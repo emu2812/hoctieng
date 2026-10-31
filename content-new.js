@@ -15752,7 +15752,12 @@ var TC_VOCAB = [
 // Ngữ pháp trọng tâm TOEIC: 6 trạm x 6 câu, ví dụ trước — quy tắc sau.
 var TC_GRAMMAR = [
 { name: "Thì hiện tại và quá khứ trong email công sở", level: "450",
-  explain: "Nghe ví dụ trước: 'I write to confirm the meeting.' (Tôi viết để xác nhận cuộc họp.) 'I wrote to you yesterday.' (Tôi đã viết cho bạn hôm qua.) Quy tắc: việc đang làm hoặc thói quen dùng hiện tại (write); việc đã xong hẳn dùng quá khứ (wrote). Trong email TOEIC, 'yesterday/last week' luôn đi với quá khứ.",
+  explain: "Ví dụ trước: 'I write to confirm the meeting.' (Tôi viết để xác nhận cuộc họp.) 'I wrote to you yesterday.' (Tôi đã viết cho bạn hôm qua.) Quy tắc: hiện tại đơn dùng cho thói quen, việc lặp lại và câu mở đầu email trang trọng (I write to…); hiện tại tiếp diễn dùng cho việc đang diễn ra quanh lúc viết (I am writing to…); quá khứ đơn dùng cho việc đã xong hẳn và có mốc thời gian cụ thể. Trong email TOEIC, cứ thấy 'yesterday / last week / ago' thì chia quá khứ, không dùng hiện tại.",
+  tenseTable: [
+    ["Hiện tại đơn", "Thói quen, việc lặp lại; mở đầu email trang trọng", "usually, every week, always", "I write to confirm the meeting. / We send the report every Friday."],
+    ["Hiện tại tiếp diễn", "Việc đang diễn ra quanh lúc viết", "now, at the moment, currently", "I am writing to ask about the contract. / We are preparing the report now."],
+    ["Quá khứ đơn", "Việc đã xong hẳn, có mốc thời gian cụ thể", "yesterday, last week, ago", "I wrote to you yesterday. / We met last Monday."]
+  ],
   quiz: [
   { q: "I ___ to confirm the meeting.", o: ["write", "wrote", "writing"], a: 0, why: "Viết để xác nhận ngay bây giờ: hiện tại write." },
   { q: "She ___ me yesterday about the order.", o: ["calls", "called", "call"], a: 1, why: "Có 'yesterday' nên dùng quá khứ called." },
@@ -15933,10 +15938,10 @@ var TC_MOCK_R = [
 ];
 // Lộ trình 4 chặng theo mục tiêu điểm. Cổng: chặng sau mở khi chặng trước xong từ 80%.
 var TC_STAGES = [
-{ score: 450, title: "Chặng 450 — Nền công sở", steps: ["v0", "v1", "v8", "v9", "v16", "g0", "g1", "g6", "g3", "g12", "g16", "l0", "l1", "l2", "l10", "l11", "l12", "l20", "l21", "l22", "l23", "l24", "l25", "l26", "l27", "r0", "r1", "r12", "r13", "r14", "v19", "v20", "v21", "v22", "v23", "v24", "v31", "v32", "v33", "v34", "v35", "v36", "v37", "v38", "v39", "v40", "v49", "v50", "v51", "v52", "v53", "v54", "v55", "v56", "v57", "v58", "v59", "v60", "v79", "v80", "v81", "v82", "v83", "v84", "v85", "v86", "v87", "v88", "v89", "v90", "v109", "v110", "v111", "v112", "v113", "v114", "v115", "v116", "v117", "v118", "v119", "v120", "v139", "v140", "v141", "v142", "v143", "v144", "v145", "v146", "v147", "v148", "v149", "v150", "v169", "v170", "v171", "v172", "v173", "v174", "v175", "v176", "v177", "v178", "v179", "v180", "v259", "v260", "v261", "v262", "v263", "v264", "v265", "v266", "v267", "v268", "v269", "v270", "v271", "v272", "v273", "v274", "v275", "v276", "v277", "v278", "v279", "v280", "v281", "v282", "v283", "v284", "c0"] },
-{ score: 600, title: "Chặng 600 — Giao tiếp công việc", steps: ["v2", "v3", "v10", "v11", "v17", "g2", "g4", "g5", "g9", "g13", "g15", "g18", "g21", "l3", "l4", "l13", "l14", "l28", "l29", "l30", "l31", "l32", "r2", "r3", "r4", "r15", "r16", "r17", "v25", "v26", "v41", "v42", "v43", "v44", "v61", "v62", "v63", "v64", "v65", "v66", "v67", "v68", "v91", "v92", "v93", "v94", "v95", "v96", "v97", "v98", "v121", "v122", "v123", "v124", "v125", "v126", "v127", "v128", "v151", "v152", "v153", "v154", "v155", "v156", "v157", "v158", "v181", "v182", "v183", "v184", "v185", "v186", "v187", "v188", "v285", "v286", "c1"] },
-{ score: 750, title: "Chặng 750 — Làm việc độc lập", steps: ["v4", "v5", "v12", "v13", "v18", "g10", "g7", "g8", "g14", "g19", "g20", "l5", "l6", "l7", "l15", "l16", "l17", "l33", "l34", "l35", "l36", "r5", "r6", "r7", "r18", "r19", "r20", "r24", "r26", "r27", "r29", "r30", "v27", "v28", "v45", "v46", "v69", "v70", "v71", "v72", "v73", "v74", "v99", "v100", "v101", "v102", "v103", "v104", "v129", "v130", "v131", "v132", "v133", "v134", "v159", "v160", "v161", "v162", "v163", "v164", "v189", "v190", "v191", "v192", "v193", "v194", "v199", "v200", "v201", "v202", "v203", "v204", "v205", "v206", "v207", "v208", "v209", "v210", "v211", "v212", "v229", "v230", "v231", "v232", "v233", "v234", "v235", "v236", "v237", "v238", "v239", "v240", "v241", "v242", "v243", "v244", "v245", "v246", "v247", "v248", "v249", "v250", "v251", "v252", "v253", "v254", "v255", "v256", "v257", "v258", "c2"] },
-{ score: 900, title: "Chặng 900 — Thành thạo và thi thử", steps: ["v6", "v7", "v14", "v15", "g11", "g17", "l8", "l9", "l18", "l19", "l37", "l38", "l39", "r8", "r9", "r10", "r11", "r21", "r22", "r23", "r25", "r28", "r31", "r32", "r33", "v29", "v30", "v47", "v48", "v75", "v76", "v77", "v78", "v105", "v106", "v107", "v108", "v135", "v136", "v137", "v138", "v165", "v166", "v167", "v168", "v195", "v196", "v197", "v198", "v213", "v214", "v215", "v216", "v217", "v218", "v219", "v220", "v221", "v222", "v223", "v224", "v225", "v226", "v227", "v228", "c3", "m0"] }
+{ score: 450, title: "Chặng 450 — Nền công sở", steps: ["v0", "v1", "v8", "v9", "v16", "v19", "v20", "v21", "v22", "v23", "v24", "v31", "v32", "v33", "v34", "v35", "v36", "v37", "v38", "v39", "v40", "v49", "v50", "v51", "v52", "v53", "v54", "v55", "v56", "v57", "v58", "v59", "v60", "v79", "v80", "v81", "v82", "v83", "v84", "v85", "v86", "v87", "v88", "v89", "v90", "v109", "v110", "v111", "v112", "v113", "v114", "v115", "v116", "v117", "v118", "v119", "v120", "v139", "v140", "v141", "v142", "v143", "v144", "v145", "v146", "v147", "v148", "v149", "v150", "v169", "v170", "v171", "v172", "v173", "v174", "v175", "v176", "v177", "v178", "v179", "v180", "v259", "v260", "v261", "v262", "v263", "v264", "v265", "v266", "v267", "v268", "v269", "v270", "v271", "v272", "v273", "v274", "v275", "v276", "v277", "v278", "v279", "v280", "v281", "v282", "v283", "v284", "g0", "g1", "g6", "g3", "g12", "g16", "l0", "l1", "l2", "l10", "l11", "l12", "l20", "l21", "l22", "l23", "l24", "l25", "l26", "l27", "r0", "r1", "r12", "r13", "r14", "c0"] },
+{ score: 600, title: "Chặng 600 — Giao tiếp công việc", steps: ["v2", "v3", "v10", "v11", "v17", "v25", "v26", "v41", "v42", "v43", "v44", "v61", "v62", "v63", "v64", "v65", "v66", "v67", "v68", "v91", "v92", "v93", "v94", "v95", "v96", "v97", "v98", "v121", "v122", "v123", "v124", "v125", "v126", "v127", "v128", "v151", "v152", "v153", "v154", "v155", "v156", "v157", "v158", "v181", "v182", "v183", "v184", "v185", "v186", "v187", "v188", "v285", "v286", "g2", "g4", "g5", "g9", "g13", "g15", "g18", "g21", "l3", "l4", "l13", "l14", "l28", "l29", "l30", "l31", "l32", "r2", "r3", "r4", "r15", "r16", "r17", "c1"] },
+{ score: 750, title: "Chặng 750 — Làm việc độc lập", steps: ["v4", "v5", "v12", "v13", "v18", "v27", "v28", "v45", "v46", "v69", "v70", "v71", "v72", "v73", "v74", "v99", "v100", "v101", "v102", "v103", "v104", "v129", "v130", "v131", "v132", "v133", "v134", "v159", "v160", "v161", "v162", "v163", "v164", "v189", "v190", "v191", "v192", "v193", "v194", "v199", "v200", "v201", "v202", "v203", "v204", "v205", "v206", "v207", "v208", "v209", "v210", "v211", "v212", "v229", "v230", "v231", "v232", "v233", "v234", "v235", "v236", "v237", "v238", "v239", "v240", "v241", "v242", "v243", "v244", "v245", "v246", "v247", "v248", "v249", "v250", "v251", "v252", "v253", "v254", "v255", "v256", "v257", "v258", "g10", "g7", "g8", "g14", "g19", "g20", "l5", "l6", "l7", "l15", "l16", "l17", "l33", "l34", "l35", "l36", "r5", "r6", "r7", "r18", "r19", "r20", "r24", "r26", "r27", "r29", "r30", "c2"] },
+{ score: 900, title: "Chặng 900 — Thành thạo và thi thử", steps: ["v6", "v7", "v14", "v15", "v29", "v30", "v47", "v48", "v75", "v76", "v77", "v78", "v105", "v106", "v107", "v108", "v135", "v136", "v137", "v138", "v165", "v166", "v167", "v168", "v195", "v196", "v197", "v198", "v213", "v214", "v215", "v216", "v217", "v218", "v219", "v220", "v221", "v222", "v223", "v224", "v225", "v226", "v227", "v228", "g11", "g17", "l8", "l9", "l18", "l19", "l37", "l38", "l39", "r8", "r9", "r10", "r11", "r21", "r22", "r23", "r25", "r28", "r31", "r32", "r33", "c3", "m0"] }
 ];
 // ---------- TRACK TOPIK (29/10/2026) — nội dung TỰ SOẠN 100%, dạy bằng tiếng Việt ----------
 // TOPIK thi thật (dạng giấy PBT, chuẩn của web): TOPIK I (Nghe 30 + Đọc 40 = 70 câu, 100 phút, 200 điểm, cấp 1–2), TOPIK II (Nghe 50 + Viết 4 + Đọc 50 = 104 câu, 180 phút, 300 điểm, cấp 3–6).
@@ -16316,9 +16321,9 @@ var TP_MOCK_R = [
 // Lộ trình: 42 bước. Hangul tuần tự; các chặng sau mở khi chặng trước xong từ 80%.
 var TP_STAGES = [
 { title: "Hangul — bảng chữ", steps: ["h0", "h1", "h2", "h3", "h4", "k0"] },
-{ title: "TOPIK I — Cấp 1", steps: ["v0", "v1", "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15", "v16", "v17", "g0", "g1", "g6", "g7", "l0", "l1", "l2", "l10", "l11", "l12", "r0", "r1", "r2", "r12", "r13", "r14", "r15", "v28", "v29", "v30", "v31", "v32", "v33", "v34", "v35", "v36", "v37", "v38", "v39", "v40", "v41", "v42", "v49", "v50", "v51", "v52", "v53", "v54", "v55", "v56", "v57", "v58", "v59", "v60", "v61", "v62", "v63", "v64", "v65", "v66", "v67", "v68", "v69", "v70", "v71", "v72", "v73", "v74", "v75", "k1"] },
-{ title: "TOPIK I — Cấp 2", steps: ["v2", "v3", "v4", "v18", "v19", "v20", "v21", "v22", "v23", "g2", "g3", "g8", "g9", "l3", "l4", "l5", "l13", "l14", "l15", "r3", "r4", "r5", "r16", "r17", "r18", "r19", "v43", "v44", "v45", "v46", "v76", "v77", "v78", "v79", "v80", "v81", "v86", "v87", "v88", "v89", "v90", "v91", "v92", "v93", "v94", "v95", "v96", "v97", "v98", "v99", "v100", "v101", "v102", "v103", "v104", "v105", "v106", "v107", "v108", "v109", "v110", "v111", "v112", "v113", "v114", "v115", "v116", "v117", "v118", "v119", "k2"] },
-{ title: "Hướng lên TOPIK II — nền tảng", steps: ["v5", "v6", "v7", "v24", "v25", "v26", "v27", "g4", "g5", "g10", "g11", "l6", "l7", "l8", "l9", "l16", "l17", "l18", "l19", "r6", "r7", "r8", "r9", "r10", "r11", "r20", "r21", "r22", "r23", "v47", "v48", "v82", "v83", "v84", "v85", "k3", "w0", "w1", "m0"] }
+{ title: "TOPIK I — Cấp 1", steps: ["v0", "v1", "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15", "v16", "v17", "v28", "v29", "v30", "v31", "v32", "v33", "v34", "v35", "v36", "v37", "v38", "v39", "v40", "v41", "v42", "v49", "v50", "v51", "v52", "v53", "v54", "v55", "v56", "v57", "v58", "v59", "v60", "v61", "v62", "v63", "v64", "v65", "v66", "v67", "v68", "v69", "v70", "v71", "v72", "v73", "v74", "v75", "g0", "g1", "g6", "g7", "l0", "l1", "l2", "l10", "l11", "l12", "r0", "r1", "r2", "r12", "r13", "r14", "r15", "k1"] },
+{ title: "TOPIK I — Cấp 2", steps: ["v2", "v3", "v4", "v18", "v19", "v20", "v21", "v22", "v23", "v43", "v44", "v45", "v46", "v76", "v77", "v78", "v79", "v80", "v81", "v86", "v87", "v88", "v89", "v90", "v91", "v92", "v93", "v94", "v95", "v96", "v97", "v98", "v99", "v100", "v101", "v102", "v103", "v104", "v105", "v106", "v107", "v108", "v109", "v110", "v111", "v112", "v113", "v114", "v115", "v116", "v117", "v118", "v119", "g2", "g3", "g8", "g9", "l3", "l4", "l5", "l13", "l14", "l15", "r3", "r4", "r5", "r16", "r17", "r18", "r19", "k2"] },
+{ title: "Hướng lên TOPIK II — nền tảng", steps: ["v5", "v6", "v7", "v24", "v25", "v26", "v27", "v47", "v48", "v82", "v83", "v84", "v85", "g4", "g5", "g10", "g11", "l6", "l7", "l8", "l9", "l16", "l17", "l18", "l19", "r6", "r7", "r8", "r9", "r10", "r11", "r20", "r21", "r22", "r23", "w0", "w1", "k3", "m0"] }
 ];
 // TOEIC mở rộng đợt 30/10 — từ vựng mới, tự soạn, dạy bằng tiếng Việt.
 // IPA do người soạn viết theo cách phát âm thông dụng, chưa đối chiếu độc lập với từ điển.
@@ -53398,9 +53403,23 @@ var TP_READ_EXPAND18 = [{"part":1,"title":"Đọc: giới thiệu quê quán","p
 TP_LISTEN.push.apply(TP_LISTEN, TP_LISTEN_EXPAND18);
 TP_READ.push.apply(TP_READ, TP_READ_EXPAND18);
 // Noi buoc moi vao chang (chen truoc buoc kiem tra/mock cuoi chang de giu thu tu hoc): Cap 1 72->79 buoc, Cap 2 71->78 buoc, Nen tang II 39->41 buoc. Cong 80% tinh dong theo tong buoc moi.
-TP_STAGES[1].steps.splice(TP_STAGES[1].steps.indexOf("k1"), 0, "l60", "l61", "l62", "l63", "r64", "r65", "r66");
-TP_STAGES[2].steps.splice(TP_STAGES[2].steps.indexOf("k2"), 0, "l64", "l65", "l66", "l67", "r67", "r68", "r69");
-TP_STAGES[3].steps.splice(TP_STAGES[3].steps.indexOf("m0"), 0, "l68", "l69");
+/* DOT UI-FIX 31/10: buoc bo sung dot 18 chen vao dung khoi loai (nghe ve khoi
+   nghe, doc ve khoi doc) thay vi chen cuoi chang — giu thu tu lo trinh don dieu
+   tu vung -> ngu phap -> nghe -> doc -> (viet) -> kiem tra -> mock. Buoc, chang
+   va noi dung khong doi, chi doi vi tri trong chang. */
+(function () {
+  function insertKind(stageIdx, ids, kindLetter) {
+    var st = TP_STAGES[stageIdx]; if (!st) return;
+    var last = -1;
+    st.steps.forEach(function (id, i) { if (id[0] === kindLetter) last = i; });
+    ids.forEach(function (id, j) { if (st.steps.indexOf(id) < 0) st.steps.splice(last + 1 + j, 0, id); });
+  }
+  insertKind(1, ["l60", "l61", "l62", "l63"], "l");
+  insertKind(1, ["r64", "r65", "r66"], "r");
+  insertKind(2, ["l64", "l65", "l66", "l67"], "l");
+  insertKind(2, ["r67", "r68", "r69"], "r");
+  insertKind(3, ["l68", "l69"], "l");
+})();
 
 // DOT 17 PHAN A (31/10/2026) — lap o mong HSK len >=10 bai/cap (chi ban nhap).
 // DOT 17 PHAN A (31/10/2026) — lap o mong HSK len >=10 bai/cap. TU SOAN 100%.
