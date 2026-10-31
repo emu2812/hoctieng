@@ -299,6 +299,7 @@ function loadState() {
 }
 var state = loadState();
 var curTab = "home", curLesson = null, returnTab = "home", nudgeShown = false, phNudgeShown = false, phViewMode = "wave", phNudgePhShown = false, lessonStart = 0, runFirstTry = {}, runWrong = [], landingBypass = false;
+var introForced = false; try { introForced = /[?&]intro=1(&|$)/.test(window.location.search || ""); } catch (e) { introForced = false; }
 
 function awardXp(n) { state.xp = (state.xp || 0) + n; saveState(); }
 function xpLevel(xp) {
@@ -1349,6 +1350,18 @@ function render() {
     }
   } catch (e) {}
   var landingSkip = landingBypass; landingBypass = false;
+  if (!curLesson && introForced && !landingNeeded()) {
+    var appI = $("#app");
+    if (appI) {
+      appI.classList.remove("lesson-view");
+      appI.innerHTML = introPageHTML(); wireIntroPage();
+    }
+    document.title = "Giới thiệu — Học ngoại ngữ từ đầu";
+    document.body.classList.add("landing-on");
+    $$("#tabBar .tab").forEach(function (b) { b.classList.remove("on"); });
+    updateBottomBar();
+    return;
+  }
   if (!curLesson && !landingSkip && landingNeeded()) {
     var loggedIn = false;
     try { loggedIn = !!(typeof authState !== "undefined" && authState.user); } catch (e) {}
@@ -2650,6 +2663,7 @@ function viewMine(app) {
   var html = trackSwitchHTML() + '<h2>Của tôi</h2>';
   var mineT = (state.track === "zh") ? zhSessionTarget() : practiceNextTarget();
   html += '<section class="card next-card" id="mineNextCard"><p class="eyebrow">TIẾP THEO</p><h3>' + esc(mineT.title) + '</h3><p class="mut">' + esc(mineT.type) + '</p><button class="btn btn-primary" id="mineNextBtn">Học tiếp</button></section>';
+  html += '<section class="card" id="mineIntroCard"><h3>Giới thiệu về web học</h3><p class="mut">Xem lại web này là gì, có 4 con đường học nào và học theo cách nào.</p><button class="btn" id="mineIntro">Xem lại trang giới thiệu</button></section>';
   html += guideLine("mineIntro", "Tiến trình, mục tiêu và cài đặt của bạn — mở nhóm cần xem.");
   html += '<details class="card" id="mineGrpAccount"><summary><b>Tài khoản</b></summary>';
   html += accountCardHTML() + '</details>';
@@ -2721,6 +2735,7 @@ function viewMine(app) {
   $("#goalInp").onchange = function (e) { setGoal(+e.target.value); };
   $("#checkinBtn").onclick = checkinToday;
   var mnB = $("#mineNextBtn"); if (mnB) mnB.onclick = function () { if (state.track === "zh") zhOpenTarget(mineT); else openPracticeNext(mineT); };
+  var miB = $("#mineIntro"); if (miB) miB.onclick = function () { introForced = true; render(); };
   var plSave = $("#planSaveBtn"); if (plSave) plSave.onclick = function () { if (!state.plan) state.plan = {}; state.plan.band = $("#planBandSel").value; state.plan.date = $("#planDateInp").value; saveState(); render(); };
   wirePushCard();
   $("#tutorTry").onclick = function () { callAiTutor("Xin chào").then(function (r) { toast("Gia sư đã trả lời: " + String(r).slice(0, 80)); }, function (err) { toast(err); }); };
@@ -10201,10 +10216,29 @@ function landingNeeded() {
   if (state.checkin && Object.keys(state.checkin).length > 0) return false;
   return true;
 }
+/* Noi dung gioi thieu dung chung: man mo dau lan dau + man mo lai (?intro=1, tu Cua toi).
+   Chi mo ta, khong chua nut hanh dong — nut nam o ham goi, de moi man giu dung
+   1 viec chinh cua no (man mo dau: chon loi vao; man mo lai: quay ve hoc). */
+function introContentHTML() {
+  return '<div class="hero-pair">' + mascPairHTML(false)
+    + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Học ngoại ngữ từ đầu, đi từng bước một</h2>'
+    + '<p class="mut">Đây là web học ngoại ngữ miễn phí: học tiếng Anh để thi IELTS, tiếng Trung theo HSK, tiếng Anh công sở theo TOEIC, tiếng Hàn theo TOPIK. Vào học là thấy ngay bước tiếp theo, không phải tự mò.</p></div></div>'
+    + '<section><h3>4 con đường học</h3>'
+    + '<p><b>Tiếng Anh · IELTS</b> — nghe, nói, đọc, viết để thi IELTS, từ Band 0 tới 7,5+.</p>'
+    + '<p><b>Tiếng Trung · HSK</b> — chữ Hán, pinyin, nghe, nói, đọc, viết theo 6 cấp HSK.</p>'
+    + '<p><b>TOEIC · Nghe–Đọc</b> — nghe, đọc công sở để thi TOEIC, từ 450 tới 900+.</p>'
+    + '<p><b>Tiếng Hàn · TOPIK</b> — bảng chữ Hangul, nghe, đọc theo cấp TOPIK I, hướng lên TOPIK II.</p></section>'
+    + '<section><h3>Học như thế nào</h3>'
+    + '<p><b>Bước 1 — Học lý thuyết:</b> từ vựng, ngữ pháp, phát âm, giải thích bằng tiếng Việt đơn giản, ví dụ trước rồi mới tới quy tắc.</p>'
+    + '<p><b>Bước 2 — Thực hành:</b> nghe, đọc, nói, viết ngay sau lý thuyết, bài nào cũng có đáp án và giải thích vì sao sai.</p>'
+    + '<p><b>Bước 3 — Kiểm tra:</b> kiểm tra cuối chặng và thi thử đúng dạng thi thật, ra điểm số và mức độ của bạn.</p>'
+    + '<p class="mut">Mỗi lần mở web chỉ có một việc tiếp theo nổi bật nhất — học xong bước này mới tới bước sau, không loay hoay chọn bài.</p></section>'
+    + '<p class="mut">Học miễn phí, không bán khóa học. Mọi bài học, từ vựng, bài luyện đều do web tự soạn theo đúng dạng thi chính thức — không sao chép đề thi thật hay nội dung có bản quyền.</p>';
+}
 function landingAuthHTML() {
-  return '<section class="card" id="landingAuth"><div class="hero-pair">' + mascPairHTML(false)
-    + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn đăng nhập không?</h2>'
-    + '<p class="mut">Đăng nhập thì tiến trình theo tài khoản, đổi máy vẫn còn. Bỏ qua thì học ngay với tư cách khách, tiến trình chỉ lưu trên máy này.</p></div></div>'
+  return '<section class="card" id="landingAuth">' + introContentHTML()
+    + '<section><h3>Bạn muốn đăng nhập không?</h3>'
+    + '<p class="mut">Đăng nhập thì tiến trình theo tài khoản, đổi máy vẫn còn. Bỏ qua thì học ngay với tư cách khách, tiến trình chỉ lưu trên máy này.</p></section>'
     + '<div class="row"><button class="btn" id="landLogin">Đăng nhập</button><button class="btn" id="landSignup">Đăng ký</button><button class="btn" id="landGuest">Bỏ qua, học với tư cách khách</button></div>'
     + '<p class="mut">Đăng nhập sau vẫn làm được từ tab Của tôi → Tài khoản.</p></section>';
 }
@@ -10226,6 +10260,26 @@ function landingHTML() {
     + '<button class="btn land-opt" id="landTc"><b>TOEIC · Nghe–Đọc</b><span class="mut">Luyện nghe, đọc công sở để thi TOEIC, từ 450 tới 900+.</span></button>'
     + '<button class="btn land-opt" id="landTp"><b>Tiếng Hàn · TOPIK</b><span class="mut">Học bảng chữ Hangul, nghe, đọc theo cấp TOPIK I, hướng lên TOPIK II.</span></button>'
     + '</div></section>';
+}
+/* Man gioi thieu mo lai: chi danh cho nguoi da co track/tien trinh (landingNeeded
+   da false) mo bang ?intro=1 hoac nut o Cua toi. Viec chinh cua man nay la xem
+   lai gioi thieu roi quay ve hoc — nut chinh duy nhat la Vao hoc tiep; nguoi
+   chua dang nhap co them hang Dang nhap / Dang ky phu (mo the Tai khoan san co). */
+function introPageHTML() {
+  var loggedIn = false;
+  try { loggedIn = !!(typeof authState !== "undefined" && authState.user); } catch (e) {}
+  var h = '<section class="card" id="introPage">' + introContentHTML()
+    + '<div class="row"><button class="btn btn-primary" id="introEnter">Vào học tiếp</button></div>';
+  if (!loggedIn) {
+    h += '<div class="row"><button class="btn" id="introLogin">Đăng nhập</button><button class="btn" id="introSignup">Đăng ký</button></div>'
+      + '<p class="mut">Đăng nhập thì tiến trình theo tài khoản, đổi máy vẫn còn. Đăng nhập sau vẫn làm được từ tab Của tôi → Tài khoản.</p>';
+  }
+  return h + '</section>';
+}
+function wireIntroPage() {
+  var en = $("#introEnter"); if (en) en.onclick = function () { introForced = false; render(); };
+  var li = $("#introLogin"); if (li) li.onclick = function () { introForced = false; landingBypass = true; go("mine"); };
+  var su = $("#introSignup"); if (su) su.onclick = function () { introForced = false; landingBypass = true; go("mine"); };
 }
 function chooseLandingTrack(t) {
   state.track = t; state.trackChosen = true; saveState(); go("home");
