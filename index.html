@@ -2061,7 +2061,7 @@ function viewRoadmap(app) {
   }
   html += '</section>';
   html += gd23MidHTML();
-  html += '<h3>Bản đồ 13 chương</h3><p class="mut">Học tự do theo chặng; bài kiểm tra cuối chương mở khi xong 80% số bước chương (chuẩn nội bộ).</p>';
+  html += '<h3>Bản đồ 13 chương</h3><p class="mut">Học tự do theo chặng; bài kiểm tra cuối chương mở khi xong 80% số bước chương (chuẩn nội bộ). Các bước trong mỗi chương xếp xen kẽ các loại (vài bộ từ, rồi ngữ pháp, đọc, nghe, nói, viết, lặp lại) để đỡ chán và nhớ lâu; bước "Ôn xen kẽ" vẫn ở cuối chương.</p>';
   RB_CHAPTER_MAP.forEach(function (ch, ci) {
     var isOpen = ch.status === "open";
     /* DOT 19 UI GATE (31/10/2026): hang Band 0 cung liet ke buoc that tu rbChSteps
@@ -2084,12 +2084,14 @@ function viewRoadmap(app) {
       + rbStageHTML(ch)
       + (ci === 0 ? '<button class="btn btn-primary" id="mapCh1">Vào học chương 1</button>' : (hasSteps ? '<button class="btn" data-chopen="' + esc(ch.band) + '">Mở chương này</button>' : '<p class="mut">Cổng: mở khi bạn học xong 80% bước tính cổng của chính chương đó (chuẩn nội bộ).</p>'));
     if (hasSteps) {
-      var lastType = "";
+      /* SUA 01/11 dot dan-xen: bo tieu de nhom theo loai chen giua cac buoc
+         (cach bay cu: moi lan doi loai lai chen mot tieu de — sau khi dan xen
+         thi tieu de se lap lien tuc). Moi hang buoc van kem nhan loai, danh
+         sach thanh mot luong xen ke lien tuc dung thu tu rbChSteps. */
       var rows = "";
       var titleSeen = {};
       var firstUndone = true;
       chSteps.forEach(function (st, si) {
-        if (st.type !== lastType) { rows += '<p style="margin:10px 0 2px"><b>' + esc(st.type) + '</b></p>'; lastType = st.type; }
         titleSeen[st.title] = (titleSeen[st.title] || 0) + 1;
         var suf2 = titleSeen[st.title] > 1 ? ' · phần ' + titleSeen[st.title] : '';
         var isNext = firstUndone && !rbStepDone(st); if (isNext) firstUndone = false;
@@ -2366,10 +2368,10 @@ function viewPractice(app) {
     + '<p class="mut">3 pha: nhìn mẫu rồi gõ, nghe rồi gõ, nhớ rồi gõ.</p>'
     + '<div class="row"><button class="btn" data-typingmode="nentang">Nền tảng (Band 0–4,5)</button><button class="btn" data-typingmode="coban">Cơ bản (Band 5,0–5,5)</button><button class="btn" data-typingmode="nangcao">Nâng cao (Band 6,0+)</button></div></details>';
   /* --- Tro choi --- */
-  var gameDefs2 = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"]];
-  html += '<details class="card" id="u7PlayCardPractice"><summary><b>🎬 Giải trí — 7 game + video hoạt hình</b></summary>'
+  var gameDefs2 = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["shooter", "🔫", "Bắn từ đúng"], ["race", "🏎️", "Đua xe từ vựng"], ["speakgame", "🎤", "Nói theo chấm điểm"], ["platform", "🏃", "Đi cảnh nhặt sao"]];
+  html += '<section class="card" id="u7PlayCardPractice"><h3>🎬 Giải trí — 11 game + video hoạt hình</h3><p class="mut">Khu giải trí luôn mở sẵn — bấm là chơi ngay, không cần mở thu gọn. 4 game mới: bắn từ đúng, đua xe, nói theo chấm điểm, đi cảnh nhặt sao.</p>'
     + '<p><button class="btn" id="u7PlayNowPractice">🎮 Chơi thử ngay</button></p>'
-    + '<div class="row">' + gameDefs2.map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div><div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube từ kênh gốc, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details>" + '</div></details>';
+    + '<div class="row">' + gameDefs2.map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div><div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, có phụ đề tiếng Anh (chưa có Vietsub — nghe và đọc phụ đề Anh để đoán nghĩa): news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p></details>" + '</div></section>';
   /* --- Luyen moi GĐ2/GĐ3 --- */
   html += '<details class="card" id="gd23Practice"><summary><b>🆕 Luyện mới — GĐ2/GĐ3</b></summary>'
    
@@ -3729,7 +3731,8 @@ function pronWordChipsHTML(words, issues) {
 function gameBestAll() { try { return JSON.parse(localStorage.getItem("ielts_game_best_v1") || "{}"); } catch (e) { return {}; } }
 /* DOT 2e: ky luc game tach rieng theo track — track Anh giu khoa cu (vd "match"),
    track Trung dung khoa "<game>:zh" trong cung localStorage ielts_game_best_v1. */
-function gameBestKey(id, track) { return (track || state.track) === "zh" ? id + ":zh" : id; }
+/* DOT NOI-DUNG-GIAI-TRI 01/11: ky luc game tach rieng ca TC/TP (khoa EN/ZH cu giu nguyen). */
+function gameBestKey(id, track) { var t = track || state.track; if (t === "zh") return id + ":zh"; if (t === "tc") return id + ":tc"; if (t === "tp") return id + ":tp"; return id; }
 function gameBest(id, track) { var all = gameBestAll(); return all[gameBestKey(id, track)] || null; }
 function gameSaveBest(id, score, stars, track) { var all = gameBestAll(); var k = gameBestKey(id, track); var prev = all[k]; if (!prev || score > prev.score) { all[k] = { score: score, stars: stars, at: Date.now() }; try { localStorage.setItem("ielts_game_best_v1", JSON.stringify(all)); } catch (e) {} } return all[k]; }
 function gameShuffle(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = a[i]; a[i] = a[j]; a[j] = tmp; } return a; }
@@ -3804,8 +3807,51 @@ function gameZhTypeScore(typed, ref) { var t = String(typed || "").replace(/[\s\
 function gameZhOrderItems() { var out = []; (ZH_WRITE || []).forEach(function (w) { if (w.kind === "order" && (w.words || []).length) out.push({ words: w.words.slice(), ref: w.words.join("") }); }); if (out.length < 5) { var cards = gameShuffle(gameZhCards()); for (var i = 0; i < cards.length && out.length < 5; i++) { var ex = cards[i].ex || ""; if (ex.length >= 4 && ex.length <= 14) out.push({ words: ex.split(""), ref: ex }); } } return out.slice(0, 5); }
 function gameZhTypeSentences() { var out = []; gameShuffle(gameZhCards()).forEach(function (c) { if (c.ex && c.exv) out.push({ han: c.ex, vi: c.exv }); }); return out.slice(0, 5); }
 function gameStarsFor(frac) { return frac >= 0.9 ? 3 : (frac >= 0.6 ? 2 : (frac > 0 ? 1 : 0)); }
+
+/* DOT NOI-DUNG-GIAI-TRI 01/11: kho tu chung cho game moi (dung tu/bai that cua web,
+   theo dung track dang choi; trung tu thi loc trung theo w). */
+function gamePoolWords(track) {
+  var out = [], seen = {};
+  var push = function (w, vi) { if (w && vi && !seen[w]) { seen[w] = true; out.push({ w: w, vi: vi }); } };
+  if (track === "zh") { gameZhCards().forEach(function (c) { push(c.han, c.vi); }); return out; }
+  if (track === "tc") { (typeof TC_VOCAB !== "undefined" ? TC_VOCAB : []).forEach(function (st) { (st.cards || []).forEach(function (c) { push(c.w, c.vi); }); }); return out; }
+  if (track === "tp") { (typeof TP_VOCAB !== "undefined" ? TP_VOCAB : []).forEach(function (st) { (st.cards || []).forEach(function (c) { push(c.w, c.vi); }); }); return out; }
+  (CONTENT.vocab || []).forEach(function (v) { (v.cards || []).forEach(function (c) { push(c.w, c.vi); }); });
+  return out;
+}
+function gamePoolRounds(track, n) {
+  var pool = gameShuffle(gamePoolWords(track)), rounds = [];
+  for (var i = 0; i < Math.min(n, pool.length); i++) {
+    var others = gameShuffle(pool.filter(function (p, j) { return j !== i; })).slice(0, 3).map(function (p) { return p.w; });
+    var opts = gameShuffle([pool[i].w].concat(others));
+    rounds.push({ vi: pool[i].vi, opts: opts, a: opts.indexOf(pool[i].w) });
+  }
+  return rounds;
+}
+function gameSpeakWord(text, track) { if (track === "zh") zhSpeak(text); else if (track === "tp") tpSpeak(text); else speak(text); }
+/* Cham diem noi theo (ham thuan de test duoc): dung khop = 100, gan dung = 60, sai = 0.
+   Luu y: day la cham game vui (so sanh ban ghi voi tu muc tieu), KHONG thay the
+   cham Noi bang AI theo luat dung — game chi luyen noi theo, khong tinh diem thi. */
+function speakGameScore(tx, exp, track) {
+  var t = String(tx || ""), e = String(exp || "");
+  if (track === "zh" || track === "tp") {
+    t = t.replace(/[\s\u3000-\u303f\uff00-\uffef.,!?;:'"]/g, "");
+    e = e.replace(/[\s\u3000-\u303f\uff00-\uffef.,!?;:'"]/g, "");
+  } else {
+    t = t.toLowerCase().replace(/[^a-z]/g, "");
+    e = e.toLowerCase().replace(/[^a-z]/g, "");
+  }
+  if (!t.length || !e.length) return 0;
+  if (t === e) return 100;
+  if (t.indexOf(e) >= 0 || e.indexOf(t) >= 0) return 60;
+  return 0;
+}
+function gameRecordWrong(l, game, idx, round) {
+  var q = { q: "Game " + game + ": từ đúng cho nghĩa \"" + round.vi + "\"", o: round.opts.slice(), a: round.a, why: "Từ đúng là " + round.opts[round.a] + " — " + round.vi + "." };
+  try { if (l.gameTrack === "zh") recordZhQuizError("game:" + game, idx, q); else if (l.gameTrack === "en") recordQuizError("game:" + game, idx, q); } catch (e) {}
+}
 function renderArcadeLesson(app, l) {
-  var defs = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"]];
+  var defs = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["shooter", "🔫", "Bắn từ đúng"], ["race", "🏎️", "Đua xe từ vựng"], ["speakgame", "🎤", "Nói theo chấm điểm"], ["platform", "🏃", "Đi cảnh nhặt sao"]];
   var def = null; defs.forEach(function (d) { if (d[0] === l.gameId) def = d; });
   if (!def) { toast("Trò chơi này chưa có."); backFromLesson(); return; }
   if (l.gameTrack == null) l.gameTrack = state.track;
@@ -3829,6 +3875,10 @@ function renderArcadeLesson(app, l) {
     if (l.gameId === "typerace") { if (isZhGame) { l.sents = gameZhTypeSentences(); } else { var curT = gameCurrentBand(), tSet = null; if (curT) { for (var ti = 0; ti < CONTENT.typing.length; ti++) { if (normBandStr(CONTENT.typing[ti].level) === curT) { tSet = CONTENT.typing[ti]; break; } } } l.sents = (tSet || CONTENT.typing[0]).sentences.slice(0, 5); } l.si = 0; l.t0 = 0; }
     if (l.gameId === "order") { if (isZhGame) { l.zhOrder = gameZhOrderItems(); } else { var curO = gameCurrentBand(), oSet = null; if (curO) { for (var oi = 0; oi < CONTENT.typing.length; oi++) { if (normBandStr(CONTENT.typing[oi].level) === curO) { oSet = CONTENT.typing[oi]; break; } } } l.sents = (oSet || CONTENT.typing[0]).sentences.slice(0, 5); } l.si = 0; l.builtArr = []; l.words = []; }
     if (l.gameId === "quiz") { l.qs = isZhGame ? gameZhQuizQs() : gameQuizQs(); l.qi = 0; }
+    if (l.gameId === "shooter") { l.shRounds = gamePoolRounds(l.gameTrack, 10); l.shI = 0; l.shRight = 0; l.shLast = null; }
+    if (l.gameId === "race") { l.rcQs = gamePoolRounds(l.gameTrack, 10); l.rcI = 0; l.rcRight = 0; l.rcMe = 0; l.rcOpp = 0; l.rcLast = null; }
+    if (l.gameId === "speakgame") { l.spWords = gameShuffle(gamePoolWords(l.gameTrack)).slice(0, 5); l.spI = 0; l.spRight = 0; l.spHeard = null; l.spPts = null; }
+    if (l.gameId === "platform") { l.pfQs = gamePoolRounds(l.gameTrack, 8); l.pfI = 0; l.pfStars = 0; l.pfRight = 0; l.pfLast = null; }
   }
   var html = head, body = "";
   if (l.gameId === "match") {
@@ -3925,6 +3975,53 @@ function renderArcadeLesson(app, l) {
     body = '<p>Câu ' + (l.qi + 1) + '/' + l.qs.length + ' · Điểm: ' + l.score + '</p><p><b>' + esc(q0.q) + '</b></p>' + (q0.o || []).map(function (o, i) { return '<button class="btn q-opt" data-qi="' + i + '">' + esc(o) + '</button>'; }).join("") + '<div class="why" id="gmWhy"></div>';
     app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
     $$("[data-qi]").forEach(function (b) { b.onclick = function () { var i = +b.dataset.qi; if (i === q0.a) { l.score += 10; l.qi++; } else { if (isZhGame) { try { recordZhQuizError("game:quiz", l.qi, q0); } catch (e) {} } else { recordQuizError("game:quiz", l.qi, q0); } $("#gmWhy").textContent = "Sai rồi — đáp án đúng: " + (q0.o ? q0.o[q0.a] : "") + " — " + (q0.why || "") + " Câu này đã vào Sổ lỗi sai để ôn lại."; $("#gmWhy").classList.add("show"); l.qi++; } saveState(); setTimeout(function () { render(); }, 900); }; });
+    return;
+  }
+  /* DOT NOI-DUNG-GIAI-TRI 01/11: 4 game moi — choi bang bam cham, khong can ban phim.
+     Bắn súng: 10 vòng, bấm đúng từ cho nghĩa. Đua xe: 10 câu, đúng +12% / sai đối thủ +8%.
+     Nói theo: 5 từ, nghe mẫu rồi nói, chấm bằng speakGameScore (game vui, không tính điểm thi).
+     Đi cảnh: 8 chặng, đúng thì nhảy qua chướng ngại + nhặt sao, sai thì xem đáp án rồi thử lại.
+     Nhân vật/chướng ngại/vật phẩm chỉ là emoji tự sắp, KHÔNG dùng tài sản Mario/Nintendo. */
+  if (l.gameId === "shooter") {
+    if (l.shI >= l.shRounds.length) { finish(l.score, gameStarsFor(l.shRight / l.shRounds.length), "Bắn trúng " + l.shRight + "/" + l.shRounds.length + " từ."); return; }
+    var shr = l.shRounds[l.shI];
+    body = '<p>Vòng ' + (l.shI + 1) + '/' + l.shRounds.length + ' · Điểm: ' + l.score + '</p><p>🎯 Bắn từ đúng cho nghĩa: <b>' + esc(shr.vi) + '</b></p><div class="row">' + shr.opts.map(function (o, i) { return '<button class="btn" data-sh="' + i + '">' + esc(o) + '</button>'; }).join("") + '</div>' + (l.shLast ? '<p class="mut">' + esc(l.shLast.msg) + '</p><div class="row"><button class="btn btn-primary" id="gmNext">Tiếp theo →</button></div>' : '');
+    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
+    $$("[data-sh]").forEach(function (b) { b.onclick = function () { if (l.shLast) return; var i = +b.dataset.sh; if (i === shr.a) { l.score += 10; l.shRight++; l.shLast = { msg: "💥 Trúng! " + shr.opts[shr.a] + " — " + shr.vi + "." }; } else { l.shLast = { msg: "Hụt rồi — từ đúng là " + shr.opts[shr.a] + " (" + shr.vi + ")." }; gameRecordWrong(l, "shooter", l.shI, shr); } saveState(); render(); }; });
+    var shNx = $("#gmNext"); if (shNx) shNx.onclick = function () { l.shI++; l.shLast = null; saveState(); render(); };
+    return;
+  }
+  if (l.gameId === "race") {
+    if (l.rcI >= l.rcQs.length) { var rcWon = l.rcMe > l.rcOpp; finish(l.score, rcWon ? (l.rcRight >= 8 ? 3 : 2) : (l.rcRight > 0 ? 1 : 0), "Đua xe: bạn " + l.rcMe + "% — đối thủ " + l.rcOpp + "% · đúng " + l.rcRight + "/" + l.rcQs.length + " câu."); return; }
+    var rcq = l.rcQs[l.rcI];
+    var rcBar = function (p) { var f = Math.round(p / 10); return "█".repeat(f) + "░".repeat(10 - f) + " " + p + "%"; };
+    body = '<p>Câu ' + (l.rcI + 1) + '/' + l.rcQs.length + ' · Điểm: ' + l.score + '</p><p>🏎️ Bạn: ' + rcBar(l.rcMe) + '</p><p>🚗 Đối thủ: ' + rcBar(l.rcOpp) + '</p><p>Trả lời đúng để xe bạn tăng tốc (+12%), sai thì đối thủ tăng tốc (+8%). Từ đúng cho nghĩa: <b>' + esc(rcq.vi) + '</b></p><div class="row">' + rcq.opts.map(function (o, i) { return '<button class="btn" data-rc="' + i + '">' + esc(o) + '</button>'; }).join("") + '</div>' + (l.rcLast ? '<p class="mut">' + esc(l.rcLast.msg) + '</p><div class="row"><button class="btn btn-primary" id="gmNext">Tiếp theo →</button></div>' : '');
+    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
+    $$("[data-rc]").forEach(function (b) { b.onclick = function () { if (l.rcLast) return; var i = +b.dataset.rc; if (i === rcq.a) { l.score += 10; l.rcRight++; l.rcMe = Math.min(100, l.rcMe + 12); l.rcLast = { msg: "🏁 Đúng! Xe bạn tăng tốc lên " + l.rcMe + "%." }; } else { l.rcOpp = Math.min(100, l.rcOpp + 8); l.rcLast = { msg: "Đối thủ tăng tốc lên " + l.rcOpp + "% — từ đúng là " + rcq.opts[rcq.a] + " (" + rcq.vi + ")." }; gameRecordWrong(l, "race", l.rcI, rcq); } saveState(); render(); }; });
+    var rcNx = $("#gmNext"); if (rcNx) rcNx.onclick = function () { l.rcI++; l.rcLast = null; saveState(); render(); };
+    return;
+  }
+  if (l.gameId === "speakgame") {
+    if (l.spI >= l.spWords.length) { finish(l.score, gameStarsFor(l.score / (l.spWords.length * 100)), "Nói theo: " + l.score + "/" + (l.spWords.length * 100) + " điểm."); return; }
+    var spw = l.spWords[l.spI];
+    var spSR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    body = '<p>Câu ' + (l.spI + 1) + '/' + l.spWords.length + ' · Điểm: ' + l.score + '</p><p style="font-size:26px"><b>' + esc(spw.w) + '</b></p><p class="mut">' + esc(spw.vi) + '</p><div class="row"><button class="btn" id="gmHear">🔊 Nghe mẫu</button>' + (spSR ? '<button class="btn btn-primary" id="gmRec">🎤 Bấm và nói</button>' : '') + '</div>' + (!spSR ? '<p class="mut">Trình duyệt này không hỗ trợ ghi âm nhận giọng — hãy mở bằng Chrome hoặc Edge trên điện thoại để chơi có chấm điểm. Bạn vẫn có thể nghe mẫu và đọc theo, nhưng câu này không tính điểm.</p><div class="row"><button class="btn btn-primary" id="gmSkip">Bỏ qua câu này (không tính điểm) →</button></div>' : '') + (l.spHeard != null ? '<p>Nghe được: “' + esc(l.spHeard) + '” — ' + (l.spPts === 100 ? '✓ đúng (+100)' : (l.spPts > 0 ? '◐ gần đúng (+' + l.spPts + ')' : '✗ chưa đúng')) + '</p><div class="row"><button class="btn btn-primary" id="gmNext">Câu tiếp theo →</button></div>' : '');
+    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
+    $("#gmHear").onclick = function () { gameSpeakWord(spw.w, l.gameTrack); };
+    var spRec = $("#gmRec"); if (spRec) spRec.onclick = function () { try { var r = new spSR(); r.lang = (l.gameTrack === "zh" ? "zh-CN" : (l.gameTrack === "tp" ? "ko-KR" : "en-GB")); r.interimResults = false; r.maxAlternatives = 1; r.onresult = function (ev) { var tx = ""; try { tx = ev.results[0][0].transcript || ""; } catch (e) {} l.spHeard = tx; l.spPts = speakGameScore(tx, spw.w, l.gameTrack); l.score += l.spPts; if (l.spPts === 100) l.spRight++; saveState(); render(); }; r.onerror = function () { toast("Không nghe được — hãy thử lại."); }; r.start(); } catch (e) { toast("Không mở được mic — hãy thử lại."); } };
+    var spSk = $("#gmSkip"); if (spSk) spSk.onclick = function () { l.spI++; saveState(); render(); };
+    var spNx = $("#gmNext"); if (spNx) spNx.onclick = function () { l.spI++; l.spHeard = null; l.spPts = null; saveState(); render(); };
+    return;
+  }
+  if (l.gameId === "platform") {
+    if (l.pfI >= l.pfQs.length) { finish(l.pfStars * 10, l.pfStars >= 8 ? 3 : (l.pfStars >= 5 ? 2 : (l.pfStars > 0 ? 1 : 0)), "Đi cảnh: nhặt được " + l.pfStars + "/" + l.pfQs.length + " sao · đúng " + l.pfRight + " câu."); return; }
+    var pfq = l.pfQs[l.pfI];
+    var pfTrack = "";
+    for (var pi = 0; pi <= l.pfQs.length; pi++) { if (pi === l.pfI) pfTrack += "🏃"; else if (pi < l.pfI) pfTrack += "⭐"; else if (pi === l.pfQs.length) pfTrack += "🏁"; else pfTrack += "🪨"; pfTrack += " "; }
+    body = '<p>Chặng ' + (l.pfI + 1) + '/' + l.pfQs.length + ' · ⭐ ' + l.pfStars + ' sao · Điểm: ' + l.score + '</p><p style="font-size:22px;letter-spacing:2px">' + pfTrack + '</p><p>Trả lời đúng để nhảy qua chướng ngại và nhặt sao. Từ đúng cho nghĩa: <b>' + esc(pfq.vi) + '</b></p><div class="row">' + pfq.opts.map(function (o, i) { return '<button class="btn" data-pf="' + i + '">' + esc(o) + '</button>'; }).join("") + '</div>' + (l.pfLast ? '<p class="mut">' + esc(l.pfLast.msg) + '</p><div class="row"><button class="btn btn-primary" id="gmRetry">Thử lại câu này</button></div>' : '');
+    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
+    $$("[data-pf]").forEach(function (b) { b.onclick = function () { if (l.pfLast) return; var i = +b.dataset.pf; if (i === pfq.a) { l.pfStars++; l.pfRight++; l.score += 10; l.pfI++; } else { l.pfLast = { msg: "Vấp chướng ngại rồi — từ đúng là " + pfq.opts[pfq.a] + " (" + pfq.vi + "). Xem đáp án rồi thử lại nhé." }; gameRecordWrong(l, "platform", l.pfI, pfq); } saveState(); render(); }; });
+    var pfRt = $("#gmRetry"); if (pfRt) pfRt.onclick = function () { l.pfLast = null; saveState(); render(); };
     return;
   }
 }
@@ -10397,7 +10494,7 @@ function zhStageGuidebookHTML(stage) {
   var grams = (ZH_GRAMMAR || []).filter(function (g) { return g.stage === stage; }).map(function (g) { return g.title; });
   var sets = zhStageSets(stage).map(function (d) { return d.set.topic; });
   if (stage === 1) { try { sets.unshift(zhSetByKey("starter").set.topic); } catch (e) {} }
-  var order = stage === 1 ? "Học pinyin trước, rồi bộ từ, rồi ngữ pháp → đọc → nghe → nói → nhập vai → viết của chặng, hết chặng mới sang chặng sau." : "Học theo thứ tự: bộ từ → ngữ pháp → đọc → nghe → nói → nhập vai → viết của đúng chặng này, hết chặng mới sang chặng sau.";
+  var order = stage === 1 ? "Học pinyin trước, rồi học xen kẽ trong chặng: vài bộ từ, rồi ngữ pháp, đọc, nghe, nói, nhập vai, viết, lặp lại — hết chặng mới sang chặng sau." : "Học theo thứ tự xen kẽ trong chặng: vài bộ từ, rồi ngữ pháp, đọc, nghe, nói, nhập vai, viết, lặp lại — hết chặng mới sang chặng sau.";
   return '<details class="guide-more"><summary><b>Sổ tay chặng ' + stage + ' — bấm để mở</b></summary>'
     + (grams.length ? '<p><b>Ngữ pháp chặng này:</b> ' + esc(grams.join(" · ")) + '</p>' : '')
     + (sets.length ? '<p><b>Bộ từ chặng này:</b> ' + esc(sets.join(" · ")) + '</p>' : '')
@@ -10416,12 +10513,16 @@ function zhModNodeHTML(kind, i, item, stage) {
   var sub = kind === "zhGram" ? item.quiz.length + " câu hỏi" : kind === "zhRead" ? item.questions.length + " câu hỏi" : kind === "zhListen" ? item.lines.length + " lượt thoại · " + item.questions.length + " câu hỏi" : kind === "zhSpeak" ? item.lines.length + " lượt thoại" : kind === "zhRole" ? item.turns.length + " lượt thoại" : item.kind === "order" ? "sắp xếp từ thành câu" : item.kind === "fill" ? item.questions.length + " câu điền từ" : "viết đoạn ngắn";
   return '<button class="path-node ' + (st === "next" ? "future" : st) + '" data-' + attr + '="' + i + '"><span class="dotwrap"><span class="dot">' + icon + '</span></span><span><span class="pn-title">' + esc(label + ": " + item.title) + '</span><br><span class="pn-type">Tiếng Trung · ' + label + ' chặng ' + stage + ' · ' + sub + '</span><br><span class="pn-st">' + stTxt + '</span>' + flags + '</span></button>';
 }
+/* SUA 01/11 dot dan-xen: ham nay khong con duoc goi tu Ban do (Ban do dung
+   zhStageSeq qua zhSeqNodeHTML); giu dinh nghia de phong dung lai, khong xoa
+   voi de tranh gay loi neu noi khac tham chieu. */
 function zhStageModuleHTML(stage) {
 
   /* DOT UI-FIX 31/10: chang 1 gom theo chu diem thay vi xep theo ky nang.
-     Moi nut module chang 1 xuat hien dung 1 lan trong dung 1 cum; 2 bo tu
-     (Mau sac va hinh dang; Cam xuc, so sanh va cau hoi) chua co module doi ung
-     o chang 1 nen van nam o duong tu vung phia tren, khong bia them noi dung. */
+     Moi nut module chang 1 xuat hien dung 1 lan trong dung 1 cum.
+     DOT NOI-DUNG-GIAI-TRI 01/11: them cum 7 cho 2 bo tu truoc day chua co module
+     doi ung (Mau sac va hinh dang; Cam xuc, so sanh va cau hoi) — 6 muc moi
+     (1 ngu phap, 1 doc, 2 nghe, 1 noi, 1 viet), khong trung nut. */
   if (stage === 1) {
     var ZH_ARR = { zhGram: ZH_GRAMMAR, zhRead: ZH_READING, zhListen: ZH_LISTENING, zhSpeak: ZH_SPEAK, zhRole: ZH_ROLE, zhWrite: ZH_WRITE };
     var ZH_CLUSTERS = [
@@ -10430,7 +10531,8 @@ function zhStageModuleHTML(stage) {
       { name: "3. Số đếm và thời gian", vocab: "Số và thời gian; Số đếm và thời gian trong ngày", items: [["zhGram", 55], ["zhGram", 56], ["zhRead", 34], ["zhRead", 51], ["zhListen", 53], ["zhSpeak", 44], ["zhSpeak", 45], ["zhWrite", 36], ["zhWrite", 39]] },
       { name: "4. Trường học và lớp học", vocab: "Trường học và lớp học; Đời sống ở trường", items: [["zhGram", 53], ["zhGram", 57], ["zhRead", 53], ["zhRead", 55], ["zhListen", 40], ["zhListen", 55], ["zhSpeak", 41], ["zhSpeak", 46], ["zhWrite", 32], ["zhWrite", 37]] },
       { name: "5. Ăn uống", vocab: "Ăn uống hằng ngày; Đồ ăn sáng và đồ uống", items: [["zhGram", 45], ["zhRead", 54], ["zhListen", 36], ["zhListen", 54], ["zhSpeak", 48], ["zhRole", 31], ["zhWrite", 38]] },
-      { name: "6. Mua sắm, chợ và đi lại", vocab: "Chợ, hỏi đường và địa danh; Đi lại trong thành phố", items: [["zhGram", 44], ["zhRead", 35], ["zhRead", 52], ["zhListen", 39], ["zhListen", 52], ["zhListen", 60], ["zhSpeak", 47], ["zhWrite", 40]] }
+      { name: "6. Mua sắm, chợ và đi lại", vocab: "Chợ, hỏi đường và địa danh; Đi lại trong thành phố", items: [["zhGram", 44], ["zhRead", 35], ["zhRead", 52], ["zhListen", 39], ["zhListen", 52], ["zhListen", 60], ["zhSpeak", 47], ["zhWrite", 40]] },
+      { name: "7. Màu sắc, hình dáng, cảm xúc và câu hỏi", vocab: "Màu sắc và hình dáng; Cảm xúc, so sánh và câu hỏi", items: [["zhGram", 60], ["zhRead", 60], ["zhListen", 61], ["zhListen", 62], ["zhSpeak", 60], ["zhWrite", 60]] }
     ];
     var clOut = "";
     ZH_CLUSTERS.forEach(function (cl) {
@@ -10472,6 +10574,34 @@ function zhStageSeq(stage) {
   (ZH_SPEAK || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhSpeak", r.id), target: { kind: "zhLesson", title: "Nói: " + r.title, type: "Tiếng Trung · Nói chặng " + stage, lesson: { type: "zhSpeak", idx: i } } }); });
   (ZH_ROLE || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhRole", r.id), target: { kind: "zhLesson", title: "Nhập vai: " + r.title, type: "Tiếng Trung · Nhập vai chặng " + stage, lesson: { type: "zhRole", idx: i } } }); });
   (ZH_WRITE || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhWrite", r.id), target: { kind: "zhLesson", title: "Viết: " + r.title, type: "Tiếng Trung · Viết chặng " + stage, lesson: { type: "zhWrite", idx: i } } }); });
+  /* DOT DAN-XEN 01/11: dan xen cac loai bai trong chang thay vi don cuc theo
+     loai (het bo tu moi sang ngu phap...). Thuat toan chia deu dang DUAL
+     (bai thu j cua loai k -> luot floor(j*R/n_k), R = so buoc nhieu nhat
+     trong cac loai con lai tru loai troi): giu nguyen tap buoc, thu tu trong
+     cung loai; bai dau tien cua MOI loai deu roi vao luot 0 nen chang luon
+     bat dau bang tu vung. Mach pinyin nam ngoai zhStageSeq nen khong anh
+     huong; "Hoc tiep" va Ban do doc zhStageSeq nen tu khop thu tu moi. */
+  (function () {
+    var KIND_ORDER = ["zhVocab", "zhGram", "zhRead", "zhListen", "zhSpeak", "zhRole", "zhWrite"];
+    var groups = {};
+    out.forEach(function (it) { var k = it.target.lesson.type; (groups[k] = groups[k] || []).push(it); });
+    var kinds = KIND_ORDER.filter(function (k) { return groups[k] && groups[k].length; });
+    Object.keys(groups).forEach(function (k) { if (kinds.indexOf(k) < 0) kinds.push(k); });
+    if (kinds.length < 2) return;
+    var dom = kinds[0];
+    kinds.forEach(function (k) { if (groups[k].length > groups[dom].length) dom = k; });
+    var R = 0;
+    kinds.forEach(function (k) { if (k !== dom && groups[k].length > R) R = groups[k].length; });
+    var rounds = [];
+    for (var r = 0; r < R; r++) rounds.push([]);
+    kinds.forEach(function (k) {
+      var g = groups[k], n = g.length;
+      for (var j = 0; j < n; j++) rounds[Math.floor(j * R / n)].push(g[j]);
+    });
+    var mixed = [];
+    rounds.forEach(function (rd) { rd.forEach(function (it) { mixed.push(it); }); });
+    out = mixed;
+  })();
   return out;
 }
 function zhSessionTarget() {
@@ -10524,6 +10654,16 @@ function zhSetNodeHTML(d) {
 function zhStageBanner(st, done, total) {
   return '<div class="unit-banner"><b>Chặng ' + st.stage + ': ' + esc(st.title) + '</b><p class="mut">' + esc(st.desc) + ' · Từ tích lũy (sách cũ): ' + st.oldCum + ' · Hệ E: ' + st.eCum + (total != null ? ' · Đã xong ' + done + '/' + total : '') + '</p></div>';
 }
+/* SUA 01/11 dot dan-xen: mot muc cua zhStageSeq -> dung nut Ban do da co
+   (zhSetNodeHTML / zhModNodeHTML, giu nguyen wiring wireZhMap) de Ban do hien
+   dung thu tu di hoc xen ke — khong don cuc theo loai, khong lech "Tiep theo". */
+function zhSeqNodeHTML(it, stage) {
+  var ls = it.target.lesson;
+  if (ls.type === "zhVocab") { var d = zhSetByKey(ls.setKey); return d ? zhSetNodeHTML(d) : ""; }
+  var ARR = { zhGram: ZH_GRAMMAR, zhRead: ZH_READING, zhListen: ZH_LISTENING, zhSpeak: ZH_SPEAK, zhRole: ZH_ROLE, zhWrite: ZH_WRITE };
+  var arr = ARR[ls.type];
+  return arr && arr[ls.idx] ? zhModNodeHTML(ls.type, ls.idx, arr[ls.idx], stage) : "";
+}
 function zhStageMapBlock(st, detailed) {
   var html = "";
     var sets = zhStageSets(st.stage);
@@ -10534,12 +10674,12 @@ function zhStageMapBlock(st, detailed) {
          con bo tu nao (hien tai khong chang 2-6 nao roi vao day, vi 2-3 da co
          bo HSK2/HSK3 rieng, 4-6 da co bo tu truoc). Khong hien cho chang 2-3. */
       html += '<p class="mut">Chặng này chưa có bộ từ riêng — viết chữ và từ điển bấm tra đã mở chung trong tab Luyện tập; thi thử HSK của chặng này vẫn mở ở đợt sau, web không mạo nhận đã đủ. Trong lúc chờ, học nối bằng bộ từ thật gần nhất:</p><div class="row"><button class="btn" data-zhbridge="' + st.stage + '">Học bộ từ gần nhất →</button></div>';
-    } else {
-      html += '<div class="path-v">';
-      sets.forEach(function (d) { html += zhSetNodeHTML(d); });
-      html += '</div>';
     }
-    html += zhStageModuleHTML(st.stage);
+    /* SUA 01/11 dot dan-xen: thay cach bay cu (het bo tu roi zhStageModuleHTML
+       xep theo pha) bang mot danh sach xen ke duy nhat tu zhStageSeq. */
+    html += '<div class="path-v">';
+    zhStageSeq(st.stage).forEach(function (it) { html += zhSeqNodeHTML(it, st.stage); });
+    html += '</div>';
     html += zhChapterTestMapHTML(st.stage);
     html += '<details class="guide-more"><summary><b>Xem ghi chú nhãn HSK của chặng này</b></summary><p class="mut">' + esc(sets.length ? sets[0].set.hskNote : st.note) + '</p></details>';
     if (detailed) html += zhStageGuidebookHTML(st.stage);
@@ -10563,10 +10703,14 @@ function zhMapHTML(detailed, onlyStage) {
   html += zhStageBanner(ZH_STAGES[0], phDoneN + (stDone ? 1 : 0) + s1DoneN, ZH_PH_STEPS.length + 1 + s1Sets.length);
   html += '<div class="path-v">';
   ZH_PH_STEPS.forEach(function (s, i) { html += zhPhNodeHTML(i); });
-  html += zhSetNodeHTML(starter);
-  s1Sets.forEach(function (d) { html += zhSetNodeHTML(d); });
   html += '</div>';
-  html += zhStageModuleHTML(1);
+  /* SUA 01/11 dot dan-xen: chang 1 bo cach bay cu (bo starter + bo chang 1
+     roi cum chu diem zhStageModuleHTML — lech thu tu di hoc, don cuc tu
+     vung) — thay bang mot danh sach xen ke duy nhat tu zhStageSeq(1). Mach
+     pinyin giu nguyen o tren, kiem tra cuoi chang giu nguyen o duoi. */
+  html += '<div class="path-v">';
+  zhStageSeq(1).forEach(function (it) { html += zhSeqNodeHTML(it, 1); });
+  html += '</div>';
   html += zhChapterTestMapHTML(1);
   /* UI 28/10 (GD-02): man chinh chi ve chang hien tai; ban do day du
      van o tab Ban do (zhMapHTML(true) khong truyen onlyStage). */
@@ -10732,9 +10876,9 @@ function viewPracticeZh(app) {
   html += '<details><summary><b>Nhập vai chặng 1–6 (' + ZH_ROLE.length + ' tình huống)</b></summary>' + zhSkillPracticeHTML("role") + '</details>';
   html += '<details><summary><b>Viết chặng 1–6 (' + ZH_WRITE.length + ' bài)</b></summary>' + zhSkillPracticeHTML("write") + '</details>';
   html += '<details><summary><b>🎓 Thi — kiểm tra cuối chặng + thi thử HSK (bản rút gọn)</b></summary>' + zhPracticeExamHTML() + '</details>';
-  html += '<details class="card" id="zhGameCardPractice"><summary><b>🎬 Giải trí — 7 game + video hoạt hình track Trung</b></summary>'
+  html += '<section class="card" id="zhGameCardPractice"><h3>🎬 Giải trí — 11 game + video hoạt hình track Trung</h3><p class="mut">Khu giải trí luôn mở sẵn — bấm là chơi ngay, không cần mở thu gọn. 4 game mới: bắn từ đúng, đua xe, nói theo chấm điểm, đi cảnh nhặt sao.</p>'
     + '<p class="mut">Chơi bằng nội dung tiếng Trung: nối chữ Hán với nghĩa, giải mã pinyin, nghe chữ Hán đoán nghĩa, gõ chữ Hán, xếp câu, quiz ngữ pháp/đọc/nghe, ôn từ đến hạn. Trả lời sai trong game cũng vào Sổ lỗi sai track Trung. Kỷ lục tách riêng theo track (không trộn với track Anh), lưu trên máy này.</p><div class="row">'
-    + [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"]].map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div><div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube từ kênh gốc, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Tây Du Ký Tập 90: Kế hoạch của bọn yêu quái (Tiếng Trung IMC)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/uKj-EGFpiWE?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu90') + "</details><details><summary><b>Doraemon: Ngôi nhà biến thành Robot (Tiếng Trung Phụ Đề)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jt4C4cQ7BeI?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('doraemon') + "</details><details><summary><b>Peppa Pig: Bữa trưa [Vietsub + Pinyin] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/DEJV45iuYx8?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('peppazh') + "</details><details><summary><b>Shin: Nhiều Ô Quá! (Hoa Ngữ Hoạt Hình)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/NBrKtkq4Z2g?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('shinzh') + "</details>" + '</div></details>';
+    + [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["shooter", "🔫", "Bắn từ đúng"], ["race", "🏎️", "Đua xe từ vựng"], ["speakgame", "🎤", "Nói theo chấm điểm"], ["platform", "🏃", "Đi cảnh nhặt sao"]].map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div><div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Tây Du Ký Tập 90: Kế hoạch của bọn yêu quái (Tiếng Trung IMC)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/uKj-EGFpiWE?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu90') + "</details><details><summary><b>Doraemon: Ngôi nhà biến thành Robot (Tiếng Trung Phụ Đề)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jt4C4cQ7BeI?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('doraemon') + "</details><details><summary><b>Peppa Pig: Bữa trưa [Vietsub + Pinyin] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/DEJV45iuYx8?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('peppazh') + "</details><details><summary><b>Shin: Nhiều Ô Quá! (Hoa Ngữ Hoạt Hình)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/NBrKtkq4Z2g?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('shinzh') + "</details><details><summary><b>Tây Du Ký 1986 — tập 1 (Chữ cứng, Pinyin, Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/ATNVFYOLVPg?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu01') + "</details>" + '</div></section>';
   html += '<details><summary><b>HSKK — thi nói riêng</b></summary>' + zhHskkHTML() + '</details>';
   html += '<p><button class="btn" id="zhPracticeEntryBtn">Làm lại kiểm tra đầu vào HSK</button></p>';
   app.innerHTML = html;
@@ -11523,7 +11667,11 @@ function renderZhPh(app, l) {
     + '<p><b>Ví dụ trước:</b></p>' + step.examples.map(function (e) { return '<p>· ' + esc(e) + '</p>'; }).join("")
     + (step.id === "tones" ? '<div class="row"><button class="btn" id="zhPhListen">🔊 Nghe 4 thanh mẫu (mā má mǎ mà)</button></div>' : '')
     + '<details class="rule-more"><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(step.rule) + '</p><p>💡 <b>Mẹo:</b> ' + esc(step.tip) + '</p></details>'
-    + (step.id === "tones" ? videoSlotIf("zhPh:tones") : '<details class="guide-more"><summary><b>Xem nguồn video lý thuyết</b></summary><p class="mut">Video lý thuyết: xem nguồn trong Cài đặt → Nguồn nội dung.</p></details>')
+    + (step.id === "tones" ? videoSlotIf("zhPh:tones") + videoSlotIf("zhPh:pairs") + videoSlotIf("zhPh:sandhi") + videoSlotIf("zhPh:bu") + videoSlotIf("zhPh:song") : '<details class="guide-more"><summary><b>Xem nguồn video lý thuyết</b></summary><p class="mut">Video lý thuyết: xem nguồn trong Cài đặt → Nguồn nội dung.</p></details>')
+    /* DOT NOI-DUNG-GIAI-TRI 01/11: 4 clip pinyin con lai (cap thanh, bien dieu,
+       chu 不, bai hat) deu thuoc chu de thanh dieu nen nhung het vao bai Thanh dieu
+       (buoc pinyin duy nhat ve thanh); cac buoc finals/initials/rules giu ghi chu
+       nguon nhu cu. Clip pairs/song van giu co ghi trong ban do video. */
     + '<p class="mut">Bài này có ' + step.quiz.length + ' câu hỏi thực hành.</p>'
     + '<div class="row"><button class="btn btn-primary" id="zhPhStart">Vào luyện tập →</button>' + (st === "done" ? '' : ' <button class="btn" id="zhPhSkip">Bỏ qua bước này</button>') + '</div>'
     + (st === "skipped" ? '<p class="mut">Bước này bạn đã bỏ qua trước đó — làm lại để tính là xong.</p>' : '')
@@ -11938,7 +12086,7 @@ function zhPracticeExamHTML() {
     btns += '<button class="btn" data-zhmock="' + hsk + '">Thi thử HSK' + hsk + ' (Nghe ' + m.listen.n + ' + Đọc ' + m.read.n + ' + Viết ' + m.write.n + ' câu)</button>';
   });
   return '<div class="row" style="margin-top:6px">' + btns + '</div>'
-    + '<p class="mut">Kiểm tra cuối chặng mở khi xong 80% số bước chặng (chuẩn nội bộ); mỗi phần cần từ 50% đúng lần đầu mới tính qua — chưa qua chỉ cần học lại đúng phần yếu, vẫn đi tiếp. Thi thử HSK cấp 1 đã có đủ ' + zhMockBuild(1).total + ' câu (Nghe ' + zhMockBuild(1).listen.n + ' + Đọc ' + zhMockBuild(1).read.n + ').</p>';
+    + '<p class="mut">Kiểm tra cuối chặng mở khi xong 80% số bước chặng (chuẩn nội bộ); mỗi phần cần từ 50% đúng lần đầu mới tính qua — chưa qua chỉ cần học lại đúng phần yếu, vẫn đi tiếp. Thi thử HSK cấp 1 đã có ' + zhMockBuild(1).total + ' câu (Nghe ' + zhMockBuild(1).listen.n + ' + Đọc ' + zhMockBuild(1).read.n + ' + Viết luyện thêm ' + zhMockBuild(1).write.n + ').</p>';
 }
 function zhFirstUndoneModule(kind, stage) {
   var arr = kind === "gram" ? ZH_GRAMMAR : kind === "read" ? ZH_READING : ZH_LISTENING;
@@ -12051,21 +12199,26 @@ function zhMockBuild(hsk) {
     if (w.kind === "order") wQs.push(zhMockOrderMCQ(w, wQs.length));
     else if (w.kind === "fill") (w.questions || []).forEach(function (qq) { wQs.push(qq); });
   });
-  // DOT 18 31/10: HSK1 doi thanh 40 cau (20+20+0) dung co cau de that; cap 2-6 cat dung muc tieu
-  // de mau HSK 3.0 (Nghe/Doc/Viet): L2 25/25/10, L3 30/30/10, L4 32/32/6, L5 35/35/2, L6 40/40/2.
+  // DOT 18 31/10: cap 2-6 cat dung muc tieu de mau HSK 3.0 (Nghe/Doc/Viet).
+  // DOT NOI-DUNG-GIAI-TRI 01/11: Viet HSK5 len 9 (het ngan hang hien co: 7 sap xep + 2 cau dien),
+  // Viet HSK6 len 10 (ngan hang du: 6 sap xep + 6 cau dien, cat 10) — muc cu L5/L6 chi 2 cau.
   if (hsk >= 2 && hsk <= 6) {
-    var tgt = { 2: [25, 25, 10], 3: [30, 30, 10], 4: [32, 32, 6], 5: [35, 35, 2], 6: [40, 40, 2] }[hsk];
+    var tgt = { 2: [25, 25, 10], 3: [30, 30, 10], 4: [32, 32, 6], 5: [35, 35, 9], 6: [40, 40, 10] }[hsk];
     lQs = lQs.slice(0, tgt[0]); rQs = rQs.slice(0, tgt[1]); wQs = wQs.slice(0, tgt[2]);
     return { hsk: hsk, listen: { qs: lQs, n: lQs.length, segments: listens }, read: { qs: rQs, n: rQs.length, passages: reads }, write: { qs: wQs, n: wQs.length }, total: lQs.length + rQs.length + wQs.length };
   }
-  // DOT 18 31/10: HSK1 ve dung co cau de that (20 Nghe + 20 Doc, khong Viet): 16 cau tu 4 doan dau
-  // + 4 cau tu bai Nghe moi zh18-mock-l1; Viet = 0 (KHONG xoa cau khoi ngan hang Viet).
+  // DOT 18 31/10: HSK1 ve dung co cau de that (20 Nghe + 20 Doc): 16 cau tu 4 doan dau
+  // + 4 cau tu bai Nghe moi zh18-mock-l1.
+  // DOT NOI-DUNG-GIAI-TRI 01/11: HSK1 them 10 cau Viet LUYEN THEM tu ngan hang Viet chang 1
+  // (dien tu — ngan hang co 40 cau, cat 10). De that cap 1 KHONG co Viet; phan nay ghi ro
+  // la luyen them o man hub, khong mao nhan la cau de that.
   var lQs1 = []; listens.slice(0, 4).forEach(function (sg) { (sg.questions || []).forEach(function (qq) { lQs1.push(qq); }); });
   var mockL1 = null; listens.forEach(function (sg) { if (sg.id === "zh18-mock-l1") mockL1 = sg; });
   if (mockL1) (mockL1.questions || []).forEach(function (qq) { lQs1.push(qq); });
   var rQs1 = []; reads.slice(0, 4).forEach(function (r) { (r.questions || []).forEach(function (qq) { rQs1.push(qq); }); });
   var segs1 = listens.slice(0, 4); if (mockL1) segs1.push(mockL1);
-  return { hsk: hsk, listen: { qs: lQs1, n: lQs1.length, segments: segs1 }, read: { qs: rQs1, n: rQs1.length, passages: reads.slice(0, 4) }, write: { qs: [], n: 0 }, total: lQs1.length + rQs1.length };
+  var wQs1 = wQs.slice(0, 10);
+  return { hsk: hsk, listen: { qs: lQs1, n: lQs1.length, segments: segs1 }, read: { qs: rQs1, n: rQs1.length, passages: reads.slice(0, 4) }, write: { qs: wQs1, n: wQs1.length }, total: lQs1.length + rQs1.length + wQs1.length };
 }
 var ZH_MOCK_MIN = { listen: 10, read: 15, write: 10 };
 var ZH_MOCK_ORDER = ["listen", "read", "write"];
@@ -12103,14 +12256,14 @@ function renderZhMock(app, l) {
     var prev = (state.zhMockTests || []).filter(function (m) { return m.hsk === hsk; });
     var prevHTML = prev.length ? '<p class="mut">Đã thi trước đây: ' + prev.map(function (m) { return m.date + ' — Nghe ' + m.listen.c + '/' + m.listen.n + ', Đọc ' + m.read.c + '/' + m.read.n + ', Viết ' + m.write.c + '/' + m.write.n; }).join(" · ") + '</p>' : '<p class="mut">Chưa có mốc thi thử ' + label + ' nào.</p>';
     var zhFull = mock.total >= ({ 1: 40, 2: 60, 3: 70, 4: 70, 5: 72, 6: 82 })[hsk];
-    app.innerHTML = lessonHead({ title: "Thi thử " + label + (zhFull ? " (đủ câu)" : " (bản rút gọn)"), type: "Tiếng Trung · Thi thử HSK" }, (hsk === 1 ? "Thi thử gộp 2 phần (Nghe + Đọc) từ đúng ngân hàng của web, lọc theo chặng — cấp 1 không có phần Viết." : "Thi thử gộp 3 phần từ đúng ngân hàng của web, lọc theo chặng."))
+    app.innerHTML = lessonHead({ title: "Thi thử " + label + (zhFull ? " (đủ câu)" : " (bản rút gọn)"), type: "Tiếng Trung · Thi thử HSK" }, (hsk === 1 ? "Thi thử gộp 3 phần từ đúng ngân hàng của web, lọc theo chặng — Nghe + Đọc đủ 40 câu theo đề thật, phần Viết là luyện thêm của web (đề thật cấp 1 không có Viết)." : "Thi thử gộp 3 phần từ đúng ngân hàng của web, lọc theo chặng."))
       + '<div class="qblock">'
-      + (zhFull ? '<p><b>✓ Đủ câu theo đề mẫu HSK 3.0:</b> số câu dưới đây đếm thật từ ngân hàng của web, đúng tỉ lệ Nghe/Đọc/Viết của đề mẫu.</p>' : '<p><b>⚠️ Đây là BẢN RÚT GỌN, không phải đề HSK thật:</b> đề HSK thật nhiều câu hơn rất nhiều; số câu dưới đây đếm thật từ ngân hàng của web.</p>')
+      + (hsk === 1 ? '<p><b>Nghe + Đọc đủ 40 câu theo đề thật;</b> cộng thêm 10 câu Viết luyện thêm của web (đề thật cấp 1 không có Viết) — số câu đếm thật từ ngân hàng của web.</p>' : zhFull ? '<p><b>✓ Đủ câu theo đề mẫu HSK 3.0:</b> số câu dưới đây đếm thật từ ngân hàng của web, đúng tỉ lệ Nghe/Đọc/Viết của đề mẫu.</p>' : '<p><b>⚠️ Đây là BẢN RÚT GỌN, không phải đề HSK thật:</b> đề HSK thật nhiều câu hơn rất nhiều; số câu dưới đây đếm thật từ ngân hàng của web.</p>')
       + '<p><b>Nghe:</b> ' + mock.listen.n + ' câu (đồng hồ 10 phút) — ' + mock.listen.segments.map(function (s) { return esc(s.title); }).join(" · ") + '</p>'
       + '<p><b>Đọc:</b> ' + mock.read.n + ' câu (đồng hồ 15 phút) — ' + mock.read.passages.map(function (r) { return esc(r.title); }).join(" · ") + '</p>'
-      + (mock.write.n === 0 ? '<p><b>Viết:</b> không có phần này — đề thật HSK cấp 1 không có phần Viết.</p>' : '<p><b>Viết' + (zhFull ? "" : " (rút gọn)") + ':</b> ' + mock.write.n + ' câu (đồng hồ 10 phút) — sắp xếp từ thành câu + điền từ của ZH_WRITE; chưa phải dạng viết đoạn của đề thật.</p>')
+      + (mock.write.n === 0 ? '<p><b>Viết:</b> không có phần này — đề thật HSK cấp 1 không có phần Viết.</p>' : '<p><b>Viết' + (zhFull ? "" : " (rút gọn)") + ':</b> ' + mock.write.n + ' câu (đồng hồ 10 phút) — sắp xếp từ thành câu + điền từ của ZH_WRITE; chưa phải dạng viết đoạn của đề thật.' + (hsk === 5 ? ' HSK5 hiện có 9 câu Viết trong ngân hàng — đã lấy hết.' : '') + '</p>')
       + '<p><b>Tổng: ' + mock.total + ' câu.</b> Mỗi phần có đồng hồ đếm ngược chạy thật, hết giờ phần tự chuyển phần tiếp theo; các câu chưa trả lời tính là sai.</p>'
-      + (function () { var zhReal = { 1: 40, 2: 60, 3: 70, 4: 70, 5: 72, 6: 82 }; var rt = zhReal[hsk] || 0; return rt ? '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): ' + mock.total + '/' + rt + ' câu — ' + (mock.total >= rt ? 'đủ câu để gọi sẵn sàng thi.' : 'chưa đủ câu để gọi sẵn sàng thi theo chuẩn nội bộ của web.') + '</p>' : ''; })()
+      + (function () { var zhReal = { 1: 40, 2: 60, 3: 70, 4: 70, 5: 72, 6: 82 }; var rt = zhReal[hsk] || 0; var base = (hsk === 1) ? (mock.listen.n + mock.read.n) : mock.total; return rt ? '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): ' + base + '/' + rt + ' câu' + (hsk === 1 ? ' (Nghe + Đọc; chưa tính 10 câu Viết luyện thêm)' : '') + ' — ' + (base >= rt ? 'đủ câu để gọi sẵn sàng thi.' : 'chưa đủ câu để gọi sẵn sàng thi theo chuẩn nội bộ của web.') + '</p>' : ''; })()
       + '<p class="mut">Không có phần Nói trong đề này — nói thi riêng ở mục HSKK (HSKK là bài thi nói riêng). Chấm Nghe/Đọc/Viết rút gọn theo đáp án; không có AI chấm tiếng Trung trong đợt này (chờ nâng cấp).</p>'
       + '<p class="mut">Thi thử này theo hệ 6 cấp cũ (Giáo trình chuẩn HSK); HSK 3.0 ra mắt toàn cầu 13/12/2026 có cấu trúc mới — xem thêm ở Bản đồ → Lớp bổ sung HSK 3.0.</p>'
       + prevHTML
@@ -12530,54 +12683,28 @@ function viewHomeTc(app) {
   var spl = document.getElementById("statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
   var mg = document.getElementById("tcHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
 }
-/* SUA 01/11 dot ban-do: nhom nut tren Ban do TOEIC/TOPIK theo loai buoc
-   (Ly thuyet -> Thuc hanh -> Kiem tra), de Ngu phap/Nghe/Doc/Viet/Kiem tra/
-   Thi thu khong bi chon sau tuong tu vung. Chi doi cach bay: giu nguyen
-   id buoc, thu tu trong cung loai, trang thai khoa/mo/xong, phan tram chang,
-   nut "Hoc tiep" va hanh vi bam buoc (wireTc/wireTp khong doi).
+/* SUA 01/11 dot dan-xen: bo cach bay chia khoi theo loai cua dot ban-do
+   (het tu vung moi sang ngu phap... la don cuc, hoc chan) — Ban do TOEIC/
+   TOPIK nay hien nut theo DUNG thu tu buoc di hoc (xen ke), moi nut da kem
+   nhan loai trong tieu de. Chi doi cach bay: giu nguyen id buoc, trang thai
+   khoa/mo/xong, phan tram chang, nut "Hoc tiep" va hanh vi bam buoc
+   (wireTc/wireTp khong doi).
    Goi btnFn(id) dung 1 tham so — khong dung .map(btnFn) tran: map truyen
    ca index lam tham so label nen nut thu 2 tro di tung hien so ("1 ->")
-   thay vi tieu de that; day la loi hien thi cu tren Ban do, ban nay sua luon. */
-function roadmapGroupHTML(steps, btnFn, metaFn) {
-  var order = [
-    { kind: "hangul", label: "Hangul" },
-    { kind: "vocab", label: "Từ vựng" },
-    { kind: "gram", label: "Ngữ pháp" },
-    { kind: "listen", label: "Nghe" },
-    { kind: "read", label: "Đọc" },
-    { kind: "write", label: "Viết" },
-    { kind: "check", label: "Kiểm tra cuối chặng" },
-    { kind: "mock", label: "Thi thử" }
-  ];
-  var byKind = {};
-  steps.forEach(function (id) {
-    var m = metaFn(id);
-    var k = (m && m.kind) || "other";
-    if (!byKind[k]) byKind[k] = [];
-    byKind[k].push(id);
-  });
-  var out = "";
-  order.forEach(function (g) {
-    var ids = byKind[g.kind];
-    if (!ids || !ids.length) return;
-    out += '<h4>' + g.label + ' (' + ids.length + ')</h4><div class="row" data-roadmap-group="' + g.kind + '">' + ids.map(function (id) { return btnFn(id); }).join("") + '</div>';
-  });
-  Object.keys(byKind).forEach(function (k) {
-    if (order.some(function (g) { return g.kind === k; })) return;
-    out += '<h4>Khác (' + byKind[k].length + ')</h4><div class="row" data-roadmap-group="' + k + '">' + byKind[k].map(function (id) { return btnFn(id); }).join("") + '</div>';
-  });
-  return out;
+   thay vi tieu de that. */
+function roadmapOrderedHTML(steps, btnFn) {
+  return '<div class="row" data-roadmap-ordered="1">' + steps.map(function (id) { return btnFn(id); }).join("") + '</div>';
 }
 function viewRoadmapTc(app) {
   tcNorm();
   var n = tcNextStep();
   var html = trackSwitchHTML() + '<h2>Bản đồ TOEIC</h2>';
-  html += '<p class="mut">4 chặng theo mục tiêu điểm: 450, 600, 750, 900. Chặng sau mở khi chặng trước xong từ 80%. Mỗi bước xong được +10 XP. Nội dung tự soạn 100%, không phải đề thi thật của ETS.</p>';
+  html += '<p class="mut">4 chặng theo mục tiêu điểm: 450, 600, 750, 900. Chặng sau mở khi chặng trước xong từ 80%. Mỗi bước xong được +10 XP. Nội dung tự soạn 100%, không phải đề thi thật của ETS. Các bước trong mỗi chặng xếp xen kẽ các loại (vài bộ từ, rồi ngữ pháp, nghe, đọc, lặp lại) để đỡ chán và nhớ lâu; kiểm tra cuối chặng rồi thi thử vẫn ở cuối chặng.</p>';
   if (n) html += '<div class="row"><button class="btn btn-primary" data-tcnext="1">Học tiếp: ' + esc(n.meta.title) + ' →</button></div>';
   TC_STAGES.forEach(function (st, i) {
     html += '<section class="card"><h3>' + esc(st.title) + ' — đã xong ' + tcStagePct(i) + '%</h3>';
     if (!tcStageOpen(i)) html += '<p class="mut">Chặng này chưa mở — cần xong 80% chặng trước.</p>';
-    html += roadmapGroupHTML(st.steps, tcStepBtnHTML, tcStepMeta) + '</section>';
+    html += roadmapOrderedHTML(st.steps, tcStepBtnHTML) + '</section>';
   });
   app.innerHTML = html;
   wireTc(app);
@@ -12600,8 +12727,12 @@ function viewPracticeTc(app) {
   });
   html += '<section class="card"><h3>Thi thử TOEIC đủ 200 câu</h3><p class="mut">200 câu, 120 phút tham khảo, điểm ước lượng 10–990 chỉ để tham khảo.</p><div class="row">' + tcStepBtnHTML("m0") + '</div></section>';
   if (state.tcHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOEIC chưa sửa: ' + state.tcHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
+  /* DOT NOI-DUNG-GIAI-TRI 01/11: the giai tri TC — chi 4 game moi (7 game cu dung kho EN nen khong dua vao). */
+  html += '<section class="card" id="tcGameCardPractice"><h3>🎮 Giải trí — 4 game chơi mà học</h3><p class="mut">Chơi bằng từ vựng TOEIC của web: bắn từ đúng, đua xe, nói theo chấm điểm, đi cảnh nhặt sao. Chơi được bằng bấm chạm trên điện thoại. Kỷ lục riêng từng game, lưu trên máy này.</p><div class="row">' + [["shooter", "🔫", "Bắn từ đúng"], ["race", "🏎️", "Đua xe từ vựng"], ["speakgame", "🎤", "Nói theo chấm điểm"], ["platform", "🏃", "Đi cảnh nhặt sao"]].map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div></section>';
   app.innerHTML = html;
   wireTc(app);
+  app.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
+
   wireVocabSearch("tcVocabSearch", "tcVocabGroups");
 }
 function viewReviewTc(app) {
@@ -12649,8 +12780,12 @@ function tpStepMeta(id) {
   if (k === "l") { var l = (typeof TP_LISTEN !== "undefined") ? TP_LISTEN[n] : null; return l ? { kind: "listen", title: "Nghe: " + l.title, ref: n } : null; }
   if (k === "r") { var r = (typeof TP_READ !== "undefined") ? TP_READ[n] : null; return r ? { kind: "read", title: "Đọc: " + r.title, ref: n } : null; }
   if (k === "k") { var ck2 = (typeof TP_CHECK !== "undefined") ? TP_CHECK[n] : null; return ck2 ? { kind: "check", title: ck2.title, ref: n } : null; }
-  if (k === "w") { return (typeof TP_WRITE !== "undefined") ? { kind: "write", title: n === 0 ? "Viết TOPIK II: nhiệm vụ 51–52 (điền câu)" : "Viết TOPIK II: nhiệm vụ 53–54 (luận)", ref: n } : null; }
+  if (k === "w") { return (typeof TP_WRITE !== "undefined") ? { kind: "write", title: n === 0 ? "Viết TOPIK II: nhiệm vụ 51–52 (điền câu)" : n === 1 ? "Viết TOPIK II: nhiệm vụ 53–54 (luận)" : n === 2 ? "Luyện viết Cấp 1: điền câu đơn giản" : "Luyện viết Cấp 2: điền câu ghép + đoạn ngắn", ref: n } : null; }
   if (id === "m0") return { kind: "mock", title: "Thi thử TOPIK I rút gọn", ref: 0 };
+  if (id === "m1") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 3 (đủ 104 nhiệm vụ)", ref: 1 };
+  if (id === "m2") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 4 (đủ 104 nhiệm vụ)", ref: 2 };
+  if (id === "m3") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 5 (đủ 104 nhiệm vụ)", ref: 3 };
+  if (id === "m4") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 6 (đủ 104 nhiệm vụ)", ref: 4 };
   return null;
 }
 function tpStagePct(i) {
@@ -12829,8 +12964,9 @@ function tpOpenStep(id, backTab) {
     tpWireBack(back); return;
   }
   if (m.kind === "write") {
-    var tasks = m.ref === 0 ? [51, 52] : [53, 54];
-    var htmlW = tpBackBtnHTML(back) + '<section class="card"><p class="eyebrow">TOPIK II · VIẾT</p><h2>' + esc(m.title) + '</h2><p class="mut">Thi thật TOPIK II dạng giấy (PBT): Nghe 50 + Viết 4 + Đọc 50 = 104 câu, 300 điểm; Viết = 100/300 điểm. Phần này tự luyện, tự chấm theo bảng tiêu chí — không có máy chấm tự động. Cách đọc/nghĩa tiếng Hàn do người soạn viết, chưa đối chiếu độc lập với giáo trình TOPIK.</p>';
+    var tasks = m.ref === 0 ? [51, 52] : m.ref === 1 ? [53, 54] : m.ref === 2 ? [61] : [62];
+    var isBasicWrite = m.ref >= 2;
+    var htmlW = tpBackBtnHTML(back) + '<section class="card"><p class="eyebrow">' + (isBasicWrite ? 'TOPIK I · LUYỆN VIẾT' : 'TOPIK II · VIẾT') + '</p><h2>' + esc(m.title) + '</h2><p class="mut">' + (isBasicWrite ? 'TOPIK I thi thật KHÔNG có phần Viết — đây là bài luyện viết cơ bản để chuẩn bị lên TOPIK II, tự luyện tự chấm theo đáp án mẫu và bảng tiêu chí — không có máy chấm tự động.' : 'Thi thật TOPIK II dạng giấy (PBT): Nghe 50 + Viết 4 + Đọc 50 = 104 câu, 300 điểm; Viết = 100/300 điểm. Phần này tự luyện, tự chấm theo bảng tiêu chí — không có máy chấm tự động.') + ' Cách đọc/nghĩa tiếng Hàn do người soạn viết, chưa đối chiếu độc lập với giáo trình TOPIK.</p>';
     tasks.forEach(function (t) {
       var T = TP_WRITE[t];
       htmlW += '<h3>' + esc(T.name) + '</h3><p>' + esc(T.intro) + '</p>';
@@ -12855,7 +12991,7 @@ function tpOpenStep(id, backTab) {
     document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     tpWireBack(back); return;
   }
-  if (m.kind === "mock") { tpOpenMock(back); return; }
+  if (m.kind === "mock") { if (id === "m0") tpOpenMock(back); else tpOpenMock2(back, id); return; }
 }
 function tpEst(lc, rc) {
   var nl = (typeof TP_MOCK_L !== "undefined") ? TP_MOCK_L.length : 35;
@@ -12933,9 +13069,9 @@ function tpLevelMin(total) {
   if (total >= 120) return "Cấp tối thiểu chắc chắn: cấp 3 (tổng thật ≥120 dù Viết được 0 điểm; nếu Viết tốt có thể lên cấp 4–6).";
   return "Chưa đạt ngưỡng tối thiểu của cấp nào từ phần Nghe + Đọc (tổng thật = điểm này + điểm Viết 0–100, nên cấp thật vẫn phụ thuộc điểm Viết).";
 }
-function tpOpenMock2(back) {
+function tpOpenMock2(back, stepId) {
   var app = document.getElementById("app"); if (!app) return;
-  app.innerHTML = tpBackBtnHTML(back) + '<section class="card"><p class="eyebrow">TOPIK · THI THỬ ĐỦ CÂU</p><h2>Thi thử TOPIK II đủ 104 nhiệm vụ</h2><p class="mut">104 nhiệm vụ: 50 câu Nghe + 50 câu Đọc + 4 nhiệm vụ Viết (điền câu kiểu 51, 52 + luận ngắn kiểu 53 + luận dài kiểu 54), thời gian tham khảo 180 phút. Đề thi thật TOPIK II dạng giấy có 104 câu/nhiệm vụ trong 180 phút, 300 điểm (Viết = 100 điểm) — bài này đủ số nhiệm vụ theo đề thật. Điểm Nghe + Đọc quy về /200 chỉ để tham khảo; phần Viết chỉ tự chấm theo bảng tiêu chí, KHÔNG cộng vào điểm số (chưa có máy chấm tự động), nên điểm tổng /300 và cấp vẫn là ước lượng có giới hạn, không mạo nhận là điểm chính thức. Đây là bài thi thử chung cho cả 4 cấp riêng 3–6 (các cấp không có mock riêng). Ngưỡng cấp chính thức /300: cấp 3 ≥120, cấp 4 ≥150, cấp 5 ≥190, cấp 6 ≥230 — nhưng bài này chỉ tính Nghe + Đọc /200 (Viết tự chấm, không cộng điểm), nên kết quả chỉ cho “cấp tối thiểu chắc chắn”, không phải cấp chính thức.</p><div class="row"><button class="btn btn-primary" id="tpMock2Start">Bắt đầu thi thử</button></div><div id="tpMock2Body"></div></section>';
+  app.innerHTML = tpBackBtnHTML(back) + '<section class="card"><p class="eyebrow">TOPIK · THI THỬ ĐỦ CÂU</p><h2>Thi thử TOPIK II đủ 104 nhiệm vụ</h2><p class="mut">104 nhiệm vụ: 50 câu Nghe + 50 câu Đọc + 4 nhiệm vụ Viết (điền câu kiểu 51, 52 + luận ngắn kiểu 53 + luận dài kiểu 54), thời gian tham khảo 180 phút. Đề thi thật TOPIK II dạng giấy có 104 câu/nhiệm vụ trong 180 phút, 300 điểm (Viết = 100 điểm) — bài này đủ số nhiệm vụ theo đề thật. Điểm Nghe + Đọc quy về /200 chỉ để tham khảo; phần Viết chỉ tự chấm theo bảng tiêu chí, KHÔNG cộng vào điểm số (chưa có máy chấm tự động), nên điểm tổng /300 và cấp vẫn là ước lượng có giới hạn, không mạo nhận là điểm chính thức. Bài thi thử này mở từ bước thi thử riêng của từng cấp 3–6 trên Bản đồ (mỗi cấp một bước riêng, chung ngân hàng 104 nhiệm vụ). Ngưỡng cấp chính thức /300: cấp 3 ≥120, cấp 4 ≥150, cấp 5 ≥190, cấp 6 ≥230 — nhưng bài này chỉ tính Nghe + Đọc /200 (Viết tự chấm, không cộng điểm), nên kết quả chỉ cho “cấp tối thiểu chắc chắn”, không phải cấp chính thức.</p><div class="row"><button class="btn btn-primary" id="tpMock2Start">Bắt đầu thi thử</button></div><div id="tpMock2Body"></div></section>';
   tpWireBack(back);
   document.getElementById("tpMock2Start").onclick = function () {
     var body = document.getElementById("tpMock2Body");
@@ -12971,7 +13107,7 @@ function tpOpenMock2(back) {
       TP_MOCK2_L.forEach(function (q, i) { if (answers["L" + i] === q.a) lc++; });
       TP_MOCK2_R.forEach(function (q, i) { if (answers["R" + i] === q.a) rc++; });
       var est = tpEst2(lc, rc);
-      tpNorm(); state.tpMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, level: "TOPIK II đủ câu — Nghe+Đọc tham khảo, Viết tự chấm", kind: "II" }); saveState();
+      tpNorm(); state.tpMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, level: "TOPIK II đủ câu — Nghe+Đọc tham khảo, Viết tự chấm", kind: "II" }); if (stepId) tpMarkDone(stepId); saveState();
       var rev = '<h3>Kết quả thi thử TOPIK II đủ câu</h3><p>Nghe: ' + lc + '/50 · Đọc: ' + rc + '/50 · <b>Điểm ước lượng Nghe + Đọc: ' + est.total + '/200 (tham khảo)</b> (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p><b>' + tpLevelMin(est.total) + '</b> <span class="mut">Công thức hiển thị: điểm Nghe + Đọc quy về /200, Viết tự chấm KHÔNG cộng vào; tổng thật = điểm này + điểm Viết (0–100). Ngưỡng cấp chính thức /300: cấp 3 ≥120, cấp 4 ≥150, cấp 5 ≥190, cấp 6 ≥230. Đây là ước lượng nội bộ, không phải kết quả chính thức.</span></p><p class="mut">Điểm này là ước lượng có giới hạn: đề thật TOPIK II tính trên tổng 300 điểm gồm Viết 100 điểm, còn bài này Viết chỉ tự chấm theo bảng tiêu chí, KHÔNG cộng vào điểm số. Phần Viết hãy tự chấm theo bảng tiêu chí ở trên.</p>';
       rev += '<h3>Xem lại từng câu trắc nghiệm</h3>';
       TP_MOCK2_L.forEach(function (q, i) { rev += '<p><b>Nghe ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["L" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
@@ -13043,12 +13179,12 @@ function viewRoadmapTp(app) {
   tpNorm();
   var n = tpNextStep();
   var html = trackSwitchHTML() + '<h2>Bản đồ TOPIK</h2>';
-  html += '<p class="mut">Hangul học theo thứ tự (bài sau mở khi xong bài trước). Các chặng sau mở khi chặng trước xong từ 80%. Mỗi bước xong được +10 XP. Nội dung tự soạn 100%, không phải đề thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí).</p>';
+  html += '<p class="mut">Hangul học theo thứ tự (bài sau mở khi xong bài trước). Các chặng sau mở khi chặng trước xong từ 80%. Mỗi bước xong được +10 XP. Nội dung tự soạn 100%, không phải đề thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí). Các bước trong mỗi chặng xếp xen kẽ các loại (vài bộ từ, rồi ngữ pháp, nghe, đọc, viết, lặp lại) để đỡ chán và nhớ lâu; kiểm tra cuối chặng rồi thi thử vẫn ở cuối chặng.</p>';
   if (n) html += '<div class="row"><button class="btn btn-primary" data-tpnext="1">Học tiếp: ' + esc(n.meta.title) + ' →</button></div>';
   TP_STAGES.forEach(function (st, i) {
     html += '<section class="card"><h3>' + esc(st.title) + ' — đã xong ' + tpStagePct(i) + '%</h3>';
     if (!tpStageOpen(i)) html += '<p class="mut">Chặng này chưa mở — cần xong 80% chặng trước.</p>';
-    html += roadmapGroupHTML(st.steps, tpStepBtnHTML, tpStepMeta) + '</section>';
+    html += roadmapOrderedHTML(st.steps, tpStepBtnHTML) + '</section>';
   });
   app.innerHTML = html;
   wireTp(app);
@@ -13072,8 +13208,12 @@ function viewPracticeTp(app) {
   });
   html += '<section class="card"><h3>Thi thử TOPIK I rút gọn</h3><p class="mut">20 câu, 20 phút tham khảo, cấp ước lượng chỉ để tham khảo.</p><div class="row">' + tpStepBtnHTML("m0") + '</div></section>';
   if (state.tpHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOPIK chưa sửa: ' + state.tpHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
+  /* DOT NOI-DUNG-GIAI-TRI 01/11: the giai tri TP — chi 4 game moi (7 game cu dung kho EN nen khong dua vao). */
+  html += '<section class="card" id="tpGameCardPractice"><h3>🎮 Giải trí — 4 game chơi mà học</h3><p class="mut">Chơi bằng từ vựng TOPIK của web: bắn từ đúng, đua xe, nói theo chấm điểm, đi cảnh nhặt sao. Chơi được bằng bấm chạm trên điện thoại. Kỷ lục riêng từng game, lưu trên máy này.</p><div class="row">' + [["shooter", "🔫", "Bắn từ đúng"], ["race", "🏎️", "Đua xe từ vựng"], ["speakgame", "🎤", "Nói theo chấm điểm"], ["platform", "🏃", "Đi cảnh nhặt sao"]].map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div></section>';
   app.innerHTML = html;
   wireTp(app);
+  app.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
+
   wireVocabSearch("tpVocabSearch", "tpVocabGroups");
 }
 function viewReviewTp(app) {
