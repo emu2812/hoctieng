@@ -12530,6 +12530,44 @@ function viewHomeTc(app) {
   var spl = document.getElementById("statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
   var mg = document.getElementById("tcHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
 }
+/* SUA 01/11 dot ban-do: nhom nut tren Ban do TOEIC/TOPIK theo loai buoc
+   (Ly thuyet -> Thuc hanh -> Kiem tra), de Ngu phap/Nghe/Doc/Viet/Kiem tra/
+   Thi thu khong bi chon sau tuong tu vung. Chi doi cach bay: giu nguyen
+   id buoc, thu tu trong cung loai, trang thai khoa/mo/xong, phan tram chang,
+   nut "Hoc tiep" va hanh vi bam buoc (wireTc/wireTp khong doi).
+   Goi btnFn(id) dung 1 tham so — khong dung .map(btnFn) tran: map truyen
+   ca index lam tham so label nen nut thu 2 tro di tung hien so ("1 ->")
+   thay vi tieu de that; day la loi hien thi cu tren Ban do, ban nay sua luon. */
+function roadmapGroupHTML(steps, btnFn, metaFn) {
+  var order = [
+    { kind: "hangul", label: "Hangul" },
+    { kind: "vocab", label: "Từ vựng" },
+    { kind: "gram", label: "Ngữ pháp" },
+    { kind: "listen", label: "Nghe" },
+    { kind: "read", label: "Đọc" },
+    { kind: "write", label: "Viết" },
+    { kind: "check", label: "Kiểm tra cuối chặng" },
+    { kind: "mock", label: "Thi thử" }
+  ];
+  var byKind = {};
+  steps.forEach(function (id) {
+    var m = metaFn(id);
+    var k = (m && m.kind) || "other";
+    if (!byKind[k]) byKind[k] = [];
+    byKind[k].push(id);
+  });
+  var out = "";
+  order.forEach(function (g) {
+    var ids = byKind[g.kind];
+    if (!ids || !ids.length) return;
+    out += '<h4>' + g.label + ' (' + ids.length + ')</h4><div class="row" data-roadmap-group="' + g.kind + '">' + ids.map(function (id) { return btnFn(id); }).join("") + '</div>';
+  });
+  Object.keys(byKind).forEach(function (k) {
+    if (order.some(function (g) { return g.kind === k; })) return;
+    out += '<h4>Khác (' + byKind[k].length + ')</h4><div class="row" data-roadmap-group="' + k + '">' + byKind[k].map(function (id) { return btnFn(id); }).join("") + '</div>';
+  });
+  return out;
+}
 function viewRoadmapTc(app) {
   tcNorm();
   var n = tcNextStep();
@@ -12539,7 +12577,7 @@ function viewRoadmapTc(app) {
   TC_STAGES.forEach(function (st, i) {
     html += '<section class="card"><h3>' + esc(st.title) + ' — đã xong ' + tcStagePct(i) + '%</h3>';
     if (!tcStageOpen(i)) html += '<p class="mut">Chặng này chưa mở — cần xong 80% chặng trước.</p>';
-    html += '<div class="row">' + st.steps.map(tcStepBtnHTML).join("") + '</div></section>';
+    html += roadmapGroupHTML(st.steps, tcStepBtnHTML, tcStepMeta) + '</section>';
   });
   app.innerHTML = html;
   wireTc(app);
@@ -13010,7 +13048,7 @@ function viewRoadmapTp(app) {
   TP_STAGES.forEach(function (st, i) {
     html += '<section class="card"><h3>' + esc(st.title) + ' — đã xong ' + tpStagePct(i) + '%</h3>';
     if (!tpStageOpen(i)) html += '<p class="mut">Chặng này chưa mở — cần xong 80% chặng trước.</p>';
-    html += '<div class="row">' + st.steps.map(tpStepBtnHTML).join("") + '</div></section>';
+    html += roadmapGroupHTML(st.steps, tpStepBtnHTML, tpStepMeta) + '</section>';
   });
   app.innerHTML = html;
   wireTp(app);
