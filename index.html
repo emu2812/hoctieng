@@ -13532,7 +13532,7 @@ function tpStepMeta(id) {
   if (k === "l") { var l = (typeof TP_LISTEN !== "undefined") ? TP_LISTEN[n] : null; return l ? { kind: "listen", title: "Nghe: " + l.title, ref: n } : null; }
   if (k === "r") { var r = (typeof TP_READ !== "undefined") ? TP_READ[n] : null; return r ? { kind: "read", title: "Đọc: " + r.title, ref: n } : null; }
   if (k === "k") { var ck2 = (typeof TP_CHECK !== "undefined") ? TP_CHECK[n] : null; return ck2 ? { kind: "check", title: ck2.title, ref: n } : null; }
-  if (k === "w") { return (typeof TP_WRITE !== "undefined") ? { kind: "write", title: n === 0 ? "Viết TOPIK II: nhiệm vụ 51–52 (điền câu)" : n === 1 ? "Viết TOPIK II: nhiệm vụ 53–54 (luận)" : n === 2 ? "Luyện viết Cấp 1: điền câu đơn giản" : "Luyện viết Cấp 2: điền câu ghép + đoạn ngắn", ref: n } : null; }
+  if (k === "w") { return (typeof TP_WRITE !== "undefined") ? { kind: "write", title: n === 0 ? "Viết TOPIK II: nhiệm vụ 51–52 (điền câu)" : n === 1 ? "Viết TOPIK II: nhiệm vụ 53–54 (luận)" : n === 2 ? "Luyện viết Cấp 1: điền câu đơn giản" : n === 3 ? "Luyện viết Cấp 2: điền câu ghép + đoạn ngắn" : n === 4 ? "Luyện viết Cấp 3: điền câu 51–52" : n === 5 ? "Luyện viết Cấp 3: luận ngắn 53" : n === 6 ? "Luyện viết Cấp 4: điền câu 51–52" : n === 7 ? "Luyện viết Cấp 4: luận ngắn 53 nâng cao" : n === 8 ? "Luyện viết Cấp 5: điền câu 51–52 học thuật" : n === 9 ? "Luyện viết Cấp 5: luận 53 + làm quen 54" : n === 10 ? "Luyện viết Cấp 6: điền câu 52 khó" : "Luyện viết Cấp 6: luận dài 54", ref: n } : null; }
   if (id === "m0") return { kind: "mock", title: "Thi thử TOPIK I rút gọn (70 câu)", ref: 0 };
   if (id === "m1") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 3 (đủ 104 nhiệm vụ)", ref: 1 };
   if (id === "m2") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 4 (đủ 104 nhiệm vụ)", ref: 2 };
@@ -13783,8 +13783,8 @@ function tpOpenStep(id, backTab) {
     tpWireBack(back); return;
   }
   if (m.kind === "write") {
-    var tasks = m.ref === 0 ? [51, 52] : m.ref === 1 ? [53, 54] : m.ref === 2 ? [61] : [62];
-    var isBasicWrite = m.ref >= 2;
+    var tasks = m.ref === 0 ? [51, 52] : m.ref === 1 ? [53, 54] : m.ref === 2 ? [61] : m.ref === 3 ? [62] : m.ref === 4 ? [63] : m.ref === 5 ? [64] : m.ref === 6 ? [65] : m.ref === 7 ? [66] : m.ref === 8 ? [67] : m.ref === 9 ? [68] : m.ref === 10 ? [69] : [70];
+    var isBasicWrite = m.ref === 2 || m.ref === 3;
     var htmlW = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + (isBasicWrite ? 'TOPIK I · LUYỆN VIẾT' : 'TOPIK II · VIẾT') + '</p><h2>' + esc(m.title) + '</h2><p class="mut">' + (isBasicWrite ? 'TOPIK I thi thật KHÔNG có phần Viết — đây là bài luyện viết cơ bản để chuẩn bị lên TOPIK II, tự luyện tự chấm theo đáp án mẫu và bảng tiêu chí — không có máy chấm tự động. Dạng điền câu này chỉ luyện điền, chưa cần viết lại bản sửa (bước viết lại áp cho bài luận TOPIK II).' : 'Thi thật TOPIK II dạng giấy (PBT): Nghe 50 + Viết 4 + Đọc 50 = 104 câu, 300 điểm; Viết = 100/300 điểm. Phần này tự luyện, tự chấm theo bảng tiêu chí — không có máy chấm tự động.') + ' Cách đọc/nghĩa tiếng Hàn do người soạn viết, chưa đối chiếu độc lập với giáo trình TOPIK.</p>';
     tasks.forEach(function (t) {
       var T = TP_WRITE[t];
