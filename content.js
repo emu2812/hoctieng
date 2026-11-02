@@ -41042,7 +41042,7 @@ const CONTENT = {
    "section": "Section 2",
    "band": "Band 5,5",
    "topic": "Thông báo chuyến tham quan bảo tàng khoa học",
-   "text": "Welcome to the City Science Museum tour on Saturday the 18th. The bus leaves the main gate at 8:00 and returns at 4:30 in the afternoon. Tickets cost 120000 dong for adults and 60000 dong for children under 12 years old. Visitors will watch a 20 minute film and then join a hands-on workshop in Room 3. Please wear comfortable shoes and bring a bottle of water with you. Booking closes on Thursday at 5:00, so please register early at the front desk.",
+   "text": "Welcome to the City Science Museum tour on Saturday the 18th. The bus leaves the main gate at 8:00 and returns at 4:30 in the afternoon. Tickets cost 120.000 đồng for adults and 60000 dong for children under 12 years old. Visitors will watch a 20 minute film and then join a hands-on workshop in Room 3. Please wear comfortable shoes and bring a bottle of water with you. Booking closes on Thursday at 5:00, so please register early at the front desk.",
    "questions": [
     {
      "type": "MC",
@@ -41063,7 +41063,7 @@ const CONTENT = {
       "40000 dong",
       "50000 dong",
       "60000 dong",
-      "120000 dong"
+      "120.000 đồng"
      ],
      "a": 2,
      "why": "Vé trẻ em dưới 12 tuổi giá 60000 đồng vì thông báo nêu giá riêng cho trẻ em."
