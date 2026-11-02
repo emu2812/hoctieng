@@ -228,7 +228,7 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 <button id="tutorFloatBtn" aria-label="Gia sư AI" title="Gia sư AI">🤖</button>
 <div id="tutorFloatPanel" aria-label="Khung trò chuyện với gia sư AI" style="display:none">
 <div class="row" style="justify-content:space-between"><b>Gia sư AI</b><button class="btn" id="tutorFloatClose">✕ Đóng</button></div>
-<p class="mut">Hỏi gia sư bằng tiếng Việt đơn giản. Cần đăng nhập để dùng.</p>
+<p class="mut" id="tutorFloatNote">Hỏi gia sư bằng tiếng Việt đơn giản. Cần đăng nhập để dùng.</p>
 <div id="tutorFloatMsgs"></div>
 <div id="tutorFloatLogin" style="display:none"><p class="mut">Cần đăng nhập để dùng gia sư AI.</p><button class="btn btn-amber" id="tutorFloatToAccount">Sang thẻ Tài khoản</button></div>
 <div class="row" id="tutorFloatForm"><input type="text" id="tutorFloatInput" placeholder="Hỏi gia sư..." style="flex:1;min-width:0"><button class="btn btn-amber" id="tutorFloatSend">Gửi</button></div>
@@ -1377,7 +1377,8 @@ function render() {
   normZh();
   try { updateSiteTitle(); } catch (e) {}
   try { settleStreakFreeze(); } catch (e) {}
-  try { var bn = $("#previewBanner"); if (bn) { bn.textContent = authBannerText(); bn.style.display = (!curLesson && curTab === "home" && !landingNeeded()) ? "" : "none"; } } catch (e) {}
+  try { var bn = $("#previewBanner"); if (bn) { if (authState.authLoading && !authState.user) { bn.textContent = "Đang tải tài khoản…"; } else { bn.textContent = authBannerText(); } bn.style.display = (!curLesson && curTab === "home" && !landingNeeded()) ? "" : "none"; } } catch (e) {}
+  try { var tfn = $("#tutorFloatNote"); if (tfn) tfn.textContent = authState.user ? "Đã sẵn sàng — gõ câu hỏi để dùng." : "Hỏi gia sư bằng tiếng Việt đơn giản. Cần đăng nhập để dùng."; } catch (e) {}
   try {
     var rec = getRecoveryState();
     if (rec.active && !rec.done) {
@@ -2007,7 +2008,14 @@ function personalPathCardHTML() {
   if (state.personalPath && state.personalPath.note) h += '<p class="mut">' + esc(state.personalPath.note) + '</p>';
   if (state.personalExplain) h += '<p class="mut">AI giải thích: ' + esc(state.personalExplain) + '</p>';
   h += '<button class="btn" id="ppExplainBtn">AI giải thích vì sao lộ trình xếp thế này</button>';
-  if (authState.vip) h += ' <button class="btn btn-primary" id="vipComposeBtn">AI soạn lộ trình riêng</button>';
+  if (authState.vip) {
+    var dg = state.pathDiag || {};
+    h += '<p style="margin-top:10px"><b>Chẩn đoán trước khi soạn:</b> <span class="mut">điền đủ 3 ô rồi bấm “AI soạn lộ trình riêng”.</span></p>'
+      + '<p><label class="mut">Trình độ hiện tại <input type="text" id="ppDiagLevel" value="' + esc(dg.level || "") + '" placeholder="VD: mới bắt đầu / Band 5,0" style="width:100%"></label></p>'
+      + '<p><label class="mut">Band mục tiêu <input type="text" id="ppDiagTarget" value="' + esc(dg.target || (state.targetBand != null ? String(state.targetBand) : "")) + '" placeholder="VD: 6,5" style="width:100%"></label></p>'
+      + '<p><label class="mut">Thời gian học mỗi ngày (phút) <input type="number" id="ppDiagMinutes" value="' + esc(dg.minutes || (state.goal != null ? String(state.goal) : "")) + '" placeholder="VD: 30" style="width:100%"></label></p>';
+    h += ' <button class="btn btn-primary" id="vipComposeBtn">AI soạn lộ trình riêng</button>';
+  }
   else h += ' <button class="btn" id="vipRequestBtn">Yêu cầu VIP</button>';
   if (authState.vip) h += '<p class="mut">Tài khoản VIP: bấm "AI soạn lộ trình riêng" để mô hình soạn lại lộ trình từ dữ liệu học của bạn.</p>';
   h += '</section>';
@@ -2797,7 +2805,7 @@ function viewMine(app) {
   html += pushCardHTML();
   if (typeof authState !== "undefined" && authState.user) { html += personalPathCardHTML(); } else { html += '<section class="card" id="ppGuest"><h3>Lộ trình riêng — Cá nhân hóa cực chi tiết</h3><p class="mut">Lộ trình riêng mở khi bạn đăng nhập — khách dùng lộ trình ' + (state.track === "zh" ? "6 chặng" : "13 chương") + ' chuẩn ở trang Bản đồ. Đăng nhập ở thẻ Tài khoản phía trên để mở.</p></section>'; }
   html += '<details style="margin-top:8px"><summary><b>🧭 AI Coach — 3 gợi ý tiếp theo</b></summary>' + u8CoachHTML() + '</details>';
-  html += '<details style="margin-top:8px"><summary><b>Gia sư AI</b></summary><section class="card"><h3>Gia sư AI</h3><p>' + esc(RB_AI.tutor.label) + '.</p><p class="mut">Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p>'
+  html += '<details style="margin-top:8px"><summary><b>Gia sư AI</b></summary><section class="card"><h3>Gia sư AI</h3><p>' + esc(RB_AI.tutor.label) + '.</p>' + (authState.user ? '<p class="mut">Đã sẵn sàng — gõ câu hỏi để dùng.</p>' : '<p class="mut">Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p>')
     + '<button class="btn" id="tutorTry">Thử gọi gia sư</button><p style="margin-top:10px"><textarea id="tutorModeInp" rows="2" style="width:100%" placeholder="Gõ câu hoặc câu hỏi cần gia sư giúp..."></textarea></p><p><button class="btn" id="tutorExplainBtn">AI giải thích</button> <button class="btn" id="tutorFixBtn">AI sửa câu của tôi</button></p><div class="why" id="tutorModeOut"></div></section></details>';
   html += '<details style="margin-top:8px"><summary><b>Trò chuyện với AI</b></summary><section class="card"><h3>Trò chuyện với AI</h3><p class="mut">Trò chuyện tự do với AI đã mở ở trang Giao tiếp bản địa (giữa Ôn tập và Của tôi): chọn 1 trong 2 loại riêng — gõ tay (chỉ gõ chữ) hoặc nói live (luân phiên chặt, chỉ tiếng Anh, mic khóa khi AI đang nói). Nói tự do thích gì nói đó, không chấm điểm trong lúc nói. Mô hình nguồn là AI trò chuyện liên tục, không phải người thật. Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p></section></details>';
   html += '</details>';
@@ -2850,7 +2858,7 @@ function viewMine(app) {
    progress (section meta:* theo quy ước web cũ + section rb:* cho bản mới),
    saved_words, study_log. Cờ VIP (meta:vip hoặc rb:vip) CHỈ ĐỌC — web không
    bao giờ tự cấp VIP, không ghi đè cờ khi đồng bộ. */
-var authState = { status: "guest", user: null, vip: false, sync: "", merge: null, lastUid: null, syncTimer: null };
+var authState = { status: "guest", user: null, vip: false, sync: "", merge: null, lastUid: null, syncTimer: null, authLoading: true };
 function authBannerText() {
   try {
     if (typeof authState !== "undefined" && authState.user) return "Đã đăng nhập: " + authState.user.email + (authState.vip ? " · VIP" : "") + " — tiến trình đồng bộ theo tài khoản.";
@@ -3217,7 +3225,7 @@ function authWatch() {
   supaClientPromise().then(function (client) {
     try {
       if (client && client.auth && client.auth.onAuthStateChange) {
-        client.auth.onAuthStateChange(function () { authRefresh().then(function () { render(); }, function () {}); });
+        client.auth.onAuthStateChange(function () { authRefresh().then(function () { authState.authLoading = false; render(); }, function () { authState.authLoading = false; render(); }); });
       }
     } catch (e) {}
   });
@@ -3340,7 +3348,7 @@ function authDoSignUp() {
 function authDoSignOut() {
   supaClientPromise().then(function (client) {
     function done() {
-      authState.user = null; authState.vip = false; authState.status = "guest"; authState.lastUid = null; authState.merge = null;
+      authState.user = null; authState.vip = false; authState.status = "guest"; authState.lastUid = null; authState.merge = null; authState.authLoading = false;
       state.accountMerge = null; saveState();
       toast("Đã đăng xuất — tiếp tục học ở chế độ khách.");
       render();
@@ -3480,7 +3488,7 @@ function callAiTutorRoadmap(contextText) {
       client.auth.getSession().then(function (res) {
         var sess = res && res.data && res.data.session;
         if (!sess || !sess.access_token) { reject(loginMsg); return; }
-        fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify({ message: "Hãy soạn lộ trình học riêng cho tôi từ bản tóm tắt tiến trình trong ngữ cảnh.", mode: "roadmap", context: contextText }) })
+        fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify({ message: "Hãy soạn lộ trình học riêng cho tôi từ bản tóm tắt tiến trình trong ngữ cảnh. Trả lời bằng tiếng Việt có dấu đầy đủ, ngắn gọn, đủ ý, không cắt giữa chừng.", mode: "roadmap", context: contextText }) })
           .then(function (resp) {
             if (!resp.ok) {
               return resp.json().catch(function () { return {}; }).then(function (d) {
@@ -3500,8 +3508,14 @@ function vipComposePath() {
   /* Goi that mode roadmap: gui tom tat tien trinh THAT (khong tu dat band,
      khong bia tien trinh). May chu tu chan VIP, web khong chan them,
      khong tu cap VIP. */
+  var lvlEl = $("#ppDiagLevel"), tgtEl = $("#ppDiagTarget"), minEl = $("#ppDiagMinutes");
+  var lvl = lvlEl ? lvlEl.value.trim() : "", tgt = tgtEl ? tgtEl.value.trim() : "", mins = minEl ? minEl.value.trim() : "";
+  /* Form chưa vẽ (gọi trực tiếp, không qua nút trên thẻ): dùng chẩn đoán đã lưu nếu đủ 3 ô, thay vì chặn hẳn. */
+  if (!lvlEl && !tgtEl && !minEl && state.pathDiag && state.pathDiag.level && state.pathDiag.target && state.pathDiag.minutes) { lvl = state.pathDiag.level; tgt = state.pathDiag.target; mins = state.pathDiag.minutes; }
+  if (!lvl || !tgt || !mins) { toast("Hãy điền đủ 3 ô chẩn đoán (trình độ hiện tại, band mục tiêu, thời gian học mỗi ngày) rồi bấm lại."); return; }
+  state.pathDiag = { level: lvl, target: tgt, minutes: mins }; saveState();
   var pp = buildPersonalPath();
-  var sum = "Trình độ: đã xong " + pp.done + "/" + pp.total + " bước chương 1. Phần yếu nhất: " + (pp.weak ? pp.weak.name + " (" + pp.weak.pct + "%)" : "chưa có kiểm tra") + ". Mục đến hạn ôn: " + pp.dueCount + ". Nhịp độ: " + pp.pace + ". Bước tiếp theo: " + (pp.items[0] ? pp.items[0].title : "không có") + ". Band mục tiêu: " + (state.targetBand != null ? state.targetBand : "chưa đặt") + ".";
+  var sum = "Trình độ: đã xong " + pp.done + "/" + pp.total + " bước chương 1. Phần yếu nhất: " + (pp.weak ? pp.weak.name + " (" + pp.weak.pct + "%)" : "chưa có kiểm tra") + ". Mục đến hạn ôn: " + pp.dueCount + ". Nhịp độ: " + pp.pace + ". Bước tiếp theo: " + (pp.items[0] ? pp.items[0].title : "không có") + ". Band mục tiêu: " + (state.targetBand != null ? state.targetBand : "chưa đặt") + ". Chẩn đoán của tôi: trình độ hiện tại " + lvl + "; band mục tiêu " + tgt + "; thời gian học " + mins + " phút/ngày.";
   state.personalPath = { source: "ai-pending", note: "AI đang soạn lộ trình riêng…", at: Date.now() };
   saveState(); render();
   callAiTutorRoadmap(sum).then(function (r) {
@@ -7716,7 +7730,7 @@ function chatVoiceStart(l, app) {
   var v = chatVoiceState(l);
   if (v.started) return;
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) { v.srSupported = false; v.active = false; var st0 = $("#chatMicStatus"); if (st0) st0.textContent = chatVoiceStatusText(l); return; }
+  if (!SR) { v.srSupported = false; v.active = false; var st0 = $("#chatMicStatus"); if (st0) st0.textContent = chatVoiceStatusText(l); var tog0 = $("#chatMicToggle"); if (tog0) tog0.textContent = "🎤 Mở mic"; return; }
   try {
     var rec = new SR();
     rec.lang = "en-GB"; rec.continuous = true; rec.interimResults = true;
@@ -7727,6 +7741,7 @@ function chatVoiceStart(l, app) {
         v.active = false; v.started = false;
         toast("Không bật được micrô trên trình duyệt này — hãy cho phép micrô rồi mở lại.");
         var st = $("#chatMicStatus"); if (st) st.textContent = chatVoiceStatusText(l);
+        var togE = $("#chatMicToggle"); if (togE) togE.textContent = "🎤 Mở mic";
       }
     };
     rec.onend = function () {
@@ -7739,8 +7754,9 @@ function chatVoiceStart(l, app) {
     rec.start();
     chatVoiceStartRecorder(l);
   } catch (e) {
-    v.started = false; v.rec = null;
+    v.active = false; v.started = false; v.rec = null;
     toast("Không bật được micrô trên trình duyệt này.");
+    var togC = $("#chatMicToggle"); if (togC) togC.textContent = "🎤 Mở mic";
   }
 }
 function chatVoiceOnResult(l, app, ev) {
@@ -7866,6 +7882,7 @@ function renderChat(app, l) {
   if (isVoice) {
     html += '</div><p class="mut" id="chatMicStatus">' + esc(chatVoiceStatusText(l)) + '</p><p class="mut" id="chatLive"></p>'
       + '<div class="row"><button class="btn" id="chatMicToggle">🎤 Tắt mic</button><button class="btn btn-amber" id="chatEnd">Kết thúc phiên (+10 XP)</button><button class="btn" id="chatReport">⚑ Báo cáo nội dung không phù hợp</button></div>'
+      + '<div class="row"><input type="text" id="chatVoiceTextInp" placeholder="Gõ câu tiếng Anh rồi bấm Gửi..." style="flex:1"><button class="btn btn-primary" id="chatVoiceTextSend">Gửi</button></div><p class="mut">Mic không bật được thì gõ tiếng Anh vào đây để nói tiếp (nói live chỉ tiếng Anh).</p>'
       + '<div class="row"><label class="mut">Giọng Anh <select id="chatVoiceEn"></select></label></div>'
       + '<div class="row"><label class="mut">Tốc độ <input type="range" id="chatVoiceRate" min="0.7" max="1.3" step="0.1"></label><label class="mut">Âm lượng <input type="range" id="chatVoiceVol" min="0" max="1" step="0.1"></label><span class="mut" id="chatVoiceLabel"></span></div>';
   } else {
@@ -7965,6 +7982,16 @@ function renderChat(app, l) {
       var rt = $("#chatVoiceRate"); if (rt) { rt.value = prefs.rate != null ? prefs.rate : 1; rt.onchange = function () { var p = chatVoicePrefs(); p.rate = parseFloat(rt.value) || 1; try { state.chatVoicePrefs = p; saveState(); } catch (e) {} }; }
       var vl = $("#chatVoiceVol"); if (vl) { vl.value = prefs.vol != null ? prefs.vol : 1; vl.onchange = function () { var p = chatVoicePrefs(); p.vol = parseFloat(vl.value); if (isNaN(p.vol)) p.vol = 1; try { state.chatVoicePrefs = p; saveState(); } catch (e) {} }; }
       var lb0 = $("#chatVoiceLabel"); if (lb0) lb0.textContent = chatLiveVoiceLabel();
+    })();
+    (function () {
+      var sendVoiceText = function () {
+        var inp = $("#chatVoiceTextInp"); if (!inp) return;
+        var t = inp.value.trim(); if (!t) { toast("Hãy gõ câu tiếng Anh trước đã."); return; }
+        inp.value = "";
+        chatSendUser(l, app, t);
+      };
+      var vts = $("#chatVoiceTextSend"); if (vts) vts.onclick = sendVoiceText;
+      var vti = $("#chatVoiceTextInp"); if (vti) vti.onkeydown = function (e) { if (e.key === "Enter") sendVoiceText(); };
     })();
     chatVoiceEnsure(l, app);
   }
@@ -8619,7 +8646,7 @@ function renderSkillWrite(app, l) {
       if (aw.parsed.fix && aw.parsed.fix.length) awHtml += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + aw.parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
       if (aw.parsed.tips && aw.parsed.tips.length) awHtml += '<div class="sumcard"><h3>NOTE — VIẾT HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + aw.parsed.tips.map(function (tp) { return '<p>Đoạn: “' + esc(tp.quote) + '” — ' + esc(tp.why) + (tp.rewrite ? ' — <b>Viết lại: ' + esc(tp.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
     } else if (aw.parsed && !aw.parsed.full) {
-      awHtml += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(aw.parsed.raw || "") + '</p><p class="mut">Band bản nháp chưa có — hãy bấm “AI chấm Viết 4 tiêu chí” để AI chấm lại.</p>';
+      awHtml += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(aw.parsed.raw || "") + '</p><p class="mut">Band chưa có vì AI trả dở dang — bạn vẫn có thể bấm “Đã chấm xong → Viết lại bản sửa” để viết lại theo góp ý (nếu có), hoặc bấm “AI chấm Viết 4 tiêu chí” để chấm lại.</p>';
     }
     awHtml += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrAiBtn"' + (aw.busy ? ' disabled' : '') + '>' + (aw.busy ? 'Đang chấm...' : 'AI chấm Viết 4 tiêu chí') + '</button></div></div>';
     app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 2: AI chấm 4 tiêu chí + đối chiếu bài mẫu") + phaseBarHTML(2) + awHtml
@@ -8631,19 +8658,24 @@ function renderSkillWrite(app, l) {
     (function () {
       var b = $("#wrAiBtn"); if (!b) return;
       b.onclick = function () {
-        l.aiWrite = { busy: true, err: "" }; render();
-        callAiTutorWriting(w.type, w.prompt, l.draft || "").then(function (res) {
-          l.aiWrite = { parsed: parseAiDetailReply(res.reply, "writing") }; render();
-        }, function (err) { l.aiWrite = { err: (err && err.message) || String(err) }; render(); });
+        var tries = 0;
+        (function gradeOnce() {
+          l.aiWrite = { busy: true, err: "" }; render();
+          callAiTutorWriting(w.type, w.prompt, l.draft || "").then(function (res) {
+            var p = parseAiDetailReply(res.reply, "writing");
+            if (!p.full && tries < 2) { tries++; gradeOnce(); return; }
+            l.aiWrite = { parsed: p }; render();
+          }, function (err) { l.aiWrite = { err: (err && err.message) || String(err) }; render(); });
+        })();
       };
     })();
     $("#wrNext2").onclick = function () {
-      if (!l.aiWrite || !l.aiWrite.parsed || !l.aiWrite.parsed.full) { toast("Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần Viết chỉ có AI chấm, không tự chấm."); return; }
-      l.aiBand = l.aiWrite.parsed.overall; l.wstep = 2; render();
+      if (!l.aiWrite || !l.aiWrite.parsed) { toast("Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần Viết chỉ có AI chấm, không tự chấm."); return; }
+      l.aiBand = l.aiWrite.parsed.full ? l.aiWrite.parsed.overall : null; l.wstep = 2; render();
     };
     return;
   }
-  app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 3: Viết lại bản sửa") + phaseBarHTML(2) + '<div class="qblock"><p><b>Band AI chấm bản nháp: ' + fmtBandComma(l.aiBand) + '</b> <span class="mut">(Máy ước lượng)</span></p><p>Viết lại bài, sửa theo góp ý AI:</p>'
+  app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 3: Viết lại bản sửa") + phaseBarHTML(2) + '<div class="qblock"><p><b>' + (l.aiBand == null ? "Band chưa có vì AI trả dở dang — hãy viết lại theo góp ý AI (nếu có)" : "Band AI chấm bản nháp: " + fmtBandComma(l.aiBand)) + '</b>' + (l.aiBand == null ? "" : ' <span class="mut">(Máy ước lượng)</span>') + '</p><p>Viết lại bài, sửa theo góp ý AI:</p>'
     + '<textarea id="wrRewrite" rows="8" style="width:100%;padding:10px">' + esc(l.rewrite || l.draft || "") + '</textarea>'
     + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrSave">Lưu bản sửa</button></div></div>';
   wireBack();
@@ -14045,7 +14077,7 @@ function viewReviewTp(app) {
 /* ---------- Khởi động ---------- */
 render();
 try { mrPruneLibBest(); } catch (e) {}
-authRefresh().then(function () { render(); }, function () {});
+authRefresh().then(function () { authState.authLoading = false; render(); }, function () { authState.authLoading = false; render(); });
 authWatch();
 wireTutorFloat();
 </script>

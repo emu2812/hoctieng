@@ -238,7 +238,7 @@ var RB_GLOSSARY = [
 
 // ---------- 9. ĐƯỜNG DÂY AI (giữ nguyên hợp đồng, chưa gọi khi chưa đăng nhập) ----------
 var RB_AI = {
-  tutor: { fn: "ai-tutor", model: "gemini-3.5-flash", needsJwt: true, label: "Gia sư AI (đã hoạt động, cần đăng nhập để dùng)" },
+  tutor: { fn: "ai-tutor", model: "gemini-3.5-flash", needsJwt: true, label: "Gia sư AI (đã hoạt động)" },
   pronounce: { fn: "pronounce", req: ["audioBase64", "mimeType", "referenceText", "language?", "referencePinyin?"], res: ["score", "transcript", "words", "issues", "toneIssues?", "modelUsed", "gradedLanguage"], needsJwt: true }
 };
 
