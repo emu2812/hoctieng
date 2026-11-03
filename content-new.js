@@ -64929,3 +64929,5814 @@ var ZH_VOCAB_EXPAND_E1 = [
 ];
 
 CONTENT.zhVocab.push.apply(CONTENT.zhVocab, ZH_VOCAB_EXPAND_E1);
+
+var ZH_VOCAB_EXPAND_E2 = [
+ {
+  "topic": "HSK4 — Thư điện tử và liên lạc nơi làm việc",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "收件人",
+    "pinyin": "shōujiànrén",
+    "vi": "người nhận thư",
+    "col": "请写收件人",
+    "ex": "请先写好收件人，再写邮件内容。",
+    "exv": "Hãy viết người nhận thư trước, rồi mới viết nội dung thư."
+   },
+   {
+    "han": "发件人",
+    "pinyin": "fājiànrén",
+    "vi": "người gửi thư",
+    "col": "看发件人",
+    "ex": "我看了一眼发件人，就知道是谁寄来的。",
+    "exv": "Tôi nhìn người gửi thư một cái là biết ai gửi đến."
+   },
+   {
+    "han": "附件",
+    "pinyin": "fùjiàn",
+    "vi": "tệp đính kèm",
+    "col": "打开附件",
+    "ex": "请打开附件，里面有今天的会议资料。",
+    "exv": "Hãy mở tệp đính kèm, trong đó có tài liệu họp hôm nay."
+   },
+   {
+    "han": "抄送",
+    "pinyin": "chāosòng",
+    "vi": "gửi kèm (cc)",
+    "col": "抄送领导",
+    "ex": "这封邮件还要抄送领导，让他也知道。",
+    "exv": "Thư này còn phải gửi kèm cho lãnh đạo, để anh ấy cũng biết."
+   },
+   {
+    "han": "回复邮件",
+    "pinyin": "huífù yóujiàn",
+    "vi": "trả lời thư",
+    "col": "尽快回复邮件",
+    "ex": "我今天很忙，明天才能回复邮件。",
+    "exv": "Hôm nay tôi rất bận, ngày mai mới trả lời thư được."
+   },
+   {
+    "han": "转发邮件",
+    "pinyin": "zhuǎnfā yóujiàn",
+    "vi": "chuyển tiếp thư",
+    "col": "转发邮件给同事",
+    "ex": "请把这封邮件转发邮件给同事，大家一起看。",
+    "exv": "Hãy chuyển tiếp thư này cho đồng nghiệp, mọi người cùng xem."
+   },
+   {
+    "han": "邮件主题",
+    "pinyin": "yóujiàn zhǔtí",
+    "vi": "tiêu đề thư",
+    "col": "写清邮件主题",
+    "ex": "写邮件的时候，要先写清邮件主题。",
+    "exv": "Khi viết thư, phải viết rõ tiêu đề thư trước."
+   },
+   {
+    "han": "草稿箱",
+    "pinyin": "cǎogǎoxiāng",
+    "vi": "hộp thư nháp",
+    "col": "存在草稿箱",
+    "ex": "这封邮件还没写完，先存在草稿箱里。",
+    "exv": "Thư này chưa viết xong, cứ lưu vào hộp thư nháp trước."
+   },
+   {
+    "han": "电子签名",
+    "pinyin": "diànzǐ qiānmíng",
+    "vi": "chữ ký điện tử",
+    "col": "加上电子签名",
+    "ex": "发正式邮件的时候，记得加上电子签名。",
+    "exv": "Khi gửi thư chính thức, nhớ thêm chữ ký điện tử."
+   },
+   {
+    "han": "投影仪",
+    "pinyin": "tóuyǐngyí",
+    "vi": "máy chiếu",
+    "col": "打开投影仪",
+    "ex": "开会之前，秘书先打开投影仪。",
+    "exv": "Trước khi họp, thư ký mở máy chiếu trước."
+   },
+   {
+    "han": "复印资料",
+    "pinyin": "fùyìn zīliào",
+    "vi": "photocopy tài liệu",
+    "col": "去复印资料",
+    "ex": "我去复印资料，你先去会议室等我。",
+    "exv": "Tôi đi photocopy tài liệu, bạn đến phòng họp chờ tôi trước."
+   },
+   {
+    "han": "扫描文件",
+    "pinyin": "sǎomiáo wénjiàn",
+    "vi": "quét tài liệu",
+    "col": "扫描文件发过去",
+    "ex": "请把合同扫描文件发过去，我马上看。",
+    "exv": "Hãy quét tài liệu hợp đồng gửi qua, tôi xem ngay."
+   },
+   {
+    "han": "文件夹",
+    "pinyin": "wénjiànjiā",
+    "vi": "thư mục tài liệu",
+    "col": "新建文件夹",
+    "ex": "我新建了一个文件夹，专门放这个项目的文件。",
+    "exv": "Tôi tạo một thư mục mới, chuyên để file của dự án này."
+   },
+   {
+    "han": "下载文件",
+    "pinyin": "xiàzài wénjiàn",
+    "vi": "tải tài liệu xuống",
+    "col": "下载文件要时间",
+    "ex": "这个文件很大，下载文件要一点时间。",
+    "exv": "Tài liệu này rất lớn, tải xuống cần một chút thời gian."
+   },
+   {
+    "han": "上传照片",
+    "pinyin": "shàngchuán zhàopiàn",
+    "vi": "tải ảnh lên",
+    "col": "上传照片到群里",
+    "ex": "旅行回来以后，我把照片上传照片到群里了。",
+    "exv": "Sau khi du lịch về, tôi đã tải ảnh lên nhóm rồi."
+   },
+   {
+    "han": "登录账号",
+    "pinyin": "dēnglù zhànghào",
+    "vi": "đăng nhập tài khoản",
+    "col": "登录账号失败",
+    "ex": "网络不好，我登录账号失败了两次。",
+    "exv": "Mạng kém, tôi đăng nhập tài khoản thất bại hai lần."
+   },
+   {
+    "han": "修改密码",
+    "pinyin": "xiūgǎi mìmǎ",
+    "vi": "đổi mật khẩu",
+    "col": "定期修改密码",
+    "ex": "为了安全，我们要定期修改密码。",
+    "exv": "Vì an toàn, chúng ta phải đổi mật khẩu định kỳ."
+   },
+   {
+    "han": "无线网络",
+    "pinyin": "wúxiàn wǎngluò",
+    "vi": "mạng không dây",
+    "col": "连接无线网络",
+    "ex": "到了酒店，我先连接无线网络。",
+    "exv": "Đến khách sạn, tôi kết nối mạng không dây trước."
+   },
+   {
+    "han": "信号不好",
+    "pinyin": "xìnhào bù hǎo",
+    "vi": "tín hiệu kém",
+    "col": "这里信号不好",
+    "ex": "这个房间里信号不好，打电话总是断。",
+    "exv": "Trong phòng này tín hiệu kém, gọi điện cứ bị ngắt."
+   },
+   {
+    "han": "给手机充电",
+    "pinyin": "gěi shǒujī chōngdiàn",
+    "vi": "sạc điện thoại",
+    "col": "晚上给手机充电",
+    "ex": "我每天晚上睡觉前给手机充电。",
+    "exv": "Mỗi tối trước khi ngủ tôi sạc điện thoại."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Họp hành và trình bày ý kiến",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "主持会议",
+    "pinyin": "zhǔchí huìyì",
+    "vi": "chủ trì cuộc họp",
+    "col": "由经理主持会议",
+    "ex": "今天的会由经理主持会议，大家准时参加。",
+    "exv": "Cuộc họp hôm nay do quản lý chủ trì, mọi người tham gia đúng giờ."
+   },
+   {
+    "han": "发言人",
+    "pinyin": "fāyánrén",
+    "vi": "người phát biểu",
+    "col": "第一位发言人",
+    "ex": "第一位发言人先介绍了项目的情况。",
+    "exv": "Người phát biểu đầu tiên giới thiệu tình hình dự án trước."
+   },
+   {
+    "han": "提出建议",
+    "pinyin": "tíchū jiànyì",
+    "vi": "đưa ra đề nghị",
+    "col": "大胆提出建议",
+    "ex": "开会的时候，大家都可以大胆提出建议。",
+    "exv": "Khi họp, mọi người đều có thể mạnh dạn đưa ra đề nghị."
+   },
+   {
+    "han": "表示赞同",
+    "pinyin": "biǎoshì zàntóng",
+    "vi": "tỏ ý tán thành",
+    "col": "点头表示赞同",
+    "ex": "他点头表示赞同，觉得这个办法很好。",
+    "exv": "Anh ấy gật đầu tỏ ý tán thành, thấy cách này rất hay."
+   },
+   {
+    "han": "表示反对",
+    "pinyin": "biǎoshì fǎnduì",
+    "vi": "tỏ ý phản đối",
+    "col": "明确表示反对",
+    "ex": "有两位同事明确表示反对这个方案。",
+    "exv": "Có hai đồng nghiệp tỏ ý phản đối phương án này rõ ràng."
+   },
+   {
+    "han": "达成共识",
+    "pinyin": "dáchéng gòngshí",
+    "vi": "đạt được đồng thuận",
+    "col": "最后达成共识",
+    "ex": "讨论了一个小时，大家最后达成共识。",
+    "exv": "Thảo luận một tiếng, cuối cùng mọi người đạt được đồng thuận."
+   },
+   {
+    "han": "存在分歧",
+    "pinyin": "cúnzài fēnqí",
+    "vi": "có bất đồng",
+    "col": "在价格上存在分歧",
+    "ex": "双方在价格上存在分歧，还要再谈一次。",
+    "exv": "Hai bên còn bất đồng về giá, còn phải đàm phán thêm một lần."
+   },
+   {
+    "han": "做出让步",
+    "pinyin": "zuòchū ràngbù",
+    "vi": "nhượng bộ",
+    "col": "适当做出让步",
+    "ex": "为了合作成功，双方都适当做出让步。",
+    "exv": "Để hợp tác thành công, hai bên đều nhượng bộ vừa phải."
+   },
+   {
+    "han": "协商解决",
+    "pinyin": "xiéshāng jiějué",
+    "vi": "thương lượng giải quyết",
+    "col": "通过协商解决",
+    "ex": "这个问题不大，可以通过协商解决。",
+    "exv": "Vấn đề này không lớn, có thể giải quyết bằng thương lượng."
+   },
+   {
+    "han": "会议议程",
+    "pinyin": "huìyì yìchéng",
+    "vi": "chương trình họp",
+    "col": "按照会议议程",
+    "ex": "我们按照会议议程，一项一项地讨论。",
+    "exv": "Chúng tôi theo chương trình họp, thảo luận từng mục một."
+   },
+   {
+    "han": "会议纪要",
+    "pinyin": "huìyì jìyào",
+    "vi": "tóm tắt cuộc họp",
+    "col": "整理会议纪要",
+    "ex": "会后，秘书负责整理会议纪要。",
+    "exv": "Sau họp, thư ký phụ trách tổng hợp tóm tắt cuộc họp."
+   },
+   {
+    "han": "讨论议题",
+    "pinyin": "tǎolùn yìtí",
+    "vi": "thảo luận vấn đề",
+    "col": "今天的讨论议题",
+    "ex": "今天的讨论议题是明年的工作计划。",
+    "exv": "Vấn đề thảo luận hôm nay là kế hoạch công việc năm sau."
+   },
+   {
+    "han": "发表意见",
+    "pinyin": "fābiǎo yìjiàn",
+    "vi": "phát biểu ý kiến",
+    "col": "轮流发表意见",
+    "ex": "大家轮流发表意见，每个人说两分钟。",
+    "exv": "Mọi người lần lượt phát biểu ý kiến, mỗi người nói hai phút."
+   },
+   {
+    "han": "补充说明",
+    "pinyin": "bǔchōng shuōmíng",
+    "vi": "bổ sung giải thích",
+    "col": "再补充说明一点",
+    "ex": "关于费用问题，我再补充说明一点。",
+    "exv": "Về vấn đề chi phí, tôi bổ sung giải thích thêm một chút."
+   },
+   {
+    "han": "总结发言",
+    "pinyin": "zǒngjié fāyán",
+    "vi": "tổng kết phát biểu",
+    "col": "最后总结发言",
+    "ex": "会议结束前，经理做了最后总结发言。",
+    "exv": "Trước khi kết thúc họp, quản lý đã tổng kết phát biểu cuối cùng."
+   },
+   {
+    "han": "投票表决",
+    "pinyin": "tóupiào biǎojué",
+    "vi": "bỏ phiếu quyết định",
+    "col": "举手投票表决",
+    "ex": "大家举手投票表决，选出新的组长。",
+    "exv": "Mọi người giơ tay bỏ phiếu quyết định, chọn ra tổ trưởng mới."
+   },
+   {
+    "han": "多数同意",
+    "pinyin": "duōshù tóngyì",
+    "vi": "đa số đồng ý",
+    "col": "多数同意这个方案",
+    "ex": "多数同意这个方案，我们就按这个做。",
+    "exv": "Đa số đồng ý phương án này, chúng ta làm theo phương án này."
+   },
+   {
+    "han": "少数反对",
+    "pinyin": "shǎoshù fǎnduì",
+    "vi": "thiểu số phản đối",
+    "col": "只有少数反对",
+    "ex": "只有少数反对，大多数人都支持。",
+    "exv": "Chỉ có thiểu số phản đối, đa số đều ủng hộ."
+   },
+   {
+    "han": "轮流发言",
+    "pinyin": "lúnliú fāyán",
+    "vi": "lần lượt phát biểu",
+    "col": "大家轮流发言",
+    "ex": "讨论的时候，大家轮流发言，不要抢话。",
+    "exv": "Khi thảo luận, mọi người lần lượt phát biểu, đừng tranh lời."
+   },
+   {
+    "han": "认真听取",
+    "pinyin": "rènzhēn tīngqǔ",
+    "vi": "lắng nghe nghiêm túc",
+    "col": "认真听取意见",
+    "ex": "领导认真听取意见，然后才做决定。",
+    "exv": "Lãnh đạo lắng nghe ý kiến nghiêm túc, rồi mới quyết định."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Sức khỏe tâm lý và nghỉ ngơi",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "压力大",
+    "pinyin": "yālì dà",
+    "vi": "áp lực lớn",
+    "col": "工作压力大",
+    "ex": "最近工作压力大，他每天都很累。",
+    "exv": "Gần đây áp lực công việc lớn, anh ấy ngày nào cũng mệt."
+   },
+   {
+    "han": "放松心情",
+    "pinyin": "fàngsōng xīnqíng",
+    "vi": "thả lỏng tâm trạng",
+    "col": "听音乐放松心情",
+    "ex": "周末我喜欢听音乐放松心情。",
+    "exv": "Cuối tuần tôi thích nghe nhạc để thả lỏng tâm trạng."
+   },
+   {
+    "han": "深呼吸",
+    "pinyin": "shēn hūxī",
+    "vi": "hít thở sâu",
+    "col": "先深呼吸",
+    "ex": "紧张的时候，先深呼吸三次再说话。",
+    "exv": "Khi căng thẳng, hãy hít thở sâu ba lần rồi mới nói."
+   },
+   {
+    "han": "心理健康",
+    "pinyin": "xīnlǐ jiànkāng",
+    "vi": "sức khỏe tâm lý",
+    "col": "重视心理健康",
+    "ex": "学校越来越重视心理健康，开了咨询室。",
+    "exv": "Trường học ngày càng coi trọng sức khỏe tâm lý, đã mở phòng tư vấn."
+   },
+   {
+    "han": "情绪稳定",
+    "pinyin": "qíngxù wěndìng",
+    "vi": "cảm xúc ổn định",
+    "col": "保持情绪稳定",
+    "ex": "遇到困难也要保持情绪稳定，慢慢想办法。",
+    "exv": "Gặp khó khăn cũng phải giữ cảm xúc ổn định, từ từ nghĩ cách."
+   },
+   {
+    "han": "心情不好",
+    "pinyin": "xīnqíng bù hǎo",
+    "vi": "tâm trạng không tốt",
+    "col": "今天心情不好",
+    "ex": "她今天心情不好，不想跟人说话。",
+    "exv": "Hôm nay tâm trạng cô ấy không tốt, không muốn nói chuyện với ai."
+   },
+   {
+    "han": "耐心等待",
+    "pinyin": "nàixīn děngdài",
+    "vi": "kiên nhẫn chờ đợi",
+    "col": "请耐心等待",
+    "ex": "医生很忙，请大家耐心等待一会儿。",
+    "exv": "Bác sĩ rất bận, mọi người kiên nhẫn chờ một lát."
+   },
+   {
+    "han": "乐观面对",
+    "pinyin": "lèguān miànduì",
+    "vi": "đối mặt một cách lạc quan",
+    "col": "乐观面对困难",
+    "ex": "他总是乐观面对困难，从来不抱怨。",
+    "exv": "Anh ấy luôn đối mặt với khó khăn một cách lạc quan, chưa bao giờ than phiền."
+   },
+   {
+    "han": "悲观情绪",
+    "pinyin": "bēiguān qíngxù",
+    "vi": "cảm xúc bi quan",
+    "col": "摆脱悲观情绪",
+    "ex": "多跟朋友聊天，可以摆脱悲观情绪。",
+    "exv": "Trò chuyện nhiều với bạn bè có thể thoát khỏi cảm xúc bi quan."
+   },
+   {
+    "han": "感到孤独",
+    "pinyin": "gǎndào gūdú",
+    "vi": "cảm thấy cô đơn",
+    "col": "一个人在外感到孤独",
+    "ex": "刚到新城市的时候，他常常感到孤独。",
+    "exv": "Mới đến thành phố mới, anh ấy thường cảm thấy cô đơn."
+   },
+   {
+    "han": "害羞内向",
+    "pinyin": "hàixiū nèixiàng",
+    "vi": "rụt rè, hướng nội",
+    "col": "性格害羞内向",
+    "ex": "她性格害羞内向，不太爱在人前说话。",
+    "exv": "Tính cô ấy rụt rè hướng nội, không thích nói trước đám đông."
+   },
+   {
+    "han": "自信满满",
+    "pinyin": "zìxìn mǎnmǎn",
+    "vi": "đầy tự tin",
+    "col": "自信满满地走上台",
+    "ex": "他自信满满地走上台，开始演讲。",
+    "exv": "Anh ấy đầy tự tin bước lên sân khấu, bắt đầu diễn thuyết."
+   },
+   {
+    "han": "自尊心",
+    "pinyin": "zìzūnxīn",
+    "vi": "lòng tự trọng",
+    "col": "保护孩子的自尊心",
+    "ex": "批评孩子的时候，也要注意保护孩子的自尊心。",
+    "exv": "Khi phê bình con, cũng phải chú ý bảo vệ lòng tự trọng của con."
+   },
+   {
+    "han": "骄傲自满",
+    "pinyin": "jiāoào zìmǎn",
+    "vi": "kiêu ngạo tự mãn",
+    "col": "不能骄傲自满",
+    "ex": "考了第一名也不能骄傲自满，还要继续努力。",
+    "exv": "Thi được hạng nhất cũng không được kiêu ngạo tự mãn, còn phải tiếp tục cố gắng."
+   },
+   {
+    "han": "谦虚好学",
+    "pinyin": "qiānxū hàoxué",
+    "vi": "khiêm tốn ham học",
+    "col": "谦虚好学的学生",
+    "ex": "他是个谦虚好学的学生，老师都很喜欢他。",
+    "exv": "Anh ấy là học sinh khiêm tốn ham học, thầy cô đều rất thích."
+   },
+   {
+    "han": "幽默感",
+    "pinyin": "yōumògǎn",
+    "vi": "khiếu hài hước",
+    "col": "很有幽默感",
+    "ex": "我们班长很有幽默感，常常把大家逗笑。",
+    "exv": "Lớp trưởng chúng tôi rất có khiếu hài hước, thường làm mọi người cười."
+   },
+   {
+    "han": "善良热心",
+    "pinyin": "shànliáng rèxīn",
+    "vi": "tốt bụng nhiệt tình",
+    "col": "善良热心的邻居",
+    "ex": "王奶奶是个善良热心的邻居，谁有困难她都帮忙。",
+    "exv": "Bà Vương là hàng xóm tốt bụng nhiệt tình, ai khó khăn bà cũng giúp."
+   },
+   {
+    "han": "发脾气",
+    "pinyin": "fā píqi",
+    "vi": "nổi cáu",
+    "col": "不要随便发脾气",
+    "ex": "生气的时候不要随便发脾气，先冷静一下。",
+    "exv": "Khi tức giận đừng tùy tiện nổi cáu, hãy bình tĩnh trước đã."
+   },
+   {
+    "han": "控制情绪",
+    "pinyin": "kòngzhì qíngxù",
+    "vi": "kiềm chế cảm xúc",
+    "col": "学会控制情绪",
+    "ex": "长大了，就要学会控制情绪，不能想哭就哭。",
+    "exv": "Lớn rồi thì phải học kiềm chế cảm xúc, không thể muốn khóc là khóc."
+   },
+   {
+    "han": "冷静下来",
+    "pinyin": "lěngjìng xiàlai",
+    "vi": "bình tĩnh lại",
+    "col": "先冷静下来",
+    "ex": "别着急，先冷静下来，再慢慢说清楚。",
+    "exv": "Đừng vội, hãy bình tĩnh lại trước, rồi từ từ nói rõ."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Tiết kiệm và chi tiêu gia đình",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "家庭预算",
+    "pinyin": "jiātíng yùsuàn",
+    "vi": "ngân sách gia đình",
+    "col": "制定家庭预算",
+    "ex": "每个月初，妈妈都会制定家庭预算。",
+    "exv": "Đầu mỗi tháng, mẹ đều lập ngân sách gia đình."
+   },
+   {
+    "han": "每月开支",
+    "pinyin": "měi yuè kāizhī",
+    "vi": "chi tiêu mỗi tháng",
+    "col": "算算每月开支",
+    "ex": "月底了，爸爸开始算算每月开支。",
+    "exv": "Cuối tháng, bố bắt đầu tính chi tiêu mỗi tháng."
+   },
+   {
+    "han": "生活费用",
+    "pinyin": "shēnghuó fèiyòng",
+    "vi": "chi phí sinh hoạt",
+    "col": "生活费用不低",
+    "ex": "在大城市生活，生活费用不低。",
+    "exv": "Sống ở thành phố lớn, chi phí sinh hoạt không thấp."
+   },
+   {
+    "han": "水电费",
+    "pinyin": "shuǐdiànfèi",
+    "vi": "tiền điện nước",
+    "col": "交水电费",
+    "ex": "每个月十号之前要交水电费。",
+    "exv": "Trước ngày mười mỗi tháng phải nộp tiền điện nước."
+   },
+   {
+    "han": "房租水电",
+    "pinyin": "fángzū shuǐdiàn",
+    "vi": "tiền thuê nhà và điện nước",
+    "col": "房租水电加起来",
+    "ex": "房租水电加起来，已经占了工资的一半。",
+    "exv": "Tiền thuê nhà và điện nước cộng lại đã chiếm một nửa lương."
+   },
+   {
+    "han": "存钱买房",
+    "pinyin": "cún qián mǎi fáng",
+    "vi": "để dành tiền mua nhà",
+    "col": "努力存钱买房",
+    "ex": "他们夫妻俩努力存钱买房，已经存了五年。",
+    "exv": "Hai vợ chồng họ cố gắng để dành tiền mua nhà, đã để dành năm năm rồi."
+   },
+   {
+    "han": "取款机",
+    "pinyin": "qǔkuǎnjī",
+    "vi": "máy rút tiền",
+    "col": "去取款机取钱",
+    "ex": "附近没有银行，我去取款机取钱。",
+    "exv": "Gần đây không có ngân hàng, tôi đến máy rút tiền rút tiền."
+   },
+   {
+    "han": "转账汇款",
+    "pinyin": "zhuǎnzhàng huìkuǎn",
+    "vi": "chuyển khoản",
+    "col": "用手机转账汇款",
+    "ex": "现在用手机转账汇款，几分钟就到了。",
+    "exv": "Bây giờ dùng điện thoại chuyển khoản, vài phút là đến."
+   },
+   {
+    "han": "缴费账单",
+    "pinyin": "jiǎofèi zhàngdān",
+    "vi": "hóa đơn nộp tiền",
+    "col": "收到缴费账单",
+    "ex": "我收到缴费账单，马上就去交了。",
+    "exv": "Tôi nhận được hóa đơn nộp tiền, lập tức đi nộp ngay."
+   },
+   {
+    "han": "开发票",
+    "pinyin": "kāi fāpiào",
+    "vi": "xuất hóa đơn",
+    "col": "请帮我开发票",
+    "ex": "买了电脑以后，请帮我开发票。",
+    "exv": "Sau khi mua máy tính, xin xuất hóa đơn giúp tôi."
+   },
+   {
+    "han": "报销车费",
+    "pinyin": "bàoxiāo chēfèi",
+    "vi": "thanh toán lại tiền xe",
+    "col": "可以报销车费",
+    "ex": "出差的车费可以报销车费，记得留好票。",
+    "exv": "Tiền xe công tác được thanh toán lại, nhớ giữ vé cẩn thận."
+   },
+   {
+    "han": "分期付款",
+    "pinyin": "fēnqī fùkuǎn",
+    "vi": "trả góp",
+    "col": "选择分期付款",
+    "ex": "这台冰箱太贵了，他选择分期付款。",
+    "exv": "Chiếc tủ lạnh này đắt quá, anh ấy chọn trả góp."
+   },
+   {
+    "han": "信用卡账单",
+    "pinyin": "xìnyòngkǎ zhàngdān",
+    "vi": "hóa đơn thẻ tín dụng",
+    "col": "信用卡账单来了",
+    "ex": "信用卡账单来了，这个月花得有点多。",
+    "exv": "Hóa đơn thẻ tín dụng đến rồi, tháng này tiêu hơi nhiều."
+   },
+   {
+    "han": "储蓄习惯",
+    "pinyin": "chǔxù xíguàn",
+    "vi": "thói quen tiết kiệm",
+    "col": "养成储蓄习惯",
+    "ex": "从小养成储蓄习惯，长大就不怕缺钱。",
+    "exv": "Từ nhỏ hình thành thói quen tiết kiệm, lớn lên sẽ không sợ thiếu tiền."
+   },
+   {
+    "han": "理财观念",
+    "pinyin": "lǐcái guānniàn",
+    "vi": "quan niệm quản lý tiền",
+    "col": "理财观念很重要",
+    "ex": "理财观念很重要，不能有多少花多少。",
+    "exv": "Quan niệm quản lý tiền rất quan trọng, không thể có bao nhiêu tiêu bấy nhiêu."
+   },
+   {
+    "han": "奖金收入",
+    "pinyin": "jiǎngjīn shōurù",
+    "vi": "thu nhập tiền thưởng",
+    "col": "奖金收入不错",
+    "ex": "他今年的奖金收入不错，可以带家人去旅行。",
+    "exv": "Thu nhập tiền thưởng năm nay của anh ấy khá tốt, có thể đưa gia đình đi du lịch."
+   },
+   {
+    "han": "工资到账",
+    "pinyin": "gōngzī dàozhàng",
+    "vi": "lương đã về tài khoản",
+    "col": "工资到账了",
+    "ex": "工资到账了，她马上给妈妈转了一笔钱。",
+    "exv": "Lương đã về tài khoản, cô ấy lập tức chuyển cho mẹ một khoản tiền."
+   },
+   {
+    "han": "物价上涨",
+    "pinyin": "wùjià shàngzhǎng",
+    "vi": "giá cả tăng lên",
+    "col": "物价上涨了",
+    "ex": "最近物价上涨了，买菜都比以前贵。",
+    "exv": "Gần đây giá cả tăng lên, mua rau cũng đắt hơn trước."
+   },
+   {
+    "han": "货比三家",
+    "pinyin": "huò bǐ sān jiā",
+    "vi": "so sánh giá ba cửa hàng",
+    "col": "买东西要货比三家",
+    "ex": "妈妈说买东西要货比三家，不要急着买。",
+    "exv": "Mẹ nói mua đồ phải so sánh giá ba cửa hàng, đừng vội mua."
+   },
+   {
+    "han": "砍价还价",
+    "pinyin": "kǎnjià huánjià",
+    "vi": "mặc cả",
+    "col": "在市场砍价还价",
+    "ex": "在市场买衣服，可以跟老板砍价还价。",
+    "exv": "Mua quần áo ở chợ có thể mặc cả với chủ quán."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — An toàn giao thông và đi lại xa",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "驾驶证",
+    "pinyin": "jiàshǐzhèng",
+    "vi": "giấy phép lái xe",
+    "col": "考驾驶证",
+    "ex": "他今年二十岁，正在考驾驶证。",
+    "exv": "Anh ấy năm nay hai mươi tuổi, đang thi giấy phép lái xe."
+   },
+   {
+    "han": "交通违章",
+    "pinyin": "jiāotōng wéizhāng",
+    "vi": "vi phạm giao thông",
+    "col": "交通违章要罚款",
+    "ex": "交通违章要罚款，还要扣分，大家要小心。",
+    "exv": "Vi phạm giao thông sẽ bị phạt tiền, còn bị trừ điểm, mọi người phải cẩn thận."
+   },
+   {
+    "han": "罚款通知",
+    "pinyin": "fákuǎn tōngzhī",
+    "vi": "thông báo phạt tiền",
+    "col": "收到罚款通知",
+    "ex": "他闯了红灯，第二天就收到罚款通知。",
+    "exv": "Anh ấy vượt đèn đỏ, hôm sau đã nhận được thông báo phạt tiền."
+   },
+   {
+    "han": "交通事故",
+    "pinyin": "jiāotōng shìgù",
+    "vi": "tai nạn giao thông",
+    "col": "发生交通事故",
+    "ex": "下雨路滑，容易发生交通事故，开车要慢一点。",
+    "exv": "Mưa đường trơn, dễ xảy ra tai nạn giao thông, lái xe phải chậm một chút."
+   },
+   {
+    "han": "交通堵塞",
+    "pinyin": "jiāotōng dǔsè",
+    "vi": "tắc đường",
+    "col": "早高峰交通堵塞",
+    "ex": "早高峰交通堵塞，他上班迟到了半小时。",
+    "exv": "Giờ cao điểm sáng tắc đường, anh ấy đi làm muộn nửa tiếng."
+   },
+   {
+    "han": "上下班高峰",
+    "pinyin": "shàng xiàbān gāofēng",
+    "vi": "giờ cao điểm đi làm",
+    "col": "避开上下班高峰",
+    "ex": "为了避开上下班高峰，他每天提前一小时出门。",
+    "exv": "Để tránh giờ cao điểm đi làm, anh ấy mỗi ngày ra khỏi nhà sớm một tiếng."
+   },
+   {
+    "han": "换乘地铁",
+    "pinyin": "huànchéng dìtiě",
+    "vi": "chuyển tuyến tàu điện ngầm",
+    "col": "换乘地铁去机场",
+    "ex": "去机场要先坐一号线，再换乘地铁二号线。",
+    "exv": "Đi sân bay phải đi tuyến số một trước, rồi chuyển tuyến tàu điện ngầm số hai."
+   },
+   {
+    "han": "首班车",
+    "pinyin": "shǒubānchē",
+    "vi": "chuyến xe đầu tiên",
+    "col": "赶上首班车",
+    "ex": "他起得很早，赶上了首班车。",
+    "exv": "Anh ấy dậy rất sớm, kịp chuyến xe đầu tiên."
+   },
+   {
+    "han": "票价调整",
+    "pinyin": "piàojià tiáozhěng",
+    "vi": "điều chỉnh giá vé",
+    "col": "票价调整了",
+    "ex": "从下个月起，地铁票价调整了，大家注意看通知。",
+    "exv": "Từ tháng sau, giá vé tàu điện ngầm được điều chỉnh, mọi người chú ý xem thông báo."
+   },
+   {
+    "han": "检票进站",
+    "pinyin": "jiǎnpiào jìn zhàn",
+    "vi": "soát vé vào ga",
+    "col": "检票进站上车",
+    "ex": "请大家排队检票进站上车，不要拥挤。",
+    "exv": "Mọi người xếp hàng soát vé vào ga lên xe, đừng chen lấn."
+   },
+   {
+    "han": "安全检查",
+    "pinyin": "ānquán jiǎnchá",
+    "vi": "kiểm tra an ninh",
+    "col": "通过安全检查",
+    "ex": "进站之前，每个人都要通过安全检查。",
+    "exv": "Trước khi vào ga, mỗi người đều phải qua kiểm tra an ninh."
+   },
+   {
+    "han": "行李箱",
+    "pinyin": "xínglixiāng",
+    "vi": "vali",
+    "col": "拖着行李箱",
+    "ex": "她拖着行李箱，急急忙忙往站台走。",
+    "exv": "Cô ấy kéo vali, vội vàng đi về phía sân ga."
+   },
+   {
+    "han": "值机柜台",
+    "pinyin": "zhíjī guìtái",
+    "vi": "quầy làm thủ tục bay",
+    "col": "去值机柜台",
+    "ex": "到了机场，先去值机柜台办登机手续。",
+    "exv": "Đến sân bay, trước tiên đến quầy làm thủ tục bay."
+   },
+   {
+    "han": "托运行李",
+    "pinyin": "tuōyùn xíngli",
+    "vi": "hành lý ký gửi",
+    "col": "办理托运行李",
+    "ex": "这个箱子太重了，需要办理托运行李。",
+    "exv": "Chiếc vali này nặng quá, cần làm thủ tục hành lý ký gửi."
+   },
+   {
+    "han": "随身物品",
+    "pinyin": "suíshēn wùpǐn",
+    "vi": "đồ mang theo người",
+    "col": "保管好随身物品",
+    "ex": "上车的时候，请保管好随身物品。",
+    "exv": "Khi lên xe, xin giữ cẩn thận đồ mang theo người."
+   },
+   {
+    "han": "系好安全带",
+    "pinyin": "jì hǎo ānquándài",
+    "vi": "thắt dây an toàn",
+    "col": "上车系好安全带",
+    "ex": "上车以后，第一件事就是系好安全带。",
+    "exv": "Sau khi lên xe, việc đầu tiên là thắt dây an toàn."
+   },
+   {
+    "han": "遵守交规",
+    "pinyin": "zūnshǒu jiāoguī",
+    "vi": "tuân thủ luật giao thông",
+    "col": "人人遵守交规",
+    "ex": "人人遵守交规，路上才会更安全。",
+    "exv": "Ai cũng tuân thủ luật giao thông, đường sá mới an toàn hơn."
+   },
+   {
+    "han": "红灯停绿灯行",
+    "pinyin": "hóng dēng tíng lǜ dēng xíng",
+    "vi": "đèn đỏ dừng, đèn xanh đi",
+    "col": "记住红灯停绿灯行",
+    "ex": "老师告诉孩子们，要记住红灯停绿灯行。",
+    "exv": "Cô giáo dặn các em phải nhớ đèn đỏ dừng, đèn xanh đi."
+   },
+   {
+    "han": "人行横道",
+    "pinyin": "rénxíng héngdào",
+    "vi": "vạch qua đường cho người đi bộ",
+    "col": "走人行横道",
+    "ex": "过马路的时候，一定要走人行横道。",
+    "exv": "Khi qua đường, nhất định phải đi trên vạch qua đường cho người đi bộ."
+   },
+   {
+    "han": "限速标志",
+    "pinyin": "xiànsù biāozhì",
+    "vi": "biển báo giới hạn tốc độ",
+    "col": "注意限速标志",
+    "ex": "开车进学校附近，要注意限速标志，慢慢开。",
+    "exv": "Lái xe vào gần trường học, phải chú ý biển báo giới hạn tốc độ, đi chậm thôi."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Học nghề và thực tập",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "实习单位",
+    "pinyin": "shíxí dānwèi",
+    "vi": "đơn vị thực tập",
+    "col": "联系实习单位",
+    "ex": "大三的时候，学生要自己联系实习单位。",
+    "exv": "Năm ba, sinh viên phải tự liên hệ đơn vị thực tập."
+   },
+   {
+    "han": "实习报告",
+    "pinyin": "shíxí bàogào",
+    "vi": "báo cáo thực tập",
+    "col": "写实习报告",
+    "ex": "实习结束以后，每个人都要写实习报告。",
+    "exv": "Sau khi kết thúc thực tập, mỗi người đều phải viết báo cáo thực tập."
+   },
+   {
+    "han": "指导老师",
+    "pinyin": "zhǐdǎo lǎoshī",
+    "vi": "giáo viên hướng dẫn",
+    "col": "请教指导老师",
+    "ex": "遇到问题可以请教指导老师，不要自己硬想。",
+    "exv": "Gặp vấn đề có thể hỏi giáo viên hướng dẫn, đừng tự nghĩ cứng nhắc."
+   },
+   {
+    "han": "论文答辩",
+    "pinyin": "lùnwén dábiàn",
+    "vi": "bảo vệ luận văn",
+    "col": "参加论文答辩",
+    "ex": "下个月他要参加论文答辩，现在天天在准备。",
+    "exv": "Tháng sau anh ấy phải bảo vệ luận văn, bây giờ ngày nào cũng chuẩn bị."
+   },
+   {
+    "han": "课外活动",
+    "pinyin": "kèwài huódòng",
+    "vi": "hoạt động ngoại khóa",
+    "col": "参加课外活动",
+    "ex": "学校有很多课外活动，学生可以自由参加。",
+    "exv": "Trường có nhiều hoạt động ngoại khóa, sinh viên có thể tự do tham gia."
+   },
+   {
+    "han": "学生社团",
+    "pinyin": "xuésheng shètuán",
+    "vi": "câu lạc bộ sinh viên",
+    "col": "加入学生社团",
+    "ex": "她加入了学生社团的舞蹈队，每周排练两次。",
+    "exv": "Cô ấy tham gia đội múa của câu lạc bộ sinh viên, mỗi tuần tập hai lần."
+   },
+   {
+    "han": "志愿服务",
+    "pinyin": "zhìyuàn fúwù",
+    "vi": "phục vụ tình nguyện",
+    "col": "参加志愿服务",
+    "ex": "假期里，很多学生参加志愿服务，去帮助老人。",
+    "exv": "Trong kỳ nghỉ, nhiều sinh viên tham gia phục vụ tình nguyện, đi giúp người già."
+   },
+   {
+    "han": "兼职工作",
+    "pinyin": "jiānzhí gōngzuò",
+    "vi": "công việc bán thời gian",
+    "col": "找一份兼职工作",
+    "ex": "为了赚生活费，他找了一份兼职工作。",
+    "exv": "Để kiếm tiền sinh hoạt, anh ấy tìm một công việc bán thời gian."
+   },
+   {
+    "han": "全职工作",
+    "pinyin": "quánzhí gōngzuò",
+    "vi": "công việc toàn thời gian",
+    "col": "找到全职工作",
+    "ex": "毕业以后，她很快找到了一份全职工作。",
+    "exv": "Sau khi tốt nghiệp, cô ấy nhanh chóng tìm được một công việc toàn thời gian."
+   },
+   {
+    "han": "投递简历",
+    "pinyin": "tóudì jiǎnlì",
+    "vi": "nộp hồ sơ xin việc",
+    "col": "网上投递简历",
+    "ex": "现在找工作大多在网上投递简历，很方便。",
+    "exv": "Bây giờ tìm việc phần lớn nộp hồ sơ xin việc trên mạng, rất tiện."
+   },
+   {
+    "han": "参加面试",
+    "pinyin": "cānjiā miànshì",
+    "vi": "tham gia phỏng vấn",
+    "col": "明天参加面试",
+    "ex": "他明天参加面试，今晚早点休息。",
+    "exv": "Ngày mai anh ấy tham gia phỏng vấn, tối nay nghỉ sớm."
+   },
+   {
+    "han": "正式录用",
+    "pinyin": "zhèngshì lùyòng",
+    "vi": "tuyển dụng chính thức",
+    "col": "被正式录用",
+    "ex": "经过三轮面试，她终于被正式录用了。",
+    "exv": "Qua ba vòng phỏng vấn, cuối cùng cô ấy được tuyển dụng chính thức."
+   },
+   {
+    "han": "办理入职",
+    "pinyin": "bànlǐ rùzhí",
+    "vi": "làm thủ tục vào làm",
+    "col": "第一天办理入职",
+    "ex": "上班第一天，人事部帮新人办理入职。",
+    "exv": "Ngày đầu đi làm, phòng nhân sự giúp người mới làm thủ tục vào làm."
+   },
+   {
+    "han": "提出辞职",
+    "pinyin": "tíchū cízhí",
+    "vi": "xin thôi việc",
+    "col": "向领导提出辞职",
+    "ex": "因为要回老家，他向领导提出辞职。",
+    "exv": "Vì phải về quê, anh ấy xin thôi việc với lãnh đạo."
+   },
+   {
+    "han": "获得升职",
+    "pinyin": "huòdé shēngzhí",
+    "vi": "được thăng chức",
+    "col": "努力获得升职",
+    "ex": "他工作努力，去年获得升职了。",
+    "exv": "Anh ấy làm việc chăm chỉ, năm ngoái được thăng chức."
+   },
+   {
+    "han": "申请加薪",
+    "pinyin": "shēnqǐng jiāxīn",
+    "vi": "xin tăng lương",
+    "col": "向公司申请加薪",
+    "ex": "工作三年了，他想向公司申请加薪。",
+    "exv": "Làm việc ba năm rồi, anh ấy muốn xin công ty tăng lương."
+   },
+   {
+    "han": "请病假",
+    "pinyin": "qǐng bìngjià",
+    "vi": "xin nghỉ ốm",
+    "col": "发烧请病假",
+    "ex": "他发烧了，今天向老师请病假。",
+    "exv": "Anh ấy bị sốt, hôm nay xin nghỉ ốm với thầy giáo."
+   },
+   {
+    "han": "迟到早退",
+    "pinyin": "chídào zǎotuì",
+    "vi": "đi muộn về sớm",
+    "col": "不能迟到早退",
+    "ex": "公司规定，上班不能迟到早退。",
+    "exv": "Công ty quy định, đi làm không được đi muộn về sớm."
+   },
+   {
+    "han": "考勤记录",
+    "pinyin": "kǎo qín jìlù",
+    "vi": "bản ghi chấm công",
+    "col": "查看考勤记录",
+    "ex": "月底，人事部会查看考勤记录，算出勤奖。",
+    "exv": "Cuối tháng, phòng nhân sự sẽ xem bản ghi chấm công, tính tiền thưởng chuyên cần."
+   },
+   {
+    "han": "工作表现",
+    "pinyin": "gōngzuò biǎoxiàn",
+    "vi": "biểu hiện công việc",
+    "col": "工作表现很好",
+    "ex": "她工作表现很好，年底得了优秀员工奖。",
+    "exv": "Biểu hiện công việc của cô ấy rất tốt, cuối năm được giải nhân viên xuất sắc."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Bạn bè và quan hệ xã hội",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "老邻居",
+    "pinyin": "lǎo línjū",
+    "vi": "hàng xóm cũ",
+    "col": "老邻居见面",
+    "ex": "搬走以后，他很少跟老邻居见面。",
+    "exv": "Sau khi chuyển đi, anh ấy ít gặp hàng xóm cũ."
+   },
+   {
+    "han": "新同事",
+    "pinyin": "xīn tóngshì",
+    "vi": "đồng nghiệp mới",
+    "col": "认识新同事",
+    "ex": "上班第一天，她认识了很多新同事。",
+    "exv": "Ngày đầu đi làm, cô ấy quen nhiều đồng nghiệp mới."
+   },
+   {
+    "han": "合租室友",
+    "pinyin": "hézū shìyǒu",
+    "vi": "bạn cùng thuê phòng",
+    "col": "和合租室友",
+    "ex": "她和合租室友一起做饭，一起打扫卫生。",
+    "exv": "Cô ấy cùng bạn cùng thuê phòng nấu cơm, cùng quét dọn vệ sinh."
+   },
+   {
+    "han": "网上朋友",
+    "pinyin": "wǎngshang péngyou",
+    "vi": "bạn trên mạng",
+    "col": "交网上朋友",
+    "ex": "在网上学习的时候，他交了几个网上朋友。",
+    "exv": "Khi học trên mạng, anh ấy kết bạn với vài bạn trên mạng."
+   },
+   {
+    "han": "偶像明星",
+    "pinyin": "ǒuxiàng míngxīng",
+    "vi": "ngôi sao thần tượng",
+    "col": "喜欢偶像明星",
+    "ex": "很多年轻人喜欢偶像明星，常常去看演唱会。",
+    "exv": "Nhiều người trẻ thích ngôi sao thần tượng, thường đi xem hòa nhạc."
+   },
+   {
+    "han": "学习榜样",
+    "pinyin": "xuéxí bǎngyàng",
+    "vi": "tấm gương học tập",
+    "col": "把他当学习榜样",
+    "ex": "大家把他当学习榜样，因为他每天都坚持读书。",
+    "exv": "Mọi người coi anh ấy là tấm gương học tập, vì ngày nào anh ấy cũng kiên trì đọc sách."
+   },
+   {
+    "han": "互相信任",
+    "pinyin": "hùxiāng xìnrèn",
+    "vi": "tin tưởng lẫn nhau",
+    "col": "朋友要互相信任",
+    "ex": "朋友之间要互相信任，有困难互相帮助。",
+    "exv": "Bạn bè phải tin tưởng lẫn nhau, có khó khăn giúp đỡ nhau."
+   },
+   {
+    "han": "产生误会",
+    "pinyin": "chǎnshēng wùhuì",
+    "vi": "nảy sinh hiểu lầm",
+    "col": "容易产生误会",
+    "ex": "不说清楚，就容易产生误会。",
+    "exv": "Không nói rõ ràng thì dễ nảy sinh hiểu lầm."
+   },
+   {
+    "han": "化解矛盾",
+    "pinyin": "huàjiě máodùn",
+    "vi": "hóa giải mâu thuẫn",
+    "col": "坐下来化解矛盾",
+    "ex": "两个人坐下来好好谈，就能化解矛盾。",
+    "exv": "Hai người ngồi xuống nói chuyện tử tế là có thể hóa giải mâu thuẫn."
+   },
+   {
+    "han": "互相原谅",
+    "pinyin": "hùxiāng yuánliàng",
+    "vi": "tha thứ cho nhau",
+    "col": "学会互相原谅",
+    "ex": "好朋友吵架以后，要学会互相原谅。",
+    "exv": "Bạn thân cãi nhau xong phải học tha thứ cho nhau."
+   },
+   {
+    "han": "宽容大度",
+    "pinyin": "kuānróng dàdù",
+    "vi": "khoan dung rộng lượng",
+    "col": "宽容大度的人",
+    "ex": "宽容大度的人朋友多，大家都愿意跟他来往。",
+    "exv": "Người khoan dung rộng lượng có nhiều bạn, ai cũng muốn qua lại với anh ấy."
+   },
+   {
+    "han": "羡慕别人",
+    "pinyin": "xiànmù biérén",
+    "vi": "ngưỡng mộ người khác",
+    "col": "不要只羡慕别人",
+    "ex": "不要只羡慕别人，自己努力也能进步。",
+    "exv": "Đừng chỉ ngưỡng mộ người khác, tự mình cố gắng cũng có thể tiến bộ."
+   },
+   {
+    "han": "佩服对手",
+    "pinyin": "pèifú duìshǒu",
+    "vi": "khâm phục đối thủ",
+    "col": "真心佩服对手",
+    "ex": "虽然输了比赛，他还是真心佩服对手。",
+    "exv": "Dù thua trận, anh ấy vẫn thật lòng khâm phục đối thủ."
+   },
+   {
+    "han": "尊重长辈",
+    "pinyin": "zūnzhòng zhǎngbèi",
+    "vi": "tôn trọng người lớn tuổi",
+    "col": "从小尊重长辈",
+    "ex": "我们从小就要学会尊重长辈，听长辈的话。",
+    "exv": "Từ nhỏ chúng ta phải học tôn trọng người lớn tuổi, nghe lời người lớn."
+   },
+   {
+    "han": "礼貌待人",
+    "pinyin": "lǐmào dàirén",
+    "vi": "lịch sự với mọi người",
+    "col": "礼貌待人很重要",
+    "ex": "礼貌待人很重要，一句谢谢能让人开心。",
+    "exv": "Lịch sự với mọi người rất quan trọng, một câu cảm ơn có thể làm người ta vui."
+   },
+   {
+    "han": "客气话",
+    "pinyin": "kèqihuà",
+    "vi": "lời khách sáo",
+    "col": "说几句客气话",
+    "ex": "见面的时候说几句客气话，气氛会轻松很多。",
+    "exv": "Khi gặp mặt nói vài lời khách sáo, bầu không khí sẽ thoải mái hơn nhiều."
+   },
+   {
+    "han": "主动打招呼",
+    "pinyin": "zhǔdòng dǎ zhāohu",
+    "vi": "chủ động chào hỏi",
+    "col": "主动打招呼",
+    "ex": "见到邻居要主动打招呼，不要低头走过去。",
+    "exv": "Gặp hàng xóm phải chủ động chào hỏi, đừng cúi đầu đi qua."
+   },
+   {
+    "han": "保持联系",
+    "pinyin": "bǎochí liánxì",
+    "vi": "giữ liên lạc",
+    "col": "毕业后保持联系",
+    "ex": "毕业以后，老同学们还常常保持联系。",
+    "exv": "Sau khi tốt nghiệp, các bạn cũ vẫn thường giữ liên lạc."
+   },
+   {
+    "han": "久别重逢",
+    "pinyin": "jiǔbié chóngféng",
+    "vi": "lâu ngày gặp lại",
+    "col": "久别重逢很开心",
+    "ex": "十年没见的老朋友久别重逢，大家都很开心。",
+    "exv": "Bạn cũ mười năm không gặp, lâu ngày gặp lại, mọi người đều rất vui."
+   },
+   {
+    "han": "形影不离",
+    "pinyin": "xíng yǐng bù lí",
+    "vi": "như hình với bóng",
+    "col": "形影不离的好朋友",
+    "ex": "上学的时候，她们是形影不离的好朋友。",
+    "exv": "Thời đi học, họ là bạn thân như hình với bóng."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Nhà ở và sửa chữa nhà cửa",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "房东房客",
+    "pinyin": "fángdōng fángkè",
+    "vi": "chủ nhà và người thuê",
+    "col": "房东房客商量",
+    "ex": "房东房客商量好了，下个月开始涨一点房租。",
+    "exv": "Chủ nhà và người thuê đã bàn xong, từ tháng sau tăng một chút tiền thuê."
+   },
+   {
+    "han": "租房押金",
+    "pinyin": "zūfáng yājīn",
+    "vi": "tiền đặt cọc thuê nhà",
+    "col": "交租房押金",
+    "ex": "租房子要先交租房押金，一般是一个月房租。",
+    "exv": "Thuê nhà phải nộp tiền đặt cọc trước, thường là một tháng tiền thuê."
+   },
+   {
+    "han": "续租合同",
+    "pinyin": "xùzū hétong",
+    "vi": "hợp đồng thuê tiếp",
+    "col": "签续租合同",
+    "ex": "住得很舒服，他决定跟房东签续租合同。",
+    "exv": "Ở rất thoải mái, anh ấy quyết định ký hợp đồng thuê tiếp với chủ nhà."
+   },
+   {
+    "han": "搬家公司",
+    "pinyin": "bānjiā gōngsī",
+    "vi": "công ty chuyển nhà",
+    "col": "请搬家公司",
+    "ex": "东西太多了，我们请搬家公司来帮忙。",
+    "exv": "Đồ đạc nhiều quá, chúng tôi mời công ty chuyển nhà đến giúp."
+   },
+   {
+    "han": "打包行李",
+    "pinyin": "dǎbāo xíngli",
+    "vi": "đóng gói hành lý",
+    "col": "提前打包行李",
+    "ex": "搬家前三天，她就开始提前打包行李。",
+    "exv": "Ba ngày trước khi chuyển nhà, cô ấy đã bắt đầu đóng gói hành lý."
+   },
+   {
+    "han": "装修房子",
+    "pinyin": "zhuāngxiū fángzi",
+    "vi": "sửa sang nhà cửa",
+    "col": "正在装修房子",
+    "ex": "楼下那家正在装修房子，白天有点吵。",
+    "exv": "Nhà tầng dưới đang sửa sang nhà cửa, ban ngày hơi ồn."
+   },
+   {
+    "han": "水管漏水",
+    "pinyin": "shuǐguǎn lòushuǐ",
+    "vi": "ống nước bị rò",
+    "col": "水管漏水了",
+    "ex": "厨房的水管漏水了，地上全是水。",
+    "exv": "Ống nước nhà bếp bị rò, sàn nhà toàn nước."
+   },
+   {
+    "han": "请电工",
+    "pinyin": "qǐng diàngōng",
+    "vi": "mời thợ điện",
+    "col": "请电工来修",
+    "ex": "灯不亮了，我请电工来修一下。",
+    "exv": "Đèn không sáng, tôi mời thợ điện đến sửa."
+   },
+   {
+    "han": "粉刷墙壁",
+    "pinyin": "fěnshuā qiángbì",
+    "vi": "sơn tường",
+    "col": "粉刷墙壁一新",
+    "ex": "请工人来粉刷墙壁，家里看起来亮多了。",
+    "exv": "Sơn tường mới, nhà trông sáng hơn nhiều."
+   },
+   {
+    "han": "换门锁",
+    "pinyin": "huàn ménsuǒ",
+    "vi": "thay ổ khóa",
+    "col": "搬家后换门锁",
+    "ex": "搬家以后，第一件事就是换门锁，安全一点。",
+    "exv": "Sau khi chuyển nhà, việc đầu tiên là thay ổ khóa cho an toàn hơn."
+   },
+   {
+    "han": "窗帘布",
+    "pinyin": "chuāngliánbù",
+    "vi": "vải rèm cửa",
+    "col": "买窗帘布",
+    "ex": "妈妈去市场买窗帘布，准备给客厅换新的。",
+    "exv": "Mẹ đi chợ mua vải rèm cửa, chuẩn bị thay mới cho phòng khách."
+   },
+   {
+    "han": "阳台晾衣",
+    "pinyin": "yángtái liàng yī",
+    "vi": "phơi quần áo ở ban công",
+    "col": "在阳台晾衣",
+    "ex": "天气好的时候，奶奶喜欢在阳台晾衣。",
+    "exv": "Khi thời tiết đẹp, bà thích phơi quần áo ở ban công."
+   },
+   {
+    "han": "厨房用具",
+    "pinyin": "chúfáng yòngjù",
+    "vi": "dụng cụ nhà bếp",
+    "col": "厨房用具很多",
+    "ex": "她家的厨房用具很多，做饭很方便。",
+    "exv": "Dụng cụ nhà bếp nhà cô ấy rất nhiều, nấu cơm rất tiện."
+   },
+   {
+    "han": "停电停水",
+    "pinyin": "tíngdiàn tíngshuǐ",
+    "vi": "mất điện mất nước",
+    "col": "突然停电停水",
+    "ex": "昨天晚上突然停电停水，大家都很不方便。",
+    "exv": "Tối qua đột nhiên mất điện mất nước, mọi người đều rất bất tiện."
+   },
+   {
+    "han": "交物业费",
+    "pinyin": "jiāo wùyèfèi",
+    "vi": "nộp phí quản lý chung cư",
+    "col": "按时交物业费",
+    "ex": "住在小区里，要按时交物业费。",
+    "exv": "Sống trong khu dân cư phải nộp phí quản lý chung cư đúng hạn."
+   },
+   {
+    "han": "小区保安",
+    "pinyin": "xiǎoqū bǎoān",
+    "vi": "bảo vệ khu dân cư",
+    "col": "小区保安很负责",
+    "ex": "我们小区保安很负责，进出都要登记。",
+    "exv": "Bảo vệ khu dân cư chúng tôi rất có trách nhiệm, ra vào đều phải đăng ký."
+   },
+   {
+    "han": "楼上楼下",
+    "pinyin": "lóushang lóuxia",
+    "vi": "tầng trên tầng dưới",
+    "col": "楼上楼下都认识",
+    "ex": "住了五年，楼上楼下都认识了。",
+    "exv": "Ở năm năm, tầng trên tầng dưới đều quen nhau rồi."
+   },
+   {
+    "han": "隔壁邻居",
+    "pinyin": "gébì línjū",
+    "vi": "hàng xóm sát vách",
+    "col": "隔壁邻居很热情",
+    "ex": "隔壁邻居很热情，常常送自己种的菜来。",
+    "exv": "Hàng xóm sát vách rất nhiệt tình, thường tặng rau tự trồng."
+   },
+   {
+    "han": "噪音扰民",
+    "pinyin": "zàoyīn rǎomín",
+    "vi": "tiếng ồn làm phiền dân",
+    "col": "半夜噪音扰民",
+    "ex": "半夜装修噪音扰民，邻居都睡不着。",
+    "exv": "Nửa đêm sửa nhà gây tiếng ồn làm phiền dân, hàng xóm đều không ngủ được."
+   },
+   {
+    "han": "垃圾分类",
+    "pinyin": "lājī fēnlèi",
+    "vi": "phân loại rác",
+    "col": "做好垃圾分类",
+    "ex": "从这个月起，小区要求大家做好垃圾分类。",
+    "exv": "Từ tháng này, khu dân cư yêu cầu mọi người phân loại rác tốt."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Thời tiết cực đoan và phòng tránh",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "暴雨预警",
+    "pinyin": "bàoyǔ yùjǐng",
+    "vi": "cảnh báo mưa lớn",
+    "col": "发布暴雨预警",
+    "ex": "气象台发布暴雨预警，提醒大家不要出门。",
+    "exv": "Đài khí tượng phát cảnh báo mưa lớn, nhắc mọi người đừng ra ngoài."
+   },
+   {
+    "han": "暴雪封路",
+    "pinyin": "bàoxuě fēng lù",
+    "vi": "tuyết lớn phong tỏa đường",
+    "col": "暴雪封路了",
+    "ex": "北方下了大雪，暴雪封路了，汽车开不出去。",
+    "exv": "Phương Bắc tuyết rơi lớn, tuyết lớn phong tỏa đường, ô tô không chạy ra được."
+   },
+   {
+    "han": "台风登陆",
+    "pinyin": "táifēng dēnglù",
+    "vi": "bão đổ bộ",
+    "col": "台风登陆沿海",
+    "ex": "台风登陆沿海地区，风大雨大，大家要关好门窗。",
+    "exv": "Bão đổ bộ vùng ven biển, gió lớn mưa lớn, mọi người phải đóng chặt cửa sổ."
+   },
+   {
+    "han": "地震逃生",
+    "pinyin": "dìzhèn táoshēng",
+    "vi": "thoát hiểm khi động đất",
+    "col": "学习地震逃生",
+    "ex": "学校组织学生学习地震逃生，演练了两次。",
+    "exv": "Trường tổ chức cho học sinh học thoát hiểm khi động đất, diễn tập hai lần."
+   },
+   {
+    "han": "洪水泛滥",
+    "pinyin": "hóngshuǐ fànlàn",
+    "vi": "lũ lụt tràn lan",
+    "col": "洪水泛滥成灾",
+    "ex": "连下三天大雨，河水上涨，洪水泛滥成灾。",
+    "exv": "Mưa lớn liên tục ba ngày, nước sông dâng, lũ lụt tràn lan thành tai họa."
+   },
+   {
+    "han": "干旱缺水",
+    "pinyin": "gānhàn quē shuǐ",
+    "vi": "hạn hán thiếu nước",
+    "col": "干旱缺水严重",
+    "ex": "今年夏天干旱缺水严重，庄稼都快枯死了。",
+    "exv": "Mùa hè năm nay hạn hán thiếu nước nghiêm trọng, hoa màu sắp khô chết."
+   },
+   {
+    "han": "雾霾天气",
+    "pinyin": "wùmái tiānqì",
+    "vi": "thời tiết sương mù ô nhiễm",
+    "col": "雾霾天气戴口罩",
+    "ex": "雾霾天气出门要戴口罩，少在外面待着。",
+    "exv": "Thời tiết sương mù ô nhiễm ra ngoài phải đeo khẩu trang, ít ở ngoài."
+   },
+   {
+    "han": "沙尘暴",
+    "pinyin": "shāchénbào",
+    "vi": "bão cát",
+    "col": "沙尘暴来了",
+    "ex": "春天的时候，北方常常有沙尘暴来了。",
+    "exv": "Vào mùa xuân, phương Bắc thường có bão cát đến."
+   },
+   {
+    "han": "持续高温",
+    "pinyin": "chíxù gāowēn",
+    "vi": "nắng nóng kéo dài",
+    "col": "持续高温一周",
+    "ex": "这个城市持续高温一周，每天都超过三十五度。",
+    "exv": "Thành phố này nắng nóng kéo dài một tuần, ngày nào cũng trên ba mươi lăm độ."
+   },
+   {
+    "han": "严寒天气",
+    "pinyin": "yánhán tiānqì",
+    "vi": "thời tiết giá rét",
+    "col": "严寒天气注意",
+    "ex": "严寒天气注意保暖，老人小孩尽量少出门。",
+    "exv": "Thời tiết giá rét chú ý giữ ấm, người già trẻ nhỏ cố gắng ít ra ngoài."
+   },
+   {
+    "han": "空气潮湿",
+    "pinyin": "kōngqì cháoshī",
+    "vi": "không khí ẩm ướt",
+    "col": "南方空气潮湿",
+    "ex": "南方空气潮湿，衣服晾两天都不干。",
+    "exv": "Không khí phương Nam ẩm ướt, quần áo phơi hai ngày cũng không khô."
+   },
+   {
+    "han": "路面结冰",
+    "pinyin": "lùmiàn jiébīng",
+    "vi": "mặt đường đóng băng",
+    "col": "路面结冰小心",
+    "ex": "冬天下雪以后，路面结冰小心，开车要慢。",
+    "exv": "Mùa đông sau khi tuyết rơi, mặt đường đóng băng phải cẩn thận, lái xe phải chậm."
+   },
+   {
+    "han": "积雪融化",
+    "pinyin": "jīxuě rónghuà",
+    "vi": "tuyết đọng tan ra",
+    "col": "天气转暖积雪融化",
+    "ex": "天气转暖积雪融化，路面上全是水。",
+    "exv": "Thời tiết ấm lên tuyết đọng tan ra, mặt đường toàn nước."
+   },
+   {
+    "han": "防暑降温",
+    "pinyin": "fángshǔ jiàngwēn",
+    "vi": "phòng nóng giảm nhiệt",
+    "col": "夏天防暑降温",
+    "ex": "夏天防暑降温很重要，要多喝水，少晒太阳。",
+    "exv": "Mùa hè phòng nóng giảm nhiệt rất quan trọng, phải uống nhiều nước, ít phơi nắng."
+   },
+   {
+    "han": "注意保暖",
+    "pinyin": "zhùyì bǎonuǎn",
+    "vi": "chú ý giữ ấm",
+    "col": "天冷注意保暖",
+    "ex": "天冷了，妈妈打电话让我注意保暖。",
+    "exv": "Trời lạnh rồi, mẹ gọi điện dặn tôi chú ý giữ ấm."
+   },
+   {
+    "han": "多穿衣服",
+    "pinyin": "duō chuān yīfu",
+    "vi": "mặc thêm quần áo",
+    "col": "出门多穿衣服",
+    "ex": "明天要降温，出门多穿衣服，别感冒了。",
+    "exv": "Ngày mai nhiệt độ giảm, ra ngoài mặc thêm quần áo, đừng để cảm lạnh."
+   },
+   {
+    "han": "带好雨具",
+    "pinyin": "dài hǎo yǔjù",
+    "vi": "mang theo đồ dùng khi mưa",
+    "col": "出门带好雨具",
+    "ex": "天气预报说下午有雨，出门带好雨具。",
+    "exv": "Dự báo thời tiết nói chiều có mưa, ra ngoài mang theo đồ dùng khi mưa."
+   },
+   {
+    "han": "避难场所",
+    "pinyin": "bìnàn chǎngsuǒ",
+    "vi": "nơi tránh nạn",
+    "col": "附近的避难场所",
+    "ex": "学校操场是附近的避难场所，地震时可以去那里。",
+    "exv": "Sân trường là nơi tránh nạn gần đây, khi động đất có thể đến đó."
+   },
+   {
+    "han": "救援队伍",
+    "pinyin": "jiùyuán duìwu",
+    "vi": "đội cứu hộ",
+    "col": "救援队伍赶到",
+    "ex": "洪水过后，救援队伍很快赶到了村里。",
+    "exv": "Sau lũ, đội cứu hộ nhanh chóng đến làng."
+   },
+   {
+    "han": "受灾群众",
+    "pinyin": "shòuzāi qúnzhòng",
+    "vi": "người dân bị thiên tai",
+    "col": "帮助受灾群众",
+    "ex": "全国各地都在帮助受灾群众，捐钱捐物。",
+    "exv": "Khắp cả nước đều đang giúp người dân bị thiên tai, quyên tiền quyên đồ."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Đọc sách và thư viện",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "借书还书",
+    "pinyin": "jiè shū huán shū",
+    "vi": "mượn sách trả sách",
+    "col": "按时借书还书",
+    "ex": "图书馆规定，借书还书要按时，不能过期。",
+    "exv": "Thư viện quy định, mượn sách trả sách phải đúng hạn, không được quá hạn."
+   },
+   {
+    "han": "续借图书",
+    "pinyin": "xùjiè túshū",
+    "vi": "gia hạn mượn sách",
+    "col": "可以续借图书",
+    "ex": "这本书还没看完，可以在网上续借图书一次。",
+    "exv": "Quyển sách này chưa đọc xong, có thể gia hạn mượn sách trên mạng một lần."
+   },
+   {
+    "han": "逾期罚款",
+    "pinyin": "yúqī fákuǎn",
+    "vi": "phạt quá hạn",
+    "col": "逾期罚款不多",
+    "ex": "还书晚了三天，逾期罚款不多，只有几块钱。",
+    "exv": "Trả sách muộn ba ngày, phạt quá hạn không nhiều, chỉ vài đồng."
+   },
+   {
+    "han": "书架分类",
+    "pinyin": "shūjià fēnlèi",
+    "vi": "phân loại giá sách",
+    "col": "书架分类清楚",
+    "ex": "这个图书馆书架分类清楚，找书很容易。",
+    "exv": "Thư viện này phân loại giá sách rõ ràng, tìm sách rất dễ."
+   },
+   {
+    "han": "图书目录",
+    "pinyin": "túshū mùlù",
+    "vi": "mục lục sách",
+    "col": "查图书目录",
+    "ex": "找书之前，先在电脑上查图书目录。",
+    "exv": "Trước khi tìm sách, hãy tra mục lục sách trên máy tính trước."
+   },
+   {
+    "han": "查阅资料",
+    "pinyin": "cháyuè zīliào",
+    "vi": "tra cứu tài liệu",
+    "col": "去图书馆查阅资料",
+    "ex": "写论文的时候，他每天去图书馆查阅资料。",
+    "exv": "Khi viết luận văn, ngày nào anh ấy cũng đến thư viện tra cứu tài liệu."
+   },
+   {
+    "han": "出版社",
+    "pinyin": "chūbǎnshè",
+    "vi": "nhà xuất bản",
+    "col": "这家出版社",
+    "ex": "这本书是这家出版社出版的，质量很好。",
+    "exv": "Quyển sách này do nhà xuất bản này xuất bản, chất lượng rất tốt."
+   },
+   {
+    "han": "译者序言",
+    "pinyin": "yìzhě xùyán",
+    "vi": "lời tựa của dịch giả",
+    "col": "译者序言写得好",
+    "ex": "这本译书的译者序言写得好，介绍了作者的生平。",
+    "exv": "Lời tựa của dịch giả trong bản dịch này viết hay, giới thiệu cuộc đời tác giả."
+   },
+   {
+    "han": "插图精美",
+    "pinyin": "chātú jīngměi",
+    "vi": "hình minh họa đẹp",
+    "col": "插图精美的绘本",
+    "ex": "这本绘本插图精美，孩子们都很喜欢。",
+    "exv": "Quyển sách tranh này hình minh họa đẹp, các em nhỏ đều rất thích."
+   },
+   {
+    "han": "封面设计",
+    "pinyin": "fēngmiàn shèjì",
+    "vi": "thiết kế bìa sách",
+    "col": "封面设计很漂亮",
+    "ex": "这本书封面设计很漂亮，在书店里很显眼。",
+    "exv": "Quyển sách này thiết kế bìa rất đẹp, trong hiệu sách rất nổi bật."
+   },
+   {
+    "han": "页码标注",
+    "pinyin": "yèmǎ biāozhù",
+    "vi": "đánh dấu số trang",
+    "col": "页码标注清楚",
+    "ex": "这本词典页码标注清楚，查起来很方便。",
+    "exv": "Quyển từ điển này đánh dấu số trang rõ ràng, tra rất tiện."
+   },
+   {
+    "han": "章节标题",
+    "pinyin": "zhāngjié biāotí",
+    "vi": "tiêu đề chương",
+    "col": "看章节标题",
+    "ex": "读书之前，先看章节标题，了解全书的结构。",
+    "exv": "Trước khi đọc sách, hãy xem tiêu đề chương trước, hiểu cấu trúc toàn sách."
+   },
+   {
+    "han": "段落大意",
+    "pinyin": "duànluò dàyì",
+    "vi": "ý chính của đoạn",
+    "col": "概括段落大意",
+    "ex": "老师让学生概括段落大意，锻炼阅读能力。",
+    "exv": "Cô giáo yêu cầu học sinh tóm tắt ý chính của đoạn, rèn luyện năng lực đọc."
+   },
+   {
+    "han": "内容摘要",
+    "pinyin": "nèiróng zhāiyào",
+    "vi": "tóm tắt nội dung",
+    "col": "写内容摘要",
+    "ex": "每读完一本书，他都要写内容摘要，记在笔记本上。",
+    "exv": "Mỗi khi đọc xong một quyển sách, anh ấy đều viết tóm tắt nội dung, ghi vào sổ."
+   },
+   {
+    "han": "引用名言",
+    "pinyin": "yǐnyòng míngyán",
+    "vi": "trích dẫn danh ngôn",
+    "col": "文章引用名言",
+    "ex": "他的文章常常引用名言，让文章更有说服力。",
+    "exv": "Bài văn của anh ấy thường trích dẫn danh ngôn, làm bài văn thuyết phục hơn."
+   },
+   {
+    "han": "参考书目",
+    "pinyin": "cānkǎo shūmù",
+    "vi": "danh mục sách tham khảo",
+    "col": "列出参考书目",
+    "ex": "论文最后要列出参考书目，说明资料来源。",
+    "exv": "Cuối luận văn phải liệt kê danh mục sách tham khảo, nói rõ nguồn tài liệu."
+   },
+   {
+    "han": "学术期刊",
+    "pinyin": "xuéshù qīkān",
+    "vi": "tạp chí học thuật",
+    "col": "发表在学术期刊",
+    "ex": "他的研究发表在学术期刊上，得到了同行的认可。",
+    "exv": "Nghiên cứu của anh ấy đăng trên tạp chí học thuật, được đồng nghiệp công nhận."
+   },
+   {
+    "han": "畅销书",
+    "pinyin": "chàngxiāoshū",
+    "vi": "sách bán chạy",
+    "col": "一本畅销书",
+    "ex": "这是一本畅销书，上市一个月就卖了十万本。",
+    "exv": "Đây là một quyển sách bán chạy, lên kệ một tháng đã bán mười vạn bản."
+   },
+   {
+    "han": "工具书",
+    "pinyin": "gōngjùshū",
+    "vi": "sách công cụ tra cứu",
+    "col": "工具书放在架子上",
+    "ex": "词典和地图都是工具书，放在架子上随时能查。",
+    "exv": "Từ điển và bản đồ đều là sách công cụ tra cứu, để trên giá lúc nào cũng tra được."
+   },
+   {
+    "han": "词典编纂",
+    "pinyin": "cídiǎn biānzuǎn",
+    "vi": "biên soạn từ điển",
+    "col": "从事词典编纂",
+    "ex": "他从事词典编纂工作二十年了，编过三本词典。",
+    "exv": "Anh ấy làm công việc biên soạn từ điển hai mươi năm rồi, đã biên ba quyển từ điển."
+   }
+  ]
+ },
+ {
+  "topic": "HSK4 — Dịch vụ công và giấy tờ cá nhân",
+  "hsk": "HSK4",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "办理证件",
+    "pinyin": "bànlǐ zhèngjiàn",
+    "vi": "làm giấy tờ",
+    "col": "去办理证件",
+    "ex": "明天上午我要去办理证件，记得带身份证。",
+    "exv": "Sáng mai tôi đi làm giấy tờ, nhớ mang chứng minh thư."
+   },
+   {
+    "han": "身份证件",
+    "pinyin": "shēnfèn zhèngjiàn",
+    "vi": "giấy tờ tùy thân",
+    "col": "出示身份证件",
+    "ex": "进大楼的时候，要出示身份证件登记。",
+    "exv": "Khi vào tòa nhà, phải xuất trình giấy tờ tùy thân để đăng ký."
+   },
+   {
+    "han": "户口本",
+    "pinyin": "hùkǒuběn",
+    "vi": "sổ hộ khẩu",
+    "col": "户口本放在家里",
+    "ex": "户口本放在家里，办手续的时候要带上。",
+    "exv": "Sổ hộ khẩu để ở nhà, khi làm thủ tục phải mang theo."
+   },
+   {
+    "han": "居住证",
+    "pinyin": "jūzhùzhèng",
+    "vi": "giấy chứng nhận cư trú",
+    "col": "办理居住证",
+    "ex": "在外地工作的人，要办理居住证。",
+    "exv": "Người làm việc ở nơi khác phải làm giấy chứng nhận cư trú."
+   },
+   {
+    "han": "工作证明",
+    "pinyin": "gōngzuò zhèngmíng",
+    "vi": "giấy chứng nhận công tác",
+    "col": "开工作证明",
+    "ex": "办签证需要开工作证明，公司可以帮忙开。",
+    "exv": "Làm thị thực cần giấy chứng nhận công tác, công ty có thể giúp mở."
+   },
+   {
+    "han": "收入证明",
+    "pinyin": "shōurù zhèngmíng",
+    "vi": "giấy chứng nhận thu nhập",
+    "col": "提供收入证明",
+    "ex": "贷款的时候，银行要求提供收入证明。",
+    "exv": "Khi vay tiền, ngân hàng yêu cầu cung cấp giấy chứng nhận thu nhập."
+   },
+   {
+    "han": "无犯罪记录",
+    "pinyin": "wú fànzuì jìlù",
+    "vi": "không có tiền án",
+    "col": "开无犯罪记录",
+    "ex": "有些工作要求开无犯罪记录，证明自己没有犯过罪。",
+    "exv": "Một số công việc yêu cầu giấy không có tiền án, chứng minh mình chưa phạm tội."
+   },
+   {
+    "han": "公证材料",
+    "pinyin": "gōngzhèng cáiliào",
+    "vi": "tài liệu công chứng",
+    "col": "准备公证材料",
+    "ex": "出国留学要准备公证材料，提前一个月开始办。",
+    "exv": "Du học nước ngoài phải chuẩn bị tài liệu công chứng, bắt đầu làm trước một tháng."
+   },
+   {
+    "han": "复印身份证",
+    "pinyin": "fùyìn shēnfènzhèng",
+    "vi": "photocopy chứng minh thư",
+    "col": "复印身份证两份",
+    "ex": "办手续要复印身份证两份，一份交上去，一份自己留着。",
+    "exv": "Làm thủ tục phải photocopy chứng minh thư hai bản, một bản nộp lên, một bản tự giữ."
+   },
+   {
+    "han": "填写表格",
+    "pinyin": "tiánxiě biǎogé",
+    "vi": "điền biểu mẫu",
+    "col": "认真填写表格",
+    "ex": "填写表格要认真，名字和号码不能写错。",
+    "exv": "Điền biểu mẫu phải cẩn thận, tên và số không được viết sai."
+   },
+   {
+    "han": "排队等候",
+    "pinyin": "páiduì děnghòu",
+    "vi": "xếp hàng chờ đợi",
+    "col": "排队等候叫号",
+    "ex": "大厅里很多人，大家排队等候叫号。",
+    "exv": "Trong sảnh rất đông người, mọi người xếp hàng chờ gọi số."
+   },
+   {
+    "han": "取号办事",
+    "pinyin": "qǔhào bànshì",
+    "vi": "lấy số làm việc",
+    "col": "先取号办事",
+    "ex": "到了服务中心，先取号办事，再坐着等。",
+    "exv": "Đến trung tâm dịch vụ, lấy số làm việc trước, rồi ngồi chờ."
+   },
+   {
+    "han": "窗口服务",
+    "pinyin": "chuāngkǒu fúwù",
+    "vi": "dịch vụ tại quầy",
+    "col": "窗口服务很好",
+    "ex": "这个大厅窗口服务很好，工作人员很有耐心。",
+    "exv": "Dịch vụ tại quầy của sảnh này rất tốt, nhân viên rất kiên nhẫn."
+   },
+   {
+    "han": "网上预约",
+    "pinyin": "wǎngshang yùyuē",
+    "vi": "đặt lịch hẹn trên mạng",
+    "col": "提前网上预约",
+    "ex": "办护照要提前网上预约，不然排队很久。",
+    "exv": "Làm hộ chiếu phải đặt lịch hẹn trên mạng trước, nếu không xếp hàng rất lâu."
+   },
+   {
+    "han": "办事流程",
+    "pinyin": "bànshì liúchéng",
+    "vi": "quy trình làm việc",
+    "col": "办事流程写在墙上",
+    "ex": "办事流程写在墙上，大家一看就明白。",
+    "exv": "Quy trình làm việc viết trên tường, mọi người nhìn là hiểu ngay."
+   },
+   {
+    "han": "缺少材料",
+    "pinyin": "quēshǎo cáiliào",
+    "vi": "thiếu tài liệu",
+    "col": "因为缺少材料",
+    "ex": "因为缺少材料，他的申请没有通过，要补交。",
+    "exv": "Vì thiếu tài liệu, đơn của anh ấy không được duyệt, phải bổ sung."
+   },
+   {
+    "han": "补交材料",
+    "pinyin": "bǔjiāo cáiliào",
+    "vi": "bổ sung tài liệu",
+    "col": "三天内补交材料",
+    "ex": "工作人员说，三天内补交材料就可以了。",
+    "exv": "Nhân viên nói, trong ba ngày bổ sung tài liệu là được."
+   },
+   {
+    "han": "审核通过",
+    "pinyin": "shěnhé tōngguò",
+    "vi": "thẩm duyệt đạt",
+    "col": "审核通过了",
+    "ex": "等了一个星期，他的申请审核通过了。",
+    "exv": "Chờ một tuần, đơn của anh ấy đã được thẩm duyệt đạt."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Tranh luận và thuyết phục",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "论点明确",
+    "pinyin": "lùndiǎn míngquè",
+    "vi": "luận điểm rõ ràng",
+    "col": "论点明确才有说服力",
+    "ex": "写议论文的时候，论点明确才有说服力。",
+    "exv": "Khi viết văn nghị luận, luận điểm rõ ràng mới có sức thuyết phục."
+   },
+   {
+    "han": "论据充足",
+    "pinyin": "lùnjù chōngzú",
+    "vi": "luận cứ đầy đủ",
+    "col": "论据充足的文章",
+    "ex": "这篇文章论据充足，引用了很多真实数据。",
+    "exv": "Bài văn này luận cứ đầy đủ, trích dẫn nhiều số liệu thật."
+   },
+   {
+    "han": "论证过程",
+    "pinyin": "lùnzhèng guòchéng",
+    "vi": "quá trình lập luận",
+    "col": "论证过程要严密",
+    "ex": "论证过程要严密，不能前后矛盾。",
+    "exv": "Quá trình lập luận phải chặt chẽ, không được trước sau mâu thuẫn."
+   },
+   {
+    "han": "反驳对方",
+    "pinyin": "fǎnbó duìfāng",
+    "vi": "bác bỏ đối phương",
+    "col": "有理有据反驳对方",
+    "ex": "辩论的时候，要有理有据反驳对方，不能只说气话。",
+    "exv": "Khi tranh biện, phải có lý có cứ bác bỏ đối phương, không được chỉ nói lời giận."
+   },
+   {
+    "han": "提出质疑",
+    "pinyin": "tíchū zhìyí",
+    "vi": "đặt nghi vấn",
+    "col": "对这个结论提出质疑",
+    "ex": "有学生对这个结论提出质疑，老师让他说说理由。",
+    "exv": "Có học sinh đặt nghi vấn về kết luận này, thầy giáo bảo em nói lý do."
+   },
+   {
+    "han": "表示赞成",
+    "pinyin": "biǎoshì zànchéng",
+    "vi": "tỏ ý tán thành",
+    "col": "举手表示赞成",
+    "ex": "组长问大家的意见，多数人举手表示赞成。",
+    "exv": "Tổ trưởng hỏi ý kiến mọi người, đa số giơ tay tỏ ý tán thành."
+   },
+   {
+    "han": "加以批评",
+    "pinyin": "jiāyǐ pīpíng",
+    "vi": "phê bình thêm",
+    "col": "对这种做法加以批评",
+    "ex": "老师对这种做法加以批评，希望学生改正。",
+    "exv": "Thầy giáo phê bình thêm cách làm này, mong học sinh sửa chữa."
+   },
+   {
+    "han": "为自己辩护",
+    "pinyin": "wèi zìjǐ biànhù",
+    "vi": "biện hộ cho mình",
+    "col": "为自己辩护的权利",
+    "ex": "每个人都有为自己辩护的权利，先听他说完。",
+    "exv": "Mỗi người đều có quyền biện hộ cho mình, hãy nghe anh ấy nói xong trước."
+   },
+   {
+    "han": "说服力",
+    "pinyin": "shuōfúlì",
+    "vi": "sức thuyết phục",
+    "col": "很有说服力",
+    "ex": "这个例子很有说服力，大家都点头了。",
+    "exv": "Ví dụ này rất có sức thuyết phục, mọi người đều gật đầu."
+   },
+   {
+    "han": "以理服人",
+    "pinyin": "yǐ lǐ fú rén",
+    "vi": "lấy lý lẽ thuyết phục người",
+    "col": "以理服人最重要",
+    "ex": "吵架解决不了问题，以理服人最重要。",
+    "exv": "Cãi nhau không giải quyết được vấn đề, lấy lý lẽ thuyết phục người là quan trọng nhất."
+   },
+   {
+    "han": "以事实说话",
+    "pinyin": "yǐ shìshí shuōhuà",
+    "vi": "lấy sự thật để nói",
+    "col": "我们以事实说话",
+    "ex": "不要凭感觉下结论，我们以事实说话。",
+    "exv": "Đừng dựa vào cảm giác để kết luận, chúng ta lấy sự thật để nói."
+   },
+   {
+    "han": "双赢局面",
+    "pinyin": "shuāngyíng júmiàn",
+    "vi": "cục diện hai bên cùng thắng",
+    "col": "形成双赢局面",
+    "ex": "谈判成功了，双方形成了双赢局面。",
+    "exv": "Đàm phán thành công, hai bên hình thành cục diện hai bên cùng thắng."
+   },
+   {
+    "han": "各执一词",
+    "pinyin": "gè zhí yì cí",
+    "vi": "mỗi người giữ một ý",
+    "col": "双方各执一词",
+    "ex": "关于这件事，双方各执一词，谁也不让谁。",
+    "exv": "Về việc này, hai bên mỗi người giữ một ý, ai cũng không nhường ai."
+   },
+   {
+    "han": "针锋相对",
+    "pinyin": "zhēnfēng xiāngduì",
+    "vi": "đối chọi gay gắt",
+    "col": "辩论针锋相对",
+    "ex": "昨天的辩论针锋相对，观众看得很过瘾。",
+    "exv": "Cuộc tranh biện hôm qua đối chọi gay gắt, khán giả xem rất đã."
+   },
+   {
+    "han": "据理力争",
+    "pinyin": "jù lǐ lì zhēng",
+    "vi": "dựa vào lý lẽ tranh đấu",
+    "col": "据理力争不退让",
+    "ex": "为了维护自己的权利，他据理力争不退让。",
+    "exv": "Để bảo vệ quyền lợi của mình, anh ấy dựa vào lý lẽ tranh đấu không nhượng bộ."
+   },
+   {
+    "han": "让步妥协",
+    "pinyin": "ràngbù tuǒxié",
+    "vi": "nhượng bộ thỏa hiệp",
+    "col": "互相让步妥协",
+    "ex": "合作要长久，双方就要互相让步妥协。",
+    "exv": "Hợp tác muốn lâu dài, hai bên phải nhượng bộ thỏa hiệp lẫn nhau."
+   },
+   {
+    "han": "达成一致",
+    "pinyin": "dáchéng yízhì",
+    "vi": "đạt được nhất trí",
+    "col": "终于达成一致",
+    "ex": "开了三次会，双方终于达成一致。",
+    "exv": "Họp ba lần, hai bên cuối cùng đạt được nhất trí."
+   },
+   {
+    "han": "意见不合",
+    "pinyin": "yìjiàn bù hé",
+    "vi": "ý kiến không hợp nhau",
+    "col": "意见不合很正常",
+    "ex": "意见不合很正常，关键是好好商量。",
+    "exv": "Ý kiến không hợp nhau là bình thường, quan trọng là bàn bạc tử tế."
+   },
+   {
+    "han": "求同存异",
+    "pinyin": "qiú tóng cún yì",
+    "vi": "tìm điểm chung giữ điểm khác",
+    "col": "求同存异向前看",
+    "ex": "朋友之间要学会求同存异向前看，不要总翻旧账。",
+    "exv": "Bạn bè phải học tìm điểm chung giữ điểm khác mà nhìn về phía trước, đừng cứ lật lại chuyện cũ."
+   },
+   {
+    "han": "辩论赛",
+    "pinyin": "biànlùnsài",
+    "vi": "cuộc thi tranh biện",
+    "col": "参加辩论赛",
+    "ex": "她下个月要参加辩论赛，每天都在练习。",
+    "exv": "Tháng sau cô ấy tham gia cuộc thi tranh biện, ngày nào cũng luyện tập."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Quản lý thời gian và áp lực công việc",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "拖延习惯",
+    "pinyin": "tuōyán xíguàn",
+    "vi": "thói quen trì hoãn",
+    "col": "改掉拖延习惯",
+    "ex": "他下决心改掉拖延习惯，不再把事情推到明天。",
+    "exv": "Anh ấy quyết tâm bỏ thói quen trì hoãn, không đẩy việc sang ngày mai nữa."
+   },
+   {
+    "han": "工作效率",
+    "pinyin": "gōngzuò xiàolǜ",
+    "vi": "hiệu suất làm việc",
+    "col": "提高工作效率",
+    "ex": "用好工具可以提高工作效率，少加班。",
+    "exv": "Dùng tốt công cụ có thể nâng cao hiệu suất làm việc, ít làm thêm giờ."
+   },
+   {
+    "han": "专注工作",
+    "pinyin": "zhuānzhù gōngzuò",
+    "vi": "tập trung làm việc",
+    "col": "关掉手机专注工作",
+    "ex": "为了专注工作，他开会的时候关掉手机。",
+    "exv": "Để tập trung làm việc, khi họp anh ấy tắt điện thoại."
+   },
+   {
+    "han": "容易分心",
+    "pinyin": "róngyì fēnxīn",
+    "vi": "dễ bị phân tâm",
+    "col": "一边听歌容易分心",
+    "ex": "他一边听歌一边写报告，容易分心，写得很慢。",
+    "exv": "Anh ấy vừa nghe nhạc vừa viết báo cáo, dễ bị phân tâm, viết rất chậm."
+   },
+   {
+    "han": "制定计划",
+    "pinyin": "zhìdìng jìhuà",
+    "vi": "lập kế hoạch",
+    "col": "提前制定计划",
+    "ex": "做项目之前，要提前制定计划，列出每个步骤。",
+    "exv": "Trước khi làm dự án, phải lập kế hoạch trước, liệt kê từng bước."
+   },
+   {
+    "han": "合理安排",
+    "pinyin": "hélǐ ānpái",
+    "vi": "sắp xếp hợp lý",
+    "col": "合理安排时间",
+    "ex": "合理安排时间，工作和休息都要顾到。",
+    "exv": "Sắp xếp thời gian hợp lý, công việc và nghỉ ngơi đều phải lo."
+   },
+   {
+    "han": "优先处理",
+    "pinyin": "yōuxiān chǔlǐ",
+    "vi": "xử lý ưu tiên",
+    "col": "优先处理急事",
+    "ex": "事情很多的时候，先优先处理急事。",
+    "exv": "Khi việc nhiều, hãy xử lý việc gấp trước."
+   },
+   {
+    "han": "提前完成",
+    "pinyin": "tíqián wánchéng",
+    "vi": "hoàn thành trước hạn",
+    "col": "提前完成任务",
+    "ex": "他提前完成任务，留出时间检查一遍。",
+    "exv": "Anh ấy hoàn thành nhiệm vụ trước hạn, dành thời gian kiểm tra một lượt."
+   },
+   {
+    "han": "推迟交稿",
+    "pinyin": "tuīchí jiāogǎo",
+    "vi": "hoãn nộp bản thảo",
+    "col": "不得不推迟交稿",
+    "ex": "因为生病了，他不得不推迟交稿三天。",
+    "exv": "Vì bị ốm, anh ấy đành hoãn nộp bản thảo ba ngày."
+   },
+   {
+    "han": "临时任务",
+    "pinyin": "línshí rènwu",
+    "vi": "nhiệm vụ đột xuất",
+    "col": "接到临时任务",
+    "ex": "下午三点，他突然接到临时任务，要马上做。",
+    "exv": "Ba giờ chiều, anh ấy đột nhiên nhận nhiệm vụ đột xuất, phải làm ngay."
+   },
+   {
+    "han": "紧急会议",
+    "pinyin": "jǐnjí huìyì",
+    "vi": "cuộc họp khẩn cấp",
+    "col": "召开紧急会议",
+    "ex": "出了问题，公司马上召开紧急会议商量办法。",
+    "exv": "Xảy ra vấn đề, công ty lập tức họp khẩn cấp bàn cách."
+   },
+   {
+    "han": "加班加点",
+    "pinyin": "jiābān jiādiǎn",
+    "vi": "làm thêm giờ thêm điểm",
+    "col": "连续加班加点",
+    "ex": "这个月项目很赶，他连续加班加点，累得不行。",
+    "exv": "Tháng này dự án rất gấp, anh ấy làm thêm giờ liên tục, mệt không chịu nổi."
+   },
+   {
+    "han": "身心疲惫",
+    "pinyin": "shēnxīn píbèi",
+    "vi": "thân tâm mệt mỏi",
+    "col": "感到身心疲惫",
+    "ex": "忙了一个月，他感到身心疲惫，想休息几天。",
+    "exv": "Bận một tháng, anh ấy cảm thấy thân tâm mệt mỏi, muốn nghỉ vài ngày."
+   },
+   {
+    "han": "缓解压力",
+    "pinyin": "huǎnjiě yālì",
+    "vi": "giảm bớt áp lực",
+    "col": "运动缓解压力",
+    "ex": "跑步和游泳都能缓解压力，他每周跑三次。",
+    "exv": "Chạy bộ và bơi đều có thể giảm bớt áp lực, anh ấy mỗi tuần chạy ba lần."
+   },
+   {
+    "han": "调整心态",
+    "pinyin": "tiáozhěng xīntài",
+    "vi": "điều chỉnh tâm thái",
+    "col": "及时调整心态",
+    "ex": "遇到挫折要及时调整心态，不要一直难过。",
+    "exv": "Gặp thất bại phải kịp thời điều chỉnh tâm thái, đừng buồn mãi."
+   },
+   {
+    "han": "劳逸结合",
+    "pinyin": "láoyì jiéhé",
+    "vi": "lao động và nghỉ ngơi kết hợp",
+    "col": "注意劳逸结合",
+    "ex": "学习再忙也要注意劳逸结合，累了就休息。",
+    "exv": "Học bận mấy cũng phải chú ý lao động và nghỉ ngơi kết hợp, mệt thì nghỉ."
+   },
+   {
+    "han": "提高效率",
+    "pinyin": "tígāo xiàolǜ",
+    "vi": "nâng cao hiệu suất",
+    "col": "提高效率的办法",
+    "ex": "列清单是提高效率的办法，做完一项划掉一项。",
+    "exv": "Lập danh sách là cách nâng cao hiệu suất, làm xong mục nào gạch mục đó."
+   },
+   {
+    "han": "时间管理",
+    "pinyin": "shíjiān guǎnlǐ",
+    "vi": "quản lý thời gian",
+    "col": "学好时间管理",
+    "ex": "学好时间管理，一天能做更多有用的事。",
+    "exv": "Học tốt quản lý thời gian, một ngày có thể làm nhiều việc hữu ích hơn."
+   },
+   {
+    "han": "日程表",
+    "pinyin": "rìchéngbiǎo",
+    "vi": "bảng lịch trình",
+    "col": "看一眼日程表",
+    "ex": "每天早上，他先看一眼日程表，再开始工作。",
+    "exv": "Mỗi sáng, anh ấy xem bảng lịch trình trước, rồi mới bắt đầu làm việc."
+   },
+   {
+    "han": "待办事项",
+    "pinyin": "dàibàn shìxiàng",
+    "vi": "việc cần làm",
+    "col": "列出待办事项",
+    "ex": "晚上睡觉前，她把明天的待办事项列出来。",
+    "exv": "Trước khi ngủ tối, cô ấy liệt kê việc cần làm ngày mai ra."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Giáo dục mầm non và gia đình",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "幼儿园",
+    "pinyin": "yòu'éryuán",
+    "vi": "trường mẫu giáo",
+    "col": "送孩子上幼儿园",
+    "ex": "早上八点，妈妈送孩子上幼儿园。",
+    "exv": "Tám giờ sáng, mẹ đưa con đến trường mẫu giáo."
+   },
+   {
+    "han": "托儿所",
+    "pinyin": "tuō'érsuǒ",
+    "vi": "nhà trẻ",
+    "col": "托儿所的阿姨",
+    "ex": "托儿所的阿姨很有耐心，孩子们都喜欢她。",
+    "exv": "Cô ở nhà trẻ rất kiên nhẫn, các em đều thích cô."
+   },
+   {
+    "han": "启蒙教育",
+    "pinyin": "qǐméng jiàoyù",
+    "vi": "giáo dục khai mở",
+    "col": "重视启蒙教育",
+    "ex": "现在家长都很重视启蒙教育，从小培养兴趣。",
+    "exv": "Bây giờ phụ huynh đều coi trọng giáo dục khai mở, từ nhỏ bồi dưỡng hứng thú."
+   },
+   {
+    "han": "寓教于乐",
+    "pinyin": "yù jiào yú lè",
+    "vi": "vừa học vừa chơi",
+    "col": "寓教于乐的游戏",
+    "ex": "老师设计了很多寓教于乐的游戏，孩子玩中学。",
+    "exv": "Cô giáo thiết kế nhiều trò chơi vừa học vừa chơi, trẻ vừa chơi vừa học."
+   },
+   {
+    "han": "亲子活动",
+    "pinyin": "qīnzǐ huódòng",
+    "vi": "hoạt động cha mẹ và con",
+    "col": "周末亲子活动",
+    "ex": "周末学校组织亲子活动，家长和孩子一起做手工。",
+    "exv": "Cuối tuần trường tổ chức hoạt động cha mẹ và con, phụ huynh và trẻ cùng làm thủ công."
+   },
+   {
+    "han": "家长会",
+    "pinyin": "jiāzhǎnghuì",
+    "vi": "họp phụ huynh",
+    "col": "开家长会",
+    "ex": "这个星期五下午开家长会，爸爸妈妈都要去。",
+    "exv": "Chiều thứ sáu tuần này họp phụ huynh, bố mẹ đều phải đi."
+   },
+   {
+    "han": "家庭作业",
+    "pinyin": "jiātíng zuòyè",
+    "vi": "bài tập về nhà",
+    "col": "做家庭作业",
+    "ex": "放学回家，他先做家庭作业，再出去玩。",
+    "exv": "Tan học về nhà, em làm bài tập về nhà trước, rồi mới ra ngoài chơi."
+   },
+   {
+    "han": "辅导功课",
+    "pinyin": "fǔdǎo gōngkè",
+    "vi": "hướng dẫn bài vở",
+    "col": "妈妈辅导功课",
+    "ex": "晚上妈妈辅导功课，教他做数学题。",
+    "exv": "Buổi tối mẹ hướng dẫn bài vở, dạy em làm bài toán."
+   },
+   {
+    "han": "陪孩子玩",
+    "pinyin": "péi háizi wán",
+    "vi": "chơi cùng con",
+    "col": "爸爸陪孩子玩",
+    "ex": "周末爸爸陪孩子玩积木，玩了一下午。",
+    "exv": "Cuối tuần bố chơi cùng con xếp hình, chơi cả buổi chiều."
+   },
+   {
+    "han": "讲故事",
+    "pinyin": "jiǎng gùshi",
+    "vi": "kể chuyện",
+    "col": "奶奶讲故事",
+    "ex": "小时候，奶奶每天晚上给我讲故事。",
+    "exv": "Hồi nhỏ, bà mỗi tối kể chuyện cho tôi."
+   },
+   {
+    "han": "睡前故事",
+    "pinyin": "shuìqián gùshi",
+    "vi": "chuyện kể trước khi ngủ",
+    "col": "听睡前故事",
+    "ex": "孩子听睡前故事，很快就睡着了。",
+    "exv": "Trẻ nghe chuyện kể trước khi ngủ, nhanh chóng ngủ thiếp đi."
+   },
+   {
+    "han": "养成习惯",
+    "pinyin": "yǎngchéng xíguàn",
+    "vi": "hình thành thói quen",
+    "col": "从小养成习惯",
+    "ex": "从小养成习惯，lớn lên làm việc sẽ có nề nếp。",
+    "exv": "Từ nhỏ hình thành thói quen, lớn lên làm việc sẽ có nề nếp."
+   },
+   {
+    "han": "独立自主",
+    "pinyin": "dúlì zìzhǔ",
+    "vi": "độc lập tự chủ",
+    "col": "培养独立自主",
+    "ex": "老师鼓励孩子独立自主，自己的事情自己做。",
+    "exv": "Cô giáo khuyến khích trẻ độc lập tự chủ, việc của mình tự làm."
+   },
+   {
+    "han": "分享玩具",
+    "pinyin": "fēnxiǎng wánjù",
+    "vi": "chia sẻ đồ chơi",
+    "col": "学会分享玩具",
+    "ex": "在幼儿园，孩子要学会分享玩具，不能抢。",
+    "exv": "Ở trường mẫu giáo, trẻ phải học chia sẻ đồ chơi, không được giành."
+   },
+   {
+    "han": "遵守规则",
+    "pinyin": "zūnshǒu guīzé",
+    "vi": "tuân thủ quy tắc",
+    "col": "大家遵守规则",
+    "ex": "玩游戏的时候，大家遵守规则，才玩得开心。",
+    "exv": "Khi chơi trò chơi, mọi người tuân thủ quy tắc thì mới chơi vui."
+   },
+   {
+    "han": "文明礼貌",
+    "pinyin": "wénmíng lǐmào",
+    "vi": "văn minh lịch sự",
+    "col": "做文明礼貌的孩子",
+    "ex": "老师教孩子做文明礼貌的孩子，见人要问好。",
+    "exv": "Cô giáo dạy trẻ làm đứa trẻ văn minh lịch sự, gặp người phải chào hỏi."
+   },
+   {
+    "han": "尊老爱幼",
+    "pinyin": "zūn lǎo ài yòu",
+    "vi": "kính già yêu trẻ",
+    "col": "尊老爱幼是美德",
+    "ex": "尊老爱幼是美德，从小就要教孩子。",
+    "exv": "Kính già yêu trẻ là đức tính tốt, từ nhỏ phải dạy trẻ."
+   },
+   {
+    "han": "孝顺父母",
+    "pinyin": "xiàoshùn fùmǔ",
+    "vi": "hiếu thuận với cha mẹ",
+    "col": "孝顺父母的孩子",
+    "ex": "孝顺父母的孩子，长大也会照顾家人。",
+    "exv": "Đứa trẻ hiếu thuận với cha mẹ, lớn lên cũng sẽ chăm sóc gia đình."
+   },
+   {
+    "han": "隔代教育",
+    "pinyin": "gédài jiàoyù",
+    "vi": "giáo dục cách thế hệ",
+    "col": "隔代教育的问题",
+    "ex": "很多孩子由爷爷奶奶带，隔代教育的问题值得注意。",
+    "exv": "Nhiều trẻ do ông bà nuôi, vấn đề giáo dục cách thế hệ đáng chú ý."
+   },
+   {
+    "han": "留守儿童",
+    "pinyin": "liúshǒu értóng",
+    "vi": "trẻ em ở lại quê",
+    "col": "关心留守儿童",
+    "ex": "社会应该多关心留守儿童，cho các em được gần gũi nhiều hơn。",
+    "exv": "Xã hội nên quan tâm nhiều hơn đến trẻ em ở lại quê, cho các em được gần gũi nhiều hơn."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Đô thị hóa và đời sống thành phố",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "城市化进程",
+    "pinyin": "chéngshìhuà jìnchéng",
+    "vi": "quá trình đô thị hóa",
+    "col": "城市化进程很快",
+    "ex": "近二十年，这个国家的城市化进程很快。",
+    "exv": "Gần hai mươi năm nay, quá trình đô thị hóa của nước này rất nhanh."
+   },
+   {
+    "han": "郊区发展",
+    "pinyin": "jiāoqū fāzhǎn",
+    "vi": "phát triển ngoại ô",
+    "col": "郊区发展起来",
+    "ex": "地铁修到郊区以后，郊区发展起来了。",
+    "exv": "Sau khi tàu điện ngầm xây đến ngoại ô, ngoại ô phát triển lên."
+   },
+   {
+    "han": "旧城改造",
+    "pinyin": "jiùchéng gǎizào",
+    "vi": "cải tạo khu phố cũ",
+    "col": "旧城改造工程",
+    "ex": "旧城改造工程让老街区变干净了，也保留了老味道。",
+    "exv": "Công trình cải tạo khu phố cũ làm khu phố cổ sạch hơn, cũng giữ được hương vị cũ."
+   },
+   {
+    "han": "拆迁安置",
+    "pinyin": "chāiqiān ānzhì",
+    "vi": "di dời và bố trí chỗ ở",
+    "col": "拆迁安置工作",
+    "ex": "政府认真做好拆迁安置工作，让居民住进新房。",
+    "exv": "Chính phủ làm tốt công tác di dời và bố trí chỗ ở, để dân cư vào ở nhà mới."
+   },
+   {
+    "han": "人口密集",
+    "pinyin": "rénkǒu mìjí",
+    "vi": "dân cư đông đúc",
+    "col": "人口密集的地区",
+    "ex": "市中心是人口密集的地区，上下班特别挤。",
+    "exv": "Trung tâm thành phố là khu vực dân cư đông đúc, giờ đi làm đặc biệt chật."
+   },
+   {
+    "han": "交通拥堵",
+    "pinyin": "jiāotōng yōngdǔ",
+    "vi": "giao thông tắc nghẽn",
+    "col": "交通拥堵严重",
+    "ex": "早晚高峰的时候，交通拥堵严重，开车不如坐地铁。",
+    "exv": "Lúc cao điểm sáng tối, giao thông tắc nghẽn nghiêm trọng, lái xe không bằng đi tàu điện ngầm."
+   },
+   {
+    "han": "环境绿化",
+    "pinyin": "huánjìng lǜhuà",
+    "vi": "phủ xanh môi trường",
+    "col": "加强环境绿化",
+    "ex": "城市加强环境绿化，种了很多树，空气变好了。",
+    "exv": "Thành phố tăng cường phủ xanh môi trường, trồng nhiều cây, không khí tốt lên."
+   },
+   {
+    "han": "公共设施",
+    "pinyin": "gōnggòng shèshī",
+    "vi": "cơ sở công cộng",
+    "col": "完善公共设施",
+    "ex": "新小区完善公共设施，有公园、图书馆和运动场。",
+    "exv": "Khu dân cư mới hoàn thiện cơ sở công cộng, có công viên, thư viện và sân vận động."
+   },
+   {
+    "han": "社区服务",
+    "pinyin": "shèqū fúwù",
+    "vi": "dịch vụ cộng đồng",
+    "col": "社区服务中心",
+    "ex": "社区服务中心可以帮老人理发，还能借书。",
+    "exv": "Trung tâm dịch vụ cộng đồng có thể giúp người già cắt tóc, còn có thể mượn sách."
+   },
+   {
+    "han": "物业管理",
+    "pinyin": "wùyè guǎnlǐ",
+    "vi": "quản lý bất động sản",
+    "col": "物业管理很好",
+    "ex": "这个小区的物业管理很好，楼道天天都干净。",
+    "exv": "Quản lý bất động sản của khu này rất tốt, hành lang ngày nào cũng sạch."
+   },
+   {
+    "han": "业主委员会",
+    "pinyin": "yèzhǔ wěiyuánhuì",
+    "vi": "ban đại diện chủ sở hữu",
+    "col": "成立业主委员会",
+    "ex": "居民成立业主委员会，跟物业商量小区的大小事。",
+    "exv": "Cư dân thành lập ban đại diện chủ sở hữu, bàn với ban quản lý việc lớn nhỏ của khu."
+   },
+   {
+    "han": "邻里关系",
+    "pinyin": "línlǐ guānxi",
+    "vi": "quan hệ hàng xóm",
+    "col": "邻里关系和睦",
+    "ex": "这个小区邻里关系和睦，谁家有事大家都帮忙。",
+    "exv": "Khu này quan hệ hàng xóm hòa thuận, nhà ai có việc mọi người đều giúp."
+   },
+   {
+    "han": "生活节奏",
+    "pinyin": "shēnghuó jiézòu",
+    "vi": "nhịp sống",
+    "col": "生活节奏很快",
+    "ex": "大城市生活节奏很快，年轻人常常加班。",
+    "exv": "Nhịp sống thành phố lớn rất nhanh, người trẻ thường làm thêm giờ."
+   },
+   {
+    "han": "工作机会",
+    "pinyin": "gōngzuò jīhuì",
+    "vi": "cơ hội việc làm",
+    "col": "工作机会很多",
+    "ex": "大城市工作机会很多，吸引了很多年轻人来。",
+    "exv": "Thành phố lớn có nhiều cơ hội việc làm, thu hút nhiều người trẻ đến."
+   },
+   {
+    "han": "房价高涨",
+    "pinyin": "fángjià gāozhǎng",
+    "vi": "giá nhà tăng cao",
+    "col": "房价高涨买不起",
+    "ex": "这几年房价高涨，很多年轻人买不起房。",
+    "exv": "Mấy năm nay giá nhà tăng cao, nhiều người trẻ không mua nổi nhà."
+   },
+   {
+    "han": "租房市场",
+    "pinyin": "zūfáng shìchǎng",
+    "vi": "thị trường thuê nhà",
+    "col": "租房市场很活跃",
+    "ex": "开学季到了，租房市场很活跃，房子不好找。",
+    "exv": "Mùa khai giảng đến, thị trường thuê nhà rất sôi động, nhà khó tìm."
+   },
+   {
+    "han": "外来人口",
+    "pinyin": "wàilái rénkǒu",
+    "vi": "dân nhập cư",
+    "col": "外来人口很多",
+    "ex": "这个城市外来人口很多，来自全国各地。",
+    "exv": "Thành phố này dân nhập cư rất đông, đến từ khắp cả nước."
+   },
+   {
+    "han": "本地居民",
+    "pinyin": "běndì jūmín",
+    "vi": "cư dân địa phương",
+    "col": "本地居民很热情",
+    "ex": "本地居民很热情，常常给新来的人指路。",
+    "exv": "Cư dân địa phương rất nhiệt tình, thường chỉ đường cho người mới đến."
+   },
+   {
+    "han": "城乡差距",
+    "pinyin": "chéng xiāng chājù",
+    "vi": "khoảng cách thành thị nông thôn",
+    "col": "缩小城乡差距",
+    "ex": "国家想办法缩小城乡差距，让农村也富起来。",
+    "exv": "Nhà nước tìm cách thu hẹp khoảng cách thành thị nông thôn, để nông thôn cũng giàu lên."
+   },
+   {
+    "han": "返乡创业",
+    "pinyin": "fǎnxiāng chuàngyè",
+    "vi": "về quê khởi nghiệp",
+    "col": "回乡返乡创业",
+    "ex": "大学毕业以后，他选择返乡创业，开了一家网店。",
+    "exv": "Sau khi tốt nghiệp đại học, anh ấy chọn về quê khởi nghiệp, mở một cửa hàng online."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Tiêu dùng thông minh và quảng cáo",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "广告代言",
+    "pinyin": "guǎnggào dàiyán",
+    "vi": "quảng cáo đại diện",
+    "col": "请明星广告代言",
+    "ex": "这个品牌请明星广告代言，销量一下子涨了很多。",
+    "exv": "Thương hiệu này mời ngôi sao quảng cáo đại diện, doanh số tăng lên rất nhiều ngay lập tức."
+   },
+   {
+    "han": "品牌形象",
+    "pinyin": "pǐnpái xíngxiàng",
+    "vi": "hình ảnh thương hiệu",
+    "col": "维护品牌形象",
+    "ex": "公司很注意维护品牌形象，不做虚假广告。",
+    "exv": "Công ty rất chú ý giữ gìn hình ảnh thương hiệu, không làm quảng cáo giả."
+   },
+   {
+    "han": "注册商标",
+    "pinyin": "zhùcè shāngbiāo",
+    "vi": "đăng ký nhãn hiệu",
+    "col": "注册商标受保护",
+    "ex": "注册商标受保护，别人不能随便用。",
+    "exv": "Nhãn hiệu đã đăng ký được bảo vệ, người khác không được tùy tiện dùng."
+   },
+   {
+    "han": "仿冒产品",
+    "pinyin": "fǎngmào chǎnpǐn",
+    "vi": "sản phẩm nhái",
+    "col": "小心仿冒产品",
+    "ex": "在网上买东西要小心仿冒产品，认准官方店。",
+    "exv": "Mua đồ trên mạng phải cẩn thận sản phẩm nhái, nhận đúng cửa hàng chính thức."
+   },
+   {
+    "han": "正版保证",
+    "pinyin": "zhèngbǎn bǎozhèng",
+    "vi": "đảm bảo chính hãng",
+    "col": "正版保证假一赔十",
+    "ex": "这家店正版保证假一赔十，买着放心。",
+    "exv": "Cửa hàng này đảm bảo chính hãng, giả đền gấp mười, mua rất yên tâm."
+   },
+   {
+    "han": "理性消费",
+    "pinyin": "lǐxìng xiāofèi",
+    "vi": "tiêu dùng lý trí",
+    "col": "提倡理性消费",
+    "ex": "老师提倡理性消费，买东西先想想是不是真的需要。",
+    "exv": "Thầy giáo đề xướng tiêu dùng lý trí, mua đồ trước tiên nghĩ xem có thật sự cần không."
+   },
+   {
+    "han": "冲动购物",
+    "pinyin": "chōngdòng gòuwù",
+    "vi": "mua sắm bốc đồng",
+    "col": "避免冲动购物",
+    "ex": "为了避免冲动购物，她把购物车放三天再买。",
+    "exv": "Để tránh mua sắm bốc đồng, cô ấy để giỏ hàng ba ngày rồi mới mua."
+   },
+   {
+    "han": "团购优惠",
+    "pinyin": "tuángòu yōuhuì",
+    "vi": "ưu đãi mua theo nhóm",
+    "col": "团购优惠很划算",
+    "ex": "跟朋友一起团购优惠很划算，省了不少钱。",
+    "exv": "Cùng bạn bè mua theo nhóm ưu đãi rất hời, tiết kiệm không ít tiền."
+   },
+   {
+    "han": "直播带货",
+    "pinyin": "zhíbò dàihuò",
+    "vi": "bán hàng qua livestream",
+    "col": "看直播带货",
+    "ex": "很多人喜欢看直播带货，主播一边讲一边卖。",
+    "exv": "Nhiều người thích xem bán hàng qua livestream, người dẫn vừa nói vừa bán."
+   },
+   {
+    "han": "网红推荐",
+    "pinyin": "wǎnghóng tuījiàn",
+    "vi": "người nổi tiếng mạng giới thiệu",
+    "col": "网红推荐的东西",
+    "ex": "网红推荐的东西不一定都好，买之前要多看看评价。",
+    "exv": "Đồ người nổi tiếng mạng giới thiệu chưa chắc đều tốt, trước khi mua phải xem nhiều đánh giá."
+   },
+   {
+    "han": "种草拔草",
+    "pinyin": "zhòngcǎo bácǎo",
+    "vi": "gieo cỏ nhổ cỏ (muốn mua rồi mua)",
+    "col": "先种草拔草",
+    "ex": "她先种草拔草，看了很多测评才下单。",
+    "exv": "Cô ấy gieo cỏ rồi nhổ cỏ, xem nhiều bài đánh giá mới đặt hàng."
+   },
+   {
+    "han": "货真价实",
+    "pinyin": "huò zhēn jià shí",
+    "vi": "hàng thật giá thật",
+    "col": "货真价实的店",
+    "ex": "这家店货真价实，老顾客特别多。",
+    "exv": "Cửa hàng này hàng thật giá thật, khách quen đặc biệt đông."
+   },
+   {
+    "han": "假冒伪劣",
+    "pinyin": "jiǎmào wěiliè",
+    "vi": "hàng giả kém chất lượng",
+    "col": "打击假冒伪劣",
+    "ex": "市场要严厉打击假冒伪劣，保护消费者。",
+    "exv": "Thị trường phải nghiêm khắc đánh hàng giả kém chất lượng, bảo vệ người tiêu dùng."
+   },
+   {
+    "han": "消费者权益",
+    "pinyin": "xiāofèizhě quányì",
+    "vi": "quyền lợi người tiêu dùng",
+    "col": "维护消费者权益",
+    "ex": "买到假货可以投诉，维护消费者权益。",
+    "exv": "Mua phải hàng giả có thể khiếu nại, bảo vệ quyền lợi người tiêu dùng."
+   },
+   {
+    "han": "投诉渠道",
+    "pinyin": "tóusù qúdào",
+    "vi": "kênh khiếu nại",
+    "col": "投诉渠道很多",
+    "ex": "现在投诉渠道很多，电话、网站都可以投诉。",
+    "exv": "Bây giờ kênh khiếu nại rất nhiều, điện thoại, trang web đều có thể khiếu nại."
+   },
+   {
+    "han": "退换货",
+    "pinyin": "tuì huàn huò",
+    "vi": "trả và đổi hàng",
+    "col": "支持退换货",
+    "ex": "这件衣服不合身，店里支持退换货。",
+    "exv": "Chiếc áo này không vừa, cửa hàng hỗ trợ trả và đổi hàng."
+   },
+   {
+    "han": "七天无理由",
+    "pinyin": "qī tiān wú lǐyóu",
+    "vi": "bảy ngày không cần lý do",
+    "col": "七天无理由退货",
+    "ex": "网上买的衣服可以七天无理由退货，很方便。",
+    "exv": "Quần áo mua trên mạng có thể trả hàng bảy ngày không cần lý do, rất tiện."
+   },
+   {
+    "han": "保价服务",
+    "pinyin": "bǎojià fúwù",
+    "vi": "dịch vụ bảo đảm giá",
+    "col": "提供保价服务",
+    "ex": "大促期间很多店提供保价服务，买贵了可以退差价。",
+    "exv": "Trong đợt khuyến mãi lớn nhiều cửa hàng cung cấp dịch vụ bảo đảm giá, mua đắt có thể trả lại chênh lệch."
+   },
+   {
+    "han": "会员积分",
+    "pinyin": "huìyuán jīfēn",
+    "vi": "điểm tích lũy hội viên",
+    "col": "用会员积分换东西",
+    "ex": "她的会员积分很多，可以用会员积分换东西。",
+    "exv": "Điểm tích lũy hội viên của cô ấy rất nhiều, có thể dùng điểm đổi đồ."
+   },
+   {
+    "han": "满减活动",
+    "pinyin": "mǎn jiǎn huódòng",
+    "vi": "hoạt động giảm giá khi đủ mức",
+    "col": "参加满减活动",
+    "ex": "双十一参加满减活动，买得越多省得越多。",
+    "exv": "Ngày 11/11 tham gia hoạt động giảm giá khi đủ mức, mua càng nhiều tiết kiệm càng nhiều."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Khoa học đời sống và sức khỏe cộng đồng",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "营养均衡",
+    "pinyin": "yíngyǎng jūnhéng",
+    "vi": "dinh dưỡng cân bằng",
+    "col": "注意营养均衡",
+    "ex": "吃饭要注意营养均衡，肉菜搭配着吃。",
+    "exv": "Ăn cơm phải chú ý dinh dưỡng cân bằng, thịt rau ăn phối hợp."
+   },
+   {
+    "han": "脂肪含量",
+    "pinyin": "zhīfáng hánliàng",
+    "vi": "hàm lượng chất béo",
+    "col": "脂肪含量很高",
+    "ex": "油炸食品脂肪含量很高，少吃为好。",
+    "exv": "Đồ chiên rán hàm lượng chất béo rất cao, ít ăn thì tốt hơn."
+   },
+   {
+    "han": "卡路里",
+    "pinyin": "kǎlùlǐ",
+    "vi": "calo",
+    "col": "卡路里不低",
+    "ex": "一杯奶茶的卡路里不低，减肥的人要少喝。",
+    "exv": "Một cốc trà sữa calo không thấp, người giảm cân phải ít uống."
+   },
+   {
+    "han": "控制体重",
+    "pinyin": "kòngzhì tǐzhòng",
+    "vi": "kiểm soát cân nặng",
+    "col": "运动控制体重",
+    "ex": "他每天跑步，就是为了控制体重。",
+    "exv": "Anh ấy ngày nào cũng chạy bộ, chính là để kiểm soát cân nặng."
+   },
+   {
+    "han": "减肥方法",
+    "pinyin": "jiǎnféi fāngfǎ",
+    "vi": "phương pháp giảm cân",
+    "col": "科学的减肥方法",
+    "ex": "科学的减肥方法是管住嘴、迈开腿，不要吃减肥药。",
+    "exv": "Phương pháp giảm cân khoa học là kiểm soát ăn uống, vận động nhiều, đừng uống thuốc giảm cân."
+   },
+   {
+    "han": "戒烟戒酒",
+    "pinyin": "jiè yān jiè jiǔ",
+    "vi": "cai thuốc cai rượu",
+    "col": "决心戒烟戒酒",
+    "ex": "为了身体健康，他决心戒烟戒酒。",
+    "exv": "Vì sức khỏe, anh ấy quyết tâm cai thuốc cai rượu."
+   },
+   {
+    "han": "定期体检",
+    "pinyin": "dìngqī tǐjiǎn",
+    "vi": "khám sức khỏe định kỳ",
+    "col": "每年定期体检",
+    "ex": "公司每年组织员工定期体检，发现问题早治疗。",
+    "exv": "Công ty mỗi năm tổ chức nhân viên khám sức khỏe định kỳ, phát hiện vấn đề chữa sớm."
+   },
+   {
+    "han": "接种疫苗",
+    "pinyin": "jiēzhòng yìmiáo",
+    "vi": "tiêm vaccine",
+    "col": "孩子接种疫苗",
+    "ex": "孩子出生以后，要按时接种疫苗。",
+    "exv": "Sau khi trẻ ra đời, phải tiêm vaccine đúng lịch."
+   },
+   {
+    "han": "隔离观察",
+    "pinyin": "gélí guānchá",
+    "vi": "cách ly theo dõi",
+    "col": "居家隔离观察",
+    "ex": "从外地回来的人，要居家隔离观察几天。",
+    "exv": "Người từ nơi khác về phải cách ly theo dõi tại nhà vài ngày."
+   },
+   {
+    "han": "传染途径",
+    "pinyin": "chuánrǎn tújìng",
+    "vi": "đường lây truyền",
+    "col": "了解传染途径",
+    "ex": "了解传染途径，才能更好地预防疾病。",
+    "exv": "Hiểu đường lây truyền mới có thể phòng bệnh tốt hơn."
+   },
+   {
+    "han": "增强免疫",
+    "pinyin": "zēngqiáng miǎnyì",
+    "vi": "tăng cường miễn dịch",
+    "col": "锻炼增强免疫",
+    "ex": "经常锻炼、按时睡觉，都能增强免疫。",
+    "exv": "Thường xuyên tập luyện, ngủ đúng giờ đều có thể tăng cường miễn dịch."
+   },
+   {
+    "han": "健康宣传",
+    "pinyin": "jiànkāng xuānchuán",
+    "vi": "tuyên truyền sức khỏe",
+    "col": "开展健康宣传",
+    "ex": "社区开展健康宣传，教大家怎么吃得健康。",
+    "exv": "Cộng đồng triển khai tuyên truyền sức khỏe, dạy mọi người ăn uống lành mạnh thế nào."
+   },
+   {
+    "han": "心理咨询",
+    "pinyin": "xīnlǐ zīxún",
+    "vi": "tư vấn tâm lý",
+    "col": "寻求心理咨询",
+    "ex": "心情不好很久了，可以寻求心理咨询，不用不好意思。",
+    "exv": "Tâm trạng không tốt đã lâu, có thể tìm tư vấn tâm lý, không cần ngại."
+   },
+   {
+    "han": "急救知识",
+    "pinyin": "jíjiù zhīshi",
+    "vi": "kiến thức cấp cứu",
+    "col": "学习急救知识",
+    "ex": "每个人都应该学习急救知识，关键时候能救人。",
+    "exv": "Mỗi người đều nên học kiến thức cấp cứu, lúc quan trọng có thể cứu người."
+   },
+   {
+    "han": "献血活动",
+    "pinyin": "xiànxuè huódòng",
+    "vi": "hoạt động hiến máu",
+    "col": "参加献血活动",
+    "ex": "大学组织献血活动，很多学生都去参加了。",
+    "exv": "Trường đại học tổ chức hoạt động hiến máu, nhiều sinh viên đều đi tham gia."
+   },
+   {
+    "han": "无偿献血",
+    "pinyin": "wúcháng xiànxuè",
+    "vi": "hiến máu không nhận tiền",
+    "col": "无偿献血光荣",
+    "ex": "无偿献血光荣，他已经献了三次血。",
+    "exv": "Hiến máu không nhận tiền là vinh quang, anh ấy đã hiến máu ba lần rồi."
+   },
+   {
+    "han": "献爱心",
+    "pinyin": "xiàn àixīn",
+    "vi": "dâng tặng tình yêu thương",
+    "col": "为灾区献爱心",
+    "ex": "大家纷纷为灾区献爱心，捐钱捐物。",
+    "exv": "Mọi người đều dâng tặng tình yêu thương cho vùng thiên tai, quyên tiền quyên đồ."
+   },
+   {
+    "han": "膳食搭配",
+    "pinyin": "shànshí dāpèi",
+    "vi": "phối hợp bữa ăn",
+    "col": "合理膳食搭配",
+    "ex": "合理膳食搭配很重要，主食、蔬菜、肉类都要有。",
+    "exv": "Phối hợp bữa ăn hợp lý rất quan trọng, cơm, rau, thịt đều phải có."
+   },
+   {
+    "han": "饮食规律",
+    "pinyin": "yǐnshí guīlǜ",
+    "vi": "ăn uống điều độ",
+    "col": "保持饮食规律",
+    "ex": "保持饮食规律，一日三餐按时吃，不要暴饮暴食。",
+    "exv": "Giữ ăn uống điều độ, một ngày ba bữa ăn đúng giờ, đừng ăn uống vô độ."
+   },
+   {
+    "han": "作息规律",
+    "pinyin": "zuòxī guīlǜ",
+    "vi": "sinh hoạt điều độ",
+    "col": "作息规律很重要",
+    "ex": "作息规律很重要，早睡早起身体好。",
+    "exv": "Sinh hoạt điều độ rất quan trọng, ngủ sớm dậy sớm cơ thể khỏe."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Văn học dân gian và truyện kể",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "民间传说",
+    "pinyin": "mínjiān chuánshuō",
+    "vi": "truyền thuyết dân gian",
+    "col": "流传的民间传说",
+    "ex": "白蛇传是流传很广的民间传说，很多人都知道。",
+    "exv": "Truyền thuyết Bạch Xà là truyền thuyết dân gian lưu truyền rất rộng, nhiều người đều biết."
+   },
+   {
+    "han": "神话故事",
+    "pinyin": "shénhuà gùshi",
+    "vi": "chuyện thần thoại",
+    "col": "讲神话故事",
+    "ex": "奶奶给孙子讲神话故事，讲盘古开天地。",
+    "exv": "Bà kể chuyện thần thoại cho cháu, kể Bàn Cổ khai thiên lập địa."
+   },
+   {
+    "han": "寓言故事",
+    "pinyin": "yùyán gùshi",
+    "vi": "chuyện ngụ ngôn",
+    "col": "寓言故事有道理",
+    "ex": "寓言故事有道理，读完让人想一想。",
+    "exv": "Chuyện ngụ ngôn có đạo lý, đọc xong làm người ta suy nghĩ."
+   },
+   {
+    "han": "童话世界",
+    "pinyin": "tónghuà shìjiè",
+    "vi": "thế giới cổ tích",
+    "col": "走进童话世界",
+    "ex": "打开这本书，就像走进童话世界，到处是魔法。",
+    "exv": "Mở quyển sách này ra, giống như bước vào thế giới cổ tích, đâu đâu cũng là phép thuật."
+   },
+   {
+    "han": "民间谚语",
+    "pinyin": "mínjiān yànyǔ",
+    "vi": "tục ngữ dân gian",
+    "col": "一句民间谚语",
+    "ex": "“早起的鸟儿有虫吃”是一句民间谚语，意思是勤奋有回报。",
+    "exv": "“Chim dậy sớm có sâu ăn” là một câu tục ngữ dân gian, ý là chăm chỉ có đền đáp."
+   },
+   {
+    "han": "成语典故",
+    "pinyin": "chéngyǔ diǎngù",
+    "vi": "điển cố thành ngữ",
+    "col": "成语典故很有趣",
+    "ex": "很多成语典故很有趣，背后都有一个故事。",
+    "exv": "Nhiều điển cố thành ngữ rất thú vị, đằng sau đều có một câu chuyện."
+   },
+   {
+    "han": "对联春联",
+    "pinyin": "duìlián chūnlián",
+    "vi": "câu đối và câu đối xuân",
+    "col": "贴对联春联",
+    "ex": "过年的时候，家家户户贴对联春联，红红火火。",
+    "exv": "Khi ăn Tết, nhà nhà dán câu đối và câu đối xuân, đỏ rực vui vẻ."
+   },
+   {
+    "han": "剪纸艺术",
+    "pinyin": "jiǎnzhǐ yìshù",
+    "vi": "nghệ thuật cắt giấy",
+    "col": "剪纸艺术很精巧",
+    "ex": "剪纸艺术很精巧，一张红纸能剪出花鸟鱼虫。",
+    "exv": "Nghệ thuật cắt giấy rất tinh xảo, một tờ giấy đỏ có thể cắt ra hoa chim cá sâu."
+   },
+   {
+    "han": "刺绣工艺",
+    "pinyin": "cìxiù gōngyì",
+    "vi": "nghề thêu",
+    "col": "刺绣工艺精美",
+    "ex": "苏州的刺绣工艺精美，一针一线都很细。",
+    "exv": "Nghề thêu Tô Châu tinh mỹ, từng mũi kim sợi chỉ đều rất tỉ mỉ."
+   },
+   {
+    "han": "陶瓷制作",
+    "pinyin": "táocí zhìzuò",
+    "vi": "chế tác gốm sứ",
+    "col": "陶瓷制作过程",
+    "ex": "陶瓷制作过程很复杂，要经过选土、成型、烧制。",
+    "exv": "Quá trình chế tác gốm sứ rất phức tạp, phải qua chọn đất, tạo hình, nung."
+   },
+   {
+    "han": "书法作品",
+    "pinyin": "shūfǎ zuòpǐn",
+    "vi": "tác phẩm thư pháp",
+    "col": "书法作品展览",
+    "ex": "博物馆办了书法作品展览，吸引了很多观众。",
+    "exv": "Bảo tàng tổ chức triển lãm tác phẩm thư pháp, thu hút nhiều khán giả."
+   },
+   {
+    "han": "国画山水",
+    "pinyin": "guóhuà shānshuǐ",
+    "vi": "tranh thủy mặc sơn thủy",
+    "col": "画国画山水",
+    "ex": "爷爷喜欢画国画山水，画里的山水很有意境。",
+    "exv": "Ông thích vẽ tranh thủy mặc sơn thủy, sơn thủy trong tranh rất có ý cảnh."
+   },
+   {
+    "han": "京剧脸谱",
+    "pinyin": "jīngjù liǎnpǔ",
+    "vi": "mặt nạ kinh kịch",
+    "col": "京剧脸谱颜色",
+    "ex": "京剧脸谱颜色不同，代表的人物性格也不同。",
+    "exv": "Mặt nạ kinh kịch màu sắc khác nhau, tính cách nhân vật đại diện cũng khác nhau."
+   },
+   {
+    "han": "相声小品",
+    "pinyin": "xiàngsheng xiǎopǐn",
+    "vi": "tướng thanh và tiểu phẩm",
+    "col": "看相声小品",
+    "ex": "过年看相声小品，全家人笑个不停。",
+    "exv": "Ăn Tết xem tướng thanh và tiểu phẩm, cả nhà cười không ngừng."
+   },
+   {
+    "han": "传统戏曲",
+    "pinyin": "chuántǒng xìqǔ",
+    "vi": "hí khúc truyền thống",
+    "col": "传统戏曲要传承",
+    "ex": "传统戏曲要传承，年轻人也要多了解。",
+    "exv": "Hí khúc truyền thống phải được truyền lại, người trẻ cũng phải tìm hiểu nhiều."
+   },
+   {
+    "han": "地方戏",
+    "pinyin": "dìfāng xì",
+    "vi": "hí kịch địa phương",
+    "col": "各地的地方戏",
+    "ex": "中国各地的地方戏很多，唱腔各不相同。",
+    "exv": "Hí kịch địa phương khắp Trung Quốc rất nhiều, giọng hát mỗi nơi khác nhau."
+   },
+   {
+    "han": "说书人",
+    "pinyin": "shuōshūrén",
+    "vi": "người kể chuyện",
+    "col": "茶馆里的说书人",
+    "ex": "以前茶馆里的说书人，一讲就是一下午。",
+    "exv": "Ngày xưa người kể chuyện trong quán trà, kể một lần là cả buổi chiều."
+   },
+   {
+    "han": "评书艺术",
+    "pinyin": "píngshū yìshù",
+    "vi": "nghệ thuật bình thư",
+    "col": "评书艺术讲故事",
+    "ex": "评书艺术讲故事生动，听众听得入迷。",
+    "exv": "Nghệ thuật bình thư kể chuyện sinh động, thính giả nghe say mê."
+   },
+   {
+    "han": "民间艺人",
+    "pinyin": "mínjiān yìrén",
+    "vi": "nghệ nhân dân gian",
+    "col": "民间艺人手艺好",
+    "ex": "民间艺人手艺好，一块糖也能吹出小动物。",
+    "exv": "Nghệ nhân dân gian tay nghề giỏi, một miếng đường cũng thổi ra con vật nhỏ."
+   },
+   {
+    "han": "非遗保护",
+    "pinyin": "fēiyí bǎohù",
+    "vi": "bảo vệ di sản phi vật thể",
+    "col": "加强非遗保护",
+    "ex": "国家加强非遗保护，让老手艺传下去。",
+    "exv": "Nhà nước tăng cường bảo vệ di sản phi vật thể, để nghề cũ truyền xuống."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Giải đấu thể thao và cổ động viên",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "裁判判罚",
+    "pinyin": "cáipàn pànfá",
+    "vi": "trọng tài xử phạt",
+    "col": "裁判判罚有争议",
+    "ex": "这次裁判判罚有争议，球迷在网上讨论了很久。",
+    "exv": "Lần này trọng tài xử phạt gây tranh cãi, người hâm mộ bàn luận trên mạng rất lâu."
+   },
+   {
+    "han": "主教练",
+    "pinyin": "zhǔ jiàoliàn",
+    "vi": "huấn luyện viên trưởng",
+    "col": "主教练的战术",
+    "ex": "主教练的战术很成功，球队连赢了三场。",
+    "exv": "Chiến thuật của huấn luyện viên trưởng rất thành công, đội thắng liên tiếp ba trận."
+   },
+   {
+    "han": "参赛队员",
+    "pinyin": "cānsài duìyuán",
+    "vi": "đội viên tham gia thi đấu",
+    "col": "参赛队员很努力",
+    "ex": "参赛队员很努力，每天训练六个小时。",
+    "exv": "Đội viên tham gia thi đấu rất cố gắng, mỗi ngày tập sáu tiếng."
+   },
+   {
+    "han": "对手实力",
+    "pinyin": "duìshǒu shílì",
+    "vi": "thực lực đối thủ",
+    "col": "对手实力很强",
+    "ex": "对手实力很强，我们不能轻敌。",
+    "exv": "Thực lực đối thủ rất mạnh, chúng ta không được khinh địch."
+   },
+   {
+    "han": "冠军奖杯",
+    "pinyin": "guànjūn jiǎngbēi",
+    "vi": "cúp vô địch",
+    "col": "举起冠军奖杯",
+    "ex": "比赛结束，队长举起冠军奖杯，全场欢呼。",
+    "exv": "Trận đấu kết thúc, đội trưởng giơ cao cúp vô địch, cả sân reo hò."
+   },
+   {
+    "han": "金牌银牌",
+    "pinyin": "jīnpái yínpái",
+    "vi": "huy chương vàng và bạc",
+    "col": "金牌银牌都光荣",
+    "ex": "不管是金牌银牌都光荣，都是努力的结果。",
+    "exv": "Dù là huy chương vàng hay bạc đều vinh quang, đều là kết quả của nỗ lực."
+   },
+   {
+    "han": "点球大战",
+    "pinyin": "diǎnqiú dàzhàn",
+    "vi": "loạt sút luân lưu",
+    "col": "进入点球大战",
+    "ex": "两队打平了，比赛进入点球大战，气氛很紧张。",
+    "exv": "Hai đội hòa nhau, trận đấu bước vào loạt sút luân lưu, bầu không khí rất căng thẳng."
+   },
+   {
+    "han": "犯规动作",
+    "pinyin": "fànguī dòngzuò",
+    "vi": "động tác phạm lỗi",
+    "col": "犯规动作被罚",
+    "ex": "他的犯规动作被罚，裁判给了他一张黄牌。",
+    "exv": "Động tác phạm lỗi của anh ấy bị phạt, trọng tài cho anh ấy một thẻ vàng."
+   },
+   {
+    "han": "禁赛处罚",
+    "pinyin": "jìnsài chǔfá",
+    "vi": "phạt cấm thi đấu",
+    "col": "受到禁赛处罚",
+    "ex": "因为违反规则，他受到禁赛处罚，三场不能上场。",
+    "exv": "Vì vi phạm quy tắc, anh ấy bị phạt cấm thi đấu, ba trận không được ra sân."
+   },
+   {
+    "han": "赛前热身",
+    "pinyin": "sàiqián rèshēn",
+    "vi": "khởi động trước trận",
+    "col": "认真赛前热身",
+    "ex": "比赛之前，队员认真赛前热身，防止受伤。",
+    "exv": "Trước trận đấu, đội viên khởi động trước trận nghiêm túc, đề phòng chấn thương."
+   },
+   {
+    "han": "赛后总结",
+    "pinyin": "sàihòu zǒngjié",
+    "vi": "tổng kết sau trận",
+    "col": "赛后总结经验",
+    "ex": "不管输赢，教练都会带大家赛后总结经验。",
+    "exv": "Dù thắng hay thua, huấn luyện viên đều dẫn mọi người tổng kết kinh nghiệm sau trận."
+   },
+   {
+    "han": "啦啦队",
+    "pinyin": "lālāduì",
+    "vi": "đội cổ vũ",
+    "col": "啦啦队加油",
+    "ex": "场边的啦啦队加油，喊得特别卖力。",
+    "exv": "Đội cổ vũ bên sân cổ vũ, hô đặc biệt hết sức."
+   },
+   {
+    "han": "球迷助威",
+    "pinyin": "qiúmí zhùwēi",
+    "vi": "người hâm mộ cổ vũ",
+    "col": "球迷助威声很大",
+    "ex": "球迷助威声很大，整个体育场都在震动。",
+    "exv": "Tiếng người hâm mộ cổ vũ rất lớn, cả sân vận động đều rung động."
+   },
+   {
+    "han": "现场气氛",
+    "pinyin": "xiànchǎng qìfēn",
+    "vi": "bầu không khí tại chỗ",
+    "col": "现场气氛热烈",
+    "ex": "决赛的时候，现场气氛热烈，座无虚席。",
+    "exv": "Lúc chung kết, bầu không khí tại chỗ nhiệt liệt, không còn chỗ trống."
+   },
+   {
+    "han": "体育精神",
+    "pinyin": "tǐyù jīngshén",
+    "vi": "tinh thần thể thao",
+    "col": "发扬体育精神",
+    "ex": "比赛要发扬体育精神，输赢都要尊重对手。",
+    "exv": "Thi đấu phải phát huy tinh thần thể thao, thắng thua đều phải tôn trọng đối thủ."
+   },
+   {
+    "han": "友谊第一",
+    "pinyin": "yǒuyì dìyī",
+    "vi": "tình bạn là trên hết",
+    "col": "友谊第一比赛第二",
+    "ex": "老师说，友谊第一比赛第二，不要为输赢吵架。",
+    "exv": "Thầy giáo nói, tình bạn là trên hết, thi đấu là thứ hai, đừng vì thắng thua mà cãi nhau."
+   },
+   {
+    "han": "比赛第二",
+    "pinyin": "bǐsài dì'èr",
+    "vi": "thi đấu là thứ hai",
+    "col": "友谊第一比赛第二",
+    "ex": "记住友谊第一比赛第二，开开心心打球最重要。",
+    "exv": "Nhớ tình bạn là trên hết, thi đấu là thứ hai, vui vẻ chơi bóng là quan trọng nhất."
+   },
+   {
+    "han": "公平竞争",
+    "pinyin": "gōngpíng jìngzhēng",
+    "vi": "cạnh tranh công bằng",
+    "col": "坚持公平竞争",
+    "ex": "所有队伍都要坚持公平竞争，不能作弊。",
+    "exv": "Mọi đội đều phải kiên trì cạnh tranh công bằng, không được gian lận."
+   },
+   {
+    "han": "颁奖仪式",
+    "pinyin": "bānjiǎng yíshì",
+    "vi": "lễ trao giải",
+    "col": "颁奖仪式上",
+    "ex": "颁奖仪式上，冠军站上领奖台，全场鼓掌。",
+    "exv": "Trong lễ trao giải, nhà vô địch đứng lên bục nhận giải, cả sân vỗ tay."
+   },
+   {
+    "han": "赛程安排",
+    "pinyin": "sàichéng ānpái",
+    "vi": "sắp xếp lịch thi đấu",
+    "col": "赛程安排很紧",
+    "ex": "这个星期赛程安排很紧，三天要打两场比赛。",
+    "exv": "Tuần này sắp xếp lịch thi đấu rất dày, ba ngày phải đá hai trận."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Di cư lao động và hội nhập",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "外出务工",
+    "pinyin": "wàichū wùgōng",
+    "vi": "ra ngoài làm thuê",
+    "col": "外出务工的人",
+    "ex": "村里很多年轻人外出务工，过年才回家。",
+    "exv": "Trong làng nhiều người trẻ ra ngoài làm thuê, Tết mới về nhà."
+   },
+   {
+    "han": "返乡过年",
+    "pinyin": "fǎnxiāng guònián",
+    "vi": "về quê ăn Tết",
+    "col": "返乡过年的人很多",
+    "ex": "春运的时候，返乡过年的人很多，车票很难买。",
+    "exv": "Mùa xuân vận, người về quê ăn Tết rất đông, vé xe rất khó mua."
+   },
+   {
+    "han": "户籍制度",
+    "pinyin": "hùjí zhìdù",
+    "vi": "chế độ hộ tịch",
+    "col": "户籍制度改革",
+    "ex": "户籍制度改革以后，外地人办事方便了很多。",
+    "exv": "Sau khi cải cách chế độ hộ tịch, người nơi khác làm việc tiện hơn nhiều."
+   },
+   {
+    "han": "暂住证",
+    "pinyin": "zànzhùzhèng",
+    "vi": "giấy tạm trú",
+    "col": "办暂住证",
+    "ex": "刚到这个城市，要先办暂住证，才能租房子。",
+    "exv": "Mới đến thành phố này, phải làm giấy tạm trú trước mới thuê nhà được."
+   },
+   {
+    "han": "融入城市",
+    "pinyin": "róngrù chéngshì",
+    "vi": "hòa nhập thành phố",
+    "col": "慢慢融入城市",
+    "ex": "刚来的时候不习惯，住了一年就慢慢融入城市了。",
+    "exv": "Mới đến chưa quen, ở một năm thì dần dần hòa nhập thành phố rồi."
+   },
+   {
+    "han": "适应环境",
+    "pinyin": "shìyìng huánjìng",
+    "vi": "thích nghi môi trường",
+    "col": "很快适应环境",
+    "ex": "她适应能力很强，到新地方很快适应环境。",
+    "exv": "Khả năng thích nghi của cô ấy rất mạnh, đến nơi mới nhanh chóng thích nghi môi trường."
+   },
+   {
+    "han": "乡愁情结",
+    "pinyin": "xiāngchóu qíngjié",
+    "vi": "tình cảm nhớ quê",
+    "col": "浓浓的乡愁情结",
+    "ex": "在外多年，他心里有浓浓的乡愁情结，常常想起家乡。",
+    "exv": "Ở ngoài nhiều năm, trong lòng anh ấy có tình cảm nhớ quê đậm đà, thường nhớ về quê hương."
+   },
+   {
+    "han": "故乡变化",
+    "pinyin": "gùxiāng biànhuà",
+    "vi": "quê hương thay đổi",
+    "col": "故乡变化很大",
+    "ex": "十年没回去，故乡变化很大，修了新路，盖了新房。",
+    "exv": "Mười năm không về, quê hương thay đổi rất lớn, làm đường mới, xây nhà mới."
+   },
+   {
+    "han": "异乡生活",
+    "pinyin": "yìxiāng shēnghuó",
+    "vi": "cuộc sống nơi đất khách",
+    "col": "异乡生活不容易",
+    "ex": "异乡生活不容易，一个人生病了也没人照顾。",
+    "exv": "Cuộc sống nơi đất khách không dễ, một mình ốm cũng không ai chăm sóc."
+   },
+   {
+    "han": "漂泊在外",
+    "pinyin": "piāobó zàiwài",
+    "vi": "phiêu bạt bên ngoài",
+    "col": "漂泊在外的日子",
+    "ex": "漂泊在外的日子里，他最想念妈妈做的饭。",
+    "exv": "Những ngày phiêu bạt bên ngoài, anh ấy nhớ nhất cơm mẹ nấu."
+   },
+   {
+    "han": "打工生活",
+    "pinyin": "dǎgōng shēnghuó",
+    "vi": "cuộc sống làm thuê",
+    "col": "打工生活很辛苦",
+    "ex": "打工生活很辛苦，每天早上六点就要起床。",
+    "exv": "Cuộc sống làm thuê rất vất vả, mỗi ngày sáu giờ sáng phải dậy."
+   },
+   {
+    "han": "工资拖欠",
+    "pinyin": "gōngzī tuōqiàn",
+    "vi": "nợ lương",
+    "col": "工资拖欠几个月",
+    "ex": "有的老板工资拖欠几个月，工人生活很困难。",
+    "exv": "Có chủ nợ lương mấy tháng, công nhân sống rất khó khăn."
+   },
+   {
+    "han": "维权意识",
+    "pinyin": "wéiquán yìshí",
+    "vi": "ý thức bảo vệ quyền lợi",
+    "col": "提高维权意识",
+    "ex": "工人要提高维权意识，学会用法律保护自己。",
+    "exv": "Công nhân phải nâng cao ý thức bảo vệ quyền lợi, học dùng pháp luật bảo vệ mình."
+   },
+   {
+    "han": "劳动合同",
+    "pinyin": "láodòng hétong",
+    "vi": "hợp đồng lao động",
+    "col": "签劳动合同",
+    "ex": "上班之前一定要签劳动合同，写清楚工资和时间。",
+    "exv": "Trước khi đi làm nhất định phải ký hợp đồng lao động, viết rõ lương và thời gian."
+   },
+   {
+    "han": "社会保障",
+    "pinyin": "shèhuì bǎozhàng",
+    "vi": "bảo đảm xã hội",
+    "col": "社会保障越来越好",
+    "ex": "现在社会保障越来越好，生病住院能报销一部分。",
+    "exv": "Bây giờ bảo đảm xã hội ngày càng tốt, ốm nằm viện được thanh toán một phần."
+   },
+   {
+    "han": "医疗保险",
+    "pinyin": "yīliáo bǎoxiǎn",
+    "vi": "bảo hiểm y tế",
+    "col": "参加医疗保险",
+    "ex": "在城里工作的人都要参加医疗保险，看病便宜一些。",
+    "exv": "Người làm việc trong thành phố đều phải tham gia bảo hiểm y tế, khám bệnh rẻ hơn một chút."
+   },
+   {
+    "han": "子女教育",
+    "pinyin": "zǐnǚ jiàoyù",
+    "vi": "giáo dục con cái",
+    "col": "子女教育是大问题",
+    "ex": "对外出务工的人来说，子女教育是大问题。",
+    "exv": "Đối với người ra ngoài làm thuê, giáo dục con cái là vấn đề lớn."
+   },
+   {
+    "han": "随迁子女",
+    "pinyin": "suíqiān zǐnǚ",
+    "vi": "con cái đi theo cha mẹ di cư",
+    "col": "随迁子女上学",
+    "ex": "随迁子女上学的问题，政府正在想办法解决。",
+    "exv": "Vấn đề con cái đi theo cha mẹ di cư đi học, chính phủ đang tìm cách giải quyết."
+   },
+   {
+    "han": "城市融入",
+    "pinyin": "chéngshì róngrù",
+    "vi": "hòa nhập đô thị",
+    "col": "城市融入需要时间",
+    "ex": "城市融入需要时间，也需要本地人的接纳。",
+    "exv": "Hòa nhập đô thị cần thời gian, cũng cần sự đón nhận của người địa phương."
+   },
+   {
+    "han": "安居乐业",
+    "pinyin": "ānjū lèyè",
+    "vi": "an cư lạc nghiệp",
+    "col": "安居乐业的生活",
+    "ex": "有了稳定的工作和房子，才能过上安居乐业的生活。",
+    "exv": "Có công việc và nhà ở ổn định mới sống được cuộc sống an cư lạc nghiệp."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Công nghệ giáo dục và lớp học số",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "在线课程",
+    "pinyin": "zàixiàn kèchéng",
+    "vi": "khóa học trực tuyến",
+    "col": "报名在线课程",
+    "ex": "她在网上报名在线课程，学习汉语。",
+    "exv": "Cô ấy đăng ký khóa học trực tuyến trên mạng, học tiếng Trung."
+   },
+   {
+    "han": "直播课堂",
+    "pinyin": "zhíbò kètáng",
+    "vi": "lớp học livestream",
+    "col": "直播课堂互动多",
+    "ex": "直播课堂互动多，学生可以直接问老师问题。",
+    "exv": "Lớp học livestream tương tác nhiều, học sinh có thể hỏi thầy giáo trực tiếp."
+   },
+   {
+    "han": "录播课程",
+    "pinyin": "lùbò kèchéng",
+    "vi": "khóa học ghi hình sẵn",
+    "col": "录播课程随时看",
+    "ex": "录播课程随时看，有空的时候打开手机就能学。",
+    "exv": "Khóa học ghi hình sẵn lúc nào cũng xem được, rảnh mở điện thoại là học được."
+   },
+   {
+    "han": "互动答疑",
+    "pinyin": "hùdòng dáyí",
+    "vi": "tương tác giải đáp thắc mắc",
+    "col": "课后互动答疑",
+    "ex": "课后老师安排互动答疑，回答学生的问题。",
+    "exv": "Sau giờ học thầy giáo sắp xếp tương tác giải đáp thắc mắc, trả lời câu hỏi của học sinh."
+   },
+   {
+    "han": "作业批改",
+    "pinyin": "zuòyè pīgǎi",
+    "vi": "chấm bài tập",
+    "col": "作业批改很及时",
+    "ex": "这个老师作业批改很及时，第二天就发回来了。",
+    "exv": "Thầy giáo này chấm bài tập rất kịp thời, hôm sau đã trả lại."
+   },
+   {
+    "han": "考试系统",
+    "pinyin": "kǎoshì xìtǒng",
+    "vi": "hệ thống thi cử",
+    "col": "新的考试系统",
+    "ex": "学校用了新的考试系统，考试在电脑上进行。",
+    "exv": "Trường dùng hệ thống thi cử mới, thi cử tiến hành trên máy tính."
+   },
+   {
+    "han": "学习平台",
+    "pinyin": "xuéxí píngtái",
+    "vi": "nền tảng học tập",
+    "col": "学习平台上有课程",
+    "ex": "学习平台上有课程、有练习，还有讨论区。",
+    "exv": "Trên nền tảng học tập có khóa học, có bài luyện, còn có khu thảo luận."
+   },
+   {
+    "han": "电子教材",
+    "pinyin": "diànzǐ jiàocái",
+    "vi": "giáo trình điện tử",
+    "col": "电子教材很方便",
+    "ex": "电子教材很方便，不用背着很重的书包。",
+    "exv": "Giáo trình điện tử rất tiện, không phải mang cặp sách rất nặng."
+   },
+   {
+    "han": "虚拟实验",
+    "pinyin": "xūnǐ shíyàn",
+    "vi": "thí nghiệm ảo",
+    "col": "做虚拟实验",
+    "ex": "在电脑上做虚拟实验，不用担心危险。",
+    "exv": "Làm thí nghiệm ảo trên máy tính, không lo nguy hiểm."
+   },
+   {
+    "han": "人工智能助教",
+    "pinyin": "réngōng zhìnéng zhùjiào",
+    "vi": "trợ giảng trí tuệ nhân tạo",
+    "col": "人工智能助教答疑",
+    "ex": "人工智能助教答疑很快，半夜也能回答问题。",
+    "exv": "Trợ giảng trí tuệ nhân tạo giải đáp rất nhanh, nửa đêm cũng trả lời được câu hỏi."
+   },
+   {
+    "han": "个性化学习",
+    "pinyin": "gèxìnghuà xuéxí",
+    "vi": "học tập cá nhân hóa",
+    "col": "个性化学习计划",
+    "ex": "系统根据你的水平，给你个性化学习计划。",
+    "exv": "Hệ thống căn cứ trình độ của bạn, đưa ra kế hoạch học tập cá nhân hóa cho bạn."
+   },
+   {
+    "han": "学习进度",
+    "pinyin": "xuéxí jìndù",
+    "vi": "tiến độ học tập",
+    "col": "学习进度不一样",
+    "ex": "每个人的学习进度不一样，不用跟别人比。",
+    "exv": "Tiến độ học tập mỗi người khác nhau, không cần so với người khác."
+   },
+   {
+    "han": "错题本",
+    "pinyin": "cuòtíběn",
+    "vi": "sổ bài sai",
+    "col": "整理错题本",
+    "ex": "考试之前，把错题本拿出来复习一遍。",
+    "exv": "Trước khi thi, lấy sổ bài sai ra ôn một lượt."
+   },
+   {
+    "han": "复习计划",
+    "pinyin": "fùxí jìhuà",
+    "vi": "kế hoạch ôn tập",
+    "col": "制定复习计划",
+    "ex": "离考试还有一个月，他制定了复习计划。",
+    "exv": "Còn một tháng nữa là thi, anh ấy lập kế hoạch ôn tập."
+   },
+   {
+    "han": "模拟考试",
+    "pinyin": "mónǐ kǎoshì",
+    "vi": "thi thử mô phỏng",
+    "col": "参加模拟考试",
+    "ex": "正式考试之前，学校组织了两次模拟考试。",
+    "exv": "Trước kỳ thi chính thức, trường tổ chức hai lần thi thử mô phỏng."
+   },
+   {
+    "han": "自适应学习",
+    "pinyin": "zì shìyìng xuéxí",
+    "vi": "học tập tự thích ứng",
+    "col": "自适应学习系统",
+    "ex": "自适应学习系统会根据你的答案，调整下一道题的难度。",
+    "exv": "Hệ thống học tập tự thích ứng sẽ căn cứ đáp án của bạn, điều chỉnh độ khó câu tiếp theo."
+   },
+   {
+    "han": "知识图谱",
+    "pinyin": "zhīshi túpǔ",
+    "vi": "bản đồ tri thức",
+    "col": "知识图谱很清楚",
+    "ex": "这个知识图谱很清楚，哪个知识点没掌握，一看就知道。",
+    "exv": "Bản đồ tri thức này rất rõ, điểm kiến thức nào chưa nắm, nhìn là biết ngay."
+   },
+   {
+    "han": "跨学科学习",
+    "pinyin": "kuà xuékē xuéxí",
+    "vi": "học tập liên ngành",
+    "col": "跨学科学习有好处",
+    "ex": "跨学科学习有好处，能把不同学科的知识连起来。",
+    "exv": "Học tập liên ngành có lợi, có thể nối kiến thức các môn khác nhau lại."
+   },
+   {
+    "han": "终身学习",
+    "pinyin": "zhōngshēn xuéxí",
+    "vi": "học tập suốt đời",
+    "col": "终身学习很重要",
+    "ex": "活到老学到老，终身学习很重要。",
+    "exv": "Sống đến già học đến già, học tập suốt đời rất quan trọng."
+   },
+   {
+    "han": "自主学习",
+    "pinyin": "zìzhǔ xuéxí",
+    "vi": "tự học",
+    "col": "培养自主学习",
+    "ex": "老师要培养自主学习的能力，不能只靠老师讲。",
+    "exv": "Thầy giáo phải bồi dưỡng năng lực tự học, không thể chỉ dựa vào thầy giảng."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Môi trường làm việc và văn hóa doanh nghiệp",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "企业文化",
+    "pinyin": "qǐyè wénhuà",
+    "vi": "văn hóa doanh nghiệp",
+    "col": "企业文化很重要",
+    "ex": "企业文化很重要，决定了员工愿不愿意留下来。",
+    "exv": "Văn hóa doanh nghiệp rất quan trọng, quyết định nhân viên có muốn ở lại không."
+   },
+   {
+    "han": "团队氛围",
+    "pinyin": "tuánduì fēnwéi",
+    "vi": "bầu không khí nhóm",
+    "col": "团队氛围很好",
+    "ex": "我们团队氛围很好，大家互相帮助，不抢功劳。",
+    "exv": "Bầu không khí nhóm chúng tôi rất tốt, mọi người giúp đỡ nhau, không tranh công."
+   },
+   {
+    "han": "上下级关系",
+    "pinyin": "shàng xiàjí guānxi",
+    "vi": "quan hệ cấp trên cấp dưới",
+    "col": "上下级关系融洽",
+    "ex": "这家公司上下级关系融洽，领导也常跟员工一起吃饭。",
+    "exv": "Quan hệ cấp trên cấp dưới của công ty này hòa hợp, lãnh đạo cũng thường ăn cơm cùng nhân viên."
+   },
+   {
+    "han": "扁平管理",
+    "pinyin": "biǎnpíng guǎnlǐ",
+    "vi": "quản lý phẳng",
+    "col": "实行扁平管理",
+    "ex": "公司实行扁平管理，层级少，沟通快。",
+    "exv": "Công ty thực hiện quản lý phẳng, ít cấp bậc, giao tiếp nhanh."
+   },
+   {
+    "han": "弹性工作",
+    "pinyin": "tánxìng gōngzuò",
+    "vi": "làm việc linh hoạt",
+    "col": "弹性工作时间",
+    "ex": "公司实行弹性工作时间，早上九点到十点都可以来。",
+    "exv": "Công ty thực hiện thời gian làm việc linh hoạt, sáng chín giờ đến mười giờ đều có thể đến."
+   },
+   {
+    "han": "远程办公",
+    "pinyin": "yuǎnchéng bàngōng",
+    "vi": "làm việc từ xa",
+    "col": "远程办公很方便",
+    "ex": "远程办公很方便，在家也能开会、交报告。",
+    "exv": "Làm việc từ xa rất tiện, ở nhà cũng họp được, nộp báo cáo được."
+   },
+   {
+    "han": "居家办公",
+    "pinyin": "jūjiā bàngōng",
+    "vi": "làm việc tại nhà",
+    "col": "居家办公的日子",
+    "ex": "居家办公的日子里，她每天省了两个小时路上的时间。",
+    "exv": "Những ngày làm việc tại nhà, cô ấy mỗi ngày tiết kiệm hai tiếng đi đường."
+   },
+   {
+    "han": "团建活动",
+    "pinyin": "tuánjiàn huódòng",
+    "vi": "hoạt động xây dựng nhóm",
+    "col": "团建活动去爬山",
+    "ex": "上个星期团建活动去爬山，大家玩得很开心。",
+    "exv": "Tuần trước hoạt động xây dựng nhóm đi leo núi, mọi người chơi rất vui."
+   },
+   {
+    "han": "年会聚餐",
+    "pinyin": "niánhuì jùcān",
+    "vi": "tiệc cuối năm",
+    "col": "年会聚餐抽奖",
+    "ex": "年会聚餐抽奖的时候，全场最热闹。",
+    "exv": "Lúc tiệc cuối năm bốc thăm trúng thưởng, cả hội trường náo nhiệt nhất."
+   },
+   {
+    "han": "员工福利",
+    "pinyin": "yuángōng fúlì",
+    "vi": "phúc lợi nhân viên",
+    "col": "员工福利不错",
+    "ex": "这家公司员工福利不错，有体检、有旅游补贴。",
+    "exv": "Phúc lợi nhân viên của công ty này khá tốt, có khám sức khỏe, có phụ cấp du lịch."
+   },
+   {
+    "han": "带薪休假",
+    "pinyin": "dàixīn xiūjià",
+    "vi": "nghỉ phép có lương",
+    "col": "带薪休假五天",
+    "ex": "他今年有带薪休假五天，打算带家人去海边。",
+    "exv": "Anh ấy năm nay có năm ngày nghỉ phép có lương, định đưa gia đình đi biển."
+   },
+   {
+    "han": "绩效考核",
+    "pinyin": "jìxiào kǎohé",
+    "vi": "đánh giá hiệu quả công việc",
+    "col": "绩效考核要公平",
+    "ex": "绩效考核要公平，不能只看领导喜不喜欢。",
+    "exv": "Đánh giá hiệu quả công việc phải công bằng, không thể chỉ xem lãnh đạo có thích không."
+   },
+   {
+    "han": "晋升通道",
+    "pinyin": "jìnshēng tōngdào",
+    "vi": "con đường thăng tiến",
+    "col": "晋升通道很清楚",
+    "ex": "这家公司晋升通道很清楚，努力就有机会升职。",
+    "exv": "Con đường thăng tiến của công ty này rất rõ, cố gắng là có cơ hội thăng chức."
+   },
+   {
+    "han": "内部培训",
+    "pinyin": "nèibù péixùn",
+    "vi": "đào tạo nội bộ",
+    "col": "内部培训每周一次",
+    "ex": "公司内部培训每周一次，老员工给新员工讲经验。",
+    "exv": "Đào tạo nội bộ của công ty mỗi tuần một lần, nhân viên cũ giảng kinh nghiệm cho nhân viên mới."
+   },
+   {
+    "han": "导师制度",
+    "pinyin": "dǎoshī zhìdù",
+    "vi": "chế độ người hướng dẫn",
+    "col": "导师制度帮新人",
+    "ex": "导师制度帮新人很快适应工作，少走弯路。",
+    "exv": "Chế độ người hướng dẫn giúp người mới nhanh chóng thích nghi công việc, ít đi đường vòng."
+   },
+   {
+    "han": "新人入职",
+    "pinyin": "xīnrén rùzhí",
+    "vi": "người mới vào làm",
+    "col": "新人入职培训",
+    "ex": "新人入职培训三天，介绍公司和工作流程。",
+    "exv": "Đào tạo người mới vào làm ba ngày, giới thiệu công ty và quy trình công việc."
+   },
+   {
+    "han": "老员工",
+    "pinyin": "lǎo yuángōng",
+    "vi": "nhân viên lâu năm",
+    "col": "老员工经验丰富",
+    "ex": "老员工经验丰富，遇到问题先问问他们。",
+    "exv": "Nhân viên lâu năm kinh nghiệm phong phú, gặp vấn đề hỏi họ trước."
+   },
+   {
+    "han": "离职交接",
+    "pinyin": "lízhí jiāojiē",
+    "vi": "bàn giao khi thôi việc",
+    "col": "做好离职交接",
+    "ex": "离职之前要做好离职交接，把工作交给同事。",
+    "exv": "Trước khi thôi việc phải làm tốt bàn giao khi thôi việc, giao việc cho đồng nghiệp."
+   },
+   {
+    "han": "竞业协议",
+    "pinyin": "jìngyè xiéyì",
+    "vi": "thỏa thuận không cạnh tranh",
+    "col": "签竞业协议",
+    "ex": "离职的时候，他签竞业协议，一年内不能去对手公司。",
+    "exv": "Khi thôi việc, anh ấy ký thỏa thuận không cạnh tranh, trong một năm không được đến công ty đối thủ."
+   },
+   {
+    "han": "保密协议",
+    "pinyin": "bǎomì xiéyì",
+    "vi": "thỏa thuận bảo mật",
+    "col": "签保密协议",
+    "ex": "入职的时候，每个人都要签保密协议，不能泄露客户资料。",
+    "exv": "Khi vào làm, mỗi người đều phải ký thỏa thuận bảo mật, không được tiết lộ tài liệu khách hàng."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — An toàn mạng và đời sống số",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "个人信息",
+    "pinyin": "gèrén xìnxī",
+    "vi": "thông tin cá nhân",
+    "col": "保护个人信息",
+    "ex": "上网的时候要注意保护个人信息，不要随便填。",
+    "exv": "Khi lên mạng phải chú ý bảo vệ thông tin cá nhân, đừng tùy tiện điền."
+   },
+   {
+    "han": "隐私泄露",
+    "pinyin": "yǐnsī xièlù",
+    "vi": "rò rỉ riêng tư",
+    "col": "防止隐私泄露",
+    "ex": "防止隐私泄露，照片不要随便发到网上。",
+    "exv": "Để ngăn rò rỉ riêng tư, ảnh đừng tùy tiện đăng lên mạng."
+   },
+   {
+    "han": "网络诈骗",
+    "pinyin": "wǎngluò zhàpiàn",
+    "vi": "lừa đảo qua mạng",
+    "col": "小心网络诈骗",
+    "ex": "接到陌生电话要小心网络诈骗，不要给对方转钱。",
+    "exv": "Nhận điện thoại lạ phải cẩn thận lừa đảo qua mạng, đừng chuyển tiền cho đối phương."
+   },
+   {
+    "han": "防范意识",
+    "pinyin": "fángfàn yìshí",
+    "vi": "ý thức phòng ngừa",
+    "col": "提高防范意识",
+    "ex": "老人要提高防范意识，遇到可疑电话先问问孩子。",
+    "exv": "Người già phải nâng cao ý thức phòng ngừa, gặp điện thoại đáng ngờ hỏi con trước."
+   },
+   {
+    "han": "病毒查杀",
+    "pinyin": "bìngdú chāshā",
+    "vi": "quét diệt virus",
+    "col": "定期病毒查杀",
+    "ex": "电脑要定期病毒查杀，不然会越来越慢。",
+    "exv": "Máy tính phải quét diệt virus định kỳ, nếu không sẽ ngày càng chậm."
+   },
+   {
+    "han": "人脸识别",
+    "pinyin": "rénliǎn shìbié",
+    "vi": "nhận diện khuôn mặt",
+    "col": "人脸识别开门",
+    "ex": "现在很多小区用人脸识别开门，不用带钥匙。",
+    "exv": "Bây giờ nhiều khu dân cư dùng nhận diện khuôn mặt mở cửa, không cần mang chìa khóa."
+   },
+   {
+    "han": "指纹解锁",
+    "pinyin": "zhǐwén jiěsuǒ",
+    "vi": "mở khóa bằng vân tay",
+    "col": "指纹解锁手机",
+    "ex": "她的手机用指纹解锁手机，一按就开了。",
+    "exv": "Điện thoại của cô ấy mở khóa bằng vân tay, ấn một cái là mở."
+   },
+   {
+    "han": "扫码支付",
+    "pinyin": "sǎomǎ zhīfù",
+    "vi": "thanh toán quét mã",
+    "col": "扫码支付很方便",
+    "ex": "买菜的时候扫码支付很方便，不用带现金。",
+    "exv": "Khi mua rau thanh toán quét mã rất tiện, không cần mang tiền mặt."
+   },
+   {
+    "han": "实名认证",
+    "pinyin": "shímíng rènzhèng",
+    "vi": "xác thực tên thật",
+    "col": "完成实名认证",
+    "ex": "注册账号要完成实名认证，填身份证信息。",
+    "exv": "Đăng ký tài khoản phải hoàn thành xác thực tên thật, điền thông tin chứng minh thư."
+   },
+   {
+    "han": "账号安全",
+    "pinyin": "zhànghào ānquán",
+    "vi": "an toàn tài khoản",
+    "col": "注意账号安全",
+    "ex": "注意账号安全，不要把密码告诉别人。",
+    "exv": "Chú ý an toàn tài khoản, đừng nói mật khẩu cho người khác."
+   },
+   {
+    "han": "密码强度",
+    "pinyin": "mìmǎ qiángdù",
+    "vi": "độ mạnh mật khẩu",
+    "col": "密码强度不够",
+    "ex": "你的密码强度不够，字母太少了，换一个吧。",
+    "exv": "Độ mạnh mật khẩu của bạn không đủ, chữ cái quá ít, đổi cái khác đi."
+   },
+   {
+    "han": "定期更换",
+    "pinyin": "dìngqī gēnghuàn",
+    "vi": "thay đổi định kỳ",
+    "col": "定期更换密码",
+    "ex": "为了安全，密码要定期更换，三个月换一次。",
+    "exv": "Vì an toàn, mật khẩu phải thay đổi định kỳ, ba tháng đổi một lần."
+   },
+   {
+    "han": "不明链接",
+    "pinyin": "bùmíng liànjiē",
+    "vi": "đường link không rõ nguồn",
+    "col": "不要点不明链接",
+    "ex": "不要点不明链接，点开可能中病毒。",
+    "exv": "Đừng bấm đường link không rõ nguồn, bấm vào có thể nhiễm virus."
+   },
+   {
+    "han": "钓鱼网站",
+    "pinyin": "diàoyú wǎngzhàn",
+    "vi": "trang web lừa đảo",
+    "col": "钓鱼网站骗钱",
+    "ex": "钓鱼网站骗钱，样子跟真网站一模一样，要小心。",
+    "exv": "Trang web lừa đảo lừa tiền, hình thức giống hệt trang web thật, phải cẩn thận."
+   },
+   {
+    "han": "谨防上当",
+    "pinyin": "jǐnfáng shàngdàng",
+    "vi": "cẩn thận kẻo bị lừa",
+    "col": "谨防上当受骗",
+    "ex": "网上买东西要谨防上当受骗，先看卖家评价。",
+    "exv": "Mua đồ trên mạng phải cẩn thận kẻo bị lừa, xem đánh giá người bán trước."
+   },
+   {
+    "han": "举报不良",
+    "pinyin": "jùbào bùliáng",
+    "vi": "tố cáo nội dung xấu",
+    "col": "举报不良信息",
+    "ex": "看到不良信息可以举报不良信息，平台会处理。",
+    "exv": "Thấy thông tin xấu có thể tố cáo nội dung xấu, nền tảng sẽ xử lý."
+   },
+   {
+    "han": "未成年人保护",
+    "pinyin": "wèichéngniánrén bǎohù",
+    "vi": "bảo vệ trẻ vị thành niên",
+    "col": "加强未成年人保护",
+    "ex": "国家加强未成年人保护，限制孩子玩游戏的时间。",
+    "exv": "Nhà nước tăng cường bảo vệ trẻ vị thành niên, hạn chế thời gian trẻ chơi game."
+   },
+   {
+    "han": "网络文明",
+    "pinyin": "wǎngluò wénmíng",
+    "vi": "văn minh mạng",
+    "col": "讲网络文明",
+    "ex": "上网也要讲网络文明，不要骂人，不要造谣。",
+    "exv": "Lên mạng cũng phải nói văn minh mạng, đừng chửi người, đừng bịa tin."
+   },
+   {
+    "han": "信息安全",
+    "pinyin": "xìnxī ānquán",
+    "vi": "an toàn thông tin",
+    "col": "信息安全很重要",
+    "ex": "信息安全很重要，公司专门请了人来负责。",
+    "exv": "An toàn thông tin rất quan trọng, công ty chuyên mời người phụ trách."
+   },
+   {
+    "han": "支付安全",
+    "pinyin": "zhīfù ānquán",
+    "vi": "an toàn thanh toán",
+    "col": "注意支付安全",
+    "ex": "用手机付钱的时候，要注意支付安全，不要用公共网络。",
+    "exv": "Khi dùng điện thoại trả tiền, phải chú ý an toàn thanh toán, đừng dùng mạng công cộng."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Ẩm thực vùng miền và văn hóa ăn uống",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "川菜麻辣",
+    "pinyin": "chuāncài málà",
+    "vi": "món Tứ Xuyên cay tê",
+    "col": "川菜麻辣过瘾",
+    "ex": "川菜麻辣过瘾，吃得满头大汗还想吃。",
+    "exv": "Món Tứ Xuyên cay tê rất đã, ăn đến mồ hôi đầy đầu vẫn muốn ăn."
+   },
+   {
+    "han": "粤菜清淡",
+    "pinyin": "yuècài qīngdàn",
+    "vi": "món Quảng Đông thanh đạm",
+    "col": "粤菜清淡鲜美",
+    "ex": "粤菜清淡鲜美，老人小孩都爱吃。",
+    "exv": "Món Quảng Đông thanh đạm tươi ngon, người già trẻ nhỏ đều thích ăn."
+   },
+   {
+    "han": "鲁菜咸鲜",
+    "pinyin": "lǔcài xián xiān",
+    "vi": "món Sơn Đông mặn tươi",
+    "col": "鲁菜咸鲜味浓",
+    "ex": "鲁菜咸鲜味浓，讲究火候和刀工。",
+    "exv": "Món Sơn Đông mặn tươi vị đậm, chú trọng lửa nấu và kỹ thuật dao."
+   },
+   {
+    "han": "苏菜甜润",
+    "pinyin": "sūcài tián rùn",
+    "vi": "món Tô Châu ngọt dịu",
+    "col": "苏菜甜润精致",
+    "ex": "苏菜甜润精致，摆盘像一幅画。",
+    "exv": "Món Tô Châu ngọt dịu tinh tế, bày biện như một bức tranh."
+   },
+   {
+    "han": "火锅底料",
+    "pinyin": "huǒguō dǐliào",
+    "vi": "nước lẩu",
+    "col": "火锅底料很香",
+    "ex": "这家火锅底料很香，一进门就闻到了。",
+    "exv": "Nước lẩu nhà này rất thơm, vừa vào cửa đã ngửi thấy."
+   },
+   {
+    "han": "烧烤摊位",
+    "pinyin": "shāokǎo tānwèi",
+    "vi": "quầy nướng",
+    "col": "夜市烧烤摊位",
+    "ex": "夜市烧烤摊位很多，烤串的香味飘出很远。",
+    "exv": "Quầy nướng chợ đêm rất nhiều, mùi xiên nướng bay rất xa."
+   },
+   {
+    "han": "地方小吃",
+    "pinyin": "dìfāng xiǎochī",
+    "vi": "món ăn vặt địa phương",
+    "col": "各地的地方小吃",
+    "ex": "各地的地方小吃都不一样，到了一个地方一定要尝尝。",
+    "exv": "Món ăn vặt địa phương mỗi nơi khác nhau, đến một nơi nhất định phải nếm thử."
+   },
+   {
+    "han": "夜市美食",
+    "pinyin": "yèshì měishí",
+    "vi": "món ngon chợ đêm",
+    "col": "夜市美食真多",
+    "ex": "夜市美食真多，从街头吃到街尾都吃不完。",
+    "exv": "Món ngon chợ đêm thật nhiều, ăn từ đầu phố đến cuối phố cũng không hết."
+   },
+   {
+    "han": "土特产品",
+    "pinyin": "tǔ tè chǎnpǐn",
+    "vi": "sản phẩm đặc sản địa phương",
+    "col": "买土特产品",
+    "ex": "回家的时候，妈妈让我买土特产品送亲戚。",
+    "exv": "Khi về nhà, mẹ bảo tôi mua sản phẩm đặc sản địa phương tặng họ hàng."
+   },
+   {
+    "han": "农家菜",
+    "pinyin": "nóngjiācài",
+    "vi": "món ăn nhà nông",
+    "col": "农家菜味道好",
+    "ex": "农家菜味道好，菜都是自己种的，新鲜。",
+    "exv": "Món ăn nhà nông vị ngon, rau đều tự trồng, tươi."
+   },
+   {
+    "han": "家常味道",
+    "pinyin": "jiācháng wèidao",
+    "vi": "hương vị cơm nhà",
+    "col": "家常味道最难忘",
+    "ex": "在外面吃得再好，也忘不了家常味道。",
+    "exv": "Ở ngoài ăn ngon mấy cũng không quên được hương vị cơm nhà."
+   },
+   {
+    "han": "色香味俱全",
+    "pinyin": "sè xiāng wèi jù quán",
+    "vi": "sắc hương vị đều đủ",
+    "col": "色香味俱全的好菜",
+    "ex": "这道菜色香味俱全，看着好看，闻着香，吃着更香。",
+    "exv": "Món này sắc hương vị đều đủ, nhìn đẹp, ngửi thơm, ăn càng thơm."
+   },
+   {
+    "han": "讲究火候",
+    "pinyin": "jiǎngjiu huǒhòu",
+    "vi": "chú trọng lửa nấu",
+    "col": "做菜讲究火候",
+    "ex": "做菜讲究火候，火大了会糊，火小了不熟。",
+    "exv": "Nấu ăn chú trọng lửa nấu, lửa lớn sẽ cháy, lửa nhỏ không chín."
+   },
+   {
+    "han": "刀工精细",
+    "pinyin": "dāogōng jīngxì",
+    "vi": "kỹ thuật dao tinh tế",
+    "col": "刀工精细的师傅",
+    "ex": "这位师傅刀工精细，能把豆腐切成细丝。",
+    "exv": "Vị sư phụ này kỹ thuật dao tinh tế, có thể cắt đậu phụ thành sợi nhỏ."
+   },
+   {
+    "han": "现做现卖",
+    "pinyin": "xiàn zuò xiàn mài",
+    "vi": "làm tại chỗ bán tại chỗ",
+    "col": "现做现卖的包子",
+    "ex": "这家包子现做现卖，刚出笼的最好吃。",
+    "exv": "Bánh bao nhà này làm tại chỗ bán tại chỗ, mới ra khỏi lồng là ngon nhất."
+   },
+   {
+    "han": "排队等位",
+    "pinyin": "páiduì děngwèi",
+    "vi": "xếp hàng chờ chỗ",
+    "col": "排队等位半小时",
+    "ex": "这家店太火了，吃饭要排队等位半小时。",
+    "exv": "Quán này quá hot, ăn cơm phải xếp hàng chờ chỗ nửa tiếng."
+   },
+   {
+    "han": "点菜服务",
+    "pinyin": "diǎncài fúwù",
+    "vi": "dịch vụ gọi món",
+    "col": "点菜服务很周到",
+    "ex": "这家饭店点菜服务很周到，还会推荐特色菜。",
+    "exv": "Dịch vụ gọi món của nhà hàng này rất chu đáo, còn giới thiệu món đặc sắc."
+   },
+   {
+    "han": "打包带走",
+    "pinyin": "dǎbāo dàizǒu",
+    "vi": "đóng gói mang đi",
+    "col": "吃不完打包带走",
+    "ex": "吃不完打包带走，回家热一热还能吃。",
+    "exv": "Ăn không hết đóng gói mang đi, về nhà hâm lại vẫn ăn được."
+   },
+   {
+    "han": "光盘行动",
+    "pinyin": "guāngpán xíngdòng",
+    "vi": "phong trào ăn sạch đĩa",
+    "col": "提倡光盘行动",
+    "ex": "学校提倡光盘行动，吃饭不要剩饭剩菜。",
+    "exv": "Trường học đề xướng phong trào ăn sạch đĩa, ăn cơm đừng để thừa cơm thừa rau."
+   },
+   {
+    "han": "风味小吃",
+    "pinyin": "fēngwèi xiǎochī",
+    "vi": "món ăn vặt đặc sắc",
+    "col": "风味小吃一条街",
+    "ex": "这条街是风味小吃一条街，什么好吃的都有。",
+    "exv": "Con phố này là phố món ăn vặt đặc sắc, món ngon gì cũng có."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Giao tiếp đa văn hóa nơi làm việc",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "跨文化交流",
+    "pinyin": "kuà wénhuà jiāoliú",
+    "vi": "giao lưu liên văn hóa",
+    "col": "跨文化交流活动",
+    "ex": "学校组织跨文化交流活动，留学生和中国学生一起做游戏。",
+    "exv": "Trường tổ chức hoạt động giao lưu liên văn hóa, du học sinh và sinh viên Trung Quốc cùng chơi trò chơi."
+   },
+   {
+    "han": "文化习俗",
+    "pinyin": "wénhuà xísú",
+    "vi": "phong tục văn hóa",
+    "col": "了解文化习俗",
+    "ex": "出国之前，要先了解文化习俗，免得失礼。",
+    "exv": "Trước khi ra nước ngoài, phải tìm hiểu phong tục văn hóa trước, tránh thất lễ."
+   },
+   {
+    "han": "风俗禁忌",
+    "pinyin": "fēngsú jìnjì",
+    "vi": "kiêng kỵ phong tục",
+    "col": "注意风俗禁忌",
+    "ex": "去别人家做客，要注意风俗禁忌，比如不能随便进卧室。",
+    "exv": "Đến nhà người khác chơi, phải chú ý kiêng kỵ phong tục, ví dụ không được tùy tiện vào phòng ngủ."
+   },
+   {
+    "han": "社交礼节",
+    "pinyin": "shèjiāo lǐjié",
+    "vi": "lễ tiết xã giao",
+    "col": "学习社交礼节",
+    "ex": "刚工作的年轻人要学习社交礼节，见客户要大方得体。",
+    "exv": "Người trẻ mới đi làm phải học lễ tiết xã giao, gặp khách hàng phải hào phóng đúng mực."
+   },
+   {
+    "han": "递名片",
+    "pinyin": "dì míngpiàn",
+    "vi": "đưa danh thiếp",
+    "col": "双手递名片",
+    "ex": "见客户的时候，要双手递名片，表示尊重。",
+    "exv": "Khi gặp khách hàng, phải đưa danh thiếp bằng hai tay, tỏ ý tôn trọng."
+   },
+   {
+    "han": "握手问候",
+    "pinyin": "wòshǒu wènhòu",
+    "vi": "bắt tay chào hỏi",
+    "col": "握手问候对方",
+    "ex": "见面的时候握手问候对方，微笑着打招呼。",
+    "exv": "Khi gặp mặt bắt tay chào hỏi đối phương, mỉm cười chào hỏi."
+   },
+   {
+    "han": "鞠躬致意",
+    "pinyin": "jūgōng zhìyì",
+    "vi": "cúi chào tỏ ý",
+    "col": "鞠躬致意表示感谢",
+    "ex": "演出结束，演员鞠躬致意表示感谢，观众鼓掌。",
+    "exv": "Buổi diễn kết thúc, diễn viên cúi chào tỏ ý cảm ơn, khán giả vỗ tay."
+   },
+   {
+    "han": "入乡随俗",
+    "pinyin": "rù xiāng suí sú",
+    "vi": "nhập gia tùy tục",
+    "col": "入乡随俗很重要",
+    "ex": "到了一个新地方，入乡随俗很重要，不要用自己的习惯要求别人。",
+    "exv": "Đến một nơi mới, nhập gia tùy tục rất quan trọng, đừng dùng thói quen của mình yêu cầu người khác."
+   },
+   {
+    "han": "尊重差异",
+    "pinyin": "zūnzhòng chāyì",
+    "vi": "tôn trọng khác biệt",
+    "col": "互相尊重差异",
+    "ex": "不同国家的人在一起工作，要互相尊重差异。",
+    "exv": "Người các nước khác nhau làm việc cùng nhau phải tôn trọng khác biệt lẫn nhau."
+   },
+   {
+    "han": "避免误解",
+    "pinyin": "bìmiǎn wùjiě",
+    "vi": "tránh hiểu lầm",
+    "col": "多沟通避免误解",
+    "ex": "多沟通可以避免误解，有话直说，别猜来猜去。",
+    "exv": "Giao tiếp nhiều có thể tránh hiểu lầm, có gì nói thẳng, đừng đoán qua đoán lại."
+   },
+   {
+    "han": "语言障碍",
+    "pinyin": "yǔyán zhàngài",
+    "vi": "rào cản ngôn ngữ",
+    "col": "克服语言障碍",
+    "ex": "刚到国外，语言障碍是最大的困难，慢慢就好了。",
+    "exv": "Mới ra nước ngoài, rào cản ngôn ngữ là khó khăn lớn nhất, dần dần sẽ tốt lên."
+   },
+   {
+    "han": "翻译协助",
+    "pinyin": "fānyì xiézhù",
+    "vi": "hỗ trợ phiên dịch",
+    "col": "需要翻译协助",
+    "ex": "开会的时候如果听不懂，可以请人翻译协助。",
+    "exv": "Khi họp nếu nghe không hiểu, có thể nhờ người hỗ trợ phiên dịch."
+   },
+   {
+    "han": "国际会议",
+    "pinyin": "guójì huìyì",
+    "vi": "hội nghị quốc tế",
+    "col": "参加国际会议",
+    "ex": "他下个月去北京参加国际会议，讨论气候问题。",
+    "exv": "Tháng sau anh ấy đến Bắc Kinh tham gia hội nghị quốc tế, thảo luận vấn đề khí hậu."
+   },
+   {
+    "han": "时差问题",
+    "pinyin": "shíchā wèntí",
+    "vi": "vấn đề chênh lệch múi giờ",
+    "col": "时差问题要适应",
+    "ex": "跟国外客户开会，时差问题要适应，常常半夜开会。",
+    "exv": "Họp với khách hàng nước ngoài, vấn đề chênh lệch múi giờ phải thích nghi, thường họp nửa đêm."
+   },
+   {
+    "han": "远程协作",
+    "pinyin": "yuǎnchéng xiézuò",
+    "vi": "hợp tác từ xa",
+    "col": "远程协作的工具",
+    "ex": "远程协作的工具很多，视频会议最常用。",
+    "exv": "Công cụ hợp tác từ xa rất nhiều, họp video là thường dùng nhất."
+   },
+   {
+    "han": "多元团队",
+    "pinyin": "duōyuán tuánduì",
+    "vi": "nhóm đa dạng",
+    "col": "多元团队有优势",
+    "ex": "多元团队有优势，不同背景的人能想出更多办法。",
+    "exv": "Nhóm đa dạng có ưu thế, người nền tảng khác nhau có thể nghĩ ra nhiều cách hơn."
+   },
+   {
+    "han": "包容开放",
+    "pinyin": "bāoróng kāifàng",
+    "vi": "bao dung cởi mở",
+    "col": "包容开放的心态",
+    "ex": "跟外国同事相处，要有包容开放的心态。",
+    "exv": "Chung sống với đồng nghiệp nước ngoài phải có tâm thái bao dung cởi mở."
+   },
+   {
+    "han": "文化冲突",
+    "pinyin": "wénhuà chōngtū",
+    "vi": "xung đột văn hóa",
+    "col": "文化冲突怎么办",
+    "ex": "遇到文化冲突怎么办？先冷静，再沟通，不要吵架。",
+    "exv": "Gặp xung đột văn hóa thì làm sao? Bình tĩnh trước, rồi giao tiếp, đừng cãi nhau."
+   },
+   {
+    "han": "文化适应",
+    "pinyin": "wénhuà shìyìng",
+    "vi": "thích ứng văn hóa",
+    "col": "文化适应需要时间",
+    "ex": "文化适应需要时间，住上半年就会好很多。",
+    "exv": "Thích ứng văn hóa cần thời gian, ở nửa năm sẽ tốt hơn nhiều."
+   },
+   {
+    "han": "沟通方式",
+    "pinyin": "gōutōng fāngshì",
+    "vi": "cách thức giao tiếp",
+    "col": "换个沟通方式",
+    "ex": "这样说对方听不进去，换个沟通方式试试。",
+    "exv": "Nói thế này đối phương nghe không vào, đổi cách thức giao tiếp thử xem."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Nghiên cứu thị trường và hành vi người tiêu dùng",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "问卷调查",
+    "pinyin": "wènjuàn diàochá",
+    "vi": "điều tra bằng bảng hỏi",
+    "col": "做问卷调查",
+    "ex": "公司做问卷调查，了解顾客喜欢什么产品。",
+    "exv": "Công ty làm điều tra bằng bảng hỏi, tìm hiểu khách hàng thích sản phẩm gì."
+   },
+   {
+    "han": "样本数量",
+    "pinyin": "yàngběn shùliàng",
+    "vi": "số lượng mẫu",
+    "col": "样本数量要足够",
+    "ex": "样本数量要足够，调查结果才比较可靠。",
+    "exv": "Số lượng mẫu phải đủ, kết quả điều tra mới tương đối đáng tin."
+   },
+   {
+    "han": "数据统计",
+    "pinyin": "shùjù tǒngjì",
+    "vi": "thống kê số liệu",
+    "col": "数据统计结果",
+    "ex": "数据统计结果显示，年轻人更喜欢网上购物。",
+    "exv": "Kết quả thống kê số liệu cho thấy, người trẻ thích mua sắm trên mạng hơn."
+   },
+   {
+    "han": "市场趋势",
+    "pinyin": "shìchǎng qūshì",
+    "vi": "xu hướng thị trường",
+    "col": "把握市场趋势",
+    "ex": "做生意要把握市场趋势，跟着趋势走。",
+    "exv": "Làm ăn phải nắm xu hướng thị trường, đi theo xu hướng."
+   },
+   {
+    "han": "消费需求",
+    "pinyin": "xiāofèi xūqiú",
+    "vi": "nhu cầu tiêu dùng",
+    "col": "消费需求变了",
+    "ex": "现在消费需求变了，大家更看重质量和健康。",
+    "exv": "Bây giờ nhu cầu tiêu dùng thay đổi rồi, mọi người coi trọng chất lượng và sức khỏe hơn."
+   },
+   {
+    "han": "供给关系",
+    "pinyin": "gōngjǐ guānxì",
+    "vi": "quan hệ cung ứng",
+    "col": "供给关系紧张",
+    "ex": "过年的时候，蔬菜供给关系紧张，价格会涨。",
+    "exv": "Dịp Tết, quan hệ cung ứng rau căng thẳng, giá sẽ tăng."
+   },
+   {
+    "han": "竞争对手",
+    "pinyin": "jìngzhēng duìshǒu",
+    "vi": "đối thủ cạnh tranh",
+    "col": "了解竞争对手",
+    "ex": "开店之前，要先了解竞争对手，看看他们卖什么。",
+    "exv": "Trước khi mở cửa hàng, phải tìm hiểu đối thủ cạnh tranh trước, xem họ bán gì."
+   },
+   {
+    "han": "市场份额",
+    "pinyin": "shìchǎng fèn'é",
+    "vi": "thị phần",
+    "col": "市场份额第一",
+    "ex": "这个品牌的市场份额第一，卖得最好。",
+    "exv": "Thị phần của thương hiệu này đứng đầu, bán chạy nhất."
+   },
+   {
+    "han": "目标客户",
+    "pinyin": "mùbiāo kèhù",
+    "vi": "khách hàng mục tiêu",
+    "col": "明确目标客户",
+    "ex": "做广告之前，要先明确目标客户是谁。",
+    "exv": "Trước khi làm quảng cáo, phải xác định rõ khách hàng mục tiêu là ai."
+   },
+   {
+    "han": "客户反馈",
+    "pinyin": "kèhù fǎnkuì",
+    "vi": "phản hồi khách hàng",
+    "col": "重视客户反馈",
+    "ex": "公司很重视客户反馈，每条意见都会看。",
+    "exv": "Công ty rất coi trọng phản hồi khách hàng, mỗi ý kiến đều xem."
+   },
+   {
+    "han": "售后服务",
+    "pinyin": "shòuhòu fúwù",
+    "vi": "dịch vụ sau bán hàng",
+    "col": "售后服务很好",
+    "ex": "这家店售后服务很好，坏了可以免费修。",
+    "exv": "Dịch vụ sau bán hàng của cửa hàng này rất tốt, hỏng được sửa miễn phí."
+   },
+   {
+    "han": "产品定位",
+    "pinyin": "chǎnpǐn dìngwèi",
+    "vi": "định vị sản phẩm",
+    "col": "产品定位清楚",
+    "ex": "产品定位清楚，卖给学生还是卖给上班族，要想好。",
+    "exv": "Định vị sản phẩm rõ ràng, bán cho học sinh hay bán cho người đi làm, phải nghĩ kỹ."
+   },
+   {
+    "han": "价格策略",
+    "pinyin": "jiàgé cèlüè",
+    "vi": "chiến lược giá",
+    "col": "价格策略要灵活",
+    "ex": "价格策略要灵活，节日可以打折，平时保持原价。",
+    "exv": "Chiến lược giá phải linh hoạt, ngày lễ có thể giảm giá, ngày thường giữ giá gốc."
+   },
+   {
+    "han": "促销手段",
+    "pinyin": "cùxiāo shǒuduàn",
+    "vi": "thủ đoạn khuyến mãi",
+    "col": "促销手段很多",
+    "ex": "促销手段很多，有满减、有赠品，还有抽奖。",
+    "exv": "Thủ đoạn khuyến mãi rất nhiều, có giảm giá khi đủ mức, có quà tặng, còn có bốc thăm."
+   },
+   {
+    "han": "销售渠道",
+    "pinyin": "xiāoshòu qúdào",
+    "vi": "kênh bán hàng",
+    "col": "销售渠道变多了",
+    "ex": "现在销售渠道变多了，网上网下都能卖。",
+    "exv": "Bây giờ kênh bán hàng nhiều lên, trên mạng dưới mạng đều bán được."
+   },
+   {
+    "han": "线上线下",
+    "pinyin": "xiànshang xiànxia",
+    "vi": "trực tuyến và ngoại tuyến",
+    "col": "线上线下一起卖",
+    "ex": "这家店线上线下一起卖，生意越做越大。",
+    "exv": "Cửa hàng này trực tuyến và ngoại tuyến cùng bán, việc làm ăn càng làm càng lớn."
+   },
+   {
+    "han": "品牌忠诚",
+    "pinyin": "pǐnpái zhōngchéng",
+    "vi": "lòng trung thành với thương hiệu",
+    "col": "品牌忠诚很高",
+    "ex": "老顾客对这个品牌忠诚很高，十几年都买它。",
+    "exv": "Khách quen lòng trung thành với thương hiệu này rất cao, mười mấy năm đều mua nó."
+   },
+   {
+    "han": "口碑传播",
+    "pinyin": "kǒubēi chuánbō",
+    "vi": "lan truyền tiếng tốt",
+    "col": "靠口碑传播",
+    "ex": "这家小店不做广告，全靠口碑传播，生意也很好。",
+    "exv": "Cửa hàng nhỏ này không quảng cáo, hoàn toàn dựa vào lan truyền tiếng tốt, việc làm ăn cũng rất tốt."
+   },
+   {
+    "han": "调研报告",
+    "pinyin": "diàoyán bàogào",
+    "vi": "báo cáo điều tra",
+    "col": "写调研报告",
+    "ex": "调查结束以后，要写调研报告，交给领导看。",
+    "exv": "Sau khi điều tra kết thúc, phải viết báo cáo điều tra, giao cho lãnh đạo xem."
+   },
+   {
+    "han": "市场细分",
+    "pinyin": "shìchǎng xìfēn",
+    "vi": "phân khúc thị trường",
+    "col": "市场细分很重要",
+    "ex": "市场细分很重要，不同年龄的人喜欢不同的东西。",
+    "exv": "Phân khúc thị trường rất quan trọng, người độ tuổi khác nhau thích đồ khác nhau."
+   }
+  ]
+ },
+ {
+  "topic": "HSK5 — Phúc lợi xã hội và chăm sóc người cao tuổi",
+  "hsk": "HSK5",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "养老院",
+    "pinyin": "yǎnglǎoyuàn",
+    "vi": "viện dưỡng lão",
+    "col": "住养老院",
+    "ex": "有的老人愿意住养老院，那里有人照顾，还有伴儿。",
+    "exv": "Có người già muốn ở viện dưỡng lão, ở đó có người chăm sóc, còn có bạn."
+   },
+   {
+    "han": "护理人员",
+    "pinyin": "hùlǐ rényuán",
+    "vi": "nhân viên chăm sóc",
+    "col": "护理人员很耐心",
+    "ex": "养老院的护理人员很耐心，对老人像对自己的父母。",
+    "exv": "Nhân viên chăm sóc của viện dưỡng lão rất kiên nhẫn, đối với người già như đối với cha mẹ mình."
+   },
+   {
+    "han": "赡养老人",
+    "pinyin": "shànyǎng lǎorén",
+    "vi": "phụng dưỡng người già",
+    "col": "赡养老人是责任",
+    "ex": "赡养老人是责任，儿女长大了要照顾父母。",
+    "exv": "Phụng dưỡng người già là trách nhiệm, con cái lớn lên phải chăm sóc cha mẹ."
+   },
+   {
+    "han": "孝敬父母",
+    "pinyin": "xiàojìng fùmǔ",
+    "vi": "hiếu kính cha mẹ",
+    "col": "孝敬父母要行动",
+    "ex": "孝敬父母要行动，不光是嘴上说说，要常回家看看。",
+    "exv": "Hiếu kính cha mẹ phải hành động, không chỉ nói miệng, phải thường về nhà thăm."
+   },
+   {
+    "han": "敬老爱老",
+    "pinyin": "jìng lǎo ài lǎo",
+    "vi": "kính già yêu già",
+    "col": "敬老爱老是传统",
+    "ex": "敬老爱老是传统，年轻人坐车要给老人让座。",
+    "exv": "Kính già yêu già là truyền thống, người trẻ đi xe phải nhường ghế cho người già."
+   },
+   {
+    "han": "空巢老人",
+    "pinyin": "kōngcháo lǎorén",
+    "vi": "người già sống một mình",
+    "col": "空巢老人很孤单",
+    "ex": "空巢老人很孤单，社区常常组织人去陪他们聊天。",
+    "exv": "Người già sống một mình rất cô đơn, cộng đồng thường tổ chức người đến trò chuyện cùng họ."
+   },
+   {
+    "han": "老年大学",
+    "pinyin": "lǎonián dàxué",
+    "vi": "trường đại học người cao tuổi",
+    "col": "老年大学学画画",
+    "ex": "奶奶在老年大学学画画，还交了很多朋友。",
+    "exv": "Bà học vẽ ở trường đại học người cao tuổi, còn kết nhiều bạn."
+   },
+   {
+    "han": "广场舞",
+    "pinyin": "guǎngchǎngwǔ",
+    "vi": "múa quảng trường",
+    "col": "跳广场舞",
+    "ex": "每天晚上，阿姨们在广场跳广场舞，热热闹闹。",
+    "exv": "Mỗi tối, các cô ở quảng trường múa quảng trường, náo nhiệt."
+   },
+   {
+    "han": "晨练队伍",
+    "pinyin": "chénliàn duìwu",
+    "vi": "đội tập buổi sáng",
+    "col": "晨练队伍很整齐",
+    "ex": "公园里的晨练队伍很整齐，动作一致。",
+    "exv": "Đội tập buổi sáng trong công viên rất đều, động tác thống nhất."
+   },
+   {
+    "han": "福利院",
+    "pinyin": "fúlìyuàn",
+    "vi": "viện phúc lợi",
+    "col": "福利院的孩子",
+    "ex": "福利院的孩子需要大家的关心和帮助。",
+    "exv": "Trẻ em của viện phúc lợi cần sự quan tâm và giúp đỡ của mọi người."
+   },
+   {
+    "han": "救助站",
+    "pinyin": "jiùzhùzhàn",
+    "vi": "trạm cứu trợ",
+    "col": "救助站帮忙",
+    "ex": "流浪的人可以去救助站帮忙，那里提供吃住。",
+    "exv": "Người lang thang có thể đến trạm cứu trợ giúp đỡ, ở đó cung cấp ăn ở."
+   },
+   {
+    "han": "低保家庭",
+    "pinyin": "dībǎo jiātíng",
+    "vi": "gia đình hưởng trợ cấp tối thiểu",
+    "col": "低保家庭有补贴",
+    "ex": "低保家庭有补贴，每个月能领一笔生活费。",
+    "exv": "Gia đình hưởng trợ cấp tối thiểu có phụ cấp, mỗi tháng nhận được một khoản tiền sinh hoạt."
+   },
+   {
+    "han": "社会救助",
+    "pinyin": "shèhuì jiùzhù",
+    "vi": "cứu trợ xã hội",
+    "col": "社会救助制度",
+    "ex": "社会救助制度越来越完善，困难的人能得到帮助。",
+    "exv": "Chế độ cứu trợ xã hội ngày càng hoàn thiện, người khó khăn được giúp đỡ."
+   },
+   {
+    "han": "慈善捐赠",
+    "pinyin": "císhàn juānzèng",
+    "vi": "quyên tặng từ thiện",
+    "col": "慈善捐赠献爱心",
+    "ex": "很多企业通过慈善捐赠献爱心，帮助贫困地区的孩子上学。",
+    "exv": "Nhiều doanh nghiệp qua quyên tặng từ thiện dâng tặng tình yêu thương, giúp trẻ em vùng nghèo đi học."
+   },
+   {
+    "han": "公益活动",
+    "pinyin": "gōngyì huódòng",
+    "vi": "hoạt động công ích",
+    "col": "参加公益活动",
+    "ex": "周末很多年轻人参加公益活动，去敬老院帮忙。",
+    "exv": "Cuối tuần nhiều người trẻ tham gia hoạt động công ích, đến viện dưỡng lão giúp đỡ."
+   },
+   {
+    "han": "志愿者服务",
+    "pinyin": "zhìyuànzhě fúwù",
+    "vi": "dịch vụ tình nguyện viên",
+    "col": "志愿者服务很辛苦",
+    "ex": "志愿者服务很辛苦，但是帮助了别人，自己也开心。",
+    "exv": "Dịch vụ tình nguyện viên rất vất vả, nhưng giúp được người khác, bản thân cũng vui."
+   },
+   {
+    "han": "社区养老",
+    "pinyin": "shèqū yǎnglǎo",
+    "vi": "dưỡng lão tại cộng đồng",
+    "col": "社区养老很方便",
+    "ex": "社区养老很方便，老人不用离开熟悉的环境。",
+    "exv": "Dưỡng lão tại cộng đồng rất tiện, người già không phải rời môi trường quen thuộc."
+   },
+   {
+    "han": "居家养老",
+    "pinyin": "jūjiā yǎnglǎo",
+    "vi": "dưỡng lão tại nhà",
+    "col": "居家养老受欢迎",
+    "ex": "居家养老受欢迎，很多老人愿意住在自己家里。",
+    "exv": "Dưỡng lão tại nhà được ưa chuộng, nhiều người già muốn ở nhà mình."
+   },
+   {
+    "han": "医养结合",
+    "pinyin": "yī yǎng jiéhé",
+    "vi": "kết hợp y tế và dưỡng lão",
+    "col": "医养结合的模式",
+    "ex": "医养结合的模式很好，看病和养老在一个地方。",
+    "exv": "Mô hình kết hợp y tế và dưỡng lão rất tốt, khám bệnh và dưỡng lão ở một nơi."
+   },
+   {
+    "han": "安度晚年",
+    "pinyin": "āndù wǎnnián",
+    "vi": "an hưởng tuổi già",
+    "col": "安度晚年的愿望",
+    "ex": "每个老人都希望安度晚年，儿女常回家看看。",
+    "exv": "Mỗi người già đều mong an hưởng tuổi già, con cái thường về nhà thăm."
+   }
+  ]
+ },
+ {
+  "topic": "HSK6 — Toàn cầu hóa và hội nhập kinh tế",
+  "hsk": "HSK6",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "经济全球化",
+    "pinyin": "jīngjì quánqiúhuà",
+    "vi": "toàn cầu hóa kinh tế",
+    "col": "经济全球化的大趋势",
+    "ex": "经济全球化的大趋势不可阻挡，各国联系越来越紧。",
+    "exv": "Xu thế lớn toàn cầu hóa kinh tế không thể ngăn cản, các nước liên hệ ngày càng chặt."
+   },
+   {
+    "han": "区域一体化",
+    "pinyin": "qūyù yìtǐhuà",
+    "vi": "nhất thể hóa khu vực",
+    "col": "区域一体化加快",
+    "ex": "区域一体化加快，邻国之间的贸易越来越方便。",
+    "exv": "Nhất thể hóa khu vực tăng nhanh, thương mại giữa các nước láng giềng ngày càng tiện."
+   },
+   {
+    "han": "多边合作",
+    "pinyin": "duōbiān hézuò",
+    "vi": "hợp tác đa phương",
+    "col": "加强多边合作",
+    "ex": "各国要加强多边合作，一起应对气候变化。",
+    "exv": "Các nước phải tăng cường hợp tác đa phương, cùng ứng phó biến đổi khí hậu."
+   },
+   {
+    "han": "双边关系",
+    "pinyin": "shuāngbiān guānxì",
+    "vi": "quan hệ song phương",
+    "col": "双边关系很重要",
+    "ex": "双边关系很重要，直接影响两国的贸易和人员往来。",
+    "exv": "Quan hệ song phương rất quan trọng, ảnh hưởng trực tiếp thương mại và giao lưu nhân sự của hai nước."
+   },
+   {
+    "han": "关税壁垒",
+    "pinyin": "guānshuì bìlèi",
+    "vi": "rào cản thuế quan",
+    "col": "关税壁垒提高了成本",
+    "ex": "关税壁垒提高了成本，进口商品变贵了。",
+    "exv": "Rào cản thuế quan làm tăng chi phí, hàng nhập khẩu đắt lên."
+   },
+   {
+    "han": "贸易逆差",
+    "pinyin": "màoyì nìchā",
+    "vi": "thâm hụt thương mại",
+    "col": "贸易逆差扩大",
+    "ex": "今年贸易逆差扩大，进口比出口多很多。",
+    "exv": "Năm nay thâm hụt thương mại mở rộng, nhập khẩu nhiều hơn xuất khẩu rất nhiều."
+   },
+   {
+    "han": "倾销行为",
+    "pinyin": "qīngxiāo xíngwéi",
+    "vi": "hành vi bán phá giá",
+    "col": "倾销行为受处罚",
+    "ex": "倾销行为受处罚，破坏了公平竞争的市场。",
+    "exv": "Hành vi bán phá giá bị xử phạt, phá hoại thị trường cạnh tranh công bằng."
+   },
+   {
+    "han": "经济制裁",
+    "pinyin": "jīngjì zhìcái",
+    "vi": "trừng phạt kinh tế",
+    "col": "经济制裁的影响",
+    "ex": "经济制裁的影响很大，普通百姓的生活也受影响。",
+    "exv": "Ảnh hưởng của trừng phạt kinh tế rất lớn, đời sống người dân thường cũng bị ảnh hưởng."
+   },
+   {
+    "han": "自由贸易",
+    "pinyin": "zìyóu màoyì",
+    "vi": "thương mại tự do",
+    "col": "自由贸易的好处",
+    "ex": "自由贸易的好处是商品种类多，价格也便宜。",
+    "exv": "Lợi ích của thương mại tự do là chủng loại hàng hóa nhiều, giá cũng rẻ."
+   },
+   {
+    "han": "投资环境",
+    "pinyin": "tóuzī huánjìng",
+    "vi": "môi trường đầu tư",
+    "col": "改善投资环境",
+    "ex": "这个城市改善投资环境，吸引了很多外资企业。",
+    "exv": "Thành phố này cải thiện môi trường đầu tư, thu hút nhiều doanh nghiệp vốn nước ngoài."
+   },
+   {
+    "han": "外资企业",
+    "pinyin": "wàizī qǐyè",
+    "vi": "doanh nghiệp vốn nước ngoài",
+    "col": "外资企业很多",
+    "ex": "开发区里外资企业很多，提供了不少工作机会。",
+    "exv": "Trong khu phát triển doanh nghiệp vốn nước ngoài rất nhiều, cung cấp không ít cơ hội việc làm."
+   },
+   {
+    "han": "跨国公司",
+    "pinyin": "kuàguó gōngsī",
+    "vi": "công ty đa quốc gia",
+    "col": "跨国公司的分公司",
+    "ex": "这家跨国公司的分公司遍布二十多个国家。",
+    "exv": "Chi nhánh của công ty đa quốc gia nàycó mặt ở hơn hai mươi nước."
+   },
+   {
+    "han": "供应链断裂",
+    "pinyin": "gōngyìngliàn duànliè",
+    "vi": "chuỗi cung ứng đứt gãy",
+    "col": "供应链断裂的后果",
+    "ex": "供应链断裂的后果很严重，很多工厂停工了。",
+    "exv": "Hậu quả của chuỗi cung ứng đứt gãy rất nghiêm trọng, nhiều nhà máy ngừng việc."
+   },
+   {
+    "han": "汇率波动",
+    "pinyin": "huìlǜ bōdòng",
+    "vi": "tỷ giá biến động",
+    "col": "汇率波动很大",
+    "ex": "最近汇率波动很大，做外贸的人要小心。",
+    "exv": "Gần đây tỷ giá biến động rất lớn, người làm ngoại thương phải cẩn thận."
+   },
+   {
+    "han": "金融危机",
+    "pinyin": "jīnróng wēijī",
+    "vi": "khủng hoảng tài chính",
+    "col": "金融危机的影响",
+    "ex": "金融危机的影响持续了好几年，很多人失业了。",
+    "exv": "Ảnh hưởng của khủng hoảng tài chính kéo dài mấy năm, nhiều người thất nghiệp."
+   },
+   {
+    "han": "经济复苏",
+    "pinyin": "jīngjì fùsū",
+    "vi": "phục hồi kinh tế",
+    "col": "经济复苏的迹象",
+    "ex": "经济复苏的迹象出现了，商店的生意好起来了。",
+    "exv": "Dấu hiệu phục hồi kinh tế xuất hiện, việc làm ăn của cửa hàng tốt lên."
+   },
+   {
+    "han": "可持续增长",
+    "pinyin": "kě chíxù zēngzhǎng",
+    "vi": "tăng trưởng bền vững",
+    "col": "可持续增长的目标",
+    "ex": "国家提出可持续增长的目标，不光看速度，还要看质量。",
+    "exv": "Nhà nước đưa ra mục tiêu tăng trưởng bền vững, không chỉ xem tốc độ, còn xem chất lượng."
+   },
+   {
+    "han": "共同富裕",
+    "pinyin": "gòngtóng fùyù",
+    "vi": "cùng nhau giàu có",
+    "col": "共同富裕的道路",
+    "ex": "共同富裕的道路很长，要一步一步走。",
+    "exv": "Con đường cùng nhau giàu có rất dài, phải đi từng bước một."
+   },
+   {
+    "han": "经济一体化",
+    "pinyin": "jīngjì yìtǐhuà",
+    "vi": "nhất thể hóa kinh tế",
+    "col": "经济一体化程度",
+    "ex": "这个地区的经济一体化程度很高，货币都可以通用。",
+    "exv": "Mức độ nhất thể hóa kinh tế của khu vực này rất cao, tiền tệ đều có thể dùng chung."
+   },
+   {
+    "han": "贸易自由化",
+    "pinyin": "màoyì zìyóuhuà",
+    "vi": "tự do hóa thương mại",
+    "col": "贸易自由化进程",
+    "ex": "贸易自由化进程加快，关税越来越低。",
+    "exv": "Quá trình tự do hóa thương mại tăng nhanh, thuế quan ngày càng thấp."
+   }
+  ]
+ },
+ {
+  "topic": "HSK6 — Đạo đức khoa học và trách nhiệm nghiên cứu",
+  "hsk": "HSK6",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "学术伦理",
+    "pinyin": "xuéshù lúnlǐ",
+    "vi": "đạo đức học thuật",
+    "col": "学术伦理课",
+    "ex": "大学开了学术伦理课，教学生怎么做诚实的研究。",
+    "exv": "Trường đại học mở môn đạo đức học thuật, dạy sinh viên làm nghiên cứu trung thực thế nào."
+   },
+   {
+    "han": "科研诚信",
+    "pinyin": "kēyán chéngxìn",
+    "vi": "trung thực nghiên cứu",
+    "col": "科研诚信最重要",
+    "ex": "做研究的时候，科研诚信最重要，数据不能造假。",
+    "exv": "Khi làm nghiên cứu, trung thực nghiên cứu là quan trọng nhất, số liệu không được giả mạo."
+   },
+   {
+    "han": "抄袭行为",
+    "pinyin": "chāoxí xíngwéi",
+    "vi": "hành vi sao chép",
+    "col": "抄袭行为被发现",
+    "ex": "抄袭行为被发现以后，他的论文被取消了。",
+    "exv": "Sau khi hành vi sao chép bị phát hiện, luận văn của anh ấy bị hủy."
+   },
+   {
+    "han": "数据造假",
+    "pinyin": "shùjù zàojiǎ",
+    "vi": "số liệu giả mạo",
+    "col": "数据造假很严重",
+    "ex": "数据造假很严重，一旦发现就要受到处罚。",
+    "exv": "Số liệu giả mạo rất nghiêm trọng, một khi phát hiện sẽ bị xử phạt."
+   },
+   {
+    "han": "研究基金",
+    "pinyin": "yánjiū jījīn",
+    "vi": "quỹ nghiên cứu",
+    "col": "申请研究基金",
+    "ex": "教授申请研究基金，用来买实验设备。",
+    "exv": "Giáo sư đăng ký quỹ nghiên cứu, dùng để mua thiết bị thí nghiệm."
+   },
+   {
+    "han": "课题立项",
+    "pinyin": "kètí lìxiàng",
+    "vi": "lập đề tài",
+    "col": "课题立项通过",
+    "ex": "课题立项通过以后，研究小组正式开始工作。",
+    "exv": "Sau khi lập đề tài được duyệt, nhóm nghiên cứu chính thức bắt đầu làm việc."
+   },
+   {
+    "han": "实验设计",
+    "pinyin": "shíyàn shèjì",
+    "vi": "thiết kế thí nghiệm",
+    "col": "实验设计要合理",
+    "ex": "实验设计要合理，不然结果不可靠。",
+    "exv": "Thiết kế thí nghiệm phải hợp lý, nếu không kết quả không đáng tin."
+   },
+   {
+    "han": "实验组",
+    "pinyin": "shíyànzǔ",
+    "vi": "nhóm thí nghiệm",
+    "col": "实验组和对照组",
+    "ex": "实验组和对照组要分开，才能比较出效果。",
+    "exv": "Nhóm thí nghiệm và nhóm đối chứng phải tách ra, mới so sánh được hiệu quả."
+   },
+   {
+    "han": "变量控制",
+    "pinyin": "biànliàng kòngzhì",
+    "vi": "kiểm soát biến số",
+    "col": "变量控制很重要",
+    "ex": "做实验的时候，变量控制很重要，只改变一个条件。",
+    "exv": "Khi làm thí nghiệm, kiểm soát biến số rất quan trọng, chỉ thay đổi một điều kiện."
+   },
+   {
+    "han": "提出假设",
+    "pinyin": "tíchū jiǎshè",
+    "vi": "đưa ra giả thuyết",
+    "col": "先提出假设",
+    "ex": "做研究要先提出假设，再通过实验验证。",
+    "exv": "Làm nghiên cứu phải đưa ra giả thuyết trước, rồi qua thí nghiệm kiểm chứng."
+   },
+   {
+    "han": "验证假设",
+    "pinyin": "yànzhèng jiǎshè",
+    "vi": "kiểm chứng giả thuyết",
+    "col": "实验验证假设",
+    "ex": "实验验证假设以后，才能得出结论。",
+    "exv": "Thí nghiệm kiểm chứng giả thuyết xong mới đưa ra kết luận được."
+   },
+   {
+    "han": "研究结论",
+    "pinyin": "yánjiū jiélùn",
+    "vi": "kết luận nghiên cứu",
+    "col": "研究结论要谨慎",
+    "ex": "研究结论要谨慎，不能超出数据的范围。",
+    "exv": "Kết luận nghiên cứu phải thận trọng, không được vượt quá phạm vi số liệu."
+   },
+   {
+    "han": "学术规范",
+    "pinyin": "xuéshù guīfàn",
+    "vi": "quy phạm học thuật",
+    "col": "遵守学术规范",
+    "ex": "写论文要遵守学术规范，引用要注明出处。",
+    "exv": "Viết luận văn phải tuân thủ quy phạm học thuật, trích dẫn phải ghi rõ nguồn."
+   },
+   {
+    "han": "引用规范",
+    "pinyin": "yǐnyòng guīfàn",
+    "vi": "quy phạm trích dẫn",
+    "col": "引用规范很重要",
+    "ex": "引用规范很重要，抄别人的话要加引号。",
+    "exv": "Quy phạm trích dẫn rất quan trọng, chép lời người khác phải thêm dấu ngoặc kép."
+   },
+   {
+    "han": "知识产权",
+    "pinyin": "zhīshi chǎnquán",
+    "vi": "quyền sở hữu trí tuệ",
+    "col": "保护知识产权",
+    "ex": "保护知识产权，才能鼓励更多人创新。",
+    "exv": "Bảo vệ quyền sở hữu trí tuệ mới khuyến khích nhiều người đổi mới hơn."
+   },
+   {
+    "han": "专利申请",
+    "pinyin": "zhuānlì shēnqǐng",
+    "vi": "đăng ký sáng chế",
+    "col": "专利申请通过",
+    "ex": "他的专利申请通过了，发明得到了法律保护。",
+    "exv": "Đăng ký sáng chế của anh ấy được duyệt, phát minh được pháp luật bảo vệ."
+   },
+   {
+    "han": "成果转化",
+    "pinyin": "chéngguǒ zhuǎnhuà",
+    "vi": "chuyển hóa thành quả",
+    "col": "成果转化成产品",
+    "ex": "研究成果转化成产品，才能真正走进生活。",
+    "exv": "Thành quả nghiên cứu chuyển hóa thành sản phẩm mới thật sự đi vào đời sống."
+   },
+   {
+    "han": "产学研合作",
+    "pinyin": "chǎn xué yán hézuò",
+    "vi": "hợp tác sản xuất học thuật nghiên cứu",
+    "col": "产学研合作的项目",
+    "ex": "产学研合作的项目很多，企业出钱，大学出技术。",
+    "exv": "Dự án hợp tác sản xuất học thuật nghiên cứu rất nhiều, doanh nghiệp bỏ tiền, trường đại học bỏ kỹ thuật."
+   },
+   {
+    "han": "实验伦理",
+    "pinyin": "shíyàn lúnlǐ",
+    "vi": "đạo đức thí nghiệm",
+    "col": "实验伦理审查",
+    "ex": "做动物实验要通过实验伦理审查，不能伤害动物。",
+    "exv": "Làm thí nghiệm động vật phải qua thẩm tra đạo đức thí nghiệm, không được làm hại động vật."
+   },
+   {
+    "han": "学术不端",
+    "pinyin": "xuéshù bùduān",
+    "vi": "hành vi sai trái học thuật",
+    "col": "学术不端受处罚",
+    "ex": "学术不端受处罚，轻的警告，重的开除。",
+    "exv": "Hành vi sai trái học thuật bị xử phạt, nhẹ thì cảnh cáo, nặng thì đuổi học."
+   }
+  ]
+ },
+ {
+  "topic": "HSK6 — Chính sách công và quản trị xã hội",
+  "hsk": "HSK6",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "公共政策",
+    "pinyin": "gōnggòng zhèngcè",
+    "vi": "chính sách công",
+    "col": "公共政策的制定",
+    "ex": "公共政策的制定要听老百姓的意见，不能关起门来定。",
+    "exv": "Việc xây dựng chính sách công phải nghe ý kiến người dân, không thể đóng cửa tự quyết."
+   },
+   {
+    "han": "法律法规",
+    "pinyin": "fǎlǜ fǎguī",
+    "vi": "pháp luật và quy định",
+    "col": "遵守法律法规",
+    "ex": "每个公民都要遵守法律法规，做事不能违法。",
+    "exv": "Mỗi công dân đều phải tuân thủ pháp luật và quy định, làm việc không được phạm pháp."
+   },
+   {
+    "han": "条例草案",
+    "pinyin": "tiáolì cǎoàn",
+    "vi": "dự thảo điều lệ",
+    "col": "条例草案公开",
+    "ex": "条例草案公开以后，大家可以提意见。",
+    "exv": "Sau khi dự thảo điều lệ công khai, mọi người có thể góp ý."
+   },
+   {
+    "han": "公开听证",
+    "pinyin": "gōngkāi tīngzhèng",
+    "vi": "điều trần công khai",
+    "col": "举行公开听证",
+    "ex": "修路之前，政府举行公开听证，听听居民的想法。",
+    "exv": "Trước khi làm đường, chính phủ tổ chức điều trần công khai, nghe ý nghĩ của cư dân."
+   },
+   {
+    "han": "征求意见",
+    "pinyin": "zhēngqiú yìjiàn",
+    "vi": "xin ý kiến",
+    "col": "向社会征求意见",
+    "ex": "新政策出台之前，要向社会征求意见一个月。",
+    "exv": "Trước khi chính sách mới ra đời, phải xin ý kiến xã hội một tháng."
+   },
+   {
+    "han": "政策执行",
+    "pinyin": "zhèngcè zhíxíng",
+    "vi": "thực thi chính sách",
+    "col": "政策执行要到位",
+    "ex": "政策执行要到位，不能上面定了，下面不动。",
+    "exv": "Thực thi chính sách phải đến nơi đến chốn, không thể trên quyết dưới không động."
+   },
+   {
+    "han": "监督问责",
+    "pinyin": "jiāndū wènzé",
+    "vi": "giám sát và truy trách nhiệm",
+    "col": "加强监督问责",
+    "ex": "加强监督问责，做得不好的人要承担责任。",
+    "exv": "Tăng cường giám sát và truy trách nhiệm, người làm không tốt phải chịu trách nhiệm."
+   },
+   {
+    "han": "政务公开",
+    "pinyin": "zhèngwù gōngkāi",
+    "vi": "công khai công vụ",
+    "col": "政务公开透明",
+    "ex": "政务公开透明，老百姓办事心里有数。",
+    "exv": "Công khai công vụ minh bạch, người dân làm việc trong lòng yên tâm."
+   },
+   {
+    "han": "廉洁自律",
+    "pinyin": "liánjié zìlǜ",
+    "vi": "liêm khiết tự kiềm chế",
+    "col": "廉洁自律的干部",
+    "ex": "廉洁自律的干部受人尊敬，不贪不占。",
+    "exv": "Cán bộ liêm khiết tự kiềm chế được người tôn trọng, không tham không chiếm."
+   },
+   {
+    "han": "反腐倡廉",
+    "pinyin": "fǎnfǔ chànglián",
+    "vi": "chống tham nhũng đề cao liêm khiết",
+    "col": "反腐倡廉的工作",
+    "ex": "反腐倡廉的工作一直在做，发现一个查一个。",
+    "exv": "Công tác chống tham nhũng đề cao liêm khiết vẫn luôn làm, phát hiện một xử lý một."
+   },
+   {
+    "han": "基层治理",
+    "pinyin": "jīcéng zhìlǐ",
+    "vi": "quản trị cơ sở",
+    "col": "基层治理很重要",
+    "ex": "基层治理很重要，关系到老百姓的日常生活。",
+    "exv": "Quản trị cơ sở rất quan trọng, liên quan đến đời sống hằng ngày của người dân."
+   },
+   {
+    "han": "社区自治",
+    "pinyin": "shèqū zìzhì",
+    "vi": "tự trị cộng đồng",
+    "col": "社区自治的办法",
+    "ex": "社区自治的办法很多，居民自己商量着办。",
+    "exv": "Cách tự trị cộng đồng rất nhiều, cư dân tự bàn bạc mà làm."
+   },
+   {
+    "han": "公众参与",
+    "pinyin": "gōngzhòng cānyù",
+    "vi": "công chúng tham gia",
+    "col": "公众参与决策",
+    "ex": "公众参与决策，政策才能更符合大家的需要。",
+    "exv": "Công chúng tham gia quyết sách, chính sách mới phù hợp nhu cầu mọi người hơn."
+   },
+   {
+    "han": "利益协调",
+    "pinyin": "lìyì xiétiáo",
+    "vi": "điều phối lợi ích",
+    "col": "利益协调很难",
+    "ex": "不同群体的利益协调很难，需要耐心谈。",
+    "exv": "Điều phối lợi ích các nhóm khác nhau rất khó, cần kiên nhẫn đàm phán."
+   },
+   {
+    "han": "社会稳定",
+    "pinyin": "shèhuì wěndìng",
+    "vi": "ổn định xã hội",
+    "col": "维护社会稳定",
+    "ex": "维护社会稳定，人人有责，从小事做起。",
+    "exv": "Giữ gìn ổn định xã hội, ai cũng có trách nhiệm, bắt đầu từ việc nhỏ."
+   },
+   {
+    "han": "风险防范",
+    "pinyin": "fēngxiǎn fángfàn",
+    "vi": "phòng ngừa rủi ro",
+    "col": "风险防范意识",
+    "ex": "企业要有风险防范意识，提前准备应急方案。",
+    "exv": "Doanh nghiệp phải có ý thức phòng ngừa rủi ro, chuẩn bị phương án ứng phó trước."
+   },
+   {
+    "han": "应急管理",
+    "pinyin": "yìngjí guǎnlǐ",
+    "vi": "quản lý ứng phó khẩn cấp",
+    "col": "应急管理部门",
+    "ex": "应急管理部门负责处理地震、洪水等突发事件。",
+    "exv": "Cơ quan quản lý ứng phó khẩn cấp phụ trách xử lý động đất, lũ lụt và các sự kiện đột xuất."
+   },
+   {
+    "han": "信息公开",
+    "pinyin": "xìnxī gōngkāi",
+    "vi": "công khai thông tin",
+    "col": "信息公开及时",
+    "ex": "信息公开及时，老百姓就不会乱猜。",
+    "exv": "Công khai thông tin kịp thời, người dân sẽ không đoán mò."
+   },
+   {
+    "han": "透明度",
+    "pinyin": "tòumíngdù",
+    "vi": "độ minh bạch",
+    "col": "提高透明度",
+    "ex": "提高透明度，让权力在阳光下运行。",
+    "exv": "Nâng cao độ minh bạch, để quyền lực vận hành dưới ánh nắng."
+   },
+   {
+    "han": "公信力",
+    "pinyin": "gōngxìnlì",
+    "vi": "uy tín công cộng",
+    "col": "公信力很重要",
+    "ex": "政府的公信力很重要，说到就要做到。",
+    "exv": "Uy tín công cộng của chính phủ rất quan trọng, nói được phải làm được."
+   }
+  ]
+ },
+ {
+  "topic": "HSK6 — Văn hóa đại chúng và truyền thông toàn cầu",
+  "hsk": "HSK6",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "流量明星",
+    "pinyin": "liúliàng míngxīng",
+    "vi": "ngôi sao lưu lượng",
+    "col": "流量明星的粉丝",
+    "ex": "流量明星的粉丝很多，一条消息就有几十万点赞。",
+    "exv": "Người hâm mộ của ngôi sao lưu lượng rất đông, một tin nhắn có mấy chục vạn lượt thích."
+   },
+   {
+    "han": "热搜榜单",
+    "pinyin": "rèsōu bǎngdān",
+    "vi": "bảng tìm kiếm nóng",
+    "col": "登上热搜榜单",
+    "ex": "这部剧播出以后，马上登上热搜榜单。",
+    "exv": "Sau khi bộ phim này phát sóng, lập tức lên bảng tìm kiếm nóng."
+   },
+   {
+    "han": "粉丝经济",
+    "pinyin": "fěnsī jīngjì",
+    "vi": "kinh tế người hâm mộ",
+    "col": "粉丝经济的力量",
+    "ex": "粉丝经济的力量很大，粉丝买什么，偶像就推什么。",
+    "exv": "Sức mạnh của kinh tế người hâm mộ rất lớn, người hâm mộ mua gì, thần tượng giới thiệu cái đó."
+   },
+   {
+    "han": "网络红人",
+    "pinyin": "wǎngluò hóngrén",
+    "vi": "người nổi tiếng mạng",
+    "col": "网络红人带货",
+    "ex": "网络红人带货很厉害，一场直播能卖几百万。",
+    "exv": "Người nổi tiếng mạng bán hàng rất giỏi, một buổi livestream bán được mấy triệu."
+   },
+   {
+    "han": "弹幕评论",
+    "pinyin": "dànmù pínglùn",
+    "vi": "bình luận đạn mạc",
+    "col": "弹幕评论很有趣",
+    "ex": "看视频的时候，弹幕评论很有趣，大家一边看一边聊。",
+    "exv": "Khi xem video, bình luận đạn mạc rất thú vị, mọi người vừa xem vừa trò chuyện."
+   },
+   {
+    "han": "综艺节目",
+    "pinyin": "zōngyì jiémù",
+    "vi": "chương trình tạp kỹ",
+    "col": "综艺节目很火",
+    "ex": "这档综艺节目很火，每周都有几千万人看。",
+    "exv": "Chương trình tạp kỹ này rất hot, mỗi tuần có mấy chục triệu người xem."
+   },
+   {
+    "han": "选秀比赛",
+    "pinyin": "xuǎnxiù bǐsài",
+    "vi": "cuộc thi tuyển chọn tài năng",
+    "col": "选秀比赛选偶像",
+    "ex": "选秀比赛选偶像，年轻人通过比赛出道。",
+    "exv": "Cuộc thi tuyển chọn tài năng chọn thần tượng, người trẻ qua cuộc thi ra mắt."
+   },
+   {
+    "han": "出圈破圈",
+    "pinyin": "chūquān pòquān",
+    "vi": "vượt khỏi vòng tròn riêng",
+    "col": "出圈破圈很难",
+    "ex": "一个小众爱好要出圈破圈很难，需要好的作品。",
+    "exv": "Một sở thích nhỏ muốn vượt khỏi vòng tròn riêng rất khó, cần tác phẩm hay."
+   },
+   {
+    "han": "文化输出",
+    "pinyin": "wénhuà shūchū",
+    "vi": "xuất khẩu văn hóa",
+    "col": "文化输出的影响",
+    "ex": "文化输出的影响很大，外国人通过电影了解中国。",
+    "exv": "Ảnh hưởng của xuất khẩu văn hóa rất lớn, người nước ngoài qua phim hiểu Trung Quốc."
+   },
+   {
+    "han": "跨文化传播",
+    "pinyin": "kuà wénhuà chuánbō",
+    "vi": "truyền bá liên văn hóa",
+    "col": "跨文化传播的桥梁",
+    "ex": "翻译就是跨文化传播的桥梁，让不同国家的人互相理解。",
+    "exv": "Phiên dịch chính là cầu nối truyền bá liên văn hóa, để người các nước khác nhau hiểu nhau."
+   },
+   {
+    "han": "媒介素养",
+    "pinyin": "méijiè sùyǎng",
+    "vi": "năng lực sử dụng truyền thông",
+    "col": "提高媒介素养",
+    "ex": "学生要提高媒介素养，不轻信网上的消息。",
+    "exv": "Học sinh phải nâng cao năng lực sử dụng truyền thông, không vội tin tin tức trên mạng."
+   },
+   {
+    "han": "舆论引导",
+    "pinyin": "yúlùn yǐndǎo",
+    "vi": "định hướng dư luận",
+    "col": "舆论引导很重要",
+    "ex": "出了大事，舆论引导很重要，要及时说清楚事实。",
+    "exv": "Xảy ra việc lớn, định hướng dư luận rất quan trọng, phải kịp thời nói rõ sự thật."
+   },
+   {
+    "han": "热点事件",
+    "pinyin": "rèdiǎn shìjiàn",
+    "vi": "sự kiện nóng",
+    "col": "热点事件一出",
+    "ex": "热点事件一出，网上马上就讨论开了。",
+    "exv": "Sự kiện nóng vừa xuất hiện, trên mạng lập tức bàn luận sôi nổi."
+   },
+   {
+    "han": "网络暴力",
+    "pinyin": "wǎngluò bàolì",
+    "vi": "bạo lực mạng",
+    "col": "反对网络暴力",
+    "ex": "我们要反对网络暴力，不在网上骂人、造谣。",
+    "exv": "Chúng ta phải phản đối bạo lực mạng, không chửi người, bịa tin trên mạng."
+   },
+   {
+    "han": "键盘侠",
+    "pinyin": "jiànpánxiá",
+    "vi": "anh hùng bàn phím",
+    "col": "键盘侠只会骂人",
+    "ex": "键盘侠只会骂人，现实中却不敢站出来。",
+    "exv": "Anh hùng bàn phím chỉ biết chửi người, ngoài đời thực lại không dám đứng ra."
+   },
+   {
+    "han": "跟风现象",
+    "pinyin": "gēnfēng xiànxiàng",
+    "vi": "hiện tượng chạy theo phong trào",
+    "col": "跟风现象很普遍",
+    "ex": "跟风现象很普遍，别人买什么，自己也跟着买。",
+    "exv": "Hiện tượng chạy theo phong trào rất phổ biến, người khác mua gì, mình cũng mua theo."
+   },
+   {
+    "han": "审美标准",
+    "pinyin": "shěnměi biāozhǔn",
+    "vi": "tiêu chuẩn thẩm mỹ",
+    "col": "审美标准不一样",
+    "ex": "每个时代的审美标准不一样，不能用今天的眼光否定过去。",
+    "exv": "Tiêu chuẩn thẩm mỹ mỗi thời đại khác nhau, không thể dùng con mắt hôm nay phủ định quá khứ."
+   },
+   {
+    "han": "流行趋势",
+    "pinyin": "liúxíng qūshì",
+    "vi": "xu hướng thịnh hành",
+    "col": "流行趋势变化快",
+    "ex": "流行趋势变化快，今年流行的，明年可能就过时了。",
+    "exv": "Xu hướng thịnh hành thay đổi nhanh, năm nay thịnh hành, năm sau có thể đã lỗi thời."
+   },
+   {
+    "han": "娱乐至上",
+    "pinyin": "yúlè zhìshàng",
+    "vi": "giải trí lên trên hết",
+    "col": "娱乐至上的风气",
+    "ex": "娱乐至上的风气不好，什么都拿来娱乐，就没有严肃的东西了。",
+    "exv": "Phong khí giải trí lên trên hết không tốt, cái gì cũng đem ra giải trí thì không còn thứ nghiêm túc nữa."
+   },
+   {
+    "han": "流量经济",
+    "pinyin": "liúliàng jīngjì",
+    "vi": "kinh tế lưu lượng",
+    "col": "流量经济的时代",
+    "ex": "流量经济的时代，有流量就有钱，很多人拼命追流量。",
+    "exv": "Thời đại kinh tế lưu lượng, có lưu lượng là có tiền, nhiều người chạy theo lưu lượng bằng mọi giá."
+   }
+  ]
+ },
+ {
+  "topic": "HSK6 — Phát triển bền vững và kinh tế tuần hoàn",
+  "hsk": "HSK6",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "可持续发展",
+    "pinyin": "kě chíxù fāzhǎn",
+    "vi": "phát triển bền vững",
+    "col": "可持续发展的路",
+    "ex": "可持续发展的路要走，既要发展经济，也要保护环境。",
+    "exv": "Con đường phát triển bền vững phải đi, vừa phát triển kinh tế, vừa bảo vệ môi trường."
+   },
+   {
+    "han": "循环经济",
+    "pinyin": "xúnhuán jīngjì",
+    "vi": "kinh tế tuần hoàn",
+    "col": "发展循环经济",
+    "ex": "发展循环经济，废物也能变成资源。",
+    "exv": "Phát triển kinh tế tuần hoàn, phế thải cũng biến thành tài nguyên được."
+   },
+   {
+    "han": "再生资源",
+    "pinyin": "zàishēng zīyuán",
+    "vi": "tài nguyên tái sinh",
+    "col": "利用再生资源",
+    "ex": "利用再生资源，旧纸、旧塑料都能再加工。",
+    "exv": "Tận dụng tài nguyên tái sinh, giấy cũ, nhựa cũ đều tái chế được."
+   },
+   {
+    "han": "垃圾回收",
+    "pinyin": "lājī huíshōu",
+    "vi": "thu hồi rác",
+    "col": "垃圾回收做得好",
+    "ex": "这个小区垃圾回收做得好，分类清楚，回收及时。",
+    "exv": "Khu này thu hồi rác làm tốt, phân loại rõ ràng, thu hồi kịp thời."
+   },
+   {
+    "han": "分类投放",
+    "pinyin": "fēnlèi tóufàng",
+    "vi": "bỏ rác theo loại",
+    "col": "分类投放垃圾",
+    "ex": "居民要分类投放垃圾，厨余、可回收要分开。",
+    "exv": "Cư dân phải bỏ rác theo loại, rác nhà bếp, rác tái chế phải tách ra."
+   },
+   {
+    "han": "减排目标",
+    "pinyin": "jiǎnpái mùbiāo",
+    "vi": "mục tiêu giảm phát thải",
+    "col": "减排目标定好了",
+    "ex": "减排目标定好了，到2030年要减少三成。",
+    "exv": "Mục tiêu giảm phát thải đã đặt ra, đến năm 2030 phải giảm ba phần mười."
+   },
+   {
+    "han": "碳足迹",
+    "pinyin": "tàn zújì",
+    "vi": "dấu chân carbon",
+    "col": "减少碳足迹",
+    "ex": "少开车、多坐公交，就能减少碳足迹。",
+    "exv": "Ít lái xe, đi xe buýt nhiều là có thể giảm dấu chân carbon."
+   },
+   {
+    "han": "绿色转型",
+    "pinyin": "lǜsè zhuǎnxíng",
+    "vi": "chuyển đổi xanh",
+    "col": "绿色转型不容易",
+    "ex": "绿色转型不容易，工厂要换设备，要花很多钱。",
+    "exv": "Chuyển đổi xanh không dễ, nhà máy phải đổi thiết bị, tốn rất nhiều tiền."
+   },
+   {
+    "han": "清洁能源",
+    "pinyin": "qīngjié néngyuán",
+    "vi": "năng lượng sạch",
+    "col": "清洁能源越来越多",
+    "ex": "清洁能源越来越多，太阳能、风能都在发展。",
+    "exv": "Năng lượng sạch ngày càng nhiều, năng lượng mặt trời, năng lượng gió đều đang phát triển."
+   },
+   {
+    "han": "节能减排",
+    "pinyin": "jiénéng jiǎnpái",
+    "vi": "tiết kiệm năng lượng giảm phát thải",
+    "col": "节能减排从我做起",
+    "ex": "节能减排从我做起，随手关灯、节约用水。",
+    "exv": "Tiết kiệm năng lượng giảm phát thải bắt đầu từ tôi, tiện tay tắt đèn, tiết kiệm nước."
+   },
+   {
+    "han": "生态补偿",
+    "pinyin": "shēngtài bǔcháng",
+    "vi": "bù đắp sinh thái",
+    "col": "生态补偿机制",
+    "ex": "国家建立生态补偿机制，保护森林的人能得到补贴。",
+    "exv": "Nhà nước lập cơ chế bù đắp sinh thái, người bảo vệ rừng được phụ cấp."
+   },
+   {
+    "han": "环境修复",
+    "pinyin": "huánjìng xiūfù",
+    "vi": "phục hồi môi trường",
+    "col": "环境修复见成效",
+    "ex": "经过几年的环境修复，这条河的水变清了。",
+    "exv": "Qua mấy năm phục hồi môi trường, nước sông này trong lên."
+   },
+   {
+    "han": "生物多样性",
+    "pinyin": "shēngwù duōyàngxìng",
+    "vi": "đa dạng sinh học",
+    "col": "保护生物多样性",
+    "ex": "保护生物多样性，就是保护我们自己的未来。",
+    "exv": "Bảo vệ đa dạng sinh học chính là bảo vệ tương lai của chính chúng ta."
+   },
+   {
+    "han": "气候谈判",
+    "pinyin": "qìhòu tánpàn",
+    "vi": "đàm phán khí hậu",
+    "col": "气候谈判很艰难",
+    "ex": "气候谈判很艰难，各国利益不一样，谈一次要好几天。",
+    "exv": "Đàm phán khí hậu rất gian nan, lợi ích các nước khác nhau, đàm phán một lần mất mấy ngày."
+   },
+   {
+    "han": "全球变暖",
+    "pinyin": "quánqiú biànnuǎn",
+    "vi": "toàn cầu ấm lên",
+    "col": "全球变暖的后果",
+    "ex": "全球变暖的后果很严重，冰川融化，海平面上升。",
+    "exv": "Hậu quả của toàn cầu ấm lên rất nghiêm trọng, băng tan, mực nước biển dâng lên."
+   },
+   {
+    "han": "海平面上升",
+    "pinyin": "hǎi píngmiàn shàngshēng",
+    "vi": "mực nước biển dâng lên",
+    "col": "海平面上升的威胁",
+    "ex": "海平面上升的威胁很大，沿海城市要提前准备。",
+    "exv": "Mối đe dọa của mực nước biển dâng lên rất lớn, thành phố ven biển phải chuẩn bị trước."
+   },
+   {
+    "han": "极端天气",
+    "pinyin": "jíduān tiānqì",
+    "vi": "thời tiết cực đoan",
+    "col": "极端天气越来越多",
+    "ex": "极端天气越来越多，暴雨、高温一年比一年多。",
+    "exv": "Thời tiết cực đoan ngày càng nhiều, mưa lớn, nắng nóng năm sau nhiều hơn năm trước."
+   },
+   {
+    "han": "绿色金融",
+    "pinyin": "lǜsè jīnróng",
+    "vi": "tài chính xanh",
+    "col": "绿色金融支持环保",
+    "ex": "绿色金融支持环保项目，给绿色企业低息贷款。",
+    "exv": "Tài chính xanh hỗ trợ dự án bảo vệ môi trường, cho doanh nghiệp xanh vay lãi suất thấp."
+   },
+   {
+    "han": "生态文明",
+    "pinyin": "shēngtài wénmíng",
+    "vi": "văn minh sinh thái",
+    "col": "建设生态文明",
+    "ex": "建设生态文明，绿水青山就是金山银山。",
+    "exv": "Xây dựng văn minh sinh thái, núi xanh nước biếc chính là núi vàng núi bạc."
+   },
+   {
+    "han": "绿色消费",
+    "pinyin": "lǜsè xiāofèi",
+    "vi": "tiêu dùng xanh",
+    "col": "提倡绿色消费",
+    "ex": "社会提倡绿色消费，买环保产品，少用一次性用品。",
+    "exv": "Xã hội đề xướng tiêu dùng xanh, mua sản phẩm bảo vệ môi trường, ít dùng đồ dùng một lần."
+   }
+  ]
+ },
+ {
+  "topic": "HSK6 — Tâm lý xã hội và hành vi tập thể",
+  "hsk": "HSK6",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "从众心理",
+    "pinyin": "cóngzhòng xīnlǐ",
+    "vi": "tâm lý theo đám đông",
+    "col": "从众心理作怪",
+    "ex": "从众心理作怪，别人排队，自己也跟着排。",
+    "exv": "Tâm lý theo đám đông tác quái, người khác xếp hàng, mình cũng xếp theo."
+   },
+   {
+    "han": "社会偏见",
+    "pinyin": "shèhuì piānjiàn",
+    "vi": "thành kiến xã hội",
+    "col": "消除社会偏见",
+    "ex": "消除社会偏见需要时间，也需要教育。",
+    "exv": "Xóa bỏ thành kiến xã hội cần thời gian, cũng cần giáo dục."
+   },
+   {
+    "han": "共情能力",
+    "pinyin": "gòngqíng nénglì",
+    "vi": "năng lực đồng cảm",
+    "col": "共情能力很重要",
+    "ex": "做老师要有共情能力，才能理解学生的感受。",
+    "exv": "Làm thầy giáo phải có năng lực đồng cảm mới hiểu cảm nhận của học sinh."
+   },
+   {
+    "han": "同理心",
+    "pinyin": "tónglǐxīn",
+    "vi": "sự thấu cảm",
+    "col": "多一点同理心",
+    "ex": "人与人之间多一点同理心，矛盾就会少很多。",
+    "exv": "Giữa người với người thêm một chút thấu cảm, mâu thuẫn sẽ ít đi rất nhiều."
+   },
+   {
+    "han": "归属感",
+    "pinyin": "guīshǔgǎn",
+    "vi": "cảm giác thuộc về",
+    "col": "找到归属感",
+    "ex": "刚到新公司，他还没找到归属感，觉得自己是外人。",
+    "exv": "Mới đến công ty mới, anh ấy chưa tìm được cảm giác thuộc về, thấy mình là người ngoài."
+   },
+   {
+    "han": "认同感",
+    "pinyin": "rèntónggǎn",
+    "vi": "cảm giác đồng nhất",
+    "col": "认同感很强",
+    "ex": "她对这个团队认同感很强，愿意为团队付出。",
+    "exv": "Cô ấy cảm giác đồng nhất với nhóm này rất mạnh, sẵn sàng cống hiến cho nhóm."
+   },
+   {
+    "han": "安全感",
+    "pinyin": "ānquángǎn",
+    "vi": "cảm giác an toàn",
+    "col": "安全感来自哪里",
+    "ex": "安全感来自哪里？来自稳定的工作和家人的支持。",
+    "exv": "Cảm giác an toàn đến từ đâu? Đến từ công việc ổn định và sự ủng hộ của gia đình."
+   },
+   {
+    "han": "成就感",
+    "pinyin": "chéngjiùgǎn",
+    "vi": "cảm giác thành tựu",
+    "col": "成就感满满",
+    "ex": "项目成功了，大家成就感满满，觉得辛苦都值得。",
+    "exv": "Dự án thành công, mọi người cảm giác thành tựu đầy tràn, thấy vất vả đều đáng giá."
+   },
+   {
+    "han": "获得感",
+    "pinyin": "huòdégǎn",
+    "vi": "cảm giác đạt được",
+    "col": "获得感越来越强",
+    "ex": "生活变好了，老百姓的获得感越来越强。",
+    "exv": "Đời sống tốt lên, cảm giác đạt được của người dân ngày càng mạnh."
+   },
+   {
+    "han": "幸福感",
+    "pinyin": "xìngfúgǎn",
+    "vi": "cảm giác hạnh phúc",
+    "col": "幸福感不只看钱",
+    "ex": "幸福感不只看钱，健康和家人在身边更重要。",
+    "exv": "Cảm giác hạnh phúc không chỉ xem tiền, sức khỏe và gia đình bên cạnh quan trọng hơn."
+   },
+   {
+    "han": "孤独感",
+    "pinyin": "gūdúgǎn",
+    "vi": "cảm giác cô đơn",
+    "col": "孤独感很强烈",
+    "ex": "一个人在大城市打拼，孤独感很强烈。",
+    "exv": "Một mình phấn đấu ở thành phố lớn, cảm giác cô đơn rất mạnh."
+   },
+   {
+    "han": "焦虑感",
+    "pinyin": "jiāolǜgǎn",
+    "vi": "cảm giác lo âu",
+    "col": "焦虑感挥之不去",
+    "ex": "考试临近，焦虑感挥之不去，晚上睡不着。",
+    "exv": "Kỳ thi đến gần, cảm giác lo âu không xua đi được, tối ngủ không được."
+   },
+   {
+    "han": "压力感",
+    "pinyin": "yālìgǎn",
+    "vi": "cảm giác áp lực",
+    "col": "压力感很大",
+    "ex": "工作压力感很大，他想换个轻松一点的工作。",
+    "exv": "Cảm giác áp lực công việc rất lớn, anh ấy muốn đổi công việc nhẹ nhàng hơn."
+   },
+   {
+    "han": "群体行为",
+    "pinyin": "qúntǐ xíngwéi",
+    "vi": "hành vi nhóm",
+    "col": "群体行为有规律",
+    "ex": "群体行为有规律，人多了容易互相影响。",
+    "exv": "Hành vi nhóm có quy luật, người đông dễ ảnh hưởng lẫn nhau."
+   },
+   {
+    "han": "集体意识",
+    "pinyin": "jítǐ yìshí",
+    "vi": "ý thức tập thể",
+    "col": "集体意识很强",
+    "ex": "这个班集体意识很强，活动的时候没人掉队。",
+    "exv": "Ý thức tập thể của lớp này rất mạnh, khi hoạt động không ai bị rớt lại."
+   },
+   {
+    "han": "社会角色",
+    "pinyin": "shèhuì juésè",
+    "vi": "vai trò xã hội",
+    "col": "社会角色会变化",
+    "ex": "一个人的社会角色会变化，在家是孩子，在公司是员工。",
+    "exv": "Vai trò xã hội của một người sẽ thay đổi, ở nhà là con, ở công ty là nhân viên."
+   },
+   {
+    "han": "人际边界",
+    "pinyin": "rénjì biānjiè",
+    "vi": "ranh giới giữa người với người",
+    "col": "人际边界要清楚",
+    "ex": "人际边界要清楚，再好的朋友也不能随便翻别人的东西。",
+    "exv": "Ranh giới giữa người với người phải rõ ràng, bạn thân mấy cũng không được tùy tiện lục đồ người khác."
+   },
+   {
+    "han": "沟通障碍",
+    "pinyin": "gōutōng zhàngài",
+    "vi": "trở ngại giao tiếp",
+    "col": "沟通障碍怎么办",
+    "ex": "沟通障碍怎么办？先听对方说完，再说自己的想法。",
+    "exv": "Trở ngại giao tiếp thì làm sao? Nghe đối phương nói xong trước, rồi nói ý nghĩ của mình."
+   },
+   {
+    "han": "情绪管理",
+    "pinyin": "qíngxù guǎnlǐ",
+    "vi": "quản lý cảm xúc",
+    "col": "情绪管理是本事",
+    "ex": "情绪管理是本事，生气的时候还能好好说话，就是本事。",
+    "exv": "Quản lý cảm xúc là bản lĩnh, khi tức giận vẫn nói chuyện tử tế được chính là bản lĩnh."
+   },
+   {
+    "han": "社会心态",
+    "pinyin": "shèhuì xīntài",
+    "vi": "tâm thái xã hội",
+    "col": "社会心态要健康",
+    "ex": "社会心态要健康，大家互相信任，社会才稳定。",
+    "exv": "Tâm thái xã hội phải lành mạnh, mọi người tin tưởng lẫn nhau, xã hội mới ổn định."
+   }
+  ]
+ },
+ {
+  "topic": "HSK6 — Ngôn ngữ, dịch thuật và giao tiếp liên văn hóa",
+  "hsk": "HSK6",
+  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "cards": [
+   {
+    "han": "口译笔译",
+    "pinyin": "kǒuyì bǐyì",
+    "vi": "phiên dịch nói và dịch viết",
+    "col": "口译笔译都要练",
+    "ex": "学翻译的人，口译笔译都要练，不能只会一种。",
+    "exv": "Người học phiên dịch, phiên dịch nói và dịch viết đều phải luyện, không thể chỉ biết một loại."
+   },
+   {
+    "han": "直译意译",
+    "pinyin": "zhíyì yìyì",
+    "vi": "dịch trực tiếp và dịch theo ý",
+    "col": "直译意译各有好处",
+    "ex": "直译意译各有好处，有时候直译好，有时候意译好。",
+    "exv": "Dịch trực tiếp và dịch theo ý mỗi loại có lợi riêng, có lúc dịch trực tiếp hay, có lúc dịch theo ý hay."
+   },
+   {
+    "han": "双语对照",
+    "pinyin": "shuāngyǔ duìzhào",
+    "vi": "đối chiếu song ngữ",
+    "col": "双语对照的书",
+    "ex": "双语对照的书很好，左边中文，右边越南文，对照着看。",
+    "exv": "Sách đối chiếu song ngữ rất tốt, bên trái tiếng Trung, bên phải tiếng Việt, đối chiếu mà xem."
+   },
+   {
+    "han": "母语水平",
+    "pinyin": "mǔyǔ shuǐpíng",
+    "vi": "trình độ tiếng mẹ đẻ",
+    "col": "母语水平很高",
+    "ex": "他的母语水平很高，写文章用词很准确。",
+    "exv": "Trình độ tiếng mẹ đẻ của anh ấy rất cao, viết văn dùng từ rất chính xác."
+   },
+   {
+    "han": "外语学习",
+    "pinyin": "wàiyǔ xuéxí",
+    "vi": "học ngoại ngữ",
+    "col": "外语学习要坚持",
+    "ex": "外语学习要坚持，每天学一点，比突击有用。",
+    "exv": "Học ngoại ngữ phải kiên trì, mỗi ngày học một chút, hơn học dồn."
+   },
+   {
+    "han": "方言差异",
+    "pinyin": "fāngyán chāyì",
+    "vi": "khác biệt phương ngữ",
+    "col": "方言差异很大",
+    "ex": "中国方言差异很大，南方人和北方人说话互相听不懂。",
+    "exv": "Khác biệt phương ngữ Trung Quốc rất lớn, người phương Nam và phương Bắc nói chuyện nghe không hiểu nhau."
+   },
+   {
+    "han": "俚语表达",
+    "pinyin": "lǐyǔ biǎodá",
+    "vi": "cách diễn đạt tiếng lóng",
+    "col": "俚语表达很生动",
+    "ex": "俚语表达很生动，年轻人说话常常带俚语。",
+    "exv": "Cách diễn đạt tiếng lóng rất sinh động, người trẻ nói chuyện thường mang tiếng lóng."
+   },
+   {
+    "han": "专业术语",
+    "pinyin": "zhuānyè shùyǔ",
+    "vi": "thuật ngữ chuyên ngành",
+    "col": "专业术语要记准",
+    "ex": "专业术语要记准，写错一个字，意思就变了。",
+    "exv": "Thuật ngữ chuyên ngành phải nhớ chính xác, viết sai một chữ, ý nghĩa thay đổi."
+   },
+   {
+    "han": "词典释义",
+    "pinyin": "cídiǎn shìyì",
+    "vi": "giải nghĩa từ điển",
+    "col": "词典释义很清楚",
+    "ex": "这本词典释义很清楚，每个词都有例句。",
+    "exv": "Giải nghĩa từ điển của quyển này rất rõ, mỗi từ đều có câu ví dụ."
+   },
+   {
+    "han": "语料库",
+    "pinyin": "yǔliàokù",
+    "vi": "ngữ liệu kho",
+    "col": "语料库里查用法",
+    "ex": "写论文的时候，可以去语料库里查用法，看看真人怎么说。",
+    "exv": "Khi viết luận văn, có thể vào kho ngữ liệu tra cách dùng, xem người thật nói thế nào."
+   },
+   {
+    "han": "语言政策",
+    "pinyin": "yǔyán zhèngcè",
+    "vi": "chính sách ngôn ngữ",
+    "col": "语言政策要兼顾",
+    "ex": "语言政策要兼顾，既推广普通话，也保护方言。",
+    "exv": "Chính sách ngôn ngữ phải cân nhắc cả hai, vừa phổ biến tiếng phổ thông, vừa bảo vệ phương ngữ."
+   },
+   {
+    "han": "推广普通话",
+    "pinyin": "tuīguǎng pǔtōnghuà",
+    "vi": "phổ biến tiếng phổ thông",
+    "col": "推广普通话的工作",
+    "ex": "推广普通话的工作做了很多年，现在全国都能听懂普通话。",
+    "exv": "Công tác phổ biến tiếng phổ thông làm nhiều năm rồi, bây giờ cả nước đều nghe hiểu tiếng phổ thông."
+   },
+   {
+    "han": "汉字规范",
+    "pinyin": "hànzì guīfàn",
+    "vi": "quy phạm chữ Hán",
+    "col": "汉字规范很重要",
+    "ex": "汉字规范很重要，写错别字会影响意思。",
+    "exv": "Quy phạm chữ Hán rất quan trọng, viết sai chữ sẽ ảnh hưởng ý nghĩa."
+   },
+   {
+    "han": "简化字",
+    "pinyin": "jiǎnhuàzì",
+    "vi": "chữ giản thể",
+    "col": "简化字笔画少",
+    "ex": "简化字笔画少，学起来比繁体字容易。",
+    "exv": "Chữ giản thể ít nét, học dễ hơn chữ phồn thể."
+   },
+   {
+    "han": "繁体字",
+    "pinyin": "fántǐzì",
+    "vi": "chữ phồn thể",
+    "col": "繁体字笔画多",
+    "ex": "繁体字笔画多，但是看起来很有味道。",
+    "exv": "Chữ phồn thể nhiều nét, nhưng nhìn rất có hương vị."
+   },
+   {
+    "han": "书法艺术",
+    "pinyin": "shūfǎ yìshù",
+    "vi": "nghệ thuật thư pháp",
+    "col": "书法艺术是国粹",
+    "ex": "书法艺术是国粹，写一手好字，人人都夸。",
+    "exv": "Nghệ thuật thư pháp là quốc túy, viết một tay chữ đẹp, ai cũng khen."
+   },
+   {
+    "han": "跨文化交际",
+    "pinyin": "kuà wénhuà jiāojì",
+    "vi": "giao tiếp liên văn hóa",
+    "col": "跨文化交际的能力",
+    "ex": "跨文化交际的能力很重要，出国工作的人都要学。",
+    "exv": "Năng lực giao tiếp liên văn hóa rất quan trọng, người ra nước ngoài làm việc đều phải học."
+   },
+   {
+    "han": "文化误读",
+    "pinyin": "wénhuà wùdú",
+    "vi": "đọc sai văn hóa",
+    "col": "文化误读会闹笑话",
+    "ex": "文化误读会闹笑话，一个手势在不同国家意思不一样。",
+    "exv": "Đọc sai văn hóa sẽ gây trò cười, một cử chỉ ở các nước khác nhau ý nghĩa khác nhau."
+   },
+   {
+    "han": "语境理解",
+    "pinyin": "yǔjìng lǐjiě",
+    "vi": "hiểu ngữ cảnh",
+    "col": "语境理解很重要",
+    "ex": "一句话在不同语境理解很重要，离开语境就容易理解错。",
+    "exv": "Hiểu ngữ cảnh rất quan trọng, một câu nói trong ngữ cảnh khác nhau hiểu khác nhau, rời ngữ cảnh dễ hiểu sai."
+   },
+   {
+    "han": "交际策略",
+    "pinyin": "jiāojì cèlüè",
+    "vi": "chiến lược giao tiếp",
+    "col": "交际策略要灵活",
+    "ex": "交际策略要灵活，跟不同的人说话，用不同的方法。",
+    "exv": "Chiến lược giao tiếp phải linh hoạt, nói chuyện với người khác nhau dùng phương pháp khác nhau."
+   }
+  ]
+ }
+];
+var ZH_GRAMMAR_EXPAND_E2 = [ {
+  "id": "e2-s5-liandou",
+  "stage": 5,
+  "title": "连…都… — ngay cả… cũng…",
+  "hook": "“连三岁的小孩都会用手机” — ngay cả đứa trẻ ba tuổi cũng biết dùng điện thoại: điều không ngờ nhất mà còn thế.",
+  "examples": [
+   "连三岁的小孩都会用手机。(Lián sān suì de xiǎohái dōu huì yòng shǒujī.) — Ngay cả đứa trẻ ba tuổi cũng biết dùng điện thoại.",
+   "他连饭都没吃，就去开会了。(Tā lián fàn dōu méi chī, jiù qù kāi huì le.) — Anh ấy ngay cả cơm cũng chưa ăn đã đi họp rồi.",
+   "这个问题连老师都觉得难。(Zhège wèntí lián lǎoshī dōu juéde nán.) — Vấn đề này ngay cả thầy giáo cũng thấy khó.",
+   "连下雨天他都坚持跑步。(Lián xià yǔ tiān tā dōu jiānchí pǎobù.) — Ngay cả ngày mưa anh ấy cũng kiên trì chạy bộ."
+  ],
+  "speak": "连三岁的小孩都会用手机。他连饭都没吃，就去开会了。这个问题连老师都觉得难。连下雨天他都坚持跑步。",
+  "rule": "连 nêu điều cực đoan, không ngờ nhất ở trước, 都 nêu kết quả cũng xảy ra ở sau. 连…都… đi thành cặp, thiếu 都 thì câu chưa đủ nghĩa nhấn mạnh.",
+  "tip": "Hãy nhớ: 连 là “ngay cả”, 都 là “cũng” — điều cực đoan nhất mà còn thế, thì chuyện thường càng thế.",
+  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK5 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  "quiz": [
+   { "q": "Câu nào dùng 连…都… đúng?", "o": ["连三岁的小孩都会用手机。", "连三岁的小孩会用手机。", "三岁的小孩连都会用手机。", "连三岁的小孩都不会用手机。"], "a": 0, "why": "连…都… đi thành cặp: 连三岁的小孩都会用手机。" },
+   { "q": "Điền vào chỗ trống: 他___饭都没吃，就去开会了。", "o": ["连", "都", "也", "就"], "a": 0, "why": "连 nêu điều cực đoan (ngay cả cơm cũng chưa ăn) ở vế trước." },
+   { "q": "“Ngay cả ngày mưa anh ấy cũng kiên trì chạy bộ” viết thế nào?", "o": ["连下雨天他都坚持跑步。", "虽然下雨天他坚持跑步。", "如果下雨天他坚持跑步。", "连下雨天但是他坚持跑步。"], "a": 0, "why": "“Ngay cả… cũng…” là 连…都…, không phải 虽然 hay 如果。" },
+   { "q": "连 trong câu có nghĩa là gì?", "o": ["Ngay cả", "Mặc dù", "Nếu", "Vì"], "a": 0, "why": "连 = ngay cả, nêu điều cực đoan nhất." },
+   { "q": "Câu nào SAI?", "o": ["连下雨天他都坚持跑步。", "连饭他都没吃。", "连老师都觉得难。", "连小孩都会用手机。"], "a": 1, "why": "Chủ ngữ 他 phải đứng trước 连 (他连饭都没吃), không chen vào giữa 连…都。" },
+   { "q": "“Ngay cả” là từ nào?", "o": ["连", "都", "也", "就"], "a": 0, "why": "连 = ngay cả; 都 = cũng, đi sau 连。" }
+  ]
+ },
+ {
+  "id": "e2-s5-zhiyoucai",
+  "stage": 5,
+  "title": "只有…才… — chỉ khi… mới…",
+  "hook": "“只有努力学习，才有好成绩” — chỉ khi học chăm chỉ mới có thành tích tốt: một điều kiện duy nhất.",
+  "examples": [
+   "只有努力学习，才有好成绩。(Zhǐyǒu nǔlì xuéxí, cái yǒu hǎo chéngjì.) — Chỉ khi học chăm chỉ mới có thành tích tốt.",
+   "只有早点出门，才不会迟到。(Zhǐyǒu zǎo diǎn chū mén, cái bú huì chídào.) — Chỉ khi ra khỏi nhà sớm mới không muộn.",
+   "只有大家一起努力，才能完成这个任务。(Zhǐyǒu dàjiā yìqǐ nǔlì, cái néng wánchéng zhège rènwu.) — Chỉ khi mọi người cùng cố gắng mới hoàn thành được nhiệm vụ này.",
+   "只有身体好，才能好好工作。(Zhǐyǒu shēntǐ hǎo, cái néng hǎohāo gōngzuò.) — Chỉ khi sức khỏe tốt mới làm việc tốt được."
+  ],
+  "speak": "只有努力学习，才有好成绩。只有早点出门，才不会迟到。只有大家一起努力，才能完成这个任务。只有身体好，才能好好工作。",
+  "rule": "只有 nêu điều kiện duy nhất ở vế đầu, 才 nêu kết quả ở vế sau. Hai chữ đi thành cặp; thiếu 才 thì câu chưa đủ nghĩa điều kiện duy nhất.",
+  "tip": "Hãy nhớ: 只有 là “chỉ khi”, 才 là “mới” — chỉ có một cách duy nhất thì mới dùng 只有…才….",
+  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK5 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  "quiz": [
+   { "q": "Câu nào dùng 只有…才… đúng?", "o": ["只有努力学习，才有好成绩。", "只有努力学习，就有好成绩。", "只有努力学习，但是有好成绩。", "努力学习，只有有好成绩。"], "a": 0, "why": "只有 đi cặp với 才: chỉ khi học chăm chỉ mới có thành tích tốt。" },
+   { "q": "Điền vào chỗ trống: 只有早点出门，___不会迟到。", "o": ["才", "就", "都", "也"], "a": 0, "why": "Vế sau là kết quả của điều kiện duy nhất, dùng 才。" },
+   { "q": "“Chỉ khi sức khỏe tốt mới làm việc tốt được” viết thế nào?", "o": ["只有身体好，才能好好工作。", "如果身体好，就能好好工作。", "虽然身体好，但是能好好工作。", "只有身体好，就好好工作。"], "a": 0, "why": "“Chỉ khi… mới…” là 只有…才…, không phải 如果 hay 虽然。" },
+   { "q": "只有 trong câu có nghĩa là gì?", "o": ["Chỉ khi", "Mặc dù", "Nếu", "Vì"], "a": 0, "why": "只有 = chỉ khi, nêu điều kiện duy nhất." },
+   { "q": "Câu nào SAI?", "o": ["只有努力学习，才有好成绩。", "只有早点出门，就不会迟到。", "只有大家一起努力，才能完成任务。", "只有身体好，才能好好工作。"], "a": 1, "why": "只有 phải đi với 才, không đi với 就 trong nghĩa điều kiện duy nhất này." },
+   { "q": "“Mới” trong mẫu “chỉ khi… mới…” là từ nào?", "o": ["才", "就", "都", "也"], "a": 0, "why": "才 = mới, đi cặp với 只有。" }
+  ]
+ },
+ {
+  "id": "e2-s6-zhisuoyi",
+  "stage": 6,
+  "title": "之所以…是因为… — sở dĩ… là vì…",
+  "hook": "“他之所以成功，是因为他一直很努力” — sở dĩ anh ấy thành công là vì anh ấy luôn rất chăm chỉ: nhấn mạnh nguyên nhân.",
+  "examples": [
+   "他之所以成功，是因为他一直很努力。(Tā zhī suǒyǐ chénggōng, shì yīnwèi tā yìzhí hěn nǔlì.) — Sở dĩ anh ấy thành công là vì anh ấy luôn rất chăm chỉ.",
+   "这家店之所以受欢迎，是因为东西好吃又便宜。(Zhè jiā diàn zhī suǒyǐ shòu huānyíng, shì yīnwèi dōngxi hǎochī yòu piányi.) — Sở dĩ cửa hàng này được ưa chuộng là vì đồ ăn ngon mà rẻ.",
+   "她之所以学汉语，是因为她喜欢中国文化。(Tā zhī suǒyǐ xué Hànyǔ, shì yīnwèi tā xǐhuan Zhōngguó wénhuà.) — Sở dĩ cô ấy học tiếng Trung là vì cô ấy thích văn hóa Trung Quốc.",
+   "这个城市之所以干净，是因为大家都爱护环境。(Zhège chéngshì zhī suǒyǐ gānjìng, shì yīnwèi dàjiā dōu àihù huánjìng.) — Sở dĩ thành phố này sạch là vì mọi người đều bảo vệ môi trường."
+  ],
+  "speak": "他之所以成功，是因为他一直很努力。这家店之所以受欢迎，是因为东西好吃又便宜。她之所以学汉语，是因为她喜欢中国文化。这个城市之所以干净，是因为大家都爱护环境。",
+  "rule": "之所以 nêu kết quả ở vế đầu, 是因为 nêu nguyên nhân thật sự ở vế sau. Mẫu này nhấn mạnh nguyên nhân, trang trọng hơn chỉ nói 因为, dùng nhiều trong văn viết và nói có lý lẽ.",
+  "tip": "Hãy nhớ: 之所以 là “sở dĩ”, 是因为 là “là vì” — kết quả trước, nguyên nhân sau, ngược với 因为…所以….",
+  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK6 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  "quiz": [
+   { "q": "Câu nào dùng 之所以…是因为… đúng?", "o": ["他之所以成功，是因为他一直很努力。", "他之所以成功，因为他一直很努力。", "他成功之所以，是因为他一直很努力。", "他之所以成功，所以他一直很努力。"], "a": 0, "why": "之所以 ở vế kết quả, 是因为 ở vế nguyên nhân, đi thành cặp。" },
+   { "q": "Điền vào chỗ trống: 这家店之所以受欢迎，___东西好吃又便宜。", "o": ["是因为", "因为", "所以", "但是"], "a": 0, "why": "Vế sau là nguyên nhân thật sự, dùng 是因为, không dùng riêng 因为。" },
+   { "q": "“Sở dĩ cô ấy học tiếng Trung là vì cô ấy thích văn hóa Trung Quốc” viết thế nào?", "o": ["她之所以学汉语，是因为她喜欢中国文化。", "她学汉语之所以，是因为她喜欢中国文化。", "因为她喜欢中国文化，所以她学汉语。", "她之所以学汉语，所以她喜欢中国文化。"], "a": 0, "why": "“Sở dĩ… là vì…” là 之所以…是因为…; 因为…所以… cũng đúng nghĩa nhưng không phải mẫu đang hỏi." },
+   { "q": "之所以 trong câu có nghĩa là gì?", "o": ["Sở dĩ", "Mặc dù", "Nếu", "Vì vậy"], "a": 0, "why": "之所以 = sở dĩ, nêu kết quả cần giải thích nguyên nhân." },
+   { "q": "Câu nào SAI?", "o": ["他之所以成功，是因为他一直很努力。", "她之所以学汉语，是因为所以她喜欢中国文化。", "这家店之所以受欢迎，是因为东西好吃又便宜。", "这个城市之所以干净，是因为大家都爱护环境。"], "a": 1, "why": "是因为 và 所以 không dùng cùng nhau trong một vế: chỉ dùng 是因为。" },
+   { "q": "“Là vì” trong mẫu “sở dĩ… là vì…” là:", "o": ["是因为", "因为", "所以", "之所以"], "a": 0, "why": "是因为 = là vì, đi cặp với 之所以。" }
+  ]
+ },
+ {
+  "id": "e2-s6-yimian",
+  "stage": 6,
+  "title": "以免 — để khỏi / kẻo",
+  "hook": "“早点出门，以免迟到” — ra khỏi nhà sớm, để khỏi muộn: làm trước để tránh điều xấu.",
+  "examples": [
+   "早点出门，以免迟到。(Zǎo diǎn chū mén, yǐmiǎn chídào.) — Ra khỏi nhà sớm, để khỏi muộn.",
+   "请把文件保存好，以免丢失。(Qǐng bǎ wénjiàn bǎocún hǎo, yǐmiǎn diūshī.) — Xin lưu tài liệu cẩn thận, để khỏi mất.",
+   "出门带把伞，以免下雨淋湿。(Chū mén dài bǎ sǎn, yǐmiǎn xià yǔ lín shī.) — Ra ngoài mang theo ô, kẻo mưa ướt.",
+   "说话小声一点，以免吵到别人。(Shuōhuà xiǎo shēng yìdiǎn, yǐmiǎn chǎo dào biérén.) — Nói nhỏ một chút, để khỏi làm ồn người khác."
+  ],
+  "speak": "早点出门，以免迟到。请把文件保存好，以免丢失。出门带把伞，以免下雨淋湿。说话小声一点，以免吵到别人。",
+  "rule": "以免 đứng trước điều xấu muốn tránh, vế trước là việc làm phòng ngừa. 以免 chỉ đi với điều xấu (迟到、丢失、淋湿), không đi với điều tốt.",
+  "tip": "Hãy nhớ: 以免 là “để khỏi / kẻo” — sau 以免 luôn là điều mình không muốn xảy ra.",
+  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK6 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  "quiz": [
+   { "q": "Câu nào dùng 以免 đúng?", "o": ["早点出门，以免迟到。", "早点出门，以免不迟到。", "早点出门，以免到了。", "早点出门，以免迟到所以快。"], "a": 0, "why": "以免 + điều xấu (迟到): ra sớm để khỏi muộn。" },
+   { "q": "Điền vào chỗ trống: 请把文件保存好，___丢失。", "o": ["以免", "以便", "为了", "因为"], "a": 0, "why": "Muốn tránh mất tài liệu thì dùng 以免, không dùng 以便 (để cho tiện)。" },
+   { "q": "“Mang ô đi kẻo mưa ướt” viết thế nào?", "o": ["带把伞，以免下雨淋湿。", "带把伞，以便下雨淋湿。", "带把伞，因为下雨淋湿。", "带把伞，所以下雨淋湿。"], "a": 0, "why": "“Kẻo…” là 以免, không phải 以便 hay 因为。" },
+   { "q": "以免 trong câu có nghĩa là gì?", "o": ["Để khỏi / kẻo", "Để cho tiện", "Vì", "Cho nên"], "a": 0, "why": "以免 = để khỏi / kẻo, tránh điều xấu." },
+   { "q": "Câu nào SAI?", "o": ["早点出门，以免迟到。", "请多喝水，以免身体好。", "出门带把伞，以免下雨淋湿。", "说话小声一点，以免吵到别人。"], "a": 1, "why": "身体好 là điều tốt, không phải điều xấu cần tránh, nên không dùng 以免。" },
+   { "q": "“Để khỏi mất” — từ “để khỏi” là:", "o": ["以免", "以便", "为了", "尽管"], "a": 0, "why": "以免 = để khỏi, đi với điều xấu (丢失)。" }
+  ]
+ }
+];
+var ZH_WRITE_EXPAND_E2 = [ {
+  "id": "e2-s5-write-bianlun",
+  "stage": 5,
+  "title": "Viết: Tranh luận về học online hay học trực tiếp",
+  "kind": "free",
+  "prompt": "Viết một đoạn ngắn (8–10 câu) nêu ý kiến của bạn: học online hay học trực tiếp tốt hơn? Nêu 2 lý do, thừa nhận 1 điểm mạnh của ý đối lập, rồi kết luận.",
+  "model": "我觉得网上学习和在教室学习各有好处，但是我更喜欢在教室学习。第一，在教室里，老师可以直接回答我的问题，同学也可以一起讨论，学习气氛很好。第二，在教室学习不容易分心，没有手机游戏打扰我。有人说网上学习很方便，在家里就能上课，这一点我也同意。可是，长时间看电脑，眼睛很容易累，而且自律性不强的人很难坚持。我的自律性也不太好，所以在教室学习更适合我。总的来说，网上学习是很好的补充，但是我还是选择去教室上课。",
+  "analysis": "Đoạn mẫu mở đầu bằng ý kiến (更喜欢在教室学习), rồi nêu 2 lý do (trả lời trực tiếp + không分心), sau đó thừa nhận điểm mạnh của ý đối lập (网上学习很方便), rồi phản biện bằng nhược điểm (mỏi mắt + khó坚持), cuối cùng kết luận theo ý kiến đầu. Viết theo khung ý kiến — lý do — thừa nhận — phản biện — kết luận thì đoạn tranh luận có sức thuyết phục.",
+  "phrases": ["我觉得……，但是我更喜欢……。", "有人说……，这一点我也同意。可是，……", "总的来说，……是很好的补充，但是我还是选择……。"],
+  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+ },
+ {
+  "id": "e2-s5-write-chengshi",
+  "stage": 5,
+  "title": "Viết: Thành phố hay quê hương đáng sống hơn",
+  "kind": "free",
+  "prompt": "Viết một đoạn ngắn (8–10 câu) so sánh sống ở thành phố và sống ở quê: mỗi bên nêu 1–2 điểm tốt và 1 điểm chưa tốt, rồi nêu ý kiến của bạn.",
+  "model": "有人喜欢住在大城市，有人喜欢住在乡下，我觉得各有好处。城市里工作机会多，医院、学校、商场都很方便，生活很丰富。可是，城市的生活节奏很快，房价很高，空气也不太好。乡下空气新鲜，生活安静，花钱也少，但是工作机会不多，年轻人常常要去城市找工作。对我来说，年轻的时候可以在城市工作、学习，等年纪大了，再回乡下过安静的生活。这样既能抓住机会，又能享受安静，我觉得是最好的选择。",
+  "analysis": "Đoạn mẫu mở đầu bằng hai ý đối lập (thành phố — quê), rồi nêu mặt tốt và chưa tốt của từng bên (thành phố: tiện + nhanh/đắt; quê: trong lành + ít việc), sau đó nêu ý kiến theo giai đoạn đời (trẻ ở thành phố, già về quê), cuối cùng kết bằng lựa chọn tổng hợp. Viết theo khung hai mặt — ý kiến theo giai đoạn — kết luận thì đoạn so sánh cân bằng, không một chiều.",
+  "phrases": ["有人喜欢……，有人喜欢……，我觉得各有好处。", "对我来说，年轻的时候可以……，等年纪大了，再……。", "这样既能……，又能……，我觉得是最好的选择。"],
+  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+ },
+ {
+  "id": "e2-s6-write-huanjing",
+  "stage": 6,
+  "title": "Viết: Bảo vệ môi trường bắt đầu từ đâu",
+  "kind": "free",
+  "prompt": "Viết một đoạn ngắn (8–10 câu) về bảo vệ môi trường: nêu nhận định chung, liệt kê 3 việc cụ thể bạn làm được, bác bỏ ý “sức một người quá nhỏ”, rồi kêu gọi hành động.",
+  "model": "保护环境不是一句口号，要从我们每天的生活做起。第一，少用一次性用品，出门带自己的水杯和布袋。第二，节约用水用电，随手关灯，洗澡不要洗太久。第三，多坐公共交通，少开车，这样既能减少污染，又能锻炼身体。有人说，一个人的力量太小，改变不了什么。我不同意这种看法：如果每个人都从小事做起，合起来的力量就很大。从今天开始，从我做起，让我们的城市更干净、更美丽。",
+  "analysis": "Đoạn mẫu mở đầu bằng nhận định (不是一句口号，要从生活做起), rồi liệt kê 3 việc cụ thể theo thứ tự (少用一次性用品 — 节约用水用电 — 多坐公共交通), sau đó bác ý “sức một người nhỏ” bằng lập luận hợp sức (如果每个人都……，合起来的力量就很大), cuối cùng kêu gọi (从今天开始，从我做起). Viết theo khung nhận định — việc cụ thể — bác bỏ — kêu gọi thì đoạn văn có sức thuyết phục.",
+  "phrases": ["保护环境不是一句口号，要从……做起。", "有人说……。我不同意这种看法：如果……，……就……。", "从今天开始，从我做起。"],
+  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK6, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+ },
+ {
+  "id": "e2-s6-write-wangluo",
+  "stage": 6,
+  "title": "Viết: Mạng xã hội giúp hay hại giới trẻ",
+  "kind": "free",
+  "prompt": "Viết một đoạn ngắn (8–10 câu) về mạng xã hội với giới trẻ: nêu mặt tốt và mặt xấu, nêu lập trường của bạn (quản lý thời gian + không vội tin tin chưa kiểm chứng), rồi kết luận có điều kiện.",
+  "model": "社交媒体对年轻人既有帮助，也有坏处，关键看怎么用。好处是，年轻人可以在网上学习新知识，认识不同地方的朋友，了解世界大事。坏处是，很多人花太多时间刷视频，学习和睡觉都受影响，还有人轻信网上的假消息，甚至被人骗钱。我觉得，年轻人应该学会管理时间，每天上网不超过两个小时，不轻信、不转发没有证实的消息。家长和学校也要教孩子怎么安全上网，而不是简单地不让孩子上网。只有这样，社交媒体才能真正帮助年轻人，而不是害了他们。",
+  "analysis": "Đoạn mẫu mở đầu bằng nhận định hai mặt (既有帮助，也有坏处，关键看怎么用), rồi nêu mặt tốt (học + kết bạn + biết大事) và mặt xấu (tốn thời gian +轻信假消息), sau đó nêu lập trường (quản lý thời gian + không轻信、不转发) và trách nhiệm của phụ huynh/trường, cuối cùng kết bằng điều kiện 只有…才…. Viết theo khung hai mặt — lập trường — trách nhiệm chung — kết điều kiện thì đoạn nghị luận cân bằng và có chiều sâu.",
+  "phrases": ["……既有帮助，也有坏处，关键看怎么用。", "我觉得，年轻人应该学会……，不……。", "只有这样，……才能真正……，而不是……。"],
+  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK6, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+ }
+];
+
+CONTENT.zhVocab.push.apply(CONTENT.zhVocab, ZH_VOCAB_EXPAND_E2);
+ZH_GRAMMAR.push.apply(ZH_GRAMMAR, ZH_GRAMMAR_EXPAND_E2);
+ZH_WRITE.push.apply(ZH_WRITE, ZH_WRITE_EXPAND_E2);
