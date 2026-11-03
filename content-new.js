@@ -672,37 +672,77 @@ function rbBuildChSteps() {
   (CONTENT.writing || []).forEach(function (w, i) {
     if (w.band === "Band 0") out["Band 0"].push({ title: w.title, type: "Viết", lesson: { type: "skillWrite", idx: i }, doneKey: "write:" + i });
   });
-  // DOT DAN-XEN 01/11: dan xen cac loai bai trong moi chuong thay vi don cuc
-  // theo loai (het tu vung moi sang ngu phap...). Thuat toan chia deu dang
-  // DUAL (bai thu j cua loai k -> luot floor(j*R/n_k), R = so buoc nhieu nhat
-  // trong cac loai con lai tru loai troi): giu nguyen tap buoc, thu tu trong
-  // cung loai, buoc "On xen ke" cuoi chuong; bai dau tien cua MOI loai deu
-  // roi vao luot 0 nen chuong luon bat dau bang tu vung; Band 0 chi co Viet
-  // nen giu nguyen. Ban do + "Tiep theo" deu doc rbChSteps nen tu khop.
+  // DOT DAN-XEN v47 (03/11/2026): dan xen theo chu ky hoc — vai bo tu vung
+  // -> 1 tram ngu phap -> Nghe -> Doc, roi lap lai; cac loai thuc hanh con
+  // lai (Phat am, Noi, Nhap vai, Viet, Luyen viet, Go cau) xoay vong ngay sau
+  // Doc theo dung thu tu do. Thuat toan: hang doi ky nang tron deu theo
+  // tham hut (deficit merge) — moi loai rai deu ca chuong, khong don thanh
+  // buc tuong o cuoi khi mot loai troi hon (xoay vong don gian o ban v47
+  // luot 1 gap loi nay: loai Nghe dai nhat don 14 buoc lien nhau o cuoi
+  // chuong Band 3,0/5,0); hoa thi uu tien thu tu hoc nen ky nang dau tien
+  // luon la ngu phap khi chuong co ngu phap. Tu vung: khoi dau la "vai bo"
+  // (toi da 3 bo) roi moi toi ngu phap, phan con lai chia deu truoc cac ky
+  // nang con lai; giu nguyen tap buoc, thu tu trong cung loai, buoc "On xen
+  // ke" cuoi chuong, Band 0 giu nguyen. Ban do + "Tiep theo" deu doc
+  // rbChSteps nen tu khop. Tien trinh cu khong mat vi doneKey gan theo
+  // buoc, khong theo vi tri.
   (function () {
-    var KIND_ORDER = ["Từ vựng", "Ngữ pháp", "Đọc", "Nghe ngắn", "Nghe dài", "Phát âm", "Nói", "Nhập vai", "Viết", "Luyện viết", "Gõ câu"];
+    var SKILL_ORDER = ["Ngữ pháp", "Nghe", "Đọc", "Phát âm", "Nói", "Nhập vai", "Viết", "Luyện viết", "Gõ câu"];
+    function listenKey(t) { return (t === "Nghe ngắn" || t === "Nghe dài") ? "Nghe" : t; }
     Object.keys(out).forEach(function (b) {
       if (b === "Band 0") return;
       var steps = out[b];
       var tails = steps.filter(function (s) { return s.review; });
       var rest = steps.filter(function (s) { return !s.review; });
+      var vocab = [];
       var groups = {};
-      rest.forEach(function (s) { (groups[s.type] = groups[s.type] || []).push(s); });
-      var kinds = KIND_ORDER.filter(function (k) { return groups[k] && groups[k].length; });
-      Object.keys(groups).forEach(function (k) { if (kinds.indexOf(k) < 0) kinds.push(k); });
-      if (kinds.length < 2) { out[b] = rest.concat(tails); return; }
-      var dom = kinds[0];
-      kinds.forEach(function (k) { if (groups[k].length > groups[dom].length) dom = k; });
-      var R = 0;
-      kinds.forEach(function (k) { if (k !== dom && groups[k].length > R) R = groups[k].length; });
-      var rounds = [];
-      for (var r = 0; r < R; r++) rounds.push([]);
-      kinds.forEach(function (k) {
-        var g = groups[k], n = g.length;
-        for (var j = 0; j < n; j++) rounds[Math.floor(j * R / n)].push(g[j]);
+      rest.forEach(function (s) {
+        if (s.type === "Từ vựng") vocab.push(s);
+        else { var k = listenKey(s.type); (groups[k] = groups[k] || []).push(s); }
       });
+      var kinds = SKILL_ORDER.filter(function (k) { return groups[k] && groups[k].length; });
+      Object.keys(groups).forEach(function (k) { if (kinds.indexOf(k) < 0) kinds.push(k); });
+      if (!vocab.length || !kinds.length) { out[b] = rest.concat(tails); return; }
+      // Hang doi ky nang tron deu theo tham hut (kinds da theo thu tu uu tien
+      // nen hoa thi loai dung truoc thang).
+      var queue = [];
+      var idx = {}, placed = {};
+      kinds.forEach(function (k) { idx[k] = 0; placed[k] = 0; });
+      var totalSkills = 0;
+      kinds.forEach(function (k) { totalSkills += groups[k].length; });
+      for (var qi = 0; qi < totalSkills; qi++) {
+        var best = null, bestDef = -1e9;
+        kinds.forEach(function (k) {
+          if (idx[k] >= groups[k].length) return;
+          var def = qi * groups[k].length / totalSkills - placed[k];
+          if (def > bestDef + 1e-9) { best = k; bestDef = def; }
+        });
+        queue.push(groups[best][idx[best]++]); placed[best]++;
+      }
+      // Tu vung: khoi dau "vai bo" (toi da 3), phan con lai chia deu truoc
+      // cac ky nang con lai.
+      var S = queue.length, V = vocab.length, vi = 0;
       var mixed = [];
-      rounds.forEach(function (rd) { rd.forEach(function (s) { mixed.push(s); }); });
+      if (S >= 2) {
+        var first = Math.min(3, V);
+        for (var fj = 0; fj < first; fj++) mixed.push(vocab[vi++]);
+        mixed.push(queue[0]);
+        var Vr = V - vi, Sr = S - 1;
+        var base = Math.floor(Vr / Sr), rem = Vr % Sr;
+        for (var q = 1; q < S; q++) {
+          var take = base + (q - 1 < rem ? 1 : 0);
+          for (var tj = 0; tj < take; tj++) mixed.push(vocab[vi++]);
+          mixed.push(queue[q]);
+        }
+      } else {
+        var base0 = Math.floor(V / S), rem0 = V % S;
+        queue.forEach(function (sk, q0) {
+          var take0 = base0 + (q0 < rem0 ? 1 : 0);
+          for (var t0 = 0; t0 < take0; t0++) mixed.push(vocab[vi++]);
+          mixed.push(sk);
+        });
+      }
+      while (vi < V) mixed.push(vocab[vi++]);
       out[b] = mixed.concat(tails);
     });
   })();
@@ -70740,3 +70780,81 @@ var ZH_WRITE_EXPAND_E2 = [ {
 CONTENT.zhVocab.push.apply(CONTENT.zhVocab, ZH_VOCAB_EXPAND_E2);
 ZH_GRAMMAR.push.apply(ZH_GRAMMAR, ZH_GRAMMAR_EXPAND_E2);
 ZH_WRITE.push.apply(ZH_WRITE, ZH_WRITE_EXPAND_E2);
+
+// DOT DAN-XEN v47 (03/11/2026): chuan hoa CUOI CUNG thu tu buoc TOEIC/TOPIK
+// theo chu ky hoc — vai bo tu vung -> 1 tram ngu phap -> Nghe -> Doc, roi
+// lap lai; Viet (w) xoay vong ngay sau Doc. Dat o CUOI file vi mang steps
+// duoc noi them nhieu dot (dot 18, c1, c2, d1, d2a, d2b chen bang splice):
+// chuan hoa sau moi lan chen moi giu dung chu ky o thu tu chay that. Chi
+// doi thu tu hien thi: cung tap buoc, giu thu tu trong cung loai, kiem tra
+// cuoi chang (c/k) + thi thu (m) giu o cuoi, chang Hangul (toan h) giu
+// nguyen tuyet doi. Chang nao khong dung hinh dang du kien thi bo qua
+// (giu nguyen) thay vi do vo. Tien trinh cu khong mat vi tcDone/tpDone
+// gan theo id buoc, khong theo vi tri; cong 80% tinh theo so luong.
+// Thuat toan (giong IELTS/HSK): hang doi ky nang tron deu theo tham hut
+// (deficit merge) de khong don buc tuong o cuoi khi mot loai troi hon;
+// tu vung mo dau "vai bo" (toi da 3 bo) roi moi toi ngu phap, phan con lai
+// chia deu truoc cac ky nang con lai.
+(function () {
+  function interleaveStage(st) {
+    if (!st || !st.steps || !st.steps.length) return;
+    var ids = st.steps;
+    var tailN = 0;
+    while (tailN < ids.length && "ckm".indexOf(ids[ids.length - 1 - tailN].charAt(0)) >= 0) tailN++;
+    if (!tailN) return;
+    var tail = ids.slice(ids.length - tailN);
+    var body = ids.slice(0, ids.length - tailN);
+    if (body.some(function (id) { return "ckm".indexOf(id.charAt(0)) >= 0; })) return;
+    if (body.some(function (id) { return id.charAt(0) === "h"; })) return;
+    var vocab = body.filter(function (id) { return id.charAt(0) === "v"; });
+    var SKILL_ORDER = ["g", "l", "r", "w"];
+    var groups = {};
+    var ok = true;
+    body.forEach(function (id) {
+      var p = id.charAt(0);
+      if (p === "v") return;
+      if (SKILL_ORDER.indexOf(p) < 0) { ok = false; return; }
+      (groups[p] = groups[p] || []).push(id);
+    });
+    if (!ok || !vocab.length) return;
+    var kinds = SKILL_ORDER.filter(function (k) { return groups[k] && groups[k].length; });
+    if (!kinds.length) return;
+    var queue = [], idx = {}, placed = {};
+    kinds.forEach(function (k) { idx[k] = 0; placed[k] = 0; });
+    var totalSkills = 0;
+    kinds.forEach(function (k) { totalSkills += groups[k].length; });
+    for (var qi = 0; qi < totalSkills; qi++) {
+      var best = null, bestDef = -1e9;
+      kinds.forEach(function (k) {
+        if (idx[k] >= groups[k].length) return;
+        var def = qi * groups[k].length / totalSkills - placed[k];
+        if (def > bestDef + 1e-9) { best = k; bestDef = def; }
+      });
+      queue.push(groups[best][idx[best]++]); placed[best]++;
+    }
+    var S = queue.length, V = vocab.length, vi = 0, mixed = [];
+    if (S >= 2) {
+      var first = Math.min(3, V);
+      for (var fj = 0; fj < first; fj++) mixed.push(vocab[vi++]);
+      mixed.push(queue[0]);
+      var Vr = V - vi, Sr = S - 1;
+      var base = Math.floor(Vr / Sr), rem = Vr % Sr;
+      for (var q = 1; q < S; q++) {
+        var take = base + (q - 1 < rem ? 1 : 0);
+        for (var tj = 0; tj < take; tj++) mixed.push(vocab[vi++]);
+        mixed.push(queue[q]);
+      }
+    } else {
+      var base0 = Math.floor(V / S), rem0 = V % S;
+      queue.forEach(function (sk, q0) {
+        var take0 = base0 + (q0 < rem0 ? 1 : 0);
+        for (var t0 = 0; t0 < take0; t0++) mixed.push(vocab[vi++]);
+        mixed.push(sk);
+      });
+    }
+    while (vi < V) mixed.push(vocab[vi++]);
+    st.steps = mixed.concat(tail);
+  }
+  (typeof TC_STAGES !== "undefined" ? TC_STAGES : []).forEach(interleaveStage);
+  (typeof TP_STAGES !== "undefined" ? TP_STAGES : []).forEach(interleaveStage);
+})();

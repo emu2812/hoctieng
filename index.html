@@ -11077,32 +11077,65 @@ function zhStageSeq(stage) {
   (ZH_SPEAK || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhSpeak", r.id), target: { kind: "zhLesson", title: "Nói: " + r.title, type: "Tiếng Trung · Nói chặng " + stage, lesson: { type: "zhSpeak", idx: i } } }); });
   (ZH_ROLE || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhRole", r.id), target: { kind: "zhLesson", title: "Nhập vai: " + r.title, type: "Tiếng Trung · Nhập vai chặng " + stage, lesson: { type: "zhRole", idx: i } } }); });
   (ZH_WRITE || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhWrite", r.id), target: { kind: "zhLesson", title: "Viết: " + r.title, type: "Tiếng Trung · Viết chặng " + stage, lesson: { type: "zhWrite", idx: i } } }); });
-  /* DOT DAN-XEN 01/11: dan xen cac loai bai trong chang thay vi don cuc theo
-     loai (het bo tu moi sang ngu phap...). Thuat toan chia deu dang DUAL
-     (bai thu j cua loai k -> luot floor(j*R/n_k), R = so buoc nhieu nhat
-     trong cac loai con lai tru loai troi): giu nguyen tap buoc, thu tu trong
-     cung loai; bai dau tien cua MOI loai deu roi vao luot 0 nen chang luon
-     bat dau bang tu vung. Mach pinyin nam ngoai zhStageSeq nen khong anh
-     huong; "Hoc tiep" va Ban do doc zhStageSeq nen tu khop thu tu moi. */
+  /* DOT DAN-XEN v47 (03/11/2026): dan xen theo chu ky hoc — vai bo tu vung
+     -> 1 tram ngu phap -> Nghe -> Doc, roi lap lai; Noi, Nhap vai, Viet
+     theo dung thu tu pha sau Nghe (quy tac Dot 2d: sau Nghe la Noi -> Nhap
+     vai -> Viet cua dung chang). Hang doi ky nang xep theo VONG PHA: moi
+     vong lay 1 buoc cua tung loai theo thu tu (ngu phap, Nghe, Doc, Noi,
+     Nhap vai, Viet) — vong pha giu dung thu tu dich chuyen "Hoc tiep"
+     (test I1/I2/I3: xong ngu phap/doc/nghe -> Noi; xong Noi -> Nhap vai;
+     xong Nhap vai -> Viet) ma tron deu (deficit) lam vo vi loai nhieu buoc
+     (Viet) chen len truoc loai it buoc (Nhap vai). Vong pha an toan o track
+     Trung vi so buoc cac loai can nhau (chenh toi da 6, tru Nhap vai chang
+     1 chi co 1) nen khong co duoi don loai dai; track Anh/TOEIC/TOPIK dung
+     deficit vi co loai troi han (Nghe). Tu vung: khoi dau "vai bo" (toi da
+     3 bo) roi moi toi ngu phap, phan con lai chia deu truoc cac ky nang con
+     lai — nho vay ma sau khoi dong, buoc ke la bo HSK1/set tu dau tien
+     (test G3), khong phai ngu phap. Giu nguyen tap buoc, thu tu trong cung
+     loai. Mach pinyin nam ngoai zhStageSeq nen khong anh huong; "Hoc tiep"
+     va Ban do doc zhStageSeq nen tu khop thu tu moi. Kiem tra cuoi chang
+     render rieng sau seq nen van o cuoi chang. */
   (function () {
-    var KIND_ORDER = ["zhVocab", "zhGram", "zhRead", "zhListen", "zhSpeak", "zhRole", "zhWrite"];
+    var SKILL_ORDER = ["zhGram", "zhListen", "zhRead", "zhSpeak", "zhRole", "zhWrite"];
     var groups = {};
     out.forEach(function (it) { var k = it.target.lesson.type; (groups[k] = groups[k] || []).push(it); });
-    var kinds = KIND_ORDER.filter(function (k) { return groups[k] && groups[k].length; });
-    Object.keys(groups).forEach(function (k) { if (kinds.indexOf(k) < 0) kinds.push(k); });
-    if (kinds.length < 2) return;
-    var dom = kinds[0];
-    kinds.forEach(function (k) { if (groups[k].length > groups[dom].length) dom = k; });
-    var R = 0;
-    kinds.forEach(function (k) { if (k !== dom && groups[k].length > R) R = groups[k].length; });
-    var rounds = [];
-    for (var r = 0; r < R; r++) rounds.push([]);
-    kinds.forEach(function (k) {
-      var g = groups[k], n = g.length;
-      for (var j = 0; j < n; j++) rounds[Math.floor(j * R / n)].push(g[j]);
-    });
+    var vocab = groups["zhVocab"] || [];
+    var kinds = SKILL_ORDER.filter(function (k) { return groups[k] && groups[k].length; });
+    Object.keys(groups).forEach(function (k) { if (k !== "zhVocab" && kinds.indexOf(k) < 0) kinds.push(k); });
+    if (!vocab.length || !kinds.length) return;
+    // Vong pha: moi vong lay 1 buoc cua tung loai theo thu tu pha.
+    var queue = [];
+    var idx = {};
+    kinds.forEach(function (k) { idx[k] = 0; });
+    var remain = true;
+    while (remain) {
+      remain = false;
+      kinds.forEach(function (k) {
+        if (idx[k] < groups[k].length) { queue.push(groups[k][idx[k]++]); remain = true; }
+      });
+    }
+    var S = queue.length, V = vocab.length, vi = 0;
     var mixed = [];
-    rounds.forEach(function (rd) { rd.forEach(function (it) { mixed.push(it); }); });
+    if (S >= 2) {
+      var first = Math.min(3, V);
+      for (var fj = 0; fj < first; fj++) mixed.push(vocab[vi++]);
+      mixed.push(queue[0]);
+      var Vr = V - vi, Sr = S - 1;
+      var base = Math.floor(Vr / Sr), rem = Vr % Sr;
+      for (var q = 1; q < S; q++) {
+        var take = base + (q - 1 < rem ? 1 : 0);
+        for (var tj = 0; tj < take; tj++) mixed.push(vocab[vi++]);
+        mixed.push(queue[q]);
+      }
+    } else {
+      var base0 = Math.floor(V / S), rem0 = V % S;
+      queue.forEach(function (sk, q0) {
+        var take0 = base0 + (q0 < rem0 ? 1 : 0);
+        for (var t0 = 0; t0 < take0; t0++) mixed.push(vocab[vi++]);
+        mixed.push(sk);
+      });
+    }
+    while (vi < V) mixed.push(vocab[vi++]);
     out = mixed;
   })();
   return out;
