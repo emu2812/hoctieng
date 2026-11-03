@@ -44,7 +44,7 @@ p{margin:8px 0}
 .q-opt-sel{outline:3px solid var(--amber);outline-offset:1px}
 .summarybox{background:#fff;border:2px solid var(--amber);border-radius:18px;padding:20px;margin:12px 0;position:relative}
 .sumcard{background:var(--paper);border:1px solid var(--line2);border-radius:14px;padding:10px 12px;margin:8px 0}
-.bigletter{font-size:76px;font-weight:800;text-align:center;line-height:1.1;margin:6px 0}
+.bigletter{font-size:76px;font-weight:800;text-align:center;line-height:1.1;margin:6px 0;overflow-wrap:normal;word-break:normal}
 .step-row{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line2);border-radius:14px;padding:12px 16px;margin:8px 0;background:#fff;cursor:pointer;width:100%;text-align:left;font-size:16px}
 .step-row.done{border-color:var(--green)}
 .step-row.cur{border-color:var(--amber);border-width:2px;background:#FFFBEA}
@@ -5110,6 +5110,20 @@ function renderCh1Skill(app, l, d, isListen) {
 }
 function renderCh1Listen(app, l) { renderCh1Skill(app, l, (typeof RB_CH1_LISTEN !== "undefined") ? RB_CH1_LISTEN : null, true); }
 function renderCh1Read(app, l) { renderCh1Skill(app, l, (typeof RB_CH1_READ !== "undefined") ? RB_CH1_READ : null, false); }
+/* Thu nho chu the tu vua khung chu khong ngat giua tu: .qblock ke thua
+   overflow-wrap:break-word nen tu dai vuot khung la bi ngat ("distanc e").
+   Ham nay chi thu font (toi da 76px, giam dan toi 16px) cho toi khi tu vua
+   khung; tu ngan giu nguyen 76px, cum nhieu tu van xuong dong o khoang trang.
+   Trong jsdom khong co layout (scrollWidth = clientWidth = 0) nen ham khong lam gi. */
+function fitBigLetter() {
+  var el = document.getElementById("cardBig"); if (!el) return;
+  try {
+    el.style.fontSize = "";
+    var size = 76;
+    while (size > 16 && el.scrollWidth > el.clientWidth) { size -= 2; el.style.fontSize = size + "px"; }
+  } catch (e) {}
+}
+if (typeof window !== "undefined" && !window.__bigFitWired) { window.__bigFitWired = true; window.addEventListener("resize", function () { try { fitBigLetter(); } catch (e) {} }); }
 function renderVocab(app, l) {
   var set0 = CONTENT.vocab[l.setIdx];
   var step = l.step || { id: "vocab:" + l.setIdx, title: set0.topic, type: "Từ vựng" };
@@ -5174,6 +5188,7 @@ function renderVocab(app, l) {
     + '</div></div>';
   app.innerHTML = html;
   wireBack();
+  fitBigLetter();
   wireMrLibSection(app.querySelector(".mr-lib-section"));
   var clMemoBtn = $("#vocabMemoSave"); if (clMemoBtn) clMemoBtn.onclick = function () { if (!state.mems) state.mems = {}; state.mems[clMemoKey] = $("#vocabMemoInp").value; saveState(); toast("Đã lưu mẹo nhớ."); };
   var vkSpk = $("#btnSpeak"); if (vkSpk) vkSpk.onclick = function () { speak(c.w); };
@@ -9220,29 +9235,33 @@ var SCENE_INNER = {
   shop: '<rect x="45" y="40" width="110" height="60" fill="#fef3c7"/><path d="M40 40 L160 40 L150 22 L50 22 Z" fill="#f59e0b"/><circle cx="100" cy="70" r="14" fill="#fde68a" stroke="#b45309" stroke-width="3"/><rect x="92" y="62" width="16" height="4" fill="#b45309"/>',
   sea: '<path d="M20 78 q20 -14 40 0 t40 0 t40 0 t40 0" stroke="#2563eb" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M20 96 q20 -14 40 0 t40 0 t40 0 t40 0" stroke="#60a5fa" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="150" cy="30" r="14" fill="#fde68a"/>',
   computer: '<rect x="45" y="26" width="110" height="62" rx="8" fill="#dbeafe"/><rect x="55" y="36" width="90" height="42" fill="#fff7ed"/><rect x="88" y="92" width="24" height="10" fill="#94a3b8"/><rect x="60" y="104" width="80" height="6" fill="#94a3b8"/>',
-  animal: '<circle cx="100" cy="58" r="30" fill="#fde68a"/><path d="M74 36 L70 16 L88 26 Z M126 36 L130 16 L112 26 Z" fill="#fde68a"/><circle cx="88" cy="54" r="3" fill="#334155"/><circle cx="112" cy="54" r="3" fill="#334155"/><path d="M94 66 q6 6 12 0" stroke="#92400e" stroke-width="3" fill="none" stroke-linecap="round"/>'
+  animal: '<circle cx="100" cy="58" r="30" fill="#fde68a"/><path d="M74 36 L70 16 L88 26 Z M126 36 L130 16 L112 26 Z" fill="#fde68a"/><circle cx="88" cy="54" r="3" fill="#334155"/><circle cx="112" cy="54" r="3" fill="#334155"/><path d="M94 66 q6 6 12 0" stroke="#92400e" stroke-width="3" fill="none" stroke-linecap="round"/>',
+  landscape: '<path d="M20 100 L70 40 L110 100 Z" fill="#dbeafe" stroke="#b45309" stroke-width="2"/><path d="M70 40 L84 60 L70 54 L56 60 Z" fill="#fff7ed"/><path d="M90 100 L140 30 L180 100 Z" fill="#fef3c7" stroke="#b45309" stroke-width="2"/><circle cx="162" cy="26" r="12" fill="#fde68a"/><rect x="20" y="100" width="160" height="8" fill="#86efac"/>'
 };
 var SCENE_RULES = [
   [/morning|sunrise|dawn/, "morning"],
-  [/night|moon|evening|sleep|dream/, "night"],
-  [/rain|storm|cloud|umbrella/, "rain"],
-  [/school|teacher|student|lesson|class|learn|study/, "school"],
-  [/work|job|office|business|meeting|company/, "work"],
-  [/food|eat|cook|restaurant|lunch|dinner|breakfast|fruit|bread/, "food"],
-  [/sport|football|ball|swim|exercise|gym/, "sport"],
-  [/music|song|sing|guitar|piano/, "music"],
-  [/phone|call|message|computer|internet|email/, "phone"],
-  [/friend|together|party|celebrat/, "friend"],
-  [/shop|store|buy|money|price|market/, "shop"],
-  [/health|doctor|hospital|medicine|disease|patient/, "health"],
-  [/sea|ocean|beach|river|lake|boat/, "sea"],
-  [/home|house|family|room|kitchen|bedroom/, "home"],
-  [/car|drive|road|travel|journey|bus|train|flight|trip/, "car"],
-  [/city|building|street|town|village|apartment/, "city"],
-  [/tree|forest|flower|garden|nature|environment|animal|bird|cat|dog/, "nature"],
-  [/sun|summer|hot|sunny|weather/, "morning"],
-  [/water|fish/, "sea"],
-  [/book|read|story/, "book"]
+  [/night|moon|evening|sleep|dream|\brests?\b|fireworks/, "night"],
+  [/\brain\b|rainfall|raining|rainy|storm|cloud|umbrella/, "rain"],
+  [/school|teacher|student|lesson|learn|study|\bclass\b|classroom|classmate|classmates|education|assignment|homework|degree|seminar|enrol|plagiarism|certificate|diploma|nursery|training|campus|dormitory|vocational|qualification|flashcard/, "school"],
+  [/\bwork\b|workplace|workshop|workforce|workload|teamwork|advertising|job|office|business|meeting|company|career|salary|wage|profit|revenue|investment|shareholder|consumer|\bexports?\b|\bimports?\b|multinational|outsourcing|entrepreneur|budget|expenditure|demand/, "work"],
+  [/food|\beats?\b|eating|cook|restaurant|lunch|dinner|breakfast|fruit|bread|meal|picnic|dish|snack|cuisine|mushroom|diet|carbohydrate|grain/, "food"],
+  [/\bsport\b|sports|football|\bballs?\b|basketball|volleyball|baseball|swim|exercise|gym|workout|athlete|yoga/, "sport"],
+  [/music|\bsong\b|songs|songwriter|\bsings?\b|singing|singer|guitar|piano/, "music"],
+  [/computer|laptop|software|keyboard|digital|online|internet|wifi|data|virtual|cybercrime|network|screenshot|notification|search engine/, "computer"],
+  [/health|doctor|hospital|medicine|disease|patient|brain|cough|headache|allergy|antibiotic|blood pressure|check-up|clinic|diagnosis|dizzy|dose|fever|infection|\bnurse\b|nurses|\bpains?\b|prescription|sore throat|stomachache|surgery|symptom|therapy|vaccination|vitamin|\bwards?\b|illness|treatment|prevention|breathe|breathing|strain|sprain/, "health"],
+  [/phone|\bcall\b|calls|called|calling|message|email|chat|device|gadget|tablet|smartphone/, "phone"],
+  [/friend|together|party|celebrat|communication|communicate/, "friend"],
+  [/shop|\bstore\b|stores|buy|money|price|market|wallet|pay|payment/, "shop"],
+  [/\bseas?\b|seaside|seashore|seafood|overseas|ocean|beach|river|lake|boat|island/, "sea"],
+  [/home|house|housing|family|kitchen|bedroom|bathroom|restroom|\broom\b/, "home"],
+  [/\bcars?\b|carpool|carwash|carpark|drive|\broad\b|roads|travel|journey|\bbus\b|buses|\btrain\b|trains|flight|\btrip\b|trips|passenger|traffic|suitcase|\bride\b|rides|rider|transport|transportation|cargo|booking|seat|passport|zebra crossing/, "car"],
+  [/\bcity\b|cities|building|street|town|village|apartment|urbanisation|map|hotel/, "city"],
+  [/\b(cat|cats|kitten|kittens)\b/, "animal"],
+  [/\b(mountain|mountains|valley|valleys|glacier|glaciers|volcano|volcanoes|hill|hills|cliff|cliffs|peak|peaks|terrain)\b/, "landscape"],
+  [/tree|forest|flower|garden|nature|environment|biodiversity|ecosystem|habitat|conservation|recycle|renewable|soil/, "nature"],
+  [/sun|summer|\bhot\b|sunny|weather|warm/, "morning"],
+  [/\bwater\b|waterfall|\bfish\b|fishing/, "sea"],
+  [/\bbooks?\b|notebook|textbook|bookstore|bookshop|bookshelf|ebook|\breads?\b|reading|reader|story|headline|journalism/, "book"]
 ];
 function sceneForText(text, allowDefault) {
   var t = (text || "").toLowerCase();
