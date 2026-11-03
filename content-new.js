@@ -70935,7 +70935,32 @@ var VIDEO_SAMPLE = {
     { en: "After lunch, we wash the dishes together.", vi: "Ăn trưa xong, cả nhà cùng rửa bát." }
   ]
 };
-var VIDEO_LINES = {};
+/* DOT VOA v54 (04/11/2026): cau that cho video VOA Learning English "English in a Minute:
+   Break the News" (ID BKNJxpdNAtY, 1 phut). NGUON: kich ban chinh thuc trong mo ta cua VOA
+   cho tap nay (khong phai ranh caption YouTube — video nay KHONG co nut CC, khong co phu de
+   Anh/Viet roi). CANH BAO: ban phac 12 cau cua dot v53 (chuyen Andrew di Brazil, ao so mi du
+   lich, kinh ram, sach huong dan, cat ngan sach, muon sach) la SAI — tuyet doi khong dung lai.
+   Ban dich tieng Viet tu soan, don gian, theo dung thu tu cau Anh; khong cau nao can gan co
+   "(can doi chieu giao trinh)" vi tat ca deu dich truc tiep, don gian. Dong gioi thieu "Learn
+   common American English idioms with English in a Minute." chi la dong mo ta, khong phai loi
+   thoai — khong dua vao bai tap. Tu lieu VOA Learning English thuoc pham vi cong cong cho muc
+   dich giao duc khi ghi nguon learningenglish.voanews.com. */
+var VIDEO_LINES = {
+  "voa-break-the-news": [
+    { en: "Welcome to English in a Minute.", vi: "Chào mừng bạn đến với English in a Minute." },
+    { en: "News can be any information that is, well, new to someone.", vi: "Tin tức có thể là bất cứ thông tin nào mới mẻ đối với một người." },
+    { en: "But what does it mean to \"break the news?\"", vi: "Nhưng cụm từ \"break the news\" nghĩa là gì?" },
+    { en: "Oh, Andrew, I have some news.", vi: "Ôi, Andrew, em có tin mới đây." },
+    { en: "What is it?", vi: "Tin gì vậy?" },
+    { en: "We got a raise! And you got a bigger raise than I did!", vi: "Chúng ta được tăng lương rồi! Và anh được tăng nhiều hơn em!" },
+    { en: "Whoa! I don't want to break the news to my wife. She'll be mad that she didn't get one.", vi: "Ồ! Anh không muốn báo tin này cho vợ anh. Cô ấy sẽ giận vì cô ấy không được tăng lương." },
+    { en: "Don't worry. I will tell her. The phrase \"break the news\" means \"to tell someone bad news – or to share news that might be difficult to hear.\" That is all for English in a Minute.", vi: "Đừng lo. Em sẽ nói với cô ấy. Cụm từ \"break the news\" có nghĩa là \"báo tin buồn cho ai đó – hay chia sẻ một tin có thể khó nghe\". Đó là tất cả cho English in a Minute hôm nay." },
+    { en: "Let me try that: break the news. What does the phrase \"break the news\" mean?", vi: "Để anh thử xem: break the news. Cụm từ \"break the news\" nghĩa là gì?" },
+    { en: "I already told you – to tell someone bad news. Do you have bad news for me?", vi: "Em đã nói với anh rồi mà – là báo tin buồn cho ai đó. Anh có tin buồn cho em à?" },
+    { en: "Oh no! Just the opposite! You got the biggest raise of anyone at the office!", vi: "Ồ không! Hoàn toàn ngược lại! Em được tăng lương nhiều nhất văn phòng!" },
+    { en: "Yay! Now I don't have to break the news to your wife.", vi: "Tuyệt quá! Giờ em không phải báo tin cho vợ anh nữa." }
+  ]
+};
 
 /* STORY TRANSLATIONS v53 (04/11/2026): ban dich tieng Viet tach khop tung cau cho 96 bai doc
    (76 bai co ban dich tom tat lech so cau + 20 bai chua co ban dich), de du dieu kien vao dang
