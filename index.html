@@ -12965,6 +12965,9 @@ function tcStepMeta(id) {
   if (k === "r") { var r = (typeof TC_READ !== "undefined") ? TC_READ[n] : null; return r ? { kind: "read", title: "Đọc Part " + r.part + ": " + r.title, ref: n } : null; }
   if (k === "c") { var ck = (typeof TC_CHECK_ALL !== "undefined") ? TC_CHECK_ALL[n] : null; return ck ? { kind: "check", title: ck.title, ref: n } : null; }
   if (id === "m0") return { kind: "mock", title: "Thi thử TOEIC đủ 200 câu", ref: 0 };
+  if (id === "m450") return { kind: "mock", title: "Thi thử TOEIC chặng 450 — 120 câu", ref: 450 };
+  if (id === "m600") return { kind: "mock", title: "Thi thử TOEIC chặng 600 — 120 câu", ref: 600 };
+  if (id === "m750") return { kind: "mock", title: "Thi thử TOEIC chặng 750 — 120 câu", ref: 750 };
   return null;
 }
 function tcStagePct(i) {
@@ -13220,8 +13223,12 @@ function tcOpenStep(id, backTab) {
     app.innerHTML = html3; app._tcQs = l.qs;
     tcWireQuiz(app, id, "tcFinishBtn");
     /* DOT SOI-C4 02/11: dap an chi mo sau khi bam Nghe it nhat 1 lan — truoc do bai
-       nghe thanh bai doc vi dap an hien san bang chu. */
+       nghe thanh bai doc vi dap an hien san bang chu.
+       SUA DOT (c1) 02/11: reset co _tcListened moi lan mo bai Nghe — truoc day co nay
+       dinh tren nut #app vinh vien nen tu bai Nghe thu 2 tro di trong cung phien,
+       bam Nghe khong mo dap an nua (kiem chung: l0 mo duoc, l1/l44 ket 0/3). */
     (function () {
+      app._tcListened = false;
       var opts = app.querySelectorAll(".tcopt");
       opts.forEach(function (b) { b.disabled = true; });
       var lb = document.getElementById("tcListenBtn");
@@ -13253,36 +13260,44 @@ function tcOpenStep(id, backTab) {
     document.getElementById("tcRedoBtn").onclick = function () { tcOpenStep(id, back); };
     tcWireBack(back); return;
   }
-  if (m.kind === "mock") { tcOpenMock(back); return; }
+  if (m.kind === "mock") { tcOpenMock(back, id); return; }
 }
-function tcEst(lc, rc) {
-  var nl = (typeof TC_MOCK_L !== "undefined") ? TC_MOCK_L.length : 50;
-  var nr = (typeof TC_MOCK_R !== "undefined") ? TC_MOCK_R.length : 50;
+function tcEst(lc, rc, nl, nr) {
+  if (typeof nl !== "number") nl = (typeof TC_MOCK_L !== "undefined") ? TC_MOCK_L.length : 50;
+  if (typeof nr !== "number") nr = (typeof TC_MOCK_R !== "undefined") ? TC_MOCK_R.length : 50;
   var le = lc === 0 ? 5 : Math.round(lc / nl * 495 / 5) * 5;
   var re = rc === 0 ? 5 : Math.round(rc / nr * 495 / 5) * 5;
   var total = le + re; if (total < 10) total = 10; if (total > 990) total = 990;
   return { l: le, r: re, total: total };
 }
-function tcOpenMock(back) {
+/* DOT V39 02/11: spec cho tung mock TOEIC — m0 giu nguyen y het hanh vi cu; m450/m600/m750 dung mang rieng, 72 phut, moc rieng. Diem tcEst ti le tren 495 moi phan theo do dai mang cua mock do (uoc luong noi bo, khong phai bang ETS). */
+function tcMockSpec(stepId) {
+  if (stepId === "m450") return { step: "m450", title: "Thi thử TOEIC chặng 450 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 450", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK450_L !== "undefined") ? TC_MOCK450_L : [], R: (typeof TC_MOCK450_R !== "undefined") ? TC_MOCK450_R : [], minutes: 72, milestone: "tc-mock-450" };
+  if (stepId === "m600") return { step: "m600", title: "Thi thử TOEIC chặng 600 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 600", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK600_L !== "undefined") ? TC_MOCK600_L : [], R: (typeof TC_MOCK600_R !== "undefined") ? TC_MOCK600_R : [], minutes: 72, milestone: "tc-mock-600" };
+  if (stepId === "m750") return { step: "m750", title: "Thi thử TOEIC chặng 750 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 750", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK750_L !== "undefined") ? TC_MOCK750_L : [], R: (typeof TC_MOCK750_R !== "undefined") ? TC_MOCK750_R : [], minutes: 72, milestone: "tc-mock-750" };
+  return { step: "m0", title: "Thi thử TOEIC đủ 200 câu", eyebrow: "TOEIC · THI THỬ ĐỦ CÂU", intro1: "200 câu: 100 câu Nghe (Part 1: 6, Part 2: 25, Part 3: 39, Part 4: 30) + 100 câu Đọc (Part 5: 30, Part 6: 16, Part 7: 54), thời gian tham khảo 120 phút. Đây là bài tự soạn theo đúng tỉ lệ đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng tham khảo — ETS không công bố bảng quy đổi điểm thô cố định.", intro2: 'Tỉ lệ so với đề thật: 200/200 câu (100%). Theo chuẩn nội bộ của web, mock này đủ câu để gọi là "sẵn sàng thi" ở mức số câu — điểm vẫn chỉ là ước lượng tham khảo.', resultTitle: "Kết quả thi thử TOEIC đủ câu", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn đủ 200 câu theo đúng tỉ lệ đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định.", L: TC_MOCK_L, R: TC_MOCK_R, minutes: 120, milestone: "tc-mock-200" };
+}
+function tcOpenMock(back, stepId) {
   var app = document.getElementById("app"); if (!app) return;
-  var skipBanner = tcSkipBanner("m0");
-  app.innerHTML = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · THI THỬ ĐỦ CÂU</p><h2>Thi thử TOEIC đủ 200 câu</h2><p class="mut">200 câu: 100 câu Nghe (Part 1: 6, Part 2: 25, Part 3: 39, Part 4: 30) + 100 câu Đọc (Part 5: 30, Part 6: 16, Part 7: 54), thời gian tham khảo 120 phút. Đây là bài tự soạn theo đúng tỉ lệ đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng tham khảo — ETS không công bố bảng quy đổi điểm thô cố định.</p><p class="mut">Tỉ lệ so với đề thật: 200/200 câu (100%). Theo chuẩn nội bộ của web, mock này đủ câu để gọi là "sẵn sàng thi" ở mức số câu — điểm vẫn chỉ là ước lượng tham khảo.</p><div class="row"><button class="btn btn-primary" id="tcMockStart">Bắt đầu thi thử</button></div><div id="tcMockBody"></div></section>';
+  var spec = tcMockSpec(stepId); var ML = spec.L, MR = spec.R, mins = spec.minutes;
+  var skipBanner = tcSkipBanner(spec.step);
+  app.innerHTML = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + esc(spec.eyebrow) + '</p><h2>' + esc(spec.title) + '</h2><p class="mut">' + spec.intro1 + '</p><p class="mut">' + spec.intro2 + '</p><div class="row"><button class="btn btn-primary" id="tcMockStart">Bắt đầu thi thử</button></div><div id="tcMockBody"></div></section>';
   tcWireBack(back);
   document.getElementById("tcMockStart").onclick = function () {
     var body = document.getElementById("tcMockBody");
-    var secs = 120 * 60;
-    var qhtml = '<p><b>Thời gian còn lại: <span id="tcMockClock">120:00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
-    qhtml += '<h3>Phần Nghe (100 câu)</h3>';
-    qhtml += TC_MOCK_L.map(function (q, i) {
+    var secs = mins * 60;
+    var qhtml = '<p><b>Thời gian còn lại: <span id="tcMockClock">' + mins + ':00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
+    qhtml += '<h3>Phần Nghe (' + ML.length + ' câu)</h3>';
+    qhtml += ML.map(function (q, i) {
       return '<div class="qblock tcq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tcmocklisten" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + q.o.map(function (op, oi) { return '<button class="btn tcopt" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("") + '</div><div class="tcwhy"></div></div>';
     }).join("");
-    qhtml += '<h3>Phần Đọc (100 câu)</h3>';
-    qhtml += TC_MOCK_R.map(function (q, i) {
+    qhtml += '<h3>Phần Đọc (' + MR.length + ' câu)</h3>';
+    qhtml += MR.map(function (q, i) {
       return '<div class="qblock tcq" data-qi="R' + i + '">' + (q.passage ? '<p>' + esc(q.passage) + '</p>' : '') + '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + q.o.map(function (op, oi) { return '<button class="btn tcopt" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("") + '</div><div class="tcwhy"></div></div>';
     }).join("");
     qhtml += '<div class="row"><button class="btn btn-primary" id="tcMockSubmit">Nộp bài</button></div><div id="tcMockResult"></div>';
     body.innerHTML = qhtml;
-    body.querySelectorAll(".tcmocklisten").forEach(function (b) { b.onclick = function () { try { speak(TC_MOCK_L[+b.dataset.i].script); } catch (e) {} }; });
+    body.querySelectorAll(".tcmocklisten").forEach(function (b) { b.onclick = function () { try { speak(ML[+b.dataset.i].script); } catch (e) {} }; });
     var answers = {};
     body.querySelectorAll(".tcopt").forEach(function (b) {
       b.onclick = function () {
@@ -13294,14 +13309,14 @@ function tcOpenMock(back) {
     function submit() {
       if (tcMockTimer) { clearInterval(tcMockTimer); tcMockTimer = null; }
       var lc = 0, rc = 0;
-      TC_MOCK_L.forEach(function (q, i) { if (answers["L" + i] === q.a) lc++; });
-      TC_MOCK_R.forEach(function (q, i) { if (answers["R" + i] === q.a) rc++; });
-      var est = tcEst(lc, rc);
-      tcNorm(); state.tcMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, milestone: "tc-mock-200" }); saveState(); tcMarkDone("m0");
-      var rev = '<h3>Kết quả thi thử TOEIC đủ câu</h3><p>Nghe: ' + lc + '/' + TC_MOCK_L.length + ' · Đọc: ' + rc + '/' + TC_MOCK_R.length + ' · <b>Điểm ước lượng: ' + est.total + '/990</b> (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p class="mut">Điểm này chỉ để tham khảo — bài tự soạn đủ 200 câu theo đúng tỉ lệ đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định.</p>';
+      ML.forEach(function (q, i) { if (answers["L" + i] === q.a) lc++; });
+      MR.forEach(function (q, i) { if (answers["R" + i] === q.a) rc++; });
+      var est = tcEst(lc, rc, ML.length, MR.length);
+      tcNorm(); state.tcMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, milestone: spec.milestone, nl: ML.length, nr: MR.length }); saveState(); tcMarkDone(spec.step);
+      var rev = '<h3>' + esc(spec.resultTitle) + '</h3><p>Nghe: ' + lc + '/' + ML.length + ' · Đọc: ' + rc + '/' + MR.length + ' · <b>Điểm ước lượng: ' + est.total + '/990</b> (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p class="mut">' + spec.resultNote + '</p>';
       rev += '<h3>Xem lại từng câu</h3><p class="mut">Sửa thế này: câu nào chưa đúng thì xem lại lý thuyết của chặng đó rồi mở lại thi thử từ Bản đồ để làm lại.</p>';
-      TC_MOCK_L.forEach(function (q, i) { rev += '<p><b>Nghe ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["L" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
-      TC_MOCK_R.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
+      ML.forEach(function (q, i) { rev += '<p><b>Nghe ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["L" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
+      MR.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
       var resEl = document.getElementById("tcMockResult"); if (resEl) resEl.innerHTML = rev;
       var sub = document.getElementById("tcMockSubmit"); if (sub) sub.disabled = true;
       body.querySelectorAll(".tcopt").forEach(function (x) { x.disabled = true; });
@@ -13475,6 +13490,7 @@ function viewPracticeTc(app) {
     if (items.length) html += '<section class="card"><h3>Đọc Part ' + p + '</h3><div class="row">' + items.map(function (x) { return tcStepBtnHTML("r" + x.i); }).join("") + '</div></section>';
   });
   html += '<section class="card"><h3>Thi thử TOEIC đủ 200 câu</h3><p class="mut">200 câu, 120 phút tham khảo, điểm ước lượng 10–990 chỉ để tham khảo.</p><div class="row">' + tcStepBtnHTML("m0") + '</div></section>';
+  html += '<section class="card"><h3>Thi thử TOEIC theo chặng (120 câu)</h3><p class="mut">Mỗi chặng một bài riêng, ở cuối chặng đó: 120 câu, 72 phút tham khảo, điểm ước lượng nội bộ 10–990 chỉ để tham khảo.</p><div class="row">' + tcStepBtnHTML("m450") + tcStepBtnHTML("m600") + tcStepBtnHTML("m750") + '</div></section>';
   if (state.tcHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOEIC chưa sửa: ' + state.tcHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
   /* DOT V32 PLATFORMER 01/11: the giai tri TC — chi 1 game Di canh nhat sao (canvas that); 3 game cu con code nhung khong con nut vao tu the. */
   html += '<section class="card" id="tcGameCardPractice"><h3>🎮 Giải trí — Đi cảnh nhặt sao + video tiếng Anh</h3><p class="mut">Chạy nhảy thật trên canvas: dùng phím ←/→/Space trên máy tính hoặc nút cảm ứng trên điện thoại. Chơi bằng từ vựng TOEIC của web: nhặt sao, nhảy lên đúng bệ ở cổng. Kỷ lục riêng của game, lưu trên máy này.</p><div class="row">' + [["platform", "🏃", "Đi cảnh nhặt sao"]].map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div><div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Khối video này dùng chung video tiếng Anh với track IELTS — xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; "I\'m hungry!" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; "I want to see the lights!" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; "Let\'s play!" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; "We are friends!" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; "I love dogs!" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, có phụ đề tiếng Anh (chưa có Vietsub — nghe và đọc phụ đề Anh để đoán nghĩa): news — tin tức; break the news — báo tin (thường là tin buồn); "I have news for you." — mình có tin cho bạn đây.</p></details></div></section>';
@@ -13500,7 +13516,8 @@ function viewReviewTc(app) {
   if (state.tcMockTests.length > 0) {
     html += '<section class="card"><h3>Lịch sử thi thử TOEIC</h3>';
     html += state.tcMockTests.map(function (m) {
-      return '<p>' + new Date(m.at).toISOString().slice(0, 10) + ' — Nghe ' + m.l + '/' + TC_MOCK_L.length + ' · Đọc ' + m.r + '/' + TC_MOCK_R.length + ' · Ước lượng ' + m.est + '/990 (tham khảo)</p>';
+      var mlab = m.milestone === "tc-mock-450" ? "chặng 450" : m.milestone === "tc-mock-600" ? "chặng 600" : m.milestone === "tc-mock-750" ? "chặng 750" : "đủ 200 câu";
+      return '<p>' + new Date(m.at).toISOString().slice(0, 10) + ' — Thi thử ' + mlab + ' — Nghe ' + m.l + '/' + (m.nl || TC_MOCK_L.length) + ' · Đọc ' + m.r + '/' + (m.nr || TC_MOCK_R.length) + ' · Ước lượng ' + m.est + '/990 (tham khảo)</p>';
     }).join("");
     html += '</section>';
   }

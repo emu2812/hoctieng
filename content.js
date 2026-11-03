@@ -2372,7 +2372,7 @@ const CONTENT = {
   {
    "topic": "Xã hội và văn hóa",
    "theme": "Society - Xã hội",
-   "band": "Band 7,0",
+   "band": "Band 6,5",
    "cards": [
     {
      "w": "community",
