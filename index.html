@@ -8084,6 +8084,27 @@ function renderSkillListenLong(app, l) {
 function splitSentencesEN(text) {
   var t = String(text || "").replace(/\s+/g, " ").trim();
   t = t.replace(/(^|\s)[AB]:\s*/g, "$1");
+  var DOT = "\uE000";
+  t = t.replace(/(\d)\.(\d)/g, "$1" + DOT + "$2");
+  function ampmProtect(m, a, mm, offset, str) {
+    var rest = str.slice(offset + m.length);
+    var skip = rest.match(/^\s*["'”\)\],;:]*/)[0];
+    var ch = rest.charAt(skip.length);
+    if (ch >= "A" && ch <= "Z") return a + DOT + mm + ".";
+    return a + DOT + mm + DOT;
+  }
+  t = t.replace(/\b([aApP])\.([mM])\./g, ampmProtect);
+  t = t.replace(/\b([aApP])\.([mM])\b(?!\.)/g, function (m, a, mm, offset, str) {
+    var rest = str.slice(offset + m.length);
+    var skip = rest.match(/^\s*["'”\)\],;:]*/)[0];
+    var ch = rest.charAt(skip.length);
+    if (ch >= "A" && ch <= "Z") return m;
+    return a + DOT + mm;
+  });
+  t = t.replace(/\b(Mr|Mrs|Ms|Dr|St)\.(?=\s+[A-Z])/g, "$1" + DOT);
+  t = t.replace(/\b(e)\.(g)\./gi, "$1" + DOT + "$2" + DOT);
+  t = t.replace(/\b(i)\.(e)\./gi, "$1" + DOT + "$2" + DOT);
+  t = t.replace(/\bNo\.(?=\s*\d)/g, "No" + DOT);
   var parts = t.match(/[^.?!]+[.?!]+["'”)]?/g) || (t ? [t] : []);
   var out = [];
   parts.forEach(function (p) {
@@ -8091,12 +8112,13 @@ function splitSentencesEN(text) {
     if (!p) return;
     var prev = out[out.length - 1];
     if (prev) {
-      var lastTok = prev.split(" ").pop();
-      if (/^(Mr|Mrs|Ms|Dr|St)\.$/i.test(lastTok) || /\d\.$/.test(prev)) { out[out.length - 1] = prev + " " + p; return; }
+      var lastTok = prev.split(" ").pop().split(DOT).join(".");
+      if (/^(Mr|Mrs|Ms|Dr|St)\.$/i.test(lastTok)) { out[out.length - 1] = prev + " " + p; return; }
+      if (/^\d+\.$/.test(lastTok) && prev.trim() === lastTok) { out[out.length - 1] = prev + " " + p; return; }
     }
     out.push(p);
   });
-  return out;
+  return out.map(function (s) { return s.split(DOT).join("."); });
 }
 function dictMaskFor(sent, level) {
   var toks = sent.split(" ");
