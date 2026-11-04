@@ -27,6 +27,56 @@ var LQ_CLUE_SPOTS = [
   { place: "Cổng Học viện", witness: "Tấm bảng ở cổng", prefix: "Tấm bảng ở cổng ghi", giver: "chest" }
 ];
 
+/* ---------- Cảnh minh họa đã duyệt (phong cách truyện tranh) ----------
+   Chỉ đổi lớp vỏ, không đổi luật/điểm/kho từ. Ảnh bản đồ đảo làm nền
+   thành phố, ảnh sách phép mở đầu chương, chân dung nhân vật dẫn đường
+   dùng cho mọi hộp thoại (một nhân vật xuyên suốt). Ảnh nào lỗi thì tự
+   rơi về hình vẽ bằng code cũ, game không bao giờ vỡ. */
+var LQ_IMG_MAP = "assets/media-generation-world-map-0-ba0b452e-b805-4eea-812a-a738d83297ab.webp";
+var LQ_IMG_BOOK = "assets/media-generation-magic-book-opening-0-5d1589d4-da6a-4117-8438-7d7b8e4614c9.webp";
+var LQ_IMG_GUIDE = "assets/media-generation-npc-guide-portrait-0-91c329a7-065e-4e04-801e-63b953c59598.webp";
+var lqImgCache = {};
+function lqImg(src) {
+  if (lqImgCache[src]) return lqImgCache[src];
+  var img = null;
+  try { img = new Image(); img.src = src; } catch (e) { img = null; }
+  lqImgCache[src] = img;
+  return img;
+}
+function lqImgReady(img) { try { return !!(img && img.complete && img.naturalWidth > 0); } catch (e) { return false; } }
+function lqGuideImgHTML(size) {
+  var s = size || 96;
+  return '<img src="' + LQ_IMG_GUIDE + '" alt="Nhân vật dẫn đường" style="width:' + s + 'px;height:' + s + 'px;object-fit:cover;border-radius:50%;border:3px solid #D97706;flex:none" onerror="this.style.display=\'none\'">';
+}
+/* Màn thưởng: luôn hiện đủ 3 ô sao để thấy thang 3 sao, rồi lấp từng sao
+   một theo nhịp rõ ràng, giống hệt vòng mobile. Trước đây sao lấp có độ
+   trễ khó hiểu và không nhất quán với mobile. */
+function lqRewardStarsHTML(stars) {
+  var n = stars || 0;
+  var out = '<p class="rw-stars" data-stars-earned="' + n + '"><span class="mut">Thang 3 sao: </span>';
+  for (var i = 0; i < 3; i++) out += '<span class="rw-star-slot" data-star-slot="' + (i + 1) + '" style="font-size:34px">☆</span>';
+  out += ' <span class="rw-star-count">' + n + '/3 sao</span></p>';
+  return out;
+}
+function lqAnimateRewardStars() {
+  var box = document.querySelector("[data-stars-earned]");
+  if (!box) return;
+  var earned = parseInt(box.getAttribute("data-stars-earned"), 10) || 0;
+  var slots = box.querySelectorAll("[data-star-slot]");
+  function fill(k) { for (var i = 0; i < slots.length; i++) if (i < k) slots[i].textContent = "⭐"; }
+  for (var j = 0; j < earned; j++) (function (k) { setTimeout(function () { fill(k); }, 450 * k); })(j + 1);
+  setTimeout(function () { fill(earned); }, 450 * earned + 200);
+}
+/* Bấm vào khu vực tòa nhà thì đi tới đúng nhân vật/rương của khu đó, thay
+   vì chỉ bấm trúng chấm nhỏ mới đi. Trước đây bấm vào tòa nhà thì nhân
+   vật đi tới giữa tòa nhà rồi vẫn đứng xa nhân vật, không nói chuyện được. */
+function lqSnapTarget(x, y) {
+  if (x >= 10 && x <= 240 && y >= 5 && y <= 185) return [LQ_NPCS.librarian.x, LQ_NPCS.librarian.y];
+  if (x >= 400 && x <= 630 && y >= 5 && y <= 185) return [LQ_NPCS.merchant.x, LQ_NPCS.merchant.y];
+  if (x >= 400 && x <= 630 && y >= 240 && y <= 395) return [LQ_CHEST.x, LQ_CHEST.y];
+  return null;
+}
+
 /* Content Adapter (chỉ đọc bank gốc, không copy): ánh xạ thẻ thật sang
    trường chuẩn của MASTER PROMPT, cùng kiểu với vòng mobile v60. */
 function lqAdapterItems(setIdx) {
@@ -193,6 +243,38 @@ function lqDrawCity(l) {
   var cv = document.getElementById("lqCanvas"); if (!cv) return;
   var ctx = null; try { ctx = cv.getContext("2d"); } catch (e) {} if (!ctx) return;
   var W = LQ_W, H = LQ_H;
+  var mapImg = lqImg(LQ_IMG_MAP);
+  if (lqImgReady(mapImg)) {
+    var sc = Math.max(W / mapImg.naturalWidth, H / mapImg.naturalHeight);
+    var dw = mapImg.naturalWidth * sc, dh = mapImg.naturalHeight * sc;
+    ctx.drawImage(mapImg, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    ctx.fillStyle = "rgba(255,251,235,0.18)"; ctx.fillRect(0, 0, W, H);
+    function plate(x, y, label) {
+      ctx.font = "bold 13px sans-serif"; ctx.textAlign = "center";
+      var tw = ctx.measureText(label).width + 20;
+      ctx.fillStyle = "rgba(31,41,55,0.78)";
+      ctx.fillRect(x - tw / 2, y - 16, tw, 22);
+      ctx.fillStyle = "#fff"; ctx.fillText(label, x, y);
+    }
+    function marker(x, y, color, label) {
+      ctx.strokeStyle = color; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.arc(x, y, 26, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x, y, 14, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#fff"; ctx.font = "bold 13px sans-serif"; ctx.textAlign = "center";
+      ctx.fillText("●", x, y + 5);
+      plate(x, y + 46, label);
+    }
+    marker(LQ_NPCS.librarian.x, LQ_NPCS.librarian.y, "#7c3aed", "📚 Thư viện · Thủ thư");
+    marker(LQ_NPCS.merchant.x, LQ_NPCS.merchant.y, "#059669", "🛍️ Chợ · Người bán hàng");
+    if (!s.found[2]) marker(LQ_CHEST.x, LQ_CHEST.y, "#b45309", "📦 Rương ở Cổng Học viện");
+    if (lqNear(l, LQ_NPCS.librarian.x, LQ_NPCS.librarian.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.textAlign = "center"; ctx.fillText("!", LQ_NPCS.librarian.x, LQ_NPCS.librarian.y - 34); }
+    if (lqNear(l, LQ_NPCS.merchant.x, LQ_NPCS.merchant.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.textAlign = "center"; ctx.fillText("!", LQ_NPCS.merchant.x, LQ_NPCS.merchant.y - 34); }
+    if (!s.found[2] && lqNear(l, LQ_CHEST.x, LQ_CHEST.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.textAlign = "center"; ctx.fillText("!", LQ_CHEST.x, LQ_CHEST.y - 34); }
+    ctx.fillStyle = "#f59e0b"; ctx.fillRect(s.px - 10, s.py - 28, 20, 28);
+    ctx.fillStyle = "#fde68a"; ctx.beginPath(); ctx.arc(s.px, s.py - 36, 11, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#b45309"; ctx.fillRect(s.px - 12, s.py - 46, 24, 5);
+    return;
+  }
   ctx.fillStyle = "#dcfce7"; ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = "#fef9c3"; ctx.beginPath(); ctx.arc(W - 40, 210, 90, 0, Math.PI * 2); ctx.fill();
   ctx.fillStyle = "#fef3c7"; ctx.fillRect(190, 180, 260, 90);
@@ -335,7 +417,7 @@ function lqTaskNext(l) {
 function renderLangQuestIntro(app, l) {
   var head = lessonHead({ title: "🏙️ Thành phố Ngôn Ngữ — Chương 1: Bước chân vào Thành phố", type: "langquest" }, "Phiêu lưu PC: đi bộ quanh thành phố, nói chuyện, tìm manh mối, phá án bằng kiến thức. Thắng thua chỉ trong game, không chạm phần học. Sai ngôn ngữ vào Sổ lỗi sai, không trừ mạng.");
   var setIdx = lqPickSet();
-  var body = '<div class="qblock"><h3>🏙️ Bước chân vào Thành phố Ngôn Ngữ</h3><p>Sáng nay, một sự cố bí ẩn làm thất lạc các trang từ điển của thành phố. Thủ thư chuyển sách từ Thư viện sang Học viện thì gió thổi bay mất mấy trang. Bạn hãy vào thành phố, nói chuyện với người dân, tìm lại 3 trang, nối manh mối trên bảng điều tra rồi trình bày kết luận.</p>';
+  var body = '<div class="qblock"><h3>🏙️ Bước chân vào Thành phố Ngôn Ngữ</h3><img src="' + LQ_IMG_BOOK + '" alt="Sách phép mở ra thành phố" style="width:100%;max-width:640px;border-radius:20px;border:2px solid #D97706;display:block" onerror="this.style.display=\'none\'"><p class="mut">Mở sách phép ra, cả thành phố hiện lên!</p><p>Sáng nay, một sự cố bí ẩn làm thất lạc các trang từ điển của thành phố. Thủ thư chuyển sách từ Thư viện sang Học viện thì gió thổi bay mất mấy trang. Bạn hãy vào thành phố, nói chuyện với người dân, tìm lại 3 trang, nối manh mối trên bảng điều tra rồi trình bày kết luận.</p>';
   var best = gameBest("langquest", "en");
   if (best) body += '<p class="mut">Kỷ lục của bạn: ' + best.score + ' điểm · ' + "⭐".repeat(best.stars || 0) + '</p>';
   if (setIdx < 0) body += '<p>Chưa có bộ từ nào đủ 6 thẻ để chơi chương này — bạn học thêm vài thẻ rồi quay lại nhé.</p>';
@@ -364,7 +446,7 @@ function renderLangQuestCity(app, l) {
     + '<div class="qblock"><canvas id="lqCanvas" width="640" height="400" style="width:100%;max-width:720px;border:2px solid #D97706;border-radius:20px;background:#FFF8E1;display:block"></canvas>'
     + '<div class="row" style="margin-top:8px"><button class="btn" id="lqTalkLibrarian">💬 Nói chuyện với Thủ thư</button><button class="btn" id="lqTalkMerchant">💬 Nói chuyện với Người bán hàng</button><button class="btn" id="lqOpenChest">📦 Mở rương ở Cổng Học viện</button>' + boardBtn + '</div>'
     + chestHint
-    + '<p class="mut">WASD / phím mũi tên để đi, bấm vào bản đồ để đi tới đó. Đứng gần người dân hoặc rương thì nút hành động mới bấm được.</p></div>';
+    + '<p class="mut">WASD / phím mũi tên để đi, bấm vào bản đồ để đi tới đó — bấm vào khu vực tòa nhà nào thì nhân vật đi thẳng tới người dân hoặc rương ở khu đó. Đứng gần người dân hoặc rương thì nút hành động mới bấm được.</p></div>';
   wireBack();
   var bb = document.getElementById("btnBack");
   if (bb) bb.onclick = function () { lqStopLoop(l); backFromLesson(); };
@@ -390,7 +472,9 @@ function renderLangQuestCity(app, l) {
     if (x === null) return;
     var r = cv.getBoundingClientRect ? cv.getBoundingClientRect() : null;
     if (r && r.width) { x = x / r.width * LQ_W; y = y / r.height * LQ_H; }
-    s.tx = x; s.ty = y;
+    var snap = lqSnapTarget(x, y);
+    if (snap) { s.tx = snap[0]; s.ty = snap[1]; }
+    else { s.tx = x; s.ty = y; }
   };
   lqUpdateCityUI(l);
   lqDrawCity(l);
@@ -400,7 +484,7 @@ function renderLangQuestTalk(app, l) {
   var s = l.lq;
   var npc = LQ_NPCS[s.talkNpc] || LQ_NPCS.librarian;
   var head = lessonHead({ title: "🏙️ Thành phố Ngôn Ngữ — Chương 1", type: "langquest" }, "Đang nói chuyện với " + npc.name + ".");
-  var body = '<div class="qblock"><h3>' + esc(npc.name) + '</h3>';
+  var body = '';
   if (s.talkView === "lines") {
     body += s.talkLines.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
     body += '<div class="row"><button class="btn btn-primary" id="lqTalkBack">← Quay lại nói chuyện</button></div>';
@@ -412,8 +496,7 @@ function renderLangQuestTalk(app, l) {
       return '<button class="btn" data-lqopt="' + o.id + '">' + esc(o.label) + '</button>';
     }).join("") + '</div>';
   }
-  body += '</div>';
-  app.innerHTML = head + body;
+  app.innerHTML = head + '<div class="qblock"><h3>' + esc(npc.name) + '</h3><div class="row" style="align-items:flex-start">' + lqGuideImgHTML(96) + '<div style="flex:1;background:#FFF8E1;border:2px solid #D97706;border-radius:16px;padding:10px 12px">' + body + '</div></div></div>';
   wireBack();
   var bb = document.getElementById("btnBack");
   if (bb) bb.onclick = function () { lqBackToCity(l); };
@@ -593,10 +676,11 @@ function renderLangQuestEnd(app, l) {
   var head = lessonHead({ title: "🏙️ Thành phố Ngôn Ngữ — Chương 1", type: "langquest" }, "Phá án xong! Chương 2 đã mở trong hồ sơ của bạn.");
   function dedup(list) { var seen = {}, out = []; list.forEach(function (r) { var k = String(r.w).toLowerCase(); if (!seen[k]) { seen[k] = true; out.push(r); } }); return out; }
   var rightD = dedup(s.rightList), wrongD = dedup(s.wrongList);
-  app.innerHTML = head + '<div class="reward-frame">' + summaryBadgeSVG() + '<h2>🎉 Phá án thành công!</h2><p>Đúng rồi! Các trang bị gió thổi bay trên đường chuyển sách và rơi rải rác ở Thư viện, Chợ và Cổng Học viện — bạn đã nối đủ bằng chứng.</p><p>Điểm: <b>' + s.finalScore + '</b></p><p class="rw-stars">' + (function () { var st = ""; for (var si2 = 0; si2 < (s.finalStars || 0); si2++) st += '<span class="rw-star" style="animation-delay:' + (si2 * 0.25) + 's">⭐</span>'; return st || "chưa có sao"; })() + '</p><p class="mut">Chương 2: Bí mật trong Thư viện Cổ đã mở trong hồ sơ của bạn, nội dung sẽ có ở bản sau.</p>'
+  app.innerHTML = head + '<div class="reward-frame">' + summaryBadgeSVG() + '<h2>🎉 Phá án thành công!</h2><p>Đúng rồi! Các trang bị gió thổi bay trên đường chuyển sách và rơi rải rác ở Thư viện, Chợ và Cổng Học viện — bạn đã nối đủ bằng chứng.</p><p>Điểm: <b>' + s.finalScore + '</b></p>' + lqRewardStarsHTML(s.finalStars) + '<p class="mut">Chương 2: Bí mật trong Thư viện Cổ đã mở trong hồ sơ của bạn, nội dung sẽ có ở bản sau.</p>'
     + gameSummaryHTML(rightD, wrongD)
     + '<div class="row"><button class="btn btn-primary" id="lqAgain">🔁 Chơi lại Chương 1</button><button class="btn" id="lqHub">Về Luyện tập</button></div></div>';
   wireBack();
+  lqAnimateRewardStars();
   document.getElementById("lqAgain").onclick = function () { l.lq = null; render(); };
   document.getElementById("lqHub").onclick = function () { lqStopLoop(l); backFromLesson(); go("practice"); };
   var rw = document.getElementById("gmReviewWrong");
@@ -654,5 +738,8 @@ window.LangQuest = {
   getState: function (l) { return l.lq; },
   near: lqNear,
   clueCount: lqClueCount,
-  objective: lqObjective
+  objective: lqObjective,
+  rewardStarsHTML: lqRewardStarsHTML,
+  animateStars: lqAnimateRewardStars,
+  snapTarget: lqSnapTarget
 };

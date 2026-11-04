@@ -13,6 +13,45 @@ var WA_RUN_LENGTH = 2400;
 var WA_RUN_SPEED = 100;
 var WA_PLAYER_X = 90;
 
+/* ---------- Cảnh minh họa đã duyệt (phong cách truyện tranh) ----------
+   Chỉ đổi lớp vỏ, không đổi luật/điểm/mạng/kho từ. Ảnh phố làm nền đoạn
+   chạy, chân dung nhân vật dẫn đường dùng cho mọi hộp thoại. Ảnh nào lỗi
+   thì tự rơi về hình vẽ bằng code cũ, game không bao giờ vỡ. */
+var WA_IMG_TOWN = "assets/media-generation-town-mobile-scene-0-0b9a4b60-108c-41fb-85af-ebf80e551244.webp";
+var WA_IMG_GUIDE = "assets/media-generation-npc-guide-portrait-0-91c329a7-065e-4e04-801e-63b953c59598.webp";
+var waImgCache = {};
+function waImg(src) {
+  if (waImgCache[src]) return waImgCache[src];
+  var img = null;
+  try { img = new Image(); img.src = src; } catch (e) { img = null; }
+  waImgCache[src] = img;
+  return img;
+}
+function waImgReady(img) { try { return !!(img && img.complete && img.naturalWidth > 0); } catch (e) { return false; } }
+function waGuideImgHTML(size) {
+  var s = size || 96;
+  return '<img src="' + WA_IMG_GUIDE + '" alt="Nhân vật dẫn đường" style="width:' + s + 'px;height:' + s + 'px;object-fit:cover;border-radius:50%;border:3px solid #D97706;flex:none" onerror="this.style.display=\'none\'">';
+}
+/* Màn thưởng: luôn hiện đủ 3 ô sao để thấy thang 3 sao, rồi lấp từng sao
+   một theo nhịp rõ ràng. Trước đây chỉ vẽ đúng số sao đạt được nên sao
+   thứ 3 biến mất hẳn ở mobile. */
+function waRewardStarsHTML(stars) {
+  var n = stars || 0;
+  var out = '<p class="rw-stars" data-stars-earned="' + n + '"><span class="mut">Thang 3 sao: </span>';
+  for (var i = 0; i < 3; i++) out += '<span class="rw-star-slot" data-star-slot="' + (i + 1) + '" style="font-size:34px">☆</span>';
+  out += ' <span class="rw-star-count">' + n + '/3 sao</span></p>';
+  return out;
+}
+function waAnimateRewardStars() {
+  var box = document.querySelector("[data-stars-earned]");
+  if (!box) return;
+  var earned = parseInt(box.getAttribute("data-stars-earned"), 10) || 0;
+  var slots = box.querySelectorAll("[data-star-slot]");
+  function fill(k) { for (var i = 0; i < slots.length; i++) if (i < k) slots[i].textContent = "⭐"; }
+  for (var j = 0; j < earned; j++) (function (k) { setTimeout(function () { fill(k); }, 450 * k); })(j + 1);
+  setTimeout(function () { fill(earned); }, 450 * earned + 200);
+}
+
 /* Content Adapter (chỉ đọc bank gốc, không copy): ánh xạ thẻ thật sang
    trường chuẩn của MASTER PROMPT. source_url là vị trí bài học trong web
    (SPA nên ghi dạng tab + bộ, không bịa URL http). */
@@ -95,7 +134,8 @@ function waNewLoop(l, setIdx) {
     usedChallenge: [],
     loopOn: false,
     keyHandler: null,
-    raf: 0
+    raf: 0,
+    introSeen: false
   };
 }
 function waBanner(l, msg) { var b = document.getElementById("waBanner"); if (b) b.textContent = msg; }
@@ -179,12 +219,21 @@ function waDrawRun(l) {
   var cv = document.getElementById("waCanvas"); if (!cv) return;
   var ctx = null; try { ctx = cv.getContext("2d"); } catch (e) {} if (!ctx) return;
   var W = 360, H = 240, groundY = 190;
-  ctx.fillStyle = "#bfe8ff"; ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = "#fff7cc"; ctx.beginPath(); ctx.arc(310, 32, 22, 0, Math.PI * 2); ctx.fill();
-  ctx.fillStyle = "#ffffff";
-  [[50, 30], [150, 22], [240, 38]].forEach(function (c) { ctx.beginPath(); ctx.arc(c[0], c[1], 14, 0, Math.PI * 2); ctx.arc(c[0] + 14, c[1] + 4, 11, 0, Math.PI * 2); ctx.fill(); });
-  ctx.fillStyle = "#8fce7e"; ctx.fillRect(0, groundY, W, H - groundY);
-  ctx.fillStyle = "#6db35e"; ctx.fillRect(0, groundY, W, 6);
+  var townImg = waImg(WA_IMG_TOWN);
+  if (waImgReady(townImg)) {
+    var sc = Math.max(W / townImg.naturalWidth, H / townImg.naturalHeight);
+    var dw = townImg.naturalWidth * sc, dh = townImg.naturalHeight * sc;
+    ctx.drawImage(townImg, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    ctx.fillStyle = "rgba(255,251,235,0.30)"; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "rgba(111,179,94,0.45)"; ctx.fillRect(0, groundY, W, H - groundY);
+  } else {
+    ctx.fillStyle = "#bfe8ff"; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "#fff7cc"; ctx.beginPath(); ctx.arc(310, 32, 22, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    [[50, 30], [150, 22], [240, 38]].forEach(function (c) { ctx.beginPath(); ctx.arc(c[0], c[1], 14, 0, Math.PI * 2); ctx.arc(c[0] + 14, c[1] + 4, 11, 0, Math.PI * 2); ctx.fill(); });
+    ctx.fillStyle = "#8fce7e"; ctx.fillRect(0, groundY, W, H - groundY);
+    ctx.fillStyle = "#6db35e"; ctx.fillRect(0, groundY, W, 6);
+  }
   var jumpY = 0;
   if (s.jumpT > 0) jumpY = Math.sin((900 - s.jumpT) / 900 * Math.PI) * 46;
   var px = WA_PLAYER_X, py = groundY - jumpY;
@@ -489,6 +538,20 @@ function renderWordAdv(app, l) {
   }
   var s = l.wa;
   if (s.phase === "run") {
+    if (!s.introSeen) {
+      app.innerHTML = head + '<div class="game-hud"><p id="waHud"></p><p id="waBanner" class="mut">Nhân vật dẫn đường đón bạn ở đầu phố.</p></div>'
+        + '<div class="qblock"><img src="' + WA_IMG_TOWN + '" alt="Phố của Biệt đội Săn Từ" style="width:100%;max-width:480px;border-radius:20px;border:2px solid #D97706;display:block" onerror="this.style.display=\'none\'">'
+        + '<div class="row" style="margin-top:10px;align-items:flex-start">' + waGuideImgHTML(96)
+        + '<div style="flex:1;background:#FFF8E1;border:2px solid #D97706;border-radius:16px;padding:10px 12px"><p style="margin:0 0 6px"><b>Nhân vật dẫn đường:</b></p><p style="margin:0">“Chào bạn! Mình là người dẫn đường của Biệt đội Săn Từ. Phố này có 3 viên ngọc từ đang chờ bạn — chạy nhảy né bẫy, thu đủ ngọc rồi giải mật mã và đánh bại Quái Đá nhé!”</p></div></div>'
+        + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="waIntroGo" style="flex:1;padding:14px;font-size:18px">🏃 Bắt đầu chạy!</button></div>'
+        + '<p class="mut">Chạm vào màn hình cũng nhảy. Trên máy tính: phím Cách/↑ = nhảy, ↓ = trượt.</p></div>';
+      wireBack();
+      var bb0 = document.getElementById("btnBack");
+      if (bb0) bb0.onclick = function () { waStopLoop(l); backFromLesson(); };
+      waUpdateHud(l);
+      document.getElementById("waIntroGo").onclick = function () { s.introSeen = true; render(); };
+      return;
+    }
     app.innerHTML = head + '<div class="game-hud"><p id="waHud"></p><p id="waBanner" class="mut">Chạy thôi! Nhảy qua đá, trượt qua dây leo, chạm vào ngọc để thu thập.</p></div>'
       + '<div class="qblock"><canvas id="waCanvas" width="360" height="240" style="width:100%;max-width:480px;border:2px solid #D97706;border-radius:20px;background:#FDEFC8;display:block"></canvas>'
       + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="waJump" style="flex:1;padding:14px;font-size:18px">🦘 NHẢY</button><button class="btn btn-primary" id="waSlide" style="flex:1;padding:14px;font-size:18px">🐍 TRƯỢT</button></div>'
@@ -535,10 +598,11 @@ function renderWordAdv(app, l) {
   if (s.phase === "end") {
     var rightD = waDedupWords(s.rightList), wrongD = waDedupWords(s.wrongList);
     var gemsHtml = s.collected.map(function (g) { return esc(g.source_text) + " — " + esc(g.translation_vi); }).join("; ") || "chưa có";
-    app.innerHTML = head + '<div class="reward-frame">' + summaryBadgeSVG() + '<h2>🏁 Thắng boss rồi!</h2><p>Điểm: <b>' + s.finalScore + '</b></p><p class="rw-stars">' + (function () { var st = ""; for (var si2 = 0; si2 < (s.finalStars || 0); si2++) st += '<span class="rw-star" style="animation-delay:' + (si2 * 0.25) + 's">⭐</span>'; return st || "chưa có sao"; })() + '</p><p>Ngọc đã thu: ' + gemsHtml + '</p><p class="mut">Boss mệt rồi, ngồi xuống và tặng rương — không có bạo lực, chỉ có kiến thức thắng.</p>'
+    app.innerHTML = head + '<div class="reward-frame">' + summaryBadgeSVG() + '<h2>🏁 Thắng boss rồi!</h2><p>Điểm: <b>' + s.finalScore + '</b></p>' + waRewardStarsHTML(s.finalStars) + '<p>Ngọc đã thu: ' + gemsHtml + '</p><p class="mut">Boss mệt rồi, ngồi xuống và tặng rương — không có bạo lực, chỉ có kiến thức thắng.</p>'
       + gameSummaryHTML(rightD, wrongD)
       + '<div class="row"><button class="btn btn-primary" id="waAgain">🔁 Chơi lại vòng mới</button><button class="btn" id="waHub">Về Luyện tập</button></div></div>';
     wireBack();
+    waAnimateRewardStars();
     document.getElementById("waAgain").onclick = function () { waResetToIsland(l); };
     document.getElementById("waHub").onclick = function () { waStopLoop(l); backFromLesson(); go("practice"); };
     var rw = document.getElementById("gmReviewWrong");
@@ -593,5 +657,7 @@ window.WordAdv = {
   toFail: waToFail,
   resumeCheckpoint: waResumeCheckpoint,
   drawRun: waDrawRun,
-  drawBoss: waDrawBoss
+  drawBoss: waDrawBoss,
+  rewardStarsHTML: waRewardStarsHTML,
+  animateStars: waAnimateRewardStars
 };
