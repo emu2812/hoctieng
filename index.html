@@ -132,11 +132,6 @@ body.has-bottombar #btnBack{display:none}
    Lưới thẻ game dùng .card sẵn có + tông hổ phách của web; chế độ thế giới
    ẩn chrome site (header, tabbar, banner, nút gia sư, thanh dưới) để game
    chiếm toàn màn hình, chỉ còn nút Thoát game. */
-.ent-grid{display:flex;flex-wrap:wrap;gap:16px;margin:16px 0}
-.ent-card{flex:1 1 100%;min-width:0;display:flex;flex-direction:column}
-@media(min-width:700px){.ent-card{flex-basis:calc(33.333% - 11px)}}
-.ent-card .ent-img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center;border-radius:12px;display:block}
-.ent-card p.ent-playrow{margin-top:auto}
 /* ---- TRANG CHỦ MỚI + KHÔNG GIAN BÀI HỌC 3 CỘT (04/11/2026) ----
    Chỉ dùng dữ liệu thật của web: state (localStorage ielts_rebuild_v1),
    kho bài/kho từ sẵn có, video VOA + câu thoại VIDEO_LINES đã có.
@@ -154,12 +149,6 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .ws-col{min-width:0}
 @media(max-width:900px){.ws-grid{grid-template-columns:1fr}}
 .ws-progress{margin:8px 0 12px}
-.ent-card .ent-label{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:700;background:#fff}
-.ent-card .ent-play{width:100%;min-height:48px;font-size:18px}
-#gameWorldExit{position:fixed;top:12px;right:12px;z-index:99;display:none;min-height:44px;background:var(--amber);border-color:var(--amber);font-weight:700}
-body.game-world header,body.game-world #tabBar,body.game-world #previewBanner,body.game-world #tutorFloatBtn,body.game-world #tutorFloatPanel,body.game-world #bottombar{display:none !important}
-body.game-world .wrap{max-width:none;margin:0;padding:0}
-body.game-world #gameWorldExit{display:block}
 .vocab-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px 20px;grid-template-areas:"main pron" "actions pron" "foot foot" "lib lib";align-items:start}
 .vocab-main{grid-area:main;min-width:0}
 .vocab-pron{grid-area:pron;min-width:0}
@@ -215,9 +204,6 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .bento-tile h3{font-size:18px}
 .chapter-row{border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);border:0}
 #practiceNextCard,#mineNextCard{border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03)}
-.game-tile{border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);border:0;border-left:6px solid var(--bento-amber)}
-.game-tile.lq{border-left-color:var(--bento-coral)}
-.game-tile.coop{border-left-color:var(--green)}
 .game-hud{display:flex;gap:8px 16px;flex-wrap:wrap;align-items:center;background:#fff;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:10px 16px;margin:8px 0}
 .game-hud p{margin:0}
 .game-hud #waHud,.game-hud #lqHud{font-weight:700;font-variant-numeric:tabular-nums}
@@ -238,9 +224,6 @@ body.in-lesson .lessonframe{top:0}
 /* v68 cân đối: workspace ẩn panel phụ, 3 cột dùng hết chiều rộng */
 body.workspace-open #app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,1fr)}
 body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none}
-/* v68 cân đối: màn chơi Bắn từ rơi lấp đầy chiều cao viewport trên desktop */
-.ts-world{display:flex;flex-direction:column}
-@media(min-width:700px){.ts-world{min-height:100dvh}.ts-world>.qblock{flex:1}}
 .bento-side .bento-tile{margin:0 0 16px}
 .bigletter{overflow-wrap:break-word;max-width:100%}
 </style>
@@ -296,7 +279,6 @@ body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none
 <button class="tab" data-tab="review">Ôn tập</button>
 <button class="tab" data-tab="native">Giao tiếp bản địa</button>
 <button class="tab" data-tab="mine">Của tôi</button>
-<button class="tab" data-tab="entertainment">Giải trí</button>
 </nav>
 <main id="app"><div class="card"><p>Đang tải bài học…</p></div></main>
 <div id="toast"></div>
@@ -311,7 +293,6 @@ body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none
 <p class="mut" id="tutorFloatStatus"></p>
 </div>
 <div id="bottombar" style="display:none"><button class="btn" id="bbBack">← Quay lại</button></div>
-<button id="gameWorldExit" class="btn" style="display:none">✕ Thoát game</button>
 <script src="config.js"></script>
 <script src="content.js"></script>
 <script src="content-new.js"></script>
@@ -940,24 +921,6 @@ function guideLine(id, text) {
   } catch (e) { return ""; }
 }
 function backFromLesson() { examTimerStop(); examPartTimerStop(); try { mirrorStop(); } catch (e) {} curLesson = null; go(returnTab || "home"); }
-/* ---------- THẾ GIỚI GAME TOÀN MÀN HÌNH (04/11/2026) ----------
-   Game là một thế giới riêng, không liên quan tới web bên ngoài: khi mở
-   game (wordadv/langquest/coop/runner3d/typeshooter), chrome site bị ẩn bằng class game-world
-   trên body (CSS lo việc ẩn/hiện, kể cả thanh dưới vốn có inline style),
-   chỉ còn nút Thoát game; bấm thoát thì về đúng tab đã mở game (returnTab).
-   Đồng bộ ở render() nên mọi đường thoát (nút thoát, nút Quay lại của
-   game, hết ván về tab) đều khôi phục lại giao diện site. */
-var GAME_WORLD_TYPES = ["wordadv", "langquest", "coop", "runner3d", "typeshooter"];
-function isGameWorldLesson(l) { return !!(l && GAME_WORLD_TYPES.indexOf(l.type) >= 0); }
-function enterGameWorld() {
-  document.body.classList.add("game-world");
-  var x = $("#gameWorldExit");
-  if (x) { x.style.display = "block"; if (!x.dataset.wired) { x.dataset.wired = "1"; x.onclick = function () { exitGameWorld(); backFromLesson(); }; } }
-}
-function exitGameWorld() {
-  document.body.classList.remove("game-world");
-  var x = $("#gameWorldExit"); if (x) x.style.display = "none";
-}
 function nextStepButtonHTML() { return '<button class="btn btn-primary" id="btnNextStep">Tiếp tục sang bài tiếp →</button>'; }
 function wireNextStep() { updateBottomBar(); }
 function elapsedText() { var s = Math.max(0, Math.round((Date.now() - lessonStart) / 1000)); return s < 60 ? s + " giây" : Math.floor(s / 60) + " phút " + (s % 60) + " giây"; }
@@ -1556,7 +1519,6 @@ function render() {
   }
   document.body.classList.remove("landing-on");
   $$("#tabBar .tab").forEach(function (b) { b.classList.toggle("on", b.dataset.tab === curTab); });
-  if (isGameWorldLesson(curLesson)) enterGameWorld(); else exitGameWorld();
   var app = $("#app");
   if (curLesson) { renderLesson(app); applyLessonLayout(app); u7PositionUpdate(); updateBottomBar(); return; }
   app.classList.remove("lesson-view");
@@ -1566,7 +1528,6 @@ function render() {
   else if (curTab === "practice") { if (state.track === "zh") viewPracticeZh(app); else if (state.track === "tc") viewPracticeTc(app); else if (state.track === "tp") viewPracticeTp(app); else viewPractice(app); }
   else if (curTab === "review") { if (state.track === "zh") viewReviewZh(app); else if (state.track === "tc") viewReviewTc(app); else if (state.track === "tp") viewReviewTp(app); else viewReview(app); }
   else if (curTab === "native") viewNative(app);
-  else if (curTab === "entertainment") viewEntertainment(app);
   else viewMine(app);
   u7PositionUpdate(); updateBottomBar(); wireTrackSwitch(); wireTypeEntryRow();
 }
@@ -1835,7 +1796,7 @@ function zhPositionText() {
     if (p) return base + " · Chặng " + p.stage + " · " + p.done + "/" + p.total + " bước học đã xong" + phSeg;
     return base;
   }
-  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", entertainment: "Giải trí" };
+  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi" };
   var cur = zhPositionCurrent();
   if (cur) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + "Chặng " + cur.stage + " · " + cur.done + "/" + cur.total + " bước học đã xong" + phSeg;
   return "Vị trí: " + (tabMap[curTab] || curTab);
@@ -1906,7 +1867,7 @@ function u7PositionText() {
   /* UI 28/10 (GD-01/GD-05/V9): dinh dang thong nhat
      "Vi tri: <Loai bai> · Chuong <X> · done/total buoc da xong".
      Tieu de bai khong lap lai o Vi tri (lessonHead/skillHead da hien). */
-  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Kiểm tra phát âm đầu vào", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra đầu vào", entryPlace: "Xếp lớp đầu vào", dictation: "Nghe chép chính tả", game: "Trò chơi", reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
+  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Kiểm tra phát âm đầu vào", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra đầu vào", entryPlace: "Xếp lớp đầu vào", dictation: "Nghe chép chính tả", reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
   if (typeof curLesson !== "undefined" && curLesson) {
     if (curLesson.step) {
       var ls = learningSteps(); var li = -1;
@@ -1923,7 +1884,7 @@ function u7PositionText() {
     if (hp && hp.band) return "Vị trí: " + label + " · " + enChapterLabel(hp.band) + " · " + hp.done + "/" + hp.total + " bước đã xong";
     return "Vị trí: " + label;
   }
-  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", entertainment: "Giải trí" };
+  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi" };
   var hp2 = null; try { hp2 = homePathInfo(); } catch (e) {}
   if (hp2 && hp2.band) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + enChapterLabel(hp2.band) + " · " + hp2.done + "/" + hp2.total + " bước đã xong";
   return "Vị trí: " + (tabMap[curTab] || curTab);
@@ -2015,7 +1976,6 @@ var HOME_NAV_MAP = [
   { label: "📚 Từ vựng", target: "practice", kind: "tab", section: "practiceGrpVocab" },
   { label: "🗣️ Luyện nói", target: "practice", kind: "tab", section: "practiceGrpSpeak" },
   { label: "🎓 Luyện thi", target: "practice", kind: "tab", section: "practiceGrpExam" },
-  { label: "🎮 Trò chơi", target: "entertainment", kind: "tab", section: "" },
   { label: "📖 Truyện", target: "practice", kind: "tab", section: "practiceGrpStory" }
 ];
 function homeNavGo(entry) {
@@ -2604,82 +2564,12 @@ function viewRoadmap(app) {
    bài tập và lời văn đều là kho tự soạn có sẵn, chỉ nối vào khung mới. */
 function skillDoneMark(key) { return (state.skillDone && state.skillDone[key]) ? " ✓" : ""; }
 function enPracticeEntHTML() {
-  var gameDefs2 = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["dropword", "🌧️", "Gõ từ rơi"], ["guessword", "❓", "Đoán từ"], ["matchpairs", "🃏", "Ghép cặp lật thẻ"]];
-  return '<h3>🎬 Giải trí — game đã chuyển sang tab riêng</h3><p class="mut">Game và phòng chơi giờ ở tab Giải trí riêng — bấm để sang chơi ngay, không còn chôn trong mục này nữa.</p><p><button class="btn btn-primary" id="entGoTabBtn">🎮 Sang tab Giải trí</button></p>'
-    + '<div class="qblock" id="entVideoBlock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p>" + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + "</details><details><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; \"I love pancakes!\" — mình thích bánh kếp!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; \"Let's go camping!\" — cùng đi cắm trại nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; \"I can ride a bike!\" — mình biết đạp xe rồi!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; \"My new shoes!\" — giày mới của mình!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; \"I am Baymax!\" — mình là Baymax!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; \"Let's cook!\" — cùng nấu ăn nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; \"We are friends!\" — chúng mình là bạn bè!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details>" + '</div>';
+  return '<div class="qblock" id="entVideoBlock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p>" + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + "</details><details><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; \"I love pancakes!\" — mình thích bánh kếp!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; \"Let's go camping!\" — cùng đi cắm trại nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; \"I can ride a bike!\" — mình biết đạp xe rồi!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; \"My new shoes!\" — giày mới của mình!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; \"I am Baymax!\" — mình là Baymax!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; \"Let's cook!\" — cùng nấu ăn nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; \"We are friends!\" — chúng mình là bạn bè!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details>" + '</div>';
 }
 function enPracticeEntWire(m) {
-  var gt = m.querySelector("#entGoTabBtn"); if (gt) gt.onclick = function () { go("entertainment"); };
   videoVOAWire();
 }
 
-/* ---------- TAB GIẢI TRÍ RIÊNG (04/11/2026): nhà chung của game + video
-   giải trí, vẫn trong cùng 1 web — không tách site, không tách repo.
-   5 thẻ game là danh sách game chính thức duy nhất: mỗi thẻ có ảnh minh
-   họa đúng đường dẫn ảnh game đã dùng (không thêm asset mới), tên, mô tả
-   tự soạn 2 dòng, nhãn Chơi đơn/Phòng CO-OP và 1 nút CHƠI NGAY lớn mở game
-   bằng đúng dispatch cũ openLesson({type}) như nút game ở tab Luyện tập
-   trước đây. Video không chép dữ liệu: thẻ video chỉ dẫn sang khối video
-   đang ở tab Luyện tập. */
-function viewEntertainment(app) {
-  var html = '<h2>Giải trí</h2><p class="mut">Chơi game và xem video cho vui — không tính điểm thi, không khóa, không bắt buộc.</p>'
-    + '<div class="row" id="entFilterRow">'
-    + '<button class="btn btn-primary" data-entfilter="all">Tất cả</button>'
-    + '<button class="btn" data-entfilter="vocab">Từ vựng</button>'
-    + '<button class="btn" data-entfilter="adventure">Phiêu lưu</button>'
-    + '<button class="btn" data-entfilter="coop">CO-OP</button></div>'
-    + '<div class="ent-grid" id="entGameGrid">'
-    + '<article class="card ent-card" data-genre="vocab adventure" data-gametype="wordadv">'
-    + '<img class="ent-img" src="assets/media-generation-town-guide-matched-0-4ee9a2c0-32b7-4d72-b055-b048fb5159d4.webp" alt="Biệt đội Săn Từ — Vòng 1" loading="lazy">'
-    + '<h3>🏝️ Biệt đội Săn Từ — Vòng 1</h3>'
-    + '<p class="mut ent-desc">Chạy nhảy né bẫy trên đảo, gom 3 ngọc từ rồi vượt boss. Chơi một mình, mỗi vòng chỉ 60–90 giây.</p>'
-    + '<p><span class="ent-label">Chơi đơn</span></p>'
-    + '<p class="ent-playrow"><button class="btn btn-primary ent-play" id="waStartBtn" data-gametype="wordadv">▶ CHƠI NGAY' + coopPlayedLabel("wordadv") + '</button></p></article>'
-    + '<article class="card ent-card" data-genre="adventure" data-gametype="langquest">'
-    + '<img class="ent-img" src="assets/media-generation-world-map-0-ba0b452e-b805-4eea-812a-a738d83297ab.webp" alt="Thành phố Ngôn Ngữ — Chương 1" loading="lazy">'
-    + '<h3>🏙️ Thành phố Ngôn Ngữ — Chương 1</h3>'
-    + '<p class="mut ent-desc">Đi bộ quanh thành phố, nói chuyện với người dân và tìm manh mối. Chơi một mình trên máy tính.</p>'
-    + '<p><span class="ent-label">Chơi đơn</span></p>'
-    + '<p class="ent-playrow"><button class="btn btn-primary ent-play" id="lqStartBtn" data-gametype="langquest">▶ CHƠI NGAY' + coopPlayedLabel("langquest") + '</button></p></article>'
-    + '<article class="card ent-card" data-genre="coop" data-gametype="coop">'
-    + '<img class="ent-img" src="assets/media-generation-npc-guide-portrait-0-91c329a7-065e-4e04-801e-63b953c59598.webp" alt="Phòng CO-OP — Cánh cổng tri thức" loading="lazy">'
-    + '<h3>👥 Phòng CO-OP — Cánh cổng tri thức</h3>'
-    + '<p class="mut ent-desc">Chơi cùng 2–4 người thật theo lượt, mỗi người giữ một manh mối. Cần đăng nhập để chơi cùng bạn.</p>'
-    + '<p><span class="ent-label">Phòng CO-OP</span></p>'
-    + '<p class="ent-playrow"><button class="btn btn-primary ent-play" id="coopStartBtn" data-gametype="coop">▶ CHƠI NGAY' + coopPlayedLabel("coop") + '</button></p></article>'
-    + '<article class="card ent-card" data-genre="vocab adventure" data-gametype="runner3d">'
-    + '<img class="ent-img" src="assets/media-generation-town-guide-matched-0-4ee9a2c0-32b7-4d72-b055-b048fb5159d4.webp" alt="Chạy 3D — Phố 3D" loading="lazy">'
-    + '<h3>🏃 Chạy 3D — Phố 3D</h3>'
-    + '<p class="mut ent-desc">Chạy thật trong phố 3 chiều: đổi làn, nhảy, trượt để gom ngọc từ. Chơi một mình, tay lái nhanh thì thắng.</p>'
-    + '<p><span class="ent-label">Chơi đơn</span></p>'
-    + '<p class="ent-playrow"><button class="btn btn-primary ent-play" id="r3dStartBtn" data-gametype="runner3d">▶ CHƠI NGAY' + coopPlayedLabel("runner3d") + '</button></p></article>'
-    + '<article class="card ent-card" data-genre="vocab" data-gametype="typeshooter">'
-    + '<img class="ent-img" src="assets/media-generation-npc-guide-portrait-0-91c329a7-065e-4e04-801e-63b953c59598.webp" alt="Bắn từ rơi" loading="lazy">'
-    + '<h3>🚀 Bắn từ rơi</h3>'
-    + '<p class="mut ent-desc">Từ rơi từ trời xuống — gõ đúng hết từ để bắn hạ trước khi chạm đất. Chơi một mình, giữ đủ 3 tim là thắng.</p>'
-    + '<p><span class="ent-label">Chơi đơn</span></p>'
-    + '<p class="ent-playrow"><button class="btn btn-primary ent-play" id="tsStartBtn" data-gametype="typeshooter">▶ CHƠI NGAY' + coopPlayedLabel("typeshooter") + '</button></p></article>'
-    + '</div>'
-    + '<section class="card" id="entVideoCard"><h3>🎬 Video giải trí</h3>'
-    + '<p class="mut">Video hoạt hình song ngữ xem cho vui vẫn ở mục Luyện tập — bấm để sang xem ngay.</p>'
-    + '<p><button class="btn" id="entVideoGo">🎬 Xem video hoạt hình</button></p></section>';
-  app.innerHTML = html;
-  $$("#entFilterRow [data-entfilter]").forEach(function (b) {
-    b.onclick = function () {
-      var f = b.dataset.entfilter;
-      $$("#entFilterRow [data-entfilter]").forEach(function (x) { x.classList.toggle("btn-primary", x === b); });
-      $$("#entGameGrid .ent-card").forEach(function (c) {
-        var gs = (" " + (c.dataset.genre || "") + " ");
-        c.style.display = (f === "all" || gs.indexOf(" " + f + " ") >= 0) ? "" : "none";
-      });
-    };
-  });
-  $$("#entGameGrid .ent-play").forEach(function (b) {
-    b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: b.dataset.gametype }); };
-  });
-  var vg = $("#entVideoGo");
-  if (vg) vg.onclick = function () { go("practice"); setTimeout(function () { var v = $("#entVideoBlock"); if (v && v.scrollIntoView) v.scrollIntoView(); }, 100); };
-}
 function viewPractice(app) {
   var c = skillCounts();
   function doneK(k) { return !!(state.skillDone && state.skillDone[k]); }
@@ -2876,7 +2766,7 @@ function viewPractice(app) {
     + '<p class="mut">3 pha: nhìn mẫu rồi gõ, nghe rồi gõ, nhớ rồi gõ.</p>'
     + '<div class="row"><button class="btn" data-typingmode="nentang">Nền tảng (Band 0–4,5)</button><button class="btn" data-typingmode="coban">Cơ bản (Band 5,0–5,5)</button><button class="btn" data-typingmode="nangcao">Nâng cao (Band 6,0+)</button></div></details>';
   /* --- Tro choi --- */
-  html += '<section class="card" id="u7PlayCardPractice"><h3>🎬 Giải trí — 10 game + video hoạt hình</h3><p class="mut">Đang tải khu giải trí…</p></section>';
+  html += '<section class="card" id="u7PlayCardPractice"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Đang tải video…</p></section>';
   /* --- Luyen moi GĐ2/GĐ3 --- */
   html += '<details class="card" id="gd23Practice"><summary><b>🆕 Luyện mới — GĐ2/GĐ3</b></summary>'
    
@@ -2965,7 +2855,6 @@ function viewPractice(app) {
   $$("[data-skilldrill]").forEach(function (b) { b.onclick = function () { openSkill("skillDrill", 0, { idx: +b.dataset.skilldrill }); }; });
   $$("[data-phaseexam]").forEach(function (b) { b.onclick = function () { openSkill("phaseExam", 0, { phase: +b.dataset.phaseexam }); }; });
   $$("[data-mocktest]").forEach(function (b) { b.onclick = function () { openSkill("mockTest", 0, { milestone: b.dataset.mocktest }); }; });
-  $$("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
   $$("[data-typingmode]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "skillTyping", mode: b.dataset.typingmode }); }; });
   $$("[data-weaksession]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "weakSession" }); }; });
   $$("[data-mixedquiz]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "mixedQuiz" }); }; });
@@ -4270,47 +4159,15 @@ function pronWordChipsHTML(words, issues) {
   }).join(' ') + '</p><p class="mut">Mỗi từ máy chủ chỉ trả nghe đúng hay chưa đúng nên % từng từ là 100% hoặc 0%; xanh là nghe đúng, đỏ là chưa đúng.</p>';
 }
 /* 3. Khu Tro choi: 7 game kho cu + ky luc rieng tung game (luu tren may nay). */
-function gameBestAll() { try { var all = JSON.parse(localStorage.getItem("ielts_game_best_v1") || "{}"); var cleaned = false; Object.keys(all).forEach(function (k) { if (k === "platform" || k.indexOf("platform:") === 0) delete all[k]; }); if (cleaned) { try { localStorage.setItem("ielts_game_best_v1", JSON.stringify(all)); } catch (e) {} } return all; } catch (e) { return {}; } }
 /* DOT 2e: ky luc game tach rieng theo track — track Anh giu khoa cu (vd "match"),
    track Trung dung khoa "<game>:zh" trong cung localStorage ielts_game_best_v1. */
 /* DOT NOI-DUNG-GIAI-TRI 01/11: ky luc game tach rieng ca TC/TP (khoa EN/ZH cu giu nguyen). */
-function gameBestKey(id, track) { var t = track || state.track; if (t === "zh") return id + ":zh"; if (t === "tc") return id + ":tc"; if (t === "tp") return id + ":tp"; return id; }
-function gameBest(id, track) { var all = gameBestAll(); return all[gameBestKey(id, track)] || null; }
-function gameSaveBest(id, score, stars, track) { var all = gameBestAll(); var k = gameBestKey(id, track); var prev = all[k]; if (!prev || score > prev.score) { all[k] = { score: score, stars: stars, at: Date.now() }; try { localStorage.setItem("ielts_game_best_v1", JSON.stringify(all)); } catch (e) {} } return all[k]; }
 /* Nhãn "đã chơi / chưa chơi" cho nút game mới, cùng kiểu với game cũ
    (game cũ: " · 🏆 X điểm" hoặc " · chưa chơi"). Đặt ở đây (cùng khối
    helper game) để tab Luyện tập vẽ được nhãn ngay cả khi file game riêng
    chưa tải xong — nút game mới gọi helper này trong enPracticeEntHTML. */
-function coopPlayedLabel(id) {
-  var b = null;
-  try { b = gameBest(id, "en"); } catch (e) { b = null; }
-  return b ? " · 🏆 " + b.score + " điểm" : " · chưa chơi";
-}
 function gameShuffle(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = a[i]; a[i] = a[j]; a[j] = tmp; } return a; }
-function gameCurrentBand() {
-  if (state.entryPlaced && state.entryPlaced.band) return state.entryPlaced.band;
-  for (var i = 0; i < RB_CHAPTER_MAP.length; i++) {
-    var ch = RB_CHAPTER_MAP[i]; if (ch.band === "Band 0") continue;
-    var steps = rbChSteps(ch.band);
-    for (var j = 0; j < steps.length; j++) if (!rbStepDone(steps[j])) return ch.band;
-  }
-  return null;
-}
-function gameMatchPairs() {
-  var cur = gameCurrentBand(), set = null;
-  if (cur) { for (var i = 0; i < CONTENT.vocab.length; i++) { if (normBandStr(CONTENT.vocab[i].band) === cur && CONTENT.vocab[i].cards && CONTENT.vocab[i].cards.length >= 8) { set = CONTENT.vocab[i]; break; } } }
-  if (!set) { for (var k = 0; k < CONTENT.vocab.length; k++) { if (CONTENT.vocab[k].cards && CONTENT.vocab[k].cards.length >= 8) { set = CONTENT.vocab[k]; break; } } }
-  if (!set) return []; return set.cards.slice(0, 8).map(function (c) { return { w: c.w, vi: c.vi }; });
-}
-function gameScramble(w) { var letters = String(w).split(""); if (letters.length < 2) return String(w); var s = gameShuffle(letters).join(""), tries = 0; while (s === String(w) && tries < 5) { s = gameShuffle(letters).join(""); tries++; } return s; }
 function gameNormSent(s) { return String(s || "").toLowerCase().replace(/[.!?,;:'"]/g, "").replace(/\s+/g, " ").trim(); }
-function gameTyperaceScore(typed, ref, seconds) { var tw = gameNormSent(typed) ? gameNormSent(typed).split(" ") : [], rw = gameNormSent(ref) ? gameNormSent(ref).split(" ") : []; var ok = 0; for (var i = 0; i < Math.min(tw.length, rw.length); i++) if (tw[i] === rw[i]) ok++; var acc = rw.length ? Math.round(ok / rw.length * 100) : 0; var wpm = seconds > 0 ? Math.round(tw.length / (seconds / 60)) : 0; return { acc: acc, wpm: wpm, score: acc + Math.min(wpm, 100) }; }
-function gameQuizQs() {
-  var cur = gameCurrentBand(), out = [];
-  if (cur) { CONTENT.grammar.forEach(function (g) { if (normBandStr(g.level) === cur) (g.quiz || []).forEach(function (q) { out.push(q); }); }); }
-  if (out.length < 10) { CONTENT.grammar.forEach(function (g) { (g.quiz || []).forEach(function (q) { if (out.length < 10 && out.indexOf(q) < 0) out.push(q); }); }); }
-  return out.slice(0, 10);
-}
 /* DOT 2e: nguon game track Trung (chi lay tu ngan hang Trung san co).
    - Noi tu: chu Han <-> nghia (the tu zhSets).
    - Giai ma chu: nhin chu Han + nghia, go lai PINYIN (khong can dau thanh).
@@ -4321,65 +4178,10 @@ function gameQuizQs() {
      vi du the tu thanh cau.
    - Quiz leo thang: ngan hang quiz ngu phap/doc/nghe Trung (chang 2-3, la nhung
      chang co phan he). */
-function gameZhCards() { var out = []; zhSets().forEach(function (d) { (d.set.cards || []).forEach(function (c) { if (c.han && c.vi && c.pinyin) out.push(c); }); }); return out; }
-function gameDueGameItems(isZh) {
-  /* B5 (28/10/2026): game on tu den han — chi dung muc den han that + dap an
-     that tu the that; thieu 3 dap an nhieu that thi bo muc, khong bia. */
-  var items = [];
-  if (isZh) {
-    var pool = gameZhCards();
-    zhDueHard().forEach(function (it) {
-      var h = it.h; if (!h || !h.han || !h.vi) return;
-      var ds = [];
-      pool.forEach(function (c) { if (c.han !== h.han && ds.indexOf(c.han) < 0) ds.push(c.han); });
-      if (ds.length < 3) return;
-      var opts = gameShuffle([h.han].concat(gameShuffle(ds).slice(0, 3)));
-      items.push({ key: it.key, w: h.han, py: h.pinyin || "", vi: h.vi, o: opts, a: opts.indexOf(h.han) });
-    });
-  } else {
-    var pool = [];
-    CONTENT.vocab.forEach(function (v) { (v.cards || []).forEach(function (c) { if (c.w && c.vi) pool.push(c); }); });
-    dueCards().forEach(function (dc) {
-      var c = dc.card; if (!c || !c.w || !c.vi) return;
-      var ds = [];
-      pool.forEach(function (p) { if (p.w !== c.w && ds.indexOf(p.w) < 0) ds.push(p.w); });
-      if (ds.length < 3) return;
-      var opts = gameShuffle([c.w].concat(gameShuffle(ds).slice(0, 3)));
-      items.push({ key: dc.key, w: c.w, vi: c.vi, o: opts, a: opts.indexOf(c.w) });
-    });
-  }
-  return items.slice(0, 10);
-}
-function gameZhMatchPairs() { return gameShuffle(gameZhCards()).slice(0, 8).map(function (c) { return { w: c.han, vi: c.vi }; }); }
-function gameZhQuizQs() { var out = []; (ZH_GRAMMAR || []).forEach(function (g) { (g.quiz || []).forEach(function (q) { out.push(q); }); }); (ZH_READING || []).forEach(function (r) { (r.questions || []).forEach(function (q) { out.push(q); }); }); (ZH_LISTENING || []).forEach(function (r) { (r.questions || []).forEach(function (q) { out.push(q); }); }); return gameShuffle(out).slice(0, 10); }
-function gameZhSpeakLines() { var out = []; (ZH_SPEAK || []).forEach(function (s) { (s.lines || []).forEach(function (ln) { if (ln.han && ln.vi) out.push(ln); }); }); return out; }
 function zhStripTone(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim(); }
-function gameZhTypeScore(typed, ref) { var t = String(typed || "").replace(/[\s\u3002\uff0c\uff01\uff1f\u3001\uff1b\uff1a,.!?;:'"]/g, ""); var r = String(ref || "").replace(/[\s\u3002\uff0c\uff01\uff1f\u3001\uff1b\uff1a,.!?;:'"]/g, ""); if (!r.length) return { acc: 0, score: 0 }; var ok = 0; for (var i = 0; i < Math.min(t.length, r.length); i++) if (t[i] === r[i]) ok++; var acc = Math.round(ok / r.length * 100); return { acc: acc, score: acc }; }
-function gameZhOrderItems() { var out = []; (ZH_WRITE || []).forEach(function (w) { if (w.kind === "order" && (w.words || []).length) out.push({ words: w.words.slice(), ref: w.words.join("") }); }); if (out.length < 5) { var cards = gameShuffle(gameZhCards()); for (var i = 0; i < cards.length && out.length < 5; i++) { var ex = cards[i].ex || ""; if (ex.length >= 4 && ex.length <= 14) out.push({ words: ex.split(""), ref: ex }); } } return out.slice(0, 5); }
-function gameZhTypeSentences() { var out = []; gameShuffle(gameZhCards()).forEach(function (c) { if (c.ex && c.exv) out.push({ han: c.ex, vi: c.exv }); }); return out.slice(0, 5); }
-function gameStarsFor(frac) { return frac >= 0.9 ? 3 : (frac >= 0.6 ? 2 : (frac > 0 ? 1 : 0)); }
 
 /* DOT NOI-DUNG-GIAI-TRI 01/11: kho tu chung cho game moi (dung tu/bai that cua web,
    theo dung track dang choi; trung tu thi loc trung theo w). */
-function gamePoolWords(track) {
-  var out = [], seen = {};
-  var push = function (w, vi) { if (w && vi && !seen[w]) { seen[w] = true; out.push({ w: w, vi: vi }); } };
-  if (track === "zh") { gameZhCards().forEach(function (c) { push(c.han, c.vi); }); return out; }
-  if (track === "tc") { (typeof TC_VOCAB !== "undefined" ? TC_VOCAB : []).forEach(function (st) { (st.cards || []).forEach(function (c) { push(c.w, c.vi); }); }); return out; }
-  if (track === "tp") { (typeof TP_VOCAB !== "undefined" ? TP_VOCAB : []).forEach(function (st) { (st.cards || []).forEach(function (c) { push(c.w, c.vi); }); }); return out; }
-  (CONTENT.vocab || []).forEach(function (v) { (v.cards || []).forEach(function (c) { push(c.w, c.vi); }); });
-  return out;
-}
-function gamePoolRounds(track, n) {
-  var pool = gameShuffle(gamePoolWords(track)), rounds = [];
-  for (var i = 0; i < Math.min(n, pool.length); i++) {
-    var others = gameShuffle(pool.filter(function (p, j) { return j !== i; })).slice(0, 3).map(function (p) { return p.w; });
-    var opts = gameShuffle([pool[i].w].concat(others));
-    rounds.push({ vi: pool[i].vi, opts: opts, a: opts.indexOf(pool[i].w) });
-  }
-  return rounds;
-}
-function gameSpeakWord(text, track) { if (track === "zh") zhSpeak(text); else if (track === "tp") tpSpeak(text); else speak(text); }
 /* Cham diem noi theo (ham thuan de test duoc): dung khop = 100, gan dung = 60, sai = 0.
    Luu y: day la cham game vui (so sanh ban ghi voi tu muc tieu), KHONG thay the
    cham Noi bang AI theo luat dung — game chi luyen noi theo, khong tinh diem thi. */
@@ -4396,178 +4198,6 @@ function speakGameScore(tx, exp, track) {
   if (t === e) return 100;
   if (t.indexOf(e) >= 0 || e.indexOf(t) >= 0) return 60;
   return 0;
-}
-function gameRecordWrong(l, game, idx, round) {
-  var q = { q: "Game " + game + ": từ đúng cho nghĩa \"" + round.vi + "\"", o: round.opts.slice(), a: round.a, why: "Từ đúng là " + round.opts[round.a] + " — " + round.vi + "." };
-  try { if (l.gameTrack === "zh") recordZhQuizError("game:" + game, idx, q); else if (l.gameTrack === "en") recordQuizError("game:" + game, idx, q); else if (l.gameTrack === "tc") tcAddHard("game:" + game, q.q, q.o[q.a], q.why); else if (l.gameTrack === "tp") tpAddHard("game:" + game, q.q, q.o[q.a], q.why); } catch (e) {}
-}
-function renderArcadeLesson(app, l) {
-  var defs = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["shooter", "🔫", "Bắn từ đúng"], ["race", "🏎️", "Đua xe từ vựng"], ["speakgame", "🎤", "Nói theo chấm điểm"], ["dropword", "🌧️", "Gõ từ rơi"], ["guessword", "❓", "Đoán từ"], ["matchpairs", "🃏", "Ghép cặp lật thẻ"]];
-  var def = null; defs.forEach(function (d) { if (d[0] === l.gameId) def = d; });
-  if (!def) { toast("Trò chơi này chưa có."); backFromLesson(); return; }
-  if (l.gameTrack == null) l.gameTrack = state.track;
-  var isZhGame = l.gameTrack === "zh";
-  var head = lessonHead({ title: def[1] + " " + def[2], type: "game" }, isZhGame ? "Chơi bằng nội dung tiếng Trung · Kỷ lục riêng của track Trung (không trộn với track Anh), lưu trên máy này. Trả lời sai trong game cũng vào Sổ lỗi sai track Trung." : "Kỷ lục riêng từng game, lưu trên máy này. Trả lời sai trong game cũng vào Sổ lỗi sai.");
-  var finish = function (score, stars, detail) { if (!l.xpGiven) { awardXp(10); l.xpGiven = true; } gameSaveBest(l.gameId, score, stars, l.gameTrack); l.stage = "end"; l.finalScore = score; l.finalStars = stars; l.finalDetail = detail; saveState(); render(); };
-  if (l.stage === "end") {
-    var best = gameBest(l.gameId, l.gameTrack);
-    app.innerHTML = head + '<div class="summarybox">' + summaryBadgeSVG() + '<h2>🏁 Hết ván!</h2><p>Điểm của bạn: <b>' + l.finalScore + '</b> · Sao: ' + "⭐".repeat(l.finalStars || 0) + '</p>' + (l.finalDetail ? '<p>' + esc(l.finalDetail) + '</p>' : '') + (best ? '<p class="mut">🏆 Kỷ lục của game này: ' + best.score + ' điểm · ' + "⭐".repeat(best.stars || 0) + '</p>' : '') + (l.finalExtraHTML ? l.finalExtraHTML : '') + '<div class="row"><button class="btn btn-primary" id="gmAgain">🔁 Chơi lại ván mới</button><button class="btn" id="gmHub">Về Luyện tập</button></div></div>';
-    wireBack();
-    $("#gmAgain").onclick = function () { var id = l.gameId; ["built", "stage", "xpGiven", "finalScore", "finalStars", "finalDetail", "finalExtraHTML"].forEach(function (k) { delete l[k]; }); l.score = 0; render(); };
-    var rw = $("#gmReviewWrong"); if (rw) rw.onclick = function () { if (l.reviewWrongFn) l.reviewWrongFn(); else go("review"); };
-    $("#gmHub").onclick = function () { backFromLesson(); go("practice"); };
-    return;
-  }
-  if (!l.built) {
-    l.built = true; l.score = 0;
-    if (l.gameId === "match") { l.pairs = isZhGame ? gameZhMatchPairs() : gameMatchPairs(); l.enOrder = gameShuffle(l.pairs.map(function (_, i) { return i; })); l.viOrder = gameShuffle(l.pairs.map(function (_, i) { return i; })); l.selEn = null; l.matched = l.pairs.map(function () { return false; }); l.wrongPairs = 0; }
-    if (l.gameId === "unscramble") { if (isZhGame) { l.words = gameShuffle(gameZhCards()).slice(0, 8).map(function (c) { return { w: zhStripTone(c.pinyin), han: c.han, vi: c.vi }; }); } else { var vc = []; CONTENT.vocab.forEach(function (v) { (v.cards || []).forEach(function (c) { if (c.w && c.vi) vc.push(c); }); }); l.words = gameShuffle(vc).slice(0, 8); } l.wi = 0; l.streak = 0; }
-    if (l.gameId === "listeng") { l.items = isZhGame ? gameShuffle(gameZhSpeakLines()).slice(0, 5) : gameShuffle(CONTENT.listening.slice()).slice(0, 5); l.li = 0; }
-    if (l.gameId === "duegame") { l.dueItems = gameDueGameItems(isZhGame); l.di = 0; l.graduated = 0; l.picked = -1; }
-    if (l.gameId === "typerace") { if (isZhGame) { l.sents = gameZhTypeSentences(); } else { var curT = gameCurrentBand(), tSet = null; if (curT) { for (var ti = 0; ti < CONTENT.typing.length; ti++) { if (normBandStr(CONTENT.typing[ti].level) === curT) { tSet = CONTENT.typing[ti]; break; } } } l.sents = (tSet || CONTENT.typing[0]).sentences.slice(0, 5); } l.si = 0; l.t0 = 0; }
-    if (l.gameId === "order") { if (isZhGame) { l.zhOrder = gameZhOrderItems(); } else { var curO = gameCurrentBand(), oSet = null; if (curO) { for (var oi = 0; oi < CONTENT.typing.length; oi++) { if (normBandStr(CONTENT.typing[oi].level) === curO) { oSet = CONTENT.typing[oi]; break; } } } l.sents = (oSet || CONTENT.typing[0]).sentences.slice(0, 5); } l.si = 0; l.builtArr = []; l.words = []; }
-    if (l.gameId === "quiz") { l.qs = isZhGame ? gameZhQuizQs() : gameQuizQs(); l.qi = 0; }
-    if (l.gameId === "shooter") { l.shRounds = gamePoolRounds(l.gameTrack, 10); l.shI = 0; l.shRight = 0; l.shLast = null; }
-    if (l.gameId === "race") { l.rcQs = gamePoolRounds(l.gameTrack, 10); l.rcI = 0; l.rcRight = 0; l.rcMe = 0; l.rcOpp = 0; l.rcLast = null; }
-    if (l.gameId === "speakgame") { l.spWords = gameShuffle(gamePoolWords(l.gameTrack)).slice(0, 5); l.spI = 0; l.spRight = 0; l.spHeard = null; l.spPts = null; }
-    if (l.gameId === "dropword") { l.gwSet = gameCurrentVocabSet(); l.gwStarted = false; }
-    if (l.gameId === "guessword") { l.gwSet = gameCurrentVocabSet(); l.gwStarted = false; }
-    if (l.gameId === "matchpairs") { l.mpStarted = false; }
-  }
-  var html = head, body = "";
-  if (l.gameId === "match") {
-    if (l.matched.every(function (m) { return m; })) { finish(l.score, l.wrongPairs === 0 ? 3 : (l.wrongPairs <= 2 ? 2 : 1), "Nối đúng cả " + l.pairs.length + " cặp."); return; }
-    body = '<p class="mut">' + (isZhGame ? 'Bấm một chữ Hán rồi bấm đúng nghĩa tiếng Việt của nó. Điểm: ' : 'Bấm một từ tiếng Anh rồi bấm đúng nghĩa tiếng Việt của nó. Điểm: ') + l.score + '</p><div class="row">' + l.enOrder.map(function (pi) { return '<button class="btn' + (l.matched[pi] ? ' btn-amber' : '') + '" data-mi="' + pi + '"' + (l.matched[pi] ? ' disabled' : '') + '>' + esc(l.pairs[pi].w) + '</button>'; }).join("") + '</div><div class="row" style="margin-top:8px">' + l.viOrder.map(function (pi) { return '<button class="btn" data-mv="' + pi + '"' + (l.matched[pi] ? ' disabled' : '') + '>' + esc(l.pairs[pi].vi) + '</button>'; }).join("") + '</div><p class="mut">' + (l.selEn == null ? (isZhGame ? 'Hãy bấm một chữ Hán trước.' : 'Hãy bấm một từ tiếng Anh trước.') : 'Đã chọn: ' + esc(l.pairs[l.selEn].w) + ' — giờ bấm nghĩa đúng.') + '</p>';
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $$("[data-mi]").forEach(function (b) { b.onclick = function () { l.selEn = +b.dataset.mi; render(); }; });
-    $$("[data-mv]").forEach(function (b) { b.onclick = function () { var pi = +b.dataset.mv; if (l.selEn == null) { toast(isZhGame ? "Hãy bấm một chữ Hán trước." : "Hãy bấm một từ tiếng Anh trước."); return; } if (pi === l.selEn) { l.matched[pi] = true; l.score += 10; } else { l.wrongPairs++; if (isZhGame) { try { recordZhQuizError("game:match", l.selEn, { q: "Nối từ: " + l.pairs[l.selEn].w, o: [l.pairs[l.selEn].vi], a: 0, why: "Nghĩa đúng của " + l.pairs[l.selEn].w + " là " + l.pairs[l.selEn].vi + "." }); } catch (e) {} } else { recordQuizError("game:match", l.selEn, { q: "Nối từ: " + l.pairs[l.selEn].w, o: [l.pairs[l.selEn].vi], a: 0, why: "Nghĩa đúng của " + l.pairs[l.selEn].w + " là " + l.pairs[l.selEn].vi + "." }); } } l.selEn = null; saveState(); render(); }; });
-    return;
-  }
-  if (l.gameId === "unscramble") {
-    if (l.wi >= l.words.length) { finish(l.score, gameStarsFor(l.score / (l.words.length * 10 + 20)), "Giải mã xong " + l.words.length + " từ."); return; }
-    var w0 = l.words[l.wi];
-    if (!l.curScr) l.curScr = gameScramble(w0.w);
-    body = isZhGame ? '<p>Từ ' + (l.wi + 1) + '/' + l.words.length + ' · Chữ: <b>' + esc(w0.han) + '</b> · Nghĩa: <b>' + esc(w0.vi) + '</b> · Chuỗi đúng liên tiếp: ' + l.streak + ' · Điểm: ' + l.score + '</p><p class="mut">Gõ lại pinyin (không cần dấu thanh):</p><p style="font-size:26px;letter-spacing:4px"><b>' + esc(l.curScr) + '</b></p><input type="text" id="gmInp" style="width:100%;padding:10px" placeholder="Gõ pinyin..."><div class="row" style="margin-top:8px"><button class="btn btn-primary" id="gmCheck">Kiểm tra</button></div><div class="why" id="gmWhy"></div>'
-    : '<p>Từ ' + (l.wi + 1) + '/' + l.words.length + ' · Nghĩa: <b>' + esc(w0.vi) + '</b> · Chuỗi đúng liên tiếp: ' + l.streak + ' · Điểm: ' + l.score + '</p><p style="font-size:26px;letter-spacing:4px"><b>' + esc(l.curScr) + '</b></p><input type="text" id="gmInp" style="width:100%;padding:10px" placeholder="Gõ lại từ đúng..."><div class="row" style="margin-top:8px"><button class="btn btn-primary" id="gmCheck">Kiểm tra</button></div><div class="why" id="gmWhy"></div>';
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $("#gmCheck").onclick = function () { var raw = $("#gmInp").value || ""; var v = raw.trim().toLowerCase(); var okV = isZhGame ? (zhStripTone(raw) === w0.w) : (v === String(w0.w).toLowerCase()); if (okV) { l.score += 10 + l.streak * 2; l.streak++; l.wi++; delete l.curScr; } else { l.streak = 0; if (isZhGame) { try { recordZhQuizError("game:unscramble", l.wi, { q: "Giải mã chữ (chữ: " + w0.han + ", nghĩa: " + w0.vi + ")", o: [w0.w], a: 0, why: "Pinyin đúng là " + w0.w + "." }); } catch (e) {} } else { recordQuizError("game:unscramble", l.wi, { q: "Giải mã chữ (nghĩa: " + w0.vi + ")", o: [w0.w], a: 0, why: "Từ đúng là " + w0.w + "." }); } $("#gmWhy").textContent = isZhGame ? "Chưa đúng — pinyin đúng: " + w0.w + " (không cần dấu thanh). Bấm Kiểm tra lại sau khi sửa (vẫn tính sai lần này)." : "Chưa đúng — đáp án đúng: " + w0.w + ". Bấm Kiểm tra lại sau khi sửa (vẫn tính sai lần này)."; $("#gmWhy").classList.add("show"); saveState(); return; } saveState(); render(); };
-    return;
-  }
-  if (l.gameId === "listeng") {
-    if (l.li >= l.items.length) { finish(l.score, gameStarsFor(l.score / (l.items.length * 10)), "Nghe và đoán xong " + l.items.length + " câu."); return; }
-    var it0 = l.items[l.li];
-    if (!l.curOpts) { if (isZhGame) { var others = gameShuffle(l.items.filter(function (x) { return x.vi !== it0.vi; })).slice(0, 2).map(function (x) { return x.vi; }); l.curOpts = gameShuffle([it0.vi].concat(others)); } else { var others = gameShuffle(CONTENT.listening.filter(function (x) { return x.text !== it0.text; })).slice(0, 2).map(function (x) { return x.text; }); l.curOpts = gameShuffle([it0.text].concat(others)); } }
-    body = '<p>Câu ' + (l.li + 1) + '/' + l.items.length + ' · Điểm: ' + l.score + '</p><button class="btn btn-primary" id="gmHear">🔊 Nghe câu</button><div style="margin-top:10px">' + l.curOpts.map(function (o, i) { return '<button class="btn q-opt" data-li="' + i + '">' + esc(o) + '</button>'; }).join("") + '</div>';
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $("#gmHear").onclick = function () { if (isZhGame) zhSpeak(it0.han); else speak(it0.text); };
-    $$("[data-li]").forEach(function (b) { b.onclick = function () { var correctText = isZhGame ? it0.vi : it0.text; if (l.curOpts[+b.dataset.li] === correctText) l.score += 10; else { if (isZhGame) { try { recordZhQuizError("game:listeng", l.li, { q: "Nghe và đoán: chữ Hán vừa nghe nghĩa là gì?", o: l.curOpts.slice(), a: l.curOpts.indexOf(correctText), why: "Chữ đúng là: " + it0.han + " — " + it0.vi }); } catch (e) {} } else { recordQuizError("game:listeng", l.li, { q: "Nghe và đoán: câu vừa nghe là gì?", o: l.curOpts.slice(), a: l.curOpts.indexOf(it0.text), why: "Câu đúng là: " + it0.text }); } } l.li++; delete l.curOpts; saveState(); render(); }; });
-    return;
-  }
-  if (l.gameId === "duegame") {
-    if (!l.dueItems.length) {
-      app.innerHTML = head + '<div class="qblock"><div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Hôm nay không còn từ nào đến hạn để chơi game — sang tab Ôn tập ôn từng mục nhé.</p></div></div><div class="row"><button class="btn btn-primary" id="gmDueBack">' + (isZhGame ? 'Về Ôn tập' : 'Về Luyện tập') + '</button></div></div>';
-      wireBack();
-      $("#gmDueBack").onclick = function () { backFromLesson(); go(isZhGame ? "review" : "practice"); };
-      return;
-    }
-    if (l.di >= l.dueItems.length) { finish(l.score, gameStarsFor(l.score / (l.dueItems.length * 10)), "Ôn xong " + l.dueItems.length + " từ đến hạn. Tốt nghiệp trong ván này: " + (l.graduated || 0) + " từ (đúng đủ lần thứ 2 cách quãng)."); return; }
-    var dit = l.dueItems[l.di];
-    var dBody = '<p>Ván ' + (l.di + 1) + '/' + l.dueItems.length + ' · Điểm: ' + l.score + '</p><button class="btn btn-primary" id="gmDueHear">🔊 Nghe chữ</button><div style="margin-top:10px">' + dit.o.map(function (o, i) { return '<button class="btn q-opt" data-due="' + i + '">' + esc(o) + '</button>'; }).join("") + '</div>';
-    if (l.picked >= 0) {
-      dBody += '<div class="why show"><p><b>' + (l.lastOk ? 'Đúng rồi!' : 'Chưa đúng — chữ đúng: ' + esc(dit.w)) + '</b>' + (l.lastDone ? ' · Từ này đã tốt nghiệp!' : (l.lastOk ? ' · Chưa tốt nghiệp — cần đúng thêm lần nữa ở lần ôn cách quãng sau.' : '')) + '</p><p class="mut">' + esc(dit.w) + (dit.py ? ' ' + esc(dit.py) : '') + ' — ' + esc(dit.vi) + '</p><button class="btn btn-primary" id="gmDueNext">Tiếp tục →</button></div>';
-    }
-    app.innerHTML = html + '<div class="qblock">' + dBody + '</div>'; wireBack();
-    $("#gmDueHear").onclick = function () { if (isZhGame) zhSpeak(dit.w); else speak(dit.w); };
-    $$("[data-due]").forEach(function (b) { b.onclick = function () {
-      if (l.picked >= 0) return;
-      l.picked = +b.dataset.due;
-      l.lastOk = (l.picked === dit.a);
-      if (l.lastOk) l.score += 10;
-      if (isZhGame) { var judged = zhHardJudge(dit.key, l.lastOk); l.lastDone = !!(judged && judged.done); }
-      else { var res = vocabBoxJudge(dit.key, l.lastOk, { noXp: true }); l.lastDone = !!(l.lastOk && res.box >= 5); }
-      if (l.lastDone) l.graduated = (l.graduated || 0) + 1;
-      saveState(); render();
-    }; });
-    var dn = $("#gmDueNext"); if (dn) dn.onclick = function () { l.di++; l.picked = -1; render(); };
-    return;
-  }
-  if (l.gameId === "typerace") {
-    if (l.si >= l.sents.length) { finish(l.score, gameStarsFor(l.score / (l.sents.length * (isZhGame ? 100 : 200))), "Đua gõ xong " + l.sents.length + " câu."); return; }
-    if (!l.t0) l.t0 = Date.now();
-    var s0 = l.sents[l.si];
-    body = isZhGame ? '<p>Câu ' + (l.si + 1) + '/' + l.sents.length + ' · Điểm: ' + l.score + '</p><p style="font-size:20px"><b>' + esc(s0.han) + '</b></p><p class="mut">Nghĩa: ' + esc(s0.vi) + ' — gõ lại chữ Hán (gõ pinyin rồi chọn chữ trên điện thoại).</p><textarea id="gmInp" rows="3" style="width:100%;padding:10px" placeholder="Gõ lại câu chữ Hán..."></textarea><div class="row" style="margin-top:8px"><button class="btn btn-primary" id="gmCheck">Chấm câu này</button></div><div class="why" id="gmWhy"></div>'
-    : '<p>Câu ' + (l.si + 1) + '/' + l.sents.length + ' · Điểm: ' + l.score + '</p><p style="font-size:20px"><b>' + esc(s0) + '</b></p><textarea id="gmInp" rows="3" style="width:100%;padding:10px" placeholder="Gõ lại câu mẫu cho đúng và nhanh..."></textarea><div class="row" style="margin-top:8px"><button class="btn btn-primary" id="gmCheck">Chấm câu này</button></div><div class="why" id="gmWhy"></div>';
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $("#gmCheck").onclick = function () { if (isZhGame) { var r = gameZhTypeScore($("#gmInp").value || "", s0.han); l.score += r.score; if (r.acc < 100) { try { recordZhQuizError("game:typerace", l.si, { q: "Đua gõ câu: " + s0.han, o: [s0.han], a: 0, why: "Câu mẫu đúng là: " + s0.han }); } catch (e) {} } $("#gmWhy").textContent = "Độ chính xác " + r.acc + "% · +" + r.score + " điểm."; $("#gmWhy").classList.add("show"); l.si++; l.t0 = 0; saveState(); setTimeout(function () { render(); }, 900); return; } var secs = Math.max(1, (Date.now() - l.t0) / 1000); var r = gameTyperaceScore($("#gmInp").value || "", s0, secs); l.score += r.score; if (r.acc < 100) recordQuizError("game:typerace", l.si, { q: "Đua gõ câu: " + s0, o: [s0], a: 0, why: "Câu mẫu đúng là: " + s0 }); $("#gmWhy").textContent = "Độ chính xác " + r.acc + "% · Tốc độ " + r.wpm + " từ/phút · +" + r.score + " điểm."; $("#gmWhy").classList.add("show"); l.si++; l.t0 = 0; saveState(); setTimeout(function () { render(); }, 900); };
-    return;
-  }
-  if (l.gameId === "order" && isZhGame) {
-    if (l.si >= l.zhOrder.length) { finish(l.score, gameStarsFor(l.score / (l.zhOrder.length * 10)), "Xếp câu xong " + l.zhOrder.length + " câu."); return; }
-    var itZ = l.zhOrder[l.si];
-    if (!l.words.length) l.words = gameShuffle(itZ.words.slice());
-    body = '<p>Câu ' + (l.si + 1) + '/' + l.zhOrder.length + ' · Điểm: ' + l.score + '</p><p><b>Câu bạn xếp:</b> ' + esc(l.builtArr.join("") || "(chưa chọn từ nào)") + '</p><div class="row">' + l.words.map(function (wd, i) { return '<button class="btn" data-ow="' + i + '"' + (l.builtArr.indexOf(wd) >= 0 && l.words.filter(function (x) { return x === wd; }).length <= l.builtArr.filter(function (x) { return x === wd; }).length ? ' disabled' : '') + '>' + esc(wd) + '</button>'; }).join("") + '</div><div class="row" style="margin-top:8px"><button class="btn" id="gmClear">Xóa và xếp lại</button><button class="btn btn-primary" id="gmCheck">Kiểm tra</button></div>';
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $$("[data-ow]").forEach(function (b) { b.onclick = function () { l.builtArr.push(l.words[+b.dataset.ow]); render(); }; });
-    $("#gmClear").onclick = function () { l.builtArr = []; render(); };
-    $("#gmCheck").onclick = function () { if (l.builtArr.join("") === itZ.ref) l.score += 10; else { try { recordZhQuizError("game:order", l.si, { q: "Xếp câu đúng: " + itZ.ref, o: [itZ.ref], a: 0, why: "Câu đúng là: " + itZ.ref }); } catch (e) {} } l.si++; l.builtArr = []; l.words = []; saveState(); render(); };
-    return;
-  }
-  if (l.gameId === "order") {
-    if (l.si >= l.sents.length) { finish(l.score, gameStarsFor(l.score / (l.sents.length * 10)), "Xếp câu xong " + l.sents.length + " câu."); return; }
-    var s1 = l.sents[l.si];
-    if (!l.words.length) l.words = gameShuffle(s1.replace(/[.!?,;:'"]/g, "").split(" "));
-    body = '<p>Câu ' + (l.si + 1) + '/' + l.sents.length + ' · Điểm: ' + l.score + '</p><p><b>Câu bạn xếp:</b> ' + esc(l.builtArr.join(" ") || "(chưa chọn từ nào)") + '</p><div class="row">' + l.words.map(function (wd, i) { return '<button class="btn" data-ow="' + i + '"' + (l.builtArr.indexOf(wd) >= 0 && l.words.filter(function (x) { return x === wd; }).length <= l.builtArr.filter(function (x) { return x === wd; }).length ? ' disabled' : '') + '>' + esc(wd) + '</button>'; }).join("") + '</div><div class="row" style="margin-top:8px"><button class="btn" id="gmClear">Xóa và xếp lại</button><button class="btn btn-primary" id="gmCheck">Kiểm tra</button></div>';
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $$("[data-ow]").forEach(function (b) { b.onclick = function () { l.builtArr.push(l.words[+b.dataset.ow]); render(); }; });
-    $("#gmClear").onclick = function () { l.builtArr = []; render(); };
-    $("#gmCheck").onclick = function () { if (gameNormSent(l.builtArr.join(" ")) === gameNormSent(s1)) l.score += 10; else recordQuizError("game:order", l.si, { q: "Xếp câu đúng: " + s1, o: [s1], a: 0, why: "Câu đúng là: " + s1 }); l.si++; l.builtArr = []; l.words = []; saveState(); render(); };
-    return;
-  }
-  if (l.gameId === "quiz") {
-    if (l.qi >= l.qs.length) { finish(l.score, gameStarsFor(l.score / (l.qs.length * 10)), "Quiz leo thang: đúng " + (l.score / 10) + "/" + l.qs.length + " câu."); return; }
-    var q0 = l.qs[l.qi];
-    body = '<p>Câu ' + (l.qi + 1) + '/' + l.qs.length + ' · Điểm: ' + l.score + '</p><p><b>' + esc(q0.q) + '</b></p>' + (q0.o || []).map(function (o, i) { return '<button class="btn q-opt" data-qi="' + i + '">' + esc(o) + '</button>'; }).join("") + '<div class="why" id="gmWhy"></div>';
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $$("[data-qi]").forEach(function (b) { b.onclick = function () { var i = +b.dataset.qi; if (i === q0.a) { l.score += 10; l.qi++; } else { if (isZhGame) { try { recordZhQuizError("game:quiz", l.qi, q0); } catch (e) {} } else { recordQuizError("game:quiz", l.qi, q0); } $("#gmWhy").textContent = "Sai rồi — đáp án đúng: " + (q0.o ? q0.o[q0.a] : "") + " — " + (q0.why || "") + " Câu này đã vào Sổ lỗi sai để ôn lại."; $("#gmWhy").classList.add("show"); l.qi++; } saveState(); setTimeout(function () { render(); }, 900); }; });
-    return;
-  }
-  /* Game cu shooter/race/speakgame giu code nhung khong con nut vao tu the.
-     Game Di canh nhap sao (platformer) da XOA sach 03/11/2026 theo lenh Bui (xau) —
-     khong con engine, khong con nut, khong con ky luc. */
-  if (l.gameId === "shooter") {
-    if (l.shI >= l.shRounds.length) { finish(l.score, gameStarsFor(l.shRight / l.shRounds.length), "Bắn trúng " + l.shRight + "/" + l.shRounds.length + " từ."); return; }
-    var shr = l.shRounds[l.shI];
-    body = '<p>Vòng ' + (l.shI + 1) + '/' + l.shRounds.length + ' · Điểm: ' + l.score + '</p><p>🎯 Bắn từ đúng cho nghĩa: <b>' + esc(shr.vi) + '</b></p><div class="row">' + shr.opts.map(function (o, i) { return '<button class="btn" data-sh="' + i + '">' + esc(o) + '</button>'; }).join("") + '</div>' + (l.shLast ? '<p class="mut">' + esc(l.shLast.msg) + '</p><div class="row"><button class="btn btn-primary" id="gmNext">Tiếp theo →</button></div>' : '');
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $$("[data-sh]").forEach(function (b) { b.onclick = function () { if (l.shLast) return; var i = +b.dataset.sh; if (i === shr.a) { l.score += 10; l.shRight++; l.shLast = { msg: "💥 Trúng! " + shr.opts[shr.a] + " — " + shr.vi + "." }; } else { l.shLast = { msg: "Hụt rồi — từ đúng là " + shr.opts[shr.a] + " (" + shr.vi + ")." }; gameRecordWrong(l, "shooter", l.shI, shr); } saveState(); render(); }; });
-    var shNx = $("#gmNext"); if (shNx) shNx.onclick = function () { l.shI++; l.shLast = null; saveState(); render(); };
-    return;
-  }
-  if (l.gameId === "race") {
-    if (l.rcI >= l.rcQs.length) { var rcWon = l.rcMe > l.rcOpp; finish(l.score, rcWon ? (l.rcRight >= 8 ? 3 : 2) : (l.rcRight > 0 ? 1 : 0), "Đua xe: bạn " + l.rcMe + "% — đối thủ " + l.rcOpp + "% · đúng " + l.rcRight + "/" + l.rcQs.length + " câu."); return; }
-    var rcq = l.rcQs[l.rcI];
-    var rcBar = function (p) { var f = Math.round(p / 10); return "█".repeat(f) + "░".repeat(10 - f) + " " + p + "%"; };
-    body = '<p>Câu ' + (l.rcI + 1) + '/' + l.rcQs.length + ' · Điểm: ' + l.score + '</p><p>🏎️ Bạn: ' + rcBar(l.rcMe) + '</p><p>🚗 Đối thủ: ' + rcBar(l.rcOpp) + '</p><p>Trả lời đúng để xe bạn tăng tốc (+12%), sai thì đối thủ tăng tốc (+8%). Từ đúng cho nghĩa: <b>' + esc(rcq.vi) + '</b></p><div class="row">' + rcq.opts.map(function (o, i) { return '<button class="btn" data-rc="' + i + '">' + esc(o) + '</button>'; }).join("") + '</div>' + (l.rcLast ? '<p class="mut">' + esc(l.rcLast.msg) + '</p><div class="row"><button class="btn btn-primary" id="gmNext">Tiếp theo →</button></div>' : '');
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $$("[data-rc]").forEach(function (b) { b.onclick = function () { if (l.rcLast) return; var i = +b.dataset.rc; if (i === rcq.a) { l.score += 10; l.rcRight++; l.rcMe = Math.min(100, l.rcMe + 12); l.rcLast = { msg: "🏁 Đúng! Xe bạn tăng tốc lên " + l.rcMe + "%." }; } else { l.rcOpp = Math.min(100, l.rcOpp + 8); l.rcLast = { msg: "Đối thủ tăng tốc lên " + l.rcOpp + "% — từ đúng là " + rcq.opts[rcq.a] + " (" + rcq.vi + ")." }; gameRecordWrong(l, "race", l.rcI, rcq); } saveState(); render(); }; });
-    var rcNx = $("#gmNext"); if (rcNx) rcNx.onclick = function () { l.rcI++; l.rcLast = null; saveState(); render(); };
-    return;
-  }
-  if (l.gameId === "speakgame") {
-    if (l.spI >= l.spWords.length) { finish(l.score, gameStarsFor(l.score / (l.spWords.length * 100)), "Nói theo: " + l.score + "/" + (l.spWords.length * 100) + " điểm."); return; }
-    var spw = l.spWords[l.spI];
-    var spSR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    body = '<p>Câu ' + (l.spI + 1) + '/' + l.spWords.length + ' · Điểm: ' + l.score + '</p><p style="font-size:26px"><b>' + esc(spw.w) + '</b></p><p class="mut">' + esc(spw.vi) + '</p><div class="row"><button class="btn" id="gmHear">🔊 Nghe mẫu</button>' + (spSR ? '<button class="btn btn-primary" id="gmRec">🎤 Bấm và nói</button>' : '') + '</div>' + (!spSR ? '<p class="mut">Trình duyệt này không hỗ trợ ghi âm nhận giọng — hãy mở bằng Chrome hoặc Edge trên điện thoại để chơi có chấm điểm. Bạn vẫn có thể nghe mẫu và đọc theo, nhưng câu này không tính điểm.</p><div class="row"><button class="btn btn-primary" id="gmSkip">Bỏ qua câu này (không tính điểm) →</button></div>' : '') + (l.spHeard != null ? '<p>Nghe được: “' + esc(l.spHeard) + '” — ' + (l.spPts === 100 ? '✓ đúng (+100)' : (l.spPts > 0 ? '◐ gần đúng (+' + l.spPts + ')' : '✗ chưa đúng')) + '</p><div class="row"><button class="btn btn-primary" id="gmNext">Câu tiếp theo →</button></div>' : '');
-    app.innerHTML = html + '<div class="qblock">' + body + '</div>'; wireBack();
-    $("#gmHear").onclick = function () { gameSpeakWord(spw.w, l.gameTrack); };
-    var spRec = $("#gmRec"); if (spRec) spRec.onclick = function () { try { var r = new spSR(); r.lang = (l.gameTrack === "zh" ? "zh-CN" : (l.gameTrack === "tp" ? "ko-KR" : "en-GB")); r.interimResults = false; r.maxAlternatives = 1; r.onresult = function (ev) { var tx = ""; try { tx = ev.results[0][0].transcript || ""; } catch (e) {} l.spHeard = tx; l.spPts = speakGameScore(tx, spw.w, l.gameTrack); l.score += l.spPts; if (l.spPts === 100) l.spRight++; saveState(); render(); }; r.onerror = function () { toast("Không nghe được — hãy thử lại."); }; r.start(); } catch (e) { toast("Không mở được mic — hãy thử lại."); } };
-    var spSk = $("#gmSkip"); if (spSk) spSk.onclick = function () { l.spI++; saveState(); render(); };
-    var spNx = $("#gmNext"); if (spNx) spNx.onclick = function () { l.spI++; l.spHeard = null; l.spPts = null; saveState(); render(); };
-    return;
-  }
-  if (l.gameId === "dropword") { renderDropWord(app, l, head, finish); return; }
-  if (l.gameId === "guessword") { renderGuessWord(app, l, head, finish); return; }
-  if (l.gameId === "matchpairs") { renderMatchPairs(app, l, head, finish); return; }
 }
 /* 4. Go cau: 2 che do (Co ban/Nang cao) + 3 pha (nhin-go, nghe-go, nho-go). */
 function typingSets(mode) { return CONTENT.typing.filter(function (s) { return typingModeOfLevel(s.level) === (mode || "coban"); }); }
@@ -4958,12 +4588,6 @@ function renderLesson(app) {
   else if (l.type === "phaseExam") renderPhaseExam(app, l);
   else if (l.type === "phaseSkill") renderPhaseSkill(app, l);
   else if (l.type === "mockTest") renderMockTest(app, l);
-  else if (l.type === "game") renderArcadeLesson(app, l);
-  else if (l.type === "wordadv") renderWordAdv(app, l);
-  else if (l.type === "langquest") renderLangQuest(app, l);
-  else if (l.type === "coop") renderCoop(app, l);
-  else if (l.type === "runner3d") { if (window.Runner3D && Runner3D.render) Runner3D.render(l); }
-  else if (l.type === "typeshooter") renderTypeShooter(app, l);
   else if (l.type === "skillTyping") renderTypingLesson(app, l);
   else if (l.type === "weakSession") renderWeakSession(app, l);
   else if (l.type === "reviewSession") renderReviewSession(app, l);
@@ -9284,7 +8908,7 @@ function practiceFilterHTML() {
   var bandOpts = '<option value="">Mọi trình độ</option>' + RB_CHAPTER_MAP.map(function (ch) { return '<option value="' + esc(ch.band) + '">' + esc(ch.band) + ' — ' + esc(ch.title) + '</option>'; }).join("");
   return '<section class="card" id="practiceFilterCard"><h3>🔎 Tìm bài theo kỹ năng, chủ đề, trình độ, mục tiêu thi</h3>'
     + '<p class="mut">Lọc kho bài tự soạn của web — tìm được bài trong vài cú bấm. Lọc chỉ để tìm bài luyện thêm, không đổi lộ trình đan xen và số bước mỗi chặng.</p>'
-    + '<div class="row"><select id="pfSkill"><option value="">Mọi kỹ năng</option><option value="Từ vựng">Từ vựng</option><option value="Ngữ pháp">Ngữ pháp</option><option value="Đọc">Đọc</option><option value="Nghe">Nghe</option><option value="Nói">Nói</option><option value="Viết">Viết</option><option value="Gõ câu">Gõ câu</option><option value="Trò chơi">Trò chơi</option><option value="Nghe chép">Nghe chép</option><option value="Shadowing">Shadowing</option><option value="Truyện ngắn">Truyện ngắn</option><option value="Podcast">Podcast</option></select> '
+    + '<div class="row"><select id="pfSkill"><option value="">Mọi kỹ năng</option><option value="Từ vựng">Từ vựng</option><option value="Ngữ pháp">Ngữ pháp</option><option value="Đọc">Đọc</option><option value="Nghe">Nghe</option><option value="Nói">Nói</option><option value="Viết">Viết</option><option value="Gõ câu">Gõ câu</option><option value="Nghe chép">Nghe chép</option><option value="Shadowing">Shadowing</option><option value="Truyện ngắn">Truyện ngắn</option><option value="Podcast">Podcast</option></select> '
     + '<select id="pfBand">' + bandOpts + '</select> '
     + '<select id="pfExam"><option value="IELTS">Mục tiêu thi: IELTS</option><option value="HSK">Mục tiêu thi: HSK</option><option value="TOEIC">Mục tiêu thi: TOEIC</option><option value="TOPIK">Mục tiêu thi: TOPIK</option></select></div>'
     + '<p><input type="text" id="pfTopic" style="width:100%;padding:10px" placeholder="Chủ đề, ví dụ: giáo dục, du lịch, sức khỏe… (để trống là không lọc chủ đề)"></p>'
@@ -9311,9 +8935,6 @@ function pfBuildItems() {
   (CONTENT.writingDrills || []).forEach(function (d, i) { items.push({ skill: "Viết", topic: d.title || "Luyện viết từng bước", band: "", label: "Luyện viết từng bước: " + (d.title || ("bài " + (i + 1))), open: open({ type: "skillDrill", idx: i }) }); });
   [["nentang", "Nền tảng (Band 0–4,5)"], ["coban", "Cơ bản (Band 5,0–5,5)"], ["nangcao", "Nâng cao (Band 6,0+)"]].forEach(function (mm) {
     items.push({ skill: "Gõ câu", topic: "Gõ câu " + mm[1], band: "", label: "Gõ câu: " + mm[1], open: open({ type: "skillTyping", mode: mm[0] }) });
-  });
-  [["match", "Nối từ thần tốc"], ["unscramble", "Giải mã chữ"], ["listeng", "Nghe và đoán"], ["typerace", "Đua gõ câu"], ["order", "Xếp câu đúng"], ["quiz", "Quiz leo thang"], ["duegame", "Ôn từ đến hạn"], ["dropword", "Gõ từ rơi"], ["guessword", "Đoán từ"], ["matchpairs", "Ghép cặp lật thẻ"]].forEach(function (gd) {
-    items.push({ skill: "Trò chơi", topic: gd[1], band: "", label: "Trò chơi: " + gd[1], open: open({ type: "game", gameId: gd[0] }) });
   });
   return items;
 }
@@ -9609,21 +9230,6 @@ function renderPodcast(app, l) {
 }
 
 /* ---------- Game tu vung dang hoc: go tu roi + doan tu ---------- */
-function gameCurrentVocabSet() {
-  for (var i = 0; i < CONTENT.vocab.length; i++) { var s = CONTENT.vocab[i]; var pos = (state.pos || {})["vocab:" + i] || 0; if (pos > 0 && pos < (s.cards || []).length) return i; }
-  for (var j = 0; j < CONTENT.vocab.length; j++) { var p = (state.pos || {})["vocab:" + j] || 0; if (p < (CONTENT.vocab[j].cards || []).length) return j; }
-  return 0;
-}
-function vocabSetPickerHTML(sel) {
-  return '<p><select id="gwSetSel" style="width:100%;padding:8px">' + CONTENT.vocab.map(function (s, i) {
-    var pos = (state.pos || {})["vocab:" + i] || 0; var done = pos >= (s.cards || []).length;
-    return '<option value="' + i + '"' + (i === sel ? ' selected' : '') + '>' + esc(s.topic) + ' — đã học ' + pos + '/' + s.cards.length + ' thẻ' + (done ? ' · ✓ xong' : '') + '</option>';
-  }).join("") + '</select></p>';
-}
-function vocabSetCards(i) {
-  var s = CONTENT.vocab[i] || CONTENT.vocab[0];
-  return (s.cards || []).filter(function (c) { return c.w && c.vi; });
-}
 /* ================= DOT GAME MOI 03/11/2026: XOA game Di canh nhat sao (Bui chot 22:40 03/11:
    game xau) — go sach engine platformer + moi tham chieu; thay bang 3 game tu ve moi:
    Go tu roi (ban dep), Doan tu kieu Wordle (ban dep), Ghep cap lat the (moi).
@@ -9632,339 +9238,9 @@ function vocabSetCards(i) {
    Ghi nho lau (dung he SRS san co, khong tao he moi): tu dung ngay lan dau trong game ->
    vao hang doi on (hen mai, dung lai thi hen thua dan theo lich 1-3-7-14-30, dung 2 lan
    lien tiep cach quang thi tot nghiep); tu sai -> vao So loi sai (khoa theo dung tu). */
-function gameTrackWords(l, n) {
-  if (l.gameTrack === "tc" || l.gameTrack === "tp") {
-    var pool = gameShuffle(gamePoolWords(l.gameTrack)).filter(function (c) { return c.w && c.vi; });
-    return { words: pool.slice(0, n), note: l.gameTrack === "tc" ? "Từ vựng TOEIC của web" : "Từ vựng TOPIK của web", setIdx: null };
-  }
-  var si = gameCurrentVocabSet();
-  return { words: gameShuffle(vocabSetCards(si)).slice(0, n), note: "Bộ: " + (CONTENT.vocab[si].topic || ""), setIdx: si };
-}
-function gameWordDistractors(word, vi, track, n) {
-  var pool = [];
-  if (track === "tc" || track === "tp") pool = gamePoolWords(track).slice();
-  else CONTENT.vocab.forEach(function (s) { (s.cards || []).forEach(function (c) { if (c.w && c.vi) pool.push(c); }); });
-  return gameShuffle(pool.filter(function (c) { return c.w !== word && c.vi !== vi; })).slice(0, n).map(function (c) { return c.w; });
-}
-function gameWordRight(word, vi, track, firstTry) {
-  if (!state.hard) state.hard = {};
-  var key = "srs:gameword:" + String(word).toLowerCase();
-  var ex = state.hard[key];
-  if (!ex) {
-    if (!firstTry) return false;
-    var opts = gameShuffle([word].concat(gameWordDistractors(word, vi, track, 2)));
-    state.hard[key] = { kind: "srs", lesson: "game", qi: "w:" + word, q: "Từ đã chơi: chọn đúng từ cho nghĩa \"" + vi + "\"", options: opts, a: opts.indexOf(word), why: word + " — " + vi, streak: 0, level: 0, fails: 0, due: addDaysStr(todayStr(), 1) };
-    saveState(); return true;
-  }
-  hardJudge(key, true); return true;
-}
-function gameWordWrong(gameId, word, vi, track) {
-  var opts = gameShuffle([word].concat(gameWordDistractors(word, vi, track, 2)));
-  recordQuizError("game:" + gameId, word, { q: "Game: từ đúng cho nghĩa \"" + vi + "\"", o: opts, a: opts.indexOf(word), why: "Từ đúng là " + word + " — " + vi + "." });
-  return "quiz:game:" + gameId + ":" + word;
-}
-function gameSummaryHTML(rightList, wrongList) {
-  var h = '<div class="qblock"><h3>📋 Tổng kết ván này</h3>';
-  h += '<p><b>Từ đã chắc (' + rightList.length + '):</b> ' + (rightList.length ? rightList.map(function (r) { return esc(r.w) + " — " + esc(r.vi); }).join("; ") : "chưa có") + '</p>';
-  h += '<p><b>Từ cần ôn lại (' + wrongList.length + '):</b> ' + (wrongList.length ? wrongList.map(function (r) { return esc(r.w) + " — " + esc(r.vi); }).join("; ") : "không có — tốt lắm!") + '</p>';
-  h += '<p class="mut">Từ đúng ngay lần đầu đã vào hàng đợi ôn (hẹn mai, đúng lại thì hẹn thưa dần theo lịch 1-3-7-14-30). Từ sai đã vào Sổ lỗi sai.</p>';
-  if (wrongList.length) h += '<div class="row"><button class="btn btn-primary" id="gmReviewWrong">📖 Ôn ngay các từ sai</button></div>';
-  h += '</div>';
-  return h;
-}
-function gameReviewWrongNow(l) {
-  (l.wrongKeys || []).forEach(function (k) { if (state.hard[k]) state.hard[k].due = todayStr(); });
-  saveState(); go("review");
-}
 /* ---------- Go tu roi (ban dep): roi muot, go dung thi vo thanh hieu ung sang +10. ---------- */
-function dropWordArmTimer(l) {
-  try { if (l.gwTimer) clearTimeout(l.gwTimer); } catch (e) {}
-  l.gwTimer = setTimeout(function () { dropWordMiss(l); }, 10000);
-}
-function dropWordMiss(l) {
-  if (curLesson !== l) return;
-  try { if (l.gwTimer) clearTimeout(l.gwTimer); } catch (e) {}
-  var w = l.gwWords[l.gwI];
-  if (w) { l.wrongKeys.push(gameWordWrong("dropword", w.w, w.vi, l.gameTrack)); l.wrongList.push({ w: w.w, vi: w.vi }); }
-  l.gwMissed++; l.gwI++;
-  if (l.gwI < l.gwWords.length) dropWordArmTimer(l);
-  render();
-}
-function dropWordAnswer(l, v) {
-  if (curLesson !== l) return;
-  try { if (l.gwTimer) clearTimeout(l.gwTimer); } catch (e) {}
-  var w = l.gwWords[l.gwI];
-  if (!w) return;
-  if (v.trim().toLowerCase() === String(w.w).toLowerCase()) {
-    l.gwScore += 10; l.gwCaught++;
-    gameWordRight(w.w, w.vi, l.gameTrack, !l.gwTried);
-    l.rightList.push({ w: w.w, vi: w.vi });
-    l.gwBurst = true; l.gwI++; l.gwTried = false;
-    if (l.gwI < l.gwWords.length) dropWordArmTimer(l);
-    render();
-  } else {
-    l.gwTried = true;
-    toast("Chưa đúng — gõ lại từ này nhé.");
-    var inp = $("#gwInp"); if (inp) inp.value = "";
-    dropWordArmTimer(l);
-  }
-}
-function renderDropWord(app, l, head, finish) {
-  if (!l.gwStarted) {
-    var isPool = (l.gameTrack === "tc" || l.gameTrack === "tp");
-    var cur = gameCurrentVocabSet();
-    app.innerHTML = head + '<div class="qblock"><p>' + skillIconSpan("game") + '<b>Gõ từ rơi (bản đẹp):</b> từ rơi mượt từ trên xuống trên nền trời ấm. Gõ đúng từ vào ô rồi bấm “Gõ ↓” thì từ vỡ thành hiệu ứng sáng, +10 điểm. Ván có 10 từ, lấy từ đúng bộ từ bạn đang học' + (isPool ? ' (từ vựng ' + (l.gameTrack === "tc" ? "TOEIC" : "TOPIK") + ' của web).' : ' (mặc định là bộ đang học dở, đổi được).') + '</p>'
-      + '<p class="mut">Từ rơi xuống đáy thì chỉ bỏ qua và vào Sổ lỗi sai để ôn lại, không trừ điểm, không trừ lượt, không khóa — hết ván chơi lại thoải mái, học tiếp không bị chặn. Cuối ván có tổng kết từ đã chắc / từ cần ôn lại.</p>'
-      + (isPool ? '<p class="mut">' + (l.gameTrack === "tc" ? "Từ vựng TOEIC của web" : "Từ vựng TOPIK của web") + ' · 10 từ · Khoảng 3 phút.</p>' : vocabSetPickerHTML(cur) + '<p class="mut" id="gwMeta"></p>')
-      + '<div class="row"><button class="btn btn-primary" id="gwStart">Bắt đầu chơi →</button></div></div>';
-    wireBack();
-    if (!isPool) { var gwUpd = function () { var si = +($("#gwSetSel").value || 0); var s = CONTENT.vocab[si]; var m = $("#gwMeta"); if (m) m.textContent = "Bộ: " + s.topic + " · " + (s.band || "") + " · 10 từ · Khoảng 3 phút."; }; $("#gwSetSel").onchange = gwUpd; gwUpd(); }
-    $("#gwStart").onclick = function () {
-      if (isPool) { l.gwWords = gameShuffle(gamePoolWords(l.gameTrack)).filter(function (c) { return c.w && c.vi; }).slice(0, 10); }
-      else { var si = +($("#gwSetSel").value || 0); l.gwSet = si; l.gwWords = gameShuffle(vocabSetCards(si)).slice(0, 10); }
-      l.gwI = 0; l.gwScore = 0; l.gwCaught = 0; l.gwMissed = 0; l.gwStarted = true; l.gwTried = false; l.gwBurst = false; l.rightList = []; l.wrongList = []; l.wrongKeys = [];
-      dropWordArmTimer(l); render();
-    };
-    return;
-  }
-  if (l.gwI >= l.gwWords.length) {
-    l.finalExtraHTML = gameSummaryHTML(l.rightList, l.wrongList);
-    l.reviewWrongFn = function () { gameReviewWrongNow(l); };
-    finish(l.gwScore, l.gwScore >= 90 ? 3 : (l.gwScore >= 60 ? 2 : 1), "Gõ đúng " + l.gwCaught + "/" + l.gwWords.length + " từ · Từ rơi qua: " + l.gwMissed + " (không trừ điểm).");
-    return;
-  }
-  var w = l.gwWords[l.gwI];
-  app.innerHTML = head + '<style>@keyframes gwFall { from { top: 0%; } to { top: 82%; } } @keyframes gwFloatUp { 0% { opacity: 1; transform: translate(-50%, 0) scale(1); } 100% { opacity: 0; transform: translate(-50%, -46px) scale(1.25); } }</style><div class="qblock">'
-    + '<p><b>Từ ' + (l.gwI + 1) + '/' + l.gwWords.length + ' · Điểm: ' + l.gwScore + '</b> · Nghĩa: <b>' + esc(w.vi) + '</b></p>'
-    + '<div id="gwStage" style="position:relative;height:150px;border-radius:16px;overflow:hidden;background:linear-gradient(180deg, #fef3c7 0%, #dbeafe 100%);border:1.5px solid #f59e0b"><div id="gwWord" style="position:absolute;left:50%;transform:translateX(-50%);top:0%;font-size:30px;animation:gwFall 10s linear forwards;background:#fff;border:2px solid #f59e0b;border-radius:999px;padding:6px 18px;box-shadow:0 4px 12px rgba(0,0,0,0.15)"><b>' + esc(w.w) + '</b></div>' + (l.gwBurst ? '<div style="position:absolute;left:50%;top:30%;font-size:26px;animation:gwFloatUp 1s ease-out forwards">✨ +10</div>' : '') + '</div>'
-    + '<p><input type="text" id="gwInp" style="width:100%;padding:10px" placeholder="Gõ đúng từ đang rơi…"></p>'
-    + '<div class="row"><button class="btn btn-primary" id="gwHit">Gõ ↓</button></div>'
-    + '<p class="mut">Từ rơi xuống đáy thì chỉ bỏ qua và vào Sổ lỗi sai, không trừ điểm, không khóa lượt.</p></div>';
-  wireBack();
-  l.gwBurst = false;
-  window.__vocabGame = { miss: function () { dropWordMiss(l); }, answer: function (v) { dropWordAnswer(l, v); } };
-  var doHit = function () { var v = ($("#gwInp").value || "").trim(); if (v) dropWordAnswer(l, v); };
-  $("#gwHit").onclick = doHit;
-  $("#gwInp").onkeydown = function (e) { if (e.key === "Enter") doHit(); };
-}
 /* ---------- Doan tu kieu Wordle (ban dep): o chu doi mau + ban phim ao. ---------- */
-function wordleUnits(word, track) {
-  if (track === "tp") return Array.from(String(word));
-  return String(word).toLowerCase().split("");
-}
-function wordleColors(guess, target) {
-  var colors = guess.map(function () { return "gray"; });
-  var remaining = {};
-  target.forEach(function (u, i) { if (guess[i] !== u) remaining[u] = (remaining[u] || 0) + 1; });
-  guess.forEach(function (u, i) {
-    if (guess[i] === target[i]) colors[i] = "green";
-    else if (remaining[u] > 0) { colors[i] = "amber"; remaining[u]--; }
-  });
-  return colors;
-}
-function wordleCellBg(c) { return c === "green" ? "#86efac" : (c === "amber" ? "#fde68a" : "#e5e7eb"); }
-function gameWordleWords(l, n) {
-  var latin = function (w) { return /^[a-z]{3,10}$/.test(w); };
-  var src = [];
-  if (l.gameTrack === "tc") src = gamePoolWords("tc").filter(function (c) { return c.w && c.vi && latin(c.w); });
-  else if (l.gameTrack === "tp") src = gamePoolWords("tp").filter(function (c) { return c.w && c.vi && !/\s/.test(c.w) && Array.from(c.w).length >= 2 && Array.from(c.w).length <= 8; });
-  else {
-    var si = (l.gwSet != null ? l.gwSet : gameCurrentVocabSet());
-    src = vocabSetCards(si).filter(function (c) { return latin(c.w); });
-    if (src.length < n) src = gamePoolWords("en").filter(function (c) { return latin(c.w); });
-  }
-  return gameShuffle(src).slice(0, n);
-}
-function guessWordTry(l, v) {
-  if (curLesson !== l) return;
-  var w = l.gwWords[l.gwI];
-  if (!w) return;
-  var track = l.gameTrack;
-  var target = wordleUnits(w.w, track);
-  var guess = (track === "tp") ? Array.from(String(v).trim()) : String(v).trim().toLowerCase().split("").filter(function (ch) { return /[a-z]/.test(ch); });
-  if (!guess.length) return;
-  l.gwAtt++;
-  var colors = wordleColors(guess, target);
-  l.gwRows.push({ units: guess, colors: colors });
-  var rank = { gray: 1, amber: 2, green: 3 };
-  guess.forEach(function (u, i) { var c = colors[i]; if (!l.gwKeyState[u] || rank[c] > rank[l.gwKeyState[u]]) l.gwKeyState[u] = c; });
-  var posOk = colors.filter(function (c) { return c === "green"; }).length;
-  var inWord = colors.filter(function (c) { return c === "amber"; }).length;
-  var allGreen = colors.length === target.length && posOk === target.length;
-  if (allGreen) {
-    var pts = 70 - 10 * l.gwAtt;
-    l.gwScore += pts; l.gwRight++;
-    gameWordRight(w.w, w.vi, track, l.gwAtt === 1);
-    l.rightList.push({ w: w.w, vi: w.vi });
-    l.gwI++; l.gwAtt = 0; l.gwRows = []; l.gwCur = []; l.gwFeed = "";
-    saveState(); render(); return;
-  }
-  if (l.gwAtt >= 6) {
-    l.wrongKeys.push(gameWordWrong("guessword", w.w, w.vi, track));
-    l.wrongList.push({ w: w.w, vi: w.vi });
-    l.gwFeed = "Hết 6 lượt — đáp án đúng: " + w.w + " — " + w.vi + ". Từ này đã vào Sổ lỗi sai.";
-    l.gwI++; l.gwAtt = 0; l.gwRows = []; l.gwCur = [];
-    saveState(); render(); return;
-  }
-  l.gwFeed = "Chưa đúng — đúng " + posOk + " chữ cái đúng vị trí · " + inWord + " chữ cái có trong từ nhưng sai vị trí · còn " + (6 - l.gwAtt) + " lượt.";
-  l.gwCur = [];
-  saveState(); render();
-}
-function gwSyncCurRow(l) {
-  var row = document.getElementById("gwCurRow");
-  if (!row) return;
-  var w = l.gwWords[l.gwI]; if (!w) return;
-  var target = wordleUnits(w.w, l.gameTrack);
-  var cells = "";
-  for (var i = 0; i < Math.max(target.length, l.gwCur.length); i++) {
-    var u = l.gwCur[i];
-    cells += '<span style="display:inline-block;min-width:34px;height:44px;line-height:44px;text-align:center;font-size:22px;font-weight:700;border:2px solid #f59e0b;border-radius:8px;margin:2px;background:#fff">' + (u ? esc(u) : "&nbsp;") + '</span>';
-  }
-  row.innerHTML = cells;
-}
-function renderGuessWord(app, l, head, finish) {
-  if (!l.gwStarted) {
-    var isPool = (l.gameTrack === "tc" || l.gameTrack === "tp");
-    var cur = gameCurrentVocabSet();
-    app.innerHTML = head + '<div class="qblock"><p>' + skillIconSpan("game") + '<b>Đoán từ (kiểu Wordle, bản đẹp):</b> nhìn nghĩa tiếng Việt rồi đoán từ. Mỗi lượt đoán hiện thành hàng ô chữ đổi màu: ô xanh lá là đúng vị trí, ô vàng là có trong từ nhưng sai vị trí, ô xám là không có trong từ. Mỗi từ có tối đa 6 lượt đoán — đoán đúng sớm điểm càng cao (lượt 1: 60 điểm, lượt 6: 10 điểm). Ván có 5 từ, lấy từ đúng bộ từ bạn đang học' + (isPool ? ' (từ vựng ' + (l.gameTrack === "tc" ? "TOEIC" : "TOPIK") + ' của web).' : '.') + '</p>'
-      + '<p class="mut">Đoán sai 6 lần thì hiện đáp án và từ đó vào Sổ lỗi sai để ôn lại. Không tim, không khóa lượt, không bảng xếp hạng — hết ván chơi lại thoải mái. Cuối ván có tổng kết từ đã chắc / từ cần ôn lại.</p>'
-      + (isPool ? '<p class="mut">' + (l.gameTrack === "tc" ? "Từ vựng TOEIC của web" : "Từ vựng TOPIK của web") + ' · 5 từ · Khoảng 3 phút.</p>' : vocabSetPickerHTML(cur) + '<p class="mut" id="gwMeta"></p>')
-      + '<div class="row"><button class="btn btn-primary" id="gwStart">Bắt đầu chơi →</button></div></div>';
-    wireBack();
-    if (!isPool) { var gwUpd2 = function () { var si = +($("#gwSetSel").value || 0); var s = CONTENT.vocab[si]; var m = $("#gwMeta"); if (m) m.textContent = "Bộ: " + s.topic + " · " + (s.band || "") + " · 5 từ · Khoảng 3 phút."; }; $("#gwSetSel").onchange = gwUpd2; gwUpd2(); }
-    $("#gwStart").onclick = function () {
-      if (!isPool) { var si = +($("#gwSetSel").value || 0); l.gwSet = si; }
-      l.gwWords = gameWordleWords(l, 5);
-      l.gwI = 0; l.gwScore = 0; l.gwAtt = 0; l.gwRight = 0; l.gwStarted = true; l.gwFeed = ""; l.gwRows = []; l.gwCur = []; l.gwKeyState = {}; l.rightList = []; l.wrongList = []; l.wrongKeys = [];
-      render();
-    };
-    return;
-  }
-  if (l.gwI >= l.gwWords.length) {
-    l.finalExtraHTML = gameSummaryHTML(l.rightList, l.wrongList);
-    l.reviewWrongFn = function () { gameReviewWrongNow(l); };
-    finish(l.gwScore, l.gwScore >= 240 ? 3 : (l.gwScore >= 150 ? 2 : 1), "Đoán đúng " + l.gwRight + "/" + l.gwWords.length + " từ · Tổng " + l.gwScore + " điểm.");
-    return;
-  }
-  var w = l.gwWords[l.gwI];
-  var target = wordleUnits(w.w, l.gameTrack);
-  var rowsHtml = l.gwRows.map(function (r) {
-    return '<div>' + r.units.map(function (u, i) { return '<span style="display:inline-block;min-width:34px;height:44px;line-height:44px;text-align:center;font-size:22px;font-weight:700;border:2px solid #d1d5db;border-radius:8px;margin:2px;background:' + wordleCellBg(r.colors[i]) + '">' + esc(u) + '</span>'; }).join("") + '</div>';
-  }).join("");
-  var kbHtml = "";
-  if (l.gameTrack === "tp") {
-    var bank = [];
-    var seen = {};
-    target.forEach(function (u) { if (!seen[u]) { seen[u] = true; bank.push(u); } });
-    gameShuffle(gamePoolWords("tp")).slice(0, 12).forEach(function (c) { Array.from(c.w).forEach(function (u) { if (!seen[u] && bank.length < 14) { seen[u] = true; bank.push(u); } }); });
-    bank = gameShuffle(bank);
-    kbHtml = '<div class="row">' + bank.map(function (u) { var st = l.gwKeyState[u]; return '<button class="btn" data-gwkey="' + esc(u) + '" style="min-width:44px;min-height:48px;font-size:18px' + (st ? ';background:' + wordleCellBg(st) : '') + '">' + esc(u) + '</button>'; }).join("") + '</div><div class="row" style="margin-top:8px"><button class="btn" id="gwBksp">⌫ Xóa</button><button class="btn btn-primary" id="gwEnter">⏎ Đoán</button></div>';
-  } else {
-    var rows = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
-    kbHtml = rows.map(function (r) { return '<div class="row">' + r.split("").map(function (ch) { var st = l.gwKeyState[ch]; return '<button class="btn" data-gwkey="' + ch + '" style="min-width:36px;min-height:48px;font-size:18px' + (st ? ';background:' + wordleCellBg(st) : '') + '">' + ch.toUpperCase() + '</button>'; }).join("") + '</div>'; }).join("") + '<div class="row" style="margin-top:8px"><button class="btn" id="gwBksp">⌫ Xóa</button><button class="btn btn-primary" id="gwEnter">⏎ Đoán</button></div><p><input type="text" id="gwInp" style="width:100%;padding:10px" placeholder="Hoặc gõ bằng bàn phím máy tính rồi bấm Đoán…"></p>';
-  }
-  app.innerHTML = head + '<div class="qblock">'
-    + '<p><b>Từ ' + (l.gwI + 1) + '/' + l.gwWords.length + ' · Điểm: ' + l.gwScore + ' · Còn ' + (6 - l.gwAtt) + '/6 lượt đoán</b></p>'
-    + '<p>Nghĩa: <b>' + esc(w.vi) + '</b> · Từ này có ' + target.length + ' ' + (l.gameTrack === "tp" ? "khối chữ" : "chữ cái") + '.</p>'
-    + rowsHtml + '<div id="gwCurRow" style="margin-top:6px"></div>'
-    + (l.gwFeed ? '<p>' + esc(l.gwFeed) + '</p>' : '')
-    + kbHtml
-    + (l.gameTrack === "tp" ? "" : '<p><input type="text" id="gwInp" style="width:70%;padding:10px" placeholder="Gõ từ bạn đoán…"> <button class="btn" id="gwGuess">Đoán</button></p>')
-    + '<p class="mut">🟩 đúng vị trí · 🟨 có trong từ nhưng sai vị trí · ⬜ không có trong từ. Đoán đúng sớm điểm càng cao.</p></div>';
-  wireBack();
-  gwSyncCurRow(l);
-  window.__vocabGame = { guess: function (v) { guessWordTry(l, v); } };
-  $$("[data-gwkey]").forEach(function (b) { b.onclick = function () { l.gwCur.push(b.dataset.gwkey); gwSyncCurRow(l); }; });
-  var bk = $("#gwBksp"); if (bk) bk.onclick = function () { l.gwCur.pop(); gwSyncCurRow(l); };
-  var doGuess = function () { if (l.gwCur.length) guessWordTry(l, l.gwCur.join("")); };
-  var en = $("#gwEnter"); if (en) en.onclick = doGuess;
-  var gg = $("#gwGuess"); if (gg) gg.onclick = function () { var iv = $("#gwInp"); if (iv) l.gwCur = iv.value.trim().toLowerCase().split("").filter(function (ch) { return /[a-z]/.test(ch); }); doGuess(); };
-  var inp = $("#gwInp");
-  if (inp) {
-    inp.oninput = function () { l.gwCur = inp.value.trim().toLowerCase().split("").filter(function (ch) { return /[a-z]/.test(ch); }); gwSyncCurRow(l); };
-    inp.onkeydown = function (e) { if (e.key === "Enter") { l.gwCur = inp.value.trim().toLowerCase().split("").filter(function (ch) { return /[a-z]/.test(ch); }); doGuess(); } };
-  }
-}
 /* ---------- Ghep cap lat the (moi): lat 2 the, trung cap tu-nghia thi giu mat ngua + phat am. ---------- */
-function renderMatchPairs(app, l, head, finish) {
-  if (!l.mpStarted) {
-    var isPool = (l.gameTrack === "tc" || l.gameTrack === "tp");
-    var cur = gameCurrentVocabSet();
-    app.innerHTML = head + '<div class="qblock"><p>' + skillIconSpan("game") + '<b>Ghép cặp lật thẻ (bản đẹp):</b> 12 thẻ úp — 6 từ và 6 nghĩa tiếng Việt. Lật 2 thẻ: trúng cặp từ–nghĩa thì giữ mặt ngửa kèm phát âm từ đó; lật sai thì úp lại sau một nhịp. Không tính giờ, không trừ điểm, không khóa lượt — cứ lật tới khi hết cặp.</p>'
-      + '<p class="mut">Cặp ghép đúng ngay lần đầu thì từ đó vào hàng đợi ôn; cặp phải thử nhiều lần thì từ đó vào Sổ lỗi sai. Cuối ván có tổng kết từ đã chắc / từ cần ôn lại.</p>'
-      + (isPool ? '<p class="mut">' + (l.gameTrack === "tc" ? "Từ vựng TOEIC của web" : "Từ vựng TOPIK của web") + ' · 6 cặp · Khoảng 3 phút.</p>' : vocabSetPickerHTML(cur) + '<p class="mut" id="gwMeta"></p>')
-      + '<div class="row"><button class="btn btn-primary" id="mpStart">Bắt đầu chơi →</button></div></div>';
-    wireBack();
-    if (!isPool) { var mpUpd = function () { var si = +($("#gwSetSel").value || 0); var s = CONTENT.vocab[si]; var m = $("#gwMeta"); if (m) m.textContent = "Bộ: " + s.topic + " · " + (s.band || "") + " · 6 cặp · Khoảng 3 phút."; }; $("#gwSetSel").onchange = mpUpd; mpUpd(); }
-    $("#mpStart").onclick = function () {
-      var words;
-      if (isPool) words = gameShuffle(gamePoolWords(l.gameTrack)).filter(function (c) { return c.w && c.vi; }).slice(0, 6);
-      else { var si = +($("#gwSetSel").value || 0); l.gwSet = si; words = gameShuffle(vocabSetCards(si)).slice(0, 6); }
-      l.mpPairs = words;
-      var cards = [];
-      words.forEach(function (wd, pi) { cards.push({ pi: pi, kind: "w", text: wd.w }); cards.push({ pi: pi, kind: "vi", text: wd.vi }); });
-      l.mpCards = gameShuffle(cards);
-      l.mpFlipped = []; l.mpMatched = words.map(function () { return false; }); l.mpTries = words.map(function () { return 0; });
-      l.mpScore = 0; l.mpFirst = 0; l.rightList = []; l.wrongList = []; l.wrongKeys = []; l.mpStarted = true; l.mpLock = false;
-      render();
-    };
-    return;
-  }
-  if (l.mpMatched.every(function (m) { return m; })) {
-    l.mpPairs.forEach(function (wd, pi) {
-      if (l.mpTries[pi] <= 1) { gameWordRight(wd.w, wd.vi, l.gameTrack, true); l.rightList.push({ w: wd.w, vi: wd.vi }); }
-      else { l.wrongKeys.push(gameWordWrong("matchpairs", wd.w, wd.vi, l.gameTrack)); l.wrongList.push({ w: wd.w, vi: wd.vi }); }
-    });
-    l.finalExtraHTML = gameSummaryHTML(l.rightList, l.wrongList);
-    l.reviewWrongFn = function () { gameReviewWrongNow(l); };
-    finish(l.mpScore, l.mpFirst >= 5 ? 3 : (l.mpFirst >= 3 ? 2 : 1), "Ghép đúng cả " + l.mpPairs.length + " cặp · Đúng ngay lần đầu: " + l.mpFirst + "/" + l.mpPairs.length + " cặp.");
-    return;
-  }
-  var matchedCount = l.mpMatched.filter(function (m) { return m; }).length;
-  var grid = l.mpCards.map(function (c, ci) {
-    var isUp = l.mpMatched[c.pi] || l.mpFlipped.indexOf(ci) >= 0;
-    var style = "";
-    if (l.mpMatched[c.pi]) style = "background:#fff;border:2px solid #86efac;";
-    else if (isUp) style = "background:#fff;border:2px solid #f59e0b;";
-    else style = "background:linear-gradient(135deg, #f59e0b, #fbbf24);border:2px solid #b45309;color:#fff;";
-    var label = isUp ? esc(c.text) + (l.mpMatched[c.pi] && c.kind === "w" ? " 🔊" : "") : "?";
-    var mpFs = (c.kind === "w" && isUp) ? (c.text.length <= 8 ? '17px' : (c.text.length <= 11 ? '13px' : '12px')) : '15px';
-    return '<button class="btn" data-mp="' + ci + '" style="min-width:0;overflow-wrap:break-word;padding:10px 4px;min-height:72px;font-size:' + mpFs + ';font-weight:700;' + style + '">' + label + '</button>';
-  }).join("");
-  app.innerHTML = head + '<style>@keyframes mpPop { 0% { transform: scale(0.92); } 100% { transform: scale(1); } }</style><div class="qblock">'
-    + '<p><b>Đã ghép: ' + matchedCount + '/' + l.mpPairs.length + ' cặp · Điểm: ' + l.mpScore + '</b></p>'
-    + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;animation:mpPop 0.3s ease-out">' + grid + '</div>'
-    + '<p class="mut">Lật 2 thẻ để tìm cặp từ–nghĩa. Trúng cặp thì giữ mặt ngửa và nghe phát âm; sai thì úp lại sau một nhịp. Không tính giờ, không trừ điểm.</p></div>';
-  wireBack();
-  window.__vocabGame = window.__vocabGame || {};
-  window.__vocabGame.matchFlip = function (ci) { mpFlip(l, ci); };
-  $$("[data-mp]").forEach(function (b) { b.onclick = function () { mpFlip(l, +b.dataset.mp); }; });
-}
-function mpFlip(l, ci) {
-  if (curLesson !== l || l.mpLock) return;
-  var c = l.mpCards[ci];
-  if (!c) return;
-  if (l.mpMatched[c.pi]) { if (c.kind === "w") gameSpeakWord(c.text, l.gameTrack); return; }
-  if (l.mpFlipped.indexOf(ci) >= 0) return;
-  l.mpFlipped.push(ci);
-  if (l.mpFlipped.length === 2) {
-    var a = l.mpCards[l.mpFlipped[0]], b = l.mpCards[l.mpFlipped[1]];
-    if (a.pi === b.pi) {
-      l.mpTries[a.pi]++;
-      l.mpMatched[a.pi] = true;
-      if (l.mpTries[a.pi] === 1) l.mpFirst++;
-      l.mpScore += 10;
-      l.mpFlipped = [];
-      try { gameSpeakWord(l.mpPairs[a.pi].w, l.gameTrack); } catch (e) {}
-      saveState(); render();
-    } else {
-      l.mpTries[a.pi]++; l.mpTries[b.pi]++;
-      l.mpLock = true;
-      saveState(); render();
-      setTimeout(function () { if (curLesson !== l) return; l.mpFlipped = []; l.mpLock = false; render(); }, 900);
-    }
-  } else { saveState(); render(); }
-}
 
 /* ================= DOT TINH CHINH PARROTO 3 (03/11/2026): tu duy/giao dien/hinh anh.
    Giu nguyen mau/font/he thi giac san co cua web; hinh chi la SVG viet tay.
@@ -13060,7 +12336,6 @@ function wireZhMap(scope) {
   (scope || document).querySelectorAll("[data-zhchaptertest]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); openLesson({ type: "zhChapterTest", stage: +b.dataset.zhchaptertest }); }; });
   msWire(scope);
   (scope || document).querySelectorAll("[data-zhmock]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); openLesson({ type: "zhMock", hsk: +b.dataset.zhmock }); }; });
-  (scope || document).querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
   (scope || document).querySelectorAll("[data-zhbridge]").forEach(function (b) { b.onclick = function () {
     var all = zhSets();
     for (var i = 0; i < all.length; i++) if (!zhSetDone(all[i])) { openLesson({ type: "zhVocab", setKey: all[i].key, idx: all[i].idx }); return; }
@@ -13151,12 +12426,9 @@ function zhSkillPracticeHTML(kind) {
   return out;
 }
 function zhPracticeEntHTML() {
-  return '<h3>🎬 Giải trí — 7 game + video hoạt hình track Trung</h3><p class="mut">Khu giải trí luôn mở sẵn — bấm là chơi ngay, không cần mở thu gọn.</p>'
-    + '<p class="mut">Chơi bằng nội dung tiếng Trung: nối chữ Hán với nghĩa, giải mã pinyin, nghe chữ Hán đoán nghĩa, gõ chữ Hán, xếp câu, quiz ngữ pháp/đọc/nghe, ôn từ đến hạn. Trả lời sai trong game cũng vào Sổ lỗi sai track Trung. Kỷ lục tách riêng theo track (không trộn với track Anh), lưu trên máy này.</p><div class="row">'
-    + [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"]].map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div><div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Tây Du Ký Tập 90: Kế hoạch của bọn yêu quái (Tiếng Trung IMC)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/uKj-EGFpiWE?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu90') + "</details><details><summary><b>Doraemon: Ngôi nhà biến thành Robot (Tiếng Trung Phụ Đề)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jt4C4cQ7BeI?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('doraemon') + "</details><details><summary><b>Peppa Pig: Bữa trưa [Vietsub + Pinyin] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/DEJV45iuYx8?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('peppazh') + "</details><details><summary><b>Shin: Nhiều Ô Quá! (Hoa Ngữ Hoạt Hình)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/NBrKtkq4Z2g?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('shinzh') + "</details><details><summary><b>Tây Du Ký 1986 — tập 1 (Chữ cứng, Pinyin, Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/ATNVFYOLVPg?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu01') + "</details>" + '</div>';
+  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Tây Du Ký Tập 90: Kế hoạch của bọn yêu quái (Tiếng Trung IMC)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/uKj-EGFpiWE?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu90') + "</details><details><summary><b>Doraemon: Ngôi nhà biến thành Robot (Tiếng Trung Phụ Đề)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jt4C4cQ7BeI?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('doraemon') + "</details><details><summary><b>Peppa Pig: Bữa trưa [Vietsub + Pinyin] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/DEJV45iuYx8?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('peppazh') + "</details><details><summary><b>Shin: Nhiều Ô Quá! (Hoa Ngữ Hoạt Hình)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/NBrKtkq4Z2g?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('shinzh') + "</details><details><summary><b>Tây Du Ký 1986 — tập 1 (Chữ cứng, Pinyin, Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/ATNVFYOLVPg?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu01') + "</details>" + '</div>';
 }
 function zhPracticeEntWire(m) {
-  m.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
   m.querySelectorAll("[data-zhvideo-save]").forEach(function (b) { b.onclick = function () { var r = zhSaveVideoWords(b.dataset.zhvideoSave); toast("Đã lưu " + r.added + " từ mới vào Ôn tập" + (r.skipped ? " (" + r.skipped + " từ đã có nên không lưu thêm)" : "") + "."); render(); }; });
 }
 function viewPracticeZh(app) {
@@ -13191,7 +12463,7 @@ function viewPracticeZh(app) {
   html += '<details><summary><b>Nhập vai chặng 1–6 (' + ZH_ROLE.length + ' tình huống)</b></summary>' + zhSkillPracticeHTML("role") + '</details>';
   html += '<details><summary><b>Viết chặng 1–6 (' + ZH_WRITE.length + ' bài)</b></summary>' + zhSkillPracticeHTML("write") + '</details>';
   html += '<details><summary><b>🎓 Thi — kiểm tra cuối chặng + thi thử HSK (bản rút gọn)</b></summary>' + zhPracticeExamHTML() + '</details>';
-    html += '<section class="card" id="zhGameCardPractice"><h3>🎬 Giải trí — 7 game + video hoạt hình track Trung</h3><p class="mut">Đang tải khu giải trí…</p></section>';
+    html += '<section class="card" id="zhGameCardPractice"><h3>🎬 Video hoạt hình track Trung — xem cho vui</h3><p class="mut">Đang tải video…</p></section>';
   html += videoNewBlockHTML("zh");
   html += '<details><summary><b>HSKK — thi nói riêng</b></summary>' + zhHskkHTML() + '</details>';
   html += '<p><button class="btn" id="zhPracticeEntryBtn">Làm lại kiểm tra đầu vào HSK</button></p>';
@@ -13347,11 +12619,9 @@ function renderZhReviewSession(app, l) {
 function viewReviewZh(app) {
   var items = Object.keys(state.zhHard || {}).filter(function (k) { return !(state.zhHard[k] && state.zhHard[k].done); });
   var due = zhDueHard();
-  var dueGameN = gameDueGameItems(true).length;
-  var dueGameBtn = dueGameN ? ' <button class="btn" id="zhReviewGameBtn">📅 Chơi game Ôn từ đến hạn (' + dueGameN + ' từ)</button>' : '';
   var html = trackSwitchHTML() + '<h2>Ôn tập · Tiếng Trung</h2><p class="mut">Lịch ôn: ' + RB_SCHEDULE_TEXT + '.</p>';
   if (due.length) {
-    html += '<section class="card next-card" id="zhReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + due.length + ' mục đến hạn</h3><p class="mut">Một phiên trộn: câu sai nhiều nhất trước, thẻ từ thành câu chọn nghĩa/pinyin. Làm đúng ở đây chưa tốt nghiệp mục nếu chưa đủ 2 lần — ôn đúng thêm lần nữa ở lần đến hạn sau mới xong hẳn.</p><button class="btn btn-primary" id="zhReviewStartBtn">Bắt đầu buổi ôn</button>' + dueGameBtn + '</section>';
+    html += '<section class="card next-card" id="zhReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + due.length + ' mục đến hạn</h3><p class="mut">Một phiên trộn: câu sai nhiều nhất trước, thẻ từ thành câu chọn nghĩa/pinyin. Làm đúng ở đây chưa tốt nghiệp mục nếu chưa đủ 2 lần — ôn đúng thêm lần nữa ở lần đến hạn sau mới xong hẳn.</p><button class="btn btn-primary" id="zhReviewStartBtn">Bắt đầu buổi ôn</button></section>';
     html += '<section class="card"><h3>Đến hạn hôm nay (' + due.length + ')</h3><p class="mut">Xếp theo: sai nhiều nhất trước, rồi tới ngày đến hạn sớm nhất.</p>';
     due.forEach(function (it) {
       var h = it.h;
@@ -13406,7 +12676,6 @@ function viewReviewZh(app) {
   app.innerHTML = html;
   var rb = $("#zhReviewNextBtn"); if (rb) rb.onclick = function () { zhOpenTarget(zhSessionTarget()); };
   var sb = $("#zhReviewStartBtn"); if (sb) sb.onclick = function () { lessonStart = Date.now(); openLesson({ type: "zhReviewSession" }); };
-  var gb = $("#zhReviewGameBtn"); if (gb) gb.onclick = function () { lessonStart = Date.now(); openLesson({ type: "game", gameId: "duegame", gameTrack: "zh" }); };
   $$("[data-zhhard-review]").forEach(function (b) { b.onclick = function () {
     var h = state.zhHard[b.dataset.zhhardReview];
     if (!h) return;
@@ -15274,10 +14543,9 @@ function viewRoadmapTc(app) {
   wireTc(app);
 }
 function tcPracticeEntHTML() {
-  return '<h3>🎮 Giải trí — 3 game từ vựng + video tiếng Anh</h3><p class="mut">Chơi bằng từ vựng TOEIC của web: gõ từ rơi, đoán từ kiểu Wordle, ghép cặp lật thẻ. Sai vào Sổ lỗi sai, cuối ván có tổng kết từ đã chắc / từ cần ôn lại. Kỷ lục riêng từng game, lưu trên máy này.</p><div class="row">' + [["dropword", "🌧️", "Gõ từ rơi"], ["guessword", "❓", "Đoán từ"], ["matchpairs", "🃏", "Ghép cặp lật thẻ"]].map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div><div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Khối video này dùng chung video tiếng Anh với track IELTS — xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; "I\'m hungry!" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; "I want to see the lights!" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; "Let\'s play!" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; "We are friends!" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; "I love dogs!" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); "I have news for you." — mình có tin cho bạn đây.</p>' + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + '</details><details><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; "I love pancakes!" — mình thích bánh kếp!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; "Let\'s go camping!" — cùng đi cắm trại nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; "I can ride a bike!" — mình biết đạp xe rồi!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; "My new shoes!" — giày mới của mình!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; "I am Baymax!" — mình là Baymax!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; "Let\'s cook!" — cùng nấu ăn nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; "We are friends!" — chúng mình là bạn bè!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details></div>';
+  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Khối video này dùng chung video tiếng Anh với track IELTS — xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; "I\'m hungry!" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; "I want to see the lights!" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; "Let\'s play!" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; "We are friends!" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; "I love dogs!" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); "I have news for you." — mình có tin cho bạn đây.</p>' + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + '</details><details><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; "I love pancakes!" — mình thích bánh kếp!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; "Let\'s go camping!" — cùng đi cắm trại nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; "I can ride a bike!" — mình biết đạp xe rồi!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; "My new shoes!" — giày mới của mình!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; "I am Baymax!" — mình là Baymax!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; "Let\'s cook!" — cùng nấu ăn nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; "We are friends!" — chúng mình là bạn bè!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details></div>';
 }
 function tcPracticeEntWire(m) {
-  m.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
   videoVOAWire();
 }
 function viewPracticeTc(app) {
@@ -15300,12 +14568,11 @@ function viewPracticeTc(app) {
   html += '<section class="card"><h3>Thi thử TOEIC theo chặng (120 câu)</h3><p class="mut">Mỗi chặng một bài riêng, ở cuối chặng đó: 120 câu, 72 phút tham khảo, điểm ước lượng nội bộ 10–990 chỉ để tham khảo.</p><div class="row">' + tcStepBtnHTML("m450") + tcStepBtnHTML("m600") + tcStepBtnHTML("m750") + '</div></section>';
   if (state.tcHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOEIC chưa sửa: ' + state.tcHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
   /* DOT V32 PLATFORMER 01/11: the giai tri TC — chi 1 game Di canh nhat sao (canvas that); 3 game cu con code nhung khong con nut vao tu the. */
-    html += '<section class="card" id="tcGameCardPractice"><h3>🎮 Giải trí — 3 game từ vựng + video tiếng Anh</h3><p class="mut">Đang tải khu giải trí…</p></section>';
+    html += '<section class="card" id="tcGameCardPractice"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Đang tải video…</p></section>';
   html += videoNewBlockHTML("tc");
   app.innerHTML = html;
   wireTc(app);
   videoVOAWire();
-  app.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
 
   wireVocabSearch("tcVocabSearch", "tcVocabGroups");
   (function () { var jobs = [{ id: "tcGameCardPractice", html: tcPracticeEntHTML, wire: tcPracticeEntWire }]; if (videoNewEntHTML["tc"]) jobs.push({ id: "videoNewEnttc", html: function () { return videoNewEntHTML["tc"]; }, wire: null }); practiceEntLazy("tc", jobs); })();
@@ -15844,9 +15111,6 @@ function viewRoadmapTp(app) {
   app.innerHTML = html;
   wireTp(app);
 }
-function tpPracticeEntHTML() {
-  return '<h3>🎮 Giải trí — 3 game từ vựng</h3><p class="mut">Chơi bằng từ vựng TOPIK của web: gõ từ rơi, đoán từ, ghép cặp lật thẻ. Sai vào Sổ lỗi sai, cuối ván có tổng kết từ đã chắc / từ cần ôn lại. Kỷ lục riêng từng game, lưu trên máy này.</p><div class="row">' + [["dropword", "🌧️", "Gõ từ rơi"], ["guessword", "❓", "Đoán từ"], ["matchpairs", "🃏", "Ghép cặp lật thẻ"]].map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div>';
-}
 function tpPracticeFunHTML() {
   return '<div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p>'
     + '<details><summary><b>Running Man (DANET · 5:31)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/Es0eoMEYiro?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng trong hình do kênh cung cấp — xem cho vui, nghe tiếng Hàn thật.</p></details>'
@@ -15856,9 +15120,6 @@ function tpPracticeFunHTML() {
     + '<details><summary><b>IU — fanchant Blueming (IU-VN Subteam · 5:22)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hGc7vETpHAI?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng do fan làm, có ghi chú của nhóm dịch (không phải phụ đề chính thức) — xem cho vui, nghe tiếng Hàn thật.</p></details>'
     + '</div>';
 }
-function tpPracticeEntWire(m) {
-  m.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
-}
 function viewPracticeTp(app) {
   tpNorm();
   var n = tpNextStep();
@@ -15866,7 +15127,6 @@ function viewPracticeTp(app) {
     + '<section class="card next-card" id="tpPracticeNextCard"><p class="eyebrow">TIẾP THEO NÊN LUYỆN</p><h3>' + esc(n ? n.meta.title : "Đã xong hết các bước TOPIK hiện có 🎉") + '</h3>' + (n ? '<button class="btn btn-primary" data-tpnext="1">Tiếp theo nên luyện</button>' : '') + '</section>';
   /* DOT SOI-D18 02/11: khoi giai tri dua len ngay duoi the TIEP THEO (truoc day chon cuoi trang). */
 /* DOT V32 PLATFORMER 01/11: the giai tri TP — chi 1 game Di canh nhat sao (canvas that); 3 game cu con code nhung khong con nut vao tu the. */
-    html += '<section class="card" id="tpGameCardPractice"><h3>🎮 Giải trí — 3 game từ vựng</h3><p class="mut">Đang tải khu giải trí…</p></section>';
     html += '<section class="card" id="tpFunVideoPractice"><div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Đang tải video…</p></div></section>';
   html += videoNewBlockHTML("tp");
   html += '<section class="card"><h3>Hangul — học theo thứ tự (5 bài)</h3><div class="row">' + TP_HANGUL.map(function (h, i) { return tpStepBtnHTML("h" + i); }).join("") + '</div></section>';
@@ -15885,10 +15145,9 @@ function viewPracticeTp(app) {
   if (state.tpHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOPIK chưa sửa: ' + state.tpHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
     app.innerHTML = html;
   wireTp(app);
-  app.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
 
   wireVocabSearch("tpVocabSearch", "tpVocabGroups");
-  (function () { var jobs = [{ id: "tpGameCardPractice", html: tpPracticeEntHTML, wire: tpPracticeEntWire }, { id: "tpFunVideoPractice", html: tpPracticeFunHTML, wire: null }]; if (videoNewEntHTML["tp"]) jobs.push({ id: "videoNewEnttp", html: function () { return videoNewEntHTML["tp"]; }, wire: null }); practiceEntLazy("tp", jobs); })();
+  (function () { var jobs = [{ id: "tpFunVideoPractice", html: tpPracticeFunHTML, wire: null }]; if (videoNewEntHTML["tp"]) jobs.push({ id: "videoNewEnttp", html: function () { return videoNewEntHTML["tp"]; }, wire: null }); practiceEntLazy("tp", jobs); })();
 }
 function viewReviewTp(app) {
   tpNorm();
@@ -15924,10 +15183,5 @@ authRefresh().then(function () { authState.authLoading = false; render(); }, fun
 authWatch();
 wireTutorFloat();
 </script>
-<script src="word_adventure.js"></script>
-<script src="language_quest.js"></script>
-<script src="coop_room.js"></script>
-<script src="runner3d.js"></script>
-<script src="type_shooter.js"></script>
 </body>
 </html>
