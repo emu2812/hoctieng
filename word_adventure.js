@@ -17,7 +17,7 @@ var WA_PLAYER_X = 90;
    Chỉ đổi lớp vỏ, không đổi luật/điểm/mạng/kho từ. Ảnh phố làm nền đoạn
    chạy, chân dung nhân vật dẫn đường dùng cho mọi hộp thoại. Ảnh nào lỗi
    thì tự rơi về hình vẽ bằng code cũ, game không bao giờ vỡ. */
-var WA_IMG_TOWN = "assets/media-generation-town-mobile-scene-0-0b9a4b60-108c-41fb-85af-ebf80e551244.webp";
+var WA_IMG_TOWN = "assets/media-generation-town-guide-matched-0-4ee9a2c0-32b7-4d72-b055-b048fb5159d4.webp";
 var WA_IMG_GUIDE = "assets/media-generation-npc-guide-portrait-0-91c329a7-065e-4e04-801e-63b953c59598.webp";
 var waImgCache = {};
 function waImg(src) {
@@ -28,6 +28,111 @@ function waImg(src) {
   return img;
 }
 function waImgReady(img) { try { return !!(img && img.complete && img.naturalWidth > 0); } catch (e) { return false; } }
+/* ---------- Chuyển động thật (đợt vẽ 2D): parallax + chu trình + hạt -----
+   Lớp xa = ảnh phố (đứng yên — đúng parallax: lớp xa nhất gần như không
+   trôi); lớp giữa = bụi cây vẽ bằng code, cuộn 0.4x theo quãng đường;
+   mặt đất = cỏ/đá vẽ bằng code, cuộn 1x; mây trôi theo thời gian. Ảnh phố
+   là ảnh đơn không lặp được nên KHÔNG cuộn ảnh (cuộn sẽ lộ đường nối);
+   chuyển động đến từ các lớp vẽ bằng code + nhân vật + hạt. Hạt dùng lại
+   (pool cố định WA_PARTICLE_MAX), không cấp phát trong vòng lặp, không
+   dùng shadowBlur/filter blur. */
+function waMod(v, m) { return ((v % m) + m) % m; }
+var WA_PARTICLE_MAX = 28;
+function waParticlesInit(s) {
+  if (s.particles && s.particles.length === WA_PARTICLE_MAX) return;
+  s.particles = [];
+  for (var i = 0; i < WA_PARTICLE_MAX; i++) s.particles.push({ x: 0, y: 0, vx: 0, vy: 0, life: 0, max: 1, size: 2, kind: 0 });
+}
+function waParticleSpawn(s, x, y, kind) {
+  waParticlesInit(s);
+  for (var i = 0; i < s.particles.length; i++) {
+    var p = s.particles[i];
+    if (p.life <= 0) {
+      p.x = x; p.y = y;
+      p.vx = kind === 1 ? (Math.random() * 80 - 40) : (Math.random() * 40 - 50);
+      p.vy = kind === 1 ? (Math.random() * -80 - 20) : (Math.random() * -30 - 10);
+      p.life = p.max = kind === 1 ? 500 : 700;
+      p.size = kind === 1 ? 3 : 2;
+      p.kind = kind;
+      return;
+    }
+  }
+}
+function waParticlesStep(s, dt) {
+  waParticlesInit(s);
+  for (var i = 0; i < s.particles.length; i++) {
+    var p = s.particles[i];
+    if (p.life <= 0) continue;
+    p.life -= dt;
+    p.x += p.vx * dt / 1000;
+    p.y += p.vy * dt / 1000;
+    p.vy += 40 * dt / 1000;
+  }
+}
+function waDrawParticles(ctx, s) {
+  if (!s.particles) return;
+  for (var i = 0; i < s.particles.length; i++) {
+    var p = s.particles[i];
+    if (p.life <= 0) continue;
+    var a = Math.max(0, p.life / p.max);
+    if (p.kind === 1) {
+      ctx.fillStyle = "rgba(250,204,21," + a.toFixed(2) + ")";
+      ctx.fillRect(p.x - p.size, p.y - p.size, p.size * 2, p.size * 2);
+    } else {
+      ctx.fillStyle = "rgba(214,182,140," + (a * 0.7).toFixed(2) + ")";
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+}
+function waRunPose(dist, jumpT, slideT) {
+  if (slideT > 0) return { legSwing: 0, bob: 0, air: false };
+  if (jumpT > 0) return { legSwing: 0, bob: 0, air: true };
+  var sw = Math.sin(dist * 0.09);
+  return { legSwing: sw * 7, bob: Math.abs(sw) * 3, air: false };
+}
+function waDrawRunner(ctx, px, py, pose, slide) {
+  var y = py - pose.bob;
+  ctx.fillStyle = "#f59e0b"; ctx.fillRect(px - 10, y - 34, 20, slide ? 16 : 30);
+  ctx.fillStyle = "#fde68a"; ctx.beginPath(); ctx.arc(px, y - (slide ? 24 : 42), 11, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = "#b45309"; ctx.fillRect(px - 12, y - (slide ? 34 : 52), 24, 5);
+  ctx.fillStyle = "#92400e";
+  if (slide) { ctx.fillRect(px - 14, y - 8, 26, 6); }
+  else if (pose.air) { ctx.fillRect(px - 9, y - 10, 6, 10); ctx.fillRect(px + 3, y - 10, 6, 10); }
+  else {
+    var sw = pose.legSwing;
+    ctx.fillRect(px - 8 + Math.min(0, sw) * 0.4, y - 14, 6, 14 - Math.max(0, sw) * 0.3);
+    ctx.fillRect(px + 2 + Math.max(0, sw) * 0.4, y - 14, 6, 14 - Math.max(0, -sw) * 0.3);
+  }
+}
+function waDrawClouds(ctx, W, animT) {
+  ctx.fillStyle = "rgba(255,255,255,0.85)";
+  var bases = [50, 170, 280];
+  for (var i = 0; i < 3; i++) {
+    var cx = waMod(bases[i] + animT * 0.008 + i * 40, W + 100) - 50;
+    var cy = 24 + i * 12;
+    ctx.beginPath(); ctx.arc(cx, cy, 13, 0, Math.PI * 2); ctx.arc(cx + 13, cy + 3, 10, 0, Math.PI * 2); ctx.arc(cx - 13, cy + 4, 9, 0, Math.PI * 2); ctx.fill();
+  }
+}
+function waDrawMidBushes(ctx, W, groundY, dist) {
+  for (var i = 0; i < 5; i++) {
+    var bx = waMod(i * 173 - dist * 0.4, W + 160) - 80;
+    ctx.fillStyle = "rgba(34,100,60,0.35)";
+    ctx.beginPath(); ctx.arc(bx, groundY - 4, 16, 0, Math.PI * 2); ctx.arc(bx + 14, groundY - 2, 11, 0, Math.PI * 2); ctx.fill();
+  }
+}
+function waDrawGroundTexture(ctx, W, groundY, dist) {
+  ctx.fillStyle = "rgba(30,90,40,0.55)";
+  for (var i = 0; i < 10; i++) {
+    var gx = waMod(i * 67 - dist, W + 40) - 20;
+    var gy = groundY + 8 + (i % 4) * 12;
+    ctx.fillRect(gx, gy, 3, 7); ctx.fillRect(gx + 4, gy + 2, 3, 5);
+  }
+  ctx.fillStyle = "rgba(120,90,60,0.5)";
+  for (var j = 0; j < 6; j++) {
+    var sx = waMod(j * 113 + 30 - dist, W + 40) - 20;
+    ctx.beginPath(); ctx.arc(sx, groundY + 20 + (j % 3) * 10, 2.5, 0, Math.PI * 2); ctx.fill();
+  }
+}
 function waGuideImgHTML(size) {
   var s = size || 96;
   return '<img src="' + WA_IMG_GUIDE + '" alt="Nhân vật dẫn đường" style="width:' + s + 'px;height:' + s + 'px;object-fit:cover;border-radius:50%;border:3px solid #D97706;flex:none" onerror="this.style.display=\'none\'">';
@@ -135,7 +240,10 @@ function waNewLoop(l, setIdx) {
     loopOn: false,
     keyHandler: null,
     raf: 0,
-    introSeen: false
+    introSeen: false,
+    animT: 0,
+    dustClock: 0,
+    particles: null
   };
 }
 function waBanner(l, msg) { var b = document.getElementById("waBanner"); if (b) b.textContent = msg; }
@@ -188,11 +296,16 @@ function waRunStep(l, dt) {
   if (s.slideT > 0) s.slideT -= dtMs;
   if (s.invulnT > 0) s.invulnT -= dtMs;
   s.dist += WA_RUN_SPEED * dtMs / 1000;
+  s.animT = (s.animT || 0) + dtMs;
+  waParticlesStep(s, dtMs);
+  s.dustClock = (s.dustClock || 0) + dtMs;
+  if (s.dustClock >= 140) { s.dustClock = 0; waParticleSpawn(s, WA_PLAYER_X - 6, 186, 0); }
   for (var i = 0; i < s.gems.length; i++) {
     var g = s.gems[i]; if (g.got) continue;
     var gx = g.x - s.dist + WA_PLAYER_X;
     if (gx <= 112 && gx >= 40) {
       g.got = true; s.collected.push(g.word); s.score += 10;
+      for (var k = 0; k < 4; k++) waParticleSpawn(s, gx, 120, 1);
       waBanner(l, "💎 Thu được ngọc: " + g.word.source_text + " — " + g.word.translation_vi);
     }
   }
@@ -219,6 +332,7 @@ function waDrawRun(l) {
   var cv = document.getElementById("waCanvas"); if (!cv) return;
   var ctx = null; try { ctx = cv.getContext("2d"); } catch (e) {} if (!ctx) return;
   var W = 360, H = 240, groundY = 190;
+  var animT = s.animT || 0;
   var townImg = waImg(WA_IMG_TOWN);
   if (waImgReady(townImg)) {
     var sc = Math.max(W / townImg.naturalWidth, H / townImg.naturalHeight);
@@ -229,20 +343,17 @@ function waDrawRun(l) {
   } else {
     ctx.fillStyle = "#bfe8ff"; ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = "#fff7cc"; ctx.beginPath(); ctx.arc(310, 32, 22, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    [[50, 30], [150, 22], [240, 38]].forEach(function (c) { ctx.beginPath(); ctx.arc(c[0], c[1], 14, 0, Math.PI * 2); ctx.arc(c[0] + 14, c[1] + 4, 11, 0, Math.PI * 2); ctx.fill(); });
     ctx.fillStyle = "#8fce7e"; ctx.fillRect(0, groundY, W, H - groundY);
     ctx.fillStyle = "#6db35e"; ctx.fillRect(0, groundY, W, 6);
   }
+  waDrawClouds(ctx, W, animT);
+  waDrawMidBushes(ctx, W, groundY, s.dist);
+  waDrawGroundTexture(ctx, W, groundY, s.dist);
   var jumpY = 0;
   if (s.jumpT > 0) jumpY = Math.sin((900 - s.jumpT) / 900 * Math.PI) * 46;
   var px = WA_PLAYER_X, py = groundY - jumpY;
   var blink = (s.invulnT > 0 && Math.floor(s.invulnT / 200) % 2 === 0);
-  if (!blink) {
-    ctx.fillStyle = "#f59e0b"; ctx.fillRect(px - 10, py - 34, 20, s.slideT > 0 ? 16 : 30);
-    ctx.fillStyle = "#fde68a"; ctx.beginPath(); ctx.arc(px, py - (s.slideT > 0 ? 24 : 42), 11, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#b45309"; ctx.fillRect(px - 12, py - (s.slideT > 0 ? 34 : 52), 24, 5);
-  }
+  if (!blink) waDrawRunner(ctx, px, py, waRunPose(s.dist, s.jumpT, s.slideT), s.slideT > 0);
   s.gems.forEach(function (g, i) {
     if (g.got) return;
     var gx = g.x - s.dist + WA_PLAYER_X;
@@ -261,6 +372,9 @@ function waDrawRun(l) {
   });
   ctx.fillStyle = "#1f2937"; ctx.font = "12px sans-serif"; ctx.textAlign = "left";
   ctx.fillText("Đường: " + Math.min(100, Math.round(s.dist / WA_RUN_LENGTH * 100)) + "%", 8, 16);
+  waDrawParticles(ctx, s);
+  var veil = Math.max(0, 0.45 - animT / 900);
+  if (veil > 0) { ctx.fillStyle = "rgba(255,248,225," + veil.toFixed(2) + ")"; ctx.fillRect(0, 0, W, H); }
 }
 
 /* ---------- Mật mã nghe–đánh vần ---------- */
@@ -540,7 +654,7 @@ function renderWordAdv(app, l) {
   if (s.phase === "run") {
     if (!s.introSeen) {
       app.innerHTML = head + '<div class="game-hud"><p id="waHud"></p><p id="waBanner" class="mut">Nhân vật dẫn đường đón bạn ở đầu phố.</p></div>'
-        + '<div class="qblock"><img src="' + WA_IMG_TOWN + '" alt="Phố của Biệt đội Săn Từ" style="width:100%;max-width:480px;border-radius:20px;border:2px solid #D97706;display:block" onerror="this.style.display=\'none\'">'
+        + '<style>.wa-intro-pan{animation:waIntroPan 16s ease-in-out infinite alternate}@keyframes waIntroPan{from{transform:scale(1.08) translateX(-6px)}to{transform:scale(1.08) translateX(6px)}}</style><div class="qblock"><div style="overflow:hidden;border-radius:20px;border:2px solid #D97706;max-width:480px"><img class="wa-intro-pan" src="' + WA_IMG_TOWN + '" alt="Phố của Biệt đội Săn Từ" style="width:100%;display:block" onerror="this.style.display=\'none\'"></div>'
         + '<div class="row" style="margin-top:10px;align-items:flex-start">' + waGuideImgHTML(96)
         + '<div style="flex:1;background:#FFF8E1;border:2px solid #D97706;border-radius:16px;padding:10px 12px"><p style="margin:0 0 6px"><b>Nhân vật dẫn đường:</b></p><p style="margin:0">“Chào bạn! Mình là người dẫn đường của Biệt đội Săn Từ. Phố này có 3 viên ngọc từ đang chờ bạn — chạy nhảy né bẫy, thu đủ ngọc rồi giải mật mã và đánh bại Quái Đá nhé!”</p></div></div>'
         + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="waIntroGo" style="flex:1;padding:14px;font-size:18px">🏃 Bắt đầu chạy!</button></div>'

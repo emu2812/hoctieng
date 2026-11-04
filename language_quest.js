@@ -44,6 +44,79 @@ function lqImg(src) {
   return img;
 }
 function lqImgReady(img) { try { return !!(img && img.complete && img.naturalWidth > 0); } catch (e) { return false; } }
+/* ---------- Chuyển động thật (đợt vẽ 2D): chu trình đi + hạt + nhấp nháy --
+   Bản đồ đảo là bảng cố định (điểm bấm phải khớp vị trí vẽ) nên ảnh bản đồ
+   KHÔNG dịch chuyển (dịch sẽ làm điểm bấm lệch khỏi tòa nhà vẽ trên ảnh);
+   chuyển động đến từ: mây trôi trên bản đồ, vòng nhấp nháy quanh điểm bấm
+   gần nhất, chu trình chân đi + nhún thở của nhân vật, hạt bụi bước chân.
+   Hạt dùng lại (pool cố định), không cấp phát trong vòng lặp, không dùng
+   shadowBlur/filter blur. */
+function lqMod(v, m) { return ((v % m) + m) % m; }
+var LQ_PARTICLE_MAX = 20;
+function lqParticlesInit(s) {
+  if (s.particles && s.particles.length === LQ_PARTICLE_MAX) return;
+  s.particles = [];
+  for (var i = 0; i < LQ_PARTICLE_MAX; i++) s.particles.push({ x: 0, y: 0, vx: 0, vy: 0, life: 0, max: 1, size: 2 });
+}
+function lqParticleSpawn(s, x, y, kind) {
+  lqParticlesInit(s);
+  for (var i = 0; i < s.particles.length; i++) {
+    var p = s.particles[i];
+    if (p.life <= 0) {
+      p.x = x; p.y = y;
+      p.vx = Math.random() * 40 - 50;
+      p.vy = Math.random() * -30 - 10;
+      p.life = p.max = 700;
+      p.size = 2;
+      return;
+    }
+  }
+}
+function lqParticlesStep(s, dt) {
+  lqParticlesInit(s);
+  for (var i = 0; i < s.particles.length; i++) {
+    var p = s.particles[i];
+    if (p.life <= 0) continue;
+    p.life -= dt;
+    p.x += p.vx * dt / 1000;
+    p.y += p.vy * dt / 1000;
+    p.vy += 40 * dt / 1000;
+  }
+}
+function lqDrawParticles(ctx, s) {
+  if (!s.particles) return;
+  for (var i = 0; i < s.particles.length; i++) {
+    var p = s.particles[i];
+    if (p.life <= 0) continue;
+    var a = Math.max(0, p.life / p.max);
+    ctx.fillStyle = "rgba(214,182,140," + (a * 0.7).toFixed(2) + ")";
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+  }
+}
+function lqCharPose(moving, animT) {
+  if (moving) { var sw = Math.sin(animT * 0.02); return { legSwing: sw * 6, bob: Math.abs(sw) * 2 }; }
+  return { legSwing: 0, bob: Math.sin(animT * 0.002) * 1.5 };
+}
+function lqDrawChar(ctx, px, py, pose) {
+  var y = py - pose.bob;
+  ctx.fillStyle = "#f59e0b"; ctx.fillRect(px - 10, y - 28, 20, 28);
+  ctx.fillStyle = "#fde68a"; ctx.beginPath(); ctx.arc(px, y - 36, 11, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = "#b45309"; ctx.fillRect(px - 12, y - 46, 24, 5);
+  ctx.fillStyle = "#92400e";
+  var sw = pose.legSwing;
+  ctx.fillRect(px - 8 + Math.min(0, sw) * 0.4, y - 14, 6, 14 - Math.max(0, sw) * 0.3);
+  ctx.fillRect(px + 2 + Math.max(0, sw) * 0.4, y - 14, 6, 14 - Math.max(0, -sw) * 0.3);
+}
+function lqPulseR(animT) { return 30 + Math.sin(animT * 0.005) * 4; }
+function lqDrawClouds(ctx, W, animT) {
+  ctx.fillStyle = "rgba(255,255,255,0.35)";
+  var bases = [80, 300, 500];
+  for (var i = 0; i < 3; i++) {
+    var cx = lqMod(bases[i] + animT * 0.005 + i * 60, W + 120) - 60;
+    var cy = 30 + i * 18;
+    ctx.beginPath(); ctx.arc(cx, cy, 20, 0, Math.PI * 2); ctx.arc(cx + 20, cy + 5, 15, 0, Math.PI * 2); ctx.arc(cx - 20, cy + 6, 13, 0, Math.PI * 2); ctx.fill();
+  }
+}
 function lqGuideImgHTML(size) {
   var s = size || 96;
   return '<img src="' + LQ_IMG_GUIDE + '" alt="Nhân vật dẫn đường" style="width:' + s + 'px;height:' + s + 'px;object-fit:cover;border-radius:50%;border:3px solid #D97706;flex:none" onerror="this.style.display=\'none\'">';
@@ -140,6 +213,7 @@ function lqNewChapter(l) {
     concChoice: -1, concEv: [], concMsg: "",
     score: 0, wrongCount: 0, rightList: [], wrongList: [], wrongKeys: [],
     loopOn: false, raf: 0, keyHandler: null, keyUpHandler: null,
+    animT: 0, dustClock: 0, particles: null, moving: false,
     finalScore: 0, finalStars: 0
   };
 }
@@ -207,6 +281,7 @@ function lqStep(l, dt) {
   var s = l.lq; if (!s || s.phase !== "city") return;
   var dx = 0, dy = 0;
   if (s.keys.left) dx -= 1; if (s.keys.right) dx += 1; if (s.keys.up) dy -= 1; if (s.keys.down) dy += 1;
+  var movingNow = !!(dx || dy || (s.tx >= 0 && s.ty >= 0));
   if (dx || dy) {
     s.tx = -1; s.ty = -1;
     var len = Math.sqrt(dx * dx + dy * dy);
@@ -220,6 +295,13 @@ function lqStep(l, dt) {
   }
   s.px = Math.max(16, Math.min(LQ_W - 16, s.px));
   s.py = Math.max(16, Math.min(LQ_H - 16, s.py));
+  s.moving = movingNow;
+  s.animT = (s.animT || 0) + dt;
+  lqParticlesStep(s, dt);
+  if (movingNow) {
+    s.dustClock = (s.dustClock || 0) + dt;
+    if (s.dustClock >= 160) { s.dustClock = 0; lqParticleSpawn(s, s.px - 4, s.py - 2, 0); }
+  }
 }
 function lqUpdateCityUI(l) {
   var s = l.lq; if (!s || s.phase !== "city") return;
@@ -249,6 +331,7 @@ function lqDrawCity(l) {
     var dw = mapImg.naturalWidth * sc, dh = mapImg.naturalHeight * sc;
     ctx.drawImage(mapImg, (W - dw) / 2, (H - dh) / 2, dw, dh);
     ctx.fillStyle = "rgba(255,251,235,0.18)"; ctx.fillRect(0, 0, W, H);
+    lqDrawClouds(ctx, W, s.animT || 0);
     function plate(x, y, label) {
       ctx.font = "bold 13px sans-serif"; ctx.textAlign = "center";
       var tw = ctx.measureText(label).width + 20;
@@ -270,12 +353,19 @@ function lqDrawCity(l) {
     if (lqNear(l, LQ_NPCS.librarian.x, LQ_NPCS.librarian.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.textAlign = "center"; ctx.fillText("!", LQ_NPCS.librarian.x, LQ_NPCS.librarian.y - 34); }
     if (lqNear(l, LQ_NPCS.merchant.x, LQ_NPCS.merchant.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.textAlign = "center"; ctx.fillText("!", LQ_NPCS.merchant.x, LQ_NPCS.merchant.y - 34); }
     if (!s.found[2] && lqNear(l, LQ_CHEST.x, LQ_CHEST.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.textAlign = "center"; ctx.fillText("!", LQ_CHEST.x, LQ_CHEST.y - 34); }
-    ctx.fillStyle = "#f59e0b"; ctx.fillRect(s.px - 10, s.py - 28, 20, 28);
-    ctx.fillStyle = "#fde68a"; ctx.beginPath(); ctx.arc(s.px, s.py - 36, 11, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#b45309"; ctx.fillRect(s.px - 12, s.py - 46, 24, 5);
+    var pr = lqPulseR(s.animT || 0);
+    ctx.strokeStyle = "rgba(245,158,11,0.8)"; ctx.lineWidth = 3;
+    if (lqNear(l, LQ_NPCS.librarian.x, LQ_NPCS.librarian.y)) { ctx.beginPath(); ctx.arc(LQ_NPCS.librarian.x, LQ_NPCS.librarian.y, pr, 0, Math.PI * 2); ctx.stroke(); }
+    if (lqNear(l, LQ_NPCS.merchant.x, LQ_NPCS.merchant.y)) { ctx.beginPath(); ctx.arc(LQ_NPCS.merchant.x, LQ_NPCS.merchant.y, pr, 0, Math.PI * 2); ctx.stroke(); }
+    if (!s.found[2] && lqNear(l, LQ_CHEST.x, LQ_CHEST.y)) { ctx.beginPath(); ctx.arc(LQ_CHEST.x, LQ_CHEST.y, pr, 0, Math.PI * 2); ctx.stroke(); }
+    lqDrawChar(ctx, s.px, s.py, lqCharPose(!!s.moving, s.animT || 0));
+    lqDrawParticles(ctx, s);
+    var veil = Math.max(0, 0.45 - (s.animT || 0) / 900);
+    if (veil > 0) { ctx.fillStyle = "rgba(255,248,225," + veil.toFixed(2) + ")"; ctx.fillRect(0, 0, W, H); }
     return;
   }
   ctx.fillStyle = "#dcfce7"; ctx.fillRect(0, 0, W, H);
+  lqDrawClouds(ctx, W, s.animT || 0);
   ctx.fillStyle = "#fef9c3"; ctx.beginPath(); ctx.arc(W - 40, 210, 90, 0, Math.PI * 2); ctx.fill();
   ctx.fillStyle = "#fef3c7"; ctx.fillRect(190, 180, 260, 90);
   ctx.fillStyle = "#1f2937"; ctx.font = "bold 13px sans-serif"; ctx.textAlign = "center";
@@ -296,7 +386,7 @@ function lqDrawCity(l) {
     ctx.fillText("●", n.x, n.y + 5);
     ctx.fillStyle = "#1f2937"; ctx.font = "12px sans-serif";
     ctx.fillText(n.name, n.x, n.y + 32);
-    if (lqNear(l, n.x, n.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.fillText("!", n.x, n.y - 24); }
+    if (lqNear(l, n.x, n.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.fillText("!", n.x, n.y - 24); ctx.strokeStyle = "rgba(245,158,11,0.8)"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(n.x, n.y, lqPulseR(l.lq.animT || 0) - 10, 0, Math.PI * 2); ctx.stroke(); }
   }
   npc(LQ_NPCS.librarian); npc(LQ_NPCS.merchant);
   if (!s.found[2]) {
@@ -304,11 +394,12 @@ function lqDrawCity(l) {
     ctx.fillStyle = "#f59e0b"; ctx.fillRect(LQ_CHEST.x - 14, LQ_CHEST.y - 12, 28, 6);
     ctx.fillStyle = "#1f2937"; ctx.font = "12px sans-serif"; ctx.textAlign = "center";
     ctx.fillText("Rương", LQ_CHEST.x, LQ_CHEST.y + 28);
-    if (lqNear(l, LQ_CHEST.x, LQ_CHEST.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.fillText("!", LQ_CHEST.x, LQ_CHEST.y - 24); }
+    if (lqNear(l, LQ_CHEST.x, LQ_CHEST.y)) { ctx.fillStyle = "#f59e0b"; ctx.font = "bold 20px sans-serif"; ctx.fillText("!", LQ_CHEST.x, LQ_CHEST.y - 24); ctx.strokeStyle = "rgba(245,158,11,0.8)"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(LQ_CHEST.x, LQ_CHEST.y, lqPulseR(l.lq.animT || 0) - 10, 0, Math.PI * 2); ctx.stroke(); }
   }
-  ctx.fillStyle = "#f59e0b"; ctx.fillRect(s.px - 10, s.py - 28, 20, 28);
-  ctx.fillStyle = "#fde68a"; ctx.beginPath(); ctx.arc(s.px, s.py - 36, 11, 0, Math.PI * 2); ctx.fill();
-  ctx.fillStyle = "#b45309"; ctx.fillRect(s.px - 12, s.py - 46, 24, 5);
+  lqDrawChar(ctx, s.px, s.py, lqCharPose(!!s.moving, s.animT || 0));
+  lqDrawParticles(ctx, s);
+  var veil2 = Math.max(0, 0.45 - (s.animT || 0) / 900);
+  if (veil2 > 0) { ctx.fillStyle = "rgba(255,248,225," + veil2.toFixed(2) + ")"; ctx.fillRect(0, 0, W, H); }
 }
 
 /* ---------- Màn hình ---------- */
