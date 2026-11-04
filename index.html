@@ -2281,8 +2281,8 @@ function enPracticeEntHTML() {
   var gameDefs2 = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["dropword", "🌧️", "Gõ từ rơi"], ["guessword", "❓", "Đoán từ"], ["matchpairs", "🃏", "Ghép cặp lật thẻ"]];
   return '<h3>🎬 Giải trí — 10 game + video hoạt hình</h3><p class="mut">Khu giải trí luôn mở sẵn — bấm là chơi ngay, không cần mở thu gọn. 3 game từ vựng mới: gõ từ rơi, đoán từ kiểu Wordle và ghép cặp lật thẻ — chơi bằng đúng bộ từ bạn đang học, sai vào Sổ lỗi sai, cuối ván có tổng kết.</p>'
     + '<p><button class="btn" id="u7PlayNowPractice">🎮 Chơi thử ngay</button></p>'
-    + '<div class="qblock" style="border:2px solid #f59e0b"><h3>🏝️ MỚI — Biệt đội Săn Từ: Vòng 1</h3><p class="mut">Phiêu lưu 60–90 giây: chọn đảo, chạy nhảy né bẫy bằng một ngón tay, thu 3 ngọc từ, giải mật mã nghe–đánh vần rồi vượt boss 3 giai đoạn. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="waStartBtn">🏝️ Chơi Vòng 1 — Biệt đội Săn Từ</button></p></div>'
-    + '<div class="qblock" style="border:2px solid #0ea5e9"><h3>🏙️ MỚI — Thành phố Ngôn Ngữ: Chương 1</h3><p class="mut">Phiêu lưu PC: đi bộ quanh thành phố bằng WASD/chuột, nói chuyện với 2 người dân, tìm 3 trang từ điển, nối manh mối trên bảng điều tra rồi trình bày kết luận. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="lqStartBtn">🏙️ Chơi Chương 1 — Thành phố Ngôn Ngữ</button></p></div>'
+    + '<div class="qblock" style="border:2px solid #f59e0b"><h3>🏝️ MỚI — Biệt đội Săn Từ: Vòng 1</h3><p class="mut">Phiêu lưu 60–90 giây: chọn đảo, chạy nhảy né bẫy bằng một ngón tay, thu 3 ngọc từ, giải mật mã nghe–đánh vần rồi vượt boss 3 giai đoạn. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="waStartBtn">🏝️ Chơi Vòng 1 — Biệt đội Săn Từ' + coopPlayedLabel("wordadv") + '</button></p></div>'
+    + '<div class="qblock" style="border:2px solid #0ea5e9"><h3>🏙️ MỚI — Thành phố Ngôn Ngữ: Chương 1</h3><p class="mut">Phiêu lưu PC: đi bộ quanh thành phố bằng WASD/chuột, nói chuyện với 2 người dân, tìm 3 trang từ điển, nối manh mối trên bảng điều tra rồi trình bày kết luận. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="lqStartBtn">🏙️ Chơi Chương 1 — Thành phố Ngôn Ngữ' + coopPlayedLabel("langquest") + '</button></p></div>' + '<div class="qblock" style="border:2px solid #059669"><h3>👥 MỚI — Phòng CO-OP: Cánh cổng tri thức (theo lượt)</h3><p class="mut">Chơi cùng 2–4 người thật, theo lượt: tạo phòng lấy mã, mỗi người nhận manh mối riêng, chia sẻ cho cả đội bằng tin nhắn mẫu, cùng mở cổng và chia đều thưởng. Cần đăng nhập để đồng bộ với bạn chơi khác; khách chỉ chơi đơn được. Không có người chơi giả, không chat tự do.</p><p><button class="btn btn-primary" id="coopStartBtn">👥 Vào phòng CO-OP' + coopPlayedLabel("coop") + '</button></p></div>'
     + '<div class="row">' + gameDefs2.map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div>' + '<div class="qblock"><h3>🌐 Game bên ngoài — chơi trên trang khác</h3><p class="mut">4 game dưới đây KHÔNG phải game của web mình — bấm vào sẽ mở trang khác trong tab mới, không tính điểm vào web mình. Cả 4 game đều chỉ có tiếng Anh nên mỗi game có hướng dẫn tiếng Việt và nghĩa gợi ý do web mình tự soạn. Chơi miễn phí, không cần đăng nhập.</p>'
     + '<p><b>🔗 <a href="https://learnenglishkids.britishcouncil.org/fun-games/games/wordshake" target="_blank" rel="noopener">Wordshake (British Council)</a> — game bên ngoài</b><br><span class="mut">Trong 3 phút, bấm các chữ cái kề nhau trên lưới 4×4 để tạo thành từ tiếng Anh. Gợi ý: cứ từ nào bạn biết nghĩa thì tạo từ đó — ví dụ từ chỉ quả: PEAR là quả lê. Game không có hình minh họa nên hợp hơn với bạn đã biết một ít từ.</span></p>'
     + '<p><b>🔗 <a href="https://www.gamestolearnenglish.com/hangman/" target="_blank" rel="noopener">Hangman chủ đề Food, mức Easy (Games to Learn English)</a> — game bên ngoài</b><br><span class="mut">Vào game chọn mức Easy và chủ đề Food, rồi đoán từng chữ cái để tìm từ về đồ ăn — ví dụ TOMATOES là cà chua. Dưới khung game chỉ có một banner quảng cáo nhỏ, không che màn hình; trang có liên kết ủng hộ tự nguyện, không bắt trả tiền. Đoán đúng hết thì có hình gợi ý hiện ra.</span></p>'
@@ -2294,6 +2294,7 @@ function enPracticeEntWire(m) {
   var pn = m.querySelector("#u7PlayNowPractice"); if (pn) pn.onclick = function () { openLesson({ type: "u7trial" }); };
   var wa = m.querySelector("#waStartBtn"); if (wa) wa.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "wordadv" }); };
   var lq = m.querySelector("#lqStartBtn"); if (lq) lq.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "langquest" }); };
+  var cpb = m.querySelector("#coopStartBtn"); if (cpb) cpb.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "coop" }); };
   videoVOAWire();
 }
 function viewPractice(app) {
@@ -3893,6 +3894,15 @@ function gameBestAll() { try { var all = JSON.parse(localStorage.getItem("ielts_
 function gameBestKey(id, track) { var t = track || state.track; if (t === "zh") return id + ":zh"; if (t === "tc") return id + ":tc"; if (t === "tp") return id + ":tp"; return id; }
 function gameBest(id, track) { var all = gameBestAll(); return all[gameBestKey(id, track)] || null; }
 function gameSaveBest(id, score, stars, track) { var all = gameBestAll(); var k = gameBestKey(id, track); var prev = all[k]; if (!prev || score > prev.score) { all[k] = { score: score, stars: stars, at: Date.now() }; try { localStorage.setItem("ielts_game_best_v1", JSON.stringify(all)); } catch (e) {} } return all[k]; }
+/* Nhãn "đã chơi / chưa chơi" cho nút game mới, cùng kiểu với game cũ
+   (game cũ: " · 🏆 X điểm" hoặc " · chưa chơi"). Đặt ở đây (cùng khối
+   helper game) để tab Luyện tập vẽ được nhãn ngay cả khi file game riêng
+   chưa tải xong — nút game mới gọi helper này trong enPracticeEntHTML. */
+function coopPlayedLabel(id) {
+  var b = null;
+  try { b = gameBest(id, "en"); } catch (e) { b = null; }
+  return b ? " · 🏆 " + b.score + " điểm" : " · chưa chơi";
+}
 function gameShuffle(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = a[i]; a[i] = a[j]; a[j] = tmp; } return a; }
 function gameCurrentBand() {
   if (state.entryPlaced && state.entryPlaced.band) return state.entryPlaced.band;
@@ -4567,6 +4577,7 @@ function renderLesson(app) {
   else if (l.type === "game") renderArcadeLesson(app, l);
   else if (l.type === "wordadv") renderWordAdv(app, l);
   else if (l.type === "langquest") renderLangQuest(app, l);
+  else if (l.type === "coop") renderCoop(app, l);
   else if (l.type === "skillTyping") renderTypingLesson(app, l);
   else if (l.type === "weakSession") renderWeakSession(app, l);
   else if (l.type === "reviewSession") renderReviewSession(app, l);
@@ -15516,5 +15527,6 @@ wireTutorFloat();
 </script>
 <script src="word_adventure.js"></script>
 <script src="language_quest.js"></script>
+<script src="coop_room.js"></script>
 </body>
 </html>
