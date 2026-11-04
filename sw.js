@@ -10,7 +10,7 @@
    install nạp lại toàn bộ file tĩnh, skipWaiting + claim để bản mới có hiệu
    lực ngay, không để người học kẹt bản cũ. Đợt đẩy nào đổi file tĩnh thì
    nhớ đổi CACHE_VERSION trong file này. */
-var CACHE_VERSION = "ielts-cache-v63";
+var CACHE_VERSION = "ielts-cache-v65";
 var CACHE_ASSETS = ["./", "index.html", "content.js", "content-new.js", "config.js", "word_adventure.js", "language_quest.js", "coop_room.js"];
 
 self.addEventListener("install", function (event) {

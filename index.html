@@ -130,6 +130,20 @@ body.has-bottombar #toast{bottom:88px}
 body.has-bottombar #btnBack{display:none}
 #bottombar{flex-wrap:wrap}
 #bottombar .btn{min-height:44px}
+/* ---- TAB GIẢI TRÍ RIÊNG + THẾ GIỚI GAME TOÀN MÀN HÌNH (04/11/2026) ----
+   Lưới thẻ game dùng .card sẵn có + tông hổ phách của web; chế độ thế giới
+   ẩn chrome site (header, tabbar, banner, nút gia sư, thanh dưới) để game
+   chiếm toàn màn hình, chỉ còn nút Thoát game. */
+.ent-grid{display:grid;gap:16px;margin:16px 0}
+@media(min-width:700px){.ent-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ent-card{min-width:0}
+.ent-card .ent-img{width:100%;height:auto;border-radius:12px;display:block}
+.ent-card .ent-label{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:700;background:#fff}
+.ent-card .ent-play{width:100%;min-height:48px;font-size:18px}
+#gameWorldExit{position:fixed;top:12px;right:12px;z-index:99;display:none;min-height:44px;background:var(--amber);border-color:var(--amber);font-weight:700}
+body.game-world header,body.game-world #tabBar,body.game-world #previewBanner,body.game-world #tutorFloatBtn,body.game-world #tutorFloatPanel,body.game-world #bottombar{display:none !important}
+body.game-world .wrap{max-width:none;margin:0;padding:0}
+body.game-world #gameWorldExit{display:block}
 .vocab-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px 20px;grid-template-areas:"main pron" "actions pron" "foot foot" "lib lib";align-items:start}
 .vocab-main{grid-area:main;min-width:0}
 .vocab-pron{grid-area:pron;min-width:0}
@@ -260,6 +274,7 @@ body.in-lesson .lessonframe{top:0}
 <button class="tab" data-tab="review">Ôn tập</button>
 <button class="tab" data-tab="native">Giao tiếp bản địa</button>
 <button class="tab" data-tab="mine">Của tôi</button>
+<button class="tab" data-tab="entertainment">Giải trí</button>
 </nav>
 <main id="app"><div class="card"><p>Đang tải bài học…</p></div></main>
 <div id="toast"></div>
@@ -275,6 +290,7 @@ body.in-lesson .lessonframe{top:0}
 <p class="mut" id="tutorFloatStatus"></p>
 </div>
 <div id="bottombar" style="display:none"><button class="btn" id="bbBack">← Quay lại</button></div>
+<button id="gameWorldExit" class="btn" style="display:none">✕ Thoát game</button>
 <script src="config.js"></script>
 <script src="content.js"></script>
 <script src="content-new.js"></script>
@@ -903,6 +919,24 @@ function guideLine(id, text) {
   } catch (e) { return ""; }
 }
 function backFromLesson() { examTimerStop(); examPartTimerStop(); try { mirrorStop(); } catch (e) {} curLesson = null; go(returnTab || "home"); }
+/* ---------- THẾ GIỚI GAME TOÀN MÀN HÌNH (04/11/2026) ----------
+   Game là một thế giới riêng, không liên quan tới web bên ngoài: khi mở
+   game (wordadv/langquest/coop), chrome site bị ẩn bằng class game-world
+   trên body (CSS lo việc ẩn/hiện, kể cả thanh dưới vốn có inline style),
+   chỉ còn nút Thoát game; bấm thoát thì về đúng tab đã mở game (returnTab).
+   Đồng bộ ở render() nên mọi đường thoát (nút thoát, nút Quay lại của
+   game, hết ván về tab) đều khôi phục lại giao diện site. */
+var GAME_WORLD_TYPES = ["wordadv", "langquest", "coop"];
+function isGameWorldLesson(l) { return !!(l && GAME_WORLD_TYPES.indexOf(l.type) >= 0); }
+function enterGameWorld() {
+  document.body.classList.add("game-world");
+  var x = $("#gameWorldExit");
+  if (x) { x.style.display = "block"; if (!x.dataset.wired) { x.dataset.wired = "1"; x.onclick = function () { exitGameWorld(); backFromLesson(); }; } }
+}
+function exitGameWorld() {
+  document.body.classList.remove("game-world");
+  var x = $("#gameWorldExit"); if (x) x.style.display = "none";
+}
 function nextStepButtonHTML() { return '<button class="btn btn-primary" id="btnNextStep">Tiếp tục sang bài tiếp →</button>'; }
 function wireNextStep() { updateBottomBar(); }
 function elapsedText() { var s = Math.max(0, Math.round((Date.now() - lessonStart) / 1000)); return s < 60 ? s + " giây" : Math.floor(s / 60) + " phút " + (s % 60) + " giây"; }
@@ -1498,6 +1532,7 @@ function render() {
   }
   document.body.classList.remove("landing-on");
   $$("#tabBar .tab").forEach(function (b) { b.classList.toggle("on", b.dataset.tab === curTab); });
+  if (isGameWorldLesson(curLesson)) enterGameWorld(); else exitGameWorld();
   var app = $("#app");
   if (curLesson) { renderLesson(app); applyLessonLayout(app); u7PositionUpdate(); updateBottomBar(); return; }
   app.classList.remove("lesson-view");
@@ -1507,6 +1542,7 @@ function render() {
   else if (curTab === "practice") { if (state.track === "zh") viewPracticeZh(app); else if (state.track === "tc") viewPracticeTc(app); else if (state.track === "tp") viewPracticeTp(app); else viewPractice(app); }
   else if (curTab === "review") { if (state.track === "zh") viewReviewZh(app); else if (state.track === "tc") viewReviewTc(app); else if (state.track === "tp") viewReviewTp(app); else viewReview(app); }
   else if (curTab === "native") viewNative(app);
+  else if (curTab === "entertainment") viewEntertainment(app);
   else viewMine(app);
   u7PositionUpdate(); updateBottomBar(); wireTrackSwitch(); wireTypeEntryRow();
 }
@@ -1775,7 +1811,7 @@ function zhPositionText() {
     if (p) return base + " · Chặng " + p.stage + " · " + p.done + "/" + p.total + " bước học đã xong" + phSeg;
     return base;
   }
-  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi" };
+  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", entertainment: "Giải trí" };
   var cur = zhPositionCurrent();
   if (cur) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + "Chặng " + cur.stage + " · " + cur.done + "/" + cur.total + " bước học đã xong" + phSeg;
   return "Vị trí: " + (tabMap[curTab] || curTab);
@@ -1863,7 +1899,7 @@ function u7PositionText() {
     if (hp && hp.band) return "Vị trí: " + label + " · " + enChapterLabel(hp.band) + " · " + hp.done + "/" + hp.total + " bước đã xong";
     return "Vị trí: " + label;
   }
-  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi" };
+  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", entertainment: "Giải trí" };
   var hp2 = null; try { hp2 = homePathInfo(); } catch (e) {}
   if (hp2 && hp2.band) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + enChapterLabel(hp2.band) + " · " + hp2.done + "/" + hp2.total + " bước đã xong";
   return "Vị trí: " + (tabMap[curTab] || curTab);
@@ -2328,25 +2364,68 @@ function viewRoadmap(app) {
 function skillDoneMark(key) { return (state.skillDone && state.skillDone[key]) ? " ✓" : ""; }
 function enPracticeEntHTML() {
   var gameDefs2 = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["dropword", "🌧️", "Gõ từ rơi"], ["guessword", "❓", "Đoán từ"], ["matchpairs", "🃏", "Ghép cặp lật thẻ"]];
-  return '<h3>🎬 Giải trí — 10 game + video hoạt hình</h3><p class="mut">Khu giải trí luôn mở sẵn — bấm là chơi ngay, không cần mở thu gọn. 3 game từ vựng mới: gõ từ rơi, đoán từ kiểu Wordle và ghép cặp lật thẻ — chơi bằng đúng bộ từ bạn đang học, sai vào Sổ lỗi sai, cuối ván có tổng kết.</p>'
-    + '<p><button class="btn" id="u7PlayNowPractice">🎮 Chơi thử ngay</button></p>'
-    + (function () { var ghOrder = [["wordadv", "Biệt đội Săn Từ — Vòng 1"], ["langquest", "Thành phố Ngôn Ngữ — Chương 1"], ["coop", "Phòng CO-OP — Cánh cổng tri thức"]]; var ghNext = null; for (var gi = 0; gi < ghOrder.length; gi++) { if (!gameBest(ghOrder[gi][0])) { ghNext = ghOrder[gi]; break; } } var ghAll = !ghNext; if (ghAll) ghNext = ghOrder[0]; return '<p><button class="btn btn-primary" id="gameHubPlayNow" data-ghtype="' + ghNext[0] + '">▶ ' + (ghAll ? 'Chơi lại: ' : 'Chơi ngay: ') + ghNext[1] + '</button></p>'; })()
-    + '<div class="game-tile"><h3>🏝️ MỚI — Biệt đội Săn Từ: Vòng 1</h3><p class="mut">Phiêu lưu 60–90 giây: chọn đảo, chạy nhảy né bẫy bằng một ngón tay, thu 3 ngọc từ, giải mật mã nghe–đánh vần rồi vượt boss 3 giai đoạn. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="waStartBtn">🏝️ Chơi Vòng 1 — Biệt đội Săn Từ' + coopPlayedLabel("wordadv") + '</button></p></div>'
-    + '<div class="game-tile lq"><h3>🏙️ MỚI — Thành phố Ngôn Ngữ: Chương 1</h3><p class="mut">Phiêu lưu PC: đi bộ quanh thành phố bằng WASD/chuột, nói chuyện với 2 người dân, tìm 3 trang từ điển, nối manh mối trên bảng điều tra rồi trình bày kết luận. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="lqStartBtn">🏙️ Chơi Chương 1 — Thành phố Ngôn Ngữ' + coopPlayedLabel("langquest") + '</button></p></div>' + '<div class="game-tile coop"><h3>👥 MỚI — Phòng CO-OP: Cánh cổng tri thức (theo lượt)</h3><p class="mut">Chơi cùng 2–4 người thật, theo lượt: tạo phòng lấy mã, mỗi người nhận manh mối riêng, chia sẻ cho cả đội bằng tin nhắn mẫu, cùng mở cổng và chia đều thưởng. Cần đăng nhập để đồng bộ với bạn chơi khác; khách chỉ chơi đơn được. Không có người chơi giả, không chat tự do.</p><p><button class="btn btn-primary" id="coopStartBtn">👥 Vào phòng CO-OP' + coopPlayedLabel("coop") + '</button></p></div>'
-    + '<div class="row">' + gameDefs2.map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div>' + '<div class="qblock"><h3>🌐 Game bên ngoài — chơi trên trang khác</h3><p class="mut">4 game dưới đây KHÔNG phải game của web mình — bấm vào sẽ mở trang khác trong tab mới, không tính điểm vào web mình. Cả 4 game đều chỉ có tiếng Anh nên mỗi game có hướng dẫn tiếng Việt và nghĩa gợi ý do web mình tự soạn. Chơi miễn phí, không cần đăng nhập.</p>'
-    + '<p><b>🔗 <a href="https://learnenglishkids.britishcouncil.org/fun-games/games/wordshake" target="_blank" rel="noopener">Wordshake (British Council)</a> — game bên ngoài</b><br><span class="mut">Trong 3 phút, bấm các chữ cái kề nhau trên lưới 4×4 để tạo thành từ tiếng Anh. Gợi ý: cứ từ nào bạn biết nghĩa thì tạo từ đó — ví dụ từ chỉ quả: PEAR là quả lê. Game không có hình minh họa nên hợp hơn với bạn đã biết một ít từ.</span></p>'
-    + '<p><b>🔗 <a href="https://www.gamestolearnenglish.com/hangman/" target="_blank" rel="noopener">Hangman chủ đề Food, mức Easy (Games to Learn English)</a> — game bên ngoài</b><br><span class="mut">Vào game chọn mức Easy và chủ đề Food, rồi đoán từng chữ cái để tìm từ về đồ ăn — ví dụ TOMATOES là cà chua. Dưới khung game chỉ có một banner quảng cáo nhỏ, không che màn hình; trang có liên kết ủng hộ tự nguyện, không bắt trả tiền. Đoán đúng hết thì có hình gợi ý hiện ra.</span></p>'
-    + '<p><b>🔗 <a href="https://learnenglishkids.britishcouncil.org/grammar-vocabulary/word-games/colours" target="_blank" rel="noopener">Colours (British Council)</a> — game bên ngoài</b><br><span class="mut">Học tên các màu sắc cơ bản nhất, có màu và hình gợi ý, có nút nghe phát âm. Chơi Balloon Burst TRƯỚC: chọc bóng bay theo đúng thứ tự chữ cái để đánh vần tên màu. Trò kéo từ vào vệt sơn đôi khi kéo không dính nên để chơi sau.</span></p>'
-    + '<p><b>🔗 <a href="https://wordwall.net/resource/1750651/school-things-hangman" target="_blank" rel="noopener">School things Hangman (Wordwall — tài nguyên của Jaydashgreen)</a> — game bên ngoài</b><br><span class="mut">Xem hình đồ dùng học tập rồi đoán từng chữ cái; có 8 từ, sai tối đa 7 lượt — ví dụ từ đầu tiên: pencil là bút chì. Không cần đăng nhập để chơi: hộp thoại Sign Up hiện lên thì bấm X để đóng là chơi được.</span></p></div>' + '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p>" + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + "</details><details><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; \"I love pancakes!\" — mình thích bánh kếp!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; \"Let's go camping!\" — cùng đi cắm trại nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; \"I can ride a bike!\" — mình biết đạp xe rồi!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; \"My new shoes!\" — giày mới của mình!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; \"I am Baymax!\" — mình là Baymax!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; \"Let's cook!\" — cùng nấu ăn nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; \"We are friends!\" — chúng mình là bạn bè!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details>" + '</div>';
+  return '<h3>🎬 Giải trí — game đã chuyển sang tab riêng</h3><p class="mut">Game và phòng chơi giờ ở tab Giải trí riêng — bấm để sang chơi ngay, không còn chôn trong mục này nữa.</p><p><button class="btn btn-primary" id="entGoTabBtn">🎮 Sang tab Giải trí</button></p>'
+    + '<div class="qblock" id="entVideoBlock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p>" + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + "</details><details><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; \"I love pancakes!\" — mình thích bánh kếp!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; \"Let's go camping!\" — cùng đi cắm trại nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; \"I can ride a bike!\" — mình biết đạp xe rồi!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; \"My new shoes!\" — giày mới của mình!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; \"I am Baymax!\" — mình là Baymax!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; \"Let's cook!\" — cùng nấu ăn nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; \"We are friends!\" — chúng mình là bạn bè!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details>" + '</div>';
 }
 function enPracticeEntWire(m) {
-  m.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
-  var pn = m.querySelector("#u7PlayNowPractice"); if (pn) pn.onclick = function () { openLesson({ type: "u7trial" }); };
-  var gh = m.querySelector("#gameHubPlayNow"); if (gh) gh.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: gh.dataset.ghtype }); };
-  var wa = m.querySelector("#waStartBtn"); if (wa) wa.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "wordadv" }); };
-  var lq = m.querySelector("#lqStartBtn"); if (lq) lq.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "langquest" }); };
-  var cpb = m.querySelector("#coopStartBtn"); if (cpb) cpb.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "coop" }); };
+  var gt = m.querySelector("#entGoTabBtn"); if (gt) gt.onclick = function () { go("entertainment"); };
   videoVOAWire();
+}
+
+/* ---------- TAB GIẢI TRÍ RIÊNG (04/11/2026): nhà chung của game + video
+   giải trí, vẫn trong cùng 1 web — không tách site, không tách repo.
+   3 thẻ game là danh sách game chính thức duy nhất: mỗi thẻ có ảnh minh
+   họa đúng đường dẫn ảnh game đã dùng (không thêm asset mới), tên, mô tả
+   tự soạn 2 dòng, nhãn Chơi đơn/Phòng CO-OP và 1 nút CHƠI NGAY lớn mở game
+   bằng đúng dispatch cũ openLesson({type}) như nút game ở tab Luyện tập
+   trước đây. Video không chép dữ liệu: thẻ video chỉ dẫn sang khối video
+   đang ở tab Luyện tập. */
+function viewEntertainment(app) {
+  var html = '<h2>Giải trí</h2><p class="mut">Chơi game và xem video cho vui — không tính điểm thi, không khóa, không bắt buộc.</p>'
+    + '<div class="row" id="entFilterRow">'
+    + '<button class="btn btn-primary" data-entfilter="all">Tất cả</button>'
+    + '<button class="btn" data-entfilter="vocab">Từ vựng</button>'
+    + '<button class="btn" data-entfilter="adventure">Phiêu lưu</button>'
+    + '<button class="btn" data-entfilter="coop">CO-OP</button></div>'
+    + '<div class="ent-grid" id="entGameGrid">'
+    + '<article class="card ent-card" data-genre="vocab adventure" data-gametype="wordadv">'
+    + '<img class="ent-img" src="assets/media-generation-town-mobile-scene-0-0b9a4b60-108c-41fb-85af-ebf80e551244.webp" alt="Biệt đội Săn Từ — Vòng 1" loading="lazy">'
+    + '<h3>🏝️ Biệt đội Săn Từ — Vòng 1</h3>'
+    + '<p class="mut ent-desc">Chạy nhảy né bẫy trên đảo, gom 3 ngọc từ rồi vượt boss. Chơi một mình, mỗi vòng chỉ 60–90 giây.</p>'
+    + '<p><span class="ent-label">Chơi đơn</span></p>'
+    + '<p><button class="btn btn-primary ent-play" id="waStartBtn" data-gametype="wordadv">▶ CHƠI NGAY' + coopPlayedLabel("wordadv") + '</button></p></article>'
+    + '<article class="card ent-card" data-genre="adventure" data-gametype="langquest">'
+    + '<img class="ent-img" src="assets/media-generation-world-map-0-ba0b452e-b805-4eea-812a-a738d83297ab.webp" alt="Thành phố Ngôn Ngữ — Chương 1" loading="lazy">'
+    + '<h3>🏙️ Thành phố Ngôn Ngữ — Chương 1</h3>'
+    + '<p class="mut ent-desc">Đi bộ quanh thành phố, nói chuyện với người dân và tìm manh mối. Chơi một mình trên máy tính.</p>'
+    + '<p><span class="ent-label">Chơi đơn</span></p>'
+    + '<p><button class="btn btn-primary ent-play" id="lqStartBtn" data-gametype="langquest">▶ CHƠI NGAY' + coopPlayedLabel("langquest") + '</button></p></article>'
+    + '<article class="card ent-card" data-genre="coop" data-gametype="coop">'
+    + '<img class="ent-img" src="assets/media-generation-npc-guide-portrait-0-91c329a7-065e-4e04-801e-63b953c59598.webp" alt="Phòng CO-OP — Cánh cổng tri thức" loading="lazy">'
+    + '<h3>👥 Phòng CO-OP — Cánh cổng tri thức</h3>'
+    + '<p class="mut ent-desc">Chơi cùng 2–4 người thật theo lượt, mỗi người giữ một manh mối. Cần đăng nhập để chơi cùng bạn.</p>'
+    + '<p><span class="ent-label">Phòng CO-OP</span></p>'
+    + '<p><button class="btn btn-primary ent-play" id="coopStartBtn" data-gametype="coop">▶ CHƠI NGAY' + coopPlayedLabel("coop") + '</button></p></article>'
+    + '</div>'
+    + '<section class="card" id="entVideoCard"><h3>🎬 Video giải trí</h3>'
+    + '<p class="mut">Video hoạt hình song ngữ xem cho vui vẫn ở mục Luyện tập — bấm để sang xem ngay.</p>'
+    + '<p><button class="btn" id="entVideoGo">🎬 Xem video hoạt hình</button></p></section>';
+  app.innerHTML = html;
+  $$("#entFilterRow [data-entfilter]").forEach(function (b) {
+    b.onclick = function () {
+      var f = b.dataset.entfilter;
+      $$("#entFilterRow [data-entfilter]").forEach(function (x) { x.classList.toggle("btn-primary", x === b); });
+      $$("#entGameGrid .ent-card").forEach(function (c) {
+        var gs = (" " + (c.dataset.genre || "") + " ");
+        c.style.display = (f === "all" || gs.indexOf(" " + f + " ") >= 0) ? "" : "none";
+      });
+    };
+  });
+  $$("#entGameGrid .ent-play").forEach(function (b) {
+    b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: b.dataset.gametype }); };
+  });
+  var vg = $("#entVideoGo");
+  if (vg) vg.onclick = function () { go("practice"); setTimeout(function () { var v = $("#entVideoBlock"); if (v && v.scrollIntoView) v.scrollIntoView(); }, 100); };
 }
 function viewPractice(app) {
   var c = skillCounts();
