@@ -25423,7 +25423,7 @@ const CONTENT = {
      "why": "Trong bài, vào buổi tối cả nhà ăn tối và trò chuyện. Vì vậy đáp án đúng là ăn tối và trò chuyện."
     }
    ],
-   "translation": "Tên tôi là Lan. Tôi sống ở Hà Nội cùng gia đình. Gia đình tôi có bốn người.\n\nCha tôi là giáo viên. Ông làm việc ở một trường học. Mẹ tôi là Bác sĩ. Bà làm việc ở một bệnh viện. Tôi có một em trai. Em tên là Minh. Em mười tuổi.\n\nChúng tôi hạnh phúc bên nhau. Vào buổi tối, chúng tôi ăn tối và trò chuyện. Tôi rất yêu gia đình mình.",
+   "translation": "Tên tôi là Lan. Tôi sống ở Hà Nội cùng gia đình. Gia đình tôi có bốn người.\n\nCha tôi là giáo viên. Ông làm việc ở một trường học. Mẹ tôi là bác sĩ. Bà làm việc ở một bệnh viện. Tôi có một em trai. Em tên là Minh. Em mười tuổi.\n\nChúng tôi hạnh phúc bên nhau. Vào buổi tối, chúng tôi ăn tối và trò chuyện. Tôi rất yêu gia đình mình.",
    "phrases": [
     {
      "en": "four people in my family",
@@ -27971,7 +27971,7 @@ const CONTENT = {
      "why": "Đoạn E nói ngược lại: 'You do not need to walk far' → Sai."
     }
    ],
-   "translation": "A. Đi bộ là hình thức vận động đơn giản nhất trên thế giới. Nó không cần thiết bị đặc biệt, không cần thẻ tập gym và không cần huấn luyện. Vậy mà các Bác sĩ đồng ý rằng đi bộ khoảng ba mươi phút mỗi ngày có thể cải thiện sức khỏe theo nhiều cách khác nhau.\n\nB. Lợi ích đầu tiên là cho trái tim. Đi bộ thường xuyên làm tim khỏe hơn và giảm nguy cơ bệnh tim. Các nghiên cứu cho thấy người đi bộ đến nơi làm việc nhìn chung khỏe hơn người lái xe, ngay cả khi quãng đi bộ khá ngắn.\n\nC. Đi bộ cũng giúp ích cho tinh thần. Sau một buổi đi bộ trong công viên, mọi người thường cảm thấy bình tĩnh hơn và suy nghĩ rõ ràng hơn. Nhiều nhà văn và nhà khoa học trong lịch sử đi bộ dài mỗi ngày vì những ý tưởng hay nhất đến với họ khi đang di chuyển.\n\nD. Đi bộ hằng ngày còn tốt cho cơ thể theo những cách nhỏ hơn. Nó giữ cho chân và lưng khỏe, giúp kiểm soát cân nặng và cải thiện giấc ngủ ban đêm. Không như chạy, đi bộ nhẹ nhàng nên phù hợp với người cao tuổi và người mới bắt đầu.\n\nE. Vì tất cả những lý do này, các chuyên gia sức khỏe khuyên mọi người tìm thời gian đi bộ. Bạn không cần đi xa. Điều quan trọng là đi bộ một chút mỗi ngày và biến nó thành một phần thói quen bình thường của bạn.",
+   "translation": "A. Đi bộ là hình thức vận động đơn giản nhất trên thế giới. Nó không cần thiết bị đặc biệt, không cần thẻ tập gym và không cần huấn luyện. Vậy mà các bác sĩ đồng ý rằng đi bộ khoảng ba mươi phút mỗi ngày có thể cải thiện sức khỏe theo nhiều cách khác nhau.\n\nB. Lợi ích đầu tiên là cho trái tim. Đi bộ thường xuyên làm tim khỏe hơn và giảm nguy cơ bệnh tim. Các nghiên cứu cho thấy người đi bộ đến nơi làm việc nhìn chung khỏe hơn người lái xe, ngay cả khi quãng đi bộ khá ngắn.\n\nC. Đi bộ cũng giúp ích cho tinh thần. Sau một buổi đi bộ trong công viên, mọi người thường cảm thấy bình tĩnh hơn và suy nghĩ rõ ràng hơn. Nhiều nhà văn và nhà khoa học trong lịch sử đi bộ dài mỗi ngày vì những ý tưởng hay nhất đến với họ khi đang di chuyển.\n\nD. Đi bộ hằng ngày còn tốt cho cơ thể theo những cách nhỏ hơn. Nó giữ cho chân và lưng khỏe, giúp kiểm soát cân nặng và cải thiện giấc ngủ ban đêm. Không như chạy, đi bộ nhẹ nhàng nên phù hợp với người cao tuổi và người mới bắt đầu.\n\nE. Vì tất cả những lý do này, các chuyên gia sức khỏe khuyên mọi người tìm thời gian đi bộ. Bạn không cần đi xa. Điều quan trọng là đi bộ một chút mỗi ngày và biến nó thành một phần thói quen bình thường của bạn.",
    "phrases": [
     {
      "en": "no special equipment",
