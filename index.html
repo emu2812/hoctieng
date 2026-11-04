@@ -936,12 +936,12 @@ function guideLine(id, text) {
 function backFromLesson() { examTimerStop(); examPartTimerStop(); try { mirrorStop(); } catch (e) {} curLesson = null; go(returnTab || "home"); }
 /* ---------- THẾ GIỚI GAME TOÀN MÀN HÌNH (04/11/2026) ----------
    Game là một thế giới riêng, không liên quan tới web bên ngoài: khi mở
-   game (wordadv/langquest/coop), chrome site bị ẩn bằng class game-world
+   game (wordadv/langquest/coop/runner3d/typeshooter), chrome site bị ẩn bằng class game-world
    trên body (CSS lo việc ẩn/hiện, kể cả thanh dưới vốn có inline style),
    chỉ còn nút Thoát game; bấm thoát thì về đúng tab đã mở game (returnTab).
    Đồng bộ ở render() nên mọi đường thoát (nút thoát, nút Quay lại của
    game, hết ván về tab) đều khôi phục lại giao diện site. */
-var GAME_WORLD_TYPES = ["wordadv", "langquest", "coop"];
+var GAME_WORLD_TYPES = ["wordadv", "langquest", "coop", "runner3d", "typeshooter"];
 function isGameWorldLesson(l) { return !!(l && GAME_WORLD_TYPES.indexOf(l.type) >= 0); }
 function enterGameWorld() {
   document.body.classList.add("game-world");
@@ -2606,7 +2606,7 @@ function enPracticeEntWire(m) {
 
 /* ---------- TAB GIẢI TRÍ RIÊNG (04/11/2026): nhà chung của game + video
    giải trí, vẫn trong cùng 1 web — không tách site, không tách repo.
-   3 thẻ game là danh sách game chính thức duy nhất: mỗi thẻ có ảnh minh
+   5 thẻ game là danh sách game chính thức duy nhất: mỗi thẻ có ảnh minh
    họa đúng đường dẫn ảnh game đã dùng (không thêm asset mới), tên, mô tả
    tự soạn 2 dòng, nhãn Chơi đơn/Phòng CO-OP và 1 nút CHƠI NGAY lớn mở game
    bằng đúng dispatch cũ openLesson({type}) như nút game ở tab Luyện tập
@@ -2638,6 +2638,18 @@ function viewEntertainment(app) {
     + '<p class="mut ent-desc">Chơi cùng 2–4 người thật theo lượt, mỗi người giữ một manh mối. Cần đăng nhập để chơi cùng bạn.</p>'
     + '<p><span class="ent-label">Phòng CO-OP</span></p>'
     + '<p class="ent-playrow"><button class="btn btn-primary ent-play" id="coopStartBtn" data-gametype="coop">▶ CHƠI NGAY' + coopPlayedLabel("coop") + '</button></p></article>'
+    + '<article class="card ent-card" data-genre="vocab adventure" data-gametype="runner3d">'
+    + '<img class="ent-img" src="assets/media-generation-town-mobile-scene-0-0b9a4b60-108c-41fb-85af-ebf80e551244.webp" alt="Chạy 3D — Phố 3D" loading="lazy">'
+    + '<h3>🏃 Chạy 3D — Phố 3D</h3>'
+    + '<p class="mut ent-desc">Chạy thật trong phố 3 chiều: đổi làn, nhảy, trượt để gom ngọc từ. Chơi một mình, tay lái nhanh thì thắng.</p>'
+    + '<p><span class="ent-label">Chơi đơn</span></p>'
+    + '<p class="ent-playrow"><button class="btn btn-primary ent-play" id="r3dStartBtn" data-gametype="runner3d">▶ CHƠI NGAY' + coopPlayedLabel("runner3d") + '</button></p></article>'
+    + '<article class="card ent-card" data-genre="vocab" data-gametype="typeshooter">'
+    + '<img class="ent-img" src="assets/media-generation-npc-guide-portrait-0-91c329a7-065e-4e04-801e-63b953c59598.webp" alt="Bắn từ rơi" loading="lazy">'
+    + '<h3>🚀 Bắn từ rơi</h3>'
+    + '<p class="mut ent-desc">Từ rơi từ trời xuống — gõ đúng hết từ để bắn hạ trước khi chạm đất. Chơi một mình, giữ đủ 3 tim là thắng.</p>'
+    + '<p><span class="ent-label">Chơi đơn</span></p>'
+    + '<p class="ent-playrow"><button class="btn btn-primary ent-play" id="tsStartBtn" data-gametype="typeshooter">▶ CHƠI NGAY' + coopPlayedLabel("typeshooter") + '</button></p></article>'
     + '</div>'
     + '<section class="card" id="entVideoCard"><h3>🎬 Video giải trí</h3>'
     + '<p class="mut">Video hoạt hình song ngữ xem cho vui vẫn ở mục Luyện tập — bấm để sang xem ngay.</p>'
@@ -4941,6 +4953,8 @@ function renderLesson(app) {
   else if (l.type === "wordadv") renderWordAdv(app, l);
   else if (l.type === "langquest") renderLangQuest(app, l);
   else if (l.type === "coop") renderCoop(app, l);
+  else if (l.type === "runner3d") { if (window.Runner3D && Runner3D.render) Runner3D.render(l); }
+  else if (l.type === "typeshooter") renderTypeShooter(app, l);
   else if (l.type === "skillTyping") renderTypingLesson(app, l);
   else if (l.type === "weakSession") renderWeakSession(app, l);
   else if (l.type === "reviewSession") renderReviewSession(app, l);
@@ -15898,5 +15912,7 @@ wireTutorFloat();
 <script src="word_adventure.js"></script>
 <script src="language_quest.js"></script>
 <script src="coop_room.js"></script>
+<script src="runner3d.js"></script>
+<script src="type_shooter.js"></script>
 </body>
 </html>
