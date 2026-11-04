@@ -473,11 +473,13 @@ function renderWordAdv(app, l) {
   var head = lessonHead({ title: "🏝️ Biệt đội Săn Từ — Vòng 1", type: "wordadv" }, "Chơi bằng bộ từ tiếng Anh của web · Thắng thua và mất mạng chỉ trong game, không chạm phần học. Sai ngôn ngữ vào Sổ lỗi sai, không trừ mạng.");
   if (!l.wa) {
     var islands = waPickIslands();
-    var body = '<div class="qblock"><h3>🏝️ Chọn đảo khởi đầu</h3><p class="mut">Mỗi đảo là một bộ từ thật của web. Vòng này: chạy nhảy né bẫy bằng một ngón tay, thu 3 ngọc từ, giải mật mã nghe–đánh vần, rồi vượt boss 3 giai đoạn. Cả vòng khoảng 60–90 giây.</p>';
+    var waBest = null; try { waBest = gameBest("wordadv", "en"); } catch (e) { waBest = null; }
+    var waCur = gameCurrentVocabSet();
+    var body = '<div class="qblock"><h3>🏝️ Chọn đảo khởi đầu</h3><p class="mut">Mỗi đảo là một bộ từ thật của web. Vòng này: chạy nhảy né bẫy bằng một ngón tay, thu 3 ngọc từ, giải mật mã nghe–đánh vần, rồi vượt boss 3 giai đoạn. Cả vòng khoảng 60–90 giây.</p><p class="mut">' + (waBest ? "Kỷ lục của bạn: 🏆 " + waBest.score + " điểm" + (waBest.stars ? " · " + "⭐".repeat(waBest.stars) : "") : "Chưa có kỷ lục — chơi vòng đầu để lập kỷ lục.") + '</p>';
     if (!islands.length) body += '<p>Chưa có bộ từ nào đủ 12 thẻ và 3 từ đánh vần được — quay lại sau nhé.</p>';
     else body += '<div class="row">' + islands.map(function (si) {
       var st = CONTENT.vocab[si];
-      return '<button class="btn btn-primary" data-waisle="' + si + '">🏝️ ' + esc(st.topic || "") + (st.band ? " · " + esc(st.band) : "") + " · " + vocabSetCards(si).length + " từ</button>";
+      return '<button class="btn btn-primary" data-waisle="' + si + '">🏝️ ' + esc(st.topic || "") + (st.band ? " · " + esc(st.band) : "") + " · " + vocabSetCards(si).length + " từ" + (si === waCur ? " · ⭐ Gợi ý: bộ bạn đang học" : "") + "</button>";
     }).join("") + "</div>";
     body += "</div>";
     app.innerHTML = head + body;
@@ -487,8 +489,8 @@ function renderWordAdv(app, l) {
   }
   var s = l.wa;
   if (s.phase === "run") {
-    app.innerHTML = head + '<div class="qblock"><p id="waHud"></p><p id="waBanner" class="mut">Chạy thôi! Nhảy qua đá, trượt qua dây leo, chạm vào ngọc để thu thập.</p>'
-      + '<canvas id="waCanvas" width="360" height="240" style="width:100%;max-width:480px;border:2px solid #f59e0b;border-radius:16px;background:#bfe8ff;display:block"></canvas>'
+    app.innerHTML = head + '<div class="game-hud"><p id="waHud"></p><p id="waBanner" class="mut">Chạy thôi! Nhảy qua đá, trượt qua dây leo, chạm vào ngọc để thu thập.</p></div>'
+      + '<div class="qblock"><canvas id="waCanvas" width="360" height="240" style="width:100%;max-width:480px;border:2px solid #D97706;border-radius:20px;background:#FDEFC8;display:block"></canvas>'
       + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="waJump" style="flex:1;padding:14px;font-size:18px">🦘 NHẢY</button><button class="btn btn-primary" id="waSlide" style="flex:1;padding:14px;font-size:18px">🐍 TRƯỢT</button></div>'
       + '<p class="mut">Chạm vào màn hình cũng nhảy. Trên máy tính: phím Cách/↑ = nhảy, ↓ = trượt.</p></div>';
     wireBack();
@@ -513,8 +515,8 @@ function renderWordAdv(app, l) {
     return;
   }
   if (s.phase === "boss") {
-    app.innerHTML = head + '<div class="qblock"><p id="waHud"></p><p id="waBanner" class="mut">Quái Đá sắp tấn công — vùng đỏ là vùng nguy hiểm, chạy ra khỏi vùng đỏ trước khi đá rơi! Khi boss choáng (dấu ✦) thì trả lời đúng để đánh trả.</p>'
-      + '<canvas id="waCanvas" width="360" height="240" style="width:100%;max-width:480px;border:2px solid #f59e0b;border-radius:16px;background:#1f2937;display:block"></canvas>'
+    app.innerHTML = head + '<div class="game-hud"><p id="waHud"></p><p id="waBanner" class="mut">Quái Đá sắp tấn công — vùng đỏ là vùng nguy hiểm, chạy ra khỏi vùng đỏ trước khi đá rơi! Khi boss choáng (dấu ✦) thì trả lời đúng để đánh trả.</p></div>'
+      + '<div class="qblock"><canvas id="waCanvas" width="360" height="240" style="width:100%;max-width:480px;border:2px solid #D97706;border-radius:20px;background:#1f2937;display:block"></canvas>'
       + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="waLeft" style="flex:1;padding:14px;font-size:18px">◀ Chạy trái</button><button class="btn btn-primary" id="waRight" style="flex:1;padding:14px;font-size:18px">Chạy phải ▶</button></div>'
       + '<div id="waBossQ" style="margin-top:8px"></div>'
       + '<p class="mut">Trên máy tính: phím ← → để di chuyển. Checkpoint: qua mỗi giai đoạn sẽ lưu lại — thua trong trận boss thì chơi lại từ giai đoạn gần nhất.</p></div>';
@@ -533,7 +535,7 @@ function renderWordAdv(app, l) {
   if (s.phase === "end") {
     var rightD = waDedupWords(s.rightList), wrongD = waDedupWords(s.wrongList);
     var gemsHtml = s.collected.map(function (g) { return esc(g.source_text) + " — " + esc(g.translation_vi); }).join("; ") || "chưa có";
-    app.innerHTML = head + '<div class="summarybox">' + summaryBadgeSVG() + '<h2>🏁 Thắng boss rồi!</h2><p>Điểm: <b>' + s.finalScore + '</b> · Sao: ' + "⭐".repeat(s.finalStars || 0) + '</p><p>Ngọc đã thu: ' + gemsHtml + '</p><p class="mut">Boss mệt rồi, ngồi xuống và tặng rương — không có bạo lực, chỉ có kiến thức thắng.</p>'
+    app.innerHTML = head + '<div class="reward-frame">' + summaryBadgeSVG() + '<h2>🏁 Thắng boss rồi!</h2><p>Điểm: <b>' + s.finalScore + '</b></p><p class="rw-stars">' + (function () { var st = ""; for (var si2 = 0; si2 < (s.finalStars || 0); si2++) st += '<span class="rw-star" style="animation-delay:' + (si2 * 0.25) + 's">⭐</span>'; return st || "chưa có sao"; })() + '</p><p>Ngọc đã thu: ' + gemsHtml + '</p><p class="mut">Boss mệt rồi, ngồi xuống và tặng rương — không có bạo lực, chỉ có kiến thức thắng.</p>'
       + gameSummaryHTML(rightD, wrongD)
       + '<div class="row"><button class="btn btn-primary" id="waAgain">🔁 Chơi lại vòng mới</button><button class="btn" id="waHub">Về Luyện tập</button></div></div>';
     wireBack();

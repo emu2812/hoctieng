@@ -360,8 +360,8 @@ function renderLangQuestCity(app, l) {
   var boardBtn = s.boardDone
     ? '<button class="btn btn-primary" id="lqOpenConc">📋 Trình bày kết luận</button>'
     : '<button class="btn btn-primary" id="lqOpenBoard">🔍 Mở bảng điều tra</button>';
-  app.innerHTML = head + '<div class="qblock"><p id="lqHud"></p><p id="lqObj" class="mut"></p><p id="lqBanner" class="mut">Chào mừng tới thành phố! Đi tới Thư viện (góc trên bên trái) gặp Thủ thư nhé.</p>'
-    + '<canvas id="lqCanvas" width="640" height="400" style="width:100%;max-width:720px;border:2px solid #0ea5e9;border-radius:16px;background:#dcfce7;display:block"></canvas>'
+  app.innerHTML = head + '<div class="game-hud"><p id="lqHud"></p><p id="lqObj" class="mut"></p><p id="lqBanner" class="mut">Chào mừng tới thành phố! Đi tới Thư viện (góc trên bên trái) gặp Thủ thư nhé.</p></div>'
+    + '<div class="qblock"><canvas id="lqCanvas" width="640" height="400" style="width:100%;max-width:720px;border:2px solid #D97706;border-radius:20px;background:#FFF8E1;display:block"></canvas>'
     + '<div class="row" style="margin-top:8px"><button class="btn" id="lqTalkLibrarian">💬 Nói chuyện với Thủ thư</button><button class="btn" id="lqTalkMerchant">💬 Nói chuyện với Người bán hàng</button><button class="btn" id="lqOpenChest">📦 Mở rương ở Cổng Học viện</button>' + boardBtn + '</div>'
     + chestHint
     + '<p class="mut">WASD / phím mũi tên để đi, bấm vào bản đồ để đi tới đó. Đứng gần người dân hoặc rương thì nút hành động mới bấm được.</p></div>';
@@ -495,12 +495,12 @@ function renderLangQuestBoard(app, l) {
   body += '<div class="row"><div style="flex:1"><h4>Trang từ điển</h4>' + [0, 1, 2].map(function (i) {
     var c = s.clueWords[i];
     var linked = s.links[i] !== undefined && s.links[i] !== null;
-    var st = linked ? 'background:#bbf7d0' : (s.boardSel === i ? 'outline:3px solid #0ea5e9;background:#e0f2fe' : 'background:#fff');
+    var st = linked ? 'background:#EAF7F0' : (s.boardSel === i ? 'outline:3px solid #D97706;background:#FFF8E1' : 'background:#fff');
     return '<p><button class="btn" data-lqclue="' + i + '" style="' + st + ';width:100%;text-align:left">📄 ' + esc(c.word) + (s.showNotes ? ' — ' + esc(c.vi) : '') + (linked ? ' → lời khai ' + (s.links[i] + 1) : '') + '</button></p>';
   }).join("") + '</div><div style="flex:1"><h4>Lời khai</h4>' + s.statements.map(function (st, j) {
     var usedBy = -1;
     for (var i = 0; i < 3; i++) if (s.links[i] === j) usedBy = i;
-    var stl = usedBy >= 0 ? 'background:#bbf7d0' : 'background:#fff';
+    var stl = usedBy >= 0 ? 'background:#EAF7F0' : 'background:#fff';
     return '<p><button class="btn" data-lqstmt="' + j + '" style="' + stl + ';width:100%;text-align:left">' + (j + 1) + '. ' + esc(st.text) + (usedBy >= 0 ? ' ← trang “' + esc(s.clueWords[usedBy].word) + '”' : '') + '</button></p>';
   }).join("") + '</div></div>';
   if (s.boardMsg) body += '<p>' + esc(s.boardMsg) + '</p>';
@@ -593,7 +593,7 @@ function renderLangQuestEnd(app, l) {
   var head = lessonHead({ title: "🏙️ Thành phố Ngôn Ngữ — Chương 1", type: "langquest" }, "Phá án xong! Chương 2 đã mở trong hồ sơ của bạn.");
   function dedup(list) { var seen = {}, out = []; list.forEach(function (r) { var k = String(r.w).toLowerCase(); if (!seen[k]) { seen[k] = true; out.push(r); } }); return out; }
   var rightD = dedup(s.rightList), wrongD = dedup(s.wrongList);
-  app.innerHTML = head + '<div class="summarybox">' + summaryBadgeSVG() + '<h2>🎉 Phá án thành công!</h2><p>Đúng rồi! Các trang bị gió thổi bay trên đường chuyển sách và rơi rải rác ở Thư viện, Chợ và Cổng Học viện — bạn đã nối đủ bằng chứng.</p><p>Điểm: <b>' + s.finalScore + '</b> · Sao: ' + "⭐".repeat(s.finalStars || 0) + '</p><p class="mut">Chương 2: Bí mật trong Thư viện Cổ đã mở trong hồ sơ của bạn, nội dung sẽ có ở bản sau.</p>'
+  app.innerHTML = head + '<div class="reward-frame">' + summaryBadgeSVG() + '<h2>🎉 Phá án thành công!</h2><p>Đúng rồi! Các trang bị gió thổi bay trên đường chuyển sách và rơi rải rác ở Thư viện, Chợ và Cổng Học viện — bạn đã nối đủ bằng chứng.</p><p>Điểm: <b>' + s.finalScore + '</b></p><p class="rw-stars">' + (function () { var st = ""; for (var si2 = 0; si2 < (s.finalStars || 0); si2++) st += '<span class="rw-star" style="animation-delay:' + (si2 * 0.25) + 's">⭐</span>'; return st || "chưa có sao"; })() + '</p><p class="mut">Chương 2: Bí mật trong Thư viện Cổ đã mở trong hồ sơ của bạn, nội dung sẽ có ở bản sau.</p>'
     + gameSummaryHTML(rightD, wrongD)
     + '<div class="row"><button class="btn btn-primary" id="lqAgain">🔁 Chơi lại Chương 1</button><button class="btn" id="lqHub">Về Luyện tập</button></div></div>';
   wireBack();

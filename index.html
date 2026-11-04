@@ -167,6 +167,46 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 #nextCard h2,#zhNextCard h2,#entryWelcome h2,#zhEntryWelcome h2,#landingScreen h2,#landingAuth h2{font-size:28px;line-height:1.25;margin:4px 0 8px}
 #nextCard .dragon,#nextCard .snake,#zhNextCard .dragon,#zhNextCard .snake,#entryWelcome .dragon,#entryWelcome .snake,#zhEntryWelcome .dragon,#zhEntryWelcome .snake,#landingScreen .dragon,#landingScreen .snake{width:88px;height:88px}
 @media(max-width:699px){#nextCard .dragon,#nextCard .snake,#zhNextCard .dragon,#zhNextCard .snake,#entryWelcome .dragon,#entryWelcome .snake,#zhEntryWelcome .dragon,#zhEntryWelcome .snake,#landingScreen .dragon,#landingScreen .snake{width:64px;height:64px}}
+
+/* ---- BENTO v63 (04/11/2026): he o mo-dun Huong 3, chi bo cuc + trinh bay ----
+   Token rieng cho he Bento; token cu giu nguyen de khoi vo man cu. Bo 20px
+   chi ap cho O Bento (nut/pill giu 999px nhu cu — khac ho linh kien). */
+:root{--bento-bg:#FAFAFA;--bento-card:#FFFFFF;--bento-amber:#D97706;--bento-coral:#F05A28;--bento-ink:#18181B;--bento-soft:#F4F4F5}
+.bento-hub{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);margin:16px 0}
+@media(min-width:900px){.bento-hub{grid-template-columns:repeat(4,minmax(0,1fr))}.bento-tile.bento-today{grid-column:3/4;grid-row:1/2}.bento-tile.bento-type{grid-column:4/5;grid-row:1/2}.bento-tile.bento-ms{grid-column:3/4;grid-row:2/3}.bento-tile.bento-u8{grid-column:4/5;grid-row:2/3}}
+.bento-tile:empty{display:none}
+.bento-tile{min-width:0;background:var(--bento-card);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:20px}
+.bento-tile.bento-hero{padding:0;background:transparent;box-shadow:none}
+@media(min-width:900px){.bento-tile.bento-hero{grid-column:span 2;grid-row:span 2}}
+.bento-tile.bento-wide{grid-column:1/-1}
+.bento-tile>.card,.bento-tile>details.card{margin:0;border:0;padding:0;box-shadow:none;background:transparent;border-radius:0}
+.bento-tile.bento-hero>.card{border-radius:20px}
+.bento-tile h2{font-size:26px}
+.bento-tile h3{font-size:18px}
+.chapter-row{border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);border:0}
+#practiceNextCard,#mineNextCard{border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03)}
+.game-tile{border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);border:0;border-left:6px solid var(--bento-amber)}
+.game-tile.lq{border-left-color:var(--bento-coral)}
+.game-tile.coop{border-left-color:var(--green)}
+.game-hud{display:flex;gap:8px 16px;flex-wrap:wrap;align-items:center;background:#fff;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:10px 16px;margin:8px 0}
+.game-hud p{margin:0}
+.game-hud #waHud,.game-hud #lqHud{font-weight:700;font-variant-numeric:tabular-nums}
+.game-hud #waBanner,.game-hud #lqBanner{flex:1 1 220px}
+#waCanvas{aspect-ratio:360/240;height:auto}
+#lqCanvas{aspect-ratio:640/400;height:auto}
+.reward-frame{max-width:640px;margin:24px auto;background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.10);padding:28px 24px;text-align:center}
+.reward-frame h2{font-size:26px}
+.reward-frame .row{justify-content:center}
+.reward-frame .qblock{text-align:left}
+.rw-stars{font-size:44px;letter-spacing:6px;line-height:1.2}
+.rw-star{display:inline-block;animation:rwPop .5s both}
+@keyframes rwPop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
+body.in-lesson #tabBar{position:static}
+body.in-lesson .lessonframe{top:0}
+.bento-side{display:none}
+@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,820px) 300px;justify-content:center}#app.lesson-view:has(>.lesson-main)>.bento-side{display:block;position:sticky;top:120px}}
+.bento-side .bento-tile{margin:0 0 16px}
+.bigletter{overflow-wrap:break-word;max-width:100%}
 </style>
 </head>
 <body>
@@ -1155,6 +1195,12 @@ function applyLessonLayout(app) {
   } catch (e) {}
   app.appendChild(main);
   app.classList.add("lesson-view");
+  document.body.classList.add("in-lesson");
+  var side = document.createElement("aside"); side.className = "bento-side";
+  try {
+    side.innerHTML = '<div class="bento-tile"><p class="eyebrow">TIẾN TRÌNH CỦA BẠN</p><p>🔥 Chuỗi ' + streakDays() + ' ngày · ' + (state.xp || 0) + ' XP</p><p class="mut">' + esc(goalStripToday()) + '</p><p class="mut">' + dueCount() + ' mục đến hạn ôn</p><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>';
+  } catch (e) { side.innerHTML = '<div class="bento-tile"><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>'; }
+  app.appendChild(side);
 }
 function go(tab) { examTimerStop(); examPartTimerStop(); curTab = tab; curLesson = null; render(); }
 /* ---------- V59: TAI LUOI THE GIAI TRI (tab Luyen tap) ----------
@@ -1409,6 +1455,7 @@ function wireVocabSearch(searchId, wrapId) {
 }
 
 function render() {
+  document.body.classList.remove("in-lesson");
   normZh();
   try { updateSiteTitle(); } catch (e) {}
   try { settleStreakFreeze(); } catch (e) {}
@@ -1900,6 +1947,7 @@ function viewHome(app) {
   var info = homePathInfo();
   var html = trackSwitchHTML(true) + '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span><button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += '<p id="homeGreet">' + (trulyNew ? 'Hôm nay 2812 cùng bạn học nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếp nhé.') + '</p>';
+  html += '<div class="bento-hub"><div class="bento-tile bento-hero">';
   if (trulyNew) {
     html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra đầu vào để web xếp đúng chặng cho bạn (khuyên dùng). Bỏ qua thì học từ đầu chương 1.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra đầu vào</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div></div></div></section>';
   } else {
@@ -1909,18 +1957,19 @@ function viewHome(app) {
     var xpVal = t.step ? (stepDone(t.step.id) ? 5 : 10) : 0;
     html += '<section class="card next-card" id="nextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ ' + heroEyebrow + '</p><h2>' + esc(t.title) + '</h2><p class="mut">' + heroSub + '</p><button class="btn btn-primary" id="nextBtn">Học tiếp: ' + esc(t.title) + ' →' + (xpVal ? ' · +' + xpVal + ' XP' : '') + '</button></div></div></section>';
   }
+  html += '</div>';
   if (fresh) {
-    html += '<section class="card" id="u7Welcome">'
+    html += '<div class="bento-tile bento-today"><section class="card" id="u7Welcome">'
       + '<details id="u7WhyCard"><summary><b>Vì sao học kiểu này nhớ lâu — bấm để mở</b></summary><p><b>Ôn đúng lúc sắp quên:</b> câu nào sai sẽ vào Sổ lỗi sai và ôn lại đúng ngày theo lịch 1-3-7-14-30 ngày — xem chi tiết ở Cài đặt → Ghi chú.</p><p><b>Học theo dạng bài:</b> mỗi dạng bài có cách làm riêng trước, rồi mới luyện trộn nhiều dạng như đi thi thật.</p><p><b>Chẩn đoán trước khi học:</b> bài kiểm tra nhanh đầu chặng cho biết bạn yếu chỗ nào, để lộ trình xếp dạng bài yếu lên trước.</p></details>'
-      + '<details id="u7Faq"><summary><b>Câu hỏi thường gặp — bấm để mở</b></summary><p><b>Mỗi ngày học bao lâu?</b> Khoảng 10-20 phút một buổi là đủ, học đều mỗi ngày quan trọng hơn học dồn một lúc.</p><p><b>Làm sai có sao không?</b> Không sao cả — câu sai vào Sổ lỗi sai để ôn lại, không bị trừ điểm hay khóa bài.</p><p><b>"Band ước lượng" nghĩa là gì?</b> Là điểm web tự tính để bạn tham khảo trình độ, không phải điểm thi thật — IELTS không công bố bảng quy đổi cố định.</p></details></section>';
+      + '<details id="u7Faq"><summary><b>Câu hỏi thường gặp — bấm để mở</b></summary><p><b>Mỗi ngày học bao lâu?</b> Khoảng 10-20 phút một buổi là đủ, học đều mỗi ngày quan trọng hơn học dồn một lúc.</p><p><b>Làm sai có sao không?</b> Không sao cả — câu sai vào Sổ lỗi sai để ôn lại, không bị trừ điểm hay khóa bài.</p><p><b>"Band ước lượng" nghĩa là gì?</b> Là điểm web tự tính để bạn tham khảo trình độ, không phải điểm thi thật — IELTS không công bố bảng quy đổi cố định.</p></details></section></div>';
   }
-  html += typeEntryRowHTML("en");
-  if (!fresh) html += specTodayHTML(t);
+  html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("en") + '</div>';
+  if (!fresh) html += '<div class="bento-tile bento-today">' + specTodayHTML(t) + '</div>';
   var curStep = null, curTitle = "";
   if (info.kind === "ch1") { var nsH = nextLearnStep(); curStep = nsH; }
   else { var undH = info.steps.filter(function (st) { return !rbStepDone(st); }); curStep = undH.length ? undH[0] : null; }
   var bannerSk = curStep ? skClassFor(curStep.type) : "";
-  html += '<section id="homePath"><div class="unit-banner' + (bannerSk ? ' ' + bannerSk : '') + '"><b>Chương ' + (info.ci + 1) + ': ' + esc(info.title) + '</b><p class="mut">Đã xong ' + info.done + '/' + info.total + ' nấc' + (info.done < info.total ? ' · còn ' + (info.total - info.done) + ' nấc nữa là hết chương' : ' · đã xong chương này') + '</p></div><div class="path-v">';
+  html += '<div class="bento-tile bento-wide"><section id="homePath"><div class="unit-banner' + (bannerSk ? ' ' + bannerSk : '') + '"><b>Chương ' + (info.ci + 1) + ': ' + esc(info.title) + '</b><p class="mut">Đã xong ' + info.done + '/' + info.total + ' nấc' + (info.done < info.total ? ' · còn ' + (info.total - info.done) + ' nấc nữa là hết chương' : ' · đã xong chương này') + '</p></div><div class="path-v">';
   if (info.kind === "ch1") {
     var curId = nextLearnStep() ? nextLearnStep().id : null;
     learningSteps().forEach(function (s) {
@@ -1940,13 +1989,13 @@ function viewHome(app) {
       html += '<button class="path-node ' + stt + '" data-path-rstep="' + esc(info.band) + ':' + si + '"><span class="dotwrap"><span class="dot">' + icon2 + '</span></span><span><span class="pn-title">' + esc(st.title) + '</span><br><span class="pn-type">' + esc(st.type) + '</span><br><span class="pn-st">' + stTxt2 + '</span></span></button>';
     });
   }
-  html += '</div></section>';
-  html += msHomeHTML("en");
-  html += u8DailyHTML();
-  html += '<details class="card" id="homeMore"><summary><b>Xem thêm: chơi thử, bản đồ, kiểm tra nhanh</b></summary>'
+  html += '</div></section></div>';
+  html += '<div class="bento-tile bento-ms">' + msHomeHTML("en") + '</div>';
+  html += '<div class="bento-tile bento-u8">' + u8DailyHTML() + '</div>';
+  html += '<div class="bento-tile bento-wide"><details class="card" id="homeMore"><summary><b>Xem thêm: chơi thử, bản đồ, kiểm tra nhanh</b></summary>'
     + '<p><button class="btn" id="u7PlayNow">🎮 Chơi thử ngay</button></p>'
     + '<p><button class="dimlink" id="mapGo">Xem bản đồ 13 chương →</button> · <button class="dimlink" id="quickCheckLink">Tôi đã biết chút ít — kiểm tra nhanh</button>' + (fresh ? '' : ' · <button class="dimlink" id="entryRedoLink">Làm lại kiểm tra đầu vào</button>') + ' · <button class="dimlink" id="loginLink">Đăng nhập</button></p>'
-    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details>';
+    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var ll = $("#loginLink"); if (ll) { try { ll.textContent = (typeof authState !== "undefined" && authState.user) ? "Tài khoản: " + authState.user.email : "Đăng nhập"; } catch (e) {} }
@@ -2281,8 +2330,9 @@ function enPracticeEntHTML() {
   var gameDefs2 = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["dropword", "🌧️", "Gõ từ rơi"], ["guessword", "❓", "Đoán từ"], ["matchpairs", "🃏", "Ghép cặp lật thẻ"]];
   return '<h3>🎬 Giải trí — 10 game + video hoạt hình</h3><p class="mut">Khu giải trí luôn mở sẵn — bấm là chơi ngay, không cần mở thu gọn. 3 game từ vựng mới: gõ từ rơi, đoán từ kiểu Wordle và ghép cặp lật thẻ — chơi bằng đúng bộ từ bạn đang học, sai vào Sổ lỗi sai, cuối ván có tổng kết.</p>'
     + '<p><button class="btn" id="u7PlayNowPractice">🎮 Chơi thử ngay</button></p>'
-    + '<div class="qblock" style="border:2px solid #f59e0b"><h3>🏝️ MỚI — Biệt đội Săn Từ: Vòng 1</h3><p class="mut">Phiêu lưu 60–90 giây: chọn đảo, chạy nhảy né bẫy bằng một ngón tay, thu 3 ngọc từ, giải mật mã nghe–đánh vần rồi vượt boss 3 giai đoạn. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="waStartBtn">🏝️ Chơi Vòng 1 — Biệt đội Săn Từ' + coopPlayedLabel("wordadv") + '</button></p></div>'
-    + '<div class="qblock" style="border:2px solid #0ea5e9"><h3>🏙️ MỚI — Thành phố Ngôn Ngữ: Chương 1</h3><p class="mut">Phiêu lưu PC: đi bộ quanh thành phố bằng WASD/chuột, nói chuyện với 2 người dân, tìm 3 trang từ điển, nối manh mối trên bảng điều tra rồi trình bày kết luận. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="lqStartBtn">🏙️ Chơi Chương 1 — Thành phố Ngôn Ngữ' + coopPlayedLabel("langquest") + '</button></p></div>' + '<div class="qblock" style="border:2px solid #059669"><h3>👥 MỚI — Phòng CO-OP: Cánh cổng tri thức (theo lượt)</h3><p class="mut">Chơi cùng 2–4 người thật, theo lượt: tạo phòng lấy mã, mỗi người nhận manh mối riêng, chia sẻ cho cả đội bằng tin nhắn mẫu, cùng mở cổng và chia đều thưởng. Cần đăng nhập để đồng bộ với bạn chơi khác; khách chỉ chơi đơn được. Không có người chơi giả, không chat tự do.</p><p><button class="btn btn-primary" id="coopStartBtn">👥 Vào phòng CO-OP' + coopPlayedLabel("coop") + '</button></p></div>'
+    + (function () { var ghOrder = [["wordadv", "Biệt đội Săn Từ — Vòng 1"], ["langquest", "Thành phố Ngôn Ngữ — Chương 1"], ["coop", "Phòng CO-OP — Cánh cổng tri thức"]]; var ghNext = null; for (var gi = 0; gi < ghOrder.length; gi++) { if (!gameBest(ghOrder[gi][0])) { ghNext = ghOrder[gi]; break; } } var ghAll = !ghNext; if (ghAll) ghNext = ghOrder[0]; return '<p><button class="btn btn-primary" id="gameHubPlayNow" data-ghtype="' + ghNext[0] + '">▶ ' + (ghAll ? 'Chơi lại: ' : 'Chơi ngay: ') + ghNext[1] + '</button></p>'; })()
+    + '<div class="game-tile"><h3>🏝️ MỚI — Biệt đội Săn Từ: Vòng 1</h3><p class="mut">Phiêu lưu 60–90 giây: chọn đảo, chạy nhảy né bẫy bằng một ngón tay, thu 3 ngọc từ, giải mật mã nghe–đánh vần rồi vượt boss 3 giai đoạn. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="waStartBtn">🏝️ Chơi Vòng 1 — Biệt đội Săn Từ' + coopPlayedLabel("wordadv") + '</button></p></div>'
+    + '<div class="game-tile lq"><h3>🏙️ MỚI — Thành phố Ngôn Ngữ: Chương 1</h3><p class="mut">Phiêu lưu PC: đi bộ quanh thành phố bằng WASD/chuột, nói chuyện với 2 người dân, tìm 3 trang từ điển, nối manh mối trên bảng điều tra rồi trình bày kết luận. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="lqStartBtn">🏙️ Chơi Chương 1 — Thành phố Ngôn Ngữ' + coopPlayedLabel("langquest") + '</button></p></div>' + '<div class="game-tile coop"><h3>👥 MỚI — Phòng CO-OP: Cánh cổng tri thức (theo lượt)</h3><p class="mut">Chơi cùng 2–4 người thật, theo lượt: tạo phòng lấy mã, mỗi người nhận manh mối riêng, chia sẻ cho cả đội bằng tin nhắn mẫu, cùng mở cổng và chia đều thưởng. Cần đăng nhập để đồng bộ với bạn chơi khác; khách chỉ chơi đơn được. Không có người chơi giả, không chat tự do.</p><p><button class="btn btn-primary" id="coopStartBtn">👥 Vào phòng CO-OP' + coopPlayedLabel("coop") + '</button></p></div>'
     + '<div class="row">' + gameDefs2.map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div>' + '<div class="qblock"><h3>🌐 Game bên ngoài — chơi trên trang khác</h3><p class="mut">4 game dưới đây KHÔNG phải game của web mình — bấm vào sẽ mở trang khác trong tab mới, không tính điểm vào web mình. Cả 4 game đều chỉ có tiếng Anh nên mỗi game có hướng dẫn tiếng Việt và nghĩa gợi ý do web mình tự soạn. Chơi miễn phí, không cần đăng nhập.</p>'
     + '<p><b>🔗 <a href="https://learnenglishkids.britishcouncil.org/fun-games/games/wordshake" target="_blank" rel="noopener">Wordshake (British Council)</a> — game bên ngoài</b><br><span class="mut">Trong 3 phút, bấm các chữ cái kề nhau trên lưới 4×4 để tạo thành từ tiếng Anh. Gợi ý: cứ từ nào bạn biết nghĩa thì tạo từ đó — ví dụ từ chỉ quả: PEAR là quả lê. Game không có hình minh họa nên hợp hơn với bạn đã biết một ít từ.</span></p>'
     + '<p><b>🔗 <a href="https://www.gamestolearnenglish.com/hangman/" target="_blank" rel="noopener">Hangman chủ đề Food, mức Easy (Games to Learn English)</a> — game bên ngoài</b><br><span class="mut">Vào game chọn mức Easy và chủ đề Food, rồi đoán từng chữ cái để tìm từ về đồ ăn — ví dụ TOMATOES là cà chua. Dưới khung game chỉ có một banner quảng cáo nhỏ, không che màn hình; trang có liên kết ủng hộ tự nguyện, không bắt trả tiền. Đoán đúng hết thì có hình gợi ý hiện ra.</span></p>'
@@ -2292,6 +2342,7 @@ function enPracticeEntHTML() {
 function enPracticeEntWire(m) {
   m.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
   var pn = m.querySelector("#u7PlayNowPractice"); if (pn) pn.onclick = function () { openLesson({ type: "u7trial" }); };
+  var gh = m.querySelector("#gameHubPlayNow"); if (gh) gh.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: gh.dataset.ghtype }); };
   var wa = m.querySelector("#waStartBtn"); if (wa) wa.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "wordadv" }); };
   var lq = m.querySelector("#lqStartBtn"); if (lq) lq.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "langquest" }); };
   var cpb = m.querySelector("#coopStartBtn"); if (cpb) cpb.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "coop" }); };
@@ -12692,6 +12743,7 @@ function viewHomeZh(app) {
   var html = trackSwitchHTML(true);
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span><button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += '<p id="homeGreet">' + (fresh ? 'Hôm nay 2812 cùng bạn học tiếng Trung nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếng Trung nhé.') + '</p>';
+  html += '<div class="bento-hub"><div class="bento-tile bento-hero">';
   if (fresh) {
     html += '<section class="card next-card" id="zhEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TIẾNG TRUNG</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi HSK thật. Bỏ qua thì học từ chặng 1.</p><div class="row"><button class="btn btn-primary" id="zhEntryStartBtn">Kiểm tra đầu vào HSK</button><button class="btn" id="zhNextBtn">Bỏ qua, học từ chặng 1</button></div></div></div></section>';
   } else {
@@ -12699,18 +12751,19 @@ function viewHomeZh(app) {
     var zhXp = (t.title.indexOf("Ôn lại") === 0) ? "" : " · +10 XP";
     html += '<section class="card next-card" id="zhNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TIẾNG TRUNG</p><h2>' + esc(t.title) + '</h2><p class="mut">' + esc(t.type) + '</p><button class="btn btn-primary" id="zhNextBtn">Học tiếp: ' + esc(t.title) + ' →' + zhXp + '</button></div></div></section>';
   }
-  html += typeEntryRowHTML("zh");
-  if (!fresh) html += specTodayZhHTML(t.title);
+  html += '</div>';
+  html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("zh") + '</div>';
+  if (!fresh) html += '<div class="bento-tile bento-today">' + specTodayZhHTML(t.title) + '</div>';
   var zp = zhPositionCurrent() || { stage: 1, done: 0, total: 0 };
-  html += '<section class="card" id="zhHomePath"><h3>Chặng hiện tại: Chặng ' + zp.stage + '</h3><p class="mut">Đã xong ' + zp.done + '/' + zp.total + ' bước học — toàn bộ bước xem ở Bản đồ, khỏi cuộn dài ở màn chính.</p><div class="row"><button class="btn" id="zhHomeStageBtn">Xem chặng này ở Bản đồ →</button></div></section>';
-  html += '<div class="row"><button class="btn" id="zhHomeFullMapBtn">Xem toàn bộ bản đồ 6 chặng →</button></div>';
-  html += msHomeHTML("zh");
+  html += '<div class="bento-tile"><section class="card" id="zhHomePath"><h3>Chặng hiện tại: Chặng ' + zp.stage + '</h3><p class="mut">Đã xong ' + zp.done + '/' + zp.total + ' bước học — toàn bộ bước xem ở Bản đồ, khỏi cuộn dài ở màn chính.</p><div class="row"><button class="btn" id="zhHomeStageBtn">Xem chặng này ở Bản đồ →</button></div></section></div>';
+  html += '<div class="bento-tile"><div class="row"><button class="btn" id="zhHomeFullMapBtn">Xem toàn bộ bản đồ 6 chặng →</button></div></div>';
+  html += '<div class="bento-tile bento-ms">' + msHomeHTML("zh") + '</div>';
   /* D3b: Trang chu chi giu link gon toi HSKK; the day du chi o Ban do. */
-  html += '<section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Bản đồ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Bản đồ →</button></div></section>';
-  html += zhSystemEHTML();
-  html += '<details class="card" id="zhHomeMore"><summary><b>Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập</b></summary>'
+  html += '<div class="bento-tile"><section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Bản đồ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Bản đồ →</button></div></section></div>';
+  html += '<div class="bento-tile">' + zhSystemEHTML() + '</div>';
+  html += '<div class="bento-tile bento-wide"><details class="card" id="zhHomeMore"><summary><b>Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập</b></summary>'
     + '<p>' + (fresh ? '' : '<button class="dimlink" id="zhEntryRedoLink">Làm lại kiểm tra đầu vào HSK</button> · ') + '<button class="dimlink" id="zhToRoadmap">Xem bản đồ tiếng Trung →</button> · <button class="dimlink" id="zhLoginLink">Đăng nhập</button></p>'
-    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details>';
+    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = $("#zhNextBtn"); if (nb) nb.onclick = function () {
@@ -14763,20 +14816,22 @@ function viewHomeTc(app) {
   var html = trackSwitchHTML(true);
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span><button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng 2812 luyện TOEIC nhé.</p>';
+  html += '<div class="bento-hub"><div class="bento-tile bento-hero">';
   if (n) {
     html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TOEIC</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOEIC Nghe–Đọc, từ 450 tới 900+.</p><button class="btn btn-primary" id="tcNextBtn">Học tiếp: ' + esc(n.meta.title) + ' → · +10 XP</button></div></div></section>';
   } else {
     html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOEIC</p><h2>Bạn đã xong hết các bước TOEIC hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p></div></div></section>';
   }
-  html += typeEntryRowHTML("tc");
-  html += specTodayTcHTML(n ? n.id : null);
-  html += '<section class="card" id="tcHomePath"><h3>Lộ trình TOEIC của bạn</h3>';
+  html += '</div>';
+  html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("tc") + '</div>';
+  html += '<div class="bento-tile bento-today">' + specTodayTcHTML(n ? n.id : null) + '</div>';
+  html += '<div class="bento-tile"><section class="card" id="tcHomePath"><h3>Lộ trình TOEIC của bạn</h3>';
   TC_STAGES.forEach(function (st, i) {
     html += '<p><b>' + esc(st.title) + '</b> — đã xong ' + tcStagePct(i) + '%</p>';
   });
-  html += '<div class="row"><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button></div></section>';
-  html += msHomeHTML("tc");
-  html += '<details class="card"><summary><b>TOEIC Nghe–Đọc là gì? — bấm để mở</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details>';
+  html += '<div class="row"><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button></div></section></div>';
+  html += '<div class="bento-tile">' + msHomeHTML("tc") + '</div>';
+  html += '<div class="bento-tile bento-wide"><details class="card"><summary><b>TOEIC Nghe–Đọc là gì? — bấm để mở</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tcNextBtn"); if (nb) nb.onclick = function () { var nn = tcNextStep(); if (nn) tcOpenStep(nn.id, "home"); };
@@ -15411,20 +15466,22 @@ function viewHomeTp(app) {
   var html = trackSwitchHTML(true);
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span><button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng 2812 luyện TOPIK nhé.</p>';
+  html += '<div class="bento-hub"><div class="bento-tile bento-hero">';
   if (n) {
     html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TOPIK</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOPIK: Hangul trước, rồi TOPIK I cấp 1–2, hướng lên TOPIK II.</p><button class="btn btn-primary" id="tpNextBtn">Học tiếp: ' + esc(n.meta.title) + ' → · +10 XP</button></div></div></section>';
   } else {
     html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOPIK</p><h2>Bạn đã xong hết các bước TOPIK hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p></div></div></section>';
   }
-  html += typeEntryRowHTML("tp");
-  html += specTodayTpHTML(n ? n.id : null);
-  html += '<section class="card" id="tpHomePath"><h3>Lộ trình TOPIK của bạn</h3>';
+  html += '</div>';
+  html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("tp") + '</div>';
+  html += '<div class="bento-tile bento-today">' + specTodayTpHTML(n ? n.id : null) + '</div>';
+  html += '<div class="bento-tile"><section class="card" id="tpHomePath"><h3>Lộ trình TOPIK của bạn</h3>';
   TP_STAGES.forEach(function (st, i) {
     html += '<p><b>' + esc(st.title) + '</b> — đã xong ' + tpStagePct(i) + '%</p>';
   });
-  html += '<div class="row"><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button></div></section>';
-  html += msHomeHTML("tp");
-  html += '<details class="card"><summary><b>TOPIK là gì? — bấm để mở</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details>';
+  html += '<div class="row"><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button></div></section></div>';
+  html += '<div class="bento-tile">' + msHomeHTML("tp") + '</div>';
+  html += '<div class="bento-tile bento-wide"><details class="card"><summary><b>TOPIK là gì? — bấm để mở</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tpNextBtn"); if (nb) nb.onclick = function () { var nn = tpNextStep(); if (nn) tpOpenStep(nn.id, "home"); };
