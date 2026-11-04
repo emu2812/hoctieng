@@ -132,9 +132,9 @@ body.has-bottombar #btnBack{display:none}
    Lưới thẻ game dùng .card sẵn có + tông hổ phách của web; chế độ thế giới
    ẩn chrome site (header, tabbar, banner, nút gia sư, thanh dưới) để game
    chiếm toàn màn hình, chỉ còn nút Thoát game. */
-.ent-grid{display:grid;gap:16px;margin:16px 0}
-@media(min-width:700px){.ent-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.ent-card{min-width:0;display:flex;flex-direction:column}
+.ent-grid{display:flex;flex-wrap:wrap;gap:16px;margin:16px 0}
+.ent-card{flex:1 1 100%;min-width:0;display:flex;flex-direction:column}
+@media(min-width:700px){.ent-card{flex-basis:calc(33.333% - 11px)}}
 .ent-card .ent-img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center;border-radius:12px;display:block}
 .ent-card p.ent-playrow{margin-top:auto}
 /* ---- TRANG CHỦ MỚI + KHÔNG GIAN BÀI HỌC 3 CỘT (04/11/2026) ----
@@ -235,6 +235,12 @@ body.in-lesson #tabBar{position:static}
 body.in-lesson .lessonframe{top:0}
 .bento-side{display:none}
 @media (min-width:1200px){#app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,820px) 300px;justify-content:center}#app.lesson-view:has(>.lesson-main)>.bento-side{display:block;position:sticky;top:120px}}
+/* v68 cân đối: workspace ẩn panel phụ, 3 cột dùng hết chiều rộng */
+body.workspace-open #app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,1fr)}
+body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none}
+/* v68 cân đối: màn chơi Bắn từ rơi lấp đầy chiều cao viewport trên desktop */
+.ts-world{display:flex;flex-direction:column}
+@media(min-width:700px){.ts-world{min-height:100dvh}.ts-world>.qblock{flex:1}}
 .bento-side .bento-tile{margin:0 0 16px}
 .bigletter{overflow-wrap:break-word;max-width:100%}
 </style>
@@ -1232,6 +1238,8 @@ if (typeof document !== "undefined" && !window.__specDeleg) { window.__specDeleg
 function applyLessonLayout(app) {
   if (!app) return;
   app.classList.remove("lesson-view");
+  /* v68 cân đối: workspace tự gắn class để CSS ẩn panel phụ + nới lưới bài học */
+  document.body.classList.toggle("workspace-open", !!(typeof curLesson !== "undefined" && curLesson && curLesson.type === "workspace"));
   var frame = app.querySelector(".lessonframe");
   if (!frame) return;
   var main = document.createElement("div"); main.className = "lesson-main";
@@ -1505,6 +1513,7 @@ function wireVocabSearch(searchId, wrapId) {
 
 function render() {
   document.body.classList.remove("in-lesson");
+  document.body.classList.remove("workspace-open");
   normZh();
   try { updateSiteTitle(); } catch (e) {}
   try { settleStreakFreeze(); } catch (e) {}
@@ -13088,9 +13097,14 @@ function viewHomeZh(app) {
   /* D3b: Trang chu chi giu link gon toi HSKK; the day du chi o Ban do. */
   html += '<div class="bento-tile"><section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Bản đồ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Bản đồ →</button></div></section></div>';
   html += '<div class="bento-tile">' + zhSystemEHTML() + '</div>';
-  html += '<div class="bento-tile bento-wide"><details class="card" id="zhHomeMore"><summary><b>Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập</b></summary>'
-    + '<p>' + (fresh ? '' : '<button class="dimlink" id="zhEntryRedoLink">Làm lại kiểm tra đầu vào HSK</button> · ') + '<button class="dimlink" id="zhToRoadmap">Xem bản đồ tiếng Trung →</button> · <button class="dimlink" id="zhLoginLink">Đăng nhập</button></p>'
-    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details></div></div>';
+  /* v68 cân đối: tách trạng thái đóng băng chuỗi khỏi khối Xem thêm thành tile
+     riêng để hàng cuối đủ 4 tile (người dùng cũ); người dùng mới còn thiếu 1 ô
+     do vắng tile today nên tách thêm nút Đăng nhập thành tile riêng chỉ khi
+     fresh — cả hai đều là DỜI nội dung khỏi Xem thêm, không lặp thông tin. */
+  html += '<div class="bento-tile"><section class="card" id="zhHomeFreeze"><h3>❄️ Đóng băng chuỗi</h3><p class="mut">Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></section></div>';
+  if (fresh) html += '<div class="bento-tile"><section class="card" id="zhHomeAccount"><h3>👤 Tài khoản</h3><p class="mut">Đăng nhập để lưu tiến trình và đồng bộ.</p><div class="row"><button class="btn" id="zhLoginTileBtn">Đăng nhập →</button></div></section></div>';
+  html += '<div class="bento-tile bento-wide"><details class="card" id="zhHomeMore"><summary><b>' + (fresh ? 'Xem thêm: bản đồ' : 'Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập') + '</b></summary>'
+    + '<p>' + (fresh ? '' : '<button class="dimlink" id="zhEntryRedoLink">Làm lại kiểm tra đầu vào HSK</button> · ') + '<button class="dimlink" id="zhToRoadmap">Xem bản đồ tiếng Trung →</button>' + (fresh ? '' : ' · <button class="dimlink" id="zhLoginLink">Đăng nhập</button>') + '</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = $("#zhNextBtn"); if (nb) nb.onclick = function () {
@@ -13105,6 +13119,7 @@ function viewHomeZh(app) {
   var hfm = $("#zhHomeFullMapBtn"); if (hfm) hfm.onclick = function () { go("roadmap"); };
   var zhs = $("#zhHomeStageBtn"); if (zhs) zhs.onclick = function () { go("roadmap"); };
   var lg = $("#zhLoginLink"); if (lg) lg.onclick = function () { go("mine"); };
+  var ltb = $("#zhLoginTileBtn"); if (ltb) ltb.onclick = function () { go("mine"); };
   wireZhMap(app);
   wireZhHskk();
 }

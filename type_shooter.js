@@ -448,12 +448,12 @@ function renderTypeShooter(app, l) {
     return;
   }
   if (s.phase === "play" || s.phase === "pause") {
-    app.innerHTML = head + '<div class="game-hud" style="display:flex;justify-content:space-between;gap:8px"><span id="tsHudScore"></span><span id="tsHudLevel"></span><span id="tsHudLives"></span></div>'
+    app.innerHTML = head + '<div class="ts-world"><div class="game-hud" style="display:flex;justify-content:space-between;gap:8px"><span id="tsHudScore"></span><span id="tsHudLevel"></span><span id="tsHudLives"></span></div>'
       + '<div class="qblock"><p id="tsBanner" class="mut">Gõ từ đang rơi để bắn hạ!</p>'
       + '<canvas id="tsCanvas" width="360" height="480" style="width:100%;max-width:480px;border:2px solid #D97706;border-radius:20px;background:#1e1b4b;display:block"></canvas>'
       + '<div class="row" style="margin-top:8px"><input id="tsInput" type="text" autocomplete="off" autocapitalize="off" placeholder="Gõ từ đang rơi vào đây…" style="flex:1;padding:12px;font-size:18px;border:2px solid #D97706;border-radius:12px">'
       + '<button class="btn btn-primary" id="tsPause">⏸ Tạm dừng</button><button class="btn" id="tsSound">🔊 Âm thanh</button></div>'
-      + '<p class="mut">Gõ đúng hết một từ thì bắn hạ. Từ chạm vạch đỏ dưới cùng thì mất 1 tim.</p></div>';
+      + '<p class="mut">Gõ đúng hết một từ thì bắn hạ. Từ chạm vạch đỏ dưới cùng thì mất 1 tim.</p></div></div>';
     backBtn();
     tsUpdateHud(l);
     var inp = document.getElementById("tsInput");

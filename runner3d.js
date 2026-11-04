@@ -506,13 +506,31 @@ function r3dWorldOverlay() {
   try { el = document.getElementById("r3dWorld"); } catch (e) {}
   return el;
 }
+/* v68 cân đối: nút Thoát game cấp site (z-99) nằm DƯỚI overlay runner
+   (z-9999) nên không bấm được trong lúc chơi — runner có nút thoát riêng
+   mới là lối thoát thật. Ẩn nút site khi vào game, khôi phục khi thoát
+   (giá trị cũ nhớ trên chính overlay, như _r3dChrome). */
+function r3dHideSiteExit(ov) {
+  try {
+    var gx = document.getElementById("gameWorldExit");
+    if (!gx) return;
+    if (ov && ov._r3dGameExit === undefined) ov._r3dGameExit = gx.style.display || "";
+    gx.style.display = "none";
+  } catch (e) {}
+}
+function r3dRestoreSiteExit(ov) {
+  try {
+    var gx = document.getElementById("gameWorldExit");
+    if (gx && ov && ov._r3dGameExit !== undefined) gx.style.display = ov._r3dGameExit;
+  } catch (e) {}
+}
 function r3dEnterWorld(l) {
   var s = l.r3d; if (!s) return null;
   /* Dùng lại overlay đã có (không tạo trùng): một thế giới duy nhất tại một
      thời điểm, trạng thái ẩn chrome lưu trên chính overlay để Thoát luôn
      khôi phục đúng dù game đã reset state giữa chừng. */
   var existing = r3dWorldOverlay();
-  if (existing) { s.worldOn = true; return existing; }
+  if (existing) { s.worldOn = true; r3dHideSiteExit(existing); return existing; }
   var ov = null;
   try {
     ov = document.createElement("div");
@@ -534,6 +552,7 @@ function r3dEnterWorld(l) {
     }
   });
   try { document.body.style.overflow = "hidden"; } catch (e) {}
+  r3dHideSiteExit(ov);
   s.worldOn = true;
   return ov;
 }
@@ -544,6 +563,7 @@ function r3dExitWorld(l) {
   if (ov) {
     var recs = ov._r3dChrome || [];
     recs.forEach(function (rec) { try { rec.el.style.display = rec.display; } catch (e) {} });
+    r3dRestoreSiteExit(ov);
     try { if (ov.parentNode) ov.parentNode.removeChild(ov); } catch (e) {}
   }
   try { document.body.style.overflow = ""; } catch (e) {}
