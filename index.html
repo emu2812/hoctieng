@@ -2281,6 +2281,7 @@ function enPracticeEntHTML() {
   var gameDefs2 = [["match", "🔗", "Nối từ thần tốc"], ["unscramble", "🔤", "Giải mã chữ"], ["listeng", "👂", "Nghe và đoán"], ["typerace", "⌨️", "Đua gõ câu"], ["order", "🧩", "Xếp câu đúng"], ["quiz", "🧗", "Quiz leo thang"], ["duegame", "📅", "Ôn từ đến hạn"], ["dropword", "🌧️", "Gõ từ rơi"], ["guessword", "❓", "Đoán từ"], ["matchpairs", "🃏", "Ghép cặp lật thẻ"]];
   return '<h3>🎬 Giải trí — 10 game + video hoạt hình</h3><p class="mut">Khu giải trí luôn mở sẵn — bấm là chơi ngay, không cần mở thu gọn. 3 game từ vựng mới: gõ từ rơi, đoán từ kiểu Wordle và ghép cặp lật thẻ — chơi bằng đúng bộ từ bạn đang học, sai vào Sổ lỗi sai, cuối ván có tổng kết.</p>'
     + '<p><button class="btn" id="u7PlayNowPractice">🎮 Chơi thử ngay</button></p>'
+    + '<div class="qblock" style="border:2px solid #f59e0b"><h3>🏝️ MỚI — Biệt đội Săn Từ: Vòng 1</h3><p class="mut">Phiêu lưu 60–90 giây: chọn đảo, chạy nhảy né bẫy bằng một ngón tay, thu 3 ngọc từ, giải mật mã nghe–đánh vần rồi vượt boss 3 giai đoạn. Chơi bằng đúng bộ từ bạn đang học; sai vào Sổ lỗi sai.</p><p><button class="btn btn-primary" id="waStartBtn">🏝️ Chơi Vòng 1 — Biệt đội Săn Từ</button></p></div>'
     + '<div class="row">' + gameDefs2.map(function (gd) { var b = gameBest(gd[0]); return '<button class="btn" data-gamebtn="' + gd[0] + '">' + gd[1] + ' ' + gd[2] + (b ? ' · 🏆 ' + b.score + ' điểm' : ' · chưa chơi') + '</button>'; }).join("") + '</div>' + '<div class="qblock"><h3>🌐 Game bên ngoài — chơi trên trang khác</h3><p class="mut">4 game dưới đây KHÔNG phải game của web mình — bấm vào sẽ mở trang khác trong tab mới, không tính điểm vào web mình. Cả 4 game đều chỉ có tiếng Anh nên mỗi game có hướng dẫn tiếng Việt và nghĩa gợi ý do web mình tự soạn. Chơi miễn phí, không cần đăng nhập.</p>'
     + '<p><b>🔗 <a href="https://learnenglishkids.britishcouncil.org/fun-games/games/wordshake" target="_blank" rel="noopener">Wordshake (British Council)</a> — game bên ngoài</b><br><span class="mut">Trong 3 phút, bấm các chữ cái kề nhau trên lưới 4×4 để tạo thành từ tiếng Anh. Gợi ý: cứ từ nào bạn biết nghĩa thì tạo từ đó — ví dụ từ chỉ quả: PEAR là quả lê. Game không có hình minh họa nên hợp hơn với bạn đã biết một ít từ.</span></p>'
     + '<p><b>🔗 <a href="https://www.gamestolearnenglish.com/hangman/" target="_blank" rel="noopener">Hangman chủ đề Food, mức Easy (Games to Learn English)</a> — game bên ngoài</b><br><span class="mut">Vào game chọn mức Easy và chủ đề Food, rồi đoán từng chữ cái để tìm từ về đồ ăn — ví dụ TOMATOES là cà chua. Dưới khung game chỉ có một banner quảng cáo nhỏ, không che màn hình; trang có liên kết ủng hộ tự nguyện, không bắt trả tiền. Đoán đúng hết thì có hình gợi ý hiện ra.</span></p>'
@@ -2290,6 +2291,7 @@ function enPracticeEntHTML() {
 function enPracticeEntWire(m) {
   m.querySelectorAll("[data-gamebtn]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: b.dataset.gamebtn }); }; });
   var pn = m.querySelector("#u7PlayNowPractice"); if (pn) pn.onclick = function () { openLesson({ type: "u7trial" }); };
+  var wa = m.querySelector("#waStartBtn"); if (wa) wa.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "wordadv" }); };
   videoVOAWire();
 }
 function viewPractice(app) {
@@ -4561,6 +4563,7 @@ function renderLesson(app) {
   else if (l.type === "phaseSkill") renderPhaseSkill(app, l);
   else if (l.type === "mockTest") renderMockTest(app, l);
   else if (l.type === "game") renderArcadeLesson(app, l);
+  else if (l.type === "wordadv") renderWordAdv(app, l);
   else if (l.type === "skillTyping") renderTypingLesson(app, l);
   else if (l.type === "weakSession") renderWeakSession(app, l);
   else if (l.type === "reviewSession") renderReviewSession(app, l);
@@ -15508,5 +15511,6 @@ authRefresh().then(function () { authState.authLoading = false; render(); }, fun
 authWatch();
 wireTutorFloat();
 </script>
+<script src="word_adventure.js"></script>
 </body>
 </html>
