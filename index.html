@@ -392,6 +392,7 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <script src="g71_rong_bay.js"></script>
 <script src="g71_ban_bong_bong.js"></script>
 <script src="g71_rong_lua.js"></script>
+<script src="g71_dau_bai.js"></script>
 <script>
 "use strict";
 /* ============ SHELL BẢN MỚI — GIAI ĐOẠN 1 ============
@@ -2386,7 +2387,9 @@ function homeQuickHTML() {
    dây nối của game cũ). Thắng +10 XP bằng hàm sẵn có; thua không
    trừ gì. Từ vựng lấy từ kho bài học tiếng Anh.
    v77 — thêm thẻ thứ 4 "Rồng Lửa — bản thử" (g71_rong_lua.js): lát cắt
-   chơi được đầu tiên của game Rồng Lửa RPG, vùng 1 Rừng Xanh. */
+   chơi được đầu tiên của game Rồng Lửa RPG, vùng 1 Rừng Xanh.
+   v85 — thêm thẻ thứ 5 "Đấu Bài Với Máy" (g71_dau_bai.js): đấu bài theo
+   lượt với máy, thẻ là từ thật + sức mạnh + hệ, gõ đúng từ để tung chiêu. */
 function viewGamesHub(app) {
   var cards = [
     { key: "go", icon: "msc-dragon", title: "⌨️ Luyện Gõ",
@@ -2396,7 +2399,9 @@ function viewGamesHub(app) {
     { key: "bubble", icon: "msc-snake", title: "🫧 Bắn Bong Bóng",
       desc: "Bong bóng mang từ tiếng Anh nổi dưới nước. Ngắm pháo, bắn vỡ đúng bong bóng. Đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim." },
     { key: "ronglua", icon: "msc-dragon", title: "🔥 Rồng Lửa — bản thử",
-      desc: "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái. Chạm quái để khóa, gõ đúng từ để tung chiêu theo hệ, khắc hệ gây sát thương tối đa, combo nhân tới x3. 3 ải, trùm cuối đổi hệ." }
+      desc: "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái. Chạm quái để khóa, gõ đúng từ để tung chiêu theo hệ, khắc hệ gây sát thương tối đa, combo nhân tới x3. 3 ải, trùm cuối đổi hệ." },
+    { key: "daubai", icon: "msc-dragon", title: "🃏 Đấu Bài Với Máy",
+      desc: "Mỗi bên một bộ bài — lá là từ thật kèm sức mạnh + hệ Lửa/Nước/Điện. Mỗi lượt bốc 1 lá, đánh 1 lá: Đánh, Đỡ hay Hồi tùy bạn; gõ đúng từ trên lá để tung chiêu, gõ sai chỉ gõ lại. Thắng vì chọn bài khôn hơn — thắng được vàng + 1 lá mới." }
   ];
   var html = trackSwitchHTML();
   html += '<h2>Trò chơi</h2>';
@@ -2417,6 +2422,7 @@ function viewGamesHub(app) {
       else if (k === "dragon") G71RongBay.start();
       else if (k === "bubble") G71BanBongBong.start();
       else if (k === "ronglua") G71RongLua.start();
+      else if (k === "daubai") G71DauBai.start();
     };
   });
   var back = app.querySelector("#g71HubHome");
