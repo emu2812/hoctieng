@@ -14,7 +14,6 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-ap
 .qblock p{max-width:820px}
 .qblock .mut{max-width:820px}
 header h1{font-size:30px;margin:6px 0 2px}
-header .sub{color:var(--mut);font-size:14px}
 .tabbar{display:flex;gap:6px;position:sticky;top:0;background:var(--paper);padding:8px 0;z-index:5;flex-wrap:wrap}
 .tab{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font-size:15px;cursor:pointer;min-height:44px}
 .tab.on{background:var(--amber);border-color:var(--amber);font-weight:700}
@@ -136,11 +135,51 @@ body.has-bottombar #btnBack{display:none}
    Chỉ dùng dữ liệu thật của web: state (localStorage ielts_rebuild_v1),
    kho bài/kho từ sẵn có, video VOA + câu thoại VIDEO_LINES đã có.
    Không bịa lịch sử học, không bảng xếp hạng. */
-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.home-shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;align-items:start}
-.home-sidebar .home-navbtn{display:block;width:100%;text-align:left;margin:0 0 8px}
 .home-main{min-width:0}
-@media(max-width:900px){.home-shell{display:block}.home-sidebar{display:none}}
+/* ---- V72: KHUNG UNG DUNG (hoc Parroto: thanh ben + thanh tren + cot giua) ---- */
+.app-frame{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start}
+.app-sidebar{position:sticky;top:12px;background:#fff;border:1.5px solid var(--line2);border-radius:18px;padding:16px 12px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 24px)}
+.app-sidebar nav{overflow-y:auto;flex:1;min-height:0}
+.sb-logo h1{font-size:20px;margin:0}
+.sb-mark{display:none}
+.sb-search input,.app-topbar input{width:100%;border:1.5px solid var(--line);border-radius:999px;padding:10px 14px;font-size:15px;background:#fff}
+.app-sidebar .home-navbtn{display:flex;gap:10px;align-items:center;width:100%;text-align:left;margin:0 0 6px}
+.app-sidebar .home-navbtn.on{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:700}
+.sb-bottom{border-top:1.5px solid var(--line2);padding-top:12px}
+.sb-profile{margin:12px 0 0}
+.app-col{min-width:0}
+.app-topbar{position:sticky;top:0;z-index:6;display:flex;gap:10px;align-items:center;background:var(--paper);padding:10px 0;border-bottom:1.5px solid var(--line2);min-height:66px}
+.app-topbar input{flex:1;min-width:0;max-width:420px}
+.tb-spacer{flex:1}
+.tb-track{font-weight:700;white-space:nowrap}
+#appFooter{margin:28px 0 0;border-top:1.5px solid var(--line2);padding:20px 0 0}
+.foot-grid{display:grid;gap:16px;grid-template-columns:1.4fr 1fr 1fr 1fr}
+@media(min-width:901px){.tabbar{display:none}.app-col .lessonframe{top:70px}}
+@media(max-width:900px){.app-frame{display:block}.app-sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:60;width:280px;max-height:none;border-radius:0;overflow-y:auto}body.sidebar-open .app-sidebar{display:flex}.tabbar{top:70px}.foot-grid{grid-template-columns:1fr 1fr}.tb-track{display:none}#tbAccountBtn{display:none}}
+body.sidebar-collapsed .app-frame{grid-template-columns:64px minmax(0,1fr)}
+body.sidebar-collapsed .sb-logo h1,body.sidebar-collapsed .sb-tag,body.sidebar-collapsed .sb-search,body.sidebar-collapsed .sb-txt,body.sidebar-collapsed .sb-profile{display:none}
+body.sidebar-collapsed .sb-mark{display:block;font-size:28px;text-align:center}
+body.sidebar-collapsed .app-sidebar .home-navbtn{justify-content:center;padding:12px 8px}
+body.landing-on .app-sidebar,body.landing-on .app-topbar,body.landing-on #appFooter{display:none}
+body.landing-on .app-frame{display:block}
+/* ---- V72: DUONG UON + NUT SAO (hoc Duolingo: chi lay ban do/duong) ---- */
+.duo-path{display:flex;flex-direction:column;align-items:center;position:relative;padding:8px 0 16px}
+.duo-path::before{content:"";position:absolute;left:50%;top:20px;bottom:20px;width:4px;margin-left:-2px;background:var(--line2);border-radius:4px}
+.duo-path .step-row,.duo-path .path-node{position:relative;width:216px;flex-direction:column;align-items:center;text-align:center;background:transparent;border:0;padding:8px 0;margin:8px 0;font-family:inherit}
+.duo-node.pos0{margin-left:0}.duo-node.pos1{margin-left:64px}.duo-node.pos2{margin-left:128px}.duo-node.pos3{margin-left:64px}.duo-node.pos4{margin-left:0}.duo-node.pos5{margin-left:-64px}.duo-node.pos6{margin-left:-128px}.duo-node.pos7{margin-left:-64px}
+.duo-star{font-size:52px;line-height:1;color:#C9BFA8;filter:drop-shadow(0 3px 0 rgba(0,0,0,.12))}
+.duo-node.done .duo-star{color:var(--green)}
+.duo-node.cur .duo-star{color:var(--amber);font-size:64px;animation:mascBob 2s ease-in-out infinite}
+.duo-node.skipped .duo-star{color:#C9BFA8}
+.duo-label{font-size:14px;margin-top:2px}
+.duo-label b{font-size:15px}
+.duo-st{font-size:13px;color:var(--mut)}
+.duo-node.done .duo-st{color:#147A4E;font-weight:700}
+.duo-node.cur .duo-st{color:#8A6100;font-weight:700}
+.duo-guide{width:64px;height:64px;margin-top:4px}
+.duo-chest .duo-star,.duo-cup .duo-star{font-size:56px}
+.chapter-row .unit-banner{margin:0 0 12px}
+@media(max-width:520px){.duo-path .step-row,.duo-path .path-node{width:200px}.duo-node.pos1{margin-left:32px}.duo-node.pos2{margin-left:64px}.duo-node.pos3{margin-left:32px}.duo-node.pos5{margin-left:-32px}.duo-node.pos6{margin-left:-64px}.duo-node.pos7{margin-left:-32px}}
 .heat-grid{display:grid;grid-template-rows:repeat(7,18px);grid-auto-flow:column;grid-auto-columns:18px;gap:3px;overflow-x:auto;padding-bottom:4px}
 .heat-cell{width:18px;height:18px;border-radius:4px;border:1px solid var(--line2);padding:0;cursor:pointer;background:#ece5d8}
 .heat-cell.lv1{background:#fde68a}.heat-cell.lv2{background:#fcd34d}.heat-cell.lv3{background:#f59e0b}.heat-cell.lv4{background:#b45309}
@@ -269,7 +308,15 @@ body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none
 </symbol>
 </defs></svg>
 <div class="wrap">
-<header><h1 id="siteTitle">Học tiếng Anh từ đầu</h1><button id="tutorFloatBtn" aria-label="Gia sư AI" title="Gia sư AI">🤖 Gia sư AI</button></header>
+<div class="app-frame" id="appFrame">
+<aside class="app-sidebar home-sidebar" id="appSidebar" aria-label="Điều hướng chính">
+<div class="sb-logo"><span class="sb-mark" aria-hidden="true">🐉</span><h1 id="siteTitle">Học tiếng Anh từ đầu</h1><p class="sb-tag mut">Học từ đầu, tới giao tiếp thật</p></div>
+<div class="sb-search"><input type="text" id="sbSearchInp" placeholder="🔍 Tìm bài học…" aria-label="Tìm bài học"></div>
+<nav id="appSidebarNav"></nav>
+<div class="sb-bottom"><button class="btn" id="sbCollapseBtn">« Thu gọn</button><div class="sb-profile" id="sbProfile"></div></div>
+</aside>
+<div class="app-col">
+<header class="app-topbar"><button class="btn" id="tbMenuBtn" aria-label="Mở hoặc đóng thanh bên">☰</button><input type="text" id="tbSearchInp" placeholder="🔍 Tìm bài học…" aria-label="Tìm bài học"><span class="tb-spacer"></span><span class="tb-track" id="tbTrackLabel"></span><button id="tutorFloatBtn" aria-label="Gia sư AI" title="Gia sư AI">🤖 Gia sư AI</button><button class="btn" id="tbAccountBtn">Tài khoản</button></header>
 <div id="previewBanner">Bạn đang ở chế độ khách — tiến trình lưu trên máy này, chưa đồng bộ tài khoản. Đăng nhập ở mục Của tôi → Tài khoản để đồng bộ.</div>
 <nav class="tabbar" id="tabBar">
 <button class="tab" data-tab="home">Học</button>
@@ -281,6 +328,14 @@ body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none
 <button class="tab" data-tab="mine">Của tôi</button>
 </nav>
 <main id="app"><div class="card"><p>Đang tải bài học…</p></div></main>
+<footer id="appFooter"><div class="foot-grid">
+<div><b>🐉 Học ngoại ngữ từ đầu</b><p class="mut">Nội dung tự soạn 100% · Miễn phí · Không quảng cáo giữa bài.</p></div>
+<div><b>Học tập</b><p><button class="dimlink" data-footgo="home">Học</button></p><p><button class="dimlink" data-footgo="roadmap">Bản đồ</button></p><p><button class="dimlink" data-footgo="practice">Luyện tập</button></p><p><button class="dimlink" data-footgo="review">Ôn tập</button></p></div>
+<div><b>Mở rộng</b><p><button class="dimlink" data-footgo="native">Giao tiếp bản địa</button></p><p><button class="dimlink" data-footgo="games">Trò chơi</button></p><p><button class="dimlink" data-footgo="mypath">Lộ trình riêng</button></p></div>
+<div><b>Tài khoản</b><p><button class="dimlink" data-footgo="mine">Của tôi</button></p></div>
+</div><p class="mut">Học từ đầu, tới giao tiếp thật.</p></footer>
+</div>
+</div>
 <div id="toast"></div>
 <div id="nudgeModal"><div class="box" id="nudgeBox"></div></div>
 </div>
@@ -1479,6 +1534,7 @@ function wireVocabSearch(searchId, wrapId) {
 }
 
 function render() {
+  try { syncAppFrame(); } catch (e) {}
   document.body.classList.remove("in-lesson");
   document.body.classList.remove("workspace-open");
   normZh();
@@ -1992,10 +2048,128 @@ function homeNavGo(entry) {
     if (el) { try { el.open = true; } catch (e) {} if (el.scrollIntoView) el.scrollIntoView(); }
   }, 150);
 }
-function homeSidebarHTML() {
-  return '<aside class="home-sidebar" aria-label="Điều hướng chính"><nav>' + HOME_NAV_MAP.map(function (e, i) {
-    return '<button class="btn home-navbtn" data-homenav="' + i + '">' + e.label + '</button>';
-  }).join("") + '</nav></aside>';
+/* V72 — KHUNG UNG DUNG: thanh ben + thanh tren dung chung moi trang.
+   Thanh ben dung HOME_NAV_MAP (1 muc Tro choi duy nhat, nhu v71).
+   Muc tab hien tai to dam; tab Luyen tap co nhieu muc con nen khong to
+   rieng muc nao (tabBar o mobile van to tab do). */
+function syncAppFrame() {
+  if (curLesson) document.body.classList.remove("sidebar-open");
+  var nav = document.getElementById("appSidebarNav");
+  if (nav && !nav.dataset.built) {
+    nav.innerHTML = HOME_NAV_MAP.map(function (e, i) {
+      var ix = e.label.indexOf(" ");
+      var ico = ix > 0 ? e.label.slice(0, ix) : "";
+      var txt = ix > 0 ? e.label.slice(ix + 1) : e.label;
+      return '<button class="btn home-navbtn" data-homenav="' + i + '"><span class="sb-ico">' + ico + '</span><span class="sb-txt">' + txt + '</span></button>';
+    }).join("");
+    nav.dataset.built = "1";
+    $$("#appSidebarNav .home-navbtn").forEach(function (b) {
+      b.onclick = function () {
+        homeNavGo(HOME_NAV_MAP[+b.dataset.homenav]);
+        document.body.classList.remove("sidebar-open");
+      };
+    });
+  }
+  if (!curLesson) {
+    $$("#appSidebarNav .home-navbtn").forEach(function (b) {
+      var e = HOME_NAV_MAP[+b.dataset.homenav];
+      b.classList.toggle("on", e.target === curTab && !e.section);
+    });
+  }
+  var pf = document.getElementById("sbProfile");
+  if (pf) {
+    var logged = false, mail = "";
+    try { logged = !!(typeof authState !== "undefined" && authState.user); mail = logged ? authState.user.email : ""; } catch (e) {}
+    if (logged) {
+      var lv = xpLevel(state.xp || 0);
+      pf.innerHTML = '<p><b>👤 ' + esc(mail) + '</b></p><p class="mut">' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</p><button class="btn" id="sbLoginBtn">Tài khoản →</button>';
+    } else {
+      pf.innerHTML = '<p><b>👤 Khách</b></p><p class="mut">Tiến trình lưu trên máy này.</p><button class="btn" id="sbLoginBtn">Đăng nhập</button>';
+    }
+    var lb = document.getElementById("sbLoginBtn");
+    if (lb) lb.onclick = function () { go("mine"); };
+  }
+  var tl = document.getElementById("tbTrackLabel");
+  if (tl) tl.textContent = state.track === "zh" ? "Tiếng Trung" : state.track === "tc" ? "TOEIC" : state.track === "tp" ? "TOPIK" : "Tiếng Anh";
+  var ft = document.getElementById("appFooter");
+  if (ft && !ft.dataset.wired) {
+    ft.dataset.wired = "1";
+    $$("#appFooter [data-footgo]").forEach(function (b) { b.onclick = function () { go(b.dataset.footgo); }; });
+  }
+  if (!syncAppFrame._wired) {
+    syncAppFrame._wired = true;
+    var cb = document.getElementById("sbCollapseBtn");
+    if (cb) cb.onclick = function () {
+      var c = document.body.classList.toggle("sidebar-collapsed");
+      cb.textContent = c ? "»" : "« Thu gọn";
+    };
+    var mb = document.getElementById("tbMenuBtn");
+    if (mb) mb.onclick = function () {
+      if (window.innerWidth >= 901) document.body.classList.toggle("sidebar-collapsed");
+      else document.body.classList.toggle("sidebar-open");
+    };
+    var ab = document.getElementById("tbAccountBtn");
+    if (ab) ab.onclick = function () { go("mine"); };
+    var goSearch = function (q) {
+      if (curLesson || curTab !== "home") go("home");
+      var inp = document.getElementById("homeSearchInp");
+      if (inp) { inp.value = q; renderHomeSearchResults(q); }
+    };
+    ["sbSearchInp", "tbSearchInp"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.oninput = function () { goSearch(el.value); };
+    });
+  }
+}
+/* V72 — Nut sao duong uon (hoc Duolingo: chi lay duong + nut sao).
+   duoNodeHTML KHONG esc lai: caller esc tieu de/phu de truoc. */
+function duoStar(st) { return (st === "done" || st === "cur") ? "★" : "☆"; }
+function duoNodeHTML(o) {
+  var h = '<button class="' + o.cls + '" ' + o.attrs + '><span class="duo-star">' + o.star + '</span><span class="duo-label"><b>' + o.title + '</b><br><span class="mut">' + o.sub + '</span>';
+  if (o.flag) h += '<br><span class="chip cl-flag">' + o.flag + '</span>';
+  h += '<br><span class="duo-st">' + o.status + '</span></span>';
+  if (o.guide) h += '<svg class="duo-guide masc-bob" aria-hidden="true" focusable="false"><use href="#msc-dragon"/></svg>';
+  return h + '</button>';
+}
+function mapCupCounts() {
+  var passed = state.testDone ? 1 : 0, total = 1;
+  (RB_CHAPTER_MAP || []).forEach(function (ch) {
+    try { if (rbChSteps(ch.band).length) { total++; if ((state.chapterTestDone || {})[ch.band]) passed++; } } catch (e) {}
+  });
+  return { passed: passed, total: total };
+}
+/* V72 — Khoi hoc that tren trang Hoc (tu, nghe, luyen nhanh), lay tu kho
+   co san, khong bia noi dung. */
+function homeNextVocabSet() {
+  var sets = CONTENT.vocab || [];
+  for (var i = 0; i < sets.length; i++) {
+    try { if (!rbStepDone({ doneKey: "vocabPos:" + i })) return i; } catch (e) { return i; }
+  }
+  return -1;
+}
+function homeWordsHTML() {
+  var i = homeNextVocabSet();
+  if (i < 0) return '<section class="card"><h3>📚 Từ mới</h3><p>Đã xong hết ' + (CONTENT.vocab || []).length + ' bộ từ ✓ — ôn lại ở tab Ôn tập khi tới hạn.</p><div class="row"><button class="btn" data-home-goreview>Ôn tập đến hạn →</button></div></section>';
+  var s = CONTENT.vocab[i];
+  var rows = (s.cards || []).slice(0, 6).map(function (c) {
+    return '<button class="btn" data-home-vocabset="' + i + '" style="display:block;width:100%;text-align:left;margin:4px 0"><b>' + esc(c.w) + '</b> — ' + esc(c.vi) + '</button>';
+  }).join("");
+  return '<section class="card"><h3>📚 Từ mới — ' + esc(s.topic) + ' (' + s.cards.length + ' từ)</h3><p class="mut">Bấm một từ để mở bộ từ này và học tiếp.</p>' + rows + '<div class="row"><button class="btn" data-home-vocabset="' + i + '">Học bộ từ này →</button></div></section>';
+}
+function homeListenHTML() {
+  var items = (CONTENT.listeningPlus || []).slice(0, 3);
+  if (!items.length) return '<section class="card"><h3>🎧 Nghe hôm nay</h3><p class="mut">Chưa có bài nghe chép — xem ở tab Luyện tập.</p></section>';
+  var rows = items.map(function (r, i) {
+    return '<button class="btn" data-home-dict="' + i + '" style="display:block;width:100%;text-align:left;margin:4px 0">🎧 Nghe chép — ' + esc(r.topic) + ' <span class="mut">· ' + esc(r.section || "") + '</span></button>';
+  }).join("");
+  return '<section class="card"><h3>🎧 Nghe hôm nay — nghe chép theo câu</h3><p class="mut">Nghe từng câu rồi gõ lại những gì nghe được.</p>' + rows + '</section>';
+}
+function homeQuickHTML() {
+  var i = homeNextVocabSet();
+  if (i < 0) i = 0;
+  var s = (CONTENT.vocab || [])[i];
+  if (!s) return '<section class="card"><h3>✍️ Luyện nhanh</h3><p class="mut">Chưa có bộ từ để kiểm tra nhanh.</p></section>';
+  return '<section class="card"><h3>✍️ Luyện nhanh — ' + esc(s.topic) + '</h3><p class="mut">Kiểm tra nhanh cả bộ, trộn toàn bộ thẻ. Không cộng XP, không tăng nấc — chỉ để kiểm tra.</p><div class="row"><button class="btn" data-home-quick="' + i + '">Kiểm tra nhanh cả bộ →</button></div></section>';
 }
 /* v71 — Khu Trò chơi mới: đúng 3 game, mở bằng nút data-g71game (không dùng
    dây nối của game cũ). Thắng +10 XP bằng hàm sẵn có; thua không
@@ -2219,7 +2393,7 @@ function viewHome(app) {
   var info = homePathInfo();
   var html = trackSwitchHTML(true) + '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span><button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += homeSearchHTML();
-  html += '<div class="home-shell">' + homeSidebarHTML() + '<div class="home-main">';
+  html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (trulyNew ? 'Hôm nay 2812 cùng bạn học nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếp nhé.') + '</p>';
   html += '<div class="bento-hub"><div class="bento-tile bento-hero">';
   if (trulyNew) {
@@ -2243,33 +2417,35 @@ function viewHome(app) {
   if (info.kind === "ch1") { var nsH = nextLearnStep(); curStep = nsH; }
   else { var undH = info.steps.filter(function (st) { return !rbStepDone(st); }); curStep = undH.length ? undH[0] : null; }
   var bannerSk = curStep ? skClassFor(curStep.type) : "";
-  html += '<div class="bento-tile bento-wide"><section id="homePath"><div class="unit-banner' + (bannerSk ? ' ' + bannerSk : '') + '"><b>Chương ' + (info.ci + 1) + ': ' + esc(info.title) + '</b><p class="mut">Đã xong ' + info.done + '/' + info.total + ' nấc' + (info.done < info.total ? ' · còn ' + (info.total - info.done) + ' nấc nữa là hết chương' : ' · đã xong chương này') + '</p></div><div class="path-v">';
+  html += '<div class="bento-tile bento-wide"><section id="homePath"><div class="unit-banner' + (bannerSk ? ' ' + bannerSk : '') + '"><b>PHẦN ' + (info.kind === "ch1" ? 1 : (info.ci + 2)) + ' · Chương ' + (info.ci + 1) + ': ' + esc(info.title) + '</b><p class="mut">Đã xong ' + info.done + '/' + info.total + ' nấc' + (info.done < info.total ? ' · còn ' + (info.total - info.done) + ' nấc nữa là hết chương' : ' · đã xong chương này') + '</p></div><div class="duo-path">';
   if (info.kind === "ch1") {
     var curId = nextLearnStep() ? nextLearnStep().id : null;
-    learningSteps().forEach(function (s) {
+    learningSteps().forEach(function (s, pi) {
       var st = stepDone(s.id) ? "done" : (state.skipped.indexOf(s.id) >= 0 ? "skipped" : (s.id === curId ? "cur" : "future"));
-      var icon = st === "skipped" ? "↩" : (stepTypeIcon(s.type) || (st === "done" ? "✓" : st === "cur" ? "▶" : "○"));
       var stTxt = st === "done" ? "Đã xong" : st === "cur" ? "Đang học · Bạn đang ở đây" : st === "skipped" ? "Đã bỏ qua — bấm để học lại" : "Chưa tới";
-      html += '<button class="path-node ' + st + '" data-path-step="' + s.id + '"><span class="dotwrap"><span class="dot">' + icon + '</span></span><span><span class="pn-title">' + esc(s.title) + '</span><br><span class="pn-type">' + esc(s.type) + ' · khoảng ' + s.mins + ' phút</span><br><span class="pn-st">' + stTxt + '</span></span></button>';
+      html += duoNodeHTML({ cls: "path-node duo-node pos" + (pi % 8) + " " + st, attrs: 'data-path-step="' + s.id + '"', star: duoStar(st), title: esc(s.title), sub: esc(s.type) + " · khoảng " + s.mins + " phút", status: stTxt, flag: st === "cur" ? "📍 Bạn đang ở đây" : "", guide: st === "cur" });
     });
     var gateSt = state.testDone ? "done" : (gateOpen() ? "cur" : "future");
     var gateTxt = state.testDone ? "Đã xong" : (gateOpen() ? "Đang học · Bạn đang ở đây" : "Chưa tới · Mở khi xong 80% chương 1");
-    html += '<button class="path-node ' + gateSt + '" data-path-test="1"><span class="dotwrap"><span class="dot">📝</span></span><span><span class="pn-title">Bài kiểm tra cuối chương 1</span><br><span class="pn-type">Kiểm tra cuối chương</span><br><span class="pn-st">' + gateTxt + '</span></span></button>';
+    html += duoNodeHTML({ cls: "path-node duo-node pos" + (learningSteps().length % 8) + " " + gateSt, attrs: 'data-path-test="1"', star: "📝", title: "Bài kiểm tra cuối chương 1", sub: "Kiểm tra cuối chương", status: gateTxt, flag: "", guide: false });
   } else {
     info.steps.forEach(function (st, si) {
       var stt = rbStepDone(st) ? "done" : (si === info.steps.findIndex(function (x) { return !rbStepDone(x); }) ? "cur" : "future");
-      var icon2 = stepTypeIcon(st.type) || (stt === "done" ? "✓" : stt === "cur" ? "▶" : "○");
+
       var stTxt2 = stt === "done" ? "Đã xong" : stt === "cur" ? "Đang học · Bạn đang ở đây" : "Chưa tới";
-      html += '<button class="path-node ' + stt + '" data-path-rstep="' + esc(info.band) + ':' + si + '"><span class="dotwrap"><span class="dot">' + icon2 + '</span></span><span><span class="pn-title">' + esc(st.title) + '</span><br><span class="pn-type">' + esc(st.type) + '</span><br><span class="pn-st">' + stTxt2 + '</span></span></button>';
+      html += duoNodeHTML({ cls: "path-node duo-node pos" + (si % 8) + " " + stt, attrs: 'data-path-rstep="' + esc(info.band) + ':' + si + '"', star: duoStar(stt), title: esc(st.title), sub: esc(st.type), status: stTxt2, flag: stt === "cur" ? "📍 Bạn đang ở đây" : "", guide: stt === "cur" });
     });
   }
   html += '</div></section></div>';
+  html += '<div class="bento-tile bento-wide">' + homeWordsHTML() + '</div>';
+  html += '<div class="bento-tile bento-wide">' + homeListenHTML() + '</div>';
+  html += '<div class="bento-tile bento-wide">' + homeQuickHTML() + '</div>';
   html += '<div class="bento-tile bento-ms">' + msHomeHTML("en") + '</div>';
   html += '<div class="bento-tile bento-u8">' + u8DailyHTML() + '</div>';
   html += homeProgressTileHTML() + '<div class="bento-tile bento-wide"><details class="card" id="homeMore"><summary><b>Xem thêm: chơi thử, bản đồ, kiểm tra nhanh</b></summary>'
     + '<p><button class="btn" id="u7PlayNow">🎮 Chơi thử ngay</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video (3 cột)</button></p>'
     + '<p><button class="dimlink" id="mapGo">Xem bản đồ 13 chương →</button> · <button class="dimlink" id="quickCheckLink">Tôi đã biết chút ít — kiểm tra nhanh</button>' + (fresh ? '' : ' · <button class="dimlink" id="entryRedoLink">Làm lại kiểm tra đầu vào</button>') + ' · <button class="dimlink" id="loginLink">Đăng nhập</button></p>'
-    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details></div></div></div></div>';
+    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details></div></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var ll = $("#loginLink"); if (ll) { try { ll.textContent = (typeof authState !== "undefined" && authState.user) ? "Tài khoản: " + authState.user.email : "Đăng nhập"; } catch (e) {} }
@@ -2280,9 +2456,13 @@ function viewHome(app) {
   var esb = $("#entryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "entryPlace" }); };
   var erl = $("#entryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "entryPlace" }); };
   var spl = $("#statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
-  $$(".home-navbtn").forEach(function (b) { b.onclick = function () { homeNavGo(HOME_NAV_MAP[+b.dataset.homenav]); }; });
+
   (function () { var inp = $("#homeSearchInp"); if (inp) inp.oninput = function () { renderHomeSearchResults(inp.value); }; })();
   $$("#heatCard [data-heatday]").forEach(function (b) { b.onclick = function () { var d = $("#heatDetail"); if (d) d.textContent = heatDetailFor(b.dataset.heatday); }; });
+  $$("[data-home-vocabset]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "vocab", setIdx: +b.dataset.homeVocabset }); }; });
+  $$("[data-home-dict]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "dictation", idx: +b.dataset.homeDict }); }; });
+  $$("[data-home-quick]").forEach(function (b) { b.onclick = function () { openLesson({ type: "vocabQuick", setIdx: +b.dataset.homeQuick }); }; });
+  $$("[data-home-goreview]").forEach(function (b) { b.onclick = function () { go("review"); }; });
   var wsBtn = $("#wsOpenBtn"); if (wsBtn) wsBtn.onclick = function () { openLesson({ type: "workspace" }); };
   $$("#homePath [data-path-step]").forEach(function (b) { b.onclick = function () { openStep(stepById(b.dataset.pathStep)); }; });
   $$("#homePath [data-path-test]").forEach(function (b) { b.onclick = function () { openStep(stepById("test")); }; });
@@ -2449,12 +2629,13 @@ function viewRoadmap(app) {
   var done = doneLearnCount(), total = learningSteps().length;
   var html = trackSwitchHTML() + '<h2>Bản đồ</h2><p class="mut">Cổng 80%: bài kiểm tra cuối chương mở khi bạn học xong 80% số bước tính cổng của chương đó — bước tính cổng là bước học chính (không tính bước làm quen và bước ôn xen kẽ); đây là chuẩn nội bộ của web, không phải chuẩn IELTS. Mỗi chương dưới đây chỉ ghi phân số đã xong/cần, không lặp lại luật này.</p>';
   html += '<section class="card" id="myPathLink"><h3>Lộ trình riêng của bạn</h3><p class="mut">Lộ trình AI tạo riêng cho bạn, khác Bản đồ chung.</p><button class="btn" id="myPathGo">Mở lộ trình riêng</button></section>';
-  html += '<section class="card"><h3>Chương 1: Chào hỏi và 44 âm — ' + done + '/' + total + ' bước</h3><div id="roadmapBox">';
+  html += '<section class="card"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + done + '/' + total + ' bước</b></div><div id="roadmapBox"><div class="duo-path">';
   var clCur = nextLearnStep(); var clCurIdx = clCur ? stepIdx(clCur.id) : -1;
+  var gateHTML = "";
   RB_CH1_STEPS.forEach(function (s, i) {
     if (s.id === "test") {
       var open = gateOpen();
-      html += '<div class="card" id="gateRow" style="margin:8px 0"><div class="row"><span class="num">' + (i + 1) + '.</span><b>' + esc(s.title) + '</b><span class="chip">' + esc(s.type) + '</span></div>'
+      gateHTML += '<div class="card" id="gateRow" style="margin:8px 0"><div class="row"><span class="num">' + (i + 1) + '.</span><b>' + esc(s.title) + '</b><span class="chip">' + esc(s.type) + '</span></div>'
         + '<p class="mut">Luật mở: bài kiểm tra mở khi bạn học xong ' + RB_CH1_GATE_NEED + '/' + total + ' bước.</p>'
         + '<button class="btn" id="gateBtn" ' + (open ? "" : "disabled") + '>' + (state.testDone ? "Đã qua — làm lại" : open ? "Làm bài kiểm tra" : "Chưa mở") + '</button></div>';
       return;
@@ -2465,10 +2646,10 @@ function viewRoadmap(app) {
     /* FIX-V32 01/11: khong gan chip "Tiep theo" cho buoc ke sau buoc hien tai —
        chip nay gay nham la buoc tiep theo that; buoc hien tai da co "Ban dang o day". */
     else if (st === "done" && Object.keys(state.hard || {}).some(function (k) { return !state.hard[k].done && k.indexOf(s.id) >= 0; })) clFlag = "Ôn lại";
-    var icon = st === "done" ? "✓" : st === "cur" ? "▶" : "○";
-    html += '<button class="step-row ' + st + '" data-step="' + s.id + '" data-status="' + st + '"><span class="num">' + (i + 1) + '.</span><span><b>' + esc(s.title) + '</b><br><span class="mut">' + esc(s.type) + ' · khoảng ' + s.mins + ' phút (ước tính)</span>' + (clFlag ? '<span class="chip cl-flag">' + clFlag + '</span>' : '') + '</span><span class="st">' + icon + '</span></button>';
+
+    html += duoNodeHTML({ cls: "step-row duo-node pos" + (i % 8) + " " + st, attrs: 'data-step="' + s.id + '" data-status="' + st + '"', star: duoStar(st), title: esc(s.title), sub: esc(s.type) + " · khoảng " + s.mins + " phút (ước tính)", status: st === "done" ? "Đã xong" : st === "cur" ? "Đang học" : "Chưa tới", flag: clFlag, guide: st === "cur" });
   });
-  html += '</div>';
+  html += '</div>' + gateHTML + '</div>';
   if (state.skipped.length) {
     html += '<h3>Đã bỏ qua</h3><p class="mut">Các bước bạn nhảy qua — quay lại học nốt khi rảnh:</p><div id="skippedList">';
     state.skipped.forEach(function (id) {
@@ -2501,8 +2682,8 @@ function viewRoadmap(app) {
     var d2 = ci === 0 ? (gateDoneR + '/' + gateStepsR.length + ' bước Viết') : (hasSteps ? (gateDoneR + '/' + gateStepsR.length + ' bước tính cổng') : 'Sắp mở');
     var chipTxt = ci === 0 ? 'Đang mở · ' + d2 : (hasSteps ? 'Đã mở · ' + d2 : 'Sắp mở');
     var gb = ci === 0 ? RB_CH1_GUIDEBOOK : CL_GUIDEBOOKS[ch.band];
-    html += '<section class="card chapter-row" data-ch="' + esc(ch.band) + '"><div class="row"><b>Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</b><span class="chip' + (isOpen ? ' cur' : '') + '">' + chipTxt + '</span><button class="btn" data-gbopen="' + esc(ch.band) + '">📖 Sổ tay chương</button></div>'
-      + '<p><b>Mục tiêu:</b> ' + esc(ch.goal) + '</p>'
+    html += '<section class="card chapter-row" data-ch="' + esc(ch.band) + '"><div class="row unit-banner"><b>PHẦN ' + (ci + 2) + ' · Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</b><span class="chip' + (isOpen ? ' cur' : '') + '">' + chipTxt + '</span><button class="btn" data-gbopen="' + esc(ch.band) + '">📖 HƯỚNG DẪN · Sổ tay chương</button></div><p><b>Mục tiêu:</b> ' + esc(ch.goal) + '</p>'
+
       + (ci === 0 ? '<p class="mut">10 bước dưới đây là bước Viết Band 0; 7 bước mở đầu (từ vựng, ngữ pháp, nghe, đọc, phát âm) nằm ở thẻ Chương 1 phía trên — hai con số là hai nhóm bước khác nhau.</p>' : '')
       + '<details><summary><b>Học xong làm được — bấm để mở</b></summary><p>' + esc(ch.can.join(" · ")) + '</p></details>'
       + rbStageHTML(ch)
@@ -2512,7 +2693,7 @@ function viewRoadmap(app) {
          (cach bay cu: moi lan doi loai lai chen mot tieu de — sau khi dan xen
          thi tieu de se lap lien tuc). Moi hang buoc van kem nhan loai, danh
          sach thanh mot luong xen ke lien tuc dung thu tu rbChSteps. */
-      var rows = "";
+      var rows = ""; var hasNext = false;
       var titleSeen = {};
       var firstUndone = true;
       var allowCur = !clCur && !mapCurUsed && chSteps.some(function (st) { return !rbStepDone(st); });
@@ -2520,11 +2701,12 @@ function viewRoadmap(app) {
       chSteps.forEach(function (st, si) {
         titleSeen[st.title] = (titleSeen[st.title] || 0) + 1;
         var suf2 = titleSeen[st.title] > 1 ? ' · phần ' + titleSeen[st.title] : '';
-        var isNext = allowCur && firstUndone && !rbStepDone(st); if (isNext) firstUndone = false;
-        rows += '<button class="step-row' + (isNext ? ' cur' : '') + '" data-rstep="' + esc(ch.band) + ':' + si + '"><span><b>' + esc(st.title) + suf2 + (st.familiar ? ' · làm quen' : '') + (st.review ? ' · không tính cổng' : '') + '</b><br><span class="mut">' + esc(st.type) + '</span>' + (isNext ? '<span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span><span class="st">' + (rbStepDone(st) ? "✓" : "→") + '</span></button>';
+        var isNext = allowCur && firstUndone && !rbStepDone(st); if (isNext) { firstUndone = false; hasNext = true; }
+        rows += duoNodeHTML({ cls: "step-row duo-node pos" + (si % 8) + (isNext ? " cur" : ""), attrs: 'data-rstep="' + esc(ch.band) + ':' + si + '"', star: rbStepDone(st) ? "★" : "☆", title: esc(st.title) + suf2 + (st.familiar ? " · làm quen" : "") + (st.review ? " · không tính cổng" : ""), sub: esc(st.type), status: rbStepDone(st) ? "Đã xong" : isNext ? "Đang học" : "Chưa tới", flag: isNext ? "📍 Bạn đang ở đây" : "", guide: isNext });
       });
       var missing = rbChMissing(ch.band);
-      html += '<details class="ch-steps" data-ch-steps="' + esc(ch.band) + '" style="margin-top:8px"><summary><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b> — bấm để mở</summary><div>' + rows + '</div></details>'
+      var chestHTML = (ci > 0) ? '<button class="duo-node duo-chest pos' + (chSteps.length % 8) + '" data-chchest="' + esc(ch.band) + '"><span class="duo-star">🎁</span><span class="duo-label"><b>Rương cuối chương</b><br><span class="duo-st">Bấm để mở kiểm tra cuối chương</span></span></button>' : "";
+      html += '<details class="ch-steps" data-ch-steps="' + esc(ch.band) + '" style="margin-top:8px"' + (hasNext ? ' open' : '') + '><summary><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b> — bấm để mở</summary><div class="duo-path">' + rows + chestHTML + '</div></details>'
         + ((missing.length && ci > 0) ? '<p class="mut">Chưa có bước: ' + esc(missing.join(", ")) + '.</p>' : "")
         /* DOT 19 UI GATE: hang Band 0 chi co buoc Viet trong rbChSteps (cac kho
            khac cua Band 0 thuoc Chuong 1 o the tren) nen khong hien dong
@@ -2554,6 +2736,8 @@ function viewRoadmap(app) {
       + (gb ? '<p><b>Ngữ pháp chính:</b> ' + esc(gb.grammar.join(" · ")) + '</p><p><b>Cụm câu then chốt:</b> ' + esc(gb.phrases.join(" · ")) + '</p><p><b>Lỗi người Việt hay mắc:</b> ' + esc(gb.mistakes.join(" · ")) + '</p>' : '')
       + (isOpen ? '' : '<p class="mut">Chương này sắp mở — sổ tay này chỉ là định hướng, chưa có bài học bên trong.</p>') + '</details></section>';
   });
+  var cc0 = mapCupCounts();
+  html += '<section class="card" id="mapCupCard"><div class="duo-path"><button class="duo-node duo-cup pos0" id="mapCupBtn"><span class="duo-star">🏆</span><span class="duo-label"><b>Cúp cuối lộ trình</b><br><span class="duo-st">Đã qua ' + cc0.passed + '/' + cc0.total + ' kiểm tra cuối chương</span></span></button></div></section>';
   html += '<hr><p class="mut">Dưới đây là mục thêm ngoài Bản đồ — không phải bước học, bấm khi cần.</p>';
   html += '<section class="card" id="bkRoadmapCard"><h3>📚 Nội dung mới theo nghiên cứu sách</h3><p class="mut">Nội dung tự soạn của web — xem nguồn trong Cài đặt → Nguồn nội dung.</p><details><summary><b>Xem phạm vi nội dung mới theo sách</b></summary><p class="mut">Lỗi người Việt có ở các chặng từ Band 0 tới Band 6,5; ví dụ đời sống người Việt có ở Band 2,0 tới Band 6,0; sắc thái và phong cách chỉ ở chặng 7,5+ — không đưa xuống chặng thấp hơn. Mở ở tab Luyện tập.</p></details><button class="btn" id="bkRoadmapGo">Mở ở tab Luyện tập</button></section>';
   html += '<section class="card" id="clCanDo"><h3>Trang cấp độ — bạn làm được gì ở mỗi cấp</h3><details><summary><b>Xem năng lực từng cấp</b></summary>' + RB_CHAPTER_MAP.map(function (ch) { return '<p><b>' + esc(ch.band) + ' — ' + esc(ch.title) + ':</b> ' + esc(ch.can.join("; ")) + '</p>'; }).join("") + '</details></section>';
@@ -2582,6 +2766,23 @@ function viewRoadmap(app) {
       if (st) openRoadmapStepLesson(st.lesson);
     };
   });
+  $$("[data-chchest]").forEach(function (btn) {
+    btn.onclick = function () {
+      var band = btn.dataset.chchest;
+      var gs = (typeof rbGateSteps === "function") ? rbGateSteps(band) : rbChSteps(band);
+      var dc = gs.filter(function (st) { return rbStepDone(st); }).length;
+      var need = Math.ceil(gs.length * 0.8);
+      var passed = !!((state.chapterTestDone || {})[band]);
+      if (passed || dc >= need) { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "chapterTest", band: band }); }
+      else toast("Kiểm tra cuối chương chưa mở — đã xong " + dc + "/" + gs.length + " bước tính cổng, cần " + need + " bước.");
+    };
+  });
+  var cupBtn = document.getElementById("mapCupBtn");
+  if (cupBtn) cupBtn.onclick = function () {
+    var cc = mapCupCounts();
+    if (cc.passed >= cc.total) toast("Đã hoàn thành toàn bộ lộ trình — tuyệt vời!");
+    else toast("Lộ trình: đã qua " + cc.passed + "/" + cc.total + " kiểm tra cuối chương — học tiếp các chương chưa xong ở Bản đồ nhé.");
+  };
   $$("[data-chtest]").forEach(function (btn) {
     btn.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "chapterTest", band: btn.dataset.chtest }); };
   });
