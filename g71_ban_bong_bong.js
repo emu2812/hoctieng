@@ -43,25 +43,42 @@
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
 
+    /* Mỗi bong bóng giữ một khe riêng (4 khe chia đều bề ngang) nên
+       không chồng nhau; y xuất phát so le nhau để không dồn dưới đáy. */
+    var SLOTS = 4;
     function radiusFor(word) {
-      return Math.min(64, 30 + String(word).length * 4);
+      var W = cv.width || 360;
+      return G71.bubbleRadius(word, W / SLOTS);
     }
-    function spawnBubble(word, top) {
+    /* Giới hạn khe: bong bóng luôn nằm trọn trong khe của nó (cộng lề
+       4px ở hai mép màn hình) nên các bong bóng không thể chạm nhau. */
+    function slotBounds(W, slot, r) {
+      var sw = W / SLOTS;
+      var lo = Math.max(slot * sw + r, r + 4);
+      var hi = Math.min((slot + 1) * sw - r, W - r - 4);
+      if (hi < lo) { lo = r + 4; hi = W - r - 4; }
+      return [lo, hi];
+    }
+    function spawnBubble(word, top, slot) {
       var W = cv.width || 360, H = cv.height || 480;
-      return { word: word, x: 40 + Math.random() * Math.max(60, W - 80),
-        y: top ? -60 : H + 40 + Math.random() * 120,
-        r: radiusFor(word), vy: 26 + Math.random() * 22, ph: Math.random() * 6.28 };
+      var r = radiusFor(word);
+      var cx = G71.bubbleSlotX(W, SLOTS, slot);
+      var bd = slotBounds(W, slot, r);
+      var x = Math.max(bd[0], Math.min(bd[1], cx + (Math.random() - 0.5) * 16));
+      return { word: word, slot: slot,
+        x: x, y: top ? -60 : H + 40 + slot * 70,
+        r: r, vy: 26 + Math.random() * 22, ph: Math.random() * 6.28 };
     }
     function loadRound() {
       var rd = st.rounds[st.round];
       if (!rd) return;
-      bubbles = rd.options.map(function (opt) { return spawnBubble(opt, false); });
+      bubbles = rd.options.map(function (opt, i) { return spawnBubble(opt, false, i); });
     }
     function hud() {
       var rd = st.rounds[Math.min(st.round, st.rounds.length - 1)];
-      stg.hud.innerHTML = "<span>Điểm: " + st.score + "/99</span>"
-        + "<span>" + G71.hearts(st.hearts) + "</span>"
-        + "<span style=\"flex:1 1 220px;\">Nghĩa: " + G71.escHtml(rd ? rd.vi : "") + "</span>";
+      stg.hud.innerHTML = "<span style=\"flex:none\">Điểm: " + st.score + "/99</span>"
+        + "<span style=\"flex:none\">" + G71.hearts(st.hearts) + "</span>"
+        + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">Nghĩa: " + G71.escHtml(rd ? rd.vi : "") + "</span>";
     }
     loadRound();
     hud();
@@ -69,13 +86,13 @@
     function fire() {
       if (!running || st.over) return;
       var W = cv.width, H = cv.height;
-      bullets.push({ x: W / 2, y: H - 70, vx: Math.cos(aim) * 620, vy: Math.sin(aim) * 620 });
+      bullets.push({ x: W / 2, y: H - 64, vx: Math.cos(aim) * 620, vy: Math.sin(aim) * 620 });
     }
     function aimAt(cx, cy) {
       var r = cv.getBoundingClientRect();
       var px = cx - r.left, py = cy - r.top;
       var W = cv.width, H = cv.height;
-      aim = Math.atan2(py - (H - 70), px - W / 2);
+      aim = Math.atan2(py - (H - 64), px - W / 2);
       if (aim > -0.15) aim = -0.15;
       if (aim < -Math.PI + 0.15) aim = -Math.PI + 0.15;
     }
@@ -120,8 +137,14 @@
       bubbles.forEach(function (b) {
         b.y -= b.vy * dt;
         b.x += Math.sin(t * 1.5 + b.ph) * 14 * dt;
-        b.x = Math.max(b.r + 2, Math.min(W - b.r - 2, b.x));
-        if (b.y < -b.r - 10) { b.y = H + 40; b.x = 40 + Math.random() * Math.max(60, W - 80); }
+        /* Giữ bong bóng trong khe, không tràn mép màn hình. */
+        var bd2 = slotBounds(W, b.slot, b.r);
+        b.x = Math.max(bd2[0], Math.min(bd2[1], b.x));
+        if (b.y < -b.r - 10) {
+          b.y = H + 40;
+          b.x = Math.max(bd2[0], Math.min(bd2[1],
+            G71.bubbleSlotX(W, SLOTS, b.slot) + (Math.random() - 0.5) * 16));
+        }
       });
       bullets.forEach(function (bl) { bl.x += bl.vx * dt; bl.y += bl.vy * dt; });
       bullets = bullets.filter(function (bl) {
@@ -145,13 +168,14 @@
             bubbles = [];
             loadRound();
           } else {
+            var freedSlot = bub.slot;
             bubbles.splice(hit.u, 1);
             var rd = st.rounds[st.round];
             if (rd) {
               var taken = bubbles.map(function (x) { return x.word; });
               taken.push(rd.correct);
               var cand = G71.pool().filter(function (p) { return taken.indexOf(p.w) < 0; });
-              if (cand.length) bubbles.push(spawnBubble(cand[Math.floor(Math.random() * cand.length)].w, false));
+              if (cand.length) bubbles.push(spawnBubble(cand[Math.floor(Math.random() * cand.length)].w, false, freedSlot));
             }
           }
           hud();
@@ -161,34 +185,18 @@
       parts.forEach(function (p) { p.x += p.vx * dt; p.y += p.vy * dt; });
 
       ctx.clearRect(0, 0, W, H);
-      var g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, "#7DD3FC"); g.addColorStop(1, "#1D4E89");
-      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-      G71.watercolor(ctx, W, H, [
-        { x: 0.2, y: 0.3, rx: 0.24, ry: 0.18, c: "#BFDBFE" },
-        { x: 0.8, y: 0.6, rx: 0.26, ry: 0.2, c: "#93C5FD" }
-      ]);
-      ctx.strokeStyle = "rgba(255,255,255,.35)";
-      ctx.lineWidth = 2;
-      for (var wv = 0; wv < 4; wv++) {
-        ctx.beginPath();
-        var wy = H * (0.2 + wv * 0.2) + Math.sin(t * 1.2 + wv) * 6;
-        ctx.moveTo(0, wy);
-        for (var wx = 0; wx <= W; wx += 24) ctx.lineTo(wx, wy + Math.sin(wx / 40 + t + wv) * 5);
-        ctx.stroke();
-      }
+      G71.paintSea(ctx, W, H, now);
       bubbles.forEach(function (b) {
-        ctx.fillStyle = "rgba(255,255,255,.45)";
+        /* Bong bóng đặc hơn + chữ có viền trắng để đọc được dưới nước. */
+        ctx.fillStyle = "rgba(255,255,255,.55)";
         ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2); ctx.fill();
-        ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.lineWidth = 2;
+        ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.lineWidth = 2;
         ctx.stroke();
-        ctx.fillStyle = "rgba(255,255,255,.85)";
+        ctx.fillStyle = "rgba(255,255,255,.9)";
         ctx.beginPath(); ctx.arc(b.x - b.r * 0.35, b.y - b.r * 0.4, b.r * 0.16, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(b.x - b.r * 0.2, b.y - b.r * 0.28, b.r * 0.07, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = "#0F172A";
-        ctx.font = "700 16px system-ui, sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(b.word, b.x, b.y + 6);
-        ctx.textAlign = "left";
+        G71.drawFitText(ctx, b.word, b.x, b.y, b.r * 2 - 16, 16, 10, 3, "700", "rgba(255,255,255,.9)");
       });
       parts.forEach(function (p) {
         ctx.fillStyle = "rgba(255,255,255,.9)";
@@ -199,15 +207,15 @@
         ctx.beginPath(); ctx.arc(bl.x, bl.y, 5, 0, Math.PI * 2);
         ctx.fillStyle = "#FDE68A"; ctx.fill();
       });
-      var cx0 = W / 2, cy0 = H - 70;
+      var cx0 = W / 2, cy0 = H - 64;
       ctx.strokeStyle = "#1F2430"; ctx.lineWidth = 8; ctx.lineCap = "round";
       ctx.beginPath(); ctx.moveTo(cx0, cy0);
-      ctx.lineTo(cx0 + Math.cos(aim) * 44, cy0 + Math.sin(aim) * 44); ctx.stroke();
+      ctx.lineTo(cx0 + Math.cos(aim) * 52, cy0 + Math.sin(aim) * 52); ctx.stroke();
       ctx.fillStyle = "#F05A28";
-      ctx.beginPath(); ctx.arc(cx0, cy0, 20, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx0, cy0, 24, 0, Math.PI * 2); ctx.fill();
       ctx.fillStyle = "#fff";
-      ctx.beginPath(); ctx.arc(cx0, cy0, 9, 0, Math.PI * 2); ctx.fill();
-      G71.drawSnake(ctx, W - 52, H - 34, 14, true);
+      ctx.beginPath(); ctx.arc(cx0, cy0, 10, 0, Math.PI * 2); ctx.fill();
+      G71.drawSnake(ctx, W - 56, H - 36, 18, true);
       maybeEnd();
       if (running) requestAnimationFrame(frame);
     }

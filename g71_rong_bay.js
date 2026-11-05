@@ -48,18 +48,19 @@
 
     function hud() {
       var rd = st.rounds[Math.min(shown, st.rounds.length - 1)];
-      stg.hud.innerHTML = "<span>" + G71.hearts(st.hearts) + "</span>"
-        + "<span>Vòng: " + (Math.min(shown + 1, st.rounds.length)) + "/" + st.rounds.length + "</span>"
-        + "<span>Tiến độ: " + Math.round(shown / st.rounds.length * 100) + "%</span>"
-        + "<span>Điểm: " + st.score + "</span>"
-        + "<span style=\"flex:1 1 220px;\">Nghĩa: " + G71.escHtml(rd ? rd.vi : "") + "</span>";
+      stg.hud.innerHTML = "<span style=\"flex:none\">" + G71.hearts(st.hearts) + "</span>"
+        + "<span style=\"flex:none\">Vòng: " + (Math.min(shown + 1, st.rounds.length)) + "/" + st.rounds.length + "</span>"
+        + "<span style=\"flex:none\">Tiến độ: " + Math.round(shown / st.rounds.length * 100) + "%</span>"
+        + "<span style=\"flex:none\">Điểm: " + st.score + "</span>"
+        + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">Nghĩa: " + G71.escHtml(rd ? rd.vi : "") + "</span>";
     }
     hud();
 
+    var cloudFrac = 0.72; /* cập nhật mỗi khung hình theo cloudGeom */
     function dashTo(li) {
       if (!running || st.over || phase !== "fly") return;
       lane = li;
-      targetX = 0.68;
+      targetX = cloudFrac;
       phase = "dash";
     }
     function onKey(e) {
@@ -126,13 +127,9 @@
       }
 
       ctx.clearRect(0, 0, W, H);
-      var g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, "#BFE6F5"); g.addColorStop(1, "#FFF7E8");
-      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-      G71.watercolor(ctx, W, H, [
-        { x: 0.25, y: 0.2, rx: 0.24, ry: 0.16, c: "#7DD3FC" },
-        { x: 0.75, y: 0.75, rx: 0.26, ry: 0.18, c: "#F59E0B" }
-      ]);
+      G71.paintSky(ctx, W, H, now);
+      var cg = G71.cloudGeom(W, H);
+      cloudFrac = cg.cx / W;
       ctx.strokeStyle = "rgba(255,255,255,.7)";
       ctx.lineWidth = 3;
       ctx.setLineDash([14, 12]);
@@ -142,33 +139,30 @@
       ctx.setLineDash([]);
       if (rd) {
         rd.options.forEach(function (opt, li) {
-          var cx = W * 0.72 + Math.sin(now / 900 + li * 2) * 8;
+          /* Mây rộng neo mép phải: từ dài ngắt 2 dòng + thu nhỏ, không
+             bao giờ tràn khỏi mây hay khỏi mép màn hình. */
+          var cx = cg.cx + Math.sin(now / 900 + li * 2) * 6;
           var cy = laneYs[li];
-          G71.drawCloud(ctx, cx, cy, 62);
+          cx = Math.max(cg.hw + 8, Math.min(W - cg.hw - 8, cx));
+          G71.drawCloudWide(ctx, cx, cy, cg.hw, cg.hh);
           if (phase === "resolve") {
             if (opt === rd.correct) {
               ctx.strokeStyle = "#1E9E6A"; ctx.lineWidth = 4;
-              ctx.beginPath(); ctx.arc(cx, cy, 62, 0, Math.PI * 2); ctx.stroke();
+              ctx.beginPath(); ctx.ellipse(cx, cy, cg.hw + 5, cg.hh + 5, 0, 0, Math.PI * 2); ctx.stroke();
             } else if (li === lane && !bannerOk) {
               ctx.strokeStyle = "#DC2626"; ctx.lineWidth = 4;
-              ctx.beginPath(); ctx.arc(cx, cy, 62, 0, Math.PI * 2); ctx.stroke();
+              ctx.beginPath(); ctx.ellipse(cx, cy, cg.hw + 5, cg.hh + 5, 0, 0, Math.PI * 2); ctx.stroke();
             }
           }
           ctx.fillStyle = "#1F2430";
-          ctx.font = "700 18px system-ui, sans-serif";
-          ctx.textAlign = "center";
-          ctx.fillText(opt, cx, cy + 7);
-          ctx.textAlign = "left";
+          G71.drawFitText(ctx, opt, cx, cy, cg.hw * 2 - 24, 18, 11, 2, "700");
         });
       }
-      G71.drawDragon(ctx, W * dragonX, laneYs[lane] + bob, 26);
-      G71.drawSnake(ctx, W * 0.06, H - 40, 16, false);
+      G71.drawDragon(ctx, W * dragonX, laneYs[lane] + bob, 30);
+      G71.drawSnake(ctx, W * 0.08, H - 44, 20, false);
       if (banner) {
         ctx.fillStyle = bannerOk ? "#1E9E6A" : "#DC2626";
-        ctx.font = "800 34px system-ui, sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(banner, W / 2, H * 0.12);
-        ctx.textAlign = "left";
+        G71.drawFitText(ctx, banner, W / 2, H * 0.12, W - 32, 30, 15, 2, "800");
       }
       maybeEnd();
       if (running) requestAnimationFrame(frame);

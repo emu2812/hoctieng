@@ -93,25 +93,29 @@
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
 
     function hud() {
-      stg.hud.innerHTML = "<span>Điểm: " + st.score + "</span>"
-        + "<span>Mốc: " + st.cleared + "/" + st.total + "</span>"
-        + "<span>Chủ đề: " + G71.escHtml(st.theme || "Từ vựng") + "</span>"
-        + "<span>" + G71.hearts(st.hearts) + "</span>";
+      /* HUD một dòng: các số liệu giữ nguyên, chủ đề co lại bằng dấu … */
+      stg.hud.innerHTML = "<span style=\"flex:none\">Điểm: " + st.score + "</span>"
+        + "<span style=\"flex:none\">Mốc: " + st.cleared + "/" + st.total + "</span>"
+        + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">Chủ đề: " + G71.escHtml(st.theme || "Từ vựng") + "</span>"
+        + "<span style=\"flex:none\">" + G71.hearts(st.hearts) + "</span>";
     }
     hud();
 
     /* Bàn phím trên màn hình cho chuột + cảm ứng. */
+    /* Bàn phím gọn: 3 hàng thấp để sân vũ trụ giữ được chiều cao. */
     var kb = document.createElement("div");
-    kb.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:8px 12px;background:#fff;border-top:2px solid #F3D9A4;";
+    kb.id = "g71Kb";
+    kb.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;";
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(function (L) {
       var b = document.createElement("button");
       b.className = "btn";
       b.textContent = L;
-      b.style.cssText = "padding:8px 10px;min-width:34px;";
+      b.style.cssText = "padding:6px 4px;min-width:30px;font-size:15px;";
       b.onclick = function () { feed(L); };
       kb.appendChild(b);
     });
     stg.el.appendChild(kb);
+    if (stg.resize) stg.resize();
 
     function feed(ch) {
       if (!running || st.over) return;
@@ -172,29 +176,16 @@
       var W = cv.width, H = cv.height;
       if (!W || !H) { requestAnimationFrame(frame); return; }
       ctx.clearRect(0, 0, W, H);
-      var g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, "#0F172A"); g.addColorStop(1, "#274B73");
-      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-      G71.watercolor(ctx, W, H, [
-        { x: 0.2, y: 0.25, rx: 0.22, ry: 0.16, c: "#7DD3FC" },
-        { x: 0.8, y: 0.6, rx: 0.25, ry: 0.18, c: "#F59E0B" },
-        { x: 0.5, y: 0.85, rx: 0.28, ry: 0.14, c: "#1E9E6A" }
-      ]);
-      ctx.fillStyle = "#fff";
-      for (var s = 0; s < 60; s++) {
-        var sx = (s * 97) % W, sy = (s * 57) % H;
-        ctx.globalAlpha = 0.35 + ((s * 13) % 10) / 20;
-        ctx.fillRect(sx, sy, 2, 2);
-      }
-      ctx.globalAlpha = 1;
+      G71.paintSpace(ctx, W, H, now);
       st.words.forEach(function (wd, i) {
         if (wd.status !== "falling") return;
         var py = wd.y * H;
         if (py < -30 || py > H + 30) return;
         var isAct = (st.active === i);
-        ctx.font = "700 17px system-ui, sans-serif";
+        /* Chữ tự thu nhỏ theo bề ngang sân để viên thuốc không tràn mép. */
+        G71.fitFont(ctx, wd.w, Math.max(60, W - 32), 17, 12, "700");
         var tw = ctx.measureText(wd.w).width + 28;
-        var px = Math.max(tw / 2 + 4, Math.min(W - tw / 2 - 4, wd.x * W));
+        var px = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, wd.x * W));
         ctx.fillStyle = isAct ? "#F59E0B" : "#1F2430";
         G71.rr(ctx, px - tw / 2, py - 18, tw, 34, 17);
         ctx.fill();
@@ -208,12 +199,16 @@
         ctx.fillStyle = "#fff";
         ctx.fillText(rest, x0 + ctx.measureText(done).width, py + 6);
       });
+      /* Nhân vật + bảng nghĩa đặt trọn trong sân, có lề an toàn ở đáy:
+         bảng nghĩa chiếm dải H-38..H-4, tên lửa ở trên nó, rồng ở trên nữa. */
+      var rocketY = Math.max(110, H - 86);
+      var dragonY = rocketY - 62;
       flashes = flashes.filter(function (f) { return (f.ttl -= dt) > 0; });
       flashes.forEach(function (f) {
         ctx.strokeStyle = "rgba(253,230,138,.9)";
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(W / 2, H - 70);
+        ctx.moveTo(W / 2, rocketY - 45);
         ctx.lineTo(f.x * W, f.y * H);
         ctx.stroke();
       });
@@ -223,14 +218,18 @@
         ctx.fillRect((p.x + p.vx * (0.6 - p.ttl)) * W, (p.y + p.vy * (0.6 - p.ttl)) * H, 5, 5);
       });
       var flick = 0.5 + 0.5 * Math.sin(now / 90);
-      G71.drawRocket(ctx, W / 2, H - 46, 30, flick);
-      G71.drawDragon(ctx, W / 2, H - 108, 16);
+      G71.drawRocket(ctx, W / 2, rocketY, 32, flick);
+      G71.drawDragon(ctx, W / 2, dragonY, 18);
       if (st.active !== null && st.words[st.active]) {
-        ctx.fillStyle = "rgba(255,255,255,.92)";
+        /* Bảng nghĩa: nền tối mờ + chữ tự thu/ngắt 2 dòng, không cắt mép. */
+        var meanText = "Nghĩa: " + st.words[st.active].vi;
         ctx.font = "700 15px system-ui, sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText("Nghĩa: " + st.words[st.active].vi, W / 2, H - 8);
-        ctx.textAlign = "left";
+        var mw = Math.min(W - 16, ctx.measureText(meanText).width + 28);
+        ctx.fillStyle = "rgba(15,23,42,.72)";
+        G71.rr(ctx, W / 2 - mw / 2, H - 38, mw, 34, 15);
+        ctx.fill();
+        ctx.fillStyle = "rgba(255,255,255,.95)";
+        G71.drawFitText(ctx, meanText, W / 2, H - 21, W - 40, 15, 11, 2, "700");
       }
       maybeEnd();
       if (running) requestAnimationFrame(frame);
