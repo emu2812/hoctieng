@@ -13754,35 +13754,33 @@ function viewHomeZh(app) {
   var fresh = isZhNewUser();
   var streak = streakDays();
   var lv = xpLevel(state.xp || 0);
+  var tZh = fresh ? null : zhSessionTarget();
   var html = trackSwitchHTML(true);
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span><button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (fresh ? 'Hôm nay 2812 cùng bạn học tiếng Trung nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếng Trung nhé.') + '</p>';
-  html += '<div class="bento-hub"><div class="bento-tile bento-hero">';
+  html += '<div class="home-clean"><div class="home-hero">';
   if (fresh) {
     html += '<section class="card next-card" id="zhEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TIẾNG TRUNG</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi HSK thật. Bỏ qua thì học từ chặng 1.</p><div class="row"><button class="btn btn-primary" id="zhEntryStartBtn">Kiểm tra đầu vào HSK</button><button class="btn" id="zhNextBtn">Bỏ qua, học từ chặng 1</button></div></div></div></section>';
   } else {
-    var t = zhSessionTarget();
-    var zhXp = (t.title.indexOf("Ôn lại") === 0) ? "" : " · +10 XP";
-    html += '<section class="card next-card" id="zhNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TIẾNG TRUNG</p><h2>' + esc(t.title) + '</h2><p class="mut">' + esc(t.type) + '</p><button class="btn btn-primary" id="zhNextBtn">Học tiếp: ' + esc(t.title) + ' →' + zhXp + '</button></div></div></section>';
+    var zhXp = (tZh.title.indexOf("Ôn lại") === 0) ? "" : " · +10 XP";
+    html += '<section class="card next-card" id="zhNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TIẾNG TRUNG</p><h2>' + esc(tZh.title) + '</h2><p class="mut">' + esc(tZh.type) + '</p><button class="btn btn-primary" id="zhNextBtn">Học tiếp: ' + esc(tZh.title) + ' →' + zhXp + '</button></div></div></section>';
   }
   html += '</div>';
-  html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("zh") + '</div>';
-  if (!fresh) html += '<div class="bento-tile bento-today">' + specTodayZhHTML(t.title) + '</div>';
+  /* v92: cùng khung trang chủ kiểu v84 EN — màn đầu chỉ lời chào + MỘT việc
+     tiếp theo + dòng tiến trình; các khối còn lại vào details đóng sẵn, cùng
+     thứ tự mục ở cả 4 track. "VÀO NHANH THEO LOẠI" đã có đủ ở Luyện tập
+     nên không còn ở trang chủ. Nội dung thật từng track giữ nguyên, chỉ
+     xếp lại vào khung chung. */
+  var todayZhHTML = fresh ? "" : specTodayZhHTML(tZh.title);
+  if (todayZhHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayZhHTML + '</details>';
   var zp = zhPositionCurrent() || { stage: 1, done: 0, total: 0 };
-  html += '<div class="bento-tile"><section class="card" id="zhHomePath"><h3>Chặng hiện tại: Chặng ' + zp.stage + '</h3><p class="mut">Đã xong ' + zp.done + '/' + zp.total + ' bước học — toàn bộ bước xem ở Bản đồ, khỏi cuộn dài ở màn chính.</p><div class="row"><button class="btn" id="zhHomeStageBtn">Xem chặng này ở Bản đồ →</button></div></section></div>';
-  html += '<div class="bento-tile"><div class="row"><button class="btn" id="zhHomeFullMapBtn">Xem toàn bộ bản đồ 6 chặng →</button></div></div>';
-  html += '<div class="bento-tile bento-ms">' + msHomeHTML("zh") + '</div>';
-  /* D3b: Trang chu chi giu link gon toi HSKK; the day du chi o Ban do. */
-  html += '<div class="bento-tile"><section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Bản đồ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Bản đồ →</button></div></section></div>';
-  html += '<div class="bento-tile">' + zhSystemEHTML() + '</div>';
-  /* v68 cân đối: tách trạng thái đóng băng chuỗi khỏi khối Xem thêm thành tile
-     riêng để hàng cuối đủ 4 tile (người dùng cũ); người dùng mới còn thiếu 1 ô
-     do vắng tile today nên tách thêm nút Đăng nhập thành tile riêng chỉ khi
-     fresh — cả hai đều là DỜI nội dung khỏi Xem thêm, không lặp thông tin. */
-  html += '<div class="bento-tile"><section class="card" id="zhHomeFreeze"><h3>❄️ Đóng băng chuỗi</h3><p class="mut">Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></section></div>';
-  if (fresh) html += '<div class="bento-tile"><section class="card" id="zhHomeAccount"><h3>👤 Tài khoản</h3><p class="mut">Đăng nhập để lưu tiến trình và đồng bộ.</p><div class="row"><button class="btn" id="zhLoginTileBtn">Đăng nhập →</button></div></section></div>';
-  html += '<div class="bento-tile bento-wide"><details class="card" id="zhHomeMore"><summary><b>' + (fresh ? 'Xem thêm: bản đồ' : 'Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập') + '</b></summary>'
-    + '<p>' + (fresh ? '' : '<button class="dimlink" id="zhEntryRedoLink">Làm lại kiểm tra đầu vào HSK</button> · ') + '<button class="dimlink" id="zhToRoadmap">Xem bản đồ tiếng Trung →</button>' + (fresh ? '' : ' · <button class="dimlink" id="zhLoginLink">Đăng nhập</button>') + '</p></details></div></div>';
+  html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="zhHomePath"><h3>Chặng hiện tại: Chặng ' + zp.stage + '</h3><p class="mut">Đã xong ' + zp.done + '/' + zp.total + ' bước học — toàn bộ bước xem ở Bản đồ, khỏi cuộn dài ở màn chính.</p><div class="row"><button class="btn" id="zhHomeStageBtn">Xem chặng này ở Bản đồ →</button></div></section></details>';
+  html += '<details class="card" id="homeSuggestMore"><summary><b>Gợi ý học hôm nay</b></summary>' + msHomeHTML("zh") + '<section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Bản đồ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Bản đồ →</button></div></section>' + zhSystemEHTML() + '</details>';
+  html += '<details class="card" id="homeMore"><summary><b>' + (fresh ? 'Xem thêm: bản đồ, đăng nhập' : 'Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập') + '</b></summary>'
+    + '<p><button class="btn" id="zhHomeFullMapBtn">Xem toàn bộ bản đồ 6 chặng →</button></p>'
+    + '<p>' + (fresh ? '' : '<button class="dimlink" id="zhEntryRedoLink">Làm lại kiểm tra đầu vào HSK</button> · ') + '<button class="dimlink" id="zhToRoadmap">Xem bản đồ tiếng Trung →</button> · <button class="dimlink" id="zhLoginLink">Đăng nhập</button></p>'
+    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = $("#zhNextBtn"); if (nb) nb.onclick = function () {
@@ -13797,7 +13795,6 @@ function viewHomeZh(app) {
   var hfm = $("#zhHomeFullMapBtn"); if (hfm) hfm.onclick = function () { go("roadmap"); };
   var zhs = $("#zhHomeStageBtn"); if (zhs) zhs.onclick = function () { go("roadmap"); };
   var lg = $("#zhLoginLink"); if (lg) lg.onclick = function () { go("mine"); };
-  var ltb = $("#zhLoginTileBtn"); if (ltb) ltb.onclick = function () { go("mine"); };
   wireZhMap(app);
   wireZhHskk();
 }
@@ -15859,23 +15856,25 @@ function viewHomeTc(app) {
   var n = tcNextStep();
   var html = trackSwitchHTML(true);
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span><button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="home-main">';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng 2812 luyện TOEIC nhé.</p>';
-  html += '<div class="bento-hub"><div class="bento-tile bento-hero">';
+  html += '<div class="home-clean"><div class="home-hero">';
   if (n) {
     html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TOEIC</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOEIC Nghe–Đọc, từ 450 tới 900+.</p><button class="btn btn-primary" id="tcNextBtn">Học tiếp: ' + esc(n.meta.title) + ' → · +10 XP</button></div></div></section>';
   } else {
     html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOEIC</p><h2>Bạn đã xong hết các bước TOEIC hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p></div></div></section>';
   }
   html += '</div>';
-  html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("tc") + '</div>';
-  html += '<div class="bento-tile bento-today">' + specTodayTcHTML(n ? n.id : null) + '</div>';
-  html += '<div class="bento-tile"><section class="card" id="tcHomePath"><h3>Lộ trình TOEIC của bạn</h3>';
+  /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
+  var todayTcHTML = specTodayTcHTML(n ? n.id : null);
+  if (todayTcHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayTcHTML + '</details>';
+  html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="tcHomePath"><h3>Lộ trình TOEIC của bạn</h3>';
   TC_STAGES.forEach(function (st, i) {
     html += '<p><b>' + esc(st.title) + '</b> — đã xong ' + tcStagePct(i) + '%</p>';
   });
-  html += '<div class="row"><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button></div></section></div>';
-  html += '<div class="bento-tile">' + msHomeHTML("tc") + '</div>';
-  html += '<div class="bento-tile bento-wide"><details class="card"><summary><b>TOEIC Nghe–Đọc là gì?</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></div></div>';
+  html += '</section></details>';
+  html += '<details class="card" id="homeSuggestMore"><summary><b>Gợi ý học hôm nay</b></summary>' + msHomeHTML("tc") + '<details class="card"><summary><b>TOEIC Nghe–Đọc là gì?</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></details>';
+  html += '<details class="card" id="homeMore"><summary><b>Xem thêm: bản đồ</b></summary><p><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button></p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tcNextBtn"); if (nb) nb.onclick = function () { var nn = tcNextStep(); if (nn) tcOpenStep(nn.id, "home"); };
@@ -15883,15 +15882,6 @@ function viewHomeTc(app) {
   var mg = document.getElementById("tcHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
   msWire(app);
 }
-/* SUA 01/11 dot dan-xen: bo cach bay chia khoi theo loai cua dot ban-do
-   (het tu vung moi sang ngu phap... la don cuc, hoc chan) — Ban do TOEIC/
-   TOPIK nay hien nut theo DUNG thu tu buoc di hoc (xen ke), moi nut da kem
-   nhan loai trong tieu de. Chi doi cach bay: giu nguyen id buoc, trang thai
-   khoa/mo/xong, phan tram chang, nut "Hoc tiep" va hanh vi bam buoc
-   (wireTc/wireTp khong doi).
-   Goi btnFn(id) dung 1 tham so — khong dung .map(btnFn) tran: map truyen
-   ca index lam tham so label nen nut thu 2 tro di tung hien so ("1 ->")
-   thay vi tieu de that. */
 function roadmapOrderedHTML(steps, btnFn) {
   return '<div class="row" data-roadmap-ordered="1">' + steps.map(function (id) { return btnFn(id); }).join("") + '</div>';
 }
@@ -16584,23 +16574,25 @@ function viewHomeTp(app) {
   var n = tpNextStep();
   var html = trackSwitchHTML(true);
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span><button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="home-main">';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng 2812 luyện TOPIK nhé.</p>';
-  html += '<div class="bento-hub"><div class="bento-tile bento-hero">';
+  html += '<div class="home-clean"><div class="home-hero">';
   if (n) {
     html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TOPIK</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOPIK: Hangul trước, rồi TOPIK I cấp 1–2, hướng lên TOPIK II.</p><button class="btn btn-primary" id="tpNextBtn">Học tiếp: ' + esc(n.meta.title) + ' → · +10 XP</button></div></div></section>';
   } else {
     html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOPIK</p><h2>Bạn đã xong hết các bước TOPIK hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p></div></div></section>';
   }
   html += '</div>';
-  html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("tp") + '</div>';
-  html += '<div class="bento-tile bento-today">' + specTodayTpHTML(n ? n.id : null) + '</div>';
-  html += '<div class="bento-tile"><section class="card" id="tpHomePath"><h3>Lộ trình TOPIK của bạn</h3>';
+  /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
+  var todayTpHTML = specTodayTpHTML(n ? n.id : null);
+  if (todayTpHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayTpHTML + '</details>';
+  html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="tpHomePath"><h3>Lộ trình TOPIK của bạn</h3>';
   TP_STAGES.forEach(function (st, i) {
     html += '<p><b>' + esc(st.title) + '</b> — đã xong ' + tpStagePct(i) + '%</p>';
   });
-  html += '<div class="row"><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button></div></section></div>';
-  html += '<div class="bento-tile">' + msHomeHTML("tp") + '</div>';
-  html += '<div class="bento-tile bento-wide"><details class="card"><summary><b>TOPIK là gì?</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></div></div>';
+  html += '</section></details>';
+  html += '<details class="card" id="homeSuggestMore"><summary><b>Gợi ý học hôm nay</b></summary>' + msHomeHTML("tp") + '<details class="card"><summary><b>TOPIK là gì?</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></details>';
+  html += '<details class="card" id="homeMore"><summary><b>Xem thêm: bản đồ</b></summary><p><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button></p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tpNextBtn"); if (nb) nb.onclick = function () { var nn = tpNextStep(); if (nn) tpOpenStep(nn.id, "home"); };
