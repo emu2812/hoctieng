@@ -381,8 +381,178 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], vocabSkipped: [], chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", personalPath: null, personalExplain: "", vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], vocabSkipped: [], chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", personalPath: null, personalExplain: "", myWords: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
+
+/* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
+   Chỉ đúng các trường an toàn đã chốt (08:15): từ, nghĩa, IPA, pinyin + thanh điệu,
+   giải thích, câu ví dụ + dịch, từ loại, mẹo, ghi chú, bộ/track. KHÔNG có ô nhập cho
+   hình minh họa, đồng/trái nghĩa (chưa có khung hiển thị) và KHÔNG BAO GIỜ nhận các
+   trường nội bộ (snd, col, whyText, exv, ok, SRS/XP, id) — hệ thống tự sinh.
+   Lưu trong state.myWords (localStorage luôn; đăng nhập thì đồng bộ Supabase qua
+   bảng progress sẵn có, section rb:myWords — không cần bảng mới). Khách gộp vào
+   tài khoản khi đăng nhập theo luật gộp chung (tài khoản thắng khi trùng id).
+   Từ cá nhân được CHÈN LÚC CHẠY vào cuối bộ đã chọn (không sửa file kho): mọi luồng
+   học/flashcard/ôn tập/SRS đọc bộ qua mảng cards nên tự thấy từ cá nhân như từ
+   thường, gắn nhãn "cá nhân". Không bao giờ ghi ngược vào kho chung. */
+function myWordBanks() {
+  var banks = [];
+  try { if (typeof CONTENT !== "undefined" && CONTENT.vocab) banks.push({ key: "en", label: "IELTS", sets: CONTENT.vocab }); } catch (e) {}
+  try { if (typeof CONTENT !== "undefined" && CONTENT.zhVocab) banks.push({ key: "zh", label: "HSK", sets: CONTENT.zhVocab }); } catch (e) {}
+  try { if (typeof TC_VOCAB !== "undefined") banks.push({ key: "tc", label: "TOEIC", sets: TC_VOCAB }); } catch (e) {}
+  try { if (typeof TP_VOCAB !== "undefined") banks.push({ key: "tp", label: "TOPIK", sets: TP_VOCAB }); } catch (e) {}
+  return banks;
+}
+function myWordsForSet(bank, setIdx) {
+  return (state.myWords || []).filter(function (m) { return m && m.bank === bank && m.setIdx === setIdx; }).sort(function (a, b) { return (a.createdAt || 0) - (b.createdAt || 0); });
+}
+function myDisplayCard(m) {
+  /* Ánh xạ hiển thị: câu ví dụ + dịch vào đúng chỗ ví dụ sẵn có của thẻ (ex/exv);
+     giải thích giữ riêng ở myEx để dòng "cá nhân" hiển thị, không lẫn vào ví dụ. */
+  return { w: m.w, han: m.w, vi: m.vi, ipa: m.ipa || "", pinyin: m.pinyin || "", ex: m.sen || m.ex || "", exv: m.senVi || "", note: m.note || "", tip: m.tip || "", pos: m.pos || "", sen: m.sen || "", senVi: m.senVi || "", myEx: m.ex || "", personal: 1, _myId: m.id };
+}
+function injectMyWords() {
+  myWordBanks().forEach(function (b) {
+    (b.sets || []).forEach(function (s, si) {
+      if (!s || !s.cards) return;
+      var kept = s.cards.filter(function (c) { return !c.personal; });
+      myWordsForSet(b.key, si).forEach(function (m) { kept.push(myDisplayCard(m)); });
+      s.cards = kept;
+    });
+  });
+}
+function myWordNorm(w) { return String(w || "").trim().toLowerCase(); }
+function myWordDuplicate(bank, setIdx, w) {
+  var n = myWordNorm(w), bankObj = null;
+  myWordBanks().forEach(function (b) { if (b.key === bank) bankObj = b; });
+  if (!bankObj || !bankObj.sets[setIdx]) return null;
+  var field = (bank === "zh") ? "han" : "w", hit = null;
+  (bankObj.sets[setIdx].cards || []).forEach(function (c) { if (!c.personal && myWordNorm(c[field]) === n) hit = { vi: c.vi }; });
+  if (hit) return hit;
+  (state.myWords || []).forEach(function (m) { if (m.bank === bank && m.setIdx === setIdx && myWordNorm(m.w) === n) hit = { vi: m.vi }; });
+  return hit;
+}
+function mySetOptionsHTML(bank, filter) {
+  var bankObj = null; myWordBanks().forEach(function (b) { if (b.key === bank) bankObj = b; });
+  if (!bankObj) return '<option value="">(chưa có bộ nào)</option>';
+  var f = (filter || "").trim().toLowerCase(), opts = [];
+  (bankObj.sets || []).forEach(function (s, i) {
+    if (!s) return;
+    var label = (s.topic || ("Bộ " + (i + 1))) + (s.band ? " · " + s.band : "") + (s.hsk ? " · " + s.hsk : "");
+    if (f && label.toLowerCase().indexOf(f) < 0) return;
+    opts.push('<option value="' + i + '">' + esc(label) + '</option>');
+  });
+  return opts.length ? opts.join("") : '<option value="">(không khớp bộ nào)</option>';
+}
+function myWordOpenSet(bank, setIdx) {
+  try {
+    if (bank === "en") openLesson({ type: "vocab", setIdx: setIdx });
+    else if (bank === "zh") openLesson({ type: "zhVocab", setKey: "zhvocab:" + setIdx, idx: setIdx });
+    else if (bank === "tc" && typeof tcOpenStep === "function") tcOpenStep("v" + setIdx);
+    else if (bank === "tp" && typeof tpOpenStep === "function") tpOpenStep("v" + setIdx);
+    else go("practice");
+  } catch (e) { go("practice"); }
+}
+function supplementHTML() {
+  var words = state.myWords || [];
+  var banks = myWordBanks();
+  var trackOpts = banks.map(function (b) { return '<option value="' + b.key + '">' + b.label + '</option>'; }).join("");
+  var curBank = banks.length ? banks[0].key : "en";
+  var storageNote = (typeof authState !== "undefined" && authState.user)
+    ? "Đã đăng nhập — từ đồng bộ theo tài khoản, mở máy nào cũng thấy."
+    : "Đang ở chế độ khách — từ lưu trên máy này; đăng nhập để đồng bộ theo tài khoản.";
+  var html = '<details class="card" id="mineGrpSupplement"><summary><b>Bổ sung nội dung</b></summary>';
+  html += '<section class="card"><h3>Nhập từ tay</h3>'
+    + '<p class="mut">Từ bạn nhập sẽ vào flashcard và ôn tập như từ thường, gắn nhãn "cá nhân", chỉ mình bạn thấy — không vào kho chung.</p>'
+    + '<p class="mut">' + storageNote + '</p>'
+    + '<p class="mut">Phát âm kiểm tra kỹ trước khi lưu — web không tự kiểm IPA/pinyin đúng sai. Âm thanh đọc bằng giọng trình duyệt thật, không cần nhập mã âm thanh.</p>'
+    + '<p><label>Track: <select id="myFTrack">' + trackOpts + '</select></label></p>'
+    + '<p><label>Lọc bộ: <input type="text" id="myFSetFilter" placeholder="Gõ vài chữ để lọc bộ…" style="width:100%"></label></p>'
+    + '<p><label>Bộ để xếp từ vào (*): <select id="myFSet" style="width:100%">' + mySetOptionsHTML(curBank, "") + '</select></label></p>'
+    + '<p><label>Từ (*): <input type="text" id="myFW" placeholder="VD: neighbour / 供应链 / 이웃" style="width:100%"></label></p>'
+    + '<p><label>Nghĩa tiếng Việt (*): <input type="text" id="myFVi" placeholder="VD: hàng xóm" style="width:100%"></label></p>'
+    + '<p><label>IPA (tiếng Anh): <input type="text" id="myFIpa" placeholder="VD: /ˈneɪbə/" style="width:100%"></label></p>'
+    + '<p><label>Pinyin + thanh điệu (tiếng Trung, bắt buộc với HSK): <input type="text" id="myFPinyin" placeholder="VD: gōngyìngliàn" style="width:100%"></label></p>'
+    + '<p><label>Giải thích: <textarea id="myFEx" rows="2" style="width:100%" placeholder="Giải thích ngắn, cách nhớ…"></textarea></label></p>'
+    + '<p><label>Câu ví dụ: <input type="text" id="myFSen" style="width:100%"></label></p>'
+    + '<p><label>Dịch câu ví dụ: <input type="text" id="myFSenVi" style="width:100%"></label></p>'
+    + '<p><label>Từ loại: <input type="text" id="myFPos" placeholder="VD: danh từ / động từ / tính từ" style="width:100%"></label></p>'
+    + '<p><label>Mẹo: <input type="text" id="myFTip" style="width:100%"></label></p>'
+    + '<p><label>Ghi chú: <textarea id="myFNote" rows="2" style="width:100%"></textarea></label></p>'
+    + '<p><button class="btn" id="myFSave">Lưu từ</button></p>'
+    + '<p class="mut" id="myFMsg"></p></section>';
+  html += '<section class="card"><h3>Từ của tôi (' + words.length + ' từ)</h3>';
+  if (!words.length) {
+    html += '<p class="mut">Chưa có từ nào — nhập từ đầu tiên ở form phía trên.</p>';
+  } else {
+    var groups = {}, order = [];
+    words.forEach(function (m) {
+      var k = m.bank + ":" + m.setIdx;
+      if (!groups[k]) { groups[k] = []; order.push(k); }
+      groups[k].push(m);
+    });
+    order.forEach(function (k) {
+      var parts = k.split(":"), bkey = parts[0], si = +parts[1], bObj = null;
+      banks.forEach(function (b) { if (b.key === bkey) bObj = b; });
+      var setName = (bObj && bObj.sets[si]) ? (bObj.sets[si].topic || ("Bộ " + (si + 1))) : ("Bộ " + (si + 1));
+      html += '<details style="margin-top:8px"><summary><b>' + esc(setName) + '</b> · ' + groups[k].length + ' từ cá nhân</summary>';
+      groups[k].forEach(function (m) {
+        html += '<div class="qblock"><p><span class="chip">Cá nhân</span> <b>' + esc(m.w) + '</b>'
+          + (m.ipa ? ' <span class="mut">' + esc(m.ipa) + '</span>' : '')
+          + (m.pinyin ? ' <span class="mut">' + esc(m.pinyin) + '</span>' : '')
+          + ' — ' + esc(m.vi) + '</p>'
+          + (m.ex ? '<p>' + esc(m.ex) + '</p>' : '')
+          + (m.sen ? '<p>Câu ví dụ: <b>' + esc(m.sen) + '</b> — ' + esc(m.senVi || "") + '</p>' : '')
+          + (m.pos ? '<p class="mut">Từ loại: ' + esc(m.pos) + '</p>' : '')
+          + (m.tip ? '<p>💡 ' + esc(m.tip) + '</p>' : '')
+          + (m.note ? '<p class="mut">' + esc(m.note) + '</p>' : '')
+          + '<p><button class="btn" data-myopen="' + bkey + ':' + si + '">Học bộ này →</button></p></div>';
+      });
+      html += '</details>';
+    });
+  }
+  html += '</section></details>';
+  return html;
+}
+function wireSupplement() {
+  var tr = $("#myFTrack"), sf = $("#myFSetFilter"), ss = $("#myFSet");
+  if (!tr || !ss) return;
+  var rebuild = function () {
+    var cur = ss.value;
+    ss.innerHTML = mySetOptionsHTML(tr.value, sf ? sf.value : "");
+    if (cur) { for (var i = 0; i < ss.options.length; i++) if (ss.options[i].value === cur) { ss.value = cur; break; } }
+  };
+  tr.onchange = rebuild;
+  if (sf) sf.oninput = rebuild;
+  var sv = $("#myFSave");
+  if (sv) sv.onclick = function () {
+    var msg = $("#myFMsg");
+    var setMsg = function (t) { if (msg) msg.textContent = t; };
+    var w = ($("#myFW").value || "").trim();
+    var vi = ($("#myFVi").value || "").trim();
+    var bank = tr.value;
+    var setIdx = parseInt(ss.value, 10);
+    if (!w || !vi) { setMsg("Hãy nhập từ và nghĩa tiếng Việt (hai ô bắt buộc)."); return; }
+    if (isNaN(setIdx)) { setMsg("Hãy chọn bộ để xếp từ vào (từ không gắn bộ sẽ không hiện ở đâu cả)."); return; }
+    var pinyin = ($("#myFPinyin").value || "").trim();
+    if (bank === "zh" && !pinyin) { setMsg("Tiếng Trung cần pinyin + thanh điệu — hãy nhập rồi kiểm tra kỹ trước khi lưu."); return; }
+    var dup = myWordDuplicate(bank, setIdx, w);
+    if (dup) { setMsg("Từ này đã có trong bộ rồi (nghĩa: " + dup.vi + ") — không ghi đè, hãy nhập từ khác."); return; }
+    if (!state.myWords) state.myWords = [];
+    state.myWords.push({ id: "my" + Date.now() + "" + Math.floor(Math.random() * 1000), bank: bank, setIdx: setIdx, w: w, vi: vi, ipa: ($("#myFIpa").value || "").trim(), pinyin: pinyin, ex: ($("#myFEx").value || "").trim(), sen: ($("#myFSen").value || "").trim(), senVi: ($("#myFSenVi").value || "").trim(), pos: ($("#myFPos").value || "").trim(), tip: ($("#myFTip").value || "").trim(), note: ($("#myFNote").value || "").trim(), createdAt: Date.now() });
+    saveState();
+    injectMyWords();
+    toast("Đã lưu từ “" + w + "” vào bộ của bạn.");
+    render();
+  };
+  $$("[data-myopen]").forEach(function (b) {
+    b.onclick = function () {
+      var parts = (b.dataset.myopen || "").split(":");
+      myWordOpenSet(parts[0], +parts[1]);
+    };
+  });
+}
+
 function normHardFails(st) {
   /* Mục khó cũ chưa có số lần sai: mục từ Sổ lỗi sai (quiz/drill) vốn đã sai
      ít nhất 1 lần nên tính là 1; các loại khác tính là 0. Chỉ chuẩn hóa khi
@@ -415,6 +585,7 @@ function loadState() {
   return st;
 }
 var state = loadState();
+try { injectMyWords(); } catch (e) {}
 var curTab = "home", curLesson = null, returnTab = "home", nudgeShown = false, phNudgeShown = false, phViewMode = "wave", phNudgePhShown = false, lessonStart = 0, runFirstTry = {}, runWrong = [], landingBypass = false;
 var introForced = false; try { introForced = /[?&]intro=1(&|$)/.test(window.location.search || ""); } catch (e) { introForced = false; }
 
@@ -3391,6 +3562,7 @@ function viewMine(app) {
     + '<button class="btn" id="tutorTry">Thử gọi gia sư</button><p style="margin-top:10px"><textarea id="tutorModeInp" rows="2" style="width:100%" placeholder="Gõ câu hoặc câu hỏi cần gia sư giúp..."></textarea></p><p><button class="btn" id="tutorExplainBtn">AI giải thích</button> <button class="btn" id="tutorFixBtn">AI sửa câu của tôi</button></p><div class="why" id="tutorModeOut"></div></section></details>';
   html += '<details style="margin-top:8px"><summary><b>Trò chuyện với AI</b></summary><section class="card"><h3>Trò chuyện với AI</h3><p class="mut">Trò chuyện tự do với AI đã mở ở trang Giao tiếp bản địa (giữa Ôn tập và Của tôi): chọn 1 trong 2 loại riêng — gõ tay (chỉ gõ chữ) hoặc nói live (luân phiên chặt, chỉ tiếng Anh, mic khóa khi AI đang nói). Nói tự do thích gì nói đó, không chấm điểm trong lúc nói. Mô hình nguồn là AI trò chuyện liên tục, không phải người thật. Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p></section></details>';
   html += '</details>';
+  html += supplementHTML();
   html += notesHTML() + sourcesHTML();
   app.innerHTML = html;
   var setGoal = function (v) { v = Math.max(15, Math.min(180, Math.round(v) || 30)); state.goal = v; state.goalSet = true; saveState(); render(); };
@@ -3402,6 +3574,7 @@ function viewMine(app) {
   var miB = $("#mineIntro"); if (miB) miB.onclick = function () { introForced = true; render(); };
   var plSave = $("#planSaveBtn"); if (plSave) plSave.onclick = function () { if (!state.plan) state.plan = {}; state.plan.band = $("#planBandSel").value; state.plan.date = $("#planDateInp").value; saveState(); render(); };
   wirePushCard();
+  wireSupplement();
   $("#tutorTry").onclick = function () { callAiTutor("Xin chào").then(function (r) { toast("Gia sư đã trả lời: " + String(r).slice(0, 80)); }, function (err) { toast(err); }); };
   var tExp = $("#tutorExplainBtn"); if (tExp) tExp.onclick = function () { var v = ($("#tutorModeInp").value || "").trim(); if (!v) { toast("Hãy gõ câu hoặc câu hỏi trước đã."); return; } var out = $("#tutorModeOut"); out.textContent = "AI đang giải thích…"; out.classList.add("show"); callAiTutorMode("explain", v).then(function (r) { out.textContent = r; }, function (err) { out.textContent = err; }); };
   var tFix = $("#tutorFixBtn"); if (tFix) tFix.onclick = function () { var v = ($("#tutorModeInp").value || "").trim(); if (!v) { toast("Hãy gõ câu cần sửa trước đã."); return; } var out = $("#tutorModeOut"); out.textContent = "AI đang sửa câu…"; out.classList.add("show"); callAiTutorMode("fix", v).then(function (r) { out.textContent = r; }, function (err) { out.textContent = err; }); };
@@ -3553,6 +3726,10 @@ function mergeGuestIntoAccount(guest, acc) {
   ((acc && acc.tpHard) || []).forEach(function (h) { if (!merged.tpHard.some(function (x) { return x.step === h.step && x.q === h.q; })) merged.tpHard.push(h); });
   merged.tpMockTests = dedupTcTpMockTests(((guest && guest.tpMockTests) || []).concat((acc && acc.tpMockTests) || []));
   merged.vipRequests = (guest && guest.vipRequests) || [];
+  (function () { var seen = {}, out = [];
+    ((acc && acc.myWords) || []).forEach(function (m) { if (m && m.id) { seen[m.id] = true; out.push(m); } });
+    ((guest && guest.myWords) || []).forEach(function (m) { if (m && m.id && !seen[m.id]) { seen[m.id] = true; out.push(m); } });
+    merged.myWords = out; })();
   function unionArr(a, b) { var out = (a || []).slice(); (b || []).forEach(function (x) { if (out.indexOf(x) < 0) out.push(x); }); return out; }
   merged.skipped = unionArr(guest.skipped, acc.skipped);
   merged.phSkipped = unionArr(guest.phSkipped, acc.phSkipped);
@@ -3637,6 +3814,7 @@ function syncPull(uid) {
           else if (k === "pos") acc.pos = r.state || {};
           else if (k === "u8") acc.u8 = r.state || null;
           else if (k === "mems") acc.mems = r.state || {};
+          else if (k === "myWords") acc.myWords = r.state || [];
           else if (k === "plan") acc.plan = r.state || null;
           else if (k === "pushOpts") acc.pushOpts = r.state || null;
           else if (k === "entryPlaced") acc.entryPlaced = r.state || null;
@@ -3722,6 +3900,7 @@ function syncPush() {
          tung may nen khong dong bo enabled/subscribed/permission). */
       (function () { var u = (typeof normU8 === "function") ? normU8() : (state.u8 || {}); row("rb", "u8", u); })();
       row("rb", "mems", state.mems || {});
+      row("rb", "myWords", state.myWords || []);
       row("rb", "plan", state.plan || null);
       (function () { var pp = (typeof pushPrefs === "function") ? pushPrefs() : { time: "20:00", types: { srs: true, path: true, checkin: true } }; row("rb", "pushOpts", { time: pp.time, types: pp.types || {} }); })();
       row("rb", "entryPlaced", state.entryPlaced || null);
@@ -3799,6 +3978,7 @@ function authRefresh() {
       state = m.state;
       state.accountMerge = m.report;
       saveState();
+      try { injectMyWords(); } catch (e) {}
       authState.merge = m.report;
       authState.vip = !!acc.vip;
       authState.sync = "Đã gộp tiến trình khách lên tài khoản.";
@@ -3828,6 +4008,7 @@ function authPullAndMerge() {
       saveState();
       authState.merge = m.report;
       authState.vip = !!acc.vip;
+      try { injectMyWords(); } catch (e) {}
       toast("Đã tải và gộp tiến trình từ tài khoản.");
       render();
     });
@@ -5498,6 +5679,7 @@ function renderVocab(app, l) {
     + (c.snd ? '<div class="why show">' + esc(c.snd) + '</div>' : "")
     + (c.note ? '<p class="mut">' + esc(c.note) + '</p>' : "")
     + (c.tip ? '<p>💡 ' + esc(c.tip) + '</p>' : "")
+    + (c.personal ? '<p><span class="chip">Cá nhân</span>' + ((c.myEx && c.sen) ? ' Giải thích: ' + esc(c.myEx) : '') + '</p>' : "")
     + '</div>'
     + (l.preview ? previewLockHTML() : '<div id="vocabMulti">' + vkEnPanelHTML(vk, c, cards, pos) + '</div>')
     + '</div>'
@@ -13334,7 +13516,7 @@ function renderZhVocab(app, l) {
     + '<p>' + (zhShowBig ? '<b>' + esc(c.pinyin) + '</b>' : '') + '<span id="zhMeaning"' + (zhShowMeaning ? '' : ' style="display:none"') + '> — ' + esc(c.vi) + '</span></p>'
     + '<div id="zhMeaningBody"' + (zhShowMeaning ? '' : ' style="display:none"') + '>'
     + '<p class="mut">Cụm đi kèm: ' + esc(c.col || "") + '</p>'
-    + '<p>Ví dụ: ' + esc(c.ex || "") + '</p><p class="mut">' + esc(c.exv || "") + '</p>'
+    + (c.personal ? (c.sen ? '<p>Ví dụ: ' + esc(c.ex || "") + '</p><p class="mut">' + esc(c.exv || "") + '</p><p><span class="chip">Cá nhân</span>' + (c.myEx ? ' Giải thích: ' + esc(c.myEx) : '') + '</p>' : '<p><span class="chip">Cá nhân</span>' + (c.myEx ? ' Giải thích: ' + esc(c.myEx) : '') + '</p>') : '<p>Ví dụ: ' + esc(c.ex || "") + '</p><p class="mut">' + esc(c.exv || "") + '</p>')
     + '</div>'
     + '<div id="zhMulti">' + vkZhPanelHTML(zvk, c, cards, pos, d) + '</div>'
     + '</div>'
@@ -14469,7 +14651,7 @@ function tcOpenStep(id, backTab) {
     var html = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · TỪ VỰNG</p><h2>' + esc(s.topic) + '</h2><p class="mut">' + s.cards.length + ' thẻ. Tự nhớ nghĩa của từng từ trước rồi bấm Hiện nghĩa để kiểm tra — đừng xem nghĩa ngay. Bấm 🔊 để nghe ví dụ bằng giọng máy. Chưa có video người bản xứ cho bộ từ này — tạm nghe giọng máy ở từng thẻ.</p>';
     html += s.cards.map(function (c, i) {
       var bx = (state.tcCardBox && state.tcCardBox[id + ":" + i]) || 0;
-      return '<div class="qblock" data-tcpage="' + i + '"><p><b>' + esc(c.w) + '</b> <span class="mut">' + esc(c.ipa) + '</span> <button class="btn tcshow" data-i="' + i + '">Hiện nghĩa</button> <button class="btn tcspeak" data-i="' + i + '">🔊 Nghe ví dụ</button></p><p class="tchide mut" data-mean="' + i + '" style="display:none">' + esc(c.vi) + ' · Cụm: ' + esc(c.col) + '<br>' + esc(c.ex) + '<br>' + esc(c.exv) + '</p><p class="mut"><span class="tcbox" data-box="' + i + '">Nấc nhớ: ' + bx + '/5</span> (đủ 5 nấc là thuộc hẳn; tự đánh dấu) <button class="btn tcmark" data-i="' + i + '"' + (bx >= 5 ? ' disabled' : '') + '>' + (bx >= 5 ? 'Đã thuộc ✓' : 'Nhớ rồi (+1 nấc)') + '</button> <button class="btn tcskip" data-i="' + i + '">Bỏ qua thẻ này</button></p></div>';
+      return '<div class="qblock" data-tcpage="' + i + '"><p>' + (c.personal ? '<span class="chip">Cá nhân</span> ' : '') + '<b>' + esc(c.w) + '</b> <span class="mut">' + esc(c.ipa) + '</span> <button class="btn tcshow" data-i="' + i + '">Hiện nghĩa</button> <button class="btn tcspeak" data-i="' + i + '">🔊 Nghe ví dụ</button></p><p class="tchide mut" data-mean="' + i + '" style="display:none">' + esc(c.vi) + ' · Cụm: ' + esc(c.col) + '<br>' + esc(c.ex) + '<br>' + esc(c.exv) + (c.personal && c.myEx && c.sen ? '<br>Giải thích: ' + esc(c.myEx) : '') + '</p><p class="mut"><span class="tcbox" data-box="' + i + '">Nấc nhớ: ' + bx + '/5</span> (đủ 5 nấc là thuộc hẳn; tự đánh dấu) <button class="btn tcmark" data-i="' + i + '"' + (bx >= 5 ? ' disabled' : '') + '>' + (bx >= 5 ? 'Đã thuộc ✓' : 'Nhớ rồi (+1 nấc)') + '</button> <button class="btn tcskip" data-i="' + i + '">Bỏ qua thẻ này</button></p></div>';
     }).join("");
     html += vocabMirrorHTML("tc") + '<div class="row"><button class="btn btn-primary" id="tcFinishBtn">Đã học xong bộ này (+10 XP)</button></div></section>';
     app.innerHTML = html;
@@ -15031,7 +15213,7 @@ function tpOpenStep(id, backTab) {
     var htmlV = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · TỪ VỰNG</p><h2>' + esc(s.topic) + '</h2><p class="mut">' + s.cards.length + ' thẻ. Tự nhớ nghĩa của từng từ trước rồi bấm Hiện nghĩa để kiểm tra — đừng xem nghĩa ngay. Bấm 🔊 để nghe ví dụ bằng giọng máy. Chưa có video người bản xứ cho bộ từ này — tạm nghe giọng máy ở từng thẻ.</p>';
     htmlV += s.cards.map(function (c, i) {
       var bx = (state.tpCardBox && state.tpCardBox[id + ":" + i]) || 0;
-      return '<div class="qblock" data-tppage="' + i + '"><p><b>' + esc(c.w) + '</b> <span class="mut">' + esc(c.r) + '</span> <button class="btn tpshow" data-i="' + i + '">Hiện nghĩa</button> <button class="btn tpspeak" data-i="' + i + '">🔊 Nghe ví dụ</button></p><p class="tphide mut" data-mean="' + i + '" style="display:none">' + esc(c.vi) + '<br>' + esc(c.ex) + '<br>' + esc(c.exv) + '</p><p class="mut"><span class="tpbox" data-box="' + i + '">Nấc nhớ: ' + bx + '/5</span> (đủ 5 nấc là thuộc hẳn; tự đánh dấu) <button class="btn tpmark" data-i="' + i + '"' + (bx >= 5 ? ' disabled' : '') + '>' + (bx >= 5 ? 'Đã thuộc ✓' : 'Nhớ rồi (+1 nấc)') + '</button> <button class="btn tpskip" data-i="' + i + '">Bỏ qua thẻ này</button></p></div>';
+      return '<div class="qblock" data-tppage="' + i + '"><p>' + (c.personal ? '<span class="chip">Cá nhân</span> ' : '') + '<b>' + esc(c.w) + '</b> <span class="mut">' + esc(c.r) + '</span> <button class="btn tpshow" data-i="' + i + '">Hiện nghĩa</button> <button class="btn tpspeak" data-i="' + i + '">🔊 Nghe ví dụ</button></p><p class="tphide mut" data-mean="' + i + '" style="display:none">' + esc(c.vi) + '<br>' + esc(c.ex) + '<br>' + esc(c.exv) + (c.personal && c.myEx && c.sen ? '<br>Giải thích: ' + esc(c.myEx) : '') + '</p><p class="mut"><span class="tpbox" data-box="' + i + '">Nấc nhớ: ' + bx + '/5</span> (đủ 5 nấc là thuộc hẳn; tự đánh dấu) <button class="btn tpmark" data-i="' + i + '"' + (bx >= 5 ? ' disabled' : '') + '>' + (bx >= 5 ? 'Đã thuộc ✓' : 'Nhớ rồi (+1 nấc)') + '</button> <button class="btn tpskip" data-i="' + i + '">Bỏ qua thẻ này</button></p></div>';
     }).join("");
     htmlV += vocabMirrorHTML("tp") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Đã học xong bộ này (+10 XP)</button></div></section>';
     app.innerHTML = htmlV;
