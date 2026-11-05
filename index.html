@@ -155,7 +155,7 @@ body.has-bottombar #btnBack{display:none}
 #appFooter{margin:28px 0 0;border-top:1.5px solid var(--line2);padding:20px 0 0}
 .foot-grid{display:grid;gap:16px;grid-template-columns:1.4fr 1fr 1fr 1fr}
 @media(min-width:901px){.tabbar{display:none}.app-col .lessonframe{top:70px}}
-@media(max-width:900px){.app-frame{display:block}.app-sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:60;width:280px;max-height:none;border-radius:0;overflow-y:auto}body.sidebar-open .app-sidebar{display:flex}.tabbar{top:70px}.foot-grid{grid-template-columns:1fr 1fr}.tb-track{display:none}#tbAccountBtn{display:none}#appSidebarNav{display:none}#sbCollapseBtn{display:none}.tb-spacer{display:none}#tutorFloatBtn span{display:none}}
+@media(max-width:900px){.app-frame{display:block}.app-sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:60;width:280px;max-height:none;border-radius:0;overflow-y:auto}body.sidebar-open .app-sidebar{display:flex}.tabbar{top:70px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabbar::-webkit-scrollbar{display:none}.tabbar .tab{flex:0 0 auto;white-space:nowrap}.foot-grid{grid-template-columns:1fr 1fr}.tb-track{display:none}#tbAccountBtn{display:none}#appSidebarNav{display:none}#sbCollapseBtn{display:none}.tb-spacer{display:none}#tutorFloatBtn span{display:none}}
 body.sidebar-collapsed .app-frame{grid-template-columns:64px minmax(0,1fr)}
 body.sidebar-collapsed .sb-logo h1,body.sidebar-collapsed .sb-tag,body.sidebar-collapsed .sb-txt,body.sidebar-collapsed .sb-profile{display:none}
 body.sidebar-collapsed .sb-mark{display:block;font-size:28px;text-align:center}
@@ -373,6 +373,7 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <script src="g71_luyen_go.js"></script>
 <script src="g71_rong_bay.js"></script>
 <script src="g71_ban_bong_bong.js"></script>
+<script src="g71_rong_lua.js"></script>
 <script>
 "use strict";
 /* ============ SHELL BẢN MỚI — GIAI ĐOẠN 1 ============
@@ -2365,7 +2366,9 @@ function homeQuickHTML() {
 }
 /* v71 — Khu Trò chơi mới: đúng 3 game, mở bằng nút data-g71game (không dùng
    dây nối của game cũ). Thắng +10 XP bằng hàm sẵn có; thua không
-   trừ gì. Từ vựng lấy từ kho bài học tiếng Anh. */
+   trừ gì. Từ vựng lấy từ kho bài học tiếng Anh.
+   v77 — thêm thẻ thứ 4 "Rồng Lửa — bản thử" (g71_rong_lua.js): lát cắt
+   chơi được đầu tiên của game Rồng Lửa RPG, vùng 1 Rừng Xanh. */
 function viewGamesHub(app) {
   var cards = [
     { key: "go", icon: "msc-dragon", title: "⌨️ Luyện Gõ",
@@ -2373,7 +2376,9 @@ function viewGamesHub(app) {
     { key: "dragon", icon: "msc-dragon", title: "🐉 Rồng Bay Trên Mây",
       desc: "Rồng bay trên 3 làn mây. Đọc nghĩa tiếng Việt rồi bay vào làn có từ đúng. Đúng hiện CHUẨN!, sai mất tim. Hết 10 vòng còn tim là thắng." },
     { key: "bubble", icon: "msc-snake", title: "🫧 Bắn Bong Bóng",
-      desc: "Bong bóng mang từ tiếng Anh nổi dưới nước. Ngắm pháo, bắn vỡ đúng bong bóng. Đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim." }
+      desc: "Bong bóng mang từ tiếng Anh nổi dưới nước. Ngắm pháo, bắn vỡ đúng bong bóng. Đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim." },
+    { key: "ronglua", icon: "msc-dragon", title: "🔥 Rồng Lửa — bản thử",
+      desc: "Rồng nhỏ thu hồi các từ bị Bóng Tối Câm Lặng đánh cắp ở Rừng Xanh. Gõ đúng từ để tung chiêu theo hệ, khắc hệ gây sát thương tối đa, combo nhân tới x3. 3 ải, trùm cuối đổi hệ." }
   ];
   var html = trackSwitchHTML();
   html += '<h2>Trò chơi</h2>';
@@ -2393,6 +2398,7 @@ function viewGamesHub(app) {
       if (k === "go") G71LuyenGo.start();
       else if (k === "dragon") G71RongBay.start();
       else if (k === "bubble") G71BanBongBong.start();
+      else if (k === "ronglua") G71RongLua.start();
     };
   });
   var back = app.querySelector("#g71HubHome");
