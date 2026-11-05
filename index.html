@@ -115,6 +115,8 @@ iframe{width:100%;aspect-ratio:16/9;border:1.5px solid var(--line2);border-radiu
 .path-node .pn-st{font-size:14px}
 .path-node.done .pn-st{color:#147A4E;font-weight:700}
 .path-node.cur .pn-st{color:#8A6100;font-weight:700}
+.ch-node>.chip,.stage-node>.chip{margin-left:auto;align-self:center}
+.chapter-body[hidden],.stage-body[hidden]{display:none}
 body.landing-on #tabBar,body.landing-on #previewBanner,body.landing-on #tutorFloatBtn{display:none}
 .land-grid{display:grid;gap:12px;margin:16px 0}
 @media(min-width:700px){.land-grid{grid-template-columns:1fr 1fr}}
@@ -2846,7 +2848,7 @@ function viewRoadmap(app) {
   var done = doneLearnCount(), total = learningSteps().length;
   var html = trackSwitchHTML() + '<h2>Bản đồ</h2><p class="mut">Cổng 80%: bài kiểm tra cuối chương mở khi bạn học xong 80% số bước tính cổng của chương đó — bước tính cổng là bước học chính (không tính bước làm quen và bước ôn xen kẽ); đây là chuẩn nội bộ của web, không phải chuẩn IELTS. Mỗi chương dưới đây chỉ ghi phân số đã xong/cần, không lặp lại luật này.</p>';
   html += '<section class="card" id="myPathLink"><h3>Lộ trình riêng của bạn</h3><p class="mut">Lộ trình AI tạo riêng cho bạn, khác Bản đồ chung.</p><button class="btn" id="myPathGo">Mở lộ trình riêng</button></section>';
-  html += '<section class="card"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + done + '/' + total + ' bước</b></div><div id="roadmapBox"><div class="duo-path">';
+  html += '<section class="card"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + done + '/' + total + ' bước</b></div><div id="roadmapBox"><div class="path-v">';
   var clCur = nextLearnStep(); var clCurIdx = clCur ? stepIdx(clCur.id) : -1;
   var gateHTML = "";
   RB_CH1_STEPS.forEach(function (s, i) {
@@ -2864,7 +2866,11 @@ function viewRoadmap(app) {
        chip nay gay nham la buoc tiep theo that; buoc hien tai da co "Ban dang o day". */
     else if (st === "done" && Object.keys(state.hard || {}).some(function (k) { return !state.hard[k].done && k.indexOf(s.id) >= 0; })) clFlag = "Ôn lại";
 
-    html += duoNodeHTML({ cls: "step-row duo-node pos" + (i % 8) + " " + st, attrs: 'data-step="' + s.id + '" data-status="' + st + '"', star: duoStar(st), title: esc(s.title), sub: esc(s.type) + " · khoảng " + s.mins + " phút (ước tính)", status: st === "done" ? "Đã xong" : st === "skipped" ? "Đã bỏ qua — bấm để học lại" : st === "cur" ? "Đang học" : "Chưa tới", flag: clFlag, guide: st === "cur" });
+    /* v86: nut .path-node theo mau HSK; giu nguyen data-step, class step-row,
+       co "Ban dang o day" va chip "Tiep theo" o buoc hien tai (buoc tiep theo
+       con o Chuong 1 — thay cach dat chip cu cua FIX-V32). */
+    var stTxt = st === "done" ? "Đã xong" : st === "skipped" ? "Đã bỏ qua — bấm để học lại" : st === "cur" ? "Đang học" : "Chưa tới";
+    html += '<button class="path-node step-row ' + st + '" data-step="' + s.id + '" data-status="' + st + '"><span class="dotwrap"><span class="dot">' + duoStar(st) + '</span></span><span><span class="pn-title">' + esc(s.title) + '</span><br><span class="pn-type">' + esc(s.type) + ' · khoảng ' + s.mins + ' phút (ước tính)</span><br><span class="pn-st">' + stTxt + '</span>' + (clFlag ? ' <span class="chip cl-flag">' + clFlag + '</span>' : '') + (st === "cur" ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
   });
   html += '</div>' + gateHTML + '</div>';
   html += '</section>';
@@ -2875,7 +2881,15 @@ function viewRoadmap(app) {
        chuong khong to them; neu chuong 1 xong het thi hang dau tien chua xong
        cua chuong som nhat con do moi duoc to + co, cac diem vao chuong khac
        chi de mui ten. */
-  var mapCurUsed = false;
+  /* v86: chương chứa bước tiếp theo (khi Chương 1 đã xong hết) — nút chương
+     này mang chip "Tiếp theo"; bước tiếp theo trong chương mang cờ
+     "Bạn đang ở đây". Tính trước vòng lặp để nút chương biết trạng thái. */
+  var curChapterBand = null;
+  if (!clCur) {
+    for (var cbi = 0; cbi < RB_CHAPTER_MAP.length; cbi++) {
+      if (rbChSteps(RB_CHAPTER_MAP[cbi].band).some(function (st) { return !rbStepDone(st); })) { curChapterBand = RB_CHAPTER_MAP[cbi].band; break; }
+    }
+  }
   RB_CHAPTER_MAP.forEach(function (ch, ci) {
     var isOpen = ch.status === "open";
     /* DOT 19 UI GATE (31/10/2026): hang Band 0 cung liet ke buoc that tu rbChSteps
@@ -2891,8 +2905,15 @@ function viewRoadmap(app) {
     var d2 = ci === 0 ? (gateDoneR + '/' + gateStepsR.length + ' bước Viết') : (hasSteps ? (gateDoneR + '/' + gateStepsR.length + ' bước tính cổng') : 'Sắp mở');
     var chipTxt = ci === 0 ? 'Đang mở · ' + d2 : (hasSteps ? 'Đã mở · ' + d2 : 'Sắp mở');
     var gb = ci === 0 ? RB_CH1_GUIDEBOOK : CL_GUIDEBOOKS[ch.band];
-    html += '<section class="card chapter-row" data-ch="' + esc(ch.band) + '"><div class="row unit-banner"><b>PHẦN ' + (ci + 2) + ' · Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</b><span class="chip' + (isOpen ? ' cur' : '') + '">' + chipTxt + '</span><button class="btn" data-gbopen="' + esc(ch.band) + '">📖 HƯỚNG DẪN · Sổ tay chương</button></div><p><b>Mục tiêu:</b> ' + esc(ch.goal) + '</p>'
-
+    var passedCh = !!((state.chapterTestDone || {})[ch.band]);
+    var isCurCh = curChapterBand === ch.band;
+    var chStatus = passedCh ? "done" : (!hasSteps ? "locked" : (isCurCh ? "cur" : "future"));
+    var chStTxt = passedCh ? "Đã xong" : (!hasSteps ? "Sắp mở" : (isCurCh ? "Đang học" : "Chưa tới"));
+    var chIcon = passedCh ? "✓" : (!hasSteps ? "🔒" : "📖");
+    var pnType = ci === 0 ? 'Tiếng Anh · IELTS · ' + gateStepsR.length + ' bước Viết' : (hasSteps ? 'Tiếng Anh · IELTS · ' + chSteps.length + ' bước học' : 'Tiếng Anh · IELTS · Sắp mở');
+    /* v86: thân chương gập, chỉ chương đang học mở sẵn; bấm nút tròn để mở/gập. */
+    var open = isCurCh;
+    var body = '<div class="row unit-banner"><b>PHẦN ' + (ci + 2) + ' · Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</b><button class="btn" data-gbopen="' + esc(ch.band) + '">📖 HƯỚNG DẪN · Sổ tay chương</button></div><p><b>Mục tiêu:</b> ' + esc(ch.goal) + '</p>'
       + (ci === 0 ? '<p class="mut">10 bước dưới đây là bước Viết Band 0; 7 bước mở đầu (từ vựng, ngữ pháp, nghe, đọc, phát âm) nằm ở thẻ Chương 1 phía trên — hai con số là hai nhóm bước khác nhau.</p>' : '')
       + '<details><summary><b>Học xong làm được</b></summary><p>' + esc(ch.can.join(" · ")) + '</p></details>'
       + rbStageHTML(ch)
@@ -2905,17 +2926,18 @@ function viewRoadmap(app) {
       var rows = ""; var hasNext = false;
       var titleSeen = {};
       var firstUndone = true;
-      var allowCur = !clCur && !mapCurUsed && chSteps.some(function (st) { return !rbStepDone(st); });
-      if (allowCur) mapCurUsed = true;
+      var allowCur = isCurCh;
       chSteps.forEach(function (st, si) {
         titleSeen[st.title] = (titleSeen[st.title] || 0) + 1;
         var suf2 = titleSeen[st.title] > 1 ? ' · phần ' + titleSeen[st.title] : '';
         var isNext = allowCur && firstUndone && !rbStepDone(st); if (isNext) { firstUndone = false; hasNext = true; }
-        rows += duoNodeHTML({ cls: "step-row duo-node pos" + (si % 8) + (isNext ? " cur" : ""), attrs: 'data-rstep="' + esc(ch.band) + ':' + si + '"', star: rbStepDone(st) ? "★" : "☆", title: esc(st.title) + suf2 + (st.familiar ? " · làm quen" : "") + (st.review ? " · không tính cổng" : ""), sub: esc(st.type), status: rbStepDone(st) ? "Đã xong" : isNext ? "Đang học" : "Chưa tới", flag: isNext ? "📍 Bạn đang ở đây" : "", guide: isNext });
+        var stDone = rbStepDone(st);
+        var stTxt = stDone ? "Đã xong" : isNext ? "Đang học" : "Chưa tới";
+        rows += '<button class="path-node step-row' + (isNext ? ' cur' : '') + '" data-rstep="' + esc(ch.band) + ':' + si + '"><span class="dotwrap"><span class="dot">' + (stDone ? "★" : "☆") + '</span></span><span><span class="pn-title">' + esc(st.title) + suf2 + (st.familiar ? " · làm quen" : "") + (st.review ? " · không tính cổng" : "") + '</span><br><span class="pn-type">' + esc(st.type) + '</span><br><span class="pn-st">' + stTxt + '</span>' + (isNext ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span></button>';
       });
       var missing = rbChMissing(ch.band);
-      var chestHTML = (ci > 0) ? '<button class="duo-node duo-chest pos' + (chSteps.length % 8) + '" data-chchest="' + esc(ch.band) + '"><span class="duo-star">🎁</span><span class="duo-label"><b>Rương cuối chương</b><br><span class="duo-st">Kiểm tra cuối chương</span></span></button>' : "";
-      html += '<details class="ch-steps" data-ch-steps="' + esc(ch.band) + '" style="margin-top:8px"' + (hasNext ? ' open' : '') + '><summary><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b></summary><div class="duo-path">' + rows + '</div></details>' + (chestHTML ? '<div class="duo-path">' + chestHTML + '</div>' : '')
+      var chestHTML = (ci > 0) ? '<div class="path-v"><button class="path-node duo-chest" data-chchest="' + esc(ch.band) + '"><span class="dotwrap"><span class="dot">🎁</span></span><span><span class="pn-title">Rương cuối chương</span><br><span class="pn-type">Kiểm tra cuối chương</span><br><span class="pn-st">' + (passedCh ? 'Đã qua ✓' : 'Chưa mở — cần đủ 80% bước tính cổng') + '</span></span></button></div>' : "";
+      body += '<details class="ch-steps" data-ch-steps="' + esc(ch.band) + '" style="margin-top:8px"' + (hasNext ? ' open' : '') + '><summary><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b></summary><div class="path-v">' + rows + '</div></details>' + chestHTML
         + ((missing.length && ci > 0) ? '<p class="mut">Chưa có bước: ' + esc(missing.join(", ")) + '.</p>' : "")
         /* DOT 19 UI GATE: hang Band 0 chi co buoc Viet trong rbChSteps (cac kho
            khac cua Band 0 thuoc Chuong 1 o the tren) nen khong hien dong
@@ -2936,17 +2958,22 @@ function viewRoadmap(app) {
            diem so; khong doi cong 80% hay tien trinh. */
         + msRowHTML("en", ch.band);
     }
-    html += '<details class="u7RoadNote" data-ch-note="' + esc(ch.band) + '"><summary><b>Ghi chú lộ trình</b></summary>'
+    body += '<details class="u7RoadNote" data-ch-note="' + esc(ch.band) + '"><summary><b>Ghi chú lộ trình</b></summary>'
       + '<p><b>Lý do xếp chương này:</b> ' + (ci === 0 ? 'Chương mở đầu: học từ cái quen thuộc nhất — chào hỏi, từ lớp học, 44 âm — rồi mới lên câu dài và bài khó.' : 'Chương này xếp sau chương ' + esc(RB_CHAPTER_MAP[ci - 1].band) + ': học xong chương trước mới đủ nền để học chương này.') + '</p>'
       + '<p><b>Dạng bài yếu cần chú ý:</b> ' + (ci === 0 ? 'Xem Sổ lỗi sai — dạng nào sai nhiều thì ôn dạng đó trước, đừng học dàn trải.' : 'Khi tới chương này, ôn lại dạng bài yếu nhất ở chương trước theo Sổ lỗi sai trước khi học bài mới.') + '</p>'
       + (isOpen ? '' : '<p class="mut">Chương này sắp mở — ghi chú này chỉ là định hướng, chưa có bài học bên trong.</p>')
       + '</details>'
       + '<details class="clGuidebook" data-cl-gb="' + esc(ch.band) + '"><summary><b>Nội dung sổ tay chương</b></summary>'
       + (gb ? '<p><b>Ngữ pháp chính:</b> ' + esc(gb.grammar.join(" · ")) + '</p><p><b>Cụm câu then chốt:</b> ' + esc(gb.phrases.join(" · ")) + '</p><p><b>Lỗi người Việt hay mắc:</b> ' + esc(gb.mistakes.join(" · ")) + '</p>' : '')
-      + (isOpen ? '' : '<p class="mut">Chương này sắp mở — sổ tay này chỉ là định hướng, chưa có bài học bên trong.</p>') + '</details></section>';
+      + (isOpen ? '' : '<p class="mut">Chương này sắp mở — sổ tay này chỉ là định hướng, chưa có bài học bên trong.</p>') + '</details>';
+    /* v86: nút chương tròn .path-node theo mẫu HSK — dot tròn có icon, tiêu đề +
+       mô tả + trạng thái; chip tiến trình là con trực tiếp của nút. */
+    html += '<section class="card chapter-row" data-ch="' + esc(ch.band) + '">'
+      + '<button class="path-node row ch-node ' + chStatus + '" data-chapter="' + esc(ch.band) + '" aria-expanded="' + (open ? 'true' : 'false') + '"><span class="dotwrap"><span class="dot">' + chIcon + '</span></span><span><span class="pn-title">Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</span><br><span class="pn-type">' + pnType + '</span><br><span class="pn-st">' + chStTxt + '</span>' + (isCurCh ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span><span class="chip' + (isOpen ? ' cur' : '') + '">' + chipTxt + '</span></button>'
+      + '<div class="chapter-body"' + (open ? '' : ' hidden') + '>' + body + '</div></section>';
   });
   var cc0 = mapCupCounts();
-  html += '<section class="card" id="mapCupCard"><div class="duo-path"><button class="duo-node duo-cup pos0" id="mapCupBtn"><span class="duo-star">🏆</span><span class="duo-label"><b>Cúp cuối lộ trình</b><br><span class="duo-st">Đã qua ' + cc0.passed + '/' + cc0.total + ' kiểm tra cuối chương</span></span></button></div></section>';
+  html += '<section class="card" id="mapCupCard"><div class="path-v"><button class="path-node duo-cup" id="mapCupBtn"><span class="dotwrap"><span class="dot">🏆</span></span><span><span class="pn-title">Cúp cuối lộ trình</span><br><span class="pn-type">Lộ trình IELTS · 13 chương</span><br><span class="pn-st">Đã qua ' + cc0.passed + '/' + cc0.total + ' kiểm tra cuối chương</span></span></button></div></section>';
   html += '<hr><p class="mut">Dưới đây là mục thêm ngoài Bản đồ — không phải bước học, bấm khi cần.</p>';
   html += '<section class="card" id="bkRoadmapCard"><h3>📚 Nội dung mới theo nghiên cứu sách</h3><p class="mut">Nội dung tự soạn của web — xem nguồn trong Cài đặt → Nguồn nội dung.</p><details><summary><b>Xem phạm vi nội dung mới theo sách</b></summary><p class="mut">Lỗi người Việt có ở các chặng từ Band 0 tới Band 6,5; ví dụ đời sống người Việt có ở Band 2,0 tới Band 6,0; sắc thái và phong cách chỉ ở chặng 7,5+ — không đưa xuống chặng thấp hơn. Mở ở tab Luyện tập.</p></details><button class="btn" id="bkRoadmapGo">Mở ở tab Luyện tập</button></section>';
   html += '<section class="card" id="clCanDo"><h3>Trang cấp độ — bạn làm được gì ở mỗi cấp</h3><details><summary><b>Xem năng lực từng cấp</b></summary>' + RB_CHAPTER_MAP.map(function (ch) { return '<p><b>' + esc(ch.band) + ' — ' + esc(ch.title) + ':</b> ' + esc(ch.can.join("; ")) + '</p>'; }).join("") + '</details></section>';
@@ -2994,6 +3021,17 @@ function viewRoadmap(app) {
   };
   $$("[data-chtest]").forEach(function (btn) {
     btn.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "chapterTest", band: btn.dataset.chtest }); };
+  });
+  /* v86: nút chương mở/gập thân chương (mẫu HSK: chương chứa bước tiếp theo mở sẵn). */
+  $$("[data-chapter]").forEach(function (btn) {
+    btn.onclick = function () {
+      var sec = btn.closest(".chapter-row");
+      var body = sec ? sec.querySelector(".chapter-body") : null;
+      if (!body) return;
+      var willOpen = body.hasAttribute("hidden");
+      if (willOpen) body.removeAttribute("hidden"); else body.setAttribute("hidden", "");
+      btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    };
   });
   msWire(app);
   $$("[data-readeasy]").forEach(function (btn) {
@@ -14933,37 +14971,58 @@ function tcTpKindLabel(kind) {
    buoc tiep theo chung, kiem tra + thi thu tach nut rieng duoi details.
    GIU NGUYEN: data-tcstep/data-tpstep (wireTc/wireTp khong doi), thu tu
    buoc trong st.steps (dan xen v31), cong chang 80%, mach Hangul. */
+/* DOT V32 MAP 01/11: the chang kieu IELTS (chapter-row) cho Ban do TOEIC/TOPIK:
+   chip x/y buoc, details Cac buoc dang step-row, chip Tiep theo duy nhat o
+   buoc tiep theo chung, kiem tra + thi thu tach nut rieng duoi details.
+   GIU NGUYEN: data-tcstep/data-tpstep (wireTc/wireTp khong doi), thu tu
+   buoc trong st.steps (dan xen v31), cong chang 80%, mach Hangul.
+   v86: dau the thanh nut tron .path-node theo mau HSK (nut tron co icon,
+   tieu de + mo ta + trang thai); chang chua buoc tiep theo mang co
+   "Ban dang o day"; than chang gap, chi chang dang hoc mo san
+   (bam nut tron de mo/gap — thay FIX-V33 "moi chang deu mo"). */
 function tcTpStageCardHTML(st, i, isTc) {
   var status = isTc ? tcStepStatus : tpStepStatus;
   var meta = isTc ? tcStepMeta : tpStepMeta;
   var attr = isTc ? "data-tcstep" : "data-tpstep";
-  var open = true; /* FIX-V33 02/11: moi chang deu mo (nhay coc lien chang). */
   var next = isTc ? tcNextStep() : tpNextStep();
   var learn = [], finals = [];
   st.steps.forEach(function (s) { var m = meta(s); if (!m) return; if (m.kind === "check" || m.kind === "mock") finals.push(s); else learn.push(s); });
   var doneLearn = 0; learn.forEach(function (s) { if (status(s) === "done") doneLearn++; });
+  var doneFinals = 0; finals.forEach(function (s) { if (status(s) === "done") doneFinals++; });
+  var isCurStage = !!(next && st.steps.indexOf(next.id) >= 0);
+  var isDoneStage = learn.length > 0 && doneLearn === learn.length && doneFinals === finals.length;
+  var stIcon = isDoneStage ? "✓" : isCurStage ? "🎯" : "📖";
+  var stTxt = isDoneStage ? "Đã xong" : isCurStage ? "Đang học" : "Chưa tới";
   var rows = "";
   learn.forEach(function (id) {
     var m = meta(id); if (!m) return;
     var stt = status(id);
     var isNext = !!(next && next.id === id);
-    rows += '<button class="step-row' + (isNext ? ' cur' : '') + '" ' + attr + '="' + esc(id) + '"><span><b>' + esc(m.title) + '</b><br><span class="mut">' + tcTpKindLabel(m.kind) + '</span>' + (isNext ? '<span class="chip cl-flag">Tiếp theo</span>' : '') + '</span><span class="st">' + (stt === "done" ? "✓" : stt === "locked" ? "🔒" : "→") + '</span></button>';
+    var mark = stt === "done" ? "✓" : stt === "locked" ? "🔒" : "→";
+    var stTxt2 = stt === "done" ? "Đã xong" : stt === "locked" ? "Chưa mở — học theo thứ tự" : isNext ? "Đang học" : "Chưa tới";
+    rows += '<button class="path-node step-row' + (isNext ? ' cur' : '') + '" ' + attr + '="' + esc(id) + '"><span class="dotwrap"><span class="dot">' + mark + '</span></span><span><span class="pn-title">' + esc(m.title) + '</span><br><span class="pn-type">' + tcTpKindLabel(m.kind) + '</span><br><span class="pn-st">' + stTxt2 + '</span>' + (isNext ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
   });
-  var g = (isTc ? TC_STAGE_GOALS : TP_STAGE_GOALS)[i] || { goal: "", can: [] };
-  var html = '<section class="card chapter-row"><div class="row"><b>' + esc(st.title) + '</b><span class="chip' + (open ? ' cur' : '') + '">' + (open ? 'Đã mở · ' + doneLearn + '/' + learn.length + ' bước học' : 'Chưa mở') + '</span></div>'
-    + '<p><b>Mục tiêu:</b> ' + esc(g.goal) + '</p>'
-    + '<details><summary><b>Học xong làm được</b></summary><p>' + esc(g.can.join(" · ")) + '</p></details>'
-    + '<details class="ch-steps" style="margin-top:8px"><summary><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b></summary><div>' + rows + '</div></details>';
+  var finalsHTML = "";
   finals.forEach(function (id) {
     var m = meta(id); if (!m) return;
     var stt = status(id);
     var isNextF = !!(next && next.id === id);
-    html += '<p><button class="btn" ' + attr + '="' + esc(id) + '">' + esc(m.title) + (stt === "done" ? " ✓" : stt === "locked" ? " 🔒" : " →") + (isNextF ? '<span class="chip cl-flag">Tiếp theo</span>' : '') + '</button></p>';
+    var mark = stt === "done" ? "✓" : stt === "locked" ? "🔒" : "→";
+    var stTxt3 = stt === "done" ? "Đã xong" : stt === "locked" ? "Chưa mở — học theo thứ tự" : isNextF ? "Đang học" : "Chưa tới";
+    finalsHTML += '<button class="path-node step-row' + (isNextF ? ' cur' : '') + '" ' + attr + '="' + esc(id) + '"><span class="dotwrap"><span class="dot">' + mark + '</span></span><span><span class="pn-title">' + esc(m.title) + '</span><br><span class="pn-type">' + tcTpKindLabel(m.kind) + '</span><br><span class="pn-st">' + stTxt3 + '</span>' + (isNextF ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
   });
+  var g = (isTc ? TC_STAGE_GOALS : TP_STAGE_GOALS)[i] || { goal: "", can: [] };
+  var html = '<section class="card chapter-row">'
+    + '<button class="path-node row stage-node' + (isDoneStage ? ' done' : isCurStage ? ' cur' : '') + '" data-stage-node="' + i + '" aria-expanded="' + (isCurStage ? 'true' : 'false') + '"><span class="dotwrap"><span class="dot">' + stIcon + '</span></span><span><span class="pn-title"><b>' + esc(st.title) + '</b></span><br><span class="pn-type">' + (isTc ? 'TOEIC' : 'TOPIK') + ' · ' + learn.length + ' bước học · ' + finals.length + ' kiểm tra/thi thử</span><br><span class="pn-st">' + stTxt + '</span>' + (isCurStage ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span><span class="chip cur">Đã mở · ' + doneLearn + '/' + learn.length + ' bước học</span></button>'
+    + '<div class="stage-body"' + (isCurStage ? '' : ' hidden') + '>'
+    + '<p><b>Mục tiêu:</b> ' + esc(g.goal) + '</p>'
+    + '<details><summary><b>Học xong làm được</b></summary><p>' + esc(g.can.join(" · ")) + '</p></details>'
+    + '<details class="ch-steps" style="margin-top:8px"><summary><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b></summary><div class="path-v">' + rows + '</div></details>';
+  if (finalsHTML) html += '<div class="path-v">' + finalsHTML + '</div>';
   if (finals.length) html += '<p class="mut">Kiểm tra cuối chặng và thi thử làm sau cùng của chặng; bước gợi ý sẽ chuyển sang kiểm tra khi bạn xong 80% bước học của chặng (chuẩn nội bộ).</p>';
   /* DOT v56: nhiem vu giao tiep that — buoc cuoi cua chang, sau kiem tra/thi thu. */
   html += msRowHTML(isTc ? "tc" : "tp", isTc ? st.score : i);
-  return html + '</section>';
+  return html + '</div></section>';
 }
 function viewRoadmapTc(app) {
   tcNorm();
@@ -14977,6 +15036,17 @@ function viewRoadmapTc(app) {
   if (state.tcSkipped.length) html += '<section class="card"><h3>Đã bỏ qua</h3><p class="mut">Các bước bạn học trước mà chưa học nốt — quay lại học khi rảnh:</p><div class="row">' + state.tcSkipped.map(function (s) { return tcStepBtnHTML(s); }).join("") + '</div></section>';
   app.innerHTML = html;
   wireTc(app);
+  /* v86: nút chặng mở/gập thân chặng. */
+  app.querySelectorAll("[data-stage-node]").forEach(function (btn) {
+    btn.onclick = function () {
+      var sec = btn.closest(".chapter-row");
+      var body = sec ? sec.querySelector(".stage-body") : null;
+      if (!body) return;
+      var willOpen = body.hasAttribute("hidden");
+      if (willOpen) body.removeAttribute("hidden"); else body.setAttribute("hidden", "");
+      btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    };
+  });
 }
 function tcPracticeEntHTML() {
   return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Khối video này dùng chung video tiếng Anh với track IELTS — xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details class="vrow"><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; "I\'m hungry!" — mình đói bụng rồi!</p></details><details class="vrow"><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; "I want to see the lights!" — mình muốn xem đèn lồng!</p></details><details class="vrow"><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; "Let\'s play!" — cùng chơi nào!</p></details><details class="vrow"><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; "We are friends!" — chúng mình là bạn bè!</p></details><details class="vrow"><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; "I love dogs!" — mình yêu chó!</p></details><details class="vrow"><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); "I have news for you." — mình có tin cho bạn đây.</p>' + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + '</details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; "I love pancakes!" — mình thích bánh kếp!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; "Let\'s go camping!" — cùng đi cắm trại nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; "I can ride a bike!" — mình biết đạp xe rồi!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; "My new shoes!" — giày mới của mình!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; "I am Baymax!" — mình là Baymax!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; "Let\'s cook!" — cùng nấu ăn nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; "We are friends!" — chúng mình là bạn bè!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details></div>';
@@ -15546,6 +15616,17 @@ function viewRoadmapTp(app) {
   if (state.tpSkipped.length) html += '<section class="card"><h3>Đã bỏ qua</h3><p class="mut">Các bước bạn học trước mà chưa học nốt — quay lại học khi rảnh:</p><div class="row">' + state.tpSkipped.map(function (s) { return tpStepBtnHTML(s); }).join("") + '</div></section>';
   app.innerHTML = html;
   wireTp(app);
+  /* v86: nút chặng mở/gập thân chặng. */
+  app.querySelectorAll("[data-stage-node]").forEach(function (btn) {
+    btn.onclick = function () {
+      var sec = btn.closest(".chapter-row");
+      var body = sec ? sec.querySelector(".stage-body") : null;
+      if (!body) return;
+      var willOpen = body.hasAttribute("hidden");
+      if (willOpen) body.removeAttribute("hidden"); else body.setAttribute("hidden", "");
+      btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    };
+  });
 }
 function tpPracticeFunHTML() {
   return '<div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p>'
