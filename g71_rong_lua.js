@@ -79,22 +79,34 @@
   var BATTLE_XP = 5, BOSS_GOLD = 30, MONSTER_GOLD = 5;
   var LEVEL_NAMES = ["", "Bìa Rừng", "Lối Mòn Xanh", "Hang Trùm Bóng Tối"];
 
-  /* ---- Kho từ thiên nhiên từ CONTENT.vocab (không bịa) ---- */
+  /* ---- Kho từ theo track (không bịa) ----
+     v91: EN moi loc theo chu de thien nhien (vung 1 Rung Xanh); track khac
+     dung toan bo kho that cua track do (chu de theo kho cua track). */
   function naturePool() {
+    var tk = "en";
+    try { tk = (typeof G71 !== "undefined" && G71.trackKey) ? G71.trackKey() : "en"; } catch (e) {}
+    if (tk !== "en") {
+      var tp = [];
+      try { tp = G71.pool(); } catch (e) {}
+      var seen2 = {}, uniq2 = [];
+      tp.forEach(function (p) {
+        var k = String(p.w); if (!seen2[k]) { seen2[k] = 1; uniq2.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
+      });
+      return uniq2;
+    }
     var re = /environment|nature|animal|weather|geograph|agricultur|climate/i;
     var out = [];
     try {
       (CONTENT.vocab || []).forEach(function (set) {
         if (!re.test(set.theme || set.topic || "")) return;
         (set.cards || []).forEach(function (c) {
-          if (c && c.w && c.vi && /^[A-Za-z]+$/.test(c.w)) out.push({ w: String(c.w), vi: String(c.vi) });
+          if (c && c.w && c.vi && /^[A-Za-z]+$/.test(c.w)) out.push({ w: String(c.w), vi: String(c.vi), type: String(c.w) });
         });
       });
     } catch (e) {}
     var seen = {}, uniq = [];
     out.forEach(function (p) {
-      var k = p.w.toLowerCase();
-      if (!seen[k]) { seen[k] = 1; uniq.push(p); }
+      var k = p.w.toLowerCase(); if (!seen[k]) { seen[k] = 1; uniq.push(p); }
     });
     return uniq;
   }
@@ -106,23 +118,26 @@
     var words = [];
     pool.forEach(function (p) {
       if (words.length >= n) return;
-      if (!used[p.w.toLowerCase()]) { used[p.w.toLowerCase()] = 1; words.push(p); }
+      if (!G71.isTypeable(p)) return;
+      if (!used[String(p.w)]) { used[String(p.w)] = 1; words.push(p); }
     });
     if (words.length < n) {
       var rest = G71.shuffle(G71.pool()).filter(function (p) {
-        return /^[A-Za-z]+$/.test(p.w) && !used[p.w.toLowerCase()];
+        return G71.isTypeable(p) && !used[String(p.w)];
       });
-      while (words.length < n && rest.length) { var p = rest.pop(); used[p.w.toLowerCase()] = 1; words.push({ w: p.w, vi: p.vi }); }
+      while (words.length < n && rest.length) { var p = rest.pop(); used[String(p.w)] = 1; words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
     }
     return words;
   }
   function pickBossWord(used) {
     var pool = G71.shuffle(naturePool().slice()).filter(function (p) {
-      return p.w.length >= 7 && !used[p.w.toLowerCase()];
+      return (p.type || p.w).length >= 7 && !used[String(p.w)];
     });
-    if (pool.length) { used[pool[0].w.toLowerCase()] = 1; return pool[0]; }
+    if (pool.length) { used[String(pool[0].w)] = 1; return pool[0]; }
     var rest = pickNatureWords(1, used);
-    return rest[0] || { w: "mountain", vi: "núi" };
+    if (rest[0]) return rest[0];
+    var all = G71.pool();
+    return all.length ? all[0] : { w: "mountain", vi: "núi", type: "mountain" };
   }
 
   /* ---- Tiến trình lát cắt, lưu trong state.rongLua (sống qua lần chơi) ---- */
@@ -172,7 +187,7 @@
       var ws = words.map(function (wd, i) {
         var boss = isBoss && i === 0;
         return {
-          w: wd.w, vi: wd.vi, isBoss: boss,
+          w: wd.w, vi: wd.vi, type: wd.type || wd.w, isBoss: boss,
           weak: EL_ORDER[Math.floor(Math.random() * 3)],
           hp: boss ? 30 : LOGIC.monsterHp(level), maxHp: boss ? 30 : LOGIC.monsterHp(level),
           phase: 0, progress: 0, status: "advancing",
@@ -214,7 +229,7 @@
     typeLetter: function (st, ch, now, element, wordLvl) {
       if (st.over) return { ok: false };
       ch = String(ch || "").toLowerCase();
-      if (!ch || ch.length !== 1 || !/[a-z]/.test(ch)) return { ok: false };
+      if (!ch || ch.length !== 1) return { ok: false };
       if (now < st.graceUntil) return { ok: false, grace: true };
       var w = null;
       if (st.active !== null && st.words[st.active] && st.words[st.active].status === "advancing") {
@@ -223,23 +238,25 @@
         var best = null;
         st.words.forEach(function (wd, i) {
           if (wd.status !== "advancing") return;
-          if (wd.w.charAt(wd.progress).toLowerCase() !== ch) return;
+          var tg = wd.type || wd.w;
+          if (tg.charAt(wd.progress).toLowerCase() !== ch) return;
           if (best === null || wd.y > st.words[best].y) best = i;
         });
         if (best === null) { st.combo = 0; return { ok: false, wrong: true }; }
         st.active = best;
         w = st.words[best];
       }
-      if (w.w.charAt(w.progress).toLowerCase() !== ch) { st.combo = 0; return { ok: false, wrong: true }; }
+      var tgt = w.type || w.w;
+      if (tgt.charAt(w.progress).toLowerCase() !== ch) { st.combo = 0; return { ok: false, wrong: true }; }
       w.progress++;
-      if (w.progress < w.w.length) return { ok: true };
+      if (w.progress < tgt.length) return { ok: true };
       /* Gõ xong một từ = tung một chiêu lên quái đang khóa. */
       var el = element || st.element;
       var match = (el === w.weak);
       var lvl = 1;
       if (typeof wordLvl === "function") { try { lvl = wordLvl(w.w) || 1; } catch (e) { lvl = 1; } }
       else if (typeof wordLvl === "number") lvl = wordLvl;
-      var dmg = damageFor(w.w.length, lvl, match, st.combo);
+      var dmg = damageFor((w.type || w.w).length, lvl, match, st.combo);
       w.hp -= dmg;
       st.score += dmg;
       var killed = false, gold = 0;
@@ -567,25 +584,44 @@
     G71.rr(ctx, bx, by, bw, 6, 3); ctx.fill();
     ctx.fillStyle = m.hp / m.maxHp > 0.5 ? C.amber500 : C.amber700;
     if (m.hp > 0) { G71.rr(ctx, bx, by, bw * (m.hp / m.maxHp), 6, 3); ctx.fill(); }
-    /* Viên từ gắn dưới quái. */
-    G71.fitFont(ctx, m.w, Math.max(70, W - 32), 17, 12, "700");
-    var tw = ctx.measureText(m.w).width + 30;
+    /* Viên từ gắn dưới quái. v91: tieng Trung hien 2 dong — chu Han o
+       tren, pinyin (chuoi go) o duoi co to mau tien trinh. */
+    var mType = m.type || m.w;
+    var mTwo = mType !== m.w;
+    ctx.font = "700 17px system-ui, sans-serif";
+    var mWide = (ctx.measureText(m.w).width >= ctx.measureText(mType).width) ? m.w : mType;
+    G71.fitFont(ctx, mWide, Math.max(70, W - 32), 17, 12, "700");
+    var tw = Math.max(ctx.measureText(m.w).width, ctx.measureText(mType).width) + 30;
     var pillY = py + s * 1.05;
     var pillX = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, px));
+    var pillH = mTwo ? 54 : 34, pillTop = pillY - (mTwo ? 28 : 17);
     if (locked) {
       ctx.fillStyle = "rgba(245,158,11,.35)";
-      G71.rr(ctx, pillX - tw / 2 - 4, pillY - 19, tw + 8, 36, 20); ctx.fill();
+      G71.rr(ctx, pillX - tw / 2 - 4, pillTop - 2, tw + 8, pillH + 4, 20); ctx.fill();
     }
     ctx.fillStyle = C.ink800;
-    G71.rr(ctx, pillX - tw / 2, pillY - 17, tw, 34, 17); ctx.fill();
+    G71.rr(ctx, pillX - tw / 2, pillTop, tw, pillH, 17); ctx.fill();
     ctx.strokeStyle = locked ? C.amber500 : C.ink200;
     ctx.lineWidth = 2; ctx.stroke();
-    var done = m.w.slice(0, m.progress), rest = m.w.slice(m.progress);
-    var x0 = pillX - ctx.measureText(m.w).width / 2;
-    ctx.fillStyle = C.amber100;
-    ctx.fillText(done, x0, pillY + 6);
-    ctx.fillStyle = "#fff";
-    ctx.fillText(rest, x0 + ctx.measureText(done).width, pillY + 6);
+    if (mTwo) {
+      ctx.font = "700 16px system-ui, sans-serif";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(m.w, pillX - ctx.measureText(m.w).width / 2, pillY - 6);
+      var done = mType.slice(0, m.progress), rest = mType.slice(m.progress);
+      ctx.font = "700 13px system-ui, sans-serif";
+      var x0 = pillX - ctx.measureText(mType).width / 2;
+      ctx.fillStyle = C.amber100;
+      ctx.fillText(done, x0, pillY + 14);
+      ctx.fillStyle = "#fff";
+      ctx.fillText(rest, x0 + ctx.measureText(done).width, pillY + 14);
+    } else {
+      var done2 = mType.slice(0, m.progress), rest2 = mType.slice(m.progress);
+      var x02 = pillX - ctx.measureText(mType).width / 2;
+      ctx.fillStyle = C.amber100;
+      ctx.fillText(done2, x02, pillY + 6);
+      ctx.fillStyle = "#fff";
+      ctx.fillText(rest2, x02 + ctx.measureText(done2).width, pillY + 6);
+    }
     ctx.restore();
   }
 
@@ -641,6 +677,39 @@
     showMap();
   }
 
+  /* Ban phim tren man hinh (chuot + cam ung) cho tran danh.
+     v91: track tieng Han (TP) thi ban phim la cac am tiet Hangul cua tu
+     dang khoa (bam theo thu tu); cac track khac go chu cai A-Z nhu cu.
+     Lam moi theo sig trong vong frame() de doi theo tu dang khoa.
+     PHAI dat o muc IIFE (khong dat trong buildControls) vi frame() goi
+     no tu ngoai — de long trong buildControls thi frame() goi se
+     ReferenceError am tham trong try/catch, ban phim rong khong. */
+  var kbSigRl = "";
+  function refreshKbRl() {
+    if (!ctrlBar || ctrlBar.style.display === "none") return;
+    var isTp = false;
+    try { isTp = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
+    var act = (battle && battle.active !== null && battle.words[battle.active]) ? battle.words[battle.active] : null;
+    if (!act && battle) {
+      var low = null;
+      battle.words.forEach(function (wd) { if (wd.status === "advancing" && (!low || wd.y > low.y)) low = wd; });
+      act = low;
+    }
+    var sig = (isTp ? "tp:" : "az:") + (act ? (act.type || act.w) : "") + "|" + (battle ? battle.resolved : 0);
+    if (sig === kbSigRl) return;
+    kbSigRl = sig;
+    ctrlBar.innerHTML = "";
+    var keys = isTp && act ? String(act.type || act.w).split("") : "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    keys.forEach(function (L) {
+      var b = document.createElement("button");
+      b.className = "btn";
+      b.textContent = L;
+      b.style.cssText = "padding:6px 4px;min-width:30px;font-size:15px;";
+      b.onclick = function () { feed(L); };
+      ctrlBar.appendChild(b);
+    });
+  }
+
   function buildControls(stg) {
     elBar = document.createElement("div");
     elBar.id = "rlElBar";
@@ -661,14 +730,7 @@
     ctrlBar = document.createElement("div");
     ctrlBar.id = "g71KbRl";
     ctrlBar.style.cssText = "display:none;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;";
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(function (L) {
-      var b = document.createElement("button");
-      b.className = "btn";
-      b.textContent = L;
-      b.style.cssText = "padding:6px 4px;min-width:30px;font-size:15px;";
-      b.onclick = function () { feed(L); };
-      ctrlBar.appendChild(b);
-    });
+    refreshKbRl();
     stg.el.appendChild(ctrlBar);
     if (stg.resize) stg.resize();
   }
@@ -925,7 +987,9 @@
       setElement(EL_ORDER[parseInt(e.key, 10) - 1]);
       return;
     }
-    if (e.key && e.key.length === 1 && /[a-zA-Z]/.test(e.key)) feed(e.key);
+    var isTpKey = false;
+    try { isTpKey = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
+    if (e.key && e.key.length === 1 && (isTpKey || /[a-zA-Z]/.test(e.key))) feed(e.key);
   }
 
   function onKeyUp(e) {
@@ -983,6 +1047,7 @@
     }
     hud();
     maybeEnd();
+    if (mode === "battle" && battle) { try { refreshKbRl(); } catch (e) {} }
     if (mode !== "battle" || !battle) return;
     var cv = stage.canvas, ctx = stage.ctx;
     if (!cv || !ctx) { requestAnimationFrame(frame); return; }

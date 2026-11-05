@@ -16,7 +16,7 @@
   var LOGIC = {
     createState: function (words, theme) {
       var ws = words.map(function (wd, i) {
-        return { w: wd.w, vi: wd.vi, status: "falling", progress: 0,
+        return { w: wd.w, vi: wd.vi, type: wd.type || wd.w, status: "falling", progress: 0,
           x: 0.12 + Math.random() * 0.76, y: -0.12 - i * 0.22,
           speed: 0.075 + Math.random() * 0.03 };
       });
@@ -44,7 +44,7 @@
     typeLetter: function (st, ch, now) {
       if (st.over) return { ok: false };
       ch = String(ch || "").toLowerCase();
-      if (!ch || ch.length !== 1 || !/[a-z]/.test(ch)) return { ok: false };
+      if (!ch || ch.length !== 1) return { ok: false };
       if (now < st.graceUntil) return { ok: false, grace: true };
       var w = null;
       if (st.active !== null && st.words[st.active] && st.words[st.active].status === "falling") {
@@ -53,16 +53,18 @@
         var best = null;
         st.words.forEach(function (wd, i) {
           if (wd.status !== "falling") return;
-          if (wd.w.charAt(wd.progress).toLowerCase() !== ch) return;
+          var tg = wd.type || wd.w;
+          if (tg.charAt(wd.progress).toLowerCase() !== ch) return;
           if (best === null || wd.y > st.words[best].y) best = i;
         });
         if (best === null) return { ok: false, wrong: true };
         st.active = best;
         w = st.words[best];
       }
-      if (w.w.charAt(w.progress).toLowerCase() === ch) {
+      var tgt = w.type || w.w;
+      if (tgt.charAt(w.progress).toLowerCase() === ch) {
         w.progress++;
-        if (w.progress >= w.w.length) {
+        if (w.progress >= tgt.length) {
           w.status = "done";
           st.cleared++;
           st.score += 10;
@@ -173,19 +175,38 @@
     }
     hud();
 
-    /* Bàn phím trên màn hình cho chuột + cảm ứng. */
-    /* Bàn phím gọn: 3 hàng thấp để sân vũ trụ giữ được chiều cao. */
+    /* Bàn phím trên màn hình cho chuột + cảm ứng.
+       v91: track tieng Han (TP) thi ban phim la cac am tiet Hangul cua tu
+       dang khoa (bam theo thu tu de ghep thanh tu); cac track khac go
+       chu cai nhu cu (tieng Trung go pinyin bang chu cai Latin). */
     var kb = document.createElement("div");
     kb.id = "g71Kb";
     kb.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;";
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(function (L) {
-      var b = document.createElement("button");
-      b.className = "btn";
-      b.textContent = L;
-      b.style.cssText = "padding:6px 4px;min-width:30px;font-size:15px;";
-      b.onclick = function () { feed(L); };
-      kb.appendChild(b);
-    });
+    var kbSig = "";
+    function refreshKb() {
+      var isTp = false;
+      try { isTp = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
+      var act = (st.active !== null && st.words[st.active]) ? st.words[st.active] : null;
+      if (!act) {
+        var low = null;
+        st.words.forEach(function (wd) { if (wd.status === "falling" && (!low || wd.y > low.y)) low = wd; });
+        act = low;
+      }
+      var sig = (isTp ? "tp:" : "az:") + (act ? (act.type || act.w) : "") + "|" + st.resolved;
+      if (sig === kbSig) return;
+      kbSig = sig;
+      kb.innerHTML = "";
+      var keys = isTp && act ? String(act.type || act.w).split("") : "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+      keys.forEach(function (L) {
+        var b = document.createElement("button");
+        b.className = "btn";
+        b.textContent = L;
+        b.style.cssText = "padding:6px 4px;min-width:30px;font-size:15px;";
+        b.onclick = function () { feed(L); };
+        kb.appendChild(b);
+      });
+    }
+    refreshKb();
     stg.el.appendChild(kb);
     if (stg.resize) stg.resize();
 
@@ -209,7 +230,9 @@
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (e.key === "ArrowLeft") { keys.left = true; e.preventDefault(); return; }
       if (e.key === "ArrowRight") { keys.right = true; e.preventDefault(); return; }
-      if (e.key && e.key.length === 1 && /[a-zA-Z]/.test(e.key)) feed(e.key);
+      var isTpKey = false;
+      try { isTpKey = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
+      if (e.key && e.key.length === 1 && (isTpKey || /[a-zA-Z]/.test(e.key))) feed(e.key);
     }
     function onKeyUp(e) {
       if (e.key === "ArrowLeft") keys.left = false;
@@ -261,6 +284,7 @@
       if (!running) return;
       var dt = Math.min(0.05, (now - last) / 1000);
       last = now;
+      refreshKb();
       /* Lái tàu bằng phím mũi tên giữ (0,55 đơn vị/giây — qua sân ~1,8 giây). */
       if (keys.left) LOGIC.moveShip(st, -0.55 * dt);
       if (keys.right) LOGIC.moveShip(st, 0.55 * dt);
@@ -279,22 +303,45 @@
         var py = wd.y * H;
         if (py < -30 || py > H + 30) return;
         var isAct = (st.active === i);
-        /* Chữ tự thu nhỏ theo bề ngang sân để viên thuốc không tràn mép. */
-        G71.fitFont(ctx, wd.w, Math.max(60, W - 32), 17, 12, "700");
-        var tw = ctx.measureText(wd.w).width + 28;
+        /* v91: track tieng Trung hien 2 dong — chu Han o tren, pinyin
+           (chuoi go) o duoi co to mau tien trinh; cac track khac 1 dong. */
+        var wdType = wd.type || wd.w;
+        var twoLine = wdType !== wd.w;
+        ctx.font = "700 17px system-ui, sans-serif";
+        var wide = (ctx.measureText(wd.w).width >= ctx.measureText(wdType).width) ? wd.w : wdType;
+        G71.fitFont(ctx, wide, Math.max(60, W - 32), 17, 12, "700");
+        var tw = Math.max(ctx.measureText(wd.w).width, ctx.measureText(wdType).width) + 28;
         var px = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, wd.x * W));
         ctx.fillStyle = isAct ? "#F59E0B" : "#1F2430";
-        G71.rr(ctx, px - tw / 2, py - 18, tw, 34, 17);
-        ctx.fill();
-        ctx.strokeStyle = isAct ? "#FBBF24" : "#334155";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        var done = wd.w.slice(0, wd.progress), rest = wd.w.slice(wd.progress);
-        var x0 = px - ctx.measureText(wd.w).width / 2;
-        ctx.fillStyle = "#FDE68A";
-        ctx.fillText(done, x0, py + 6);
-        ctx.fillStyle = "#fff";
-        ctx.fillText(rest, x0 + ctx.measureText(done).width, py + 6);
+        if (twoLine) {
+          G71.rr(ctx, px - tw / 2, py - 28, tw, 54, 17);
+          ctx.fill();
+          ctx.strokeStyle = isAct ? "#FBBF24" : "#334155";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.font = "700 16px system-ui, sans-serif";
+          ctx.fillStyle = "#fff";
+          ctx.fillText(wd.w, px - ctx.measureText(wd.w).width / 2, py - 6);
+          var done = wdType.slice(0, wd.progress), rest = wdType.slice(wd.progress);
+          ctx.font = "700 13px system-ui, sans-serif";
+          var x0 = px - ctx.measureText(wdType).width / 2;
+          ctx.fillStyle = "#FDE68A";
+          ctx.fillText(done, x0, py + 14);
+          ctx.fillStyle = "#fff";
+          ctx.fillText(rest, x0 + ctx.measureText(done).width, py + 14);
+        } else {
+          G71.rr(ctx, px - tw / 2, py - 18, tw, 34, 17);
+          ctx.fill();
+          ctx.strokeStyle = isAct ? "#FBBF24" : "#334155";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          var done2 = wdType.slice(0, wd.progress), rest2 = wdType.slice(wd.progress);
+          var x02 = px - ctx.measureText(wdType).width / 2;
+          ctx.fillStyle = "#FDE68A";
+          ctx.fillText(done2, x02, py + 6);
+          ctx.fillStyle = "#fff";
+          ctx.fillText(rest2, x02 + ctx.measureText(done2).width, py + 6);
+        }
       });
       /* Tàu ở vị trí lái được; tia bắn đi từ mũi tàu, không còn từ giữa sân. */
       var rocketY = Math.max(110, H - 86);

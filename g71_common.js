@@ -17,46 +17,130 @@
     }
     return a;
   }
-  /* Kho từ phẳng từ CONTENT.vocab: [{w, vi, theme}]. */
+  /* v91: kho tu theo track dang hoc. Tu game lay tu kho that cua track
+     (EN = CONTENT.vocab, ZH = zhSets(), TC = TC_VOCAB, TP = TP_VOCAB),
+     khong bia tu. Moi tu co them:
+     - w: tu hien thi (tu tieng Anh / chu Han / tu Hangul)
+     - type: chuoi de go/bam (EN/TC = chinh tu; ZH = pinyin KHONG dau;
+       TP = chinh tu Hangul, moi am tiet la 1 ky tu de bam theo thu tu)
+     - py: pinyin co dau thanh (chi ZH, de hien goi y) */
+  function trackKey() {
+    try { return (typeof state !== "undefined" && state && state.track) || "en"; }
+    catch (e) { return "en"; }
+  }
+  function pinyinPlain(py) {
+    var m = { "\u0101": "a", "\u00e1": "a", "\u01ce": "a", "\u00e0": "a",
+      "\u0113": "e", "\u00e9": "e", "\u011b": "e", "\u00e8": "e",
+      "\u012b": "i", "\u00ed": "i", "\u01d0": "i", "\u00ec": "i",
+      "\u014d": "o", "\u00f3": "o", "\u01d2": "o", "\u00f2": "o",
+      "\u016b": "u", "\u00fa": "u", "\u01d4": "u", "\u00f9": "u",
+      "\u01d6": "v", "\u01d8": "v", "\u01da": "v", "\u01dc": "v",
+      "\u00fc": "v" };
+    return String(py || "").replace(/[\u0101\u00e1\u01ce\u00e0\u0113\u00e9\u011b\u00e8\u012b\u00ed\u01d0\u00ec\u014d\u00f3\u01d2\u00f2\u016b\u00fa\u01d4\u00f9\u01d6\u01d8\u01da\u01dc\u00fc]/g,
+      function (ch) { return m[ch] || ch; });
+  }
+  function trackSets() {
+    var t = trackKey(), out = [];
+    try {
+      if (t === "zh" && typeof zhSets === "function") {
+        zhSets().forEach(function (d) {
+          var set = d && d.set;
+          if (!set || !set.cards) return;
+          out.push({ theme: set.topic || set.title || "",
+            cards: set.cards.filter(function (c) { return c && c.han && c.vi && c.pinyin; })
+              .map(function (c) { return { w: String(c.han), vi: String(c.vi),
+                type: pinyinPlain(c.pinyin), py: String(c.pinyin) }; }) });
+        });
+        return out.filter(function (x) { return x.cards.length; });
+      }
+      if (t === "tc" && typeof TC_VOCAB !== "undefined") {
+        (TC_VOCAB || []).forEach(function (set) {
+          if (!set || !set.cards) return;
+          out.push({ theme: set.topic || "",
+            cards: set.cards.filter(function (c) { return c && c.w && c.vi; })
+              .map(function (c) { return { w: String(c.w), vi: String(c.vi), type: String(c.w) }; }) });
+        });
+        return out.filter(function (x) { return x.cards.length; });
+      }
+      if (t === "tp" && typeof TP_VOCAB !== "undefined") {
+        (TP_VOCAB || []).forEach(function (set) {
+          if (!set || !set.cards) return;
+          out.push({ theme: set.topic || "",
+            cards: set.cards.filter(function (c) { return c && c.w && c.vi; })
+              .map(function (c) { return { w: String(c.w), vi: String(c.vi), type: String(c.w) }; }) });
+        });
+        return out.filter(function (x) { return x.cards.length; });
+      }
+    } catch (e) {}
+    return out;
+  }
+  /* Mot tu co go/bam duoc khong: chuoi type la chu cai Latin (EN/TC/ZH
+     pinyin khong dau) hoac toan am tiet Hangul (TP). */
+  function isTypeable(wd) {
+    var t = wd && (wd.type || wd.w);
+    if (!t) return false;
+    if (/^[A-Za-z]+$/.test(t)) return true;
+    return /^[\uAC00-\uD7A3]+$/.test(t);
+  }
+  /* Kho từ phẳng theo track: [{w, vi, theme, type, py}]. EN dung kho
+     CONTENT.vocab cu; ZH/TC/TP dung kho that cua track do. */
   function pool() {
-    var out = [];
+    var t = trackKey();
+    if (t !== "en") {
+      var sets = trackSets(), out = [];
+      sets.forEach(function (set) {
+        set.cards.forEach(function (c) {
+          out.push({ w: c.w, vi: c.vi, theme: set.theme, type: c.type, py: c.py || "" });
+        });
+      });
+      if (out.length) return out;
+    }
+    var outEn = [];
     try {
       (CONTENT.vocab || []).forEach(function (set) {
         var theme = set.theme || set.topic || "";
         (set.cards || []).forEach(function (c) {
-          if (c && c.w && c.vi) out.push({ w: String(c.w), vi: String(c.vi), theme: theme });
+          if (c && c.w && c.vi) outEn.push({ w: String(c.w), vi: String(c.vi), theme: theme, type: String(c.w) });
         });
       });
     } catch (e) {}
-    return out;
+    return outEn;
   }
-  /* Một chủ đề ngẫu nhiên, tối đa n từ; thiếu thì bù từ kho chung. */
+  /* Một chủ đề ngẫu nhiên, tối đa n từ; thiếu thì bù từ kho chung
+     (kho cua track dang hoc). */
   function pickSetWords(n) {
-    var sets = [];
-    try { sets = (CONTENT.vocab || []).filter(function (s) { return s && s.cards && s.cards.length; }); } catch (e) {}
+    var sets = [], t = trackKey();
+    try {
+      if (t !== "en") sets = trackSets();
+      if (!sets.length) sets = (CONTENT.vocab || []).filter(function (s) { return s && s.cards && s.cards.length; });
+    } catch (e) {}
     if (!sets.length) return { theme: "", words: [] };
     var set = sets[Math.floor(Math.random() * sets.length)];
     var theme = set.theme || set.topic || "";
-    var cards = shuffle(set.cards.slice()).filter(function (c) { return c && c.w && c.vi; });
-    var words = cards.slice(0, n).map(function (c) { return { w: String(c.w), vi: String(c.vi) }; });
+    var cards = shuffle(set.cards.slice()).filter(function (c) { return c && (c.w || c.han) && c.vi; });
+    var words = cards.slice(0, n).map(function (c) {
+      if (c.han) return { w: String(c.han), vi: String(c.vi), type: pinyinPlain(c.pinyin), py: String(c.pinyin || "") };
+      return { w: String(c.w), vi: String(c.vi), type: String(c.type || c.w) };
+    });
     if (words.length < n) {
       var rest = shuffle(pool()).filter(function (p) {
         return words.every(function (x) { return x.w !== p.w; });
       });
-      while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi }); }
+      while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
     }
     return { theme: theme, words: words };
   }
-  /* Riêng Luyện Gõ: chỉ lấy từ một chữ cái a-z (không khoảng trắng, không
-     dấu gạch nối) để gõ phím được trọn vẹn. */
+  /* Riêng game go chu: chi lay tu go/bam duoc tron ven theo he chu cua
+     track — EN/TC: tu mot chu cai a-z; ZH: pinyin khong dau (chu cai a-z);
+     TP: tu Hangul (bam tung am tiet). */
   function pickTypingWords(n) {
     var got = pickSetWords(n * 3);
-    var words = got.words.filter(function (wd) { return /^[A-Za-z]+$/.test(wd.w); }).slice(0, n);
+    var words = got.words.filter(function (wd) { return isTypeable(wd); }).slice(0, n);
     if (words.length < n) {
       var rest = shuffle(pool()).filter(function (p) {
-        return /^[A-Za-z]+$/.test(p.w) && words.every(function (x) { return x.w !== p.w; });
+        return isTypeable(p) && words.every(function (x) { return x.w !== p.w; });
       });
-      while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi }); }
+      while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
     }
     return { theme: got.theme, words: words };
   }
@@ -574,6 +658,8 @@
 
   window.G71 = {
     escHtml: escHtml, shuffle: shuffle, pool: pool,
+    trackKey: trackKey, pinyinPlain: pinyinPlain, trackSets: trackSets,
+    trackPool: pool, isTypeable: isTypeable,
     pickSetWords: pickSetWords, pickTypingWords: pickTypingWords,
     buildRounds: buildRounds, hearts: hearts,
     openStage: openStage, closeStage: closeStage, endScreen: endScreen,

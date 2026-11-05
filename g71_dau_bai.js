@@ -53,7 +53,7 @@
     for (var i = 0; i < words.length; i++) els.push(EL_ORDER[i % 3]);
     G71.shuffle(els);
     return words.map(function (wd, i) {
-      return { w: String(wd.w), vi: String(wd.vi), el: els[i], power: String(wd.w).length };
+      return { w: String(wd.w), vi: String(wd.vi), type: String(wd.type || wd.w), el: els[i], power: String(wd.type || wd.w).length };
     });
   }
 
@@ -120,8 +120,8 @@
       var p = st.pending;
       if (!p || p.who !== "player") return { ok: false };
       ch = String(ch || "").toLowerCase();
-      if (!ch || ch.length !== 1 || !/[a-z]/.test(ch)) return { ok: false };
-      var w = p.card.w;
+      if (!ch || ch.length !== 1) return { ok: false };
+      var w = p.card.type || p.card.w;
       if (w.charAt(p.progress).toLowerCase() !== ch) return { ok: false, wrong: true };
       p.progress++;
       if (p.progress < w.length) return { ok: true };
@@ -257,19 +257,19 @@
     if (Object.keys(db.cards).length >= DECK_SIZE) return db;
     var got = G71.pickTypingWords(DECK_SIZE);
     buildDeck(got.words).forEach(function (c) {
-      db.cards[c.w.toLowerCase()] = { w: c.w, vi: c.vi, el: c.el };
+      db.cards[c.w.toLowerCase()] = { w: c.w, vi: c.vi, type: c.type || c.w, el: c.el };
     });
     saveDB(db);
     return db;
   }
   function rewardCard(db) {
     var pool = G71.shuffle(G71.pool()).filter(function (p) {
-      return /^[A-Za-z]+$/.test(p.w) && !db.cards[p.w.toLowerCase()];
+      return G71.isTypeable(p) && !db.cards[p.w.toLowerCase()];
     });
     var pick = pool[0];
     if (!pick) return null;
     var el = EL_ORDER[Math.floor(Math.random() * 3)];
-    db.cards[pick.w.toLowerCase()] = { w: pick.w, vi: pick.vi, el: el };
+    db.cards[pick.w.toLowerCase()] = { w: pick.w, vi: pick.vi, type: pick.type || pick.w, el: el };
     return db.cards[pick.w.toLowerCase()];
   }
 
@@ -336,9 +336,11 @@
     var pend = match.pending;
     var typeHtml = "";
     if (pend) {
-      var done = pend.card.w.slice(0, pend.progress), rest = pend.card.w.slice(pend.progress);
+      var pType = pend.card.type || pend.card.w;
+      var done = pType.slice(0, pend.progress), rest = pType.slice(pend.progress);
       typeHtml = '<section class="card" style="margin:12px 0 0;"><h3 style="margin:0 0 4px;">Gõ từ trên lá để tung chiêu'
         + (pend.action === "attack" ? " — ⚔️ Đánh" : pend.action === "defend" ? " — 🛡️ Đỡ" : " — 💚 Hồi") + '</h3>'
+        + (pType !== pend.card.w ? '<p style="font-size:26px;font-weight:700;margin:6px 0;">' + esc(pend.card.w) + '</p>' : '')
         + '<p style="font-size:22px;font-weight:700;margin:6px 0;"><span style="color:#B45309;">' + esc(done) + '</span><span>' + esc(rest) + '</span></p>'
         + '<p class="mut" style="margin:4px 0;">' + esc(pend.card.vi) + " · " + ELEMENTS[pend.card.el].icon + " " + ELEMENTS[pend.card.el].name
         + (wrongFlash ? ' · <span style="color:#E11D48;font-weight:700;">✗ gõ sai rồi, gõ lại nhé</span>' : " · gõ sai chỉ gõ lại, không mất lượt") + "</p></section>";
@@ -352,8 +354,11 @@
       var dis = (selCard < 0 || !!pend) ? " disabled" : "";
       return '<button class="btn btn-primary" data-db-action="' + a[0] + '"' + dis + ' style="flex:1;min-width:100px;">' + a[1] + '<br><span style="font-size:12px;font-weight:400;">' + a[2] + "</span></button>";
     }).join("");
-    var kbHtml = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(function (L) {
-      return '<button class="btn" data-db-key="' + L + '" style="padding:6px 4px;min-width:30px;font-size:15px;">' + L + "</button>";
+    var isTpDb = false;
+    try { isTpDb = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
+    var kbKeys = (isTpDb && pend) ? String(pend.card.type || pend.card.w).split("") : "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    var kbHtml = kbKeys.map(function (L) {
+      return '<button class="btn" data-db-key="' + esc(L) + '" style="padding:6px 4px;min-width:30px;font-size:15px;">' + esc(L) + "</button>";
     }).join("");
     arena.innerHTML = '<div class="row" style="justify-content:space-between;align-items:center;">'
       + '<h2 style="margin:0;">🃏 Đấu Bài — Đấu với máy</h2>'
@@ -411,7 +416,9 @@
 
   function onKey(e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    if (e.key && e.key.length === 1 && /[a-zA-Z]/.test(e.key)) feed(e.key);
+    var isTpKey = false;
+    try { isTpKey = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
+    if (e.key && e.key.length === 1 && (isTpKey || /[a-zA-Z]/.test(e.key))) feed(e.key);
   }
 
   function endMatch() {

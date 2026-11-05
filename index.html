@@ -189,6 +189,11 @@ body.landing-on .app-frame{display:block}
 .ws-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:16px;align-items:start}
 .ws-col{min-width:0}
 @media(max-width:900px){.ws-grid{grid-template-columns:1fr}}
+/* v91: luoi 5 the game — 5 cot desktop, 3+2 o vua, 1 cot o hep (khong con
+   1 the le loi xuong hang rieng trong). */
+.g91-games-grid{display:grid;gap:16px;grid-template-columns:repeat(5,minmax(0,1fr));margin:16px 0}
+@media(max-width:1100px){.g91-games-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:720px){.g91-games-grid{grid-template-columns:1fr}}
 .ws-progress{margin:8px 0 12px}
 .vocab-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px 20px;grid-template-areas:"main pron" "actions pron" "foot foot" "lib lib";align-items:start}
 .vocab-main{grid-area:main;min-width:0}
@@ -2832,30 +2837,47 @@ function homeQuickHTML() {
 }
 /* v71 — Khu Trò chơi mới: đúng 3 game, mở bằng nút data-g71game (không dùng
    dây nối của game cũ). Thắng +10 XP bằng hàm sẵn có; thua không
-   trừ gì. Từ vựng lấy từ kho bài học tiếng Anh.
+   trừ gì. Từ vựng lấy từ kho bài học theo track (v91: EN kho IELTS,
+   ZH kho HSK, TC kho TOEIC, TP kho TOPIK).
    v77 — thêm thẻ thứ 4 "Rồng Lửa — bản thử" (g71_rong_lua.js): lát cắt
    chơi được đầu tiên của game Rồng Lửa RPG, vùng 1 Rừng Xanh.
    v85 — thêm thẻ thứ 5 "Đấu Bài Với Máy" (g71_dau_bai.js): đấu bài theo
    lượt với máy, thẻ là từ thật + sức mạnh + hệ, gõ đúng từ để tung chiêu. */
+/* v91: ngon ngu + nhan tu theo track cho game va giao tiep ban dia.
+   EN/TC noi tieng Anh; ZH noi tieng Trung; TP noi tieng Han. */
+function gameWordLabel91() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "zh") return "từ tiếng Trung";
+  if (t === "tp") return "từ tiếng Hàn";
+  return "từ tiếng Anh";
+}
+function nativeLangMeta() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "zh") return { code: "zh", sr: "zh-CN", tts: "zh-CN", viName: "tiếng Trung", aiName: "tiếng Trung (Quan thoại, chữ giản thể)", trackName: "HSK" };
+  if (t === "tp") return { code: "ko", sr: "ko-KR", tts: "ko-KR", viName: "tiếng Hàn", aiName: "tiếng Hàn", trackName: "TOPIK" };
+  if (t === "tc") return { code: "en", sr: "en-GB", tts: "en-GB", viName: "tiếng Anh", aiName: "English", trackName: "TOEIC" };
+  return { code: "en", sr: "en-GB", tts: "en-GB", viName: "tiếng Anh", aiName: "English", trackName: "IELTS" };
+}
 function viewGamesHub(app) {
+  var wl91 = gameWordLabel91();
   var cards = [
-    { key: "go", icon: "msc-dragon", title: "⌨️ Luyện Gõ",
+    { key: "go", icon: "⌨️", title: "⌨️ Luyện Gõ",
       desc: "Lái tàu vũ trụ bằng phím ← → hoặc kéo — né thiên thạch rơi, gõ đúng từ để bắn hạ quái từ. Gõ sai chỉ gõ lại, thiên thạch đâm trúng hoặc từ chạm đáy mới mất tim. Hết 20 từ là thắng." },
-    { key: "dragon", icon: "msc-dragon", title: "🐉 Rồng Bay Trên Mây",
+    { key: "dragon", icon: "🐉", title: "🐉 Rồng Bay Trên Mây",
       desc: "Rồng bay liên tục về phía trước — phím ↑ ↓ đổi làn, né mây giông. Bay vào mây có từ đúng nghĩa cho trước thì +điểm, đâm mây sai mất tim. Hết 10 vòng còn tim là thắng." },
-    { key: "bubble", icon: "msc-snake", title: "🫧 Bắn Bong Bóng",
-      desc: "Bong bóng mang từ tiếng Anh nổi dưới nước. Ngắm pháo, bắn vỡ đúng bong bóng. Đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim." },
-    { key: "ronglua", icon: "msc-dragon", title: "🔥 Rồng Lửa — bản thử",
+    { key: "bubble", icon: "🫧", title: "🫧 Bắn Bong Bóng",
+      desc: "Bong bóng mang " + wl91 + " nổi dưới nước. Ngắm pháo, bắn vỡ đúng bong bóng. Đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim." },
+    { key: "ronglua", icon: "🔥", title: "🔥 Rồng Lửa — bản thử",
       desc: "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái. Chạm quái để khóa, gõ đúng từ để tung chiêu theo hệ, khắc hệ gây sát thương tối đa, combo nhân tới x3. 3 ải, trùm cuối đổi hệ." },
-    { key: "daubai", icon: "msc-dragon", title: "🃏 Đấu Bài Với Máy",
+    { key: "daubai", icon: "🃏", title: "🃏 Đấu Bài Với Máy",
       desc: "Mỗi bên một bộ bài — lá là từ thật kèm sức mạnh + hệ Lửa/Nước/Điện. Mỗi lượt bốc 1 lá, đánh 1 lá: Đánh, Đỡ hay Hồi tùy bạn; gõ đúng từ trên lá để tung chiêu, gõ sai chỉ gõ lại. Thắng vì chọn bài khôn hơn — thắng được vàng + 1 lá mới." }
   ];
   var html = trackSwitchHTML();
   html += '<h2>Trò chơi</h2>';
   html += '<p class="mut">Khu chơi có thắng thua và mất tim — riêng khu này thôi; phần học vẫn không gây áp lực. Rồng và Rắn dẫn đường cho bạn.</p>';
-  html += '<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:16px 0;">';
+  html += '<div class="g91-games-grid">';
   cards.forEach(function (c) {
-    html += '<section class="card"><svg style="width:88px;height:66px;" aria-hidden="true"><use href="#' + c.icon + '"></use></svg>'
+    html += '<section class="card"><div style="font-size:44px;line-height:1.15" aria-hidden="true">' + c.icon + '</div>'
       + '<h3>' + c.title + '</h3><p>' + c.desc + '</p>'
       + '<div class="row"><button class="btn btn-primary" data-g71game="' + c.key + '">Chơi ngay</button></div></section>';
   });
@@ -3961,12 +3983,13 @@ function sourcesHTML() {
    that); noi live luan phien chat, CHI TIENG ANH, mic khoa khi AI dang noi,
    khong cham diem trong luc noi; can dang nhap moi dung. */
 function viewNative(app) {
+  var lm = nativeLangMeta();
   var html = trackSwitchHTML() + '<h2>Giao tiếp bản địa</h2>'
     + '<section class="card"><h3>Nói tự do với AI — như nói với người bản địa</h3>'
     + '<p class="mut">Nói tự do, thích gì nói đó, không chấm điểm trong lúc nói. Người trò chuyện với bạn là AI trò chuyện liên tục — không phải người thật, và AI sẽ tự nói rõ điều đó khi bạn hỏi.</p>'
     + '<details style="margin-top:8px"><summary><b>Xem thêm — 2 loại nói khác nhau thế nào</b></summary>'
-    + '<p class="mut"><b>Gõ tay:</b> chỉ gõ chữ, không mic, không giọng nói. AI trả lời bằng tiếng Anh đơn giản là chính, chêm tiếng Việt khi bạn dùng tiếng Việt hoặc bí từ.</p>'
-    + '<p class="mut"><b>Nói live:</b> luân phiên chặt, CHỈ TIẾNG ANH — mic khóa trong lúc AI đang nói, AI nói xong mic mới mở lại; không có nút bấm gửi, ngừng ở câu đã rõ ý (khoảng 1,2 giây) là tự gửi, AI đáp 100% tiếng Anh bằng giọng Anh, không chêm tiếng Việt.</p>'
+    + '<p class="mut"><b>Gõ tay:</b> chỉ gõ chữ, không mic, không giọng nói. AI trả lời bằng ' + lm.viName + ' đơn giản là chính, chêm tiếng Việt khi bạn dùng tiếng Việt hoặc bí từ.</p>'
+    + '<p class="mut"><b>Nói live:</b> luân phiên chặt, CHỈ ' + lm.viName.toUpperCase() + ' — mic khóa trong lúc AI đang nói, AI nói xong mic mới mở lại; không có nút bấm gửi, ngừng ở câu đã rõ ý (khoảng 1,2 giây) là tự gửi, AI đáp 100% ' + lm.viName + ' bằng giọng ' + lm.viName + ', không chêm tiếng Việt.</p>'
     + '<p class="mut">Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản). Câu bạn bấm ⭐ sẽ lưu trên máy này vào mục "Câu hay dùng lại".</p></details>'
     + '<div class="row" style="margin-top:10px"><button class="btn" data-chat="type">Trò chuyện gõ tay với AI — Đang mở</button><button class="btn" data-chat="voice">Trò chuyện nói live với AI — Đang mở</button></div></section>';
   app.innerHTML = html;
@@ -4460,7 +4483,7 @@ function viewMine(app) {
   html += '<details style="margin-top:8px"><summary><b>🧭 AI Coach — 3 gợi ý tiếp theo</b></summary>' + u8CoachHTML() + '</details>';
   html += '<details style="margin-top:8px"><summary><b>Gia sư AI</b></summary><section class="card"><h3>Gia sư AI</h3><p>' + esc(RB_AI.tutor.label) + '.</p>' + (authState.user ? '<p class="mut">Đã sẵn sàng — gõ câu hỏi để dùng.</p>' : '<p class="mut">Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p>')
     + '<button class="btn" id="tutorTry">Thử gọi gia sư</button><p style="margin-top:10px"><textarea id="tutorModeInp" rows="2" style="width:100%" placeholder="Gõ câu hoặc câu hỏi cần gia sư giúp..."></textarea></p><p><button class="btn" id="tutorExplainBtn">AI giải thích</button> <button class="btn" id="tutorFixBtn">AI sửa câu của tôi</button></p><div class="why" id="tutorModeOut"></div></section></details>';
-  html += '<details style="margin-top:8px"><summary><b>Trò chuyện với AI</b></summary><section class="card"><h3>Trò chuyện với AI</h3><p class="mut">Trò chuyện tự do với AI đã mở ở trang Giao tiếp bản địa (giữa Ôn tập và Của tôi): chọn 1 trong 2 loại riêng — gõ tay (chỉ gõ chữ) hoặc nói live (luân phiên chặt, chỉ tiếng Anh, mic khóa khi AI đang nói). Nói tự do thích gì nói đó, không chấm điểm trong lúc nói. Mô hình nguồn là AI trò chuyện liên tục, không phải người thật. Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p></section></details>';
+  html += '<details style="margin-top:8px"><summary><b>Trò chuyện với AI</b></summary><section class="card"><h3>Trò chuyện với AI</h3><p class="mut">Trò chuyện tự do với AI đã mở ở trang Giao tiếp bản địa (giữa Ôn tập và Của tôi): chọn 1 trong 2 loại riêng — gõ tay (chỉ gõ chữ) hoặc nói live (luân phiên chặt, chỉ ' + nativeLangMeta().viName + ', mic khóa khi AI đang nói). Nói tự do thích gì nói đó, không chấm điểm trong lúc nói. Mô hình nguồn là AI trò chuyện liên tục, không phải người thật. Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p></section></details>';
   html += '</details>';
   html += supplementHTML();
   html += notesHTML() + sourcesHTML();
@@ -5284,10 +5307,19 @@ function callAiTutorChat(messages, opts) {
         };
         var lastUser = "";
         (messages || []).forEach(function (m) { if (m.role === "user") lastUser = m.text; });
-        var guidance = "Bạn là bạn trò chuyện tiếng Anh thân thiện của web học IELTS này. Bạn TỰ NHẬN LÀ AI, không phải người thật; khi được hỏi, nói rõ mình là AI. NGÔN NGỮ: trả lời CHỦ YẾU bằng tiếng Anh đơn giản, câu ngắn, dễ nghe. Chêm tiếng Việt CHỈ đúng chỗ cần: khi người học vừa dùng tiếng Việt, khi người học bí từ, hoặc khi cần giải thích nghĩa của một từ/câu khó — và chỉ chêm đúng chỗ đó, KHÔNG dịch toàn bộ câu trả lời sang tiếng Việt. Khi người học nói toàn tiếng Anh thì trả lời toàn tiếng Anh. Sửa lỗi nhẹ bằng cách nhắc lại câu đúng, không chấm điểm, không bảng đúng/sai trong lúc nói. Tuyệt đối tuân thủ 3 cấm: không nói bậy, không nội dung 18+, không nội dung vi phạm pháp luật — nếu người học đưa nội dung đó, từ chối ngắn gọn bằng tiếng Anh đơn giản + tiếng Việt rồi lái lại chủ đề luyện nói.";
+        /* v91: huong dan AI theo ngon ngu cua track dang hoc. Co englishOnly
+           cua may chu chi ep duoc tieng Anh nen voi ZH/TP thi huong dan
+           trong context nay la cho ep chinh (may chu khong co co tuong ung). */
+        var lm91 = (typeof nativeLangMeta === "function") ? nativeLangMeta() : { code: "en", viName: "tiếng Anh", aiName: "English", trackName: "IELTS" };
+        var guidance = "";
+        if (lm91.code === "zh") guidance = "Bạn là bạn trò chuyện tiếng Trung thân thiện của web học HSK này. Bạn TỰ NHẬN LÀ AI, không phải người thật; khi được hỏi, nói rõ mình là AI. NGÔN NGỮ: trả lời CHỦ YẾU bằng tiếng Trung đơn giản (chữ giản thể), câu ngắn, dễ nghe. Chêm tiếng Việt CHỈ đúng chỗ cần: khi người học vừa dùng tiếng Việt, khi người học bí từ, hoặc khi cần giải thích nghĩa của một từ/câu khó — và chỉ chêm đúng chỗ đó, KHÔNG dịch toàn bộ câu trả lời sang tiếng Việt. Khi người học nói toàn tiếng Trung thì trả lời toàn tiếng Trung. Sửa lỗi nhẹ bằng cách nhắc lại câu đúng, không chấm điểm, không bảng đúng/sai trong lúc nói. Tuyệt đối tuân thủ 3 cấm: không nói bậy, không nội dung 18+, không nội dung vi phạm pháp luật — nếu người học đưa nội dung đó, từ chối ngắn gọn bằng tiếng Trung đơn giản + tiếng Việt rồi lái lại chủ đề luyện nói.";
+        else if (lm91.code === "ko") guidance = "Bạn là bạn trò chuyện tiếng Hàn thân thiện của web học TOPIK này. Bạn TỰ NHẬN LÀ AI, không phải người thật; khi được hỏi, nói rõ mình là AI. NGÔN NGỮ: trả lời CHỦ YẾU bằng tiếng Hàn đơn giản, câu ngắn, dễ nghe. Chêm tiếng Việt CHỈ đúng chỗ cần: khi người học vừa dùng tiếng Việt, khi người học bí từ, hoặc khi cần giải thích nghĩa của một từ/câu khó — và chỉ chêm đúng chỗ đó, KHÔNG dịch toàn bộ câu trả lời sang tiếng Việt. Khi người học nói toàn tiếng Hàn thì trả lời toàn tiếng Hàn. Sửa lỗi nhẹ bằng cách nhắc lại câu đúng, không chấm điểm, không bảng đúng/sai trong lúc nói. Tuyệt đối tuân thủ 3 cấm: không nói bậy, không nội dung 18+, không nội dung vi phạm pháp luật — nếu người học đưa nội dung đó, từ chối ngắn gọn bằng tiếng Hàn đơn giản + tiếng Việt rồi lái lại chủ đề luyện nói.";
+        else guidance = "Bạn là bạn trò chuyện tiếng Anh thân thiện của web học " + lm91.trackName + " này. Bạn TỰ NHẬN LÀ AI, không phải người thật; khi được hỏi, nói rõ mình là AI. NGÔN NGỮ: trả lời CHỦ YẾU bằng tiếng Anh đơn giản, câu ngắn, dễ nghe. Chêm tiếng Việt CHỈ đúng chỗ cần: khi người học vừa dùng tiếng Việt, khi người học bí từ, hoặc khi cần giải thích nghĩa của một từ/câu khó — và chỉ chêm đúng chỗ đó, KHÔNG dịch toàn bộ câu trả lời sang tiếng Việt. Khi người học nói toàn tiếng Anh thì trả lời toàn tiếng Anh. Sửa lỗi nhẹ bằng cách nhắc lại câu đúng, không chấm điểm, không bảng đúng/sai trong lúc nói. Tuyệt đối tuân thủ 3 cấm: không nói bậy, không nội dung 18+, không nội dung vi phạm pháp luật — nếu người học đưa nội dung đó, từ chối ngắn gọn bằng tiếng Anh đơn giản + tiếng Việt rồi lái lại chủ đề luyện nói.";
         var hist = (messages || []).slice(-12).map(function (m) { return (m.role === "user" ? "Học viên: " : "AI: ") + m.text; }).join("\n");
         if (opts && opts.shortLive) guidance += " TRÒ CHUYỆN NÓI LIVE: trả lời RẤT NGẮN, tối đa 2 câu ngắn, để đọc thành giọng ngay, không dông dài.";
-        if (opts && opts.englishOnly) guidance += " TRÒ CHUYỆN NÓI LIVE CHỈ TIẾNG ANH: Answer ONLY in English. Never use Vietnamese, even if the learner speaks Vietnamese or asks a word meaning — explain new words in simple English with examples, never translate into Vietnamese.";
+        if (opts && opts.liveLang === "zh") guidance += " TRÒ CHUYỆN NÓI LIVE CHỈ TIẾNG TRUNG: Answer ONLY in Chinese (Mandarin, simplified characters). Never use Vietnamese or English, even if the learner speaks Vietnamese or asks a word meaning — explain new words in simple Chinese with examples, never translate into Vietnamese.";
+        else if (opts && opts.liveLang === "ko") guidance += " TRÒ CHUYỆN NÓI LIVE CHỈ TIẾNG HÀN: Answer ONLY in Korean. Never use Vietnamese or English, even if the learner speaks Vietnamese or asks a word meaning — explain new words in simple Korean with examples, never translate into Vietnamese.";
+        else if (opts && opts.englishOnly) guidance += " TRÒ CHUYỆN NÓI LIVE CHỈ TIẾNG ANH: Answer ONLY in English. Never use Vietnamese, even if the learner speaks Vietnamese or asks a word meaning — explain new words in simple English with examples, never translate into Vietnamese.";
         if (opts && opts.stream && typeof opts.onChunk === "function") {
           var fellBack = function () { try { if (typeof opts.onFallback === "function") opts.onFallback(); } catch (e) {} };
           fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify({ message: lastUser, mode: "chat", context: guidance + "\nLịch sử gần đây:\n" + hist, stream: true, englishOnly: !!opts.englishOnly }) })
@@ -8655,12 +8687,14 @@ function firstSymFromIpa(ipa) {
 /* ----- Trò chuyện với AI: 2 loại riêng (gõ tay / nói live luan phien chat) -----
    Mô hình nguồn = AI trò chuyện liên tục, không phải người thật.
    Loại gõ tay: chỉ gõ chữ, không mic, không giọng nói; vẫn giữ song ngữ.
-   Loại nói live (25/10): LUAN PHIÊN CHẶT, KHÔNG NGẮT LỜI, CHỈ TIẾNG ANH.
+   Loại nói live (25/10; v91 theo track): LUAN PHIÊN CHẶT, KHÔNG NGẮT LỜI,
+   CHỈ NGÔN NGỮ CỦA TRACK (EN/TC tiếng Anh, ZH tiếng Trung, TP tiếng Hàn).
    Mic khóa trong lúc AI đang nói; AI nói xong mic mới mở lại. Không có nút
    "Đã nói xong": gửi tự động khi ngừng ở câu đã rõ ý (heuristic
    chatLiveSentenceComplete trên bản ghi — quy tắc, không phải hiểu nghĩa
-   hoàn hảo như người). Nhận giọng khóa tiếng Anh en-GB; AI live đáp 100%
-   tiếng Anh, không chêm tiếng Việt. Lọc tiếng vọng: bản ghi trùng với câu AI
+   hoàn hảo như người; v91 thêm luật riêng cho câu tiếng Trung/Hàn).
+   Nhận giọng + đọc giọng theo ngôn ngữ của track; AI live đáp 100% ngôn ngữ
+   của track, không chêm tiếng Việt. Lọc tiếng vọng: bản ghi trùng với câu AI
    đang đọc (mic bắt lại tiếng loa) thì bỏ qua (khi AI không nói).
    Cả hai loại giữ nguyên: cùng AI (ai-tutor mode chat), cùng 3 cấm, cùng nút Báo cáo
    (gửi máy chủ như bản Bùi gật), cùng transcript + câu hay ⭐ + ghi chú lỗi sau phiên,
@@ -8670,8 +8704,10 @@ function chatNormText(s) {
   return String(s || "").toLowerCase().replace(/[.,!?;:"'()\[\]{}<>«»“”‘’]/g, " ").replace(/\s+/g, " ").trim();
 }
 /* ----- Trò chuyện song ngữ + giọng tách đoạn + bắt âm chuẩn (25/10) -----
-   Tách đoạn Việt/Anh: đoạn có dấu tiếng Việt (hoặc từ Việt quen thuộc) đọc
-   bằng giọng Việt và chậm hơn một chút; đoạn còn lại đọc bằng giọng Anh en-GB.
+   Tách đoạn theo ngôn ngữ (v91 thêm zh/ko): đoạn có chữ Hán đọc bằng giọng
+   tiếng Trung, đoạn có chữ Hangul đọc bằng giọng tiếng Hàn, đoạn có dấu
+   tiếng Việt (hoặc từ Việt quen thuộc) đọc bằng giọng Việt và chậm hơn một
+   chút; đoạn còn lại đọc bằng giọng Anh en-GB.
    Nhận diện dựa vào dấu tiếng Việt nên câu Việt không dấu sẽ đọc như tiếng Anh
    (giới hạn thật của nhận diện trên máy, ghi rõ trong giao diện).
    Giọng: chọn trong giọng trình duyệt có sẵn, lưu vào state.chatVoicePrefs.
@@ -8689,11 +8725,16 @@ function chatHasMixedLang(t) {
   return chatIsVietnameseSeg(s) && CHAT_EN_WORDS.test(s);
 }
 function chatSplitLangSegments(text) {
-  var parts = String(text || "").match(/[^.!?…]+[.!?…]+|[^.!?…]+$/g) || [];
+  var parts = String(text || "").match(/[^.!?…。？！]+[.!?…。？！]+|[^.!?…。？！]+$/g) || [];
   var out = [];
   for (var i = 0; i < parts.length; i++) {
     var p = parts[i].trim();
-    if (p) out.push({ text: p, lang: chatIsVietnameseSeg(p) ? "vi" : "en" });
+    if (!p) continue;
+    var lg = "en";
+    if (/[\u4E00-\u9FFF]/.test(p)) lg = "zh";
+    else if (/[\uAC00-\uD7A3]/.test(p)) lg = "ko";
+    else if (chatIsVietnameseSeg(p)) lg = "vi";
+    out.push({ text: p, lang: lg });
   }
   return out;
 }
@@ -8706,12 +8747,12 @@ function chatAllVoices() {
 function chatPickVoice(lang, prefUri) {
   var vs = chatAllVoices(), i, v;
   if (prefUri) for (i = 0; i < vs.length; i++) if (vs[i].voiceURI === prefUri) return vs[i];
-  if (lang === "vi") {
-    for (i = 0; i < vs.length; i++) if (String(vs[i].lang || "").toLowerCase().indexOf("vi") === 0) return vs[i];
-    return null;
-  }
-  for (i = 0; i < vs.length; i++) if (String(vs[i].lang || "") === "en-GB") return vs[i];
-  for (i = 0; i < vs.length; i++) if (String(vs[i].lang || "").toLowerCase().indexOf("en") === 0) return vs[i];
+  /* v91: khop giong theo ma ngon ngu — giong chuan truoc (en-GB / zh-CN /
+     ko-KR / vi-VN) roi moi toi bat ky giong nao cung tien to do. */
+  var code = String(lang || "en").toLowerCase();
+  var exact = { en: "en-GB", zh: "zh-CN", ko: "ko-KR", vi: "vi-VN" }[code] || "";
+  if (exact) for (i = 0; i < vs.length; i++) if (String(vs[i].lang || "") === exact) return vs[i];
+  for (i = 0; i < vs.length; i++) if (String(vs[i].lang || "").toLowerCase().indexOf(code) === 0) return vs[i];
   return null;
 }
 function chatVoiceLabel() {
@@ -8726,11 +8767,11 @@ function chatSpeakSegments(text, opts) {
   opts = opts || {};
   var prefs = chatVoicePrefs();
   var rate = (prefs.rate != null ? prefs.rate : 1), vol = (prefs.vol != null ? prefs.vol : 1);
-  if (opts.forceEn) {
+  if (opts.forceEn || opts.forceLang) {
     try {
       var ue = new SpeechSynthesisUtterance(text);
-      ue.lang = "en-GB"; ue.rate = rate; ue.volume = vol;
-      var ve = chatPickVoice("en", prefs.en); if (ve) ue.voice = ve;
+      ue.lang = opts.forceLang || "en-GB"; ue.rate = rate; ue.volume = vol;
+      var ve = chatPickVoice(opts.forceLangCode || "en", prefs[opts.forceLangCode || "en"]); if (ve) ue.voice = ve;
       if (opts.onstart) ue.onstart = opts.onstart;
       if (opts.onend) ue.onend = opts.onend;
       ue.onerror = opts.onend || null;
@@ -8741,7 +8782,8 @@ function chatSpeakSegments(text, opts) {
   var segs = chatSplitLangSegments(text);
   if (!segs.length) { if (opts.onend) opts.onend(); return; }
   try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
-  if (!chatPickVoice("vi", prefs.vi)) {
+  var hasCjk91 = segs.some(function (sg) { return sg.lang === "zh" || sg.lang === "ko"; });
+  if (!hasCjk91 && !chatPickVoice("vi", prefs.vi)) {
     try {
       var u0 = new SpeechSynthesisUtterance(text);
       u0.lang = "en-GB"; u0.rate = rate; u0.volume = vol;
@@ -8757,8 +8799,8 @@ function chatSpeakSegments(text, opts) {
     var sg = segs[i++];
     try {
       var u = new SpeechSynthesisUtterance(sg.text);
-      u.lang = sg.lang === "vi" ? "vi-VN" : "en-GB";
-      var vv = chatPickVoice(sg.lang, sg.lang === "vi" ? prefs.vi : prefs.en);
+      u.lang = { vi: "vi-VN", zh: "zh-CN", ko: "ko-KR" }[sg.lang] || "en-GB";
+      var vv = chatPickVoice(sg.lang, prefs[sg.lang]);
       if (vv) u.voice = vv;
       u.rate = sg.lang === "vi" ? rate * 0.9 : rate;
       u.volume = vol;
@@ -8782,6 +8824,13 @@ var CHAT_LIVE_DANGLING = /\b(and|but|or|because|so|that|to|with|of|in|on|at|for|
 function chatLiveSentenceComplete(t) {
   var s = String(t || "").trim();
   if (!s) return false;
+  /* v91: cau tieng Trung/Han khong co khoang trang giua cac tu nen khong
+     dem tu duoc — coi la ro y neu ket bang dau cau ket thuc hoac du dai
+     (>= 6 ky tu, thuong la mot y tron ven o trinh do hoc vien). */
+  if (/[\u4E00-\u9FFF\uAC00-\uD7A3]/.test(s)) {
+    if (/[。？！!?.…]["'”’)]?$/.test(s)) return true;
+    return s.replace(/\s+/g, "").length >= 6;
+  }
   var words = s.split(/\s+/).filter(Boolean);
   if (words.length < 3) return false;
   if (/[,;:\-–—]$/.test(s)) return false;
@@ -8791,8 +8840,9 @@ function chatLiveSentenceComplete(t) {
 }
 function chatLiveVoiceLabel() {
   var prefs = chatVoicePrefs();
-  var en = chatPickVoice("en", prefs.en);
-  return "Giọng đang dùng — live chỉ tiếng Anh: " + (en ? (en.name + " (" + en.lang + ")") : "mặc định trình duyệt");
+  var lm = (typeof nativeLangMeta === "function") ? nativeLangMeta() : { code: "en", viName: "tiếng Anh" };
+  var v = chatPickVoice(lm.code, prefs[lm.code]);
+  return "Giọng đang dùng — live chỉ " + lm.viName + ": " + (v ? (v.name + " (" + v.lang + ")") : "mặc định trình duyệt");
 }
 /* Ghi âm song song (tốt nhất có thể): SpeechRecognition dùng mic, MediaRecorder
    thu cùng lúc để câu kém tin cậy còn đoạn thu gửi lại cho Gemini. Trên máy
@@ -8850,15 +8900,17 @@ function chatVoiceStatusText(l) {
   if (!v.srSupported) return "Trình duyệt này không hỗ trợ nhận dạng giọng nói — hãy dùng chế độ gõ tay.";
   if (!v.active) return "Mic đang tắt — bấm “Mở mic” để nói tiếp.";
   if (v.speaking) return "AI đang nói... — mic đang khóa, AI nói xong bạn mới nói tiếp.";
-  if (v.justSpoke) return "Đến lượt bạn nói — mic đang mở, nói tiếng Anh, ngừng ở câu đã rõ ý là tự gửi.";
-  return "Mic đang mở — nói tiếng Anh, ngừng ở câu đã rõ ý (khoảng 1,2 giây) là tự gửi, không cần bấm gì.";
+  var lmSt = (typeof nativeLangMeta === "function") ? nativeLangMeta() : { viName: "tiếng Anh" };
+  if (v.justSpoke) return "Đến lượt bạn nói — mic đang mở, nói " + lmSt.viName + ", ngừng ở câu đã rõ ý là tự gửi.";
+  return "Mic đang mở — nói " + lmSt.viName + ", ngừng ở câu đã rõ ý (khoảng 1,2 giây) là tự gửi, không cần bấm gì.";
 }
 function chatVoiceSpeak(l, text) {
   var v = chatVoiceState(l);
   if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) { v.speaking = false; v.curSpoken = ""; return; }
   v.curSpoken = text; v.justSpoke = false;
+  var lmSp = (typeof nativeLangMeta === "function") ? nativeLangMeta() : { code: "en", tts: "en-GB" };
   chatSpeakSegments(text, {
-    forceEn: true,
+    forceLang: lmSp.tts, forceLangCode: lmSp.code,
     onstart: function () { v.speaking = true; },
     onend: function () { v.speaking = false; v.curSpoken = ""; v.justSpoke = true; var st = $("#chatMicStatus"); if (st) st.textContent = chatVoiceStatusText(l); }
   });
@@ -8870,7 +8922,7 @@ function chatVoiceStart(l, app) {
   if (!SR) { v.srSupported = false; v.active = false; var st0 = $("#chatMicStatus"); if (st0) st0.textContent = chatVoiceStatusText(l); var tog0 = $("#chatMicToggle"); if (tog0) tog0.textContent = "🎤 Mở mic"; return; }
   try {
     var rec = new SR();
-    rec.lang = "en-GB"; rec.continuous = true; rec.interimResults = true;
+    rec.lang = (typeof msSrLang === "function") ? msSrLang((typeof state !== "undefined" && state.track) || "en") : "en-GB"; rec.continuous = true; rec.interimResults = true;
     rec.onresult = function (ev) { chatVoiceOnResult(l, app, ev); };
     rec.onerror = function (e) {
       var err = e && e.error;
@@ -8981,7 +9033,8 @@ function chatSendUser(l, app, text) {
       var st2 = $("#chatStreamText"); if (st2) st2.textContent = acc;
     };
   }
-  callAiTutorChat(l.msgs, { shortLive: isLive, englishOnly: isLive, stream: isLive, onChunk: onChunk, onFallback: isLive ? function () { toast("Streaming lỗi — đang dùng đường trả cả câu cũ."); } : null }).then(function (reply) {
+  var lmChat = (typeof nativeLangMeta === "function") ? nativeLangMeta() : { code: "en" };
+  callAiTutorChat(l.msgs, { shortLive: isLive, englishOnly: isLive && lmChat.code === "en", liveLang: lmChat.code, stream: isLive, onChunk: onChunk, onFallback: isLive ? function () { toast("Streaming lỗi — đang dùng đường trả cả câu cũ."); } : null }).then(function (reply) {
     l.msgs.push({ role: "assistant", text: reply });
     if (isLive && curLesson === l) { var v = chatVoiceState(l); v.speakNext = reply; }
     render();
@@ -8998,16 +9051,22 @@ function chatVoiceEnsure(l, app) {
   if (tog) tog.textContent = v.active ? "🎤 Tắt mic" : "🎤 Mở mic";
 }
 function chatGreeting(mode) {
-  if (mode === "voice") return "Hello! I am the English chat AI of this website (not a real person). Let's talk only in English today. What would you like to talk about? I will not grade you while we talk.";
-  return "Chào bạn! Mình là AI trò chuyện tiếng Anh của web này (không phải người thật). Bạn muốn nói về gì hôm nay? Cứ nói tự do bằng tiếng Anh hoặc tiếng Việt — mình trả lời bằng tiếng Anh đơn giản là chính, chêm tiếng Việt khi bạn dùng tiếng Việt hoặc bí từ. Trong lúc nói mình không chấm điểm.";
+  var lm = (typeof nativeLangMeta === "function") ? nativeLangMeta() : { code: "en", viName: "tiếng Anh" };
+  if (mode === "voice") {
+    if (lm.code === "zh") return "你好！我是这个网站的中文聊天AI（不是真人）。今天我们只用中文聊天。你想聊什么？我不会在聊天时给你打分。";
+    if (lm.code === "ko") return "안녕하세요! 저는 이 웹사이트의 한국어 채팅 AI입니다(실제 사람이 아닙니다). 오늘은 한국어로만 이야기해요. 무엇에 대해 이야기하고 싶으세요? 이야기하는 동안 채점하지 않아요.";
+    return "Hello! I am the English chat AI of this website (not a real person). Let's talk only in English today. What would you like to talk about? I will not grade you while we talk.";
+  }
+  return "Chào bạn! Mình là AI trò chuyện " + lm.viName + " của web này (không phải người thật). Bạn muốn nói về gì hôm nay? Cứ nói tự do bằng " + lm.viName + " hoặc tiếng Việt — mình trả lời bằng " + lm.viName + " đơn giản là chính, chêm tiếng Việt khi bạn dùng tiếng Việt hoặc bí từ. Trong lúc nói mình không chấm điểm.";
 }
 function renderChat(app, l) {
   if (!l.chatMode) l.chatMode = "type";
   if (!l.started) l.started = Date.now();
+  var lmC = (typeof nativeLangMeta === "function") ? nativeLangMeta() : { code: "en", viName: "tiếng Anh" };
   if (!l.msgs) l.msgs = [{ role: "assistant", text: chatGreeting(l.chatMode) }];
   if (l.ended) { renderChatSummary(app, l); return; }
   var isVoice = l.chatMode === "voice";
-  var html = '<div class="lessonframe"><div class="row"><button class="btn" id="btnBack">← Quay lại</button><span class="chip cur">Nói · ' + (isVoice ? "Trò chuyện nói live" : "Trò chuyện gõ tay") + '</span></div><div style="margin-top:6px"><b>' + (isVoice ? "Trò chuyện nói live với AI" : "Trò chuyện gõ tay với AI") + '</b><div class="mut">' + (isVoice ? "Nói live luân phiên chặt, CHỈ TIẾNG ANH: mic khóa trong lúc AI đang nói, AI nói xong mic mới mở lại; không có nút bấm gửi — ngừng ở câu đã rõ ý (khoảng 1,2 giây) là tự gửi, câu lửng thì nghe tiếp. AI đáp 100% tiếng Anh bằng giọng Anh, không chêm tiếng Việt. Nhận biết câu rõ ý theo quy tắc trên bản ghi, không phải hiểu nghĩa hoàn hảo như người." : "Chỉ gõ chữ trò chuyện với AI, không mic, không giọng nói.") + ' Mô hình nguồn là AI trò chuyện liên tục — không phải người thật. Nói tự do thích gì nói đó, không chấm điểm trong lúc nói.</div></div></div>';
+  var html = '<div class="lessonframe"><div class="row"><button class="btn" id="btnBack">← Quay lại</button><span class="chip cur">Nói · ' + (isVoice ? "Trò chuyện nói live" : "Trò chuyện gõ tay") + '</span></div><div style="margin-top:6px"><b>' + (isVoice ? "Trò chuyện nói live với AI" : "Trò chuyện gõ tay với AI") + '</b><div class="mut">' + (isVoice ? "Nói live luân phiên chặt, CHỈ " + lmC.viName.toUpperCase() + ": mic khóa trong lúc AI đang nói, AI nói xong mic mới mở lại; không có nút bấm gửi — ngừng ở câu đã rõ ý (khoảng 1,2 giây) là tự gửi, câu lửng thì nghe tiếp. AI đáp 100% " + lmC.viName + " bằng giọng " + lmC.viName + ", không chêm tiếng Việt. Nhận biết câu rõ ý theo quy tắc trên bản ghi, không phải hiểu nghĩa hoàn hảo như người." : "Chỉ gõ chữ trò chuyện với AI, không mic, không giọng nói.") + ' Mô hình nguồn là AI trò chuyện liên tục — không phải người thật. Nói tự do thích gì nói đó, không chấm điểm trong lúc nói.</div></div></div>';
   html += '<div class="qblock"><div id="chatBox">';
   l.msgs.forEach(function (m, i) {
     var cls = m.role === "user" ? "user" : "ai";
@@ -9019,14 +9078,14 @@ function renderChat(app, l) {
   if (isVoice) {
     html += '</div><p class="mut" id="chatMicStatus">' + esc(chatVoiceStatusText(l)) + '</p><p class="mut" id="chatLive"></p>'
       + '<div class="row"><button class="btn" id="chatMicToggle">🎤 Tắt mic</button><button class="btn btn-amber" id="chatEnd">Kết thúc phiên (+10 XP)</button><button class="btn" id="chatReport">⚑ Báo cáo nội dung không phù hợp</button></div>'
-      + '<div class="row"><input type="text" id="chatVoiceTextInp" placeholder="Gõ câu tiếng Anh rồi bấm Gửi..." style="flex:1"><button class="btn btn-primary" id="chatVoiceTextSend">Gửi</button></div><p class="mut">Mic không bật được thì gõ tiếng Anh vào đây để nói tiếp (nói live chỉ tiếng Anh).</p>'
-      + '<div class="row"><label class="mut">Giọng Anh <select id="chatVoiceEn"></select></label></div>'
+      + '<div class="row"><input type="text" id="chatVoiceTextInp" placeholder="Gõ câu ' + lmC.viName + ' rồi bấm Gửi..." style="flex:1"><button class="btn btn-primary" id="chatVoiceTextSend">Gửi</button></div><p class="mut">Mic không bật được thì gõ ' + lmC.viName + ' vào đây để nói tiếp (nói live chỉ ' + lmC.viName + ').</p>'
+      + '<div class="row"><label class="mut">Giọng ' + lmC.viName + ' <select id="chatVoiceEn"></select></label></div>'
       + '<div class="row"><label class="mut">Tốc độ <input type="range" id="chatVoiceRate" min="0.7" max="1.3" step="0.1"></label><label class="mut">Âm lượng <input type="range" id="chatVoiceVol" min="0" max="1" step="0.1"></label><span class="mut" id="chatVoiceLabel"></span></div>';
   } else {
     html += '</div><div class="row"><input type="text" id="chatInp" placeholder="Gõ câu của bạn rồi bấm Gửi..." style="flex:1"><button class="btn btn-primary" id="chatSend">Gửi</button></div>'
       + '<div class="row"><button class="btn btn-amber" id="chatEnd">Kết thúc phiên (+10 XP)</button><button class="btn" id="chatReport">⚑ Báo cáo nội dung không phù hợp</button></div>';
   }
-  html += '<p class="mut">Trò chuyện cần đăng nhập (đăng nhập ở mục Của tôi → Tài khoản) — nếu chưa đăng nhập, web báo rõ và không bịa câu trả lời.' + (isVoice ? ' Nói live CHỈ TIẾNG ANH: nhận giọng khóa tiếng Anh, AI đáp 100% tiếng Anh, không chêm tiếng Việt; luân phiên chặt — AI đang nói thì mic khóa, AI nói xong mic mới mở lại. Gửi tự động khi ngừng ở câu đã rõ ý (khoảng 1,2 giây), câu lửng thì nghe tiếp; nhận biết câu rõ ý theo quy tắc trên bản ghi, không phải hiểu nghĩa hoàn hảo như người. Câu trả lời hiện dần theo từng phần (streaming); nếu streaming lỗi thì tự rơi về đường trả cả câu cũ.' : ' Gõ tay vẫn song ngữ: AI trả lời bằng tiếng Anh đơn giản là chính, chêm tiếng Việt khi bạn dùng tiếng Việt hoặc bí từ (không dịch hết mọi câu); giọng đọc tách đoạn Việt/Anh theo dấu tiếng Việt nên câu Việt không dấu sẽ đọc như tiếng Anh.') + ' Ghi âm song song chỉ để nghe lại câu kém tin cậy bằng AI, không lưu audio lên máy chủ. Câu bạn bấm ⭐ sẽ lưu trên máy này vào mục "Câu hay dùng lại". Bấm ⚑ Báo cáo để gửi về máy chủ (cần đăng nhập; chỉ gửi lý do + ghi chú ngắn + thời điểm phiên, không gửi transcript hay audio/video). Nếu gửi không được, báo cáo vẫn lưu trên máy này làm dự phòng.</p></div>';
+  html += '<p class="mut">Trò chuyện cần đăng nhập (đăng nhập ở mục Của tôi → Tài khoản) — nếu chưa đăng nhập, web báo rõ và không bịa câu trả lời.' + (isVoice ? ' Nói live CHỈ ' + lmC.viName.toUpperCase() + ': nhận giọng khóa ' + lmC.viName + ', AI đáp 100% ' + lmC.viName + ', không chêm tiếng Việt; luân phiên chặt — AI đang nói thì mic khóa, AI nói xong mic mới mở lại. Gửi tự động khi ngừng ở câu đã rõ ý (khoảng 1,2 giây), câu lửng thì nghe tiếp; nhận biết câu rõ ý theo quy tắc trên bản ghi, không phải hiểu nghĩa hoàn hảo như người. Câu trả lời hiện dần theo từng phần (streaming); nếu streaming lỗi thì tự rơi về đường trả cả câu cũ.' : ' Gõ tay vẫn song ngữ: AI trả lời bằng ' + lmC.viName + ' đơn giản là chính, chêm tiếng Việt khi bạn dùng tiếng Việt hoặc bí từ (không dịch hết mọi câu); giọng đọc tách đoạn theo ngôn ngữ của từng câu.') + ' Ghi âm song song chỉ để nghe lại câu kém tin cậy bằng AI, không lưu audio lên máy chủ. Câu bạn bấm ⭐ sẽ lưu trên máy này vào mục "Câu hay dùng lại". Bấm ⚑ Báo cáo để gửi về máy chủ (cần đăng nhập; chỉ gửi lý do + ghi chú ngắn + thời điểm phiên, không gửi transcript hay audio/video). Nếu gửi không được, báo cáo vẫn lưu trên máy này làm dự phòng.</p></div>';
   app.innerHTML = html;
   wireBack();
   if (isVoice) {
@@ -9105,17 +9164,17 @@ function renderChat(app, l) {
       var prefs = chatVoicePrefs();
       function fillSel(selId, lang) {
         var sel = $(selId); if (!sel) return;
-        var vs = chatAllVoices().filter(function (vv) { return lang === "vi" ? String(vv.lang || "").toLowerCase().indexOf("vi") === 0 : String(vv.lang || "").toLowerCase().indexOf("en") === 0; });
+        var vs = chatAllVoices().filter(function (vv) { return String(vv.lang || "").toLowerCase().indexOf(lang) === 0; });
         sel.innerHTML = vs.length ? vs.map(function (vv) { return '<option value="' + esc(vv.voiceURI) + '">' + esc(vv.name) + " (" + esc(vv.lang) + ")</option>"; }).join("") : '<option value="">Mặc định trình duyệt</option>';
-        var want = lang === "vi" ? prefs.vi : prefs.en;
+        var want = prefs[lang];
         if (want) sel.value = want;
         sel.onchange = function () {
-          var p = chatVoicePrefs(); if (lang === "vi") p.vi = sel.value || ""; else p.en = sel.value || "";
+          var p = chatVoicePrefs(); p[lang] = sel.value || "";
           try { state.chatVoicePrefs = p; saveState(); } catch (e) {}
           var lb = $("#chatVoiceLabel"); if (lb) lb.textContent = chatLiveVoiceLabel();
         };
       }
-      fillSel("#chatVoiceEn", "en");
+      fillSel("#chatVoiceEn", lmC.code);
       var rt = $("#chatVoiceRate"); if (rt) { rt.value = prefs.rate != null ? prefs.rate : 1; rt.onchange = function () { var p = chatVoicePrefs(); p.rate = parseFloat(rt.value) || 1; try { state.chatVoicePrefs = p; saveState(); } catch (e) {} }; }
       var vl = $("#chatVoiceVol"); if (vl) { vl.value = prefs.vol != null ? prefs.vol : 1; vl.onchange = function () { var p = chatVoicePrefs(); p.vol = parseFloat(vl.value); if (isNaN(p.vol)) p.vol = 1; try { state.chatVoicePrefs = p; saveState(); } catch (e) {} }; }
       var lb0 = $("#chatVoiceLabel"); if (lb0) lb0.textContent = chatLiveVoiceLabel();
@@ -9123,7 +9182,7 @@ function renderChat(app, l) {
     (function () {
       var sendVoiceText = function () {
         var inp = $("#chatVoiceTextInp"); if (!inp) return;
-        var t = inp.value.trim(); if (!t) { toast("Hãy gõ câu tiếng Anh trước đã."); return; }
+        var t = inp.value.trim(); if (!t) { toast("Hãy gõ câu " + lmC.viName + " trước đã."); return; }
         inp.value = "";
         chatSendUser(l, app, t);
       };
@@ -9150,7 +9209,7 @@ function renderChatSummary(app, l) {
   $("#chatToNative").onclick = function () { chatVoiceCleanup(l); backFromLesson(); go("native"); };
   if (l.notes === null && !l.notesLoading) {
     l.notesLoading = true;
-    var reqMsgs = l.msgs.concat([{ role: "user", text: "Hãy tóm tắt ngắn gọn bằng tiếng Việt những lỗi tiếng Anh tôi hay mắc trong đoạn hội thoại trên (tối đa 5 gạch đầu dòng), kèm câu đúng cho mỗi lỗi." }]);
+    var reqMsgs = l.msgs.concat([{ role: "user", text: "Hãy tóm tắt ngắn gọn bằng tiếng Việt những lỗi " + nativeLangMeta().viName + " tôi hay mắc trong đoạn hội thoại trên (tối đa 5 gạch đầu dòng), kèm câu đúng cho mỗi lỗi." }]);
     callAiTutorChat(reqMsgs).then(function (r) { l.notes = r; l.notesLoading = false; render(); },
       function (err) { l.notes = "Chưa tạo được ghi chú lỗi tự động (" + err + ") — hãy xem lại transcript ở trên."; l.notesLoading = false; render(); });
   }
