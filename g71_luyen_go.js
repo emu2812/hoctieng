@@ -1,6 +1,15 @@
-/* G71 — Luyện Gõ (v71). Từ rơi như viên thuốc trong vũ trụ; gõ đúng chữ để
-   bắn hạ. Rơi xuống đáy hoặc gõ sai đều mất tim. Gõ hết 20 từ là thắng.
-   Logic thuần (không cần canvas) để probe kiểm tra được. */
+/* G71 — Luyện Gõ (v83: chơi thời gian thực — né và bắn).
+   Bùi phán 18:21 05/11: cách chơi cũ vẫn là "trả bài mới được đi tiếp",
+   không giống chơi game. Cách chơi mới: rồng/tên lửa LÁI ĐƯỢC (phím
+   ← → / kéo chuột / kéo chạm) để né thiên thạch rơi; từ rơi như viên
+   thuốc, gõ đúng chữ để bắn hạ. Gõ sai CHỈ gõ lại, KHÔNG mất tim —
+   mất tim chỉ khi: từ rơi xuống đáy (gõ chậm) hoặc đâm phải thiên
+   thạch (né dở). Tốc độ + thiên thạch dày dần theo mốc.
+   Giữ luật lõi v71: 20 từ/lượt, 3 tim, +10/từ, chủ đề theo vòng,
+   bàn phím màn hình + chạm khóa, ân hạn 500ms sau mỗi lần mất tim.
+   Hình v83: nền vũ trụ tranh màu nước sâu hơn (paintSpace mới), rồng
+   và tên lửa to hơn. Logic thuần (không cần canvas) để probe kiểm
+   tra được. */
 (function () {
   "use strict";
 
@@ -12,7 +21,17 @@
           speed: 0.075 + Math.random() * 0.03 };
       });
       return { theme: theme, total: words.length, words: ws, active: null,
-        hearts: 3, score: 0, cleared: 0, resolved: 0, over: null, graceUntil: 0 };
+        hearts: 3, score: 0, cleared: 0, resolved: 0, over: null, graceUntil: 0,
+        ship: { x: 0.5, y: 0.86 }, rocks: [], rockTimer: 2.0 };
+    },
+    /* Lái tàu: dx theo đơn vị chuẩn (0..1), kẹp trong sân. */
+    moveShip: function (st, dx) {
+      if (st.over) return;
+      st.ship.x = Math.max(0.06, Math.min(0.94, st.ship.x + dx));
+    },
+    setShipX: function (st, x) {
+      if (st.over) return;
+      st.ship.x = Math.max(0.06, Math.min(0.94, x));
     },
     loseHeart: function (st, now) {
       st.hearts--;
@@ -20,6 +39,8 @@
       if (st.hearts <= 0) { st.over = "lose"; st.active = null; }
       return { ok: false, lostHeart: true };
     },
+    /* Gõ sai (v83): chỉ gõ lại, KHÔNG mất tim — thua vì chậm tay / né
+       dở, không phải vì trả lời sai. */
     typeLetter: function (st, ch, now) {
       if (st.over) return { ok: false };
       ch = String(ch || "").toLowerCase();
@@ -35,7 +56,7 @@
           if (wd.w.charAt(wd.progress).toLowerCase() !== ch) return;
           if (best === null || wd.y > st.words[best].y) best = i;
         });
-        if (best === null) return LOGIC.loseHeart(st, now);
+        if (best === null) return { ok: false, wrong: true };
         st.active = best;
         w = st.words[best];
       }
@@ -52,7 +73,7 @@
         }
         return { ok: true };
       }
-      return LOGIC.loseHeart(st, now);
+      return { ok: false, wrong: true };
     },
     lockWord: function (st, idx) {
       if (st.over) return;
@@ -75,9 +96,58 @@
           }
         }
       });
+      if (st.over) return;
+      /* Thiên thạch: rơi nhanh hơn từ, không bắn được — chỉ né. Càng
+         về sau càng dày (tối thiểu mỗi 1,4 giây một hòn). */
+      st.rockTimer -= dt;
+      if (st.rockTimer <= 0) {
+        st.rocks.push({ x: 0.08 + Math.random() * 0.84, y: -0.08,
+          speed: 0.10 + Math.random() * 0.06,
+          r: 0.028 + Math.random() * 0.02, rot: Math.random() * 6.28 });
+        st.rockTimer = Math.max(1.4, 2.2 - st.resolved * 0.05);
+      }
+      for (var i = st.rocks.length - 1; i >= 0; i--) {
+        var rk = st.rocks[i];
+        rk.y += rk.speed * dt;
+        rk.rot += dt * 0.6;
+        if (rk.y > 1.06) { st.rocks.splice(i, 1); continue; }
+        if (Math.abs(rk.x - st.ship.x) < 0.05 && Math.abs(rk.y - st.ship.y) < 0.07) {
+          st.rocks.splice(i, 1);
+          if (now >= st.graceUntil && st.hearts > 0) {
+            st.hearts--;
+            st.graceUntil = now + 500;
+            if (st.hearts <= 0) { st.over = "lose"; st.active = null; }
+          }
+        }
+      }
       if (!st.over && st.resolved >= st.total) st.over = "win";
     }
   };
+
+  /* Thiên thạch: đa giác lởm chởm + miệng hố, xoay chậm — nhìn là biết
+     đá, không phải vệt mờ. */
+  function drawRock(ctx, x, y, r, rot) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    ctx.fillStyle = "#78716C";
+    ctx.strokeStyle = "#44403C";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (var i = 0; i < 8; i++) {
+      var a = i / 8 * Math.PI * 2;
+      var rr = r * (0.85 + 0.3 * Math.abs(Math.sin(i * 2.7 + 1)));
+      var vx = Math.cos(a) * rr, vy = Math.sin(a) * rr;
+      if (i === 0) ctx.moveTo(vx, vy); else ctx.lineTo(vx, vy);
+    }
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "rgba(0,0,0,.3)";
+    ctx.beginPath(); ctx.arc(-r * 0.3, -r * 0.2, r * 0.28, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(r * 0.35, r * 0.3, r * 0.2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.35)";
+    ctx.beginPath(); ctx.arc(-r * 0.25, -r * 0.45, r * 0.18, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
 
   function start() {
     var set = G71.pickTypingWords(20);
@@ -86,8 +156,10 @@
     var running = true;
     var flashes = [];
     var parts = [];
+    var keys = { left: false, right: false };
+    var drawShipX = 0.5;
     var stg = G71.openStage("⌨️ Luyện Gõ" + (set.theme ? " — " + set.theme : ""),
-      "Gõ chữ trên bàn phím, hoặc bấm vào viên thuốc rồi gõ. Bấm vào nút chữ cái dưới đây cũng được. Gõ sai hoặc để từ rơi xuống đáy là mất tim.",
+      "Phím ← → (hoặc kéo chuột/chạm) lái tên lửa né thiên thạch; gõ chữ để bắn hạ từ. Gõ sai chỉ gõ lại, không mất tim. Để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim.",
       function () { running = false; });
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
@@ -135,9 +207,16 @@
     }
     function onKey(e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === "ArrowLeft") { keys.left = true; e.preventDefault(); return; }
+      if (e.key === "ArrowRight") { keys.right = true; e.preventDefault(); return; }
       if (e.key && e.key.length === 1 && /[a-zA-Z]/.test(e.key)) feed(e.key);
     }
+    function onKeyUp(e) {
+      if (e.key === "ArrowLeft") keys.left = false;
+      if (e.key === "ArrowRight") keys.right = false;
+    }
     document.addEventListener("keydown", onKey);
+    document.addEventListener("keyup", onKeyUp);
     cv.addEventListener("click", function (e) {
       var r = cv.getBoundingClientRect();
       var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
@@ -149,6 +228,15 @@
       });
       if (best !== null && bd < 0.25) LOGIC.lockWord(st, best);
     });
+    /* Kéo chuột/chạm trên sân để lái tàu (pointer events bao cả chuột
+       lẫn cảm ứng; click vẫn khóa từ như cũ). */
+    cv.addEventListener("pointermove", function (e) {
+      if (!running || st.over) return;
+      if (!(e.buttons & 1) && e.pointerType === "mouse") return;
+      var r = cv.getBoundingClientRect();
+      if (!r.width) return;
+      LOGIC.setShipX(st, (e.clientX - r.left) / r.width);
+    });
 
     var ended = false;
     function maybeEnd() {
@@ -156,6 +244,7 @@
       ended = true;
       running = false;
       document.removeEventListener("keydown", onKey);
+      document.removeEventListener("keyup", onKeyUp);
       if (st.over === "win") {
         G71.endScreen(st, true, "🎉 Thắng rồi!",
           ["Gõ đúng " + st.cleared + "/" + st.total + " từ.", "Điểm: " + st.score + " · +10 XP đã cộng vào tiến trình."],
@@ -172,11 +261,19 @@
       if (!running) return;
       var dt = Math.min(0.05, (now - last) / 1000);
       last = now;
+      /* Lái tàu bằng phím mũi tên giữ (0,55 đơn vị/giây — qua sân ~1,8 giây). */
+      if (keys.left) LOGIC.moveShip(st, -0.55 * dt);
+      if (keys.right) LOGIC.moveShip(st, 0.55 * dt);
+      drawShipX += (st.ship.x - drawShipX) * Math.min(1, dt * 12);
       LOGIC.tick(st, dt, now);
       var W = cv.width, H = cv.height;
       if (!W || !H) { requestAnimationFrame(frame); return; }
       ctx.clearRect(0, 0, W, H);
       G71.paintSpace(ctx, W, H, now);
+      /* Thiên thạch rơi. */
+      st.rocks.forEach(function (rk) {
+        drawRock(ctx, rk.x * W, rk.y * H, rk.r * W, rk.rot);
+      });
       st.words.forEach(function (wd, i) {
         if (wd.status !== "falling") return;
         var py = wd.y * H;
@@ -199,16 +296,16 @@
         ctx.fillStyle = "#fff";
         ctx.fillText(rest, x0 + ctx.measureText(done).width, py + 6);
       });
-      /* Nhân vật + bảng nghĩa đặt trọn trong sân, có lề an toàn ở đáy:
-         bảng nghĩa chiếm dải H-38..H-4, tên lửa ở trên nó, rồng ở trên nữa. */
+      /* Tàu ở vị trí lái được; tia bắn đi từ mũi tàu, không còn từ giữa sân. */
       var rocketY = Math.max(110, H - 86);
       var dragonY = rocketY - 62;
+      var shipPx = drawShipX * W;
       flashes = flashes.filter(function (f) { return (f.ttl -= dt) > 0; });
       flashes.forEach(function (f) {
         ctx.strokeStyle = "rgba(253,230,138,.9)";
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(W / 2, rocketY - 45);
+        ctx.moveTo(shipPx, rocketY - 45);
         ctx.lineTo(f.x * W, f.y * H);
         ctx.stroke();
       });
@@ -218,8 +315,8 @@
         ctx.fillRect((p.x + p.vx * (0.6 - p.ttl)) * W, (p.y + p.vy * (0.6 - p.ttl)) * H, 5, 5);
       });
       var flick = 0.5 + 0.5 * Math.sin(now / 90);
-      G71.drawRocket(ctx, W / 2, rocketY, 32, flick);
-      G71.drawDragon(ctx, W / 2, dragonY, 18);
+      G71.drawRocket(ctx, shipPx, rocketY, 40, flick);
+      G71.drawDragon(ctx, shipPx, dragonY, 26);
       if (st.active !== null && st.words[st.active]) {
         /* Bảng nghĩa: nền tối mờ + chữ tự thu/ngắt 2 dòng, không cắt mép. */
         var meanText = "Nghĩa: " + st.words[st.active].vi;
@@ -237,5 +334,5 @@
     requestAnimationFrame(frame);
   }
 
-  window.G71LuyenGo = { start: start, logic: LOGIC };
+  window.G71LuyenGo = { start: start, logic: LOGIC, drawRock: drawRock };
 })();

@@ -179,7 +179,10 @@
           x: 0.15 + Math.random() * 0.7,
           y: -0.15 - i * 0.18,
           speed: boss ? 0.025 : 0.055 + 0.005 * level,
-          gold: boss ? BOSS_GOLD : MONSTER_GOLD
+          gold: boss ? BOSS_GOLD : MONSTER_GOLD,
+          /* Đạn của quái (v83): phát đầu sau ~2-3 giây, sau đó mỗi
+             ~2-3 giây một phát (trùm nhanh hơn). */
+          fireIn: boss ? 1.4 + Math.random() * 0.8 : 2.2 + Math.random() * 1.3
         };
       });
       return {
@@ -189,8 +192,20 @@
         shield: (typeof opts.shield === "number") ? opts.shield : 0,
         element: opts.element || "fire",
         score: 0, goldEarned: 0, combo: 0, over: null,
-        graceUntil: 0, events: [], collected: []
+        graceUntil: 0, events: [], collected: [],
+        dragon: { x: 0.5, y: 0.85 }, bolts: []
       };
+    },
+    /* Lái rồng trong sân (v83): x 0,08–0,92, y 0,5–0,92. */
+    moveDragon: function (st, dx, dy) {
+      if (st.over) return;
+      st.dragon.x = Math.max(0.08, Math.min(0.92, st.dragon.x + dx));
+      st.dragon.y = Math.max(0.5, Math.min(0.92, st.dragon.y + dy));
+    },
+    setDragon: function (st, x, y) {
+      if (st.over) return;
+      st.dragon.x = Math.max(0.08, Math.min(0.92, x));
+      st.dragon.y = Math.max(0.5, Math.min(0.92, y));
     },
     lockMonster: function (st, idx) {
       if (st.over) return;
@@ -263,7 +278,10 @@
       st.words.forEach(function (wd) {
         if (wd.status !== "advancing") return;
         wd.y += wd.speed * dt;
-        if (wd.y >= 1.0) {
+        /* Quái trôi nhẹ về phía rồng (đuổi theo) để việc né có ý nghĩa. */
+        wd.x += Math.max(-1, Math.min(1, st.dragon.x - wd.x)) * 0.12 * dt;
+        /* Chạm tới rồng: quái rơi tới đáy sân HOẶC đụng trúng rồng. */
+        if (wd.y >= 1.0 || (Math.abs(wd.x - st.dragon.x) < 0.06 && Math.abs(wd.y - st.dragon.y) < 0.09)) {
           wd.status = "escaped";
           st.resolved++;
           st.combo = 0;
@@ -277,8 +295,42 @@
             st.events.push({ type: "heartLost" });
             if (st.hearts <= 0) { st.over = "lose"; st.active = null; }
           }
+          return;
+        }
+        /* Bắn đạn từ xa (chỉ khi còn cách rồng một đoạn — không bắn
+           điểm tựa; quái ở sát mép trên chưa bắn). */
+        if (wd.y > 0.05 && wd.y < 0.65) {
+          wd.fireIn -= dt;
+          if (wd.fireIn <= 0) {
+            var dx = st.dragon.x - wd.x, dy = st.dragon.y - wd.y;
+            var len = Math.sqrt(dx * dx + dy * dy) || 1;
+            st.bolts.push({ x: wd.x, y: wd.y, vx: dx / len * 0.45, vy: dy / len * 0.45 });
+            wd.fireIn = wd.isBoss ? 1.3 + Math.random() * 0.9 : 2.2 + Math.random() * 1.5;
+          }
         }
       });
+      /* Đạn của quái bay tới rồng: trúng thì mất tim (ân hạn 500ms sau
+         mỗi lần mất tim vẫn bảo vệ khỏi đạn). */
+      for (var i = st.bolts.length - 1; i >= 0; i--) {
+        var b = st.bolts[i];
+        b.x += b.vx * dt; b.y += b.vy * dt;
+        if (b.x < -0.05 || b.x > 1.05 || b.y < -0.05 || b.y > 1.05) { st.bolts.splice(i, 1); continue; }
+        if (Math.abs(b.x - st.dragon.x) < 0.05 && Math.abs(b.y - st.dragon.y) < 0.07) {
+          st.bolts.splice(i, 1);
+          if (now >= st.graceUntil) {
+            st.combo = 0;
+            if (st.shield > 0) {
+              st.shield--;
+              st.events.push({ type: "shieldBlock" });
+            } else {
+              st.hearts--;
+              st.graceUntil = now + 500;
+              st.events.push({ type: "heartLost" });
+              if (st.hearts <= 0) { st.over = "lose"; st.active = null; }
+            }
+          }
+        }
+      }
       if (!st.over && st.resolved >= st.total) st.over = "win";
     }
   };
@@ -464,7 +516,8 @@
   /* Quái Bóng Tối: khối chàm đậm, viền chàm nhạt 2px, mắt sáng hổ phách,
      huy hiệu hệ ở góc phải, thanh máu trên đầu, viên từ gắn liền bên dưới. */
   function drawMonster(ctx, m, W, H, t, locked) {
-    var px = m.x * W, py = m.y * H;
+    var px = m.x * W, py = Math.max(m.y * H, 64); /* không để quái + huy
+      hiệu + thanh máu bị cắt ở mép trên (sửa xấu 18:11) */
     var s = m.isBoss ? 34 : 24;
     ctx.save();
     /* Bóng đổ dưới quái. */
@@ -546,6 +599,7 @@
   var bolts = [], parts = [], floats = [];
   var elBar = null, ctrlBar = null, overlayBox = null;
   var last = 0, hudSig = "";
+  var moveKeys = { up: false, down: false, left: false, right: false };
 
   function esc(s) { return G71.escHtml(s); }
   function toastSafe(msg) { try { if (typeof toast === "function") toast(msg); } catch (e) {} }
@@ -569,6 +623,8 @@
   function teardown() {
     mode = "map";
     document.removeEventListener("keydown", onKey);
+    document.removeEventListener("keyup", onKeyUp);
+    moveKeys = { up: false, down: false, left: false, right: false };
     stage = null; battle = null; run = null;
     bolts = []; parts = []; floats = [];
   }
@@ -578,7 +634,7 @@
     run = null;
     mode = "map";
     var stg = G71.openStage("🔥 Rồng Lửa — Rừng Xanh (bản thử)",
-      "Chạm quái để khóa, gõ đúng từ để tung chiêu. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu.",
+      "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái; chạm quái để khóa, gõ đúng từ để tung chiêu. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng hoặc đạn trúng rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu.",
       function () { teardown(); });
     stage = stg;
     buildControls(stg);
@@ -729,7 +785,9 @@
     hud();
     if (stage.resize) stage.resize();
     document.addEventListener("keydown", onKey);
+    document.addEventListener("keyup", onKeyUp);
     stage.canvas.addEventListener("click", onCanvasClick);
+    stage.canvas.addEventListener("pointermove", onCanvasDrag);
     last = performance.now();
     requestAnimationFrame(frame);
   }
@@ -737,7 +795,10 @@
   function endBattle() {
     mode = "over";
     document.removeEventListener("keydown", onKey);
+    document.removeEventListener("keyup", onKeyUp);
+    moveKeys = { up: false, down: false, left: false, right: false };
     try { stage.canvas.removeEventListener("click", onCanvasClick); } catch (e) {}
+    try { stage.canvas.removeEventListener("pointermove", onCanvasDrag); } catch (e) {}
     if (elBar) elBar.style.display = "none";
     if (ctrlBar) ctrlBar.style.display = "none";
     /* Thua hay thắng đều giữ vàng + từ đã thu trong trận này. */
@@ -818,6 +879,9 @@
 
   function hud() {
     if (!stage || !battle) return;
+    /* HUD được phép xuống 2 dòng khi hẹp (sửa xấu 18:11: chữ hệ "⚡ Điện"
+       ở góc phải từng bị cắt mất nửa ở mép màn hình). */
+    if (stage.hud) { stage.hud.style.flexWrap = "wrap"; stage.hud.style.whiteSpace = "normal"; }
     var sig = [run ? run.level : 0, battle.battle, battle.hearts, battle.shield,
       RL.gold, battle.combo, battle.element, battle.total - battle.resolved].join("|");
     if (sig === hudSig) return;
@@ -843,7 +907,7 @@
     if (mode !== "battle" || !battle || battle.over) return;
     var r = LOGIC.typeLetter(battle, ch, Date.now(), battle.element, dictLevel);
     if (r.ok && r.completed) {
-      bolts.push({ x0: 0.5, y0: 0.85, x1: r.monster.x, y1: r.monster.y, el: battle.element,
+      bolts.push({ x0: battle.dragon.x, y0: Math.max(0.05, battle.dragon.y - 0.06), x1: r.monster.x, y1: r.monster.y, el: battle.element,
         t: 0, ttl: 0.22, dmg: r.dmg, done: false });
       if (r.bossPhase) toastSafe("Trùm đổi hệ! Giờ trùm yếu hệ " + ELEMENTS[r.bossPhase.weak].name + ".");
     }
@@ -853,11 +917,31 @@
 
   function onKey(e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === "ArrowUp") { moveKeys.up = true; e.preventDefault(); return; }
+    if (e.key === "ArrowDown") { moveKeys.down = true; e.preventDefault(); return; }
+    if (e.key === "ArrowLeft") { moveKeys.left = true; e.preventDefault(); return; }
+    if (e.key === "ArrowRight") { moveKeys.right = true; e.preventDefault(); return; }
     if (e.key === "1" || e.key === "2" || e.key === "3") {
       setElement(EL_ORDER[parseInt(e.key, 10) - 1]);
       return;
     }
     if (e.key && e.key.length === 1 && /[a-zA-Z]/.test(e.key)) feed(e.key);
+  }
+
+  function onKeyUp(e) {
+    if (e.key === "ArrowUp") moveKeys.up = false;
+    else if (e.key === "ArrowDown") moveKeys.down = false;
+    else if (e.key === "ArrowLeft") moveKeys.left = false;
+    else if (e.key === "ArrowRight") moveKeys.right = false;
+  }
+
+  /* Kéo trên sân để lái rồng (chuột + cảm ứng; click vẫn khóa quái). */
+  function onCanvasDrag(e) {
+    if (mode !== "battle" || !battle) return;
+    if (!(e.buttons & 1) && e.pointerType === "mouse") return;
+    var r = stage.canvas.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    LOGIC.setDragon(battle, (e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
   }
 
   function onCanvasClick(e) {
@@ -885,6 +969,12 @@
     var dt = Math.min(0.05, (now - last) / 1000);
     last = now;
     LOGIC.tick(battle, dt, now);
+    /* Lái rồng bằng phím mũi tên giữ (0,55 sân/giây). */
+    if (!battle.over) {
+      var mv = (moveKeys.right ? 1 : 0) - (moveKeys.left ? 1 : 0);
+      var mvY = (moveKeys.down ? 1 : 0) - (moveKeys.up ? 1 : 0);
+      if (mv || mvY) LOGIC.moveDragon(battle, mv * 0.55 * dt, mvY * 0.55 * dt);
+    }
     /* Logic + HUD + kết thúc trận chạy cả khi không có canvas 2D thật
        (jsdom/probe): chỉ phần vẽ bên dưới mới cần ctx. */
     while (battle.events.length) {
@@ -905,6 +995,16 @@
       var py = m.y * H;
       if (py < -100 || py > H + 100) return;
       drawMonster(ctx, m, W, H, now, battle.active === i);
+    });
+    /* Đạn của quái bay tới rồng: quả cầu bóng tối viền chàm. */
+    battle.bolts.forEach(function (b) {
+      ctx.save();
+      ctx.fillStyle = "#312E81";
+      ctx.beginPath(); ctx.arc(b.x * W, b.y * H, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#A5B4FC"; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = "rgba(165,180,252,.9)";
+      ctx.beginPath(); ctx.arc(b.x * W - 2, b.y * H - 2, 2.5, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
     });
     /* Tia chiêu từ rồng tới quái. */
     bolts.forEach(function (b) {
@@ -943,9 +1043,9 @@
       ctx.textAlign = "left";
     });
     ctx.globalAlpha = 1;
-    /* Rồng ở đáy sân, giữa. */
+    /* Rồng ở vị trí lái được (mặc định đáy sân, giữa). */
     var hurt = now < battle.graceUntil && Math.floor(now / 120) % 2 === 0;
-    drawDragonUp(ctx, W / 2, H - 64, 22, now, hurt);
+    drawDragonUp(ctx, battle.dragon.x * W, battle.dragon.y * H, 22, now, hurt);
     if (mode === "battle") requestAnimationFrame(frame);
   }
 

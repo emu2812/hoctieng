@@ -428,33 +428,70 @@
     return Math.max(24, r);
   }
   /* ---- Nền có chiều sâu (3 lớp: xa — giữa — gần) ---- */
+  /* Nền vũ trụ có chiều sâu (v83, sửa xấu 18:11): không còn 3 vệt bầu dục
+     mờ lớn (trông như vết loang) — tinh vân thành nhiều đốm nhỏ mềm,
+     sao trôi chậm xuống cho cảm giác bay, hành tinh có vành + bóng đổ +
+     quầng sáng rõ, thêm một hành tinh xa nhỏ làm lớp xa. */
   function paintSpace(ctx, W, H, t) {
     var g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#0F172A"); g.addColorStop(1, "#274B73");
+    g.addColorStop(0, "#0B1030"); g.addColorStop(0.6, "#16294D"); g.addColorStop(1, "#274B73");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    /* Tinh vân: nhiều đốm nhỏ mềm, nhiều màu, alpha thấp — không vệt lớn. */
     watercolor(ctx, W, H, [
-      { x: 0.2, y: 0.25, rx: 0.22, ry: 0.16, c: "#7DD3FC" },
-      { x: 0.8, y: 0.6, rx: 0.25, ry: 0.18, c: "#F59E0B" },
-      { x: 0.5, y: 0.85, rx: 0.28, ry: 0.14, c: "#1E9E6A" }
+      { x: 0.16, y: 0.18, rx: 0.07, ry: 0.05, c: "#7DD3FC" },
+      { x: 0.3, y: 0.42, rx: 0.05, ry: 0.04, c: "#A78BFA" },
+      { x: 0.62, y: 0.12, rx: 0.06, ry: 0.04, c: "#F59E0B" },
+      { x: 0.78, y: 0.55, rx: 0.08, ry: 0.05, c: "#2DD4BF" },
+      { x: 0.45, y: 0.72, rx: 0.06, ry: 0.04, c: "#F472B6" },
+      { x: 0.9, y: 0.85, rx: 0.05, ry: 0.04, c: "#7DD3FC" },
+      { x: 0.08, y: 0.88, rx: 0.06, ry: 0.04, c: "#A78BFA" },
+      { x: 0.55, y: 0.35, rx: 0.04, ry: 0.03, c: "#FBBF24" }
     ]);
+    /* Sao trôi chậm xuống (cảm giác bay về phía trước) + sao lớn lấp lánh. */
     ctx.fillStyle = "#fff";
     for (var s = 0; s < 70; s++) {
-      var sx = (s * 97) % W, sy = (s * 57) % H;
+      var sx = (s * 97) % W, sy = ((s * 57) + (t || 0) * 0.004) % H;
       var big = (s % 7 === 0);
       ctx.globalAlpha = big ? 0.9 : 0.35 + ((s * 13) % 10) / 20;
       var sz = big ? 3 : 2;
       ctx.fillRect(sx, sy, sz, sz);
+      if (big) { /* tia sáng chữ thập cho sao lớn */
+        ctx.globalAlpha = 0.5;
+        ctx.fillRect(sx - 3, sy + 1, 9, 1);
+        ctx.fillRect(sx + 1, sy - 3, 1, 9);
+      }
     }
     ctx.globalAlpha = 1;
-    /* 2 hành tinh: một có vành, một nhỏ ở xa. */
+    /* Hành tinh có vành: quầng sáng + bóng lưỡi liềm + vành rõ. */
+    var pr = Math.min(30, W * 0.08), px = W * 0.84, py = H * 0.18;
+    ctx.fillStyle = "rgba(201,138,91,.25)";
+    ctx.beginPath(); ctx.arc(px, py, pr * 1.5, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = "#C98A5B";
-    ctx.beginPath(); ctx.arc(W * 0.84, H * 0.2, Math.min(26, W * 0.07), 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "rgba(253,230,138,.8)"; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(px, py, pr, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(11,16,48,.45)"; /* bóng lưỡi liềm phía tối */
+    ctx.beginPath(); ctx.arc(px + pr * 0.28, py - pr * 0.1, pr * 0.82, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "rgba(253,230,138,.9)"; ctx.lineWidth = 3.5;
     ctx.beginPath();
-    ctx.ellipse(W * 0.84, H * 0.2, Math.min(44, W * 0.12), Math.min(12, W * 0.035), -0.35, 0, Math.PI * 2);
+    ctx.ellipse(px, py, Math.min(52, W * 0.14), Math.min(14, W * 0.04), -0.35, 0, Math.PI * 2);
     ctx.stroke();
+    ctx.strokeStyle = "rgba(253,230,138,.45)"; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.ellipse(px, py, Math.min(60, W * 0.16), Math.min(17, W * 0.05), -0.35, 0, Math.PI * 2);
+    ctx.stroke();
+    /* Hành tinh xanh nhỏ ở xa: điểm sáng + miệng hố. */
+    var br = Math.min(20, W * 0.055), bx = W * 0.14, by = H * 0.68;
+    ctx.fillStyle = "rgba(125,211,252,.3)";
+    ctx.beginPath(); ctx.arc(bx, by, br * 1.4, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = "#7DD3FC";
-    ctx.beginPath(); ctx.arc(W * 0.14, H * 0.68, Math.min(18, W * 0.05), 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(bx, by, br, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(15,23,42,.35)";
+    ctx.beginPath(); ctx.arc(bx - br * 0.3, by - br * 0.2, br * 0.28, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(bx + br * 0.35, by + br * 0.3, br * 0.2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.5)";
+    ctx.beginPath(); ctx.arc(bx - br * 0.35, by - br * 0.4, br * 0.22, 0, Math.PI * 2); ctx.fill();
+    /* Hành tinh xa tí hon làm lớp xa. */
+    ctx.fillStyle = "#94A3B8";
+    ctx.beginPath(); ctx.arc(W * 0.58, H * 0.07, 8, 0, Math.PI * 2); ctx.fill();
   }
   function paintSky(ctx, W, H, t) {
     var g = ctx.createLinearGradient(0, 0, 0, H);

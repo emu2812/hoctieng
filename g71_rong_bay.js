@@ -1,8 +1,13 @@
-/* G71 — Rồng Bay Trên Mây (v71, làm lại cho vui hơn ở v79). Rồng bay trên
-   3 làn mây; mỗi vòng cho một nghĩa tiếng Việt, người chơi bay vào làn có
-   từ đúng với nghĩa đó. Đúng +10 (chuỗi đúng nhân điểm tới ×3, mây vàng
-   +30, vòng tốc độ ×2, sao ×2), sai mất tim (khiên chặn 1 lần). Hết 10
-   vòng còn tim là thắng, sao 1–3 theo điểm + điểm cao nhất đã lưu.
+/* G71 — Rồng Bay Trên Mây (v83: bay liên tục, thời gian thực).
+   Bùi phán 18:21 05/11: cách chơi cũ vẫn là trả bài (chọn đúng mây mới
+   đi tiếp). Cách chơi mới: rồng bay về phía trước KHÔNG DỪNG, mây mang
+   từ trôi từ phải sang trái; chuyển làn ↑/↓ (phím/chạm) để bay vào
+   đúng mây khớp nghĩa cho trước và NÉ mây giông. Bay vào mây sai hoặc
+   đâm phải mây giông thì mất tim — thua vì né dở/chậm tay, không phải
+   vì trả lời sai. Mây vàng +30, vòng tốc độ ×2, combo tới ×3, vật phẩm
+   sao/khiên/chậm giữ nguyên v79. Giữ luật lõi v71: đúng +10, 10 vòng,
+   3 tim, thắng = hết 10 vòng còn tim, sao 1–3 + điểm cao nhất.
+   Hình v83: rồng to hơn, nhãn chủ đề có nền để không đè lên mây.
    Logic thuần (không cần canvas) để probe kiểm tra được. */
 (function () {
   "use strict";
@@ -56,8 +61,71 @@
         items: { star: 0, shield: 0, slow: 0 },
         starActive: false, slowUntil: 0,
         goldenLane: rounds.map(function (rd) { return (typeof rd.goldenLane === "number") ? rd.goldenLane : -1; }),
-        speed: rounds.map(function (_, i) { return (i + 1) % 3 === 0; })
+        speed: rounds.map(function (_, i) { return (i + 1) % 3 === 0; }),
+        clouds: [], waveLive: false
       };
+    },
+    /* ---- Bay liên tục v83: mây trôi từ phải sang trái, rồng bay vào mây. ---- */
+    dragonX: 0.16,
+    cloudSpeed: function (st, now) {
+      var base = 0.16 + st.round * 0.012;
+      return base * (st.speed[st.round] ? 1.8 : 1) * (LOGIC.slowActive(st, now) ? 0.5 : 1);
+    },
+    /* Một đợt mây = 1 vòng: 3 mây từ (mỗi làn 1 mây, tới rồng lệch nhau
+       chút để người chơi kịp chuyển làn đón mây đúng) + thỉnh thoảng
+       1 mây giông ở làn ngẫu nhiên (không từ — chỉ né). */
+    spawnWave: function (st) {
+      if (st.over || st.round >= st.rounds.length) return false;
+      var rd = st.rounds[st.round];
+      st.clouds = [];
+      for (var li = 0; li < 3; li++) {
+        st.clouds.push({ lane: li, x: 1.18 + li * 0.05, kind: "word",
+          word: rd.options[li], golden: li === st.goldenLane[st.round] });
+      }
+      if (Math.random() < 0.35) {
+        st.clouds.push({ lane: Math.floor(Math.random() * 3), x: 1.45, kind: "storm" });
+      }
+      st.waveLive = true;
+      return true;
+    },
+    /* Mất tim vì đâm mây giông: khiên chặn 1 lần, không thì trừ tim. */
+    loseHeartRB: function (st) {
+      if (st.items.shield > 0) { st.items.shield--; return { blocked: true }; }
+      st.hearts--;
+      st.streak = 0; st.starActive = false;
+      if (st.hearts <= 0) st.over = "lose";
+      return { blocked: false };
+    },
+    /* Trôi mây + va chạm với rồng (lane = làn rồng đang bay). Trả về
+       danh sách sự kiện để tầng vẽ hiện biểu ngữ/pháo/rung. Mây từ
+       chạm rồng thì gọi pick() cũ (luật điểm/combo/vật phẩm giữ nguyên);
+       mây ở làn khác trôi qua không sao. */
+    tickClouds: function (st, dt, now, lane) {
+      if (st.over || !st.waveLive) return [];
+      var events = [];
+      var spd = LOGIC.cloudSpeed(st, now);
+      var dx = LOGIC.dragonX;
+      for (var i = st.clouds.length - 1; i >= 0; i--) {
+        var c = st.clouds[i];
+        c.x -= spd * dt;
+        if (c.x < -0.18) { st.clouds.splice(i, 1); continue; }
+        if (c.x > dx + 0.03 || c.hit) continue;
+        c.hit = true;
+        if (c.lane !== lane) continue;
+        if (c.kind === "storm") {
+          var r = LOGIC.loseHeartRB(st);
+          events.push({ type: r.blocked ? "stormBlocked" : "stormHit" });
+          if (st.over) { st.clouds = []; st.waveLive = false; break; }
+        } else {
+          var res = LOGIC.pick(st, c.lane);
+          if (res) events.push({ type: res.correct ? "correct" : (res.blocked ? "blocked" : "wrong"), res: res });
+          st.clouds = [];
+          st.waveLive = false;
+          break; /* đợt kết thúc khi bay vào một mây từ — dừng vòng lặp
+            ngay (clouds đã rỗng, đọc tiếp sẽ lỗi). */
+        }
+      }
+      return events;
     },
     comboMult: function (streak) { return streak >= 5 ? 3 : (streak >= 3 ? 2 : 1); },
     starsFor: function (score, win) {
@@ -156,9 +224,7 @@
     var st = LOGIC.createState(rounds);
     var running = true;
     var lane = 1; /* 0 = trên, 1 = giữa, 2 = dưới */
-    var shown = 0; /* vòng đang hiển thị (chậm hơn st.round trong lúc hiện kết quả) */
-    var phase = "fly"; /* fly | dash | resolve */
-    var resolveUntil = 0;
+    var waveGapUntil = 0; /* tới lúc thả đợt mây tiếp theo */
     var banner = "";
     var bannerOk = true;
     var notice = "";
@@ -167,11 +233,9 @@
     var particles = [];
     var shakeUntil = 0;
     var celebrateUntil = 0;
-    var dragonX = 0.16;
-    var targetX = 0.16;
     var dragonY = 0;
     var stg = G71.openStage("🐉 Rồng Bay Trên Mây",
-      "Phím ↑ ↓ đổi làn, phím Cách bay vào mây. Chuột/cảm ứng: bấm vào đám mây muốn bay vào. Chuỗi đúng nhân điểm, mây vàng +30, cứ 3 vòng có 1 vòng tốc độ ×2. Bấm ⭐/🐢 để dùng vật phẩm (phím 1/2).",
+      "Rồng bay liên tục về phía trước — phím ↑ ↓ đổi làn, chuột/cảm ứng: bấm vào làn muốn bay. Bay vào mây có từ đúng nghĩa cho trước. Né mây giông (đâm phải mất tim)! Chuỗi đúng nhân điểm, mây vàng +30, cứ 3 vòng có 1 vòng tốc độ ×2. Bấm ⭐/🐢 để dùng vật phẩm (phím 1/2).",
       function () { running = false; });
     /* Tiêu đề hiện đủ tên trên màn hẹp: nút Thoát chỉ còn icon ✕. */
     var exitBtn = stg.el.querySelector("#g71Exit");
@@ -192,13 +256,13 @@
     if (slowBtn) slowBtn.onclick = function () { if (LOGIC.useItem(st, "slow", performance.now())) hud(); };
 
     function hud() {
-      var rd = st.rounds[Math.min(shown, st.rounds.length - 1)];
+      var rd = st.rounds[Math.min(st.round, st.rounds.length - 1)];
       /* HUD một dòng, nhãn gọn để tim/vòng/tiến độ/điểm không bị cắt trên
          màn hẹp; nghĩa dài tự cắt bằng … (giữ đúng luật HUD 1 dòng v74). */
       stg.hud.style.fontSize = "14px";
       stg.hud.innerHTML = "<span style=\"flex:none\">" + G71.hearts(st.hearts) + "</span>"
-        + "<span style=\"flex:none\">Vòng " + (Math.min(shown + 1, st.rounds.length)) + "/" + st.rounds.length + "</span>"
-        + "<span style=\"flex:none\">" + Math.round(shown / st.rounds.length * 100) + "%</span>"
+        + "<span style=\"flex:none\">Vòng " + (Math.min(st.round + 1, st.rounds.length)) + "/" + st.rounds.length + "</span>"
+        + "<span style=\"flex:none\">" + Math.round(st.round / st.rounds.length * 100) + "%</span>"
         + "<span style=\"flex:none\">Điểm " + st.score + "</span>"
         + (st.streak >= 2 ? "<span style=\"flex:none;color:#B45309\">🔥×" + LOGIC.comboMult(st.streak) + "</span>" : "")
         + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">Nghĩa: " + G71.escHtml(rd ? rd.vi : "") + "</span>";
@@ -209,15 +273,9 @@
     hud();
     if (!ctx) { if (stg.hint) stg.hint.textContent += " Trình duyệt này chưa hỗ trợ canvas."; return; }
 
-    function dashTo(li) {
-      if (!running || st.over || phase !== "fly") return;
-      lane = li;
-      phase = "dash";
-    }
     function onKey(e) {
-      if (e.key === "ArrowUp") { if (phase === "fly") lane = Math.max(0, lane - 1); e.preventDefault(); }
-      else if (e.key === "ArrowDown") { if (phase === "fly") lane = Math.min(2, lane + 1); e.preventDefault(); }
-      else if (e.key === " " || e.key === "Enter") { dashTo(lane); e.preventDefault(); }
+      if (e.key === "ArrowUp") { lane = Math.max(0, lane - 1); e.preventDefault(); }
+      else if (e.key === "ArrowDown") { lane = Math.min(2, lane + 1); e.preventDefault(); }
       else if (e.key === "1") { if (LOGIC.useItem(st, "star", performance.now())) hud(); }
       else if (e.key === "2") { if (LOGIC.useItem(st, "slow", performance.now())) hud(); }
     }
@@ -225,13 +283,12 @@
     cv.addEventListener("click", function (e) {
       var r = cv.getBoundingClientRect();
       var py = (e.clientY - r.top) / r.height;
-      var li = py < 0.33 ? 0 : (py < 0.66 ? 1 : 2);
-      dashTo(li);
+      lane = py < 0.33 ? 0 : (py < 0.66 ? 1 : 2);
     });
 
     var ended = false;
     function maybeEnd() {
-      if (ended || !st.over || phase === "resolve") return;
+      if (ended || !st.over) return;
       ended = true;
       running = false;
       document.removeEventListener("keydown", onKey);
@@ -253,13 +310,6 @@
     }
 
     var last = performance.now();
-    /* Mây trôi ngang trong một dải (không rời khỏi sân): tốc độ tăng theo
-       vòng, vòng tốc độ ×1.8, chậm ×0.5. */
-    function cloudX(li, now, W, cg, spd) {
-      var driftAmp = Math.min(W * 0.24, 150);
-      var x = cg.cx - driftAmp * (0.5 + 0.5 * Math.sin(now * spd + li * 2.1 + 0.7));
-      return Math.max(cg.hw + 8, Math.min(W - cg.hw - 8, x));
-    }
     /* Pháo hạt khi chọn đúng: hổ phách + teal + trắng + xanh lá. */
     function burst(x, y) {
       var colors = ["#F59E0B", "#0D9488", "#FFC800", "#1E9E6A", "#ffffff"];
@@ -274,58 +324,56 @@
       last = now;
       var W = cv.width, H = cv.height;
       if (!W || !H) { requestAnimationFrame(frame); return; }
-      var rdIdx = Math.min(shown, st.rounds.length - 1);
+      var rdIdx = Math.min(st.round, st.rounds.length - 1);
       var rd = st.rounds[rdIdx];
       var laneYs = [H * 0.22, H * 0.5, H * 0.78];
       var speedRound = !!st.speed[rdIdx];
       var slowNow = LOGIC.slowActive(st, now);
-      var baseSpd = 0.00045 + shown * 0.00006;
-      var spd = baseSpd * (speedRound ? 1.8 : 1) * (slowNow ? 0.5 : 1);
       var cg = G71.cloudGeom(W, H);
-      var cxs = [cloudX(0, now, W, cg, spd), cloudX(1, now, W, cg, spd), cloudX(2, now, W, cg, spd)];
       var bob = Math.sin(now / 260) * 8;
 
-      if (phase === "dash") {
-        targetX = cxs[lane] / W;
-        dragonX += (targetX - dragonX) * Math.min(1, dt * 8);
-        if (Math.abs(targetX - dragonX) < 0.02) {
-          var res = LOGIC.pick(st, lane);
-          if (res) {
-            notice = "";
-            if (res.correct) {
-              var praise = PRAISES[Math.floor(Math.random() * PRAISES.length)];
-              if (praise === lastPraise) praise = PRAISES[(PRAISES.indexOf(praise) + 1) % PRAISES.length];
-              lastPraise = praise;
-              banner = (res.golden ? "☀️ MÂY VÀNG! " : "") + praise + " +" + res.points
-                + (res.earned ? " · Nhận " + ITEM_ICON[res.earned] + "!" : "");
-              bannerOk = true;
-              celebrateUntil = now + 600;
-              burst(cxs[lane], laneYs[lane]);
-            } else if (res.blocked) {
-              banner = "🛡️ Khiên đã chặn! Đáp án: " + res.correctWord;
-              bannerOk = true;
-              shakeUntil = now + 250;
-            } else {
-              banner = "Sai rồi! Đáp án: " + res.correctWord;
-              bannerOk = false;
-              shakeUntil = now + 300;
-            }
-            phase = "resolve";
-            resolveUntil = now + 1200;
-            hud();
-          } else { phase = "fly"; dragonX = 0.16; targetX = 0.16; }
+      /* Thả đợt mây mới sau khoảng nghỉ ngắn giữa các đợt. */
+      if (!st.waveLive && !st.over && now >= waveGapUntil) {
+        if (LOGIC.spawnWave(st) && st.speed[st.round]) {
+          notice = "⚡ VÒNG TỐC ĐỘ — ĐIỂM ×2!";
+          noticeUntil = now + 1400;
         }
       }
-      if (phase === "resolve" && now >= resolveUntil) {
-        phase = "fly";
-        dragonX = 0.16;
-        targetX = 0.16;
-        banner = "";
-        shown = st.round;
+      /* Trôi mây + va chạm: mây từ gọi pick() cũ, mây giông trừ tim. */
+      var evs = LOGIC.tickClouds(st, dt, now, lane);
+      evs.forEach(function (ev) {
+        var res = ev.res;
+        if (ev.type === "correct") {
+          var praise = PRAISES[Math.floor(Math.random() * PRAISES.length)];
+          if (praise === lastPraise) praise = PRAISES[(PRAISES.indexOf(praise) + 1) % PRAISES.length];
+          lastPraise = praise;
+          banner = (res.golden ? "☀️ MÂY VÀNG! " : "") + praise + " +" + res.points
+            + (res.earned ? " · Nhận " + ITEM_ICON[res.earned] + "!" : "");
+          bannerOk = true;
+          celebrateUntil = now + 600;
+          burst(W * LOGIC.dragonX, laneYs[lane]);
+          waveGapUntil = now + 1000;
+        } else if (ev.type === "blocked") {
+          banner = "🛡️ Khiên đã chặn! Đáp án: " + res.correctWord;
+          bannerOk = true;
+          shakeUntil = now + 250;
+          waveGapUntil = now + 1000;
+        } else if (ev.type === "wrong") {
+          banner = "Sai rồi! Đáp án: " + res.correctWord;
+          bannerOk = false;
+          shakeUntil = now + 300;
+          waveGapUntil = now + 1000;
+        } else if (ev.type === "stormHit") {
+          banner = "⛈️ Mây giông! Đâm phải mất 1 tim — né sang làn khác!";
+          bannerOk = false;
+          shakeUntil = now + 300;
+        } else if (ev.type === "stormBlocked") {
+          banner = "🛡️ Khiên đã chặn mây giông!";
+          bannerOk = true;
+          shakeUntil = now + 250;
+        }
         hud();
-        var nIdx = Math.min(shown, st.rounds.length - 1);
-        if (st.speed[nIdx] && !st.over) { notice = "⚡ VÒNG TỐC ĐỘ — ĐIỂM ×2!"; noticeUntil = now + 1400; }
-      }
+      });
 
       var shaking = now < shakeUntil;
       if (shaking) { ctx.save(); ctx.translate((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 8); }
@@ -353,38 +401,54 @@
         ctx.beginPath(); ctx.moveTo(0, ly); ctx.lineTo(W, ly); ctx.stroke();
       });
       ctx.setLineDash([]);
-      if (rd) {
-        rd.options.forEach(function (opt, li) {
-          /* Mây rộng neo mép phải: từ dài ngắt 2 dòng + thu nhỏ, không
-             bao giờ tràn khỏi mây hay khỏi mép màn hình. */
-          var cx = cxs[li];
-          var cy = laneYs[li];
-          G71.drawCloudWide(ctx, cx, cy, cg.hw, cg.hh);
-          if (li === st.goldenLane[rdIdx]) {
-            ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 4;
-            ctx.beginPath(); ctx.ellipse(cx, cy, cg.hw + 6, cg.hh + 6, 0, 0, Math.PI * 2); ctx.stroke();
-            ctx.fillStyle = "#B45309";
-            G71.drawFitText(ctx, "★", cx + cg.hw - 6, cy - cg.hh - 4, 22, 15, 11, 1, "800");
-          }
-          if (phase === "resolve") {
-            if (opt === rd.correct) {
-              ctx.strokeStyle = "#1E9E6A"; ctx.lineWidth = 4;
-              ctx.beginPath(); ctx.ellipse(cx, cy, cg.hw + 5, cg.hh + 5, 0, 0, Math.PI * 2); ctx.stroke();
-            } else if (li === lane && !bannerOk) {
-              ctx.strokeStyle = "#DC2626"; ctx.lineWidth = 4;
-              ctx.beginPath(); ctx.ellipse(cx, cy, cg.hw + 5, cg.hh + 5, 0, 0, Math.PI * 2); ctx.stroke();
-            }
-          }
-          ctx.fillStyle = "#1F2430";
-          G71.drawFitText(ctx, opt, cx, cy, cg.hw * 2 - 24, 18, 11, 2, "700");
-        });
-      }
-      /* Chủ đề vòng (góc trái trên, sau mây để chữ luôn nổi). */
+      /* Mây trôi từ phải sang trái (v83): mỗi mây ở vị trí logic của nó;
+         mây từ trắng mang chữ, mây giông xám đậm có tia chớp — nhìn là
+         biết phải né. Mây đã qua rồng thì trôi tiếp ra khỏi sân. */
+      st.clouds.forEach(function (c) {
+        var cx = c.x * W;
+        var cy = laneYs[c.lane];
+        if (cx < -cg.hw - 20 || cx > W + cg.hw + 20) return;
+        if (c.kind === "storm") {
+          ctx.save();
+          ctx.fillStyle = "rgba(15,23,42,0.12)";
+          ctx.beginPath();
+          ctx.ellipse(cx, cy + cg.hh * 0.62, cg.hw * 0.9, cg.hh * 0.32, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#475569";
+          ctx.beginPath();
+          ctx.ellipse(cx - cg.hw * 0.55, cy + cg.hh * 0.08, cg.hw * 0.45, cg.hh * 0.62, 0, 0, Math.PI * 2);
+          ctx.ellipse(cx, cy - cg.hh * 0.18, cg.hw * 0.6, cg.hh * 0.72, 0, 0, Math.PI * 2);
+          ctx.ellipse(cx + cg.hw * 0.55, cy + cg.hh * 0.08, cg.hw * 0.45, cg.hh * 0.62, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillRect(cx - cg.hw, cy + cg.hh * 0.02, cg.hw * 2, cg.hh * 0.5);
+          ctx.fillStyle = "#FDE047";
+          ctx.beginPath();
+          ctx.moveTo(cx + 4, cy - 4); ctx.lineTo(cx - 6, cy + 12); ctx.lineTo(cx, cy + 12);
+          ctx.lineTo(cx - 4, cy + 26); ctx.lineTo(cx + 8, cy + 8); ctx.lineTo(cx + 2, cy + 8);
+          ctx.closePath(); ctx.fill();
+          ctx.restore();
+          return;
+        }
+        G71.drawCloudWide(ctx, cx, cy, cg.hw, cg.hh);
+        if (c.golden) {
+          ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 4;
+          ctx.beginPath(); ctx.ellipse(cx, cy, cg.hw + 6, cg.hh + 6, 0, 0, Math.PI * 2); ctx.stroke();
+          ctx.fillStyle = "#B45309";
+          G71.drawFitText(ctx, "★", cx + cg.hw - 6, cy - cg.hh - 4, 22, 15, 11, 1, "800");
+        }
+        ctx.fillStyle = "#1F2430";
+        G71.drawFitText(ctx, c.word, cx, cy, cg.hw * 2 - 24, 18, 11, 2, "700");
+      });
+      /* Chủ đề vòng (góc trái trên): nền trắng đặc để chữ không đè lên
+         mây trôi phía sau (sửa xấu 18:11). */
       if (rd && rd.theme) {
         var labelW = Math.min(W * 0.42, 180);
         var label = "Chủ đề: " + themeShort(rd.theme) + (speedRound ? " · ⚡×2" : "");
-        ctx.fillStyle = "rgba(31,36,48,.75)";
-        G71.drawFitText(ctx, label, 12 + labelW / 2, 20, labelW, 14, 10, 2, "700");
+        ctx.fillStyle = "rgba(255,255,255,.92)";
+        G71.rr(ctx, 8, 8, labelW + 16, 26, 13); ctx.fill();
+        ctx.strokeStyle = "rgba(31,36,48,.25)"; ctx.lineWidth = 1; ctx.stroke();
+        ctx.fillStyle = "rgba(31,36,48,.85)";
+        G71.drawFitText(ctx, label, 16 + labelW / 2, 21, labelW, 14, 10, 2, "700");
       }
       /* Rồng: bổng theo nhịp thở, nghiêng khi đổi làn, nhảy mừng khi đúng,
          rung nhẹ khi sai. */
@@ -394,9 +458,9 @@
       var tilt = Math.max(-0.22, Math.min(0.22, (dy - dragonY) * 0.004));
       dragonY = dy;
       ctx.save();
-      ctx.translate(W * dragonX + dj, dy);
+      ctx.translate(W * LOGIC.dragonX + dj, dy);
       ctx.rotate(tilt);
-      G71.drawDragon(ctx, 0, 0, 30);
+      G71.drawDragon(ctx, 0, 0, 38);
       ctx.restore();
       G71.drawSnake(ctx, W * 0.08, H - 44, 20, false);
       /* Hạt nổ khi chọn đúng. */
