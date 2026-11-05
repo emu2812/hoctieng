@@ -296,6 +296,10 @@ body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none
 <script src="config.js"></script>
 <script src="content.js"></script>
 <script src="content-new.js"></script>
+<script src="g71_common.js"></script>
+<script src="g71_luyen_go.js"></script>
+<script src="g71_rong_bay.js"></script>
+<script src="g71_ban_bong_bong.js"></script>
 <script>
 "use strict";
 /* ============ SHELL BẢN MỚI — GIAI ĐOẠN 1 ============
@@ -1528,6 +1532,7 @@ function render() {
   else if (curTab === "practice") { if (state.track === "zh") viewPracticeZh(app); else if (state.track === "tc") viewPracticeTc(app); else if (state.track === "tp") viewPracticeTp(app); else viewPractice(app); }
   else if (curTab === "review") { if (state.track === "zh") viewReviewZh(app); else if (state.track === "tc") viewReviewTc(app); else if (state.track === "tp") viewReviewTp(app); else viewReview(app); }
   else if (curTab === "native") viewNative(app);
+  else if (curTab === "games") viewGamesHub(app);
   else viewMine(app);
   u7PositionUpdate(); updateBottomBar(); wireTrackSwitch(); wireTypeEntryRow();
 }
@@ -1796,7 +1801,7 @@ function zhPositionText() {
     if (p) return base + " · Chặng " + p.stage + " · " + p.done + "/" + p.total + " bước học đã xong" + phSeg;
     return base;
   }
-  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi" };
+  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", games: "Trò chơi" };
   var cur = zhPositionCurrent();
   if (cur) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + "Chặng " + cur.stage + " · " + cur.done + "/" + cur.total + " bước học đã xong" + phSeg;
   return "Vị trí: " + (tabMap[curTab] || curTab);
@@ -1884,7 +1889,7 @@ function u7PositionText() {
     if (hp && hp.band) return "Vị trí: " + label + " · " + enChapterLabel(hp.band) + " · " + hp.done + "/" + hp.total + " bước đã xong";
     return "Vị trí: " + label;
   }
-  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi" };
+  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", games: "Trò chơi" };
   var hp2 = null; try { hp2 = homePathInfo(); } catch (e) {}
   if (hp2 && hp2.band) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + enChapterLabel(hp2.band) + " · " + hp2.done + "/" + hp2.total + " bước đã xong";
   return "Vị trí: " + (tabMap[curTab] || curTab);
@@ -1976,7 +1981,8 @@ var HOME_NAV_MAP = [
   { label: "📚 Từ vựng", target: "practice", kind: "tab", section: "practiceGrpVocab" },
   { label: "🗣️ Luyện nói", target: "practice", kind: "tab", section: "practiceGrpSpeak" },
   { label: "🎓 Luyện thi", target: "practice", kind: "tab", section: "practiceGrpExam" },
-  { label: "📖 Truyện", target: "practice", kind: "tab", section: "practiceGrpStory" }
+  { label: "📖 Truyện", target: "practice", kind: "tab", section: "practiceGrpStory" },
+  { label: "🎮 Trò chơi", target: "games", kind: "view", section: "" }
 ];
 function homeNavGo(entry) {
   if (!entry) return;
@@ -1990,6 +1996,41 @@ function homeSidebarHTML() {
   return '<aside class="home-sidebar" aria-label="Điều hướng chính"><nav>' + HOME_NAV_MAP.map(function (e, i) {
     return '<button class="btn home-navbtn" data-homenav="' + i + '">' + e.label + '</button>';
   }).join("") + '</nav></aside>';
+}
+/* v71 — Khu Trò chơi mới: đúng 3 game, mở bằng nút data-g71game (không dùng
+   dây nối của game cũ). Thắng +10 XP bằng hàm sẵn có; thua không
+   trừ gì. Từ vựng lấy từ kho bài học tiếng Anh. */
+function viewGamesHub(app) {
+  var cards = [
+    { key: "go", icon: "msc-dragon", title: "⌨️ Luyện Gõ",
+      desc: "Từ rơi như viên thuốc trong vũ trụ — gõ đúng chữ để bắn hạ. Gõ hết 20 từ là thắng; gõ sai hoặc để từ rơi xuống đáy là mất tim." },
+    { key: "dragon", icon: "msc-dragon", title: "🐉 Rồng Bay Trên Mây",
+      desc: "Rồng bay trên 3 làn mây. Đọc nghĩa tiếng Việt rồi bay vào làn có từ đúng. Đúng hiện CHUẨN!, sai mất tim. Hết 10 vòng còn tim là thắng." },
+    { key: "bubble", icon: "msc-snake", title: "🫧 Bắn Bong Bóng",
+      desc: "Bong bóng mang từ tiếng Anh nổi dưới nước. Ngắm pháo, bắn vỡ đúng bong bóng. Đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim." }
+  ];
+  var html = trackSwitchHTML();
+  html += '<h2>Trò chơi</h2>';
+  html += '<p class="mut">Khu chơi có thắng thua và mất tim — riêng khu này thôi; phần học vẫn không gây áp lực. Rồng và Rắn dẫn đường cho bạn.</p>';
+  html += '<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:16px 0;">';
+  cards.forEach(function (c) {
+    html += '<section class="card"><svg style="width:88px;height:66px;" aria-hidden="true"><use href="#' + c.icon + '"></use></svg>'
+      + '<h3>' + c.title + '</h3><p>' + c.desc + '</p>'
+      + '<div class="row"><button class="btn btn-primary" data-g71game="' + c.key + '">Chơi ngay</button></div></section>';
+  });
+  html += '</div>';
+  html += '<div class="row"><button class="btn" id="g71HubHome">← Về trang chủ</button></div>';
+  app.innerHTML = html;
+  $$("[data-g71game]", app).forEach(function (b) {
+    b.onclick = function () {
+      var k = b.getAttribute("data-g71game");
+      if (k === "go") G71LuyenGo.start();
+      else if (k === "dragon") G71RongBay.start();
+      else if (k === "bubble") G71BanBongBong.start();
+    };
+  });
+  var back = app.querySelector("#g71HubHome");
+  if (back) back.onclick = function () { go("home"); };
 }
 function homeSearchEntries() {
   var out = [];
