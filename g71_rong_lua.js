@@ -1,4 +1,4 @@
-/* G71 — Rồng Lửa RPG, vertical slice vùng 1 Rừng Xanh (v77).
+/* G71 — Rồng Lửa RPG, vertical slice vùng 1 Rừng Xanh (v80: ảnh Canva).
    Cốt truyện: vương quốc Ngôn Ngữ bị Bóng Tối Câm Lặng phong ấn, các từ
    bị đánh cắp; rồng nhỏ đi thu hồi từng từ. Vùng 1: 3 ải, mỗi ải 3 trận.
    Quái tiến tới mang từ; tung chiêu = gõ/chạm đúng từ. Chiêu có hệ
@@ -9,7 +9,8 @@
    dùng nhiều thăng cấp (tối đa cấp 3). Thắng rơi vàng, cửa hàng giữa các
    trận (bình máu/khiên). Trùm cuối vùng 1 đổi hệ sau mỗi 1/3 máu.
    Từ lấy từ kho CONTENT.vocab sẵn có, chủ đề thiên nhiên — không bịa.
-   Hình vẽ bằng code theo ART_DIRECTION.md (chàm + hổ phách + teal).
+   Hình: ảnh Canva vùng 1 (assets/ronglua/) theo ART_DIRECTION.md;
+   bản vẽ code giữ làm dự phòng khi ảnh lỗi/chưa load xong.
    Logic thuần (không cần canvas) để probe kiểm tra được; start() nối DOM. */
 (function () {
   "use strict";
@@ -32,6 +33,47 @@
   };
   var EL_ORDER = ["fire", "water", "elec"];
   function nextEl(k) { return EL_ORDER[(EL_ORDER.indexOf(k) + 1) % EL_ORDER.length]; }
+
+  /* ---- Ảnh Canva vùng 1 Rừng Xanh (v80): vẽ bằng ảnh, bản vẽ code
+     làm dự phòng — ảnh lỗi hoặc chưa load xong thì vẽ lại bằng code như
+     cũ, game không vỡ. Ảnh đã tối ưu ở assets/ronglua/ (nền ≤1600px,
+     sprite cạnh dài ≤512px, huy hiệu cắt từ ảnh quái biến thể). ---- */
+  var RL_ART = "assets/ronglua/";
+  var RL_IMGS = {
+    bg: "nen-rung.png", dragon: "rong-lua-nho.png", monster: "quai-bong-toi.png",
+    badge_fire: "quai-lua-badge.png", badge_water: "quai-nuoc-badge.png",
+    badge_elec: "quai-dien-badge.png",
+    coin: "dong-xu-vang.png", potion: "binh-thuoc.png", shield: "khien.png"
+  };
+  var rlImg = {};
+  function rlLoadImg(name) {
+    var rec = { img: null, ok: false };
+    try {
+      var im = new Image();
+      im.onload = function () { rec.ok = !!(im.naturalWidth && im.naturalHeight); };
+      im.onerror = function () { rec.ok = false; };
+      im.src = RL_ART + RL_IMGS[name];
+      rec.img = im;
+    } catch (e) { rec.ok = false; }
+    rlImg[name] = rec;
+  }
+  Object.keys(RL_IMGS).forEach(rlLoadImg);
+  function rlReady(name) {
+    var r = rlImg[name];
+    return !!(r && r.img && r.ok && r.img.complete && r.img.naturalWidth > 0);
+  }
+  function rlDrawCover(ctx, name, W, H) {
+    if (!rlReady(name)) return false;
+    var im = rlImg[name].img, iw = im.naturalWidth, ih = im.naturalHeight;
+    var sc = Math.max(W / iw, H / ih);
+    var dw = iw * sc, dh = ih * sc;
+    ctx.drawImage(im, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    return true;
+  }
+  /* Ảnh nhỏ dùng trong DOM (vàng/bình/khiên ở bản đồ, cửa hàng, HUD). */
+  function rlImgTag(name, size) {
+    return '<img src="' + RL_ART + RL_IMGS[name] + '" alt="" style="width:' + size + 'px;height:' + size + 'px;vertical-align:-4px">';
+  }
 
   var POTION_COST = 20, POTION_HEAL = 2, SHIELD_COST = 25;
   var BATTLE_XP = 5, BOSS_GOLD = 30, MONSTER_GOLD = 5;
@@ -289,10 +331,14 @@
     drawElIcon(ctx, el, x, y, r * 0.62);
     ctx.restore();
   }
-  /* Rừng Xanh lúc chạng vạng: nhiều lớp có chiều sâu — trời chàm, quầng
-     teal chân trời, hàng cây xa mờ, hàng cây giữa, mặt đất, bụi cây tiền
-     cảnh làm khung, đom đóm hổ phách bay + sương teal trôi. */
+  /* Rừng Xanh: ảnh nền Canva (cover) khi ảnh đã load; bản vẽ code lúc
+     chạng vạng làm dự phòng. Sương teal + đom đóm hổ phách vẽ bằng code
+     làm lớp phủ chuyển động trên cả hai trường hợp. */
   function paintForest(ctx, W, H, t) {
+    var useImg = rlReady("bg");
+    if (useImg) {
+      rlDrawCover(ctx, "bg", W, H);
+    } else {
     var g = ctx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, C.ink950); g.addColorStop(0.55, C.ink900); g.addColorStop(1, C.ink800);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
@@ -317,15 +363,18 @@
       ctx.beginPath(); ctx.arc(tx, H * 0.66, tr, 0, Math.PI * 2); ctx.fill();
       ctx.fillRect(tx - tr * 0.08, H * 0.66, tr * 0.16, H * 0.1);
     }
+    }
     /* Sương teal trôi. */
     ctx.fillStyle = "rgba(13,148,136,.07)";
     for (var m = 0; m < 3; m++) {
       var mx = ((t / 9000 + m * 0.37) % 1.3 - 0.15) * W;
       ctx.beginPath(); ctx.ellipse(mx, H * (0.58 + m * 0.08), W * 0.24, H * 0.035, 0, 0, Math.PI * 2); ctx.fill();
     }
-    /* Mặt đất. */
+    if (!useImg) {
+    /* Mặt đất (chỉ bản vẽ code). */
     ctx.fillStyle = C.ink900;
     ctx.fillRect(0, H * 0.74, W, H * 0.26);
+    }
     /* Đom đóm hổ phách bay (điểm sáng, không blur thật). */
     for (var f = 0; f < 14; f++) {
       var fx = (f * 97 + Math.sin(t / 1400 + f * 2.1) * 14) % W;
@@ -338,15 +387,35 @@
       ctx.beginPath(); ctx.arc(fx, fy, 5, 0, Math.PI * 2); ctx.fill();
     }
     ctx.globalAlpha = 1;
-    /* Bụi cây tiền cảnh hai bên đáy làm khung (chàm đậm nhất). */
+    if (!useImg) {
+    /* Bụi cây tiền cảnh hai bên đáy làm khung (chàm đậm nhất, chỉ bản vẽ code). */
     ctx.fillStyle = C.ink950;
     ctx.beginPath(); ctx.ellipse(W * 0.06, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(W * 0.94, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+    }
   }
   /* Rồng nhỏ nhìn lên (hướng quái rơi xuống): thân chàm đậm, bụng + sừng
      hổ phách nhạt, cánh hổ phách vỗ nhẹ, điểm sáng trắng ở trên-trái,
      bóng đổ ellipse dưới thân, viền 2px. */
   function drawDragonUp(ctx, x, y, s, t, hurt) {
+    if (rlReady("dragon")) {
+      var dim = rlImg.dragon.img;
+      var dw = s * 4.7, dh = dw * dim.naturalHeight / dim.naturalWidth;
+      /* Bóng đổ dưới thân. */
+      ctx.save();
+      ctx.fillStyle = "rgba(0,0,0,.28)";
+      ctx.beginPath(); ctx.ellipse(x, y + dh * 0.44, dw * 0.4, 6, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      /* Rồng ảnh Canva: bổng nhẹ + nghiêng nhẹ theo nhịp; bị thương thì
+         nhấp nháy + lắc nhẹ. */
+      ctx.save();
+      ctx.translate(x, y + Math.sin(t / 500) * 3);
+      ctx.rotate(Math.sin(t / 700) * 0.05);
+      if (hurt) { ctx.globalAlpha = 0.55; ctx.translate((Math.random() - 0.5) * 4, 0); }
+      ctx.drawImage(dim, -dw / 2, -dh / 2, dw, dh);
+      ctx.restore();
+      return;
+    }
     ctx.save();
     ctx.translate(x, y);
     /* Bóng đổ dưới thân. */
@@ -401,7 +470,16 @@
     /* Bóng đổ dưới quái. */
     ctx.fillStyle = "rgba(0,0,0,.25)";
     ctx.beginPath(); ctx.ellipse(px, py + s * 0.95, s * 0.9, s * 0.22, 0, 0, Math.PI * 2); ctx.fill();
-    /* Thân khối bóng tối. */
+    if (rlReady("monster")) {
+      var mim = rlImg.monster.img;
+      var mw = s * 2.7, mh = mw * mim.naturalHeight / mim.naturalWidth;
+      ctx.drawImage(mim, px - mw / 2, py - mh / 2 - s * 0.1, mw, mh);
+      if (locked) {
+        ctx.strokeStyle = C.amber500; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.ellipse(px, py - s * 0.1, mw * 0.52, mh * 0.5, 0, 0, Math.PI * 2); ctx.stroke();
+      }
+    } else {
+    /* Thân khối bóng tối (bản vẽ code, dự phòng). */
     ctx.fillStyle = C.ink800;
     ctx.strokeStyle = locked ? C.amber500 : C.ink300;
     ctx.lineWidth = 2;
@@ -420,8 +498,16 @@
     /* Điểm sáng trên-trái thân. */
     ctx.fillStyle = "rgba(255,255,255,.2)";
     ctx.beginPath(); ctx.ellipse(px - s * 0.4, py - s * 0.4, s * 0.28, s * 0.12, -0.5, 0, Math.PI * 2); ctx.fill();
-    /* Huy hiệu hệ yếu ở góc phải. */
-    drawElBadge(ctx, m.weak, px + s * 0.85, py - s * 0.75, 9);
+    }
+    /* Huy hiệu hệ yếu ở góc phải: ảnh badge Canva cắt từ quái biến thể,
+       không thì huy hiệu vector cũ. */
+    var badgeKey = { fire: "badge_fire", water: "badge_water", elec: "badge_elec" }[m.weak];
+    var bgx = px + s * 0.85, bgy = py - s * 0.75;
+    if (rlReady(badgeKey)) {
+      ctx.drawImage(rlImg[badgeKey].img, bgx - 12, bgy - 12, 24, 24);
+    } else {
+      drawElBadge(ctx, m.weak, bgx, bgy, 9);
+    }
     /* Thanh máu. */
     var bw = s * 1.9, bx = px - bw / 2, by = py - s * 1.35;
     ctx.fillStyle = C.grey400;
@@ -559,7 +645,7 @@
     var dictCount = Object.keys(RL.dict).length;
     var html = '<h2 style="margin:4px 0 2px;">🌲 Rừng Xanh — Vùng 1</h2>'
       + '<p class="mut" style="margin:6px 0 12px;">Vương quốc Ngôn Ngữ bị Bóng Tối Câm Lặng phong ấn, các từ bị đánh cắp. Rồng nhỏ lên đường thu hồi từng từ — bắt đầu từ Rừng Xanh.</p>'
-      + '<p style="font-weight:700;margin:6px 0;">🪙 Vàng: ' + RL.gold + (RL.shield ? ' &nbsp;·&nbsp; 🛡️ Khiên: ' + RL.shield : '') + '</p>'
+      + '<p style="font-weight:700;margin:6px 0;">' + rlImgTag("coin", 20) + ' Vàng: ' + RL.gold + (RL.shield ? ' &nbsp;·&nbsp; ' + rlImgTag("shield", 20) + ' Khiên: ' + RL.shield : '') + '</p>'
       + '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0;">';
     [1, 2, 3].forEach(function (lv) {
       var cleared = !!RL.cleared[lv];
@@ -711,8 +797,8 @@
     var html = '<h2 style="margin:4px 0 2px;">🛒 Cửa hàng</h2>'
       + '<p class="mut" style="margin:6px 0 12px;">Thắng trận ' + run.battle + ' ải ' + run.level + '! Mua đồ chuẩn bị cho trận tiếp theo. Vàng của bạn: <b>' + RL.gold + '</b> · Tim rồng: ' + run.hearts + '/5</p>'
       + '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">'
-      + '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">🧪 Bình máu — 20 vàng</h3><p class="mut">Hồi 2 tim cho rồng (tối đa 5).</p><div class="row"><button class="btn btn-primary" id="rlBuyPotion"' + (canPotion ? '' : ' disabled') + '>Mua</button></div></section>'
-      + '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">🛡️ Khiên — 25 vàng</h3><p class="mut">Chặn 1 đòn quái chạm tới rồng trong ải này.</p><div class="row"><button class="btn btn-primary" id="rlBuyShield"' + (canShield ? '' : ' disabled') + '>Mua</button></div></section>'
+      + '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">' + rlImgTag("potion", 22) + ' Bình máu — 20 vàng</h3><p class="mut">Hồi 2 tim cho rồng (tối đa 5).</p><div class="row"><button class="btn btn-primary" id="rlBuyPotion"' + (canPotion ? '' : ' disabled') + '>Mua</button></div></section>'
+      + '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">' + rlImgTag("shield", 22) + ' Khiên — 25 vàng</h3><p class="mut">Chặn 1 đòn quái chạm tới rồng trong ải này.</p><div class="row"><button class="btn btn-primary" id="rlBuyShield"' + (canShield ? '' : ' disabled') + '>Mua</button></div></section>'
       + '</div>'
       + '<div class="row" style="margin-top:14px;"><button class="btn btn-primary" id="rlNextBattle">Trận tiếp theo →</button><button class="btn" id="rlShopMap">Về bản đồ</button></div>';
     box.innerHTML = html;
@@ -739,12 +825,12 @@
     var el = ELEMENTS[battle.element];
     stage.hud.innerHTML = "<span style=\"flex:none\">Ải " + run.level + "-" + battle.battle + "</span>"
       + "<span style=\"flex:none\">" + heartsSvg(battle.hearts, 5) + "</span>"
-      + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">Vàng: " + RL.gold
+      + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">" + rlImgTag("coin", 16) + " Vàng: " + RL.gold
       + " · Combo x" + Math.min(3, 1 + battle.combo)
       + " · Quái còn: " + (battle.total - battle.resolved) + "</span>"
       + "<span style=\"flex:none\">" + el.icon + " " + el.name + "</span>";
     var tag = document.getElementById("rlShieldTag");
-    if (tag) tag.textContent = battle.shield > 0 ? "🛡️ x" + battle.shield : "";
+    if (tag) tag.innerHTML = battle.shield > 0 ? rlImgTag("shield", 18) + " x" + battle.shield : "";
   }
 
   function burst(x, y, el) {
@@ -865,6 +951,7 @@
 
   window.G71RongLua = {
     start: start, logic: LOGIC, elements: ELEMENTS, heartsSvg: heartsSvg,
+    art: { ready: rlReady, base: RL_ART, files: RL_IMGS },
     store: { load: loadRL, save: saveRL, fresh: freshRL },
     /* Mỏ neo cho probe: đọc trạng thái chơi hiện tại (chế độ, trận, lượt chạy, tiến trình). */
     debug: function () { return { mode: mode, battle: battle, run: run, rl: RL }; }
