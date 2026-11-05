@@ -155,7 +155,7 @@ body.has-bottombar #btnBack{display:none}
 #appFooter{margin:28px 0 0;border-top:1.5px solid var(--line2);padding:20px 0 0}
 .foot-grid{display:grid;gap:16px;grid-template-columns:1.4fr 1fr 1fr 1fr}
 @media(min-width:901px){.tabbar{display:none}.app-col .lessonframe{top:70px}}
-@media(max-width:900px){.app-frame{display:block}.app-sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:60;width:280px;max-height:none;border-radius:0;overflow-y:auto}body.sidebar-open .app-sidebar{display:flex}.tabbar{top:70px}.foot-grid{grid-template-columns:1fr 1fr}.tb-track{display:none}#tbAccountBtn{display:none}}
+@media(max-width:900px){.app-frame{display:block}.app-sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:60;width:280px;max-height:none;border-radius:0;overflow-y:auto}body.sidebar-open .app-sidebar{display:flex}.tabbar{top:70px}.foot-grid{grid-template-columns:1fr 1fr}.tb-track{display:none}#tbAccountBtn{display:none}#appSidebarNav{display:none}#sbCollapseBtn{display:none}.tb-spacer{display:none}#tutorFloatBtn span{display:none}}
 body.sidebar-collapsed .app-frame{grid-template-columns:64px minmax(0,1fr)}
 body.sidebar-collapsed .sb-logo h1,body.sidebar-collapsed .sb-tag,body.sidebar-collapsed .sb-txt,body.sidebar-collapsed .sb-profile{display:none}
 body.sidebar-collapsed .sb-mark{display:block;font-size:28px;text-align:center}
@@ -338,7 +338,7 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <div class="sb-bottom"><button class="btn" id="sbCollapseBtn">« Thu gọn</button><div class="sb-profile" id="sbProfile"></div></div>
 </aside>
 <div class="app-col">
-<header class="app-topbar"><button class="btn" id="tbMenuBtn" aria-label="Mở hoặc đóng thanh bên">☰</button><input type="text" id="tbSearchInp" placeholder="🔍 Tìm bài học…" aria-label="Tìm bài học"><span class="tb-spacer"></span><span class="tb-track" id="tbTrackLabel"></span><button id="tutorFloatBtn" aria-label="Gia sư AI" title="Gia sư AI">🤖 Gia sư AI</button><button class="btn" id="tbAccountBtn">Tài khoản</button></header>
+<header class="app-topbar"><button class="btn" id="tbMenuBtn" aria-label="Mở hoặc đóng thanh bên">☰</button><input type="text" id="tbSearchInp" placeholder="🔍 Tìm bài học…" aria-label="Tìm bài học"><span class="tb-spacer"></span><span class="tb-track" id="tbTrackLabel"></span><button id="tutorFloatBtn" aria-label="Gia sư AI" title="Gia sư AI">🤖 <span>Gia sư AI</span></button><button class="btn" id="tbAccountBtn">Tài khoản</button></header>
 <div id="previewBanner">Bạn đang ở chế độ khách — tiến trình lưu trên máy này, chưa đồng bộ tài khoản. Đăng nhập ở mục Của tôi → Tài khoản để đồng bộ.</div>
 <nav class="tabbar" id="tabBar">
 <button class="tab" data-tab="home">Học</button>
@@ -348,6 +348,7 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <button class="tab" data-tab="review">Ôn tập</button>
 <button class="tab" data-tab="native">Giao tiếp bản địa</button>
 <button class="tab" data-tab="mine">Của tôi</button>
+<button class="tab" data-tab="games">Trò chơi</button>
 </nav>
 <main id="app"><div class="card"><p>Đang tải bài học…</p></div></main>
 <footer id="appFooter"><div><b>🐉 Học ngoại ngữ từ đầu</b><p class="mut">Nội dung tự soạn 100% · Miễn phí · Không quảng cáo giữa bài.</p></div><p class="mut">Học từ đầu, tới giao tiếp thật.</p></footer>
@@ -1648,7 +1649,7 @@ function tcTpLockFor(isTc, id) {
   if (next) showLockModal("Bài này mở khi bạn học xong 80% " + pv + " (chuẩn nội bộ).", next.meta.title, function () { openFn(next.id, curTab); });
   else toast("Chặng này chưa mở — học xong 80% " + pv + " đã.");
 }
-function typeEntryRowHTML(track) {
+function typeEntryRowHTML(track, flat) {
   var btns = typeEntryTypes().map(function (t) {
     var r = typeEntryResolve(track, t.k);
     /* DOT SOI-D9b 02/11: track TOEIC chi co Nghe-Doc nen an han nut loai thieu
@@ -1657,6 +1658,7 @@ function typeEntryRowHTML(track) {
     var sub = r.status === "done" ? "Đã xong hết — ôn lại: " + typeEntryShort(r.title) : (r.status === "locked" ? "Chưa mở: " + typeEntryShort(r.title) : "Tiếp theo: " + typeEntryShort(r.title));
     return '<button class="btn" data-typeentry="' + track + ':' + t.k + '">' + t.label + '<br><span class="mut">' + esc(sub) + '</span></button>';
   }).join("");
+  if (flat) return '<div id="typeEntryRow"><p class="mut"><b>Vào nhanh theo loại:</b></p><div class="row">' + btns + '</div></div>';
   return '<section class="card" id="typeEntryRow"><p class="eyebrow">VÀO NHANH THEO LOẠI</p><p class="mut">Bấm một loại để tới bài mở được đầu tiên của loại đó — không cần mò qua tường nút.</p><div class="row">' + btns + '</div></section>';
 }
 function wireTypeEntryRow() {
@@ -2039,7 +2041,7 @@ function zhPositionText() {
   try { if (typeof ZH_PH_STEPS !== "undefined" && ZH_PH_STEPS.length && state && state.zhPhDone) { var pd = 0; ZH_PH_STEPS.forEach(function (s) { if (state.zhPhDone[s.id]) pd++; }); if (pd > 0) phSeg = " · Pinyin " + pd + "/" + ZH_PH_STEPS.length; } } catch (e) {}
   var zhTypeMap = { zhVocab: "Từ vựng", zhPh: "Phát âm Pinyin", zhGram: "Ngữ pháp", zhRead: "Bài Đọc", zhListen: "Bài Nghe", zhSpeak: "Bài Nói", zhRole: "Nhập vai", zhWrite: "Bài Viết", zhStroke: "Viết chữ", zhFace: "Nhận mặt chữ", zhEntry: "Kiểm tra đầu vào HSK", zhHskk: "Luyện HSKK", zhReviewSession: "Buổi ôn trộn", zhChapterTest: "Kiểm tra cuối chặng", zhMock: "Thi thử HSK" };
   if (typeof curLesson !== "undefined" && curLesson && zhTypeMap[curLesson.type]) {
-    var base = "Vị trí: " + zhTypeMap[curLesson.type] + (curLesson.title ? " · " + curLesson.title : "");
+    var base = zhTypeMap[curLesson.type];
     var st = zhPositionStage(curLesson);
     var p = (st != null) ? zhPositionProgress(st) : null;
     if (p) return base + " · Chặng " + p.stage + " · " + p.done + "/" + p.total + " bước học đã xong" + phSeg;
@@ -2047,8 +2049,8 @@ function zhPositionText() {
   }
   var tabMap = { home: "Học", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", games: "Trò chơi" };
   var cur = zhPositionCurrent();
-  if (cur) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + "Chặng " + cur.stage + " · " + cur.done + "/" + cur.total + " bước học đã xong" + phSeg;
-  return "Vị trí: " + (tabMap[curTab] || curTab);
+  if (cur) return "Chặng " + cur.stage + " · " + cur.done + "/" + cur.total + " bước học đã xong" + phSeg;
+  return "";
 }
 function enChapterLabel(band) { return band === "Band 0" ? "Chương 1" : "Chương " + band.replace(/^Band /, ""); }
 function enLessonBand(l) {
@@ -2110,40 +2112,43 @@ function u7PositionText() {
       var stP = stagesP[siP] || stagesP[0];
       var learnP = (stP.steps || []).filter(function (x) { var mm = isTcP ? tcStepMeta(x) : tpStepMeta(x); return mm && mm.kind !== "check" && mm.kind !== "mock"; });
       var dnP = 0; learnP.forEach(function (x) { if (doneP[x]) dnP++; });
-      return "Vị trí: " + (isTcP ? "TOEIC" : "TOPIK") + " · " + stP.title + " · đã xong " + dnP + "/" + learnP.length + " bước học" + (nxP ? " · Tiếp theo: " + nxP.meta.title : " · đã xong hết các bước hiện có");
+      return (isTcP ? "TOEIC" : "TOPIK") + " · " + stP.title + " · đã xong " + dnP + "/" + learnP.length + " bước học" + (nxP ? " · Tiếp theo: " + nxP.meta.title : " · đã xong hết các bước hiện có");
     }
   } catch (e) {}
-  /* UI 28/10 (GD-01/GD-05/V9): dinh dang thong nhat
-     "Vi tri: <Loai bai> · Chuong <X> · done/total buoc da xong".
-     Tieu de bai khong lap lai o Vi tri (lessonHead/skillHead da hien). */
+  /* UI 28/10 (GD-01/GD-05/V9) + v76: dinh dang thong nhat
+     "<Loai bai> · Chuong <X> · done/total buoc da xong" (khong tien to
+     "Vi tri:", khong ten tab o che do xem tab — ten tab da co o H1 +
+     chip dang chon; chi con tien do thi hien, khong thi an dong). */
   var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Kiểm tra phát âm đầu vào", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra đầu vào", entryPlace: "Xếp lớp đầu vào", dictation: "Nghe chép chính tả", reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
   if (typeof curLesson !== "undefined" && curLesson) {
     if (curLesson.step) {
       var ls = learningSteps(); var li = -1;
       for (var k = 0; k < ls.length; k++) if (ls[k].id === curLesson.step.id) li = k;
-      if (li >= 0) return "Vị trí: Chương 1 · Bước " + (li + 1) + "/" + ls.length;
-      return "Vị trí: Chương 1 · Bài kiểm tra cuối chương";
+      if (li >= 0) return "Chương 1 · Bước " + (li + 1) + "/" + ls.length;
+      return "Chương 1 · Bài kiểm tra cuối chương";
     }
     /* DOT SOI-D12 02/11: thi thu co chang rieng theo milestone, khong roi ve Chuong 1 mac dinh. */
-    if (curLesson.type === "mockTest" && curLesson.milestone) return "Vị trí: Thi thử · Chặng " + fmtBandComma(curLesson.milestone);
+    if (curLesson.type === "mockTest" && curLesson.milestone) return "Thi thử · Chặng " + fmtBandComma(curLesson.milestone);
     var label = typeMap[curLesson.type] || "Bài học";
     var ch = enLessonChapter(curLesson);
-    if (ch) return "Vị trí: " + label + " · " + ch.label + " · " + ch.done + "/" + ch.total + " bước đã xong";
+    if (ch) return label + " · " + ch.label + " · " + ch.done + "/" + ch.total + " bước đã xong";
     var hp = null; try { hp = homePathInfo(); } catch (e) {}
-    if (hp && hp.band) return "Vị trí: " + label + " · " + enChapterLabel(hp.band) + " · " + hp.done + "/" + hp.total + " bước đã xong";
-    return "Vị trí: " + label;
+    if (hp && hp.band) return label + " · " + enChapterLabel(hp.band) + " · " + hp.done + "/" + hp.total + " bước đã xong";
+    return label;
   }
   var tabMap = { home: "Học", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", games: "Trò chơi" };
   var hp2 = null; try { hp2 = homePathInfo(); } catch (e) {}
-  if (hp2 && hp2.band) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + enChapterLabel(hp2.band) + " · " + hp2.done + "/" + hp2.total + " bước đã xong";
-  return "Vị trí: " + (tabMap[curTab] || curTab);
+  if (hp2 && hp2.band) return enChapterLabel(hp2.band) + " · " + hp2.done + "/" + hp2.total + " bước đã xong";
+  return "";
 }
 function u7PositionUpdate() {
   var app = $("#app"); if (!app) return;
   var el = $("#u7Position");
   if (!el) { el = document.createElement("p"); el.id = "u7Position"; el.className = "mut"; }
   if (app.firstChild !== el) app.insertBefore(el, app.firstChild);
-  el.textContent = u7PositionText();
+  var t = u7PositionText();
+  el.textContent = t;
+  el.style.display = t ? "" : "none";
 }
 function u7TrialQs() {
   var set = (typeof CONTENT !== "undefined" && CONTENT.vocab) ? CONTENT.vocab[24] : null;
@@ -2219,7 +2224,7 @@ function goalStripText() {
      hoạt động, không bịa lịch sử. */
 var HOME_NAV_MAP = [
   { label: "🏠 Học", target: "home", kind: "tab", section: "" },
-  { label: "🗺️ Chủ đề", target: "roadmap", kind: "tab", section: "" },
+  { label: "🗺️ Bản đồ", target: "roadmap", kind: "tab", section: "" },
   { label: "🧭 Lộ trình riêng", target: "mypath", kind: "tab", section: "" },
   { label: "🎧 Luyện tập", target: "practice", kind: "tab", section: "" },
   { label: "🔁 Ôn tập", target: "review", kind: "tab", section: "" },
@@ -2998,36 +3003,16 @@ function viewPractice(app) {
   var html = trackSwitchHTML() + '<h2>Luyện tập</h2>'
     + '<section class="card next-card" id="practiceNextCard"><p class="eyebrow">TIẾP THEO NÊN LUYỆN</p><h3>' + esc(pT.title) + '</h3><p class="mut">' + esc(pT.type) + '</p>'
     + '<button class="btn btn-primary" id="practiceNextBtn">Tiếp theo nên luyện</button></section>'
-    + practiceFilterHTML() + dictationCardHTML() + storyCardHTML() + podcastCardHTML()
-    + typeEntryRowHTML("en")
+    + practiceFilterHTML(typeEntryRowHTML("en", true)) + dictationCardHTML() + storyCardHTML() + podcastCardHTML()
     + guideLine("practiceIntro", "Luyện riêng theo từng kỹ năng — mở nhóm cần luyện, bấm bài để học. Đây là chỗ tra cứu và luyện riêng từng kỹ năng — đường học chính vẫn ở tab Bản đồ.")
-    + '<details style="margin-top:8px"><summary><b>Xem nguồn nội dung</b></summary>'
-   
-    + '<p class="mut">Mọi bài dưới đây đều từ kho tự soạn của web — xem chi tiết nguồn trong Cài đặt → Nguồn nội dung.</p></details>'
-  /* --- 4 nhom theo muc dich (kieu Practice Hub cua Duolingo) --- */
-  var ppStageBtns = '<div class="row" style="margin-top:6px"><button class="btn" data-ppch="ch1">Chương 1: Chào hỏi và 44 âm</button>'
-    + RB_CHAPTER_MAP.slice(1).map(function (ch) { return '<button class="btn" data-ppch="' + esc(ch.band) + '">Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</button>'; }).join("") + '</div>'
-    + '<p class="mut">Bấm chương để học tiếp bước chưa xong đầu tiên của chương đó.</p>';
-  var ppTestBtns = (function () {
-    var rows = '<div class="row" style="margin-top:6px"><button class="btn" data-ppchtest="ch1">Kiểm tra cuối chương 1</button>';
-    RB_CHAPTER_MAP.slice(1).forEach(function (ch) {
-      var steps = rbChSteps(ch.band);
-      if (!steps.length) return;
-      var gateSteps = rbGateSteps(ch.band);
-      var dc = gateSteps.filter(function (st) { return rbStepDone(st); }).length;
-      var need = Math.ceil(gateSteps.length * 0.8);
-      var passed = !!((state.chapterTestDone || {})[ch.band]);
-      rows += '<button class="btn" data-ppchtest="' + esc(ch.band) + '"' + ((!passed && dc < need) ? ' disabled' : '') + '">Kiểm tra cuối chương ' + esc(ch.band) + (passed ? ' \u2713 (làm lại)' : (dc >= need ? '' : ' · chưa mở')) + '</button>';
-    });
-    return rows + '</div><p class="mut">Kiểm tra cuối chương mở khi xong 80% số bước chương (chuẩn nội bộ).</p>';
-  })();
-  html += '<details class="card practice-purpose" id="ppWeak"><summary><b>🎯 Ôn điểm yếu</b> — lỗi sai + mục khó đến hạn</summary><div id="ppWeakBody"></div></details>'
+  /* --- Nhom luyen tap theo muc dich (v76: gop vo boc + noi dung thanh mot khoi) --- */
+  html += '<div id="ppWeakSlot"></div>'
     + '<details class="card" id="practiceGrpTutor"><summary><b>🧑‍🏫 Trợ giảng — AI nâng cấp bài của bạn</b></summary>'
     + '<p class="mut">Bạn tự lập dàn ý Writing hoặc tự soạn câu trả lời Speaking bằng ý của mình trước, AI chỉ nâng cấp chính bài đó: giữ ý, gợi ý cụm nên dùng. AI không viết thay bài cho bạn.</p>'
     + '<div class="row"><button class="btn" data-spectutor="write">Lập dàn ý Writing →</button><button class="btn" data-spectutor="speak">Soạn câu trả lời Speaking →</button></div></details>'
-    + '<details class="card practice-purpose" id="ppSkill"><summary><b>📚 Theo kỹ năng</b> — từ vựng, ngữ pháp, đọc, nghe, nói, viết, gõ câu, trò chơi</summary><div id="ppSkillBody"></div></details>'
-    + '<details class="card practice-purpose" id="ppStage"><summary><b>🗺️ Theo chặng</b> — 13 chương + kiểm tra đầu vào</summary><div id="ppStageBody">' + ppStageBtns + '</div></details>'
-    + '<details class="card practice-purpose" id="ppExam"><summary><b>🎓 Thi cuối chương</b> — kiểm tra cuối chương (mở bước tiếp theo)</summary><div id="ppExamBody">' + ppTestBtns + '</div></details>';
+    + '<h3 id="ppSkillHead" style="margin-top:14px">📚 Theo kỹ năng</h3>'
+    + '<details class="card" id="ppStage"><summary><b>🗺️ Theo chặng</b> — bổ trợ + kiểm tra đầu vào</summary><div id="ppStageBody"></div></details>'
+    + '<div id="ppExamSlot"></div>';
   /* --- Tu vung: 89 bo xep theo band --- */
   var vocabByBand = {}, vocabBandOrder = [];
   CONTENT.vocab.forEach(function (s, i) {
@@ -3125,7 +3110,7 @@ function viewPractice(app) {
   html += '<details class="card" id="practiceGrpSpeak"><summary><b>🗣️ Nói — ' + c.speakTotal + ' kịch bản (Part 1: ' + c.speakP1 + ' · Part 2: ' + c.speakP2 + ' · Part 3: ' + c.speakP3 + ') + ' + c.roleplay + ' tình huống nhập vai' + nextTxt(speakNextItems) + '</b></summary>'
     + '<details style="margin-top:8px"><summary><b>Xem cách học Nói theo kịch bản</b></summary>'
     + '<p class="mut">Mỗi kịch bản: đọc hội thoại mẫu (giám khảo – thí sinh, kèm tiếng Việt), nghe từng câu, rồi làm câu hỏi từ vựng và cấu trúc rút ra từ chính bài mẫu. Nói Part 3 là thảo luận mở rộng, khó hơn Part 1. Part 3 chính thức từ Band 4,5; các bài Part 3 ở band thấp là “làm quen”, không tính vào cổng 80%.</p>'
-    + '<p class="mut">Muốn nói tự do với AI? Sang trang Giao tiếp bản địa (giữa Ôn tập và Của tôi): gõ tay hoặc nói live, không chấm điểm trong lúc nói.</p></details>';
+    + '</details>';
   [1, 2, 3].forEach(function (p) {
     var idxs = []; CONTENT.speaking.forEach(function (s, i) { if (s.partNum === p && s.part !== "Roleplay") idxs.push(i); });
     idxs.sort(function (a, b) { var ba = bandSortVal(CONTENT.speaking[a].band), bb = bandSortVal(CONTENT.speaking[b].band); return ba - bb || a - b; });
@@ -3187,7 +3172,7 @@ function viewPractice(app) {
    
     + '<div class="row"><button class="btn" data-mixedquiz="1">Đề tự sinh trộn dạng</button><button class="btn" data-clozespeak="1">Luyện nói cloze</button><button class="btn" data-videounknown="1">Video — đánh dấu không biết</button><button class="btn" data-speechanalyzer="1">Speech Analyzer 5 mảng</button></div></details>';
   /* --- On diem yeu --- */
-  html += '<details class="card" id="practiceGrpWeak"><summary><b>🎯 Buổi Ôn điểm yếu tự sinh</b></summary>'
+  html += '<details class="card" id="practiceGrpWeak"><summary><b>🎯 Ôn điểm yếu</b> — lỗi sai + mục khó đến hạn</summary>'
     + '<p class="mut">Tự sinh từ Sổ lỗi sai của bạn: câu sai nhiều nhất lên đầu, kèm phần yếu nhất từ kiểm tra.</p><p><button class="btn" data-weaksession="1">Mở buổi Ôn điểm yếu</button> <span class="mut">' + dueHard().length + ' mục đến hạn ôn</span></p></details>';
   /* --- Lop hoc + noi dung sach --- */
   html += '<details class="card" id="practiceGrpClass"><summary><b>🏫 Lớp học (Classes)</b></summary>' + u8ClassHTML() + '</details>';
@@ -3202,7 +3187,7 @@ function viewPractice(app) {
     + '<h3>Thi thử đúng format</h3>'
     + '<p class="mut">Thi thử gộp 4 kỹ năng như một kỳ thi thật: Nghe 40 câu (30 phút), Đọc 3 bài (60 phút), Viết Task 1 + Task 2 (60 phút), Nói Part 1-2-3 (14 phút). Mỗi phần thi có đồng hồ đếm ngược chạy thật, hết giờ bài tự nộp. Kết quả lưu thành mốc đã thi thử. Lần thi thử đầu tiên ở mỗi mốc là dạng có hướng dẫn (không bấm giờ); lưu mốc xong, các lần sau mới bấm giờ.</p>'
     + '<div class="row"><button class="btn" data-mocktest="4.5">Thi thử chặng 4,5</button><button class="btn" data-mocktest="5.5">Chặng 5,5</button><button class="btn" data-mocktest="6.5">Chặng 6,5</button><button class="btn" data-mocktest="7.5">Chặng 7,5+</button></div>'
-    + '<details style="margin-top:8px"><summary><b>Xem cách chọn bài thi thử</b></summary><p class="mut">Chặng chọn bài có độ khó gần chặng đó nhất trong kho; bài nào thay thế vì kho thiếu đúng độ khó sẽ ghi rõ trong màn thi.</p></details></details>';
+    + '<details style="margin-top:8px"><summary><b>Xem cách chọn bài thi thử</b></summary><p class="mut">Chặng chọn bài có độ khó gần chặng đó nhất trong kho; bài nào thay thế vì kho thiếu đúng độ khó sẽ ghi rõ trong màn thi.</p></details>' + '<p class="mut">Kiểm tra cuối chương mở khi xong 80% số bước chương (chuẩn nội bộ). Mở ở tab Bản đồ.</p></details>';
   /* --- Bo tro chuong 1 --- */
   html += '<details class="card" id="practiceGrpSupport"><summary><b>Bổ trợ — chương 1</b></summary>'
     + '<button class="step-row" data-practice="classroom"><span>Từ vựng lớp học đầu tiên (20 từ)</span><span class="st">→</span></button>'
@@ -3217,34 +3202,25 @@ function viewPractice(app) {
    
     + '<button class="step-row" data-entrycheck="zero"><span>Kiểm tra đầu vào — Band 0 (6 câu)</span><span class="st">' + (doneK("entryZero") ? '✓' : '→') + '</span></button>'
     + '<button class="step-row" data-entrycheck="trial"><span>Kiểm tra đầu vào — Band 5,0–7,5+ (16 câu)</span><span class="st">' + (doneK("entryTrial") ? '✓' : '→') + '</span></button></details>';
-  html += videoNewBlockHTML("en");
+  html += '<details style="margin-top:8px"><summary><b>Xem nguồn nội dung</b></summary><p class="mut">Mọi bài dưới đây đều từ kho tự soạn của web — xem chi tiết nguồn trong Cài đặt → Nguồn nội dung.</p></details>' + videoNewBlockHTML("en");
   app.innerHTML = html;
   videoSampleWire();
   videoVOAWire();
   (function () {
     var move = function (id, bodyId) { var el = document.getElementById(id), body = document.getElementById(bodyId); if (el && body) body.appendChild(el); };
-    move("practiceGrpWeak", "ppWeakBody");
-    ["practiceGrpVocab", "practiceGrpRead", "practiceGrpListen", "practiceGrpSpeak", "practiceGrpWrite", "practiceGrpGram", "practiceGrpTyping", "u7PlayCardPractice", "gd23Practice", "practiceGrpClass", "practiceGrpBk"].forEach(function (id) { move(id, "ppSkillBody"); });
+    var slotReplace = function (slotId, elId) { var sl = document.getElementById(slotId), el = document.getElementById(elId); if (sl && el) sl.replaceWith(el); };
+    slotReplace("ppWeakSlot", "practiceGrpWeak");
+    var head = document.getElementById("ppSkillHead");
+    ["practiceGrpVocab", "practiceGrpRead", "practiceGrpListen", "practiceGrpSpeak", "practiceGrpWrite", "practiceGrpGram", "practiceGrpTyping", "u7PlayCardPractice", "gd23Practice", "practiceGrpClass", "practiceGrpBk"].forEach(function (id) { var el = document.getElementById(id); if (el && head) { head.parentNode.insertBefore(el, head.nextSibling); head = el; } });
     ["practiceGrpSupport", "practiceGrpEntry"].forEach(function (id) { move(id, "ppStageBody"); });
-    move("practiceGrpExam", "ppExamBody");
+    slotReplace("ppExamSlot", "practiceGrpExam");
   })();
   (function () {
-    var px = document.getElementById("ppExamBody");
+    var px = document.getElementById("practiceGrpExam");
     if (px) { var dv = document.createElement("div"); dv.innerHTML = '<div class="qblock"><p><b>Xem thêm sau thi thử — bài thi mẫu để đối chiếu:</b></p>' + videoSlotIf("mockSheet:lizMock") + videoSlotIf("mockSheet:band9") + videoSlotIf("mockSheet:band7") + '</div>'; px.appendChild(dv); }
   })();
   $$("[data-writefilter]").forEach(function (b) { b.onclick = function () { var f = b.dataset.writefilter; $$("[data-writegrp]").forEach(function (g) { g.style.display = (f === "all" || g.dataset.writegrp === f) ? "" : "none"; }); $$("[data-writefilter]").forEach(function (x) { x.classList.toggle("btn-primary", x === b); }); }; });
   var pnb = $("#practiceNextBtn"); if (pnb) pnb.onclick = function () { openPracticeNext(practiceNextTarget()); };
-  $$("[data-ppch]").forEach(function (b) { b.onclick = function () {
-    lessonStart = Date.now(); runWrong = []; runFirstTry = {};
-    if (b.dataset.ppch === "ch1") { var ns = nextLearnStep(); openStep(ns || stepById("pron1"), { noNudge: true }); return; }
-    var st = rbFirstUndoneStep(b.dataset.ppch) || rbChSteps(b.dataset.ppch)[0];
-    if (st) openRoadmapStepLesson(st.lesson);
-  }; });
-  $$("[data-ppchtest]").forEach(function (b) { b.onclick = function () {
-    lessonStart = Date.now(); runWrong = []; runFirstTry = {};
-    if (b.dataset.ppchtest === "ch1") { openStep(stepById("test")); return; }
-    openLesson({ type: "chapterTest", band: b.dataset.ppchtest });
-  }; });
   $$("[data-practice]").forEach(function (btn) {
     btn.onclick = function () { openStep(stepById(btn.dataset.practice)); };
   });
@@ -9330,10 +9306,11 @@ function renderShadowListen(app, l, item, isLong) {
 }
 
 /* ---------- Lọc 3 trục + mục tiêu thi ở trang Luyện tập (mới) ---------- */
-function practiceFilterHTML() {
+function practiceFilterHTML(extra) {
   var bandOpts = '<option value="">Mọi trình độ</option>' + RB_CHAPTER_MAP.map(function (ch) { return '<option value="' + esc(ch.band) + '">' + esc(ch.band) + ' — ' + esc(ch.title) + '</option>'; }).join("");
   return '<section class="card" id="practiceFilterCard"><h3>🔎 Tìm bài theo kỹ năng, chủ đề, trình độ, mục tiêu thi</h3>'
-    + '<p class="mut">Lọc kho bài tự soạn của web — tìm được bài trong vài cú bấm. Lọc chỉ để tìm bài luyện thêm, không đổi lộ trình đan xen và số bước mỗi chặng.</p>'
+    + '<p class="mut">Vào nhanh theo loại bài, hoặc lọc kho bài tự soạn theo kỹ năng, chặng và cấp độ — kết quả hiện ngay dưới đây. Lọc chỉ để tìm bài luyện thêm, không đổi lộ trình đan xen và số bước mỗi chặng.</p>'
+    + (extra || "")
     + '<div class="row"><select id="pfSkill"><option value="">Mọi kỹ năng</option><option value="Từ vựng">Từ vựng</option><option value="Ngữ pháp">Ngữ pháp</option><option value="Đọc">Đọc</option><option value="Nghe">Nghe</option><option value="Nói">Nói</option><option value="Viết">Viết</option><option value="Gõ câu">Gõ câu</option><option value="Nghe chép">Nghe chép</option><option value="Shadowing">Shadowing</option><option value="Truyện ngắn">Truyện ngắn</option><option value="Podcast">Podcast</option></select> '
     + '<select id="pfBand">' + bandOpts + '</select> '
     + '<select id="pfExam"><option value="IELTS">Mục tiêu thi: IELTS</option><option value="HSK">Mục tiêu thi: HSK</option><option value="TOEIC">Mục tiêu thi: TOEIC</option><option value="TOPIK">Mục tiêu thi: TOPIK</option></select></div>'
