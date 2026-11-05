@@ -421,7 +421,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], vocabSkipped: [], chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", personalPath: null, personalExplain: "", myWords: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], vocabSkipped: [], chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", personalPath: null, personalExplain: "", myWords: [], myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -493,6 +493,278 @@ function myWordOpenSet(bank, setIdx) {
     else go("practice");
   } catch (e) { go("practice"); }
 }
+
+/* ---------- LUYỆN NGHE TỰ GẮN LINK (v87, Bùi chốt 07:02–07:12 05/11) ----------
+   Người học tự dán link video vào KHU LUYỆN NGHE CHUNG (khối "Video mới"
+   trong tab Luyện tập — có mặt ở cả 4 track), chỉ gắn nhãn "cá nhân",
+   KHÔNG tách khu riêng, KHÔNG thêm tab mới. Ô nhận link MỌI WEBSITE,
+   không chỉ YouTube.
+   Lưu trong state.myLinks (localStorage luôn; đăng nhập thì đồng bộ Supabase
+   qua bảng progress sẵn có, section rb:myLinks — không cần bảng mới). Khách
+   gộp vào tài khoản khi đăng nhập theo luật gộp chung (hợp theo link đã
+   chuẩn hóa, CỘNG DỒN, tài khoản thắng khi trùng). Chỉ lưu đúng trường an
+   toàn do hệ thống tự sinh (id, track, url, norm, kind, videoId, host,
+   title, vkey, createdAt) — KHÔNG nhận trường nội bộ từ ô nhập.
+   YouTube: phát trong trang bằng YouTube IFrame API (tải lười, chỉ khi bấm
+   Phát) để (a) nghe từng đoạn thật bằng nút −10s/+10s/nghe lại, (b) báo rõ
+   video riêng tư/tắt nhúng (lỗi 100/101/150) thay vì để khung trống. API
+   không tải được thì dùng khung nhúng thường làm dự phòng. Web khác: KHÔNG
+   nhúng (nhiều trang chặn nhúng) — vẫn lưu link, bấm mở tại nguồn.
+   Bài tập chỉ mở khi video có phụ đề thật trên web (VIDEO_LINES): nghe chép
+   theo câu + Shadowing dùng đúng 2 cỗ máy sẵn có của video VOA/mẫu (không
+   làm khung mới); podcast transcript từng câu là dạng nghe thụ động. Chưa có
+   phụ đề thì chỉ nghe/xem cho vui, ghi rõ "chưa có phụ đề để đối chiếu".
+   KHÔNG bịa phụ đề, KHÔNG dùng ASR. Truyện song ngữ + kiểm tra hiểu KHÔNG
+   mở cho link cá nhân vì cần câu hỏi kiểm tra hiểu viết tay cho từng video
+   (như 5 câu của VOA) — tự sinh câu hỏi từ phụ đề là bịa nội dung; nút
+   Truyện (nếu có) chỉ báo rõ lý do, không mở bài kiểm tra 0 câu. */
+function myLinkNormUrl(raw) {
+  return String(raw || "").trim();
+}
+function parseListenUrl(raw) {
+  var u = String(raw || "").trim();
+  if (!u) return { err: "Chưa dán link — dán link video vào ô rồi bấm Thêm link." };
+  if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(u)) u = "https://" + u;
+  var host = "", path = "", vq = null;
+  try {
+    var p = new URL(u);
+    host = String(p.hostname || "").toLowerCase();
+    path = p.pathname || "";
+    vq = p.searchParams ? p.searchParams.get("v") : null;
+  } catch (e) { return { err: "Link không đúng — kiểm tra lại rồi dán lại." }; }
+  if (!host || host.indexOf(".") < 0) return { err: "Link không đúng — kiểm tra lại rồi dán lại." };
+  var h = host.replace(/^www\./, "");
+  var vid = null;
+  if (h === "youtu.be") { vid = path.replace(/^\//, "").split("/")[0].split("?")[0]; }
+  else if (h === "youtube.com" || h === "m.youtube.com" || h === "music.youtube.com" || h === "youtube-nocookie.com") {
+    if (vq && /^[A-Za-z0-9_-]{11}$/.test(vq)) vid = vq;
+    else { var pm = path.match(/^\/(embed|shorts|v|live)\/([A-Za-z0-9_-]{11})/); if (pm) vid = pm[2]; }
+  }
+  if (vid && vid.length !== 11) vid = null;
+  if (vid) return { kind: "youtube", videoId: vid, host: host, url: u, norm: "yt:" + vid };
+  return { kind: "web", videoId: null, host: host, url: u, norm: "web:" + u.replace(/#.*$/, "").replace(/\/$/, "") };
+}
+function myLinksForTrack(track) {
+  return (state.myLinks || []).filter(function (m) { return m && m.track === track; }).sort(function (a, b) { return (a.createdAt || 0) - (b.createdAt || 0); });
+}
+function myLinkFindVideo(videoId) {
+  if (!videoId) return null;
+  var hit = null;
+  try {
+    if (typeof VIDEO_NEW !== "undefined") VIDEO_NEW.forEach(function (v) { if (v && v.id === videoId) hit = v; });
+  } catch (e) {}
+  if (hit) return hit;
+  /* Video VOA không nằm trong VIDEO_NEW mà chỉ có trong workspaceData()
+     (dự phòng ghi cứng id BKNJxpdNAtY) + VIDEO_LINES — khớp theo đó để
+     link VOA dán vào vẫn mở được bài tập đối chiếu phụ đề thật. */
+  try {
+    if (typeof workspaceData === "function") {
+      var w = workspaceData();
+      if (w && w.video && w.video.id === videoId) return { key: "voa-break-the-news", title: w.video.title };
+    }
+  } catch (e) {}
+  return null;
+}
+function myLinkLines(vkey) {
+  var lines = (typeof VIDEO_LINES !== "undefined") ? VIDEO_LINES[vkey] : null;
+  if (!lines || !lines.length) return null;
+  var ok = lines.filter(function (x) { return x && String(x.en || "").trim(); });
+  return ok.length ? ok : null;
+}
+function videoLinesEnsure(key) {
+  if (!window.__videoLinesIdx) window.__videoLinesIdx = {};
+  if (window.__videoLinesIdx[key]) return window.__videoLinesIdx[key];
+  var lines = myLinkLines(key);
+  if (!lines) return null;
+  var title = key;
+  try {
+    var all = videoNewList("en").concat(videoNewList("zh"), videoNewList("tc"), videoNewList("tp"));
+    all.forEach(function (v) { if (v.key === key) title = v.title; });
+  } catch (e) {}
+  var li = CONTENT.listeningPlus.length;
+  CONTENT.listeningPlus.push({ topic: title, section: "Video — link cá nhân", band: "", questions: [], text: lines.map(function (x) { return x.en; }).join(" ") });
+  var ri = CONTENT.reading.length;
+  CONTENT.reading.push({ title: title, topic: title, level: "", text: lines.map(function (x) { return x.en; }).join(" "), translation: lines.map(function (x) { return x.vi; }).join(" "), phrases: [], questions: [] });
+  var si = CONTENT.speaking.length;
+  CONTENT.speaking.push({ topic: title, band: "", lines: lines.map(function (x) { return { who: "Lời thoại", en: x.en, vi: x.vi }; }) });
+  window.__videoLinesIdx[key] = { listen: li, read: ri, speak: si };
+  return window.__videoLinesIdx[key];
+}
+function videoLinkWire() {
+  /* Nối chung cho mọi nút [data-vvideo] có phụ đề thật (kể cả video của web
+     gắn phụ đề sau này): nghe chép + Shadowing + podcast dùng đúng cỗ máy
+     của VOA/mẫu. Nút Truyện không mở bài kiểm tra 0 câu — chỉ báo rõ lý do.
+     Nút VOA đã nối bởi videoVOAWire thì bỏ qua. */
+  $$("[data-vvideo]").forEach(function (b) {
+    if (b.__voaWired || b.__vlinkWired) return;
+    b.__vlinkWired = true;
+    var key = b.dataset.vvideo, kind = b.dataset.vkind;
+    b.onclick = function () {
+      if (kind === "story") { toast("Truyện song ngữ của video này chưa có câu hỏi kiểm tra hiểu viết tay nên chưa mở được — vẫn nghe chép, Shadowing và podcast bình thường."); return; }
+      var idx = videoLinesEnsure(key);
+      if (!idx) { toast("Chưa có phụ đề thật của video này nên chưa mở được bài tập."); return; }
+      lessonStart = Date.now(); runWrong = []; runFirstTry = {};
+      if (kind === "dictation") openLesson({ type: "dictation", idx: idx.listen });
+      else if (kind === "shadow") openLesson({ type: "skillListenLong", idx: idx.listen });
+      else if (kind === "podcast") openLesson({ type: "podcast", idx: idx.speak });
+    };
+  });
+}
+function myLinkExercisesHTML(m) {
+  var lines = m.vkey ? myLinkLines(m.vkey) : null;
+  if (!lines) return '<p class="mut"><b>Phụ đề:</b> chưa có phụ đề để đối chiếu — chỉ nghe và xem cho vui (nghe thụ động). Nghe chép/Shadowing chỉ mở khi web đã có phụ đề thật của video này.</p>';
+  return '<p class="mut"><b>Đã có phụ đề thật trên web (' + lines.length + ' câu) — bài tập đối chiếu phụ đề:</b></p><div class="row">'
+    + '<button class="btn" data-vvideo="' + m.vkey + '" data-vkind="dictation">🎧 Nghe chép theo câu</button>'
+    + '<button class="btn" data-vvideo="' + m.vkey + '" data-vkind="shadow">🎤 Shadowing Xem/Luyện</button>'
+    + '<button class="btn" data-vvideo="' + m.vkey + '" data-vkind="podcast">🎙️ Podcast transcript từng câu</button></div>'
+    + '<p class="mut">Truyện song ngữ + kiểm tra hiểu: chưa mở cho video này vì cần câu hỏi kiểm tra hiểu viết tay — vẫn nghe chép, Shadowing và podcast bình thường.</p>';
+}
+function myLinkCardHTML(m) {
+  var isYT = m.kind === "youtube";
+  var title = m.title || (isYT ? "Video YouTube" : (m.host || "Link web"));
+  var h = '<details class="vrow" id="myLink-' + m.id + '"><summary><b>' + esc(title) + '</b> <span class="chip">cá nhân</span>' + (isYT ? ' <span class="chip">YouTube</span>' : ' <span class="chip">' + esc(m.host || "Web") + '</span>') + '</summary>'
+    + '<p class="mut">' + esc(m.url) + '</p>';
+  if (isYT) {
+    h += '<div class="row"><button class="btn" data-ytplay="' + m.id + '">▶ Phát trong trang — chỉ nghe, xem</button><a class="btn" href="' + esc(m.url) + '" target="_blank" rel="noopener">Mở trên YouTube</a><button class="btn" data-mylinkdel="' + m.id + '">🗑 Xóa link</button></div>';
+    h += '<div class="ytp" id="ytpBox-' + m.id + '" hidden><div id="ytpHost-' + m.id + '"></div>'
+      + '<div class="row" style="margin-top:6px"><button class="btn" data-ytseg="back" data-ytlink="' + m.id + '">⏮ −10 giây</button><button class="btn" data-ytseg="toggle" data-ytlink="' + m.id + '">▶/⏸ Phát/Dừng</button><button class="btn" data-ytseg="fwd" data-ytlink="' + m.id + '">+10 giây ⏭</button><button class="btn" data-ytseg="replay" data-ytlink="' + m.id + '">🔁 Nghe lại 10 giây</button></div>'
+      + '<p class="mut" id="ytpErr-' + m.id + '" hidden></p></div>';
+    h += myLinkExercisesHTML(m);
+  } else {
+    h += '<p class="mut">Link web khác — không phát được trong trang, mở ở trang gốc bằng nút bên dưới.</p><div class="row"><a class="btn" href="' + esc(m.url) + '" target="_blank" rel="noopener">🌐 Mở tại nguồn</a><button class="btn" data-mylinkdel="' + m.id + '">🗑 Xóa link</button></div>';
+  }
+  return h + '</details>';
+}
+function myListenLinksHTML(track) {
+  var links = myLinksForTrack(track);
+  var isGuest = !(typeof authState !== "undefined" && authState.user);
+  var html = '<div class="qblock" id="myListenLinkBox"><h3>🔗 Link luyện nghe của bạn <span class="chip">cá nhân</span></h3>'
+    + '<p class="mut">Dán link video bất kỳ vào đây — link nằm chung trong khu Luyện nghe này, chỉ bạn thấy, gắn nhãn "cá nhân". YouTube phát trong trang, nghe từng đoạn bằng nút −10s/+10s. Link web khác vẫn lưu lại, mở ở trang gốc bằng nút bên dưới. Chỉ nghe cho vui thì cứ bấm Phát rồi xem, không cần làm bài tập. Bài tập nghe chép/Shadowing chỉ mở khi web đã có phụ đề thật của video đó — web không bịa phụ đề.</p>'
+    + '<div class="row"><input id="myLinkUrl" type="url" placeholder="Dán link video vào đây — ví dụ: https://www.youtube.com/watch?v=..." style="flex:1;min-width:220px"><button class="btn" id="myLinkAdd">+ Thêm link</button></div>'
+    + '<p class="mut" id="myLinkMsg">' + (isGuest ? "Đang ở chế độ khách — link lưu trên máy này; đăng nhập để đồng bộ theo tài khoản." : "Đã đăng nhập — link đồng bộ theo tài khoản, mở máy nào cũng thấy.") + '</p>'
+    + '<div id="myLinkList">' + (links.length ? links.map(myLinkCardHTML).join("") : '<p class="mut">Chưa có link nào — dán link đầu tiên vào ô trên.</p>') + '</div></div>';
+  return html;
+}
+function ytPersonalErrText(code) {
+  if (code === 100) return "Không tìm thấy video này — có thể video đã bị xóa hoặc chuyển sang riêng tư. Bấm “Mở trên YouTube” để kiểm tra tại nguồn.";
+  if (code === 101 || code === 150) return "Chủ video đã tắt tính năng nhúng — không phát được trong trang. Bấm “Mở trên YouTube” để xem tại nguồn.";
+  if (code === 2) return "Link video không đúng — kiểm tra lại link.";
+  if (code === 5) return "Trình phát YouTube gặp lỗi — bấm “Mở trên YouTube” để xem tại nguồn.";
+  return "Không phát được video này trong trang — bấm “Mở trên YouTube” để xem tại nguồn.";
+}
+function ytPersonalShowErr(linkId, code) {
+  var el = document.getElementById("ytpErr-" + linkId);
+  if (!el) return;
+  el.textContent = ytPersonalErrText(code);
+  el.removeAttribute("hidden");
+}
+function ytPersonalFallback(linkId) {
+  var host = document.getElementById("ytpHost-" + linkId);
+  var m = (state.myLinks || []).filter(function (x) { return x && x.id === linkId; })[0];
+  if (!host || !m) return;
+  host.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + m.videoId + '?rel=0" loading="lazy" allowfullscreen></iframe>';
+  var el = document.getElementById("ytpErr-" + linkId);
+  if (el) { el.textContent = "Không tải được khung phát có điều khiển đoạn — vẫn xem được bằng khung thường bên dưới; nếu video không hiện, bấm “Mở trên YouTube”."; el.removeAttribute("hidden"); }
+}
+function ytPersonalLoadAPI(cb) {
+  try {
+    if (window.YT && window.YT.Player) { cb(true); return; }
+    if (window.__ytApiLoading) { (window.__ytApiQueue = window.__ytApiQueue || []).push(cb); return; }
+    window.__ytApiLoading = true;
+    window.__ytApiQueue = [cb];
+    var done = function (ok) {
+      if (!window.__ytApiLoading && !(window.__ytApiQueue && window.__ytApiQueue.length)) return;
+      window.__ytApiLoading = false;
+      var q = window.__ytApiQueue || []; window.__ytApiQueue = [];
+      q.forEach(function (f) { try { f(ok); } catch (e) {} });
+    };
+    window.onYouTubeIframeAPIReady = function () { done(true); };
+    var s = document.createElement("script");
+    s.src = "https://www.youtube.com/iframe_api";
+    s.onerror = function () { done(false); };
+    document.head.appendChild(s);
+    setTimeout(function () { if (window.__ytApiLoading) done(!!(window.YT && window.YT.Player)); }, 8000);
+  } catch (e) { try { cb(false); } catch (e2) {} }
+}
+function ytPersonalOpen(linkId) {
+  var m = (state.myLinks || []).filter(function (x) { return x && x.id === linkId; })[0];
+  if (!m || m.kind !== "youtube") return;
+  var box = document.getElementById("ytpBox-" + linkId);
+  if (!box) return;
+  box.removeAttribute("hidden");
+  var hostEl = document.getElementById("ytpHost-" + linkId);
+  var pl = window.__ytPersonalPlayers && window.__ytPersonalPlayers[linkId];
+  if (pl && hostEl && hostEl.tagName === "IFRAME") return;
+  if (window.__ytPersonalPlayers) delete window.__ytPersonalPlayers[linkId];
+  ytPersonalLoadAPI(function (ok) {
+    if (ok && window.YT && window.YT.Player) {
+      try {
+        var player = new window.YT.Player("ytpHost-" + linkId, {
+          videoId: m.videoId,
+          host: "https://www.youtube-nocookie.com",
+          playerVars: { rel: 0 },
+          events: {
+            onReady: function () {},
+            onError: function (ev) { ytPersonalShowErr(linkId, ev && ev.data); },
+            onStateChange: function () {}
+          }
+        });
+        if (!window.__ytPersonalPlayers) window.__ytPersonalPlayers = {};
+        window.__ytPersonalPlayers[linkId] = player;
+      } catch (e) { ytPersonalFallback(linkId); }
+    } else {
+      ytPersonalFallback(linkId);
+    }
+  });
+}
+function ytPersonalSeg(linkId, kind) {
+  try {
+    var pl = window.__ytPersonalPlayers && window.__ytPersonalPlayers[linkId];
+    if (!pl) return;
+    var cur = 0;
+    try { cur = pl.getCurrentTime ? (pl.getCurrentTime() || 0) : 0; } catch (e) {}
+    if (kind === "back") pl.seekTo(Math.max(0, cur - 10), true);
+    else if (kind === "fwd") pl.seekTo(cur + 10, true);
+    else if (kind === "replay") { pl.seekTo(Math.max(0, cur - 10), true); if (pl.playVideo) pl.playVideo(); }
+    else if (kind === "toggle") { var st = pl.getPlayerState ? pl.getPlayerState() : -1; if (st === 1) { if (pl.pauseVideo) pl.pauseVideo(); } else if (pl.playVideo) pl.playVideo(); }
+  } catch (e) {}
+}
+function myListenLinkWire(app) {
+  var addBtn = document.getElementById("myLinkAdd");
+  var urlInput = document.getElementById("myLinkUrl");
+  var msg = document.getElementById("myLinkMsg");
+  function setMsg(t) { if (msg) msg.textContent = t; }
+  if (addBtn && urlInput) {
+    addBtn.onclick = function () {
+      var r = parseListenUrl(urlInput.value);
+      if (r.err) { setMsg(r.err); return; }
+      var dup = (state.myLinks || []).some(function (m) { return m && m.norm === r.norm && m.track === (state.track || "en"); });
+      if (dup) { setMsg("Link này đã có trong danh sách rồi."); return; }
+      if (!state.myLinks) state.myLinks = [];
+      var v = r.kind === "youtube" ? myLinkFindVideo(r.videoId) : null;
+      state.myLinks.push({ id: "ml" + Date.now() + "" + Math.floor(Math.random() * 1000), track: state.track || "en", url: r.url, norm: r.norm, kind: r.kind, videoId: r.videoId, host: r.host, title: v ? v.title : "", vkey: v ? v.key : null, createdAt: Date.now() });
+      saveState();
+      toast("Đã thêm link vào khu Luyện nghe.");
+      render();
+    };
+    urlInput.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); addBtn.click(); } });
+  }
+  $$("[data-mylinkdel]").forEach(function (b) {
+    b.onclick = function () {
+      if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "Bấm lại để xác nhận xóa"; return; }
+      state.myLinks = (state.myLinks || []).filter(function (m) { return m.id !== b.dataset.mylinkdel; });
+      saveState(); toast("Đã xóa link."); render();
+    };
+  });
+  $$("[data-ytplay]").forEach(function (b) {
+    b.onclick = function () { ytPersonalOpen(b.dataset.ytplay); };
+  });
+  $$("[data-ytseg]").forEach(function (b) {
+    b.onclick = function () { ytPersonalSeg(b.dataset.ytlink, b.dataset.ytseg); };
+  });
+  videoLinkWire();
+}
+
 function supplementHTML() {
   var words = state.myWords || [];
   var banks = myWordBanks();
@@ -3272,6 +3544,7 @@ function viewPractice(app) {
   app.innerHTML = html;
   videoSampleWire();
   videoVOAWire();
+  myListenLinkWire(app);
   (function () {
     var move = function (id, bodyId) { var el = document.getElementById(id), body = document.getElementById(bodyId); if (el && body) body.appendChild(el); };
     var slotReplace = function (slotId, elId) { var sl = document.getElementById(slotId), el = document.getElementById(elId); if (sl && el) sl.replaceWith(el); };
@@ -3779,6 +4052,10 @@ function mergeGuestIntoAccount(guest, acc) {
     ((acc && acc.myWords) || []).forEach(function (m) { if (m && m.id) { seen[m.id] = true; out.push(m); } });
     ((guest && guest.myWords) || []).forEach(function (m) { if (m && m.id && !seen[m.id]) { seen[m.id] = true; out.push(m); } });
     merged.myWords = out; })();
+  (function () { var seen = {}, out = [];
+    ((acc && acc.myLinks) || []).forEach(function (m) { if (m && m.norm) { seen[m.norm + "|" + (m.track || "en")] = true; out.push(m); } });
+    ((guest && guest.myLinks) || []).forEach(function (m) { if (m && m.norm && !seen[m.norm + "|" + (m.track || "en")]) { seen[m.norm + "|" + (m.track || "en")] = true; out.push(m); } });
+    merged.myLinks = out; })();
   function unionArr(a, b) { var out = (a || []).slice(); (b || []).forEach(function (x) { if (out.indexOf(x) < 0) out.push(x); }); return out; }
   merged.skipped = unionArr(guest.skipped, acc.skipped);
   merged.phSkipped = unionArr(guest.phSkipped, acc.phSkipped);
@@ -3864,6 +4141,7 @@ function syncPull(uid) {
           else if (k === "u8") acc.u8 = r.state || null;
           else if (k === "mems") acc.mems = r.state || {};
           else if (k === "myWords") acc.myWords = r.state || [];
+          else if (k === "myLinks") acc.myLinks = r.state || [];
           else if (k === "plan") acc.plan = r.state || null;
           else if (k === "pushOpts") acc.pushOpts = r.state || null;
           else if (k === "entryPlaced") acc.entryPlaced = r.state || null;
@@ -3950,6 +4228,7 @@ function syncPush() {
       (function () { var u = (typeof normU8 === "function") ? normU8() : (state.u8 || {}); row("rb", "u8", u); })();
       row("rb", "mems", state.mems || {});
       row("rb", "myWords", state.myWords || []);
+      row("rb", "myLinks", state.myLinks || []);
       row("rb", "plan", state.plan || null);
       (function () { var pp = (typeof pushPrefs === "function") ? pushPrefs() : { time: "20:00", types: { srs: true, path: true, checkin: true } }; row("rb", "pushOpts", { time: pp.time, types: pp.types || {} }); })();
       row("rb", "entryPlaced", state.entryPlaced || null);
@@ -9139,7 +9418,7 @@ function videoNewBlockHTML(track) {
   var dayN = list.filter(function (v) { return v.kind === "day"; }).length;
   var entN = list.length - dayN;
   var html = '<section class="card" id="videoNewCard' + track + '"><h3>🎬 Video mới — ' + trackName + ' (' + list.length + ' video: ' + dayN + ' dạy + ' + entN + ' giải trí)</h3>'
-    + '<p class="mut">Chỉ nhúng video công khai từ YouTube (không tải về đăng lại). Mỗi video ghi rõ tên, kênh, loại, ngôn ngữ, trình độ. Video giải trí chưa có phụ đề thật thì chỉ để xem, không bịa bài tập.</p>';
+    + '<p class="mut">Chỉ nhúng video công khai từ YouTube (không tải về đăng lại). Mỗi video ghi rõ tên, kênh, loại, ngôn ngữ, trình độ. Video giải trí chưa có phụ đề thật thì chỉ để xem, không bịa bài tập.</p>' + myListenLinksHTML(track);
   if (track === "en") {
     html += '<div class="qblock"><h3>🧪 Video mẫu thử cơ chế 4 dạng bài (câu tự soạn)</h3>'
       + '<p class="mut">5 câu tự soạn về bữa trưa gia đình — KHÔNG phải phụ đề thật của video nào. Bấm để thử đúng 4 cỗ máy thật của web (nghe chép, Shadowing, truyện, podcast) với cùng một bộ câu này. Khi có phụ đề thật của một video giải trí, web sẽ gắn đúng 4 nút này vào video đó.</p>'
@@ -12960,6 +13239,7 @@ function viewPracticeZh(app) {
   };
   $$("[data-zhvideo-save]").forEach(function (b) { b.onclick = function () { var r = zhSaveVideoWords(b.dataset.zhvideoSave); toast("Đã lưu " + r.added + " từ mới vào Ôn tập" + (r.skipped ? " (" + r.skipped + " từ đã có nên không lưu thêm)" : "") + "."); render(); }; });
   wireZhMap(app);
+  myListenLinkWire(app);
   wireZhHskk();
   wireZhDictStroke(app);
   (function () { var jobs = [{ id: "zhGameCardPractice", html: zhPracticeEntHTML, wire: zhPracticeEntWire }]; if (videoNewEntHTML["zh"]) jobs.push({ id: "videoNewEntzh", html: function () { return videoNewEntHTML["zh"]; }, wire: null }); practiceEntLazy("zh", jobs); })();
@@ -15079,6 +15359,7 @@ function viewPracticeTc(app) {
   app.innerHTML = html;
   wireTc(app);
   videoVOAWire();
+  myListenLinkWire(app);
 
   wireVocabSearch("tcVocabSearch", "tcVocabGroups");
   (function () { var jobs = [{ id: "tcGameCardPractice", html: tcPracticeEntHTML, wire: tcPracticeEntWire }]; if (videoNewEntHTML["tc"]) jobs.push({ id: "videoNewEnttc", html: function () { return videoNewEntHTML["tc"]; }, wire: null }); practiceEntLazy("tc", jobs); })();
@@ -15662,6 +15943,7 @@ function viewPracticeTp(app) {
   if (state.tpHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOPIK chưa sửa: ' + state.tpHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
     app.innerHTML = html;
   wireTp(app);
+  myListenLinkWire(app);
 
   wireVocabSearch("tpVocabSearch", "tpVocabGroups");
   (function () { var jobs = [{ id: "tpFunVideoPractice", html: tpPracticeFunHTML, wire: null }]; if (videoNewEntHTML["tp"]) jobs.push({ id: "videoNewEnttp", html: function () { return videoNewEntHTML["tp"]; }, wire: null }); practiceEntLazy("tp", jobs); })();
