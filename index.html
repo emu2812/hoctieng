@@ -768,8 +768,9 @@ function myListenLinkWire(app) {
 function supplementHTML() {
   var words = state.myWords || [];
   var banks = myWordBanks();
-  var trackOpts = banks.map(function (b) { return '<option value="' + b.key + '">' + b.label + '</option>'; }).join("");
-  var curBank = banks.length ? banks[0].key : "en";
+  var curBank = "en";
+  banks.forEach(function (b) { if (b.key === state.track) curBank = b.key; });
+  var trackOpts = banks.map(function (b) { return '<option value="' + b.key + '"' + (b.key === curBank ? ' selected' : '') + '>' + b.label + '</option>'; }).join("");
   var storageNote = (typeof authState !== "undefined" && authState.user)
     ? "Đã đăng nhập — từ đồng bộ theo tài khoản, mở máy nào cũng thấy."
     : "Đang ở chế độ khách — từ lưu trên máy này; đăng nhập để đồng bộ theo tài khoản.";
@@ -3006,6 +3007,8 @@ function personalWeakStepId() {
   return null;
 }
 function buildPersonalPath() {
+  var tr89 = (typeof state !== "undefined" && state.track) || "en";
+  if (tr89 !== "en") return buildPersonalPath89(tr89);
   var remaining = learningSteps().filter(function (s) { return !stepDone(s.id); });
   var doneN = doneLearnCount(), totalN = learningSteps().length;
   var pace = state.pace || "vua";
@@ -3039,7 +3042,7 @@ function buildPersonalPath() {
   if (ordered.length === 0) reasons.push("Bạn đã xong chương 1 — lộ trình riêng sẽ mở tiếp khi chương 2 mở.");
   if (pace === "nhanh") reasons.push("Nhịp tăng tốc: các bước đã xong không lặp lại.");
   if (pace === "ky") reasons.push("Nhịp kỹ: ôn thêm sau mỗi bước và sau mỗi 2 bước.");
-  return { items: items, reasons: reasons, done: doneN, total: totalN, weak: weak, dueCount: due.length, pace: pace };
+  return { items: items, reasons: reasons, done: doneN, total: totalN, weak: weak, dueCount: due.length, pace: pace, scopeLabel: "chương 1", dueLabel: "Mục đến hạn ôn", more: 0 };
 }
 function setPace(p) {
   if (["nhanh", "vua", "ky"].indexOf(p) < 0) return;
@@ -3052,23 +3055,25 @@ function personalPathCardHTML() {
   var h = '<section class="card" id="ppCard"><h3>Lộ trình riêng — Cá nhân hóa cực chi tiết</h3>';
   h += '<p class="mut">AI theo dõi lộ trình của riêng bạn: điểm yếu, Sổ lỗi sai, nhịp độ — rồi tự chỉnh bước tiếp theo cho hợp lý. Mỗi lần đổi đều ghi rõ lý do.</p>';
   h += '<p>Nhịp độ: ' + paceBtn("nhanh", "Tăng tốc") + ' ' + paceBtn("vua", "Vừa") + ' ' + paceBtn("ky", "Kỹ hơn") + '</p>';
-  h += '<p>Đã xong ' + pp.done + '/' + pp.total + ' bước chương 1' + (pp.dueCount ? ' · ' + pp.dueCount + ' mục đến hạn ôn' : '') + '</p>';
+  h += '<p>Đã xong ' + pp.done + '/' + pp.total + ' bước ' + (pp.scopeLabel || 'chương 1') + (pp.dueCount ? ' · ' + pp.dueCount + ' ' + (pp.dueLabel || 'mục đến hạn ôn') : '') + '</p>';
   if (pp.reasons.length) h += '<ul>' + pp.reasons.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join("") + '</ul>';
   if (!pp.items.length) { h += '<p>Chưa có bước tiếp theo trong lộ trình riêng.</p>'; }
   else {
     h += '<div>' + pp.items.map(function (it, i) {
-      var btn = it.stepId ? '<button class="btn" data-ppstep="' + it.stepId + '">Vào học</button>' : '<button class="btn" data-ppreview="1">Ôn ngay</button>';
+      var btn = it.kind === "review" ? '<button class="btn" data-ppreview="1">Ôn ngay</button>' : (it.open ? '<button class="btn" data-ppopen="' + i + '">Vào học</button>' : '<button class="btn" data-ppstep="' + it.stepId + '">Vào học</button>');
       return '<p><b>' + (i + 1) + '. ' + esc(it.title) + '</b>' + (it.reason ? '<br><span class="mut">' + esc(it.reason) + '</span>' : '') + ' ' + btn + '</p>';
     }).join("") + '</div>';
+    if (pp.more > 0) h += '<p class="mut">Còn ' + pp.more + ' bước nữa ở ' + (pp.scopeLabel || 'chương 1') + ' — học xong các bước trên sẽ hiện tiếp.</p>';
   }
   if (state.personalPath && state.personalPath.note) h += '<p class="mut">' + esc(state.personalPath.note) + '</p>';
   if (state.personalExplain) h += '<p class="mut">AI giải thích: ' + esc(state.personalExplain) + '</p>';
   h += '<button class="btn" id="ppExplainBtn">AI giải thích vì sao lộ trình xếp thế này</button>';
   if (authState.vip) {
     var dg = state.pathDiag || {};
+    var tm89 = trackMeta89();
     h += '<p style="margin-top:10px"><b>Chẩn đoán trước khi soạn:</b> <span class="mut">điền đủ 3 ô rồi bấm “AI soạn lộ trình riêng”.</span></p>'
-      + '<p><label class="mut">Trình độ hiện tại <input type="text" id="ppDiagLevel" value="' + esc(dg.level || "") + '" placeholder="VD: mới bắt đầu / Band 5,0" style="width:100%"></label></p>'
-      + '<p><label class="mut">Band mục tiêu <input type="text" id="ppDiagTarget" value="' + esc(dg.target || (state.targetBand != null ? String(state.targetBand) : "")) + '" placeholder="VD: 6,5" style="width:100%"></label></p>'
+      + '<p><label class="mut">Trình độ hiện tại <input type="text" id="ppDiagLevel" value="' + esc(dg.level || "") + '" placeholder="' + esc(tm89.levelPh) + '" style="width:100%"></label></p>'
+      + '<p><label class="mut">' + esc(tm89.targetLabel) + ' <input type="text" id="ppDiagTarget" value="' + esc(dg.target || (state.targetBand != null ? String(state.targetBand) : "")) + '" placeholder="' + esc(tm89.targetPh) + '" style="width:100%"></label></p>'
       + '<p><label class="mut">Thời gian học mỗi ngày (phút) <input type="number" id="ppDiagMinutes" value="' + esc(dg.minutes || (state.goal != null ? String(state.goal) : "")) + '" placeholder="VD: 30" style="width:100%"></label></p>';
     h += ' <button class="btn btn-primary" id="vipComposeBtn">AI soạn lộ trình riêng</button>';
   }
@@ -3109,6 +3114,7 @@ function viewMyPath(app) {
   };
   $$("#ppCard [data-pace]").forEach(function (b) { b.onclick = function () { setPace(b.dataset.pace); }; });
   $$("#ppCard [data-ppstep]").forEach(function (b) { b.onclick = function () { openStep(stepById(b.dataset.ppstep), { noNudge: true }); }; });
+  $$("#ppCard [data-ppopen]").forEach(function (b) { b.onclick = function () { openPersonalPathItem89(+b.dataset.ppopen); }; });
   $$("#ppCard [data-ppreview]").forEach(function (b) { b.onclick = function () { go("review"); }; });
   var ppe = $("#ppExplainBtn");
   if (ppe) ppe.onclick = function () {
@@ -3702,20 +3708,28 @@ function viewReview(app) {
 /* ---------- CỦA TÔI ---------- */
 
 /* ---------- CHAT LOC (GĐ2, f7/f18): Ke hoach ngay dich + lich diem danh ---------- */
-function clPlanHTML(remainMins, goal) {
+function clPlanHTML(scope, goal) {
+  var t89 = (typeof state !== "undefined" && state.track) || "en";
   var p = state.plan || {};
-  var h = '<div id="clPlan"><h4>Kế hoạch tới ngày đích</h4><p class="mut">Chọn band mục tiêu và ngày muốn đạt — web tính ngược số ngày cần học và báo đang đúng tiến độ hay chậm bao nhiêu ngày (hiện chỉ tính chương 1; các chương sau đã mở bước học nhưng chưa tính vào ước tính này).</p>';
-  h += '<div class="row"><select id="planBandSel">' + RB_CHAPTER_MAP.map(function (ch) { return '<option value="' + esc(ch.band) + '"' + (p.band === ch.band ? ' selected' : '') + '>' + esc(ch.band) + ' — ' + esc(ch.title) + '</option>'; }).join("") + '</select><input type="date" id="planDateInp" value="' + esc(p.date || "") + '"><button class="btn" id="planSaveBtn">Lưu kế hoạch</button></div>';
+  var tm89 = trackMeta89();
+  var h = '<div id="clPlan"><h4>Kế hoạch tới ngày đích</h4><p class="mut">Chọn ' + esc(tm89.targetWord) + ' mục tiêu và ngày muốn đạt — web ' + (t89 === "en" ? 'tính ngược số ngày cần học và báo đang đúng tiến độ hay chậm bao nhiêu ngày (hiện chỉ tính chương 1; các chương sau đã mở bước học nhưng chưa tính vào ước tính này)' : 'đếm số bước còn lại ở ' + scope.scopeLabel + ' và báo còn bao nhiêu ngày tới đích (hiện chỉ tính ' + scope.scopeLabel + '; các chặng khác đã mở bước học nhưng chưa tính vào ước tính này)') + '.</p>';
+  h += '<div class="row"><select id="planBandSel">' + trackPlanOptions89() + '</select><input type="date" id="planDateInp" value="' + esc(p.date || "") + '"><button class="btn" id="planSaveBtn">Lưu kế hoạch</button></div>';
   if (p.date) {
     var today = new Date(todayStr() + "T00:00:00"), tgt = new Date(p.date + "T00:00:00");
     var daysLeft = Math.ceil((tgt - today) / 86400000);
-    var needDays = Math.max(1, Math.ceil(remainMins / (goal || 30)));
-    var needMins = daysLeft > 0 ? Math.ceil(remainMins / daysLeft) : remainMins;
-    var status = daysLeft <= 0 ? "Đã tới ngày đích — hãy đặt ngày mới." : (needDays <= daysLeft ? "Đang đúng tiến độ (cần " + needDays + " ngày học, còn " + daysLeft + " ngày tới đích)." : "Đang chậm " + (needDays - daysLeft) + " ngày — cần tăng lên " + needMins + " phút/ngày để kịp.");
-    h += '<p id="planStatus"><b>Kế hoạch (' + esc(p.band || "") + ', tới ' + esc(p.date) + '):</b> ' + status + '</p>';
-  } else h += '<p class="mut" id="planStatus">Chưa có kế hoạch ngày đích — chọn band và ngày rồi bấm Lưu kế hoạch.</p>';
+    if (t89 === "en") {
+      var needDays = Math.max(1, Math.ceil((scope.remainMins || 0) / (goal || 30)));
+      var needMins = daysLeft > 0 ? Math.ceil((scope.remainMins || 0) / daysLeft) : (scope.remainMins || 0);
+      var status = daysLeft <= 0 ? "Đã tới ngày đích — hãy đặt ngày mới." : (needDays <= daysLeft ? "Đang đúng tiến độ (cần " + needDays + " ngày học, còn " + daysLeft + " ngày tới đích)." : "Đang chậm " + (needDays - daysLeft) + " ngày — cần tăng lên " + needMins + " phút/ngày để kịp.");
+      h += '<p id="planStatus"><b>Kế hoạch (' + esc(p.band || "") + ', tới ' + esc(p.date) + '):</b> ' + status + '</p>';
+    } else {
+      var status2 = daysLeft <= 0 ? "Đã tới ngày đích — hãy đặt ngày mới." : ("Còn " + scope.remainCount + " bước chưa xong ở " + scope.scopeLabel + " · còn " + daysLeft + " ngày tới đích.");
+      h += '<p id="planStatus"><b>Kế hoạch (' + esc(p.band || "") + ', tới ' + esc(p.date) + '):</b> ' + status2 + '</p>';
+    }
+  } else h += '<p class="mut" id="planStatus">Chưa có kế hoạch ngày đích — chọn ' + esc(t89 === "en" ? "band" : tm89.targetWord) + ' và ngày rồi bấm Lưu kế hoạch.</p>';
   return h + '</div>';
 }
+
 function clCalHTML() {
   var now = new Date(), y = now.getFullYear(), m = now.getMonth();
   var days = new Date(y, m + 1, 0).getDate();
@@ -3752,20 +3766,9 @@ function notesHTML() {
   var h = '<details class="card" id="mineGrpNotes"><summary><b>📝 Ghi chú</b></summary>';
   h += '<p class="mut">Các quy tắc tính điểm, ôn tập và quy tắc khác gom ở đây. Nguồn nội dung xem ở mục Nguồn nội dung bên dưới.</p>';
   h += '<h3>Cách tính điểm</h3>';
-  h += '<h4>Bảng quy đổi điểm thô → band (Nghe/Đọc, thang 40 câu)</h4>';
-  h += '<p>' + RB_BAND_NOTE + '</p>';
-  h += notesBandTableHTML("reading", "Đọc") + notesBandTableHTML("listening", "Nghe");
-  h += '<p class="mut">CEFR là khung trình độ chung châu Âu (A1 thấp nhất tới C2 cao nhất) — cột CEFR trong bảng trên đối chiếu band với khung này.</p>';
-  h += '<p>Kiểm tra tổng hợp cuối chương dùng bảng Đọc làm bảng chung.</p>';
-  h += '<h4>Điểm Nói/Viết</h4>';
-  h += '<p><b>4 tiêu chí chấm nói (mỗi tiêu chí 25%):</b> ' + esc(RB_SPEAK_CRITERIA_TXT) + '</p>';
-  h += '<p><b>4 tiêu chí chấm viết (mỗi tiêu chí 25%):</b> ' + esc(RB_WRITE_CRITERIA_TXT) + '</p>';
-  h += '<p>Band chung là trung bình 4 tiêu chí. Phát âm neo điểm pronounce: điểm pronounce cao thì band Phát âm cao, thấp thì band thấp, không bịa ngược.</p>';
-  h += '<p>Kiểm tra phát âm đầu vào: kết quả chỉ là ước lượng tại chỗ, không tính đạt chuẩn.</p>';
-  h += '<p>Thẻ từ: quyền camera/mic bị từ chối thì không tính đạt chuẩn.</p>';
-  h += '<p>AI chấm tiếng Trung (hàm chấm bản mới): chấm theo từng âm tiết, thanh điệu là chiều riêng; thẻ từ cần AI ≥ 80 mới qua bước phát âm. Nếu máy chủ chưa nâng cấp hàm chấm thì tạm chưa tính điểm AI.</p>';
+  h += notesScoreHTML89();
   h += '<h4>Mốc qua bài</h4>';
-  h += '<p>Kiểm tra cuối chương mở khi xong 80% số bước tính cổng (bước “làm quen” và bước “ôn xen kẽ” không tính vào 80%; làm tròn lên: cần Math.ceil(số bước tính cổng × 0,8) bước; chương 1 cần 6/7 bước). Kiểm tra cuối chặng tiếng Trung mở khi xong 80% số bước chặng; mỗi phần cần từ 50% đúng lần đầu mới tính qua, chưa qua chỉ cần học lại đúng phần yếu.</p>';
+  h += notesGateHTML89();
   h += '<h4>Bảng XP và cấp</h4><ul>' + xpItems + '</ul>';
   h += '<p>Mốc lên cấp: ' + xpLevels + '; từ cấp 9 trở đi mỗi cấp thêm ' + RB_XP_LEVEL_STEP + ' XP.</p>';
   h += '<h4>Điểm game</h4>';
@@ -3781,30 +3784,22 @@ function notesHTML() {
   h += '<p>Chẩn đoán kỹ thuật của gương được ẩn trong lúc học để màn học gọn — bạn chỉ thấy điểm chấm, không thấy dòng chẩn đoán.</p>';
   h += '<p>Đây là quiz sau video duy nhất còn lại; các điểm luyện khác không có quiz video.</p>';
   h += '<p>Bấm Yêu cầu VIP chỉ ghi lại yêu cầu để chủ web cấp tay — tài khoản vẫn là Thường cho tới khi được cấp, sau khi được cấp thì bấm Tải lại từ tài khoản để hiện VIP.</p>';
-  h += '<p>HSKK: web giữ mục HSKK riêng, không gộp nói vào đề từng cấp — vì tới 25/10/2026 chưa có bằng chứng chính thức nào cho thấy nói đã tích hợp có điểm riêng vào từng đề HSK 3.0.</p>';
+  if ((state.track || "en") === "en") h += '<p>HSKK: web giữ mục HSKK riêng, không gộp nói vào đề từng cấp — vì tới 25/10/2026 chưa có bằng chứng chính thức nào cho thấy nói đã tích hợp có điểm riêng vào từng đề HSK 3.0.</p>';
   h += '<p>Đóng băng chuỗi: tối đa 3 lượt, miễn phí, không mua bán, không trừ XP. Cứ 7 ngày chuỗi liên tiếp thì nhận thêm 1 lượt. Lỡ 1 ngày mà còn lượt thì chuỗi tự giữ, không cần bấm gì. Nếu lỡ nhiều ngày hơn số lượt còn lại thì chuỗi sẽ đứt thật và lượt đóng băng được giữ lại, không trừ oan. Lỡ tiếp ngày nữa mà hết lượt thì chuỗi đứt.</p>';
-  h += '<p>Kế hoạch tới ngày đích: số tuần còn lại ≈ số phút còn lại chia cho mục tiêu phút/ngày rồi chia 7 (làm tròn lên). Tính ngược ngày đích: số ngày học cần = số phút còn lại chia mục tiêu phút/ngày; web báo đúng tiến độ, chậm bao nhiêu ngày, hoặc cần tăng lên bao nhiêu phút/ngày để kịp. Hiện chỉ tính chương 1.</p>';
+  h += notesPlanHTML89();
   h += '</details>';
   return h;
 }
 function sourcesHTML() {
   var h = '<details class="card" id="mineGrpSources"><summary><b>📚 Nguồn nội dung</b></summary>';
   h += '<p class="mut">Nội dung của web lấy từ đâu — gom ở đây. Cách tính điểm và ôn tập xem ở mục Ghi chú bên trên.</p>';
-  h += '<h3>Nội dung tự soạn</h3>';
-  h += '<p>Mọi bài dưới đây đều từ kho tự soạn của web, xếp theo đúng định dạng thi IELTS. Số lượng đếm thật từ kho, không ghi số mẫu.</p>';
-  h += '<p>Nội dung tự soạn của web, viết mới từ khoảng trống mà 86 sách không có đủ: lỗi riêng cho người Việt, ví dụ đời sống người Việt, sắc thái chặng 7,5+, và đối chiếu format thi hiện tại.</p>';
-  h += '<p>Câu biểu đạt mỗi ngày: câu tự soạn, dùng được thật trong giao tiếp.</p>';
-  h += '<h3>Chuẩn IELTS tham chiếu</h3>';
-  h += '<p>Nguồn đối chiếu: nghiên cứu chuẩn IELTS chính thống 23/10 (Cambridge / IDP / British Council). Sách cũ có điểm đã lỗi thời nên phải đối chiếu lại, không tin hoàn toàn.</p>';
-  h += '<p>Điểm neo band: Đọc 15/40 = 5,0; Nghe 16/40 = 5,0 (theo Teacher’s Book Mindset Level 1, Cambridge).</p>';
-  h += '<h3>Chuẩn HSK (hệ 6 cấp + hệ E)</h3>';
-  h += '<p>Nền tảng web theo Giáo trình chuẩn HSK (hệ 6 cấp cũ). Bảng đối chiếu số từ tích lũy: cột “Sách cũ” là thang của bộ giáo trình Bùi gửi; cột “Hệ E” là đề cương thi HSK 3.0 năm 2025 (đã đối chiếu văn bản gốc ngày 25/10/2026). Phần bổ sung từ hệ E (vượt ngoài sách cũ) sẽ có ở đợt sau — web không dùng số hệ F (khung dạy học GF 0025-2021) để ghi nhãn.</p>';
-  h += '<h3>Chuẩn nội bộ của web</h3>';
-  h += '<p>Cổng 80% mở kiểm tra, band ước lượng, lịch ôn 1-3-7-14-30 ngày và bảng XP đều là chuẩn nội bộ của web, không phải chuẩn IELTS hay HSK chính thức. Cách tính chi tiết xem trong Cài đặt → Ghi chú.</p>';
+  h += sourcesSelfHTML89() + sourcesStdHTML89() + sourcesInternalHTML89();
   h += '<h3>Nguồn video</h3>';
   h += '<p>Video người bản địa nói từ: nguồn YouGlish, dùng video YouTube; chế độ hạn chế đã bật. Video mở trong trang, không rời khỏi bài học.</p>';
-  h += '<p><b>Video lý thuyết pinyin</b> (mở trong trang, không link ra YouTube):</p>';
-  h += videoSlotIf("zhPh:tones") + videoSlotIf("zhPh:pairs") + videoSlotIf("zhPh:sandhi") + videoSlotIf("zhPh:bu") + videoSlotIf("zhPh:song");
+  if ((state.track || "en") === "zh" || (state.track || "en") === "en") {
+    h += '<p><b>Video lý thuyết pinyin</b> (mở trong trang, không link ra YouTube):</p>';
+    h += videoSlotIf("zhPh:tones") + videoSlotIf("zhPh:pairs") + videoSlotIf("zhPh:sandhi") + videoSlotIf("zhPh:bu") + videoSlotIf("zhPh:song");
+  }
   h += '</details>';
   return h;
 }
@@ -3829,16 +3824,455 @@ function viewNative(app) {
   });
 }
 
+/* ============ V89: CUA TOI THEO TUNG TRACK ============
+   Một khung duy nhất, số liệu/nhãn theo track đang xem. EN giữ nguyên
+   (Band IELTS + 13 chương). ZH: cấp HSK + 6 chặng. TC: điểm TOEIC +
+   4 chặng. TP: cấp TOPIK + 8 chặng. Mọi số đều đếm từ dữ liệu thật của
+   chính track đó (cùng nguồn với các tab khác của track); số nào không
+   đếm được thì không ghi lên giao diện. */
+function trackMeta89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "zh") return { key: "zh", roadLabel: "6 chặng", levelLabel: "Cấp HSK", targetLabel: "Cấp HSK mục tiêu", targetWord: "cấp HSK", targetPh: "VD: HSK 3", levelPh: "VD: mới bắt đầu / HSK 2" };
+  if (t === "tc") return { key: "tc", roadLabel: "4 chặng", levelLabel: "Điểm TOEIC", targetLabel: "Điểm TOEIC mục tiêu", targetWord: "điểm TOEIC", targetPh: "VD: 750", levelPh: "VD: mới bắt đầu / TOEIC 450" };
+  if (t === "tp") return { key: "tp", roadLabel: "8 chặng", levelLabel: "Cấp TOPIK", targetLabel: "Cấp TOPIK mục tiêu", targetWord: "cấp TOPIK", targetPh: "VD: TOPIK 4", levelPh: "VD: mới bắt đầu / TOPIK 2" };
+  return { key: "en", roadLabel: "13 chương", levelLabel: "Band IELTS", targetLabel: "Band mục tiêu", targetWord: "band", targetPh: "VD: 6,5", levelPh: "VD: mới bắt đầu / Band 5,0" };
+}
+function fmtDateTs89(ts) {
+  try { var d = new Date(+ts); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); } catch (e) { return ""; }
+}
+/* Đếm bước theo loại (kind) từ danh sách bước phẳng của TC/TP — cùng nguồn
+   với Bản đồ (tcFlatOrder/tpFlatOrder + tcStepMeta/tpStepMeta). */
+function tcTpKindCounts89(isTc) {
+  var meta = isTc ? tcStepMeta : tpStepMeta;
+  var flat = isTc ? tcFlatOrder() : tpFlatOrder();
+  var doneMap = isTc ? (state.tcDone || {}) : (state.tpDone || {});
+  var kc = {};
+  flat.forEach(function (id) { var m = meta(id); if (!m) return; if (!kc[m.kind]) kc[m.kind] = [0, 0]; kc[m.kind][1]++; if (doneMap[id]) kc[m.kind][0]++; });
+  return kc;
+}
+function masteryDots89(raw) {
+  return raw.map(function (r) {
+    var pct = r.total ? Math.round(r.done / r.total * 100) : 0;
+    var dots = 0, i;
+    for (i = 1; i <= 5; i++) if (pct >= i * 20) dots++;
+    var dotStr = "";
+    for (i = 0; i < 5; i++) dotStr += (i < dots ? "●" : "○");
+    return { name: r.name, done: r.done, total: r.total, pct: pct, dots: dots, dotStr: dotStr, none: !!r.none, noneNote: r.noneNote || "" };
+  });
+}
+/* 5 chấm thành thạo theo track (ZH/TC/TP). EN giữ nguyên trong gd23SkillMastery. */
+function trackMasteryRows89(track) {
+  var raw = [];
+  var push = function (name, done, total, noneNote) { raw.push({ name: name, done: done, total: total, none: total === 0, noneNote: noneNote || "" }); };
+  if (track === "zh") {
+    var zc = function (arr, kind) { var a = arr || [], d = 0; a.forEach(function (x) { if (x && x.id != null && zhModDone(kind, x.id)) d++; }); return [d, a.length]; };
+    var zl = zc(typeof ZH_LISTENING !== "undefined" ? ZH_LISTENING : [], "zhListen"); push("Nghe", zl[0], zl[1]);
+    var zr = zc(typeof ZH_READING !== "undefined" ? ZH_READING : [], "zhRead"); push("Đọc", zr[0], zr[1]);
+    var zs = zc(typeof ZH_SPEAK !== "undefined" ? ZH_SPEAK : [], "zhSpeak"), zro = zc(typeof ZH_ROLE !== "undefined" ? ZH_ROLE : [], "zhRole"); push("Nói", zs[0] + zro[0], zs[1] + zro[1]);
+    var zw = zc(typeof ZH_WRITE !== "undefined" ? ZH_WRITE : [], "zhWrite"); push("Viết", zw[0], zw[1]);
+    var zsets = zhSets(), zdone = 0; zsets.forEach(function (d) { if (zhSetDone(d)) zdone++; }); push("Từ vựng", zdone, zsets.length);
+  } else {
+    var isTc = track === "tc";
+    var kc = tcTpKindCounts89(isTc);
+    var g = function (k) { return kc[k] || [0, 0]; };
+    var li = g("listen"); push("Nghe", li[0], li[1]);
+    var re = g("read"); push("Đọc", re[0], re[1]);
+    if (isTc) { push("Nói", 0, 0, "TOEIC chỉ thi Nghe–Đọc nên track này không có bài Nói."); push("Viết", 0, 0, "TOEIC chỉ thi Nghe–Đọc nên track này không có bài Viết."); }
+    else { push("Nói", 0, 0, "Track này chưa có bài Nói riêng."); var wr = g("write"); push("Viết", wr[0], wr[1]); }
+    var vo = g("vocab"); push("Từ vựng", vo[0], vo[1]);
+  }
+  return masteryDots89(raw);
+}
+/* Mức độ từng kỹ năng theo track (ZH/TC/TP). EN giữ nguyên trong skillLevelRows. */
+function trackSkillRows89(track) {
+  var rows = [];
+  var row = function (name, done, total) { rows.push('<p>' + esc(name) + ': ' + (total ? (done + '/' + total + ' (' + Math.round(done / total * 100) + '%)') : 'chưa có dữ liệu — làm một bài để đo') + '</p>'); };
+  if (track === "zh") {
+    var zc2 = function (arr, kind) { var a = arr || [], d = 0; a.forEach(function (x) { if (x && x.id != null && zhModDone(kind, x.id)) d++; }); return [d, a.length]; };
+    var zsets = zhSets(), zd = 0; zsets.forEach(function (d) { if (zhSetDone(d)) zd++; });
+    row("Từ vựng (bộ)", zd, zsets.length);
+    var phD = 0; (ZH_PH_STEPS || []).forEach(function (s) { if (state.zhPhDone && state.zhPhDone[s.id]) phD++; });
+    row("Mạch pinyin", phD, (ZH_PH_STEPS || []).length);
+    var zg = zc2(typeof ZH_GRAMMAR !== "undefined" ? ZH_GRAMMAR : [], "zhGram"); row("Ngữ pháp", zg[0], zg[1]);
+    var zr = zc2(typeof ZH_READING !== "undefined" ? ZH_READING : [], "zhRead"); row("Đọc", zr[0], zr[1]);
+    var zl = zc2(typeof ZH_LISTENING !== "undefined" ? ZH_LISTENING : [], "zhListen"); row("Nghe", zl[0], zl[1]);
+    var zs = zc2(typeof ZH_SPEAK !== "undefined" ? ZH_SPEAK : [], "zhSpeak"); row("Nói", zs[0], zs[1]);
+    var zro = zc2(typeof ZH_ROLE !== "undefined" ? ZH_ROLE : [], "zhRole"); row("Nhập vai", zro[0], zro[1]);
+    var zw = zc2(typeof ZH_WRITE !== "undefined" ? ZH_WRITE : [], "zhWrite"); row("Viết", zw[0], zw[1]);
+    row("HSKK Sơ cấp", (state.zhDone && state.zhDone["hskk:elem"]) ? 1 : 0, 1);
+  } else {
+    var isTc = track === "tc";
+    var kc = tcTpKindCounts89(isTc);
+    var g2 = function (k) { return kc[k] || [0, 0]; };
+    var put = function (name, k) { var v = g2(k); row(name, v[0], v[1]); };
+    if (isTc) {
+      put("Từ vựng (bộ)", "vocab"); put("Ngữ pháp", "gram"); put("Nghe Part 1–4", "listen"); put("Đọc Part 5–7", "read"); put("Kiểm tra cuối chặng", "check"); put("Thi thử", "mock");
+    } else {
+      put("Hangul", "hangul"); put("Từ vựng (bộ)", "vocab"); put("Ngữ pháp", "gram"); put("Nghe", "listen"); put("Đọc", "read"); put("Viết", "write"); put("Kiểm tra cuối chặng", "check"); put("Thi thử", "mock");
+    }
+  }
+  return '<div class="sumcard"><b>Mức độ từng kỹ năng (/100 — % bài đã xong, không phải điểm thi):</b>' + rows.join("") + '</div>';
+}
+/* Phạm vi "chương/chặng hiện tại" cho Mục tiêu ngày + Kế hoạch + Lộ trình riêng.
+   EN: chương 1 (giữ nguyên learningSteps, có số phút). ZH/TC/TP: chặng hiện
+   tại (bước học chính, không tính kiểm tra/thi thử); dữ liệu bước không có
+   số phút nên chỉ đếm bước, không ước tính tuần. */
+function trackCurrentScope89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") {
+    var steps = learningSteps();
+    var rem = steps.filter(function (s) { return !stepDone(s.id); });
+    var mins = rem.reduce(function (a, s) { return a + (s.mins || 0); }, 0);
+    return { track: "en", scopeLabel: "chương 1", remainCount: rem.length, totalSteps: steps.length, doneCount: steps.length - rem.length, remainMins: mins, stageIdx: 0 };
+  }
+  if (t === "zh") {
+    var seq = zhFullSeq(), stage = 6, i, first = null;
+    for (i = 0; i < seq.length; i++) if (!seq[i].done) { first = seq[i]; break; }
+    stage = first ? first.stage : 6;
+    var items = [];
+    if (stage === 0) { (ZH_PH_STEPS || []).forEach(function (s, ix) { items.push({ done: !!(state.zhPhDone && state.zhPhDone[s.id]), target: { title: "Phát âm: " + s.title, lesson: { type: "zhPh", idx: ix } } }); }); }
+    else items = zhStageSeq(stage);
+    var remZh = items.filter(function (it) { return !it.done; });
+    return { track: "zh", scopeLabel: "chặng " + stage, remainCount: remZh.length, totalSteps: items.length, doneCount: items.length - remZh.length, remainMins: null, stage: stage, stageItems: items };
+  }
+  var isTc = t === "tc";
+  var nx = isTc ? tcNextStep() : tpNextStep();
+  var stageIdx = 0;
+  if (nx) stageIdx = isTc ? tcStepStage(nx.id) : tpStepStage(nx.id);
+  var stg = (isTc ? TC_STAGES : TP_STAGES)[stageIdx] || { steps: [], title: "", score: 0 };
+  var learnKinds = isTc ? ["vocab", "gram", "listen", "read"] : ["hangul", "vocab", "gram", "listen", "read", "write"];
+  var meta = isTc ? tcStepMeta : tpStepMeta;
+  var doneMap = isTc ? (state.tcDone || {}) : (state.tpDone || {});
+  var learnIds = (stg.steps || []).filter(function (id) { var m = meta(id); return m && learnKinds.indexOf(m.kind) >= 0; });
+  var remTc = learnIds.filter(function (id) { return !doneMap[id]; });
+  return { track: t, scopeLabel: isTc ? ("chặng " + stg.score) : stg.title, remainCount: remTc.length, totalSteps: learnIds.length, doneCount: learnIds.length - remTc.length, remainMins: null, stageIdx: stageIdx, learnIds: learnIds };
+}
+/* Mục tiêu cho Kế hoạch tới ngày đích, theo track. */
+function trackPlanOptions89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  var p = (state.plan || {});
+  var opt = function (v, label) { return '<option value="' + esc(v) + '"' + (p.band === v ? ' selected' : '') + '>' + esc(label) + '</option>'; };
+  if (t === "zh") return (ZH_STAGES || []).map(function (st) { return opt("HSK " + st.stage, "HSK " + st.stage + " — " + st.title); }).join("");
+  if (t === "tc") return (TC_STAGES || []).map(function (st) { return opt("TOEIC " + st.score, "TOEIC " + st.score + " — " + String(st.title || "").replace(/^Chặng \d+ — /, "")); }).join("");
+  if (t === "tp") {
+    var out = [];
+    (TP_STAGES || []).forEach(function (st) { var m = String(st.title || "").match(/Cấp (\d)/); if (m) { var n = +m[1]; out.push(opt("TOPIK " + n, "TOPIK " + n + " — " + (n <= 2 ? "TOPIK I" : "TOPIK II"))); } });
+    return out.join("");
+  }
+  return RB_CHAPTER_MAP.map(function (ch) { return opt(ch.band, ch.band + " — " + ch.title); }).join("");
+}
+/* Một mốc thi thử thành một dòng, theo track. */
+function zhMockLine89(m) {
+  return 'Thi thử HSK ' + esc(String(m.hsk)) + ' (' + esc(m.date) + '): Nghe ' + m.listen.c + '/' + m.listen.n + ' · Đọc ' + m.read.c + '/' + m.read.n + (m.write.n === 0 ? ' · Viết: không có phần này' : ' · Viết ' + m.write.c + '/' + m.write.n) + ' · Tổng ' + m.total.c + '/' + m.total.n + ' câu';
+}
+function tcMockLine89(m) {
+  var lab = { "tc-mock-200": "đủ 200 câu", "tc-mock-450": "chặng 450", "tc-mock-600": "chặng 600", "tc-mock-750": "chặng 750" }[m.milestone] || m.milestone;
+  return 'Thi thử TOEIC — ' + lab + ' (' + fmtDateTs89(m.at) + '): Nghe ' + m.l + '/' + m.nl + ' · Đọc ' + m.r + '/' + m.nr + ' · Điểm ước lượng ' + m.est + '/990';
+}
+function tpMockLine89(m) {
+  var d = fmtDateTs89(m.at);
+  if (m.milestone === "tp-mock-II") return 'Thi thử TOPIK II đủ 104 nhiệm vụ (' + d + '): Nghe ' + m.l + '/50 · Đọc ' + m.r + '/50 · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "");
+  return 'Thi thử TOPIK I rút gọn (' + d + '): Nghe ' + m.l + '/35 · Đọc ' + m.r + '/35 · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "");
+}
+/* Thẻ "Đánh giá mức độ" theo track. EN giữ nguyên y hệt. */
+function trackLevelHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") {
+    var levelHTML = "";
+    if (state.lastTest) {
+      var lt = state.lastTest;
+      var weakestP = lt.parts.slice().sort(function (a, b) { return a.pct - b.pct; })[0];
+      levelHTML = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
+        + '<p><b>Band ước lượng: ' + fmtBandComma(lt.band) + '</b> <span class="mut">(kiểm tra cuối chương 1, ngày ' + esc(lt.date) + ')</span></p>'
+        + lt.parts.map(function (pt) { return '<p>Phần "' + esc(pt.name) + '": ' + pt.c + '/' + pt.n + ' (' + pt.pct + '%)</p>'; }).join("")
+        + '<p><b>Phần yếu nhất: ' + esc(weakestP.name) + ' (' + weakestP.pct + '%)</b> — hãy luyện lại bước tương ứng trong chương 1.</p>'
+        + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú. Band ở đây là ước lượng từ kiểm tra nội bộ, không phải điểm thi IELTS thật.</p>'
+        + '<button class="btn" id="levelWeakBtn">Luyện phần yếu nhất</button></section>';
+    } else {
+      levelHTML = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
+        + '<div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Chưa có bài kiểm tra — bạn chưa làm bài kiểm tra cuối chương nào.</p></div></div>'
+        + '<p class="mut">Làm bài kiểm tra cuối chương 1 ở Lộ trình để xem mức độ của mình (band ước lượng + % từng phần + phần yếu nhất).</p></section>';
+    }
+    return levelHTML;
+  }
+  var snake = '<div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Chưa có bài kiểm tra — bạn chưa làm kiểm tra cuối chặng nào.</p></div></div>';
+  if (t === "zh") {
+    var passed = 0; Object.keys(state.zhChapterTestDone || {}).forEach(function (k) { if (state.zhChapterTestDone[k]) passed++; });
+    var mocks = state.zhMockTests || [];
+    if (!mocks.length && !passed) return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + snake + '<p class="mut">Làm kiểm tra cuối chặng HSK ở Bản đồ để xem mức độ tiếng Trung của mình (đúng/sai từng phần + phần yếu nhất).</p></section>';
+    var h = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
+      + '<p><b>Đã qua kiểm tra cuối chặng: ' + passed + '/6 chặng</b> <span class="mut">(mỗi phần cần từ 50% đúng lần đầu mới tính qua)</span></p>';
+    if (mocks.length) { var m = mocks[mocks.length - 1]; h += '<p><b>' + zhMockLine89(m) + '</b></p><p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p>'; }
+    else h += '<p class="mut">Chưa thi thử HSK — thi thử ở cuối Bản đồ để lưu mốc.</p>';
+    return h + '</section>';
+  }
+  var isTc = t === "tc";
+  var kc = tcTpKindCounts89(isTc);
+  var ck = kc["check"] || [0, 0];
+  var mk = isTc ? (state.tcMockTests || []) : (state.tpMockTests || []);
+  if (!mk.length && !ck[0]) {
+    var emptyTxt = isTc ? "Làm kiểm tra cuối chặng TOEIC ở Bản đồ để xem mức độ của mình (đúng/sai từng phần + phần yếu nhất)."
+      : "Làm kiểm tra cuối chặng TOPIK ở Bản đồ để xem mức độ tiếng Hàn của mình (đúng/sai từng phần + phần yếu nhất).";
+    return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + snake + '<p class="mut">' + emptyTxt + '</p></section>';
+  }
+  var h2 = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
+    + '<p><b>Đã qua kiểm tra cuối chặng: ' + ck[0] + '/' + ck[1] + ' chặng</b></p>';
+  if (mk.length) {
+    var m2 = mk[mk.length - 1];
+    if (isTc) h2 += '<p><b>' + tcMockLine89(m2) + '</b></p><p class="mut">ETS không công bố bảng quy đổi điểm thô cố định — điểm này chỉ là ước lượng nội bộ.</p>';
+    else h2 += '<p><b>' + tpMockLine89(m2) + '</b></p><p class="mut">Các mốc dưới đây đo trình độ tiếng Hàn của bạn qua bài thi thử đã lưu.</p>';
+  } else h2 += '<p class="mut">Chưa thi thử — thi thử ở cuối chặng trong Bản đồ để lưu mốc.</p>';
+  return h2 + '</section>';
+}
+/* Thẻ "Buổi thi kết thúc đợt" theo track. EN giữ nguyên y hệt. */
+function trackPhaseHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") {
+    var phaseHTML = "";
+    var phList = state.phaseExams || [];
+    if (phList.length) {
+      var last = phList[phList.length - 1], prevPh = phList.length > 1 ? phList[phList.length - 2] : null;
+      var dPh = function (sk) { if (!prevPh) return ""; var d = Math.round((last[sk].band - prevPh[sk].band) * 10) / 10; return d > 0 ? " ▲ +" + d.toFixed(1).replace(".", ",") : (d < 0 ? " ▼ " + d.toFixed(1).replace(".", ",") : " = không đổi"); };
+      phaseHTML = '<section class="card" id="minePhase"><h3>Buổi thi kết thúc đợt — trình độ qua các đợt</h3>'
+        + '<p><b>Đợt ' + last.phase + ' (' + esc(last.date) + '):</b> Nghe ' + fmtBandComma(last.listening.band) + dPh("listening") + ' · Đọc ' + fmtBandComma(last.reading.band) + dPh("reading") + ' · Nói ' + fmtBandComma(last.speaking.band) + ' (Tự đánh giá)' + (last.speaking.aiScore != null ? ' · AI phát âm ' + last.speaking.aiScore + '%' : '') + dPh("speaking") + ' · Viết ' + fmtBandComma(last.writing.band) + (last.writing.ai ? ' (Máy ước lượng)' : ' (Tự đánh giá)') + dPh("writing") + '</p>'
+        + (prevPh ? '<p class="mut">Đợt trước (Đợt ' + prevPh.phase + ', ' + esc(prevPh.date) + '): Nghe ' + fmtBandComma(prevPh.listening.band) + ' · Đọc ' + fmtBandComma(prevPh.reading.band) + ' · Nói ' + fmtBandComma(prevPh.speaking.band) + ' · Viết ' + fmtBandComma(prevPh.writing.band) + '</p>' : '<p class="mut">Đây là đợt đầu tiên — thi thêm đợt sau để so sánh trình độ thay đổi ra sao.</p>')
+        + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú.</p>'
+        + '<p><button class="btn" id="phaseAgainBtn">Mở buổi thi đợt ' + (last.phase + 1) + '</button></p></section>';
+    } else {
+      phaseHTML = '<section class="card" id="minePhase"><h3>Buổi thi kết thúc đợt</h3><p class="mut">Chưa có buổi thi nào. Vào Luyện tập → Buổi thi kết thúc đợt để thi 4 kỹ năng riêng và lưu kết quả theo đợt.</p></section>';
+    }
+    return phaseHTML;
+  }
+  var msg = t === "zh" ? "Chưa có buổi thi nào. Thi thử HSK ở cuối Bản đồ để lưu mốc thi thử của bạn."
+    : t === "tc" ? "Chưa có buổi thi nào. Thi thử TOEIC ở cuối chặng trong Bản đồ để lưu mốc thi thử của bạn."
+    : "Chưa có buổi thi nào. Thi thử TOPIK ở cuối chặng trong Bản đồ để lưu mốc thi thử của bạn.";
+  return '<section class="card" id="minePhase"><h3>Buổi thi kết thúc đợt</h3><p class="mut">' + msg + '</p></section>';
+}
+/* Thẻ "Mốc đã thi thử" theo track. EN giữ nguyên y hệt. */
+function trackMockHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") {
+    var mockHTML = "";
+    var mkList = state.mockTests || [];
+    if (mkList.length) {
+      mockHTML = '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + mkList.map(function (m) {
+        return '<p>Chặng ' + esc(String(m.milestone).replace(".", ",")) + (m.milestone === "7.5" ? "+" : "") + ' (' + esc(m.date) + '): Nghe ' + fmtBandComma(m.listen) + ' · Đọc ' + fmtBandComma(m.read) + ' · Viết ' + fmtBandComma(m.write) + ' · Nói ' + fmtBandComma(m.speak) + ' · <b>Overall ' + fmtBandComma(m.overall) + '</b></p>';
+      }).join("") + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú.</p></section>';
+    }
+    return mockHTML;
+  }
+  if (t === "zh") {
+    var zl = state.zhMockTests || []; if (!zl.length) return "";
+    return '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + zl.map(function (m) { return '<p>' + zhMockLine89(m) + '</p>'; }).join("") + '<p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p></section>';
+  }
+  if (t === "tc") {
+    var tl = state.tcMockTests || []; if (!tl.length) return "";
+    return '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + tl.map(function (m) { return '<p>' + tcMockLine89(m) + '</p>'; }).join("") + '<p class="mut">ETS không công bố bảng quy đổi điểm thô cố định — điểm này chỉ là ước lượng nội bộ.</p></section>';
+  }
+  var pl = state.tpMockTests || []; if (!pl.length) return "";
+  return '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + pl.map(function (m) { return '<p>' + tpMockLine89(m) + '</p>'; }).join("") + '<p class="mut">Ngưỡng cấp là quy ước nội bộ của web theo thang PBT /200, không phải bảng chính thức.</p></section>';
+}
+/* "Thẻ đã thuộc" + "Mục khó chưa xong" theo track. */
+function trackKnownCards89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") return Object.keys(state.cards).filter(function (k) { return state.cards[k].box >= 1; }).length;
+  if (t === "zh") { var n = 0; zhSets().forEach(function (d) { n += Math.min(zhSetPos(d), (d.set.cards || []).length); }); return n; }
+  if (t === "tc") { var box = state.tcCardBox || {}, c = 0; Object.keys(box).forEach(function (k) { if (box[k] >= 1) c++; }); return c; }
+  var box2 = state.tpCardBox || {}, c2 = 0; Object.keys(box2).forEach(function (k) { if (box2[k] >= 1) c2++; }); return c2;
+}
+function trackHardCount89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") return Object.keys(state.hard).filter(function (k) { return !state.hard[k].done; }).length;
+  if (t === "zh") return Object.keys(state.zhHard || {}).filter(function (k) { return !state.zhHard[k].done; }).length;
+  if (t === "tc") return (state.tcHard || []).length;
+  return (state.tpHard || []).length;
+}
+/* Bảng chú giải theo track: mục chung + mục riêng của track. */
+function trackGlossary89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") return RB_GLOSSARY.slice();
+  var base = RB_GLOSSARY.filter(function (g) { return ["Nấc nhớ", "Sổ lỗi sai", "Chặng", "Ôn giãn cách"].indexOf(g.t) >= 0; });
+  var byTitle = {};
+  RB_GLOSSARY.forEach(function (g) { byTitle[g.t] = g; });
+  if (t === "zh") return base.concat([
+    { t: "Pinyin", d: "Pinyin là cách viết âm tiếng Trung bằng chữ cái Latin, kèm dấu thanh: nhìn pinyin là biết đọc âm tiết đó thế nào." },
+    { t: "Cấp HSK", d: "Cấp HSK là thang trình độ tiếng Trung, từ HSK 1 đến HSK 6. Cấp càng cao nghĩa là tiếng Trung càng tốt." }
+  ]);
+  if (t === "tc") return base.concat([
+    byTitle["IPA"],
+    { t: "Điểm TOEIC", d: "Điểm TOEIC (Nghe + Đọc) từ 10 đến 990. Điểm càng cao nghĩa là tiếng Anh công sở càng tốt." }
+  ]);
+  return base.concat([
+    { t: "Hangul", d: "Hangul là bảng chữ cái tiếng Hàn: mỗi âm tiết ghép từ phụ âm đầu, nguyên âm và phụ âm cuối (nếu có). Học thuộc bảng Hangul là bước đầu tiên." },
+    { t: "Cấp TOPIK", d: "Cấp TOPIK là thang trình độ tiếng Hàn, từ cấp 1 đến cấp 6 (TOPIK I: cấp 1–2; TOPIK II: cấp 3–6). Cấp càng cao nghĩa là tiếng Hàn càng tốt." }
+  ]);
+}
+/* "Cách tính điểm" trong Ghi chú, theo track. EN giữ nguyên y hệt. */
+function notesScoreHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") {
+    return '<h4>Bảng quy đổi điểm thô → band (Nghe/Đọc, thang 40 câu)</h4>'
+      + '<p>' + RB_BAND_NOTE + '</p>'
+      + notesBandTableHTML("reading", "Đọc") + notesBandTableHTML("listening", "Nghe")
+      + '<p class="mut">CEFR là khung trình độ chung châu Âu (A1 thấp nhất tới C2 cao nhất) — cột CEFR trong bảng trên đối chiếu band với khung này.</p>'
+      + '<p>Kiểm tra tổng hợp cuối chương dùng bảng Đọc làm bảng chung.</p>'
+      + '<h4>Điểm Nói/Viết</h4>'
+      + '<p><b>4 tiêu chí chấm nói (mỗi tiêu chí 25%):</b> ' + esc(RB_SPEAK_CRITERIA_TXT) + '</p>'
+      + '<p><b>4 tiêu chí chấm viết (mỗi tiêu chí 25%):</b> ' + esc(RB_WRITE_CRITERIA_TXT) + '</p>'
+      + '<p>Band chung là trung bình 4 tiêu chí. Phát âm neo điểm pronounce: điểm pronounce cao thì band Phát âm cao, thấp thì band thấp, không bịa ngược.</p>'
+      + '<p>Kiểm tra phát âm đầu vào: kết quả chỉ là ước lượng tại chỗ, không tính đạt chuẩn.</p>'
+      + '<p>Thẻ từ: quyền camera/mic bị từ chối thì không tính đạt chuẩn.</p>'
+      + '<p>AI chấm tiếng Trung (hàm chấm bản mới): chấm theo từng âm tiết, thanh điệu là chiều riêng; thẻ từ cần AI ≥ 80 mới qua bước phát âm. Nếu máy chủ chưa nâng cấp hàm chấm thì tạm chưa tính điểm AI.</p>';
+  }
+  if (t === "zh") {
+    return '<h4>Điểm HSK</h4>'
+      + '<p>Kiểm tra cuối chặng: mỗi phần cần từ 50% đúng lần đầu mới tính qua; chưa qua chỉ cần học lại đúng phần yếu, các phần đã đạt không cần làm lại.</p>'
+      + '<p>Thi thử HSK (bản rút gọn): điểm là số câu đúng từng phần Nghe/Đọc/Viết — không phải điểm HSK chính thức.</p>'
+      + '<p>AI chấm tiếng Trung (hàm chấm bản mới): chấm theo từng âm tiết, thanh điệu là chiều riêng; thẻ từ cần AI ≥ 80 mới qua bước phát âm. Nếu máy chủ chưa nâng cấp hàm chấm thì tạm chưa tính điểm AI.</p>'
+      + '<p>Thẻ từ: quyền camera/mic bị từ chối thì không tính đạt chuẩn.</p>'
+      + '<p>HSKK: web giữ mục HSKK riêng, không gộp nói vào đề từng cấp — vì tới 25/10/2026 chưa có bằng chứng chính thức nào cho thấy nói đã tích hợp có điểm riêng vào từng đề HSK 3.0.</p>';
+  }
+  if (t === "tc") {
+    return '<h4>Điểm TOEIC</h4>'
+      + '<p>Thi thử TOEIC: mỗi phần Nghe/Đọc quy ra thang 495 theo tỉ lệ câu đúng, tổng tối đa 990. ETS không công bố bảng quy đổi điểm thô cố định nên điểm này chỉ là ước lượng nội bộ, không tương đương điểm thi thật.</p>'
+      + '<p>Thi thử đủ 200 câu theo đúng tỉ lệ đề thi thật của ETS; thi thử theo chặng rút gọn 120 câu (60%).</p>';
+  }
+  return '<h4>Điểm TOPIK</h4>'
+    + '<p>Thi thử TOPIK I rút gọn: tổng /200 (Nghe + Đọc, mỗi phần /100 theo tỉ lệ câu đúng); từ 140 = cấp 2, 80–139 = cấp 1. Ngưỡng này là quy ước nội bộ của web theo thang PBT /200, không phải bảng chính thức.</p>'
+    + '<p>Thi thử TOPIK II đủ 104 nhiệm vụ: Nghe + Đọc tính điểm tham khảo, Viết tự chấm theo bảng tiêu chí.</p>';
+}
+function notesGateHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") return '<p>Kiểm tra cuối chương mở khi xong 80% số bước tính cổng (bước “làm quen” và bước “ôn xen kẽ” không tính vào 80%; làm tròn lên: cần Math.ceil(số bước tính cổng × 0,8) bước; chương 1 cần 6/7 bước). Kiểm tra cuối chặng tiếng Trung mở khi xong 80% số bước chặng; mỗi phần cần từ 50% đúng lần đầu mới tính qua, chưa qua chỉ cần học lại đúng phần yếu.</p>';
+  if (t === "zh") return '<p>Kiểm tra cuối chặng mở khi xong 80% số bước chặng; mỗi phần cần từ 50% đúng lần đầu mới tính qua, chưa qua chỉ cần học lại đúng phần yếu.</p>';
+  return '<p>Kiểm tra cuối chặng mở khi xong 80% số bước học của chặng — bước gợi ý sẽ chuyển sang kiểm tra cuối chặng khi đủ 80%.</p>';
+}
+function notesPlanHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") return '<p>Kế hoạch tới ngày đích: số tuần còn lại ≈ số phút còn lại chia cho mục tiêu phút/ngày rồi chia 7 (làm tròn lên). Tính ngược ngày đích: số ngày học cần = số phút còn lại chia mục tiêu phút/ngày; web báo đúng tiến độ, chậm bao nhiêu ngày, hoặc cần tăng lên bao nhiêu phút/ngày để kịp. Hiện chỉ tính chương 1.</p>';
+  return '<p>Kế hoạch tới ngày đích: web đếm số bước còn lại ở chặng hiện tại và báo còn bao nhiêu ngày tới đích. Hiện chỉ tính chặng hiện tại.</p>';
+}
+/* "Nội dung tự soạn" + chuẩn tham chiếu + chuẩn nội bộ, theo track. */
+function sourcesSelfHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  var h = '<h3>Nội dung tự soạn</h3>';
+  if (t === "en") {
+    h += '<p>Mọi bài dưới đây đều từ kho tự soạn của web, xếp theo đúng định dạng thi IELTS. Số lượng đếm thật từ kho, không ghi số mẫu.</p>';
+    h += '<p>Nội dung tự soạn của web, viết mới từ khoảng trống mà 86 sách không có đủ: lỗi riêng cho người Việt, ví dụ đời sống người Việt, sắc thái chặng 7,5+, và đối chiếu format thi hiện tại.</p>';
+    h += '<p>Câu biểu đạt mỗi ngày: câu tự soạn, dùng được thật trong giao tiếp.</p>';
+    return h;
+  }
+  if (t === "zh") {
+    h += '<p>Mọi bài dưới đây đều từ kho tự soạn của web, xếp theo đúng định dạng thi HSK. Số lượng đếm thật từ kho, không ghi số mẫu.</p>';
+    h += '<p>Nội dung tự soạn của web, viết mới theo Giáo trình chuẩn HSK, kèm ví dụ đời sống người Việt.</p>';
+    return h;
+  }
+  if (t === "tc") {
+    h += '<p>Mọi bài dưới đây đều từ kho tự soạn của web, xếp theo đúng định dạng thi TOEIC. Số lượng đếm thật từ kho, không ghi số mẫu.</p>';
+    h += '<p>Nội dung tự soạn của web, viết mới theo đúng dạng đề thi thật của ETS.</p>';
+    return h;
+  }
+  h += '<p>Mọi bài dưới đây đều từ kho tự soạn của web, xếp theo đúng định dạng thi TOPIK. Số lượng đếm thật từ kho, không ghi số mẫu.</p>';
+  h += '<p>Nội dung tự soạn của web, viết mới theo đúng dạng đề thi TOPIK.</p>';
+  return h;
+}
+function sourcesStdHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") {
+    return '<h3>Chuẩn IELTS tham chiếu</h3>'
+      + '<p>Nguồn đối chiếu: nghiên cứu chuẩn IELTS chính thống 23/10 (Cambridge / IDP / British Council). Sách cũ có điểm đã lỗi thời nên phải đối chiếu lại, không tin hoàn toàn.</p>'
+      + '<p>Điểm neo band: Đọc 15/40 = 5,0; Nghe 16/40 = 5,0 (theo Teacher’s Book Mindset Level 1, Cambridge).</p>'
+      + '<h3>Chuẩn HSK (hệ 6 cấp + hệ E)</h3>'
+      + '<p>Nền tảng web theo Giáo trình chuẩn HSK (hệ 6 cấp cũ). Bảng đối chiếu số từ tích lũy: cột “Sách cũ” là thang của bộ giáo trình Bùi gửi; cột “Hệ E” là đề cương thi HSK 3.0 năm 2025 (đã đối chiếu văn bản gốc ngày 25/10/2026). Phần bổ sung từ hệ E (vượt ngoài sách cũ) sẽ có ở đợt sau — web không dùng số hệ F (khung dạy học GF 0025-2021) để ghi nhãn.</p>';
+  }
+  if (t === "zh") {
+    return '<h3>Chuẩn HSK (hệ 6 cấp + hệ E)</h3>'
+      + '<p>Nền tảng web theo Giáo trình chuẩn HSK (hệ 6 cấp cũ). Bảng đối chiếu số từ tích lũy: cột “Sách cũ” là thang của bộ giáo trình Bùi gửi; cột “Hệ E” là đề cương thi HSK 3.0 năm 2025 (đã đối chiếu văn bản gốc ngày 25/10/2026). Phần bổ sung từ hệ E (vượt ngoài sách cũ) sẽ có ở đợt sau — web không dùng số hệ F (khung dạy học GF 0025-2021) để ghi nhãn.</p>';
+  }
+  if (t === "tc") {
+    return '<h3>Chuẩn TOEIC tham chiếu</h3>'
+      + '<p>Nguồn đối chiếu: dạng đề thi thật của ETS. Bài thi thử là bài tự soạn rút gọn theo đúng dạng đề thi thật, không phải đề thi thật; ETS không công bố bảng quy đổi điểm thô cố định.</p>';
+  }
+  return '<h3>Chuẩn TOPIK tham chiếu</h3>'
+    + '<p>Nguồn đối chiếu: dạng đề thi TOPIK (TOPIK I 70 câu, 100 phút; TOPIK II đủ 104 nhiệm vụ). Bài thi thử là bài tự soạn rút gọn theo đúng dạng đề thi, không phải đề thi thật.</p>';
+}
+function sourcesInternalHTML89() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") return '<h3>Chuẩn nội bộ của web</h3>'
+    + '<p>Cổng 80% mở kiểm tra, band ước lượng, lịch ôn 1-3-7-14-30 ngày và bảng XP đều là chuẩn nội bộ của web, không phải chuẩn IELTS hay HSK chính thức. Cách tính chi tiết xem trong Cài đặt → Ghi chú.</p>';
+  var std = t === "zh" ? "HSK" : t === "tc" ? "TOEIC" : "TOPIK";
+  return '<h3>Chuẩn nội bộ của web</h3>'
+    + '<p>Cổng 80% mở kiểm tra, điểm thi thử ước lượng, lịch ôn 1-3-7-14-30 ngày và bảng XP đều là chuẩn nội bộ của web, không phải chuẩn ' + std + ' chính thức. Cách tính chi tiết xem trong Cài đặt → Ghi chú.</p>';
+}
+/* Lộ trình riêng theo track (v89). EN giữ nguyên trong buildPersonalPath. */
+function buildPersonalPath89(track) {
+  var scope = trackCurrentScope89();
+  var pace = state.pace || "vua";
+  var items = [], reasons = [];
+  var stepItem = function (title, open) { return { kind: "step", title: title, reason: "", open: open }; };
+  var reviewItem = function (label, reason) { return { kind: "review", title: "Ôn điểm yếu" + label, reason: reason, open: { t: "review" } }; };
+  var dueCount, dueLabel, ordered = [];
+  if (track === "zh") {
+    dueCount = 0; try { dueCount = zhDueHard().length; } catch (e) {}
+    dueLabel = "Mục đến hạn ôn";
+    (scope.stageItems || []).forEach(function (it) { if (!it.done) ordered.push(stepItem(it.target.title, { t: "zh", lesson: it.target.lesson })); });
+  } else {
+    var isTc = track === "tc";
+    dueCount = isTc ? (state.tcHard || []).length : (state.tpHard || []).length;
+    dueLabel = "Mục lỗi sai chưa xong";
+    (scope.learnIds || []).forEach(function (id) {
+      var doneMap = isTc ? (state.tcDone || {}) : (state.tpDone || {});
+      if (doneMap[id]) return;
+      var m = (isTc ? tcStepMeta : tpStepMeta)(id);
+      if (m) ordered.push(stepItem(m.title, { t: track, id: id }));
+    });
+  }
+  var dueTxt = dueLabel === "Mục đến hạn ôn" ? "mục đến hạn ôn" : "mục lỗi sai chưa xong";
+  if (dueCount > 0 && pace === "nhanh") {
+    items.push(reviewItem(" (gọn)", "Bạn có " + dueCount + " " + dueTxt + " — gom gọn để tăng tốc."));
+    ordered.forEach(function (it) { items.push(it); });
+  } else {
+    ordered.forEach(function (it, idx) {
+      items.push(it);
+      if (pace === "ky") items.push({ kind: "drill", title: "Ôn kỹ: " + it.title, reason: "Bạn chọn nhịp kỹ nên ôn thêm sau mỗi bước.", open: it.open });
+      if (dueCount > 0 && pace === "vua" && idx === 0) items.push(reviewItem("", "Bạn có " + dueCount + " " + dueTxt + " — ôn đúng lúc sắp quên là nhớ lâu nhất."));
+      if (dueCount > 0 && pace === "ky" && (idx + 1) % 2 === 0) items.push(reviewItem("", "Bạn chọn nhịp kỹ nên ôn thêm sau mỗi 2 bước."));
+    });
+    if (dueCount > 0 && !items.some(function (it) { return it.kind === "review"; })) items.push(reviewItem("", "Bạn có " + dueCount + " " + dueTxt + " — ôn đúng lúc sắp quên là nhớ lâu nhất."));
+  }
+  if (dueCount > 0) reasons.push("Bạn có " + dueCount + " " + dueTxt + " trong Sổ lỗi sai.");
+  if (ordered.length === 0) {
+    var lastStage = track === "zh" ? (scope.stage === 6) : (track === "tc" ? scope.stageIdx === 3 : scope.stageIdx === 7);
+    reasons.push(lastStage ? "Bạn đã xong hết các chặng — hãy ôn tập mỗi ngày để nhớ lâu." : "Bạn đã xong chặng này — lộ trình riêng sẽ mở tiếp khi chặng sau mở.");
+  } else reasons.push("Chưa có kiểm tra — lộ trình theo thứ tự chặng; làm kiểm tra cuối chặng để xem phần nào chưa vững.");
+  if (pace === "nhanh") reasons.push("Nhịp tăng tốc: các bước đã xong không lặp lại.");
+  if (pace === "ky") reasons.push("Nhịp kỹ: ôn thêm sau mỗi bước và sau mỗi 2 bước.");
+  var shown = items.slice(0, 5);
+  var shownSteps = 0; shown.forEach(function (it) { if (it.kind === "step") shownSteps++; });
+  return { items: shown, reasons: reasons, done: scope.doneCount, total: scope.totalSteps, weak: null, dueCount: dueCount, dueLabel: dueLabel, pace: pace, scopeLabel: scope.scopeLabel, more: Math.max(0, ordered.length - shownSteps) };
+}
+/* Mở bước trong Lộ trình riêng theo track (v89). */
+function openPersonalPathItem89(i) {
+  var pp = buildPersonalPath();
+  var it = pp.items && pp.items[i];
+  if (!it || !it.open) return;
+  var o = it.open;
+  if (o.t === "review") { go("review"); return; }
+  if (o.t === "zh") { openLesson(o.lesson); return; }
+  if (o.t === "tc") { tcOpenStep(o.id, curTab); return; }
+  if (o.t === "tp") { tpOpenStep(o.id, curTab); return; }
+}
+
 function viewMine(app) {
   var lv = xpLevel(state.xp || 0);
-  var known = Object.keys(state.cards).filter(function (k) { return state.cards[k].box >= 1; }).length;
-  var hardN = Object.keys(state.hard).filter(function (k) { return !state.hard[k].done; }).length;
+  var known = trackKnownCards89();
+  var hardN = trackHardCount89();
   var savedN = Object.keys(state.savedWords || {}).length;
   var streak = streakDays();
-  var remain = learningSteps().filter(function (s) { return !stepDone(s.id); });
-  var remainMins = remain.reduce(function (a, s) { return a + s.mins; }, 0);
+  var scope89 = trackCurrentScope89();
+  var remainMins = scope89.remainMins;
   var goal = state.goal || 30;
-  var weeks = Math.max(1, Math.ceil(Math.ceil(remainMins / goal) / 7));
+  var weeks = remainMins != null ? Math.max(1, Math.ceil(Math.ceil(remainMins / goal) / 7)) : null;
   var html = trackSwitchHTML() + '<h2>Của tôi</h2>';
   var mineT = (state.track === "zh") ? zhSessionTarget() : practiceNextTarget();
   html += '<section class="card next-card" id="mineNextCard"><p class="eyebrow">TIẾP THEO</p><h3>' + esc(mineT.title) + '</h3><p class="mut">' + esc(mineT.type) + '</p><button class="btn btn-primary" id="mineNextBtn">Học tiếp</button></section>';
@@ -3857,53 +4291,21 @@ function viewMine(app) {
     + '<button class="btn" id="goalMinus">−</button><input type="number" id="goalInp" value="' + goal + '" min="15" max="180" style="width:90px">'
     + '<button class="btn" id="goalPlus">+</button><span>phút/ngày</span></div>'
     + '<p><span class="chip">Chuỗi ' + streak + ' ngày</span> <button class="btn" id="checkinBtn">' + (state.checkin[todayStr()] ? "Đã điểm danh" : "Điểm danh hôm nay (+5 XP)") + '</button></p>'
-    + '<p class="mut">Với mục tiêu này, bạn còn khoảng ' + weeks + ' tuần nữa để xong chương 1 (ước tính). Web tĩnh không gửi thông báo khi bạn đóng trang — hãy tự mở web mỗi ngày để giữ chuỗi.</p>' + clPlanHTML(remainMins, goal) + '</section>';
+    + '<p class="mut">' + (weeks != null ? ('Với mục tiêu này, bạn còn khoảng ' + weeks + ' tuần nữa để xong chương 1 (ước tính). ') : ('Với mục tiêu này, bạn còn ' + scope89.remainCount + ' bước chưa xong ở ' + scope89.scopeLabel + '. ')) + 'Web tĩnh không gửi thông báo khi bạn đóng trang — hãy tự mở web mỗi ngày để giữ chuỗi.</p>' + clPlanHTML(scope89, goal) + '</section>';
   html += freezeStatusHTML();
   html += clCalHTML();
   html += '<section class="card"><h3>Tiến trình của bạn</h3><p>Thẻ đã thuộc: ' + known + ' · Mục khó chưa xong: ' + hardN + ' · Từ đã lưu: ' + savedN + '</p>'
     + '<p>' + (hardN > 0 ? '<button class="btn" id="mineHardBtn">Xem sổ lỗi sai (' + hardN + ') →</button> ' : '') + '<button class="btn" id="quickCheckBtn">Kiểm tra trình độ (tùy chọn, không bắt buộc)</button></p></section>';
-  var levelHTML = "";
-  if (state.lastTest) {
-    var lt = state.lastTest;
-    var weakestP = lt.parts.slice().sort(function (a, b) { return a.pct - b.pct; })[0];
-    levelHTML = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
-      + '<p><b>Band ước lượng: ' + fmtBandComma(lt.band) + '</b> <span class="mut">(kiểm tra cuối chương 1, ngày ' + esc(lt.date) + ')</span></p>'
-      + lt.parts.map(function (pt) { return '<p>Phần "' + esc(pt.name) + '": ' + pt.c + '/' + pt.n + ' (' + pt.pct + '%)</p>'; }).join("")
-      + '<p><b>Phần yếu nhất: ' + esc(weakestP.name) + ' (' + weakestP.pct + '%)</b> — hãy luyện lại bước tương ứng trong chương 1.</p>'
-      + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú. Band ở đây là ước lượng từ kiểm tra nội bộ, không phải điểm thi IELTS thật.</p>'
-      + '<button class="btn" id="levelWeakBtn">Luyện phần yếu nhất</button></section>';
-  } else {
-    levelHTML = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
-      + '<div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Chưa có bài kiểm tra — bạn chưa làm bài kiểm tra cuối chương nào.</p></div></div>'
-      + '<p class="mut">Làm bài kiểm tra cuối chương 1 ở Lộ trình để xem mức độ của mình (band ước lượng + % từng phần + phần yếu nhất).</p></section>';
-  }
-  var phaseHTML = "";
-  var phList = state.phaseExams || [];
-  if (phList.length) {
-    var last = phList[phList.length - 1], prevPh = phList.length > 1 ? phList[phList.length - 2] : null;
-    var dPh = function (sk) { if (!prevPh) return ""; var d = Math.round((last[sk].band - prevPh[sk].band) * 10) / 10; return d > 0 ? " ▲ +" + d.toFixed(1).replace(".", ",") : (d < 0 ? " ▼ " + d.toFixed(1).replace(".", ",") : " = không đổi"); };
-    phaseHTML = '<section class="card" id="minePhase"><h3>Buổi thi kết thúc đợt — trình độ qua các đợt</h3>'
-      + '<p><b>Đợt ' + last.phase + ' (' + esc(last.date) + '):</b> Nghe ' + fmtBandComma(last.listening.band) + dPh("listening") + ' · Đọc ' + fmtBandComma(last.reading.band) + dPh("reading") + ' · Nói ' + fmtBandComma(last.speaking.band) + ' (Tự đánh giá)' + (last.speaking.aiScore != null ? ' · AI phát âm ' + last.speaking.aiScore + '%' : '') + dPh("speaking") + ' · Viết ' + fmtBandComma(last.writing.band) + (last.writing.ai ? ' (Máy ước lượng)' : ' (Tự đánh giá)') + dPh("writing") + '</p>'
-      + (prevPh ? '<p class="mut">Đợt trước (Đợt ' + prevPh.phase + ', ' + esc(prevPh.date) + '): Nghe ' + fmtBandComma(prevPh.listening.band) + ' · Đọc ' + fmtBandComma(prevPh.reading.band) + ' · Nói ' + fmtBandComma(prevPh.speaking.band) + ' · Viết ' + fmtBandComma(prevPh.writing.band) + '</p>' : '<p class="mut">Đây là đợt đầu tiên — thi thêm đợt sau để so sánh trình độ thay đổi ra sao.</p>')
-      + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú.</p>'
-      + '<p><button class="btn" id="phaseAgainBtn">Mở buổi thi đợt ' + (last.phase + 1) + '</button></p></section>';
-  } else {
-    phaseHTML = '<section class="card" id="minePhase"><h3>Buổi thi kết thúc đợt</h3><p class="mut">Chưa có buổi thi nào. Vào Luyện tập → Buổi thi kết thúc đợt để thi 4 kỹ năng riêng và lưu kết quả theo đợt.</p></section>';
-  }
-  var mockHTML = "";
-  var mkList = state.mockTests || [];
-  if (mkList.length) {
-    mockHTML = '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + mkList.map(function (m) {
-      return '<p>Chặng ' + esc(String(m.milestone).replace(".", ",")) + (m.milestone === "7.5" ? "+" : "") + ' (' + esc(m.date) + '): Nghe ' + fmtBandComma(m.listen) + ' · Đọc ' + fmtBandComma(m.read) + ' · Viết ' + fmtBandComma(m.write) + ' · Nói ' + fmtBandComma(m.speak) + ' · <b>Overall ' + fmtBandComma(m.overall) + '</b></p>';
-    }).join("") + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú.</p></section>';
-  }
+  var levelHTML = trackLevelHTML89();
+  var phaseHTML = trackPhaseHTML89();
+  var mockHTML = trackMockHTML89();
   levelHTML += skillLevelRows();
   html += levelHTML + phaseHTML + mockHTML;
-  html += '<details style="margin-top:8px"><summary><b>Bảng chú giải</b></summary>' + RB_GLOSSARY.map(function (g) { return '<p><b>' + esc(g.t) + ':</b> ' + esc(g.d) + '</p>'; }).join("") + '</details>';
+  html += '<details style="margin-top:8px"><summary><b>Bảng chú giải</b></summary>' + trackGlossary89().map(function (g) { return '<p><b>' + esc(g.t) + ':</b> ' + esc(g.d) + '</p>'; }).join("") + '</details>';
   html += '</details>';
   html += '<details class="card" id="mineGrpSettings"><summary><b>Nhắc học và cài đặt</b></summary>';
   html += pushCardHTML();
-  if (typeof authState !== "undefined" && authState.user) { html += personalPathCardHTML(); } else { html += '<section class="card" id="ppGuest"><h3>Lộ trình riêng — Cá nhân hóa cực chi tiết</h3><p class="mut">Lộ trình riêng mở khi bạn đăng nhập — khách dùng lộ trình ' + (state.track === "zh" ? "6 chặng" : "13 chương") + ' chuẩn ở trang Bản đồ. Đăng nhập ở thẻ Tài khoản phía trên để mở.</p></section>'; }
+  if (typeof authState !== "undefined" && authState.user) { html += personalPathCardHTML(); } else { html += '<section class="card" id="ppGuest"><h3>Lộ trình riêng — Cá nhân hóa cực chi tiết</h3><p class="mut">Lộ trình riêng mở khi bạn đăng nhập — khách dùng lộ trình ' + trackMeta89().roadLabel + ' chuẩn ở trang Bản đồ. Đăng nhập ở thẻ Tài khoản phía trên để mở.</p></section>'; }
   html += '<details style="margin-top:8px"><summary><b>🧭 AI Coach — 3 gợi ý tiếp theo</b></summary>' + u8CoachHTML() + '</details>';
   html += '<details style="margin-top:8px"><summary><b>Gia sư AI</b></summary><section class="card"><h3>Gia sư AI</h3><p>' + esc(RB_AI.tutor.label) + '.</p>' + (authState.user ? '<p class="mut">Đã sẵn sàng — gõ câu hỏi để dùng.</p>' : '<p class="mut">Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p>')
     + '<button class="btn" id="tutorTry">Thử gọi gia sư</button><p style="margin-top:10px"><textarea id="tutorModeInp" rows="2" style="width:100%" placeholder="Gõ câu hoặc câu hỏi cần gia sư giúp..."></textarea></p><p><button class="btn" id="tutorExplainBtn">AI giải thích</button> <button class="btn" id="tutorFixBtn">AI sửa câu của tôi</button></p><div class="why" id="tutorModeOut"></div></section></details>';
@@ -3942,10 +4344,11 @@ function viewMine(app) {
   var aV = $("#accVipRequestBtn"); if (aV) aV.onclick = function () { sendVipRequest(); };
   $$("#ppCard [data-pace]").forEach(function (b) { b.onclick = function () { setPace(b.dataset.pace); }; });
   $$("#ppCard [data-ppstep]").forEach(function (b) { b.onclick = function () { openStep(stepById(b.dataset.ppstep), { noNudge: true }); }; });
+  $$("#ppCard [data-ppopen]").forEach(function (b) { b.onclick = function () { openPersonalPathItem89(+b.dataset.ppopen); }; });
   $$("#ppCard [data-ppreview]").forEach(function (b) { b.onclick = function () { go("review"); }; });
   var ppe = $("#ppExplainBtn"); if (ppe) ppe.onclick = function () {
     var pp = buildPersonalPath();
-    var sum = "Trình độ: đã xong " + pp.done + "/" + pp.total + " bước chương 1. Phần yếu nhất: " + (pp.weak ? pp.weak.name + " (" + pp.weak.pct + "%)" : "chưa có kiểm tra") + ". Mục đến hạn ôn: " + pp.dueCount + ". Nhịp độ: " + pp.pace + ". Bước tiếp theo: " + (pp.items[0] ? pp.items[0].title : "không có") + ".";
+    var sum = "Trình độ: đã xong " + pp.done + "/" + pp.total + " bước " + (pp.scopeLabel || "chương 1") + ". Phần yếu nhất: " + (pp.weak ? pp.weak.name + " (" + pp.weak.pct + "%)" : "chưa có kiểm tra") + ". " + (pp.dueLabel || "Mục đến hạn ôn") + ": " + pp.dueCount + ". Nhịp độ: " + pp.pace + ". Bước tiếp theo: " + (pp.items[0] ? pp.items[0].title : "không có") + ".";
     callAiTutorChat([{ role: "user", text: sum + " Giải thích ngắn vì sao lộ trình riêng của tôi xếp như vậy, bằng tiếng Việt đơn giản." }]).then(function (r) { state.personalExplain = r; saveState(); render(); }, function (err) { toast(err); });
   };
   var vcb = $("#vipComposeBtn"); if (vcb) vcb.onclick = function () { vipComposePath(); };
@@ -4539,8 +4942,8 @@ function authDoResetPassword() {
   });
 }
 function accountCardHTML() {
-  var known = Object.keys(state.cards).filter(function (k) { return state.cards[k].box >= 1; }).length;
-  var hardN = Object.keys(state.hard).filter(function (k) { return !state.hard[k].done; }).length;
+  var known = trackKnownCards89();
+  var hardN = trackHardCount89();
   var h = '<section class="card" id="accCard">';
   if (!authState.user) {
     h += '<p>Chưa đăng nhập — đang học ở chế độ khách.</p>'
@@ -5125,6 +5528,8 @@ function renderPronEntry(app, l) {
 }
 /* 9. Danh gia muc do /100 tung ky nang (tu tien trinh that, khong phai diem thi). */
 function skillLevelRows() {
+  var tr89 = (typeof state !== "undefined" && state.track) || "en";
+  if (tr89 !== "en") return trackSkillRows89(tr89);
   var steps = (typeof learningSteps === "function") ? learningSteps() : [];
   var rows = [];
   var row = function (name, done, total) { rows.push('<p>' + esc(name) + ': ' + (total ? (done + '/' + total + ' (' + Math.round(done / total * 100) + '%)') : 'chưa có dữ liệu — làm một bài để đo') + '</p>'); };
@@ -12453,6 +12858,8 @@ function gd23TolerantCheck(input, answer, strict) {
 
 /* ----- GĐ3: 5 chấm thành thạo theo từng kỹ năng ----- */
 function gd23SkillMastery() {
+  var tr89 = (typeof state !== "undefined" && state.track) || "en";
+  if (tr89 !== "en") return trackMasteryRows89(tr89);
   var sd = state.skillDone || {};
   var cnt = function (pfx) {
     var d = 0;
@@ -12486,12 +12893,18 @@ function gd23SkillMastery() {
 }
 function gd23MasteryHTML() {
   var rows = gd23SkillMastery();
-  var totD = 0, totT = 0; rows.forEach(function (r) { totD += r.done; totT += r.total; });
+  var totD = 0, totT = 0; rows.forEach(function (r) { if (!r.none) { totD += r.done; totT += r.total; } });
+  var t89 = (typeof state !== "undefined" && state.track) || "en";
+  var note89 = t89 === "en" ? ' — Từ vựng chỉ tính bộ 24 mẫu, các kỹ năng khác tính toàn bộ bài trong kho.'
+    : t89 === "zh" ? ' — Từ vựng tính theo bộ; các kỹ năng khác tính toàn bộ bài trong kho.'
+    : t89 === "tc" ? ' — TOEIC chỉ thi Nghe–Đọc nên không có hàng Nói/Viết; Từ vựng tính theo bộ.'
+    : ' — Track này chưa có bài Nói riêng; Từ vựng tính theo bộ, các kỹ năng khác tính toàn bộ bài trong kho.';
   return '<section class="card" id="skillMastery"><h3>5 chấm thành thạo theo từng kỹ năng</h3>'
     + '<p class="mut">Mỗi kỹ năng có 5 chấm — mỗi chấm tương ứng 1/5 số bài đã xong của kỹ năng đó. Đây là mức theo tiến trình, không phải điểm thi.</p>'
     + rows.map(function (r) {
+      if (r.none) return '<p data-mastery-skill="' + esc(r.name) + '"><b>' + esc(r.name) + ':</b> chưa có trong track này — ' + esc(r.noneNote || "") + '</p>';
       return '<p data-mastery-skill="' + esc(r.name) + '"><b>' + esc(r.name) + ':</b> <span class="mastery-dots">' + r.dotStr + '</span> ' + r.dots + '/5 chấm · ' + r.done + '/' + r.total + ' bài (' + r.pct + '%)</p>';
-    }).join("") + '<p><b>Tổng: ' + totD + '/' + totT + ' bài</b> <span class="mut">(' + rows.map(function (r) { return r.name + ' ' + r.total; }).join(' + ') + ' — Từ vựng chỉ tính bộ 24 mẫu, các kỹ năng khác tính toàn bộ bài trong kho.)</span></p></section>';
+    }).join("") + '<p><b>Tổng: ' + totD + '/' + totT + ' bài</b> <span class="mut">(' + rows.filter(function (r) { return !r.none; }).map(function (r) { return r.name + ' ' + r.total; }).join(' + ') + note89 + ')</span></p></section>';
 }
 
 /* ----- GĐ3: Speech Analyzer 5 mảng ----- */
