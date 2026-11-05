@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Học tiếng Anh từ đầu — Bản mới</title>
 <style>
-:root{--paper:#FFFBF2;--ink:#1F2430;--amber:#FFB800;--amber2:#FFC800;--coral:#FF6B4A;--coralD:#F0522E;--line:#E7DCC6;--line2:#F0E7D8;--green:#1E9E6A;--red:#D9534F;--mut:#6E6A61}
+:root{--paper:#FFFBF2;--ink:#1F2430;--amber:#FFB800;--amber2:#FFC800;--coral:#FF6B4A;--coralD:#F0522E;--line:#E7DCC6;--line2:#F0E7D8;--green:#1E9E6A;--red:#D9534F;--mut:#57534A}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:17px;line-height:1.55}
 .wrap{max-width:100%;margin:0 auto;padding:12px 14px 96px}
@@ -17,7 +17,7 @@ header h1{font-size:30px;margin:6px 0 2px}
 .tabbar{display:flex;gap:6px;position:sticky;top:0;background:var(--paper);padding:8px 0;z-index:5;flex-wrap:wrap}
 .tab{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font-size:15px;cursor:pointer;min-height:44px}
 .tab.on{background:var(--amber);border-color:var(--amber);font-weight:700}
-.card{background:#fff;border:1.5px solid var(--line2);border-radius:18px;padding:20px;margin:12px 0}
+.card{background:#fff;border:0;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:16px 20px;margin:12px 0}
 h2{font-size:22px;margin:2px 0 8px}
 h3{font-size:18px;margin:14px 0 6px}
 p{margin:8px 0}
@@ -27,7 +27,7 @@ p{margin:8px 0}
 .btn-amber{background:var(--amber);border-color:var(--amber);font-weight:700}
 .btn:disabled{opacity:.45;cursor:default}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.chip{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:3px 10px;font-size:13px;background:#fff}
+.chip{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:3px 10px;font-size:14px;background:#fff}
 .chip.cur{background:var(--amber2);border-color:var(--amber);font-weight:700}
 .bar{height:14px;background:var(--line2);border-radius:999px;overflow:hidden}
 .bar>i{display:block;height:100%;background:var(--amber);border-radius:999px}.bar.gold{outline:2px solid var(--amber)}
@@ -37,14 +37,14 @@ p{margin:8px 0}
    (.lesson-main ton tai) — man tu ve lai giua chung thi roi ve 1 cot, khong vo. */
 .lesson-side{display:none}
 @media (min-width:1200px){#app.lesson-view:has(>.lesson-main){display:grid;grid-template-columns:minmax(0,820px);gap:24px;align-items:start}#app.lesson-view:has(>.lesson-main)>.lessonframe{grid-column:1/-1}#app.lesson-view:has(>.lesson-main)>.lesson-main{min-width:0}#app.lesson-view:has(>.lesson-main)>.lesson-side{display:block;position:sticky;top:120px}#app.lesson-view:has(>.lesson-main)>.lesson-side .card{margin:0 0 12px}}
-.qblock{background:#fff;border:1.5px solid var(--line2);border-radius:18px;padding:20px;margin:12px 0}
-.why{display:none;background:#FFF8E1;border:1.5px solid var(--amber);border-radius:14px;padding:10px 12px;margin:10px 0}
+.qblock{background:#fff;border:0;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:16px 20px;margin:12px 0}
+.why{display:none;background:#FFF8E1;border:1.5px solid var(--amber);border-radius:16px;padding:10px 12px;margin:10px 0}
 .why.show{display:block}
 .q-opt-sel{outline:3px solid var(--amber);outline-offset:1px}
-.summarybox{background:#fff;border:2px solid var(--amber);border-radius:18px;padding:20px;margin:12px 0;position:relative}
-.sumcard{background:var(--paper);border:1px solid var(--line2);border-radius:14px;padding:10px 12px;margin:8px 0}
+.summarybox{background:var(--soft);border:0;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:20px;margin:12px 0;position:relative}
+.sumcard{background:var(--paper);border:1px solid var(--line2);border-radius:16px;padding:10px 12px;margin:8px 0}
 .bigletter{font-size:76px;font-weight:800;text-align:center;line-height:1.1;margin:6px 0;overflow-wrap:normal;word-break:normal}
-.step-row{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line2);border-radius:14px;padding:12px 16px;margin:8px 0;background:#fff;cursor:pointer;width:100%;text-align:left;font-size:16px}
+.step-row{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line2);border-radius:16px;padding:12px 16px;margin:8px 0;background:#fff;cursor:pointer;width:100%;text-align:left;font-size:16px}
 .step-row.done{border-color:var(--green)}
 .step-row.cur{border-color:var(--amber);border-width:2px;background:#FFFBEA}
 .step-row.future{opacity:.62}
@@ -57,23 +57,23 @@ p{margin:8px 0}
 .ph-btn.lock{opacity:.55}
 .ph-map{margin:10px 0}
 .ph-map summary{cursor:pointer;font-weight:700}
-.q-opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px 16px;margin:8px 0;font-size:16px;cursor:pointer}
+.q-opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:14px 16px;margin:8px 0;font-size:16px;cursor:pointer}
 .q-opt.ok{border-color:var(--green);background:#EAF7F0}
 .q-opt.bad{border-color:var(--red);background:#FDECEA}
 .q-opt:disabled{cursor:default}
 #tutorFloatBtn{position:static;width:auto;height:auto;min-height:44px;border-radius:999px;border:2px solid var(--amber);background:var(--coral);color:#1F2430;font-size:16px;font-weight:700;line-height:1.4;cursor:pointer;z-index:45;box-shadow:0 2px 10px rgba(0,0,0,.25);padding:8px 16px}
-#tutorFloatPanel{position:fixed;right:16px;top:64px;width:min(360px,calc(100vw - 32px));max-height:70vh;overflow-y:auto;background:#fff;border:2px solid var(--amber);border-radius:18px;padding:14px;z-index:45;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+#tutorFloatPanel{position:fixed;right:16px;top:64px;width:min(360px,calc(100vw - 32px));max-height:70vh;overflow-y:auto;background:#fff;border:2px solid var(--amber);border-radius:20px;padding:14px;z-index:45;box-shadow:0 4px 20px rgba(0,0,0,.25)}
 #tutorFloatMsgs .chat-msg{font-size:15px}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:15px;display:none;z-index:50;max-width:92vw;text-align:center}
 #previewBanner{background:#fff7dd;border-bottom:1px solid #ecd28a;color:#7a5b12;font-size:13px;text-align:center;padding:7px 12px}
 #nudgeModal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
 #nudgeModal .box{background:#fff;border-radius:18px;padding:20px;max-width:480px}
 input[type=text],input[type=number],input[type=email],input[type=password]{border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;font-size:16px}
-iframe{width:100%;aspect-ratio:16/9;border:1.5px solid var(--line2);border-radius:14px}
+iframe{width:100%;aspect-ratio:16/9;border:1.5px solid var(--line2);border-radius:16px}
 .mr-video{transform:scaleX(-1);width:100%;max-width:420px;border-radius:14px;background:#000}.mr-stage{position:relative;max-width:420px}
 @media (min-width:1200px){.mr-video,.mr-stage{max-width:640px}}.mr-overlay{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}.mr-feed table{width:100%;border-collapse:collapse}.mr-feed td,.mr-feed th{border-bottom:1px solid #E7DCC6;padding:4px 6px;text-align:left;font-size:14px}.mr-lib-row{display:flex;gap:10px;flex-wrap:wrap}.mr-item{width:280px}.mr-item video{width:100%;border-radius:12px}.ai-good{color:#147A4E;font-weight:700}.ai-mid{color:#856000;font-weight:700}.ai-bad{color:#B03A2E;font-weight:700}
 .mr-overlay{filter:drop-shadow(0 0 3px rgba(0,0,0,0.85))}
-.chat-msg{border:1.5px solid var(--line2);border-radius:14px;padding:10px 12px;margin:8px 0;background:#fff}
+.chat-msg{border:1.5px solid var(--line2);border-radius:16px;padding:10px 12px;margin:8px 0;background:#fff}
 .chat-msg.user{background:#FFFBEA}
 .chat-msg.ai{background:#fff}
 .mr-diag{font-weight:600}
@@ -87,21 +87,21 @@ iframe{width:100%;aspect-ratio:16/9;border:1.5px solid var(--line2);border-radiu
 /* ---- v2 (2026-10-26): he thi giac + bo cuc moi; cac class cu giu nguyen ---- */
 :root{--greenbg:#EAF7F0;--redbg:#FDECEA;--soft:#FFF8E1;--sk-vocab:#1F6FB2;--sk-grammar:#7A4FA3;--sk-read:#0E7C6B;--sk-listen:#B45309;--sk-speak:#C2410C;--sk-write:#BE185D}
 .eyebrow{font-size:14px;letter-spacing:1.5px;font-weight:800;color:var(--mut);text-transform:uppercase;margin:2px 0 6px}
-#app>.card{margin:32px 0}
-.stat-strip{display:flex;gap:16px;flex-wrap:wrap;align-items:center;background:#fff;border:1.5px solid var(--line2);border-radius:16px;padding:10px 16px;margin:12px 0;font-size:14px}
+#app>.card{margin:24px 0}
+.stat-strip{display:flex;gap:16px;flex-wrap:wrap;align-items:center;background:#fff;border:0;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:10px 16px;margin:12px 0;font-size:14px}
 .stat-strip .sep{color:var(--line)}
-.next-card{border:2px solid var(--amber);background:var(--soft);box-shadow:0 2px 10px rgba(31,36,48,.08)}
-.hero-pair{display:flex;gap:16px;align-items:flex-start}
+.next-card{border:0;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.03)}
+.hero-pair{display:flex;gap:16px;align-items:center}
 .hero-pair .mascots{flex:0 0 auto;display:flex;gap:2px}
 .hero-pair .hero-text{flex:1;min-width:0}
 .dragon,.snake{width:64px;height:64px;flex:0 0 auto}
 .dragon.sm,.snake.sm{width:56px;height:56px}
 @keyframes mascBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .masc-bob{animation:mascBob 3s ease-in-out infinite}
-.unit-banner{background:#fff;border:1.5px solid var(--line2);border-left:6px solid var(--amber);border-radius:16px;padding:16px 20px;margin:24px 0 8px}
+.unit-banner{background:#fff;border:0;border-left:6px solid var(--amber);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:16px 20px;margin:24px 0 8px}
 .unit-banner.sk-vocab{border-left-color:var(--sk-vocab)}.unit-banner.sk-grammar{border-left-color:var(--sk-grammar)}.unit-banner.sk-read{border-left-color:var(--sk-read)}.unit-banner.sk-listen{border-left-color:var(--sk-listen)}.unit-banner.sk-speak{border-left-color:var(--sk-speak)}.unit-banner.sk-write{border-left-color:var(--sk-write)}
 .unit-banner b{font-size:18px}
-.skill-chip{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:700;background:#fff}
+.skill-chip{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;font-size:14px;font-weight:700;background:#fff}
 .skill-chip.sk-vocab{color:var(--sk-vocab);border-color:var(--sk-vocab)}.skill-chip.sk-grammar{color:var(--sk-grammar);border-color:var(--sk-grammar)}.skill-chip.sk-read{color:var(--sk-read);border-color:var(--sk-read)}.skill-chip.sk-listen{color:var(--sk-listen);border-color:var(--sk-listen)}.skill-chip.sk-speak{color:var(--sk-speak);border-color:var(--sk-speak)}.skill-chip.sk-write{color:var(--sk-write);border-color:var(--sk-write)}
 .path-v{position:relative;margin:8px 0 24px}
 .path-v::before{content:"";position:absolute;left:29px;top:10px;bottom:10px;width:3px;background:var(--line2)}
@@ -112,13 +112,13 @@ iframe{width:100%;aspect-ratio:16/9;border:1.5px solid var(--line2);border-radiu
 .path-node.cur .dot{width:58px;height:58px;border:3px solid var(--amber);background:var(--soft);color:var(--ink);box-shadow:0 0 0 6px rgba(255,184,0,.18)}
 .path-node .pn-title{font-weight:700}
 .path-node .pn-type{font-size:14px;color:var(--mut)}
-.path-node .pn-st{font-size:13px}
+.path-node .pn-st{font-size:14px}
 .path-node.done .pn-st{color:#147A4E;font-weight:700}
 .path-node.cur .pn-st{color:#8A6100;font-weight:700}
 body.landing-on #tabBar,body.landing-on #previewBanner,body.landing-on #tutorFloatBtn{display:none}
 .land-grid{display:grid;gap:12px;margin:16px 0}
 @media(min-width:700px){.land-grid{grid-template-columns:1fr 1fr}}
-.land-opt{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:64px;padding:14px 16px;text-align:left;border-width:2px}
+.land-opt{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:64px;padding:14px 16px;text-align:left;border-width:1.5px}
 .land-opt b{font-size:18px}.zh-han{font-size:44px;line-height:1.4}
 .path-node.skipped .pn-st{color:var(--mut)}
 #bottombar{position:fixed;left:0;right:0;bottom:0;z-index:44;background:#fff;border-top:1.5px solid var(--line2);padding:10px 16px;display:flex;gap:10px;justify-content:space-between;align-items:center;box-shadow:0 -2px 10px rgba(31,36,48,.08)}
@@ -138,13 +138,13 @@ body.has-bottombar #btnBack{display:none}
 .home-main{min-width:0}
 /* ---- V72: KHUNG UNG DUNG (hoc Parroto: thanh ben + thanh tren + cot giua) ---- */
 .app-frame{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start}
-.app-sidebar{position:sticky;top:12px;background:#fff;border:1.5px solid var(--line2);border-radius:18px;padding:16px 12px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 24px)}
+.app-sidebar{position:sticky;top:12px;background:#fff;border:0;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:16px 12px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 24px)}
 .app-sidebar nav{overflow-y:auto;flex:1;min-height:0}
 .sb-logo h1{font-size:20px;margin:0}
 .sb-mark{display:none}
-.sb-search input,.app-topbar input{width:100%;border:1.5px solid var(--line);border-radius:999px;padding:10px 14px;font-size:15px;background:#fff}
+.app-topbar input{width:100%;border:1.5px solid var(--line);border-radius:999px;padding:10px 14px;font-size:15px;background:#fff}
 .app-sidebar .home-navbtn{display:flex;gap:10px;align-items:center;width:100%;text-align:left;margin:0 0 6px}
-.app-sidebar .home-navbtn.on{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:700}
+.app-sidebar .home-navbtn.on{background:var(--amber);color:var(--ink);border-color:var(--amber);font-weight:700}
 .sb-bottom{border-top:1.5px solid var(--line2);padding-top:12px}
 .sb-profile{margin:12px 0 0}
 .app-col{min-width:0}
@@ -157,7 +157,7 @@ body.has-bottombar #btnBack{display:none}
 @media(min-width:901px){.tabbar{display:none}.app-col .lessonframe{top:70px}}
 @media(max-width:900px){.app-frame{display:block}.app-sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:60;width:280px;max-height:none;border-radius:0;overflow-y:auto}body.sidebar-open .app-sidebar{display:flex}.tabbar{top:70px}.foot-grid{grid-template-columns:1fr 1fr}.tb-track{display:none}#tbAccountBtn{display:none}}
 body.sidebar-collapsed .app-frame{grid-template-columns:64px minmax(0,1fr)}
-body.sidebar-collapsed .sb-logo h1,body.sidebar-collapsed .sb-tag,body.sidebar-collapsed .sb-search,body.sidebar-collapsed .sb-txt,body.sidebar-collapsed .sb-profile{display:none}
+body.sidebar-collapsed .sb-logo h1,body.sidebar-collapsed .sb-tag,body.sidebar-collapsed .sb-txt,body.sidebar-collapsed .sb-profile{display:none}
 body.sidebar-collapsed .sb-mark{display:block;font-size:28px;text-align:center}
 body.sidebar-collapsed .app-sidebar .home-navbtn{justify-content:center;padding:12px 8px}
 body.landing-on .app-sidebar,body.landing-on .app-topbar,body.landing-on #appFooter{display:none}
@@ -173,7 +173,7 @@ body.landing-on .app-frame{display:block}
 .duo-node.skipped .duo-star{color:#C9BFA8}
 .duo-label{font-size:14px;margin-top:2px}
 .duo-label b{font-size:15px}
-.duo-st{font-size:13px;color:var(--mut)}
+.duo-st{font-size:14px;color:var(--mut)}
 .duo-node.done .duo-st{color:#147A4E;font-weight:700}
 .duo-node.cur .duo-st{color:#8A6100;font-weight:700}
 .duo-guide{width:64px;height:64px;margin-top:4px}
@@ -209,8 +209,10 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .dimlink:disabled{opacity:.55;text-decoration:none;cursor:default}
 .les-progress{height:8px;background:var(--line2);border-radius:999px;overflow:hidden;margin:8px 0 12px}
 .les-progress>i{display:block;height:100%;background:var(--amber);border-radius:999px}
+.les-progress-label{font-size:14px;color:var(--mut);margin:2px 0 4px}
+#practiceFilterCard select{padding:10px 12px;font-size:15px;border:1.5px solid var(--line);border-radius:12px;background:#fff;flex:1;min-width:0}
 @media (hover:hover){.tip{position:relative}.tip:hover::after,.tip:focus::after{content:attr(data-tip);position:absolute;left:0;bottom:calc(100% + 6px);background:var(--ink);color:#fff;font-size:13px;font-weight:400;padding:6px 10px;border-radius:10px;width:220px;z-index:30}}
-@media (prefers-reduced-motion:reduce){.masc-bob{animation:none}.summarybox .confetti i{animation:none;display:none}}
+@media (prefers-reduced-motion:reduce){.masc-bob{animation:none}.duo-node.cur .duo-star{animation:none}.rw-star{animation:none}.summarybox .confetti i{animation:none;display:none}}
 
 /* ---- UI DA NGON NGU (29/10/2026): he thi giac thong nhat, khong doi noi dung ---- */
 .lang-label{margin:10px 0 2px}
@@ -233,7 +235,7 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .bento-hub{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);margin:16px 0}
 @media(min-width:900px){.bento-hub{grid-template-columns:repeat(4,minmax(0,1fr))}.bento-tile.bento-today{grid-column:3/4;grid-row:1/2}.bento-tile.bento-type{grid-column:4/5;grid-row:1/2}.bento-tile.bento-ms{grid-column:3/4;grid-row:2/3}.bento-tile.bento-u8{grid-column:4/5;grid-row:2/3}}
 .bento-tile:empty{display:none}
-.bento-tile{min-width:0;background:var(--bento-card);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:20px}
+.bento-tile{min-width:0;background:var(--bento-card);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:16px 20px}
 .bento-tile.bento-hero{padding:0;background:transparent;box-shadow:none}
 @media(min-width:900px){.bento-tile.bento-hero{grid-column:span 2;grid-row:span 2}}
 .bento-tile.bento-wide{grid-column:1/-1}
@@ -265,6 +267,27 @@ body.workspace-open #app.lesson-view:has(>.lesson-main){grid-template-columns:mi
 body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none}
 .bento-side .bento-tile{margin:0 0 16px}
 .bigletter{overflow-wrap:break-word;max-width:100%}
+
+/* ---- V75 BEAUTY (lam dep them trong pham vi dot v75: khong doi khung, khong doi luat) ---- */
+.btn:hover:not(:disabled){box-shadow:0 2px 10px rgba(0,0,0,.10)}
+.q-opt:hover:not(:disabled){border-color:var(--amber);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.tab:hover:not(.on){border-color:var(--amber)}
+input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[type=password]:focus,select:focus{outline:3px solid var(--amber);outline-offset:1px;border-color:var(--amber)}
+.btn:focus-visible,.q-opt:focus-visible,.tab:focus-visible,.step-row:focus-visible,.ph-btn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.dragon,.snake,.duo-guide{filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
+.duo-node.cur .duo-star{filter:drop-shadow(0 6px 12px rgba(255,184,0,.5))}
+.duo-path::before{background:linear-gradient(180deg,rgba(255,184,0,.45),rgba(255,184,0,.12))}
+.app-topbar{box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.tabbar{box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.next-card{border-left:6px solid var(--amber)}
+.app-sidebar .home-navbtn{background:transparent;border-color:transparent}
+.app-sidebar .home-navbtn:not(.on):hover{background:var(--soft)}
+.vrow{background:#fff;border:0;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:12px 16px;margin:10px 0}
+.vrow>summary{cursor:pointer;font-weight:700;list-style:none}
+.vrow>summary::-webkit-details-marker{display:none}
+.vrow>summary::before{content:"▶ ";color:var(--coral)}
+.vrow[open]>summary::before{content:"▼ "}
+.vrow iframe{margin-top:10px}
 </style>
 </head>
 <body>
@@ -311,7 +334,6 @@ body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none
 <div class="app-frame" id="appFrame">
 <aside class="app-sidebar home-sidebar" id="appSidebar" aria-label="Điều hướng chính">
 <div class="sb-logo"><span class="sb-mark" aria-hidden="true">🐉</span><h1 id="siteTitle">Học tiếng Anh từ đầu</h1><p class="sb-tag mut">Học từ đầu, tới giao tiếp thật</p></div>
-<div class="sb-search"><input type="text" id="sbSearchInp" placeholder="🔍 Tìm bài học…" aria-label="Tìm bài học"></div>
 <nav id="appSidebarNav"></nav>
 <div class="sb-bottom"><button class="btn" id="sbCollapseBtn">« Thu gọn</button><div class="sb-profile" id="sbProfile"></div></div>
 </aside>
@@ -328,12 +350,7 @@ body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none
 <button class="tab" data-tab="mine">Của tôi</button>
 </nav>
 <main id="app"><div class="card"><p>Đang tải bài học…</p></div></main>
-<footer id="appFooter"><div class="foot-grid">
-<div><b>🐉 Học ngoại ngữ từ đầu</b><p class="mut">Nội dung tự soạn 100% · Miễn phí · Không quảng cáo giữa bài.</p></div>
-<div><b>Học tập</b><p><button class="dimlink" data-footgo="home">Học</button></p><p><button class="dimlink" data-footgo="roadmap">Bản đồ</button></p><p><button class="dimlink" data-footgo="practice">Luyện tập</button></p><p><button class="dimlink" data-footgo="review">Ôn tập</button></p></div>
-<div><b>Mở rộng</b><p><button class="dimlink" data-footgo="native">Giao tiếp bản địa</button></p><p><button class="dimlink" data-footgo="games">Trò chơi</button></p><p><button class="dimlink" data-footgo="mypath">Lộ trình riêng</button></p></div>
-<div><b>Tài khoản</b><p><button class="dimlink" data-footgo="mine">Của tôi</button></p></div>
-</div><p class="mut">Học từ đầu, tới giao tiếp thật.</p></footer>
+<footer id="appFooter"><div><b>🐉 Học ngoại ngữ từ đầu</b><p class="mut">Nội dung tự soạn 100% · Miễn phí · Không quảng cáo giữa bài.</p></div><p class="mut">Học từ đầu, tới giao tiếp thật.</p></footer>
 </div>
 </div>
 <div id="toast"></div>
@@ -1175,7 +1192,7 @@ function lessonHead(step, sub) {
     + chChip
     + '<span class="chip">' + esc(step.type) + '</span></div>'
     + '<div style="margin-top:6px"><b>' + esc(step.title) + '</b>' + collapseSub(sub) + '</div></div>'
-    + (li >= 0 ? '<div class="les-progress"><i style="width:' + Math.round((li + 1) / ls.length * 100) + '%"></i></div>' : "");
+    + (li >= 0 ? '<p class="les-progress-label">Tiến độ chương</p><div class="les-progress"><i style="width:' + Math.round((li + 1) / ls.length * 100) + '%"></i></div>' : "");
 }
 function wireBack() { var b = $("#btnBack"); if (b) b.onclick = backFromLesson; var nb = $("#zhNextStepBtn"); if (nb) nb.onclick = function () { var nx = zhSessionTarget(); if (nx) zhOpenTarget(nx); }; updateBottomBar(); }
 function finishSummaryHTML(title, stats, wrongListHTML, opts) {
@@ -2028,7 +2045,7 @@ function zhPositionText() {
     if (p) return base + " · Chặng " + p.stage + " · " + p.done + "/" + p.total + " bước học đã xong" + phSeg;
     return base;
   }
-  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", games: "Trò chơi" };
+  var tabMap = { home: "Học", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", games: "Trò chơi" };
   var cur = zhPositionCurrent();
   if (cur) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + "Chặng " + cur.stage + " · " + cur.done + "/" + cur.total + " bước học đã xong" + phSeg;
   return "Vị trí: " + (tabMap[curTab] || curTab);
@@ -2116,7 +2133,7 @@ function u7PositionText() {
     if (hp && hp.band) return "Vị trí: " + label + " · " + enChapterLabel(hp.band) + " · " + hp.done + "/" + hp.total + " bước đã xong";
     return "Vị trí: " + label;
   }
-  var tabMap = { home: "Màn chính", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", games: "Trò chơi" };
+  var tabMap = { home: "Học", roadmap: "Bản đồ", mypath: "Lộ trình riêng", practice: "Luyện tập", review: "Ôn tập", native: "Giao tiếp bản địa", mine: "Của tôi", games: "Trò chơi" };
   var hp2 = null; try { hp2 = homePathInfo(); } catch (e) {}
   if (hp2 && hp2.band) return "Vị trí: " + (curTab === "home" ? "" : (tabMap[curTab] || curTab) + " · ") + enChapterLabel(hp2.band) + " · " + hp2.done + "/" + hp2.total + " bước đã xong";
   return "Vị trí: " + (tabMap[curTab] || curTab);
@@ -2201,15 +2218,14 @@ function goalStripText() {
    - Khách chưa có dữ liệu: lưới trống, các số đều 0 — nói rõ là chưa có
      hoạt động, không bịa lịch sử. */
 var HOME_NAV_MAP = [
-  { label: "🏠 Trang chủ", target: "home", kind: "tab", section: "" },
+  { label: "🏠 Học", target: "home", kind: "tab", section: "" },
   { label: "🗺️ Chủ đề", target: "roadmap", kind: "tab", section: "" },
-  { label: "🎧 Luyện nghe", target: "practice", kind: "tab", section: "practiceGrpListen" },
-  { label: "🔁 Shadowing", target: "practice", kind: "tab", section: "practiceGrpListen" },
-  { label: "📚 Từ vựng", target: "practice", kind: "tab", section: "practiceGrpVocab" },
-  { label: "🗣️ Luyện nói", target: "practice", kind: "tab", section: "practiceGrpSpeak" },
-  { label: "🎓 Luyện thi", target: "practice", kind: "tab", section: "practiceGrpExam" },
-  { label: "📖 Truyện", target: "practice", kind: "tab", section: "practiceGrpStory" },
-  { label: "🎮 Trò chơi", target: "games", kind: "view", section: "" }
+  { label: "🧭 Lộ trình riêng", target: "mypath", kind: "tab", section: "" },
+  { label: "🎧 Luyện tập", target: "practice", kind: "tab", section: "" },
+  { label: "🔁 Ôn tập", target: "review", kind: "tab", section: "" },
+  { label: "🗣️ Giao tiếp bản địa", target: "native", kind: "tab", section: "" },
+  { label: "🎮 Trò chơi", target: "games", kind: "view", section: "" },
+  { label: "👤 Của tôi", target: "mine", kind: "tab", section: "" }
 ];
 function homeNavGo(entry) {
   if (!entry) return;
@@ -2219,10 +2235,11 @@ function homeNavGo(entry) {
     if (el) { try { el.open = true; } catch (e) {} if (el.scrollIntoView) el.scrollIntoView(); }
   }, 150);
 }
-/* V72 — KHUNG UNG DUNG: thanh ben + thanh tren dung chung moi trang.
-   Thanh ben dung HOME_NAV_MAP (1 muc Tro choi duy nhat, nhu v71).
-   Muc tab hien tai to dam; tab Luyen tap co nhieu muc con nen khong to
-   rieng muc nao (tabBar o mobile van to tab do). */
+/* V75 — KHUNG UNG DUNG: thanh ben + thanh tren dung chung moi trang.
+   Thanh ben dung HOME_NAV_MAP du 8 muc (them Lo trinh rieng, On tap,
+   Giao tiep ban dia, Cua toi; Luyen tap gop 1 muc, cac muc con van la
+   nhom trong trang Luyen tap). Muc hien tai to dam theo curTab, khop
+   tabBar o mobile va co trang thai active cho Cua toi. */
 function syncAppFrame() {
   if (curLesson) document.body.classList.remove("sidebar-open");
   var nav = document.getElementById("appSidebarNav");
@@ -2244,7 +2261,7 @@ function syncAppFrame() {
   if (!curLesson) {
     $$("#appSidebarNav .home-navbtn").forEach(function (b) {
       var e = HOME_NAV_MAP[+b.dataset.homenav];
-      b.classList.toggle("on", e.target === curTab && !e.section);
+      b.classList.toggle("on", e.target === curTab);
     });
   }
   var pf = document.getElementById("sbProfile");
@@ -2283,10 +2300,9 @@ function syncAppFrame() {
     if (ab) ab.onclick = function () { go("mine"); };
     var goSearch = function (q) {
       if (curLesson || curTab !== "home") go("home");
-      var inp = document.getElementById("homeSearchInp");
-      if (inp) { inp.value = q; renderHomeSearchResults(q); }
+      renderHomeSearchResults(q);
     };
-    ["sbSearchInp", "tbSearchInp"].forEach(function (id) {
+    ["tbSearchInp"].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.oninput = function () { goSearch(el.value); };
     });
@@ -2396,9 +2412,7 @@ function homeSearchOpen(e) {
   else if (e.kind === "listen") openLesson({ type: "skillListen", idx: e.idx });
 }
 function homeSearchHTML() {
-  return '<section class="card" id="homeSearchCard"><label for="homeSearchInp"><b>🔍 Tìm bài học</b></label>'
-    + '<input type="text" id="homeSearchInp" placeholder="Gõ tên bài, ví dụ: nghe, ngữ pháp, đọc…" style="width:100%;margin-top:6px">'
-    + '<div id="homeSearchResults"></div></section>';
+  return '<div id="homeSearchResults"></div>';
 }
 function renderHomeSearchResults(q) {
   var box = $("#homeSearchResults"); if (!box) return;
@@ -2579,8 +2593,8 @@ function viewHome(app) {
   html += '</div>';
   if (fresh) {
     html += '<div class="bento-tile bento-today"><section class="card" id="u7Welcome">'
-      + '<details id="u7WhyCard"><summary><b>Vì sao học kiểu này nhớ lâu — bấm để mở</b></summary><p><b>Ôn đúng lúc sắp quên:</b> câu nào sai sẽ vào Sổ lỗi sai và ôn lại đúng ngày theo lịch 1-3-7-14-30 ngày — xem chi tiết ở Cài đặt → Ghi chú.</p><p><b>Học theo dạng bài:</b> mỗi dạng bài có cách làm riêng trước, rồi mới luyện trộn nhiều dạng như đi thi thật.</p><p><b>Chẩn đoán trước khi học:</b> bài kiểm tra nhanh đầu chặng cho biết bạn yếu chỗ nào, để lộ trình xếp dạng bài yếu lên trước.</p></details>'
-      + '<details id="u7Faq"><summary><b>Câu hỏi thường gặp — bấm để mở</b></summary><p><b>Mỗi ngày học bao lâu?</b> Khoảng 10-20 phút một buổi là đủ, học đều mỗi ngày quan trọng hơn học dồn một lúc.</p><p><b>Làm sai có sao không?</b> Không sao cả — câu sai vào Sổ lỗi sai để ôn lại, không bị trừ điểm hay khóa bài.</p><p><b>"Band ước lượng" nghĩa là gì?</b> Là điểm web tự tính để bạn tham khảo trình độ, không phải điểm thi thật — IELTS không công bố bảng quy đổi cố định.</p></details></section></div>';
+      + '<details id="u7WhyCard"><summary><b>Vì sao học kiểu này nhớ lâu</b></summary><p><b>Ôn đúng lúc sắp quên:</b> câu nào sai sẽ vào Sổ lỗi sai và ôn lại đúng ngày theo lịch 1-3-7-14-30 ngày — xem chi tiết ở Cài đặt → Ghi chú.</p><p><b>Học theo dạng bài:</b> mỗi dạng bài có cách làm riêng trước, rồi mới luyện trộn nhiều dạng như đi thi thật.</p><p><b>Chẩn đoán trước khi học:</b> bài kiểm tra nhanh đầu chặng cho biết bạn yếu chỗ nào, để lộ trình xếp dạng bài yếu lên trước.</p></details>'
+      + '<details id="u7Faq"><summary><b>Câu hỏi thường gặp</b></summary><p><b>Mỗi ngày học bao lâu?</b> Khoảng 10-20 phút một buổi là đủ, học đều mỗi ngày quan trọng hơn học dồn một lúc.</p><p><b>Làm sai có sao không?</b> Không sao cả — câu sai vào Sổ lỗi sai để ôn lại, không bị trừ điểm hay khóa bài.</p><p><b>"Band ước lượng" nghĩa là gì?</b> Là điểm web tự tính để bạn tham khảo trình độ, không phải điểm thi thật — IELTS không công bố bảng quy đổi cố định.</p></details></section></div>';
   }
   html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("en") + '</div>';
   if (!fresh) html += '<div class="bento-tile bento-today">' + specTodayHTML(t) + '</div>';
@@ -2628,7 +2642,6 @@ function viewHome(app) {
   var erl = $("#entryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "entryPlace" }); };
   var spl = $("#statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
 
-  (function () { var inp = $("#homeSearchInp"); if (inp) inp.oninput = function () { renderHomeSearchResults(inp.value); }; })();
   $$("#heatCard [data-heatday]").forEach(function (b) { b.onclick = function () { var d = $("#heatDetail"); if (d) d.textContent = heatDetailFor(b.dataset.heatday); }; });
   $$("[data-home-vocabset]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "vocab", setIdx: +b.dataset.homeVocabset }); }; });
   $$("[data-home-dict]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "dictation", idx: +b.dataset.homeDict }); }; });
@@ -2787,7 +2800,7 @@ function rbStageHTML(ch) {
   var easy = [];
   if (st.easyBand) { CONTENT.reading.forEach(function (r, i) { if (r.level === st.easyBand && easy.length < 2) easy.push(i); }); }
   var easyHTML = easy.length ? '<p><b>Đọc thêm (dễ hơn một nấc, không tính điểm):</b> ' + easy.map(function (i) { return '<button class="btn" data-readeasy="' + i + '">' + esc(CONTENT.reading[i].title) + '</button>'; }).join(" ") + '</p>' : "";
-  return '<details class="rbStage" data-ch-stage="' + esc(ch.band) + '"><summary><b>Chặng này học gì theo lộ trình chuẩn — bấm để mở</b></summary>'
+  return '<details class="rbStage" data-ch-stage="' + esc(ch.band) + '"><summary><b>Chặng này học gì theo lộ trình chuẩn</b></summary>'
     + '<p><b>Tên chặng:</b> ' + esc(st.stage) + '</p>'
     + '<p><b>Việc chính:</b> ' + esc(st.job) + '</p>'
     + '<p><b>Cấp độ:</b> ' + esc(st.cefr) + '</p>'
@@ -2811,24 +2824,16 @@ function viewRoadmap(app) {
         + '<button class="btn" id="gateBtn" ' + (open ? "" : "disabled") + '>' + (state.testDone ? "Đã qua — làm lại" : open ? "Làm bài kiểm tra" : "Chưa mở") + '</button></div>';
       return;
     }
-    var st = stepDone(s.id) ? "done" : (nextLearnStep() && nextLearnStep().id === s.id ? "cur" : "future");
+    var st = stepDone(s.id) ? "done" : (state.skipped.indexOf(s.id) >= 0 ? "skipped" : (nextLearnStep() && nextLearnStep().id === s.id ? "cur" : "future"));
     var clFlag = "";
     if (st === "cur") clFlag = "📍 Bạn đang ở đây";
     /* FIX-V32 01/11: khong gan chip "Tiep theo" cho buoc ke sau buoc hien tai —
        chip nay gay nham la buoc tiep theo that; buoc hien tai da co "Ban dang o day". */
     else if (st === "done" && Object.keys(state.hard || {}).some(function (k) { return !state.hard[k].done && k.indexOf(s.id) >= 0; })) clFlag = "Ôn lại";
 
-    html += duoNodeHTML({ cls: "step-row duo-node pos" + (i % 8) + " " + st, attrs: 'data-step="' + s.id + '" data-status="' + st + '"', star: duoStar(st), title: esc(s.title), sub: esc(s.type) + " · khoảng " + s.mins + " phút (ước tính)", status: st === "done" ? "Đã xong" : st === "cur" ? "Đang học" : "Chưa tới", flag: clFlag, guide: st === "cur" });
+    html += duoNodeHTML({ cls: "step-row duo-node pos" + (i % 8) + " " + st, attrs: 'data-step="' + s.id + '" data-status="' + st + '"', star: duoStar(st), title: esc(s.title), sub: esc(s.type) + " · khoảng " + s.mins + " phút (ước tính)", status: st === "done" ? "Đã xong" : st === "skipped" ? "Đã bỏ qua — bấm để học lại" : st === "cur" ? "Đang học" : "Chưa tới", flag: clFlag, guide: st === "cur" });
   });
   html += '</div>' + gateHTML + '</div>';
-  if (state.skipped.length) {
-    html += '<h3>Đã bỏ qua</h3><p class="mut">Các bước bạn nhảy qua — quay lại học nốt khi rảnh:</p><div id="skippedList">';
-    state.skipped.forEach(function (id) {
-      var s = stepById(id); if (!s) return;
-      html += '<button class="step-row future" data-skip="' + id + '"><span><b>' + esc(s.title) + '</b><br><span class="mut">' + esc(s.type) + '</span></span><span class="st">→</span></button>';
-    });
-    html += '</div>';
-  }
   html += '</section>';
   html += gd23MidHTML();
   html += '<h3>Bản đồ 13 chương</h3><p class="mut">Học tự do theo chặng; mốc mở kiểm tra cuối chương xem ở đầu trang. Các bước trong mỗi chương xếp xen kẽ các loại (vài bộ từ, rồi ngữ pháp, đọc, nghe, nói, viết, lặp lại) để đỡ chán và nhớ lâu; bước "Ôn xen kẽ" vẫn ở cuối chương.</p>';
@@ -2856,7 +2861,7 @@ function viewRoadmap(app) {
     html += '<section class="card chapter-row" data-ch="' + esc(ch.band) + '"><div class="row unit-banner"><b>PHẦN ' + (ci + 2) + ' · Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</b><span class="chip' + (isOpen ? ' cur' : '') + '">' + chipTxt + '</span><button class="btn" data-gbopen="' + esc(ch.band) + '">📖 HƯỚNG DẪN · Sổ tay chương</button></div><p><b>Mục tiêu:</b> ' + esc(ch.goal) + '</p>'
 
       + (ci === 0 ? '<p class="mut">10 bước dưới đây là bước Viết Band 0; 7 bước mở đầu (từ vựng, ngữ pháp, nghe, đọc, phát âm) nằm ở thẻ Chương 1 phía trên — hai con số là hai nhóm bước khác nhau.</p>' : '')
-      + '<details><summary><b>Học xong làm được — bấm để mở</b></summary><p>' + esc(ch.can.join(" · ")) + '</p></details>'
+      + '<details><summary><b>Học xong làm được</b></summary><p>' + esc(ch.can.join(" · ")) + '</p></details>'
       + rbStageHTML(ch)
       + (ci === 0 ? '<button class="btn btn-primary" id="mapCh1">Vào học chương 1</button>' : (hasSteps ? '<button class="btn" data-chopen="' + esc(ch.band) + '">Mở chương này</button>' : '<p class="mut">Chương này chưa có bước học.</p>'));
     if (hasSteps) {
@@ -2876,8 +2881,8 @@ function viewRoadmap(app) {
         rows += duoNodeHTML({ cls: "step-row duo-node pos" + (si % 8) + (isNext ? " cur" : ""), attrs: 'data-rstep="' + esc(ch.band) + ':' + si + '"', star: rbStepDone(st) ? "★" : "☆", title: esc(st.title) + suf2 + (st.familiar ? " · làm quen" : "") + (st.review ? " · không tính cổng" : ""), sub: esc(st.type), status: rbStepDone(st) ? "Đã xong" : isNext ? "Đang học" : "Chưa tới", flag: isNext ? "📍 Bạn đang ở đây" : "", guide: isNext });
       });
       var missing = rbChMissing(ch.band);
-      var chestHTML = (ci > 0) ? '<button class="duo-node duo-chest pos' + (chSteps.length % 8) + '" data-chchest="' + esc(ch.band) + '"><span class="duo-star">🎁</span><span class="duo-label"><b>Rương cuối chương</b><br><span class="duo-st">Bấm để mở kiểm tra cuối chương</span></span></button>' : "";
-      html += '<details class="ch-steps" data-ch-steps="' + esc(ch.band) + '" style="margin-top:8px"' + (hasNext ? ' open' : '') + '><summary><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b> — bấm để mở</summary><div class="duo-path">' + rows + chestHTML + '</div></details>'
+      var chestHTML = (ci > 0) ? '<button class="duo-node duo-chest pos' + (chSteps.length % 8) + '" data-chchest="' + esc(ch.band) + '"><span class="duo-star">🎁</span><span class="duo-label"><b>Rương cuối chương</b><br><span class="duo-st">Kiểm tra cuối chương</span></span></button>' : "";
+      html += '<details class="ch-steps" data-ch-steps="' + esc(ch.band) + '" style="margin-top:8px"' + (hasNext ? ' open' : '') + '><summary><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b></summary><div class="duo-path">' + rows + '</div></details>' + (chestHTML ? '<div class="duo-path">' + chestHTML + '</div>' : '')
         + ((missing.length && ci > 0) ? '<p class="mut">Chưa có bước: ' + esc(missing.join(", ")) + '.</p>' : "")
         /* DOT 19 UI GATE: hang Band 0 chi co buoc Viet trong rbChSteps (cac kho
            khac cua Band 0 thuoc Chuong 1 o the tren) nen khong hien dong
@@ -2898,12 +2903,12 @@ function viewRoadmap(app) {
            diem so; khong doi cong 80% hay tien trinh. */
         + msRowHTML("en", ch.band);
     }
-    html += '<details class="u7RoadNote" data-ch-note="' + esc(ch.band) + '"><summary><b>Ghi chú lộ trình — bấm để mở</b></summary>'
+    html += '<details class="u7RoadNote" data-ch-note="' + esc(ch.band) + '"><summary><b>Ghi chú lộ trình</b></summary>'
       + '<p><b>Lý do xếp chương này:</b> ' + (ci === 0 ? 'Chương mở đầu: học từ cái quen thuộc nhất — chào hỏi, từ lớp học, 44 âm — rồi mới lên câu dài và bài khó.' : 'Chương này xếp sau chương ' + esc(RB_CHAPTER_MAP[ci - 1].band) + ': học xong chương trước mới đủ nền để học chương này.') + '</p>'
       + '<p><b>Dạng bài yếu cần chú ý:</b> ' + (ci === 0 ? 'Xem Sổ lỗi sai — dạng nào sai nhiều thì ôn dạng đó trước, đừng học dàn trải.' : 'Khi tới chương này, ôn lại dạng bài yếu nhất ở chương trước theo Sổ lỗi sai trước khi học bài mới.') + '</p>'
       + (isOpen ? '' : '<p class="mut">Chương này sắp mở — ghi chú này chỉ là định hướng, chưa có bài học bên trong.</p>')
       + '</details>'
-      + '<details class="clGuidebook" data-cl-gb="' + esc(ch.band) + '"><summary><b>Nội dung sổ tay chương — bấm để mở</b></summary>'
+      + '<details class="clGuidebook" data-cl-gb="' + esc(ch.band) + '"><summary><b>Nội dung sổ tay chương</b></summary>'
       + (gb ? '<p><b>Ngữ pháp chính:</b> ' + esc(gb.grammar.join(" · ")) + '</p><p><b>Cụm câu then chốt:</b> ' + esc(gb.phrases.join(" · ")) + '</p><p><b>Lỗi người Việt hay mắc:</b> ' + esc(gb.mistakes.join(" · ")) + '</p>' : '')
       + (isOpen ? '' : '<p class="mut">Chương này sắp mở — sổ tay này chỉ là định hướng, chưa có bài học bên trong.</p>') + '</details></section>';
   });
@@ -2964,9 +2969,6 @@ function viewRoadmap(app) {
   var mtn = $("#mapToNative"); if (mtn) mtn.onclick = function () { go("native"); };
   var mpg = $("#myPathGo"); if (mpg) mpg.onclick = function () { go("mypath"); };
   var bkg = $("#bkRoadmapGo"); if (bkg) bkg.onclick = function () { go("practice"); };
-  $$("#skippedList .step-row[data-skip]").forEach(function (btn) {
-    btn.onclick = function () { openStep(stepById(btn.dataset.skip), { noNudge: true }); };
-  });
 }
 
 /* ---------- LUYỆN TẬP (4 kỹ năng riêng + thi) ---------- */
@@ -2977,7 +2979,7 @@ function viewRoadmap(app) {
    bài tập và lời văn đều là kho tự soạn có sẵn, chỉ nối vào khung mới. */
 function skillDoneMark(key) { return (state.skillDone && state.skillDone[key]) ? " ✓" : ""; }
 function enPracticeEntHTML() {
-  return '<div class="qblock" id="entVideoBlock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p>" + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + "</details><details><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; \"I love pancakes!\" — mình thích bánh kếp!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; \"Let's go camping!\" — cùng đi cắm trại nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; \"I can ride a bike!\" — mình biết đạp xe rồi!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; \"My new shoes!\" — giày mới của mình!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; \"I am Baymax!\" — mình là Baymax!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; \"Let's cook!\" — cùng nấu ăn nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; \"We are friends!\" — chúng mình là bạn bè!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details>" + '</div>';
+  return '<div class="qblock" id="entVideoBlock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details class=\"vrow\"><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details class=\"vrow\"><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details class=\"vrow\"><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details class=\"vrow\"><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details class=\"vrow\"><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details class=\"vrow\"><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p>" + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + "</details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; \"I love pancakes!\" — mình thích bánh kếp!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; \"Let's go camping!\" — cùng đi cắm trại nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; \"I can ride a bike!\" — mình biết đạp xe rồi!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; \"My new shoes!\" — giày mới của mình!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; \"I am Baymax!\" — mình là Baymax!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; \"Let's cook!\" — cùng nấu ăn nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; \"We are friends!\" — chúng mình là bạn bè!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details>" + '</div>';
 }
 function enPracticeEntWire(m) {
   videoVOAWire();
@@ -3504,7 +3506,7 @@ function viewMine(app) {
   html += accountCardHTML() + '</details>';
   html += '<details class="card" id="mineGrpProgress"><summary><b>Tiến trình của tôi</b></summary>';
   html += '<section class="card" id="mineStats"><h3>Điểm XP</h3><p><b>' + (state.xp || 0) + ' XP</b> · Cấp ' + lv.level + ' · còn ' + (lv.next - (state.xp || 0)) + ' XP nữa lên cấp ' + (lv.level + 1) + '</p>'
-    + '<details style="margin-top:8px"><summary><b>Cách nhận XP — bấm để mở</b></summary><p class="mut">Xem bảng XP đầy đủ và mốc lên cấp trong Cài đặt → Ghi chú.</p></details></section>';
+    + '<details style="margin-top:8px"><summary><b>Cách nhận XP</b></summary><p class="mut">Xem bảng XP đầy đủ và mốc lên cấp trong Cài đặt → Ghi chú.</p></details></section>';
   html += gd23MasteryHTML();
   html += '<section class="card"><h3>Mục tiêu ngày</h3><div class="row">'
     + '<button class="btn" id="goalMinus">−</button><input type="number" id="goalInp" value="' + goal + '" min="15" max="180" style="width:90px">'
@@ -6052,7 +6054,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
   var whyText = revealed ? revealText : (l.hint || "");
   var qStrict = gd23Strictness(gd23StrictBandForLesson(l, lessonId));
   var qStrictText = "Mức chấm gõ đáp án: " + qStrict.label + ((mode === "phase" || mode === "mock" || mode === "test") ? " — nhưng bài thi chỉ tính đúng nguyên văn, không khoan dung" : "");
-  var html = head + '<div class="les-progress"><i style="width:' + Math.round(qi / qs.length * 100) + '%"></i></div>';
+  var html = head + '<p class="les-progress-label">Tiến độ bài</p><div class="les-progress"><i style="width:' + Math.round(qi / qs.length * 100) + '%"></i></div>';
   html += '<div class="qblock" id="quizBox"><div class="row"><span class="chip">Câu ' + (qi + 1) + '/' + qs.length + '</span>' + clQChips + '<span class="chip cur" id="quizStreakChip">🔥 ' + (l.streak || 0) + ' lần liên tiếp</span>' + '<span class="chip" id="quizCorrectChip">✓ Đúng ' + Object.keys(runFirstTry).filter(function (k) { return runFirstTry[k]; }).length + '/' + qs.length + ' câu</span>' + '<span class="chip" id="quizStrictChip">' + esc(qStrictText) + '</span></div>'
     + (l.encourage && !l.encourageShown ? '<div class="sumcard" id="quizEncourage"><b>' + esc(l.encourage) + '</b><p><button class="btn btn-primary" id="encOk">Tiếp tục →</button></p></div>' : '')
     + '<p><b>' + esc(q.q) + '</b></p>';
@@ -6486,7 +6488,7 @@ function renderPron(app, l) {
   }
   html += '<section class="card"><h3>🎯 Phát âm nâng cao — vượt ngoài 44 âm</h3><p class="mut">Nối âm, trọng âm, schwa và nuốt âm: xem người bản địa nói rồi nhại theo. Mỗi video một chủ điểm.</p>'
     + videoSlotIf("pronAdv:linking") + videoSlotIf("pronAdv:stress") + videoSlotIf("pronAdv:schwa") + videoSlotIf("pronAdv:elision")
-    + '<details><summary><b>Toàn bộ series Tim\'s Pronunciation Workshop (26 video)</b></summary>'
+    + '<details class="vrow"><summary><b>Toàn bộ series Tim\'s Pronunciation Workshop (26 video)</b></summary>'
     + videoSlotIf("pronAdv:wasWere") + videoSlotIf("pronAdv:assimTP") + videoSlotIf("pronAdv:intrusiveR") + videoSlotIf("pronAdv:cvLinking") + videoSlotIf("pronAdv:the2ways") + videoSlotIf("pronAdv:linkingR") + videoSlotIf("pronAdv:wouldYou") + videoSlotIf("pronAdv:haveTo") + videoSlotIf("pronAdv:linkingW") + videoSlotIf("pronAdv:andFluent") + videoSlotIf("pronAdv:assimNP") + videoSlotIf("pronAdv:dDisappear") + videoSlotIf("pronAdv:assimTJ") + videoSlotIf("pronAdv:haveAux") + videoSlotIf("pronAdv:nd") + videoSlotIf("pronAdv:linkingJ") + videoSlotIf("pronAdv:assimDG") + videoSlotIf("pronAdv:plosives") + videoSlotIf("pronAdv:been") + videoSlotIf("pronAdv:sSound") + videoSlotIf("pronAdv:canFluent") + videoSlotIf("pronAdv:assimS") + videoSlotIf("pronAdv:hWords") + videoSlotIf("pronAdv:assimTK") + videoSlotIf("pronAdv:twinningT") + videoSlotIf("pronAdv:assimDB") + '</details></section>';
   if (state.phSkipped && state.phSkipped.length) {
     html += '<h3>Đã bỏ qua (phát âm)</h3><p class="mut">Các âm bạn bấm vào khi chưa tới lượt — học xong âm trước rồi quay lại:</p><div id="phSkippedList">';
@@ -9079,7 +9081,7 @@ function videoFormatStatusHTML(v) {
 }
 var videoNewEntHTML = {};
 function videoNewDetailHTML(v) {
-  return '<details style="margin-top:8px"><summary><b>' + esc(v.title) + ' (' + esc(v.channel) + ' · ' + (v.kind === "day" ? "Dạy" : "Giải trí") + ' · ' + esc(v.lang) + ' · ' + esc(v.level) + ')</b></summary>'
+  return '<details class="vrow"><summary><b>' + esc(v.title) + ' (' + esc(v.channel) + ' · ' + (v.kind === "day" ? "Dạy" : "Giải trí") + ' · ' + esc(v.lang) + ' · ' + esc(v.level) + ')</b></summary>'
     + '<iframe src="https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0" loading="lazy" allowfullscreen></iframe>'
     + '<p>' + esc(v.note) + '</p>' + videoFormatStatusHTML(v) + '</details>';
 }
@@ -9336,7 +9338,7 @@ function practiceFilterHTML() {
     + '<select id="pfBand">' + bandOpts + '</select> '
     + '<select id="pfExam"><option value="IELTS">Mục tiêu thi: IELTS</option><option value="HSK">Mục tiêu thi: HSK</option><option value="TOEIC">Mục tiêu thi: TOEIC</option><option value="TOPIK">Mục tiêu thi: TOPIK</option></select></div>'
     + '<p><input type="text" id="pfTopic" style="width:100%;padding:10px" placeholder="Chủ đề, ví dụ: giáo dục, du lịch, sức khỏe… (để trống là không lọc chủ đề)"></p>'
-    + '<div class="row"><button class="btn" id="pfGo">Tìm bài</button></div>'
+    + '<div class="row"><button class="btn btn-amber" id="pfGo">Tìm bài</button></div>'
     + '<div id="pfResults"></div></section>';
 }
 function pfBuildItems() {
@@ -12437,7 +12439,7 @@ function zhStageGuidebookHTML(stage) {
   var sets = zhStageSets(stage).map(function (d) { return d.set.topic; });
   if (stage === 1) { try { sets.unshift(zhSetByKey("starter").set.topic); } catch (e) {} }
   var order = stage === 1 ? "Học pinyin trước, rồi học xen kẽ trong chặng: vài bộ từ, rồi ngữ pháp, đọc, nghe, nói, nhập vai, viết, lặp lại — hết chặng mới sang chặng sau." : "Học theo thứ tự xen kẽ trong chặng: vài bộ từ, rồi ngữ pháp, đọc, nghe, nói, nhập vai, viết, lặp lại — hết chặng mới sang chặng sau.";
-  return '<details class="guide-more"><summary><b>Sổ tay chặng ' + stage + ' — bấm để mở</b></summary>'
+  return '<details class="guide-more"><summary><b>Sổ tay chặng ' + stage + '</b></summary>'
     + (grams.length ? '<p><b>Ngữ pháp chặng này:</b> ' + esc(grams.join(" · ")) + '</p>' : '')
     + (sets.length ? '<p><b>Bộ từ chặng này:</b> ' + esc(sets.join(" · ")) + '</p>' : '')
     + '<p><b>Vì sao chặng này xếp đây:</b> ' + order + '</p>'
@@ -12633,7 +12635,7 @@ function zhStageBanner(st, done, total, extra) {
 function zhStageGoalsHTML(stage) {
   var zg = (typeof ZH_STAGE_GOALS !== "undefined") ? ZH_STAGE_GOALS[stage - 1] : null;
   if (!zg) return "";
-  return '<p><b>Mục tiêu:</b> ' + esc(zg.goal) + '</p><details><summary><b>Học xong làm được — bấm để mở</b></summary><p>' + esc(zg.can.join(" · ")) + '</p></details>';
+  return '<p><b>Mục tiêu:</b> ' + esc(zg.goal) + '</p><details><summary><b>Học xong làm được</b></summary><p>' + esc(zg.can.join(" · ")) + '</p></details>';
 }
 /* SUA 01/11 dot dan-xen: mot muc cua zhStageSeq -> dung nut Ban do da co
    (zhSetNodeHTML / zhModNodeHTML, giu nguyen wiring wireZhMap) de Ban do hien
@@ -12667,7 +12669,7 @@ function zhStageMapBlock(st, detailed, collapsed) {
     body += msRowHTML("zh", st.stage);
     body += '<details class="guide-more"><summary><b>Xem ghi chú nhãn HSK của chặng này</b></summary><p class="mut">' + esc(sets.length ? sets[0].set.hskNote : st.note) + '</p></details>';
     if (detailed) body += zhStageGuidebookHTML(st.stage);
-    if (collapsed) html += '<details><summary><b>Các bước học — đã xong ' + (pp ? pp.done : 0) + '/' + (pp ? pp.total : 0) + ' bước học — bấm để mở</b></summary>' + body + '</details>';
+    if (collapsed) html += '<details><summary><b>Các bước học — đã xong ' + (pp ? pp.done : 0) + '/' + (pp ? pp.total : 0) + ' bước học</b></summary>' + body + '</details>';
     else html += body;
   return html;
 }
@@ -12703,7 +12705,7 @@ function zhMapHTML(detailed, onlyStage) {
   s1Body += zhChapterTestMapHTML(1);
   s1Body += msRowHTML("zh", 1);
   var curZh1 = 1; try { var cz1 = zhPositionCurrent(); if (cz1) curZh1 = cz1.stage; } catch (e) {}
-  if (curZh1 !== 1 && !onlyStage) { var p1b = zhPositionProgress(1); html += '<details><summary><b>Các bước học chặng 1 — đã xong ' + (p1b ? p1b.done : 0) + '/' + (p1b ? p1b.total : 0) + ' bước học — bấm để mở</b></summary>' + s1Body + '</details>'; }
+  if (curZh1 !== 1 && !onlyStage) { var p1b = zhPositionProgress(1); html += '<details><summary><b>Các bước học chặng 1 — đã xong ' + (p1b ? p1b.done : 0) + '/' + (p1b ? p1b.total : 0) + ' bước học</b></summary>' + s1Body + '</details>'; }
   else html += s1Body;
   /* UI 28/10 (GD-02): man chinh chi ve chang hien tai; ban do day du
      van o tab Ban do (zhMapHTML(true) khong truyen onlyStage). */
@@ -12725,7 +12727,7 @@ function zhMapHTML(detailed, onlyStage) {
 }
 function zhSystemEHTML() {
   var rows = ZH_STAGES.map(function (st) { return '<tr><td>Chặng ' + st.stage + '</td><td>' + st.oldCum + '</td><td>' + st.eCum + '</td></tr>'; }).join("");
-  return '<details class="card" id="zhSystemE"><summary><b>Lớp bổ sung HSK 3.0 — hệ E (bấm để mở)</b></summary>'
+  return '<details class="card" id="zhSystemE"><summary><b>Lớp bổ sung HSK 3.0 — hệ E </b></summary>'
     + '<p class="mut">Nền tảng web theo Giáo trình chuẩn HSK (hệ 6 cấp cũ). Bảng dưới đối chiếu số từ tích lũy. Xem nguồn và xuất xứ trong Cài đặt → Nguồn nội dung.</p>'
     + '<table><tr><th>Chặng</th><th>Sách cũ (tích lũy)</th><th>Hệ E (tích lũy)</th></tr>' + rows + '<tr><td>Chặng 7–9 (hệ E)</td><td>— (ngoài bộ 6 cấp)</td><td>11000</td></tr></table>'
     + '<p class="mut">Học xong bộ giáo trình cũ đạt đích HSK cũ ở cấp tương ứng; muốn thi theo HSK 3.0 thì cần thêm từ vựng và kỹ năng theo khung mới.</p></details>';
@@ -12850,7 +12852,7 @@ function zhSkillPracticeHTML(kind) {
   return out;
 }
 function zhPracticeEntHTML() {
-  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Tây Du Ký Tập 90: Kế hoạch của bọn yêu quái (Tiếng Trung IMC)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/uKj-EGFpiWE?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu90') + "</details><details><summary><b>Doraemon: Ngôi nhà biến thành Robot (Tiếng Trung Phụ Đề)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jt4C4cQ7BeI?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('doraemon') + "</details><details><summary><b>Peppa Pig: Bữa trưa [Vietsub + Pinyin] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/DEJV45iuYx8?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('peppazh') + "</details><details><summary><b>Shin: Nhiều Ô Quá! (Hoa Ngữ Hoạt Hình)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/NBrKtkq4Z2g?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('shinzh') + "</details><details><summary><b>Tây Du Ký 1986 — tập 1 (Chữ cứng, Pinyin, Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/ATNVFYOLVPg?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu01') + "</details>" + '</div>';
+  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details class=\"vrow\"><summary><b>Tây Du Ký Tập 90: Kế hoạch của bọn yêu quái (Tiếng Trung IMC)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/uKj-EGFpiWE?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu90') + "</details><details class=\"vrow\"><summary><b>Doraemon: Ngôi nhà biến thành Robot (Tiếng Trung Phụ Đề)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jt4C4cQ7BeI?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('doraemon') + "</details><details class=\"vrow\"><summary><b>Peppa Pig: Bữa trưa [Vietsub + Pinyin] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/DEJV45iuYx8?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('peppazh') + "</details><details class=\"vrow\"><summary><b>Shin: Nhiều Ô Quá! (Hoa Ngữ Hoạt Hình)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/NBrKtkq4Z2g?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('shinzh') + "</details><details class=\"vrow\"><summary><b>Tây Du Ký 1986 — tập 1 (Chữ cứng, Pinyin, Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/ATNVFYOLVPg?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu01') + "</details>" + '</div>';
 }
 function zhPracticeEntWire(m) {
   m.querySelectorAll("[data-zhvideo-save]").forEach(function (b) { b.onclick = function () { var r = zhSaveVideoWords(b.dataset.zhvideoSave); toast("Đã lưu " + r.added + " từ mới vào Ôn tập" + (r.skipped ? " (" + r.skipped + " từ đã có nên không lưu thêm)" : "") + "."); render(); }; });
@@ -14866,7 +14868,7 @@ function viewHomeTc(app) {
   });
   html += '<div class="row"><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button></div></section></div>';
   html += '<div class="bento-tile">' + msHomeHTML("tc") + '</div>';
-  html += '<div class="bento-tile bento-wide"><details class="card"><summary><b>TOEIC Nghe–Đọc là gì? — bấm để mở</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></div></div>';
+  html += '<div class="bento-tile bento-wide"><details class="card"><summary><b>TOEIC Nghe–Đọc là gì?</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tcNextBtn"); if (nb) nb.onclick = function () { var nn = tcNextStep(); if (nn) tcOpenStep(nn.id, "home"); };
@@ -14940,8 +14942,8 @@ function tcTpStageCardHTML(st, i, isTc) {
   var g = (isTc ? TC_STAGE_GOALS : TP_STAGE_GOALS)[i] || { goal: "", can: [] };
   var html = '<section class="card chapter-row"><div class="row"><b>' + esc(st.title) + '</b><span class="chip' + (open ? ' cur' : '') + '">' + (open ? 'Đã mở · ' + doneLearn + '/' + learn.length + ' bước học' : 'Chưa mở') + '</span></div>'
     + '<p><b>Mục tiêu:</b> ' + esc(g.goal) + '</p>'
-    + '<details><summary><b>Học xong làm được — bấm để mở</b></summary><p>' + esc(g.can.join(" · ")) + '</p></details>'
-    + '<details class="ch-steps" style="margin-top:8px"><summary><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b> — bấm để mở</summary><div>' + rows + '</div></details>';
+    + '<details><summary><b>Học xong làm được</b></summary><p>' + esc(g.can.join(" · ")) + '</p></details>'
+    + '<details class="ch-steps" style="margin-top:8px"><summary><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b></summary><div>' + rows + '</div></details>';
   finals.forEach(function (id) {
     var m = meta(id); if (!m) return;
     var stt = status(id);
@@ -14967,7 +14969,7 @@ function viewRoadmapTc(app) {
   wireTc(app);
 }
 function tcPracticeEntHTML() {
-  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Khối video này dùng chung video tiếng Anh với track IELTS — xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; "I\'m hungry!" — mình đói bụng rồi!</p></details><details><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; "I want to see the lights!" — mình muốn xem đèn lồng!</p></details><details><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; "Let\'s play!" — cùng chơi nào!</p></details><details><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; "We are friends!" — chúng mình là bạn bè!</p></details><details><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; "I love dogs!" — mình yêu chó!</p></details><details><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); "I have news for you." — mình có tin cho bạn đây.</p>' + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + '</details><details><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; "I love pancakes!" — mình thích bánh kếp!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; "Let\'s go camping!" — cùng đi cắm trại nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; "I can ride a bike!" — mình biết đạp xe rồi!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; "My new shoes!" — giày mới của mình!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; "I am Baymax!" — mình là Baymax!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; "Let\'s cook!" — cùng nấu ăn nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; "We are friends!" — chúng mình là bạn bè!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details></div>';
+  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Khối video này dùng chung video tiếng Anh với track IELTS — xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details class="vrow"><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; "I\'m hungry!" — mình đói bụng rồi!</p></details><details class="vrow"><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; "I want to see the lights!" — mình muốn xem đèn lồng!</p></details><details class="vrow"><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; "Let\'s play!" — cùng chơi nào!</p></details><details class="vrow"><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; "We are friends!" — chúng mình là bạn bè!</p></details><details class="vrow"><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; "I love dogs!" — mình yêu chó!</p></details><details class="vrow"><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); "I have news for you." — mình có tin cho bạn đây.</p>' + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + '</details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; "I love pancakes!" — mình thích bánh kếp!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; "Let\'s go camping!" — cùng đi cắm trại nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; "I can ride a bike!" — mình biết đạp xe rồi!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; "My new shoes!" — giày mới của mình!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; "I am Baymax!" — mình là Baymax!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; "Let\'s cook!" — cùng nấu ăn nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; "We are friends!" — chúng mình là bạn bè!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details></div>';
 }
 function tcPracticeEntWire(m) {
   videoVOAWire();
@@ -15514,7 +15516,7 @@ function viewHomeTp(app) {
   });
   html += '<div class="row"><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button></div></section></div>';
   html += '<div class="bento-tile">' + msHomeHTML("tp") + '</div>';
-  html += '<div class="bento-tile bento-wide"><details class="card"><summary><b>TOPIK là gì? — bấm để mở</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></div></div>';
+  html += '<div class="bento-tile bento-wide"><details class="card"><summary><b>TOPIK là gì?</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tpNextBtn"); if (nb) nb.onclick = function () { var nn = tpNextStep(); if (nn) tpOpenStep(nn.id, "home"); };
@@ -15537,11 +15539,11 @@ function viewRoadmapTp(app) {
 }
 function tpPracticeFunHTML() {
   return '<div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p>'
-    + '<details><summary><b>Running Man (DANET · 5:31)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/Es0eoMEYiro?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng trong hình do kênh cung cấp — xem cho vui, nghe tiếng Hàn thật.</p></details>'
-    + '<details><summary><b>Running Man (DANET · 11:30)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/1xcTXCHQTgs?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng trong hình do kênh cung cấp — xem cho vui, nghe tiếng Hàn thật.</p></details>'
-    + '<details><summary><b>BTS (AJ Subteam · 3:30)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/3C-CxMgzvEI?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng do fan làm (không phải phụ đề chính thức) — video fan làm có thể bị gỡ, xem cho vui, nghe tiếng Hàn thật.</p></details>'
-    + '<details><summary><b>BTS (Young Forever · 2:52)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hFeGWusH9jE?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng do fan làm kèm lời bài hát (không phải phụ đề chính thức) — xem cho vui, nghe tiếng Hàn thật.</p></details>'
-    + '<details><summary><b>IU — fanchant Blueming (IU-VN Subteam · 5:22)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hGc7vETpHAI?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng do fan làm, có ghi chú của nhóm dịch (không phải phụ đề chính thức) — xem cho vui, nghe tiếng Hàn thật.</p></details>'
+    + '<details class="vrow"><summary><b>Running Man (DANET · 5:31)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/Es0eoMEYiro?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng trong hình do kênh cung cấp — xem cho vui, nghe tiếng Hàn thật.</p></details>'
+    + '<details class="vrow"><summary><b>Running Man (DANET · 11:30)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/1xcTXCHQTgs?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng trong hình do kênh cung cấp — xem cho vui, nghe tiếng Hàn thật.</p></details>'
+    + '<details class="vrow"><summary><b>BTS (AJ Subteam · 3:30)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/3C-CxMgzvEI?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng do fan làm (không phải phụ đề chính thức) — video fan làm có thể bị gỡ, xem cho vui, nghe tiếng Hàn thật.</p></details>'
+    + '<details class="vrow"><summary><b>BTS (Young Forever · 2:52)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hFeGWusH9jE?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng do fan làm kèm lời bài hát (không phải phụ đề chính thức) — xem cho vui, nghe tiếng Hàn thật.</p></details>'
+    + '<details class="vrow"><summary><b>IU — fanchant Blueming (IU-VN Subteam · 5:22)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hGc7vETpHAI?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng do fan làm, có ghi chú của nhóm dịch (không phải phụ đề chính thức) — xem cho vui, nghe tiếng Hàn thật.</p></details>'
     + '</div>';
 }
 function viewPracticeTp(app) {
