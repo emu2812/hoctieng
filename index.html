@@ -2610,6 +2610,27 @@ function syncAppFrame() {
 /* V72 — Nut sao duong uon (hoc Duolingo: chi lay duong + nut sao).
    duoNodeHTML KHONG esc lai: caller esc tieu de/phu de truoc. */
 function duoStar(st) { return (st === "done" || st === "cur") ? "★" : "☆"; }
+/* v88: emoji nut buoc theo loai bai, giong mau HSK (ZH: 🎤 phat am, 📚 tu vung,
+   📖 ngu phap, 📄 doc, 🎧 nghe, 🗣️ noi, 🎭 nhap vai, ✍️ viet). Nhan ca ma loai
+   cua buoc chuong EN (st.type), kind cua buoc Chuong 1 (RB_CH1_STEPS) va kind
+   cua buoc TC/TP. Trang thai xong/chua toi nam o chu .pn-st, khong nam o nut. */
+function mapStepEmoji(k) {
+  k = String(k || "");
+  if (k === "vocab" || k === "Từ vựng") return "📚";
+  if (k === "grammar" || k === "gram" || k === "skillGramOld" || k === "Ngữ pháp") return "📖";
+  if (k === "ch1read" || k === "skillRead" || k === "read" || k === "Đọc") return "📄";
+  if (k === "ch1listen" || k === "skillListen" || k === "skillListenLong" || k === "listen" || k === "Nghe ngắn" || k === "Nghe dài") return "🎧";
+  if (k === "pron" || k === "skillPronTopic" || k === "Phát âm") return "🎤";
+  if (k === "skillSpeak" || k === "Nói") return "🗣️";
+  if (k === "skillRoleplay" || k === "roleplay" || k === "Nhập vai") return "🎭";
+  if (k === "skillWrite" || k === "skillDrill" || k === "write" || k === "Viết" || k === "Luyện viết") return "✍️";
+  if (k === "skillTyping" || k === "Gõ câu") return "⌨️";
+  if (k === "skillReview" || k === "Ôn xen kẽ") return "🔁";
+  if (k === "hangul") return "🔤";
+  if (k === "check") return "📝";
+  if (k === "mock") return "🎓";
+  return "📝";
+}
 function duoNodeHTML(o) {
   var h = '<button class="' + o.cls + '" ' + o.attrs + '><span class="duo-star">' + o.star + '</span><span class="duo-label"><b>' + o.title + '</b><br><span class="mut">' + o.sub + '</span>';
   if (o.flag) h += '<br><span class="chip cl-flag">' + o.flag + '</span>';
@@ -3142,7 +3163,7 @@ function viewRoadmap(app) {
        co "Ban dang o day" va chip "Tiep theo" o buoc hien tai (buoc tiep theo
        con o Chuong 1 — thay cach dat chip cu cua FIX-V32). */
     var stTxt = st === "done" ? "Đã xong" : st === "skipped" ? "Đã bỏ qua — bấm để học lại" : st === "cur" ? "Đang học" : "Chưa tới";
-    html += '<button class="path-node step-row ' + st + '" data-step="' + s.id + '" data-status="' + st + '"><span class="dotwrap"><span class="dot">' + duoStar(st) + '</span></span><span><span class="pn-title">' + esc(s.title) + '</span><br><span class="pn-type">' + esc(s.type) + ' · khoảng ' + s.mins + ' phút (ước tính)</span><br><span class="pn-st">' + stTxt + '</span>' + (clFlag ? ' <span class="chip cl-flag">' + clFlag + '</span>' : '') + (st === "cur" ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
+    html += '<button class="path-node step-row ' + st + '" data-step="' + s.id + '" data-status="' + st + '"><span class="dotwrap"><span class="dot">' + mapStepEmoji(s.kind) + '</span></span><span><span class="pn-title">' + esc(s.title) + '</span><br><span class="pn-type">' + esc(s.type) + ' · khoảng ' + s.mins + ' phút (ước tính)</span><br><span class="pn-st">' + stTxt + '</span>' + (clFlag ? ' <span class="chip cl-flag">' + clFlag + '</span>' : '') + (st === "cur" ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
   });
   html += '</div>' + gateHTML + '</div>';
   html += '</section>';
@@ -3205,11 +3226,17 @@ function viewRoadmap(app) {
         var isNext = allowCur && firstUndone && !rbStepDone(st); if (isNext) { firstUndone = false; hasNext = true; }
         var stDone = rbStepDone(st);
         var stTxt = stDone ? "Đã xong" : isNext ? "Đang học" : "Chưa tới";
-        rows += '<button class="path-node step-row' + (isNext ? ' cur' : '') + '" data-rstep="' + esc(ch.band) + ':' + si + '"><span class="dotwrap"><span class="dot">' + (stDone ? "★" : "☆") + '</span></span><span><span class="pn-title">' + esc(st.title) + suf2 + (st.familiar ? " · làm quen" : "") + (st.review ? " · không tính cổng" : "") + '</span><br><span class="pn-type">' + esc(st.type) + '</span><br><span class="pn-st">' + stTxt + '</span>' + (isNext ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span></button>';
+        rows += '<button class="path-node step-row' + (isNext ? ' cur' : '') + '" data-rstep="' + esc(ch.band) + ':' + si + '"><span class="dotwrap"><span class="dot">' + mapStepEmoji(st.type) + '</span></span><span><span class="pn-title">' + esc(st.title) + suf2 + (st.familiar ? " · làm quen" : "") + (st.review ? " · không tính cổng" : "") + '</span><br><span class="pn-type">' + esc(st.type) + '</span><br><span class="pn-st">' + stTxt + '</span>' + (isNext ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span></button>';
       });
       var missing = rbChMissing(ch.band);
       var chestHTML = (ci > 0) ? '<div class="path-v"><button class="path-node duo-chest" data-chchest="' + esc(ch.band) + '"><span class="dotwrap"><span class="dot">🎁</span></span><span><span class="pn-title">Rương cuối chương</span><br><span class="pn-type">Kiểm tra cuối chương</span><br><span class="pn-st">' + (passedCh ? 'Đã qua ✓' : 'Chưa mở — cần đủ 80% bước tính cổng') + '</span></span></button></div>' : "";
-      body += '<details class="ch-steps" data-ch-steps="' + esc(ch.band) + '" style="margin-top:8px"' + (hasNext ? ' open' : '') + '><summary><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b></summary><div class="path-v">' + rows + '</div></details>' + chestHTML
+      /* v88: chuong hien tai trai thang buoc thanh timeline doc giong mau HSK
+         (khong goi trong <details> nua, van giu data-ch-steps tren .path-v);
+         cac chuong khac giu nguyen muc gap. hasNext chi dung khi la chuong
+         hien tai nen bo khoi nhanh muc gap. */
+      body += (isCurCh
+        ? '<p class="mut" style="margin-top:8px"><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b></p><div class="path-v" data-ch-steps="' + esc(ch.band) + '">' + rows + '</div>'
+        : '<details class="ch-steps" data-ch-steps="' + esc(ch.band) + '" style="margin-top:8px"><summary><b>Các bước (' + chSteps.length + ') — đã xong ' + gateDoneR + '/' + gateStepsR.length + ' bước tính cổng</b></summary><div class="path-v">' + rows + '</div></details>') + chestHTML
         + ((missing.length && ci > 0) ? '<p class="mut">Chưa có bước: ' + esc(missing.join(", ")) + '.</p>' : "")
         /* DOT 19 UI GATE: hang Band 0 chi co buoc Viet trong rbChSteps (cac kho
            khac cua Band 0 thuoc Chuong 1 o the tren) nen khong hien dong
@@ -15278,18 +15305,19 @@ function tcTpStageCardHTML(st, i, isTc) {
     var m = meta(id); if (!m) return;
     var stt = status(id);
     var isNext = !!(next && next.id === id);
-    var mark = stt === "done" ? "✓" : stt === "locked" ? "🔒" : "→";
+    /* v88: nut buoc emoji theo loai bai giong mau HSK (thay ✓/🔒/→); trang thai
+       xong/khoa nam o chu .pn-st. */
     var stTxt2 = stt === "done" ? "Đã xong" : stt === "locked" ? "Chưa mở — học theo thứ tự" : isNext ? "Đang học" : "Chưa tới";
-    rows += '<button class="path-node step-row' + (isNext ? ' cur' : '') + '" ' + attr + '="' + esc(id) + '"><span class="dotwrap"><span class="dot">' + mark + '</span></span><span><span class="pn-title">' + esc(m.title) + '</span><br><span class="pn-type">' + tcTpKindLabel(m.kind) + '</span><br><span class="pn-st">' + stTxt2 + '</span>' + (isNext ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
+    rows += '<button class="path-node step-row' + (isNext ? ' cur' : '') + '" ' + attr + '="' + esc(id) + '"><span class="dotwrap"><span class="dot">' + mapStepEmoji(m.kind) + '</span></span><span><span class="pn-title">' + esc(m.title) + '</span><br><span class="pn-type">' + tcTpKindLabel(m.kind) + '</span><br><span class="pn-st">' + stTxt2 + '</span>' + (isNext ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
   });
   var finalsHTML = "";
   finals.forEach(function (id) {
     var m = meta(id); if (!m) return;
     var stt = status(id);
     var isNextF = !!(next && next.id === id);
-    var mark = stt === "done" ? "✓" : stt === "locked" ? "🔒" : "→";
+    /* v88: nut kiem tra/thi thu emoji theo loai bai giong mau HSK (thay ✓/🔒/→). */
     var stTxt3 = stt === "done" ? "Đã xong" : stt === "locked" ? "Chưa mở — học theo thứ tự" : isNextF ? "Đang học" : "Chưa tới";
-    finalsHTML += '<button class="path-node step-row' + (isNextF ? ' cur' : '') + '" ' + attr + '="' + esc(id) + '"><span class="dotwrap"><span class="dot">' + mark + '</span></span><span><span class="pn-title">' + esc(m.title) + '</span><br><span class="pn-type">' + tcTpKindLabel(m.kind) + '</span><br><span class="pn-st">' + stTxt3 + '</span>' + (isNextF ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
+    finalsHTML += '<button class="path-node step-row' + (isNextF ? ' cur' : '') + '" ' + attr + '="' + esc(id) + '"><span class="dotwrap"><span class="dot">' + mapStepEmoji(m.kind) + '</span></span><span><span class="pn-title">' + esc(m.title) + '</span><br><span class="pn-type">' + tcTpKindLabel(m.kind) + '</span><br><span class="pn-st">' + stTxt3 + '</span>' + (isNextF ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
   });
   var g = (isTc ? TC_STAGE_GOALS : TP_STAGE_GOALS)[i] || { goal: "", can: [] };
   var html = '<section class="card chapter-row">'
@@ -15297,7 +15325,11 @@ function tcTpStageCardHTML(st, i, isTc) {
     + '<div class="stage-body"' + (isCurStage ? '' : ' hidden') + '>'
     + '<p><b>Mục tiêu:</b> ' + esc(g.goal) + '</p>'
     + '<details><summary><b>Học xong làm được</b></summary><p>' + esc(g.can.join(" · ")) + '</p></details>'
-    + '<details class="ch-steps" style="margin-top:8px"><summary><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b></summary><div class="path-v">' + rows + '</div></details>';
+    /* v88: chang hien tai trai thang buoc thanh timeline doc giong mau HSK
+       (khong goi trong <details> nua); cac chang khac giu nguyen muc gap. */
+    + (isCurStage
+      ? '<p class="mut" style="margin-top:8px"><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b></p><div class="path-v">' + rows + '</div>'
+      : '<details class="ch-steps" style="margin-top:8px"><summary><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b></summary><div class="path-v">' + rows + '</div></details>');
   if (finalsHTML) html += '<div class="path-v">' + finalsHTML + '</div>';
   if (finals.length) html += '<p class="mut">Kiểm tra cuối chặng và thi thử làm sau cùng của chặng; bước gợi ý sẽ chuyển sang kiểm tra khi bạn xong 80% bước học của chặng (chuẩn nội bộ).</p>';
   /* DOT v56: nhiem vu giao tiep that — buoc cuoi cua chang, sau kiem tra/thi thu. */
