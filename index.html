@@ -232,33 +232,31 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
    Token rieng cho he Bento; token cu giu nguyen de khoi vo man cu. Bo 20px
    chi ap cho O Bento (nut/pill giu 999px nhu cu — khac ho linh kien). */
 :root{--bento-bg:#FAFAFA;--bento-card:#FFFFFF;--bento-amber:#D97706;--bento-coral:#F05A28;--bento-ink:#18181B;--bento-soft:#F4F4F5}
-.bento-hub{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);margin:16px 0}
+.bento-hub{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);margin:16px 0;align-items:start}
+/* v84 (05/11/2026): DIỆT STRETCH — gốc khoảng trống giữa (kiểm live 18:55
+   05/11): lưới bento kéo mọi ô trong hàng cao bằng ô cao nhất, ô giữa
+   ~180px bị kéo theo thẻ phải ~580px nên trống ~400px, có thẻ trống tới
+   ~1.250px BÊN TRONG thẻ. align-items:start: mỗi ô chỉ cao bằng nội dung
+   của nó, không kéo theo ô dài nhất. Áp cho mọi hub (EN/ZH/TC/TP). */
 @media(min-width:900px){.bento-hub{grid-template-columns:repeat(4,minmax(0,1fr))}.bento-tile.bento-today{grid-column:3/4;grid-row:1/2}.bento-tile.bento-type{grid-column:4/5;grid-row:1/2}.bento-tile.bento-ms{grid-column:3/4;grid-row:2/3}.bento-tile.bento-u8{grid-column:4/5;grid-row:2/3}}
 .bento-tile:empty{display:none}
 .bento-tile{min-width:0;background:var(--bento-card);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:16px 20px}
 .bento-tile.bento-hero{padding:0;background:transparent;box-shadow:none}
 @media(min-width:900px){.bento-tile.bento-hero{grid-column:span 2;grid-row:span 2}}
 .bento-tile.bento-wide{grid-column:1/-1}
-/* v82 (05/11/2026): trang chủ EN desktop — cột chính trái + ray phải, lấp
-   khoảng trống giữa màn chính (Bùi 18:08 "sao đoạn giữa trống hẳn 1 khoảng
-   mà 2 bên kia lại đầy chữ"). Nguyên nhân cũ: hero chiếm 2x2 ô nhưng thẻ
-   hero chỉ cao ~200px, hàng 1 bị kéo dài bởi thẻ VÀO NHANH (6 nút xếp dọc),
-   mọi tile wide đều 1/-1 nên chỉ bắt đầu từ hàng 3 — cột giữa hàng 1-2
-   trống hẳn. Cách sửa: hero + hôm nay + đường đi + từ/nghe/luyện nhanh/xem
-   thêm vào cột 1-2; loại/việc/nhiệm vụ/câu/ngày + tiến trình vào ray 3-4
-   (tile rộng nên nút loại xếp 2 cột, thẻ ray ngắn lại); đường đi ở màn chính
-   thẳng cột dọc (như bản đồ HSK Bùi khen) thay cho uốn lượn, để vừa cột hẹp.
-   Chỉ áp cho hub EN (class bento-hub-en); ZH/TC/TP + mobile không đổi. */
-@media(min-width:900px){
-.bento-hub-en .bento-tile.bento-hero{grid-column:1/3;grid-row:1}
-.bento-hub-en .bento-tile.bento-today{grid-column:1/3;grid-row:2}
-.bento-hub-en .bento-tile.bento-type{grid-column:3/5;grid-row:1}
-.bento-hub-en .bento-tile.bento-ms{grid-column:3/5;grid-row:2}
-.bento-hub-en .bento-tile.bento-u8{grid-column:3/5;grid-row:3}
-.bento-hub-en .bento-tile.bento-wide.bento-progress{grid-column:3/5;grid-row:4}
-.bento-hub-en .bento-tile.bento-wide{grid-column:1/3}
-.bento-hub-en #homePath .duo-node{margin-left:0}
-}
+/* v84 (05/11/2026): TRANG CHỦ SẠCH — Bùi 18:51 "nội dung còn quá nhiều và
+   quá loạn". Luật v82 (cột trái + ray phải) đã gỡ: trang chủ EN không còn
+   lưới bento 4 cột — xếp dọc một cột: lời chào + MỘT việc tiếp theo duy
+   nhất (hero) + dòng tiến trình (stat-strip ở trên); mọi khối còn lại vào
+   <details> đóng sẵn (Việc hôm nay, Đường đi, Gợi ý học, Xem thêm), Vào
+   nhanh theo loại về Luyện tập (đã có đủ ở thẻ Tìm bài), tiến trình chi
+   tiết (heatmap/tổng kết/mốc) về Của tôi → Tiến trình của tôi. Không xóa
+   khối học thật nào. ZH/TC/TP + mobile không đổi khung, chỉ hết stretch
+   nhờ align-items:start ở trên. */
+.home-clean{margin:16px 0}
+.home-clean .home-hero{margin:0 0 4px}
+.home-clean details.card{margin:12px 0}
+.home-clean details.card>summary{cursor:pointer}
 .bento-tile>.card,.bento-tile>details.card{margin:0;border:0;padding:0;box-shadow:none;background:transparent;border-radius:0}
 .bento-tile.bento-hero>.card{border-radius:20px}
 .bento-tile h2{font-size:26px}
@@ -2506,9 +2504,8 @@ function milestonesHTML() {
   }).join("");
   return '<section class="card" id="milestoneCard"><h3>🏆 Mốc thưởng</h3><p class="mut">Bạn đang có ' + xp + " XP · Cấp " + lv.level + " (cấp tiếp theo cần tổng " + lv.next + " XP).</p><p><b>Theo chuỗi:</b></p><ul>" + sMil + "</ul><p><b>Theo cấp:</b></p><ul>" + lMil + "</ul></section>";
 }
-function homeProgressTileHTML() {
-  return '<div class="bento-tile bento-wide bento-progress">' + heatmapHTML() + summaryCardHTML() + milestonesHTML() + "</div>";
-}
+/* v84: homeProgressTileHTML đã gỡ — heatmap/tổng kết/mốc dời sang Của tôi
+   (viewMine, nhóm Tiến trình của tôi); trang chủ chỉ giữ dòng tiến trình. */
 
 /* ============ KHÔNG GIAN BÀI HỌC 3 CỘT: VIDEO | BÀI TẬP | BẢN CHÉP (04/11/2026) ============
    Dùng đúng video + câu thoại đã có: video VOA "Break the News" (id BKNJxpdNAtY,
@@ -2611,7 +2608,7 @@ function viewHome(app) {
   html += homeSearchHTML();
   html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (trulyNew ? 'Hôm nay 2812 cùng bạn học nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếp nhé.') + '</p>';
-  html += '<div class="bento-hub bento-hub-en"><div class="bento-tile bento-hero">';
+  html += '<div class="home-clean"><div class="home-hero">';
   if (trulyNew) {
     html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra đầu vào để web xếp đúng chặng cho bạn (khuyên dùng). Bỏ qua thì học từ đầu chương 1.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra đầu vào</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div></div></div></section>';
   } else {
@@ -2623,17 +2620,19 @@ function viewHome(app) {
   }
   html += '</div>';
   if (fresh) {
-    html += '<div class="bento-tile bento-today"><section class="card" id="u7Welcome">'
+    html += '<details class="card" id="homeWelcomeMore"><summary><b>Vì sao học kiểu này nhớ lâu · Câu hỏi thường gặp</b></summary><section class="card" id="u7Welcome">'
       + '<details id="u7WhyCard"><summary><b>Vì sao học kiểu này nhớ lâu</b></summary><p><b>Ôn đúng lúc sắp quên:</b> câu nào sai sẽ vào Sổ lỗi sai và ôn lại đúng ngày theo lịch 1-3-7-14-30 ngày — xem chi tiết ở Cài đặt → Ghi chú.</p><p><b>Học theo dạng bài:</b> mỗi dạng bài có cách làm riêng trước, rồi mới luyện trộn nhiều dạng như đi thi thật.</p><p><b>Chẩn đoán trước khi học:</b> bài kiểm tra nhanh đầu chặng cho biết bạn yếu chỗ nào, để lộ trình xếp dạng bài yếu lên trước.</p></details>'
-      + '<details id="u7Faq"><summary><b>Câu hỏi thường gặp</b></summary><p><b>Mỗi ngày học bao lâu?</b> Khoảng 10-20 phút một buổi là đủ, học đều mỗi ngày quan trọng hơn học dồn một lúc.</p><p><b>Làm sai có sao không?</b> Không sao cả — câu sai vào Sổ lỗi sai để ôn lại, không bị trừ điểm hay khóa bài.</p><p><b>"Band ước lượng" nghĩa là gì?</b> Là điểm web tự tính để bạn tham khảo trình độ, không phải điểm thi thật — IELTS không công bố bảng quy đổi cố định.</p></details></section></div>';
+      + '<details id="u7Faq"><summary><b>Câu hỏi thường gặp</b></summary><p><b>Mỗi ngày học bao lâu?</b> Khoảng 10-20 phút một buổi là đủ, học đều mỗi ngày quan trọng hơn học dồn một lúc.</p><p><b>Làm sai có sao không?</b> Không sao cả — câu sai vào Sổ lỗi sai để ôn lại, không bị trừ điểm hay khóa bài.</p><p><b>"Band ước lượng" nghĩa là gì?</b> Là điểm web tự tính để bạn tham khảo trình độ, không phải điểm thi thật — IELTS không công bố bảng quy đổi cố định.</p></details></section></details>';
   }
-  html += '<div class="bento-tile bento-type">' + typeEntryRowHTML("en") + '</div>';
-  if (!fresh) html += '<div class="bento-tile bento-today">' + specTodayHTML(t) + '</div>';
+  /* v84: Vào nhanh theo loại đã có đủ ở Luyện tập (thẻ Tìm bài, 7 nút) —
+     bỏ khỏi trang chủ để màn chính chỉ còn một việc tiếp theo. */
+  var todayHTML = (!fresh) ? specTodayHTML(t) : "";
+  if (todayHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayHTML + '</details>';
   var curStep = null, curTitle = "";
   if (info.kind === "ch1") { var nsH = nextLearnStep(); curStep = nsH; }
   else { var undH = info.steps.filter(function (st) { return !rbStepDone(st); }); curStep = undH.length ? undH[0] : null; }
   var bannerSk = curStep ? skClassFor(curStep.type) : "";
-  html += '<div class="bento-tile bento-wide"><section id="homePath"><div class="unit-banner' + (bannerSk ? ' ' + bannerSk : '') + '"><b>PHẦN ' + (info.kind === "ch1" ? 1 : (info.ci + 2)) + ' · Chương ' + (info.ci + 1) + ': ' + esc(info.title) + '</b><p class="mut">Đã xong ' + info.done + '/' + info.total + ' nấc' + (info.done < info.total ? ' · còn ' + (info.total - info.done) + ' nấc nữa là hết chương' : ' · đã xong chương này') + '</p></div><div class="duo-path">';
+  html += '<details class="card" id="homePathMore"><summary><b>Đường đi chương hiện tại</b></summary><section id="homePath"><div class="unit-banner' + (bannerSk ? ' ' + bannerSk : '') + '"><b>PHẦN ' + (info.kind === "ch1" ? 1 : (info.ci + 2)) + ' · Chương ' + (info.ci + 1) + ': ' + esc(info.title) + '</b><p class="mut">Đã xong ' + info.done + '/' + info.total + ' nấc' + (info.done < info.total ? ' · còn ' + (info.total - info.done) + ' nấc nữa là hết chương' : ' · đã xong chương này') + '</p></div><div class="duo-path">';
   if (info.kind === "ch1") {
     var curId = nextLearnStep() ? nextLearnStep().id : null;
     learningSteps().forEach(function (s, pi) {
@@ -2652,16 +2651,14 @@ function viewHome(app) {
       html += duoNodeHTML({ cls: "path-node duo-node pos" + (si % 8) + " " + stt, attrs: 'data-path-rstep="' + esc(info.band) + ':' + si + '"', star: duoStar(stt), title: esc(st.title), sub: esc(st.type), status: stTxt2, flag: stt === "cur" ? "📍 Bạn đang ở đây" : "", guide: stt === "cur" });
     });
   }
-  html += '</div></section></div>';
-  html += '<div class="bento-tile bento-wide">' + homeWordsHTML() + '</div>';
-  html += '<div class="bento-tile bento-wide">' + homeListenHTML() + '</div>';
-  html += '<div class="bento-tile bento-wide">' + homeQuickHTML() + '</div>';
-  html += '<div class="bento-tile bento-ms">' + msHomeHTML("en") + '</div>';
-  html += '<div class="bento-tile bento-u8">' + u8DailyHTML() + '</div>';
-  html += homeProgressTileHTML() + '<div class="bento-tile bento-wide"><details class="card" id="homeMore"><summary><b>Xem thêm: chơi thử, bản đồ, kiểm tra nhanh</b></summary>'
+  html += '</div></section></details>';
+  html += '<details class="card" id="homeSuggestMore"><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML() + homeListenHTML() + homeQuickHTML() + msHomeHTML("en") + u8DailyHTML() + '</details>';
+  /* v84: tiến trình chi tiết (heatmap/tổng kết/mốc) dời sang Của tôi →
+     Tiến trình của tôi — trang chủ chỉ giữ dòng tiến trình ở stat-strip. */
+  html += '<details class="card" id="homeMore"><summary><b>Xem thêm: chơi thử, bản đồ, kiểm tra nhanh</b></summary>'
     + '<p><button class="btn" id="u7PlayNow">🎮 Chơi thử ngay</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video (3 cột)</button></p>'
     + '<p><button class="dimlink" id="mapGo">Xem bản đồ 13 chương →</button> · <button class="dimlink" id="quickCheckLink">Tôi đã biết chút ít — kiểm tra nhanh</button>' + (fresh ? '' : ' · <button class="dimlink" id="entryRedoLink">Làm lại kiểm tra đầu vào</button>') + ' · <button class="dimlink" id="loginLink">Đăng nhập</button></p>'
-    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details></div></div></div>';
+    + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p></details></div></div>';
   app.innerHTML = html;
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var ll = $("#loginLink"); if (ll) { try { ll.textContent = (typeof authState !== "undefined" && authState.user) ? "Tài khoản: " + authState.user.email : "Đăng nhập"; } catch (e) {} }
@@ -2673,7 +2670,6 @@ function viewHome(app) {
   var erl = $("#entryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "entryPlace" }); };
   var spl = $("#statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
 
-  $$("#heatCard [data-heatday]").forEach(function (b) { b.onclick = function () { var d = $("#heatDetail"); if (d) d.textContent = heatDetailFor(b.dataset.heatday); }; });
   $$("[data-home-vocabset]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "vocab", setIdx: +b.dataset.homeVocabset }); }; });
   $$("[data-home-dict]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "dictation", idx: +b.dataset.homeDict }); }; });
   $$("[data-home-quick]").forEach(function (b) { b.onclick = function () { openLesson({ type: "vocabQuick", setIdx: +b.dataset.homeQuick }); }; });
@@ -3507,6 +3503,9 @@ function viewMine(app) {
   html += '<details class="card" id="mineGrpAccount"><summary><b>Tài khoản</b></summary>';
   html += accountCardHTML() + '</details>';
   html += '<details class="card" id="mineGrpProgress"><summary><b>Tiến trình của tôi</b></summary>';
+  /* v84: heatmap 90 ngày + tổng kết + mốc thưởng dời từ trang chủ về đây —
+     tiến trình chi tiết thuộc về Của tôi, không dồn lên màn chính. */
+  html += heatmapHTML() + summaryCardHTML() + milestonesHTML();
   html += '<section class="card" id="mineStats"><h3>Điểm XP</h3><p><b>' + (state.xp || 0) + ' XP</b> · Cấp ' + lv.level + ' · còn ' + (lv.next - (state.xp || 0)) + ' XP nữa lên cấp ' + (lv.level + 1) + '</p>'
     + '<details style="margin-top:8px"><summary><b>Cách nhận XP</b></summary><p class="mut">Xem bảng XP đầy đủ và mốc lên cấp trong Cài đặt → Ghi chú.</p></details></section>';
   html += gd23MasteryHTML();
@@ -3569,6 +3568,8 @@ function viewMine(app) {
   html += supplementHTML();
   html += notesHTML() + sourcesHTML();
   app.innerHTML = html;
+  /* v84: heatmap đã dời về đây từ trang chủ — bấm ô ngày hiện chi tiết. */
+  $$("#heatCard [data-heatday]").forEach(function (b) { b.onclick = function () { var d = $("#heatDetail"); if (d) d.textContent = heatDetailFor(b.dataset.heatday); }; });
   var setGoal = function (v) { v = Math.max(15, Math.min(180, Math.round(v) || 30)); state.goal = v; state.goalSet = true; saveState(); render(); };
   $("#goalMinus").onclick = function () { setGoal((state.goal || 30) - 5); };
   $("#goalPlus").onclick = function () { setGoal((state.goal || 30) + 5); };
