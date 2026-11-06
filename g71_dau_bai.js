@@ -408,7 +408,13 @@
   function feed(ch) {
     if (mode !== "battle" || !match || match.over || !match.pending) return;
     var r = LOGIC.typeLetter(match, ch);
-    if (r && r.wrong) wrongFlash = true;
+    if (r && r.wrong) {
+      wrongFlash = true;
+      /* v103 P2.8: go sai chu cua la dang go thi tu tren la vao hang doi
+         on (go sai chi la go lai trong tran, nhung chinh ta cua tu do
+         chua vung — gap lai o buoi on se chac hon). */
+      try { if (typeof recordGameMiss === "function" && match.pending && match.pending.card) recordGameMiss(match.pending.card.w, "dau-bai"); } catch (e) {}
+    }
     else if (r && r.ok) wrongFlash = false;
     render();
     if (match.over) endMatch();

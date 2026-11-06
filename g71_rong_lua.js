@@ -268,27 +268,14 @@
     return out.slice(0, 8);
   }
   /* Ôn lại một từ đã cứu, đúng luật SRS của track đó (không xóa dữ liệu,
-     không trừ điểm học): EN dùng vocabBoxJudge; ZH dùng zhHardJudge;
-     TC/TP tăng 1 nấc + hẹn theo RB_INTERVALS (đúng luật nút Nhớ rồi). */
+     không trừ điểm học): EN/TC/TP dùng vocabBoxJudge (kho the dung chung
+     state.cards); ZH dùng zhHardJudge. */
   function reviewKidnapped(item) {
     try {
       if (!item || !item.key) return false;
       if (item.track === "en" && typeof vocabBoxJudge === "function") { vocabBoxJudge(item.key, true); return true; }
       if (item.track === "zh" && typeof zhHardJudge === "function") { zhHardJudge(item.key, true); return true; }
-      if ((item.track === "tc" || item.track === "tp") && typeof todayStr === "function"
-        && typeof addDaysStr === "function" && typeof RB_INTERVALS !== "undefined") {
-        var isTc = item.track === "tc";
-        var boxes = isTc ? (state.tcCardBox || {}) : (state.tpCardBox || {});
-        var dues = isTc ? (state.tcCardDue || {}) : (state.tpCardDue || {});
-        var box = Math.min(5, (boxes[item.key] || 0) + 1);
-        boxes[item.key] = box;
-        if (box >= 5) delete dues[item.key];
-        else dues[item.key] = addDaysStr(todayStr(), RB_INTERVALS[Math.min(box - 1, RB_INTERVALS.length - 1)]);
-        if (isTc) { state.tcCardBox = boxes; state.tcCardDue = dues; }
-        else { state.tpCardBox = boxes; state.tpCardDue = dues; }
-        if (typeof saveState === "function") saveState();
-        return true;
-      }
+      if ((item.track === "tc" || item.track === "tp") && typeof vocabBoxJudge === "function") { vocabBoxJudge(item.key, true); return true; }
     } catch (e) {}
     return false;
   }
@@ -1617,9 +1604,43 @@
     collected.forEach(function (c) {
       var k = c.w.toLowerCase();
       var old = RL.dict[k];
+      var was = old ? old.lvl : 0;
       if (old) { old.lvl = Math.min(3, old.lvl + 1); old.uses = (old.uses || 1) + 1; old.el = c.el; }
       else RL.dict[k] = { w: c.w, vi: c.vi, el: c.el, lvl: 1, uses: 1 };
+      /* v103 D2: vua dat cap 3 thi tinh vao nac SRS (giu nguyen thang cap
+         chieu trong game). */
+      if (was === 2 && RL.dict[k].lvl === 3) srsBumpForLevel3(c.w);
     });
+  }
+  /* v103 D2: tu dat cap 3 trong game duoc tinh vao nac SRS — chi tang 1
+     nac, co chan 1 lan/ngay qua vocabBoxJudge; ZH tang level cua muc the
+     (khong dong streak — tot nghiep van can 2 lan tra loi dung trong
+     buoi on). Tu chua co trong kho the thi tao muc nac 1 (da dung dung
+     tu do 3 lan trong game). */
+  function srsBumpForLevel3(w) {
+    try {
+      if (typeof gameMissCardFor !== "function") return;
+      var hit = gameMissCardFor(w);
+      if (!hit) return;
+      if (hit.bank === "zh") {
+        if (typeof state === "undefined" || !state) return;
+        if (!state.zhHard) state.zhHard = {};
+        var h = state.zhHard[hit.key];
+        var t = todayStr();
+        if (!h) {
+          var c = hit.card;
+          state.zhHard[hit.key] = { kind: "card", setKey: hit.setKey, idx: hit.idx, han: c.han, pinyin: c.pinyin, vi: c.vi, level: 1, streak: 0, fails: 0, due: addDaysStr(t, RB_INTERVALS[1]) };
+          saveState();
+          return;
+        }
+        if (h.done) return;
+        h.level = Math.min(5, (h.level || 0) + 1);
+        h.due = addDaysStr(t, RB_INTERVALS[Math.min(h.level, RB_INTERVALS.length - 1)]);
+        saveState();
+        return;
+      }
+      if (typeof vocabBoxJudge === "function") vocabBoxJudge(hit.key, true, { noXp: true });
+    } catch (e) {}
   }
   function clearOverlays() {
     if (overlayBox && overlayBox.parentNode) overlayBox.parentNode.removeChild(overlayBox);
@@ -1842,8 +1863,10 @@
       keys.forEach(function (k) {
         var e = RL.dict[k];
         var stars = "★".repeat(e.lvl) + "☆".repeat(3 - e.lvl);
+        var srsTxt = "";
+        try { if (typeof gameSrsStatusFor === "function") { var ss = gameSrsStatusFor(e.w); if (ss) srsTxt = " · " + ss; } } catch (e2) {}
         html += '<section class="card" style="margin:0;padding:10px 14px;"><b>' + esc(e.w) + '</b> — ' + esc(e.vi)
-          + '<br><span class="mut">Hệ ' + ELEMENTS[e.el].name + ' ' + ELEMENTS[e.el].icon + ' · Cấp ' + stars + ' · đã dùng ' + (e.uses || 1) + ' lần</span></section>';
+          + '<br><span class="mut">Hệ ' + ELEMENTS[e.el].name + ' ' + ELEMENTS[e.el].icon + ' · Cấp ' + stars + ' · đã dùng ' + (e.uses || 1) + ' lần' + srsTxt + '</span></section>';
       });
       html += '</div>';
     }
@@ -1979,6 +2002,18 @@
     try { stage.canvas.removeEventListener("pointermove", onCanvasDrag); } catch (e) {}
     if (elBar) elBar.style.display = "none";
     if (ctrlBar) ctrlBar.style.display = "none";
+    /* v103 P2.8: tu de thoat + tu con dang tien khi het tran vao hang doi
+       on SRS (thang hay thua deu ghi — quai thoat la tu chua go kip). */
+    try {
+      if (typeof recordGameMiss === "function" && battle && battle.words) {
+        battle.words.forEach(function (wd) {
+          if (wd.status === "escaped" || wd.status === "advancing") {
+            recordGameMiss(wd.w, "rong-lua");
+            if (wd.phrase && wd.phrase.parts) wd.phrase.parts.forEach(function (pt) { if (pt.text) recordGameMiss(pt.text, "rong-lua"); });
+          }
+        });
+      }
+    } catch (e) {}
     /* Thua hay thắng đều giữ vàng + từ đã thu trong trận này. */
     RL.gold += battle.goldEarned;
     mergeCollected(battle.collected);
@@ -2347,6 +2382,7 @@
     logic: LOGIC, elements: ELEMENTS, heartsSvg: heartsSvg,
     companions: COMPANIONS, unlockedCompanions: unlockedCompanions,
     findKidnapped: findKidnapped, reviewKidnapped: reviewKidnapped,
+    mergeCollected: mergeCollected, srsBumpForLevel3: srsBumpForLevel3,
     art: { ready: rlReady, base: RL_ART, files: RL_IMGS, paint: paintRegion, paintWeather: paintWeather,
       drawMonster: drawMonster, drawDragonUp: drawDragonUp },
     store: { load: loadRL, save: saveRL, fresh: freshRL },

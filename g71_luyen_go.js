@@ -470,12 +470,22 @@
       running = false;
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("keyup", onKeyUp);
+      /* v103 P2.8: tu de roi (status "missed") vao hang doi on SRS — chi
+         tu roi khoi man moi tinh lo; tu con dang roi khi het tim thi
+         khong ghi (chua he thay thi chua tinh lo). */
+      try {
+        if (typeof recordGameMiss === "function") {
+          (st.words || []).forEach(function (wd) {
+            if (wd.status === "missed") recordGameMiss(wd.w, "luyen-go");
+          });
+        }
+      } catch (e) {}
       if (st.over === "win") {
-        G71.endScreen(st, true, "🎉 Thắng rồi!",
+        G71.endScreen(stg, true, "🎉 Thắng rồi!",
           ["Gõ đúng " + st.cleared + "/" + st.total + " từ.", "Điểm: " + st.score + " · +10 XP đã cộng vào tiến trình."],
           start);
       } else {
-        G71.endScreen(st, false, "Hết tim rồi!",
+        G71.endScreen(stg, false, "Hết tim rồi!",
           ["Gõ đúng " + st.cleared + "/" + st.total + " từ.", "Chơi lại để thử chủ đề khác nhé."],
           start);
       }
@@ -486,13 +496,22 @@
       if (!running) return;
       var dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      refreshKb();
       syncInput();
       /* Lái tàu bằng phím mũi tên giữ (0,55 đơn vị/giây — qua sân ~1,8 giây). */
       if (keys.left) LOGIC.moveShip(st, -0.55 * dt);
       if (keys.right) LOGIC.moveShip(st, 0.55 * dt);
       drawShipX += (st.ship.x - drawShipX) * Math.min(1, dt * 12);
       LOGIC.tick(st, dt, now);
+      /* v102-fix: refreshKb PHẢI chạy SAU tick — trước đây nó chạy trước
+         tick nên bàn phím đọc trạng thái trước-tick còn thanh Nghĩa (vẽ
+         sau tick) đọc trạng thái sau-tick; khung hình nào tick đổi từ
+         mục tiêu (từ rơi khỏi màn / từ khác vượt lên) thì bàn phím hiện
+         âm tiết của từ cũ trong khi Nghĩa hiện từ mới — kiểm render v101
+         và v102 đều bắt được (bàn phím hiện từ không còn trên màn, bấm
+         viên mục tiêu cũng không đổi bàn phím ngay). Sau tick thì bàn
+         phím, thanh Nghĩa, viền mục tiêu và syncInput luôn đọc cùng một
+         trạng thái, ở mọi tốc độ khung hình. */
+      refreshKb();
       var W = cv.width, H = cv.height;
       if (!W || !H) { requestAnimationFrame(frame); return; }
       ctx.clearRect(0, 0, W, H);

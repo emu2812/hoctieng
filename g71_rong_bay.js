@@ -296,13 +296,13 @@
       saveBest(best);
       if (st.over === "win") {
         var stars = LOGIC.starsFor(st.score, true);
-        G71.endScreen(st, true, "🎉 Thắng rồi!",
+        G71.endScreen(stg, true, "🎉 Thắng rồi!",
           ["Sao: " + "★".repeat(stars) + "☆".repeat(3 - stars) + ".",
            "Điểm: " + st.score + " · Điểm cao nhất: " + best + " · Chuỗi dài nhất: " + st.bestStreak + ".",
            "+10 XP đã cộng vào tiến trình."],
           start);
       } else {
-        G71.endScreen(st, false, "Hết tim rồi!",
+        G71.endScreen(stg, false, "Hết tim rồi!",
           ["Điểm: " + st.score + " · Điểm cao nhất: " + best + ".",
            "Chuỗi dài nhất: " + st.bestStreak + ". Chơi lại để thử bộ từ khác nhé."],
           start);
@@ -358,11 +358,15 @@
           bannerOk = true;
           shakeUntil = now + 250;
           waveGapUntil = now + 1000;
+          /* v103 P2.8: chon sai (du duoc khien chan) thi tu do vao hang doi on. */
+          try { if (typeof recordGameMiss === "function") recordGameMiss(res.correctWord, "rong-bay"); } catch (e) {}
         } else if (ev.type === "wrong") {
           banner = "Sai rồi! Đáp án: " + res.correctWord;
           bannerOk = false;
           shakeUntil = now + 300;
           waveGapUntil = now + 1000;
+          /* v103 P2.8: chon sai thi tu do vao hang doi on. */
+          try { if (typeof recordGameMiss === "function") recordGameMiss(res.correctWord, "rong-bay"); } catch (e) {}
         } else if (ev.type === "stormHit") {
           banner = "⛈️ Mây giông! Đâm phải mất 1 tim — né sang làn khác!";
           bannerOk = false;

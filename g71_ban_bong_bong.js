@@ -115,11 +115,11 @@
       running = false;
       document.removeEventListener("keydown", onKey);
       if (st.over === "win") {
-        G71.endScreen(st, true, "🎉 Thắng rồi!",
+        G71.endScreen(stg, true, "🎉 Thắng rồi!",
           ["Đủ 99 điểm!", "Điểm: " + st.score + " · +10 XP đã cộng vào tiến trình."],
           start);
       } else {
-        G71.endScreen(st, false, "Hết tim rồi!",
+        G71.endScreen(stg, false, "Hết tim rồi!",
           ["Điểm: " + st.score + "/99.", "Chơi lại để thử bộ từ khác nhé."],
           start);
       }
@@ -168,6 +168,8 @@
             bubbles = [];
             loadRound();
           } else {
+            /* v103 P2.8: ban nham thi tu dung vao hang doi on. */
+            try { if (typeof recordGameMiss === "function") recordGameMiss(res.correctWord, "ban-bong-bong"); } catch (e) {}
             var freedSlot = bub.slot;
             bubbles.splice(hit.u, 1);
             var rd = st.rounds[st.round];
