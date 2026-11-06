@@ -34,11 +34,15 @@ p{margin:8px 0}
 .bar{height:14px;background:var(--line2);border-radius:999px;overflow:hidden}
 .bar>i{display:block;height:100%;background:var(--amber);border-radius:999px}.bar.gold{outline:2px solid var(--amber)}
 .dimlink{color:var(--mut);text-decoration:underline;cursor:pointer;font-size:14px;background:none;border:0;padding:0}
-.lessonframe{position:sticky;top:66px;background:var(--paper);padding:8px 0;z-index:4;border-bottom:1.5px solid var(--line2)}
+/* v106c: frame KHONG dinh nua — bo sticky de mep tren noi dung chinh khong bi
+   xen khi cuon (truoc day topbar 66px + frame ~134px dinh thanh khoi duc
+   ~200px, mep duoi xen moi dong chu troi qua tren Thi thu chang 4,5 + ket
+   qua bai Noi + Luyen tap). Chi topbar 66px con dinh, nhu chuan thuong. */
+.lessonframe{background:var(--paper);padding:8px 0;border-bottom:1.5px solid var(--line2)}
 /* Bo cuc desktop chung: cot phu chi hien khi cau truc bai hoc da boc xong
    (.lesson-main ton tai) — man tu ve lai giua chung thi roi ve 1 cot, khong vo. */
 .lesson-side{display:none}
-@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){display:grid;grid-template-columns:minmax(0,820px);gap:24px;align-items:start}#app.lesson-view:has(>.lesson-main)>.lessonframe{grid-column:1/-1}#app.lesson-view:has(>.lesson-main)>.lesson-main{min-width:0}#app.lesson-view:has(>.lesson-main)>.lesson-side{display:block;position:sticky;top:240px}#app.lesson-view:has(>.lesson-main)>.lesson-side .card{margin:0 0 12px}}
+@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){display:grid;grid-template-columns:minmax(0,820px);gap:24px;align-items:start}#app.lesson-view:has(>.lesson-main)>.lessonframe{grid-column:1/-1}#app.lesson-view:has(>.lesson-main)>.lesson-main{min-width:0}#app.lesson-view:has(>.lesson-main)>.lesson-side{display:block;position:sticky;top:78px}#app.lesson-view:has(>.lesson-main)>.lesson-side .card{margin:0 0 12px}}
 .qblock{background:#fff;border:0;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:16px 20px;margin:12px 0}
 .why{display:none;background:#FFF8E1;border:1.5px solid var(--amber);border-radius:16px;padding:10px 12px;margin:10px 0}
 .why.show{display:block}
@@ -159,7 +163,7 @@ body.has-bottombar #btnBack{display:none}
 .tb-track{font-weight:700;white-space:nowrap}
 #appFooter{margin:28px 0 0;border-top:1.5px solid var(--line2);padding:20px 0 0}
 .foot-grid{display:grid;gap:16px;grid-template-columns:1.4fr 1fr 1fr 1fr}
-@media(min-width:901px){.tabbar{display:none}.app-col .lessonframe{top:70px}}
+@media(min-width:901px){.tabbar{display:none}}
 @media(max-width:900px){.app-frame{display:block}.app-sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:60;width:280px;max-height:none;border-radius:0;overflow-y:auto}body.sidebar-open .app-sidebar{display:flex}.tabbar{display:none}.foot-grid{grid-template-columns:1fr 1fr}.tb-track{display:none}#tbAccountBtn{display:none}#sbCollapseBtn{display:none}.tb-spacer{display:none}#tutorFloatBtn span{display:none}}
 body.sidebar-collapsed .app-frame{grid-template-columns:64px minmax(0,1fr)}
 body.sidebar-collapsed .sb-logo h1,body.sidebar-collapsed .sb-tag,body.sidebar-collapsed .sb-txt,body.sidebar-collapsed .sb-profile{display:none}
@@ -287,9 +291,8 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .rw-star{display:inline-block;animation:rwPop .5s both}
 @keyframes rwPop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
 body.in-lesson #tabBar{position:static}
-body.in-lesson .lessonframe{top:66px}
 .bento-side{display:none}
-@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,820px) 300px;justify-content:center}#app.lesson-view:has(>.lesson-main)>.bento-side{display:block;position:sticky;top:240px}}/* v106b: fallback — JS dat top chinh xac theo day lessonframe (xem applyLessonLayout) */
+@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,820px) 300px;justify-content:center}#app.lesson-view:has(>.lesson-main)>.bento-side{display:block;position:sticky;top:78px}}/* v106c: top cot phai = 66 (topbar) + 12 — frame khong con dinh nen khong cong chieu cao frame nua */
 /* v94 — trang bài học 3 cột: Nội dung | Thực hành | Tham khảo (cột 3 là .bento-side sẵn có).
    Dưới 1200px hai cột thân bài xếp dọc đúng thứ tự; cột tham khảo hiện dưới cùng ở bài đã tách. */
 .lesson-col-head{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--mut);margin:2px 0 8px;text-transform:uppercase}
@@ -1971,6 +1974,29 @@ function applyLessonLayout(app) {
     else if (curLesson && curLesson.title) title = curLesson.title;
   } catch (e) {}
   app.appendChild(main);
+  /* v106c — frame long trong #quizSlot (bai Doc/Nghe/Noi/bkLife dung quizSlot
+     de chay quiz): dua frame ra lam con truc tiep cua #app, dat ngay truoc
+     .lesson-main, de luat >.lessonframe{grid-column:1/-1} ap dung; neu khong
+     luoi 2 cot dat sai vi tri — noi dung ket qua roi vao cot hep 300px ben
+     phai, cot chinh giua trong (loi thay tren live v106b: trang ket qua bai
+     Noi Hometown). Dong thoi dua cac nut truc tiep dung TRUOC frame (doan
+     gioi thieu bai Noi, khoi bai doc, khung 5 nhip bai nghe) vao dau
+     .lesson-main de chung khong chiem o luoi lam lech vi tri; xoa #quizSlot
+     rong con lai. */
+  (function () {
+    var anc = frame;
+    while (anc.parentNode && anc.parentNode !== app) anc = anc.parentNode;
+    var lead = [], n = app.firstChild;
+    while (n && n !== anc) { lead.push(n); n = n.nextSibling; }
+    var frag = document.createDocumentFragment();
+    lead.forEach(function (el) { if (el.nodeType === 1 && el.tagName !== "SCRIPT" && el.tagName !== "STYLE") frag.appendChild(el); });
+    if (frag.childNodes.length) main.insertBefore(frag, main.firstChild);
+    if (frame.parentNode !== app) {
+      var slot = frame.parentNode;
+      app.insertBefore(frame, main);
+      while (slot && slot !== app) { var up = slot.parentNode; if (!slot.hasChildNodes()) slot.remove(); else break; slot = up; }
+    }
+  })();
   /* v94 — một thanh tiến trình duy nhất trong trang bài: khi thân bài đã có
      thanh tiến độ riêng (thanh 5 nấc của thẻ từ vựng, thanh "Đã học xong X
      trên 44 âm" của phát âm, thanh "Tiến độ bài" của quiz), gỡ thanh
@@ -2028,22 +2054,10 @@ function applyLessonLayout(app) {
     side.innerHTML = '<p class="lesson-col-head">🧰 Tham khảo</p><div class="bento-tile"><p class="eyebrow">TIẾN TRÌNH CỦA BẠN</p><p>🔥 Chuỗi ' + streakDays() + ' ngày · ' + (state.xp || 0) + ' XP</p><p class="mut">' + esc(goalStripToday()) + '</p><p class="mut">' + trackDueCount90() + ' mục đến hạn ôn</p><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>';
   } catch (e) { side.innerHTML = '<p class="lesson-col-head">🧰 Tham khảo</p><div class="bento-tile"><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>'; }
   app.appendChild(side);
-  /* v106b — chong lessonframe de len cot phai: frame dinh o top:66px, day
-     cua frame khi dinh = 66 + frame.offsetHeight; cot phai phai dinh duoi
-     day do + 12px, neu khong tieu de "TIEN TRINH CUA BAN" bi frame che nua
-     (loi thay tren live v106: Thi thu chang 4,5 + ket qua bai Noi). CSS top
-     240px chi la fallback; gia tri chinh xac dat o day theo tung trang. */
-  var bentoTopFix = function () { try { side.style.top = (66 + frame.offsetHeight + 12) + "px"; } catch (e) {} };
-  bentoTopFix();
-  try {
-    if (!window.__bentoTopFixOn) {
-      window.__bentoTopFixOn = true;
-      window.addEventListener("resize", function () {
-        try { var f = document.querySelector("#app .lessonframe"); var s = document.querySelector("#app .bento-side"); if (f && s) s.style.top = (66 + f.offsetHeight + 12) + "px"; } catch (e) {}
-      });
-    }
-  } catch (e) {}
-  try { var det106b = frame.querySelectorAll("details"); for (var di106b = 0; di106b < det106b.length; di106b++) det106b[di106b].addEventListener("toggle", bentoTopFix); } catch (e) {}
+  /* v106c — frame KHONG con dinh nua (xem CSS .lessonframe): cot phai chi
+     can dinh duoi topbar 66px + 12px khoang cach = 78px, khong phu thuoc
+     chieu cao frame; khong can tinh lai khi resize/mo <details> nua. */
+  try { side.style.top = "78px"; } catch (e) {}
 }
 function go(tab) { examTimerStop(); examPartTimerStop(); curTab = tab; curLesson = null; render(); }
 /* ---------- V59: TAI LUOI THE GIAI TRI (tab Luyen tap) ----------
