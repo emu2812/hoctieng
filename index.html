@@ -2745,8 +2745,9 @@ var HOME_NAV_MAP = [
   { label: "🎧 Luyện tập", target: "practice", kind: "tab", section: "" },
   { label: "🔁 Ôn tập", target: "review", kind: "tab", section: "" },
   { label: "🗣️ Giao tiếp bản địa", target: "native", kind: "tab", section: "" },
-  { label: "🎮 Trò chơi", target: "games", kind: "view", section: "" },
-  { label: "👤 Của tôi", target: "mine", kind: "tab", section: "" }
+  /* v96: thu tu 2 muc cuoi khop thanh tab tren (Cua toi truoc, Tro choi sau). */
+  { label: "👤 Của tôi", target: "mine", kind: "tab", section: "" },
+  { label: "🎮 Trò chơi", target: "games", kind: "view", section: "" }
 ];
 function homeNavGo(entry) {
   if (!entry) return;
@@ -2863,9 +2864,21 @@ function duoNodeHTML(o) {
 function mapCupCounts() {
   var passed = state.testDone ? 1 : 0, total = 1;
   (RB_CHAPTER_MAP || []).forEach(function (ch) {
-    try { if (rbChSteps(ch.band).length) { total++; if ((state.chapterTestDone || {})[ch.band]) passed++; } } catch (e) {}
+    /* v96: Band 0 khong co kiem tra rieng — kiem tra cua no chinh la kiem tra
+       chuong 1 da dem o total=1 ben tren; dem ca no se thua 1 (0/14 thay vi 0/13). */
+    try { if (ch.band !== "Band 0" && rbChSteps(ch.band).length) { total++; if ((state.chapterTestDone || {})[ch.band]) passed++; } } catch (e) {}
   });
   return { passed: passed, total: total };
+}
+/* v96: cup cuoi lo trinh cho ZH/TC/TP — dem dung kiem tra cuoi chang that cua
+   tung track (ZH: 6 chang; TC: 4 chang; TP: 8 chang). */
+function zhCupCounts() {
+  var passed = 0; [1, 2, 3, 4, 5, 6].forEach(function (s) { if (zhChapterTestPassed(s)) passed++; });
+  return { passed: passed, total: 6 };
+}
+function tcTpCupCounts(isTc) {
+  var kc = tcTpKindCounts89(isTc), ck = kc["check"] || [0, 0];
+  return { passed: ck[0], total: ck[1] };
 }
 /* V72 — Khoi hoc that tren trang Hoc (tu, nghe, luyen nhanh), lay tu kho
    co san, khong bia noi dung. */
@@ -3383,9 +3396,15 @@ function rbStageHTML(ch) {
 }
 function viewRoadmap(app) {
   var done = doneLearnCount(), total = learningSteps().length;
+  /* v96: Chuong 1 gom 7 buoc mo dau (the tren) + 10 buoc Viet Band 0 (hang Band 0
+     duoi) = 17 buoc; mot con so duy nhat khap noi. Luat mo kiem tra (6/7 buoc
+     mo dau) giu nguyen o dong gateRow ben duoi. */
+  var ch1WSteps = rbGateSteps("Band 0");
+  var ch1WDone = ch1WSteps.filter(function (st) { return rbStepDone(st); }).length;
+  var ch1TotalAll = total + ch1WSteps.length, ch1DoneAll = done + ch1WDone;
   var html = trackSwitchHTML() + '<h2>Bản đồ</h2><p class="mut">Cổng 80%: bài kiểm tra cuối chương mở khi bạn học xong 80% số bước tính cổng của chương đó — bước tính cổng là bước học chính (không tính bước làm quen và bước ôn xen kẽ); đây là chuẩn nội bộ của web, không phải chuẩn IELTS. Mỗi chương dưới đây chỉ ghi phân số đã xong/cần, không lặp lại luật này.</p>';
   html += '<section class="card" id="myPathLink"><h3>Lộ trình riêng của bạn</h3><p class="mut">Lộ trình AI tạo riêng cho bạn, khác Bản đồ chung.</p><button class="btn" id="myPathGo">Mở lộ trình riêng</button></section>';
-  html += '<section class="card"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + done + '/' + total + ' bước</b></div><div id="roadmapBox"><div class="path-v">';
+  html += '<section class="card"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + ch1DoneAll + '/' + ch1TotalAll + ' bước</b></div><div id="roadmapBox"><div class="path-v">';
   var clCur = nextLearnStep(); var clCurIdx = clCur ? stepIdx(clCur.id) : -1;
   var gateHTML = "";
   RB_CH1_STEPS.forEach(function (s, i) {
@@ -3439,7 +3458,13 @@ function viewRoadmap(app) {
        Hang Band 0: 10 buoc Viet; 5 buoc mo dau (phat am, tu vung) o the Chuong 1 phia tren. */
     var gateStepsR = (typeof rbGateSteps === "function") ? rbGateSteps(ch.band) : chSteps;
     var gateDoneR = gateStepsR.filter(function (st) { return rbStepDone(st); }).length;
-    var d2 = ci === 0 ? (gateDoneR + '/' + gateStepsR.length + ' bước Viết') : (hasSteps ? (gateDoneR + '/' + gateStepsR.length + ' bước tính cổng') : 'Sắp mở');
+    /* v96: mot con so duy nhat cho moi chuong = tong muc bam duoc trong chuong:
+       Band 0: 17 (7 buoc mo dau + 10 buoc Viet); chuong khac: so buoc + 1 ruong
+       cuoi chuong; done tinh ca ruong khi da qua. Tien do cong (vd 0/88) van
+       hien trong than chuong o dong "Cac buoc" va dong mo kiem tra cuoi chuong. */
+    var totalClick = chSteps.length + (ci > 0 ? 1 : 0);
+    var doneClick = chSteps.filter(function (st) { return rbStepDone(st); }).length + ((ci > 0 && (state.chapterTestDone || {})[ch.band]) ? 1 : 0);
+    var d2 = ci === 0 ? (ch1DoneAll + '/' + ch1TotalAll + ' bước') : (hasSteps ? (doneClick + '/' + totalClick + ' bước') : 'Sắp mở');
     var chipTxt = ci === 0 ? 'Đang mở · ' + d2 : (hasSteps ? 'Đã mở · ' + d2 : 'Sắp mở');
     var gb = ci === 0 ? RB_CH1_GUIDEBOOK : CL_GUIDEBOOKS[ch.band];
     var passedCh = !!((state.chapterTestDone || {})[ch.band]);
@@ -3447,11 +3472,11 @@ function viewRoadmap(app) {
     var chStatus = passedCh ? "done" : (!hasSteps ? "locked" : (isCurCh ? "cur" : "future"));
     var chStTxt = passedCh ? "Đã xong" : (!hasSteps ? "Sắp mở" : (isCurCh ? "Đang học" : "Chưa tới"));
     var chIcon = passedCh ? "✓" : (!hasSteps ? "🔒" : "📖");
-    var pnType = ci === 0 ? 'Tiếng Anh · IELTS · ' + gateStepsR.length + ' bước Viết' : (hasSteps ? 'Tiếng Anh · IELTS · ' + chSteps.length + ' bước học' : 'Tiếng Anh · IELTS · Sắp mở');
+    var pnType = ci === 0 ? 'Tiếng Anh · IELTS · ' + ch1TotalAll + ' bước' : (hasSteps ? 'Tiếng Anh · IELTS · ' + totalClick + ' bước' : 'Tiếng Anh · IELTS · Sắp mở');
     /* v86: thân chương gập, chỉ chương đang học mở sẵn; bấm nút tròn để mở/gập. */
     var open = isCurCh;
     var body = '<div class="row unit-banner"><b>PHẦN ' + (ci + 2) + ' · Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</b><button class="btn" data-gbopen="' + esc(ch.band) + '">📖 HƯỚNG DẪN · Sổ tay chương</button></div><p><b>Mục tiêu:</b> ' + esc(ch.goal) + '</p>'
-      + (ci === 0 ? '<p class="mut">10 bước dưới đây là bước Viết Band 0; 7 bước mở đầu (từ vựng, ngữ pháp, nghe, đọc, phát âm) nằm ở thẻ Chương 1 phía trên — hai con số là hai nhóm bước khác nhau.</p>' : '')
+      + (ci === 0 ? '<p class="mut">Chương 1 có 17 bước: 10 bước Viết Band 0 dưới đây và 7 bước mở đầu (từ vựng, ngữ pháp, nghe, đọc, phát âm) ở thẻ Chương 1 phía trên.</p>' : '')
       + '<details><summary><b>Học xong làm được</b></summary><p>' + esc(ch.can.join(" · ")) + '</p></details>'
       + rbStageHTML(ch)
       + (ci === 0 ? '<button class="btn btn-primary" id="mapCh1">Vào học chương 1</button>' : (hasSteps ? '<button class="btn" data-chopen="' + esc(ch.band) + '">Mở chương này</button>' : '<p class="mut">Chương này chưa có bước học.</p>'));
@@ -3881,11 +3906,11 @@ function viewReview(app) {
   var html = trackSwitchHTML() + '<h2>Ôn tập</h2><p class="mut">Lịch ôn: ' + RB_SCHEDULE_TEXT + '.</p>';
   if (cards.length || hards.length) {
     var dueN = cards.length + hards.length;
-    html += '<section class="card next-card" id="reviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn</h3><p class="mut">Một phiên trộn: câu sai cũ trước, thêm vài thẻ mới làm quen. Làm đúng ở đây chưa tốt nghiệp mục — ôn lại đúng 2 lần cách quãng ở tab này mới tính.</p><button class="btn btn-primary" id="reviewStartBtn">Bắt đầu buổi ôn</button></section>';
+    html += '<section class="card next-card" id="reviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + hards.length + ' câu lỗi sai + ' + cards.length + ' thẻ)</h3><p class="mut">Một phiên trộn: câu sai cũ trước, thêm vài thẻ mới làm quen. Làm đúng ở đây chưa tốt nghiệp mục — ôn lại đúng 2 lần cách quãng ở tab này mới tính.</p><button class="btn btn-primary" id="reviewStartBtn">Bắt đầu buổi ôn</button></section>';
   }
   html += gd23ReviewMixHTML();
   if (hards.length) {
-    html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Bấm “Đã ôn xong” chỉ dời ngày ôn, không tăng nấc: tăng nấc chỉ tính khi bạn trả lời đúng câu đó trong buổi ôn.</p><div id="reviewList">';
+    html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn (' + hards.length + ')</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Bấm “Đã ôn xong” chỉ dời ngày ôn, không tăng nấc: tăng nấc chỉ tính khi bạn trả lời đúng câu đó trong buổi ôn.</p><div id="reviewList">';
     hards.forEach(function (it) {
       var h = it.h;
       html += '<div class="sumcard"><b>' + esc(h.q || h.lesson || it.key) + '</b>'
@@ -3900,7 +3925,7 @@ function viewReview(app) {
   }
   var undue = undueHard();
   if (undue.length) {
-    html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p><div>';
+    html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + undue.length + ')</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p><div>';
     undue.forEach(function (it) {
       var h = it.h;
       html += '<div class="sumcard"><b>' + esc(h.q || h.lesson || it.key) + '</b>' + (h.kind === "srs" ? '<div><span class="chip">Câu đã học — ôn lại</span></div>' : "") + '<p class="mut">Về buổi ôn ngày ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p>'
@@ -14039,10 +14064,19 @@ function viewRoadmapZh(app) {
   html += zhMapHTML(true);
   html += zhHskkHTML();
   html += zhSystemEHTML();
+  /* v96: cup cuoi lo trinh HSK — dem dung 6 kiem tra cuoi chang that. */
+  var ccZh = zhCupCounts();
+  html += '<section class="card" id="mapCupCard"><div class="path-v"><button class="path-node duo-cup" id="zhMapCupBtn"><span class="dotwrap"><span class="dot">🏆</span></span><span><span class="pn-title">Cúp cuối lộ trình</span><br><span class="pn-type">Lộ trình HSK · 6 chặng</span><br><span class="pn-st">Đã qua ' + ccZh.passed + '/' + ccZh.total + ' kiểm tra cuối chặng</span></span></button></div></section>';
   app.innerHTML = html;
   var rn = $("#zhRoadmapNextBtn"); if (rn) rn.onclick = function () { zhOpenTarget(zhSessionTarget()); };
   wireZhMap(app);
   wireZhHskk();
+  var zhCupBtn = document.getElementById("zhMapCupBtn");
+  if (zhCupBtn) zhCupBtn.onclick = function () {
+    var cc = zhCupCounts();
+    if (cc.passed >= cc.total) toast("Đã hoàn thành toàn bộ lộ trình — tuyệt vời!");
+    else toast("Lộ trình: đã qua " + cc.passed + "/" + cc.total + " kiểm tra cuối chặng — học tiếp các chặng chưa xong ở Bản đồ nhé.");
+  };
 }
 function zhSkillPracticeHTML(kind) {
   var out = "";
@@ -14279,7 +14313,7 @@ function viewReviewZh(app) {
     var freshN90 = due.length ? Math.round(due.length / 4) : 0;
     var freshCount90 = freshN90 ? zhFreshCards90().slice(0, freshN90).length : 0;
     html += '<section class="card" id="reviewMix"><h3>Hàng đợi ôn trộn — 80% mục cũ + 20% mục mới</h3><p>Hôm nay: <b>' + due.length + ' mục cũ đến hạn</b> + <b>' + freshCount90 + ' mục mới</b> (nhãn "Mới"). Mục mới chỉ để làm quen trước, không thay phần ôn cũ.</p>' + (freshCount90 ? '<p class="mut">' + freshCount90 + ' thẻ mới làm quen (không hiện tên trước để khỏi lộ đáp án khi vào buổi ôn).</p>' : '<p class="mut">Không còn thẻ mới chưa học trong kho từ vựng.</p>') + '</section>';
-    html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn</h3><p class="mut">Xếp theo: sai nhiều nhất trước, rồi tới ngày đến hạn sớm nhất.</p>';
+    html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn (' + due.length + ')</h3><p class="mut">Xếp theo: sai nhiều nhất trước, rồi tới ngày đến hạn sớm nhất.</p>';
     due.forEach(function (it) {
       var h = it.h;
       if (h.kind === "gram") {
@@ -14302,7 +14336,7 @@ function viewReviewZh(app) {
   if (items.length) {
     var dueKeys = {}; due.forEach(function (it) { dueKeys[it.key] = true; });
     var bookItems = items.filter(function (k) { return !dueKeys[k]; });
-    html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn</h3><p class="mut">Các mục chưa đến hạn chỉ xem lại ở đây; nút "Đã nhớ rồi" chỉ hiện ở mục Đến hạn hôm nay khi đúng ngày ôn. Bấm "Đã nhớ rồi" chỉ dời ngày ôn tới lần sau, không tính là ôn đúng, không tốt nghiệp, không cộng XP — muốn tốt nghiệp phải trả lời đúng trong buổi ôn.</p>';
+    html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + bookItems.length + ')</h3><p class="mut">Các mục chưa đến hạn chỉ xem lại ở đây; nút "Đã nhớ rồi" chỉ hiện ở mục Đến hạn hôm nay khi đúng ngày ôn. Bấm "Đã nhớ rồi" chỉ dời ngày ôn tới lần sau, không tính là ôn đúng, không tốt nghiệp, không cộng XP — muốn tốt nghiệp phải trả lời đúng trong buổi ôn.</p>';
     bookItems.forEach(function (k) {
       var h = state.zhHard[k];
       if (h.kind === "gram") {
@@ -15688,7 +15722,7 @@ function tcStepMeta(id) {
   if (k === "l") { var l = (typeof TC_LISTEN !== "undefined") ? TC_LISTEN[n] : null; return l ? { kind: "listen", title: "Nghe Part " + l.part + ": " + l.title, ref: n } : null; }
   if (k === "r") { var r = (typeof TC_READ !== "undefined") ? TC_READ[n] : null; return r ? { kind: "read", title: "Đọc Part " + r.part + ": " + r.title, ref: n } : null; }
   if (k === "c") { var ck = (typeof TC_CHECK_ALL !== "undefined") ? TC_CHECK_ALL[n] : null; return ck ? { kind: "check", title: ck.title, ref: n } : null; }
-  if (id === "m0") return { kind: "mock", title: "Thi thử TOEIC đủ 200 câu", ref: 0 };
+  if (id === "m0") return { kind: "mock", title: "Thi thử TOEIC chặng 900 — đủ 200 câu", ref: 0 };
   if (id === "m450") return { kind: "mock", title: "Thi thử TOEIC chặng 450 — 120 câu", ref: 450 };
   if (id === "m600") return { kind: "mock", title: "Thi thử TOEIC chặng 600 — 120 câu", ref: 600 };
   if (id === "m750") return { kind: "mock", title: "Thi thử TOEIC chặng 750 — 120 câu", ref: 750 };
@@ -16001,7 +16035,7 @@ function tcMockSpec(stepId) {
   if (stepId === "m450") return { step: "m450", title: "Thi thử TOEIC chặng 450 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 450", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK450_L !== "undefined") ? TC_MOCK450_L : [], R: (typeof TC_MOCK450_R !== "undefined") ? TC_MOCK450_R : [], minutes: 72, milestone: "tc-mock-450" };
   if (stepId === "m600") return { step: "m600", title: "Thi thử TOEIC chặng 600 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 600", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK600_L !== "undefined") ? TC_MOCK600_L : [], R: (typeof TC_MOCK600_R !== "undefined") ? TC_MOCK600_R : [], minutes: 72, milestone: "tc-mock-600" };
   if (stepId === "m750") return { step: "m750", title: "Thi thử TOEIC chặng 750 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 750", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK750_L !== "undefined") ? TC_MOCK750_L : [], R: (typeof TC_MOCK750_R !== "undefined") ? TC_MOCK750_R : [], minutes: 72, milestone: "tc-mock-750" };
-  return { step: "m0", title: "Thi thử TOEIC đủ 200 câu", eyebrow: "TOEIC · THI THỬ ĐỦ CÂU", intro1: "200 câu: 100 câu Nghe (Part 1: 6, Part 2: 25, Part 3: 39, Part 4: 30) + 100 câu Đọc (Part 5: 30, Part 6: 16, Part 7: 54), thời gian tham khảo 120 phút. Đây là bài tự soạn theo đúng tỉ lệ đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng tham khảo — ETS không công bố bảng quy đổi điểm thô cố định.", intro2: 'Tỉ lệ so với đề thật: 200/200 câu (100%). Theo chuẩn nội bộ của web, mock này đủ câu để gọi là "sẵn sàng thi" ở mức số câu — điểm vẫn chỉ là ước lượng tham khảo.', resultTitle: "Kết quả thi thử TOEIC đủ câu", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn đủ 200 câu theo đúng tỉ lệ đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định.", L: TC_MOCK_L, R: TC_MOCK_R, minutes: 120, milestone: "tc-mock-200" };
+  return { step: "m0", title: "Thi thử TOEIC chặng 900 — đủ 200 câu", eyebrow: "TOEIC · THI THỬ CHẶNG 900", intro1: "200 câu: 100 câu Nghe (Part 1: 6, Part 2: 25, Part 3: 39, Part 4: 30) + 100 câu Đọc (Part 5: 30, Part 6: 16, Part 7: 54), thời gian tham khảo 120 phút. Đây là bài tự soạn theo đúng tỉ lệ đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng tham khảo — ETS không công bố bảng quy đổi điểm thô cố định.", intro2: 'Tỉ lệ so với đề thật: 200/200 câu (100%). Theo chuẩn nội bộ của web, mock này đủ câu để gọi là "sẵn sàng thi" ở mức số câu — điểm vẫn chỉ là ước lượng tham khảo.', resultTitle: "Kết quả thi thử TOEIC đủ câu", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn đủ 200 câu theo đúng tỉ lệ đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định.", L: TC_MOCK_L, R: TC_MOCK_R, minutes: 120, milestone: "tc-mock-200" };
 }
 function tcOpenMock(back, stepId) {
   var app = document.getElementById("app"); if (!app) return;
@@ -16196,7 +16230,7 @@ function tcTpStageCardHTML(st, i, isTc) {
   });
   var g = (isTc ? TC_STAGE_GOALS : TP_STAGE_GOALS)[i] || { goal: "", can: [] };
   var html = '<section class="card chapter-row">'
-    + '<button class="path-node row stage-node' + (isDoneStage ? ' done' : isCurStage ? ' cur' : '') + '" data-stage-node="' + i + '" aria-expanded="' + (isCurStage ? 'true' : 'false') + '"><span class="dotwrap"><span class="dot">' + stIcon + '</span></span><span><span class="pn-title"><b>' + esc(st.title) + '</b></span><br><span class="pn-type">' + (isTc ? 'TOEIC' : 'TOPIK') + ' · ' + learn.length + ' bước học · ' + finals.length + ' kiểm tra/thi thử</span><br><span class="pn-st">' + stTxt + '</span>' + (isCurStage ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span><span class="chip cur">Đã mở · ' + doneLearn + '/' + learn.length + ' bước học</span></button>'
+    + '<button class="path-node row stage-node' + (isDoneStage ? ' done' : isCurStage ? ' cur' : '') + '" data-stage-node="' + i + '" aria-expanded="' + (isCurStage ? 'true' : 'false') + '"><span class="dotwrap"><span class="dot">' + stIcon + '</span></span><span><span class="pn-title"><b>' + esc(st.title) + '</b></span><br><span class="pn-type">' + (isTc ? 'TOEIC' : 'TOPIK') + ' · ' + (learn.length + finals.length) + ' bước (' + learn.length + ' học · ' + finals.length + ' kiểm tra/thi thử)</span><br><span class="pn-st">' + stTxt + '</span>' + (isCurStage ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span><span class="chip cur">Đã mở · ' + (doneLearn + doneFinals) + '/' + (learn.length + finals.length) + ' bước</span></button>'
     + '<div class="stage-body"' + (isCurStage ? '' : ' hidden') + '>'
     + '<p><b>Mục tiêu:</b> ' + esc(g.goal) + '</p>'
     + '<details><summary><b>Học xong làm được</b></summary><p>' + esc(g.can.join(" · ")) + '</p></details>'
@@ -16205,7 +16239,9 @@ function tcTpStageCardHTML(st, i, isTc) {
     + (isCurStage
       ? '<p class="mut" style="margin-top:8px"><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b></p><div class="path-v">' + rows + '</div>'
       : '<details class="ch-steps" style="margin-top:8px"><summary><b>Các bước học (' + learn.length + ') — đã xong ' + doneLearn + '/' + learn.length + ' bước học</b></summary><div class="path-v">' + rows + '</div></details>');
-  if (finalsHTML) html += '<div class="path-v">' + finalsHTML + '</div>';
+  /* v96: khoi kiem tra/thi thu co tieu de dem rieng — truoc day khong co tieu de
+     nen 2 nut cuoi trong nhu buoc hoc, gay lech +2/+1 voi so "buoc hoc" ghi tren. */
+  if (finalsHTML) html += '<p class="mut" style="margin-top:8px"><b>Kiểm tra/thi thử (' + finals.length + ') — đã xong ' + doneFinals + '/' + finals.length + '</b></p><div class="path-v">' + finalsHTML + '</div>';
   if (finals.length) html += '<p class="mut">Kiểm tra cuối chặng và thi thử làm sau cùng của chặng; bước gợi ý sẽ chuyển sang kiểm tra khi bạn xong 80% bước học của chặng (chuẩn nội bộ).</p>';
   /* DOT v56: nhiem vu giao tiep that — buoc cuoi cua chang, sau kiem tra/thi thu. */
   html += msRowHTML(isTc ? "tc" : "tp", isTc ? st.score : i);
@@ -16221,8 +16257,17 @@ function viewRoadmapTc(app) {
     html += tcTpStageCardHTML(st, i, true);
   });
   if (state.tcSkipped.length) html += '<section class="card"><h3>Đã bỏ qua</h3><p class="mut">Các bước bạn học trước mà chưa học nốt — quay lại học khi rảnh:</p><div class="row">' + state.tcSkipped.map(function (s) { return tcStepBtnHTML(s); }).join("") + '</div></section>';
+  /* v96: cup cuoi lo trinh TOEIC — dem dung 4 kiem tra cuoi chang that. */
+  var ccTc = tcTpCupCounts(true);
+  html += '<section class="card" id="mapCupCard"><div class="path-v"><button class="path-node duo-cup" id="tcMapCupBtn"><span class="dotwrap"><span class="dot">🏆</span></span><span><span class="pn-title">Cúp cuối lộ trình</span><br><span class="pn-type">Lộ trình TOEIC · 4 chặng</span><br><span class="pn-st">Đã qua ' + ccTc.passed + '/' + ccTc.total + ' kiểm tra cuối chặng</span></span></button></div></section>';
   app.innerHTML = html;
   wireTc(app);
+  var tcCupBtn = document.getElementById("tcMapCupBtn");
+  if (tcCupBtn) tcCupBtn.onclick = function () {
+    var cc = tcTpCupCounts(true);
+    if (cc.passed >= cc.total) toast("Đã hoàn thành toàn bộ lộ trình — tuyệt vời!");
+    else toast("Lộ trình: đã qua " + cc.passed + "/" + cc.total + " kiểm tra cuối chặng — học tiếp các chặng chưa xong ở Bản đồ nhé.");
+  };
   /* v86: nút chặng mở/gập thân chặng. */
   app.querySelectorAll("[data-stage-node]").forEach(function (btn) {
     btn.onclick = function () {
@@ -16257,8 +16302,9 @@ function viewPracticeTc(app) {
     var items = TC_READ.map(function (r, i) { return { r: r, i: i }; }).filter(function (x) { return x.r.part === p; });
     if (items.length) html += '<section class="card"><h3>Đọc Part ' + p + '</h3><div class="row">' + items.map(function (x) { return tcStepBtnHTML("r" + x.i); }).join("") + '</div></section>';
   });
-  html += '<section class="card"><h3>Thi thử TOEIC đủ 200 câu</h3><p class="mut">200 câu, 120 phút tham khảo, điểm ước lượng 10–990 chỉ để tham khảo.</p><div class="row">' + tcStepBtnHTML("m0") + '</div></section>';
-  html += '<section class="card"><h3>Thi thử TOEIC theo chặng (120 câu)</h3><p class="mut">Mỗi chặng một bài riêng, ở cuối chặng đó: 120 câu, 72 phút tham khảo, điểm ước lượng nội bộ 10–990 chỉ để tham khảo.</p><div class="row">' + tcStepBtnHTML("m450") + tcStepBtnHTML("m600") + tcStepBtnHTML("m750") + '</div></section>';
+  /* v96: thi thu chặng 900 (m0, du 200 cau) nam chung danh sach theo chang — truoc
+     day tach rieng muc "du 200 cau" nen chang 900 nhu thieu thi thu rieng. */
+  html += '<section class="card"><h3>Thi thử TOEIC theo chặng</h3><p class="mut">Mỗi chặng một bài riêng, ở cuối chặng đó. Chặng 450/600/750: 120 câu, 72 phút tham khảo. Chặng 900: đủ 200 câu, 120 phút tham khảo — đúng tỉ lệ đề thi thật của ETS. Điểm ước lượng nội bộ 10–990 chỉ để tham khảo.</p><div class="row">' + tcStepBtnHTML("m450") + tcStepBtnHTML("m600") + tcStepBtnHTML("m750") + tcStepBtnHTML("m0") + '</div></section>';
   if (state.tcHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOEIC chưa sửa: ' + state.tcHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
   /* DOT V32 PLATFORMER 01/11: the giai tri TC — chi 1 game Di canh nhat sao (canvas that); 3 game cu con code nhung khong con nut vao tu the. */
     html += '<section class="card" id="tcGameCardPractice"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Đang tải video…</p></section>';
@@ -16279,11 +16325,11 @@ function viewReviewTc(app) {
   var freshTotal = tcFreshCards90().length;
   var html = trackSwitchHTML() + '<h2>Ôn tập · TOEIC</h2><p class="mut">Lịch ôn: ' + RB_SCHEDULE_TEXT + '.</p>';
   if (dueN > 0) {
-    html += '<section class="card next-card" id="tcReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn</h3><p class="mut">Câu sai cũ trước — mở lại đúng bước đó và trả lời đúng. Làm đúng ở đây chưa tốt nghiệp mục — trả lời đúng thêm lần nữa ở lần đến hạn sau mới tính.</p><button class="btn btn-primary" id="tcReviewStartBtn">Bắt đầu buổi ôn</button></section>';
+    html += '<section class="card next-card" id="tcReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + dueH.length + ' câu lỗi sai + ' + dueC.length + ' thẻ)</h3><p class="mut">Câu sai cũ trước — mở lại đúng bước đó và trả lời đúng. Làm đúng ở đây chưa tốt nghiệp mục — trả lời đúng thêm lần nữa ở lần đến hạn sau mới tính.</p><button class="btn btn-primary" id="tcReviewStartBtn">Bắt đầu buổi ôn</button></section>';
     html += '<section class="card" id="reviewMix"><h3>Hàng đợi ôn</h3><p>Hôm nay: <b>' + dueN + ' mục cũ đến hạn</b> + <b>' + Math.min(freshTotal, freshN) + ' thẻ từ vựng mới chưa học</b>. Thẻ mới học ở bước từ vựng mới trong Bản đồ — buổi ôn này chỉ ôn mục đến hạn.</p></section>';
   }
   if (dueH.length) {
-    html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Trả lời đúng câu đó khi làm lại bước mới tăng 1 nấc: đúng 2 lần ở các lần ôn cách quãng mới tốt nghiệp.</p>';
+    html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn (' + dueH.length + ')</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Trả lời đúng câu đó khi làm lại bước mới tăng 1 nấc: đúng 2 lần ở các lần ôn cách quãng mới tốt nghiệp.</p>';
     dueH.forEach(function (h) {
       var m = tcStepMeta(h.step);
       html += '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "ngay hôm nay") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div class="row"><button class="btn" data-tcretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tcfix="' + state.tcHard.indexOf(h) + '">Đã sửa xong</button></div></div>';
@@ -16291,7 +16337,7 @@ function viewReviewTc(app) {
     html += '</section>';
   }
   if (undueH.length) {
-    html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p>';
+    html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + undueH.length + ')</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p>';
     undueH.forEach(function (h) {
       var m = tcStepMeta(h.step);
       html += '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div class="row"><button class="btn" data-tcretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tcfix="' + state.tcHard.indexOf(h) + '">Đã sửa xong</button></div></div>';
@@ -16355,7 +16401,9 @@ function tpStepMeta(id) {
   if (k === "h") { var h = (typeof TP_HANGUL !== "undefined") ? TP_HANGUL[n] : null; return h ? { kind: "hangul", title: "Hangul: " + h.title, ref: n } : null; }
   if (k === "v") { var s = (typeof TP_VOCAB !== "undefined") ? TP_VOCAB[n] : null; return s ? { kind: "vocab", title: "Từ vựng: " + s.topic, ref: n } : null; }
   if (k === "g") { var g = (typeof TP_GRAMMAR !== "undefined") ? TP_GRAMMAR[n] : null; return g ? { kind: "gram", title: "Ngữ pháp: " + g.name, ref: n } : null; }
-  if (k === "l") { var l = (typeof TP_LISTEN !== "undefined") ? TP_LISTEN[n] : null; return l ? { kind: "listen", title: "Nghe: " + l.title, ref: n } : null; }
+  /* v96: tieu de TP_LISTEN tu ngay 10 tro di da co san tien to "Nghe: " — them
+     "Nghe: " nua se thanh "Nghe: Nghe:". Boc tien to cu neu co roi moi them. */
+  if (k === "l") { var l = (typeof TP_LISTEN !== "undefined") ? TP_LISTEN[n] : null; return l ? { kind: "listen", title: "Nghe: " + String(l.title || "").replace(/^Nghe: /, ""), ref: n } : null; }
   if (k === "r") { var r = (typeof TP_READ !== "undefined") ? TP_READ[n] : null; return r ? { kind: "read", title: "Đọc: " + r.title, ref: n } : null; }
   if (k === "k") { var ck2 = (typeof TP_CHECK !== "undefined") ? TP_CHECK[n] : null; return ck2 ? { kind: "check", title: ck2.title, ref: n } : null; }
   if (k === "w") { return (typeof TP_WRITE !== "undefined") ? { kind: "write", title: n === 0 ? "Viết TOPIK II: nhiệm vụ 51–52 (điền câu)" : n === 1 ? "Viết TOPIK II: nhiệm vụ 53–54 (luận)" : n === 2 ? "Luyện viết Cấp 1: điền câu đơn giản" : n === 3 ? "Luyện viết Cấp 2: điền câu ghép + đoạn ngắn" : n === 4 ? "Luyện viết Cấp 3: điền câu 51–52" : n === 5 ? "Luyện viết Cấp 3: luận ngắn 53" : n === 6 ? "Luyện viết Cấp 4: điền câu 51–52" : n === 7 ? "Luyện viết Cấp 4: luận ngắn 53 nâng cao" : n === 8 ? "Luyện viết Cấp 5: điền câu 51–52 học thuật" : n === 9 ? "Luyện viết Cấp 5: luận 53 + làm quen 54" : n === 10 ? "Luyện viết Cấp 6: điền câu 52 khó" : "Luyện viết Cấp 6: luận dài 54", ref: n } : null; }
@@ -16843,8 +16891,17 @@ function viewRoadmapTp(app) {
     html += tcTpStageCardHTML(st, i, false);
   });
   if (state.tpSkipped.length) html += '<section class="card"><h3>Đã bỏ qua</h3><p class="mut">Các bước bạn học trước mà chưa học nốt — quay lại học khi rảnh:</p><div class="row">' + state.tpSkipped.map(function (s) { return tpStepBtnHTML(s); }).join("") + '</div></section>';
+  /* v96: cup cuoi lo trinh TOPIK — dem dung 8 kiem tra cuoi chang that. */
+  var ccTp = tcTpCupCounts(false);
+  html += '<section class="card" id="mapCupCard"><div class="path-v"><button class="path-node duo-cup" id="tpMapCupBtn"><span class="dotwrap"><span class="dot">🏆</span></span><span><span class="pn-title">Cúp cuối lộ trình</span><br><span class="pn-type">Lộ trình TOPIK · 8 chặng</span><br><span class="pn-st">Đã qua ' + ccTp.passed + '/' + ccTp.total + ' kiểm tra cuối chặng</span></span></button></div></section>';
   app.innerHTML = html;
   wireTp(app);
+  var tpCupBtn = document.getElementById("tpMapCupBtn");
+  if (tpCupBtn) tpCupBtn.onclick = function () {
+    var cc = tcTpCupCounts(false);
+    if (cc.passed >= cc.total) toast("Đã hoàn thành toàn bộ lộ trình — tuyệt vời!");
+    else toast("Lộ trình: đã qua " + cc.passed + "/" + cc.total + " kiểm tra cuối chặng — học tiếp các chặng chưa xong ở Bản đồ nhé.");
+  };
   /* v86: nút chặng mở/gập thân chặng. */
   app.querySelectorAll("[data-stage-node]").forEach(function (btn) {
     btn.onclick = function () {
@@ -16887,7 +16944,7 @@ function viewPracticeTp(app) {
     var items = TP_READ.map(function (r, i) { return { r: r, i: i }; }).filter(function (x) { return x.r.part === p; });
     if (items.length) html += '<section class="card"><h3>Đọc dạng ' + p + '</h3><div class="row">' + items.map(function (x) { return tpStepBtnHTML("r" + x.i); }).join("") + '</div></section>';
   });
-  html += '<section class="card"><h3>Thi thử TOPIK I rút gọn</h3><p class="mut">20 câu, 20 phút tham khảo, cấp ước lượng chỉ để tham khảo.</p><div class="row">' + tpStepBtnHTML("m0") + '</div></section>';
+  html += '<section class="card"><h3>Thi thử TOPIK I rút gọn</h3><p class="mut">70 câu: 35 câu Nghe + 35 câu Đọc, 100 phút tham khảo, cấp ước lượng chỉ để tham khảo.</p><div class="row">' + tpStepBtnHTML("m0") + '</div></section>';
   if (state.tpHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOPIK chưa sửa: ' + state.tpHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
     app.innerHTML = html;
   wireTp(app);
@@ -16904,11 +16961,11 @@ function viewReviewTp(app) {
   var freshTotal = tpFreshCards90().length;
   var html = trackSwitchHTML() + '<h2>Ôn tập · TOPIK</h2><p class="mut">Lịch ôn: ' + RB_SCHEDULE_TEXT + '.</p>';
   if (dueN > 0) {
-    html += '<section class="card next-card" id="tpReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn</h3><p class="mut">Câu sai cũ trước — mở lại đúng bước đó và trả lời đúng. Làm đúng ở đây chưa tốt nghiệp mục — trả lời đúng thêm lần nữa ở lần đến hạn sau mới tính.</p><button class="btn btn-primary" id="tpReviewStartBtn">Bắt đầu buổi ôn</button></section>';
+    html += '<section class="card next-card" id="tpReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + dueH.length + ' câu lỗi sai + ' + dueC.length + ' thẻ)</h3><p class="mut">Câu sai cũ trước — mở lại đúng bước đó và trả lời đúng. Làm đúng ở đây chưa tốt nghiệp mục — trả lời đúng thêm lần nữa ở lần đến hạn sau mới tính.</p><button class="btn btn-primary" id="tpReviewStartBtn">Bắt đầu buổi ôn</button></section>';
     html += '<section class="card" id="reviewMix"><h3>Hàng đợi ôn</h3><p>Hôm nay: <b>' + dueN + ' mục cũ đến hạn</b> + <b>' + Math.min(freshTotal, freshN) + ' thẻ từ vựng mới chưa học</b>. Thẻ mới học ở bước từ vựng mới trong Bản đồ — buổi ôn này chỉ ôn mục đến hạn.</p></section>';
   }
   if (dueH.length) {
-    html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Trả lời đúng câu đó khi làm lại bước mới tăng 1 nấc: đúng 2 lần ở các lần ôn cách quãng mới tốt nghiệp.</p>';
+    html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn (' + dueH.length + ')</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Trả lời đúng câu đó khi làm lại bước mới tăng 1 nấc: đúng 2 lần ở các lần ôn cách quãng mới tốt nghiệp.</p>';
     dueH.forEach(function (h) {
       var m = tpStepMeta(h.step);
       html += '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "ngay hôm nay") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div class="row"><button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tpfix="' + state.tpHard.indexOf(h) + '">Đã sửa xong</button></div></div>';
@@ -16916,7 +16973,7 @@ function viewReviewTp(app) {
     html += '</section>';
   }
   if (undueH.length) {
-    html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p>';
+    html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + undueH.length + ')</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p>';
     undueH.forEach(function (h) {
       var m = tpStepMeta(h.step);
       html += '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div class="row"><button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tpfix="' + state.tpHard.indexOf(h) + '">Đã sửa xong</button></div></div>';
