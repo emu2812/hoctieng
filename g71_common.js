@@ -618,41 +618,9 @@
       }
     }
     ctx.globalAlpha = 1;
-    /* Hành tinh chàm có vành hổ phách (trên-phải): quầng sáng + bóng
-       lưỡi liềm + điểm sáng trắng trên-trái. */
-    var pr = Math.min(30, W * 0.08), px = W * 0.84, py = H * 0.18;
-    ctx.fillStyle = "rgba(67,56,202,.3)";
-    ctx.beginPath(); ctx.arc(px, py, pr * 1.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#4338CA";
-    ctx.beginPath(); ctx.arc(px, py, pr, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "rgba(4,6,15,.45)"; /* bóng lưỡi liềm phía tối */
-    ctx.beginPath(); ctx.arc(px + pr * 0.28, py - pr * 0.1, pr * 0.82, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,.55)"; /* điểm sáng trên-trái */
-    ctx.beginPath(); ctx.arc(px - pr * 0.35, py - pr * 0.4, pr * 0.22, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "rgba(245,158,11,.9)"; ctx.lineWidth = 3.5;
-    ctx.beginPath();
-    ctx.ellipse(px, py, Math.min(52, W * 0.14), Math.min(14, W * 0.04), -0.35, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.strokeStyle = "rgba(245,158,11,.45)"; ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.ellipse(px, py, Math.min(60, W * 0.16), Math.min(17, W * 0.05), -0.35, 0, Math.PI * 2);
-    ctx.stroke();
-    /* Hành tinh hổ phách đậm ở xa (dưới-trái): vành hổ phách + miệng hố
-       tối + điểm sáng trên-trái — thay cho hành tinh xanh/xám cũ. */
-    var br = Math.min(20, W * 0.055), bx = W * 0.14, by = H * 0.68;
-    ctx.fillStyle = "rgba(245,158,11,.3)";
-    ctx.beginPath(); ctx.arc(bx, by, br * 1.4, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#92400E";
-    ctx.beginPath(); ctx.arc(bx, by, br, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "rgba(4,6,15,.35)";
-    ctx.beginPath(); ctx.arc(bx - br * 0.3, by - br * 0.2, br * 0.28, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(bx + br * 0.35, by + br * 0.3, br * 0.2, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,.5)";
-    ctx.beginPath(); ctx.arc(bx - br * 0.35, by - br * 0.4, br * 0.22, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "rgba(245,158,11,.7)"; ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.ellipse(bx, by, br * 1.6, br * 0.45, -0.3, 0, Math.PI * 2);
-    ctx.stroke();
+    /* v102: BỎ hẳn hai hành tinh có vành — kiểm render v101 vẫn đọc
+       chúng là clip-art (hình vành Thổ Tinh) dù đã đổi đúng màu hệ;
+       chiều sâu giữ bằng gradient + quầng chân trời + tinh vân + sao. */
   }
   function paintSky(ctx, W, H, t) {
     var g = ctx.createLinearGradient(0, 0, 0, H);

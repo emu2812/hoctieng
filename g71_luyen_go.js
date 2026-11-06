@@ -292,6 +292,16 @@
       if (sig === kbSig) return;
       kbSig = sig;
       kb.innerHTML = "";
+      /* v102: track TP chưa có từ nào trên màn thì KHÔNG hiện bàn A–Z
+         (chữ Latin vô nghĩa với tiếng Hàn — kiểm render v101 thấy bàn
+         A–Z lúc mới mở ván); hiện dòng chờ thay cho bàn phím. */
+      if (isTp && !act) {
+        var ph = document.createElement("div");
+        ph.style.cssText = "padding:10px 8px;color:#6B7280;font-size:14px;text-align:center;width:100%;";
+        ph.textContent = "⏳ Chờ từ rơi xuống…";
+        kb.appendChild(ph);
+        return;
+      }
       var keys = isTp && act ? String(act.type || act.w).split("") : "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
       keys.forEach(function (L) {
         var b = document.createElement("button");
@@ -321,9 +331,19 @@
       typeInput.setAttribute("spellcheck", "false");
       typeInput.setAttribute("placeholder", "⌨️ Chạm để gõ");
       typeInput.style.cssText = "display:block;width:calc(100% - 24px);margin:8px auto;padding:10px 14px;font-size:17px;color:#1E1B4B;background:#fff;border:2px solid #C7D2FE;border-radius:20px;outline:none;box-sizing:border-box;";
+      /* v102: nhiều bàn phím Android (Samsung, TECNO...) gõ theo kiểu
+         composition — từng phím chỉ đổi chữ đang ghép, compositionend
+         chỉ tới khi bấm dấu cách/enter; mà từ trong game không có dấu
+         cách nên game bỏ qua toàn bộ phím đang ghép (Bùi báo 15:02
+         06/11: "Chạm để gõ nhưng có gõ được đâu"). Sửa: track
+         Latin/pinyin (EN/TC/ZH) xử lý ngay cả khi đang ghép (chữ đang
+         ghép là chữ cái hoàn chỉnh); riêng TP (Hangul) vẫn chờ
+         compositionend vì chữ đang ghép là jamo dở (ㅎ chưa thành 한),
+         xử lý sớm sẽ xóa mất chữ đang ghép. */
+      var isTpTrack = (tk === "tp");
       typeInput.addEventListener("compositionstart", function () { composing = true; });
       typeInput.addEventListener("compositionend", function () { composing = false; processInput(); });
-      typeInput.addEventListener("input", function () { if (!composing) processInput(); });
+      typeInput.addEventListener("input", function () { if (!composing || !isTpTrack) processInput(); });
       stg.el.appendChild(typeInput);
     } else {
       kb = document.createElement("div");
@@ -391,10 +411,20 @@
        khi người chơi gõ bằng phím vật lý / đổi từ đang khóa thì ô nhập
        đồng bộ theo; viền hổ phách khi có từ đang khóa. */
     function syncInput() {
-      if (!typeInput || composing) return;
+      if (!typeInput) return;
       var tw = LOGIC.targetWord(st);
       var done = tw ? (tw.type || tw.w).slice(0, tw.progress) : "";
-      if (typeInput.value !== done) typeInput.value = done;
+      /* v102: lưới an toàn — bàn phím nào không bắn sự kiện input đáng
+         tin thì mỗi khung hình đọc thẳng giá trị ô nhập và cho qua
+         tiền tố đúng (processInput xử lý chênh lệch rồi trả ô nhập về
+         đúng tiền tố). Riêng TP đang ghép thì chờ compositionend như cũ
+         (jamo dở chưa thành âm tiết, xử lý sớm sẽ xóa mất). */
+      if ((typeInput.value || "") !== done && (!composing || !isTpTrack)) {
+        processInput();
+        tw = LOGIC.targetWord(st);
+        done = tw ? (tw.type || tw.w).slice(0, tw.progress) : "";
+        if (typeInput.value !== done && (!composing || !isTpTrack)) typeInput.value = done;
+      }
       var locked = (st.active !== null && st.words[st.active] && st.words[st.active].status === "falling");
       typeInput.style.borderColor = locked ? "#F59E0B" : "#C7D2FE";
     }
@@ -471,11 +501,17 @@
       st.rocks.forEach(function (rk) {
         drawRock(ctx, rk.x * W, rk.y * H, rk.r * W, rk.rot);
       });
+      /* v102: tô sáng TỪ MỤC TIÊU (không chỉ từ đang khóa) — thanh Nghĩa,
+         bàn phím và viên từ luôn chỉ cùng một từ, người chơi biết ngay
+         từ nào cần gõ (kiểm render v101: không có viền khóa nên không
+         biết từ nào là từ cần gõ). targetWord ưu tiên từ đang khóa nên
+         một luật này bao cả hai. */
+      var targetW = LOGIC.targetWord(st);
       st.words.forEach(function (wd, i) {
         if (wd.status !== "falling") return;
         var py = wd.y * H;
         if (py < -30 || py > H + 30) return;
-        var isAct = (st.active === i);
+        var isHl = (st.active === i) || (targetW === wd);
         /* v91: track tieng Trung hien 2 dong — chu Han o tren, pinyin
            (chuoi go) o duoi co to mau tien trinh; cac track khac 1 dong. */
         var wdType = wd.type || wd.w;
@@ -489,11 +525,11 @@
            hổ phách nhịp, chưa khóa viền chàm nhạt. */
         ctx.fillStyle = "#1E1B4B";
         if (twoLine) {
-          if (isAct) { ctx.shadowColor = "rgba(245,158,11,.55)"; ctx.shadowBlur = 16; }
+          if (isHl) { ctx.shadowColor = "rgba(245,158,11,.55)"; ctx.shadowBlur = 16; }
           G71.rr(ctx, px - tw / 2, py - 28, tw, 54, 17);
           ctx.fill();
           ctx.shadowBlur = 0;
-          ctx.strokeStyle = isAct ? "#F59E0B" : "#C7D2FE";
+          ctx.strokeStyle = isHl ? "#F59E0B" : "#C7D2FE";
           ctx.lineWidth = 2;
           ctx.stroke();
           ctx.font = "700 16px system-ui, sans-serif";
@@ -507,11 +543,11 @@
           ctx.fillStyle = "#fff";
           ctx.fillText(rest, x0 + ctx.measureText(done).width, py + 14);
         } else {
-          if (isAct) { ctx.shadowColor = "rgba(245,158,11,.55)"; ctx.shadowBlur = 16; }
+          if (isHl) { ctx.shadowColor = "rgba(245,158,11,.55)"; ctx.shadowBlur = 16; }
           G71.rr(ctx, px - tw / 2, py - 18, tw, 34, 17);
           ctx.fill();
           ctx.shadowBlur = 0;
-          ctx.strokeStyle = isAct ? "#F59E0B" : "#C7D2FE";
+          ctx.strokeStyle = isHl ? "#F59E0B" : "#C7D2FE";
           ctx.lineWidth = 2;
           ctx.stroke();
           var done2 = wdType.slice(0, wd.progress), rest2 = wdType.slice(wd.progress);

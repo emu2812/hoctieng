@@ -368,6 +368,14 @@
     });
     return uniq;
   }
+  /* v102: từ 1 chữ cái Latin (vd "R" ở bộ "Học 26 chữ cái A-Z") gõ 1
+     phím là chết — lọc khỏi kho chọn quái Rồng Lửa. Chỉ lọc chuỗi gõ là
+     1 chữ cái Latin; từ Hàn 1 âm tiết hay chữ Hán 1 chữ vẫn là từ thật
+     (chuỗi gõ của chúng không phải 1 chữ cái Latin) nên giữ. */
+  function isSingleLetter(p) {
+    var t = String((p && (p.type || p.w)) || "");
+    return /^[A-Za-z]$/.test(t);
+  }
   /* Lấy n từ thiên nhiên chưa dùng; thiếu thì bù từ kho chung (vẫn là từ
      thật trong sách, lọc một chữ cái a-z). */
   function pickNatureWords(n, used) {
@@ -377,11 +385,12 @@
     pool.forEach(function (p) {
       if (words.length >= n) return;
       if (!G71.isTypeable(p)) return;
+      if (isSingleLetter(p)) return;
       if (!used[String(p.w)]) { used[String(p.w)] = 1; words.push(p); }
     });
     if (words.length < n) {
       var rest = G71.shuffle(G71.pool()).filter(function (p) {
-        return G71.isTypeable(p) && !used[String(p.w)];
+        return G71.isTypeable(p) && !isSingleLetter(p) && !used[String(p.w)];
       });
       while (words.length < n && rest.length) { var p = rest.pop(); used[String(p.w)] = 1; words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
     }
@@ -418,13 +427,14 @@
     pool.forEach(function (p) {
       if (words.length >= n) return;
       if (!G71.isTypeable(p)) return;
+      if (isSingleLetter(p)) return;
       if (!used[String(p.w)]) { used[String(p.w)] = 1; words.push(p); }
     });
     if (words.length < n) {
       /* Kho chủ đề mỏng (vd TOEIC thiên nhiên/cảm xúc): bù từ kho chung
          của track — vẫn là từ thật trong sách, không bịa. */
       var rest = G71.shuffle(G71.pool()).filter(function (p) {
-        return G71.isTypeable(p) && !used[String(p.w)];
+        return G71.isTypeable(p) && !isSingleLetter(p) && !used[String(p.w)];
       });
       while (words.length < n && rest.length) { var p = rest.pop(); used[String(p.w)] = 1; words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
     }
@@ -539,6 +549,56 @@
     return !!(p && p.cleared && p.cleared[String(stage)]);
   }
 
+  /* ---- Chân dung hình học của quái (v102) ----
+     NGUYÊN NHÂN THẬT lỗi chồng quái live v100: cửa sổ tách v100 chỉ xét
+     |dy|<0,12 và |dx|<0,10 — nhưng chân dung VẼ của một quái rộng hơn
+     nhiều: nhãn "Sợ từ…" nằm trên quái ~53px, thẻ từ nằm dưới quái tới
+     ~51px (thẻ 2 dòng), tổng ~104px dọc; ngang thì thẻ/nhãn rộng tới
+     ~140px. Quái sinh ra đã xếp cột dọc cách nhau 0,18 (y = -0,15 -
+     i*0,18), cùng tốc độ nên khoảng dọc không đổi, lại cùng trôi về cột
+     x của rồng — trên canvas điện thoại H~400-550px thì 0,18 chỉ
+     ~72-99px < 104px nên chồng nhau, mà |dy|=0,18 nằm NGOÀI cửa sổ 0,12
+     của v100 nên lực tách không bao giờ chạy (không phải lực tách yếu —
+     lực đẩy 0,055/tick vốn mạnh gấp ~27 lần lực trôi 0,002/tick).
+     Sửa: tính đúng hộp chân dung từng quái theo kích cỡ canvas thật
+     (nhãn + thân + thẻ, kể cả việc thẻ/nhãn bị kẹp ở mép màn hình),
+     đẩy ngang đủ hết chồng mỗi tick. Trùm không bị đẩy (giữ v100). */
+  function textWpx(s) {
+    var w = 0; s = String(s || "");
+    for (var i = 0; i < s.length; i++) {
+      var c = s.charCodeAt(i);
+      w += (c >= 0x2E80) ? 17 : (c === 32 ? 5 : 10);
+    }
+    return w;
+  }
+  /* Hộp chân dung quái theo tọa độ chuẩn hóa {x0,x1,y0,y1} — cùng hệ với
+     m.x/m.y; W/H là kích cỡ canvas thật (frame() ghi vào battle.canvasW/
+     canvasH; probe/không có canvas thì mặc định 360x500, màn dọc).
+     Dọc lấy đúng chỗ vẽ: py = max(m.y*H, 64) (drawMonster kẹp mép trên),
+     nhãn trên tới py-54, thẻ dưới tới py+25+pillH/2. Ngang lấy hợp của
+     thân (±33px), thẻ từ (tâm kẹp mép) và nhãn "Sợ…" (tâm kẹp mép). */
+  function monsterFoot(m, W, H) {
+    W = W || 360; H = H || 500;
+    var mType = m.type || m.w;
+    var isPh = !!(m.isPhrase && m.phrase);
+    var dispTop = isPh ? m.phrase.display : m.w;
+    var dispBot = isPh ? phraseSpaced(m.phrase) : mType;
+    var tw = Math.max(textWpx(dispTop), textWpx(dispBot)) + 30;
+    var gwW = 0;
+    if (m.groupWeak && GROUP_WEAK[m.groupWeak]) gwW = GROUP_WEAK[m.groupWeak].hint.length * 7 + 14;
+    var px = m.x * W;
+    var pillCx = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, px));
+    var gwCx = gwW ? Math.max(gwW / 2 + 4, Math.min(W - gwW / 2 - 4, px)) : px;
+    var pyPx = Math.max(m.y * H, 64);
+    var pillH = (isPh || mType !== m.w) ? 54 : 34;
+    return {
+      x0: Math.min(px - 33, pillCx - tw / 2, gwCx - gwW / 2) / W,
+      x1: Math.max(px + 33, pillCx + tw / 2, gwCx + gwW / 2) / W,
+      y0: (pyPx - 54) / H,
+      y1: (pyPx + 25 + pillH / 2) / H
+    };
+  }
+
   /* ---- Logic thuần của trận đánh ---- */
   function damageFor(wordLen, wordLvl, match, combo, weatherMult) {
     var base = match ? 2 : 1;
@@ -560,6 +620,8 @@
     companionDmgBonus: companionDmgBonus,
     companionHeal: companionHeal,
     layoutPills: layoutPills,
+    monsterFootprint: monsterFoot,
+    isSingleLetter: isSingleLetter,
     pickNatureWords: pickNatureWords,
     pickRegionWords: pickRegionWords,
     pickBossWord: pickBossWord,
@@ -809,21 +871,62 @@
           }
         }
       });
-      /* Tách quái chồng nhau (v100 B3): quái trôi về phía rồng nên hay
-         tụ lại một chỗ — đẩy ngang các quái đang tiến tới khi chúng quá
-         gần nhau (cả hai chiều), để hình quái + nhãn "Sợ..." luôn đọc
-         được. Trùm không bị đẩy. */
+      /* Tách quái chồng nhau (v102, thay v100 B3): quái sinh ra đã xếp
+         cột dọc (cách nhau 0,18), cùng tốc độ, cùng trôi về cột x của
+         rồng — cửa sổ v100 (|dy|<0,12, |dx|<0,10) hẹp hơn chân dung vẽ
+         thật (~104px dọc, ~140px ngang) nên lực tách không bao giờ chạy
+         trên canvas điện thoại. Nay tính đúng hộp chân dung từng quái
+         theo canvas thật (monsterFoot: nhãn + thân + thẻ, kể cả kẹp mép)
+         rồi đẩy theo trục chồng ÍT nhất: chồng dọc tới 0,10 (~50px —
+         gồm cột quái live oy~0,01 lẫn canvas nhỏ/thẻ 2 dòng) thì chỉ
+         tách dọc nhẹ, quái vẫn giữ cột; chồng sâu hơn thì tách CẢ HAI
+         trục (ngang + dọc) — chỉ tách ngang thì chuỗi quái dồn vào nhau
+         kẹt ở mép vì lực ngang các cặp triệt tiêu lẫn nhau, tách dọc mở
+         thêm dải cao mới để quái xếp được.
+         Tách dọc CHỈ ĐẨY XUỐNG (không bao giờ đẩy quái lên): đẩy lên
+         chống lại bước tiến tới — quái trên bị nhiều cặp đẩy lên cùng
+         lúc sẽ đóng băng cả trận (trận không kết thúc). Đẩy xuống chỉ
+         làm quái thoát sớm hơn một chút, trận vẫn chảy. Đẩy dọc chỉ áp
+         cho quái ĐÃ VÀO MÀN thật (y*H≥64): quái chưa vào màn vẽ kẹp ở
+         mép trên nên hộp của chúng chồng nhau theo định nghĩa — đẩy dọc
+         sẽ xô cả cụm lao xuống sân cùng lúc. Kẹp quái dưới ở y≤0,98.
+         Trùm không bị đẩy. */
       var adv = st.words.filter(function (w) { return w.status === "advancing"; });
+      var sepW = st.canvasW || 360, sepH = st.canvasH || 500;
       for (var si = 0; si < adv.length; si++) {
         for (var sj = si + 1; sj < adv.length; sj++) {
           var A = adv[si], B = adv[sj];
           if (A.isBoss || B.isBoss) continue;
-          var sdx = B.x - A.x, sdy = B.y - A.y;
-          if (Math.abs(sdy) < 0.12 && Math.abs(sdx) < 0.10) {
-            var push = (0.10 - Math.abs(sdx)) / 2 + 0.005;
-            var dir = (sdx > 0) ? 1 : (sdx < 0 ? -1 : ((si % 2 === 0) ? 1 : -1));
-            A.x = Math.max(0.06, Math.min(0.94, A.x - dir * push));
-            B.x = Math.max(0.06, Math.min(0.94, B.x + dir * push));
+          var FA = monsterFoot(A, sepW, sepH), FB = monsterFoot(B, sepW, sepH);
+          var ox = Math.min(FA.x1, FB.x1) - Math.max(FA.x0, FB.x0);
+          var oy = Math.min(FA.y1, FB.y1) - Math.max(FA.y0, FB.y0);
+          if (ox > 0 && oy > 0) {
+            var dn = (A.y <= B.y) ? B : A;
+            if (oy < ox && oy < 0.10) {
+              /* Chồng dọc ít (tới ~50px trên canvas 500px — gồm cả cột
+                 quái live và canvas nhỏ/thẻ 2 dòng): chỉ tách dọc, đẩy
+                 quái dưới xuống, kẹp 0,03/tick. */
+              var vy = Math.min(oy / 2 + 0.002, 0.03);
+              /* Chỉ đẩy dọc khi quái ĐÃ VÀO MÀN thật (dn.y*H≥64) và còn
+                 dưới 0,98 — quái chưa vào màn vẽ kẹp ở mép trên nên hộp
+                 của chúng chồng nhau theo định nghĩa; đẩy dọc sẽ xô cả
+                 cụm quái chưa vào màn lao xuống sân cùng lúc rồi kẹt
+                 chồng nhau. Quái đã tiến qua 0,98 thì để tự tiến và
+                 thoát, nếu không min(0,98, ...) kéo ngược quái về 0,98
+                 mỗi tick và ghim trận lại. */
+              if (dn.y * sepH >= 64 && dn.y < 0.98) dn.y = Math.min(0.98, dn.y + vy);
+            } else {
+              /* Chồng sâu: tách ngang (chia đôi hai quái, kẹp 0,08/tick;
+                 độ chệch +0,02 để cặp gần cùng cột (ox nhỏ) vẫn có lực
+                 tách ngang đáng kể, không kẹt vì lực bị các cặp kề
+                 triệt tiêu) + tách dọc nhẹ xuống (kẹp 0,03/tick). */
+              var push = Math.min(ox / 2 + 0.02, 0.08);
+              var dir = (B.x > A.x) ? 1 : (B.x < A.x ? -1 : ((si % 2 === 0) ? 1 : -1));
+              A.x = Math.max(0.06, Math.min(0.94, A.x - dir * push));
+              B.x = Math.max(0.06, Math.min(0.94, B.x + dir * push));
+              var vy2 = Math.min(oy / 2 + 0.002, 0.03);
+              if (dn.y * sepH >= 64 && dn.y < 0.98) dn.y = Math.min(0.98, dn.y + vy2);
+            }
           }
         }
       }
@@ -2146,6 +2249,13 @@
     if (mode !== "battle" || !battle) return;
     var dt = Math.min(0.05, (now - last) / 1000);
     last = now;
+    /* v102: cho tick() biết kích cỡ canvas thật để tách quái theo đúng
+       hộp chân dung vẽ (px). jsdom không có layout (clientWidth=0) thì
+       bỏ qua — tick dùng mặc định 360x500. */
+    try {
+      var _cv0 = stage && stage.canvas;
+      if (_cv0 && _cv0.clientWidth > 0) { battle.canvasW = _cv0.width; battle.canvasH = _cv0.height; }
+    } catch (e) {}
     LOGIC.tick(battle, dt, now);
     /* Lái rồng bằng phím mũi tên giữ (0,55 sân/giây). */
     if (!battle.over) {
