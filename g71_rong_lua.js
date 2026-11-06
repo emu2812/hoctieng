@@ -1,17 +1,26 @@
-/* G71 — Rồng Lửa RPG, vertical slice vùng 1 Rừng Xanh (v80: ảnh Canva).
+/* G71 — Rồng Lửa RPG, đủ 5 vùng × 10 ải (v98).
    Cốt truyện: vương quốc Ngôn Ngữ bị Bóng Tối Câm Lặng phong ấn, các từ
-   bị đánh cắp; rồng nhỏ đi thu hồi từng từ. Vùng 1: 3 ải, mỗi ải 3 trận.
+   bị đánh cắp; rồng nhỏ đi thu hồi từng từ. 5 vùng × 10 ải, mỗi ải 3 trận:
+   (1) Rừng Xanh — thiên nhiên; (2) Làng Chài — đời sống; (3) Thành Phố —
+   công việc/học tập; (4) Hang Pha Lê — cảm xúc/mô tả; (5) Núi Lửa — tổng
+   hợp, trùm cuối. Thắng trùm Núi Lửa mở Chế độ Vô Tận (kỷ lục cá nhân).
    Quái tiến tới mang từ; tung chiêu = gõ/chạm đúng từ. Chiêu có hệ
    (Lửa/Nước/Điện), quái yếu một hệ — đúng hệ sát thương tối đa, sai hệ
    nửa sát thương; trúng liên tiếp nhân combo tới x3. Rồng 5 tim, quái
    chạm tới trừ 1 tim (khiên chặn được 1 đòn); hết tim thua ải nhưng GIỮ
    cấp/vàng/từ đã thu. Từ đánh bại lần đầu thành chiêu trong Từ Điển Rồng,
    dùng nhiều thăng cấp (tối đa cấp 3). Thắng rơi vàng, cửa hàng giữa các
-   trận (bình máu/khiên). Trùm cuối vùng 1 đổi hệ sau mỗi 1/3 máu.
-   Từ lấy từ kho CONTENT.vocab sẵn có, chủ đề thiên nhiên — không bịa.
-   Hình: ảnh Canva vùng 1 (assets/ronglua/) theo ART_DIRECTION.md;
-   bản vẽ code giữ làm dự phòng khi ảnh lỗi/chưa load xong.
-   Logic thuần (không cần canvas) để probe kiểm tra được; start() nối DOM. */
+   trận (bình máu/khiên). Trùm mỗi vùng đổi hệ sau mỗi 1/3 máu.
+   Kho từ lấy từ kho thật của track đang học (v91), lọc theo chủ đề vùng;
+   chủ đề nào kho mỏng (TOEIC: thiên nhiên/cảm xúc) thì ưu tiên từ theo
+   chủ đề, thiếu bù từ kho chung của track — vẫn là từ thật trong sách,
+   không bịa, và bản đồ ghi rõ. Vùng sau mở khi qua trùm vùng trước HOẶC
+   đủ XP web (100/300/600/1000). Vùng 1 giữ luật/nội dung lát cắt v78–v80
+   (3 trận/ải, trùm HP 30 đổi hệ ở 20/10, ảnh Canva + fallback vẽ code).
+   Hình: ảnh Canva vùng 1 (assets/ronglua/); vùng 2–5 vẽ bằng code theo
+   ART_DIRECTION.md (một bảng màu chàm + hổ phách + teal, bo 20px, sáng
+   trên-trái). Logic thuần (không cần canvas) để probe kiểm tra được;
+   start() nối DOM. */
 (function () {
   "use strict";
 
@@ -33,6 +42,67 @@
   };
   var EL_ORDER = ["fire", "water", "elec"];
   function nextEl(k) { return EL_ORDER[(EL_ORDER.indexOf(k) + 1) % EL_ORDER.length]; }
+
+  /* ---- 5 vùng: chủ đề, trùm, tên ải (v98) ---- */
+  var REGIONS = [
+    { id: 1, name: "Rừng Xanh", icon: "🌲", theme: "thiên nhiên", boss: "Trùm Bóng Tối",
+      accent: "teal", desc: "Nơi từ về thiên nhiên, cây cỏ, thú vật và thời tiết bị phong ấn.",
+      stages: ["Bìa Rừng", "Lối Mòn Xanh", "Suối Ngàn Hoa", "Thác Bạc", "Tổ Chim Lớn",
+        "Vườn Nấm", "Cây Cổ Thụ", "Hang Đom Đóm", "Đỉnh Tán Lá", "Hang Trùm Bóng Tối"] },
+    { id: 2, name: "Làng Chài", icon: "🎣", theme: "đời sống", boss: "Trùm Sóng Đen",
+      accent: "teal", desc: "Từ về đời sống, gia đình, ăn uống, chợ búa và việc nhà.",
+      stages: ["Bến Cá", "Chợ Sáng", "Bếp Lửa Hồng", "Nhà Gỗ Ven Sông", "Vườn Rau",
+        "Quán Nước Đầu Làng", "Thuyền Buồm", "Kho Lúa", "Đêm Hội Làng", "Hang Trùm Sóng Đen"] },
+    { id: 3, name: "Thành Phố", icon: "🏙️", theme: "công việc và học tập", boss: "Trùm Bóng Đêm",
+      accent: "amber", desc: "Từ về công việc, học tập, trường lớp và thành phố.",
+      stages: ["Ga Tàu", "Văn Phòng", "Phòng Họp", "Thư Viện", "Giảng Đường",
+        "Quán Cà Phê", "Công Viên", "Trung Tâm Thương Mại", "Sân Vận Động", "Tháp Trùm Bóng Đêm"] },
+    { id: 4, name: "Hang Pha Lê", icon: "💎", theme: "cảm xúc và mô tả", boss: "Trùm Pha Lê Đen",
+      accent: "indigo", desc: "Từ về cảm xúc, tính cách, quan hệ và cách mô tả con người.",
+      stages: ["Cửa Hang", "Dòng Suối Pha Lê", "Gương Cảm Xúc", "Vườn Hoa Tím",
+        "Cầu Vồng", "Hồ Nước Trong", "Tháp Tính Cách", "Cánh Đồng Hoa", "Đỉnh Pha Lê", "Trùm Pha Lê Đen"] },
+    { id: 5, name: "Núi Lửa", icon: "🌋", theme: "tổng hợp", boss: "Trùm Dung Nham",
+      accent: "fire", desc: "Tổng hợp mọi chủ đề — chỉ dành cho rồng đã qua 4 vùng.",
+      stages: ["Chân Núi", "Dòng Dung Nham", "Hang Đá Nóng", "Cầu Đá", "Đỉnh Khói",
+        "Hồ Lửa", "Vực Sâu", "Cổng Tro", "Sườn Núi Lửa", "Hang Trùm Dung Nham"] }
+  ];
+  /* XP web cần để mở vùng 2–5 nếu chưa qua trùm vùng trước (vùng 1 luôn mở). */
+  var XP_NEED = [0, 100, 300, 600, 1000];
+  function regionById(id) {
+    for (var i = 0; i < REGIONS.length; i++) if (REGIONS[i].id === id) return REGIONS[i];
+    return REGIONS[0];
+  }
+  function xpNeedFor(region) { return XP_NEED[Math.max(0, Math.min(4, (region || 1) - 1))]; }
+  /* Regex lọc bộ từ theo chủ đề vùng, theo từng track (v98).
+     EN lọc theo topic tiếng Anh của CONTENT.vocab; ZH/TC/TP lọc theo topic
+     tiếng Việt của bộ. Vùng 5 tổng hợp: không lọc, lấy toàn kho track. */
+  var REGION_TOPIC_RE = {
+    1: {
+      en: /environment|nature|animal|weather|geograph|agricultur|climate|forest|garden|plant/i,
+      zh: /thiên nhiên|môi trường|động vật|thời tiết|bốn mùa|nông nghiệp|khí hậu/i,
+      tc: /môi trường|an toàn.*lao động|năng lượng/i,
+      tp: /thiên nhiên|môi trường|động vật|thời tiết|bốn mùa|nông nghiệp|khí hậu|công viên/i
+    },
+    2: {
+      en: /daily life|family|home|food|house|market|village|cooking|housework|kitchen|restaurant|shopping/i,
+      zh: /đời sống|gia đình|sinh hoạt|ăn uống|chợ|nhà ở|quần áo|mua sắm|nấu ăn|việc nhà/i,
+      tc: /ăn trưa|nhà ăn|khách sạn|nhà hàng|du lịch công tác|đi công tác|ăn uống/i,
+      tp: /gia đình|ăn uống|nhà bếp|chợ|mua sắm|việc nhà|đời sống|món ăn|ẩm thực/i
+    },
+    3: {
+      en: /work|business|job|office|study|education|school|city|career|meeting|presentation|interview/i,
+      zh: /công việc|học tập|trường học|văn phòng|thành phố|thi cử|giáo dục|nghề nghiệp/i,
+      tc: /họp|email|tuyển dụng|quản lý|kinh doanh|tài chính|marketing|văn phòng|công việc|dự án/i,
+      tp: /công việc|trường học|học tập|thi cử|văn phòng|thành phố|giáo dục|nghề nghiệp/i
+    },
+    4: {
+      en: /feeling|emotion|psycholog|describ|character|personality|opinion/i,
+      zh: /cảm xúc|tính cách|phẩm chất|tâm lý|miêu tả|quan hệ xã hội/i,
+      tc: /đánh giá|phản hồi|khiếu nại|thương lượng|đàm phán|giao tiếp|quan hệ|ứng xử/i,
+      tp: /cảm xúc|tính cách|tâm lý|quan hệ|bạn bè|gặp gỡ/i
+    },
+    5: null /* tổng hợp: toàn kho track */
+  };
 
   /* ---- Ảnh Canva vùng 1 Rừng Xanh (v80): vẽ bằng ảnh, bản vẽ code
      làm dự phòng — ảnh lỗi hoặc chưa load xong thì vẽ lại bằng code như
@@ -77,7 +147,6 @@
 
   var POTION_COST = 20, POTION_HEAL = 2, SHIELD_COST = 25;
   var BATTLE_XP = 5, BOSS_GOLD = 30, MONSTER_GOLD = 5;
-  var LEVEL_NAMES = ["", "Bìa Rừng", "Lối Mòn Xanh", "Hang Trùm Bóng Tối"];
 
   /* ---- Kho từ theo track (không bịa) ----
      v91: EN moi loc theo chu de thien nhien (vung 1 Rung Xanh); track khac
@@ -129,19 +198,93 @@
     }
     return words;
   }
-  function pickBossWord(used) {
-    var pool = G71.shuffle(naturePool().slice()).filter(function (p) {
-      return (p.type || p.w).length >= 7 && !used[String(p.w)];
+  /* ---- Kho từ theo chủ đề vùng + track (v98).
+     naturePool/pickNatureWords giữ nguyên vỏ bọc vùng 1 (probe cũ).
+     Vùng 5 tổng hợp = toàn kho track. Kho chủ đề mỏng thì bù từ kho
+     chung của track — vẫn là từ thật trong sách, không bịa. ---- */
+  function regionPool(regionId) {
+    var tk = "en";
+    try { tk = (typeof G71 !== "undefined" && G71.trackKey) ? G71.trackKey() : "en"; } catch (e) {}
+    var re = REGION_TOPIC_RE[regionId || 1];
+    var all = [];
+    try { all = G71.pool(); } catch (e) { all = []; }
+    if (!re) return all.slice();
+    var rx = re[tk] || re.en;
+    if (!rx) return all.slice();
+    var out = [], seen = {};
+    all.forEach(function (c) {
+      /* G71.pool() mang chủ đề bộ trong trường theme (không phải set/topic). */
+      var topic = (c.theme || c.set || c.topic || "") + " " + (c.w || "") + " " + (c.vi || "");
+      if (!rx.test(topic)) return;
+      var k = String(c.w || "").toLowerCase();
+      if (!k || seen[k]) return;
+      seen[k] = true; out.push(c);
+    });
+    return out;
+  }
+  function pickRegionWords(regionId, n, used) {
+    used = used || {};
+    var pool = G71.shuffle(regionPool(regionId).slice());
+    var words = [];
+    pool.forEach(function (p) {
+      if (words.length >= n) return;
+      if (!G71.isTypeable(p)) return;
+      if (!used[String(p.w)]) { used[String(p.w)] = 1; words.push(p); }
+    });
+    if (words.length < n) {
+      /* Kho chủ đề mỏng (vd TOEIC thiên nhiên/cảm xúc): bù từ kho chung
+         của track — vẫn là từ thật trong sách, không bịa. */
+      var rest = G71.shuffle(G71.pool()).filter(function (p) {
+        return G71.isTypeable(p) && !used[String(p.w)];
+      });
+      while (words.length < n && rest.length) { var p = rest.pop(); used[String(p.w)] = 1; words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
+    }
+    return words;
+  }
+  function pickBossWord(used, regionId) {
+    used = used || {};
+    var pool = G71.shuffle(regionPool(regionId || 1).slice()).filter(function (p) {
+      return G71.isTypeable(p) && (p.type || p.w).length >= 7 && !used[String(p.w)];
     });
     if (pool.length) { used[String(pool[0].w)] = 1; return pool[0]; }
-    var rest = pickNatureWords(1, used);
+    /* Kho chủ đề không có từ dài ≥7 (vd TOEIC thiên nhiên): lấy từ dài
+       của toàn kho track — vẫn là từ thật trong sách, không bịa. */
+    var longAll = G71.shuffle(G71.pool().slice()).filter(function (p) {
+      return G71.isTypeable(p) && (p.type || p.w).length >= 7 && !used[String(p.w)];
+    });
+    if (longAll.length) { used[String(longAll[0].w)] = 1; return longAll[0]; }
+    var rest = pickRegionWords(regionId || 1, 1, used);
     if (rest[0]) return rest[0];
     var all = G71.pool();
     return all.length ? all[0] : { w: "mountain", vi: "núi", type: "mountain" };
   }
+  /* Ghi chú kho mỏng hiển thị trên bản đồ vùng (v98): kho chủ đề nào
+     dưới 42 từ gõ được (nhu cầu tối đa một ải: 13+14+15) thì ghi rõ,
+     không giấu — người học biết vùng đó lấy thêm từ kho chung. */
+  function regionPoolNote(regionId) {
+    var tk = "en";
+    try { tk = (typeof G71 !== "undefined" && G71.trackKey) ? G71.trackKey() : "en"; } catch (e) {}
+    var n = regionPool(regionId).filter(function (c) { return G71.isTypeable(c); }).length;
+    if (n >= 42) return "";
+    var trackName = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[tk] || tk;
+    return "Kho từ " + trackName + " theo chủ đề này còn ít (" + n + " từ gõ được) — vùng này ưu tiên từ theo chủ đề, thiếu thì lấy thêm từ kho chung của track, vẫn là từ thật trong sách.";
+  }
 
-  /* ---- Tiến trình lát cắt, lưu trong state.rongLua (sống qua lần chơi) ---- */
-  function freshRL() { return { gold: 0, shield: 0, dict: {}, unlocked: 1, cleared: {} }; }
+  /* ---- Tiến trình 5 vùng, lưu trong state.rongLua (sống qua lần chơi) ----
+     Dạng mới v98: { gold, shield, dict, region, progress: { "1": { unlocked,
+     cleared: {} }, ... }, endless, endlessBest }. Vàng dùng chung với Đấu
+     Bài (g71_dau_bai.js đọc state.rongLua.gold) nên gold giữ ở cấp cao
+     nhất. Dạng cũ v78–v97 { unlocked, cleared } của vùng 1 được migration
+     giữ nguyên vào progress["1"]. Vùng sau mở khi qua trùm vùng trước
+     HOẶC đủ XP web (100/300/600/1000) — loadRL tự suy ra cả hai đường,
+     để không bao giờ kẹt dù lưu cũ thiếu. ---- */
+  function freshRL() {
+    return { gold: 0, shield: 0, dict: {}, region: 1,
+      progress: { "1": { unlocked: 1, cleared: {} } }, endless: false, endlessBest: 0 };
+  }
+  function webXp() {
+    try { return (typeof state !== "undefined" && state && state.xp) || 0; } catch (e) { return 0; }
+  }
   function loadRL() {
     var d = freshRL();
     try {
@@ -150,10 +293,35 @@
         if (typeof s.gold === "number") d.gold = s.gold;
         if (typeof s.shield === "number") d.shield = s.shield;
         if (s.dict) d.dict = s.dict;
-        if (typeof s.unlocked === "number") d.unlocked = Math.max(1, Math.min(3, s.unlocked));
-        if (s.cleared) d.cleared = s.cleared;
+        if (typeof s.endless === "boolean") d.endless = s.endless;
+        if (typeof s.endlessBest === "number") d.endlessBest = s.endlessBest;
+        if (s.progress) {
+          Object.keys(s.progress).forEach(function (rk) {
+            var p = s.progress[rk] || {};
+            d.progress[rk] = {
+              unlocked: Math.max(1, Math.min(10, (typeof p.unlocked === "number" ? p.unlocked : 1))),
+              cleared: p.cleared || {}
+            };
+          });
+          if (typeof s.region === "number") d.region = Math.max(1, Math.min(5, s.region));
+        } else if (typeof s.unlocked === "number" || s.cleared) {
+          /* Dạng cũ v78–v97: unlocked/cleared là của vùng 1. */
+          d.progress["1"] = {
+            unlocked: Math.max(1, Math.min(10, s.unlocked || 1)), cleared: {}
+          };
+          if (s.cleared) Object.keys(s.cleared).forEach(function (k) { d.progress["1"].cleared[k] = true; });
+          d.region = 1;
+        }
       }
     } catch (e) {}
+    /* Suy ra vùng mở cao nhất: qua trùm vùng trước, hoặc đủ XP web. */
+    for (var r = 1; r <= 4; r++) {
+      var pr = d.progress[String(r)];
+      if (pr && pr.cleared && pr.cleared["10"]) d.region = Math.max(d.region, r + 1);
+    }
+    var xp = webXp();
+    for (var r2 = 2; r2 <= 5; r2++) if (xp >= XP_NEED[r2 - 1]) d.region = Math.max(d.region, r2);
+    if (d.progress["5"] && d.progress["5"].cleared && d.progress["5"].cleared["10"]) d.endless = true;
     return d;
   }
   function saveRL(rl) {
@@ -163,6 +331,23 @@
         if (typeof saveState === "function") saveState();
       }
     } catch (e) {}
+  }
+  function regionProg(rl, region) {
+    var k = String(region);
+    if (!rl.progress[k]) rl.progress[k] = { unlocked: 1, cleared: {} };
+    return rl.progress[k];
+  }
+  function regionOpen(rl, region) {
+    if (region <= 1) return true;
+    if (rl && rl.region >= region) return true;
+    return webXp() >= xpNeedFor(region);
+  }
+  function stageOpen(rl, region, stage) {
+    return regionOpen(rl, region) && stage <= regionProg(rl, region).unlocked;
+  }
+  function stageCleared(rl, region, stage) {
+    var p = rl.progress[String(region)];
+    return !!(p && p.cleared && p.cleared[String(stage)]);
   }
 
   /* ---- Logic thuần của trận đánh ---- */
@@ -177,23 +362,33 @@
     nextEl: nextEl,
     damageFor: damageFor,
     pickNatureWords: pickNatureWords,
+    pickRegionWords: pickRegionWords,
     pickBossWord: pickBossWord,
     naturePool: naturePool,
+    regionPool: regionPool,
+    regionPoolNote: regionPoolNote,
+    regions: REGIONS,
+    xpNeedFor: xpNeedFor,
+    regionOpen: regionOpen,
     battleSize: function (level, battle) { return 2 + level + battle; },
-    monsterHp: function (level) { return 3 + (level - 1); },
+    /* HP quái tăng theo vùng: 3 + (ải−1) + (vùng−1)×2 (vùng 1 giữ nguyên). */
+    monsterHp: function (level, region) { return 3 + (level - 1) + ((region || 1) - 1) * 2; },
+    /* HP trùm theo vùng: 30 + (vùng−1)×10 (vùng 1 giữ nguyên 30). */
+    bossHp: function (region) { return 30 + ((region || 1) - 1) * 10; },
     createBattle: function (words, opts) {
       opts = opts || {};
-      var level = opts.level || 1, isBoss = !!opts.boss;
+      var level = opts.level || 1, isBoss = !!opts.boss, region = opts.region || 1;
       var ws = words.map(function (wd, i) {
         var boss = isBoss && i === 0;
+        var bhp = LOGIC.bossHp(region), mhp = LOGIC.monsterHp(level, region);
         return {
           w: wd.w, vi: wd.vi, type: wd.type || wd.w, isBoss: boss,
           weak: EL_ORDER[Math.floor(Math.random() * 3)],
-          hp: boss ? 30 : LOGIC.monsterHp(level), maxHp: boss ? 30 : LOGIC.monsterHp(level),
+          hp: boss ? bhp : mhp, maxHp: boss ? bhp : mhp,
           phase: 0, progress: 0, status: "advancing",
           x: 0.15 + Math.random() * 0.7,
           y: -0.15 - i * 0.18,
-          speed: boss ? 0.025 : 0.055 + 0.005 * level,
+          speed: boss ? 0.025 + 0.002 * (region - 1) : 0.055 + 0.005 * level + 0.003 * (region - 1),
           gold: boss ? BOSS_GOLD : MONSTER_GOLD,
           /* Đạn của quái (v83): phát đầu sau ~2-3 giây, sau đó mỗi
              ~2-3 giây một phát (trùm nhanh hơn). */
@@ -201,7 +396,7 @@
         };
       });
       return {
-        level: level, battle: opts.battle || 1, isBoss: isBoss,
+        level: level, battle: opts.battle || 1, isBoss: isBoss, region: region,
         words: ws, total: ws.length, resolved: 0, active: null,
         hearts: (typeof opts.hearts === "number") ? opts.hearts : 5,
         shield: (typeof opts.shield === "number") ? opts.shield : 0,
@@ -276,11 +471,12 @@
       st.combo++;
       var phaseEvent = null;
       if (w.isBoss && w.status === "advancing") {
-        if (w.phase === 0 && w.hp <= 20) {
+        /* Trùm đổi hệ sau mỗi 1/3 máu (vùng 1 HP 30: ở 20 rồi 10). */
+        if (w.phase === 0 && w.hp <= w.maxHp * 2 / 3) {
           w.phase = 1; w.weak = nextEl(w.weak);
           phaseEvent = { type: "bossPhase", weak: w.weak, phase: 1 };
           st.events.push(phaseEvent);
-        } else if (w.phase === 1 && w.hp <= 10) {
+        } else if (w.phase === 1 && w.hp <= w.maxHp / 3) {
           w.phase = 2; w.weak = nextEl(w.weak);
           phaseEvent = { type: "bossPhase", weak: w.weak, phase: 2 };
           st.events.push(phaseEvent);
@@ -463,6 +659,201 @@
     ctx.beginPath(); ctx.ellipse(W * 0.94, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
     }
   }
+  /* ---- Nền 4 vùng mới (v98): vẽ bằng code, CÙNG hệ nghệ thuật với vùng 1
+     (bảng màu C chàm + hổ phách + teal, bo 20px, sáng trên-trái, bóng đổ,
+     lớp xa mờ nhạt — gần rõ nét). Vùng 1 giữ ảnh Canva + paintForest. ---- */
+  function paintVillage(ctx, W, H, t) {
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, C.ink950); g.addColorStop(0.55, C.ink900); g.addColorStop(1, C.ink800);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    /* Trăng + quầng teal chân trời. */
+    ctx.fillStyle = C.amber100;
+    ctx.beginPath(); ctx.arc(W * 0.82, H * 0.12, 22, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(13,148,136,.16)";
+    ctx.beginPath(); ctx.ellipse(W * 0.5, H * 0.6, W * 0.6, H * 0.09, 0, 0, Math.PI * 2); ctx.fill();
+    /* Nhà gỗ xa (mờ, chàm). */
+    ctx.fillStyle = C.ink800; ctx.globalAlpha = 0.85;
+    for (var i = 0; i < 6; i++) {
+      var hx = (0.03 + i * 0.17) * W, hw = W * 0.11, hh = H * (0.1 + (i % 3) * 0.03);
+      ctx.fillRect(hx, H * 0.6 - hh, hw, hh);
+      ctx.beginPath(); ctx.moveTo(hx - 4, H * 0.6 - hh); ctx.lineTo(hx + hw / 2, H * 0.6 - hh - H * 0.04);
+      ctx.lineTo(hx + hw + 4, H * 0.6 - hh); ctx.closePath(); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    /* Đèn hổ phách trong cửa sổ nhà xa. */
+    ctx.fillStyle = C.amber400;
+    for (var wnd = 0; wnd < 6; wnd++) {
+      ctx.globalAlpha = 0.5 + 0.4 * (0.5 + 0.5 * Math.sin(t / 700 + wnd * 1.9));
+      ctx.fillRect((0.06 + wnd * 0.17) * W, H * 0.56, 6, 8);
+    }
+    ctx.globalAlpha = 1;
+    /* Biển teal dưới, sóng trôi. */
+    ctx.fillStyle = C.ink700;
+    ctx.fillRect(0, H * 0.68, W, H * 0.32);
+    ctx.fillStyle = "rgba(13,148,136,.35)";
+    for (var s = 0; s < 3; s++) {
+      var sx = ((t / 6000 + s * 0.4) % 1.2 - 0.1) * W;
+      ctx.beginPath(); ctx.ellipse(sx, H * (0.74 + s * 0.07), W * 0.22, 5, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    /* Thuyền buồm nhỏ trôi. */
+    var bx = ((t / 22000) % 1.2 - 0.1) * W;
+    ctx.fillStyle = C.ink950;
+    ctx.beginPath(); ctx.moveTo(bx, H * 0.72); ctx.lineTo(bx + 34, H * 0.72); ctx.lineTo(bx + 17, H * 0.76); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = C.amber100;
+    ctx.beginPath(); ctx.moveTo(bx + 17, H * 0.72); ctx.lineTo(bx + 17, H * 0.66); ctx.lineTo(bx + 30, H * 0.72); ctx.closePath(); ctx.fill();
+    /* Đèn lồng hổ phách bay. */
+    for (var f = 0; f < 8; f++) {
+      var fx = (f * 131 + Math.sin(t / 1500 + f * 2.3) * 12) % W;
+      var fy = H * (0.18 + ((f * 41) % 40) / 100) + Math.cos(t / 1200 + f) * 5;
+      ctx.globalAlpha = 0.4 + 0.4 * (0.5 + 0.5 * Math.sin(t / 600 + f * 1.7));
+      ctx.fillStyle = C.amber400;
+      ctx.beginPath(); ctx.arc(fx, fy, 3, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    /* Bụi cây tiền cảnh hai bên đáy làm khung. */
+    ctx.fillStyle = C.ink950;
+    ctx.beginPath(); ctx.ellipse(W * 0.06, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(W * 0.94, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  function paintCity(ctx, W, H, t) {
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, C.ink950); g.addColorStop(0.6, C.ink900); g.addColorStop(1, C.ink800);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    /* Sao + trăng. */
+    ctx.fillStyle = C.amber100;
+    for (var st = 0; st < 16; st++) {
+      ctx.globalAlpha = 0.3 + 0.5 * (0.5 + 0.5 * Math.sin(t / 800 + st * 2.7));
+      ctx.beginPath(); ctx.arc((st * 173) % W, H * (0.05 + ((st * 37) % 20) / 100), 1.6, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(W * 0.15, H * 0.1, 20, 0, Math.PI * 2); ctx.fill();
+    /* Quầng hổ phách chân trời. */
+    ctx.fillStyle = "rgba(245,158,11,.12)";
+    ctx.beginPath(); ctx.ellipse(W * 0.5, H * 0.66, W * 0.62, H * 0.09, 0, 0, Math.PI * 2); ctx.fill();
+    /* Tòa nhà xa (mờ). */
+    ctx.fillStyle = C.ink800; ctx.globalAlpha = 0.8;
+    for (var i = 0; i < 8; i++) {
+      var bx2 = (0.02 + i * 0.125) * W, bw = W * 0.09, bh = H * (0.22 + ((i * 53) % 18) / 100);
+      ctx.fillRect(bx2, H * 0.66 - bh, bw, bh);
+    }
+    ctx.globalAlpha = 1;
+    /* Tòa nhà gần + cửa sổ hổ phách sáng. */
+    ctx.fillStyle = C.ink700;
+    for (var j = 0; j < 5; j++) {
+      var cx = (0.06 + j * 0.19) * W, cw = W * 0.13, ch = H * (0.3 + ((j * 71) % 16) / 100);
+      ctx.fillRect(cx, H * 0.72 - ch, cw, ch);
+      ctx.fillStyle = C.amber400;
+      for (var wy = 0; wy < 3; wy++) for (var wx = 0; wx < 2; wx++) {
+        if (((j * 7 + wy * 3 + wx) % 3) === 0) continue;
+        ctx.globalAlpha = 0.65;
+        ctx.fillRect(cx + cw * (0.2 + wx * 0.45), H * 0.72 - ch + ch * (0.2 + wy * 0.28), 5, 7);
+      }
+      ctx.globalAlpha = 1; ctx.fillStyle = C.ink700;
+    }
+    /* Đường phố dưới. */
+    ctx.fillStyle = C.ink900;
+    ctx.fillRect(0, H * 0.72, W, H * 0.28);
+    ctx.fillStyle = C.amber400; ctx.globalAlpha = 0.7;
+    ctx.fillRect(W * 0.1, H * 0.86, W * 0.8, 3);
+    ctx.globalAlpha = 1;
+    /* Bụi cây tiền cảnh hai bên đáy làm khung. */
+    ctx.fillStyle = C.ink950;
+    ctx.beginPath(); ctx.ellipse(W * 0.06, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(W * 0.94, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  function paintCrystal(ctx, W, H, t) {
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, C.ink950); g.addColorStop(0.55, C.ink900); g.addColorStop(1, C.ink800);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    /* Quầng teal giữa hang. */
+    ctx.fillStyle = "rgba(13,148,136,.18)";
+    ctx.beginPath(); ctx.ellipse(W * 0.5, H * 0.55, W * 0.5, H * 0.16, 0, 0, Math.PI * 2); ctx.fill();
+    /* Tinh thể xa (nhạt, chàm). */
+    ctx.fillStyle = C.ink700;
+    for (var i = 0; i < 7; i++) {
+      var cx2 = (0.04 + i * 0.15) * W, cw2 = W * (0.05 + (i % 3) * 0.012), ch2 = H * (0.16 + ((i * 47) % 14) / 100);
+      ctx.beginPath(); ctx.moveTo(cx2, H * 0.62); ctx.lineTo(cx2 + cw2 / 2, H * 0.62 - ch2);
+      ctx.lineTo(cx2 + cw2, H * 0.62); ctx.closePath(); ctx.fill();
+    }
+    /* Tinh thể gần: chàm nhạt + cạnh sáng trên-trái. */
+    for (var j = 0; j < 5; j++) {
+      var dx = (0.08 + j * 0.19) * W, dw = W * (0.07 + (j % 2) * 0.02), dh = H * (0.24 + ((j * 61) % 18) / 100);
+      ctx.fillStyle = C.ink300;
+      ctx.beginPath(); ctx.moveTo(dx, H * 0.78); ctx.lineTo(dx + dw / 2, H * 0.78 - dh);
+      ctx.lineTo(dx + dw, H * 0.78); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.45)"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(dx + dw * 0.12, H * 0.78 - dh * 0.1);
+      ctx.lineTo(dx + dw / 2, H * 0.78 - dh); ctx.stroke();
+    }
+    /* Nền hang dưới. */
+    ctx.fillStyle = C.ink900;
+    ctx.fillRect(0, H * 0.78, W, H * 0.22);
+    /* Điểm sáng lấp lánh. */
+    for (var f2 = 0; f2 < 14; f2++) {
+      var fx2 = (f2 * 101 + Math.sin(t / 1300 + f2 * 2.2) * 10) % W;
+      var fy2 = H * (0.15 + ((f2 * 59) % 55) / 100) + Math.cos(t / 1000 + f2) * 5;
+      ctx.globalAlpha = 0.35 + 0.45 * (0.5 + 0.5 * Math.sin(t / 550 + f2 * 1.9));
+      ctx.fillStyle = C.amber400;
+      ctx.beginPath(); ctx.arc(fx2, fy2, 2.2, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    /* Bụi cây tiền cảnh hai bên đáy làm khung. */
+    ctx.fillStyle = C.ink950;
+    ctx.beginPath(); ctx.ellipse(W * 0.06, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(W * 0.94, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  function paintVolcano(ctx, W, H, t) {
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, C.ink950); g.addColorStop(0.55, C.ink900); g.addColorStop(1, C.ink800);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    /* Khói hổ phách trên miệng núi. */
+    ctx.fillStyle = "rgba(245,158,11,.14)";
+    for (var s = 0; s < 3; s++) {
+      var sx2 = W * 0.5 + Math.sin(t / 2000 + s * 2.1) * 30;
+      ctx.beginPath(); ctx.ellipse(sx2, H * (0.2 + s * 0.05), W * (0.16 + s * 0.05), H * 0.03, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    /* Núi lửa: chàm đậm, miệng sáng dung nham. */
+    ctx.fillStyle = C.ink800;
+    ctx.beginPath(); ctx.moveTo(W * 0.1, H * 0.78); ctx.lineTo(W * 0.5, H * 0.22);
+    ctx.lineTo(W * 0.9, H * 0.78); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = C.amber500;
+    ctx.beginPath(); ctx.moveTo(W * 0.44, H * 0.3); ctx.lineTo(W * 0.5, H * 0.22);
+    ctx.lineTo(W * 0.56, H * 0.3); ctx.lineTo(W * 0.52, H * 0.34); ctx.lineTo(W * 0.48, H * 0.34);
+    ctx.closePath(); ctx.fill();
+    /* Dòng dung nham chảy xuống sườn. */
+    ctx.strokeStyle = C.amber500; ctx.lineWidth = 5; ctx.globalAlpha = 0.85;
+    ctx.beginPath(); ctx.moveTo(W * 0.5, H * 0.32);
+    ctx.quadraticCurveTo(W * 0.56, H * 0.5, W * 0.6, H * 0.78); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(W * 0.47, H * 0.34);
+    ctx.quadraticCurveTo(W * 0.42, H * 0.55, W * 0.38, H * 0.78); ctx.stroke();
+    ctx.globalAlpha = 1;
+    /* Hồ dung nham dưới chân núi. */
+    ctx.fillStyle = C.ink900;
+    ctx.fillRect(0, H * 0.78, W, H * 0.22);
+    ctx.fillStyle = "rgba(245,158,11,.5)";
+    ctx.beginPath(); ctx.ellipse(W * 0.5, H * 0.8, W * 0.34, H * 0.03, 0, 0, Math.PI * 2); ctx.fill();
+    /* Tàn lửa hổ phách bay lên. */
+    for (var f3 = 0; f3 < 16; f3++) {
+      var fx3 = (f3 * 89 + Math.sin(t / 1200 + f3 * 2.4) * 16) % W;
+      var fy3 = H * (0.85 - ((t / 9000 + f3 * 0.07) % 0.7));
+      ctx.globalAlpha = 0.4 + 0.45 * (0.5 + 0.5 * Math.sin(t / 500 + f3 * 1.8));
+      ctx.fillStyle = (f3 % 3 === 0) ? C.amber400 : C.amber500;
+      ctx.beginPath(); ctx.arc(fx3, fy3, 2.4, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    /* Bụi cây tiền cảnh hai bên đáy làm khung. */
+    ctx.fillStyle = C.ink950;
+    ctx.beginPath(); ctx.ellipse(W * 0.06, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(W * 0.94, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  /* Bộ chọn nền theo vùng: 1 = rừng (ảnh Canva nếu có), 2–5 = vẽ code. */
+  function paintRegion(ctx, W, H, t, region) {
+    if (region === 2) return paintVillage(ctx, W, H, t);
+    if (region === 3) return paintCity(ctx, W, H, t);
+    if (region === 4) return paintCrystal(ctx, W, H, t);
+    if (region === 5) return paintVolcano(ctx, W, H, t);
+    return paintForest(ctx, W, H, t);
+  }
   /* Rồng nhỏ nhìn lên (hướng quái rơi xuống): thân chàm đậm, bụng + sừng
      hổ phách nhạt, cánh hổ phách vỗ nhẹ, điểm sáng trắng ở trên-trái,
      bóng đổ ellipse dưới thân, viền 2px. */
@@ -626,8 +1017,9 @@
   }
 
   /* ---- Màn hình + luồng chơi ---- */
-  var RL = null;      /* tiến trình lát cắt (state.rongLua) */
-  var run = null;     /* lượt chạy ải hiện tại {level, battle, hearts, shield, used} */
+  var RL = null;      /* tiến trình 5 vùng (state.rongLua) */
+  var run = null;     /* lượt chạy ải hiện tại {region, level, battle, hearts, shield, used} */
+  var curRegion = 1;  /* vùng đang xem trên bản đồ */
   var stage = null;   /* G71.openStage api */
   var mode = "map";   /* map | battle | shop | dict | over */
   var battle = null;  /* LOGIC battle state */
@@ -669,8 +1061,9 @@
     RL = loadRL();
     run = null;
     mode = "map";
-    var stg = G71.openStage("🔥 Rồng Lửa — Rừng Xanh (bản thử)",
-      "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái; chạm quái để khóa, gõ đúng từ để tung chiêu. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng hoặc đạn trúng rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu.",
+    curRegion = Math.min(RL.region, 5);
+    var stg = G71.openStage("🔥 Rồng Lửa — 5 Vùng",
+      "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái; chạm quái để khóa, gõ đúng từ để tung chiêu. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng hoặc đạn trúng rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu. 5 vùng × 10 ải, trùm mỗi vùng đổi hệ sau mỗi 1/3 máu — thắng trùm Núi Lửa mở Chế độ Vô Tận.",
       function () { teardown(); });
     stage = stg;
     buildControls(stg);
@@ -761,30 +1154,61 @@
     box.id = "rlMap";
     box.style.cssText = "position:absolute;inset:0;z-index:4;overflow:auto;background:#FFFBEB;padding:18px 16px 24px;";
     var dictCount = Object.keys(RL.dict).length;
-    var html = '<h2 style="margin:4px 0 2px;">🌲 Rừng Xanh — Vùng 1</h2>'
-      + '<p class="mut" style="margin:6px 0 12px;">Vương quốc Ngôn Ngữ bị Bóng Tối Câm Lặng phong ấn, các từ bị đánh cắp. Rồng nhỏ lên đường thu hồi từng từ — bắt đầu từ Rừng Xanh.</p>'
+    var reg = regionById(curRegion);
+    var prog = regionProg(RL, curRegion);
+    var html = '<h2 style="margin:4px 0 2px;">🔥 Rồng Lửa — 5 Vùng</h2>'
+      + '<p class="mut" style="margin:6px 0 12px;">Vương quốc Ngôn Ngữ bị Bóng Tối Câm Lặng phong ấn, các từ bị đánh cắp. Rồng nhỏ lên đường thu hồi từng từ — bắt đầu từ Rừng Xanh, qua 5 vùng tới Núi Lửa.</p>'
       + '<p style="font-weight:700;margin:6px 0;">' + rlImgTag("coin", 20) + ' Vàng: ' + RL.gold + (RL.shield ? ' &nbsp;·&nbsp; ' + rlImgTag("shield", 20) + ' Khiên: ' + RL.shield : '') + '</p>'
-      + '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0;">';
-    [1, 2, 3].forEach(function (lv) {
-      var cleared = !!RL.cleared[lv];
-      var open = lv <= RL.unlocked;
-      var st = cleared ? "✅ Đã qua" : (open ? "▶ Mở" : "🔒 Chưa mở");
-      html += '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">Ải ' + lv + " — " + LEVEL_NAMES[lv] + '</h3>'
-        + '<p class="mut" style="margin:4px 0;">3 trận · chủ đề thiên nhiên' + (lv === 3 ? ' · trùm cuối đổi hệ' : '') + '</p>'
-        + '<p style="margin:4px 0;font-weight:700;">' + st + '</p>'
-        + (open ? '<div class="row"><button class="btn btn-primary" data-rl-level="' + lv + '">Chơi ải ' + lv + '</button></div>' : '')
-        + '</section>';
+      + '<div class="row" style="flex-wrap:wrap;margin:8px 0 12px;" id="rlRegionTabs">';
+    REGIONS.forEach(function (rg) {
+      var open = regionOpen(RL, rg.id);
+      var label = rg.icon + " " + rg.name + (open ? "" : " 🔒");
+      html += '<button class="btn" data-rl-region-tab="' + rg.id + '"'
+        + (rg.id === curRegion ? ' style="background:#F59E0B;border-color:#B45309;color:#fff;"' : '')
+        + (open ? '' : ' disabled title="Qua trùm vùng trước hoặc đủ ' + xpNeedFor(rg.id) + ' XP để mở"') + '>' + label + '</button>';
     });
     html += '</div>'
-      + '<div class="row" style="flex-wrap:wrap;">'
+      + '<h3 style="margin:8px 0 4px;">' + reg.icon + ' ' + reg.name + ' — Vùng ' + reg.id + ' · chủ đề ' + reg.theme + '</h3>'
+      + '<p class="mut" style="margin:4px 0 12px;">' + reg.desc + ' Trùm vùng: <b>' + reg.boss + '</b> (ải 10, đổi hệ sau mỗi 1/3 máu).</p>';
+    var note = regionPoolNote(curRegion);
+    if (note) html += '<p class="mut" style="margin:4px 0 12px;">⚠️ ' + note + '</p>';
+    html += '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0;">';
+    for (var lv = 1; lv <= 10; lv++) {
+      var cleared = !!prog.cleared[lv];
+      var open = lv <= prog.unlocked;
+      var st = cleared ? "✅ Đã qua" : (open ? "▶ Mở" : "🔒 Chưa mở");
+      html += '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">Ải ' + lv + " — " + reg.stages[lv - 1] + '</h3>'
+        + '<p class="mut" style="margin:4px 0;">3 trận · chủ đề ' + reg.theme + (lv === 10 ? ' · trùm ' + reg.boss : '') + '</p>'
+        + '<p style="margin:4px 0;font-weight:700;">' + st + '</p>'
+        + (open ? '<div class="row"><button class="btn btn-primary" data-rl-region="' + curRegion + '" data-rl-level="' + lv + '">Chơi ải ' + lv + '</button></div>' : '')
+        + '</section>';
+    }
+    html += '</div>';
+    if (RL.endless) {
+      html += '<section class="card" style="margin:0 0 12px;"><h3 style="margin:0 0 4px;">♾️ Chế độ Vô Tận</h3>'
+        + '<p class="mut" style="margin:4px 0;">Đã thắng trùm Núi Lửa! Quái kéo tới từng đợt, càng về sau càng đông và càng nhanh. Kỷ lục của bạn: <b>' + (RL.endlessBest || 0) + ' đợt</b>.</p>'
+        + '<div class="row"><button class="btn btn-primary" id="rlEndlessBtn">Chơi Vô Tận</button></div></section>';
+    }
+    html += '<div class="row" style="flex-wrap:wrap;">'
       + '<button class="btn" id="rlDictBtn">📖 Từ Điển Rồng (' + dictCount + ' từ)</button>'
       + '<button class="btn" id="rlBackBtn">← Về khu Trò chơi</button></div>';
     box.innerHTML = html;
     stage.el.appendChild(box);
     overlayBox = box;
-    box.querySelectorAll("[data-rl-level]").forEach(function (b) {
-      b.onclick = function () { startLevel(parseInt(b.getAttribute("data-rl-level"), 10)); };
+    box.querySelectorAll("[data-rl-region-tab]").forEach(function (b) {
+      b.onclick = function () {
+        curRegion = parseInt(b.getAttribute("data-rl-region-tab"), 10);
+        showMap();
+      };
     });
+    box.querySelectorAll("[data-rl-level]").forEach(function (b) {
+      b.onclick = function () {
+        startLevel(parseInt(b.getAttribute("data-rl-region"), 10),
+          parseInt(b.getAttribute("data-rl-level"), 10));
+      };
+    });
+    var eb = box.querySelector("#rlEndlessBtn");
+    if (eb) eb.onclick = startEndless;
     box.querySelector("#rlDictBtn").onclick = showDict;
     box.querySelector("#rlBackBtn").onclick = function () { stage.close(); };
   }
@@ -817,8 +1241,8 @@
     box.querySelector("#rlDictBack").onclick = showMap;
   }
 
-  function startLevel(lv) {
-    run = { level: lv, battle: 1, hearts: 5, shield: RL.shield || 0, used: {} };
+  function startLevel(region, lv) {
+    run = { region: region, level: lv, battle: 1, hearts: 5, shield: RL.shield || 0, used: {} };
     startBattle();
   }
 
@@ -826,18 +1250,51 @@
     mode = "battle";
     clearOverlays();
     hudSig = "";
-    var lv = run.level, b = run.battle;
-    var isBoss = (lv === 3 && b === 3);
+    var rg = run.region, lv = run.level, b = run.battle;
+    var isBoss = (lv === 10 && b === 3);
     var words;
     if (isBoss) {
-      var boss = pickBossWord(run.used);
-      var mins = pickNatureWords(2, run.used);
+      var boss = pickBossWord(run.used, rg);
+      var mins = pickRegionWords(rg, 2, run.used);
       words = [boss].concat(mins);
     } else {
-      words = pickNatureWords(LOGIC.battleSize(lv, b), run.used);
+      words = pickRegionWords(rg, LOGIC.battleSize(lv, b), run.used);
     }
     battle = LOGIC.createBattle(words, {
-      level: lv, battle: b, boss: isBoss,
+      level: lv, battle: b, boss: isBoss, region: rg,
+      hearts: run.hearts, shield: run.shield, element: curElement
+    });
+    bolts = []; parts = []; floats = [];
+    if (elBar) elBar.style.display = "flex";
+    if (ctrlBar) ctrlBar.style.display = "flex";
+    setElement(battle.element);
+    hud();
+    if (stage.resize) stage.resize();
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("keyup", onKeyUp);
+    stage.canvas.addEventListener("click", onCanvasClick);
+    stage.canvas.addEventListener("pointermove", onCanvasDrag);
+    last = performance.now();
+    requestAnimationFrame(frame);
+  }
+
+  /* Chế độ Vô Tận (v98): mở sau khi thắng trùm Núi Lửa. Quái kéo tới
+     từng đợt, càng về sau càng đông (tối đa 12) và càng nhanh; 5 tim
+     mang theo qua các đợt, không có cửa hàng giữa đợt. */
+  function startEndless() {
+    run = { region: 5, endless: true, wave: 1, level: 10, battle: 1,
+      hearts: 5, shield: RL.shield || 0, used: {} };
+    startEndlessWave();
+  }
+  function startEndlessWave() {
+    mode = "battle";
+    clearOverlays();
+    hudSig = "";
+    run.battle = run.wave;
+    var n = Math.min(4 + run.wave, 12);
+    var words = pickRegionWords(5, n, run.used);
+    battle = LOGIC.createBattle(words, {
+      level: Math.min(10, 2 + run.wave), battle: run.wave, boss: false, region: 5,
       hearts: run.hearts, shield: run.shield, element: curElement
     });
     bolts = []; parts = []; floats = [];
@@ -874,18 +1331,41 @@
 
   function onBattleWin() {
     xpSafe(BATTLE_XP);
+    if (run.endless) {
+      /* Vô Tận: qua một đợt, kỷ lục = đợt cao nhất, tim mang theo. */
+      RL.endlessBest = Math.max(RL.endlessBest || 0, run.wave);
+      saveRL(RL);
+      run.wave++;
+      toastSafe("Qua đợt " + (run.wave - 1) + "! Đợt " + run.wave + " đang tới — đông hơn, nhanh hơn.");
+      startEndlessWave();
+      return;
+    }
     if (battle.isBoss) {
-      RL.cleared[3] = true; RL.unlocked = 3; saveRL(RL);
-      G71.endScreen(stage, true, "🎉 Thắng Trùm Rừng Xanh!",
-        ["Đã thu hồi xong các từ ở Rừng Xanh!", "Vàng: " + RL.gold + " · Từ điển: " + Object.keys(RL.dict).length + " từ · +10 XP đã cộng vào tiến trình."],
+      var progB = regionProg(RL, run.region);
+      progB.cleared["10"] = true;
+      progB.unlocked = 10;
+      var regB = regionById(run.region);
+      if (run.region < 5) {
+        RL.region = Math.max(RL.region, run.region + 1);
+        regionProg(RL, run.region + 1);
+      } else {
+        RL.endless = true;
+      }
+      saveRL(RL);
+      var lines = ["Đã thu hồi xong các từ ở " + regB.name + "!",
+        "Vàng: " + RL.gold + " · Từ điển: " + Object.keys(RL.dict).length + " từ · +10 XP đã cộng vào tiến trình."];
+      if (run.region < 5) lines.push("Đã mở vùng " + regionById(run.region + 1).name + "!");
+      else lines.push("Chế độ Vô Tận đã mở — quái kéo tới từng đợt, kỷ lục đang chờ bạn!");
+      G71.endScreen(stage, true, "🎉 Thắng " + regB.boss + "!", lines,
         function () { start(); });
       return;
     }
     if (run.battle >= 3) {
-      RL.cleared[run.level] = true;
-      RL.unlocked = Math.max(RL.unlocked, Math.min(3, run.level + 1));
+      var prog = regionProg(RL, run.region);
+      prog.cleared[String(run.level)] = true;
+      prog.unlocked = Math.max(prog.unlocked, Math.min(10, run.level + 1));
       saveRL(RL);
-      toastSafe("Qua ải " + run.level + "! Đã mở ải " + RL.unlocked + ".");
+      toastSafe("Qua ải " + run.level + " vùng " + regionById(run.region).name + "! Đã mở ải " + prog.unlocked + ".");
       showMap();
       return;
     }
@@ -897,15 +1377,30 @@
     var box = document.createElement("div");
     box.id = "rlLose";
     box.style.cssText = "position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:rgba(255,247,232,.93);padding:16px;";
+    var title = "Hết tim rồi!";
+    var line1, line2, retryLabel;
+    if (run.endless) {
+      title = "Vô Tận kết thúc ở đợt " + run.wave + "!";
+      line1 = "Kỷ lục của bạn: " + (RL.endlessBest || 0) + " đợt.";
+      line2 = "Cấp, vàng và từ đã thu vẫn giữ nguyên — chơi lại từ đợt 1 nhé.";
+      retryLabel = "Chơi lại Vô Tận";
+    } else {
+      line1 = "Rồng đã gục ở vùng " + regionById(run.region).name + " — ải " + run.level + " trận " + run.battle + ".";
+      line2 = "Cấp, vàng và từ đã thu vẫn giữ nguyên — chơi lại ải nhé.";
+      retryLabel = "Chơi lại ải";
+    }
     box.innerHTML = '<div style="background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.12);padding:28px 24px;text-align:center;max-width:520px;width:100%;">'
-      + '<h2 style="margin-top:0;">Hết tim rồi!</h2>'
-      + '<p style="margin:6px 0;">Rồng đã gục ở ải ' + run.level + ' trận ' + run.battle + '.</p>'
-      + '<p style="margin:6px 0;">Cấp, vàng và từ đã thu vẫn giữ nguyên — chơi lại ải nhé.</p>'
-      + '<div class="row" style="justify-content:center;"><button class="btn btn-primary" id="rlRetry">Chơi lại ải</button>'
+      + '<h2 style="margin-top:0;">' + title + '</h2>'
+      + '<p style="margin:6px 0;">' + line1 + '</p>'
+      + '<p style="margin:6px 0;">' + line2 + '</p>'
+      + '<div class="row" style="justify-content:center;"><button class="btn btn-primary" id="rlRetry">' + retryLabel + '</button>'
       + '<button class="btn" id="rlLoseMap">Về bản đồ</button></div></div>';
     stage.el.appendChild(box);
     overlayBox = box;
-    box.querySelector("#rlRetry").onclick = function () { run.battle = 1; run.hearts = 5; startBattle(); };
+    box.querySelector("#rlRetry").onclick = function () {
+      if (run.endless) startEndless();
+      else { run.battle = 1; run.hearts = 5; startBattle(); }
+    };
     box.querySelector("#rlLoseMap").onclick = showMap;
   }
 
@@ -918,7 +1413,7 @@
     var canPotion = RL.gold >= POTION_COST && run.hearts < 5;
     var canShield = RL.gold >= SHIELD_COST;
     var html = '<h2 style="margin:4px 0 2px;">🛒 Cửa hàng</h2>'
-      + '<p class="mut" style="margin:6px 0 12px;">Thắng trận ' + run.battle + ' ải ' + run.level + '! Mua đồ chuẩn bị cho trận tiếp theo. Vàng của bạn: <b>' + RL.gold + '</b> · Tim rồng: ' + run.hearts + '/5</p>'
+      + '<p class="mut" style="margin:6px 0 12px;">Thắng trận ' + run.battle + ' ải ' + run.level + ' vùng ' + regionById(run.region).name + '! Mua đồ chuẩn bị cho trận tiếp theo. Vàng của bạn: <b>' + RL.gold + '</b> · Tim rồng: ' + run.hearts + '/5</p>'
       + '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">'
       + '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">' + rlImgTag("potion", 22) + ' Bình máu — 20 vàng</h3><p class="mut">Hồi 2 tim cho rồng (tối đa 5).</p><div class="row"><button class="btn btn-primary" id="rlBuyPotion"' + (canPotion ? '' : ' disabled') + '>Mua</button></div></section>'
       + '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">' + rlImgTag("shield", 22) + ' Khiên — 25 vàng</h3><p class="mut">Chặn 1 đòn quái chạm tới rồng trong ải này.</p><div class="row"><button class="btn btn-primary" id="rlBuyShield"' + (canShield ? '' : ' disabled') + '>Mua</button></div></section>'
@@ -944,12 +1439,15 @@
     /* HUD được phép xuống 2 dòng khi hẹp (sửa xấu 18:11: chữ hệ "⚡ Điện"
        ở góc phải từng bị cắt mất nửa ở mép màn hình). */
     if (stage.hud) { stage.hud.style.flexWrap = "wrap"; stage.hud.style.whiteSpace = "normal"; }
-    var sig = [run ? run.level : 0, battle.battle, battle.hearts, battle.shield,
-      RL.gold, battle.combo, battle.element, battle.total - battle.resolved].join("|");
+    var sig = [(run && run.region) || 0, run ? run.level : 0, battle.battle, battle.hearts, battle.shield,
+      RL.gold, battle.combo, battle.element, battle.total - battle.resolved, run && run.endless ? run.wave : 0].join("|");
     if (sig === hudSig) return;
     hudSig = sig;
     var el = ELEMENTS[battle.element];
-    stage.hud.innerHTML = "<span style=\"flex:none\">Ải " + run.level + "-" + battle.battle + "</span>"
+    var stageLabel = (run && run.endless)
+      ? "Vô Tận · Đợt " + run.wave
+      : "V" + (run.region || 1) + " · Ải " + run.level + "-" + battle.battle;
+    stage.hud.innerHTML = "<span style=\"flex:none\">" + stageLabel + "</span>"
       + "<span style=\"flex:none\">" + heartsSvg(battle.hearts, 5) + "</span>"
       + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">" + rlImgTag("coin", 16) + " Vàng: " + RL.gold
       + " · Combo x" + Math.min(3, 1 + battle.combo)
@@ -1054,7 +1552,7 @@
     var W = cv.width, H = cv.height;
     if (!W || !H) { requestAnimationFrame(frame); return; }
     ctx.clearRect(0, 0, W, H);
-    paintForest(ctx, W, H, now);
+    paintRegion(ctx, W, H, now, (run && run.region) || (battle && battle.region) || 1);
     battle.words.forEach(function (m, i) {
       if (m.status !== "advancing") return;
       var py = m.y * H;
@@ -1115,10 +1613,11 @@
   }
 
   window.G71RongLua = {
-    start: start, logic: LOGIC, elements: ELEMENTS, heartsSvg: heartsSvg,
+    start: start, startEndless: startEndless, logic: LOGIC, elements: ELEMENTS, heartsSvg: heartsSvg,
     art: { ready: rlReady, base: RL_ART, files: RL_IMGS },
     store: { load: loadRL, save: saveRL, fresh: freshRL },
+    regions: REGIONS, regionById: regionById,
     /* Mỏ neo cho probe: đọc trạng thái chơi hiện tại (chế độ, trận, lượt chạy, tiến trình). */
-    debug: function () { return { mode: mode, battle: battle, run: run, rl: RL }; }
+    debug: function () { return { mode: mode, battle: battle, run: run, rl: RL, curRegion: curRegion }; }
   };
 })();
