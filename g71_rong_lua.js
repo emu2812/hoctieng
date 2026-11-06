@@ -967,8 +967,9 @@
     }
     return s;
   }
-  /* Biểu tượng hệ dạng vector nhỏ: lửa = giọt lửa, nước = giọt nước,
-     điện = tia chớp. Màu lấy theo hệ. */
+  /* Biểu tượng hệ dạng vector nhỏ: lửa = ngọn lửa (đầu nhọn cong
+     sang phải, hông trái có eo chữ S, đốm lửa trong), nước = giọt
+     nước đối xứng, điện = tia chớp. Màu lấy theo hệ. */
   function drawElIcon(ctx, el, x, y, r, stroke) {
     var col = ELEMENTS[el].color;
     ctx.save();
@@ -984,10 +985,24 @@
     }
     ctx.beginPath();
     if (el === "fire") {
-      ctx.moveTo(0, -r);
-      ctx.quadraticCurveTo(r * 0.9, -r * 0.1, r * 0.55, r * 0.55);
-      ctx.quadraticCurveTo(0, r * 1.05, -r * 0.55, r * 0.55);
-      ctx.quadraticCurveTo(-r * 0.9, -r * 0.1, 0, -r);
+      /* v105f: NGỌN LỬA thật (trước đây là giọt nước đối xứng, trùng
+         hệ Nước — kiểm render 02:11–02:14 07/11 bắt được). Đầu nhọn
+         cong sang phải, hông trái có eo chữ S, đốm lửa trong. Đốm
+         trong vẽ cùng chiều với viền ngoài để chế độ tô (fill) không
+         bị khoét lỗ. */
+      ctx.moveTo(0.25 * r, -r);
+      ctx.quadraticCurveTo(0.95 * r, -0.3 * r, 0.6 * r, 0.4 * r);
+      ctx.quadraticCurveTo(0.5 * r, r, 0.05 * r, r);
+      ctx.quadraticCurveTo(-0.5 * r, r, -0.55 * r, 0.45 * r);
+      ctx.quadraticCurveTo(-0.75 * r, -0.1 * r, -0.25 * r, -0.5 * r);
+      ctx.quadraticCurveTo(-0.05 * r, -0.75 * r, 0.25 * r, -r);
+      /* Đốm lửa trong (cùng chiều viền ngoài). Đặt thấp + lệch phải
+         để nét không chạm điểm chính giữa huy hiệu (tâm phải giữ
+         nguyên màu hệ đặc — probe v105e kiểm pixel tâm chính xác). */
+      ctx.moveTo(0.32 * r, 0.12 * r);
+      ctx.quadraticCurveTo(0.48 * r, 0.35 * r, 0.24 * r, 0.58 * r);
+      ctx.quadraticCurveTo(0.12 * r, 0.62 * r, 0.06 * r, 0.5 * r);
+      ctx.quadraticCurveTo(0.12 * r, 0.28 * r, 0.32 * r, 0.12 * r);
     } else if (el === "water") {
       ctx.moveTo(0, -r);
       ctx.quadraticCurveTo(r * 0.85, r * 0.1, r * 0.6, r * 0.5);
