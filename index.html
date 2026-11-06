@@ -29,6 +29,8 @@ p{margin:8px 0}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .chip{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:3px 10px;font-size:14px;background:#fff}
 .chip.cur{background:var(--amber2);border-color:var(--amber);font-weight:700}
+/* v106b: khoang cach giua "cua ban" va chip "ca nhan" trong tieu de Link luyen nghe */
+#myListenLinkBox h3 .chip{margin-left:8px}
 .bar{height:14px;background:var(--line2);border-radius:999px;overflow:hidden}
 .bar>i{display:block;height:100%;background:var(--amber);border-radius:999px}.bar.gold{outline:2px solid var(--amber)}
 .dimlink{color:var(--mut);text-decoration:underline;cursor:pointer;font-size:14px;background:none;border:0;padding:0}
@@ -36,7 +38,7 @@ p{margin:8px 0}
 /* Bo cuc desktop chung: cot phu chi hien khi cau truc bai hoc da boc xong
    (.lesson-main ton tai) — man tu ve lai giua chung thi roi ve 1 cot, khong vo. */
 .lesson-side{display:none}
-@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){display:grid;grid-template-columns:minmax(0,820px);gap:24px;align-items:start}#app.lesson-view:has(>.lesson-main)>.lessonframe{grid-column:1/-1}#app.lesson-view:has(>.lesson-main)>.lesson-main{min-width:0}#app.lesson-view:has(>.lesson-main)>.lesson-side{display:block;position:sticky;top:120px}#app.lesson-view:has(>.lesson-main)>.lesson-side .card{margin:0 0 12px}}
+@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){display:grid;grid-template-columns:minmax(0,820px);gap:24px;align-items:start}#app.lesson-view:has(>.lesson-main)>.lessonframe{grid-column:1/-1}#app.lesson-view:has(>.lesson-main)>.lesson-main{min-width:0}#app.lesson-view:has(>.lesson-main)>.lesson-side{display:block;position:sticky;top:240px}#app.lesson-view:has(>.lesson-main)>.lesson-side .card{margin:0 0 12px}}
 .qblock{background:#fff;border:0;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:16px 20px;margin:12px 0}
 .why{display:none;background:#FFF8E1;border:1.5px solid var(--amber);border-radius:16px;padding:10px 12px;margin:10px 0}
 .why.show{display:block}
@@ -287,7 +289,7 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 body.in-lesson #tabBar{position:static}
 body.in-lesson .lessonframe{top:66px}
 .bento-side{display:none}
-@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,820px) 300px;justify-content:center}#app.lesson-view:has(>.lesson-main)>.bento-side{display:block;position:sticky;top:120px}}
+@media (min-width:1200px){#app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,820px) 300px;justify-content:center}#app.lesson-view:has(>.lesson-main)>.bento-side{display:block;position:sticky;top:240px}}/* v106b: fallback — JS dat top chinh xac theo day lessonframe (xem applyLessonLayout) */
 /* v94 — trang bài học 3 cột: Nội dung | Thực hành | Tham khảo (cột 3 là .bento-side sẵn có).
    Dưới 1200px hai cột thân bài xếp dọc đúng thứ tự; cột tham khảo hiện dưới cùng ở bài đã tách. */
 .lesson-col-head{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--mut);margin:2px 0 8px;text-transform:uppercase}
@@ -2026,6 +2028,22 @@ function applyLessonLayout(app) {
     side.innerHTML = '<p class="lesson-col-head">🧰 Tham khảo</p><div class="bento-tile"><p class="eyebrow">TIẾN TRÌNH CỦA BẠN</p><p>🔥 Chuỗi ' + streakDays() + ' ngày · ' + (state.xp || 0) + ' XP</p><p class="mut">' + esc(goalStripToday()) + '</p><p class="mut">' + trackDueCount90() + ' mục đến hạn ôn</p><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>';
   } catch (e) { side.innerHTML = '<p class="lesson-col-head">🧰 Tham khảo</p><div class="bento-tile"><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>'; }
   app.appendChild(side);
+  /* v106b — chong lessonframe de len cot phai: frame dinh o top:66px, day
+     cua frame khi dinh = 66 + frame.offsetHeight; cot phai phai dinh duoi
+     day do + 12px, neu khong tieu de "TIEN TRINH CUA BAN" bi frame che nua
+     (loi thay tren live v106: Thi thu chang 4,5 + ket qua bai Noi). CSS top
+     240px chi la fallback; gia tri chinh xac dat o day theo tung trang. */
+  var bentoTopFix = function () { try { side.style.top = (66 + frame.offsetHeight + 12) + "px"; } catch (e) {} };
+  bentoTopFix();
+  try {
+    if (!window.__bentoTopFixOn) {
+      window.__bentoTopFixOn = true;
+      window.addEventListener("resize", function () {
+        try { var f = document.querySelector("#app .lessonframe"); var s = document.querySelector("#app .bento-side"); if (f && s) s.style.top = (66 + f.offsetHeight + 12) + "px"; } catch (e) {}
+      });
+    }
+  } catch (e) {}
+  try { var det106b = frame.querySelectorAll("details"); for (var di106b = 0; di106b < det106b.length; di106b++) det106b[di106b].addEventListener("toggle", bentoTopFix); } catch (e) {}
 }
 function go(tab) { examTimerStop(); examPartTimerStop(); curTab = tab; curLesson = null; render(); }
 /* ---------- V59: TAI LUOI THE GIAI TRI (tab Luyen tap) ----------
