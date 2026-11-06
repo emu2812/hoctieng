@@ -1000,7 +1000,7 @@
     ctx.save();
     ctx.fillStyle = "rgba(4,6,15,.55)";
     ctx.beginPath(); ctx.arc(x, y, r + 3, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = ELEMENTS[el].color; ctx.lineWidth = 2;
+    ctx.strokeStyle = ELEMENTS[el].color; ctx.lineWidth = 3;
     ctx.beginPath(); ctx.arc(x, y, r + 3, 0, Math.PI * 2); ctx.stroke();
     drawElIcon(ctx, el, x, y, r * 0.62);
     ctx.restore();
@@ -1480,14 +1480,23 @@
     ctx.fillStyle = "rgba(255,255,255,.2)";
     ctx.beginPath(); ctx.ellipse(px - s * 0.4, py - s * 0.4, s * 0.28, s * 0.12, -0.5, 0, Math.PI * 2); ctx.fill();
     }
-    /* Huy hiệu hệ yếu ở góc phải: ảnh badge Canva cắt từ quái biến thể,
-       không thì huy hiệu vector cũ. */
+    /* Huy hiệu hệ yếu ở góc phải (v105d): đĩa màu hệ ĐẦY ĐỦ phía sau ảnh
+       badge Canva + ảnh to hơn (26px) — ảnh badge hệ Điện nhạt (tròn
+       lavender) nên nhìn thoáng không ra tím; đĩa #8B5CF6 đầy đủ + viền
+       đậm làm huy hiệu đọc ra hệ ngay. Không ảnh thì huy hiệu vector
+       to hơn (r=12, viền 3px). */
     var badgeKey = { fire: "badge_fire", water: "badge_water", elec: "badge_elec" }[m.weak];
     var bgx = px + s * 0.85, bgy = py - s * 0.75;
+    var badgeCol = ELEMENTS[m.weak] ? ELEMENTS[m.weak].color : C.ink300;
+    var badgeDark = ELEMENTS[m.weak] ? ELEMENTS[m.weak].dark : C.ink600;
+    ctx.fillStyle = badgeCol;
+    ctx.beginPath(); ctx.arc(bgx, bgy, 17, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = badgeDark; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(bgx, bgy, 17, 0, Math.PI * 2); ctx.stroke();
     if (rlReady(badgeKey)) {
-      ctx.drawImage(rlImg[badgeKey].img, bgx - 12, bgy - 12, 24, 24);
+      ctx.drawImage(rlImg[badgeKey].img, bgx - 13, bgy - 13, 26, 26);
     } else {
-      drawElBadge(ctx, m.weak, bgx, bgy, 9);
+      drawElBadge(ctx, m.weak, bgx, bgy, 12);
     }
     /* Thanh máu. */
     var bw = s * 1.9, bx = px - bw / 2, by = py - s * 1.35;
@@ -1536,7 +1545,10 @@
     }
     ctx.fillStyle = C.ink800;
     G71.rr(ctx, pillX - tw / 2, pillTop, tw, pillH, 17); ctx.fill();
-    ctx.strokeStyle = locked ? C.amber500 : C.ink200;
+    /* v105d: viền thẻ từ theo đúng màu hệ của quái (như lá Đấu Bài) —
+       trước đây mọi hệ chung một màu tím nhạt #C7D2FE nên không đọc ra
+       hệ; quái khóa giữ viền VÀNG như cũ. */
+    ctx.strokeStyle = locked ? C.amber500 : (ELEMENTS[m.weak] ? ELEMENTS[m.weak].color : C.ink200);
     ctx.lineWidth = 2; ctx.stroke();
     if (isPh) {
       /* Cụm từ: dòng trên là cụm (chữ Hán/Hangul/cụm tiếng Anh), dòng
