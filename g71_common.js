@@ -85,6 +85,33 @@
     if (/^[A-Za-z]+$/.test(t)) return true;
     return /^[\uAC00-\uD7A3]+$/.test(t);
   }
+  /* v102 (Rong Lua) — v105 mo rong ra diem choke chung: chuoi go la 1
+     chu cai Latin duy nhat ("V", "R" o bo 26 chu cai EN, pinyin "a")
+     thi khong lam muc tieu game — go 1 phim la chet, khong hoc duoc
+     gi. CHI loc chu cai Latin: tu Han 1 am tiet (물), chu Han 1 chu
+     (pinyin dai hon 1 phim) giu nguyen. */
+  function isSingleLetter(wd) {
+    var t = wd && (wd.type || wd.w);
+    return !!t && /^[A-Za-z]$/.test(String(t));
+  }
+  /* Bo dau tieng Viet: dung NFD nhu normSearch o index.html. */
+  function stripDiacritics(s) {
+    try { return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D"); }
+    catch (e) { return String(s || ""); }
+  }
+  /* v105: dang hien thi cua mot the tu. Tu vay tieng Viet trong kho EN
+     viet khong dau ("banh mi") nhung nghia tieng Viet co dau ("bánh
+     mì") — hien dang co dau cho dung tieng Viet, nguoi hoc van go
+     chuoi Latin khong dau nhu cu. Chi doi khi nghia (bo dau, thuong
+     hoa) trung khop hoan toan voi tu — tu Anh thuong ("dirty"),
+     chu Han, tu Hangul khong doi. Chuoi go (type) khong doi. */
+  function displayWord(wd) {
+    var w = wd && (wd.w != null ? String(wd.w) : "");
+    var vi = wd && (wd.vi != null ? String(wd.vi) : "");
+    if (!w || !vi) return w;
+    if (stripDiacritics(vi).toLowerCase().trim() === w.toLowerCase().trim()) return vi;
+    return w;
+  }
   /* Kho từ phẳng theo track: [{w, vi, theme, type, py}]. EN dung kho
      CONTENT.vocab cu; ZH/TC/TP dung kho that cua track do. */
   function pool() {
@@ -142,10 +169,10 @@
      TP: tu Hangul (bam tung am tiet). */
   function pickTypingWords(n) {
     var got = pickSetWords(n * 3);
-    var words = got.words.filter(function (wd) { return isTypeable(wd); }).slice(0, n);
+    var words = got.words.filter(function (wd) { return isTypeable(wd) && !isSingleLetter(wd); }).slice(0, n);
     if (words.length < n) {
       var rest = shuffle(pool()).filter(function (p) {
-        return isTypeable(p) && words.every(function (x) { return x.w !== p.w; });
+        return isTypeable(p) && !isSingleLetter(p) && words.every(function (x) { return x.w !== p.w; });
       });
       while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "", col: p.col || "", ex: p.ex || "" }); }
     }
@@ -157,14 +184,21 @@
     var rounds = [];
     for (var i = 0; i < p.length && rounds.length < n; i++) {
       var t = p[i];
+      if (isSingleLetter(t)) continue; /* v105: chu cai don khong lam dap an */
       var ds = [];
       for (var j = 0; j < p.length && ds.length < dist; j++) {
         var d = p[j];
-        if (d.w !== t.w && d.vi !== t.vi && ds.every(function (x) { return x.w !== d.w; })) ds.push(d);
+        if (!isSingleLetter(d) && d.w !== t.w && d.vi !== t.vi && ds.every(function (x) { return x.w !== d.w; })) ds.push(d);
       }
       if (ds.length < dist) continue;
       var opts = shuffle([t.w].concat(ds.map(function (d) { return d.w; })));
-      rounds.push({ vi: t.vi, correct: t.w, options: opts });
+      /* v105: ban do hien thi cua moi lua chon (vd "banh mi" -> "bánh
+         mì") de game ve dung dang co dau; so sanh dap an van dung
+         chuoi goc (options). */
+      var dm = {};
+      dm[t.w] = displayWord(t);
+      ds.forEach(function (d) { dm[d.w] = displayWord(d); });
+      rounds.push({ vi: t.vi, correct: t.w, options: opts, disp: dm });
     }
     return rounds;
   }
@@ -656,11 +690,25 @@
       ctx.stroke();
     });
   }
+  /* v105: bien sau co chieu sau that (xa — giua — gan), dung he mau
+     chàm + hổ phách + teal cua ART_DIRECTION.md cho san hô/rong bien/
+     cá, xanh bien chi o gradient nuoc: mat nuoc sang tren, day bien
+     chàm đậm duoi; tia sang, da xa mo, ca nhieu lop, san hô + rong
+     bien tien canh o hai goc day, cat + soi, bot khi noi. Vi tri
+     xac dinh theo chi so (khong random moi khung) de khong nhap nhay. */
   function paintSea(ctx, W, H, t) {
     var g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#7DD3FC"); g.addColorStop(1, "#1D4E89");
+    g.addColorStop(0, "#4A90C2"); g.addColorStop(0.45, "#2A6BA0");
+    g.addColorStop(0.75, "#1D4E89"); g.addColorStop(1, "#0B1B3A");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-    /* Tia sáng từ mặt nước. */
+    /* Lop xa: da + san hô mo o chan troi (xa mo, gan ro). */
+    ctx.fillStyle = "rgba(11,27,58,.35)";
+    [[0.08, 0.3, 0.16], [0.3, 0.22, 0.12], [0.55, 0.34, 0.18], [0.78, 0.26, 0.13], [0.94, 0.3, 0.1]].forEach(function (r) {
+      ctx.beginPath();
+      ctx.ellipse(W * r[0], H * 0.86, W * r[2], H * r[1] * 0.5, 0, Math.PI, 0);
+      ctx.fill();
+    });
+    /* Tia sang tu mat nuoc — rong, mem, lac nhe. */
     ctx.fillStyle = "rgba(255,255,255,.10)";
     [0.18, 0.5, 0.8].forEach(function (rx, i) {
       var sway = Math.sin(t / 1600 + i * 2) * 10;
@@ -671,33 +719,82 @@
       ctx.lineTo(W * rx + sway - 8, H * 0.55);
       ctx.closePath(); ctx.fill();
     });
-    /* Đáy biển + rong biển đung đưa + cá nhỏ. */
+    ctx.fillStyle = "rgba(253,230,138,.07)";
+    ctx.beginPath();
+    ctx.moveTo(W * 0.34 + Math.sin(t / 2000) * 8 - 12, 0);
+    ctx.lineTo(W * 0.34 + Math.sin(t / 2000) * 8 + 12, 0);
+    ctx.lineTo(W * 0.34 + Math.sin(t / 2000) * 8 + 30, H * 0.4);
+    ctx.lineTo(W * 0.34 + Math.sin(t / 2000) * 8 - 2, H * 0.4);
+    ctx.closePath(); ctx.fill();
+    /* Ca nhieu lop: xa nho mo, gan to ro — boi ngang, lac nhe. */
+    function fish(fx, fy, len, alpha, dir, wob) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(fx, fy + Math.sin(t / 1300 + wob) * 4);
+      ctx.scale(dir, 1);
+      ctx.fillStyle = "#0B1030";
+      ctx.beginPath(); ctx.ellipse(0, 0, len, len * 0.45, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-len * 0.85, 0); ctx.lineTo(-len * 1.4, -len * 0.5); ctx.lineTo(-len * 1.4, len * 0.5);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#F59E0B";
+      ctx.beginPath(); ctx.arc(len * 0.45, -len * 0.08, len * 0.09, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+    fish(W * 0.3 + Math.sin(t / 2600) * 14, H * 0.28, 9, 0.35, 1, 0);
+    fish(W * 0.68 - Math.sin(t / 2400 + 2) * 14, H * 0.42, 11, 0.45, -1, 2);
+    fish(W * 0.82 + Math.sin(t / 3000 + 4) * 18, H * 0.2, 8, 0.3, -1, 4);
+    fish(W * 0.16 + Math.sin(t / 2200 + 1) * 16, H * 0.55, 15, 0.65, 1, 1);
+    fish(W * 0.58 - Math.sin(t / 2800 + 3) * 12, H * 0.62, 13, 0.55, -1, 3);
+    /* Hat phu du troi. */
+    ctx.fillStyle = "rgba(255,255,255,.35)";
+    for (var pd = 0; pd < 14; pd++) {
+      var px = (pd * 67 + 20) % W, py = ((pd * 53) + (t || 0) * 0.006) % H;
+      ctx.beginPath(); ctx.arc(px, py, pd % 3 === 0 ? 2 : 1.2, 0, Math.PI * 2); ctx.fill();
+    }
+    /* Day bien: cat + bong mo + soi. */
     ctx.fillStyle = "#E7C98B";
     ctx.beginPath();
     ctx.ellipse(W * 0.5, H + 18, W * 0.62, 46, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = "#1E9E6A"; ctx.lineWidth = 5; ctx.lineCap = "round";
-    [0.1, 0.22, 0.88, 0.95].forEach(function (sx, i) {
-      var sway2 = Math.sin(t / 1100 + i * 1.7) * 8;
+    ctx.fillStyle = "rgba(11,27,58,.18)";
+    ctx.beginPath();
+    ctx.ellipse(W * 0.5, H + 6, W * 0.5, 16, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "rgba(30,27,75,.35)";
+    [[0.3, 0.93], [0.62, 0.95], [0.45, 0.97]].forEach(function (sp) {
+      ctx.beginPath(); ctx.ellipse(W * sp[0], H * sp[1], 9, 5, 0, 0, Math.PI * 2); ctx.fill();
+    });
+    /* Tien canh: san hô ho phach + teal o hai goc day, rong bien teal
+       dung dua giua cac khe — khung canh, khong che bong bong. */
+    function coral(bx, base, s, col) {
+      ctx.strokeStyle = col; ctx.lineWidth = 5; ctx.lineCap = "round";
+      [-1, -0.4, 0.3, 1].forEach(function (k, i) {
+        var sway2 = Math.sin(t / 1100 + i * 1.7 + bx) * 5;
+        ctx.beginPath();
+        ctx.moveTo(bx, base);
+        ctx.quadraticCurveTo(bx + k * 8 + sway2, base - s * 0.5, bx + k * 16 + sway2 * 1.5, base - s * (0.7 + (i % 2) * 0.25));
+        ctx.stroke();
+      });
+    }
+    coral(W * 0.06, H - 6, 52, "#F59E0B");
+    coral(W * 0.13, H - 4, 38, "#0D9488");
+    coral(W * 0.94, H - 6, 56, "#0D9488");
+    coral(W * 0.87, H - 4, 40, "#F59E0B");
+    ctx.strokeStyle = "#0D9488"; ctx.lineWidth = 5; ctx.lineCap = "round";
+    [0.22, 0.78].forEach(function (sx, i) {
+      var sway3 = Math.sin(t / 1100 + i * 1.7) * 8;
       var base = H - 8;
       ctx.beginPath();
       ctx.moveTo(W * sx, base);
-      ctx.quadraticCurveTo(W * sx + sway2, base - 40, W * sx + sway2 * 1.6, base - 74 - (i % 2) * 14);
+      ctx.quadraticCurveTo(W * sx + sway3, base - 40, W * sx + sway3 * 1.6, base - 74 - (i % 2) * 14);
       ctx.stroke();
     });
-    ctx.fillStyle = "rgba(15,23,42,.45)";
-    [[0.3, 0.3], [0.68, 0.45]].forEach(function (fp, i) {
-      var fx = W * fp[0] + Math.sin(t / 1300 + i * 3) * 12, fy = H * fp[1];
-      ctx.beginPath(); ctx.ellipse(fx, fy, 12, 6, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(fx - 12, fy); ctx.lineTo(fx - 20, fy - 6); ctx.lineTo(fx - 20, fy + 6);
-      ctx.closePath(); ctx.fill();
-    });
-    /* Bọt khí nhỏ nổi lên. */
+    /* Bot khi nho noi len. */
     ctx.fillStyle = "rgba(255,255,255,.5)";
-    for (var b = 0; b < 8; b++) {
+    for (var b = 0; b < 10; b++) {
       var by = H - ((t / 22 + b * 90) % H);
-      ctx.beginPath(); ctx.arc(W * (0.12 + b * 0.11), by, 2.5, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(W * (0.1 + b * 0.09), by, b % 3 === 0 ? 3.5 : 2.5, 0, Math.PI * 2); ctx.fill();
     }
   }
 
@@ -705,6 +802,7 @@
     escHtml: escHtml, shuffle: shuffle, pool: pool,
     trackKey: trackKey, pinyinPlain: pinyinPlain, trackSets: trackSets,
     trackPool: pool, isTypeable: isTypeable,
+    isSingleLetter: isSingleLetter, stripDiacritics: stripDiacritics, displayWord: displayWord,
     pickSetWords: pickSetWords, pickTypingWords: pickTypingWords,
     buildRounds: buildRounds, hearts: hearts,
     openStage: openStage, closeStage: closeStage, endScreen: endScreen,

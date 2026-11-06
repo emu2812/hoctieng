@@ -33,18 +33,23 @@
     var ti = 0, guard = 0;
     while (rounds.length < n && guard++ < 300) {
       var theme = themes[ti % themes.length]; ti++;
-      var cands = G71.shuffle(byTheme[theme].slice()).filter(function (w) { return !used[w.w]; });
+      var cands = G71.shuffle(byTheme[theme].slice()).filter(function (w) { return !used[w.w] && !G71.isSingleLetter(w); });
       if (!cands.length) continue;
       var t = cands[0];
       var ds = [];
       var rest = G71.shuffle(p.slice());
       for (var j = 0; j < rest.length && ds.length < dist; j++) {
         var d = rest[j];
-        if (d.w !== t.w && d.vi !== t.vi && ds.every(function (x) { return x.w !== d.w; })) ds.push(d);
+        if (!G71.isSingleLetter(d) && d.w !== t.w && d.vi !== t.vi && ds.every(function (x) { return x.w !== d.w; })) ds.push(d);
       }
       if (ds.length < dist) continue;
       used[t.w] = true;
-      rounds.push({ vi: t.vi, correct: t.w, options: G71.shuffle([t.w].concat(ds.map(function (d) { return d.w; }))), theme: theme });
+      /* v105: ban do hien thi cua moi lua chon (vd "banh mi" -> "bánh
+         mì"); so sanh dap an van dung chuoi goc. */
+      var dm = {};
+      dm[t.w] = G71.displayWord(t);
+      ds.forEach(function (d) { dm[d.w] = G71.displayWord(d); });
+      rounds.push({ vi: t.vi, correct: t.w, options: G71.shuffle([t.w].concat(ds.map(function (d) { return d.w; }))), theme: theme, disp: dm });
     }
     return rounds.length >= 3 ? rounds : G71.buildRounds(n, dist);
   }
@@ -80,7 +85,7 @@
       st.clouds = [];
       for (var li = 0; li < 3; li++) {
         st.clouds.push({ lane: li, x: 1.18 + li * 0.05, kind: "word",
-          word: rd.options[li], golden: li === st.goldenLane[st.round] });
+          word: rd.options[li], disp: (rd.disp && rd.disp[rd.options[li]]) || rd.options[li], golden: li === st.goldenLane[st.round] });
       }
       if (Math.random() < 0.35) {
         st.clouds.push({ lane: Math.floor(Math.random() * 3), x: 1.45, kind: "storm" });
@@ -441,7 +446,7 @@
           G71.drawFitText(ctx, "★", cx + cg.hw - 6, cy - cg.hh - 4, 22, 15, 11, 1, "800");
         }
         ctx.fillStyle = "#1F2430";
-        G71.drawFitText(ctx, c.word, cx, cy, cg.hw * 2 - 24, 18, 11, 2, "700");
+        G71.drawFitText(ctx, c.disp || c.word, cx, cy, cg.hw * 2 - 24, 18, 11, 2, "700");
       });
       /* Chủ đề vòng (góc trái trên): nền trắng đặc để chữ không đè lên
          mây trôi phía sau (sửa xấu 18:11). */

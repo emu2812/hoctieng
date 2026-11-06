@@ -568,7 +568,7 @@
     W = W || 360; H = H || 500;
     var mType = m.type || m.w;
     var isPh = !!(m.isPhrase && m.phrase);
-    var dispTop = isPh ? m.phrase.display : m.w;
+    var dispTop = isPh ? m.phrase.display : G71.displayWord(m);
     var dispBot = isPh ? phraseSpaced(m.phrase) : mType;
     var tw = Math.max(textWpx(dispTop), textWpx(dispBot)) + 30;
     var gwW = 0;
@@ -1400,7 +1400,7 @@
       var s = m.isBoss ? 34 : 24;
       var mType = m.type || m.w;
       var pillH = (mType !== m.w) ? 54 : 34;
-      var disp = (m.isPhrase && m.phrase) ? m.phrase.display : m.w;
+      var disp = (m.isPhrase && m.phrase) ? m.phrase.display : G71.displayWord(m);
       var typeSp = (m.isPhrase && m.phrase) ? phraseSpaced(m.phrase) : mType;
       var tw;
       try {
@@ -1502,7 +1502,7 @@
     var mType = m.type || m.w;
     var mTwo = mType !== m.w;
     var isPh = !!(m.isPhrase && m.phrase);
-    var dispTop = isPh ? m.phrase.display : m.w;
+    var dispTop = isPh ? m.phrase.display : G71.displayWord(m);
     var dispBot = isPh ? phraseSpaced(m.phrase) : mType;
     ctx.font = "700 17px system-ui, sans-serif";
     var mWide = (ctx.measureText(dispTop).width >= ctx.measureText(dispBot).width) ? dispTop : dispBot;
@@ -1553,7 +1553,7 @@
     } else if (mTwo) {
       ctx.font = "700 16px system-ui, sans-serif";
       ctx.fillStyle = "#fff";
-      ctx.fillText(m.w, pillX - ctx.measureText(m.w).width / 2, pillY - 6);
+      ctx.fillText(dispTop, pillX - ctx.measureText(dispTop).width / 2, pillY - 6);
       var done = mType.slice(0, m.progress), rest = mType.slice(m.progress);
       ctx.font = "700 13px system-ui, sans-serif";
       var x0 = pillX - ctx.measureText(mType).width / 2;
@@ -1562,8 +1562,11 @@
       ctx.fillStyle = "#fff";
       ctx.fillText(rest, x0 + ctx.measureText(done).width, pillY + 14);
     } else {
-      var done2 = mType.slice(0, m.progress), rest2 = mType.slice(m.progress);
-      var x02 = pillX - ctx.measureText(mType).width / 2;
+      /* v105: hien dang co dau ("bánh mì") khi dai bang chuoi go. */
+      var dispOne = G71.displayWord(m);
+      var showOne = (dispOne.length === mType.length) ? dispOne : mType;
+      var done2 = showOne.slice(0, m.progress), rest2 = showOne.slice(m.progress);
+      var x02 = pillX - ctx.measureText(showOne).width / 2;
       ctx.fillStyle = C.amber100;
       ctx.fillText(done2, x02, pillY + 6);
       ctx.fillStyle = "#fff";
@@ -1768,6 +1771,16 @@
     var dictCount = Object.keys(RL.dict).length;
     var reg = regionById(curRegion);
     var prog = regionProg(RL, curRegion);
+    /* v105: ban do that — duong di uon luon (SVG noi cac nut ai) thay
+       cho luoi the trang giong het nhau. Moi ai co phu de RIENG bang
+       so that (quai/tran + mau quai tang theo ai; ai 10 la trum voi
+       mau that), ten ai khong ngat giua chung (nowrap), vung khoa van
+       doc duoc (xem truoc duoc, chu khong bi disabled mo). */
+    var ACCENT = { teal: "#0D9488", amber: "#B45309", indigo: "#4338CA", fire: "#B45309" };
+    var accent = ACCENT[reg.accent] || "#B45309";
+    var regionIsOpen = regionOpen(RL, curRegion);
+    var nextLv = 0;
+    for (var nl = 1; nl <= 10; nl++) { if (!prog.cleared[nl] && nl <= prog.unlocked) { nextLv = nl; break; } }
     var html = '<h2 style="margin:4px 0 2px;">🔥 Rồng Lửa — 5 Vùng</h2>'
       + '<p class="mut" style="margin:6px 0 12px;">Vương quốc Ngôn Ngữ bị Bóng Tối Câm Lặng phong ấn, các từ bị đánh cắp. Rồng nhỏ lên đường thu hồi từng từ — bắt đầu từ Rừng Xanh, qua 5 vùng tới Núi Lửa.</p>'
       + '<p style="font-weight:700;margin:6px 0;">' + rlImgTag("coin", 20) + ' Vàng: ' + RL.gold + (RL.shield ? ' &nbsp;·&nbsp; ' + rlImgTag("shield", 20) + ' Khiên: ' + RL.shield : '') + '</p>'
@@ -1777,27 +1790,57 @@
       var label = rg.icon + " " + rg.name + (open ? "" : " 🔒");
       html += '<button class="btn" data-rl-region-tab="' + rg.id + '"'
         + (rg.id === curRegion ? ' style="background:#F59E0B;border-color:#B45309;color:#fff;"' : '')
-        + (open ? '' : ' disabled title="Qua trùm vùng trước hoặc đủ ' + xpNeedFor(rg.id) + ' XP để mở"') + '>' + label + '</button>';
+        + (open ? '' : ' style="background:#FFFBEB;border-color:#1E1B4B;color:#1E1B4B;" title="Chưa mở: qua trùm vùng trước hoặc đủ ' + xpNeedFor(rg.id) + ' XP — bấm để xem trước"') + '>' + label + '</button>';
     });
-    html += '</div>'
-      + '<h3 style="margin:8px 0 4px;">' + reg.icon + ' ' + reg.name + ' — Vùng ' + reg.id + ' · chủ đề ' + reg.theme + '</h3>'
+    html += '</div>';
+    if (!regionIsOpen) {
+      var prevBoss = curRegion > 1 ? REGIONS[curRegion - 2].boss : "";
+      html += '<p style="margin:4px 0 12px;font-weight:700;background:#FFFBEB;border:2px solid #1E1B4B;border-radius:20px;padding:10px 14px;">🔒 Vùng này chưa mở — thắng ' + prevBoss + ' hoặc đủ ' + xpNeedFor(curRegion) + ' XP để mở. Bạn đang xem trước bản đồ, chưa chơi được.</p>';
+    }
+    html += '<h3 style="margin:8px 0 4px;color:' + accent + ';">' + reg.icon + ' ' + reg.name + ' — Vùng ' + reg.id + ' · chủ đề ' + reg.theme + '</h3>'
       + '<p class="mut" style="margin:4px 0 12px;">' + reg.desc + ' Trùm vùng: <b>' + reg.boss + '</b> (ải 10, đổi hệ sau mỗi 1/3 máu).</p>';
     var wth = weatherFor(curRegion);
     if (wth) html += '<p style="margin:4px 0 12px;font-weight:700;">' + wth.icon + ' Thời tiết vùng: ' + wth.name + ' (' + wth.season + ') — chiêu hệ ' + ELEMENTS[wth.element].name + ' +50%.</p>';
     var note = regionPoolNote(curRegion);
     if (note) html += '<p class="mut" style="margin:4px 0 12px;">⚠️ ' + note + '</p>';
-    html += '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0;">';
+    /* Duong di uon luon: nut ai xen ke trai/phai (man rong), mot cot
+       (man hep); SVG noi tam cac nut, ve sau khi gan DOM. */
+    html += '<style>#rlMapPath .rlNode{display:flex;align-items:flex-start;gap:12px;position:relative;z-index:1;margin:0 0 18px;}'
+      + '@media (min-width:560px){#rlMapPath .rlNode:nth-child(even){flex-direction:row-reverse;}}</style>'
+      + '<div id="rlMapPath" style="position:relative;max-width:720px;margin:14px auto 4px;">'
+      + '<svg id="rlMapSvg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></svg>'
+      + '<div id="rlMapNodes" style="position:relative;z-index:1;">';
     for (var lv = 1; lv <= 10; lv++) {
       var cleared = !!prog.cleared[lv];
-      var open = lv <= prog.unlocked;
-      var st = cleared ? "✅ Đã qua" : (open ? "▶ Mở" : "🔒 Chưa mở");
-      html += '<section class="card" style="margin:0;"><h3 style="margin:0 0 4px;">Ải ' + lv + " — " + reg.stages[lv - 1] + '</h3>'
-        + '<p class="mut" style="margin:4px 0;">3 trận · chủ đề ' + reg.theme + (lv === 10 ? ' · trùm ' + reg.boss : '') + '</p>'
-        + '<p style="margin:4px 0;font-weight:700;">' + st + '</p>'
+      var open = stageOpen(RL, curRegion, lv);
+      var isBoss = (lv === 10);
+      var isNext = (lv === nextLv);
+      var sub, stTxt, badgeTxt, badgeBg, badgeFg, badgeBd, cardBd;
+      if (isBoss) {
+        sub = reg.boss + ' · ' + LOGIC.bossHp(curRegion) + ' máu · đổi hệ sau mỗi 1/3 máu';
+      } else {
+        sub = '3 trận · ' + LOGIC.battleSize(lv, 1) + '–' + LOGIC.battleSize(lv, 3) + ' quái/trận · quái ' + LOGIC.monsterHp(lv, curRegion) + ' máu';
+      }
+      if (!regionIsOpen) { stTxt = '🔒 Vùng chưa mở — xem bản đồ trước'; }
+      else if (cleared) { stTxt = '✅ Đã qua — chơi lại để luyện từ'; }
+      else if (isNext) { stTxt = '🐉 Rồng đang ở đây — chơi ải này tiếp'; }
+      else if (open) { stTxt = '▶ Mở'; }
+      else if (lv === prog.unlocked + 1) { stTxt = '🔒 Thắng ải ' + prog.unlocked + ' để mở'; }
+      else { stTxt = '🔒 Thắng các ải trước để mở'; }
+      if (cleared) { badgeTxt = '✓'; badgeBg = '#0D9488'; badgeFg = '#fff'; badgeBd = '#0D9488'; cardBd = '#0D9488'; }
+      else if (isBoss) { badgeTxt = '👑'; badgeBg = '#F59E0B'; badgeFg = '#1E1B4B'; badgeBd = '#B45309'; cardBd = '#B45309'; }
+      else if (open) { badgeTxt = String(lv); badgeBg = '#F59E0B'; badgeFg = '#1E1B4B'; badgeBd = '#B45309'; cardBd = '#F59E0B'; }
+      else { badgeTxt = String(lv); badgeBg = '#FFFBEB'; badgeFg = '#1E1B4B'; badgeBd = '#1E1B4B'; cardBd = '#C7D2FE'; }
+      html += '<div class="rlNode" data-rl-lv="' + lv + '">'
+        + '<div class="rlNodeBadge" style="flex:none;width:' + (isBoss ? 64 : 54) + 'px;height:' + (isBoss ? 64 : 54) + 'px;border-radius:50%;background:' + badgeBg + ';color:' + badgeFg + ';border:2px solid ' + badgeBd + ';display:flex;align-items:center;justify-content:center;font-size:' + (isBoss ? 26 : 20) + 'px;font-weight:700;box-shadow:0 3px 10px rgba(4,6,15,.25);' + (isNext ? 'outline:3px solid #FDE68A;outline-offset:2px;' : '') + '">' + badgeTxt + '</div>'
+        + '<section class="card rlStageCard" data-rl-stage="' + lv + '" style="margin:0;flex:1;min-width:0;border:2px solid ' + cardBd + ';">'
+        + '<div style="font-weight:700;font-size:15px;display:flex;flex-wrap:wrap;gap:0 6px;align-items:baseline;"><span style="white-space:nowrap;">Ải ' + lv + '</span><span>—</span><span class="rlStageName" style="white-space:nowrap;">' + reg.stages[lv - 1] + '</span></div>'
+        + '<p class="rlStageSub mut" style="margin:4px 0;">' + sub + '</p>'
+        + '<p style="margin:4px 0;font-weight:700;">' + stTxt + '</p>'
         + (open ? '<div class="row"><button class="btn btn-primary" data-rl-region="' + curRegion + '" data-rl-level="' + lv + '">Chơi ải ' + lv + '</button></div>' : '')
-        + '</section>';
+        + '</section></div>';
     }
-    html += '</div>';
+    html += '</div></div>';
     if (RL.endless) {
       html += '<section class="card" style="margin:0 0 12px;"><h3 style="margin:0 0 4px;">♾️ Chế độ Vô Tận</h3>'
         + '<p class="mut" style="margin:4px 0;">Đã thắng trùm Núi Lửa! Quái kéo tới từng đợt, càng về sau càng đông và càng nhanh. Kỷ lục của bạn: <b>' + (RL.endlessBest || 0) + ' đợt</b>.</p>'
@@ -1845,6 +1888,48 @@
     if (rb) rb.onclick = startRescue;
     box.querySelector("#rlDictBtn").onclick = showDict;
     box.querySelector("#rlBackBtn").onclick = function () { stage.close(); };
+    /* v105: ve duong di uon luon noi tam cac nut ai (do vi tri that sau
+       khi gan DOM); ve lai khi doi co man hinh. */
+    function drawMapPath() {
+      var pathBox = box.querySelector("#rlMapPath");
+      var svg = box.querySelector("#rlMapSvg");
+      if (!pathBox || !svg || !box.isConnected) return;
+      var badges = box.querySelectorAll(".rlNodeBadge");
+      if (!badges.length) return;
+      var pr = pathBox.getBoundingClientRect();
+      if (!pr.width || !pr.height) return;
+      var pts = [];
+      badges.forEach(function (bd) {
+        var r = bd.getBoundingClientRect();
+        pts.push({ x: r.left - pr.left + r.width / 2, y: r.top - pr.top + r.height / 2 });
+      });
+      var d = "M " + pts[0].x.toFixed(1) + " " + pts[0].y.toFixed(1);
+      for (var i = 1; i < pts.length; i++) {
+        var p0 = pts[i - 1], p1 = pts[i];
+        var my = (p0.y + p1.y) / 2;
+        d += " C " + p0.x.toFixed(1) + " " + my.toFixed(1) + ", " + p1.x.toFixed(1) + " " + my.toFixed(1) + ", " + p1.x.toFixed(1) + " " + p1.y.toFixed(1);
+      }
+      svg.setAttribute("viewBox", "0 0 " + pr.width + " " + pr.height);
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var NS = "http://www.w3.org/2000/svg";
+      function mkPath(stroke, width, dash, opacity) {
+        var p = document.createElementNS(NS, "path");
+        p.setAttribute("d", d); p.setAttribute("fill", "none");
+        p.setAttribute("stroke", stroke); p.setAttribute("stroke-width", String(width));
+        p.setAttribute("stroke-linecap", "round");
+        if (dash) p.setAttribute("stroke-dasharray", dash);
+        if (opacity) p.setAttribute("opacity", opacity);
+        return p;
+      }
+      svg.appendChild(mkPath("#ffffff", 9, null, "0.7"));
+      svg.appendChild(mkPath(accent, 5, "1 13", null));
+    }
+    drawMapPath();
+    function onMapResize() {
+      if (!box.isConnected) { try { window.removeEventListener("resize", onMapResize); } catch (e) {} return; }
+      drawMapPath();
+    }
+    try { window.addEventListener("resize", onMapResize); } catch (e) {}
   }
 
   function showDict() {

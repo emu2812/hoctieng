@@ -59,20 +59,20 @@
       if (hi < lo) { lo = r + 4; hi = W - r - 4; }
       return [lo, hi];
     }
-    function spawnBubble(word, top, slot) {
+    function spawnBubble(word, top, slot, disp) {
       var W = cv.width || 360, H = cv.height || 480;
-      var r = radiusFor(word);
+      var r = radiusFor(disp || word);
       var cx = G71.bubbleSlotX(W, SLOTS, slot);
       var bd = slotBounds(W, slot, r);
       var x = Math.max(bd[0], Math.min(bd[1], cx + (Math.random() - 0.5) * 16));
-      return { word: word, slot: slot,
+      return { word: word, disp: disp || word, slot: slot,
         x: x, y: top ? -60 : H + 40 + slot * 70,
         r: r, vy: 26 + Math.random() * 22, ph: Math.random() * 6.28 };
     }
     function loadRound() {
       var rd = st.rounds[st.round];
       if (!rd) return;
-      bubbles = rd.options.map(function (opt, i) { return spawnBubble(opt, false, i); });
+      bubbles = rd.options.map(function (opt, i) { return spawnBubble(opt, false, i, rd.disp && rd.disp[opt]); });
     }
     function hud() {
       var rd = st.rounds[Math.min(st.round, st.rounds.length - 1)];
@@ -176,8 +176,11 @@
             if (rd) {
               var taken = bubbles.map(function (x) { return x.word; });
               taken.push(rd.correct);
-              var cand = G71.pool().filter(function (p) { return taken.indexOf(p.w) < 0; });
-              if (cand.length) bubbles.push(spawnBubble(cand[Math.floor(Math.random() * cand.length)].w, false, freedSlot));
+              var cand = G71.pool().filter(function (p) { return taken.indexOf(p.w) < 0 && !G71.isSingleLetter(p); });
+              if (cand.length) {
+                var pick = cand[Math.floor(Math.random() * cand.length)];
+                bubbles.push(spawnBubble(pick.w, false, freedSlot, G71.displayWord(pick)));
+              }
             }
           }
           hud();
@@ -189,16 +192,24 @@
       ctx.clearRect(0, 0, W, H);
       G71.paintSea(ctx, W, H, now);
       bubbles.forEach(function (b) {
-        /* Bong bóng đặc hơn + chữ có viền trắng để đọc được dưới nước. */
-        ctx.fillStyle = "rgba(255,255,255,.55)";
+        /* v105: bong bóng co gradient + diem sang + vien sang — nhin
+           la bong bóng that, khong phai hinh tron phang; chu doc ro
+           tren nen trang mo, hien dang co dau cua tu vay tieng Viet. */
+        var bg = ctx.createRadialGradient(b.x - b.r * 0.35, b.y - b.r * 0.4, b.r * 0.1, b.x, b.y, b.r);
+        bg.addColorStop(0, "rgba(255,255,255,.92)");
+        bg.addColorStop(0.55, "rgba(255,255,255,.55)");
+        bg.addColorStop(1, "rgba(199,210,254,.35)");
+        ctx.fillStyle = bg;
         ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2); ctx.fill();
         ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.lineWidth = 2;
         ctx.stroke();
-        ctx.fillStyle = "rgba(255,255,255,.9)";
+        ctx.strokeStyle = "rgba(245,158,11,.45)"; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(b.x, b.y, b.r - 2, Math.PI * 0.9, Math.PI * 1.6); ctx.stroke();
+        ctx.fillStyle = "rgba(255,255,255,.95)";
         ctx.beginPath(); ctx.arc(b.x - b.r * 0.35, b.y - b.r * 0.4, b.r * 0.16, 0, Math.PI * 2); ctx.fill();
         ctx.beginPath(); ctx.arc(b.x - b.r * 0.2, b.y - b.r * 0.28, b.r * 0.07, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = "#0F172A";
-        G71.drawFitText(ctx, b.word, b.x, b.y, b.r * 2 - 16, 16, 10, 3, "700", "rgba(255,255,255,.9)");
+        G71.drawFitText(ctx, b.disp || b.word, b.x, b.y, b.r * 2 - 16, 16, 10, 3, "700", "rgba(255,255,255,.9)");
       });
       parts.forEach(function (p) {
         ctx.fillStyle = "rgba(255,255,255,.9)";
@@ -209,14 +220,25 @@
         ctx.beginPath(); ctx.arc(bl.x, bl.y, 5, 0, Math.PI * 2);
         ctx.fillStyle = "#FDE68A"; ctx.fill();
       });
+      /* v105: sung dung he chàm + ho phach + teal (ART_DIRECTION.md):
+         nong chàm đậm, dau nong ho phach, de ho phach vien chàm đậm,
+         tam kem + cham teal — khong con cam do #F05A28 / den #1F2430. */
       var cx0 = W / 2, cy0 = H - 64;
-      ctx.strokeStyle = "#1F2430"; ctx.lineWidth = 8; ctx.lineCap = "round";
+      var tipX = cx0 + Math.cos(aim) * 52, tipY = cy0 + Math.sin(aim) * 52;
+      ctx.strokeStyle = "#1E1B4B"; ctx.lineWidth = 9; ctx.lineCap = "round";
       ctx.beginPath(); ctx.moveTo(cx0, cy0);
-      ctx.lineTo(cx0 + Math.cos(aim) * 52, cy0 + Math.sin(aim) * 52); ctx.stroke();
-      ctx.fillStyle = "#F05A28";
+      ctx.lineTo(cx0 + Math.cos(aim) * 40, cy0 + Math.sin(aim) * 40); ctx.stroke();
+      ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 9; ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(cx0 + Math.cos(aim) * 40, cy0 + Math.sin(aim) * 40);
+      ctx.lineTo(tipX, tipY); ctx.stroke();
+      ctx.fillStyle = "#F59E0B";
       ctx.beginPath(); ctx.arc(cx0, cy0, 24, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = "#fff";
-      ctx.beginPath(); ctx.arc(cx0, cy0, 10, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#B45309"; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = "#FFFBEB";
+      ctx.beginPath(); ctx.arc(cx0, cy0, 11, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#0D9488";
+      ctx.beginPath(); ctx.arc(cx0, cy0, 4.5, 0, Math.PI * 2); ctx.fill();
       G71.drawSnake(ctx, W - 56, H - 36, 18, true);
       maybeEnd();
       if (running) requestAnimationFrame(frame);

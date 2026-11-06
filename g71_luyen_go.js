@@ -541,13 +541,19 @@
         if (py < -30 || py > H + 30) return;
         var isHl = (st.active === i) || (targetW === wd);
         /* v91: track tieng Trung hien 2 dong — chu Han o tren, pinyin
-           (chuoi go) o duoi co to mau tien trinh; cac track khac 1 dong. */
+           (chuoi go) o duoi co to mau tien trinh; cac track khac 1 dong.
+           v105: vien hien dang co dau cua tu vay tieng Viet ("banh mi"
+           -> "bánh mì"); chuoi go van la Latin khong dau. Dang hien
+           thi dai bang chuoi go theo tung ky tu (dau tieng Viet khong
+           doi do dai) nen to mau tien trinh theo chi so van dung. */
         var wdType = wd.type || wd.w;
+        var dispW = G71.displayWord(wd);
+        var dispType = (dispW.length === wdType.length) ? dispW : wdType;
         var twoLine = wdType !== wd.w;
         ctx.font = "700 17px system-ui, sans-serif";
-        var wide = (ctx.measureText(wd.w).width >= ctx.measureText(wdType).width) ? wd.w : wdType;
+        var wide = (ctx.measureText(dispW).width >= ctx.measureText(dispType).width) ? dispW : dispType;
         G71.fitFont(ctx, wide, Math.max(60, W - 32), 17, 12, "700");
-        var tw = Math.max(ctx.measureText(wd.w).width, ctx.measureText(wdType).width) + 28;
+        var tw = Math.max(ctx.measureText(dispW).width, ctx.measureText(dispType).width) + 28;
         var px = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, wd.x * W));
         /* v101: viên chàm đậm; đang khóa thì viền hổ phách + quầng sáng
            hổ phách nhịp, chưa khóa viền chàm nhạt. */
@@ -562,7 +568,7 @@
           ctx.stroke();
           ctx.font = "700 16px system-ui, sans-serif";
           ctx.fillStyle = "#fff";
-          ctx.fillText(wd.w, px - ctx.measureText(wd.w).width / 2, py - 6);
+          ctx.fillText(dispW, px - ctx.measureText(dispW).width / 2, py - 6);
           var done = wdType.slice(0, wd.progress), rest = wdType.slice(wd.progress);
           ctx.font = "700 13px system-ui, sans-serif";
           var x0 = px - ctx.measureText(wdType).width / 2;
@@ -578,8 +584,8 @@
           ctx.strokeStyle = isHl ? "#F59E0B" : "#C7D2FE";
           ctx.lineWidth = 2;
           ctx.stroke();
-          var done2 = wdType.slice(0, wd.progress), rest2 = wdType.slice(wd.progress);
-          var x02 = px - ctx.measureText(wdType).width / 2;
+          var done2 = dispType.slice(0, wd.progress), rest2 = dispType.slice(wd.progress);
+          var x02 = px - ctx.measureText(dispType).width / 2;
           ctx.fillStyle = "#FDE68A";
           ctx.fillText(done2, x02, py + 6);
           ctx.fillStyle = "#fff";
