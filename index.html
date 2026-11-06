@@ -9882,6 +9882,18 @@ function msSrLang(track) { return track === "zh" ? "zh-CN" : track === "tp" ? "k
 function msSpeakChecks() { return ["Nói đúng tình huống (đúng người, đúng việc cần nói)", "Dùng từ đúng chủ đề của chặng", "Câu đúng trật tự, người nghe hiểu được", "Đã nghe lại bản ghi của mình và đối chiếu với câu mẫu"]; }
 function msWriteChecks() { return ["Trả lời đúng yêu cầu đề", "Ý nối nhau mạch lạc, có mở đầu và kết", "Từ đúng chủ đề của chặng", "Câu đúng ngữ pháp cơ bản, dấu câu đúng"]; }
 function msIsVip() { try { return !!(typeof authState !== "undefined" && authState.vip); } catch (e) { return false; } }
+/* v104 Chặng 7 — AI chấm sâu Nói/Viết CHỈ mở cho VIP (luật đứng: AI chỉ cho
+   VIP do Bùi cấp). Tài khoản thường/khách thấy rõ thông báo + bảng tự đối
+   chiếu theo đúng 4 tiêu chí — KHÔNG phải điểm máy chấm, KHÔNG có band. */
+function aiVipNoticeHTML(kind) {
+  var checks = kind === "speaking" ? msSpeakChecks() : msWriteChecks();
+  var skill = kind === "speaking" ? "Nói" : "Viết";
+  return '<h3>AI chấm ' + skill + ' 4 tiêu chí — chỉ mở cho VIP</h3>'
+    + '<p>AI chấm sâu theo 4 tiêu chí chính thức chỉ mở cho tài khoản VIP do quản trị viên cấp. Bạn đang dùng tài khoản thường nên web không gọi AI chấm.</p>'
+    + '<p class="mut">Muốn dùng AI chấm, gửi yêu cầu VIP ở mục Của tôi → Tài khoản (xem quy trình cấp trong Cài đặt → Ghi chú).</p>'
+    + '<h3>Tự đối chiếu theo bảng tiêu chí</h3><p class="mut">Bảng dưới đây là tự đối chiếu, không phải điểm máy chấm — không có band.</p><ul>'
+    + checks.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul>';
+}
 function msRowHTML(track, stageKey) {
   var m = msGet(track, stageKey); if (!m) return "";
   var key = msKey(track, stageKey); var d = msDone(key);
@@ -11460,6 +11472,30 @@ function speakLinesHTML(s) {
     return '<p><b>' + esc(ln.who) + ':</b> ' + esc(ln.en) + ' <button class="btn" data-speakline="' + i + '">🔊</button><br><span class="mut">' + esc(ln.vi) + '</span></p>';
   }).join("");
 }
+/* v104 Chặng 7 — AI chấm Nói 4 tiêu chí cho bài Nói (VIP). Tái dùng y hệt
+   máy móc của thi: examSpeakPartHTML/wireExamSpeakPart (ghi âm + chấm phát
+   âm từng chữ qua callPronounce) rồi speakAiBlockHTML/wireSpeakAi (AI chấm
+   4 tiêu chí qua callAiTutorSpeaking). Tài khoản thường chỉ thấy thông báo
+   VIP + bảng tự đối chiếu, không có nút AI, không có band. */
+function spLessonScript(s) { return { lines: (s.lines || []).map(function (ln) { return { who: ln.who, en: ln.en, vi: ln.vi }; }) }; }
+function spLessonAiParts(l, s) {
+  return [{ label: "Toàn bài", script: spLessonScript(s), transcript: ((l.spRec && l.spRec.ai && l.spRec.ai.transcript) || (l.spRec && l.spRec.transcript) || ""), pronounce: (l.spRec && l.spRec.ai) || null }];
+}
+function spLessonAiHTML(l, s) {
+  if (!msIsVip()) return '<div class="qblock"><h3>🎤 Nói lại toàn bài — AI chấm 4 tiêu chí</h3>' + aiVipNoticeHTML("speaking") + '<p class="mut">Bài Nói này đã ghi xong theo phần trắc nghiệm ở trên — phần nói lại chỉ để luyện thêm.</p></div>';
+  var h = '<div class="qblock"><h3>🎤 Nói lại toàn bài — AI chấm 4 tiêu chí</h3></div>';
+  if (!l.spLessonSpoken) return h + examSpeakPartHTML(spLessonScript(s), { skipId: "spLessonRecBtn", continueLabel: "Tiếp tục → AI chấm 4 tiêu chí", failLabel: "Không ghi âm được → AI chấm 4 tiêu chí" });
+  return h + speakAiBlockHTML(l.spAi || {}, spLessonAiParts(l, s));
+}
+function wireSpLessonAi(l, s) {
+  if (!msIsVip()) return;
+  if (!l.spLessonSpoken) {
+    wireExamSpeakPart(l, spLessonScript(s), { skipId: "spLessonRecBtn", continueLabel: "Tiếp tục → AI chấm 4 tiêu chí", failLabel: "Không ghi âm được → AI chấm 4 tiêu chí", onSkip: function () { l.spLessonSpoken = true; render(); }, onScored: function (res) { if (res) l.spAiScore = res.score; } });
+    return;
+  }
+  var sa = l.spAi || (l.spAi = {});
+  wireSpeakAi(l, sa, spLessonAiParts(l, s), { onReRecord: function () { l.spLessonSpoken = false; l.spRec = null; l.spAi = null; l.spAiScore = null; render(); } });
+}
 function renderSkillSpeak(app, l) {
   var s = CONTENT.speaking[l.idx];
   if (!s) { curLesson = null; render(); return; }
@@ -11484,11 +11520,16 @@ function renderSkillSpeak(app, l) {
     return;
   }
   /* DOT honest 28/10/2026: bai mau + ban dich KHONG mo san tren man lam quiz —
-     chi hien o man tong ket sau khi xong (qua finishExtraHTML). */
-  l.finishExtraHTML = '<details open style="margin-bottom:10px"><summary><b>Xem lại bài mẫu</b></summary><div class="qblock">' + speakLinesHTML(s) + '</div></details>';
-  app.innerHTML = '<p class="mut">Sau khi làm xong, hãy tự nói lại toàn bộ bài mẫu thành tiếng (không chấm điểm).</p><div id="quizSlot"></div>';
+     chi hien o man tong ket sau khi xong (qua finishExtraHTML).
+     v104 Chặng 7: man tong ket them khoi "Noi lai toan bai — AI cham 4 tieu chi"
+     (VIP) / tu doi chieu (thuong) trong #spLessonAiSlot; dien + noi day sau
+     moi lan render vi khoi nay phu thuoc trang thai ghi am. */
+  l.finishExtraHTML = '<details open style="margin-bottom:10px"><summary><b>Xem lại bài mẫu</b></summary><div class="qblock">' + speakLinesHTML(s) + '</div></details><div id="spLessonAiSlot"></div>';
+  app.innerHTML = '<p class="mut">Sau khi làm xong, nói lại toàn bộ bài mẫu thành tiếng ở cuối trang — tài khoản VIP được AI chấm 4 tiêu chí, tài khoản thường tự đối chiếu theo bảng tiêu chí.</p><div id="quizSlot"></div>';
   $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speak(s.lines[+b.dataset.speakline].en); }; });
   renderQuizEngine($("#quizSlot"), l, s.quiz || [], "skill", "speak:" + l.idx, 2);
+  var spSlot = $("#spLessonAiSlot");
+  if (spSlot) { spSlot.innerHTML = spLessonAiHTML(l, s); wireSpLessonAi(l, s); }
 }
 function renderSkillRoleplay(app, l) {
   var r = CONTENT.roleplay[l.idx];
@@ -11720,22 +11761,40 @@ function renderSkillWrite(app, l) {
   }
   if (step === 3) {
     var att = (state.writingAttempts || {})[key] || {};
-    app.innerHTML = skillHead("Viết — " + w.title, w.type + (w.band ? " · " + w.band : "")) + finishSummaryHTML("Bạn đã hoàn thành bài viết 3 bước!", '<p>Band AI chấm: <b>' + (att.aiBand != null ? fmtBandComma(att.aiBand) : "?") + '</b> <span class="mut">(Máy ước lượng — không phải điểm thi thật)</span></p><p class="mut">Cả hai bản đã lưu trong tiến trình của bạn.</p>', "") + '<div class="qblock"><h3>Đối chiếu 2 cột — bản gốc và bản sửa</h3><div class="row"><div style="flex:1"><b>Bản gốc (bản nháp)</b><p>' + esc(att.draft || "") + '</p></div><div style="flex:1"><b>Bản sửa (đã lưu)</b><p>' + esc(att.rewrite || "") + '</p></div></div><p class="mut">Bản gốc để đối chiếu, bản sửa là bản bạn đã sửa theo góp ý AI — cả hai đều đã lưu.</p></div>';
+    /* v104: bài tự đối chiếu (thường) ghi rõ "Tự đánh giá — không có band
+       máy"; bài VIP có band AI thì giữ nhãn Máy ước lượng như cũ. */
+    var attBandLine = att.selfCheck ? "Tự đánh giá — không có band máy (AI chấm chỉ mở cho VIP)"
+      : (att.aiBand != null ? "Band AI chấm: <b>" + fmtBandComma(att.aiBand) + '</b> <span class="mut">(Máy ước lượng — không phải điểm thi thật)</span>' : "Band AI chấm: <b>?</b> <span class=\"mut\">(Máy ước lượng — không phải điểm thi thật)</span>");
+    app.innerHTML = skillHead("Viết — " + w.title, w.type + (w.band ? " · " + w.band : "")) + finishSummaryHTML("Bạn đã hoàn thành bài viết 3 bước!", '<p>' + attBandLine + '</p><p class="mut">Cả hai bản đã lưu trong tiến trình của bạn.</p>', "") + '<div class="qblock"><h3>Đối chiếu 2 cột — bản gốc và bản sửa</h3><div class="row"><div style="flex:1"><b>Bản gốc (bản nháp)</b><p>' + esc(att.draft || "") + '</p></div><div style="flex:1"><b>Bản sửa (đã lưu)</b><p>' + esc(att.rewrite || "") + '</p></div></div><p class="mut">Bản gốc để đối chiếu, bản sửa là bản bạn đã sửa theo ' + (att.selfCheck ? 'những gì rút ra khi đối chiếu bài mẫu' : 'góp ý AI') + ' — cả hai đều đã lưu.</p></div>';
     wireBack();
     var ns = $("#btnNextStep"); if (ns) { ns.textContent = "Về Luyện tập"; ns.onclick = function () { backFromLesson(); }; }
-    $("#btnRedo").onclick = function () { l.wstep = 0; l.draft = ""; l.rewrite = ""; l.aiWrite = null; l.aiBand = null; lessonStart = Date.now(); render(); };
+    $("#btnRedo").onclick = function () { l.wstep = 0; l.draft = ""; l.rewrite = ""; l.aiWrite = null; l.aiBand = null; l.selfCheckW = false; lessonStart = Date.now(); render(); };
     return;
   }
   if (step === 0) {
     app.innerHTML = skillHead("Viết — " + w.title, w.type + (w.band ? " · " + w.band : "") + " · Bước 1: Viết bản nháp") + phaseBarHTML(2) + '<div class="qblock"><p><b>Đề bài:</b> ' + esc(w.prompt) + '</p>'
       + (w.dataDesc ? '<p class="mut">' + esc(w.dataDesc) + '</p>' : "")
       + '<textarea id="wrDraft" rows="8" style="width:100%;padding:10px">' + esc(l.draft || "") + '</textarea>'
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrNext1">Xong bản nháp → AI chấm</button></div></div>';
+      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrNext1">' + (msIsVip() ? "Xong bản nháp → AI chấm" : "Xong bản nháp → Đối chiếu") + '</button></div></div>';
     wireBack();
     $("#wrNext1").onclick = function () { var v = $("#wrDraft").value; if (!v.trim()) { toast("Hãy viết vài câu trước đã."); return; } l.draft = v; l.wstep = 1; l.aiWrite = l.aiWrite || null; render(); };
     return;
   }
   if (step === 1) {
+    /* v104 Chặng 7: tài khoản thường — không gọi AI; tự đối chiếu theo bảng
+       tiêu chí + đối chiếu bài mẫu 2 cột rồi viết lại bản sửa. Không có band
+       máy, bài lưu ghi rõ "Tự đánh giá". */
+    if (!msIsVip()) {
+      app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 2: Tự đối chiếu + đối chiếu bài mẫu") + phaseBarHTML(2)
+        + '<div class="qblock">' + aiVipNoticeHTML("writing") + '</div>'
+        + '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>Bản của bạn</b><p>' + esc(l.draft || "") + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(w.model || "") + '</p></div></div>'
+        + (w.analysis ? '<p><b>Phân tích bài mẫu:</b> ' + esc(w.analysis) + '</p>' : "")
+        + (w.phrases ? '<p><b>Cụm câu dùng được:</b> ' + w.phrases.map(function (p) { return esc(p.en) + " (" + esc(p.vi) + ")"; }).join(" · ") + '</p>' : "")
+        + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrNext2">Đã đối chiếu xong → Viết lại bản sửa</button></div></div>';
+      wireBack();
+      $("#wrNext2").onclick = function () { l.aiBand = null; l.selfCheckW = true; l.wstep = 2; render(); };
+      return;
+    }
     var aw = l.aiWrite || {};
     var awHtml = '<div class="qblock"><h3>AI chấm 4 tiêu chí</h3>';
     if (aw.err) awHtml += '<p>' + esc(aw.err) + '</p>';
@@ -11776,14 +11835,15 @@ function renderSkillWrite(app, l) {
     };
     return;
   }
-  app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 3: Viết lại bản sửa") + phaseBarHTML(2) + '<div class="qblock"><p><b>' + (l.aiBand == null ? "Band chưa có vì AI trả dở dang — hãy viết lại theo góp ý AI (nếu có)" : "Band AI chấm bản nháp: " + fmtBandComma(l.aiBand)) + '</b>' + (l.aiBand == null ? "" : ' <span class="mut">(Máy ước lượng)</span>') + '</p><p>Viết lại bài, sửa theo góp ý AI:</p>'
+  var wrStep3Band = l.selfCheckW ? "Bạn tự đối chiếu theo bảng tiêu chí — không có band máy (AI chấm chỉ mở cho VIP)" : (l.aiBand == null ? "Band chưa có vì AI trả dở dang — hãy viết lại theo góp ý AI (nếu có)" : "Band AI chấm bản nháp: " + fmtBandComma(l.aiBand) + ' <span class="mut">(Máy ước lượng)</span>');
+  app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 3: Viết lại bản sửa") + phaseBarHTML(2) + '<div class="qblock"><p><b>' + wrStep3Band + '</b></p><p>' + (l.selfCheckW ? "Viết lại bài, sửa theo những gì rút ra khi đối chiếu bài mẫu:" : "Viết lại bài, sửa theo góp ý AI:") + '</p>'
     + '<textarea id="wrRewrite" rows="8" style="width:100%;padding:10px">' + esc(l.rewrite || l.draft || "") + '</textarea>'
     + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrSave">Lưu bản sửa</button></div></div>';
   wireBack();
   $("#wrSave").onclick = function () {
     var v = $("#wrRewrite").value; if (!v.trim()) { toast("Hãy viết bản sửa trước đã."); return; }
     if (!state.writingAttempts) state.writingAttempts = {};
-    state.writingAttempts[key] = { draft: l.draft || "", rewrite: v, aiBand: l.aiBand, at: todayStr() };
+    state.writingAttempts[key] = { draft: l.draft || "", rewrite: v, aiBand: l.aiBand, selfCheck: !!l.selfCheckW, at: todayStr() };
     var was = !!(state.skillDone && state.skillDone[key]);
     if (!state.skillDone) state.skillDone = {};
     state.skillDone[key] = true; awardXp(was ? 5 : 10); saveState();
@@ -12437,6 +12497,9 @@ function parseWritingReply(reply) {
   return { criteria: sorted, overall: overall, aiOverall: aiOverall, full: full, raw: reply };
 }
 function writingAiBlockHTML(l) {
+  /* v104 Chặng 7: AI chấm Viết chỉ mở cho VIP — tài khoản thường thấy thông
+     báo + bảng tự đối chiếu, không có nút AI, không có điểm máy. */
+  if (!msIsVip()) return '<div class="qblock">' + aiVipNoticeHTML("writing") + '</div>';
   var w = l.aiW || {};
   var h = '<div class="qblock"><h3>AI chấm bài</h3>';
   if (w.err) h += '<p>' + esc(w.err) + '</p>';
@@ -12609,7 +12672,11 @@ function speakAiTranscriptForParts(sa, parts) {
 function speakAiBlockHTML(sa, parts) {
   sa = sa || {};
   var h = '<div class="qblock"><h3>AI chấm Nói 4 tiêu chí</h3>';
-  h += '<p class="mut">Điểm thi lần nộp đầu giữ nguyên làm mốc — bản sửa và điểm chấm lại chỉ là bước luyện thêm để so sánh tiến bộ, không ghi đè điểm thi. AI lỗi thì bấm nút thử lại bên dưới — phần thi Nói chỉ có AI chấm, không tự chấm.</p>';
+  /* v104 Chặng 7: AI chấm Nói chỉ mở cho VIP — tài khoản thường thấy thông
+     báo + bảng tự đối chiếu, vẫn xem được transcript đã tô màu phát âm
+     (Máy ước lượng), nhưng không có nút AI chấm 4 tiêu chí, không có band. */
+  if (!msIsVip()) h += aiVipNoticeHTML("speaking");
+  else h += '<p class="mut">Điểm thi lần nộp đầu giữ nguyên làm mốc — bản sửa và điểm chấm lại chỉ là bước luyện thêm để so sánh tiến bộ, không ghi đè điểm thi. AI lỗi thì bấm nút thử lại bên dưới — phần thi Nói chỉ có AI chấm, không tự chấm.</p>';
   if (sa.err) h += '<p>' + esc(sa.err) + '</p>';
   var showParsed = function (parsed, title) {
     if (!parsed || !parsed.full) return "";
@@ -12622,17 +12689,21 @@ function speakAiBlockHTML(sa, parts) {
     return s;
   };
   if (sa.first) h += showParsed(sa.first, "Kết quả AI chấm lần đầu");
+  /* v104: AI trả sai định dạng thì PHẢI báo rõ (như khối Viết) — trước đây
+     showParsed trả "" nên người học chỉ thấy nút chấm lại mà không biết lỗi gì. */
+  if (sa.first && !sa.first.full) h += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(sa.first.raw || "") + '</p><p class="mut">Band bài này chưa có — hãy bấm “AI chấm Nói 4 tiêu chí” để AI chấm lại.</p>';
   if (sa.revised) {
     h += '<p><b>Điểm thi lần đầu (giữ nguyên làm mốc): Band ' + fmtBandComma(sa.firstOverall) + ' (Máy ước lượng)</b> · <b>Điểm chấm lại (chỉ luyện thêm): Band ' + fmtBandComma(sa.revisedOverall) + ' (Máy ước lượng)</b></p>';
     h += showParsed(sa.revised, "Kết quả chấm lại bản sửa");
+    if (!sa.revised.full) h += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(sa.revised.raw || "") + '</p><p class="mut">Band chấm lại chưa có — hãy bấm “Chấm lại toàn bài Nói (bản sửa)” để AI chấm lại.</p>';
     if (sa.transcript && sa.revTranscript) h += '<div class="qblock"><h3>Đối chiếu 2 cột — bản nói đầu và bản nói lại</h3><div class="row"><div style="flex:1"><b>Bản nói đầu</b><p>' + esc(sa.transcript) + '</p></div><div style="flex:1"><b>Bản nói lại (đã chấm lại)</b><p>' + esc(sa.revTranscript) + '</p></div></div><p class="mut">Điểm thi lần đầu giữ nguyên làm mốc; bản nói lại chỉ để luyện thêm và so sánh tiến bộ.</p></div>';
   }
-  if (!sa.first && !sa.err) {
+  if (!sa.first && !sa.err && msIsVip()) {
     var hasTranscript = parts.some(function (pt) { return (pt.transcript || "").trim(); });
     if (hasTranscript) h += '<p class="mut">Bấm “AI chấm Nói 4 tiêu chí” để AI chấm từ bản ghi (cần đăng nhập; chưa đăng nhập thì đăng nhập ở Của tôi → Tài khoản rồi bấm lại).</p>';
     else h += '<p class="mut">Chưa có bản ghi để AI chấm — hãy ghi âm bài nói trước rồi quay lại đây bấm chấm (bấm “Ghi âm lại toàn bài Nói” bên dưới để ghi lại).</p>';
   }
-  h += '<div class="row"><button class="btn btn-primary" id="spAiBtn"' + (sa.busy ? ' disabled' : '') + '>' + (sa.busy ? 'Đang chấm...' : (sa.first ? 'Chấm lại toàn bài Nói (bản sửa)' : 'AI chấm Nói 4 tiêu chí')) + '</button></div>';
+  if (msIsVip()) h += '<div class="row"><button class="btn btn-primary" id="spAiBtn"' + (sa.busy ? ' disabled' : '') + '>' + (sa.busy ? 'Đang chấm...' : (sa.first ? 'Chấm lại toàn bài Nói (bản sửa)' : 'AI chấm Nói 4 tiêu chí')) + '</button></div>';
   parts.forEach(function (pt, pi) {
     var refLines = examSpeakRefLines(pt.script || { lines: [] });
     var pr = pt.pronounce || null;
@@ -12901,7 +12972,7 @@ function renderPhaseSkill(app, l) {
         openLesson({ type: "phaseExam", phase: ph });
         return;
       }
-      toast("Hãy bấm “AI chấm Nói 4 tiêu chí” để AI chấm đã — phần thi Nói chỉ có AI chấm, không tự chấm.");
+      toast(msIsVip() ? "Hãy bấm “AI chấm Nói 4 tiêu chí” để AI chấm đã — phần thi Nói chỉ có AI chấm, không tự chấm." : "AI chấm Nói chỉ mở cho tài khoản VIP — bấm “Giữ bài đợt để chấm lại sau” để giữ bài, nâng cấp VIP rồi quay lại chấm.");
       return;
     };
     var psK = $("#psKeep"); if (psK) psK.onclick = function () { if (phasePendingSave(l, "speaking")) { toast("Đã giữ bài đợt — quay lại khi AI khỏe rồi bấm Tiếp tục chấm."); backFromLesson(); } else { toast("Chưa giữ được — hãy về hub đợt rồi làm lại."); } };
@@ -12950,7 +13021,7 @@ function renderPhaseSkill(app, l) {
         openLesson({ type: "phaseExam", phase: ph });
         return;
       }
-      toast("Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần thi Viết chỉ có AI chấm, không tự chấm."); return;
+      toast(msIsVip() ? "Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần thi Viết chỉ có AI chấm, không tự chấm." : "AI chấm Viết chỉ mở cho tài khoản VIP — bấm “Giữ bài đợt để chấm lại sau” để giữ bài, nâng cấp VIP rồi quay lại chấm."); return;
     };
     var psK = $("#psKeep"); if (psK) psK.onclick = function () { if (phasePendingSave(l, "writing")) { toast("Đã giữ bài đợt — quay lại khi AI khỏe rồi bấm Tiếp tục chấm."); backFromLesson(); } else { toast("Chưa giữ được — hãy về hub đợt rồi làm lại."); } };
     return;
@@ -13183,7 +13254,7 @@ function renderMockTest(app, l) {
         mockRun.stage = "speak"; mockRun.times.speakStart = Date.now(); render();
         return;
       }
-      toast("Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần thi Viết chỉ có AI chấm, không tự chấm."); return;
+      toast(msIsVip() ? "Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần thi Viết chỉ có AI chấm, không tự chấm." : "AI chấm Viết chỉ mở cho tài khoản VIP — bấm “Giữ bài làm để chấm lại sau” để giữ bài, nâng cấp VIP rồi quay lại chấm."); return;
     };
     return;
   }
@@ -13241,7 +13312,7 @@ function renderMockTest(app, l) {
       if (mkSa.first && mkSa.first.full) {
         mockRun.speak.band = mkSa.firstOverall; mockRun.speak.ai = true; mockRun.speak.firstBand = mkSa.firstOverall; mockRun.speak.revisedBand = (mkSa.revisedOverall != null ? mkSa.revisedOverall : null);
       } else {
-        toast("Hãy bấm “AI chấm Nói 4 tiêu chí” để AI chấm đã — phần thi Nói chỉ có AI chấm, không tự chấm.");
+        toast(msIsVip() ? "Hãy bấm “AI chấm Nói 4 tiêu chí” để AI chấm đã — phần thi Nói chỉ có AI chấm, không tự chấm." : "AI chấm Nói chỉ mở cho tài khoản VIP — bấm “Giữ bài làm để chấm lại sau” để giữ bài, nâng cấp VIP rồi quay lại chấm.");
         return;
       }
       mockRun.times.speak = Date.now() - mockRun.times.speakStart;

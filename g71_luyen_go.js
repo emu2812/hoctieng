@@ -266,7 +266,15 @@
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
 
+    var lastHud = { hearts: -1, score: -1, cleared: -1 };
     function hud() {
+      /* v103-fix: tim chỉ được vẽ lại ở start() và feed() nên tim mất do
+         từ rơi khỏi màn / thiên thạch đâm tàu (trừ trong tick) không bao
+         giờ hiện lên HUD — kiểm render v103 bắt được: hết tim rồi mà HUD
+         vẫn 3 tim hổ phách. Nay hud() có chốt chống vẽ thừa và được gọi
+         mỗi frame sau tick (như Rồng Bay), nên tim xám dần đúng lúc mất. */
+      if (st.hearts === lastHud.hearts && st.score === lastHud.score && st.cleared === lastHud.cleared) return;
+      lastHud.hearts = st.hearts; lastHud.score = st.score; lastHud.cleared = st.cleared;
       /* HUD một dòng: các số liệu giữ nguyên, chủ đề co lại bằng dấu … */
       stg.hud.innerHTML = "<span style=\"flex:none\">Điểm: " + st.score + "</span>"
         + "<span style=\"flex:none\">Mốc: " + st.cleared + "/" + st.total + "</span>"
@@ -512,6 +520,7 @@
          phím, thanh Nghĩa, viền mục tiêu và syncInput luôn đọc cùng một
          trạng thái, ở mọi tốc độ khung hình. */
       refreshKb();
+      hud(); /* v103-fix: vẽ lại HUD sau tick để tim mất trong tick hiện ngay (xem hud()). */
       var W = cv.width, H = cv.height;
       if (!W || !H) { requestAnimationFrame(frame); return; }
       ctx.clearRect(0, 0, W, H);
