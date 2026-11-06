@@ -168,14 +168,16 @@
     }
     return rounds;
   }
-  /* Tim thống nhất cho cả 3 game: tim đầy là ♥ đặc màu đỏ, tim mất là
-     ♡ rỗng màu xám. Dùng ♥ (U+2665) thay cho ❤ (U+2764) vì ❤ không kèm
-     ký tự chọn kiểu có thể hiện thành tim rỗng trên font của một số máy. */
+  /* Tim thống nhất cho cả 3 game — v101: tim vector SVG hổ phách (sống)
+     / xám (mất) theo ART_DIRECTION.md §9; KHÔNG dùng ký tự ♥ (font
+     Android render thành emoji đỏ, lệch hệ màu). Cùng path tim với
+     Rồng Lửa (heartsSvg trong g71_rong_lua.js). */
   function hearts(n) {
-    var s = "";
-    for (var i = 0; i < 3; i++) s += (i < n
-      ? '<span style="color:#E11D48">♥</span>'
-      : '<span style="color:#9CA3AF">♡</span>');
+    var s = "", i, fill;
+    for (i = 0; i < 3; i++) {
+      fill = (i < n) ? "#F59E0B" : "#9CA3AF";
+      s += '<svg width="18" height="17" viewBox="0 0 24 22" style="vertical-align:-3px"><path d="M12 21 C5 15 2 11 2 7.5 C2 4.5 4.5 2 7.5 2 C9.5 2 11 3.5 12 5 C13 3.5 14.5 2 16.5 2 C19.5 2 22 4.5 22 7.5 C22 11 19 15 12 21Z" fill="' + fill + '"/></svg>';
+    }
     return s;
   }
 
@@ -567,70 +569,90 @@
     return Math.max(24, r);
   }
   /* ---- Nền có chiều sâu (3 lớp: xa — giữa — gần) ---- */
-  /* Nền vũ trụ có chiều sâu (v83, sửa xấu 18:11): không còn 3 vệt bầu dục
-     mờ lớn (trông như vết loang) — tinh vân thành nhiều đốm nhỏ mềm,
-     sao trôi chậm xuống cho cảm giác bay, hành tinh có vành + bóng đổ +
-     quầng sáng rõ, thêm một hành tinh xa nhỏ làm lớp xa. */
+  /* Nền vũ trụ tranh màu nước theo ART_DIRECTION.md (v101, làm lại giao
+     diện Luyện Gõ theo phán quyết của Bùi 06/11): CHỈ dùng màu trong hệ
+     chàm + hổ phách + teal — không còn #7DD3FC/#A78BFA/#F472B6, hành
+     tinh nâu #C98A5B hay hành tinh xám; gradient 4 điểm toàn chàm,
+     quầng chân trời teal + dải hổ phách, tinh vân đốm nhỏ alpha thấp,
+     sao dịu lại, 2 hành tinh đúng bảng (chàm + hổ phách đậm) có vành
+     hổ phách, bóng lưỡi liềm, điểm sáng trắng trên-trái. */
   function paintSpace(ctx, W, H, t) {
     var g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#0B1030"); g.addColorStop(0.6, "#16294D"); g.addColorStop(1, "#274B73");
+    g.addColorStop(0, "#04060F"); g.addColorStop(0.45, "#0B1030");
+    g.addColorStop(0.8, "#1E1B4B"); g.addColorStop(1, "#312E81");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-    /* Tinh vân: nhiều đốm nhỏ mềm, nhiều màu, alpha thấp — không vệt lớn. */
+    /* Quầng chân trời teal + dải hổ phách ấm (ánh sáng trên-trái,
+       chiều sâu: xa mờ, gần rõ). */
+    ctx.globalAlpha = 0.12;
+    ctx.fillStyle = "#0D9488";
+    ctx.beginPath(); ctx.ellipse(W * 0.5, H * 0.94, W * 0.55, H * 0.12, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 0.08;
+    ctx.fillStyle = "#F59E0B";
+    ctx.beginPath(); ctx.ellipse(W * 0.5, H * 0.97, W * 0.42, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 1;
+    /* Tinh vân: đốm nhỏ mềm, CHỈ màu trong bảng hệ (chàm nhạt / teal /
+       hổ phách / vàng nhạt) — watercolor vẽ ở alpha 0.16. */
     watercolor(ctx, W, H, [
-      { x: 0.16, y: 0.18, rx: 0.07, ry: 0.05, c: "#7DD3FC" },
-      { x: 0.3, y: 0.42, rx: 0.05, ry: 0.04, c: "#A78BFA" },
+      { x: 0.16, y: 0.18, rx: 0.07, ry: 0.05, c: "#A5B4FC" },
+      { x: 0.3, y: 0.42, rx: 0.05, ry: 0.04, c: "#0D9488" },
       { x: 0.62, y: 0.12, rx: 0.06, ry: 0.04, c: "#F59E0B" },
-      { x: 0.78, y: 0.55, rx: 0.08, ry: 0.05, c: "#2DD4BF" },
-      { x: 0.45, y: 0.72, rx: 0.06, ry: 0.04, c: "#F472B6" },
-      { x: 0.9, y: 0.85, rx: 0.05, ry: 0.04, c: "#7DD3FC" },
-      { x: 0.08, y: 0.88, rx: 0.06, ry: 0.04, c: "#A78BFA" },
-      { x: 0.55, y: 0.35, rx: 0.04, ry: 0.03, c: "#FBBF24" }
+      { x: 0.78, y: 0.55, rx: 0.08, ry: 0.05, c: "#0D9488" },
+      { x: 0.45, y: 0.72, rx: 0.06, ry: 0.04, c: "#C7D2FE" },
+      { x: 0.9, y: 0.85, rx: 0.05, ry: 0.04, c: "#FBBF24" },
+      { x: 0.08, y: 0.88, rx: 0.06, ry: 0.04, c: "#A5B4FC" },
+      { x: 0.55, y: 0.35, rx: 0.04, ry: 0.03, c: "#FDE68A" }
     ]);
-    /* Sao trôi chậm xuống (cảm giác bay về phía trước) + sao lớn lấp lánh. */
+    /* Sao trôi chậm xuống (cảm giác bay về phía trước) + sao lớn lấp lánh.
+       Sao dịu lại so với v83 để không át viên từ. */
     ctx.fillStyle = "#fff";
     for (var s = 0; s < 70; s++) {
       var sx = (s * 97) % W, sy = ((s * 57) + (t || 0) * 0.004) % H;
       var big = (s % 7 === 0);
-      ctx.globalAlpha = big ? 0.9 : 0.35 + ((s * 13) % 10) / 20;
-      var sz = big ? 3 : 2;
+      ctx.globalAlpha = big ? 0.85 : 0.25 + ((s * 13) % 10) / 25;
+      var sz = big ? 2.5 : 1.5;
       ctx.fillRect(sx, sy, sz, sz);
       if (big) { /* tia sáng chữ thập cho sao lớn */
-        ctx.globalAlpha = 0.5;
-        ctx.fillRect(sx - 3, sy + 1, 9, 1);
-        ctx.fillRect(sx + 1, sy - 3, 1, 9);
+        ctx.globalAlpha = 0.45;
+        ctx.fillRect(sx - 3, sy + 1, 8, 1);
+        ctx.fillRect(sx + 1, sy - 3, 1, 8);
       }
     }
     ctx.globalAlpha = 1;
-    /* Hành tinh có vành: quầng sáng + bóng lưỡi liềm + vành rõ. */
+    /* Hành tinh chàm có vành hổ phách (trên-phải): quầng sáng + bóng
+       lưỡi liềm + điểm sáng trắng trên-trái. */
     var pr = Math.min(30, W * 0.08), px = W * 0.84, py = H * 0.18;
-    ctx.fillStyle = "rgba(201,138,91,.25)";
+    ctx.fillStyle = "rgba(67,56,202,.3)";
     ctx.beginPath(); ctx.arc(px, py, pr * 1.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#C98A5B";
+    ctx.fillStyle = "#4338CA";
     ctx.beginPath(); ctx.arc(px, py, pr, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "rgba(11,16,48,.45)"; /* bóng lưỡi liềm phía tối */
+    ctx.fillStyle = "rgba(4,6,15,.45)"; /* bóng lưỡi liềm phía tối */
     ctx.beginPath(); ctx.arc(px + pr * 0.28, py - pr * 0.1, pr * 0.82, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "rgba(253,230,138,.9)"; ctx.lineWidth = 3.5;
+    ctx.fillStyle = "rgba(255,255,255,.55)"; /* điểm sáng trên-trái */
+    ctx.beginPath(); ctx.arc(px - pr * 0.35, py - pr * 0.4, pr * 0.22, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "rgba(245,158,11,.9)"; ctx.lineWidth = 3.5;
     ctx.beginPath();
     ctx.ellipse(px, py, Math.min(52, W * 0.14), Math.min(14, W * 0.04), -0.35, 0, Math.PI * 2);
     ctx.stroke();
-    ctx.strokeStyle = "rgba(253,230,138,.45)"; ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "rgba(245,158,11,.45)"; ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.ellipse(px, py, Math.min(60, W * 0.16), Math.min(17, W * 0.05), -0.35, 0, Math.PI * 2);
     ctx.stroke();
-    /* Hành tinh xanh nhỏ ở xa: điểm sáng + miệng hố. */
+    /* Hành tinh hổ phách đậm ở xa (dưới-trái): vành hổ phách + miệng hố
+       tối + điểm sáng trên-trái — thay cho hành tinh xanh/xám cũ. */
     var br = Math.min(20, W * 0.055), bx = W * 0.14, by = H * 0.68;
-    ctx.fillStyle = "rgba(125,211,252,.3)";
+    ctx.fillStyle = "rgba(245,158,11,.3)";
     ctx.beginPath(); ctx.arc(bx, by, br * 1.4, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#7DD3FC";
+    ctx.fillStyle = "#92400E";
     ctx.beginPath(); ctx.arc(bx, by, br, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "rgba(15,23,42,.35)";
+    ctx.fillStyle = "rgba(4,6,15,.35)";
     ctx.beginPath(); ctx.arc(bx - br * 0.3, by - br * 0.2, br * 0.28, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.arc(bx + br * 0.35, by + br * 0.3, br * 0.2, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = "rgba(255,255,255,.5)";
     ctx.beginPath(); ctx.arc(bx - br * 0.35, by - br * 0.4, br * 0.22, 0, Math.PI * 2); ctx.fill();
-    /* Hành tinh xa tí hon làm lớp xa. */
-    ctx.fillStyle = "#94A3B8";
-    ctx.beginPath(); ctx.arc(W * 0.58, H * 0.07, 8, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "rgba(245,158,11,.7)"; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(bx, by, br * 1.6, br * 0.45, -0.3, 0, Math.PI * 2);
+    ctx.stroke();
   }
   function paintSky(ctx, W, H, t) {
     var g = ctx.createLinearGradient(0, 0, 0, H);

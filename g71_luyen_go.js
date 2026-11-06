@@ -8,8 +8,10 @@
    Giữ luật lõi v71: 20 từ/lượt, 3 tim, +10/từ, chủ đề theo vòng,
    bàn phím màn hình + chạm khóa, ân hạn 500ms sau mỗi lần mất tim.
    Hình v83: nền vũ trụ tranh màu nước sâu hơn (paintSpace mới), rồng
-   và tên lửa to hơn. Logic thuần (không cần canvas) để probe kiểm
-   tra được. */
+   và tên lửa to hơn. v101 (phán quyết của Bùi 06/11): làm lại giao
+   diện theo ART_DIRECTION.md (một tên lửa duy nhất, bỏ rồng cưỡi
+   tên lửa) + ô nhập thật mở bàn phím gốc điện thoại trên cảm ứng.
+   Logic thuần (không cần canvas) để probe kiểm tra được. */
 (function () {
   "use strict";
 
@@ -39,6 +41,24 @@
       if (st.hearts <= 0) { st.over = "lose"; st.active = null; }
       return { ok: false, lostHeart: true };
     },
+    /* Từ mục tiêu hiện tại (v101): từ đang khóa nếu còn rơi VÀ đã vào
+       màn (y >= 0), nếu không thì từ rơi thấp nhất ĐÃ VÀO màn. Dùng
+       cho thanh Nghĩa + bàn phím, để Nghĩa luôn khớp đúng từ người
+       chơi đang thấy — trước đây typeLetter tự khóa cả từ còn ở trên
+       mép màn (y < 0), nên Nghĩa có thể hiện nghĩa của từ chưa nhìn
+       thấy (ảnh Bùi gửi 06/11: "lớn tuổi" trong khi các từ thấy được
+       là sanitise/medicine/pottery). */
+    targetWord: function (st) {
+      if (st.active !== null && st.words[st.active]
+          && st.words[st.active].status === "falling" && st.words[st.active].y >= 0) {
+        return st.words[st.active];
+      }
+      var low = null;
+      st.words.forEach(function (wd) {
+        if (wd.status === "falling" && wd.y >= 0 && (!low || wd.y > low.y)) low = wd;
+      });
+      return low;
+    },
     /* Gõ sai (v83): chỉ gõ lại, KHÔNG mất tim — thua vì chậm tay / né
        dở, không phải vì trả lời sai. */
     typeLetter: function (st, ch, now) {
@@ -52,7 +72,7 @@
       } else {
         var best = null;
         st.words.forEach(function (wd, i) {
-          if (wd.status !== "falling") return;
+          if (wd.status !== "falling" || wd.y < 0) return;
           var tg = wd.type || wd.w;
           if (tg.charAt(wd.progress).toLowerCase() !== ch) return;
           if (best === null || wd.y > st.words[best].y) best = i;
@@ -79,7 +99,9 @@
     },
     lockWord: function (st, idx) {
       if (st.over) return;
-      if (st.words[idx] && st.words[idx].status === "falling") st.active = idx;
+      /* v101: chỉ khóa từ đã vào màn (y >= 0) — từ chưa nhìn thấy thì
+         chạm/gõ cũng không khóa được, thanh Nghĩa không lệch. */
+      if (st.words[idx] && st.words[idx].status === "falling" && st.words[idx].y >= 0) st.active = idx;
     },
     tick: function (st, dt, now) {
       if (st.over) return;
@@ -132,8 +154,8 @@
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(rot);
-    ctx.fillStyle = "#78716C";
-    ctx.strokeStyle = "#44403C";
+    ctx.fillStyle = "#1E1B4B";
+    ctx.strokeStyle = "#A5B4FC";
     ctx.lineWidth = 2;
     ctx.beginPath();
     for (var i = 0; i < 8; i++) {
@@ -151,17 +173,95 @@
     ctx.restore();
   }
 
+  /* Tàu của người chơi (v101): MỘT tên lửa duy nhất theo ART_DIRECTION.md
+     — thân kem, mũi + cánh hổ phách đậm, cửa sổ teal, lửa hổ phách;
+     bỏ hẳn con rồng xanh lá cưỡi tên lửa (nhìn trẻ con, lệch hệ).
+     Vẽ theo tâm (x, y), mũi hướng lên, cao ~2s; lửa nhấp nháy theo flick. */
+  function drawShip(ctx, x, y, s, flick) {
+    var f = (flick === undefined) ? 1 : flick;
+    ctx.save();
+    ctx.translate(x, y);
+    /* Bóng ellipse mờ dưới tàu (chiều sâu). */
+    ctx.fillStyle = "rgba(4,6,15,.35)";
+    ctx.beginPath(); ctx.ellipse(0, s * 1.05, s * 0.7, s * 0.12, 0, 0, Math.PI * 2); ctx.fill();
+    /* Lửa: ngoài hổ phách, trong vàng nhạt, nhấp nháy theo flick. */
+    var fl = s * (0.55 + 0.25 * f);
+    ctx.fillStyle = "#F59E0B";
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.28, s * 0.85);
+    ctx.quadraticCurveTo(0, s * 0.85 + fl, s * 0.28, s * 0.85);
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#FDE68A";
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.14, s * 0.85);
+    ctx.quadraticCurveTo(0, s * 0.85 + fl * 0.6, s * 0.14, s * 0.85);
+    ctx.closePath(); ctx.fill();
+    /* Cánh trái/phải hổ phách đậm. */
+    ctx.fillStyle = "#B45309";
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.3, s * 0.35);
+    ctx.lineTo(-s * 0.62, s * 0.95);
+    ctx.lineTo(-s * 0.3, s * 0.9);
+    ctx.closePath(); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(s * 0.3, s * 0.35);
+    ctx.lineTo(s * 0.62, s * 0.95);
+    ctx.lineTo(s * 0.3, s * 0.9);
+    ctx.closePath(); ctx.fill();
+    /* Thân kem, viền chàm 2px. */
+    ctx.fillStyle = "#FFFBEB";
+    ctx.strokeStyle = "#1E1B4B";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0, -s);
+    ctx.quadraticCurveTo(s * 0.34, -s * 0.55, s * 0.3, s * 0.1);
+    ctx.lineTo(s * 0.3, s * 0.85);
+    ctx.lineTo(-s * 0.3, s * 0.85);
+    ctx.lineTo(-s * 0.3, s * 0.1);
+    ctx.quadraticCurveTo(-s * 0.34, -s * 0.55, 0, -s);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    /* Mũi hổ phách đậm. */
+    ctx.fillStyle = "#B45309";
+    ctx.beginPath();
+    ctx.moveTo(0, -s);
+    ctx.quadraticCurveTo(s * 0.34, -s * 0.55, s * 0.3, -s * 0.28);
+    ctx.lineTo(-s * 0.3, -s * 0.28);
+    ctx.quadraticCurveTo(-s * 0.34, -s * 0.55, 0, -s);
+    ctx.closePath(); ctx.fill();
+    /* Cửa sổ teal, viền chàm, chấm sáng trắng trên-trái. */
+    ctx.fillStyle = "#0D9488";
+    ctx.strokeStyle = "#1E1B4B";
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(0, -s * 0.05, s * 0.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "rgba(255,255,255,.8)";
+    ctx.beginPath(); ctx.arc(-s * 0.07, -s * 0.12, s * 0.06, 0, Math.PI * 2); ctx.fill();
+    /* Vệt sáng dọc thân trái (ánh sáng trên-trái). */
+    ctx.fillStyle = "rgba(255,255,255,.45)";
+    ctx.beginPath(); ctx.ellipse(-s * 0.18, s * 0.2, s * 0.05, s * 0.42, 0.08, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+
   function start() {
     var set = G71.pickTypingWords(20);
     if (!set.words.length) { try { toast("Chưa có từ vựng để chơi."); } catch (e) {} return; }
     var st = LOGIC.createState(set.words, set.theme);
+    window.G71LuyenGo._st = st; /* trạng thái trận đang chạy (cho probe kiểm tra) */
     var running = true;
     var flashes = [];
     var parts = [];
     var keys = { left: false, right: false };
     var drawShipX = 0.5;
-    var stg = G71.openStage("⌨️ Luyện Gõ" + (set.theme ? " — " + set.theme : ""),
-      "Phím ← → (hoặc kéo chuột/chạm) lái tên lửa né thiên thạch; gõ chữ để bắn hạ từ. Gõ sai chỉ gõ lại, không mất tim. Để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim.",
+    /* v101: tiêu đề ngắn "⌨️ Luyện Gõ" (không kèm chủ đề — chủ đề vẫn ở
+       HUD) để không bị cắt dở trên điện thoại như ảnh Bùi gửi 06/11.
+       Cảm ứng = con trỏ thô (pointer: coarse). Chỉ dùng matchMedia,
+       KHÔNG dùng "ontouchstart" in window (nhiều desktop cũng có thuộc
+       tính này, và jsdom cũng có — sẽ nhận nhầm desktop thành cảm ứng). */
+    var isTouch = false;
+    try { isTouch = !!(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(pointer: coarse)").matches); } catch (e) {}
+    var stg = G71.openStage("⌨️ Luyện Gõ",
+      isTouch
+        ? "Chạm vào ô gõ để mở bàn phím điện thoại; gõ đúng từ để bắn hạ. Kéo để lái tàu né thiên thạch. Gõ sai chỉ gõ lại, không mất tim. Để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim."
+        : "Phím ← → (hoặc kéo chuột) lái tàu né thiên thạch; gõ chữ để bắn hạ từ. Gõ sai chỉ gõ lại, không mất tim. Để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim.",
       function () { running = false; });
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
@@ -175,23 +275,19 @@
     }
     hud();
 
-    /* Bàn phím trên màn hình cho chuột + cảm ứng.
-       v91: track tieng Han (TP) thi ban phim la cac am tiet Hangul cua tu
-       dang khoa (bam theo thu tu de ghep thanh tu); cac track khac go
-       chu cai nhu cu (tieng Trung go pinyin bang chu cai Latin). */
-    var kb = document.createElement("div");
-    kb.id = "g71Kb";
-    kb.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;";
+    /* Bàn phím (v101): cảm ứng → BỎ bàn phím tự vẽ, dùng ô nhập thật để
+       mở BÀN PHÍM GỐC của điện thoại (lang + inputmode theo track);
+       desktop → giữ bàn phím trên màn hình như cũ.
+       v91: track tiếng Hàn (TP) thì bàn phím là các âm tiết Hangul của từ
+       đang khóa (bấm theo thứ tự để ghép thành từ); các track khác gõ
+       chữ cái như cũ (tiếng Trung gõ pinyin bằng chữ cái Latin). */
+    var kb = null, typeInput = null, composing = false;
     var kbSig = "";
     function refreshKb() {
+      if (!kb) return;
       var isTp = false;
       try { isTp = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
-      var act = (st.active !== null && st.words[st.active]) ? st.words[st.active] : null;
-      if (!act) {
-        var low = null;
-        st.words.forEach(function (wd) { if (wd.status === "falling" && (!low || wd.y > low.y)) low = wd; });
-        act = low;
-      }
+      var act = LOGIC.targetWord(st);
       var sig = (isTp ? "tp:" : "az:") + (act ? (act.type || act.w) : "") + "|" + st.resolved;
       if (sig === kbSig) return;
       kbSig = sig;
@@ -206,9 +302,40 @@
         kb.appendChild(b);
       });
     }
-    refreshKb();
-    stg.el.appendChild(kb);
+    if (isTouch) {
+      /* Ô nhập thật (v101): lang + inputmode theo track đang học để bàn
+         phím gốc mở đúng ngôn ngữ — EN/TC: bàn Latin (en); ZH: gõ
+         pinyin bằng chữ Latin không dấu (zh-Latn); TP: bàn Hangul
+         (ko-KR). KHÔNG có keyword "hangul"/"korean" trong chuẩn
+         WHATWG inputmode nên TP dùng inputmode="text" + lang="ko-KR"
+         (Gboard/iOS chọn bàn phím theo lang của ô nhập). */
+      var tk = "en";
+      try { tk = (typeof G71 !== "undefined" && G71.trackKey) ? (G71.trackKey() || "en") : "en"; } catch (e) {}
+      typeInput = document.createElement("input");
+      typeInput.id = "g71TypeInput";
+      typeInput.setAttribute("lang", tk === "tp" ? "ko-KR" : (tk === "zh" ? "zh-Latn" : "en"));
+      typeInput.setAttribute("inputmode", tk === "tp" ? "text" : "latin");
+      typeInput.setAttribute("autocapitalize", "off");
+      typeInput.setAttribute("autocorrect", "off");
+      typeInput.setAttribute("autocomplete", "off");
+      typeInput.setAttribute("spellcheck", "false");
+      typeInput.setAttribute("placeholder", "⌨️ Chạm để gõ");
+      typeInput.style.cssText = "display:block;width:calc(100% - 24px);margin:8px auto;padding:10px 14px;font-size:17px;color:#1E1B4B;background:#fff;border:2px solid #C7D2FE;border-radius:20px;outline:none;box-sizing:border-box;";
+      typeInput.addEventListener("compositionstart", function () { composing = true; });
+      typeInput.addEventListener("compositionend", function () { composing = false; processInput(); });
+      typeInput.addEventListener("input", function () { if (!composing) processInput(); });
+      stg.el.appendChild(typeInput);
+    } else {
+      kb = document.createElement("div");
+      kb.id = "g71Kb";
+      kb.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;";
+      refreshKb();
+      stg.el.appendChild(kb);
+    }
     if (stg.resize) stg.resize();
+    /* Mở bàn phím gốc ngay khi trận bắt đầu (đang trong luồng bấm nút
+       mở game — cử chỉ người dùng — nên iOS cho mở bàn phím). */
+    if (typeInput) { try { typeInput.focus(); } catch (e) {} }
 
     function feed(ch) {
       if (!running || st.over) return;
@@ -225,6 +352,51 @@
       }
       if (before !== st.cleared || r.lostHeart) hud();
       maybeEnd();
+    }
+    /* Đọc chữ gõ từ ô nhập gốc (v101, chỉ cảm ứng): xử lý qua sự kiện
+       input để IME ghép đúng (Hangul ghép vần thành âm tiết, pinyin
+       gõ Latin). Chỉ cho từng ký tự VƯỢT QUA tiền tố đã gõ đúng của từ
+       mục tiêu qua feed() — ký tự sai bị loại ngay khi gõ, không mất
+       lượt; đang ghép dở (composition) thì không xử lý gì. */
+    function processInput() {
+      if (!typeInput || !running || st.over) return;
+      var guard = 0;
+      while (guard++ < 40) {
+        var tw = LOGIC.targetWord(st);
+        if (!tw) { typeInput.value = ""; return; }
+        var tgt = tw.type || tw.w;
+        var done = tgt.slice(0, tw.progress);
+        var val = typeInput.value || "";
+        if (val === done) return; /* chưa gõ thêm gì */
+        if (val.indexOf(done) !== 0) { typeInput.value = done; return; } /* sửa giữa chuỗi: trả lại tiền tố đúng */
+        var rest = val.slice(done.length);
+        var ch = rest.charAt(0);
+        var progBefore = 0;
+        st.words.forEach(function (wd) { progBefore += wd.progress; });
+        var twWas = tw;
+        feed(ch);
+        if (st.over) { typeInput.value = ""; return; }
+        var progAfter = 0;
+        st.words.forEach(function (wd) { progAfter += wd.progress; });
+        if (progAfter === progBefore) { typeInput.value = done; return; } /* ký tự sai: loại, dừng */
+        if (twWas.status !== "falling") { typeInput.value = ""; return; } /* từ vừa xong: dừng, không gộp ký tự thừa sang từ mới */
+        /* Ký tự đúng, từ chưa xong: bỏ ký tự đã tiêu thụ rồi lặp để xử
+           lý tiếp phần thừa (dán nhiều ký tự / IME chốt một âm tiết). */
+        var tw2 = LOGIC.targetWord(st);
+        var done2 = tw2 ? (tw2.type || tw2.w).slice(0, tw2.progress) : "";
+        typeInput.value = done2 + rest.slice(1);
+      }
+    }
+    /* Giữ ô nhập luôn hiện đúng tiền tố đã gõ của từ mục tiêu (v101):
+       khi người chơi gõ bằng phím vật lý / đổi từ đang khóa thì ô nhập
+       đồng bộ theo; viền hổ phách khi có từ đang khóa. */
+    function syncInput() {
+      if (!typeInput || composing) return;
+      var tw = LOGIC.targetWord(st);
+      var done = tw ? (tw.type || tw.w).slice(0, tw.progress) : "";
+      if (typeInput.value !== done) typeInput.value = done;
+      var locked = (st.active !== null && st.words[st.active] && st.words[st.active].status === "falling");
+      typeInput.style.borderColor = locked ? "#F59E0B" : "#C7D2FE";
     }
     function onKey(e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -285,6 +457,7 @@
       var dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       refreshKb();
+      syncInput();
       /* Lái tàu bằng phím mũi tên giữ (0,55 đơn vị/giây — qua sân ~1,8 giây). */
       if (keys.left) LOGIC.moveShip(st, -0.55 * dt);
       if (keys.right) LOGIC.moveShip(st, 0.55 * dt);
@@ -312,11 +485,15 @@
         G71.fitFont(ctx, wide, Math.max(60, W - 32), 17, 12, "700");
         var tw = Math.max(ctx.measureText(wd.w).width, ctx.measureText(wdType).width) + 28;
         var px = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, wd.x * W));
-        ctx.fillStyle = isAct ? "#F59E0B" : "#1F2430";
+        /* v101: viên chàm đậm; đang khóa thì viền hổ phách + quầng sáng
+           hổ phách nhịp, chưa khóa viền chàm nhạt. */
+        ctx.fillStyle = "#1E1B4B";
         if (twoLine) {
+          if (isAct) { ctx.shadowColor = "rgba(245,158,11,.55)"; ctx.shadowBlur = 16; }
           G71.rr(ctx, px - tw / 2, py - 28, tw, 54, 17);
           ctx.fill();
-          ctx.strokeStyle = isAct ? "#FBBF24" : "#334155";
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = isAct ? "#F59E0B" : "#C7D2FE";
           ctx.lineWidth = 2;
           ctx.stroke();
           ctx.font = "700 16px system-ui, sans-serif";
@@ -330,9 +507,11 @@
           ctx.fillStyle = "#fff";
           ctx.fillText(rest, x0 + ctx.measureText(done).width, py + 14);
         } else {
+          if (isAct) { ctx.shadowColor = "rgba(245,158,11,.55)"; ctx.shadowBlur = 16; }
           G71.rr(ctx, px - tw / 2, py - 18, tw, 34, 17);
           ctx.fill();
-          ctx.strokeStyle = isAct ? "#FBBF24" : "#334155";
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = isAct ? "#F59E0B" : "#C7D2FE";
           ctx.lineWidth = 2;
           ctx.stroke();
           var done2 = wdType.slice(0, wd.progress), rest2 = wdType.slice(wd.progress);
@@ -345,14 +524,13 @@
       });
       /* Tàu ở vị trí lái được; tia bắn đi từ mũi tàu, không còn từ giữa sân. */
       var rocketY = Math.max(110, H - 86);
-      var dragonY = rocketY - 62;
       var shipPx = drawShipX * W;
       flashes = flashes.filter(function (f) { return (f.ttl -= dt) > 0; });
       flashes.forEach(function (f) {
         ctx.strokeStyle = "rgba(253,230,138,.9)";
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(shipPx, rocketY - 45);
+        ctx.moveTo(shipPx, rocketY - 42);
         ctx.lineTo(f.x * W, f.y * H);
         ctx.stroke();
       });
@@ -362,16 +540,21 @@
         ctx.fillRect((p.x + p.vx * (0.6 - p.ttl)) * W, (p.y + p.vy * (0.6 - p.ttl)) * H, 5, 5);
       });
       var flick = 0.5 + 0.5 * Math.sin(now / 90);
-      G71.drawRocket(ctx, shipPx, rocketY, 40, flick);
-      G71.drawDragon(ctx, shipPx, dragonY, 26);
-      if (st.active !== null && st.words[st.active]) {
-        /* Bảng nghĩa: nền tối mờ + chữ tự thu/ngắt 2 dòng, không cắt mép. */
-        var meanText = "Nghĩa: " + st.words[st.active].vi;
+      drawShip(ctx, shipPx, rocketY, 40, flick);
+      var meanWord = LOGIC.targetWord(st);
+      if (meanWord) {
+        /* Bảng nghĩa (v101): luôn là nghĩa của TỪ MỤC TIÊU hiện tại
+           (targetWord — từ đang khóa đã vào màn, hoặc từ rơi thấp nhất
+           đã vào màn); nền chàm đậm mờ + viền hổ phách, không cắt mép. */
+        var meanText = "Nghĩa: " + meanWord.vi;
         ctx.font = "700 15px system-ui, sans-serif";
         var mw = Math.min(W - 16, ctx.measureText(meanText).width + 28);
-        ctx.fillStyle = "rgba(15,23,42,.72)";
+        ctx.fillStyle = "rgba(30,27,75,.85)";
         G71.rr(ctx, W / 2 - mw / 2, H - 38, mw, 34, 15);
         ctx.fill();
+        ctx.strokeStyle = "#FBBF24";
+        ctx.lineWidth = 2;
+        ctx.stroke();
         ctx.fillStyle = "rgba(255,255,255,.95)";
         G71.drawFitText(ctx, meanText, W / 2, H - 21, W - 40, 15, 11, 2, "700");
       }
@@ -381,5 +564,5 @@
     requestAnimationFrame(frame);
   }
 
-  window.G71LuyenGo = { start: start, logic: LOGIC, drawRock: drawRock };
+  window.G71LuyenGo = { start: start, logic: LOGIC, drawRock: drawRock, drawShip: drawShip };
 })();
