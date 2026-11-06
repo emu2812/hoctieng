@@ -969,11 +969,19 @@
   }
   /* Biểu tượng hệ dạng vector nhỏ: lửa = giọt lửa, nước = giọt nước,
      điện = tia chớp. Màu lấy theo hệ. */
-  function drawElIcon(ctx, el, x, y, r) {
+  function drawElIcon(ctx, el, x, y, r, stroke) {
     var col = ELEMENTS[el].color;
     ctx.save();
     ctx.translate(x, y);
-    ctx.fillStyle = col;
+    if (stroke) {
+      /* v105e: vẽ icon bằng NÉT trắng (không tô đặc) — nét không che
+         điểm chính giữa huy hiệu nên tâm vẫn là màu hệ đặc. lineCap
+         butt + lineJoin bevel để nét không tràn ra ngoài đường vẽ. */
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = 2;
+      ctx.lineCap = "butt"; ctx.lineJoin = "bevel";
+    } else {
+      ctx.fillStyle = col;
+    }
     ctx.beginPath();
     if (el === "fire") {
       ctx.moveTo(0, -r);
@@ -993,7 +1001,8 @@
       ctx.lineTo(r * 0.55, -r * 0.15);
       ctx.lineTo(r * 0.05, -r * 0.15);
     }
-    ctx.closePath(); ctx.fill();
+    ctx.closePath();
+    if (stroke) ctx.stroke(); else ctx.fill();
     ctx.restore();
   }
   function drawElBadge(ctx, el, x, y, r) {
@@ -1480,12 +1489,12 @@
     ctx.fillStyle = "rgba(255,255,255,.2)";
     ctx.beginPath(); ctx.ellipse(px - s * 0.4, py - s * 0.4, s * 0.28, s * 0.12, -0.5, 0, Math.PI * 2); ctx.fill();
     }
-    /* Huy hiệu hệ yếu ở góc phải (v105d): đĩa màu hệ ĐẦY ĐỦ phía sau ảnh
-       badge Canva + ảnh to hơn (26px) — ảnh badge hệ Điện nhạt (tròn
-       lavender) nên nhìn thoáng không ra tím; đĩa #8B5CF6 đầy đủ + viền
-       đậm làm huy hiệu đọc ra hệ ngay. Không ảnh thì huy hiệu vector
-       to hơn (r=12, viền 3px). */
-    var badgeKey = { fire: "badge_fire", water: "badge_water", elec: "badge_elec" }[m.weak];
+    /* Huy hiệu hệ yếu ở góc phải (v105e): đĩa màu hệ ĐẶC (r=17) + icon
+       hệ vẽ bằng NÉT trắng ở giữa — BỎ ảnh badge Canva làm nền (ảnh
+       Điện nhạt lavender nên nền chính giữa vẫn nhạt dù v105d đã vẽ đĩa
+       tím phía sau; ảnh Lửa/Nước đạt nhưng dùng chung một kiểu vẽ cho
+       cả 3 hệ để thống nhất). Nét trắng không che điểm chính giữa nên
+       tâm huy hiệu vẫn là màu hệ đặc. */
     var bgx = px + s * 0.85, bgy = py - s * 0.75;
     var badgeCol = ELEMENTS[m.weak] ? ELEMENTS[m.weak].color : C.ink300;
     var badgeDark = ELEMENTS[m.weak] ? ELEMENTS[m.weak].dark : C.ink600;
@@ -1493,11 +1502,7 @@
     ctx.beginPath(); ctx.arc(bgx, bgy, 17, 0, Math.PI * 2); ctx.fill();
     ctx.strokeStyle = badgeDark; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.arc(bgx, bgy, 17, 0, Math.PI * 2); ctx.stroke();
-    if (rlReady(badgeKey)) {
-      ctx.drawImage(rlImg[badgeKey].img, bgx - 13, bgy - 13, 26, 26);
-    } else {
-      drawElBadge(ctx, m.weak, bgx, bgy, 12);
-    }
+    drawElIcon(ctx, m.weak, bgx, bgy, 12, true);
     /* Thanh máu. */
     var bw = s * 1.9, bx = px - bw / 2, by = py - s * 1.35;
     ctx.fillStyle = C.grey400;
