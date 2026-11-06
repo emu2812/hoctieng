@@ -52,7 +52,7 @@
         "Vườn Nấm", "Cây Cổ Thụ", "Hang Đom Đóm", "Đỉnh Tán Lá", "Hang Trùm Bóng Tối"] },
     { id: 2, name: "Làng Chài", icon: "🎣", theme: "đời sống", boss: "Trùm Sóng Đen",
       accent: "teal", desc: "Từ về đời sống, gia đình, ăn uống, chợ búa và việc nhà.",
-      weather: { key: "sun", season: "Mùa hè", name: "Nắng vàng", icon: "☀️", element: "fire", mult: 1.5 },
+      weather: { key: "firefest", season: "Mùa hè", name: "Đêm Hội Lửa", icon: "🎇", element: "fire", mult: 1.5 },
       stages: ["Bến Cá", "Chợ Sáng", "Bếp Lửa Hồng", "Nhà Gỗ Ven Sông", "Vườn Rau",
         "Quán Nước Đầu Làng", "Thuyền Buồm", "Kho Lúa", "Đêm Hội Làng", "Hang Trùm Sóng Đen"] },
     { id: 3, name: "Thành Phố", icon: "🏙️", theme: "công việc và học tập", boss: "Trùm Bóng Đêm",
@@ -809,6 +809,24 @@
           }
         }
       });
+      /* Tách quái chồng nhau (v100 B3): quái trôi về phía rồng nên hay
+         tụ lại một chỗ — đẩy ngang các quái đang tiến tới khi chúng quá
+         gần nhau (cả hai chiều), để hình quái + nhãn "Sợ..." luôn đọc
+         được. Trùm không bị đẩy. */
+      var adv = st.words.filter(function (w) { return w.status === "advancing"; });
+      for (var si = 0; si < adv.length; si++) {
+        for (var sj = si + 1; sj < adv.length; sj++) {
+          var A = adv[si], B = adv[sj];
+          if (A.isBoss || B.isBoss) continue;
+          var sdx = B.x - A.x, sdy = B.y - A.y;
+          if (Math.abs(sdy) < 0.12 && Math.abs(sdx) < 0.10) {
+            var push = (0.10 - Math.abs(sdx)) / 2 + 0.005;
+            var dir = (sdx > 0) ? 1 : (sdx < 0 ? -1 : ((si % 2 === 0) ? 1 : -1));
+            A.x = Math.max(0.06, Math.min(0.94, A.x - dir * push));
+            B.x = Math.max(0.06, Math.min(0.94, B.x + dir * push));
+          }
+        }
+      }
       /* Đạn của quái bay tới rồng: trúng thì mất tim (ân hạn 500ms sau
          mỗi lần mất tim vẫn bảo vệ khỏi đạn). */
       for (var i = st.bolts.length - 1; i >= 0; i--) {
@@ -1156,16 +1174,28 @@
         var ry = (((i * 173 + t / 14) % (H + 40)) + H + 40) % (H + 40) - 20;
         ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(rx - 6, ry + 14); ctx.stroke();
       }
-    } else if (w.key === "sun") {
-      /* Nắng vàng: tia sáng từ góc trên-trái + mặt trời nhỏ. */
-      ctx.strokeStyle = "rgba(251,191,36,.28)"; ctx.lineWidth = 5;
-      for (var j = 0; j < 7; j++) {
-        var ang = -0.5 + j * 0.22;
-        ctx.beginPath(); ctx.moveTo(W * 0.08, H * 0.06);
-        ctx.lineTo(W * 0.08 + Math.cos(ang) * W * 0.5, H * 0.06 + Math.sin(ang) * H * 0.6); ctx.stroke();
+    } else if (w.key === "firefest") {
+      /* Đêm Hội Lửa (v100 B4): cảnh làng chài là ĐÊM có trăng nên tia
+         nắng thẳng ban ngày lệch hẳn — đổi thành ánh lửa trại ấm từ
+         góc dưới-trái + tàn lửa/đom đóm lửa bay lên, hợp đêm, vẫn hệ
+         Lửa +50%. */
+      /* Quầng lửa trại ấm ba lớp (ngoài nhạt → trong đậm → lõi sáng) để
+         ánh lửa đọc được là lửa ấm trên nền đêm, không phải mảng sương
+         nhạt; tàn lửa bay lên quanh quầng. */
+      ctx.fillStyle = "rgba(245,158,11,.16)";
+      ctx.beginPath(); ctx.ellipse(W * 0.12, H * 0.85, W * 0.3, H * 0.16, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(251,191,36,.18)";
+      ctx.beginPath(); ctx.ellipse(W * 0.12, H * 0.85, W * 0.18, H * 0.1, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(245,158,11,.30)";
+      ctx.beginPath(); ctx.ellipse(W * 0.10, H * 0.93, W * 0.07, H * 0.04, 0, 0, Math.PI * 2); ctx.fill();
+      for (var fe = 0; fe < 14; fe++) {
+        var fx = (((fe * 97 + Math.sin(t / 1300 + fe * 2.1) * 14) % W) + W) % W;
+        var fy = H * (0.8 - ((((t / 9000 + fe * 0.06) % 0.6) + 0.6) % 0.6));
+        ctx.globalAlpha = 0.4 + 0.45 * (0.5 + 0.5 * Math.sin(t / 500 + fe * 1.8));
+        ctx.fillStyle = (fe % 3 === 0) ? C.amber400 : C.amber500;
+        ctx.beginPath(); ctx.arc(fx, fy, 2.4, 0, Math.PI * 2); ctx.fill();
       }
-      ctx.fillStyle = "rgba(251,191,36,.5)";
-      ctx.beginPath(); ctx.arc(W * 0.08, H * 0.06, 26, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 1;
     } else if (w.key === "storm") {
       /* Giông: chớp sáng cả sân theo chu kỳ + một tia sét răng cưa. */
       var cyc = (t % 4000) / 4000;
@@ -1469,6 +1499,9 @@
      gây sát thương. */
   var HINT_DEFAULT = "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái; chạm quái để khóa, gõ đúng từ để tung chiêu. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng hoặc đạn trúng rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu. 5 vùng × 10 ải, trùm mỗi vùng đổi hệ sau mỗi 1/3 máu — thắng trùm Núi Lửa mở Chế độ Vô Tận.";
   var HINT_STAGE1 = "👉 Bước 1: CHẠM vào quái để khóa nó (quái đã khóa có viền vàng — quái đầu tiên đã khóa sẵn cho bạn). Bước 2: GÕ đúng từ trên thẻ của quái để tung chiêu. Đúng hệ khắc quái gây sát thương tối đa. Quái ải 1 đi chậm và không bắn trong 30 giây đầu — cứ bình tĩnh gõ!";
+  /* v100 B6: ải 1 các vùng 2–5 — cùng 2 bước khóa + gõ, nhưng KHÔNG có
+     câu "không bắn trong 30 giây đầu" (luật nhẹ nhàng chỉ ở vùng 1 ải 1). */
+  var HINT_STAGE1_OTHER = "👉 Bước 1: CHẠM vào quái để khóa nó (quái đã khóa có viền vàng — quái đầu tiên đã khóa sẵn cho bạn). Bước 2: GÕ đúng từ trên thẻ của quái để tung chiêu. Đúng hệ khắc quái gây sát thương tối đa. Quái ở vùng này bắn đạn bình thường (chỉ ải 1 vùng 1 mới nhẹ nhàng) — vừa gõ vừa né nhé!";
 
   function esc(s) { return G71.escHtml(s); }
   function toastSafe(msg) { try { if (typeof toast === "function") toast(msg); } catch (e) {} }
@@ -1785,8 +1818,11 @@
       level: lv, battle: b, boss: isBoss, region: rg,
       hearts: run.hearts, shield: run.shield, element: curElement
     });
-    /* v99 B4: ải 1 — gợi ý rõ từng bước + khóa sẵn quái đầu tiên. */
-    if (stage && stage.hint) stage.hint.textContent = (lv === 1) ? HINT_STAGE1 : HINT_DEFAULT;
+    /* v99 B4: ải 1 — gợi ý rõ từng bước + khóa sẵn quái đầu tiên.
+       v100 B6: câu "quái ải 1 không bắn trong 30 giây đầu" chỉ đúng ở
+       vùng 1 ải 1 (luật nhẹ nhàng) — các vùng khác ải 1 dùng gợi ý
+       riêng, không ghi câu đó. */
+    if (stage && stage.hint) stage.hint.textContent = (lv === 1) ? ((rg === 1) ? HINT_STAGE1 : HINT_STAGE1_OTHER) : HINT_DEFAULT;
     if (lv === 1) autoLockLowest();
   }
 

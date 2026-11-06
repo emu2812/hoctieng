@@ -214,15 +214,63 @@
       if (hintEl) hintEl.style.display = open ? "" : "none";
     }
     applyHelp();
-    if (helpBtn) helpBtn.onclick = function () {
-      var open = hintEl && hintEl.style.display === "none";
-      helpChoice = open;
-      applyHelp();
-    };
+    /* Nút "?" mở bảng hướng dẫn thật (v100 B1): trước đây "?" chỉ bật/
+       tắt một dòng gợi ý nhỏ ở cuối sân — trên trình duyệt thật tác
+       dụng này gần như không nhìn thấy nên người chơi tưởng nút chết.
+       Bảng hướng dẫn hiện nội dung gợi ý hiện tại (trò chơi cập nhật
+       dòng này theo trận/bản đồ) trong hộp thoại rõ ràng, có nút đóng;
+       bấm "?" lần nữa hoặc bấm nền mờ cũng đóng. Gắn bằng event
+       delegation trên khung sân khấu để nút vẫn bấm được dù tiêu đề
+       được vẽ lại. */
+    var guideBox = null;
+    function toggleGuide() {
+      if (guideBox && guideBox.parentNode) {
+        guideBox.parentNode.removeChild(guideBox);
+        guideBox = null;
+        return;
+      }
+      var txt = (hintEl && hintEl.textContent) || hint || "";
+      guideBox = document.createElement("div");
+      guideBox.id = "g71Guide";
+      guideBox.style.cssText = "position:absolute;inset:0;z-index:6;overflow:auto;background:rgba(4,6,15,.55);display:flex;align-items:center;justify-content:center;padding:16px;";
+      guideBox.innerHTML = '<div style="background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.18);padding:24px 22px;max-width:560px;width:100%;">'
+        + '<h2 style="margin:0 0 10px;">📖 Hướng dẫn</h2>'
+        + '<p style="margin:6px 0;line-height:1.6;">' + escHtml(txt) + '</p>'
+        + '<div class="row" style="justify-content:center;margin-top:14px;"><button class="btn btn-primary" id="g71GuideClose">Đã hiểu</button></div></div>';
+      var cb = guideBox.querySelector("#g71GuideClose");
+      if (cb) cb.onclick = toggleGuide;
+      guideBox.addEventListener("click", function (e) { if (e.target === guideBox) toggleGuide(); });
+      var wrap = ov.querySelector("#g71CanvasWrap");
+      if (wrap) wrap.appendChild(guideBox);
+    }
+    ov.addEventListener("click", function (e) {
+      var t = e && e.target;
+      if (t && t.closest && t.closest("#g71Help")) toggleGuide();
+    });
     function resize() {
       try {
         var w = cv.clientWidth, h = cv.clientHeight;
-        if (w && h && (cv.width !== w || cv.height !== h)) { cv.width = w; cv.height = h; }
+        if (w && h && (cv.width !== w || cv.height !== h)) {
+          /* Giữ khung hình cuối khi đổi cỡ canvas (v100 B2): gán
+             cv.width/cv.height XÓA canvas — khi thua/thắng, sân khấu
+             ẩn bàn phím + thanh hệ làm khung canvas đổi cỡ, khung hình
+             cuối mất, nền mờ phía sau hộp thoại thành trang xám phẳng.
+             Chụp nhanh khung hình ra canvas phụ rồi vẽ lại sau khi đổi cỡ. */
+          var snap = null, sw = 0, sh = 0;
+          try {
+            if (ctx && cv.width > 0 && cv.height > 0) {
+              snap = document.createElement("canvas");
+              snap.width = cv.width; snap.height = cv.height;
+              var sctx = snap.getContext("2d");
+              if (sctx) { sctx.drawImage(cv, 0, 0); sw = cv.width; sh = cv.height; }
+              else snap = null;
+            }
+          } catch (e) { snap = null; }
+          cv.width = w; cv.height = h;
+          if (snap && ctx) {
+            try { ctx.drawImage(snap, 0, 0, sw, sh, 0, 0, w, h); } catch (e) {}
+          }
+        }
       } catch (e) {}
     }
     resize();
@@ -251,7 +299,7 @@
     if (exitBtn) exitBtn.onclick = close;
     var api = { el: ov, canvas: cv, ctx: ctx, hud: ov.querySelector("#g71Hud"),
       wrap: ov.querySelector("#g71CanvasWrap"), hint: hintEl, helpBtn: helpBtn,
-      resize: resize, close: close };
+      guide: toggleGuide, resize: resize, close: close };
     stage = api;
     return api;
   }
