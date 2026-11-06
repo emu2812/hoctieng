@@ -531,6 +531,18 @@
   function stageOpen(rl, region, stage) {
     return regionOpen(rl, region) && stage <= regionProg(rl, region).unlocked;
   }
+  /* v105b: khách đã thắng ải nào chưa — bản đồ lần đầu phải mở ở
+     Vùng 1 (Rừng Xanh) cho khách mới, dù XP web của khách đã đủ mở
+     Vùng 2 (trước đây curRegion = vùng mở cao nhất nên khách có
+     XP >= 100 mở bản đồ lần đầu đã thấy Làng Chài — kiểm render
+     v105 bắt được). */
+  function hasAnyCleared(rl) {
+    if (!rl || !rl.progress) return false;
+    return Object.keys(rl.progress).some(function (k) {
+      var p = rl.progress[k] || {};
+      return p.cleared && Object.keys(p.cleared).length > 0;
+    });
+  }
   function stageCleared(rl, region, stage) {
     var p = rl.progress[String(region)];
     return !!(p && p.cleared && p.cleared[String(stage)]);
@@ -618,6 +630,7 @@
     regions: REGIONS,
     xpNeedFor: xpNeedFor,
     regionOpen: regionOpen,
+    hasAnyCleared: hasAnyCleared,
     battleSize: function (level, battle) { return 2 + level + battle; },
     /* HP quái tăng theo vùng: 3 + (ải−1) + (vùng−1)×2 (vùng 1 giữ nguyên). */
     monsterHp: function (level, region) { return 3 + (level - 1) + ((region || 1) - 1) * 2; },
@@ -1662,7 +1675,9 @@
     RL = loadRL();
     run = null;
     mode = "map";
-    curRegion = Math.min(RL.region, 5);
+    /* v105b: khách mới (chưa thắng ải nào) mở bản đồ lần đầu phải thấy
+       Vùng 1; người chơi cũ vẫn mở ở vùng xa nhất đã mở. */
+    curRegion = hasAnyCleared(RL) ? Math.min(RL.region, 5) : 1;
     var stg = G71.openStage("🔥 Rồng Lửa — 5 Vùng", HINT_DEFAULT,
       function () { teardown(); });
     stage = stg;

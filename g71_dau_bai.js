@@ -46,6 +46,17 @@
   }
   function elName(k) { return ELEMENTS[k] ? ELEMENTS[k].name : ""; }
   function elIcon(k) { return ELEMENTS[k] ? ELEMENTS[k].icon : ""; }
+  /* Hệ gắn với từng từ (băm từ từ — ổn định qua các trận và qua mọi
+     lần vẽ lại, không xáo lại mỗi lần buildDeck; v105 xáo hệ mỗi lần
+     buildDeck nên cùng một lá lúc thì viền Lửa lúc thì viền Nước —
+     kiểm render v105 bắt được: cùng hệ Điện mà "mend" viền xanh ngọc,
+     "lonely" viền cam). Lá đã có hệ lưu trong bộ sưu tập thì giữ hệ
+     đó; lá chưa có hệ thì suy từ từ. */
+  function elFor(w) {
+    var h = 0, s = String(w || "");
+    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 997;
+    return EL_ORDER[h % EL_ORDER.length];
+  }
   /* Đúng hệ khắc: gấp đôi; sai hệ (bị khắc): một nửa; bằng hệ: đủ. */
   function dmgFor(power, atkEl, defEl) {
     var mult = 1;
@@ -116,12 +127,10 @@
   }
 
   /* Lá bài từ từ thật: sức mạnh = độ dài từ (+ thưởng nâng cấp); hệ
-     chia đều 3 hệ rồi xáo; loại suy từ từ; giá theo sức + loại
-     (- giảm giá khi đã nâng cấp, tối thiểu 1). */
+     lấy hệ đã lưu của lá, chưa có thì suy từ từ (elFor — ổn định,
+     không xáo lại mỗi lần buildDeck); loại suy từ từ; giá theo sức +
+     loại (- giảm giá khi đã nâng cấp, tối thiểu 1). */
   function buildDeck(words, upgrades) {
-    var els = [];
-    for (var i = 0; i < words.length; i++) els.push(EL_ORDER[i % 3]);
-    G71.shuffle(els);
     return words.map(function (wd, i) {
       var key = String(wd.w).toLowerCase();
       var up = (upgrades && upgrades[key]) || null;
@@ -130,6 +139,7 @@
       var power = String(wd.type || wd.w).length + powerBonus;
       var kind = kindFor(wd.w);
       var cost = Math.max(1, costForBase({ power: power, kind: kind }) - costCut);
+      var el = (wd.el && ELEMENTS[wd.el]) ? wd.el : elFor(wd.w);
       /* Cụm/ví dụ: lá trong bộ sưu tập không lưu col/ex — tra lại từ
          kho track (pool có col/ex) để lá bài hiện đủ nội dung. */
       var col = String(wd.col || ""), ex = String(wd.ex || "");
@@ -142,7 +152,7 @@
         } catch (e) {}
       }
       return { w: String(wd.w), vi: String(wd.vi), type: String(wd.type || wd.w),
-        el: els[i], power: power, kind: kind, cost: cost, lvl: up ? (up.lvl || 0) : 0,
+        el: el, power: power, kind: kind, cost: cost, lvl: up ? (up.lvl || 0) : 0,
         col: col, ex: ex };
     });
   }
@@ -155,6 +165,7 @@
   }
   var LOGIC = {
     elements: ELEMENTS,
+    elFor: elFor,
     kinds: KINDS,
     nextEl: nextEl,
     beats: beats,
@@ -591,9 +602,13 @@
     var kind = KINDS[c.kind] || KINDS.attack;
     var el = ELEMENTS[c.el] || ELEMENTS.fire;
     var up = (DB.upgrades && DB.upgrades[key]) || null;
-    return '<button class="btn" data-db-deck-card="' + esc(key) + '" style="text-align:left;padding:10px 12px;min-width:150px;flex:1 1 150px;border:2px solid ' + el.color + ';'
-      + (selected ? 'background:#FDE68A;box-shadow:0 0 0 3px #F59E0B;' : '')
-      + '"><span style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;"><span>' + kind.icon + ' ' + kind.name + '</span><span>⚡' + c.cost + '</span></span>'
+    /* v105b: bo 20px theo ART_DIRECTION (class .btn cho bo 999px làm lá
+       thành viên thuốc dài, mép cong ăn vào chữ); viền + vòng chọn đúng
+       màu hệ (vòng chọn trước đây cố định hổ phách nên che mất màu hệ);
+       bỏ flex để khung grid chia cột đều (lá cuối không giãn). */
+    return '<button class="btn" data-db-deck-card="' + esc(key) + '" style="text-align:left;padding:10px 12px;min-width:150px;border-radius:20px;border:2px solid ' + el.color + ';'
+      + (selected ? 'background:#FDE68A;box-shadow:0 0 0 3px ' + el.color + ';' : '')
+      + '"><span style="display:flex;justify-content:space-between;gap:4px;font-size:13px;font-weight:700;"><span>' + kind.icon + ' ' + kind.name + '</span><span>⚡' + c.cost + '</span></span>'
       + '<span style="display:block;font-size:17px;font-weight:700;">' + esc(G71.displayWord(c)) + (up ? ' <span style="color:#B45309;">★' + up.lvl + '</span>' : '') + '</span>'
       + '<span style="display:block;font-size:13px;color:#57534A;">' + esc(c.vi) + '</span>'
       + '<span style="display:block;font-size:13px;font-weight:700;">' + el.icon + ' ' + el.name + ' · sức ' + c.power + '</span></button>';
@@ -612,7 +627,7 @@
       + '<button class="btn" id="dbExit">✕ Thoát</button></div>'
       + '<p class="mut" style="margin:6px 0;">Chọn đúng <b>12 lá</b> từ bộ sưu tập (' + keys.length + ' lá) để vào trận. Mỗi lá có loại + hệ + sức + giá ⚡ riêng — lá mạnh tốn nhiều năng lượng, xếp bộ sao cho vừa đánh vừa đỡ vừa hồi.</p>'
       + '<p style="font-weight:700;margin:6px 0;">🪙 Vàng: ' + readGold() + ' · 🏆 Thắng: ' + DB.wins + ' · Thua: ' + DB.losses + ' · Đã chọn: <span id="dbDeckCount">' + deckSel.length + '</span>/12 lá</p>'
-      + '<div style="display:flex;flex-wrap:wrap;gap:8px;">' + cardsHtml + '</div>'
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;">' + cardsHtml + '</div>'
       + '<div class="row" style="margin-top:14px;flex-wrap:wrap;">'
       + '<button class="btn btn-primary" id="dbStart" data-db-start' + (deckSel.length === DECK_SIZE ? '' : ' disabled') + '>⚔️ Vào trận (' + deckSel.length + '/12)</button>'
       + '<button class="btn" id="dbRandom">🎲 Chọn ngẫu nhiên 12 lá</button>'
@@ -703,12 +718,12 @@
     var exLine = "";
     if (c.col) exLine = '<span style="display:block;font-size:12px;color:#57534A;font-style:italic;">“' + esc(c.col) + '”</span>';
     else if (c.ex) exLine = '<span style="display:block;font-size:12px;color:#57534A;font-style:italic;">“' + esc(String(c.ex).slice(0, 42)) + (String(c.ex).length > 42 ? '…' : '') + '”</span>';
-    return '<button class="btn" data-db-card="' + i + '" style="text-align:left;padding:10px 12px;min-width:150px;flex:1 1 150px;border:2px solid ' + el.color + ';'
-      + (sel ? 'background:#FDE68A;box-shadow:0 0 0 3px #F59E0B;' : 'box-shadow:0 2px 8px ' + el.color + '44;')
+    return '<button class="btn" data-db-card="' + i + '" style="text-align:left;padding:10px 12px;min-width:150px;border-radius:20px;border:2px solid ' + el.color + ';'
+      + (sel ? 'background:#FDE68A;box-shadow:0 0 0 3px ' + el.color + ';' : 'box-shadow:0 2px 8px ' + el.color + '44;')
       + (afford ? '' : 'opacity:.55;')
-      + '"><span style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;"><span>' + kind.icon + ' ' + kind.name + '</span><span>⚡' + c.cost + '</span></span>'
-      + '<span style="display:block;font-size:17px;font-weight:700;">' + esc(G71.displayWord(c)) + (c.lvl ? ' <span style="color:#B45309;">★' + c.lvl + '</span>' : '') + '</span>'
-      + '<span style="display:block;font-size:13px;color:#57534A;">' + esc(c.vi) + '</span>'
+      + '"><span style="display:flex;justify-content:space-between;gap:4px;font-size:13px;font-weight:700;"><span>' + kind.icon + ' ' + kind.name + '</span><span>⚡' + c.cost + '</span></span>'
+      + '<span style="display:block;font-size:17px;font-weight:700;overflow-wrap:break-word;">' + esc(G71.displayWord(c)) + (c.lvl ? ' <span style="color:#B45309;">★' + c.lvl + '</span>' : '') + '</span>'
+      + '<span style="display:block;font-size:13px;color:#57534A;overflow-wrap:break-word;">' + esc(c.vi) + '</span>'
       + '<span style="display:block;font-size:13px;font-weight:700;">' + el.icon + ' ' + el.name + ' · sức ' + c.power + '</span>'
       + exLine + '</button>';
   }
@@ -766,7 +781,7 @@
       + '<p style="margin:4px 0;">Lá vừa đánh: ' + lastCardLine(match.pLast) + '</p>'
       + '<div class="row" style="margin-top:8px;"><button class="btn btn-primary" data-db-endturn' + (pend ? ' disabled' : '') + '>⏭️ Kết thúc lượt (' + match.pEnergy + ' ⚡ còn lại)</button></div></section>'
       + '<h3 style="margin:12px 0 6px;">🖐️ Bài trên tay (' + match.pHand.length + " lá)</h3>"
-      + '<div style="display:flex;flex-wrap:wrap;gap:8px;">' + match.pHand.map(cardHTML).join("") + "</div>"
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;">' + match.pHand.map(cardHTML).join("") + "</div>"
       + typeHtml
       + kbHtml;
     var ex = arena.querySelector("#dbExit");

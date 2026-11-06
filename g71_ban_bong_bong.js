@@ -59,20 +59,26 @@
       if (hi < lo) { lo = r + 4; hi = W - r - 4; }
       return [lo, hi];
     }
-    function spawnBubble(word, top, slot, disp) {
+    /* v105b: bong bóng luôn nằm TRỌN trong màn ngay khi sinh — y so le
+       theo khe nhưng kẹp trong [r, H-r] (trước đây sinh dưới đáy
+       H+40+slot*70 nên ló nửa viên dưới cát, và trôi khỏi mép trên
+       rồi mới nổi lại — kiểm render v105 bắt được). */
+    function spawnBubble(word, slot, disp) {
       var W = cv.width || 360, H = cv.height || 480;
       var r = radiusFor(disp || word);
       var cx = G71.bubbleSlotX(W, SLOTS, slot);
       var bd = slotBounds(W, slot, r);
       var x = Math.max(bd[0], Math.min(bd[1], cx + (Math.random() - 0.5) * 16));
+      var stag = Math.min(70, Math.max(20, (H - 2 * r) / SLOTS));
+      var y = Math.max(r, H - r - slot * stag);
       return { word: word, disp: disp || word, slot: slot,
-        x: x, y: top ? -60 : H + 40 + slot * 70,
+        x: x, y: y,
         r: r, vy: 26 + Math.random() * 22, ph: Math.random() * 6.28 };
     }
     function loadRound() {
       var rd = st.rounds[st.round];
       if (!rd) return;
-      bubbles = rd.options.map(function (opt, i) { return spawnBubble(opt, false, i, rd.disp && rd.disp[opt]); });
+      bubbles = rd.options.map(function (opt, i) { return spawnBubble(opt, i, rd.disp && rd.disp[opt]); });
     }
     function hud() {
       var rd = st.rounds[Math.min(st.round, st.rounds.length - 1)];
@@ -86,7 +92,9 @@
     function fire() {
       if (!running || st.over) return;
       var W = cv.width, H = cv.height;
-      bullets.push({ x: W / 2, y: H - 64, vx: Math.cos(aim) * 620, vy: Math.sin(aim) * 620 });
+      /* v105b: đạn xuất phát từ đầu nòng (62px theo hướng ngắm),
+         không phải từ tâm đế — đạn bay ra khỏi nòng trông như bắn. */
+      bullets.push({ x: W / 2 + Math.cos(aim) * 62, y: H - 64 + Math.sin(aim) * 62, vx: Math.cos(aim) * 620, vy: Math.sin(aim) * 620 });
     }
     function aimAt(cx, cy) {
       var r = cv.getBoundingClientRect();
@@ -140,8 +148,11 @@
         /* Giữ bong bóng trong khe, không tràn mép màn hình. */
         var bd2 = slotBounds(W, b.slot, b.r);
         b.x = Math.max(bd2[0], Math.min(bd2[1], b.x));
-        if (b.y < -b.r - 10) {
-          b.y = H + 40;
+        if (b.y - b.r <= 0) {
+          /* v105b: chạm mép trên thì nổi lại từ đáy — luôn trọn trong
+             màn (trước đây trôi khỏi mép trên hẳn rồi mới xuất hiện
+             lại từ dưới đáy H+40, nửa chìm dưới cát). */
+          b.y = H - b.r;
           b.x = Math.max(bd2[0], Math.min(bd2[1],
             G71.bubbleSlotX(W, SLOTS, b.slot) + (Math.random() - 0.5) * 16));
         }
@@ -179,7 +190,7 @@
               var cand = G71.pool().filter(function (p) { return taken.indexOf(p.w) < 0 && !G71.isSingleLetter(p); });
               if (cand.length) {
                 var pick = cand[Math.floor(Math.random() * cand.length)];
-                bubbles.push(spawnBubble(pick.w, false, freedSlot, G71.displayWord(pick)));
+                bubbles.push(spawnBubble(pick.w, freedSlot, G71.displayWord(pick)));
               }
             }
           }
@@ -220,17 +231,28 @@
         ctx.beginPath(); ctx.arc(bl.x, bl.y, 5, 0, Math.PI * 2);
         ctx.fillStyle = "#FDE68A"; ctx.fill();
       });
-      /* v105: sung dung he chàm + ho phach + teal (ART_DIRECTION.md):
-         nong chàm đậm, dau nong ho phach, de ho phach vien chàm đậm,
-         tam kem + cham teal — khong con cam do #F05A28 / den #1F2430. */
+      /* v105b: súng đọc ra là SÚNG đặt trên bệ (v105 nòng mỏng 9px +
+         đế tròn nên live vẫn đọc như "vòng tròn cam + nòng nhỏ"):
+         bệ súng hình thang chàm đậm từ đế xuống cát, nòng chàm đậm dày
+         13px dài 62px, đầu nòng hổ phách dày 15px, đế hổ phách + tâm
+         kem + chấm teal giữ nguyên. Đạn nay xuất phát từ đầu nòng. */
       var cx0 = W / 2, cy0 = H - 64;
-      var tipX = cx0 + Math.cos(aim) * 52, tipY = cy0 + Math.sin(aim) * 52;
-      ctx.strokeStyle = "#1E1B4B"; ctx.lineWidth = 9; ctx.lineCap = "round";
-      ctx.beginPath(); ctx.moveTo(cx0, cy0);
-      ctx.lineTo(cx0 + Math.cos(aim) * 40, cy0 + Math.sin(aim) * 40); ctx.stroke();
-      ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 9; ctx.lineCap = "round";
+      var tipX = cx0 + Math.cos(aim) * 62, tipY = cy0 + Math.sin(aim) * 62;
+      var midX = cx0 + Math.cos(aim) * 50, midY = cy0 + Math.sin(aim) * 50;
+      ctx.fillStyle = "#1E1B4B";
       ctx.beginPath();
-      ctx.moveTo(cx0 + Math.cos(aim) * 40, cy0 + Math.sin(aim) * 40);
+      ctx.moveTo(cx0 - 16, cy0 + 12);
+      ctx.lineTo(cx0 + 16, cy0 + 12);
+      ctx.lineTo(cx0 + 27, H - 4);
+      ctx.lineTo(cx0 - 27, H - 4);
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(cx0 - 16, cy0 + 12); ctx.lineTo(cx0 + 16, cy0 + 12); ctx.stroke();
+      ctx.strokeStyle = "#1E1B4B"; ctx.lineWidth = 13; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(cx0, cy0);
+      ctx.lineTo(midX, midY); ctx.stroke();
+      ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 15; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(midX, midY);
       ctx.lineTo(tipX, tipY); ctx.stroke();
       ctx.fillStyle = "#F59E0B";
       ctx.beginPath(); ctx.arc(cx0, cy0, 24, 0, Math.PI * 2); ctx.fill();

@@ -47,32 +47,37 @@
        chơi đang thấy — trước đây typeLetter tự khóa cả từ còn ở trên
        mép màn (y < 0), nên Nghĩa có thể hiện nghĩa của từ chưa nhìn
        thấy (ảnh Bùi gửi 06/11: "lớn tuổi" trong khi các từ thấy được
-       là sanitise/medicine/pottery). */
-    targetWord: function (st) {
+       là sanitise/medicine/pottery). v105b: minY (mặc định 0) — ngưỡng
+       "vào màn" theo chân dung vẽ thật (viên chỉ hiện trọn khi
+       y >= 28/H); code live truyền visY(), probe cũ gọi không tham
+       số vẫn giữ hành vi y>=0. */
+    targetWord: function (st, minY) {
+      var minYv = (typeof minY === "number") ? minY : 0;
       if (st.active !== null && st.words[st.active]
-          && st.words[st.active].status === "falling" && st.words[st.active].y >= 0) {
+          && st.words[st.active].status === "falling" && st.words[st.active].y >= minYv) {
         return st.words[st.active];
       }
       var low = null;
       st.words.forEach(function (wd) {
-        if (wd.status === "falling" && wd.y >= 0 && (!low || wd.y > low.y)) low = wd;
+        if (wd.status === "falling" && wd.y >= minYv && (!low || wd.y > low.y)) low = wd;
       });
       return low;
     },
     /* Gõ sai (v83): chỉ gõ lại, KHÔNG mất tim — thua vì chậm tay / né
        dở, không phải vì trả lời sai. */
-    typeLetter: function (st, ch, now) {
+    typeLetter: function (st, ch, now, minY) {
       if (st.over) return { ok: false };
       ch = String(ch || "").toLowerCase();
       if (!ch || ch.length !== 1) return { ok: false };
       if (now < st.graceUntil) return { ok: false, grace: true };
+      var minYv = (typeof minY === "number") ? minY : 0;
       var w = null;
       if (st.active !== null && st.words[st.active] && st.words[st.active].status === "falling") {
         w = st.words[st.active];
       } else {
         var best = null;
         st.words.forEach(function (wd, i) {
-          if (wd.status !== "falling" || wd.y < 0) return;
+          if (wd.status !== "falling" || wd.y < minYv) return;
           var tg = wd.type || wd.w;
           if (tg.charAt(wd.progress).toLowerCase() !== ch) return;
           if (best === null || wd.y > st.words[best].y) best = i;
@@ -97,11 +102,34 @@
       }
       return { ok: false, wrong: true };
     },
-    lockWord: function (st, idx) {
+    lockWord: function (st, idx, minY) {
       if (st.over) return;
       /* v101: chỉ khóa từ đã vào màn (y >= 0) — từ chưa nhìn thấy thì
-         chạm/gõ cũng không khóa được, thanh Nghĩa không lệch. */
-      if (st.words[idx] && st.words[idx].status === "falling" && st.words[idx].y >= 0) st.active = idx;
+         chạm/gõ cũng không khóa được, thanh Nghĩa không lệch. v105b:
+         minY (mặc định 0) — code live truyền visY() để chỉ khóa từ
+         đã hiện trọn viên. */
+      var minYv = (typeof minY === "number") ? minY : 0;
+      if (st.words[idx] && st.words[idx].status === "falling" && st.words[idx].y >= minYv) st.active = idx;
+    },
+    /* Chân dung vẽ thật của viên (v105b): thân + chữ như vòng vẽ —
+       đo theo pixel vẽ thật, không đo hộp logic (bài học tách quái
+       v102). W/H mặc định 360×500 khi chưa có canvas (frame() ghi
+       st.canvasW/H trước khi tick). Trả về rect pixel (tâm x kẹp mép
+       như vòng vẽ): rộng ≈ dài chữ*10+28, cao 34px (1 dòng) / 54px
+       (2 dòng ZH/TP: chữ Hán/Hangul trên, pinyin/phiên âm dưới). */
+    pillRect: function (st, wd) {
+      var W = (st && st.canvasW) || 360, H = (st && st.canvasH) || 500;
+      var wdType = wd.type || wd.w;
+      var dispW = wd.w;
+      try { if (typeof G71 !== "undefined" && G71.displayWord) dispW = G71.displayWord(wd); } catch (e) {}
+      var dispType = (dispW.length === wdType.length) ? dispW : wdType;
+      var twoLine = wdType !== wd.w;
+      var wide = (dispW.length >= dispType.length) ? dispW : dispType;
+      var tw = Math.max(60, wide.length * 10 + 28);
+      var halfH = twoLine ? 28 : 18;
+      var px = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, wd.x * W));
+      var py = wd.y * H;
+      return { x0: px - tw / 2, y0: py - halfH, x1: px + tw / 2, y1: py + halfH, w: tw, h: halfH * 2 };
     },
     tick: function (st, dt, now) {
       if (st.over) return;
@@ -121,6 +149,41 @@
         }
       });
       if (st.over) return;
+      /* v105b: tách viên khi chồng (như tách quái Rồng Lửa v102) —
+         đo theo CHÂN DUNG VẼ THẬT của viên (pillRect: thân + chữ,
+         tâm x kẹp mép như vòng vẽ), không đo hộp logic; tách theo
+         trục chồng ít nhất (theo px); dọc chỉ đẩy viên THẤP hơn
+         xuống, không bao giờ đẩy lên, và chỉ đẩy khi viên đó đã vào
+         màn (trên màn đã thấy thì tách ngang thay cho tách dọc). */
+      (function () {
+        var Wd = (st.canvasW) || 360, Hd = (st.canvasH) || 500;
+        var fall = st.words.filter(function (wd) { return wd.status === "falling"; });
+        for (var a = 0; a < fall.length; a++) {
+          for (var b = a + 1; b < fall.length; b++) {
+            var A = fall[a], B = fall[b];
+            var ra = LOGIC.pillRect(st, A), rb = LOGIC.pillRect(st, B);
+            var ox = Math.min(ra.x1, rb.x1) - Math.max(ra.x0, rb.x0);
+            var oy = Math.min(ra.y1, rb.y1) - Math.max(ra.y0, rb.y0);
+            if (ox <= 0 || oy <= 0) continue;
+            if (ox <= oy) {
+              var push = (ox / 2 + 2) / Wd;
+              var dir = (A.x <= B.x) ? -1 : 1;
+              A.x = Math.max(0.06, Math.min(0.94, A.x + dir * push));
+              B.x = Math.max(0.06, Math.min(0.94, B.x - dir * push));
+            } else {
+              var low = (A.y >= B.y) ? A : B;
+              if (low.y * Hd >= 18 && low.y < 0.98) {
+                low.y = Math.min(0.98, low.y + (oy / 2 + 2) / Hd);
+              } else {
+                var push2 = (ox / 2 + 2) / Wd;
+                var dir2 = (A.x <= B.x) ? -1 : 1;
+                A.x = Math.max(0.06, Math.min(0.94, A.x + dir2 * push2));
+                B.x = Math.max(0.06, Math.min(0.94, B.x - dir2 * push2));
+              }
+            }
+          }
+        }
+      })();
       /* Thiên thạch: rơi nhanh hơn từ, không bắn được — chỉ né. Càng
          về sau càng dày (tối thiểu mỗi 1,4 giây một hòn). */
       st.rockTimer -= dt;
@@ -265,6 +328,12 @@
       function () { running = false; });
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
+    /* v105b: ngưỡng "vào màn" theo chân dung vẽ thật — viên chỉ hiện
+       trọn khi tâm viên cách mép trên ít nhất nửa chiều cao viên
+       (28px cho viên 2 dòng, 18px cho viên 1 dòng; lấy 28px cho cả
+       hai để Nghĩa/bàn phím/khóa từ luôn chỉ từ đã thấy trọn). Mọi
+       chỗ đọc từ mục tiêu trong trận đều truyền visY() vào LOGIC. */
+    function visY() { return 28 / ((cv && cv.height) || 500); }
 
     var lastHud = { hearts: -1, score: -1, cleared: -1 };
     function hud() {
@@ -295,7 +364,7 @@
       if (!kb) return;
       var isTp = false;
       try { isTp = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
-      var act = LOGIC.targetWord(st);
+      var act = LOGIC.targetWord(st, visY());
       var sig = (isTp ? "tp:" : "az:") + (act ? (act.type || act.w) : "") + "|" + st.resolved;
       if (sig === kbSig) return;
       kbSig = sig;
@@ -369,7 +438,7 @@
       if (!running || st.over) return;
       var before = st.cleared;
       var actBefore = st.active;
-      var r = LOGIC.typeLetter(st, ch, Date.now());
+      var r = LOGIC.typeLetter(st, ch, Date.now(), visY());
       if (r.ok && st.active !== null) {
         var wd = st.words[st.active];
         if (wd) flashes.push({ x: wd.x, y: wd.y, ttl: 0.18 });
@@ -390,7 +459,7 @@
       if (!typeInput || !running || st.over) return;
       var guard = 0;
       while (guard++ < 40) {
-        var tw = LOGIC.targetWord(st);
+        var tw = LOGIC.targetWord(st, visY());
         if (!tw) { typeInput.value = ""; return; }
         var tgt = tw.type || tw.w;
         var done = tgt.slice(0, tw.progress);
@@ -410,7 +479,7 @@
         if (twWas.status !== "falling") { typeInput.value = ""; return; } /* từ vừa xong: dừng, không gộp ký tự thừa sang từ mới */
         /* Ký tự đúng, từ chưa xong: bỏ ký tự đã tiêu thụ rồi lặp để xử
            lý tiếp phần thừa (dán nhiều ký tự / IME chốt một âm tiết). */
-        var tw2 = LOGIC.targetWord(st);
+        var tw2 = LOGIC.targetWord(st, visY());
         var done2 = tw2 ? (tw2.type || tw2.w).slice(0, tw2.progress) : "";
         typeInput.value = done2 + rest.slice(1);
       }
@@ -420,7 +489,7 @@
        đồng bộ theo; viền hổ phách khi có từ đang khóa. */
     function syncInput() {
       if (!typeInput) return;
-      var tw = LOGIC.targetWord(st);
+      var tw = LOGIC.targetWord(st, visY());
       var done = tw ? (tw.type || tw.w).slice(0, tw.progress) : "";
       /* v102: lưới an toàn — bàn phím nào không bắn sự kiện input đáng
          tin thì mỗi khung hình đọc thẳng giá trị ô nhập và cho qua
@@ -429,7 +498,7 @@
          (jamo dở chưa thành âm tiết, xử lý sớm sẽ xóa mất). */
       if ((typeInput.value || "") !== done && (!composing || !isTpTrack)) {
         processInput();
-        tw = LOGIC.targetWord(st);
+        tw = LOGIC.targetWord(st, visY());
         done = tw ? (tw.type || tw.w).slice(0, tw.progress) : "";
         if (typeInput.value !== done && (!composing || !isTpTrack)) typeInput.value = done;
       }
@@ -459,7 +528,7 @@
         var d = Math.abs(wd.x - px) + Math.abs(wd.y - py);
         if (d < bd) { bd = d; best = i; }
       });
-      if (best !== null && bd < 0.25) LOGIC.lockWord(st, best);
+      if (best !== null && bd < 0.25) LOGIC.lockWord(st, best, visY());
     });
     /* Kéo chuột/chạm trên sân để lái tàu (pointer events bao cả chuột
        lẫn cảm ứng; click vẫn khóa từ như cũ). */
@@ -509,6 +578,9 @@
       if (keys.left) LOGIC.moveShip(st, -0.55 * dt);
       if (keys.right) LOGIC.moveShip(st, 0.55 * dt);
       drawShipX += (st.ship.x - drawShipX) * Math.min(1, dt * 12);
+      /* v105b: ghi kích thước canvas thật cho tick() trước khi tick —
+         tách viên (pillRect) đo theo canvas thật. */
+      st.canvasW = cv.width; st.canvasH = cv.height;
       LOGIC.tick(st, dt, now);
       /* v102-fix: refreshKb PHẢI chạy SAU tick — trước đây nó chạy trước
          tick nên bàn phím đọc trạng thái trước-tick còn thanh Nghĩa (vẽ
@@ -534,11 +606,21 @@
          từ nào cần gõ (kiểm render v101: không có viền khóa nên không
          biết từ nào là từ cần gõ). targetWord ưu tiên từ đang khóa nên
          một luật này bao cả hai. */
-      var targetW = LOGIC.targetWord(st);
+      var targetW = LOGIC.targetWord(st, visY());
       st.words.forEach(function (wd, i) {
         if (wd.status !== "falling") return;
         var py = wd.y * H;
-        if (py < -30 || py > H + 30) return;
+        var wdType = wd.type || wd.w;
+        var dispW = G71.displayWord(wd);
+        var dispType = (dispW.length === wdType.length) ? dispW : wdType;
+        var twoLine = wdType !== wd.w;
+        /* v105b: viên chỉ vẽ khi đã hiện TRỌN (tâm cách mép trên ít
+           nhất nửa chiều cao viên — 28px viên 2 dòng, 18px viên 1
+           dòng); trước đây vẽ từ py >= -30 nên viên mới ló nửa viên
+           dưới thanh thông tin (kiểm render v105: "scalability",
+           "withdraw" chỉ ló nửa viên). */
+        var halfH = twoLine ? 28 : 18;
+        if (py < halfH || py > H + 30) return;
         var isHl = (st.active === i) || (targetW === wd);
         /* v91: track tieng Trung hien 2 dong — chu Han o tren, pinyin
            (chuoi go) o duoi co to mau tien trinh; cac track khac 1 dong.
@@ -546,10 +628,6 @@
            -> "bánh mì"); chuoi go van la Latin khong dau. Dang hien
            thi dai bang chuoi go theo tung ky tu (dau tieng Viet khong
            doi do dai) nen to mau tien trinh theo chi so van dung. */
-        var wdType = wd.type || wd.w;
-        var dispW = G71.displayWord(wd);
-        var dispType = (dispW.length === wdType.length) ? dispW : wdType;
-        var twoLine = wdType !== wd.w;
         ctx.font = "700 17px system-ui, sans-serif";
         var wide = (ctx.measureText(dispW).width >= ctx.measureText(dispType).width) ? dispW : dispType;
         G71.fitFont(ctx, wide, Math.max(60, W - 32), 17, 12, "700");
@@ -611,7 +689,7 @@
       });
       var flick = 0.5 + 0.5 * Math.sin(now / 90);
       drawShip(ctx, shipPx, rocketY, 40, flick);
-      var meanWord = LOGIC.targetWord(st);
+      var meanWord = LOGIC.targetWord(st, visY());
       if (meanWord) {
         /* Bảng nghĩa (v101): luôn là nghĩa của TỪ MỤC TIÊU hiện tại
            (targetWord — từ đang khóa đã vào màn, hoặc từ rơi thấp nhất
