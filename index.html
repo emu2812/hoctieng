@@ -3872,7 +3872,7 @@ function viewPractice(app) {
   $$("[data-gramnew]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "grammar", gIdx: +b.dataset.gramnew }); }; });
   $$("[data-entrycheck]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "entryCheck", part: b.dataset.entrycheck }); }; });
   var pnPr = $("#u7PlayNowPractice"); if (pnPr) pnPr.onclick = function () { openLesson({ type: "u7trial" }); };
-  practiceEntLazy("en", [{ id: "u7PlayCardPractice", html: enPracticeEntHTML, wire: enPracticeEntWire }]);
+  (function () { var jobs = [{ id: "u7PlayCardPractice", html: enPracticeEntHTML, wire: enPracticeEntWire }]; if (videoNewEntHTML["en"]) jobs.push({ id: "videoNewEnten", html: function () { return videoNewEntHTML["en"]; }, wire: null }); practiceEntLazy("en", jobs); })(); /* v95: EN nay co video giai tri moi (en-e1..e4) — chen luoi nhu ZH/TC/TP, truoc day EN chua co video giai tri nen khong co job nay */
 }
 
 /* ---------- ÔN TẬP: MỘT hàng đợi duy nhất ---------- */
