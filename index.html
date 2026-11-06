@@ -6189,6 +6189,7 @@ function renderLesson(app) {
   else if (l.type === "reviewSession") renderReviewSession(app, l);
   else if (l.type === "reviewCard") renderReviewCard(app, l);
   else if (l.type === "vocabQuick") renderVocabQuickCheck(app, l);
+  else if (l.type === "vocabFlash") renderVocabFlash(app, l);
   else if (l.type === "zhVocabQuick") renderZhVocabQuickCheck(app, l);
   else if (l.type === "pronEntry") renderPronEntry(app, l);
   else if (l.type === "skillGramOld") renderSkillGramOld(app, l);
@@ -6675,6 +6676,124 @@ function renderReviewCard(app, l) {
    dung + giai thich ngan, the sai duoc hoi lai lan 2 voi kieu khac ngay trong
    buoi; cuoi buoi cham diem (dung lan dau / tong so the) va liet ke the sai.
    KHONG tang nac SRS, KHONG cong XP. */
+/* ---------- v97: FLASHCARD CO DIEN + TU DANH GIA 4 MUC ----------
+   Giai doan 3 (methods-platform/khao-sat-khoang-cach.md): lat the + tu
+   danh gia "Chua nho / Kho nho / Nho tot / Rat de", anh xa vao SRS CO SAN
+   (vocabBoxJudge), GIU luat tot nghiep = box 5 (chi +1 nac moi lan, khong
+   cho tot nghiep som) va giu lich 1-3-7-14-30 ngay:
+   - Chua nho: vocabBoxJudge(key, false) — reset nac theo luat cu, hen mai.
+   - Kho nho: giu nac, hen mai (on day hon).
+   - Nho tot: vocabBoxJudge(key, true) — +1 nac, hen theo RB_INTERVALS.
+   - Rat de: vocabBoxJudge(key, true) roi keo dai lich them 1 nac thang
+     (due = RB_INTERVALS[box] thay vi [box-1]) — thua dan, khong +2 nac.
+   Chi EN (CONTENT.vocab); ZH/TC/TP dung kho the + khoa box khac — lam
+   dot sau. Khong them state moi (chi dung state.cards da dong bo), khong
+   dem nguoc, khong mang, khong bang xep hang. */
+function vocabFlashGrade97(key, grade) {
+  var t = todayStr();
+  if (grade === 0) return vocabBoxJudge(key, false);
+  if (grade === 1) {
+    var cur = state.cards[key] || { box: 0 };
+    state.cards[key] = { box: cur.box || 0, due: addDaysStr(t, 1), boxDay: cur.boxDay };
+    saveState();
+    return { gained: false, box: cur.box || 0 };
+  }
+  var r = vocabBoxJudge(key, true);
+  if (grade === 3 && r && r.gained && r.box < 5) {
+    var st = state.cards[key];
+    if (st) { st.due = addDaysStr(t, RB_INTERVALS[Math.min(r.box, RB_INTERVALS.length - 1)]); saveState(); }
+  }
+  return r;
+}
+function renderVocabFlash(app, l) {
+  var set0 = CONTENT.vocab[l.setIdx];
+  if (!set0) { curLesson = null; render(); return; }
+  var cards = set0.cards;
+  var head = skillHead("Flashcard — " + set0.topic, "Lật thẻ rồi tự đánh giá: Chưa nhớ / Khó nhớ / Nhớ tốt / Rất dễ. Đánh giá vào nấc nhớ của thẻ — không đếm ngược, không mất mạng.");
+  if (!l.fl) {
+    var order = [];
+    cards.forEach(function (c, i) {
+      var st = state.cards["s" + l.setIdx + ":" + i] || { box: 0 };
+      if ((st.box || 0) < 5) order.push(i);
+    });
+    l.fl = { order: order, qi: 0, flipped: false, grades: [0, 0, 0, 0] };
+  }
+  var fl = l.fl;
+  if (fl.qi >= fl.order.length) {
+    var total = fl.order.length;
+    app.innerHTML = head + '<div class="summarybox"><h2>Kết quả flashcard</h2>'
+      + (total === 0 ? '<p>Bộ này đã thuộc hết (đủ 5 nấc) — không còn thẻ nào để lật.</p>'
+        : '<p>Chưa nhớ: <b>' + fl.grades[0] + '</b> · Khó nhớ: <b>' + fl.grades[1] + '</b> · Nhớ tốt: <b>' + fl.grades[2] + '</b> · Rất dễ: <b>' + fl.grades[3] + '</b> (tổng ' + total + ' thẻ).</p><p class="mut">Thẻ "Chưa nhớ"/"Khó nhớ" hẹn ôn vào ngày mai; thẻ "Nhớ tốt"/"Rất dễ" tăng 1 nấc theo lịch 1-3-7-14-30 ngày.</p>')
+      + '<div class="row"><button class="btn btn-primary" id="flAgain">Lật lại cả bộ</button><button class="btn" id="flBack">Về Luyện tập</button></div></div>';
+    wireBack();
+    $("#flAgain").onclick = function () { l.fl = null; render(); };
+    $("#flBack").onclick = function () { backFromLesson(); };
+    return;
+  }
+  var pos = fl.order[fl.qi];
+  var c = cards[pos];
+  var key = "s" + l.setIdx + ":" + pos;
+  var st = state.cards[key] || { box: 0 };
+  var html = head + '<div class="qblock vocab-card"><p class="mut">Thẻ ' + (fl.qi + 1) + '/' + fl.order.length + ' · Nấc nhớ: ' + (st.box || 0) + '/5</p>'
+    + '<div class="bigletter" id="cardBig">' + esc(c.w) + '</div>'
+    + '<p><span class="mut">' + esc(c.ipa || "") + '</span></p>'
+    + '<div class="row"><button class="btn" id="flListen">🔊 Nghe</button>' + (fl.flipped ? '' : '<button class="btn btn-primary" id="flFlip">Lật thẻ — xem nghĩa</button>') + '</div>';
+  if (fl.flipped) {
+    html += '<div id="vocabMeaningBody"><p><b>' + esc(c.vi || "") + '</b></p><p>' + esc(c.col || "") + (c.col && c.ex ? ' — ' : '') + esc(c.ex || "") + '</p><p class="mut">' + esc(c.exv || "") + '</p></div>'
+      + '<p><b>Tự đánh giá — bạn nhớ từ này tới đâu?</b></p><div class="row">'
+      + '<button class="btn" data-flgrade="0">😕 Chưa nhớ</button>'
+      + '<button class="btn" data-flgrade="1">🤔 Khó nhớ</button>'
+      + '<button class="btn" data-flgrade="2">🙂 Nhớ tốt</button>'
+      + '<button class="btn" data-flgrade="3">😄 Rất dễ</button></div>'
+      + '<p class="mut">Chưa nhớ/Khó nhớ: hẹn ôn ngày mai. Nhớ tốt: tăng 1 nấc theo lịch 1-3-7-14-30 ngày. Rất dễ: tăng 1 nấc và lịch thưa thêm một nấc. Đủ 5 nấc là thuộc hẳn.</p>';
+  } else {
+    html += '<p class="mut">Nghĩ xem từ này nghĩa là gì, rồi bấm "Lật thẻ". Đừng đoán mò — không nhớ thì cứ lật xem, không trừ điểm.</p>';
+  }
+  html += '</div>';
+  app.innerHTML = html;
+  wireBack(); fitBigLetter();
+  var flL = $("#flListen"); if (flL) flL.onclick = function () { speak(c.w); };
+  var flF = $("#flFlip"); if (flF) flF.onclick = function () { fl.flipped = true; render(); };
+  $$("[data-flgrade]").forEach(function (b) {
+    b.onclick = function () {
+      var g = +b.dataset.flgrade;
+      vocabFlashGrade97(key, g);
+      fl.grades[g]++;
+      fl.qi++; fl.flipped = false;
+      render();
+    };
+  });
+}
+/* ---------- v97: KHOI "PHUONG PHAP HOC GOI Y" TRONG BAI TU VUNG ----------
+   Khoang trong #1 cua khao sat methods-platform (CHUA CO): chon cach hoc
+   ngay trong bai, gan noi dung goc (cung bo tu), KHONG nhan ban bai.
+   Cac nut deu mo hoat dong CO SAN cho dung bo nay:
+   - Flashcard (moi o v97): lat the + tu danh gia 4 muc.
+   - Kiem tra tri nho (vocabQuick co san): moi the 1 cau ngau nhien kieu
+     (chinh la che do Recall: hoi truoc, dap an sau, luan phien dinh dang).
+   - Lich on: sang tab On tap (muc den han + So loi sai).
+   Khong co nut game: game lay tu ngau nhien theo track (pickSetWords),
+   chua co duong mo game theo dung bo nay — lam dot sau. */
+function vocabMethodsHTML97(setIdx) {
+  return '<details class="card" id="vocabMethods97"><summary><b>🧭 Phương pháp học gợi ý</b> — chọn cách học cho bộ từ này</summary>'
+    + '<p class="mut">Cách học mặc định của bài này: học thẻ từng bước (lật → gõ → chọn → xong). Các cách dưới đây học cùng bộ từ này, không thêm bài mới.</p>'
+    + '<div class="row">'
+    + '<button class="btn" data-meth="flash">🃏 Flashcard — lật thẻ + tự đánh giá</button>'
+    + '<button class="btn" data-meth="quick">🧠 Kiểm tra trí nhớ — mỗi thẻ 1 câu</button>'
+    + '<button class="btn" data-meth="review">📅 Lịch ôn của bộ này</button>'
+    + '</div></details>';
+}
+function wireVocabMethods97(app, setIdx) {
+  var btns = app.querySelectorAll("[data-meth]");
+  btns.forEach(function (b) {
+    b.onclick = function () {
+      var m = b.dataset.meth;
+      if (m === "flash") openLesson({ type: "vocabFlash", setIdx: setIdx });
+      else if (m === "quick") openLesson({ type: "vocabQuick", setIdx: setIdx });
+      else if (m === "review") { backFromLesson(); go("review"); }
+    };
+  });
+}
 function renderVocabQuickCheck(app, l) {
   var set0 = CONTENT.vocab[l.setIdx];
   if (!set0) { curLesson = null; render(); return; }
@@ -6828,6 +6947,7 @@ function renderVocab(app, l) {
     if (!l.step) { var nsV = $("#btnNextStep"); if (nsV) { nsV.textContent = "Về Luyện tập"; nsV.onclick = function () { backFromLesson(); }; } }
     $("#btnRedo").onclick = function () { state.pos["vocab:" + l.setIdx] = 0; saveState(); lessonStart = Date.now(); render(); };
     var qcBtnDone = document.createElement("button"); qcBtnDone.className = "btn"; qcBtnDone.style.marginTop = "10px"; qcBtnDone.textContent = "Kiểm tra nhanh cả bộ"; qcBtnDone.onclick = function () { openLesson({ type: "vocabQuick", setIdx: l.setIdx }); }; app.appendChild(qcBtnDone);
+    var flBtnDone = document.createElement("button"); flBtnDone.className = "btn"; flBtnDone.style.marginTop = "10px"; flBtnDone.textContent = "🃏 Học lại bằng flashcard"; flBtnDone.onclick = function () { openLesson({ type: "vocabFlash", setIdx: l.setIdx }); }; app.appendChild(flBtnDone);
     return;
   }
   if (l.vocabReview) {
@@ -6855,6 +6975,7 @@ function renderVocab(app, l) {
   var big = c.w;
   var vr = gd23VocabRound(pos, cards.length);
   var html = stepHeader(step, l.step ? "" : "Bộ từ vựng · " + (set0.band || "chưa xếp band") + ".");
+  html += vocabMethodsHTML97(l.setIdx);
   html += '<div class="bar" style="margin-top:6px" title="Tiến trình 5 kiểu học của thẻ này"><i style="width:' + Math.round((vk.step + 1) / 5 * 100) + '%"></i></div><div class="qblock vocab-card"><div class="vocab-layout">'
     + '<div class="vocab-main">'
     + '<div class="bigletter" id="cardBig">' + (vkShowBig ? esc(big) : '···') + '</div>'
@@ -6883,6 +7004,7 @@ function renderVocab(app, l) {
     + '</div></div>';
   app.innerHTML = html;
   wireBack();
+  wireVocabMethods97(app, l.setIdx);
   fitBigLetter();
   wireMrLibSection(app.querySelector(".mr-lib-section"));
   var clMemoBtn = $("#vocabMemoSave"); if (clMemoBtn) clMemoBtn.onclick = function () { if (!state.mems) state.mems = {}; state.mems[clMemoKey] = $("#vocabMemoInp").value; saveState(); toast("Đã lưu mẹo nhớ."); };
@@ -6926,6 +7048,7 @@ function renderVocab(app, l) {
       if (!l.step) { var nsV = $("#btnNextStep"); if (nsV) { nsV.textContent = "Về Luyện tập"; nsV.onclick = function () { backFromLesson(); }; } }
       $("#btnRedo").onclick = function () { state.pos["vocab:" + l.setIdx] = 0; saveState(); lessonStart = Date.now(); runFirstTry = {}; runWrong = []; render(); };
       var qcBtnFin = document.createElement("button"); qcBtnFin.className = "btn"; qcBtnFin.style.marginTop = "10px"; qcBtnFin.textContent = "Kiểm tra nhanh cả bộ"; qcBtnFin.onclick = function () { openLesson({ type: "vocabQuick", setIdx: l.setIdx }); }; app.appendChild(qcBtnFin);
+      var flBtnFin = document.createElement("button"); flBtnFin.className = "btn"; flBtnFin.style.marginTop = "10px"; flBtnFin.textContent = "🃏 Học lại bằng flashcard"; flBtnFin.onclick = function () { openLesson({ type: "vocabFlash", setIdx: l.setIdx }); }; app.appendChild(flBtnFin);
     } else if ((pos + 1) % 5 === 0) {
       var blockWrongs = runWrong.filter(function (i) { return i > pos - 5 && i <= pos; });
       if (blockWrongs.length) {
