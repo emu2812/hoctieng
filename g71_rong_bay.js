@@ -240,7 +240,7 @@
     var celebrateUntil = 0;
     var dragonY = 0;
     var stg = G71.openStage("🐉 Rồng Bay Trên Mây",
-      "Rồng bay liên tục về phía trước — phím ↑ ↓ đổi làn, chuột/cảm ứng: bấm vào làn muốn bay. Bay vào mây có từ đúng nghĩa cho trước. Né mây giông (đâm phải mất tim)! Chuỗi đúng nhân điểm, mây vàng +30, cứ 3 vòng có 1 vòng tốc độ ×2. Bấm ⭐/🐢 để dùng vật phẩm (phím 1/2).",
+      "Rồng bay liên tục về phía trước — phím ↑ ↓ đổi làn, chuột/cảm ứng: bấm vào làn muốn bay. Bay vào mây có từ đúng nghĩa cho trước. Né mây giông (đâm phải mất tim)! Chuỗi đúng nhân điểm, mây vàng +30. Bấm ⭐/🐢 để dùng vật phẩm (phím 1/2).",
       function () { running = false; });
     /* Tiêu đề hiện đủ tên trên màn hẹp: nút Thoát chỉ còn icon ✕. */
     var exitBtn = stg.el.querySelector("#g71Exit");

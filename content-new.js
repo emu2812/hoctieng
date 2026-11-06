@@ -207,7 +207,7 @@ var RB_PH_ALL_EXAMPLES = { "i:": "see", "ɪ": "ship", "e": "bed", "æ": "cat", "
 
 // ---------- 8. LỊCH ÔN, XP, THANG ĐIỂM, GHI CHÚ ----------
 var RB_INTERVALS = [1, 3, 7, 14, 30];
-var RB_SCHEDULE_TEXT = "1-3-7-14-30 ngày (chuẩn nội bộ của web)";
+var RB_SCHEDULE_TEXT = "1-3-7-14-30 ngày";
 var RB_XP_RULES = [
   { what: "Học xong một bài", xp: 10 },
   { what: "Làm lại một bài đã xong", xp: 5 },
@@ -226,12 +226,12 @@ var RB_BAND_TABLE = {
   reading: [[39, 9.0], [37, 8.5], [35, 8.0], [33, 7.5], [30, 7.0], [27, 6.5], [23, 6.0], [19, 5.5], [15, 5.0], [13, 4.5], [10, 4.0], [8, 3.5], [6, 3.0], [4, 2.5], [0, 2.0]],
   listening: [[39, 9.0], [37, 8.5], [35, 8.0], [32, 7.5], [30, 7.0], [26, 6.5], [23, 6.0], [19, 5.5], [16, 5.0], [13, 4.5], [10, 4.0], [8, 3.5], [6, 3.0], [4, 2.5], [0, 2.0]]
 };
-var RB_BAND_NOTE = "Band ước lượng để tham khảo - IELTS không công bố bảng quy đổi cố định. Điểm neo tham khảo: Đọc 15/40 = 5,0; Nghe 16/40 = 5,0 (theo Teacher's Book Mindset Level 1, Cambridge).";
+var RB_BAND_NOTE = "Band ước lượng, chỉ để tham khảo.";
 var RB_GLOSSARY = [
   { t: "Nấc nhớ", d: "Mỗi thẻ từ có 5 nấc nhớ, đúng thì lên nấc, đủ 5 nấc là thuộc hẳn." },
   { t: "Sổ lỗi sai", d: "Nơi gom mọi câu bạn làm sai để ôn lại sau, tới khi sửa xong mới thôi." },
   { t: "Chặng", d: "Một chặng là một đoạn đường học; bạn có thể học theo thứ tự hoặc nhảy tới chặng khác, bước nào bỏ qua sẽ gom vào 'Đã bỏ qua'." },
-  { t: "Ôn giãn cách", d: "Ôn giãn cách là ôn lại đúng lúc sắp quên, các lần ôn cách nhau xa dần: 1-3-7-14-30 ngày (chuẩn nội bộ của web)." },
+  { t: "Ôn giãn cách", d: "Ôn giãn cách là ôn lại đúng lúc sắp quên, các lần ôn cách nhau xa dần: 1-3-7-14-30 ngày." },
   { t: "IPA", d: "IPA là bảng ký hiệu phiên âm quốc tế: mỗi âm tiếng Anh có một ký hiệu riêng, viết giữa hai dấu gạch chéo như /i:/. Nhìn phiên âm là biết cách đọc một từ, kể cả từ bạn chưa gặp bao giờ." },
   { t: "Band", d: "Band là thang điểm của IELTS, từ 0 đến 9. Band càng cao nghĩa là tiếng Anh càng tốt." }
 ];
@@ -1097,7 +1097,7 @@ var BK_FORMAT = [
   { old: "Sách cũ hay in bảng 'bao nhiêu phần trăm thì lên bậc' hoặc '200 giờ = 1 band'.",
     now: "Không nhà cung cấp chính thống nào công bố ngưỡng % qua bậc; '200 giờ = 1 band' không phải chuẩn hiện hành. Cambridge tính giờ tích lũy theo cấp CEFR, còn IELTS.org ghi khoảng 3 tháng lên tối đa 0,5 band. Mốc 80% của web này là chuẩn nội bộ, không phải chuẩn IELTS." },
   { old: "Sách cũ viết cho thi giấy, chưa nhắc thi trên máy tính.",
-    now: "Hiện nay có cả thi giấy và thi trên máy tính với cùng format 4 kỹ năng; bài thi thử của web này theo format trên nhưng ghi rõ giới hạn kho (phần Đọc của thi thử mới có 15 câu do kho tự soạn hiện tại, không mạo nhận là đề đủ)." }
+    now: "Hiện nay có cả thi giấy và thi trên máy tính với cùng format 4 kỹ năng. Bài thi thử theo format trên, nhưng phần Đọc mới có 15 câu (chưa đủ 40 câu như thi thật)." }
 ];
 
 // ---------- GĐ2+GĐ3 CÒN LẠI (25/10/2026): hằng số dùng chung ----------
@@ -1120,7 +1120,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
    "topic": "Logistics 1 — Chuỗi cung ứng cơ bản",
    "hsk": "HSK4",
-   "hskNote": "Mức đặt theo chủ đề công việc/giao thông cấp 4; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Thuật ngữ chuyên ngành (供应链, 经销商) coi là ngoài khung.",
+   "hskNote": "Nhãn cấp 4 là mức đặt theo chủ đề công việc/giao thông. Thuật ngữ chuyên ngành (供应链, 经销商) coi là ngoài khung.",
    "cards": [
     {
      "han": "供应链",
@@ -1287,7 +1287,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
    "topic": "Logistics 2 — Kho bãi và đóng gói",
    "hsk": "HSK5",
-   "hskNote": "Mức đặt theo chủ đề nghề nghiệp cấp 5; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Thuật ngữ kho bãi chuyên ngành coi là ngoài khung.",
+   "hskNote": "Nhãn cấp 5 là mức đặt theo chủ đề nghề nghiệp. Thuật ngữ kho bãi chuyên ngành coi là ngoài khung.",
    "cards": [
     {
      "han": "包装",
@@ -1454,7 +1454,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
    "topic": "Logistics 3 — Vận chuyển và giao nhận",
    "hsk": "HSK5",
-   "hskNote": "Mức đặt theo chủ đề giao thông/nghề nghiệp cấp 5; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Thuật ngữ giao nhận chuyên ngành (清关, 承运人) coi là ngoài khung.",
+   "hskNote": "Nhãn cấp 5 là mức đặt theo chủ đề giao thông/nghề nghiệp. Thuật ngữ giao nhận chuyên ngành (清关, 承运人) coi là ngoài khung.",
    "cards": [
     {
      "han": "海关",
@@ -1621,7 +1621,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
    "topic": "Logistics 4 — Quản trị logistics",
    "hsk": "HSK6",
-   "hskNote": "Mức đặt theo chủ đề nghề nghiệp/kinh tế cấp 6; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Thuật ngữ quản trị chuyên ngành (逆向物流, 准时制, 最后一公里) coi là ngoài khung.",
+   "hskNote": "Nhãn cấp 6 là mức đặt theo chủ đề nghề nghiệp/kinh tế. Thuật ngữ quản trị chuyên ngành (逆向物流, 准时制, 最后一公里) coi là ngoài khung.",
    "cards": [
     {
      "han": "采购",
@@ -1788,7 +1788,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
    "topic": "Y tế 1 — Khoa phòng và nhân sự y tế",
    "hsk": "HSK4",
-   "hskNote": "Mức đặt theo chủ đề nghề nghiệp/sức khỏe cấp 4; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Tên khoa chuyên ngành coi là ngoài khung.",
+   "hskNote": "Nhãn cấp 4 là mức đặt theo chủ đề nghề nghiệp/sức khỏe. Tên khoa chuyên ngành coi là ngoài khung.",
    "cards": [
     {
      "han": "科室",
@@ -1955,7 +1955,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
    "topic": "Y tế 2 — Xét nghiệm và chẩn đoán hình ảnh",
    "hsk": "HSK5",
-   "hskNote": "Mức đặt theo chủ đề sức khỏe/nghề nghiệp cấp 5; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Thuật ngữ xét nghiệm/chẩn đoán hình ảnh phần lớn coi là ngoài khung.",
+   "hskNote": "Nhãn cấp 5 là mức đặt theo chủ đề sức khỏe/nghề nghiệp. Thuật ngữ xét nghiệm/chẩn đoán hình ảnh phần lớn coi là ngoài khung.",
    "cards": [
     {
      "han": "化验",
@@ -2122,7 +2122,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
    "topic": "Y tế 3 — Y tế công cộng và dịch bệnh",
    "hsk": "HSK6",
-   "hskNote": "Mức đặt theo chủ đề xã hội/sức khỏe cấp 6; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Thuật ngữ dịch tễ chuyên ngành coi là ngoài khung.",
+   "hskNote": "Nhãn cấp 6 là mức đặt theo chủ đề xã hội/sức khỏe. Thuật ngữ dịch tễ chuyên ngành coi là ngoài khung.",
    "cards": [
     {
      "han": "公共卫生",
@@ -2289,7 +2289,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
    "topic": "Y tế 4 — Nghiên cứu y khoa và y đức",
    "hsk": "HSK6",
-   "hskNote": "Mức đặt theo chủ đề học thuật cấp 6; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Thuật ngữ nghiên cứu y khoa coi là ngoài khung.",
+   "hskNote": "Nhãn cấp 6 là mức đặt theo chủ đề học thuật. Thuật ngữ nghiên cứu y khoa coi là ngoài khung.",
    "cards": [
     {
      "han": "临床试验",
@@ -2456,7 +2456,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
   "topic": "Gia đình và đời sống hằng ngày",
   "hsk": "HSK2",
-  "hskNote": "Bộ tự soạn theo chủ đề sách HSK2. Các từ là từ thông dụng ở trình độ này; câu ví dụ tự soạn, không trích nguyên văn giáo trình. Nhãn HSK2 là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "hskNote": "Nhãn HSK2 là mức đặt theo chủ đề/trình độ.",
   "cards": [
    {
     "han": "爸爸",
@@ -2623,7 +2623,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
   "topic": "Thời gian",
   "hsk": "HSK2",
-  "hskNote": "Bộ tự soạn theo chủ đề sách HSK2. Các từ là từ thông dụng ở trình độ này; câu ví dụ tự soạn, không trích nguyên văn giáo trình. Nhãn HSK2 là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "hskNote": "Nhãn HSK2 là mức đặt theo chủ đề/trình độ.",
   "cards": [
    {
     "han": "明天",
@@ -2790,7 +2790,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
   "topic": "Ăn uống",
   "hsk": "HSK2",
-  "hskNote": "Bộ tự soạn theo chủ đề sách HSK2. Các từ là từ thông dụng ở trình độ này; câu ví dụ tự soạn, không trích nguyên văn giáo trình. Nhãn HSK2 là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "hskNote": "Nhãn HSK2 là mức đặt theo chủ đề/trình độ.",
   "cards": [
    {
     "han": "吃饭",
@@ -2957,7 +2957,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
   "topic": "Đi lại và mua sắm",
   "hsk": "HSK2",
-  "hskNote": "Bộ tự soạn theo chủ đề sách HSK2. Các từ là từ thông dụng ở trình độ này; câu ví dụ tự soạn, không trích nguyên văn giáo trình. Nhãn HSK2 là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "hskNote": "Nhãn HSK2 là mức đặt theo chủ đề/trình độ.",
   "cards": [
    {
     "han": "出租车",
@@ -3124,7 +3124,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
   "topic": "Học tập và công việc",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề sách HSK3. Các từ là từ thông dụng ở trình độ này; câu ví dụ tự soạn, không trích nguyên văn giáo trình. Nhãn HSK3 là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "hskNote": "Nhãn HSK3 là mức đặt theo chủ đề/trình độ.",
   "cards": [
    {
     "han": "学习",
@@ -3291,7 +3291,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
   "topic": "Du lịch",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề sách HSK3. Các từ là từ thông dụng ở trình độ này; câu ví dụ tự soạn, không trích nguyên văn giáo trình. Nhãn HSK3 là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "hskNote": "Nhãn HSK3 là mức đặt theo chủ đề/trình độ.",
   "cards": [
    {
     "han": "旅行",
@@ -3458,7 +3458,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
   "topic": "Sức khỏe",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề sách HSK3. Các từ là từ thông dụng ở trình độ này; câu ví dụ tự soạn, không trích nguyên văn giáo trình. Nhãn HSK3 là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "hskNote": "Nhãn HSK3 là mức đặt theo chủ đề/trình độ.",
   "cards": [
    {
     "han": "身体",
@@ -3625,7 +3625,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
   {
   "topic": "Xã hội và giao tiếp",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề sách HSK3. Các từ là từ thông dụng ở trình độ này; câu ví dụ tự soạn, không trích nguyên văn giáo trình. Nhãn HSK3 là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "hskNote": "Nhãn HSK3 là mức đặt theo chủ đề/trình độ.",
   "cards": [
    {
     "han": "社会",
@@ -3828,7 +3828,7 @@ var RB_SPEAK_PART_FRAME = {
   3: { frame: "Nêu quan điểm, rồi lý do + ví dụ, có thể thêm ý trái chiều. Ví dụ: 'I think... because... For example,... On the other hand,...'", phrases: ["In my opinion, ...", "The main reason is...", "For instance, ...", "On the other hand, ..."] }
 };
 
-var RB_WRITE_CRITERIA_TXT = "đáp ứng đúng đề; mạch lạc và liên kết; từ vựng; ngữ pháp đúng và đa dạng. Task 2 nặng gấp đôi Task 1.";
+var RB_WRITE_CRITERIA_TXT = "đáp ứng đúng đề; mạch lạc và liên kết; từ vựng; ngữ pháp đúng và đa dạng.";
 var RB_WRITE_STRUCT = {
   "Task 1": { struct: "Mở bài (1-2 câu: nói lại biểu đồ nói về gì, không chép nguyên đề) — Thân bài (2 đoạn: điểm nổi bật nhất + so sánh số liệu) — Không cần kết luận dài. Mỗi đoạn 3-4 câu." },
   "Task 2": { struct: "Mở bài (1-2 câu: nói lại vấn đề + nêu quan điểm) — Thân bài (2-3 đoạn: mỗi đoạn 1 ý chính + lý do + ví dụ) — Kết bài (1-2 câu: nhắc lại quan điểm). Mỗi đoạn 4-5 câu." },
@@ -3931,12 +3931,12 @@ var RB_NEW_GRAMMAR_MISTAKES = [
 // Hệ đếm HSK 3.0 dùng hệ E (đề cương thi 2025, đã đối chiếu văn bản gốc):
 // tích lũy 300/500/1000/2000/3600/5400/11000. KHÔNG dùng số hệ F.
 var ZH_STAGES = [
-  { stage: 1, title: "Phát âm và chào hỏi", oldCum: 150, eCum: 300, desc: "Mạch pinyin 4 bước + bộ từ chào hỏi; nghe–nói là trục chính", note: "Nhãn HSK của web là mức đặt chủ đề theo tiến trình cấp, không phải xác nhận từng từ nằm trong khung HSK 2.0 chính thức." },
-  { stage: 2, title: "Thanh điệu và so sánh bước đầu", oldCum: 300, eCum: 500, desc: "Thanh điệu, ngữ pháp 了/过/着/比较 + bộ từ đời sống", note: "Nhãn HSK của web là mức đặt chủ đề theo tiến trình cấp, không phải xác nhận từng từ nằm trong khung HSK 2.0 chính thức." },
-  { stage: 3, title: "Từ hội thoại sang đoạn văn", oldCum: 600, eCum: 1000, desc: "Bổ ngữ, câu chữ 把, câu chữ 被, đoạn văn ngắn", note: "Nhãn HSK của web là mức đặt chủ đề theo tiến trình cấp, không phải xác nhận từng từ nằm trong khung HSK 2.0 chính thức." },
-  { stage: 4, title: "Học theo chủ đề, mở rộng theo chữ", oldCum: 1200, eCum: 2000, desc: "Mỗi bài 1 chủ đề lớn; dùng chữ dẫn từ; cặp điểm dễ nhầm", note: "Nhãn HSK của web là mức đặt chủ đề theo tiến trình cấp, không phải xác nhận từng từ nằm trong khung HSK 2.0 chính thức." },
-  { stage: 5, title: "Học qua từ, đoạn văn dài", oldCum: 2500, eCum: 3600, desc: "Từ vựng là trục chính; tự sự, nghị luận; viết đoạn từ 100 chữ", note: "Nhãn HSK của web là mức đặt chủ đề theo tiến trình cấp, không phải xác nhận từng từ nằm trong khung HSK 2.0 chính thức." },
-  { stage: 6, title: "Văn bản dài và viết lại", oldCum: 5000, eCum: 5400, desc: "Bài khóa 700–1500 chữ; viết rút gọn 300–350 chữ", note: "Nhãn HSK của web là mức đặt chủ đề theo tiến trình cấp, không phải xác nhận từng từ nằm trong khung HSK 2.0 chính thức." }
+  { stage: 1, title: "Phát âm và chào hỏi", oldCum: 150, eCum: 300, desc: "Mạch pinyin 4 bước + bộ từ chào hỏi; nghe–nói là trục chính", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
+  { stage: 2, title: "Thanh điệu và so sánh bước đầu", oldCum: 300, eCum: 500, desc: "Thanh điệu, ngữ pháp 了/过/着/比较 + bộ từ đời sống", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
+  { stage: 3, title: "Từ hội thoại sang đoạn văn", oldCum: 600, eCum: 1000, desc: "Bổ ngữ, câu chữ 把, câu chữ 被, đoạn văn ngắn", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
+  { stage: 4, title: "Học theo chủ đề, mở rộng theo chữ", oldCum: 1200, eCum: 2000, desc: "Mỗi bài 1 chủ đề lớn; dùng chữ dẫn từ; cặp điểm dễ nhầm", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
+  { stage: 5, title: "Học qua từ, đoạn văn dài", oldCum: 2500, eCum: 3600, desc: "Từ vựng là trục chính; tự sự, nghị luận; viết đoạn từ 100 chữ", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
+  { stage: 6, title: "Văn bản dài và viết lại", oldCum: 5000, eCum: 5400, desc: "Bài khóa 700–1500 chữ; viết rút gọn 300–350 chữ", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." }
 ];
 /* DOT FIX-V32 R2 (V3) 01/11: Muc tieu + Hoc xong lam duoc cho tung chang ZH,
    theo mau TC_STAGE_GOALS/TP_STAGE_GOALS. Dien dat lai 100% bang tieng Viet
@@ -4010,7 +4010,7 @@ var ZH_PH_STEPS = [
 var ZH_STARTER = {
   topic: "Chặng 1 — Chào hỏi và làm quen",
   hsk: "HSK1",
-  hskNote: "Bộ tự soạn theo chủ đề sách HSK1 (chào hỏi, bản thân, giao tiếp tối thiểu). Các từ là từ cơ bản thông dụng; câu ví dụ tự soạn, không trích nguyên văn giáo trình.",
+  hskNote: "Chủ đề sách HSK1: chào hỏi, bản thân, giao tiếp tối thiểu.",
   cards: [
     { han: "你", pinyin: "nǐ", vi: "bạn", col: "你好", ex: "你好吗？", exv: "Bạn có khỏe không?" },
     { han: "好", pinyin: "hǎo", vi: "tốt; khỏe", col: "很好", ex: "我很好，谢谢。", exv: "Tôi rất khỏe, cảm ơn." },
@@ -4445,7 +4445,7 @@ var ZH_GRAMMAR = [ {
   "speak": "我昨天买了一本书。他已经回家了。下雨了，快回家吧。我吃饭了，你呢？",
   "rule": "了 đứng sau động từ báo việc đã xong (买了书); đứng cuối câu báo tình huống mới xuất hiện (下雨了). Có 已经 thì cuối câu vẫn dùng 了.",
   "tip": "Đừng dịch 了 lúc nào cũng là “đã”: ở cuối câu nó hay là “rồi”.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "Câu nào dùng 了 đúng để nói việc đã xong?",
@@ -4529,7 +4529,7 @@ var ZH_GRAMMAR = [ {
   "speak": "我去过北京。你吃过中国菜吗？他没去过上海。我看过这部电影。",
   "rule": "过 đứng sau động từ, nghĩa là “từng làm”, nhấn mạnh kinh nghiệm. Phủ định dùng 没…过, không dùng 不…过.",
   "tip": "了 nói việc xong, 过 nói từng trải: 我吃了饭 (ăn rồi) khác 我吃过饭 (từng ăn).",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“我去过北京” nhấn mạnh điều gì?",
@@ -4613,7 +4613,7 @@ var ZH_GRAMMAR = [ {
   "speak": "门开着。他穿着一件红衣服。她笑着说。墙上挂着一幅画。",
   "rule": "着 đứng sau động từ, báo trạng thái đang duy trì: cửa đang mở, áo đang mặc, tranh đang treo. Dạng “động từ + 着 + động từ” nghĩa là vừa… vừa… (笑着说).",
   "tip": "着 khác 在: 在 + động từ là đang làm việc gì; 着 là trạng thái giữ nguyên.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“门开着” nghĩa là gì?",
@@ -4697,7 +4697,7 @@ var ZH_GRAMMAR = [ {
   "speak": "今天比昨天冷。他比我高。这个比那个便宜。我的汉语比他的汉语好。",
   "rule": "Công thức: A 比 B + tính từ. Có thể thêm 更, 多 hoặc 一点儿 sau tính từ. Phủ định so sánh dùng 没有: 他没有我高 (anh ấy không cao bằng tôi).",
   "tip": "比 không đi với 很: không nói “比昨天很冷”.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“今天比昨天冷” nghĩa là gì?",
@@ -4781,7 +4781,7 @@ var ZH_GRAMMAR = [ {
   "speak": "这是我的书。他高兴地说。他跑得很快。她唱得很好听。",
   "rule": "的 nối định ngữ với danh từ (我的书); 地 nối trạng ngữ với động từ (高兴地说); 得 nối động từ với bổ ngữ mức độ (跑得很快).",
   "tip": "Mẹo nhớ: 的 trước danh từ, 地 trước động từ, 得 sau động từ.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "Điền vào chỗ trống: 这是___书。",
@@ -4865,7 +4865,7 @@ var ZH_GRAMMAR = [ {
   "speak": "你喝茶还是喝咖啡？明天或者后天都可以。你去还是我去？周末或者去公园，或者在家休息。",
   "rule": "还是 dùng trong câu hỏi lựa chọn (thường có dấu ?). 或者 dùng trong câu kể để nêu các lựa chọn, có thể lặp lại: 或者…或者….",
   "tip": "Thấy dấu ? và hai lựa chọn thì chọn 还是; câu kể “cái này hay cái kia đều được” thì chọn 或者.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "Câu hỏi lựa chọn “Bạn uống trà hay cà phê?” dùng từ nào?",
@@ -4949,7 +4949,7 @@ var ZH_GRAMMAR = [ {
   "speak": "请把门关上。我把书放在桌子上了。他把房间打扫干净了。请把这句话写下来。",
   "rule": "Công thức: 把 + tân ngữ + động từ + thành phần khác (kết quả, xu hướng, nơi chốn…). Động từ trong câu 把 không đứng trơ trọi một mình.",
   "tip": "Nhớ công thức: 把 + cái gì + làm sao (kết quả ra sao).",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“请把门关上” nghĩa là gì?",
@@ -5033,7 +5033,7 @@ var ZH_GRAMMAR = [ {
   "speak": "我的书被他拿走了。杯子被打碎了。他被老师表扬了。我的作业被老师收走了。",
   "rule": "Công thức: chủ ngữ + 被 + (người gây ra) + động từ + kết quả. Sau động từ thường có kết quả (走了, 碎了…), không đứng trơ.",
   "tip": "Bị động không chỉ là chuyện xấu: 被表扬 là được khen, vẫn dùng 被.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“我的书被他拿走了” nghĩa là gì?",
@@ -5117,7 +5117,7 @@ var ZH_GRAMMAR = [ {
   "speak": "天气越来越冷了。他的汉语越来越好。东西越来越贵。我越来越喜欢北京了。",
   "rule": "Công thức: 越来越 + tính từ hoặc động từ tâm lý (喜欢, 爱…). Nó diễn tả mức độ thay đổi dần theo thời gian.",
   "tip": "越来越 đi với tính từ hoặc cảm xúc, không đi với số lượng cụ thể hay tên riêng.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“天气越来越冷了” nghĩa là gì?",
@@ -5201,7 +5201,7 @@ var ZH_GRAMMAR = [ {
   "speak": "虽然今天很冷，但是他还是去跑步了。虽然她很忙，但是每天都给我打电话。虽然路很远，但是我们走到了。虽然他累了，但是还在工作。",
   "rule": "虽然 mở đầu vế nhượng bộ (tuy…), 但是 mở đầu vế chính (nhưng…). Hai từ hay đi thành cặp; 但是 và 可是 chỉ chọn một, không dùng cả hai.",
   "tip": "Nhớ cặp đôi: thấy 虽然 thì tìm 但是 ở vế sau.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“虽然今天很冷，但是他还是去跑步了” nghĩa là gì?",
@@ -5285,7 +5285,7 @@ var ZH_GRAMMAR = [ {
   "speak": "如果明天下雨，我们就不去公园了。如果你有时间，就来我家吧。如果不舒服，就早点儿休息。如果他不来，我就自己去。",
   "rule": "如果 nêu giả thiết ở vế đầu, 就 nêu kết quả ở vế sau và đứng trước động từ của vế sau.",
   "tip": "Nhớ cặp đôi: 如果 ở vế đầu, 就 ở vế sau.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“如果明天下雨，我们就不去公园了” nghĩa là gì?",
@@ -5369,7 +5369,7 @@ var ZH_GRAMMAR = [ {
   "speak": "他不但会说汉语，而且会写汉字。这件衣服不但便宜，而且好看。她不但聪明，而且很努力。北京不但大，而且很美。",
   "rule": "不但 ở vế đầu, 而且 ở vế sau. Hai vế cùng chủ ngữ thì 不但 đứng sau chủ ngữ (他不但…). Vế sau thường tiến thêm một bậc so với vế trước.",
   "tip": "Cùng một người/vật thì 不但 đứng sau chủ ngữ, đừng đặt 不但 lên trước chủ ngữ.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
     "q": "“他不但会说汉语，而且会写汉字” nghĩa là gì?",
@@ -5448,7 +5448,7 @@ var ZH_READING = [ {
   "text": "小明的家在三楼。家里有三口人：爸爸、妈妈和小明。客厅很大，沙发很舒服。他的房间不大，但是很干净。晚上，一家人在客厅看电视。",
   "pinyin": "Xiǎo Míng de jiā zài sān lóu. Jiā lǐ yǒu sān kǒu rén: bàba, māma hé Xiǎo Míng. Kètīng hěn dà, shāfā hěn shūfu. Tā de fángjiān bù dà, dànshì hěn gānjìng. Wǎnshang, yì jiā rén zài kètīng kàn diànshì.",
   "vi": "Nhà của Tiểu Minh ở tầng 3. Nhà có 3 người: bố, mẹ và Tiểu Minh. Phòng khách rất rộng, ghế sofa rất thoải mái. Phòng của cậu ấy không lớn nhưng rất sạch. Buổi tối, cả nhà xem tivi ở phòng khách.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Nhà của Tiểu Minh ở tầng mấy?",
@@ -5513,7 +5513,7 @@ var ZH_READING = [ {
   "text": "我每天早上七点去学校。上午有四节课：汉语、数学、英语和体育。午饭后，我和同学在操场上踢足球。下午三点放学，我坐公共汽车回家。老师说我的汉语越来越好，我很高兴。",
   "pinyin": "Wǒ měitiān zǎoshang qī diǎn qù xuéxiào. Shàngwǔ yǒu sì jié kè: Hànyǔ, shùxué, Yīngyǔ hé tǐyù. Wǔfàn hòu, wǒ hé tóngxué zài cāochǎng shang tī zúqiú. Xiàwǔ sān diǎn fàngxué, wǒ zuò gōnggòng qìchē huí jiā. Lǎoshī shuō wǒ de Hànyǔ yuè lái yuè hǎo, wǒ hěn gāoxìng.",
   "vi": "Mỗi ngày tôi đi học lúc 7 giờ sáng. Buổi sáng có 4 tiết: tiếng Trung, toán, tiếng Anh và thể dục. Sau bữa trưa, tôi và bạn học đá bóng ở sân trường. 3 giờ chiều tan học, tôi đi xe buýt về nhà. Cô giáo nói tiếng Trung của tôi càng ngày càng tốt, tôi rất vui.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Mấy giờ đi học?",
@@ -5578,7 +5578,7 @@ var ZH_READING = [ {
   "text": "今天天气很好。早上有点儿冷，中午很暖和。天空很蓝，没有云。下午刮了一点儿风，但是不冷。明天可能下雨，出门别忘了带伞。",
   "pinyin": "Jīntiān tiānqì hěn hǎo. Zǎoshang yǒudiǎnr lěng, zhōngwǔ hěn nuǎnhuo. Tiānkōng hěn lán, méi yǒu yún. Xiàwǔ guā le yìdiǎnr fēng, dànshì bù lěng. Míngtiān kěnéng xià yǔ, chū mén bié wàng le dài sǎn.",
   "vi": "Hôm nay thời tiết rất đẹp. Sáng hơi lạnh, trưa rất ấm. Bầu trời rất xanh, không có mây. Chiều có gió nhẹ nhưng không lạnh. Ngày mai có thể mưa, ra ngoài đừng quên mang ô.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Buổi sáng thời tiết thế nào?",
@@ -5643,7 +5643,7 @@ var ZH_READING = [ {
   "text": "我的好朋友叫小红。她今年二十岁，是大学生。她很高，也很漂亮。我们每个星期六一起去图书馆看书。她喜欢唱歌，我喜欢画画。我们常常互相帮助，从来不吵架。",
   "pinyin": "Wǒ de hǎo péngyou jiào Xiǎo Hóng. Tā jīnnián èrshí suì, shì dàxuéshēng. Tā hěn gāo, yě hěn piàoliang. Wǒmen měi gè xīngqīliù yìqǐ qù túshūguǎn kàn shū. Tā xǐhuan chàng gē, wǒ xǐhuan huà huà. Wǒmen chángcháng hùxiāng bāngzhù, cónglái bù chǎojià.",
   "vi": "Bạn thân của tôi tên là Tiểu Hồng. Năm nay cô ấy 20 tuổi, là sinh viên đại học. Cô ấy rất cao và cũng rất xinh. Mỗi thứ bảy chúng tôi cùng đi thư viện đọc sách. Cô ấy thích hát, tôi thích vẽ. Chúng tôi thường giúp đỡ lẫn nhau, không bao giờ cãi nhau.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Tiểu Hồng năm nay bao nhiêu tuổi?",
@@ -5708,7 +5708,7 @@ var ZH_READING = [ {
   "text": "我上个月开始在一家公司工作。公司离我家不远，坐地铁只要二十分钟。我的工作是写报告，有时候还要开会。同事们都很友好，常常帮助我。虽然工作有点儿忙，但是我学到了很多东西。",
   "pinyin": "Wǒ shàng gè yuè kāishǐ zài yì jiā gōngsī gōngzuò. Gōngsī lí wǒ jiā bù yuǎn, zuò dìtiě zhǐ yào èrshí fēnzhōng. Wǒ de gōngzuò shì xiě bàogào, yǒu shíhou hái yào kāi huì. Tóngshìmen dōu hěn yǒuhǎo, chángcháng bāngzhù wǒ. Suīrán gōngzuò yǒudiǎnr máng, dànshì wǒ xué dào le hěn duō dōngxi.",
   "vi": "Tháng trước tôi bắt đầu làm việc ở một công ty. Công ty không xa nhà tôi, đi tàu điện ngầm chỉ mất 20 phút. Công việc của tôi là viết báo cáo, thỉnh thoảng còn phải họp. Các đồng nghiệp đều rất thân thiện, thường giúp đỡ tôi. Tuy công việc hơi bận nhưng tôi đã học được rất nhiều thứ.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Bắt đầu đi làm từ khi nào?",
@@ -5773,7 +5773,7 @@ var ZH_READING = [ {
   "text": "星期六早上，天气晴朗，我们一家人去公园玩。公园里有很多花，还有一个大湖。爸爸妈妈在湖边散步，我和弟弟在草地上放风筝。中午我们在公园外面的小饭馆吃饭。大家都玩得很开心，下午四点才回家。",
   "pinyin": "Xīngqīliù zǎoshang, tiānqì qínglǎng, wǒmen yì jiā rén qù gōngyuán wán. Gōngyuán lǐ yǒu hěn duō huā, hái yǒu yí gè dà hú. Bàba māma zài hú biān sànbù, wǒ hé dìdi zài cǎodì shang fàng fēngzheng. Zhōngwǔ wǒmen zài gōngyuán wàimiàn de xiǎo fànguǎn chī fàn. Dàjiā dōu wán de hěn kāixīn, xiàwǔ sì diǎn cái huí jiā.",
   "vi": "Sáng thứ bảy, trời nắng đẹp, cả nhà chúng tôi đi công viên chơi. Trong công viên có nhiều hoa, còn có một cái hồ lớn. Bố mẹ đi dạo bên hồ, tôi và em trai thả diều trên bãi cỏ. Trưa chúng tôi ăn cơm ở quán nhỏ ngoài công viên. Mọi người đều chơi rất vui, 4 giờ chiều mới về nhà.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Cả nhà đi đâu chơi?",
@@ -5838,7 +5838,7 @@ var ZH_READING = [ {
   "text": "昨天我觉得头疼，还有点儿发烧，就去医院看医生了。医生说我感冒了，要多喝水，好好休息。妈妈给我做了热汤，还买了药。我吃了药，睡了一觉，今天感觉好多了。以后天气冷的时候，我一定多穿衣服。",
   "pinyin": "Zuótiān wǒ juéde tóu téng, hái yǒudiǎnr fāshāo, jiù qù yīyuàn kàn yīshēng le. Yīshēng shuō wǒ gǎnmào le, yào duō hē shuǐ, hǎohāo xiūxi. Māma gěi wǒ zuò le rè tāng, hái mǎi le yào. Wǒ chī le yào, shuì le yí jiào, jīntiān gǎnjué hǎo duō le. Yǐhòu tiānqì lěng de shíhou, wǒ yídìng duō chuān yīfu.",
   "vi": "Hôm qua tôi thấy đau đầu, còn hơi sốt, nên đã đi bệnh viện khám bác sĩ. Bác sĩ nói tôi bị cảm, phải uống nhiều nước, nghỉ ngơi cho tốt. Mẹ nấu canh nóng cho tôi, còn mua thuốc. Tôi uống thuốc, ngủ một giấc, hôm nay cảm thấy khá hơn nhiều. Sau này khi trời lạnh, tôi nhất định mặc nhiều áo hơn.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Hôm qua người kể bị sao?",
@@ -5903,7 +5903,7 @@ var ZH_READING = [ {
   "text": "星期天，我和朋友去商场买衣服。我看中了一件蓝色的毛衣，穿上很舒服。可是价格有点儿贵，要三百块。售货员说可以便宜一点儿，最后两百五十块卖给我了。我还买了一条裤子，朋友买了一双鞋。我们都对今天买的东西很满意。",
   "pinyin": "Xīngqītiān, wǒ hé péngyou qù shāngchǎng mǎi yīfu. Wǒ kàn zhòng le yí jiàn lán sè de máoyī, chuān shang hěn shūfu. Kěshì jiàgé yǒudiǎnr guì, yào sān bǎi kuài. Shòuhuòyuán shuō kěyǐ piányi yìdiǎnr, zuìhòu liǎng bǎi wǔshí kuài mài gěi wǒ le. Wǒ hái mǎi le yì tiáo kùzi, péngyou mǎi le yì shuāng xié. Wǒmen dōu duì jīntiān mǎi de dōngxi hěn mǎnyì.",
   "vi": "Chủ nhật, tôi và bạn đi trung tâm thương mại mua quần áo. Tôi ưng một chiếc áo len màu xanh, mặc lên rất thoải mái. Nhưng giá hơi đắt, 300 đồng. Nhân viên bán hàng nói có thể rẻ hơn một chút, cuối cùng bán cho tôi 250 đồng. Tôi còn mua một chiếc quần, bạn tôi mua một đôi giày. Chúng tôi đều rất hài lòng với những thứ mua hôm nay.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Người kể ưng món gì đầu tiên?",
@@ -6004,7 +6004,7 @@ var ZH_LISTENING = [ {
     "vi": "Được, không gặp không về."
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Hai người hẹn làm gì?",
@@ -6087,7 +6087,7 @@ var ZH_LISTENING = [ {
     "vi": "Thật tốt, rảnh tôi qua xem."
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Nhà mới gần đâu?",
@@ -6164,7 +6164,7 @@ var ZH_LISTENING = [ {
     "vi": "Có, sau giờ học chúng mình cùng đi."
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Hai người hỏi về bài gì?",
@@ -6249,7 +6249,7 @@ var ZH_LISTENING = [ {
     "vi": "Được, chủ quán, 2 bát mì, 2 món!"
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Hai người muốn ăn gì?",
@@ -6326,7 +6326,7 @@ var ZH_LISTENING = [ {
     "vi": "Đúng, đừng để bị cảm."
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Ngày mai thời tiết thế nào?",
@@ -6409,7 +6409,7 @@ var ZH_LISTENING = [ {
     "vi": "Cảm ơn giám đốc!"
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "A xin nghỉ mấy ngày?",
@@ -6492,7 +6492,7 @@ var ZH_LISTENING = [ {
     "vi": "Nghe hay đấy, chúc các bạn chơi vui!"
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "B định đi đâu?",
@@ -6577,7 +6577,7 @@ var ZH_LISTENING = [ {
     "vi": "Vâng, tôi nhất định chú ý."
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Bệnh nhân bị sao?",
@@ -6660,7 +6660,7 @@ var ZH_LISTENING = [ {
     "vi": "Được, tôi mua."
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "Giá ban đầu là bao nhiêu?",
@@ -6743,7 +6743,7 @@ var ZH_LISTENING = [ {
     "vi": "Cảm ơn bạn nhiều!"
    }
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  "note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   "questions": [
    {
     "q": "A nhờ giúp việc gì?",
@@ -6825,7 +6825,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "我叫大明，很高兴认识你。", "py": "Wǒ jiào Dà Míng, hěn gāoxìng rènshi nǐ.", "vi": "Tôi tên là Đại Minh, rất vui được quen bạn." },
    { "sp": "B", "han": "我也很高兴认识你。", "py": "Wǒ yě hěn gāoxìng rènshi nǐ.", "vi": "Tôi cũng rất vui được quen bạn." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "giadinh", "stage": 2, "title": "Nói về gia đình", "topic": "Gia đình",
@@ -6836,7 +6836,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "你妹妹今年多大了？", "py": "Nǐ mèimei jīnnián duō dà le?", "vi": "Em gái bạn năm nay mấy tuổi?" },
    { "sp": "B", "han": "她今年十岁，上小学三年级。", "py": "Tā jīnnián shí suì, shàng xiǎoxué sān niánjí.", "vi": "Em ấy năm nay 10 tuổi, học lớp 3 tiểu học." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "truonghoc", "stage": 2, "title": "Ở trường học", "topic": "Trường học",
@@ -6847,7 +6847,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "我是一班的。你们班有多少学生？", "py": "Wǒ shì yì bān de. Nǐmen bān yǒu duōshao xuésheng?", "vi": "Tôi học lớp 1. Lớp bạn có bao nhiêu học sinh?" },
    { "sp": "B", "han": "我们班有三十个学生。", "py": "Wǒmen bān yǒu sānshí gè xuésheng.", "vi": "Lớp chúng tôi có 30 học sinh." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "muasam", "stage": 2, "title": "Mua quần áo", "topic": "Mua sắm",
@@ -6859,7 +6859,7 @@ var ZH_SPEAK = [ {
    { "sp": "B", "han": "好吧，一百二十块，你要吗？", "py": "Hǎo ba, yì bǎi èrshí kuài, nǐ yào ma?", "vi": "Được rồi, 120 tệ, bạn có lấy không?" },
    { "sp": "A", "han": "好，我要了。", "py": "Hǎo, wǒ yào le.", "vi": "Được, tôi lấy." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "anuong", "stage": 2, "title": "Gọi món ăn", "topic": "Ăn uống",
@@ -6870,7 +6870,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "我想吃米饭和鱼。", "py": "Wǒ xiǎng chī mǐfàn hé yú.", "vi": "Tôi muốn ăn cơm và cá." },
    { "sp": "B", "han": "好，我们再要两杯水。", "py": "Hǎo, wǒmen zài yào liǎng bēi shuǐ.", "vi": "Được, chúng mình gọi thêm hai cốc nước." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "thoitiet", "stage": 2, "title": "Nói về thời tiết", "topic": "Thời tiết",
@@ -6881,7 +6881,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "明天会更冷吗？", "py": "Míngtiān huì gèng lěng ma?", "vi": "Ngày mai có lạnh hơn không?" },
    { "sp": "B", "han": "天气预报说明天会晴天，但是风很大。", "py": "Tiānqì yùbào shuō míngtiān huì qíngtiān, dànshì fēng hěn dà.", "vi": "Dự báo nói mai trời nắng, nhưng gió rất to." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "dilam", "stage": 3, "title": "Nói về công việc", "topic": "Đi làm",
@@ -6893,7 +6893,7 @@ var ZH_SPEAK = [ {
    { "sp": "B", "han": "你的工作忙吗？", "py": "Nǐ de gōngzuò máng ma?", "vi": "Công việc của bạn có bận không?" },
    { "sp": "A", "han": "有时候很忙，不过我很喜欢。", "py": "Yǒu shíhou hěn máng, búguò wǒ hěn xǐhuan.", "vi": "Có lúc rất bận, nhưng tôi rất thích." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "dilai", "stage": 3, "title": "Đi xe buýt", "topic": "Đi lại",
@@ -6904,7 +6904,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "要多长时间？", "py": "Yào duō cháng shíjiān?", "vi": "Mất bao lâu?" },
    { "sp": "B", "han": "大概二十分钟。", "py": "Dàgài èrshí fēnzhōng.", "vi": "Khoảng 20 phút." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "suckhoe", "stage": 3, "title": "Bị cảm", "topic": "Sức khỏe",
@@ -6916,7 +6916,7 @@ var ZH_SPEAK = [ {
    { "sp": "B", "han": "吃了，还喝了很多水。", "py": "Chī le, hái hē le hěn duō shuǐ.", "vi": "Uống rồi, còn uống rất nhiều nước." },
    { "sp": "A", "han": "那你早点儿休息吧。", "py": "Nà nǐ zǎo diǎnr xiūxi ba.", "vi": "Vậy bạn nghỉ sớm nhé." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "banbe", "stage": 3, "title": "Hẹn bạn bè", "topic": "Bạn bè",
@@ -6927,7 +6927,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "好啊，几点见？", "py": "Hǎo a, jǐ diǎn jiàn?", "vi": "Được, mấy giờ gặp?" },
    { "sp": "B", "han": "上午九点，在公园门口见。", "py": "Shàngwǔ jiǔ diǎn, zài gōngyuán ménkǒu jiàn.", "vi": "9 giờ sáng, gặp ở cổng công viên." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "dulich", "stage": 3, "title": "Đi du lịch", "topic": "Du lịch",
@@ -6938,7 +6938,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "你打算去几天？", "py": "Nǐ dǎsuan qù jǐ tiān?", "vi": "Bạn định đi mấy ngày?" },
    { "sp": "B", "han": "大概五天。", "py": "Dàgài wǔ tiān.", "vi": "Khoảng 5 ngày." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "sothich", "stage": 3, "title": "Sở thích của bạn", "topic": "Sở thích",
@@ -6949,7 +6949,7 @@ var ZH_SPEAK = [ {
    { "sp": "A", "han": "你喜欢什么音乐？", "py": "Nǐ xǐhuan shénme yīnyuè?", "vi": "Bạn thích nhạc gì?" },
    { "sp": "B", "han": "我喜欢轻音乐，听了很放松。", "py": "Wǒ xǐhuan qīng yīnyuè, tīng le hěn fàngsōng.", "vi": "Tôi thích nhạc nhẹ, nghe rất thư giãn." }
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
   }
  ];
 var ZH_ROLE = [ {
@@ -6967,7 +6967,7 @@ var ZH_ROLE = [ {
   ],
   "chunks": ["这件多少钱？ — Cái này bao nhiêu tiền?", "我可以试一下吗？ — Tôi mặc thử được không?", "我要这件。 — Tôi lấy cái này."],
   "tip": "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "nhahang", "stage": 2, "title": "Ở nhà hàng", "setting": "Nhà hàng",
@@ -6983,7 +6983,7 @@ var ZH_ROLE = [ {
   ],
   "chunks": ["几位？ — Mấy người ạ?", "我要一碗面条。 — Tôi muốn một bát mì.", "买单，谢谢！ — Tính tiền, cảm ơn!"],
   "tip": "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "hoiduong", "stage": 2, "title": "Hỏi đường", "setting": "Ngoài đường",
@@ -6998,7 +6998,7 @@ var ZH_ROLE = [ {
   ],
   "chunks": ["请问，去……怎么走？ — Xin hỏi, đi…… đi thế nào?", "一直往前走 — Đi thẳng", "大概十分钟就到了。 — Khoảng 10 phút là tới."],
   "tip": "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "truonghocrole", "stage": 2, "title": "Học sinh mới ở trường", "setting": "Lớp học",
@@ -7014,7 +7014,7 @@ var ZH_ROLE = [ {
   ],
   "chunks": ["你是新来的吗？ — Bạn là học sinh mới à?", "我叫……，你呢？ — Tôi tên là……，còn bạn?", "坐我旁边吧。 — Ngồi cạnh tôi nhé."],
   "tip": "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "benhvien", "stage": 3, "title": "Đi khám bệnh", "setting": "Bệnh viện",
@@ -7030,7 +7030,7 @@ var ZH_ROLE = [ {
   ],
   "chunks": ["你哪儿不舒服？ — Bạn khó chịu ở đâu?", "我头疼，还发烧。 — Tôi đau đầu, còn sốt.", "谢谢医生。 — Cảm ơn bác sĩ."],
   "tip": "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "benxe", "stage": 3, "title": "Mua vé ở bến xe", "setting": "Bến xe",
@@ -7046,7 +7046,7 @@ var ZH_ROLE = [ {
   ],
   "chunks": ["几点有车？ — Mấy giờ có xe?", "票多少钱一张？ — Vé bao nhiêu tiền một vé?", "我要两张。 — Tôi muốn hai vé."],
   "tip": "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "khachsan", "stage": 3, "title": "Thuê phòng khách sạn", "setting": "Khách sạn",
@@ -7062,7 +7062,7 @@ var ZH_ROLE = [ {
   ],
   "chunks": ["有空房间吗？ — Còn phòng trống không?", "单人间还是双人间？ — Phòng đơn hay phòng đôi?", "多少钱一晚？ — Bao nhiêu tiền một đêm?"],
   "tip": "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "goidien", "stage": 3, "title": "Gọi điện rủ bạn đi chơi", "setting": "Cuộc gọi điện thoại",
@@ -7078,7 +7078,7 @@ var ZH_ROLE = [ {
   ],
   "chunks": ["喂，你好！我是…… — A lô, chào bạn! Tôi là……", "明天你有时间吗？ — Ngày mai bạn có thời gian không?", "我们一起去看电影吧。 — Chúng mình cùng đi xem phim nhé."],
   "tip": "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
   }
  ];
 var ZH_WRITE = [ {
@@ -7086,21 +7086,21 @@ var ZH_WRITE = [ {
   "prompt": "Sắp xếp các từ thành câu đúng: hôm nay tôi đi học ở trường.",
   "words": ["我", "今天", "去", "学校", "上课"],
   "why": "Trật tự đúng: chủ ngữ 我 → thời gian 今天 → động từ 去 → nơi chốn 学校 → việc 上课.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+  "note": "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
  },
  {
   "id": "sapxep-muado", "stage": 2, "title": "Sắp xếp: Mẹ mua áo mới", "kind": "order",
   "prompt": "Sắp xếp các từ thành câu đúng: hôm qua mẹ đã mua một cái áo mới.",
   "words": ["妈妈", "昨天", "买了", "一件", "新衣服"],
   "why": "Trật tự đúng: chủ ngữ 妈妈 → thời gian 昨天 → động từ 买了 → số lượng 一件 → đồ vật 新衣服.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+  "note": "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
  },
  {
   "id": "sapxep-dilam", "stage": 3, "title": "Sắp xếp: Anh ấy đi làm", "kind": "order",
   "prompt": "Sắp xếp các từ thành câu đúng: anh ấy mỗi ngày 8 giờ sáng đi làm.",
   "words": ["他", "每天", "早上", "八点", "去", "上班"],
   "why": "Trật tự đúng: chủ ngữ 他 → tần suất 每天 → buổi 早上 → giờ 八点 → động từ 去 → việc 上班.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+  "note": "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
  },
  {
   "id": "dientu-giadinh", "stage": 2, "title": "Điền từ: Gia đình", "kind": "fill",
@@ -7109,7 +7109,7 @@ var ZH_WRITE = [ {
    { "q": "我家有___口人。(Nhà tôi có 4 người.)", "o": ["三", "四", "五", "六"], "a": 1, "why": "四口人: nhà có 4 người." },
    { "q": "我妹妹今年___岁。(Em gái tôi năm nay 10 tuổi.)", "o": ["九", "十", "十一", "十二"], "a": 1, "why": "十岁: 10 tuổi." }
   ],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+  "note": "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
  },
  {
   "id": "dientu-anuong", "stage": 2, "title": "Điền từ: Ăn uống", "kind": "fill",
@@ -7118,7 +7118,7 @@ var ZH_WRITE = [ {
    { "q": "我想吃___。(Tôi muốn ăn mì.)", "o": ["米饭", "面条", "面包", "水果"], "a": 1, "why": "面条 là mì." },
    { "q": "我们再要两___水。(Chúng mình gọi thêm hai cốc nước.)", "o": ["杯", "个", "本", "张"], "a": 0, "why": "杯 là lượng từ cho cốc nước: 两杯水." }
   ],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+  "note": "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
  },
  {
   "id": "dientu-dilam", "stage": 3, "title": "Điền từ: Đi làm", "kind": "fill",
@@ -7127,7 +7127,7 @@ var ZH_WRITE = [ {
    { "q": "他在一家公司___。(Anh ấy làm việc ở một công ty.)", "o": ["学习", "工作", "休息", "睡觉"], "a": 1, "why": "工作 là làm việc." },
    { "q": "我的工作有时候很___，不过我很喜欢。(Công việc của tôi có lúc rất bận, nhưng tôi rất thích.)", "o": ["忙", "闲", "早", "晚"], "a": 0, "why": "很忙: rất bận." }
   ],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+  "note": "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
  },
  {
   "id": "viet-gioithieu", "stage": 2, "title": "Viết: Giới thiệu bản thân", "kind": "free",
@@ -7135,7 +7135,7 @@ var ZH_WRITE = [ {
   "model": "大家好！我叫小明。我今年二十岁。我是学生。我喜欢看书和听音乐。",
   "analysis": "Bài mẫu mở đầu bằng 大家好，rồi đi theo thứ tự: tên → tuổi → thân phận → sở thích, mỗi ý một câu ngắn.",
   "phrases": ["我叫…… — Tôi tên là……", "我今年……岁 — Năm nay tôi…… tuổi", "我是学生 — Tôi là học sinh"],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); đề và bài mẫu tự viết, không trích nguyên văn giáo trình. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+  "note": "Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "viet-cuoituan", "stage": 3, "title": "Viết: Kể về cuối tuần", "kind": "free",
@@ -7143,7 +7143,7 @@ var ZH_WRITE = [ {
   "model": "上个周末，我和朋友去公园了。我们在公园散步，还拍了很多照片。中午我们在附近的饭馆吃饭。下午我们回家了。我觉得很开心。",
   "analysis": "Bài mẫu kể theo thứ tự thời gian: cuối tuần → buổi sáng, buổi trưa, buổi chiều → cảm nghĩ ở câu cuối.",
   "phrases": ["上个周末 — Cuối tuần trước", "我和朋友去…… — Tôi cùng bạn đi……", "我觉得很开心 — Tôi thấy rất vui"],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); đề và bài mẫu tự viết, không trích nguyên văn giáo trình. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+  "note": "Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
   }
  ];
 
@@ -7340,7 +7340,7 @@ CONTENT.zhVocab.push.apply(CONTENT.zhVocab, [
 {
 "topic": "Công việc văn phòng — Làm việc trong văn phòng",
 "hsk": "HSK4",
-"hskNote": "Mức đặt theo chủ đề công việc văn phòng cấp 4; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+"hskNote": "Nhãn cấp 4 là mức đặt theo chủ đề công việc văn phòng.",
 "cards": [
 {"han": "会议室", "pinyin": "huìyìshì", "vi": "phòng họp", "col": "在会议室开会", "ex": "我们在会议室开会。", "exv": "Chúng tôi họp trong phòng họp."},
 {"han": "复印", "pinyin": "fùyìn", "vi": "photocopy", "col": "复印文件", "ex": "请帮我复印这份文件。", "exv": "Hãy giúp tôi photocopy tài liệu này."},
@@ -7367,7 +7367,7 @@ CONTENT.zhVocab.push.apply(CONTENT.zhVocab, [
 {
 "topic": "Sức khỏe và bệnh viện — Khám bệnh và chăm sóc",
 "hsk": "HSK4",
-"hskNote": "Mức đặt theo chủ đề sức khỏe và bệnh viện cấp 4; tài liệu HSK tham khảo không có bảng từ từng cấp nên nhãn này là mức đặt chủ đề, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+"hskNote": "Nhãn cấp 4 là mức đặt theo chủ đề sức khỏe và bệnh viện.",
 "cards": [
 {"han": "检查", "pinyin": "jiǎnchá", "vi": "kiểm tra", "col": "做检查", "ex": "医生先做检查，再开药。", "exv": "Bác sĩ kiểm tra trước, rồi mới kê thuốc."},
 {"han": "治疗", "pinyin": "zhìliáo", "vi": "điều trị", "col": "接受治疗", "ex": "他住院接受治疗。", "exv": "Anh ấy nằm viện để điều trị."},
@@ -7405,7 +7405,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 "speak": "虽然今天下雨，但是我们还是去公园。虽然他很累，但是他没有休息。虽然这件衣服很贵，但是我很喜欢。虽然工作很难，但是大家都很努力。",
 "rule": "虽然 nêu điều trái ngược ở vế đầu, 但是 nêu ý chính ở vế sau. Hai chữ thường đi thành cặp, 但是 đứng đầu vế sau.",
 "tip": "Hãy nhớ: 虽然 là “tuy”, 但是 là “nhưng” — nói điều khó trước, rồi nói quyết định sau.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "quiz": [
 {"q": "Điền chỗ trống: 虽然今天很忙，___ 我还是来了。", "o": ["但是", "如果", "而且", "因为"], "a": 0, "why": "虽然 đi với 但是: tuy bận, nhưng vẫn đến."},
 {"q": "Câu nào dùng 虽然…但是 đúng?", "o": ["虽然下雨，但是我们去公园", "虽然下雨，如果我们去公园", "虽然下雨，而且我们去公园", "虽然下雨，因为我们去公园"], "a": 0, "why": "虽然…但是 là cặp nói hai mặt trái ngược."},
@@ -7424,7 +7424,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 "speak": "他不但会唱歌，而且会跳舞。这家饭馆不但便宜，而且很好吃。她不但学习好，而且很热心。这个城市不但干净，而且很安静。",
 "rule": "不但 nêu điểm tốt thứ nhất, 而且 nêu điểm tốt thứ hai, và điểm sau thường mạnh hơn điểm trước. Hai chữ đi thành cặp.",
 "tip": "Hãy nhớ thứ tự: 不但 trước, 而且 sau — giống như “không những… mà còn…” trong tiếng Việt.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "quiz": [
 {"q": "Điền chỗ trống: 她不但聪明，___ 很努力。", "o": ["而且", "但是", "如果", "因为"], "a": 0, "why": "不但 đi với 而且: không những thông minh mà còn chăm chỉ."},
 {"q": "Câu nào dùng 不但…而且 đúng?", "o": ["他不但会中文，而且会英文", "他不但会中文，但是会英文", "他不但会中文，如果会英文", "他不但会中文，因为会英文"], "a": 0, "why": "不但…而且 là cặp nói hai điểm tốt cùng lúc."}
@@ -7442,7 +7442,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 "speak": "如果明天下雨，我们就不去爬山。如果你有时间，就帮我一下。如果他不来，我们就先开始。如果身体不舒服，就早点儿休息。",
 "rule": "如果 nêu điều kiện ở vế đầu, 就 nêu kết quả ở vế sau. 就 thường đứng trước động từ của vế sau.",
 "tip": "Hãy nhớ: 如果 là “nếu”, 就 là “thì” — điều kiện chưa xảy ra, kết quả đi sau nó.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "quiz": [
 {"q": "Điền chỗ trống: 如果你累了，___ 休息一下。", "o": ["就", "但是", "而且", "因为"], "a": 0, "why": "如果…就: nếu mệt thì nghỉ một chút."},
 {"q": "“如果明天下雨，我们就不去” nghĩa là gì?", "o": ["Nếu ngày mai mưa thì chúng tôi không đi", "Tuy ngày mai mưa nhưng chúng tôi vẫn đi", "Vì ngày mai mưa nên chúng tôi đi", "Không những mưa mà chúng tôi còn đi"], "a": 0, "why": "如果 nêu điều kiện mưa, 就 nêu kết quả không đi."}
@@ -7460,7 +7460,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 "speak": "我把书放在桌子上了。请把门关上。他把房间打扫干净了。妈妈把衣服洗干净了。",
 "rule": "把 + đồ vật + động từ + kết quả hoặc phương hướng. Sau động từ phải có thêm thành phần như 上, 干净, 在桌子上 — động từ không đứng trơ một mình.",
 "tip": "Hãy nhớ công thức: 把 + cái gì + làm gì + kết quả ra sao.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "quiz": [
 {"q": "Câu nào là câu chữ 把 đúng?", "o": ["我把书放在桌子上了", "我把书放", "我放把书在桌子上", "我书把放在桌子上"], "a": 0, "why": "把 + 书 + 放 + 在桌子上: đồ vật lên trước động từ, sau động từ có phương hướng."},
 {"q": "“请把门关上” nghĩa là gì?", "o": ["Hãy đóng cửa lại", "Hãy mở cửa ra", "Hãy lau cửa đi", "Hãy khóa cửa lại"], "a": 0, "why": "把门关上: đóng cửa lại, 上 chỉ phương hướng đóng vào."}
@@ -7478,7 +7478,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 "speak": "我的手机被弟弟拿走了。衣服被雨淋湿了。他的自行车被偷了。这个消息被大家知道了。",
 "rule": "被 + người gây ra (có thể bỏ) + động từ + kết quả. Câu 被 thường nói việc không mong muốn, và sau động từ phải có kết quả như 走了, 湿了, 偷了.",
 "tip": "Hãy nhớ: đồ vật chịu tác động đứng trước 被, người làm ra việc (nếu có) đứng sau 被.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "quiz": [
 {"q": "Câu nào là câu chữ 被 đúng?", "o": ["他的自行车被偷了", "他的自行车偷了被", "被他的自行车偷了", "他的被自行车偷了"], "a": 0, "why": "自行车 + 被 + 偷了: đồ vật trước 被, động từ và kết quả sau."},
 {"q": "“衣服被雨淋湿了” nghĩa là gì?", "o": ["Quần áo bị mưa làm ướt", "Quần áo làm mưa bị ướt", "Mưa bị quần áo làm ướt", "Quần áo phơi ngoài mưa"], "a": 0, "why": "衣服 chịu tác động, 雨 gây ra việc làm ướt."}
@@ -7496,7 +7496,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 "speak": "今天比昨天更冷。这件衣服比那件更贵。北京没有上海那么热。我的中文没有他那么好。",
 "rule": "比…更…: A 比 B 更 + tính từ (A hơn B). 没有…那么…: A 没有 B 那么 + tính từ (A không bằng B). Tính từ đứng cuối câu so sánh.",
 "tip": "Hãy nhớ: 比 là “hơn”, 没有…那么 là “không bằng” — hai mẫu ngược nhau, đừng đổi chỗ.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "quiz": [
 {"q": "“今天比昨天更冷” nghĩa là gì?", "o": ["Hôm nay lạnh hơn hôm qua", "Hôm qua lạnh hơn hôm nay", "Hôm nay và hôm qua lạnh như nhau", "Hôm nay không lạnh"], "a": 0, "why": "比…更…: hôm nay hơn hôm qua về độ lạnh."},
 {"q": "“我的中文没有他那么好” nghĩa là gì?", "o": ["Tiếng Trung của tôi không tốt bằng anh ấy", "Tiếng Trung của tôi tốt hơn anh ấy", "Tiếng Trung của tôi tốt như anh ấy", "Anh ấy không biết tiếng Trung"], "a": 0, "why": "没有…那么…: tôi không bằng anh ấy."},
@@ -7510,7 +7510,7 @@ ZH_READING.push.apply(ZH_READING, [
 "text": "小王上个月开始在一家公司工作。他的工作是整理文件和安排会议。每天早上八点，他先检查今天的任务。上午，他跟同事讨论新的计划。中午，大家一起去食堂吃饭。下午，他把报告交给经理，经理会告诉他哪里要改。刚开始的时候，他觉得工作很难，但是同事都很热心。现在，他已经习惯了新的工作，也交了几个好朋友。",
 "pinyin": "Xiǎo Wáng shàng gè yuè kāishǐ zài yì jiā gōngsī gōngzuò. Tā de gōngzuò shì zhěnglǐ wénjiàn hé ānpái huìyì. Měitiān zǎoshang bā diǎn, tā xiān jiǎnchá jīntiān de rènwu. Shàngwǔ, tā gēn tóngshì tǎolùn xīn de jìhuà. Zhōngwǔ, dàjiā yìqǐ qù shítáng chī fàn. Xiàwǔ, tā bǎ bàogào jiāo gěi jīnglǐ, jīnglǐ huì gàosu tā nǎlǐ yào gǎi. Gāng kāishǐ de shíhou, tā juéde gōngzuò hěn nán, dànshì tóngshì dōu hěn rèxīn. Xiànzài, tā yǐjīng xíguàn le xīn de gōngzuò, yě jiāo le jǐ gè hǎo péngyou.",
 "vi": "Tháng trước Tiểu Vương bắt đầu làm việc ở một công ty. Công việc của anh ấy là sắp xếp tài liệu và sắp xếp cuộc họp. Mỗi sáng 8 giờ, anh ấy kiểm tra nhiệm vụ hôm nay trước. Buổi sáng, anh ấy thảo luận kế hoạch mới với đồng nghiệp. Buổi trưa, mọi người cùng đi ăn ở nhà ăn. Buổi chiều, anh ấy giao báo cáo cho giám đốc, giám đốc sẽ nói chỗ nào cần sửa. Lúc mới bắt đầu, anh ấy thấy công việc rất khó, nhưng đồng nghiệp đều rất nhiệt tình. Bây giờ, anh ấy đã quen với công việc mới, cũng kết bạn với vài người bạn tốt.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Công việc của Tiểu Vương là gì?", "o": ["Sắp xếp tài liệu và sắp xếp cuộc họp", "Lái xe và giao hàng", "Nấu ăn và dọn phòng", "Bán quần áo và thu tiền"], "a": 0, "why": "Bài viết: 他的工作是整理文件和安排会议."},
 {"q": "Buổi chiều Tiểu Vương làm gì?", "o": ["Giao báo cáo cho giám đốc", "Đi họp ở công ty khác", "Về nhà sớm", "Đi mua tài liệu"], "a": 0, "why": "Bài viết: 下午，他把报告交给经理."},
@@ -7523,7 +7523,7 @@ ZH_READING.push.apply(ZH_READING, [
 "text": "昨天，市里开通了一条新的地铁线。这条线一共有十个站，从城东到城西。很多市民早上坐地铁去上班，比以前快二十分钟。车站里有清楚的标志，老人和孩子也容易找到路。市政府说，新地铁可以减少路上的汽车。记者采访了一位司机，他说现在开车没有以前那么堵了。不过，也有人说，早上高峰的时候车上还是很挤。",
 "pinyin": "Zuótiān, shì lǐ kāitōng le yì tiáo xīn de dìtiě xiàn. Zhè tiáo xiàn yígòng yǒu shí gè zhàn, cóng chéng dōng dào chéng xī. Hěn duō shìmín zǎoshang zuò dìtiě qù shàngbān, bǐ yǐqián kuài èr shí fēnzhōng. Chēzhàn lǐ yǒu qīngchu de biāozhì, lǎorén hé háizi yě róngyì zhǎodào lù. Shì zhèngfǔ shuō, xīn dìtiě kěyǐ jiǎnshǎo lù shang de qìchē. Jìzhě cǎifǎng le yí wèi sījī, tā shuō xiànzài kāi chē méiyǒu yǐqián nàme dǔ le. Búguò, yě yǒu rén shuō, zǎoshang gāofēng de shíhou chē shang háishi hěn jǐ.",
 "vi": "Hôm qua, thành phố khai trương một tuyến tàu điện ngầm mới. Tuyến này tổng cộng có mười ga, từ phía đông thành phố đến phía tây. Nhiều người dân buổi sáng đi tàu điện ngầm đi làm, nhanh hơn trước hai mươi phút. Trong ga có biển chỉ dẫn rõ ràng, người già và trẻ em cũng dễ tìm đường. Chính quyền thành phố nói tàu điện ngầm mới có thể giảm ô tô trên đường. Phóng viên phỏng vấn một tài xế, anh ấy nói bây giờ lái xe không tắc như trước. Tuy nhiên, cũng có người nói giờ cao điểm buổi sáng trên xe vẫn rất đông.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Tuyến tàu điện ngầm mới có mấy ga?", "o": ["Tám ga", "Mười ga", "Mười hai ga", "Hai mươi ga"], "a": 1, "why": "Bài viết: 这条线一共有十个站."},
 {"q": "Đi tàu điện ngầm đi làm nhanh hơn trước bao nhiêu?", "o": ["Mười phút", "Hai mươi phút", "Ba mươi phút", "Một giờ"], "a": 1, "why": "Bài viết: 比以前快二十分钟."},
@@ -7536,7 +7536,7 @@ ZH_READING.push.apply(ZH_READING, [
 "text": "上个星期六，小区组织居民一起种树。早上八点，三十多个人来到小区的空地上。大家先把垃圾分类，再把树苗种进土里。孩子们负责浇水，大人负责扶树苗。种完树以后，大家又在公园里捡垃圾。一个小时以后，公园变得干净多了。居委会说，以后每个月都要组织一次这样的活动。居民们都说，这样的活动不但对环境好，而且让邻居更熟悉。",
 "pinyin": "Shàng gè xīngqīliù, xiǎoqū zǔzhī jūmín yìqǐ zhòng shù. Zǎoshang bā diǎn, sān shí duō gè rén láidào xiǎoqū de kōngdì shang. Dàjiā xiān bǎ lājī fēnlèi, zài bǎ shùmiáo zhòng jìn tǔ lǐ. Háizimen fùzé jiāo shuǐ, dàren fùzé fú shùmiáo. Zhòng wán shù yǐhòu, dàjiā yòu zài gōngyuán lǐ jiǎn lājī. Yí gè xiǎoshí yǐhòu, gōngyuán biàn de gānjìng duō le. Jūwěihuì shuō, yǐhòu měi gè yuè dōu yào zǔzhī yí cì zhèyàng de huódòng. Jūmínmen dōu shuō, zhèyàng de huódòng búdàn duì huánjìng hǎo, érqiě ràng línjū gèng shúxi.",
 "vi": "Thứ Bảy tuần trước, khu dân cư tổ chức cư dân cùng trồng cây. Sáng 8 giờ, hơn ba mươi người đến bãi đất trống của khu. Mọi người phân loại rác trước, rồi trồng cây con xuống đất. Trẻ em phụ trách tưới nước, người lớn phụ trách đỡ cây con. Trồng cây xong, mọi người lại nhặt rác trong công viên. Một giờ sau, công viên sạch hơn nhiều. Ban quản lý khu nói sau này mỗi tháng đều tổ chức một hoạt động như vậy. Cư dân đều nói hoạt động như vậy không những tốt cho môi trường mà còn khiến hàng xóm thân thiết hơn.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Có bao nhiêu người tham gia trồng cây?", "o": ["Hơn mười người", "Hơn hai mươi người", "Hơn ba mươi người", "Hơn năm mươi người"], "a": 2, "why": "Bài viết: 三十多个人来到小区的空地上."},
 {"q": "Trẻ em phụ trách việc gì?", "o": ["Tưới nước", "Đỡ cây con", "Phân loại rác", "Nhặt rác"], "a": 0, "why": "Bài viết: 孩子们负责浇水."},
@@ -7549,7 +7549,7 @@ ZH_READING.push.apply(ZH_READING, [
 "text": "去年夏天，我和朋友去杭州旅行。我们先去西湖，湖边有很多柳树。上午，我们坐船游湖，风很舒服。中午，我们在一家小饭馆吃西湖有名的菜。下午，我们去茶园看茶农采茶，还买了一包新茶。晚上，我们在夜市买纪念品，也尝了当地的小吃。虽然走了很多路，但是大家都很开心。回来以后，我把照片发给家人，他们也想去杭州看看。",
 "pinyin": "Qùnián xiàtiān, wǒ hé péngyou qù Hángzhōu lǚxíng. Wǒmen xiān qù Xī Hú, hú biān yǒu hěn duō liǔshù. Shàngwǔ, wǒmen zuò chuán yóu hú, fēng hěn shūfu. Zhōngwǔ, wǒmen zài yì jiā xiǎo fànguǎn chī Xī Hú yǒumíng de cài. Xiàwǔ, wǒmen qù cháyuán kàn chánóng cǎi chá, hái mǎi le yì bāo xīn chá. Wǎnshang, wǒmen zài yèshì mǎi jìniànpǐn, yě cháng le dāngdì de xiǎochī. Suīrán zǒu le hěn duō lù, dànshì dàjiā dōu hěn kāixīn. Huílai yǐhòu, wǒ bǎ zhàopiàn fā gěi jiārén, tāmen yě xiǎng qù Hángzhōu kànkan.",
 "vi": "Mùa hè năm ngoái, tôi và bạn bè đi du lịch Hàng Châu. Chúng tôi đến Tây Hồ trước, bên hồ có nhiều cây liễu. Buổi sáng, chúng tôi ngồi thuyền dạo hồ, gió rất dễ chịu. Buổi trưa, chúng tôi ăn món nổi tiếng của Tây Hồ ở một quán nhỏ. Buổi chiều, chúng tôi đến vườn chè xem nông dân hái chè, còn mua một gói chè mới. Buổi tối, chúng tôi mua đồ lưu niệm ở chợ đêm, cũng nếm món ăn vặt địa phương. Tuy đi bộ rất nhiều đường, nhưng mọi người đều rất vui. Sau khi về, tôi gửi ảnh cho gia đình, họ cũng muốn đến Hàng Châu xem.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Buổi sáng nhóm đi đâu và làm gì?", "o": ["Ngồi thuyền dạo hồ Tây Hồ", "Đi vườn chè hái chè", "Đi chợ đêm mua đồ", "Đi nhà hàng ăn trưa"], "a": 0, "why": "Bài viết: 上午，我们坐船游湖."},
 {"q": "Buổi chiều nhóm mua gì?", "o": ["Một gói chè mới", "Một chiếc áo", "Một quyển sách", "Một chiếc thuyền"], "a": 0, "why": "Bài viết: 还买了一包新茶."},
@@ -7569,7 +7569,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "请带上个月的报告，我想讨论一下。", "py": "Qǐng dài shàng gè yuè de bàogào, wǒ xiǎng tǎolùn yí xià.", "vi": "Hãy mang báo cáo tháng trước, tôi muốn thảo luận một chút."},
 {"sp": "B", "han": "没问题，明天见。", "py": "Méi wèntí, míngtiān jiàn.", "vi": "Không vấn đề, mai gặp."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Hai người hẹn gặp lúc mấy giờ?", "o": ["9 giờ", "10 giờ", "10 giờ rưỡi", "11 giờ"], "a": 2, "why": "A nói: 我们十点半在会议室见吧."},
 {"q": "Hai người gặp ở đâu?", "o": ["Ở nhà ăn", "Ở phòng họp", "Ở văn phòng giám đốc", "Ở cổng công ty"], "a": 1, "why": "A nói: 在会议室见吧."},
@@ -7586,7 +7586,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "我可以先看一下房间吗？", "py": "Wǒ kěyǐ xiān kàn yí xià fángjiān ma?", "vi": "Tôi xem phòng trước được không?"},
 {"sp": "B", "han": "当然可以，请跟我来。", "py": "Dāngrán kěyǐ, qǐng gēn wǒ lái.", "vi": "Tất nhiên được, mời đi theo tôi."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Tiền thuê nhà một tháng là bao nhiêu?", "o": ["1500 tệ", "2000 tệ", "2500 tệ", "3000 tệ"], "a": 2, "why": "B nói: 两千五百块."},
 {"q": "Tiền thuê có bao gồm điện nước không?", "o": ["Có, bao gồm hết", "Không, không bao gồm", "Chỉ bao gồm nước", "Chỉ bao gồm điện"], "a": 1, "why": "B nói: 不包括水电."},
@@ -7603,7 +7603,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "医生，我要吃药吗？", "py": "Yīshēng, wǒ yào chī yào ma?", "vi": "Bác sĩ, tôi phải uống thuốc không?"},
 {"sp": "B", "han": "要吃药，多喝水，多休息。", "py": "Yào chī yào, duō hē shuǐ, duō xiūxi.", "vi": "Phải uống thuốc, uống nhiều nước, nghỉ ngơi nhiều."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Bệnh nhân bị làm sao?", "o": ["Đau đầu và sốt", "Đau bụng và ho", "Đau chân và mệt", "Đau răng và sốt"], "a": 0, "why": "A nói: 我头疼，还发烧."},
 {"q": "Bệnh nhân sốt mấy ngày rồi?", "o": ["Một ngày", "Hai ngày", "Ba ngày", "Bốn ngày"], "a": 1, "why": "A nói: 两天了."},
@@ -7620,7 +7620,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "换货要钱吗？", "py": "Huàn huò yào qián ma?", "vi": "Đổi hàng có mất tiền không?"},
 {"sp": "B", "han": "不用，七天内免费换。", "py": "Bú yòng, qī tiān nèi miǎnfèi huàn.", "vi": "Không, trong bảy ngày đổi miễn phí."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Đôi giày có vấn đề gì?", "o": ["Màu khác ảnh", "Hơi nhỏ", "Bị rách", "Giao nhầm hàng"], "a": 1, "why": "A nói: 颜色一样，但是有点儿小."},
 {"q": "A nên đổi sang cỡ nào?", "o": ["Cỡ nhỏ hơn một số", "Cỡ lớn hơn một số", "Cỡ giống như cũ", "Cỡ lớn hơn hai số"], "a": 1, "why": "B nói: 换大一号的."},
@@ -7637,7 +7637,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "西湖门票多少钱？", "py": "Xī Hú ménpiào duōshao qián?", "vi": "Vé vào Tây Hồ bao nhiêu tiền?"},
 {"sp": "B", "han": "湖边免费，坐船才要钱。", "py": "Hú biān miǎnfèi, zuò chuán cái yào qián.", "vi": "Ven hồ miễn phí, ngồi thuyền mới mất tiền."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Đi Tây Hồ bằng phương tiện nào?", "o": ["Tàu số 1", "Tàu số 2", "Xe buýt số 2", "Taxi"], "a": 1, "why": "B nói: 坐二号地铁."},
 {"q": "Từ ga đi bộ đến Tây Hồ mất bao lâu?", "o": ["Khoảng năm phút", "Khoảng mười phút", "Khoảng hai mươi phút", "Khoảng nửa giờ"], "a": 1, "why": "B nói: 大概十分钟."},
@@ -7656,7 +7656,7 @@ ZH_SPEAK.push.apply(ZH_SPEAK, [
 {"sp": "B", "han": "我负责第一部分，你负责第二部分。", "py": "Wǒ fùzé dì yí bùfen, nǐ fùzé dì èr bùfen.", "vi": "Tôi phụ trách phần đầu, bạn phụ trách phần hai."},
 {"sp": "A", "han": "星期五我们再开会检查进度。", "py": "Xīngqīwǔ wǒmen zài kāihuì jiǎnchá jìndù.", "vi": "Thứ Sáu chúng ta họp lại kiểm tra tiến độ."}
 ],
-"note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
+"note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
 },
 {
 "id": "s4-speak-thuenha", "stage": 4, "title": "Xem nhà thuê", "topic": "Thuê nhà",
@@ -7668,7 +7668,7 @@ ZH_SPEAK.push.apply(ZH_SPEAK, [
 {"sp": "B", "han": "可以，冰箱和洗衣机都可以用。", "py": "Kěyǐ, bīngxiāng hé xǐyījī dōu kěyǐ yòng.", "vi": "Được, tủ lạnh và máy giặt đều dùng được."},
 {"sp": "A", "han": "那我下个月一号搬进来。", "py": "Nà wǒ xià gè yuè yí hào bān jìnlai.", "vi": "Vậy mùng 1 tháng sau tôi dọn vào."}
 ],
-"note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
+"note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
 },
 {
 "id": "s4-speak-khambenh", "stage": 4, "title": "Ở phòng khám", "topic": "Khám bệnh",
@@ -7680,7 +7680,7 @@ ZH_SPEAK.push.apply(ZH_SPEAK, [
 {"sp": "B", "han": "先做检查，再开药给你。", "py": "Xiān zuò jiǎnchá, zài kāi yào gěi nǐ.", "vi": "Kiểm tra trước, rồi kê thuốc cho bạn."},
 {"sp": "A", "han": "谢谢医生，我会多休息。", "py": "Xièxie yīshēng, wǒ huì duō xiūxi.", "vi": "Cảm ơn bác sĩ, tôi sẽ nghỉ ngơi nhiều."}
 ],
-"note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
+"note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
 },
 {
 "id": "s4-speak-muasam", "stage": 4, "title": "Đổi áo mua trên mạng", "topic": "Mua sắm",
@@ -7692,7 +7692,7 @@ ZH_SPEAK.push.apply(ZH_SPEAK, [
 {"sp": "B", "han": "不用，这次免费。", "py": "Bú yòng, zhè cì miǎnfèi.", "vi": "Không, lần này miễn phí."},
 {"sp": "A", "han": "太好了，谢谢！", "py": "Tài hǎo le, xièxie!", "vi": "Tuyệt quá, cảm ơn!"}
 ],
-"note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
+"note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
 },
 {
 "id": "s4-speak-dulich", "stage": 4, "title": "Lên kế hoạch leo núi", "topic": "Du lịch",
@@ -7704,7 +7704,7 @@ ZH_SPEAK.push.apply(ZH_SPEAK, [
 {"sp": "B", "han": "要带水和雨衣吗？", "py": "Yào dài shuǐ hé yǔyī ma?", "vi": "Cần mang nước và áo mưa không?"},
 {"sp": "A", "han": "要带，山上天气变化很快。", "py": "Yào dài, shān shang tiānqì biànhuà hěn kuài.", "vi": "Cần mang, thời tiết trên núi thay đổi rất nhanh."}
 ],
-"note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
+"note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
 },
 {
 "id": "s4-speak-moitruong", "stage": 4, "title": "Trồng cây ở khu phố", "topic": "Môi trường",
@@ -7716,7 +7716,7 @@ ZH_SPEAK.push.apply(ZH_SPEAK, [
 {"sp": "B", "han": "对，分类以后回收更容易。", "py": "Duì, fēnlèi yǐhòu huíshōu gèng róngyì.", "vi": "Đúng, phân loại xong tái chế dễ hơn."},
 {"sp": "A", "han": "好，我先告诉邻居们。", "py": "Hǎo, wǒ xiān gàosu línjūmen.", "vi": "Được, tôi báo cho hàng xóm trước."}
 ],
-"note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
+"note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp."
 }
 ]);
 ZH_ROLE.push.apply(ZH_ROLE, [
@@ -7779,14 +7779,14 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 "prompt": "Sắp xếp các từ thành câu đúng: anh ấy đã dọn phòng sạch rồi.",
 "words": ["他", "把", "房间", "打扫", "干净了"],
 "why": "Trật tự đúng: chủ ngữ 他 → 把 → đồ vật 房间 → động từ 打扫 → kết quả 干净了.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "s4-write-sapxep-bei", "stage": 4, "title": "Sắp xếp: Câu chữ 被 với xe đạp", "kind": "order",
 "prompt": "Sắp xếp các từ thành câu đúng: xe đạp của anh ấy bị trộm mất.",
 "words": ["他的", "自行车", "被", "偷", "了"],
 "why": "Trật tự đúng: đồ vật chịu tác động 他的自行车 → 被 → động từ 偷 → kết quả 了.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "s4-write-dientu-congviec", "stage": 4, "title": "Điền từ: Công việc văn phòng", "kind": "fill",
@@ -7795,7 +7795,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 {"q": "星期五我们要 ___ 报告，经理要看。", "o": ["写", "吃", "买", "跑"], "a": 0, "why": "Viết báo cáo: 写报告, giám đốc cần xem báo cáo."},
 {"q": "这个任务 ___ 小王负责。", "o": ["被", "把", "由", "跟"], "a": 2, "why": "由小王负责: nhiệm vụ do Tiểu Vương phụ trách; 由 nêu người chịu trách nhiệm."}
 ],
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "s4-write-viet-dulich", "stage": 4, "title": "Viết: Kể về một chuyến đi", "kind": "free",
@@ -7803,7 +7803,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 "model": "去年夏天，我和朋友去杭州旅行。我们先去西湖，湖边有很多柳树。上午，我们坐船游湖，风很舒服。下午，我们去茶园看茶农采茶，还买了一包新茶。虽然走了很多路，但是大家都很开心。",
 "analysis": "Đoạn mẫu mở đầu bằng thời gian và người đi cùng, rồi kể theo thứ tự buổi sáng — buổi chiều, cuối cùng nói cảm xúc bằng 虽然…但是. Viết theo khung này thì đoạn văn rõ ràng, không bị nhảy ý.",
 "phrases": ["去年夏天，我和朋友去…旅行。", "上午，我们…，下午，我们…。", "虽然…，但是大家都很开心。"],
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động."
 }
 ]);
 // noi-dung-2b-fix.js — FILE VÁ đợt 2b (bổ sung cho đủ chuẩn các phân hệ Trung chặng 4).
@@ -8100,7 +8100,7 @@ CONTENT.readingMock.push.apply(CONTENT.readingMock, [
 ],"translation":"Hỏi học sinh một tuần sau giờ học lịch sử để nhớ danh sách ngày tháng, hầu hết sẽ chật vật. Hỏi cùng học sinh đó về câu chuyện nữ hoàng trẻ mất ngai vàng, chi tiết trở lại dễ dàng đáng ngạc nhiên: sự phản bội, cuộc trốn thoát, bài diễn văn cuối cùng. Khác biệt này không phải bí ẩn về tài năng mà là đặc điểm của trí nhớ: não người không tiến hóa để lưu sự kiện rời rạc mà để nhớ chuyện gì xảy ra, với ai và vì sao nó quan trọng — tức là nhớ câu chuyện. Một sự kiện đơn lẻ như ngày tháng có ít liên kết với thứ khác nên dễ bị mất; câu chuyện ngược lại là một mạng lưới — nhân vật có động cơ, sự kiện có nguyên nhân, mỗi cảnh gợi ý cho cảnh tiếp theo; khi cố nhớ một phần, phần còn lại kéo nó trở lại. Các nhà tâm lý học gọi đây là elaborative encoding: một mục càng có nhiều liên kết với thứ đã biết thì càng có nhiều đường quay lại nó. Cảm xúc củng cố mạng lưới hơn nữa vì não coi sự kiện cảm xúc là quan trọng và lưu sâu hơn; người kể chuyện luôn biết điều này nên lịch sử được kể qua anh hùng và nhân vật phản diện thay vì bảng số liệu — con số hiếm khi khiến ai cảm thấy gì, nhân vật đối mặt lựa chọn khó thì có, và cảm xúc là chất keo mạnh cho trí nhớ. Câu chuyện còn giúp hiểu chứ không chỉ nhớ: danh sách sự kiện về chiến tranh cho biết chuyện gì xảy ra, câu chuyện về quyết định của người lính cho biết vì sao và cái giá của nó; sự hiểu biết đó chuyển giao được, trong khi học sinh chỉ ghi nhớ ngày tháng thì không thể suy luận về lựa chọn tương tự trong tình huống mới. Tuy vậy sự kiện vẫn quan trọng: câu chuyện không có sự kiện chính xác là huyền thoại, và học sinh chỉ nhớ kịch tính có thể lặp lại sai lầm một cách tự tin. Cách học tốt nhất kết hợp cả hai: câu chuyện mang ý nghĩa và khiến sự kiện đáng nhớ, sự kiện chính xác neo câu chuyện vào sự thật.","phrases":[{"en": "isolated facts", "vi": "sự kiện rời rạc"}, {"en": "elaborative encoding", "vi": "mã hóa liên kết (elaborative encoding)"}, {"en": "a powerful glue for memory", "vi": "chất keo mạnh cho trí nhớ"}, {"en": "transfers", "vi": "chuyển giao được"}, {"en": "anchor stories in truth", "vi": "neo câu chuyện vào sự thật"}]}]);
 // Pha 2 (c) — Phan he HSK chang 5 (tu soan 100%, theo mau chang 4).
 // Ghi chu: khong them bo zhVocab moi (ghim 18 bo); chi them phan he ZH_*.
-var ZH_S5_NOTE = "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.";
+var ZH_S5_NOTE = "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.";
 ZH_GRAMMAR.push(
 { "id": "s5-chufei", "stage": 5, "title": "除非…否则 — trừ phi… nếu không…", "hook": "“除非你告诉我，否则我不知道” — trừ phi bạn nói cho tôi, nếu không tôi không biết: điều kiện duy nhất.", "examples": [ "除非你告诉我，否则我不知道。(Chúfēi nǐ gàosu wǒ, fǒuzé wǒ bù zhīdào.) — Trừ phi bạn nói cho tôi, nếu không tôi không biết.", "除非努力学习，否则很难通过考试。(Chúfēi nǔlì xuéxí, fǒuzé hěn nán tōngguò kǎoshì.) — Trừ phi học chăm chỉ, nếu không rất khó qua kỳ thi.", "除非下雨，否则我们明天去爬山。(Chúfēi xià yǔ, fǒuzé wǒmen míngtiān qù pá shān.) — Trừ phi trời mưa, nếu không ngày mai chúng tôi đi leo núi.", "除非你早点来，否则就没有座位了。(Chúfēi nǐ zǎo diǎn lái, fǒuzé jiù méiyǒu zuòwèi le.) — Trừ phi bạn đến sớm, nếu không sẽ không còn chỗ ngồi." ], "speak": "除非你告诉我，否则我不知道。除非努力学习，否则很难通过考试。除非下雨，否则我们明天去爬山。除非你早点来，否则就没有座位了。", "rule": "除非 nêu điều kiện duy nhất ở vế đầu, 否则 nêu kết quả xấu nếu điều kiện không xảy ra ở vế sau. Hai chữ đi thành cặp.", "tip": "Hãy nhớ: 除非 là “trừ phi”, 否则 là “nếu không” — chỉ có một cách duy nhất thì mới dùng 除非.", "note": ZH_S5_NOTE, "quiz": [
 { "q": "Câu nào dùng 除非…否则 đúng?", "o": [ "除非你告诉我，否则我不知道。", "除非你告诉我，但是我不知道。", "除非你告诉我，所以我不知道。", "除非你告诉我，可是我不知道。" ], "a": 0, "why": "除非 đi cặp với 否则: trừ phi bạn nói, nếu không tôi không biết." },
@@ -8234,37 +8234,37 @@ ZH_SPEAK.push(
 { "sp": "A", "han": "这个项目的目的是帮助学生更好地学习中文。", "py": "Zhège xiàngmù de mùdì shì bāngzhù xuésheng gèng hǎo de xuéxí Zhōngwén.", "vi": "Mục đích của dự án này là giúp học sinh học tiếng Trung tốt hơn." },
 { "sp": "A", "han": "我们先调查了学生的需要，然后设计了三个部分。", "py": "Wǒmen xiān diàochá le xuésheng de xūyào, ránhòu shèjì le sān gè bùfen.", "vi": "Chúng tôi đã khảo sát nhu cầu của học sinh trước, rồi thiết kế ba phần." },
 { "sp": "A", "han": "第一部分是词汇，第二部分是语法，第三部分是练习。", "py": "Dì yí bùfen shì cíhuì, dì èr bùfen shì yǔfǎ, dì sān bùfen shì liànxí.", "vi": "Phần đầu là từ vựng, phần hai là ngữ pháp, phần ba là luyện tập." },
-{ "sp": "A", "han": "谢谢大家，有问题可以问我。", "py": "Xièxie dàjiā, yǒu wèntí kěyǐ wèn wǒ.", "vi": "Cảm ơn mọi người, có câu hỏi cứ hỏi tôi." } ], "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
+{ "sp": "A", "han": "谢谢大家，有问题可以问我。", "py": "Xièxie dàjiā, yǒu wèntí kěyǐ wèn wǒ.", "vi": "Cảm ơn mọi người, có câu hỏi cứ hỏi tôi." } ], "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
 { "id": "s5-speak-tranhluan", "stage": 5, "title": "Tranh luận: học online hay học trực tiếp", "topic": "Học tập", "hook": "“我觉得网上学习更方便” — tranh luận bắt đầu bằng việc nêu ý kiến của mình.", "lines": [
 { "sp": "A", "han": "我觉得网上学习更方便，在家里就能上课。", "py": "Wǒ juéde wǎngshang xuéxí gèng fāngbiàn, zài jiā lǐ jiù néng shàng kè.", "vi": "Tôi thấy học online tiện hơn, ở nhà cũng học được." },
 { "sp": "B", "han": "但是在家里学习很容易分心，没有课堂的气氛。", "py": "Dànshì zài jiā lǐ xuéxí hěn róngyì fēn xīn, méiyǒu kètáng de qìfēn.", "vi": "Nhưng học ở nhà rất dễ mất tập trung, không có không khí lớp học." },
 { "sp": "A", "han": "网上学习可以看回放，不懂的地方可以多看几遍。", "py": "Wǎngshang xuéxí kěyǐ kàn huífàng, bù dǒng de dìfang kěyǐ duō kàn jǐ biàn.", "vi": "Học online có thể xem lại, chỗ không hiểu có thể xem nhiều lần." },
 { "sp": "B", "han": "可是面对面学习可以直接问老师，马上得到回答。", "py": "Kěshì miàn duì miàn xuéxí kěyǐ zhíjiē wèn lǎoshī, mǎshàng dédào huídá.", "vi": "Nhưng học trực tiếp có thể hỏi thầy ngay, được trả lời ngay." },
-{ "sp": "A", "han": "我同意，两种方式各有好处，最重要的是适合自己。", "py": "Wǒ tóngyì, liǎng zhǒng fāngshì gè yǒu hǎochù, zuì zhòngyào de shì shìhé zìjǐ.", "vi": "Tôi đồng ý, hai cách đều có lợi, quan trọng nhất là phù hợp với mình." } ], "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
+{ "sp": "A", "han": "我同意，两种方式各有好处，最重要的是适合自己。", "py": "Wǒ tóngyì, liǎng zhǒng fāngshì gè yǒu hǎochù, zuì zhòngyào de shì shìhé zìjǐ.", "vi": "Tôi đồng ý, hai cách đều có lợi, quan trọng nhất là phù hợp với mình." } ], "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
 { "id": "s5-speak-kechuyen", "stage": 5, "title": "Kể chuyện ngày đầu đi làm", "topic": "Công việc", "hook": "“我第一天上班的时候，特别紧张” — kể chuyện bắt đầu bằng thời gian và cảm xúc.", "lines": [
 { "sp": "A", "han": "我第一天上班的时候，特别紧张。", "py": "Wǒ dì yì tiān shàng bān de shíhou, tèbié jǐnzhāng.", "vi": "Ngày đầu đi làm, tôi đặc biệt căng thẳng." },
 { "sp": "A", "han": "早上，我提前半个小时就到了公司。", "py": "Zǎoshang, wǒ tíqián bàn gè xiǎoshí jiù dào le gōngsī.", "vi": "Buổi sáng, tôi đến công ty sớm nửa tiếng." },
 { "sp": "A", "han": "经理先带我认识了同事，然后告诉我今天的任务。", "py": "Jīnglǐ xiān dài wǒ rènshi le tóngshì, ránhòu gàosu wǒ jīntiān de rènwu.", "vi": "Quản lý dẫn tôi làm quen đồng nghiệp trước, rồi nói nhiệm vụ hôm nay." },
 { "sp": "A", "han": "中午，同事们请我一起吃饭，我就不紧张了。", "py": "Zhōngwǔ, tóngshìmen qǐng wǒ yì qǐ chī fàn, wǒ jiù bù jǐnzhāng le.", "vi": "Trưa, đồng nghiệp mời tôi ăn cùng, tôi hết căng thẳng." },
-{ "sp": "A", "han": "现在想起来，那一天过得很快，也很有意思。", "py": "Xiànzài xiǎng qǐlái, nà yì tiān guò de hěn kuài, yě hěn yǒu yìsi.", "vi": "Giờ nghĩ lại, ngày đó trôi rất nhanh và cũng rất thú vị." } ], "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
+{ "sp": "A", "han": "现在想起来，那一天过得很快，也很有意思。", "py": "Xiànzài xiǎng qǐlái, nà yì tiān guò de hěn kuài, yě hěn yǒu yìsi.", "vi": "Giờ nghĩ lại, ngày đó trôi rất nhanh và cũng rất thú vị." } ], "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
 { "id": "s5-speak-gioithieubanthan", "stage": 5, "title": "Giới thiệu bản thân khi phỏng vấn", "topic": "Công việc", "hook": "“我叫小李，去年大学毕业” — phỏng vấn bắt đầu bằng tên và học vấn.", "lines": [
 { "sp": "A", "han": "我叫小李，去年大学毕业，学的是教育。", "py": "Wǒ jiào Xiǎo Lǐ, qùnián dàxué bìyè, xué de shì jiàoyù.", "vi": "Tôi tên Tiểu Lý, năm ngoái tốt nghiệp đại học, học ngành giáo dục." },
 { "sp": "A", "han": "毕业以后，我在一家公司做了一年销售。", "py": "Bìyè yǐhòu, wǒ zài yì jiā gōngsī zuò le yì nián xiāoshòu.", "vi": "Sau khi tốt nghiệp, tôi làm bán hàng một năm ở một công ty." },
 { "sp": "A", "han": "这份工作让我学会了怎么跟不同的人交流。", "py": "Zhè fèn gōngzuò ràng wǒ xuéhuì le zěnme gēn bù tóng de rén jiāoliú.", "vi": "Công việc này dạy tôi cách giao tiếp với những người khác nhau." },
 { "sp": "A", "han": "我希望能在这个公司继续学习，做出成绩。", "py": "Wǒ xīwàng néng zài zhège gōngsī jìxù xuéxí, zuò chū chéngjì.", "vi": "Tôi hy vọng được tiếp tục học hỏi ở công ty này và đạt thành tích." },
-{ "sp": "A", "han": "谢谢你们给我这个机会。", "py": "Xièxie nǐmen gěi wǒ zhège jīhuì.", "vi": "Cảm ơn các bạn đã cho tôi cơ hội này." } ], "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
+{ "sp": "A", "han": "谢谢你们给我这个机会。", "py": "Xièxie nǐmen gěi wǒ zhège jīhuì.", "vi": "Cảm ơn các bạn đã cho tôi cơ hội này." } ], "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
 { "id": "s5-speak-kehoach", "stage": 5, "title": "Kế hoạch cuối tuần", "topic": "Đời sống", "hook": "“这个周末你有什么计划？” — nói về kế hoạch bắt đầu bằng câu hỏi.", "lines": [
 { "sp": "A", "han": "这个周末你有什么计划？", "py": "Zhège zhōumò nǐ yǒu shénme jìhuà?", "vi": "Cuối tuần này bạn có kế hoạch gì?" },
 { "sp": "B", "han": "星期六上午我想去图书馆看书，下午去公园跑步。", "py": "Xīngqī liù shàngwǔ wǒ xiǎng qù túshūguǎn kàn shū, xiàwǔ qù gōngyuán pǎo bù.", "vi": "Sáng thứ bảy tôi muốn đến thư viện đọc sách, chiều đi công viên chạy bộ." },
 { "sp": "A", "han": "星期天呢？", "py": "Xīngqī tiān ne?", "vi": "Chủ nhật thì sao?" },
 { "sp": "B", "han": "星期天我打算在家休息，顺便整理一下房间。", "py": "Xīngqī tiān wǒ dǎsuàn zài jiā xiūxi, shùnbiàn zhěnglǐ yí xià fángjiān.", "vi": "Chủ nhật tôi định ở nhà nghỉ, tiện thể dọn dẹp phòng." },
-{ "sp": "A", "han": "好计划，周末过后我们再一起去爬山吧。", "py": "Hǎo jìhuà, zhōumò guò hòu wǒmen zài yì qǐ qù pá shān ba.", "vi": "Kế hoạch hay, sau cuối tuần chúng ta lại cùng đi leo núi nhé." } ], "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
+{ "sp": "A", "han": "好计划，周末过后我们再一起去爬山吧。", "py": "Hǎo jìhuà, zhōumò guò hòu wǒmen zài yì qǐ qù pá shān ba.", "vi": "Kế hoạch hay, sau cuối tuần chúng ta lại cùng đi leo núi nhé." } ], "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." },
 { "id": "s5-speak-congnghe", "stage": 5, "title": "Ý kiến về công nghệ", "topic": "Đời sống", "hook": "“现在的生活离不开手机” — nói ý kiến bắt đầu bằng một nhận xét chung.", "lines": [
 { "sp": "A", "han": "现在的生活离不开手机，什么事都能在手机上做。", "py": "Xiànzài de shēnghuó lí bù kāi shǒujī, shénme shì dōu néng zài shǒujī shang zuò.", "vi": "Cuộc sống bây giờ không thể thiếu điện thoại, việc gì cũng làm được trên điện thoại." },
 { "sp": "B", "han": "是啊，买东西、学习、跟朋友聊天都很方便。", "py": "Shì a, mǎi dōngxi, xuéxí, gēn péngyou liáotiān dōu hěn fāngbiàn.", "vi": "Đúng vậy, mua đồ, học tập, trò chuyện với bạn bè đều rất tiện." },
 { "sp": "A", "han": "但是，很多人每天看手机的时间太长了，对眼睛不好。", "py": "Dànshì, hěn duō rén měitiān kàn shǒujī de shíjiān tài cháng le, duì yǎnjing bù hǎo.", "vi": "Nhưng nhiều người xem điện thoại quá lâu mỗi ngày, không tốt cho mắt." },
 { "sp": "B", "han": "你说得对，我们应该控制时间，多出去走走。", "py": "Nǐ shuō de duì, wǒmen yīnggāi kòngzhì shíjiān, duō chū qù zǒu zou.", "vi": "Bạn nói đúng, chúng ta nên kiểm soát thời gian, ra ngoài đi dạo nhiều hơn." },
-{ "sp": "A", "han": "科技是好东西，关键是怎么用它。", "py": "Kējì shì hǎo dōngxi, guānjiàn shì zěnme yòng tā.", "vi": "Công nghệ là thứ tốt, quan trọng là dùng nó thế nào." } ], "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." }
+{ "sp": "A", "han": "科技是好东西，关键是怎么用它。", "py": "Kējì shì hǎo dōngxi, guānjiàn shì zěnme yòng tā.", "vi": "Công nghệ là thứ tốt, quan trọng là dùng nó thế nào." } ], "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp." }
 );
 ZH_ROLE.push(
 { "id": "s5-role-thuongluong", "stage": 5, "title": "Thương lượng lương", "setting": "Văn phòng công ty", "you": "Ứng viên xin việc", "partner": "Quản lý nhân sự", "goal": "Nêu mức lương mong muốn, nghe đề nghị của công ty, chốt thỏa thuận lịch sự.", "turns": [
@@ -8304,13 +8304,13 @@ ZH_WRITE.push(
 { "id": "s5-write-dientu-hocxa", "stage": 5, "title": "Điền từ: Học xa nhà", "kind": "fill", "prompt": "Chọn từ đúng điền vào câu về học xa nhà.", "questions": [
 { "q": "他去年离开家乡，到北京 ___ 大学。", "o": [ "上", "吃", "买", "跑" ], "a": 0, "why": "上大学: lên đại học, động từ 上 dùng với trường học." },
 { "q": "离开家不是失去依靠，而是学会 ___ 。", "o": [ "独立", "回家", "睡觉", "吃饭" ], "a": 0, "why": "学会独立: học độc lập — ý chính của bài học xa nhà." } ], "note": ZH_S5_NOTE },
-{ "id": "s5-write-viet-thoiquen", "stage": 5, "title": "Viết: Thói quen đọc sách của tôi", "kind": "free", "prompt": "Viết một đoạn ngắn (6-10 câu) về thói quen đọc sách của bạn: trước đây thế nào, bắt đầu đọc từ khi nào, đọc loại sách gì, đọc sách thay đổi bạn ra sao.", "model": "我以前不喜欢读书，觉得读书很无聊。去年，朋友送给我一本小说，我三天就看完了。从那以后，我每天晚上读半个小时书。有的书讲历史，有的书讲科学，还有的书讲怎么跟人相处。读书让我学会从别人的角度看问题。现在，我的书架上已经有一百多本书了。我希望身边的人也能养成读书的习惯。", "analysis": "Đoạn mẫu mở đầu bằng quá khứ (以前不喜欢), rồi kể bước ngoặt (朋友送书 — 三天看完), rồi thói quen hiện tại (每天晚上读半个小时), cuối cùng nói thay đổi và mong muốn. Viết theo khung quá khứ — bước ngoặt — hiện tại — thay đổi thì đoạn văn có mạch rõ ràng.", "phrases": [ "我以前不喜欢…，觉得…很无聊。", "从那以后，我每天晚上…。", "…让我学会从别人的角度看问题。" ], "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt." }
+{ "id": "s5-write-viet-thoiquen", "stage": 5, "title": "Viết: Thói quen đọc sách của tôi", "kind": "free", "prompt": "Viết một đoạn ngắn (6-10 câu) về thói quen đọc sách của bạn: trước đây thế nào, bắt đầu đọc từ khi nào, đọc loại sách gì, đọc sách thay đổi bạn ra sao.", "model": "我以前不喜欢读书，觉得读书很无聊。去年，朋友送给我一本小说，我三天就看完了。从那以后，我每天晚上读半个小时书。有的书讲历史，有的书讲科学，还有的书讲怎么跟人相处。读书让我学会从别人的角度看问题。现在，我的书架上已经有一百多本书了。我希望身边的人也能养成读书的习惯。", "analysis": "Đoạn mẫu mở đầu bằng quá khứ (以前不喜欢), rồi kể bước ngoặt (朋友送书 — 三天看完), rồi thói quen hiện tại (每天晚上读半个小时), cuối cùng nói thay đổi và mong muốn. Viết theo khung quá khứ — bước ngoặt — hiện tại — thay đổi thì đoạn văn có mạch rõ ràng.", "phrases": [ "我以前不喜欢…，觉得…很无聊。", "从那以后，我每天晚上…。", "…让我学会从别人的角度看问题。" ], "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt." }
 );
 // Pha 2 (c) — Phan he HSK chang 6 (tu soan 100%, theo mau chang 4/5).
-var ZH_S6_NOTE = "Bài tự soạn theo chủ đề đời sống trình độ HSK6, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.";
-var ZH_S6_NOTE_SPEAK = "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK6, không trích nguyên văn giáo trình; nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp.";
+var ZH_S6_NOTE = "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.";
+var ZH_S6_NOTE_SPEAK = "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp.";
 var ZH_S6_NOTE_ROLE = "Bài này là tự luyện nhập vai, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt.";
-var ZH_S6_NOTE_FREE = "Bài tự soạn theo chủ đề đời sống trình độ HSK6, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt.";
+var ZH_S6_NOTE_FREE = "Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt.";
 ZH_GRAMMAR.push(
 { "id": "s6-jinguan", "stage": 6, "title": "尽管…还是 — dù… vẫn…", "hook": "“尽管下雨，他还是来了” — dù trời mưa, anh ấy vẫn đến: khó khăn không đổi quyết định.", "examples": [ "尽管下雨，他还是来了。(Jǐnguǎn xià yǔ, tā háishi lái le.) — Dù trời mưa, anh ấy vẫn đến.", "尽管工作很忙，她还是坚持每天读书。(Jǐnguǎn gōngzuò hěn máng, tā háishi jiānchí měitiān dú shū.) — Dù công việc rất bận, cô ấy vẫn kiên trì đọc sách mỗi ngày.", "尽管路很远，我们还是走到了山顶。(Jǐnguǎn lù hěn yuǎn, wǒmen háishi zǒu dào le shāndǐng.) — Dù đường rất xa, chúng tôi vẫn đi đến đỉnh núi.", "尽管大家都反对，他还是决定试一试。(Jǐnguǎn dàjiā dōu fǎnduì, tā háishi juédìng shì yí shì.) — Dù mọi người đều phản đối, anh ấy vẫn quyết định thử một lần." ], "speak": "尽管下雨，他还是来了。尽管工作很忙，她还是坚持每天读书。尽管路很远，我们还是走到了山顶。尽管大家都反对，他还是决定试一试。", "rule": "尽管 nêu khó khăn ở vế đầu, 还是 nêu quyết định không đổi ở vế sau. Khác với 虽然 ở chỗ 尽管 trang trọng hơn, dùng nhiều trong văn viết.", "tip": "Hãy nhớ: 尽管 là “dù…”, 还是 là “vẫn…” — 尽管 trang trọng hơn 虽然, dùng được cả văn nói và văn viết.", "note": ZH_S6_NOTE, "quiz": [
 { "q": "Câu nào dùng 尽管…还是 đúng?", "o": [ "尽管下雨，他还是来了。", "尽管下雨，但是他来了。", "尽管下雨，所以他来了。", "尽管下雨，可是他来了。" ], "a": 0, "why": "尽管 đi cặp với 还是: dù mưa vẫn đến." },
@@ -8524,7 +8524,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK1 — Gia đình và bản thân",
    "hsk": "HSK1",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK1, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "我", "pinyin": "wǒ", "vi": "tôi", "col": "我是学生", "ex": "我是越南人。", "exv": "Tôi là người Việt Nam."},
     {"han": "你", "pinyin": "nǐ", "vi": "bạn", "col": "你好", "ex": "你好，你叫什么名字？", "exv": "Xin chào, bạn tên là gì?"},
@@ -8551,7 +8551,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK1 — Số và thời gian",
    "hsk": "HSK1",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK1, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "一", "pinyin": "yī", "vi": "một", "col": "一本书", "ex": "我有一本书。", "exv": "Tôi có một quyển sách."},
     {"han": "二", "pinyin": "èr", "vi": "hai", "col": "两个苹果", "ex": "我有两个苹果。", "exv": "Tôi có hai quả táo."},
@@ -8578,7 +8578,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK1 — Ăn uống hằng ngày",
    "hsk": "HSK1",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK1, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "吃", "pinyin": "chī", "vi": "ăn", "col": "吃饭", "ex": "我们一起吃饭吧。", "exv": "Chúng ta cùng ăn cơm nhé."},
     {"han": "喝", "pinyin": "hē", "vi": "uống", "col": "喝水", "ex": "请喝水。", "exv": "Mời bạn uống nước."},
@@ -8605,7 +8605,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK1 — Trường học và lớp học",
    "hsk": "HSK1",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK1, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "学校", "pinyin": "xuéxiào", "vi": "trường học", "col": "我的学校", "ex": "我的学校很大。", "exv": "Trường của tôi rất lớn."},
     {"han": "老师", "pinyin": "lǎoshī", "vi": "thầy cô giáo", "col": "我的老师", "ex": "我的老师很好。", "exv": "Cô giáo của tôi rất tốt."},
@@ -8632,7 +8632,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK1 — Đi lại trong thành phố",
    "hsk": "HSK1",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK1, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "路", "pinyin": "lù", "vi": "đường", "col": "这条路", "ex": "这条路很长。", "exv": "Con đường này rất dài."},
     {"han": "街", "pinyin": "jiē", "vi": "phố", "col": "大街", "ex": "大街上人很多。", "exv": "Trên phố lớn có rất nhiều người."},
@@ -8659,7 +8659,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK2 — Thời tiết và bốn mùa",
    "hsk": "HSK2",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK2, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "天气", "pinyin": "tiānqì", "vi": "thời tiết", "col": "今天天气很好", "ex": "今天天气很好。", "exv": "Hôm nay thời tiết rất đẹp."},
     {"han": "晴天", "pinyin": "qíngtiān", "vi": "ngày nắng", "col": "今天是晴天", "ex": "今天是晴天，我们去公园吧。", "exv": "Hôm nay trời nắng, chúng ta đi công viên nhé."},
@@ -8686,7 +8686,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK2 — Nhà ở và đồ dùng trong nhà",
    "hsk": "HSK2",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK2, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "房子", "pinyin": "fángzi", "vi": "ngôi nhà", "col": "一座房子", "ex": "我家是一座小房子。", "exv": "Nhà tôi là một ngôi nhà nhỏ."},
     {"han": "房间", "pinyin": "fángjiān", "vi": "phòng", "col": "我的房间", "ex": "我的房间很干净。", "exv": "Phòng của tôi rất sạch sẽ."},
@@ -8713,7 +8713,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK3 — Giải trí và sở thích",
    "hsk": "HSK3",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK3, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "兴趣", "pinyin": "xìngqù", "vi": "sở thích, hứng thú", "col": "有兴趣", "ex": "我对音乐有兴趣。", "exv": "Tôi có hứng thú với âm nhạc."},
     {"han": "爱好", "pinyin": "àihào", "vi": "sở thích", "col": "我的爱好", "ex": "我的爱好是游泳。", "exv": "Sở thích của tôi là bơi lội."},
@@ -8740,7 +8740,7 @@ ZH_WRITE.push(
   {
    "topic": "HSK3 — Môi trường và thành phố",
    "hsk": "HSK3",
-   "hskNote": "Bộ tự soạn theo chủ đề HSK3, các từ là từ cơ bản thông dụng theo chủ đề, câu ví dụ tự soạn không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không mạo nhận từng từ nằm trong khung từ vựng chính thức.",
+   "hskNote": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
    "cards": [
     {"han": "环境", "pinyin": "huánjìng", "vi": "môi trường", "col": "保护环境", "ex": "我们要保护环境。", "exv": "Chúng ta phải bảo vệ môi trường."},
     {"han": "污染", "pinyin": "wūrǎn", "vi": "ô nhiễm", "col": "空气污染", "ex": "空气污染对身体不好。", "exv": "Ô nhiễm không khí không tốt cho sức khỏe."},
@@ -8774,13 +8774,13 @@ ZH_WRITE.push(
 // Trường speak ở mục ngữ pháp giữ dạng chữ Hán thuần như mẫu cũ để đọc máy;
 // mọi câu đó đều đã có đủ pinyin + dịch tiếng Việt ở trường examples.
 (function () {
-var N2 = "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.";
-var N3 = "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.";
-var N4 = "Bài tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.";
-var N5 = "Bài tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.";
-var N6 = "Bài tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.";
-function spNote(st) { return "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK" + st + " (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."; }
-function roNote(st) { return "Tình huống tự soạn theo chủ đề đời sống trình độ HSK" + st + " (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."; }
+var N2 = "Nhãn HSK là mức đặt theo chủ đề/trình độ.";
+var N3 = "Nhãn HSK là mức đặt theo chủ đề/trình độ.";
+var N4 = "Nhãn HSK là mức đặt theo chủ đề/trình độ.";
+var N5 = "Nhãn HSK là mức đặt theo chủ đề/trình độ.";
+var N6 = "Nhãn HSK là mức đặt theo chủ đề/trình độ.";
+function spNote(st) { return "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."; }
+function roNote(st) { return "Thoại đối tác nghe bằng giọng đọc máy zh-CN. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."; }
 var RO_TIP = "Học để dùng được, không học vẹt: hiểu ý từng lượt rồi nói lại bằng lời của mình cũng được. Đối tác nói gì chưa hiểu thì bấm Nghe lại.";
 
 ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
@@ -9044,7 +9044,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
   "speak": "我是学生。他是我的朋友。你是学生吗？我不是老师。你呢？",
   "rule": "是 nối chủ ngữ với thân phận (我是学生); 吗 đặt cuối câu trần thuật thành câu hỏi (你是学生吗？); 不 đứng trước 是 để phủ định (我不是老师); 呢 hỏi lại đối phương (你呢？).",
   "tip": "Đừng nói 是 rồi bỏ lửng: 是 luôn cần có nội dung đằng sau (là ai, là cái gì).",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Câu ví dụ chỉ dùng từ chặng 1 (kèm hư từ 的/在/很 đã gặp trong cụm đi kèm của thẻ).",
+  "note": "Câu ví dụ chỉ dùng từ chặng 1 (kèm hư từ 的/在/很 đã gặp trong cụm đi kèm của thẻ).",
   "quiz": [
    {"q": "Câu nào nói đúng 'Tôi là học sinh'?", "o": ["我是学生", "我学生是", "我是学", "学生我是"], "a": 0, "why": "是 đứng giữa chủ ngữ và thân phận: 我是学生。"},
    {"q": "Muốn hỏi 'Bạn có phải là học sinh không?' thì nói?", "o": ["你是学生吗", "你是学生", "你吗是学生", "学生你是吗"], "a": 0, "why": "吗 đặt cuối câu trần thuật thành câu hỏi: 你是学生吗？"},
@@ -9222,7 +9222,7 @@ ZH_READING.push.apply(ZH_READING, [
   "text": "我是学生。爸爸、妈妈、姐姐、我，我们是四个人。爸爸是老师，妈妈是老师。姐姐是学生，我是学生。早上，爸爸去学校，妈妈去商店。我在家学习汉语。晚上，我们在家吃饭。爸爸吃米饭，妈妈吃面条，我吃饺子。我的老师很好，我的同学是我的朋友。",
   "pinyin": "Wǒ shì xuésheng. Bàba, māma, jiějie, wǒ, wǒmen shì sì gè rén. Bàba shì lǎoshī, māma shì lǎoshī. Jiějie shì xuésheng, wǒ shì xuésheng. Zǎoshang, bàba qù xuéxiào, māma qù shāngdiàn. Wǒ zài jiā xuéxí Hànyǔ. Wǎnshang, wǒmen zài jiā chī fàn. Bàba chī mǐfàn, māma chī miàntiáo, wǒ chī jiǎozi. Wǒ de lǎoshī hěn hǎo, wǒ de tóngxué shì wǒ de péngyou.",
   "vi": "Tôi là học sinh. Bố, mẹ, chị gái và tôi — chúng tôi là 4 người. Bố là thầy giáo, mẹ là cô giáo. Chị gái là học sinh, tôi là học sinh. Buổi sáng, bố đến trường, mẹ đến cửa hàng. Tôi ở nhà học tiếng Trung. Buổi tối, chúng tôi ở nhà ăn cơm. Bố ăn cơm, mẹ ăn mì sợi, tôi ăn bánh chẻo. Thầy cô của tôi rất tốt, bạn học của tôi là bạn của tôi.",
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Đoạn văn chỉ dùng từ chặng 1 (kèm hư từ 的/在/很 đã gặp trong cụm đi kèm của thẻ).",
+  "note": "Đoạn văn chỉ dùng từ chặng 1 (kèm hư từ 的/在/很 đã gặp trong cụm đi kèm của thẻ).",
   "questions": [
    {"q": "Nhà tôi có mấy người?", "o": ["3 người", "4 người", "5 người", "2 người"], "a": 1, "why": "我们是四个人：chúng tôi là 4 người."},
    {"q": "Bố làm nghề gì?", "o": ["Bác sĩ", "Thầy giáo", "Học sinh", "Bạn học"], "a": 1, "why": "爸爸是老师：bố là thầy giáo."},
@@ -9246,7 +9246,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "明天上午我可以去看看吗？", "py": "Míngtiān shàngwǔ wǒ kěyǐ qù kànkan ma?", "vi": "Sáng mai tôi có thể tới xem không?"},
 {"sp": "B", "han": "可以，十点我在楼下等你。", "py": "Kěyǐ, shí diǎn wǒ zài lóu xià děng nǐ.", "vi": "Được, 10 giờ tôi đợi bạn dưới nhà."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Phòng ở tầng mấy?", "o": ["Tầng 3", "Tầng 2", "Tầng 4", "Tầng 1"], "a": 0, "why": "房间在三楼: phòng ở tầng 3."},
 {"q": "Tiền thuê một tháng bao nhiêu?", "o": ["2000 tệ", "1000 tệ", "3000 tệ", "1500 tệ"], "a": 0, "why": "一个月两千块."},
@@ -9266,7 +9266,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "谢谢，我知道了。", "py": "Xièxie, wǒ zhīdào le.", "vi": "Cảm ơn, tôi biết rồi."},
 {"sp": "B", "han": "不客气，早上出门要多穿衣服。", "py": "Bú kèqi, zǎoshang chūmén yào duō chuān yīfu.", "vi": "Không có gì, sáng ra ngoài phải mặc nhiều áo."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Ngày mai Hà Nội thế nào?", "o": ["Rất lạnh, còn mưa nhỏ", "Rất nóng", "Không mưa", "Rất ấm"], "a": 0, "why": "明天很冷，还下小雨."},
 {"q": "Phải mặc gì?", "o": ["Áo khoác và áo len", "Chỉ áo len", "Chỉ áo khoác", "Áo ngắn tay"], "a": 0, "why": "你要穿外套，还要穿毛衣."},
@@ -9286,7 +9286,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "给你二十块钱。", "py": "Gěi nǐ èrshí kuài qián.", "vi": "Gửi bạn 20 tệ."},
 {"sp": "B", "han": "找你两块钱，谢谢！", "py": "Zhǎo nǐ liǎng kuài qián, xièxie!", "vi": "Trả lại bạn 2 tệ, cảm ơn!"}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Rau bao nhiêu tiền một cân?", "o": ["5 tệ", "4 tệ", "8 tệ", "10 tệ"], "a": 0, "why": "五块钱一斤."},
 {"q": "A trả giá bao nhiêu?", "o": ["4 tệ", "3 tệ", "5 tệ", "6 tệ"], "a": 0, "why": "四块钱可以吗: 4 tệ được không?"},
@@ -9306,7 +9306,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "下车以后走路远吗？", "py": "Xià chē yǐhòu zǒu lù yuǎn ma?", "vi": "Sau khi xuống xe đi bộ có xa không?"},
 {"sp": "B", "han": "不远，走五分钟就到了。", "py": "Bù yuǎn, zǒu wǔ fēnzhōng jiù dào le.", "vi": "Không xa, đi 5 phút là tới."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Đi trường đi xe buýt số mấy?", "o": ["Số 3", "Số 5", "Số 7", "Số 8"], "a": 0, "why": "坐三路车."},
 {"q": "Xuống xe ở đâu?", "o": ["Cổng trường", "Cổng chợ", "Cổng công viên", "Nhà của A"], "a": 0, "why": "在学校门口下车."},
@@ -9326,7 +9326,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "夏天我回家看你们。", "py": "Xiàtiān wǒ huí jiā kàn nǐmen.", "vi": "Mùa hè con về nhà thăm mọi người."},
 {"sp": "B", "han": "好，我们在家里等你。", "py": "Hǎo, wǒmen zài jiā lǐ děng nǐ.", "vi": "Được, bố mẹ ở nhà đợi con."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "A ở trường thế nào?", "o": ["Rất tốt, có nhiều bài tập", "Không tốt", "Không có bài tập", "Đã nghỉ học"], "a": 0, "why": "我很好，学校里有很多作业."},
 {"q": "Mẹ dặn A gì?", "o": ["Học nghiêm túc và chú ý sức khỏe", "Chỉ học, không cần sức khỏe", "Nghỉ học", "Về quê ngay"], "a": 0, "why": "你要认真学习，也要注意身体."},
@@ -9349,7 +9349,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "好，明天八点在网上见。", "py": "Hǎo, míngtiān bā diǎn zài wǎngshang jiàn.", "vi": "Được, mai 8 giờ gặp trên mạng."},
 {"sp": "B", "han": "好，不见不散。", "py": "Hǎo, bú jiàn bú sàn.", "vi": "Được, không gặp không về."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Mấy giờ bắt đầu học nhóm?", "o": ["8 giờ tối mai", "7 giờ tối mai", "8 giờ sáng mai", "9 giờ tối mai"], "a": 0, "why": "八点开始: 8 giờ bắt đầu."},
 {"q": "Nhóm làm theo thứ tự nào?", "o": ["Thảo luận vấn đề trước, rồi cùng viết", "Viết trước, rồi thảo luận", "Chỉ viết, không thảo luận", "Chỉ thảo luận, không viết"], "a": 0, "why": "先讨论问题，再一起写."},
@@ -9369,7 +9369,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "地铁站离学校远吗？", "py": "Dìtiě zhàn lí xuéxiào yuǎn ma?", "vi": "Ga tàu điện cách trường có xa không?"},
 {"sp": "B", "han": "不远，出站走十分钟就到了。", "py": "Bù yuǎn, chū zhàn zǒu shí fēnzhōng jiù dào le.", "vi": "Không xa, ra ga đi 10 phút là tới."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "Bây giờ là giờ gì?", "o": ["Giờ cao điểm", "Giờ thấp điểm", "Buổi tối", "Cuối tuần"], "a": 0, "why": "现在是高峰时间."},
 {"q": "Đi xe buýt mất bao lâu?", "o": ["Khoảng một tiếng, có lúc hơn một tiếng", "Nửa tiếng", "10 phút", "2 tiếng"], "a": 0, "why": "差不多，有时候要一个多小时."},
@@ -9389,7 +9389,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "那我们怎么办？", "py": "Nà wǒmen zěnme bàn?", "vi": "Vậy chúng mình làm sao?"},
 {"sp": "B", "han": "我们可以自己安排时间，认真听课，不管在哪儿上课。", "py": "Wǒmen kěyǐ zìjǐ ānpái shíjiān, rènzhēn tīngkè, bùguǎn zài nǎr shàngkè.", "vi": "Chúng mình có thể tự sắp xếp thời gian, nghe giảng nghiêm túc, dù học ở đâu."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "B thấy học online tiện vì sao?", "o": ["Ở nhà là có thể học", "Không có bài tập", "Không cần thầy cô", "Không cần mạng"], "a": 0, "why": "在家里就能上课."},
 {"q": "A phản đối học ở nhà vì sao?", "o": ["Dễ không nghiêm túc, còn muốn chơi điện thoại", "Phải tốn thời gian trên đường", "Không có máy tính", "Không có bạn học"], "a": 0, "why": "在家里上课容易不认真，还想玩手机."},
@@ -9409,7 +9409,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "我还要早睡早起吗？", "py": "Wǒ hái yào zǎo shuì zǎo qǐ ma?", "vi": "Tôi còn phải ngủ sớm dậy sớm không?"},
 {"sp": "B", "han": "对，早睡早起，身体才会更健康。", "py": "Duì, zǎo shuì zǎo qǐ, shēntǐ cái huì gèng jiànkāng.", "vi": "Đúng, ngủ sớm dậy sớm, cơ thể mới khỏe hơn."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "A bị gì?", "o": ["Thời tiết vừa thay đổi là bị cảm", "Bị đau chân", "Bị đau răng", "Không bị gì"], "a": 0, "why": "天气一变我就感冒."},
 {"q": "Bình thường A có vận động không?", "o": ["Không thường vận động", "Mỗi ngày chạy bộ", "Mỗi ngày đi dạo", "Chơi thể thao ở trường"], "a": 0, "why": "我不常运动."},
@@ -9429,7 +9429,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "家里人同意吗？", "py": "Jiā lǐ rén tóngyì ma?", "vi": "Người nhà có đồng ý không?"},
 {"sp": "B", "han": "他们都同意，还说回家也是一种选择。", "py": "Tāmen dōu tóngyì, hái shuō huí jiā yě shì yì zhǒng xuǎnzé.", "vi": "Họ đều đồng ý, còn nói về nhà cũng là một lựa chọn."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "B làm việc ở thành phố bao lâu?", "o": ["5 năm", "3 năm", "1 năm", "10 năm"], "a": 0, "why": "我在城市工作了五年."},
 {"q": "Vì sao B muốn về quê?", "o": ["Thành phố áp lực rất lớn, mỗi ngày đều rất mệt", "Thành phố không có cơ hội", "Quê không có việc", "B không thích làm việc"], "a": 0, "why": "城市机会多，可是压力也很大，我每天都很累."},
@@ -9449,7 +9449,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
 {"sp": "A", "han": "归根到底，网课好不好，要看怎么用。", "py": "Guī gēn dào dǐ, wǎngkè hǎo bu hǎo, yào kàn zěnme yòng.", "vi": "Rốt cuộc, lớp học online tốt hay không, phải xem dùng thế nào."},
 {"sp": "B", "han": "我同意，用得好，网课就是一个好工具。", "py": "Wǒ tóngyì, yòng de hǎo, wǎngkè jiù shì yí gè hǎo gōngjù.", "vi": "Tôi đồng ý, dùng tốt thì lớp học online là một công cụ tốt."}
 ],
-"note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+"note": "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "questions": [
 {"q": "B dự đoán lớp học online sau này thế nào?", "o": ["Ngày càng nhiều, vì rất tiện", "Ngày càng ít", "Không thay đổi", "Biến mất"], "a": 0, "why": "网课会越来越多，因为很方便."},
 {"q": "A phản đối điểm nào?", "o": ["Lớp học online không thể thay thế tất cả các lớp học", "Lớp học online không tiện", "Không ai học online", "Học online quá đắt"], "a": 0, "why": "网课不能代替所有的课."},
@@ -9470,7 +9470,7 @@ ZH_LISTENING.push.apply(ZH_LISTENING, [
    {"sp": "A", "han": "我吃面条。我喝茶。", "py": "Wǒ chī miàntiáo. Wǒ hē chá.", "vi": "Tôi ăn mì sợi. Tôi uống trà."},
    {"sp": "B", "han": "我喝牛奶。牛奶很好喝。", "py": "Wǒ hē niúnǎi. Niúnǎi hěn hǎohē.", "vi": "Tôi uống sữa. Sữa rất ngon."}
   ],
-  "note": "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1.",
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1.",
   "questions": [
    {"q": "Lúc đầu B nói gì về mình?", "o": ["Tôi đói", "Tôi khát", "Tôi no rồi", "Tôi muốn ngủ"], "a": 0, "why": "我饿：tôi đói."},
    {"q": "A rủ B ăn gì?", "o": ["Ăn mì sợi", "Ăn cơm", "Ăn bánh chẻo", "Ăn trái cây"], "a": 1, "why": "A hỏi: 我们吃米饭，好吗？— chúng mình ăn cơm nhé, được không?"},
@@ -9659,7 +9659,7 @@ ZH_SPEAK.push.apply(ZH_SPEAK, [
    {"sp": "B", "han": "我的老师很好。你的同学是你的朋友吗？", "py": "Wǒ de lǎoshī hěn hǎo. Nǐ de tóngxué shì nǐ de péngyou ma?", "vi": "Thầy cô của tôi rất tốt. Bạn học của bạn có phải là bạn của bạn không?"},
    {"sp": "A", "han": "是。我的同学是我的朋友。", "py": "Shì. Wǒ de tóngxué shì wǒ de péngyou.", "vi": "Đúng. Bạn học của tôi là bạn của tôi."}
   ],
-  "note": "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  }
 ]);
 
@@ -9867,7 +9867,7 @@ ZH_ROLE.push.apply(ZH_ROLE, [
   ],
   "chunks": ["晚上吃米饭，好吗？", "我吃米饭。", "你喝茶吗？", "不。我喝牛奶。"],
   "tip": "Ở nhà, cứ nói ngắn như vậy là đủ: món ăn + 好吗 để rủ, 不 để từ chối nhẹ nhàng.",
-  "note": "Tình huống tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Lời thoại chỉ dùng từ chặng 1. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
+  "note": "Lời thoại chỉ dùng từ chặng 1. Tình huống này không chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt."
  }
 ]);
 
@@ -9877,7 +9877,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 "prompt": "Sắp xếp các từ thành câu đúng: hôm nay mẹ đi chợ mua rau xanh.",
 "words": ["今天", "妈妈", "去", "市场", "买青菜"],
 "why": "Câu đúng: 今天妈妈去市场买青菜。(Jīntiān māma qù shìchǎng mǎi qīngcài.) — Hôm nay mẹ đi chợ mua rau xanh. Trật tự đúng: thời gian 今天 → chủ ngữ 妈妈 → động từ 去 → nơi chốn 市场 → việc 买青菜.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s2-w-hocline", "stage": 2, "title": "Điền từ: Học online", "kind": "fill",
@@ -9888,21 +9888,21 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 {"q": "网络不好的时候，我听___。(Wǎngluò bù hǎo de shíhou, wǒ tīng ___. — Khi mạng không tốt, tôi nghe không rõ.)", "o": ["不清楚", "很清楚", "很快", "很好"], "a": 0, "why": "听不清楚 là nghe không rõ."}
 ],
 "why": "Ba câu đều về buổi học online ở nhà: học online (上网课), giảng trên máy tính (电脑), mạng xấu thì nghe không rõ (听不清楚).",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s3-w-yibian", "stage": 3, "title": "Sắp xếp: Vừa học online vừa ghi chép", "kind": "order",
 "prompt": "Sắp xếp các từ thành câu đúng: tôi vừa học online vừa ghi chép.",
 "words": ["我", "一边", "上网课", "一边", "记笔记"],
 "why": "Câu đúng: 我一边上网课，一边记笔记。(Wǒ yìbiān shàng wǎngkè, yìbiān jì bǐjì.) — Tôi vừa học online vừa ghi chép. Trật tự đúng: chủ ngữ 我 → 一边 + việc 1 上网课 → 一边 + việc 2 记笔记.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s3-w-xianzai", "stage": 3, "title": "Sắp xếp: Đi chợ trước, rồi về nhà nấu cơm", "kind": "order",
 "prompt": "Sắp xếp các từ thành câu đúng: tôi đi chợ trước, rồi về nhà nấu cơm.",
 "words": ["我", "先", "去市场", "再", "回家做饭"],
 "why": "Câu đúng: 我先去市场，再回家做饭。(Wǒ xiān qù shìchǎng, zài huí jiā zuò fàn.) — Tôi đi chợ trước, rồi về nhà nấu cơm. Trật tự đúng: chủ ngữ 我 → 先 + việc trước 去市场 → 再 + việc sau 回家做饭.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s3-w-cho", "stage": 3, "title": "Điền từ: Đi chợ", "kind": "fill",
@@ -9913,7 +9913,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 {"q": "找你___块钱。(Zhǎo nǐ ___ kuài qián. — Trả lại bạn 2 tệ.)", "o": ["两", "十", "二十", "十八"], "a": 0, "why": "两块钱 là 2 tệ."}
 ],
 "why": "Ba câu đều về mua bán ở chợ: giá theo cân (一斤), tổng tiền 18 tệ (十八), tiền trả lại 2 tệ (两块钱).",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s3-w-que", "stage": 3, "title": "Viết: Kể về quê nhà", "kind": "free",
@@ -9924,14 +9924,14 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 "analysis": "Bài mẫu kể theo thứ tự: quê ở đâu → trước/sau làng có gì → ông bà làm gì → khi nào về quê → cảm nghĩ ở câu cuối.",
 "phrases": ["我的家乡在…… (Wǒ de jiāxiāng zài……) — Quê của tôi ở……", "村子前面有…… (Cūnzi qiánmiàn yǒu……) — Trước làng có……", "我觉得家乡很好。 (Wǒ juéde jiāxiāng hěn hǎo.) — Tôi thấy quê nhà rất tốt."],
 "why": "Bài mẫu dùng đủ 5 ý trong đề: vị trí quê → cảnh trước/sau làng → việc của ông bà → mùa hè về quê → cảm nghĩ. Viết đủ 5 ý, mỗi ý một câu ngắn là đạt yêu cầu đối chiếu.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); đề và bài mẫu tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
 },
 {
 "id": "p3-s4-w-duilaishuo", "stage": 4, "title": "Sắp xếp: Đối với tôi, sống ở Hà Nội rất tiện", "kind": "order",
 "prompt": "Sắp xếp các từ thành câu đúng: đối với tôi, sống ở Hà Nội rất tiện.",
 "words": ["对", "我", "来说", "住在河内", "很方便"],
 "why": "Câu đúng: 对我来说，住在河内很方便。(Duì wǒ lái shuō, zhù zài Hénèi hěn fāngbiàn.) — Đối với tôi, sống ở Hà Nội rất tiện. Trật tự đúng: 对 + người 我 + 来说 → nhận xét 住在河内很方便.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s4-w-tro", "stage": 4, "title": "Điền từ: Thuê trọ", "kind": "fill",
@@ -9942,14 +9942,14 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 {"q": "住进来以前，和房东签一个___。(Zhù jìnlái yǐqián, hé fángdōng qiān yí gè ___. — Trước khi dọn vào ở, ký một hợp đồng với chủ nhà.)", "o": ["合同", "课文", "作业", "问题"], "a": 0, "why": "合同 là hợp đồng."}
 ],
 "why": "Ba câu đều về thuê trọ: phòng không xa trường (不远), tiền thuê phòng (房租), hợp đồng với chủ nhà (合同).",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s5-w-yuqi", "stage": 5, "title": "Sắp xếp: Thay vì ở nhà chờ, chi bằng đi chợ xem thử", "kind": "order",
 "prompt": "Sắp xếp các từ thành câu đúng: thay vì ở nhà chờ, chi bằng đi chợ xem thử.",
 "words": ["与其", "在家等", "不如", "去市场看看"],
 "why": "Câu đúng: 与其在家等，不如去市场看看。(Yǔqí zài jiā děng, bùrú qù shìchǎng kànkan.) — Thay vì ở nhà chờ, chi bằng đi chợ xem thử. Trật tự đúng: 与其 + phương án bỏ 在家等 → 不如 + phương án chọn 去市场看看.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s5-w-hocline", "stage": 5, "title": "Viết: Ý kiến của bạn về học online", "kind": "free",
@@ -9960,14 +9960,14 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 "analysis": "Bài mẫu nêu ý kiến theo thứ tự: mở đầu ý kiến → ưu điểm → khuyết điểm → cách khắc phục (dùng 与其…不如…) → kết luận hai mặt.",
 "phrases": ["我觉得…… (Wǒ juéde……) — Tôi thấy……", "在家里就能上课。 (Zài jiā lǐ jiù néng shàngkè.) — Ở nhà là có thể học.", "两种课都有优点和缺点。 (Liǎng zhǒng kè dōu yǒu yōudiǎn hé quēdiǎn.) — Hai loại lớp học đều có ưu điểm và khuyết điểm."],
 "why": "Bài mẫu dùng đủ 4 ý trong đề: ý kiến mở đầu → ưu điểm → khuyết điểm → kết luận hai mặt, kèm một câu 与其…不如… để nêu cách khắc phục.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); đề và bài mẫu tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
 },
 {
 "id": "p3-s6-w-guigen", "stage": 6, "title": "Sắp xếp: Rốt cuộc, thời tiết chúng ta không thể thay đổi", "kind": "order",
 "prompt": "Sắp xếp các từ thành câu đúng: rốt cuộc, thời tiết chúng ta không thể thay đổi.",
 "words": ["归根到底", "天气", "我们", "不能改变"],
 "why": "Câu đúng: 归根到底，天气我们不能改变。(Guī gēn dào dǐ, tiānqì wǒmen bù néng gǎibiàn.) — Rốt cuộc, thời tiết chúng ta không thể thay đổi. Trật tự đúng: 归根到底 mở đầu câu kết luận → chủ đề 天气 → chủ ngữ 我们 → 不能改变.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
 },
 {
 "id": "p3-s6-w-thoitiet", "stage": 6, "title": "Viết: Lập luận về thời tiết thay đổi và sức khỏe", "kind": "free",
@@ -9978,7 +9978,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
 "analysis": "Bài mẫu lập luận theo thứ tự: nhận xét chung → mùa hè → mùa đông → nên làm gì → kết luận 归根到底 → hệ quả ở câu cuối.",
 "phrases": ["最近几年，河内的天气变化很大。 (Zuìjìn jǐ nián, Hénèi de tiānqì biànhuà hěn dà.) — Mấy năm gần đây, thời tiết Hà Nội thay đổi rất lớn.", "归根到底，天气我们不能改变。 (Guī gēn dào dǐ, tiānqì wǒmen bù néng gǎibiàn.) — Rốt cuộc, thời tiết chúng ta không thể thay đổi.", "这样，身体才会更健康。 (Zhèyàng, shēntǐ cái huì gèng jiànkāng.) — Như vậy, cơ thể mới khỏe hơn."],
 "why": "Bài mẫu dùng đủ 4 ý trong đề: ảnh hưởng chung → hè/đông đối chiếu → nên làm gì → kết luận 归根到底, mỗi ý rõ ràng, không lan man.",
-"note": "Bài tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); đề và bài mẫu tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+"note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
 },
  {
   "id": "tian-ci-jia", "stage": 1, "title": "Điền từ: Nhà và trường", "kind": "fill",
@@ -9989,7 +9989,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
    {"q": "爸爸去___。(Bố đến trường.)", "o": ["学校", "商店", "公园", "教室"], "a": 0, "why": "爸爸去学校：bố đến trường."},
    {"q": "我喝___。(Tôi uống sữa.)", "o": ["牛奶", "米饭", "面条", "苹果"], "a": 0, "why": "我喝牛奶：tôi uống sữa."}
   ],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
+  "note": "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách."
  }
 ]);
 })();
@@ -14941,7 +14941,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
     if ((s.hsk === "HSK2" || s.hsk === "HSK3")
       && s.hskNote.indexOf("không mạo nhận") >= 0
       && s.hskNote.indexOf("không phải xác nhận") < 0) {
-      s.hskNote += " Nhãn này là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.";
+      s.hskNote += " Nhãn này là mức đặt theo chủ đề/trình độ.";
     }
   });
 })();
@@ -20793,7 +20793,7 @@ var IELTS_MOCKREAD_70 = [
 // Tự soạn theo chủ đề từng cấp. Nhãn cấp là mức đặt theo chủ đề/trình độ, KHÔNG mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.
 // Mục tiêu từ tích lũy theo đề cương thi HSK 3.0: cấp 1: 300, cấp 2: 500, cấp 3: 1.000, cấp 4: 2.000, cấp 5: 3.600, cấp 6: 5.400.
 var ZH_VOCAB_EXPAND = [
-{ topic: "HSK1 — Số đếm và thời gian trong ngày", hsk: "HSK1", hskNote: "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK1 — Số đếm và thời gian trong ngày", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "十一", pinyin: "shíyī", vi: "mười một", col: "十一点", ex: "我们十一点见。", exv: "Chúng ta gặp nhau lúc 11 giờ." },
   { han: "十二", pinyin: "shí'èr", vi: "mười hai", col: "十二点", ex: "十二点吃午饭。", exv: "12 giờ ăn trưa." },
@@ -20816,7 +20816,7 @@ var ZH_VOCAB_EXPAND = [
   { han: "时候", pinyin: "shíhou", vi: "lúc, khi", col: "的时候", ex: "吃饭的时候别说话。", exv: "Lúc ăn cơm đừng nói chuyện." },
   { han: "早", pinyin: "zǎo", vi: "sớm", col: "很早", ex: "他每天起得很早。", exv: "Anh ấy mỗi ngày dậy rất sớm." }
   ] },
-{ topic: "HSK1 — Màu sắc và hình dáng", hsk: "HSK1", hskNote: "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK1 — Màu sắc và hình dáng", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "红色", pinyin: "hóngsè", vi: "màu đỏ", col: "红色的", ex: "我喜欢红色的衣服。", exv: "Tôi thích quần áo màu đỏ." },
   { han: "蓝色", pinyin: "lánsè", vi: "màu xanh dương", col: "蓝色的", ex: "蓝色的天空很美。", exv: "Bầu trời xanh dương rất đẹp." },
@@ -20839,7 +20839,7 @@ var ZH_VOCAB_EXPAND = [
   { han: "脏", pinyin: "zāng", vi: "bẩn", col: "很脏", ex: "鞋子很脏。", exv: "Giày rất bẩn." },
   { han: "颜色", pinyin: "yánsè", vi: "màu sắc", col: "什么颜色", ex: "你喜欢什么颜色？", exv: "Bạn thích màu gì?" }
   ] },
-{ topic: "HSK1 — Đồ ăn sáng và đồ uống", hsk: "HSK1", hskNote: "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK1 — Đồ ăn sáng và đồ uống", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "面包", pinyin: "miànbāo", vi: "bánh mì", col: "吃面包", ex: "早上我吃面包。", exv: "Buổi sáng tôi ăn bánh mì." },
 { han: "牛奶", pinyin: "niúnǎi", vi: "sữa", col: "牛奶瓶", ex: "我买了一瓶牛奶。", exv: "Tôi mua một bình sữa." },
@@ -20862,7 +20862,7 @@ var ZH_VOCAB_EXPAND = [
   { han: "酸", pinyin: "suān", vi: "chua", col: "很酸", ex: "这个柠檬很酸。", exv: "Quả chanh này rất chua." },
   { han: "咸", pinyin: "xián", vi: "mặn", col: "太咸了", ex: "这个汤太咸了。", exv: "Món canh này quá mặn." }
   ] },
-{ topic: "HSK1 — Gia đình và xưng hô", hsk: "HSK1", hskNote: "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK1 — Gia đình và xưng hô", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "爷爷", pinyin: "yéye", vi: "ông nội", col: "我爷爷", ex: "我爷爷今年七十岁。", exv: "Ông nội tôi năm nay bảy mươi tuổi." },
   { han: "奶奶", pinyin: "nǎinai", vi: "bà nội", col: "我奶奶", ex: "我奶奶很喜欢我。", exv: "Bà nội tôi rất thích tôi." },
@@ -20885,7 +20885,7 @@ var ZH_VOCAB_EXPAND = [
   { han: "姓", pinyin: "xìng", vi: "họ", col: "我姓", ex: "我姓王。", exv: "Tôi họ Vương." },
   { han: "叫", pinyin: "jiào", vi: "gọi là, tên là", col: "我叫", ex: "我叫小明。", exv: "Tôi tên là Tiểu Minh." }
   ] },
-{ topic: "HSK2 — Mua sắm ở chợ", hsk: "HSK2", hskNote: "Bộ tự soạn theo chủ đề cấp 2; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK2 — Mua sắm ở chợ", hsk: "HSK2", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "市场", pinyin: "shìchǎng", vi: "chợ", col: "去市场", ex: "妈妈每天去市场。", exv: "Mẹ mỗi ngày đi chợ." },
   { han: "商店", pinyin: "shāngdiàn", vi: "cửa hàng", col: "大商店", ex: "这家商店很大。", exv: "Cửa hàng này rất lớn." },
@@ -20908,7 +20908,7 @@ var ZH_VOCAB_EXPAND = [
   { han: "斤", pinyin: "jīn", vi: "cân (0,5 kg)", col: "一斤", ex: "买一斤肉。", exv: "Mua một cân thịt." },
   { han: "袋子", pinyin: "dàizi", vi: "túi", col: "塑料袋", ex: "请给我一个袋子。", exv: "Xin cho tôi một cái túi." }
   ] },
-{ topic: "HSK2 — Thời tiết bốn mùa", hsk: "HSK2", hskNote: "Bộ tự soạn theo chủ đề cấp 2; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK2 — Thời tiết bốn mùa", hsk: "HSK2", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "春天", pinyin: "chūntiān", vi: "mùa xuân", col: "春天来了", ex: "春天来了，花开了。", exv: "Mùa xuân đến, hoa nở." },
   { han: "夏天", pinyin: "xiàtiān", vi: "mùa hè", col: "夏天很热", ex: "夏天很热。", exv: "Mùa hè rất nóng." },
@@ -20931,7 +20931,7 @@ var ZH_VOCAB_EXPAND = [
 { han: "季节", pinyin: "jìjié", vi: "mùa", col: "换季节", ex: "换季节的时候容易感冒。", exv: "Khi giao mùa dễ bị cảm." },
   { han: "气候", pinyin: "qìhòu", vi: "khí hậu", col: "气候好", ex: "这里气候很好。", exv: "Khí hậu ở đây rất tốt." }
   ] },
-{ topic: "HSK2 — Giao thông đi lại", hsk: "HSK2", hskNote: "Bộ tự soạn theo chủ đề cấp 2; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK2 — Giao thông đi lại", hsk: "HSK2", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "公共汽车", pinyin: "gōnggòng qìchē", vi: "xe buýt", col: "公共汽车站", ex: "公共汽车站在前面。", exv: "Trạm xe buýt ở phía trước." },
 { han: "地铁", pinyin: "dìtiě", vi: "tàu điện ngầm", col: "地铁票", ex: "我买了两张地铁票。", exv: "Tôi mua hai vé tàu điện ngầm." },
@@ -20954,7 +20954,7 @@ var ZH_VOCAB_EXPAND = [
   { han: "方向", pinyin: "fāngxiàng", vi: "hướng, phương hướng", col: "哪个方向", ex: "学校在哪个方向？", exv: "Trường học ở hướng nào?" },
   { han: "地图", pinyin: "dìtú", vi: "bản đồ", col: "看地图", ex: "看地图找路。", exv: "Xem bản đồ tìm đường." }
   ] },
-{ topic: "HSK3 — Sức khỏe và khám bệnh", hsk: "HSK3", hskNote: "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK3 — Sức khỏe và khám bệnh", hsk: "HSK3", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "医院", pinyin: "yīyuàn", vi: "bệnh viện", col: "医院里", ex: "医院里很多人。", exv: "Trong bệnh viện có nhiều người." },
   { han: "医生", pinyin: "yīshēng", vi: "bác sĩ", col: "看医生", ex: "不舒服就去看医生。", exv: "Khó chịu thì đi khám bác sĩ." },
@@ -20977,7 +20977,7 @@ var ZH_VOCAB_EXPAND = [
   { han: "严重", pinyin: "yánzhòng", vi: "nghiêm trọng", col: "很严重", ex: "他的病很严重。", exv: "Bệnh của anh ấy rất nghiêm trọng." },
   { han: "治疗", pinyin: "zhìliáo", vi: "điều trị", col: "治疗病人", ex: "医生在治疗病人。", exv: "Bác sĩ đang điều trị bệnh nhân." }
   ] },
-{ topic: "HSK3 — Công việc văn phòng cơ bản", hsk: "HSK3", hskNote: "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK3 — Công việc văn phòng cơ bản", hsk: "HSK3", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "办公室", pinyin: "bàngōngshì", vi: "văn phòng", col: "办公室里", ex: "办公室里很安静。", exv: "Trong văn phòng rất yên tĩnh." },
   { han: "同事", pinyin: "tóngshì", vi: "đồng nghiệp", col: "我的同事", ex: "我的同事都很好。", exv: "Đồng nghiệp của tôi đều rất tốt." },
@@ -21000,7 +21000,7 @@ var ZH_VOCAB_EXPAND = [
   { han: "失败", pinyin: "shībài", vi: "thất bại", col: "失败了", ex: "不要怕失败。", exv: "Đừng sợ thất bại." },
   { han: "努力", pinyin: "nǔlì", vi: "nỗ lực", col: "努力工作", ex: "他努力工作。", exv: "Anh ấy làm việc nỗ lực." }
   ] },
-{ topic: "HSK4 — Môi trường và xã hội", hsk: "HSK4", hskNote: "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK4 — Môi trường và xã hội", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "环境", pinyin: "huánjìng", vi: "môi trường", col: "环境保护", ex: "环境保护很重要。", exv: "Bảo vệ môi trường rất quan trọng." },
 { han: "污染", pinyin: "wūrǎn", vi: "ô nhiễm", col: "污染严重", ex: "这里污染严重。", exv: "Ở đây ô nhiễm nghiêm trọng." },
@@ -21025,7 +21025,7 @@ var ZH_VOCAB_EXPAND = [
   ] }
 ];
 var ZH_VOCAB_EXPAND2 = [
-{ topic: "HSK1 — Cảm xúc, so sánh và câu hỏi", hsk: "HSK1", hskNote: "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK1 — Cảm xúc, so sánh và câu hỏi", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
  cards: [
   { han: "喜欢", pinyin: "xǐhuan", vi: "thích", col: "喜欢喝茶", ex: "我喜欢喝茶。", exv: "Tôi thích uống trà." },
   { han: "太", pinyin: "tài", vi: "quá", col: "太好了", ex: "太好了！", exv: "Tốt quá!" },
@@ -21043,7 +21043,7 @@ var ZH_VOCAB_EXPAND2 = [
   { han: "什么", pinyin: "shénme", vi: "gì", col: "什么名字", ex: "你叫什么名字？", exv: "Bạn tên là gì?" },
   { han: "高兴", pinyin: "gāoxìng", vi: "vui", col: "很高兴", ex: "很高兴认识你。", exv: "Rất vui được quen biết bạn." }
  ] },
-{ topic: "HSK1 — Gia đình và sinh hoạt hằng ngày", hsk: "HSK1", hskNote: "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK1 — Gia đình và sinh hoạt hằng ngày", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
  cards: [
   { han: "岁", pinyin: "suì", vi: "tuổi", col: "二十岁", ex: "我今年二十岁。", exv: "Năm nay tôi hai mươi tuổi." },
   { han: "每", pinyin: "měi", vi: "mỗi", col: "每天", ex: "我每天跑步。", exv: "Mỗi ngày tôi đều chạy bộ." },
@@ -21061,7 +21061,7 @@ var ZH_VOCAB_EXPAND2 = [
   { han: "做作业", pinyin: "zuò zuòyè", vi: "làm bài tập", col: "做完作业", ex: "做作业要认真。", exv: "Làm bài tập phải nghiêm túc." },
   { han: "看电视", pinyin: "kàn diànshì", vi: "xem ti vi", col: "看电视新闻", ex: "晚上爸爸看电视新闻。", exv: "Buổi tối bố xem tin tức trên ti vi." }
  ] },
-{ topic: "HSK1 — Chợ, hỏi đường và địa danh", hsk: "HSK1", hskNote: "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK1 — Chợ, hỏi đường và địa danh", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
  cards: [
   { han: "睡觉", pinyin: "shuì jiào", vi: "ngủ", col: "睡觉时间", ex: "该睡觉了。", exv: "Đến giờ đi ngủ rồi." },
   { han: "市场", pinyin: "shìchǎng", vi: "chợ", col: "逛市场", ex: "星期六我们去市场。", exv: "Thứ Bảy chúng tôi đi chợ." },
@@ -21089,7 +21089,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "你是学生吗？你喜欢中国菜吗？今天是星期一吗？他是中国人吗？",
   rule: "Câu kể + 吗 = câu hỏi có/không. Trả lời: 是/不是, 喜欢/不喜欢, v.v. 吗 không dùng với câu hỏi đã có từ hỏi (谁, 什么, 哪儿).",
   tip: "Đừng thêm 吗 vào câu đã có 什么, 谁, 哪儿 — đó đã là câu hỏi rồi.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "Câu nào là câu hỏi đúng?", o: ["你是学生吗？", "你是学生。", "你是吗学生？", "你吗是学生？"], a: 0, why: "吗 đặt cuối câu kể: 你是学生吗？" },
   { q: "Trả lời đúng cho '你喜欢中国菜吗？' (thích) là:", o: ["喜欢。", "不喜欢。", "是。", "不是。"], a: 0, why: "Hỏi 喜欢 thì trả lời 喜欢/不喜欢。" },
@@ -21103,7 +21103,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "我是学生，你呢？我很好，你呢？他去学校，你呢？我喜欢茶，你呢？",
   rule: "Mệnh đề + ，+ chủ ngữ + 呢 = hỏi lại cùng việc. Trả lời như câu hỏi thường. 呢 cũng dùng cuối câu kể để nhấn mạnh đang diễn ra (他在看书呢).",
   tip: "你呢？ là cách hỏi lại ngắn gọn nhất, dùng rất nhiều trong hội thoại.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'我是学生，你呢？' — 呢 ở đây dùng để:", o: ["Hỏi lại cùng việc.", "Hỏi thời gian.", "Hỏi địa điểm.", "Cảm thán."], a: 0, why: "你呢？ = còn bạn thì sao?" },
   { q: "Trả lời đúng cho '我很好，你呢？' (tôi cũng khỏe) là:", o: ["我也很好。", "我不好。", "我是学生。", "我去学校。"], a: 0, why: "Hỏi lại sức khỏe thì trả lời sức khỏe: 我也很好。" },
@@ -21117,7 +21117,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "今天太热了！这个菜太好吃了！他太高了。这个书包太贵了。",
   rule: "太 + tính từ + 了 = quá... (thường mang nghĩa cảm thán hoặc phàn nàn nhẹ). Không dùng 太 với tính từ mang nghĩa tiêu cực mà không có 了? Thực tế: 太好了 (tốt quá) dùng được; 太 + tính từ + 了 là dạng chuẩn.",
   tip: "太...了 hay dùng để khen hoặc than: 太漂亮了 (đẹp quá!), 太贵了 (đắt quá!).",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'今天太热了！' nghĩa là:", o: ["Hôm nay nóng quá!", "Hôm nay lạnh quá!", "Hôm nay đẹp quá!", "Hôm nay mưa quá!"], a: 0, why: "太热了 = nóng quá." },
   { q: "Điền đúng: '这个菜太___了！' (ngon)", o: ["好吃", "好喝", "好看", "好玩"], a: 0, why: "Món ăn ngon: 好吃。" },
@@ -21131,7 +21131,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "请给我一点儿水。我会说一点儿汉语。今天比昨天冷一点儿。请慢一点儿。",
   rule: "一点儿 + danh từ = một chút (số lượng). Tính từ + 一点儿 = hơn một chút (so sánh). Động từ + 一点儿 cũng được: 慢一点儿 (chậm một chút).",
   tip: "一点儿 rất lịch sự khi xin/mượn: 一点儿水, 一点儿时间.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'请给我一点儿水。' nghĩa là:", o: ["Xin cho tôi một chút nước.", "Xin cho tôi nhiều nước.", "Xin cho tôi trà.", "Xin cho tôi cơm."], a: 0, why: "一点儿水 = một chút nước." },
   { q: "'我会说一点儿汉语。' — người nói biết tiếng Trung ở mức nào?", o: ["Một chút.", "Rất giỏi.", "Không biết.", "Lưu loát."], a: 0, why: "一点儿汉语 = một chút tiếng Trung." },
@@ -21145,7 +21145,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "你喝茶还是咖啡？今天去还是明天去？我们可以坐公共汽车或者地铁。星期六或者星期天，我有时间。",
   rule: "还是 = hay (trong câu hỏi lựa chọn, chọn một trong hai). 或者 = hoặc (trong câu kể, nêu khả năng). Đừng dùng 或者 trong câu hỏi lựa chọn và đừng dùng 还是 trong câu kể thường.",
   tip: "Mẹo nhớ: hỏi thì 还是, kể thì 或者.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'你喝茶还是咖啡？' — 还是 ở đây dùng để:", o: ["Hỏi lựa chọn.", "Kể khả năng.", "Chỉ thời gian.", "Phủ định."], a: 0, why: "还是 trong câu hỏi = hay." },
   { q: "Điền đúng (câu kể): '我们可以坐公共汽车___地铁。'", o: ["或者", "还是", "但是", "因为"], a: 0, why: "Câu kể dùng 或者。" },
@@ -21159,7 +21159,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "他跑得很快。她说汉语说得很好。今天热得不行。他写字写得很漂亮。",
   rule: "Động từ + 得 + (mức độ) = làm đến mức nào. Với động từ có tân ngữ, lặp lại động từ: 说汉语说得很好. Phủ định: 得不 (跑得不快).",
   tip: "得 (de) bổ ngữ khác 的 (de) sở hữu và 地 (de) trạng ngữ — cùng âm, khác chữ, khác chức năng.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'他跑得很快。' — 得 ở đây dùng để:", o: ["Nối động từ với mức độ (chạy nhanh đến mức nào).", "Chỉ sở hữu.", "Chỉ thời gian.", "Chỉ địa điểm."], a: 0, why: "跑得很快 = chạy rất nhanh." },
   { q: "Điền đúng: '她说汉语说___很好。'", o: ["得", "的", "地", "和"], a: 0, why: "Bổ ngữ mức độ dùng 得。" },
@@ -21173,7 +21173,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "先吃饭，再看电视。先写作业，再玩。先去学校，再去市场。你先坐，再说。",
   rule: "先 + việc 1, 再 + việc 2 = làm việc 1 trước, việc 2 sau. 再 khác 又: 再 dùng cho việc chưa xảy ra (tương lai), 又 dùng cho việc đã lặp lại trong quá khứ.",
   tip: "先...再... rất hay dùng khi hướng dẫn thứ tự: 先...再...最后...",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK2; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'先吃饭，再看电视。' nghĩa là:", o: ["Ăn cơm trước, rồi mới xem tivi.", "Xem tivi trước, rồi mới ăn cơm.", "Vừa ăn vừa xem.", "Không ăn, không xem."], a: 0, why: "先...再... = trước... rồi mới..." },
   { q: "Điền đúng: '先写作业，___玩。'", o: ["再", "又", "也", "还"], a: 0, why: "Việc sau chưa xảy ra dùng 再。" },
@@ -21187,7 +21187,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "虽然很累，但是我很高兴。虽然下雨了，但是我们还是去了。虽然他很有钱，但是他很节约。虽然汉语很难，但是我喜欢学。",
   rule: "虽然 + ý nhượng bộ, 但是 + ý chính (ngược lại). 但是 có thể bỏ khi chủ ngữ hai vế giống nhau và ý đã rõ, nhưng dạng đầy đủ an toàn hơn. 还是 (vẫn) thường đi kèm vế sau.",
   tip: "虽然...但是... là cặp nhượng bộ cơ bản nhất; đừng dùng 但是 hai lần.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'虽然很累，但是我很高兴。' nghĩa là:", o: ["Tuy rất mệt, nhưng tôi rất vui.", "Vì rất mệt nên tôi rất vui.", "Rất mệt và rất vui.", "Không mệt, không vui."], a: 0, why: "虽然...但是... = tuy... nhưng..." },
   { q: "Điền đúng: '虽然下雨了，___我们还是去了。'", o: ["但是", "因为", "所以", "如果"], a: 0, why: "Cặp 虽然...但是..." },
@@ -21201,7 +21201,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "除了汉语以外，我还会说英语。除了他以外，大家都来了。除了吃饭以外，他还喜欢看书。除了星期天以外，我每天都工作。",
   rule: "除了 + A + 以外, (还/都) + ... = ngoài A ra, còn/đều... Chú ý: 除了...以外 còn có nghĩa loại trừ (除了他以外，大家都来了 = trừ anh ấy ra, mọi người đều đến) — nghĩa phụ thuộc vào vế sau (还 = thêm vào; 都 = tất cả trừ ra).",
   tip: "Phân biệt bằng vế sau: có 还 = thêm vào; có 都 = loại trừ.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'除了汉语以外，我还会说英语。' nghĩa là:", o: ["Ngoài tiếng Trung ra, tôi còn nói được tiếng Anh.", "Tôi chỉ nói tiếng Trung.", "Tôi không nói tiếng Trung.", "Tôi chỉ nói tiếng Anh."], a: 0, why: "除了...以外 + 还 = ngoài ra còn..." },
   { q: "'除了他以外，大家都来了。' nghĩa là:", o: ["Trừ anh ấy ra, mọi người đều đến.", "Mọi người đều đến, kể cả anh ấy.", "Chỉ anh ấy đến.", "Không ai đến."], a: 0, why: "除了...以外 + 都 = loại trừ." },
@@ -21215,7 +21215,7 @@ var ZH_GRAMMAR_EXPAND = [
   speak: "他不但会说汉语，而且会写汉字。这个菜不但好吃，而且很便宜。她不但学习好，而且体育也好。北京不但很大，而且很美。",
   rule: "不但 + ý 1, 而且 + ý 2 (mạnh hơn, tiến thêm). Chủ ngữ giống nhau thì 不但 đặt sau chủ ngữ (他不但...); chủ ngữ khác nhau thì 不但 đặt đầu câu. Vế sau thường có 也/还/更.",
   tip: "不但...而且... dùng khi ý sau mạnh hơn ý trước — đừng dùng khi hai ý ngang nhau.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK4; ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   quiz: [
   { q: "'他不但会说汉语，而且会写汉字。' nghĩa là:", o: ["Anh ấy không những nói được tiếng Trung, mà còn viết được chữ Hán.", "Anh ấy chỉ nói được tiếng Trung.", "Anh ấy chỉ viết được chữ Hán.", "Anh ấy không biết tiếng Trung."], a: 0, why: "不但...而且... = không những... mà còn..." },
   { q: "Điền đúng: '这个菜不但好吃，___很便宜。'", o: ["而且", "但是", "因为", "如果"], a: 0, why: "Cặp 不但...而且..." },
@@ -21229,7 +21229,7 @@ var ZH_READING_EXPAND = [
 { id: "zh1a", stage: 1, title: "Tôi là học sinh", topic: "Giới thiệu", text: "我是学生。我叫小明。我今年二十岁。我是越南人。我在河内学习汉语。我很喜欢中国。我每天学习汉语两个小时。",
   pinyin: "Wǒ shì xuésheng. Wǒ jiào Xiǎo Míng. Wǒ jīnnián èrshí suì. Wǒ shì Yuènán rén. Wǒ zài Hénèi xuéxí Hànyǔ. Wǒ hěn xǐhuan Zhōngguó. Wǒ měitiān xuéxí Hànyǔ liǎng gè xiǎoshí.",
   vi: "Tôi là học sinh. Tôi tên là Tiểu Minh. Năm nay tôi hai mươi tuổi. Tôi là người Việt Nam. Tôi học tiếng Trung ở Hà Nội. Tôi rất thích Trung Quốc. Mỗi ngày tôi học tiếng Trung hai giờ.",
-  note: "Bài tự soạn theo chủ đề cấp 1; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Tiểu Minh bao nhiêu tuổi?", o: ["20 tuổi.", "12 tuổi.", "21 tuổi.", "18 tuổi."], a: 0, why: "今年二十岁: năm nay hai mươi tuổi." },
   { q: "Tiểu Minh là người nước nào?", o: ["Việt Nam.", "Trung Quốc.", "Nhật Bản.", "Hàn Quốc."], a: 0, why: "我是越南人: Tôi là người Việt Nam." },
@@ -21240,7 +21240,7 @@ var ZH_READING_EXPAND = [
 { id: "zh1b", stage: 1, title: "Gia đình tôi", topic: "Gia đình", text: "我家有四口人：爸爸、妈妈、姐姐和我。爸爸是老师，妈妈是医生。姐姐是大学生。我是中学生。我们一家人很幸福。",
   pinyin: "Wǒ jiā yǒu sì kǒu rén: bàba, māma, jiějie hé wǒ. Bàba shì lǎoshī, māma shì yīshēng. Jiějie shì dàxuéshēng. Wǒ shì zhōngxuéshēng. Wǒmen yì jiā rén hěn xìngfú.",
   vi: "Nhà tôi có bốn người: bố, mẹ, chị gái và tôi. Bố là giáo viên, mẹ là bác sĩ. Chị gái là sinh viên đại học. Tôi là học sinh trung học. Cả nhà chúng tôi rất hạnh phúc.",
-  note: "Bài tự soạn theo chủ đề cấp 1; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Nhà Tiểu Minh (người kể) có mấy người?", o: ["4 người.", "3 người.", "5 người.", "2 người."], a: 0, why: "四口人: bốn người." },
   { q: "Bố làm nghề gì?", o: ["Giáo viên.", "Bác sĩ.", "Kỹ sư.", "Nông dân."], a: 0, why: "爸爸是老师: Bố là giáo viên." },
@@ -21251,7 +21251,7 @@ var ZH_READING_EXPAND = [
 { id: "zh1c", stage: 1, title: "Một ngày của tôi", topic: "Đời sống hằng ngày", text: "我每天早上七点起床。起床以后，我刷牙、洗脸，然后吃早饭。八点我去学校。中午我在学校吃饭。下午五点我回家。晚上我做作业，然后看电视。十一点我睡觉。",
   pinyin: "Wǒ měitiān zǎoshang qī diǎn qǐchuáng. Qǐchuáng yǐhòu, wǒ shuā yá, xǐ liǎn, ránhòu chī zǎofàn. Bā diǎn wǒ qù xuéxiào. Zhōngwǔ wǒ zài xuéxiào chī fàn. Xiàwǔ wǔ diǎn wǒ huí jiā. Wǎnshang wǒ zuò zuòyè, ránhòu kàn diànshì. Shíyī diǎn wǒ shuìjiào.",
   vi: "Mỗi ngày tôi dậy lúc 7 giờ sáng. Sau khi dậy, tôi đánh răng, rửa mặt, rồi ăn sáng. 8 giờ tôi đến trường. Buổi trưa tôi ăn cơm ở trường. 5 giờ chiều tôi về nhà. Buổi tối tôi làm bài tập, rồi xem tivi. 11 giờ tôi đi ngủ.",
-  note: "Bài tự soạn theo chủ đề cấp 1; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Người kể dậy lúc nào?", o: ["7 giờ sáng.", "6 giờ sáng.", "8 giờ sáng.", "5 giờ sáng."], a: 0, why: "早上七点起床: dậy lúc 7 giờ sáng." },
   { q: "Sau khi dậy, người kể làm gì theo thứ tự?", o: ["Đánh răng, rửa mặt, rồi ăn sáng.", "Ăn sáng, rồi đánh răng.", "Đi học ngay.", "Xem tivi."], a: 0, why: "刷牙、洗脸，然后吃早饭." },
@@ -21262,7 +21262,7 @@ var ZH_READING_EXPAND = [
 { id: "zh1d", stage: 1, title: "Mua trái cây", topic: "Mua sắm", text: "今天下午，我和妈妈去市场买水果。苹果十块一斤，香蕉五块一斤。妈妈买了一斤苹果和两斤香蕉。一共二十块。妈妈给卖水果的人二十块。卖水果的人说：“谢谢！”",
   pinyin: "Jīntiān xiàwǔ, wǒ hé māma qù shìchǎng mǎi shuǐguǒ. Píngguǒ shí kuài yì jīn, xiāngjiāo wǔ kuài yì jīn. Māma mǎi le yì jīn píngguǒ hé liǎng jīn xiāngjiāo. Yígòng èrshí kuài. Māma gěi mài shuǐguǒ de rén èrshí kuài. Mài shuǐguǒ de rén shuō: 'Xièxie!'",
   vi: "Chiều hôm nay, tôi và mẹ đi chợ mua trái cây. Táo mười đồng một cân, chuối năm đồng một cân. Mẹ mua một cân táo và hai cân chuối. Tổng cộng hai mươi đồng. Mẹ đưa cho người bán trái cây hai mươi đồng. Người bán trái cây nói: 'Cảm ơn!'",
-  note: "Bài tự soạn theo chủ đề cấp 1; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo trình độ.",
+  note: "Nhãn cấp là mức đặt theo trình độ.",
   questions: [
   { q: "Chiều nay người kể đi đâu với ai?", o: ["Đi chợ với mẹ.", "Đi chợ một mình.", "Đi siêu thị với bố.", "Đi chợ với bạn."], a: 0, why: "我和妈妈去市场: tôi và mẹ đi chợ." },
   { q: "Táo giá bao nhiêu một cân?", o: ["10 đồng.", "5 đồng.", "20 đồng.", "15 đồng."], a: 0, why: "苹果十块一斤: táo mười đồng một cân." },
@@ -21273,7 +21273,7 @@ var ZH_READING_EXPAND = [
 { id: "zh2a", stage: 2, title: "Cuối tuần của Tiểu Hoa", topic: "Cuối tuần", text: "星期六早上，小花和朋友去公园。她们在公园里跑步、拍照。下午，她们去图书馆看书。小花借了两本书。晚上，她们一起吃饭，饭很好吃。小花说：“今天很快乐！”",
   pinyin: "Xīngqīliù zǎoshang, Xiǎo Huā hé péngyou qù gōngyuán. Tāmen zài gōngyuán lǐ pǎobù, pāizhào. Xiàwǔ, tāmen qù túshūguǎn kàn shū. Xiǎo Huā jiè le liǎng běn shū. Wǎnshang, tāmen yìqǐ chī fàn, fàn hěn hǎochī. Xiǎo Huā shuō: 'Jīntiān hěn kuàilè!'",
   vi: "Sáng thứ Bảy, Tiểu Hoa và bạn đi công viên. Họ chạy bộ, chụp ảnh trong công viên. Buổi chiều, họ đến thư viện đọc sách. Tiểu Hoa mượn hai cuốn sách. Buổi tối, họ cùng ăn cơm, cơm rất ngon. Tiểu Hoa nói: 'Hôm nay rất vui!'",
-  note: "Bài tự soạn theo chủ đề cấp 2; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Sáng thứ Bảy, Tiểu Hoa đi đâu với ai?", o: ["Đi công viên với bạn.", "Đi thư viện với bạn.", "Đi chợ với mẹ.", "Đi công viên một mình."], a: 0, why: "小花和朋友去公园." },
   { q: "Ở công viên, họ làm gì?", o: ["Chạy bộ và chụp ảnh.", "Đọc sách.", "Ăn cơm.", "Bơi."], a: 0, why: "跑步、拍照: chạy bộ, chụp ảnh." },
@@ -21284,7 +21284,7 @@ var ZH_READING_EXPAND = [
 { id: "zh2b", stage: 2, title: "Thời tiết Hà Nội", topic: "Thời tiết", text: "河内的天气很好。春天很暖和，夏天很热，秋天很凉快，冬天不太冷。今天是秋天，天气晴朗，不冷不热。很多人去公园散步。孩子们在公园里玩。",
   pinyin: "Hénèi de tiānqì hěn hǎo. Chūntiān hěn nuǎnhuo, xiàtiān hěn rè, qiūtiān hěn liángkuai, dōngtiān bú tài lěng. Jīntiān shì qiūtiān, tiānqì qínglǎng, bù lěng bú rè. Hěn duō rén qù gōngyuán sànbù. Háizimen zài gōngyuán lǐ wán.",
   vi: "Thời tiết Hà Nội rất tốt. Mùa xuân rất ấm áp, mùa hè rất nóng, mùa thu rất mát mẻ, mùa đông không quá lạnh. Hôm nay là mùa thu, thời tiết quang đãng, không lạnh không nóng. Nhiều người đi dạo trong công viên. Trẻ em chơi trong công viên.",
-  note: "Bài tự soạn theo chủ đề cấp 2; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Mùa xuân Hà Nội thế nào?", o: ["Rất ấm áp.", "Rất nóng.", "Rất lạnh.", "Rất mát."], a: 0, why: "春天很暖和: mùa xuân rất ấm áp." },
   { q: "Mùa hè và mùa đông Hà Nội thế nào?", o: ["Mùa hè rất nóng, mùa đông không quá lạnh.", "Mùa hè mát, mùa đông rất lạnh.", "Mùa hè lạnh, mùa đông nóng.", "Cả hai đều mát."], a: 0, why: "夏天很热，冬天不太冷." },
@@ -21295,7 +21295,7 @@ var ZH_READING_EXPAND = [
 { id: "zh2c", stage: 2, title: "Đi tàu điện ngầm", topic: "Giao thông", text: "今天，我坐地铁去学校。地铁站离我家很近，走路五分钟就到了。地铁很快，也很便宜。我坐了三站，就到了学校。坐地铁比坐公共汽车快。",
   pinyin: "Jīntiān, wǒ zuò dìtiě qù xuéxiào. Dìtiězhàn lí wǒ jiā hěn jìn, zǒulù wǔ fēnzhōng jiù dào le. Dìtiě hěn kuài, yě hěn piányi. Wǒ zuò le sān zhàn, jiù dào le xuéxiào. Zuò dìtiě bǐ zuò gōnggòng qìchē kuài.",
   vi: "Hôm nay, tôi đi tàu điện ngầm đến trường. Ga tàu điện ngầm rất gần nhà tôi, đi bộ năm phút là đến. Tàu điện ngầm rất nhanh, cũng rất rẻ. Tôi đi ba trạm là đến trường. Đi tàu điện ngầm nhanh hơn đi xe buýt.",
-  note: "Bài tự soạn theo chủ đề cấp 2; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Hôm nay người kể đi đâu bằng gì?", o: ["Đi tàu điện ngầm đến trường.", "Đi xe buýt đến trường.", "Đi bộ đến trường.", "Đi taxi đến trường."], a: 0, why: "坐地铁去学校: đi tàu điện ngầm đến trường." },
   { q: "Ga tàu điện ngầm cách nhà bao xa (đi bộ)?", o: ["5 phút.", "10 phút.", "3 phút.", "15 phút."], a: 0, why: "走路五分钟就到了: đi bộ năm phút là đến." },
@@ -21306,7 +21306,7 @@ var ZH_READING_EXPAND = [
 { id: "zh3a", stage: 3, title: "Học tiếng Trung khó nhưng thú vị", topic: "Học tập", text: "虽然汉语很难，但是我很喜欢学。汉字很难写，可是很有意思。我每天学习两个小时，有时候跟中国朋友说话。虽然我还说得不好，但是我一直在进步。我相信，明年我会说得更好。",
   pinyin: "Suīrán Hànyǔ hěn nán, dànshì wǒ hěn xǐhuan xué. Hànzì hěn nán xiě, kěshì hěn yǒu yìsi. Wǒ měitiān xuéxí liǎng gè xiǎoshí, yǒu shíhou gēn Zhōngguó péngyou shuō huà. Suīrán wǒ hái shuō de bù hǎo, dànshì wǒ yìzhí zài jìnbù. Wǒ xiāngxìn, míngnián wǒ huì shuō de gèng hǎo.",
   vi: "Tuy tiếng Trung rất khó, nhưng tôi rất thích học. Chữ Hán rất khó viết, nhưng rất thú vị. Mỗi ngày tôi học hai giờ, thỉnh thoảng nói chuyện với bạn Trung Quốc. Tuy tôi vẫn nói chưa tốt, nhưng tôi luôn tiến bộ. Tôi tin rằng, năm sau tôi sẽ nói tốt hơn.",
-  note: "Bài tự soạn theo chủ đề cấp 3; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Người kể nghĩ tiếng Trung thế nào?", o: ["Rất khó nhưng rất thích học.", "Dễ và thích học.", "Khó và không thích.", "Dễ nhưng không thích."], a: 0, why: "虽然汉语很难，但是我很喜欢学." },
   { q: "Chữ Hán thế nào?", o: ["Rất khó viết nhưng rất thú vị.", "Dễ viết.", "Khó viết và chán.", "Dễ viết nhưng chán."], a: 0, why: "汉字很难写，可是很有意思." },
@@ -21317,7 +21317,7 @@ var ZH_READING_EXPAND = [
 { id: "zh3b", stage: 3, title: "Bảo vệ môi trường", topic: "Môi trường", text: "现在，环境问题越来越严重。很多人乱扔垃圾，空气和水都被污染了。我们应该节约用水，不浪费食物，出门多坐公共汽车，少开车。保护环境不只是政府的事，也是每个人的事。从小事做起，我们的城市会更干净、更美丽。",
   pinyin: "Xiànzài, huánjìng wèntí yuè lái yuè yánzhòng. Hěn duō rén luàn rēng lājī, kōngqì hé shuǐ dōu bèi wūrǎn le. Wǒmen yīnggāi jiéyuē yòng shuǐ, bù làngfèi shíwù, chūmén duō zuò gōnggòng qìchē, shǎo kāichē. Bǎohù huánjìng bù zhǐ shì zhèngfǔ de shì, yě shì měi gè rén de shì. Cóng xiǎoshì zuò qǐ, wǒmen de chéngshì huì gèng gānjìng, gèng měilì.",
   vi: "Hiện nay, vấn đề môi trường ngày càng nghiêm trọng. Nhiều người vứt rác bừa bãi, không khí và nước đều bị ô nhiễm. Chúng ta nên tiết kiệm nước, không lãng phí thức ăn, ra ngoài đi xe buýt nhiều hơn, lái xe ít hơn. Bảo vệ môi trường không chỉ là việc của chính phủ, mà còn là việc của mỗi người. Bắt đầu từ việc nhỏ, thành phố của chúng ta sẽ sạch hơn, đẹp hơn.",
-  note: "Bài tự soạn theo chủ đề cấp 3; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Hiện nay vấn đề môi trường thế nào?", o: ["Ngày càng nghiêm trọng.", "Ngày càng tốt.", "Không thay đổi.", "Không còn vấn đề."], a: 0, why: "环境问题越来越严重." },
   { q: "Nhiều người làm gì gây ô nhiễm?", o: ["Vứt rác bừa bãi.", "Trồng cây.", "Tiết kiệm nước.", "Đi xe buýt."], a: 0, why: "乱扔垃圾: vứt rác bừa bãi." },
@@ -21328,7 +21328,7 @@ var ZH_READING_EXPAND = [
 { id: "s4-zh4a", stage: 4, title: "Làm việc nhóm và thành công", topic: "Công việc", text: "一个项目能不能成功，不但要看个人的能力，而且要看团队的合作。如果每个人只想自己，不帮助别人，项目很难成功。相反，如果大家互相帮助，分享经验，遇到问题一起解决，项目不但会成功，而且会比计划的更好。合作不是一件容易的事，需要耐心，也需要信任。",
   pinyin: "Yí gè xiàngmù néng bu néng chénggōng, búdàn yào kàn gèrén de nénglì, érqiě yào kàn tuánduì de hézuò. Rúguǒ měi gè rén zhǐ xiǎng zìjǐ, bù bāngzhù biéren, xiàngmù hěn nán chénggōng. Xiāngfǎn, rúguǒ dàjiā hùxiāng bāngzhù, fēnxiǎng jīngyàn, yùdào wèntí yìqǐ jiějué, xiàngmù búdàn huì chénggōng, érqiě huì bǐ jìhuà de gèng hǎo. Hézuò bú shì yí jiàn róngyì de shì, xūyào nàixīn, yě xūyào xìnrèn.",
   vi: "Một dự án có thành công hay không, không những phải xem năng lực cá nhân, mà còn phải xem sự hợp tác của nhóm. Nếu mỗi người chỉ nghĩ cho mình, không giúp người khác, dự án rất khó thành công. Ngược lại, nếu mọi người giúp đỡ lẫn nhau, chia sẻ kinh nghiệm, gặp vấn đề cùng giải quyết, dự án không những sẽ thành công, mà còn tốt hơn kế hoạch. Hợp tác không phải là việc dễ dàng, cần kiên nhẫn, cũng cần tin tưởng.",
-  note: "Bài tự soạn theo chủ đề cấp 4; đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Dự án thành công không những xem gì, mà còn xem gì?", o: ["Không những năng lực cá nhân, mà còn sự hợp tác của nhóm.", "Chỉ năng lực cá nhân.", "Chỉ tiền.", "Chỉ thời gian."], a: 0, why: "不但要看个人的能力，而且要看团队的合作." },
   { q: "Nếu mỗi người chỉ nghĩ cho mình thì sao?", o: ["Dự án rất khó thành công.", "Dự án chắc chắn thành công.", "Không ảnh hưởng.", "Dự án nhanh hơn."], a: 0, why: "很难成功: rất khó thành công." },
@@ -21345,7 +21345,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "我叫小红。很高兴认识你。", py: "Wǒ jiào Xiǎo Hóng. Hěn gāoxìng rènshi nǐ.", vi: "Tôi tên là Tiểu Hồng. Rất vui được quen biết bạn." },
   { sp: "B", han: "我也很高兴认识你。", py: "Wǒ yě hěn gāoxìng rènshi nǐ.", vi: "Tôi cũng rất vui được quen biết bạn." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 1; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Người A tên là gì?", o: ["Tiểu Hồng.", "Tiểu Minh.", "Tiểu Hoa.", "Tiểu Long."], a: 0, why: "我叫小红: Tôi tên là Tiểu Hồng." },
   { q: "Người B tên là gì?", o: ["Tiểu Minh.", "Tiểu Hồng.", "Tiểu Hoa.", "Tiểu Long."], a: 0, why: "我叫小明: Tôi tên là Tiểu Minh." },
@@ -21359,7 +21359,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "我今年二十二岁。", py: "Wǒ jīnnián èrshí'èr suì.", vi: "Năm nay tôi hai mươi hai tuổi." },
   { sp: "B", han: "你比我大两岁。", py: "Nǐ bǐ wǒ dà liǎng suì.", vi: "Bạn lớn hơn tôi hai tuổi." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 1; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Người B bao nhiêu tuổi?", o: ["20 tuổi.", "22 tuổi.", "18 tuổi.", "25 tuổi."], a: 0, why: "我今年二十岁: Năm nay tôi hai mươi tuổi." },
   { q: "Người A bao nhiêu tuổi?", o: ["22 tuổi.", "20 tuổi.", "24 tuổi.", "21 tuổi."], a: 0, why: "我今年二十二岁: Năm nay tôi hai mươi hai tuổi." },
@@ -21373,7 +21373,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "我要两瓶。", py: "Wǒ yào liǎng píng.", vi: "Tôi muốn hai chai." },
   { sp: "B", han: "一共四块。", py: "Yígòng sì kuài.", vi: "Tổng cộng bốn đồng." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 1; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Một chai nước giá bao nhiêu?", o: ["2 đồng.", "4 đồng.", "1 đồng.", "3 đồng."], a: 0, why: "两块: hai đồng." },
   { q: "Người A muốn mua mấy chai?", o: ["2 chai.", "1 chai.", "3 chai.", "4 chai."], a: 0, why: "我要两瓶: Tôi muốn hai chai." },
@@ -21387,7 +21387,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "谢谢！", py: "Xièxie!", vi: "Cảm ơn!" },
   { sp: "B", han: "不客气。", py: "Bú kèqi.", vi: "Không có gì." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 1; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Người A hỏi đường đến đâu?", o: ["Trường học.", "Bệnh viện.", "Chợ.", "Công viên."], a: 0, why: "学校在哪儿: trường học ở đâu?" },
   { q: "Đi như thế nào?", o: ["Đi thẳng, ngã tư thứ hai rẽ trái.", "Đi thẳng, ngã tư đầu tiên rẽ phải.", "Rẽ phải ngay.", "Quay lại."], a: 0, why: "往前走，第二个路口左转." },
@@ -21401,7 +21401,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "去学校旁边的饭馆吧，那儿的菜很好吃。", py: "Qù xuéxiào pángbiān de fànguǎn ba, nàr de cài hěn hǎochī.", vi: "Đến quán ăn bên cạnh trường nhé, món ăn ở đó rất ngon." },
   { sp: "B", han: "好，十二点见。", py: "Hǎo, shí'èr diǎn jiàn.", vi: "Được, 12 giờ gặp." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 2; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Họ sẽ ăn trưa ở đâu?", o: ["Quán ăn bên cạnh trường.", "Ở nhà.", "Ở căng tin.", "Ở chợ."], a: 0, why: "学校旁边的饭馆: quán ăn bên cạnh trường." },
   { q: "Vì sao chọn quán đó?", o: ["Vì món ăn ở đó rất ngon.", "Vì rẻ.", "Vì gần nhà.", "Vì đẹp."], a: 0, why: "那儿的菜很好吃: món ăn ở đó rất ngon." },
@@ -21415,7 +21415,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "那我们带伞吧。", py: "Nà wǒmen dài sǎn ba.", vi: "Vậy chúng ta mang ô nhé." },
   { sp: "B", han: "好，还要穿外套。", py: "Hǎo, hái yào chuān wàitào.", vi: "Được, còn phải mặc áo khoác." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 2; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Ngày mai thời tiết thế nào?", o: ["Sẽ mưa.", "Sẽ nắng.", "Sẽ tuyết.", "Sẽ gió."], a: 0, why: "明天会下雨: ngày mai sẽ mưa." },
   { q: "Họ sẽ mang gì?", o: ["Ô.", "Mũ.", "Áo mưa.", "Kính."], a: 0, why: "带伞吧: mang ô nhé." },
@@ -21429,7 +21429,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "车站在哪儿？", py: "Chēzhàn zài nǎr?", vi: "Trạm xe ở đâu?" },
   { sp: "B", han: "在前面，往前走两分钟。", py: "Zài qiánmiàn, wǎng qián zǒu liǎng fēnzhōng.", vi: "Ở phía trước, đi thẳng hai phút." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 2; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Đến thư viện đi xe buýt số mấy?", o: ["Số 5.", "Số 3.", "Số 2.", "Số 8."], a: 0, why: "坐五路车: đi xe buýt số 5." },
   { q: "Đi mấy trạm thì đến?", o: ["3 trạm.", "5 trạm.", "2 trạm.", "4 trạm."], a: 0, why: "坐三站就到了: đi ba trạm là đến." },
@@ -21443,7 +21443,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "爬山虽然很累，但是很有意思。", py: "Pá shān suīrán hěn lèi, dànshì hěn yǒu yìsi.", vi: "Leo núi tuy rất mệt, nhưng rất thú vị." },
   { sp: "B", han: "是啊，我们一起去吧。", py: "Shì a, wǒmen yìqǐ qù ba.", vi: "Đúng vậy, chúng ta cùng đi nhé." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 3; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Thứ Bảy người B muốn làm gì?", o: ["Đi leo núi.", "Ở nhà nghỉ.", "Đi thư viện.", "Đi chợ."], a: 0, why: "星期六想去爬山: thứ Bảy muốn đi leo núi." },
   { q: "Chủ nhật người B làm gì?", o: ["Ở nhà nghỉ ngơi.", "Đi leo núi.", "Đi làm.", "Đi học."], a: 0, why: "星期天在家休息: Chủ nhật ở nhà nghỉ ngơi." },
@@ -21457,7 +21457,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "你应该多锻炼，少熬夜。", py: "Nǐ yīnggāi duō duànliàn, shǎo áoyè.", vi: "Bạn nên tập thể dục nhiều hơn, thức khuya ít hơn." },
   { sp: "B", han: "你说得对，从今天开始，我每天跑步半个小时。", py: "Nǐ shuō de duì, cóng jīntiān kāishǐ, wǒ měitiān pǎobù bàn gè xiǎoshí.", vi: "Bạn nói đúng, bắt đầu từ hôm nay, mỗi ngày tôi chạy bộ nửa giờ." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 3; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Gần đây người B cảm thấy thế nào?", o: ["Không tốt lắm, thường mệt.", "Rất khỏe.", "Bình thường.", "Rất vui."], a: 0, why: "不太好，常常觉得累." },
   { q: "Người A khuyên gì?", o: ["Tập thể dục nhiều hơn, thức khuya ít hơn.", "Ăn nhiều hơn.", "Ngủ nhiều hơn.", "Uống thuốc."], a: 0, why: "多锻炼，少熬夜." },
@@ -21473,7 +21473,7 @@ var ZH_LISTEN_EXPAND = [
   { sp: "A", han: "你对工资有什么要求？", py: "Nǐ duì gōngzī yǒu shénme yāoqiú?", vi: "Bạn có yêu cầu gì về lương?" },
   { sp: "B", han: "我希望工资合理，更重要的是有学习的机会。", py: "Wǒ xīwàng gōngzī hélǐ, gèng zhòngyào de shì yǒu xuéxí de jīhuì.", vi: "Tôi mong lương hợp lý, quan trọng hơn là có cơ hội học hỏi." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề cấp 4; lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn cấp là mức đặt theo chủ đề/trình độ.",
   questions: [
   { q: "Người B muốn vào công ty vì sao?", o: ["Vì công ty không những nổi tiếng, mà môi trường làm việc còn rất tốt.", "Vì lương cao.", "Vì gần nhà.", "Vì bạn bè làm ở đó."], a: 0, why: "不但很有名，而且工作环境很好." },
   { q: "Người B đã làm việc ở đâu, bao lâu?", o: ["Ở một công ty lớn, ba năm.", "Ở một công ty nhỏ, ba năm.", "Ở một công ty lớn, năm năm.", "Ở chính phủ, ba năm."], a: 0, why: "在一家大公司工作了三年." },
@@ -21495,7 +21495,7 @@ var ZH_WRITE_EXPAND = [
    { "q": "这个问题很复杂，我们需要___讨论。(Vấn đề này rất phức tạp, chúng ta cần thảo luận kỹ.)", "o": ["详细", "简单", "随便", "容易"], "a": 0, "why": "详细讨论: thảo luận kỹ lưỡng." },
    { "q": "他对这份工作非常___，每天都很努力。(Anh ấy rất tận tâm với công việc này, ngày nào cũng rất nỗ lực.)", "o": ["认真", "认错", "认识", "认输"], "a": 0, "why": "认真 là nghiêm túc, tận tâm." }
   ],
-  "note": "Bài tự soạn theo chủ đề xã hội và công việc trình độ HSK6 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách. Nhãn cấp là mức đặt theo chủ đề/trình độ."
+  "note": "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách. Nhãn cấp là mức đặt theo chủ đề/trình độ."
  }
 ];
 
@@ -22410,7 +22410,7 @@ var TP_VOCAB_EXPAND3 = [
 ];
 
 var ZH_VOCAB_EXPAND3 = [
-{ topic: "HSK3 — Xã hội và đời sống", hsk: "HSK3", hskNote: "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK3 — Xã hội và đời sống", hsk: "HSK3", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "社会", pinyin: "shèhuì", vi: "xã hội", col: "社会问题", ex: "社会问题需要大家一起解决。", exv: "Vấn đề xã hội cần mọi người cùng nhau giải quyết." },
   { han: "文化", pinyin: "wénhuà", vi: "văn hóa", col: "文化活动", ex: "学校举办了很多文化活动。", exv: "Trường học đã tổ chức nhiều hoạt động văn hóa." },
@@ -22433,7 +22433,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "重要", pinyin: "zhòngyào", vi: "quan trọng", col: "很重要", ex: "健康很重要。", exv: "Sức khỏe rất quan trọng." },
   { han: "严重", pinyin: "yánzhòng", vi: "nghiêm trọng", col: "问题很严重", ex: "这个问题很严重。", exv: "Vấn đề này rất nghiêm trọng." }
   ] },
-{ topic: "HSK3 — Công việc và học tập", hsk: "HSK3", hskNote: "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK3 — Công việc và học tập", hsk: "HSK3", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "努力", pinyin: "nǔlì", vi: "nỗ lực", col: "努力学习", ex: "他每天努力学习。", exv: "Mỗi ngày anh ấy đều nỗ lực học tập." },
   { han: "成功", pinyin: "chénggōng", vi: "thành công", col: "取得成功", ex: "努力才能取得成功。", exv: "Chỉ có nỗ lực mới đạt được thành công." },
@@ -22456,7 +22456,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "能力", pinyin: "nénglì", vi: "năng lực", col: "提高能力", ex: "学习可以提高能力。", exv: "Học tập có thể nâng cao năng lực." },
   { han: "兴趣", pinyin: "xìngqù", vi: "hứng thú", col: "产生兴趣", ex: "我从小对音乐有兴趣。", exv: "Từ nhỏ tôi đã có hứng thú với âm nhạc." }
   ] },
-{ topic: "HSK3 — Sức khỏe và đời sống hằng ngày", hsk: "HSK3", hskNote: "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK3 — Sức khỏe và đời sống hằng ngày", hsk: "HSK3", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "健康", pinyin: "jiànkāng", vi: "sức khỏe, khỏe mạnh", col: "健康生活", ex: "身体健康最重要。", exv: "Sức khỏe cơ thể là quan trọng nhất." },
   { han: "安全", pinyin: "ānquán", vi: "an toàn", col: "安全第一", ex: "过马路要注意安全。", exv: "Qua đường phải chú ý an toàn." },
@@ -22479,7 +22479,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "休息", pinyin: "xiūxi", vi: "nghỉ ngơi", col: "休息日", ex: "累了就好好休息。", exv: "Mệt thì nghỉ ngơi cho tốt." },
   { han: "营养", pinyin: "yíngyǎng", vi: "dinh dưỡng", col: "营养丰富", ex: "这种食物营养丰富。", exv: "Loại thức ăn này rất giàu dinh dưỡng." }
   ] },
-{ topic: "HSK3 — Giao tiếp và cảm xúc", hsk: "HSK3", hskNote: "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK3 — Giao tiếp và cảm xúc", hsk: "HSK3", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "表扬", pinyin: "biǎoyáng", vi: "khen ngợi", col: "受到表扬", ex: "他受到了老师的表扬。", exv: "Anh ấy được thầy giáo khen ngợi." },
   { han: "批评", pinyin: "pīpíng", vi: "phê bình", col: "批评自己", ex: "他先批评自己。", exv: "Anh ấy tự phê bình mình trước." },
@@ -22502,7 +22502,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "担心", pinyin: "dānxīn", vi: "lo lắng", col: "不用担心", ex: "不用担心，一切都会好的。", exv: "Đừng lo lắng, mọi việc sẽ tốt thôi." },
   { han: "满意", pinyin: "mǎnyì", vi: "hài lòng", col: "非常满意", ex: "我对这个结果非常满意。", exv: "Tôi rất hài lòng với kết quả này." }
   ] },
-{ topic: "HSK3 — Thành phố và môi trường", hsk: "HSK3", hskNote: "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK3 — Thành phố và môi trường", hsk: "HSK3", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "城市", pinyin: "chéngshì", vi: "thành phố", col: "城市发展", ex: "这是一个历史悠久的大城市。", exv: "Đây là một thành phố lớn có lịch sử lâu đời." },
   { han: "农村", pinyin: "nóngcūn", vi: "nông thôn", col: "农村生活", ex: "农村生活很安静。", exv: "Cuộc sống nông thôn rất yên tĩnh." },
@@ -22525,7 +22525,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "中心", pinyin: "zhōngxīn", vi: "trung tâm", col: "市中心", ex: "市中心很热闹。", exv: "Trung tâm thành phố rất nhộn nhịp." },
   { han: "周围", pinyin: "zhōuwéi", vi: "xung quanh", col: "周围环境", ex: "周围环境很好。", exv: "Môi trường xung quanh rất tốt." }
   ] },
-{ topic: "HSK4 — Tư duy và đánh giá", hsk: "HSK4", hskNote: "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK4 — Tư duy và đánh giá", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "分析", pinyin: "fēnxī", vi: "phân tích", col: "分析问题", ex: "我们要认真分析问题。", exv: "Chúng ta phải phân tích vấn đề một cách nghiêm túc." },
   { han: "判断", pinyin: "pànduàn", vi: "phán đoán", col: "做出判断", ex: "他很快做出了判断。", exv: "Anh ấy nhanh chóng đưa ra phán đoán." },
@@ -22548,7 +22548,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "假如", pinyin: "jiǎrú", vi: "nếu như, giả sử", col: "假如有时间", ex: "假如有时间，我就去看你。", exv: "Nếu có thời gian, tôi sẽ đến thăm bạn." },
   { han: "因此", pinyin: "yīncǐ", vi: "do đó", col: "因此失败", ex: "他没有准备，因此失败了。", exv: "Anh ấy không chuẩn bị, do đó đã thất bại." }
   ] },
-{ topic: "HSK4 — Kinh tế và xã hội", hsk: "HSK4", hskNote: "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK4 — Kinh tế và xã hội", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "消费", pinyin: "xiāofèi", vi: "tiêu dùng", col: "消费水平", ex: "消费水平提高了。", exv: "Mức tiêu dùng đã tăng lên." },
   { han: "生产", pinyin: "shēngchǎn", vi: "sản xuất", col: "生产产品", ex: "工厂生产很多产品。", exv: "Nhà máy sản xuất nhiều sản phẩm." },
@@ -22571,7 +22571,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "收入", pinyin: "shōurù", vi: "thu nhập", col: "增加收入", ex: "他想增加收入。", exv: "Anh ấy muốn tăng thu nhập." },
   { han: "支出", pinyin: "zhīchū", vi: "chi tiêu", col: "减少支出", ex: "我们要减少支出。", exv: "Chúng ta phải giảm chi tiêu." }
   ] },
-{ topic: "HSK4 — Khoa học và công nghệ", hsk: "HSK4", hskNote: "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK4 — Khoa học và công nghệ", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "科学", pinyin: "kēxué", vi: "khoa học", col: "科学研究", ex: "他从事科学研究。", exv: "Anh ấy làm nghiên cứu khoa học." },
   { han: "技术", pinyin: "jìshù", vi: "kỹ thuật, công nghệ", col: "新技术", ex: "新技术发展很快。", exv: "Công nghệ mới phát triển rất nhanh." },
@@ -22594,7 +22594,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "软件", pinyin: "ruǎnjiàn", vi: "phần mềm", col: "新软件", ex: "公司开发了一个新软件。", exv: "Công ty đã phát triển một phần mềm mới." },
   { han: "程序", pinyin: "chéngxù", vi: "chương trình", col: "编写程序", ex: "他在编写程序。", exv: "Anh ấy đang viết chương trình." }
   ] },
-{ topic: "HSK4 — Văn hóa và giáo dục", hsk: "HSK4", hskNote: "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK4 — Văn hóa và giáo dục", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "传统", pinyin: "chuántǒng", vi: "truyền thống", col: "传统习俗", ex: "我们要保护传统文化。", exv: "Chúng ta phải bảo vệ văn hóa truyền thống." },
   { han: "习俗", pinyin: "xísú", vi: "phong tục", col: "当地习俗", ex: "你要了解当地习俗。", exv: "Bạn phải tìm hiểu phong tục địa phương." },
@@ -22617,7 +22617,7 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "观点", pinyin: "guāndiǎn", vi: "quan điểm", col: "提出观点", ex: "请提出你的观点。", exv: "Hãy đưa ra quan điểm của bạn." },
   { han: "思想", pinyin: "sīxiǎng", vi: "tư tưởng", col: "思想进步", ex: "他的思想很进步。", exv: "Tư tưởng của anh ấy rất tiến bộ." }
   ] },
-{ topic: "HSK4 — Đời sống và sức khỏe nâng cao", hsk: "HSK4", hskNote: "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+{ topic: "HSK4 — Đời sống và sức khỏe nâng cao", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
   { han: "压力", pinyin: "yālì", vi: "áp lực", col: "压力很大", ex: "工作压力很大。", exv: "Áp lực công việc rất lớn." },
   { han: "焦虑", pinyin: "jiāolǜ", vi: "lo âu", col: "感到焦虑", ex: "考试前他感到焦虑。", exv: "Trước kỳ thi anh ấy cảm thấy lo âu." },
@@ -23626,7 +23626,7 @@ TP_VOCAB_EXPAND4.push(
 // khong mao nhan tung tu nam trong danh sach tu de cuong thi HSK 3.0 chinh thuc.
 var ZH_VOCAB_EXPAND4 = [
 { topic: "HSK5 — Công việc và xã hội", hsk: "HSK5",
-  hskNote: "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+  hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "升职", pinyin: "shēngzhí", vi: "thăng chức", col: "升职加薪", ex: "他升职了。", exv: "Anh ấy đã thăng chức." },
 { han: "夜班", pinyin: "yèbān", vi: "ca đêm", col: "上夜班", ex: "他今天上夜班。", exv: "Hôm nay anh ấy làm ca đêm." },
@@ -23650,7 +23650,7 @@ var ZH_VOCAB_EXPAND4 = [
 { han: "观念", pinyin: "guānniàn", vi: "quan niệm", col: "改变观念", ex: "我们要改变观念。", exv: "Chúng ta cần thay đổi quan niệm." },
 ] },
 { topic: "HSK5 — Giáo dục và văn hóa", hsk: "HSK5",
-  hskNote: "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+  hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "启蒙", pinyin: "qǐméng", vi: "khai sáng", col: "启蒙教育", ex: "启蒙教育很重要。", exv: "Giáo dục khai sáng rất quan trọng." },
 { han: "科目", pinyin: "kēmù", vi: "môn học", col: "考试科目", ex: "考试科目有三门。", exv: "Môn thi có ba môn." },
@@ -23676,7 +23676,7 @@ var ZH_VOCAB_EXPAND4 = [
 ];
 ZH_VOCAB_EXPAND4.push(
 { topic: "HSK6 — Kinh tế và chính sách", hsk: "HSK6",
-  hskNote: "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+  hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "财政", pinyin: "cáizhèng", vi: "tài chính công", col: "财政收入", ex: "财政收入增加了。", exv: "Thu tài chính công đã tăng." },
 { han: "行情", pinyin: "hángqíng", vi: "giá thị trường", col: "市场行情", ex: "市场行情很好。", exv: "Giá thị trường rất tốt." },
@@ -23700,7 +23700,7 @@ ZH_VOCAB_EXPAND4.push(
 { han: "废气", pinyin: "fèiqì", vi: "khí thải", col: "排放废气", ex: "工厂排放废气。", exv: "Nhà máy thải khí thải." },
 ] },
 { topic: "HSK6 — Khoa học và môi trường", hsk: "HSK6",
-  hskNote: "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+  hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "气温", pinyin: "qìwēn", vi: "nhiệt độ", col: "气温下降", ex: "气温下降了。", exv: "Nhiệt độ đã giảm." },
 { han: "地震", pinyin: "dìzhèn", vi: "động đất", col: "发生地震", ex: "昨天发生了地震。", exv: "Hôm qua xảy ra động đất." },
@@ -30135,7 +30135,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK5 — Khái niệm trừu tượng",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "概念",
@@ -30302,7 +30302,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK5 — Xã hội và công việc",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "社会",
@@ -30469,7 +30469,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK5 — Tâm lý và cảm xúc",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "心理",
@@ -30636,7 +30636,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK5 — Văn hóa và nghệ thuật",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "文化",
@@ -30803,7 +30803,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK5 — Khoa học và môi trường",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "科技",
@@ -30970,7 +30970,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK6 — Học thuật và nghiên cứu",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "学术",
@@ -31137,7 +31137,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK6 — Kinh tế và pháp luật",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "经济",
@@ -31304,7 +31304,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK6 — Triết học và tư tưởng",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "哲学",
@@ -31471,7 +31471,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK6 — Chính trị và quốc tế",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "政治",
@@ -31638,7 +31638,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK6 — Văn học và ngôn ngữ",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "散文",
@@ -31805,7 +31805,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK3 — Đời sống hằng ngày mở rộng",
     "hsk": "HSK3",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "起床",
@@ -31972,7 +31972,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK3 — Trường học và học tập",
     "hsk": "HSK3",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "课堂",
@@ -32139,7 +32139,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK3 — Du lịch và thành phố",
     "hsk": "HSK3",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "机场",
@@ -32306,7 +32306,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK4 — Công việc và nghề nghiệp",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "面试",
@@ -32473,7 +32473,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK4 — Sức khỏe và lối sống",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "健康",
@@ -32640,7 +32640,7 @@ var ZH_VOCAB_EXPAND5 = [
   {
     "topic": "HSK4 — Giao tiếp xã hội",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "交朋友",
@@ -35061,7 +35061,7 @@ var TP_VOCAB_EXPAND6 = [
 var ZH_VOCAB_EXPAND6 = [
   { "topic": "HSK1 — Đời sống ở trường",
     "hsk": "HSK1",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "操场", "pinyin": "cāochǎng", "vi": "sân vận động", "col": "学校操场", "ex": "我们在操场上跑步。", "exv": "Chúng ta chạy bộ ở sân vận động." },
       { "han": "图书馆", "pinyin": "túshūguǎn", "vi": "thư viện", "col": "学校图书馆", "ex": "我在图书馆看书。", "exv": "Tôi đọc sách ở thư viện." },
@@ -35086,7 +35086,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK3 — Đời sống gia đình",
     "hsk": "HSK3",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "厨房", "pinyin": "chúfáng", "vi": "nhà bếp", "col": "干净的厨房", "ex": "妈妈在厨房做饭。", "exv": "Mẹ nấu cơm trong nhà bếp." },
       { "han": "客厅", "pinyin": "kètīng", "vi": "phòng khách", "col": "宽敞的客厅", "ex": "我们在客厅看电视。", "exv": "Chúng ta xem tivi ở phòng khách." },
@@ -35111,7 +35111,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK3 — Đời sống ở trường nâng cao",
     "hsk": "HSK3",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "课程", "pinyin": "kèchéng", "vi": "khóa học, môn học", "col": "中文课程", "ex": "这门课程很难。", "exv": "Môn học này rất thú vị." },
       { "han": "课后作业", "pinyin": "kèhòu zuòyè", "vi": "bài tập sau giờ học", "col": "完成课后作业", "ex": "我完成了课后作业。", "exv": "Tôi đã hoàn thành bài tập sau giờ học." },
@@ -35136,7 +35136,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK3 — Du lịch",
     "hsk": "HSK3",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "旅行", "pinyin": "lǚxíng", "vi": "du lịch", "col": "去旅行", "ex": "暑假我们去旅行。", "exv": "Nghỉ hè chúng ta đi du lịch." },
       { "han": "导游", "pinyin": "dǎoyóu", "vi": "hướng dẫn viên", "col": "一位导游", "ex": "导游很热情。", "exv": "Hướng dẫn viên rất nhiệt tình." },
@@ -35161,7 +35161,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK3 — Giao tiếp hằng ngày",
     "hsk": "HSK3",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "聊天", "pinyin": "liáotiān", "vi": "trò chuyện", "col": "和朋友聊天", "ex": "我们经常一起聊天。", "exv": "Chúng ta cùng trò chuyện." },
       { "han": "打招呼", "pinyin": "dǎzhāohu", "vi": "chào hỏi", "col": "互相打招呼", "ex": "见面先打招呼。", "exv": "Gặp nhau chào hỏi trước." },
@@ -35186,7 +35186,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK4 — Đời sống công sở",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "上班", "pinyin": "shàngbān", "vi": "đi làm", "col": "准时上班", "ex": "我准时上班。", "exv": "Tôi đi làm đúng giờ." },
       { "han": "下班", "pinyin": "xiàbān", "vi": "tan làm", "col": "按时下班", "ex": "今天按时下班。", "exv": "Hôm nay tan làm đúng giờ." },
@@ -35211,7 +35211,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK4 — Sống khỏe",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "锻炼", "pinyin": "duànliàn", "vi": "rèn luyện", "col": "体育锻炼", "ex": "每天坚持锻炼。", "exv": "Mỗi ngày kiên trì rèn luyện." },
       { "han": "跑步", "pinyin": "pǎobù", "vi": "chạy bộ", "col": "喜欢跑步", "ex": "早上跑步。", "exv": "Buổi sáng chạy bộ." },
@@ -35236,7 +35236,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK4 — Giao thông",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "堵车", "pinyin": "dǔchē", "vi": "tắc đường", "col": "路上堵车", "ex": "路上堵车了。", "exv": "Trên đường tắc đường rồi." },
       { "han": "高峰", "pinyin": "gāofēng", "vi": "giờ cao điểm", "col": "早高峰", "ex": "早高峰很堵。", "exv": "Giờ cao điểm buổi sáng rất tắc." },
@@ -35261,7 +35261,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK4 — Mua sắm",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "商场", "pinyin": "shāngchǎng", "vi": "trung tâm thương mại", "col": "去商场", "ex": "周末去商场。", "exv": "Cuối tuần đến trung tâm thương mại." },
       { "han": "专卖店", "pinyin": "zhuānmàidiàn", "vi": "cửa hàng chuyên bán", "col": "品牌专卖店", "ex": "这是品牌专卖店。", "exv": "Đây là cửa hàng chuyên bán của thương hiệu." },
@@ -35286,7 +35286,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK5 — Tư duy trừu tượng",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "思维", "pinyin": "sīwéi", "vi": "tư duy", "col": "创新思维", "ex": "创新思维很重要。", "exv": "Tư duy đổi mới rất quan trọng." },
       { "han": "逻辑", "pinyin": "luójí", "vi": "logic", "col": "逻辑清楚", "ex": "他的逻辑很清楚。", "exv": "Logic của anh ấy rất rõ ràng." },
@@ -35311,7 +35311,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK5 — Xã hội hiện đại",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "人口", "pinyin": "rénkǒu", "vi": "dân số", "col": "人口增长", "ex": "这里人口众多。", "exv": "Ở đây dân số đông." },
       { "han": "老龄化", "pinyin": "lǎolínghuà", "vi": "già hóa dân số", "col": "人口老龄化", "ex": "人口老龄化严重。", "exv": "Già hóa dân số nghiêm trọng." },
@@ -35336,7 +35336,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK5 — Kinh tế đời sống",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "物价", "pinyin": "wùjià", "vi": "giá cả hàng hóa", "col": "物价上涨", "ex": "物价上涨了。", "exv": "Giá cả hàng hóa đã tăng." },
       { "han": "通货膨胀", "pinyin": "tōnghuò péngzhàng", "vi": "lạm phát", "col": "控制通货膨胀", "ex": "要控制通货膨胀。", "exv": "Phải kiểm soát lạm phát." },
@@ -35361,7 +35361,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK5 — Giao lưu văn hóa",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "传统", "pinyin": "chuántǒng", "vi": "truyền thống", "col": "保持传统", "ex": "要保持传统。", "exv": "Phải giữ truyền thống." },
       { "han": "习俗", "pinyin": "xísú", "vi": "phong tục", "col": "传统习俗", "ex": "要尊重当地习俗。", "exv": "Phải tôn trọng phong tục địa phương." },
@@ -35386,7 +35386,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK5 — Khoa học và công nghệ",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "科学", "pinyin": "kēxué", "vi": "khoa học", "col": "科学技术", "ex": "科学技术发展很快。", "exv": "Khoa học công nghệ phát triển rất nhanh." },
       { "han": "实验", "pinyin": "shíyàn", "vi": "thí nghiệm", "col": "科学实验", "ex": "我们在做实验。", "exv": "Chúng ta đang làm thí nghiệm." },
@@ -35411,7 +35411,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK5 — Bảo vệ môi trường",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "垃圾", "pinyin": "lājī", "vi": "rác", "col": "垃圾处理", "ex": "请把垃圾扔进桶里。", "exv": "Hãy bỏ rác vào thùng." },
       { "han": "分类", "pinyin": "fēnlèi", "vi": "phân loại", "col": "垃圾分类", "ex": "要做好垃圾分类。", "exv": "Phải phân loại rác tốt." },
@@ -35436,7 +35436,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK6 — Triết lý và tư tưởng",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "哲学", "pinyin": "zhéxué", "vi": "triết học", "col": "哲学家", "ex": "我学习哲学。", "exv": "Tôi học triết học." },
       { "han": "思想", "pinyin": "sīxiǎng", "vi": "tư tưởng", "col": "先进思想", "ex": "这是先进思想。", "exv": "Đây là tư tưởng tiên tiến." },
@@ -35461,7 +35461,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK6 — Chính trị và pháp luật",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "政治", "pinyin": "zhèngzhì", "vi": "chính trị", "col": "政治制度", "ex": "政治制度不同。", "exv": "Chế độ chính trị khác nhau." },
       { "han": "民主", "pinyin": "mínzhǔ", "vi": "dân chủ", "col": "民主选举", "ex": "民主选举很重要。", "exv": "Chế độ dân chủ rất quan trọng." },
@@ -35486,7 +35486,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK6 — Lịch sử và văn minh",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "朝代", "pinyin": "cháodài", "vi": "triều đại", "col": "古代朝代", "ex": "中国有很多朝代。", "exv": "Trung Quốc có nhiều triều đại." },
       { "han": "皇帝", "pinyin": "huángdì", "vi": "hoàng đế", "col": "古代皇帝", "ex": "皇帝住在宫里。", "exv": "Hoàng đế ở trong cung." },
@@ -35511,7 +35511,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK6 — Khám phá khoa học",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "科学假说", "pinyin": "kēxué jiǎshuō", "vi": "giả thuyết khoa học", "col": "一个科学假说", "ex": "这是一个科学假说。", "exv": "Đây là một giả thuyết khoa học." },
       { "han": "验证", "pinyin": "yànzhèng", "vi": "kiểm chứng", "col": "实验验证", "ex": "实验验证了假设。", "exv": "Thí nghiệm đã kiểm chứng giả thiết." },
@@ -35536,7 +35536,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK6 — Văn học và nghệ thuật",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "作者", "pinyin": "zuòzhě", "vi": "tác giả", "col": "作者简介", "ex": "这位作者很有名。", "exv": "Tác giả này rất nổi tiếng." },
       { "han": "作品", "pinyin": "zuòpǐn", "vi": "tác phẩm", "col": "代表作品", "ex": "这是他的代表作品。", "exv": "Đây là tác phẩm tiêu biểu của anh ấy." },
@@ -35561,7 +35561,7 @@ var ZH_VOCAB_EXPAND6 = [
     ] },
   { "topic": "HSK6 — Tâm lý và cảm xúc",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "心理", "pinyin": "xīnlǐ", "vi": "tâm lý", "col": "心理咨询", "ex": "心理咨询很重要。", "exv": "Sức khỏe tâm lý rất quan trọng." },
       { "han": "情绪", "pinyin": "qíngxù", "vi": "cảm xúc", "col": "情绪低落", "ex": "要控制情绪。", "exv": "Phải kiểm soát cảm xúc." },
@@ -36640,7 +36640,7 @@ var TP_VOCAB_EXPAND7 = [
 var ZH_VOCAB_EXPAND7 = [
   { "topic": "HSK5 — Kinh tế và tiêu dùng",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "消费", "pinyin": "xiāofèi", "vi": "tiêu dùng", "col": "日常消费", "ex": "我们要控制日常消费。", "exv": "Chúng ta phải kiểm soát tiêu dùng hằng ngày." },
       { "han": "收入", "pinyin": "shōurù", "vi": "thu nhập", "col": "努力增加收入", "ex": "他努力增加收入。", "exv": "Anh ấy muốn tăng thu nhập." },
@@ -36665,7 +36665,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK5 — Giáo dục và nghiên cứu",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "研究", "pinyin": "yánjiū", "vi": "nghiên cứu", "col": "研究项目", "ex": "他在做研究工作。", "exv": "Anh ấy đang làm công việc nghiên cứu." },
       { "han": "论文", "pinyin": "lùnwén", "vi": "luận văn", "col": "发表论文", "ex": "她正在写论文。", "exv": "Cô ấy đang viết luận văn." },
@@ -36690,7 +36690,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK5 — Môi trường và năng lượng",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "环境", "pinyin": "huánjìng", "vi": "môi trường", "col": "爱护环境", "ex": "我们要爱护环境。", "exv": "Chúng ta phải bảo vệ môi trường." },
       { "han": "污染", "pinyin": "wūrǎn", "vi": "ô nhiễm", "col": "治理污染", "ex": "治理污染很重要。", "exv": "Ô nhiễm không khí rất nghiêm trọng." },
@@ -36715,7 +36715,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK5 — Xã hội và pháp luật",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "社会", "pinyin": "shèhuì", "vi": "xã hội", "col": "和谐社会", "ex": "和谐社会需要大家努力。", "exv": "Xã hội phát triển rất nhanh." },
       { "han": "法律", "pinyin": "fǎlǜ", "vi": "pháp luật", "col": "学习法律", "ex": "人人要遵守法律。", "exv": "Mọi người phải tuân thủ pháp luật." },
@@ -36740,7 +36740,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK5 — Công nghệ và truyền thông",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "技术", "pinyin": "jìshù", "vi": "kỹ thuật", "col": "学习技术", "ex": "这是一项新技术。", "exv": "Đây là một kỹ thuật mới." },
       { "han": "科学", "pinyin": "kēxué", "vi": "khoa học", "col": "科学发展", "ex": "科学发展很快。", "exv": "Khoa học phát triển rất nhanh." },
@@ -36765,7 +36765,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK5 — Sức khỏe và y tế",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "健康", "pinyin": "jiànkāng", "vi": "sức khỏe", "col": "恢复健康", "ex": "运动能保持健康。", "exv": "Vận động giúp giữ sức khỏe." },
       { "han": "身体", "pinyin": "shēntǐ", "vi": "cơ thể", "col": "检查身体", "ex": "每年检查一次身体。", "exv": "Mỗi năm kiểm tra cơ thể một lần." },
@@ -36790,7 +36790,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK6 — Triết học và tư tưởng (2)",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "哲学", "pinyin": "zhéxué", "vi": "triết học", "col": "哲学问题", "ex": "他在大学学习哲学。", "exv": "Anh ấy học triết học ở đại học." },
       { "han": "思想", "pinyin": "sīxiǎng", "vi": "tư tưởng", "col": "交流思想", "ex": "我们经常交流思想。", "exv": "Chúng ta thường trao đổi tư tưởng." },
@@ -36815,7 +36815,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK6 — Văn học và nghệ thuật (2)",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "文学", "pinyin": "wénxué", "vi": "văn học", "col": "学习文学", "ex": "她喜欢学习文学。", "exv": "Cô ấy thích học văn học." },
       { "han": "小说", "pinyin": "xiǎoshuō", "vi": "tiểu thuyết", "col": "科幻小说", "ex": "我喜欢读科幻小说。", "exv": "Tôi thích đọc tiểu thuyết." },
@@ -36840,7 +36840,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK6 — Chính trị và quốc tế (2)",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "政治", "pinyin": "zhèngzhì", "vi": "chính trị", "col": "政治课", "ex": "政治课很重要。", "exv": "Đời sống chính trị rất quan trọng." },
       { "han": "政府", "pinyin": "zhèngfǔ", "vi": "chính phủ", "col": "地方政府", "ex": "政府工作要公开。", "exv": "Công việc chính phủ phải công khai." },
@@ -36865,7 +36865,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK6 — Khoa học và khám phá",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "发现", "pinyin": "fāxiàn", "vi": "phát hiện", "col": "惊人发现", "ex": "科学家有了新发现。", "exv": "Nhà khoa học đã có phát hiện mới." },
       { "han": "探索", "pinyin": "tànsuǒ", "vi": "khám phá", "col": "探索宇宙", "ex": "人类在探索宇宙。", "exv": "Nhân loại đang khám phá vũ trụ." },
@@ -36890,7 +36890,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK6 — Tâm lý và hành vi",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "情绪", "pinyin": "qíngxù", "vi": "cảm xúc", "col": "调节情绪", "ex": "要学会控制情绪。", "exv": "Phải học cách kiểm soát cảm xúc." },
       { "han": "感觉", "pinyin": "gǎnjué", "vi": "cảm giác", "col": "感觉良好", "ex": "我的感觉良好。", "exv": "Cảm giác của tôi rất tốt." },
@@ -36915,7 +36915,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK6 — Lịch sử và văn hóa",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "历史", "pinyin": "lìshǐ", "vi": "lịch sử", "col": "学习历史", "ex": "我们要学习历史。", "exv": "Chúng ta phải học lịch sử." },
       { "han": "古代", "pinyin": "gǔdài", "vi": "thời cổ đại", "col": "古代建筑", "ex": "这座古代建筑很有名。", "exv": "Kiến trúc cổ đại này rất nổi tiếng." },
@@ -36940,7 +36940,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK4 — Du lịch và khách sạn",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "旅行", "pinyin": "lǚxíng", "vi": "du lịch, đi chơi", "col": "旅行计划", "ex": "假期我们去旅行。", "exv": "Kỳ nghỉ chúng ta đi du lịch." },
       { "han": "旅游", "pinyin": "lǚyóu", "vi": "du lịch", "col": "旅游业", "ex": "这里有很多旅游景点。", "exv": "Ở đây có nhiều điểm du lịch." },
@@ -36965,7 +36965,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK4 — Thể thao và giải trí",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "比赛", "pinyin": "bǐsài", "vi": "thi đấu", "col": "参加比赛", "ex": "他参加了比赛。", "exv": "Anh ấy đã tham gia thi đấu." },
       { "han": "运动员", "pinyin": "yùndòngyuán", "vi": "vận động viên", "col": "优秀运动员", "ex": "她是优秀运动员。", "exv": "Cô ấy là vận động viên xuất sắc." },
@@ -36990,7 +36990,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK4 — Giao thông và thành phố",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "交通", "pinyin": "jiāotōng", "vi": "giao thông", "col": "交通规则", "ex": "这里交通方便。", "exv": "Giao thông ở đây thuận tiện." },
       { "han": "堵车", "pinyin": "dǔchē", "vi": "tắc đường", "col": "严重堵车", "ex": "早上路上堵车。", "exv": "Buổi sáng đường tắc." },
@@ -37015,7 +37015,7 @@ var ZH_VOCAB_EXPAND7 = [
     ] },
   { "topic": "HSK4 — Mua sắm và dịch vụ",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "购物", "pinyin": "gòuwù", "vi": "mua sắm", "col": "购物中心", "ex": "周末去购物。", "exv": "Cuối tuần đi mua sắm." },
       { "han": "商场", "pinyin": "shāngchǎng", "vi": "trung tâm thương mại", "col": "商场打折", "ex": "我们去商场买衣服。", "exv": "Chúng ta đến trung tâm thương mại mua quần áo." },
@@ -37840,7 +37840,7 @@ var TC_VOCAB_EXPAND9 = [
 var ZH_VOCAB_EXPAND8 = [
   { "topic": "HSK5 — Tài chính và ngân hàng",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "证券", "pinyin": "zhèngquàn", "vi": "chứng khoán", "col": "证券市场", "ex": "证券市场变化很快。", "exv": "Thị trường chứng khoán thay đổi rất nhanh." },
       { "han": "股票", "pinyin": "gǔpiào", "vi": "cổ phiếu", "col": "购买股票", "ex": "他购买了一些股票。", "exv": "Anh ấy đã mua một số cổ phiếu." },
@@ -37865,7 +37865,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK5 — Bệnh viện và điều trị",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "诊断", "pinyin": "zhěnduàn", "vi": "chẩn đoán", "col": "医生诊断", "ex": "医生诊断了他的病。", "exv": "Bác sĩ đã chẩn đoán bệnh của anh ấy." },
       { "han": "治疗", "pinyin": "zhìliáo", "vi": "điều trị", "col": "治疗方案", "ex": "病人正在接受治疗。", "exv": "Bệnh nhân đang được điều trị." },
@@ -37890,7 +37890,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK5 — Pháp luật và trật tự",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "法律", "pinyin": "fǎlǜ", "vi": "pháp luật", "col": "法律常识", "ex": "公民要遵守法律。", "exv": "Công dân phải tuân thủ pháp luật." },
       { "han": "法规", "pinyin": "fǎguī", "vi": "quy định pháp luật", "col": "相关法规", "ex": "请了解相关法规。", "exv": "Hãy tìm hiểu quy định pháp luật liên quan." },
@@ -37915,7 +37915,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK5 — Giáo dục nghề nghiệp",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "职业", "pinyin": "zhíyè", "vi": "nghề nghiệp", "col": "职业规划", "ex": "年轻人要选择职业。", "exv": "Người trẻ phải chọn nghề nghiệp." },
       { "han": "培训", "pinyin": "péixùn", "vi": "đào tạo", "col": "参加培训", "ex": "员工参加了技能培训。", "exv": "Nhân viên đã tham gia đào tạo kỹ năng." },
@@ -37940,7 +37940,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK5 — Giao thông và logistics",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "运输", "pinyin": "yùnshū", "vi": "vận chuyển", "col": "货物运输", "ex": "公司负责货物运输。", "exv": "Công ty phụ trách vận chuyển hàng hóa." },
       { "han": "物流", "pinyin": "wùliú", "vi": "logistics", "col": "物流公司", "ex": "这家物流公司很有名。", "exv": "Công ty logistics này rất nổi tiếng." },
@@ -37965,7 +37965,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK5 — Truyền thông và dư luận",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "媒体", "pinyin": "méitǐ", "vi": "truyền thông", "col": "新闻媒体", "ex": "新闻媒体报道了这件事。", "exv": "Truyền thông tin tức đã đưa tin việc này." },
       { "han": "记者", "pinyin": "jìzhě", "vi": "phóng viên", "col": "记者采访", "ex": "记者采访了市长。", "exv": "Phóng viên đã phỏng vấn thị trưởng." },
@@ -37990,7 +37990,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK6 — Kinh tế học và chính sách",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "宏观", "pinyin": "hóngguān", "vi": "vĩ mô", "col": "宏观经济", "ex": "政府关注宏观经济。", "exv": "Chính phủ quan tâm kinh tế vĩ mô." },
       { "han": "微观", "pinyin": "wēiguān", "vi": "vi mô", "col": "微观经济", "ex": "微观经济也很重要。", "exv": "Kinh tế vi mô cũng rất quan trọng." },
@@ -38015,7 +38015,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK6 — Triết học phương Đông",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "哲学", "pinyin": "zhéxué", "vi": "triết học", "col": "中国哲学", "ex": "他研究中国哲学。", "exv": "Anh ấy nghiên cứu triết học Trung Quốc." },
       { "han": "儒家", "pinyin": "rújiā", "vi": "Nho gia", "col": "儒家思想", "ex": "儒家思想影响深远。", "exv": "Tư tưởng Nho gia ảnh hưởng sâu rộng." },
@@ -38040,7 +38040,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK6 — Nghệ thuật đương đại",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "当代", "pinyin": "dāngdài", "vi": "đương đại", "col": "当代艺术", "ex": "当代艺术很有趣。", "exv": "Nghệ thuật đương đại rất thú vị." },
       { "han": "抽象", "pinyin": "chōuxiàng", "vi": "trừu tượng", "col": "抽象画", "ex": "他喜欢抽象画。", "exv": "Anh ấy thích tranh trừu tượng." },
@@ -38065,7 +38065,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK6 — Ngoại giao và xung đột",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "外交", "pinyin": "wàijiāo", "vi": "ngoại giao", "col": "外交事务", "ex": "国家制定了外交政策。", "exv": "Quốc gia đã đặt chính sách ngoại giao." },
       { "han": "谈判", "pinyin": "tánpàn", "vi": "đàm phán", "col": "和平谈判", "ex": "双方进行了和平谈判。", "exv": "Hai bên đã đàm phán hòa bình." },
@@ -38090,7 +38090,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK6 — Sinh học và môi trường",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "生态", "pinyin": "shēngtài", "vi": "sinh thái", "col": "生态系统", "ex": "保护生态系统很重要。", "exv": "Bảo vệ hệ sinh thái rất quan trọng." },
       { "han": "生物", "pinyin": "shēngwù", "vi": "sinh vật", "col": "生物多样性", "ex": "生物多样性正在减少。", "exv": "Đa dạng sinh vật đang giảm." },
@@ -38115,7 +38115,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK6 — Lịch sử hiện đại",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "革命", "pinyin": "gémìng", "vi": "cách mạng", "col": "工业革命", "ex": "工业革命改变了世界。", "exv": "Cách mạng công nghiệp đã thay đổi thế giới." },
       { "han": "改革", "pinyin": "gǎigé", "vi": "cải cách", "col": "改革开放", "ex": "改革开放促进了发展。", "exv": "Cải cách mở cửa thúc đẩy phát triển." },
@@ -38140,7 +38140,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK4 — Nhà hàng và ẩm thực",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "餐馆", "pinyin": "cānguǎn", "vi": "nhà hàng", "col": "一家餐馆", "ex": "这家餐馆很有名。", "exv": "Nhà hàng này rất nổi tiếng." },
       { "han": "菜单", "pinyin": "càidān", "vi": "thực đơn", "col": "看菜单", "ex": "请看菜单点菜。", "exv": "Hãy xem thực đơn gọi món." },
@@ -38165,7 +38165,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK4 — Thời tiết và mùa",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "天气", "pinyin": "tiānqì", "vi": "thời tiết", "col": "天气预报", "ex": "请看天气预报。", "exv": "Hãy xem dự báo thời tiết." },
       { "han": "气温", "pinyin": "qìwēn", "vi": "nhiệt độ", "col": "气温变化", "ex": "明天气温下降。", "exv": "Ngày mai nhiệt độ giảm." },
@@ -38190,7 +38190,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK4 — Gia đình và bạn bè",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "家庭", "pinyin": "jiātíng", "vi": "gia đình", "col": "幸福家庭", "ex": "他有一个幸福家庭。", "exv": "Anh ấy có một gia đình hạnh phúc." },
       { "han": "父母", "pinyin": "fùmǔ", "vi": "cha mẹ", "col": "孝敬父母", "ex": "我们要孝敬父母。", "exv": "Chúng ta phải hiếu kính cha mẹ." },
@@ -38215,7 +38215,7 @@ var ZH_VOCAB_EXPAND8 = [
     ] },
   { "topic": "HSK4 — Công việc và nghề nghiệp (2)",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "工作", "pinyin": "gōngzuò", "vi": "công việc", "col": "工作机会", "ex": "他在找一份新工作。", "exv": "Anh ấy đang tìm việc." },
       { "han": "上班", "pinyin": "shàngbān", "vi": "đi làm", "col": "上班时间", "ex": "员工要按时上班。", "exv": "Nhân viên phải đi làm đúng giờ." },
@@ -42250,7 +42250,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK5 — Pháp luật và tòa án",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "法律",
@@ -42417,7 +42417,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK5 — Báo chí và tin tức",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "新闻",
@@ -42584,7 +42584,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK5 — Tâm lý và cảm xúc nâng cao",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "情绪",
@@ -42751,7 +42751,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK5 — Giao thông và thành phố",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "交通",
@@ -42918,7 +42918,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK5 — Thể thao và thi đấu",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "冠军",
@@ -43085,7 +43085,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK5 — Giáo dục và thi cử",
     "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "录取",
@@ -43252,7 +43252,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK6 — Triết học và tư tưởng (3)",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "哲学",
@@ -43419,7 +43419,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK6 — Kinh tế vĩ mô",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "宏观",
@@ -43586,7 +43586,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK6 — Ngoại giao và quốc tế",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "建交",
@@ -43753,7 +43753,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK6 — Văn học và nghệ thuật (3)",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "文学",
@@ -43920,7 +43920,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK6 — Khoa học và công nghệ",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "科研",
@@ -44087,7 +44087,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK6 — Xã hội và dân sinh",
     "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "民生",
@@ -44254,7 +44254,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK4 — Mua sắm và mặc cả",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "讨价还价",
@@ -44421,7 +44421,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK4 — Du lịch và khách sạn (2)",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "景点",
@@ -44588,7 +44588,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK4 — Sức khỏe và khám bệnh",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "挂号",
@@ -44755,7 +44755,7 @@ var ZH_VOCAB_EXPAND9 = [
   {
     "topic": "HSK4 — Công việc và văn phòng",
     "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       {
         "han": "加班",
@@ -45692,7 +45692,7 @@ var TC_VOCAB_EXPAND11 = [
 ];
 var ZH_VOCAB_EXPAND10 = [
   { "topic": "HSK5 — Thuế và tài chính cá nhân", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "税收", "pinyin": "shuìshōu", "vi": "thuế", "col": "税收政策", "ex": "税收政策要公平。", "exv": "Chính sách thuế phải công bằng." },
       { "han": "税务", "pinyin": "shuìwù", "vi": "thuế vụ", "col": "税务部门", "ex": "税务部门负责收税。", "exv": "Cơ quan thuế vụ phụ trách thu thuế." },
@@ -45716,7 +45716,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "审计", "pinyin": "shěnjì", "vi": "kiểm toán", "col": "审计工作", "ex": "审计工作很细致。", "exv": "Công việc kiểm toán rất tỉ mỉ." }
     ] },
   { "topic": "HSK5 — Bảo hiểm và an sinh", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "保险", "pinyin": "bǎoxiǎn", "vi": "bảo hiểm", "col": "买保险", "ex": "出门要买保险。", "exv": "Đi xa phải mua bảo hiểm." },
       { "han": "投保", "pinyin": "tóubǎo", "vi": "mua bảo hiểm", "col": "投保手续", "ex": "投保手续很简单。", "exv": "Thủ tục mua bảo hiểm rất đơn giản." },
@@ -45740,7 +45740,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "权益", "pinyin": "quányì", "vi": "quyền lợi", "col": "保护权益", "ex": "要保护员工权益。", "exv": "Phải bảo vệ quyền lợi nhân viên." }
     ] },
   { "topic": "HSK5 — Nông nghiệp và thực phẩm", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "农业", "pinyin": "nóngyè", "vi": "nông nghiệp", "col": "发展农业", "ex": "国家发展农业。", "exv": "Nhà nước phát triển nông nghiệp." },
       { "han": "农民", "pinyin": "nóngmín", "vi": "nông dân", "col": "农民生活", "ex": "农民生活改善了。", "exv": "Đời sống nông dân đã cải thiện." },
@@ -45764,7 +45764,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "价格", "pinyin": "jiàgé", "vi": "giá cả", "col": "价格水平", "ex": "请注意价格水平。", "exv": "Hãy chú ý tới giá cả." }
     ] },
   { "topic": "HSK5 — Năng lượng và môi trường", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "能源", "pinyin": "néngyuán", "vi": "năng lượng", "col": "能源结构", "ex": "能源结构很重要。", "exv": "Năng lượng rất quan trọng." },
       { "han": "煤炭", "pinyin": "méitàn", "vi": "than đá", "col": "煤炭资源", "ex": "煤炭资源有限。", "exv": "Tài nguyên than đá có hạn." },
@@ -45788,7 +45788,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "环境", "pinyin": "huánjìng", "vi": "môi trường", "col": "环境治理", "ex": "请注意环境治理。", "exv": "Hãy chú ý tới môi trường." }
     ] },
   { "topic": "HSK5 — Thể dục và sức khỏe cộng đồng", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "锻炼", "pinyin": "duànliàn", "vi": "rèn luyện", "col": "身体锻炼", "ex": "身体锻炼很重要。", "exv": "Rèn luyện rất quan trọng." },
       { "han": "跑步", "pinyin": "pǎobù", "vi": "chạy bộ", "col": "跑步锻炼", "ex": "早上跑步锻炼。", "exv": "Buổi sáng chạy bộ rèn luyện." },
@@ -45812,7 +45812,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "视力", "pinyin": "shìlì", "vi": "thị lực", "col": "保护视力", "ex": "要保护视力。", "exv": "Phải bảo vệ thị lực." }
     ] },
   { "topic": "HSK5 — Du lịch và văn hóa địa phương", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "游客", "pinyin": "yóukè", "vi": "du khách", "col": "游客很多", "ex": "这里游客很多。", "exv": "Ở đây du khách rất đông." },
       { "han": "导游", "pinyin": "dǎoyóu", "vi": "hướng dẫn viên du lịch", "col": "导游服务", "ex": "导游服务很重要。", "exv": "Hướng dẫn viên du lịch rất quan trọng." },
@@ -45837,7 +45837,7 @@ var ZH_VOCAB_EXPAND10 = [
     ] }
 ,
   { "topic": "HSK6 — Kinh tế số và thương mại điện tử", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "数字", "pinyin": "shùzì", "vi": "kỹ thuật số", "col": "数字经济", "ex": "数字经济发展很快。", "exv": "Kinh tế số phát triển rất nhanh." },
       { "han": "数据", "pinyin": "shùjù", "vi": "dữ liệu", "col": "数据分析", "ex": "数据分析很重要。", "exv": "Phân tích dữ liệu rất quan trọng." },
@@ -45861,7 +45861,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "创业", "pinyin": "chuàngyè", "vi": "khởi nghiệp", "col": "创业机会", "ex": "年轻人创业机会多。", "exv": "Người trẻ có nhiều cơ hội khởi nghiệp." }
     ] },
   { "topic": "HSK6 — Biến đổi khí hậu và chính sách", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "气候", "pinyin": "qìhòu", "vi": "khí hậu", "col": "气候问题", "ex": "我们要了解气候问题。", "exv": "Chúng ta phải tìm hiểu khí hậu." },
       { "han": "全球", "pinyin": "quánqiú", "vi": "toàn cầu", "col": "全球变暖", "ex": "全球变暖要重视。", "exv": "Nóng lên toàn cầu phải coi trọng." },
@@ -45885,7 +45885,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "持续", "pinyin": "chíxù", "vi": "bền vững, liên tục", "col": "持续发展", "ex": "持续发展很重要。", "exv": "Phát triển bền vững rất quan trọng." }
     ] },
   { "topic": "HSK6 — Giáo dục đại học và nghiên cứu", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "教授", "pinyin": "jiàoshòu", "vi": "giáo sư", "col": "教授讲座", "ex": "请注意教授讲座。", "exv": "Hãy chú ý tới giáo sư." },
       { "han": "讲座", "pinyin": "jiǎngzuò", "vi": "bài giảng", "col": "讲座内容", "ex": "讲座内容很重要。", "exv": "Bài giảng rất quan trọng." },
@@ -45909,7 +45909,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "图书馆", "pinyin": "túshūguǎn", "vi": "thư viện", "col": "图书馆规则", "ex": "请注意图书馆规则。", "exv": "Hãy chú ý tới thư viện." }
     ] },
   { "topic": "HSK6 — Y học cổ truyền và hiện đại", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "中医", "pinyin": "zhōngyī", "vi": "Đông y", "col": "看中医", "ex": "奶奶喜欢看中医。", "exv": "Bà thích khám Đông y." },
       { "han": "针灸", "pinyin": "zhēnjiǔ", "vi": "châm cứu", "col": "针灸治疗", "ex": "针灸治疗很有效。", "exv": "Châm cứu điều trị rất hiệu quả." },
@@ -45933,7 +45933,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "药房", "pinyin": "yàofáng", "vi": "hiệu thuốc", "col": "去药房", "ex": "去药房买药。", "exv": "Đến hiệu thuốc mua thuốc." }
     ] },
   { "topic": "HSK6 — Vũ trụ và công nghệ cao", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "卫星", "pinyin": "wèixīng", "vi": "vệ tinh", "col": "卫星通信", "ex": "卫星通信很重要。", "exv": "Vệ tinh rất quan trọng." },
       { "han": "火箭", "pinyin": "huǒjiàn", "vi": "tên lửa", "col": "火箭发射", "ex": "火箭发射很壮观。", "exv": "Phóng tên lửa rất hùng vĩ." },
@@ -45957,7 +45957,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "代码", "pinyin": "dàimǎ", "vi": "mã nguồn", "col": "写代码", "ex": "程序员写代码。", "exv": "Lập trình viên viết mã nguồn." }
     ] },
   { "topic": "HSK6 — Ngôn ngữ và dịch thuật", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "翻译", "pinyin": "fānyì", "vi": "dịch thuật", "col": "翻译水平", "ex": "我们要了解翻译水平。", "exv": "Chúng ta phải tìm hiểu dịch thuật." },
       { "han": "口译", "pinyin": "kǒuyì", "vi": "phiên dịch", "col": "做口译", "ex": "她做口译工作。", "exv": "Cô ấy làm công việc phiên dịch." },
@@ -45982,7 +45982,7 @@ var ZH_VOCAB_EXPAND10 = [
     ] }
 ,
   { "topic": "HSK4 — Ngân hàng và thanh toán", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "银行", "pinyin": "yínháng", "vi": "ngân hàng", "col": "银行职员", "ex": "银行职员很重要。", "exv": "Ngân hàng rất quan trọng." },
       { "han": "账户", "pinyin": "zhànghù", "vi": "tài khoản", "col": "开账户", "ex": "开账户要身份证。", "exv": "Mở tài khoản cần chứng minh thư." },
@@ -46006,7 +46006,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "支票", "pinyin": "zhīpiào", "vi": "séc", "col": "开支票", "ex": "公司开支票付款。", "exv": "Công ty mở séc thanh toán." }
     ] },
   { "topic": "HSK4 — Thời tiết và du lịch", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "天气", "pinyin": "tiānqì", "vi": "thời tiết", "col": "天气很好", "ex": "明天天气会变冷。", "exv": "Ngày mai thời tiết sẽ trở lạnh." },
       { "han": "晴天", "pinyin": "qíngtiān", "vi": "ngày nắng", "col": "晴天出门", "ex": "晴天出门散步。", "exv": "Ngày nắng ra ngoài đi dạo." },
@@ -46030,7 +46030,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "炎热", "pinyin": "yánrè", "vi": "nóng bức", "col": "炎热夏天", "ex": "炎热夏天要多喝水。", "exv": "Mùa hè nóng bức phải uống nhiều nước." }
     ] },
   { "topic": "HSK4 — Thể thao và sức khỏe", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "运动", "pinyin": "yùndòng", "vi": "vận động", "col": "运动习惯", "ex": "运动习惯很好。", "exv": "Thói quen vận động rất tốt." },
       { "han": "比赛", "pinyin": "bǐsài", "vi": "thi đấu", "col": "比赛规则", "ex": "我们要了解比赛规则。", "exv": "Chúng ta phải tìm hiểu thi đấu." },
@@ -46054,7 +46054,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "速度", "pinyin": "sùdù", "vi": "tốc độ", "col": "提高速度", "ex": "提高速度要练习。", "exv": "Nâng cao tốc độ phải luyện tập." }
     ] },
   { "topic": "HSK4 — Mua sắm trực tuyến", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "网购", "pinyin": "wǎnggòu", "vi": "mua sắm trực tuyến", "col": "网购安全", "ex": "我们要了解网购安全。", "exv": "Chúng ta phải tìm hiểu mua sắm trực tuyến." },
       { "han": "下单", "pinyin": "xiàdān", "vi": "đặt hàng", "col": "下单付款", "ex": "下单付款很快。", "exv": "Đặt hàng thanh toán rất nhanh." },
@@ -46820,7 +46820,7 @@ var TC_VOCAB_EXPAND12 = [
 ];
 var ZH_VOCAB_EXPAND11 = [
   { "topic": "HSK6 — Triết học và tư duy", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "哲学", "pinyin": "zhéxué", "vi": "triết học", "col": "当代哲学思想", "ex": "哲学思想影响很大。", "exv": "Tư tưởng triết học ảnh hưởng rất lớn." },
       { "han": "逻辑", "pinyin": "luójí", "vi": "logic", "col": "逻辑顺序", "ex": "逻辑思维很重要，值得思考。", "exv": "Tư duy logic rất quan trọng." },
@@ -46844,7 +46844,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "思维", "pinyin": "sīwéi", "vi": "tư duy", "col": "思维方式", "ex": "思维方式要改变。", "exv": "Cách tư duy phải thay đổi." }
     ] },
   { "topic": "HSK6 — Kinh tế vĩ mô (2)", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "通货膨胀", "pinyin": "tōnghuò péngzhàng", "vi": "lạm phát", "col": "通货膨胀率上升", "ex": "通货膨胀率很高。", "exv": "Tỉ lệ lạm phát rất cao." },
       { "han": "失业", "pinyin": "shīyè", "vi": "thất nghiệp", "col": "失业人数", "ex": "失业问题要解决，值得思考。", "exv": "Vấn đề thất nghiệp phải giải quyết." },
@@ -46868,7 +46868,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "利润", "pinyin": "lìrùn", "vi": "lợi nhuận", "col": "利润下降", "ex": "利润下降了。", "exv": "Lợi nhuận đã giảm xuống." }
     ] },
   { "topic": "HSK6 — Pháp luật và xã hội", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "法律", "pinyin": "fǎlǜ", "vi": "pháp luật", "col": "法律制度", "ex": "法律规定要遵守，值得思考。", "exv": "Quy định pháp luật phải tuân thủ." },
       { "han": "法规", "pinyin": "fǎguī", "vi": "quy định pháp luật", "col": "遵守法规", "ex": "相关法规很多。", "exv": "Quy định pháp luật liên quan rất nhiều." },
@@ -46892,7 +46892,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "公平", "pinyin": "gōngpíng", "vi": "công bằng", "col": "公平公正", "ex": "公平竞争很重要。", "exv": "Cạnh tranh công bằng rất quan trọng." }
     ] },
   { "topic": "HSK6 — Môi trường và tài nguyên", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "环境", "pinyin": "huánjìng", "vi": "môi trường", "col": "环境优美", "ex": "环境保护很重要，值得思考。", "exv": "Bảo vệ môi trường rất quan trọng." },
       { "han": "污染", "pinyin": "wūrǎn", "vi": "ô nhiễm", "col": "污染源", "ex": "污染非常严重。", "exv": "Ô nhiễm vô cùng nghiêm trọng." },
@@ -46917,7 +46917,7 @@ var ZH_VOCAB_EXPAND11 = [
     ] }
 ,
   { "topic": "HSK6 — Văn hóa và nghệ thuật", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "文化", "pinyin": "wénhuà", "vi": "văn hóa", "col": "中外文化交流", "ex": "文化交流很重要。", "exv": "Giao lưu văn hóa rất quan trọng." },
       { "han": "传统", "pinyin": "chuántǒng", "vi": "truyền thống", "col": "弘扬传统文化", "ex": "传统文化要保护。", "exv": "Văn hóa truyền thống phải bảo vệ." },
@@ -46941,7 +46941,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "创作", "pinyin": "chuàngzuò", "vi": "sáng tác", "col": "创作灵感", "ex": "创作灵感很重要。", "exv": "Cảm hứng sáng tác rất quan trọng." }
     ] },
   { "topic": "HSK6 — Tâm lý và giáo dục", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "心理", "pinyin": "xīnlǐ", "vi": "tâm lý", "col": "心理准备", "ex": "心理健康很重要，值得思考。", "exv": "Sức khỏe tâm lý rất quan trọng." },
       { "han": "情绪", "pinyin": "qíngxù", "vi": "cảm xúc", "col": "情绪高涨", "ex": "情绪非常稳定。", "exv": "Cảm xúc vô cùng ổn định." },
@@ -46966,7 +46966,7 @@ var ZH_VOCAB_EXPAND11 = [
     ] }
 ,
   { "topic": "HSK5 — Y tế và sức khỏe", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "健康", "pinyin": "jiànkāng", "vi": "sức khỏe", "col": "健康长寿", "ex": "身体健康最重要，值得思考。", "exv": "Sức khỏe cơ thể là quan trọng nhất." },
       { "han": "疾病", "pinyin": "jíbìng", "vi": "bệnh tật", "col": "常见疾病", "ex": "预防疾病很重要。", "exv": "Phòng bệnh rất quan trọng." },
@@ -46990,7 +46990,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "疫苗", "pinyin": "yìmiáo", "vi": "vắc-xin", "col": "疫苗接种率", "ex": "接种疫苗很重要。", "exv": "Tiêm vắc-xin rất quan trọng." }
     ] },
   { "topic": "HSK5 — Khoa học và công nghệ (2)", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "科学", "pinyin": "kēxué", "vi": "khoa học", "col": "科学精神", "ex": "科学研究很重要。", "exv": "Nghiên cứu khoa học rất quan trọng." },
       { "han": "技术", "pinyin": "jìshù", "vi": "kỹ thuật", "col": "技术创新", "ex": "新技术发展很快，值得思考。", "exv": "Kỹ thuật mới phát triển rất nhanh." },
@@ -47014,7 +47014,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "智能", "pinyin": "zhìnéng", "vi": "thông minh", "col": "智能系统", "ex": "智能手机很普及。", "exv": "Điện thoại thông minh rất phổ biến." }
     ] },
   { "topic": "HSK5 — Giao thông và du lịch", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "交通", "pinyin": "jiāotōng", "vi": "giao thông", "col": "交通便利", "ex": "交通非常方便。", "exv": "Giao thông vô cùng thuận tiện." },
       { "han": "机场", "pinyin": "jīchǎng", "vi": "sân bay", "col": "国际机场", "ex": "国际机场很大。", "exv": "Sân bay quốc tế rất lớn." },
@@ -47038,7 +47038,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "换乘", "pinyin": "huànchéng", "vi": "chuyển tuyến", "col": "换乘公交", "ex": "换乘地铁很方便。", "exv": "Chuyển tuyến tàu điện ngầm rất tiện." }
     ] },
   { "topic": "HSK5 — Nghề nghiệp và công việc", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "职业", "pinyin": "zhíyè", "vi": "nghề nghiệp", "col": "职业选择", "ex": "职业选择很重要。", "exv": "Lựa chọn nghề nghiệp rất quan trọng." },
       { "han": "工作", "pinyin": "gōngzuò", "vi": "công việc", "col": "工作努力", "ex": "工作非常努力。", "exv": "Làm việc vô cùng chăm chỉ." },
@@ -47063,7 +47063,7 @@ var ZH_VOCAB_EXPAND11 = [
     ] }
 ,
   { "topic": "HSK5 — Gia đình và xã hội", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "家庭", "pinyin": "jiātíng", "vi": "gia đình", "col": "家庭幸福", "ex": "家庭非常幸福。", "exv": "Gia đình vô cùng hạnh phúc." },
       { "han": "父母", "pinyin": "fùmǔ", "vi": "cha mẹ", "col": "孝顺父母", "ex": "孝顺父母很重要。", "exv": "Hiếu thảo với cha mẹ rất quan trọng." },
@@ -47087,7 +47087,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "爱心", "pinyin": "àixīn", "vi": "tình yêu thương", "col": "献爱心", "ex": "献爱心帮助别人。", "exv": "Hãy trao tình yêu thương giúp người khác." }
     ] },
   { "topic": "HSK5 — Thể thao và giải trí", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "运动", "pinyin": "yùndòng", "vi": "thể thao, vận động", "col": "运动会", "ex": "喜欢运动很好。", "exv": "Thích thể thao rất tốt." },
       { "han": "比赛", "pinyin": "bǐsài", "vi": "thi đấu", "col": "比赛开始", "ex": "参加比赛很重要。", "exv": "Tham gia thi đấu rất quan trọng." },
@@ -47111,7 +47111,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "奖牌", "pinyin": "jiǎngpái", "vi": "huy chương", "col": "奖牌榜", "ex": "获得奖牌很难。", "exv": "Giành huy chương rất khó." }
     ] },
   { "topic": "HSK4 — Thời tiết và bốn mùa", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "春天", "pinyin": "chūntiān", "vi": "mùa xuân", "col": "春天到了", "ex": "春天来了，花开了，值得思考。", "exv": "Mùa xuân đến, hoa nở." },
       { "han": "夏天", "pinyin": "xiàtiān", "vi": "mùa hè", "col": "夏天到了", "ex": "夏天非常热。", "exv": "Mùa hè vô cùng nóng." },
@@ -47135,7 +47135,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "彩虹", "pinyin": "cǎihóng", "vi": "cầu vồng", "col": "彩虹桥", "ex": "雨后彩虹很美。", "exv": "Cầu vồng sau mưa rất đẹp." }
     ] },
   { "topic": "HSK4 — Ăn uống hằng ngày", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "早餐", "pinyin": "zǎocān", "vi": "bữa sáng", "col": "吃早餐", "ex": "吃早餐很重要。", "exv": "Ăn sáng rất quan trọng." },
       { "han": "午餐", "pinyin": "wǔcān", "vi": "bữa trưa", "col": "吃午餐", "ex": "吃午餐要按时。", "exv": "Ăn trưa phải đúng giờ." },
@@ -47159,7 +47159,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "甜", "pinyin": "tián", "vi": "ngọt", "col": "甜点", "ex": "这个水果很甜。", "exv": "Trái cây này rất ngọt." }
     ] },
   { "topic": "HSK4 — Học tập ở trường", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "学校", "pinyin": "xuéxiào", "vi": "trường học", "col": "学校很大", "ex": "学校非常大。", "exv": "Trường học vô cùng lớn." },
       { "han": "老师", "pinyin": "lǎoshī", "vi": "giáo viên", "col": "老师很好", "ex": "老师非常好。", "exv": "Giáo viên vô cùng tốt." },
@@ -47183,7 +47183,7 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "讨论", "pinyin": "tǎolùn", "vi": "thảo luận", "col": "展开讨论", "ex": "讨论问题很有趣。", "exv": "Thảo luận vấn đề rất thú vị." }
     ] },
   { "topic": "HSK4 — Mua sắm và đời sống", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "商店", "pinyin": "shāngdiàn", "vi": "cửa hàng", "col": "商店很多", "ex": "商店非常多。", "exv": "Cửa hàng vô cùng nhiều." },
       { "han": "超市", "pinyin": "chāoshì", "vi": "siêu thị", "col": "大超市", "ex": "去超市买东西。", "exv": "Hãy đến siêu thị mua đồ." },
@@ -47947,7 +47947,7 @@ var TC_VOCAB_EXPAND13 = [
 ];
 var ZH_VOCAB_EXPAND12 = [
   { "topic": "HSK4 — Làm thủ tục hành chính", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "手续", "pinyin": "shǒuxù", "vi": "thủ tục", "col": "办理手续", "ex": "我去办理入学手续。", "exv": "Tôi đi làm thủ tục nhập học." },
       { "han": "证件", "pinyin": "zhèngjiàn", "vi": "giấy tờ", "col": "准备证件", "ex": "请准备好相关证件。", "exv": "Xin hãy chuẩn bị đầy đủ giấy tờ liên quan." },
@@ -47971,7 +47971,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "办理", "pinyin": "bànlǐ", "vi": "giải quyết, làm", "col": "办理业务", "ex": "这个窗口办理出国业务。", "exv": "Cửa sổ này giải quyết nghiệp vụ xuất ngoại." }
     ] },
   { "topic": "HSK4 — Thuê nhà và sinh hoạt", "hsk": "HSK4",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "租房", "pinyin": "zūfáng", "vi": "thuê nhà", "col": "租房住", "ex": "他在学校附近租房住。", "exv": "Anh ấy thuê nhà ở gần trường." },
       { "han": "房东", "pinyin": "fángdōng", "vi": "chủ nhà", "col": "联系房东", "ex": "有问题可以直接联系房东。", "exv": "Có vấn đề có thể liên hệ trực tiếp với chủ nhà." },
@@ -47995,7 +47995,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "退房", "pinyin": "tuìfáng", "vi": "trả phòng", "col": "退房时间", "ex": "退房之前要打扫干净。", "exv": "Trước khi trả phòng phải dọn dẹp sạch sẽ." }
     ] },
   { "topic": "HSK6 — Đạo đức nghề nghiệp và trách nhiệm xã hội", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "诚信", "pinyin": "chéngxìn", "vi": "chữ tín, trung thực", "col": "讲究诚信", "ex": "做生意要讲究诚信。", "exv": "Làm ăn phải coi trọng chữ tín." },
       { "han": "操守", "pinyin": "cāoshǒu", "vi": "đạo đức nghề nghiệp", "col": "职业操守", "ex": "医生要有良好的职业操守。", "exv": "Bác sĩ phải có đạo đức nghề nghiệp tốt." },
@@ -48019,7 +48019,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "惩戒", "pinyin": "chéngjiè", "vi": "trừng phạt, kỷ luật", "col": "惩戒措施", "ex": "学校采取了相应的惩戒措施。", "exv": "Nhà trường đã áp dụng biện pháp kỷ luật tương ứng." },
     ] },
   { "topic": "HSK6 — Dân số và già hóa", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "老龄化", "pinyin": "lǎolínghuà", "vi": "già hóa", "col": "社会老龄化", "ex": "人口老龄化正在加快。", "exv": "Quá trình già hóa dân số đang tăng nhanh." },
       { "han": "养老", "pinyin": "yǎnglǎo", "vi": "dưỡng lão", "col": "养老服务", "ex": "养老问题受到全社会关注。", "exv": "Vấn đề dưỡng lão được toàn xã hội quan tâm." },
@@ -48043,7 +48043,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "陪伴", "pinyin": "péibàn", "vi": "gần gũi, bầu bạn", "col": "需要陪伴", "ex": "老人最需要家人的陪伴。", "exv": "Người già cần nhất sự gần gũi của gia đình." }
     ] },
   { "topic": "HSK6 — Khoa học thần kinh và nhận thức", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "认知", "pinyin": "rènzhī", "vi": "nhận thức", "col": "认知能力", "ex": "孩子的认知能力在不断发展。", "exv": "Năng lực nhận thức của trẻ đang không ngừng phát triển." },
       { "han": "记忆", "pinyin": "jìyì", "vi": "trí nhớ", "col": "增强记忆", "ex": "复习可以帮助增强记忆。", "exv": "Ôn tập có thể giúp tăng cường trí nhớ." },
@@ -48067,7 +48067,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "幻觉", "pinyin": "huànjué", "vi": "ảo giác", "col": "产生幻觉", "ex": "发高烧时可能产生幻觉。", "exv": "Khi sốt cao có thể xuất hiện ảo giác." }
     ] },
   { "topic": "HSK6 — Ngoại giao đa phương", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "外交", "pinyin": "wàijiāo", "vi": "ngoại giao", "col": "外交场合", "ex": "各国外交政策各不相同。", "exv": "Chính sách ngoại giao của mỗi nước đều khác nhau." },
       { "han": "谈判", "pinyin": "tánpàn", "vi": "đàm phán", "col": "谈判桌上", "ex": "双方在谈判桌上争论了很久。", "exv": "Hai bên đang tiến hành đàm phán." },
@@ -48091,7 +48091,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "互访", "pinyin": "hùfǎng", "vi": "thăm viếng lẫn nhau", "col": "互访交流", "ex": "两国领导人互访交流不断。", "exv": "Lãnh đạo cấp cao hai nước thăm viếng lẫn nhau thường xuyên." }
     ] },
   { "topic": "HSK6 — Văn học hiện thực", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "现实", "pinyin": "xiànshí", "vi": "hiện thực", "col": "反映现实", "ex": "这部小说真实地反映现实。", "exv": "Tiểu thuyết này phản ánh hiện thực một cách chân thực." },
       { "han": "描绘", "pinyin": "miáohuì", "vi": "miêu tả", "col": "生动描绘", "ex": "作者生动描绘了乡村生活。", "exv": "Tác giả đã miêu tả sinh động đời sống nông thôn." },
@@ -48115,7 +48115,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "史诗", "pinyin": "shǐshī", "vi": "sử thi", "col": "英雄史诗", "ex": "这是一部英雄史诗。", "exv": "Đây là một bộ sử thi anh hùng." }
     ] },
   { "topic": "HSK6 — Tài nguyên nước và an ninh lương thực", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "水资源", "pinyin": "shuǐzīyuán", "vi": "tài nguyên nước", "col": "节约水资源", "ex": "我们要节约水资源。", "exv": "Chúng ta phải tiết kiệm tài nguyên nước." },
       { "han": "灌溉", "pinyin": "guàngài", "vi": "tưới tiêu", "col": "灌溉农田", "ex": "农民用河水灌溉农田。", "exv": "Nông dân dùng nước sông tưới ruộng." },
@@ -48139,7 +48139,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "浪费", "pinyin": "làngfèi", "vi": "lãng phí", "col": "杜绝浪费", "ex": "学校提倡杜绝浪费。", "exv": "Nhà trường kêu gọi kiên quyết chống lãng phí." }
     ] },
   { "topic": "HSK6 — Trí tuệ nhân tạo và đạo đức dữ liệu", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "算法", "pinyin": "suànfǎ", "vi": "thuật toán", "col": "算法模型", "ex": "推荐算法影响我们看到的内容。", "exv": "Thuật toán gợi ý ảnh hưởng đến nội dung chúng ta nhìn thấy." },
       { "han": "数据", "pinyin": "shùjù", "vi": "dữ liệu", "col": "数据安全", "ex": "数据安全越来越受到重视。", "exv": "An toàn dữ liệu ngày càng được coi trọng." },
@@ -48163,7 +48163,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "界面", "pinyin": "jièmiàn", "vi": "giao diện", "col": "操作界面", "ex": "这个软件的操作界面很友好。", "exv": "Giao diện thao tác của phần mềm này rất thân thiện." }
     ] },
   { "topic": "HSK5 — Thương mại điện tử và thanh toán số", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "网购", "pinyin": "wǎnggòu", "vi": "mua sắm trực tuyến", "col": "网购平台", "ex": "年轻人很喜欢网购。", "exv": "Người trẻ rất thích mua sắm trực tuyến." },
       { "han": "支付", "pinyin": "zhīfù", "vi": "thanh toán", "col": "手机支付", "ex": "现在大家都用手机支付。", "exv": "Hiện nay mọi người đều dùng điện thoại để thanh toán." },
@@ -48187,7 +48187,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "结算", "pinyin": "jiésuàn", "vi": "thanh toán, quyết toán", "col": "结算货款", "ex": "月底统一结算货款。", "exv": "Cuối tháng sẽ quyết toán tiền hàng một lần." }
     ] },
   { "topic": "HSK5 — Giáo dục trực tuyến", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "网课", "pinyin": "wǎngkè", "vi": "khóa học trực tuyến", "col": "上网课", "ex": "他在家上网课。", "exv": "Anh ấy học trực tuyến ở nhà." },
       { "han": "慕课", "pinyin": "mùkè", "vi": "khóa học mở trực tuyến", "col": "免费慕课", "ex": "网上有许多免费慕课。", "exv": "Trên mạng có nhiều khóa học mở trực tuyến miễn phí." },
@@ -48211,7 +48211,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "录取", "pinyin": "lùqǔ", "vi": "trúng tuyển", "col": "录取通知", "ex": "她被理想的大学录取了。", "exv": "Cô ấy đã trúng tuyển vào trường đại học mơ ước." }
     ] },
   { "topic": "HSK5 — Sức khỏe tinh thần nơi công sở", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "压力", "pinyin": "yālì", "vi": "áp lực", "col": "压力倍增", "ex": "工作压力太大了。", "exv": "Áp lực công việc quá lớn." },
       { "han": "释放", "pinyin": "shìfàng", "vi": "giải tỏa", "col": "释放压力", "ex": "运动可以帮助释放压力。", "exv": "Vận động có thể giúp giải tỏa áp lực." },
@@ -48235,7 +48235,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "宣泄", "pinyin": "xuānxiè", "vi": "xả ra", "col": "宣泄压力", "ex": "跑步是宣泄情绪的好办法。", "exv": "Chạy bộ là cách tốt để xả cảm xúc." }
     ] },
   { "topic": "HSK5 — Nông nghiệp thông minh", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "庄稼", "pinyin": "zhuāngjia", "vi": "hoa màu", "col": "庄稼长势", "ex": "今年庄稼长势很好。", "exv": "Năm nay hoa màu sinh trưởng rất tốt." },
       { "han": "收成", "pinyin": "shōucheng", "vi": "thu hoạch", "col": "收成不错", "ex": "今年收成不错。", "exv": "Năm nay thu hoạch khá tốt." },
@@ -48259,7 +48259,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "农民", "pinyin": "nóngmín", "vi": "nông dân", "col": "勤劳农民", "ex": "勤劳农民种出了好庄稼。", "exv": "Nông dân cần cù đã trồng được hoa màu tốt." }
     ] },
   { "topic": "HSK5 — Giao thông công cộng đô thị", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "地铁", "pinyin": "dìtiě", "vi": "tàu điện ngầm", "col": "地铁出行", "ex": "上班我一般坐地铁。", "exv": "Đi làm tôi thường đi tàu điện ngầm." },
       { "han": "公交", "pinyin": "gōngjiāo", "vi": "xe buýt công cộng", "col": "坐公交", "ex": "他每天坐公交上学。", "exv": "Mỗi ngày anh ấy đi xe buýt đến trường." },
@@ -48283,7 +48283,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "单行道", "pinyin": "dānxíngdào", "vi": "đường một chiều", "col": "走单行道", "ex": "这条路是单行道，别逆行。", "exv": "Con đường này là đường một chiều, đừng đi ngược chiều." }
     ] },
   { "topic": "HSK5 — Bảo tồn di sản văn hóa", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "文物", "pinyin": "wénwù", "vi": "văn vật", "col": "文物修复", "ex": "保护文物是全社会的责任。", "exv": "Bảo vệ văn vật là trách nhiệm của toàn xã hội." },
       { "han": "遗址", "pinyin": "yízhǐ", "vi": "di chỉ", "col": "古城遗址", "ex": "这座古城遗址很有价值。", "exv": "Di chỉ thành cổ này rất có giá trị." },
@@ -48307,7 +48307,7 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "遗存", "pinyin": "yícún", "vi": "di tồn", "col": "历史遗存", "ex": "这座城市历史遗存丰富。", "exv": "Thành phố này có di tồn lịch sử phong phú." }
     ] },
   { "topic": "HSK5 — Khởi nghiệp và việc làm trẻ", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "创业", "pinyin": "chuàngyè", "vi": "khởi nghiệp", "col": "创业团队", "ex": "很多年轻人选择自主创业。", "exv": "Nhiều người trẻ chọn tự khởi nghiệp." },
       { "han": "融资", "pinyin": "róngzī", "vi": "huy động vốn", "col": "完成融资", "ex": "这家公司完成了新一轮融资。", "exv": "Công ty này đã hoàn thành vòng huy động vốn mới." },
@@ -49036,7 +49036,7 @@ CONTENT.zhVocab.push.apply(CONTENT.zhVocab, ZH_VOCAB_EXPAND12);
 CONTENT.vocab.push.apply(CONTENT.vocab, IELTS_VOCAB_EXPAND11);
 var ZH_VOCAB_EXPAND13 = [
 { "topic": "HSK5 — Quản trị doanh nghiệp vừa và nhỏ", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "企业", "pinyin": "qǐyè", "vi": "doanh nghiệp", "col": "小企业", "ex": "这家小企业只有二十名员工。", "exv": "Doanh nghiệp nhỏ này chỉ có hai mươi nhân viên." },
       { "han": "管理", "pinyin": "guǎnlǐ", "vi": "quản lý", "col": "管理一家小公司", "ex": "好的管理方法能提高工作效率。", "exv": "Phương pháp quản lý tốt có thể nâng cao hiệu quả làm việc." },
@@ -49060,7 +49060,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "发展", "pinyin": "fāzhǎn", "vi": "phát triển", "col": "企业发展空间", "ex": "这家企业发展很快。", "exv": "Doanh nghiệp này phát triển rất nhanh." }
     ] },
   { "topic": "HSK5 — Thị trường lao động và việc làm", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "就业", "pinyin": "jiùyè", "vi": "có việc làm", "col": "毕业生的就业压力", "ex": "这座城市的就业机会越来越多。", "exv": "Cơ hội việc làm ở thành phố này ngày càng nhiều." },
       { "han": "失业", "pinyin": "shīyè", "vi": "thất nghiệp", "col": "失业以后", "ex": "失业以后，他开始学习新的技能。", "exv": "Sau khi thất nghiệp, anh ấy bắt đầu học kỹ năng mới." },
@@ -49084,7 +49084,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "保险", "pinyin": "bǎoxiǎn", "vi": "bảo hiểm", "col": "社会保险", "ex": "公司给员工买了社会保险。", "exv": "Công ty đã mua bảo hiểm xã hội cho nhân viên." }
     ] },
   { "topic": "HSK5 — Giáo dục trực tuyến và học suốt đời", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "在线", "pinyin": "zàixiàn", "vi": "trực tuyến", "col": "在线上课", "ex": "越来越多的人选择在线学习。", "exv": "Ngày càng nhiều người chọn học trực tuyến." },
       { "han": "课程", "pinyin": "kèchéng", "vi": "khóa học", "col": "免费课程", "ex": "这个网站有很多免费课程。", "exv": "Trang web này có nhiều khóa học miễn phí." },
@@ -49108,7 +49108,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "讨论", "pinyin": "tǎolùn", "vi": "thảo luận", "col": "一起讨论", "ex": "大家在小组里讨论问题。", "exv": "Mọi người thảo luận vấn đề trong nhóm." }
     ] },
   { "topic": "HSK5 — Sức khỏe tinh thần nơi làm việc", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "心理", "pinyin": "xīnlǐ", "vi": "tâm lý", "col": "心理压力大", "ex": "公司开始重视员工的心理健康。", "exv": "Công ty bắt đầu coi trọng sức khỏe tâm lý của nhân viên." },
       { "han": "健康", "pinyin": "jiànkāng", "vi": "khỏe mạnh", "col": "健康最重要", "ex": "身体健康比什么都重要。", "exv": "Sức khỏe cơ thể quan trọng hơn bất cứ thứ gì." },
@@ -49132,7 +49132,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "调整", "pinyin": "tiáozhěng", "vi": "điều chỉnh", "col": "调整心态", "ex": "压力大的时候要学会调整心态。", "exv": "Khi áp lực lớn phải học cách điều chỉnh tâm trạng." }
     ] },
   { "topic": "HSK5 — Giao thông thông minh và đô thị", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "交通", "pinyin": "jiāotōng", "vi": "giao thông", "col": "交通情况", "ex": "这个小区的交通很方便。", "exv": "Giao thông ở khu này rất thuận tiện." },
       { "han": "城市", "pinyin": "chéngshì", "vi": "thành phố", "col": "城市生活节奏", "ex": "大城市的交通越来越智能。", "exv": "Giao thông ở thành phố lớn ngày càng thông minh." },
@@ -49156,7 +49156,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "司机", "pinyin": "sījī", "vi": "tài xế", "col": "公交司机", "ex": "公交司机开车很稳。", "exv": "Tài xế xe buýt lái xe rất vững." }
     ] },
   { "topic": "HSK5 — Thương mại điện tử và người tiêu dùng", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "网购", "pinyin": "wǎnggòu", "vi": "mua hàng online", "col": "网购东西", "ex": "年轻人大多喜欢网购。", "exv": "Phần lớn người trẻ thích mua hàng online." },
       { "han": "电商", "pinyin": "diànshāng", "vi": "thương mại điện tử", "col": "电商平台", "ex": "这个电商平台上的商品很多。", "exv": "Trên nền tảng thương mại điện tử này có rất nhiều hàng hóa." },
@@ -49180,7 +49180,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "购物", "pinyin": "gòuwù", "vi": "mua sắm", "col": "网上购物", "ex": "网上购物已经很普遍了。", "exv": "Mua sắm online đã rất phổ biến rồi." }
     ] },
   { "topic": "HSK5 — Năng lượng và tiết kiệm tài nguyên", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "能源", "pinyin": "néngyuán", "vi": "năng lượng", "col": "能源问题", "ex": "新能源的发展越来越快。", "exv": "Sự phát triển của năng lượng mới ngày càng nhanh." },
       { "han": "电力", "pinyin": "diànlì", "vi": "điện lực", "col": "节约电力", "ex": "大家要一起节约电力。", "exv": "Mọi người phải cùng nhau tiết kiệm điện." },
@@ -49204,7 +49204,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "保护", "pinyin": "bǎohù", "vi": "bảo vệ", "col": "保护大自然", "ex": "保护环境是每个人的责任。", "exv": "Bảo vệ môi trường là trách nhiệm của mỗi người." }
     ] },
   { "topic": "HSK5 — Văn hóa đọc và thư viện cộng đồng", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "阅读", "pinyin": "yuèdú", "vi": "đọc", "col": "阅读时间", "ex": "从小养成阅读习惯很重要。", "exv": "Từ nhỏ hình thành thói quen đọc rất quan trọng." },
       { "han": "图书馆", "pinyin": "túshūguǎn", "vi": "thư viện", "col": "社区图书馆", "ex": "我们小区新建了一个社区图书馆。", "exv": "Khu chúng tôi mới xây một thư viện cộng đồng." },
@@ -49228,7 +49228,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "文化", "pinyin": "wénhuà", "vi": "văn hóa", "col": "文化生活", "ex": "图书馆丰富了人们的文化生活。", "exv": "Thư viện làm phong phú đời sống văn hóa của mọi người." }
     ] },
   { "topic": "HSK5 — Thể thao quần chúng và sức khỏe", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "运动", "pinyin": "yùndòng", "vi": "vận động, thể thao", "col": "运动对身体好", "ex": "他从小就喜欢运动。", "exv": "Anh ấy từ nhỏ đã thích vận động." },
       { "han": "锻炼", "pinyin": "duànliàn", "vi": "rèn luyện", "col": "锻炼一下身体", "ex": "每天锻炼对身体有好处。", "exv": "Mỗi ngày rèn luyện cơ thể có lợi cho sức khỏe." },
@@ -49252,7 +49252,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "规律", "pinyin": "guīlǜ", "vi": "đều đặn, có quy luật", "col": "生活规律", "ex": "生活规律对身体有好处。", "exv": "Sinh hoạt đều đặn có lợi cho cơ thể." }
     ] },
   { "topic": "HSK5 — Du lịch văn hóa và di sản", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "旅游", "pinyin": "lǚyóu", "vi": "du lịch", "col": "文化旅游", "ex": "文化旅游越来越受欢迎。", "exv": "Du lịch văn hóa ngày càng được ưa chuộng." },
       { "han": "文化", "pinyin": "wénhuà", "vi": "văn hóa", "col": "当地文化", "ex": "旅游的时候要了解当地文化。", "exv": "Khi du lịch phải tìm hiểu văn hóa địa phương." },
@@ -49276,7 +49276,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "特色", "pinyin": "tèsè", "vi": "đặc sắc", "col": "地方特色", "ex": "每个城市都有自己的地方特色。", "exv": "Mỗi thành phố đều có đặc sắc địa phương của riêng mình." }
     ] },
   { "topic": "HSK5 — An toàn thực phẩm và dinh dưỡng", "hsk": "HSK5",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "食品", "pinyin": "shípǐn", "vi": "thực phẩm", "col": "食品包装", "ex": "食品安全关系到每个人的健康。", "exv": "An toàn thực phẩm liên quan đến sức khỏe của mỗi người." },
       { "han": "安全", "pinyin": "ānquán", "vi": "an toàn", "col": "食品安全问题", "ex": "大家都很关心食品安全问题。", "exv": "Mọi người đều rất quan tâm đến vấn đề an toàn thực phẩm." },
@@ -49300,7 +49300,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "质量", "pinyin": "zhìliàng", "vi": "chất lượng", "col": "食品质量", "ex": "我们要重视食品质量。", "exv": "Chúng ta phải coi trọng chất lượng thực phẩm." }
     ] },
 { "topic": "HSK6 — Kinh tế vĩ mô và lạm phát", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "通货膨胀", "pinyin": "tōnghuò péngzhàng", "vi": "lạm phát", "col": "通货膨胀压力", "ex": "今年通货膨胀率有所上升。", "exv": "Tỉ lệ lạm phát năm nay có tăng lên." },
       { "han": "宏观经济", "pinyin": "hóngguān jīngjì", "vi": "kinh tế vĩ mô", "col": "宏观经济形势", "ex": "宏观经济形势总体平稳。", "exv": "Tình hình kinh tế vĩ mô nhìn chung ổn định." },
@@ -49324,7 +49324,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "预算", "pinyin": "yùsuàn", "vi": "ngân sách dự kiến", "col": "安排预算", "ex": "公司正在制定明年的预算。", "exv": "Công ty đang lập ngân sách dự kiến cho năm sau." }
     ] },
   { "topic": "HSK6 — Tài chính ngân hàng và tín dụng", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "银行", "pinyin": "yínháng", "vi": "ngân hàng", "col": "商业银行", "ex": "他在商业银行工作。", "exv": "Anh ấy làm việc ở ngân hàng thương mại." },
       { "han": "贷款", "pinyin": "dàikuǎn", "vi": "vay tiền", "col": "获得贷款", "ex": "小企业可以申请贷款。", "exv": "Doanh nghiệp nhỏ có thể xin vay tiền." },
@@ -49348,7 +49348,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "额度", "pinyin": "édù", "vi": "hạn mức", "col": "提高额度", "ex": "银行提高了他的信用卡额度。", "exv": "Ngân hàng đã nâng hạn mức thẻ tín dụng của anh ấy." }
     ] },
   { "topic": "HSK6 — Thương mại quốc tế và chuỗi cung ứng", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "出口", "pinyin": "chūkǒu", "vi": "xuất khẩu", "col": "出口业务", "ex": "今年出口增加了不少。", "exv": "Năm nay xuất khẩu đã tăng lên khá nhiều." },
       { "han": "进口", "pinyin": "jìnkǒu", "vi": "nhập khẩu", "col": "进口规模", "ex": "这家商店卖很多进口商品。", "exv": "Cửa hàng này bán nhiều hàng nhập khẩu." },
@@ -49372,7 +49372,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "供应", "pinyin": "gōngyìng", "vi": "cung cấp", "col": "稳定供应", "ex": "工厂保证原料稳定供应。", "exv": "Nhà máy cam kết cung cấp nguyên liệu ổn định." }
     ] },
   { "topic": "HSK6 — Trí tuệ nhân tạo và dữ liệu", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "人工智能", "pinyin": "réngōng zhìnéng", "vi": "trí tuệ nhân tạo", "col": "人工智能发展", "ex": "人工智能发展带来了新机会。", "exv": "Sự phát triển của trí tuệ nhân tạo đã mang lại cơ hội mới." },
       { "han": "数据", "pinyin": "shùjù", "vi": "dữ liệu", "col": "数据处理", "ex": "公司每天分析数据。", "exv": "Công ty mỗi ngày phân tích dữ liệu." },
@@ -49396,7 +49396,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "开发", "pinyin": "kāifā", "vi": "phát triển, lập trình", "col": "开发软件", "ex": "团队正在开发软件。", "exv": "Nhóm đang phát triển phần mềm." }
     ] },
   { "topic": "HSK6 — Môi trường và năng lượng sạch", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "环境", "pinyin": "huánjìng", "vi": "môi trường", "col": "环境质量", "ex": "我们每个人都要保护环境。", "exv": "Mỗi người chúng ta đều phải bảo vệ môi trường." },
       { "han": "污染", "pinyin": "wūrǎn", "vi": "ô nhiễm", "col": "污染来源", "ex": "城市正在努力减少污染。", "exv": "Thành phố đang cố gắng giảm ô nhiễm." },
@@ -49420,7 +49420,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "充电", "pinyin": "chōngdiàn", "vi": "sạc điện", "col": "充电设施", "ex": "充电设施越来越多。", "exv": "Cơ sở sạc điện ngày càng nhiều." }
     ] },
   { "topic": "HSK6 — Y tế công cộng và phòng dịch", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "健康", "pinyin": "jiànkāng", "vi": "sức khỏe", "col": "健康管理", "ex": "身体健康是最重要的。", "exv": "Sức khỏe cơ thể là quan trọng nhất." },
       { "han": "疾病", "pinyin": "jíbìng", "vi": "bệnh tật", "col": "疾病治疗", "ex": "预防疾病比治疗更重要。", "exv": "Phòng bệnh quan trọng hơn chữa bệnh." },
@@ -49444,7 +49444,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "宣传", "pinyin": "xuānchuán", "vi": "tuyên truyền", "col": "宣传活动", "ex": "社区经常开展健康宣传。", "exv": "Cộng đồng thường xuyên tổ chức tuyên truyền sức khỏe." }
     ] },
   { "topic": "HSK6 — Giáo dục đại học và nghiên cứu (2)", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "大学", "pinyin": "dàxué", "vi": "đại học", "col": "大学生活", "ex": "大学生活丰富多彩。", "exv": "Đời sống đại học phong phú đa dạng." },
       { "han": "教授", "pinyin": "jiàoshòu", "vi": "giáo sư", "col": "教授团队", "ex": "有问题可以请教教授。", "exv": "Có vấn đề có thể hỏi giáo sư." },
@@ -49468,7 +49468,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "讲座", "pinyin": "jiǎngzuò", "vi": "buổi giảng, bài giảng chuyên đề", "col": "举办讲座", "ex": "学校每周举办讲座。", "exv": "Trường học mỗi tuần tổ chức buổi giảng chuyên đề." }
     ] },
   { "topic": "HSK6 — Pháp luật dân sự và hợp đồng", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "法律", "pinyin": "fǎlǜ", "vi": "pháp luật", "col": "法律意识", "ex": "每个人都要遵守法律。", "exv": "Mỗi người đều phải tuân thủ pháp luật." },
       { "han": "合同", "pinyin": "hétong", "vi": "hợp đồng", "col": "合同管理", "ex": "合作之前要签订合同。", "exv": "Trước khi hợp tác cần ký hợp đồng." },
@@ -49492,7 +49492,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "违法", "pinyin": "wéifǎ", "vi": "vi phạm pháp luật", "col": "违法成本", "ex": "违法行为会受到处罚。", "exv": "Hành vi vi phạm pháp luật sẽ bị xử phạt." }
     ] },
   { "topic": "HSK6 — Truyền thông số và mạng xã hội", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "媒体", "pinyin": "méitǐ", "vi": "truyền thông", "col": "新媒体", "ex": "新媒体发展很快。", "exv": "Truyền thông mới phát triển rất nhanh." },
       { "han": "新闻", "pinyin": "xīnwén", "vi": "tin tức", "col": "看新闻", "ex": "他每天早上看新闻。", "exv": "Anh ấy mỗi sáng đều xem tin tức." },
@@ -49516,7 +49516,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "关注", "pinyin": "guānzhù", "vi": "theo dõi, quan tâm", "col": "关注话题", "ex": "年轻人很关注话题。", "exv": "Người trẻ rất quan tâm đến chủ đề." }
     ] },
   { "topic": "HSK6 — Văn hóa nghệ thuật đương đại", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "文化", "pinyin": "wénhuà", "vi": "văn hóa", "col": "文化发展", "ex": "文化交流增进了理解。", "exv": "Giao lưu văn hóa đã tăng thêm sự thấu hiểu." },
       { "han": "艺术", "pinyin": "yìshù", "vi": "nghệ thuật", "col": "艺术教育", "ex": "艺术作品打动了观众。", "exv": "Tác phẩm nghệ thuật đã chạm đến khán giả." },
@@ -49540,7 +49540,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "服装", "pinyin": "fúzhuāng", "vi": "trang phục", "col": "演出服装", "ex": "演出服装非常精美。", "exv": "Trang phục biểu diễn vô cùng tinh xảo." }
     ] },
   { "topic": "HSK6 — Giao thông đô thị và quy hoạch", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "交通", "pinyin": "jiāotōng", "vi": "giao thông", "col": "交通管理", "ex": "交通拥堵是城市的大问题。", "exv": "Ùn tắc giao thông là vấn đề lớn của thành phố." },
       { "han": "地铁", "pinyin": "dìtiě", "vi": "tàu điện ngầm", "col": "地铁建设", "ex": "上班可以乘坐地铁。", "exv": "Đi làm có thể đi tàu điện ngầm." },
@@ -49564,7 +49564,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "共享", "pinyin": "gòngxiǎng", "vi": "dùng chung", "col": "共享服务", "ex": "共享单车方便了短途出行。", "exv": "Xe đạp dùng chung đã giúp đi lại quãng ngắn tiện lợi hơn." }
     ] },
   { "topic": "HSK6 — Nông nghiệp công nghệ cao", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "农业", "pinyin": "nóngyè", "vi": "nông nghiệp", "col": "现代农业", "ex": "现代农业离不开科技。", "exv": "Nông nghiệp hiện đại không thể thiếu khoa học kỹ thuật." },
       { "han": "农民", "pinyin": "nóngmín", "vi": "nông dân", "col": "农民收入", "ex": "农民收入稳步提高。", "exv": "Thu nhập của nông dân tăng lên vững chắc." },
@@ -49588,7 +49588,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "农村", "pinyin": "nóngcūn", "vi": "nông thôn", "col": "农村发展", "ex": "农村发展越来越快。", "exv": "Nông thôn phát triển ngày càng nhanh." }
     ] },
   { "topic": "HSK6 — Du lịch bền vững", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "旅游", "pinyin": "lǚyóu", "vi": "du lịch", "col": "旅游发展", "ex": "旅游业带动了当地经济。", "exv": "Ngành du lịch đã kéo theo kinh tế địa phương." },
       { "han": "游客", "pinyin": "yóukè", "vi": "du khách", "col": "接待游客", "ex": "小镇每年接待游客很多。", "exv": "Thị trấn nhỏ mỗi năm đón nhiều du khách." },
@@ -49612,7 +49612,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "预订", "pinyin": "yùdìng", "vi": "đặt trước", "col": "预订服务", "ex": "旺季要提前预订。", "exv": "Mùa cao điểm cần đặt trước." }
     ] },
   { "topic": "HSK6 — Khởi nghiệp và đổi mới sáng tạo", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "创业", "pinyin": "chuàngyè", "vi": "khởi nghiệp", "col": "创业环境", "ex": "创业团队充满活力。", "exv": "Nhóm khởi nghiệp tràn đầy sức sống." },
       { "han": "企业", "pinyin": "qǐyè", "vi": "doanh nghiệp", "col": "中小企业", "ex": "中小企业需要政策支持。", "exv": "Doanh nghiệp vừa và nhỏ cần chính sách hỗ trợ." },
@@ -49636,7 +49636,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "挑战", "pinyin": "tiǎozhàn", "vi": "thử thách", "col": "应对挑战", "ex": "创业者要勇敢面对挑战。", "exv": "Người khởi nghiệp cần dũng cảm đối mặt thử thách." }
     ] },
   { "topic": "HSK6 — Quản trị nhân sự và văn hóa doanh nghiệp", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "员工", "pinyin": "yuángōng", "vi": "nhân viên", "col": "员工队伍", "ex": "员工福利越来越好。", "exv": "Phúc lợi nhân viên ngày càng tốt." },
       { "han": "招聘", "pinyin": "zhāopìn", "vi": "tuyển dụng", "col": "招聘人才", "ex": "公司正在招聘人才。", "exv": "Công ty đang tuyển dụng nhân tài." },
@@ -49660,7 +49660,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "制度", "pinyin": "zhìdù", "vi": "chế độ, quy chế", "col": "管理制度", "ex": "管理制度越来越完善。", "exv": "Quy chế quản lý ngày càng hoàn thiện." }
     ] },
 { "topic": "HSK6 — Quan hệ quốc tế và ngoại giao", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "邦交", "pinyin": "bāngjiāo", "vi": "quan hệ ngoại giao", "col": "建立邦交", "ex": "两国在多年前就建立了邦交。", "exv": "Hai nước đã thiết lập quan hệ ngoại giao từ nhiều năm trước." },
       { "han": "建交", "pinyin": "jiànjiāo", "vi": "thiết lập quan hệ ngoại giao", "col": "建交五十周年", "ex": "今年是两国建交五十周年。", "exv": "Năm nay là kỷ niệm năm mươi năm hai nước thiết lập quan hệ ngoại giao." },
@@ -49684,7 +49684,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "豁免", "pinyin": "huòmiǎn", "vi": "miễn trừ", "col": "外交豁免", "ex": "外交人员享有外交豁免。", "exv": "Nhân viên ngoại giao được hưởng quyền miễn trừ ngoại giao." }
     ] },
   { "topic": "HSK6 — An ninh mạng và bảo mật dữ liệu", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "黑客", "pinyin": "hēikè", "vi": "tin tặc", "col": "防范黑客", "ex": "公司要采取措施防范黑客。", "exv": "Công ty phải áp dụng biện pháp phòng chống tin tặc." },
       { "han": "病毒", "pinyin": "bìngdú", "vi": "vi-rút máy tính", "col": "感染病毒", "ex": "这台电脑感染病毒了。", "exv": "Chiếc máy tính này đã bị nhiễm vi-rút." },
@@ -49708,7 +49708,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "追踪", "pinyin": "zhuīzōng", "vi": "truy vết", "col": "追踪来源", "ex": "警方正在追踪来源。", "exv": "Cảnh sát đang truy vết nguồn gốc." }
     ] },
   { "topic": "HSK6 — Biến đổi khí hậu và thích ứng", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "气候", "pinyin": "qìhòu", "vi": "khí hậu", "col": "气候特点", "ex": "气候变化影响着每个人的生活。", "exv": "Biến đổi khí hậu ảnh hưởng đến cuộc sống của mỗi người." },
       { "han": "升温", "pinyin": "shēngwēn", "vi": "tăng nhiệt độ", "col": "全球升温", "ex": "全球升温让夏天越来越热。", "exv": "Nhiệt độ toàn cầu tăng lên khiến mùa hè ngày càng nóng." },
@@ -49732,7 +49732,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "节水", "pinyin": "jiéshuǐ", "vi": "tiết kiệm nước", "col": "节水意识", "ex": "干旱地区的人节水意识很强。", "exv": "Người ở vùng hạn hán có ý thức tiết kiệm nước rất cao." }
     ] },
   { "topic": "HSK6 — Khoa học vũ trụ và khám phá", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "宇宙", "pinyin": "yǔzhòu", "vi": "vũ trụ", "col": "宇宙深处", "ex": "人类一直在探索宇宙的奥秘。", "exv": "Con người vẫn luôn khám phá bí ẩn của vũ trụ." },
       { "han": "星系", "pinyin": "xīngxì", "vi": "thiên hà", "col": "遥远星系", "ex": "望远镜拍到了遥远星系的照片。", "exv": "Kính thiên văn đã chụp được ảnh của thiên hà xa xôi." },
@@ -49756,7 +49756,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "载人", "pinyin": "zàirén", "vi": "có người lái", "col": "载人飞船", "ex": "载人飞船把宇航员送上了太空。", "exv": "Tàu vũ trụ có người lái đã đưa phi hành gia lên không gian." }
     ] },
   { "topic": "HSK6 — Triết học hiện đại và tư duy phản biện", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "哲学", "pinyin": "zhéxué", "vi": "triết học", "col": "哲学思考", "ex": "学习哲学可以帮助我们思考。", "exv": "Học triết học có thể giúp chúng ta suy nghĩ sâu hơn." },
       { "han": "逻辑", "pinyin": "luójí", "vi": "lô-gíc", "col": "逻辑严密", "ex": "他的发言逻辑清楚，很有说服力。", "exv": "Bài phát biểu của anh ấy lô-gíc rõ ràng, rất thuyết phục." },
@@ -49780,7 +49780,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "相对", "pinyin": "xiāngduì", "vi": "tương đối", "col": "相对来说", "ex": "相对来说，这个办法更简单。", "exv": "Nói một cách tương đối thì cách này đơn giản hơn." }
     ] },
   { "topic": "HSK6 — Tâm lý học và hành vi", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "心理", "pinyin": "xīnlǐ", "vi": "tâm lý", "col": "心理负担", "ex": "心理健康和身体健康一样重要。", "exv": "Sức khỏe tâm lý cũng quan trọng như sức khỏe thể chất." },
       { "han": "行为", "pinyin": "xíngwéi", "vi": "hành vi", "col": "行为习惯", "ex": "行为习惯是在日常生活中养成的。", "exv": "Thói quen hành vi được hình thành trong đời sống hằng ngày." },
@@ -49804,7 +49804,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "咨询", "pinyin": "zīxún", "vi": "tư vấn", "col": "咨询老师", "ex": "遇到困难可以寻求心理咨询。", "exv": "Gặp khó khăn có thể tìm đến tư vấn tâm lý." }
     ] },
   { "topic": "HSK6 — Ngôn ngữ học và đa ngữ", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "语言", "pinyin": "yǔyán", "vi": "ngôn ngữ", "col": "学习语言", "ex": "学习语言要多听多说。", "exv": "Học ngôn ngữ phải nghe nhiều và nói nhiều." },
       { "han": "方言", "pinyin": "fāngyán", "vi": "phương ngữ", "col": "方言差异", "ex": "地方方言很有特色。", "exv": "Phương ngữ địa phương rất đặc sắc." },
@@ -49828,7 +49828,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "交流", "pinyin": "jiāoliú", "vi": "giao lưu", "col": "交流思想", "ex": "多交流经验可以互相学习。", "exv": "Trao đổi kinh nghiệm nhiều có thể học hỏi lẫn nhau." }
     ] },
   { "topic": "HSK6 — Lịch sử hiện đại và ký ức cộng đồng", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "历史", "pinyin": "lìshǐ", "vi": "lịch sử", "col": "历史知识", "ex": "学习历史可以帮助我们了解过去。", "exv": "Học lịch sử có thể giúp chúng ta hiểu về quá khứ." },
       { "han": "纪念", "pinyin": "jìniàn", "vi": "kỷ niệm", "col": "纪念先辈", "ex": "学校举行纪念活动。", "exv": "Trường học tổ chức hoạt động kỷ niệm." },
@@ -49852,7 +49852,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "后代", "pinyin": "hòudài", "vi": "thế hệ sau", "col": "留给后代", "ex": "这段记忆要留给后代。", "exv": "Ký ức này phải để lại cho thế hệ sau." }
     ] },
   { "topic": "HSK6 — Thể thao chuyên nghiệp và huấn luyện", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "运动员", "pinyin": "yùndòngyuán", "vi": "vận động viên", "col": "专业运动员", "ex": "专业运动员每天训练好几个小时。", "exv": "Vận động viên chuyên nghiệp mỗi ngày tập luyện nhiều giờ." },
       { "han": "教练", "pinyin": "jiàoliàn", "vi": "huấn luyện viên", "col": "教练团队", "ex": "主教练正在布置新的训练计划。", "exv": "Huấn luyện viên trưởng đang sắp xếp kế hoạch tập luyện mới." },
@@ -49876,7 +49876,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "爆发力", "pinyin": "bàofālì", "vi": "sức bật", "col": "爆发力训练", "ex": "短跑选手要加强爆发力训练。", "exv": "Vận động viên chạy ngắn phải tăng cường tập sức bật." }
     ] },
   { "topic": "HSK6 — Điện ảnh và phê bình phim", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "电影", "pinyin": "diànyǐng", "vi": "phim điện ảnh", "col": "电影院里", "ex": "周末我们一起去看电影。", "exv": "Cuối tuần chúng tôi cùng đi xem phim." },
       { "han": "导演", "pinyin": "dǎoyǎn", "vi": "đạo diễn", "col": "著名导演", "ex": "这位著名导演拍了很多好片子。", "exv": "Vị đạo diễn nổi tiếng này đã quay nhiều bộ phim hay." },
@@ -49900,7 +49900,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "动画片", "pinyin": "dònghuàpiàn", "vi": "phim hoạt hình", "col": "动画片角色", "ex": "动画片角色深受孩子喜爱。", "exv": "Nhân vật phim hoạt hình được trẻ em vô cùng yêu thích." }
     ] },
   { "topic": "HSK6 — Kiến trúc và không gian sống", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "建筑", "pinyin": "jiànzhù", "vi": "kiến trúc", "col": "古老建筑", "ex": "这座建筑风格很独特。", "exv": "Phong cách kiến trúc của tòa nhà này rất độc đáo." },
       { "han": "设计", "pinyin": "shèjì", "vi": "thiết kế", "col": "设计方案", "ex": "设计方案要考虑采光和通风。", "exv": "Phương án thiết kế phải tính đến ánh sáng và thông gió." },
@@ -49924,7 +49924,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "庭院", "pinyin": "tíngyuàn", "vi": "sân vườn", "col": "庭院种花", "ex": "庭院种花可以美化生活。", "exv": "Trồng hoa trong sân vườn có thể làm đẹp cuộc sống." }
     ] },
   { "topic": "HSK6 — Logistics và vận tải hàng hóa", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "货运", "pinyin": "huòyùn", "vi": "vận tải hàng hóa", "col": "货运业务", "ex": "货运公司负责把货物送到各地。", "exv": "Công ty vận tải hàng hóa phụ trách đưa hàng đến khắp nơi." },
       { "han": "货车", "pinyin": "huòchē", "vi": "xe tải", "col": "货车司机", "ex": "货车司机每天要开很远的路。", "exv": "Tài xế xe tải mỗi ngày phải chạy quãng đường rất xa." },
@@ -49948,7 +49948,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "仓储", "pinyin": "cāngchǔ", "vi": "kho bãi", "col": "仓储管理", "ex": "仓储管理直接影响发货速度。", "exv": "Quản lý kho bãi ảnh hưởng trực tiếp đến tốc độ giao hàng." }
     ] },
   { "topic": "HSK6 — Bảo hiểm và quản lý rủi ro cá nhân", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "保险", "pinyin": "bǎoxiǎn", "vi": "bảo hiểm", "col": "保险意识", "ex": "买保险是为了给家人一份保障。", "exv": "Mua bảo hiểm là để mang lại sự bảo đảm cho gia đình." },
       { "han": "保费", "pinyin": "bǎofèi", "vi": "phí bảo hiểm", "col": "保费标准", "ex": "保费要按时交，不能断。", "exv": "Phí bảo hiểm phải đóng đúng hạn, không được ngắt quãng." },
@@ -49972,7 +49972,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "评估", "pinyin": "pínggū", "vi": "đánh giá", "col": "评估风险", "ex": "买保险前要先评估风险。", "exv": "Trước khi mua bảo hiểm phải đánh giá rủi ro trước." }
     ] },
   { "topic": "HSK6 — Bất động sản và thị trường nhà ở", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "房产", "pinyin": "fángchǎn", "vi": "bất động sản", "col": "房产市场", "ex": "房产市场变化很快。", "exv": "Thị trường bất động sản thay đổi rất nhanh." },
       { "han": "房价", "pinyin": "fángjià", "vi": "giá nhà", "col": "房价上涨", "ex": "这几年房价上涨了不少。", "exv": "Mấy năm nay giá nhà đã tăng lên khá nhiều." },
@@ -49996,7 +49996,7 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "交房", "pinyin": "jiāofáng", "vi": "bàn giao nhà", "col": "交房时间", "ex": "交房时间要写进合同里。", "exv": "Thời gian bàn giao nhà phải ghi vào hợp đồng." }
     ] },
   { "topic": "HSK6 — Năng lượng tái tạo và lưới điện", "hsk": "HSK6",
-    "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức — đây không phải xác nhận từng từ thuộc đề cương thi.",
+    "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "太阳能", "pinyin": "tàiyángnéng", "vi": "năng lượng mặt trời", "col": "利用太阳能", "ex": "利用太阳能可以减少用电成本。", "exv": "Tận dụng năng lượng mặt trời có thể giảm chi phí dùng điện." },
       { "han": "风能", "pinyin": "fēngnéng", "vi": "năng lượng gió", "col": "开发风能", "ex": "沿海地区适合开发风能。", "exv": "Vùng ven biển thích hợp phát triển năng lượng gió." },
@@ -51585,7 +51585,7 @@ var ZH_READ_EXPAND15_THIN = [
   text: "星期六早上，小红和妈妈一起去市场。市场里人很多，有蔬菜、水果、鱼和肉。小红喜欢吃西红柿和苹果，妈妈买了很多菜。买完东西，她们去了一家小饭店吃饭。饭店的菜很好吃，也不贵。小红说，下个星期六，她还想和妈妈一起去市场。",
   pinyin: "Xīngqīliù zǎoshang, Xiǎo Hóng hé māma yìqǐ qù shìchǎng. Shìchǎng lǐ rén hěn duō, yǒu shūcài, shuǐguǒ, yú hé ròu. Xiǎo Hóng xǐhuan chī xīhóngshì hé píngguǒ, māma mǎi le hěn duō cài. Mǎi wán dōngxi, tāmen qù le yì jiā xiǎo fàndiàn chī fàn. Fàndiàn de cài hěn hǎochī, yě bú guì. Xiǎo Hóng shuō, xià gè xīngqīliù, tā hái xiǎng hé māma yìqǐ qù shìchǎng.",
   vi: "Sáng thứ Bảy, Tiểu Hồng và mẹ cùng đi chợ. Trong chợ có rất nhiều người, có rau, trái cây, cá và thịt. Tiểu Hồng thích ăn cà chua và táo, mẹ mua rất nhiều rau. Mua đồ xong, hai mẹ con đi ăn ở một quán ăn nhỏ. Món ăn ở quán rất ngon, cũng không đắt. Tiểu Hồng nói, thứ Bảy tuần sau, bạn ấy còn muốn cùng mẹ đi chợ nữa.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Tiểu Hồng và mẹ đi đâu vào sáng thứ Bảy?", o: ["Đi chợ", "Đi học", "Đi công viên", "Đi bệnh viện"], a: 0, why: "Bài viết: 星期六早上，小红和妈妈一起去市场 — sáng thứ Bảy, Tiểu Hồng và mẹ cùng đi chợ." },
    { q: "Trong chợ có những gì?", o: ["Chỉ có rau", "Rau, trái cây, cá và thịt", "Chỉ có quần áo", "Chỉ có sách"], a: 1, why: "Bài viết: 有蔬菜、水果、鱼和肉 — có rau, trái cây, cá và thịt." },
@@ -51596,7 +51596,7 @@ var ZH_READ_EXPAND15_THIN = [
   text: "昨天是小明的生日。他的朋友们来到他家，给他带了很多礼物，有书、玩具和水果。小明的妈妈做了一个大蛋糕，蛋糕上有十根蜡烛，因为小明今年十岁。大家一起唱生日歌，小明许了一个愿，然后吹灭了蜡烛。晚上，大家一起吃蛋糕、聊天，玩得很开心。小明说，这是他最开心的一天。",
   pinyin: "Zuótiān shì Xiǎo Míng de shēngrì. Tā de péngyou men lái dào tā jiā, gěi tā dài le hěn duō lǐwù, yǒu shū, wánjù hé shuǐguǒ. Xiǎo Míng de māma zuò le yí gè dà dàngāo, dàngāo shang yǒu shí gēn làzhú, yīnwèi Xiǎo Míng jīnnián shí suì. Dàjiā yìqǐ chàng shēngrì gē, Xiǎo Míng xǔ le yí gè yuàn, ránhòu chuī miè le làzhú. Wǎnshang, dàjiā yìqǐ chī dàngāo, liáotiān, wán de hěn kāixīn. Xiǎo Míng shuō, zhè shì tā zuì kāixīn de yì tiān.",
   vi: "Hôm qua là sinh nhật của Tiểu Minh. Các bạn của bạn ấy đến nhà bạn ấy, mang tới rất nhiều quà, có sách, đồ chơi và trái cây. Mẹ của Tiểu Minh làm một chiếc bánh lớn, trên bánh có mười ngọn nến, vì năm nay Tiểu Minh mười tuổi. Mọi người cùng hát bài sinh nhật, Tiểu Minh ước một điều, rồi thổi tắt nến. Buổi tối, mọi người cùng ăn bánh, trò chuyện, chơi rất vui. Tiểu Minh nói, đây là ngày vui nhất của bạn ấy.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Hôm qua là ngày gì của Tiểu Minh?", o: ["Ngày đầu đi học", "Sinh nhật", "Tết", "Ngày nghỉ"], a: 1, why: "Bài viết: 昨天是小明的生日 — hôm qua là sinh nhật của Tiểu Minh." },
    { q: "Bạn bè mang tới những gì?", o: ["Quần áo và giày", "Tiền và thẻ", "Sách, đồ chơi và trái cây", "Cơm và mì"], a: 2, why: "Bài viết: 有书、玩具和水果 — có sách, đồ chơi và trái cây." },
@@ -51607,7 +51607,7 @@ var ZH_READ_EXPAND15_THIN = [
   text: "每天早上六点，王爷爷都去公园锻炼身体。他先慢跑半小时，然后打太极拳。公园里有很多老人，他们一起锻炼，一起聊天。王爷爷说，锻炼身体让他身体健康，心情也很好。他的儿子也想跟他一起锻炼，但是儿子每天起得很晚。王爷爷告诉儿子：早睡早起，身体才会好。",
   pinyin: "Měitiān zǎoshang liù diǎn, Wáng yéye dōu qù gōngyuán duànliàn shēntǐ. Tā xiān màn pǎo bàn xiǎoshí, ránhòu dǎ tàijíquán. Gōngyuán lǐ yǒu hěn duō lǎorén, tāmen yìqǐ duànliàn, yìqǐ liáotiān. Wáng yéye shuō, duànliàn shēntǐ ràng tā shēntǐ jiànkāng, xīnqíng yě hěn hǎo. Tā de érzi yě xiǎng gēn tā yìqǐ duànliàn, dànshì érzi měitiān qǐ de hěn wǎn. Wáng yéye gàosu érzi: zǎo shuì zǎo qǐ, shēntǐ cái huì hǎo.",
   vi: "Mỗi sáng lúc 6 giờ, ông Vương đều đi công viên tập thể dục. Ông chạy chậm nửa giờ trước, rồi tập thái cực quyền. Trong công viên có rất nhiều người già, họ cùng tập thể dục, cùng trò chuyện. Ông Vương nói, tập thể dục giúp ông khỏe mạnh, tâm trạng cũng rất tốt. Con trai ông cũng muốn tập cùng ông, nhưng con trai ngày nào cũng dậy rất muộn. Ông Vương bảo con trai: ngủ sớm dậy sớm, cơ thể mới tốt.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK4, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Ông Vương đi đâu mỗi sáng?", o: ["Chợ", "Công viên", "Trường học", "Bệnh viện"], a: 1, why: "Bài viết: 每天早上六点，王爷爷都去公园锻炼身体 — mỗi sáng 6 giờ, ông Vương đều đi công viên tập thể dục." },
    { q: "Ông tập gì sau khi chạy chậm?", o: ["Bơi", "Đá bóng", "Thái cực quyền", "Nhảy dây"], a: 2, why: "Bài viết: 然后打太极拳 — rồi tập thái cực quyền." },
@@ -51618,7 +51618,7 @@ var ZH_READ_EXPAND15_THIN = [
   text: "小张大学毕业后留在了北京工作。他在公司附近租了一个小房间，房租不便宜，但是上班很方便。刚开始的时候，他觉得一个人住有点孤单。周末的时候，他常常给家里打电话，跟爸爸妈妈聊聊工作和生活。半年以后，他认识了很多新朋友，也慢慢习惯了大城市的生活。他说，虽然北京的生活节奏很快，但是这里有很多机会，只要努力，就能实现自己的梦想。",
   pinyin: "Xiǎo Zhāng dàxué bìyè hòu liú zài le Běijīng gōngzuò. Tā zài gōngsī fùjìn zū le yí gè xiǎo fángjiān, fángzū bù piányi, dànshì shàng bān hěn fāngbiàn. Gāng kāishǐ de shíhou, tā juéde yí gè rén zhù yǒudiǎn gūdān. Zhōumò de shíhou, tā chángcháng gěi jiālǐ dǎ diànhuà, gēn bàba māma liáoliao gōngzuò hé shēnghuó. Bàn nián yǐhòu, tā rènshi le hěn duō xīn péngyou, yě mànman xíguàn le dà chéngshì de shēnghuó. Tā shuō, suīrán Běijīng de shēnghuó jiézòu hěn kuài, dànshì zhèlǐ yǒu hěn duō jīhuì, zhǐyào nǔlì, jiù néng shíxiàn zìjǐ de mèngxiǎng.",
   vi: "Sau khi tốt nghiệp đại học, Tiểu Trương ở lại Bắc Kinh làm việc. Cậu thuê một phòng nhỏ gần công ty, tiền thuê không rẻ, nhưng đi làm rất tiện. Lúc mới bắt đầu, cậu thấy sống một mình hơi cô đơn. Vào cuối tuần, cậu thường gọi điện về nhà, trò chuyện với bố mẹ về công việc và cuộc sống. Nửa năm sau, cậu quen rất nhiều bạn mới, cũng dần quen với cuộc sống ở thành phố lớn. Cậu nói, tuy nhịp sống ở Bắc Kinh rất nhanh, nhưng ở đây có nhiều cơ hội, chỉ cần cố gắng là có thể thực hiện ước mơ của mình.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
   questions: [
    { q: "小张大学毕业后留在哪里工作？", o: ["上海", "北京", "广州", "杭州"], a: 1, why: "Bài viết: 留在了北京工作 — ở lại Bắc Kinh làm việc." },
    { q: "小张租的房间怎么样？", o: ["房租很便宜，但上班很远", "房间很大", "房租不便宜，但上班很方便", "房间在郊区"], a: 2, why: "Bài viết: 房租不便宜，但是上班很方便 — tiền thuê không rẻ, nhưng đi làm rất tiện." },
@@ -51629,7 +51629,7 @@ var ZH_READ_EXPAND15_THIN = [
   text: "现在，很多年轻人喜欢用手机看短视频。他们觉得短视频很有意思，可以学到很多东西，也可以放松心情。但是，也有人担心，看短视频的时间太长，会影响学习和工作。李老师说，短视频本身没有好坏，关键是看你怎么用。如果你每天只看一会儿，看看新闻、学学外语，短视频就是一个好帮手。如果你一看就是几个小时，什么正事都不做，那它就会变成浪费时间的工具。所以，年轻人应该学会管理自己的时间，不要让手机控制自己的生活。",
   pinyin: "Xiànzài, hěn duō niánqīng rén xǐhuan yòng shǒujī kàn duǎn shìpín. Tāmen juéde duǎn shìpín hěn yǒu yìsi, kěyǐ xué dào hěn duō dōngxi, yě kěyǐ fàngsōng xīnqíng. Dànshì, yě yǒu rén dānxīn, kàn duǎn shìpín de shíjiān tài cháng, huì yǐngxiǎng xuéxí hé gōngzuò. Lǐ lǎoshī shuō, duǎn shìpín běnshēn méiyǒu hǎo huài, guānjiàn shì kàn nǐ zěnme yòng. Rúguǒ nǐ měitiān zhǐ kàn yí huìr, kàn kan xīnwén, xué xué wàiyǔ, duǎn shìpín jiù shì yí gè hǎo bāngshou. Rúguǒ nǐ yí kàn jiù shì jǐ gè xiǎoshí, shénme zhèngshì dōu bú zuò, nà tā jiù huì biànchéng làngfèi shíjiān de gōngjù. Suǒyǐ, niánqīng rén yīnggāi xuéhuì guǎnlǐ zìjǐ de shíjiān, bú yào ràng shǒujī kòngzhì zìjǐ de shēnghuó.",
   vi: "Bây giờ, nhiều bạn trẻ thích dùng điện thoại xem video ngắn. Họ thấy video ngắn rất thú vị, có thể học được nhiều thứ, cũng có thể thư giãn. Nhưng cũng có người lo rằng xem video ngắn quá lâu sẽ ảnh hưởng tới học tập và công việc. Thầy Lý nói, bản thân video ngắn không tốt không xấu, quan trọng là xem bạn dùng nó thế nào. Nếu mỗi ngày bạn chỉ xem một lát, xem tin tức, học ngoại ngữ, video ngắn là một trợ thủ tốt. Nếu bạn xem một mạch mấy giờ, việc chính gì cũng không làm, thì nó sẽ trở thành công cụ lãng phí thời gian. Vì vậy, bạn trẻ nên học cách quản lý thời gian của mình, đừng để điện thoại điều khiển cuộc sống của mình.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
   questions: [
    { q: "很多年轻人喜欢用什么看短视频？", o: ["电脑", "手机", "电视", "平板电脑"], a: 1, why: "Bài viết: 喜欢用手机看短视频 — thích dùng điện thoại xem video ngắn." },
    { q: "有人担心看短视频时间太长会怎么样？", o: ["眼睛变好", "睡得更好", "影响学习和工作", "花钱太多"], a: 2, why: "Bài viết: 会影响学习和工作 — sẽ ảnh hưởng tới học tập và công việc." },
@@ -51640,7 +51640,7 @@ var ZH_READ_EXPAND15_THIN = [
   text: "去年秋天，陈静一个人去了云南旅行。她坐火车去了大理，看了美丽的洱海，还爬了一座小山。一路上，她认识了几个一起旅行的朋友，大家一起吃饭、拍照，玩得很开心。陈静说，一个人旅行虽然有时候会觉得累，但是可以自由地安排时间，想去哪儿就去哪儿。这次旅行让她变得更加独立，也更加自信。她计划明年再去一个新地方旅行，看看中国不同的风景。",
   pinyin: "Qùnián qiūtiān, Chén Jìng yí gè rén qù le Yúnnán lǚxíng. Tā zuò huǒchē qù le Dàlǐ, kàn le měilì de Ěrhǎi, hái pá le yí zuò xiǎo shān. Yí lù shang, tā rènshi le jǐ gè yìqǐ lǚxíng de péngyou, dàjiā yìqǐ chī fàn, pāi zhào, wán de hěn kāixīn. Chén Jìng shuō, yí gè rén lǚxíng suīrán yǒu shíhou huì juéde lèi, dànshì kěyǐ zìyóu de ānpái shíjiān, xiǎng qù nǎr jiù qù nǎr. Zhè cì lǚxíng ràng tā biàn de gèngjiā dúlì, yě gèngjiā zìxìn. Tā jìhuà míngnián zài qù yí gè xīn dìfang lǚxíng, kàn kan Zhōngguó bù tóng de fēngjǐng.",
   vi: "Mùa thu năm ngoái, Trần Tĩnh đi du lịch Vân Nam một mình. Bạn ấy đi tàu tới Đại Lý, ngắm hồ Nhĩ Hải xinh đẹp, còn leo một ngọn núi nhỏ. Dọc đường, bạn ấy quen vài người bạn cùng đi du lịch, mọi người cùng ăn cơm, chụp ảnh, chơi rất vui. Trần Tĩnh nói, đi du lịch một mình tuy đôi khi thấy mệt, nhưng có thể tự do sắp xếp thời gian, muốn đi đâu thì đi đó. Chuyến đi này giúp bạn ấy độc lập hơn, cũng tự tin hơn. Bạn ấy dự định năm sau lại đi du lịch một nơi mới, ngắm những phong cảnh khác nhau của Trung Quốc.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
   questions: [
    { q: "陈静去年秋天一个人去了哪里旅行？", o: ["四川", "云南", "北京", "上海"], a: 1, why: "Bài viết: 一个人去了云南旅行 — đi du lịch Vân Nam một mình." },
    { q: "她在大理看了什么？", o: ["长城", "美丽的洱海", "西湖", "故宫"], a: 1, why: "Bài viết: 看了美丽的洱海 — ngắm hồ Nhĩ Hải xinh đẹp." },
@@ -51657,7 +51657,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "你是学生吗？", py: "Nǐ shì xuésheng ma?", vi: "Bạn là học sinh phải không?" },
    { sp: "B", han: "是，我是学生。你也是学生吗？", py: "Shì, wǒ shì xuésheng. Nǐ yě shì xuésheng ma?", vi: "Đúng, tôi là học sinh. Bạn cũng là học sinh phải không?" },
    { sp: "A", han: "是，我们是学生。再见！", py: "Shì, wǒmen shì xuésheng. Zàijiàn!", vi: "Đúng, chúng ta đều là học sinh. Tạm biệt!" } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "s1-speak15-gia-dinh", stage: 1, title: "Gia đình của tôi", topic: "Gia đình",
   hook: "“我家有四口人” — đếm người trong nhà và nói nghề của bố mẹ.",
   lines: [
@@ -51666,7 +51666,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "你的哥哥是学生吗？", py: "Nǐ de gēge shì xuésheng ma?", vi: "Anh trai bạn là học sinh phải không?" },
    { sp: "B", han: "不是，他是老师。我的妈妈也是老师。", py: "Bú shì, tā shì lǎoshī. Wǒ de māma yě shì lǎoshī.", vi: "Không phải, anh ấy là giáo viên. Mẹ tôi cũng là giáo viên." },
    { sp: "A", han: "你的家人很好。", py: "Nǐ de jiārén hěn hǎo.", vi: "Gia đình bạn đều rất tốt." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "s1-speak15-so-dem", stage: 1, title: "Đếm số 1 đến 10", topic: "Số đếm",
   hook: "“一、二、三……” — đếm từ 1 đến 10 rồi hỏi tuổi nhau.",
   lines: [
@@ -51675,7 +51675,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "你今年多少岁？", py: "Nǐ jīnnián duōshao suì?", vi: "Năm nay bạn mấy tuổi?" },
    { sp: "B", han: "我今年十岁。", py: "Wǒ jīnnián shí suì.", vi: "Năm nay tôi 10 tuổi." },
    { sp: "A", han: "很好，我们会说了！", py: "Hěn hǎo, wǒmen huì shuō le!", vi: "Tốt lắm, chúng ta đều biết đếm rồi!" } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "s1-speak15-thoi-gian", stage: 1, title: "Mấy giờ rồi?", topic: "Thời gian",
   hook: "“现在七点吗？” — hỏi giờ và nói giờ vào học, giờ tan học.",
   lines: [
@@ -51684,7 +51684,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "我们八点上课，对吗？", py: "Wǒmen bā diǎn shàng kè, duì ma?", vi: "Chúng ta 8 giờ vào học, đúng không?" },
    { sp: "B", han: "对，八点上课，十二点下课。", py: "Duì, bā diǎn shàng kè, shí'èr diǎn xià kè.", vi: "Đúng, 8 giờ vào học, 12 giờ tan học." },
    { sp: "A", han: "好的，我们七点四十五去学校。", py: "Hǎo de, wǒmen qī diǎn sìshíwǔ qù xuéxiào.", vi: "Được, chúng ta 7 giờ 45 đi học." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "s1-speak15-lop-hoc", stage: 1, title: "Trong lớp học", topic: "Lớp học",
   hook: "“这是你的书吗？” — hỏi đồ vật trong lớp học ở đâu.",
   lines: [
@@ -51693,7 +51693,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "你的椅子在哪儿？", py: "Nǐ de yǐzi zài nǎr?", vi: "Ghế của bạn ở đâu?" },
    { sp: "B", han: "我的椅子在教室。老师在教室吗？", py: "Wǒ de yǐzi zài jiàoshì. Lǎoshī zài jiàoshì ma?", vi: "Ghế của tôi ở trong lớp học. Thầy cô có ở trong lớp học không?" },
    { sp: "A", han: "老师在教室外面。", py: "Lǎoshī zài jiàoshì wàimiàn.", vi: "Thầy cô ở ngoài lớp học." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "s1-speak15-mua-do", stage: 1, title: "Mua táo ở cửa hàng", topic: "Mua đồ",
   hook: "“我要买苹果” — mua đồ và hỏi giá tiền.",
   lines: [
@@ -51702,7 +51702,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "我要买五个苹果。多少钱？", py: "Wǒ yào mǎi wǔ gè píngguǒ. Duōshao qián?", vi: "Tôi muốn mua 5 quả táo. Bao nhiêu tiền?" },
    { sp: "B", han: "一共十块。", py: "Yígòng shí kuài.", vi: "Tổng cộng 10 tệ." },
    { sp: "A", han: "好的，给你十块。谢谢！", py: "Hǎo de, gěi nǐ shí kuài. Xièxie!", vi: "Được, đưa bạn 10 tệ. Cảm ơn!" } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "s1-speak15-an-uong", stage: 1, title: "Hôm nay ăn gì?", topic: "Ăn uống",
   hook: "“你喜欢吃什么？” — nói món ăn và đồ uống mình thích.",
   lines: [
@@ -51711,7 +51711,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "我喜欢吃面条。你喜欢喝什么？", py: "Wǒ xǐhuan chī miàntiáo. Nǐ xǐhuan hē shénme?", vi: "Tôi thích ăn mì. Bạn thích uống gì?" },
    { sp: "B", han: "我喜欢喝水和牛奶。", py: "Wǒ xǐhuan hē shuǐ hé niúnǎi.", vi: "Tôi thích uống nước và sữa." },
    { sp: "A", han: "我也喜欢喝水。我们一起吃饭！", py: "Wǒ yě xǐhuan hē shuǐ. Wǒmen yìqǐ chī fàn!", vi: "Tôi cũng thích uống nước. Chúng ta cùng ăn cơm nhé!" } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "s1-speak15-ban-be", stage: 1, title: "Bạn của tôi", topic: "Bạn bè",
   hook: "“这是我的朋友” — giới thiệu bạn và nói cùng học tiếng Trung.",
   lines: [
@@ -51720,7 +51720,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "小红是我的同学，我们一起学习汉语。", py: "Xiǎo Hóng shì wǒ de tóngxué, wǒmen yìqǐ xuéxí Hànyǔ.", vi: "Tiểu Hồng là bạn học của tôi, chúng tôi cùng học tiếng Trung." },
    { sp: "B", han: "你的汉语很好！", py: "Nǐ de Hànyǔ hěn hǎo!", vi: "Tiếng Trung của bạn rất tốt!" },
    { sp: "A", han: "谢谢！我们是好朋友。", py: "Xièxie! Wǒmen shì hǎo péngyou.", vi: "Cảm ơn! Chúng ta đều là bạn tốt." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "s1-speak15-nha-toi", stage: 1, title: "Nhà tôi", topic: "Nhà ở",
   hook: "“你的家在哪儿？” — nói nhà mình ở đâu và nhà có lớn không.",
   lines: [
@@ -51729,7 +51729,7 @@ var ZH_SPEAK_EXPAND15_THIN = [
    { sp: "A", han: "我的家也在河内。", py: "Wǒ de jiā yě zài Hénèi.", vi: "Nhà tôi cũng ở Hà Nội." },
    { sp: "B", han: "你的家大吗？", py: "Nǐ de jiā dà ma?", vi: "Nhà bạn có lớn không?" },
    { sp: "A", han: "我的家不大，很好。", py: "Wǒ de jiā bú dà, hěn hǎo.", vi: "Nhà tôi không lớn, rất tốt." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." }
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." }
 ];
 var ZH_WRITE_EXPAND15_THIN = [
 { id: "s1-write15-chao-hoi", stage: 1, title: "Điền từ: Chào hỏi", kind: "fill",
@@ -51739,7 +51739,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "我___小明。(Tôi tên là Tiểu Minh.)", o: ["是", "叫", "在", "去"], a: 1, why: "我叫小明：tôi tên là Tiểu Minh." },
    { q: "___见！(Tạm biệt!)", o: ["再", "好", "大", "小"], a: 0, why: "再见：tạm biệt." },
    { q: "很高兴___你。(Rất vui được gặp bạn.)", o: ["认识", "学习", "吃", "喝"], a: 0, why: "很高兴认识你：rất vui được gặp bạn." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "s1-write15-gia-dinh", stage: 1, title: "Điền từ: Gia đình tôi", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu về gia đình.",
   questions: [
@@ -51747,7 +51747,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "这是我的___。(Đây là mẹ tôi.)", o: ["妈妈", "爸爸", "哥哥", "姐姐"], a: 0, why: "这是我的妈妈：đây là mẹ tôi." },
    { q: "我哥哥是___。(Anh trai tôi là học sinh.)", o: ["学生", "老师", "朋友", "同学"], a: 0, why: "我哥哥是学生：anh trai tôi là học sinh." },
    { q: "我的妈妈是___。(Mẹ tôi là giáo viên.)", o: ["老师", "学生", "朋友", "同学"], a: 0, why: "我的妈妈是老师：mẹ tôi là giáo viên." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "s1-write15-so-dem", stage: 1, title: "Điền từ: Số đếm", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu đếm số.",
   questions: [
@@ -51755,7 +51755,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "我今年___岁。(Tôi năm nay 10 tuổi.)", o: ["十", "九", "八", "七"], a: 0, why: "我今年十岁：tôi năm nay 10 tuổi." },
    { q: "我有两___书。(Tôi có 2 quyển sách.)", o: ["本", "个", "块", "口"], a: 0, why: "两本书：2 quyển sách; 本 là lượng từ cho sách." },
    { q: "今天是星期___。(Hôm nay là thứ Hai.)", o: ["一", "二", "三", "四"], a: 0, why: "星期一：thứ Hai." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "s1-write15-truong-hoc", stage: 1, title: "Điền từ: Trường học", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu về trường học.",
   questions: [
@@ -51763,7 +51763,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "这是我的___。(Đây là sách của tôi.)", o: ["书", "笔", "桌子", "椅子"], a: 0, why: "这是我的书：đây là sách của tôi." },
    { q: "我的笔在___上。(Bút của tôi ở trên bàn.)", o: ["桌子", "椅子", "学校", "教室"], a: 0, why: "在桌子上：ở trên bàn." },
    { q: "我的椅子在___。(Ghế của tôi ở trong lớp học.)", o: ["教室", "学校", "商店", "河内"], a: 0, why: "椅子在教室：ghế ở trong lớp học." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "s1-write15-an-uong", stage: 1, title: "Điền từ: Ăn và uống", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu về ăn uống.",
   questions: [
@@ -51771,7 +51771,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "我喝___。(Tôi uống nước.)", o: ["水", "米饭", "面条", "苹果"], a: 0, why: "我喝水：tôi uống nước." },
    { q: "我要吃___。(Tôi muốn ăn táo.)", o: ["苹果", "米饭", "水", "牛奶"], a: 0, why: "我要吃苹果：tôi muốn ăn táo." },
    { q: "你喜欢喝___吗？(Bạn thích uống sữa không?)", o: ["牛奶", "米饭", "面条", "苹果"], a: 0, why: "喜欢喝牛奶：thích uống sữa." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "s1-write15-thoi-gian", stage: 1, title: "Điền từ: Thời gian", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu về thời gian.",
   questions: [
@@ -51779,7 +51779,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "我们八点___。(Chúng ta 8 giờ vào học.)", o: ["上课", "下课", "吃饭", "睡觉"], a: 0, why: "八点上课：8 giờ vào học." },
    { q: "今天是___。(Hôm nay là thứ Hai.)", o: ["星期一", "星期二", "星期三", "星期天"], a: 0, why: "今天是星期一：hôm nay là thứ Hai." },
    { q: "明天是星期___。(Ngày mai là thứ Ba.)", o: ["二", "一", "三", "四"], a: 0, why: "明天是星期二：ngày mai là thứ Ba." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "s1-write15-mua-do", stage: 1, title: "Điền từ: Mua đồ", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu mua đồ.",
   questions: [
@@ -51787,7 +51787,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "五个苹果一共___块。(5 quả táo tổng cộng 10 tệ.)", o: ["十", "九", "八", "七"], a: 0, why: "一共十块：tổng cộng 10 tệ." },
    { q: "你要买多少___苹果？(Bạn muốn mua bao nhiêu quả táo?)", o: ["个", "本", "块", "口"], a: 0, why: "多少个苹果：bao nhiêu quả táo; 个 là lượng từ cho táo." },
    { q: "给你十___。(Đưa bạn 10 tệ.)", o: ["块", "个", "本", "口"], a: 0, why: "十块：10 tệ; 块 là đơn vị tiền." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "s1-write15-ban-be", stage: 1, title: "Điền từ: Bạn bè", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu về bạn bè.",
   questions: [
@@ -51795,7 +51795,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "小红是我的___。(Tiểu Hồng là bạn học của tôi.)", o: ["同学", "老师", "朋友", "妈妈"], a: 0, why: "小红是我的同学：Tiểu Hồng là bạn học của tôi." },
    { q: "我们一起学习___。(Chúng tôi cùng học tiếng Trung.)", o: ["汉语", "米饭", "苹果", "水"], a: 0, why: "一起学习汉语：cùng học tiếng Trung." },
    { q: "我们是好___。(Chúng ta là bạn tốt.)", o: ["朋友", "老师", "学生", "同学"], a: 0, why: "我们是好朋友：chúng ta là bạn tốt." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "s1-write15-nha-toi", stage: 1, title: "Điền từ: Nhà tôi", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu về nhà ở.",
   questions: [
@@ -51803,7 +51803,7 @@ var ZH_WRITE_EXPAND15_THIN = [
    { q: "我的家___大。(Nhà tôi không lớn.)", o: ["不", "很", "小", "也"], a: 0, why: "不大：không lớn." },
    { q: "我的家不___。(Nhà tôi không xa.)", o: ["远", "近", "大", "小"], a: 0, why: "不远：không xa." },
    { q: "你的家在___？(Nhà bạn ở đâu?)", o: ["哪儿", "什么", "学校", "教室"], a: 0, why: "家在哪儿：nhà ở đâu; 哪儿 hỏi nơi chốn." } ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); câu và đáp án tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." }
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." }
 ];
 ZH_READING.push.apply(ZH_READING, ZH_READ_EXPAND15_THIN);
 ZH_SPEAK.push.apply(ZH_SPEAK, ZH_SPEAK_EXPAND15_THIN);
@@ -53611,7 +53611,7 @@ var ZH_READING_EXPAND17 = [
   text: "早上，小明起床了。他刷牙、洗脸，然后吃早饭。早饭有面包、鸡蛋和牛奶。小明喜欢喝牛奶。吃早饭以后，他去学校。他走路去学校，学校不远。",
   pinyin: "Zǎoshang, Xiǎo Míng qǐ chuáng le. Tā shuā yá, xǐ liǎn, ránhòu chī zǎofàn. Zǎofàn yǒu miànbāo, jīdàn hé niúnǎi. Xiǎo Míng xǐhuan hē niúnǎi. Chī zǎofàn yǐhòu, tā qù xuéxiào. Tā zǒu lù qù xuéxiào, xuéxiào bù yuǎn.",
   vi: "Buổi sáng, Tiểu Minh thức dậy. Cậu ấy đánh răng, rửa mặt, sau đó ăn sáng. Bữa sáng có bánh mì, trứng gà và sữa. Tiểu Minh thích uống sữa. Ăn sáng xong, cậu ấy đi học. Cậu ấy đi bộ đến trường, trường không xa.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Buổi sáng Tiểu Minh làm gì đầu tiên?", o: ["Thức dậy", "Đi chợ", "Xem tivi", "Đá bóng"], a: 0, why: "Bài viết nói buổi sáng Tiểu Minh thức dậy, sau đó đánh răng và rửa mặt." },
    { q: "Bữa sáng của Tiểu Minh có gì?", o: ["Chỉ có cơm", "Bánh mì, trứng gà và sữa", "Chỉ có trái cây", "Mì và thịt"], a: 1, why: "Bài viết kể bữa sáng có bánh mì, trứng gà và sữa." },
@@ -53622,7 +53622,7 @@ var ZH_READING_EXPAND17 = [
   text: "今天早上，妈妈去市场。市场有很多人。妈妈买了苹果、香蕉和鸡蛋。苹果三块一斤，香蕉两块一斤。妈妈给了卖苹果的人十块钱。回家以后，妈妈做饭给我们吃。",
   pinyin: "Jīntiān zǎoshang, māma qù shìchǎng. Shìchǎng yǒu hěn duō rén. Māma mǎi le píngguǒ, xiāngjiāo hé jīdàn. Píngguǒ sān kuài yì jīn, xiāngjiāo liǎng kuài yì jīn. Māma gěi le mài píngguǒ de rén shí kuài qián. Huí jiā yǐhòu, māma zuò fàn gěi wǒmen chī.",
   vi: "Sáng nay, mẹ đi chợ. Chợ có rất nhiều người. Mẹ mua táo, chuối và trứng gà. Táo ba đồng một cân, chuối hai đồng một cân. Mẹ đưa cho người bán táo mười đồng. Về nhà, mẹ nấu cơm cho chúng tôi ăn.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Sáng nay mẹ đi đâu?", o: ["Đi chợ", "Đi học", "Đi công viên", "Đi bệnh viện"], a: 0, why: "Bài viết nói sáng nay mẹ đi chợ." },
    { q: "Sáng nay mẹ mua những món nào?", o: ["Táo, chuối và trứng gà", "Cơm và mì", "Quần áo và giày", "Sách và bút"], a: 0, why: "Bài viết kể mẹ mua táo, chuối và trứng gà." },
@@ -53633,7 +53633,7 @@ var ZH_READING_EXPAND17 = [
   text: "我的同桌叫小红。她今年八岁。她喜欢红色，也喜欢看书。她的书包是红色的，有很多书和笔。早上，我们一起去学校。下午，我们一起回家。小红是我的好朋友，我很喜欢她。",
   pinyin: "Wǒ de tóngzhuō jiào Xiǎo Hóng. Tā jīnnián bā suì. Tā xǐhuan hóngsè, yě xǐhuan kàn shū. Tā de shūbāo shì hóngsè de, yǒu hěn duō shū hé bǐ. Zǎoshang, wǒmen yìqǐ qù xuéxiào. Xiàwǔ, wǒmen yìqǐ huí jiā. Xiǎo Hóng shì wǒ de hǎo péngyou, wǒ hěn xǐhuan tā.",
   vi: "Bạn cùng bàn của tôi tên là Tiểu Hồng. Bạn ấy năm nay 8 tuổi. Bạn ấy thích màu đỏ, cũng thích đọc sách. Cặp sách của bạn ấy màu đỏ, có rất nhiều sách và bút. Buổi sáng, chúng tôi cùng đi học. Buổi chiều, chúng tôi cùng về nhà. Tiểu Hồng là bạn tốt của tôi, tôi rất thích bạn ấy.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Bạn cùng bàn của tôi tên là gì?", o: ["Tiểu Minh", "Tiểu Hồng", "Đại Minh", "Tiểu Hoa"], a: 1, why: "Bài viết nói bạn cùng bàn tên là Tiểu Hồng." },
    { q: "Bạn cùng bàn của tôi năm nay mấy tuổi?", o: ["7 tuổi", "8 tuổi", "9 tuổi", "10 tuổi"], a: 1, why: "Bài viết nói Tiểu Hồng năm nay 8 tuổi." },
@@ -53644,7 +53644,7 @@ var ZH_READING_EXPAND17 = [
   text: "晚上，爸爸回家了。妈妈问爸爸今天晚上吃什么。爸爸说吃米饭和鱼。妈妈做了米饭、鱼和菜。我们喜欢吃妈妈做的菜。吃饭以后，爸爸看电视，妈妈喝茶，我看书。",
   pinyin: "Wǎnshang, bàba huí jiā le. Māma wèn bàba jīntiān wǎnshang chī shénme. Bàba shuō chī mǐfàn hé yú. Māma zuò le mǐfàn, yú hé cài. Wǒmen xǐhuan chī māma zuò de cài. Chī fàn yǐhòu, bàba kàn diànshì, māma hē chá, wǒ kàn shū.",
   vi: "Buổi tối, bố về nhà. Mẹ hỏi bố tối nay ăn gì. Bố nói ăn cơm và cá. Mẹ nấu cơm, cá và rau. Chúng tôi thích ăn món mẹ nấu. Ăn cơm xong, bố xem tivi, mẹ uống trà, tôi đọc sách.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Buổi tối ai về nhà?", o: ["Mẹ", "Bố", "Tiểu Minh", "Bạn học"], a: 1, why: "Bài viết nói buổi tối bố về nhà." },
    { q: "Mẹ hỏi bố điều gì?", o: ["Tối nay ăn gì", "Ngày mai đi đâu", "Hôm nay học gì", "Mua gì ở chợ"], a: 0, why: "Bài viết nói mẹ hỏi bố tối nay ăn gì." },
@@ -53655,7 +53655,7 @@ var ZH_READING_EXPAND17 = [
   text: "我们学校有一个图书馆。图书馆很大，有很多书。早上，很多学生去图书馆看书。图书馆很干净，学生们喜欢在图书馆看书。下午，很多学生也去图书馆看书。",
   pinyin: "Wǒmen xuéxiào yǒu yí gè túshūguǎn. Túshūguǎn hěn dà, yǒu hěn duō shū. Zǎoshang, hěn duō xuésheng qù túshūguǎn kàn shū. Túshūguǎn hěn gānjìng, xuéshengmen xǐhuan zài túshūguǎn kàn shū. Xiàwǔ, hěn duō xuésheng yě qù túshūguǎn kàn shū.",
   vi: "Trường chúng tôi có một thư viện. Thư viện rất rộng, có rất nhiều sách. Buổi sáng, nhiều học sinh đến thư viện đọc sách. Thư viện rất sạch, các học sinh thích đọc sách ở thư viện. Buổi chiều, nhiều học sinh cũng đến thư viện đọc sách.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Trường có gì?", o: ["Một thư viện", "Một công viên", "Một nhà ăn", "Một cửa hàng"], a: 0, why: "Bài viết nói trường có một thư viện." },
    { q: "Trong thư viện có gì?", o: ["Rất nhiều sách", "Rất nhiều đồ chơi", "Rất nhiều quần áo", "Rất nhiều đồ ăn"], a: 0, why: "Bài viết nói trong thư viện có rất nhiều sách." },
@@ -53666,7 +53666,7 @@ var ZH_READING_EXPAND17 = [
   text: "星期六早上，小明和妈妈去超市。超市里有很多东西，有水果、牛奶和面包。小明喜欢吃苹果，妈妈买了很多苹果。买完东西，他们去饭店吃饭。饭店的面条很好吃。小明说，下个星期六，他想和妈妈一起去超市。",
   pinyin: "Xīngqīliù zǎoshang, Xiǎo Míng hé māma qù chāoshì. Chāoshì lǐ yǒu hěn duō dōngxi, yǒu shuǐguǒ, niúnǎi hé miànbāo. Xiǎo Míng xǐhuan chī píngguǒ, māma mǎi le hěn duō píngguǒ. Mǎi wán dōngxi, tāmen qù fàndiàn chī fàn. Fàndiàn de miàntiáo hěn hǎochī. Xiǎo Míng shuō, xià gè xīngqīliù, tā xiǎng hé māma yìqǐ qù chāoshì.",
   vi: "Sáng thứ Bảy, Tiểu Minh và mẹ đi siêu thị. Trong siêu thị có rất nhiều đồ, có trái cây, sữa và bánh mì. Tiểu Minh thích ăn táo, mẹ mua rất nhiều táo. Mua đồ xong, hai mẹ con đi quán ăn cơm. Mì ở quán rất ngon. Tiểu Minh nói, thứ Bảy tuần sau, bạn ấy muốn cùng mẹ đi siêu thị nữa.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Sáng thứ Bảy Tiểu Minh và mẹ đi đâu?", o: ["Đi siêu thị", "Đi chợ", "Đi công viên", "Đi trường học"], a: 0, why: "Bài viết nói sáng thứ Bảy Tiểu Minh và mẹ đi siêu thị." },
    { q: "Trong siêu thị có gì?", o: ["Trái cây, sữa và bánh mì", "Chỉ có quần áo", "Chỉ có sách", "Chỉ có đồ chơi"], a: 0, why: "Bài viết kể trong siêu thị có trái cây, sữa và bánh mì." },
@@ -53677,7 +53677,7 @@ var ZH_READING_EXPAND17 = [
   text: "星期六下午，小红去商场买衣服。她看到一件红色的衣服，很漂亮，也很便宜。她穿上衣服，问妈妈这件衣服好看吗。妈妈说很好看。小红很高兴，她买了这件衣服。回到家里，她穿上新衣服给妈妈看。星期天，她穿着新衣服去公园玩。",
   pinyin: "Xīngqīliù xiàwǔ, Xiǎo Hóng qù shāngchǎng mǎi yīfu. Tā kàn dào yí jiàn hóngsè de yīfu, hěn piàoliang, yě hěn piányi. Tā chuān shang yīfu, wèn māma zhè jiàn yīfu hǎokàn ma. Māma shuō hěn hǎokàn. Xiǎo Hóng hěn gāoxìng, tā mǎi le zhè jiàn yīfu. Huí dào jiālǐ, tā chuān shang xīn yīfu gěi māma kàn. Xīngqītiān, tā chuānzhe xīn yīfu qù gōngyuán wán.",
   vi: "Chiều thứ Bảy, Tiểu Hồng đi trung tâm thương mại mua quần áo. Bạn ấy thấy một chiếc áo màu đỏ, rất đẹp, cũng rất rẻ. Bạn ấy mặc áo vào, hỏi mẹ chiếc áo này có đẹp không. Mẹ nói rất đẹp. Tiểu Hồng rất vui, bạn ấy mua chiếc áo này. Về đến nhà, bạn ấy mặc áo mới cho mẹ xem. Chủ nhật, bạn ấy mặc áo mới đi công viên chơi.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Chiều thứ Bảy Tiểu Hồng đi đâu?", o: ["Đi công viên", "Đi trung tâm thương mại", "Đi chợ", "Đi trường học"], a: 1, why: "Bài viết nói chiều thứ Bảy Tiểu Hồng đi trung tâm thương mại." },
    { q: "Bạn ấy thấy áo màu gì?", o: ["Màu xanh", "Màu đỏ", "Màu vàng", "Màu trắng"], a: 1, why: "Bài viết nói bạn ấy thấy một chiếc áo màu đỏ." },
@@ -53688,7 +53688,7 @@ var ZH_READING_EXPAND17 = [
   text: "现在，很多年轻人到大城市工作，老人常常一个人在家里生活。早上，老人去公园锻炼身体，和朋友聊天。下午，他们有时候看电视，有时候去市场买菜。晚上，孩子们打电话回家，问老人身体好不好。老人说，生活和以前不一样，但是他们有很多朋友，也有很多快乐的事情。社会应该多关心老人，让他们的生活更快乐。",
   pinyin: "Xiànzài, hěn duō niánqīng rén dào dà chéngshì gōngzuò, lǎorén chángcháng yí gè rén zài jiālǐ shēnghuó. Zǎoshang, lǎorén qù gōngyuán duànliàn shēntǐ, hé péngyou liáotiān. Xiàwǔ, tāmen yǒu shíhou kàn diànshì, yǒu shíhou qù shìchǎng mǎi cài. Wǎnshang, háizimen dǎ diànhuà huí jiā, wèn lǎorén shēntǐ hǎo bu hǎo. Lǎorén shuō, shēnghuó hé yǐqián bù yíyàng, dànshì tāmen yǒu hěn duō péngyou, yě yǒu hěn duō kuàilè de shìqing. Shèhuì yīnggāi duō guānxīn lǎorén, ràng tāmen de shēnghuó gèng kuàilè.",
   vi: "Hiện nay, nhiều người trẻ đến thành phố lớn làm việc, người già thường sống một mình ở nhà. Buổi sáng, người già ra công viên tập thể dục, trò chuyện với bạn bè. Buổi chiều, đôi khi họ xem tivi ở nhà, đôi khi đi chợ mua rau. Buổi tối, các con gọi điện về nhà, hỏi thăm sức khỏe người già. Người già nói, cuộc sống không giống như trước, nhưng họ có nhiều bạn bè, cũng có nhiều chuyện vui. Xã hội nên quan tâm nhiều hơn đến người già, để cuộc sống của họ vui vẻ hơn.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Nhiều người trẻ đi đâu làm việc?", o: ["Về quê", "Đến thành phố lớn", "Ở nhà", "Ra nước ngoài"], a: 1, why: "Bài viết nói nhiều người trẻ đến thành phố lớn làm việc." },
    { q: "Buổi sáng người già làm gì?", o: ["Đi chợ", "Ra công viên tập thể dục và trò chuyện", "Đi làm", "Đọc sách"], a: 1, why: "Bài viết nói buổi sáng người già ra công viên tập thể dục, trò chuyện với bạn bè." },
@@ -53699,7 +53699,7 @@ var ZH_READING_EXPAND17 = [
   text: "现在，很多人喜欢用手机看书，也喜欢在手机上看新闻。手机很方便，可以随时看书，书就在手机里。但是，长时间看手机对身体不好，也容易让人分心。专家说，看书的时候应该专心，一天看十分钟也很好。纸书和手机都可以用来读书，最重要的是养成读书的好习惯。每天读书一点点，一年以后，你会发现自己读了很多书，也学了很多新东西。",
   pinyin: "Xiànzài, hěn duō rén xǐhuan yòng shǒujī kàn shū, yě xǐhuan zài shǒujī shang kàn xīnwén. Shǒujī hěn fāngbiàn, kěyǐ suíshí kàn shū, shū jiù zài shǒujī lǐ. Dànshì, cháng shíjiān kàn shǒujī duì shēntǐ bù hǎo, yě róngyì ràng rén fēnxīn. Zhuānjiā shuō, kàn shū de shíhou yīnggāi zhuānxīn, yì tiān kàn shí fēnzhōng yě hěn hǎo. Zhǐ shū hé shǒujī dōu kěyǐ yòng lái dú shū, zuì zhòngyào de shì yǎngchéng dú shū de hǎo xíguàn. Měi tiān dú shū yì diǎn diǎn, yì nián yǐhòu, nǐ huì fāxiàn zìjǐ dú le hěn duō shū, yě xué le hěn duō xīn dōngxi.",
   vi: "Hiện nay, nhiều người thích dùng điện thoại đọc sách, cũng thích xem tin tức trên điện thoại. Điện thoại rất tiện, có thể đọc sách bất cứ lúc nào, sách ở ngay trong điện thoại. Nhưng xem điện thoại lâu không tốt cho sức khỏe, cũng dễ làm người ta mất tập trung. Chuyên gia nói, khi đọc sách nên tập trung, một ngày đọc mười phút cũng rất tốt. Sách giấy và điện thoại đều có thể dùng để đọc sách, quan trọng nhất là tạo được thói quen đọc sách tốt. Mỗi ngày đọc một chút, một năm sau, bạn sẽ thấy mình đã đọc rất nhiều sách, cũng học được nhiều điều mới.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); đoạn văn và câu hỏi tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Nhiều người thích dùng điện thoại làm gì?", o: ["Đọc sách và xem tin tức", "Chỉ gọi điện", "Chơi game", "Chụp ảnh"], a: 0, why: "Bài viết nói nhiều người thích dùng điện thoại đọc sách, cũng thích xem tin tức." },
    { q: "Điện thoại tiện ở điểm nào?", o: ["Có thể đọc sách bất cứ lúc nào", "Không cần sạc pin", "Rất rẻ", "Rất to"], a: 0, why: "Bài viết nói điện thoại có thể đọc sách bất cứ lúc nào." },
@@ -53716,7 +53716,7 @@ var ZH_LISTEN_EXPAND17 = [
    { sp: "B", han: "苹果三块一斤，三斤九块钱。", py: "Píngguǒ sān kuài yì jīn, sān jīn jiǔ kuài qián.", vi: "Táo ba đồng một cân, ba cân là chín đồng." },
    { sp: "A", han: "好，给你十块钱。", py: "Hǎo, gěi nǐ shí kuài qián.", vi: "Được, đưa bạn mười đồng." },
    { sp: "B", han: "给你一块钱，谢谢。", py: "Gěi nǐ yí kuài qián, xièxie.", vi: "Đưa lại bạn một đồng, cảm ơn." } ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  note: "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Người mua muốn mua gì?", o: ["Táo", "Chuối", "Trứng gà", "Cam"], a: 0, why: "Người mua nói muốn mua táo." },
    { q: "Người mua mua mấy cân táo?", o: ["Một cân", "Hai cân", "Ba cân", "Năm cân"], a: 2, why: "Người mua nói mua ba cân táo." },
@@ -53730,7 +53730,7 @@ var ZH_LISTEN_EXPAND17 = [
    { sp: "B", han: "好，八点在学校前面见。", py: "Hǎo, bā diǎn zài xuéxiào qiánmiàn jiàn.", vi: "Được, 8 giờ gặp ở phía trước trường." },
    { sp: "A", han: "明天早上你吃什么？", py: "Míngtiān zǎoshang nǐ chī shénme?", vi: "Sáng mai bạn ăn gì?" },
    { sp: "B", han: "我吃面包和牛奶。", py: "Wǒ chī miànbāo hé niúnǎi.", vi: "Tôi ăn bánh mì và sữa." } ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  note: "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Hai bạn nói về chuyện gì?", o: ["Đi học sáng mai", "Đi chợ", "Ăn cơm trưa", "Đi công viên"], a: 0, why: "Hai bạn hẹn nhau đi học vào sáng mai." },
    { q: "Mấy giờ hai bạn đi học?", o: ["8 giờ", "7 giờ", "9 giờ", "10 giờ"], a: 0, why: "Bạn B nói 8 giờ đi." },
@@ -53744,7 +53744,7 @@ var ZH_LISTEN_EXPAND17 = [
    { sp: "B", han: "面条五块钱，很好吃。", py: "Miàntiáo wǔ kuài qián, hěn hǎochī.", vi: "Mì năm đồng, rất ngon." },
    { sp: "A", han: "好，我们吃面条。", py: "Hǎo, wǒmen chī miàntiáo.", vi: "Được, chúng mình ăn mì." },
    { sp: "B", han: "好，我们吃面条，再喝牛奶。", py: "Hǎo, wǒmen chī miàntiáo, zài hē niúnǎi.", vi: "Được, chúng mình ăn mì, rồi uống thêm sữa." } ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  note: "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Buổi trưa hai bạn đi đâu ăn cơm?", o: ["Nhà ăn", "Chợ", "Công viên", "Ở nhà"], a: 0, why: "Hai bạn hẹn đi nhà ăn ăn cơm buổi trưa." },
    { q: "Hai bạn muốn ăn gì?", o: ["Bánh mì", "Mì", "Cơm", "Trái cây"], a: 1, why: "Cả hai bạn đều muốn ăn mì." },
@@ -53758,7 +53758,7 @@ var ZH_LISTEN_EXPAND17 = [
    { sp: "B", han: "有很多书，很干净。", py: "Yǒu hěn duō shū, hěn gānjìng.", vi: "Có rất nhiều sách, rất sạch." },
    { sp: "A", han: "我也要去，我们一起去，好吗？", py: "Wǒ yě yào qù, wǒmen yìqǐ qù, hǎo ma?", vi: "Tôi cũng muốn đi, chúng mình cùng đi nhé?" },
    { sp: "B", han: "好，下午三点去。", py: "Hǎo, xiàwǔ sān diǎn qù.", vi: "Được, 3 giờ chiều đi." } ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  note: "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Buổi chiều bạn B đi đâu?", o: ["Đi chợ", "Đi thư viện", "Đi công viên", "Đi bệnh viện"], a: 1, why: "Bạn B nói đi thư viện đọc sách." },
    { q: "Bạn B nói gì về thư viện?", o: ["Rất nhiều sách, rất sạch", "Rất ít sách", "Rất ồn", "Rất nhỏ"], a: 0, why: "Bạn B nói trong thư viện có rất nhiều sách, rất sạch." },
@@ -53772,7 +53772,7 @@ var ZH_LISTEN_EXPAND17 = [
    { sp: "B", han: "对，我走路去学校。", py: "Duì, wǒ zǒu lù qù xuéxiào.", vi: "Đúng, tôi đi bộ đến trường." },
    { sp: "A", han: "学校前面有商店吗？", py: "Xuéxiào qiánmiàn yǒu shāngdiàn ma?", vi: "Phía trước trường có cửa hàng không?" },
    { sp: "B", han: "有，有一个小商店。", py: "Yǒu, yǒu yí gè xiǎo shāngdiàn.", vi: "Có, có một cửa hàng nhỏ." } ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  note: "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Nhà bạn B ở đâu?", o: ["Phía trước trường", "Phía sau trường", "Ở chợ", "Ở công viên"], a: 0, why: "Bạn B nói nhà ở phía trước trường." },
    { q: "Nhà bạn B có xa trường không?", o: ["Rất xa", "Không xa", "Rất xa chợ", "Không biết"], a: 1, why: "Bạn B nói nhà ở phía trước trường, không xa." },
@@ -53786,7 +53786,7 @@ var ZH_LISTEN_EXPAND17 = [
    { sp: "B", han: "好，一个房间三天一共六百块钱。", py: "Hǎo, yí gè fángjiān sān tiān yígòng liù bǎi kuài qián.", vi: "Được, một phòng ba ngày tổng cộng sáu trăm đồng." },
    { sp: "A", han: "房间里有电视和电脑吗？", py: "Fángjiān lǐ yǒu diànshì hé diànnǎo ma?", vi: "Trong phòng có tivi và máy tính không?" },
    { sp: "B", han: "有，房间很大，也很干净。", py: "Yǒu, fángjiān hěn dà, yě hěn gānjìng.", vi: "Có, phòng rất rộng, cũng rất sạch." } ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  note: "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Người khách muốn đặt gì?", o: ["Một phòng khách sạn", "Một vé tàu", "Một bàn ăn", "Một chiếc xe"], a: 0, why: "Người khách nói muốn đặt trước một phòng." },
    { q: "Người khách ở mấy ngày?", o: ["Ba ngày", "Hai ngày", "Năm ngày", "Một tuần"], a: 0, why: "Người khách nói ở ba ngày." },
@@ -53800,7 +53800,7 @@ var ZH_LISTEN_EXPAND17 = [
    { sp: "B", han: "左转，再走十分钟就到了。", py: "Zuǒ zhuǎn, zài zǒu shí fēnzhōng jiù dào le.", vi: "Rẽ trái, đi thêm mười phút nữa là đến." },
    { sp: "A", han: "谢谢，医院门口有商店吗？", py: "Xièxie, yīyuàn ménkǒu yǒu shāngdiàn ma?", vi: "Cảm ơn, cổng bệnh viện có cửa hàng không?" },
    { sp: "B", han: "有，门口有一个小商店。", py: "Yǒu, ménkǒu yǒu yí gè xiǎo shāngdiàn.", vi: "Có, cổng có một cửa hàng nhỏ." } ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  note: "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Người hỏi muốn đi đâu?", o: ["Bệnh viện", "Trường học", "Chợ", "Công viên"], a: 0, why: "Người hỏi xin hỏi bệnh viện ở đâu." },
    { q: "Bệnh viện ở đâu?", o: ["Phía trước", "Phía sau", "Bên trái", "Bên phải"], a: 0, why: "Người chỉ đường nói bệnh viện ở phía trước." },
@@ -53814,7 +53814,7 @@ var ZH_LISTEN_EXPAND17 = [
    { sp: "B", han: "很好，你为什么想来我们公司？", py: "Hěn hǎo, nǐ wèi shénme xiǎng lái wǒmen gōngsī?", vi: "Rất tốt, vì sao bạn muốn đến công ty chúng tôi?" },
    { sp: "A", han: "因为我想学习，也想得到工作经验。", py: "Yīnwèi wǒ xiǎng xuéxí, yě xiǎng dédào gōngzuò jīngyàn.", vi: "Vì tôi muốn học tập, cũng muốn có kinh nghiệm làm việc." },
    { sp: "B", han: "好，下个星期一你来公司，我们再谈。", py: "Hǎo, xià gè xīngqīyī nǐ lái gōngsī, wǒmen zài tán.", vi: "Được, thứ Hai tuần sau bạn đến công ty, chúng ta nói chuyện thêm." } ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
+  note: "Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.",
   questions: [
    { q: "Người A đến để làm gì?", o: ["Mua đồ", "Phỏng vấn thực tập", "Xin nghỉ việc", "Hỏi đường"], a: 1, why: "Người A nói đến tham gia phỏng vấn thực tập." },
    { q: "Trước đây người A đã làm gì?", o: ["Làm việc ở bệnh viện", "Chưa từng làm việc", "Làm việc ở cửa hàng hai tháng", "Làm việc ở trường học"], a: 2, why: "Người A nói đã làm việc ở cửa hàng hai tháng." },
@@ -53830,7 +53830,7 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "两块钱，很便宜。", py: "Liǎng kuài qián, hěn piányi.", vi: "Hai đồng, rất rẻ." },
    { sp: "B", han: "我们在下一个车站下车吗？", py: "Wǒmen zài xià yí gè chēzhàn xià chē ma?", vi: "Chúng mình xuống ở trạm tiếp theo à?" },
    { sp: "A", han: "对，下一个车站下车。", py: "Duì, xià yí gè chēzhàn xià chē.", vi: "Đúng, xuống ở trạm tiếp theo." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "zh17s2b", stage: 2, title: "Hỏi đường đi công viên", topic: "Hỏi đường",
   hook: "“公园在前面，你往前面走。” — chỉ đường đi công viên: 往前面走 là đi về phía trước.",
   lines: [
@@ -53839,7 +53839,7 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "前面左转吗？", py: "Qiánmiàn zuǒ zhuǎn ma?", vi: "Phía trước rẽ trái à?" },
    { sp: "B", han: "对，左转，再走五分钟就到了。", py: "Duì, zuǒ zhuǎn, zài zǒu wǔ fēnzhōng jiù dào le.", vi: "Đúng, rẽ trái, đi thêm năm phút nữa là đến." },
    { sp: "A", han: "谢谢，再见。", py: "Xièxie, zàijiàn.", vi: "Cảm ơn, tạm biệt." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "zh17s3a", stage: 3, title: "Đặt bàn ăn tối", topic: "Ăn uống",
   hook: "“晚上我们去饭馆吃饭吧。” — rủ nhau đi ăn tối ở quán: 去饭馆吃饭 là đi quán ăn cơm.",
   lines: [
@@ -53848,7 +53848,7 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "四个人，六点去。", py: "Sì gè rén, liù diǎn qù.", vi: "Bốn người, 6 giờ đi." },
    { sp: "B", han: "我们要预订吗？", py: "Wǒmen yào yùdìng ma?", vi: "Chúng mình có cần đặt trước không?" },
    { sp: "A", han: "要，我给饭馆打电话。", py: "Yào, wǒ gěi fànguǎn dǎ diànhuà.", vi: "Cần, tôi gọi điện cho quán." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "zh17s4a", stage: 4, title: "Thuê xe đạp đi chơi", topic: "Đi lại",
   hook: "“我们租自行车去公园吧。” — rủ nhau thuê xe đạp đi công viên: 租自行车 là thuê xe đạp.",
   lines: [
@@ -53857,7 +53857,7 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "一天二十块钱，很便宜。", py: "Yì tiān èrshí kuài qián, hěn piányi.", vi: "Một ngày hai mươi đồng, rất rẻ." },
    { sp: "B", han: "我们租两辆自行车吧。", py: "Wǒmen zū liǎng liàng zìxíngchē ba.", vi: "Chúng mình thuê hai chiếc xe đạp nhé." },
    { sp: "A", han: "好，下午我们骑车去公园。", py: "Hǎo, xiàwǔ wǒmen qí chē qù gōngyuán.", vi: "Được, buổi chiều chúng mình đạp xe đi công viên." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "zh17s4b", stage: 4, title: "Đi khám răng", topic: "Sức khỏe",
   hook: "“我牙疼，想去医院看牙。” — nói bị đau răng và muốn đi khám: 牙疼 là đau răng.",
   lines: [
@@ -53866,7 +53866,7 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "疼两天了，昨天晚上很疼。", py: "Téng liǎng tiān le, zuótiān wǎnshang hěn téng.", vi: "Đau hai ngày rồi, tối qua rất đau." },
    { sp: "B", han: "医生会给你检查，也会给你吃药。", py: "Yīshēng huì gěi nǐ jiǎnchá, yě huì gěi nǐ chī yào.", vi: "Bác sĩ sẽ khám cho bạn, cũng sẽ cho bạn uống thuốc." },
    { sp: "A", han: "好，谢谢你，我现在就去医院。", py: "Hǎo, xièxie nǐ, wǒ xiànzài jiù qù yīyuàn.", vi: "Được, cảm ơn bạn, tôi đi bệnh viện ngay bây giờ." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "zh17s5a", stage: 5, title: "Bàn về làm thêm", topic: "Công việc",
   hook: "“大学生做兼职，可以得到工作经验。” — nói về làm thêm của sinh viên: 做兼职 là làm thêm, 工作经验 là kinh nghiệm làm việc.",
   lines: [
@@ -53875,7 +53875,7 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "你一个星期工作几天？", py: "Nǐ yí gè xīngqī gōngzuò jǐ tiān?", vi: "Một tuần bạn làm việc mấy ngày?" },
    { sp: "B", han: "工作两天，星期六和星期天。", py: "Gōngzuò liǎng tiān, xīngqīliù hé xīngqītiān.", vi: "Làm hai ngày, thứ Bảy và chủ nhật." },
    { sp: "A", han: "做兼职很好，可以得到工作经验。", py: "Zuò jiānzhí hěn hǎo, kěyǐ dédào gōngzuò jīngyàn.", vi: "Làm thêm rất tốt, có thể có kinh nghiệm làm việc." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "zh17s5b", stage: 5, title: "Chọn môn học kỳ sau", topic: "Học tập",
   hook: "“下个学期，你想学什么？” — hỏi học gì vào học kỳ sau: 学习电脑 là học máy tính.",
   lines: [
@@ -53884,7 +53884,7 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "电脑课难吗？", py: "Diànnǎo kè nán ma?", vi: "Môn máy tính có khó không?" },
    { sp: "B", han: "不难，老师很好，课也很有意思。", py: "Bù nán, lǎoshī hěn hǎo, kè yě hěn yǒu yìsi.", vi: "Không khó, thầy cô rất tốt, môn học cũng rất thú vị." },
    { sp: "A", han: "好，我也学习电脑。", py: "Hǎo, wǒ yě xuéxí diànnǎo.", vi: "Được, tôi cũng học máy tính." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "zh17s6a", stage: 6, title: "Ở thành phố hay về quê làm việc", topic: "Công việc",
   hook: "“年轻人应该去大城市工作，还是回老家工作？” — nêu lựa chọn nghề nghiệp cho người trẻ: 回老家工作 là về quê làm việc.",
   lines: [
@@ -53893,7 +53893,7 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "老家生活轻松，但是工作机会少。", py: "Lǎojiā shēnghuó qīngsōng, dànshì gōngzuò jīhuì shǎo.", vi: "Quê nhà cuộc sống thoải mái, nhưng ít cơ hội việc làm." },
    { sp: "B", han: "我觉得，先去大城市学习几年，再回老家工作。", py: "Wǒ juéde, xiān qù dà chéngshì xuéxí jǐ nián, zài huí lǎojiā gōngzuò.", vi: "Tôi thấy, trước hết đi thành phố lớn học vài năm, rồi về quê làm việc." },
    { sp: "A", han: "这个想法很好，又能学习，又能回家。", py: "Zhè gè xiǎngfǎ hěn hǎo, yòu néng xuéxí, yòu néng huí jiā.", vi: "Ý này rất hay, vừa có thể học tập, vừa có thể về nhà." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." },
 { id: "zh17s6b", stage: 6, title: "Ý kiến về học trực tuyến", topic: "Học tập",
   hook: "“在网上学习很方便，但是需要自律。” — nêu hai mặt của học trực tuyến: 自律 là tự kỷ luật.",
   lines: [
@@ -53902,84 +53902,84 @@ var ZH_SPEAK_EXPAND17 = [
    { sp: "A", han: "对，在家里学习，很容易分心。", py: "Duì, zài jiālǐ xuéxí, hěn róngyì fēnxīn.", vi: "Đúng, học ở nhà, rất dễ mất tập trung." },
    { sp: "B", han: "所以，我每天早上学习两个小时，也做学习计划。", py: "Suǒyǐ, wǒ měi tiān zǎoshang xuéxí liǎng gè xiǎoshí, yě zuò xuéxí jìhuà.", vi: "Vì vậy, mỗi sáng tôi học hai giờ, cũng làm kế hoạch học tập." },
    { sp: "A", han: "这个办法很好，我也要做学习计划。", py: "Zhè gè bànfǎ hěn hǎo, wǒ yě yào zuò xuéxí jìhuà.", vi: "Cách này rất hay, tôi cũng sẽ làm kế hoạch học tập." } ],
-  note: "Kịch bản tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." }
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Bài này là tự luyện nói nhại, chưa chấm điểm — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt." }
 ];
 var ZH_WRITE_EXPAND17 = [
 { id: "zh17w2a", stage: 2, title: "Sắp xếp: Mỗi sáng tôi uống sữa", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: mỗi sáng tôi uống một cốc sữa.",
   words: ["我", "每天", "早上", "喝", "一杯", "牛奶"],
   why: "Trật tự đúng: chủ ngữ 我 → tần suất 每天 → thời gian 早上 → động từ 喝 → số lượng 一杯 → đồ uống 牛奶.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w2b", stage: 2, title: "Sắp xếp: Chị gái mua táo ở chợ", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: chị gái mua hai cân táo ở chợ.",
   words: ["姐姐", "在", "市场", "买", "两斤", "苹果"],
   why: "Trật tự đúng: chủ ngữ 姐姐 → nơi chốn 在市场 → động từ 买 → số lượng 两斤 → đồ vật 苹果.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w2c", stage: 2, title: "Sắp xếp: Buổi tối chúng tôi xem tivi ở nhà", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: buổi tối chúng tôi xem tivi ở nhà.",
   words: ["我们", "晚上", "在", "家里", "看", "电视"],
   why: "Trật tự đúng: chủ ngữ 我们 → thời gian 晚上 → nơi chốn 在家里 → động từ 看 → đồ vật 电视.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK2 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w3a", stage: 3, title: "Sắp xếp: Thứ Bảy tôi đi công viên chơi", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: thứ Bảy tôi đi công viên chơi.",
   words: ["我", "星期六", "去", "公园", "玩"],
   why: "Trật tự đúng: chủ ngữ 我 → thời gian 星期六 → động từ 去 → nơi chốn 公园 → việc 玩.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK3 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w4a", stage: 4, title: "Sắp xếp: Anh ấy đã tìm được việc làm", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: anh ấy đã tìm được việc làm.",
   words: ["他", "已经", "找到", "一份", "工作"],
   why: "Trật tự đúng: chủ ngữ 他 → 已经 → động từ 找到 → số lượng 一份 → việc 工作.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w4b", stage: 4, title: "Sắp xếp: Nhà mới của chúng tôi gần trường", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: nhà mới của chúng tôi gần trường.",
   words: ["我们", "的", "新房子", "离", "学校", "很近"],
   why: "Trật tự đúng: chủ ngữ 我们 → 的 → nhà 新房子 → 离 → nơi chốn 学校 → tính từ 很近.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w4c", stage: 4, title: "Sắp xếp: Bây giờ cô ấy đang học lái xe", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: bây giờ cô ấy đang học lái xe.",
   words: ["她", "现在", "在", "学", "开车"],
   why: "Trật tự đúng: chủ ngữ 她 → thời gian 现在 → 在 + động từ 学 → việc 开车.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w4d", stage: 4, title: "Sắp xếp: Hôm qua mưa, tôi ở nhà đọc sách", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: hôm qua trời mưa, tôi ở nhà đọc sách.",
   words: ["昨天", "下雨", "我", "在", "家里", "看书"],
   why: "Trật tự đúng: thời gian 昨天 → tình huống 下雨 → chủ ngữ 我 → nơi chốn 在家里 → việc 看书.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK4 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w5a", stage: 5, title: "Sắp xếp: Dù bận anh ấy vẫn đi học", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: dù bận thế nào anh ấy vẫn đi học.",
   words: ["他", "不管", "多忙", "都", "去", "上课"],
   why: "Trật tự đúng: chủ ngữ 他 → 不管多忙 → 都 → động từ 去 → việc 上课. 不管…都 nói dù thế nào cũng vẫn làm.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w5b", stage: 5, title: "Sắp xếp: Vì sức khỏe cô ấy tập thể dục mỗi ngày", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: vì sức khỏe, cô ấy tập thể dục mỗi ngày.",
   words: ["她", "为了", "健康", "每天", "锻炼", "身体"],
   why: "Trật tự đúng: chủ ngữ 她 → mục đích 为了健康 → tần suất 每天 → động từ 锻炼 → đối tượng 身体.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w5c", stage: 5, title: "Sắp xếp: Công ty yêu cầu nhân viên học máy tính", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: công ty yêu cầu nhân viên học máy tính.",
   words: ["公司", "要求", "员工", "学习", "电脑"],
   why: "Trật tự đúng: chủ ngữ 公司 → động từ 要求 → đối tượng 员工 → động từ 学习 → môn học 电脑.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w5d", stage: 5, title: "Sắp xếp: Anh ấy đã làm việc ở đây năm năm", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: anh ấy đã làm việc ở đây năm năm.",
   words: ["他", "在", "这里", "工作", "五年", "了"],
   why: "Trật tự đúng: chủ ngữ 他 → nơi chốn 在这里 → động từ 工作 → thời lượng 五年 → 了 báo việc kéo dài tới nay.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK5 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w6a", stage: 6, title: "Sắp xếp: Rốt cuộc chúng ta nên bảo vệ môi trường", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: rốt cuộc, chúng ta nên bảo vệ môi trường.",
   words: ["归根到底", "我们", "应该", "保护", "环境"],
   why: "Trật tự đúng: 归根到底 mở đầu kết luận → chủ ngữ 我们 → 应该 → động từ 保护 → đối tượng 环境.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w6b", stage: 6, title: "Sắp xếp: Dù gặp khó khăn cô ấy vẫn kiên trì", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: dù gặp khó khăn, cô ấy vẫn kiên trì đến cùng.",
   words: ["她", "尽管", "遇到", "困难", "还是", "坚持下去"],
   why: "Trật tự đúng: chủ ngữ 她 → 尽管遇到困难 → 还是 → 坚持下去. 尽管…还是 nói dù… vẫn….",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." },
 { id: "zh17w6c", stage: 6, title: "Sắp xếp: Cùng với sự phát triển của công nghệ, cuộc sống tiện hơn", kind: "order",
   prompt: "Sắp xếp các từ thành câu đúng: cùng với sự phát triển của công nghệ, cuộc sống tiện lợi hơn.",
   words: ["随着", "技术", "的", "发展", "生活", "更方便"],
   why: "Trật tự đúng: 随着技术的发展 mở đầu bối cảnh → chủ ngữ 生活 → 更方便.",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK6 (hệ 6 cấp cũ); câu và từ tự viết, không trích nguyên văn giáo trình. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." }
+  note: "Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách." }
 ];
 var ZH_GRAMMAR_EXPAND17 = [
 { id: "zh17g-you", stage: 1, title: "有 — có",
@@ -53992,7 +53992,7 @@ var ZH_GRAMMAR_EXPAND17 = [
   speak: "我有一个苹果。我家有三口人。学校有一个图书馆。你有牛奶吗？",
   rule: "Công thức: ai/cái gì + 有 + cái gì. 有 nói có, sở hữu; hỏi thì thêm 吗 cuối câu, trả lời 有/没有.",
   tip: "没有 là phủ định của 有: không có. Đừng dùng 不有.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
    { q: "Câu nào dùng 有 đúng để nói tôi có một quả táo?", o: ["我有一个苹果", "我有苹果一个", "我一个有苹果", "我苹果有"], a: 0, why: "有 đứng trước đồ vật: 有一个苹果." },
    { q: "“我家有三口人” nghĩa là gì?", o: ["Trong nhà có ba người", "Trong nhà có ba quyển sách", "Nhà có ba cái bàn", "Nhà có ba con mèo"], a: 0, why: "我家有三口人: nhà tôi có ba người." },
@@ -54010,7 +54010,7 @@ var ZH_GRAMMAR_EXPAND17 = [
   speak: "我在学校。妈妈在家做饭。书在桌子上。小明在图书馆看书。",
   rule: "Công thức: ai/cái gì + 在 + nơi chốn. 在 nói ở đâu; muốn nói làm việc ở đâu thì 在 + nơi chốn đứng trước động từ: 在家做饭.",
   tip: "Đừng nhầm 在 (ở) với 再 (lại, nữa): hai chữ khác nhau.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
    { q: "Câu nào nói tôi ở trường?", o: ["我在学校", "我有学校", "我是学校", "我去学校"], a: 0, why: "在学校 là ở trường." },
    { q: "“妈妈在家做饭” nghĩa là gì?", o: ["Mẹ nấu cơm ở nhà", "Mẹ đi chợ", "Mẹ đọc sách ở thư viện", "Mẹ đi học"], a: 0, why: "在家做饭: nấu cơm ở nhà." },
@@ -54028,7 +54028,7 @@ var ZH_GRAMMAR_EXPAND17 = [
   speak: "这是我的书。小红的书包是红色的。妈妈做的菜很好吃。这是小明的笔。",
   rule: "Công thức: người sở hữu + 的 + đồ vật. 的 nói của ai; cụm 'ai làm + 的 + đồ vật' nói đồ vật do ai làm ra: 妈妈做的菜.",
   tip: "Nói quan hệ thân thuộc hay thân thiết có thể lược 的: 我妈妈 (mẹ tôi), nhưng 我 的 老师 vẫn hay giữ 的.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
    { q: "Câu nào nói sách của tôi?", o: ["我的书", "我书的", "书我", "我的有书"], a: 0, why: "我的书: sách của tôi, 的 nối tôi với sách." },
    { q: "“小红的书包是红色的” nghĩa là gì?", o: ["Cặp sách của Tiểu Hồng màu đỏ", "Sách của Tiểu Hồng màu xanh", "Cặp sách của Tiểu Minh màu đỏ", "Bút của Tiểu Hồng màu đỏ"], a: 0, why: "小红的书包是红色的: cặp sách của Tiểu Hồng màu đỏ." },
@@ -54046,7 +54046,7 @@ var ZH_GRAMMAR_EXPAND17 = [
   speak: "三本书。三口人。两个苹果。一斤香蕉。",
   rule: "Công thức: số + lượng từ + đồ vật. Người dùng 口, sách dùng 本, đồ vật chung dùng 个, cân dùng 斤. 两 là hai khi đi với lượng từ, không dùng 二.",
   tip: "Một thì nói 一个/一本/一口, đừng nói 一二; số 2 trước lượng từ luôn là 两.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
    { q: "Ba quyển sách nói thế nào?", o: ["三本书", "三书本", "书三本", "三本的书"], a: 0, why: "Số + lượng từ + đồ vật: 三本书." },
    { q: "Ba người nói thế nào?", o: ["三口人", "三人个", "三个人口", "人口三"], a: 0, why: "Người dùng lượng từ 口: 三口人." },
@@ -54064,7 +54064,7 @@ var ZH_GRAMMAR_EXPAND17 = [
   speak: "我今天去学校。早上，我吃面包和牛奶。晚上，我们在家看电视。昨天，妈妈去市场买菜。",
   rule: "Từ thời gian (今天/昨天/明天/早上/晚上) đứng trước động từ, hoặc đầu câu. Nói 'tôi hôm nay đi học' chứ không nói 'tôi đi học hôm nay' theo kiểu tiếng Việt.",
   tip: "明天 là ngày mai, 昨天 là hôm qua, 今天 là hôm nay: nhớ cặp ba ngày này.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
    { q: "Câu nào nói hôm nay tôi đi học?", o: ["我今天去学校", "我去学校今天", "今天我学校去", "我学校去今天"], a: 0, why: "今天 đứng trước động từ 去: 我今天去学校." },
    { q: "“早上，我吃面包和牛奶” nghĩa là gì?", o: ["Buổi sáng, tôi ăn bánh mì và sữa", "Buổi tối, tôi ăn cơm", "Buổi sáng, tôi đi chợ", "Buổi trưa, tôi uống trà"], a: 0, why: "早上: buổi sáng; 吃面包和牛奶: ăn bánh mì và sữa." },
@@ -54082,7 +54082,7 @@ var ZH_GRAMMAR_EXPAND17 = [
   speak: "书在桌子上。苹果在桌子下面。学校在商店前面。我家在学校后面。",
   rule: "Công thức: đồ vật + 在 + nơi chốn + phương vị. 上 là trên, 下 là dưới, 上面 là phía trên, 下面 là phía dưới, 前面 là phía trước, 后面 là phía sau.",
   tip: "Nhớ cặp đối nhau: 上—下, 上面—下面, 前面—后面: trên—dưới, phía trên—phía dưới, trước—sau.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK1 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
    { q: "Sách ở trên bàn nói thế nào?", o: ["书在桌子上", "书在桌子下面", "书在桌子前面", "书有桌子上"], a: 0, why: "在桌子上: ở trên bàn." },
    { q: "Táo ở dưới bàn nói thế nào?", o: ["苹果在桌子下面", "苹果在书包上", "苹果在书包前面", "苹果有桌子下面"], a: 0, why: "在桌子下面: ở dưới bàn." },
@@ -54100,7 +54100,7 @@ var ZH_GRAMMAR_EXPAND17 = [
   speak: "他走上来了。他从楼上走下来了。小明从学校回来了。他站起来了。",
   rule: "Công thức: động từ + 上来/下去/回来/过去/起来. 来 nói hướng về phía người nói, 去 nói hướng ra xa người nói: 上来 là lên đây, 下去 là xuống kia, 回来 là về đây, 过去 là qua kia, 起来 là đứng dậy.",
   tip: "Nhớ cặp: 上来—下去, 回来—过去, 来 hướng về mình, 去 hướng ra xa mình.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK3 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
    { q: "“他走上来了” nghĩa là gì?", o: ["Anh ấy đi lên đây", "Anh ấy đi xuống kia", "Anh ấy đi ra ngoài", "Anh ấy ngồi xuống"], a: 0, why: "走上来: đi lên về phía người nói." },
    { q: "Điền vào chỗ trống: 他从楼上走___了。", o: ["下来", "上来", "回来", "起来"], a: 0, why: "从楼上走下来: từ trên lầu đi xuống." },
@@ -54118,7 +54118,7 @@ var ZH_GRAMMAR_EXPAND17 = [
   speak: "我看完这本书了。他听懂老师的话了。我找到我的书包了。她做完作业了。",
   rule: "Công thức: động từ + 完/懂/到 + tân ngữ. 完 nói làm xong, 懂 nói hiểu được, 到 nói tìm/thấy được kết quả. Phủ định thì chèn 不 vào giữa: 没看完 (chưa đọc xong), 听不懂 (nghe không hiểu).",
   tip: "Nhớ: 完 là xong, 懂 là hiểu, 到 là tìm được; muốn nói chưa xong thì nói 没看完, không nói 不看完.",
-  note: "Trạm tự soạn theo điểm ngữ pháp trình độ HSK4 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức.",
+  note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
    { q: "“我看完这本书了” nghĩa là gì?", o: ["Tôi đã đọc xong quyển sách này", "Tôi đang đọc sách", "Tôi muốn mua sách", "Tôi làm mất sách"], a: 0, why: "看完: đọc xong." },
    { q: "Điền vào chỗ trống: 他听___老师的话了。", o: ["懂", "完", "到", "好"], a: 0, why: "听懂: nghe hiểu." },
@@ -54131,7 +54131,7 @@ var ZH_GRAMMAR_EXPAND17 = [
 ZH_READING.push.apply(ZH_READING, ZH_READING_EXPAND17);
 ZH_LISTENING.push.apply(ZH_LISTENING, ZH_LISTEN_EXPAND17);
 // DOT 18 HSK-TOPIK (31/10/2026): 1 bai Nghe cap 1 moi — phuc vu mock cap 1 ve 20+20 (xem zhMockBuild).
-var ZH_LISTEN_EXPAND18 = [{"id":"zh18-mock-l1","stage":1,"title":"Mua bánh ở cửa hàng","topic":"Mua sắm","lines":[{"sp":"A","han":"你好，我要买面包。","py":"Nǐ hǎo, wǒ yào mǎi miànbāo.","vi":"Chào bạn, tôi muốn mua bánh mì."},{"sp":"B","han":"你好，你要买面包吗？","py":"Nǐ hǎo, nǐ yào mǎi miànbāo ma?","vi":"Chào bạn, bạn muốn mua bánh mì phải không?"},{"sp":"A","han":"对，两个，多少钱？","py":"Duì, liǎng gè, duōshao qián?","vi":"Đúng, hai cái, bao nhiêu tiền?"},{"sp":"B","han":"面包五块一个，两个十块钱。","py":"Miànbāo wǔ kuài yí gè, liǎng gè shí kuài qián.","vi":"Bánh mì năm đồng một cái, hai cái mười đồng."},{"sp":"A","han":"好，给你十块。","py":"Hǎo, gěi nǐ shí kuài.","vi":"Được, đưa bạn mười đồng."},{"sp":"B","han":"谢谢，再见！","py":"Xièxie, zàijiàn!","vi":"Cảm ơn, tạm biệt!"}],"note":"Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.","questions":[{"q":"Người mua đến cửa hàng để mua gì?","o":["Bánh mì","Táo","Sữa","Cơm"],"a":0,"why":"Người mua nói muốn mua bánh mì."},{"q":"Người mua mua mấy cái bánh mì?","o":["Một cái","Hai cái","Ba cái","Năm cái"],"a":1,"why":"Người mua nói mua hai cái bánh mì."},{"q":"Mỗi cái bánh mì giá bao nhiêu?","o":["Ba đồng","Năm đồng","Mười đồng","Hai đồng"],"a":1,"why":"Người bán nói bánh mì năm đồng một cái."},{"q":"Hai cái bánh mì hết bao nhiêu tiền?","o":["Năm đồng","Mười đồng","Hai đồng","Mười lăm đồng"],"a":1,"why":"Hai cái bánh mì, mỗi cái năm đồng, tổng cộng mười đồng."}]}];
+var ZH_LISTEN_EXPAND18 = [{"id":"zh18-mock-l1","stage":1,"title":"Mua bánh ở cửa hàng","topic":"Mua sắm","lines":[{"sp":"A","han":"你好，我要买面包。","py":"Nǐ hǎo, wǒ yào mǎi miànbāo.","vi":"Chào bạn, tôi muốn mua bánh mì."},{"sp":"B","han":"你好，你要买面包吗？","py":"Nǐ hǎo, nǐ yào mǎi miànbāo ma?","vi":"Chào bạn, bạn muốn mua bánh mì phải không?"},{"sp":"A","han":"对，两个，多少钱？","py":"Duì, liǎng gè, duōshao qián?","vi":"Đúng, hai cái, bao nhiêu tiền?"},{"sp":"B","han":"面包五块一个，两个十块钱。","py":"Miànbāo wǔ kuài yí gè, liǎng gè shí kuài qián.","vi":"Bánh mì năm đồng một cái, hai cái mười đồng."},{"sp":"A","han":"好，给你十块。","py":"Hǎo, gěi nǐ shí kuài.","vi":"Được, đưa bạn mười đồng."},{"sp":"B","han":"谢谢，再见！","py":"Xièxie, zàijiàn!","vi":"Cảm ơn, tạm biệt!"}],"note":"Đoạn hội thoại tự soạn. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Nhãn HSK là mức đặt theo chủ đề/trình độ.","questions":[{"q":"Người mua đến cửa hàng để mua gì?","o":["Bánh mì","Táo","Sữa","Cơm"],"a":0,"why":"Người mua nói muốn mua bánh mì."},{"q":"Người mua mua mấy cái bánh mì?","o":["Một cái","Hai cái","Ba cái","Năm cái"],"a":1,"why":"Người mua nói mua hai cái bánh mì."},{"q":"Mỗi cái bánh mì giá bao nhiêu?","o":["Ba đồng","Năm đồng","Mười đồng","Hai đồng"],"a":1,"why":"Người bán nói bánh mì năm đồng một cái."},{"q":"Hai cái bánh mì hết bao nhiêu tiền?","o":["Năm đồng","Mười đồng","Hai đồng","Mười lăm đồng"],"a":1,"why":"Hai cái bánh mì, mỗi cái năm đồng, tổng cộng mười đồng."}]}];
 ZH_LISTENING.push.apply(ZH_LISTENING, ZH_LISTEN_EXPAND18);
 ZH_SPEAK.push.apply(ZH_SPEAK, ZH_SPEAK_EXPAND17);
 ZH_WRITE.push.apply(ZH_WRITE, ZH_WRITE_EXPAND17);
@@ -61728,7 +61728,7 @@ ZH_GRAMMAR.push({ id: "s1-gram-bi", stage: 1, title: "比 — so sánh hơn",
   hook: "“他比我高。” — Anh ấy cao hơn tôi: A 比 B + tính từ là so sánh hơn.",
   examples: ["他比我高。(Tā bǐ wǒ gāo.) — Anh ấy cao hơn tôi.", "今天比昨天冷。(Jīntiān bǐ zuótiān lěng.) — Hôm nay lạnh hơn hôm qua.", "我的书包比你的书包大。(Wǒ de shūbāo bǐ nǐ de shūbāo dà.) — Cặp của tôi to hơn cặp của bạn.", "我比他高兴。(Wǒ bǐ tā gāoxìng.) — Tôi vui hơn anh ấy."],
   speak: "他比我高。今天比昨天冷。我的书包比你的书包大。我比他高兴。",
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); nội dung tự viết, không trích nguyên văn giáo trình. Chữ Hán chỉ dùng từ thẻ chặng 1.",
+  note: "Chữ Hán chỉ dùng từ thẻ chặng 1.",
   rule: "So sánh hơn: A 比 B + tính từ. Ví dụ: 他比我高. Muốn nói “không bằng” thì dùng A 没有 B + tính từ.",
   tip: "Có 比 thì tính từ đứng cuối, không thêm 很 trước tính từ.",
   quiz: [
@@ -61750,7 +61750,7 @@ ZH_READING.push({ id: "s1-read-yanse", stage: 1, title: "Màu sắc tôi thích"
   { q: "Hôm nay tôi cảm thấy thế nào?", o: ["Rất buồn", "Rất mệt", "Rất vui", "Rất lạnh"], a: 2, why: "我今天很高兴：hôm nay tôi rất vui." },
   { q: "Ai thích màu vàng?", o: ["Mẹ tôi", "Bố tôi", "Em trai tôi", "Thầy cô tôi"], a: 2, why: "我弟弟喜欢黄色：em trai tôi thích màu vàng." }
   ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); nội dung tự viết, không trích nguyên văn giáo trình. Chữ Hán chỉ dùng từ thẻ chặng 1." });
+  note: "Chữ Hán chỉ dùng từ thẻ chặng 1." });
 ZH_LISTENING.push({ id: "s1-listen-maoyi", stage: 1, title: "Mua cặp màu đỏ", topic: "Màu sắc",
   lines: [
   { sp: "A", han: "你喜欢什么颜色？", py: "Nǐ xǐhuan shénme yánsè?", vi: "Bạn thích màu gì?" },
@@ -61760,7 +61760,7 @@ ZH_LISTENING.push({ id: "s1-listen-maoyi", stage: 1, title: "Mua cặp màu đ�
   { sp: "A", han: "这个书包多少钱？", py: "Zhège shūbāo duōshao qián?", vi: "Cái cặp này bao nhiêu tiền?" },
   { sp: "B", han: "这个书包一百块。", py: "Zhège shūbāo yìbǎi kuài.", vi: "Cái cặp này một trăm đồng." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1.",
   questions: [
   { q: "B thích màu gì?", o: ["Màu đỏ", "Màu xanh dương", "Màu vàng", "Màu trắng"], a: 0, why: "我喜欢红色：tôi thích màu đỏ." },
   { q: "Cái cặp màu đỏ này như thế nào?", o: ["Rất nhỏ", "Rất lớn", "Rất cũ", "Rất đắt"], a: 1, why: "这个书包很大：cái cặp này rất lớn." },
@@ -61776,7 +61776,7 @@ ZH_LISTENING.push({ id: "s1-listen-xinqing", stage: 1, title: "Thời tiết và
   { sp: "A", han: "你今天高兴吗？", py: "Nǐ jīntiān gāoxìng ma?", vi: "Hôm nay bạn có vui không?" },
   { sp: "B", han: "我今天很高兴。谢谢你。", py: "Wǒ jīntiān hěn gāoxìng. Xièxie nǐ.", vi: "Hôm nay tôi rất vui. Cảm ơn bạn." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại và câu hỏi tự viết, không trích nguyên văn giáo trình. Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1.",
+  note: "Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Lời thoại chỉ dùng từ chặng 1.",
   questions: [
   { q: "Hôm nay thời tiết thế nào?", o: ["Rất nóng", "Rất lạnh", "Rất đẹp", "Rất tốt"], a: 1, why: "今天天气很冷：hôm nay thời tiết rất lạnh." },
   { q: "B thích thời tiết nào?", o: ["Trời lạnh", "Trời nóng", "Trời mưa", "Trời đẹp"], a: 1, why: "我喜欢热天：tôi thích trời nóng." },
@@ -61793,7 +61793,7 @@ ZH_SPEAK.push({ id: "s1-speak-yanse", stage: 1, title: "Hỏi màu sắc và c�
   { sp: "A", han: "我今天很高兴。谢谢你。", py: "Wǒ jīntiān hěn gāoxìng. Xièxie nǐ.", vi: "Hôm nay tôi rất vui. Cảm ơn bạn." },
   { sp: "B", han: "我也很高兴。", py: "Wǒ yě hěn gāoxìng.", vi: "Tôi cũng rất vui." }
   ],
-  note: "Đoạn hội thoại tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); lời thoại tự viết, không trích nguyên văn giáo trình. Nói bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Chấm điểm phát âm chờ nâng cấp." });
+  note: "Nói bằng giọng đọc máy zh-CN, không phải audio thu sẵn. Chấm điểm phát âm chờ nâng cấp." });
 ZH_WRITE.push({ id: "s1-write-yanse", stage: 1, title: "Điền từ: Màu sắc và cảm xúc", kind: "fill",
   prompt: "Chọn từ đúng điền vào chỗ trống trong các câu về màu sắc và cảm xúc.",
   questions: [
@@ -61803,7 +61803,7 @@ ZH_WRITE.push({ id: "s1-write-yanse", stage: 1, title: "Điền từ: Màu sắc
   { q: "我今天很___。(Hôm nay tôi rất vui.)", o: ["高兴", "冷", "热", "慢"], a: 0, why: "我今天很高兴：hôm nay tôi rất vui." },
   { q: "你喜欢什么___？(Bạn thích màu gì?)", o: ["颜色", "学校", "老师", "书包"], a: 0, why: "你喜欢什么颜色：bạn thích màu gì?" }
   ],
-  note: "Bài tự soạn theo chủ đề đời sống trình độ HSK1 (hệ 6 cấp cũ); nội dung tự viết, không trích nguyên văn giáo trình. Chữ Hán chỉ dùng từ thẻ chặng 1." });
+  note: "Chữ Hán chỉ dùng từ thẻ chặng 1." });
 
 // ============================================================
 //  DOT 14 BATCH 1 — BO SUNG TOEIC (02/11/2026), chi append, khong sua noi dung cu.
@@ -63490,7 +63490,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK1 — Cơ thể và sức khỏe cơ bản",
   "hsk": "HSK1",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "头",
@@ -63657,7 +63657,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK1 — Quần áo và đồ dùng hằng ngày",
   "hsk": "HSK1",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "夹克",
@@ -63824,7 +63824,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK1 — Động vật và thiên nhiên cơ bản",
   "hsk": "HSK1",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 1; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "猫",
@@ -63967,7 +63967,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK2 — Sở thích và cuối tuần",
   "hsk": "HSK2",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 2; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "打羽毛球",
@@ -64134,7 +64134,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK3 — Đặt vé và khách sạn",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "订票",
@@ -64301,7 +64301,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK3 — Mua sắm và giá cả",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "议价",
@@ -64468,7 +64468,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK3 — Thời tiết và lịch trình",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "气象",
@@ -64635,7 +64635,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK3 — Học tập và thi cử",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "考场",
@@ -64802,7 +64802,7 @@ var ZH_VOCAB_EXPAND_E1 = [
  {
   "topic": "HSK3 — Tính cách và phẩm chất",
   "hsk": "HSK3",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 3; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "热情",
@@ -64974,7 +64974,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Thư điện tử và liên lạc nơi làm việc",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "收件人",
@@ -65141,7 +65141,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Họp hành và trình bày ý kiến",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "主持会议",
@@ -65308,7 +65308,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Sức khỏe tâm lý và nghỉ ngơi",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "压力大",
@@ -65475,7 +65475,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Tiết kiệm và chi tiêu gia đình",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "家庭预算",
@@ -65642,7 +65642,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — An toàn giao thông và đi lại xa",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "驾驶证",
@@ -65809,7 +65809,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Học nghề và thực tập",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "实习单位",
@@ -65976,7 +65976,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Bạn bè và quan hệ xã hội",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "老邻居",
@@ -66143,7 +66143,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Nhà ở và sửa chữa nhà cửa",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "房东房客",
@@ -66310,7 +66310,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Thời tiết cực đoan và phòng tránh",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "暴雨预警",
@@ -66477,7 +66477,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Đọc sách và thư viện",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "借书还书",
@@ -66644,7 +66644,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK4 — Dịch vụ công và giấy tờ cá nhân",
   "hsk": "HSK4",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 4; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "办理证件",
@@ -66795,7 +66795,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Tranh luận và thuyết phục",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "论点明确",
@@ -66962,7 +66962,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Quản lý thời gian và áp lực công việc",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "拖延习惯",
@@ -67129,7 +67129,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Giáo dục mầm non và gia đình",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "幼儿园",
@@ -67296,7 +67296,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Đô thị hóa và đời sống thành phố",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "城市化进程",
@@ -67463,7 +67463,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Tiêu dùng thông minh và quảng cáo",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "广告代言",
@@ -67630,7 +67630,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Khoa học đời sống và sức khỏe cộng đồng",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "营养均衡",
@@ -67797,7 +67797,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Văn học dân gian và truyện kể",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "民间传说",
@@ -67964,7 +67964,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Giải đấu thể thao và cổ động viên",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "裁判判罚",
@@ -68131,7 +68131,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Di cư lao động và hội nhập",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "外出务工",
@@ -68298,7 +68298,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Công nghệ giáo dục và lớp học số",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "在线课程",
@@ -68465,7 +68465,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Môi trường làm việc và văn hóa doanh nghiệp",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "企业文化",
@@ -68632,7 +68632,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — An toàn mạng và đời sống số",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "个人信息",
@@ -68799,7 +68799,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Ẩm thực vùng miền và văn hóa ăn uống",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "川菜麻辣",
@@ -68966,7 +68966,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Giao tiếp đa văn hóa nơi làm việc",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "跨文化交流",
@@ -69133,7 +69133,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Nghiên cứu thị trường và hành vi người tiêu dùng",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "问卷调查",
@@ -69300,7 +69300,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK5 — Phúc lợi xã hội và chăm sóc người cao tuổi",
   "hsk": "HSK5",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 5; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "养老院",
@@ -69467,7 +69467,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK6 — Toàn cầu hóa và hội nhập kinh tế",
   "hsk": "HSK6",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "经济全球化",
@@ -69634,7 +69634,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK6 — Đạo đức khoa học và trách nhiệm nghiên cứu",
   "hsk": "HSK6",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "学术伦理",
@@ -69801,7 +69801,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK6 — Chính sách công và quản trị xã hội",
   "hsk": "HSK6",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "公共政策",
@@ -69968,7 +69968,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK6 — Văn hóa đại chúng và truyền thông toàn cầu",
   "hsk": "HSK6",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "流量明星",
@@ -70135,7 +70135,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK6 — Phát triển bền vững và kinh tế tuần hoàn",
   "hsk": "HSK6",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "可持续发展",
@@ -70302,7 +70302,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK6 — Tâm lý xã hội và hành vi tập thể",
   "hsk": "HSK6",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "从众心理",
@@ -70469,7 +70469,7 @@ var ZH_VOCAB_EXPAND_E2 = [
  {
   "topic": "HSK6 — Ngôn ngữ, dịch thuật và giao tiếp liên văn hóa",
   "hsk": "HSK6",
-  "hskNote": "Bộ tự soạn theo chủ đề cấp 6; nhãn cấp là mức đặt chủ đề, không mạo nhận từng từ nằm trong danh sách từ đề cương thi HSK 3.0 chính thức; bộ này không phải xác nhận theo khung HSK 2.0 chính thức.",
+  "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   "cards": [
    {
     "han": "口译笔译",
@@ -70648,7 +70648,7 @@ var ZH_GRAMMAR_EXPAND_E2 = [ {
   "speak": "连三岁的小孩都会用手机。他连饭都没吃，就去开会了。这个问题连老师都觉得难。连下雨天他都坚持跑步。",
   "rule": "连 nêu điều cực đoan, không ngờ nhất ở trước, 都 nêu kết quả cũng xảy ra ở sau. 连…都… đi thành cặp, thiếu 都 thì câu chưa đủ nghĩa nhấn mạnh.",
   "tip": "Hãy nhớ: 连 là “ngay cả”, 都 là “cũng” — điều cực đoan nhất mà còn thế, thì chuyện thường càng thế.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK5 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
   "quiz": [
    { "q": "Câu nào dùng 连…都… đúng?", "o": ["连三岁的小孩都会用手机。", "连三岁的小孩会用手机。", "三岁的小孩连都会用手机。", "连三岁的小孩都不会用手机。"], "a": 0, "why": "连…都… đi thành cặp: 连三岁的小孩都会用手机。" },
    { "q": "Điền vào chỗ trống: 他___饭都没吃，就去开会了。", "o": ["连", "都", "也", "就"], "a": 0, "why": "连 nêu điều cực đoan (ngay cả cơm cũng chưa ăn) ở vế trước." },
@@ -70672,7 +70672,7 @@ var ZH_GRAMMAR_EXPAND_E2 = [ {
   "speak": "只有努力学习，才有好成绩。只有早点出门，才不会迟到。只有大家一起努力，才能完成这个任务。只有身体好，才能好好工作。",
   "rule": "只有 nêu điều kiện duy nhất ở vế đầu, 才 nêu kết quả ở vế sau. Hai chữ đi thành cặp; thiếu 才 thì câu chưa đủ nghĩa điều kiện duy nhất.",
   "tip": "Hãy nhớ: 只有 là “chỉ khi”, 才 là “mới” — chỉ có một cách duy nhất thì mới dùng 只有…才….",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK5 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
   "quiz": [
    { "q": "Câu nào dùng 只有…才… đúng?", "o": ["只有努力学习，才有好成绩。", "只有努力学习，就有好成绩。", "只有努力学习，但是有好成绩。", "努力学习，只有有好成绩。"], "a": 0, "why": "只有 đi cặp với 才: chỉ khi học chăm chỉ mới có thành tích tốt。" },
    { "q": "Điền vào chỗ trống: 只有早点出门，___不会迟到。", "o": ["才", "就", "都", "也"], "a": 0, "why": "Vế sau là kết quả của điều kiện duy nhất, dùng 才。" },
@@ -70696,7 +70696,7 @@ var ZH_GRAMMAR_EXPAND_E2 = [ {
   "speak": "他之所以成功，是因为他一直很努力。这家店之所以受欢迎，是因为东西好吃又便宜。她之所以学汉语，是因为她喜欢中国文化。这个城市之所以干净，是因为大家都爱护环境。",
   "rule": "之所以 nêu kết quả ở vế đầu, 是因为 nêu nguyên nhân thật sự ở vế sau. Mẫu này nhấn mạnh nguyên nhân, trang trọng hơn chỉ nói 因为, dùng nhiều trong văn viết và nói có lý lẽ.",
   "tip": "Hãy nhớ: 之所以 là “sở dĩ”, 是因为 là “là vì” — kết quả trước, nguyên nhân sau, ngược với 因为…所以….",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK6 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
   "quiz": [
    { "q": "Câu nào dùng 之所以…是因为… đúng?", "o": ["他之所以成功，是因为他一直很努力。", "他之所以成功，因为他一直很努力。", "他成功之所以，是因为他一直很努力。", "他之所以成功，所以他一直很努力。"], "a": 0, "why": "之所以 ở vế kết quả, 是因为 ở vế nguyên nhân, đi thành cặp。" },
    { "q": "Điền vào chỗ trống: 这家店之所以受欢迎，___东西好吃又便宜。", "o": ["是因为", "因为", "所以", "但是"], "a": 0, "why": "Vế sau là nguyên nhân thật sự, dùng 是因为, không dùng riêng 因为。" },
@@ -70720,7 +70720,7 @@ var ZH_GRAMMAR_EXPAND_E2 = [ {
   "speak": "早点出门，以免迟到。请把文件保存好，以免丢失。出门带把伞，以免下雨淋湿。说话小声一点，以免吵到别人。",
   "rule": "以免 đứng trước điều xấu muốn tránh, vế trước là việc làm phòng ngừa. 以免 chỉ đi với điều xấu (迟到、丢失、淋湿), không đi với điều tốt.",
   "tip": "Hãy nhớ: 以免 là “để khỏi / kẻo” — sau 以免 luôn là điều mình không muốn xảy ra.",
-  "note": "Trạm tự soạn theo điểm ngữ pháp trình độ HSK6 (hệ 6 cấp cũ); ví dụ tự viết, không trích nguyên văn giáo trình. Nhãn HSK là mức đặt theo trình độ, không phải xác nhận từng câu nằm trong khung từ vựng HSK 2.0 chính thức. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Chấm đúng/sai ngay theo đáp án; câu sai vào Sổ lỗi sai để ôn giãn cách.",
   "quiz": [
    { "q": "Câu nào dùng 以免 đúng?", "o": ["早点出门，以免迟到。", "早点出门，以免不迟到。", "早点出门，以免到了。", "早点出门，以免迟到所以快。"], "a": 0, "why": "以免 + điều xấu (迟到): ra sớm để khỏi muộn。" },
    { "q": "Điền vào chỗ trống: 请把文件保存好，___丢失。", "o": ["以免", "以便", "为了", "因为"], "a": 0, "why": "Muốn tránh mất tài liệu thì dùng 以免, không dùng 以便 (để cho tiện)。" },
@@ -70740,7 +70740,7 @@ var ZH_WRITE_EXPAND_E2 = [ {
   "model": "我觉得网上学习和在教室学习各有好处，但是我更喜欢在教室学习。第一，在教室里，老师可以直接回答我的问题，同学也可以一起讨论，学习气氛很好。第二，在教室学习不容易分心，没有手机游戏打扰我。有人说网上学习很方便，在家里就能上课，这一点我也同意。可是，长时间看电脑，眼睛很容易累，而且自律性不强的人很难坚持。我的自律性也不太好，所以在教室学习更适合我。总的来说，网上学习是很好的补充，但是我还是选择去教室上课。",
   "analysis": "Đoạn mẫu mở đầu bằng ý kiến (更喜欢在教室学习), rồi nêu 2 lý do (trả lời trực tiếp + không分心), sau đó thừa nhận điểm mạnh của ý đối lập (网上学习很方便), rồi phản biện bằng nhược điểm (mỏi mắt + khó坚持), cuối cùng kết luận theo ý kiến đầu. Viết theo khung ý kiến — lý do — thừa nhận — phản biện — kết luận thì đoạn tranh luận có sức thuyết phục.",
   "phrases": ["我觉得……，但是我更喜欢……。", "有人说……，这一点我也同意。可是，……", "总的来说，……是很好的补充，但是我还是选择……。"],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "e2-s5-write-chengshi",
@@ -70751,7 +70751,7 @@ var ZH_WRITE_EXPAND_E2 = [ {
   "model": "有人喜欢住在大城市，有人喜欢住在乡下，我觉得各有好处。城市里工作机会多，医院、学校、商场都很方便，生活很丰富。可是，城市的生活节奏很快，房价很高，空气也不太好。乡下空气新鲜，生活安静，花钱也少，但是工作机会不多，年轻人常常要去城市找工作。对我来说，年轻的时候可以在城市工作、学习，等年纪大了，再回乡下过安静的生活。这样既能抓住机会，又能享受安静，我觉得是最好的选择。",
   "analysis": "Đoạn mẫu mở đầu bằng hai ý đối lập (thành phố — quê), rồi nêu mặt tốt và chưa tốt của từng bên (thành phố: tiện + nhanh/đắt; quê: trong lành + ít việc), sau đó nêu ý kiến theo giai đoạn đời (trẻ ở thành phố, già về quê), cuối cùng kết bằng lựa chọn tổng hợp. Viết theo khung hai mặt — ý kiến theo giai đoạn — kết luận thì đoạn so sánh cân bằng, không một chiều.",
   "phrases": ["有人喜欢……，有人喜欢……，我觉得各有好处。", "对我来说，年轻的时候可以……，等年纪大了，再……。", "这样既能……，又能……，我觉得是最好的选择。"],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK5, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "e2-s6-write-huanjing",
@@ -70762,7 +70762,7 @@ var ZH_WRITE_EXPAND_E2 = [ {
   "model": "保护环境不是一句口号，要从我们每天的生活做起。第一，少用一次性用品，出门带自己的水杯和布袋。第二，节约用水用电，随手关灯，洗澡不要洗太久。第三，多坐公共交通，少开车，这样既能减少污染，又能锻炼身体。有人说，一个人的力量太小，改变不了什么。我不同意这种看法：如果每个人都从小事做起，合起来的力量就很大。从今天开始，从我做起，让我们的城市更干净、更美丽。",
   "analysis": "Đoạn mẫu mở đầu bằng nhận định (不是一句口号，要从生活做起), rồi liệt kê 3 việc cụ thể theo thứ tự (少用一次性用品 — 节约用水用电 — 多坐公共交通), sau đó bác ý “sức một người nhỏ” bằng lập luận hợp sức (如果每个人都……，合起来的力量就很大), cuối cùng kêu gọi (从今天开始，从我做起). Viết theo khung nhận định — việc cụ thể — bác bỏ — kêu gọi thì đoạn văn có sức thuyết phục.",
   "phrases": ["保护环境不是一句口号，要从……做起。", "有人说……。我不同意这种看法：如果……，……就……。", "从今天开始，从我做起。"],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK6, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
  },
  {
   "id": "e2-s6-write-wangluo",
@@ -70773,7 +70773,7 @@ var ZH_WRITE_EXPAND_E2 = [ {
   "model": "社交媒体对年轻人既有帮助，也有坏处，关键看怎么用。好处是，年轻人可以在网上学习新知识，认识不同地方的朋友，了解世界大事。坏处是，很多人花太多时间刷视频，学习和睡觉都受影响，还有人轻信网上的假消息，甚至被人骗钱。我觉得，年轻人应该学会管理时间，每天上网不超过两个小时，不轻信、不转发没有证实的消息。家长和学校也要教孩子怎么安全上网，而不是简单地不让孩子上网。只有这样，社交媒体才能真正帮助年轻人，而不是害了他们。",
   "analysis": "Đoạn mẫu mở đầu bằng nhận định hai mặt (既有帮助，也有坏处，关键看怎么用), rồi nêu mặt tốt (học + kết bạn + biết大事) và mặt xấu (tốn thời gian +轻信假消息), sau đó nêu lập trường (quản lý thời gian + không轻信、不转发) và trách nhiệm của phụ huynh/trường, cuối cùng kết bằng điều kiện 只有…才…. Viết theo khung hai mặt — lập trường — trách nhiệm chung — kết điều kiện thì đoạn nghị luận cân bằng và có chiều sâu.",
   "phrases": ["……既有帮助，也有坏处，关键看怎么用。", "我觉得，年轻人应该学会……，不……。", "只有这样，……才能真正……，而不是……。"],
-  "note": "Bài tự soạn theo chủ đề đời sống trình độ HSK6, không trích nguyên văn giáo trình; nhãn HSK là mức đặt theo chủ đề/trình độ, không phải xác nhận từng từ nằm trong khung từ vựng HSK 2.0 chính thức. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
+  "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài viết tự do đối chiếu với đoạn mẫu, không chấm điểm tự động. Phần này chỉ đối chiếu bài mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt."
  }
 ];
 

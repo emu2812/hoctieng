@@ -382,7 +382,7 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <button class="tab" data-tab="games">Trò chơi</button>
 </nav>
 <main id="app"><div class="card"><p>Đang tải bài học…</p></div></main>
-<footer id="appFooter"><div><b>🐉 Học ngoại ngữ từ đầu</b><p class="mut">Nội dung tự soạn 100% · Miễn phí · Không quảng cáo giữa bài.</p></div><p class="mut">Học từ đầu, tới giao tiếp thật.</p></footer>
+<footer id="appFooter"><div><b>🐉 Học ngoại ngữ từ đầu</b><p class="mut">Miễn phí · Không quảng cáo giữa bài.</p></div><p class="mut">Học từ đầu, tới giao tiếp thật.</p></footer>
 </div>
 </div>
 <div id="toast"></div>
@@ -976,7 +976,7 @@ function freezeStatusHTML() {
     hist = '<p class="mut">Chưa dùng lượt đóng băng nào.</p>';
   }
   return '<section class="card" id="freezeCard"><h3>❄️ Đóng băng chuỗi (miễn phí)</h3>'
-    + '<p>Bạn còn <b>' + f.count + ' lượt đóng băng</b> (tối đa 3 lượt, miễn phí). Xem cách nhận và giữ lượt trong Cài đặt → Ghi chú.</p>'
+    + '<p>Bạn còn <b>' + f.count + ' lượt đóng băng</b> (tối đa 3 lượt, miễn phí).</p>'
     + held + hist + '</section>';
 }
 function settleStreakFreeze() {
@@ -1317,7 +1317,7 @@ function openStep(step, opts) {
   opts = opts || {};
   if (!step) return;
   if (step.id === "test") {
-    if (!gateOpen()) { toast("Bài kiểm tra mở khi bạn học xong " + RB_CH1_GATE_NEED + "/" + learningSteps().length + " bước (mốc 80% — chuẩn nội bộ của web)."); return; }
+    if (!gateOpen()) { toast("Bài kiểm tra mở khi bạn học xong " + RB_CH1_GATE_NEED + "/" + learningSteps().length + " bước."); return; }
     openLesson({ type: "test" }); return;
   }
   var ns = nextLearnStep();
@@ -2138,7 +2138,7 @@ function typeEntryResolve(track, kind) {
         var hp = 0;
         for (var ps = 1; ps <= 6; ps++) if (zhChapterTestPassed(ps)) hp = ps;
         if (hp) { var mh = Math.min(hp + 1, 6); return { title: "Thi thử HSK" + mh + " (rút gọn)", status: "open", open: (function (mm) { return function () { lessonStart = Date.now(); openLesson({ type: "zhMock", hsk: mm }); }; })(mh) }; }
-        return { title: "Kiểm tra cuối chặng 1", status: "locked", open: function () { showLockModal("Kiểm tra cuối chặng 1 mở khi bạn học xong 80% chặng 1 (chuẩn nội bộ).", "Xem bản đồ chặng 1", function () { curTab = "roadmap"; render(); }); } };
+        return { title: "Kiểm tra cuối chặng 1", status: "locked", open: function () { showLockModal("Kiểm tra cuối chặng 1 mở khi bạn học xong 80% chặng 1.", "Xem bản đồ chặng 1", function () { curTab = "roadmap"; render(); }); } };
       }
       return { title: "", status: "missing", open: noop };
     }
@@ -2184,7 +2184,7 @@ function typeEntryResolve(track, kind) {
         }
       }
       if (state.testDone || Object.keys(state.chapterTestDone || {}).length) return { title: "Bài kiểm tra cuối chương 1", status: "done", open: function () { openStep(stepById("test")); } };
-      return { title: "Bài kiểm tra cuối chương 1", status: "locked", open: function () { var ns = nextLearnStep(); showLockModal("Bài kiểm tra cuối chương 1 mở khi bạn học xong 80% chương 1 (chuẩn nội bộ).", ns ? ns.title : "Học tiếp", function () { if (ns) openStep(ns); }); } };
+      return { title: "Bài kiểm tra cuối chương 1", status: "locked", open: function () { var ns = nextLearnStep(); showLockModal("Bài kiểm tra cuối chương 1 mở khi bạn học xong 80% chương 1.", ns ? ns.title : "Học tiếp", function () { if (ns) openStep(ns); }); } };
     }
   } catch (e) { return { title: "", status: "missing", open: noop }; }
   return { title: "", status: "missing", open: noop };
@@ -2203,7 +2203,7 @@ function tcTpLockFor(isTc, id) {
     return;
   }
   var pv = stageOf > 0 ? stages[stageOf - 1].title : stages[0].title;
-  if (next) showLockModal("Bài này mở khi bạn học xong 80% " + pv + " (chuẩn nội bộ).", next.meta.title, function () { openFn(next.id, curTab); });
+  if (next) showLockModal("Bài này mở khi bạn học xong 80% " + pv + ".", next.meta.title, function () { openFn(next.id, curTab); });
   else toast("Chặng này chưa mở — học xong 80% " + pv + " đã.");
 }
 function typeEntryRowHTML(track, flat) {
@@ -3212,8 +3212,8 @@ function viewHome(app) {
   html += '</div>';
   if (fresh) {
     html += '<details class="card" id="homeWelcomeMore"><summary><b>Vì sao học kiểu này nhớ lâu · Câu hỏi thường gặp</b></summary><section class="card" id="u7Welcome">'
-      + '<details id="u7WhyCard"><summary><b>Vì sao học kiểu này nhớ lâu</b></summary><p><b>Ôn đúng lúc sắp quên:</b> câu nào sai sẽ vào Sổ lỗi sai và ôn lại đúng ngày theo lịch 1-3-7-14-30 ngày — xem chi tiết ở Cài đặt → Ghi chú.</p><p><b>Học theo dạng bài:</b> mỗi dạng bài có cách làm riêng trước, rồi mới luyện trộn nhiều dạng như đi thi thật.</p><p><b>Chẩn đoán trước khi học:</b> bài kiểm tra nhanh đầu chặng cho biết bạn yếu chỗ nào, để lộ trình xếp dạng bài yếu lên trước.</p></details>'
-      + '<details id="u7Faq"><summary><b>Câu hỏi thường gặp</b></summary><p><b>Mỗi ngày học bao lâu?</b> Khoảng 10-20 phút một buổi là đủ, học đều mỗi ngày quan trọng hơn học dồn một lúc.</p><p><b>Làm sai có sao không?</b> Không sao cả — câu sai vào Sổ lỗi sai để ôn lại, không bị trừ điểm hay khóa bài.</p><p><b>"Band ước lượng" nghĩa là gì?</b> Là điểm web tự tính để bạn tham khảo trình độ, không phải điểm thi thật — IELTS không công bố bảng quy đổi cố định.</p></details></section></details>';
+      + '<details id="u7WhyCard"><summary><b>Vì sao học kiểu này nhớ lâu</b></summary><p><b>Ôn đúng lúc sắp quên:</b> câu nào sai sẽ vào Sổ lỗi sai và ôn lại đúng ngày theo lịch 1-3-7-14-30 ngày</p><p><b>Học theo dạng bài:</b> mỗi dạng bài có cách làm riêng trước, rồi mới luyện trộn nhiều dạng như đi thi thật.</p><p><b>Chẩn đoán trước khi học:</b> bài kiểm tra nhanh đầu chặng cho biết bạn yếu chỗ nào, để lộ trình xếp dạng bài yếu lên trước.</p></details>'
+      + '<details id="u7Faq"><summary><b>Câu hỏi thường gặp</b></summary><p><b>Mỗi ngày học bao lâu?</b> Khoảng 10-20 phút một buổi là đủ, học đều mỗi ngày quan trọng hơn học dồn một lúc.</p><p><b>Làm sai có sao không?</b> Không sao cả — câu sai vào Sổ lỗi sai để ôn lại, không bị trừ điểm hay khóa bài.</p><p><b>"Band ước lượng" nghĩa là gì?</b> Là điểm ước lượng để bạn tham khảo trình độ, không phải điểm thi thật.</p></details></section></details>';
   }
   /* v84: Vào nhanh theo loại đã có đủ ở Luyện tập (thẻ Tìm bài, 7 nút) —
      bỏ khỏi trang chủ để màn chính chỉ còn một việc tiếp theo. */
@@ -3440,7 +3440,7 @@ function viewRoadmap(app) {
   var ch1WSteps = rbGateSteps("Band 0");
   var ch1WDone = ch1WSteps.filter(function (st) { return rbStepDone(st); }).length;
   var ch1TotalAll = total + ch1WSteps.length, ch1DoneAll = done + ch1WDone;
-  var html = trackSwitchHTML() + '<h2>Bản đồ</h2><p class="mut">Cổng 80%: bài kiểm tra cuối chương mở khi bạn học xong 80% số bước tính cổng của chương đó — bước tính cổng là bước học chính (không tính bước làm quen và bước ôn xen kẽ); đây là chuẩn nội bộ của web, không phải chuẩn IELTS. Mỗi chương dưới đây chỉ ghi phân số đã xong/cần, không lặp lại luật này.</p>';
+  var html = trackSwitchHTML() + '<h2>Bản đồ</h2><p class="mut">Bài kiểm tra cuối chương mở khi bạn học xong 80% số bước của chương đó.</p>';
   html += '<section class="card" id="myPathLink"><h3>Lộ trình riêng của bạn</h3><p class="mut">Lộ trình AI tạo riêng cho bạn, khác Bản đồ chung.</p><button class="btn" id="myPathGo">Mở lộ trình riêng</button></section>';
   html += '<section class="card"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + ch1DoneAll + '/' + ch1TotalAll + ' bước</b></div><div id="roadmapBox"><div class="path-v">';
   var clCur = nextLearnStep(); var clCurIdx = clCur ? stepIdx(clCur.id) : -1;
@@ -3581,7 +3581,7 @@ function viewRoadmap(app) {
   var cc0 = mapCupCounts();
   html += '<section class="card" id="mapCupCard"><div class="path-v"><button class="path-node duo-cup" id="mapCupBtn"><span class="dotwrap"><span class="dot">🏆</span></span><span><span class="pn-title">Cúp cuối lộ trình</span><br><span class="pn-type">Lộ trình IELTS · 13 chương</span><br><span class="pn-st">Đã qua ' + cc0.passed + '/' + cc0.total + ' kiểm tra cuối chương</span></span></button></div></section>';
   html += '<hr><p class="mut">Dưới đây là mục thêm ngoài Bản đồ — không phải bước học, bấm khi cần.</p>';
-  html += '<section class="card" id="bkRoadmapCard"><h3>📚 Nội dung mới theo nghiên cứu sách</h3><p class="mut">Nội dung tự soạn của web — xem nguồn trong Cài đặt → Nguồn nội dung.</p><details><summary><b>Xem phạm vi nội dung mới theo sách</b></summary><p class="mut">Lỗi người Việt có ở các chặng từ Band 0 tới Band 6,5; ví dụ đời sống người Việt có ở Band 2,0 tới Band 6,0; sắc thái và phong cách chỉ ở chặng 7,5+ — không đưa xuống chặng thấp hơn. Mở ở tab Luyện tập.</p></details><button class="btn" id="bkRoadmapGo">Mở ở tab Luyện tập</button></section>';
+  html += '<section class="card" id="bkRoadmapCard"><h3>📚 Nội dung mới theo nghiên cứu sách</h3><details><summary><b>Xem phạm vi nội dung mới theo sách</b></summary><p class="mut">Lỗi người Việt có ở các chặng từ Band 0 tới Band 6,5; ví dụ đời sống người Việt có ở Band 2,0 tới Band 6,0; sắc thái và phong cách chỉ ở chặng 7,5+ — không đưa xuống chặng thấp hơn. Mở ở tab Luyện tập.</p></details><button class="btn" id="bkRoadmapGo">Mở ở tab Luyện tập</button></section>';
   html += '<section class="card" id="clCanDo"><h3>Trang cấp độ — bạn làm được gì ở mỗi cấp</h3><details><summary><b>Xem năng lực từng cấp</b></summary>' + RB_CHAPTER_MAP.map(function (ch) { return '<p><b>' + esc(ch.band) + ' — ' + esc(ch.title) + ':</b> ' + esc(ch.can.join("; ")) + '</p>'; }).join("") + '</details></section>';
   html += '<section class="card"><h3>Trò chuyện tự do với AI</h3><details><summary><b>Xem ghi chú về Giao tiếp bản địa</b></summary><p class="mut">Nói tự do với AI đã dời sang trang riêng Giao tiếp bản địa (giữa Ôn tập và Của tôi): gõ tay hoặc nói live, không chấm điểm trong lúc nói.</p></details><div class="row"><button class="btn" id="mapToNative">Sang trang Giao tiếp bản địa →</button></div></section>';
   app.innerHTML = html;
@@ -3656,7 +3656,7 @@ function viewRoadmap(app) {
    bài tập và lời văn đều là kho tự soạn có sẵn, chỉ nối vào khung mới. */
 function skillDoneMark(key) { return (state.skillDone && state.skillDone[key]) ? " ✓" : ""; }
 function enPracticeEntHTML() {
-  return '<div class="qblock" id="entVideoBlock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details class=\"vrow\"><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details class=\"vrow\"><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details class=\"vrow\"><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details class=\"vrow\"><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details class=\"vrow\"><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details class=\"vrow\"><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p>" + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + "</details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; \"I love pancakes!\" — mình thích bánh kếp!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; \"Let's go camping!\" — cùng đi cắm trại nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; \"I can ride a bike!\" — mình biết đạp xe rồi!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; \"My new shoes!\" — giày mới của mình!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; \"I am Baymax!\" — mình là Baymax!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; \"Let's cook!\" — cùng nấu ăn nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; \"We are friends!\" — chúng mình là bạn bè!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details>" + '</div>';
+  return '<div class="qblock" id="entVideoBlock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video.</p><details class=\"vrow\"><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; \"I'm hungry!\" — mình đói bụng rồi!</p></details><details class=\"vrow\"><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; \"I want to see the lights!\" — mình muốn xem đèn lồng!</p></details><details class=\"vrow\"><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; \"Let's play!\" — cùng chơi nào!</p></details><details class=\"vrow\"><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; \"We are friends!\" — chúng mình là bạn bè!</p></details><details class=\"vrow\"><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; \"I love dogs!\" — mình yêu chó!</p></details><details class=\"vrow\"><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); \"I have news for you.\" — mình có tin cho bạn đây.</p>" + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + "</details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; \"I love pancakes!\" — mình thích bánh kếp!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; \"Let's go camping!\" — cùng đi cắm trại nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; \"I can ride a bike!\" — mình biết đạp xe rồi!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; \"My new shoes!\" — giày mới của mình!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; \"I am Baymax!\" — mình là Baymax!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; \"Let's cook!\" — cùng nấu ăn nào!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class=\"vrow\"><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0\" loading=\"lazy\" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; \"We are friends!\" — chúng mình là bạn bè!</p><p class=\"mut\"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details>" + '</div>';
 }
 function enPracticeEntWire(m) {
   videoVOAWire();
@@ -3781,7 +3781,7 @@ function viewPractice(app) {
   CONTENT.roleplay.forEach(function (r, i) { speakNextItems.push({ label: r.title, key: "roleplay:" + i }); });
   html += '<details class="card" id="practiceGrpSpeak"><summary><b>🗣️ Nói — ' + c.speakTotal + ' kịch bản (Part 1: ' + c.speakP1 + ' · Part 2: ' + c.speakP2 + ' · Part 3: ' + c.speakP3 + ') + ' + c.roleplay + ' tình huống nhập vai' + nextTxt(speakNextItems) + '</b></summary>'
     + '<details style="margin-top:8px"><summary><b>Xem cách học Nói theo kịch bản</b></summary>'
-    + '<p class="mut">Mỗi kịch bản: đọc hội thoại mẫu (giám khảo – thí sinh, kèm tiếng Việt), nghe từng câu, rồi làm câu hỏi từ vựng và cấu trúc rút ra từ chính bài mẫu. Nói Part 3 là thảo luận mở rộng, khó hơn Part 1. Part 3 chính thức từ Band 4,5; các bài Part 3 ở band thấp là “làm quen”, không tính vào cổng 80%.</p>'
+    + '<p class="mut">Mỗi kịch bản: đọc hội thoại mẫu (giám khảo – thí sinh, kèm tiếng Việt), nghe từng câu, rồi làm câu hỏi từ vựng và cấu trúc rút ra từ chính bài mẫu. Nói Part 3 là thảo luận mở rộng, khó hơn Part 1. Part 3 chính thức từ Band 4,5; các bài Part 3 ở band thấp là “làm quen”, không tính vào số bước mở kiểm tra.</p>'
     + '</details>';
   [1, 2, 3].forEach(function (p) {
     var idxs = []; CONTENT.speaking.forEach(function (s, i) { if (s.partNum === p && s.part !== "Roleplay") idxs.push(i); });
@@ -3804,7 +3804,7 @@ function viewPractice(app) {
   CONTENT.writingDrills.forEach(function (d, i) { writeNextItems.push({ label: d.title, key: "drill:" + i }); });
   html += '<details class="card" id="practiceGrpWrite"><summary><b>✍️ Viết — ' + c.writeTotal + ' bài (Academic: ' + c.writeT1 + ' · Cả hai lối đi: ' + c.writeT2 + ' · General Training: ' + c.writeMail + ' · Nền tảng: ' + c.writeBase + ') + ' + c.writeDrills + ' bài luyện viết từng bước' + nextTxt(writeNextItems) + '</b></summary>'
     + '<div class="row" style="margin-top:8px"><span class="mut">Lọc:</span><button class="btn" data-writefilter="all">Tất cả</button><button class="btn" data-writefilter="A">Academic</button><button class="btn" data-writefilter="AG">Cả hai lối đi</button><button class="btn" data-writefilter="G">General Training</button><button class="btn" data-writefilter="N">Nền tảng</button></div>'
-    + '<details style="margin-top:8px"><summary><b>Xem cách học Viết 3 bước</b></summary><p class="mut">Mỗi bài viết đi theo 3 bước: viết bản nháp → AI chấm 4 tiêu chí + đối chiếu bài mẫu 2 cột → viết lại bản sửa (lưu cả hai bản). Các bài Chép/Điền câu mẫu ở Band 0 chỉ chấm đúng/sai từng câu, không qua 3 bước và không chấm 4 tiêu chí. Thư và email theo format General Training Task 1, không phải Academic. Cách tính band Viết: xem trong Cài đặt → Ghi chú. Bài luyện từng bước: nối câu, paraphrase, sắp xếp câu — gõ câu của bạn rồi so với bài mẫu.</p></details>';
+    + '<details style="margin-top:8px"><summary><b>Xem cách học Viết 3 bước</b></summary><p class="mut">Mỗi bài viết đi theo 3 bước: viết bản nháp → AI chấm 4 tiêu chí + đối chiếu bài mẫu 2 cột → viết lại bản sửa (lưu cả hai bản). Các bài Chép/Điền câu mẫu ở Band 0 chỉ chấm đúng/sai từng câu, không qua 3 bước và không chấm 4 tiêu chí. Thư và email theo format General Training Task 1, không phải Academic. Bài luyện từng bước: nối câu, paraphrase, sắp xếp câu — gõ câu của bạn rồi so với bài mẫu.</p></details>';
   [["Task 1 — Academic", "A"], ["Task 2 — Academic + General Training", "AG"], ["Thư và email — General Training", "G"], ["Nền tảng — Đoạn văn ngắn, Chép câu mẫu, Điền câu mẫu", "N"]].forEach(function (grp) {
     var idxs = []; CONTENT.writing.forEach(function (w, i) { if ((w.track || "") === grp[1]) idxs.push(i); });
     idxs.sort(function (a, b) { var ba = bandSortVal(CONTENT.writing[a].band), bb = bandSortVal(CONTENT.writing[b].band); return ba - bb || a - b; });
@@ -3851,15 +3851,15 @@ function viewPractice(app) {
   html += '<details class="card" id="practiceGrpBk"><summary><b>📚 Nội dung mới theo nghiên cứu sách</b></summary>' + bkPracticeHTML() + '</details>';
   /* --- Thi: buoi thi ket thuc dot + thi thu --- */
   html += '<details class="card" id="practiceGrpExam"><summary><b>🎓 Thi thử IELTS</b> — buổi thi kết thúc đợt + thi thử đúng format</summary>'
-    + '<p class="mut">3 tầng đánh giá, mỗi tầng một việc: (1) Kiểm tra cuối chương — đo chương vừa học, mở khi xong 80% bước tính cổng, qua khi mỗi phần ≥50%. (2) Buổi thi kết thúc đợt — đo từng kỹ năng sau mỗi đợt học. (3) Thi thử — gộp 4 kỹ năng như thi thật; lần đầu mỗi mốc là dạng có hướng dẫn (không bấm giờ, có mẹo từng phần), các lần sau bấm giờ như thi thật.</p>'
     + '<h3>Buổi thi kết thúc đợt</h3>'
-    + '<p class="mut">Cuối mỗi đợt học, thi 4 bài riêng từng kỹ năng (Nghe, Đọc, Nói, Viết) để biết trình độ mình đang ở đâu. Khác với bài kiểm tra cuối chương (mở bước tiếp theo) và khác với thi thử gộp 4 kỹ năng. Kết quả từng đợt lưu lại và hiện ở mục Của tôi → Đánh giá mức độ để so sánh các đợt với nhau.</p>'
+    + '<p class="mut">3 tầng đánh giá: kiểm tra cuối chương, buổi thi kết thúc đợt, thi thử — lần đầu mỗi mốc là dạng có hướng dẫn.</p>'
+    + '<p class="mut">Cuối mỗi đợt học, thi 4 bài riêng từng kỹ năng (Nghe, Đọc, Nói, Viết) để biết trình độ mình đang ở đâu. Kết quả từng đợt lưu ở mục Của tôi → Đánh giá mức độ để so sánh các đợt với nhau.</p>'
     + '<div class="row"><button class="btn" data-phaseexam="1">Mở buổi thi — Đợt 1</button><button class="btn" data-phaseexam="2">Đợt 2</button><button class="btn" data-phaseexam="3">Đợt 3</button></div>'
-    + '<details style="margin-top:8px"><summary><b>Xem cách lấy bài theo đợt</b></summary><p class="mut">Mỗi đợt lấy bộ bài khác nhau trong kho, đợt càng sau bài càng khó dần (xếp theo band trong kho). Nghe/Đọc chấm theo đáp án; Nói/Viết AI chấm 4 tiêu chí (ghi rõ "Máy ước lượng").</p></details>'
+    + '<details style="margin-top:8px"><summary><b>Xem cách lấy bài theo đợt</b></summary><p class="mut">Mỗi đợt lấy bộ bài khác nhau trong kho, đợt càng sau bài càng khó dần. Nghe/Đọc chấm theo đáp án; Nói/Viết AI chấm 4 tiêu chí (ghi rõ "Máy ước lượng").</p></details>'
     + '<h3>Thi thử đúng format</h3>'
     + '<p class="mut">Thi thử gộp 4 kỹ năng như một kỳ thi thật: Nghe 40 câu (30 phút), Đọc 3 bài (60 phút), Viết Task 1 + Task 2 (60 phút), Nói Part 1-2-3 (14 phút). Mỗi phần thi có đồng hồ đếm ngược chạy thật, hết giờ bài tự nộp. Kết quả lưu thành mốc đã thi thử. Lần thi thử đầu tiên ở mỗi mốc là dạng có hướng dẫn (không bấm giờ); lưu mốc xong, các lần sau mới bấm giờ.</p>'
     + '<div class="row"><button class="btn" data-mocktest="4.5">Thi thử chặng 4,5</button><button class="btn" data-mocktest="5.5">Chặng 5,5</button><button class="btn" data-mocktest="6.5">Chặng 6,5</button><button class="btn" data-mocktest="7.5">Chặng 7,5+</button></div>'
-    + '<details style="margin-top:8px"><summary><b>Xem cách chọn bài thi thử</b></summary><p class="mut">Chặng chọn bài có độ khó gần chặng đó nhất trong kho; bài nào thay thế vì kho thiếu đúng độ khó sẽ ghi rõ trong màn thi.</p></details>' + '<p class="mut">Kiểm tra cuối chương mở khi xong 80% số bước chương (chuẩn nội bộ). Mở ở tab Bản đồ.</p></details>';
+    + '<details style="margin-top:8px"><summary><b>Xem cách chọn bài thi thử</b></summary><p class="mut">Chặng chọn bài có độ khó gần chặng đó nhất.</p></details>' + '<p class="mut">Kiểm tra cuối chương mở khi xong 80% số bước chương. Mở ở tab Bản đồ.</p></details>';
   /* --- Bo tro chuong 1 --- */
   html += '<details class="card" id="practiceGrpSupport"><summary><b>Bổ trợ — chương 1</b></summary>'
     + '<button class="step-row" data-practice="classroom"><span>Từ vựng lớp học đầu tiên (20 từ)</span><span class="st">→</span></button>'
@@ -3874,7 +3874,7 @@ function viewPractice(app) {
    
     + '<button class="step-row" data-entrycheck="zero"><span>Kiểm tra đầu vào — Band 0 (6 câu)</span><span class="st">' + (doneK("entryZero") ? '✓' : '→') + '</span></button>'
     + '<button class="step-row" data-entrycheck="trial"><span>Kiểm tra đầu vào — Band 5,0–7,5+ (16 câu)</span><span class="st">' + (doneK("entryTrial") ? '✓' : '→') + '</span></button></details>';
-  html += '<details style="margin-top:8px"><summary><b>Xem nguồn nội dung</b></summary><p class="mut">Mọi bài dưới đây đều từ kho tự soạn của web — xem chi tiết nguồn trong Cài đặt → Nguồn nội dung.</p></details>' + videoNewBlockHTML("en");
+  html += videoNewBlockHTML("en");
   app.innerHTML = html;
   videoSampleWire();
   videoVOAWire();
@@ -4065,27 +4065,21 @@ function notesHTML() {
   var xpItems = RB_XP_RULES.map(function (r) { return '<li>' + esc(r.what) + ': +' + r.xp + ' XP</li>'; }).join("");
   var xpLevels = RB_XP_LEVELS.map(function (v, i) { return 'cấp ' + i + ' từ ' + v + ' XP'; }).join('; ');
   var h = '<details class="card" id="mineGrpNotes"><summary><b>📝 Ghi chú</b></summary>';
-  h += '<p class="mut">Các quy tắc tính điểm, ôn tập và quy tắc khác gom ở đây. Nguồn nội dung xem ở mục Nguồn nội dung bên dưới.</p>';
   h += '<h3>Cách tính điểm</h3>';
   h += notesScoreHTML89();
   h += '<h4>Mốc qua bài</h4>';
   h += notesGateHTML89();
   h += '<h4>Bảng XP và cấp</h4><ul>' + xpItems + '</ul>';
   h += '<p>Mốc lên cấp: ' + xpLevels + '; từ cấp 9 trở đi mỗi cấp thêm ' + RB_XP_LEVEL_STEP + ' XP.</p>';
-  h += '<h4>Điểm game</h4>';
-  h += '<p>Nối từ: +10 điểm mỗi cặp đúng. Giải mã từ: +10 điểm cộng thêm 2 điểm cho mỗi từ đúng liên tiếp trước đó. Nghe và đoán: +10 điểm mỗi câu đúng. Đua gõ: điểm = độ chính xác + min(tốc độ gõ, 100). Kết thúc một ván game: +10 XP. Mỗi game có kỷ lục riêng theo từng track, lưu trên máy này.</p>';
   h += '<h4>Điểm thành thạo</h4>';
-  h += '<p>Mỗi kỹ năng có 5 chấm — mỗi chấm là 20% số bài đã xong của kỹ năng đó. % từng kỹ năng là % bài đã xong, không phải điểm thi.</p>';
+  h += '<p>Mỗi chấm là 20% số bài đã xong của kỹ năng đó.</p>';
   h += '<h3>Cách ôn tập</h3>';
-  h += '<p>Lịch ôn: 1-3-7-14-30 ngày (chuẩn nội bộ của web). Thẻ từ có 5 nấc nhớ — xem giải thích đầy đủ ở Bảng chú giải trong mục Tiến trình. Mục khó trong Sổ lỗi sai: ôn đúng 2 lần liên tiếp ở các lần ôn cách quãng mới tốt nghiệp (xong hẳn); làm sai thì tính lại chuỗi đúng liên tiếp từ đầu (nấc giữ nguyên), hẹn lại sau 1 ngày.</p>';
-  h += '<p>Hàng đợi ôn trộn: 80% mục cũ đến hạn + 20% mục mới làm quen trước; mục mới không thay phần ôn cũ.</p>';
-  h += '<p>Câu sai trong quiz shadowing đã vào Sổ lỗi sai để ôn lại theo lịch 1-3-7-14-30 ngày. Làm lại quiz không xóa lỗi đã vào Sổ lỗi sai.</p>';
+  h += '<p>Ôn theo lịch 1-3-7-14-30 ngày. Mục khó trong Sổ lỗi sai: ôn đúng 2 lần liên tiếp ở các lần ôn cách quãng mới xong hẳn; làm sai thì tính lại từ đầu.</p>';
+  h += '<p>Buổi ôn trộn mục cũ đến hạn với một ít mục mới.</p>';
+  h += '<p>Câu sai trong quiz shadowing đã vào Sổ lỗi sai để ôn lại.</p>';
   h += '<h3>Quy tắc khác</h3>';
-  h += '<p>Độ mở hàm ghi trong bài học phát âm là do trang tự gán, tương đối.</p>';
-  h += '<p>Chẩn đoán kỹ thuật của gương được ẩn trong lúc học để màn học gọn — bạn chỉ thấy điểm chấm, không thấy dòng chẩn đoán.</p>';
-  h += '<p>Đây là quiz sau video duy nhất còn lại; các điểm luyện khác không có quiz video.</p>';
-  h += '<p>Bấm Yêu cầu VIP chỉ ghi lại yêu cầu để chủ web cấp tay — tài khoản vẫn là Thường cho tới khi được cấp, sau khi được cấp thì bấm Tải lại từ tài khoản để hiện VIP.</p>';
-  if ((state.track || "en") === "en") h += '<p>HSKK: web giữ mục HSKK riêng, không gộp nói vào đề từng cấp — vì tới 25/10/2026 chưa có bằng chứng chính thức nào cho thấy nói đã tích hợp có điểm riêng vào từng đề HSK 3.0.</p>';
+  h += '<p>Bấm Yêu cầu VIP chỉ ghi lại yêu cầu để chủ web cấp tay — tài khoản vẫn là Thường cho tới khi được cấp. Sau khi được cấp VIP, bấm Tải lại từ tài khoản để hiện VIP.</p>';
+  if ((state.track || "en") === "en") h += '<p>HSKK thi nói riêng, không gộp vào đề từng cấp.</p>';
   h += '<p>Đóng băng chuỗi: tối đa 3 lượt, miễn phí, không mua bán, không trừ XP. Cứ 7 ngày chuỗi liên tiếp thì nhận thêm 1 lượt. Lỡ 1 ngày mà còn lượt thì chuỗi tự giữ, không cần bấm gì. Nếu lỡ nhiều ngày hơn số lượt còn lại thì chuỗi sẽ đứt thật và lượt đóng băng được giữ lại, không trừ oan. Lỡ tiếp ngày nữa mà hết lượt thì chuỗi đứt.</p>';
   h += notesPlanHTML89();
   h += '</details>';
@@ -4288,7 +4282,7 @@ function trackLevelHTML89() {
         + '<p><b>Band ước lượng: ' + fmtBandComma(lt.band) + '</b> <span class="mut">(kiểm tra cuối chương 1, ngày ' + esc(lt.date) + ')</span></p>'
         + lt.parts.map(function (pt) { return '<p>Phần "' + esc(pt.name) + '": ' + pt.c + '/' + pt.n + ' (' + pt.pct + '%)</p>'; }).join("")
         + '<p><b>Phần yếu nhất: ' + esc(weakestP.name) + ' (' + weakestP.pct + '%)</b> — hãy luyện lại bước tương ứng trong chương 1.</p>'
-        + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú. Band ở đây là ước lượng từ kiểm tra nội bộ, không phải điểm thi IELTS thật.</p>'
+        + '<p class="mut">Band ước lượng, chỉ để tham khảo.</p>'
         + '<button class="btn" id="levelWeakBtn">Luyện phần yếu nhất</button></section>';
     } else {
       levelHTML = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
@@ -4321,7 +4315,7 @@ function trackLevelHTML89() {
     + '<p><b>Đã qua kiểm tra cuối chặng: ' + ck[0] + '/' + ck[1] + ' chặng</b></p>';
   if (mk.length) {
     var m2 = mk[mk.length - 1];
-    if (isTc) h2 += '<p><b>' + tcMockLine89(m2) + '</b></p><p class="mut">ETS không công bố bảng quy đổi điểm thô cố định — điểm này chỉ là ước lượng nội bộ.</p>';
+    if (isTc) h2 += '<p><b>' + tcMockLine89(m2) + '</b></p><p class="mut">Điểm ước lượng, chỉ để tham khảo.</p>';
     else h2 += '<p><b>' + tpMockLine89(m2) + '</b></p><p class="mut">Các mốc dưới đây đo trình độ tiếng Hàn của bạn qua bài thi thử đã lưu.</p>';
   } else h2 += '<p class="mut">Chưa thi thử — thi thử ở cuối chặng trong Bản đồ để lưu mốc.</p>';
   return h2 + '</section>';
@@ -4338,7 +4332,7 @@ function trackPhaseHTML89() {
       phaseHTML = '<section class="card" id="minePhase"><h3>Buổi thi kết thúc đợt — trình độ qua các đợt</h3>'
         + '<p><b>Đợt ' + last.phase + ' (' + esc(last.date) + '):</b> Nghe ' + fmtBandComma(last.listening.band) + dPh("listening") + ' · Đọc ' + fmtBandComma(last.reading.band) + dPh("reading") + ' · Nói ' + fmtBandComma(last.speaking.band) + ' (Tự đánh giá)' + (last.speaking.aiScore != null ? ' · AI phát âm ' + last.speaking.aiScore + '%' : '') + dPh("speaking") + ' · Viết ' + fmtBandComma(last.writing.band) + (last.writing.ai ? ' (Máy ước lượng)' : ' (Tự đánh giá)') + dPh("writing") + '</p>'
         + (prevPh ? '<p class="mut">Đợt trước (Đợt ' + prevPh.phase + ', ' + esc(prevPh.date) + '): Nghe ' + fmtBandComma(prevPh.listening.band) + ' · Đọc ' + fmtBandComma(prevPh.reading.band) + ' · Nói ' + fmtBandComma(prevPh.speaking.band) + ' · Viết ' + fmtBandComma(prevPh.writing.band) + '</p>' : '<p class="mut">Đây là đợt đầu tiên — thi thêm đợt sau để so sánh trình độ thay đổi ra sao.</p>')
-        + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú.</p>'
+        + '<p class="mut">Band ước lượng, chỉ để tham khảo.</p>'
         + '<p><button class="btn" id="phaseAgainBtn">Mở buổi thi đợt ' + (last.phase + 1) + '</button></p></section>';
     } else {
       phaseHTML = '<section class="card" id="minePhase"><h3>Buổi thi kết thúc đợt</h3><p class="mut">Chưa có buổi thi nào. Vào Luyện tập → Buổi thi kết thúc đợt để thi 4 kỹ năng riêng và lưu kết quả theo đợt.</p></section>';
@@ -4359,7 +4353,7 @@ function trackMockHTML89() {
     if (mkList.length) {
       mockHTML = '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + mkList.map(function (m) {
         return '<p>Chặng ' + esc(String(m.milestone).replace(".", ",")) + (m.milestone === "7.5" ? "+" : "") + ' (' + esc(m.date) + '): Nghe ' + fmtBandComma(m.listen) + ' · Đọc ' + fmtBandComma(m.read) + ' · Viết ' + fmtBandComma(m.write) + ' · Nói ' + fmtBandComma(m.speak) + ' · <b>Overall ' + fmtBandComma(m.overall) + '</b></p>';
-      }).join("") + '<p class="mut">Band ước lượng để tham khảo — xem bảng quy đổi đầy đủ ở Ghi chú.</p></section>';
+      }).join("") + '<p class="mut">Band ước lượng, chỉ để tham khảo.</p></section>';
     }
     return mockHTML;
   }
@@ -4369,7 +4363,7 @@ function trackMockHTML89() {
   }
   if (t === "tc") {
     var tl = state.tcMockTests || []; if (!tl.length) return "";
-    return '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + tl.map(function (m) { return '<p>' + tcMockLine89(m) + '</p>'; }).join("") + '<p class="mut">ETS không công bố bảng quy đổi điểm thô cố định — điểm này chỉ là ước lượng nội bộ.</p></section>';
+    return '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + tl.map(function (m) { return '<p>' + tcMockLine89(m) + '</p>'; }).join("") + '<p class="mut">Điểm ước lượng, chỉ để tham khảo.</p></section>';
   }
   var pl = state.tpMockTests || []; if (!pl.length) return "";
   return '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + pl.map(function (m) { return '<p>' + tpMockLine89(m) + '</p>'; }).join("") + '<p class="mut">Ngưỡng cấp là quy ước nội bộ của web theo thang PBT /200, không phải bảng chính thức.</p></section>';
@@ -4423,39 +4417,39 @@ function notesScoreHTML89() {
       + '<p class="mut">CEFR là khung trình độ chung châu Âu (A1 thấp nhất tới C2 cao nhất) — cột CEFR trong bảng trên đối chiếu band với khung này.</p>'
       + '<p>Kiểm tra tổng hợp cuối chương dùng bảng Đọc làm bảng chung.</p>'
       + '<h4>Điểm Nói/Viết</h4>'
-      + '<p><b>4 tiêu chí chấm nói (mỗi tiêu chí 25%):</b> ' + esc(RB_SPEAK_CRITERIA_TXT) + '</p>'
-      + '<p><b>4 tiêu chí chấm viết (mỗi tiêu chí 25%):</b> ' + esc(RB_WRITE_CRITERIA_TXT) + '</p>'
-      + '<p>Band chung là trung bình 4 tiêu chí. Phát âm neo điểm pronounce: điểm pronounce cao thì band Phát âm cao, thấp thì band thấp, không bịa ngược.</p>'
-      + '<p>Kiểm tra phát âm đầu vào: kết quả chỉ là ước lượng tại chỗ, không tính đạt chuẩn.</p>'
+      + '<p><b>4 tiêu chí chấm nói:</b> ' + esc(RB_SPEAK_CRITERIA_TXT) + '</p>'
+      + '<p><b>4 tiêu chí chấm viết:</b> ' + esc(RB_WRITE_CRITERIA_TXT) + '</p>'
+      + '<p>Band chung là trung bình 4 tiêu chí.</p>'
+      + '<p>Kiểm tra phát âm đầu vào chỉ là ước lượng, không tính đạt chuẩn.</p>'
       + '<p>Thẻ từ: quyền camera/mic bị từ chối thì không tính đạt chuẩn.</p>'
-      + '<p>AI chấm tiếng Trung (hàm chấm bản mới): chấm theo từng âm tiết, thanh điệu là chiều riêng; thẻ từ cần AI ≥ 80 mới qua bước phát âm. Nếu máy chủ chưa nâng cấp hàm chấm thì tạm chưa tính điểm AI.</p>';
+      + '<p>Thẻ từ tiếng Trung cần AI chấm ≥ 80 mới qua bước phát âm.</p>';
   }
   if (t === "zh") {
     return '<h4>Điểm HSK</h4>'
       + '<p>Kiểm tra cuối chặng: mỗi phần cần từ 50% đúng lần đầu mới tính qua; chưa qua chỉ cần học lại đúng phần yếu, các phần đã đạt không cần làm lại.</p>'
-      + '<p>Thi thử HSK (bản rút gọn): điểm là số câu đúng từng phần Nghe/Đọc/Viết — không phải điểm HSK chính thức.</p>'
-      + '<p>AI chấm tiếng Trung (hàm chấm bản mới): chấm theo từng âm tiết, thanh điệu là chiều riêng; thẻ từ cần AI ≥ 80 mới qua bước phát âm. Nếu máy chủ chưa nâng cấp hàm chấm thì tạm chưa tính điểm AI.</p>'
+      + '<p>Thi thử HSK (bản rút gọn): điểm là số câu đúng từng phần, không phải điểm HSK chính thức.</p>'
+      + '<p>Thẻ từ tiếng Trung cần AI chấm ≥ 80 mới qua bước phát âm.</p>'
       + '<p>Thẻ từ: quyền camera/mic bị từ chối thì không tính đạt chuẩn.</p>'
-      + '<p>HSKK: web giữ mục HSKK riêng, không gộp nói vào đề từng cấp — vì tới 25/10/2026 chưa có bằng chứng chính thức nào cho thấy nói đã tích hợp có điểm riêng vào từng đề HSK 3.0.</p>';
+      + '<p>HSKK thi nói riêng, không gộp vào đề từng cấp.</p>';
   }
   if (t === "tc") {
     return '<h4>Điểm TOEIC</h4>'
-      + '<p>Thi thử TOEIC: mỗi phần Nghe/Đọc quy ra thang 495 theo tỉ lệ câu đúng, tổng tối đa 990. ETS không công bố bảng quy đổi điểm thô cố định nên điểm này chỉ là ước lượng nội bộ, không tương đương điểm thi thật.</p>'
-      + '<p>Thi thử đủ 200 câu theo đúng tỉ lệ đề thi thật của ETS; thi thử theo chặng rút gọn 120 câu (60%).</p>';
+      + '<p>Thi thử TOEIC: tổng tối đa 990. Điểm chỉ là ước lượng, không tương đương điểm thi thật.</p>'
+      + '<p>Thi thử đủ 200 câu; thi thử theo chặng rút gọn 120 câu.</p>';
   }
   return '<h4>Điểm TOPIK</h4>'
-    + '<p>Thi thử TOPIK I rút gọn: tổng /200 (Nghe + Đọc, mỗi phần /100 theo tỉ lệ câu đúng); từ 140 = cấp 2, 80–139 = cấp 1. Ngưỡng này là quy ước nội bộ của web theo thang PBT /200, không phải bảng chính thức.</p>'
+    + '<p>Thi thử TOPIK I rút gọn: tổng /200; từ 140 = cấp 2, 80–139 = cấp 1.</p>'
     + '<p>Thi thử TOPIK II đủ 104 nhiệm vụ: Nghe + Đọc tính điểm tham khảo, Viết tự chấm theo bảng tiêu chí.</p>';
 }
 function notesGateHTML89() {
   var t = (typeof state !== "undefined" && state.track) || "en";
-  if (t === "en") return '<p>Kiểm tra cuối chương mở khi xong 80% số bước tính cổng (bước “làm quen” và bước “ôn xen kẽ” không tính vào 80%; làm tròn lên: cần Math.ceil(số bước tính cổng × 0,8) bước; chương 1 cần 6/7 bước). Kiểm tra cuối chặng tiếng Trung mở khi xong 80% số bước chặng; mỗi phần cần từ 50% đúng lần đầu mới tính qua, chưa qua chỉ cần học lại đúng phần yếu.</p>';
+  if (t === "en") return '<p>Kiểm tra cuối chương mở khi xong 80% số bước.</p>';
   if (t === "zh") return '<p>Kiểm tra cuối chặng mở khi xong 80% số bước chặng; mỗi phần cần từ 50% đúng lần đầu mới tính qua, chưa qua chỉ cần học lại đúng phần yếu.</p>';
-  return '<p>Kiểm tra cuối chặng mở khi xong 80% số bước học của chặng — bước gợi ý sẽ chuyển sang kiểm tra cuối chặng khi đủ 80%.</p>';
+  return '<p>Kiểm tra cuối chặng mở khi xong 80% số bước học của chặng.</p>';
 }
 function notesPlanHTML89() {
   var t = (typeof state !== "undefined" && state.track) || "en";
-  if (t === "en") return '<p>Kế hoạch tới ngày đích: số tuần còn lại ≈ số phút còn lại chia cho mục tiêu phút/ngày rồi chia 7 (làm tròn lên). Tính ngược ngày đích: số ngày học cần = số phút còn lại chia mục tiêu phút/ngày; web báo đúng tiến độ, chậm bao nhiêu ngày, hoặc cần tăng lên bao nhiêu phút/ngày để kịp. Hiện chỉ tính chương 1.</p>';
+  if (t === "en") return '<p>Kế hoạch tới ngày đích: web báo còn bao nhiêu ngày và cần học bao nhiêu phút/ngày để kịp. Hiện chỉ tính chương 1.</p>';
   return '<p>Kế hoạch tới ngày đích: web đếm số bước còn lại ở chặng hiện tại và báo còn bao nhiêu ngày tới đích. Hiện chỉ tính chặng hiện tại.</p>';
 }
 /* "Nội dung tự soạn" + chuẩn tham chiếu + chuẩn nội bộ, theo track. */
@@ -5268,7 +5262,7 @@ function accountCardHTML() {
     if (vr) h += '<p class="mut">Yêu cầu VIP gần nhất: ' + esc(vr.note || vr.status) + '</p>';
     h += '<p><input type="password" id="accNewPw" placeholder="Mật khẩu mới (từ 6 ký tự)"></p>'
       + '<div class="row"><button class="btn" id="accChangePw">Đổi mật khẩu</button><button class="btn" id="accLogout">Đăng xuất</button><button class="btn" id="accSync">Đồng bộ ngay</button><button class="btn" id="accPull">Tải lại từ tài khoản</button>' + (!authState.vip ? '<button class="btn" id="accVipRequestBtn">Yêu cầu VIP</button>' : '') + '</div>'
-      + (!authState.vip ? '<p class="mut">Bấm để gửi yêu cầu — xem quy trình cấp trong Cài đặt → Ghi chú.</p>' : '');
+      + (!authState.vip ? '<p class="mut">Bấm để gửi yêu cầu.</p>' : '');
   }
   h += '</section>';
   return h;
@@ -6047,7 +6041,7 @@ function renderSkillGramOld(app, l) {
         if (!state.skillDone) state.skillDone = {};
         var wasQ = !!state.skillDone["gramOld:" + l.idx];
         state.skillDone["gramOld:" + l.idx] = true; awardXp(wasQ ? 5 : 10); saveState();
-        app.innerHTML = skillHead("Kiểm tra nhanh — " + g.name, "") + '<div class="summarybox"><h2>Bạn đã qua kiểm tra nhanh!</h2><p>Bạn đúng ' + res.firstN + '/' + res.total + ' câu ngay lần đầu — trạm này đã ghi là xong, bạn không cần học lại.</p><p class="mut">Kiểm tra nhanh chỉ bỏ qua bước dạy lại — bạn vẫn làm kiểm tra cuối chương như thường (cổng 80% vẫn giữ).</p><div class="row" style="margin-top:10px"><button class="btn btn-primary" id="qcBack">Về Lộ trình</button></div></div>';
+        app.innerHTML = skillHead("Kiểm tra nhanh — " + g.name, "") + '<div class="summarybox"><h2>Bạn đã qua kiểm tra nhanh!</h2><p>Bạn đúng ' + res.firstN + '/' + res.total + ' câu ngay lần đầu — trạm này đã ghi là xong, bạn không cần học lại.</p><p class="mut">Kiểm tra nhanh chỉ bỏ qua bước dạy lại — bạn vẫn làm kiểm tra cuối chương như thường.</p><div class="row" style="margin-top:10px"><button class="btn btn-primary" id="qcBack">Về Lộ trình</button></div></div>';
       } else {
         app.innerHTML = skillHead("Kiểm tra nhanh — " + g.name, "") + '<div class="summarybox"><h2>Chưa qua kiểm tra nhanh</h2><p>Bạn đúng ' + res.firstN + '/' + res.total + ' câu — học bài đầy đủ nhé, bài này có ' + (g.quiz || []).length + ' câu luyện tập.</p><div class="row" style="margin-top:10px"><button class="btn btn-primary" id="qcLearn">Vào học bài đầy đủ</button></div></div>';
       }
@@ -6063,7 +6057,7 @@ function renderSkillGramOld(app, l) {
   var qcEligible = rbQuickcheckEligible(g);
   var qcDone = !!(state.skillDone && state.skillDone["gramOld:" + l.idx]);
   var qcBtn = (qcEligible && !qcDone) ? ' <button class="btn btn-amber" id="gramOldQuick">Tôi đã học qua rồi — kiểm tra nhanh 3 câu</button>' : '';
-  var qcNote = qcEligible ? '<p class="mut">Kiểm tra nhanh chỉ bỏ qua bước dạy lại — bạn vẫn làm kiểm tra cuối chương như thường (cổng 80% vẫn giữ).</p>' : '';
+  var qcNote = qcEligible ? '<p class="mut">Kiểm tra nhanh chỉ bỏ qua bước dạy lại — bạn vẫn làm kiểm tra cuối chương như thường.</p>' : '';
   app.innerHTML = skillHead(l.title || g.name, (g.fam || "") + " · " + (g.level || "")) + gramPhaseBarHTML("theory") + '<div class="qblock"><p class="mut">' + esc(g.hook || "") + '</p><p><b>Ví dụ trước:</b></p>' + (g.examples || []).map(function (e) { return '<p>· ' + esc(e) + '</p>'; }).join("") + '<p><b>Quy tắc:</b> ' + esc(g.explain || "") + '</p>' + (misOld ? '<p><b>Lỗi hay gặp:</b> ' + esc(misOld) + '</p>' : "") + videoSlotHTML("gramOld:" + l.idx) + '<p class="mut">Bài này có ' + (g.quiz || []).length + ' câu hỏi thực hành.</p><p><button class="btn btn-primary" id="gramOldStart">Vào luyện tập →</button> <button class="btn" id="gramOldAi">AI giải thích điểm ngữ pháp này</button>' + qcBtn + '</p>' + qcNote + '<div class="why" id="gramOldAiOut"></div></div>';
   wireBack();
   $("#gramOldStart").onclick = function () { l.quiz = true; lessonStart = Date.now(); render(); };
@@ -6101,7 +6095,7 @@ function renderBkErr(app, l) {
   if (!e) { toast("Mục này chưa có."); backFromLesson(); return; }
   l.title = "Lỗi người Việt hay mắc — " + e.title; l.skillKey = "bkErr:" + l.idx;
   if (!l.quiz) {
-    app.innerHTML = skillHead(l.title, e.band + " · " + e.kind + " · Nội dung tự soạn của web") + '<div class="qblock"><p class="mut">Đọc cặp câu dưới đây trước — câu sai và câu đúng đặt cạnh nhau, rồi mới tới quy tắc.</p>'
+    app.innerHTML = skillHead(l.title, e.band + " · " + e.kind) + '<div class="qblock"><p class="mut">Đọc cặp câu dưới đây trước — câu sai và câu đúng đặt cạnh nhau, rồi mới tới quy tắc.</p>'
       + '<p>✗ Câu hay sai: <b>' + esc(e.wrong) + '</b></p>'
       + '<p>✓ Câu đúng: <b>' + esc(e.right) + '</b></p>'
       + '<p><b>Quy tắc:</b> ' + esc(e.rule) + '</p>'
@@ -6117,7 +6111,7 @@ function renderBkLife(app, l) {
   var it = BK_LIFE[l.idx];
   if (!it) { toast("Mục này chưa có."); backFromLesson(); return; }
   l.title = "Đời sống người Việt — " + it.title; l.skillKey = "bkLife:" + l.idx;
-  var sub = it.band + " · " + it.skill + " · Bối cảnh: " + it.scene + " · Nội dung tự soạn của web";
+  var sub = it.band + " · " + it.skill + " · Bối cảnh: " + it.scene;
   if (it.qs) {
     if (!l.quiz) {
       var playBtn = it.skill === "Nghe" ? '<button class="btn" id="bkLifePlay">🔊 Nghe đoạn</button>' : "";
@@ -6147,7 +6141,7 @@ function renderBkTone(app, l) {
   if (!t) { toast("Mục này chưa có."); backFromLesson(); return; }
   l.title = "Sắc thái và phong cách — " + t.title; l.skillKey = "bkTone:" + l.idx;
   if (!l.quiz) {
-    app.innerHTML = skillHead(l.title, "Band 7,5+ · Chỉ ở chặng 7,5+ · Nội dung tự soạn của web") + '<div class="qblock"><p class="mut">Đọc cặp câu đối chiếu trước — câu thân mật và câu học thuật đặt cạnh nhau, rồi mới tới lưu ý.</p>'
+    app.innerHTML = skillHead(l.title, "Band 7,5+ · Chỉ ở chặng 7,5+") + '<div class="qblock"><p class="mut">Đọc cặp câu đối chiếu trước — câu thân mật và câu học thuật đặt cạnh nhau, rồi mới tới lưu ý.</p>'
       + '<p>Thân mật: <b>' + esc(t.informal) + '</b></p>'
       + '<p>Học thuật: <b>' + esc(t.formal) + '</b></p>'
       + '<p><b>Lưu ý:</b> ' + esc(t.note) + '</p>'
@@ -6159,8 +6153,7 @@ function renderBkTone(app, l) {
   renderQuizEngine(app, l, [t.q], "skill", "bkTone:" + l.idx);
 }
 function bkPracticeHTML() {
-  var html = '<section class="card" id="bkPracticeCard"><h3>📚 Nội dung mới theo nghiên cứu sách — tự soạn của web</h3>'
-    + '<p class="mut">Nội dung tự soạn của web — xem nguồn trong Cài đặt → Nguồn nội dung. Mỗi mục gắn đúng chặng của nó — mục 7,5+ không xuất hiện ở chặng thấp hơn.</p>';
+  var html = '<section class="card" id="bkPracticeCard"><h3>📚 Nội dung mới theo nghiên cứu sách</h3>';
   html += '<h4>Lỗi riêng cho người Việt — theo chặng</h4>';
   var bands = ["Band 0", "Band 2,0", "Band 2,5", "Band 3,0", "Band 3,5", "Band 4,0", "Band 4,5", "Band 5,0", "Band 6,0", "Band 6,5"];
   bands.forEach(function (b) {
@@ -6181,7 +6174,7 @@ function bkPracticeHTML() {
   html += '<h4>Sắc thái và phong cách — chỉ chặng 7,5+</h4><p class="mut">Mục này chỉ ở chặng 7,5+, không đưa xuống chặng thấp hơn.</p><div class="row">';
   BK_TONE.forEach(function (t, i) { html += '<button class="btn" data-bktone="' + i + '">' + esc(t.title) + skillDoneMark("bkTone:" + i) + '</button>'; });
   html += '</div>';
-  html += '<h4>Đối chiếu format thi hiện tại — thẻ tra cứu</h4><p class="mut">Xem nguồn đối chiếu trong Cài đặt → Nguồn nội dung.</p>';
+  html += '<h4>Đối chiếu format thi hiện tại — thẻ tra cứu</h4>';
   BK_FORMAT.forEach(function (f) { html += '<div class="qblock"><p><b>Sách cũ hay ghi:</b> ' + esc(f.old) + '</p><p><b>Format hiện tại:</b> ' + esc(f.now) + '</p></div>'; });
   html += '</section>';
   return html;
@@ -6402,7 +6395,7 @@ function nativeVideoHTML(word, lang) {
     + '<p class="mut yg-status"></p>'
     + '<div class="row"><button class="btn" id="ygLoadBtn">▶ Xem người bản địa nói</button></div>'
     + '<p class="mut">Powered by YouGlish.com</p>'
-    + '<details class="guide-more"><summary><b>Xem nguồn video</b></summary><p class="mut">Nguồn video: xem trong Cài đặt → Nguồn nội dung.</p></details></div>';
+    + '</div>';
 }
 function wireNativeVideo(word, lang) {
   var b = document.querySelector('#ygLoadBtn');
@@ -7195,9 +7188,9 @@ function renderVocab(app, l) {
     + '<p class="mut">Bấm “Phát âm” để AI chấm trong lúc soi gương — đạt sớm chỉ ghi nhận, tới bước phát âm đạt là qua thẻ.</p>'
     + lastPronLineHTML("s" + l.setIdx + ":" + pos)
     + gd23VocabPauseHTML(pos, cards.length)
-    + '</div><details class="card"><summary><b>Thêm</b> — mẹo nhớ, video mẫu, ghi chú camera/mic</summary>'
+    + '</div><details class="card"><summary><b>Thêm</b> — mẹo nhớ, video mẫu</summary>'
     + '<div class="row" style="margin-top:10px"><input type="text" id="vocabMemoInp" placeholder="Mẹo nhớ của bạn cho từ này..." value="' + esc((state.mems && state.mems[clMemoKey]) || "") + '"><button class="btn" id="vocabMemoSave">Lưu mẹo nhớ</button></div>'
-    + '<details class="guide-more"><summary><b>Xem ghi chú về camera/mic</b></summary><p class="mut">' + (st.due ? 'Hẹn ôn: ' + esc(st.due) + '. ' : '') + 'Quyền camera/mic: xem quy tắc trong Cài đặt → Ghi chú.</p></details>'
+    + (st.due ? '<p class="mut">Hẹn ôn: ' + esc(st.due) + '.</p>' : '')
     + mrLibSectionHTML() + '</details>'
     + '</div></div>';
   app.innerHTML = html;
@@ -7992,14 +7985,14 @@ function renderPron(app, l) {
   var donePh = phAllOrder().filter(function (s) { return phDone(s); }).length;
   html += '<p><b>Đã học xong ' + donePh + ' trên 44 âm</b></p><div class="bar" style="margin-top:8px"><i style="width:' + Math.round(donePh / 44 * 100) + '%"></i></div>';
   html += '<div class="row"><button class="btn' + (phViewMode === "wave" ? " btn-soft" : "") + '" id="phViewWave">Xem theo đợt khó</button><button class="btn' + (phViewMode === "type" ? " btn-soft" : "") + '" id="phViewType">Xem theo loại âm</button></div>';
-  html += '<section class="card"><h3>🎯 Kiểm tra phát âm đầu vào</h3><p class="mut">4 từ dễ — đọc to từng từ để biết mình yếu âm nào, rồi học âm yếu trước.</p><details class="guide-more"><summary><b>Xem cách tính kết quả ước lượng</b></summary><p class="mut">Kết quả chỉ là ước lượng tại chỗ — xem cách tính trong Cài đặt → Ghi chú.</p></details>' + (state.pronEntry ? '<p> Lần kiểm tra gần nhất (' + esc(state.pronEntry.date || "") + '): âm nên học trước ' + (state.pronEntry.weak || []).map(function (s) { return "/" + s + "/"; }).join(" ") + '</p>' : '') + '<p><button class="btn btn-primary" id="phEntryBtn">Làm kiểm tra đầu vào</button></p></section>';
+  html += '<section class="card"><h3>🎯 Kiểm tra phát âm đầu vào</h3><p class="mut">4 từ dễ — đọc to từng từ để biết mình yếu âm nào, rồi học âm yếu trước.</p>' + (state.pronEntry ? '<p> Lần kiểm tra gần nhất (' + esc(state.pronEntry.date || "") + '): âm nên học trước ' + (state.pronEntry.weak || []).map(function (s) { return "/" + s + "/"; }).join(" ") + '</p>' : '') + '<p><button class="btn btn-primary" id="phEntryBtn">Làm kiểm tra đầu vào</button></p></section>';
   if (phViewMode === "type") {
     html += '<p class="mut">Bản đồ 44 âm theo 3 khu: nguyên âm đơn là các âm ngắn gọn rung từ cổ họng, nguyên âm đôi là âm trượt từ âm này sang âm khác, phụ âm được tạo khi môi, răng và lưỡi chặn luồng hơi.</p>';
     RB_PH_TYPE_GROUPS.forEach(function (g) {
       html += '<h3>' + esc(g.t) + '</h3><p class="mut">' + esc(g.d) + '.</p><div class="ph-table" id="phTable">' + g.list.map(phBtnHTML).join("") + '</div>';
     });
   } else {
-    html += '<p class="mut">Một bảng duy nhất 44 âm, chia theo độ khó với người Việt: quen 23, hay lệch 15, khó 6.</p><details class="guide-more"><summary><b>Xem ghi chú về độ mở hàm</b></summary><p class="mut">Độ mở hàm là do trang tự gán — xem trong Cài đặt → Ghi chú.</p></details>';
+    html += '<p class="mut">Một bảng duy nhất 44 âm, chia theo độ khó với người Việt: quen 23, hay lệch 15, khó 6.</p>';
     [["quen", "Đợt 1 — âm quen", 1], ["lech", "Đợt 2 — âm hay lệch", 2], ["kho", "Đợt 3 — âm khó và âm cuối", 3]].forEach(function (tri) {
       var note = RB_PH_DIFF_NOTES[tri[0]];
       html += '<h3>' + tri[1] + ' (' + RB_PH_WAVES[tri[2]].length + ' âm)</h3><p class="mut"><b>' + esc(note.t) + '</b></p><details class="guide-more"><summary><b>Xem ghi chú về nhóm âm</b></summary><p class="mut">' + esc(note.d) + '</p></details><div class="ph-table" id="phTable">' + RB_PH_WAVES[tri[2]].map(phBtnHTML).join("") + '</div>';
@@ -8079,7 +8072,6 @@ function phShadowQuizHTML(l, sym) {
   var sh = l.shadow || {};
   var html = '<div class="qblock"><h3>Quiz shadowing — sau khi nói nhại theo video</h3>'
     + '<p class="mut">Chỉ hỏi đúng video vừa xem: âm này, từ ví dụ, cụm và câu mẫu trong bài.</p>'
-    + '<details class="guide-more"><summary><b>Xem ghi chú về quiz sau video</b></summary><p class="mut">Quiz sau video: xem ghi chú trong Cài đặt → Ghi chú.</p></details>';
   if (!sh.started) {
     html += '<p class="mut">' + (phShadowReady(l, sym) ? 'Bạn đã tập nói nhại theo rồi — bấm nút dưới để làm quiz.' : 'Hãy xem video rồi bấm “Phát âm” nói nhại theo trước đã — quiz chỉ mở sau khi bạn đã bấm tập một lần cho âm này.') + '</p>'
       + '<div class="row"><button class="btn" id="shadowQuizStart">Làm quiz shadowing (' + qs.length + ' câu)</button></div>';
@@ -8087,9 +8079,9 @@ function phShadowQuizHTML(l, sym) {
     var total = qs.length, firstN = sh.firstN || 0;
     html += '<p><b>Kết quả quiz shadowing: ' + firstN + '/' + total + ' câu đúng ngay lần đầu.</b></p>';
     if (sh.wrongList && sh.wrongList.length) {
-      html += '<div class="sumcard"><b>Câu chưa vững (' + sh.wrongList.length + '):</b>' + sh.wrongList.map(function (qi) { var q = qs[qi]; return '<p>· ' + esc(q.q) + '<br>Đáp án đúng: <b>' + esc(q.o[q.a]) + '</b> — ' + esc(q.why) + '</p>'; }).join("") + '<details class="guide-more"><summary><b>Xem lịch ôn câu sai</b></summary><p class="mut">Các câu này đã vào Sổ lỗi sai — xem lịch ôn trong Cài đặt → Ghi chú.</p></details></div>';
+      html += '<div class="sumcard"><b>Câu chưa vững (' + sh.wrongList.length + '):</b>' + sh.wrongList.map(function (qi) { var q = qs[qi]; return '<p>· ' + esc(q.q) + '<br>Đáp án đúng: <b>' + esc(q.o[q.a]) + '</b> — ' + esc(q.why) + '</p>'; }).join("") + '<p class="mut">Các câu này đã vào Sổ lỗi sai để ôn lại.</p></div>';
     } else html += '<p>Không có câu nào sai — tốt lắm!</p>';
-    html += '<div class="row"><button class="btn btn-primary" id="shadowQuizRedo">Làm lại quiz</button></div><details class="guide-more"><summary><b>Xem quy tắc làm lại quiz</b></summary><p class="mut">Làm lại quiz: xem quy tắc lỗi cũ trong Cài đặt → Ghi chú.</p></details>';
+    html += '<div class="row"><button class="btn btn-primary" id="shadowQuizRedo">Làm lại quiz</button></div>';
   } else {
     var qi = sh.qi || 0, q = qs[qi];
     html += '<div id="shadowQuizBox"><div class="row"><span class="chip">Câu ' + (qi + 1) + '/' + qs.length + '</span></div>'
@@ -9890,7 +9882,7 @@ function aiVipNoticeHTML(kind) {
   var skill = kind === "speaking" ? "Nói" : "Viết";
   return '<h3>AI chấm ' + skill + ' 4 tiêu chí — chỉ mở cho VIP</h3>'
     + '<p>AI chấm sâu theo 4 tiêu chí chính thức chỉ mở cho tài khoản VIP do quản trị viên cấp. Bạn đang dùng tài khoản thường nên web không gọi AI chấm.</p>'
-    + '<p class="mut">Muốn dùng AI chấm, gửi yêu cầu VIP ở mục Của tôi → Tài khoản (xem quy trình cấp trong Cài đặt → Ghi chú).</p>'
+    + '<p class="mut">Muốn dùng AI chấm, gửi yêu cầu VIP ở mục Của tôi → Tài khoản.</p>'
     + '<h3>Tự đối chiếu theo bảng tiêu chí</h3><p class="mut">Bảng dưới đây là tự đối chiếu, không phải điểm máy chấm — không có band.</p><ul>'
     + checks.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul>';
 }
@@ -10101,7 +10093,7 @@ function renderChapterTest(app, l) {
   if (!doneBefore && !chapterTestOpen(band)) {
     var steps = rbGateSteps(band);
     var dc = steps.filter(function (st) { return rbStepDone(st); }).length;
-    app.innerHTML = skillHead("Kiểm tra cuối chương — " + band, "Bài kiểm tra tổng hợp của chương này") + '<div class="qblock"><p>Bài kiểm tra này mở khi bạn học xong 80% số bước của chương (chuẩn nội bộ — không khóa cứng bài học, bạn vẫn học tự do các bước khác).</p><p>Hiện xong: ' + dc + '/' + steps.length + ' bước. Cần: ' + Math.ceil(steps.length * 0.8) + ' bước.</p><p><button class="btn btn-primary" id="ctBack">Về Lộ trình</button></p></div>';
+    app.innerHTML = skillHead("Kiểm tra cuối chương — " + band, "Bài kiểm tra tổng hợp của chương này") + '<div class="qblock"><p>Bài kiểm tra này mở khi bạn học xong 80% số bước của chương. Bài học không bị khóa — bạn vẫn học tự do các bước khác.</p><p>Hiện xong: ' + dc + '/' + steps.length + ' bước. Cần: ' + Math.ceil(steps.length * 0.8) + ' bước.</p><p><button class="btn btn-primary" id="ctBack">Về Lộ trình</button></p></div>';
     wireBack();
     $("#ctBack").onclick = function () { backFromLesson(); };
     return;
@@ -10123,7 +10115,7 @@ function renderChapterTest(app, l) {
       var bandEst = rawToBand(res.firstN, total, "reading");
       var wrongHTML = res.wrong.length ? '<div class="sumcard"><b>Câu chưa vững:</b>' + res.wrong.map(function (i) { var q = res.questions[i]; var ans = q.o ? q.o[q.a] : String(q.answer).split("|")[0]; return '<p>· ' + esc(q.q) + '<br>Đáp án đúng: <b>' + esc(ans) + '</b> — ' + esc(q.why) + '</p>'; }).join("") + '<p>Sửa thế này: ôn lại các câu sai trong Sổ lỗi sai rồi bấm Làm lại để làm lại bài kiểm tra.</p><p><span class="chip">Đã vào Sổ lỗi sai</span></p></div>' : "";
       app.innerHTML = skillHead("Kiểm tra cuối chương — " + band, "") + '<div class="summarybox"><h2>Kết quả kiểm tra cuối chương ' + esc(band) + '</h2><p>Kết quả: ' + res.firstN + '/' + total + ' câu đúng ngay lần đầu · Thời gian học thật: ' + elapsedText() + '.</p>' + partHTML
-        + '<p><b>Band ước lượng: ' + fmtBandComma(bandEst) + '</b> <span class="mut">(dùng bảng Đọc làm bảng chung cho kiểm tra tổng hợp)</span><br><span class="mut">' + RB_BAND_NOTE + '</span></p>'
+        + '<p><b>Band ước lượng: ' + fmtBandComma(bandEst) + '</b><br><span class="mut">' + RB_BAND_NOTE + '</span></p>'
         + (allPass ? '<p><b>Bạn đã qua bài kiểm tra cuối chương này!</b></p>' + rbChapterCanDoHTML(band) : '<p><b>Chưa đạt — mỗi phần cần từ 50% trở lên.</b> Ôn lại các câu sai rồi làm lại nhé.</p>')
         + wrongHTML + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="ctRedo">Làm lại</button><button class="btn" id="ctBack2">Về Lộ trình</button></div></div>';
       wireBack();
@@ -10158,7 +10150,7 @@ function renderTest(app, l) {
     if (allPass) { state.testDone = true; saveState(); }
     state.lastTest = { score: score, total: total, band: band, parts: partsArr, date: todayStr(), passed: allPass }; saveState();
     var stats = '<p>Kết quả: ' + score + '/' + total + ' câu đúng · Thời gian học thật: ' + elapsedText() + '.</p>' + partHTML
-      + '<p><b>Band ước lượng: ' + fmtBandComma(band) + '</b> <span class="mut">(dùng bảng Đọc làm bảng chung cho kiểm tra tổng hợp)</span><br><span class="mut">' + RB_BAND_NOTE + '</span></p>'
+      + '<p><b>Band ước lượng: ' + fmtBandComma(band) + '</b><br><span class="mut">' + RB_BAND_NOTE + '</span></p>'
       + (allPass ? '<p><b>Bạn đã qua bài kiểm tra cuối chương 1!</b></p>' + rbChapterCanDoHTML("Band 0") : '<p><b>Chưa đạt — mỗi phần cần từ 50% trở lên.</b> Ôn lại các câu sai rồi làm lại nhé.</p>');
     app.innerHTML = stepHeader(step) + '<div class="summarybox"><h2>Kết quả kiểm tra cuối chương 1</h2>' + stats + wrongHTML
       + '<div class="row" style="margin-top:10px"><button class="btn btn-amber" id="btnWeak">Luyện phần yếu nhất</button><button class="btn" id="btnRedo">Làm lại</button><button class="btn" id="btnHome">Về màn chính</button></div></div>';
@@ -10310,7 +10302,7 @@ function renderSkillReadEasy(app, l) {
 function renderSkillReview(app, l) {
   var band = l.band;
   l.title = "Ôn xen kẽ — " + band;
-  l.sub = "Ôn lại chương " + band + " · không tính vào cổng 80%";
+  l.sub = "Ôn lại chương " + band + " · không tính vào số bước mở kiểm tra";
   l.skillKey = "review:" + band;
   if (!l.quiz) {
     app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + '<div class="qblock"><p>Bài ôn này trộn câu hỏi ngữ pháp và từ vựng của chương ' + esc(band) + ' — làm để nhớ lâu, không tính vào cổng qua chương, không có điểm đạt/trượt.</p><p class="mut">8 câu: 4 câu ngữ pháp từ các trạm trong chương + 4 câu từ vựng (chọn nghĩa đúng của từ).</p><p><button class="btn btn-primary" id="revStart">Bắt đầu ôn (8 câu)</button></p></div>';
@@ -11502,7 +11494,7 @@ function renderSkillSpeak(app, l) {
   l.title = "Nói — " + s.topic; l.skillKey = "speak:" + l.idx;
   l.sub = s.part + (s.band ? " · " + s.band : "") + " · " + (s.quiz || []).length + " câu hỏi từ bài mẫu";
   if (!l.theoryDone) {
-    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + (RB_SPEAK_FAMILIAR[l.idx] ? '<div class="qblock"><p class="mut">Bài làm quen Part 3: Part 3 chính thức từ Band 4,5 — bài này chỉ để làm quen trước, không tính vào cổng 80% của chương.</p></div>' : '') + speakTheoryHTML(s)
+    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + (RB_SPEAK_FAMILIAR[l.idx] ? '<div class="qblock"><p class="mut">Bài làm quen Part 3: Part 3 chính thức từ Band 4,5 — bài này chỉ để làm quen trước, không tính vào số bước mở kiểm tra của chương.</p></div>' : '') + speakTheoryHTML(s)
       + (l.idx === 1 ? videoSlotIf("speak:1") : "")
       + (l.idx === 3 ? videoSlotIf("speak:dailyroutine") : "")
       + '<div class="qblock"><button class="btn btn-primary" id="spTheoryGo">Vào luyện tập →</button></div>';
@@ -12682,7 +12674,7 @@ function speakAiBlockHTML(sa, parts) {
     if (!parsed || !parsed.full) return "";
     var s = '<div class="sumcard"><h3>' + title + ' (Máy ước lượng)</h3>';
     parsed.criteria.forEach(function (c) { s += '<p><b>' + esc(c.name) + ': Band ' + fmtBandComma(c.band) + '</b> — ' + esc(c.note) + '</p>'; });
-    s += '<p><b>Band chung (Máy ước lượng): ' + fmtBandComma(parsed.overall) + '</b> <span class="mut">(4 tiêu chí, mỗi tiêu chí 25% — xem cách tính trong Cài đặt → Ghi chú)</span></p></div>';
+    s += '<p><b>Band chung (Máy ước lượng): ' + fmtBandComma(parsed.overall) + '</b></p></div>';
     if (parsed.good && parsed.good.length) s += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + parsed.good.map(function (g) { return '<p><span class="ai-seg ai-seg-green">' + esc(g.quote) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(g.why) + ' <button class="btn" data-spec-good="' + esc(g.quote) + '" data-spec-good-why="' + esc(g.why) + '">Lưu cụm này vào Sổ từ/cụm</button></p>'; }).join("") + '</div>';
     if (parsed.fix && parsed.fix.length) s += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
     if (parsed.tips && parsed.tips.length) s += '<div class="sumcard"><h3>NOTE — NÓI HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + parsed.tips.map(function (t) { return '<p>Câu: “' + esc(t.quote) + '” — ' + esc(t.why) + (t.rewrite ? ' — <b>Viết lại: ' + esc(t.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
@@ -13008,7 +13000,7 @@ function renderPhaseSkill(app, l) {
       };
       return;
     }
-    app.innerHTML = skillHead(l.title, "Chấm bài: AI chấm 4 tiêu chí cho từng bài (xem cách tính trong Cài đặt → Ghi chú)")
+    app.innerHTML = skillHead(l.title, "AI chấm 4 tiêu chí cho từng bài")
       + (l.examTimedOut ? '<p><b>Đã hết giờ, bài đã tự nộp.</b></p>' : '')
       + writingAiBlockHTML(l)
       + '<div class="row"><button class="btn btn-primary" id="psSave">Lưu kết quả Viết</button></div><div class="row" style="margin-top:8px"><button class="btn" id="psKeep">Giữ bài đợt để chấm lại sau</button></div>';
@@ -13155,10 +13147,10 @@ function renderMockTest(app, l) {
     app.innerHTML = skillHead("Thi thử — Chặng " + mLabel, sub) + '<div class="qblock">'
       + '<p><b>Nghe:</b> ' + mockRun.listen.n + ' câu ' + (mockRun.guided ? '(không bấm giờ — lần đầu có hướng dẫn)' : '(đồng hồ 30 phút, tham khảo)') + ' — ' + mockRun.listen.groups.map(function (g) { return esc(g.item.topic); }).join(" · ") + '</p>'
       + '<p><b>Đọc:</b> ' + mockRun.read.passages.length + ' bài = ' + mockRun.read.n + ' câu ' + (mockRun.guided ? '(không bấm giờ — lần đầu có hướng dẫn)' : '(đồng hồ 60 phút, tham khảo)') + ' — ' + mockRun.read.passages.map(function (r) { return esc(r.title) + " (" + esc(r.level) + ")"; }).join(" · ") + '</p>'
-      + (mockRun.read.n >= 40 ? '<p class="mut">Phần Đọc đủ 40 câu như thi thật: 3 bài đọc, mỗi bài 13–14 câu.</p>' : '<p class="mut">Giới hạn kho hiện tại: phần Đọc của thi thử mới có ' + mockRun.read.n + ' câu do kho bài hiện tại (mỗi bài đọc khoảng 5 câu) — chưa đủ 40 câu như thi thật, web ghi rõ chứ không giấu.</p>')
+      + (mockRun.read.n >= 40 ? '<p class="mut">Phần Đọc đủ 40 câu như thi thật: 3 bài đọc, mỗi bài 13–14 câu.</p>' : '<p class="mut">Phần Đọc mới có ' + mockRun.read.n + ' câu (chưa đủ 40 câu như thi thật).</p>')
       + '<p><b>Viết:</b> Task 1 — ' + esc(mockRun.write.t1.title) + ' · Task 2 — ' + esc(mockRun.write.t2.title) + ' ' + (mockRun.guided ? '(không bấm giờ — lần đầu có hướng dẫn)' : '(đồng hồ 60 phút, tham khảo)') + '</p>'
       + '<p><b>Nói:</b> Part 1 — ' + esc(mockRun.speak.scripts[0].topic) + ' · Part 2 — ' + esc(mockRun.speak.scripts[1].topic) + ' · Part 3 — ' + esc(mockRun.speak.scripts[2].topic) + ' ' + (mockRun.guided ? '(không bấm giờ — lần đầu có hướng dẫn)' : '(đồng hồ 14 phút, tham khảo)') + '</p>'
-      + '<p class="mut">Nghe/Đọc chấm theo đáp án (quy về thang 40). Nói AI chấm 4 tiêu chí (ghi rõ "Máy ước lượng") kèm AI chấm phát âm từng chữ; Viết AI chấm 4 tiêu chí (ghi rõ "Máy ước lượng"). Phần Nghe: trong lúc nghe câu hỏi hiện đủ hết và chọn được ngay; nghe hết bài rồi đồng hồ mới tính giờ và mở nút Nộp bài. ' + (mockRun.guided ? 'Lần thi này là dạng có hướng dẫn: không bấm giờ, mỗi phần có mẹo tiếp cận trước khi làm. Làm xong và lưu mốc, các lần sau sẽ thi bấm giờ như thi thật.' : 'Mỗi phần thi có đồng hồ đếm ngược chạy thật, hết giờ bài tự nộp.') + '</p>'
+      + '<p class="mut">Nghe/Đọc chấm theo đáp án. Nói/Viết AI chấm 4 tiêu chí (Máy ước lượng). Phần Nghe: câu hỏi hiện đủ hết, chọn được ngay; nghe hết bài rồi đồng hồ mới tính giờ và mở nút Nộp bài. ' + (mockRun.guided ? 'Lần thi này là dạng có hướng dẫn: không bấm giờ, mỗi phần có mẹo tiếp cận trước khi làm. Làm xong và lưu mốc, các lần sau sẽ thi bấm giờ như thi thật.' : 'Mỗi phần thi có đồng hồ đếm ngược chạy thật, hết giờ bài tự nộp.') + '</p>'
       + videoSlotIf("mockHub:listenTut")
       + (mockRun.guided ? '<div class="qblock"><p><b>Cách tiếp cận từng phần (thi có hướng dẫn):</b></p><p>Nghe: đọc lướt câu hỏi trước khi nghe; nghe ý chính trước, chi tiết sau; câu nào lỡ thì bỏ qua, nghe tiếp câu sau.</p><p>Đọc: đọc câu hỏi trước, gạch ý cần tìm; đọc lướt đoạn để tìm chỗ chứa đáp án rồi đọc kỹ chỗ đó; câu khó làm sau.</p><p>Viết: Task 1 chọn 2-3 điểm nổi bật nhất và so sánh số liệu, đừng liệt kê hết. Task 2 dàn ý 4 đoạn trước khi viết.</p><p>Nói: Part 1 trả lời ngắn gọn 2-3 câu; Part 2 nói đủ 1-2 phút theo 4 gợi ý; Part 3 nêu quan điểm rồi giải thích vì sao, có ví dụ.</p></div>' : '')
       + (state.mockPending && state.mockPending.milestone === l.milestone ? '<div class="qblock"><p><b>Có bài thi đang chờ chấm:</b> bài làm chặng ' + mLabel + ' đã lưu (Nghe ' + (state.mockPending.listenC || 0) + '/' + (state.mockPending.listenN || 0) + ' câu, Đọc ' + (state.mockPending.readC || 0) + '/' + (state.mockPending.readN || 0) + ' câu), AI chưa chấm xong. Bấm Tiếp tục chấm để chấm lại khi AI khỏe — bài làm không bị mất.</p><div class="row"><button class="btn btn-primary" id="mkPendingResume">Tiếp tục chấm</button><button class="btn" id="mkPendingDrop">Bỏ bài chờ chấm</button></div></div>' : '')
@@ -13238,7 +13230,7 @@ function renderMockTest(app, l) {
       };
       return;
     }
-    app.innerHTML = skillHead("Thi thử " + mLabel + " — Viết (Chấm bài)", "Xem cách tính band Viết trong Cài đặt → Ghi chú")
+    app.innerHTML = skillHead("Thi thử " + mLabel + " — Viết (Chấm bài)")
       + (l.examTimedOut ? '<p><b>Đã hết giờ, bài đã tự nộp.</b></p>' : '')
       + writingAiBlockHTML(l)
       + '<div class="row"><button class="btn btn-primary" id="mkWNext">Xong phần Viết → Nói</button></div>'
@@ -14467,13 +14459,13 @@ function zhMapHTML(detailed, onlyStage) {
 function zhSystemEHTML() {
   var rows = ZH_STAGES.map(function (st) { return '<tr><td>Chặng ' + st.stage + '</td><td>' + st.oldCum + '</td><td>' + st.eCum + '</td></tr>'; }).join("");
   return '<details class="card" id="zhSystemE"><summary><b>Lớp bổ sung HSK 3.0 — hệ E </b></summary>'
-    + '<p class="mut">Nền tảng web theo Giáo trình chuẩn HSK (hệ 6 cấp cũ). Bảng dưới đối chiếu số từ tích lũy. Xem nguồn và xuất xứ trong Cài đặt → Nguồn nội dung.</p>'
+    + '<p class="mut">Nền tảng web theo Giáo trình chuẩn HSK (hệ 6 cấp cũ). Bảng dưới đối chiếu số từ tích lũy.</p>'
     + '<table><tr><th>Chặng</th><th>Sách cũ (tích lũy)</th><th>Hệ E (tích lũy)</th></tr>' + rows + '<tr><td>Chặng 7–9 (hệ E)</td><td>— (ngoài bộ 6 cấp)</td><td>11000</td></tr></table>'
     + '<p class="mut">Học xong bộ giáo trình cũ đạt đích HSK cũ ở cấp tương ứng; muốn thi theo HSK 3.0 thì cần thêm từ vựng và kỹ năng theo khung mới.</p></details>';
 }
 function zhHskkHTML() {
   return '<section class="card" id="zhHskkCard"><h3>Luyện HSKK — thi nói riêng</h3>'
-    + '<p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Web giữ mục này riêng, không gộp nói vào đề từng cấp — xem ghi chú nghiên cứu trong Cài đặt → Ghi chú.</p>'
+    + '<p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Web giữ mục này riêng, không gộp nói vào đề từng cấp</p>'
     + '<p><b>Sơ cấp:</b> 27 câu (nghe nhắc lại 15 câu, nghe trả lời 10 câu, trả lời câu hỏi 2 câu — mỗi câu trả lời yêu cầu tối thiểu 5 câu nói).</p>'
     + '<p><b>Trung cấp:</b> 14 câu (nghe nhắc lại 10 câu, mô tả tình huống 2 câu, trả lời câu hỏi 2 câu).</p>'
     + '<p><b>Cao cấp:</b> 6 câu chính thức (nghe đoạn văn rồi nhắc lại/tóm tắt 3 đoạn, đọc to 1 đoạn văn, trả lời câu hỏi 2 câu) + 10 câu luyện thêm nghe–nhắc lại câu (không phải format Phần 1 Cao cấp).</p>'
@@ -14597,7 +14589,7 @@ function zhSkillPracticeHTML(kind) {
   return out;
 }
 function zhPracticeEntHTML() {
-  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details class=\"vrow\"><summary><b>Tây Du Ký Tập 90: Kế hoạch của bọn yêu quái (Tiếng Trung IMC)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/uKj-EGFpiWE?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu90') + "</details><details class=\"vrow\"><summary><b>Doraemon: Ngôi nhà biến thành Robot (Tiếng Trung Phụ Đề)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jt4C4cQ7BeI?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('doraemon') + "</details><details class=\"vrow\"><summary><b>Peppa Pig: Bữa trưa [Vietsub + Pinyin] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/DEJV45iuYx8?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('peppazh') + "</details><details class=\"vrow\"><summary><b>Shin: Nhiều Ô Quá! (Hoa Ngữ Hoạt Hình)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/NBrKtkq4Z2g?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('shinzh') + "</details><details class=\"vrow\"><summary><b>Tây Du Ký 1986 — tập 1 (Chữ cứng, Pinyin, Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/ATNVFYOLVPg?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu01') + "</details>" + '</div>';
+  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3>' + "<p class=\"mut\">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video.</p><details class=\"vrow\"><summary><b>Tây Du Ký Tập 90: Kế hoạch của bọn yêu quái (Tiếng Trung IMC)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/uKj-EGFpiWE?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu90') + "</details><details class=\"vrow\"><summary><b>Doraemon: Ngôi nhà biến thành Robot (Tiếng Trung Phụ Đề)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/jt4C4cQ7BeI?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('doraemon') + "</details><details class=\"vrow\"><summary><b>Peppa Pig: Bữa trưa [Vietsub + Pinyin] (Renna Languages)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/DEJV45iuYx8?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('peppazh') + "</details><details class=\"vrow\"><summary><b>Shin: Nhiều Ô Quá! (Hoa Ngữ Hoạt Hình)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/NBrKtkq4Z2g?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('shinzh') + "</details><details class=\"vrow\"><summary><b>Tây Du Ký 1986 — tập 1 (Chữ cứng, Pinyin, Vietsub)</b></summary><iframe src=\"https://www.youtube-nocookie.com/embed/ATNVFYOLVPg?rel=0\" loading=\"lazy\" allowfullscreen></iframe>" + zhVideoWordsHTML('taydu01') + "</details>" + '</div>';
 }
 function zhPracticeEntWire(m) {
   m.querySelectorAll("[data-zhvideo-save]").forEach(function (b) { b.onclick = function () { var r = zhSaveVideoWords(b.dataset.zhvideoSave); toast("Đã lưu " + r.added + " từ mới vào Ôn tập" + (r.skipped ? " (" + r.skipped + " từ đã có nên không lưu thêm)" : "") + "."); render(); }; });
@@ -15462,7 +15454,7 @@ function renderZhPh(app, l) {
     + '<p><b>Ví dụ trước:</b></p>' + step.examples.map(function (e) { return '<p>· ' + esc(e) + '</p>'; }).join("")
     + (step.id === "tones" ? '<div class="row"><button class="btn" id="zhPhListen">🔊 Nghe 4 thanh mẫu (mā má mǎ mà)</button></div>' : '')
     + '<details class="rule-more"><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(step.rule) + '</p><p>💡 <b>Mẹo:</b> ' + esc(step.tip) + '</p></details>'
-    + (step.id === "tones" ? (function () { var vs = [videoSlotIf("zhPh:tones"), videoSlotIf("zhPh:pairs"), videoSlotIf("zhPh:sandhi"), videoSlotIf("zhPh:bu"), videoSlotIf("zhPh:song")].filter(function (x) { return !!x; }); if (!vs.length) return ""; if (vs.length === 1) return vs[0]; return vs[0] + '<details class="guide-more"><summary><b>Xem thêm video về thanh điệu</b></summary>' + vs.slice(1).join("") + '</details>'; })() : '<details class="guide-more"><summary><b>Xem nguồn video lý thuyết</b></summary><p class="mut">Video lý thuyết: xem nguồn trong Cài đặt → Nguồn nội dung.</p></details>')
+    + (step.id === "tones" ? (function () { var vs = [videoSlotIf("zhPh:tones"), videoSlotIf("zhPh:pairs"), videoSlotIf("zhPh:sandhi"), videoSlotIf("zhPh:bu"), videoSlotIf("zhPh:song")].filter(function (x) { return !!x; }); if (!vs.length) return ""; if (vs.length === 1) return vs[0]; return vs[0] + '<details class="guide-more"><summary><b>Xem thêm video về thanh điệu</b></summary>' + vs.slice(1).join("") + '</details>'; })() : '')
     /* DOT NOI-DUNG-GIAI-TRI 01/11: 4 clip pinyin con lai (cap thanh, bien dieu,
        chu 不, bai hat) deu thuoc chu de thanh dieu nen nhung het vao bai Thanh dieu
        (buoc pinyin duy nhat ve thanh); cac buoc finals/initials/rules giu ghi chu
@@ -15881,7 +15873,7 @@ function zhPracticeExamHTML() {
     btns += '<button class="btn" data-zhmock="' + hsk + '">Thi thử HSK' + hsk + ' (Nghe ' + m.listen.n + ' + Đọc ' + m.read.n + ' + Viết ' + m.write.n + ' câu)</button>';
   });
   return '<div class="row" style="margin-top:6px">' + btns + '</div>'
-    + '<p class="mut">Kiểm tra cuối chặng mở khi xong 80% số bước học chặng (chuẩn nội bộ); mỗi phần cần từ 50% đúng lần đầu mới tính qua — chưa qua chỉ cần học lại đúng phần yếu, vẫn đi tiếp. Thi thử HSK cấp 1 đã có ' + zhMockBuild(1).total + ' câu (Nghe ' + zhMockBuild(1).listen.n + ' + Đọc ' + zhMockBuild(1).read.n + ' + Viết luyện thêm ' + zhMockBuild(1).write.n + ').</p>';
+    + '<p class="mut">Kiểm tra cuối chặng mở khi xong 80% số bước học chặng; mỗi phần cần từ 50% đúng lần đầu mới tính qua — chưa qua chỉ cần học lại đúng phần yếu, vẫn đi tiếp. Thi thử HSK cấp 1 đã có ' + zhMockBuild(1).total + ' câu (Nghe ' + zhMockBuild(1).listen.n + ' + Đọc ' + zhMockBuild(1).read.n + ' + Viết luyện thêm ' + zhMockBuild(1).write.n + ').</p>';
 }
 function zhFirstUndoneModule(kind, stage) {
   var arr = kind === "gram" ? ZH_GRAMMAR : kind === "read" ? ZH_READING : ZH_LISTENING;
@@ -15903,7 +15895,7 @@ function renderZhChapterTest(app, l) {
   if (!passedBefore && !zhChapterTestOpen(stage)) {
     var cg = zhChapterTestCount(stage);
     app.innerHTML = lessonHead({ title: "Kiểm tra cuối chặng " + stage, type: "Tiếng Trung · Kiểm tra cuối chặng" }, "Bài kiểm tra tổng hợp của chặng này")
-      + '<div class="qblock"><p>Bài kiểm tra này mở khi bạn học xong 80% số bước của chặng (chuẩn nội bộ — không khóa cứng bài học, bạn vẫn học tự do các bước khác).</p><p>Hiện xong: ' + cg.done + '/' + cg.total + ' bước. Cần: ' + cg.need + ' bước.</p><p><button class="btn btn-primary" id="zhCtBack">Về bản đồ</button></p></div>';
+      + '<div class="qblock"><p>Bài kiểm tra này mở khi bạn học xong 80% số bước của chặng. Bài học không bị khóa — bạn vẫn học tự do các bước khác.</p><p>Hiện xong: ' + cg.done + '/' + cg.total + ' bước. Cần: ' + cg.need + ' bước.</p><p><button class="btn btn-primary" id="zhCtBack">Về bản đồ</button></p></div>';
     wireBack();
     $("#zhCtBack").onclick = function () { backFromLesson(); };
     return;
@@ -16058,7 +16050,7 @@ function renderZhMock(app, l) {
       + '<p><b>Đọc:</b> ' + mock.read.n + ' câu (đồng hồ 15 phút) — ' + mock.read.passages.map(function (r) { return esc(r.title); }).join(" · ") + '</p>'
       + (mock.write.n === 0 ? '<p><b>Viết:</b> không có phần này — đề thật HSK cấp 1 không có phần Viết.</p>' : '<p><b>Viết' + (zhFull ? "" : " (rút gọn)") + ':</b> ' + mock.write.n + ' câu (đồng hồ 10 phút) — sắp xếp từ thành câu + điền từ của ZH_WRITE trong phần thi thử này.' + ((hsk === 5 || hsk === 6) ? ' Ngoài ra, dạng viết đoạn theo đề thật ở cấp này luyện thành bước Viết trong lộ trình (viết bản nháp → đối chiếu bài mẫu 2 cột).' : ' Chưa phải dạng viết đoạn của đề thật.') + (hsk === 5 ? ' HSK5 hiện có 9 câu Viết trong ngân hàng — đã lấy hết.' : '') + '</p>')
       + '<p><b>Tổng: ' + mock.total + ' câu.</b> Mỗi phần có đồng hồ đếm ngược chạy thật, hết giờ phần tự chuyển phần tiếp theo; các câu chưa trả lời tính là sai.</p>'
-      + (function () { var zhReal = { 1: 40, 2: 60, 3: 70, 4: 70, 5: 72, 6: 82 }; var rt = zhReal[hsk] || 0; var base = (hsk === 1) ? (mock.listen.n + mock.read.n) : mock.total; return rt ? '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): ' + base + '/' + rt + ' câu' + (hsk === 1 ? ' (Nghe + Đọc; chưa tính 10 câu Viết luyện thêm)' : '') + ' — ' + (base >= rt ? 'đủ câu để gọi sẵn sàng thi theo chuẩn nội bộ của web.' : 'chưa đủ câu để gọi sẵn sàng thi theo chuẩn nội bộ của web.') + '</p>' : ''; })()
+      + (function () { var zhReal = { 1: 40, 2: 60, 3: 70, 4: 70, 5: 72, 6: 82 }; var rt = zhReal[hsk] || 0; var base = (hsk === 1) ? (mock.listen.n + mock.read.n) : mock.total; return rt ? '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): ' + base + '/' + rt + ' câu' + (hsk === 1 ? ' (Nghe + Đọc; chưa tính 10 câu Viết luyện thêm)' : '') + ' — ' + (base >= rt ? 'đủ câu để gọi sẵn sàng thi.' : 'chưa đủ câu để gọi sẵn sàng thi.') + '</p>' : ''; })()
       + '<p class="mut">Không có phần Nói trong đề này — nói thi riêng ở mục HSKK (HSKK là bài thi nói riêng). Chấm Nghe/Đọc/Viết rút gọn theo đáp án; không có AI chấm tiếng Trung trong đợt này (chờ nâng cấp).</p>'
       + '<p class="mut">Thi thử này theo hệ 6 cấp cũ (Giáo trình chuẩn HSK); HSK 3.0 ra mắt toàn cầu 13/12/2026 có cấu trúc mới — xem thêm ở Bản đồ → Lớp bổ sung HSK 3.0.</p>'
       + prevHTML
@@ -16341,7 +16333,7 @@ function wireTc(scope) {
         var nx = tcNextStep();
         var si = tcStepStage(id);
         var pv = si > 0 ? TC_STAGES[si - 1].title : TC_STAGES[0].title;
-        if (nx) showLockModal("Bài này mở khi bạn học xong 80% " + pv + " (chuẩn nội bộ).", nx.meta.title, function () { tcOpenStep(nx.id, curTab); });
+        if (nx) showLockModal("Bài này mở khi bạn học xong 80% " + pv + ".", nx.meta.title, function () { tcOpenStep(nx.id, curTab); });
         else toast("Chặng này chưa mở — học xong 80% " + pv + " đã.");
         return;
       }
@@ -16768,10 +16760,10 @@ function tcEst(lc, rc, nl, nr) {
 }
 /* DOT V39 02/11: spec cho tung mock TOEIC — m0 giu nguyen y het hanh vi cu; m450/m600/m750 dung mang rieng, 72 phut, moc rieng. Diem tcEst ti le tren 495 moi phan theo do dai mang cua mock do (uoc luong noi bo, khong phai bang ETS). */
 function tcMockSpec(stepId) {
-  if (stepId === "m450") return { step: "m450", title: "Thi thử TOEIC chặng 450 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 450", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK450_L !== "undefined") ? TC_MOCK450_L : [], R: (typeof TC_MOCK450_R !== "undefined") ? TC_MOCK450_R : [], minutes: 72, milestone: "tc-mock-450" };
-  if (stepId === "m600") return { step: "m600", title: "Thi thử TOEIC chặng 600 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 600", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK600_L !== "undefined") ? TC_MOCK600_L : [], R: (typeof TC_MOCK600_R !== "undefined") ? TC_MOCK600_R : [], minutes: 72, milestone: "tc-mock-600" };
-  if (stepId === "m750") return { step: "m750", title: "Thi thử TOEIC chặng 750 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng nội bộ để tham khảo — ETS không công bố bảng quy đổi điểm thô cố định, và bài rút gọn 120 câu không tương đương đề thi thật 200 câu.", intro2: "Tỉ lệ so với đề thật: 120/200 câu (60%). Theo chuẩn nội bộ của web, mock rút gọn từ 100 câu trở lên dùng để luyện theo chặng và ước lượng trình độ — điểm vẫn chỉ là ước lượng tham khảo.", resultTitle: "Kết quả thi thử TOEIC chặng 750", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn rút gọn 120 câu theo đúng dạng đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định, và điểm ước lượng nội bộ này không tương đương điểm thi thật 200 câu.", L: (typeof TC_MOCK750_L !== "undefined") ? TC_MOCK750_L : [], R: (typeof TC_MOCK750_R !== "undefined") ? TC_MOCK750_R : [], minutes: 72, milestone: "tc-mock-750" };
-  return { step: "m0", title: "Thi thử TOEIC chặng 900 — đủ 200 câu", eyebrow: "TOEIC · THI THỬ CHẶNG 900", intro1: "200 câu: 100 câu Nghe (Part 1: 6, Part 2: 25, Part 3: 39, Part 4: 30) + 100 câu Đọc (Part 5: 30, Part 6: 16, Part 7: 54), thời gian tham khảo 120 phút. Đây là bài tự soạn theo đúng tỉ lệ đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm dưới đây chỉ là ước lượng tham khảo — ETS không công bố bảng quy đổi điểm thô cố định.", intro2: 'Tỉ lệ so với đề thật: 200/200 câu (100%). Theo chuẩn nội bộ của web, mock này đủ câu để gọi là "sẵn sàng thi" ở mức số câu — điểm vẫn chỉ là ước lượng tham khảo.', resultTitle: "Kết quả thi thử TOEIC đủ câu", resultNote: "Điểm này chỉ để tham khảo — bài tự soạn đủ 200 câu theo đúng tỉ lệ đề thi thật của ETS (không phải đề thi thật); ETS không công bố bảng quy đổi điểm thô cố định.", L: TC_MOCK_L, R: TC_MOCK_R, minutes: 120, milestone: "tc-mock-200" };
+  if (stepId === "m450") return { step: "m450", title: "Thi thử TOEIC chặng 450 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm chỉ là ước lượng tham khảo.", intro2: "Bài rút gọn 120/200 câu (60%), dùng để luyện theo chặng và ước lượng trình độ.", resultTitle: "Kết quả thi thử TOEIC chặng 450", resultNote: "Điểm này chỉ để tham khảo — bài rút gọn 120 câu, không phải đề thi thật 200 câu.", L: (typeof TC_MOCK450_L !== "undefined") ? TC_MOCK450_L : [], R: (typeof TC_MOCK450_R !== "undefined") ? TC_MOCK450_R : [], minutes: 72, milestone: "tc-mock-450" };
+  if (stepId === "m600") return { step: "m600", title: "Thi thử TOEIC chặng 600 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm chỉ là ước lượng tham khảo.", intro2: "Bài rút gọn 120/200 câu (60%), dùng để luyện theo chặng và ước lượng trình độ.", resultTitle: "Kết quả thi thử TOEIC chặng 600", resultNote: "Điểm này chỉ để tham khảo — bài rút gọn 120 câu, không phải đề thi thật 200 câu.", L: (typeof TC_MOCK600_L !== "undefined") ? TC_MOCK600_L : [], R: (typeof TC_MOCK600_R !== "undefined") ? TC_MOCK600_R : [], minutes: 72, milestone: "tc-mock-600" };
+  if (stepId === "m750") return { step: "m750", title: "Thi thử TOEIC chặng 750 — 120 câu", eyebrow: "TOEIC · THI THỬ THEO CHẶNG", intro1: "120 câu: 60 câu Nghe (Part 1: 3, Part 2: 15, Part 3: 24, Part 4: 18) + 60 câu Đọc (Part 5: 18, Part 6: 10, Part 7: 32), thời gian tham khảo 72 phút. Đây là bài tự soạn theo đúng dạng đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm chỉ là ước lượng tham khảo.", intro2: "Bài rút gọn 120/200 câu (60%), dùng để luyện theo chặng và ước lượng trình độ.", resultTitle: "Kết quả thi thử TOEIC chặng 750", resultNote: "Điểm này chỉ để tham khảo — bài rút gọn 120 câu, không phải đề thi thật 200 câu.", L: (typeof TC_MOCK750_L !== "undefined") ? TC_MOCK750_L : [], R: (typeof TC_MOCK750_R !== "undefined") ? TC_MOCK750_R : [], minutes: 72, milestone: "tc-mock-750" };
+  return { step: "m0", title: "Thi thử TOEIC chặng 900 — đủ 200 câu", eyebrow: "TOEIC · THI THỬ CHẶNG 900", intro1: "200 câu: 100 câu Nghe (Part 1: 6, Part 2: 25, Part 3: 39, Part 4: 30) + 100 câu Đọc (Part 5: 30, Part 6: 16, Part 7: 54), thời gian tham khảo 120 phút. Đây là bài tự soạn theo đúng tỉ lệ đề thi thật của ETS, KHÔNG phải đề thi thật. Part 1 dùng mô tả tranh bằng lời (web không có ảnh thật). Điểm chỉ là ước lượng tham khảo.", intro2: 'Đủ 200/200 câu (100%) — đủ câu để gọi là "sẵn sàng thi" ở mức số câu.', resultTitle: "Kết quả thi thử TOEIC đủ câu", resultNote: "Điểm này chỉ để tham khảo — bài đủ 200 câu theo đúng tỉ lệ đề thi thật, không phải đề thi thật.", L: TC_MOCK_L, R: TC_MOCK_R, minutes: 120, milestone: "tc-mock-200" };
 }
 function tcOpenMock(back, stepId) {
   var app = document.getElementById("app"); if (!app) return;
@@ -16978,7 +16970,7 @@ function tcTpStageCardHTML(st, i, isTc) {
   /* v96: khoi kiem tra/thi thu co tieu de dem rieng — truoc day khong co tieu de
      nen 2 nut cuoi trong nhu buoc hoc, gay lech +2/+1 voi so "buoc hoc" ghi tren. */
   if (finalsHTML) html += '<p class="mut" style="margin-top:8px"><b>Kiểm tra/thi thử (' + finals.length + ') — đã xong ' + doneFinals + '/' + finals.length + '</b></p><div class="path-v">' + finalsHTML + '</div>';
-  if (finals.length) html += '<p class="mut">Kiểm tra cuối chặng và thi thử làm sau cùng của chặng; bước gợi ý sẽ chuyển sang kiểm tra khi bạn xong 80% bước học của chặng (chuẩn nội bộ).</p>';
+  if (finals.length) html += '<p class="mut">Kiểm tra cuối chặng và thi thử làm sau cùng của chặng; bước gợi ý sẽ chuyển sang kiểm tra khi bạn xong 80% bước học của chặng.</p>';
   /* DOT v56: nhiem vu giao tiep that — buoc cuoi cua chang, sau kiem tra/thi thu. */
   html += msRowHTML(isTc ? "tc" : "tp", isTc ? st.score : i);
   return html + '</div></section>';
@@ -16987,7 +16979,7 @@ function viewRoadmapTc(app) {
   tcNorm();
   var n = tcNextStep();
   var html = trackSwitchHTML() + '<h2>Bản đồ TOEIC</h2>';
-  html += '<p class="mut">4 chặng theo mục tiêu điểm: 450, 600, 750, 900. Các chặng đều mở — học chặng nào cũng được; nhảy trước thì bước chưa học gom vào "Đã bỏ qua" ở cuối bản đồ. Mỗi bước xong được +10 XP. Nội dung tự soạn 100%, không phải đề thi thật của ETS. Các bước trong mỗi chặng xếp xen kẽ các loại (vài bộ từ, rồi ngữ pháp, nghe, đọc, lặp lại) để đỡ chán và nhớ lâu; kiểm tra cuối chặng rồi thi thử vẫn ở cuối chặng.</p>';
+  html += '<p class="mut">4 chặng theo mục tiêu điểm: 450, 600, 750, 900. Các chặng đều mở — học chặng nào cũng được; nhảy trước thì bước chưa học gom vào "Đã bỏ qua" ở cuối bản đồ. Mỗi bước xong được +10 XP. Các bước trong mỗi chặng xếp xen kẽ các loại (vài bộ từ, rồi ngữ pháp, nghe, đọc, lặp lại) để đỡ chán và nhớ lâu; kiểm tra cuối chặng rồi thi thử vẫn ở cuối chặng.</p>';
   if (n) html += '<div class="row"><button class="btn btn-primary" data-tcnext="1">Học tiếp: ' + esc(n.meta.title) + ' →</button></div>';
   TC_STAGES.forEach(function (st, i) {
     html += tcTpStageCardHTML(st, i, true);
@@ -17017,7 +17009,7 @@ function viewRoadmapTc(app) {
   });
 }
 function tcPracticeEntHTML() {
-  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Khối video này dùng chung video tiếng Anh với track IELTS — xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p><details class="vrow"><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; "I\'m hungry!" — mình đói bụng rồi!</p></details><details class="vrow"><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; "I want to see the lights!" — mình muốn xem đèn lồng!</p></details><details class="vrow"><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; "Let\'s play!" — cùng chơi nào!</p></details><details class="vrow"><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; "We are friends!" — chúng mình là bạn bè!</p></details><details class="vrow"><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; "I love dogs!" — mình yêu chó!</p></details><details class="vrow"><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); "I have news for you." — mình có tin cho bạn đây.</p>' + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + '</details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; "I love pancakes!" — mình thích bánh kếp!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; "Let\'s go camping!" — cùng đi cắm trại nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; "I can ride a bike!" — mình biết đạp xe rồi!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; "My new shoes!" — giày mới của mình!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; "I am Baymax!" — mình là Baymax!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; "Let\'s cook!" — cùng nấu ăn nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; "We are friends!" — chúng mình là bạn bè!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details></div>';
+  return '<div class="qblock"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Khối video này dùng chung video tiếng Anh với track IELTS — xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video.</p><details class="vrow"><summary><b>Peppa Pig: Bữa trưa (Renna Languages · Vietsub)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/OAyact0jkUU?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ lúc ăn trưa thì nói: lunch — bữa trưa; eat — ăn; hungry — đói bụng; "I\'m hungry!" — mình đói bụng rồi!</p></details><details class="vrow"><summary><b>Công Chúa Tóc Mây Rapunzel — TANGLED (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hUuC9GoaELI?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ muốn ra ngoài xem đèn thì nói: tower — tòa tháp; lantern — đèn lồng; dream — ước mơ; "I want to see the lights!" — mình muốn xem đèn lồng!</p></details><details class="vrow"><summary><b>Shin - Cậu Bé Bút Chì (NKSN · Song ngữ Anh - Việt)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qbh8QKSCsxg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ rủ bạn chơi thì nói: friend — bạn bè; funny — buồn cười; dance — nhảy múa; "Let\'s play!" — cùng chơi nào!</p></details><details class="vrow"><summary><b>Chúng Tôi Đơn Giản Là Gấu (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/36nVxmF08FQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi cùng anh em thì nói: bear — gấu; brother — anh em; friend — bạn bè; "We are friends!" — chúng mình là bạn bè!</p></details><details class="vrow"><summary><b>101 Chú Chó Đốm (Nhật Ký Song Ngữ)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/hsrkrBJwSoQ?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nói về chó cưng thì nói: dog — chó; puppy — chó con; spot — đốm; "I love dogs!" — mình yêu chó!</p></details><details class="vrow"><summary><b>VOA Learning English: Break the News (VOA — kênh chính thức)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/BKNJxpdNAtY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Video nói chậm, rõ, KHÔNG có rãnh phụ đề rời trên YouTube (không nút CC, không phụ đề Anh/Việt). Bài tập 4 dạng dưới đây dùng kịch bản chính thức trong mô tả của VOA cho tập này + bản dịch tiếng Việt tự soạn của web; tư liệu VOA Learning English thuộc phạm vi công cộng cho mục đích giáo dục khi ghi nguồn learningenglish.voanews.com. Từ học được: news — tin tức; break the news — báo tin (thường là tin buồn); "I have news for you." — mình có tin cho bạn đây.</p>' + videoFormatStatusHTML({key:"voa-break-the-news",kind:"giaitri"}) + '</details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Bánh kếp [Vietsub + Eng sub] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/g5jGzseG6fE?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ làm bánh kếp thì nói: pancake — bánh kếp; mix — trộn; flip — lật bánh; "I love pancakes!" — mình thích bánh kếp!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig [Vietsub + Eng Sub] Cắm trại (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/aYeFmyetZQY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi cắm trại thì nói: tent — lều; camp — cắm trại; night — ban đêm; "Let\'s go camping!" — cùng đi cắm trại nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Xe đạp [Vietsub - English subtitle] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/qY6NZS086fg?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đạp xe thì nói: bike — xe đạp; ride — đạp xe; fall — ngã; "I can ride a bike!" — mình biết đạp xe rồi!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học tiếng Anh qua Peppa Pig | Giày mới [Vietsub - English subtitles] (Renna Languages)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/jmwkTr5h790?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ đi giày mới thì nói: shoes — giày; new — mới; mud — bùn; "My new shoes!" — giày mới của mình!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Baymax gặp Hiro lần đầu tiên | Học Tiếng Anh Qua Phim Hoạt Hình Big Hero 6 Song Ngữ Anh - Việt (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/4104a1Qi1MY?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ gặp người máy thì nói: robot — người máy; hug — ôm; help — giúp đỡ; "I am Baymax!" — mình là Baymax!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Hoạt Hình Tiếng Anh Ratatouille Chú Chuột Đầu Bếp | Linguini gặp Remy lần đầu tiên (Song Ngữ) (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/8fd8VMc9rWc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ nấu ăn thì nói: rat — chuột; cook — nấu ăn; kitchen — nhà bếp; "Let\'s cook!" — cùng nấu ăn nào!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details><details class="vrow"><summary><b>Học Tiếng Anh Cùng Phân Cảnh Cảm Động Nhất Hoạt Hình Công Ty Quái Vật (Monster Inc) | Song Ngữ (NKSN)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/gYntyxg0Wzc?rel=0" loading="lazy" allowfullscreen></iframe><p><b>Học từ video này:</b> Ví dụ chơi với bạn thì nói: monster — quái vật; friend — bạn bè; door — cánh cửa; "We are friends!" — chúng mình là bạn bè!</p><p class="mut"><b>Trạng thái 4 dạng bài: chỉ xem, chưa có bài tập.</b> Nghe chép: chưa có · Shadowing: chưa có · Truyện song ngữ: chưa có · Podcast: chưa có — vì web chưa lấy được câu phụ đề thật của video này, web không bịa phụ đề.</p></details></div>';
 }
 function tcPracticeEntWire(m) {
   videoVOAWire();
@@ -17396,7 +17388,7 @@ function wireTp(scope) {
           var nx2 = tpNextStep();
           var si2 = tpStepStage(id);
           var pv2 = si2 > 0 ? TP_STAGES[si2 - 1].title : TP_STAGES[0].title;
-          if (nx2) showLockModal("Bài này mở khi bạn học xong 80% " + pv2 + " (chuẩn nội bộ).", nx2.meta.title, function () { tpOpenStep(nx2.id, curTab); });
+          if (nx2) showLockModal("Bài này mở khi bạn học xong 80% " + pv2 + ".", nx2.meta.title, function () { tpOpenStep(nx2.id, curTab); });
           else toast("Chặng này chưa mở — học xong 80% " + pv2 + " đã.");
         }
         return;
@@ -17720,7 +17712,7 @@ function viewRoadmapTp(app) {
   tpNorm();
   var n = tpNextStep();
   var html = trackSwitchHTML() + '<h2>Bản đồ TOPIK</h2>';
-  html += '<p class="mut">Hangul học theo thứ tự (bài sau mở khi xong bài trước). Các chặng còn lại đều mở — học chặng nào cũng được; nhảy trước thì bước chưa học gom vào "Đã bỏ qua" ở cuối bản đồ. Mỗi bước xong được +10 XP. Nội dung tự soạn 100%, không phải đề thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí). Các bước trong mỗi chặng xếp xen kẽ các loại (vài bộ từ, rồi ngữ pháp, nghe, đọc, viết, lặp lại) để đỡ chán và nhớ lâu; kiểm tra cuối chặng rồi thi thử vẫn ở cuối chặng.</p>';
+  html += '<p class="mut">Hangul học theo thứ tự (bài sau mở khi xong bài trước). Các chặng còn lại đều mở — học chặng nào cũng được; nhảy trước thì bước chưa học gom vào "Đã bỏ qua" ở cuối bản đồ. Mỗi bước xong được +10 XP. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí). Các bước trong mỗi chặng xếp xen kẽ các loại (vài bộ từ, rồi ngữ pháp, nghe, đọc, viết, lặp lại) để đỡ chán và nhớ lâu; kiểm tra cuối chặng rồi thi thử vẫn ở cuối chặng.</p>';
   if (n) html += '<div class="row"><button class="btn btn-primary" data-tpnext="1">Học tiếp: ' + esc(n.meta.title) + ' →</button></div>';
   TP_STAGES.forEach(function (st, i) {
     html += tcTpStageCardHTML(st, i, false);
@@ -17750,7 +17742,7 @@ function viewRoadmapTp(app) {
   });
 }
 function tpPracticeFunHTML() {
-  return '<div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video. Các video là video công khai miễn phí trên YouTube, xem trong trang, không dẫn tới mua bán.</p>'
+  return '<div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Xem cho vui, không tính điểm thi, không khóa, không có quiz bắt buộc sau video.</p>'
     + '<details class="vrow"><summary><b>Running Man (DANET · 5:31)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/Es0eoMEYiro?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng trong hình do kênh cung cấp — xem cho vui, nghe tiếng Hàn thật.</p></details>'
     + '<details class="vrow"><summary><b>Running Man (DANET · 11:30)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/1xcTXCHQTgs?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng trong hình do kênh cung cấp — xem cho vui, nghe tiếng Hàn thật.</p></details>'
     + '<details class="vrow"><summary><b>BTS (AJ Subteam · 3:30)</b></summary><iframe src="https://www.youtube-nocookie.com/embed/3C-CxMgzvEI?rel=0" loading="lazy" allowfullscreen></iframe><p>Tiếng Hàn, phụ đề Việt gắn cứng do fan làm (không phải phụ đề chính thức) — video fan làm có thể bị gỡ, xem cho vui, nghe tiếng Hàn thật.</p></details>'
