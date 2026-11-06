@@ -32,7 +32,7 @@ p{margin:8px 0}
 .bar{height:14px;background:var(--line2);border-radius:999px;overflow:hidden}
 .bar>i{display:block;height:100%;background:var(--amber);border-radius:999px}.bar.gold{outline:2px solid var(--amber)}
 .dimlink{color:var(--mut);text-decoration:underline;cursor:pointer;font-size:14px;background:none;border:0;padding:0}
-.lessonframe{position:sticky;top:52px;background:var(--paper);padding:8px 0;z-index:4;border-bottom:1.5px solid var(--line2)}
+.lessonframe{position:sticky;top:66px;background:var(--paper);padding:8px 0;z-index:4;border-bottom:1.5px solid var(--line2)}
 /* Bo cuc desktop chung: cot phu chi hien khi cau truc bai hoc da boc xong
    (.lesson-main ton tai) — man tu ve lai giua chung thi roi ve 1 cot, khong vo. */
 .lesson-side{display:none}
@@ -62,7 +62,7 @@ p{margin:8px 0}
 .q-opt.bad{border-color:var(--red);background:#FDECEA}
 .q-opt:disabled{cursor:default}
 #tutorFloatBtn{position:static;width:auto;height:auto;min-height:44px;border-radius:999px;border:2px solid var(--amber);background:var(--coral);color:#1F2430;font-size:16px;font-weight:700;line-height:1.4;cursor:pointer;z-index:45;box-shadow:0 2px 10px rgba(0,0,0,.25);padding:8px 16px}
-#tutorFloatPanel{position:fixed;right:16px;top:64px;width:min(360px,calc(100vw - 32px));max-height:70vh;overflow-y:auto;background:#fff;border:2px solid var(--amber);border-radius:20px;padding:14px;z-index:45;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+#tutorFloatPanel{position:fixed;right:16px;top:74px;width:min(360px,calc(100vw - 32px));max-height:70vh;overflow-y:auto;background:#fff;border:2px solid var(--amber);border-radius:20px;padding:14px;z-index:45;box-shadow:0 4px 20px rgba(0,0,0,.25)}
 #tutorFloatMsgs .chat-msg{font-size:15px}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:15px;display:none;z-index:50;max-width:92vw;text-align:center}
 #previewBanner{background:#fff7dd;border-bottom:1px solid #ecd28a;color:#7a5b12;font-size:13px;text-align:center;padding:7px 12px}
@@ -285,9 +285,14 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .rw-star{display:inline-block;animation:rwPop .5s both}
 @keyframes rwPop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
 body.in-lesson #tabBar{position:static}
-body.in-lesson .lessonframe{top:0}
+body.in-lesson .lessonframe{top:66px}
 .bento-side{display:none}
 @media (min-width:1200px){#app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,820px) 300px;justify-content:center}#app.lesson-view:has(>.lesson-main)>.bento-side{display:block;position:sticky;top:120px}}
+/* v94 — trang bài học 3 cột: Nội dung | Thực hành | Tham khảo (cột 3 là .bento-side sẵn có).
+   Dưới 1200px hai cột thân bài xếp dọc đúng thứ tự; cột tham khảo hiện dưới cùng ở bài đã tách. */
+.lesson-col-head{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--mut);margin:2px 0 8px;text-transform:uppercase}
+#app.lesson-view.lesson-3col:has(>.lesson-main)>.bento-side{display:block;margin-top:16px}
+@media (min-width:1200px){#app.lesson-view.lesson-3col:has(>.lesson-main){grid-template-columns:minmax(0,1fr) 300px;justify-content:center}.lesson-main.has-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}.lesson-main.has-cols>.lesson-col-theory,.lesson-main.has-cols>.lesson-col-practice{min-width:0}}
 /* v68 cân đối: workspace ẩn panel phụ, 3 cột dùng hết chiều rộng */
 body.workspace-open #app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,1fr)}
 body.workspace-open #app.lesson-view:has(>.lesson-main)>.bento-side{display:none}
@@ -1013,13 +1018,22 @@ function dueCards() {
   });
   return out;
 }
+/* v94 — dọn chữ sót v70: mục khó ghi từ game giải trí cũ (trước v70) có câu
+   hỏi dạng "Game: ..." / "Từ đã chơi: ..." hoặc chứa "undefined" (từ ghi
+   thiếu) — bản ghi hỏng, không ôn được, ẩn khỏi Sổ lỗi sai + buổi ôn +
+   số đến hạn. Code hiện tại không còn tạo mục kiểu này. */
+function isLegacyGameHard(h) {
+  if (!h) return false;
+  var q = String(h.q || h.lesson || "");
+  return q.indexOf("Game:") === 0 || q.indexOf("Từ đã chơi") === 0 || q.indexOf("undefined") >= 0;
+}
 /* DOT SOI-C2 02/11: muc kho chua den han (sai hom nay, hen ngay mai) — hien rieng o
    tab On tap de loi khong "bien mat" toi ngay hen. */
 function undueHard() {
   var t = todayStr(), out = [];
   Object.keys(state.hard).forEach(function (k) {
     var h = state.hard[k];
-    if (h && !h.done && h.due && h.due > t) out.push({ key: k, h: h });
+    if (h && !h.done && !isLegacyGameHard(h) && h.due && h.due > t) out.push({ key: k, h: h });
   });
   out.sort(function (a, b) {
     var da = a.h.due || "", db = b.h.due || "";
@@ -1032,7 +1046,7 @@ function dueHard() {
   var t = todayStr(), out = [];
   Object.keys(state.hard).forEach(function (k) {
     var h = state.hard[k];
-    if (h && !h.done && (!h.due || h.due <= t)) out.push({ key: k, h: h });
+    if (h && !h.done && !isLegacyGameHard(h) && (!h.due || h.due <= t)) out.push({ key: k, h: h });
   });
   /* Ưu tiên ôn: câu sai nhiều nhất lên đầu, rồi tới ngày đến hạn sớm nhất. */
   out.sort(function (a, b) {
@@ -1914,12 +1928,62 @@ function applyLessonLayout(app) {
     else if (curLesson && curLesson.title) title = curLesson.title;
   } catch (e) {}
   app.appendChild(main);
+  /* v94 — một thanh tiến trình duy nhất trong trang bài: khi thân bài đã có
+     thanh tiến độ riêng (thanh 5 nấc của thẻ từ vựng, thanh "Đã học xong X
+     trên 44 âm" của phát âm, thanh "Tiến độ bài" của quiz), gỡ thanh
+     "Tiến độ chương" trùng ở đầu bài. Bài chỉ có thanh chương thì giữ. */
+  (function () {
+    var bars = main.querySelectorAll(".les-progress");
+    var cardBars = main.querySelectorAll(".bar");
+    if (bars.length > 1 || (bars.length >= 1 && cardBars.length >= 1)) {
+      var chBar = null;
+      for (var bi = 0; bi < bars.length; bi++) { if (bars[bi].parentNode === main) { chBar = bars[bi]; break; } }
+      if (chBar) {
+        var lab = chBar.previousElementSibling;
+        if (lab && lab.classList && lab.classList.contains("les-progress-label")) lab.remove();
+        chBar.remove();
+      }
+    }
+    /* Nhãn mồ côi: nhãn "Tiến độ ..." không còn thanh nào đi kèm (do fix P9
+       ở quiz engine trước v94 chỉ gỡ thanh mà để lại nhãn) thì gỡ luôn. */
+    Array.prototype.slice.call(main.querySelectorAll(".les-progress-label")).forEach(function (lab) {
+      var nx = lab.nextElementSibling;
+      if (!nx || !nx.classList || !nx.classList.contains("les-progress")) lab.remove();
+    });
+  })();
+  /* v94 — trang bài học 3 cột (Nội dung | Thực hành | Tham khảo): tách thân
+     bài tại khối thực hành đầu tiên (khối có nút trả lời). Chỉ tách khi có
+     ít nhất một khối lý thuyết đứng trước — bài chỉ có một khối (từ vựng,
+     ngữ pháp, quiz, phát âm) hoặc bài workspace (đã 3 cột sẵn) giữ nguyên. */
+  (function () {
+    app.classList.remove("lesson-3col");
+    if (document.body.classList.contains("workspace-open")) return;
+    var kids = Array.prototype.slice.call(main.children);
+    var qblocks = kids.filter(function (el) { return el.classList && el.classList.contains("qblock"); });
+    var markerIdx = -1;
+    for (var qi94 = 0; qi94 < qblocks.length; qi94++) {
+      if (qblocks[qi94].querySelector("[data-qi],[data-wi],.q-opt,input[type=radio],input[type=checkbox],select,textarea,#quizBox")) { markerIdx = qi94; break; }
+    }
+    if (markerIdx < 1) return;
+    var theory = document.createElement("div"); theory.className = "lesson-col-theory";
+    var practice = document.createElement("div"); practice.className = "lesson-col-practice";
+    theory.innerHTML = '<p class="lesson-col-head">📖 Nội dung bài học</p>';
+    practice.innerHTML = '<p class="lesson-col-head">✍️ Thực hành trong bài</p>';
+    var cut = qblocks[markerIdx], inPractice = false;
+    kids.forEach(function (n) {
+      if (n === cut) inPractice = true;
+      (inPractice ? practice : theory).appendChild(n);
+    });
+    main.appendChild(theory); main.appendChild(practice);
+    main.classList.add("has-cols");
+    app.classList.add("lesson-3col");
+  })();
   app.classList.add("lesson-view");
   document.body.classList.add("in-lesson");
   var side = document.createElement("aside"); side.className = "bento-side";
   try {
-    side.innerHTML = '<div class="bento-tile"><p class="eyebrow">TIẾN TRÌNH CỦA BẠN</p><p>🔥 Chuỗi ' + streakDays() + ' ngày · ' + (state.xp || 0) + ' XP</p><p class="mut">' + esc(goalStripToday()) + '</p><p class="mut">' + trackDueCount90() + ' mục đến hạn ôn</p><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>';
-  } catch (e) { side.innerHTML = '<div class="bento-tile"><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>'; }
+    side.innerHTML = '<p class="lesson-col-head">🧰 Tham khảo</p><div class="bento-tile"><p class="eyebrow">TIẾN TRÌNH CỦA BẠN</p><p>🔥 Chuỗi ' + streakDays() + ' ngày · ' + (state.xp || 0) + ' XP</p><p class="mut">' + esc(goalStripToday()) + '</p><p class="mut">' + trackDueCount90() + ' mục đến hạn ôn</p><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>';
+  } catch (e) { side.innerHTML = '<p class="lesson-col-head">🧰 Tham khảo</p><div class="bento-tile"><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>'; }
   app.appendChild(side);
 }
 function go(tab) { examTimerStop(); examPartTimerStop(); curTab = tab; curLesson = null; render(); }
@@ -7086,7 +7150,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
   var step = l.step || { id: lessonId, title: "", type: "" };
   var isSkillMode = (mode === "skill" || mode === "phase" || mode === "mock");
   var head = isSkillMode ? skillHead(l.title || lessonId, l.sub || "") : stepHeader(step);
-  head = head.replace(/<div class="les-progress"><i style="width:\d+%"><\/i><\/div>/, ""); /* P9: một thanh tiến trình duy nhất — thanh chương bị trùng thì bỏ, giữ thanh tiến độ câu hỏi */
+  head = head.replace(/<p class="les-progress-label">Tiến độ chương<\/p><div class="les-progress"><i style="width:\d+%"><\/i><\/div>/, ""); /* P9 (v94: gỡ cả nhãn mồ côi): một thanh tiến trình duy nhất — thanh chương bị trùng thì bỏ, giữ thanh tiến độ câu hỏi */
   if (phase) head += (lessonId.indexOf("gram") === 0 ? gramPhaseBarHTML("practice") : phaseBarHTML(phase));
   var qi = l.qi || 0;
   if (qi >= qs.length) {
