@@ -29,6 +29,7 @@
     ink950: "#04060F", ink900: "#0B1030", ink800: "#1E1B4B", ink700: "#312E81",
     ink600: "#4338CA", ink300: "#A5B4FC", ink200: "#C7D2FE",
     amber700: "#B45309", amber500: "#F59E0B", amber400: "#FBBF24", amber100: "#FDE68A",
+    violet500: "#8B5CF6", violet700: "#6D28D9", /* tím hệ Điện (Bùi chốt 21:48 — phân biệt với Lửa) */
     cream: "#FFFBEB", teal600: "#0D9488", grey200: "#E5E7EB", grey400: "#9CA3AF",
     amberDark: "#92400E"
   };
@@ -38,7 +39,7 @@
   var ELEMENTS = {
     fire: { key: "fire", name: "Lửa", icon: "🔥", color: "#F59E0B", dark: "#B45309" },
     water: { key: "water", name: "Nước", icon: "💧", color: "#0D9488", dark: "#0D9488" },
-    elec: { key: "elec", name: "Điện", icon: "⚡", color: "#FBBF24", dark: "#B45309" }
+    elec: { key: "elec", name: "Điện", icon: "⚡", color: C.violet500, dark: C.violet700 }
   };
   var EL_ORDER = ["fire", "water", "elec"];
   function nextEl(k) { return EL_ORDER[(EL_ORDER.indexOf(k) + 1) % EL_ORDER.length]; }

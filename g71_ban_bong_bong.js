@@ -28,6 +28,45 @@
     }
   };
 
+  /* Súng đặt trên bệ (v105b: bệ thang chàm đậm, nòng dày, đầu nòng hổ
+     phách, đế hổ phách + tâm kem + chấm teal — đọc ra là SÚNG).
+     v105c: nòng dày 17px (cả đoạn chàm lẫn đầu nòng) + CỔ SÚNG — đĩa
+     chàm đậm tại gốc nòng, chồng lên cả đế lẫn nòng, vẽ sau đế và
+     trước tâm kem: trước đây nòng 13px chỉ chạm đế qua một điểm nên
+     ngắm chéo trông tách rời khỏi thân, có khe hở nhìn thấy được
+     (ngắm thẳng lên thì nối liền); cổ súng hàn nòng vào thân ở mọi
+     góc ngắm. Đạn xuất phát từ đầu nòng (62px theo hướng ngắm). */
+  function drawGun(ctx, W, H, aim) {
+    var cx0 = W / 2, cy0 = H - 64;
+    var tipX = cx0 + Math.cos(aim) * 62, tipY = cy0 + Math.sin(aim) * 62;
+    var midX = cx0 + Math.cos(aim) * 50, midY = cy0 + Math.sin(aim) * 50;
+    ctx.fillStyle = "#1E1B4B";
+    ctx.beginPath();
+    ctx.moveTo(cx0 - 16, cy0 + 12);
+    ctx.lineTo(cx0 + 16, cy0 + 12);
+    ctx.lineTo(cx0 + 27, H - 4);
+    ctx.lineTo(cx0 - 27, H - 4);
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx0 - 16, cy0 + 12); ctx.lineTo(cx0 + 16, cy0 + 12); ctx.stroke();
+    ctx.strokeStyle = "#1E1B4B"; ctx.lineWidth = 17; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(cx0, cy0);
+    ctx.lineTo(midX, midY); ctx.stroke();
+    ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 17; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(midX, midY);
+    ctx.lineTo(tipX, tipY); ctx.stroke();
+    ctx.fillStyle = "#F59E0B";
+    ctx.beginPath(); ctx.arc(cx0, cy0, 24, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "#B45309"; ctx.lineWidth = 2; ctx.stroke();
+    var colX = cx0 + Math.cos(aim) * 18, colY = cy0 + Math.sin(aim) * 18;
+    ctx.fillStyle = "#1E1B4B";
+    ctx.beginPath(); ctx.arc(colX, colY, 13, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#FFFBEB";
+    ctx.beginPath(); ctx.arc(cx0, cy0, 11, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#0D9488";
+    ctx.beginPath(); ctx.arc(cx0, cy0, 4.5, 0, Math.PI * 2); ctx.fill();
+  }
+
   function start() {
     var rounds = G71.buildRounds(15, 3);
     if (rounds.length < 11) { try { toast("Chưa đủ từ vựng để chơi."); } catch (e) {} return; }
@@ -231,36 +270,7 @@
         ctx.beginPath(); ctx.arc(bl.x, bl.y, 5, 0, Math.PI * 2);
         ctx.fillStyle = "#FDE68A"; ctx.fill();
       });
-      /* v105b: súng đọc ra là SÚNG đặt trên bệ (v105 nòng mỏng 9px +
-         đế tròn nên live vẫn đọc như "vòng tròn cam + nòng nhỏ"):
-         bệ súng hình thang chàm đậm từ đế xuống cát, nòng chàm đậm dày
-         13px dài 62px, đầu nòng hổ phách dày 15px, đế hổ phách + tâm
-         kem + chấm teal giữ nguyên. Đạn nay xuất phát từ đầu nòng. */
-      var cx0 = W / 2, cy0 = H - 64;
-      var tipX = cx0 + Math.cos(aim) * 62, tipY = cy0 + Math.sin(aim) * 62;
-      var midX = cx0 + Math.cos(aim) * 50, midY = cy0 + Math.sin(aim) * 50;
-      ctx.fillStyle = "#1E1B4B";
-      ctx.beginPath();
-      ctx.moveTo(cx0 - 16, cy0 + 12);
-      ctx.lineTo(cx0 + 16, cy0 + 12);
-      ctx.lineTo(cx0 + 27, H - 4);
-      ctx.lineTo(cx0 - 27, H - 4);
-      ctx.closePath(); ctx.fill();
-      ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(cx0 - 16, cy0 + 12); ctx.lineTo(cx0 + 16, cy0 + 12); ctx.stroke();
-      ctx.strokeStyle = "#1E1B4B"; ctx.lineWidth = 13; ctx.lineCap = "round";
-      ctx.beginPath(); ctx.moveTo(cx0, cy0);
-      ctx.lineTo(midX, midY); ctx.stroke();
-      ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 15; ctx.lineCap = "round";
-      ctx.beginPath(); ctx.moveTo(midX, midY);
-      ctx.lineTo(tipX, tipY); ctx.stroke();
-      ctx.fillStyle = "#F59E0B";
-      ctx.beginPath(); ctx.arc(cx0, cy0, 24, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = "#B45309"; ctx.lineWidth = 2; ctx.stroke();
-      ctx.fillStyle = "#FFFBEB";
-      ctx.beginPath(); ctx.arc(cx0, cy0, 11, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = "#0D9488";
-      ctx.beginPath(); ctx.arc(cx0, cy0, 4.5, 0, Math.PI * 2); ctx.fill();
+      drawGun(ctx, W, H, aim);
       G71.drawSnake(ctx, W - 56, H - 36, 18, true);
       maybeEnd();
       if (running) requestAnimationFrame(frame);
@@ -268,5 +278,5 @@
     requestAnimationFrame(frame);
   }
 
-  window.G71BanBongBong = { start: start, logic: LOGIC };
+  window.G71BanBongBong = { start: start, logic: LOGIC, drawGun: drawGun };
 })();

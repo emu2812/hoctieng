@@ -34,7 +34,7 @@
   var ELEMENTS = {
     fire: { key: "fire", name: "Lửa", icon: "🔥", color: "#F59E0B" },
     water: { key: "water", name: "Nước", icon: "💧", color: "#0D9488" },
-    elec: { key: "elec", name: "Điện", icon: "⚡", color: "#FBBF24" }
+    elec: { key: "elec", name: "Điện", icon: "⚡", color: "#8B5CF6" }
   };
   var EL_ORDER = ["fire", "water", "elec"];
   function nextEl(k) { return EL_ORDER[(EL_ORDER.indexOf(k) + 1) % EL_ORDER.length]; }

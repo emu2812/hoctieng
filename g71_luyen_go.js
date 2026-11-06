@@ -131,6 +131,14 @@
       var py = wd.y * H;
       return { x0: px - tw / 2, y0: py - halfH, x1: px + tw / 2, y1: py + halfH, w: tw, h: halfH * 2 };
     },
+    /* Thiên thạch hiện trọn (v105c): đỉnh đa giác vẽ thật cao nhất cách
+       tâm 1,15×bán kính (+1px viền 2px) — chỉ vẽ khi đỉnh đó đã xuống
+       dưới mép trên canvas. W/H lấy theo canvas thật (frame() ghi
+       st.canvasW/H trước khi tick); mặc định 360×500 khi chưa có. */
+    rockVisible: function (st, rk, W, H) {
+      var w = W || (st && st.canvasW) || 360, h = H || (st && st.canvasH) || 500;
+      return rk.y * h - rk.r * w * 1.15 - 2 >= 0;
+    },
     tick: function (st, dt, now) {
       if (st.over) return;
       var boost = 1 + st.resolved * 0.02;
@@ -358,8 +366,22 @@
        v91: track tiếng Hàn (TP) thì bàn phím là các âm tiết Hangul của từ
        đang khóa (bấm theo thứ tự để ghép thành từ); các track khác gõ
        chữ cái như cũ (tiếng Trung gõ pinyin bằng chữ cái Latin). */
-    var kb = null, typeInput = null, composing = false;
+    var kb = null, kbToggle = null, typeInput = null, composing = false;
     var kbSig = "";
+    /* v105c: bàn phím vẽ tự ẩn khi gõ phím thật (Bùi 21:56 06/11: bàn
+       phím A–Z vẫn hiện dù đã gõ bằng bàn phím thật — Bùi chê nó chiếm
+       chỗ từ 14:07 06/11). Mặc định mở ván vẫn hiện như cũ để người
+       dùng chuột thấy được; chỉ ẩn sau khi gõ phím chữ thật. Ẩn/hiện
+       không đổi luật chơi — chỉ display, sân canvas tự rộng ra nhờ
+       flex + ResizeObserver của openStage. */
+    var kbShown = true;
+    function setKbVisible(v) {
+      if (!kb) return;
+      kbShown = !!v;
+      kb.style.display = kbShown ? "flex" : "none";
+      if (kbToggle) kbToggle.textContent = kbShown ? "⌨️ Ẩn bàn phím" : "⌨️ Bàn phím";
+      if (stg.resize) stg.resize();
+    }
     function refreshKb() {
       if (!kb) return;
       var isTp = false;
@@ -428,6 +450,16 @@
       kb.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;";
       refreshKb();
       stg.el.appendChild(kb);
+      /* v105c: nút mở lại bàn phím vẽ — nhỏ gọn một dòng dưới bàn phím,
+         chỉ có trên desktop (cảm ứng dùng bàn phím gốc nên không có kb
+         vẽ, cũng không có nút này). */
+      kbToggle = document.createElement("button");
+      kbToggle.id = "g71KbToggle";
+      kbToggle.className = "btn";
+      kbToggle.style.cssText = "display:block;margin:6px auto;padding:4px 12px;font-size:13px;";
+      kbToggle.textContent = "⌨️ Ẩn bàn phím";
+      kbToggle.onclick = function () { setKbVisible(kb.style.display === "none"); };
+      stg.el.appendChild(kbToggle);
     }
     if (stg.resize) stg.resize();
     /* Mở bàn phím gốc ngay khi trận bắt đầu (đang trong luồng bấm nút
@@ -511,7 +543,14 @@
       if (e.key === "ArrowRight") { keys.right = true; e.preventDefault(); return; }
       var isTpKey = false;
       try { isTpKey = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
-      if (e.key && e.key.length === 1 && (isTpKey || /[a-zA-Z]/.test(e.key))) feed(e.key);
+      if (e.key && e.key.length === 1 && (isTpKey || /[a-zA-Z]/.test(e.key))) {
+        /* v105c: gõ phím chữ thật thì ẩn bàn phím vẽ (người gõ phím thật
+           không cần bàn phím vẽ nữa — phím mũi tên lái tàu thì không ẩn,
+           người dùng chuột vẫn cần bàn phím vẽ để bấm chữ); bấm nút
+           "⌨️ Bàn phím" để mở lại. */
+        if (kbShown) setKbVisible(false);
+        feed(e.key);
+      }
     }
     function onKeyUp(e) {
       if (e.key === "ArrowLeft") keys.left = false;
@@ -597,8 +636,13 @@
       if (!W || !H) { requestAnimationFrame(frame); return; }
       ctx.clearRect(0, 0, W, H);
       G71.paintSpace(ctx, W, H, now);
-      /* Thiên thạch rơi. */
+      /* Thiên thạch rơi — v105c: chỉ vẽ khi hiện TRỌN (như viên từ
+         v105b): trước đây vẽ từ lúc tâm còn trên mép nên chỉ ló nửa
+         dưới, nửa trên khuất sau thanh thông tin (kiểm render v105b:
+         3/4 ván). Va chạm trong tick() không đổi — đá chưa hiện vẫn
+         rơi bình thường, chỉ chưa vẽ. */
       st.rocks.forEach(function (rk) {
+        if (!LOGIC.rockVisible(st, rk, W, H)) return;
         drawRock(ctx, rk.x * W, rk.y * H, rk.r * W, rk.rot);
       });
       /* v102: tô sáng TỪ MỤC TIÊU (không chỉ từ đang khóa) — thanh Nghĩa,
