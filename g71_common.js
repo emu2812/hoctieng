@@ -49,7 +49,8 @@
           out.push({ theme: set.topic || set.title || "",
             cards: set.cards.filter(function (c) { return c && c.han && c.vi && c.pinyin; })
               .map(function (c) { return { w: String(c.han), vi: String(c.vi),
-                type: pinyinPlain(c.pinyin), py: String(c.pinyin) }; }) });
+                type: pinyinPlain(c.pinyin), py: String(c.pinyin),
+                col: String(c.col || ""), ex: String(c.ex || "") }; }) });
         });
         return out.filter(function (x) { return x.cards.length; });
       }
@@ -58,7 +59,8 @@
           if (!set || !set.cards) return;
           out.push({ theme: set.topic || "",
             cards: set.cards.filter(function (c) { return c && c.w && c.vi; })
-              .map(function (c) { return { w: String(c.w), vi: String(c.vi), type: String(c.w) }; }) });
+              .map(function (c) { return { w: String(c.w), vi: String(c.vi), type: String(c.w),
+                col: String(c.col || ""), ex: String(c.ex || "") }; }) });
         });
         return out.filter(function (x) { return x.cards.length; });
       }
@@ -67,7 +69,8 @@
           if (!set || !set.cards) return;
           out.push({ theme: set.topic || "",
             cards: set.cards.filter(function (c) { return c && c.w && c.vi; })
-              .map(function (c) { return { w: String(c.w), vi: String(c.vi), type: String(c.w) }; }) });
+              .map(function (c) { return { w: String(c.w), vi: String(c.vi), type: String(c.w),
+                col: String(c.col || ""), ex: String(c.ex || "") }; }) });
         });
         return out.filter(function (x) { return x.cards.length; });
       }
@@ -90,7 +93,8 @@
       var sets = trackSets(), out = [];
       sets.forEach(function (set) {
         set.cards.forEach(function (c) {
-          out.push({ w: c.w, vi: c.vi, theme: set.theme, type: c.type, py: c.py || "" });
+          out.push({ w: c.w, vi: c.vi, theme: set.theme, type: c.type, py: c.py || "",
+            col: c.col || "", ex: c.ex || "" });
         });
       });
       if (out.length) return out;
@@ -100,7 +104,8 @@
       (CONTENT.vocab || []).forEach(function (set) {
         var theme = set.theme || set.topic || "";
         (set.cards || []).forEach(function (c) {
-          if (c && c.w && c.vi) outEn.push({ w: String(c.w), vi: String(c.vi), theme: theme, type: String(c.w) });
+          if (c && c.w && c.vi) outEn.push({ w: String(c.w), vi: String(c.vi), theme: theme,
+            type: String(c.w), col: String(c.col || ""), ex: String(c.ex || "") });
         });
       });
     } catch (e) {}
@@ -119,14 +124,16 @@
     var theme = set.theme || set.topic || "";
     var cards = shuffle(set.cards.slice()).filter(function (c) { return c && (c.w || c.han) && c.vi; });
     var words = cards.slice(0, n).map(function (c) {
-      if (c.han) return { w: String(c.han), vi: String(c.vi), type: pinyinPlain(c.pinyin), py: String(c.pinyin || "") };
-      return { w: String(c.w), vi: String(c.vi), type: String(c.type || c.w) };
+      if (c.han) return { w: String(c.han), vi: String(c.vi), type: pinyinPlain(c.pinyin), py: String(c.pinyin || ""),
+        col: String(c.col || ""), ex: String(c.ex || "") };
+      return { w: String(c.w), vi: String(c.vi), type: String(c.type || c.w),
+        col: String(c.col || ""), ex: String(c.ex || "") };
     });
     if (words.length < n) {
       var rest = shuffle(pool()).filter(function (p) {
         return words.every(function (x) { return x.w !== p.w; });
       });
-      while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
+      while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "", col: p.col || "", ex: p.ex || "" }); }
     }
     return { theme: theme, words: words };
   }
@@ -140,7 +147,7 @@
       var rest = shuffle(pool()).filter(function (p) {
         return isTypeable(p) && words.every(function (x) { return x.w !== p.w; });
       });
-      while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "" }); }
+      while (words.length < n && rest.length) { var p = rest.pop(); words.push({ w: p.w, vi: p.vi, type: p.type || p.w, py: p.py || "", col: p.col || "", ex: p.ex || "" }); }
     }
     return { theme: got.theme, words: words };
   }
@@ -251,7 +258,7 @@
   /* Màn hình kết thúc: thắng thì +10 XP bằng hàm sẵn có của web. */
   function endScreen(st, win, title, lines, onReplay) {
     var box = document.createElement("div");
-    box.style.cssText = "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,247,232,.93);z-index:5;padding:16px;";
+    box.style.cssText = "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(4,6,15,.55);z-index:5;padding:16px;";
     var lis = lines.map(function (l) { return "<p style=\"margin:6px 0;\">" + escHtml(l) + "</p>"; }).join("");
     box.innerHTML = '<div style="background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.12);padding:28px 24px;text-align:center;max-width:520px;width:100%;">'
       + '<h2 style="margin-top:0;">' + escHtml(title) + "</h2>" + lis

@@ -47,22 +47,27 @@
   var REGIONS = [
     { id: 1, name: "Rừng Xanh", icon: "🌲", theme: "thiên nhiên", boss: "Trùm Bóng Tối",
       accent: "teal", desc: "Nơi từ về thiên nhiên, cây cỏ, thú vật và thời tiết bị phong ấn.",
+      weather: { key: "rain", season: "Mùa xuân", name: "Mưa phùn", icon: "🌧️", element: "water", mult: 1.5 },
       stages: ["Bìa Rừng", "Lối Mòn Xanh", "Suối Ngàn Hoa", "Thác Bạc", "Tổ Chim Lớn",
         "Vườn Nấm", "Cây Cổ Thụ", "Hang Đom Đóm", "Đỉnh Tán Lá", "Hang Trùm Bóng Tối"] },
     { id: 2, name: "Làng Chài", icon: "🎣", theme: "đời sống", boss: "Trùm Sóng Đen",
       accent: "teal", desc: "Từ về đời sống, gia đình, ăn uống, chợ búa và việc nhà.",
+      weather: { key: "sun", season: "Mùa hè", name: "Nắng vàng", icon: "☀️", element: "fire", mult: 1.5 },
       stages: ["Bến Cá", "Chợ Sáng", "Bếp Lửa Hồng", "Nhà Gỗ Ven Sông", "Vườn Rau",
         "Quán Nước Đầu Làng", "Thuyền Buồm", "Kho Lúa", "Đêm Hội Làng", "Hang Trùm Sóng Đen"] },
     { id: 3, name: "Thành Phố", icon: "🏙️", theme: "công việc và học tập", boss: "Trùm Bóng Đêm",
       accent: "amber", desc: "Từ về công việc, học tập, trường lớp và thành phố.",
+      weather: { key: "storm", season: "Mùa thu", name: "Giông", icon: "⛈️", element: "elec", mult: 1.5 },
       stages: ["Ga Tàu", "Văn Phòng", "Phòng Họp", "Thư Viện", "Giảng Đường",
         "Quán Cà Phê", "Công Viên", "Trung Tâm Thương Mại", "Sân Vận Động", "Tháp Trùm Bóng Đêm"] },
     { id: 4, name: "Hang Pha Lê", icon: "💎", theme: "cảm xúc và mô tả", boss: "Trùm Pha Lê Đen",
       accent: "indigo", desc: "Từ về cảm xúc, tính cách, quan hệ và cách mô tả con người.",
+      weather: { key: "snow", season: "Mùa đông", name: "Tuyết rơi", icon: "❄️", element: "water", mult: 1.5 },
       stages: ["Cửa Hang", "Dòng Suối Pha Lê", "Gương Cảm Xúc", "Vườn Hoa Tím",
         "Cầu Vồng", "Hồ Nước Trong", "Tháp Tính Cách", "Cánh Đồng Hoa", "Đỉnh Pha Lê", "Trùm Pha Lê Đen"] },
     { id: 5, name: "Núi Lửa", icon: "🌋", theme: "tổng hợp", boss: "Trùm Dung Nham",
       accent: "fire", desc: "Tổng hợp mọi chủ đề — chỉ dành cho rồng đã qua 4 vùng.",
+      weather: { key: "heat", season: "Mùa khô", name: "Nóng bức", icon: "🌡️", element: "fire", mult: 1.5 },
       stages: ["Chân Núi", "Dòng Dung Nham", "Hang Đá Nóng", "Cầu Đá", "Đỉnh Khói",
         "Hồ Lửa", "Vực Sâu", "Cổng Tro", "Sườn Núi Lửa", "Hang Trùm Dung Nham"] }
   ];
@@ -103,6 +108,190 @@
     },
     5: null /* tổng hợp: toàn kho track */
   };
+
+  /* ---- Lớp sâu v99: thời tiết/mùa, quái yếu theo nhóm từ, bạn đồng hành,
+     ghép cụm từ/câu, từ quá hạn bị bắt cóc (SRS thành cốt truyện).
+     Tất cả dùng dữ liệu thật của track đang học; không bịa, không đổi luật
+     lõi/XP/SRS đã có — chỉ thêm lớp sâu lên trên. ---- */
+  /* Thời tiết/mùa theo vùng: chiêu đúng hệ thời tiết được tăng sát thương
+     ×1,5 — mức tăng hiện rõ trên HUD + bản đồ vùng, không tăng ngầm. */
+  function weatherFor(region) {
+    var r = regionById(region || 1);
+    return r.weather || null;
+  }
+  function weatherMult(element, region) {
+    var w = weatherFor(region);
+    if (!w || w.element !== element) return 1;
+    return w.mult || 1.5;
+  }
+  /* Quái yếu theo NHÓM từ: mỗi quái sợ một nhóm; từ nó mang thuộc nhóm
+     đó thì chiêu gây sát thương ×2 (hiện rõ trên thẻ quái). Nhóm lấy từ
+     dữ liệu thật: độ dài chuỗi gõ + chủ đề bộ của từ trong kho. */
+  var GROUP_WEAK = {
+    long: { label: "từ dài", hint: "Sợ từ dài (≥7 chữ)" },
+    nature: { label: "từ thiên nhiên", hint: "Sợ từ thiên nhiên" },
+    emotion: { label: "từ cảm xúc", hint: "Sợ từ cảm xúc" },
+    daily: { label: "từ đời sống", hint: "Sợ từ đời sống" },
+    work: { label: "từ công việc", hint: "Sợ từ công việc" }
+  };
+  var GROUP_KEYS = ["long", "nature", "emotion", "daily", "work"];
+  var GROUP_REGION = { nature: 1, daily: 2, work: 3, emotion: 4 };
+  function wordGroups(word) {
+    var out = [];
+    var type = String((word && word.type) || (word && word.w) || "");
+    if (type.length >= 7) out.push("long");
+    var topic = String((word && word.theme) || "") + " " + String((word && word.vi) || "");
+    Object.keys(GROUP_REGION).forEach(function (g) {
+      var res = REGION_TOPIC_RE[GROUP_REGION[g]];
+      if (!res) return;
+      var hit = false;
+      ["en", "zh", "tc", "tp"].forEach(function (tk) { if (res[tk] && res[tk].test(topic)) hit = true; });
+      if (hit) out.push(g);
+    });
+    return out;
+  }
+  /* Bạn đồng hành: mở khóa khi thắng trùm vùng tương ứng (suy ra từ tiến
+     trình đã qua trùm, không cần lưu riêng — bản lưu cũ tự có). */
+  var COMPANIONS = [
+    { id: "sparrow", name: "Sẻ Lửa", icon: "🐦", region: 1, kind: "dmg", element: "fire", bonus: 1,
+      effect: "Chiêu Lửa +1 sát thương", unlock: "Thắng trùm Rừng Xanh" },
+    { id: "turtle", name: "Rùa Nước", icon: "🐢", region: 2, kind: "heal", element: "", bonus: 1,
+      effect: "Hồi 1 tim sau mỗi trận thắng", unlock: "Thắng trùm Làng Chài" },
+    { id: "firefly", name: "Đom Đóm Điện", icon: "🪲", region: 3, kind: "dmg", element: "elec", bonus: 1,
+      effect: "Chiêu Điện +1 sát thương", unlock: "Thắng trùm Thành Phố" },
+    { id: "rabbit", name: "Thỏ Pha Lê", icon: "🐇", region: 4, kind: "dmg", element: "water", bonus: 1,
+      effect: "Chiêu Nước +1 sát thương", unlock: "Thắng trùm Hang Pha Lê" }
+  ];
+  function unlockedCompanions(rl) {
+    var out = [];
+    COMPANIONS.forEach(function (c) {
+      var p = rl && rl.progress && rl.progress[String(c.region)];
+      if (p && p.cleared && p.cleared["10"]) out.push(c.id);
+    });
+    return out;
+  }
+  function companionDmgBonus(element, companions) {
+    var b = 0;
+    (companions || []).forEach(function (id) {
+      COMPANIONS.forEach(function (c) { if (c.id === id && c.kind === "dmg" && c.element === element) b += c.bonus; });
+    });
+    return b;
+  }
+  function companionHeal(companions) {
+    return (companions || []).indexOf("turtle") >= 0 ? 1 : 0;
+  }
+  /* Cụm từ/câu thật để ghép chiêu combo: EN/TC/ZH dùng trường col của thẻ
+     (cụm từ thật trong sách); TP không có col nên dùng câu ví dụ ex.
+     ZH: col là chữ Hán — tách col thành từng đoạn bằng cách tra pinyin của
+     đoạn trong kho từ của track (từ dài nhất trước); đoạn nào không tra
+     được thì cụm đó không dùng làm quái cụm (không bịa pinyin). Trả về
+     null khi không có cụm hợp lệ. */
+  function phraseFor(word, pool) {
+    if (!word) return null;
+    var tk = "en";
+    try { tk = (typeof G71 !== "undefined" && G71.trackKey) ? G71.trackKey() : "en"; } catch (e) {}
+    if (tk === "tp") {
+      var ex = String(word.ex || "").replace(/[.?!。！？]+$/, "").trim();
+      if (!ex) return null;
+      var parts = ex.split(/\s+/).filter(function (s) { return !!s; });
+      if (parts.length < 2) return null;
+      return { display: ex, vi: word.vi || "", parts: parts.map(function (p) { return { text: p, type: p }; }) };
+    }
+    var col = String(word.col || "").trim();
+    if (!col) return null;
+    if (tk === "zh") {
+      var map = {};
+      (pool || []).forEach(function (p) { if (p.w && p.type) map[String(p.w)] = String(p.type); });
+      var zhParts = [], rest = col;
+      while (rest.length) {
+        var found = null;
+        for (var L = Math.min(4, rest.length); L >= 1; L--) {
+          var seg = rest.slice(0, L);
+          if (map[seg]) { found = { text: seg, type: map[seg] }; rest = rest.slice(L); break; }
+        }
+        if (!found) return null;
+        zhParts.push(found);
+      }
+      if (zhParts.length < 2) return null;
+      return { display: col, vi: word.vi || "", parts: zhParts };
+    }
+    var words = col.split(/\s+/).filter(function (s) { return !!s; });
+    if (words.length < 2) return null;
+    return { display: col, vi: word.vi || "", parts: words.map(function (p) { return { text: p, type: p.toLowerCase() }; }) };
+  }
+  /* Chuỗi gõ của cụm, có dấu cách giữa các từ — dùng để hiển thị tiến
+     trình gõ (gõ liền không cần dấu cách; dấu cách được bỏ qua). */
+  function phraseSpaced(phrase) {
+    if (!phrase || !phrase.parts) return "";
+    return phrase.parts.map(function (p) { return p.type; }).join(" ");
+  }
+  /* Từ quá hạn SRS bị quái bắt cóc: lấy từ kho SRS thật của track đang
+     học, theo đúng lịch 1-3-7-14-30. EN: state.cards (dueCards); ZH:
+     zhHard loại card (zhDueHard); TC/TP: tcDueCards90/tpDueCards90.
+     Tối đa 8 từ, quá hạn nhất lên trước. */
+  function findKidnapped() {
+    var tk = "en";
+    try { tk = (typeof G71 !== "undefined" && G71.trackKey) ? G71.trackKey() : "en"; } catch (e) {}
+    var out = [];
+    try {
+      if (tk === "en" && typeof dueCards === "function") {
+        dueCards().forEach(function (d) {
+          var c = d.card || {};
+          if (c.w && c.vi) out.push({ w: String(c.w), vi: String(c.vi), type: String(c.w), py: "",
+            theme: String(c.theme || ""), key: d.key, track: "en", due: d.due || "" });
+        });
+      } else if (tk === "zh" && typeof zhDueHard === "function") {
+        zhDueHard().forEach(function (d) {
+          var h = d.h || {};
+          if (h.kind === "card" && h.han && h.vi) {
+            var py = "";
+            try { py = G71.pinyinPlain(h.pinyin || ""); } catch (e) { py = String(h.pinyin || ""); }
+            out.push({ w: String(h.han), vi: String(h.vi), type: py, py: String(h.pinyin || ""),
+              theme: "", key: d.key, track: "zh", due: h.due || "" });
+          }
+        });
+      } else if (tk === "tc" && typeof tcDueCards90 === "function") {
+        tcDueCards90().forEach(function (d) {
+          var c = d.card || {};
+          if (c.w && c.vi) out.push({ w: String(c.w), vi: String(c.vi), type: String(c.w), py: "",
+            theme: "", key: d.key, track: "tc", due: d.due || "" });
+        });
+      } else if (tk === "tp" && typeof tpDueCards90 === "function") {
+        tpDueCards90().forEach(function (d) {
+          var c = d.card || {};
+          if (c.w && c.vi) out.push({ w: String(c.w), vi: String(c.vi), type: String(c.w), py: "",
+            theme: "", key: d.key, track: "tp", due: d.due || "" });
+        });
+      }
+    } catch (e) {}
+    out.sort(function (a, b) { return (a.due || "") < (b.due || "") ? -1 : ((a.due || "") > (b.due || "") ? 1 : 0); });
+    return out.slice(0, 8);
+  }
+  /* Ôn lại một từ đã cứu, đúng luật SRS của track đó (không xóa dữ liệu,
+     không trừ điểm học): EN dùng vocabBoxJudge; ZH dùng zhHardJudge;
+     TC/TP tăng 1 nấc + hẹn theo RB_INTERVALS (đúng luật nút Nhớ rồi). */
+  function reviewKidnapped(item) {
+    try {
+      if (!item || !item.key) return false;
+      if (item.track === "en" && typeof vocabBoxJudge === "function") { vocabBoxJudge(item.key, true); return true; }
+      if (item.track === "zh" && typeof zhHardJudge === "function") { zhHardJudge(item.key, true); return true; }
+      if ((item.track === "tc" || item.track === "tp") && typeof todayStr === "function"
+        && typeof addDaysStr === "function" && typeof RB_INTERVALS !== "undefined") {
+        var isTc = item.track === "tc";
+        var boxes = isTc ? (state.tcCardBox || {}) : (state.tpCardBox || {});
+        var dues = isTc ? (state.tcCardDue || {}) : (state.tpCardDue || {});
+        var box = Math.min(5, (boxes[item.key] || 0) + 1);
+        boxes[item.key] = box;
+        if (box >= 5) delete dues[item.key];
+        else dues[item.key] = addDaysStr(todayStr(), RB_INTERVALS[Math.min(box - 1, RB_INTERVALS.length - 1)]);
+        if (isTc) { state.tcCardBox = boxes; state.tcCardDue = dues; }
+        else { state.tpCardBox = boxes; state.tpCardDue = dues; }
+        if (typeof saveState === "function") saveState();
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
 
   /* ---- Ảnh Canva vùng 1 Rừng Xanh (v80): vẽ bằng ảnh, bản vẽ code
      làm dự phòng — ảnh lỗi hoặc chưa load xong thì vẽ lại bằng code như
@@ -351,16 +540,26 @@
   }
 
   /* ---- Logic thuần của trận đánh ---- */
-  function damageFor(wordLen, wordLvl, match, combo) {
+  function damageFor(wordLen, wordLvl, match, combo, weatherMult) {
     var base = match ? 2 : 1;
     var lenBonus = wordLen >= 7 ? 1 : 0;
     var mult = Math.min(3, 1 + combo);
-    return (base + lenBonus + (wordLvl - 1)) * mult;
+    /* weatherMult: hệ số thời tiết vùng (1 = không tăng, 1,5 = đúng hệ
+       thời tiết). Làm tròn để sát thương luôn là số nguyên như trước. */
+    return Math.round((base + lenBonus + (wordLvl - 1)) * mult * (weatherMult || 1));
   }
   var LOGIC = {
     elements: ELEMENTS,
     nextEl: nextEl,
     damageFor: damageFor,
+    weatherFor: weatherFor,
+    weatherMult: weatherMult,
+    wordGroups: wordGroups,
+    phraseFor: phraseFor,
+    phraseSpaced: phraseSpaced,
+    companionDmgBonus: companionDmgBonus,
+    companionHeal: companionHeal,
+    layoutPills: layoutPills,
     pickNatureWords: pickNatureWords,
     pickRegionWords: pickRegionWords,
     pickBossWord: pickBossWord,
@@ -378,12 +577,28 @@
     createBattle: function (words, opts) {
       opts = opts || {};
       var level = opts.level || 1, isBoss = !!opts.boss, region = opts.region || 1;
+      /* Nhẹ nhàng cho người mới: ải 1 vùng 1 (3 trận) — quái di chuyển
+         chậm một nửa và không bắn trong 30 giây đầu mỗi trận. Vùng khác
+         ải 1 không nhẹ (người chơi tới đó đã qua nhiều ải). Chỉ tính
+         nhẹ khi vùng được truyền rõ ràng là 1 — trận gọi không kèm vùng
+         (vd test v83) giữ luật cũ: quái bắn bình thường. */
+      var gentle = (opts.gentle !== undefined) ? !!opts.gentle : (opts.region === 1 && level === 1);
       var ws = words.map(function (wd, i) {
         var boss = isBoss && i === 0;
         var bhp = LOGIC.bossHp(region), mhp = LOGIC.monsterHp(level, region);
+        /* Điểm yếu theo nhóm từ: trùm sợ một nhóm theo chủ đề (từ trùm
+           luôn dài nên không sợ nhóm "từ dài"), quái thường sợ ngẫu nhiên
+           một trong 5 nhóm. Nhóm của từ tính từ dữ liệu thật của từ. */
+        var themeGroups = ["nature", "emotion", "daily", "work"];
+        var gWeak = boss ? themeGroups[Math.floor(Math.random() * themeGroups.length)]
+          : GROUP_KEYS[Math.floor(Math.random() * GROUP_KEYS.length)];
         return {
           w: wd.w, vi: wd.vi, type: wd.type || wd.w, isBoss: boss,
           weak: EL_ORDER[Math.floor(Math.random() * 3)],
+          groupWeak: gWeak,
+          groups: wordGroups({ w: wd.w, vi: wd.vi, theme: wd.theme || "",
+            type: wd.headType || wd.type || wd.w }),
+          phrase: wd.phrase || null, isPhrase: !!wd.phrase, partIdx: 0,
           hp: boss ? bhp : mhp, maxHp: boss ? bhp : mhp,
           phase: 0, progress: 0, status: "advancing",
           x: 0.15 + Math.random() * 0.7,
@@ -403,6 +618,7 @@
         element: opts.element || "fire",
         score: 0, goldEarned: 0, combo: 0, over: null,
         graceUntil: 0, events: [], collected: [],
+        gentle: gentle, elapsed: 0,
         dragon: { x: 0.5, y: 0.85 }, bolts: []
       };
     },
@@ -421,11 +637,19 @@
       if (st.over) return;
       if (st.words[idx] && st.words[idx].status === "advancing") st.active = idx;
     },
-    typeLetter: function (st, ch, now, element, wordLvl) {
+    typeLetter: function (st, ch, now, element, wordLvl, companions) {
       if (st.over) return { ok: false };
       ch = String(ch || "").toLowerCase();
       if (!ch || ch.length !== 1) return { ok: false };
       if (now < st.graceUntil) return { ok: false, grace: true };
+      /* Dấu cách: chỉ có nghĩa với quái cụm từ (gõ liền các từ trong cụm,
+         dấu cách được bỏ qua, không mất combo); quái thường gõ cách là gõ sai. */
+      if (ch === " ") {
+        var actM = (st.active !== null && st.words[st.active]) ? st.words[st.active] : null;
+        if (actM && actM.isPhrase && actM.status === "advancing") return { ok: true, ignored: true };
+        st.combo = 0;
+        return { ok: false, wrong: true };
+      }
       var w = null;
       if (st.active !== null && st.words[st.active] && st.words[st.active].status === "advancing") {
         w = st.words[st.active];
@@ -444,16 +668,85 @@
       var tgt = w.type || w.w;
       if (tgt.charAt(w.progress).toLowerCase() !== ch) { st.combo = 0; return { ok: false, wrong: true }; }
       w.progress++;
+      /* Sát thương một chiêu: đúng hệ ×2 nền, từ dài +1, cấp từ, combo
+         tới ×3, thời tiết vùng ×1,5 khi đúng hệ thời tiết, đúng nhóm từ
+         quái sợ ×2, bạn đồng hành +1. */
+      function spellDmg(partLen, el, lvl, groupHit, comboPart) {
+        var wMult = weatherMult(el, st.region);
+        var base = damageFor(partLen, lvl, (el === w.weak), st.combo, wMult);
+        var d = base * (groupHit ? 2 : 1) * (comboPart ? 3 : 1) + companionDmgBonus(el, companions);
+        return { dmg: d, weatherBoost: wMult > 1 };
+      }
+      function wordLvlOf() {
+        var lvl = 1;
+        if (typeof wordLvl === "function") { try { lvl = wordLvl(w.w) || 1; } catch (e) { lvl = 1; } }
+        else if (typeof wordLvl === "number") lvl = wordLvl;
+        return lvl;
+      }
+      function groupHitOf() {
+        return !!(w.groupWeak && (w.groups || []).indexOf(w.groupWeak) >= 0);
+      }
+      /* Quái cụm từ: mỗi từ trong cụm xong là một chiêu; từ cuối cụm là
+         chiêu combo ×3. Gõ sai chỉ gõ lại, không mất lượt. */
+      if (w.isPhrase && w.phrase && w.phrase.parts && w.phrase.parts.length) {
+        var cumLen = 0, partIdx = 0, partEnd = 0;
+        for (var pi = 0; pi < w.phrase.parts.length; pi++) {
+          cumLen += w.phrase.parts[pi].type.length;
+          if (w.progress <= cumLen) { partIdx = pi; partEnd = cumLen; break; }
+        }
+        if (w.progress < partEnd) return { ok: true };
+        var elP = element || st.element;
+        var isLast = partIdx === w.phrase.parts.length - 1;
+        var gHitP = groupHitOf();
+        var sdP = spellDmg(w.phrase.parts[partIdx].type.length, elP, wordLvlOf(), gHitP, isLast);
+        w.hp -= sdP.dmg;
+        st.score += sdP.dmg;
+        w.partIdx = partIdx + 1;
+        var killedP = false, goldP = 0;
+        if (w.hp <= 0) {
+          w.status = "done"; w.hp = 0; st.resolved++;
+          killedP = true; goldP = w.gold; st.goldEarned += goldP;
+          st.collected.push({ w: w.w, vi: w.vi, el: elP, lvl: wordLvlOf() });
+          st.active = null;
+        } else if (isLast) {
+          /* Hết cụm mà quái chưa chết: gõ lại cụm từ đầu. */
+          w.progress = 0; w.partIdx = 0;
+        }
+        st.combo++;
+        if (st.resolved >= st.total) st.over = "win";
+        return { ok: true, completed: true, part: true, comboPart: isLast, dmg: sdP.dmg,
+          match: (elP === w.weak), killed: killedP, gold: goldP, monster: w,
+          weatherBoost: sdP.weatherBoost, groupHit: gHitP,
+          compBonus: companionDmgBonus(elP, companions), bossPhase: null };
+      }
       if (w.progress < tgt.length) return { ok: true };
       /* Gõ xong một từ = tung một chiêu lên quái đang khóa. */
       var el = element || st.element;
       var match = (el === w.weak);
-      var lvl = 1;
-      if (typeof wordLvl === "function") { try { lvl = wordLvl(w.w) || 1; } catch (e) { lvl = 1; } }
-      else if (typeof wordLvl === "number") lvl = wordLvl;
-      var dmg = damageFor((w.type || w.w).length, lvl, match, st.combo);
+      var lvl = wordLvlOf();
+      var gHit = groupHitOf();
+      var sd = spellDmg((w.type || w.w).length, el, lvl, gHit, false);
+      var dmg = sd.dmg;
       w.hp -= dmg;
       st.score += dmg;
+      /* Trùm đổi hệ sau mỗi 1/3 máu (vùng 1 HP 30: ở 20 rồi 10). Sửa v99:
+         hai mốc kiểm tra riêng (không else-if) và kiểm tra cả khi đòn này
+         kết liễu trùm — đòn mạnh vượt hai mốc vẫn ghi đủ 2 lần đổi hệ,
+         đúng luật "đổi hệ sau mỗi 1/3 máu" (trước đây đòn kết liễu làm
+         mất mốc thứ hai khi sát thương thời tiết tăng). */
+      var phaseEvent = null;
+      if (w.isBoss) {
+        if (w.phase === 0 && w.hp <= w.maxHp * 2 / 3) {
+          w.phase = 1; w.weak = nextEl(w.weak);
+          phaseEvent = { type: "bossPhase", weak: w.weak, phase: 1 };
+          st.events.push(phaseEvent);
+        }
+        if (w.phase === 1 && w.hp <= w.maxHp / 3) {
+          w.phase = 2; w.weak = nextEl(w.weak);
+          phaseEvent = { type: "bossPhase", weak: w.weak, phase: 2 };
+          st.events.push(phaseEvent);
+        }
+      }
       var killed = false, gold = 0;
       if (w.hp <= 0) {
         w.status = "done";
@@ -469,28 +762,21 @@
         w.progress = 0;
       }
       st.combo++;
-      var phaseEvent = null;
-      if (w.isBoss && w.status === "advancing") {
-        /* Trùm đổi hệ sau mỗi 1/3 máu (vùng 1 HP 30: ở 20 rồi 10). */
-        if (w.phase === 0 && w.hp <= w.maxHp * 2 / 3) {
-          w.phase = 1; w.weak = nextEl(w.weak);
-          phaseEvent = { type: "bossPhase", weak: w.weak, phase: 1 };
-          st.events.push(phaseEvent);
-        } else if (w.phase === 1 && w.hp <= w.maxHp / 3) {
-          w.phase = 2; w.weak = nextEl(w.weak);
-          phaseEvent = { type: "bossPhase", weak: w.weak, phase: 2 };
-          st.events.push(phaseEvent);
-        }
-      }
       if (st.resolved >= st.total) st.over = "win";
       return { ok: true, completed: true, dmg: dmg, match: match, killed: killed,
-        gold: gold, monster: w, bossPhase: phaseEvent };
+        gold: gold, monster: w, bossPhase: phaseEvent,
+        weatherBoost: sd.weatherBoost, groupHit: gHit,
+        compBonus: companionDmgBonus(el, companions) };
     },
     tick: function (st, dt, now) {
       if (st.over) return;
+      st.elapsed = (st.elapsed || 0) + dt;
+      /* Nhẹ nhàng ải 1 vùng 1: 30 giây đầu mỗi trận, quái đi chậm một nửa
+         và không bắn — người mới có thời gian đọc thẻ + khóa quái. */
+      var gentle = !!(st.gentle && st.elapsed < 30);
       st.words.forEach(function (wd) {
         if (wd.status !== "advancing") return;
-        wd.y += wd.speed * dt;
+        wd.y += wd.speed * (gentle ? 0.5 : 1) * dt;
         /* Quái trôi nhẹ về phía rồng (đuổi theo) để việc né có ý nghĩa. */
         wd.x += Math.max(-1, Math.min(1, st.dragon.x - wd.x)) * 0.12 * dt;
         /* Chạm tới rồng: quái rơi tới đáy sân HOẶC đụng trúng rồng. */
@@ -511,8 +797,9 @@
           return;
         }
         /* Bắn đạn từ xa (chỉ khi còn cách rồng một đoạn — không bắn
-           điểm tựa; quái ở sát mép trên chưa bắn). */
-        if (wd.y > 0.05 && wd.y < 0.65) {
+           điểm tựa; quái ở sát mép trên chưa bắn). Nhẹ nhàng ải 1:
+           30 giây đầu không bắn. */
+        if (!gentle && wd.y > 0.05 && wd.y < 0.65) {
           wd.fireIn -= dt;
           if (wd.fireIn <= 0) {
             var dx = st.dragon.x - wd.x, dy = st.dragon.y - wd.y;
@@ -854,6 +1141,63 @@
     if (region === 5) return paintVolcano(ctx, W, H, t);
     return paintForest(ctx, W, H, t);
   }
+  /* Hiệu ứng thời tiết theo vùng (v99): lớp phủ nhẹ cùng hệ nghệ thuật
+     (chàm + hổ phách + teal/trắng, alpha thấp) — mưa, nắng, giông, tuyết,
+     nóng bức. Vẽ sau nền vùng, trước quái. */
+  function paintWeather(ctx, W, H, t, region) {
+    var w = weatherFor(region);
+    if (!w) return;
+    ctx.save();
+    if (w.key === "rain") {
+      /* Mưa phùn: vệt chéo nhạt rơi. */
+      ctx.strokeStyle = "rgba(165,180,252,.5)"; ctx.lineWidth = 1.5;
+      for (var i = 0; i < 26; i++) {
+        var rx = (((i * 97 + t / 22) % (W + 60)) + W + 60) % (W + 60) - 30;
+        var ry = (((i * 173 + t / 14) % (H + 40)) + H + 40) % (H + 40) - 20;
+        ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(rx - 6, ry + 14); ctx.stroke();
+      }
+    } else if (w.key === "sun") {
+      /* Nắng vàng: tia sáng từ góc trên-trái + mặt trời nhỏ. */
+      ctx.strokeStyle = "rgba(251,191,36,.28)"; ctx.lineWidth = 5;
+      for (var j = 0; j < 7; j++) {
+        var ang = -0.5 + j * 0.22;
+        ctx.beginPath(); ctx.moveTo(W * 0.08, H * 0.06);
+        ctx.lineTo(W * 0.08 + Math.cos(ang) * W * 0.5, H * 0.06 + Math.sin(ang) * H * 0.6); ctx.stroke();
+      }
+      ctx.fillStyle = "rgba(251,191,36,.5)";
+      ctx.beginPath(); ctx.arc(W * 0.08, H * 0.06, 26, 0, Math.PI * 2); ctx.fill();
+    } else if (w.key === "storm") {
+      /* Giông: chớp sáng cả sân theo chu kỳ + một tia sét răng cưa. */
+      var cyc = (t % 4000) / 4000;
+      if (cyc < 0.06) {
+        ctx.fillStyle = "rgba(255,255,255," + (0.12 * (1 - cyc / 0.06)).toFixed(3) + ")";
+        ctx.fillRect(0, 0, W, H);
+      }
+      ctx.strokeStyle = "rgba(253,230,138,.85)"; ctx.lineWidth = 3;
+      var bx = W * (0.3 + 0.4 * Math.sin(t / 5000));
+      ctx.beginPath(); ctx.moveTo(bx, 0);
+      ctx.lineTo(bx + 18, H * 0.2); ctx.lineTo(bx - 8, H * 0.38); ctx.lineTo(bx + 14, H * 0.55); ctx.stroke();
+    } else if (w.key === "snow") {
+      /* Tuyết rơi: chấm trắng trôi chậm. */
+      ctx.fillStyle = "rgba(255,255,255,.75)";
+      for (var s = 0; s < 30; s++) {
+        var sx = (((s * 113 + Math.sin(t / 1600 + s) * 10) % W) + W) % W;
+        var sy = (((s * 67 + t / 30) % H) + H) % H;
+        ctx.beginPath(); ctx.arc(sx, sy, 2.2, 0, Math.PI * 2); ctx.fill();
+      }
+    } else if (w.key === "heat") {
+      /* Nóng bức: tàn lửa hổ phách bay lên. */
+      for (var e = 0; e < 16; e++) {
+        var ex = (((e * 89 + Math.sin(t / 1200 + e * 2.4) * 16) % W) + W) % W;
+        var ey = H * (0.85 - ((((t / 9000 + e * 0.07) % 0.7) + 0.7) % 0.7));
+        ctx.globalAlpha = 0.4 + 0.45 * (0.5 + 0.5 * Math.sin(t / 500 + e * 1.8));
+        ctx.fillStyle = (e % 3 === 0) ? C.amber400 : C.amber500;
+        ctx.beginPath(); ctx.arc(ex, ey, 2.4, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    ctx.restore();
+  }
   /* Rồng nhỏ nhìn lên (hướng quái rơi xuống): thân chàm đậm, bụng + sừng
      hổ phách nhạt, cánh hổ phách vỗ nhẹ, điểm sáng trắng ở trên-trái,
      bóng đổ ellipse dưới thân, viền 2px. */
@@ -921,6 +1265,48 @@
     ctx.beginPath(); ctx.ellipse(-s * 0.45, -s * 0.45, s * 0.3, s * 0.12, -0.5, 0, Math.PI * 2); ctx.fill();
     ctx.restore();
   }
+  /* ---- Bố cục thẻ từ không chồng nhau (sửa render v98 B1) ----
+     Thẻ từ gắn dưới quái; khi quái tụ lại, thẻ sau bị thẻ trước che.
+     Xếp thẻ theo thứ tự quái: thẻ nào đụng thẻ đã xếp thì dời xuống
+     (hoặc lên nếu chạm đáy sân) một khoảng bằng chiều cao thẻ + 8px.
+     Kết quả ghi vào m._pillX/_pillDy để drawMonster vẽ đúng chỗ + nối
+     một đường mảnh từ quái tới thẻ đã dời. */
+  function layoutPills(ctx, monsters, W, H) {
+    if (!ctx || !monsters) return;
+    var placed = [];
+    monsters.forEach(function (m) {
+      if (!m || m.status !== "advancing") return;
+      var px = m.x * W, py = Math.max(m.y * H, 64);
+      var s = m.isBoss ? 34 : 24;
+      var mType = m.type || m.w;
+      var pillH = (mType !== m.w) ? 54 : 34;
+      var disp = (m.isPhrase && m.phrase) ? m.phrase.display : m.w;
+      var typeSp = (m.isPhrase && m.phrase) ? phraseSpaced(m.phrase) : mType;
+      var tw;
+      try {
+        ctx.font = "700 17px system-ui, sans-serif";
+        tw = Math.max(ctx.measureText(disp).width, ctx.measureText(typeSp).width) + 30;
+      } catch (e) { tw = Math.max(String(disp).length, String(typeSp).length) * 10 + 30; }
+      var pillX = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, px));
+      var pillY = py + s * 1.05;
+      var step = pillH + 8, dy = 0, found = false;
+      var tries = [0, step, -step, step * 2, -step * 2];
+      for (var ti = 0; ti < tries.length; ti++) {
+        var cand = tries[ti];
+        var top = pillY + cand - pillH / 2, bottom = pillY + cand + pillH / 2;
+        if (top < 4 || bottom > H - 4) continue;
+        var clash = false;
+        for (var i = 0; i < placed.length; i++) {
+          var p = placed[i];
+          if (Math.abs(pillX - p.x) < (tw + p.tw) / 2 + 8 && top < p.bottom + 4 && bottom > p.top - 4) { clash = true; break; }
+        }
+        if (!clash) { dy = cand; found = true; break; }
+      }
+      if (!found) dy = 0;
+      m._pillX = pillX; m._pillDy = dy; m._pillTw = tw; m._pillH = pillH;
+      placed.push({ x: pillX, top: pillY + dy - pillH / 2, bottom: pillY + dy + pillH / 2, tw: tw });
+    });
+  }
   /* Quái Bóng Tối: khối chàm đậm, viền chàm nhạt 2px, mắt sáng hổ phách,
      huy hiệu hệ ở góc phải, thanh máu trên đầu, viên từ gắn liền bên dưới. */
   function drawMonster(ctx, m, W, H, t, locked) {
@@ -975,17 +1361,41 @@
     G71.rr(ctx, bx, by, bw, 6, 3); ctx.fill();
     ctx.fillStyle = m.hp / m.maxHp > 0.5 ? C.amber500 : C.amber700;
     if (m.hp > 0) { G71.rr(ctx, bx, by, bw * (m.hp / m.maxHp), 6, 3); ctx.fill(); }
+    /* Nhãn điểm yếu theo nhóm từ (v99): hiện trên thanh máu để người chơi
+       biết nên khóa quái nào — từ quái mang thuộc nhóm này thì chiêu ×2.
+       Ẩn khi quái còn ở sát mép trên (không đủ chỗ). */
+    if (m.groupWeak && GROUP_WEAK[m.groupWeak] && py - s * 1.35 - 24 > 0) {
+      var gw = GROUP_WEAK[m.groupWeak].hint;
+      ctx.font = "700 11px system-ui, sans-serif";
+      var gwW = ctx.measureText(gw).width + 14;
+      var gwX = Math.max(gwW / 2 + 4, Math.min(W - gwW / 2 - 4, px));
+      var gwY = py - s * 1.35 - 12;
+      ctx.fillStyle = "rgba(4,6,15,.72)";
+      G71.rr(ctx, gwX - gwW / 2, gwY - 9, gwW, 18, 9); ctx.fill();
+      ctx.fillStyle = C.amber100;
+      ctx.fillText(gw, gwX - ctx.measureText(gw).width / 2, gwY + 4);
+    }
     /* Viên từ gắn dưới quái. v91: tieng Trung hien 2 dong — chu Han o
-       tren, pinyin (chuoi go) o duoi co to mau tien trinh. */
+       tren, pinyin (chuoi go) o duoi co to mau tien trinh. v99: quái cụm
+       từ hiện cụm ở trên, chuỗi gõ có dấu cách ở dưới với tiến trình
+       theo từng từ; thẻ từ được layoutPills dời khi quái tụ lại. */
     var mType = m.type || m.w;
     var mTwo = mType !== m.w;
+    var isPh = !!(m.isPhrase && m.phrase);
+    var dispTop = isPh ? m.phrase.display : m.w;
+    var dispBot = isPh ? phraseSpaced(m.phrase) : mType;
     ctx.font = "700 17px system-ui, sans-serif";
-    var mWide = (ctx.measureText(m.w).width >= ctx.measureText(mType).width) ? m.w : mType;
+    var mWide = (ctx.measureText(dispTop).width >= ctx.measureText(dispBot).width) ? dispTop : dispBot;
     G71.fitFont(ctx, mWide, Math.max(70, W - 32), 17, 12, "700");
-    var tw = Math.max(ctx.measureText(m.w).width, ctx.measureText(mType).width) + 30;
-    var pillY = py + s * 1.05;
-    var pillX = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, px));
-    var pillH = mTwo ? 54 : 34, pillTop = pillY - (mTwo ? 28 : 17);
+    var tw = Math.max(ctx.measureText(dispTop).width, ctx.measureText(dispBot).width) + 30;
+    var pillY = py + s * 1.05 + (m._pillDy || 0);
+    var pillX = (typeof m._pillX === "number") ? m._pillX : Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, px));
+    var pillH = (isPh || mTwo) ? 54 : 34, pillTop = pillY - ((isPh || mTwo) ? 28 : 17);
+    if (m._pillDy) {
+      /* Đường nối mảnh từ quái tới thẻ đã dời. */
+      ctx.strokeStyle = "rgba(245,158,11,.65)"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(px, py + s * 0.9); ctx.lineTo(pillX, pillTop); ctx.stroke();
+    }
     if (locked) {
       ctx.fillStyle = "rgba(245,158,11,.35)";
       G71.rr(ctx, pillX - tw / 2 - 4, pillTop - 2, tw + 8, pillH + 4, 20); ctx.fill();
@@ -994,7 +1404,33 @@
     G71.rr(ctx, pillX - tw / 2, pillTop, tw, pillH, 17); ctx.fill();
     ctx.strokeStyle = locked ? C.amber500 : C.ink200;
     ctx.lineWidth = 2; ctx.stroke();
-    if (mTwo) {
+    if (isPh) {
+      /* Cụm từ: dòng trên là cụm (chữ Hán/Hangul/cụm tiếng Anh), dòng
+         dưới là chuỗi gõ có dấu cách, tô tiến trình theo từng từ. */
+      ctx.font = "700 16px system-ui, sans-serif";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(dispTop, pillX - ctx.measureText(dispTop).width / 2, pillY - 6);
+      ctx.font = "700 13px system-ui, sans-serif";
+      var x0 = pillX - ctx.measureText(dispBot).width / 2;
+      var off = 0;
+      m.phrase.parts.forEach(function (pt, pi) {
+        var plen = pt.type.length;
+        var dn = Math.max(0, Math.min(plen, m.progress - off));
+        var donePart = pt.type.slice(0, dn), restPart = pt.type.slice(dn);
+        ctx.fillStyle = C.amber100;
+        ctx.fillText(donePart, x0, pillY + 14);
+        x0 += ctx.measureText(donePart).width;
+        ctx.fillStyle = "#fff";
+        ctx.fillText(restPart, x0, pillY + 14);
+        x0 += ctx.measureText(restPart).width;
+        if (pi < m.phrase.parts.length - 1) {
+          ctx.fillStyle = "#fff";
+          ctx.fillText(" ", x0, pillY + 14);
+          x0 += ctx.measureText(" ").width;
+        }
+        off += plen;
+      });
+    } else if (mTwo) {
       ctx.font = "700 16px system-ui, sans-serif";
       ctx.fillStyle = "#fff";
       ctx.fillText(m.w, pillX - ctx.measureText(m.w).width / 2, pillY - 6);
@@ -1028,6 +1464,11 @@
   var elBar = null, ctrlBar = null, overlayBox = null;
   var last = 0, hudSig = "";
   var moveKeys = { up: false, down: false, left: false, right: false };
+  /* Gợi ý mặc định + gợi ý riêng ải 1 (v99 B4): ải 1 nói rõ từng bước
+     khóa quái → gõ từ, vì người mới ở v98 gõ mà không khóa nên không
+     gây sát thương. */
+  var HINT_DEFAULT = "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái; chạm quái để khóa, gõ đúng từ để tung chiêu. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng hoặc đạn trúng rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu. 5 vùng × 10 ải, trùm mỗi vùng đổi hệ sau mỗi 1/3 máu — thắng trùm Núi Lửa mở Chế độ Vô Tận.";
+  var HINT_STAGE1 = "👉 Bước 1: CHẠM vào quái để khóa nó (quái đã khóa có viền vàng — quái đầu tiên đã khóa sẵn cho bạn). Bước 2: GÕ đúng từ trên thẻ của quái để tung chiêu. Đúng hệ khắc quái gây sát thương tối đa. Quái ải 1 đi chậm và không bắn trong 30 giây đầu — cứ bình tĩnh gõ!";
 
   function esc(s) { return G71.escHtml(s); }
   function toastSafe(msg) { try { if (typeof toast === "function") toast(msg); } catch (e) {} }
@@ -1062,8 +1503,7 @@
     run = null;
     mode = "map";
     curRegion = Math.min(RL.region, 5);
-    var stg = G71.openStage("🔥 Rồng Lửa — 5 Vùng",
-      "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái; chạm quái để khóa, gõ đúng từ để tung chiêu. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng hoặc đạn trúng rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu. 5 vùng × 10 ải, trùm mỗi vùng đổi hệ sau mỗi 1/3 máu — thắng trùm Núi Lửa mở Chế độ Vô Tận.",
+    var stg = G71.openStage("🔥 Rồng Lửa — 5 Vùng", HINT_DEFAULT,
       function () { teardown(); });
     stage = stg;
     buildControls(stg);
@@ -1088,7 +1528,7 @@
       battle.words.forEach(function (wd) { if (wd.status === "advancing" && (!low || wd.y > low.y)) low = wd; });
       act = low;
     }
-    var sig = (isTp ? "tp:" : "az:") + (act ? (act.type || act.w) : "") + "|" + (battle ? battle.resolved : 0);
+    var sig = (isTp ? "tp:" : "az:") + (act ? (act.type || act.w) : "") + (act && act.isPhrase ? ":ph" : "") + "|" + (battle ? battle.resolved : 0);
     if (sig === kbSigRl) return;
     kbSigRl = sig;
     ctrlBar.innerHTML = "";
@@ -1101,12 +1541,21 @@
       b.onclick = function () { feed(L); };
       ctrlBar.appendChild(b);
     });
+    /* Quái cụm từ: thêm phím cách (gõ liền các từ, dấu cách được bỏ qua). */
+    if (act && act.isPhrase) {
+      var sp = document.createElement("button");
+      sp.className = "btn";
+      sp.textContent = "␣ cách";
+      sp.style.cssText = "padding:6px 12px;min-width:56px;font-size:15px;";
+      sp.onclick = function () { feed(" "); };
+      ctrlBar.appendChild(sp);
+    }
   }
 
   function buildControls(stg) {
     elBar = document.createElement("div");
     elBar.id = "rlElBar";
-    elBar.style.cssText = "display:none;gap:8px;justify-content:center;align-items:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;flex-wrap:wrap;";
+    elBar.style.cssText = "display:none;gap:8px;justify-content:center;align-items:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;flex-wrap:wrap;flex:none;";
     ["fire", "water", "elec"].forEach(function (k, i) {
       var b = document.createElement("button");
       b.className = "btn";
@@ -1119,10 +1568,16 @@
     sh.id = "rlShieldTag";
     sh.style.cssText = "font-weight:700;";
     elBar.appendChild(sh);
+    var cp = document.createElement("span");
+    cp.id = "rlCompanionTag";
+    cp.style.cssText = "font-weight:700;";
+    elBar.appendChild(cp);
     stg.el.appendChild(elBar);
     ctrlBar = document.createElement("div");
     ctrlBar.id = "g71KbRl";
-    ctrlBar.style.cssText = "display:none;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;";
+    /* v99 B5: chừa khoảng an toàn dưới bàn phím (16px) + flex:none để bàn
+       phím luôn thấy trọn vẹn, không phải cuộn mới thấy hàng phím. */
+    ctrlBar.style.cssText = "display:none;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px 16px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;flex:none;";
     refreshKbRl();
     stg.el.appendChild(ctrlBar);
     if (stg.resize) stg.resize();
@@ -1170,6 +1625,8 @@
     html += '</div>'
       + '<h3 style="margin:8px 0 4px;">' + reg.icon + ' ' + reg.name + ' — Vùng ' + reg.id + ' · chủ đề ' + reg.theme + '</h3>'
       + '<p class="mut" style="margin:4px 0 12px;">' + reg.desc + ' Trùm vùng: <b>' + reg.boss + '</b> (ải 10, đổi hệ sau mỗi 1/3 máu).</p>';
+    var wth = weatherFor(curRegion);
+    if (wth) html += '<p style="margin:4px 0 12px;font-weight:700;">' + wth.icon + ' Thời tiết vùng: ' + wth.name + ' (' + wth.season + ') — chiêu hệ ' + ELEMENTS[wth.element].name + ' +50%.</p>';
     var note = regionPoolNote(curRegion);
     if (note) html += '<p class="mut" style="margin:4px 0 12px;">⚠️ ' + note + '</p>';
     html += '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0;">';
@@ -1189,11 +1646,29 @@
         + '<p class="mut" style="margin:4px 0;">Đã thắng trùm Núi Lửa! Quái kéo tới từng đợt, càng về sau càng đông và càng nhanh. Kỷ lục của bạn: <b>' + (RL.endlessBest || 0) + ' đợt</b>.</p>'
         + '<div class="row"><button class="btn btn-primary" id="rlEndlessBtn">Chơi Vô Tận</button></div></section>';
     }
+    /* v99: ải giải cứu từ quá hạn SRS + mục bạn đồng hành. */
+    var kids = [];
+    try { kids = findKidnapped(); } catch (e) {}
+    if (kids.length) {
+      html += '<section class="card" style="margin:0 0 12px;border:2px solid #B45309;"><h3 style="margin:0 0 4px;">🆘 Giải cứu từ bị bắt cóc — ' + kids.length + ' từ quá hạn</h3>'
+        + '<p class="mut" style="margin:4px 0;">Những từ này đã quá hạn ôn theo lịch SRS (1-3-7-14-30) nên bị quái bắt cóc. Thắng ải giải cứu để lấy lại từ — mỗi từ được ôn lại một nấc, không mất dữ liệu ôn tập, không trừ điểm học.</p>'
+        + '<div class="row"><button class="btn btn-primary" id="rlRescueBtn">Giải cứu ngay</button></div></section>';
+    }
+    var comps = [];
+    try { comps = unlockedCompanions(RL); } catch (e) {}
+    html += '<section class="card" style="margin:0 0 12px;"><h3 style="margin:0 0 4px;">🐾 Bạn đồng hành</h3>'
+      + '<p class="mut" style="margin:4px 0;">Mở khóa bằng cách thắng trùm vùng — bạn đồng hành hỗ trợ ngay trong trận.</p>'
+      + COMPANIONS.map(function (c) {
+          var has = comps.indexOf(c.id) >= 0;
+          return '<p style="margin:4px 0;">' + (has ? '✅ ' : '🔒 ') + c.icon + ' <b>' + c.name + '</b> — ' + c.effect + ' <span class="mut">(' + c.unlock + ')</span></p>';
+        }).join("") + '</section>';
     html += '<div class="row" style="flex-wrap:wrap;">'
       + '<button class="btn" id="rlDictBtn">📖 Từ Điển Rồng (' + dictCount + ' từ)</button>'
       + '<button class="btn" id="rlBackBtn">← Về khu Trò chơi</button></div>';
     box.innerHTML = html;
-    stage.el.appendChild(box);
+    /* v99 B2: overlay nằm trong khung canvas (stage.wrap), không phủ thanh
+       tiêu đề — nút "?" hướng dẫn và "✕ Thoát" luôn bấm được. */
+    stage.wrap.appendChild(box);
     overlayBox = box;
     box.querySelectorAll("[data-rl-region-tab]").forEach(function (b) {
       b.onclick = function () {
@@ -1209,6 +1684,8 @@
     });
     var eb = box.querySelector("#rlEndlessBtn");
     if (eb) eb.onclick = startEndless;
+    var rb = box.querySelector("#rlRescueBtn");
+    if (rb) rb.onclick = startRescue;
     box.querySelector("#rlDictBtn").onclick = showDict;
     box.querySelector("#rlBackBtn").onclick = function () { stage.close(); };
   }
@@ -1236,7 +1713,7 @@
     }
     html += '<div class="row" style="margin-top:14px;"><button class="btn btn-primary" id="rlDictBack">← Về bản đồ</button></div>';
     box.innerHTML = html;
-    stage.el.appendChild(box);
+    stage.wrap.appendChild(box);
     overlayBox = box;
     box.querySelector("#rlDictBack").onclick = showMap;
   }
@@ -1246,24 +1723,28 @@
     startBattle();
   }
 
-  function startBattle() {
+  /* Ghép cụm từ/câu cho quái cuối trận (v99 A5): từ ải 2 trở đi, trận 2–3
+     có một quái cụm từ — gõ từng từ trong cụm thật (col/ex của thẻ) để
+     tung chiêu combo (từ cuối cụm ×3). Trận trùm và ải 1 không có. */
+  function applyPhraseMonster(words) {
+    if (!words || !words.length) return;
+    var lastW = words[words.length - 1];
+    if (!lastW || lastW.isBoss) return;
+    var pool = null;
+    try { pool = G71.pool(); } catch (e) { pool = null; }
+    var ph = null;
+    try { ph = LOGIC.phraseFor(lastW, pool); } catch (e) { ph = null; }
+    if (!ph) return;
+    lastW.headType = lastW.type || lastW.w;
+    lastW.phrase = ph;
+    lastW.type = ph.parts.map(function (p) { return p.type; }).join("");
+  }
+  /* Mở trận: phần chung của startBattle/startEndlessWave/startRescue. */
+  function setupBattle(words, opts) {
     mode = "battle";
     clearOverlays();
     hudSig = "";
-    var rg = run.region, lv = run.level, b = run.battle;
-    var isBoss = (lv === 10 && b === 3);
-    var words;
-    if (isBoss) {
-      var boss = pickBossWord(run.used, rg);
-      var mins = pickRegionWords(rg, 2, run.used);
-      words = [boss].concat(mins);
-    } else {
-      words = pickRegionWords(rg, LOGIC.battleSize(lv, b), run.used);
-    }
-    battle = LOGIC.createBattle(words, {
-      level: lv, battle: b, boss: isBoss, region: rg,
-      hearts: run.hearts, shield: run.shield, element: curElement
-    });
+    battle = LOGIC.createBattle(words, opts);
     bolts = []; parts = []; floats = [];
     if (elBar) elBar.style.display = "flex";
     if (ctrlBar) ctrlBar.style.display = "flex";
@@ -1276,6 +1757,37 @@
     stage.canvas.addEventListener("pointermove", onCanvasDrag);
     last = performance.now();
     requestAnimationFrame(frame);
+  }
+  /* Tự động khóa quái thấp nhất (gần rồng nhất) khi vào trận — dùng cho
+     ải 1 (người mới chưa biết phải chạm quái trước khi gõ) và ải giải cứu. */
+  function autoLockLowest() {
+    if (!battle) return;
+    var lowIdx = -1;
+    battle.words.forEach(function (wd, i) {
+      if (wd.status === "advancing" && (lowIdx < 0 || wd.y > battle.words[lowIdx].y)) lowIdx = i;
+    });
+    if (lowIdx >= 0) LOGIC.lockMonster(battle, lowIdx);
+  }
+
+  function startBattle() {
+    var rg = run.region, lv = run.level, b = run.battle;
+    var isBoss = (lv === 10 && b === 3);
+    var words;
+    if (isBoss) {
+      var boss = pickBossWord(run.used, rg);
+      var mins = pickRegionWords(rg, 2, run.used);
+      words = [boss].concat(mins);
+    } else {
+      words = pickRegionWords(rg, LOGIC.battleSize(lv, b), run.used);
+      if (lv >= 2 && b >= 2) applyPhraseMonster(words);
+    }
+    setupBattle(words, {
+      level: lv, battle: b, boss: isBoss, region: rg,
+      hearts: run.hearts, shield: run.shield, element: curElement
+    });
+    /* v99 B4: ải 1 — gợi ý rõ từng bước + khóa sẵn quái đầu tiên. */
+    if (stage && stage.hint) stage.hint.textContent = (lv === 1) ? HINT_STAGE1 : HINT_DEFAULT;
+    if (lv === 1) autoLockLowest();
   }
 
   /* Chế độ Vô Tận (v98): mở sau khi thắng trùm Núi Lửa. Quái kéo tới
@@ -1287,28 +1799,36 @@
     startEndlessWave();
   }
   function startEndlessWave() {
-    mode = "battle";
-    clearOverlays();
-    hudSig = "";
     run.battle = run.wave;
     var n = Math.min(4 + run.wave, 12);
     var words = pickRegionWords(5, n, run.used);
-    battle = LOGIC.createBattle(words, {
+    if (run.wave >= 2) applyPhraseMonster(words);
+    setupBattle(words, {
       level: Math.min(10, 2 + run.wave), battle: run.wave, boss: false, region: 5,
       hearts: run.hearts, shield: run.shield, element: curElement
     });
-    bolts = []; parts = []; floats = [];
-    if (elBar) elBar.style.display = "flex";
-    if (ctrlBar) ctrlBar.style.display = "flex";
-    setElement(battle.element);
-    hud();
-    if (stage.resize) stage.resize();
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("keyup", onKeyUp);
-    stage.canvas.addEventListener("click", onCanvasClick);
-    stage.canvas.addEventListener("pointermove", onCanvasDrag);
-    last = performance.now();
-    requestAnimationFrame(frame);
+  }
+
+  /* Ải giải cứu từ bị bắt cóc (v99 A4): quái mang đúng các từ quá hạn SRS
+     của track đang học. Thắng thì mỗi từ được ôn lại một nấc đúng luật
+     SRS; thua thì từ vẫn quá hạn, không mất dữ liệu. Trận giải cứu nhẹ
+     nhàng (quái không bắn 30 giây đầu) vì đây là buổi ôn, không phải thử thách. */
+  function startRescue() {
+    var kids = [];
+    try { kids = findKidnapped(); } catch (e) {}
+    if (!kids.length) { toastSafe("Không còn từ nào bị bắt cóc — ôn đúng hạn nhé!"); showMap(); return; }
+    var words = kids.filter(function (k) {
+      try { return G71.isTypeable(k); } catch (e) { return true; }
+    });
+    if (!words.length) { toastSafe("Các từ quá hạn không gõ được trong game — ôn lại ở tab Ôn tập nhé."); showMap(); return; }
+    run = { region: curRegion, level: 0, battle: 1, hearts: 5, shield: RL.shield || 0,
+      used: {}, rescue: true, rescueWords: words };
+    setupBattle(words, {
+      level: 1, battle: 1, boss: false, region: curRegion, gentle: true,
+      hearts: 5, shield: 0, element: curElement
+    });
+    if (stage && stage.hint) stage.hint.textContent = "🆘 Ải giải cứu: các từ quá hạn ôn bị quái bắt cóc! Gõ đúng từ trên thẻ quái để cứu từ — thắng thì mỗi từ được ôn lại một nấc theo lịch SRS.";
+    autoLockLowest();
   }
 
   function endBattle() {
@@ -1331,9 +1851,26 @@
 
   function onBattleWin() {
     xpSafe(BATTLE_XP);
+    /* v99 A4: thắng ải giải cứu — mỗi từ được ôn lại một nấc đúng luật SRS. */
+    if (run.rescue) {
+      var saved = 0;
+      (run.rescueWords || []).forEach(function (it) { if (reviewKidnapped(it)) saved++; });
+      saveRL(RL);
+      G71.endScreen(stage, true, "🎉 Đã cứu " + saved + " từ!",
+        ["Các từ bị quái bắt cóc đã trở về — mỗi từ được ôn lại một nấc theo lịch SRS (1-3-7-14-30).",
+          "Vàng: " + RL.gold + " · Từ điển: " + Object.keys(RL.dict).length + " từ · XP đã cộng vào tiến trình."],
+        function () { start(); });
+      return;
+    }
     if (run.endless) {
       /* Vô Tận: qua một đợt, kỷ lục = đợt cao nhất, tim mang theo. */
       RL.endlessBest = Math.max(RL.endlessBest || 0, run.wave);
+      var healE = 0;
+      try { healE = companionHeal(unlockedCompanions(RL)); } catch (e) {}
+      if (healE > 0 && run.hearts < 5) {
+        run.hearts = Math.min(5, run.hearts + healE);
+        toastSafe("🐢 Rùa Nước hồi " + healE + " tim cho rồng!");
+      }
       saveRL(RL);
       run.wave++;
       toastSafe("Qua đợt " + (run.wave - 1) + "! Đợt " + run.wave + " đang tới — đông hơn, nhanh hơn.");
@@ -1364,10 +1901,23 @@
       var prog = regionProg(RL, run.region);
       prog.cleared[String(run.level)] = true;
       prog.unlocked = Math.max(prog.unlocked, Math.min(10, run.level + 1));
+      /* v99 A3: bạn đồng hành Rùa Nước hồi 1 tim sau mỗi trận thắng. */
+      var heal = 0;
+      try { heal = companionHeal(unlockedCompanions(RL)); } catch (e) {}
+      if (heal > 0 && run.hearts < 5) {
+        run.hearts = Math.min(5, run.hearts + heal);
+        toastSafe("🐢 Rùa Nước hồi " + heal + " tim cho rồng!");
+      }
       saveRL(RL);
       toastSafe("Qua ải " + run.level + " vùng " + regionById(run.region).name + "! Đã mở ải " + prog.unlocked + ".");
       showMap();
       return;
+    }
+    var healS = 0;
+    try { healS = companionHeal(unlockedCompanions(RL)); } catch (e) {}
+    if (healS > 0 && run.hearts < 5) {
+      run.hearts = Math.min(5, run.hearts + healS);
+      toastSafe("🐢 Rùa Nước hồi " + healS + " tim cho rồng!");
     }
     showShop();
   }
@@ -1376,7 +1926,9 @@
     clearOverlays();
     var box = document.createElement("div");
     box.id = "rlLose";
-    box.style.cssText = "position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:rgba(255,247,232,.93);padding:16px;";
+    /* v99 B3: nền mờ tối để trận đấu còn thấy mờ phía sau hộp thoại
+       (trước đây là kem gần như đục nên trông như trang trắng). */
+    box.style.cssText = "position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:rgba(4,6,15,.55);padding:16px;";
     var title = "Hết tim rồi!";
     var line1, line2, retryLabel;
     if (run.endless) {
@@ -1384,6 +1936,11 @@
       line1 = "Kỷ lục của bạn: " + (RL.endlessBest || 0) + " đợt.";
       line2 = "Cấp, vàng và từ đã thu vẫn giữ nguyên — chơi lại từ đợt 1 nhé.";
       retryLabel = "Chơi lại Vô Tận";
+    } else if (run.rescue) {
+      title = "Quái giữ từ rồi!";
+      line1 = "Rồng đã gục trong ải giải cứu — các từ quá hạn vẫn bị quái giữ.";
+      line2 = "Không mất dữ liệu ôn tập, không trừ điểm học — chơi lại ải giải cứu nhé.";
+      retryLabel = "Giải cứu lại";
     } else {
       line1 = "Rồng đã gục ở vùng " + regionById(run.region).name + " — ải " + run.level + " trận " + run.battle + ".";
       line2 = "Cấp, vàng và từ đã thu vẫn giữ nguyên — chơi lại ải nhé.";
@@ -1395,10 +1952,11 @@
       + '<p style="margin:6px 0;">' + line2 + '</p>'
       + '<div class="row" style="justify-content:center;"><button class="btn btn-primary" id="rlRetry">' + retryLabel + '</button>'
       + '<button class="btn" id="rlLoseMap">Về bản đồ</button></div></div>';
-    stage.el.appendChild(box);
+    stage.wrap.appendChild(box);
     overlayBox = box;
     box.querySelector("#rlRetry").onclick = function () {
       if (run.endless) startEndless();
+      else if (run.rescue) startRescue();
       else { run.battle = 1; run.hearts = 5; startBattle(); }
     };
     box.querySelector("#rlLoseMap").onclick = showMap;
@@ -1420,7 +1978,7 @@
       + '</div>'
       + '<div class="row" style="margin-top:14px;"><button class="btn btn-primary" id="rlNextBattle">Trận tiếp theo →</button><button class="btn" id="rlShopMap">Về bản đồ</button></div>';
     box.innerHTML = html;
-    stage.el.appendChild(box);
+    stage.wrap.appendChild(box);
     overlayBox = box;
     box.querySelector("#rlBuyPotion").onclick = function () {
       if (RL.gold < POTION_COST || run.hearts >= 5) return;
@@ -1439,22 +1997,38 @@
     /* HUD được phép xuống 2 dòng khi hẹp (sửa xấu 18:11: chữ hệ "⚡ Điện"
        ở góc phải từng bị cắt mất nửa ở mép màn hình). */
     if (stage.hud) { stage.hud.style.flexWrap = "wrap"; stage.hud.style.whiteSpace = "normal"; }
+    var compsHud = [];
+    try { compsHud = unlockedCompanions(RL); } catch (e) {}
     var sig = [(run && run.region) || 0, run ? run.level : 0, battle.battle, battle.hearts, battle.shield,
-      RL.gold, battle.combo, battle.element, battle.total - battle.resolved, run && run.endless ? run.wave : 0].join("|");
+      RL.gold, battle.combo, battle.element, battle.total - battle.resolved, run && run.endless ? run.wave : 0,
+      compsHud.join(","), run && run.rescue ? 1 : 0].join("|");
     if (sig === hudSig) return;
     hudSig = sig;
     var el = ELEMENTS[battle.element];
-    var stageLabel = (run && run.endless)
+    var wthHud = weatherFor((run && run.region) || battle.region || 1);
+    var stageLabel = (run && run.rescue)
+      ? "🆘 Giải cứu từ"
+      : (run && run.endless)
       ? "Vô Tận · Đợt " + run.wave
       : "V" + (run.region || 1) + " · Ải " + run.level + "-" + battle.battle;
     stage.hud.innerHTML = "<span style=\"flex:none\">" + stageLabel + "</span>"
       + "<span style=\"flex:none\">" + heartsSvg(battle.hearts, 5) + "</span>"
       + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">" + rlImgTag("coin", 16) + " Vàng: " + RL.gold
       + " · Combo x" + Math.min(3, 1 + battle.combo)
-      + " · Quái còn: " + (battle.total - battle.resolved) + "</span>"
+      + " · Quái còn: " + (battle.total - battle.resolved)
+      + (wthHud ? " · " + wthHud.icon + " " + wthHud.name + ": " + ELEMENTS[wthHud.element].name + " +50%" : "")
+      + "</span>"
       + "<span style=\"flex:none\">" + el.icon + " " + el.name + "</span>";
     var tag = document.getElementById("rlShieldTag");
     if (tag) tag.innerHTML = battle.shield > 0 ? rlImgTag("shield", 18) + " x" + battle.shield : "";
+    var ctag = document.getElementById("rlCompanionTag");
+    if (ctag) {
+      var chips = [];
+      compsHud.forEach(function (id) {
+        COMPANIONS.forEach(function (c) { if (c.id === id) chips.push(c.icon + " " + c.name); });
+      });
+      ctag.textContent = chips.length ? "🐾 " + chips.join(" · ") : "";
+    }
   }
 
   function burst(x, y, el) {
@@ -1465,11 +2039,16 @@
 
   function feed(ch) {
     if (mode !== "battle" || !battle || battle.over) return;
-    var r = LOGIC.typeLetter(battle, ch, Date.now(), battle.element, dictLevel);
+    var comps = [];
+    try { comps = unlockedCompanions(RL); } catch (e) {}
+    var r = LOGIC.typeLetter(battle, ch, Date.now(), battle.element, dictLevel, comps);
     if (r.ok && r.completed) {
       bolts.push({ x0: battle.dragon.x, y0: Math.max(0.05, battle.dragon.y - 0.06), x1: r.monster.x, y1: r.monster.y, el: battle.element,
         t: 0, ttl: 0.22, dmg: r.dmg, done: false });
       if (r.bossPhase) toastSafe("Trùm đổi hệ! Giờ trùm yếu hệ " + ELEMENTS[r.bossPhase.weak].name + ".");
+      if (r.groupHit) floats.push({ x: r.monster.x, y: Math.max(0.08, r.monster.y - 0.1), text: "Điểm yếu nhóm từ! ×2", ttl: 1.2, el: battle.element });
+      if (r.comboPart) floats.push({ x: r.monster.x, y: Math.max(0.08, r.monster.y - 0.16), text: "COMBO CỤM TỪ ×3!", ttl: 1.2, el: battle.element });
+      if (r.weatherBoost) floats.push({ x: r.monster.x, y: Math.max(0.08, r.monster.y - 0.22), text: "Thời tiết +50%!", ttl: 1.2, el: battle.element });
     }
     hud();
     maybeEnd();
@@ -1485,6 +2064,7 @@
       setElement(EL_ORDER[parseInt(e.key, 10) - 1]);
       return;
     }
+    if (e.key === " ") { feed(" "); return; }
     var isTpKey = false;
     try { isTpKey = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
     if (e.key && e.key.length === 1 && (isTpKey || /[a-zA-Z]/.test(e.key))) feed(e.key);
@@ -1552,7 +2132,11 @@
     var W = cv.width, H = cv.height;
     if (!W || !H) { requestAnimationFrame(frame); return; }
     ctx.clearRect(0, 0, W, H);
-    paintRegion(ctx, W, H, now, (run && run.region) || (battle && battle.region) || 1);
+    var paintReg = (run && run.region) || (battle && battle.region) || 1;
+    paintRegion(ctx, W, H, now, paintReg);
+    paintWeather(ctx, W, H, now, paintReg);
+    /* Xếp thẻ từ trước khi vẽ quái để thẻ không chồng nhau (v99 B1). */
+    try { layoutPills(ctx, battle.words, W, H); } catch (e) {}
     battle.words.forEach(function (m, i) {
       if (m.status !== "advancing") return;
       var py = m.y * H;
@@ -1613,8 +2197,12 @@
   }
 
   window.G71RongLua = {
-    start: start, startEndless: startEndless, logic: LOGIC, elements: ELEMENTS, heartsSvg: heartsSvg,
-    art: { ready: rlReady, base: RL_ART, files: RL_IMGS },
+    start: start, startEndless: startEndless, startRescue: startRescue,
+    logic: LOGIC, elements: ELEMENTS, heartsSvg: heartsSvg,
+    companions: COMPANIONS, unlockedCompanions: unlockedCompanions,
+    findKidnapped: findKidnapped, reviewKidnapped: reviewKidnapped,
+    art: { ready: rlReady, base: RL_ART, files: RL_IMGS, paint: paintRegion, paintWeather: paintWeather,
+      drawMonster: drawMonster, drawDragonUp: drawDragonUp },
     store: { load: loadRL, save: saveRL, fresh: freshRL },
     regions: REGIONS, regionById: regionById,
     /* Mỏ neo cho probe: đọc trạng thái chơi hiện tại (chế độ, trận, lượt chạy, tiến trình). */
