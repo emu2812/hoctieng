@@ -7615,7 +7615,8 @@ function listenLongTheoryHTML(r) {
       + (g.trap ? '<details class="why-more"><summary>Xem thêm: bẫy thường gặp</summary><p>' + esc(g.trap) + '</p></details>' : '') + '</div>';
   }).join("");
   var li = CONTENT.listeningPlus.indexOf(r);
-  return '<div class="qblock"><p>Nghe lấy ý chính trước, rồi mới nghe bắt chi tiết. Transcript chỉ mở để đối chiếu sau khi làm xong.</p>' + body + videoSlotIf("listenLong:MC") + (li === 16 ? videoSlotIf("listenLong:16") : "") + (li === 15 ? videoSlotIf("listenLong:map1") + videoSlotIf("listenLong:map2") : "") + videoSlotIf("listenLongEp:" + li) + '</div>';
+  var hasRealVideo108 = ["listenLong:MC", "listenLong:16", "listenLong:map1", "listenLong:map2", "listenLongEp:" + li].some(function (k) { return typeof GRAMMAR_VIDEOS !== "undefined" && GRAMMAR_VIDEOS[k]; });
+  return '<div class="qblock"><p>Nghe lấy ý chính trước, rồi mới nghe bắt chi tiết. Transcript chỉ mở để đối chiếu sau khi làm xong.</p>' + body + videoSlotIf("listenLong:MC") + (li === 16 ? videoSlotIf("listenLong:16") : "") + (li === 15 ? videoSlotIf("listenLong:map1") + videoSlotIf("listenLong:map2") : "") + videoSlotIf("listenLongEp:" + li) + (hasRealVideo108 ? '<p class="mut">🎬 Video trên có giọng người thật — nghe giọng thật ở video; nút 🔊 Nghe trong bài dùng giọng trình duyệt.</p>' : '') + '</div>';
 }
 function speakTheoryHTML(s) {
   var f = RB_SPEAK_PART_FRAME[s.partNum] || RB_SPEAK_PART_FRAME[1];
@@ -10603,20 +10604,23 @@ function renderSkillListen(app, l) {
   l.sub = (item.fast ? "Nghe nhanh (tốc độ thật) · " : "") + item.section + " · Nghe một câu rồi chọn đúng câu vừa nghe trong 3 câu";
   if (!l.theoryDone) {
     app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + listenShortTheoryHTML() + (item.fast ? '<div class="qblock"><p><b>Nghe nhanh:</b> ' + esc(item.note) + '</p><p class="mut">Bài nghe nhanh đọc bằng giọng trình duyệt ở tốc độ hơi nhanh (1.15) — phần dạy “nói nhanh nghe như...” nằm ở ghi chú trên, vì giọng máy không nói nhanh như người thật.</p></div>' : '')
+      + listenMethodsHTML108(l, false)
       + '<div class="qblock"><button class="btn btn-primary" id="lisTheoryGo">Vào luyện tập →</button></div>';
     wireBack();
+    wireListenMethods108(app, l, false);
     $("#lisTheoryGo").onclick = function () { l.theoryDone = true; l.listened = false; render(); };
     return;
   }
   if (!l.quiz) {
     app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + gd23ListenFrameHTML(l) + '<div class="qblock">' + (item.fast ? '<p><b>Nghe nhanh:</b> ' + esc(item.note) + '</p>' : '') + '<p>Bấm 🔊 Nghe để nghe câu, nghe kỹ rồi bấm "Chọn câu đã nghe" để làm bài.</p>'
       + '<div class="row"><button class="btn" id="lisPlay">🔊 Nghe câu</button><button class="btn btn-primary" id="lisStart"' + (l.listened ? "" : " disabled") + '>Chọn câu đã nghe</button></div>'
-      + '<p class="mut">3 lựa chọn gồm câu đúng và 2 câu khác cùng Section — đều lấy từ kho câu nghe của web, không bịa thêm.</p>' + shadowEntryHTML() + '</div>';
+      + '<p class="mut">3 lựa chọn gồm câu đúng và 2 câu khác cùng Section — đều lấy từ kho câu nghe của web, không bịa thêm.</p>' + listenVoiceNoteHTML() + shadowEntryHTML(l, false) + '</div>' + listenMethodsHTML108(l, false);
     wireBack();
     $("#lisPlay").onclick = function () { speak(item.text, item.fast ? 1.15 : undefined); l.listened = true; var st = $("#lisStart"); if (st) st.disabled = false; };
     gd23ListenWire(l);
     $("#lisStart").onclick = function () { if (!l.listened) { toast("Hãy bấm 🔊 Nghe trước đã."); return; } l.quiz = true; l.listenStep = 3; lessonStart = Date.now(); runWrong = []; runFirstTry = {}; render(); };
     shadowWireEntry(l);
+    wireListenMethods108(app, l, false);
     return;
   }
   var same = [];
@@ -10627,7 +10631,7 @@ function renderSkillListen(app, l) {
   var pos = opts.length ? (l.idx % opts.length) : 0;
   var ordered = opts.slice(); ordered.splice(0, 1); ordered.splice(pos, 0, item.text);
   var q = { q: "Nghe kỹ rồi chọn đúng câu bạn vừa nghe trong 3 câu dưới đây.", o: ordered, a: pos, why: "Câu đúng thuộc chủ đề " + item.topic + " (" + item.section + ")." };
-  app.innerHTML = gd23ListenFrameHTML(l) + '<div class="row" style="margin-bottom:10px"><button class="btn btn-primary" id="lisAgain">🔊 Nghe lại câu</button></div><div id="quizSlot"></div>';
+  app.innerHTML = gd23ListenFrameHTML(l) + '<div class="row" style="margin-bottom:10px"><button class="btn btn-primary" id="lisAgain">🔊 Nghe lại câu</button></div>' + listenVoiceNoteHTML() + '<div id="quizSlot"></div>';
   $("#lisAgain").onclick = function () { speak(item.text, item.fast ? 1.15 : undefined); };
   gd23ListenWire(l);
   renderQuizEngine($("#quizSlot"), l, [q], "skill", "listen:" + l.idx, 2);
@@ -10640,24 +10644,26 @@ function renderSkillListenLong(app, l) {
   var tfN = (r.questions || []).filter(function (q) { return q.type === "TF"; }).length;
   l.sub = r.section + (r.band ? " · " + r.band : "") + " · " + r.questions.length + " câu hỏi hiểu nội dung" + (tfN ? " · có " + tfN + " câu đúng/sai (dạng luyện thêm — đề thi Listening chính thức không có dạng đúng/sai)" : "");
   if (!l.theoryDone) {
-    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + listenLongTheoryHTML(r)
+    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + listenLongTheoryHTML(r) + listenMethodsHTML108(l, true)
       + '<div class="qblock"><button class="btn btn-primary" id="lpTheoryGo">Vào luyện tập →</button></div>';
     wireBack();
+    wireListenMethods108(app, l, true);
     $("#lpTheoryGo").onclick = function () { l.theoryDone = true; l.listened = false; render(); };
     return;
   }
   if (!l.quiz) {
     app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + gd23ListenFrameHTML(l) + '<div class="qblock"><p>Bấm 🔊 Nghe toàn bài, nghe kỹ rồi bấm "Làm bài". Transcript để đối chiếu sau khi làm xong, không mở trước khi nghe.</p>'
-      + '<div class="row"><button class="btn" id="lpPlay">🔊 Nghe toàn bài</button><button class="btn btn-primary" id="lpStart"' + (l.listened ? "" : " disabled") + '>Làm bài (' + r.questions.length + ' câu)</button></div>' + shadowEntryHTML() + '</div>';
+      + listenVoiceNoteHTML()
+      + '<div class="row"><button class="btn" id="lpPlay">🔊 Nghe toàn bài</button><button class="btn btn-primary" id="lpStart"' + (l.listened ? "" : " disabled") + '>Làm bài (' + r.questions.length + ' câu)</button></div>' + shadowEntryHTML(l, true) + '</div>' + listenMethodsHTML108(l, true);
     wireBack();
     $("#lpPlay").onclick = function () { speak(r.text); l.listened = true; var st = $("#lpStart"); if (st) st.disabled = false; };
     gd23ListenWire(l);
     $("#lpStart").onclick = function () { if (!l.listened) { toast("Hãy bấm 🔊 Nghe trước đã."); return; } l.quiz = true; l.listenStep = 3; lessonStart = Date.now(); runWrong = []; runFirstTry = {}; render(); };
     shadowWireEntry(l);
+    wireListenMethods108(app, l, true);
     return;
   }
-  app.innerHTML = gd23ListenFrameHTML(l) + '<div class="row" style="margin-bottom:10px"><button class="btn btn-primary" id="lpAgain">🔊 Nghe lại toàn bài</button></div>'
-    + '<details style="margin-bottom:10px"><summary><b>Transcript (mở để đối chiếu sau khi nghe)</b></summary><div class="qblock">' + paraHTML(r.text) + '</div></details><div id="quizSlot"></div>';
+  app.innerHTML = gd23ListenFrameHTML(l) + '<div class="row" style="margin-bottom:10px"><button class="btn btn-primary" id="lpAgain">🔊 Nghe lại toàn bài</button></div>' + listenVoiceNoteHTML()    + '<details style="margin-bottom:10px"><summary><b>Transcript (mở để đối chiếu sau khi nghe)</b></summary><div class="qblock">' + paraHTML(r.text) + '</div></details><div id="quizSlot"></div>';
   $("#lpAgain").onclick = function () { speak(r.text); };
   gd23ListenWire(l);
   renderQuizEngine($("#quizSlot"), l, r.questions, "skill", "listenLong:" + l.idx, 2);
@@ -10789,9 +10795,10 @@ function renderDictation(app, l) {
       + '<div class="qblock"><p>' + skillIconSpan("listen") + '<b>Cách học:</b> bài này chia thành ' + total + ' câu. Mỗi câu: bấm 🔊 Nghe câu rồi gõ lại đúng chính tả vào ô bên dưới.</p>'
       + '<p><b>3 mức che từ</b> ở bản chép gợi ý: Dễ che ít từ nhất, Vừa che một nửa, Khó che gần hết (chỉ chừa từ đầu câu). Đổi mức bất cứ lúc nào.</p>'
       + '<p><b>Gợi ý mở từng từ tính là lỗi:</b> bấm “💡 Gợi ý” để mở 1 từ thì câu đó bị trừ điểm và vào Sổ lỗi sai — chỉ bấm khi thật sự bí.</p>'
-      + '<p>Nghe lại thoải mái, chỉnh tốc độ 0,75 / 1 / 1,25, hoặc tích “Ẩn bản chép” để tăng khó. Câu sai vào Sổ lỗi sai để ôn lại đúng ngày.</p>'
-      + '<div class="row"><button class="btn btn-primary" id="dcTheoryGo">Vào nghe chép →</button></div></div>';
+      + '<p>Nghe lại thoải mái, chỉnh tốc độ 0,75 / 1 / 1,25, hoặc tích “Ẩn bản chép” để tăng khó. Câu sai vào Sổ lỗi sai để ôn lại đúng ngày.</p>' + listenVoiceNoteHTML()
+      + '<div class="row"><button class="btn btn-primary" id="dcTheoryGo">Vào nghe chép →</button></div></div>' + listenMethodsHTML108(l, true);
     wireBack();
+    wireListenMethods108(app, l, true);
     $("#dcTheoryGo").onclick = function () { l.theoryDone = true; l.si = 0; l.res = {}; l.score = 0; l.hints = 0; l.level = "medium"; l.hideScaffold = false; l.rate = 1; l.typed = {}; l.retrying = {}; l.retryOk = {}; l.retryFail = {}; lessonStart = Date.now(); render(); };
     return;
   }
@@ -10841,8 +10848,7 @@ function renderDictation(app, l) {
     + '<p>Mức che từ: ' + levelBtn("easy", "Dễ — che ít") + ' ' + levelBtn("medium", "Vừa — che nửa") + ' ' + levelBtn("hard", "Khó — che gần hết") + '</p>'
     + '<p><label><input type="checkbox" id="dcHide"' + (l.hideScaffold ? ' checked' : '') + '> Ẩn bản chép (chỉ nghe rồi gõ)</label> · Tốc độ: <select id="dcRate"><option value="0.75"' + (l.rate === 0.75 ? ' selected' : '') + '>0,75</option><option value="1"' + (l.rate !== 0.75 && l.rate !== 1.25 ? ' selected' : '') + '>1</option><option value="1.25"' + (l.rate === 1.25 ? ' selected' : '') + '>1,25</option></select></p>'
     + (l.hideScaffold ? '<p class="mut">Bản chép đang ẩn — nghe kỹ rồi gõ lại câu.</p>' : '<p>Bản chép gợi ý: <b>' + esc(scaffold) + '</b></p>')
-    + '<div class="row"><button class="btn" id="dcPlay">🔊 Nghe câu</button><button class="btn" id="dcHint">💡 Gợi ý: mở 1 từ</button></div>'
-    + resBlock
+    + '<div class="row"><button class="btn" id="dcPlay">🔊 Nghe câu</button><button class="btn" id="dcHint">💡 Gợi ý: mở 1 từ</button></div>' + listenVoiceNoteHTML()    + resBlock
     + '<p class="mut">Mở gợi ý tính là lỗi, trừ điểm câu này. Nghe lại không bị trừ điểm.</p></div>';
   wireBack();
   $$("[data-dclevel]").forEach(function (b) { b.onclick = function () { l.level = b.dataset.dclevel; render(); }; });
@@ -11045,17 +11051,322 @@ function dictationCardHTML() {
   return html + '</details>';
 }
 
+/* ================= v108: SHADOWING 10 BUOC + LICH SU RIENG + TU DANH GIA CO CAU TRUC =================
+   Bui lenh 19:22 06/11: Shadowing du 10 buoc, co luu lich su rieng + tu danh gia co cau truc.
+   Che do 10 buoc (shadowMode "steps") chay song song voi 2 che do Xem/Luyen co san — khong sua chung.
+   10 buoc: 1 Nghe toan bai → 2 Nghe tung cau (nhin chu) → 3 Nghe cham roi doc theo →
+   4 Nhai theo tung cau → 5 Nhai khong nhin chu → 6 Noi 2 cau → 7 Nhai nua bai →
+   8 Nhai ca bai → 9 Cham nhanh cau kho → 10 Tu danh gia + luu lich su.
+   Nguoi hoc bam chip buoc nao cung nhay toi duoc (chi nhac nhe thu tu hoc), khong khoa buoc.
+   Lich su luu trong state.shadowLog (localStorage, toi da 50 muc) — xem o man tong ket buoc 10
+   va o khoi vao Shadowing cua bai Nghe. Cau "nhai duoc" vao SRS san co, cau "can luyen them"
+   vao So loi sai san co — khong tao he on moi. */
+var SHADOW_STEPS = [
+  { n: 1, t: "Nghe toàn bài", d: "Nghe một lượt lấy ý chính, chưa cần nhìn chữ." },
+  { n: 2, t: "Nghe từng câu, nhìn chữ", d: "Nghe mẫu từng câu, vừa nghe vừa nhìn chữ." },
+  { n: 3, t: "Nghe chậm rồi đọc theo", d: "Nghe câu mẫu tốc độ chậm (0,75), đọc theo ngay sau đó." },
+  { n: 4, t: "Nhại theo từng câu", d: "Ghi âm từng câu, nghe lại chính mình, tự đánh giá." },
+  { n: 5, t: "Nhại không nhìn chữ", d: "Chỉ nghe rồi nhại, chữ đã che — bí quá mới bấm hiện câu." },
+  { n: 6, t: "Nối 2 câu", d: "Nhại 2 câu liền một mạch, giữ nhịp nối câu." },
+  { n: 7, t: "Nhại nửa bài", d: "Nhại liền một nửa bài, không dừng giữa chừng." },
+  { n: 8, t: "Nhại cả bài", d: "Nhại liền cả bài một mạch, như đang nói thật." },
+  { n: 9, t: "Chấm nhanh câu khó", d: "Chọn câu còn yếu nhất, máy nghe thử rồi so với câu mẫu (chỉ là ước lượng)." },
+  { n: 10, t: "Tự đánh giá + lưu lịch sử", d: "Chấm mình theo 4 tiêu chí rồi lưu vào lịch sử Shadowing." }
+];
+var SHADOW_EVAL_CRITS = [
+  { k: "am", t: "Nghe rõ từng âm", d: "nghe rõ âm cuối, âm nối, từ khó" },
+  { k: "nhip", t: "Đúng nhịp và ngắt câu", d: "nhại đúng chỗ ngắt, không ngắt giữa cụm" },
+  { k: "dieu", t: "Đúng ngữ điệu", d: "lên giọng, xuống giọng giống câu mẫu" },
+  { k: "chay", t: "Trôi chảy", d: "nói liền mạch, không ngập ngừng quá lâu" }
+];
+function shadowStepDef(n) { return SHADOW_STEPS[n - 1] || SHADOW_STEPS[0]; }
+function shadowKey(l, isLong) { return (isLong ? "long:" : "short:") + l.idx; }
+function shadowUnitsFor(l, sents) {
+  var step = l.shadowStep || 1, out = [], i;
+  function rangeIdx(a, b) { var r = []; for (var k = a; k < b; k++) r.push(k); return r; }
+  if (step === 6) { for (i = 0; i < sents.length; i += 2) out.push({ sents: sents.slice(i, i + 2), idxs: [i, i + 1].filter(function (x) { return x < sents.length; }) }); }
+  else if (step === 7) { var mid = Math.max(1, Math.ceil(sents.length / 2)); out.push({ sents: sents.slice(0, mid), idxs: rangeIdx(0, mid) }); if (mid < sents.length) out.push({ sents: sents.slice(mid), idxs: rangeIdx(mid, sents.length) }); }
+  else if (step === 8) { out.push({ sents: sents.slice(), idxs: rangeIdx(0, sents.length) }); }
+  else { sents.forEach(function (x, j) { out.push({ sents: [x], idxs: [j] }); }); }
+  return out;
+}
+function shadowStepDone(l, n) {
+  if (!l.shadowStepsDone) l.shadowStepsDone = {};
+  l.shadowStepsDone[n] = true;
+  l.shadowStepIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; l.shadowSrText = "";
+  if (n >= 10) l.shadowStepsFinished = true; else l.shadowStep = n + 1;
+  render();
+}
+function shadowStepAdvanceUnit(l, ui, unitTotal, step) {
+  l.shadowTurn = "listen"; l.shadowRecUrl = "";
+  if (ui + 1 < unitTotal) { l.shadowStepIdx = ui + 1; render(); }
+  else shadowStepDone(l, step);
+}
+function shadowEvalLabel(v) { return v === 3 ? "Tốt" : v === 2 ? "Được" : v === 1 ? "Chưa được" : "chưa chấm"; }
+function shadowLogSave(l, item, isLong) {
+  if (!state.shadowLog) state.shadowLog = [];
+  var doneN = 0, k; for (k in (l.shadowStepsDone || {})) if (l.shadowStepsDone[k]) doneN++;
+  var entry = { at: todayStr(), key: shadowKey(l, isLong), topic: item.topic, steps: doneN, repeats: l.shadowRepeats || 0, eval: l.shadowEval || {}, note: String(l.shadowEvalNote || "").slice(0, 200) };
+  state.shadowLog.unshift(entry);
+  if (state.shadowLog.length > 50) state.shadowLog.length = 50;
+  saveState();
+  return entry;
+}
+function shadowLogFor(key) { return (state.shadowLog || []).filter(function (e) { return e.key === key; }); }
+function shadowLogHTML(key) {
+  var list = shadowLogFor(key).slice(0, 10);
+  if (!list.length) return '<p class="mut">Chưa có lần luyện Shadowing nào cho bài này — xong bước 10 và lưu lại thì lịch sử sẽ hiện ở đây.</p>';
+  return '<div class="qblock"><h3>📅 Lịch sử Shadowing — bài này</h3>' + list.map(function (e) {
+    var ev = SHADOW_EVAL_CRITS.map(function (c) { return c.t + ": " + shadowEvalLabel(e.eval && e.eval[c.k]); }).join(" · ");
+    return '<p>· <b>' + esc(e.at) + '</b> — ' + e.steps + '/10 bước · đã nhại ' + e.repeats + ' câu/lượt · ' + esc(ev) + (e.note ? '<br><span class="mut">Ghi chú: ' + esc(e.note) + '</span>' : '') + '</p>';
+  }).join("") + '</div>';
+}
+function shadowStepsBarHTML(l) {
+  var cur = l.shadowStep || 1;
+  return '<div class="qblock" id="shadowStepsBar"><p><b>Shadowing 10 bước</b> — bấm bước nào cũng nhảy tới được, nên học theo thứ tự từ 1 tới 10.</p><div class="row">'
+    + SHADOW_STEPS.map(function (x) {
+      var done = l.shadowStepsDone && l.shadowStepsDone[x.n];
+      return '<button class="btn' + (x.n === cur ? ' btn-primary' : '') + '" data-shstep="' + x.n + '">' + x.n + (done ? ' ✓' : '') + '</button>';
+    }).join(" ") + '</div><p><b>Bước ' + cur + '/10: ' + esc(shadowStepDef(cur).t) + '</b> — ' + esc(shadowStepDef(cur).d) + '</p></div>';
+}
+function shadowRecToggle(l) {
+  try {
+    if (l.shadowRecOn) { if (l.shadowRec) l.shadowRec.stop(); l.shadowRecOn = false; render(); return; }
+    if (!window.MediaRecorder) { toast("Trình duyệt này không hỗ trợ ghi âm — hãy mở bằng Chrome hoặc Edge."); return; }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      var mime = ""; ["audio/webm", "audio/mp4", "audio/ogg"].forEach(function (c) { if (!mime && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(c)) mime = c; });
+      var rec = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream);
+      var chunks = [];
+      rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+      rec.onstop = function () { try { stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {} try { l.shadowRecUrl = URL.createObjectURL(new Blob(chunks, { type: mime || "audio/webm" })); } catch (e) {} l.shadowRecOn = false; render(); };
+      l.shadowRec = rec; l.shadowChunks = chunks; l.shadowRecOn = true; rec.start(); render();
+    }, function () { toast("Không mở được mic — hãy cho phép quyền mic rồi thử lại."); });
+  } catch (e) { toast("Không mở được ghi âm trên máy này."); }
+}
+function shadowSrCheck(l, sent) {
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { l.shadowSrText = "Trình duyệt này không hỗ trợ nhận giọng nói — hãy mở bằng Chrome hoặc Edge, hoặc tự nghe lại bản ghi để đánh giá."; render(); return; }
+  try {
+    var r2 = new SR(); r2.lang = "en-GB"; r2.interimResults = false; r2.maxAlternatives = 1;
+    r2.onresult = function (ev) { var tx = ""; try { tx = ev.results[0][0].transcript || ""; } catch (e) {} l.shadowSrText = gameNormSent(tx) === gameNormSent(sent) ? "Máy nghe khớp câu mẫu (ước lượng): “" + tx + "” — tốt lắm, đây chỉ là so khớp đơn giản, không phải điểm chuẩn." : "Máy nghe được: “" + tx + "” — chưa khớp hẳn câu mẫu. Nghe lại bản ghi của bạn và tự đánh giá thêm."; render(); };
+    r2.onerror = function () { l.shadowSrText = "Không nghe được — hãy thử lại."; render(); };
+    r2.start();
+  } catch (e) { l.shadowSrText = "Không mở được nhận giọng nói trên máy này."; render(); }
+}
+function shadowStep1HTML(l, item, total) {
+  return '<div class="qblock"><p><b>Bước 1/10 — Nghe toàn bài:</b> nghe một lượt lấy ý chính, chưa cần nhìn chữ. Bài này có ' + total + ' câu.</p>'
+    + '<div class="row"><button class="btn" id="shStepPlayAll">🔊 Nghe toàn bài</button></div>'
+    + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shStepDone">Nghe xong, sang bước 2 →</button></div></div>';
+}
+function shadowStepUnitHTML(l, sents, unit, ui, unitTotal, step) {
+  var isPractice = step >= 4;
+  var maskText = step === 5 && !l.shadowShowText;
+  var text = unit.sents.join(" ");
+  var h = '<div class="qblock">';
+  h += '<p><b>Bước ' + step + '/10 — ' + esc(shadowStepDef(step).t) + ':</b> ' + esc(shadowStepDef(step).d) + '</p>';
+  h += '<p><b>' + (unit.sents.length > 1 ? 'Đoạn ' + (ui + 1) + '/' + unitTotal + ' (' + unit.sents.length + ' câu)' : 'Câu ' + (unit.idxs[0] + 1) + '/' + sents.length) + ':</b></p>';
+  if (!maskText) {
+    var words = text.split(" ");
+    h += '<p>' + words.map(function (w, i) { return '<button class="btn" data-sw="' + i + '">' + esc(w) + '</button>'; }).join(" ") + '</p>';
+    h += l.shadowWordIpa ? '<p id="shadowIpaLine"><b>' + esc(l.shadowWord) + '</b>: ' + esc(l.shadowWordIpa) + '</p>' : '<p class="mut" id="shadowIpaLine">Bấm một từ trong đoạn để xem phiên âm (từ nào chưa có trong kho phiên âm của web sẽ báo rõ).</p>';
+  } else {
+    h += '<p><b>• • • • •</b> <span class="mut">(câu đã che — nghe rồi nhại, bí quá mới hiện)</span></p><div class="row"><button class="btn" id="shStepShowText">👁 Hiện câu mẫu</button></div>';
+  }
+  h += '<div class="row" style="margin-top:8px"><button class="btn" id="shStepPlay">🔊 Nghe ' + (unit.sents.length > 1 ? 'đoạn mẫu' : 'câu mẫu') + (step === 3 ? ' (chậm 0,75)' : '') + '</button>';
+  if (!isPractice) {
+    if (ui > 0) h += '<button class="btn" id="shStepPrev">← Trước</button>';
+    if (ui + 1 < unitTotal) h += '<button class="btn btn-primary" id="shStepNext">' + (step === 3 ? 'Tôi đã đọc theo, sang câu tiếp →' : 'Câu tiếp theo →') + '</button>';
+    else h += '<button class="btn btn-primary" id="shStepDone">Xong bước ' + step + ' →</button>';
+  }
+  h += '</div>';
+  if (isPractice && l.shadowTurn === "user") {
+    h += '<div class="qblock"><p><b>Đến lượt bạn nhại lại.</b> Bấm Ghi âm rồi nói to, sau đó nghe lại chính mình để tự đánh giá.</p>'
+      + '<div class="row"><button class="btn" id="shStepRec">' + (l.shadowRecOn ? '⏹ Dừng ghi âm' : '🎤 Ghi âm nhại lại') + '</button>' + (l.shadowRecUrl ? '<button class="btn" id="shStepPlayBack">🔊 Nghe lại bản ghi của mình</button>' : '') + '</div>'
+      + (l.shadowRecUrl ? '<p><audio controls src="' + esc(l.shadowRecUrl) + '" style="width:100%"></audio></p>' : '')
+      + '<p id="shStepSrLine">' + esc(l.shadowSrText || 'Chấm nhanh bằng giọng nói (ước lượng): bấm nút dưới rồi đọc đoạn — máy chỉ so xem có khớp câu mẫu không.') + '</p>'
+      + '<div class="row"><button class="btn" id="shStepSrBtn">🎙️ Chấm nhanh bằng giọng nói (ước lượng)</button></div>'
+      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shStepGood">Tôi nhại được ✓</button><button class="btn" id="shStepWeak">Cần luyện thêm</button></div></div>';
+  } else if (isPractice) {
+    h += '<p class="mut">Chế độ nhại: bấm Nghe — máy sẽ tự dừng sau đoạn này rồi chờ bạn nhại lại.</p>';
+  }
+  h += '</div>';
+  return h;
+}
+function shadowStep9HTML(l, sents) {
+  var weak = (l.shadowWeak || []).filter(function (i) { return i < sents.length; });
+  var h = '<div class="qblock"><p><b>Bước 9/10 — Chấm nhanh câu khó:</b> chọn câu còn yếu nhất, máy nghe thử rồi so với câu mẫu (chỉ là ước lượng, không phải điểm chuẩn).</p>';
+  if (weak.length) {
+    h += '<p><b>Câu bạn đã đánh dấu cần luyện thêm:</b></p><div class="row">' + weak.map(function (i) { return '<button class="btn' + (l.shadowSrSent === i ? ' btn-primary' : '') + '" data-shsr="' + i + '">Câu ' + (i + 1) + '</button>'; }).join(" ") + '</div>';
+  } else {
+    h += '<p class="mut">Bạn chưa đánh dấu câu nào là cần luyện thêm ở các bước trước — chọn bất kỳ câu nào dưới đây để máy nghe thử.</p>';
+  }
+  h += '<p><b>Chọn câu để chấm:</b></p><div class="row">' + sents.map(function (x, i) { return '<button class="btn' + (l.shadowSrSent === i ? ' btn-primary' : '') + '" data-shsr="' + i + '">' + (i + 1) + '</button>'; }).join(" ") + '</div>';
+  var si = (l.shadowSrSent != null) ? l.shadowSrSent : (weak[0] != null ? weak[0] : 0);
+  h += '<p><b>Câu đã chọn (' + (si + 1) + '/' + sents.length + '):</b> ' + esc(sents[si]) + '</p>'
+    + '<p id="shStepSrLine">' + esc(l.shadowSrText || 'Bấm nút dưới rồi đọc to câu đã chọn — máy chỉ so xem có khớp câu mẫu không.') + '</p>'
+    + '<div class="row"><button class="btn" id="shStepSrBtn">🎙️ Chấm nhanh bằng giọng nói (ước lượng)</button></div>'
+    + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shStepDone">Xong bước 9 →</button></div></div>';
+  return h;
+}
+function shadowStep10HTML(l, item, isLong) {
+  var ev = l.shadowEval || {};
+  var h = '<div class="qblock"><p><b>Bước 10/10 — Tự đánh giá + lưu lịch sử:</b> chấm mình theo 4 tiêu chí dưới đây, rồi lưu vào lịch sử Shadowing của bài này.</p>';
+  SHADOW_EVAL_CRITS.forEach(function (c) {
+    h += '<p><b>' + esc(c.t) + '</b> <span class="mut">(' + esc(c.d) + ')</span><br>'
+      + [1, 2, 3].map(function (v) { return '<label style="margin-right:12px"><input type="radio" name="shEval_' + c.k + '" value="' + v + '"' + (ev[c.k] === v ? ' checked' : '') + '> ' + (v === 1 ? 'Chưa được' : v === 2 ? 'Được' : 'Tốt') + '</label>'; }).join("") + '</p>';
+  });
+  h += '<p>Ghi chú cho lần luyện này (không bắt buộc):<br><textarea id="shEvalNote" rows="2" style="width:100%;padding:10px">' + esc(l.shadowEvalNote || "") + '</textarea></p>'
+    + '<div class="row"><button class="btn btn-primary" id="shEvalSave">💾 Lưu vào lịch sử Shadowing</button></div></div>';
+  return h;
+}
+function renderShadowSteps(app, l, item, isLong) {
+  if (!l.shadowSents) l.shadowSents = isLong ? splitSentencesEN(item.text) : [item.text];
+  var sents = l.shadowSents, total = sents.length;
+  var step = l.shadowStep || 1;
+  if (!l.shadowStepsDone) l.shadowStepsDone = {};
+  if (!l.shadowWeak) l.shadowWeak = [];
+  if (l.shadowStepsFinished) {
+    logLessonMinutes(l);
+    var doneN = 0, k; for (k in (l.shadowStepsDone || {})) if (l.shadowStepsDone[k]) doneN++;
+    var ev = l.shadowEval || {};
+    var evTxt = SHADOW_EVAL_CRITS.map(function (c) { return c.t + ": " + shadowEvalLabel(ev[c.k]); }).join(" · ");
+    app.innerHTML = skillHead("Shadowing 10 bước — " + item.topic, "Đã luyện xong") + '<div class="summarybox"><h2>Xong Shadowing 10 bước!</h2>'
+      + '<p>Bạn đã xong <b>' + doneN + '/10 bước</b>, đã nhại <b>' + (l.shadowRepeats || 0) + ' câu/lượt</b> trong buổi này.</p>'
+      + '<p><b>Tự đánh giá của bạn:</b> ' + esc(evTxt) + '</p>'
+      + (l.shadowEvalNote ? '<p><b>Ghi chú:</b> ' + esc(l.shadowEvalNote) + '</p>' : '')
+      + "<p>" + esc(goalStripToday()) + "</p>"
+      + shadowLogHTML(shadowKey(l, isLong))
+      + '<div class="row"><button class="btn btn-primary" id="shStepsAgain">Shadowing lại từ đầu</button><button class="btn" id="shStepsToListen">Về bài Nghe</button></div></div>';
+    wireBack();
+    $("#shStepsAgain").onclick = function () { l.shadowStepsFinished = false; l.shadowStep = 1; l.shadowStepIdx = 0; l.shadowStepsDone = {}; l.shadowWeak = []; l.shadowRepeats = 0; l.shadowEval = {}; l.shadowEvalNote = ""; l.shadowTurn = "listen"; l.shadowRecUrl = ""; l.minutesLogged = false; render(); };
+    $("#shStepsToListen").onclick = function () { l.shadow = false; l.shadowFinished = false; render(); };
+    return;
+  }
+  var units = shadowUnitsFor(l, sents);
+  var ui = Math.min(Math.max(l.shadowStepIdx || 0, 0), units.length - 1);
+  var unit = units[ui];
+  var unitText = unit.sents.join(" ");
+  var head = skillHead("Shadowing 10 bước — " + item.topic, (isLong ? "Nghe dài" : "Nghe ngắn") + " · Bước " + step + "/10 · " + shadowStepDef(step).t);
+  var body = "";
+  if (step === 1) body = shadowStep1HTML(l, item, total);
+  else if (step === 9) body = shadowStep9HTML(l, sents);
+  else if (step === 10) body = shadowStep10HTML(l, item, isLong);
+  else body = shadowStepUnitHTML(l, sents, unit, ui, units.length, step);
+  app.innerHTML = head + listenVoiceNoteHTML() + shadowStepsBarHTML(l) + body + '<div class="qblock"><button class="btn" id="shStepsBack">← Về bài Nghe</button></div>';
+  wireBack();
+  $$("[data-shstep]").forEach(function (b) { b.onclick = function () { l.shadowStep = +b.dataset.shstep; l.shadowStepIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); }; });
+  var bk = $("#shStepsBack"); if (bk) bk.onclick = function () { l.shadow = false; render(); };
+  var sp = $("#shStepPlayAll"); if (sp) sp.onclick = function () { speak(item.text); };
+  var sd = $("#shStepDone"); if (sd) sd.onclick = function () { shadowStepDone(l, step); };
+  $$("[data-sw]").forEach(function (b) {
+    b.onclick = function () {
+      var w = unitText.split(" ")[+b.dataset.sw];
+      var ipa = wordIpaOf(w);
+      l.shadowWord = w; l.shadowWordIpa = ipa ? ipa : "Từ này chưa có phiên âm sẵn trong kho của web.";
+      render();
+    };
+  });
+  var splay = $("#shStepPlay");
+  if (splay) splay.onclick = function () {
+    var rate = step === 3 ? 0.75 : 1;
+    if (step >= 4) speak(unitText, rate, function () { l.shadowTurn = "user"; render(); });
+    else speak(unitText, rate);
+  };
+  var sst = $("#shStepShowText"); if (sst) sst.onclick = function () { l.shadowShowText = true; render(); };
+  var sn = $("#shStepNext"); if (sn) sn.onclick = function () { l.shadowStepIdx = ui + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
+  var spr = $("#shStepPrev"); if (spr) spr.onclick = function () { l.shadowStepIdx = Math.max(0, ui - 1); l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
+  var srec = $("#shStepRec"); if (srec) srec.onclick = function () { shadowRecToggle(l); };
+  var spb = $("#shStepPlayBack"); if (spb) spb.onclick = function () { var a = document.querySelector("audio"); if (a) a.play(); };
+  var ssr = $("#shStepSrBtn");
+  if (ssr) ssr.onclick = function () {
+    if (step === 9) { var si9 = (l.shadowSrSent != null) ? l.shadowSrSent : (((l.shadowWeak || [])[0] != null) ? l.shadowWeak[0] : 0); shadowSrCheck(l, sents[si9]); }
+    else shadowSrCheck(l, unitText);
+  };
+  $$("[data-shsr]").forEach(function (b) { b.onclick = function () { l.shadowSrSent = +b.dataset.shsr; render(); }; });
+  var gd = $("#shStepGood");
+  if (gd) gd.onclick = function () {
+    l.shadowRepeats = (l.shadowRepeats || 0) + 1;
+    unit.idxs.forEach(function (si) { srsEnqueueSentence("shadow", (isLong ? "long:" : "short:") + l.idx, si, sents[si], sents); });
+    shadowStepAdvanceUnit(l, ui, units.length, step);
+  };
+  var wk = $("#shStepWeak");
+  if (wk) wk.onclick = function () {
+    l.shadowRepeats = (l.shadowRepeats || 0) + 1;
+    unit.idxs.forEach(function (si) {
+      if (l.shadowWeak.indexOf(si) < 0) l.shadowWeak.push(si);
+      recordQuizError("shadow" + (isLong ? "Long" : "") + ":" + l.idx, si, { q: "Shadowing: " + sents[si], o: [sents[si]], a: 0, why: "Câu này bạn tự đánh giá là cần luyện thêm trong bài " + item.topic + "." });
+    });
+    saveState();
+    shadowStepAdvanceUnit(l, ui, units.length, step);
+  };
+  var sv = $("#shEvalSave");
+  if (sv) sv.onclick = function () {
+    var ev2 = {}, ok = true;
+    SHADOW_EVAL_CRITS.forEach(function (c) {
+      var r = document.querySelector('input[name="shEval_' + c.k + '"]:checked');
+      if (!r) ok = false; else ev2[c.k] = +r.value;
+    });
+    if (!ok) { toast("Hãy chấm đủ 4 tiêu chí đã — mỗi tiêu chí chọn 1 mức."); return; }
+    l.shadowEval = ev2;
+    var nt = $("#shEvalNote"); l.shadowEvalNote = nt ? nt.value : "";
+    shadowLogSave(l, item, isLong);
+    shadowStepDone(l, 10);
+  };
+}
+/* ---------- v108: GHI RO GIONG NGHE (giong trinh duyet hay giong that) ---------- */
+function listenVoiceNoteHTML() {
+  return '<p class="mut">🔊 Giọng đọc: giọng trình duyệt (máy đọc, không phải giọng người thật). Chỗ nào có video giọng thật thì ghi rõ ở video đó.</p>';
+}
+/* ---------- v108: KHOI "PHUONG PHAP HOC GOI Y" TRONG BAI NGHE ---------- */
+function listenMethodsHTML108(l, isLong) {
+  return '<details class="card" id="listenMethods108"><summary><b>🧭 Phương pháp học gợi ý</b> — chọn cách luyện nghe cho bài này</summary>'
+    + '<p class="mut">Cách học mặc định của bài này: nghe → làm bài hiểu nội dung (Lý thuyết → Thực hành → Kiểm tra). Các cách dưới đây luyện cùng bài này, không thêm bài mới.</p>'
+    + '<div class="row">'
+    + '<button class="btn" data-lmeth="shadow">🎤 Shadowing 10 bước — nhại theo từng câu</button>'
+    + (isLong ? '<button class="btn" data-lmeth="dict">✍️ Nghe chép — gõ lại từng câu</button>' : '')
+    + '<button class="btn" data-lmeth="again">🔊 Nghe lại toàn bài</button>'
+    + '<button class="btn" data-lmeth="review">📅 Ôn câu đã học</button>'
+    + '</div></details>';
+}
+function listenMethodsOpen108(l, isLong, mode) {
+  if (mode === "shadow") {
+    if (l.type === "dictation") { openLesson({ type: "skillListenLong", idx: l.idx, shadow: true, shadowMode: "steps", shadowStep: 1, shadowStepIdx: 0, shadowStepsDone: {}, shadowWeak: [], shadowRepeats: 0, shadowTurn: "listen" }); return; }
+    l.shadow = true; l.shadowMode = "steps";
+    if (!l.shadowStep) l.shadowStep = 1;
+    if (!l.shadowStepsDone) l.shadowStepsDone = {};
+    if (!l.shadowWeak) l.shadowWeak = [];
+    l.shadowStepIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; l.shadowStepsFinished = false; render(); return;
+  }
+  if (mode === "dict" && isLong) { openLesson({ type: "dictation", idx: l.idx }); return; }
+  if (mode === "again") { var item = isLong ? CONTENT.listeningPlus[l.idx] : CONTENT.listening[l.idx]; if (item) speak(item.text); return; }
+  if (mode === "review") { backFromLesson(); go("review"); return; }
+}
+function wireListenMethods108(app, l, isLong) {
+  var btns = app.querySelectorAll("[data-lmeth]");
+  btns.forEach(function (b) { b.onclick = function () { listenMethodsOpen108(l, isLong, b.dataset.lmeth); }; });
+}
+
 /* ---------- Shadowing Xem/Luyện gắn vào bài Nghe sẵn có ---------- */
-function shadowEntryHTML() {
-  return '<div class="qblock" id="shadowEntry"><p><b>Shadowing — nhại theo từng câu:</b> cùng bài Nghe này, chia từng câu. Chế độ Xem: nghe mẫu rồi nhìn câu. Chế độ Luyện: máy tự dừng sau mỗi câu, đến lượt bạn nhại lại, ghi âm rồi nghe lại chính mình.</p>'
-    + '<div class="row"><button class="btn" id="shViewBtn">👀 Shadowing — Xem</button><button class="btn btn-primary" id="shPracticeBtn">🎤 Shadowing — Luyện</button></div></div>';
+function shadowEntryHTML(l, isLong) {
+  var h = '<div class="qblock" id="shadowEntry"><p><b>Shadowing — nhại theo từng câu:</b> cùng bài Nghe này, chia từng câu. Chế độ Xem: nghe mẫu rồi nhìn câu. Chế độ Luyện: máy tự dừng sau mỗi câu, đến lượt bạn nhại lại, ghi âm rồi nghe lại chính mình.</p>';
+  if (l) {
+    var doneN = 0, k; for (k in (l.shadowStepsDone || {})) if (l.shadowStepsDone[k]) doneN++;
+    var last = shadowLogFor(shadowKey(l, !!isLong))[0];
+    if (last) h += '<p class="mut">Lần luyện Shadowing gần nhất: <b>' + esc(last.at) + '</b> — ' + last.steps + '/10 bước · đã nhại ' + last.repeats + ' câu/lượt.</p>';
+    h += '<div class="row"><button class="btn" id="shViewBtn">👀 Shadowing — Xem</button><button class="btn btn-primary" id="shPracticeBtn">🎤 Shadowing — Luyện</button><button class="btn btn-primary" id="shStepsBtn">🎤 Shadowing 10 bước' + (doneN ? ' (đã xong ' + doneN + '/10)' : '') + '</button></div></div>';
+  } else {
+    h += '<div class="row"><button class="btn" id="shViewBtn">👀 Shadowing — Xem</button><button class="btn btn-primary" id="shPracticeBtn">🎤 Shadowing — Luyện</button></div></div>';
+  }
+  return h;
 }
 function shadowWireEntry(l) {
-  var vb = $("#shViewBtn"), pb = $("#shPracticeBtn");
+  var vb = $("#shViewBtn"), pb = $("#shPracticeBtn"), sb = $("#shStepsBtn");
   if (vb) vb.onclick = function () { l.shadow = true; l.shadowMode = "view"; l.shadowIdx = 0; l.shadowTurn = "listen"; render(); };
   if (pb) pb.onclick = function () { l.shadow = true; l.shadowMode = "practice"; l.shadowIdx = 0; l.shadowTurn = "listen"; render(); };
+  if (sb) sb.onclick = function () { l.shadow = true; l.shadowMode = "steps"; if (!l.shadowStep) l.shadowStep = 1; if (!l.shadowStepsDone) l.shadowStepsDone = {}; if (!l.shadowWeak) l.shadowWeak = []; l.shadowStepIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
 }
 function renderShadowListen(app, l, item, isLong) {
+  if ((l.shadowMode || "view") === "steps") { renderShadowSteps(app, l, item, isLong); return; }
   if (!l.shadowSents) l.shadowSents = isLong ? splitSentencesEN(item.text) : [item.text];
   var sents = l.shadowSents, total = sents.length;
   var si = l.shadowIdx || 0;
@@ -11079,7 +11390,7 @@ function renderShadowListen(app, l, item, isLong) {
       + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shGood">Tôi nhại được ✓</button><button class="btn" id="shWeak">Cần luyện thêm</button></div></div>';
   }
   app.innerHTML = skillHead("Shadowing — " + item.topic, (isLong ? "Nghe dài" : "Nghe ngắn") + " · Chế độ " + (mode === "view" ? "Xem" : "Luyện") + " · Câu " + (si + 1) + "/" + total)
-    + '<div class="qblock"><p><b>Câu ' + (si + 1) + '/' + total + ':</b></p><p>' + wordBtns + '</p>' + ipaLine + viLine
+    + '<div class="qblock"><p><b>Câu ' + (si + 1) + '/' + total + ':</b></p><p>' + wordBtns + '</p>' + ipaLine + viLine + listenVoiceNoteHTML()
     + '<p><label><input type="checkbox" id="shIpa"' + (showIpa ? ' checked' : '') + '> Hiện phiên âm khi bấm từ</label> · <label><input type="checkbox" id="shVi"' + (showVi ? ' checked' : '') + '> Hiện bản dịch</label></p>'
     + '<div class="row"><button class="btn" id="shModeView">👀 Xem</button><button class="btn" id="shModePractice">🎤 Luyện (tự dừng sau mỗi câu)</button></div>'
     + '<div class="row" style="margin-top:8px"><button class="btn" id="shPlay">🔊 Nghe câu mẫu</button>' + (si > 0 ? '<button class="btn" id="shPrev">← Câu trước</button>' : '') + (si + 1 < total ? '<button class="btn btn-primary" id="shNext">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="shDone">Xong Shadowing →</button>') + '</div>'
