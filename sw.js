@@ -10,7 +10,7 @@
    install nạp lại toàn bộ file tĩnh, skipWaiting + claim để bản mới có hiệu
    lực ngay, không để người học kẹt bản cũ. Đợt đẩy nào đổi file tĩnh thì
    nhớ đổi CACHE_VERSION trong file này. */
-var CACHE_VERSION = "ielts-cache-v108c"; /* v108c: làm lại từ vựng — mỗi bước một việc, một thứ cần nhớ; hết lộ đáp án; đồng bộ 4 track; sửa đếm bước Chương 1 + XP ZH cùng ngày */
+var CACHE_VERSION = "ielts-cache-v108d"; /* v108d: sửa render v108c — che từ ở bước 2, ẩn nghĩa/câu/dịch ở bước 4, dòng đếm đúng mẫu, phản hồi "Đúng rồi" khi gõ đúng */
 var CACHE_ASSETS = ["./", "index.html", "content.js", "content-new.js", "config.js", "g71_common.js", "g71_luyen_go.js", "g71_rong_bay.js", "g71_ban_bong_bong.js", "g71_rong_lua.js", "g71_dau_bai.js", "assets/ronglua/nen-rung.png", "assets/ronglua/rong-lua-nho.png", "assets/ronglua/quai-bong-toi.png", "assets/ronglua/quai-lua-badge.png", "assets/ronglua/quai-nuoc-badge.png", "assets/ronglua/quai-dien-badge.png", "assets/ronglua/dong-xu-vang.png", "assets/ronglua/binh-thuoc.png", "assets/ronglua/khien.png"];
 
 self.addEventListener("install", function (event) {
