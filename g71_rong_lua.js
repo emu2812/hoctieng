@@ -287,7 +287,8 @@
      sprite cạnh dài ≤512px, huy hiệu cắt từ ảnh quái biến thể). ---- */
   var RL_ART = "assets/ronglua/";
   var RL_IMGS = {
-    bg: "nen-rung.png", dragon: "rong-lua-nho.png", monster: "quai-bong-toi.png",
+    bg: "nen-rung.png", bg1: "rung-1.jpg", bg2: "rung-2.jpg", bg3: "rung-3.jpg",
+    dragon: "rong-lua-nho.png", monster: "quai-bong-toi.png",
     badge_fire: "quai-lua-badge.png", badge_water: "quai-nuoc-badge.png",
     badge_elec: "quai-dien-badge.png",
     coin: "dong-xu-vang.png", potion: "binh-thuoc.png", shield: "khien.png"
@@ -304,7 +305,12 @@
     } catch (e) { rec.ok = false; }
     rlImg[name] = rec;
   }
-  Object.keys(RL_IMGS).forEach(rlLoadImg);
+  /* v110: 3 anh nen rung KHONG nap cung trang chu (them ~840KB) — chi nap
+     khi nguoi hoc mo ban do Rong Lua (rlLoadForest, goi trong showMap);
+     truoc khi anh ve thi paintForest dung anh cu nen-rung.png lam du
+     phong, game khong vo. */
+  Object.keys(RL_IMGS).forEach(function (n) { if (n !== "bg1" && n !== "bg2" && n !== "bg3") rlLoadImg(n); });
+  function rlLoadForest() { ["bg1", "bg2", "bg3"].forEach(function (n) { if (!rlImg[n]) rlLoadImg(n); }); }
   function rlReady(name) {
     var r = rlImg[name];
     return !!(r && r.img && r.ok && r.img.complete && r.img.naturalWidth > 0);
@@ -315,6 +321,33 @@
     var sc = Math.max(W / iw, H / ih);
     var dw = iw * sc, dh = ih * sc;
     ctx.drawImage(im, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    return true;
+  }
+  /* v110: 3 anh nen Rung Xanh theo tien trinh di sau vao rung (Bui quyet
+     10:06 07/11 dung ca 3): ai 1-3 cua rung nang, ai 4-7 loi mon nang,
+     ai 8-10 + trum rung suong mo binh minh. Anh JPEG 1600x900 da toi uu
+     o assets/ronglua/; anh cu nen-rung.png giu lam du phong. */
+  function rlForestBand(level) {
+    var lv = parseInt(level, 10) || 1;
+    return lv <= 3 ? 1 : (lv <= 7 ? 2 : 3);
+  }
+  function rlForestBgName(level) { return "bg" + rlForestBand(level); }
+  function rlForestBgFile(level) { return RL_ART + RL_IMGS[rlForestBgName(level)]; }
+  function rlForestBandLabel(level) {
+    var b = rlForestBand(level);
+    if (b === 1) return "Cửa rừng nắng · Ải 1–3";
+    if (b === 2) return "Lối mòn nắng · Ải 4–7";
+    return "Rừng sương mờ · Ải 8–10 + Trùm";
+  }
+  /* Ve anh cover co troi parallax cham (nen troi it, lop truoc troi
+     nhieu hon — xem paintForest): scale 1.06 de mep khong ho khi troi. */
+  function rlDrawCoverPan(ctx, name, W, H, t) {
+    if (!rlReady(name)) return false;
+    var im = rlImg[name].img, iw = im.naturalWidth, ih = im.naturalHeight;
+    var sc = Math.max(W / iw, H / ih) * 1.06;
+    var dw = iw * sc, dh = ih * sc;
+    var dx = Math.sin(t / 9000) * W * 0.012, dy = Math.cos(t / 11000) * H * 0.008;
+    ctx.drawImage(im, (W - dw) / 2 + dx, (H - dh) / 2 + dy, dw, dh);
     return true;
   }
   /* Ảnh nhỏ dùng trong DOM (vàng/bình/khiên ở bản đồ, cửa hàng, HUD). */
@@ -1032,10 +1065,23 @@
   /* Rừng Xanh: ảnh nền Canva (cover) khi ảnh đã load; bản vẽ code lúc
      chạng vạng làm dự phòng. Sương teal + đom đóm hổ phách vẽ bằng code
      làm lớp phủ chuyển động trên cả hai trường hợp. */
-  function paintForest(ctx, W, H, t) {
-    var useImg = rlReady("bg");
+  function paintForest(ctx, W, H, t, level) {
+    var useImg = rlDrawCoverPan(ctx, rlForestBgName(level || 1), W, H, t);
+    if (!useImg) useImg = rlDrawCover(ctx, "bg", W, H);
     if (useImg) {
-      rlDrawCover(ctx, "bg", W, H);
+      /* Tia nang tu goc tren-trai (huong sang duy nhat cua he nghe
+         thuat): vet sang trang alpha thap, nam duoi lop suong. */
+      ctx.save();
+      ctx.fillStyle = "#FFFFFF";
+      ctx.globalAlpha = 0.05;
+      ctx.beginPath();
+      ctx.moveTo(0, 0); ctx.lineTo(W * 0.55, 0); ctx.lineTo(W * 0.28, H); ctx.lineTo(0, H);
+      ctx.closePath(); ctx.fill();
+      ctx.globalAlpha = 0.04;
+      ctx.beginPath();
+      ctx.moveTo(0, 0); ctx.lineTo(W * 0.3, 0); ctx.lineTo(W * 0.12, H); ctx.lineTo(0, H);
+      ctx.closePath(); ctx.fill();
+      ctx.restore();
     } else {
     var g = ctx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, C.ink950); g.addColorStop(0.55, C.ink900); g.addColorStop(1, C.ink800);
@@ -1085,6 +1131,24 @@
       ctx.beginPath(); ctx.arc(fx, fy, 5, 0, Math.PI * 2); ctx.fill();
     }
     ctx.globalAlpha = 1;
+    if (useImg) {
+    /* Khung tien canh: than cay cham dam nhat o hai mep (troi nguoc
+       huong nen, bien do lon hon — lop gan troi nhanh hon lop xa),
+       + bong dat duoi day + vignette mo o vien. Chi o mep, khong che
+       vung choi giua san. */
+    var fx = -Math.sin(t / 9000) * W * 0.02;
+    ctx.fillStyle = C.ink950;
+    ctx.globalAlpha = 0.92;
+    ctx.beginPath(); ctx.ellipse(W * 0.015 + fx, H * 0.62, W * 0.045, H * 0.42, 0.06, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(W * 0.985 + fx, H * 0.58, W * 0.04, H * 0.38, -0.05, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 1;
+    var gg = ctx.createLinearGradient(0, H * 0.82, 0, H);
+    gg.addColorStop(0, "rgba(4,6,15,0)"); gg.addColorStop(1, "rgba(4,6,15,0.28)");
+    ctx.fillStyle = gg; ctx.fillRect(0, H * 0.82, W, H * 0.18);
+    var vg = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.42, W / 2, H / 2, Math.max(W, H) * 0.72);
+    vg.addColorStop(0, "rgba(4,6,15,0)"); vg.addColorStop(1, "rgba(4,6,15,0.20)");
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+    }
     if (!useImg) {
     /* Bụi cây tiền cảnh hai bên đáy làm khung (chàm đậm nhất, chỉ bản vẽ code). */
     ctx.fillStyle = C.ink950;
@@ -1279,13 +1343,14 @@
     ctx.beginPath(); ctx.ellipse(W * 0.06, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(W * 0.94, H + 6, W * 0.2, H * 0.07, 0, 0, Math.PI * 2); ctx.fill();
   }
-  /* Bộ chọn nền theo vùng: 1 = rừng (ảnh Canva nếu có), 2–5 = vẽ code. */
-  function paintRegion(ctx, W, H, t, region) {
+  /* Bộ chọn nền theo vùng: 1 = rừng (3 ảnh theo ải nếu có, ảnh cũ làm
+     dự phòng), 2–5 = vẽ code. */
+  function paintRegion(ctx, W, H, t, region, level) {
     if (region === 2) return paintVillage(ctx, W, H, t);
     if (region === 3) return paintCity(ctx, W, H, t);
     if (region === 4) return paintCrystal(ctx, W, H, t);
     if (region === 5) return paintVolcano(ctx, W, H, t);
-    return paintForest(ctx, W, H, t);
+    return paintForest(ctx, W, H, t, level || 1);
   }
   /* Hiệu ứng thời tiết theo vùng (v99): lớp phủ nhẹ cùng hệ nghệ thuật
      (chàm + hổ phách + teal/trắng, alpha thấp) — mưa, nắng, giông, tuyết,
@@ -1809,6 +1874,7 @@
   }
 
   function showMap() {
+    rlLoadForest();
     mode = "map";
     if (elBar) elBar.style.display = "none";
     if (ctrlBar) ctrlBar.style.display = "none";
@@ -1847,6 +1913,14 @@
     }
     html += '<h3 style="margin:8px 0 4px;color:' + accent + ';">' + reg.icon + ' ' + reg.name + ' — Vùng ' + reg.id + ' · chủ đề ' + reg.theme + '</h3>'
       + '<p class="mut" style="margin:4px 0 12px;">' + reg.desc + ' Trùm vùng: <b>' + reg.boss + '</b> (ải 10, đổi hệ sau mỗi 1/3 máu).</p>';
+    if (curRegion === 1) {
+      /* v110: banner anh rung that theo ai tiep theo — cang di sau cang
+         doi canh (anh cua rung nang -> loi mon nang -> rung suong mo). */
+      var bannerLv = nextLv || 1;
+      html += '<div style="margin:4px 0 12px;border-radius:20px;overflow:hidden;border:2px solid #1E1B4B;box-shadow:0 10px 26px rgba(4,6,15,.22);position:relative;">'
+        + '<img src="' + rlForestBgFile(bannerLv) + '" alt="Rừng Xanh — ' + rlForestBandLabel(bannerLv) + '" style="display:block;width:100%;height:180px;object-fit:cover;">'
+        + '<div style="position:absolute;left:12px;bottom:10px;background:rgba(4,6,15,.72);color:#FFFBEB;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:700;">🌲 ' + rlForestBandLabel(bannerLv) + (nextLv ? ' · ải tiếp theo: ' + nextLv : ' · đã qua hết 10 ải') + '</div></div>';
+    }
     var wth = weatherFor(curRegion);
     if (wth) html += '<p style="margin:4px 0 12px;font-weight:700;">' + wth.icon + ' Thời tiết vùng: ' + wth.name + ' (' + wth.season + ') — chiêu hệ ' + ELEMENTS[wth.element].name + ' +50%.</p>';
     var note = regionPoolNote(curRegion);
@@ -2447,7 +2521,7 @@
     if (!W || !H) { requestAnimationFrame(frame); return; }
     ctx.clearRect(0, 0, W, H);
     var paintReg = (run && run.region) || (battle && battle.region) || 1;
-    paintRegion(ctx, W, H, now, paintReg);
+    paintRegion(ctx, W, H, now, paintReg, (run && run.level) || 1);
     paintWeather(ctx, W, H, now, paintReg);
     /* Xếp thẻ từ trước khi vẽ quái để thẻ không chồng nhau (v99 B1). */
     try { layoutPills(ctx, battle.words, W, H); } catch (e) {}
@@ -2517,7 +2591,8 @@
     findKidnapped: findKidnapped, reviewKidnapped: reviewKidnapped,
     mergeCollected: mergeCollected, srsBumpForLevel3: srsBumpForLevel3,
     art: { ready: rlReady, base: RL_ART, files: RL_IMGS, paint: paintRegion, paintWeather: paintWeather,
-      drawMonster: drawMonster, drawDragonUp: drawDragonUp },
+      drawMonster: drawMonster, drawDragonUp: drawDragonUp,
+      forestBg: rlForestBgName, forestBand: rlForestBand, forestFile: rlForestBgFile, forestLabel: rlForestBandLabel },
     store: { load: loadRL, save: saveRL, fresh: freshRL },
     regions: REGIONS, regionById: regionById,
     /* Mỏ neo cho probe: đọc trạng thái chơi hiện tại (chế độ, trận, lượt chạy, tiến trình). */
