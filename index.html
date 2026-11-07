@@ -69,6 +69,7 @@ p{margin:8px 0}
 .q-opt.bad{border-color:var(--red);background:#FDECEA}
 .q-opt:disabled{cursor:default}
 #tutorFloatBtn{position:static;width:auto;height:auto;min-height:44px;border-radius:999px;border:2px solid var(--amber);background:var(--coral);color:#1F2430;font-size:16px;font-weight:700;line-height:1.4;cursor:pointer;z-index:45;box-shadow:0 2px 10px rgba(0,0,0,.25);padding:8px 16px}
+#fmMusicBtn{padding:8px 12px;min-width:44px}
 #tutorFloatPanel{position:fixed;right:16px;top:74px;width:min(360px,calc(100vw - 32px));max-height:70vh;overflow-y:auto;background:#fff;border:2px solid var(--amber);border-radius:20px;padding:14px;z-index:45;box-shadow:0 4px 20px rgba(0,0,0,.25)}
 #tutorFloatMsgs .chat-msg{font-size:15px}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:15px;display:none;z-index:50;max-width:92vw;text-align:center}
@@ -376,7 +377,7 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <div class="sb-bottom"><button class="btn" id="sbCollapseBtn">« Thu gọn</button><div class="sb-profile" id="sbProfile"></div></div>
 </aside>
 <div class="app-col">
-<header class="app-topbar"><button class="btn" id="tbMenuBtn" aria-label="Mở hoặc đóng thanh bên">☰</button><input type="text" id="tbSearchInp" placeholder="🔍 Tìm bài học…" aria-label="Tìm bài học"><span class="tb-spacer"></span><span class="tb-track" id="tbTrackLabel"></span><button id="tutorFloatBtn" aria-label="Gia sư AI" title="Gia sư AI">🤖 <span>Gia sư AI</span></button><button class="btn" id="tbAccountBtn">Tài khoản</button></header>
+<header class="app-topbar"><button class="btn" id="tbMenuBtn" aria-label="Mở hoặc đóng thanh bên">☰</button><input type="text" id="tbSearchInp" placeholder="🔍 Tìm bài học…" aria-label="Tìm bài học"><span class="tb-spacer"></span><span class="tb-track" id="tbTrackLabel"></span><button id="tutorFloatBtn" aria-label="Gia sư AI" title="Gia sư AI">🤖 <span>Gia sư AI</span></button><button class="btn" id="fmMusicBtn" aria-label="Tắt nhạc rừng" title="Nhạc rừng">🔊</button><button class="btn" id="tbAccountBtn">Tài khoản</button></header>
 <div id="previewBanner">Bạn đang ở chế độ khách — tiến trình lưu trên máy này, chưa đồng bộ tài khoản. Đăng nhập ở mục Của tôi → Tài khoản để đồng bộ.</div>
 <nav class="tabbar" id="tabBar">
 <button class="tab" data-tab="home">Học</button>
@@ -459,7 +460,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], vocabSkipped: [], wordPron: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", personalPath: null, personalExplain: "", myWords: [], myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], vocabSkipped: [], wordPron: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", personalPath: null, personalExplain: "", myWords: [], myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -2719,6 +2720,63 @@ $("#tabBar").addEventListener("click", function (e) {
 /* Chi khoa PUBLIC VAPID duoc phep nam trong code web. Khoa bi mat
    chi nam tren Supabase Secrets, khong bao gio ghi vao code web hay bao cao. */
 var PUSH_VAPID_PUBLIC = "BPL3QTdP0lKu5ZLjibCiekZSYMVU75oVcr6XSfKZSyeBpulQZ-YyMIU3yvI1B6xn6C6KprnMo16-5uP0oCeWT0U";
+/* ---------- NHẠC RỪNG (v111, Bùi yêu cầu 09:42 07/11) ----------
+   Nhạc nền rừng + chim hót THẬT (file Public domain — xem thẻ Nhạc rừng ở
+   Cài đặt). Trình duyệt chặn tự phát âm thanh nên nhạc chỉ bắt đầu SAU CÚ
+   CHẠM/PHÍM ĐẦU TIÊN của người học (fmWireFirstTouch). Âm lượng nhỏ (0.2)
+   để không lấn giọng đọc mẫu hay giọng AI. Nút loa trên thanh trên bật/tắt
+   nhanh; tắt hẳn trong Cài đặt (Của tôi → Nhắc học và cài đặt). File chỉ
+   nạp khi bắt đầu phát (preload "none") nên không nặng lúc mở web. */
+var FM_AUDIO_SRC = "assets/audio/nhac-rung.mp3";
+var FM_AUDIO_VOL = 0.2;
+var __fmAudio = null, __fmStarted = false;
+function fmOn() { return state.forestMusic !== false; }
+function fmAudio() {
+  if (!__fmAudio) {
+    try {
+      __fmAudio = new Audio(FM_AUDIO_SRC);
+      __fmAudio.loop = true;
+      __fmAudio.volume = FM_AUDIO_VOL;
+      __fmAudio.preload = "none";
+    } catch (e) { __fmAudio = null; }
+  }
+  return __fmAudio;
+}
+function fmTryStart() {
+  if (!fmOn() || __fmStarted) return;
+  var a = fmAudio();
+  if (!a) return;
+  try {
+    var p = a.play();
+    if (p && p.then) p.then(function () { __fmStarted = true; }, function () { /* trình duyệt vẫn chặn — đợi cú chạm sau */ });
+    else __fmStarted = true;
+  } catch (e) {}
+}
+function fmSet(on) {
+  state.forestMusic = !!on;
+  saveState();
+  if (!on) { try { var a = fmAudio(); if (a) a.pause(); } catch (e) {} __fmStarted = false; }
+  else fmTryStart();
+  fmSyncBtn();
+}
+function fmSyncBtn() {
+  var b = document.getElementById("fmMusicBtn");
+  if (b) { b.textContent = fmOn() ? "🔊" : "🔇"; b.setAttribute("aria-label", fmOn() ? "Tắt nhạc rừng" : "Bật nhạc rừng"); }
+}
+function fmWireFirstTouch() {
+  if (fmWireFirstTouch._done) return; fmWireFirstTouch._done = true;
+  ["pointerdown", "keydown"].forEach(function (ev) { document.addEventListener(ev, fmTryStart, { passive: true }); });
+}
+function fmCardHTML() {
+  var on = fmOn();
+  return '<section class="card" id="fmCard"><h3>Nhạc rừng khi mở web</h3>'
+    + '<p><label><input type="checkbox" id="fmCardToggle"' + (on ? " checked" : "") + '> Bật nhạc rừng + tiếng chim hót sau cú chạm đầu tiên</label></p>'
+    + '<p class="mut">Nhạc nhẹ, lặp lại, âm lượng nhỏ — không lấn giọng đọc mẫu hay giọng AI. Bỏ tick ở đây thì tắt hẳn (nút loa trên thanh trên cũng tắt theo). File nhạc thật, thuộc phạm vi công cộng (Public domain, PDsounds.org — "forest ambience", ghi âm rừng Costa Rica, 2009).</p></section>';
+}
+function wireFmCard() {
+  var t = document.getElementById("fmCardToggle");
+  if (t) t.onchange = function () { fmSet(t.checked); };
+}
 function pushPrefs() {
   /* Chuan hoa TAI CHO tren state.push (khong tao object moi) de cac ham
      goi pushPrefs() giua chung khong lam mat gia tri vua ghi. */
@@ -3232,6 +3290,10 @@ function syncAppFrame() {
     };
     var ab = document.getElementById("tbAccountBtn");
     if (ab) ab.onclick = function () { go("mine"); };
+    var fb = document.getElementById("fmMusicBtn");
+    if (fb) fb.onclick = function () { fmSet(!fmOn()); };
+    fmSyncBtn();
+    fmWireFirstTouch();
     var goSearch = function (q) {
       if (curLesson || curTab !== "home") go("home");
       renderHomeSearchResults(q);
@@ -4977,6 +5039,7 @@ function viewMine(app) {
   html += '</details>';
   html += '<details class="card" id="mineGrpSettings"><summary><b>Nhắc học và cài đặt</b></summary>';
   html += pushCardHTML();
+  html += fmCardHTML();
   if (typeof authState !== "undefined" && authState.user) { html += personalPathCardHTML(); } else { html += '<section class="card" id="ppGuest"><h3>Lộ trình riêng — Cá nhân hóa cực chi tiết</h3><p class="mut">Lộ trình riêng mở khi bạn đăng nhập — khách dùng lộ trình ' + trackMeta89().roadLabel + ' chuẩn ở trang Bản đồ. Đăng nhập ở thẻ Tài khoản phía trên để mở.</p></section>'; }
   html += '<details style="margin-top:8px"><summary><b>🧭 AI Coach — 3 gợi ý tiếp theo</b></summary>' + u8CoachHTML() + '</details>';
   html += '<details style="margin-top:8px"><summary><b>Gia sư AI</b></summary><section class="card"><h3>Gia sư AI</h3><p>' + esc(RB_AI.tutor.label) + '.</p>' + (authState.user ? '<p class="mut">Đã sẵn sàng — gõ câu hỏi để dùng.</p>' : '<p class="mut">Cần đăng nhập để dùng (đăng nhập ở mục Của tôi → Tài khoản).</p>')
@@ -4997,6 +5060,7 @@ function viewMine(app) {
   var miB = $("#mineIntro"); if (miB) miB.onclick = function () { introForced = true; render(); };
   var plSave = $("#planSaveBtn"); if (plSave) plSave.onclick = function () { if (!state.plan) state.plan = {}; state.plan.band = $("#planBandSel").value; state.plan.date = $("#planDateInp").value; saveState(); render(); };
   wirePushCard();
+  wireFmCard();
   wireSupplement();
   $("#tutorTry").onclick = function () { callAiTutor("Xin chào").then(function (r) { toast("Gia sư đã trả lời: " + String(r).slice(0, 80)); }, function (err) { toast(err); }); };
   var tExp = $("#tutorExplainBtn"); if (tExp) tExp.onclick = function () { var v = ($("#tutorModeInp").value || "").trim(); if (!v) { toast("Hãy gõ câu hoặc câu hỏi trước đã."); return; } var out = $("#tutorModeOut"); out.textContent = "AI đang giải thích…"; out.classList.add("show"); callAiTutorMode("explain", v).then(function (r) { out.textContent = r; }, function (err) { out.textContent = err; }); };
