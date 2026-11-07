@@ -7267,7 +7267,7 @@ function vkEnPanelHTML(vk, c, cards, pos) {
   } else {
     h += '<p>Đọc to từ “' + esc(c.w) + '” theo giọng mẫu. Bấm “🎤 Phát âm” ở hàng nút dưới để soi gương + ghi âm — AI chấm từng âm, điểm hiện ngay sau khi đọc.</p>';
     if (vk.pronDone) h += '<p>Đã đọc một lượt ✓ — điểm không khóa thẻ: chưa đạt 80 thì tập lại, muốn sang bước gõ thì bấm dưới đây.</p><button class="btn btn-primary" id="vocabPronNext">Sang bước gõ →</button>';
-    else if (!mrSupported() || mrNoDevices()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Sang bước gõ →</button>'; /* v112b L1: mrSupported() chi biet API co ton tai, khong biet may co thiet bi that khong — them mrNoDevices() (enumerateDevices tra []) */
+    else if (!mrSupported() || mrNoDevices()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Sang bước gõ →</button>'; /* v112b L1 + v112c: mrSupported() chi biet API co ton tai; mrNoDevices() = thieu mic HOAC camera (buoc 4 can ca hai) */
     else h += '<p class="mut">Chưa đọc lượt nào — bấm Phát âm để bắt đầu.</p>';
   }
   h += '<div class="row" style="margin-top:8px"><button class="btn" id="vocabSkipBtn">Bỏ qua thẻ này</button></div>';
@@ -7322,7 +7322,7 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
     } else {
       h += '<p class="mut">Chưa có điểm AI — bấm “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để AI chấm.</p>';
     }
-    var canNext = vk.pronRecorded || !!zp || !mrSupported() || vk.pronAttempted || mrNoDevices(); /* v112b L1: cung goc nhu EN/TC — mrSupported() khong phat hien may khong thiet bi that */
+    var canNext = vk.pronRecorded || !!zp || !mrSupported() || vk.pronAttempted || mrNoDevices(); /* v112b L1 + v112c: cung goc nhu EN/TC — mrNoDevices() = thieu mic HOAC camera */
     if (canNext) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhPronNext">Sang bước gõ pinyin →</button></div>';
     else {
       h += '<button class="btn" id="zhPronCheck">Đã ghi xong, kiểm tra bản ghi</button>';
@@ -9001,12 +9001,16 @@ function renderPronLesson(app, l) {
    Độ chính xác nhận diện trên mặt thật CHƯA đo — giao diện ghi rõ điều này. */
 var MR = { slot: null, sym: null, stream: null, rec: null, chunks: [], segTimer: null, curBlob: null, stopping: false, fm: null, fmOn: false, fmBusy: false, holdStart: 0, autoDone: false, pendingAuto: false, pendingAutoScore: null, pendingManual: false, stableCount: 0, momentDone: {}, urls: [], diagFm: "chưa tải", diagFace: false, diagScore: "chưa chạy", diagSends: 0, diagResults: 0, diagLm: 0, diagSendErr: "", diagVState: "", diagRetry: "chưa", fmRetried: false, fmStartAt: 0, fmGen: 0, engine: "", engineFallback: false, lm: null, lmOn: false, lmBusy: false, lmGen: 0, lmRetried: false, lmStartAt: 0, sessionId: 0, sessionActive: false, procSamples: [], sessionMoment: null, manualLocked: false, lastLiveScore: null, lastProc: null, micWant: true, micOn: false, audioStream: null, audioRec: null, audioBlob: null, audioTranscript: "", audioSid: 0, audioSlot: null, audioDiscard: false, srRec: null, camDenied: false, camMissing: false, camBlocked: false, camPermBefore: "unknown", micDenied: false, mouthOpened: false, autoGraded: false, autoGradeOn: false, onAutoGrade: null };
 function mrSupported() { try { return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia); } catch (e) { return false; } }
-/* v112b L1: may khong co mic/camera THAT — getUserMedia van ton tai dang API
+/* v112c L1: may khong co mic/camera THAT — getUserMedia van ton tai dang API
    nen mrSupported() khong phat hien duoc (chi goi moi loi NotFoundError);
    chi enumerateDevices() moi biet that (kind co trong danh sach ke ca khi
-   chua cap quyen). Kiem 1 lan/phien, cache ket qua; neu that su khong co
-   thiet bi thi goi lai cb (noi goi tu ve lai neu van dang o buoc 4). */
-var MR_NO_DEVICES = null; /* null=chua kiem, true=khong co audioinput/videoinput, false=co thiet bi */
+   chua cap quyen). Buoc 4 can CA HAI: soi guong can CAMERA, AI cham can MIC
+   — thieu MOT TRONG HAI la buoc khong chay duoc (ban v112b doi thieu CA HAI
+   moi thoat nen may co audio nhung thieu video van ket — dung case live
+   v112b: bam Phat am loi "Khong tim thay camera"). Kiem 1 lan/phien, cache
+   ket qua; neu thieu thiet bi thi goi lai cb (noi goi tu ve lai neu van
+   dang o buoc 4). */
+var MR_NO_DEVICES = null; /* null=chua kiem, true=buoc phat am KHONG chay duoc (thieu audioinput HOAC videoinput), false=du ca mic + camera */
 var MR_DEVICES_CHECKING = false;
 function mrNoDevices() { return MR_NO_DEVICES === true; }
 function mrCheckDevices(cb) {
@@ -9017,9 +9021,9 @@ function mrCheckDevices(cb) {
     MR_DEVICES_CHECKING = true;
     md.enumerateDevices().then(function (devs) {
       MR_DEVICES_CHECKING = false;
-      var has = false, list = devs || [];
-      for (var i = 0; i < list.length; i++) { if (list[i].kind === "audioinput" || list[i].kind === "videoinput") { has = true; break; } }
-      MR_NO_DEVICES = !has;
+      var hasAudio = false, hasVideo = false, list = devs || [];
+      for (var i = 0; i < list.length; i++) { if (list[i].kind === "audioinput") hasAudio = true; if (list[i].kind === "videoinput") hasVideo = true; }
+      MR_NO_DEVICES = !(hasAudio && hasVideo); /* v112c L1: thieu MOT TRONG HAI la thoat */
       if (MR_NO_DEVICES && typeof cb === "function") { try { cb(); } catch (e) {} }
     }, function () { MR_DEVICES_CHECKING = false; MR_NO_DEVICES = false; });
   } catch (e) { MR_DEVICES_CHECKING = false; MR_NO_DEVICES = false; }
@@ -17633,7 +17637,7 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
       h += '<p>Đọc to từ “' + esc(c.w) + '” theo giọng mẫu. Bấm “🎤 Đọc to để AI chấm”, đọc to rồi bấm dừng để AI chấm (đạt khi AI chấm ≥ 80) — điểm không khóa thẻ.</p>';
       h += '<div id="ttCheckSlot"></div><div id="ttCheckResult"></div>';
       if (vk.pronDone) h += '<p>Đã đọc một lượt ✓ — điểm không khóa thẻ, muốn đọc lại thì bấm dưới đây.</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Sang bước gõ →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
-      else if (!mrSupported() || mrNoDevices()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Sang bước gõ →</button></div>'; /* v112b L1: nhu EN — them mrNoDevices() */
+      else if (!mrSupported() || mrNoDevices()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Sang bước gõ →</button></div>'; /* v112b L1 + v112c: nhu EN — mrNoDevices() = thieu mic HOAC camera */
       else h += '<button class="btn btn-primary" id="ttPronBtn">🎤 Đọc to để AI chấm</button>';
       if (vk.pronWhy) h += '<div class="why show" id="ttPronWhy">' + esc(vk.pronWhy) + '</div>';
     } else {
