@@ -157,7 +157,8 @@ body.has-bottombar #btnBack{display:none}
 .sb-bottom{border-top:1.5px solid var(--line2);padding-top:12px}
 .sb-profile{margin:12px 0 0}
 .app-col{min-width:0}
-.app-topbar{position:sticky;top:0;z-index:6;display:flex;gap:10px;align-items:center;background:var(--paper);padding:10px 0;border-bottom:1.5px solid var(--line2);min-height:66px}
+.app-topbar{position:sticky;top:0;z-index:6;display:flex;gap:10px;align-items:center;background:var(--paper);padding:10px 0;border-bottom:1.5px solid var(--line2);min-height:66px;transition:transform .25s ease}
+body.topbar-hidden .app-topbar{transform:translateY(-100%)} /* v106d Loi 3: topbar tu an khi cuon xuong, hien lai khi cuon len */
 .app-topbar input{flex:1;min-width:0;max-width:420px}
 .tb-spacer{flex:1}
 .tb-track{font-weight:700;white-space:nowrap}
@@ -7558,6 +7559,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
         stats += '<p><b>Kết quả này xếp bạn bắt đầu ở ' + esc(bandLabel) + '.</b> Từ giờ màn chính chỉ còn nút “Học tiếp” tới đúng bước đó.</p>';
       }
       app.innerHTML = head + finishSummaryHTML("Hoàn thành bài luyện!", stats, wrongHTML, { starsKey: l.skillKey, appeal: "skill:" + l.skillKey }) + (l.finishExtraHTML || "") + clRetrySectionHTML();
+      refreshGoalStrips(); /* v106d Loi 2: head ve truoc khi logLessonMinutes o tren cong phut — doc lai so moi cho #lessonGoalStrip */
       wireBack(); clWireRetry(l);
       var ns = $("#btnNextStep"); if (ns && l.type !== "entryCheck") { ns.textContent = "Về Luyện tập"; ns.onclick = function () { backFromLesson(); }; }
       $("#btnRedo").onclick = function () { l.qi = 0; l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
@@ -7626,6 +7628,17 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
   var markWrong = function () {
     l.streak = 0;
     if (runFirstTry[qi] === undefined) { runFirstTry[qi] = false; if (runWrong.indexOf(qi) < 0) runWrong.push(qi); if (!l.clRetry && !(l.type === "reviewSession" && q.key && state.cards[q.key])) recordQuizError(lessonId, qi, q); }
+    updateQuizChips();
+  };
+  /* v106d Loi 1: chip dem chi duoc ve 1 lan luc render nen sau moi cau dung
+     chip van hien so cu (cham 1 nhip: sau cau 1 dung van "Dung 0/3"). Chip
+     phai doc trang thai SAU tick — cap nhat ngay sau moi lan doi
+     runFirstTry/l.streak (bumpStreak + markWrong), khong doi render(). */
+  var updateQuizChips = function () {
+    var cc = $("#quizCorrectChip");
+    if (cc) cc.textContent = "✓ Đúng " + Object.keys(runFirstTry).filter(function (k) { return runFirstTry[k]; }).length + "/" + qs.length + " câu";
+    var sc = $("#quizStreakChip");
+    if (sc) sc.textContent = "🔥 " + (l.streak || 0) + " lần liên tiếp";
   };
   var quizAdvance = function () { l.qi = qi + 1; l.wrongs = 0; l.revealed = false; l.answered = false; l.hint = ""; BAR_NEXT = null; render(); };
   /* DOT SOI-D1 02/11: chi de nut Tiep tuc trong khoi cau hoi; nut thanh duoi trung lap da bo. */
@@ -7637,6 +7650,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
       l.encourage = l.streak === 5 ? "🎉 2812: Được 5 câu liên tiếp rồi — giỏi lắm! Nghỉ một hơi rồi làm tiếp nhé." : "🔥 2812: " + l.streak + " câu liên tiếp! Phong độ đang lên — giữ nhịp này nhé.";
       l.encourageShown = false;
     }
+    updateQuizChips();
   };
   var finishOneShot = function () {
     $$("#quizBox .q-opt").forEach(function (x) { x.disabled = true; });
@@ -10537,6 +10551,14 @@ function goalStripToday() {
   var m = todayMinutes();
   return "Hôm nay: " + m + "/" + g + " phút đã ghi nhận" + (m >= g ? " · đủ mục tiêu ngày ✓" : "");
 }
+/* v106d Loi 2: day "Hom nay" o dau bai (#lessonGoalStrip) duoc ve truoc khi
+   logLessonMinutes cong phut buoi hoc, con cot phai ve sau nen lech nhau
+   1 phut (1/30 o dau bai, 2/30 o cot phai). Sau khi ghi phut thi doc lai
+   so lieu moi cho dau bai. */
+function refreshGoalStrips() {
+  var gs = document.getElementById("lessonGoalStrip");
+  if (gs) gs.textContent = goalStripToday() + " · 🔥 Chuỗi " + streakDays() + " ngày";
+}
 
 /* ---------- Nghe chép chính tả theo câu (mới) ---------- */
 function renderDictation(app, l) {
@@ -10906,12 +10928,12 @@ function renderShadowListen(app, l, item, isLong) {
     if (wk) wk.onclick = function () { recordQuizError("shadow" + (isLong ? "Long" : "") + ":" + l.idx, si, { q: "Shadowing: " + sent, o: [sent], a: 0, why: "Câu này bạn tự đánh giá là cần luyện thêm trong bài " + item.topic + "." }); if (si + 1 < total) { l.shadowIdx = si + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; } else { l.shadowFinished = true; } saveState(); render(); };
   }
   if (l.shadowFinished) {
+    logLessonMinutes(l); /* v106d Loi 2: ghi phut TRUOC khi ve man tong ket — neu ghi sau, day "Hom nay" trong man tong ket + dau bai doc so cu, cot phai doc so moi, lech nhau 1 phut */
     app.innerHTML = skillHead("Shadowing — " + item.topic, "Đã luyện xong") + '<div class="summarybox"><h2>Xong Shadowing!</h2>'
       + '<p>Bạn đã đi hết ' + total + ' câu của bài này. Câu tự đánh giá “nhại được” đã vào hàng đợi ôn đúng ngày; câu “cần luyện thêm” đã vào Sổ lỗi sai.</p>'
       + "<p>" + esc(goalStripToday()) + "</p>"
       + '<div class="row"><button class="btn btn-primary" id="shAgain">Shadowing lại từ đầu</button><button class="btn" id="shToListen">Về bài Nghe</button></div></div>';
     wireBack();
-    logLessonMinutes(l);
     $("#shAgain").onclick = function () { l.shadowFinished = false; l.shadowIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; l.minutesLogged = false; render(); };
     $("#shToListen").onclick = function () { l.shadow = false; l.shadowFinished = false; render(); };
   }
@@ -17883,6 +17905,19 @@ try { mrPruneLibBest(); } catch (e) {}
 authRefresh().then(function () { authState.authLoading = false; render(); }, function () { authState.authLoading = false; render(); });
 authWatch();
 wireTutorFloat();
+/* v106d Loi 3: topbar tu an khi cuon xuong (>90px), hien lai ngay khi cuon
+   len — dong chu o mep tren khong con bi xen nua chung duoi thanh dinh
+   trong luc doc; thanh van san khi can. Cot phai dinh o top 78px giu
+   nguyen (khi topbar an thi cot phai chi cach mep tren mot khoang). */
+if (typeof window !== "undefined" && !window.__topbarHideWired) {
+  window.__topbarHideWired = true;
+  var __tbLastY = 0;
+  window.addEventListener("scroll", function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.classList.toggle("topbar-hidden", y > __tbLastY && y > 90);
+    __tbLastY = y;
+  }, { passive: true });
+}
 </script>
 </body>
 </html>
