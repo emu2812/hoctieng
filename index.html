@@ -6613,12 +6613,27 @@ var VK_MULTI_KINDS = ["w2vi", "vi2w", "listen", "fill"];
    bi cat mep tren). Goi SAU render() o moi cho doi buoc / sang the.
    v107c: scrollIntoView dua mep the len dung mep viewport thi topbar dinh
    (66px) van che mat ~66px dau the — phai tru them 80px (66 topbar + 14
-   khoang cach, nhu chuan 78px cua v106c) de mep the nam DUOI topbar. */
+   khoang cach, nhu chuan 78px cua v106c) de mep the nam DUOI topbar.
+   v107d: neo cuon — lan ve lai the vua roi co the lam trinh duyet dich vi
+   tri the SAU khi da cuon (guong thu lai lam the ngan di, video/anh tai
+   muon, focus): kiem tra lai sau mot nhip, neu mep tren the van nam tren
+   80px (tuc van khuat sau topbar) thi cuon bu cho du. Truy van lai phan tu
+   luc kiem tra (the co the da bi ve lai lan nua) va chong goi don bang co. */
 function vkScrollCardTop() {
   try {
     var el = document.querySelector("#app section.card") || document.querySelector(".vocab-card") || document.querySelector("#app .qblock");
     if (el && typeof el.scrollIntoView === "function") { el.scrollIntoView(); try { if (typeof window !== "undefined" && typeof window.scrollBy === "function") window.scrollBy(0, -80); } catch (e2) {} }
     else if (typeof window !== "undefined" && typeof window.scrollTo === "function") window.scrollTo(0, 0);
+    if (typeof window !== "undefined" && typeof window.setTimeout === "function" && !window.__vkScrollRecheck) {
+      window.__vkScrollRecheck = true;
+      window.setTimeout(function () {
+        window.__vkScrollRecheck = false;
+        try {
+          var el2 = document.querySelector("#app section.card") || document.querySelector(".vocab-card") || document.querySelector("#app .qblock");
+          if (el2 && typeof el2.getBoundingClientRect === "function") { var r = el2.getBoundingClientRect(); if (r && r.top < 80 && typeof window.scrollBy === "function") window.scrollBy(0, r.top - 80); }
+        } catch (e3) {}
+      }, 60);
+    }
   } catch (e) {}
 }
 function vkMultiState(l, key) {
@@ -7356,7 +7371,7 @@ function renderVocab(app, l) {
   var clMemoBtn = $("#vocabMemoSave"); if (clMemoBtn) clMemoBtn.onclick = function () { if (!state.mems) state.mems = {}; state.mems[clMemoKey] = $("#vocabMemoInp").value; saveState(); toast("Đã lưu mẹo nhớ."); };
   var vkSpk = $("#btnSpeak"); if (vkSpk) vkSpk.onclick = function () { speak(c.w); };
   wireNativeVideo(c.w, "english");
-  var vkLM = $("#vocabListenModel"); if (vkLM) vkLM.onclick = function () { vkSpeakBtnState(vkLM, c.w, function (done) { speak(c.w, null, done); }, vk); };
+  var vkLM = $("#vocabListenModel"); if (vkLM) vkLM.onclick = function () { vkSpeakBtnState(vkLM, c.w, function (done) { speak(c.w, null, done); }, vk); /* v107d: bam Nghe cung dua dau the ve khung nhin — nguoi hoc co the da cuon xuong moi thay nut nay. */ vkScrollCardTop(); };
   var vkHN = $("#vocabHeardNext"); if (vkHN) vkHN.onclick = function () { vk.heard = true; vk.step = 1; render(); vkScrollCardTop(); };
   var vkPN = $("#vocabPronNext"); if (vkPN) vkPN.onclick = function () { vk.step = 4; render(); vkScrollCardTop(); };
   var vkTC = $("#vocabTypeCheck"); if (vkTC) vkTC.onclick = function () { var inp = $("#vocabTypeInp"); var val = inp ? inp.value : ""; vk.typeDraft = val; var sc = vkTypeScoreEn(val, c.w); if (sc.ok) { vk.typeDone = true; vk.typeWhy = ""; render(); } else { vk.typeWhy = sc.whyText; if (!vk.recorded.type) { vk.recorded.type = true; try { recordQuizError("vocabMulti:" + l.setIdx, pos * 10 + 9, { q: "Gõ từ: " + c.w + " (nghĩa: " + c.vi + ")", o: [c.w], a: 0, why: "Từ đúng là " + c.w + " — " + c.vi + "." }); } catch (e) {} } render(); } };
@@ -7456,6 +7471,7 @@ function renderVocab(app, l) {
       $("#btnRedo").onclick = function () { state.pos["vocab:" + l.setIdx] = 0; saveState(); lessonStart = Date.now(); runFirstTry = {}; runWrong = []; render(); };
       var nxInfoSkip = vocabNextSetInfo("en", l.setIdx); if (nxInfoSkip) { var nxBtnSkip = document.createElement("button"); nxBtnSkip.className = "btn btn-primary"; nxBtnSkip.style.marginTop = "10px"; nxBtnSkip.textContent = "Học bộ tiếp theo: " + nxInfoSkip.title + " →"; nxBtnSkip.onclick = function () { nxInfoSkip.open(); }; app.appendChild(nxBtnSkip); }
     } else render();
+    /* v107d: bo qua the cung phai dua dau the moi ve khung nhin — ham nay con duoc goi qua nut Bo qua o thanh duoi sau luot cham, duong do truoc day render ma khong cuon. */ vkScrollCardTop();
   };
   $("#btnPronounce").onclick = function () {
     var key = "s" + l.setIdx + ":" + pos;
@@ -7466,7 +7482,7 @@ function renderVocab(app, l) {
        phan hoi theo am) qua lan render ke tiep de nguoi hoc van doc duoc.
        Giu lai ca nut thanh duoi (Doc lai / Bo qua) — renderLesson() dat
        BAR_RESULT = null nen phai set lai sau render. */
-    vocabKnownStart(key, c.w, firstSymFromIpa(c.ipa), $("#vocabCheckSlot"), $("#vocabCheckResult"), null, vocabSkipCard, function (chk, ai, mirror) { vk.pronDone = true; if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror; var resEl = $("#vocabCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML; var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null; if (chk && chk.ok && vk.step === 3) vk.step = 4; render(); if (br) setBarResult(br); /* v107c: dam bao nut Phat am trong the con hien sau luot doc — neu lan ve lai vua roi lam mat/an nut (duong live truoc day, khong tai hien duoc bang probe), ve lai/khoi phuc ngay. */ if (!$("#btnPronounce")) render(); var bp3 = $("#btnPronounce"); if (bp3) bp3.style.display = ""; });
+    vocabKnownStart(key, c.w, firstSymFromIpa(c.ipa), $("#vocabCheckSlot"), $("#vocabCheckResult"), null, vocabSkipCard, function (chk, ai, mirror) { vk.pronDone = true; if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror; var resEl = $("#vocabCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML; var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null; if (chk && chk.ok && vk.step === 3) vk.step = 4; render(); if (br) setBarResult(br); /* v107c: dam bao nut Phat am trong the con hien sau luot doc — neu lan ve lai vua roi lam mat/an nut (duong live truoc day, khong tai hien duoc bang probe), ve lai/khoi phuc ngay. */ if (!$("#btnPronounce")) render(); var bp3 = $("#btnPronounce"); if (bp3) bp3.style.display = ""; /* v107d: cham xong (ke ca tu sang buoc go khi dat 80) cung phai dua dau the ve khung nhin — duong onGraded nay render ma khong cuon, nen sau luot Phat am / sang buoc 5 dau the bi khuat. */ vkScrollCardTop(); });
   };
   /* DOT UI-FIX 31/10: xem truoc thi an nut Phat am cham diem (phan cham diem khoa). */
   if (l.preview) { var bp = $("#btnPronounce"); if (bp) bp.style.display = "none"; wirePreviewLock(); }
@@ -15552,14 +15568,14 @@ function renderZhVocab(app, l) {
   $$("[data-zhstroke]").forEach(function (b) { b.onclick = function () { openLesson({ type: "zhStroke", han: b.dataset.zhstroke }); }; });
   wireNativeVideo(c.han, "chinese");
   var zhSkipCard = function () { try { mirrorStop(); } catch (e) {} var hk = d.key + ":" + pos; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[hk]) state.zhHard[hk] = { kind: "card", han: c.han, pinyin: c.pinyin, vi: c.vi, setKey: d.key, idx: pos, fails: 0, streak: 0, level: 0, due: addDaysStr(todayStr(), 1) }; /* v107b: ghi the bo qua de man ket biet bo nay toan bo qua (nhu vocabSkipped cua the Anh). */ if (!state.zhSkipped) state.zhSkipped = []; if (state.zhSkipped.indexOf(hk) < 0) state.zhSkipped.push(hk); /* v107c: ghi the bo qua = khong thuoc o luot nay (de man ket biet bo nay co thuoc the nao khong). */ if (!l.zhFirstTry) l.zhFirstTry = {}; l.zhFirstTry[pos] = false; state.zhPos[d.key] = pos + 1; saveState(); render(); };
-  var zhLM = $("#zhListenModel"); if (zhLM) zhLM.onclick = function () { vkSpeakBtnState(zhLM, c.han, function () { zhSpeak(c.han); }, zvk); };
+  var zhLM = $("#zhListenModel"); if (zhLM) zhLM.onclick = function () { vkSpeakBtnState(zhLM, c.han, function () { zhSpeak(c.han); }, zvk); /* v107d: nhu nut Nghe cua the Anh — bam Nghe cung dua dau the ve khung nhin. */ vkScrollCardTop(); };
   var zhHN = $("#zhHeardNext"); if (zhHN) zhHN.onclick = function () { zvk.heard = true; zvk.step = 1; render(); vkScrollCardTop(); };
   var zhPN = $("#zhPronNext"); if (zhPN) zhPN.onclick = function () { zvk.step = 4; render(); vkScrollCardTop(); };
   var zhTC = $("#zhTypeCheck"); if (zhTC) zhTC.onclick = function () { var inp = $("#zhTypeInp"); var val = inp ? inp.value : ""; zvk.typeDraft = val; var sc = vkTypeScoreZh(val, c.pinyin); if (sc.ok) { zvk.typeDone = true; zvk.typeWhy = ""; render(); } else { zvk.typeWhy = sc.whyText; if (!zvk.recorded.type) { zvk.recorded.type = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + 9, { q: "Gõ pinyin: " + c.han + " (nghĩa: " + c.vi + ")", o: [c.pinyin], a: 0, why: "Pinyin đúng là " + c.pinyin + " — " + c.vi + "." }); } catch (e) {} } render(); } };
   $$("[data-zhchoice]").forEach(function (b) { b.onclick = function () { if (zvk.choiceAnswered) return; var ch = vkStepChoice("zh", c, cards, pos, zvk.step); var kind = ch.kind; var picked = +b.dataset.zhchoice; if (picked === ch.a) { zvk.choiceAnswered = true; zvk.choiceWhy = "Đúng rồi — " + ch.why; } else { zvk.choiceAnswered = false; zvk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.han + "”" : ch.options[ch.a]) + ". " + ch.why + " Giờ hãy bấm vào đáp án đúng để đi tiếp."; if (!zvk.recorded["choice:" + kind]) { zvk.recorded["choice:" + kind] = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + (zvk.step - 1), { q: ch.q, o: ch.options.slice(), a: ch.a, why: ch.why }); } catch (e) {} } } render(); }; });
   var zhCL = $("#zhChoiceListen"); if (zhCL) zhCL.onclick = function () { zhSpeak(c.han); };
   var zhCN = $("#zhChoiceNext"); if (zhCN) zhCN.onclick = function () { zvk.choiceDone++; zvk.choiceAnswered = false; zvk.choiceWhy = ""; zvk.step = zvk.step + 1; render(); vkScrollCardTop(); };
-  var zhPC = $("#zhPronCheck"); if (zhPC) zhPC.onclick = function () { var res = $("#zhMirrorResult"); var t = res ? res.textContent : ""; if (t.indexOf("Nghe lại bản ghi") >= 0) { zvk.pronRecorded = true; zvk.pronDone = true; zvk.pronWhy = ""; } else if (t.indexOf("Chưa ghi được âm thanh") >= 0 || t.indexOf("Đang xử lý") >= 0) { /* v107b/v107c: ghi that bai (hoac luot ghi da ket thuc) cung la da doc mot luot — mo nut sang buoc go, diem khong khoa the; khong doi timeout doc text. */ zvk.pronAttempted = true; zvk.pronWhy = ""; } else { zvk.pronWhy = "Chưa thấy bản ghi — bấm “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để kết thúc lượt ghi, sau đó bấm lại nút này."; } render(); };
+  var zhPC = $("#zhPronCheck"); if (zhPC) zhPC.onclick = function () { var res = $("#zhMirrorResult"); var t = res ? res.textContent : ""; if (t.indexOf("Nghe lại bản ghi") >= 0) { zvk.pronRecorded = true; zvk.pronDone = true; zvk.pronWhy = ""; } else if (t.indexOf("Chưa ghi được âm thanh") >= 0 || t.indexOf("Đang xử lý") >= 0) { /* v107b/v107c: ghi that bai (hoac luot ghi da ket thuc) cung la da doc mot luot — mo nut sang buoc go, diem khong khoa the; khong doi timeout doc text. */ zvk.pronAttempted = true; zvk.pronWhy = ""; } else { zvk.pronWhy = "Chưa thấy bản ghi — bấm “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để kết thúc lượt ghi, sau đó bấm lại nút này."; } render(); /* v107d: kiem tra ban ghi xong (hien nut sang buoc go) cung dua dau the ve khung nhin. */ vkScrollCardTop(); };
   /* B6b: the hoc xong tron 5 buoc tu hen on lai theo SRS (1-3-7-14-30, dung 2 lan cach quang moi tot nghiep) — cung khuon muc kho, khong reset muc da co. */
   var zhFinishCard = function () { try { mirrorStop(); } catch (e) {} var hk = d.key + ":" + pos; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[hk]) state.zhHard[hk] = { kind: "card", han: c.han, pinyin: c.pinyin, vi: c.vi, setKey: d.key, idx: pos, fails: (Object.keys(zvk.recorded).length > 0 || zvk.peeked) ? 1 : 0, streak: 0, level: 0, due: addDaysStr(todayStr(), 1) }; /* v107b: the Trung xong +1 XP nhu the Anh (Bui quyet 09:38 07/11); hoc that the nay thi xoa khoi danh sach bo qua. */ if (state.zhSkipped && state.zhSkipped.indexOf(hk) >= 0) state.zhSkipped = state.zhSkipped.filter(function (x) { return x !== hk; }); /* v107c: ghi the hoc xong co thuoc ngay lan dau khong (dung dieu kien nhu fails o tren: co ghi am hoac peek thi khong tinh thuoc ngay). */ if (!l.zhFirstTry) l.zhFirstTry = {}; l.zhFirstTry[pos] = !(Object.keys(zvk.recorded).length > 0 || zvk.peeked); awardXp(1); state.zhPos[d.key] = pos + 1; saveState(); zhMaybeBlockReview(l, d, cards, pos); render(); vkScrollCardTop(); };
   var zhFin = $("#zhMultiFinish"); if (zhFin) zhFin.onclick = zhFinishCard;
@@ -15576,6 +15592,7 @@ function renderZhVocab(app, l) {
        gio dat pronAttempted — the ket cung o buoc 4 du da ghi that bai. */
     zvk.pronAttempted = true;
     render();
+    /* v107d: dung ghi (guong thu lai) cung phai dua dau the ve khung nhin — render nay xoa giao dien guong dai, vi tri cuon cu bi lech. */ vkScrollCardTop();
   };
   $("#zhMirrorBtn").onclick = function () {
     var slot = $("#zhMirrorSlot"), res = $("#zhMirrorResult");
@@ -16781,6 +16798,7 @@ function tcTpVocab5Skip(sess) {
   sess.pos = pos + 1;
   saveState();
   renderTcTpVocab5(sess.track, sess.stepId, sess.back);
+  /* v107d: nhu vocabSkipCard cua the Anh — ham nay con duoc goi qua nut Bo qua o thanh duoi sau luot cham, duong do truoc day render ma khong cuon. */ vkScrollCardTop();
 }
 function tcTpVocab5FinishHTML(sess, cards, allSkipped) {
   var isTc = sess.track === "tc";
@@ -16901,7 +16919,7 @@ function renderTcTpVocab5(track, stepId, back) {
   try { if (typeof fitBigLetter === "function") fitBigLetter(); } catch (e) {}
   wireVocabMethods97(app, stepId, track);
   var tl = $("#ttListen"); if (tl) tl.onclick = function () { if (isTc) speak(c.w); else tpSpeak(c.w); };
-  var tlm = $("#ttListenModel"); if (tlm) tlm.onclick = function () { vkSpeakBtnState(tlm, c.w, function (done) { if (isTc) speak(c.w, null, done); else tpSpeak(c.w); }, vk); };
+  var tlm = $("#ttListenModel"); if (tlm) tlm.onclick = function () { vkSpeakBtnState(tlm, c.w, function (done) { if (isTc) speak(c.w, null, done); else tpSpeak(c.w); }, vk); /* v107d: nhu nut Nghe cua the Anh/Trung — bam Nghe cung dua dau the ve khung nhin. */ vkScrollCardTop(); };
   var thn = $("#ttHeardNext"); if (thn) thn.onclick = function () { vk.heard = true; vk.step = 1; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   var tpn = $("#ttPronNext"); if (tpn) tpn.onclick = function () { vk.step = 4; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   var tpr = $("#ttPronRetry"); if (tpr) tpr.onclick = function () { vk.pronDone = false; vk.pronScore = null; vk.pronMirror = null; vk.pronResultHTML = ""; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
@@ -16947,6 +16965,7 @@ function renderTcTpVocab5(track, stepId, back) {
         if (chk && chk.ok && vk.step === 3) vk.step = 4;
         renderTcTpVocab5(track, stepId, backTab);
         if (br) setBarResult(br);
+        /* v107d: nhu onGraded cua the Anh — cham xong (ke ca tu sang buoc go) cung phai dua dau the ve khung nhin. */ vkScrollCardTop();
       });
     } catch (e) { if (res) res.innerHTML = '<p>Không mở được mic/camera trên máy này — đọc to theo giọng máy rồi bấm "Bỏ qua thẻ này" để học tiếp.</p>'; }
   };
