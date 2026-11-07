@@ -485,8 +485,11 @@ function myWordsForSet(bank, setIdx) {
 }
 function myDisplayCard(m) {
   /* Ánh xạ hiển thị: câu ví dụ + dịch vào đúng chỗ ví dụ sẵn có của thẻ (ex/exv);
-     giải thích giữ riêng ở myEx để dòng "cá nhân" hiển thị, không lẫn vào ví dụ. */
-  return { w: m.w, han: m.w, vi: m.vi, ipa: m.ipa || "", pinyin: m.pinyin || "", r: m.r || "", col: m.col || "", ex: m.sen || m.ex || "", exv: m.senVi || "", note: m.note || "", tip: m.tip || "", pos: m.pos || "", sen: m.sen || "", senVi: m.senVi || "", myEx: m.ex || "", personal: 1, _myId: m.id };
+     giải thích giữ riêng ở myEx để dòng "cá nhân" hiển thị, không lẫn vào ví dụ.
+     v109: them img (anh chup, data URL da nen) + unsure — anh hien o than the
+     (buoc 1 + 3) va nhanh chon hinh o buoc 2 (vkCardImage / vkImageChoice);
+     nhan "can doi chieu giao trinh" khi unsure=1. */
+  return { w: m.w, han: m.w, vi: m.vi, ipa: m.ipa || "", pinyin: m.pinyin || "", r: m.r || "", col: m.col || "", ex: m.sen || m.ex || "", exv: m.senVi || "", note: m.note || "", tip: m.tip || "", pos: m.pos || "", sen: m.sen || "", senVi: m.senVi || "", myEx: m.ex || "", personal: 1, _myId: m.id, img: m.img || "", unsure: m.unsure ? 1 : 0 };
 }
 function injectMyWords() {
   myWordBanks().forEach(function (b) {
@@ -497,6 +500,252 @@ function injectMyWords() {
       s.cards = kept;
     });
   });
+}
+/* ---------- CHUP ANH THEM TU VUNG (v109, Bui yeu cau 09:38–09:40 07/11) ----------
+   Chup anh do vat (camera) hoac chon anh co san -> nhan dien vat MIEN PHI NGAY
+   TREN MAY (MobileNet chay trong trinh duyet, tai 1 lan/phien tu CDN jsDelivr;
+   khong goi API tra phi, khong gui anh len may chu nao) -> goi y ten vat bang
+   tieng Anh + nguoi hoc XAC NHAN/SUA tu + nghia Viet + phat am roi LUU THANH
+   THE TU VUNG, anh lam hinh minh hoa cua the. The moi hoc theo dung luong 5
+   buoc + SRS nhu tu thuong; the co hinh kich hoat nhanh "chon hinh" o buoc 2
+   (can >=4 the co hinh trong cung bo — xem vkImageChoice).
+   KHONG bia tu: mo hinh chi goi y ten vat tieng Anh; nghia Viet + tu o ngon
+   ngu dich do NGUOI HOC nhap/xac nhan; tu nao chua chac thi danh dau
+   "can doi chieu giao trinh" (unsure=1) va hien nhan o the + danh sach.
+   Anh luu trong state.myWords (localStorage, dong bo Supabase nhu tu tay —
+   cung luat gop khach khi dang nhap); nen anh truoc khi luu, tran tong
+   2MB cho tat ca anh (localStorage co gioi han) — qua tran thi bao ro,
+   khong ghi de du lieu cu. */
+var MY_PHOTO_TARGET = 150000;   /* anh sau nen: toi da ~150KB */
+var MY_PHOTO_MAX_ONE = 300000;  /* anh goc chap nhan neu nen that bai: toi da ~300KB */
+var MY_PHOTO_BUDGET = 2000000;  /* tong tat ca anh trong myWords: toi da ~2MB */
+var photoDraft = null; /* ban nhap chua luu: {dataUrl, img, guesses, status, lowConf, w, vi, pron, unsure} */
+function myPhotoBytes() { var n = 0; (state.myWords || []).forEach(function (m) { if (m && m.img) n += String(m.img).length; }); return n; }
+function vkCardImageHTML(c, show) {
+  var img = show ? vkCardImage(c) : null;
+  if (!img) return "";
+  return '<p><img id="cardPhoto" src="' + esc(img) + '" alt="Hình minh họa của thẻ" style="max-width:240px;max-height:180px;border-radius:12px;display:block"></p>';
+}
+function vkUnsureHTML(c) { return (c && c.unsure) ? ' <span class="chip">Cần đối chiếu giáo trình</span>' : ''; }
+function photoLoadScript(src) {
+  return new Promise(function (resolve, reject) {
+    var s = document.createElement("script");
+    var done = false;
+    var to = setTimeout(function () { if (!done) { done = true; reject(new Error("timeout")); } }, 20000);
+    s.onload = function () { if (!done) { done = true; clearTimeout(to); resolve(); } };
+    s.onerror = function () { if (!done) { done = true; clearTimeout(to); reject(new Error("load fail")); } };
+    s.src = src; document.head.appendChild(s);
+  });
+}
+function photoLoadModel() {
+  if (window.__photoModel) return Promise.resolve(window.__photoModel);
+  var load = function () {
+    if (!window.mobilenet || !window.mobilenet.load) return Promise.reject(new Error("no mobilenet"));
+    return window.mobilenet.load({ version: 2, alpha: 0.5 }).then(function (m) { window.__photoModel = m; return m; });
+  };
+  if (window.mobilenet && window.mobilenet.load) return load();
+  return photoLoadScript("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js")
+    .then(function () { return photoLoadScript("https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"); })
+    .then(load);
+}
+function photoLoadImage(dataUrl) {
+  return new Promise(function (resolve, reject) {
+    var img = new Image();
+    var done = false;
+    var to = setTimeout(function () { if (!done) { done = true; reject(new Error("image timeout")); } }, 8000);
+    img.onload = function () { if (!done) { done = true; clearTimeout(to); resolve(img); } };
+    img.onerror = function () { if (!done) { done = true; clearTimeout(to); reject(new Error("image load fail")); } };
+    img.src = dataUrl;
+  });
+}
+function photoCompress(dataUrl) {
+  /* Nen anh xuong JPEG <= ~150KB (thu dan 640 -> 480 -> 320, chat luong
+     0.78 -> 0.7 -> 0.6). Canvas loi/timeout thi reject — ben goi se dung
+     anh goc neu duoi 300KB, khong thi bao loi. */
+  return photoLoadImage(dataUrl).then(function (img) {
+    var w = img.naturalWidth || img.width || 0, h = img.naturalHeight || img.height || 0;
+    if (!w || !h) return Promise.reject(new Error("no size"));
+    var tries = [[640, 0.78], [480, 0.7], [320, 0.6]];
+    var last = dataUrl;
+    for (var i = 0; i < tries.length; i++) {
+      var maxDim = tries[i][0], q = tries[i][1];
+      var sc = Math.min(1, maxDim / Math.max(w, h));
+      var cv = document.createElement("canvas");
+      cv.width = Math.max(1, Math.round(w * sc)); cv.height = Math.max(1, Math.round(h * sc));
+      var ctx = cv.getContext("2d");
+      if (!ctx) return Promise.reject(new Error("no canvas"));
+      ctx.drawImage(img, 0, 0, cv.width, cv.height);
+      var out = cv.toDataURL("image/jpeg", q);
+      if (!out) return Promise.reject(new Error("no dataurl"));
+      last = out;
+      if (out.length <= MY_PHOTO_TARGET) return out;
+    }
+    return last;
+  });
+}
+function photoCleanLabel(raw) {
+  /* ImageNet tra "tabby, tabby cat" — lay phan cuoi sau dau phay (ten thuong
+     goi nhat), bo khoang trang. */
+  var parts = String(raw || "").split(",");
+  return (parts[parts.length - 1] || "").trim();
+}
+function photoRecognize(dataUrl) {
+  return photoLoadModel().then(function (model) {
+    return photoLoadImage(dataUrl).then(function (img) { return model.classify(img); });
+  }).then(function (preds) {
+    var out = [];
+    (preds || []).slice(0, 3).forEach(function (p) {
+      var label = photoCleanLabel(p.className);
+      if (label) out.push({ label: label, prob: p.probability || 0 });
+    });
+    if (!out.length) throw new Error("no guess");
+    return out;
+  });
+}
+function photoPronLabel(bank) {
+  return bank === "zh" ? "Pinyin + thanh điệu" : (bank === "tp" ? "Phiên âm Latin" : "IPA");
+}
+function photoBank() { var tr = document.getElementById("phFTrack"); return (tr && tr.value) || state.track || "en"; }
+function photoSetStatus(t) { var el = document.getElementById("phFStatus"); if (el) el.textContent = t; }
+function photoReadFile(file) {
+  return new Promise(function (resolve, reject) {
+    var r = new FileReader();
+    r.onload = function () { resolve(String(r.result || "")); };
+    r.onerror = function () { reject(new Error("read fail")); };
+    r.readAsDataURL(file);
+  });
+}
+function photoHandleFile(dataUrl) {
+  /* Nhan anh tu input (camera/chon anh): hien anh ngay, nen anh, roi nhan
+     dien tren may; mo hinh tai khong duoc thi ve duong nhap tay. */
+  if (!dataUrl || dataUrl.indexOf("data:image/") !== 0) { photoSetStatus("Ảnh này không đọc được — hãy chọn ảnh khác (JPG/PNG)."); return; }
+  photoDraft = { dataUrl: dataUrl, img: null, guesses: null, status: "compressing", lowConf: false, w: "", vi: "", pron: "", unsure: false };
+  photoRenderDraft();
+  var useImg = function (img) {
+    if (!photoDraft || photoDraft.dataUrl !== dataUrl) return;
+    photoDraft.img = img; photoDraft.status = "recognizing"; photoRenderDraft();
+    photoRecognize(dataUrl).then(function (guesses) {
+      if (!photoDraft || photoDraft.dataUrl !== dataUrl) return;
+      photoDraft.guesses = guesses; photoDraft.status = "ready";
+      photoDraft.lowConf = !!(guesses[0] && guesses[0].prob < 0.5);
+      var bank = photoBank();
+      if (!photoDraft.w && (bank === "en" || bank === "tc") && guesses[0]) photoDraft.w = guesses[0].label;
+      if (photoDraft.lowConf) photoDraft.unsure = true;
+      photoRenderDraft();
+    }).catch(function () {
+      if (!photoDraft || photoDraft.dataUrl !== dataUrl) return;
+      photoDraft.guesses = null; photoDraft.status = "manual"; photoRenderDraft();
+    });
+  };
+  photoCompress(dataUrl).then(useImg).catch(function () {
+    if (!photoDraft || photoDraft.dataUrl !== dataUrl) return;
+    if (dataUrl.length <= MY_PHOTO_MAX_ONE) useImg(dataUrl);
+    else { photoDraft = null; photoRenderDraft(); photoSetStatus("Ảnh quá lớn (trên ~300KB sau khi nén thử) — hãy chụp gần hơn hoặc chọn ảnh nhỏ hơn rồi thử lại."); }
+  });
+}
+function photoDraftHTML() {
+  var d = photoDraft;
+  if (!d) return "";
+  var h = '<div id="photoDraftBox">';
+  h += '<p><img src="' + esc(d.img || d.dataUrl) + '" alt="Ảnh vừa chụp" style="max-width:240px;max-height:180px;border-radius:12px;display:block"></p>';
+  if (d.status === "compressing") h += '<p class="mut">Đang chuẩn bị ảnh…</p>';
+  else if (d.status === "recognizing") h += '<p class="mut">Đang nhận diện vật trên máy của bạn… (lần đầu tải mô hình có thể mất vài giây)</p>';
+  else {
+    if (d.status === "manual") h += '<p class="mut">Không tải được mô hình nhận diện trên máy này — nhập tay từ + nghĩa rồi lưu kèm ảnh.</p>';
+    else {
+      var g0 = d.guesses && d.guesses[0];
+      h += '<p>Mô hình nhận ra: <b>' + esc(g0 ? g0.label : "") + '</b>' + (g0 ? ' <span class="mut">(độ tin cậy ' + Math.round(g0.prob * 100) + '%)</span>' : '') + '</p>';
+      if (d.lowConf) h += '<p class="mut">Mô hình không chắc lắm — hãy kiểm tra kỹ từ rồi mới lưu, hoặc tick ô "chưa chắc" bên dưới.</p>';
+      if (d.guesses && d.guesses.length > 1) {
+        h += '<p class="mut">Cũng có thể là: ' + d.guesses.slice(1).map(function (g, i) { return '<button class="btn" data-phalt="' + (i + 1) + '">' + esc(g.label) + '</button>'; }).join(" ") + '</p>';
+      }
+    }
+    var bank = photoBank();
+    h += '<p><label>Từ (' + (bank === "zh" ? "chữ Hán" : bank === "tp" ? "tiếng Hàn" : "tiếng Anh") + ') (*): <input type="text" id="phFW" style="width:100%" value="' + esc(d.w || "") + '"></label></p>'
+      + '<p><label>Nghĩa tiếng Việt (*): <input type="text" id="phFVi" style="width:100%" value="' + esc(d.vi || "") + '"></label></p>'
+      + '<p><label>' + photoPronLabel(bank) + ' (*): <input type="text" id="phFPron" style="width:100%" value="' + esc(d.pron || "") + '"></label></p>'
+      + '<p><label><input type="checkbox" id="phFUnsure"' + (d.unsure ? ' checked' : '') + '> Tôi chưa chắc từ này — cần đối chiếu giáo trình</label></p>'
+      + '<p><button class="btn btn-primary" id="phFSave">Lưu thành thẻ từ</button> <button class="btn" id="phFCancel">Bỏ ảnh này</button></p>'
+      + '<p class="mut" id="phFMsg"></p>';
+  }
+  h += '</div>';
+  return h;
+}
+function photoRenderDraft() {
+  var area = document.getElementById("photoDraftArea");
+  if (!area) return;
+  area.innerHTML = photoDraftHTML();
+  wirePhotoDraft();
+}
+function wirePhotoDraft() {
+  var d = photoDraft; if (!d) return;
+  $$("[data-phalt]").forEach(function (b) { b.onclick = function () { var g = (d.guesses || [])[+b.dataset.phalt]; if (g) { d.w = g.label; photoRenderDraft(); } }; });
+  var wEl = document.getElementById("phFW"); if (wEl) wEl.oninput = function () { d.w = wEl.value; };
+  var viEl = document.getElementById("phFVi"); if (viEl) viEl.oninput = function () { d.vi = viEl.value; };
+  var prEl = document.getElementById("phFPron"); if (prEl) prEl.oninput = function () { d.pron = prEl.value; };
+  var unEl = document.getElementById("phFUnsure"); if (unEl) unEl.onchange = function () { d.unsure = !!unEl.checked; };
+  var sv = document.getElementById("phFSave"); if (sv) sv.onclick = function () { photoSave(); };
+  var cx = document.getElementById("phFCancel"); if (cx) cx.onclick = function () { photoDraft = null; photoRenderDraft(); };
+}
+function photoSave() {
+  var d = photoDraft; if (!d || !d.img) return;
+  var msg = document.getElementById("phFMsg");
+  var setMsg = function (t) { if (msg) msg.textContent = t; };
+  var bank = photoBank();
+  var setEl = document.getElementById("phFSet");
+  var setIdx = setEl ? parseInt(setEl.value, 10) : NaN;
+  var wEl = document.getElementById("phFW"), viEl = document.getElementById("phFVi"), prEl = document.getElementById("phFPron"), unEl = document.getElementById("phFUnsure");
+  var w = ((wEl ? wEl.value : d.w) || "").trim();
+  var vi = ((viEl ? viEl.value : d.vi) || "").trim();
+  var pron = ((prEl ? prEl.value : d.pron) || "").trim();
+  var unsure = unEl ? !!unEl.checked : !!d.unsure;
+  if (!w || !vi) { setMsg("Hãy nhập từ và nghĩa tiếng Việt (hai ô bắt buộc)."); return; }
+  if (isNaN(setIdx)) { setMsg("Hãy chọn bộ để xếp từ vào (từ không gắn bộ sẽ không hiện ở đâu cả)."); return; }
+  if (bank === "zh" && !pron) { setMsg("Tiếng Trung cần pinyin + thanh điệu — hãy nhập rồi kiểm tra kỹ trước khi lưu."); return; }
+  if ((bank === "en" || bank === "tc") && !pron) { setMsg("Tiếng Anh / TOEIC cần IPA — hãy nhập rồi kiểm tra kỹ trước khi lưu."); return; }
+  if (bank === "tp" && !pron) { setMsg("Tiếng Hàn cần phiên âm Latin — hãy nhập rồi kiểm tra kỹ trước khi lưu."); return; }
+  var dup = myWordDuplicate(bank, setIdx, w);
+  if (dup) { setMsg("Từ này đã có trong bộ rồi (nghĩa: " + dup.vi + ") — không ghi đè, hãy nhập từ khác."); return; }
+  if (myPhotoBytes() + d.img.length > MY_PHOTO_BUDGET) { setMsg("Đã đủ ảnh (tối đa ~2MB cho tất cả ảnh) — hãy xóa bớt từ có ảnh cũ rồi thêm tiếp."); return; }
+  if (!state.myWords) state.myWords = [];
+  state.myWords.push({ id: "my" + Date.now() + "" + Math.floor(Math.random() * 1000), bank: bank, setIdx: setIdx, w: w, vi: vi, ipa: (bank === "en" || bank === "tc") ? pron : "", pinyin: bank === "zh" ? pron : "", r: bank === "tp" ? pron : "", col: "", ex: "", sen: "", senVi: "", pos: "", tip: "", note: "", img: d.img, unsure: unsure ? 1 : 0, createdAt: Date.now() });
+  saveState(); injectMyWords(); photoDraft = null;
+  toast("Đã lưu từ “" + w + "” kèm ảnh vào bộ của bạn.");
+  render();
+}
+function photoOpenEntry() {
+  go("mine");
+  var det = document.getElementById("mineGrpSupplement");
+  if (det) det.open = true;
+  var sec = document.getElementById("photoWordSection");
+  if (sec && sec.scrollIntoView) sec.scrollIntoView();
+}
+function wirePhotoEntry() {
+  $$("[data-photoentry]").forEach(function (b) { b.onclick = function () { photoOpenEntry(); }; });
+}
+function wirePhotoWord() {
+  var tr = document.getElementById("phFTrack"), sf = document.getElementById("phFSetFilter"), ss = document.getElementById("phFSet");
+  if (!tr || !ss) return;
+  var rebuild = function () {
+    var cur = ss.value;
+    ss.innerHTML = mySetOptionsHTML(tr.value, sf ? sf.value : "");
+    if (cur) { for (var i = 0; i < ss.options.length; i++) if (ss.options[i].value === cur) { ss.value = cur; break; } }
+    photoRenderDraft();
+  };
+  tr.onchange = rebuild;
+  if (sf) sf.oninput = rebuild;
+  var pickFile = function (input) {
+    if (!input || !input.files || !input.files[0]) return;
+    photoReadFile(input.files[0]).then(function (dataUrl) { photoHandleFile(dataUrl); }).catch(function () { photoSetStatus("Không đọc được ảnh này — hãy chọn ảnh khác (JPG/PNG)."); });
+    input.value = "";
+  };
+  var cam = document.getElementById("phFCamera"), pk = document.getElementById("phFPick");
+  var f1 = document.getElementById("phFFile"), f2 = document.getElementById("phFPickFile");
+  if (cam && f1) cam.onclick = function () { f1.click(); };
+  if (pk && f2) pk.onclick = function () { f2.click(); };
+  if (f1) f1.onchange = function () { pickFile(f1); };
+  if (f2) f2.onchange = function () { pickFile(f2); };
+  wirePhotoDraft();
 }
 function myWordNorm(w) { return String(w || "").trim().toLowerCase(); }
 function myWordDuplicate(bank, setIdx, w) {
@@ -834,6 +1083,20 @@ function supplementHTML() {
     + '<p><label>Ghi chú: <textarea id="myFNote" rows="2" style="width:100%"></textarea></label></p>'
     + '<p><button class="btn" id="myFSave">Lưu từ</button></p>'
     + '<p class="mut" id="myFMsg"></p></section>';
+  /* v109: chup anh them tu — anh lam hinh minh hoa cua the; them du 4 the co
+     anh vao cung mot bo thi buoc chon nghia se thanh chon hinh. */
+  html += '<section class="card" id="photoWordSection"><h3>📷 Chụp ảnh thêm từ</h3>'
+    + '<p class="mut">Chụp đồ vật quanh bạn (hoặc chọn ảnh có sẵn) — web nhận diện vật ngay trên máy này, không gửi ảnh đi đâu, rồi bạn xác nhận từ + nghĩa và lưu thành thẻ từ để học như từ thường, ảnh làm hình minh họa của thẻ.</p>'
+    + '<p class="mut">' + storageNote + '</p>'
+    + '<p class="mut">Thêm đủ 4 thẻ có ảnh vào cùng một bộ thì bước chọn nghĩa sẽ thành chọn hình.</p>'
+    + '<p><label>Track: <select id="phFTrack">' + trackOpts + '</select></label></p>'
+    + '<p><label>Lọc bộ: <input type="text" id="phFSetFilter" placeholder="Gõ vài chữ để lọc bộ…" style="width:100%"></label></p>'
+    + '<p><label>Bộ để xếp từ vào (*): <select id="phFSet" style="width:100%">' + mySetOptionsHTML(curBank, "") + '</select></label></p>'
+    + '<p><button class="btn" id="phFCamera">📷 Chụp ảnh</button> <button class="btn" id="phFPick">🖼 Chọn ảnh có sẵn</button>'
+    + '<input type="file" id="phFFile" accept="image/*" capture="environment" style="display:none">'
+    + '<input type="file" id="phFPickFile" accept="image/*" style="display:none"></p>'
+    + '<p class="mut" id="phFStatus"></p>'
+    + '<div id="photoDraftArea">' + photoDraftHTML() + '</div></section>';
   html += '<section class="card"><h3>Từ của tôi (' + words.length + ' từ)</h3>';
   if (!words.length) {
     html += '<p class="mut">Chưa có từ nào — nhập từ đầu tiên ở form phía trên.</p>';
@@ -850,11 +1113,12 @@ function supplementHTML() {
       var setName = (bObj && bObj.sets[si]) ? (bObj.sets[si].topic || ("Bộ " + (si + 1))) : ("Bộ " + (si + 1));
       html += '<details style="margin-top:8px"><summary><b>' + esc(setName) + '</b> · ' + groups[k].length + ' từ cá nhân</summary>';
       groups[k].forEach(function (m) {
-        html += '<div class="qblock"><p><span class="chip">Cá nhân</span> <b>' + esc(m.w) + '</b>'
+        html += '<div class="qblock"><p><span class="chip">Cá nhân</span>' + (m.unsure ? ' <span class="chip">Cần đối chiếu giáo trình</span>' : '') + ' <b>' + esc(m.w) + '</b>'
           + (m.ipa ? ' <span class="mut">' + esc(m.ipa) + '</span>' : '')
           + (m.pinyin ? ' <span class="mut">' + esc(m.pinyin) + '</span>' : '')
           + (m.r ? ' <span class="mut">' + esc(m.r) + '</span>' : '')
           + ' — ' + esc(m.vi) + '</p>'
+          + (m.img ? '<p><img src="' + esc(m.img) + '" alt="Ảnh của từ" style="max-width:160px;max-height:120px;border-radius:10px"></p>' : '')
           + (m.col ? '<p>Cụm từ: ' + esc(m.col) + '</p>' : '')
           + (m.ex ? '<p>' + esc(m.ex) + '</p>' : '')
           + (m.sen ? '<p>Câu ví dụ: <b>' + esc(m.sen) + '</b> — ' + esc(m.senVi || "") + '</p>' : '')
@@ -910,6 +1174,7 @@ function wireSupplement() {
       myWordOpenSet(parts[0], +parts[1]);
     };
   });
+  wirePhotoWord();
 }
 
 function normHardFails(st) {
@@ -7414,16 +7679,23 @@ function renderVocab(app, l) {
   var vkShowExv = vk.step !== 1 && vk.step !== 3 && vk.step !== 4;
   var vkShowExtras = vk.step === 0;
   var vkShowScene = vk.step === 0;
+  /* v109: anh minh hoa cua the chi hien o buoc 1 + 3 (hoc + dung trong cau);
+     an o buoc 2 (doan nghia — anh se lo nghia), buoc 4 (doc lai — chi con
+     tu + IPA de doc theo) va buoc 5 (go tu — anh se lo vat can go). */
+  var vkShowImg = vk.step === 0 || vk.step === 2;
   var vkMaskEx = vk.step === 1 || vk.step === 2;
   var clMemoKey = "s" + l.setIdx + ":" + pos;
   var big = c.w;
   var vr = gd23VocabRound(pos, cards.length);
   var html = stepHeader(step, l.step ? "" : "Bộ từ vựng · " + (set0.band || "chưa xếp band") + ".");
   html += vocabMethodsHTML97(l.setIdx);
+  /* v109: nut vao chup anh them tu — de thay ngay trong khu tu vung. */
+  html += '<p><button class="btn" data-photoentry>📷 Chụp ảnh thêm từ</button></p>';
   html += '<div class="bar" style="margin-top:6px" title="Tiến trình 5 kiểu học của thẻ này"><i style="width:' + Math.round((vk.step + 1) / 5 * 100) + '%"></i></div><div class="qblock vocab-card"><div class="vocab-layout">'
     + '<div class="vocab-main">'
     + '<div class="bigletter" id="cardBig">' + (vkShowBig ? esc(big) : '···') + '</div>'
-    + ((vkShowBig || vkShowMeaning) ? '<p>' + (vkShowBig && c.ipa ? '<span class="mut">' + esc(c.ipa) + '</span>' : '') + (vkShowMeaning ? '<span id="vocabMeaning"> — <b>' + esc(c.vi || "") + '</b></span>' : '') + '</p>' : '')
+    + ((vkShowBig || vkShowMeaning) ? '<p>' + (vkShowBig && c.ipa ? '<span class="mut">' + esc(c.ipa) + '</span>' : '') + (vkShowMeaning ? '<span id="vocabMeaning"> — <b>' + esc(c.vi || "") + '</b></span>' : '') + vkUnsureHTML(c) + '</p>' : '')
+    + vkCardImageHTML(c, vkShowImg)
     + (vkShowScene ? sceneSmallSVG(c.w, false) : '')
     + '<div id="vocabMeaningBody">'
     + (vkShowEx ? '<p>' + esc(vkMaskEx ? vkMaskWord(c.col || "", c.w) : (c.col || "")) + ((c.col && c.ex) ? ' — ' : '') + esc(vkMaskEx ? vkMaskWord(c.ex || "", c.w) : (c.ex || "")) + '</p>' : '')
@@ -7464,6 +7736,7 @@ function renderVocab(app, l) {
   var vkPN = $("#vocabPronNext"); if (vkPN) vkPN.onclick = function () { vk.step = 4; render(); vkScrollCardTop(); };
   var vkTC = $("#vocabTypeCheck"); if (vkTC) vkTC.onclick = function () { var inp = $("#vocabTypeInp"); var val = inp ? inp.value : ""; vk.typeDraft = val; var sc = vkTypeScoreEn(val, c.w); if (sc.ok) { vk.typeDone = true; vk.typeWhy = ""; render(); } else { vk.typeWhy = sc.whyText; if (!vk.recorded.type) { vk.recorded.type = true; try { recordQuizError("vocabMulti:" + l.setIdx, pos * 10 + 9, { q: "Gõ từ: " + c.w + " (nghĩa: " + c.vi + ")", o: [c.w], a: 0, why: "Từ đúng là " + c.w + " — " + c.vi + "." }); } catch (e) {} } render(); } };
   $$("[data-vkchoice]").forEach(function (b) { b.onclick = function () { if (vk.choiceAnswered) return; var ch = vkStepChoice("en", c, cards, pos, vk.step); var kind = ch.kind; var picked = +b.dataset.vkchoice; if (picked === ch.a) { vk.choiceAnswered = true; vk.choiceWhy = "Đúng rồi — " + ch.why; } else { vk.choiceAnswered = false; vk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.w + "”" : ch.options[ch.a]) + ". " + ch.why + " Giờ hãy bấm vào đáp án đúng để đi tiếp."; if (!vk.recorded["choice:" + kind]) { vk.recorded["choice:" + kind] = true; try { recordQuizError("vocabMulti:" + l.setIdx, pos * 10 + (vk.step - 1), { q: ch.q, o: ch.options.slice(), a: ch.a, why: ch.why }); } catch (e) {} } } render(); }; });
+  wirePhotoEntry(); /* v109: nut "Chụp ảnh thêm từ" trong khu từ vựng. */
   var vkCL = $("#vocabChoiceListen"); if (vkCL) vkCL.onclick = function () { speak(c.w); };
   var vkCN = $("#vocabChoiceNext"); if (vkCN) vkCN.onclick = function () { vk.choiceDone++; vk.choiceAnswered = false; vk.choiceWhy = ""; vk.step = vk.step + 1; render(); vkScrollCardTop(); };
   var vkFin = $("#vocabMultiFinish"); if (vkFin) vkFin.onclick = function () { advance(Object.keys(vk.recorded).length === 0 && !vk.peeked); vkScrollCardTop(); };
@@ -15986,6 +16259,8 @@ function renderZhVocab(app, l) {
   var zhShowListen = zhStep !== 4;
   var zhShowStroke = zhStep === 0;
   var zhMaskEx = zhStep === 1 || zhStep === 2;
+  /* v109: anh minh hoa chi hien o buoc 1 + 3 (nhu the Anh). */
+  var zhShowImg = zhStep === 0 || zhStep === 2;
   var zhRound = gd23VocabRound(pos, cards.length);
   var zhBoxLevel = (((state.zhHard || {})[d.key + ":" + pos] || {}).level || 0);
   var hardKey = d.key + ":" + pos;
@@ -15993,10 +16268,13 @@ function renderZhVocab(app, l) {
   var html = lessonHead({ title: d.set.topic, type: "Tiếng Trung · Từ vựng chặng " + d.stage }, d.set.hskNote || "");
   /* v108c: khoi Phuong phap len TRUOC the (nhu the Anh) — truoc day o sau the. */
   html += vocabMethodsHTML97(d.key, "zh");
+  /* v109: nut vao chup anh them tu — de thay ngay trong khu tu vung. */
+  html += '<p><button class="btn" data-photoentry>📷 Chụp ảnh thêm từ</button></p>';
   html += '<div class="bar" style="margin-top:6px" title="Tiến trình 5 kiểu học của thẻ này"><i style="width:' + Math.round((zvk.step + 1) / 5 * 100) + '%"></i></div><div class="qblock vocab-card zh-card"><div class="vocab-layout">'
     + '<div class="vocab-main">'
     + '<div class="zh-han" id="zhCardHan" role="button" tabindex="0" title="Bấm để tra từ điển" style="cursor:pointer">' + esc(c.han) + '</div>'
-    + ((zhShowPinyin || zhShowMeaning) ? '<p>' + (zhShowPinyin ? '<b>' + esc(c.pinyin) + '</b>' : '') + (zhShowMeaning ? '<span id="zhMeaning"> — ' + esc(c.vi) + '</span>' : '') + '</p>' : '')
+    + ((zhShowPinyin || zhShowMeaning) ? '<p>' + (zhShowPinyin ? '<b>' + esc(c.pinyin) + '</b>' : '') + (zhShowMeaning ? '<span id="zhMeaning"> — ' + esc(c.vi) + '</span>' : '') + vkUnsureHTML(c) + '</p>' : '')
+    + vkCardImageHTML(c, zhShowImg)
     + '<div id="zhMeaningBody">'
     + (zhShowBody ? '<p class="mut">Cụm đi kèm: ' + esc(c.col || "") + '</p>' : '')
     + (zhShowBody ? (c.personal ? (c.sen ? '<p>Ví dụ: ' + esc(zhMaskEx ? vkMaskWord(c.ex || "", c.han) : (c.ex || "")) + '</p>' + (zhShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '') + '<p><span class="chip">Cá nhân</span>' + (zhStep === 0 && c.myEx ? ' Giải thích: ' + esc(c.myEx) : '') + '</p>' : '<p><span class="chip">Cá nhân</span>' + (zhStep === 0 && c.myEx ? ' Giải thích: ' + esc(c.myEx) : '') + '</p>') : '<p>Ví dụ: ' + esc(zhMaskEx ? vkMaskWord(c.ex || "", c.han) : (c.ex || "")) + '</p>' + (zhShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '')) : '')
@@ -16023,6 +16301,7 @@ function renderZhVocab(app, l) {
   var zhPN = $("#zhPronNext"); if (zhPN) zhPN.onclick = function () { zvk.step = 4; render(); vkScrollCardTop(); };
   var zhTC = $("#zhTypeCheck"); if (zhTC) zhTC.onclick = function () { var inp = $("#zhTypeInp"); var val = inp ? inp.value : ""; zvk.typeDraft = val; var sc = vkTypeScoreZh(val, c.pinyin); if (sc.ok) { zvk.typeDone = true; zvk.typeWhy = ""; render(); } else { zvk.typeWhy = sc.whyText; if (!zvk.recorded.type) { zvk.recorded.type = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + 9, { q: "Gõ pinyin: " + c.han + " (nghĩa: " + c.vi + ")", o: [c.pinyin], a: 0, why: "Pinyin đúng là " + c.pinyin + " — " + c.vi + "." }); } catch (e) {} } render(); } };
   $$("[data-zhchoice]").forEach(function (b) { b.onclick = function () { if (zvk.choiceAnswered) return; var ch = vkStepChoice("zh", c, cards, pos, zvk.step); var kind = ch.kind; var picked = +b.dataset.zhchoice; if (picked === ch.a) { zvk.choiceAnswered = true; zvk.choiceWhy = "Đúng rồi — " + ch.why; } else { zvk.choiceAnswered = false; zvk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.han + "”" : ch.options[ch.a]) + ". " + ch.why + " Giờ hãy bấm vào đáp án đúng để đi tiếp."; if (!zvk.recorded["choice:" + kind]) { zvk.recorded["choice:" + kind] = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + (zvk.step - 1), { q: ch.q, o: ch.options.slice(), a: ch.a, why: ch.why }); } catch (e) {} } } render(); }; });
+  wirePhotoEntry(); /* v109: nut "Chụp ảnh thêm từ" trong khu từ vựng. */
   var zhCL = $("#zhChoiceListen"); if (zhCL) zhCL.onclick = function () { zhSpeak(c.han); };
   var zhCN = $("#zhChoiceNext"); if (zhCN) zhCN.onclick = function () { zvk.choiceDone++; zvk.choiceAnswered = false; zvk.choiceWhy = ""; zvk.step = zvk.step + 1; render(); vkScrollCardTop(); };
   var zhPC = $("#zhPronCheck"); if (zhPC) zhPC.onclick = function () { var res = $("#zhMirrorResult"); var t = res ? res.textContent : ""; if (t.indexOf("Nghe lại bản ghi") >= 0) { zvk.pronRecorded = true; zvk.pronDone = true; zvk.pronWhy = ""; } else if (t.indexOf("Chưa ghi được âm thanh") >= 0 || t.indexOf("Đang xử lý") >= 0) { /* v107b/v107c: ghi that bai (hoac luot ghi da ket thuc) cung la da doc mot luot — mo nut sang buoc go, diem khong khoa the; khong doi timeout doc text. */ zvk.pronAttempted = true; zvk.pronWhy = ""; } else { zvk.pronWhy = "Chưa thấy bản ghi — bấm “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để kết thúc lượt ghi, sau đó bấm lại nút này."; } render(); /* v107d: kiem tra ban ghi xong (hien nut sang buoc go) cung dua dau the ve khung nhin. */ vkScrollCardTop(); };
@@ -17369,14 +17648,19 @@ function renderTcTpVocab5(track, stepId, back) {
   var ttShowBody = ttStep !== 3 && ttStep !== 4;
   var ttShowExv = ttStep !== 1 && ttStep !== 3 && ttStep !== 4;
   var ttMaskEx = ttStep === 1 || ttStep === 2;
+  /* v109: anh minh hoa chi hien o buoc 1 + 3 (nhu the Anh/ZH). */
+  var ttShowImg = ttStep === 0 || ttStep === 2;
   var ttRound = gd23VocabRound(pos, cards.length);
   var pronShow = isTc ? (c.ipa || "") : (c.r || "");
   var html = backBtn + skipBanner + '<section class="card"><p class="eyebrow">' + (isTc ? "TOEIC" : "TOPIK") + ' · TỪ VỰNG</p><h2>' + esc(s.topic) + '</h2>'
     + '<p class="mut">Thẻ ' + (pos + 1) + '/' + cards.length + ' · Vòng ' + ttRound.round + '/' + ttRound.total + ' · Nấc nhớ: ' + (st.box || 0) + '/5 (đủ 5 nấc là thuộc hẳn)</p>'
     + vocabMethodsHTML97(stepId, track)
+    /* v109: nut vao chup anh them tu — de thay ngay trong khu tu vung. */
+    + '<p><button class="btn" data-photoentry>📷 Chụp ảnh thêm từ</button></p>'
     + '<div class="bar" style="margin-top:6px" title="Tiến trình 5 kiểu học của thẻ này"><i style="width:' + Math.round((vk.step + 1) / 5 * 100) + '%"></i></div>'
     + '<div class="qblock vocab-card"><div class="bigletter" id="cardBig">' + (ttShowBig ? esc(c.w) : '···') + '</div>'
-    + (ttShowBig ? '<p><span class="mut">' + esc(pronShow) + '</span>' + (c.personal ? ' <span class="chip">Cá nhân</span>' : '') + '</p>' : '')
+    + (ttShowBig ? '<p><span class="mut">' + esc(pronShow) + '</span>' + (c.personal ? ' <span class="chip">Cá nhân</span>' : '') + vkUnsureHTML(c) + '</p>' : '')
+    + vkCardImageHTML(c, ttShowImg)
     + (ttShowBody ? '<div id="vocabMeaningBody">' + (ttShowMeaning ? '<p><b>' + esc(c.vi || "") + '</b></p>' : '') + '<p>' + esc(ttMaskEx ? vkMaskWord(c.col || "", c.w) : (c.col || "")) + ((c.col && c.ex) ? ' — ' : '') + esc(ttMaskEx ? vkMaskWord(c.ex || "", c.w) : (c.ex || "")) + '</p>' + (ttShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '') + (ttStep === 0 && c.personal && c.myEx && c.sen ? '<p class="mut">Giải thích: ' + esc(c.myEx) + '</p>' : '') + '</div>' : '')
     + (ttStep !== 4 ? '<div class="row"><button class="btn" id="ttListen">🔊 Nghe</button></div>' : '')
     + tcTpVkPanelHTML(sess, vk, c, cards, pos)
@@ -17422,6 +17706,7 @@ function renderTcTpVocab5(track, stepId, back) {
     }
     renderTcTpVocab5(track, stepId, backTab);
   }; });
+  wirePhotoEntry(); /* v109: nut "Chụp ảnh thêm từ" trong khu từ vựng. */
   var cn = $("#ttChoiceNext"); if (cn) cn.onclick = function () { vk.step = vk.step + 1; vk.choiceAnswered = false; vk.choiceWhy = ""; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   var cl = $("#ttChoiceListen"); if (cl) cl.onclick = function () { if (isTc) speak(c.w); else tpSpeak(c.w); };
   var sk = $("#ttSkipBtn"); if (sk) sk.onclick = function () { tcTpVocab5Skip(sess); vkScrollCardTop(); };
