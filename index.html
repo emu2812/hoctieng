@@ -7233,18 +7233,35 @@ function renderZhVocabQuickCheck(app, l) {
 function renderCh1Skill(app, l, d, isListen) {
   var step = l.step || { id: isListen ? "listen0" : "read0", title: d.title, type: isListen ? "Nghe · Chào hỏi" : "Đọc · Giới thiệu" };
   if (!d) { toast("Bài này chưa có."); backFromLesson(); return; }
+  /* v108b: khoa lich su Shadowing rieng cho bai Nghe Chuong 1 ("short:ch1listen")
+     — bai nay khong co l.idx trong CONTENT.listening; dat som de khoi vao
+     Shadowing tim dung muc lich su ngay ca khi mo lai bai sau. */
+  if (isListen && l.idx == null) l.idx = "ch1listen";
+  /* v108b: Shadowing cho bai Nghe Chuong 1 — dung cung che do 10 buoc nhu
+     bai Nghe ngan/dai (renderShadowListen), bai la doan script cua bai nay. */
+  if (isListen && l.shadow) {
+    if (!l.shadowSents) l.shadowSents = splitSentencesEN(d.script);
+    renderShadowListen(app, l, { text: d.script, topic: d.title }, false);
+    return;
+  }
   if (!l.ans) l.ans = {};
   var qs = d.qs;
   var html = stepHeader(step);
   html += '<div class="qblock"><p class="mut">' + esc(d.intro) + '</p>';
   if (isListen) {
     html += '<div class="row"><button class="btn" id="ch1ListenBtn">🔊 Nghe</button><button class="btn" id="ch1ScriptBtn">Hiện lời thoại</button></div>'
-      + '<p class="mut">(giọng đọc trình duyệt, nghe bao nhiêu lần cũng được; nghe xong hãy bấm Hiện lời thoại để đối chiếu.)</p>'
+      + '<p class="mut">(giọng đọc trình duyệt — máy đọc, không phải giọng người thật; nghe bao nhiêu lần cũng được; nghe xong hãy bấm Hiện lời thoại để đối chiếu.)</p>'
       + '<div id="ch1ScriptBox" style="display:none"><p>' + esc(d.script).replace(/\n/g, "<br>") + '</p><p class="mut">' + esc(d.scriptVi).replace(/\n/g, "<br>") + '</p></div>';
   } else {
     html += '<p>' + esc(d.passage) + '</p><p class="mut">' + esc(d.passageVi) + '</p>';
   }
-  html += '<details class="rule-more"><summary><b>Xem quy tắc</b></summary><p>' + esc(d.rule) + '</p></details></div>';
+  html += '<details class="rule-more"><summary><b>Xem quy tắc</b></summary><p>' + esc(d.rule) + '</p></details>';
+  /* v108b: khoi phuong phap + khoi vao Shadowing cho bai Nghe Chuong 1
+     (kiem render v108: bai Nghe ngan Chuong 1 khong co khoi phuong phap).
+     Dat LONG trong qblock ly thuyet (nhu bai Nghe skill van long khoi vao
+     trong qblock) de bo tach 3 cot v94 khong dem thua khoi o cot Noi dung. */
+  if (isListen) html += shadowEntryHTML(l, false) + listenMethodsHTML108(l, false);
+  html += '</div>';
   if (!l.preview) {
     html += '<div class="qblock"><p><b>Trả lời 3 câu hỏi:</b></p>';
     qs.forEach(function (q, qi) {
@@ -7264,6 +7281,7 @@ function renderCh1Skill(app, l, d, isListen) {
   }
   app.innerHTML = html;
   wireBack();
+  if (isListen) { shadowWireEntry(l); wireListenMethodsCh1(app, l, d); }
   var lb = $("#ch1ListenBtn"); if (lb) lb.onclick = function () { try { speak(d.script); } catch (e) {} };
   var sb = $("#ch1ScriptBtn"); if (sb) sb.onclick = function () { var bx = $("#ch1ScriptBox"); if (bx) { var show = bx.style.display === "none"; bx.style.display = show ? "block" : "none"; sb.textContent = show ? "Ẩn lời thoại" : "Hiện lời thoại"; } };
   app.querySelectorAll(".ch1opt").forEach(function (b) {
@@ -11103,9 +11121,10 @@ function shadowStepAdvanceUnit(l, ui, unitTotal, step) {
   else shadowStepDone(l, step);
 }
 function shadowEvalLabel(v) { return v === 3 ? "Tốt" : v === 2 ? "Được" : v === 1 ? "Chưa được" : "chưa chấm"; }
+function shadowDoneCount(l) { var n = 0, k; for (k in (l.shadowStepsDone || {})) if (l.shadowStepsDone[k]) n++; return n; }
 function shadowLogSave(l, item, isLong) {
   if (!state.shadowLog) state.shadowLog = [];
-  var doneN = 0, k; for (k in (l.shadowStepsDone || {})) if (l.shadowStepsDone[k]) doneN++;
+  var doneN = shadowDoneCount(l);
   var entry = { at: todayStr(), key: shadowKey(l, isLong), topic: item.topic, steps: doneN, repeats: l.shadowRepeats || 0, eval: l.shadowEval || {}, note: String(l.shadowEvalNote || "").slice(0, 200) };
   state.shadowLog.unshift(entry);
   if (state.shadowLog.length > 50) state.shadowLog.length = 50;
@@ -11227,7 +11246,7 @@ function renderShadowSteps(app, l, item, isLong) {
   if (!l.shadowWeak) l.shadowWeak = [];
   if (l.shadowStepsFinished) {
     logLessonMinutes(l);
-    var doneN = 0, k; for (k in (l.shadowStepsDone || {})) if (l.shadowStepsDone[k]) doneN++;
+    var doneN = shadowDoneCount(l);
     var ev = l.shadowEval || {};
     var evTxt = SHADOW_EVAL_CRITS.map(function (c) { return c.t + ": " + shadowEvalLabel(ev[c.k]); }).join(" · ");
     app.innerHTML = skillHead("Shadowing 10 bước — " + item.topic, "Đã luyện xong") + '<div class="summarybox"><h2>Xong Shadowing 10 bước!</h2>'
@@ -11309,6 +11328,11 @@ function renderShadowSteps(app, l, item, isLong) {
     if (!ok) { toast("Hãy chấm đủ 4 tiêu chí đã — mỗi tiêu chí chọn 1 mức."); return; }
     l.shadowEval = ev2;
     var nt = $("#shEvalNote"); l.shadowEvalNote = nt ? nt.value : "";
+    /* v108b: danh dau xong buoc 10 TRUOC khi luu lich su — neu khong,
+       muc lich su dem thieu buoc 10 trong khi man tong ket dem du
+       (kiem render v108: tong ket 3/10, lich su 2/10). */
+    if (!l.shadowStepsDone) l.shadowStepsDone = {};
+    l.shadowStepsDone[10] = true;
     shadowLogSave(l, item, isLong);
     shadowStepDone(l, 10);
   };
@@ -11345,12 +11369,34 @@ function wireListenMethods108(app, l, isLong) {
   var btns = app.querySelectorAll("[data-lmeth]");
   btns.forEach(function (b) { b.onclick = function () { listenMethodsOpen108(l, isLong, b.dataset.lmeth); }; });
 }
+/* v108b: mo phuong phap cho bai Nghe Chuong 1 (renderCh1Skill) — khong dung
+   listenMethodsOpen108 vi bai Chuong 1 khong co l.idx trong CONTENT.listening:
+   Shadowing mo che do 10 buoc cho chinh doan script bai nay; Nghe lai doc lai
+   script; On cau ve tab On tap. */
+function listenMethodsOpenCh1(l, d, mode) {
+  if (mode === "shadow") {
+    l.shadow = true; l.shadowMode = "steps";
+    if (!l.shadowStep) l.shadowStep = 1;
+    if (!l.shadowStepsDone) l.shadowStepsDone = {};
+    if (!l.shadowWeak) l.shadowWeak = [];
+    l.shadowStepIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; l.shadowStepsFinished = false;
+    if (l.idx == null) l.idx = "ch1listen";
+    l.shadowSents = splitSentencesEN(d.script);
+    render(); return;
+  }
+  if (mode === "again") { try { speak(d.script); } catch (e) {} return; }
+  if (mode === "review") { backFromLesson(); go("review"); return; }
+}
+function wireListenMethodsCh1(app, l, d) {
+  var btns = app.querySelectorAll("[data-lmeth]");
+  btns.forEach(function (b) { b.onclick = function () { listenMethodsOpenCh1(l, d, b.dataset.lmeth); }; });
+}
 
 /* ---------- Shadowing Xem/Luyện gắn vào bài Nghe sẵn có ---------- */
 function shadowEntryHTML(l, isLong) {
   var h = '<div class="qblock" id="shadowEntry"><p><b>Shadowing — nhại theo từng câu:</b> cùng bài Nghe này, chia từng câu. Chế độ Xem: nghe mẫu rồi nhìn câu. Chế độ Luyện: máy tự dừng sau mỗi câu, đến lượt bạn nhại lại, ghi âm rồi nghe lại chính mình.</p>';
   if (l) {
-    var doneN = 0, k; for (k in (l.shadowStepsDone || {})) if (l.shadowStepsDone[k]) doneN++;
+    var doneN = shadowDoneCount(l);
     var last = shadowLogFor(shadowKey(l, !!isLong))[0];
     if (last) h += '<p class="mut">Lần luyện Shadowing gần nhất: <b>' + esc(last.at) + '</b> — ' + last.steps + '/10 bước · đã nhại ' + last.repeats + ' câu/lượt.</p>';
     h += '<div class="row"><button class="btn" id="shViewBtn">👀 Shadowing — Xem</button><button class="btn btn-primary" id="shPracticeBtn">🎤 Shadowing — Luyện</button><button class="btn btn-primary" id="shStepsBtn">🎤 Shadowing 10 bước' + (doneN ? ' (đã xong ' + doneN + '/10)' : '') + '</button></div></div>';
