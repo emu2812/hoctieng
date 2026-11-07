@@ -1,4 +1,5 @@
 /* Service worker cho web học ngôn ngữ bản mới — cache file tĩnh + hiện
+   v112c-retry: đẩy lại để kích hoạt run Pages mới (run #199 kẹt Queued từ 02:37).
    thông báo nhắc học khi có push.
    Đăng ký từ index.html (navigator.serviceWorker.register("sw.js")).
    File này phải được đẩy kèm index.html + content-new.js lên cùng thư mục
