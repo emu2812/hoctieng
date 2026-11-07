@@ -1403,7 +1403,7 @@ function openLessonFor(step, opts) {
   else if (step.kind === "ch1listen") openLesson({ type: "ch1listen", step: step, preview: pv });
   else if (step.kind === "ch1read") openLesson({ type: "ch1read", step: step, preview: pv });
 }
-function openLesson(l) { examTimerStop(); examPartTimerStop(); curLesson = l; returnTab = curTab; render(); }
+function openLesson(l) { examTimerStop(); examPartTimerStop(); curLesson = l; returnTab = curTab; render(); /* v107e: vao bai tu vung EN/ZH thi dua dau the ve khung nhin ngay — truoc day trang giu scrollY cua man truoc (ban do/danh sach dai) nen vua vao bai the da bi cat o mep tren, phai bam Home moi thay dau the. */ if (l && (l.type === "vocab" || l.type === "zhVocab")) vkScrollCardTop(); }
 
 /* ---------- v2 (2026-10-26): BUOI HOC HOM NAY + DAT CHANG TU KIEM TRA ---------- */
 /* Thu tu buoi hoc: (a) muc on toi han trong ngay truoc; (b) buoc lo trinh
@@ -6618,10 +6618,33 @@ var VK_MULTI_KINDS = ["w2vi", "vi2w", "listen", "fill"];
    tri the SAU khi da cuon (guong thu lai lam the ngan di, video/anh tai
    muon, focus): kiem tra lai sau mot nhip, neu mep tren the van nam tren
    80px (tuc van khuat sau topbar) thi cuon bu cho du. Truy van lai phan tu
-   luc kiem tra (the co the da bi ve lai lan nua) va chong goi don bang co. */
+   luc kiem tra (the co the da bi ve lai lan nua) va chong goi don bang co.
+   v107e: NEO SAI LA GOC CUA 3 DUONG LOI O KIEM RENDER v107d (12:49 07/11,
+   task 18841f3c) — phan tu neo phai la DAU BAI (khoi tieu de), khong phai
+   the tu:
+   - EN: "#app section.card" trung <section class="card mr-lib-section">
+     (dong 7361, trong <details> "Them" DONG) -> phan tu khong co box nen
+     scrollIntoView la no-op, chi con scrollBy(0,-80); sau render() thu
+     guong (the dai -> the ngan) trang o lai qua thap: chu "word" + tieu de
+     bien khoi khung nhin (phai cuon len ~120px moi thay chu, ~315px moi
+     thay tieu de).
+   - ZH/TC: khong co section.card trong bai -> roi ve .vocab-card ->
+     scrollIntoView CHAY nhung neo sai: dua MEP THE (cach tieu de
+     ~180-250px) len dinh viewport -> tieu de bi day len tren khung nhin
+     (IELTS 4->5: phai cuon len 180-200px moi thay tieu de; HSK bam Nghe:
+     trang cuon xuong ~250px, tieu de chi con mep chu bi cat).
+   Giai: neo theo thu tu #app .lessonframe (khoi tieu de stepHeader, co o
+   EN/ZH) -> #app section.card (o TC/TP day CHINH LA the tieu de: eyebrow
+   + h2 o dau section, khong co .lessonframe) -> .vocab-card -> #app
+   .qblock. Giu nguyen scrollIntoView + scrollBy(0,-80) va neo 60ms. */
+function vkScrollAnchor() {
+  try {
+    return document.querySelector("#app .lessonframe") || document.querySelector("#app section.card") || document.querySelector(".vocab-card") || document.querySelector("#app .qblock");
+  } catch (e) { return null; }
+}
 function vkScrollCardTop() {
   try {
-    var el = document.querySelector("#app section.card") || document.querySelector(".vocab-card") || document.querySelector("#app .qblock");
+    var el = vkScrollAnchor();
     if (el && typeof el.scrollIntoView === "function") { el.scrollIntoView(); try { if (typeof window !== "undefined" && typeof window.scrollBy === "function") window.scrollBy(0, -80); } catch (e2) {} }
     else if (typeof window !== "undefined" && typeof window.scrollTo === "function") window.scrollTo(0, 0);
     if (typeof window !== "undefined" && typeof window.setTimeout === "function" && !window.__vkScrollRecheck) {
@@ -6629,7 +6652,7 @@ function vkScrollCardTop() {
       window.setTimeout(function () {
         window.__vkScrollRecheck = false;
         try {
-          var el2 = document.querySelector("#app section.card") || document.querySelector(".vocab-card") || document.querySelector("#app .qblock");
+          var el2 = vkScrollAnchor();
           if (el2 && typeof el2.getBoundingClientRect === "function") { var r = el2.getBoundingClientRect(); if (r && r.top < 80 && typeof window.scrollBy === "function") window.scrollBy(0, r.top - 80); }
         } catch (e3) {}
       }, 60);
@@ -16979,7 +17002,7 @@ function tcOpenStep(id, backTab) {
   var app = document.getElementById("app"); if (!app) return;
   var back = backTab || "practice";
   var skipBanner = tcSkipBanner(id);
-  if (m.kind === "vocab") { renderTcTpVocab5("tc", id, back); return; }
+  if (m.kind === "vocab") { renderTcTpVocab5("tc", id, back); /* v107e: vao bai tu vung TOEIC thi dua dau the ve khung nhin ngay (nhu openLesson cua EN/ZH). */ vkScrollCardTop(); return; }
   if (m.kind === "gram") {
     var g = TC_GRAMMAR[m.ref];
     /* DOT SOI-D9d 02/11: tach ly thuyet rieng 1 man, roi moi cau 1 man (phan trang
@@ -17723,7 +17746,7 @@ function tpOpenStep(id, backTab) {
     document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     tpWireBack(back); return;
   }
-  if (m.kind === "vocab") { renderTcTpVocab5("tp", id, back); return; }
+  if (m.kind === "vocab") { renderTcTpVocab5("tp", id, back); /* v107e: vao bai tu vung TOPIK thi dua dau the ve khung nhin ngay (nhu openLesson cua EN/ZH). */ vkScrollCardTop(); return; }
   if (m.kind === "gram") {
     var g = TP_GRAMMAR[m.ref];
     var html2 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2><p>' + esc(g.explain) + '</p>' + tpQuizBlockHTML(g.quiz, "g") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button></div></section>';
