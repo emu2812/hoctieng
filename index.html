@@ -428,16 +428,22 @@ function speak(text, rate, onend) { try { if (window.speechSynthesis && window.S
 /* v107b: trang thai dang phat cho nut "Nghe giong mau" (buoc 1 tu vung) — truoc
    day bam nut khong co phan hoi nhin thay duoc. Khoi phuc qua onend (speak) hoac
    timeout uoc luong (zhSpeak/tpSpeak khong co onend); timeout tham chieu nut cu
-   (da detach sau render) nen vo hai. */
-function vkSpeakBtnState(btn, text, say) {
+   (da detach sau render) nen vo hai.
+   v107c: luu trang thai dang-phat vao vk (listenPlaying) va ve nhan nut TU
+   TRANG THAI DO trong template buoc 1 — lan ve lai nao giua chung cung khong
+   lam mat nhan "Dang phat…". Tang cua so hien toi thieu len 3500ms de nguoi
+   hoc chac chan thay duoc trang thai (truoc day 2500ms, o may khong TTS
+   quan sat thuong vuot qua cua so nay). */
+function vkSpeakBtnState(btn, text, say, vk) {
   if (!btn) return;
   var old = btn.textContent;
+  if (vk) vk.listenPlaying = true;
   btn.textContent = "🔊 Đang phát…";
   btn.disabled = true;
   var done = false;
-  var restore = function () { if (done) return; done = true; try { btn.textContent = old; btn.disabled = false; } catch (e) {} };
+  var restore = function () { if (done) return; done = true; if (vk) vk.listenPlaying = false; try { btn.textContent = old; btn.disabled = false; } catch (e) {} };
   try { say(restore); } catch (e) { restore(); return; }
-  setTimeout(restore, Math.max(2500, String(text || "").length * 500));
+  setTimeout(restore, Math.max(3500, String(text || "").length * 500));
 }
 var toastTimer = null;
 function toast(msg) { var t = $("#toast"); t.textContent = msg; t.style.display = "block"; if (toastTimer) clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.style.display = "none"; }, 3200); }
@@ -1719,6 +1725,10 @@ function lessonHead(step, sub) {
 function wireBack() { var b = $("#btnBack"); if (b) b.onclick = backFromLesson; var nb = $("#zhNextStepBtn"); if (nb) nb.onclick = function () { var nx = zhSessionTarget(); if (nx) zhOpenTarget(nx); }; updateBottomBar(); }
 function finishSummaryHTML(title, stats, wrongListHTML, opts) {
   opts = opts || {};
+  /* v107c: opts.sub — phu de thay cho cau chuc mung mac dinh. Cac man ket thuc
+     tu vung truyen sub "Chua xong the nao..." khi ca buoi khong thuoc the nao
+     (toan bo qua hoac toan sai) de khoi chuc mung mot buoi khong hoc duoc gi. */
+  var sub = opts.sub || "2812 chúc mừng bạn — làm tốt lắm!";
   var extra = "";
   if (opts.chest) extra += u8ChestHTML(opts.chest.key, opts.chest.title);
   if (opts.starsKey) extra += u8StarsHTML(opts.starsKey);
@@ -1726,7 +1736,7 @@ function finishSummaryHTML(title, stats, wrongListHTML, opts) {
   var conf = "";
   for (var ci = 0; ci < 12; ci++) conf += '<i style="left:' + (4 + ci * 8) + '%;background:' + ["#FFB800", "#FF6B4A", "#1E9E6A", "#FFC800"][ci % 4] + ';animation-delay:' + (ci % 4) * 0.25 + 's"></i>';
   return '<div class="summarybox" data-summary-next="1"><div class="confetti" aria-hidden="true">' + conf + '</div>'
-    + '<div class="hero-pair">' + mascPairHTML(true) + '<div class="hero-text"><h2>' + title + '</h2><p class="mut">2812 chúc mừng bạn — làm tốt lắm!</p></div></div>'
+    + '<div class="hero-pair">' + mascPairHTML(true) + '<div class="hero-text"><h2>' + title + '</h2><p class="mut">' + sub + '</p></div></div>'
     + stats + (wrongListHTML || "") + extra + '<div class="row" style="margin-top:10px"><button class="btn" id="btnRedo">Làm lại</button></div></div>';
 }
 
@@ -6342,7 +6352,7 @@ function vkCompactActions(aiScore, mirrorScore, opts) {
     else if (opts.aiBusy) cands.push('AI đang bận — tập lại sau.');
     else cands.push('Đăng nhập để AI chấm tiếng.');
   } else if (aiScore < 80) cands.push(opts.fixHint ? ('Cần sửa: ' + opts.fixHint + '.') : 'Nghe mẫu rồi đọc to, rõ từng âm.');
-  if (mirrorScore == null) { if (opts.camMissing) cands.push('Kiểm tra camera trên thiết bị này rồi đọc lại.'); else if (!opts.camDenied) cands.push('Bật camera, để mặt vào khung rồi đọc lại.'); }
+  if (mirrorScore == null) { if (opts.camMissing) cands.push('Kiểm tra camera trên thiết bị này rồi đọc lại.'); else if (opts.camBlocked) cands.push('Kiểm tra quyền camera trong cài đặt trình duyệt rồi đọc lại.'); else if (!opts.camDenied) cands.push('Bật camera, để mặt vào khung rồi đọc lại.'); }
   else if (mirrorScore < 80) cands.push('Mở miệng đúng hình âm trong gương rồi giữ, đọc lại.');
   return cands.slice(0, 2);
 }
@@ -6464,21 +6474,28 @@ function vocabKnownRenderResult(resultEl, aiScore, mirrorScore, ok, reason, opts
     vkCompactActions(aiScore, mirrorScore, opts).forEach(function (a) { s += '<p>' + esc(a) + '</p>'; });
     if (useBar) s += '<p class="mut">Bỏ qua không tính là đạt.</p>';
     else s += '<div class="row"><button class="btn vocab-retry">Đọc lại</button></div>';
+    /* v107c: bai TC/TP khong dung curLesson nen thanh duoi an (updateBottomBar
+       dat BAR_RESULT = null khi !curLesson) — nut "Doc lai" o thanh duoi khong
+       bao gio hien o vai khach. Ve them nut doc lai ngay trong o ket qua de
+       luon doc lai duoc tai cho, ke ca khi nut o panel gap van de. */
+    if (useBar && (typeof curLesson === "undefined" || !curLesson) && opts.onRetry) s += '<div class="row"><button class="btn vocab-retry">Đọc lại</button></div>';
   }
   s += '</div>';
   resultEl.innerHTML = s;
   if (ok) return;
   if (useBar) setBarResult({ retry: opts.onRetry || null, skip: opts.onSkip, skipLabel: 'Bỏ qua thẻ này' });
-  else if (opts.onRetry) { var rb = resultEl.querySelector('.vocab-retry'); if (rb) rb.onclick = opts.onRetry; }
+  if (opts.onRetry) { var rb = resultEl.querySelector('.vocab-retry'); if (rb) rb.onclick = opts.onRetry; }
 }
 function vocabKnownGrade(aiScore, mirrorScore, opts) {
   opts = opts || {};
   var camDenied = !!opts.camDenied || !!MR.camDenied;
   var camMissing = !!opts.camMissing || !!MR.camMissing;
+  var camBlocked = !!opts.camBlocked || !!MR.camBlocked;
   var micDenied = !!opts.micDenied || !!MR.micDenied;
   var chk;
   if (camMissing) chk = { ok: false, reason: 'Không tìm thấy camera trên thiết bị này — kiểm tra camera rồi thử lại. Chưa tính đạt chuẩn.' };
   else if (camDenied) chk = { ok: false, reason: 'Camera bị từ chối — bật lại quyền camera rồi chấm lại. Chưa tính đạt chuẩn.' };
+  else if (camBlocked) chk = { ok: false, reason: 'Không mở được camera — trình duyệt đang chặn quyền camera trên thiết bị này, kiểm tra lại cài đặt trình duyệt rồi chấm lại. Chưa tính đạt chuẩn.' };
   else if (micDenied) chk = { ok: false, reason: 'Mic bị từ chối — bật lại quyền mic rồi chấm lại. Chưa tính đạt chuẩn.' };
   else if (aiScore == null) chk = { ok: false, reason: opts.estimatedOnly ? 'Chưa đăng nhập nên điểm tiếng chỉ là ước lượng tại chỗ — chưa tính đạt chuẩn. Đăng nhập ở Của tôi → Tài khoản rồi đọc lại.' : 'Chưa có điểm tiếng AI — đăng nhập ở Của tôi → Tài khoản rồi đọc lại.' };
   else if (aiScore < 80) chk = { ok: false, reason: 'Điểm tiếng AI ' + aiScore + '/100 chưa đạt 80 — đọc lại cho rõ từng âm.' };
@@ -6493,7 +6510,7 @@ function vocabKnownGrade(aiScore, mirrorScore, opts) {
     state.wordPron[opts.cardKey] = { ai: aiScore, mirror: mirrorScore, date: todayStr() };
     saveState();
   }
-  vocabKnownRenderResult(opts.resultEl, aiScore, mirrorScore, chk.ok, chk.reason, { camDenied: camDenied, camMissing: camMissing, micDenied: micDenied, estimatedOnly: !!opts.estimatedOnly, aiBusy: lgIn, fixHint: opts.fixHint || null, elsa: opts.elsa || null, onRetry: opts.onRetry || null, onSkip: opts.onSkip || null });
+  vocabKnownRenderResult(opts.resultEl, aiScore, mirrorScore, chk.ok, chk.reason, { camDenied: camDenied, camMissing: camMissing, camBlocked: camBlocked, micDenied: micDenied, estimatedOnly: !!opts.estimatedOnly, aiBusy: lgIn, fixHint: opts.fixHint || null, elsa: opts.elsa || null, onRetry: opts.onRetry || null, onSkip: opts.onSkip || null });
   /* v107: hook onGraded chay LUON (dat hay khong) de buoc doc lai trong bai tu
      vung ghi nhan diem + phan hoi theo am ma KHONG khoa the theo diem. */
   if (opts.onGraded) opts.onGraded(chk, aiScore, mirrorScore);
@@ -6565,11 +6582,11 @@ function vocabKnownStart(key, word, sym, slotEl, resultEl, onPass, onSkip, onGra
   setTimeout(function () {
     if (!VK.active || VK.key !== key) return;
     if (MR.sessionActive) return;
-    if (MR.camDenied || MR.camMissing || MR.micDenied) {
+    if (MR.camDenied || MR.camMissing || MR.camBlocked || MR.micDenied) {
       var res = VK.result, grad = VK.onGraded;
       VK.active = false; VK.key = ''; VK.word = ''; VK.sym = ''; VK.slot = null; VK.result = null; VK.onPass = null; VK.onGraded = null;
       try { mirrorStop(); } catch (e) {}
-      vocabKnownGrade(null, vocabMirrorScoreNow(), { onPass: null, resultEl: res, camDenied: !!MR.camDenied, camMissing: !!MR.camMissing, micDenied: !!MR.micDenied, onRetry: VKR ? vocabKnownRetry : null, onSkip: VKR ? VKR.onSkip : null, onGraded: grad || null });
+      vocabKnownGrade(null, vocabMirrorScoreNow(), { onPass: null, resultEl: res, camDenied: !!MR.camDenied, camMissing: !!MR.camMissing, camBlocked: !!MR.camBlocked, micDenied: !!MR.micDenied, onRetry: VKR ? vocabKnownRetry : null, onSkip: VKR ? VKR.onSkip : null, onGraded: grad || null });
     }
   }, 4000);
 }
@@ -6593,11 +6610,14 @@ function vocabKnownStopAndGrade() {
 var VK_MULTI_KINDS = ["w2vi", "vi2w", "listen", "fill"];
 /* v107b: doi buoc trong luong tu vung 5 buoc thi cuon the ve dau — truoc day
    dau the bi cat khoi khung nhin (IELTS buoc 2-4; HSK chi thay pinyin, chu Han
-   bi cat mep tren). Goi SAU render() o moi cho doi buoc / sang the. */
+   bi cat mep tren). Goi SAU render() o moi cho doi buoc / sang the.
+   v107c: scrollIntoView dua mep the len dung mep viewport thi topbar dinh
+   (66px) van che mat ~66px dau the — phai tru them 80px (66 topbar + 14
+   khoang cach, nhu chuan 78px cua v106c) de mep the nam DUOI topbar. */
 function vkScrollCardTop() {
   try {
-    var el = document.querySelector(".vocab-card") || document.querySelector("#app section.card") || document.querySelector("#app .qblock");
-    if (el && typeof el.scrollIntoView === "function") el.scrollIntoView();
+    var el = document.querySelector("#app section.card") || document.querySelector(".vocab-card") || document.querySelector("#app .qblock");
+    if (el && typeof el.scrollIntoView === "function") { el.scrollIntoView(); try { if (typeof window !== "undefined" && typeof window.scrollBy === "function") window.scrollBy(0, -80); } catch (e2) {} }
     else if (typeof window !== "undefined" && typeof window.scrollTo === "function") window.scrollTo(0, 0);
   } catch (e) {}
 }
@@ -6784,7 +6804,7 @@ function vkEnPanelHTML(vk, c, cards, pos) {
   var names = ["Nghe + câu thật", "Chọn nghĩa", "Dùng trong câu", "Đọc lại — AI chấm", "Gõ từ"];
   var h = '<p class="mut">Học từ này qua nhiều kiểu · Kiểu ' + (vk.step + 1) + '/5: ' + names[vk.step] + (vk.pronDone ? ' · Phát âm: ' + (vk.pronScore != null ? 'AI ' + vk.pronScore + '/100' : 'đã đọc lại ✓') : '') + '</p>';
   if (vk.step === 0) {
-    h += '<p>Nghe giọng mẫu đọc từ này, xem từ trong câu thật ở trên, rồi sang bước chọn nghĩa.</p><div class="row"><button class="btn" id="vocabListenModel">🔊 Nghe giọng mẫu</button><button class="btn btn-primary" id="vocabHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
+    h += '<p>Nghe giọng mẫu đọc từ này, xem từ trong câu thật ở trên, rồi sang bước chọn nghĩa.</p><div class="row"><button class="btn" id="vocabListenModel"' + (vk.listenPlaying ? ' disabled' : '') + '>' + (vk.listenPlaying ? '🔊 Đang phát…' : '🔊 Nghe giọng mẫu') + '</button><button class="btn btn-primary" id="vocabHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
   } else if (vk.step === 4) {
     h += '<p>Gõ từ tiếng Anh có nghĩa: <b>' + esc(c.vi || "") + '</b></p><p>Gõ từng chữ cái của từ (không cần viết hoa đúng):</p><div class="row"><input type="text" id="vocabTypeInp" value="' + esc(vk.typeDraft) + '" placeholder="Gõ từ vào đây…"><button class="btn btn-primary" id="vocabTypeCheck">Kiểm tra</button></div>';
     if (vk.typeWhy) h += '<div class="why show" id="vocabTypeWhy">' + esc(vk.typeWhy) + '</div>';
@@ -6822,7 +6842,7 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
   var names = ["Nghe + câu thật", "Chọn nghĩa", "Dùng trong câu", "Soi gương + ghi âm", "Gõ pinyin"];
   var h = '<p class="mut">Học từ này qua nhiều kiểu · Kiểu ' + (vk.step + 1) + '/5: ' + names[vk.step] + (vk.pronRecorded ? ' · Đã ghi âm xong ✓' : '') + '</p>';
   if (vk.step === 0) {
-    h += '<p>Nghe giọng mẫu đọc chữ Hán này, xem chữ trong câu thật ở trên, rồi sang bước chọn nghĩa.</p><div class="row"><button class="btn" id="zhListenModel">🔊 Nghe giọng mẫu</button><button class="btn btn-primary" id="zhHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
+    h += '<p>Nghe giọng mẫu đọc chữ Hán này, xem chữ trong câu thật ở trên, rồi sang bước chọn nghĩa.</p><div class="row"><button class="btn" id="zhListenModel"' + (vk.listenPlaying ? ' disabled' : '') + '>' + (vk.listenPlaying ? '🔊 Đang phát…' : '🔊 Nghe giọng mẫu') + '</button><button class="btn btn-primary" id="zhHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
   } else if (vk.step === 4) {
     h += '<p>Gõ pinyin của chữ: <b>' + esc(c.han) + '</b>' + (c.vi ? ' (' + esc(c.vi) + ')' : '') + '</p><p>Gõ pinyin từng âm tiết, không cần dấu thanh (gõ “ni hao” hay “nihao” đều được):</p><div class="row"><input type="text" id="zhTypeInp" value="' + esc(vk.typeDraft) + '" placeholder="Gõ pinyin vào đây…"><button class="btn btn-primary" id="zhTypeCheck">Kiểm tra</button></div>';
     if (vk.typeWhy) h += '<div class="why show" id="zhTypeWhy">' + esc(vk.typeWhy) + '</div>';
@@ -7254,7 +7274,16 @@ function renderVocab(app, l) {
   var pos = state.pos["vocab:" + l.setIdx] || 0;
   if (pos >= cards.length) {
     var allSkippedEn = cards.length > 0 && cards.every(function (cc, ii) { return (state.vocabSkipped || []).indexOf("s" + l.setIdx + ":" + ii) >= 0; });
-    app.innerHTML = stepHeader(step) + finishSummaryHTML(allSkippedEn ? "Đã xem hết bộ này" : "Bạn đã học xong bộ này!", allSkippedEn ? '<p>Toàn bộ ' + cards.length + ' thẻ đều bỏ qua — bước chưa tính xong, hãy học lại ở phần ôn.</p>' : '<p>Bạn đã đi hết ' + cards.length + ' thẻ của bộ này trong ' + elapsedText() + '.</p>', "", { chest: { key: step.id, title: step.title }, starsKey: "vocab:" + l.setIdx, appeal: "vocab:" + l.setIdx });
+    /* v107c: the ket qua advance(false) (go sai roi moi xong) khong ghi vao
+       vocabSkipped nen allSkippedEn sai khi ca buoi toan sai — them dieu kien
+       "khong thuoc the nao trong luot nay" (runFirstTry co muc cho bo nay ma
+       khong muc nao true). Mo lai bo da xong o luot truoc (runFirstTry rong)
+       thi chi dung allSkippedEn (du lieu ben). */
+    var ftKeysEn = Object.keys(runFirstTry).filter(function (k) { return k.indexOf("s" + l.setIdx + ":") === 0; });
+    var ftNEn = ftKeysEn.filter(function (k) { return runFirstTry[k]; }).length;
+    var nothingEn = ftKeysEn.length > 0 && ftNEn === 0;
+    var noLearnEn = allSkippedEn || nothingEn;
+    app.innerHTML = stepHeader(step) + finishSummaryHTML(noLearnEn ? "Đã xem hết bộ này" : "Bạn đã học xong bộ này!", allSkippedEn ? '<p>Toàn bộ ' + cards.length + ' thẻ đều bỏ qua — bước chưa tính xong, hãy học lại ở phần ôn.</p>' : (nothingEn ? '<p>Chưa thuộc thẻ nào trong lần học này — hãy học lại ở phần ôn.</p>' : '<p>Bạn đã đi hết ' + cards.length + ' thẻ của bộ này trong ' + elapsedText() + '.</p>'), "", { chest: { key: step.id, title: step.title }, starsKey: "vocab:" + l.setIdx, appeal: "vocab:" + l.setIdx, sub: noLearnEn ? "Chưa xong thẻ nào — hãy học lại ở phần ôn." : undefined });
     wireBack(); wireNextStep();
     if (!l.step) { var nsV = $("#btnNextStep"); if (nsV) { nsV.textContent = "Về Luyện tập"; nsV.onclick = function () { backFromLesson(); }; } }
     $("#btnRedo").onclick = function () { state.pos["vocab:" + l.setIdx] = 0; saveState(); lessonStart = Date.now(); render(); };
@@ -7327,7 +7356,7 @@ function renderVocab(app, l) {
   var clMemoBtn = $("#vocabMemoSave"); if (clMemoBtn) clMemoBtn.onclick = function () { if (!state.mems) state.mems = {}; state.mems[clMemoKey] = $("#vocabMemoInp").value; saveState(); toast("Đã lưu mẹo nhớ."); };
   var vkSpk = $("#btnSpeak"); if (vkSpk) vkSpk.onclick = function () { speak(c.w); };
   wireNativeVideo(c.w, "english");
-  var vkLM = $("#vocabListenModel"); if (vkLM) vkLM.onclick = function () { vkSpeakBtnState(vkLM, c.w, function (done) { speak(c.w, null, done); }); };
+  var vkLM = $("#vocabListenModel"); if (vkLM) vkLM.onclick = function () { vkSpeakBtnState(vkLM, c.w, function (done) { speak(c.w, null, done); }, vk); };
   var vkHN = $("#vocabHeardNext"); if (vkHN) vkHN.onclick = function () { vk.heard = true; vk.step = 1; render(); vkScrollCardTop(); };
   var vkPN = $("#vocabPronNext"); if (vkPN) vkPN.onclick = function () { vk.step = 4; render(); vkScrollCardTop(); };
   var vkTC = $("#vocabTypeCheck"); if (vkTC) vkTC.onclick = function () { var inp = $("#vocabTypeInp"); var val = inp ? inp.value : ""; vk.typeDraft = val; var sc = vkTypeScoreEn(val, c.w); if (sc.ok) { vk.typeDone = true; vk.typeWhy = ""; render(); } else { vk.typeWhy = sc.whyText; if (!vk.recorded.type) { vk.recorded.type = true; try { recordQuizError("vocabMulti:" + l.setIdx, pos * 10 + 9, { q: "Gõ từ: " + c.w + " (nghĩa: " + c.vi + ")", o: [c.w], a: 0, why: "Từ đúng là " + c.w + " — " + c.vi + "." }); } catch (e) {} } render(); } };
@@ -7358,9 +7387,18 @@ function renderVocab(app, l) {
     if (pos + 1 >= cards.length) {
       if (l.step) finishStep(step.id);
       var firstTryN = Object.keys(runFirstTry).filter(function (k) { return runFirstTry[k]; }).length;
+      /* v107c: the ket qua advance(false) (go sai roi moi xong) khong ghi vao
+         vocabSkipped nen nhan "da xem het bo" phai dung dieu kien "khong thuoc
+         the nao trong luot nay" — dem THEO BO (prefix s+setIdx), khong dung
+         firstTryN toan cuc (bo truoc thuoc tot se lam lech bo nay). Mo lai bo
+         da xong o luot truoc (runFirstTry chua co muc cho bo nay) thi chi
+         dung allSkipped ben. */
+      var ftKeysA = Object.keys(runFirstTry).filter(function (k) { return k.indexOf("s" + l.setIdx + ":") === 0; });
+      var ftNA = ftKeysA.filter(function (k) { return runFirstTry[k]; }).length;
+      var nothingA = ftKeysA.length > 0 && ftNA === 0;
       var wrongHTML = runWrong.length ? '<div class="sumcard"><b>Thẻ chưa vững (' + runWrong.length + '):</b> ' + runWrong.map(function (i) { var cc = cards[i]; return esc(cc.w); }).join(", ") + ' — các thẻ này sẽ xuất hiện lại theo lịch ôn.</div>' : "";
-      app.innerHTML = stepHeader(step) + finishSummaryHTML("Bạn đã học xong bộ này!",
-        '<p>Kết quả: ' + firstTryN + '/' + cards.length + ' thẻ thuộc ngay lần đầu · Thời gian học thật: ' + elapsedText() + '.</p>', wrongHTML, { chest: { key: step.id, title: step.title }, starsKey: "vocab:" + l.setIdx, appeal: "vocab:" + l.setIdx });
+      app.innerHTML = stepHeader(step) + finishSummaryHTML(nothingA ? "Đã xem hết bộ này" : "Bạn đã học xong bộ này!",
+        nothingA ? '<p>Chưa thuộc thẻ nào trong lần học này — hãy học lại ở phần ôn.</p>' : '<p>Kết quả: ' + firstTryN + '/' + cards.length + ' thẻ thuộc ngay lần đầu · Thời gian học thật: ' + elapsedText() + '.</p>', wrongHTML, { chest: { key: step.id, title: step.title }, starsKey: "vocab:" + l.setIdx, appeal: "vocab:" + l.setIdx, sub: nothingA ? "Chưa xong thẻ nào — hãy học lại ở phần ôn." : undefined });
       wireBack(); wireNextStep();
       if (!l.step) { var nsV = $("#btnNextStep"); if (nsV) { nsV.textContent = "Về Luyện tập"; nsV.onclick = function () { backFromLesson(); }; } }
       $("#btnRedo").onclick = function () { state.pos["vocab:" + l.setIdx] = 0; saveState(); lessonStart = Date.now(); runFirstTry = {}; runWrong = []; render(); };
@@ -7401,11 +7439,18 @@ function renderVocab(app, l) {
       for (var ski = 0; ski < cards.length; ski++) if ((state.vocabSkipped || []).indexOf("s" + l.setIdx + ":" + ski) < 0) { allSkipped = false; break; }
       if (l.step && !allSkipped) finishStep(step.id);
       var firstTryN = Object.keys(runFirstTry).filter(function (k) { return runFirstTry[k]; }).length;
+      /* v107c: nhu nhanh advance — the ket qua advance(false) khong ghi vao
+         vocabSkipped; neu ca buoi khong thuoc the nao (du khong phai toan bo
+         qua) thi tieu de cung phai la "Da xem het bo nay", khong chuc mung. */
+      var ftKeysS = Object.keys(runFirstTry).filter(function (k) { return k.indexOf("s" + l.setIdx + ":") === 0; });
+      var ftNS = ftKeysS.filter(function (k) { return runFirstTry[k]; }).length;
+      var nothingS = ftKeysS.length > 0 && ftNS === 0;
+      var noLearnS = allSkipped || nothingS;
       var skipWords = (state.vocabSkipped || []).filter(function (k) { return k.indexOf("s" + l.setIdx + ":") === 0; }).map(function (k) { var ci = +k.split(":")[1]; return cards[ci] ? esc(cards[ci].w) : k; }).join(", ");
       var wrongHTML = runWrong.length ? '<div class="sumcard"><b>Thẻ chưa vững (' + runWrong.length + '):</b> ' + runWrong.map(function (i) { var cc = cards[i]; return esc(cc.w); }).join(", ") + ' — các thẻ này sẽ xuất hiện lại theo lịch ôn.</div>' : "";
       if (skipWords) wrongHTML += '<div class="sumcard"><b>Thẻ đã bỏ qua (chưa tính đạt):</b> ' + skipWords + ' — sẽ gặp lại ở phần ôn.</div>';
-      app.innerHTML = stepHeader(step) + finishSummaryHTML(allSkipped ? "Đã xem hết bộ này — bước chưa tính xong (toàn bộ thẻ đều bỏ qua, hãy học lại ở phần ôn)" : "Bạn đã học xong bộ này!",
-        '<p>Kết quả: ' + firstTryN + '/' + cards.length + ' thẻ thuộc ngay lần đầu · Thời gian học thật: ' + elapsedText() + '.</p>', wrongHTML, { chest: { key: step.id, title: step.title }, starsKey: "vocab:" + l.setIdx, appeal: "vocab:" + l.setIdx });
+      app.innerHTML = stepHeader(step) + finishSummaryHTML(allSkipped ? "Đã xem hết bộ này — bước chưa tính xong (toàn bộ thẻ đều bỏ qua, hãy học lại ở phần ôn)" : (nothingS ? "Đã xem hết bộ này" : "Bạn đã học xong bộ này!"),
+        nothingS && !allSkipped ? '<p>Chưa thuộc thẻ nào trong lần học này — hãy học lại ở phần ôn.</p>' : '<p>Kết quả: ' + firstTryN + '/' + cards.length + ' thẻ thuộc ngay lần đầu · Thời gian học thật: ' + elapsedText() + '.</p>', wrongHTML, { chest: { key: step.id, title: step.title }, starsKey: "vocab:" + l.setIdx, appeal: "vocab:" + l.setIdx, sub: noLearnS ? "Chưa xong thẻ nào — hãy học lại ở phần ôn." : undefined });
       wireBack(); wireNextStep();
       if (!l.step) { var nsV = $("#btnNextStep"); if (nsV) { nsV.textContent = "Về Luyện tập"; nsV.onclick = function () { backFromLesson(); }; } }
       $("#btnRedo").onclick = function () { state.pos["vocab:" + l.setIdx] = 0; saveState(); lessonStart = Date.now(); runFirstTry = {}; runWrong = []; render(); };
@@ -7421,7 +7466,7 @@ function renderVocab(app, l) {
        phan hoi theo am) qua lan render ke tiep de nguoi hoc van doc duoc.
        Giu lai ca nut thanh duoi (Doc lai / Bo qua) — renderLesson() dat
        BAR_RESULT = null nen phai set lai sau render. */
-    vocabKnownStart(key, c.w, firstSymFromIpa(c.ipa), $("#vocabCheckSlot"), $("#vocabCheckResult"), null, vocabSkipCard, function (chk, ai, mirror) { vk.pronDone = true; if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror; var resEl = $("#vocabCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML; var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null; if (chk && chk.ok && vk.step === 3) vk.step = 4; render(); if (br) setBarResult(br); });
+    vocabKnownStart(key, c.w, firstSymFromIpa(c.ipa), $("#vocabCheckSlot"), $("#vocabCheckResult"), null, vocabSkipCard, function (chk, ai, mirror) { vk.pronDone = true; if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror; var resEl = $("#vocabCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML; var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null; if (chk && chk.ok && vk.step === 3) vk.step = 4; render(); if (br) setBarResult(br); /* v107c: dam bao nut Phat am trong the con hien sau luot doc — neu lan ve lai vua roi lam mat/an nut (duong live truoc day, khong tai hien duoc bang probe), ve lai/khoi phuc ngay. */ if (!$("#btnPronounce")) render(); var bp3 = $("#btnPronounce"); if (bp3) bp3.style.display = ""; });
   };
   /* DOT UI-FIX 31/10: xem truoc thi an nut Phat am cham diem (phan cham diem khoa). */
   if (l.preview) { var bp = $("#btnPronounce"); if (bp) bp.style.display = "none"; wirePreviewLock(); }
@@ -7980,6 +8025,8 @@ function phStepGoal(sub, sym) {
 function phPassCheck(aiScore, mirrorScore, opts) {
   opts = opts || {};
   if (opts.camDenied) return { ok: false, reason: "Camera bị từ chối — bật lại quyền camera rồi tập lại." };
+  if (opts.camBlocked || MR.camBlocked) return { ok: false, reason: "Không mở được camera — trình duyệt đang chặn quyền camera trên thiết bị này, kiểm tra lại cài đặt trình duyệt rồi tập lại." };
+  if (opts.camMissing || MR.camMissing) return { ok: false, reason: "Không tìm thấy camera trên thiết bị này — kiểm tra camera rồi tập lại." };
   if (opts.micDenied) return { ok: false, reason: "Mic bị từ chối — bật lại quyền mic rồi tập lại." };
   if (aiScore == null) return { ok: false, reason: "Chưa có điểm AI — cần đăng nhập ở Của tôi → Tài khoản rồi bấm nút “Phát âm” tập lại (AI chấm luôn khi dừng ghi)." };
   if (aiScore < 80) return { ok: false, reason: "Điểm tiếng AI " + aiScore + "/100 chưa đạt 80 — tập lại từ yếu tô đỏ/vàng." };
@@ -8440,7 +8487,7 @@ function renderPronLesson(app, l) {
    khi giữ đúng vùng đích khoảng 1 giây thì đoạn hiện tại được lưu tự động.
    Video chỉ lưu trên máy (IndexedDB, tối đa 12), không gửi đi đâu.
    Độ chính xác nhận diện trên mặt thật CHƯA đo — giao diện ghi rõ điều này. */
-var MR = { slot: null, sym: null, stream: null, rec: null, chunks: [], segTimer: null, curBlob: null, stopping: false, fm: null, fmOn: false, fmBusy: false, holdStart: 0, autoDone: false, pendingAuto: false, pendingAutoScore: null, pendingManual: false, stableCount: 0, momentDone: {}, urls: [], diagFm: "chưa tải", diagFace: false, diagScore: "chưa chạy", diagSends: 0, diagResults: 0, diagLm: 0, diagSendErr: "", diagVState: "", diagRetry: "chưa", fmRetried: false, fmStartAt: 0, fmGen: 0, engine: "", engineFallback: false, lm: null, lmOn: false, lmBusy: false, lmGen: 0, lmRetried: false, lmStartAt: 0, sessionId: 0, sessionActive: false, procSamples: [], sessionMoment: null, manualLocked: false, lastLiveScore: null, lastProc: null, micWant: true, micOn: false, audioStream: null, audioRec: null, audioBlob: null, audioTranscript: "", audioSid: 0, audioSlot: null, audioDiscard: false, srRec: null, camDenied: false, camMissing: false, micDenied: false, mouthOpened: false, autoGraded: false, autoGradeOn: false, onAutoGrade: null };
+var MR = { slot: null, sym: null, stream: null, rec: null, chunks: [], segTimer: null, curBlob: null, stopping: false, fm: null, fmOn: false, fmBusy: false, holdStart: 0, autoDone: false, pendingAuto: false, pendingAutoScore: null, pendingManual: false, stableCount: 0, momentDone: {}, urls: [], diagFm: "chưa tải", diagFace: false, diagScore: "chưa chạy", diagSends: 0, diagResults: 0, diagLm: 0, diagSendErr: "", diagVState: "", diagRetry: "chưa", fmRetried: false, fmStartAt: 0, fmGen: 0, engine: "", engineFallback: false, lm: null, lmOn: false, lmBusy: false, lmGen: 0, lmRetried: false, lmStartAt: 0, sessionId: 0, sessionActive: false, procSamples: [], sessionMoment: null, manualLocked: false, lastLiveScore: null, lastProc: null, micWant: true, micOn: false, audioStream: null, audioRec: null, audioBlob: null, audioTranscript: "", audioSid: 0, audioSlot: null, audioDiscard: false, srRec: null, camDenied: false, camMissing: false, camBlocked: false, camPermBefore: "unknown", micDenied: false, mouthOpened: false, autoGraded: false, autoGradeOn: false, onAutoGrade: null };
 function mrSupported() { try { return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia); } catch (e) { return false; } }
 function mrRecSupported() { try { return typeof MediaRecorder !== "undefined"; } catch (e) { return false; } }
 function mrPickMime() {
@@ -9371,8 +9418,21 @@ function mirrorStart(slot) {
   /* Reset co tu-cham DONG BO truoc khi xin quyen (promise .then chay sau,
      nen starter dat autoGradeOn SAU khi goi mirrorStart se khong bi xoa). */
   MR.mouthOpened = false; MR.autoGraded = false; MR.autoGradeOn = false; MR.onAutoGrade = null;
+  /* v107c: hoi trang thai quyen camera TRUOC khi goi getUserMedia de biet loi
+     sau do co phai nguoi dung tu choi trong hop xin quyen hay khong. Neu
+     Permissions API khong co/treo qua 500ms thi giu "unknown" roi goi ngay
+     (khong chan luong). */
+  var permDone = false;
+  var permTimer = setTimeout(function () { if (!permDone) { permDone = true; mirrorStartGUM(slot); } }, 500);
+  try {
+    if (navigator.permissions && typeof navigator.permissions.query === "function") {
+      navigator.permissions.query({ name: "camera" }).then(function (st) { if (!permDone) { permDone = true; clearTimeout(permTimer); MR.camPermBefore = (st && st.state) || "unknown"; mirrorStartGUM(slot); } }, function () { if (!permDone) { permDone = true; clearTimeout(permTimer); mirrorStartGUM(slot); } });
+    } else { clearTimeout(permTimer); mirrorStartGUM(slot); }
+  } catch (e) { clearTimeout(permTimer); mirrorStartGUM(slot); }
+}
+function mirrorStartGUM(slot) {
   navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(function (stream) {
-    MR.stream = stream; MR.slot = slot; slot._mrRunning = true; MR.camDenied = false; MR.camMissing = false; MR.micDenied = false; MR.sym = slot.querySelector(".mr-sel").value || MR.sym;
+    MR.stream = stream; MR.slot = slot; slot._mrRunning = true; MR.camDenied = false; MR.camMissing = false; MR.camBlocked = false; MR.camPermBefore = "granted"; MR.micDenied = false; MR.sym = slot.querySelector(".mr-sel").value || MR.sym;
     MR.holdStart = 0; MR.autoDone = false; MR.pendingAuto = false; MR.pendingAutoScore = null; MR.pendingManual = false; MR.stableCount = 0; MR.momentDone = {}; MR.diagSends = 0; MR.diagResults = 0; MR.diagLm = 0; MR.diagSendErr = ""; MR.diagVState = ""; MR.diagRetry = "chưa"; MR.fmRetried = false; MR.lmRetried = false; MR.sessionId++; MR.sessionActive = true; MR.procSamples = []; MR.sessionMoment = null; MR.manualLocked = false; MR.lastLiveScore = null; MR.lastProc = null; MR.audioBlob = null; MR.audioTranscript = "";
     var v = slot.querySelector(".mr-video");
     if (v) { v.srcObject = stream; v.style.display = "block"; }
@@ -9396,12 +9456,23 @@ function mirrorStart(slot) {
     }
     mrBootEngine(slot);
     if (MR.micWant) mrMicStart(slot);
-  }, function (err) { /* v107b: phan biet ly do loi — chi bao "chua cho phep" khi quyen
-     that su bi tu choi; khong thay camera thi bao dung ly do do (truoc day moi
-     loi deu bao "chua cho phep" du chua xin quyen ro rang). */
+  }, function (err) { /* v107c: chi bao "chua cho phep" khi that su da co hop xin
+     quyen va nguoi dung tu choi (quyen truoc do la "prompt" + co camera). May
+     khong camera hoac quyen bi chan boi chinh sach/trinh duyet (NotAllowedError
+     ma KHONG hien hop xin quyen) thi bao dung ly do, khong do loi cho nguoi
+     hoc. enumerateDevices lam chuan phu khi ten loi mo ho. */
     var nm = (err && err.name) || "";
-    if (nm === "NotFoundError" || nm === "OverconstrainedError") { MR.camMissing = true; toast("Không tìm thấy camera trên thiết bị này — kiểm tra camera rồi thử lại."); }
-    else { MR.camDenied = true; toast("Bạn chưa cho phép dùng camera."); }
+    var classify = function (hasVideo) {
+      if (nm === "NotFoundError" || nm === "OverconstrainedError" || !hasVideo) { MR.camMissing = true; toast("Không tìm thấy camera trên thiết bị này — kiểm tra camera rồi thử lại."); }
+      else if (nm === "NotAllowedError" && MR.camPermBefore === "prompt" && hasVideo) { MR.camDenied = true; toast("Bạn chưa cho phép dùng camera."); }
+      else if (nm === "NotAllowedError") { MR.camBlocked = true; toast("Không mở được camera — trình duyệt đang chặn quyền camera trên thiết bị này, kiểm tra lại cài đặt trình duyệt."); }
+      else { MR.camBlocked = true; toast("Không mở được camera trên thiết bị này — thử lại sau."); }
+    };
+    try {
+      if (navigator.mediaDevices && typeof navigator.mediaDevices.enumerateDevices === "function") {
+        navigator.mediaDevices.enumerateDevices().then(function (devs) { var hv = false; for (var di = 0; di < (devs || []).length; di++) if (devs[di] && devs[di].kind === "videoinput") { hv = true; break; } classify(hv); }, function () { classify(true); });
+      } else classify(true);
+    } catch (e) { classify(true); }
   });
 }
 function firstSymFromIpa(ipa) {
@@ -15413,9 +15484,17 @@ function renderZhVocab(app, l) {
   var pos = state.zhPos[d.key] || 0;
   if (pos >= cards.length) {
     var allSkippedZh = cards.length > 0 && cards.every(function (cc, ii) { return (state.zhSkipped || []).indexOf(d.key + ":" + ii) >= 0; });
+    /* v107c: the ket qua zhFinishCard ma co ghi am/peek cung dem vao "chua
+       vung" (fails=1) — neu ca buoi khong thuoc the nao thi tieu de cung phai
+       la "Da xem het bo nay". Chi ap khi l.zhFirstTry co muc cho bo nay
+       (mo lai bo da xong o luot truoc thi chi dung allSkippedZh ben). */
+    var ftZhKeys = l.zhFirstTry ? Object.keys(l.zhFirstTry) : [];
+    var ftZhN = ftZhKeys.filter(function (k) { return l.zhFirstTry[k]; }).length;
+    var nothingZh = ftZhKeys.length > 0 && ftZhN === 0;
+    var noLearnZh = allSkippedZh || nothingZh;
     if (!allSkippedZh) zhAwardOnce("set:" + d.key);
     l.zhNext = true;
-    app.innerHTML = lessonHead({ title: d.set.topic, type: "Tiếng Trung · Từ vựng chặng " + d.stage }) + finishSummaryHTML(allSkippedZh ? "Đã xem hết bộ này" : "Bạn đã học xong bộ này!", allSkippedZh ? '<p>Toàn bộ ' + cards.length + ' thẻ đều bỏ qua — bước chưa tính xong, hãy học lại ở phần ôn.</p>' : '<p>Bạn đã đi hết ' + cards.length + ' thẻ của bộ này trong ' + elapsedText() + '.</p>', "") + '<div class="row" style="margin-top:8px"><button class="btn" id="zhFaceBtn">👁 Luyện nhận mặt chữ bộ này →</button></div>' + zhNextStepHTML();
+    app.innerHTML = lessonHead({ title: d.set.topic, type: "Tiếng Trung · Từ vựng chặng " + d.stage }) + finishSummaryHTML(noLearnZh ? "Đã xem hết bộ này" : "Bạn đã học xong bộ này!", allSkippedZh ? '<p>Toàn bộ ' + cards.length + ' thẻ đều bỏ qua — bước chưa tính xong, hãy học lại ở phần ôn.</p>' : (nothingZh ? '<p>Chưa thuộc thẻ nào trong lần học này — hãy học lại ở phần ôn.</p>' : '<p>Bạn đã đi hết ' + cards.length + ' thẻ của bộ này trong ' + elapsedText() + '.</p>'), "", { sub: noLearnZh ? "Chưa xong thẻ nào — hãy học lại ở phần ôn." : undefined }) + '<div class="row" style="margin-top:8px"><button class="btn" id="zhFaceBtn">👁 Luyện nhận mặt chữ bộ này →</button></div>' + zhNextStepHTML();
     wireBack();
     var rb = $("#btnRedo"); if (rb) rb.onclick = function () { state.zhPos[d.key] = 0; saveState(); render(); };
     var fbb = $("#zhFaceBtn"); if (fbb) fbb.onclick = function () { openLesson({ type: "zhFace", setKey: d.key }); };
@@ -15472,17 +15551,17 @@ function renderZhVocab(app, l) {
   var zhCardDictEl = $("#zhCardDictBtn"); if (zhCardDictEl) zhCardDictEl.onclick = function () { zhShowDictPopup(c, d); };
   $$("[data-zhstroke]").forEach(function (b) { b.onclick = function () { openLesson({ type: "zhStroke", han: b.dataset.zhstroke }); }; });
   wireNativeVideo(c.han, "chinese");
-  var zhSkipCard = function () { try { mirrorStop(); } catch (e) {} var hk = d.key + ":" + pos; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[hk]) state.zhHard[hk] = { kind: "card", han: c.han, pinyin: c.pinyin, vi: c.vi, setKey: d.key, idx: pos, fails: 0, streak: 0, level: 0, due: addDaysStr(todayStr(), 1) }; /* v107b: ghi the bo qua de man ket biet bo nay toan bo qua (nhu vocabSkipped cua the Anh). */ if (!state.zhSkipped) state.zhSkipped = []; if (state.zhSkipped.indexOf(hk) < 0) state.zhSkipped.push(hk); state.zhPos[d.key] = pos + 1; saveState(); render(); };
-  var zhLM = $("#zhListenModel"); if (zhLM) zhLM.onclick = function () { vkSpeakBtnState(zhLM, c.han, function () { zhSpeak(c.han); }); };
+  var zhSkipCard = function () { try { mirrorStop(); } catch (e) {} var hk = d.key + ":" + pos; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[hk]) state.zhHard[hk] = { kind: "card", han: c.han, pinyin: c.pinyin, vi: c.vi, setKey: d.key, idx: pos, fails: 0, streak: 0, level: 0, due: addDaysStr(todayStr(), 1) }; /* v107b: ghi the bo qua de man ket biet bo nay toan bo qua (nhu vocabSkipped cua the Anh). */ if (!state.zhSkipped) state.zhSkipped = []; if (state.zhSkipped.indexOf(hk) < 0) state.zhSkipped.push(hk); /* v107c: ghi the bo qua = khong thuoc o luot nay (de man ket biet bo nay co thuoc the nao khong). */ if (!l.zhFirstTry) l.zhFirstTry = {}; l.zhFirstTry[pos] = false; state.zhPos[d.key] = pos + 1; saveState(); render(); };
+  var zhLM = $("#zhListenModel"); if (zhLM) zhLM.onclick = function () { vkSpeakBtnState(zhLM, c.han, function () { zhSpeak(c.han); }, zvk); };
   var zhHN = $("#zhHeardNext"); if (zhHN) zhHN.onclick = function () { zvk.heard = true; zvk.step = 1; render(); vkScrollCardTop(); };
   var zhPN = $("#zhPronNext"); if (zhPN) zhPN.onclick = function () { zvk.step = 4; render(); vkScrollCardTop(); };
   var zhTC = $("#zhTypeCheck"); if (zhTC) zhTC.onclick = function () { var inp = $("#zhTypeInp"); var val = inp ? inp.value : ""; zvk.typeDraft = val; var sc = vkTypeScoreZh(val, c.pinyin); if (sc.ok) { zvk.typeDone = true; zvk.typeWhy = ""; render(); } else { zvk.typeWhy = sc.whyText; if (!zvk.recorded.type) { zvk.recorded.type = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + 9, { q: "Gõ pinyin: " + c.han + " (nghĩa: " + c.vi + ")", o: [c.pinyin], a: 0, why: "Pinyin đúng là " + c.pinyin + " — " + c.vi + "." }); } catch (e) {} } render(); } };
   $$("[data-zhchoice]").forEach(function (b) { b.onclick = function () { if (zvk.choiceAnswered) return; var ch = vkStepChoice("zh", c, cards, pos, zvk.step); var kind = ch.kind; var picked = +b.dataset.zhchoice; if (picked === ch.a) { zvk.choiceAnswered = true; zvk.choiceWhy = "Đúng rồi — " + ch.why; } else { zvk.choiceAnswered = false; zvk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.han + "”" : ch.options[ch.a]) + ". " + ch.why + " Giờ hãy bấm vào đáp án đúng để đi tiếp."; if (!zvk.recorded["choice:" + kind]) { zvk.recorded["choice:" + kind] = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + (zvk.step - 1), { q: ch.q, o: ch.options.slice(), a: ch.a, why: ch.why }); } catch (e) {} } } render(); }; });
   var zhCL = $("#zhChoiceListen"); if (zhCL) zhCL.onclick = function () { zhSpeak(c.han); };
   var zhCN = $("#zhChoiceNext"); if (zhCN) zhCN.onclick = function () { zvk.choiceDone++; zvk.choiceAnswered = false; zvk.choiceWhy = ""; zvk.step = zvk.step + 1; render(); vkScrollCardTop(); };
-  var zhPC = $("#zhPronCheck"); if (zhPC) zhPC.onclick = function () { var res = $("#zhMirrorResult"); var t = res ? res.textContent : ""; if (t.indexOf("Nghe lại bản ghi") >= 0) { zvk.pronRecorded = true; zvk.pronDone = true; zvk.pronWhy = ""; } else if (t.indexOf("Chưa ghi được âm thanh") >= 0) { /* v107b: ghi that bai cung la da doc mot luot — mo nut sang buoc go, diem khong khoa the. */ zvk.pronAttempted = true; zvk.pronWhy = ""; } else if (t.indexOf("Đang xử lý") >= 0) { zvk.pronWhy = "Đang xử lý bản ghi — chờ một chút rồi bấm lại nút này."; } else { zvk.pronWhy = "Chưa thấy bản ghi — bấm “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để kết thúc lượt ghi, sau đó bấm lại nút này."; } render(); };
+  var zhPC = $("#zhPronCheck"); if (zhPC) zhPC.onclick = function () { var res = $("#zhMirrorResult"); var t = res ? res.textContent : ""; if (t.indexOf("Nghe lại bản ghi") >= 0) { zvk.pronRecorded = true; zvk.pronDone = true; zvk.pronWhy = ""; } else if (t.indexOf("Chưa ghi được âm thanh") >= 0 || t.indexOf("Đang xử lý") >= 0) { /* v107b/v107c: ghi that bai (hoac luot ghi da ket thuc) cung la da doc mot luot — mo nut sang buoc go, diem khong khoa the; khong doi timeout doc text. */ zvk.pronAttempted = true; zvk.pronWhy = ""; } else { zvk.pronWhy = "Chưa thấy bản ghi — bấm “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để kết thúc lượt ghi, sau đó bấm lại nút này."; } render(); };
   /* B6b: the hoc xong tron 5 buoc tu hen on lai theo SRS (1-3-7-14-30, dung 2 lan cach quang moi tot nghiep) — cung khuon muc kho, khong reset muc da co. */
-  var zhFinishCard = function () { try { mirrorStop(); } catch (e) {} var hk = d.key + ":" + pos; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[hk]) state.zhHard[hk] = { kind: "card", han: c.han, pinyin: c.pinyin, vi: c.vi, setKey: d.key, idx: pos, fails: (Object.keys(zvk.recorded).length > 0 || zvk.peeked) ? 1 : 0, streak: 0, level: 0, due: addDaysStr(todayStr(), 1) }; /* v107b: the Trung xong +1 XP nhu the Anh (Bui quyet 09:38 07/11); hoc that the nay thi xoa khoi danh sach bo qua. */ if (state.zhSkipped && state.zhSkipped.indexOf(hk) >= 0) state.zhSkipped = state.zhSkipped.filter(function (x) { return x !== hk; }); awardXp(1); state.zhPos[d.key] = pos + 1; saveState(); zhMaybeBlockReview(l, d, cards, pos); render(); vkScrollCardTop(); };
+  var zhFinishCard = function () { try { mirrorStop(); } catch (e) {} var hk = d.key + ":" + pos; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[hk]) state.zhHard[hk] = { kind: "card", han: c.han, pinyin: c.pinyin, vi: c.vi, setKey: d.key, idx: pos, fails: (Object.keys(zvk.recorded).length > 0 || zvk.peeked) ? 1 : 0, streak: 0, level: 0, due: addDaysStr(todayStr(), 1) }; /* v107b: the Trung xong +1 XP nhu the Anh (Bui quyet 09:38 07/11); hoc that the nay thi xoa khoi danh sach bo qua. */ if (state.zhSkipped && state.zhSkipped.indexOf(hk) >= 0) state.zhSkipped = state.zhSkipped.filter(function (x) { return x !== hk; }); /* v107c: ghi the hoc xong co thuoc ngay lan dau khong (dung dieu kien nhu fails o tren: co ghi am hoac peek thi khong tinh thuoc ngay). */ if (!l.zhFirstTry) l.zhFirstTry = {}; l.zhFirstTry[pos] = !(Object.keys(zvk.recorded).length > 0 || zvk.peeked); awardXp(1); state.zhPos[d.key] = pos + 1; saveState(); zhMaybeBlockReview(l, d, cards, pos); render(); vkScrollCardTop(); };
   var zhFin = $("#zhMultiFinish"); if (zhFin) zhFin.onclick = zhFinishCard;
   var zhSk = $("#zhSkipBtn"); if (zhSk) zhSk.onclick = function () { zhSkipCard(); vkScrollCardTop(); };
   var zhMirOn = false;
@@ -15490,9 +15569,13 @@ function renderZhVocab(app, l) {
     try { mirrorStop(); } catch (e) {}
     zhMirOn = false;
     var b = $("#zhMirrorBtn"); if (b) b.textContent = "🎤 Soi gương + ghi âm";
-    var res = $("#zhMirrorResult");
-    if (res) res.innerHTML = '<p class="mut">Đang xử lý bản ghi…</p>';
-    setTimeout(function () { var r2 = $("#zhMirrorResult"); if (r2 && r2.textContent.indexOf("Đang xử lý") >= 0) { r2.innerHTML = '<p class="mut">Chưa ghi được âm thanh — bật mic rồi tập lại.</p><details class="guide-more"><summary><b>Xem cách AI chấm khi soi gương (tiếng Trung)</b></summary><p class="mut">Chưa có điểm AI — bấm lại “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để AI chấm.</p></details>'; /* v107b: ghi that bai thi tu mo nut sang buoc go (khong bat nguoi hoc bam them nut kiem tra). */ zvk.pronAttempted = true; render(); } }, 1500);
+    /* v107c: luot ghi da ket thuc (du co am thanh hay khong) — mo nut sang buoc go
+       NGAY, khong doi timeout doc text da render. Timeout 1500ms cua v107b chet
+       khi co render xen giua: bam "Da ghi xong, kiem tra ban ghi" luc text dang
+       "Dang xu ly" lam render xoa text do, timeout het dieu kien nen khong bao
+       gio dat pronAttempted — the ket cung o buoc 4 du da ghi that bai. */
+    zvk.pronAttempted = true;
+    render();
   };
   $("#zhMirrorBtn").onclick = function () {
     var slot = $("#zhMirrorSlot"), res = $("#zhMirrorResult");
@@ -16619,7 +16702,7 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
   var names = isTc ? ["Nghe + câu thật", "Chọn nghĩa", "Dùng trong câu", "Đọc lại — AI chấm", "Gõ từ"] : ["Nghe + câu thật", "Chọn nghĩa", "Dùng trong câu", "Nghe + đọc to", "Gõ từ"];
   var h = '<p class="mut">Học từ này qua nhiều kiểu · Kiểu ' + (vk.step + 1) + '/5: ' + names[vk.step] + (vk.pronDone ? ' · Phát âm: ' + (vk.pronScore != null ? 'AI ' + vk.pronScore + '/100' : 'đã đọc lại ✓') : '') + '</p>';
   if (vk.step === 0) {
-    h += '<p>Nghe giọng mẫu đọc từ này, xem từ trong câu thật ở trên, rồi sang bước chọn nghĩa.</p><div class="row"><button class="btn" id="ttListenModel">🔊 Nghe giọng mẫu</button><button class="btn btn-primary" id="ttHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
+    h += '<p>Nghe giọng mẫu đọc từ này, xem từ trong câu thật ở trên, rồi sang bước chọn nghĩa.</p><div class="row"><button class="btn" id="ttListenModel"' + (vk.listenPlaying ? ' disabled' : '') + '>' + (vk.listenPlaying ? '🔊 Đang phát…' : '🔊 Nghe giọng mẫu') + '</button><button class="btn btn-primary" id="ttHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
   } else if (vk.step === 4) {
     h += '<p>' + (isTc ? 'Gõ từ này:' : 'Gõ từ này (bàn phím tiếng Hàn):') + ' <b>' + esc(c.w) + '</b>' + (c.vi ? ' (' + esc(c.vi) + ')' : '') + '</p><div class="row"><input type="text" id="ttTypeInp" value="' + esc(vk.typeDraft) + '" placeholder="Gõ vào đây…" lang="' + (isTc ? "en" : "ko") + '"><button class="btn btn-primary" id="ttTypeCheck">Kiểm tra</button></div>';
     if (vk.typeWhy) h += '<div class="why show" id="ttTypeWhy">' + esc(vk.typeWhy) + '</div>';
@@ -16710,10 +16793,17 @@ function tcTpVocab5FinishHTML(sess, cards, allSkipped) {
   /* v107b: khong ghi "da hoc xong" khi toan bo qua; mo lai bo da xong thi
      khong hien "0/15 the thuoc ngay lan dau · 0 giay" gia (firstTry rong). */
   var noRunData = Object.keys(sess.firstTry).length === 0;
+  /* v107c: the ket qua advance(false) (hoc loi, khong bo qua) khong ghi vao
+     state.vocabSkipped nen allSkipped sai khi ca buoi toan sai — them dieu kien
+     "khong thuoc the nao trong luot nay" (firstTry co muc ma khong muc nao
+     true). Mo lai bo da xong (firstTry rong) thi chi dung allSkipped ben. */
+  var nothingLearned = !noRunData && firstTryN === 0;
+  var showSkipped = allSkipped || nothingLearned;
   var statsLine = allSkipped ? '<p>Toàn bộ ' + cards.length + ' thẻ đều bỏ qua — chưa xong thẻ nào, hãy học lại ở phần ôn.</p>'
+    : nothingLearned ? '<p>Chưa thuộc thẻ nào trong lần học này — hãy học lại ở phần ôn.</p>'
     : noRunData ? '<p>Mở lại bộ đã học xong — kết quả lần học trước không lưu theo lượt này. Bấm Làm lại để học lại từ đầu.</p>'
     : '<p>Kết quả: ' + firstTryN + '/' + cards.length + ' thẻ thuộc ngay lần đầu · Thời gian học thật: ' + elapsedText() + '.</p>';
-  var h = '<div class="summarybox"><div class="hero-pair">' + mascPairHTML(true) + '<div class="hero-text"><h2>' + (allSkipped ? 'Đã xem hết bộ này' : 'Bạn đã học xong bộ này!') + '</h2><p class="mut">' + (allSkipped ? 'Chưa xong thẻ nào — hãy học lại ở phần ôn.' : '2812 chúc mừng bạn — làm tốt lắm!') + '</p></div></div>'
+  var h = '<div class="summarybox"><div class="hero-pair">' + mascPairHTML(true) + '<div class="hero-text"><h2>' + (showSkipped ? 'Đã xem hết bộ này' : 'Bạn đã học xong bộ này!') + '</h2><p class="mut">' + (showSkipped ? 'Chưa xong thẻ nào — hãy học lại ở phần ôn.' : '2812 chúc mừng bạn — làm tốt lắm!') + '</p></div></div>'
     + statsLine
     + wrongHTML
     + '<div class="row" style="margin-top:10px"><button class="btn" id="ttRedo">Làm lại</button>'
@@ -16811,7 +16901,7 @@ function renderTcTpVocab5(track, stepId, back) {
   try { if (typeof fitBigLetter === "function") fitBigLetter(); } catch (e) {}
   wireVocabMethods97(app, stepId, track);
   var tl = $("#ttListen"); if (tl) tl.onclick = function () { if (isTc) speak(c.w); else tpSpeak(c.w); };
-  var tlm = $("#ttListenModel"); if (tlm) tlm.onclick = function () { vkSpeakBtnState(tlm, c.w, function (done) { if (isTc) speak(c.w, null, done); else tpSpeak(c.w); }); };
+  var tlm = $("#ttListenModel"); if (tlm) tlm.onclick = function () { vkSpeakBtnState(tlm, c.w, function (done) { if (isTc) speak(c.w, null, done); else tpSpeak(c.w); }, vk); };
   var thn = $("#ttHeardNext"); if (thn) thn.onclick = function () { vk.heard = true; vk.step = 1; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   var tpn = $("#ttPronNext"); if (tpn) tpn.onclick = function () { vk.step = 4; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   var tpr = $("#ttPronRetry"); if (tpr) tpr.onclick = function () { vk.pronDone = false; vk.pronScore = null; vk.pronMirror = null; vk.pronResultHTML = ""; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
