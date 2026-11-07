@@ -607,6 +607,22 @@ function photoPronLabel(bank) {
 }
 function photoBank() { var tr = document.getElementById("phFTrack"); return (tr && tr.value) || state.track || "en"; }
 function photoSetStatus(t) { var el = document.getElementById("phFStatus"); if (el) el.textContent = t; }
+/* v109b: trang thai mo hinh nhan dien — kiem tra/tai truoc khi mo khu chup anh
+   (chi chay 1 lan/phien) de nguoi hoc thay ngay mo hinh san sang hay loi, va
+   biet nhap tay o dau neu mo hinh loi. */
+var photoModelState = "idle"; /* idle | loading | ready | failed */
+function photoCheckModel() {
+  if (photoModelState !== "idle") return;
+  photoModelState = "loading";
+  photoSetStatus("Đang tải mô hình nhận diện trên máy… (lần đầu có thể mất vài giây)");
+  photoLoadModel().then(function () {
+    photoModelState = "ready";
+    if (!photoDraft) photoSetStatus("Mô hình nhận diện đã sẵn sàng — chụp hoặc chọn ảnh để bắt đầu.");
+  }).catch(function () {
+    photoModelState = "failed";
+    if (!photoDraft) photoSetStatus("Không tải được mô hình nhận diện trên máy này — bạn vẫn nhập tay từ + nghĩa ở mục “Nhập từ tay” phía trên rồi lưu kèm ảnh.");
+  });
+}
 function photoReadFile(file) {
   return new Promise(function (resolve, reject) {
     var r = new FileReader();
@@ -619,6 +635,8 @@ function photoHandleFile(dataUrl) {
   /* Nhan anh tu input (camera/chon anh): hien anh ngay, nen anh, roi nhan
      dien tren may; mo hinh tai khong duoc thi ve duong nhap tay. */
   if (!dataUrl || dataUrl.indexOf("data:image/") !== 0) { photoSetStatus("Ảnh này không đọc được — hãy chọn ảnh khác (JPG/PNG)."); return; }
+  /* v109b: xoa dong nhac nho cu (neu co) — anh da nhan, luong nhan dien tiep tuc. */
+  photoSetStatus("Đã nhận ảnh — đang chuẩn bị…");
   photoDraft = { dataUrl: dataUrl, img: null, guesses: null, status: "compressing", lowConf: false, w: "", vi: "", pron: "", unsure: false };
   photoRenderDraft();
   var useImg = function (img) {
@@ -717,6 +735,8 @@ function photoOpenEntry() {
   go("mine");
   var det = document.getElementById("mineGrpSupplement");
   if (det) det.open = true;
+  /* v109b: mo khu chup anh thi kiem tra mo hinh ngay (chi chay 1 lan/phien). */
+  photoCheckModel();
   var sec = document.getElementById("photoWordSection");
   if (sec && sec.scrollIntoView) sec.scrollIntoView();
 }
@@ -726,14 +746,16 @@ function wirePhotoEntry() {
 function wirePhotoWord() {
   var tr = document.getElementById("phFTrack"), sf = document.getElementById("phFSetFilter"), ss = document.getElementById("phFSet");
   if (!tr || !ss) return;
-  var rebuild = function () {
-    var cur = ss.value;
+  /* v109b: doi track -> ve bo tu vung dau tien cua track moi (khong giu chi so
+     cu — chi so bo khac nhau giua cac track); loc bo thi giu lua chon neu con khop. */
+  var rebuild = function (keepCur) {
+    var cur = keepCur ? ss.value : "";
     ss.innerHTML = mySetOptionsHTML(tr.value, sf ? sf.value : "");
     if (cur) { for (var i = 0; i < ss.options.length; i++) if (ss.options[i].value === cur) { ss.value = cur; break; } }
     photoRenderDraft();
   };
-  tr.onchange = rebuild;
-  if (sf) sf.oninput = rebuild;
+  tr.onchange = function () { rebuild(false); };
+  if (sf) sf.oninput = function () { rebuild(true); };
   var pickFile = function (input) {
     if (!input || !input.files || !input.files[0]) return;
     photoReadFile(input.files[0]).then(function (dataUrl) { photoHandleFile(dataUrl); }).catch(function () { photoSetStatus("Không đọc được ảnh này — hãy chọn ảnh khác (JPG/PNG)."); });
@@ -741,10 +763,38 @@ function wirePhotoWord() {
   };
   var cam = document.getElementById("phFCamera"), pk = document.getElementById("phFPick");
   var f1 = document.getElementById("phFFile"), f2 = document.getElementById("phFPickFile");
-  if (cam && f1) cam.onclick = function () { f1.click(); };
-  if (pk && f2) pk.onclick = function () { f2.click(); };
+  /* v109b: moi lan bam deu co phan hoi nhin thay ngay tren trang (hop chon
+     file / camera la hop he dieu hanh, co the khong hien trong anh chup man
+     hinh — dong trang thai la bang chung duy nhat cho nguoi hoc). Neu sau
+     vai giay van chua co anh nao duoc chon thi nhac lai de nguoi hoc biet
+     duong nhap tay; anh da nhan thi photoHandleFile xoa nhac nay. */
+  var watchPick = function (input) {
+    setTimeout(function () {
+      if (!photoDraft && (!input || !input.value)) photoSetStatus("Chưa thấy ảnh nào được chọn — nếu camera/hộp chọn ảnh không mở, hãy thử lại, hoặc nhập tay ở mục “Nhập từ tay” phía trên.");
+    }, 4000);
+  };
+  if (cam && f1) cam.onclick = function () {
+    photoSetStatus("Đang mở camera…");
+    try { f1.click(); } catch (e) { photoSetStatus("Không mở được camera trên máy này — hãy bấm “Chọn ảnh có sẵn” để chọn ảnh trong máy, hoặc nhập tay ở mục “Nhập từ tay” phía trên."); return; }
+    watchPick(f1);
+  };
+  if (pk && f2) pk.onclick = function () {
+    photoSetStatus("Đã mở hộp chọn ảnh — chọn 1 ảnh trong máy.");
+    try { f2.click(); } catch (e) { photoSetStatus("Không mở được hộp chọn ảnh trên máy này — hãy nhập tay ở mục “Nhập từ tay” phía trên."); return; }
+    watchPick(f2);
+  };
   if (f1) f1.onchange = function () { pickFile(f1); };
   if (f2) f2.onchange = function () { pickFile(f2); };
+  /* v109b: dong trang thai co chu ngay tu dau (truoc day #phFStatus trong —
+     nguoi hoc bam nut khong thay phan hoi gi). */
+  var stEl = document.getElementById("phFStatus");
+  if (stEl && !stEl.textContent && !photoDraft) stEl.textContent = "Chưa chọn ảnh — bấm Chụp ảnh hoặc Chọn ảnh có sẵn để bắt đầu.";
+  /* v109b: mo muc "Bổ sung nội dung" thi kiem tra mo hinh ngay (chi 1 lan/phien). */
+  var det = document.getElementById("mineGrpSupplement");
+  if (det) {
+    if (det.open) photoCheckModel();
+    det.addEventListener("toggle", function () { if (det.open) photoCheckModel(); });
+  }
   wirePhotoDraft();
 }
 function myWordNorm(w) { return String(w || "").trim().toLowerCase(); }
@@ -764,6 +814,10 @@ function mySetOptionsHTML(bank, filter) {
   var f = (filter || "").trim().toLowerCase(), opts = [];
   (bankObj.sets || []).forEach(function (s, i) {
     if (!s) return;
+    /* v109b: bo qua bo phat am (VD EN "Bảng chữ cái và phát âm · Band 0") —
+       tu vung (nhap tay hay chup anh) khong xep vao bo day chu cai; bo mac
+       dinh nho vay luon la bo tu vung dau tien cua track. */
+    if (/phát âm|pronunciation/i.test(s.topic || "")) return;
     var label = (s.topic || ("Bộ " + (i + 1))) + (s.band ? " · " + s.band : "") + (s.hsk ? " · " + s.hsk : "");
     if (f && label.toLowerCase().indexOf(f) < 0) return;
     opts.push('<option value="' + i + '">' + esc(label) + '</option>');
