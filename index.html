@@ -3635,7 +3635,7 @@ function viewHome(app) {
   html += '<p id="homeGreet">' + (trulyNew ? 'Hôm nay 2812 cùng bạn học nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếp nhé.') + '</p>';
   html += '<div class="home-clean"><div class="home-hero">';
   if (trulyNew) {
-    html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra đầu vào để web xếp đúng chặng cho bạn (khuyên dùng). Bỏ qua thì học từ đầu chương 1.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra đầu vào</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div></div></div></section>';
+    html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra đầu vào để web xếp đúng chặng cho bạn (khuyên dùng). Bỏ qua thì học từ đầu chương 1.</p><p class="mut">2812 là bạn đồng hành học tập của web — cùng bạn học mỗi ngày và chúc mừng khi bạn làm tốt.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra đầu vào</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div></div></div></section>';
   } else {
     var t = sessionTarget();
     var heroEyebrow = t.kind === "review" ? "BUỔI HỌC HÔM NAY · ÔN TRƯỚC" : (t.fromPp ? "TIẾP THEO · LỘ TRÌNH RIÊNG" : "TIẾP THEO");
@@ -7264,7 +7264,8 @@ function vkEnPanelHTML(vk, c, cards, pos) {
   } else {
     h += '<p>Đọc to từ “' + esc(c.w) + '” theo giọng mẫu. Bấm “🎤 Phát âm” ở hàng nút dưới để soi gương + ghi âm — AI chấm từng âm, điểm hiện ngay sau khi đọc.</p>';
     if (vk.pronDone) h += '<p>Đã đọc một lượt ✓ — điểm không khóa thẻ: chưa đạt 80 thì tập lại, muốn sang bước gõ thì bấm dưới đây.</p><button class="btn btn-primary" id="vocabPronNext">Sang bước gõ →</button>';
-    else h += '<p class="mut">Chưa đọc lượt nào — bấm Phát âm để bắt đầu. Không có mic/camera thì đọc to theo giọng máy rồi bấm “Bỏ qua thẻ này” để học tiếp.</p>';
+    else if (!mrSupported()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Sang bước gõ →</button>'; /* Chang 10 F1: duong thoat nhu ZH — truoc day may khong mic chi co cach "Bo qua the nay" (bo ca the) */
+    else h += '<p class="mut">Chưa đọc lượt nào — bấm Phát âm để bắt đầu.</p>';
   }
   h += '<div class="row" style="margin-top:8px"><button class="btn" id="vocabSkipBtn">Bỏ qua thẻ này</button></div>';
   return h;
@@ -11645,7 +11646,7 @@ function shadowStepUnitHTML(l, sents, unit, ui, unitTotal, step) {
   }
   h += '</div>';
   if (isPractice && l.shadowTurn === "user") {
-    h += '<div class="qblock"><p><b>Đến lượt bạn nhại lại.</b> Bấm Ghi âm rồi nói to, sau đó nghe lại chính mình để tự đánh giá.</p>'
+    h += '<div class="qblock"><p><b>Đến lượt bạn nhại lại.</b> Bấm Ghi âm rồi nói to, sau đó nghe lại chính mình để tự đánh giá.</p><p class="mut">Nhại xong bấm “Tôi nhại được ✓” (hoặc “Cần luyện thêm”) để sang câu/bước tiếp.</p>' /* Chang 10 F2: buoc 4-8 truoc day khong co dong nao noi nut nao de sang buoc */
       + '<div class="row"><button class="btn" id="shStepRec">' + (l.shadowRecOn ? '⏹ Dừng ghi âm' : '🎤 Ghi âm nhại lại') + '</button>' + (l.shadowRecUrl ? '<button class="btn" id="shStepPlayBack">🔊 Nghe lại bản ghi của mình</button>' : '') + '</div>'
       + (l.shadowRecUrl ? '<p><audio controls src="' + esc(l.shadowRecUrl) + '" style="width:100%"></audio></p>' : '')
       + '<p id="shStepSrLine">' + esc(l.shadowSrText || 'Chấm nhanh bằng giọng nói (ước lượng): bấm nút dưới rồi đọc đoạn — máy chỉ so xem có khớp câu mẫu không.') + '</p>'
@@ -14036,6 +14037,7 @@ function renderPhaseSkill(app, l) {
         openLesson({ type: "phaseExam", phase: ph });
         return;
       }
+      if (!msIsVip() && phasePendingSave(l, "speaking")) { toast("Đã lưu bài đợt này — nâng cấp VIP rồi quay lại để AI chấm 4 tiêu chí."); backFromLesson(); return; } /* Chang 10 F4: khach bam "Luu ket qua" truoc day chi nhan toast, khong luu gi */
       toast(msIsVip() ? "Hãy bấm “AI chấm Nói 4 tiêu chí” để AI chấm đã — phần thi Nói chỉ có AI chấm, không tự chấm." : "AI chấm Nói chỉ mở cho tài khoản VIP — bấm “Giữ bài đợt để chấm lại sau” để giữ bài, nâng cấp VIP rồi quay lại chấm.");
       return;
     };
@@ -14085,6 +14087,7 @@ function renderPhaseSkill(app, l) {
         openLesson({ type: "phaseExam", phase: ph });
         return;
       }
+      if (!msIsVip() && phasePendingSave(l, "writing")) { toast("Đã lưu bài đợt này — nâng cấp VIP rồi quay lại để AI chấm 4 tiêu chí."); backFromLesson(); return; } /* Chang 10 F4: khach bam "Luu ket qua" truoc day chi nhan toast, khong luu gi */
       toast(msIsVip() ? "Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần thi Viết chỉ có AI chấm, không tự chấm." : "AI chấm Viết chỉ mở cho tài khoản VIP — bấm “Giữ bài đợt để chấm lại sau” để giữ bài, nâng cấp VIP rồi quay lại chấm."); return;
     };
     var psK = $("#psKeep"); if (psK) psK.onclick = function () { if (phasePendingSave(l, "writing")) { toast("Đã giữ bài đợt — quay lại khi AI khỏe rồi bấm Tiếp tục chấm."); backFromLesson(); } else { toast("Chưa giữ được — hãy về hub đợt rồi làm lại."); } };
@@ -17590,6 +17593,7 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
       h += '<p>Đọc to từ “' + esc(c.w) + '” theo giọng mẫu. Bấm “🎤 Đọc to để AI chấm”, đọc to rồi bấm dừng để AI chấm (đạt khi AI chấm ≥ 80) — điểm không khóa thẻ.</p>';
       h += '<div id="ttCheckSlot"></div><div id="ttCheckResult"></div>';
       if (vk.pronDone) h += '<p>Đã đọc một lượt ✓ — điểm không khóa thẻ, muốn đọc lại thì bấm dưới đây.</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Sang bước gõ →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
+      else if (!mrSupported()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Sang bước gõ →</button></div>'; /* Chang 10 F1: duong thoat nhu ZH */
       else h += '<button class="btn btn-primary" id="ttPronBtn">🎤 Đọc to để AI chấm</button>';
       if (vk.pronWhy) h += '<div class="why show" id="ttPronWhy">' + esc(vk.pronWhy) + '</div>';
     } else {

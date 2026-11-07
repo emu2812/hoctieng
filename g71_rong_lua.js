@@ -698,7 +698,7 @@
           hp: boss ? bhp : mhp, maxHp: boss ? bhp : mhp,
           phase: 0, progress: 0, status: "advancing",
           x: 0.15 + Math.random() * 0.7,
-          y: -0.15 - i * 0.18,
+          y: -0.15 - i * 0.18, /* Chang 10: GIU 0,18 nhu cu — thu siet 0,10 thi vao man nhanh (quai 4: 23s->6,3s) nhung lam hong test tach quai v102 B3 (cap ZH ket 42 tick, 5/40 lan chay); chi giu sua gentle (quai tren mep di toc do day du) nen quai 4 vao man 23s->11,5s */
           speed: boss ? 0.025 + 0.002 * (region - 1) : 0.055 + 0.005 * level + 0.003 * (region - 1),
           gold: boss ? BOSS_GOLD : MONSTER_GOLD,
           /* Đạn của quái (v83): phát đầu sau ~2-3 giây, sau đó mỗi
@@ -714,6 +714,7 @@
         element: opts.element || "fire",
         score: 0, goldEarned: 0, combo: 0, over: null,
         graceUntil: 0, events: [], collected: [],
+        typingShield: 0, /* Chang 10: giay con lai cua khien go — quai tam ngung ban khi nguoi choi dang go dung */
         gentle: gentle, elapsed: 0,
         dragon: { x: 0.5, y: 0.85 }, bolts: []
       };
@@ -764,6 +765,7 @@
       var tgt = w.type || w.w;
       if (tgt.charAt(w.progress).toLowerCase() !== ch) { st.combo = 0; return { ok: false, wrong: true }; }
       w.progress++;
+      st.typingShield = 1.0; /* Chang 10: vua go dung -> quai tam ngung ban 1 giay — dang go thi khong bi dan trung */
       /* Sát thương một chiêu: đúng hệ ×2 nền, từ dài +1, cấp từ, combo
          tới ×3, thời tiết vùng ×1,5 khi đúng hệ thời tiết, đúng nhóm từ
          quái sợ ×2, bạn đồng hành +1. */
@@ -867,12 +869,13 @@
     tick: function (st, dt, now) {
       if (st.over) return;
       st.elapsed = (st.elapsed || 0) + dt;
+      if (st.typingShield > 0) st.typingShield = Math.max(0, st.typingShield - dt);
       /* Nhẹ nhàng ải 1 vùng 1: 30 giây đầu mỗi trận, quái đi chậm một nửa
          và không bắn — người mới có thời gian đọc thẻ + khóa quái. */
       var gentle = !!(st.gentle && st.elapsed < 30);
       st.words.forEach(function (wd) {
         if (wd.status !== "advancing") return;
-        wd.y += wd.speed * (gentle ? 0.5 : 1) * dt;
+        wd.y += wd.speed * (gentle && wd.y >= 0 ? 0.5 : 1) * dt; /* Chang 10: gentle chi cham khi quai DA VAO man — truoc day quai tren mep cung di cham nen vao man rat muon */
         /* Quái trôi nhẹ về phía rồng (đuổi theo) để việc né có ý nghĩa. */
         wd.x += Math.max(-1, Math.min(1, st.dragon.x - wd.x)) * 0.12 * dt;
         /* Chạm tới rồng: quái rơi tới đáy sân HOẶC đụng trúng rồng. */
@@ -895,7 +898,7 @@
         /* Bắn đạn từ xa (chỉ khi còn cách rồng một đoạn — không bắn
            điểm tựa; quái ở sát mép trên chưa bắn). Nhẹ nhàng ải 1:
            30 giây đầu không bắn. */
-        if (!gentle && wd.y > 0.05 && wd.y < 0.65) {
+        if (!gentle && !(st.typingShield > 0) && wd.y > 0.05 && wd.y < 0.65) { /* Chang 10: dang go dung thi quai khong ban moi */
           wd.fireIn -= dt;
           if (wd.fireIn <= 0) {
             var dx = st.dragon.x - wd.x, dy = st.dragon.y - wd.y;
@@ -1141,6 +1144,29 @@
     ctx.globalAlpha = 0.92;
     ctx.beginPath(); ctx.ellipse(W * 0.015 + fx, H * 0.62, W * 0.045, H * 0.42, 0.06, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(W * 0.985 + fx, H * 0.58, W * 0.04, H * 0.38, -0.05, 0, Math.PI * 2); ctx.fill();
+    /* Chang 10: van vo cay — truoc day than cay chi la elip dac mau cham
+       (nhin nhu bong den dac, khong thay van vo). Ve vai vet doc mo
+       (cham nhat, alpha thap) cat theo hinh elip than cay. */
+    ctx.save();
+    ctx.beginPath(); ctx.ellipse(W * 0.015 + fx, H * 0.62, W * 0.045, H * 0.42, 0.06, 0, Math.PI * 2); ctx.clip();
+    ctx.strokeStyle = "rgba(165,180,252,.22)"; ctx.lineWidth = 2;
+    [-0.02, 0.005, 0.03].forEach(function (dx) {
+      ctx.beginPath();
+      ctx.moveTo(W * (0.015 + dx) + fx, H * 0.22);
+      ctx.quadraticCurveTo(W * (0.015 + dx) + fx + 3, H * 0.6, W * (0.015 + dx) + fx - 2, H * 1.0);
+      ctx.stroke();
+    });
+    ctx.restore();
+    ctx.save();
+    ctx.beginPath(); ctx.ellipse(W * 0.985 + fx, H * 0.58, W * 0.04, H * 0.38, -0.05, 0, Math.PI * 2); ctx.clip();
+    ctx.strokeStyle = "rgba(165,180,252,.22)"; ctx.lineWidth = 2;
+    [-0.015, 0.01, 0.032].forEach(function (dx) {
+      ctx.beginPath();
+      ctx.moveTo(W * (0.985 + dx) + fx, H * 0.22);
+      ctx.quadraticCurveTo(W * (0.985 + dx) + fx - 3, H * 0.6, W * (0.985 + dx) + fx + 2, H * 1.0);
+      ctx.stroke();
+    });
+    ctx.restore();
     ctx.globalAlpha = 1;
     var gg = ctx.createLinearGradient(0, H * 0.82, 0, H);
     gg.addColorStop(0, "rgba(4,6,15,0)"); gg.addColorStop(1, "rgba(4,6,15,0.28)");
@@ -1545,13 +1571,13 @@
       var mw = s * 2.7, mh = mw * mim.naturalHeight / mim.naturalWidth;
       ctx.drawImage(mim, px - mw / 2, py - mh / 2 - s * 0.1, mw, mh);
       if (locked) {
-        ctx.strokeStyle = C.amber500; ctx.lineWidth = 3;
+        ctx.strokeStyle = "#FFFFFF"; ctx.lineWidth = 3; /* Chang 10: vong khoa mau trang — truoc dung C.amber500 (#F59E0B) TRUNG MAU he Lua nen khong phan biet duoc quai dang khoa voi quai he Lua */
         ctx.beginPath(); ctx.ellipse(px, py - s * 0.1, mw * 0.52, mh * 0.5, 0, 0, Math.PI * 2); ctx.stroke();
       }
     } else {
     /* Thân khối bóng tối (bản vẽ code, dự phòng). */
     ctx.fillStyle = C.ink800;
-    ctx.strokeStyle = locked ? C.amber500 : C.ink300;
+    ctx.strokeStyle = locked ? "#FFFFFF" : C.ink300; /* Chang 10: vong khoa mau trang (ly do nhu tren) */
     ctx.lineWidth = 2;
     ctx.beginPath(); ctx.ellipse(px, py, s * 0.95, s * 0.85, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
     /* Gai bóng tối trên đầu. */
@@ -1584,7 +1610,7 @@
     ctx.beginPath(); ctx.arc(bgx, bgy, 17, 0, Math.PI * 2); ctx.stroke();
     drawElIcon(ctx, m.weak, bgx, bgy, 12, true);
     /* Thanh máu. */
-    var bw = s * 1.9, bx = px - bw / 2, by = py - s * 1.35;
+    var bw = s * 1.9, bx = px - bw / 2, by = py - s * 1.75; /* Chang 10: thanh mau doi len tren — truoc by=py-s*1,35, thanh mau de len mep tren-trai huy hieu (pixel xam trong dia huy, kiem bang probe) */
     ctx.fillStyle = C.grey400;
     G71.rr(ctx, bx, by, bw, 6, 3); ctx.fill();
     ctx.fillStyle = m.hp / m.maxHp > 0.5 ? C.amber500 : C.amber700;
@@ -1592,12 +1618,12 @@
     /* Nhãn điểm yếu theo nhóm từ (v99): hiện trên thanh máu để người chơi
        biết nên khóa quái nào — từ quái mang thuộc nhóm này thì chiêu ×2.
        Ẩn khi quái còn ở sát mép trên (không đủ chỗ). */
-    if (m.groupWeak && GROUP_WEAK[m.groupWeak] && py - s * 1.35 - 24 > 0) {
+    if (m.groupWeak && GROUP_WEAK[m.groupWeak] && py - s * 1.75 - 26 > 0) { /* Chang 10: nguong an theo vi tri nhan moi */
       var gw = GROUP_WEAK[m.groupWeak].hint;
       ctx.font = "700 11px system-ui, sans-serif";
       var gwW = ctx.measureText(gw).width + 14;
       var gwX = Math.max(gwW / 2 + 4, Math.min(W - gwW / 2 - 4, px));
-      var gwY = py - s * 1.35 - 12;
+      var gwY = py - s * 1.75 - 12; /* Chang 10: nhan doi len theo thanh mau (giu khoang cach 3px) */
       ctx.fillStyle = "rgba(4,6,15,.72)";
       G71.rr(ctx, gwX - gwW / 2, gwY - 9, gwW, 18, 9); ctx.fill();
       ctx.fillStyle = C.amber100;

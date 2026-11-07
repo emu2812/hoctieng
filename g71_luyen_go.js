@@ -24,6 +24,7 @@
       });
       return { theme: theme, total: words.length, words: ws, active: null,
         hearts: 3, score: 0, cleared: 0, resolved: 0, over: null, graceUntil: 0,
+        typingShield: 0, /* Chang 10: giay con lai cua khien go — dang go dung thi tu roi cham lai */
         ship: { x: 0.5, y: 0.86 }, rocks: [], rockTimer: 2.0 };
     },
     /* Lái tàu: dx theo đơn vị chuẩn (0..1), kẹp trong sân. */
@@ -89,6 +90,7 @@
       var tgt = w.type || w.w;
       if (tgt.charAt(w.progress).toLowerCase() === ch) {
         w.progress++;
+        st.typingShield = 0.8; /* Chang 10: vua go dung -> tu roi cham lai mot nua trong 0,8 giay */
         if (w.progress >= tgt.length) {
           w.status = "done";
           st.cleared++;
@@ -142,9 +144,11 @@
     tick: function (st, dt, now) {
       if (st.over) return;
       var boost = 1 + st.resolved * 0.02;
+      if (st.typingShield > 0) st.typingShield = Math.max(0, st.typingShield - dt);
+      var fallMul = (st.typingShield > 0) ? 0.5 : 1; /* Chang 10: dang go dung thi tu roi cham lai mot nua — nguoi go cham van kip; thien thach van roi nhanh nhu cu */
       st.words.forEach(function (wd) {
         if (wd.status !== "falling") return;
-        wd.y += wd.speed * boost * dt;
+        wd.y += wd.speed * boost * fallMul * dt;
         if (wd.y >= 1.02) {
           wd.status = "missed";
           st.resolved++;
