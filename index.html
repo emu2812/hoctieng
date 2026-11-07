@@ -3633,6 +3633,9 @@ function viewHome(app) {
   html += homeSearchHTML();
   html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (trulyNew ? 'Hôm nay 2812 cùng bạn học nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếp nhé.') + '</p>';
+  /* v112b L3: cau giai thich 2812 truoc day chi co trong the CHAO BAN MOI
+     (nguoi moi) — nguoi quay lai chi thay homeGreet nen khong biet 2812 la ai. */
+  if (!trulyNew) html += '<p class="mut">2812 là bạn đồng hành học tập của web — cùng bạn học mỗi ngày và chúc mừng khi bạn làm tốt.</p>';
   html += '<div class="home-clean"><div class="home-hero">';
   if (trulyNew) {
     html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra đầu vào để web xếp đúng chặng cho bạn (khuyên dùng). Bỏ qua thì học từ đầu chương 1.</p><p class="mut">2812 là bạn đồng hành học tập của web — cùng bạn học mỗi ngày và chúc mừng khi bạn làm tốt.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra đầu vào</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div></div></div></section>';
@@ -7264,7 +7267,7 @@ function vkEnPanelHTML(vk, c, cards, pos) {
   } else {
     h += '<p>Đọc to từ “' + esc(c.w) + '” theo giọng mẫu. Bấm “🎤 Phát âm” ở hàng nút dưới để soi gương + ghi âm — AI chấm từng âm, điểm hiện ngay sau khi đọc.</p>';
     if (vk.pronDone) h += '<p>Đã đọc một lượt ✓ — điểm không khóa thẻ: chưa đạt 80 thì tập lại, muốn sang bước gõ thì bấm dưới đây.</p><button class="btn btn-primary" id="vocabPronNext">Sang bước gõ →</button>';
-    else if (!mrSupported()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Sang bước gõ →</button>'; /* Chang 10 F1: duong thoat nhu ZH — truoc day may khong mic chi co cach "Bo qua the nay" (bo ca the) */
+    else if (!mrSupported() || mrNoDevices()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Sang bước gõ →</button>'; /* v112b L1: mrSupported() chi biet API co ton tai, khong biet may co thiet bi that khong — them mrNoDevices() (enumerateDevices tra []) */
     else h += '<p class="mut">Chưa đọc lượt nào — bấm Phát âm để bắt đầu.</p>';
   }
   h += '<div class="row" style="margin-top:8px"><button class="btn" id="vocabSkipBtn">Bỏ qua thẻ này</button></div>';
@@ -7319,7 +7322,7 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
     } else {
       h += '<p class="mut">Chưa có điểm AI — bấm “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để AI chấm.</p>';
     }
-    var canNext = vk.pronRecorded || !!zp || !mrSupported() || vk.pronAttempted;
+    var canNext = vk.pronRecorded || !!zp || !mrSupported() || vk.pronAttempted || mrNoDevices(); /* v112b L1: cung goc nhu EN/TC — mrSupported() khong phat hien may khong thiet bi that */
     if (canNext) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhPronNext">Sang bước gõ pinyin →</button></div>';
     else {
       h += '<button class="btn" id="zhPronCheck">Đã ghi xong, kiểm tra bản ghi</button>';
@@ -7974,6 +7977,10 @@ function renderVocab(app, l) {
   };
   /* DOT UI-FIX 31/10: xem truoc thi an nut Phat am cham diem (phan cham diem khoa). */
   if (l.preview) { var bp = $("#btnPronounce"); if (bp) bp.style.display = "none"; wirePreviewLock(); }
+  /* v112b L1: kiem thiet bi ghi am 1 lan/phien (cache trong mrCheckDevices) —
+     neu may that su khong co mic/camera thi ve lai de hien nut thoat o buoc 4
+     ngay khi vao buoc, khong can bam Phat am that bai truoc. */
+  mrCheckDevices(function () { if (vk.step === 3) render(); });
 }
 
 /* ----- Trạm ngữ pháp ----- */
@@ -8994,6 +9001,29 @@ function renderPronLesson(app, l) {
    Độ chính xác nhận diện trên mặt thật CHƯA đo — giao diện ghi rõ điều này. */
 var MR = { slot: null, sym: null, stream: null, rec: null, chunks: [], segTimer: null, curBlob: null, stopping: false, fm: null, fmOn: false, fmBusy: false, holdStart: 0, autoDone: false, pendingAuto: false, pendingAutoScore: null, pendingManual: false, stableCount: 0, momentDone: {}, urls: [], diagFm: "chưa tải", diagFace: false, diagScore: "chưa chạy", diagSends: 0, diagResults: 0, diagLm: 0, diagSendErr: "", diagVState: "", diagRetry: "chưa", fmRetried: false, fmStartAt: 0, fmGen: 0, engine: "", engineFallback: false, lm: null, lmOn: false, lmBusy: false, lmGen: 0, lmRetried: false, lmStartAt: 0, sessionId: 0, sessionActive: false, procSamples: [], sessionMoment: null, manualLocked: false, lastLiveScore: null, lastProc: null, micWant: true, micOn: false, audioStream: null, audioRec: null, audioBlob: null, audioTranscript: "", audioSid: 0, audioSlot: null, audioDiscard: false, srRec: null, camDenied: false, camMissing: false, camBlocked: false, camPermBefore: "unknown", micDenied: false, mouthOpened: false, autoGraded: false, autoGradeOn: false, onAutoGrade: null };
 function mrSupported() { try { return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia); } catch (e) { return false; } }
+/* v112b L1: may khong co mic/camera THAT — getUserMedia van ton tai dang API
+   nen mrSupported() khong phat hien duoc (chi goi moi loi NotFoundError);
+   chi enumerateDevices() moi biet that (kind co trong danh sach ke ca khi
+   chua cap quyen). Kiem 1 lan/phien, cache ket qua; neu that su khong co
+   thiet bi thi goi lai cb (noi goi tu ve lai neu van dang o buoc 4). */
+var MR_NO_DEVICES = null; /* null=chua kiem, true=khong co audioinput/videoinput, false=co thiet bi */
+var MR_DEVICES_CHECKING = false;
+function mrNoDevices() { return MR_NO_DEVICES === true; }
+function mrCheckDevices(cb) {
+  if (MR_NO_DEVICES !== null || MR_DEVICES_CHECKING) return;
+  try {
+    var md = (typeof navigator !== "undefined") ? navigator.mediaDevices : null;
+    if (!md || !md.enumerateDevices) { MR_NO_DEVICES = false; return; }
+    MR_DEVICES_CHECKING = true;
+    md.enumerateDevices().then(function (devs) {
+      MR_DEVICES_CHECKING = false;
+      var has = false, list = devs || [];
+      for (var i = 0; i < list.length; i++) { if (list[i].kind === "audioinput" || list[i].kind === "videoinput") { has = true; break; } }
+      MR_NO_DEVICES = !has;
+      if (MR_NO_DEVICES && typeof cb === "function") { try { cb(); } catch (e) {} }
+    }, function () { MR_DEVICES_CHECKING = false; MR_NO_DEVICES = false; });
+  } catch (e) { MR_DEVICES_CHECKING = false; MR_NO_DEVICES = false; }
+}
 function mrRecSupported() { try { return typeof MediaRecorder !== "undefined"; } catch (e) { return false; } }
 function mrPickMime() {
   if (!mrRecSupported() || !MediaRecorder.isTypeSupported) return "";
@@ -11653,7 +11683,12 @@ function shadowStepUnitHTML(l, sents, unit, ui, unitTotal, step) {
       + '<div class="row"><button class="btn" id="shStepSrBtn">🎙️ Chấm nhanh bằng giọng nói (ước lượng)</button></div>'
       + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shStepGood">Tôi nhại được ✓</button><button class="btn" id="shStepWeak">Cần luyện thêm</button></div></div>';
   } else if (isPractice) {
-    h += '<p class="mut">Chế độ nhại: bấm Nghe — máy sẽ tự dừng sau đoạn này rồi chờ bạn nhại lại.</p>';
+    /* v112b L2: turn chi doi sang "user" khi callback speak() chay — may khong
+       TTS thi callback khong bao gio chay nen nguoi hoc ket o day, khong co
+       nut nao de di tiep. Them nut nhin thay de sang phan nhai lai. */
+    h += '<p class="mut">Chế độ nhại: bấm Nghe — máy sẽ tự dừng sau đoạn này rồi chờ bạn nhại lại.</p>'
+      + '<p class="mut">Nghe xong bấm nút dưới để sang phần nhại lại (nếu máy không đọc được giọng mẫu thì bấm luôn, không cần chờ hết đoạn).</p>'
+      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shStepToUser">Đã nghe xong, sang phần nhại lại →</button></div>';
   }
   h += '</div>';
   return h;
@@ -11738,6 +11773,7 @@ function renderShadowSteps(app, l, item, isLong) {
     if (step >= 4) speak(unitText, rate, function () { l.shadowTurn = "user"; render(); });
     else speak(unitText, rate);
   };
+  var stu = $("#shStepToUser"); if (stu) stu.onclick = function () { l.shadowTurn = "user"; render(); };
   var sst = $("#shStepShowText"); if (sst) sst.onclick = function () { l.shadowShowText = true; render(); };
   var sn = $("#shStepNext"); if (sn) sn.onclick = function () { l.shadowStepIdx = ui + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
   var spr = $("#shStepPrev"); if (spr) spr.onclick = function () { l.shadowStepIdx = Math.max(0, ui - 1); l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
@@ -11887,7 +11923,7 @@ function renderShadowListen(app, l, item, isLong) {
     + '<p><label><input type="checkbox" id="shIpa"' + (showIpa ? ' checked' : '') + '> Hiện phiên âm khi bấm từ</label> · <label><input type="checkbox" id="shVi"' + (showVi ? ' checked' : '') + '> Hiện bản dịch</label></p>'
     + '<div class="row"><button class="btn" id="shModeView">👀 Xem</button><button class="btn" id="shModePractice">🎤 Luyện (tự dừng sau mỗi câu)</button></div>'
     + '<div class="row" style="margin-top:8px"><button class="btn" id="shPlay">🔊 Nghe câu mẫu</button>' + (si > 0 ? '<button class="btn" id="shPrev">← Câu trước</button>' : '') + (si + 1 < total ? '<button class="btn btn-primary" id="shNext">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="shDone">Xong Shadowing →</button>') + '</div>'
-    + (mode === "practice" && l.shadowTurn !== "user" ? '<p class="mut">Chế độ Luyện: bấm Nghe câu mẫu — máy sẽ tự dừng sau câu này rồi chờ bạn nhại lại.</p>' : '')
+    + (mode === "practice" && l.shadowTurn !== "user" ? '<p class="mut">Chế độ Luyện: bấm Nghe câu mẫu — máy sẽ tự dừng sau câu này rồi chờ bạn nhại lại.</p><div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shToUser">Đã nghe xong, sang phần nhại lại →</button></div>' : '') /* v112b L2: cung goc — turn chi doi khi callback speak() chay */
     + '</div>' + turnLine
     + '<div class="qblock"><button class="btn" id="shBackListen">← Về bài Nghe</button></div>';
   wireBack();
@@ -11908,6 +11944,7 @@ function renderShadowListen(app, l, item, isLong) {
     if (mode === "practice") speak(sent, 1, function () { l.shadowTurn = "user"; render(); });
     else speak(sent, 1);
   };
+  var stu2 = $("#shToUser"); if (stu2) stu2.onclick = function () { l.shadowTurn = "user"; render(); };
   var pv = $("#shPrev"); if (pv) pv.onclick = function () { l.shadowIdx = Math.max(0, si - 1); l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
   var nx = $("#shNext"); if (nx) nx.onclick = function () { l.shadowIdx = si + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
   var dn = $("#shDone"); if (dn) dn.onclick = function () { l.shadowFinished = true; render(); };
@@ -16458,6 +16495,9 @@ function renderZhVocab(app, l) {
   };
   $("#zhHardBtn").onclick = function () { try { mirrorStop(); } catch (e) {} if (isHard) delete state.zhHard[hardKey]; else state.zhHard[hardKey] = { kind: "card", han: c.han, pinyin: c.pinyin, vi: c.vi, setKey: d.key, idx: pos, fails: 0, streak: 0, level: 0, due: "" }; saveState(); render(); };
   $("#zhPrev").onclick = function () { try { mirrorStop(); } catch (e) {} state.zhPos[d.key] = Math.max(0, pos - 1); saveState(); render(); vkScrollCardTop(); };
+  /* v112b L1: nhu the Anh/TC — kiem thiet bi ghi am 1 lan/phien, ve lai neu may
+     that su khong co mic/camera de hien nut thoat o buoc 4 ngay khi vao buoc. */
+  mrCheckDevices(function () { if (zvk.step === 3) render(); });
 }
 /* ---------- 28/10: Luyen nhan mat chu track Trung (zhFace) ----------
    Bai luyen kieu tu vung nhung tach rieng ky nang NHO MAT CHU: truoc khi
@@ -17593,7 +17633,7 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
       h += '<p>Đọc to từ “' + esc(c.w) + '” theo giọng mẫu. Bấm “🎤 Đọc to để AI chấm”, đọc to rồi bấm dừng để AI chấm (đạt khi AI chấm ≥ 80) — điểm không khóa thẻ.</p>';
       h += '<div id="ttCheckSlot"></div><div id="ttCheckResult"></div>';
       if (vk.pronDone) h += '<p>Đã đọc một lượt ✓ — điểm không khóa thẻ, muốn đọc lại thì bấm dưới đây.</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Sang bước gõ →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
-      else if (!mrSupported()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Sang bước gõ →</button></div>'; /* Chang 10 F1: duong thoat nhu ZH */
+      else if (!mrSupported() || mrNoDevices()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Sang bước gõ →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Sang bước gõ →</button></div>'; /* v112b L1: nhu EN — them mrNoDevices() */
       else h += '<button class="btn btn-primary" id="ttPronBtn">🎤 Đọc to để AI chấm</button>';
       if (vk.pronWhy) h += '<div class="why show" id="ttPronWhy">' + esc(vk.pronWhy) + '</div>';
     } else {
@@ -17856,6 +17896,9 @@ function renderTcTpVocab5(track, stepId, back) {
   var mf = $("#ttMultiFinish"); if (mf) mf.onclick = function () { tcTpVocab5Advance(sess, Object.keys(vk.recorded).length === 0 && !vk.peeked); vkScrollCardTop(); };
   var pl = $("#ttPronListen"); if (pl) pl.onclick = function () { tpSpeak(c.w); };
   var pd = $("#ttPronDone"); if (pd) pd.onclick = function () { vk.pronDone = true; vk.step = 4; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
+  /* v112b L1: nhu the Anh — kiem thiet bi ghi am 1 lan/phien, ve lai neu may
+     that su khong co mic/camera de hien nut thoat o buoc 4 ngay khi vao buoc. */
+  mrCheckDevices(function () { if (vk.step === 3) renderTcTpVocab5(track, stepId, backTab); });
 }
 function tcOpenStep(id, backTab) {
   tcNorm();

@@ -1144,26 +1144,27 @@
     ctx.globalAlpha = 0.92;
     ctx.beginPath(); ctx.ellipse(W * 0.015 + fx, H * 0.62, W * 0.045, H * 0.42, 0.06, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(W * 0.985 + fx, H * 0.58, W * 0.04, H * 0.38, -0.05, 0, Math.PI * 2); ctx.fill();
-    /* Chang 10: van vo cay — truoc day than cay chi la elip dac mau cham
-       (nhin nhu bong den dac, khong thay van vo). Ve vai vet doc mo
-       (cham nhat, alpha thap) cat theo hinh elip than cay. */
+    /* v112b L4: van vo cay — ban Chang 10 (3 vet alpha .22, net 2) mat thuong
+       van thay den dac (kiem render live: chi thay 2 duong rat mo khi phong to).
+       Tang len 5 vet, alpha .45, net 3, trai rong khap than — van giu than toi
+       (do sang TB vung than van < 45) nhung vet nhin thay ro. */
     ctx.save();
     ctx.beginPath(); ctx.ellipse(W * 0.015 + fx, H * 0.62, W * 0.045, H * 0.42, 0.06, 0, Math.PI * 2); ctx.clip();
-    ctx.strokeStyle = "rgba(165,180,252,.22)"; ctx.lineWidth = 2;
-    [-0.02, 0.005, 0.03].forEach(function (dx) {
+    ctx.strokeStyle = "rgba(165,180,252,.45)"; ctx.lineWidth = 3;
+    [-0.03, -0.015, 0, 0.015, 0.03].forEach(function (dx, i) {
       ctx.beginPath();
       ctx.moveTo(W * (0.015 + dx) + fx, H * 0.22);
-      ctx.quadraticCurveTo(W * (0.015 + dx) + fx + 3, H * 0.6, W * (0.015 + dx) + fx - 2, H * 1.0);
+      ctx.quadraticCurveTo(W * (0.015 + dx) + fx + (i % 2 ? 4 : -4), H * 0.6, W * (0.015 + dx) + fx + (i % 2 ? -3 : 3), H * 1.0);
       ctx.stroke();
     });
     ctx.restore();
     ctx.save();
     ctx.beginPath(); ctx.ellipse(W * 0.985 + fx, H * 0.58, W * 0.04, H * 0.38, -0.05, 0, Math.PI * 2); ctx.clip();
-    ctx.strokeStyle = "rgba(165,180,252,.22)"; ctx.lineWidth = 2;
-    [-0.015, 0.01, 0.032].forEach(function (dx) {
+    ctx.strokeStyle = "rgba(165,180,252,.45)"; ctx.lineWidth = 3;
+    [-0.03, -0.015, 0, 0.015, 0.03].forEach(function (dx, i) {
       ctx.beginPath();
       ctx.moveTo(W * (0.985 + dx) + fx, H * 0.22);
-      ctx.quadraticCurveTo(W * (0.985 + dx) + fx - 3, H * 0.6, W * (0.985 + dx) + fx + 2, H * 1.0);
+      ctx.quadraticCurveTo(W * (0.985 + dx) + fx + (i % 2 ? -4 : 4), H * 0.6, W * (0.985 + dx) + fx + (i % 2 ? 3 : -3), H * 1.0);
       ctx.stroke();
     });
     ctx.restore();
@@ -1728,10 +1729,10 @@
      khóa quái → gõ từ, vì người mới ở v98 gõ mà không khóa nên không
      gây sát thương. */
   var HINT_DEFAULT = "Lái rồng bằng phím mũi tên hoặc kéo trên sân để né đạn của quái; chạm quái để khóa, gõ đúng từ để tung chiêu. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng hoặc đạn trúng rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu. 5 vùng × 10 ải, trùm mỗi vùng đổi hệ sau mỗi 1/3 máu — thắng trùm Núi Lửa mở Chế độ Vô Tận.";
-  var HINT_STAGE1 = "👉 Bước 1: CHẠM vào quái để khóa nó (quái đã khóa có viền vàng — quái đầu tiên đã khóa sẵn cho bạn). Bước 2: GÕ đúng từ trên thẻ của quái để tung chiêu. Đúng hệ khắc quái gây sát thương tối đa. Quái ải 1 đi chậm và không bắn trong 30 giây đầu — cứ bình tĩnh gõ!";
+  var HINT_STAGE1 = "👉 Bước 1: CHẠM vào quái để khóa nó (quái đã khóa có viền trắng — quái đầu tiên đã khóa sẵn cho bạn). Bước 2: GÕ đúng từ trên thẻ của quái để tung chiêu. Đúng hệ khắc quái gây sát thương tối đa. Quái ải 1 đi chậm và không bắn trong 30 giây đầu — cứ bình tĩnh gõ!";
   /* v100 B6: ải 1 các vùng 2–5 — cùng 2 bước khóa + gõ, nhưng KHÔNG có
      câu "không bắn trong 30 giây đầu" (luật nhẹ nhàng chỉ ở vùng 1 ải 1). */
-  var HINT_STAGE1_OTHER = "👉 Bước 1: CHẠM vào quái để khóa nó (quái đã khóa có viền vàng — quái đầu tiên đã khóa sẵn cho bạn). Bước 2: GÕ đúng từ trên thẻ của quái để tung chiêu. Đúng hệ khắc quái gây sát thương tối đa. Quái ở vùng này bắn đạn bình thường (chỉ ải 1 vùng 1 mới nhẹ nhàng) — vừa gõ vừa né nhé!";
+  var HINT_STAGE1_OTHER = "👉 Bước 1: CHẠM vào quái để khóa nó (quái đã khóa có viền trắng — quái đầu tiên đã khóa sẵn cho bạn). Bước 2: GÕ đúng từ trên thẻ của quái để tung chiêu. Đúng hệ khắc quái gây sát thương tối đa. Quái ở vùng này bắn đạn bình thường (chỉ ải 1 vùng 1 mới nhẹ nhàng) — vừa gõ vừa né nhé!";
 
   function esc(s) { return G71.escHtml(s); }
   function toastSafe(msg) { try { if (typeof toast === "function") toast(msg); } catch (e) {} }
