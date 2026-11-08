@@ -16,6 +16,29 @@
   var ITEM_ICON = { star: "⭐", shield: "🛡️", slow: "🐢" };
   var BEST_KEY = "g71_rongbay_best";
 
+  /* v115: ảnh rồng/mây thật (AI, assets/rongbay/) — vẽ bằng drawImage khi
+     ảnh sẵn; GIỮ FALLBACK vẽ code khi ảnh chưa tải (máy offline/mạng chậm).
+     Tải lười như rlLoadForest() ở Rồng Lửa: gọi rbLoadAll() khi mở game. */
+  var RB_ART = "assets/rongbay/";
+  var RB_IMGS = { dragon: "rong-bay.png", cloud: "may-trang.png", golden: "may-vang.png", storm: "may-giong.png" };
+  var rbImg = {};
+  function rbLoadImg(name) {
+    var rec = { img: null, ok: false };
+    try {
+      var im = new Image();
+      im.onload = function () { rec.ok = !!(im.naturalWidth && im.naturalHeight); };
+      im.onerror = function () { rec.ok = false; };
+      im.src = RB_ART + RB_IMGS[name];
+      rec.img = im;
+    } catch (e) { rec.ok = false; }
+    rbImg[name] = rec;
+  }
+  function rbLoadAll() { Object.keys(RB_IMGS).forEach(function (n) { if (!rbImg[n]) rbLoadImg(n); }); }
+  function rbReady(name) {
+    var r = rbImg[name];
+    return !!(r && r.img && r.ok && r.img.complete && r.img.naturalWidth > 0);
+  }
+
   /* Vòng theo chủ đề: mỗi vòng lấy đáp án đúng từ một chủ đề khác nhau
      (du lịch, thời tiết, cảm xúc...), đáp án nhiễu lấy từ kho chung.
      Thiếu chủ đề thì về lại buildRounds cũ. */
@@ -208,6 +231,7 @@
   }
 
   function start() {
+    rbLoadAll(); /* v115: bắt đầu tải ảnh rồng/mây ngay khi mở game */
     var rounds = buildThemedRounds(10, 2);
     if (rounds.length < 3) { try { toast("Chưa đủ từ vựng để chơi."); } catch (e) {} return; }
     /* Mây vàng: mỗi vòng ~40% có một đám mây vàng ở làn ngẫu nhiên (làn
@@ -422,27 +446,50 @@
           ctx.beginPath();
           ctx.ellipse(cx, cy + cg.hh * 0.62, cg.hw * 0.9, cg.hh * 0.32, 0, 0, Math.PI * 2);
           ctx.fill();
-          ctx.fillStyle = "#312E81"; /* v114: mây giông chàm đậm (ART_DIRECTION), không xám ngoài bảng. */
-          ctx.beginPath();
-          ctx.ellipse(cx - cg.hw * 0.55, cy + cg.hh * 0.08, cg.hw * 0.45, cg.hh * 0.62, 0, 0, Math.PI * 2);
-          ctx.ellipse(cx, cy - cg.hh * 0.18, cg.hw * 0.6, cg.hh * 0.72, 0, 0, Math.PI * 2);
-          ctx.ellipse(cx + cg.hw * 0.55, cy + cg.hh * 0.08, cg.hw * 0.45, cg.hh * 0.62, 0, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.fillRect(cx - cg.hw, cy + cg.hh * 0.02, cg.hw * 2, cg.hh * 0.5);
-          ctx.fillStyle = "#FBBF24"; /* v114: tia chớp hổ phách nhạt (ART_DIRECTION). */
-          ctx.beginPath();
-          ctx.moveTo(cx + 4, cy - 4); ctx.lineTo(cx - 6, cy + 12); ctx.lineTo(cx, cy + 12);
-          ctx.lineTo(cx - 4, cy + 26); ctx.lineTo(cx + 8, cy + 8); ctx.lineTo(cx + 2, cy + 8);
-          ctx.closePath(); ctx.fill();
+          /* v115: mây giông ảnh thật (may-giong.png) khi đã tải; chưa tải
+             thì vẽ code cũ (mây chàm + tia chớp hổ phách). */
+          if (rbReady("storm")) {
+            var sim = rbImg.storm.img;
+            var sw = cg.hw * 2.7, sh = sw * sim.naturalHeight / sim.naturalWidth;
+            ctx.drawImage(sim, cx - sw / 2, cy - sh / 2, sw, sh);
+          } else {
+            ctx.fillStyle = "#312E81"; /* v114: mây giông chàm đậm (ART_DIRECTION), không xám ngoài bảng. */
+            ctx.beginPath();
+            ctx.ellipse(cx - cg.hw * 0.55, cy + cg.hh * 0.08, cg.hw * 0.45, cg.hh * 0.62, 0, 0, Math.PI * 2);
+            ctx.ellipse(cx, cy - cg.hh * 0.18, cg.hw * 0.6, cg.hh * 0.72, 0, 0, Math.PI * 2);
+            ctx.ellipse(cx + cg.hw * 0.55, cy + cg.hh * 0.08, cg.hw * 0.45, cg.hh * 0.62, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillRect(cx - cg.hw, cy + cg.hh * 0.02, cg.hw * 2, cg.hh * 0.5);
+            ctx.fillStyle = "#FBBF24"; /* v114: tia chớp hổ phách nhạt (ART_DIRECTION). */
+            ctx.beginPath();
+            ctx.moveTo(cx + 4, cy - 4); ctx.lineTo(cx - 6, cy + 12); ctx.lineTo(cx, cy + 12);
+            ctx.lineTo(cx - 4, cy + 26); ctx.lineTo(cx + 8, cy + 8); ctx.lineTo(cx + 2, cy + 8);
+            ctx.closePath(); ctx.fill();
+          }
           ctx.restore();
           return;
         }
-        G71.drawCloudWide(ctx, cx, cy, cg.hw, cg.hh);
+        /* v115: mây từ ảnh thật (may-trang.png / may-vang.png) khi đã tải;
+           chưa tải thì vẽ code cũ. Sao ★ của mây vàng giữ nguyên, vị trí
+           theo mép mây (ảnh rộng hơn nên tính theo cỡ ảnh). */
+        var cname = c.golden ? "golden" : "cloud";
+        var cw = 0, ch = 0;
+        if (rbReady(cname)) {
+          var cim = rbImg[cname].img;
+          cw = cg.hw * 2.7; ch = cw * cim.naturalHeight / cim.naturalWidth;
+          ctx.drawImage(cim, cx - cw / 2, cy - ch / 2, cw, ch);
+        } else {
+          G71.drawCloudWide(ctx, cx, cy, cg.hw, cg.hh);
+          if (c.golden) {
+            ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 4;
+            ctx.beginPath(); ctx.ellipse(cx, cy, cg.hw + 6, cg.hh + 6, 0, 0, Math.PI * 2); ctx.stroke();
+          }
+        }
         if (c.golden) {
-          ctx.strokeStyle = "#F59E0B"; ctx.lineWidth = 4;
-          ctx.beginPath(); ctx.ellipse(cx, cy, cg.hw + 6, cg.hh + 6, 0, 0, Math.PI * 2); ctx.stroke();
           ctx.fillStyle = "#B45309";
-          G71.drawFitText(ctx, "★", cx + cg.hw - 6, cy - cg.hh - 4, 22, 15, 11, 1, "800");
+          var starX = cw ? cx + cw / 2 - 8 : cx + cg.hw - 6;
+          var starY = ch ? cy - ch / 2 - 2 : cy - cg.hh - 4;
+          G71.drawFitText(ctx, "★", starX, starY, 22, 15, 11, 1, "800");
         }
         ctx.fillStyle = "#1F2430";
         /* v113 S12 (luật trọng tâm, lệnh Bùi): từ mục tiêu — mây khớp nghĩa
@@ -502,9 +549,19 @@
          trái màn dọc (đuôi dài 2,2×52px). */
       ctx.translate(W * LOGIC.dragonX + 34 + dj, dy);
       ctx.rotate(tilt);
-      ctx.fillStyle = "rgba(245,158,11,.20)";
-      ctx.beginPath(); ctx.ellipse(0, 0, 78, 52, 0, 0, Math.PI * 2); ctx.fill();
-      G71.drawDragon(ctx, 0, 0, 52);
+      /* v115: rồng ảnh thật (rong-bay.png 800×600) khi đã tải; quầng to
+         theo (ảnh rồng rộng hơn rồng vẽ code). Chưa tải thì vẽ code cũ. */
+      if (rbReady("dragon")) {
+        var dim = rbImg.dragon.img;
+        var dw = 220, dh = dw * dim.naturalHeight / dim.naturalWidth;
+        ctx.fillStyle = "rgba(245,158,11,.20)";
+        ctx.beginPath(); ctx.ellipse(0, 0, 125, 88, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.drawImage(dim, -dw / 2, -dh / 2, dw, dh);
+      } else {
+        ctx.fillStyle = "rgba(245,158,11,.20)";
+        ctx.beginPath(); ctx.ellipse(0, 0, 78, 52, 0, 0, Math.PI * 2); ctx.fill();
+        G71.drawDragon(ctx, 0, 0, 52);
+      }
       ctx.restore();
       G71.drawSnake(ctx, W * 0.08, H - 44, 20, false);
       /* Hạt nổ khi chọn đúng. */

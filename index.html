@@ -2755,7 +2755,9 @@ $("#tabBar").addEventListener("click", function (e) {
 var PUSH_VAPID_PUBLIC = "BPL3QTdP0lKu5ZLjibCiekZSYMVU75oVcr6XSfKZSyeBpulQZ-YyMIU3yvI1B6xn6C6KprnMo16-5uP0oCeWT0U";
 /* ---------- NHẠC RỪNG (v111, Bùi yêu cầu 09:42 07/11) ----------
    Nhạc nền rừng + chim hót THẬT (file Public domain — xem thẻ Nhạc rừng ở
-   Cài đặt). Trình duyệt chặn tự phát âm thanh nên nhạc chỉ bắt đầu SAU CÚ
+   Cài đặt). v115 (Bùi lệnh 16:48 08/11): đổi sang bản dawn chorus vui tươi
+   "Réveil des oiseaux" (Joseph Sardin, 2007, CC0) — chim hót líu lo nhiều
+   hơn hẳn bản rừng Costa Rica cũ; file + ghi nguồn đã đổi theo, engine giữ nguyên. Trình duyệt chặn tự phát âm thanh nên nhạc chỉ bắt đầu SAU CÚ
    CHẠM/PHÍM ĐẦU TIÊN của người học (fmWireFirstTouch). Âm lượng nhỏ (0.2)
    để không lấn giọng đọc mẫu hay giọng AI. Nút loa trên thanh trên bật/tắt
    nhanh; tắt hẳn trong Cài đặt (Của tôi → Cài đặt). File chỉ
@@ -2804,7 +2806,7 @@ function fmCardHTML() {
   var on = fmOn();
   return '<section class="card" id="fmCard"><h3>Nhạc rừng khi mở web</h3>'
     + '<p><label><input type="checkbox" id="fmCardToggle"' + (on ? " checked" : "") + '> Bật nhạc rừng + tiếng chim hót sau cú chạm đầu tiên</label></p>'
-    + '<p class="mut">Nhạc nhẹ, lặp lại, âm lượng nhỏ — không lấn giọng đọc mẫu hay giọng AI. Bỏ tick ở đây thì tắt hẳn (nút loa trên thanh trên cũng tắt theo). File nhạc thật, thuộc phạm vi công cộng (Public domain, PDsounds.org — "forest ambience", ghi âm rừng Costa Rica, 2009).</p></section>';
+    + '<p class="mut">Nhạc nhẹ, lặp lại, âm lượng nhỏ — không lấn giọng đọc mẫu hay giọng AI. Bỏ tick ở đây thì tắt hẳn (nút loa trên thanh trên cũng tắt theo). File nhạc thật, thuộc phạm vi công cộng (Public domain — CC0 1.0, "Réveil des oiseaux", Joseph Sardin, 2007, via Wikimedia Commons).</p></section>';
 }
 function wireFmCard() {
   var t = document.getElementById("fmCardToggle");
@@ -4973,7 +4975,7 @@ function sourcesHTML() {
   h += sourcesSelfHTML89() + sourcesStdHTML89() + sourcesInternalHTML89();
   h += '<h3>Nguồn video</h3>';
   h += '<p>Video người bản địa nói từ: nguồn YouGlish, dùng video YouTube; chế độ hạn chế đã bật. Video mở trong trang, không rời khỏi bài học.</p>';
-  h += '<p>Nhạc rừng: file nhạc thật, thuộc phạm vi công cộng (Public domain, PDsounds.org — "forest ambience", ghi âm rừng Costa Rica, 2009).</p>';
+  h += '<p>Nhạc rừng: file nhạc thật, thuộc phạm vi công cộng (Public domain — CC0 1.0, "Réveil des oiseaux", Joseph Sardin, 2007, via Wikimedia Commons).</p>';
   if ((state.track || "en") === "zh" || (state.track || "en") === "en") {
     h += '<p><b>Video lý thuyết pinyin</b> (mở trong trang, không link ra YouTube):</p>';
     h += videoSlotIf("zhPh:tones") + videoSlotIf("zhPh:pairs") + videoSlotIf("zhPh:sandhi") + videoSlotIf("zhPh:bu") + videoSlotIf("zhPh:song");
