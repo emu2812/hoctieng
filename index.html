@@ -436,7 +436,7 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <script src="g71_rong_bay.js"></script>
 <script src="g71_ban_bong_bong.js"></script>
 <script src="g71_rong_lua.js"></script>
-<script src="g71_dau_bai.js"></script>
+<script src="g71_giai_do.js"></script>
 <script>
 "use strict";
 /* ============ SHELL BẢN MỚI — GIAI ĐOẠN 1 ============
@@ -3495,8 +3495,9 @@ function homeQuickHTML() {
    ZH kho HSK, TC kho TOEIC, TP kho TOPIK).
    v77 — thêm thẻ thứ 4 "Rồng Lửa — bản thử" (g71_rong_lua.js): lát cắt
    chơi được đầu tiên của game Rồng Lửa RPG, vùng 1 Rừng Xanh.
-   v85 — thêm thẻ thứ 5 "Đấu Bài Với Máy" (g71_dau_bai.js): đấu bài theo
-   lượt với máy, thẻ là từ thật + sức mạnh + hệ, gõ đúng từ để tung chiêu. */
+   v85 — thêm thẻ thứ 5 "Đấu Bài Với Máy": đấu bài theo lượt với máy,
+   thẻ là từ thật + sức mạnh + hệ, gõ đúng từ để tung chiêu.
+   v116 — GỠ Đấu Bài (Bùi 16:50 08/11), thay bằng thẻ "Giải Đố" (g71_giai_do.js). */
 /* v91: ngon ngu + nhan tu theo track cho game va giao tiep ban dia.
    EN/TC noi tieng Anh; ZH noi tieng Trung; TP noi tieng Han. */
 function gameWordLabel91() {
@@ -3542,7 +3543,7 @@ function viewGuide(app) {
     + '</details>'
     + '<details class="guide-sec" id="guideGames"><summary><b>🎮 Luật game</b></summary>'
     + '<p><b>Rồng Lửa:</b> chạm quái để khóa, gõ đúng từ để tung chiêu. Quái đã khóa có viền trắng — quái đầu ải 1 đã khóa sẵn. Ải 1 vùng 1 nhẹ nhàng cho người mới: quái đi chậm một nửa và không bắn trong 30 giây đầu mỗi trận; vùng khác ải 1, quái bắn đạn bình thường. Phím 1/2/3 đổi hệ chiêu — đúng hệ khắc quái gây sát thương tối đa. Quái chạm tới rồng hoặc đạn trúng rồng là mất tim; thua ải vẫn giữ cấp, vàng và từ đã thu. 5 vùng × 10 ải, trùm mỗi vùng đổi hệ sau mỗi 1/3 máu — thắng trùm Núi Lửa mở Chế độ Vô Tận. Từ quá hạn ôn bị quái bắt cóc — thắng ải giải cứu để lấy lại.</p><p>Thời tiết mỗi vùng tăng sức chiêu hệ tương ứng +50%. Quái còn yếu theo nhóm từ (từ dài, từ thiên nhiên, từ cảm xúc, từ đời sống) — chiêu đúng nhóm gây sát thương ×2. Bạn đồng hành mở khóa bằng cách thắng trùm vùng, hỗ trợ ngay trong trận.</p>'
-    + '<p><b>Đấu Bài:</b> chọn đúng 12 lá để vào trận; mỗi lượt có 3 ⚡ — lá Tấn công gây sát thương, lá Đỡ chặn đòn sau, lá Hồi hồi máu, lá Tăng sức/Đốt/Độc/Làm yếu gây trạng thái kéo dài qua lượt. Gõ đúng từ trên lá để tung chiêu. Thắng trận, lá kết liễu được nâng cấp.</p>'
+    + '<p><b>Giải Đố:</b> máy đưa câu hỏi, bạn gõ đáp án — cho nghĩa tiếng Việt thì gõ từ, cho câu thiếu từ thì gõ từ còn thiếu (tiếng Trung gõ pinyin, tiếng Hàn bấm các âm tiết Hangul theo thứ tự). Đúng +10 điểm (chuỗi đúng từ 3 câu trở lên +15), sai mất 1 tim; hết 3 tim là thua. Một lượt 10 câu.</p>'
     + '<p><b>Rồng Bay Trên Mây:</b> Rồng bay liên tục về phía trước — phím ↑ ↓ đổi làn, chuột/cảm ứng bấm vào làn muốn bay. Bay vào mây có từ đúng nghĩa cho trước; né mây giông (đâm phải mất tim). Chuỗi đúng nhân điểm, mây vàng +30. Bấm ⭐/🐢 để dùng vật phẩm (phím 1/2).</p>'
     + '<p><b>Luyện Gõ:</b> Gõ đúng từ để bắn hạ. Gõ sai chỉ gõ lại, không mất tim. Phím ← → (hoặc kéo chuột/cảm ứng) lái tàu né thiên thạch; để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim.</p><p><b>Bắn Bong Bóng:</b> bắn đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim.</p>'
     + '</details>'
@@ -3561,8 +3562,8 @@ function viewGamesHub(app) {
     { key: "ronglua", icon: "🔥", title: "🔥 Rồng Lửa — 5 Vùng",
       img: "assets/ronglua/rung-1.jpg", imgAlt: "Rừng Xanh — cửa rừng nắng",
       desc: "5 vùng × 10 ải · 5 tim" },
-    { key: "daubai", icon: "🃏", title: "🃏 Đấu Bài Với Máy",
-      desc: "Mỗi bên một bộ bài 12 lá do bạn tự xây từ bộ sưu tập — lá là từ thật kèm loại, hệ, sức và giá năng lượng. Mỗi lượt có 3 ⚡, đánh được nhiều lá tới khi hết năng lượng; gõ đúng từ trên lá để tung chiêu, gõ sai chỉ gõ lại. Máy hiện rõ ý định lượt tới để bạn tính nước đi. Thắng vì chọn bài khôn hơn — thắng được vàng + 1 lá mới + nâng cấp lá kết liễu." }
+    { key: "giaido", icon: "❓", title: "❓ Giải Đố",
+      desc: "Máy đưa câu hỏi, bạn gõ đáp án — cho nghĩa tiếng Việt thì gõ từ, cho câu thiếu từ thì gõ từ còn thiếu. Đúng +10 điểm (chuỗi đúng từ 3 câu trở lên +15), sai mất 1 tim, hết 3 tim là thua. Một lượt 10 câu, hỏi từ kho từ/câu thật của track đang học." }
   ];
   var html = trackSwitchHTML();
   html += '<h2>Trò chơi</h2>';
@@ -3596,9 +3597,9 @@ function viewGamesHub(app) {
     var g0 = document.createElement("section");
     g0.className = "card next-card"; g0.id = "gamesNextCard";
     g0.innerHTML = '<p class="eyebrow">TIẾP THEO NÊN CHƠI</p><h3>🔥 Rồng Lửa — game chủ lực</h3><p class="mut">5 vùng × 10 ải · bắt đầu với Rồng Lửa, game sâu nhất của web.</p><div class="row"><button class="btn btn-primary" data-g71game="ronglua">Bắt đầu với Rồng Lửa →</button></div>';
-    var g1 = mk("G1", "Chơi sâu — Rồng Lửa · Đấu Bài", false);
+    var g1 = mk("G1", "Chơi sâu — Rồng Lửa · Giải Đố", false);
     var g2 = mk("G2", "Chơi nhanh — Luyện Gõ · Rồng Bay · Bắn Bong Bóng", true);
-    [byKey("ronglua"), byKey("daubai")].forEach(function (c) { if (c) g1.querySelector(".g91-games-grid").appendChild(c); });
+    [byKey("ronglua"), byKey("giaido")].forEach(function (c) { if (c) g1.querySelector(".g91-games-grid").appendChild(c); });
     [byKey("go"), byKey("dragon"), byKey("bubble")].forEach(function (c) { if (c) g2.querySelector(".g91-games-grid").appendChild(c); });
     var g3 = document.createElement("p"); g3.className = "mut";
     g3.innerHTML = 'Luật game: xem ở tab <a href="#" id="gamesGuideLink">Hướng dẫn → Luật game</a>.';
@@ -3626,7 +3627,7 @@ function viewGamesHub(app) {
       else if (k === "dragon") G71RongBay.start();
       else if (k === "bubble") G71BanBongBong.start();
       else if (k === "ronglua") G71RongLua.start();
-      else if (k === "daubai") G71DauBai.start();
+      else if (k === "giaido") G71GiaiDo.start();
     };
   });
   var back = app.querySelector("#g71HubHome");
