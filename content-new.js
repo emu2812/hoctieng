@@ -70966,7 +70966,7 @@ var VIDEO_NEW = [
 /* DOT VIDEO 03/11/2026: cau mau TU SOAN de thu co che 4 dang bai tu video (KHONG phai phu de that cua video nao).
    Khi co cau phu de that cua mot video, nap vao VIDEO_LINES[videoKey] theo dung shape nay, 4 nut se mo bang engine that. */
 var VIDEO_SAMPLE = {
-  key: "sample-en", title: "Video mẫu thử cơ chế — bữa trưa gia đình (câu tự soạn)",
+  key: "sample-en", title: "Mẫu thử cơ chế — bữa trưa gia đình (nghe bằng âm thanh, câu tự soạn, chưa có video)",
   lines: [
     { en: "Mum makes lunch for the family today.", vi: "Hôm nay mẹ nấu bữa trưa cho cả nhà." },
     { en: "We eat rice, soup, and vegetables together.", vi: "Cả nhà cùng ăn cơm, canh và rau." },

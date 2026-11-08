@@ -80,16 +80,21 @@
     return qs;
   }
 
-  /* v117 P3a: CHAP NHAN BIEN THE DUNG NGHIA. Hai co che, ca hai deu
-     kiem chung duoc tu du lieu that, khong doan:
-     (1) BANG BIEN SOAN (cap doi da gap that khi kiem render v116):
-         guidebook<->guide, excursion<->trip — dap an go dung nghia
-         nhung khac tu chuan van duoc tinh dung, kem ghi chu dap an chuan.
-     (2) CUNG NGHIA VIET TRONG KHO (acceptFn do start() xay tu 30 tu
-         cua luot choi): tu go nam trong kho va co nghia Viet Y HET
-         nghia cua cau hoi thi duoc tinh dung.
+  /* v117 P3a + v117b L2: CHAP NHAN BIEN THE DUNG NGHIA. Hai co che, ca
+     hai deu kiem chung duoc tu du lieu that, khong doan:
+     (1) BANG BIEN SOAN (cap doi da gap that khi kiem render — chi them
+         cap khi gap that tren ban that): guidebook<->guide,
+         excursion<->trip, secondhand<->used (Bui gap 08/11: go "used"
+         cho cau secondhand bi cham sai), happy<->glad, journey<->trip.
+         Dap an go dung nghia nhung khac tu chuan van duoc tinh dung,
+         kem ghi chu dap an chuan.
+     (2) CUNG NGHIA VIET TRONG KHO (acceptFn do start() xay tu TOAN BO
+         kho cua track — v117b: truoc day chi xay tu 30 tu cua luot
+         choi nen tu dung nghia nam ngoai luot khong bao gio duoc chap
+         nhan): tu go nam trong kho va co nghia Viet Y HET nghia cua
+         cau hoi thi duoc tinh dung.
      Khong chap nhan: tu ngoai kho, tu gan dung chinh ta, tu khac nghia. */
-  var SYN_PAIRS = [["guidebook", "guide"], ["excursion", "trip"]];
+  var SYN_PAIRS = [["guidebook", "guide"], ["excursion", "trip"], ["secondhand", "used"], ["happy", "glad"], ["journey", "trip"]];
   function synonymOf(ans, given, track) {
     var a = normalizeAnswer(ans, track), g = normalizeAnswer(given, track);
     if (!a || !g || a === g) return false;
@@ -324,13 +329,18 @@
       return placed.map(function (ci) { return chips[ci].ch; }).join("");
     }
 
-    /* v117 P3a: acceptFn — tu go la tu trong kho 30 tu cua luot nay
-       va co nghia Viet Y HET nghia cua cau hoi thi tinh dung. */
+    /* v117b L2: acceptFn — tu go la tu trong TOAN BO kho cua track
+       (G71.pool) va co nghia Viet Y HET nghia cua cau hoi thi tinh
+       dung. v117 chi xay tu 30 tu cua luot nen tu dung nghia nam
+       ngoai luot (vd "used" cho cau secondhand) khong bao gio duoc
+       chap nhan. Roi ve 30 tu neu pool khong co (moi truong probe cu). */
     var byVi = {};
     (function () {
       try {
-        var pool = G71.pickTypingWords(30) || { words: [] };
-        (pool.words || []).forEach(function (wd) {
+        var all = null;
+        try { all = (typeof G71.pool === "function") ? G71.pool() : null; } catch (e) {}
+        var list = (all && all.length) ? all : ((G71.pickTypingWords(30) || { words: [] }).words || []);
+        list.forEach(function (wd) {
           var k = String(wd.vi || "").trim();
           if (!k) return;
           (byVi[k] = byVi[k] || []).push(wd);
@@ -344,6 +354,7 @@
       }
       return false;
     }
+    window.G71GiaiDo._acceptFn = acceptFn; /* v117b L2: cho probe kiem tra bang dong nghia that */
     function doSubmit() {
       if (!running || st.over || st.phase !== "ask") return;
       var raw = isTp ? assembledAnswer() : (typeInput ? typeInput.value : "");

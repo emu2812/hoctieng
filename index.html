@@ -360,8 +360,12 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 .app-topbar{box-shadow:0 2px 12px rgba(0,0,0,.04)}
 .tabbar{box-shadow:0 2px 8px rgba(0,0,0,.03)}
 .next-card{border-left:6px solid var(--amber)}
-.app-sidebar .home-navbtn{background:transparent;border-color:transparent}
-.app-sidebar .home-navbtn:not(.on):hover{background:var(--soft)}
+/* v117b L3: nut menu sidebar phai doc duoc tren nen rung — quy tac V75
+   (nen trong suot) de chu toi (ButtonText mac dinh) tren anh rung toi;
+   khoi phuc nen kem + chu muc nhu nut Thu gon/Dang nhap (anh Bui 22:04:
+   chi muc dang chon doc duoc, cac muc con lai gan nhu khong thay). */
+.app-sidebar .home-navbtn{background:rgba(255,251,235,.96);border-color:rgba(180,83,9,.6);color:var(--ink)}
+.app-sidebar .home-navbtn:not(.on):hover{background:#FDE68A}
 .vrow{background:#fff;border:0;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.03);padding:12px 16px;margin:10px 0}
 .vrow>summary{cursor:pointer;font-weight:700;list-style:none}
 .vrow>summary::-webkit-details-marker{display:none}
@@ -3684,6 +3688,9 @@ function homeSearchEntries() {
   var out = [];
   learningSteps().forEach(function (s) { out.push({ label: s.title, sub: s.type, kind: "step", id: s.id }); });
   (CONTENT.listeningPlus || []).forEach(function (r, i) { out.push({ label: "Nghe chép — " + r.topic, sub: r.section || "", kind: "dictation", idx: i }); });
+  /* v117b L1b: bai tap nghe chep video VOA vao chi muc — truoc day tim
+     "Break the News"/"Break" khong thay vi workspace khong co trong chi muc. */
+  out.push({ label: "Nghe chép video — VOA: Break the News", sub: "Video có phụ đề thật · Không gian bài học 3 cột", kind: "workspace", id: "voa-break-the-news" });
   (CONTENT.listening || []).forEach(function (r, i) { out.push({ label: "Nghe — " + r.topic, sub: r.section || "", kind: "listen", idx: i }); });
   return out;
 }
@@ -3697,6 +3704,7 @@ function homeSearchOpen(e) {
   if (e.kind === "step") { var s = stepById(e.id); if (s) openStep(s, { noNudge: true }); }
   else if (e.kind === "dictation") openLesson({ type: "dictation", idx: e.idx });
   else if (e.kind === "listen") openLesson({ type: "skillListen", idx: e.idx });
+  else if (e.kind === "workspace") openLesson({ type: "workspace" });
 }
 function homeSearchHTML() {
   return '<div id="homeSearchResults"></div>';
@@ -4800,7 +4808,7 @@ function viewPractice(app) {
     });
     var cls = byId("practiceGrpClass");
     if (cls && anchor && anchor.parentNode) anchor.parentNode.insertBefore(cls, anchor.nextSibling);
-    /* Luat 1-mo: chi nhom chua buoc tiep theo mo; G5 luon dong khi moi vao.
+    /* v117b L4: luat 1-mo — tat ca thu gon khi moi vao Luyen tap; mo nhom nao thi nhom khac dong. The Bai tiep theo (practiceNextCard) van hien rieng de danh dau, khong mo nhom.
        review -> mo truc tiep the On diem yeu (ngoai nhom). */
     var nk = null;
     if (pT) {
@@ -4818,7 +4826,7 @@ function viewPractice(app) {
       }
     }
     [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
-      cl.open = (nk && cl.getAttribute("data-g6") === nk);
+      cl.open = false; /* v117b L4: mac dinh thu gon het, khong tu mo nhom chua bai tiep theo */
       cl.addEventListener("toggle", function (e) {
         if (e.target !== cl || !cl.open) return;
         [G1, G2, G3, G4, G5, G6].forEach(function (o) { if (o !== cl) o.open = false; });
@@ -12002,7 +12010,7 @@ function videoNewBlockHTML(track) {
   var html = '<section class="card" id="videoNewCard' + track + '"><h3>🎬 Video mới — ' + trackName + ' (' + list.length + ' video: ' + dayN + ' dạy + ' + entN + ' giải trí)</h3>'
     + '<p class="mut">Video giải trí chưa có phụ đề thật thì chỉ xem — bài tập chỉ mở khi có phụ đề thật.</p>' + myListenLinksHTML(track);
   if (track === "en") {
-    html += '<div class="qblock"><h3>🧪 Video mẫu thử cơ chế 4 dạng bài (câu tự soạn)</h3>'
+    html += '<div class="qblock"><h3>🧪 Mẫu thử cơ chế 4 dạng bài (nghe bằng âm thanh — câu tự soạn, chưa có video)</h3>'
       + '<div class="row"><button class="btn" data-vsample="dictation">🎧 Thử nghe chép mẫu</button><button class="btn" data-vsample="shadow">🎤 Thử Shadowing mẫu</button><button class="btn" data-vsample="story">📖 Thử truyện mẫu</button><button class="btn" data-vsample="podcast">🎙️ Thử podcast mẫu</button></div></div>';
   }
   videoNewEntHTML[track] = "";
@@ -12019,11 +12027,11 @@ function videoSampleLines() {
 }
 function videoSampleListenItem() {
   var lines = videoSampleLines();
-  return { topic: "Video mẫu — bữa trưa gia đình", section: "Video mẫu thử cơ chế", band: "", questions: [], text: lines.map(function (x) { return x.en; }).join(" ") };
+  return { topic: "Mẫu nghe chép bằng âm thanh — bữa trưa gia đình", section: "Mẫu nghe chép bằng âm thanh — thử cơ chế", band: "", questions: [], text: lines.map(function (x) { return x.en; }).join(" ") };
 }
 function videoSampleReadItem() {
   var lines = videoSampleLines();
-  return { title: "Video mẫu — bữa trưa gia đình", topic: "Video mẫu thử cơ chế", level: "", text: lines.map(function (x) { return x.en; }).join(" "), translation: lines.map(function (x) { return x.vi; }).join(" "), phrases: [],
+  return { title: "Mẫu nghe chép bằng âm thanh — bữa trưa gia đình", topic: "Mẫu nghe chép bằng âm thanh — thử cơ chế", level: "", text: lines.map(function (x) { return x.en; }).join(" "), translation: lines.map(function (x) { return x.vi; }).join(" "), phrases: [],
     questions: [
       { type: "MC", q: "Who makes lunch for the family today?", options: ["Dad", "Mum", "The child", "Nobody"], a: 1, why: "Câu 1: Mum makes lunch for the family today." },
       { type: "MC", q: "What does the family eat together?", options: ["Only rice", "Rice, soup, and vegetables", "Only soup", "Bread and cheese"], a: 1, why: "Câu 2: We eat rice, soup, and vegetables together." },
@@ -12035,7 +12043,7 @@ function videoSampleReadItem() {
 function videoSampleSpeakItem() {
   var lines = videoSampleLines();
   var who = ["Mẹ", "Cả nhà", "Mình", "Bố", "Cả nhà"];
-  return { topic: "Video mẫu — bữa trưa gia đình", band: "", lines: lines.map(function (x, i) { return { who: who[i] || "Cả nhà", en: x.en, vi: x.vi }; }) };
+  return { topic: "Mẫu nghe chép bằng âm thanh — bữa trưa gia đình", band: "", lines: lines.map(function (x, i) { return { who: who[i] || "Cả nhà", en: x.en, vi: x.vi }; }) };
 }
 function videoSampleEnsure() {
   if (window.__videoSampleIdx) return window.__videoSampleIdx;
@@ -12107,6 +12115,25 @@ function videoVOAWire() {
       else if (kind === "shadow") openLesson({ type: "skillListenLong", idx: idx.listen });
       else if (kind === "story") openLesson({ type: "story", idx: idx.read });
       else if (kind === "podcast") openLesson({ type: "podcast", idx: idx.speak });
+    };
+  });
+  /* v117b L1a: nut mo khong gian nghe chep video tren the VOA — them sau
+     khi render vi the VOA la chuoi cung trong entVideoBlock (khong sua
+     truc tiep chuoi dai). */
+  try {
+    var voaFrame = document.querySelector('iframe[src*="BKNJxpdNAtY"]');
+    var voaDet = (voaFrame && voaFrame.closest) ? voaFrame.closest("details.vrow") : null;
+    if (voaDet && !voaDet.querySelector("[data-wsvoa]")) {
+      var p = document.createElement("p");
+      p.innerHTML = '<button class="btn btn-amber" data-wsvoa>🎧 Luyện nghe chép video →</button>';
+      voaDet.appendChild(p);
+    }
+  } catch (e) {}
+  $$("[data-wsvoa]").forEach(function (b) {
+    if (b.__wsWired) return; b.__wsWired = true;
+    b.onclick = function () {
+      lessonStart = Date.now(); runWrong = []; runFirstTry = {};
+      openLesson({ type: "workspace" });
     };
   });
 }
@@ -12485,10 +12512,12 @@ function listenHubScrollTo(el) {
 }
 function listenHubGo(track, key) {
   var i, idx;
+  /* v117b L1c: hang "Video co phu de that" mo thang bai tap VOA (khong
+     gian nghe chep video) — truoc day chi cuon toi the Video moi nen
+     khong mo duoc bai. Hien chi video VOA tieng Anh co phu de that. */
   if (key === "video") {
-    var g3v = document.querySelector('[data-g6="G3"]');
-    if (g3v) g3v.open = true;
-    listenHubScrollTo(document.getElementById("videoNewCard" + track));
+    lessonStart = Date.now(); runWrong = []; runFirstTry = {};
+    openLesson({ type: "workspace" });
     return;
   }
   if (key === "link") {
@@ -16495,7 +16524,7 @@ function viewPracticeZh(app) {
     var put = function (cl, el) { if (cl && el) cl.appendChild(el); };
     var oneOpen = function (list, nk) {
       list.forEach(function (cl) {
-        cl.open = (nk && cl.getAttribute("data-g6") === nk);
+        cl.open = false; /* v117b L4: mac dinh thu gon het, khong tu mo nhom chua bai tiep theo */
         cl.addEventListener("toggle", function (e) {
           if (e.target !== cl || !cl.open) return;
           list.forEach(function (o) { if (o !== cl) o.open = false; });
@@ -19071,7 +19100,7 @@ function viewPracticeTc(app) {
     var put = function (cl, el) { if (cl && el) cl.appendChild(el); };
     var oneOpen = function (list, nk) {
       list.forEach(function (cl) {
-        cl.open = (nk && cl.getAttribute("data-g6") === nk);
+        cl.open = false; /* v117b L4: mac dinh thu gon het, khong tu mo nhom chua bai tiep theo */
         cl.addEventListener("toggle", function (e) {
           if (e.target !== cl || !cl.open) return;
           list.forEach(function (o) { if (o !== cl) o.open = false; });
@@ -19880,7 +19909,7 @@ function viewPracticeTp(app) {
     var put = function (cl, el) { if (cl && el) cl.appendChild(el); };
     var oneOpen = function (list, nk) {
       list.forEach(function (cl) {
-        cl.open = (nk && cl.getAttribute("data-g6") === nk);
+        cl.open = false; /* v117b L4: mac dinh thu gon het, khong tu mo nhom chua bai tiep theo */
         cl.addEventListener("toggle", function (e) {
           if (e.target !== cl || !cl.open) return;
           list.forEach(function (o) { if (o !== cl) o.open = false; });

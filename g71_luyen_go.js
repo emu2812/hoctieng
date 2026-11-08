@@ -25,7 +25,7 @@
       return { theme: theme, total: words.length, words: ws, active: null,
         hearts: 3, score: 0, cleared: 0, resolved: 0, over: null, graceUntil: 0,
         typingShield: 0, /* Chang 10: giay con lai cua khien go — dang go dung thi tu roi cham lai */
-        ship: { x: 0.5, y: 0.86 }, rocks: [], rockTimer: 2.0 };
+        ship: { x: 0.5, y: 0.86 }, rocks: [], rockTimer: 4.0 /* v117b L5: hon da dau xuat hien muon hon (2s -> 4s) de nguoi moi go kip tu dau */ };
     },
     /* Lái tàu: dx theo đơn vị chuẩn (0..1), kẹp trong sân. */
     moveShip: function (st, dx) {
@@ -215,9 +215,16 @@
          về sau càng dày (tối thiểu mỗi 1,4 giây một hòn). */
       st.rockTimer -= dt;
       if (st.rockTimer <= 0) {
-        st.rocks.push({ x: 0.08 + Math.random() * 0.84, y: -0.08,
-          speed: 0.10 + Math.random() * 0.06,
-          r: 0.028 + Math.random() * 0.02, rot: Math.random() * 6.28 });
+        /* v117b L5: dau van nhe tay cho nguoi moi — da dau cham hon
+           (x0,75 khi chua xong 5 tu) va it da cung luc hon (toi da 2
+           khi chua xong 5 tu, 3 khi chua xong 10 tu); ve sau day dan
+           nhu cu. Giu luat v117 (go xong tu ha da gan) + luat ne da xa. */
+        var maxRocks = st.resolved < 5 ? 2 : (st.resolved < 10 ? 3 : 99);
+        if (st.rocks.length < maxRocks) {
+          st.rocks.push({ x: 0.08 + Math.random() * 0.84, y: -0.08,
+            speed: (0.10 + Math.random() * 0.06) * (st.resolved < 5 ? 0.75 : 1),
+            r: 0.028 + Math.random() * 0.02, rot: Math.random() * 6.28 });
+        }
         st.rockTimer = Math.max(1.4, 2.2 - st.resolved * 0.05);
       }
       for (var i = st.rocks.length - 1; i >= 0; i--) {
