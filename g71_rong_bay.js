@@ -249,7 +249,7 @@
     itemBar.id = "g71Items";
     itemBar.style.cssText = "position:absolute;top:8px;right:10px;z-index:4;display:flex;gap:6px;align-items:center;";
     itemBar.innerHTML = '<button type="button" id="g71ItemStar" class="btn" title="Sao: vòng sau điểm gấp đôi" style="flex:none;padding:3px 6px;font-size:13px;">⭐×0</button>'
-      + '<span id="g71ItemShield" title="Khiên: tự chặn 1 lần chọn sai" style="flex:none;background:#fff;border:2px solid #F3D9A4;border-radius:12px;padding:3px 6px;font-weight:700;font-size:13px;">🛡️×0</span>'
+      + '<span id="g71ItemShield" title="Khiên: tự chặn 1 lần chọn sai" style="flex:none;background:#fff;border:2px solid #FDE68A;border-radius:12px;padding:3px 6px;font-weight:700;font-size:13px;">🛡️×0</span>'
       + '<button type="button" id="g71ItemSlow" class="btn" title="Chậm: mây chậm lại 5 giây" style="flex:none;padding:3px 6px;font-size:13px;">🐢×0</button>';
     stg.wrap.appendChild(itemBar);
     var starBtn = itemBar.querySelector("#g71ItemStar");
@@ -314,9 +314,9 @@
     }
 
     var last = performance.now();
-    /* Pháo hạt khi chọn đúng: hổ phách + teal + trắng + xanh lá. */
+    /* Pháo hạt khi chọn đúng: CHỈ màu trong bảng ART_DIRECTION (hổ phách + teal + chàm nhạt + trắng). */
     function burst(x, y) {
-      var colors = ["#F59E0B", "#0D9488", "#FFC800", "#1E9E6A", "#ffffff"];
+      var colors = ["#F59E0B", "#0D9488", "#FBBF24", "#A5B4FC", "#ffffff"];
       for (var i = 0; i < 42; i++) {
         particles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 360, vy: -Math.random() * 260 - 40,
           g: 520, life: 0.9 + Math.random() * 0.4, t: 0, c: colors[i % colors.length], r: 2 + Math.random() * 3.5 });
@@ -422,14 +422,14 @@
           ctx.beginPath();
           ctx.ellipse(cx, cy + cg.hh * 0.62, cg.hw * 0.9, cg.hh * 0.32, 0, 0, Math.PI * 2);
           ctx.fill();
-          ctx.fillStyle = "#475569";
+          ctx.fillStyle = "#312E81"; /* v114: mây giông chàm đậm (ART_DIRECTION), không xám ngoài bảng. */
           ctx.beginPath();
           ctx.ellipse(cx - cg.hw * 0.55, cy + cg.hh * 0.08, cg.hw * 0.45, cg.hh * 0.62, 0, 0, Math.PI * 2);
           ctx.ellipse(cx, cy - cg.hh * 0.18, cg.hw * 0.6, cg.hh * 0.72, 0, 0, Math.PI * 2);
           ctx.ellipse(cx + cg.hw * 0.55, cy + cg.hh * 0.08, cg.hw * 0.45, cg.hh * 0.62, 0, 0, Math.PI * 2);
           ctx.fill();
           ctx.fillRect(cx - cg.hw, cy + cg.hh * 0.02, cg.hw * 2, cg.hh * 0.5);
-          ctx.fillStyle = "#FDE047";
+          ctx.fillStyle = "#FBBF24"; /* v114: tia chớp hổ phách nhạt (ART_DIRECTION). */
           ctx.beginPath();
           ctx.moveTo(cx + 4, cy - 4); ctx.lineTo(cx - 6, cy + 12); ctx.lineTo(cx, cy + 12);
           ctx.lineTo(cx - 4, cy + 26); ctx.lineTo(cx + 8, cy + 8); ctx.lineTo(cx + 2, cy + 8);
@@ -497,9 +497,14 @@
       var tilt = Math.max(-0.22, Math.min(0.22, (dy - dragonY) * 0.004));
       dragonY = dy;
       ctx.save();
-      ctx.translate(W * LOGIC.dragonX + dj, dy);
+      /* v114: rồng TO hơn (38 → 52) + quầng hổ phách sau lưng — trọng tâm
+         TO và NÉT nhất màn. Dịch phải thêm 34px để đuôi không chạm mép
+         trái màn dọc (đuôi dài 2,2×52px). */
+      ctx.translate(W * LOGIC.dragonX + 34 + dj, dy);
       ctx.rotate(tilt);
-      G71.drawDragon(ctx, 0, 0, 38);
+      ctx.fillStyle = "rgba(245,158,11,.20)";
+      ctx.beginPath(); ctx.ellipse(0, 0, 78, 52, 0, 0, Math.PI * 2); ctx.fill();
+      G71.drawDragon(ctx, 0, 0, 52);
       ctx.restore();
       G71.drawSnake(ctx, W * 0.08, H - 44, 20, false);
       /* Hạt nổ khi chọn đúng. */
@@ -519,7 +524,7 @@
         ctx.fillStyle = "#B45309";
         G71.drawFitText(ctx, notice, W / 2, H * 0.12, W - 32, 22, 13, 2, "800");
       } else if (banner) {
-        ctx.fillStyle = bannerOk ? "#1E9E6A" : "#DC2626";
+        ctx.fillStyle = bannerOk ? "#0D9488" : "#92400E"; /* v114: đúng = teal, sai = hổ phách đậm — CHỈ màu trong bảng ART_DIRECTION (§1), không xanh lá/đỏ ngoài bảng. */
         G71.drawFitText(ctx, banner, W / 2, H * 0.12, W - 32, 30, 15, 2, "800");
       }
       if (shaking) ctx.restore();

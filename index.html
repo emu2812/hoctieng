@@ -116,10 +116,11 @@ iframe{width:100%;aspect-ratio:16/9;border:1.5px solid var(--line2);border-radiu
 .skill-chip{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;font-size:14px;font-weight:700;background:#fff}
 .skill-chip.sk-vocab{color:var(--sk-vocab);border-color:var(--sk-vocab)}.skill-chip.sk-grammar{color:var(--sk-grammar);border-color:var(--sk-grammar)}.skill-chip.sk-read{color:var(--sk-read);border-color:var(--sk-read)}.skill-chip.sk-listen{color:var(--sk-listen);border-color:var(--sk-listen)}.skill-chip.sk-speak{color:var(--sk-speak);border-color:var(--sk-speak)}.skill-chip.sk-write{color:var(--sk-write);border-color:var(--sk-write)}
 .path-v{position:relative;margin:8px 0 24px}
-.path-v::before{content:"";position:absolute;left:29px;top:10px;bottom:10px;width:3px;background:var(--line2)}
+/* v114: đường kẻ dọc thành ĐƯỜNG MÒN ĐẤT — nét đứt màu nâu hổ phách, nút là trạm dừng dọc đường. */
+.path-v::before{content:"";position:absolute;left:28px;top:10px;bottom:10px;width:4px;border-radius:2px;background:repeating-linear-gradient(to bottom,#B45309 0 10px,rgba(180,83,9,.25) 10px 18px)}
 .path-node{display:flex;gap:12px;align-items:flex-start;position:relative;width:100%;text-align:left;background:transparent;border:0;cursor:pointer;padding:8px 0;font-size:16px;font-family:inherit;color:inherit}
 .path-node .dotwrap{flex:0 0 58px;display:flex;justify-content:center}
-.path-node .dot{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;background:#fff;border:2px dashed var(--line);color:var(--mut)}
+.path-node .dot{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;background:#FFFBEB;border:2px solid #B45309;color:var(--mut);box-shadow:0 2px 0 rgba(180,83,9,.25)}
 .path-node.done .dot{background:var(--green);border-style:solid;border-color:var(--green);color:#fff}
 .path-node.cur .dot{width:58px;height:58px;border:3px solid var(--amber);background:var(--soft);color:var(--ink);box-shadow:0 0 0 6px rgba(255,184,0,.18)}
 .path-node .pn-title{font-weight:700}
@@ -135,6 +136,22 @@ body.landing-on #tabBar,body.landing-on #previewBanner,body.landing-on #tutorFlo
 .land-opt{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:64px;padding:14px 16px;text-align:left;border-width:1.5px}
 .land-opt b{font-size:18px}.zh-han{font-size:56px;line-height:1.4}
 .path-node.skipped .pn-st{color:var(--mut)}
+/* ---- v114 — ĐƯỜNG MÒN TRONG RỪNG: bản đồ học thành đường mòn, mỗi nút là
+   một trạm dừng dọc đường. 3 ảnh rừng theo độ sâu: rung-1 cửa rừng nắng
+   (đầu lộ trình), rung-2 lối mòn nắng (giữa), rung-3 sương mờ bình minh
+   (cuối, gần đỉnh). Lớp phủ kem mờ giữ chữ đọc rõ trên ảnh. ---- */
+.trail-head{position:relative;border-radius:20px;overflow:hidden;padding:20px;margin:12px 0 4px;background:linear-gradient(rgba(4,6,15,.30),rgba(4,6,15,.55)),url(assets/ronglua/rung-1.jpg) center/cover;color:#FFFBEB;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+.trail-head h3{color:#FFFBEB;font-size:22px;margin:0 0 4px}
+.trail-head p{margin:0;color:#FDE68A;font-size:15px;line-height:1.45}
+.trail-head .trail-legend{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.trail-head .trail-legend span{background:rgba(255,251,235,.92);color:#1F2430;border-radius:999px;padding:3px 10px;font-size:13px;font-weight:700}
+.trail-depth{display:flex;align-items:center;gap:10px;margin:20px 0 4px;color:#92400E;font-weight:800;font-size:15px}
+.trail-depth::before,.trail-depth::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,transparent,#B45309,transparent);border-radius:2px}
+.chapter-row.forest-band-1>.path-node,.chapter-row.forest-band-2>.path-node,.chapter-row.forest-band-3>.path-node{border-radius:20px;padding:8px 12px}
+.chapter-row.forest-band-1>.path-node{background:linear-gradient(rgba(255,251,235,.90),rgba(255,251,235,.90)),url(assets/ronglua/rung-1.jpg) center/cover}
+.chapter-row.forest-band-2>.path-node{background:linear-gradient(rgba(255,251,235,.90),rgba(255,251,235,.90)),url(assets/ronglua/rung-2.jpg) center/cover}
+.chapter-row.forest-band-3>.path-node{background:linear-gradient(rgba(255,251,235,.90),rgba(255,251,235,.90)),url(assets/ronglua/rung-3.jpg) center/cover}
+.card.forest-band-1{background:linear-gradient(rgba(255,251,235,.94),rgba(255,251,235,.94)),url(assets/ronglua/rung-1.jpg) center/cover}
 #bottombar{position:fixed;left:0;right:0;bottom:0;z-index:44;background:#fff;border-top:1.5px solid var(--line2);padding:10px 16px;display:flex;gap:10px;justify-content:space-between;align-items:center;box-shadow:0 -2px 10px rgba(31,36,48,.08)}
 #bottombar .btn{margin:0}
 body.has-bottombar #toast{bottom:88px}
@@ -4036,6 +4053,11 @@ function rbStageHTML(ch) {
     + '<p><b>Chuẩn theo:</b> ' + esc(st.std) + '</p>'
     + easyHTML + '</details>';
 }
+/* v114: đầu đường mòn — banner rừng chung cho mọi bản đồ (EN/ZH/TC/TP).
+   Chỉ là tiêu đề + chú thích, không lặp dòng cổng (dòng cổng giữ đúng 3 lần). */
+function trailHeadHTML(sub) {
+  return '<div class="trail-head" id="trailHead"><h3>🌲 Đường mòn trong rừng</h3><p>' + esc(sub) + '</p><div class="trail-legend"><span>✅ Đã xong</span><span>📍 Đang học</span><span>🔒 Chưa tới</span></div></div>';
+}
 function viewRoadmap(app) {
   var done = doneLearnCount(), total = learningSteps().length;
   /* v96: Chuong 1 gom 7 buoc mo dau (the tren) + 10 buoc Viet Band 0 (hang Band 0
@@ -4044,9 +4066,9 @@ function viewRoadmap(app) {
   var ch1WSteps = rbGateSteps("Band 0");
   var ch1WDone = ch1WSteps.filter(function (st) { return rbStepDone(st); }).length;
   var ch1TotalAll = total + ch1WSteps.length, ch1DoneAll = done + ch1WDone;
-  var html = trackSwitchHTML() + '<h2>Bản đồ</h2><p class="mut">Bài kiểm tra cuối chương mở khi bạn học xong 80% số bước của chương đó.</p>';
+  var html = trackSwitchHTML() + '<h2>Bản đồ</h2><p class="mut">Bài kiểm tra cuối chương mở khi bạn học xong 80% số bước của chương đó.</p>' + trailHeadHTML("Đi dọc đường mòn, thu nhặt từng bài học — mỗi trạm là một bước học, đi hết đường mòn là hết lộ trình.");
   html += '<div class="row" id="myPathLink"><button class="btn btn-primary" id="mapNextGo">Học tiếp →</button><button class="dimlink" id="myPathGo">Lộ trình riêng →</button></div>';
-  html += '<section class="card"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + ch1DoneAll + '/' + ch1TotalAll + ' bước</b></div><div id="roadmapBox"><div class="path-v">';
+  html += '<section class="card forest-band-1"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + ch1DoneAll + '/' + ch1TotalAll + ' bước</b></div><div id="roadmapBox"><div class="path-v">';
   var clCur = nextLearnStep(); var clCurIdx = clCur ? stepIdx(clCur.id) : -1;
   var gateHTML = "";
   RB_CH1_STEPS.forEach(function (s, i) {
@@ -4178,7 +4200,13 @@ function viewRoadmap(app) {
       + (isOpen ? '' : '<p class="mut">Chương này sắp mở — sổ tay này chỉ là định hướng, chưa có bài học bên trong.</p>') + '</details>';
     /* v86: nút chương tròn .path-node theo mẫu HSK — dot tròn có icon, tiêu đề +
        mô tả + trạng thái; chip tiến trình là con trực tiếp của nút. */
-    html += '<section class="card chapter-row" data-ch="' + esc(ch.band) + '">'
+    /* v114: mỗi chương mang một dải rừng theo độ sâu (chương 1–5 cửa rừng
+       nắng, 6–9 lối mòn nắng, 10–13 sương mờ bình minh) + mốc độ sâu giữa
+       các dải. Chỉ thêm class/div, không đổi nút, trạng thái hay cổng. */
+    var bandCls = ci < 5 ? " forest-band-1" : (ci < 9 ? " forest-band-2" : " forest-band-3");
+    if (ci === 5) html += '<div class="trail-depth">🌲 Đi sâu vào rừng — Lối mòn nắng</div>';
+    if (ci === 9) html += '<div class="trail-depth">🌲 Sương mờ bình minh — gần tới đỉnh</div>';
+    html += '<section class="card chapter-row' + bandCls + '" data-ch="' + esc(ch.band) + '">'
       + '<button class="path-node row ch-node ' + chStatus + '" data-chapter="' + esc(ch.band) + '" aria-expanded="' + (open ? 'true' : 'false') + '"><span class="dotwrap"><span class="dot">' + chIcon + '</span></span><span><span class="pn-title">Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</span><br><span class="pn-type">' + pnType + '</span><br><span class="pn-st">' + chStTxt + '</span>' + (isCurCh ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span><span class="chip' + (isOpen ? ' cur' : '') + '">' + chipTxt + '</span></button>'
       + '<div class="chapter-body"' + (open ? '' : ' hidden') + '>' + body + '</div></section>';
   });
@@ -16148,7 +16176,7 @@ function viewHomeZh(app) {
   wireZhHskk();
 }
 function viewRoadmapZh(app) {
-  var html = trackSwitchHTML() + '<h2>Bản đồ tiếng Trung</h2>';
+  var html = trackSwitchHTML() + '<h2>Bản đồ tiếng Trung</h2>' + trailHeadHTML("6 chặng theo Giáo trình chuẩn HSK — đi dọc đường mòn, thu nhặt từng bộ từ, từng bài ngữ pháp dọc đường.");
   html += '<p class="mut">6 chặng theo Giáo trình chuẩn HSK (hệ 6 cấp cũ) + lớp bổ sung HSK 3.0 hệ E. Chặng 1–6 đã có bộ từ riêng cùng ngữ pháp, đọc, nghe, nói, nhập vai, viết, kiểm tra cuối chặng và thi thử HSK (bản rút gọn); viết chữ (đợt 1: 30 chữ nét đơn giản) và từ điển bấm tra đã mở trong tab Luyện tập.</p>';
   var rt = zhSessionTarget();
   html += '<div class="row"><button class="btn btn-primary" id="zhRoadmapNextBtn">Học tiếp: ' + esc(rt.title) + ' →</button></div>';
@@ -18717,6 +18745,9 @@ function tcTpStageCardHTML(st, i, isTc) {
   var isCurStage = !!(next && st.steps.indexOf(next.id) >= 0);
   var isDoneStage = learn.length > 0 && doneLearn === learn.length && doneFinals === finals.length;
   var stIcon = isDoneStage ? "✓" : isCurStage ? "🎯" : "📖";
+  /* v114: dải rừng theo độ sâu (TOEIC 4 chặng: 1–2 cửa rừng, 3 lối mòn, 4 sương mờ;
+     TOPIK 8 chặng: 1–3 cửa rừng, 4–6 lối mòn, 7–8 sương mờ). */
+  var bandN = isTc ? (i < 2 ? 1 : (i < 3 ? 2 : 3)) : (i < 3 ? 1 : (i < 6 ? 2 : 3));
   var stTxt = isDoneStage ? "Đã xong" : isCurStage ? "Đang học" : "Chưa tới";
   var rows = "";
   learn.forEach(function (id) {
@@ -18738,7 +18769,7 @@ function tcTpStageCardHTML(st, i, isTc) {
     finalsHTML += '<button class="path-node step-row' + (isNextF ? ' cur' : '') + '" ' + attr + '="' + esc(id) + '"><span class="dotwrap"><span class="dot">' + mapStepEmoji(m.kind) + '</span></span><span><span class="pn-title">' + esc(m.title) + '</span><br><span class="pn-type">' + tcTpKindLabel(m.kind) + '</span><br><span class="pn-st">' + stTxt3 + '</span>' + (isNextF ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
   });
   var g = (isTc ? TC_STAGE_GOALS : TP_STAGE_GOALS)[i] || { goal: "", can: [] };
-  var html = '<section class="card chapter-row">'
+  var html = '<section class="card chapter-row forest-band-' + bandN + '">'
     + '<button class="path-node row stage-node' + (isDoneStage ? ' done' : isCurStage ? ' cur' : '') + '" data-stage-node="' + i + '" aria-expanded="' + (isCurStage ? 'true' : 'false') + '"><span class="dotwrap"><span class="dot">' + stIcon + '</span></span><span><span class="pn-title"><b>' + esc(st.title) + '</b></span><br><span class="pn-type">' + (isTc ? 'TOEIC' : 'TOPIK') + ' · ' + (learn.length + finals.length) + ' bước (' + learn.length + ' học · ' + finals.length + ' kiểm tra/thi thử)</span><br><span class="pn-st">' + stTxt + '</span>' + (isCurStage ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span><span class="chip cur">Đã mở · ' + (doneLearn + doneFinals) + '/' + (learn.length + finals.length) + ' bước</span></button>'
     + '<div class="stage-body"' + (isCurStage ? '' : ' hidden') + '>'
     + '<details><summary><b>Mục tiêu</b></summary><p>' + esc(g.goal) + '</p></details>'
@@ -18758,7 +18789,7 @@ function tcTpStageCardHTML(st, i, isTc) {
 function viewRoadmapTc(app) {
   tcNorm();
   var n = tcNextStep();
-  var html = trackSwitchHTML() + '<h2>Bản đồ TOEIC</h2>';
+  var html = trackSwitchHTML() + '<h2>Bản đồ TOEIC</h2>' + trailHeadHTML("4 chặng theo mục tiêu điểm 450 – 900 — đi dọc đường mòn, thu nhặt từng bài học dọc đường.");
   html += '<p class="mut">4 chặng theo mục tiêu điểm: 450, 600, 750, 900.</p>';
   if (n) html += '<div class="row"><button class="btn btn-primary" data-tcnext="1">Học tiếp: ' + esc(n.meta.title) + ' →</button></div>';
   TC_STAGES.forEach(function (st, i) {
@@ -19556,7 +19587,7 @@ function viewHomeTp(app) {
 function viewRoadmapTp(app) {
   tpNorm();
   var n = tpNextStep();
-  var html = trackSwitchHTML() + '<h2>Bản đồ TOPIK</h2>';
+  var html = trackSwitchHTML() + '<h2>Bản đồ TOPIK</h2>' + trailHeadHTML("Hangul học theo thứ tự — đi dọc đường mòn, thu nhặt từng bài học dọc đường.");
   html += '<p class="mut">Hangul học theo thứ tự (bài sau mở khi xong bài trước). Chặng cuối là nền tảng hướng lên TOPIK II.</p>';
   if (n) html += '<div class="row"><button class="btn btn-primary" data-tpnext="1">Học tiếp: ' + esc(n.meta.title) + ' →</button></div>';
   TP_STAGES.forEach(function (st, i) {

@@ -217,71 +217,36 @@
 
   /* ---- Sân khấu toàn màn hình ---- */
   var stage = null;
-  var helpChoice = null; /* null = chưa chọn; true/false = lựa chọn ? của phiên */
   function closeStage() {
     if (stage) { try { stage.close(); } catch (e) {} }
   }
-  function openStage(title, hint, onClose) {
+  function openStage(title, onClose) {
     closeStage();
     var ov = document.createElement("div");
     ov.id = "g71Stage";
     ov.style.cssText = "position:fixed;inset:0;z-index:9999;background:#FFF7E8;display:flex;flex-direction:column;";
     /* HUD một dòng duy nhất: không xuống dòng, phần dài (chủ đề/nghĩa)
        tự cắt bằng dấu … để sân canvas giữ được chiều cao trên điện thoại
-       dọc. Nút "?" mở/đóng hướng dẫn; màn hẹp mặc định thu hướng dẫn để
-       sân chiếm phần lớn màn hình, màn rộng mặc định hiện hướng dẫn. Lựa
-       chọn của người chơi được nhớ trong phiên (helpChoice). */
+       dọc. Sân không còn thanh gợi ý — luật game chỉ nằm ở tab Hướng dẫn.
+       Nút "?" thoát sân rồi mở tab Hướng dẫn. */
     ov.innerHTML = '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border-bottom:2px solid #F3D9A4;">'
       + '<h2 style="margin:0;font-size:18px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(title) + '</h2>'
       + '<button id="g71Help" class="btn" title="Hướng dẫn" style="flex:none;">?</button>'
       + '<button id="g71Exit" class="btn" style="flex:none;">✕ Thoát</button></div>'
       + '<div id="g71Hud" style="display:flex;gap:10px;align-items:center;padding:7px 12px;font-weight:700;white-space:nowrap;overflow:hidden;"></div>'
-      + '<div id="g71CanvasWrap" style="flex:1;min-height:0;position:relative;overflow:hidden;"><canvas id="g71Canvas" style="display:block;width:100%;height:100%;touch-action:none;"></canvas></div>'
-      + '<p id="g71Hint" style="margin:0;padding:7px 12px;color:#6B7280;font-size:13px;">' + escHtml(hint) + '</p>';
+      + '<div id="g71CanvasWrap" style="flex:1;min-height:0;position:relative;overflow:hidden;"><canvas id="g71Canvas" style="display:block;width:100%;height:100%;touch-action:none;"></canvas></div>';
     document.body.appendChild(ov);
     var cv = ov.querySelector("#g71Canvas");
     var ctx = null;
     try { ctx = cv.getContext("2d"); } catch (e) {}
-    var hintEl = ov.querySelector("#g71Hint");
     var helpBtn = ov.querySelector("#g71Help");
-    function applyHelp() {
-      var open = (helpChoice !== null) ? helpChoice
-        : (typeof window !== "undefined" && window.innerWidth ? window.innerWidth >= 600 : true);
-      if (hintEl) hintEl.style.display = open ? "" : "none";
-    }
-    applyHelp();
-    /* Nút "?" mở bảng hướng dẫn thật (v100 B1): trước đây "?" chỉ bật/
-       tắt một dòng gợi ý nhỏ ở cuối sân — trên trình duyệt thật tác
-       dụng này gần như không nhìn thấy nên người chơi tưởng nút chết.
-       Bảng hướng dẫn hiện nội dung gợi ý hiện tại (trò chơi cập nhật
-       dòng này theo trận/bản đồ) trong hộp thoại rõ ràng, có nút đóng;
-       bấm "?" lần nữa hoặc bấm nền mờ cũng đóng. Gắn bằng event
-       delegation trên khung sân khấu để nút vẫn bấm được dù tiêu đề
-       được vẽ lại. */
-    var guideBox = null;
-    function toggleGuide() {
-      if (guideBox && guideBox.parentNode) {
-        guideBox.parentNode.removeChild(guideBox);
-        guideBox = null;
-        return;
-      }
-      var txt = (hintEl && hintEl.textContent) || hint || "";
-      guideBox = document.createElement("div");
-      guideBox.id = "g71Guide";
-      guideBox.style.cssText = "position:absolute;inset:0;z-index:6;overflow:auto;background:rgba(4,6,15,.55);display:flex;align-items:center;justify-content:center;padding:16px;";
-      guideBox.innerHTML = '<div style="background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.18);padding:24px 22px;max-width:560px;width:100%;">'
-        + '<h2 style="margin:0 0 10px;">📖 Hướng dẫn</h2>'
-        + '<p style="margin:6px 0;line-height:1.6;">' + escHtml(txt) + '</p>'
-        + '<div class="row" style="justify-content:center;margin-top:14px;"><button class="btn btn-primary" id="g71GuideClose">Đã hiểu</button></div></div>';
-      var cb = guideBox.querySelector("#g71GuideClose");
-      if (cb) cb.onclick = toggleGuide;
-      guideBox.addEventListener("click", function (e) { if (e.target === guideBox) toggleGuide(); });
-      var wrap = ov.querySelector("#g71CanvasWrap");
-      if (wrap) wrap.appendChild(guideBox);
-    }
+    /* Nút "?" (v113): thoát sân rồi mở tab Hướng dẫn — luật game chỉ
+       nằm ở một nơi duy nhất, không còn hộp thoại riêng hay thanh gợi ý.
+       Gắn bằng event delegation trên khung sân khấu để nút vẫn bấm được
+       dù tiêu đề được vẽ lại. */
     ov.addEventListener("click", function (e) {
       var t = e && e.target;
-      if (t && t.closest && t.closest("#g71Help")) toggleGuide();
+      if (t && t.closest && t.closest("#g71Help")) { close(); if (typeof go === "function") go("guide"); }
     });
     function resize() {
       try {
@@ -334,8 +299,8 @@
     var exitBtn = ov.querySelector("#g71Exit");
     if (exitBtn) exitBtn.onclick = close;
     var api = { el: ov, canvas: cv, ctx: ctx, hud: ov.querySelector("#g71Hud"),
-      wrap: ov.querySelector("#g71CanvasWrap"), hint: hintEl, helpBtn: helpBtn,
-      guide: toggleGuide, resize: resize, close: close };
+      wrap: ov.querySelector("#g71CanvasWrap"), helpBtn: helpBtn,
+      resize: resize, close: close };
     stage = api;
     return api;
   }
@@ -380,13 +345,13 @@
   function drawDragon(ctx, x, y, s) {
     ctx.save();
     ctx.translate(x, y);
-    ctx.fillStyle = "#FF6B4A";
+    ctx.fillStyle = "#F59E0B";
     ctx.beginPath();
     ctx.moveTo(-s * 0.9, 0);
     ctx.quadraticCurveTo(-s * 2.0, -s * 0.5, -s * 2.2, s * 0.2);
     ctx.quadraticCurveTo(-s * 1.4, s * 0.3, -s * 0.9, s * 0.3);
     ctx.closePath(); ctx.fill();
-    ctx.fillStyle = "#FF6B4A";
+    ctx.fillStyle = "#F59E0B";
     ctx.globalAlpha = 0.85;
     ctx.beginPath();
     ctx.moveTo(-s * 0.2, -s * 0.3);
@@ -394,18 +359,20 @@
     ctx.quadraticCurveTo(s * 0.3, -s * 1.2, s * 0.2, -s * 0.3);
     ctx.closePath(); ctx.fill();
     ctx.globalAlpha = 1;
-    ctx.fillStyle = "#1E9E6A";
+    ctx.fillStyle = "#312E81";
     ctx.beginPath(); ctx.ellipse(0, 0, s * 1.1, s * 0.7, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#FFC800";
+    ctx.fillStyle = "rgba(255,255,255,.35)";
+    ctx.beginPath(); ctx.ellipse(-s * 0.35, -s * 0.42, s * 0.45, s * 0.16, -0.3, 0, Math.PI * 2); ctx.fill(); /* v114: điểm sáng trên-trái */
+    ctx.fillStyle = "#FDE68A";
     ctx.beginPath(); ctx.ellipse(s * 0.15, s * 0.2, s * 0.65, s * 0.38, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#1E9E6A";
+    ctx.fillStyle = "#312E81";
     ctx.beginPath(); ctx.arc(s * 0.95, -s * 0.55, s * 0.62, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#FFB800";
+    ctx.fillStyle = "#F59E0B";
     ctx.beginPath();
     ctx.moveTo(s * 0.6, -s * 1.05); ctx.lineTo(s * 0.75, -s * 1.55); ctx.lineTo(s * 0.95, -s * 1.0); ctx.closePath();
     ctx.moveTo(s * 1.05, -s * 1.05); ctx.lineTo(s * 1.25, -s * 1.5); ctx.lineTo(s * 1.4, -s * 0.95); ctx.closePath();
     ctx.fill();
-    ctx.fillStyle = "#FFC800";
+    ctx.fillStyle = "#FDE68A";
     ctx.beginPath(); ctx.ellipse(s * 1.45, -s * 0.45, s * 0.32, s * 0.24, 0, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = "#1F2430";
     ctx.beginPath(); ctx.arc(s * 1.05, -s * 0.7, s * 0.12, 0, Math.PI * 2); ctx.fill();
@@ -658,12 +625,12 @@
   }
   function paintSky(ctx, W, H, t) {
     var g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#BFE6F5"); g.addColorStop(1, "#FFF7E8");
+    g.addColorStop(0, "#C7D2FE"); g.addColorStop(1, "#FFFBEB");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
     /* Mặt trời + quầng sáng. */
-    ctx.fillStyle = "rgba(253,224,71,.25)";
+    ctx.fillStyle = "rgba(253,230,138,.35)";
     ctx.beginPath(); ctx.arc(W * 0.86, H * 0.12, 52, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#FDE047";
+    ctx.fillStyle = "#F59E0B";
     ctx.beginPath(); ctx.arc(W * 0.86, H * 0.12, 26, 0, Math.PI * 2); ctx.fill();
     /* Mây xa mờ. */
     ctx.globalAlpha = 0.55;
@@ -671,12 +638,12 @@
     drawCloudWide(ctx, W * 0.6, H * 0.06, 36, 16);
     ctx.globalAlpha = 1;
     /* Núi xa 2 lớp ở chân trời. */
-    ctx.fillStyle = "rgba(125,211,252,.5)";
+    ctx.fillStyle = "rgba(165,180,252,.55)";
     ctx.beginPath();
     ctx.moveTo(0, H);
     for (var x = 0; x <= W; x += 24) ctx.lineTo(x, H * 0.88 + Math.sin(x / 60) * H * 0.03);
     ctx.lineTo(W, H); ctx.closePath(); ctx.fill();
-    ctx.fillStyle = "rgba(30,158,106,.35)";
+    ctx.fillStyle = "rgba(13,148,136,.35)";
     ctx.beginPath();
     ctx.moveTo(0, H);
     for (var x2 = 0; x2 <= W; x2 += 24) ctx.lineTo(x2, H * 0.94 + Math.sin(x2 / 45 + 2) * H * 0.02);
