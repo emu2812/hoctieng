@@ -4744,8 +4744,14 @@ function viewPractice(app) {
     })();
     put(G1, byId("practiceGrpVocab"));
     put(G2, byId("practiceGrpGram"));
+    /* v117c L2: giu tham chieu hang video + the hub TRUOC khi doi
+       practiceGrpListen vao G3 — jsdom khong tim thay con cua <details>
+       vua doi cho bang getElementById trong cung luot render (trinh duyet
+       that khong bi, nhung giu truoc thi dung o ca hai). */
+    var listenVideoRowEl = byId("listenVideoRow"), listenHubCardEl = byId("listenHubCard");
     put(G3, byId("practiceGrpListen"));
-    put(G3, byId("listenHubCard"));
+    put(G3, listenVideoRowEl);
+    put(G3, listenHubCardEl);
     put(G3, byId("practiceGrpDict"));
     put(G3, byId("practiceGrpPod"));
     put(G3, byId("practiceGrpRead"));
@@ -8650,6 +8656,77 @@ function videoSlotHTML(key) {
      Giu cau chuan 28/10, khong nhac "kenh chinh thuc". */
   return '<p class="mut">Video lý thuyết: chưa có video cho trạm này — web chỉ chọn clip dạy rõ nhất, dễ theo nhất cho người Việt khi đã kiểm chứng, không gắn video chưa đạt chuẩn.</p>';
 }
+/* v117c L1: khung video LAZY — chi hien anh dai dien + nut phat, chua chen
+   iframe that. Iframe that chi duoc chen khi the <details> chua no mo ra
+   lan dau (su kien toggle) hoac nguoi hoc bam nut phat. Trang Luyen tap ZH
+   co 72 iframe YouTube trong DOM ngay sau render ban dau (29 xiaoyun +
+   11 listenExtra + 23 Video moi + 3 janus + 1 wordorder + 5 video giai
+   tri) — mo G3 la trinh duyet phai tai ~40 embed cung luc, de sap tab
+   tren may yeu. Chi ap lazy cho cum nang (xiaoyun, listenExtra, Video
+   moi); bai hoc le (videoSlotIf thuong) va cum nho (janus/wordorder) giu
+   nguyen. Anh dai dien lay tu i.ytimg.com theo dung id video. */
+function vidLazyHTML(v) {
+  var st = (v.start != null) ? ' data-vstart="' + Math.max(0, Math.floor(v.start)) + '"' : "";
+  var en = (v.end != null) ? ' data-vend="' + Math.max(0, Math.floor(v.end)) + '"' : "";
+  return '<div class="vid-lazy" data-vid="' + esc(v.id) + '"' + st + en + '><img src="https://i.ytimg.com/vi/' + esc(v.id) + '/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display=\'none\'"><button class="btn vid-lazy-play" type="button">▶ Phát video</button></div>';
+}
+function videoCardLazyHTML(v) {
+  var segTxt = "";
+  if (v.start != null || v.end != null) segTxt = " — chỉ phát đúng đoạn này" + (v.start != null ? " (từ " + fmtSegTime(v.start) : "") + (v.end != null ? " đến " + fmtSegTime(v.end) + ")" : (v.start != null ? ")" : ""));
+  return '<div class="sumcard"><p><b>Video lý thuyết:</b></p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.title) + ' (' + esc(v.channel) + ') — ' + esc(v.note) + segTxt + '</p></div>';
+}
+function videoSlotLazyHTML(key) {
+  var v = (key && typeof GRAMMAR_VIDEOS !== "undefined") ? GRAMMAR_VIDEOS[key] : null;
+  if (v) {
+    if (v.videos && v.videos.length) return v.videos.map(function (x) { return videoCardLazyHTML(x); }).join("");
+    return videoCardLazyHTML(v);
+  }
+  return '<p class="mut">Video lý thuyết: chưa có video cho trạm này — web chỉ chọn clip dạy rõ nhất, dễ theo nhất cho người Việt khi đã kiểm chứng, không gắn video chưa đạt chuẩn.</p>';
+}
+function videoSlotLazyIf(key) { /* nhu videoSlotIf nhung lazy: chi khi ban do co clip cho khoa nay */
+  return (typeof GRAMMAR_VIDEOS !== "undefined" && GRAMMAR_VIDEOS[key]) ? videoSlotLazyHTML(key) : "";
+}
+function vidLazyFillOne(ph) {
+  if (!ph || !ph.parentNode || !ph.getAttribute) return false;
+  var id = ph.getAttribute("data-vid");
+  if (!id) return false;
+  var src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0";
+  var st = ph.getAttribute("data-vstart"), en = ph.getAttribute("data-vend");
+  if (st != null && st !== "") src += "&start=" + Math.max(0, Math.floor(+st || 0));
+  if (en != null && en !== "" && (st == null || st === "" || +en > +st)) src += "&end=" + Math.max(0, Math.floor(+en || 0));
+  var fr = document.createElement("iframe");
+  fr.setAttribute("src", src); fr.setAttribute("loading", "lazy"); fr.setAttribute("allowfullscreen", "");
+  ph.parentNode.replaceChild(fr, ph);
+  return true;
+}
+function vidLazyFill(scope) {
+  if (!scope || !scope.querySelectorAll) return 0;
+  var list = scope.querySelectorAll(".vid-lazy"), n = 0, i;
+  for (i = 0; i < list.length; i++) {
+    var ph = list[i];
+    if (!ph.parentNode) continue;
+    /* chi chen khi khung da thay duoc: khong con nam trong <details> nao
+       dang dong (the vua mo la to nhan, the con ben trong van dong thi
+       doi — tranh chen 29 iframe cung luc khi moi mo G3). */
+    if (ph.closest("details:not([open])")) continue;
+    if (vidLazyFillOne(ph)) n++;
+  }
+  return n;
+}
+/* v117c L1: mo the <details> nao thi chen iframe that trong the do (chi
+   nhung khung da thay duoc); bam nut phat tren khung cho thi chen ngay
+   khung do. Nghe ca toggle lan click o muc document de song qua moi
+   lan render() ve lai innerHTML. */
+document.addEventListener("toggle", function (e) {
+  var t = e.target;
+  if (t && t.tagName === "DETAILS" && t.open) { try { vidLazyFill(t); } catch (err) {} }
+}, true);
+document.addEventListener("click", function (e) {
+  var b = (e.target && e.target.closest) ? e.target.closest(".vid-lazy-play") : null;
+  if (!b) return;
+  var ph = b.closest(".vid-lazy");
+  if (ph) { try { vidLazyFillOne(ph); } catch (err) {} }
+});
 function readTheoryHTML(r) {
   var seen = {}, forms = [];
   (r.questions || []).forEach(function (q) { if (q.type && !seen[q.type]) { seen[q.type] = true; forms.push(q.type); } });
@@ -11998,7 +12075,7 @@ function videoFormatStatusHTML(v) {
 var videoNewEntHTML = {};
 function videoNewDetailHTML(v) {
   return '<details class="vrow"><summary><b>' + esc(v.title) + ' (' + esc(v.channel) + ' · ' + (v.kind === "day" ? "Dạy" : "Giải trí") + ' · ' + esc(v.lang) + ' · ' + esc(v.level) + ')</b></summary>'
-    + '<iframe src="https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0" loading="lazy" allowfullscreen></iframe>'
+    + vidLazyHTML(v)
     + '<p>' + esc(v.note) + '</p>' + videoFormatStatusHTML(v) + '</details>';
 }
 function videoNewBlockHTML(track) {
@@ -12475,8 +12552,17 @@ var LISTEN_HUB_NOTE = {
 };
 function listenHubHTML(track) {
   var rows = LISTEN_HUB_ROWS[track] || LISTEN_HUB_ROWS.en;
-  var h = '<details class="card" id="listenHubCard"><summary><b>🎧 Cách luyện nghe</b></summary>';
+  var videoRow = null;
+  rows.forEach(function (r) { if (r.k === "video") videoRow = r; });
+  /* v117c L2: hang "Video co phu de that" RA NGOAI lam hang rieng trong G3,
+     thay ngay khi mo G3 — truoc day nam trong the hub (details dong san)
+     ben trong G3 (dong san) nen phai mo 2 lop moi thay. Cac hang hub khac
+     giu nguyen trong the hub. */
+  var h = "";
+  if (videoRow) h += '<div class="card" id="listenVideoRow"><div class="row"><span style="flex:1">' + videoRow.t + '</span><button class="btn" data-lhub="video" data-track="' + track + '">Vào luyện →</button></div></div>';
+  h += '<details class="card" id="listenHubCard"><summary><b>🎧 Cách luyện nghe</b></summary>';
   rows.forEach(function (r) {
+    if (r.k === "video") return;
     h += '<div class="row"><span style="flex:1">' + r.t + '</span><button class="btn" data-lhub="' + r.k + '" data-track="' + track + '">Vào luyện →</button></div>';
   });
   var note = LISTEN_HUB_NOTE[track] || "";
@@ -16477,8 +16563,8 @@ function viewPracticeZh(app) {
   html += '<details><summary><b>Ngữ pháp chặng 1–6 (' + ZH_GRAMMAR.length + ' trạm)</b></summary><div class="qblock"><p><b>Video mở đầu phần Ngữ pháp:</b></p>' + videoSlotIf("zhPractice:wordorder") + '</div>' + zhSkillPracticeHTML("gram") + '</details>';
   html += '<details><summary><b>Đọc chặng 1–6 (' + ZH_READING.length + ' bài)</b></summary>' + zhSkillPracticeHTML("read") + '</details>';
   html += listenHubHTML("zh");
-  html += '<details><summary><b>Nghe chặng 1–6 (' + ZH_LISTENING.length + ' đoạn)</b></summary><div class="qblock"><p><b>Nghe thêm (ngoài các đoạn hội thoại trong bài):</b></p>' + videoSlotIf("zhPractice:listenExtra1") + videoSlotIf("zhPractice:listenExtra2") + videoSlotIf("zhPractice:listenExtra3") + videoSlotIf("zhPractice:listenExtra4") + videoSlotIf("zhPractice:listenExtra5") + videoSlotIf("zhPractice:listenExtra6") + videoSlotIf("zhPractice:listenExtra7") + videoSlotIf("zhPractice:listenExtra8") + videoSlotIf("zhPractice:listenExtra9") + videoSlotIf("zhPractice:listenExtra10") + videoSlotIf("zhPractice:listenExtra11") + '</div>' + zhSkillPracticeHTML("listen") + '</details>';
-  html += '<details><summary><b>Luyện nghe và đọc HSK1 trong 30 ngày (29 tập — thiếu Ngày 17)</b></summary><div class="qblock"><p><b>Nghe + đọc theo ngày, từ dễ đến khó:</b></p><p class="mut">Dải gốc 30 ngày nhưng trang playlist thiếu Ngày 17 nên chỉ gắn được 29 tập. Kênh hiển thị: Listening Chinese With Me.</p>' + videoSlotIf("zhPractice:xiaoyun01") + videoSlotIf("zhPractice:xiaoyun02") + videoSlotIf("zhPractice:xiaoyun03") + videoSlotIf("zhPractice:xiaoyun04") + videoSlotIf("zhPractice:xiaoyun05") + videoSlotIf("zhPractice:xiaoyun06") + videoSlotIf("zhPractice:xiaoyun07") + videoSlotIf("zhPractice:xiaoyun08") + videoSlotIf("zhPractice:xiaoyun09") + videoSlotIf("zhPractice:xiaoyun10") + videoSlotIf("zhPractice:xiaoyun11") + videoSlotIf("zhPractice:xiaoyun12") + videoSlotIf("zhPractice:xiaoyun13") + videoSlotIf("zhPractice:xiaoyun14") + videoSlotIf("zhPractice:xiaoyun15") + videoSlotIf("zhPractice:xiaoyun16") + videoSlotIf("zhPractice:xiaoyun18") + videoSlotIf("zhPractice:xiaoyun19") + videoSlotIf("zhPractice:xiaoyun20") + videoSlotIf("zhPractice:xiaoyun21") + videoSlotIf("zhPractice:xiaoyun22") + videoSlotIf("zhPractice:xiaoyun23") + videoSlotIf("zhPractice:xiaoyun24") + videoSlotIf("zhPractice:xiaoyun25") + videoSlotIf("zhPractice:xiaoyun26") + videoSlotIf("zhPractice:xiaoyun27") + videoSlotIf("zhPractice:xiaoyun28") + videoSlotIf("zhPractice:xiaoyun29") + videoSlotIf("zhPractice:xiaoyun30") + '</div></details>';
+  html += '<details><summary><b>Nghe chặng 1–6 (' + ZH_LISTENING.length + ' đoạn)</b></summary><div class="qblock"><p><b>Nghe thêm (ngoài các đoạn hội thoại trong bài):</b></p>' + videoSlotLazyIf("zhPractice:listenExtra1") + videoSlotLazyIf("zhPractice:listenExtra2") + videoSlotLazyIf("zhPractice:listenExtra3") + videoSlotLazyIf("zhPractice:listenExtra4") + videoSlotLazyIf("zhPractice:listenExtra5") + videoSlotLazyIf("zhPractice:listenExtra6") + videoSlotLazyIf("zhPractice:listenExtra7") + videoSlotLazyIf("zhPractice:listenExtra8") + videoSlotLazyIf("zhPractice:listenExtra9") + videoSlotLazyIf("zhPractice:listenExtra10") + videoSlotLazyIf("zhPractice:listenExtra11") + '</div>' + zhSkillPracticeHTML("listen") + '</details>';
+  html += '<details><summary><b>Luyện nghe và đọc HSK1 trong 30 ngày (29 tập — thiếu Ngày 17)</b></summary><div class="qblock"><p><b>Nghe + đọc theo ngày, từ dễ đến khó:</b></p><p class="mut">Dải gốc 30 ngày nhưng trang playlist thiếu Ngày 17 nên chỉ gắn được 29 tập. Kênh hiển thị: Listening Chinese With Me.</p>' + videoSlotLazyIf("zhPractice:xiaoyun01") + videoSlotLazyIf("zhPractice:xiaoyun02") + videoSlotLazyIf("zhPractice:xiaoyun03") + videoSlotLazyIf("zhPractice:xiaoyun04") + videoSlotLazyIf("zhPractice:xiaoyun05") + videoSlotLazyIf("zhPractice:xiaoyun06") + videoSlotLazyIf("zhPractice:xiaoyun07") + videoSlotLazyIf("zhPractice:xiaoyun08") + videoSlotLazyIf("zhPractice:xiaoyun09") + videoSlotLazyIf("zhPractice:xiaoyun10") + videoSlotLazyIf("zhPractice:xiaoyun11") + videoSlotLazyIf("zhPractice:xiaoyun12") + videoSlotLazyIf("zhPractice:xiaoyun13") + videoSlotLazyIf("zhPractice:xiaoyun14") + videoSlotLazyIf("zhPractice:xiaoyun15") + videoSlotLazyIf("zhPractice:xiaoyun16") + videoSlotLazyIf("zhPractice:xiaoyun18") + videoSlotLazyIf("zhPractice:xiaoyun19") + videoSlotLazyIf("zhPractice:xiaoyun20") + videoSlotLazyIf("zhPractice:xiaoyun21") + videoSlotLazyIf("zhPractice:xiaoyun22") + videoSlotLazyIf("zhPractice:xiaoyun23") + videoSlotLazyIf("zhPractice:xiaoyun24") + videoSlotLazyIf("zhPractice:xiaoyun25") + videoSlotLazyIf("zhPractice:xiaoyun26") + videoSlotLazyIf("zhPractice:xiaoyun27") + videoSlotLazyIf("zhPractice:xiaoyun28") + videoSlotLazyIf("zhPractice:xiaoyun29") + videoSlotLazyIf("zhPractice:xiaoyun30") + '</div></details>';
   html += '<details><summary><b>Nói chặng 1–6 (' + ZH_SPEAK.length + ' kịch bản)</b></summary>' + zhSkillPracticeHTML("speak") + '</details>';
   html += '<details><summary><b>Nhập vai chặng 1–6 (' + ZH_ROLE.length + ' tình huống)</b></summary>' + zhSkillPracticeHTML("role") + '</details>';
   html += '<details><summary><b>Viết chặng 1–6 (' + ZH_WRITE.length + ' bài)</b></summary>' + zhSkillPracticeHTML("write") + '</details>';
@@ -16551,6 +16637,7 @@ function viewPracticeZh(app) {
       var st = sumText(el), id = el.id || "";
       if (id === "zhDictCard" || id === "zhFaceCard" || st.indexOf("Từ vựng chặng") === 0) put(G1, el);
       else if (st.indexOf("Ngữ pháp") === 0) put(G2, el);
+      else if (id === "listenVideoRow") put(G3, el);
       else if (id === "listenHubCard") put(G3, el);
       else if (st.indexOf("Nghe chặng") === 0 || st.indexOf("Luyện nghe và đọc HSK1") === 0) put(G3, el);
       else if (st.indexOf("Đọc chặng") === 0) put(G3, el);
@@ -19127,6 +19214,7 @@ function viewPracticeTc(app) {
       var h3 = h3Text(el), id = el.id || "";
       if (id === "tcVocabGroups") put(G1, el);
       else if (h3.indexOf("Ngữ pháp") === 0) put(G2, el);
+      else if (id === "listenVideoRow") put(G3, el);
       else if (id === "listenHubCard") put(G3, el);
       else if (h3.indexOf("Nghe Part") === 0) put(G3, el);
       else if (h3.indexOf("Đọc Part") === 0) put(G3, el);
@@ -19951,6 +20039,7 @@ function viewPracticeTp(app) {
       var h3 = h3Text(el), id = el.id || "";
       if (h3.indexOf("Hangul") === 0 || id === "tpVocabGroups") put(G1, el);
       else if (h3.indexOf("Ngữ pháp") === 0) put(G2, el);
+      else if (id === "listenVideoRow") put(G3, el);
       else if (id === "listenHubCard") put(G3, el);
       else if (h3.indexOf("Nghe dạng") === 0) put(G3, el);
       else if (h3.indexOf("Đọc dạng") === 0) put(G3, el);
