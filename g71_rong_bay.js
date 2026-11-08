@@ -263,7 +263,8 @@
     var shakeUntil = 0;
     var celebrateUntil = 0;
     var dragonY = 0;
-    var stg = G71.openStage("🐉 Rồng Bay Trên Mây", function () { running = false; });
+    var stg = G71.openStage("🐉 Rồng Bay Trên Mây", function () { running = false; },
+      "Rồng bay về phía trước không dừng, mây mang từ trôi từ phải sang trái. Chuyển làn ↑/↓ (phím/chạm) để bay vào đúng mây khớp nghĩa cho trước và né mây giông. Bay vào mây sai hoặc đâm phải mây giông thì mất tim. Mây vàng +30, vòng tốc độ ×2, combo tới ×3.");
     /* Tiêu đề hiện đủ tên trên màn hẹp: nút Thoát chỉ còn icon ✕. */
     var exitBtn = stg.el.querySelector("#g71Exit");
     if (exitBtn) { exitBtn.textContent = "✕"; exitBtn.title = "Thoát"; }
@@ -348,6 +349,8 @@
     }
     function frame(now) {
       if (!running) return;
+      /* v117 P3b: tam dung khi hop thoai "?" dang mo. */
+      if (stg.paused) { last = now; requestAnimationFrame(frame); return; }
       var dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       var W = cv.width, H = cv.height;

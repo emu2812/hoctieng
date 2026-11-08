@@ -179,6 +179,25 @@ body.has-bottombar #btnBack{display:none}
 .sb-bottom{border-top:1.5px solid var(--line2);padding-top:12px}
 .sb-profile{margin:12px 0 0}
 .app-col{min-width:0}
+/* ---- v117: CA GIAO DIEN WEB LA KHU RUNG (Bui lenh 19:05 08/11) ----
+   Chi doi LOP MY THUAT (nen, vien, tieu de, bong) — giu nguyen bo cuc,
+   chu, mau chu, nut bam, vi tri. Dung 3 anh rung da co (rung-1/2/3.jpg)
+   + bang mau ART_DIRECTION (cham + ho phach + teal). Chu luon nam tren
+   nen kem/mo de doc ro — khong dat chu truc tiep len anh rung roi. */
+:root{--forest:#14532D;--forest2:#166534;--wood:#92400E;--wood2:#B45309}
+.app-sidebar{background:linear-gradient(rgba(4,6,15,.58),rgba(4,6,15,.66)),url("assets/ronglua/rung-2.jpg") center/cover;color:#FFFBEB;box-shadow:0 12px 28px rgba(4,6,15,.35)}
+.app-sidebar h1,.app-sidebar .sb-tag,.app-sidebar .sb-profile{color:#FFFBEB}
+.app-sidebar .sb-bottom{border-top-color:rgba(255,251,235,.35)}
+.app-sidebar .home-navbtn{background:rgba(255,251,235,.94);border:1.5px solid rgba(180,83,9,.6);box-shadow:0 2px 0 rgba(146,64,14,.35)}
+.app-sidebar .home-navbtn.on{background:var(--amber);border-color:var(--amber);box-shadow:0 2px 0 rgba(146,64,14,.45)}
+.app-topbar{border-bottom-color:#D9C7A7}
+.next-card{background:linear-gradient(rgba(255,251,235,.9),rgba(255,251,235,.93)),url("assets/ronglua/rung-1.jpg") center/cover}
+.stat-strip{background:linear-gradient(rgba(255,251,235,.9),rgba(255,251,235,.93)),url("assets/ronglua/rung-3.jpg") center/cover}
+.card{border:1.5px solid rgba(20,83,45,.14)}
+.g1-cluster{border-left:6px solid var(--wood2)}
+.g1-cluster[open]{border-left-color:var(--forest2)}
+.g1-cluster>summary b{color:var(--forest)}
+#appFooter{border-top-color:#D9C7A7}
 .app-topbar{position:sticky;top:0;z-index:6;display:flex;gap:10px;align-items:center;background:var(--paper);padding:10px 0;border-bottom:1.5px solid var(--line2);min-height:66px;transition:transform .25s ease}
 body.topbar-hidden .app-topbar{transform:translateY(-100%)} /* v106d Loi 3: topbar tu an khi cuon xuong, hien lai khi cuon len */
 .app-topbar input{flex:1;min-width:0;max-width:420px}
@@ -367,16 +386,21 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <circle cx="77" cy="42" r="4" fill="#FF6B4A" opacity=".45"/>
 </symbol>
 <symbol id="msc-snake" viewBox="0 0 120 90">
-<ellipse cx="55" cy="70" rx="32" ry="13" fill="#1E9E6A"/>
-<ellipse cx="55" cy="60" rx="22" ry="10" fill="#1E9E6A"/>
-<circle cx="45" cy="68" r="4" fill="#FFC800"/><circle cx="63" cy="72" r="3" fill="#FFC800"/>
-<path d="M78 60 Q88 50 88 38" stroke="#1E9E6A" stroke-width="14" fill="none" stroke-linecap="round"/>
-<circle cx="88" cy="30" r="17" fill="#1E9E6A"/>
-<ellipse cx="98" cy="35" rx="8" ry="6" fill="#FFC800"/>
-<path d="M104 38 L114 38 M114 38 L110 34 M114 38 L110 42" stroke="#FF6B4A" stroke-width="2" fill="none" stroke-linecap="round"/>
-<circle cx="86" cy="26" r="3.5" fill="#1F2430"/><circle cx="87.2" cy="24.8" r="1.1" fill="#fff"/>
-<path d="M92 38 Q96 41 100 38" stroke="#1F2430" stroke-width="2" fill="none" stroke-linecap="round"/>
-<circle cx="78" cy="38" r="3.5" fill="#FF6B4A" opacity=".45"/>
+<!-- v117 P5d: ran ve lai TO RO — 3 vong than cuon + dau ngang cao + luoi che dai, nhan ra ngay la ran, khong lan voi rong (rong co canh/sung/chan). -->
+<ellipse cx="52" cy="74" rx="40" ry="13" fill="#1E9E6A"/>
+<ellipse cx="52" cy="74" rx="40" ry="13" fill="none" stroke="#14532D" stroke-width="2"/>
+<ellipse cx="52" cy="62" rx="30" ry="11" fill="#1E9E6A"/>
+<ellipse cx="52" cy="62" rx="30" ry="11" fill="none" stroke="#14532D" stroke-width="2"/>
+<ellipse cx="52" cy="52" rx="20" ry="9" fill="#1E9E6A"/>
+<path d="M40 74 Q52 80 64 74 M36 62 Q52 68 68 62" stroke="#FFC800" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<circle cx="42" cy="72" r="4" fill="#FFC800"/><circle cx="62" cy="76" r="3.5" fill="#FFC800"/><circle cx="58" cy="60" r="3" fill="#FFC800"/>
+<path d="M70 56 Q84 48 86 34" stroke="#1E9E6A" stroke-width="15" fill="none" stroke-linecap="round"/>
+<circle cx="88" cy="26" r="17" fill="#1E9E6A"/>
+<circle cx="88" cy="26" r="17" fill="none" stroke="#14532D" stroke-width="2"/>
+<ellipse cx="98" cy="31" rx="8" ry="6" fill="#FFC800"/>
+<path d="M103 30 L116 30 M116 30 L111 25 M116 30 L111 35" stroke="#FF6B4A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<circle cx="84" cy="21" r="4" fill="#1F2430"/><circle cx="85.5" cy="19.5" r="1.4" fill="#fff"/>
+<path d="M90 34 Q95 38 100 34" stroke="#1F2430" stroke-width="2" fill="none" stroke-linecap="round"/>
 </symbol>
 <symbol id="msc-dragon-cele" viewBox="0 -18 120 108">
 <use href="#msc-dragon"/>
@@ -1965,6 +1989,29 @@ function mascPairHTML(cele) {
   var sn = cele ? "msc-snake-cele" : "msc-snake";
   return '<div class="mascots"><svg class="dragon masc-bob" aria-hidden="true" focusable="false"><use href="#' + d + '"/></svg><svg class="snake masc-bob" aria-hidden="true" focusable="false"><use href="#' + sn + '"/></svg></div>';
 }
+/* v117 P5d: RONG - RAN DAN XEN, CHUC NANG NHU NHAU (Bui chot 19:11 08/11).
+   Xoa phan vai co dinh cu (rong = huong dan/hero, ran = chi man trong):
+   cho nao rong lam duoc thi ran cung lam duoc nhu nhau.
+   heroMascot(kind, seed, cls):
+   - "dragon" / "snake": dung con do.
+   - "pair": ca cap (mascPairHTML).
+   - "alt": luan phien ON DINH theo seed (cung seed luon ra cung con —
+     khong nhay lung tung moi lan render lai); seed thuong la tieu de
+     cua muc (vd tieu de nut lo trinh).
+   Dung cho MOI cho: huong dan, hero trang chu, man trong, chuc mung,
+   man ket qua. */
+function heroMascot(kind, seed, cls) {
+  var pick = kind;
+  if (kind === "alt") {
+    var h = 0, sd = String(seed == null ? "" : seed);
+    for (var i = 0; i < sd.length; i++) h = (h * 31 + sd.charCodeAt(i)) % 997;
+    pick = (h % 2 === 0) ? "dragon" : "snake";
+  }
+  if (pick === "pair") return mascPairHTML(false);
+  var sym = pick === "snake" ? "msc-snake" : "msc-dragon";
+  var c = cls || "sm masc-bob";
+  return '<svg class="' + pick + ' ' + c + '" aria-hidden="true" focusable="false"><use href="#' + sym + '"/></svg>';
+}
 /* Thanh dinh duoi: chi co nut Quay lai khi dang hoc; them nut chinh CHI khi
    o the tong ket (nut chinh roi khoi the, chi o thanh duoi — sua trung v2).
    Nut chinh duoc tao/xoa theo man de dem nut chinh tren toan trang luon dung. */
@@ -3425,7 +3472,7 @@ function duoNodeHTML(o) {
   var h = '<button class="' + o.cls + '" ' + o.attrs + '><span class="duo-star">' + o.star + '</span><span class="duo-label"><b>' + o.title + '</b><br><span class="mut">' + o.sub + '</span>';
   if (o.flag) h += '<br><span class="chip cl-flag">' + o.flag + '</span>';
   h += '<br><span class="duo-st">' + o.status + '</span></span>';
-  if (o.guide) h += '<svg class="duo-guide masc-bob" aria-hidden="true" focusable="false"><use href="#msc-dragon"/></svg>';
+  if (o.guide) h += heroMascot("alt", o.title, "duo-guide masc-bob");
   return h + '</button>';
 }
 function mapCupCounts() {
@@ -3726,12 +3773,23 @@ function milestonesHTML() {
    - Dễ: chip đủ từ của câu + gợi ý chữ cái đầu mỗi từ.
    - Vừa: chip chỉ từ dài (≥6 chữ cái) + gợi ý từ đầu câu.
    - Khó: không chip, không gợi ý. Nghe lại không giới hạn ở cả 3 mức. */
-function workspaceData() {
-  var v = null;
-  try { (videoNewList("en") || []).forEach(function (x) { if (x.key === "voa-break-the-news") v = x; }); } catch (e) {}
-  if (!v) v = { id: "BKNJxpdNAtY", title: "VOA: Break the News — English in a Minute", channel: "VOA Learning English" };
-  var lines = (typeof VIDEO_LINES !== "undefined" && VIDEO_LINES["voa-break-the-news"]) || [];
-  return { video: v, lines: lines };
+/* v117 P2: khung nghe chep video DUNG CHUNG 4 track — mo theo video key
+   (l.wsVideoKey); hien chi EN co phu de that (VOA). Track nao co them
+   VIDEO_LINES that thi chi can truyen wsVideoKey la co bai tap, khong
+   can sua khung. Goi khong doi so van ve VOA mac dinh. */
+function workspaceData(l) {
+  var key = (l && l.wsVideoKey) || "voa-break-the-news";
+  var v = null, track = "en";
+  try {
+    ["en", "zh", "tc", "tp"].forEach(function (tr) {
+      (videoNewList(tr) || []).forEach(function (x) { if (x.key === key) { v = x; track = tr; } });
+    });
+  } catch (e) {}
+  if (!v) v = { id: "BKNJxpdNAtY", title: "VOA: Break the News — English in a Minute", channel: "VOA Learning English", kind: "giaitri" };
+  var lines = (typeof VIDEO_LINES !== "undefined" && VIDEO_LINES[key]) || [];
+  var trackName = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[track] || "IELTS";
+  var kindLabel = (v.kind === "day") ? "Video dạy" : "Video giải trí";
+  return { video: v, lines: lines, key: key, trackName: trackName, kindLabel: kindLabel };
 }
 function wsWords(sent) { return String(sent || "").replace(/[“”"']/g, "").split(/\s+/).filter(Boolean); }
 function wsScaffold(sent, level) {
@@ -3746,57 +3804,178 @@ function wsChips(sent, level) {
   if (level === "medium") return words.filter(function (w) { return w.replace(/[^A-Za-z]/g, "").length >= 6; });
   return words.slice();
 }
+/* v117 P2: bang IPA cho cac tu trong 12 cau VOA that — chi ghi nhung tu
+   chac chan (theo phat am chuan en-GB, khop giong TTS cua web). Tu nao
+   khong co trong bang thi hien tron, KHONG doan IPA. */
+var WS_IPA = { welcome: "ˈwelkəm", to: "tuː", english: "ˈɪŋɡlɪʃ", in: "ɪn", a: "ə", minute: "ˈmɪnɪt", news: "njuːz", can: "kæn", be: "biː", any: "ˈeni", information: "ˌɪnfəˈmeɪʃn", that: "ðæt", is: "ɪz", well: "wel", new: "njuː", someone: "ˈsʌmwʌn", but: "bʌt", what: "wɒt", does: "dʌz", it: "ɪt", mean: "miːn", means: "miːnz", break: "breɪk", the: "ðə", oh: "əʊ", andrew: "ˈændruː", i: "aɪ", have: "hæv", some: "sʌm", we: "wiː", got: "ɡɒt", raise: "reɪz", and: "ənd", you: "juː", bigger: "ˈbɪɡə", biggest: "ˈbɪɡɪst", than: "ðæn", did: "dɪd", whoa: "wəʊ", "don't": "dəʊnt", want: "wɒnt", my: "maɪ", wife: "waɪf", "she'll": "ʃiːl", she: "ʃiː", mad: "mæd", "didn't": "ˈdɪdnt", get: "ɡet", one: "wʌn", worry: "ˈwʌri", will: "wɪl", tell: "tel", her: "hɜː", phrase: "freɪz", bad: "bæd", or: "ɔː", share: "ʃeə", might: "maɪt", difficult: "ˈdɪfɪkəlt", hear: "hɪə", all: "ɔːl", for: "fɔː", let: "let", me: "miː", try: "traɪ", already: "ɔːlˈredi", told: "təʊld", do: "duː", no: "nəʊ", just: "dʒʌst", opposite: "ˈɒpəzɪt", anyone: "ˈeniwʌn", of: "ɒv", at: "æt", office: "ˈɒfɪs", yay: "jeɪ", now: "naʊ", your: "jɔː" };
+/* v117 P2: chon tu de dien trong che do Luyen — tu noi dung (>=4 chu cai,
+   khong phai tu chuc nang), toi da 5 tu, cach deu nhau de phu khap cau. */
+var WS_STOP = { a: 1, an: 1, the: 1, to: 1, of: 1, in: 1, on: 1, is: 1, are: 1, was: 1, were: 1, be: 1, been: 1, i: 1, you: 1, he: 1, she: 1, it: 1, we: 1, they: 1, my: 1, your: 1, his: 1, her: 1, our: 1, their: 1, me: 1, him: 1, us: 1, them: 1, do: 1, does: 1, did: 1, have: 1, has: 1, had: 1, will: 1, would: 1, can: 1, could: 1, should: 1, and: 1, or: 1, but: 1, so: 1, that: 1, this: 1, what: 1, who: 1, when: 1, where: 1, why: 1, how: 1, not: 1, no: 1, yes: 1, oh: 1, well: 1, just: 1, now: 1, all: 1, for: 1, at: 1, by: 1, with: 1, from: 1, as: 1, than: 1, then: 1, very: 1, too: 1, some: 1, let: 1 };
+function wsGapBlanks(sent) {
+  var words = wsWords(sent);
+  var cands = [];
+  words.forEach(function (w, i) {
+    var clean = w.replace(/[^A-Za-z'’-]/g, "");
+    if (clean.length >= 4 && !WS_STOP[clean.toLowerCase()]) cands.push({ idx: i, word: clean });
+  });
+  if (!cands.length) return [];
+  if (cands.length <= 5) return cands;
+  var out = [], step = cands.length / 5;
+  for (var k = 0; k < 5; k++) out.push(cands[Math.floor(k * step)]);
+  return out;
+}
+/* v117 P2: ghi am nhai lai trong workspace — cung mau shadowRecToggle
+   (getUserMedia + MediaRecorder, luu blob URL de phat lai). */
+function wsRecToggle(l) {
+  try {
+    if (l.wsRecOn) { if (l.wsRec) l.wsRec.stop(); l.wsRecOn = false; render(); return; }
+    if (!window.MediaRecorder) { toast("Trình duyệt này không hỗ trợ ghi âm — hãy mở bằng Chrome hoặc Edge."); return; }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      var mime = ""; ["audio/webm", "audio/mp4", "audio/ogg"].forEach(function (c) { if (!mime && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(c)) mime = c; });
+      var rec = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream);
+      var chunks = [];
+      rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+      rec.onstop = function () { try { stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {} try { l.wsRecUrl = URL.createObjectURL(new Blob(chunks, { type: mime || "audio/webm" })); } catch (e) {} l.wsRecOn = false; render(); };
+      l.wsRec = rec; l.wsRecOn = true; rec.start(); render();
+    }, function () { toast("Không mở được mic — hãy cho phép quyền mic rồi thử lại."); });
+  } catch (e) { toast("Không mở được ghi âm trên máy này."); }
+}
 function renderLessonWorkspace(app, l) {
-  var d = workspaceData(), lines = d.lines;
+  var d = workspaceData(l), lines = d.lines;
   if (!lines.length) { curLesson = null; render(); return; }
   if (l.wsSi == null) l.wsSi = 0;
   if (!l.wsLevel) l.wsLevel = "medium";
+  if (!l.wsMode) l.wsMode = "dict";
+  if (l.wsAutoStop == null) l.wsAutoStop = true;
   if (!l.wsRes) l.wsRes = {};
   if (!l.wsTried) l.wsTried = {};
+  if (!l.wsGapRes) l.wsGapRes = {};
+  if (!l.wsGapMiss) l.wsGapMiss = {};
   var total = lines.length;
   if (l.wsDone) {
     var good = 0; for (var k = 0; k < total; k++) if (l.wsRes[k] === "good") good++;
     app.innerHTML = '<div class="lessonframe"><div class="row"><button class="btn" id="btnBack">← Quay lại</button><span class="chip cur">Không gian bài học</span></div>'
-      + '<p class="mut" id="wsBreadcrumb">IELTS &gt; Video giải trí &gt; ' + esc(d.video.title) + ' &gt; Nghe chép</p></div>'
+      + '<p class="mut" id="wsBreadcrumb">' + d.trackName + ' &gt; ' + d.kindLabel + ' &gt; ' + esc(d.video.title) + ' &gt; Nghe chép</p></div>'
       + '<div class="summarybox"><h2>Xong bài nghe chép video!</h2>'
       + "<p>Kết quả: " + good + "/" + total + " câu đúng ngay lần đầu.</p>"
       + '<div class="row"><button class="btn btn-primary" id="wsAgain">Làm lại bài</button><button class="btn" id="wsBack">Về Luyện tập</button></div></div>';
     wireBack();
-    $("#wsAgain").onclick = function () { l.wsDone = false; l.wsSi = 0; l.wsRes = {}; l.wsTried = {}; render(); };
+    $("#wsAgain").onclick = function () { l.wsDone = false; l.wsSi = 0; l.wsRes = {}; l.wsTried = {}; l.wsGapRes = {}; l.wsGapMiss = {}; l.wsRecUrl = ""; render(); };
     $("#wsBack").onclick = function () { backFromLesson(); };
     return;
   }
   var si = Math.min(l.wsSi, total - 1), cur = lines[si];
   var pct = Math.round(si / total * 100);
   var chips = wsChips(cur.en, l.wsLevel), scaffold = wsScaffold(cur.en, l.wsLevel);
+  var gaps = (l.wsMode === "gap") ? wsGapBlanks(cur.en) : [];
   var lvlBtn = function (lv, label) { return '<button class="btn' + (l.wsLevel === lv ? ' btn-amber' : '') + '" data-wslevel="' + lv + '">' + label + '</button>'; };
+  var modeBtn = function (m, label) { return '<button class="btn' + (l.wsMode === m ? ' btn-amber' : '') + '" data-wsmode="' + m + '">' + label + '</button>'; };
+  /* v117 P2: dai tu kem IPA duoi video cho cau hien tai — tu nao khong co
+     trong bang WS_IPA thi hien tron, khong doan. */
+  var wordsStrip = wsWords(cur.en).map(function (w) {
+    if (!/[A-Za-z]/.test(w)) return null;
+    var clean = w.replace(/[^A-Za-z'’-]/g, "").toLowerCase();
+    var ipa = WS_IPA[clean];
+    return ipa ? esc(w) + ' <span class="mut">/' + ipa + '/</span>' : esc(w);
+  }).filter(function (x) { return x !== null; }).join(" · ");
+  /* v117 P2: che do Luyen — cau co o trong de dien tu con thieu. */
+  var gapHTML = "";
+  if (l.wsMode === "gap") {
+    if (gaps.length) {
+      var gi = 0;
+      var parts = wsWords(cur.en).map(function (w, wi) {
+        var g = null;
+        for (var k = 0; k < gaps.length; k++) if (gaps[k].idx === wi) g = gaps[k];
+        if (!g) return esc(w);
+        var n = gi++;
+        return '<input type="text" class="ws-gap" data-gap="' + n + '" size="' + Math.max(3, g.word.length) + '" placeholder="' + g.word.length + ' chữ" style="padding:4px 6px">';
+      }).join(" ");
+      gapHTML = '<p><b>Điền từ còn thiếu:</b></p><p>' + parts + '</p>'
+        + '<div class="row">' + gaps.map(function (g, i) { return '<button class="btn ws-gapchip" data-gapchip="' + i + '">' + esc(g.word) + '</button>'; }).join("") + '</div>'
+        + '<p class="mut">Bấm từ gợi ý để điền vào ô trống đầu tiên, hoặc gõ trực tiếp vào từng ô.</p>';
+    } else {
+      gapHTML = '<p class="mut">Câu này quá ngắn, không có từ để điền — nghe chép cả câu như chế độ thường nhé.</p>'
+        + '<p><input type="text" id="wsInp" style="width:100%;padding:10px" placeholder="Gõ lại câu vừa nghe…"></p>';
+    }
+  }
+  var resTxt = "";
+  if (l.wsMode === "gap") {
+    if (l.wsGapRes[si]) {
+      var gm = l.wsGapMiss[si] || [];
+      resTxt = "Điền từ còn thiếu: đúng " + l.wsGapRes[si] + "." + (gm.length ? " Từ chưa đúng: " + gm.join(", ") + " — nghe lại rồi điền lại nhé." : " Tốt lắm!");
+    }
+  } else {
+    resTxt = l.wsRes[si] ? (l.wsRes[si] === "good" ? "✓ Đúng ngay lần đầu." : (l.wsRes[si] === "retry" ? "✓ Đúng khi làm lại (không tính đúng lần đầu)." : "✗ Chưa đúng — câu đúng: " + esc(cur.en))) : "";
+  }
   app.innerHTML = '<div class="lessonframe"><div class="row"><button class="btn" id="btnBack">← Quay lại</button><span class="chip cur">Không gian bài học</span></div>'
-    + '<p class="mut" id="wsBreadcrumb">IELTS &gt; Video giải trí &gt; ' + esc(d.video.title) + ' &gt; Nghe chép</p></div>'
+    + '<p class="mut" id="wsBreadcrumb">' + d.trackName + ' &gt; ' + d.kindLabel + ' &gt; ' + esc(d.video.title) + ' &gt; Nghe chép</p></div>'
     + '<div class="ws-progress"><p class="mut">Tiến độ câu ' + (si + 1) + "/" + total + " · " + pct + '%</p><div class="les-progress"><i style="width:' + pct + '%"></i></div></div>'
     + '<div class="ws-grid">'
-    + '<section class="card ws-col" id="wsMediaCol"><h3>🎬 Video</h3><div id="wsMediaBody" style="display:' + (l.wsHideMedia ? "none" : "block") + '"><iframe src="https://www.youtube-nocookie.com/embed/' + d.video.id + '?rel=0" loading="lazy" allowfullscreen></iframe><p class="mut">' + esc(d.video.title) + " (" + esc(d.video.channel) + ')</p></div><button class="btn" id="wsMediaToggle">' + (l.wsHideMedia ? "Hiện Media" : "Ẩn Media") + "</button></section>"
+    + '<section class="card ws-col" id="wsMediaCol"><h3>🎬 Video</h3><div id="wsMediaBody" style="display:' + (l.wsHideMedia ? "none" : "block") + '"><iframe src="https://www.youtube-nocookie.com/embed/' + d.video.id + '?rel=0" loading="lazy" allowfullscreen></iframe><p class="mut">' + esc(d.video.title) + " (" + esc(d.video.channel) + ')</p></div>'
+    + '<p id="wsWords"><b>Từng từ — câu ' + (si + 1) + ':</b><br>' + wordsStrip + '</p>'
+    + '<p class="mut">Từ nào không có phiên âm thì hiện trơn — chỉ ghi phiên âm đã chắc chắn.</p>'
+    + '<button class="btn" id="wsMediaToggle">' + (l.wsHideMedia ? "Hiện Media" : "Ẩn Media") + "</button></section>"
     + '<section class="card ws-col" id="wsExCol"><h3>✍️ Bài tập — Nghe chép</h3>'
-    + "<p>Mức độ: " + lvlBtn("easy", "Dễ") + " " + lvlBtn("medium", "Vừa") + " " + lvlBtn("hard", "Khó") + "</p>"
+    + "<p>Chế độ: " + modeBtn("dict", "Nghe chép cả câu") + " " + modeBtn("gap", "Luyện — điền từ còn thiếu") + "</p>"
+    + '<p><button class="btn" id="wsAutoStopBtn">⏸ Tự động dừng sau mỗi câu: ' + (l.wsAutoStop ? "Bật" : "Tắt") + '</button></p>'
+    + '<p class="mut">Bật: nghe xong 1 câu thì dừng để chép. Tắt: nghe liền sang câu tiếp theo (chỉ áp cho nút Bắt đầu; Phát lại chỉ phát câu hiện tại). Video YouTube không có mốc thời gian từng câu nên không dừng thật được trên video — phần nghe theo câu dùng giọng đọc mẫu.</p>'
+    + (l.wsMode === "gap" ? gapHTML : ("<p>Mức độ: " + lvlBtn("easy", "Dễ") + " " + lvlBtn("medium", "Vừa") + " " + lvlBtn("hard", "Khó") + "</p>"
     + (scaffold ? "<p>Bản chép gợi ý: <b>" + esc(scaffold) + "</b></p>" : '')
     + (chips.length ? "<div class=\"row\">" + chips.map(function (w, i) { return '<button class="btn ws-chip" data-wschip="' + i + '">' + esc(w) + "</button>"; }).join("") + "</div>" : '')
-    + '<p><input type="text" id="wsInp" style="width:100%;padding:10px" placeholder="Gõ lại câu vừa nghe…"></p>'
+    + '<p><input type="text" id="wsInp" style="width:100%;padding:10px" placeholder="Gõ lại câu vừa nghe…"></p>'))
     + '<div class="row"><button class="btn btn-primary" id="wsStart">▶ Bắt đầu</button><button class="btn" id="wsReplay">🔁 Phát lại</button><button class="btn btn-primary" id="wsCheck">Kiểm tra</button></div>'
+    + '<div class="row" style="margin-top:8px"><button class="btn" id="wsRec">' + (l.wsRecOn ? "⏹ Dừng ghi âm" : "🎤 Ghi âm nhại lại") + '</button>' + (l.wsRecUrl ? '<button class="btn" id="wsRecPlay">🔊 Nghe lại bản ghi của mình</button>' : '') + '</div>'
+    + (l.wsRecUrl ? '<p><audio controls src="' + esc(l.wsRecUrl) + '" style="width:100%"></audio></p>' : '')
     + '<div class="row" style="margin-top:8px">' + (si > 0 ? '<button class="btn" id="wsPrev">← Câu trước</button>' : "") + (si + 1 < total ? '<button class="btn" id="wsNext">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="wsFinish">Xem kết quả →</button>') + "</div>"
-    + '<p id="wsResult">' + (l.wsRes[si] ? (l.wsRes[si] === "good" ? "✓ Đúng ngay lần đầu." : (l.wsRes[si] === "retry" ? "✓ Đúng khi làm lại (không tính đúng lần đầu)." : "✗ Chưa đúng — câu đúng: " + esc(cur.en))) : "") + "</p></section>"
+    + '<p id="wsResult">' + resTxt + "</p></section>"
     + '<section class="card ws-col" id="wsTransCol"><h3>📖 Bản chép</h3><div id="wsTransBody" style="display:' + (l.wsHideTrans ? "none" : "block") + '"><ol>' + lines.map(function (x, i) { return "<li" + (i === si ? ' style="font-weight:700"' : "") + "><b>#" + (i + 1) + "</b> " + esc(x.en) + '<br><span class="mut">' + esc(x.vi) + "</span></li>"; }).join("") + "</ol></div><button class=\"btn\" id=\"wsTransToggle\">" + (l.wsHideTrans ? "Hiện bản chép" : "Ẩn bản chép") + "</button></section>"
     + "</div>";
   wireBack();
   $$("[data-wslevel]").forEach(function (b) { b.onclick = function () { l.wsLevel = b.dataset.wslevel; render(); }; });
+  $$("[data-wsmode]").forEach(function (b) { b.onclick = function () { l.wsMode = b.dataset.wsmode; render(); }; });
   $$("[data-wschip]").forEach(function (b) { b.onclick = function () { var inp = $("#wsInp"); if (!inp) return; var w = chips[+b.dataset.wschip]; if (w) inp.value = (inp.value ? inp.value + " " : "") + w; inp.focus(); }; });
+  $$("[data-gapchip]").forEach(function (b) { b.onclick = function () { var w = gaps[+b.dataset.gapchip]; if (!w) return; var ins = Array.prototype.slice.call(document.querySelectorAll(".ws-gap")); for (var i = 0; i < ins.length; i++) { if (!ins[i].value) { ins[i].value = w.word; break; } } }; });
   $("#wsMediaToggle").onclick = function () { l.wsHideMedia = !l.wsHideMedia; render(); };
   $("#wsTransToggle").onclick = function () { l.wsHideTrans = !l.wsHideTrans; render(); };
-  $("#wsStart").onclick = function () { try { speak(cur.en); } catch (e) {} var inp = $("#wsInp"); if (inp) inp.focus(); };
+  $("#wsAutoStopBtn").onclick = function () { l.wsAutoStop = !l.wsAutoStop; render(); };
+  var playGen = 0;
+  $("#wsStart").onclick = function () {
+    var gen = ++playGen;
+    try {
+      speak(cur.en, null, function () {
+        if (gen !== playGen) return;
+        if (l.wsAutoStop) return;
+        if (si + 1 < total) { l.wsSi = si + 1; l.wsRecUrl = ""; render(); var nx2 = $("#wsStart"); if (nx2) nx2.click(); }
+      });
+    } catch (e) {}
+    var inp = $("#wsInp"); if (inp) inp.focus();
+  };
   $("#wsReplay").onclick = function () { try { speak(cur.en); } catch (e) {} };
-  var pv = $("#wsPrev"); if (pv) pv.onclick = function () { l.wsSi = Math.max(0, si - 1); render(); };
-  var nx = $("#wsNext"); if (nx) nx.onclick = function () { l.wsSi = si + 1; render(); };
+  var pv = $("#wsPrev"); if (pv) pv.onclick = function () { l.wsSi = Math.max(0, si - 1); l.wsRecUrl = ""; render(); };
+  var nx = $("#wsNext"); if (nx) nx.onclick = function () { l.wsSi = si + 1; l.wsRecUrl = ""; render(); };
   var fn = $("#wsFinish"); if (fn) fn.onclick = function () { l.wsDone = true; render(); };
+  var rc = $("#wsRec"); if (rc) rc.onclick = function () { wsRecToggle(l); };
+  var rp = $("#wsRecPlay"); if (rp) rp.onclick = function () { var a = document.querySelector("#wsExCol audio"); if (a) { try { a.play(); } catch (e) {} } };
   var ck = $("#wsCheck");
   if (ck) ck.onclick = function () {
+    if (l.wsMode === "gap" && gaps.length) {
+      var inputs = Array.prototype.slice.call(document.querySelectorAll(".ws-gap"));
+      var goodN = 0, miss = [];
+      inputs.forEach(function (inp, i) {
+        var g = gaps[i];
+        var v = (inp.value || "").trim().toLowerCase().replace(/[^a-z'’-]/g, "");
+        var ok = v === g.word.toLowerCase();
+        inp.style.borderColor = ok ? "#147A4E" : "#DC2626";
+        inp.style.background = ok ? "#E7F6EC" : "#FDECEC";
+        if (ok) goodN++; else miss.push(g.word);
+      });
+      l.wsGapRes[si] = goodN + "/" + gaps.length;
+      l.wsGapMiss[si] = miss;
+      if (goodN === gaps.length) l.wsRes[si] = l.wsTried[si] ? "retry" : "good";
+      else { l.wsRes[si] = "wrong"; l.wsTried[si] = true; }
+      render();
+      return;
+    }
     var v = ($("#wsInp").value || "").trim();
     if (!v) { toast("Hãy gõ câu bạn nghe được trước đã."); return; }
     var ok = false;
@@ -4004,7 +4183,7 @@ function personalPathCardHTML() {
 function viewMyPath(app) {
   var html = trackSwitchHTML() + '<h2>Lộ trình riêng</h2>';
   if (typeof authState === "undefined" || !authState.user) {
-    html += '<section class="card" id="myPathGuest"><div class="hero-pair"><svg class="dragon sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-dragon"/></svg><div class="hero-text"><h3>Lộ trình riêng — Cá nhân hóa cực chi tiết</h3></div></div>'
+    html += '<section class="card" id="myPathGuest"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><h3>Lộ trình riêng — Cá nhân hóa cực chi tiết</h3></div></div>'
       + '<p class="mut">Lộ trình riêng mở khi bạn đăng nhập — khách dùng lộ trình ' + trackMeta89().roadLabel + ' chuẩn ở trang Bản đồ. Đăng nhập ở thẻ Tài khoản để mở.</p>'
       + '<button class="btn btn-primary" id="myPathLogin">Đăng nhập — sang thẻ Tài khoản</button></section>';
     app.innerHTML = html;
@@ -4522,15 +4701,15 @@ function viewPractice(app) {
   videoVOAWire();
   myListenLinkWire(app);
   listenHubWire();
-  /* v113 G1: gom Luyen tap EN thanh cum K0-K9 (slice-D §7, G1 §4b).
-     Cum = 1 <details class="card g1-cluster" data-g1="Kx">; nhom cu thanh
-     nhom con ben trong. Chi cum chua buoc tiep theo mo (luat 1-mo);
-     K0/K9 luon dong khi moi vao. */
+  /* v117 P1: gom Luyen tap EN thanh 6 nhom G1-G6 (Bui lenh 19:01 08/11).
+     Nhom = 1 <details class="card g1-cluster" data-g6="Gx">; chi gom lai,
+     khong xoa noi dung. Luat 1-mo; G5 luon dong khi moi vao (nhu K9 cu).
+     Tim bai (practiceFilterCard) + On diem yeu + Lop hoc giu ngoai nhom. */
   (function () {
     var byId = function (id) { return document.getElementById(id); };
     var mkCluster = function (key, title) {
       var d = document.createElement("details");
-      d.className = "card g1-cluster"; d.setAttribute("data-g1", key); d.id = "practice" + key;
+      d.className = "card g1-cluster"; d.setAttribute("data-g6", key); d.id = "practice" + key;
       var sm = document.createElement("summary"); var b = document.createElement("b");
       b.textContent = title; sm.appendChild(b); d.appendChild(sm); return d;
     };
@@ -4541,125 +4720,108 @@ function viewPractice(app) {
       if (!r) { r = document.createElement("div"); r.className = "row g1-row"; cl.appendChild(r); }
       r.appendChild(btn);
     };
-    var K0 = mkCluster("K0", "K0 · Tìm bài / Vào nhanh");
-    var K1 = mkCluster("K1", "K1 · Từ vựng");
-    var K2 = mkCluster("K2", "K2 · Ngữ pháp");
-    var K3 = mkCluster("K3", "K3 · Nghe");
-    var K4 = mkCluster("K4", "K4 · Đọc");
-    var K5 = mkCluster("K5", "K5 · Nói");
-    var K6 = mkCluster("K6", "K6 · Viết");
-    var K7 = mkCluster("K7", "K7 · Thi & Kiểm tra");
-    var K8 = mkCluster("K8", "K8 · Ôn điểm yếu");
-    var K9 = mkCluster("K9", "K9 · Giải trí");
-    put(K0, byId("practiceFilterCard"));
-    /* Ván thử 5 câu (u7trial): lối vào ở K0 Vào nhanh — nút này thay cho
-       #u7PlayNow cũ ở trang chủ (v113 dọn trang chủ, gỡ khỏi homeMore). */
+    var G1 = mkCluster("G1", "G1 · Từ vựng");
+    var G2 = mkCluster("G2", "G2 · Ngữ pháp");
+    var G3 = mkCluster("G3", "G3 · Luyện nghe-nói-đọc-viết");
+    var G4 = mkCluster("G4", "G4 · Thi");
+    var G5 = mkCluster("G5", "G5 · Giải trí");
+    var G6 = mkCluster("G6", "G6 · Trò chuyện AI");
+    /* Van thu 5 cau (u7trial): thi thu ngan — vao G4 Thi. */
     (function () {
       var b = document.createElement("button"); b.className = "btn"; b.id = "u7PlayNowPractice";
       b.textContent = "🎮 Chơi thử ngay (5 câu)";
       b.onclick = function () { openLesson({ type: "u7trial" }); };
       var row = document.createElement("div"); row.className = "row"; row.appendChild(b);
-      K0.appendChild(row);
+      G4.appendChild(row);
     })();
-    put(K1, byId("practiceGrpVocab"));
-    put(K2, byId("practiceGrpGram"));
-    put(K3, byId("practiceGrpListen"));
-    put(K3, byId("practiceGrpDict"));
-    put(K3, byId("practiceGrpPod"));
-    put(K4, byId("practiceGrpRead"));
-    put(K4, byId("practiceGrpStory"));
-    put(K5, byId("practiceGrpSpeak"));
-    put(K6, byId("practiceGrpWrite"));
-    put(K6, byId("practiceGrpTyping"));
-    put(K7, byId("practiceGrpExam"));
-    put(K7, byId("practiceGrpEntry"));
-    put(K8, byId("practiceGrpWeak"));
-    /* Tach hop Sach (T9): Loi Viet -> K2; Vi du doi song theo ky nang;
-       Sac thai -> K6; Format thi -> K7; roi bo hop. */
+    put(G1, byId("practiceGrpVocab"));
+    put(G2, byId("practiceGrpGram"));
+    put(G3, byId("practiceGrpListen"));
+    put(G3, byId("listenHubCard"));
+    put(G3, byId("practiceGrpDict"));
+    put(G3, byId("practiceGrpPod"));
+    put(G3, byId("practiceGrpRead"));
+    put(G3, byId("practiceGrpStory"));
+    put(G3, byId("practiceGrpSpeak"));
+    put(G3, byId("practiceGrpWrite"));
+    put(G3, byId("practiceGrpTyping"));
+    put(G4, byId("practiceGrpExam"));
+    put(G4, byId("practiceGrpEntry"));
+    /* v117: On diem yeu + Lop hoc GIU NGOAI nhom (nhu tien le) — khong put. */
+    /* Tach hop Sach (T9): Loi Viet -> G2; Vi du doi song theo ky nang
+       + Sac thai -> G3; Format thi -> G4; roi bo hop. */
     var bk = byId("bkPracticeCard");
     if (bk) {
       Array.prototype.slice.call(bk.querySelectorAll("details")).forEach(function (dt) {
         var sum = dt.querySelector("summary");
         var st = sum ? sum.textContent : "";
-        if (dt.querySelector("[data-bkerr]")) put(K2, dt);
-        else if (dt.querySelector("[data-bklife]")) {
-          if (st.indexOf("Nghe") >= 0) put(K3, dt);
-          else if (st.indexOf("Đọc") >= 0) put(K4, dt);
-          else if (st.indexOf("Nói") >= 0) put(K5, dt);
-          else if (st.indexOf("Viết") >= 0) put(K6, dt);
-          else put(K4, dt);
-        }
+        if (dt.querySelector("[data-bkerr]")) put(G2, dt);
+        else if (dt.querySelector("[data-bklife]")) put(G3, dt);
       });
-      /* T9: giu nhan "chi chang 7,5+" cua Sac thai khi tach hop — dua ca tieu de + ghi chu vao K6 cung nut. */
-      Array.prototype.slice.call(bk.querySelectorAll("h4")).forEach(function (h) { if (h.textContent.indexOf("Sắc thái") >= 0) K6.appendChild(h); });
-      Array.prototype.slice.call(bk.querySelectorAll("p.mut")).forEach(function (p) { if (p.textContent.indexOf("chỉ ở chặng 7,5+") >= 0) K6.appendChild(p); });
-      Array.prototype.slice.call(bk.querySelectorAll("[data-bktone]")).forEach(function (btn) { rowInto(K6, btn); });
-      Array.prototype.slice.call(bk.querySelectorAll(".qblock")).forEach(function (qb) { put(K7, qb); });
+      /* T9: giu nhan "chi chang 7,5+" cua Sac thai khi tach hop — dua ca tieu de + ghi chu vao G3 cung nut. */
+      Array.prototype.slice.call(bk.querySelectorAll("h4")).forEach(function (h) { if (h.textContent.indexOf("Sắc thái") >= 0) G3.appendChild(h); });
+      Array.prototype.slice.call(bk.querySelectorAll("p.mut")).forEach(function (p) { if (p.textContent.indexOf("chỉ ở chặng 7,5+") >= 0) G3.appendChild(p); });
+      Array.prototype.slice.call(bk.querySelectorAll("[data-bktone]")).forEach(function (btn) { rowInto(G3, btn); });
+      Array.prototype.slice.call(bk.querySelectorAll(".qblock")).forEach(function (qb) { put(G4, qb); });
     }
     var bkWrap = byId("practiceGrpBk"); if (bkWrap) bkWrap.remove();
-    /* Tach hop Luyen moi GĐ2/GĐ3: tron de -> K7, cloze + Analyzer -> K5,
-       video-danh-dau-khong-biet -> K3; roi bo hop. */
+    /* Tach hop Luyen moi GĐ2/GĐ3: tron de -> G4, cloze + Analyzer +
+       video-danh-dau-khong-biet -> G3; roi bo hop. */
     var gd = byId("gd23Practice");
     if (gd) {
-      rowInto(K7, gd.querySelector("[data-mixedquiz]"));
-      rowInto(K5, gd.querySelector("[data-clozespeak]"));
-      rowInto(K5, gd.querySelector("[data-speechanalyzer]"));
-      rowInto(K3, gd.querySelector("[data-videounknown]"));
+      rowInto(G4, gd.querySelector("[data-mixedquiz]"));
+      rowInto(G3, gd.querySelector("[data-clozespeak]"));
+      rowInto(G3, gd.querySelector("[data-speechanalyzer]"));
+      rowInto(G3, gd.querySelector("[data-videounknown]"));
       gd.remove();
     }
-    /* Tach Tro giang: nut Speaking -> K5, nut Writing -> K6; roi bo hop. */
-    var tu = byId("practiceGrpTutor");
-    if (tu) {
-      rowInto(K5, tu.querySelector('[data-spectutor="speak"]'));
-      rowInto(K6, tu.querySelector('[data-spectutor="write"]'));
-      tu.remove();
-    }
+    /* v117: Tro giang AI NGUYEN THE vao G6 (khong tach nut nua); Gia su AI
+       them vao G6 qua the tutorCard. */
+    put(G6, byId("practiceGrpTutor"));
+    var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("en");
+    if (tc6.firstChild) put(G6, tc6.firstChild);
     /* Bo tro chuong 1 (T4): 6 nut trung 100% buoc chuong 1 o Ban do — TRU nut
        Phat am 44 am (mo bang phat am, khong phai buoc chuong 1) thi chuyen
-       vao K5 Noi thay vi xoa. */
+       vao G3 thay vi xoa. */
     var sup = byId("practiceGrpSupport");
-    if (sup) { rowInto(K5, sup.querySelector('[data-practice="pron1"]')); sup.remove(); }
+    if (sup) { rowInto(G3, sup.querySelector('[data-practice="pron1"]')); sup.remove(); }
     var stg = byId("ppStage"); if (stg) stg.remove();
     var head = byId("ppSkillHead"); if (head) head.remove();
     ["ppWeakSlot", "ppExamSlot"].forEach(function (id) { var e = byId(id); if (e) e.remove(); });
-    /* Link tu gan + video mau thu 4 dang (trong Video moi) -> K3 Nghe. */
-    var vn = byId("videoNewCarden");
-    if (vn) {
-      put(K3, byId("myListenLinkBox"));
-      var qb2 = vn.querySelector(".qblock");
-      if (qb2 && qb2.textContent.indexOf("Video mẫu thử") >= 0) put(K3, qb2);
-      put(K9, vn);
-    }
-    put(K9, byId("u7PlayCardPractice"));
-    /* Xep cum theo thu tu K0-K9 ngay sau the Tiep theo; Lop hoc giu lai
-       cuoi trang, ngoai luong K (T5 — chua co cho tuong duong o Ban do). */
-    var anchor = byId("practiceNextCard");
-    [K0, K1, K2, K3, K4, K5, K6, K7, K8, K9].forEach(function (cl) {
+    /* v117: Video moi NGUYEN THE vao G3 (link tu gan + video mau nam trong
+       the) — khong tach myListenLinkBox hay qblock mau nua. */
+    put(G3, byId("videoNewCarden"));
+    put(G5, byId("u7PlayCardPractice"));
+    /* Xep cum theo thu tu G1-G6 ngay sau the Tim bai; Lop hoc giu lai
+       cuoi trang, ngoai luong nhom (T5). */
+    var anchor = byId("practiceFilterCard") || byId("practiceNextCard");
+    [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
     });
     var cls = byId("practiceGrpClass");
     if (cls && anchor && anchor.parentNode) anchor.parentNode.insertBefore(cls, anchor.nextSibling);
-    /* Luat 1-mo: chi cum chua buoc tiep theo mo; K0/K9 luon dong. */
+    /* Luat 1-mo: chi nhom chua buoc tiep theo mo; G5 luon dong khi moi vao.
+       review -> mo truc tiep the On diem yeu (ngoai nhom). */
     var nk = null;
     if (pT) {
-      if (pT.kind === "review") nk = "K8";
-      else if (pT.kind === "test") nk = "K7";
+      if (pT.kind === "review") { var pw = byId("practiceGrpWeak"); if (pw) pw.open = true; }
+      else if (pT.kind === "test") nk = "G4";
       else {
         var tt = (pT.type || "") + " " + (pT.title || "");
-        if (/Từ vựng|Lớp học/i.test(tt)) nk = "K1";
-        else if (/Ngữ pháp/i.test(tt)) nk = "K2";
-        else if (/Nghe|Shadowing|nghe chép/i.test(tt)) nk = "K3";
-        else if (/Đọc/i.test(tt)) nk = "K4";
-        else if (/Nói|nhập vai|Phát âm/i.test(tt)) nk = "K5";
-        else if (/Viết|Gõ câu/i.test(tt)) nk = "K6";
-        else if (/Kiểm tra|Thi thử|thi/i.test(tt)) nk = "K7";
+        if (/Từ vựng|Lớp học/i.test(tt)) nk = "G1";
+        else if (/Ngữ pháp/i.test(tt)) nk = "G2";
+        else if (/Nghe|Shadowing|nghe chép/i.test(tt)) nk = "G3";
+        else if (/Đọc/i.test(tt)) nk = "G3";
+        else if (/Nói|nhập vai|Phát âm/i.test(tt)) nk = "G3";
+        else if (/Viết|Gõ câu/i.test(tt)) nk = "G3";
+        else if (/Kiểm tra|Thi thử|thi/i.test(tt)) nk = "G4";
       }
     }
-    [K0, K1, K2, K3, K4, K5, K6, K7, K8, K9].forEach(function (cl) {
-      cl.open = (nk && cl.getAttribute("data-g1") === nk);
+    [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
+      cl.open = (nk && cl.getAttribute("data-g6") === nk);
       cl.addEventListener("toggle", function (e) {
         if (e.target !== cl || !cl.open) return;
-        [K0, K1, K2, K3, K4, K5, K6, K7, K8, K9].forEach(function (o) { if (o !== cl) o.open = false; });
+        [G1, G2, G3, G4, G5, G6].forEach(function (o) { if (o !== cl) o.open = false; });
       });
     });
   })();
@@ -4675,6 +4837,10 @@ function viewPractice(app) {
   var stn = $("#speakToNative"); if (stn) stn.onclick = function () { go("native"); };
   $$("[data-spectutor]").forEach(function (btn) {
     btn.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "specTutor", tutorKind: btn.dataset.spectutor }); };
+  });
+  /* v117 P1: nut Mo Gia su AI (the tutorCard, nhom G6) — mo khung chat noi. */
+  $$("[data-tutorfloat]").forEach(function (btn) {
+    btn.onclick = function () { tutorFloatOpen(); };
   });
   var openSkill = function (type, key, extra) {
     lessonStart = Date.now(); runWrong = []; runFirstTry = {};
@@ -4856,7 +5022,7 @@ function viewReview(app) {
   html += '<section class="card"><h3>Đánh giá quá trình</h3><p><b>Nhiệm vụ thực chiến:</b> Tình huống đời sống — xử lý việc thật bằng tiếng Anh (mở ở tab Luyện tập, mục Tình huống đời sống).</p><div class="row"><button class="btn" id="reviewToPracticeBk">Mở Tình huống đời sống ở Luyện tập →</button></div></section>';
   html += gd23UnsureHTML();
   html += u8SavedPhrasesHTML();
-  if (!cards.length && !hards.length) html += '<section class="card"><div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="reviewNextStep">Học tiếp bước kế tiếp</button><button class="btn" id="reviewRoadmap">Xem lộ trình</button></div></section>';
+  if (!cards.length && !hards.length) html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="reviewNextStep">Học tiếp bước kế tiếp</button><button class="btn" id="reviewRoadmap">Xem lộ trình</button></div></section>';
   app.innerHTML = html;
   g1ReviewRegroup(app, "reviewStartCard");
   var rns = $("#reviewNextStep"); if (rns) rns.onclick = function () { openSessionTarget(sessionTarget()); };
@@ -5168,16 +5334,16 @@ function trackLevelHTML89() {
         + '<button class="btn" id="levelWeakBtn">Luyện phần yếu nhất</button></section>';
     } else {
       levelHTML = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
-        + '<div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Chưa có bài kiểm tra — bạn chưa làm bài kiểm tra cuối chương nào.</p></div></div>'
+        + '<div class="hero-pair">' + heroMascot("dragon") + '<div class="hero-text"><p>Chưa có bài kiểm tra — bạn chưa làm bài kiểm tra cuối chương nào.</p></div></div>'
         + '<p class="mut">Làm bài kiểm tra cuối chương 1 ở Lộ trình để xem mức độ của mình (band ước lượng + % từng phần + phần yếu nhất).</p></section>';
     }
     return levelHTML;
   }
-  var snake = '<div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Chưa có bài kiểm tra — bạn chưa làm kiểm tra cuối chặng nào.</p></div></div>';
+  var examHero = '<div class="hero-pair">' + heroMascot("dragon") + '<div class="hero-text"><p>Chưa có bài kiểm tra — bạn chưa làm kiểm tra cuối chặng nào.</p></div></div>';
   if (t === "zh") {
     var passed = 0; Object.keys(state.zhChapterTestDone || {}).forEach(function (k) { if (state.zhChapterTestDone[k]) passed++; });
     var mocks = state.zhMockTests || [];
-    if (!mocks.length && !passed) return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + snake + '<p class="mut">Làm kiểm tra cuối chặng HSK ở Bản đồ để xem mức độ tiếng Trung của mình (đúng/sai từng phần + phần yếu nhất).</p></section>';
+    if (!mocks.length && !passed) return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + examHero + '<p class="mut">Làm kiểm tra cuối chặng HSK ở Bản đồ để xem mức độ tiếng Trung của mình (đúng/sai từng phần + phần yếu nhất).</p></section>';
     var h = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
       + '<p><b>Đã qua kiểm tra cuối chặng: ' + passed + '/6 chặng</b> <span class="mut">(mỗi phần cần từ 50% đúng lần đầu mới tính qua)</span></p>';
     if (mocks.length) { var m = mocks[mocks.length - 1]; h += '<p><b>' + zhMockLine89(m) + '</b></p><p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p>'; }
@@ -5191,7 +5357,7 @@ function trackLevelHTML89() {
   if (!mk.length && !ck[0]) {
     var emptyTxt = isTc ? "Làm kiểm tra cuối chặng TOEIC ở Bản đồ để xem mức độ của mình (đúng/sai từng phần + phần yếu nhất)."
       : "Làm kiểm tra cuối chặng TOPIK ở Bản đồ để xem mức độ tiếng Hàn của mình (đúng/sai từng phần + phần yếu nhất).";
-    return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + snake + '<p class="mut">' + emptyTxt + '</p></section>';
+    return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + examHero + '<p class="mut">' + emptyTxt + '</p></section>';
   }
   var h2 = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
     + '<p><b>Đã qua kiểm tra cuối chặng: ' + ck[0] + '/' + ck[1] + ' chặng</b></p>';
@@ -11813,7 +11979,10 @@ function videoNewList(track) {
   return reg.filter(function (v) { return v.track === track; });
 }
 function videoFormatStatusHTML(v) {
-  if (v.kind === "day") return '';
+  /* v117 P2: video day chua co phu de that thi chi xem — ghi ro trang thai
+     (truoc day tra ve rong). Video giai tri khong dong thi giu rong vi
+     dau the Video moi da co nhan chung. */
+  if (v.kind === "day") return '<p class="mut">Chưa có bài tập — đang chờ phụ đề thật.</p>';
   var vlines = (typeof VIDEO_LINES !== "undefined") ? VIDEO_LINES[v.key] : null;
   if (vlines && vlines.length) return '<p class="mut"><b>Đã có đủ 4 dạng bài thật.</b></p><div class="row"><button class="btn" data-vvideo="' + v.key + '" data-vkind="dictation">🎧 Nghe chép theo câu</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="shadow">🎤 Shadowing Xem/Luyện</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="story">📖 Truyện song ngữ + kiểm tra hiểu</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="podcast">🎙️ Podcast transcript từng câu</button></div>';
   return ''; /* v113 B-P3: dong trang thai "chua co" lap duoi moi video — chi giu 1 nhan chung o dau khoi giai tri. */
@@ -12269,13 +12438,40 @@ var LISTEN_HUB_ROWS = {
     { k: "link", t: "Link tự gắn" }
   ]
 };
+/* v117 P1 (lech 2): ghi ro vi sao track nay thieu cach luyen — khong lang
+   le vang mat. EN du 7 hang nen khong co ghi chu thieu. */
+var LISTEN_HUB_NOTE = {
+  en: "",
+  zh: "Track tiếng Trung chưa có Nghe chép chính tả, Shadowing (10 bước) và Podcast — đang chờ phụ đề thật tiếng Trung. Bài tập 4 dạng bài qua video hiện chỉ mở được với video có phụ đề thật (hiện chỉ có video VOA tiếng Anh).",
+  tc: "Track TOEIC chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật. Bài tập 4 dạng bài qua video hiện chỉ mở được với video có phụ đề thật (hiện chỉ có video VOA tiếng Anh).",
+  tp: "Track TOPIK chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật. Bài tập 4 dạng bài qua video hiện chỉ mở được với video có phụ đề thật (hiện chỉ có video VOA tiếng Anh)."
+};
 function listenHubHTML(track) {
   var rows = LISTEN_HUB_ROWS[track] || LISTEN_HUB_ROWS.en;
   var h = '<details class="card" id="listenHubCard"><summary><b>🎧 Cách luyện nghe</b></summary>';
   rows.forEach(function (r) {
     h += '<div class="row"><span style="flex:1">' + r.t + '</span><button class="btn" data-lhub="' + r.k + '" data-track="' + track + '">Vào luyện →</button></div>';
   });
+  var note = LISTEN_HUB_NOTE[track] || "";
+  if (note) h += '<p class="mut">Chưa có ở track này: ' + note + '</p>';
   h += '<p class="mut">Câu đã nhại được / chép đúng vào hàng đợi ôn; câu yếu vào Sổ lỗi sai — xem ở tab Ôn tập.</p></details>';
+  return h;
+}
+/* v117 P1 (lech 8): the Tro chuyen AI (nhom G6) — dung chung 4 track.
+   - Gia su AI (khung chat noi, tutorFloatOpen) co o ca 4 track.
+   - Tro giang AI (nang cap bai Noi/Viet, data-spectutor) hien chi co noi
+     dung IELTS nen chi EN co 2 nut that; ZH/TC/TP ghi ro dang cho nang
+     cap cho track do (khong dat nut chet). */
+function tutorCardHTML(track) {
+  var h = '<details class="card" id="tutorCard' + track + '"><summary><b>🤖 Trò chuyện AI</b></summary>';
+  h += '<p class="mut">Trò chuyện với gia sư AI để hỏi bài, luyện nói, và nhận gợi ý học riêng cho bạn.</p>';
+  h += '<div class="row"><button class="btn btn-amber" data-tutorfloat="' + track + '">💬 Mở Gia sư AI</button></div>';
+  if (track === "en") {
+    h += '<p class="mut">Trợ giảng AI (nâng cấp bài Nói/Viết) ở thẻ "Trợ giảng" ngay trong nhóm này.</p>';
+  } else {
+    h += '<p class="mut">Trợ giảng AI chấm Nói/Viết hiện chỉ có ở track IELTS — đang chờ nâng cấp cho track này.</p>';
+  }
+  h += '</details>';
   return h;
 }
 function listenHubFirstUndoneEN(kind, arr) {
@@ -12290,12 +12486,14 @@ function listenHubScrollTo(el) {
 function listenHubGo(track, key) {
   var i, idx;
   if (key === "video") {
-    var k9 = document.querySelector('[data-g1="K9"]');
-    if (k9) k9.open = true;
+    var g3v = document.querySelector('[data-g6="G3"]');
+    if (g3v) g3v.open = true;
     listenHubScrollTo(document.getElementById("videoNewCard" + track));
     return;
   }
   if (key === "link") {
+    var g3l = document.querySelector('[data-g6="G3"]');
+    if (g3l) g3l.open = true;
     listenHubScrollTo(document.getElementById("myListenLinkBox"));
     var inp = document.getElementById("myLinkUrl");
     if (inp) { try { inp.focus(); } catch (e) {} }
@@ -12514,7 +12712,7 @@ function renderShadowListen(app, l, item, isLong) {
 /* ---------- Lọc 3 trục + mục tiêu thi ở trang Luyện tập (mới) ---------- */
 function practiceFilterHTML(extra) {
   var bandOpts = '<option value="">Mọi trình độ</option>' + RB_CHAPTER_MAP.map(function (ch) { return '<option value="' + esc(ch.band) + '">' + esc(ch.band) + ' — ' + esc(ch.title) + '</option>'; }).join("");
-  return '<details class="card" id="practiceFilterCard"><summary><b>K0 · Tìm bài / Vào nhanh</b></summary><h3>🔎 Tìm bài theo kỹ năng, chủ đề, trình độ, mục tiêu thi</h3>'
+  return '<details class="card" id="practiceFilterCard"><summary><b>🔎 Tìm bài / Vào nhanh</b></summary><h3>🔎 Tìm bài theo kỹ năng, chủ đề, trình độ, mục tiêu thi</h3>'
     + '<p class="mut">Vào nhanh theo loại bài, hoặc lọc kho bài tự soạn theo kỹ năng, chặng và cấp độ — kết quả hiện ngay dưới đây. Lọc chỉ để tìm bài luyện thêm, không đổi lộ trình đan xen và số bước mỗi chặng.</p>'
     + (extra || "")
     + '<div class="row"><select id="pfSkill"><option value="">Mọi kỹ năng</option><option value="Từ vựng">Từ vựng</option><option value="Ngữ pháp">Ngữ pháp</option><option value="Đọc">Đọc</option><option value="Nghe">Nghe</option><option value="Nói">Nói</option><option value="Viết">Viết</option><option value="Gõ câu">Gõ câu</option><option value="Nghe chép">Nghe chép</option><option value="Shadowing">Shadowing</option><option value="Truyện ngắn">Truyện ngắn</option><option value="Podcast">Podcast</option></select> '
@@ -16283,75 +16481,81 @@ function viewPracticeZh(app) {
   myListenLinkWire(app);
   wireZhHskk();
   wireZhDictStroke(app);
-  /* v113 G1: gom Luyen tap ZH thanh cum K0-K9 (G1 §4b). */
+  /* v117 P1: gom Luyen tap ZH thanh 6 nhom G1-G6 (Bui lenh 19:01 08/11).
+     Chi gom lai, khong xoa noi dung. Luat 1-mo; G5 luon dong khi moi vao.
+     Vao nhanh (typeEntryRow) + On diem yeu giu ngoai nhom. */
   (function () {
     var byId = function (id) { return document.getElementById(id); };
     var mkCluster = function (key, title) {
       var d = document.createElement("details");
-      d.className = "card g1-cluster"; d.setAttribute("data-g1", key);
+      d.className = "card g1-cluster"; d.setAttribute("data-g6", key);
       var sm = document.createElement("summary"); var b = document.createElement("b");
       b.textContent = title; sm.appendChild(b); d.appendChild(sm); return d;
     };
     var put = function (cl, el) { if (cl && el) cl.appendChild(el); };
     var oneOpen = function (list, nk) {
       list.forEach(function (cl) {
-        cl.open = (nk && cl.getAttribute("data-g1") === nk);
+        cl.open = (nk && cl.getAttribute("data-g6") === nk);
         cl.addEventListener("toggle", function (e) {
           if (e.target !== cl || !cl.open) return;
           list.forEach(function (o) { if (o !== cl) o.open = false; });
         });
       });
     };
-    var K0 = mkCluster("K0", "K0 · Tìm bài / Vào nhanh");
-    var K1 = mkCluster("K1", "K1 · Từ vựng");
-    var K2 = mkCluster("K2", "K2 · Ngữ pháp");
-    var K3 = mkCluster("K3", "K3 · Nghe");
-    var K4 = mkCluster("K4", "K4 · Đọc");
-    var K5 = mkCluster("K5", "K5 · Nói");
-    var K6 = mkCluster("K6", "K6 · Viết");
-    var K7 = mkCluster("K7", "K7 · Thi & Kiểm tra");
-    var K8 = mkCluster("K8", "K8 · Ôn điểm yếu");
-    var K9 = mkCluster("K9", "K9 · Giải trí");
-    K8.innerHTML += '<p class="mut">Sổ lỗi sai + thẻ đến hạn ở tab Ôn tập.</p>';
+    var G1 = mkCluster("G1", "G1 · Từ vựng");
+    var G2 = mkCluster("G2", "G2 · Ngữ pháp");
+    var G3 = mkCluster("G3", "G3 · Luyện nghe-nói-đọc-viết");
+    var G4 = mkCluster("G4", "G4 · Thi");
+    var G5 = mkCluster("G5", "G5 · Giải trí");
+    var G6 = mkCluster("G6", "G6 · Trò chuyện AI");
+    /* On diem yeu: the rieng ngoai nhom — nut ve tab On tap. */
+    var weakCard = document.createElement("details");
+    weakCard.className = "card"; weakCard.id = "zhWeakCard";
+    weakCard.innerHTML = '<summary><b>🎯 Ôn điểm yếu</b></summary><p class="mut">Sổ lỗi sai + thẻ đến hạn ở tab Ôn tập.</p>';
     var k8b = document.createElement("button"); k8b.className = "btn";
     k8b.textContent = "Mở buổi Ôn điểm yếu →";
-    k8b.onclick = function () { go("review"); }; K8.appendChild(k8b);
+    k8b.onclick = function () { go("review"); }; weakCard.appendChild(k8b);
     var sumText = function (el) { var sm = el.querySelector("summary"); return sm ? sm.textContent : ""; };
     var kids = Array.prototype.slice.call(app.children);
     kids.forEach(function (el) {
-      if (el.id === "zhPracticeNextCard" || el.tagName === "H2") return;
+      if (el.id === "zhPracticeNextCard" || el.id === "typeEntryRow" || el.tagName === "H2") return;
       var st = sumText(el), id = el.id || "";
-      if (id === "typeEntryRow") put(K0, el);
-      else if (id === "zhDictCard" || id === "zhFaceCard" || st.indexOf("Từ vựng chặng") === 0) put(K1, el);
-      else if (st.indexOf("Ngữ pháp") === 0) put(K2, el);
-      else if (id === "listenHubCard") put(K3, el);
-      else if (st.indexOf("Nghe chặng") === 0 || st.indexOf("Luyện nghe và đọc HSK1") === 0) put(K3, el);
-      else if (st.indexOf("Đọc chặng") === 0) put(K4, el);
-      else if (st.indexOf("Mạch pinyin") === 0 || st.indexOf("Nói chặng") === 0 || st.indexOf("Nhập vai") === 0) put(K5, el);
-      else if (id === "zhStrokeCard" || st.indexOf("Viết chặng") === 0) put(K6, el);
-      else if (st.indexOf("🎓 Thi") === 0 || st.indexOf("HSKK") === 0) put(K7, el);
-      else if (el.querySelector("#zhPracticeEntryBtn")) put(K7, el);
-      else if (id === "zhGameCardPractice") put(K9, el);
-      else if (id === "videoNewCardzh") { put(K3, byId("myListenLinkBox")); put(K9, el); }
+      if (id === "zhDictCard" || id === "zhFaceCard" || st.indexOf("Từ vựng chặng") === 0) put(G1, el);
+      else if (st.indexOf("Ngữ pháp") === 0) put(G2, el);
+      else if (id === "listenHubCard") put(G3, el);
+      else if (st.indexOf("Nghe chặng") === 0 || st.indexOf("Luyện nghe và đọc HSK1") === 0) put(G3, el);
+      else if (st.indexOf("Đọc chặng") === 0) put(G3, el);
+      else if (st.indexOf("Mạch pinyin") === 0 || st.indexOf("Nói chặng") === 0 || st.indexOf("Nhập vai") === 0) put(G3, el);
+      else if (id === "zhStrokeCard" || st.indexOf("Viết chặng") === 0) put(G3, el);
+      else if (st.indexOf("🎓 Thi") === 0 || st.indexOf("HSKK") === 0) put(G4, el);
+      else if (el.querySelector("#zhPracticeEntryBtn")) put(G4, el);
+      else if (id === "zhGameCardPractice") put(G5, el);
+      else if (id === "videoNewCardzh") put(G3, el);
     });
-    var anchor = byId("zhPracticeNextCard");
-    [K0, K1, K2, K3, K4, K5, K6, K7, K8, K9].forEach(function (cl) {
+    /* v117: the Tro chuyen AI (Gia su AI + ghi chu Tro giang) vao G6. */
+    var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("zh");
+    if (tc6.firstChild) put(G6, tc6.firstChild);
+    var anchor = byId("typeEntryRow") || byId("zhPracticeNextCard");
+    [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
     });
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(weakCard, anchor.nextSibling);
     var nk = null;
     if (typeof t !== "undefined" && t) {
       var tt = (t.type || "") + " " + (t.title || "");
-      if (/Pinyin/i.test(tt)) nk = "K5";
-      else if (/Từ vựng/i.test(tt)) nk = "K1";
-      else if (/Ngữ pháp/i.test(tt)) nk = "K2";
-      else if (/Nghe/i.test(tt)) nk = "K3";
-      else if (/Đọc/i.test(tt)) nk = "K4";
-      else if (/Nói|Nhập vai/i.test(tt)) nk = "K5";
-      else if (/Viết/i.test(tt)) nk = "K6";
-      else if (/HSKK|Thi/i.test(tt)) nk = "K7";
-      else if (/Ôn tập/i.test(tt)) nk = "K8";
+      if (/Pinyin/i.test(tt)) nk = "G3";
+      else if (/Từ vựng/i.test(tt)) nk = "G1";
+      else if (/Ngữ pháp/i.test(tt)) nk = "G2";
+      else if (/Nghe/i.test(tt)) nk = "G3";
+      else if (/Đọc/i.test(tt)) nk = "G3";
+      else if (/Nói|Nhập vai/i.test(tt)) nk = "G3";
+      else if (/Viết/i.test(tt)) nk = "G3";
+      else if (/HSKK|Thi/i.test(tt)) nk = "G4";
+      else if (/Ôn tập/i.test(tt)) weakCard.open = true;
     }
-    oneOpen([K0, K1, K2, K3, K4, K5, K6, K7, K8, K9], nk);
+    oneOpen([G1, G2, G3, G4, G5, G6], nk);
+    /* v117: nut Mo Gia su AI (the tutorCard, nhom G6). */
+    Array.prototype.slice.call(document.querySelectorAll("[data-tutorfloat]")).forEach(function (b) { b.onclick = function () { tutorFloatOpen(); }; });
   })();
   (function () { var jobs = [{ id: "zhGameCardPractice", html: zhPracticeEntHTML, wire: zhPracticeEntWire }]; if (videoNewEntHTML["zh"]) jobs.push({ id: "videoNewEntzh", html: function () { return videoNewEntHTML["zh"]; }, wire: null }); practiceEntLazy("zh", jobs); })();
 }
@@ -16465,7 +16669,7 @@ function renderZhReviewSession(app, l) {
   if (!l.qsBuilt) { l.qsBuilt = true; l.qs = zhReviewSessionQuestions(); l.qi = 0; l.score = 0; l.picked = -1; l.graduated = 0; l.lastOk = false; l.lastDone = false; }
   var head = lessonHead({ title: "Buổi ôn trộn · Tiếng Trung", type: "Tiếng Trung · Ôn tập" });
   if (!l.qs.length) {
-    app.innerHTML = head + '<div class="qblock"><div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Hôm nay không còn mục nào đến hạn để trộn thành phiên — sang tab Ôn tập ôn từng mục nhé.</p></div></div><p><button class="btn btn-primary" id="zhRevToReview">Về Ôn tập</button></p></div>';
+    app.innerHTML = head + '<div class="qblock"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không còn mục nào đến hạn để trộn thành phiên — sang tab Ôn tập ôn từng mục nhé.</p></div></div><p><button class="btn btn-primary" id="zhRevToReview">Về Ôn tập</button></p></div>';
     wireBack(); var zr = $("#zhRevToReview"); if (zr) zr.onclick = function () { backFromLesson(); go("review"); }; return;
   }
   if (l.qi >= l.qs.length) {
@@ -16565,7 +16769,7 @@ function viewReviewZh(app) {
     if (bookReviewing.length) { html += '<h4>Thẻ đang ôn (' + bookReviewing.length + ')</h4>'; bookReviewing.forEach(function (k) { html += zhHardItemHTML(k, state.zhHard[k], false); }); }
     html += '</section><div class="row"><button class="' + (due.length ? 'btn' : 'btn btn-primary') + '" id="zhReviewNextBtn">Học tiếp bước kế tiếp</button></div>';
   }
-  if (!due.length && items.length) html += '<section class="card"><div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div></section>';
+  if (!due.length && items.length) html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div></section>';
   var zhMock90 = state.zhMockTests || [];
   html += '<section class="card"><h3>Mốc đã thi thử</h3><p class="mut">Xem ở Của tôi → Tiến trình.</p>' + (zhMock90.length ? '' : '<p class="mut">Chưa có mốc thi thử nào — thi thử HSK ở Bản đồ, mốc sẽ hiện ở đây.</p>') + '<p><b>Luyện HSKK:</b> thi nói riêng theo cấp (Sơ cấp / Trung cấp / Cao cấp) — xem ở Luyện tập, cụm Thi &amp; Kiểm tra.</p><div class="row"><button class="btn" id="zhReviewToMineMock">Xem mốc ở Của tôi →</button> <button class="btn" id="zhReviewToHskk">Luyện HSKK ở Luyện tập →</button></div></section>';
   html += '<section class="card"><h3>🎬 Video ôn thêm (HSK1)</h3><p class="mut">Ôn từ vựng bằng video — xem cho vui mà vẫn ôn, không tính điểm, không gắn vào từng thẻ.</p>' + videoSlotIf("zhReview:words300") + videoSlotIf("zhReview:family") + videoSlotIf("zhReview:objects") + '</section>';
@@ -16573,7 +16777,7 @@ function viewReviewZh(app) {
 
 
   if (!items.length) {
-    html += '<section class="card"><div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Chưa có thẻ tiếng Trung nào đánh dấu khó.</p><p class="mut">Học tiếp chặng tiếng Trung, thẻ nào khó thì bấm "Đánh dấu khó" — thẻ sẽ về đây.</p></div></div><div class="row"><button class="btn btn-primary" id="zhReviewNextBtn">Học tiếp bước kế tiếp</button></div></section>';
+    html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Chưa có thẻ tiếng Trung nào đánh dấu khó.</p><p class="mut">Học tiếp chặng tiếng Trung, thẻ nào khó thì bấm "Đánh dấu khó" — thẻ sẽ về đây.</p></div></div><div class="row"><button class="btn btn-primary" id="zhReviewNextBtn">Học tiếp bước kế tiếp</button></div></section>';
   }
   app.innerHTML = html;
   g1ReviewRegroup(app, "zhReviewStartCard");
@@ -18853,67 +19057,75 @@ function viewPracticeTc(app) {
     html += '<section class="card" id="tcGameCardPractice"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Đang tải video…</p></section>';
   html += videoNewBlockHTML("tc");
   app.innerHTML = html;
-  /* v113 G1: gom Luyen tap TC thanh cum K0-K4/K7-K9 (bo K5/K6 — track Nghe-Doc). */
+  /* v117 P1: gom Luyen tap TC thanh 6 nhom G1-G6 (Bui lenh 19:01 08/11).
+     Chi gom lai, khong xoa noi dung. Luat 1-mo; G5 luon dong khi moi vao.
+     Vao nhanh (typeEntryRow) + On diem yeu giu ngoai nhom. */
   (function () {
     var byId = function (id) { return document.getElementById(id); };
     var mkCluster = function (key, title) {
       var d = document.createElement("details");
-      d.className = "card g1-cluster"; d.setAttribute("data-g1", key);
+      d.className = "card g1-cluster"; d.setAttribute("data-g6", key);
       var sm = document.createElement("summary"); var b = document.createElement("b");
       b.textContent = title; sm.appendChild(b); d.appendChild(sm); return d;
     };
     var put = function (cl, el) { if (cl && el) cl.appendChild(el); };
     var oneOpen = function (list, nk) {
       list.forEach(function (cl) {
-        cl.open = (nk && cl.getAttribute("data-g1") === nk);
+        cl.open = (nk && cl.getAttribute("data-g6") === nk);
         cl.addEventListener("toggle", function (e) {
           if (e.target !== cl || !cl.open) return;
           list.forEach(function (o) { if (o !== cl) o.open = false; });
         });
       });
     };
-    var K0 = mkCluster("K0", "K0 · Tìm bài / Vào nhanh");
-    var K1 = mkCluster("K1", "K1 · Từ vựng");
-    var K2 = mkCluster("K2", "K2 · Ngữ pháp");
-    var K3 = mkCluster("K3", "K3 · Nghe");
-    var K4 = mkCluster("K4", "K4 · Đọc");
-    var K7 = mkCluster("K7", "K7 · Thi & Kiểm tra");
-    var K8 = mkCluster("K8", "K8 · Ôn điểm yếu");
-    var K9 = mkCluster("K9", "K9 · Giải trí");
-    K8.innerHTML += '<p class="mut">Sổ lỗi sai + thẻ đến hạn ở tab Ôn tập.</p>';
+    var G1 = mkCluster("G1", "G1 · Từ vựng");
+    var G2 = mkCluster("G2", "G2 · Ngữ pháp");
+    var G3 = mkCluster("G3", "G3 · Luyện nghe-nói-đọc-viết");
+    var G4 = mkCluster("G4", "G4 · Thi");
+    var G5 = mkCluster("G5", "G5 · Giải trí");
+    var G6 = mkCluster("G6", "G6 · Trò chuyện AI");
+    /* On diem yeu: the rieng ngoai nhom — nut ve tab On tap. */
+    var weakCard = document.createElement("details");
+    weakCard.className = "card"; weakCard.id = "tcWeakCard";
+    weakCard.innerHTML = '<summary><b>🎯 Ôn điểm yếu</b></summary><p class="mut">Sổ lỗi sai + thẻ đến hạn ở tab Ôn tập.</p>';
     var k8b = document.createElement("button"); k8b.className = "btn";
     k8b.textContent = "Mở buổi Ôn điểm yếu →";
-    k8b.onclick = function () { go("review"); }; K8.appendChild(k8b);
+    k8b.onclick = function () { go("review"); }; weakCard.appendChild(k8b);
     var h3Text = function (el) { var h = el.querySelector("h3"); return h ? h.textContent : ""; };
     var kids = Array.prototype.slice.call(app.children);
     kids.forEach(function (el) {
-      if (el.id === "tcPracticeNextCard" || el.tagName === "H2") return;
+      if (el.id === "tcPracticeNextCard" || el.id === "typeEntryRow" || el.tagName === "H2") return;
       var h3 = h3Text(el), id = el.id || "";
-      if (id === "typeEntryRow") put(K0, el);
-      else if (id === "tcVocabGroups") put(K1, el);
-      else if (h3.indexOf("Ngữ pháp") === 0) put(K2, el);
-      else if (id === "listenHubCard") put(K3, el);
-      else if (h3.indexOf("Nghe Part") === 0) put(K3, el);
-      else if (h3.indexOf("Đọc Part") === 0) put(K4, el);
-      else if (h3.indexOf("Thi thử") === 0) put(K7, el);
+      if (id === "tcVocabGroups") put(G1, el);
+      else if (h3.indexOf("Ngữ pháp") === 0) put(G2, el);
+      else if (id === "listenHubCard") put(G3, el);
+      else if (h3.indexOf("Nghe Part") === 0) put(G3, el);
+      else if (h3.indexOf("Đọc Part") === 0) put(G3, el);
+      else if (h3.indexOf("Thi thử") === 0) put(G4, el);
       else if (h3.indexOf("Lỗi sai TOEIC") === 0) el.remove();
-      else if (id === "tcGameCardPractice") put(K9, el);
-      else if (id === "videoNewCardtc") { put(K3, byId("myListenLinkBox")); put(K9, el); }
+      else if (id === "tcGameCardPractice") put(G5, el);
+      else if (id === "videoNewCardtc") put(G3, el);
     });
-    var anchor = byId("tcPracticeNextCard");
-    [K0, K1, K2, K3, K4, K7, K8, K9].forEach(function (cl) {
+    /* v117: the Tro chuyen AI (Gia su AI + ghi chu Tro giang) vao G6. */
+    var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("tc");
+    if (tc6.firstChild) put(G6, tc6.firstChild);
+    var anchor = byId("typeEntryRow") || byId("tcPracticeNextCard");
+    [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
     });
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(weakCard, anchor.nextSibling);
     var nk = null;
     if (typeof n !== "undefined" && n && n.meta) {
       var kk = n.meta.kind || "";
-      if (kk === "vocab") nk = "K1";
-      else if (kk === "gram") nk = "K2";
-      else if (kk === "listen") nk = "K3";
-      else if (kk === "read") nk = "K4";
-      else if (kk === "check" || kk === "mock") nk = "K7";
+      if (kk === "vocab") nk = "G1";
+      else if (kk === "gram") nk = "G2";
+      else if (kk === "listen") nk = "G3";
+      else if (kk === "read") nk = "G3";
+      else if (kk === "check" || kk === "mock") nk = "G4";
     }
-    oneOpen([K0, K1, K2, K3, K4, K7, K8, K9], nk);
+    oneOpen([G1, G2, G3, G4, G5, G6], nk);
+    /* v117: nut Mo Gia su AI (the tutorCard, nhom G6). */
+    Array.prototype.slice.call(document.querySelectorAll("[data-tutorfloat]")).forEach(function (b) { b.onclick = function () { tutorFloatOpen(); }; });
   })();
   wireTc(app);
   videoVOAWire();
@@ -19110,7 +19322,7 @@ function viewReviewTc(app) {
   if (!dueH.length && !undueH.length && !dueC.length) {
     html += '<section class="card"><h3>Không còn lỗi sai TOEIC 🎉</h3><p class="mut">Các câu bạn làm sai trong track TOEIC sẽ hiện ở đây để ôn lại đúng bước đó, cho tới khi bạn trả lời đúng trong buổi ôn.</p></section>';
   } else if (dueN === 0) {
-    html += '<section class="card"><div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="tcReviewNextBtn">Học tiếp bước kế tiếp</button></div></section>';
+    html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="tcReviewNextBtn">Học tiếp bước kế tiếp</button></div></section>';
   }
   app.innerHTML = html;
   g1ReviewRegroup(app, "tcReviewStartCard");
@@ -19661,33 +19873,36 @@ function viewPracticeTp(app) {
     var byId = function (id) { return document.getElementById(id); };
     var mkCluster = function (key, title) {
       var d = document.createElement("details");
-      d.className = "card g1-cluster"; d.setAttribute("data-g1", key);
+      d.className = "card g1-cluster"; d.setAttribute("data-g6", key);
       var sm = document.createElement("summary"); var b = document.createElement("b");
       b.textContent = title; sm.appendChild(b); d.appendChild(sm); return d;
     };
     var put = function (cl, el) { if (cl && el) cl.appendChild(el); };
     var oneOpen = function (list, nk) {
       list.forEach(function (cl) {
-        cl.open = (nk && cl.getAttribute("data-g1") === nk);
+        cl.open = (nk && cl.getAttribute("data-g6") === nk);
         cl.addEventListener("toggle", function (e) {
           if (e.target !== cl || !cl.open) return;
           list.forEach(function (o) { if (o !== cl) o.open = false; });
         });
       });
     };
-    var K0 = mkCluster("K0", "K0 · Tìm bài / Vào nhanh");
-    var K1 = mkCluster("K1", "K1 · Từ vựng");
-    var K2 = mkCluster("K2", "K2 · Ngữ pháp");
-    var K3 = mkCluster("K3", "K3 · Nghe");
-    var K4 = mkCluster("K4", "K4 · Đọc");
-    var K6 = mkCluster("K6", "K6 · Viết TOPIK II (51–54)");
-    var K7 = mkCluster("K7", "K7 · Thi & Kiểm tra");
-    var K8 = mkCluster("K8", "K8 · Ôn điểm yếu");
-    var K9 = mkCluster("K9", "K9 · Giải trí");
-    K8.innerHTML += '<p class="mut">Sổ lỗi sai + thẻ đến hạn ở tab Ôn tập.</p>';
+    /* v117 P1: gom Luyen tap TP thanh 6 nhom G1-G6 (Bui lenh 19:01 08/11).
+       Chi gom lai, khong xoa noi dung. Luat 1-mo; G5 luon dong khi moi vao.
+       Vao nhanh (typeEntryRow) + On diem yeu giu ngoai nhom. */
+    var G1 = mkCluster("G1", "G1 · Từ vựng");
+    var G2 = mkCluster("G2", "G2 · Ngữ pháp");
+    var G3 = mkCluster("G3", "G3 · Luyện nghe-nói-đọc-viết");
+    var G4 = mkCluster("G4", "G4 · Thi");
+    var G5 = mkCluster("G5", "G5 · Giải trí");
+    var G6 = mkCluster("G6", "G6 · Trò chuyện AI");
+    /* On diem yeu: the rieng ngoai nhom — nut ve tab On tap. */
+    var weakCard = document.createElement("details");
+    weakCard.className = "card"; weakCard.id = "tpWeakCard";
+    weakCard.innerHTML = '<summary><b>🎯 Ôn điểm yếu</b></summary><p class="mut">Sổ lỗi sai + thẻ đến hạn ở tab Ôn tập.</p>';
     var k8b = document.createElement("button"); k8b.className = "btn";
     k8b.textContent = "Mở buổi Ôn điểm yếu →";
-    k8b.onclick = function () { go("review"); }; K8.appendChild(k8b);
+    k8b.onclick = function () { go("review"); }; weakCard.appendChild(k8b);
     var wIds = [];
     (typeof TP_STAGES !== "undefined" ? TP_STAGES : []).forEach(function (stg) {
       (stg.steps || []).forEach(function (id) { if (id && id[0] === "w" && wIds.indexOf(id) < 0) wIds.push(id); });
@@ -19695,42 +19910,47 @@ function viewPracticeTp(app) {
     if (wIds.length) {
       var wr = document.createElement("div"); wr.className = "row";
       wr.innerHTML = wIds.map(function (id) { return tpStepBtnHTML(id); }).join("");
-      K6.appendChild(wr);
+      G3.appendChild(wr);
       var wp = document.createElement("p"); wp.className = "mut";
       wp.textContent = "Bài Viết TOPIK II (51–54) trước đây chỉ có trong Bản đồ — nay có ở đây. TOPIK I thi thật không có phần Viết.";
-      K6.appendChild(wp);
+      G3.appendChild(wp);
     }
     var h3Text = function (el) { var h = el.querySelector("h3"); return h ? h.textContent : ""; };
     var kids = Array.prototype.slice.call(app.children);
     kids.forEach(function (el) {
-      if (el.id === "tpPracticeNextCard" || el.tagName === "H2") return;
+      if (el.id === "tpPracticeNextCard" || el.id === "typeEntryRow" || el.tagName === "H2") return;
       var h3 = h3Text(el), id = el.id || "";
-      if (id === "typeEntryRow") put(K0, el);
-      else if (h3.indexOf("Hangul") === 0 || id === "tpVocabGroups") put(K1, el);
-      else if (h3.indexOf("Ngữ pháp") === 0) put(K2, el);
-      else if (id === "listenHubCard") put(K3, el);
-      else if (h3.indexOf("Nghe dạng") === 0) put(K3, el);
-      else if (h3.indexOf("Đọc dạng") === 0) put(K4, el);
-      else if (h3.indexOf("Thi thử") === 0) put(K7, el);
+      if (h3.indexOf("Hangul") === 0 || id === "tpVocabGroups") put(G1, el);
+      else if (h3.indexOf("Ngữ pháp") === 0) put(G2, el);
+      else if (id === "listenHubCard") put(G3, el);
+      else if (h3.indexOf("Nghe dạng") === 0) put(G3, el);
+      else if (h3.indexOf("Đọc dạng") === 0) put(G3, el);
+      else if (h3.indexOf("Thi thử") === 0) put(G4, el);
       else if (h3.indexOf("Lỗi sai TOPIK") === 0) el.remove();
-      else if (id === "tpFunVideoPractice") put(K9, el);
-      else if (id === "videoNewCardtp") { put(K3, byId("myListenLinkBox")); put(K9, el); }
+      else if (id === "tpFunVideoPractice") put(G5, el);
+      else if (id === "videoNewCardtp") put(G3, el);
     });
-    var anchor = byId("tpPracticeNextCard");
-    [K0, K1, K2, K3, K4, K6, K7, K8, K9].forEach(function (cl) {
+    /* v117: the Tro chuyen AI (Gia su AI + ghi chu Tro giang) vao G6. */
+    var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("tp");
+    if (tc6.firstChild) put(G6, tc6.firstChild);
+    var anchor = byId("typeEntryRow") || byId("tpPracticeNextCard");
+    [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
     });
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(weakCard, anchor.nextSibling);
     var nk = null;
     if (typeof n !== "undefined" && n && n.meta) {
       var kk = n.meta.kind || "";
-      if (kk === "hangul" || kk === "vocab") nk = "K1";
-      else if (kk === "gram") nk = "K2";
-      else if (kk === "listen") nk = "K3";
-      else if (kk === "read") nk = "K4";
-      else if (kk === "write") nk = "K6";
-      else if (kk === "check" || kk === "mock") nk = "K7";
+      if (kk === "hangul" || kk === "vocab") nk = "G1";
+      else if (kk === "gram") nk = "G2";
+      else if (kk === "listen") nk = "G3";
+      else if (kk === "read") nk = "G3";
+      else if (kk === "write") nk = "G3";
+      else if (kk === "check" || kk === "mock") nk = "G4";
     }
-    oneOpen([K0, K1, K2, K3, K4, K6, K7, K8, K9], nk);
+    oneOpen([G1, G2, G3, G4, G5, G6], nk);
+    /* v117: nut Mo Gia su AI (the tutorCard, nhom G6). */
+    Array.prototype.slice.call(document.querySelectorAll("[data-tutorfloat]")).forEach(function (b) { b.onclick = function () { tutorFloatOpen(); }; });
   })();
   wireTp(app);
   myListenLinkWire(app);
@@ -19790,7 +20010,7 @@ function viewReviewTp(app) {
   if (!dueH.length && !undueH.length && !dueC.length) {
     html += '<section class="card"><h3>Không còn lỗi sai TOPIK 🎉</h3><p class="mut">Các câu bạn làm sai trong track TOPIK sẽ hiện ở đây để ôn lại đúng bước đó, cho tới khi bạn trả lời đúng trong buổi ôn.</p></section>';
   } else if (dueN === 0) {
-    html += '<section class="card"><div class="hero-pair"><svg class="snake sm masc-bob" aria-hidden="true" focusable="false"><use href="#msc-snake"/></svg><div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="tpReviewNextBtn">Học tiếp bước kế tiếp</button></div></section>';
+    html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="tpReviewNextBtn">Học tiếp bước kế tiếp</button></div></section>';
   }
   app.innerHTML = html;
   g1ReviewRegroup(app, "tpReviewStartCard");

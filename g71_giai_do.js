@@ -80,6 +80,26 @@
     return qs;
   }
 
+  /* v117 P3a: CHAP NHAN BIEN THE DUNG NGHIA. Hai co che, ca hai deu
+     kiem chung duoc tu du lieu that, khong doan:
+     (1) BANG BIEN SOAN (cap doi da gap that khi kiem render v116):
+         guidebook<->guide, excursion<->trip — dap an go dung nghia
+         nhung khac tu chuan van duoc tinh dung, kem ghi chu dap an chuan.
+     (2) CUNG NGHIA VIET TRONG KHO (acceptFn do start() xay tu 30 tu
+         cua luot choi): tu go nam trong kho va co nghia Viet Y HET
+         nghia cua cau hoi thi duoc tinh dung.
+     Khong chap nhan: tu ngoai kho, tu gan dung chinh ta, tu khac nghia. */
+  var SYN_PAIRS = [["guidebook", "guide"], ["excursion", "trip"]];
+  function synonymOf(ans, given, track) {
+    var a = normalizeAnswer(ans, track), g = normalizeAnswer(given, track);
+    if (!a || !g || a === g) return false;
+    for (var i = 0; i < SYN_PAIRS.length; i++) {
+      var p0 = normalizeAnswer(SYN_PAIRS[i][0], track), p1 = normalizeAnswer(SYN_PAIRS[i][1], track);
+      if ((p0 === a && p1 === g) || (p1 === a && p0 === g)) return true;
+    }
+    return false;
+  }
+
   var LOGIC = {
     TOTAL: 10,
     createState: function (qs) {
@@ -93,13 +113,20 @@
     /* Nộp đáp án cho câu hiện tại. Đúng +10 (chuỗi đúng >= 3 thì +15);
        sai mất 1 tim, hết tim thua ngay (màn thua hiện sau khi xem sửa
        sai). Trả về {ok, correct}; chỉ nhận khi đang ở phase "ask". */
-    submit: function (st, raw, track) {
+    submit: function (st, raw, track, acceptFn) {
       if (!st || st.over || st.phase !== "ask") return { ok: false };
       var q = st.qs[st.idx];
       if (!q) return { ok: false };
       var given = normalizeAnswer(raw, track);
       var want = normalizeAnswer(q.answer, track);
       var correct = given.length > 0 && given === want;
+      var viaSyn = false;
+      if (!correct && given.length > 0) {
+        if (synonymOf(q.answer, raw, track)) { correct = true; viaSyn = true; }
+        else if (typeof acceptFn === "function") {
+          try { if (acceptFn(given, want, q)) { correct = true; viaSyn = true; } } catch (e) {}
+        }
+      }
       st.answered++;
       if (correct) {
         st.correct++;
@@ -113,8 +140,8 @@
         if (st.hearts <= 0) st.over = "lose";
       }
       st.phase = "feedback";
-      st.last = { correct: correct, given: String(raw == null ? "" : raw), answer: q.answer, display: q.display };
-      return { ok: true, correct: correct };
+      st.last = { correct: correct, given: String(raw == null ? "" : raw), answer: q.answer, display: q.display, viaSynonym: viaSyn };
+      return { ok: true, correct: correct, viaSynonym: viaSyn };
     },
     /* Sang câu tiếp sau khi đã xem sửa sai. Hết 10 câu mà còn tim thì
        thắng. Trả về true nếu đã sang câu mới, false nếu trận đã kết thúc. */
@@ -142,7 +169,7 @@
     var stg = G71.openStage("❓ Giải Đố", function () {
       running = false;
       if (advTimer) { try { clearTimeout(advTimer); } catch (e) {} advTimer = null; }
-    });
+    }, "Máy đưa ra câu hỏi, bạn gõ đáp án. Câu hỏi từ kho từ/câu thật theo bài đang học: cho nghĩa Việt thì gõ từ, cho câu thiếu từ thì gõ từ còn thiếu. Đúng +10 điểm (chuỗi đúng từ 3 câu trở lên +15), sai mất 1 tim, hết 3 tim là thua. Dưới mỗi câu có gợi ý độ dài từ + chữ cái đầu.");
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
 
@@ -228,17 +255,23 @@
       eyebrowEl.textContent = "CÂU " + (st.idx + 1) + "/" + st.qs.length
         + (q.theme ? " · " + q.theme : "")
         + (q.kind === "gap" ? " · Điền từ còn thiếu" : " · Nghĩa là gì?");
+      /* v117 P3a: goi y do dai + chu dau de khong phai doan mo — dap an
+         la chuoi go/bam (EN/TC: tu; ZH: pinyin; TP: am tiet Hangul). */
+      var __ans = q.answer || "";
+      var __n = __ans.length, __first = __ans.charAt(0);
+      var __unit = (track === "tp") ? "âm tiết" : (track === "zh" ? "chữ cái pinyin" : "chữ cái");
+      var __hint = "Gợi ý: từ có " + __n + " " + __unit + ", bắt đầu bằng '" + __first + "'.";
       if (q.kind === "gap") {
         promptEl.textContent = q.prompt;
-        hintEl.textContent = "Điền từ còn thiếu vào chỗ trống.";
+        hintEl.textContent = "Điền từ còn thiếu vào chỗ trống. " + __hint;
       } else if (track === "zh") {
         /* ZH: hiện chữ Hán to + nghĩa Việt — đáp án cần gõ là pinyin. */
         promptEl.innerHTML = '<span style="font-size:44px;">' + G71.escHtml(q.w) + '</span>'
           + '<span style="display:block;font-size:20px;margin-top:4px;">' + G71.escHtml(q.vi) + '</span>';
-        hintEl.textContent = "Gõ pinyin của chữ Hán trên (không dấu).";
+        hintEl.textContent = "Gõ pinyin của chữ Hán trên (không dấu). " + __hint;
       } else {
         promptEl.textContent = q.vi;
-        hintEl.textContent = "Gõ từ có nghĩa trên.";
+        hintEl.textContent = "Gõ từ có nghĩa trên. " + __hint;
       }
       feedbackEl.innerHTML = "";
       if (!isTp) {
@@ -291,12 +324,32 @@
       return placed.map(function (ci) { return chips[ci].ch; }).join("");
     }
 
+    /* v117 P3a: acceptFn — tu go la tu trong kho 30 tu cua luot nay
+       va co nghia Viet Y HET nghia cua cau hoi thi tinh dung. */
+    var byVi = {};
+    (function () {
+      try {
+        var pool = G71.pickTypingWords(30) || { words: [] };
+        (pool.words || []).forEach(function (wd) {
+          var k = String(wd.vi || "").trim();
+          if (!k) return;
+          (byVi[k] = byVi[k] || []).push(wd);
+        });
+      } catch (e) {}
+    })();
+    function acceptFn(given, want, q) {
+      var cands = byVi[String(q.vi || "").trim()] || [];
+      for (var i = 0; i < cands.length; i++) {
+        if (normalizeAnswer(cands[i].type || cands[i].w, track) === given) return true;
+      }
+      return false;
+    }
     function doSubmit() {
       if (!running || st.over || st.phase !== "ask") return;
       var raw = isTp ? assembledAnswer() : (typeInput ? typeInput.value : "");
       if (!isTp && !String(raw || "").trim()) { try { typeInput.focus(); } catch (e) {} return; }
       if (isTp && placed.length < chips.length) return;
-      var r = LOGIC.submit(st, raw, track);
+      var r = LOGIC.submit(st, raw, track, acceptFn);
       if (!r.ok) return;
       if (!isTp) { typeInput.disabled = true; submitBtn.disabled = true; }
       else submitBtn.disabled = true;
@@ -320,7 +373,9 @@
         var pts = (st.combo >= 3 ? 15 : 10);
         html = '<div style="background:#ECFDF5;border:2px solid #0D9488;border-radius:16px;padding:12px 14px;">'
           + '<b style="color:#0D9488;">✅ Đúng rồi! +' + pts + ' điểm'
-          + (st.combo >= 3 ? ' · Combo ×' + st.combo : '') + '</b></div>';
+          + (st.combo >= 3 ? ' · Combo ×' + st.combo : '') + '</b>'
+          + (last.viaSynonym ? '<div style="margin-top:4px;">Bạn gõ \'' + G71.escHtml(last.given) + '\' — cũng đúng nghĩa; đáp án chuẩn là <b>' + G71.escHtml(last.display || q.answer) + '</b>.</div>' : '')
+          + '</div>';
       } else {
         html = '<div style="background:#FEF3C7;border:2px solid #F59E0B;border-radius:16px;padding:12px 14px;">'
           + '<b style="color:#92400E;">❌ Chưa đúng.</b> Đáp án: <b>' + G71.escHtml(last.display || q.answer) + '</b>'

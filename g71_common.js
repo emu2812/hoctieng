@@ -220,15 +220,24 @@
   function closeStage() {
     if (stage) { try { stage.close(); } catch (e) {} }
   }
-  function openStage(title, onClose) {
+  /* v117 P3b: nut "?" mo hop thoai huong dan TAI CHO (khung phu tren
+     san), khong roi game, khong mat van — thay hanh vi cu v113 (thoat
+     san roi mo tab Huong dan). Game thoi gian thuc TAM DUNG khi hop
+     thoai mo (stage.paused — vong frame cua game tu kiem tra); game
+     theo luot (Giai Do) khong can tam dung. Hop thoai nam trong khung
+     canvas (khong phu thanh tieu de/nut "?"/nut Thoat). Nhan "Xem day
+     du" moi thoat san sang tab Huong dan (hanh vi cu, gio phai chon
+     chu dong). helpText: tom tat luat rieng cua tung game; khong co
+     thi hien dong chung. */
+  function openStage(title, onClose, helpText) {
     closeStage();
     var ov = document.createElement("div");
     ov.id = "g71Stage";
     ov.style.cssText = "position:fixed;inset:0;z-index:9999;background:#FFF7E8;display:flex;flex-direction:column;";
     /* HUD một dòng duy nhất: không xuống dòng, phần dài (chủ đề/nghĩa)
        tự cắt bằng dấu … để sân canvas giữ được chiều cao trên điện thoại
-       dọc. Sân không còn thanh gợi ý — luật game chỉ nằm ở tab Hướng dẫn.
-       Nút "?" thoát sân rồi mở tab Hướng dẫn. */
+       dọc. Sân không còn thanh gợi ý — luật game đầy đủ nằm ở tab Hướng
+       dẫn; nút "?" mở hộp thoại tóm tắt tại chỗ (v117 P3b). */
     ov.innerHTML = '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border-bottom:2px solid #F3D9A4;">'
       + '<h2 style="margin:0;font-size:18px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(title) + '</h2>'
       + '<button id="g71Help" class="btn" title="Hướng dẫn" style="flex:none;">?</button>'
@@ -240,13 +249,40 @@
     var ctx = null;
     try { ctx = cv.getContext("2d"); } catch (e) {}
     var helpBtn = ov.querySelector("#g71Help");
-    /* Nút "?" (v113): thoát sân rồi mở tab Hướng dẫn — luật game chỉ
-       nằm ở một nơi duy nhất, không còn hộp thoại riêng hay thanh gợi ý.
+    var helpBox = null;
+    /* Hop thoai huong dan tai cho (v117 P3b): nam trong khung canvas,
+       khong phu thanh tieu de. Mo thi stage.paused = true. */
+    function openHelp() {
+      if (helpBox) return;
+      api.paused = true; api.helpOpen = true;
+      helpBox = document.createElement("div");
+      helpBox.id = "g71HelpBox";
+      helpBox.style.cssText = "position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:rgba(4,6,15,.55);padding:16px;";
+      var body = helpText || "Luật chơi đầy đủ nằm ở tab Hướng dẫn.";
+      helpBox.innerHTML = '<div style="background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.12);padding:22px 20px;max-width:520px;width:100%;">'
+        + '<h2 style="margin:0 0 8px;">❓ Hướng dẫn — ' + escHtml(title) + '</h2>'
+        + '<p style="margin:6px 0;line-height:1.6;">' + escHtml(body) + '</p>'
+        + '<div class="row" style="justify-content:center;margin-top:12px;"><button class="btn btn-primary" id="g71HelpClose">Đóng — quay lại game</button>'
+        + '<button class="btn" id="g71HelpFull">Xem đầy đủ ở tab Hướng dẫn</button></div></div>';
+      var wrap = ov.querySelector("#g71CanvasWrap");
+      if (wrap) wrap.appendChild(helpBox); else ov.appendChild(helpBox);
+      var cb = helpBox.querySelector("#g71HelpClose");
+      if (cb) cb.onclick = closeHelp;
+      var fb = helpBox.querySelector("#g71HelpFull");
+      if (fb) fb.onclick = function () { close(); if (typeof go === "function") go("guide"); };
+    }
+    function closeHelp() {
+      if (!helpBox) return;
+      if (helpBox.parentNode) helpBox.parentNode.removeChild(helpBox);
+      helpBox = null;
+      if (api) { api.paused = false; api.helpOpen = false; }
+    }
+    /* Nút "?" (v117 P3b): mở hộp thoại tại chỗ, không rời game.
        Gắn bằng event delegation trên khung sân khấu để nút vẫn bấm được
        dù tiêu đề được vẽ lại. */
     ov.addEventListener("click", function (e) {
       var t = e && e.target;
-      if (t && t.closest && t.closest("#g71Help")) { close(); if (typeof go === "function") go("guide"); }
+      if (t && t.closest && t.closest("#g71Help")) { openHelp(); }
     });
     function resize() {
       try {
@@ -287,6 +323,7 @@
     function close() {
       if (closed) return;
       closed = true;
+      if (helpBox) { try { if (helpBox.parentNode) helpBox.parentNode.removeChild(helpBox); } catch (e) {} helpBox = null; }
       window.removeEventListener("resize", resize);
       try { if (ro) ro.disconnect(); } catch (e) {}
       document.removeEventListener("keydown", onKey);
@@ -294,13 +331,14 @@
       if (stage === api) stage = null;
       if (onClose) { try { onClose(); } catch (e) {} }
     }
-    function onKey(e) { if (e.key === "Escape") close(); }
+    function onKey(e) { if (e.key === "Escape") { if (helpBox) { closeHelp(); return; } close(); } }
     document.addEventListener("keydown", onKey);
     var exitBtn = ov.querySelector("#g71Exit");
     if (exitBtn) exitBtn.onclick = close;
     var api = { el: ov, canvas: cv, ctx: ctx, hud: ov.querySelector("#g71Hud"),
       wrap: ov.querySelector("#g71CanvasWrap"), helpBtn: helpBtn,
-      resize: resize, close: close };
+      resize: resize, close: close,
+      paused: false, helpOpen: false, openHelp: openHelp, closeHelp: closeHelp };
     stage = api;
     return api;
   }

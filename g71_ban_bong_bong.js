@@ -76,9 +76,8 @@
     var bullets = [];
     var parts = [];
     var bubbles = [];
-    var stg = G71.openStage("🫧 Bắn Bong Bóng",
-      "Di chuột/ngón tay để ngắm, bấm để bắn. Phím ← → ngắm, phím Cách bắn. Bắn đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim; bong bóng trôi khỏi mặt nước sẽ nổi lại, không trừ điểm.",
-      function () { running = false; });
+    var stg = G71.openStage("🫧 Bắn Bong Bóng", function () { running = false; },
+      "Cho một nghĩa tiếng Việt; bong bóng mang từ tiếng Anh nổi dưới nước. Ngắm pháo bằng chuột/cảm ứng/phím, bắn vỡ đúng bong bóng. Mỗi lần đúng +9 điểm; đủ 99 điểm là thắng; bắn nhầm mất tim.");
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
 
@@ -163,11 +162,11 @@
       document.removeEventListener("keydown", onKey);
       if (st.over === "win") {
         G71.endScreen(stg, true, "🎉 Thắng rồi!",
-          ["Đủ 99 điểm!", "Điểm: " + st.score + " · +10 XP đã cộng vào tiến trình."],
+          ["Đủ 99 điểm!", "Điểm: " + st.score + "."],
           start);
       } else {
         G71.endScreen(stg, false, "Hết tim rồi!",
-          ["Điểm: " + st.score + "/99.", "Chơi lại để thử bộ từ khác nhé."],
+          ["Điểm: " + st.score + "/99."],
           start);
       }
     }
@@ -175,6 +174,8 @@
     var last = performance.now();
     function frame(now) {
       if (!running) return;
+      /* v117 P3b: tam dung khi hop thoai "?" dang mo. */
+      if (stg.paused) { last = now; requestAnimationFrame(frame); return; }
       var dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       var W = cv.width, H = cv.height;

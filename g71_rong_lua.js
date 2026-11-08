@@ -161,7 +161,13 @@
     { id: "firefly", name: "Đom Đóm Điện", icon: "🪲", region: 3, kind: "dmg", element: "elec", bonus: 1,
       effect: "Chiêu Điện +1 sát thương", unlock: "Thắng trùm Thành Phố" },
     { id: "rabbit", name: "Thỏ Pha Lê", icon: "🐇", region: 4, kind: "dmg", element: "water", bonus: 1,
-      effect: "Chiêu Nước +1 sát thương", unlock: "Thắng trùm Hang Pha Lê" }
+      effect: "Chiêu Nước +1 sát thương", unlock: "Thắng trùm Hang Pha Lê" },
+    /* v117 P5d: Ran Lua — ban dong hanh thu 5, mo khi thang trum Nui Lua
+       (trum cuoi). Ran la linh vat cua web nen lam BAN, khong lam quai:
+       ran khong phai ke thu de danh; ran dung canh rong, tang suc moi
+       chieu. element "" = ap cho moi he. */
+    { id: "snake", name: "Rắn Lửa", icon: "🐍", region: 5, kind: "dmg", element: "", bonus: 1,
+      effect: "Mọi chiêu +1 sát thương", unlock: "Thắng trùm Núi Lửa" }
   ];
   function unlockedCompanions(rl) {
     var out = [];
@@ -174,7 +180,8 @@
   function companionDmgBonus(element, companions) {
     var b = 0;
     (companions || []).forEach(function (id) {
-      COMPANIONS.forEach(function (c) { if (c.id === id && c.kind === "dmg" && c.element === element) b += c.bonus; });
+      /* v117 P5d: element "" (Ran Lua) ap cho moi he. */
+      COMPANIONS.forEach(function (c) { if (c.id === id && c.kind === "dmg" && (c.element === element || !c.element)) b += c.bonus; });
     });
     return b;
   }
@@ -504,9 +511,9 @@
 
   /* ---- Tiến trình 5 vùng, lưu trong state.rongLua (sống qua lần chơi) ----
      Dạng mới v98: { gold, shield, dict, region, progress: { "1": { unlocked,
-     cleared: {} }, ... }, endless, endlessBest }. Vàng dùng chung với Đấu
-     Bài (g71_dau_bai.js đọc state.rongLua.gold) nên gold giữ ở cấp cao
-     nhất. Dạng cũ v78–v97 { unlocked, cleared } của vùng 1 được migration
+     cleared: {} }, ... }, endless, endlessBest }. Vàng là ví chung của web
+     (game khác thắng cũng cộng vào đây) nên gold giữ ở cấp cao nhất.
+     Dạng cũ v78–v97 { unlocked, cleared } của vùng 1 được migration
      giữ nguyên vào progress["1"]. Vùng sau mở khi qua trùm vùng trước
      HOẶC đủ XP web (100/300/600/1000) — loadRL tự suy ra cả hai đường,
      để không bao giờ kẹt dù lưu cũ thiếu. ---- */
@@ -616,6 +623,42 @@
     }
     return w;
   }
+  /* v117 P5a: QUAI CHIEN DAU THEO NGHIA — the tren quai hien NGHIA tieng
+     Viet (dong tren) + goi y tu (dong duoi: chu dau + o trong theo tung
+     ky tu; chu da go dung hien ra mau ho phach nhat). Tu AN trong luc
+     danh — chi hien lai day du khi tung trung chieu (float phan hoi o
+     feed()). Dung chung cho layoutPills, monsterFoot va drawMonsterPill
+     de 3 cho do cung mot kich co. Theo he chu tung track: EN/TC go chu
+     cai, ZH go pinyin (type), TP bam am tiet Hangul (type). */
+  function hintBlanks(m) {
+    var t = m.type || m.w;
+    var out = [];
+    for (var i = 0; i < t.length; i++) out.push((i === 0 || i < m.progress) ? t.charAt(i) : "_");
+    return out.join(" ");
+  }
+  function phraseHintBlanks(m) {
+    var parts = m.phrase.parts, off = 0, segs = [];
+    for (var pi = 0; pi < parts.length; pi++) {
+      var pt = parts[pi].type, seg = [];
+      for (var i = 0; i < pt.length; i++) {
+        var gi = off + i;
+        seg.push((i === 0 || gi < m.progress) ? pt.charAt(i) : "_");
+      }
+      segs.push(seg.join(" "));
+      off += pt.length;
+    }
+    return segs.join("  ");
+  }
+  function pillLines(m) {
+    var isPh = !!(m.isPhrase && m.phrase);
+    return { top: m.vi || m.w, bot: isPh ? phraseHintBlanks(m) : hintBlanks(m) };
+  }
+  function meaningHint(m, track) {
+    var t = m.type || m.w;
+    var unit = (track === "tp") ? "âm tiết" : (track === "zh" ? "chữ cái pinyin" : "chữ cái");
+    return { first: t.charAt(0), len: t.length, unit: unit };
+  }
+
   /* Hộp chân dung quái theo tọa độ chuẩn hóa {x0,x1,y0,y1} — cùng hệ với
      m.x/m.y; W/H là kích cỡ canvas thật (frame() ghi vào battle.canvasW/
      canvasH; probe/không có canvas thì mặc định 360x500, màn dọc).
@@ -624,18 +667,15 @@
      thân (±33px), thẻ từ (tâm kẹp mép) và nhãn "Sợ…" (tâm kẹp mép). */
   function monsterFoot(m, W, H) {
     W = W || 360; H = H || 500;
-    var mType = m.type || m.w;
-    var isPh = !!(m.isPhrase && m.phrase);
-    var dispTop = isPh ? m.phrase.display : G71.displayWord(m);
-    var dispBot = isPh ? phraseSpaced(m.phrase) : mType;
-    var tw = Math.max(textWpx(dispTop), textWpx(dispBot)) + 30;
+    var pl = pillLines(m);
+    var tw = Math.max(textWpx(pl.top), textWpx(pl.bot)) + 30;
     var gwW = 0;
     if (m.groupWeak && GROUP_WEAK[m.groupWeak]) gwW = GROUP_WEAK[m.groupWeak].hint.length * 7 + 14;
     var px = m.x * W;
     var pillCx = Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, px));
     var gwCx = gwW ? Math.max(gwW / 2 + 4, Math.min(W - gwW / 2 - 4, px)) : px;
     var pyPx = Math.max(m.y * H, 64);
-    var pillH = (isPh || mType !== m.w) ? 54 : 34;
+    var pillH = 54; /* v117 P5a: the quai luon 2 dong (nghia + goi y) */
     return {
       x0: Math.min(px - 33, pillCx - tw / 2, gwCx - gwW / 2) / W,
       x1: Math.max(px + 33, pillCx + tw / 2, gwCx + gwW / 2) / W,
@@ -665,6 +705,7 @@
     companionDmgBonus: companionDmgBonus,
     companionHeal: companionHeal,
     layoutPills: layoutPills,
+    pillLines: pillLines, meaningHint: meaningHint,
     monsterFootprint: monsterFoot,
     isSingleLetter: isSingleLetter,
     pickNatureWords: pickNatureWords,
@@ -702,13 +743,17 @@
           : GROUP_KEYS[Math.floor(Math.random() * GROUP_KEYS.length)];
         return {
           w: wd.w, vi: wd.vi, type: wd.type || wd.w, isBoss: boss,
+          py: wd.py || wd.pinyin || "",
           weak: EL_ORDER[Math.floor(Math.random() * 3)],
           groupWeak: gWeak,
           groups: wordGroups({ w: wd.w, vi: wd.vi, theme: wd.theme || "",
             type: wd.headType || wd.type || wd.w }),
           phrase: wd.phrase || null, isPhrase: !!wd.phrase, partIdx: 0,
           hp: boss ? bhp : mhp, maxHp: boss ? bhp : mhp,
-          phase: 0, progress: 0, status: "advancing",
+          /* v117 P5b: tung con quai mot — chi quai dau tien tien len ngay;
+             cac quai sau o trang thai "waiting" (khong tien, khong ban,
+             khong ve), chi xuat hien khi quai truoc da xong. */
+          phase: 0, progress: 0, status: (i === 0) ? "advancing" : "waiting",
           x: 0.15 + Math.random() * 0.7,
           y: -0.15 - i * 0.18, /* Chang 10: GIU 0,18 nhu cu — thu siet 0,10 thi vao man nhanh (quai 4: 23s->6,3s) nhung lam hong test tach quai v102 B3 (cap ZH ket 42 tick, 5/40 lan chay); chi giu sua gentle (quai tren mep di toc do day du) nen quai 4 vao man 23s->11,5s */
           speed: boss ? 0.025 + 0.002 * (region - 1) : 0.055 + 0.005 * level + 0.003 * (region - 1),
@@ -920,6 +965,22 @@
           }
         }
       });
+      /* v117 P5b: tung con quai mot — khong con quai nao dang tien thi
+         cho quai cho ke tiep xuat hien (chi mot con mot luc). */
+      if (!st.over) {
+        var anyAdv = false;
+        st.words.forEach(function (wd) { if (wd.status === "advancing") anyAdv = true; });
+        if (!anyAdv) {
+          for (var wi = 0; wi < st.words.length; wi++) {
+            if (st.words[wi].status === "waiting") {
+              st.words[wi].status = "advancing";
+              st.words[wi].x = 0.15 + Math.random() * 0.7;
+              st.words[wi].y = -0.15;
+              break;
+            }
+          }
+        }
+      }
       /* Tách quái chồng nhau (v102, thay v100 B3): quái sinh ra đã xếp
          cột dọc (cách nhau 0,18), cùng tốc độ, cùng trôi về cột x của
          rồng — cửa sổ v100 (|dy|<0,12, |dx|<0,10) hẹp hơn chân dung vẽ
@@ -1540,10 +1601,10 @@
       if (!m || m.status !== "advancing") return;
       var px = m.x * W, py = Math.max(m.y * H, 64);
       var s = m.isBoss ? 34 : 24;
-      var mType = m.type || m.w;
-      var pillH = (mType !== m.w) ? 54 : 34;
-      var disp = (m.isPhrase && m.phrase) ? m.phrase.display : G71.displayWord(m);
-      var typeSp = (m.isPhrase && m.phrase) ? phraseSpaced(m.phrase) : mType;
+      var pl = pillLines(m); /* v117 P5a: the do theo nghia + goi y */
+      var pillH = 54;
+      var disp = pl.top;
+      var typeSp = pl.bot;
       var tw;
       try {
         ctx.font = "700 17px system-ui, sans-serif";
@@ -1642,22 +1703,26 @@
       ctx.fillStyle = C.amber100;
       ctx.fillText(gw, gwX - ctx.measureText(gw).width / 2, gwY + 4);
     }
-    /* Viên từ gắn dưới quái. v91: tieng Trung hien 2 dong — chu Han o
-       tren, pinyin (chuoi go) o duoi co to mau tien trinh. v99: quái cụm
-       từ hiện cụm ở trên, chuỗi gõ có dấu cách ở dưới với tiến trình
-       theo từng từ; thẻ từ được layoutPills dời khi quái tụ lại. */
-    var mType = m.type || m.w;
-    var mTwo = mType !== m.w;
-    var isPh = !!(m.isPhrase && m.phrase);
-    var dispTop = isPh ? m.phrase.display : G71.displayWord(m);
-    var dispBot = isPh ? phraseSpaced(m.phrase) : mType;
+    ctx.restore();
+  }
+  /* v117 P5a+P5c: THE TREN QUAI — ve RIENG SAU rong (lop tren cung) de
+     nhan luon doc duoc tron ven (truoc day the nam trong drawMonster nen
+     rong bay len cao se che mat chu — anh Bui 08/11: "he...ore").
+     The hien NGHIA tieng Viet (dong tren, trang) + goi y tu (dong duoi:
+     chu dau + o trong, chu da go dung to ho phach nhat, o trong trang).
+     Tu AN trong luc danh. */
+  function drawMonsterPill(ctx, m, W, H, t, locked) {
+    var px = m.x * W, py = Math.max(m.y * H, 64); /* khop drawMonster */
+    var s = m.isBoss ? 34 : 24;
+    var pl = pillLines(m);
+    ctx.save();
     ctx.font = "700 17px system-ui, sans-serif";
-    var mWide = (ctx.measureText(dispTop).width >= ctx.measureText(dispBot).width) ? dispTop : dispBot;
+    var mWide = (ctx.measureText(pl.top).width >= ctx.measureText(pl.bot).width) ? pl.top : pl.bot;
     G71.fitFont(ctx, mWide, Math.max(70, W - 32), 17, 12, "700");
-    var tw = Math.max(ctx.measureText(dispTop).width, ctx.measureText(dispBot).width) + 30;
+    var tw = Math.max(ctx.measureText(pl.top).width, ctx.measureText(pl.bot).width) + 30;
     var pillY = py + s * 1.05 + (m._pillDy || 0);
     var pillX = (typeof m._pillX === "number") ? m._pillX : Math.max(tw / 2 + 8, Math.min(W - tw / 2 - 8, px));
-    var pillH = (isPh || mTwo) ? 54 : 34, pillTop = pillY - ((isPh || mTwo) ? 28 : 17);
+    var pillH = 54, pillTop = pillY - 28;
     if (m._pillDy) {
       /* Đường nối mảnh từ quái tới thẻ đã dời. */
       ctx.strokeStyle = "rgba(245,158,11,.65)"; ctx.lineWidth = 1.5;
@@ -1669,59 +1734,49 @@
     }
     ctx.fillStyle = C.ink800;
     G71.rr(ctx, pillX - tw / 2, pillTop, tw, pillH, 17); ctx.fill();
-    /* v105d: viền thẻ từ theo đúng màu hệ của quái (như lá Đấu Bài) —
-       trước đây mọi hệ chung một màu tím nhạt #C7D2FE nên không đọc ra
-       hệ; quái khóa giữ viền VÀNG như cũ. */
+    /* v105d: viền thẻ từ theo đúng màu hệ của quái; quái khóa giữ viền VÀNG. */
     ctx.strokeStyle = locked ? C.amber500 : (ELEMENTS[m.weak] ? ELEMENTS[m.weak].color : C.ink200);
     ctx.lineWidth = 2; ctx.stroke();
-    if (isPh) {
-      /* Cụm từ: dòng trên là cụm (chữ Hán/Hangul/cụm tiếng Anh), dòng
-         dưới là chuỗi gõ có dấu cách, tô tiến trình theo từng từ. */
-      ctx.font = "700 16px system-ui, sans-serif";
-      ctx.fillStyle = "#fff";
-      ctx.fillText(dispTop, pillX - ctx.measureText(dispTop).width / 2, pillY - 6);
-      ctx.font = "700 13px system-ui, sans-serif";
-      var x0 = pillX - ctx.measureText(dispBot).width / 2;
-      var off = 0;
-      m.phrase.parts.forEach(function (pt, pi) {
-        var plen = pt.type.length;
-        var dn = Math.max(0, Math.min(plen, m.progress - off));
-        var donePart = pt.type.slice(0, dn), restPart = pt.type.slice(dn);
-        ctx.fillStyle = C.amber100;
-        ctx.fillText(donePart, x0, pillY + 14);
-        x0 += ctx.measureText(donePart).width;
-        ctx.fillStyle = "#fff";
-        ctx.fillText(restPart, x0, pillY + 14);
-        x0 += ctx.measureText(restPart).width;
-        if (pi < m.phrase.parts.length - 1) {
-          ctx.fillStyle = "#fff";
-          ctx.fillText(" ", x0, pillY + 14);
-          x0 += ctx.measureText(" ").width;
-        }
-        off += plen;
-      });
-    } else if (mTwo) {
-      ctx.font = "700 16px system-ui, sans-serif";
-      ctx.fillStyle = "#fff";
-      ctx.fillText(dispTop, pillX - ctx.measureText(dispTop).width / 2, pillY - 6);
-      var done = mType.slice(0, m.progress), rest = mType.slice(m.progress);
-      ctx.font = "700 13px system-ui, sans-serif";
-      var x0 = pillX - ctx.measureText(mType).width / 2;
-      ctx.fillStyle = C.amber100;
-      ctx.fillText(done, x0, pillY + 14);
-      ctx.fillStyle = "#fff";
-      ctx.fillText(rest, x0 + ctx.measureText(done).width, pillY + 14);
-    } else {
-      /* v105: hien dang co dau ("bánh mì") khi dai bang chuoi go. */
-      var dispOne = G71.displayWord(m);
-      var showOne = (dispOne.length === mType.length) ? dispOne : mType;
-      var done2 = showOne.slice(0, m.progress), rest2 = showOne.slice(m.progress);
-      var x02 = pillX - ctx.measureText(showOne).width / 2;
-      ctx.fillStyle = C.amber100;
-      ctx.fillText(done2, x02, pillY + 6);
-      ctx.fillStyle = "#fff";
-      ctx.fillText(rest2, x02 + ctx.measureText(done2).width, pillY + 6);
+    /* Dòng trên: nghĩa tiếng Việt. */
+    ctx.font = "700 16px system-ui, sans-serif";
+    ctx.fillStyle = "#fff";
+    ctx.fillText(pl.top, pillX - ctx.measureText(pl.top).width / 2, pillY - 6);
+    /* Dòng dưới: gợi ý — chữ đầu + chữ đã gõ đúng tô hổ phách nhạt,
+       ô trống "_" trắng. Vẽ từng ký tự để tô đúng từng chữ. */
+    ctx.font = "700 13px system-ui, sans-serif";
+    var bot = pl.bot;
+    var cx = pillX - ctx.measureText(bot).width / 2;
+    for (var ci = 0; ci < bot.length; ci++) {
+      var ch = bot.charAt(ci);
+      ctx.fillStyle = (ch === "_") ? "#fff" : C.amber100;
+      ctx.fillText(ch, cx, pillY + 14);
+      cx += ctx.measureText(ch).width;
     }
+    ctx.restore();
+  }
+  /* v117 P5d: Ran Lua (ban dong hanh) — than cuon 2 vong, dau ngang cao,
+     luoi che, mat ho phach; ve theo ART_DIRECTION (ho phach + cham). */
+  function drawSnakeCompanion(ctx, x, y, s, t) {
+    ctx.save();
+    ctx.translate(x, y + Math.sin(t / 600) * 2);
+    ctx.fillStyle = "rgba(0,0,0,.25)";
+    ctx.beginPath(); ctx.ellipse(0, s * 0.9, s * 1.1, s * 0.22, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = C.amber700; ctx.strokeStyle = C.ink800; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.ellipse(0, s * 0.45, s * 1.05, s * 0.42, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = C.amber500;
+    ctx.beginPath(); ctx.ellipse(0, s * 0.28, s * 0.78, s * 0.32, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = C.amber700; ctx.lineWidth = s * 0.42; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(s * 0.45, s * 0.2); ctx.quadraticCurveTo(s * 0.85, -s * 0.35, s * 0.55, -s * 0.75); ctx.stroke();
+    ctx.fillStyle = C.amber700;
+    ctx.beginPath(); ctx.arc(s * 0.55, -s * 0.85, s * 0.42, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = "#92400E"; ctx.lineWidth = 2; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(s * 0.9, -s * 0.8); ctx.lineTo(s * 1.25, -s * 0.95); ctx.moveTo(s * 0.9, -s * 0.8); ctx.lineTo(s * 1.25, -s * 0.65); ctx.stroke();
+    ctx.fillStyle = C.ink800;
+    ctx.beginPath(); ctx.arc(s * 0.45, -s * 0.95, s * 0.09, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#fff";
+    ctx.beginPath(); ctx.arc(s * 0.48, -s * 0.98, s * 0.03, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.35)";
+    ctx.beginPath(); ctx.arc(-s * 0.3, s * 0.35, s * 0.12, 0, Math.PI * 2); ctx.fill();
     ctx.restore();
   }
 
@@ -1807,7 +1862,8 @@
     /* v105b: khách mới (chưa thắng ải nào) mở bản đồ lần đầu phải thấy
        Vùng 1; người chơi cũ vẫn mở ở vùng xa nhất đã mở. */
     curRegion = hasAnyCleared(RL) ? Math.min(RL.region, 5) : 1;
-    var stg = G71.openStage("🔥 Rồng Lửa — 5 Vùng", function () { teardown(); });
+    var stg = G71.openStage("🔥 Rồng Lửa — 5 Vùng", function () { teardown(); },
+      "Mỗi quái hiện NGHĨA tiếng Việt của từ nó mang — gõ từ để tung chiêu (từ ẩn, chỉ gợi ý chữ đầu + độ dài). Gõ xong một từ là tung một chiêu. Phím 1/2/3 đổi hệ Lửa/Nước/Điện: đúng hệ quái yếu thì sát thương gấp đôi. Mỗi lúc chỉ một quái lên đánh. Phím mũi tên lái rồng né đạn quái.");
     stage = stg;
     buildControls(stg);
     showMap();
@@ -2507,7 +2563,14 @@
       __wl.style.cssText = "padding:6px 12px;font-size:21px;font-weight:700;";
       stage.hud.parentNode.insertBefore(__wl, stage.hud.nextSibling);
     }
-    if (__wl) __wl.textContent = "Từ đang đánh: " + (__act ? (__act.type || __act.w || "—") : "—") + " · ❤️×" + battle.hearts;
+    /* v117 P5a: dong HUD DOM hien NGHIA + goi y (chu dau + do dai) thay
+       cho tu — tu tren canvas thi probe DOM khong do duoc. */
+    var __trk = "en";
+    try { __trk = (typeof G71 !== "undefined" && G71.trackKey) ? (G71.trackKey() || "en") : "en"; } catch (e) {}
+    var __mh = __act ? meaningHint(__act, __trk) : null;
+    if (__wl) __wl.textContent = "Nghĩa đang đánh: " + (__act ? (__act.vi || "—") : "—")
+      + (__mh ? " · Gợi ý: '" + __mh.first + "' · " + __mh.len + " " + __mh.unit : "")
+      + " · ❤️×" + battle.hearts;
     var tag = document.getElementById("rlShieldTag");
     if (tag) tag.innerHTML = battle.shield > 0 ? rlImgTag("shield", 18) + " x" + battle.shield : "";
     var ctag = document.getElementById("rlCompanionTag");
@@ -2534,6 +2597,10 @@
     if (r.ok && r.completed) {
       bolts.push({ x0: battle.dragon.x, y0: Math.max(0.05, battle.dragon.y - 0.06), x1: r.monster.x, y1: r.monster.y, el: battle.element,
         t: 0, ttl: 0.22, dmg: r.dmg, done: false });
+      /* v117 P5a: danh trung thi hien lai tu day du kem nghia de nho. */
+      var __fw = r.monster.w;
+      if (r.monster.py) __fw += " (" + r.monster.py + ")";
+      floats.push({ x: r.monster.x, y: Math.max(0.08, r.monster.y - 0.28), text: __fw + " — " + (r.monster.vi || ""), ttl: 1.6, el: battle.element });
       if (r.bossPhase) toastSafe("Trùm đổi hệ! Giờ trùm yếu hệ " + ELEMENTS[r.bossPhase.weak].name + ".");
       if (r.groupHit) floats.push({ x: r.monster.x, y: Math.max(0.08, r.monster.y - 0.1), text: "Điểm yếu nhóm từ! ×2", ttl: 1.2, el: battle.element });
       if (r.comboPart) floats.push({ x: r.monster.x, y: Math.max(0.08, r.monster.y - 0.16), text: "COMBO CỤM TỪ ×3!", ttl: 1.2, el: battle.element });
@@ -2597,6 +2664,8 @@
 
   function frame(now) {
     if (mode !== "battle" || !battle) return;
+    /* v117 P3b: tam dung khi hop thoai "?" dang mo — khong tick, khong mat tim. */
+    if (stage && stage.paused) { last = now; if (mode === "battle") requestAnimationFrame(frame); return; }
     var dt = Math.min(0.05, (now - last) / 1000);
     last = now;
     /* v102: cho tick() biết kích cỡ canvas thật để tách quái theo đúng
@@ -2689,6 +2758,22 @@
     /* Rồng ở vị trí lái được (mặc định đáy sân, giữa). */
     var hurt = now < battle.graceUntil && Math.floor(now / 120) % 2 === 0;
     drawDragonUp(ctx, battle.dragon.x * W, battle.dragon.y * H, 22, now, hurt);
+    /* v117 P5d: bạn đồng hành Rắn Lửa cuộn bên cạnh rồng (đã mở khi
+       thắng trùm Núi Lửa). */
+    try {
+      var __comps = unlockedCompanions(RL);
+      if (__comps.indexOf("snake") >= 0) {
+        drawSnakeCompanion(ctx, Math.max(30, battle.dragon.x * W - 52), battle.dragon.y * H + 26, 16, now);
+      }
+    } catch (e) {}
+    /* v117 P5c: thẻ trên quái vẽ SAU rồng (lớp trên cùng) — nhãn luôn
+       đọc được trọn vẹn, rồng không che chữ nữa. */
+    battle.words.forEach(function (m, i) {
+      if (m.status !== "advancing") return;
+      var py2 = m.y * H;
+      if (py2 < -100 || py2 > H + 100) return;
+      drawMonsterPill(ctx, m, W, H, now, battle.active === i);
+    });
     if (mode === "battle") requestAnimationFrame(frame);
   }
 
@@ -2699,7 +2784,7 @@
     findKidnapped: findKidnapped, reviewKidnapped: reviewKidnapped,
     mergeCollected: mergeCollected, srsBumpForLevel3: srsBumpForLevel3,
     art: { ready: rlReady, base: RL_ART, files: RL_IMGS, paint: paintRegion, paintWeather: paintWeather,
-      drawMonster: drawMonster, drawDragonUp: drawDragonUp,
+      drawMonster: drawMonster, drawMonsterPill: drawMonsterPill, drawSnakeCompanion: drawSnakeCompanion, drawDragonUp: drawDragonUp,
       forestBg: rlForestBgName, forestBand: rlForestBand, forestFile: rlForestBgFile, forestLabel: rlForestBandLabel },
     store: { load: loadRL, save: saveRL, fresh: freshRL },
     regions: REGIONS, regionById: regionById,

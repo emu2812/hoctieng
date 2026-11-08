@@ -15231,7 +15231,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { w: "five", ipa: "/faɪv/", vi: "năm", col: "five books", ex: "She has five books on the desk.", exv: "Cô ấy có năm quyển sách trên bàn." },
         { w: "six", ipa: "/sɪks/", vi: "sáu", col: "six days", ex: "We stay here for six days.", exv: "Chúng ta ở đây sáu ngày." },
         { w: "seven", ipa: "/ˈsevn/", vi: "bảy", col: "seven days", ex: "There are seven days in a week.", exv: "Một tuần có bảy ngày." },
-        { w: "eight", ipa: "/eɪt/", vi: "tám", col: "eight hours", ex: "I sleep for eight hours at night.", exv: "Tôi ngủ tám tiếng vào ban đêm." },
+        { w: "eight", ipa: "/eɪt/", vi: "tám", col: "eight chairs", ex: "We have eight chairs in the classroom.", exv: "Chúng ta có tám cái ghế trong lớp học." },
         { w: "nine", ipa: "/naɪn/", vi: "chín", col: "nine students", ex: "Nine students are in the class today.", exv: "Hôm nay có chín học sinh trong lớp." }
       );
     }

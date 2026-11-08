@@ -97,8 +97,23 @@
           st.score += 10;
           st.resolved++;
           st.active = null;
+          /* v117 P4: go dung tu thi thien thach gan voi tu do cung bi ha
+             ngay. Da roi nhanh hon tu (0,10-0,16 so voi 0,075-0,105) va
+             khong ban duoc — nhung mat thuong thay da nam ngay duoi vien
+             tu nen nguoi choi hieu la mot cap; truoc day go dung tu roi
+             ma da van roi tiep roi dam tau mat tim (anh Bui 08/11:
+             "directions"). Chi ha hon GAN NHAT trong vong 0,35 (theo
+             toa do chuan hoa) — da xa tu thi van phai ne nhu cu. */
+          var rockShot = null, bestD = 0.35, bestR = -1;
+          for (var ri = 0; ri < (st.rocks || []).length; ri++) {
+            var rk = st.rocks[ri];
+            var ddx = rk.x - w.x, ddy = rk.y - w.y;
+            var dd = Math.sqrt(ddx * ddx + ddy * ddy);
+            if (dd < bestD) { bestD = dd; bestR = ri; }
+          }
+          if (bestR >= 0) { rockShot = st.rocks[bestR]; st.rocks.splice(bestR, 1); }
           if (st.resolved >= st.total) st.over = "win";
-          return { ok: true, completed: true };
+          return { ok: true, completed: true, rockShot: rockShot };
         }
         return { ok: true };
       }
@@ -333,7 +348,8 @@
        tính này, và jsdom cũng có — sẽ nhận nhầm desktop thành cảm ứng). */
     var isTouch = false;
     try { isTouch = !!(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(pointer: coarse)").matches); } catch (e) {}
-    var stg = G71.openStage("⌨️ Luyện Gõ", function () { running = false; });
+    var stg = G71.openStage("⌨️ Luyện Gõ", function () { running = false; },
+      "Gõ đúng từ để bắn hạ viên từ đang rơi. Gõ sai chỉ gõ lại, không mất tim. Phím ← → lái tàu né thiên thạch; để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim. Gõ đúng một từ thì thiên thạch ngay dưới từ đó cũng bị hạ.");
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
     /* v105b: ngưỡng "vào màn" theo chân dung vẽ thật — viên chỉ hiện
@@ -415,6 +431,10 @@
       if (r.completed && actBefore !== null && st.words[actBefore]) {
         var wd2 = st.words[actBefore];
         for (var i = 0; i < 14; i++) parts.push({ x: wd2.x, y: wd2.y, vx: (Math.random() - 0.5) * 0.6, vy: (Math.random() - 0.5) * 0.6, ttl: 0.6 });
+      }
+      /* v117 P4: nổ thêm tại chỗ thiên thạch vừa bị hạ cùng từ. */
+      if (r.completed && r.rockShot) {
+        for (var j = 0; j < 10; j++) parts.push({ x: r.rockShot.x, y: r.rockShot.y, vx: (Math.random() - 0.5) * 0.6, vy: (Math.random() - 0.5) * 0.6, ttl: 0.6 });
       }
       if (before !== st.cleared || r.lostHeart) hud();
       maybeEnd();
@@ -542,6 +562,8 @@
     var last = performance.now();
     function frame(now) {
       if (!running) return;
+      /* v117 P3b: tam dung khi hop thoai "?" dang mo — khong tick, khong mat tim. */
+      if (stg.paused) { last = now; requestAnimationFrame(frame); return; }
       var dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       syncInput();
