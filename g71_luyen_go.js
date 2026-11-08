@@ -6,7 +6,7 @@
    mất tim chỉ khi: từ rơi xuống đáy (gõ chậm) hoặc đâm phải thiên
    thạch (né dở). Tốc độ + thiên thạch dày dần theo mốc.
    Giữ luật lõi v71: 20 từ/lượt, 3 tim, +10/từ, chủ đề theo vòng,
-   bàn phím màn hình + chạm khóa, ân hạn 500ms sau mỗi lần mất tim.
+   ô nhập thật + chạm khóa, ân hạn 500ms sau mỗi lần mất tim.
    Hình v83: nền vũ trụ tranh màu nước sâu hơn (paintSpace mới), rồng
    và tên lửa to hơn. v101 (phán quyết của Bùi 06/11): làm lại giao
    diện theo ART_DIRECTION.md (một tên lửa duy nhất, bỏ rồng cưỡi
@@ -44,7 +44,7 @@
     },
     /* Từ mục tiêu hiện tại (v101): từ đang khóa nếu còn rơi VÀ đã vào
        màn (y >= 0), nếu không thì từ rơi thấp nhất ĐÃ VÀO màn. Dùng
-       cho thanh Nghĩa + bàn phím, để Nghĩa luôn khớp đúng từ người
+       cho thanh Nghĩa + ô nhập, để Nghĩa luôn khớp đúng từ người
        chơi đang thấy — trước đây typeLetter tự khóa cả từ còn ở trên
        mép màn (y < 0), nên Nghĩa có thể hiện nghĩa của từ chưa nhìn
        thấy (ảnh Bùi gửi 06/11: "lớn tuổi" trong khi các từ thấy được
@@ -333,17 +333,13 @@
        tính này, và jsdom cũng có — sẽ nhận nhầm desktop thành cảm ứng). */
     var isTouch = false;
     try { isTouch = !!(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(pointer: coarse)").matches); } catch (e) {}
-    var stg = G71.openStage("⌨️ Luyện Gõ",
-      isTouch
-        ? "Chạm vào ô gõ để mở bàn phím điện thoại; gõ đúng từ để bắn hạ. Kéo để lái tàu né thiên thạch. Gõ sai chỉ gõ lại, không mất tim. Để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim."
-        : "Phím ← → (hoặc kéo chuột) lái tàu né thiên thạch; gõ chữ để bắn hạ từ. Gõ sai chỉ gõ lại, không mất tim. Để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim.",
-      function () { running = false; });
+    var stg = G71.openStage("⌨️ Luyện Gõ", function () { running = false; });
     var cv = stg.canvas, ctx = stg.ctx;
     if (!ctx) { stg.hud.innerHTML = "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"; return; }
     /* v105b: ngưỡng "vào màn" theo chân dung vẽ thật — viên chỉ hiện
        trọn khi tâm viên cách mép trên ít nhất nửa chiều cao viên
        (28px cho viên 2 dòng, 18px cho viên 1 dòng; lấy 28px cho cả
-       hai để Nghĩa/bàn phím/khóa từ luôn chỉ từ đã thấy trọn). Mọi
+       hai để Nghĩa/ô nhập/khóa từ luôn chỉ từ đã thấy trọn). Mọi
        chỗ đọc từ mục tiêu trong trận đều truyền visY() vào LOGIC. */
     function visY() { return 28 / ((cv && cv.height) || 500); }
 
@@ -364,107 +360,44 @@
     }
     hud();
 
-    /* Bàn phím (v101): cảm ứng → BỎ bàn phím tự vẽ, dùng ô nhập thật để
-       mở BÀN PHÍM GỐC của điện thoại (lang + inputmode theo track);
-       desktop → giữ bàn phím trên màn hình như cũ.
-       v91: track tiếng Hàn (TP) thì bàn phím là các âm tiết Hangul của từ
-       đang khóa (bấm theo thứ tự để ghép thành từ); các track khác gõ
-       chữ cái như cũ (tiếng Trung gõ pinyin bằng chữ cái Latin). */
-    var kb = null, kbToggle = null, typeInput = null, composing = false;
-    var kbSig = "";
-    /* v105c: bàn phím vẽ tự ẩn khi gõ phím thật (Bùi 21:56 06/11: bàn
-       phím A–Z vẫn hiện dù đã gõ bằng bàn phím thật — Bùi chê nó chiếm
-       chỗ từ 14:07 06/11). Mặc định mở ván vẫn hiện như cũ để người
-       dùng chuột thấy được; chỉ ẩn sau khi gõ phím chữ thật. Ẩn/hiện
-       không đổi luật chơi — chỉ display, sân canvas tự rộng ra nhờ
-       flex + ResizeObserver của openStage. */
-    var kbShown = true;
-    function setKbVisible(v) {
-      if (!kb) return;
-      kbShown = !!v;
-      kb.style.display = kbShown ? "flex" : "none";
-      if (kbToggle) kbToggle.textContent = kbShown ? "⌨️ Ẩn bàn phím" : "⌨️ Bàn phím";
-      if (stg.resize) stg.resize();
-    }
-    function refreshKb() {
-      if (!kb) return;
-      var isTp = false;
-      try { isTp = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
-      var act = LOGIC.targetWord(st, visY());
-      var sig = (isTp ? "tp:" : "az:") + (act ? (act.type || act.w) : "") + "|" + st.resolved;
-      if (sig === kbSig) return;
-      kbSig = sig;
-      kb.innerHTML = "";
-      /* v102: track TP chưa có từ nào trên màn thì KHÔNG hiện bàn A–Z
-         (chữ Latin vô nghĩa với tiếng Hàn — kiểm render v101 thấy bàn
-         A–Z lúc mới mở ván); hiện dòng chờ thay cho bàn phím. */
-      if (isTp && !act) {
-        var ph = document.createElement("div");
-        ph.style.cssText = "padding:10px 8px;color:#6B7280;font-size:14px;text-align:center;width:100%;";
-        ph.textContent = "⏳ Chờ từ rơi xuống…";
-        kb.appendChild(ph);
-        return;
-      }
-      var keys = isTp && act ? String(act.type || act.w).split("") : "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-      keys.forEach(function (L) {
-        var b = document.createElement("button");
-        b.className = "btn";
-        b.textContent = L;
-        b.style.cssText = "padding:6px 4px;min-width:30px;font-size:15px;";
-        b.onclick = function () { feed(L); };
-        kb.appendChild(b);
-      });
-    }
-    if (isTouch) {
-      /* Ô nhập thật (v101): lang + inputmode theo track đang học để bàn
-         phím gốc mở đúng ngôn ngữ — EN/TC: bàn Latin (en); ZH: gõ
-         pinyin bằng chữ Latin không dấu (zh-Latn); TP: bàn Hangul
-         (ko-KR). KHÔNG có keyword "hangul"/"korean" trong chuẩn
-         WHATWG inputmode nên TP dùng inputmode="text" + lang="ko-KR"
-         (Gboard/iOS chọn bàn phím theo lang của ô nhập). */
-      var tk = "en";
-      try { tk = (typeof G71 !== "undefined" && G71.trackKey) ? (G71.trackKey() || "en") : "en"; } catch (e) {}
-      typeInput = document.createElement("input");
-      typeInput.id = "g71TypeInput";
-      typeInput.setAttribute("lang", tk === "tp" ? "ko-KR" : (tk === "zh" ? "zh-Latn" : "en"));
-      typeInput.setAttribute("inputmode", tk === "tp" ? "text" : "latin");
-      typeInput.setAttribute("autocapitalize", "off");
-      typeInput.setAttribute("autocorrect", "off");
-      typeInput.setAttribute("autocomplete", "off");
-      typeInput.setAttribute("spellcheck", "false");
-      typeInput.setAttribute("placeholder", "⌨️ Chạm để gõ");
-      typeInput.style.cssText = "display:block;width:calc(100% - 24px);margin:8px auto;padding:10px 14px;font-size:17px;color:#1E1B4B;background:#fff;border:2px solid #C7D2FE;border-radius:20px;outline:none;box-sizing:border-box;";
-      /* v102: nhiều bàn phím Android (Samsung, TECNO...) gõ theo kiểu
-         composition — từng phím chỉ đổi chữ đang ghép, compositionend
-         chỉ tới khi bấm dấu cách/enter; mà từ trong game không có dấu
-         cách nên game bỏ qua toàn bộ phím đang ghép (Bùi báo 15:02
-         06/11: "Chạm để gõ nhưng có gõ được đâu"). Sửa: track
-         Latin/pinyin (EN/TC/ZH) xử lý ngay cả khi đang ghép (chữ đang
-         ghép là chữ cái hoàn chỉnh); riêng TP (Hangul) vẫn chờ
-         compositionend vì chữ đang ghép là jamo dở (ㅎ chưa thành 한),
-         xử lý sớm sẽ xóa mất chữ đang ghép. */
-      var isTpTrack = (tk === "tp");
-      typeInput.addEventListener("compositionstart", function () { composing = true; });
-      typeInput.addEventListener("compositionend", function () { composing = false; processInput(); });
-      typeInput.addEventListener("input", function () { if (!composing || !isTpTrack) processInput(); });
-      stg.el.appendChild(typeInput);
-    } else {
-      kb = document.createElement("div");
-      kb.id = "g71Kb";
-      kb.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:6px 8px;background:#fff;border-top:2px solid #F3D9A4;touch-action:manipulation;";
-      refreshKb();
-      stg.el.appendChild(kb);
-      /* v105c: nút mở lại bàn phím vẽ — nhỏ gọn một dòng dưới bàn phím,
-         chỉ có trên desktop (cảm ứng dùng bàn phím gốc nên không có kb
-         vẽ, cũng không có nút này). */
-      kbToggle = document.createElement("button");
-      kbToggle.id = "g71KbToggle";
-      kbToggle.className = "btn";
-      kbToggle.style.cssText = "display:block;margin:6px auto;padding:4px 12px;font-size:13px;";
-      kbToggle.textContent = "⌨️ Ẩn bàn phím";
-      kbToggle.onclick = function () { setKbVisible(kb.style.display === "none"); };
-      stg.el.appendChild(kbToggle);
-    }
+    /* v113 S11: BO HAN BAN PHIM VE A-Z (Bui 06:12 08/11 — chiem cho
+       khung game). Chi con MOT o nhap that mo BAN PHIM GOC cua dien
+       thoai (lang + inputmode theo track, nhu v101); may tinh go phim
+       vat ly qua onKey nhu cu. O nhap hien tren MOI thiet bi (truoc
+       chi cam ung), nho gon 1 dong, tra dien tich cho khung game. */
+    var typeInput = null, composing = false;
+    /* Ô nhập thật (v101, v113 S11 mở cho MỌI thiết bị): lang + inputmode
+       theo track đang học để bàn phím gốc mở đúng ngôn ngữ — EN/TC: bàn
+       Latin (en); ZH: gõ pinyin bằng chữ Latin không dấu (zh-Latn); TP:
+       bàn Hangul (ko-KR). KHÔNG có keyword "hangul"/"korean" trong chuẩn
+       WHATWG inputmode nên TP dùng inputmode="text" + lang="ko-KR"
+       (Gboard/iOS chọn bàn phím theo lang của ô nhập). */
+    var tk = "en";
+    try { tk = (typeof G71 !== "undefined" && G71.trackKey) ? (G71.trackKey() || "en") : "en"; } catch (e) {}
+    typeInput = document.createElement("input");
+    typeInput.id = "g71TypeInput";
+    typeInput.setAttribute("lang", tk === "tp" ? "ko-KR" : (tk === "zh" ? "zh-Latn" : "en"));
+    typeInput.setAttribute("inputmode", tk === "tp" ? "text" : "latin");
+    typeInput.setAttribute("autocapitalize", "off");
+    typeInput.setAttribute("autocorrect", "off");
+    typeInput.setAttribute("autocomplete", "off");
+    typeInput.setAttribute("spellcheck", "false");
+    typeInput.setAttribute("placeholder", "⌨️ Chạm để gõ");
+    typeInput.style.cssText = "display:block;width:calc(100% - 24px);margin:8px auto;padding:10px 14px;font-size:17px;color:#1E1B4B;background:#fff;border:2px solid #C7D2FE;border-radius:20px;outline:none;box-sizing:border-box;";
+    /* v102: nhiều bàn phím Android (Samsung, TECNO...) gõ theo kiểu
+       composition — từng phím chỉ đổi chữ đang ghép, compositionend
+       chỉ tới khi bấm dấu cách/enter; mà từ trong game không có dấu
+       cách nên game bỏ qua toàn bộ phím đang ghép (Bùi báo 15:02
+       06/11: "Chạm để gõ nhưng có gõ được đâu"). Sửa: track
+       Latin/pinyin (EN/TC/ZH) xử lý ngay cả khi đang ghép (chữ đang
+       ghép là chữ cái hoàn chỉnh); riêng TP (Hangul) vẫn chờ
+       compositionend vì chữ đang ghép là jamo dở (ㅎ chưa thành 한),
+       xử lý sớm sẽ xóa mất chữ đang ghép. */
+    var isTpTrack = (tk === "tp");
+    typeInput.addEventListener("compositionstart", function () { composing = true; });
+    typeInput.addEventListener("compositionend", function () { composing = false; processInput(); });
+    typeInput.addEventListener("input", function () { if (!composing || !isTpTrack) processInput(); });
+    stg.el.appendChild(typeInput);
     if (stg.resize) stg.resize();
     /* Mở bàn phím gốc ngay khi trận bắt đầu (đang trong luồng bấm nút
        mở game — cử chỉ người dùng — nên iOS cho mở bàn phím). */
@@ -548,11 +481,6 @@
       var isTpKey = false;
       try { isTpKey = (typeof G71 !== "undefined" && G71.trackKey && G71.trackKey() === "tp"); } catch (e) {}
       if (e.key && e.key.length === 1 && (isTpKey || /[a-zA-Z]/.test(e.key))) {
-        /* v105c: gõ phím chữ thật thì ẩn bàn phím vẽ (người gõ phím thật
-           không cần bàn phím vẽ nữa — phím mũi tên lái tàu thì không ẩn,
-           người dùng chuột vẫn cần bàn phím vẽ để bấm chữ); bấm nút
-           "⌨️ Bàn phím" để mở lại. */
-        if (kbShown) setKbVisible(false);
         feed(e.key);
       }
     }
@@ -602,11 +530,11 @@
       } catch (e) {}
       if (st.over === "win") {
         G71.endScreen(stg, true, "🎉 Thắng rồi!",
-          ["Gõ đúng " + st.cleared + "/" + st.total + " từ.", "Điểm: " + st.score + " · +10 XP đã cộng vào tiến trình."],
+          ["Gõ đúng " + st.cleared + "/" + st.total + " từ.", "Điểm: " + st.score + "."],
           start);
       } else {
         G71.endScreen(stg, false, "Hết tim rồi!",
-          ["Gõ đúng " + st.cleared + "/" + st.total + " từ.", "Chơi lại để thử chủ đề khác nhé."],
+          ["Gõ đúng " + st.cleared + "/" + st.total + " từ."],
           start);
       }
     }
@@ -625,16 +553,8 @@
          tách viên (pillRect) đo theo canvas thật. */
       st.canvasW = cv.width; st.canvasH = cv.height;
       LOGIC.tick(st, dt, now);
-      /* v102-fix: refreshKb PHẢI chạy SAU tick — trước đây nó chạy trước
-         tick nên bàn phím đọc trạng thái trước-tick còn thanh Nghĩa (vẽ
-         sau tick) đọc trạng thái sau-tick; khung hình nào tick đổi từ
-         mục tiêu (từ rơi khỏi màn / từ khác vượt lên) thì bàn phím hiện
-         âm tiết của từ cũ trong khi Nghĩa hiện từ mới — kiểm render v101
-         và v102 đều bắt được (bàn phím hiện từ không còn trên màn, bấm
-         viên mục tiêu cũng không đổi bàn phím ngay). Sau tick thì bàn
-         phím, thanh Nghĩa, viền mục tiêu và syncInput luôn đọc cùng một
-         trạng thái, ở mọi tốc độ khung hình. */
-      refreshKb();
+      /* v113 S11: da bo ban phim ve — chi con o nhap that; syncInput()
+         o dau frame giu o nhap dong bo voi tu muc tieu. */
       hud(); /* v103-fix: vẽ lại HUD sau tick để tim mất trong tick hiện ngay (xem hud()). */
       var W = cv.width, H = cv.height;
       if (!W || !H) { requestAnimationFrame(frame); return; }
@@ -650,7 +570,7 @@
         drawRock(ctx, rk.x * W, rk.y * H, rk.r * W, rk.rot);
       });
       /* v102: tô sáng TỪ MỤC TIÊU (không chỉ từ đang khóa) — thanh Nghĩa,
-         bàn phím và viên từ luôn chỉ cùng một từ, người chơi biết ngay
+         ô nhập và viên từ luôn chỉ cùng một từ, người chơi biết ngay
          từ nào cần gõ (kiểm render v101: không có viền khóa nên không
          biết từ nào là từ cần gõ). targetWord ưu tiên từ đang khóa nên
          một luật này bao cả hai. */

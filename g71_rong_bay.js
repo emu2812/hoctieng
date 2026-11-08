@@ -239,9 +239,7 @@
     var shakeUntil = 0;
     var celebrateUntil = 0;
     var dragonY = 0;
-    var stg = G71.openStage("🐉 Rồng Bay Trên Mây",
-      "Rồng bay liên tục về phía trước — phím ↑ ↓ đổi làn, chuột/cảm ứng: bấm vào làn muốn bay. Bay vào mây có từ đúng nghĩa cho trước. Né mây giông (đâm phải mất tim)! Chuỗi đúng nhân điểm, mây vàng +30. Bấm ⭐/🐢 để dùng vật phẩm (phím 1/2).",
-      function () { running = false; });
+    var stg = G71.openStage("🐉 Rồng Bay Trên Mây", function () { running = false; });
     /* Tiêu đề hiện đủ tên trên màn hẹp: nút Thoát chỉ còn icon ✕. */
     var exitBtn = stg.el.querySelector("#g71Exit");
     if (exitBtn) { exitBtn.textContent = "✕"; exitBtn.title = "Thoát"; }
@@ -262,21 +260,23 @@
 
     function hud() {
       var rd = st.rounds[Math.min(st.round, st.rounds.length - 1)];
-      /* HUD một dòng, nhãn gọn để tim/vòng/tiến độ/điểm không bị cắt trên
-         màn hẹp; nghĩa dài tự cắt bằng … (giữ đúng luật HUD 1 dòng v74). */
+      /* HUD nghĩa hiện ĐỦ, cho xuống dòng (v113 S12, lệnh Bùi: mọi chữ
+         hiện đủ — GHI ĐÈ luật HUD 1 dòng v74: nghĩa dài không cắt bằng …).
+         Nghĩa xuống 2 dòng làm HUD cao thêm ~1 dòng, sân canvas hẹp lại
+         chút nhưng không chữ nào bị cắt giữa từ nữa. */
       stg.hud.style.fontSize = "14px";
       stg.hud.innerHTML = "<span style=\"flex:none\">" + G71.hearts(st.hearts) + "</span>"
         + "<span style=\"flex:none\">Vòng " + (Math.min(st.round + 1, st.rounds.length)) + "/" + st.rounds.length + "</span>"
         + "<span style=\"flex:none\">" + Math.round(st.round / st.rounds.length * 100) + "%</span>"
         + "<span style=\"flex:none\">Điểm " + st.score + "</span>"
         + (st.streak >= 2 ? "<span style=\"flex:none;color:#B45309\">🔥×" + LOGIC.comboMult(st.streak) + "</span>" : "")
-        + "<span style=\"flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap\">Nghĩa: " + G71.escHtml(rd ? rd.vi : "") + "</span>";
+        + "<span style=\"flex:1;min-width:0;white-space:normal;line-height:1.3;font-size:13px;overflow-wrap:break-word\">Nghĩa: " + G71.escHtml(rd ? rd.vi : "") + "</span>";
       if (starBtn) { starBtn.textContent = "⭐×" + st.items.star; starBtn.disabled = st.items.star <= 0 || st.starActive || !!st.over; }
       if (shieldBadge) shieldBadge.textContent = "🛡️×" + st.items.shield;
       if (slowBtn) { slowBtn.textContent = "🐢×" + st.items.slow; slowBtn.disabled = st.items.slow <= 0 || LOGIC.slowActive(st, performance.now()) || !!st.over; }
     }
     hud();
-    if (!ctx) { if (stg.hint) stg.hint.textContent += " Trình duyệt này chưa hỗ trợ canvas."; return; }
+    if (!ctx) { stg.hud.insertAdjacentHTML("beforeend", "<p>Trình duyệt này chưa hỗ trợ canvas.</p>"); return; } /* v113-fix: giu HUD (Vong/Diem/Nghia) khi khong co canvas — chi them dong bao, khong xoa HUD nhu S12 (lam mat HUD o jsdom + may khong canvas). */
 
     function onKey(e) {
       if (e.key === "ArrowUp") { lane = Math.max(0, lane - 1); e.preventDefault(); }
@@ -288,7 +288,7 @@
     cv.addEventListener("click", function (e) {
       var r = cv.getBoundingClientRect();
       var py = (e.clientY - r.top) / r.height;
-      lane = py < 0.33 ? 0 : (py < 0.66 ? 1 : 2);
+      lane = py < 0.34 ? 0 : (py < 0.60 ? 1 : 2); /* v113 S12: mốc bấm theo điểm giữa các làn mới. */
     });
 
     var ended = false;
@@ -303,13 +303,12 @@
         var stars = LOGIC.starsFor(st.score, true);
         G71.endScreen(stg, true, "🎉 Thắng rồi!",
           ["Sao: " + "★".repeat(stars) + "☆".repeat(3 - stars) + ".",
-           "Điểm: " + st.score + " · Điểm cao nhất: " + best + " · Chuỗi dài nhất: " + st.bestStreak + ".",
-           "+10 XP đã cộng vào tiến trình."],
+           "Điểm: " + st.score + " · Điểm cao nhất: " + best + " · Chuỗi dài nhất: " + st.bestStreak + "."],
           start);
       } else {
         G71.endScreen(stg, false, "Hết tim rồi!",
           ["Điểm: " + st.score + " · Điểm cao nhất: " + best + ".",
-           "Chuỗi dài nhất: " + st.bestStreak + ". Chơi lại để thử bộ từ khác nhé."],
+           "Chuỗi dài nhất: " + st.bestStreak + "."],
           start);
       }
     }
@@ -331,7 +330,7 @@
       if (!W || !H) { requestAnimationFrame(frame); return; }
       var rdIdx = Math.min(st.round, st.rounds.length - 1);
       var rd = st.rounds[rdIdx];
-      var laneYs = [H * 0.22, H * 0.5, H * 0.78];
+      var laneYs = [H * 0.20, H * 0.48, H * 0.72]; /* v113 S12: siết làn — làn dưới lên 0.72H để mây làn dưới hiện trọn, lề dưới ~0.28H (ảnh Bùi 06:14: mây cuối bị cắt ở mép dưới màn hình dọc). */
       var speedRound = !!st.speed[rdIdx];
       var slowNow = LOGIC.slowActive(st, now);
       var cg = G71.cloudGeom(W, H);
@@ -446,18 +445,49 @@
           G71.drawFitText(ctx, "★", cx + cg.hw - 6, cy - cg.hh - 4, 22, 15, 11, 1, "800");
         }
         ctx.fillStyle = "#1F2430";
-        G71.drawFitText(ctx, c.disp || c.word, cx, cy, cg.hw * 2 - 24, 18, 11, 2, "700");
+        /* v113 S12 (luật trọng tâm, lệnh Bùi): từ mục tiêu — mây khớp nghĩa
+           cho trước — TO nhất và NÉT nhất màn: 24px/800 + halo trắng để chữ
+           tách khỏi nền mây/trời. Các mây khác giữ 18px/700. */
+        var isTarget = rd && (c.word === rd.correct);
+        if (isTarget) G71.drawFitText(ctx, c.disp || c.word, cx, cy, cg.hw * 2 - 24, 24, 13, 2, "800", "#FFFFFF");
+        else G71.drawFitText(ctx, c.disp || c.word, cx, cy, cg.hw * 2 - 24, 18, 11, 2, "700");
       });
       /* Chủ đề vòng (góc trái trên): nền trắng đặc để chữ không đè lên
          mây trôi phía sau (sửa xấu 18:11). */
       if (rd && rd.theme) {
-        var labelW = Math.min(W * 0.42, 180);
+        /* v113 S12: pill 1 dòng duy nhất, rộng đo theo chữ thật (lệnh Bùi:
+           mọi chữ hiện đủ). Trước đây rộng cố định min(W*0.42,180) mà nhãn
+           thật "Chủ đề: Quản lý dự án (3)" đã ~182px ở 14px nên drawFitText
+           ngắt 2 dòng nhét trong pill cao 26px — dòng 2 tràn khỏi pill.
+           Chừa 160px bên phải cho cụm vật phẩm ⭐/🛡️/🐢 để pill không chui
+           xuống dưới nút vật phẩm (đo thật cụm vật phẩm ~134px + right:10px). */
         var label = "Chủ đề: " + themeShort(rd.theme) + (speedRound ? " · ⚡×2" : "");
+        ctx.font = "700 14px system-ui, sans-serif";
+        var pillW = Math.min(Math.ceil(ctx.measureText(label).width) + 20, W - 160);
+        if (pillW < 80) pillW = 80;
+        /* v113 S12b: nhãn quá dài thì rút gọn theo bậc (vẫn 1 dòng, đủ chữ,
+           không cắt bằng …, không thu xuống 6-7px): bỏ hậu tố tốc độ trước
+           (băng-rôn đã báo vòng tốc độ), rồi bỏ phụ đề sau ": " (chỉ còn
+           tên bộ, vd "Native Chunks 3"). Nhãn dài nhất trong kho
+           ("...Native Chunks 3: Polite and Social Phrases · ⚡×2", 56 ký
+           tự) cũng vừa sau 2 bước rút gọn. */
+        function pillFits(txt, size) {
+          ctx.font = "700 " + size + "px system-ui, sans-serif";
+          return ctx.measureText(txt).width <= pillW - 16;
+        }
+        if (!pillFits(label, 9)) {
+          var shortLabel = "Chủ đề: " + themeShort(rd.theme);
+          if (pillFits(shortLabel, 9)) label = shortLabel;
+          else {
+            var headLabel = "Chủ đề: " + themeShort(rd.theme).split(": ")[0];
+            if (pillFits(headLabel, 9)) label = headLabel;
+          }
+        }
         ctx.fillStyle = "rgba(255,255,255,.92)";
-        G71.rr(ctx, 8, 8, labelW + 16, 26, 13); ctx.fill();
+        G71.rr(ctx, 8, 8, pillW, 26, 13); ctx.fill();
         ctx.strokeStyle = "rgba(31,36,48,.25)"; ctx.lineWidth = 1; ctx.stroke();
         ctx.fillStyle = "rgba(31,36,48,.85)";
-        G71.drawFitText(ctx, label, 16 + labelW / 2, 21, labelW, 14, 10, 2, "700");
+        G71.drawFitText(ctx, label, 8 + pillW / 2, 21, pillW - 16, 14, 9, 1, "700");
       }
       /* Rồng: bổng theo nhịp thở, nghiêng khi đổi làn, nhảy mừng khi đúng,
          rung nhẹ khi sai. */
