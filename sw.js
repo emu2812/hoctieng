@@ -11,7 +11,7 @@
    install nạp lại toàn bộ file tĩnh, skipWaiting + claim để bản mới có hiệu
    lực ngay, không để người học kẹt bản cũ. Đợt đẩy nào đổi file tĩnh thì
    nhớ đổi CACHE_VERSION trong file này. */
-var CACHE_VERSION = "ielts-cache-v117c"; /* v112: Chặng 10 — soi kỹ toàn web như người học, sửa bước 4 kẹt mic, Shadowing, khiên gõ, vân vỏ cây */
+var CACHE_VERSION = "ielts-cache-v118"; /* v112: Chặng 10 — soi kỹ toàn web như người học, sửa bước 4 kẹt mic, Shadowing, khiên gõ, vân vỏ cây */
 var CACHE_ASSETS = ["./", "index.html", "content.js", "content-new.js", "config.js", "g71_common.js", "g71_luyen_go.js", "g71_rong_bay.js", "g71_ban_bong_bong.js", "g71_rong_lua.js", "g71_giai_do.js", "assets/ronglua/nen-rung.png", "assets/ronglua/rung-1.jpg", "assets/ronglua/rung-2.jpg", "assets/ronglua/rung-3.jpg", "assets/ronglua/rong-lua-nho.png", "assets/ronglua/quai-bong-toi.png", "assets/ronglua/quai-lua-badge.png", "assets/ronglua/quai-nuoc-badge.png", "assets/ronglua/quai-dien-badge.png", "assets/ronglua/dong-xu-vang.png", "assets/ronglua/binh-thuoc.png", "assets/ronglua/khien.png", "assets/rongbay/rong-bay.png", "assets/rongbay/may-trang.png", "assets/rongbay/may-vang.png", "assets/rongbay/may-giong.png", "assets/audio/nhac-rung.mp3"];
 
 self.addEventListener("install", function (event) {
