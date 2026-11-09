@@ -53,7 +53,7 @@ p{margin:8px 0}
 .q-opt-sel{outline:3px solid var(--amber);outline-offset:1px}
 .summarybox{background:var(--soft);border:0;border-radius:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 1px 2px rgba(31,36,48,.06),0 12px 28px rgba(31,36,48,.10);padding:20px;margin:12px 0;position:relative}
 .sumcard{background:var(--paper);border:1px solid var(--line2);border-radius:16px;padding:10px 12px;margin:8px 0}
-.bigletter{font-size:76px;font-weight:800;text-align:center;line-height:1.1;margin:6px 0;overflow-wrap:normal;word-break:normal}
+.bigletter{font-size:76px;font-weight:800;text-align:center;line-height:1.1;margin:6px 0;overflow-wrap:normal;word-break:normal}.bigletter.step2word{font-size:28px}.zh-han.step2word{font-size:28px}
 /* v118: dong trong tam cua the tu (cach doc + nghia) + nut nho lang. */
 .vocab-focus-line{font-size:24px;line-height:1.5;margin:10px 0}
 .vocab-focus-line b{font-size:26px}
@@ -234,7 +234,7 @@ body.landing-on .app-frame{display:block}
 .duo-guide{width:64px;height:64px;margin-top:4px}
 .duo-chest .duo-star,.duo-cup .duo-star{font-size:56px}
 .g91-games-grid h3{font-size:20px}
-.vk-choice-big button{font-size:18px}
+.vk-choice-big button{font-size:18px}.vk-choice-big.vk-step2 button{font-size:22px;font-weight:600}
 .chapter-row .unit-banner{margin:0 0 12px}
 @media(max-width:520px){.duo-path .step-row,.duo-path .path-node{width:200px}.duo-node.pos1{margin-left:32px}.duo-node.pos2{margin-left:64px}.duo-node.pos3{margin-left:32px}.duo-node.pos5{margin-left:-32px}.duo-node.pos6{margin-left:-64px}.duo-node.pos7{margin-left:-32px}}
 .heat-grid{display:grid;grid-template-rows:repeat(7,18px);grid-auto-flow:column;grid-auto-columns:18px;gap:3px;overflow-x:auto;padding-bottom:4px}
@@ -7352,7 +7352,7 @@ function stepHeader(step, sub) { return lessonHead(step, sub); }
    lúc đang ghi là dừng và chấm ngay (dự phòng khi tự chấm chưa kích hoạt). */
 var VK = { active: false, key: "", word: "", sym: "", slot: null, result: null, onPass: null, onGraded: null };
 var VKR = null; /* thong tin lan cham gan nhat de nut "Doc lai" khoi dong lai dung the */
-function vocabKnownRetry() { if (!VKR) return; vocabKnownStart(VKR.key, VKR.word, VKR.sym, VKR.slotEl, VKR.resultEl, VKR.onPass, VKR.onSkip, VKR.onGraded); }
+function vocabKnownRetry() { if (!VKR) return; var rSlot = VKR.slotEl, rRes = VKR.resultEl; /* v118b: sau lan cham truoc, render() da tao lai #vocabCheckSlot/#vocabCheckResult moi — tham chieu VKR cu bi tach khoi DOM, cham lai se ghi vao phan tu chet (ket qua cu van hien). Lay lai phan tu dang hien cung id khi phan tu cu da tach. */ if (rSlot && !rSlot.isConnected && rSlot.id) { var s2 = document.getElementById(rSlot.id); if (s2) rSlot = s2; } if (rRes && !rRes.isConnected && rRes.id) { var r2 = document.getElementById(rRes.id); if (r2) rRes = r2; } vocabKnownStart(VKR.key, VKR.word, VKR.sym, rSlot, rRes, VKR.onPass, VKR.onSkip, VKR.onGraded); }
 function vocabMirrorScoreNow() { if (MR.lastProc && MR.lastProc.total != null) return MR.lastProc.total; return MR.lastLiveScore; }
 /* Hanh dong gon cho panel ket qua cham: toi da 2 dong, theo thu tu uu tien
    camera -> mic -> AI -> guong. Dung chung cho the tu va bai luyen am. */
@@ -7870,10 +7870,8 @@ function vkEnPanelHTML(vk, c, cards, pos) {
   /* v107: 1 Nghe + cau that -> 2 Chon nghia (hoac hinh khi co hinh) -> 3 Dung
      trong cau that -> 4 Doc lai, AI cham tung am (diem khong khoa the) -> 5 Go
      tu. Tu + nghia + cau that hien ngay tu buoc 1 (khong lat the, khong peek). */
-  var names = ["Nghe + câu thật", "Chọn nghĩa", "Dùng trong câu", "Đọc lại — AI chấm", "Gõ từ"];
-  var h = '<p class="mut">Kiểu ' + (vk.step + 1) + '/5: ' + names[vk.step] + (vk.pronDone ? ' · Phát âm: ' + (vk.pronScore != null ? 'AI ' + vk.pronScore + '/100' : 'đã đọc lại ✓') : '') + '</p>';
-  /* v108c: noi ro buoc nay can nho cai gi (moi buoc mot thu can nho). */
-  h += '<p><b>Bước này nhớ:</b> ' + vkStepRemember("en", vk.step) + '</p>';
+  /* v118b (Bui 06:16): bo han hai dong nhan o dau the — "Kieu X/5" (+ hau to diem phat am) va "Buoc nay nho". Diem AI van hien o khu ket qua cham buoc 4 (#vocabCheckResult). Noi dung tu noi ro viec can lam. */
+  var h = '';
   if (vk.step === 0) {
     h += '<div class="row"><button class="btn" id="vocabHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
   } else if (vk.step === 4) {
@@ -7884,9 +7882,10 @@ function vkEnPanelHTML(vk, c, cards, pos) {
     if (vk.typeDone) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="vocabMultiFinish">Xong thẻ →</button></div>';
   } else if (vk.step === 1 || vk.step === 2) {
     var ch = vkStepChoice("en", c, cards, pos, vk.step);
-    h += '<p style="font-size:20px">' + esc(ch.q) + ' <span class="mut">(' + vkMultiKindLabel(ch.kind) + ')</span></p>';
+    /* v118b: buoc 2 (step 1) khong hien dong hoi — tu nho o dau the da la de bai, dong hoi w2vi/image chi lap lai tu; chi hien dong hoi o buoc 3 (step 2). */
+    if (vk.step === 2) h += '<p style="font-size:20px">' + esc(ch.q) + ' <span class="mut">(' + vkMultiKindLabel(ch.kind) + ')</span></p>';
     if (ch.kind === "listen") h += '<button class="btn" id="vocabChoiceListen">🔊 Nghe lại</button> ';
-    h += '<div class="row vk-choice-big">' + vkChoiceBtnsHTML("vkchoice", ch) + '</div>';
+    h += '<div class="row vk-choice-big' + (vk.step === 1 ? ' vk-step2' : '') + '">' + vkChoiceBtnsHTML("vkchoice", ch) + '</div>';
     if (vk.choiceWhy) h += '<div class="why show" id="vocabChoiceWhy">' + esc(vk.choiceWhy) + '</div>';
     if (vk.choiceAnswered) h += '<button class="btn btn-primary" id="vocabChoiceNext">' + (vk.step === 1 ? 'Sang bước dùng trong câu →' : 'Sang bước đọc lại →') + '</button>';
   } else {
@@ -7911,10 +7910,8 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
      trong cau that -> 4 Soi guong + ghi am (AI cham tung am tiet, diem khong
      khoa the) -> 5 Go pinyin. Chu + pinyin + nghia + cau that hien ngay tu
      buoc 1 (khong lat the, khong peek). */
-  var names = ["Nghe + câu thật", "Chọn nghĩa", "Dùng trong câu", "Soi gương + ghi âm — AI chấm", "Gõ pinyin"];
-  var h = '<p class="mut">Kiểu ' + (vk.step + 1) + '/5: ' + names[vk.step] + (vk.pronRecorded ? ' · Đã ghi âm xong ✓' : '') + '</p>';
-  /* v108c: noi ro buoc nay can nho cai gi (moi buoc mot thu can nho). */
-  h += '<p><b>Bước này nhớ:</b> ' + vkStepRemember("zh", vk.step) + '</p>';
+  /* v118b (Bui 06:16): bo han hai dong nhan o dau the — "Kieu X/5" (+ "Da ghi am xong") va "Buoc nay nho". Diem AI van hien o buoc 4 ("AI cham: X%"). */
+  var h = '';
   if (vk.step === 0) {
     h += '<div class="row"><button class="btn" id="zhHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
   } else if (vk.step === 4) {
@@ -7925,9 +7922,10 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
     if (vk.typeDone) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhMultiFinish">Xong thẻ →</button></div>';
   } else if (vk.step === 1 || vk.step === 2) {
     var ch = vkStepChoice("zh", c, cards, pos, vk.step);
-    h += '<p style="font-size:20px">' + esc(ch.q) + ' <span class="mut">(' + vkMultiKindLabel(ch.kind) + ')</span></p>';
+    /* v118b: buoc 2 (step 1) khong hien dong hoi — chu nho o dau the da la de bai, dong hoi w2vi/image chi lap lai chu; chi hien dong hoi o buoc 3 (step 2). */
+    if (vk.step === 2) h += '<p style="font-size:20px">' + esc(ch.q) + ' <span class="mut">(' + vkMultiKindLabel(ch.kind) + ')</span></p>';
     if (ch.kind === "listen") h += '<button class="btn" id="zhChoiceListen">🔊 Nghe lại</button> ';
-    h += '<div class="row vk-choice-big">' + vkChoiceBtnsHTML("zhchoice", ch) + '</div>';
+    h += '<div class="row vk-choice-big' + (vk.step === 1 ? ' vk-step2' : '') + '">' + vkChoiceBtnsHTML("zhchoice", ch) + '</div>';
     if (vk.choiceWhy) h += '<div class="why show" id="zhChoiceWhy">' + esc(vk.choiceWhy) + '</div>';
     if (vk.choiceAnswered) h += '<button class="btn btn-primary" id="zhChoiceNext">' + (vk.step === 1 ? 'Sang bước dùng trong câu →' : 'Sang bước ghi âm →') + '</button>';
   } else {
@@ -8417,10 +8415,12 @@ function renderVocab(app, l) {
      nghia/cau/dich o buoc 4, GIU tu + IPA + nut Nghe vi tu la de bai de
      doc theo (an ca tu thi buoc 4 khong lam duoc, guong khi ghi am cung
      hien ten tu; khong mic thi duong "doc to theo giong may" cung mat). */
+  /* v118b (Bui 06:10 + 06:12): moi buoc mot trong tam. Buoc 2 (step 1): tu chi la de bai — thu nho 28px (small), an IPA (viec buoc 4) + an vi du. Buoc 3 (step 2): tu la dap an (kind fill/vi2w) — an thanh "···" (mask) nhu buoc 5, an IPA + vi du + nghia (de bai nam trong dong hoi o panel). Buoc 4 (step 3) giu tu to + IPA; buoc 5 (step 4) an tu. vkShowBig giu nguyen de nut Nghe + video giong mau van hien o buoc 2/3. */
+  var vkWordMode = vk.step === 1 ? "small" : (vk.step === 2 || vk.step === 4 ? "mask" : "big");
   var vkShowBig = vk.step !== 4;
-  var vkShowMeaning = vk.step !== 1 && vk.step !== 3 && vk.step !== 4;
-  var vkShowEx = vk.step !== 3 && vk.step !== 4;
-  var vkShowExv = vk.step !== 1 && vk.step !== 3 && vk.step !== 4;
+  var vkShowMeaning = vk.step === 0;
+  var vkShowEx = vk.step === 0;
+  var vkShowExv = vk.step === 0;
   var vkShowExtras = vk.step === 0;
   var vkShowScene = vk.step === 0;
   /* v109: anh minh hoa cua the chi hien o buoc 1 + 3 (hoc + dung trong cau);
@@ -8435,8 +8435,8 @@ function renderVocab(app, l) {
   /* v109: nut vao chup anh them tu — de thay ngay trong khu tu vung. */
   html += '<div class="qblock vocab-card"><div class="vocab-layout">'
     + '<div class="vocab-main">'
-    + '<div class="bigletter" id="cardBig">' + (vkShowBig ? esc(big) : '···') + '</div>'
-    + ((vkShowBig || vkShowMeaning) ? '<p class="vocab-focus-line">' + (vkShowBig && c.ipa ? '<span class="mut">' + esc(c.ipa) + '</span>' : '') + (vkShowMeaning ? '<span id="vocabMeaning"> — <b>' + esc(c.vi || "") + '</b></span>' : '') + vkUnsureHTML(c) + '</p>' : '')
+    + '<div class="bigletter' + (vkWordMode === "small" ? ' step2word' : '') + '" id="cardBig">' + (vkWordMode === "mask" ? '···' : esc(big)) + '</div>'
+    + ((vkWordMode === "big" || vkShowMeaning) ? '<p class="vocab-focus-line">' + (vkWordMode === "big" && c.ipa ? '<span class="mut">' + esc(c.ipa) + '</span>' : '') + (vkShowMeaning ? '<span id="vocabMeaning"> — <b>' + esc(c.vi || "") + '</b></span>' : '') + vkUnsureHTML(c) + '</p>' : '')
     + vkCardImageHTML(c, vkShowImg)
     + (vkShowScene ? sceneSmallSVG(c.w, false) : '')
     + '<div id="vocabMeaningBody">'
@@ -17384,10 +17384,11 @@ function renderZhVocab(app, l) {
      hien du — nay an nghia/cau/dich, GIU chu + pinyin + nut Nghe vi chu la
      de bai de doc theo (ly do nhu the Anh). */
   var zhStep = zvk.step;
-  var zhShowPinyin = zhStep !== 4;
-  var zhShowMeaning = zhStep !== 1 && zhStep !== 3 && zhStep !== 4;
-  var zhShowBody = zhStep !== 3 && zhStep !== 4;
-  var zhShowExv = zhStep !== 1 && zhStep !== 3 && zhStep !== 4;
+  /* v118b (Bui 06:10 + 06:12): buoc 2 (step 1): chu Han chi la de bai — thu nho 28px, an pinyin + an cum/vi du. Buoc 3 (step 2): chu la dap an — an thanh "···", an pinyin + cum/vi du + nghia (de bai trong dong hoi o panel). Buoc 4 (step 3) giu chu + pinyin; buoc 5 (step 4) giu chu (go pinyin theo chu). */
+  var zhShowPinyin = zhStep !== 1 && zhStep !== 2 && zhStep !== 4;
+  var zhShowMeaning = zhStep === 0;
+  var zhShowBody = zhStep === 0;
+  var zhShowExv = zhStep === 0;
   var zhShowListen = zhStep !== 4;
   var zhShowStroke = zhStep === 0;
   var zhMaskEx = zhStep === 1 || zhStep === 2;
@@ -17401,7 +17402,7 @@ function renderZhVocab(app, l) {
   /* v109: nut vao chup anh them tu — de thay ngay trong khu tu vung. */
   html += '<div class="qblock vocab-card zh-card"><div class="vocab-layout">'
     + '<div class="vocab-main">'
-    + '<div class="zh-han" id="zhCardHan" role="button" tabindex="0" title="Bấm để tra từ điển" style="cursor:pointer">' + esc(c.han) + '</div>'
+    + '<div class="zh-han' + (zhStep === 1 ? ' step2word' : '') + '" id="zhCardHan" role="button" tabindex="0"' + (zhStep === 2 ? '' : ' title="Bấm để tra từ điển" style="cursor:pointer"') + '>' + (zhStep === 2 ? '···' : esc(c.han)) + '</div>'
     + ((zhShowPinyin || zhShowMeaning) ? '<p class="vocab-focus-line">' + (zhShowPinyin ? '<b>' + esc(c.pinyin) + '</b>' : '') + (zhShowMeaning ? '<span id="zhMeaning"> — <b>' + esc(c.vi) + '</b></span>' : '') + vkUnsureHTML(c) + '</p>' : '')
     + vkCardImageHTML(c, zhShowImg)
     + '<div id="zhMeaningBody">'
@@ -17420,7 +17421,7 @@ function renderZhVocab(app, l) {
   wireBack();
   wireVocabMethods97(app, d.key, "zh");
   var zhL = $("#zhListen"); if (zhL) zhL.onclick = function () { zhSpeak(c.han); };
-  var zhCardHanEl = $("#zhCardHan"); if (zhCardHanEl) zhCardHanEl.onclick = function () { if (zhStep !== 3 && zhStep !== 4) zhShowDictPopup(c, d); /* v108d: buoc 4 + buoc 5 khong mo tu dien (lo nghia) */ };
+  var zhCardHanEl = $("#zhCardHan"); if (zhCardHanEl) zhCardHanEl.onclick = function () { if (zhStep !== 2 && zhStep !== 3 && zhStep !== 4) zhShowDictPopup(c, d); /* v108d: buoc 4 + buoc 5 khong mo tu dien (lo nghia); v118b: buoc 3 cung khong — chu dang an "···", mo tu dien se lo dap an */ };
   var zhCardDictEl = $("#zhCardDictBtn"); if (zhCardDictEl) zhCardDictEl.onclick = function () { zhShowDictPopup(c, d); };
   $$("[data-zhstroke]").forEach(function (b) { b.onclick = function () { openLesson({ type: "zhStroke", han: b.dataset.zhstroke }); }; });
   wireNativeVideo(c.han, "chinese");
@@ -18576,10 +18577,8 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
      TP: nghe + doc to, tu xac nhan) -> 5 Go tu. Tu + nghia + cau that hien
      ngay tu buoc 1 (khong lat the, khong peek). */
   var isTc = sess.track === "tc";
-  var names = isTc ? ["Nghe + câu thật", "Chọn nghĩa", "Dùng trong câu", "Đọc lại — AI chấm", "Gõ từ"] : ["Nghe + câu thật", "Chọn nghĩa", "Dùng trong câu", "Nghe + đọc to", "Gõ từ"];
-  var h = '<p class="mut">Kiểu ' + (vk.step + 1) + '/5: ' + names[vk.step] + (vk.pronDone ? ' · Phát âm: ' + (vk.pronScore != null ? 'AI ' + vk.pronScore + '/100' : 'đã đọc lại ✓') : '') + '</p>';
-  /* v108c: noi ro buoc nay can nho cai gi (moi buoc mot thu can nho). */
-  h += '<p><b>Bước này nhớ:</b> ' + vkStepRemember(isTc ? "tc" : "tp", vk.step) + '</p>';
+  /* v118b (Bui 06:16): bo han hai dong nhan o dau the — "Kieu X/5" (+ hau to diem phat am) va "Buoc nay nho". Diem AI (TC) van hien o khu ket qua cham buoc 4 (#ttCheckResult); TP khong co AI, bam "Da doc to" la sang buoc go ngay. */
+  var h = '';
   if (vk.step === 0) {
     h += '<div class="row"><button class="btn" id="ttHeardNext">Đã nghe, sang bước chọn nghĩa →</button></div>';
   } else if (vk.step === 4) {
@@ -18592,9 +18591,10 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
     if (vk.typeDone) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="ttMultiFinish">Xong thẻ →</button></div>';
   } else if (vk.step === 1 || vk.step === 2) {
     var ch = vkStepChoice(isTc ? "tc" : "tp", c, cards, pos, vk.step);
-    h += '<p style="font-size:20px">' + esc(ch.q) + ' <span class="mut">(' + vkMultiKindLabel(ch.kind) + ')</span></p>';
+    /* v118b: buoc 2 (step 1) khong hien dong hoi — tu nho o dau the da la de bai, dong hoi w2vi/image chi lap lai tu; chi hien dong hoi o buoc 3 (step 2). */
+    if (vk.step === 2) h += '<p style="font-size:20px">' + esc(ch.q) + ' <span class="mut">(' + vkMultiKindLabel(ch.kind) + ')</span></p>';
     if (ch.kind === "listen") h += '<button class="btn" id="ttChoiceListen">🔊 Nghe lại</button> ';
-    h += '<div class="row vk-choice-big">' + vkChoiceBtnsHTML("ttchoice", ch) + '</div>';
+    h += '<div class="row vk-choice-big' + (vk.step === 1 ? ' vk-step2' : '') + '">' + vkChoiceBtnsHTML("ttchoice", ch) + '</div>';
     if (vk.choiceWhy) h += '<div class="why show" id="ttChoiceWhy">' + esc(vk.choiceWhy) + '</div>';
     if (vk.choiceAnswered) h += '<button class="btn btn-primary" id="ttChoiceNext">' + (vk.step === 1 ? 'Sang bước dùng trong câu →' : (isTc ? 'Sang bước phát âm →' : 'Sang bước nghe + đọc to →')) + '</button>';
   } else {
@@ -18775,10 +18775,11 @@ function renderTcTpVocab5(track, stepId, back) {
      che o buoc hien 3); buoc hien 4 truoc day hien du — nay an nghia/cau/
      dich, GIU tu + phien am + nut Nghe vi tu la de bai de doc theo. */
   var ttStep = vk.step;
-  var ttShowBig = ttStep !== 4;
-  var ttShowMeaning = ttStep !== 1 && ttStep !== 3 && ttStep !== 4;
-  var ttShowBody = ttStep !== 3 && ttStep !== 4;
-  var ttShowExv = ttStep !== 1 && ttStep !== 3 && ttStep !== 4;
+  /* v118b (Bui 06:10 + 06:12): buoc 2 (step 1): tu chi la de bai — thu nho 28px, an phien am + an vi du. Buoc 3 (step 2): tu la dap an — an thanh "···" nhu buoc 5, an phien am + vi du + nghia (de bai trong dong hoi o panel). Buoc 4 (step 3) giu tu + phien am; buoc 5 (step 4) an tu. */
+  var ttWordMode = ttStep === 1 ? "small" : (ttStep === 2 || ttStep === 4 ? "mask" : "big");
+  var ttShowMeaning = ttStep === 0;
+  var ttShowBody = ttStep === 0;
+  var ttShowExv = ttStep === 0;
   var ttMaskEx = ttStep === 1 || ttStep === 2;
   /* v109: anh minh hoa chi hien o buoc 1 + 3 (nhu the Anh/ZH). */
   var ttShowImg = ttStep === 0 || ttStep === 2;
@@ -18786,8 +18787,8 @@ function renderTcTpVocab5(track, stepId, back) {
   var pronShow = isTc ? (c.ipa || "") : (c.r || "");
   var html = backBtn + skipBanner + '<section class="card"><p class="eyebrow">' + (isTc ? "TOEIC" : "TOPIK") + ' · TỪ VỰNG</p><h2>' + esc(s.topic) + '</h2>'
     + '<p class="mut">Thẻ ' + (pos + 1) + '/' + cards.length + ' · Vòng ' + ttRound.round + '/' + ttRound.total + ' · Nấc nhớ: ' + (st.box || 0) + '/5</p>'
-    + '<div class="qblock vocab-card"><div class="bigletter" id="cardBig">' + (ttShowBig ? esc(c.w) : '···') + '</div>'
-    + (ttShowBig ? '<p class="vocab-focus-line"><span class="mut">' + esc(pronShow) + '</span>' + (c.personal ? ' <span class="chip">Cá nhân</span>' : '') + vkUnsureHTML(c) + '</p>' : '')
+    + '<div class="qblock vocab-card"><div class="bigletter' + (ttWordMode === "small" ? ' step2word' : '') + '" id="cardBig">' + (ttWordMode === "mask" ? '···' : esc(c.w)) + '</div>'
+    + (ttWordMode === "big" ? '<p class="vocab-focus-line"><span class="mut">' + esc(pronShow) + '</span>' + (c.personal ? ' <span class="chip">Cá nhân</span>' : '') + vkUnsureHTML(c) + '</p>' : '')
     + vkCardImageHTML(c, ttShowImg)
     + (ttShowBody ? '<div id="vocabMeaningBody">' + (ttShowMeaning ? '<p class="vocab-focus-line"><b>' + esc(c.vi || "") + '</b></p>' : '') + '<p>' + esc(ttMaskEx ? vkMaskWord(c.col || "", c.w) : (c.col || "")) + ((c.col && c.ex) ? ' — ' : '') + esc(ttMaskEx ? vkMaskWord(c.ex || "", c.w) : (c.ex || "")) + '</p>' + (ttShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '') + (ttStep === 0 && c.personal && c.myEx && c.sen ? '<p class="mut">Giải thích: ' + esc(c.myEx) + '</p>' : '') + '</div>' : '')
     + (ttStep !== 4 ? '<div class="row"><button class="btn" id="ttListen">🔊 Nghe</button></div>' : '')
