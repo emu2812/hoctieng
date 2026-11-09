@@ -4043,6 +4043,7 @@ function viewHome(app) {
   html += homeSearchHTML();
   html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (trulyNew ? 'Hôm nay 2812 cùng bạn học nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếp nhé.') + '</p>';
+  html += pronWeakHomeHTML(); /* v119b */
   html += '<div class="home-clean"><div class="home-hero">';
   if (trulyNew) {
     html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra đầu vào để web xếp đúng chặng cho bạn.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra đầu vào</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div></div></div></section>';
@@ -4108,6 +4109,7 @@ function viewHome(app) {
   var esb = $("#entryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "entryPlace" }); };
   var erl = $("#entryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "entryPlace" }); };
   var spl = $("#statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
+  var hwl = $("#homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "en"); }; /* v119b */
 
   $$("[data-home-vocabset]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "vocab", setIdx: +b.dataset.homeVocabset }); }; });
   $$("[data-home-dict]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "dictation", idx: +b.dataset.homeDict }); }; });
@@ -6831,7 +6833,7 @@ function elsaSoundVerdict(sym, targetWord, aiRes) {
 function elsaSoundVerdictHTML(sym, targetWord, aiRes) {
   var v = elsaSoundVerdict(sym, targetWord, aiRes);
   var h = '<div class="elsa-verdict" data-elsa-verdict="' + v.level + '" data-elsa-sym="' + esc(sym) + '">'
-    + '<p><b>Âm /' + esc(sym) + '/ trong từ “' + esc(targetWord) + '”: ' + esc(v.label) + '</b>' + (v.heard ? '<br><span class="mut">' + esc(v.heard) + '</span>' : '') + '</p>';
+    + '<p><b>' + (sym ? 'Âm /' + esc(sym) + '/ trong từ “' + esc(targetWord) + '”' : 'Từ “' + esc(targetWord) + '” (chưa rõ âm đầu — thẻ này không có phiên âm)') + ': ' + esc(v.label) + '</b>' + (v.heard ? '<br><span class="mut">' + esc(v.heard) + '</span>' : '') + '</p>';
   if (v.level === "none") h += '<p class="mut">Chưa có điểm AI cho lần tập này (chưa đăng nhập, AI chưa trả, hoặc chưa ghi được âm thanh) — chưa đo được nên chưa kết luận lỗi âm.</p>';
   else h += '<p class="mut">Cách sửa: ' + esc(v.guide.join(" · ")) + '.<br>Kết luận suy ra từ kết quả nghe của AI theo từ (máy chủ chỉ trả nghe đúng/chưa đúng theo từ) — không phải điểm riêng từng âm của máy chủ.</p>';
   return h + '</div>';
@@ -7147,7 +7149,7 @@ function pronDiagSpeak(track, text) { if (track === "zh") zhSpeak(text); else if
 function pronDiagEntryHTML(track) {
   var prev = (state.pronDiag || {})[track];
   return '<section class="card" id="' + track + 'PronDiagCard"><h3>🎯 Chẩn đoán phát âm đầu vào</h3>'
-    + '<p class="mut">12 mẫu đọc to — mỗi mẫu phủ một âm khó của người Việt. Đọc to từng mẫu, xem mình yếu âm nào, rồi học đúng âm đó. Không khóa bài nào, không tính đạt chuẩn.</p>'
+    + '<p class="mut">12 mẫu đọc to — mỗi mẫu phủ một âm khó của người Việt. Đọc to từng mẫu, xem mình yếu âm nào, rồi học đúng âm đó. Không khóa bài nào.</p>'
     + (prev ? '<p>Lần chẩn đoán gần nhất (' + esc(prev.date || "") + '): âm nên học trước ' + (prev.weak || []).map(function (w) { return "/" + esc(w.sym) + "/"; }).join(" ") + '</p>' : '')
     + '<p><button class="btn" data-pd-entry="' + track + '" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button></p></section>';
 }
@@ -7260,6 +7262,100 @@ function renderPronDiag(app, l) {
     } catch (e) { toast("Không mở được mic — hãy thử lại."); }
   };
   var nx = $("#pdNext"); if (nx) nx.onclick = function () { l.i++; l.scored = false; l.heard = ""; if (l.i >= sets.length) pronDiagFinish(l, track); render(); };
+}
+
+/* ---------- v119b ELSA muc 2: "AM YEU CUA TOI" + "TU CON SAI" GOM THEO AM ----------
+   MOT muc duy nhat trong khu phat am moi track; bam vao mot am thi vao ngay
+   bai luyen am do (qua pronDiagLearn). Nguon DU LIEU THAT duy nhat:
+   (1) chan doan v119: state.pronDiag[track] (.weak + .scores; tu co score 0);
+   (2) doc lai the tu buoc 4: state.wordPron — chi muc co ai<80 VA co sym+word
+       (luu tu v119b; muc cu khong co sym/word thi khong gom duoc — khong hien
+       so lieu gia, khong suy am tu chinh ta).
+   CHO THIEU da biet (khong lam ban mong lang le): ZH — diem buoc 4 chi o
+   ZH_PRON (chi trong phien, khong luu state); TP — buoc 4 chua co AI cham.
+   Tu con sai cua ZH/TP hien chi lay tu chan doan; muc se ghi ro dieu nay. */
+function pronWeakDiagSym(track, sym) {
+  var sets = PRON_DIAG_SETS[track] || [];
+  for (var i = 0; i < sets.length; i++) if (sets[i].sym === sym) return sets[i];
+  return null;
+}
+function pronWeakSymInfo(track, sym) {
+  var d = pronWeakDiagSym(track, sym);
+  if (d) return { sym: sym, symVi: d.symVi, target: d.target };
+  if (track === "en" || track === "tc") {
+    var p = (typeof phEntry === "function") ? phEntry(sym) : null;
+    var ex = (typeof RB_PH_ALL_EXAMPLES !== "undefined") ? RB_PH_ALL_EXAMPLES[sym] : null;
+    if (p || ex) return { sym: sym, symVi: "âm /" + sym + "/ — ví dụ: " + (p ? p.w : ex) + (p && p.vi ? " (" + p.vi + ")" : ""), target: { kind: "ph", sym: sym } };
+  }
+  return { sym: sym, symVi: "âm /" + sym + "/", target: { kind: "ph", sym: sym } };
+}
+function pronWeakData(track) {
+  var bySym = {}, order = [];
+  var add = function (sym, symVi, target, word) {
+    if (!sym) return;
+    var e = bySym[sym];
+    if (!e) { e = { sym: sym, symVi: symVi || ("âm /" + sym + "/"), target: target || null, words: [], seen: {} }; bySym[sym] = e; order.push(sym); }
+    if (word && word.w && !e.seen[word.w]) { e.seen[word.w] = true; e.words.push(word); }
+  };
+  var pd = (state.pronDiag || {})[track];
+  if (pd) {
+    (pd.scores || []).forEach(function (s) { if (s && s.score === 0) add(s.sym, s.symVi, s.target, { w: s.w, show: s.show, read: s.read, vi: s.vi, src: "diag" }); });
+    (pd.weak || []).forEach(function (w) { if (w) add(w.sym, w.symVi, w.target, null); });
+  }
+  var wp = state.wordPron || {};
+  Object.keys(wp).forEach(function (k) {
+    var p = wp[k]; if (!p || p.ai == null || p.ai >= 80 || !p.sym || !p.word) return;
+    if (track === "zh" || track === "tp") return; /* ZH/TP khong co wordPron ben vung */
+    if (track === "tc" && k.indexOf("tc:") !== 0) return;
+    if (track === "en" && (k.indexOf("tc:") === 0 || k.indexOf("tp:") === 0)) return;
+    var info = pronWeakSymInfo(track, p.sym);
+    add(p.sym, info.symVi, info.target, { w: p.word, show: p.word, read: "", vi: "", src: "word" });
+  });
+  var sounds = order.map(function (s) { var e = bySym[s]; return { sym: e.sym, symVi: e.symVi, target: e.target, words: e.words }; });
+  var total = 0; sounds.forEach(function (s) { total += s.words.length; });
+  return { track: track, sounds: sounds, totalWords: total, hasDiag: !!pd, hasWordPron: Object.keys(wp).length > 0 };
+}
+function pronWeakHTML(track) {
+  var d = pronWeakData(track);
+  var h = '<section class="card" id="' + track + 'PronWeakCard"><h3>🎯 Âm yếu của tôi</h3>'
+    + '<p class="mut">Âm yếu từ chẩn đoán phát âm + từ còn sai khi đọc lại thẻ từ (bước 4) — gom theo âm, không gom theo bài. Bấm vào một âm để học ngay âm đó. Đọc lại đúng thì âm/từ tự biến mất khỏi danh sách này.</p>';
+  if (!d.sounds.length) {
+    if (d.hasDiag) h += '<p><b>Chưa có âm yếu nào được ghi nhận.</b></p><p class="mut">Chẩn đoán gần nhất bạn đọc đúng hết các mẫu khó. Từ còn sai sẽ hiện ở đây khi bạn đọc sai trong chẩn đoán hoặc khi đọc lại thẻ từ chưa đạt 80.</p>';
+    else h += '<p><b>Chưa có dữ liệu — làm chẩn đoán phát âm đầu vào để biết mình yếu âm nào.</b></p><p class="mut">Chẩn đoán đọc to 12 mẫu phủ âm khó của người Việt; kết quả liệt kê âm yếu + từ còn sai ở đây.</p><p><button class="btn" data-pd-entry="' + track + '" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button></p>';
+  } else {
+    h += d.sounds.map(function (s, i) {
+      var shown = s.words.slice(0, 6);
+      var more = s.words.length - shown.length;
+      return '<div class="weak-sound" data-weak-sym="' + esc(s.sym) + '"><p><b>/' + esc(s.sym) + '/</b> — ' + esc(s.symVi) + ' · <b>' + s.words.length + ' từ còn sai</b> <button class="btn btn-sm" data-pd-weak-learn="' + i + '">Học ngay âm này →</button></p>'
+        + (shown.length ? '<p class="mut">Từ còn sai: ' + shown.map(function (w) { return esc(w.show) + (w.read ? ' (' + esc(w.read) + ')' : '') + (w.vi ? ' — ' + esc(w.vi) : ''); }).join('; ') + (more > 0 ? '; …còn ' + more + ' từ nữa' : '') + '.</p>' : '<p class="mut">Âm này yếu trong chẩn đoán — chưa ghi từ sai cụ thể.</p>')
+        + '</div>';
+    }).join("");
+  }
+  if (track === "zh" || track === "tp") h += '<p class="mut">Lưu ý: track này chưa lưu điểm đọc lại thẻ từ (bước 4) — từ còn sai hiện chỉ lấy từ chẩn đoán phát âm. Đây là chỗ thiếu đang chờ vá, không phải bạn chưa học gì.</p>';
+  h += '<p class="mut">Từ còn sai lấy từ chẩn đoán phát âm và điểm đọc lại thẻ từ (bước 4) — số liệu thật của bạn, không có số mẫu.</p></section>';
+  return h;
+}
+function pronWeakWire(scope, track) {
+  var card = (scope || document).querySelector("#" + track + "PronWeakCard");
+  if (!card) return;
+  var d = pronWeakData(track);
+  card.querySelectorAll("[data-pd-weak-learn]").forEach(function (b) {
+    b.onclick = function () { var s = d.sounds[+b.dataset.pdWeakLearn]; if (s && s.target) pronDiagLearn(track, s); };
+  });
+}
+function pronWeakGo(track) {
+  try {
+    if (track === "en") { openLesson({ type: "pron", step: stepById("pron1") }); return; }
+    go("practice");
+    if (track === "tc" || track === "tp") setTimeout(function () { try { var cl = document.querySelector('[data-g6="G3"]'); if (cl && !cl.open) cl.open = true; } catch (e) {} }, 150);
+  } catch (e) {}
+}
+function pronWeakHomeHTML() {
+  var track = (typeof state !== "undefined" && state.track) || "en";
+  var d = pronWeakData(track);
+  if (!d.sounds.length) return "";
+  var syms = d.sounds.slice(0, 5).map(function (s) { return "/" + s.sym + "/"; }).join(" ");
+  return '<p id="homeWeakLine">🎯 Âm yếu của tôi: ' + esc(syms) + ' — ' + d.totalWords + ' từ còn sai · <button class="dimlink" id="homeWeakLink">Xem ở khu phát âm →</button></p>';
 }
 /* 9. Danh gia muc do /100 tung ky nang (tu tien trinh that, khong phai diem thi). */
 function skillLevelRows() {
@@ -7719,7 +7815,11 @@ function vocabKnownGrade(aiScore, mirrorScore, opts) {
      mot diem) de mat the hien "Phát âm lần gần nhất" — khong bia diem. */
   if (opts.cardKey && (aiScore != null || mirrorScore != null)) {
     if (!state.wordPron) state.wordPron = {};
-    state.wordPron[opts.cardKey] = { ai: aiScore, mirror: mirrorScore, date: todayStr() };
+    var wpNew = { ai: aiScore, mirror: mirrorScore, date: todayStr() };
+    /* v119b: luu them sym+word de gom "tu con sai" theo am (ELSA muc 2). */
+    if (opts.elsa && opts.elsa.sym) wpNew.sym = opts.elsa.sym;
+    if (opts.elsa && opts.elsa.word) wpNew.word = opts.elsa.word;
+    state.wordPron[opts.cardKey] = wpNew;
     saveState();
   }
   vocabKnownRenderResult(opts.resultEl, aiScore, mirrorScore, chk.ok, chk.reason, { camDenied: camDenied, camMissing: camMissing, camBlocked: camBlocked, micDenied: micDenied, estimatedOnly: !!opts.estimatedOnly, aiBusy: lgIn, fixHint: opts.fixHint || null, elsa: opts.elsa || null, onRetry: opts.onRetry || null, onSkip: opts.onSkip || null });
@@ -8793,7 +8893,7 @@ function renderVocab(app, l) {
        phan hoi theo am) qua lan render ke tiep de nguoi hoc van doc duoc.
        Giu lai ca nut thanh duoi (Doc lai / Bo qua) — renderLesson() dat
        BAR_RESULT = null nen phai set lai sau render. */
-    vocabKnownStart(key, c.w, firstSymFromIpa(c.ipa), $("#vocabCheckSlot"), $("#vocabCheckResult"), null, vocabSkipCard, function (chk, ai, mirror) { vk.pronDone = true; if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror; var resEl = $("#vocabCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML; var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null; if (chk && chk.ok && vk.step === 3) vk.step = 4; render(); if (br) setBarResult(br); /* v107c: dam bao nut Phat am trong the con hien sau luot doc — neu lan ve lai vua roi lam mat/an nut (duong live truoc day, khong tai hien duoc bang probe), ve lai/khoi phuc ngay. */ if (!$("#btnPronounce")) render(); var bp3 = $("#btnPronounce"); if (bp3) bp3.style.display = ""; /* v107d: cham xong (ke ca tu sang buoc go khi dat 80) cung phai dua dau the ve khung nhin — duong onGraded nay render ma khong cuon, nen sau luot Phat am / sang buoc 5 dau the bi khuat. */ vkScrollCardTop(); });
+    vocabKnownStart(key, c.w, c.ipa ? firstSymFromIpa(c.ipa) : "", $("#vocabCheckSlot"), $("#vocabCheckResult"), null, vocabSkipCard, function (chk, ai, mirror) { vk.pronDone = true; if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror; var resEl = $("#vocabCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML; var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null; if (chk && chk.ok && vk.step === 3) vk.step = 4; render(); if (br) setBarResult(br); /* v107c: dam bao nut Phat am trong the con hien sau luot doc — neu lan ve lai vua roi lam mat/an nut (duong live truoc day, khong tai hien duoc bang probe), ve lai/khoi phuc ngay. */ if (!$("#btnPronounce")) render(); var bp3 = $("#btnPronounce"); if (bp3) bp3.style.display = ""; /* v107d: cham xong (ke ca tu sang buoc go khi dat 80) cung phai dua dau the ve khung nhin — duong onGraded nay render ma khong cuon, nen sau luot Phat am / sang buoc 5 dau the bi khuat. */ vkScrollCardTop(); });
   };
   /* DOT UI-FIX 31/10: xem truoc thi an nut Phat am cham diem (phan cham diem khoa). */
   if (l.preview) { var bp = $("#btnPronounce"); if (bp) bp.style.display = "none"; wirePreviewLock(); }
@@ -9580,7 +9680,8 @@ function renderPron(app, l) {
   var donePh = phAllOrder().filter(function (s) { return phDone(s); }).length;
   html += '<p><b>Đã học xong ' + donePh + ' trên 44 âm</b></p><div class="bar" style="margin-top:8px"><i style="width:' + Math.round(donePh / 44 * 100) + '%"></i></div>';
   html += '<div class="row"><button class="btn' + (phViewMode === "wave" ? " btn-soft" : "") + '" id="phViewWave">Xem theo đợt khó</button><button class="btn' + (phViewMode === "type" ? " btn-soft" : "") + '" id="phViewType">Xem theo loại âm</button></div>';
-  html += '<section class="card"><h3>🎯 Chẩn đoán phát âm đầu vào</h3><p class="mut">12 mẫu đọc to — mỗi mẫu phủ một âm khó của người Việt. Đọc to từng mẫu, xem mình yếu âm nào, rồi học đúng âm đó. Không khóa bài nào, không tính đạt chuẩn.</p>' + ((state.pronDiag || {}).en ? '<p> Lần chẩn đoán gần nhất (' + esc((((state.pronDiag || {}).en) || {}).date || "") + '): âm nên học trước ' + ((((state.pronDiag || {}).en) || {}).weak || []).map(function (s) { return "/" + esc(s.sym) + "/"; }).join(" ") + '</p>' : '') + '<p><button class="btn" id="phEntryBtn" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button></p></section>';
+  html += '<section class="card"><h3>🎯 Chẩn đoán phát âm đầu vào</h3><p class="mut">12 mẫu đọc to — mỗi mẫu phủ một âm khó của người Việt. Đọc to từng mẫu, xem mình yếu âm nào, rồi học đúng âm đó. Không khóa bài nào.</p>' + ((state.pronDiag || {}).en ? '<p> Lần chẩn đoán gần nhất (' + esc((((state.pronDiag || {}).en) || {}).date || "") + '): âm nên học trước ' + ((((state.pronDiag || {}).en) || {}).weak || []).map(function (s) { return "/" + esc(s.sym) + "/"; }).join(" ") + '</p>' : '') + '<p><button class="btn" id="phEntryBtn" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button></p></section>';
+  html += pronWeakHTML("en"); /* v119b */
   if (phViewMode === "type") {
     html += '<p class="mut">Bản đồ 44 âm theo 3 khu: nguyên âm đơn là các âm ngắn gọn rung từ cổ họng, nguyên âm đôi là âm trượt từ âm này sang âm khác, phụ âm được tạo khi môi, răng và lưỡi chặn luồng hơi.</p>';
     RB_PH_TYPE_GROUPS.forEach(function (g) {
@@ -9610,6 +9711,7 @@ function renderPron(app, l) {
   var vw = $("#phViewWave"); if (vw) vw.onclick = function () { phViewMode = "wave"; render(); };
   var vt = $("#phViewType"); if (vt) vt.onclick = function () { phViewMode = "type"; render(); };
   var peb = $("#phEntryBtn"); if (peb) peb.onclick = function () { openLesson({ type: "pronEntry" }); };
+  pronWeakWire(app, "en"); pronDiagWireEntry(app); /* v119b */
   $$("#phTable .ph-btn").forEach(function (b) {
     b.onclick = function () {
       var sym = b.dataset.s;
@@ -16713,6 +16815,7 @@ function viewHomeZh(app) {
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (fresh ? 'Hôm nay 2812 cùng bạn học tiếng Trung nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếng Trung nhé.') + '</p>';
+  html += pronWeakHomeHTML(); /* v119b */
   html += '<div class="home-clean"><div class="home-hero">';
   if (fresh) {
     html += '<section class="card next-card" id="zhEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TIẾNG TRUNG</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi HSK thật. Bỏ qua thì học từ chặng 1.</p><div class="row"><button class="btn btn-primary" id="zhEntryStartBtn">Kiểm tra đầu vào HSK</button><button class="btn" id="zhNextBtn">Bỏ qua, học từ chặng 1</button></div></div></div></section>';
@@ -16745,6 +16848,7 @@ function viewHomeZh(app) {
   var esb = $("#zhEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "zhEntry" }); };
   var erl = $("#zhEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "zhEntry" }); };
   var spl = $("#statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
+  var hwl = $("#homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "zh"); }; /* v119b */
   var mg = $("#zhToRoadmap"); if (mg) mg.onclick = function () { go("roadmap"); };
   var hhb = $("#zhHomeHskkBtn"); if (hhb) hhb.onclick = function () { go("roadmap"); };
   var hfm = $("#zhHomeFullMapBtn"); if (hfm) hfm.onclick = function () { go("roadmap"); };
@@ -16812,6 +16916,7 @@ function viewPracticeZh(app) {
   html += '<section class="card" id="zhFaceCard"><h3>👁 Nhận mặt chữ — nhớ mặt chữ từng bộ</h3><p class="mut">Thẻ từ luôn hiện pinyin kèm chữ nên dễ học vẹt bằng pinyin mà chưa nhớ mặt chữ. Bài này tách riêng kỹ năng đó: nhìn chữ Hán (không có pinyin) rồi chọn đúng nghĩa — và ngược lại, nhìn nghĩa chọn đúng chữ. Mỗi lượt 10 câu, lấy từ một bộ thật, đáp án nhiễu cũng là từ thật trong cùng bộ (thiếu đáp án nhiễu thì bỏ câu, không bịa). Trả lời sai vào Sổ lỗi sai. Sau khi trả lời mới hiện pinyin và nút nghe để gắn thêm âm thanh.</p><div class="row"><input id="zhFaceFilter" placeholder="Lọc bộ theo chủ điểm…" style="flex:1"><select id="zhFaceSet">' + zhFaceOpts + '</select><button class="btn" id="zhFaceStartBtn">Bắt đầu luyện →</button></div></section>';
   html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">Đợt 1: 30 chữ nét đơn giản — sẽ bổ sung dần. Bấm vào một chữ để xem video mẫu cách viết và tập viết.</p><div class="row">' + zhStrokesList().map(function (e) { return '<button class="btn" data-zhstroke-list="' + e.han + '"><span style="font-size:22px">' + e.han + '</span> ' + esc(e.py) + '</button>'; }).join("") + '</div><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
   html += pronDiagEntryHTML("zh");
+  html += pronWeakHTML("zh"); /* v119b */
   html += '<details><summary><b>Mạch pinyin chặng 1</b></summary><div class="path-v">';
   ZH_PH_STEPS.forEach(function (s, i) { html += zhPhNodeHTML(i); });
   html += '</div></details>';
@@ -16841,7 +16946,7 @@ function viewPracticeZh(app) {
   practiceFilterWire();
   var pb = $("#zhPracticeNextBtn"); if (pb) pb.onclick = function () { zhOpenTarget(zhSessionTarget()); };
   listenHubWire();
-  pronDiagWireEntry(app);
+  pronDiagWireEntry(app); pronWeakWire(app, "zh"); /* v119b */
   var eb = $("#zhPracticeEntryBtn"); if (eb) eb.onclick = function () { openLesson({ type: "zhEntry" }); };
   var fb = $("#zhFaceStartBtn"); if (fb) fb.onclick = function () { var sel = $("#zhFaceSet"); openLesson({ type: "zhFace", setKey: sel ? sel.value : "starter" }); };
   var ff = $("#zhFaceFilter"); if (ff) ff.oninput = function () {
@@ -19061,7 +19166,7 @@ function renderTcTpVocab5(track, stepId, back) {
          Giu lai HTML ket qua cham qua lan render ke tiep. Giu lai ca nut
          thanh duoi (Doc lai / Bo qua) — renderLesson() dat BAR_RESULT = null
          nen phai set lai sau render. */
-      vocabKnownStart(key, c.w, firstSymFromIpa(c.ipa || ""), slot, res, null, function () { tcTpVocab5Skip(sess); }, function (chk, ai, mirror) {
+      vocabKnownStart(key, c.w, c.ipa ? firstSymFromIpa(c.ipa) : "", slot, res, null, function () { tcTpVocab5Skip(sess); }, function (chk, ai, mirror) {
         vk.pronDone = true; if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror;
         var resEl = $("#ttCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML;
         var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null;
@@ -19251,6 +19356,7 @@ function viewHomeTc(app) {
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += '<div class="home-main">';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng 2812 luyện TOEIC nhé.</p>';
+  html += pronWeakHomeHTML(); /* v119b */
   html += '<div class="home-clean"><div class="home-hero">';
   if (n) {
     html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TOEIC</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOEIC Nghe–Đọc, từ 450 tới 900+.</p><button class="btn btn-primary" id="tcNextBtn">Học tiếp: ' + esc(n.meta.title) + ' → · +10 XP</button></div></div></section>';
@@ -19272,6 +19378,7 @@ function viewHomeTc(app) {
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tcNextBtn"); if (nb) nb.onclick = function () { var nn = tcNextStep(); if (nn) tcOpenStep(nn.id, "home"); };
   var spl = document.getElementById("statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
+  var hwl = document.getElementById("homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "tc"); }; /* v119b */
   var mg = document.getElementById("tcHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
   msWire(app);
 }
@@ -19425,6 +19532,7 @@ function viewPracticeTc(app) {
   html += '<section class="card"><h3>Ngữ pháp trọng tâm (' + TC_GRAMMAR.length + ' trạm)</h3><div class="row">' + TC_GRAMMAR.map(function (g, i) { return tcStepBtnHTML("g" + i); }).join("") + '</div></section>';
   html += listenHubHTML("tc");
   html += pronDiagEntryHTML("tc");
+  html += pronWeakHTML("tc"); /* v119b */
   [1, 2, 3, 4].forEach(function (p) {
     var items = TC_LISTEN.map(function (l, i) { return { l: l, i: i }; }).filter(function (x) { return x.l.part === p; });
     if (items.length) html += '<section class="card"><h3>Nghe Part ' + p + '</h3><div class="row">' + items.map(function (x) { return tcStepBtnHTML("l" + x.i); }).join("") + '</div></section>';
@@ -19485,6 +19593,7 @@ function viewPracticeTc(app) {
       else if (id === "listenVideoRow") put(G3, el);
       else if (id === "listenHubCard") put(G3, el);
       else if (id === "tcPronDiagCard") put(G3, el);
+      else if (id === "tcPronWeakCard") put(G3, el); /* v119b */
       else if (h3.indexOf("Nghe Part") === 0) put(G3, el);
       else if (h3.indexOf("Đọc Part") === 0) put(G3, el);
       else if (h3.indexOf("Thi thử") === 0) put(G4, el);
@@ -19521,7 +19630,7 @@ function viewPracticeTc(app) {
 
   wireVocabSearch("tcVocabSearch", "tcVocabGroups");
   wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
-  pronDiagWireEntry(app);
+  pronDiagWireEntry(app); pronWeakWire(app, "tc"); /* v119b */
   (function () { var jobs = [{ id: "tcGameCardPractice", html: tcPracticeEntHTML, wire: tcPracticeEntWire }]; if (videoNewEntHTML["tc"]) jobs.push({ id: "videoNewEnttc", html: function () { return videoNewEntHTML["tc"]; }, wire: null }); practiceEntLazy("tc", jobs); })();
 }
 /* ---------- v103 P1.6 — BUOI ON TRON TC/TP (giong buoi on tron EN/ZH) ----------
@@ -20164,6 +20273,7 @@ function viewHomeTp(app) {
   html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += '<div class="home-main">';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng 2812 luyện TOPIK nhé.</p>';
+  html += pronWeakHomeHTML(); /* v119b */
   html += '<div class="home-clean"><div class="home-hero">';
   if (n) {
     html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TOPIK</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOPIK: Hangul trước, rồi TOPIK I cấp 1–2, hướng lên TOPIK II.</p><button class="btn btn-primary" id="tpNextBtn">Học tiếp: ' + esc(n.meta.title) + ' → · +10 XP</button></div></div></section>';
@@ -20185,6 +20295,7 @@ function viewHomeTp(app) {
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tpNextBtn"); if (nb) nb.onclick = function () { var nn = tpNextStep(); if (nn) tpOpenStep(nn.id, "home"); };
   var spl = document.getElementById("statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
+  var hwl = document.getElementById("homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "tp"); }; /* v119b */
   var mg = document.getElementById("tpHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
   msWire(app);
 }
@@ -20248,6 +20359,7 @@ function viewPracticeTp(app) {
   html += '<section class="card"><h3>Ngữ pháp trọng tâm (' + TP_GRAMMAR.length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return tpStepBtnHTML("g" + i); }).join("") + '</div></section>';
   html += listenHubHTML("tp");
   html += pronDiagEntryHTML("tp");
+  html += pronWeakHTML("tp"); /* v119b */
   [1, 2, 3, 4].forEach(function (p) {
     var items = TP_LISTEN.map(function (l, i) { return { l: l, i: i }; }).filter(function (x) { return x.l.part === p; });
     if (items.length) html += '<section class="card"><h3>Nghe dạng ' + p + '</h3><div class="row">' + items.map(function (x) { return tpStepBtnHTML("l" + x.i); }).join("") + '</div></section>';
@@ -20316,6 +20428,7 @@ function viewPracticeTp(app) {
       else if (id === "listenVideoRow") put(G3, el);
       else if (id === "listenHubCard") put(G3, el);
       else if (id === "tpPronDiagCard") put(G3, el);
+      else if (id === "tpPronWeakCard") put(G3, el); /* v119b */
       else if (h3.indexOf("Nghe dạng") === 0) put(G3, el);
       else if (h3.indexOf("Đọc dạng") === 0) put(G3, el);
       else if (h3.indexOf("Thi thử") === 0) put(G4, el);
@@ -20352,7 +20465,7 @@ function viewPracticeTp(app) {
 
   wireVocabSearch("tpVocabSearch", "tpVocabGroups");
   wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
-  pronDiagWireEntry(app);
+  pronDiagWireEntry(app); pronWeakWire(app, "tp"); /* v119b */
   (function () { var jobs = [{ id: "tpFunVideoPractice", html: tpPracticeFunHTML, wire: null }]; if (videoNewEntHTML["tp"]) jobs.push({ id: "videoNewEnttp", html: function () { return videoNewEntHTML["tp"]; }, wire: null }); practiceEntLazy("tp", jobs); })();
 }
 function viewReviewTp(app) {
