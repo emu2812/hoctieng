@@ -3649,7 +3649,7 @@ function viewGuide(app) {
     + '<p>Tiếng Trung: kiểm tra xếp chặng nội bộ, không phải đề thi HSK thật; xếp tối đa tới chặng 4. Tiếng Hàn: bảng chữ Hangul học theo thứ tự (bài sau mở khi xong bài trước).</p>'
     + '</details>'
     + '<details class="guide-sec" id="guideVocab"><summary><b>📚 Từ vựng — học 1 thẻ qua 5 bước</b></summary>'
-    + '<p>Bước 4 đọc to — AI chấm từng âm, đạt khi AI chấm ≥ 80; gương chỉ để tự nhìn quỹ đạo miệng, không chấm điểm, không khóa thẻ. Điểm không khóa thẻ, chưa đạt thì tập lại. Bước 5 gõ từ: tiếng Anh gõ chữ cái (không cần viết hoa đúng), tiếng Trung gõ pinyin (không dấu cũng được), tiếng Hàn gõ Hangul.</p>'
+    + '<p>Bước 4 đọc to — máy chỉ kiểm tra có nghe ra đúng từ không (chấm tầng 1, chưa phải chấm từng âm); 80 là mức đủ tốt để đi tiếp, không khóa thẻ. Gương chỉ để tự nhìn quỹ đạo miệng, không chấm điểm. Chưa đạt thì tập lại. Bước 5 gõ từ: tiếng Anh gõ chữ cái (không cần viết hoa đúng), tiếng Trung gõ pinyin (không dấu cũng được), tiếng Hàn gõ Hangul.</p>'
     + '</details>'
     + '<details class="guide-sec" id="guideReview"><summary><b>🔁 Ôn tập &amp; Sổ lỗi sai</b></summary>'
     + '<p>Ôn theo lịch 1-3-7-14-30 ngày. Mục khó trong Sổ lỗi sai: ôn đúng 2 lần liên tiếp ở các lần ôn cách quãng mới xong hẳn; làm sai thì tính lại từ đầu. Thẻ đến hạn ôn theo kiểu "test trước, hiện sau": trả lời đúng ngay lần đầu mới tăng 1 nấc; xem đáp án trước thì lần đó không tính đạt.</p><p>Buổi ôn trộn mục cũ đến hạn với một ít mục mới.</p><p>Nút "Đã ôn xong" / "Đã nhớ rồi" chỉ hiện ở mục đến hạn đúng ngày — bấm chỉ dời ngày ôn tới lần sau, không tính là ôn đúng, không tốt nghiệp, không cộng XP.</p></details>'
@@ -5231,13 +5231,13 @@ function notesScoreHTML89() {
       + '<p><b>4 tiêu chí chấm nói:</b> ' + esc(RB_SPEAK_CRITERIA_TXT) + '</p>'
       + '<p><b>4 tiêu chí chấm viết:</b> ' + esc(RB_WRITE_CRITERIA_TXT) + '</p>'
       + '<p>Band chung là trung bình 4 tiêu chí.</p>'
-      + '<p>Thẻ từ tiếng Trung: đọc to được chấm bằng tầng 1 (chỉ cần mic) và AI chấm ≥ 80 là mức đạt chuẩn — điểm không khóa thẻ, đọc chưa đạt vẫn bấm “Tiếp tục →” được.</p>'
+      + '<p>Thẻ từ tiếng Trung: đọc to được chấm bằng tầng 1 (chỉ cần mic) — máy chỉ kiểm tra có nghe ra đúng từ không, chưa phải chấm từng âm; 80 là mức đủ tốt để đi tiếp, không khóa thẻ, đọc chưa đạt vẫn bấm “Tiếp tục →” được.</p>'
       + PRON_TIER_GUIDE_HTML;
   }
   if (t === "zh") {
     return '<h4>Điểm HSK</h4>'
       + '<p>Thi thử HSK (bản rút gọn): điểm là số câu đúng từng phần, không phải điểm HSK chính thức.</p>'
-      + '<p>Thẻ từ tiếng Trung: đọc to được chấm bằng tầng 1 (chỉ cần mic) và AI chấm ≥ 80 là mức đạt chuẩn — điểm không khóa thẻ, đọc chưa đạt vẫn bấm “Tiếp tục →” được.</p>'
+      + '<p>Thẻ từ tiếng Trung: đọc to được chấm bằng tầng 1 (chỉ cần mic) — máy chỉ kiểm tra có nghe ra đúng từ không, chưa phải chấm từng âm; 80 là mức đủ tốt để đi tiếp, không khóa thẻ, đọc chưa đạt vẫn bấm “Tiếp tục →” được.</p>'
       + PRON_TIER_GUIDE_HTML;
   }
   if (t === "tc") {
