@@ -2071,7 +2071,7 @@ function updateBottomBar() {
   if (!curLesson) { bar.style.display = "none"; document.body.classList.remove("has-bottombar"); dropBarNext(); BAR_RESULT = null; BAR_NEXT = null; bar.querySelectorAll("[data-bar-result]").forEach(function (b) { b.remove(); }); bar.querySelectorAll("[data-bar-next]").forEach(function (b) { b.remove(); }); bar.querySelectorAll("[data-bar-lesson-done]").forEach(function (b) { b.remove(); }); return; }
   /* v120: man hoc the tu chi con thanh tien do + nut X — an han thanh duoi
      (nut Quay lai + nut Doc lai/Bo qua) khi the tu dang hien. */
-  if (app && app.querySelector(".vocab-card")) { bar.style.display = "none"; document.body.classList.remove("has-bottombar"); return; }
+  if (app && (app.querySelector(".vocab-card") || (isVocabFocusLesson(curLesson) && !app.querySelector(".summarybox")))) { bar.style.display = "none"; document.body.classList.remove("has-bottombar"); return; } /* v124b (dung hoa): an thanh duoi khi DANG HOC the (ke ca kiem tra nhanh/the on tap); man TONG KET (.summarybox) GIU thanh duoi de nut "Sang bai tiep" (#btnNextStep) con cho bam (B2/A10) */
   bar.style.display = "flex"; document.body.classList.add("has-bottombar");
   (function () { var ld = bar.querySelector("[data-bar-lesson-done]"); if (curLesson.type === "zhSpeak" && !curLesson.done) { var disS = !zhSpeakAllHeard(ZH_SPEAK[curLesson.idx], curLesson); if (!ld) setBarLessonDone("zhSpeakDone", "Đã luyện xong →", function () { try { mirrorStop(); } catch (e) {} zhAwardOnce("zhSpeak:" + ZH_SPEAK[curLesson.idx].id); curLesson.done = true; render(); }, disS); else ld.disabled = disS; } else if (curLesson.type === "zhRole" && curLesson.theoryDone && !curLesson.done) { var disR = !zhRoleAllHeard(ZH_ROLE[curLesson.idx], curLesson); if (!ld) setBarLessonDone("zhRoleDone", "Đã luyện xong →", function () { zhAwardOnce("zhRole:" + ZH_ROLE[curLesson.idx].id); curLesson.done = true; render(); }, disR); else ld.disabled = disR; } else if (ld) ld.remove(); })();
   renderBarResultBtns(bar);
@@ -2415,6 +2415,10 @@ if (typeof document !== "undefined" && !window.__specDeleg) { window.__specDeleg
 
 /* ---------- Điều hướng ---------- */
 /* ----- Bo cuc desktop chung: boc bai hoc thanh 2 cot ----- */
+/* v124b: the tu mo o che do tap trung bat ke duong vao — the chinh (vocab/
+   zhVocab), kiem tra nhanh (vocabQuick/zhVocabQuick), flashcard (vocabFlash)
+   va the on tap (reviewCard) deu an thanh tren/menu trai/chan trang. */
+function isVocabFocusLesson(l) { return !!(l && (l.type === "vocab" || l.type === "zhVocab" || l.type === "vocabQuick" || l.type === "zhVocabQuick" || l.type === "vocabFlash" || l.type === "reviewCard")); }
 function applyLessonLayout(app) {
   if (!app) return;
   app.classList.remove("lesson-view");
@@ -2427,7 +2431,7 @@ function applyLessonLayout(app) {
        lesson-view de luoi desktop (cot chinh 820px, can giua) van ap dung;
        khong co frame nen bo qua cac buoc dua frame/cot phai (the tu von
        khong co cot phai theo v118). */
-    var isVocabNoFrame = (typeof curLesson !== "undefined" && curLesson && (curLesson.type === "vocab" || curLesson.type === "zhVocab")) && app.querySelector(".vocab-card");
+    var isVocabNoFrame = isVocabFocusLesson(curLesson) && app.querySelector(".vocab-card");
     if (!isVocabNoFrame) return;
     var mainNF = document.createElement("div"); mainNF.className = "lesson-main";
     while (app.firstChild) mainNF.appendChild(app.firstChild);
@@ -2477,7 +2481,7 @@ function applyLessonLayout(app) {
     var cardBars = main.querySelectorAll(".bar");
     /* v118: the tu vung khong con thanh 5 nac rieng — van go thanh chuong
        trung tren the tu de chi con 1 chi so tien do (chan the). */
-    var isVocabCard118 = (typeof curLesson !== "undefined" && curLesson && (curLesson.type === "vocab" || curLesson.type === "zhVocab"));
+    var isVocabCard118 = isVocabFocusLesson(curLesson);
     if (bars.length > 1 || (bars.length >= 1 && (cardBars.length >= 1 || isVocabCard118))) {
       var chBar = null;
       for (var bi = 0; bi < bars.length; bi++) { if (bars[bi].parentNode === main) { chBar = bars[bi]; break; } }
@@ -2529,7 +2533,7 @@ function applyLessonLayout(app) {
   } catch (e) { side.innerHTML = '<p class="lesson-col-head">🧰 Tham khảo</p><div class="bento-tile"><p class="mut">Thứ tự học: Lý thuyết → Thực hành → Kiểm tra</p></div>'; }
   /* v118: the tu vung khong co cot phai "TIEN TRINH CUA BAN" — cot do khong
      thuoc the tu; chi giu cho cac bai hoc khac. */
-  if (!(typeof curLesson !== "undefined" && curLesson && (curLesson.type === "vocab" || curLesson.type === "zhVocab"))) app.appendChild(side);
+  if (!isVocabFocusLesson(curLesson)) app.appendChild(side);
   /* v106c — frame KHONG con dinh nua (xem CSS .lessonframe): cot phai chi
      can dinh duoi topbar 66px + 12px khoang cach = 78px, khong phu thuoc
      chieu cao frame; khong can tinh lai khi resize/mo <details> nua. */
@@ -2793,7 +2797,7 @@ function render() {
   try { syncAppFrame(); } catch (e) {}
   document.body.classList.remove("in-lesson");
   /* v120: an thanh tren trong suot bai the tu EN/ZH (moi man, ke ca man tong ket). */
-  document.body.classList.toggle("lesson-vocab", !!(typeof curLesson !== "undefined" && curLesson && (curLesson.type === "vocab" || curLesson.type === "zhVocab")));
+  document.body.classList.toggle("lesson-vocab", isVocabFocusLesson(curLesson)); /* v124b: mo the tu bat ke duong vao deu tap trung */
   document.body.classList.remove("workspace-open");
   normZh();
   try { updateSiteTitle(); } catch (e) {}
@@ -9006,14 +9010,19 @@ function vkEnPanelHTML(vk, c, cards, pos) {
   } else {
     /* v124: buoc 4 tach hai che do — Doc to (chi mic, tang 1) la nut chinh;
        Soi guong quy dao (chi camera) la nut phu o hang actions. */
+    /* v124b (dung hoa): nut chinh buoc 4 THONG NHAT 4 track — "Doc to" chi khi
+       chua thu VA mic con (chua biet mat mic); "Tiep tuc" khi da thu HOAC biet
+       mat mic (luat v112: may khong mic phai thoat ngay, khong bat bam Doc to
+       cho loi). Khoi T1 an khi khong mic (nhu v124). */
     var enNoMic = !mrSupported() || mrNoMic();
+    var enAttempted = vk.pronDone || vk.pronAttempted;
     if (vk.pronDone) h += '<p>Đã đọc ✓</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
     else if (vk.pronAttempted) h += '<p class="mut">' + (vk.t1 ? esc(vk.t1) : 'Chưa ghi được điểm lần này') + ' — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
     else if (enNoMic) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
     if (!enNoMic) {
-      h += '<div class="qblock"><p><b>Đọc to</b> <span class="mut">(chỉ cần mic, không cần camera)</span></p><div class="row"><button class="btn" id="enT1Hear">🔊 Nghe mẫu</button><button class="btn' + ((!vk.pronDone && !vk.pronAttempted) ? ' btn-primary' : '') + '" id="enT1Rec">🎤 Đọc to</button></div><p class="mut" id="enT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
-      if (mrNoCamera()) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
+      h += '<div class="qblock"><p><b>Đọc to</b> <span class="mut">(chỉ cần mic, không cần camera)</span></p><div class="row"><button class="btn" id="enT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!enAttempted ? ' btn-primary' : '') + '" id="enT1Rec">🎤 Đọc to</button></div><p class="mut" id="enT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
     }
+    if (mrNoCamera() && !enNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
     var sym4 = c.ipa ? firstSymFromIpa(c.ipa) : "";
     if (sym4 && RB_PH_ALL_EXAMPLES[sym4]) h += '<p><button class="btn" id="vocabPhLink">Âm /' + esc(sym4) + '/ luyện ở đâu? → Vào bài âm này</button></p>';
   }
@@ -9062,24 +9071,36 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
     } else if (vk.pronAttempted) {
       h += '<p class="mut">Không ghi được âm thanh ở lượt vừa rồi.</p>';
     }
-    var canNext = vk.pronRecorded || !!zp || !mrSupported() || vk.pronAttempted || mrNoMic(); /* v124: buoc 4 chi can MIC de doc to (tang 1); guong la phu, khong gat cong */
-    if (canNext) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhPronNext">Tiếp tục →</button></div>';
-    else {
+    /* v124b (dung hoa): nut chinh buoc 4 THONG NHAT 4 track — "Doc to" chi khi
+       chua thu VA mic con; "Tiep tuc" khi da thu HOAC biet mat mic (luat v112).
+       Khoi T1 an khi khong mic (nhu EN/TC). Nut "Da soi xong, kiem tra quy dao"
+       hien khi chua xong buoc (de mo luong guong) HOAC khi da co du lieu quy dao
+       cua dung the nay — nhung chi khi guong dung duoc (co camera) hoac da co
+       quy dao (may khong camera thi nut nay la duong cut). */
+    var zhNoMic = !mrSupported() || mrNoMic();
+    var zhAttempted = vk.pronRecorded || vk.pronDone || vk.pronAttempted || !!zp;
+    var zhKey = d ? (d.key + ":" + pos) : "";
+    var zhHasTraj = zhKey !== "" && (typeof MR !== "undefined" && MR.lastTraj && MR.lastTraj.n >= 6 && MR.zhKey === zhKey);
+    if (zhAttempted) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhPronNext">Tiếp tục →</button></div>';
+    else if (zhNoMic) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhPronNext">Tiếp tục →</button></div><p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p>';
+    if (!vk.pronRecorded && !vk.pronDone && (!zhAttempted || zhHasTraj) && (zhHasTraj || !mrNoCamera())) {
       h += '<button class="btn" id="zhPronCheck">Đã soi xong, kiểm tra quỹ đạo</button>';
       if (vk.pronWhy) h += '<div class="why show" id="zhPronWhy">' + esc(vk.pronWhy) + '</div>';
     }
     /* v123: tang 1 (chi mic, khach cung duoc) + cham thanh dieu YIN (tang 3) + link bai am — song song voi AI soi guong, khong thay the. */
     var zt1 = vk.t1 || {};
-    h += '<div class="qblock" id="zhT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="zhT1Hear">🔊 Nghe mẫu</button><button class="btn' + (canNext ? '' : ' btn-primary') + '" id="zhT1Rec">🎤 Đọc to</button></div>'; /* v124: Doc to la nut chinh duy nhat khi chua xong buoc 4 */
-    if (zt1.ok) h += '<p class="ok" style="font-size:18px">✓ Nghe ra đúng — ' + esc(zt1.heard || "") + '</p>';
-    else if (zt1.tried && zt1.err) h += '<p class="mut">' + esc(zt1.err) + '</p>';
-    else if (zt1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(zt1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
-    h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
+    if (!zhNoMic) {
+      h += '<div class="qblock" id="zhT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="zhT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!zhAttempted ? ' btn-primary' : '') + '" id="zhT1Rec">🎤 Đọc to</button></div>'; /* v124b: Doc to la nut chinh duy nhat khi chua thu lan nao (nhu EN/TC/TP) */
+      if (zt1.ok) h += '<p class="ok" style="font-size:18px">✓ Nghe ra đúng — ' + esc(zt1.heard || "") + '</p>';
+      else if (zt1.tried && zt1.err) h += '<p class="mut">' + esc(zt1.err) + '</p>';
+      else if (zt1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(zt1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
+      h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
+    }
     var ztP = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || "");
     var ztHan0 = String(c.han || "")[0] || "";
     var ztPy0 = String(c.pinyin || "").split(/\s+/)[0] || "";
     h += '<div class="qblock" id="zhToneBlock"><p><b>🎵 Chấm thanh điệu (tầng 3):</b> đọc to một âm tiết “' + esc(ztHan0) + '” (' + esc(ztPy0) + ', ' + esc(zhToneName(ztP.tone)) + '), máy đo cao độ giọng bằng YIN rồi vẽ đường giọng của bạn so với đường chuẩn.</p><div class="row"><button class="btn" id="zhToneBtn">🎵 Chấm thanh điệu</button></div><div id="zhToneRes">' + (vk.toneRes ? toneYinResultHTML(vk.toneRes.points, vk.toneRes.sc, vk.toneRes.tone) : "") + '</div>' + (vk.toneErr ? '<p class="mut">' + esc(vk.toneErr) + '</p>' : "") + '</div>';
-    if (mrNoCamera()) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
+    if (mrNoCamera() && !zhNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
     h += '<p><button class="btn" id="zhPhLink">Âm ' + esc(zhToneName(ztP.tone)) + ' luyện ở đâu? → Vào bài âm này</button></p>';
   }
   return h;
@@ -9105,7 +9126,7 @@ function renderReviewCard(app, l) {
     if (rc.kind === "listen") qHtml += '<button class="btn" id="rcListen">🔊 Nghe</button> ';
     var opts = ch.options.map(function (o, i) { return '<button class="btn q-opt" data-rc="' + i + '">' + esc(o) + '</button>'; }).join(" ");
     var peekHtml = rc.peeked ? '<div class="why show"><p>Đáp án: <b>' + esc(card.w) + '</b> — ' + esc(card.vi) + '.</p><p class="mut">Bạn đã xem đáp án — lần này không tính đạt dù trả lời đúng.</p></div>' : '<button class="btn" id="rcPeek">Quên rồi, xem lại nghĩa</button>';
-    app.innerHTML = head + '<div class="qblock">' + qHtml + '<div class="row">' + opts + '</div>' + peekHtml + '</div>';
+    app.innerHTML = head + '<div class="qblock">' + qHtml + '<div class="row vk-choice-big">' + opts + '</div>' + peekHtml + '</div>'; /* v124b: dap an doc to nhu the tu buoc 2 (v120b) */
     wireBack();
     var rl = $("#rcListen"); if (rl) rl.onclick = function () { speak(card.w); };
     var pk = $("#rcPeek"); if (pk) pk.onclick = function () { rc.peeked = true; render(); };
@@ -9353,7 +9374,7 @@ function renderVocabQuickCheck(app, l) {
   if (!qc.answered) {
     var qHtml = '<p><b>Câu ' + (qc.qi + 1) + '/' + qc.order.length + (qc.second ? ' (ôn lại)' : '') + ':</b> ' + esc(ch.q) + ' <span class="mut">(' + vkMultiKindLabel(kind) + ')</span></p>';
     if (kind === "listen") qHtml += '<button class="btn" id="qcListen">🔊 Nghe</button> ';
-    app.innerHTML = head + '<div class="qblock">' + qHtml + '<div class="row">' + ch.options.map(function (o, i) { return '<button class="btn q-opt" data-qc="' + i + '">' + esc(o) + '</button>'; }).join(" ") + '</div></div>';
+    app.innerHTML = head + '<div class="qblock">' + qHtml + '<div class="row vk-choice-big">' + ch.options.map(function (o, i) { return '<button class="btn q-opt" data-qc="' + i + '">' + esc(o) + '</button>'; }).join(" ") + '</div></div>'; /* v124b: dap an doc to nhu the tu buoc 2 (v120b) */
     wireBack();
     var ql = $("#qcListen"); if (ql) ql.onclick = function () { if (bank === "tp") tpSpeak(c.w); else speak(c.w); };
     $$("[data-qc]").forEach(function (b) { b.onclick = function () { if (qc.answered) return; qc.answered = true; qc.picked = +b.dataset.qc; if (qc.picked === ch.a) { if (!qc.second) qc.firstOk++; } else if (qc.wrongs.indexOf(pos) < 0) qc.wrongs.push(pos); render(); }; });
@@ -9386,7 +9407,7 @@ function renderZhVocabQuickCheck(app, l) {
   if (!qc.answered) {
     var qHtml = '<p><b>Câu ' + (qc.qi + 1) + '/' + qc.order.length + (qc.second ? ' (ôn lại)' : '') + ':</b> ' + esc(ch.q) + ' <span class="mut">(' + vkMultiKindLabel(kind) + ')</span></p>';
     if (kind === "listen") qHtml += '<button class="btn" id="zqcListen">🔊 Nghe</button> ';
-    app.innerHTML = head + '<div class="qblock">' + qHtml + '<div class="row">' + ch.options.map(function (o, i) { return '<button class="btn q-opt" data-zqc="' + i + '">' + esc(o) + '</button>'; }).join(" ") + '</div></div>';
+    app.innerHTML = head + '<div class="qblock">' + qHtml + '<div class="row vk-choice-big">' + ch.options.map(function (o, i) { return '<button class="btn q-opt" data-zqc="' + i + '">' + esc(o) + '</button>'; }).join(" ") + '</div></div>'; /* v124b: dap an doc to nhu the tu buoc 2 (v120b) */
     wireBack();
     var ql = $("#zqcListen"); if (ql) ql.onclick = function () { zhSpeak(c.han); };
     $$("[data-zqc]").forEach(function (b) { b.onclick = function () { if (qc.answered) return; qc.answered = true; qc.picked = +b.dataset.zqc; if (qc.picked === ch.a) { if (!qc.second) qc.firstOk++; } else if (qc.wrongs.indexOf(pos) < 0) qc.wrongs.push(pos); render(); }; });
@@ -19829,14 +19850,18 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
       /* v124: buoc 4 tach hai che do — Doc to (chi mic, tang 1) la nut chinh;
          Soi guong quy dao (chi camera) la nut phu. */
       h += '<div id="ttCheckSlot"></div><div id="ttCheckResult"></div>';
-      var tcNoMic = !mrSupported() || mrNoMic() || vk.pronFailed;
+      /* v124b (dung hoa): nhu EN — "Doc to" chi khi chua thu VA mic con;
+         "Tiep tuc" khi da thu HOAC biet mat mic (luat v112). Khoi T1 an khi
+         khong mic (nhu v124). */
+      var tcNoMic = !mrSupported() || mrNoMic();
+      var tcAttempted = vk.pronDone || vk.pronAttempted;
       if (vk.pronDone) h += '<p>Đã đọc ✓</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
       else if (vk.pronAttempted) h += '<p class="mut">' + (vk.t1 ? esc(vk.t1) : 'Chưa ghi được điểm lần này') + ' — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
       else if (tcNoMic) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button></div>';
       if (!tcNoMic) {
-        h += '<div class="qblock"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="tcT1Hear">🔊 Nghe mẫu</button><button class="btn' + ((!vk.pronDone && !vk.pronAttempted) ? ' btn-primary' : '') + '" id="tcT1Rec">🎤 Đọc to</button></div><p class="mut" id="tcT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
-        if (mrNoCamera()) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
+        h += '<div class="qblock"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="tcT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!tcAttempted ? ' btn-primary' : '') + '" id="tcT1Rec">🎤 Đọc to</button></div><p class="mut" id="tcT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
       }
+      if (mrNoCamera() && !tcNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
       if (vk.pronWhy) h += '<div class="why show" id="ttPronWhy">' + esc(vk.pronWhy) + '</div>';
       if (!mrNoCamera()) h += '<div class="row"><button class="btn" id="ttPronBtn">🪞 Soi gương quỹ đạo</button></div>'; /* v124: nut guong chi-camera, luon nut phu */
       var sym4t = c.ipa ? firstSymFromIpa(c.ipa) : "";
@@ -19844,14 +19869,23 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
     } else {
       /* v123: tang 1 (chi mic, khach cung duoc) — may co nghe ra tu nay khong; khong con tu xac nhan khong. */
       var tp1 = vk.t1 || {};
-      h += '<div class="qblock" id="tpT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="ttPronListen">🔊 Nghe mẫu</button><button class="btn" id="ttT1Rec">🎤 Đọc to</button></div>';
-      if (tp1.ok) h += '<p class="ok" style="font-size:18px">✓ Nghe ra đúng — ' + esc(tp1.heard || "") + '</p>';
-      else if (tp1.tried && tp1.err) h += '<p class="mut">' + esc(tp1.err) + '</p>';
-      else if (tp1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(tp1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
-      h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
+      /* v124b (dung hoa): nhu EN/TC/ZH — "Doc to" la nut chinh duy nhat khi chua
+         thu VA mic con; "Tiep tuc" khi da thu HOAC biet mat mic (luat v112).
+         Khoi T1 an khi khong mic (nhu EN/TC). */
+      var tpNoMic = !mrSupported() || mrNoMic();
+      var tpAttempted = vk.pronDone || vk.pronAttempted || (vk.t1 && vk.t1.tried);
+      if (tpNoMic && !tpAttempted) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p>';
+      if (!tpNoMic) {
+        h += '<div class="qblock" id="tpT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="ttPronListen">🔊 Nghe mẫu</button><button class="btn' + (tpAttempted ? '' : ' btn-primary') + '" id="ttT1Rec">🎤 Đọc to</button></div>';
+        if (tp1.ok) h += '<p class="ok" style="font-size:18px">✓ Nghe ra đúng — ' + esc(tp1.heard || "") + '</p>';
+        else if (tp1.tried && tp1.err) h += '<p class="mut">' + esc(tp1.err) + '</p>';
+        else if (tp1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(tp1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
+        h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
+      }
+      if (mrNoCamera() && !tpNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
       h += '<div id="ttCheckSlot"></div>';
       if (!mrNoCamera()) h += '<div class="row"><button class="btn" id="ttPronBtn">🪞 Soi gương quỹ đạo</button></div>'; /* v124: nut guong chi-camera, luon nut phu */
-      h += '<div class="row"><button class="btn btn-primary" id="ttPronDone">Tiếp tục →</button></div>';
+      if (tpAttempted || tpNoMic) h += '<div class="row"><button class="btn btn-primary" id="ttPronDone">Tiếp tục →</button></div>';
       var tpj = tpJamo(c.w);
       var tpsym = tpj ? TP_INIT_JAMO[tpj.init] : "";
       if (tpsym) h += '<p><button class="btn" id="ttPhLinkTp">Âm /' + esc(tpsym) + '/ luyện ở đâu? → Vào bài âm này</button></p>';
@@ -20132,9 +20166,10 @@ function renderTcTpVocab5(track, stepId, back) {
     pronTier1Start("tp", function (heard) {
       var sc = pronTier1Score(heard, c.w, "tp");
       vk.t1 = { tried: true, ok: sc === 100, heard: heard, err: "" };
+      vk.pronDone = sc === 100; vk.pronAttempted = sc !== 100; /* v124b: dat co nhu EN/TC de panel buoc 4 doi nut chinh theo trang thai thu */
       try { if (!state.wordPron) state.wordPron = {}; var j3 = tpJamo(c.w); state.wordPron[tcTpVocab5Key(track, stepId, sess.pos)] = { ai: sc === 100 ? 100 : 0, sym: j3 ? TP_INIT_JAMO[j3.init] : "", word: c.w, date: todayStr() }; saveState(); } catch (e) {}
       renderTcTpVocab5(track, stepId, backTab);
-    }, function (kind) { vk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; renderTcTpVocab5(track, stepId, backTab); });
+    }, function (kind) { vk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; vk.pronDone = false; vk.pronAttempted = true; /* v124b: dat co nhu EN/TC */ renderTcTpVocab5(track, stepId, backTab); });
   };
   var tplTp = $("#ttPhLinkTp"); if (tplTp) tplTp.onclick = function () { var j2 = tpJamo(c.w); if (j2) openLesson({ type: "tpPron", sound: TP_INIT_JAMO[j2.init], sub: 0 }); };
   /* v112b L1: nhu the Anh — kiem thiet bi ghi am 1 lan/phien, ve lai neu may
