@@ -205,6 +205,9 @@ body.has-bottombar #btnBack{display:none}
 .app-topbar{position:sticky;top:0;z-index:6;display:flex;gap:10px;align-items:center;background:var(--paper);padding:10px 0;border-bottom:1.5px solid var(--line2);min-height:66px;transition:transform .25s ease}
 body.topbar-hidden .app-topbar{transform:translateY(-100%)} /* v106d Loi 3: topbar tu an khi cuon xuong, hien lai khi cuon len */
 body.lesson-vocab .app-topbar{display:none} /* v120 (Bui 12:05 09/11): man hoc the tu don gian — an han thanh tren, chi con thanh tien do + nut X */
+body.lesson-vocab .app-frame .app-sidebar{display:none} /* v120b (Bui 15:45 09/11): man hoc the tu — an luon menu trai (desktop), chi con thanh tien do + nut X; bam X thoat thi hien lai theo class */
+body.lesson-vocab #appFooter{display:none} /* v120b: an luon chan trang trong luc hoc the */
+body.lesson-vocab .app-frame{display:block} /* v120b: menu trai an thi cot giua chiem het chieu rong */
 .vk-lesson-head{display:flex;align-items:center;gap:12px;padding:4px 0 12px}
 .vk-lesson-head .vk-close{flex:0 0 auto;width:40px;height:40px;padding:0;font-size:18px;line-height:1;border-radius:999px}
 .vk-progress{flex:1;height:8px;background:#E7E0D2;border-radius:999px;overflow:hidden}
@@ -239,7 +242,11 @@ body.landing-on .app-frame{display:block}
 .duo-guide{width:64px;height:64px;margin-top:4px}
 .duo-chest .duo-star,.duo-cup .duo-star{font-size:56px}
 .g91-games-grid h3{font-size:20px}
-.vk-choice-big button{font-size:18px}.vk-choice-big.vk-step2 button{font-size:22px;font-weight:600}
+/* v120b (Bui 15:45 09/11): 4 o dap an phai TO nhu Duolingo/Memrise — moi o full-width,
+   mot o mot hang, chu 22px dam, padding lon, vung bam lon; ap cho ca buoc 2
+   (chon nghia) va buoc 3 (dien ngu canh), ca 4 track (chung vkChoiceBtnsHTML). */
+.row.vk-choice-big{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.row.vk-choice-big button{width:100%;margin:0;text-align:left;font-size:22px;font-weight:600;line-height:1.35;padding:16px 18px;border-radius:16px;min-height:60px}
 .chapter-row .unit-banner{margin:0 0 12px}
 @media(max-width:520px){.duo-path .step-row,.duo-path .path-node{width:200px}.duo-node.pos1{margin-left:32px}.duo-node.pos2{margin-left:64px}.duo-node.pos3{margin-left:32px}.duo-node.pos5{margin-left:-32px}.duo-node.pos6{margin-left:-64px}.duo-node.pos7{margin-left:-32px}}
 .heat-grid{display:grid;grid-template-rows:repeat(7,18px);grid-auto-flow:column;grid-auto-columns:18px;gap:3px;overflow-x:auto;padding-bottom:4px}
@@ -8803,7 +8810,7 @@ function renderVocab(app, l) {
   var vkHN = $("#vocabHeardNext"); if (vkHN) vkHN.onclick = function () { vk.heard = true; vk.step = 1; render(); vkScrollCardTop(); };
   var vkPN = $("#vocabPronNext"); if (vkPN) vkPN.onclick = function () { vk.step = 4; render(); vkScrollCardTop(); };
   var vkTC = $("#vocabTypeCheck"); if (vkTC) vkTC.onclick = function () { var inp = $("#vocabTypeInp"); var val = inp ? inp.value : ""; vk.typeDraft = val; var sc = vkTypeScoreEn(val, c.w); if (sc.ok) { vk.typeDone = true; vk.typeWhy = ""; render(); } else { vk.typeWhy = sc.whyText; if (!vk.recorded.type) { vk.recorded.type = true; try { recordQuizError("vocabMulti:" + l.setIdx, pos * 10 + 9, { q: "Gõ từ: " + c.w + " (nghĩa: " + c.vi + ")", o: [c.w], a: 0, why: "Từ đúng là " + c.w + " — " + c.vi + "." }); } catch (e) {} } render(); } };
-  $$("[data-vkchoice]").forEach(function (b) { b.onclick = function () { if (vk.choiceAnswered) return; var ch = vkStepChoice("en", c, cards, pos, vk.step); var kind = ch.kind; var picked = +b.dataset.vkchoice; if (picked === ch.a) { vk.choiceAnswered = true; vk.choiceWhy = "Đúng rồi — " + ch.why; } else { vk.choiceAnswered = false; vk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.w + "”" : ch.options[ch.a]) + ". " + ch.why + " Giờ hãy bấm vào đáp án đúng để đi tiếp."; if (!vk.recorded["choice:" + kind]) { vk.recorded["choice:" + kind] = true; try { recordQuizError("vocabMulti:" + l.setIdx, pos * 10 + (vk.step - 1), { q: ch.q, o: ch.options.slice(), a: ch.a, why: ch.why }); } catch (e) {} } } render(); }; });
+  $$("[data-vkchoice]").forEach(function (b) { b.onclick = function () { if (vk.choiceAnswered) return; var ch = vkStepChoice("en", c, cards, pos, vk.step); var kind = ch.kind; var picked = +b.dataset.vkchoice; if (picked === ch.a) { vk.choiceAnswered = true; vk.choiceWhy = "Đúng rồi — " + ch.why; } else { /* v120b: tra loi sai cung hien nut "Tiếp tục →" (khong bat bam dap an dung moi di tiep) */ vk.choiceAnswered = true; vk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.w + "”" : ch.options[ch.a]) + ". " + ch.why + " Bấm “Tiếp tục →” để học tiếp."; if (!vk.recorded["choice:" + kind]) { vk.recorded["choice:" + kind] = true; try { recordQuizError("vocabMulti:" + l.setIdx, pos * 10 + (vk.step - 1), { q: ch.q, o: ch.options.slice(), a: ch.a, why: ch.why }); } catch (e) {} } } render(); }; });
   wirePhotoEntry(); /* v109: nut "Chụp ảnh thêm từ" trong khu từ vựng. */
   var vkCL = $("#vocabChoiceListen"); if (vkCL) vkCL.onclick = function () { speak(c.w); };
   var vkCN = $("#vocabChoiceNext"); if (vkCN) vkCN.onclick = function () { vk.choiceDone++; vk.choiceAnswered = false; vk.choiceWhy = ""; vk.step = vk.step + 1; render(); vkScrollCardTop(); };
@@ -17771,7 +17778,7 @@ function renderZhVocab(app, l) {
   var zhHN = $("#zhHeardNext"); if (zhHN) zhHN.onclick = function () { zvk.heard = true; zvk.step = 1; render(); vkScrollCardTop(); };
   var zhPN = $("#zhPronNext"); if (zhPN) zhPN.onclick = function () { zvk.step = 4; render(); vkScrollCardTop(); };
   var zhTC = $("#zhTypeCheck"); if (zhTC) zhTC.onclick = function () { var inp = $("#zhTypeInp"); var val = inp ? inp.value : ""; zvk.typeDraft = val; var sc = vkTypeScoreZh(val, c.pinyin); if (sc.ok) { zvk.typeDone = true; zvk.typeWhy = ""; render(); } else { zvk.typeWhy = sc.whyText; if (!zvk.recorded.type) { zvk.recorded.type = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + 9, { q: "Gõ pinyin: " + c.han + " (nghĩa: " + c.vi + ")", o: [c.pinyin], a: 0, why: "Pinyin đúng là " + c.pinyin + " — " + c.vi + "." }); } catch (e) {} } render(); } };
-  $$("[data-zhchoice]").forEach(function (b) { b.onclick = function () { if (zvk.choiceAnswered) return; var ch = vkStepChoice("zh", c, cards, pos, zvk.step); var kind = ch.kind; var picked = +b.dataset.zhchoice; if (picked === ch.a) { zvk.choiceAnswered = true; zvk.choiceWhy = "Đúng rồi — " + ch.why; } else { zvk.choiceAnswered = false; zvk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.han + "”" : ch.options[ch.a]) + ". " + ch.why + " Giờ hãy bấm vào đáp án đúng để đi tiếp."; if (!zvk.recorded["choice:" + kind]) { zvk.recorded["choice:" + kind] = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + (zvk.step - 1), { q: ch.q, o: ch.options.slice(), a: ch.a, why: ch.why }); } catch (e) {} } } render(); }; });
+  $$("[data-zhchoice]").forEach(function (b) { b.onclick = function () { if (zvk.choiceAnswered) return; var ch = vkStepChoice("zh", c, cards, pos, zvk.step); var kind = ch.kind; var picked = +b.dataset.zhchoice; if (picked === ch.a) { zvk.choiceAnswered = true; zvk.choiceWhy = "Đúng rồi — " + ch.why; } else { /* v120b: tra loi sai cung hien nut "Tiếp tục →" (khong bat bam dap an dung moi di tiep) */ zvk.choiceAnswered = true; zvk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.han + "”" : ch.options[ch.a]) + ". " + ch.why + " Bấm “Tiếp tục →” để học tiếp."; if (!zvk.recorded["choice:" + kind]) { zvk.recorded["choice:" + kind] = true; if (!l.zhBlockWrong) l.zhBlockWrong = []; if (l.zhBlockWrong.indexOf(pos) < 0) l.zhBlockWrong.push(pos); try { recordZhQuizError("zhVocabMulti:" + d.key, pos * 10 + (zvk.step - 1), { q: ch.q, o: ch.options.slice(), a: ch.a, why: ch.why }); } catch (e) {} } } render(); }; });
   wirePhotoEntry(); /* v109: nut "Chụp ảnh thêm từ" trong khu từ vựng. */
   var zhCL = $("#zhChoiceListen"); if (zhCL) zhCL.onclick = function () { zhSpeak(c.han); };
   var zhCN = $("#zhChoiceNext"); if (zhCN) zhCN.onclick = function () { zvk.choiceDone++; zvk.choiceAnswered = false; zvk.choiceWhy = ""; zvk.step = zvk.step + 1; render(); vkScrollCardTop(); };
@@ -19173,8 +19180,9 @@ function renderTcTpVocab5(track, stepId, back) {
     var picked = +b.dataset.ttchoice;
     if (picked === ch.a) { vk.choiceAnswered = true; vk.choiceWhy = "Đúng rồi — " + ch.why; }
     else {
-      vk.choiceAnswered = false;
-      vk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.w + "”" : ch.options[ch.a]) + ". " + ch.why + " Giờ hãy bấm vào đáp án đúng để đi tiếp.";
+      /* v120b: tra loi sai cung hien nut "Tiếp tục →" (khong bat bam dap an dung moi di tiep) */
+      vk.choiceAnswered = true;
+      vk.choiceWhy = "Chưa đúng — đáp án đúng: " + (kind === "image" ? "hình của “" + c.w + "”" : ch.options[ch.a]) + ". " + ch.why + " Bấm “Tiếp tục →” để học tiếp.";
       if (!vk.recorded["choice:" + kind]) { vk.recorded["choice:" + kind] = true; tcTpRecordVocabError(track, stepId, ch.q, ch.options[ch.a], ch.why); }
     }
     renderTcTpVocab5(track, stepId, backTab);
