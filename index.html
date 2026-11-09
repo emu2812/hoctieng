@@ -3645,14 +3645,14 @@ function viewGuide(app) {
     + '<p>Tiếng Trung: kiểm tra xếp chặng nội bộ, không phải đề thi HSK thật; xếp tối đa tới chặng 4. Tiếng Hàn: bảng chữ Hangul học theo thứ tự (bài sau mở khi xong bài trước).</p>'
     + '</details>'
     + '<details class="guide-sec" id="guideVocab"><summary><b>📚 Từ vựng — học 1 thẻ qua 5 bước</b></summary>'
-    + '<p>Bước 4 đọc to — AI chấm từng âm, đạt khi AI chấm và khớp miệng đều ≥ 80; điểm không khóa thẻ, chưa đạt thì tập lại. Bước 5 gõ từ: tiếng Anh gõ chữ cái (không cần viết hoa đúng), tiếng Trung gõ pinyin (không dấu cũng được), tiếng Hàn gõ Hangul.</p>'
+    + '<p>Bước 4 đọc to — AI chấm từng âm, đạt khi AI chấm ≥ 80; gương chỉ để tự nhìn quỹ đạo miệng, không chấm điểm, không khóa thẻ. Điểm không khóa thẻ, chưa đạt thì tập lại. Bước 5 gõ từ: tiếng Anh gõ chữ cái (không cần viết hoa đúng), tiếng Trung gõ pinyin (không dấu cũng được), tiếng Hàn gõ Hangul.</p>'
     + '</details>'
     + '<details class="guide-sec" id="guideReview"><summary><b>🔁 Ôn tập &amp; Sổ lỗi sai</b></summary>'
     + '<p>Ôn theo lịch 1-3-7-14-30 ngày. Mục khó trong Sổ lỗi sai: ôn đúng 2 lần liên tiếp ở các lần ôn cách quãng mới xong hẳn; làm sai thì tính lại từ đầu. Thẻ đến hạn ôn theo kiểu "test trước, hiện sau": trả lời đúng ngay lần đầu mới tăng 1 nấc; xem đáp án trước thì lần đó không tính đạt.</p><p>Buổi ôn trộn mục cũ đến hạn với một ít mục mới.</p><p>Nút "Đã ôn xong" / "Đã nhớ rồi" chỉ hiện ở mục đến hạn đúng ngày — bấm chỉ dời ngày ôn tới lần sau, không tính là ôn đúng, không tốt nghiệp, không cộng XP.</p></details>'
     + '<details class="guide-sec" id="guideScore"><summary><b>📊 Cách tính điểm</b></summary>'
     + '<p>AI góp ý (nhiệm vụ giao tiếp thật): bấm "Nhận giọng nói thành chữ" trước, rồi mới bấm "AI góp ý". AI chỉ đọc được bản ghi chữ nên chỉ góp ý về ý, từ, câu — không chấm phát âm, không phải điểm thi.</p>'
     + notesScoreHTML89()
-    + '<details><summary><b>Luật đạt/không đạt cần biết</b></summary>' + (tr === "zh" ? '<p>Kiểm tra cuối chặng: mỗi phần cần từ 50% đúng lần đầu mới tính qua; chưa qua chỉ cần học lại đúng phần yếu, các phần đã đạt không cần làm lại.</p>' : tr === "tp" ? '<p>Thi thử TOPIK I rút gọn: tổng /200; từ 140 = cấp 2, 80–139 = cấp 1.</p>' : '') + '<p>Thẻ từ: quyền camera/mic bị từ chối thì không tính đạt chuẩn.</p></details></details>'
+    + '<details><summary><b>Luật đạt/không đạt cần biết</b></summary>' + (tr === "zh" ? '<p>Kiểm tra cuối chặng: mỗi phần cần từ 50% đúng lần đầu mới tính qua; chưa qua chỉ cần học lại đúng phần yếu, các phần đã đạt không cần làm lại.</p>' : tr === "tp" ? '<p>Thi thử TOPIK I rút gọn: tổng /200; từ 140 = cấp 2, 80–139 = cấp 1.</p>' : '') + '<p>Thẻ từ: quyền mic bị từ chối thì không tính đạt chuẩn (gương không tính điểm, chỉ để tự nhìn).</p></details></details>'
     + '<details class="guide-sec" id="guideTerms"><summary><b>📖 Thuật ngữ hay gặp</b></summary>' + trackGlossary89().map(function (g) { return '<p><b>' + esc(g.t) + ':</b> ' + esc(g.d) + '</p>'; }).join("") + '</details>'
     + '<details class="guide-sec" id="guideAccount"><summary><b>👤 Tài khoản &amp; VIP</b></summary>'
     + '<p>Sau khi được cấp VIP, bấm "Tải lại từ tài khoản" ở mục Của tôi → Tài khoản để hiện VIP.</p></details>'
@@ -6920,7 +6920,6 @@ function lastPronLineHTML(key) {
   if (!p) return "";
   var parts = [];
   if (p.ai != null) parts.push("AI " + p.ai + "/100");
-  if (p.mirror != null) parts.push("gương " + p.mirror + "%");
   if (!parts.length) return "";
   return '<p class="mut" id="vocabLastPron">Phát âm lần gần nhất: ' + parts.join(" · ") + (p.date ? " (" + esc(p.date) + ")" : "") + '.</p>';
 }
@@ -7894,7 +7893,20 @@ function phMirrorCheck(cb) {
   } catch (e) { if (cb) cb(null); }
 }
 function phMirrorBoxHTML() {
-  return '<div class="qblock" id="phMirrorBox" style="display:none"><video id="phMirrorVideo" autoplay playsinline muted style="width:100%;max-width:320px"></video><p class="mut">Gương chỉ để tự nhìn miệng — không chấm điểm.</p><button class="btn" id="phMirrorClose">Tắt gương</button></div><p class="mut" id="phMirrorNote"></p>';
+  /* v124: hop guong bai am dung MR engine (chi camera, khong mic) de ve
+     quy dao mieng; nut mo/dung/tat theo 3 trang thai. */
+  return '<div class="qblock" id="phMirrorBox" style="display:none"><div id="phMirrorSlot"></div><button class="btn" id="phMirrorClose">✕ Tắt gương</button></div><p class="mut" id="phMirrorNote"></p>';
+}
+function phMirrorOpen(l) {
+  var box = document.getElementById("phMirrorBox"), openBtn = document.getElementById("phMirrorOpen");
+  if (!box) return;
+  var slot = document.getElementById("phMirrorSlot");
+  if (!slot) return;
+  slot.innerHTML = phPracticeSlotHTML(l.sound);
+  box.style.display = "block";
+  MR.sym = l.sound; MR.micWant = false;
+  try { mirrorStart(slot); } catch (e) {}
+  if (openBtn) { openBtn.textContent = "⏹ Dừng gương"; openBtn.onclick = function () { phMirrorStop(); }; }
 }
 function phMirrorWire(l) {
   var openBtn = document.getElementById("phMirrorOpen");
@@ -7906,27 +7918,24 @@ function phMirrorWire(l) {
       if (nt) nt.textContent = "Máy này không có camera — đọc to bằng mic vẫn chấm được.";
     }
   });
-  openBtn.onclick = function () {
-    var box = document.getElementById("phMirrorBox"), vd = document.getElementById("phMirrorVideo"), nt = document.getElementById("phMirrorNote");
-    var md = (typeof navigator !== "undefined") ? navigator.mediaDevices : null;
-    if (!md || !md.getUserMedia) { if (nt) nt.textContent = "Máy này không mở được camera — đọc to bằng mic vẫn chấm được."; return; }
-    md.getUserMedia({ video: true }).then(function (st) {
-      window.__phMirrorStream = st;
-      if (vd) { vd.srcObject = st; }
-      if (box) box.style.display = "block";
-      openBtn.textContent = "👁 Đang mở gương — bấm để tắt";
-      openBtn.onclick = function () { phMirrorStop(); };
-    }).catch(function () { if (nt) nt.textContent = "Không mở được camera — đọc to bằng mic vẫn chấm được."; });
-  };
+  openBtn.onclick = function () { phMirrorOpen(l); };
   var cl = document.getElementById("phMirrorClose");
   if (cl) cl.onclick = function () { phMirrorStop(); };
 }
 function phMirrorStop() {
-  try { if (window.__phMirrorStream) { window.__phMirrorStream.getTracks().forEach(function (tr) { tr.stop(); }); window.__phMirrorStream = null; } } catch (e) {}
+  /* v124: dung guong -> mirrorStop() ve quy dao vao .mr-session trong hop;
+     KHONG render() lai (render se xoa mat quy dao vua ve). Nut mo chuyen
+     thanh "Tat guong" de an hop khi muon. */
+  try { mirrorStop(); } catch (e) {}
+  var box = document.getElementById("phMirrorBox"), openBtn = document.getElementById("phMirrorOpen");
+  if (openBtn) { openBtn.textContent = "✕ Tắt gương"; openBtn.onclick = function () { phMirrorHide(); }; }
+  var cl = document.getElementById("phMirrorClose");
+  if (cl) cl.onclick = function () { phMirrorHide(); };
+}
+function phMirrorHide() {
   var box = document.getElementById("phMirrorBox"), openBtn = document.getElementById("phMirrorOpen");
   if (box) box.style.display = "none";
-  if (openBtn) openBtn.textContent = "👁 Soi gương (tùy chọn)";
-  if (openBtn) openBtn.onclick = null;
+  if (openBtn) { openBtn.textContent = "👁 Soi gương (tùy chọn)"; openBtn.onclick = null; }
   render();
 }
 
@@ -8466,15 +8475,13 @@ function vocabMirrorScoreNow() { if (MR.lastProc && MR.lastProc.total != null) r
 function vkCompactActions(aiScore, mirrorScore, opts) {
   opts = opts || {};
   var cands = [];
-  if (opts.camDenied) cands.push('Bật lại quyền camera rồi đọc lại.');
   if (opts.micDenied) cands.push('Bật lại quyền mic rồi đọc lại.');
   if (aiScore == null) {
     if (opts.estimatedOnly) cands.push('Đăng nhập để AI chấm tiếng (điểm hiện tại chỉ là ước lượng tại chỗ).');
     else if (opts.aiBusy) cands.push('AI đang bận — tập lại sau.');
     else cands.push('Đăng nhập để AI chấm tiếng.');
   } else if (aiScore < 80) cands.push(opts.fixHint ? ('Cần sửa: ' + opts.fixHint + '.') : 'Nghe mẫu rồi đọc to, rõ từng âm.');
-  if (mirrorScore == null) { if (opts.camMissing) cands.push('Kiểm tra camera trên thiết bị này rồi đọc lại.'); else if (opts.camBlocked) cands.push('Kiểm tra quyền camera trong cài đặt trình duyệt rồi đọc lại.'); else if (!opts.camDenied) cands.push('Bật camera, để mặt vào khung rồi đọc lại.'); }
-  else if (mirrorScore < 80) cands.push('Mở miệng đúng hình âm trong gương rồi giữ, đọc lại.');
+  /* v124: guong khong gat cong, khong goi y theo diem guong nua. */
   return cands.slice(0, 2);
 }
 /* Nut ket qua cham hien o thanh duoi (cung hang Quay lai), khong hien trong
@@ -8587,7 +8594,7 @@ function vocabKnownRenderResult(resultEl, aiScore, mirrorScore, ok, reason, opts
   opts = opts || {};
   var useBar = !!opts.onSkip;
   var s = '<div class="qblock vocab-result">'
-    + '<p><b>Điểm tiếng AI: ' + (aiScore == null ? 'chưa có' : aiScore + '/100') + ' · Khớp khẩu hình: ' + (mirrorScore == null ? 'chưa có' : mirrorScore + '%') + '</b></p>';
+    + '<p><b>Điểm tiếng AI: ' + (aiScore == null ? 'chưa có' : aiScore + '/100') + '</b></p>';
   if (opts.elsa) s += elsaSoundVerdictHTML(opts.elsa.sym, opts.elsa.word, opts.elsa.aiRes);
   if (ok) s += '<p>Đã đạt chuẩn.</p>';
   else {
@@ -8608,27 +8615,23 @@ function vocabKnownRenderResult(resultEl, aiScore, mirrorScore, ok, reason, opts
   if (opts.onRetry) { var rb = resultEl.querySelector('.vocab-retry'); if (rb) rb.onclick = opts.onRetry; }
 }
 function vocabKnownGrade(aiScore, mirrorScore, opts) {
+  /* v124: guong chi de NHIN (quy dao), khong ra diem, khong gat cong — chi
+     diem tieng AI quyet dinh dat/khong dat. mirrorScore giu tham so de tuong
+     thich ham goi cu, khong dung nua. */
   opts = opts || {};
-  var camDenied = !!opts.camDenied || !!MR.camDenied;
-  var camMissing = !!opts.camMissing || !!MR.camMissing;
-  var camBlocked = !!opts.camBlocked || !!MR.camBlocked;
+  var camDenied = false, camMissing = false, camBlocked = false;
   var micDenied = !!opts.micDenied || !!MR.micDenied;
   var chk;
-  if (camMissing) chk = { ok: false, reason: 'Không tìm thấy camera trên thiết bị này — kiểm tra camera rồi thử lại. Chưa tính đạt chuẩn.' };
-  else if (camDenied) chk = { ok: false, reason: 'Camera bị từ chối — bật lại quyền camera rồi chấm lại. Chưa tính đạt chuẩn.' };
-  else if (camBlocked) chk = { ok: false, reason: 'Không mở được camera — trình duyệt đang chặn quyền camera trên thiết bị này, kiểm tra lại cài đặt trình duyệt rồi chấm lại. Chưa tính đạt chuẩn.' };
-  else if (micDenied) chk = { ok: false, reason: 'Mic bị từ chối — bật lại quyền mic rồi chấm lại. Chưa tính đạt chuẩn.' };
+  if (micDenied) chk = { ok: false, reason: 'Mic bị từ chối — bật lại quyền mic rồi chấm lại. Chưa tính đạt chuẩn.' };
   else if (aiScore == null) chk = { ok: false, reason: opts.estimatedOnly ? 'Chưa đăng nhập nên điểm tiếng chỉ là ước lượng tại chỗ — chưa tính đạt chuẩn. Đăng nhập ở Của tôi → Tài khoản rồi đọc lại.' : 'Chưa có điểm tiếng AI — đăng nhập ở Của tôi → Tài khoản rồi đọc lại.' };
   else if (aiScore < 80) chk = { ok: false, reason: 'Điểm tiếng AI ' + aiScore + '/100 chưa đạt 80 — đọc lại cho rõ từng âm.' };
-  else if (mirrorScore == null) chk = { ok: false, reason: 'Chưa có điểm khớp khẩu hình — bật camera, để mặt vào khung rồi đọc lại.' };
-  else if (mirrorScore < 80) chk = { ok: false, reason: 'Điểm khớp khẩu hình ' + mirrorScore + '% chưa đạt 80% — chỉnh miệng theo hình mẫu rồi đọc lại.' };
-  else chk = { ok: true, reason: 'Đã đạt chuẩn: tiếng AI ' + aiScore + '/100 và khớp khẩu hình ' + mirrorScore + '%.' };
+  else chk = { ok: true, reason: 'Đã đạt chuẩn: tiếng AI ' + aiScore + '/100.' };
   var lgIn = false; try { lgIn = !!(typeof authState !== "undefined" && authState.user); } catch (e) {}
   /* v93: luu diem phat am lan gan nhat cua THE NAY (chi khi do duoc it nhat
      mot diem) de mat the hien "Phát âm lần gần nhất" — khong bia diem. */
-  if (opts.cardKey && (aiScore != null || mirrorScore != null)) {
+  if (opts.cardKey && aiScore != null) {
     if (!state.wordPron) state.wordPron = {};
-    var wpNew = { ai: aiScore, mirror: mirrorScore, date: todayStr() };
+    var wpNew = { ai: aiScore, date: todayStr() };
     /* v119b: luu them sym+word de gom "tu con sai" theo am (ELSA muc 2). */
     if (opts.elsa && opts.elsa.sym) wpNew.sym = opts.elsa.sym;
     if (opts.elsa && opts.elsa.word) wpNew.word = opts.elsa.word;
@@ -9001,9 +9004,16 @@ function vkEnPanelHTML(vk, c, cards, pos) {
     if (vk.choiceWhy) h += '<div class="why show" id="vocabChoiceWhy">' + esc(vk.choiceWhy) + '</div>';
     if (vk.choiceAnswered) h += '<button class="btn btn-primary" id="vocabChoiceNext">Tiếp tục →</button>';
   } else {
+    /* v124: buoc 4 tach hai che do — Doc to (chi mic, tang 1) la nut chinh;
+       Soi guong quy dao (chi camera) la nut phu o hang actions. */
+    var enNoMic = !mrSupported() || mrNoMic();
     if (vk.pronDone) h += '<p>Đã đọc ✓</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
-    else if (vk.pronAttempted) h += '<p class="mut">Chưa ghi được điểm lần này — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>'; /* v122b: cham khong diem van duoc di tiep; nut Phat am lai o hang actions */
-    else if (!mrSupported() || mrNoDevices()) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>'; /* v112b L1 + v112c: mrSupported() chi biet API co ton tai; mrNoDevices() = thieu mic HOAC camera (buoc 4 can ca hai) */
+    else if (vk.pronAttempted) h += '<p class="mut">' + (vk.t1 ? esc(vk.t1) : 'Chưa ghi được điểm lần này') + ' — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
+    else if (enNoMic) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
+    if (!enNoMic) {
+      h += '<div class="qblock"><p><b>Đọc to</b> <span class="mut">(chỉ cần mic, không cần camera)</span></p><div class="row"><button class="btn" id="enT1Hear">🔊 Nghe mẫu</button><button class="btn' + ((!vk.pronDone && !vk.pronAttempted) ? ' btn-primary' : '') + '" id="enT1Rec">🎤 Đọc to</button></div><p class="mut" id="enT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
+      if (mrNoCamera()) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
+    }
     var sym4 = c.ipa ? firstSymFromIpa(c.ipa) : "";
     if (sym4 && RB_PH_ALL_EXAMPLES[sym4]) h += '<p><button class="btn" id="vocabPhLink">Âm /' + esc(sym4) + '/ luyện ở đâu? → Vào bài âm này</button></p>';
   }
@@ -9052,15 +9062,15 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
     } else if (vk.pronAttempted) {
       h += '<p class="mut">Không ghi được âm thanh ở lượt vừa rồi.</p>';
     }
-    var canNext = vk.pronRecorded || !!zp || !mrSupported() || vk.pronAttempted || mrNoDevices(); /* v112b L1 + v112c: cung goc nhu EN/TC — mrNoDevices() = thieu mic HOAC camera */
+    var canNext = vk.pronRecorded || !!zp || !mrSupported() || vk.pronAttempted || mrNoMic(); /* v124: buoc 4 chi can MIC de doc to (tang 1); guong la phu, khong gat cong */
     if (canNext) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhPronNext">Tiếp tục →</button></div>';
     else {
-      h += '<button class="btn" id="zhPronCheck">Đã ghi xong, kiểm tra bản ghi</button>';
+      h += '<button class="btn" id="zhPronCheck">Đã soi xong, kiểm tra quỹ đạo</button>';
       if (vk.pronWhy) h += '<div class="why show" id="zhPronWhy">' + esc(vk.pronWhy) + '</div>';
     }
     /* v123: tang 1 (chi mic, khach cung duoc) + cham thanh dieu YIN (tang 3) + link bai am — song song voi AI soi guong, khong thay the. */
     var zt1 = vk.t1 || {};
-    h += '<div class="qblock" id="zhT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="zhT1Hear">🔊 Nghe mẫu</button><button class="btn" id="zhT1Rec">🎤 Đọc to</button></div>';
+    h += '<div class="qblock" id="zhT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="zhT1Hear">🔊 Nghe mẫu</button><button class="btn' + (canNext ? '' : ' btn-primary') + '" id="zhT1Rec">🎤 Đọc to</button></div>'; /* v124: Doc to la nut chinh duy nhat khi chua xong buoc 4 */
     if (zt1.ok) h += '<p class="ok" style="font-size:18px">✓ Nghe ra đúng — ' + esc(zt1.heard || "") + '</p>';
     else if (zt1.tried && zt1.err) h += '<p class="mut">' + esc(zt1.err) + '</p>';
     else if (zt1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(zt1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
@@ -9069,6 +9079,7 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
     var ztHan0 = String(c.han || "")[0] || "";
     var ztPy0 = String(c.pinyin || "").split(/\s+/)[0] || "";
     h += '<div class="qblock" id="zhToneBlock"><p><b>🎵 Chấm thanh điệu (tầng 3):</b> đọc to một âm tiết “' + esc(ztHan0) + '” (' + esc(ztPy0) + ', ' + esc(zhToneName(ztP.tone)) + '), máy đo cao độ giọng bằng YIN rồi vẽ đường giọng của bạn so với đường chuẩn.</p><div class="row"><button class="btn" id="zhToneBtn">🎵 Chấm thanh điệu</button></div><div id="zhToneRes">' + (vk.toneRes ? toneYinResultHTML(vk.toneRes.points, vk.toneRes.sc, vk.toneRes.tone) : "") + '</div>' + (vk.toneErr ? '<p class="mut">' + esc(vk.toneErr) + '</p>' : "") + '</div>';
+    if (mrNoCamera()) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
     h += '<p><button class="btn" id="zhPhLink">Âm ' + esc(zhToneName(ztP.tone)) + ' luyện ở đâu? → Vào bài âm này</button></p>';
   }
   return h;
@@ -9576,7 +9587,7 @@ function renderVocab(app, l) {
     + (l.preview ? previewLockHTML() : '<div id="vocabMulti">' + vkEnPanelHTML(vk, c, cards, pos) + '</div>')
     + '</div>'
     + '<div class="vocab-pron"' + ((vk.step === 1 || vk.step === 2 || vk.step === 4) ? ' style="display:none"' : '') + '>' + (vkShowVideo ? nativeVideoHTML(c.w, "english") : '') + '<div id="vocabCheckSlot" style="display:none"></div><div id="vocabCheckResult"></div></div>'
-    + '<div class="vocab-actions row">' + (vkShowBig ? '<button class="btn" id="btnSpeak">🔊 Nghe</button>' : '') + (vk.step === 3 && !vk.pronDone && mrSupported() && !mrNoDevices() ? '<button class="btn btn-primary" id="btnPronounce">🎤 Phát âm</button>' : '') + (vk.step === 3 && vk.pronDone ? '<button class="btn" id="btnPronounce">🎤 Phát âm lại</button>' : '') /* v120: sau khi cham xong chi con 1 nut chinh (Tiep tuc); nut Phat am ha xuong phu de tap lai */ + '</div>'
+    + '<div class="vocab-actions row">' + (vkShowBig ? '<button class="btn" id="btnSpeak">🔊 Nghe</button>' : '') + (vk.step === 3 && mrSupported() && !mrNoCamera() ? '<button class="btn" id="btnPronounce">🪞 Soi gương quỹ đạo</button>' : '') /* v124: nut guong chi-camera, luon nut phu — nut chinh o buoc 4 la nut Doc to / Tiep tuc trong panel */ + '</div>'
     /* v120: bo chan the (bo dem The/Vong/Nac nho + dong phat am lan gan nhat + tam dung) + khoi "Them — meo nho" — man hoc chi giu noi dung buoc + 1 nut chinh; tien do hien o thanh tren. */
     + '</div></div>';
   app.innerHTML = html;
@@ -9705,15 +9716,35 @@ function renderVocab(app, l) {
     /* v107d: bo qua the cung phai dua dau the moi ve khung nhin — ham nay con duoc goi qua nut Bo qua o thanh duoi sau luot cham, duong do truoc day render ma khong cuon. */ vkScrollCardTop();
   };
   var bp0 = $("#btnPronounce"); if (bp0) bp0.onclick = function () { /* v118c: nut khong co o buoc 2 — phai co guard, khong thi render crash */
-    var key = "s" + l.setIdx + ":" + pos;
-    if (VK.active && VK.key === key) { vocabKnownStopAndGrade(); return; }
-    /* v107: diem phat am chi ghi nhan (onGraded) — dat 80/80 o buoc doc lai thi
-       tu sang buoc go, khong dat thi o lai tap lai hoac bam "Sang buoc go";
-       the chi xong khi go dung o buoc 5/5. Giu lai HTML ket qua cham (diem +
-       phan hoi theo am) qua lan render ke tiep de nguoi hoc van doc duoc.
-       Giu lai ca nut thanh duoi (Doc lai / Bo qua) — renderLesson() dat
-       BAR_RESULT = null nen phai set lai sau render. */
-    vocabKnownStart(key, c.w, c.ipa ? firstSymFromIpa(c.ipa) : "", $("#vocabCheckSlot"), $("#vocabCheckResult"), null, vocabSkipCard, function (chk, ai, mirror) { if (ai != null || mirror != null) { vk.pronDone = true; vk.pronAttempted = false; } else vk.pronAttempted = true; /* v122b: cham xong ma khong co diem (khong am thanh/khong dang nhap) thi KHONG hien "Da doc ✓" gia, nhung van mo nut Tiep tuc de khong ket o buoc 4 */ if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror; var resEl = $("#vocabCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML; var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null; if (chk && chk.ok && vk.step === 3) vk.step = 4; render(); if (br) setBarResult(br); /* v107c: dam bao nut Phat am trong the con hien sau luot doc — neu lan ve lai vua roi lam mat/an nut (duong live truoc day, khong tai hien duoc bang probe), ve lai/khoi phuc ngay. */ if (!$("#btnPronounce")) render(); var bp3 = $("#btnPronounce"); if (bp3) bp3.style.display = ""; /* v107d: cham xong (ke ca tu sang buoc go khi dat 80) cung phai dua dau the ve khung nhin — duong onGraded nay render ma khong cuon, nen sau luot Phat am / sang buoc 5 dau the bi khuat. */ vkScrollCardTop(); });
+    /* v124: nut guong chi-camera (quy dao) — bam mo, bam lai dung (giu quy dao
+       hien trong slot), bam lan nua thi tat + mo nut Tiep tuc. */
+    var slot = $("#vocabCheckSlot");
+    if (!slot) return;
+    if (slot.style.display !== "none" && slot.innerHTML) {
+      if (!bp0.dataset.stopped) { try { mirrorStop(); } catch (e) {} bp0.dataset.stopped = "1"; bp0.textContent = "✕ Tắt gương"; return; }
+      try { mirrorStop(); } catch (e) {}
+      slot.style.display = "none"; slot.innerHTML = ""; delete bp0.dataset.stopped;
+      vk.pronAttempted = true; render(); return;
+    }
+    var sym0 = c.ipa ? firstSymFromIpa(c.ipa) : "";
+    slot.innerHTML = phPracticeSlotHTML(sym0);
+    slot.style.display = "block";
+    MR.sym = sym0; MR.micWant = false;
+    try { mirrorStart(slot); } catch (e) {}
+    bp0.textContent = "⏹ Dừng gương";
+  };
+  /* v124: tang 1 o buoc 4 the Anh (chi mic, khach cung duoc). Nghe ra dung tu
+     thi pronDone + luu wordPron {ai:100} de gom Am yeu; khong nghe ra thi
+     pronAttempted + luu {ai:0}. Loi mic thi pronAttempted + hien ly do. */
+  var enT1H = $("#enT1Hear"); if (enT1H) enT1H.onclick = function () { speak(c.w); };
+  var enT1R = $("#enT1Rec"); if (enT1R) enT1R.onclick = function () {
+    pronTier1Start("en", function (heard) {
+      var sc = pronTier1Score(heard, c.w, "en");
+      if (sc === 100) { vk.pronDone = true; vk.pronAttempted = false; vk.t1 = "✓ Máy nghe ra đúng từ “" + c.w + "”. "; }
+      else { vk.pronDone = false; vk.pronAttempted = true; vk.t1 = "✗ Máy chưa nghe ra từ “" + c.w + "”" + (heard ? " — nghe được: “" + heard + "”" : "") + ". Nghe mẫu rồi đọc to lại. "; }
+      try { if (!state.wordPron) state.wordPron = {}; state.wordPron["s" + l.setIdx + ":" + pos] = { ai: sc === 100 ? 100 : 0, sym: c.ipa ? firstSymFromIpa(c.ipa) : "", word: c.w, date: todayStr() }; saveState(); } catch (e) {}
+      render();
+    }, function (kind) { vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; render(); });
   };
   var vpl = $("#vocabPhLink"); if (vpl) vpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4]) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); };
   /* DOT UI-FIX 31/10: xem truoc thi an nut Phat am cham diem (phan cham diem khoa). */
@@ -10321,16 +10352,13 @@ function phStepGoal(sub, sym) {
   return goals[sub] || goals[0];
 }
 function phPassCheck(aiScore, mirrorScore, opts) {
+  /* v124: guong chi de NHIN (quy dao), khong ra diem, khong gat cong — chi
+     diem tieng AI quyet dinh. mirrorScore giu tham so de tuong thich, khong dung. */
   opts = opts || {};
-  if (opts.camDenied) return { ok: false, reason: "Camera bị từ chối — bật lại quyền camera rồi tập lại." };
-  if (opts.camBlocked || MR.camBlocked) return { ok: false, reason: "Không mở được camera — trình duyệt đang chặn quyền camera trên thiết bị này, kiểm tra lại cài đặt trình duyệt rồi tập lại." };
-  if (opts.camMissing || MR.camMissing) return { ok: false, reason: "Không tìm thấy camera trên thiết bị này — kiểm tra camera rồi tập lại." };
   if (opts.micDenied) return { ok: false, reason: "Mic bị từ chối — bật lại quyền mic rồi tập lại." };
   if (aiScore == null) return { ok: false, reason: "Chưa có điểm AI — cần đăng nhập ở Của tôi → Tài khoản rồi bấm nút “Phát âm” tập lại (AI chấm luôn khi dừng ghi)." };
   if (aiScore < 80) return { ok: false, reason: "Điểm tiếng AI " + aiScore + "/100 chưa đạt 80 — tập lại từ yếu tô đỏ/vàng." };
-  if (mirrorScore == null) return { ok: false, reason: "Chưa có điểm gương — bấm nút “Phát âm” để bật camera, đọc âm trong lúc soi gương rồi bấm lại để dừng." };
-  if (mirrorScore < 80) return { ok: false, reason: "Điểm khớp khẩu hình " + mirrorScore + "% chưa đạt 80% — chỉnh miệng theo hình mẫu rồi tập lại." };
-  return { ok: true, reason: "Đã đạt chuẩn: tiếng AI " + aiScore + "/100 và khớp khẩu hình " + mirrorScore + "%." };
+  return { ok: true, reason: "Đã đạt chuẩn: tiếng AI " + aiScore + "/100." };
 }
 function phMirrorScoreNow(l) {
   if (l && l.mirrorScore != null) return l.mirrorScore;
@@ -10412,11 +10440,11 @@ function phDetailHTML(p) {
 }
 function phPracticeSlotHTML(sym) {
   return '<div class="mr-stage"><video class="mr-video" autoplay muted playsinline style="display:none"></video><canvas class="mr-overlay" style="display:none"></canvas></div>'
-    + '<p class="mr-status mut">Bấm “Phát âm” để bắt đầu camera + mic cùng một lần tập.</p>'
+    + '<p class="mr-status mut">Đang mở camera để soi quỹ đạo miệng — chỉ nhìn, không ghi âm, không chấm điểm.</p>'
     + '<p class="mr-diag mut" style="display:none"></p><p class="mr-diag2 mut" style="display:none"></p>'
-    + '<div class="mr-feed"><div class="mr-feed-body"><p class="mut">Điểm khớp khẩu hình sẽ hiện ở đây khi đang tập.</p></div></div>'
+    + '<div class="mr-feed"><div class="mr-feed-body"><p class="mut">Khẩu hình lúc này sẽ hiện ở đây khi đang tập.</p></div></div>'
     + '<div class="mr-session"></div>'
-    + '<p class="mut mr-mic-status">Mic sẽ tự bật cùng camera.</p>'
+    + '<p class="mut mr-mic-status">Chỉ soi gương — không ghi âm, không chấm điểm.</p>'
     + '<select class="mr-sel" style="display:none"><option value="' + esc(sym) + '" selected>/' + esc(sym) + '/</option></select>';
 }
 function phPracticeFinish(app, step, l, sym, aiScore, mirrorScore) {
@@ -10439,7 +10467,7 @@ function phPracticeFinish(app, step, l, sym, aiScore, mirrorScore) {
       ? { words: MR.lastPronWords, issues: MR.lastPronIssues || [], transcript: MR.lastPronTranscript || "", score: aiScore } : null;
     var phExWord = (phEntry(sym) || {}).w || (RB_PH_ALL_EXAMPLES[sym] || "");
     res.innerHTML = '<div class="qblock">'
-      + '<p><b>Điểm tiếng AI: ' + (aiScore == null ? 'chưa có' : aiScore + '/100') + ' · Khớp khẩu hình: ' + (mirrorScore == null ? 'chưa có' : mirrorScore + '%') + '</b></p>'
+      + '<p><b>Điểm tiếng AI: ' + (aiScore == null ? 'chưa có' : aiScore + '/100') + '</b></p>'
       + (phAiRes ? pronWordChipsHTML(MR.lastPronWords, MR.lastPronIssues, phAiRes) : '')
       + elsaSoundVerdictHTML(sym, phExWord, phAiRes)
       + (chk.ok ? '<p>Đã đạt chuẩn — tự qua âm.</p>' : phActs.map(function (a) { return '<p>' + esc(a) + '</p>'; }).join('') + '<p class="mut">Bỏ qua không tính là đạt.</p>')
@@ -10768,7 +10796,7 @@ function renderPronLesson(app, l) {
    khi giữ đúng vùng đích khoảng 1 giây thì đoạn hiện tại được lưu tự động.
    Video chỉ lưu trên máy (IndexedDB, tối đa 12), không gửi đi đâu.
    Độ chính xác nhận diện trên mặt thật CHƯA đo — giao diện ghi rõ điều này. */
-var MR = { slot: null, sym: null, stream: null, rec: null, chunks: [], segTimer: null, curBlob: null, stopping: false, fm: null, fmOn: false, fmBusy: false, holdStart: 0, autoDone: false, pendingAuto: false, pendingAutoScore: null, pendingManual: false, stableCount: 0, momentDone: {}, urls: [], diagFm: "chưa tải", diagFace: false, diagScore: "chưa chạy", diagSends: 0, diagResults: 0, diagLm: 0, diagSendErr: "", diagVState: "", diagRetry: "chưa", fmRetried: false, fmStartAt: 0, fmGen: 0, engine: "", engineFallback: false, lm: null, lmOn: false, lmBusy: false, lmGen: 0, lmRetried: false, lmStartAt: 0, sessionId: 0, sessionActive: false, procSamples: [], sessionMoment: null, manualLocked: false, lastLiveScore: null, lastProc: null, micWant: true, micOn: false, audioStream: null, audioRec: null, audioBlob: null, audioTranscript: "", audioSid: 0, audioSlot: null, audioDiscard: false, srRec: null, camDenied: false, camMissing: false, camBlocked: false, camPermBefore: "unknown", micDenied: false, mouthOpened: false, autoGraded: false, autoGradeOn: false, onAutoGrade: null };
+var MR = { slot: null, sym: null, stream: null, rec: null, chunks: [], segTimer: null, curBlob: null, stopping: false, fm: null, fmOn: false, fmBusy: false, holdStart: 0, autoDone: false, pendingAuto: false, pendingAutoScore: null, pendingManual: false, stableCount: 0, momentDone: {}, urls: [], diagFm: "chưa tải", diagFace: false, diagScore: "chưa chạy", diagSends: 0, diagResults: 0, diagLm: 0, diagSendErr: "", diagVState: "", diagRetry: "chưa", fmRetried: false, fmStartAt: 0, fmGen: 0, engine: "", engineFallback: false, lm: null, lmOn: false, lmBusy: false, lmGen: 0, lmRetried: false, lmStartAt: 0, sessionId: 0, sessionActive: false, procSamples: [], sessionMoment: null, manualLocked: false, lastLiveScore: null, lastProc: null, lastTraj: null, micWant: true, micOn: false, audioStream: null, audioRec: null, audioBlob: null, audioTranscript: "", audioSid: 0, audioSlot: null, audioDiscard: false, srRec: null, camDenied: false, camMissing: false, camBlocked: false, camPermBefore: "unknown", micDenied: false, mouthOpened: false, autoGraded: false, autoGradeOn: false, onAutoGrade: null };
 function mrSupported() { try { return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia); } catch (e) { return false; } }
 /* v112c L1: may khong co mic/camera THAT — getUserMedia van ton tai dang API
    nen mrSupported() khong phat hien duoc (chi goi moi loi NotFoundError);
@@ -10780,8 +10808,11 @@ function mrSupported() { try { return !!(navigator.mediaDevices && navigator.med
    ket qua; neu thieu thiet bi thi goi lai cb (noi goi tu ve lai neu van
    dang o buoc 4). */
 var MR_NO_DEVICES = null; /* null=chua kiem, true=buoc phat am KHONG chay duoc (thieu audioinput HOAC videoinput), false=du ca mic + camera */
+var MR_HAS_AUDIO = null, MR_HAS_VIDEO = null; /* v124: tach rieng mic/camera — chi-mic van cham tang 1, chi-guong chi can camera */
 var MR_DEVICES_CHECKING = false;
 function mrNoDevices() { return MR_NO_DEVICES === true; }
+function mrNoMic() { return MR_HAS_AUDIO === false; }
+function mrNoCamera() { return MR_HAS_VIDEO === false; }
 function mrCheckDevices(cb) {
   if (MR_NO_DEVICES !== null || MR_DEVICES_CHECKING) return;
   try {
@@ -10792,6 +10823,7 @@ function mrCheckDevices(cb) {
       MR_DEVICES_CHECKING = false;
       var hasAudio = false, hasVideo = false, list = devs || [];
       for (var i = 0; i < list.length; i++) { if (list[i].kind === "audioinput") hasAudio = true; if (list[i].kind === "videoinput") hasVideo = true; }
+      MR_HAS_AUDIO = hasAudio; MR_HAS_VIDEO = hasVideo;
       MR_NO_DEVICES = !(hasAudio && hasVideo); /* v112c L1: thieu MOT TRONG HAI la thoat */
       if (MR_NO_DEVICES && typeof cb === "function") { try { cb(); } catch (e) {} }
     }, function () { MR_DEVICES_CHECKING = false; MR_NO_DEVICES = false; });
@@ -10814,7 +10846,7 @@ function mrIndices(lm) {
   var open = mrClamp((oRatio - 0.008) / 0.115);
   return { round: round, spread: spread, open: open };
 }
-/* ---------- Gương nâng cấp: vẽ khung hình + điểm khớp khẩu hình % + bắt khoảnh khắc ----------
+/* ---------- Gương quỹ đạo v124: vẽ khung hình + quỹ đạo miệng theo thời gian (chỉ nhìn, không điểm) + bắt khoảnh khắc ----------
    Ngưỡng dưới đây là TẠM (chưa đo độ chính xác trên mặt thật — chủ web vẫn cần thử
    /u:/ và /æ/ trên điện thoại thật), ghi rõ để chỉnh được, không quảng cáo tuyệt đối.
    Điểm % này là ĐIỂM KHỚP KHẨU HÌNH (hình miệng nhìn thấy được), KHÔNG phải điểm
@@ -10858,10 +10890,10 @@ function mrRenderFeedback(slot, score) {
     return;
   }
   var rows = score.items.map(function (it) {
-    return '<tr><td>' + esc(it.label) + '</td><td>' + it.v.toFixed(2) + ' (đích ' + it.lo.toFixed(2) + '–' + it.hi.toFixed(2) + ')</td><td>' + it.score + '%</td><td>' + (it.ok ? '<span class="ai-good">Đạt</span>' : '<span class="ai-bad">Chưa đạt</span>') + '</td><td>' + (it.ok ? '' : esc(it.tip)) + '</td></tr>';
+    return '<tr><td>' + esc(it.label) + '</td><td>' + it.v.toFixed(2) + ' (đích ' + it.lo.toFixed(2) + '–' + it.hi.toFixed(2) + ')</td><td>' + (it.ok ? '<span class="ai-good">Trong khoảng đích</span>' : '<span class="ai-bad">Ngoài khoảng đích</span>') + '</td><td>' + (it.ok ? '' : esc(it.tip)) + '</td></tr>';
   }).join("");
-  body.innerHTML = '<p><b>Điểm khớp khẩu hình: ' + score.total + '%</b> <span class="mut">(chỉ tính hình miệng nhìn thấy được, không phải điểm phát âm theo âm thanh)</span></p>'
-    + '<table><tr><th>Mục</th><th>Số đo (đích)</th><th>Điểm</th><th>Kết quả</th><th>Gợi ý sửa</th></tr>' + rows + '</table>'
+  body.innerHTML = '<p><b>Khẩu hình lúc này</b> <span class="mut">(chỉ để tự nhìn và chỉnh miệng — không phải điểm phát âm)</span></p>'
+    + '<table><tr><th>Mục</th><th>Số đo (đích)</th><th>Kết quả</th><th>Gợi ý sửa</th></tr>' + rows + '</table>'
     + '<p class="mut">Giữ ổn định: ' + MR.stableCount + '/' + MR_CAPTURE_FRAMES + ' khung hình đạt liên tiếp để tự bắt khoảnh khắc.</p>';
 }
 function mrDrawFrame(slot, lm) {
@@ -10973,19 +11005,19 @@ function mrVidClear() {
   });
 }
 function mrPruneLibBest() {
-  /* Don kho IndexedDB ve 1 clip dung nhat moi khoa (khoa = key hoac am):
-     giu ban ghi mau dung co diem cao nhat, xoa clip luu tay cu, clip duoi
-     80% va clip thua cung khoa. Loi thi lang (khong chan tai web). */
+  /* v124: don kho IndexedDB ve 1 clip MOI NHAT moi khoa (khoa = key hoac
+     am): guong khong ra diem nen khong chon theo diem nua. Loi thi lang
+     (khong chan tai web). */
   try {
     return mrVidAll().then(function (list) {
-      var isRight = function (v) { return (v.auto === true || v.kind === "moment") && v.score != null && v.score >= MR_CAPTURE_MIN_SCORE; };
+      var isRight = function (v) { return (v.auto === true || v.kind === "moment"); };
       var best = {};
       list.forEach(function (v) {
-        var k = mrVidKeyOf(v), sc = v.score != null ? v.score : 0;
-        if (!best[k] || sc > (best[k].score != null ? best[k].score : 0) || (sc === (best[k].score != null ? best[k].score : 0) && v.ts > best[k].ts)) best[k] = v;
+        var k = mrVidKeyOf(v);
+        if (!best[k] || (v.ts || 0) > (best[k].ts || 0)) best[k] = v;
       });
       var bestList = Object.keys(best).map(function (k) { return best[k]; });
-      bestList.sort(function (a, b) { var sa = a.score != null ? a.score : 0, sb = b.score != null ? b.score : 0; if (sb !== sa) return sb - sa; return (b.ts || 0) - (a.ts || 0); });
+      bestList.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
       var keep = {}; bestList.slice(0, 12).forEach(function (v) { keep[v.id] = true; });
       var dels = [];
       list.forEach(function (v) { if (!isRight(v) || best[mrVidKeyOf(v)].id !== v.id || !keep[v.id]) dels.push(mrVidDelete(v.id)); });
@@ -11001,20 +11033,20 @@ function mrRenderLib(slot) {
   MR.urls = [];
   if (typeof indexedDB === "undefined") { lib.innerHTML = '<p class="mut">Trình duyệt này không lưu được video mẫu.</p>'; return; }
   mrVidAll().then(function (list) {
-    /* Chi 1 hang duy nhat: clip mau dung (tu luu khi tap dung >=80%).
-       Khong con hang luu tay — cac ban ghi cu khong phai mau dung bi don
-       sach boi mrPruneLibBest luc tai web. */
-    var isAutoRight = function (v) { return (v.auto === true || v.kind === "moment") && v.score != null && v.score >= MR_CAPTURE_MIN_SCORE; };
+    /* Chi 1 hang duy nhat: clip mau dung (tu luu khi giu dung hinh mieng
+       mot luc). Khong con hang luu tay — cac ban ghi cu khong phai mau dung
+       bi don sach boi mrPruneLibBest luc tai web. */
+    var isAutoRight = function (v) { return (v.auto === true || v.kind === "moment"); };
     var top = list.filter(isAutoRight);
     if (cnt) cnt.textContent = top.length ? ("Thư viện: " + top.length + " video mẫu đúng.") : "Thư viện: chưa có video mẫu nào.";
     var item = function (v) {
       var media = "";
       if (v.blob) { var url = URL.createObjectURL(v.blob); MR.urls.push(url); media = '<video controls src="' + url + '"></video>'; }
       else if (v.shot) { media = '<img src="' + v.shot + '" style="width:100%;border-radius:12px" alt="Khung hình đúng">'; }
-      var cap = (v.kind === "moment") ? ('Khoảnh khắc đúng nhất · Khớp khẩu hình ' + v.score + '%') : ('Video mẫu đúng · Khớp khẩu hình ' + v.score + '%');
+      var cap = (v.kind === "moment") ? 'Khoảnh khắc đúng nhất' : 'Video mẫu đúng';
       return '<div class="mr-item">' + media + '<p class="mut">Âm /' + esc(v.sym) + '/ · ' + cap + ' · ' + new Date(v.ts).toLocaleString("vi-VN") + '</p><button class="btn mr-del" data-id="' + v.id + '">Xóa video này</button></div>';
     };
-    lib.innerHTML = '<h4>Video mẫu đúng của bạn</h4>' + (top.length ? '<div class="mr-lib-row">' + top.slice().reverse().map(function (v) { return item(v); }).join("") + '</div>' : '<p class="mut">Chưa có video mẫu đúng — tập đúng từ 80% trở lên để hệ thống tự lưu.</p>');
+    lib.innerHTML = '<h4>Video mẫu đúng của bạn</h4>' + (top.length ? '<div class="mr-lib-row">' + top.slice().reverse().map(function (v) { return item(v); }).join("") + '</div>' : '<p class="mut">Chưa có video mẫu đúng — giữ đúng hình miệng một lúc để hệ thống tự lưu.</p>');
     lib.querySelectorAll(".mr-del").forEach(function (b) {
       b.onclick = function () { mrVidDelete(+b.dataset.id).then(function () { mrRenderLib(slot); }); };
     });
@@ -11045,29 +11077,19 @@ function mrDiagUpdate(slot) { var d = slot && slot.querySelector(".mr-diag"); if
 function mrSetStatus(slot, t) { var s = slot && slot.querySelector(".mr-status"); if (s) s.textContent = t; }
 function mrVidKeyOf(v) { return v.key || v.sym || ""; }
 function mrSaveSessionClip(slot, blob, score, shot, kind) {
-  /* Moi khoa the/am chi giu MOT clip dung nhat (diem cao nhat). Clip moi thap
-     hon hoac bang clip cu thi khong them; clip moi cao hon thi thay clip cu.
+  /* v124: moi khoa the/am chi giu MOT clip MOI NHAT. Clip moi thay clip cu
+     cung khoa (guong khong ra diem nen khong so sanh diem nua).
      Khoa = khoa the tu (luc tap the) hoac am (luc luyen am). Chi luu tu dong. */
   if (!blob && !shot) return Promise.resolve(null);
   var key = (typeof VK !== "undefined" && VK.active && VK.key) ? VK.key : (MR.sym || "");
-  var rec = { key: key, sym: MR.sym, ts: Date.now(), blob: blob || null, shot: shot || "", kind: kind, score: score != null ? score : null, auto: true };
+  var rec = { key: key, sym: MR.sym, ts: Date.now(), blob: blob || null, shot: shot || "", kind: kind, score: null, auto: true };
   var addNew = function () {
-    return mrVidAddFull(rec).then(function (id) { MR.sessionMoment = { id: id, score: score }; return id; });
+    return mrVidAddFull(rec).then(function (id) { MR.sessionMoment = { id: id, score: null }; return id; });
   };
-  if (!key) {
-    if (MR.sessionMoment && MR.sessionMoment.id != null) { var oldId0 = MR.sessionMoment.id; return mrVidDelete(oldId0).then(addNew, addNew); }
-    return addNew();
-  }
   return mrVidAll().then(function (list) {
     var same = list.filter(function (v) { return mrVidKeyOf(v) === key; });
-    var best = null;
-    same.forEach(function (v) { var sc = v.score != null ? v.score : 0; if (!best || sc > (best.score != null ? best.score : 0)) best = v; });
-    if (best && (best.score != null ? best.score : 0) >= (score != null ? score : 0)) { MR.sessionMoment = { id: best.id, score: best.score }; return best.id; }
-    var dels = same.filter(function (v) { return !(MR.sessionMoment && v.id === MR.sessionMoment.id); }).map(function (v) { return mrVidDelete(v.id); });
-    return Promise.all(dels).then(function () {
-      if (MR.sessionMoment && MR.sessionMoment.id != null) { var oldId = MR.sessionMoment.id; return mrVidDelete(oldId).then(addNew, addNew); }
-      return addNew();
-    });
+    var dels = same.map(function (v) { return mrVidDelete(v.id); });
+    return Promise.all(dels).then(addNew, addNew);
   }, function () { return addNew(); });
 }
 function mrSaveCurrent(slot, auto, scoreOverride) {
@@ -11137,7 +11159,7 @@ function mirrorStop() {
     var v = slot.querySelector(".mr-video"); if (v) { v.srcObject = null; v.style.display = "none"; }
     var ov = slot.querySelector(".mr-overlay");
     if (ov) { ov.style.display = "none"; try { var ocx = ov.getContext && ov.getContext("2d"); if (ocx) ocx.clearRect(0, 0, ov.width, ov.height); } catch (e) {} }
-    var fb = slot.querySelector(".mr-feed-body"); if (fb) fb.innerHTML = '<p class="mut">Bấm “Phát âm” để xem điểm khớp từng khung hình.</p>';
+    var fb = slot.querySelector(".mr-feed-body"); if (fb) fb.innerHTML = '<p class="mut">Đã tắt camera.</p>';
     var spk1 = slot.querySelector(".mr-speak"); if (spk1) { spk1.style.display = "inline-block"; spk1.textContent = "🎤 Phát âm"; }
     MR.autoGradeOn = false; MR.onAutoGrade = null;
     var sv = slot.querySelector(".mr-save"); if (sv) sv.disabled = true;
@@ -11265,10 +11287,77 @@ function mrOnResults(res) {
   MR.diagLm = lm ? lm.length : 0;
   mrHandleLandmarks(slot, lm);
 }
+
+/* v124: QUY DAO MIENG — ve duong do mo mieng theo thoi gian (chi de NHIN,
+   TUYET DOI khong ra diem tu guong, khong hien so % khop mieng). Duong mau:
+   lay tu mrTargetPath (duong dich cua am); duong nguoi hoc: lay tu cac mau
+   procSamples (cua so nhu mrProcessScore). Ghi ro han che: hinh moi khong
+   thay duoc vi tri luoi — am phan biet bang luoi thi guong gan nhu khong
+   giup duoc. */
+function mrTrajRefOpen(sym, n) {
+  n = n || 24;
+  try {
+    var pts = mrTargetPath(sym, n);
+    if (!pts || !pts.length) return null;
+    return pts.map(function (p) { return (p && typeof p.o === "number") ? p.o : null; });
+  } catch (e) { return null; }
+}
+function mrTrajUserOpen() {
+  var s = MR.procSamples || [];
+  if (s.length < 6) return null;
+  var start = 0, found = false;
+  for (var i = 0; i < s.length; i++) { if (s[i].open >= MR_AUTO_OPEN) { start = Math.max(0, i - 4); found = true; break; } }
+  if (!found) start = 0;
+  var end = -1;
+  for (var j = s.length - 1; j >= 0; j--) { if (s[j].total >= 50) { end = j; break; } }
+  if (end < 0) end = s.length - 1; /* khong co dich so (ZH/TP): lay den mau cuoi */
+  if (end <= start) return null;
+  var win = s.slice(start, end + 1);
+  if (win.length < 6) return null;
+  var n = 24, out = [];
+  for (var m = 0; m < n; m++) {
+    var pos = m * (win.length - 1) / (n - 1), lo = Math.floor(pos), hi = Math.min(win.length - 1, lo + 1), f = pos - lo;
+    out.push(win[lo].o * (1 - f) + win[hi].o * f);
+  }
+  return out;
+}
+function mrTrajSVG(sym) {
+  var ref = mrTrajRefOpen(sym, 24), usr = mrTrajUserOpen();
+  if (!usr) return "";
+  var W = 320, H = 120, pad = 8;
+  var path = function (arr) {
+    return arr.map(function (v, i) {
+      var x = pad + i * (W - 2 * pad) / (arr.length - 1);
+      var y = H - pad - Math.max(0, Math.min(1, v)) * (H - 2 * pad);
+      return (i === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1);
+    }).join(" ");
+  };
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;max-width:320px;height:120px" role="img" aria-label="Quỹ đạo độ mở miệng theo thời gian">'
+    + '<line x1="' + pad + '" y1="' + (H - pad) + '" x2="' + (W - pad) + '" y2="' + (H - pad) + '" stroke="#ccc" stroke-width="1"/>'
+    + (ref ? '<path d="' + path(ref) + '" fill="none" stroke="#0f766e" stroke-width="2" stroke-dasharray="5 4"/>' : '')
+    + '<path d="' + path(usr) + '" fill="none" stroke="#d97706" stroke-width="2.5"/>'
+    + '</svg>';
+  return '<div class="mr-traj"><p><b>Quỹ đạo miệng của bạn</b></p>' + svg
+    + '<p class="mut"><span style="color:#d97706">— đường của bạn</span>' + (ref ? ' · <span style="color:#0f766e">- - đường mẫu của âm /' + esc(sym) + '/</span>' : '') + '</p>'
+    + '<p class="mut">Trên là khép, dưới là mở · trái là bắt đầu, phải là kết thúc. Nhìn xem đường của bạn khác mẫu ở đâu rồi chỉnh miệng theo.</p>'
+    + '<p class="mut">Gương chỉ giúp bạn NHÌN miệng mình cử động theo thời gian — không chấm điểm. Hình môi không thấy được vị trí lưỡi, nên âm phân biệt bằng lưỡi thì gương gần như không giúp được.</p></div>';
+}
+function mrTrajHTML(sym) {
+  var svg = mrTrajSVG(sym);
+  if (svg) { MR.lastTraj = { n: (MR.procSamples || []).length, hasRef: !!mrTrajRefOpen(sym, 24) }; return svg; }
+  MR.lastTraj = { n: (MR.procSamples || []).length, hasRef: false };
+  return '<p class="mut">Chưa vẽ được quỹ đạo miệng — hãy mở miệng đọc âm trong lúc soi gương rồi tắt camera để xem lại.</p>';
+}
 function mrHandleLandmarks(slot, lm) {
           if (!lm) { MR.diagFace = false; MR.diagScore = "đứng — chưa thấy mặt"; mrDiagUpdate(slot); return; }
           MR.diagFace = true;
           var idx = mrIndices(lm), tg = RB_MIRROR_TARGETS[MR.sym];
+          /* v124: ghi mau quy dao TRUOC khi kiem tra dich — am khong co dich so
+             (ZH/TP) van co duong quy dao cua ban (chi khong co duong mau). */
+          if (MR.sessionActive) {
+            MR.procSamples.push({ o: idx.open, r: idx.round, s: idx.spread, total: null, t: Date.now() });
+            if (MR.procSamples.length > 900) MR.procSamples.splice(0, MR.procSamples.length - 900);
+          }
           if (!tg) { MR.diagScore = "đứng — âm này không có đích camera"; mrDiagUpdate(slot); try { mrDrawFrame(slot, lm); } catch (e) {} return; }
           try { mrDrawFrame(slot, lm); } catch (e) {}
           var score = mrScoreFrame(idx, tg);
@@ -11277,19 +11366,21 @@ function mrHandleLandmarks(slot, lm) {
           if (idx.open >= MR_AUTO_OPEN) MR.mouthOpened = true;
           mrMaybeAutoGrade();
           if (MR.sessionActive && score) {
-            MR.procSamples.push({ o: idx.open, r: idx.round, s: idx.spread, total: score.total });
-            if (MR.procSamples.length > 900) MR.procSamples.splice(0, MR.procSamples.length - 900);
+            var lastS = MR.procSamples[MR.procSamples.length - 1];
+            if (lastS) lastS.total = score.total;
           }
-          MR.diagScore = score ? ("đang chạy (tổng " + score.total + "%)") : "đứng — âm khó chấm tự động";
+          MR.diagScore = score ? "đang chạy" : "đứng — âm khó chấm tự động";
           mrDiagUpdate(slot);
-          /* Bắt khoảnh khắc: tổng điểm >= ngưỡng trong N khung hình liên tiếp. */
-          if (score && score.total >= MR_CAPTURE_MIN_SCORE) MR.stableCount++;
+          /* v124: bat khoanh khac khi MOI muc deu trong khoang dich N khung
+             lien tiep (khong dung tong % nua — guong khong ra diem). */
+          var allOk = score && score.items && score.items.every(function (it) { return it.ok; });
+          if (allOk) MR.stableCount++;
           else MR.stableCount = 0;
-          if (score && MR.stableCount >= MR_CAPTURE_FRAMES && !MR.manualLocked && (!MR.sessionMoment || score.total > MR.sessionMoment.score)) {
+          if (allOk && MR.stableCount >= MR_CAPTURE_FRAMES && !MR.manualLocked && !MR.sessionMoment) {
             MR.momentDone[MR.sym] = true;
             MR.autoDone = true; /* khoảnh khắc đã gồm clip nên không lưu thêm video tự bắt trùng */
             var shot = mrSnapshotFrame(slot);
-            mrSaveSessionClip(slot, MR.curBlob || null, score.total, shot, "moment").then(function () {
+            mrSaveSessionClip(slot, MR.curBlob || null, null, shot, "moment").then(function () {
               mrRenderLib(slot);
               /* Đợt dọn code thừa: khung tập mới không còn .mr-lib bên trong nên
                  phải refresh cả mục thư viện riêng, nếu không khoảnh khắc đã lưu
@@ -11306,17 +11397,12 @@ function mrHandleLandmarks(slot, lm) {
             if (z) { has = true; if (kv[1] < z[0] || kv[1] > z[1]) pass = false; }
           });
           if (!has) { mrSetStatus(slot, "Âm này camera khó chấm tự động — hãy tự soi gương: " + (tg.hint || "")); return; }
-          if (pass && score && score.total >= MR_CAPTURE_MIN_SCORE) {
+          if (pass) {
             if (!MR.holdStart) MR.holdStart = Date.now();
             if (Date.now() - MR.holdStart >= 1000 && !MR.autoDone && !MR.manualLocked) {
-              MR.autoDone = true; MR.pendingAuto = true; MR.pendingAutoScore = score.total;
+              MR.autoDone = true; MR.pendingAuto = true;
               mrSetStatus(slot, "Đạt! Đang lưu video mẫu…");
             } else mrSetStatus(slot, "Đang giữ đúng khẩu hình…");
-          } else if (pass) {
-            /* Miệng trong vùng đích nhưng điểm khung chưa đạt 80%: không tính
-               là giữ đúng — đặt lại đồng hồ, không đặt pendingAuto. */
-            MR.holdStart = 0;
-            mrSetStatus(slot, "Đang giữ đúng hình nhưng chưa đủ điểm đúng (cần từ 80%) — chỉnh thêm theo hình mẫu.");
           } else {
             MR.holdStart = 0;
             mrSetStatus(slot, "Chưa đúng vùng đích — " + (tg.hint || "hãy soi gương và chỉnh theo hình mẫu."));
@@ -11614,13 +11700,7 @@ function mrRenderSessionBox(slot, audioHTML) {
   if (!slot || slot.isConnected === false) return;
   var box = slot.querySelector(".mr-session");
   if (!box) return;
-  var proc = MR.lastProc, procHTML = "";
-  if (proc && proc.total != null) {
-    procHTML = '<p><b>Điểm quá trình: ' + proc.total + '%</b> (so đường miệng thật với đường đích của âm /' + esc(MR.sym) + '/ từ lúc mở miệng đến lúc kết thúc âm' + (proc.glide ? ' — trượt từ âm đầu sang âm cuối' : ' — từ miệng đóng mở ra đúng hình rồi giữ') + ').</p>'
-      + '<p class="mut">Cách tính: trung bình cả quá trình ' + proc.pathAvg + '% · khung hình tốt nhất ' + proc.peak + '% · lúc mở miệng ' + proc.start + '%.</p>';
-  } else {
-    procHTML = '<p>Chưa chấm được điểm quá trình' + (proc && proc.note ? ' (' + esc(proc.note) + ')' : '') + ' — hãy mở miệng đọc âm trong lúc soi gương rồi tắt camera để chấm lại.</p>';
-  }
+  var procHTML = mrTrajHTML(MR.sym); /* v124: hop lan tap hien QUY DAO mieng, khong hien % */
   box.innerHTML = procHTML + (audioHTML || "");
 }
 function mrFinishSession(slot) {
@@ -11628,8 +11708,8 @@ function mrFinishSession(slot) {
   MR.lastProc = mrProcessScore(MR.procSamples, MR.sym);
   var audioHTML = "";
   if (MR.audioRec && MR.audioRec.state === "recording") audioHTML = '<p>Điểm tiếng: đang chấm…</p>';
-  else if (!MR.micWant) audioHTML = '<p>Điểm tiếng: chưa chấm (mic đã tắt — lần tập này chỉ chấm hình).</p>';
-  else audioHTML = '<p>Điểm tiếng: chưa chấm (mic chưa bật hoặc chưa cho phép — gương vẫn chấm phần hình).</p>';
+  else if (!MR.micWant) audioHTML = '<p class="mut">Lần này chỉ soi gương quỹ đạo — không ghi âm, không chấm điểm.</p>';
+  else audioHTML = '<p class="mut">Chưa chấm điểm tiếng (mic chưa bật hoặc chưa cho phép) — gương chỉ để soi, không chấm điểm.</p>';
   mrRenderSessionBox(slot, audioHTML);
 }
 var MR_AUTO_OPEN = 0.35; /* do mo mieng toi thieu de tinh la "da mo mom" (idx.open: mieng dong ~0) */
@@ -11673,7 +11753,7 @@ function mrFinishAudio(slot) {
             if (MR.zhKey) ZH_PRON[MR.zhKey] = { score: sc, gradedLanguage: "zh", toneIssues: r.toneIssues || [], words: r.words || [], issues: r.issues || [], transcript: r.transcript || "" };
             extra += sc >= 80
               ? '<p class="mut">Đã đạt chuẩn AI 80 — bấm “Thẻ tiếp theo” để qua thẻ.</p>'
-              : '<p class="mut">Chưa đạt 80 — tập lại từ đỏ rồi bấm “Soi gương + ghi âm” chấm lại.</p>';
+              : '<p class="mut">Chưa đạt 80 — tập lại từ đỏ rồi bấm lại nút ghi âm để chấm lại.</p>';
             if (MR.zhKey && sc >= 80) { var nb = document.querySelector("#zhNext"); if (nb) { nb.disabled = false; nb.className = "btn btn-primary"; } }
           } else {
             extra = '<p class="mut">Hàm chấm trên máy chủ chưa phải bản mới — tạm chưa tính điểm AI, ghi âm là qua bước.</p>';
@@ -11682,7 +11762,7 @@ function mrFinishAudio(slot) {
           mrRenderSessionBox(slot, zhHtml + extra);
           var zr2 = document.querySelector("#zhMirrorResult"); if (zr2) zr2.innerHTML = zhHtml + extra;
         }, function (err) {
-          var extra = '<p class="mut">AI chấm chưa được (' + esc((err && err.message) || String(err)) + ') — đăng nhập rồi bấm “Soi gương + ghi âm” chấm lại; chưa có điểm AI thì chưa qua bước phát âm.</p>';
+          var extra = '<p class="mut">AI chấm chưa được (' + esc((err && err.message) || String(err)) + ') — đăng nhập rồi bấm lại nút ghi âm để chấm lại; chưa có điểm AI thì chưa qua bước phát âm.</p>';
           mrRenderSessionBox(slot, zhHtml + extra);
           var zr2 = document.querySelector("#zhMirrorResult"); if (zr2) zr2.innerHTML = zhHtml + extra;
         });
@@ -17572,7 +17652,7 @@ function zhHskkHTML() {
     + '<p><b>Cao cấp:</b> 6 câu chính thức (nghe đoạn văn rồi nhắc lại/tóm tắt 3 đoạn, đọc to 1 đoạn văn, trả lời câu hỏi 2 câu) + 10 câu luyện thêm nghe–nhắc lại câu (không phải format Phần 1 Cao cấp).</p>'
     + '<p class="mut">Phần mô tả tình huống ở Trung cấp là dạng chuyển thể: đề thật dùng tranh, web dùng đoạn mô tả tình huống bằng chữ thay cho tranh.</p>'
     + '<p class="mut">Ghi chú: HSK 3.0 ra mắt toàn cầu ngày 13/12/2026 — sau mốc này cần kiểm tra lại cấu trúc đề và HSKK.</p>'
-    + '<div class="row"><button class="btn" id="zhHskkBtn">Luyện HSKK Sơ cấp (27 câu, đủ 3 phần)</button><button class="btn" id="zhHskkBtnInter">Luyện HSKK Trung cấp (14 câu, đủ 3 phần)</button><button class="btn" id="zhHskkBtnAdv">Luyện HSKK Cao cấp (6 câu chính thức + luyện thêm)</button></div>'
+    + '<div class="row"><button class="btn" id="zhHskkBtn">Luyện HSKK Sơ cấp (27 câu, đủ 3 phần)</button><button class="btn" id="zhHskkBtnInter">Luyện HSKK Trung cấp (14 câu, đủ 3 phần)</button><button class="btn" id="zhHskkBtnAdv">Luyện HSKK Cao cấp (6 câu chính thức, đủ 3 phần + luyện thêm)</button></div>'
     + '<p class="mut">Bài luyện này là tự luyện nghe–nhắc lại — đọc to câu mẫu được chấm bằng tầng 1 (máy có nghe ra không); chấm nói AI sâu sẽ có ở đợt sau.</p></section>';
 }
 function wireZhMap(scope) {
@@ -18508,7 +18588,7 @@ function renderZhVocab(app, l) {
   /* v118c (Bui 08:19): buoc 2 (step 1) chi nghia — BO nut video nguoi ban dia o buoc 2, GIU nut Nghe. */
   var zhShowVideo = zhStep === 0; /* v120: video nguoi ban dia chi o buoc nghe (buoc 1) */
   var zhStep2 = zhStep === 1; /* v118c (Bui 08:24): buoc 2 chi nghia — BO nut Soi guong; nut Chup anh GO HAN khoi the (Bui 08:30: thanh muc lon rieng o G1) */
-  var zhCanNext = zvk.pronRecorded || !!(d && zhPronGet(d, pos)) || !mrSupported() || zvk.pronAttempted || mrNoDevices(); /* v120: giong dieu kien canNext trong panel — da ghi xong thi nut Soi guong ha xuong phu */
+  var zhCanNext = zvk.pronRecorded || !!(d && zhPronGet(d, pos)) || !mrSupported() || zvk.pronAttempted || mrNoMic(); /* v124: giong dieu kien canNext trong panel — chi can mic de doc to; guong la phu */
   var zhShowStroke = zhStep === 0;
   var zhMaskEx = zhStep === 1 || zhStep === 2;
   /* v109: anh minh hoa chi hien o buoc 1 + 3 (nhu the Anh). */
@@ -18531,7 +18611,7 @@ function renderZhVocab(app, l) {
     + '<div id="zhMulti">' + vkZhPanelHTML(zvk, c, cards, pos, d) + '</div>'
     + '</div>'
     + '<div class="vocab-pron"' + ((zhStep === 1 || zhStep === 2 || zhStep === 4) ? ' style="display:none"' : '') + '>' + (zhShowVideo ? nativeVideoHTML(c.han, "chinese") : '') + '<div id="zhMirrorSlot" style="display:none"></div><div id="zhMirrorResult"></div></div>'
-    + '<div class="vocab-actions row">' + (zhShowListen ? '<button class="btn" id="zhListen">🔊 Nghe</button>' : '') + (zhStep === 3 ? '<button class="btn' + (zhCanNext ? '' : ' btn-primary') + '" id="zhMirrorBtn">🎤 Soi gương + ghi âm</button>' : '') /* v120: da ghi xong chi con 1 nut chinh (Tiep tuc); nut Soi guong ha xuong phu de tap lai */ + '</div>'
+    + '<div class="vocab-actions row">' + (zhShowListen ? '<button class="btn" id="zhListen">🔊 Nghe</button>' : '') + (zhStep === 3 && !mrNoCamera() ? '<button class="btn" id="zhMirrorBtn">🪞 Soi gương quỹ đạo</button>' : '') /* v124: nut guong chi-camera, luon nut phu — nut chinh o buoc 4 la nut Doc to / Tiep tuc trong panel; khong co camera thi an han */ + '</div>'
     /* v120: bo khoi "Them — tra tu, danh dau kho" + chan the (bo dem The/Vong/Nac nho + dong phat am lan gan nhat) — man hoc chi giu noi dung buoc + 1 nut chinh. */
     + '<div id="zhStrokeArea" style="margin-top:8px">' + (zhShowStroke ? zhStrokeAreaHTML(c) : '') + '</div>'
     + '</div></div>';
@@ -18553,7 +18633,7 @@ function renderZhVocab(app, l) {
   wirePhotoEntry(); /* v109: nut "Chụp ảnh thêm từ" trong khu từ vựng. */
   var zhCL = $("#zhChoiceListen"); if (zhCL) zhCL.onclick = function () { zhSpeak(c.han); };
   var zhCN = $("#zhChoiceNext"); if (zhCN) zhCN.onclick = function () { zvk.choiceDone++; zvk.choiceAnswered = false; zvk.choiceWhy = ""; zvk.step = zvk.step + 1; render(); vkScrollCardTop(); };
-  var zhPC = $("#zhPronCheck"); if (zhPC) zhPC.onclick = function () { var res = $("#zhMirrorResult"); var t = res ? res.textContent : ""; if (t.indexOf("Nghe lại bản ghi") >= 0) { zvk.pronRecorded = true; zvk.pronDone = true; zvk.pronWhy = ""; } else if (t.indexOf("Chưa ghi được âm thanh") >= 0 || t.indexOf("Đang xử lý") >= 0) { /* v107b/v107c: ghi that bai (hoac luot ghi da ket thuc) cung la da doc mot luot — mo nut sang buoc go, diem khong khoa the; khong doi timeout doc text. */ zvk.pronAttempted = true; zvk.pronWhy = ""; } else { zvk.pronWhy = "Chưa thấy bản ghi — bấm “Soi gương + ghi âm”, đọc to chữ Hán rồi bấm dừng để kết thúc lượt ghi, sau đó bấm lại nút này."; } render(); /* v107d: kiem tra ban ghi xong (hien nut sang buoc go) cung dua dau the ve khung nhin. */ vkScrollCardTop(); };
+  var zhPC = $("#zhPronCheck"); if (zhPC) zhPC.onclick = function () { var res = $("#zhMirrorResult"); var t = res ? res.textContent : ""; if (t.indexOf("Nghe lại bản ghi") >= 0) { zvk.pronRecorded = true; zvk.pronDone = true; zvk.pronWhy = ""; } else if (t.indexOf("Chưa ghi được âm thanh") >= 0 || t.indexOf("Đang xử lý") >= 0) { /* v107b/v107c: ghi that bai (hoac luot ghi da ket thuc) cung la da doc mot luot — mo nut sang buoc go, diem khong khoa the; khong doi timeout doc text. */ zvk.pronAttempted = true; zvk.pronWhy = ""; } else if (typeof MR !== "undefined" && MR.lastTraj && MR.lastTraj.n >= 6) { /* v124: da soi guong quy dao mot luot (du mau) — mo nut sang buoc go. */ zvk.pronAttempted = true; zvk.pronWhy = ""; } else { zvk.pronWhy = "Chưa thấy quỹ đạo miệng — bấm “🪞 Soi gương quỹ đạo”, đọc to chữ Hán trong lúc nhìn miệng mình rồi bấm dừng, sau đó bấm lại nút này."; } render(); /* v107d: kiem tra ban ghi xong (hien nut sang buoc go) cung dua dau the ve khung nhin. */ vkScrollCardTop(); };
   /* v123: tang 1 + cham thanh dieu YIN + link bai am o buoc 4 the ZH. */
   var zhT1H = $("#zhT1Hear"); if (zhT1H) zhT1H.onclick = function () { zhSpeak(c.han); };
   var zhT1R = $("#zhT1Rec"); if (zhT1R) zhT1R.onclick = function () {
@@ -18576,10 +18656,11 @@ function renderZhVocab(app, l) {
   var zhFin = $("#zhMultiFinish"); if (zhFin) zhFin.onclick = zhFinishCard;
   var zhSk = $("#zhSkipBtn"); if (zhSk) zhSk.onclick = function () { zhSkipCard(); vkScrollCardTop(); };
   var zhMirOn = false;
+  var zhMirStopped = false;
   var zhMirStop = function () {
     try { mirrorStop(); } catch (e) {}
-    zhMirOn = false;
-    var b = $("#zhMirrorBtn"); if (b) b.textContent = "🎤 Soi gương + ghi âm";
+    zhMirOn = false; zhMirStopped = false;
+    var b = $("#zhMirrorBtn"); if (b) b.textContent = "🪞 Soi gương quỹ đạo";
     /* v107c: luot ghi da ket thuc (du co am thanh hay khong) — mo nut sang buoc go
        NGAY, khong doi timeout doc text da render. Timeout 1500ms cua v107b chet
        khi co render xen giua: bam "Da ghi xong, kiem tra ban ghi" luc text dang
@@ -18592,11 +18673,12 @@ function renderZhVocab(app, l) {
   var zmb0 = $("#zhMirrorBtn"); if (zmb0) zmb0.onclick = function () { /* v118c: nut khong co o buoc 2 — phai co guard, khong thi render crash */
     var slot = $("#zhMirrorSlot"), res = $("#zhMirrorResult");
     if (!slot) return;
+    if (zhMirOn && !zhMirStopped) { try { mirrorStop(); } catch (e) {} zhMirStopped = true; this.textContent = "✕ Tắt gương"; return; }
     if (zhMirOn) { zhMirStop(); return; }
-    if (!mrSupported()) { if (res) res.innerHTML = '<p>Trình duyệt này chưa hỗ trợ camera/mic — không tính đạt chuẩn.</p>'; return; }
-    zhMirOn = true; this.textContent = "⏹ Dừng + nghe lại";
+    if (!mrSupported()) { if (res) res.innerHTML = '<p>Trình duyệt này chưa hỗ trợ camera — không mở được gương quỹ đạo.</p>'; return; }
+    zhMirOn = true; zhMirStopped = false; this.textContent = "⏹ Dừng gương";
     slot.style.display = "block"; slot.innerHTML = phPracticeSlotHTML("zh");
-    MR.zhWord = c.han; MR.zhPinyin = c.pinyin; MR.zhKey = d.key + ":" + pos; MR.micWant = true;
+    MR.zhWord = c.han; MR.zhPinyin = c.pinyin; MR.zhKey = d.key + ":" + pos; MR.micWant = false; /* v124: chi-guong, khong mic */
     mirrorStart(slot);
   };
   /* v120: nut "Danh dau kho" da bo cung khoi Them. */
@@ -18864,7 +18946,7 @@ function zhSpeakRefreshCur(s, l) {
   var n = (s.lines || []).length, cur = 0;
   while (cur < n && l.heard && l.heard[cur]) cur++;
   var el = $("#zhSpeakCur");
-  if (el) el.textContent = (cur < n) ? ("Đang ở lượt " + (cur + 1) + "/" + n + " — bấm 🔊 Nghe rồi 🎤 Soi gương + ghi âm ở lượt này.") : "Đã nghe đủ các lượt — bấm nút Đã luyện xong ở thanh dưới để ghi nhận.";
+  if (el) el.textContent = (cur < n) ? ("Đang ở lượt " + (cur + 1) + "/" + n + " — bấm 🔊 Nghe rồi 🪞 Soi gương quỹ đạo ở lượt này.") : "Đã nghe đủ các lượt — bấm nút Đã luyện xong ở thanh dưới để ghi nhận.";
   for (var i = 0; i < n; i++) { var c = $("#zhSpeakCurChip-" + i); if (c) c.style.display = (i === cur) ? "inline-block" : "none"; }
   var db = $("#zhSpeakDone"); if (db) db.disabled = !zhSpeakAllHeard(s, l);
 }
@@ -18886,15 +18968,15 @@ function renderZhSpeak(app, l) {
     + '<p>Bước 1: bấm 🔊 Nghe lượt thoại.</p>'
     + '<p>Bước 2: nhắc lại thành tiếng ngay sau đó, bắt chước giọng mẫu.</p>'
     + '<p>Bước 3: nghe toàn đoạn rồi nói lại cả đoạn.</p>'
-    + '<p>Bước 4: muốn soi miệng thì bấm 🎤 Soi gương + ghi âm ở lượt muốn tập.</p>'
+    + '<p>Bước 4: muốn soi miệng thì bấm 🪞 Soi gương quỹ đạo ở lượt muốn tập.</p>'
     + '<p class="mut">Bài này không chấm điểm AI — AI chấm tiếng Trung đang chờ nâng cấp, không tính đạt cũng không tính chưa đạt. Nút “Đã luyện xong” ở thanh dưới chỉ mở khi đã nghe hết các lượt.</p>'
     + '<div class="row"><button class="btn" id="zhSpeakAll">🔊 Nghe toàn đoạn</button></div>'
-    + '<p class="mut" id="zhSpeakCur">' + (zhSpeakCur < s.lines.length ? 'Đang ở lượt ' + (zhSpeakCur + 1) + '/' + s.lines.length + ' — bấm 🔊 Nghe rồi 🎤 Soi gương + ghi âm ở lượt này.' : 'Đã nghe đủ các lượt — bấm nút Đã luyện xong ở thanh dưới để ghi nhận.') + '</p>'
+    + '<p class="mut" id="zhSpeakCur">' + (zhSpeakCur < s.lines.length ? 'Đang ở lượt ' + (zhSpeakCur + 1) + '/' + s.lines.length + ' — bấm 🔊 Nghe rồi 🪞 Soi gương quỹ đạo ở lượt này.' : 'Đã nghe đủ các lượt — bấm nút Đã luyện xong ở thanh dưới để ghi nhận.') + '</p>'
     + (s.id === "chaohoi" ? videoSlotIf("zhSpeak:chaohoi1") + videoSlotIf("zhSpeak:chaohoi2") + videoSlotIf("zhSpeak:chaohoi3") : "")
     + '</div>';
   (s.lines || []).forEach(function (ln, i) {
     html += '<div class="qblock"><p><b>Lượt ' + (i + 1) + '/' + s.lines.length + ' · ' + esc(ln.sp) + ' nói:</b> <span class="chip cur" id="zhSpeakCurChip-' + i + '" style="display:' + (i === zhSpeakCur ? 'inline-block' : 'none') + '">← Đang ở lượt này</span></p><div class="zh-han">' + esc(ln.han) + '</div><p><b>' + esc(ln.py) + '</b></p><p class="mut">' + esc(ln.vi) + '</p>'
-      + '<div class="row"><button class="btn" data-zhspeakline="' + i + '">🔊 Nghe lượt này</button><button class="btn" data-zhspeakmirror="' + i + '">🎤 Soi gương + ghi âm</button></div>'
+      + '<div class="row"><button class="btn" data-zhspeakline="' + i + '">🔊 Nghe lượt này</button><button class="btn" data-zhspeakmirror="' + i + '">🪞 Soi gương quỹ đạo</button></div>'
       + '<div id="zhSpeakMirrorSlot-' + i + '" style="display:none"></div><div id="zhSpeakMirrorResult-' + i + '"></div></div>';
   });
   app.innerHTML = html;
@@ -18909,16 +18991,15 @@ function renderZhSpeak(app, l) {
     if (!slot) return;
     if (mirOnIdx === li) {
       try { mirrorStop(); } catch (e) {}
-      mirOnIdx = -1; b.textContent = "🎤 Soi gương + ghi âm";
-      if (res) res.innerHTML = '<p class="mut">Đang xử lý bản ghi…</p>';
-      setTimeout(function () { var r2 = $("#zhSpeakMirrorResult-" + li); if (r2 && r2.textContent.indexOf("Đang xử lý") >= 0) { r2.innerHTML = '<p class="mut">Chưa ghi được âm thanh — bật mic rồi tập lại.</p><p class="mut">Chưa có điểm AI — bấm lại nút gương, đọc to rồi bấm dừng để AI chấm.</p>'; } }, 1500);
+      mirOnIdx = -1; b.textContent = "🪞 Soi gương quỹ đạo";
+      if (res) res.innerHTML = '<p class="mut">Đã dừng gương — xem quỹ đạo miệng ở khung gương phía trên.</p>';
       return;
     }
-    if (!mrSupported()) { if (res) res.innerHTML = '<p>Trình duyệt này chưa hỗ trợ camera/mic — không tính đạt chuẩn.</p>'; return; }
-    if (mirOnIdx >= 0) { try { mirrorStop(); } catch (e) {} $$("[data-zhspeakmirror]").forEach(function (pb) { pb.textContent = "🎤 Soi gương + ghi âm"; }); }
+    if (!mrSupported()) { if (res) res.innerHTML = '<p>Trình duyệt này chưa hỗ trợ camera — không mở được gương quỹ đạo.</p>'; return; }
+    if (mirOnIdx >= 0) { try { mirrorStop(); } catch (e) {} $$("[data-zhspeakmirror]").forEach(function (pb) { pb.textContent = "🪞 Soi gương quỹ đạo"; }); }
     mirOnIdx = li; b.textContent = "⏹ Dừng + nghe lại";
     slot.style.display = "block"; slot.innerHTML = phPracticeSlotHTML("zh");
-    MR.zhWord = s.lines[li].han; MR.zhPinyin = s.lines[li].py; MR.zhKey = null; MR.micWant = true;
+    MR.zhWord = s.lines[li].han; MR.zhPinyin = s.lines[li].py; MR.zhKey = null; MR.micWant = false; /* v124: chi-guong, khong mic */
     mirrorStart(slot);
   }; });
 
@@ -19745,12 +19826,19 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
     if (vk.choiceAnswered) h += '<button class="btn btn-primary" id="ttChoiceNext">Tiếp tục →</button>';
   } else {
     if (isTc) {
+      /* v124: buoc 4 tach hai che do — Doc to (chi mic, tang 1) la nut chinh;
+         Soi guong quy dao (chi camera) la nut phu. */
       h += '<div id="ttCheckSlot"></div><div id="ttCheckResult"></div>';
+      var tcNoMic = !mrSupported() || mrNoMic() || vk.pronFailed;
       if (vk.pronDone) h += '<p>Đã đọc ✓</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
-      else if (vk.pronAttempted) h += '<p class="mut">Chưa ghi được điểm lần này — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>'; /* v122b: cham khong diem van duoc di tiep + doc lai */
-      else if (!mrSupported() || mrNoDevices() || vk.pronFailed) h += '<p class="mut">Máy này không có mic/camera để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button></div>'; /* v112b L1 + v112c: nhu EN — mrNoDevices() = thieu mic HOAC camera; v120: mo mic that bai (catch) cung ve nhanh nay */
-      else h += '<button class="btn btn-primary" id="ttPronBtn">🎤 Đọc to để AI chấm</button>';
+      else if (vk.pronAttempted) h += '<p class="mut">' + (vk.t1 ? esc(vk.t1) : 'Chưa ghi được điểm lần này') + ' — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
+      else if (tcNoMic) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button></div>';
+      if (!tcNoMic) {
+        h += '<div class="qblock"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="tcT1Hear">🔊 Nghe mẫu</button><button class="btn' + ((!vk.pronDone && !vk.pronAttempted) ? ' btn-primary' : '') + '" id="tcT1Rec">🎤 Đọc to</button></div><p class="mut" id="tcT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
+        if (mrNoCamera()) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
+      }
       if (vk.pronWhy) h += '<div class="why show" id="ttPronWhy">' + esc(vk.pronWhy) + '</div>';
+      if (!mrNoCamera()) h += '<div class="row"><button class="btn" id="ttPronBtn">🪞 Soi gương quỹ đạo</button></div>'; /* v124: nut guong chi-camera, luon nut phu */
       var sym4t = c.ipa ? firstSymFromIpa(c.ipa) : "";
       if (sym4t && RB_PH_ALL_EXAMPLES[sym4t]) h += '<p><button class="btn" id="ttPhLink">Âm /' + esc(sym4t) + '/ luyện ở đâu? → Vào bài âm này</button></p>';
     } else {
@@ -19761,6 +19849,8 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
       else if (tp1.tried && tp1.err) h += '<p class="mut">' + esc(tp1.err) + '</p>';
       else if (tp1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(tp1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
       h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
+      h += '<div id="ttCheckSlot"></div>';
+      if (!mrNoCamera()) h += '<div class="row"><button class="btn" id="ttPronBtn">🪞 Soi gương quỹ đạo</button></div>'; /* v124: nut guong chi-camera, luon nut phu */
       h += '<div class="row"><button class="btn btn-primary" id="ttPronDone">Tiếp tục →</button></div>';
       var tpj = tpJamo(c.w);
       var tpsym = tpj ? TP_INIT_JAMO[tpj.init] : "";
@@ -19950,7 +20040,7 @@ function renderTcTpVocab5(track, stepId, back) {
     + vkCardImageHTML(c, ttShowImg)
     + (ttShowBody ? '<div id="vocabMeaningBody">' + (ttShowMeaning ? '<p class="vocab-focus-line"><b>' + esc(c.vi || "") + '</b></p>' : '') + '<p>' + esc(ttMaskEx ? vkMaskWord(c.col || "", c.w) : (c.col || "")) + ((c.col && c.ex) ? ' — ' : '') + esc(ttMaskEx ? vkMaskWord(c.ex || "", c.w) : (c.ex || "")) + '</p>' + (ttShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '') + (ttStep === 0 && c.personal && c.myEx && c.sen ? '<p class="mut">Giải thích: ' + esc(c.myEx) + '</p>' : '') + '</div>' : '')
     + tcTpVkPanelHTML(sess, vk, c, cards, pos)
-    + (ttStep === 3 ? vocabMirrorHTML(isTc ? "tc" : "tp") : '')
+    /* v124: bo guong video thuong o buoc 4 — thay bang nut guong quy dao MR trong panel (chi-camera, co quy dao). */
     + (ttStep !== 4 ? '<div class="row" style="margin-top:8px"><button class="btn" id="ttListen">🔊 Nghe</button></div>' : '')
     + '</div>'
     /* v120: bo khoi "Them — cach hoc khac" — man hoc chi giu noi dung buoc + 1 nut chinh. */
@@ -19972,7 +20062,7 @@ function renderTcTpVocab5(track, stepId, back) {
   var tlm = $("#ttListenModel"); if (tlm) tlm.onclick = function () { vkSpeakBtnState(tlm, c.w, function (done) { if (isTc) speak(c.w, null, done); else tpSpeak(c.w); }, vk); /* v107d: nhu nut Nghe cua the Anh/Trung — bam Nghe cung dua dau the ve khung nhin. */ vkScrollCardTop(); };
   var thn = $("#ttHeardNext"); if (thn) thn.onclick = function () { vk.heard = true; vk.step = 1; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   var tpn = $("#ttPronNext"); if (tpn) tpn.onclick = function () { vk.step = 4; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
-  var tpr = $("#ttPronRetry"); if (tpr) tpr.onclick = function () { vk.pronDone = false; vk.pronAttempted = false; vk.pronScore = null; vk.pronMirror = null; vk.pronResultHTML = ""; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
+  var tpr = $("#ttPronRetry"); if (tpr) tpr.onclick = function () { vk.pronDone = false; vk.pronAttempted = false; vk.pronScore = null; vk.pronMirror = null; vk.pronResultHTML = ""; vk.t1 = ""; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   var tc = $("#ttTypeCheck"); if (tc) tc.onclick = function () {
     var inp = $("#ttTypeInp"); var val = inp ? inp.value : "";
     vk.typeDraft = val;
@@ -20003,23 +20093,35 @@ function renderTcTpVocab5(track, stepId, back) {
   var cl = $("#ttChoiceListen"); if (cl) cl.onclick = function () { if (isTc) speak(c.w); else tpSpeak(c.w); };
   var sk = $("#ttSkipBtn"); if (sk) sk.onclick = function () { tcTpVocab5Skip(sess); vkScrollCardTop(); };
   var pb = $("#ttPronBtn"); if (pb) pb.onclick = function () {
-    var slot = $("#ttCheckSlot"), res = $("#ttCheckResult");
-    try {
-      /* v107: diem phat am chi ghi nhan (onGraded) — dat 80/80 o buoc doc lai
-         thi tu sang buoc go, khong dat thi o lai tap lai hoac bam "Sang buoc go".
-         Giu lai HTML ket qua cham qua lan render ke tiep. Giu lai ca nut
-         thanh duoi (Doc lai / Bo qua) — renderLesson() dat BAR_RESULT = null
-         nen phai set lai sau render. */
-      vocabKnownStart(key, c.w, c.ipa ? firstSymFromIpa(c.ipa) : "", slot, res, null, function () { tcTpVocab5Skip(sess); }, function (chk, ai, mirror) {
-        if (ai != null || mirror != null) { vk.pronDone = true; vk.pronAttempted = false; } else vk.pronAttempted = true; /* v122b: nhu the Anh — cham khong diem thi mo nut Tiep tuc + Doc to lai, khong hien "Da doc ✓" gia */ if (ai != null) vk.pronScore = ai; if (mirror != null) vk.pronMirror = mirror;
-        var resEl = $("#ttCheckResult"); if (resEl && resEl.innerHTML) vk.pronResultHTML = resEl.innerHTML;
-        var br = (typeof BAR_RESULT !== "undefined") ? BAR_RESULT : null;
-        if (chk && chk.ok && vk.step === 3) vk.step = 4;
-        renderTcTpVocab5(track, stepId, backTab);
-        if (br) setBarResult(br);
-        /* v107d: nhu onGraded cua the Anh — cham xong (ke ca tu sang buoc go) cung phai dua dau the ve khung nhin. */ vkScrollCardTop();
-      });
-    } catch (e) { vk.pronFailed = true; renderTcTpVocab5(track, stepId, backTab); }
+    /* v124: nut guong chi-camera (quy dao) — bam mo, bam lai dung (giu quy dao
+       hien trong slot), bam lan nua thi tat + mo nut Tiep tuc. */
+    var slot = $("#ttCheckSlot");
+    if (!slot) return;
+    if (slot.style.display !== "none" && slot.innerHTML) {
+      if (!pb.dataset.stopped) { try { mirrorStop(); } catch (e) {} pb.dataset.stopped = "1"; pb.textContent = "✕ Tắt gương"; return; }
+      try { mirrorStop(); } catch (e) {}
+      slot.style.display = "none"; slot.innerHTML = ""; delete pb.dataset.stopped;
+      vk.pronAttempted = true; renderTcTpVocab5(track, stepId, backTab); return;
+    }
+    var sym0 = "";
+    if (isTc) sym0 = c.ipa ? firstSymFromIpa(c.ipa) : "";
+    else { var jj = tpJamo(c.w); sym0 = jj ? TP_INIT_JAMO[jj.init] : ""; }
+    slot.innerHTML = phPracticeSlotHTML(sym0);
+    slot.style.display = "block";
+    MR.sym = sym0; MR.micWant = false;
+    try { mirrorStart(slot); } catch (e) {}
+    pb.textContent = "⏹ Dừng gương";
+  };
+  /* v124: tang 1 TC o buoc 4 (chi mic, khach cung duoc) + luu wordPron de gom Am yeu. */
+  var tcT1H = $("#tcT1Hear"); if (tcT1H) tcT1H.onclick = function () { speak(c.w); };
+  var tcT1R = $("#tcT1Rec"); if (tcT1R) tcT1R.onclick = function () {
+    pronTier1Start("en", function (heard) {
+      var sc = pronTier1Score(heard, c.w, "en");
+      if (sc === 100) { vk.pronDone = true; vk.pronAttempted = false; vk.t1 = "✓ Máy nghe ra đúng từ “" + c.w + "”. "; }
+      else { vk.pronDone = false; vk.pronAttempted = true; vk.t1 = "✗ Máy chưa nghe ra từ “" + c.w + "”" + (heard ? " — nghe được: “" + heard + "”" : "") + ". Nghe mẫu rồi đọc to lại. "; }
+      try { if (!state.wordPron) state.wordPron = {}; state.wordPron[tcTpVocab5Key(track, stepId, sess.pos)] = { ai: sc === 100 ? 100 : 0, sym: c.ipa ? firstSymFromIpa(c.ipa) : "", word: c.w, date: todayStr() }; saveState(); } catch (e) {}
+      renderTcTpVocab5(track, stepId, backTab);
+    }, function (kind) { vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; renderTcTpVocab5(track, stepId, backTab); });
   };
   var tpl = $("#ttPhLink"); if (tpl) tpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4]) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); };
   var mf = $("#ttMultiFinish"); if (mf) mf.onclick = function () { tcTpVocab5Advance(sess, Object.keys(vk.recorded).length === 0 && !vk.peeked); vkScrollCardTop(); };
