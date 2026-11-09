@@ -4596,7 +4596,7 @@ function viewPractice(app) {
     + practiceFilterHTML(typeEntryRowHTML("en", true)) + dictationCardHTML() + storyCardHTML() + podcastCardHTML()
     + guideLine("practiceIntro", "Luyện riêng theo từng kỹ năng — mở nhóm cần luyện, bấm bài để học. Đây là chỗ tra cứu và luyện riêng từng kỹ năng — đường học chính vẫn ở tab Bản đồ.")
   /* --- Nhom luyen tap theo muc dich (v76: gop vo boc + noi dung thanh mot khoi) --- */
-  html += '<div id="ppWeakSlot"></div>'
+  html += pronWeakHTML("en") /* v125b: the Am yeu cua toi nhu ZH/TC/TP — lap day slot ppWeakSlot von de trong (khong cham ; de khong dut chuoi += xuong the Tro giang) */
     + '<details class="card" id="practiceGrpTutor"><summary><b>🧑‍🏫 Trợ giảng — AI nâng cấp bài của bạn</b></summary>'
     + '<p class="mut">Bạn tự lập dàn ý Writing hoặc tự soạn câu trả lời Speaking bằng ý của mình trước, AI chỉ nâng cấp chính bài đó: giữ ý, gợi ý cụm nên dùng. AI không viết thay bài cho bạn.</p>'
     + '<div class="row"><button class="btn" data-spectutor="write">Lập dàn ý Writing →</button><button class="btn" data-spectutor="speak">Soạn câu trả lời Speaking →</button></div></details>'
@@ -4956,6 +4956,7 @@ function viewPractice(app) {
   var stSel = $("#storySel"); if (stSel) { var stGo = $("#storyGo"); if (stGo) stGo.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "story", idx: +stSel.value }); }; var stMeta = $("#storyMeta"); var stUpd = function () { if (stMeta) stMeta.textContent = storyMetaText(+stSel.value); }; stSel.onchange = stUpd; stUpd(); }
   var podSel = $("#podSel"); if (podSel) { var podGo = $("#podGo"); if (podGo) podGo.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "podcast", idx: +podSel.value }); }; var podMeta = $("#podMeta"); var podUpd = function () { if (podMeta) podMeta.textContent = podMetaText(+podSel.value); }; podSel.onchange = podUpd; podUpd(); }
   practiceFilterWire();
+  pronWeakWire(app, "en"); pronDiagWireEntry(app); /* v125b: nut Hoc ngay am nay + nut Lam chan doan trong the Am yeu */
   $$("[data-skillspeak]").forEach(function (b) { b.onclick = function () { openSkill("skillSpeak", 0, { idx: +b.dataset.skillspeak }); }; });
   $$("[data-skillroleplay]").forEach(function (b) { b.onclick = function () { openSkill("skillRoleplay", 0, { idx: +b.dataset.skillroleplay }); }; });
   $$("[data-skillwrite]").forEach(function (b) { b.onclick = function () { openSkill("skillWrite", 0, { idx: +b.dataset.skillwrite }); }; });
