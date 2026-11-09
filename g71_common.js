@@ -245,6 +245,26 @@
       + '<div id="g71Hud" style="display:flex;gap:10px;align-items:center;padding:7px 12px;font-weight:700;white-space:nowrap;overflow:hidden;"></div>'
       + '<div id="g71CanvasWrap" style="flex:1;min-height:0;position:relative;overflow:hidden;"><canvas id="g71Canvas" style="display:block;width:100%;height:100%;touch-action:none;"></canvas></div>';
     document.body.appendChild(ov);
+    /* v121: CSS che do gon khi viewport thap (ban phim goc dang mo —
+       layout viewport co lai nho interactive-widget=resizes-content):
+       thu hep tieu de / HUD / o nhap de khu game giu duoc chieu cao
+       nhin thay; the cau hoi Giai Do cuon doc duoc thay vi bi cat.
+       Tiem 1 lan cho ca web (guard theo id). */
+    try {
+      if (!document.getElementById("g71StageKbCss")) {
+        var kbCss = document.createElement("style");
+        kbCss.id = "g71StageKbCss";
+        kbCss.textContent = "#g71Stage.g71-kb > div:first-child{padding:5px 10px !important;}"
+          + "#g71Stage.g71-kb > div:first-child h2{font-size:16px !important;}"
+          + "#g71Stage.g71-kb #g71Hud{padding:4px 10px !important;}"
+          + "#g71Stage.g71-kb #g71TypeInput{margin:5px auto !important;padding:8px 12px !important;}"
+          + "#g71Stage.g71-kb #rlTypeInput{margin:4px auto !important;padding:7px 12px !important;}"
+          + "#g71Stage.g71-kb #rlElBar{padding:4px 8px !important;}"
+          + "#g71Stage.g71-kb #gdCard{padding:8px !important;}"
+          + "#g71Stage.g71-kb #gdCard>div{padding:14px !important;}";
+        document.head.appendChild(kbCss);
+      }
+    } catch (e) {}
     var cv = ov.querySelector("#g71Canvas");
     var ctx = null;
     try { ctx = cv.getContext("2d"); } catch (e) {}
@@ -286,6 +306,14 @@
     });
     function resize() {
       try {
+        /* v121: viewport thap (< 560px — ban phim goc dang mo tren dien
+           thoai, layout viewport da co lai) thi bat che do gon de khu
+           game khong bi bop het; viewport cao tro lai thi tat. */
+        var shortH = false;
+        try { shortH = (typeof window !== "undefined" && window.innerHeight && window.innerHeight < 560); } catch (e) {}
+        if (ov.classList) ov.classList.toggle("g71-kb", !!shortH);
+      } catch (e) {}
+      try {
         var w = cv.clientWidth, h = cv.clientHeight;
         if (w && h && (cv.width !== w || cv.height !== h)) {
           /* Giữ khung hình cuối khi đổi cỡ canvas (v100 B2): gán
@@ -319,12 +347,22 @@
         ro.observe(ov.querySelector("#g71CanvasWrap"));
       }
     } catch (e) {}
+    /* v121: visualViewport co lai khi ban phim mo (ca khi window resize
+       khong ban tren mot so may) — cung goi resize() de bat/tat che do gon. */
+    var vv = null;
+    try {
+      if (typeof window !== "undefined" && window.visualViewport && window.visualViewport.addEventListener) {
+        vv = window.visualViewport;
+        vv.addEventListener("resize", resize);
+      }
+    } catch (e) {}
     var closed = false;
     function close() {
       if (closed) return;
       closed = true;
       if (helpBox) { try { if (helpBox.parentNode) helpBox.parentNode.removeChild(helpBox); } catch (e) {} helpBox = null; }
       window.removeEventListener("resize", resize);
+      try { if (vv) vv.removeEventListener("resize", resize); } catch (e) {}
       try { if (ro) ro.disconnect(); } catch (e) {}
       document.removeEventListener("keydown", onKey);
       if (ov.parentNode) ov.parentNode.removeChild(ov);
@@ -342,16 +380,60 @@
     stage = api;
     return api;
   }
-  /* Màn hình kết thúc: thắng thì +10 XP bằng hàm sẵn có của web. */
+  /* Màn hình kết thúc — v121: là MỘT MÀN RIÊNG trong sân khấu, KHÔNG
+     còn là hộp phủ lên khung game đang chạy. Trước đây hộp kết thúc phủ
+     tuyệt đối (inset:0) lên #g71CanvasWrap, che mất chip từ / thanh
+     Nghĩa / viên quái phía sau, lại thêm ô nhập vẫn focus nên bàn phím
+     vẫn mở, kẹp khung game thành dải mỏng (ảnh Bùi gửi 12:12 09/11:
+     "Gõ đúng 0/20 từ" che mất từ "complaint"). Nay: ẩn khung canvas +
+     mọi ô nhập (blur trước để bàn phím tự tắt), hiện thẻ kết thúc trong
+     luồng cuộn riêng (flex:1, overflow-y:auto) — thẻ dài hơn màn thì
+     cuộn được, không bị cắt; nút Chơi lại / Về khu Trò chơi như cũ.
+     Gọi 2 lần chỉ hiện 1 thẻ (chốt #g71EndScreen). */
   function endScreen(st, win, title, lines, onReplay) {
+    try {
+      if (st && st.el && st.el.querySelector("#g71EndScreen")) return;
+    } catch (e) {}
+    /* v121: blur TRUOC khi an — o nhap trong khung canvas (Giai Do) chi
+       blur duoc khi con thay duoc; an khung truoc roi blur thi trinh
+       duyet co the bo qua (phat hien o probe: activeElement van la
+       #gdAnswer neu an truoc, blur sau). */
+    try {
+      if (st && st.el) {
+        var ins0 = st.el.querySelectorAll("input");
+        for (var i0 = 0; i0 < ins0.length; i0++) {
+          try { ins0[i0].blur(); } catch (e2) {}
+        }
+      }
+    } catch (e) {}
+    try { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); } catch (e) {}
+    try { if (st && st.wrap) st.wrap.style.display = "none"; } catch (e) {}
+    try {
+      if (st && st.el) {
+        var ins = st.el.querySelectorAll("input");
+        for (var ii = 0; ii < ins.length; ii++) {
+          ins[ii].style.display = "none";
+        }
+        var eb = st.el.querySelector("#rlElBar");
+        if (eb) eb.style.display = "none";
+      }
+    } catch (e) {}
+    /* v121: blur lan nua sau khi an — o nhap nao van giu focus (vd o
+       nhap Giai Do da disabled sau khi nop bai) thi thu blur them lan
+       nua; tren may that, o nhap an + disabled thi ban phim tu tat. */
+    try {
+      if (st && st.el && document.activeElement && st.el.contains(document.activeElement)
+        && document.activeElement.blur) document.activeElement.blur();
+    } catch (e) {}
     var box = document.createElement("div");
-    box.style.cssText = "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(4,6,15,.55);z-index:5;padding:16px;";
+    box.id = "g71EndScreen";
+    box.style.cssText = "flex:1;min-height:0;overflow-y:auto;display:flex;align-items:center;justify-content:center;padding:16px;background:#FFF7E8;";
     var lis = lines.map(function (l) { return "<p style=\"margin:6px 0;\">" + escHtml(l) + "</p>"; }).join("");
-    box.innerHTML = '<div style="background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.12);padding:28px 24px;text-align:center;max-width:520px;width:100%;">'
+    box.innerHTML = '<div style="background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.12);padding:28px 24px;text-align:center;max-width:520px;width:100%;margin:auto;">'
       + '<h2 style="margin-top:0;">' + escHtml(title) + "</h2>" + lis
       + '<div class="row" style="justify-content:center;"><button class="btn btn-primary" id="g71Replay">Chơi lại</button>'
       + '<button class="btn" id="g71Back">Về khu Trò chơi</button></div></div>';
-    st.wrap.appendChild(box);
+    if (st && st.el) st.el.appendChild(box);
     if (win) { try { if (typeof awardXp === "function") awardXp(10); } catch (e) {} }
     var rb = box.querySelector("#g71Replay");
     if (rb) rb.onclick = function () { st.close(); if (onReplay) onReplay(); };

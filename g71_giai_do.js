@@ -181,8 +181,13 @@
     /* ---- Thẻ câu hỏi (DOM trên nền trời vẽ canvas) ---- */
     var card = document.createElement("div");
     card.id = "gdCard";
-    card.style.cssText = "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;z-index:2;";
-    card.innerHTML = '<div style="background:#fff;border:2px solid #F3D9A4;border-radius:20px;box-shadow:0 8px 30px rgba(4,6,15,.18);padding:22px 20px;max-width:560px;width:100%;">'
+    /* v121: the cuon doc duoc khi viewport thap (ban phim mo) — truoc day
+       align-items:center + wrap overflow:hidden nen the cao hon khung thi
+       bi cat ca tren lan duoi, o nhap o cuoi the co the mat han. Nay
+       align-items:flex-start + overflow-y:auto + the con margin:auto:
+       the ngan thi van giua khung, the dai thi cuon duoc toi o nhap. */
+    card.style.cssText = "position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding:16px;z-index:2;overflow-y:auto;";
+    card.innerHTML = '<div style="background:#fff;border:2px solid #F3D9A4;border-radius:20px;box-shadow:0 8px 30px rgba(4,6,15,.18);padding:22px 20px;max-width:560px;width:100%;margin:auto;">'
       + '<p class="eyebrow" id="gdEyebrow" style="margin:0 0 8px;"></p>'
       + '<div id="gdPrompt" style="font-size:22px;line-height:1.5;font-weight:700;color:#1E1B4B;"></div>'
       + '<div id="gdHint" class="mut" style="margin-top:6px;font-size:15px;"></div>'
