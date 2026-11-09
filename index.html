@@ -257,7 +257,10 @@ body.landing-on .app-frame{display:block}
 .vocab-foot{grid-area:foot}
 .vocab-layout .mr-lib-section{grid-area:lib}
 .vocab-pron .mr-stage video,.vocab-pron .mr-stage canvas{width:100%}
-.native-vid .yg-slot{min-height:220px}
+/* v118c (Bui 08:19): slot video chi giu 220px KHI DA CO video (sau khi bam nut); luc chua mo thi gap ve 0 — truoc day slot rong van chiem 220px tao khoang trang lon giua the (anh dien thoai that cua Bui). Dong trang thai rong cung an luon de khong de lai margin cua <p> rong. */
+.native-vid .yg-slot{min-height:0}
+.native-vid .yg-slot:not(:empty){min-height:220px}
+.native-vid .yg-status:empty{display:none}
 @media (max-width:1199px){.vocab-layout{display:block}}
 .summarybox .confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .summarybox .confetti i{position:absolute;top:-8px;width:8px;height:12px;border-radius:2px;opacity:.9;animation:confFall 3.2s ease-in forwards}
@@ -799,6 +802,18 @@ function photoOpenEntry() {
 }
 function wirePhotoEntry() {
   $$("[data-photoentry]").forEach(function (b) { b.onclick = function () { photoOpenEntry(); }; });
+}
+/* v118c (Bui 08:30): muc lon rieng "Chup anh them tu" o khu Tu vung (G1) —
+   nut vao DUY NHAT (data-photoentry -> photoOpenEntry, mo form chup anh o
+   tab Cua toi); engine ben trong (MobileNet, photoDraft, nhan dien) giu
+   nguyen. Nut nay KHONG con nam trong the tu o bat ky buoc nao.
+   Nut TO + noi bat bang co chu 20px + nen ho phach #B45309 — KHONG dung
+   btn-primary de giu luat 1 nut chinh/tab Luyen tap. */
+function photoEntryBigHTML(track) {
+  var id = "photoEntryBig" + (track === "en" ? "En" : track === "zh" ? "Zh" : track === "tc" ? "Tc" : "Tp");
+  return '<section class="card photo-entry-big" id="' + id + '" style="margin-top:8px"><h3>📷 Chụp ảnh thêm từ</h3>'
+    + '<p class="mut">Chụp một đồ vật — máy nhận ra vật đó và thêm từ vào từ vựng của bạn.</p>'
+    + '<p><button class="btn" data-photoentry style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">📷 Chụp ảnh thêm từ</button></p></section>';
 }
 function wirePhotoWord() {
   var tr = document.getElementById("phFTrack"), sf = document.getElementById("phFSetFilter"), ss = document.getElementById("phFSet");
@@ -2697,7 +2712,7 @@ function wireTypeEntryRow() {
 /* Nhom theo chang (tieu de chang phan biet cac bo trung ten o chang khac nhau);
    trong cung chang, bo trung ten them hau to "phan 2/3...". Khong gop, khong xoa. */
 function normSearch(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d"); }
-function vocabGroupsHTML(stages, btnFn, statusFn, metaFn, searchId, wrapId, vocabLabel) {
+function vocabGroupsHTML(stages, btnFn, statusFn, metaFn, searchId, wrapId, vocabLabel, photoTrack) {
   var groups = stages.map(function (st) {
     return { title: st.title, ids: st.steps.filter(function (id) { return id[0] === "v"; }) };
   }).filter(function (g) { return g.ids.length; });
@@ -2710,7 +2725,8 @@ function vocabGroupsHTML(stages, btnFn, statusFn, metaFn, searchId, wrapId, voca
   }
   var out = '<section class="card" id="' + wrapId + '"><h3>' + vocabLabel + ' (' + total + ' bộ)</h3>'
     + '<p class="mut">Đã gấp theo chặng — gõ ô tìm kiếm để lọc bộ từ.</p>'
-    + '<p><input id="' + searchId + '" placeholder="Tìm bộ từ theo chủ điểm…" style="width:100%"></p>';
+    + '<p><input id="' + searchId + '" placeholder="Tìm bộ từ theo chủ điểm…" style="width:100%"></p>'
+    + photoEntryBigHTML(photoTrack); /* v118c: muc lon chup anh o dau khu Tu vung G1 */
   groups.forEach(function (g, gi) {
     var seen = {};
     var btns = g.ids.map(function (id) {
@@ -4561,7 +4577,7 @@ function viewPractice(app) {
   });
   var vocabNext = null;
   for (var vi = 0; vi < vocabNextItems.length; vi++) if (!vocabNextItems[vi].done) { vocabNext = vocabNextItems[vi].label; break; }
-  html += '<details class="card" id="practiceGrpVocab"><summary><b>📚 Từ vựng — ' + CONTENT.vocab.length + ' bộ' + (vocabNext ? ' · tiếp theo: ' + vocabNext : ' · đã xong hết') + '</b></summary>' + '<input id="enVocabSearch" placeholder="Tìm bộ từ theo chủ đề…" style="width:100%;margin:6px 0">' + '<div id="enVocabGroups">'
+  html += '<details class="card" id="practiceGrpVocab"><summary><b>📚 Từ vựng — ' + CONTENT.vocab.length + ' bộ' + (vocabNext ? ' · tiếp theo: ' + vocabNext : ' · đã xong hết') + '</b></summary>' + '<input id="enVocabSearch" placeholder="Tìm bộ từ theo chủ đề…" style="width:100%;margin:6px 0">' + photoEntryBigHTML("en") + '<div id="enVocabGroups">'
    ;
   vocabBandOrder.forEach(function (b) {
     html += '<details style="margin-top:8px"><summary><b>' + esc(b) + ' · ' + vocabByBand[b].length + ' bộ</b></summary><div class="row" style="margin-top:6px">';
@@ -4908,6 +4924,7 @@ function viewPractice(app) {
   $$("[data-bktone]").forEach(function (b) { b.onclick = function () { openSkill("bkTone", 0, { idx: +b.dataset.bktone, skillKey: "bkTone:" + b.dataset.bktone, title: BK_TONE[+b.dataset.bktone].title }); }; });
   $$("[data-vocabset]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "vocab", setIdx: +b.dataset.vocabset }); }; });
   wireVocabSearch("enVocabSearch", "enVocabGroups");
+  wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   $$("[data-vocabquick]").forEach(function (b) { b.onclick = function () { openLesson({ type: "vocabQuick", setIdx: +b.dataset.vocabquick }); }; });
   $$("[data-gramnew]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "grammar", gIdx: +b.dataset.gramnew }); }; });
   $$("[data-entrycheck]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "entryCheck", part: b.dataset.entrycheck }); }; });
@@ -8415,9 +8432,12 @@ function renderVocab(app, l) {
      nghia/cau/dich o buoc 4, GIU tu + IPA + nut Nghe vi tu la de bai de
      doc theo (an ca tu thi buoc 4 khong lam duoc, guong khi ghi am cung
      hien ten tu; khong mic thi duong "doc to theo giong may" cung mat). */
-  /* v118b (Bui 06:10 + 06:12): moi buoc mot trong tam. Buoc 2 (step 1): tu chi la de bai — thu nho 28px (small), an IPA (viec buoc 4) + an vi du. Buoc 3 (step 2): tu la dap an (kind fill/vi2w) — an thanh "···" (mask) nhu buoc 5, an IPA + vi du + nghia (de bai nam trong dong hoi o panel). Buoc 4 (step 3) giu tu to + IPA; buoc 5 (step 4) an tu. vkShowBig giu nguyen de nut Nghe + video giong mau van hien o buoc 2/3. */
+  /* v118b (Bui 06:10 + 06:12): moi buoc mot trong tam. Buoc 2 (step 1): tu chi la de bai — thu nho 28px (small), an IPA (viec buoc 4) + an vi du. Buoc 3 (step 2): tu la dap an (kind fill/vi2w) — an thanh "···" (mask) nhu buoc 5, an IPA + vi du + nghia (de bai nam trong dong hoi o panel). Buoc 4 (step 3) giu tu to + IPA; buoc 5 (step 4) an tu. vkShowBig giu nguyen de nut Nghe van hien o buoc 2/3; v118c: video giong mau BO o buoc 2 (vkShowVideo), chi o buoc 1/3/4. */
   var vkWordMode = vk.step === 1 ? "small" : (vk.step === 2 || vk.step === 4 ? "mask" : "big");
   var vkShowBig = vk.step !== 4;
+  /* v118c (Bui 08:19): buoc 2 (step 1) chi nghia — BO nut video nguoi ban dia o buoc 2, GIU nut Nghe. */
+  var vkShowVideo = vk.step !== 1 && vk.step !== 4;
+  var vkStep2 = vk.step === 1; /* v118c (Bui 08:24): buoc 2 chi nghia — chi giu Nghe + The truoc (nho, lang), BO nut Phat am; nut Chup anh GO HAN khoi the (Bui 08:30: thanh muc lon rieng o G1) */
   var vkShowMeaning = vk.step === 0;
   var vkShowEx = vk.step === 0;
   var vkShowExv = vk.step === 0;
@@ -8447,12 +8467,12 @@ function renderVocab(app, l) {
     + '</div>'
     + (l.preview ? previewLockHTML() : '<div id="vocabMulti">' + vkEnPanelHTML(vk, c, cards, pos) + '</div>')
     + '</div>'
-    + '<div class="vocab-pron">' + (vkShowBig ? nativeVideoHTML(c.w, "english") : '') + '<div id="vocabCheckSlot" style="display:none"></div><div id="vocabCheckResult"></div></div>'
-    + '<div class="vocab-actions row">' + (vkShowBig ? '<button class="btn" id="btnSpeak">🔊 Nghe</button>' : '') + '<button class="btn" id="btnPrev"' + (pos === 0 ? " disabled" : "") + '>← Thẻ trước</button><button class="' + (vk.step === 3 ? 'btn btn-primary' : 'btn') + '" id="btnPronounce">🎤 Phát âm</button></div>'
+    + '<div class="vocab-pron"' + (vk.step === 1 ? ' style="display:none"' : '') + '>' + (vkShowVideo ? nativeVideoHTML(c.w, "english") : '') + '<div id="vocabCheckSlot" style="display:none"></div><div id="vocabCheckResult"></div></div>'
+    + '<div class="vocab-actions row">' + (vkShowBig ? '<button class="btn' + (vkStep2 ? ' btn-sm' : '') + '" id="btnSpeak">🔊 Nghe</button>' : '') + '<button class="btn' + (vkStep2 ? ' btn-sm' : '') + '" id="btnPrev"' + (pos === 0 ? " disabled" : "") + '>← Thẻ trước</button>' + (vkStep2 ? '' : '<button class="' + (vk.step === 3 ? 'btn btn-primary' : 'btn') + '" id="btnPronounce">🎤 Phát âm</button>') + '</div>'
     + '<div class="vocab-foot"><p class="mut" id="cardCounter">Thẻ ' + (pos + 1) + '/' + cards.length + ' · <span id="vocabRound">Vòng ' + vr.round + '/' + vr.total + '</span> · Nấc nhớ: ' + (st.box || 0) + '/5</p>'
     + lastPronLineHTML("s" + l.setIdx + ":" + pos)
     + gd23VocabPauseHTML(pos, cards.length)
-    + '</div><p><button class="btn btn-sm" data-photoentry>📷 Chụp ảnh thêm từ</button></p><details class="card"><summary><b>Thêm</b> — mẹo nhớ</summary>'
+    + '</div><details class="card"><summary><b>Thêm</b> — mẹo nhớ</summary>'
     + '<div class="row" style="margin-top:10px"><input type="text" id="vocabMemoInp" placeholder="Mẹo nhớ của bạn cho từ này..." value="' + esc((state.mems && state.mems[clMemoKey]) || "") + '"><button class="btn" id="vocabMemoSave">Lưu mẹo nhớ</button></div>'
     + (st.due ? '<p class="mut">Hẹn ôn: ' + esc(st.due) + '.</p>' : '')
     + '<p class="mut" style="margin-top:8px">Cách học khác cho bộ từ này:</p>' + vocabMethodsBtns97()
@@ -8582,7 +8602,7 @@ function renderVocab(app, l) {
     } else render();
     /* v107d: bo qua the cung phai dua dau the moi ve khung nhin — ham nay con duoc goi qua nut Bo qua o thanh duoi sau luot cham, duong do truoc day render ma khong cuon. */ vkScrollCardTop();
   };
-  $("#btnPronounce").onclick = function () {
+  var bp0 = $("#btnPronounce"); if (bp0) bp0.onclick = function () { /* v118c: nut khong co o buoc 2 — phai co guard, khong thi render crash */
     var key = "s" + l.setIdx + ":" + pos;
     if (VK.active && VK.key === key) { vocabKnownStopAndGrade(); return; }
     /* v107: diem phat am chi ghi nhan (onGraded) — dat 80/80 o buoc doc lai thi
@@ -16678,6 +16698,7 @@ function viewPracticeZh(app) {
       });
     };
     var G1 = mkCluster("G1", "G1 · Từ vựng");
+    var phSecZh = document.createElement("div"); phSecZh.innerHTML = photoEntryBigHTML("zh"); if (phSecZh.firstChild) G1.appendChild(phSecZh.firstChild); /* v118c: muc lon chup anh o dau G1 */
     var G2 = mkCluster("G2", "G2 · Ngữ pháp");
     var G3 = mkCluster("G3", "G3 · Luyện nghe-nói-đọc-viết");
     var G4 = mkCluster("G4", "G4 · Thi");
@@ -16733,6 +16754,7 @@ function viewPracticeZh(app) {
     /* v117: nut Mo Gia su AI (the tutorCard, nhom G6). */
     Array.prototype.slice.call(document.querySelectorAll("[data-tutorfloat]")).forEach(function (b) { b.onclick = function () { tutorFloatOpen(); }; });
   })();
+  wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   (function () { var jobs = [{ id: "zhGameCardPractice", html: zhPracticeEntHTML, wire: zhPracticeEntWire }]; if (videoNewEntHTML["zh"]) jobs.push({ id: "videoNewEntzh", html: function () { return videoNewEntHTML["zh"]; }, wire: null }); practiceEntLazy("zh", jobs); })();
 }
 /* ---------- DOT 2a (26/10/2026): SRS + So loi sai track Trung ----------
@@ -17390,6 +17412,9 @@ function renderZhVocab(app, l) {
   var zhShowBody = zhStep === 0;
   var zhShowExv = zhStep === 0;
   var zhShowListen = zhStep !== 4;
+  /* v118c (Bui 08:19): buoc 2 (step 1) chi nghia — BO nut video nguoi ban dia o buoc 2, GIU nut Nghe. */
+  var zhShowVideo = zhStep !== 1 && zhStep !== 4;
+  var zhStep2 = zhStep === 1; /* v118c (Bui 08:24): buoc 2 chi nghia — BO nut Soi guong; nut Chup anh GO HAN khoi the (Bui 08:30: thanh muc lon rieng o G1) */
   var zhShowStroke = zhStep === 0;
   var zhMaskEx = zhStep === 1 || zhStep === 2;
   /* v109: anh minh hoa chi hien o buoc 1 + 3 (nhu the Anh). */
@@ -17411,12 +17436,12 @@ function renderZhVocab(app, l) {
     + '</div>'
     + '<div id="zhMulti">' + vkZhPanelHTML(zvk, c, cards, pos, d) + '</div>'
     + '</div>'
-    + '<div class="vocab-pron">' + (zhShowListen ? nativeVideoHTML(c.han, "chinese") : '') + '<div id="zhMirrorSlot" style="display:none"></div><div id="zhMirrorResult"></div></div>'
-    + '<div class="vocab-actions row">' + (zhShowListen ? '<button class="btn" id="zhListen">🔊 Nghe</button>' : '') + '<button class="btn" id="zhMirrorBtn">🎤 Soi gương + ghi âm</button><button class="btn" id="zhPrev"' + (pos === 0 ? ' disabled' : '') + '>← Thẻ trước</button></div>'
+    + '<div class="vocab-pron"' + (zhStep === 1 ? ' style="display:none"' : '') + '>' + (zhShowVideo ? nativeVideoHTML(c.han, "chinese") : '') + '<div id="zhMirrorSlot" style="display:none"></div><div id="zhMirrorResult"></div></div>'
+    + '<div class="vocab-actions row">' + (zhShowListen ? '<button class="btn' + (zhStep2 ? ' btn-sm' : '') + '" id="zhListen">🔊 Nghe</button>' : '') + (zhStep2 ? '' : '<button class="btn" id="zhMirrorBtn">🎤 Soi gương + ghi âm</button>') + '<button class="btn' + (zhStep2 ? ' btn-sm' : '') + '" id="zhPrev"' + (pos === 0 ? ' disabled' : '') + '>← Thẻ trước</button></div>'
     + '<details class="card" style="margin-top:8px"><summary><b>Thêm</b> — tra từ, đánh dấu khó</summary><div class="row" style="margin-top:6px">' + ((zhShowListen && zhStep !== 3) ? '<button class="btn" id="zhCardDictBtn">🔍 Tra từ</button>' : '') + '<button class="btn" id="zhHardBtn">' + (isHard ? 'Đã đánh dấu khó ✓' : 'Đánh dấu khó') + '</button></div><p class="mut" style="margin-top:8px">Cách học khác cho bộ từ này:</p>' + vocabMethodsBtns97() + '</details>'
     + '<div id="zhStrokeArea" style="margin-top:8px">' + (zhShowStroke ? zhStrokeAreaHTML(c) : '') + '</div>'
     + '<div class="vocab-foot"><p class="mut">Thẻ ' + (pos + 1) + '/' + cards.length + ' · Vòng ' + zhRound.round + '/' + zhRound.total + ' · Nấc nhớ: ' + zhBoxLevel + '/5</p>' + lastZhPronLineHTML(d.key + ":" + pos) + '</div>'
-    + '<p><button class="btn btn-sm" data-photoentry>📷 Chụp ảnh thêm từ</button></p></div></div>';
+    + '</div></div>';
   app.innerHTML = html;
   wireBack();
   wireVocabMethods97(app, d.key, "zh");
@@ -17453,7 +17478,7 @@ function renderZhVocab(app, l) {
     render();
     /* v107d: dung ghi (guong thu lai) cung phai dua dau the ve khung nhin — render nay xoa giao dien guong dai, vi tri cuon cu bi lech. */ vkScrollCardTop();
   };
-  $("#zhMirrorBtn").onclick = function () {
+  var zmb0 = $("#zhMirrorBtn"); if (zmb0) zmb0.onclick = function () { /* v118c: nut khong co o buoc 2 — phai co guard, khong thi render crash */
     var slot = $("#zhMirrorSlot"), res = $("#zhMirrorResult");
     if (!slot) return;
     if (zhMirOn) { zhMirStop(); return; }
@@ -18791,12 +18816,11 @@ function renderTcTpVocab5(track, stepId, back) {
     + (ttWordMode === "big" ? '<p class="vocab-focus-line"><span class="mut">' + esc(pronShow) + '</span>' + (c.personal ? ' <span class="chip">Cá nhân</span>' : '') + vkUnsureHTML(c) + '</p>' : '')
     + vkCardImageHTML(c, ttShowImg)
     + (ttShowBody ? '<div id="vocabMeaningBody">' + (ttShowMeaning ? '<p class="vocab-focus-line"><b>' + esc(c.vi || "") + '</b></p>' : '') + '<p>' + esc(ttMaskEx ? vkMaskWord(c.col || "", c.w) : (c.col || "")) + ((c.col && c.ex) ? ' — ' : '') + esc(ttMaskEx ? vkMaskWord(c.ex || "", c.w) : (c.ex || "")) + '</p>' + (ttShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '') + (ttStep === 0 && c.personal && c.myEx && c.sen ? '<p class="mut">Giải thích: ' + esc(c.myEx) + '</p>' : '') + '</div>' : '')
-    + (ttStep !== 4 ? '<div class="row"><button class="btn" id="ttListen">🔊 Nghe</button></div>' : '')
+    + (ttStep !== 4 ? '<div class="row"><button class="btn' + (ttStep === 1 ? ' btn-sm' : '') + '" id="ttListen">🔊 Nghe</button></div>' : '')
     + tcTpVkPanelHTML(sess, vk, c, cards, pos)
     + '</div>'
     + vocabMirrorHTML(isTc ? "tc" : "tp")
     + '<details class="card" style="margin-top:8px"><summary><b>Thêm</b> — cách học khác cho bộ từ này</summary>' + vocabMethodsBtns97() + '</details>'
-    + '<p><button class="btn btn-sm" data-photoentry>📷 Chụp ảnh thêm từ</button></p>'
     + '</section>';
   app.innerHTML = html;
   /* v108c: dong vi tri (#u7Position) nhu the Anh/ZH — truoc day tcOpenStep /
@@ -19210,7 +19234,7 @@ function viewPracticeTc(app) {
     + '<section class="card next-card" id="tcPracticeNextCard"><p class="eyebrow">TIẾP THEO NÊN LUYỆN</p><h3>' + esc(n ? n.meta.title : "Đã xong hết các bước TOEIC hiện có 🎉") + '</h3>' + (n ? '<button class="btn btn-primary" data-tcnext="1">Tiếp theo nên luyện</button>' : '') + '</section>';
   html += practiceFilterHTML("", "tc");
   html += typeEntryRowHTML("tc");
-  html += vocabGroupsHTML(TC_STAGES, tcStepBtnHTML, tcStepStatus, tcStepMeta, "tcVocabSearch", "tcVocabGroups", "Từ vựng công sở");
+  html += vocabGroupsHTML(TC_STAGES, tcStepBtnHTML, tcStepStatus, tcStepMeta, "tcVocabSearch", "tcVocabGroups", "Từ vựng công sở", "tc");
   html += '<section class="card"><h3>Ngữ pháp trọng tâm (' + TC_GRAMMAR.length + ' trạm)</h3><div class="row">' + TC_GRAMMAR.map(function (g, i) { return tcStepBtnHTML("g" + i); }).join("") + '</div></section>';
   html += listenHubHTML("tc");
   [1, 2, 3, 4].forEach(function (p) {
@@ -19307,6 +19331,7 @@ function viewPracticeTc(app) {
   listenHubWire();
 
   wireVocabSearch("tcVocabSearch", "tcVocabGroups");
+  wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   (function () { var jobs = [{ id: "tcGameCardPractice", html: tcPracticeEntHTML, wire: tcPracticeEntWire }]; if (videoNewEntHTML["tc"]) jobs.push({ id: "videoNewEnttc", html: function () { return videoNewEntHTML["tc"]; }, wire: null }); practiceEntLazy("tc", jobs); })();
 }
 /* ---------- v103 P1.6 — BUOI ON TRON TC/TP (giong buoi on tron EN/ZH) ----------
@@ -20029,7 +20054,7 @@ function viewPracticeTp(app) {
   html += '<section class="card"><h3>Hangul — học theo thứ tự (5 bài)</h3><div class="row">' + TP_HANGUL.map(function (h, i) { return tpStepBtnHTML("h" + i); }).join("") + '</div></section>';
   html += practiceFilterHTML("", "tp");
   html += typeEntryRowHTML("tp");
-  html += vocabGroupsHTML(TP_STAGES, tpStepBtnHTML, tpStepStatus, tpStepMeta, "tpVocabSearch", "tpVocabGroups", "Từ vựng đời sống");
+  html += vocabGroupsHTML(TP_STAGES, tpStepBtnHTML, tpStepStatus, tpStepMeta, "tpVocabSearch", "tpVocabGroups", "Từ vựng đời sống", "tp");
   html += '<section class="card"><h3>Ngữ pháp trọng tâm (' + TP_GRAMMAR.length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return tpStepBtnHTML("g" + i); }).join("") + '</div></section>';
   html += listenHubHTML("tp");
   [1, 2, 3, 4].forEach(function (p) {
@@ -20134,6 +20159,7 @@ function viewPracticeTp(app) {
   listenHubWire();
 
   wireVocabSearch("tpVocabSearch", "tpVocabGroups");
+  wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   (function () { var jobs = [{ id: "tpFunVideoPractice", html: tpPracticeFunHTML, wire: null }]; if (videoNewEntHTML["tp"]) jobs.push({ id: "videoNewEnttp", html: function () { return videoNewEntHTML["tp"]; }, wire: null }); practiceEntLazy("tp", jobs); })();
 }
 function viewReviewTp(app) {
