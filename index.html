@@ -8105,9 +8105,9 @@ function renderPronDiag(app, l) {
    (2) doc lai the tu buoc 4: state.wordPron — chi muc co ai<80 VA co sym+word
        (luu tu v119b; muc cu khong co sym/word thi khong gom duoc — khong hien
        so lieu gia, khong suy am tu chinh ta).
-   CHO THIEU da biet (khong lam ban mong lang le): ZH — diem buoc 4 chi o
-   ZH_PRON (chi trong phien, khong luu state); TP — buoc 4 chua co AI cham.
-   Tu con sai cua ZH/TP hien chi lay tu chan doan; muc se ghi ro dieu nay. */
+   Tu v123: diem buoc 4 ZH/TP deu luu state.wordPron (ZH: sym = ten thanh
+   dieu; TP: sym = jamo tran) va duoc gom vao "tu con sai" qua pronWeakData
+   (chi muc ai<80 co sym+word) — khong chi lay tu chan doan nua. */
 function pronWeakDiagSym(track, sym) {
   var sets = PRON_DIAG_SETS[track] || [];
   for (var i = 0; i < sets.length; i++) if (sets[i].sym === sym) return sets[i];
@@ -8476,23 +8476,17 @@ function vkLessonHeadHTML(pos, total) {
 
 
 
-/* ----- Thẻ từ: AI chấm đạt mới qua, không còn tự đánh dấu -----
-   Từ đợt này (Bùi chốt 17:03 25/10): bỏ hẳn hai nút tự đánh dấu ở
-   thẻ từ vựng — AI chấm đạt thì đã là thuộc rồi. Người học bấm "Phát âm"
-   (một nút bật cả camera lẫn mic); hệ thống tự chuyển sang AI chấm khi đã
-   thấy mở mồm và nghe được âm thanh.
-   ĐÍNH CHÍNH theo luật mới hơn (Bùi 10:38–10:39 26/10: mỗi từ học qua
-   nhiều kiểu — phát âm là cổng qua): phát âm đạt ở các bước đầu CHỈ ghi
-   nhận, KHÔNG tự qua thẻ; thẻ chỉ xong khi đủ 5 bước + qua cổng.
-   v107 (07/11): BO CONG PHAT AM o bai tu vung — luong moi nghe -> chon
-   nghia -> dung trong cau -> doc lai -> go; diem phat am (onGraded) chi
-   ghi nhan + hien phan hoi theo am, dat 80/80 o buoc doc lai thi tu sang
-   buoc go, khong dat van sang duoc buoc go sau mot luot doc; the chi xong
-   khi go dung o buoc 5/5. Chi BAI LUYEN AM moi khoa tuan tu theo diem.
-   Chưa đạt thì ở lại thẻ, hiện khối miêu tả (hai điểm riêng + mục cần sửa)
-   kèm nút "Đọc lại". Mic/camera bị từ chối hoặc chưa đăng nhập thì báo rõ
-   và KHÔNG tính đạt chuẩn, không đường lách. Bấm lại nút "Phát âm" trong
-   lúc đang ghi là dừng và chấm ngay (dự phòng khi tự chấm chưa kích hoạt). */
+/* ----- Thẻ từ: 5 bước nghe -> chọn nghĩa -> dùng trong câu -> đọc lại -> gõ -----
+   Bước 4 đọc lại: chấm tầng 1 nhị phân (chỉ mic, nút "Đọc to"). Đạt thì
+   hiện "Đã đọc ✓" + nút "Tiếp tục →" (bấm mới sang bước gõ); chưa đạt vẫn
+   bấm "Tiếp tục →" được sau một lượt đọc; không mic thì "Tiếp tục →" hiện
+   ngay, không tính điểm phát âm. Gương quỹ đạo là nút phụ riêng (chỉ
+   camera, chỉ để nhìn, không điểm) — không bao giờ bắt mic + camera cùng
+   lúc. Điểm đọc lại CHỈ ghi nhận, không tự qua thẻ; thẻ chỉ xong khi gõ
+   đúng ở bước 5/5. Chỉ bản đồ pinyin ZH / Hangul TP còn khóa tuần tự;
+   thẻ từ và bài luyện âm EN không khóa bước nào.
+   Lịch sử: 25/10 từng có cổng phát âm + nút tự đánh dấu (đã bỏ ở v107);
+   26/10 chốt phát âm đạt chỉ ghi nhận, không tự qua thẻ. */
 var VK = { active: false, key: "", word: "", sym: "", slot: null, result: null, onPass: null, onGraded: null };
 var VKR = null; /* thong tin lan cham gan nhat de nut "Doc lai" khoi dong lai dung the */
 function vocabKnownRetry() { if (!VKR) return; var rSlot = VKR.slotEl, rRes = VKR.resultEl; /* v118b: sau lan cham truoc, render() da tao lai #vocabCheckSlot/#vocabCheckResult moi — tham chieu VKR cu bi tach khoi DOM, cham lai se ghi vao phan tu chet (ket qua cu van hien). Lay lai phan tu dang hien cung id khi phan tu cu da tach. */ if (rSlot && !rSlot.isConnected && rSlot.id) { var s2 = document.getElementById(rSlot.id); if (s2) rSlot = s2; } if (rRes && !rRes.isConnected && rRes.id) { var r2 = document.getElementById(rRes.id); if (r2) rRes = r2; } vocabKnownStart(VKR.key, VKR.word, VKR.sym, rSlot, rRes, VKR.onPass, VKR.onSkip, VKR.onGraded); }
@@ -9882,8 +9876,8 @@ function videoSlotHTML(key) {
 /* v117c L1: khung video LAZY — chi hien anh dai dien + nut phat, chua chen
    iframe that. Iframe that chi duoc chen khi the <details> chua no mo ra
    lan dau (su kien toggle) hoac nguoi hoc bam nut phat. Trang Luyen tap ZH
-   co 72 iframe YouTube trong DOM ngay sau render ban dau (29 xiaoyun +
-   11 listenExtra + 23 Video moi + 3 janus + 1 wordorder + 5 video giai
+   co 73 iframe YouTube trong DOM ngay sau render ban dau (29 xiaoyun +
+   11 listenExtra + 24 Video moi + 3 janus + 1 wordorder + 5 video giai
    tri) — mo G3 la trinh duyet phai tai ~40 embed cung luc, de sap tab
    tren may yeu. Chi ap lazy cho cum nang (xiaoyun, listenExtra, Video
    moi); bai hoc le (videoSlotIf thuong) va cum nho (janus/wordorder) giu
@@ -10268,10 +10262,11 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
 }
 
 
-/* ----- Phát âm GĐ2: khóa tuần tự U6 + từ/cụm/câu từ kho cũ theo IPA ----- */
-/* Dải 44 âm hiện đủ để xem trước; bài học chỉ mở khi âm đó đã xong hoặc là
-   âm chưa xong đầu tiên. Âm bị khóa khi bấm vào: lần đầu mỗi phiên hiện hộp
-   nhắc đầy đủ, các lần sau chỉ toast ngắn; âm đó gom vào state.phSkipped. */
+/* ----- Phát âm GĐ2: từ/cụm/câu từ kho cũ theo IPA ----- */
+/* v122: mo het 44 am — dai am hien du de xem truoc, bam am nao cung hoc
+   duoc ngay; thu tu dot chi la goi y. Khong con khoa am / hop nhac khoa
+   (phOpenSym/phTryOpenSound luon tra true); chi "Bo qua am nay" co chu y
+   (phSkipSound) moi ghi vao state.phSkipped. */
 function phIdx(sym) { return phAllOrder().indexOf(sym); }
 /* v122: mo het 44 am — khong con khoa tuan tu o danh sach am. Nguoi hoc bam
    vao am nao cung hoc duoc ngay; thu tu dot chi la goi y. */
@@ -10364,7 +10359,7 @@ function phExtraSentences(sym) {
   return out.slice(0, 2);
 }
 
-/* ----- Phát âm: MỘT bảng 44 âm, khóa tiến tuần tự trong đợt ----- */
+/* ----- Phát âm: MỘT bảng 44 âm, mở hết (thứ tự đợt chỉ là gợi ý) ----- */
 function phDone(sym) { return !!(state.phDone && state.phDone[sym]); }
 function phAllOrder() { return RB_PH_WAVES[1].concat(RB_PH_WAVES[2], RB_PH_WAVES[3]); }
 function phNextSym() { var o = phAllOrder(); for (var i = 0; i < o.length; i++) if (!phDone(o[i]) && (!state.phSkipped || state.phSkipped.indexOf(o[i]) < 0)) return o[i]; return null; }
@@ -13754,8 +13749,9 @@ function listenVoiceNoteHTML() {
    Nghe chep -> Shadowing Xem/Luyen -> Shadowing 10 buoc -> Nghe thu dong/
    Podcast -> Video co phu de that (4 dang) -> Link tu gan. Moi cach = 1
    dong ten + 1 nut vao; man dich tu noi cach lam. ZH/TC/TP chi co cac
-   cach that su co o track do (ZH khong co nghe chep/Shadowing/Podcast
-   rieng; TC/TP chi co Nghe hieu + Video 4 dang + Link tu gan). */
+   cach that su co o track do (ZH tu v126 da co Nghe chep + Shadowing
+   Xem/Luyen + Podcast qua video zh-e10, chua co Shadowing 10 buoc;
+   TC/TP chi co Nghe hieu + Video 4 dang + Link tu gan). */
 var LISTEN_HUB_ROWS = {
   en: [
     { k: "compre", t: "Nghe hiểu" },
@@ -21251,7 +21247,7 @@ function viewReviewTc(app) {
 /* Dữ liệu ở TP_HANGUL / TP_VOCAB / TP_GRAMMAR / TP_LISTEN / TP_READ / TP_MOCK_L / TP_MOCK_R / TP_STAGES (content-new.js). */
 /* TOPIK I thi thật (PBT): Nghe 30 + Đọc 40 = 70 câu, 100 phút, 200 điểm, cấp 1–2. Web này là nội dung tự soạn rút gọn; */
 /* cấp thi thử chỉ là ước lượng nội bộ (tổng 200: từ 140 = cấp 2, 80–139 = cấp 1), KHÔNG phải bảng chính thức. */
-/* TOPIK II cấp 3–6 trong track này mới chỉ là khung nền tảng ở chặng cuối, chưa phải lộ trình đầy đủ. */
+/* TOPIK II cấp 3–6: có lộ trình đầy đủ — mỗi cấp một chặng (TP_STAGE_EXPAND16_L3–L6: từ vựng/ngữ pháp/nghe/đọc/viết + kiểm tra cuối cấp + thi thử); xem thêm TP_WRITE 63–70. */
 var tpMockTimer = null;
 function tpSpeak(text) { try { if (window.speechSynthesis && window.SpeechSynthesisUtterance) { window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "ko-KR"; u.rate = 0.85; window.speechSynthesis.speak(u); } } catch (e) {} }
 function tpNorm() {

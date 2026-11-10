@@ -483,7 +483,7 @@ var RB_CHAPTER_MAP = [
 // Thứ tự trong chương: Từ vựng -> Ngữ pháp -> Đọc -> Nghe ngắn -> Nghe dài ->
 // Nói -> Nhập vai -> Viết -> Luyện viết -> Gõ câu. Bộ từ chưa gắn band (16 bộ)
 // không vào chương nào — vẫn mở được ở tab Luyện tập, mục "Chưa xếp band".
-// Bài kiểm tra cuối chương chỉ có ở chương 1; các chương sau chưa có.
+// Bài kiểm tra cuối chương: có ở mọi chương — chapterTestQuestions(band) gom 10 câu mỗi phần (Ngữ pháp/Đọc/Nghe dài) từ kho của chính band đó, mở khi xong 80% số bước (chapterTestOpen).
 function typingModeOfLevel(lv) {
   lv = lv || "";
   if (lv.indexOf("6,0") >= 0 || lv.indexOf("6.0") >= 0 || lv.indexOf("6,5") >= 0 || lv.indexOf("6.5") >= 0 || lv.indexOf("7,") >= 0 || lv.indexOf("7.") >= 0) return "nangcao";
