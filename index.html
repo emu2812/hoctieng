@@ -10658,7 +10658,7 @@ function renderPronLesson(app, l) {
   if (sub === 0) {
     html += '<iframe src="' + segUrl + '" id="phSegFrame" allowfullscreen></iframe><p class="mut">' + esc(phVidCap) + '</p>'
       + phDetailHTML(p)
-      + '<div class="qblock"><p><b>Từ ví dụ: ' + esc(p.w) + '</b> <span class="mut">— ' + esc(p.vi) + '</span></p><div class="row"><button class="btn btn-primary" id="phHearEx">🔊 Nghe từ ví dụ</button></div><p class="mut">Màn này chỉ xem + nghe — đọc to ở các màn Từ đơn, Cụm từ, Câu mẫu sau.</p></div>'
+      + '<div class="qblock"><p><b>Từ ví dụ: ' + esc(p.w) + '</b> <span class="mut">— ' + esc(p.vi) + '</span></p><div class="row"><button class="btn btn-primary" id="phHearEx">🔊 Nghe từ ví dụ</button><button class="btn" id="phMirrorOpen">👁 Soi gương (tùy chọn)</button></div><p class="mut">Màn này chỉ xem + nghe — đọc to ở các màn Từ đơn, Cụm từ, Câu mẫu sau.</p>' + phMirrorBoxHTML() + '</div>'
       + '<div id="phShadowQuiz">' + phShadowQuizHTML(l, sym) + '</div>'
       + mrLibSectionHTML();
   } else if (sub === 1) {
@@ -10731,7 +10731,8 @@ function renderPronLesson(app, l) {
   var psNext2 = $("#phNextSound2");
   if (psNext2) psNext2.onclick = function () { if (next44) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; render(); } };
   var phHe = $("#phHearEx"); if (phHe) phHe.onclick = function () { speak(p.w); l.shadowDone = true; l.shadowDoneSym = sym; render(); };
-  if (sub === 2 || sub === 3 || sub === 4) { pronT1Wire(l, sym); phMirrorWire(l); }
+  if (sub === 2 || sub === 3 || sub === 4) { pronT1Wire(l, sym); }
+  if (sub === 0 || sub === 2 || sub === 3 || sub === 4) { phMirrorWire(l); } /* v125c: guong o ca buoc 1 nhu ZH/TP */
   var phBack = $("#phBackToPractice");
   if (phBack) phBack.onclick = function () { l.sub = 0; render(); };
   $$("#phSteps [data-phstep]").forEach(function (b) { b.onclick = function () { l.sub = +b.dataset.phstep; render(); }; });
