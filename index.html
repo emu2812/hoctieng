@@ -4607,9 +4607,7 @@ function viewPractice(app) {
     + guideLine("practiceIntro", "Luyện riêng theo từng kỹ năng — mở nhóm cần luyện, bấm bài để học. Đây là chỗ tra cứu và luyện riêng từng kỹ năng — đường học chính vẫn ở tab Bản đồ.")
   /* --- Nhom luyen tap theo muc dich (v76: gop vo boc + noi dung thanh mot khoi) --- */
   html += pronWeakHTML("en") /* v125b: the Am yeu cua toi nhu ZH/TC/TP — lap day slot ppWeakSlot von de trong (khong cham ; de khong dut chuoi += xuong the Tro giang) */
-    + '<details class="card" id="practiceGrpTutor"><summary><b>🧑‍🏫 Trợ giảng — AI nâng cấp bài của bạn</b></summary>'
-    + '<p class="mut">Bạn tự lập dàn ý Writing hoặc tự soạn câu trả lời Speaking bằng ý của mình trước, AI chỉ nâng cấp chính bài đó: giữ ý, gợi ý cụm nên dùng. AI không viết thay bài cho bạn.</p>'
-    + '<div class="row"><button class="btn" data-spectutor="write">Lập dàn ý Writing →</button><button class="btn" data-spectutor="speak">Soạn câu trả lời Speaking →</button></div></details>'
+    + specTutorGroupHTML("en") /* v129: nhom Tro giang dung chung 4 track */
     + '<h3 id="ppSkillHead" style="margin-top:14px">📚 Theo kỹ năng</h3>'
     + '<details class="card" id="ppStage"><summary><b>🗺️ Theo chặng</b> — bổ trợ + kiểm tra đầu vào</summary><div id="ppStageBody"></div></details>'
     + '<div id="ppExamSlot"></div>';
@@ -13821,15 +13819,30 @@ function listenHubHTML(track) {
    - Tro giang AI (nang cap bai Noi/Viet, data-spectutor) hien chi co noi
      dung IELTS nen chi EN co 2 nut that; ZH/TC/TP ghi ro dang cho nang
      cap cho track do (khong dat nut chet). */
+/* v129: NHOM TRO GIANG DUNG CHUNG 4 TRACK — cung vi tri (ngay sau the Am yeu),
+   cung luong (2 nut mo bai specTutor), cung dang ket qua; chi khac noi dung
+   theo track (loi gioi thieu + nhan nut). EN giu nguyen tu chu. */
+function specTutorGroupHTML(track) {
+  var intro = {
+    en: "Bạn tự lập dàn ý Writing hoặc tự soạn câu trả lời Speaking bằng ý của mình trước, AI chỉ nâng cấp chính bài đó: giữ ý, gợi ý cụm nên dùng. AI không viết thay bài cho bạn.",
+    zh: "Bạn tự lập dàn ý Viết hoặc tự soạn câu trả lời Nói bằng ý của mình trước, AI chỉ nâng cấp chính bài đó: giữ ý, gợi ý cụm tiếng Trung nên dùng (kèm pinyin). AI không viết thay bài cho bạn.",
+    tc: "Bạn tự lập dàn ý email hoặc tự soạn câu trả lời Nói bằng ý của mình trước, AI chỉ nâng cấp chính bài đó: giữ ý, gợi ý cụm tiếng Anh công sở nên dùng. AI không viết thay bài cho bạn.",
+    tp: "Bạn tự lập dàn ý Viết hoặc tự soạn câu trả lời Nói bằng ý của mình trước, AI chỉ nâng cấp chính bài đó: giữ ý, gợi ý cụm tiếng Hàn nên dùng. AI không viết thay bài cho bạn."
+  };
+  var wBtn = { en: "Lập dàn ý Writing →", zh: "Lập dàn ý Viết →", tc: "Lập dàn ý Email →", tp: "Lập dàn ý Viết →" };
+  var sBtn = { en: "Soạn câu trả lời Speaking →", zh: "Soạn câu trả lời Nói →", tc: "Soạn câu trả lời Nói →", tp: "Soạn câu trả lời Nói →" };
+  var t = intro[track] ? track : "en";
+  /* v129b: KHONG de nhan VIP o the nhom — tab Luyen tap nam duoi lop phu game nen nhan VIP se ro sang man game (luat parroto3: man hoc khong co nhan tra phi/VIP); trang thai VIP chi hien o man bai Tro giang (cong VIP mau v104). */
+  return '<details class="card" id="practiceGrpTutor"><summary><b>🧑‍🏫 Trợ giảng — AI nâng cấp bài của bạn</b></summary>'
+    + '<p class="mut">' + intro[t] + '</p>'
+    + '<div class="row"><button class="btn" data-spectutor="write">' + wBtn[t] + '</button><button class="btn" data-spectutor="speak">' + sBtn[t] + '</button></div></details>';
+}
 function tutorCardHTML(track) {
   var h = '<details class="card" id="tutorCard' + track + '"><summary><b>🤖 Trò chuyện AI</b></summary>';
   h += '<p class="mut">Trò chuyện với gia sư AI để hỏi bài, luyện nói, và nhận gợi ý học riêng cho bạn.</p>';
   h += '<div class="row"><button class="btn btn-amber" data-tutorfloat="' + track + '">💬 Mở Gia sư AI</button></div>';
-  if (track === "en") {
-    h += '<p class="mut">Trợ giảng AI (nâng cấp bài Nói/Viết) ở thẻ "Trợ giảng" ngay trong nhóm này.</p>';
-  } else {
-    h += '<p class="mut">Trợ giảng AI chấm Nói/Viết hiện chỉ có ở track IELTS — đang chờ nâng cấp cho track này.</p>';
-  }
+  /* v129: Tro giang AI co o ca 4 track — the "Tro giang" nam ngay trong nhom G6 nay. */
+  h += '<p class="mut">Trợ giảng AI (nâng cấp bài Nói/Viết) ở thẻ "Trợ giảng" ngay trong nhóm này.</p>';
   h += '</details>';
   return h;
 }
@@ -14820,31 +14833,100 @@ function renderSkillRoleplay(app, l) {
    (callAiTutorChat, can dang nhap, AI loi thi bao loi, khong tu cham).
    Bai cua hoc vien luu o state.specTutor (cung localStorage ielts_rebuild_v1)
    de mo lai van thay, khong mat khi doi tab. */
-function specTutorSave() {
+/* v129: ban nhap Tro giang luu RIENG theo track — EN giu dung hinh phang cu
+   (state.specTutor = {kind, draft, upgraded, at}) de khong vo ban nhap cu;
+   ZH/TC/TP luu o state.specTutor.byTrack[track]. */
+function specTutorSlot(track) {
   if (!state.specTutor) state.specTutor = {};
-  state.specTutor.at = todayStr();
+  if (!track || track === "en") return state.specTutor;
+  if (!state.specTutor.byTrack) state.specTutor.byTrack = {};
+  if (!state.specTutor.byTrack[track]) state.specTutor.byTrack[track] = {};
+  return state.specTutor.byTrack[track];
+}
+function specTutorSave(slot) {
+  slot = slot || state.specTutor || {};
+  slot.at = todayStr();
   saveState();
 }
-function specTutorPrompt(kind, draft) {
-  if (kind === "speak") return "Bạn là trợ giảng IELTS Speaking. Học viên đã TỰ soạn câu trả lời Speaking dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính bài này — giữ nguyên ý, giữ nguyên thứ tự ý, không thêm ý mới, không viết một bài nói mới về chủ đề, không viết thay bài cho học viên. Trả lời bằng tiếng Việt đơn giản, ví dụ trước - quy tắc sau, theo đúng 3 phần: (1) BẢN NÂNG CẤP GIỮ Ý: viết lại câu trả lời, mỗi ý của học viên vẫn ở đúng chỗ, chỉ sửa cách diễn đạt cho tự nhiên và đúng ngữ pháp hơn. (2) CỤM NÊN DÙNG: liệt kê từng cụm hay dùng được cho chính các ý này, mỗi cụm kèm nghĩa tiếng Việt ngắn và một câu ví dụ. (3) VÌ SAO SỬA THẾ: giải thích ngắn từng chỗ sửa chính, nói rõ chỗ nào là lỗi sai và chỗ nào chỉ là nâng cấp cho hay hơn.\n\nCÂU TRẢ LỜI CỦA HỌC VIÊN:\n" + draft;
-  return "Bạn là trợ giảng IELTS Writing. Học viên đã TỰ lập dàn ý (outline) dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính dàn ý này — giữ nguyên ý, giữ nguyên thứ tự ý, không thêm ý mới, không viết một bài luận mới về chủ đề, không viết thay bài cho học viên. Trả lời bằng tiếng Việt đơn giản, ví dụ trước - quy tắc sau, theo đúng 3 phần: (1) DÀN Ý ĐÃ NÂNG CẤP: giữ đúng các ý của học viên, mỗi ý một dòng, chỉ sửa cách diễn đạt, thêm từ nối và cụm câu cho mạch lạc hơn. (2) CỤM NÊN DÙNG: liệt kê từng cụm hay dùng được cho chính các ý này, mỗi cụm kèm nghĩa tiếng Việt ngắn và một câu ví dụ. (3) VÌ SAO SỬA THẾ: giải thích ngắn từng chỗ sửa chính, nói rõ chỗ nào là lỗi sai và chỗ nào chỉ là nâng cấp cho hay hơn.\n\nDÀN Ý CỦA HỌC VIÊN:\n" + draft;
-}
+function specTutorPrompt(kind, draft, track) {
+  /* v129: vai tro AI theo track (EN giu nguyen tu chu khi goi 2 tham so);
+     khung 3 phan + luat giu y giong het 4 track. */
+  track = track || "en";
+  var isSpeak = kind === "speak";
+  var R = {
+    en: { role: isSpeak ? "Bạn là trợ giảng IELTS Speaking." : "Bạn là trợ giảng IELTS Writing.",
+      task: isSpeak ? "Học viên đã TỰ soạn câu trả lời Speaking dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính bài này" : "Học viên đã TỰ lập dàn ý (outline) dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính dàn ý này",
+      newWork: isSpeak ? "không viết một bài nói mới về chủ đề" : "không viết một bài luận mới về chủ đề",
+      p1: isSpeak ? "(1) BẢN NÂNG CẤP GIỮ Ý: viết lại câu trả lời, mỗi ý của học viên vẫn ở đúng chỗ, chỉ sửa cách diễn đạt cho tự nhiên và đúng ngữ pháp hơn." : "(1) DÀN Ý ĐÃ NÂNG CẤP: giữ đúng các ý của học viên, mỗi ý một dòng, chỉ sửa cách diễn đạt, thêm từ nối và cụm câu cho mạch lạc hơn.",
+      p2: "(2) CỤM NÊN DÙNG: liệt kê từng cụm hay dùng được cho chính các ý này, mỗi cụm kèm nghĩa tiếng Việt ngắn và một câu ví dụ.",
+      label: isSpeak ? "CÂU TRẢ LỜI CỦA HỌC VIÊN:" : "DÀN Ý CỦA HỌC VIÊN:" },
+    zh: { role: isSpeak ? "Bạn là trợ giảng Nói tiếng Trung (HSKK)." : "Bạn là trợ giảng Viết tiếng Trung (HSK).",
+      task: isSpeak ? "Học viên đã TỰ soạn câu trả lời Nói tiếng Trung dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính bài này" : "Học viên đã TỰ lập dàn ý (outline) cho đoạn văn tiếng Trung dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính dàn ý này",
+      newWork: isSpeak ? "không viết một bài nói mới về chủ đề" : "không viết một đoạn văn mới về chủ đề",
+      p1: isSpeak ? "(1) BẢN NÂNG CẤP GIỮ Ý: viết lại câu trả lời, mỗi ý của học viên vẫn ở đúng chỗ, chỉ sửa cách diễn đạt cho tự nhiên và đúng ngữ pháp hơn." : "(1) DÀN Ý ĐÃ NÂNG CẤP: giữ đúng các ý của học viên, mỗi ý một dòng, chỉ sửa cách diễn đạt, thêm từ nối và cụm câu cho mạch lạc hơn.",
+      p2: "(2) CỤM NÊN DÙNG: liệt kê từng cụm tiếng Trung hay dùng được cho chính các ý này, mỗi cụm kèm pinyin và nghĩa tiếng Việt ngắn và một câu ví dụ.",
+      label: isSpeak ? "CÂU TRẢ LỜI CỦA HỌC VIÊN:" : "DÀN Ý CỦA HỌC VIÊN:" },
+    tc: { role: isSpeak ? "Bạn là trợ giảng Nói tiếng Anh công sở (TOEIC Speaking)." : "Bạn là trợ giảng Viết email công việc tiếng Anh (TOEIC Writing).",
+      task: isSpeak ? "Học viên đã TỰ soạn câu trả lời Nói tiếng Anh công sở dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính bài này" : "Học viên đã TỰ lập dàn ý email công việc dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính dàn ý này",
+      newWork: isSpeak ? "không viết một bài nói mới về chủ đề" : "không viết một email mới về chủ đề",
+      p1: isSpeak ? "(1) BẢN NÂNG CẤP GIỮ Ý: viết lại câu trả lời, mỗi ý của học viên vẫn ở đúng chỗ, chỉ sửa cách diễn đạt cho tự nhiên và đúng ngữ pháp hơn." : "(1) DÀN Ý ĐÃ NÂNG CẤP: giữ đúng các ý của học viên, mỗi ý một dòng, chỉ sửa cách diễn đạt, thêm từ nối và cụm câu cho mạch lạc hơn.",
+      p2: "(2) CỤM NÊN DÙNG: liệt kê từng cụm tiếng Anh công sở hay dùng được cho chính các ý này, mỗi cụm kèm nghĩa tiếng Việt ngắn và một câu ví dụ.",
+      label: isSpeak ? "CÂU TRẢ LỜI CỦA HỌC VIÊN:" : "DÀN Ý CỦA HỌC VIÊN:" },
+    tp: { role: isSpeak ? "Bạn là trợ giảng Nói tiếng Hàn (TOPIK)." : "Bạn là trợ giảng Viết tiếng Hàn (TOPIK).",
+      task: isSpeak ? "Học viên đã TỰ soạn câu trả lời Nói tiếng Hàn dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính bài này" : "Học viên đã TỰ lập dàn ý cho bài Viết tiếng Hàn dưới đây bằng ý của mình. Nhiệm vụ của bạn: CHỈ nâng cấp chính dàn ý này",
+      newWork: isSpeak ? "không viết một bài nói mới về chủ đề" : "không viết một bài viết mới về chủ đề",
+      p1: isSpeak ? "(1) BẢN NÂNG CẤP GIỮ Ý: viết lại câu trả lời, mỗi ý của học viên vẫn ở đúng chỗ, chỉ sửa cách diễn đạt cho tự nhiên và đúng ngữ pháp hơn." : "(1) DÀN Ý ĐÃ NÂNG CẤP: giữ đúng các ý của học viên, mỗi ý một dòng, chỉ sửa cách diễn đạt, thêm từ nối và cụm câu cho mạch lạc hơn.",
+      p2: "(2) CỤM NÊN DÙNG: liệt kê từng cụm tiếng Hàn hay dùng được cho chính các ý này, mỗi cụm kèm nghĩa tiếng Việt ngắn và một câu ví dụ.",
+      label: isSpeak ? "CÂU TRẢ LỜI CỦA HỌC VIÊN:" : "DÀN Ý CỦA HỌC VIÊN:" }
+  };
+  var r = R[track] || R.en;
+  return r.role + " " + r.task + " — giữ nguyên ý, giữ nguyên thứ tự ý, không thêm ý mới, " + r.newWork + ", không viết thay bài cho học viên. Trả lời bằng tiếng Việt đơn giản, ví dụ trước - quy tắc sau, theo đúng 3 phần: " + r.p1 + " " + r.p2 + " (3) VÌ SAO SỬA THẾ: giải thích ngắn từng chỗ sửa chính, nói rõ chỗ nào là lỗi sai và chỗ nào chỉ là nâng cấp cho hay hơn.\n\n" + r.label + "\n" + draft;
+}/* v129: chuoi man Tro giang theo track (EN giu nguyen tu chu). */
+var SPEC_TUTOR_TXT = {
+  en: { writeBtn: "Dàn ý Writing", speakBtn: "Câu trả lời Speaking",
+    titleW: "Trợ giảng — Dàn ý Writing", titleS: "Trợ giảng — Câu trả lời Speaking",
+    guideW: '<p><b>Ví dụ trước:</b> “Mở bài: Học trực tuyến ngày càng phổ biến. Thân bài 1: Tiết kiệm thời gian đi lại. Thân bài 2: Nhưng thiếu tương tác trực tiếp. Kết bài: Nên kết hợp cả hai.” — rồi viết dàn ý của bạn, mỗi ý một dòng.</p>',
+    guideS: '<p><b>Ví dụ trước:</b> “Tôi thích đọc sách vì nó giúp tôi thư giãn. Khi rảnh, tôi thường đọc truyện ngắn.” — rồi viết câu trả lời của bạn theo ý của bạn, nói như đang trả lời giám khảo.</p>',
+    phW: "Viết dàn ý Writing của bạn ở đây, mỗi ý một dòng...",
+    phS: "Viết câu trả lời Speaking của bạn ở đây..." },
+  zh: { writeBtn: "Dàn ý Viết", speakBtn: "Câu trả lời Nói",
+    titleW: "Trợ giảng — Dàn ý Viết (HSK)", titleS: "Trợ giảng — Câu trả lời Nói (HSKK)",
+    guideW: '<p><b>Ví dụ trước:</b> “开头：网课越来越流行。第一段：节省时间。第二段：缺少互动。结尾：两者结合。” — rồi viết dàn ý của bạn, mỗi ý một dòng.</p>',
+    guideS: '<p><b>Ví dụ trước:</b> “我喜欢看书，因为看书让我放松。空闲的时候，我常看短篇小说。” — rồi viết câu trả lời của bạn theo ý của bạn, nói như đang trả lời giám khảo.</p>',
+    phW: "Viết dàn ý Viết của bạn ở đây, mỗi ý một dòng...",
+    phS: "Viết câu trả lời Nói của bạn ở đây..." },
+  tc: { writeBtn: "Dàn ý Email", speakBtn: "Câu trả lời Nói",
+    titleW: "Trợ giảng — Dàn ý Email (TOEIC)", titleS: "Trợ giảng — Câu trả lời Nói (TOEIC)",
+    guideW: '<p><b>Ví dụ trước:</b> “Subject: Meeting on Friday. Mở đầu: xác nhận giờ họp. Thân email: đề xuất đổi sang 10 giờ sáng. Kết: nhờ Anna xác nhận lại.” — rồi viết dàn ý email của bạn, mỗi ý một dòng.</p>',
+    guideS: '<p><b>Ví dụ trước:</b> “Good morning, everyone. I am Linh from the sales team. Today I would like to talk about our new product.” — rồi viết câu trả lời của bạn theo ý của bạn, nói như đang trả lời đồng nghiệp.</p>',
+    phW: "Viết dàn ý email của bạn ở đây, mỗi ý một dòng...",
+    phS: "Viết câu trả lời Nói của bạn ở đây..." },
+  tp: { writeBtn: "Dàn ý Viết", speakBtn: "Câu trả lời Nói",
+    titleW: "Trợ giảng — Dàn ý Viết (TOPIK)", titleS: "Trợ giảng — Câu trả lời Nói (TOPIK)",
+    guideW: '<p><b>Ví dụ trước:</b> “서론: 온라인 수업이 점점 늘고 있다. 본론 1: 시간을 아낄 수 있다. 본론 2: 직접 만나지 못한다. 결론: 두 가지를 함께 쓰는 것이 좋다.” — rồi viết dàn ý của bạn, mỗi ý một dòng.</p>',
+    guideS: '<p><b>Ví dụ trước:</b> “저는 책 읽는 것을 좋아합니다. 책을 읽으면 마음이 편해집니다.” — rồi viết câu trả lời của bạn theo ý của bạn, nói như đang trả lời giám khảo.</p>',
+    phW: "Viết dàn ý Viết của bạn ở đây, mỗi ý một dòng...",
+    phS: "Viết câu trả lời Nói của bạn ở đây..." }
+};
 function renderSpecTutor(app, l) {
-  if (!state.specTutor) state.specTutor = {};
-  var kind = l.tutorKind || state.specTutor.kind || "write";
-  var draft = (l.tutorDraft !== undefined) ? l.tutorDraft : (state.specTutor.draft || "");
-  var up = (l.tutorUp !== undefined) ? l.tutorUp : (state.specTutor.upgraded || "");
+  var track = (state && state.track) || "en"; /* v129: man Tro giang theo track dang hoc */
+  var slot = specTutorSlot(track);
+  var stx = SPEC_TUTOR_TXT[track] || SPEC_TUTOR_TXT.en;
+  var kind = l.tutorKind || slot.kind || "write";
+  var draft = (l.tutorDraft !== undefined) ? l.tutorDraft : (slot.draft || "");
+  var up = (l.tutorUp !== undefined) ? l.tutorUp : (slot.upgraded || "");
   var busy = !!l.tutorBusy, err = l.tutorErr || "";
-  var title = kind === "speak" ? "Trợ giảng — Câu trả lời Speaking" : "Trợ giảng — Dàn ý Writing";
-  var guide = kind === "speak"
-    ? '<p><b>Ví dụ trước:</b> “Tôi thích đọc sách vì nó giúp tôi thư giãn. Khi rảnh, tôi thường đọc truyện ngắn.” — rồi viết câu trả lời của bạn theo ý của bạn, nói như đang trả lời giám khảo.</p>'
-    : '<p><b>Ví dụ trước:</b> “Mở bài: Học trực tuyến ngày càng phổ biến. Thân bài 1: Tiết kiệm thời gian đi lại. Thân bài 2: Nhưng thiếu tương tác trực tiếp. Kết bài: Nên kết hợp cả hai.” — rồi viết dàn ý của bạn, mỗi ý một dòng.</p>';
+  var vip = msIsVip(); /* v129: AI nang cap chi mo cho VIP (mau v104) — khong VIP thi chi thay thong bao + nut Yeu cau VIP, khong co nut AI; viet/luu nhap van mien phi */
+  var title = kind === "speak" ? stx.titleS : stx.titleW;
+  var guide = kind === "speak" ? stx.guideS : stx.guideW;
   var h = skillHead(title, "AI nâng cấp bài của bạn — không viết thay") + '<div class="qblock">'
     + '<p class="mut">Bạn tự viết bằng ý của mình trước, AI chỉ nâng cấp cách diễn đạt và gợi ý cụm nên dùng. Bài gốc của bạn luôn ở đây, không bị AI thay thế.</p>'
-    + '<div class="row"><button class="btn' + (kind === "write" ? ' btn-amber' : '') + '" id="specTutorWrite">Dàn ý Writing</button><button class="btn' + (kind === "speak" ? ' btn-amber' : '') + '" id="specTutorSpeak">Câu trả lời Speaking</button></div>'
+    + '<div class="row"><button class="btn' + (kind === "write" ? ' btn-amber' : '') + '" id="specTutorWrite">' + stx.writeBtn + '</button><button class="btn' + (kind === "speak" ? ' btn-amber' : '') + '" id="specTutorSpeak">' + stx.speakBtn + '</button></div>'
     + guide
-    + '<textarea id="specTutorDraft" rows="8" style="width:100%;padding:10px" placeholder="' + (kind === "speak" ? "Viết câu trả lời Speaking của bạn ở đây..." : "Viết dàn ý Writing của bạn ở đây, mỗi ý một dòng...") + '">' + esc(draft) + '</textarea>'
-    + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="specTutorGo"' + (busy ? ' disabled' : '') + '>' + (busy ? 'AI đang nâng cấp...' : 'AI nâng cấp bài của tôi') + '</button><button class="btn" id="specTutorSave">Lưu bản nháp này</button></div>'
+    + '<textarea id="specTutorDraft" rows="8" style="width:100%;padding:10px" placeholder="' + (kind === "speak" ? stx.phS : stx.phW) + '">' + esc(draft) + '</textarea>'
+    + (vip
+      ? '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="specTutorGo"' + (busy ? ' disabled' : '') + '>' + (busy ? 'AI đang nâng cấp...' : 'AI nâng cấp bài của tôi') + '</button><button class="btn" id="specTutorSave">Lưu bản nháp này</button></div>'
+      : '<p class="mut">AI nâng cấp chỉ mở cho tài khoản VIP — bạn vẫn viết và lưu bản nháp miễn phí, AI chỉ nâng cấp khi đã có VIP. <button class="btn" id="aiVipReqBtn">Yêu cầu VIP</button></p><div class="row" style="margin-top:8px"><button class="btn" id="specTutorSave">Lưu bản nháp này</button></div>')
     + (err ? '<p>' + esc(err) + '</p>' : '')
     + '</div>';
   if (up) {
@@ -14853,16 +14935,16 @@ function renderSpecTutor(app, l) {
   }
   app.innerHTML = h;
   wireBack();
-  var sw = function (k) { l.tutorKind = k; if (state.specTutor) state.specTutor.kind = k; l.tutorDraft = $("#specTutorDraft") ? $("#specTutorDraft").value : draft; render(); };
+  var sw = function (k) { l.tutorKind = k; slot.kind = k; l.tutorDraft = $("#specTutorDraft") ? $("#specTutorDraft").value : draft; render(); };
   var wb = $("#specTutorWrite"); if (wb) wb.onclick = function () { sw("write"); };
   var sb = $("#specTutorSpeak"); if (sb) sb.onclick = function () { sw("speak"); };
-  var sv = $("#specTutorSave"); if (sv) sv.onclick = function () { l.tutorDraft = $("#specTutorDraft").value; if (!state.specTutor) state.specTutor = {}; state.specTutor.kind = kind; state.specTutor.draft = l.tutorDraft; specTutorSave(); toast("Đã lưu bản nháp Trợ giảng."); };
+  var sv = $("#specTutorSave"); if (sv) sv.onclick = function () { l.tutorDraft = $("#specTutorDraft").value; slot.kind = kind; slot.draft = l.tutorDraft; specTutorSave(slot); toast("Đã lưu bản nháp Trợ giảng."); };
   var go = $("#specTutorGo"); if (go) go.onclick = function () {
     var v = $("#specTutorDraft").value; if (!v.trim()) { toast("Hãy viết bài của bạn trước đã — AI chỉ nâng cấp bài bạn đã tự viết."); return; }
-    l.tutorDraft = v; if (!state.specTutor) state.specTutor = {}; state.specTutor.kind = kind; state.specTutor.draft = v; specTutorSave();
+    l.tutorDraft = v; slot.kind = kind; slot.draft = v; specTutorSave(slot);
     l.tutorBusy = true; l.tutorErr = ""; render();
-    callAiTutorChat([{ role: "user", text: specTutorPrompt(kind, v) }]).then(function (r) {
-      l.tutorBusy = false; l.tutorUp = r; if (!state.specTutor) state.specTutor = {}; state.specTutor.upgraded = r; specTutorSave(); render();
+    callAiTutorChat([{ role: "user", text: specTutorPrompt(kind, v, track) }]).then(function (r) {
+      l.tutorBusy = false; l.tutorUp = r; slot.upgraded = r; specTutorSave(slot); render();
     }, function (e) { l.tutorBusy = false; l.tutorErr = (e && e.message) || String(e); render(); });
   };
 }
@@ -17872,6 +17954,7 @@ function viewPracticeZh(app) {
   html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">Đợt 1: 30 chữ nét đơn giản — sẽ bổ sung dần. Bấm vào một chữ để xem video mẫu cách viết và tập viết.</p><div class="row">' + zhStrokesList().map(function (e) { return '<button class="btn" data-zhstroke-list="' + e.han + '"><span style="font-size:22px">' + e.han + '</span> ' + esc(e.py) + '</button>'; }).join("") + '</div><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
   html += pronDiagEntryHTML("zh");
   html += pronWeakHTML("zh"); /* v119b */
+  html += specTutorGroupHTML("zh"); /* v129: nhom Tro giang AI nhu EN */
   html += pronAreaCardHTML("zh"); /* v123: muc phat am Pinyin rieng */
   html += '<details><summary><b>Mạch pinyin chặng 1</b></summary><div class="path-v">';
   ZH_PH_STEPS.forEach(function (s, i) { html += zhPhNodeHTML(i); });
@@ -17977,6 +18060,7 @@ function viewPracticeZh(app) {
       else if (id === "videoNewCardzh") put(G3, el);
     });
     /* v117: the Tro chuyen AI (Gia su AI + ghi chu Tro giang) vao G6. */
+    put(G6, byId("practiceGrpTutor")); /* v129: Tro giang AI NGUYEN THE vao G6 nhu EN */
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("zh");
     if (tc6.firstChild) put(G6, tc6.firstChild);
     var anchor = byId("typeEntryRow") || byId("zhPracticeNextCard");
@@ -18000,6 +18084,8 @@ function viewPracticeZh(app) {
     oneOpen([G1, G2, G3, G4, G5, G6], nk);
     /* v117: nut Mo Gia su AI (the tutorCard, nhom G6). */
     Array.prototype.slice.call(document.querySelectorAll("[data-tutorfloat]")).forEach(function (b) { b.onclick = function () { tutorFloatOpen(); }; });
+    /* v129: nut Tro giang (nhom G6) — mo bai specTutor theo track. */
+    Array.prototype.slice.call(document.querySelectorAll("[data-spectutor]")).forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "specTutor", tutorKind: b.dataset.spectutor }); }; });
   })();
   wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   (function () { var jobs = [{ id: "zhGameCardPractice", html: zhPracticeEntHTML, wire: zhPracticeEntWire }]; if (videoNewEntHTML["zh"]) jobs.push({ id: "videoNewEntzh", html: function () { return videoNewEntHTML["zh"]; }, wire: null }); practiceEntLazy("zh", jobs); })();
@@ -20850,6 +20936,7 @@ function viewPracticeTc(app) {
   html += listenHubHTML("tc");
   html += pronDiagEntryHTML("tc");
   html += pronWeakHTML("tc"); /* v119b */
+  html += specTutorGroupHTML("tc"); /* v129: nhom Tro giang AI nhu EN */
   html += pronAreaCardHTML("tc"); /* v123: duong vao phat am 44 am cho TC (truoc day TC khong co duong nao toi phat am) */
   [1, 2, 3, 4].forEach(function (p) {
     var items = TC_LISTEN.map(function (l, i) { return { l: l, i: i }; }).filter(function (x) { return x.l.part === p; });
@@ -20923,6 +21010,7 @@ function viewPracticeTc(app) {
       else if (id === "videoNewCardtc") put(G3, el);
     });
     /* v117: the Tro chuyen AI (Gia su AI + ghi chu Tro giang) vao G6. */
+    put(G6, byId("practiceGrpTutor")); /* v129: Tro giang AI NGUYEN THE vao G6 nhu EN */
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("tc");
     if (tc6.firstChild) put(G6, tc6.firstChild);
     var anchor = byId("typeEntryRow") || byId("tcPracticeNextCard");
@@ -20942,6 +21030,8 @@ function viewPracticeTc(app) {
     oneOpen([G1, G2, G3, G4, G5, G6], nk);
     /* v117: nut Mo Gia su AI (the tutorCard, nhom G6). */
     Array.prototype.slice.call(document.querySelectorAll("[data-tutorfloat]")).forEach(function (b) { b.onclick = function () { tutorFloatOpen(); }; });
+    /* v129: nut Tro giang (nhom G6) — mo bai specTutor theo track. */
+    Array.prototype.slice.call(document.querySelectorAll("[data-spectutor]")).forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "specTutor", tutorKind: b.dataset.spectutor }); }; });
   })();
   wireTc(app);
   practiceFilterWire();
@@ -21693,6 +21783,7 @@ function viewPracticeTp(app) {
   html += listenHubHTML("tp");
   html += pronDiagEntryHTML("tp");
   html += pronWeakHTML("tp"); /* v119b */
+  html += specTutorGroupHTML("tp"); /* v129: nhom Tro giang AI nhu EN */
   html += pronAreaCardHTML("tp"); /* v123: muc phat am Hangul rieng */
   [1, 2, 3, 4].forEach(function (p) {
     var items = TP_LISTEN.map(function (l, i) { return { l: l, i: i }; }).filter(function (x) { return x.l.part === p; });
@@ -21774,6 +21865,7 @@ function viewPracticeTp(app) {
       else if (id === "videoNewCardtp") put(G3, el);
     });
     /* v117: the Tro chuyen AI (Gia su AI + ghi chu Tro giang) vao G6. */
+    put(G6, byId("practiceGrpTutor")); /* v129: Tro giang AI NGUYEN THE vao G6 nhu EN */
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("tp");
     if (tc6.firstChild) put(G6, tc6.firstChild);
     var anchor = byId("typeEntryRow") || byId("tpPracticeNextCard");
@@ -21794,6 +21886,8 @@ function viewPracticeTp(app) {
     oneOpen([G1, G2, G3, G4, G5, G6], nk);
     /* v117: nut Mo Gia su AI (the tutorCard, nhom G6). */
     Array.prototype.slice.call(document.querySelectorAll("[data-tutorfloat]")).forEach(function (b) { b.onclick = function () { tutorFloatOpen(); }; });
+    /* v129: nut Tro giang (nhom G6) — mo bai specTutor theo track. */
+    Array.prototype.slice.call(document.querySelectorAll("[data-spectutor]")).forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "specTutor", tutorKind: b.dataset.spectutor }); }; });
   })();
   wireTp(app);
   practiceFilterWire();
