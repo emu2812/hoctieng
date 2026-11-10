@@ -5346,7 +5346,7 @@ function trackMasteryRows89(track) {
     var g = function (k) { return kc[k] || [0, 0]; };
     var li = g("listen"); push("Nghe", li[0], li[1]);
     var re = g("read"); push("Đọc", re[0], re[1]);
-    if (isTc) { push("Nói", 0, 0, "TOEIC chỉ thi Nghe–Đọc nên track này không có bài Nói."); push("Viết", 0, 0, "TOEIC chỉ thi Nghe–Đọc nên track này không có bài Viết."); }
+    if (isTc) { var sp = g("speak"); push("Nói", sp[0], sp[1]); push("Viết", 0, 0, "TOEIC chỉ thi Nghe–Đọc nên track này không có bài Viết."); } /* v127: TC da co 8 bai Noi s0-s7, lay so that tu tcTpKindCounts89 */
     else { push("Nói", 0, 0, "Track này chưa có bài Nói riêng."); var wr = g("write"); push("Viết", wr[0], wr[1]); }
     var vo = g("vocab"); push("Từ vựng", vo[0], vo[1]);
   }
@@ -5409,7 +5409,7 @@ function trackCurrentScope89() {
   var stageIdx = 0;
   if (nx) stageIdx = isTc ? tcStepStage(nx.id) : tpStepStage(nx.id);
   var stg = (isTc ? TC_STAGES : TP_STAGES)[stageIdx] || { steps: [], title: "", score: 0 };
-  var learnKinds = isTc ? ["vocab", "gram", "listen", "read"] : ["hangul", "vocab", "gram", "listen", "read", "write"];
+  var learnKinds = isTc ? ["vocab", "gram", "listen", "read", "speak"] : ["hangul", "vocab", "gram", "listen", "read", "write"]; /* v127: TC them speak */
   var meta = isTc ? tcStepMeta : tpStepMeta;
   var doneMap = isTc ? (state.tcDone || {}) : (state.tpDone || {});
   var learnIds = (stg.steps || []).filter(function (id) { var m = meta(id); return m && learnKinds.indexOf(m.kind) >= 0; });
@@ -17116,7 +17116,7 @@ function gd23MasteryHTML() {
   var t89 = (typeof state !== "undefined" && state.track) || "en";
   var note89 = t89 === "en" ? ' — Từ vựng chỉ tính bộ 24 mẫu, các kỹ năng khác tính toàn bộ bài trong kho.'
     : t89 === "zh" ? ' — Từ vựng tính theo bộ; các kỹ năng khác tính toàn bộ bài trong kho.'
-    : t89 === "tc" ? ' — TOEIC chỉ thi Nghe–Đọc nên không có hàng Nói/Viết; Từ vựng tính theo bộ.'
+    : t89 === "tc" ? ' — TOEIC chỉ thi Nghe–Đọc nên không có hàng Viết; Từ vựng tính theo bộ.' /* v127: TC da co hang Noi */
     : ' — Track này chưa có bài Nói riêng; Từ vựng tính theo bộ, các kỹ năng khác tính toàn bộ bài trong kho.';
   return '<section class="card" id="skillMastery"><h3>5 chấm thành thạo theo từng kỹ năng</h3>'
     + '<p class="mut">Mỗi kỹ năng có 5 chấm — mỗi chấm tương ứng 1/5 số bài đã xong của kỹ năng đó. Đây là mức theo tiến trình, không phải điểm thi.</p>'
@@ -19819,6 +19819,7 @@ function tcStepMeta(id) {
   if (k === "g") { var g = (typeof TC_GRAMMAR !== "undefined") ? TC_GRAMMAR[n] : null; return g ? { kind: "gram", title: "Ngữ pháp: " + g.name, ref: n } : null; }
   if (k === "l") { var l = (typeof TC_LISTEN !== "undefined") ? TC_LISTEN[n] : null; return l ? { kind: "listen", title: "Nghe Part " + l.part + ": " + l.title, ref: n } : null; }
   if (k === "r") { var r = (typeof TC_READ !== "undefined") ? TC_READ[n] : null; return r ? { kind: "read", title: "Đọc Part " + r.part + ": " + r.title, ref: n } : null; }
+  if (k === "s") { var sp = (typeof TC_SPEAK !== "undefined") ? TC_SPEAK[n] : null; return sp ? { kind: "speak", title: "Nói: " + sp.title, ref: n } : null; } /* v127: bai Noi TOEIC */
   if (k === "c") { var ck = (typeof TC_CHECK_ALL !== "undefined") ? TC_CHECK_ALL[n] : null; return ck ? { kind: "check", title: ck.title, ref: n } : null; }
   if (id === "m0") return { kind: "mock", title: "Thi thử TOEIC chặng 900 — đủ 200 câu", ref: 0 };
   if (id === "m450") return { kind: "mock", title: "Thi thử TOEIC chặng 450 — 120 câu", ref: 450 };
@@ -20398,6 +20399,98 @@ function renderTcTpVocab5(track, stepId, back) {
      that su khong co mic/camera de hien nut thoat o buoc 4 ngay khi vao buoc. */
   mrCheckDevices(function () { if (vk.step === 3) renderTcTpVocab5(track, stepId, backTab); });
 }
+/* v127 10/11/2026: BAI NOI TOEIC — luong nhu bai Noi EN (renderSkillSpeak):
+   (1) ly thuyet: tinh huong + muc tieu + cum cau dung duoc; (2) noi theo mau:
+   tung cau co nut Nghe (TTS en-GB) + Doc to (cham tang 1 SR: may nghe ra dung
+   cau la duoc, chua phai diem tung am); (3) noi tu do ngan: mic chi ghi lai loi
+   ban noi de tu nghe lai, KHONG cham diem; (4) tu doi chieu 4 tieu chi
+   (RB_SPEAK_CRITERIA_TXT) + bai mau de doi chieu. Nut Xong chi mo khi da nghe
+   het cac cau mau (nghe bang TTS, khong can mic) — may khong mic van hoc het
+   bai duoc (luat v112). */
+function renderTcSpeak(app, m, id, back, skipBanner) {
+  var s = TC_SPEAK[m.ref]; if (!s) return;
+  var st = TC_STAGES[tcStepStage(id)] || {};
+  var eyebrow = "TOEIC · NÓI · " + esc(st.title || "");
+  function theoryHTML() {
+    return tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(s.title) + '</h2>'
+      + '<p><b>Tình huống:</b> ' + esc(s.setting) + '</p>'
+      + '<p><b>Mục tiêu:</b> ' + esc(s.goal) + '</p>'
+      + '<p><b>Cụm câu dùng được:</b> ' + s.chunks.map(function (ch) { return esc(ch); }).join(" · ") + '</p>'
+      + '<p>💡 <b>Mẹo thực chiến:</b> ' + esc(s.tip) + '</p>'
+      + '<p class="mut">Bài Nói này không chấm điểm AI — đọc to từng câu mẫu được máy kiểm tra nghe ra hay không (chấm tầng 1, chưa phải điểm từng âm); phần nói tự do chỉ ghi lại lời bạn nói để tự nghe lại. Không cần đăng nhập, không cần camera.</p>'
+      + '<div class="row"><button class="btn btn-primary" id="tcSpeakStart">Vào luyện tập →</button></div></section>';
+  }
+  function practiceHTML() {
+    var lines = (s.lines || []).map(function (ln, i) {
+      return '<div class="qblock"><p><b>' + esc(ln.who) + ':</b> ' + esc(ln.en) + '</p><p class="mut">' + esc(ln.vi) + '</p>'
+        + '<div class="row"><button class="btn" data-tcspeakline="' + i + '">🔊 Nghe câu này</button><button class="btn" data-tcspeakrec="' + i + '">🎤 Đọc to câu này</button></div>'
+        + '<div id="tcSpeakRes-' + i + '"></div><div id="tcSpeakErr-' + i + '" class="mut"></div></div>';
+    }).join("");
+    var crit = String(RB_SPEAK_CRITERIA_TXT || "").split(";").map(function (c) { return c.trim(); }).filter(function (c) { return c; });
+    var critHTML = crit.map(function (c, i) { return '<label style="display:block;margin:4px 0"><input type="checkbox" data-tcspeakcrit="' + i + '"> ' + esc(c) + '</label>'; }).join("");
+    return tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(s.title) + '</h2>'
+      + '<h3>1. Nói theo mẫu</h3><p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Nút “Xong bài này” chỉ mở khi đã nghe hết các câu mẫu.</p>'
+      + '<div class="row"><button class="btn" id="tcSpeakAll">🔊 Nghe toàn đoạn</button></div>'
+      + '<p class="mut" id="tcSpeakHeard">Đã nghe: 0/' + s.lines.length + ' câu.</p>' + lines
+      + '<h3>2. Nói tự do</h3><div class="qblock"><p><b>Đề bài:</b> ' + esc(s.free.prompt) + '</p>'
+      + '<p><b>Gợi ý:</b> ' + s.free.hints.map(function (h) { return esc(h); }).join(" · ") + '</p>'
+      + '<div class="row"><button class="btn" id="tcSpeakFree">🎤 Nói câu trả lời của bạn</button></div>'
+      + '<div id="tcSpeakFreeRes"></div><div id="tcSpeakFreeErr" class="mut"></div>'
+      + '<p class="mut">Máy chỉ ghi lại lời bạn nói để bạn tự nghe lại — không chấm điểm phần này. Không có mic vẫn học tiếp được: đọc thầm câu trả lời theo gợi ý rồi tự đối chiếu 4 tiêu chí ở dưới.</p></div>'
+      + '<h3>3. Tự đối chiếu 4 tiêu chí</h3><div class="qblock"><p class="mut">Nghe lại giọng mình (nếu đã ghi) rồi tích vào tiêu chí bạn thấy mình đã làm được. Tài khoản VIP được AI chấm 4 tiêu chí ở bài thi Nói; bài luyện này chỉ tự đối chiếu.</p>'
+      + critHTML
+      + '<details><summary><b>Xem bài mẫu để đối chiếu</b></summary><p>' + esc(s.sample) + '</p></details></div>'
+      + '<div class="row"><button class="btn btn-primary" id="tcSpeakFinish" disabled>Xong bài này (+10 XP)</button></div></section>';
+  }
+  app.innerHTML = theoryHTML();
+  tcWireBack(back);
+  document.getElementById("tcSpeakStart").onclick = function () {
+    var heard = {}, res = {};
+    app.innerHTML = practiceHTML();
+    tcWireBack(back);
+    var fin = document.getElementById("tcSpeakFinish");
+    function refresh() {
+      var n = 0; (s.lines || []).forEach(function (_, i) { if (heard[i]) n++; });
+      var el = document.getElementById("tcSpeakHeard"); if (el) el.textContent = "Đã nghe: " + n + "/" + s.lines.length + " câu.";
+      if (fin) fin.disabled = n < s.lines.length;
+    }
+    function lineResult(i) {
+      var r = res[i] || {}; var box = document.getElementById("tcSpeakRes-" + i), err = document.getElementById("tcSpeakErr-" + i);
+      if (!box) return;
+      if (!r.tried) { box.innerHTML = ""; if (err) err.textContent = ""; return; }
+      box.innerHTML = r.ok ? '<p>✓ Máy nghe ra: “' + esc(r.heard || "") + '”</p>' : '<p>✗ Máy chưa nghe ra' + (r.heard ? ' — nghe được: “' + esc(r.heard) + '”' : '') + ' — nghe lại mẫu rồi đọc chậm hơn.</p>';
+      if (err) err.textContent = r.err || "";
+    }
+    document.getElementById("tcSpeakAll").onclick = function () {
+      try { speakAuto(s.lines.map(function (ln) { return ln.en; }).join(" ")); } catch (e) {}
+      (s.lines || []).forEach(function (_, i) { heard[i] = true; }); refresh();
+    };
+    Array.prototype.forEach.call(app.querySelectorAll("[data-tcspeakline]"), function (b) {
+      b.onclick = function () { var i = +b.dataset.tcspeakline; try { speakAuto(s.lines[i].en); } catch (e) {} heard[i] = true; refresh(); };
+    });
+    Array.prototype.forEach.call(app.querySelectorAll("[data-tcspeakrec]"), function (b) {
+      b.onclick = function () {
+        var i = +b.dataset.tcspeakrec, ref = s.lines[i].en;
+        pronTier1Start("en", function (heardTx) {
+          var sc = pronTier1Score(heardTx, ref, "en");
+          res[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" }; lineResult(i);
+        }, function (kind) {
+          res[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; lineResult(i);
+        });
+      };
+    });
+    document.getElementById("tcSpeakFree").onclick = function () {
+      var box = document.getElementById("tcSpeakFreeRes"), err = document.getElementById("tcSpeakFreeErr");
+      pronTier1Start("en", function (heardTx) {
+        if (box) box.innerHTML = '<p>Máy nghe được: “' + esc(heardTx || "") + '”</p><p class="mut">Nghe lại câu mình vừa nói rồi đối chiếu 4 tiêu chí ở dưới — phần này không chấm điểm.</p>';
+        if (err) err.textContent = "";
+      }, function (kind) {
+        if (err) err.textContent = pronTier1ErrText(kind);
+      });
+    };
+    fin.onclick = function () { if (tcMarkDone(id)) { fin.textContent = "Đã xong ✓"; fin.disabled = true; } };
+  };
+}
 function tcOpenStep(id, backTab) {
   tcNorm();
   var m = tcStepMeta(id); if (!m) return;
@@ -20405,6 +20498,7 @@ function tcOpenStep(id, backTab) {
   var back = backTab || "practice";
   var skipBanner = tcSkipBanner(id);
   if (m.kind === "vocab") { renderTcTpVocab5("tc", id, back); /* v107e: vao bai tu vung TOEIC thi dua dau the ve khung nhin ngay (nhu openLesson cua EN/ZH). */ vkScrollCardTop(); return; }
+  if (m.kind === "speak") { renderTcSpeak(app, m, id, back, skipBanner); return; } /* v127 */
   if (m.kind === "gram") {
     var g = TC_GRAMMAR[m.ref];
     /* DOT SOI-D9d 02/11: tach ly thuyet rieng 1 man, roi moi cau 1 man (phan trang
