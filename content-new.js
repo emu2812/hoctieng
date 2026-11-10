@@ -3960,7 +3960,7 @@ var ZH_PH_STEPS = [
       { q: "“mā” mang dấu thanh nào?", o: ["Dấu ngang", "Dấu lên", "Dấu cong", "Dấu xuống"], a: 0, why: "Dấu ngang là thanh 1, đọc cao và đều.", speak: "妈" },
       { q: "“mǎ” là thanh mấy?", o: ["Thanh 1", "Thanh 2", "Thanh 3", "Thanh 4"], a: 2, why: "Dấu cong xuống rồi lên là thanh 3.", speak: "马" },
       { q: "Từ nào đọc bằng thanh 4?", o: ["mā", "má", "mǎ", "mà"], a: 3, why: "Chỉ từ mang dấu xuống mới là thanh 4.", speak: "妈麻马骂" },
-      { q: "“ma” không dấu thường là gì?", o: ["Thanh 1", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 3, why: "Không dấu thường là thanh nhẹ, đọc ngắn và lướt.", speak: "吗" },
+      { q: "Chữ “吗” trong câu hỏi thường đọc bằng thanh nào?", o: ["Thanh 1", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 3, why: "吗 là trợ từ cuối câu hỏi, đọc thanh nhẹ, ngắn và lướt.", speak: "吗" },
       { q: "Cặp nào chỉ khác nhau ở thanh điệu?", o: ["mā – mà", "mā – bā", "mā – nā", "mā – lā"], a: 0, why: "Cùng vần ma, chỉ khác dấu thanh thì nghĩa đã khác.", speak: "妈骂" },
       { q: "Hai thanh 3 đi liền nhau thì thanh đầu đọc thành gì?", o: ["Vẫn thanh 3", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 1, why: "Quy tắc biến điệu: 3 + 3 đọc thành 2 + 3.", speak: "你好" }
     ] },
@@ -4417,13 +4417,19 @@ var ZH_ENTRY_QS = [
   { q: "“mā” mang dấu thanh nào?", o: ["Dấu ngang", "Dấu lên", "Dấu cong", "Dấu xuống"], a: 0, why: "Dấu ngang là thanh 1." },
   { q: "“mǎ” là thanh mấy?", o: ["Thanh 1", "Thanh 2", "Thanh 3", "Thanh 4"], a: 2, why: "Dấu cong xuống rồi lên là thanh 3." },
   { q: "Từ nào đọc bằng thanh 4?", o: ["mā", "má", "mǎ", "mà"], a: 3, why: "Chỉ từ mang dấu xuống mới là thanh 4." },
-  { q: "“ma” không dấu thường là gì?", o: ["Thanh 1", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 3, why: "Không dấu thường là thanh nhẹ, đọc ngắn và lướt." },
+  { q: "“你好” đọc liền, chữ “你” đổi thành thanh mấy?", o: ["Thanh 1", "Thanh 2", "Thanh 3", "Thanh 4"], a: 1, why: "你 (thanh 3) đứng trước 好 (thanh 3) đổi thành thanh 2 — biến điệu 3+3." },
   { q: "“你” nghĩa là gì?", o: ["Tôi", "Bạn", "Anh ấy", "Chúng ta"], a: 1, why: "你 là ngôi thứ hai: bạn." },
   { q: "“谢谢” nghĩa là gì?", o: ["Tạm biệt", "Xin lỗi", "Cảm ơn", "Xin chào"], a: 2, why: "谢谢 là cảm ơn." },
   { q: "“再见” nghĩa là gì?", o: ["Cảm ơn", "Tạm biệt", "Xin lỗi", "Mời ngồi"], a: 1, why: "再见 dùng khi chào tạm biệt." },
-  { q: "“中国” đọc là gì?", o: ["Zhōngguó", "Zhōngwén", "Zhōngxué", "Zhōngrén"], a: 0, why: "中国 đọc là Zhōngguó." },
-  { q: "“朋友” đọc là gì?", o: ["péngyou", "péngyǒu", "píngyou", "pèngyou"], a: 0, why: "朋友 đọc là péngyou." },
-  { q: "“老师” đọc là gì?", o: ["lǎoshī", "láoshī", "lǎoshǐ", "lāoshī"], a: 0, why: "老师 đọc là lǎoshī." }
+  { q: "“考试” nghĩa là gì?", o: ["Thi cử", "Học bài", "Đi làm", "Nghỉ ngơi"], a: 0, why: "考试 (kǎoshì) là thi, kiểm tra." },
+  { q: "“银行” nghĩa là gì?", o: ["Ngân hàng", "Bệnh viện", "Trường học", "Siêu thị"], a: 0, why: "银行 (yínháng) là ngân hàng." },
+  { q: "“决定” nghĩa là gì?", o: ["Quyết định", "Phát hiện", "Chuẩn bị", "Thay đổi"], a: 0, why: "决定 (juédìng) là quyết định." },
+  { q: "“影响” nghĩa là gì?", o: ["Ảnh hưởng", "Giúp đỡ", "Bảo vệ", "Khuyến khích"], a: 0, why: "影响 (yǐngxiǎng) là ảnh hưởng." },
+  { q: "“复杂” nghĩa là gì?", o: ["Phức tạp", "Đơn giản", "Rõ ràng", "Nhanh chóng"], a: 0, why: "复杂 (fùzá) là phức tạp." },
+  { q: "Điền vào chỗ trống: “我每天早上___身体。”", o: ["锻炼", "影响", "决定", "发现"], a: 0, why: "锻炼身体 là tập luyện cho cơ thể khỏe: 每天早上锻炼身体 — mỗi sáng tập thể dục." },
+  { q: "Điền vào chỗ trống: “___天气不好，我们还是去爬山了。”", o: ["尽管", "如果", "因为", "所以"], a: 0, why: "尽管…还是… là cặp nối ý đối lập: dù… vẫn… — dù thời tiết xấu, chúng tôi vẫn đi leo núi." },
+  { q: "Đoạn văn: “小明每天早上六点起床，跑步半个小时，然后吃早饭去上学。他觉得运动对身体很好。” — 小明早上先做什么？", o: ["跑步", "吃早饭", "去上学", "睡觉"], a: 0, why: "Đoạn văn ghi rõ: 六点起床，跑步半个小时 — sáu giờ dậy, chạy bộ nửa tiếng rồi mới ăn sáng." },
+  { q: "Đoạn văn: “随着科技的发展，人们的生活方式发生了很大的变化。手机已经成为人们生活中不可缺少的一部分。” — 这段话主要说什么？", o: ["科技改变了人们的生活方式", "手机很贵", "人们不喜欢科技", "生活没有变化"], a: 0, why: "Đoạn văn nói về sự thay đổi: 随着科技的发展…生活方式发生了很大的变化 — cùng với sự phát triển của công nghệ, cách sống của con người đã thay đổi rất nhiều." }
 ];
 // ---------- DOT 2c (26/10/2026): NGU PHAP / DOC / NGHE TRACK TRUNG ----------
 // Tu soan 100% theo chu de/diem ngu phap cua Giao trinh chuan HSK (he 6 cap cu);
@@ -6799,7 +6805,9 @@ function ZH_STAGE_SETS(stage) {
   return out;
 }
 function zhEntryStageFor(score, total) {
-  if (score >= 9) return 4;
+  if (score >= 15) return 6;
+  if (score >= 13) return 5;
+  if (score >= 10) return 4;
   if (score >= 7) return 3;
   if (score >= 4) return 2;
   return 1;

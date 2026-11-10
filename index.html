@@ -19602,11 +19602,11 @@ function renderZhEntry(app, l) {
       var nearSet = null;
       if (st >= 2) { var allSets = zhSets(); for (var si = 0; si < allSets.length; si++) { if (allSets[si].stage === st) { nearSet = allSets[si]; break; } } }
       var nearNote = nearSet ? '<p>Học nối: kết quả này xếp bạn vào chặng ' + st + ' — bạn bắt đầu từ bộ từ gần nhất với trình độ này là “' + esc(nearSet.set.topic) + '”, không cần học lại từ đầu.</p>' : '';
-      return '<p><b>Kết quả này xếp bạn bắt đầu ở chặng ' + st + '.</b> (Đúng ' + score + '/' + total + ': 0–3 → chặng 1, 4–6 → chặng 2, 7–8 → chặng 3, 9–10 → chặng 4.)</p>' + nearNote + '<p class="mut">Đây là kiểm tra xếp chặng nội bộ của web, không phải đề thi HSK thật. ' + nextNote + '</p>';
+      return '<p><b>Kết quả này xếp bạn bắt đầu ở chặng ' + st + '.</b> (Đúng ' + score + '/' + total + ': 0–3 → chặng 1, 4–6 → chặng 2, 7–9 → chặng 3, 10–12 → chặng 4, 13–14 → chặng 5, 15–16 → chặng 6.)</p>' + nearNote + '<p class="mut">Đây là kiểm tra xếp chặng nội bộ của web, không phải đề thi HSK thật. ' + nextNote + '</p>';
     });
     return;
   }
-  app.innerHTML = lessonHead({ title: "Kiểm tra trình độ HSK", type: "Tiếng Trung · Xếp chặng" }, "10 câu — xếp chặng 1–4.") + '<div class="qblock"><div class="row"><button class="btn btn-primary" id="zhEntryGo">Bắt đầu làm bài →</button></div></div>';
+  app.innerHTML = lessonHead({ title: "Kiểm tra trình độ HSK", type: "Tiếng Trung · Xếp chặng" }, "16 câu — xếp chặng 1–6.") + '<div class="qblock"><div class="row"><button class="btn btn-primary" id="zhEntryGo">Bắt đầu làm bài →</button></div></div>';
   wireBack();
   $("#zhEntryGo").onclick = function () { l.quiz = true; l.qi = 0; l.score = 0; l.picked = -1; l.finished = false; l.wrong = []; lessonStart = Date.now(); render(); };
 }
