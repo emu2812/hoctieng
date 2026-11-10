@@ -8658,6 +8658,11 @@ function pronWeakData(track) {
   var bySym = {}, order = [];
   var add = function (sym, symVi, target, word) {
     if (!sym) return;
+    /* v133: muc chan doan co the luu target null (vd sym ngoai bo chan doan,
+       du lieu cu) — giai quyet ngay tai day qua pronWeakSymInfo de nut
+       "Hoc ngay" khong bao gio chet; ZH ngoai bo chan doan mo ban do am ZH,
+       khong bao gio roi ve ban do 44 am EN. */
+    if (!target) { var info = pronWeakSymInfo(track, sym); if (info) { target = info.target; if (!symVi) symVi = info.symVi; } }
     var e = bySym[sym];
     if (!e) { e = { sym: sym, symVi: symVi || ("âm /" + sym + "/"), target: target || null, words: [], seen: {} }; bySym[sym] = e; order.push(sym); }
     if (word && word.w && !e.seen[word.w]) { e.seen[word.w] = true; e.words.push(word); }
