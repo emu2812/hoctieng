@@ -12681,8 +12681,9 @@ function renderMilestone(app, l) {
   }
   /* kind === "write": dung mau Writing 3 buoc san co: viet -> doi chieu bai mau
      2 cot -> viet lai ban sua. Khach: doi chieu mau + tu doi chieu (ghi ro khong
-     phai diem may cham). VIP: AI cham theo 4 tieu chi; EN dung callAiTutorWriting
-     san co, track khac dung callAiTutorChat voi 4 diem trung lap. */
+     phai diem may cham). VIP: AI cham theo 4 tieu chi bang callAiTutorWriting +
+     parseAiDetailReply dung chung ca 4 track (v128: chi khac nhan de theo ngon
+     ngu); 4 tieu chi + dinh dang tra loi giong EN nen tach diem giong het. */
   var phase = l.msPhase || 0;
   if (phase === 0) {
     app.innerHTML = head + intro + '<div class="qblock"><h3>Bước 1: Viết bản nháp</h3><p><b>Đề bài:</b> ' + esc(m.prompt) + '</p>'
@@ -12718,16 +12719,14 @@ function renderMilestone(app, l) {
     var ab = $("#msAiWriteBtn");
     if (ab) ab.onclick = function () {
       l.msAi = { busy: true }; render();
-      if (track === "en") {
-        callAiTutorWriting("Nhiệm vụ giao tiếp thật — " + m.title, m.prompt, l.msDraft || "").then(function (res) {
-          var p = parseAiDetailReply(res.reply, "writing");
-          l.msAi = p.full ? { parsed: p } : { raw: res.reply };
-          l.msAiTried = true; render();
-        }, function (err) { l.msAi = { err: (err && err.message) || String(err) }; l.msAiTried = true; render(); });
-      } else {
-        var prompt2 = "Góp ý ngắn bằng tiếng Việt đơn giản cho bài viết này theo 4 điểm: (1) Trả lời đúng yêu cầu đề, (2) Mạch lạc và liên kết, (3) Từ vựng đúng chủ đề, (4) Ngữ pháp và câu. Đề: " + m.prompt + " Bài viết của người học: " + (l.msDraft || "") + " Bài mẫu: " + m.model + " Chỉ góp ý, không tự nhận là điểm thi thật. Trả lời ngắn gọn, ví dụ trước - quy tắc sau.";
-        callAiTutorChat([{ role: "user", text: prompt2 }]).then(function (r) { l.msAi = { raw: r }; l.msAiTried = true; render(); }, function (err) { l.msAi = { err: (err && err.message) || String(err) }; l.msAiTried = true; render(); });
-      }
+      /* v128: dung chung callAiTutorWriting + parseAiDetailReply cho ca 4 track —
+         chi khac nhan de theo ngon ngu; 4 tieu chi + dinh dang tra loi giong EN. */
+      var examLabel = track === "zh" ? "Viết tiếng Trung" : track === "tc" ? "Viết email công việc tiếng Anh" : track === "tp" ? "Viết tiếng Hàn" : "Writing IELTS";
+      callAiTutorWriting("Nhiệm vụ giao tiếp thật — " + m.title, m.prompt, l.msDraft || "", examLabel).then(function (res) {
+        var p = parseAiDetailReply(res.reply, "writing");
+        l.msAi = p.full ? { parsed: p } : { raw: res.reply };
+        l.msAiTried = true; render();
+      }, function (err) { l.msAi = { err: (err && err.message) || String(err) }; l.msAiTried = true; render(); });
     };
     $("#msNext2").onclick = function () {
       if (vip && !l.msAiTried) { toast("Hãy bấm AI chấm 4 tiêu chí để AI chấm đã — phần Viết của VIP chỉ có AI chấm, không tự chấm."); return; }
@@ -15607,7 +15606,8 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
    không trả JSON 4 tiêu chí sẵn nên web dặn AI trả đúng định dạng dòng TIÊU CHÍ và
    tách bằng parseWritingReply; tách không đủ 4 tiêu chí thì hiện toàn văn, chưa tính band, không bịa điểm. AI chấm cần đăng nhập (JWT); chưa đăng nhập thì
    không gọi mạng. */
-function callAiTutorWriting(taskLabel, prompt, essay) {
+/* v128: examLabel tuy chon — cot moc Viet ZH/TC/TP dung chung ham nay, chi khac nhan de (Viết tiếng Trung / Viết email công việc tiếng Anh / Viết tiếng Hàn); 4 tieu chi + dinh dang tra loi giong EN nen parseAiDetailReply dung chung. */
+function callAiTutorWriting(taskLabel, prompt, essay, examLabel) {
   return new Promise(function (resolve, reject) {
     var loginMsg = authLoginMsg("AI chấm Writing");
     var ready = window.__supabaseReady;
@@ -15618,7 +15618,7 @@ function callAiTutorWriting(taskLabel, prompt, essay) {
         var sess = res && res.data && res.data.session;
         if (!sess || !sess.access_token) { reject(loginMsg); return; }
         var cut = essay.length > 6500;
-        var body = { message: "Chấm bài Writing IELTS " + taskLabel + " này theo đúng 4 tiêu chí chính thức: (1) Trả lời đúng yêu cầu đề, (2) Mạch lạc và liên kết, (3) Từ vựng, (4) Ngữ pháp và câu. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: mỗi tiêu chí một dòng dạng 'TIÊU CHÍ: <tên tiêu chí> | Band <số, ví dụ 6 hoặc 6,5> | <nhận xét ngắn>'; một dòng 'BAND CHUNG: <số>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng đoạn/câu/từ trong bài> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng đoạn/câu/từ yếu> — <vì sao yếu/sai> — Sửa thành: <câu đúng>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng đoạn/câu> — <vì sao nên nâng cấp để hay hơn> — Viết lại: <câu viết lại mẫu>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau; khuyến nghị là nâng cấp (từ đắt hơn, câu đa dạng hơn, liên kết tốt hơn, mở/kết gọn và thuyết phục hơn), tách rõ khỏi lỗi sai.", mode: "writing", context: "ĐỀ: " + prompt + "\nBÀI VIẾT:\n" + essay.slice(0, 6500) };
+        var body = { message: "Chấm bài " + (examLabel || "Writing IELTS") + " " + taskLabel + " này theo đúng 4 tiêu chí chính thức: (1) Trả lời đúng yêu cầu đề, (2) Mạch lạc và liên kết, (3) Từ vựng, (4) Ngữ pháp và câu. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: mỗi tiêu chí một dòng dạng 'TIÊU CHÍ: <tên tiêu chí> | Band <số, ví dụ 6 hoặc 6,5> | <nhận xét ngắn>'; một dòng 'BAND CHUNG: <số>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng đoạn/câu/từ trong bài> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng đoạn/câu/từ yếu> — <vì sao yếu/sai> — Sửa thành: <câu đúng>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng đoạn/câu> — <vì sao nên nâng cấp để hay hơn> — Viết lại: <câu viết lại mẫu>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau; khuyến nghị là nâng cấp (từ đắt hơn, câu đa dạng hơn, liên kết tốt hơn, mở/kết gọn và thuyết phục hơn), tách rõ khỏi lỗi sai.", mode: "writing", context: "ĐỀ: " + prompt + "\nBÀI VIẾT:\n" + essay.slice(0, 6500) };
         fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify(body) })
           .then(function (resp) {
             if (!resp.ok) return aiReject(resp, loginMsg);
