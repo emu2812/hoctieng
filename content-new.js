@@ -70941,6 +70941,16 @@ var VIDEO_NEW = [
   { key: "zh-e7", track: "zh", kind: "giaitri", id: "Tk1guiftytM", title: "Tiểu Tổ Tông Gấu Trúc Hạ Sơn: Quậy Đục Nước Tông Môn | mùa 1", channel: "Tú Pà review", lang: "Tiếng Trung + Vietsub/thuyết minh", level: "Mọi trình độ · Hoạt hình", note: "Hoạt hình 3D Trung Quốc “Tiểu Tổ Tông Gấu Trúc Hạ Sơn” mùa 1 (bé gấu trúc Đoàn Đoàn), bản Vietsub/thuyết minh. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
   { key: "zh-e8", track: "zh", kind: "giaitri", id: "L1Q5umSFoG4", title: "Bố Đầu Nhỏ Con Đầu To - DƯA HẤU - Phim Hoạt Hình Vui Nhộn Hay Nhất 2023", channel: "Phim Thiếu Nhi", lang: "Lồng tiếng Việt", level: "Mọi trình độ · Hoạt hình", note: "Hoạt hình “Bố Đầu Nhỏ Con Đầu To” tập Dưa Hấu, lồng tiếng Việt. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
   { key: "zh-e9", track: "zh", kind: "giaitri", id: "Yfqa7qPadg8", title: "Bố Đầu Nhỏ Con Đầu To Tập 311 - Cuộc Chiến Bảo Vệ Vịt Trời - Phim Hoạt Hình Vui Nhộn Dành Cho Bé", channel: "Phim Hoạt Hình - BH Cartoons", lang: "Lồng tiếng Việt", level: "Mọi trình độ · Hoạt hình", note: "Hoạt hình “Bố Đầu Nhỏ Con Đầu To” tập 311 (Cuộc Chiến Bảo Vệ Vịt Trời), lồng tiếng Việt. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
+  /* v126 DOT VIDEO ZH DAU TIEN CO PHU DE THAT (ngoai VOA): "Video Call with a friend"
+     (Better in Chinese, ID 5IgodoE6WUk, 2:32, 2023-12-04). NGUON PHU DE: kich ban day
+     du do chinh kenh dang trong mo ta video (chu Han + pinyin + tieng Anh, tung cau,
+     co ghi ten nguoi noi) — lay bang yt-dlp --get-description 10/11/2026; video KHONG
+     co ranh caption YouTube (khong manual, khong ASR) nhung phu de chu Han + pinyin
+     hien truc tiep trong hinh video (burned-in). oEmbed 200 = cong khai, nhung duoc.
+     Ban dich tieng Viet TU SOAN. Hai cau cuoi video la tieng Anh ("Bye bye." x2) —
+     KHONG dua vao VIDEO_LINES. Chi tiet: VIDEO_ZH_E10_NGUON.md. kind PHAI LA giaitri
+     (videoFormatStatusHTML chi mo 4 nut bai tap cho video giai tri co VIDEO_LINES). */
+  { key: "zh-e10", track: "zh", kind: "giaitri", id: "5IgodoE6WUk", title: "Video Call with a friend — Hội thoại tiếng Trung (Better in Chinese)", channel: "Better in Chinese", lang: "Tiếng Trung + phụ đề tiếng Trung (chữ Hán + pinyin)", level: "HSK 3 · Hội thoại", note: "Hội thoại gọi video: Tiểu Ái nghỉ việc, tuần trước phỏng vấn hai công ty (công ty Pháp chỉ phỏng vấn; công ty trong nước vừa thi viết vừa thi nói). Phụ đề thật từ kịch bản chính thức kênh đăng trong mô tả video.", verify: "A" },
   { key: "tc-w11", track: "tc", kind: "day", id: "qVp_YiFzxTA", title: "MAX ĐIỂM TOEIC READING PART 6 | CẬP NHẬT ĐỀ TOEIC 2026 | MS THẮM TOEIC", channel: "Ms Thắm TOEIC", lang: "Dạy bằng tiếng Việt", level: "TOEIC · Đọc", note: "Cập nhật đề TOEIC Reading Part 6 (05/2026): chữa đề, phân tích đáp án; giáo viên lên hình.", verify: "B" },
   { key: "tc-w12", track: "tc", kind: "day", id: "sM_inVY3LjE", title: "CẬP NHẬT ĐỀ TOEIC READING PART 5 MỚI NHẤT 2025 || MS THẮM TOEIC (VIDEO1)", channel: "Ms Thắm TOEIC", lang: "Dạy bằng tiếng Việt", level: "TOEIC · Đọc", note: "Cập nhật đề TOEIC Reading Part 5 mới nhất 2025 (video 1): chữa đề, phân tích đáp án.", verify: "B" },
   { key: "tc-w13", track: "tc", kind: "day", id: "vsuOeLyRtzE", title: "600 Từ vựng TOEIC - Lesson 10: Correspondence", channel: "HocHay English Videos", lang: "Dạy bằng tiếng Việt", level: "TOEIC · Từ vựng", note: "600 từ vựng TOEIC, bài 10 (Correspondence): từ + nghĩa tiếng Việt + ví dụ (định dạng slide).", verify: "B" },
@@ -70999,6 +71009,38 @@ var VIDEO_LINES = {
     { en: "I already told you – to tell someone bad news. Do you have bad news for me?", vi: "Em đã nói với anh rồi mà – là báo tin buồn cho ai đó. Anh có tin buồn cho em à?" },
     { en: "Oh no! Just the opposite! You got the biggest raise of anyone at the office!", vi: "Ồ không! Hoàn toàn ngược lại! Em được tăng lương nhiều nhất văn phòng!" },
     { en: "Yay! Now I don't have to break the news to your wife.", vi: "Tuyệt quá! Giờ em không phải báo tin cho vợ anh nữa." }
+  ],
+  /* DOT v126 — VIDEO ZH DAU TIEN CO PHU DE THAT (zh-e10, xem VIDEO_ZH_E10_NGUON.md).
+     24 cau (16 luot thoai), moi muc 1 cau: who = nguoi noi (小红/小爱), en = cau chu Han
+     (theo dung shape VIDEO_LINES: videoLinesEnsure lay x.en lam cau goc), py = pinyin
+     do chinh kenh dang trong mo ta (chi 1 cho sua theo tu dien: 呃 doc È, kenh ghi Ē),
+     vi = dich Viet TU SOAN don gian theo dung thu tu cau Han. py CHI hien o man
+     Shadowing + Podcast — KHONG hien o man nghe chep (hien pinyin la lo dap an). */
+  "zh-e10": [
+    { who: "小红", en: "嗨，小爱，最近怎么样？", py: "Hāi, xiǎo ài, zuì jìn zěn me yàng?", vi: "Chào Tiểu Ái, dạo này thế nào?" },
+    { who: "小爱", en: "嗨，最近辞职了。", py: "Hāi, zuì jìn cí zhí le.", vi: "Chào, mình mới nghỉ việc." },
+    { who: "小红", en: "辞职？", py: "Cí zhí?", vi: "Nghỉ việc?" },
+    { who: "小红", en: "为什么？", py: "Wèi shén me?", vi: "Tại sao vậy?" },
+    { who: "小爱", en: "之前的工作很无聊。", py: "Zhī qián de gōng zuò hěn wú liáo.", vi: "Công việc trước chán lắm." },
+    { who: "小爱", en: "工资不高，然后也没有什么发展的空间。", py: "Gōng zī bù gāo, rán hòu yě méi yǒu shén me fā zhǎn de kōng jiān.", vi: "Lương không cao, mà cũng chẳng có chỗ để phát triển." },
+    { who: "小红", en: "那你现在什么打算？", py: "Nà nǐ xiàn zài shén me dǎ suàn?", vi: "Thế giờ cậu định thế nào?" },
+    { who: "小爱", en: "我打算跳槽。", py: "Wǒ dǎ suàn tiào cáo.", vi: "Mình định đổi công ty." },
+    { who: "小爱", en: "上个星期面试了两家新公司。", py: "Shàng gè xīng qī miàn shì le liǎng jiā xīn gōng sī.", vi: "Tuần trước mình phỏng vấn ở hai công ty mới." },
+    { who: "小红", en: "都是什么样的公司？", py: "Dōu shì shén me yàng de gōng sī?", vi: "Đều là công ty thế nào?" },
+    { who: "小爱", en: "一家是外企，是法国的公司。", py: "Yī jiā shì wài qǐ, shì fǎ guó de gōng sī.", vi: "Một là công ty nước ngoài, công ty Pháp." },
+    { who: "小爱", en: "另外一家是国内的公司。", py: "Lìn wài yī jiā shì guó nèi de gōng sī.", vi: "Công ty còn lại là công ty trong nước." },
+    { who: "小红", en: "都有什么样的考试？", py: "Dōu yǒu shén me yàng de kǎo shì?", vi: "Đều có những bài thi nào?" },
+    { who: "小爱", en: "法国的公司只有面试。", py: "Fǎ guó de gōng sī zhǐ yǒu miàn shì.", vi: "Công ty Pháp chỉ phỏng vấn thôi." },
+    { who: "小爱", en: "国内的公司既有笔试又有口试。", py: "Guó nèi de gōng sī jì yǒu bǐ shì yòu yǒu kǒu shì.", vi: "Công ty trong nước vừa có thi viết vừa có thi nói." },
+    { who: "小红", en: "听起来好难。", py: "Tīng qǐ lái hǎo nán.", vi: "Nghe khó thật đấy." },
+    { who: "小红", en: "呃，你感觉怎么样？", py: "È, nǐ gǎn jué zěn me yàng?", vi: "Ừm, cậu thấy thế nào?" },
+    { who: "小爱", en: "我觉得法国的公司面试有点难，问了很多专业性的问题。", py: "Wǒ jué de fǎ guó de gōng sī miàn shì yǒu diǎn nán, wèn le hěn duō zhuān yè xìng de wèn tí.", vi: "Mình thấy phỏng vấn ở công ty Pháp hơi khó, họ hỏi nhiều câu chuyên môn lắm." },
+    { who: "小爱", en: "国内的公司虽然既有笔试又有口试，但是相对容易一些。", py: "Guó nèi de gōng sī suī rán jì yǒu bǐ shì yòu yǒu kǒu shì, dàn shì xiāng duì róng yì yī xiē.", vi: "Công ty trong nước tuy vừa thi viết vừa thi nói, nhưng nhìn chung dễ hơn một chút." },
+    { who: "小红", en: "啊，那什么时候知道消息？", py: "A, nà shén me shí hòu zhī dào xiāo xi?", vi: "À, thế khi nào thì biết kết quả?" },
+    { who: "小爱", en: "最晚下星期。", py: "Zuì wǎn xià xīng qī.", vi: "Muộn nhất là tuần sau." },
+    { who: "小红", en: "那祝你好运！", py: "Nà zhù nǐ hǎo yùn!", vi: "Thế thì chúc cậu may mắn nhé!" },
+    { who: "小红", en: "有消息一定要告诉我。", py: "Yǒu xiāo xi yī ding yào gào sù wǒ.", vi: "Có tin gì nhất định phải nói với mình đấy." },
+    { who: "小爱", en: "好的，谢谢！", py: "Hǎo de, xiè xiè!", vi: "Ừ, cảm ơn nhé!" }
   ]
 };
 

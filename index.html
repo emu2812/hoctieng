@@ -497,6 +497,9 @@ function todayStr() { var d = new Date(); return d.getFullYear() + "-" + String(
 function addDaysStr(base, n) { var d = new Date(base + "T00:00:00"); d.setDate(d.getDate() + n); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
 function fmtBandComma(b) { return (Math.round(b * 10) / 10).toFixed(1).replace(".", ","); }
 function speak(text, rate, onend) { try { if (window.speechSynthesis && window.SpeechSynthesisUtterance) { window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; if (rate) u.rate = rate; if (onend) u.onend = onend; window.speechSynthesis.speak(u); } } catch (e) {} }
+/* v126: doc cau tieng Trung phai dung giong zh-CN (zhSpeak), khong dung giong en-GB. */
+function hasCJK(s) { return /[\u3400-\u9FFF\uF900-\uFAFF]/.test(String(s || "")); }
+function speakAuto(text, rate, onend) { if (hasCJK(text)) zhSpeak(text, rate, onend); else speak(text, rate, onend); }
 /* v107b: trang thai dang phat cho nut "Nghe giong mau" (buoc 1 tu vung) — truoc
    day bam nut khong co phan hoi nhin thay duoc. Khoi phuc qua onend (speak) hoac
    timeout uoc luong (zhSpeak/tpSpeak khong co onend); timeout tham chieu nut cu
@@ -1010,7 +1013,7 @@ function videoLinesEnsure(key) {
   var ri = CONTENT.reading.length;
   CONTENT.reading.push({ title: title, topic: title, level: "", text: lines.map(function (x) { return x.en; }).join(" "), translation: lines.map(function (x) { return x.vi; }).join(" "), phrases: [], questions: [] });
   var si = CONTENT.speaking.length;
-  CONTENT.speaking.push({ topic: title, part: "Shadowing", band: "", lines: lines.map(function (x) { return { who: "Lời thoại", en: x.en, vi: x.vi }; }) }); /* v122b: bai Shadowing phai hien nhan Shadowing */
+  CONTENT.speaking.push({ topic: title, part: "Shadowing", band: "", lines: lines.map(function (x) { return { who: x.who || "Lời thoại", en: x.en, vi: x.vi, py: x.py || "" }; }) }); /* v122b: bai Shadowing phai hien nhan Shadowing */ /* v126: giu who + py cua video ZH */
   window.__videoLinesIdx[key] = { listen: li, read: ri, speak: si };
   return window.__videoLinesIdx[key];
 }
@@ -6961,7 +6964,7 @@ function lastZhPronLineHTML(key) {
    helper game) để tab Luyện tập vẽ được nhãn ngay cả khi file game riêng
    chưa tải xong — nút game mới gọi helper này trong enPracticeEntHTML. */
 function gameShuffle(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = a[i]; a[i] = a[j]; a[j] = tmp; } return a; }
-function gameNormSent(s) { return String(s || "").toLowerCase().replace(/[.!?,;:'"]/g, "").replace(/\s+/g, " ").trim(); }
+function gameNormSent(s) { return String(s || "").toLowerCase().replace(/[.!?,;:'"。、，；：？！·…「」『』（）《》〈〉【】—]/g, "").replace(/\s+/g, " ").trim(); } /* v126: bo ca dau cau tieng Trung */
 /* DOT 2e: nguon game track Trung (chi lay tu ngan hang Trung san co).
    - Noi tu: chu Han <-> nghia (the tu zhSets).
    - Giai ma chu: nhin chu Han + nghia, go lai PINYIN (khong can dau thanh).
@@ -13090,7 +13093,7 @@ function splitSentencesEN(text) {
   t = t.replace(/\b(e)\.(g)\./gi, "$1" + DOT + "$2" + DOT);
   t = t.replace(/\b(i)\.(e)\./gi, "$1" + DOT + "$2" + DOT);
   t = t.replace(/\bNo\.(?=\s*\d)/g, "No" + DOT);
-  var parts = t.match(/[^.?!]+[.?!]+["'”)]?/g) || (t ? [t] : []);
+  var parts = t.match(/[^.?!。？！]+[.?!。？！]+["'”)]?/g) || (t ? [t] : []); /* v126: tach ca cau tieng Trung ket thuc bang 。？！ */
   var out = [];
   parts.forEach(function (p) {
     p = p.trim();
@@ -13105,20 +13108,28 @@ function splitSentencesEN(text) {
   });
   return out.map(function (s) { return s.split(DOT).join("."); });
 }
+/* v126: cau tieng Trung khong co khoang trang giua cac tu — che theo TUNG KY TU
+   (ky tu dau + dau cau khong che, giong luat tu dau tien cua tieng Anh). */
+function dictToks(sent) {
+  if (/[\u3400-\u9FFF\uF900-\uFAFF]/.test(String(sent || ""))) return { toks: Array.from(String(sent || "")), join: "" };
+  return { toks: String(sent || "").split(" "), join: " " };
+}
 function dictMaskFor(sent, level) {
-  var toks = sent.split(" ");
-  return toks.map(function (tok, i) {
-    if (i === 0 || !/[A-Za-z0-9]/.test(tok)) return false;
+  var dt = dictToks(sent);
+  return dt.toks.map(function (tok, i) {
+    if (i === 0 || !/[A-Za-z0-9\u3400-\u9FFF\uF900-\uFAFF]/.test(tok)) return false;
     if (level === "easy") return i % 4 === 3;
     if (level === "hard") return true;
     return i % 2 === 1;
   });
 }
 function dictScaffold(sent, mask, revealed) {
-  return sent.split(" ").map(function (tok, i) {
+  var dt = dictToks(sent);
+  return dt.toks.map(function (tok, i) {
     if (!mask[i] || (revealed && revealed[i])) return tok;
+    if (/[\u3400-\u9FFF\uF900-\uFAFF]/.test(tok)) return "＿";
     return tok.replace(/[A-Za-z0-9]+/g, "___");
-  }).join(" ");
+  }).join(dt.join);
 }
 var _wordIpaCache = null;
 function wordIpaMap() {
@@ -13246,7 +13257,7 @@ function renderDictation(app, l) {
   $$("[data-dclevel]").forEach(function (b) { b.onclick = function () { l.level = b.dataset.dclevel; render(); }; });
   $("#dcHide").onchange = function () { l.hideScaffold = $("#dcHide").checked; render(); };
   $("#dcRate").onchange = function () { l.rate = parseFloat($("#dcRate").value) || 1; };
-  $("#dcPlay").onclick = function () { speak(sent, l.rate || 1); };
+  $("#dcPlay").onclick = function () { speakAuto(sent, l.rate || 1); }; /* v126: cau tieng Trung doc bang zh-CN */
   $("#dcHint").onclick = function () {
     if (res) return;
     var rev = l.revealed[si];
@@ -13760,10 +13771,13 @@ var LISTEN_HUB_ROWS = {
   ],
   zh: [
     { k: "compre", t: "Nghe hiểu" },
+    { k: "dict", t: "Nghe chép chính tả" },
+    { k: "shadowView", t: "Shadowing Xem/Luyện" },
+    { k: "podcast", t: "Nghe thụ động — Podcast" },
     { k: "passive", t: "Nghe thụ động — video" },
     { k: "video", t: "Video có phụ đề thật — 4 dạng bài" },
     { k: "link", t: "Link tự gắn" }
-  ],
+  ], /* v126: ZH da co Nghe chep + Shadowing + Podcast qua video zh-e10 co phu de that */
   tc: [
     { k: "compre", t: "Nghe hiểu" },
     { k: "video", t: "Video có phụ đề thật — 4 dạng bài" },
@@ -13779,7 +13793,7 @@ var LISTEN_HUB_ROWS = {
    le vang mat. EN du 7 hang nen khong co ghi chu thieu. */
 var LISTEN_HUB_NOTE = {
   en: "",
-  zh: "Track tiếng Trung chưa có Nghe chép chính tả, Shadowing (10 bước) và Podcast — đang chờ phụ đề thật tiếng Trung. Bài tập 4 dạng bài qua video hiện chỉ mở được với video có phụ đề thật (hiện chỉ có video VOA tiếng Anh).",
+  zh: "Shadowing 10 bước chưa có — đang chờ chuyển khung Shadowing 10 bước sang tiếng Trung. Hàng \"Video có phụ đề thật\" vẫn mở không gian VOA tiếng Anh — đang chờ chuyển không gian video sang video tiếng Trung.", /* v126: ZH da co Nghe chep + Shadowing + Podcast qua video zh-e10 */
   tc: "Track TOEIC chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật. Bài tập 4 dạng bài qua video hiện chỉ mở được với video có phụ đề thật (hiện chỉ có video VOA tiếng Anh).",
   tp: "Track TOPIK chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật. Bài tập 4 dạng bài qua video hiện chỉ mở được với video có phụ đề thật (hiện chỉ có video VOA tiếng Anh)."
 };
@@ -13874,6 +13888,15 @@ function listenHubGo(track, key) {
     } else {
       openLesson({ type: "skillListenLong", idx: listenHubFirstUndoneEN("listenLong", CONTENT.listeningPlus) });
     }
+    return;
+  }
+  /* v126: ZH mo Nghe chep / Shadowing / Podcast cua video zh-e10 co phu de that. */
+  if (track === "zh" && (key === "dict" || key === "shadowView" || key === "podcast")) {
+    var zi = (typeof videoLinesEnsure === "function") ? videoLinesEnsure("zh-e10") : null;
+    if (!zi) { toast("Chưa có phụ đề thật của video tiếng Trung nên chưa mở được bài tập."); return; }
+    if (key === "dict") openLesson({ type: "dictation", idx: zi.listen });
+    else if (key === "shadowView") openLesson({ type: "skillSpeak", idx: zi.speak });
+    else openLesson({ type: "podcast", idx: zi.speak });
     return;
   }
   if (track !== "en") return;
@@ -14165,7 +14188,10 @@ function practiceFilterWire() {
    khong them mau/linh vat/font moi — phan trinh bay cuoi de dot tinh chinh rieng sau. */
 
 /* ---------- Sua chi tiet tung tu cho cau nghe chep sai (LCS tren tu) ---------- */
-function normWordsForDiff(s) { return (s || "").toLowerCase().replace(/[^a-z0-9'\s]/g, " ").split(/\s+/).filter(Boolean); }
+function normWordsForDiff(s) {
+  if (/[\u3400-\u9FFF\uF900-\uFAFF]/.test(String(s || ""))) return Array.from(String(s || "")).filter(function (ch) { return /[\u3400-\u9FFF\uF900-\uFAFFa-z0-9']/i.test(ch); }); /* v126: cau tieng Trung so theo tung ky tu */
+  return (s || "").toLowerCase().replace(/[^a-z0-9'\s]/g, " ").split(/\s+/).filter(Boolean);
+}
 function wordDiff(user, target) {
   var u = normWordsForDiff(user), t = normWordsForDiff(target);
   var m = u.length, n = t.length, dp = [];
@@ -14338,7 +14364,7 @@ function podPlayFrom(l, i) {
   var item = CONTENT.speaking[l.idx]; if (!item) return;
   var lines = item.lines || [];
   if (l.podStop || i >= lines.length) return;
-  speak(lines[i].en, 1, function () { if (!l.podStop) podPlayFrom(l, i + 1); });
+  speakAuto(lines[i].en, 1, function () { if (!l.podStop) podPlayFrom(l, i + 1); }); /* v126 */
 }
 function renderPodcast(app, l) {
   var item = CONTENT.speaking[l.idx];
@@ -14373,7 +14399,7 @@ function renderPodcast(app, l) {
       return '<span data-pword="' + esc(clean) + '" style="cursor:pointer;text-decoration:underline dotted">' + esc(tok) + '</span>';
     }).join("");
     html += '<div class="qblock" id="podLine' + li + '"><p><span class="chip">' + esc(ln.who || "") + '</span> <span class="chip">⏱ ~' + podcastEstTime(lines, li) + '</span></p>'
-      + (listenOnly ? '<p class="mut">Câu ' + (li + 1) + ' — bấm nghe để nghe câu này.</p>' : '<p><b>' + wordsHTML + '</b></p>' + (showVi ? '<p class="mut">' + esc(ln.vi || "") + '</p>' : ''))
+      + (listenOnly ? '<p class="mut">Câu ' + (li + 1) + ' — bấm nghe để nghe câu này.</p>' : '<p><b>' + wordsHTML + '</b></p>' + (ln.py ? '<p class="mut">' + esc(ln.py) + '</p>' : '') + (showVi ? '<p class="mut">' + esc(ln.vi || "") + '</p>' : '')) /* v126: hien pinyin neu co */
       + '<div class="row"><button class="btn" data-pplay="' + li + '">▶ Nghe từ đây</button><button class="btn" data-prepeat="' + li + '">↻ Lặp câu</button></div>'
       + '<div class="why" id="podLook' + li + '"></div></div>';
   });
@@ -14391,7 +14417,7 @@ function renderPodcast(app, l) {
     state.skillDone[l.skillKey] = true; awardXp(was ? 5 : 10); logLessonMinutes(l); l.podDone = true; saveState(); render();
   };
   $$("[data-pplay]").forEach(function (b) { b.onclick = function () { l.podStop = false; podPlayFrom(l, +b.dataset.pplay); }; });
-  $$("[data-prepeat]").forEach(function (b) { b.onclick = function () { speak(lines[+b.dataset.repeat].en, 1); }; });
+  $$("[data-prepeat]").forEach(function (b) { b.onclick = function () { speakAuto(lines[+b.dataset.repeat].en, 1); }; }); /* v126 */
   $$("[data-pword]").forEach(function (sp) {
     sp.onclick = function () {
       var w = sp.dataset.pword;
@@ -14666,7 +14692,7 @@ function skillIconSpan(skill) { return '<span style="display:inline-block;vertic
 
 function speakLinesHTML(s) {
   return s.lines.map(function (ln, i) {
-    return '<p><b>' + esc(ln.who) + ':</b> ' + esc(ln.en) + ' <button class="btn" data-speakline="' + i + '">🔊</button><br><span class="mut">' + esc(ln.vi) + '</span></p>';
+    return '<p><b>' + esc(ln.who) + ':</b> ' + esc(ln.en) + ' <button class="btn" data-speakline="' + i + '">🔊</button>' + (ln.py ? '<br><span class="mut">' + esc(ln.py) + '</span>' : '') + '<br><span class="mut">' + esc(ln.vi) + '</span></p>'; /* v126: hien pinyin neu co */
   }).join("");
 }
 /* v122: man luyen noi — moi cau co nut Doc to (tang 1) + ket qua ngay. */
@@ -14677,7 +14703,7 @@ function speakLinesPracticeHTML(s, l) {
     var res = "";
     if (r.tried) res = '<br><span>' + (r.ok ? '✓ Máy nghe ra: “' + esc(r.heard || "") + '”' : '✗ Máy chưa nghe ra' + (r.heard ? ' — nghe được: “' + esc(r.heard) + '”' : '') + ' — nghe lại mẫu rồi đọc chậm hơn.') + '</span>';
     if (r.err) res += '<br><span class="mut">' + esc(r.err) + '</span>';
-    return '<p><b>' + esc(ln.who) + ':</b> ' + esc(ln.en) + ' <button class="btn" data-speakline="' + i + '">🔊</button> <button class="btn" data-splinerec="' + i + '">🎤 Đọc câu này</button><br><span class="mut">' + esc(ln.vi) + '</span>' + res + '</p>';
+    return '<p><b>' + esc(ln.who) + ':</b> ' + esc(ln.en) + ' <button class="btn" data-speakline="' + i + '">🔊</button> <button class="btn" data-splinerec="' + i + '">🎤 Đọc câu này</button>' + (ln.py ? '<br><span class="mut">' + esc(ln.py) + '</span>' : '') + '<br><span class="mut">' + esc(ln.vi) + '</span>' + res + '</p>'; /* v126: hien pinyin neu co */
   }).join("");
 }
 /* v104 Chặng 7 — AI chấm Nói 4 tiêu chí cho bài Nói (VIP). Tái dùng y hệt
@@ -14723,11 +14749,11 @@ function renderSkillSpeak(app, l) {
       + '<p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Không cần đăng nhập, không cần camera.' + ((s.quiz || []).length ? ' Sau đó làm câu hỏi từ vựng và cấu trúc rút ra từ chính bài mẫu.' : ' Bài mẫu này chỉ để nghe và nhại theo — không có câu hỏi.') + '</p>'
       + ((s.quiz || []).length ? '<button class="btn btn-primary" id="spStart">Làm câu hỏi (' + (s.quiz || []).length + ' câu)</button>' : '') + '</div>';
     wireBack();
-    $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speak(s.lines[+b.dataset.speakline].en); }; });
+    $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speakAuto(s.lines[+b.dataset.speakline].en); }; }); /* v126: cau tieng Trung doc bang zh-CN */
     $$("[data-splinerec]").forEach(function (b) { b.onclick = function () {
       var i = +b.dataset.splinerec, ref = s.lines[i].en;
-      pronTier1Start("en", function (heard) {
-        var sc = pronTier1Score(heard, ref, "en");
+      pronTier1Start(hasCJK(ref) ? "zh" : "en", function (heard) {
+        var sc = pronTier1Score(heard, ref, hasCJK(ref) ? "zh" : "en"); /* v126: cham tang 1 bang zh-CN cho cau tieng Trung */
         if (!l.spLineRes) l.spLineRes = {};
         l.spLineRes[i] = { tried: true, ok: sc === 100, heard: heard, err: "" };
         render();
@@ -14747,7 +14773,7 @@ function renderSkillSpeak(app, l) {
      moi lan render vi khoi nay phu thuoc trang thai ghi am. */
   l.finishExtraHTML = '<details open style="margin-bottom:10px"><summary><b>Xem lại bài mẫu</b></summary><div class="qblock">' + speakLinesHTML(s) + '</div></details><div id="spLessonAiSlot"></div>';
   app.innerHTML = '<p class="mut">Sau khi làm xong, nói lại toàn bộ bài mẫu thành tiếng ở cuối trang — tài khoản VIP được AI chấm 4 tiêu chí, tài khoản thường tự đối chiếu theo bảng tiêu chí.</p><div id="quizSlot"></div>';
-  $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speak(s.lines[+b.dataset.speakline].en); }; });
+  $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speakAuto(s.lines[+b.dataset.speakline].en); }; }); /* v126: cau tieng Trung doc bang zh-CN */
   renderQuizEngine($("#quizSlot"), l, s.quiz || [], "skill", "speak:" + l.idx, 2);
   var spSlot = $("#spLessonAiSlot");
   if (spSlot) { spSlot.innerHTML = spLessonAiHTML(l, s); wireSpLessonAi(l, s); }
@@ -17190,7 +17216,7 @@ function normZh() {
   if (!Array.isArray(state.tpHard)) state.tpHard = [];
   if (!Array.isArray(state.tpMockTests)) state.tpMockTests = [];
 }
-function zhSpeak(text) { try { if (window.speechSynthesis && window.SpeechSynthesisUtterance) { window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "zh-CN"; u.rate = 0.85; window.speechSynthesis.speak(u); } } catch (e) {} }
+function zhSpeak(text, rate, onend) { try { if (window.speechSynthesis && window.SpeechSynthesisUtterance) { window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "zh-CN"; u.rate = rate || 0.85; if (onend) u.onend = onend; window.speechSynthesis.speak(u); } } catch (e) {} } /* v126: them rate/onend cho bai nghe chep + podcast tieng Trung */
 function trackSwitchHTML(withLabel) {
   var zh = state.track === "zh";
   var tc = state.track === "tc";
