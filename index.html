@@ -11072,16 +11072,20 @@ function mrPruneLibBest() {
 function mrRenderLib(slot) {
   var lib = slot.querySelector(".mr-lib");
   if (!lib) return;
+  /* v125e: an ca muc khi thu vien trong — muc chi hien khi co >=1 video mau.
+     secEl la chinh section (slot co the la div boc ngoai trong probe). */
+  var secEl = (slot.classList && slot.classList.contains("mr-lib-section")) ? slot : (slot.querySelector(".mr-lib-section") || slot);
   var cnt = slot.querySelector(".mr-lib-count");
   MR.urls.forEach(function (u) { try { URL.revokeObjectURL(u); } catch (e) {} });
   MR.urls = [];
-  if (typeof indexedDB === "undefined") { lib.innerHTML = '<p class="mut">Trình duyệt này không lưu được video mẫu.</p>'; return; }
+  if (typeof indexedDB === "undefined") { secEl.style.display = ""; lib.innerHTML = '<p class="mut">Trình duyệt này không lưu được video mẫu.</p>'; return; }
   mrVidAll().then(function (list) {
     /* Chi 1 hang duy nhat: clip mau dung (tu luu khi giu dung hinh mieng
        mot luc). Khong con hang luu tay — cac ban ghi cu khong phai mau dung
        bi don sach boi mrPruneLibBest luc tai web. */
     var isAutoRight = function (v) { return (v.auto === true || v.kind === "moment"); };
     var top = list.filter(isAutoRight);
+    secEl.style.display = top.length ? "" : "none"; /* v125e */
     if (cnt) cnt.textContent = top.length ? ("Thư viện: " + top.length + " video mẫu đúng.") : "Thư viện: chưa có video mẫu nào.";
     var item = function (v) {
       var media = "";
@@ -11094,10 +11098,10 @@ function mrRenderLib(slot) {
     lib.querySelectorAll(".mr-del").forEach(function (b) {
       b.onclick = function () { mrVidDelete(+b.dataset.id).then(function () { mrRenderLib(slot); }); };
     });
-  }, function (err) { lib.innerHTML = '<p class="mut">Không đọc được thư viện video mẫu' + (err ? ' (lỗi: ' + (err.name || err.message || String(err)) + ')' : '') + '.</p>'; });
+  }, function (err) { secEl.style.display = ""; lib.innerHTML = '<p class="mut">Không đọc được thư viện video mẫu' + (err ? ' (lỗi: ' + (err.name || err.message || String(err)) + ')' : '') + '.</p>'; });
 }
 function mrLibSectionHTML() {
-  return '<section class="card mr-lib-section"><h3>Video mẫu của bạn</h3>'
+  return '<section class="card mr-lib-section" style="display:none"><h3>Video mẫu của bạn</h3>' /* v125e: mac dinh an, mrRenderLib chi hien khi co >=1 video mau */
     + '<p class="mut mr-lib-count">Thư viện: chưa có video mẫu nào.</p>'
     + '<div class="row"><button class="btn mr-clear">Xóa hết video</button></div>'
     + '<div class="mr-lib"></div>'
