@@ -3951,33 +3951,7 @@ var ZH_STAGE_GOALS = [
   { goal: "Đọc văn bản dài 700–1500 chữ, tóm tắt và viết rút gọn 300–350 chữ, dùng tiếng Trung cho chủ đề ít quen thuộc.", can: ["Đọc bài khóa dài, tìm ý chính và chi tiết quan trọng.", "Viết rút gọn 300–350 chữ, giữ đủ ý chính, bỏ ý phụ.", "Nghe bài nói dài, ghi được ý chính.", "Bàn chủ đề xã hội, văn hóa, khoa học ở mức khái quát."] }
 ];
 var ZH_PH_STEPS = [
-  { id: "tones", title: "Thanh điệu: 4 thanh + thanh nhẹ",
-    hook: "Nói tiếng Trung mà sai thanh là sai nghĩa: mā (mẹ) khác mǎ (ngựa) — chỉ khác dấu thanh.",
-    examples: ["mā 妈 — mẹ (thanh 1, cao đều)", "má 麻 — tê, gai (thanh 2, đi lên)", "mǎ 马 — ngựa (thanh 3, xuống rồi lên)", "mà 骂 — mắng (thanh 4, đi xuống)", "ma 吗 — trợ từ hỏi (thanh nhẹ, đọc lướt)"],
-    rule: "Thanh điệu là độ cao của giọng khi đọc một âm tiết. Tiếng Trung phổ thông có 4 thanh chính + thanh nhẹ. Nhìn dấu thanh là biết thanh nào.",
-    tip: "Tập đọc từng thanh với tay vẽ đường đi của giọng: ngang, lên, cong, xuống.",
-    quiz: [
-      { q: "“mā” mang dấu thanh nào?", o: ["Dấu ngang", "Dấu lên", "Dấu cong", "Dấu xuống"], a: 0, why: "Dấu ngang là thanh 1, đọc cao và đều.", speak: "妈" },
-      { q: "“mǎ” là thanh mấy?", o: ["Thanh 1", "Thanh 2", "Thanh 3", "Thanh 4"], a: 2, why: "Dấu cong xuống rồi lên là thanh 3.", speak: "马" },
-      { q: "Từ nào đọc bằng thanh 4?", o: ["mā", "má", "mǎ", "mà"], a: 3, why: "Chỉ từ mang dấu xuống mới là thanh 4.", speak: "妈麻马骂" },
-      { q: "Chữ “吗” trong câu hỏi thường đọc bằng thanh nào?", o: ["Thanh 1", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 3, why: "吗 là trợ từ cuối câu hỏi, đọc thanh nhẹ, ngắn và lướt.", speak: "吗" },
-      { q: "Cặp nào chỉ khác nhau ở thanh điệu?", o: ["mā – mà", "mā – bā", "mā – nā", "mā – lā"], a: 0, why: "Cùng vần ma, chỉ khác dấu thanh thì nghĩa đã khác.", speak: "妈骂" },
-      { q: "Hai thanh 3 đi liền nhau thì thanh đầu đọc thành gì?", o: ["Vẫn thanh 3", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 1, why: "Quy tắc biến điệu: 3 + 3 đọc thành 2 + 3.", speak: "你好" }
-    ] },
-  { id: "finals", title: "Vận mẫu cơ bản",
-    hook: "Vận mẫu là phần vần sau thanh mẫu: b + ao = bao.",
-    examples: ["a, o, e, i, u, ü — 6 vận mẫu đơn", "ai, ei, ao, ou — vận mẫu kép, đọc trượt từ âm này sang âm kia", "an, en, ang, eng — vận mẫu mũi, kết thúc bằng n hoặc ng"],
-    rule: "Một âm tiết = thanh mẫu (không bắt buộc) + vận mẫu (bắt buộc) + thanh điệu. Vận mẫu quyết định vần của âm tiết.",
-    tip: "Đọc vận mẫu mũi thì hơi thoát ra mũi ở cuối: an khác ang ở độ sâu của âm mũi.",
-    quiz: [
-      { q: "Âm nào là vận mẫu (phần vần)?", o: ["b", "a", "m", "d"], a: 1, why: "a là vận mẫu đơn; b, m, d là thanh mẫu.", speak: "啊" },
-      { q: "“ao” là vận mẫu gì?", o: ["Vận mẫu đơn", "Vận mẫu kép", "Vận mẫu mũi", "Thanh mẫu"], a: 1, why: "ao trượt từ a sang o nên là vận mẫu kép.", speak: "好" },
-      { q: "Từ “hǎo” (hảo) có vận mẫu nào?", o: ["a", "ao", "ou", "an"], a: 1, why: "hǎo = h + ao.", speak: "好" },
-      { q: "Vận mẫu mũi là vận mẫu kết thúc bằng gì?", o: ["i hoặc u", "n hoặc ng", "a hoặc o", "e"], a: 1, why: "an, en, ang, eng đều kết thúc bằng âm mũi.", speak: "安昂" },
-      { q: "“an” và “ang” khác nhau ở đâu?", o: ["Không khác", "ang đọc mũi sâu hơn, có ng cuối", "an dài hơn", "ang là thanh mẫu"], a: 1, why: "ang có ng cuối nên âm mũi sâu hơn an.", speak: "安昂" },
-      { q: "“ei” đọc gần giống gì?", o: ["ay", "au", "ei (e rồi i nhẹ)", "ao"], a: 2, why: "ei trượt từ e sang i nhẹ.", speak: "飞" }
-    ] },
-  { id: "initials", title: "Thanh mẫu cơ bản",
+{ id: "initials", title: "Thanh mẫu cơ bản",
     hook: "Thanh mẫu là phụ âm đầu: b, p, m, f là 4 thanh mẫu môi.",
     examples: ["b, p, m, f — môi", "d, t, n, l — đầu lưỡi", "g, k, h — cuống lưỡi", "j, q, x — mặt lưỡi; zh, ch, sh, r — quặt lưỡi; z, c, s — đầu lưỡi"],
     rule: "Có 21 thanh mẫu (không tính y, w). Phân biệt cặp bật hơi/không bật hơi: b–p, d–t, g–k, j–q, zh–ch, z–c.",
@@ -3990,7 +3964,33 @@ var ZH_PH_STEPS = [
       { q: "Cặp nào khác nhau ở bật hơi?", o: ["b – m", "d – t", "n – l", "g – h"], a: 1, why: "d không bật hơi, t bật hơi mạnh.", speak: "大他" },
       { q: "“r” trong pinyin (như trong rén) đọc gần giống gì?", o: ["r rung mạnh như tiếng Việt", "r mềm, gần như “z” nhẹ có rung", "l", "y"], a: 1, why: "r tiếng Trung mềm và có ma sát, không rung mạnh.", speak: "人" }
     ] },
-  { id: "rules", title: "Quy tắc viết pinyin hay nhầm",
+{ id: "finals", title: "Vận mẫu cơ bản",
+    hook: "Vận mẫu là phần vần sau thanh mẫu: b + ao = bao.",
+    examples: ["a, o, e, i, u, ü — 6 vận mẫu đơn", "ai, ei, ui, ao, ou, iu, ie, üe, er, ia, iao, ua, uo, uai — 14 vận mẫu kép, đọc trượt từ âm này sang âm kia", "an, en, in, un, ün, ian, uan, üan — 8 vận mẫu mũi trước, kết thúc bằng n", "ang, eng, ing, ong, iang, uang, iong, ueng — 8 vận mẫu mũi sau, kết thúc bằng ng"], /* v137 (M5): vi du du 36 van mau (6 don + 14 kep + 8 mui truoc + 8 mui sau) */
+    rule: "Một âm tiết = thanh mẫu (không bắt buộc) + vận mẫu (bắt buộc) + thanh điệu. Vận mẫu quyết định vần của âm tiết.",
+    tip: "Đọc vận mẫu mũi thì hơi thoát ra mũi ở cuối: an khác ang ở độ sâu của âm mũi.",
+    quiz: [
+      { q: "Âm nào là vận mẫu (phần vần)?", o: ["b", "a", "m", "d"], a: 1, why: "a là vận mẫu đơn; b, m, d là thanh mẫu.", speak: "啊" },
+      { q: "“ao” là vận mẫu gì?", o: ["Vận mẫu đơn", "Vận mẫu kép", "Vận mẫu mũi", "Thanh mẫu"], a: 1, why: "ao trượt từ a sang o nên là vận mẫu kép.", speak: "好" },
+      { q: "Từ “hǎo” (hảo) có vận mẫu nào?", o: ["a", "ao", "ou", "an"], a: 1, why: "hǎo = h + ao.", speak: "好" },
+      { q: "Vận mẫu mũi là vận mẫu kết thúc bằng gì?", o: ["i hoặc u", "n hoặc ng", "a hoặc o", "e"], a: 1, why: "an, en, ang, eng đều kết thúc bằng âm mũi.", speak: "安昂" },
+      { q: "“an” và “ang” khác nhau ở đâu?", o: ["Không khác", "ang đọc mũi sâu hơn, có ng cuối", "an dài hơn", "ang là thanh mẫu"], a: 1, why: "ang có ng cuối nên âm mũi sâu hơn an.", speak: "安昂" },
+      { q: "“ei” đọc gần giống gì?", o: ["ay", "au", "ei (e rồi i nhẹ)", "ao"], a: 2, why: "ei trượt từ e sang i nhẹ.", speak: "飞" }
+    ] },
+{ id: "tones", title: "Thanh điệu: 4 thanh + thanh nhẹ",
+    hook: "Nói tiếng Trung mà sai thanh là sai nghĩa: mā (mẹ) khác mǎ (ngựa) — chỉ khác dấu thanh.",
+    examples: ["mā 妈 — mẹ (thanh 1, cao đều)", "má 麻 — tê, gai (thanh 2, đi lên)", "mǎ 马 — ngựa (thanh 3, xuống rồi lên)", "mà 骂 — mắng (thanh 4, đi xuống)", "ma 吗 — trợ từ hỏi (thanh nhẹ, đọc lướt)"],
+    rule: "Thanh điệu là độ cao của giọng khi đọc một âm tiết. Tiếng Trung phổ thông có 4 thanh chính + thanh nhẹ. Nhìn dấu thanh là biết thanh nào.",
+    tip: "Tập đọc từng thanh với tay vẽ đường đi của giọng: ngang, lên, cong, xuống.",
+    quiz: [
+      { q: "“mā” mang dấu thanh nào?", o: ["Dấu ngang", "Dấu lên", "Dấu cong", "Dấu xuống"], a: 0, why: "Dấu ngang là thanh 1, đọc cao và đều.", speak: "妈" },
+      { q: "“mǎ” là thanh mấy?", o: ["Thanh 1", "Thanh 2", "Thanh 3", "Thanh 4"], a: 2, why: "Dấu cong xuống rồi lên là thanh 3.", speak: "马" },
+      { q: "Từ nào đọc bằng thanh 4?", o: ["mā", "má", "mǎ", "mà"], a: 3, why: "Chỉ từ mang dấu xuống mới là thanh 4.", speak: "妈麻马骂" },
+      { q: "Chữ “吗” trong câu hỏi thường đọc bằng thanh nào?", o: ["Thanh 1", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 3, why: "吗 là trợ từ cuối câu hỏi, đọc thanh nhẹ, ngắn và lướt.", speak: "吗" },
+      { q: "Cặp nào chỉ khác nhau ở thanh điệu?", o: ["mā – mà", "mā – bā", "mā – nā", "mā – lā"], a: 0, why: "Cùng vần ma, chỉ khác dấu thanh thì nghĩa đã khác.", speak: "妈骂" },
+      { q: "Hai thanh 3 đi liền nhau thì thanh đầu đọc thành gì?", o: ["Vẫn thanh 3", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 1, why: "Quy tắc biến điệu: 3 + 3 đọc thành 2 + 3.", speak: "你好" }
+    ] },
+{ id: "rules", title: "Quy tắc viết pinyin hay nhầm",
     hook: "Viết pinyin có vài chỗ gọn lại — nhớ 4 quy tắc này là đủ đọc đúng.",
     examples: ["ü sau j, q, x, y → u: ju, qu, xu, yu", "iou có thanh mẫu → iu: jiu (không viết jiou)", "uen có thanh mẫu → un: lun (không viết luen)", "i đứng một mình → yi; u đứng một mình → wu; ü đứng một mình → yu"],
     rule: "Các quy tắc gọn này chỉ đổi CÁCH VIẾT, không đổi cách đọc. Ngoài ra: hai thanh 3 liền nhau thì thanh đầu đọc thành thanh 2. Biến điệu 不 và 一 (đọc đổi thanh, viết đổi luôn trong pinyin): 不 trước thanh 4 đọc thành bú (ví dụ 不会 bú huì), trước thanh 1/2/3 đọc thành bù (ví dụ 对不起 duìbùqǐ); 一 trước thanh 4 đọc thành yí (ví dụ 一个 yí gè — một cái), trước thanh 1/2/3 đọc thành yì (ví dụ 一边 yìbiān, 十一点 shíyì diǎn). Riêng biến điệu 3+3 thì chỉ đổi cách đọc, không đổi cách viết (vẫn viết nǐ hǎo, đọc thành ní hǎo).",

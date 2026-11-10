@@ -7238,7 +7238,7 @@ function renderSylDetail(app, l) {
     zhChars = String(han).split("").map(function (ch, i) {
       var py = pys[i] || "";
       if (!py) { var zf = sylFindZh(ch); if (zf) py = String(zf.py || "").split(/\s+/)[0] || ""; }
-      var pp = zhPinyinParts(py);
+      var pp = zhPinyinParts(py, ch);
       return { ch: ch, py: py, tone: pp.tone, init: pp.initial, fin: pp.final };
     });
     if (l.aiRes) {
@@ -7818,7 +7818,7 @@ function pronT1MarkDoneTrack(track, sym) {
 var ZH_TONE_MARKS = { "ā":1,"á":2,"ǎ":3,"à":4, "ē":1,"é":2,"ě":3,"è":4, "ī":1,"í":2,"ǐ":3,"ì":4, "ō":1,"ó":2,"ǒ":3,"ò":4, "ū":1,"ú":2,"ǔ":3,"ù":4, "ǖ":1,"ǘ":2,"ǚ":3,"ǜ":4 };
 var ZH_TONE_BASE = { "ā":"a","á":"a","ǎ":"a","à":"a","ē":"e","é":"e","ě":"e","è":"e","ī":"i","í":"i","ǐ":"i","ì":"i","ō":"o","ó":"o","ǒ":"o","ò":"o","ū":"u","ú":"u","ǔ":"u","ù":"u","ǖ":"ü","ǘ":"ü","ǚ":"ü","ǜ":"ü" };
 var ZH_INITIALS = ["zh","ch","sh","b","p","m","f","d","t","n","l","g","k","h","j","q","x","r","z","c","s","y","w"];
-function zhPinyinParts(py) {
+function zhPinyinParts(py, han) {
   var s = String(py || "").split(/[\s·\-]/)[0] || "";
   var tone = 0, base = "";
   for (var i = 0; i < s.length; i++) { var ch = s[i]; if (ZH_TONE_MARKS[ch]) { if (!tone) tone = ZH_TONE_MARKS[ch]; base += ZH_TONE_BASE[ch]; } else base += ch; }
@@ -7827,11 +7827,18 @@ function zhPinyinParts(py) {
   if (mm) base = mm[0];
   var init = "";
   for (var k = 0; k < ZH_INITIALS.length; k++) { if (base.indexOf(ZH_INITIALS[k]) === 0) { init = ZH_INITIALS[k]; break; } }
-  return { initial: init, final: base.slice(init.length), tone: tone, base: base };
+  var fin = base.slice(init.length);
+  /* v137 (M5, sua lan 2 — parent): sau j/q/x/y, chu "u" trong cach viet LUON la ü that
+     (quy tac bo dau hai cham): ue -> üe, uan -> üan, un -> ün, u -> ü (vd xué, yuán,
+     jūn, yú). Sau j/q/x/y KHONG BAO GIO co u that: "quan" luon la qüan — 全 quán,
+     权 quán, 圈 quān, 拳 quán, 犬 quǎn deu la üan, khong co ngoai le; "yu" luon la
+     yü — 鱼 yú la ü, khong phai u. */
+  if ((init === "j" || init === "q" || init === "x" || init === "y") && (fin === "ue" || fin === "uan" || fin === "un" || fin === "u")) fin = "ü" + fin.slice(1);
+  return { initial: init, final: fin, tone: tone, base: base };
 }
 function zhToneName(t) { return t === 0 ? "thanh nhẹ" : "thanh " + t; }
 
-/* --- ban do am ZH: 5 thanh + 21 thanh mau + 14 van mau (theo GTC HSK).
+/* --- ban do am ZH: 5 thanh + 21 thanh mau + 36 van mau (theo GTC HSK; v135: 33, v137 (M5): +üe/üan/ün).
    Vi du la tu that thuong dung; cap phan biet la tu that chi khac o am dang hoc. --- */
 var ZH_PRON_TONES = [
   { sym: "thanh 1", group: "tone", tone: 1, han: "妈", py: "mā", vi: "mẹ", pair: "thanh 3", pairHan: "马", pairPy: "mǎ", pairVi: "ngựa", desc: "Thanh 1 — đọc cao và đều, giữ nguyên một nốt cao." },
@@ -7882,6 +7889,8 @@ var ZH_PRON_FINALS = [
      (tu HSK1/thuong dung) + pinyin + nghia Viet + cap de nham + 1 dong huong dan. */
   { sym: "ia", group: "fin", han: "家", py: "jiā", vi: "nhà", pair: "iao", pairHan: "交", pairPy: "jiāo", pairVi: "giao, đưa", desc: "Vận mẫu ia — đọc i rồi trượt nhanh sang a, miệng mở rộng dần." },
   { sym: "ie", group: "fin", han: "姐", py: "jiě", vi: "chị gái", pair: "ia", pairHan: "家", pairPy: "jiā", pairVi: "nhà", desc: "Vận mẫu ie — đọc i rồi trượt sang e, miệng mở vừa." },
+  /* v137 (M5): bo sung 3 van mau chuan con thieu (üe/üan/ün) — he chuan 36 van. */
+  { sym: "üe", group: "fin", han: "学", py: "xué", vi: "học", pair: "ie", pairHan: "姐", pairPy: "jiě", pairVi: "chị gái", desc: "Vận mẫu üe — môi chu như u, lưỡi như i rồi trượt sang e. Chỉ đi sau j, q, x, y (viết gọn thành ue: xué)." },
   { sym: "iao", group: "fin", han: "交", py: "jiāo", vi: "giao, đưa", pair: "ia", pairHan: "家", pairPy: "jiā", pairVi: "nhà", desc: "Vận mẫu iao — trượt từ i qua a rồi khép về o, đọc liền một hơi." },
   { sym: "iu", group: "fin", han: "九", py: "jiǔ", vi: "chín (số 9)", pair: "ui", pairHan: "贵", pairPy: "guì", pairVi: "quý, đắt", desc: "Vận mẫu iu — đọc i rồi khép về u, môi tròn dần. Đừng nhầm với ui (u rồi i)." },
   { sym: "ian", group: "fin", han: "点", py: "diǎn", vi: "điểm; một chút", pair: "in", pairHan: "心", pairPy: "xīn", pairVi: "tim, lòng", desc: "Vận mẫu ian — đọc i rồi sang a, kết thúc bằng n, đầu lưỡi chạm lợi." },
@@ -7893,14 +7902,16 @@ var ZH_PRON_FINALS = [
   { sym: "uo", group: "fin", han: "我", py: "wǒ", vi: "tôi", pair: "ua", pairHan: "花", pairPy: "huā", pairVi: "hoa", desc: "Vận mẫu uo — đọc u rồi trượt sang o, môi tròn dần." },
   { sym: "uai", group: "fin", han: "快", py: "kuài", vi: "nhanh", pair: "ui", pairHan: "会", pairPy: "huì", pairVi: "biết, có thể", desc: "Vận mẫu uai — trượt từ u qua a rồi khép về i, đọc liền một hơi." },
   { sym: "ui", group: "fin", han: "会", py: "huì", vi: "biết, có thể", pair: "uai", pairHan: "快", pairPy: "kuài", pairVi: "nhanh", desc: "Vận mẫu ui — đọc u rồi khép về i. Đừng nhầm với iu (i rồi u)." },
-  { sym: "uan", group: "fin", han: "全", py: "quán", vi: "toàn bộ", pair: "un", pairHan: "问", pairPy: "wèn", pairVi: "hỏi", desc: "Vận mẫu uan — đọc u rồi sang a, kết thúc bằng n." },
-  { sym: "un", group: "fin", han: "问", py: "wèn", vi: "hỏi", pair: "uan", pairHan: "全", pairPy: "quán", pairVi: "toàn bộ", desc: "Vận mẫu un — đọc u rồi kết thúc bằng n, âm ngắn." },
-  { sym: "uang", group: "fin", han: "双", py: "shuāng", vi: "đôi, cặp", pair: "uan", pairHan: "全", pairPy: "quán", pairVi: "toàn bộ", desc: "Vận mẫu uang — đọc u rồi sang a, kết thúc bằng ng, âm vang mũi sâu." },
+  { sym: "uan", group: "fin", han: "短", py: "duǎn", vi: "ngắn", pair: "üan", pairHan: "元", pairPy: "yuán", pairVi: "đơn vị tiền; nguyên", desc: "Vận mẫu uan — đọc u rồi sang a, kết thúc bằng n." },
+  { sym: "üan", group: "fin", han: "元", py: "yuán", vi: "đơn vị tiền; nguyên", pair: "uan", pairHan: "短", pairPy: "duǎn", pairVi: "ngắn", desc: "Vận mẫu üan — môi chu như u rồi trượt sang a, kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành uan: yuán). Đừng nhầm với uan (u thật) như 短 duǎn." },
+  { sym: "un", group: "fin", han: "问", py: "wèn", vi: "hỏi", pair: "uan", pairHan: "短", pairPy: "duǎn", pairVi: "ngắn", desc: "Vận mẫu un — đọc u rồi kết thúc bằng n, âm ngắn." },
+  { sym: "ün", group: "fin", han: "运", py: "yùn", vi: "vận chuyển; vận may", pair: "un", pairHan: "问", pairPy: "wèn", pairVi: "hỏi", desc: "Vận mẫu ün — môi chu như u, lưỡi như i rồi kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành un: yùn)." },
+  { sym: "uang", group: "fin", han: "双", py: "shuāng", vi: "đôi, cặp", pair: "uan", pairHan: "短", pairPy: "duǎn", pairVi: "ngắn", desc: "Vận mẫu uang — đọc u rồi sang a, kết thúc bằng ng, âm vang mũi sâu." },
   { sym: "ueng", group: "fin", han: "翁", py: "wēng", vi: "ông lão", pair: "eng", pairHan: "风", pairPy: "fēng", pairVi: "gió", desc: "Vận mẫu ueng — đọc u rồi sang e, kết thúc bằng ng. Hiếm gặp, chủ yếu trong chữ 翁 (ông lão)." },
   { sym: "er", group: "fin", han: "二", py: "èr", vi: "hai (số 2)", pair: "e", pairHan: "饿", pairPy: "è", pairVi: "đói", desc: "Vận mẫu er — đầu lưỡi cuộn lên, âm vang như r cuối, chỉ đứng một mình thành âm tiết." },
   { sym: "ong", group: "fin", han: "东", py: "dōng", vi: "phía đông", pair: "iong", pairHan: "用", pairPy: "yòng", pairVi: "dùng", desc: "Vận mẫu ong — đọc o rồi kết thúc bằng ng, môi tròn, âm vang mũi sâu." }
 ];
-function zhPronSounds() { return ZH_PRON_TONES.concat(ZH_PRON_INITIALS, ZH_PRON_FINALS); }
+function zhPronSounds() { return ZH_PRON_INITIALS.concat(ZH_PRON_FINALS, ZH_PRON_TONES); } /* v137 (M5): thu tu dung su pham — thanh mau -> van mau -> thanh dieu */
 function zhPronEntry(sym) {
   var all = zhPronSounds();
   for (var i = 0; i < all.length; i++) if (all[i].sym === sym) return all[i];
@@ -7914,7 +7925,7 @@ function zhPronNextSym() {
 }
 function zhPronMapHTML() {
   /* v135 (M4): nhan dem dong — tu dem tu mang, khong ghi cung (truoc day "Van mau (14)" + "(40 am)" sai sau khi bo sung 19 van mau). */
-  var groups = [["4 thanh điệu + thanh nhẹ (5)", ZH_PRON_TONES], ["Thanh mẫu (21)", ZH_PRON_INITIALS], ["Vận mẫu (" + ZH_PRON_FINALS.length + ")", ZH_PRON_FINALS]];
+  var groups = [["Thanh mẫu (21)", ZH_PRON_INITIALS], ["Vận mẫu (" + ZH_PRON_FINALS.length + ")", ZH_PRON_FINALS], ["4 thanh điệu + thanh nhẹ (5)", ZH_PRON_TONES]]; /* v137 (M5): ban do xep theo thu tu day */
   var h = '<section class="card" id="zhPronMapCard"><h3>🗺 Bản đồ âm · Pinyin (' + zhPronSounds().length + ' âm)</h3><p class="mut">Bấm vào một âm để vào bài luyện 6 bước của âm đó. Học âm nào cũng được, không khóa.</p>';
   groups.forEach(function (g) {
     h += '<p><b>' + esc(g[0]) + '</b></p><div class="row">';
@@ -7996,7 +8007,7 @@ function zhPronPool() {
     zhSets().forEach(function (d) { (d.set.cards || []).forEach(function (c) {
       if (!c.han || !c.pinyin) return;
       var first = String(c.pinyin).split(/\s+/)[0] || "";
-      var p = zhPinyinParts(first);
+      var p = zhPinyinParts(first, c.han);
       out.push({ han: c.han, py: c.pinyin, vi: c.vi || "", ex: c.ex || "", exv: c.exv || "", col: c.col || "", init: p.initial, fin: p.final, tone: p.tone });
     }); });
   } catch (e) {}
