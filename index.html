@@ -533,7 +533,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", personalPath: null, personalExplain: "", myWords: [], myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", myWords: [], myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -4111,6 +4111,13 @@ function renderLessonWorkspace(app, l) {
     return;
   }
   var si = Math.min(l.wsSi, total - 1), cur = lines[si];
+  var sm = subMode(); /* v156 S19: cot Ban chep hien theo che do phu de chung */
+  var transLine = function (x, i) { /* v156 S19 */
+    var tag = "<b>#" + (i + 1) + "</b> ";
+    if (sm === "vi") return "<li" + (i === si ? ' style="font-weight:700"' : "") + ">" + tag + "<b>" + esc(x.vi) + "</b></li>";
+    if (sm === "orig") return "<li" + (i === si ? ' style="font-weight:700"' : "") + ">" + tag + esc(x.en) + "</li>";
+    return "<li" + (i === si ? ' style="font-weight:700"' : "") + ">" + tag + esc(x.en) + '<br><span class="mut">' + esc(x.vi) + "</span></li>";
+  };
   var pct = Math.round(si / total * 100);
   var chips = wsChips(cur.en, l.wsLevel), scaffold = wsScaffold(cur.en, l.wsLevel);
   var gaps = (l.wsMode === "gap") ? wsGapBlanks(cur.en) : [];
@@ -4174,7 +4181,7 @@ function renderLessonWorkspace(app, l) {
     + (l.wsRecUrl ? '<p><audio controls src="' + esc(l.wsRecUrl) + '" style="width:100%"></audio></p>' : '')
     + '<div class="row" style="margin-top:8px">' + (si > 0 ? '<button class="btn" id="wsPrev">← Câu trước</button>' : "") + (si + 1 < total ? '<button class="btn" id="wsNext">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="wsFinish">Xem kết quả →</button>') + "</div>"
     + '<p id="wsResult">' + resTxt + "</p></section>"
-    + '<section class="card ws-col" id="wsTransCol"><h3>📖 Bản chép</h3><div id="wsTransBody" style="display:' + (l.wsHideTrans ? "none" : "block") + '"><ol>' + lines.map(function (x, i) { return "<li" + (i === si ? ' style="font-weight:700"' : "") + "><b>#" + (i + 1) + "</b> " + esc(x.en) + '<br><span class="mut">' + esc(x.vi) + "</span></li>"; }).join("") + "</ol></div><button class=\"btn\" id=\"wsTransToggle\">" + (l.wsHideTrans ? "Hiện bản chép" : "Ẩn bản chép") + "</button></section>"
+    + '<section class="card ws-col" id="wsTransCol"><h3>📖 Bản chép</h3><div class="row">' + subModeHTML() + '</div><div id="wsTransBody" style="display:' + (l.wsHideTrans ? "none" : "block") + '"><ol>' + lines.map(function (x, i) { return transLine(x, i); }).join("") + "</ol></div><button class=\"btn\" id=\"wsTransToggle\">" + (l.wsHideTrans ? "Hiện bản chép" : "Ẩn bản chép") + "</button></section>"
     + "</div>";
   wireBack();
   $$("[data-wslevel]").forEach(function (b) { b.onclick = function () { l.wsLevel = b.dataset.wslevel; render(); }; });
@@ -4183,6 +4190,7 @@ function renderLessonWorkspace(app, l) {
   $$("[data-gapchip]").forEach(function (b) { b.onclick = function () { var w = gaps[+b.dataset.gapchip]; if (!w) return; var ins = Array.prototype.slice.call(document.querySelectorAll(".ws-gap")); for (var i = 0; i < ins.length; i++) { if (!ins[i].value) { ins[i].value = w.word; break; } } }; });
   $("#wsMediaToggle").onclick = function () { l.wsHideMedia = !l.wsHideMedia; render(); };
   $("#wsTransToggle").onclick = function () { l.wsHideTrans = !l.wsHideTrans; render(); };
+  subModeWire(); /* v156 S19 */
   $("#wsAutoStopBtn").onclick = function () { l.wsAutoStop = !l.wsAutoStop; render(); };
   var playGen = 0;
   $("#wsStart").onclick = function () {
@@ -15739,6 +15747,19 @@ function storyCardHTML() {
     + '<p class="mut" id="storyMeta"></p>'
     + '<div class="row"><button class="btn" id="storyGo">Đọc truyện này →</button></div></details>';
 }
+/* v156 S19: cong tac 3 che do phu de — dung chung cho moi man xem video co phu de
+   (Truyen song ngu, Podcast, Shadowing, cot Ban chep cua workspace). Che do luu o
+   state.subMode (localStorage, theo tai khoan/khach) nen mo lai video van giu che do
+   da chon. Mac dinh "dual" (song ngu) — dung nhu hanh vi cu (hien ca cau goc + dich). */
+function subMode() { return (state.subMode === "orig" || state.subMode === "vi") ? state.subMode : "dual"; }
+function subModeHTML() {
+  var m = subMode();
+  var b = function (v, label) { return '<button class="btn' + (m === v ? ' btn-amber' : '') + '" data-submode="' + v + '">' + label + '</button>'; };
+  return '<span class="mut">Phụ đề:</span> ' + b("dual", "Song ngữ") + ' ' + b("orig", "Chỉ ngôn ngữ gốc") + ' ' + b("vi", "Chỉ tiếng Việt");
+}
+function subModeWire() {
+  $$("[data-submode]").forEach(function (x) { x.onclick = function () { state.subMode = x.dataset.submode; saveState(); render(); }; });
+}
 function renderStory(app, l) {
   var r = CONTENT.reading[l.idx];
   if (!r) { curLesson = null; render(); return; }
@@ -15751,11 +15772,11 @@ function renderStory(app, l) {
   }
   var S = storySentences(r);
   var mode = l.storyMode || "listen";
-  var hideVi = !!l.storyHideVi;
+  var sm = subMode(); /* v156 S19: 3 che do phu de thay nut nhi phan An/Hien ban dich cu */
   var ipaMapSt = wordIpaMap(), viMapSt = podWordViMap();
   var html = skillHead(l.title, r.topic + (r.level ? ' · ' + r.level : '') + ' · Truyện ngắn song ngữ từng câu')
     + '<div class="qblock"><p>' + skillIconSpan("read") + 'Mẹo: bấm 🔊 để nghe từng câu; bấm vào từ để tra nghĩa và lưu vào ôn tập; đọc xong bấm “Mình đã đọc xong” để mở kiểm tra.</p>'
-    + '<div class="row"><button class="btn' + (mode === "listen" ? ' btn-amber' : '') + '" id="stModeListen">Nghe & Đọc</button><button class="btn' + (mode === "read" ? ' btn-amber' : '') + '" id="stModeRead">Chỉ Đọc</button><button class="btn" id="stToggleVi">' + (hideVi ? 'Hiện bản dịch' : 'Ẩn bản dịch') + '</button></div></div>';
+    + '<div class="row"><button class="btn' + (mode === "listen" ? ' btn-amber' : '') + '" id="stModeListen">Nghe & Đọc</button><button class="btn' + (mode === "read" ? ' btn-amber' : '') + '" id="stModeRead">Chỉ Đọc</button>' + subModeHTML() + '</div></div>';
   if (S) {
     html += storyTopicSVG(r.topic);
     S.en.forEach(function (s, i) {
@@ -15764,20 +15785,19 @@ function renderStory(app, l) {
         var clean = tok.toLowerCase().replace(/[^a-z']/g, "");
         return '<span data-stword="' + esc(clean) + '" style="cursor:pointer;text-decoration:underline dotted">' + esc(tok) + '</span>';
       }).join("");
-      html += '<div class="qblock">' + sceneSmallSVG(s, true) + '<p><b>' + wHTML + '</b></p>'
+      html += '<div class="qblock">' + sceneSmallSVG(s, true) + (sm === "vi" ? '<p><b>' + esc(S.vi[i]) + '</b></p>' : '<p><b>' + wHTML + '</b></p>')
         + (mode === "listen" ? '<div class="row"><button class="btn" data-stplay="' + i + '">🔊 Nghe câu này</button></div>' : '')
-        + (hideVi ? '' : '<p class="mut">' + esc(S.vi[i]) + '</p>')
+        + (sm === "dual" ? '<p class="mut">' + esc(S.vi[i]) + '</p>' : '')
         + '<div class="why" id="stLook' + i + '"></div></div>';
     });
   } else {
-    html += storyTopicSVG(r.topic) + '<div class="qblock"><p>' + esc(r.text) + '</p><p class="mut">Bản dịch cả đoạn:</p><p>' + esc(r.translation || "") + '</p><p class="mut">Truyện này bản dịch không tách khớp từng câu nên hiện cả đoạn — vẫn kiểm tra hiểu bình thường.</p></div>';
+    html += storyTopicSVG(r.topic) + '<div class="qblock">' + (sm === "vi" ? '<p><b>' + esc(r.translation || "") + '</b></p>' : '<p>' + esc(r.text) + '</p>') + (sm === "dual" ? '<p class="mut">Bản dịch cả đoạn:</p><p>' + esc(r.translation || "") + '</p>' : '') + '<p class="mut">Truyện này bản dịch không tách khớp từng câu nên hiện cả đoạn — vẫn kiểm tra hiểu bình thường.</p></div>';
   }
   html += '<div class="qblock"><p>Đọc xong hết truyện rồi thì bấm nút dưới để mở bài kiểm tra hiểu 5 câu.</p><div class="row"><button class="btn btn-primary" id="stDone">Mình đã đọc xong →</button></div></div>';
   app.innerHTML = html; wireBack();
   $("#stModeListen").onclick = function () { l.storyMode = "listen"; render(); };
   $("#stModeRead").onclick = function () { l.storyMode = "read"; render(); };
-  var stTv = $("#stToggleVi");
-  if (stTv) stTv.onclick = function () { l.storyHideVi = !l.storyHideVi; render(); };
+  subModeWire(); /* v156 S19 */
   $$("[data-stplay]").forEach(function (b) { b.onclick = function () { speak(S.en[+b.dataset.stplay], 1); }; });
   $$("[data-stword]").forEach(function (sp) {
     sp.onclick = function () {
@@ -15836,7 +15856,7 @@ function renderPodcast(app, l) {
     $("#podBack").onclick = function () { backFromLesson(); };
     return;
   }
-  var showVi = l.showVi !== false;
+  var sm = subMode(); /* v156 S19: 3 che do phu de thay nut nhi phan An/Hien ban dich cu */
   var listenOnly = !!l.podListenOnly;
   var ipaMap = wordIpaMap(), viMap = podWordViMap();
   var lines = item.lines || [];
@@ -15848,7 +15868,7 @@ function renderPodcast(app, l) {
   });
   var html = skillHead(l.title, (item.band || "") + ' · Nghe thụ động — không trắc nghiệm, không chấm điểm')
     + '<div class="qblock"><p>' + skillIconSpan("listen") + 'Mẹo: bấm “▶ Nghe từ đây” để nghe từ câu đó tới hết đoạn; bấm vào từ để tra và lưu vào ôn tập; bật “Chỉ nghe” để tự tăng khó.</p><p class="mut">Mốc ⏱ là ước tính theo giọng máy (khoảng 150 từ/phút), không phải mốc của file thu sẵn.</p>'
-    + '<div class="row"><button class="btn" id="podToggleVi">' + (showVi ? 'Ẩn bản dịch' : 'Hiện bản dịch') + '</button><button class="btn" id="podListenOnly">' + (listenOnly ? 'Hiện transcript' : 'Chỉ nghe (ẩn chữ)') + '</button><button class="btn" id="podStop">⏹ Dừng</button><button class="btn btn-primary" id="podDoneBtn">Đã nghe xong ✓</button></div></div>';
+    + '<div class="row">' + subModeHTML() + '<button class="btn" id="podListenOnly">' + (listenOnly ? 'Hiện transcript' : 'Chỉ nghe (ẩn chữ)') + '</button><button class="btn" id="podStop">⏹ Dừng</button><button class="btn btn-primary" id="podDoneBtn">Đã nghe xong ✓</button></div></div>';
   lines.forEach(function (ln, li) {
     var wordsHTML = (ln.en || "").split(/(\s+)/).map(function (tok) {
       if (!tok.trim()) return tok;
@@ -15856,7 +15876,7 @@ function renderPodcast(app, l) {
       return '<span data-pword="' + esc(clean) + '" style="cursor:pointer;text-decoration:underline dotted">' + esc(tok) + '</span>';
     }).join("");
     html += '<div class="qblock" id="podLine' + li + '"><p><span class="chip">' + esc(ln.who || "") + '</span> <span class="chip">⏱ ~' + podcastEstTime(lines, li) + '</span></p>'
-      + (listenOnly ? '<p class="mut">Câu ' + (li + 1) + ' — bấm nghe để nghe câu này.</p>' : '<p><b>' + wordsHTML + '</b></p>' + (ln.py ? '<p class="mut">' + esc(ln.py) + '</p>' : '') + (showVi ? '<p class="mut">' + esc(ln.vi || "") + '</p>' : '')) /* v126: hien pinyin neu co */
+      + (listenOnly ? '<p class="mut">Câu ' + (li + 1) + ' — bấm nghe để nghe câu này.</p>' : (sm === "vi" ? '<p><b>' + esc(ln.vi || "") + '</b></p>' : '<p><b>' + wordsHTML + '</b></p>' + (ln.py ? '<p class="mut">' + esc(ln.py) + '</p>' : '') + (sm === "dual" ? '<p class="mut">' + esc(ln.vi || "") + '</p>' : ''))) /* v126: hien pinyin neu co */
       + '<div class="row"><button class="btn" data-pplay="' + li + '">▶ Nghe từ đây</button><button class="btn" data-prepeat="' + li + '">↻ Lặp câu</button></div>'
       + '<div class="why" id="podLook' + li + '"></div></div>';
   });
@@ -15864,7 +15884,7 @@ function renderPodcast(app, l) {
     + (vocabInPod.length ? '<div class="row">' + vocabInPod.map(function (v) { return '<button class="btn" data-pvocab="' + v.line + '">' + esc(v.w) + ' — ' + esc(v.vi) + '</button>'; }).join("") + '</div>' : '<p class="mut">Đoạn này chưa có từ nào trùng kho từ đã rà.</p>')
     + '<p class="mut">Chỉ hiện từ đã có trong kho từ của web; từ chưa có thì khi bấm vào sẽ báo rõ là chưa có, không đoán nghĩa.</p></div>';
   app.innerHTML = html; wireBack();
-  $("#podToggleVi").onclick = function () { l.showVi = !showVi; render(); };
+  subModeWire(); /* v156 S19 */
   var podLo = $("#podListenOnly");
   if (podLo) podLo.onclick = function () { l.podListenOnly = !listenOnly; render(); };
   $("#podStop").onclick = function () { l.podStop = true; try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {} };
@@ -16192,19 +16212,21 @@ function skillIconSVG(skill) {
 function skillIconSpan(skill) { return '<span style="display:inline-block;vertical-align:-6px;margin-right:6px">' + skillIconSVG(skill) + '</span>'; }
 
 function speakLinesHTML(s) {
+  var sm = subMode(); /* v156 S19: cau goc/dich theo che do phu de chung */
   return s.lines.map(function (ln, i) {
-    return '<p><b>' + esc(ln.who) + ':</b> ' + esc(ln.en) + ' <button class="btn" data-speakline="' + i + '">🔊</button>' + (ln.py ? '<br><span class="mut">' + esc(ln.py) + '</span>' : '') + '<br><span class="mut">' + esc(ln.vi) + '</span></p>'; /* v126: hien pinyin neu co */
+    return '<p><b>' + esc(ln.who) + ':</b> ' + (sm === "vi" ? '<b>' + esc(ln.vi) + '</b>' : esc(ln.en)) + ' <button class="btn" data-speakline="' + i + '">🔊</button>' + ((sm !== "vi" && ln.py) ? '<br><span class="mut">' + esc(ln.py) + '</span>' : '') + (sm === "dual" ? '<br><span class="mut">' + esc(ln.vi) + '</span>' : '') + '</p>'; /* v126: hien pinyin neu co */
   }).join("");
 }
 /* v122: man luyen noi — moi cau co nut Doc to (tang 1) + ket qua ngay. */
 function speakLinesPracticeHTML(s, l) {
   if (!l.spLineRes) l.spLineRes = {};
+  var sm = subMode(); /* v156 S19: cau goc/dich theo che do phu de chung */
   return s.lines.map(function (ln, i) {
     var r = l.spLineRes[i] || {};
     var res = "";
     if (r.tried) res = '<br><span>' + (r.ok ? '✓ Máy nghe ra: “' + esc(r.heard || "") + '”' : '✗ Máy chưa nghe ra' + (r.heard ? ' — nghe được: “' + esc(r.heard) + '”' : '') + ' — nghe lại mẫu rồi đọc chậm hơn.') + '</span>';
     if (r.err) res += '<br><span class="mut">' + esc(r.err) + '</span>';
-    return '<p><b>' + esc(ln.who) + ':</b> ' + esc(ln.en) + ' <button class="btn" data-speakline="' + i + '">🔊</button> <button class="btn" data-splinerec="' + i + '">🎤 Đọc câu này</button>' + (ln.py ? '<br><span class="mut">' + esc(ln.py) + '</span>' : '') + '<br><span class="mut">' + esc(ln.vi) + '</span>' + res + '</p>'; /* v126: hien pinyin neu co */
+    return '<p><b>' + esc(ln.who) + ':</b> ' + (sm === "vi" ? '<b>' + esc(ln.vi) + '</b>' : esc(ln.en)) + ' <button class="btn" data-speakline="' + i + '">🔊</button> <button class="btn" data-splinerec="' + i + '">🎤 Đọc câu này</button>' + ((sm !== "vi" && ln.py) ? '<br><span class="mut">' + esc(ln.py) + '</span>' : '') + (sm === "dual" ? '<br><span class="mut">' + esc(ln.vi) + '</span>' : '') + res + '</p>'; /* v126: hien pinyin neu co */
   }).join("");
 }
 /* v104 Chặng 7 — AI chấm Nói 4 tiêu chí cho bài Nói (VIP). Tái dùng y hệt
@@ -16249,10 +16271,11 @@ function renderSkillSpeak(app, l) {
     return;
   }
   if (!l.quiz) {
-    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + '<div class="qblock">' + speakLinesPracticeHTML(s, l)
+    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + '<div class="qblock"><div class="row">' + subModeHTML() + '</div>' + speakLinesPracticeHTML(s, l)
       + '<p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Không cần đăng nhập, không cần camera.' + ((s.quiz || []).length ? ' Sau đó làm câu hỏi từ vựng và cấu trúc rút ra từ chính bài mẫu.' : ' Bài mẫu này chỉ để nghe và nhại theo — không có câu hỏi.') + '</p>'
       + ((s.quiz || []).length ? '<button class="btn btn-primary" id="spStart">Làm câu hỏi (' + (s.quiz || []).length + ' câu)</button>' : '') + '</div>';
     wireBack();
+    subModeWire(); /* v156 S19 */
     $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speakAuto(s.lines[+b.dataset.speakline].en); }; }); /* v126: cau tieng Trung doc bang zh-CN */
     $$("[data-splinerec]").forEach(function (b) { b.onclick = function () {
       var i = +b.dataset.splinerec, ref = s.lines[i].en;
@@ -16275,10 +16298,11 @@ function renderSkillSpeak(app, l) {
      v104 Chặng 7: man tong ket them khoi "Noi lai toan bai — AI cham 4 tieu chi"
      (VIP) / tu doi chieu (thuong) trong #spLessonAiSlot; dien + noi day sau
      moi lan render vi khoi nay phu thuoc trang thai ghi am. */
-  l.finishExtraHTML = '<details open style="margin-bottom:10px"><summary><b>Xem lại bài mẫu</b></summary><div class="qblock">' + speakLinesHTML(s) + '</div></details><div id="spLessonAiSlot"></div>';
+  l.finishExtraHTML = '<details open style="margin-bottom:10px"><summary><b>Xem lại bài mẫu</b></summary><div class="qblock"><div class="row">' + subModeHTML() + '</div>' + speakLinesHTML(s) + '</div></details><div id="spLessonAiSlot"></div>';
   app.innerHTML = '<p class="mut">Sau khi làm xong, nói lại toàn bộ bài mẫu thành tiếng ở cuối trang — tài khoản VIP được AI chấm 4 tiêu chí, tài khoản thường tự đối chiếu theo bảng tiêu chí.</p><div id="quizSlot"></div>';
   $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speakAuto(s.lines[+b.dataset.speakline].en); }; }); /* v126: cau tieng Trung doc bang zh-CN */
   renderQuizEngine($("#quizSlot"), l, s.quiz || [], "skill", "speak:" + l.idx, 2);
+  subModeWire(); /* v156 S19: nut phu de trong khoi "Xem lai bai mau" o man tong ket */
   var spSlot = $("#spLessonAiSlot");
   if (spSlot) { spSlot.innerHTML = spLessonAiHTML(l, s); wireSpLessonAi(l, s); }
 }
