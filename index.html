@@ -5486,7 +5486,7 @@ function trackMasteryRows89(track) {
     var g = function (k) { return kc[k] || [0, 0]; };
     var li = g("listen"); push("Nghe", li[0], li[1]);
     var re = g("read"); push("Đọc", re[0], re[1]);
-    if (isTc) { var sp = g("speak"); push("Nói", sp[0], sp[1]); push("Viết", 0, 0, "TOEIC chỉ thi Nghe–Đọc nên track này không có bài Viết."); } /* v127: TC da co 8 bai Noi s0-s7, lay so that tu tcTpKindCounts89 */
+    if (isTc) { var sp = g("speak"); push("Nói", sp[0], sp[1]); var wr = g("write"); push("Viết", wr[0], wr[1]); } /* v127: TC da co 8 bai Noi s0-s7, lay so that tu tcTpKindCounts89; v152 S15: TC da co 8 bai Viet w0-w7 — TOEIC thi that chi thi Nghe-Doc nen Viet o day la bai luyen email cong so de dung that, khong phai phan thi */
     else { var sp = g("speak"); push("Nói", sp[0], sp[1]); var wr = g("write"); push("Viết", wr[0], wr[1]); } /* v136: TP da co 16 bai Noi s0-s15, lay so that tu tcTpKindCounts89 */
     var vo = g("vocab"); push("Từ vựng", vo[0], vo[1]);
   }
@@ -5515,7 +5515,7 @@ function trackSkillRows89(track) {
     var g2 = function (k) { return kc[k] || [0, 0]; };
     var put = function (name, k) { var v = g2(k); row(name, v[0], v[1]); };
     if (isTc) {
-      put("Từ vựng (bộ)", "vocab"); put("Ngữ pháp", "gram"); put("Nghe Part 1–4", "listen"); put("Đọc Part 5–7", "read"); put("Kiểm tra cuối chặng", "check"); put("Thi thử", "mock");
+      put("Từ vựng (bộ)", "vocab"); put("Ngữ pháp", "gram"); put("Nghe Part 1–4", "listen"); put("Đọc Part 5–7", "read"); put("Nói", "speak"); put("Viết", "write"); put("Kiểm tra cuối chặng", "check"); put("Thi thử", "mock"); /* v152 S15: them hang Viet (8 bai w0-w7) */
     } else {
       put("Hangul", "hangul"); put("Từ vựng (bộ)", "vocab"); put("Ngữ pháp", "gram"); put("Nghe", "listen"); put("Đọc", "read"); put("Viết", "write"); put("Kiểm tra cuối chặng", "check"); put("Thi thử", "mock");
     }
@@ -5549,7 +5549,7 @@ function trackCurrentScope89() {
   var stageIdx = 0;
   if (nx) stageIdx = isTc ? tcStepStage(nx.id) : tpStepStage(nx.id);
   var stg = (isTc ? TC_STAGES : TP_STAGES)[stageIdx] || { steps: [], title: "", score: 0 };
-  var learnKinds = isTc ? ["vocab", "gram", "listen", "read", "speak"] : ["hangul", "vocab", "gram", "listen", "read", "write"]; /* v127: TC them speak */
+  var learnKinds = isTc ? ["vocab", "gram", "listen", "read", "speak", "write"] : ["hangul", "vocab", "gram", "listen", "read", "write"]; /* v127: TC them speak; v152 S15: TC them write */
   var meta = isTc ? tcStepMeta : tpStepMeta;
   var doneMap = isTc ? (state.tcDone || {}) : (state.tpDone || {});
   var learnIds = (stg.steps || []).filter(function (id) { var m = meta(id); return m && learnKinds.indexOf(m.kind) >= 0; });
@@ -17952,7 +17952,7 @@ function gd23MasteryHTML() {
   var t89 = (typeof state !== "undefined" && state.track) || "en";
   var note89 = t89 === "en" ? ' — Từ vựng chỉ tính bộ 24 mẫu, các kỹ năng khác tính toàn bộ bài trong kho.'
     : t89 === "zh" ? ' — Từ vựng tính theo bộ; các kỹ năng khác tính toàn bộ bài trong kho.'
-    : t89 === "tc" ? ' — TOEIC chỉ thi Nghe–Đọc nên không có hàng Viết; Từ vựng tính theo bộ.' /* v127: TC da co hang Noi */
+    : t89 === "tc" ? ' — Viết là bài luyện email công sở (TOEIC thi thật chỉ thi Nghe–Đọc, không có phần Viết); Từ vựng tính theo bộ.' /* v127: TC da co hang Noi; v152 S15: TC da co hang Viet */
     : ' — Từ vựng tính theo bộ, các kỹ năng khác tính toàn bộ bài trong kho.'; /* v136: TP da co bai Noi */
   return '<section class="card" id="skillMastery"><h3>5 chấm thành thạo theo từng kỹ năng</h3>'
     + '<p class="mut">Mỗi kỹ năng có 5 chấm — mỗi chấm tương ứng 1/5 số bài đã xong của kỹ năng đó. Đây là mức theo tiến trình, không phải điểm thi.</p>'
@@ -20664,6 +20664,7 @@ function tcStepMeta(id) {
   if (k === "l") { var l = (typeof TC_LISTEN !== "undefined") ? TC_LISTEN[n] : null; return l ? { kind: "listen", title: "Nghe Part " + l.part + ": " + l.title, ref: n } : null; }
   if (k === "r") { var r = (typeof TC_READ !== "undefined") ? TC_READ[n] : null; return r ? { kind: "read", title: "Đọc Part " + r.part + ": " + r.title, ref: n } : null; }
   if (k === "s") { var sp = (typeof TC_SPEAK !== "undefined") ? TC_SPEAK[n] : null; return sp ? { kind: "speak", title: "Nói: " + sp.title, ref: n } : null; } /* v127: bai Noi TOEIC */
+  if (k === "w") { var wr = (typeof TC_WRITE !== "undefined") ? TC_WRITE[n] : null; return wr ? { kind: "write", title: "Viết: " + wr.title, ref: n } : null; } /* v152 S15: bai Viet TOEIC w0-w7 (2 moi chang) */
   if (k === "c") { var ck = (typeof TC_CHECK_ALL !== "undefined") ? TC_CHECK_ALL[n] : null; return ck ? { kind: "check", title: ck.title, ref: n } : null; }
   if (id === "m0") return { kind: "mock", title: "Thi thử TOEIC chặng 900 — đủ 200 câu", ref: 0 };
   if (id === "m450") return { kind: "mock", title: "Thi thử TOEIC chặng 450 — 120 câu", ref: 450 };
@@ -21343,6 +21344,47 @@ function renderTcSpeak(app, m, id, back, skipBanner) {
     fin.onclick = function () { if (tcMarkDone(id)) { fin.textContent = "Đã xong ✓"; fin.disabled = true; } };
   };
 }
+/* v152 S15 11/11/2026: BAI VIET TOEIC — khung Viet 3 buoc cua EN (ms, v128):
+   viet nhap -> tu cham 4 tieu chi (msWriteChecks) + doi chieu 2 cot voi bai mau
+   -> viet lai ban sua. TU CHAM, khong phai cot moc cham AI (cot moc Viet TC
+   van chi co o 4 cot moc, 1/chang). TOEIC thi that (Nghe-Doc) khong co phan
+   Viet — day la bai luyen viet email cong so de dung that trong cong viec. */
+function renderTcWrite(app, m, id, back, skipBanner) {
+  var w = TC_WRITE[m.ref]; if (!w) return;
+  var st = TC_STAGES[tcStepStage(id)] || {};
+  var eyebrow = "TOEIC · VIẾT · " + esc(st.title || "");
+  var phase = 0, draft = "", rewrite = "";
+  function render() {
+    var head = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(w.title) + '</h2>'
+      + '<p class="mut">TOEIC thi thật (Nghe–Đọc) không có phần Viết — đây là bài luyện viết email công sở để dùng thật trong công việc. Tự chấm theo bảng tiêu chí, không có máy chấm tự động.</p></section>';
+    if (phase === 0) {
+      app.innerHTML = head + '<div class="qblock"><h3>Bước 1: Viết bản nháp</h3><p><b>Đề bài:</b> ' + esc(w.prompt) + '</p>'
+        + '<p><b>Gợi ý từ/cụm dùng được:</b> ' + w.hints.map(function (h) { return esc(h); }).join(" · ") + '</p>'
+        + '<textarea id="tcWriteDraft" rows="8" style="width:100%;padding:10px">' + esc(draft) + '</textarea>'
+        + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="tcWriteNext1">Xong bản nháp → Đối chiếu</button></div></div>';
+      tcWireBack(back);
+      document.getElementById("tcWriteNext1").onclick = function () { var v = document.getElementById("tcWriteDraft").value; if (!v.trim()) { toast("Hãy viết vài câu trước đã."); return; } draft = v; phase = 1; render(); };
+      return;
+    }
+    if (phase === 1) {
+      var crit = msWriteChecks().map(function (c) { return '<label style="display:block;margin:4px 0"><input type="checkbox"> ' + esc(c) + '</label>'; }).join("");
+      app.innerHTML = head
+        + '<div class="qblock"><h3>Tự đối chiếu theo bảng tiêu chí</h3><p class="mut">Bài luyện này chỉ tự chấm — tích vào tiêu chí bạn thấy mình đã làm được. Đây không phải điểm máy chấm.</p>' + crit + '</div>'
+        + '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>Bản của bạn</b><p>' + esc(draft) + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(w.model) + '</p></div></div>'
+        + '<p><b>Phân tích bài mẫu:</b> ' + esc(w.modelNote) + '</p>'
+        + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="tcWriteNext2">Đã đối chiếu xong → Viết lại bản sửa</button></div></div>';
+      tcWireBack(back);
+      document.getElementById("tcWriteNext2").onclick = function () { phase = 2; render(); };
+      return;
+    }
+    app.innerHTML = head + '<div class="qblock"><h3>Bước 3: Viết lại bản sửa</h3><p>Viết lại bài, sửa theo bảng tiêu chí và đối chiếu bài mẫu:</p>'
+      + '<textarea id="tcWriteRewrite" rows="8" style="width:100%;padding:10px">' + esc(rewrite || draft) + '</textarea>'
+      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="tcWriteSave">Lưu bản sửa (+10 XP)</button></div></div>';
+    tcWireBack(back);
+    document.getElementById("tcWriteSave").onclick = function () { var v = document.getElementById("tcWriteRewrite").value; if (!v.trim()) { toast("Hãy viết bản sửa trước đã."); return; } rewrite = v; if (tcMarkDone(id)) { var b = document.getElementById("tcWriteSave"); if (b) { b.textContent = "Đã xong ✓"; b.disabled = true; } } };
+  }
+  render();
+}
 function tcOpenStep(id, backTab) {
   tcNorm();
   var m = tcStepMeta(id); if (!m) return;
@@ -21351,6 +21393,7 @@ function tcOpenStep(id, backTab) {
   var skipBanner = tcSkipBanner(id);
   if (m.kind === "vocab") { renderTcTpVocab5("tc", id, back); /* v107e: vao bai tu vung TOEIC thi dua dau the ve khung nhin ngay (nhu openLesson cua EN/ZH). */ vkScrollCardTop(); return; }
   if (m.kind === "speak") { renderTcSpeak(app, m, id, back, skipBanner); return; } /* v127 */
+  if (m.kind === "write") { renderTcWrite(app, m, id, back, skipBanner); return; } /* v152 S15 */
   if (m.kind === "gram") {
     var g = TC_GRAMMAR[m.ref];
     /* DOT SOI-D9d 02/11: tach ly thuyet rieng 1 man, roi moi cau 1 man (phan trang
@@ -21570,10 +21613,10 @@ function roadmapOrderedHTML(steps, btnFn) {
    (van ban tu muc-tieu-tc-tp-20261101.md, doi chieu noi dung chang that;
    thu tu mang khop thu tu TC_STAGES / TP_STAGES luc render). */
 var TC_STAGE_GOALS = [
-  { goal: "Dùng tiếng Anh công sở ở mức cơ bản: hiểu câu đơn giản về công việc quen thuộc, xử lý được các tình huống lặp lại hằng ngày ở văn phòng.", can: ["Nghe mô tả tranh văn phòng, phòng họp, nhà kho, quầy lễ tân và hỏi-đáp ngắn về giờ họp, giờ mở cửa, giá vé tàu, giao hàng (Part 1-2).", "Đọc email, thông báo, lịch trình, đơn hàng, hợp đồng mới dạng hoàn thành câu (Part 5).", "Dùng thì hiện tại và quá khứ, câu bị động, so sánh hơn-nhất, giới từ thời gian-địa điểm, mạo từ a/an/the, thì tương lai trong email công sở.", "Dùng từ vựng nền công sở: hợp đồng, họp và thuyết trình, tiếp thị, máy tính và văn phòng, đặt lịch, thư từ, văn phòng phẩm, ăn trưa và nghỉ giải lao."] },
-  { goal: "Giao tiếp công việc độc lập ở mức cơ bản: hiểu ý chính của trao đổi rõ ràng về việc quen thuộc, xử lý hầu hết tình huống công việc thường gặp.", can: ["Nghe hỏi-đáp và hội thoại về báo cáo ở đâu, ai đón khách, xin nghỉ phép, đổi vé tàu, đặt khách sạn cho khách, gọi món trưa (Part 2-3).", "Đọc hợp đồng, tuyển dụng, thanh toán, nhân viên mới, cuộc họp, giảm giá dạng hoàn thành câu (Part 5).", "Dùng mệnh đề quan hệ, từ loại, liên từ và câu điều kiện, động từ khuyết thiếu, hòa hợp chủ-vị, thì hoàn thành trong báo cáo.", "Dùng từ vựng: email và liên lạc công sở, tuyển dụng và nhân sự, ngân hàng, khách sạn, báo cáo số liệu, marketing và bán hàng."] },
-  { goal: "Làm việc độc lập bằng tiếng Anh: hiểu ý chính của văn bản phức tạp vừa phải, trao đổi trôi chảy hơn với đồng nghiệp mà không quá gắng sức.", can: ["Nghe hội thoại và thông báo về dời lịch họp, sửa máy in, đặt phòng họp, bảo trì thang máy, lịch xe buýt mới, quảng cáo (Part 2-3-4).", "Đọc email, memo làm việc tại nhà, thông báo đóng cửa bảo trì, bảng giờ tàu, chính sách đổi trả (Part 5-6-7).", "Dùng câu điều kiện loại 2, mệnh đề quan hệ rút gọn, câu gián tiếp, V-ing và to-V, giới từ đi kèm, liên từ tương quan trong báo cáo công việc.", "Dùng từ vựng: du lịch công tác, tài chính, chuỗi cung ứng, marketing số, đàm phán, chiến lược kinh doanh, quản lý khủng hoảng, mở rộng thị trường."] },
-  { goal: "Dùng tiếng Anh thành thạo trong công việc: hiểu ý chính của văn bản phức tạp cả cụ thể lẫn trừu tượng, trao đổi trôi chảy, trình bày rõ ràng và chi tiết về nhiều chủ đề.", can: ["Nghe thông báo chuyển văn phòng, tin nhắn thoại giao hàng và đặt phòng, quảng cáo khóa học, bản tin kẹt xe giờ cao điểm (Part 4).", "Đọc memo chính sách mới, quảng cáo tuyển dụng, email thay đổi lịch giao hàng và lịch nghỉ lễ, khảo sát khách hàng (Part 6-7).", "Dùng mệnh đề danh từ trong email công sở và câu điều kiện loại 3 trong báo cáo sự cố.", "Dùng từ vựng: quản trị rủi ro và tuân thủ, đàm phán quốc tế, sáp nhập và đầu tư, kinh tế vĩ mô, chuyển đổi số, luật lao động.", "Làm thi thử đủ 200 câu (Nghe 100 + Đọc 100) theo đúng format thi thật, điểm chỉ để tham khảo."] }
+  { goal: "Dùng tiếng Anh công sở ở mức cơ bản: hiểu câu đơn giản về công việc quen thuộc, xử lý được các tình huống lặp lại hằng ngày ở văn phòng.", can: ["Nghe mô tả tranh văn phòng, phòng họp, nhà kho, quầy lễ tân và hỏi-đáp ngắn về giờ họp, giờ mở cửa, giá vé tàu, giao hàng (Part 1-2).", "Đọc email, thông báo, lịch trình, đơn hàng, hợp đồng mới dạng hoàn thành câu (Part 5).", "Dùng thì hiện tại và quá khứ, câu bị động, so sánh hơn-nhất, giới từ thời gian-địa điểm, mạo từ a/an/the, thì tương lai trong email công sở.", "Dùng từ vựng nền công sở: hợp đồng, họp và thuyết trình, tiếp thị, máy tính và văn phòng, đặt lịch, thư từ, văn phòng phẩm, ăn trưa và nghỉ giải lao.", "Viết email xin nghỉ phép và email hỏi thông tin đặt hàng bằng mẫu câu công sở ngắn gọn."] }, /* v152 S15: them y Viet moi chang */
+  { goal: "Giao tiếp công việc độc lập ở mức cơ bản: hiểu ý chính của trao đổi rõ ràng về việc quen thuộc, xử lý hầu hết tình huống công việc thường gặp.", can: ["Nghe hỏi-đáp và hội thoại về báo cáo ở đâu, ai đón khách, xin nghỉ phép, đổi vé tàu, đặt khách sạn cho khách, gọi món trưa (Part 2-3).", "Đọc hợp đồng, tuyển dụng, thanh toán, nhân viên mới, cuộc họp, giảm giá dạng hoàn thành câu (Part 5).", "Dùng mệnh đề quan hệ, từ loại, liên từ và câu điều kiện, động từ khuyết thiếu, hòa hợp chủ-vị, thì hoàn thành trong báo cáo.", "Dùng từ vựng: email và liên lạc công sở, tuyển dụng và nhân sự, ngân hàng, khách sạn, báo cáo số liệu, marketing và bán hàng.", "Viết email báo cáo tiến độ tuần và email đặt hàng văn phòng phẩm."] },
+  { goal: "Làm việc độc lập bằng tiếng Anh: hiểu ý chính của văn bản phức tạp vừa phải, trao đổi trôi chảy hơn với đồng nghiệp mà không quá gắng sức.", can: ["Nghe hội thoại và thông báo về dời lịch họp, sửa máy in, đặt phòng họp, bảo trì thang máy, lịch xe buýt mới, quảng cáo (Part 2-3-4).", "Đọc email, memo làm việc tại nhà, thông báo đóng cửa bảo trì, bảng giờ tàu, chính sách đổi trả (Part 5-6-7).", "Dùng câu điều kiện loại 2, mệnh đề quan hệ rút gọn, câu gián tiếp, V-ing và to-V, giới từ đi kèm, liên từ tương quan trong báo cáo công việc.", "Dùng từ vựng: du lịch công tác, tài chính, chuỗi cung ứng, marketing số, đàm phán, chiến lược kinh doanh, quản lý khủng hoảng, mở rộng thị trường.", "Viết email xin lỗi khách hàng vì giao hàng muộn và email nhắc lịch họp kèm tài liệu."] },
+  { goal: "Dùng tiếng Anh thành thạo trong công việc: hiểu ý chính của văn bản phức tạp cả cụ thể lẫn trừu tượng, trao đổi trôi chảy, trình bày rõ ràng và chi tiết về nhiều chủ đề.", can: ["Nghe thông báo chuyển văn phòng, tin nhắn thoại giao hàng và đặt phòng, quảng cáo khóa học, bản tin kẹt xe giờ cao điểm (Part 4).", "Đọc memo chính sách mới, quảng cáo tuyển dụng, email thay đổi lịch giao hàng và lịch nghỉ lễ, khảo sát khách hàng (Part 6-7).", "Dùng mệnh đề danh từ trong email công sở và câu điều kiện loại 3 trong báo cáo sự cố.", "Dùng từ vựng: quản trị rủi ro và tuân thủ, đàm phán quốc tế, sáp nhập và đầu tư, kinh tế vĩ mô, chuyển đổi số, luật lao động.", "Viết email ứng tuyển và báo cáo sự cố ngắn bằng tiếng Anh công sở.", "Làm thi thử đủ 200 câu (Nghe 100 + Đọc 100) theo đúng format thi thật, điểm chỉ để tham khảo."] }
 ];
 var TP_STAGE_GOALS = [
   { goal: "Đọc và viết được bảng chữ Hàn: nhận mặt và đọc đúng nguyên âm, phụ âm và cách ghép âm tiết có âm cuối.", can: ["Đọc nguyên âm cơ bản và nguyên âm đôi (có y, có w).", "Đọc phụ âm cơ bản và phụ âm căng.", "Ghép âm tiết và đọc đúng 받침 (âm cuối), ví dụ 아기 (em bé), 어제 (hôm qua).", "Qua kiểm tra cuối Hangul rồi mới vào TOPIK I."] },
