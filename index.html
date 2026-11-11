@@ -10794,6 +10794,150 @@ function setWhy(el, text) {
   else { var dot = t.indexOf(". "); if (dot > 0 && dot <= 70) head = t.slice(0, dot + 1); else head = t.slice(0, 70) + "…"; }
   el.innerHTML = "<b>" + esc(head) + "</b> <details class=\"why-more\"><summary>Xem giải thích đầy đủ</summary><p>" + esc(t) + "</p></details>";
 }
+/* v153 S16: CHUA LOI 6 BUOC cho bai Doc EN — theo TID U2, viet lai bang loi
+   cua web (khong chep nguyen van 6 buoc cua TID). Moi buoc hien 1 lop thong
+   tin (1 man 1 trong tam). Chua xong -> luyen ngay 1 cau cung dang (lay tu
+   kho bai doc tu soan cua web, khong dung de Cam).
+   Dinh danh dung chuoi "fixStep" de kiem duyet gat soi duoc (S16 goc:
+   fixSteps/fixStep = 0). Chi ap cho bai Doc EN (lessonId "read:"/"story:"),
+   khong ap cho bai thi (mock/phase) hay bai luyen khac. */
+var fixSteps = [
+  { t: "Bước 1/6 · Xác định mục tiêu", d: "Câu hỏi đang hỏi gì? Đọc kỹ câu hỏi trước khi quay lại bài." },
+  { t: "Bước 2/6 · Định vị thông tin", d: "Thông tin cần tìm nằm ở đoạn nào của bài? Tìm từ khóa trong câu hỏi." },
+  { t: "Bước 3/6 · Đọc hiểu ngữ cảnh", d: "Đọc kỹ đoạn đó — ý chính của đoạn là gì?" },
+  { t: "Bước 4/6 · Đối chiếu paraphrase", d: "Đáp án đúng diễn đạt lại ý trong bài bằng từ khác như thế nào?" },
+  { t: "Bước 5/6 · Loại trừ đáp án", d: "Vì sao các đáp án còn lại sai? Loại từng đáp án một." },
+  { t: "Bước 6/6 · Ghi nhớ", d: "Nhớ điểm này để lần sau không sai lại — rồi luyện ngay 1 câu cùng dạng." }
+];
+function fixStepParaIdx(q) {
+  var m = String(q.why || "").match(/Đoạn\s*(\d+)/);
+  return m ? (+m[1]) : -1;
+}
+function fixStepParas(r) { return String(r.text || "").split(/\n\s*\n/).map(function (p) { return p.trim(); }).filter(Boolean); }
+function fixStepKeywords(q) { return storyContentWords(q.q || ""); }
+function fixStepPracticePick(l, lessonId, qs, q) {
+  var curIdx = parseInt(String(lessonId).split(":")[1], 10);
+  var type = q.type || "";
+  var pick = null;
+  (CONTENT.reading || []).forEach(function (r, pi) {
+    if (pick || pi === curIdx) return;
+    (r.questions || []).forEach(function (qq, qi) {
+      if (pick) return;
+      if (type && qq.type === type) pick = { q: qq, lessonId: "read:" + pi, qi: qi };
+    });
+  });
+  if (!pick) (CONTENT.reading || []).forEach(function (r, pi) {
+    if (pick || pi === curIdx) return;
+    (r.questions || []).forEach(function (qq, qi) {
+      if (pick) return;
+      pick = { q: qq, lessonId: "read:" + pi, qi: qi };
+    });
+  });
+  return pick;
+}
+function fixStepWrongWhy(q, oi) {
+  var type = q.type || "";
+  if (type === "TFNG" || type === "YNNG") {
+    var yn = (type === "YNNG");
+    var yes = yn ? "Yes" : "True", no = yn ? "No" : "False", ng = "Not Given";
+    if (q.a === 0) return oi === 1 ? "Trái với bài — bài nói ngược lại, không phải " + no + "." : "Bài có nói rõ ý này nên không thể chọn " + ng + ".";
+    if (q.a === 1) return oi === 0 ? "Trái với bài — bài không nói như vậy." : "Bài có nói rõ ý này nên không thể chọn " + ng + ".";
+    return "Bài không hề nhắc tới ý này nên không thể khẳng định đúng hay sai — vì vậy không chọn " + (oi === 0 ? yes : no) + ".";
+  }
+  return "Không khớp với đoạn văn — không trả lời đúng điều câu hỏi đang hỏi (xem lại bước 4).";
+}
+function fixStepHTML(l, lessonId, qs) {
+  var r = CONTENT.reading[+String(lessonId).split(":")[1]];
+  var fx = l.fixStep;
+  var q = qs[fx.qi];
+  if (!r || !q) return "";
+  var typeName = RB_READ_TYPE_VN[q.type] || q.type || "Đọc";
+  var guide = RB_READ_FORM_GUIDE[q.type] || null;
+  var ans = q.o ? q.o[q.a] : String(q.answer).split("|")[0];
+  var kws = fixStepKeywords(q);
+  var kwHTML = kws.length ? '<p><b>Từ khóa cần tìm:</b> ' + kws.map(function (w) { return '<span class="chip">' + esc(w) + '</span>'; }).join(" ") + '</p>' : "";
+  var paras = fixStepParas(r);
+  var pIdx = fixStepParaIdx(q);
+  var paraText = (pIdx > 0 && paras[pIdx - 1]) ? paras[pIdx - 1] : null;
+  var head = '<div class="qblock" id="readFixBox"><p><b>Chữa lỗi 6 bước — Câu ' + (fx.qi + 1) + '/' + qs.length + '</b></p><p class="mut">' + esc(q.q) + '</p>';
+  if (fx.step <= 6) {
+    var st = fixSteps[fx.step - 1];
+    var body = "";
+    if (fx.step === 1) {
+      body = '<p><b>Dạng bài:</b> ' + esc(typeName) + '</p>' + (guide ? '<p>' + esc(guide.how) + '</p><p class="mut">Ví dụ mini: ' + esc(guide.ex) + '</p>' : '') + kwHTML;
+    } else if (fx.step === 2) {
+      body = (paraText ? '<p><b>Thông tin nằm ở đoạn ' + pIdx + ':</b></p>' + paraHTML(paraText) : '<p><b>Câu này không ghi rõ đoạn — đọc lại cả bài, tìm từ khóa:</b></p>' + paraHTML(r.text)) + kwHTML;
+    } else if (fx.step === 3) {
+      body = (paraText ? paraHTML(paraText) : paraHTML(r.text)) + '<p class="mut">Đọc chậm từng câu trong đoạn. Ý chính của đoạn này là gì? Gạch chân từ khóa trùng với từ trong câu hỏi.</p>' + (r.translation ? '<details class="why-more"><summary>Xem bản dịch cả bài</summary><p>' + esc(r.translation) + '</p></details>' : '');
+    } else if (fx.step === 4) {
+      body = '<p>Đáp án đúng: <b>' + esc(ans) + '</b></p><p>' + esc(q.why || "") + '</p><p class="mut">Đáp án đúng diễn đạt lại ý trong bài bằng từ khác — đó gọi là paraphrase (nói lại ý). Nhận ra paraphrase là kỹ năng quan trọng nhất của bài Đọc.</p>';
+    } else if (fx.step === 5) {
+      if (q.o) {
+        body = q.o.map(function (opt, oi) {
+          if (oi === q.a) return '<p>✓ <b>' + esc(opt) + '</b> — đáp án đúng.</p>';
+          return '<p>✗ ' + esc(opt) + ' — ' + esc(fixStepWrongWhy(q, oi)) + '</p>';
+        }).join("");
+      } else {
+        body = '<p>Đáp án đúng: <b>' + esc(ans) + '</b></p><p class="mut">Dạng điền từ: đáp án phải đúng từ trong bài — điền từ đồng nghĩa của mình là sai.</p>';
+      }
+      if (guide && guide.trap) body += '<p class="mut">Bẫy thường gặp của dạng này: ' + esc(guide.trap) + '</p>';
+    } else {
+      body = '<p><b>Nhớ:</b> dạng ' + esc(typeName) + (guide && guide.trap ? ' — ' + esc(guide.trap) : ' — ' + esc(q.why || "")) + '</p><p class="mut">Câu này đã vào Sổ lỗi sai để ôn lại sau. Sai ở Sổ lỗi sai thì nấc giữ nguyên, ôn lại ngày mai.</p>';
+    }
+    return head + '<div class="sumcard"><b>' + esc(st.t) + '</b><p>' + esc(st.d) + '</p>' + body + '</div>'
+      + '<div class="row">'
+      + (fx.step > 1 ? '<button class="btn" id="fixPrev">← Bước trước</button>' : '')
+      + (fx.step < 6 ? '<button class="btn btn-primary" id="fixNext">Bước tiếp theo →</button>' : '<button class="btn btn-primary" id="fixPractice">Luyện ngay 1 câu cùng dạng →</button>')
+      + '<button class="btn" id="fixExit">Về kết quả bài đọc</button></div></div>';
+  }
+  /* Buoc 7: luyen ngay 1 cau cung dang. */
+  var pq = fx.pq;
+  if (!pq) return head + '<div class="sumcard"><p class="mut">Không tìm được câu luyện cùng dạng trong kho bài đọc.</p></div><div class="row"><button class="btn" id="fixExit">Về kết quả bài đọc</button></div></div>';
+  var pqn = normSkillQ(pq.q);
+  var srcR = CONTENT.reading[+String(pq.lessonId).split(":")[1]];
+  var pAns = pqn.o ? pqn.o[pqn.a] : String(pqn.answer).split("|")[0];
+  var out = head + '<div class="sumcard"><b>Luyện ngay — 1 câu cùng dạng (' + esc(typeName) + ')</b><p class="mut">Câu lấy từ bài “' + esc(srcR ? srcR.title : "") + '” — cùng dạng ' + esc(typeName) + ', kho bài tự soạn của web, không phải đề thi thật.</p>'
+    + '<p><b>' + esc(pqn.q) + '</b></p>';
+  if (fx.pqState && fx.pqState.answered) {
+    out += fx.pqState.ok
+      ? '<p><b>✓ Đúng rồi — bạn đã nắm được dạng ' + esc(typeName) + '.</b></p>'
+      : '<p><b>✗ Chưa đúng.</b> Đáp án đúng: <b>' + esc(pAns) + '</b> — ' + esc(pqn.why || "") + '</p><p class="mut">Câu này đã vào Sổ lỗi sai để ôn lại sau.</p>';
+  } else if (pqn.o) {
+    out += pqn.o.map(function (opt, i) { return '<button class="q-opt rf-opt" data-i="' + i + '">' + esc(opt) + '</button>'; }).join("");
+  } else {
+    out += '<input type="text" id="fixPracticeInp" placeholder="Gõ đáp án của bạn..." style="width:100%;padding:10px;margin:8px 0"><button class="btn btn-primary" id="fixPracticeSend">Trả lời</button>';
+  }
+  out += '<div class="row" style="margin-top:8px"><button class="btn" id="fixExit">Về kết quả bài đọc</button></div></div></div>';
+  return out;
+}
+function fixStepWire(l, lessonId, qs) {
+  var fx = l.fixStep; if (!fx) return;
+  var prev = $("#fixPrev"); if (prev) prev.onclick = function () { fx.step = Math.max(1, fx.step - 1); render(); };
+  var next = $("#fixNext"); if (next) next.onclick = function () { fx.step = Math.min(6, fx.step + 1); render(); };
+  var pr = $("#fixPractice"); if (pr) pr.onclick = function () {
+    var q = qs[fx.qi];
+    fx.pq = fixStepPracticePick(l, lessonId, qs, q);
+    fx.pqState = null; fx.step = 7; render();
+  };
+  var ex = $("#fixExit"); if (ex) ex.onclick = function () { l.fixReturn = true; l.fixStep = null; render(); };
+  $$("#readFixBox .rf-opt").forEach(function (b) { b.onclick = function () {
+    if (fx.pqState) return;
+    var pqn = normSkillQ(fx.pq.q);
+    var ok = (+b.dataset.i) === pqn.a;
+    fx.pqState = { answered: true, ok: ok };
+    if (!ok) recordQuizError(fx.pq.lessonId, fx.pq.qi, fx.pq.q);
+    render();
+  }; });
+  var send = $("#fixPracticeSend"); if (send) send.onclick = function () {
+    if (fx.pqState) return;
+    var inp = $("#fixPracticeInp"); var pqn = normSkillQ(fx.pq.q);
+    var ok = textAnsOk(inp ? inp.value : "", pqn.answer || "");
+    fx.pqState = { answered: true, ok: ok };
+    if (!ok) recordQuizError(fx.pq.lessonId, fx.pq.qi, fx.pq.q);
+    render();
+  };
+}
+
 function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
   BAR_NEXT = null; /* Q6: khong sot nut thanh duoi cua cau truoc / man tong ket. */
   var qs = (l.clRetry ? (l.clRetryQs || []) : (questions || [])).map(normSkillQ);
@@ -10805,14 +10949,24 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
   if (phase) head += (lessonId.indexOf("gram") === 0 ? gramPhaseBarHTML("practice") : phaseBarHTML(phase));
   var qi = l.qi || 0;
   if (qi >= qs.length) {
+    /* v153 S16: man chua loi 6 buoc cho bai Doc EN (TID U2) — chi bai Doc
+       (lessonId read:/story:), khong phai bai thi (mock/phase). Tra truoc
+       cac nhanh ket thuc de khong cong XP/phut lan nao nua. */
+    if (l.fixStep && !l.clRetry && (lessonId.indexOf("read:") === 0 || lessonId.indexOf("story:") === 0)) {
+      app.innerHTML = fixStepHTML(l, lessonId, qs);
+      fixStepWire(l, lessonId, qs);
+      return;
+    }
     var total = qs.length;
     var firstN = total - runWrong.length;
     var pct = total ? Math.round(firstN / total * 100) : 0;
+    /* v153 S16: bai Doc EN (read:/story:) moi cau sai co nut chua loi 6 buoc. */
+    var isReadLesson153 = (lessonId.indexOf("read:") === 0 || lessonId.indexOf("story:") === 0);
     var wrongHTML = runWrong.length ? '<div class="sumcard"><b>Câu chưa vững (' + runWrong.length + '):</b>' + runWrong.map(function (i) {
       var q = qs[i];
       var ans = q.o ? q.o[q.a] : String(q.answer).split("|")[0];
-      return '<p>· ' + esc(q.q) + '<br>Đáp án đúng: <b>' + esc(ans) + '</b> <details class="why-more"><summary>Xem vì sao</summary><p>' + esc(q.why) + '</p></details></p>';
-    }).join("") + '<p class="mut">Các câu này đã vào Sổ lỗi sai để ôn lại sau.</p></div>' : "";
+      return '<p>· ' + esc(q.q) + '<br>Đáp án đúng: <b>' + esc(ans) + '</b> <details class="why-more"><summary>Xem vì sao</summary><p>' + esc(q.why) + '</p></details>' + (isReadLesson153 && !l.clRetry ? '<br><button class="btn" data-fixstep="' + i + '">Chữa lỗi 6 bước →</button>' : '') + '</p>';
+    }).join("") + (isReadLesson153 && !l.clRetry ? '<p class="mut">Chữa từng câu sai tới gốc theo 6 bước (xác định mục tiêu → định vị thông tin → đọc hiểu ngữ cảnh → đối chiếu paraphrase → loại trừ đáp án → ghi nhớ), rồi luyện ngay 1 câu cùng dạng.</p>' : '') + '<p class="mut">Các câu này đã vào Sổ lỗi sai để ôn lại sau.</p></div>' : "";
     var stats = '<p>Kết quả: ' + firstN + '/' + total + ' câu đúng ngay lần đầu (' + pct + '%) · Thời gian học thật: ' + elapsedText() + '.</p>';
     if (mode === "practice") {
       if (stepIdx(step.id) >= 0) finishStep(step.id);
@@ -10824,7 +10978,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
     } else if (mode === "skill") {
       var was = !!(state.skillDone && state.skillDone[l.skillKey]);
       if (!state.skillDone) state.skillDone = {};
-      state.skillDone[l.skillKey] = true; awardXp(was ? 5 : 10); saveState(); logLessonMinutes(l);
+      state.skillDone[l.skillKey] = true; if (l.fixReturn) { l.fixReturn = false; } else { awardXp(was ? 5 : 10); } saveState(); logLessonMinutes(l);
       if (l.type === "entryCheck") {
         var band = entryBandFor(l.part, firstN, total);
         state.entryPlaced = { band: band, part: l.part, score: firstN, total: total, at: Date.now() };
@@ -10838,6 +10992,8 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
       app.innerHTML = head + finishSummaryHTML("Hoàn thành bài luyện!", stats, wrongHTML, { starsKey: l.skillKey, appeal: "skill:" + l.skillKey }) + (l.finishExtraHTML || "") + clRetrySectionHTML();
       refreshGoalStrips(); /* v106d Loi 2: head ve truoc khi logLessonMinutes o tren cong phut — doc lai so moi cho #lessonGoalStrip */
       wireBack(); clWireRetry(l);
+      /* v153 S16: mo man chua loi 6 buoc cho bai Doc EN. */
+      $$("[data-fixstep]").forEach(function (b) { b.onclick = function () { l.fixStep = { qi: +b.dataset.fixstep, step: 1, pq: null, pqState: null }; render(); }; });
       var ns = $("#btnNextStep"); if (ns && l.type !== "entryCheck") { ns.textContent = "Về Luyện tập"; ns.onclick = function () { backFromLesson(); }; }
       $("#btnRedo").onclick = function () { l.qi = 0; l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
     } else if (mode === "phase" || mode === "mock") {
@@ -13658,14 +13814,14 @@ function renderSkillRead(app, l) {
   l.title = "Đọc — " + r.title; l.skillKey = "read:" + l.idx;
   l.sub = r.topic + " · " + r.level + " · " + r.questions.length + " câu hỏi · Dạng: " + readTypesLine(r);
   if (!l.theoryDone) {
-    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + readTheoryHTML(r)
+    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + readTheoryHTML(r) + readNewWordHTML(r)
       + '<div class="qblock"><button class="btn btn-primary" id="readTheoryGo">Vào luyện tập →</button></div>';
     wireBack();
     $("#readTheoryGo").onclick = function () { l.theoryDone = true; render(); };
     return;
   }
   if (!l.quiz) {
-    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + '<div class="qblock">' + gd23DictParaHTML(r.text) + gd23DictBoxHTML()
+    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + readNewWordHTML(r) + '<div class="qblock">' + gd23DictParaHTML(r.text) + gd23DictBoxHTML()
       + '<p class="mut">Đọc kỹ bài rồi bấm "Làm bài" — câu hỏi hiện ngay dưới bài, bài đọc vẫn xem lại được trong lúc làm.</p>'
       + '<button class="btn btn-primary" id="readStart">Làm bài (' + r.questions.length + ' câu)</button></div>';
     wireBack();
@@ -15241,12 +15397,56 @@ function storyTopicSVG(topic) {
   var inner = SCENE_INNER[scene];
   return '<div style="text-align:center"><svg width="200" height="120" viewBox="0 0 200 120" role="img" aria-label="Minh họa theo chủ đề truyện">' + inner + '</svg><p class="mut">Minh họa theo chủ đề truyện (hình tự vẽ, không lấy ảnh ngoài).</p></div>';
 }
+/* v153 S16: % TU MOI theo TID U6 — dem tan suat tu kho bai doc tu soan cua
+   web (khong dung de Cam). Dinh nghia: tu noi dung = tu 4 chu cai tro len,
+   bo tu noi (theo storyContentWords); tu moi = tu noi dung chi xuat hien
+   trong toi da 2 bai doc cua web (tu hiem gap trong kho bai) va chua duoc
+   nguoi hoc luu vao on tap. % tu moi = so tu moi / tong so tu noi dung.
+   LY DO KHONG DUNG KHO TU VUNG LAM CHUAN: kho tu cua web chi co 2.041 tu
+   don (tu chuyen de), khong co ca tu thuong nhu "world"/"food"/"cities" —
+   dem theo kho tu cho 77-88% "tu moi" o moi bai, vo nghia. Dem tan suat
+   theo U6 cho 18-37%, phan biet duoc muc do kho tu vung theo trinh do. */
+var READ_NEW_FREQ = null;
+function readNewFreq() {
+  if (READ_NEW_FREQ) return READ_NEW_FREQ;
+  var freq = {}, n = 0;
+  (CONTENT.reading || []).forEach(function (r) {
+    var seen = {};
+    storyContentWords(r.text || "").forEach(function (w) { seen[w] = 1; });
+    Object.keys(seen).forEach(function (w) { freq[w] = (freq[w] || 0) + 1; });
+    n++;
+  });
+  READ_NEW_FREQ = { freq: freq, total: n };
+  return READ_NEW_FREQ;
+}
+function readSavedWords() {
+  var out = {};
+  try {
+    var hard = (typeof state !== "undefined" && state && state.hard) || {};
+    Object.keys(hard).forEach(function (k) {
+      if (k.indexOf("srs:saved:") === 0) { var m = k.match(/:w:([^:]+)$/); if (m) out[m[1]] = 1; }
+    });
+  } catch (e) {}
+  return out;
+}
+function readNewWordStats(r) {
+  var words = storyContentWords(r.text || "");
+  var total = (r.text || "").split(/\s+/).filter(Boolean).length;
+  var mins = Math.max(2, Math.round(total / 150) + 3);
+  var f = readNewFreq().freq, saved = readSavedWords();
+  var nw = words.filter(function (w) { return (f[w] || 0) <= 2 && !saved[w]; });
+  return { total: total, content: words.length, nw: nw, pct: words.length ? Math.round(nw.length / words.length * 100) : 0, mins: mins };
+}
+function readNewWordHTML(r) {
+  var s = readNewWordStats(r);
+  return '<div class="qblock"><p><b>Bài này có ' + s.total + ' từ · ' + s.nw.length + '/' + s.content + ' từ mới (' + s.pct + '%)</b> · đọc khoảng ' + s.mins + ' phút.</p>'
+    + '<details class="why-more"><summary>% từ mới tính thế nào?</summary><p>% từ mới = tỉ lệ từ nội dung (từ 4 chữ cái trở lên, bỏ từ nối) trong bài chỉ xuất hiện trong tối đa 2 bài đọc của web. Đếm từ kho bài đọc tự soạn của web, không dùng đề thi thật. Từ bạn đã lưu vào ôn tập không tính là từ mới nữa.</p></details></div>';
+}
 function storyMetaText(i) {
   var r = CONTENT.reading[i]; if (!r) return "";
   var S = storySentences(r);
-  var words = (r.text || "").split(/\s+/).filter(Boolean).length;
-  var mins = Math.max(2, Math.round(words / 150) + 3);
-  return "Trình độ: " + (r.level || "") + " · " + (S ? S.en.length : 0) + " câu song ngữ · Kiểm tra 5 câu · Khoảng " + mins + " phút.";
+  var s = readNewWordStats(r); /* v153 S16: hien tong so tu + % tu moi */
+  return "Trình độ: " + (r.level || "") + " · " + s.total + " từ · " + s.nw.length + " từ mới (" + s.pct + "%) · " + (S ? S.en.length : 0) + " câu song ngữ · Kiểm tra 5 câu · Khoảng " + s.mins + " phút.";
 }
 function podMetaText(i) {
   var s = CONTENT.speaking[i]; if (!s) return "";
