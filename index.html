@@ -1215,6 +1215,8 @@ function supplementHTML() {
   var curBank = "en";
   banks.forEach(function (b) { if (b.key === state.track) curBank = b.key; });
   var trackOpts = banks.map(function (b) { return '<option value="' + b.key + '"' + (b.key === curBank ? ' selected' : '') + '>' + b.label + '</option>'; }).join("");
+  /* v148 S11: chi o phien am cua track dang hoc moi gan (*); 2 o con lai ghi "(khong bat buoc)" nho. */
+  var phStar = function (id, on) { return '<span id="' + id + '"' + (on ? '' : ' class="mut"') + '>' + (on ? '(*)' : '(không bắt buộc)') + '</span>'; };
   var html = '<details class="card" id="mineGrpSupplement"><summary><b>Nội dung của bạn</b></summary>';
   html += '<section class="card"><h3>Nhập từ tay</h3>'
     + '<p class="mut">Từ bạn nhập sẽ vào flashcard và ôn tập như từ thường, gắn nhãn "cá nhân", chỉ mình bạn thấy — không vào kho chung.</p>'
@@ -1223,9 +1225,9 @@ function supplementHTML() {
     + '<p><label>Bộ để xếp từ vào (*): <select id="myFSet" style="width:100%">' + mySetOptionsHTML(curBank, "") + '</select></label></p>'
     + '<p><label>Từ (*): <input type="text" id="myFW" placeholder="VD: neighbour / 供应链 / 이웃" style="width:100%"></label></p>'
     + '<p><label>Nghĩa tiếng Việt (*): <input type="text" id="myFVi" placeholder="VD: hàng xóm" style="width:100%"></label></p>'
-    + '<p><label>IPA (tiếng Anh / TOEIC) (*): <input type="text" id="myFIpa" placeholder="VD: /ˈneɪbə/" style="width:100%"></label></p>'
-    + '<p><label>Pinyin + thanh điệu (tiếng Trung) (*): <input type="text" id="myFPinyin" placeholder="VD: gōngyìngliàn" style="width:100%"></label></p>'
-    + '<p><label>Phiên âm Latin (tiếng Hàn) (*): <input type="text" id="myFR" placeholder="VD: 이웃 → iut" style="width:100%"></label></p>'
+    + '<p><label>IPA (tiếng Anh / TOEIC) ' + phStar("myFIpaStar", curBank === "en" || curBank === "tc") + ': <input type="text" id="myFIpa" placeholder="VD: /ˈneɪbə/" style="width:100%"></label></p>'
+    + '<p><label>Pinyin + thanh điệu (tiếng Trung) ' + phStar("myFPinyinStar", curBank === "zh") + ': <input type="text" id="myFPinyin" placeholder="VD: gōngyìngliàn" style="width:100%"></label></p>'
+    + '<p><label>Phiên âm Latin (tiếng Hàn) ' + phStar("myFRStar", curBank === "tp") + ': <input type="text" id="myFR" placeholder="VD: 이웃 → iut" style="width:100%"></label></p>'
     + '<p><label>Cụm từ đi kèm: <input type="text" id="myFCol" placeholder="VD: a close neighbour" style="width:100%"></label></p>'
     + '<p><label>Giải thích: <textarea id="myFEx" rows="2" style="width:100%" placeholder="Giải thích ngắn, cách nhớ…"></textarea></label></p>'
     + '<p><label>Câu ví dụ: <input type="text" id="myFSen" style="width:100%"></label></p>'
@@ -1290,9 +1292,19 @@ function wireSupplement() {
     var cur = ss.value;
     ss.innerHTML = mySetOptionsHTML(tr.value, sf ? sf.value : "");
     if (cur) { for (var i = 0; i < ss.options.length; i++) if (ss.options[i].value === cur) { ss.value = cur; break; } }
+    updatePhonStars();
+  };
+  /* v148 S11: dau (*) phien am theo track dang chon trong form (#myFTrack). */
+  var updatePhonStars = function () {
+    var bank = tr.value;
+    var setStar = function (id, on) { var el = $(id); if (el) { el.textContent = on ? "(*)" : "(không bắt buộc)"; el.className = on ? "" : "mut"; } };
+    setStar("#myFIpaStar", bank === "en" || bank === "tc");
+    setStar("#myFPinyinStar", bank === "zh");
+    setStar("#myFRStar", bank === "tp");
   };
   tr.onchange = rebuild;
   if (sf) sf.oninput = rebuild;
+  updatePhonStars();
   var sv = $("#myFSave");
   if (sv) sv.onclick = function () {
     var msg = $("#myFMsg");
