@@ -20408,7 +20408,7 @@ function zhHskkItems(lv) {
     { part: "Phần 1 · Nghe đoạn văn rồi nhắc lại/tóm tắt", items: ZH_HSKK_ADV_PASSAGE18 },
     { part: "Phần 2 · Đọc to đoạn văn", items: ZH_HSKK_ADV_READ18 },
     { part: "Phần 3 · Trả lời câu hỏi", items: ZH_HSKK_ADV_Q18 },
-    { part: "Bài luyện thêm · Nghe nhắc lại câu (không phải format Phần 1 Cao cấp)", items: ZH_HSKK_ADV }
+    { part: "Bài luyện thêm · Nghe nhắc lại câu (không phải format Phần 1 Cao cấp)", official: false, items: ZH_HSKK_ADV }
   ];
   return [
     { part: "Phần 1 · Nghe nhắc lại", items: ZH_HSKK_SENTENCES.concat(ZH_HSKK_ELEM_REPEAT18) },
@@ -20418,7 +20418,7 @@ function zhHskkItems(lv) {
 }
 function zhHskkFlat(lv) {
   var out = [];
-  zhHskkItems(lv).forEach(function (sec) { sec.items.forEach(function (it) { out.push({ part: sec.part, adapt: !!sec.adapt, it: it }); }); });
+  zhHskkItems(lv).forEach(function (sec) { sec.items.forEach(function (it) { out.push({ part: sec.part, adapt: !!sec.adapt, official: sec.official !== false, it: it }); }); });
   return out;
 }
 function renderZhHskk(app, l) {
@@ -20460,7 +20460,8 @@ function renderZhHskk(app, l) {
     else if (hskkT1r.err) hskkT1Html = '<p class="mut">' + esc(hskkT1r.err) + '</p>';
     else if (hskkT1r.tried) hskkT1Html = '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(hskkT1r.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
   }
-  app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + '<div class="qblock"><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp.</p><p class="mut">' + esc(entry.part) + ' · Mục ' + (i + 1) + '/' + flat.length + '.</p>'
+  /* v144 S7: muc Cao cap danh dau ro "Câu chính thức" (muc 1-6, dung de chinh thuc 3+1+2) hay "Luyện thêm" (muc 7-16); So/Trung toan bo la cau chinh thuc nen khong danh dau them. */
+  app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + '<div class="qblock"><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp.</p><p class="mut">' + esc(entry.part) + ' · Mục ' + (i + 1) + '/' + flat.length + (lv === "adv" ? (entry.official ? ' · Câu chính thức' : ' · Luyện thêm') : '') + '.</p>'
     + body
     + '<p class="mut">Đọc to câu mẫu được chấm bằng tầng 1 (máy có nghe ra không) — câu trả lời mở thì máy không chấm được, chỉ chấm phần đọc to mẫu.</p>'
     + '<div class="row"><button class="btn" id="zhHskkListen">🔊 Nghe</button><button class="btn" id="zhHskkRec">🎤 Đọc to câu mẫu</button><button class="btn btn-primary" id="zhHskkNext"' + (hskkHeard ? '' : ' disabled') + '>Mục tiếp theo →</button></div>'
