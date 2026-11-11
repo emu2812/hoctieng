@@ -22053,7 +22053,7 @@ function tpStepMeta(id) {
   if (k === "s") { var sp = (typeof TP_SPEAK !== "undefined") ? TP_SPEAK[n] : null; return sp ? { kind: "speak", title: "Nói: " + sp.title, ref: n } : null; } /* v136: bai Noi TOPIK s0-s15 (M6) */
   if (k === "k") { var ck2 = (typeof TP_CHECK !== "undefined") ? TP_CHECK[n] : null; return ck2 ? { kind: "check", title: ck2.title, ref: n } : null; }
   if (k === "w") { return (typeof TP_WRITE !== "undefined") ? { kind: "write", title: n === 0 ? "Viết TOPIK II: nhiệm vụ 51–52 (điền câu)" : n === 1 ? "Viết TOPIK II: nhiệm vụ 53–54 (luận)" : n === 2 ? "Luyện viết Cấp 1: điền câu đơn giản" : n === 3 ? "Luyện viết Cấp 2: điền câu ghép + đoạn ngắn" : n === 4 ? "Luyện viết Cấp 3: điền câu 51–52" : n === 5 ? "Luyện viết Cấp 3: luận ngắn 53" : n === 6 ? "Luyện viết Cấp 4: điền câu 51–52" : n === 7 ? "Luyện viết Cấp 4: luận ngắn 53 nâng cao" : n === 8 ? "Luyện viết Cấp 5: điền câu 51–52 học thuật" : n === 9 ? "Luyện viết Cấp 5: luận 53 + làm quen 54" : n === 10 ? "Luyện viết Cấp 6: điền câu 52 khó" : "Luyện viết Cấp 6: luận dài 54", ref: n } : null; }
-  if (id === "m0") return { kind: "mock", title: "Thi thử TOPIK I rút gọn (70 câu)", ref: 0 };
+  if (id === "m0") return { kind: "mock", title: "Thi thử TOPIK I rút gọn (70 câu · 100 phút)", ref: 0 }; /* v151 S14: ghi 100 phut len the (lay tu man chi tiet tpOpenMock) */
   if (id === "m1") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 3 (đủ 104 nhiệm vụ)", ref: 1 };
   if (id === "m2") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 4 (đủ 104 nhiệm vụ)", ref: 2 };
   if (id === "m3") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 5 (đủ 104 nhiệm vụ)", ref: 3 };
