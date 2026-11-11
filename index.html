@@ -1912,18 +1912,122 @@ function specTodayItems(nextCard) {
   });
   if (state.mockPending && state.mockPending.milestone) items.push({ kind: "mock", title: "Thi thử đang chờ chấm: chặng " + state.mockPending.milestone, detail: "Nghe/Đọc đã xong, phần Nói/Viết chưa chấm xong — vào để chấm tiếp, bài làm không mất.", action: "mock:" + state.mockPending.milestone });
   if (state.phasePending && state.phasePending.phase) items.push({ kind: "phase", title: "Bài thi đợt " + state.phasePending.phase + " đang chờ chấm", detail: "Kết quả Nghe/Đọc đã giữ, phần chưa chấm còn chờ AI — vào để chấm tiếp.", action: "phase:" + state.phasePending.phase });
-  return { items: items, due: due, done: items.length === 0, hiddenWork: hideStep || hideTest || hideLesson || hideReview };
+  /* v147 S10: am yeu + tu con sai len dau danh sach (lay tu pronWeakData —
+     cung nguon voi the "Âm yếu của tôi": state.pronDiag + state.wordPron).
+     Khach moi (chua co du lieu that) co 1 viec bat dau thay vi the trong. */
+  var head = todayWeakTasks("en");
+  var ww = todayWrongWordTask("en");
+  if (ww) head.push(ww);
+  if (isNewUser() && !head.length) { var st0 = todayStartTask("en"); if (st0) head.push(st0); }
+  items = head.concat(items);
+  /* v147 S10: Ke hoach ngay — 3 nhiệm vụ: the hom nay chi trinh bay toi da
+     3 nhiem vu (uu tien am yeu/tu sai len truoc); cac muc cho cham (thi thu /
+     kiem tra dot) neu roi ngoai 3 nhiem vu thi hien them o dong rieng. */
+  var pl0 = todayPlanOf(items);
+  return { items: items, plan: pl0.plan, extras: pl0.extras, due: due, done: items.length === 0, hiddenWork: hideStep || hideTest || hideLesson || hideReview };
+}
+/* v147 S10: viec am yeu + tu con sai cho the "Viec hom nay" (ca 4 track cung
+   cach) + ke hoach ngay 3 nhiem vu + dong Hanh trinh.
+   - Am yeu: lay tu pronWeakData(track) — cung nguon voi the "Âm yếu của tôi"
+     (state.pronDiag + state.wordPron); toi da 2 am; bam mo bai am bang
+     pronDiagLearn nhu nut "Hoc ngay am nay" cua the Am yeu.
+   - Tu con sai: 1 muc chua tot nghiep trong So loi sai — EN: tu da luu
+     (kind "srs", qi "w:<tu>"); ZH: the tu (kind "card") trong zhHard;
+     TC/TP khong co muc tu trong so loi sai nen lay tu con sai dau tien
+     cua am yeu (mo man chi tiet tung am tiet).
+   - Ke hoach ngay — 3 nhiệm vụ: the hom nay chi trinh bay toi da 3 nhiem
+     vu (uu tien am yeu/tu sai len truoc); muc cho cham (thi thu/kiem tra
+     dot) neu roi ngoai 3 nhiem vu thi hien them o dong rieng, khong tinh
+     vao 3 nhiem vu. */
+function todayWeakTasks(track) {
+  var out = [];
+  var d = null; try { d = pronWeakData(track); } catch (e) {}
+  if (!d || !d.sounds || !d.sounds.length) return out;
+  d.sounds.slice(0, 2).forEach(function (s, i) {
+    var words = (s.words || []).slice(0, 3).map(function (w) { return w.show || w.w || ""; }).filter(Boolean);
+    out.push({ kind: "weak", title: "Luyện âm yếu /" + s.sym + "/ — " + s.words.length + " từ còn sai",
+      detail: (words.length ? "Từ còn sai: " + words.join(", ") + ". " : "") + "Học ngay âm này ở bài âm.",
+      action: "weak:" + track + ":" + i });
+  });
+  return out;
+}
+function todayWrongWordTask(track) {
+  var w = null, action = "";
+  try {
+    if (track === "en") {
+      var best = null;
+      Object.keys(state.hard || {}).forEach(function (k) {
+        var h = state.hard[k];
+        if (h && !h.done && h.kind === "srs" && h.qi && String(h.qi).indexOf("w:") === 0) {
+          if (!best || (h.fails || 0) > (best.fails || 0)) best = h;
+        }
+      });
+      if (best) { w = String(best.qi).slice(2); action = "review"; }
+    } else if (track === "zh") {
+      var zhBest = null;
+      Object.keys(state.zhHard || {}).forEach(function (k) {
+        var h = state.zhHard[k];
+        if (h && !h.done && h.kind === "card") {
+          if (!zhBest || (h.fails || 0) > (zhBest.fails || 0)) zhBest = h;
+        }
+      });
+      if (zhBest) { w = zhBest.han + (zhBest.pinyin ? " (" + zhBest.pinyin + ")" : ""); action = "zhVocab:" + zhBest.setKey; }
+    }
+  } catch (e) {}
+  if (!w) {
+    /* TC/TP khong co muc tu trong so loi sai; EN/ZH khong co muc tu thi
+       lay tu con sai dau tien cua am yeu (mo man chi tiet tung am tiet). */
+    var d = null; try { d = pronWeakData(track); } catch (e2) {}
+    if (d && d.sounds.length && d.sounds[0].words.length) {
+      var wd = d.sounds[0].words[0];
+      return { kind: "word", title: "Ôn từ còn sai: " + (wd.show || wd.w),
+        detail: "Từ này bạn đọc sai — xem chi tiết từng âm tiết rồi đọc lại.",
+        action: "sylw:" + track + ":0:0" };
+    }
+    return null;
+  }
+  return { kind: "word", title: "Ôn từ còn sai: " + w,
+    detail: track === "en" ? "Từ này còn sai trong Sổ lỗi sai — ôn lại ở tab Ôn tập." : "Từ này còn sai trong Sổ lỗi sai — mở đúng bộ từ chứa nó.",
+    action: action };
+}
+function todayStartTask(track) {
+  if (track === "zh") return { kind: "start", title: "Bắt đầu: kiểm tra trình độ HSK", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "zhEntry" };
+  if (track === "tc") return { kind: "start", title: "Bắt đầu: kiểm tra trình độ TOEIC", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "tcEntry" };
+  if (track === "tp") return { kind: "start", title: "Bắt đầu: kiểm tra trình độ TOPIK", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "tpEntry" };
+  return { kind: "start", title: "Bắt đầu: kiểm tra trình độ đầu vào", detail: "Làm kiểm tra trình độ để web xếp đúng chặng cho bạn.", action: "entry" };
+}
+function todayPlanOf(items) {
+  var plan = items.slice(0, 3);
+  var extras = items.filter(function (it, i) { return i >= 3 && (it.kind === "mock" || it.kind === "phase"); });
+  return { plan: plan, extras: extras };
+}
+function todayJourneyText(track) {
+  var streak = 0, xp = 0;
+  try { streak = streakDays(); } catch (e) {}
+  try { xp = state.xp || 0; } catch (e2) {}
+  var stage = "";
+  try {
+    if (track === "zh") { var zp = zhPositionCurrent(); stage = "Chặng " + (zp ? zp.stage : 1) + " · HSK " + (zp ? zp.stage : 1); }
+    else if (track === "tc") { var n = tcNextStep(); stage = n ? ("TOEIC · " + (n.meta && n.meta.title ? n.meta.title : "")) : "TOEIC · đã xong hết các bước"; }
+    else if (track === "tp") { var p = tpNextStep(); stage = p ? ("TOPIK · " + (p.meta && p.meta.title ? p.meta.title : "")) : "TOPIK · đã xong hết các bước"; }
+    else { var info = homePathInfo(); stage = (info.band || "Band 0") + " · " + (info.title || ""); }
+  } catch (e3) { stage = ""; }
+  return (stage ? stage + " · " : "") + "Chuỗi " + streak + " ngày · " + xp + " XP";
 }
 function specTodayHTML(nextCard) {
   var d = specTodayItems(nextCard);
   if (!d.items.length && d.hiddenWork) return "";
   var h = '<section class="card" id="specToday"><p class="eyebrow">VIỆC HÔM NAY</p>';
+  h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("en")) + '</p>';
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc 🎉</h3><p class="mut">Không còn mục đến hạn, không còn bộ từ dở dang, không còn bài thi chờ chấm.</p>'; }
   else {
-    h += '<h3>' + d.items.length + ' việc hôm nay</h3>';
-    h += d.items.map(function (it, i) {
+    h += '<h3>' + d.plan.length + ' việc hôm nay</h3>';
+    h += d.plan.map(function (it, i) {
       return '<p><b>' + (i + 1) + '. ' + esc(it.title) + '</b><br><span class="mut">' + esc(it.detail) + '</span> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>';
     }).join("");
+    if (d.extras && d.extras.length) {
+      h += d.extras.map(function (it) { return '<p class="mut">Đang chờ chấm: <b>' + esc(it.title) + '</b> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>'; }).join("");
+    }
   }
   return h + '</section>';
 }
@@ -1943,6 +2047,13 @@ function specTodayGo(action) {
   if (parts[0] === "zhReview") { go("review"); return; }
   if (parts[0] === "zhTarget") { try { zhOpenTarget(zhSessionTarget()); } catch (e) {} return; }
   if (parts[0] === "zhVocab") { var d = null; try { d = zhSetByKey(parts.slice(1).join(":")); } catch (e) {} if (d) openLesson({ type: "zhVocab", setKey: d.key, idx: d.idx }); return; }
+  /* v147 S10: viec am yeu / tu con sai / viec bat dau cua the hom nay. */
+  if (parts[0] === "weak") { var sd = null; try { sd = pronWeakData(parts[1]).sounds[+parts[2]]; } catch (e) {} if (sd && sd.target) pronDiagLearn(parts[1], sd); return; }
+  if (parts[0] === "sylw") { var sw = null, ssy = ""; try { var dd = pronWeakData(parts[1]); var ss = dd.sounds[+parts[2]]; if (ss) { sw = ss.words[+parts[3]]; ssy = ss.sym; } } catch (e) {} if (sw) sylOpen(parts[1], { word: sw.w || sw.show, sym: ssy }); return; }
+  if (parts[0] === "entry") { openLesson({ type: "entryPlace" }); return; }
+  if (parts[0] === "zhEntry") { openLesson({ type: "zhEntry" }); return; }
+  if (parts[0] === "tcEntry") { openLesson({ type: "tcEntry" }); return; }
+  if (parts[0] === "tpEntry") { openLesson({ type: "tpEntry" }); return; }
 }
 /* FIX-V33 02/11 (A4): ap luat an muc trung voi the chinh nhu ban EN — the chinh
    man chinh Trung da hien dung buoc tiep theo thi VIEC HOM NAY khong lap lai. */
@@ -1959,18 +2070,30 @@ function specTodayZhItems(mainTitle) {
       if (pos > 0 && pos < d.set.cards.length) items.push({ kind: "zhVocab", title: "Học dở bộ từ: " + d.set.topic, detail: "Đã học " + pos + "/" + d.set.cards.length + " thẻ — vào tiếp đúng chỗ đang dở.", action: "zhVocab:" + d.key });
     });
   } catch (e) {}
-  return { items: items.slice(0, 6), due: due, done: items.length === 0, hiddenWork: hiddenTarget };
+  /* v147 S10: am yeu + tu con sai len dau; khach moi co 1 viec bat dau;
+     Ke hoach ngay — 3 nhiệm vụ (chi trinh bay toi da 3 nhiem vu). */
+  var headZh = todayWeakTasks("zh");
+  var wwZh = todayWrongWordTask("zh");
+  if (wwZh) headZh.push(wwZh);
+  if (isZhNewUser() && !headZh.length) { var stZh = todayStartTask("zh"); if (stZh) headZh.push(stZh); }
+  items = headZh.concat(items);
+  var plZh = todayPlanOf(items);
+  return { items: items, plan: plZh.plan, extras: plZh.extras, due: due, done: items.length === 0, hiddenWork: hiddenTarget };
 }
 function specTodayZhHTML(mainTitle) {
   var d = specTodayZhItems(mainTitle);
   if (!d.items.length && d.hiddenWork) return "";
   var h = '<section class="card" id="specTodayZh"><p class="eyebrow">VIỆC HÔM NAY · TIẾNG TRUNG</p>';
+  h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("zh")) + '</p>';
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc 🎉</h3><p class="mut">Không còn mục đến hạn và không còn bộ từ dở dang.</p>'; }
   else {
-    h += '<h3>' + d.items.length + ' việc hôm nay</h3>';
-    h += d.items.map(function (it, i) {
+    h += '<h3>' + d.plan.length + ' việc hôm nay</h3>';
+    h += d.plan.map(function (it, i) {
       return '<p><b>' + (i + 1) + '. ' + esc(it.title) + '</b><br><span class="mut">' + esc(it.detail) + '</span> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>';
     }).join("");
+    if (d.extras && d.extras.length) {
+      h += d.extras.map(function (it) { return '<p class="mut">Đang chờ chấm: <b>' + esc(it.title) + '</b> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>'; }).join("");
+    }
   }
   return h + '</section>';
 }
@@ -4127,7 +4250,7 @@ function viewHome(app) {
 
   /* v84: Vào nhanh theo loại đã có đủ ở Luyện tập (thẻ Tìm bài, 7 nút) —
      bỏ khỏi trang chủ để màn chính chỉ còn một việc tiếp theo. */
-  var todayHTML = (!fresh) ? specTodayHTML(t) : "";
+  var todayHTML = specTodayHTML(t); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) */
   if (todayHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayHTML + '</details>';
   var curStep = null, curTitle = "";
   if (info.kind === "ch1") { var nsH = nextLearnStep(); curStep = nsH; }
@@ -18473,7 +18596,7 @@ function viewHomeZh(app) {
      thứ tự mục ở cả 4 track. "VÀO NHANH THEO LOẠI" đã có đủ ở Luyện tập
      nên không còn ở trang chủ. Nội dung thật từng track giữ nguyên, chỉ
      xếp lại vào khung chung. */
-  var todayZhHTML = fresh ? "" : specTodayZhHTML(tZh.title);
+  var todayZhHTML = specTodayZhHTML(tZh ? tZh.title : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) */
   if (todayZhHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayZhHTML + '</details>';
   var zp = zhPositionCurrent() || { stage: 1, done: 0, total: 0 };
   html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="zhHomePath"><h3>Chặng hiện tại: Chặng ' + zp.stage + '</h3><p class="mut">Đã xong ' + zp.done + '/' + zp.total + ' bước học.</p><div class="row"><button class="btn" id="zhHomeStageBtn">Xem chặng này ở Bản đồ →</button></div></section></details>';
@@ -21342,18 +21465,30 @@ function specTodayTcItems(nextId) {
   var n = tcNextStep();
   var hiddenStep = !!(nextId && n && n.id === nextId);
   if (n && !hiddenStep) items.push({ kind: "tcStep", title: "Học tiếp TOEIC: " + n.meta.title, detail: "Bước tiếp theo trong lộ trình TOEIC.", action: "tcStep:" + n.id });
-  return { items: items, done: items.length === 0, hiddenWork: hiddenStep };
+  /* v147 S10: am yeu + tu con sai len dau; khach moi co 1 viec bat dau;
+     Ke hoach ngay — 3 nhiệm vụ (chi trinh bay toi da 3 nhiem vu). */
+  var headTc = todayWeakTasks("tc");
+  var wwTc = todayWrongWordTask("tc");
+  if (wwTc) headTc.push(wwTc);
+  if (isTcNewUser() && !headTc.length) { var stTc = todayStartTask("tc"); if (stTc) headTc.push(stTc); }
+  items = headTc.concat(items);
+  var plTc = todayPlanOf(items);
+  return { items: items, plan: plTc.plan, extras: plTc.extras, done: items.length === 0, hiddenWork: hiddenStep };
 }
 function specTodayTcHTML(nextId) {
   var d = specTodayTcItems(nextId);
   if (!d.items.length && d.hiddenWork) return "";
   var h = '<section class="card" id="specTodayTc"><p class="eyebrow">VIỆC HÔM NAY · TOEIC</p>';
+  h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("tc")) + '</p>';
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc TOEIC 🎉</h3><p class="mut">Không còn lỗi sai chưa sửa và đã xong hết các bước TOEIC hiện có.</p>'; }
   else {
-    h += '<h3>' + d.items.length + ' việc hôm nay</h3>';
-    h += d.items.map(function (it, i) {
+    h += '<h3>' + d.plan.length + ' việc hôm nay</h3>';
+    h += d.plan.map(function (it, i) {
       return '<p><b>' + (i + 1) + '. ' + esc(it.title) + '</b><br><span class="mut">' + esc(it.detail) + '</span> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>';
     }).join("");
+    if (d.extras && d.extras.length) {
+      h += d.extras.map(function (it) { return '<p class="mut">Đang chờ chấm: <b>' + esc(it.title) + '</b> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>'; }).join("");
+    }
   }
   return h + '</section>';
 }
@@ -21379,7 +21514,7 @@ function viewHomeTc(app) {
   }
   html += '</div>';
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
-  var todayTcHTML = fresh ? "" : specTodayTcHTML(n ? n.id : null);
+  var todayTcHTML = specTodayTcHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) */
   if (todayTcHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayTcHTML + '</details>';
   html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="tcHomePath"><h3>Lộ trình TOEIC của bạn</h3>';
   TC_STAGES.forEach(function (st, i) {
@@ -22378,18 +22513,30 @@ function specTodayTpItems(nextId) {
   var n = tpNextStep();
   var hiddenStep = !!(nextId && n && n.id === nextId);
   if (n && !hiddenStep) items.push({ kind: "tpStep", title: "Học tiếp TOPIK: " + n.meta.title, detail: "Bước tiếp theo trong lộ trình TOPIK.", action: "tpStep:" + n.id });
-  return { items: items, done: items.length === 0, hiddenWork: hiddenStep };
+  /* v147 S10: am yeu + tu con sai len dau; khach moi co 1 viec bat dau;
+     Ke hoach ngay — 3 nhiệm vụ (chi trinh bay toi da 3 nhiem vu). */
+  var headTp = todayWeakTasks("tp");
+  var wwTp = todayWrongWordTask("tp");
+  if (wwTp) headTp.push(wwTp);
+  if (isTpNewUser() && !headTp.length) { var stTp = todayStartTask("tp"); if (stTp) headTp.push(stTp); }
+  items = headTp.concat(items);
+  var plTp = todayPlanOf(items);
+  return { items: items, plan: plTp.plan, extras: plTp.extras, done: items.length === 0, hiddenWork: hiddenStep };
 }
 function specTodayTpHTML(nextId) {
   var d = specTodayTpItems(nextId);
   if (!d.items.length && d.hiddenWork) return "";
   var h = '<section class="card" id="specTodayTp"><p class="eyebrow">VIỆC HÔM NAY · TOPIK</p>';
+  h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("tp")) + '</p>';
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc TOPIK 🎉</h3><p class="mut">Không còn lỗi sai chưa sửa và đã xong hết các bước TOPIK hiện có.</p>'; }
   else {
-    h += '<h3>' + d.items.length + ' việc hôm nay</h3>';
-    h += d.items.map(function (it, i) {
+    h += '<h3>' + d.plan.length + ' việc hôm nay</h3>';
+    h += d.plan.map(function (it, i) {
       return '<p><b>' + (i + 1) + '. ' + esc(it.title) + '</b><br><span class="mut">' + esc(it.detail) + '</span> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>';
     }).join("");
+    if (d.extras && d.extras.length) {
+      h += d.extras.map(function (it) { return '<p class="mut">Đang chờ chấm: <b>' + esc(it.title) + '</b> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>'; }).join("");
+    }
   }
   return h + '</section>';
 }
@@ -22415,7 +22562,7 @@ function viewHomeTp(app) {
   }
   html += '</div>';
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
-  var todayTpHTML = fresh ? "" : specTodayTpHTML(n ? n.id : null);
+  var todayTpHTML = specTodayTpHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) */
   if (todayTpHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayTpHTML + '</details>';
   html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="tpHomePath"><h3>Lộ trình TOPIK của bạn</h3>';
   TP_STAGES.forEach(function (st, i) {
