@@ -5226,7 +5226,7 @@ var PRON_TIER_GUIDE_HTML = '<h4>Cách chấm phát âm — một thang, ba tần
   + '<p><b>Tầng 1 — máy có nghe ra không (khách cũng được):</b> đọc to từ/câu, nhận giọng của trình duyệt trả lời “nghe ra” hay “chưa nghe ra”. Đây là kiểm tra nhị phân — chưa phải điểm từng âm, không cần đăng nhập, không cần camera.</p>'
   + '<p><b>Tầng 2 — âm yếu suy ra:</b> từ/câu máy nghe sai + kết quả nghe phân biệt âm gom thành mục “Âm yếu của tôi” để luyện lại đúng âm đó.</p>'
   + '<p><b>Tầng 3 — thanh điệu tiếng Trung (đã có):</b> chấm thanh điệu thật bằng cách đo cao độ giọng (YIN) ngay trên máy, không gửi âm thanh đi đâu: đọc to một âm tiết, máy vẽ đường cao độ của bạn so với đường chuẩn của 4 thanh điệu và cho biết đúng hay chưa.</p>'
-  + '<p><b>Chấm sâu chỉ cho bài nói dài và chỉ cho VIP:</b> AI chấm 4–5 tiêu chí (phát âm, trôi chảy, từ vựng, ngữ pháp, mạch lạc) chỉ áp cho bài nói/viết dài; tài khoản thường không có nút AI.</p>'
+  + '<p><b>Chấm sâu chỉ cho bài nói dài và chỉ cho VIP:</b> AI chấm 4 tiêu chí (Nói: trôi chảy và mạch lạc, từ vựng, ngữ pháp, phát âm; Viết: đáp ứng đúng đề, mạch lạc và liên kết, từ vựng, ngữ pháp) chỉ áp cho bài nói/viết dài; tài khoản thường không có nút AI.</p>'
   + '<p>Chuẩn 80 là chuẩn nội bộ “đủ tốt để đi tiếp” — không khóa thẻ hay bài nào. Chẩn đoán phát âm đầu vào chỉ là ước lượng, không tính đạt chuẩn.</p>';
 function notesScoreHTML89() {
   var t = (typeof state !== "undefined" && state.track) || "en";
@@ -11134,7 +11134,7 @@ function renderPron(app, l) {
     });
     html += '</div>';
   }
-  html += '<p class="mut">Màn Nói trong mỗi bài học chỉ cần mic: đọc to, máy nghe ra đúng từ/câu là được. Gương chỉ để tự nhìn miệng, không chấm điểm.</p><details class="guide-more"><summary><b>Xem cách chấm đọc to</b></summary><p class="mut">Chấm đọc to dùng nhận giọng của trình duyệt (tầng 1) — khách cũng dùng được, không cần đăng nhập, không cần camera. AI chấm sâu 4–5 tiêu chí chỉ cho bài nói dài và chỉ cho VIP. Cách chấm đầy đủ xem trong tab Hướng dẫn → Cách tính điểm.</p></details>';
+  html += '<p class="mut">Màn Nói trong mỗi bài học chỉ cần mic: đọc to, máy nghe ra đúng từ/câu là được. Gương chỉ để tự nhìn miệng, không chấm điểm.</p><details class="guide-more"><summary><b>Xem cách chấm đọc to</b></summary><p class="mut">Chấm đọc to dùng nhận giọng của trình duyệt (tầng 1) — khách cũng dùng được, không cần đăng nhập, không cần camera. AI chấm sâu 4 tiêu chí chỉ cho bài nói dài và chỉ cho VIP. Cách chấm đầy đủ xem trong tab Hướng dẫn → Cách tính điểm.</p></details>';
   app.innerHTML = html;
   wireBack();
   var vw = $("#phViewWave"); if (vw) vw.onclick = function () { phViewMode = "wave"; render(); };
@@ -20390,7 +20390,7 @@ function renderZhHskk(app, l) {
   if (i >= flat.length) {
     zhAwardOnce(meta.done);
     l.zhNext = true;
-    app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + finishSummaryHTML("Xong bài luyện HSKK " + meta.name + "!", '<p>Bạn đã luyện ' + flat.length + ' mục trong ' + elapsedText() + '.</p><p class="mut">Đọc to câu mẫu được chấm bằng tầng 1 (máy có nghe ra không) — chưa có AI chấm sâu 4–5 tiêu chí; chấm nói AI cho track Trung sẽ có ở đợt sau.</p>', "") + zhNextStepHTML();
+    app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + finishSummaryHTML("Xong bài luyện HSKK " + meta.name + "!", '<p>Bạn đã luyện ' + flat.length + ' mục trong ' + elapsedText() + '.</p><p class="mut">Đọc to câu mẫu được chấm bằng tầng 1 (máy có nghe ra không) — chưa có AI chấm sâu 4 tiêu chí; chấm nói AI cho track Trung sẽ có ở đợt sau.</p>', "") + zhNextStepHTML();
     wireBack();
     var rb = $("#btnRedo"); if (rb) rb.onclick = function () { l.i = 0; render(); };
     return;
