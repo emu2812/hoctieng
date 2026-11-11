@@ -1034,6 +1034,7 @@ function videoLinkWire() {
       if (kind === "dictation") openLesson({ type: "dictation", idx: idx.listen });
       else if (kind === "shadow") openLesson({ type: "skillSpeak", idx: idx.speak });
       else if (kind === "podcast") openLesson({ type: "podcast", idx: idx.speak });
+      else if (kind === "drill") openLesson({ type: "drill", vkey: key, track: videoTrackOf(key) });
     };
   });
 }
@@ -1043,7 +1044,8 @@ function myLinkExercisesHTML(m) {
   return '<p class="mut"><b>Đã có phụ đề thật trên web (' + lines.length + ' câu) — bài tập đối chiếu phụ đề:</b></p><div class="row">'
     + '<button class="btn" data-vvideo="' + m.vkey + '" data-vkind="dictation">🎧 Nghe chép theo câu</button>'
     + '<button class="btn" data-vvideo="' + m.vkey + '" data-vkind="shadow">🎤 Shadowing Xem/Luyện</button>'
-    + '<button class="btn" data-vvideo="' + m.vkey + '" data-vkind="podcast">🎙️ Podcast transcript từng câu</button></div>'
+    + '<button class="btn" data-vvideo="' + m.vkey + '" data-vkind="podcast">🎙️ Podcast transcript từng câu</button>'
+    + '<button class="btn" data-vvideo="' + m.vkey + '" data-vkind="drill">🔁 Drill lặp 1 câu</button></div>'
     + '<p class="mut">Truyện song ngữ + kiểm tra hiểu: chưa mở cho video này vì cần câu hỏi kiểm tra hiểu viết tay — vẫn nghe chép, Shadowing và podcast bình thường.</p>';
 }
 function myLinkCardHTML(m) {
@@ -9253,6 +9255,7 @@ function renderLesson(app) {
   else if (l.type === "skillWrite") renderSkillWrite(app, l);
   else if (l.type === "specTutor") renderSpecTutor(app, l);
   else if (l.type === "skillDrill") renderSkillDrill(app, l);
+  else if (l.type === "drill") renderDrill(app, l); /* v157 S19 phan 2/3 — Drill lap 1 cau (P9) */
   else if (l.type === "phaseExam") renderPhaseExam(app, l);
   else if (l.type === "phaseSkill") renderPhaseSkill(app, l);
   else if (l.type === "mockTest") renderMockTest(app, l);
@@ -14744,7 +14747,7 @@ function videoFormatStatusHTML(v) {
      dau the Video moi da co nhan chung. */
   if (v.kind === "day") return '<p class="mut">Chưa có bài tập — đang chờ phụ đề thật.</p>';
   var vlines = (typeof VIDEO_LINES !== "undefined") ? VIDEO_LINES[v.key] : null;
-  if (vlines && vlines.length) return '<p class="mut"><b>Đã có đủ 4 dạng bài thật.</b></p><div class="row"><button class="btn" data-vvideo="' + v.key + '" data-vkind="dictation">🎧 Nghe chép theo câu</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="shadow">🎤 Shadowing Xem/Luyện</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="story">📖 Truyện song ngữ + kiểm tra hiểu</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="podcast">🎙️ Podcast transcript từng câu</button></div>';
+  if (vlines && vlines.length) return '<p class="mut"><b>Đã có đủ 5 dạng bài thật.</b></p><div class="row"><button class="btn" data-vvideo="' + v.key + '" data-vkind="dictation">🎧 Nghe chép theo câu</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="shadow">🎤 Shadowing Xem/Luyện</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="story">📖 Truyện song ngữ + kiểm tra hiểu</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="podcast">🎙️ Podcast transcript từng câu</button><button class="btn" data-vvideo="' + v.key + '" data-vkind="drill">🔁 Drill lặp 1 câu</button></div>';
   return ''; /* v113 B-P3: dong trang thai "chua co" lap duoi moi video — chi giu 1 nhan chung o dau khoi giai tri. */
 }
 var videoNewEntHTML = {};
@@ -14867,6 +14870,7 @@ function videoVOAWire() {
       else if (kind === "shadow") openLesson({ type: "skillSpeak", idx: idx.speak });
       else if (kind === "story") openLesson({ type: "story", idx: idx.read });
       else if (kind === "podcast") openLesson({ type: "podcast", idx: idx.speak });
+      else if (kind === "drill") openLesson({ type: "drill", vkey: "voa-break-the-news", track: "en" });
     };
   });
   /* v117b L1a: nut mo khong gian nghe chep video tren the VOA — them sau
@@ -15198,7 +15202,7 @@ var LISTEN_HUB_ROWS = {
     { k: "shadowView", t: "Shadowing Xem/Luyện" },
     { k: "shadowSteps", t: "Shadowing 10 bước" },
     { k: "podcast", t: "Nghe thụ động — Podcast" },
-    { k: "video", t: "Video có phụ đề thật — 4 dạng bài" },
+    { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
   ],
   zh: [
@@ -15207,17 +15211,17 @@ var LISTEN_HUB_ROWS = {
     { k: "shadowView", t: "Shadowing Xem/Luyện" },
     { k: "podcast", t: "Nghe thụ động — Podcast" },
     { k: "passive", t: "Nghe thụ động — video" },
-    { k: "video", t: "Video có phụ đề thật — 4 dạng bài" },
+    { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
   ], /* v126: ZH da co Nghe chep + Shadowing + Podcast qua video zh-e10 co phu de that */
   tc: [
     { k: "compre", t: "Nghe hiểu" },
-    { k: "video", t: "Video có phụ đề thật — 4 dạng bài" },
+    { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
   ],
   tp: [
     { k: "compre", t: "Nghe hiểu" },
-    { k: "video", t: "Video có phụ đề thật — 4 dạng bài" },
+    { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
   ]
 };
@@ -15540,7 +15544,7 @@ function renderShadowListen(app, l, item, isLong) {
    Truyen ngan o ZH/TC/TP, Nghe chep/Shadowing/Podcast o TC/TP) khong hien. */
 function pfSkillOptions(tr) {
   var exam = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[tr] || "IELTS";
-  var order = ["Từ vựng", "Ngữ pháp", "Đọc", "Nghe", "Nói", "Viết", "Gõ câu", "Nghe chép", "Shadowing", "Truyện ngắn", "Podcast"];
+  var order = ["Từ vựng", "Ngữ pháp", "Đọc", "Nghe", "Nói", "Viết", "Gõ câu", "Nghe chép", "Shadowing", "Drill", "Truyện ngắn", "Podcast"]; /* v157 S19 phan 2/3: them Drill sau Shadowing (mo rong tu Shadowing) */
   var have = {};
   try { pfBuildItems(exam).forEach(function (it) { if (it.skill) have[it.skill] = true; }); } catch (e) {}
   return '<option value="">Mọi kỹ năng</option>' + order.filter(function (s) { return have[s]; }).map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join("");
@@ -15573,6 +15577,7 @@ function pfBuildItems(exam) {
   if (exam === "HSK") {
     zhSets().forEach(function (d) { items.push({ skill: "Từ vựng", topic: d.set.topic, band: "HSK " + d.stage, label: "Từ vựng: " + d.set.topic + " (" + d.set.cards.length + " từ)", open: open({ type: "zhVocab", setKey: d.key }) }); });
     items.push({ skill: "Đọc", topic: "Luyện trộn 60/20/20", band: "", label: "Luyện trộn 60/20/20 — 10 câu Đọc (6 vừa sức · 2 mới · 2 thử thách)", open: open({ type: "mix60", track: "zh" }) }); /* v154 S17 */
+    items.push({ skill: "Drill", topic: "Drill lặp 1 câu", band: "", label: "🔁 Drill lặp 1 câu — lặp 1 câu đến trôi chảy (video/bài đọc)", open: open({ type: "drill", track: "zh" }) }); /* v157 S19 phan 2/3 */
     return items;
   }
   if (exam === "TOEIC" || exam === "TOPIK") {
@@ -15581,6 +15586,7 @@ function pfBuildItems(exam) {
     var openFn = (exam === "TOEIC") ? tcOpenStep : tpOpenStep;
     var skillOf = { vocab: "Từ vựng", gram: "Ngữ pháp", listen: "Nghe", read: "Đọc", speak: "Nói", write: "Viết" }; /* v149 (S12): bai Noi TC/TP co that (TC 8, TP 16) phai co nhan "Nói" de bo loc tim duoc — truoc day roi ve skill "" nen loc "Nói" tra 0 bai */
     items.push({ skill: "Đọc", topic: "Luyện trộn 60/20/20", band: "", label: "Luyện trộn 60/20/20 — 10 câu Đọc (6 vừa sức · 2 mới · 2 thử thách)", open: open({ type: "mix60", track: exam === "TOEIC" ? "tc" : "tp" }) }); /* v154 S17: de DAU — loc chi hien 50 bai dau */
+    items.push({ skill: "Drill", topic: "Drill lặp 1 câu", band: "", label: "🔁 Drill lặp 1 câu — lặp 1 câu đến trôi chảy (video/bài đọc)", open: open({ type: "drill", track: exam === "TOEIC" ? "tc" : "tp" }) }); /* v157 S19 phan 2/3 */
     stages.forEach(function (st) {
       st.steps.forEach(function (id) {
         var m = metaFn(id); if (!m) return;
@@ -15593,6 +15599,7 @@ function pfBuildItems(exam) {
   RB_NEW_GRAMMAR.forEach(function (g, i) { items.push({ skill: "Ngữ pháp", topic: g.name, band: g.level || "", label: "Ngữ pháp: " + g.name, open: open({ type: "grammar", gIdx: i }) }); });
   CONTENT.grammar.forEach(function (g, i) { items.push({ skill: "Ngữ pháp", topic: g.name, band: g.level || "", label: "Ngữ pháp (kho cũ): " + g.name, open: open({ type: "skillGramOld", idx: i, skillKey: "gramOld:" + i, title: g.name }) }); });
   items.push({ skill: "Đọc", topic: "Luyện trộn 60/20/20", band: "", label: "Luyện trộn 60/20/20 — 10 câu Đọc (6 vừa sức · 2 mới · 2 thử thách)", open: open({ type: "mix60", track: "en" }) }); /* v154 S17: de DAU kho Doc — loc chi hien 50 bai dau, de cuoi se khong thay */
+    items.push({ skill: "Drill", topic: "Drill lặp 1 câu", band: "", label: "🔁 Drill lặp 1 câu — lặp 1 câu đến trôi chảy (video/bài đọc)", open: open({ type: "drill", track: "en" }) }); /* v157 S19 phan 2/3 */
   CONTENT.reading.forEach(function (r, i) { items.push({ skill: "Đọc", topic: r.topic, band: r.level || "", label: "Đọc: " + r.topic, open: open({ type: "skillRead", idx: i }) }); });
   CONTENT.listening.forEach(function (r, i) { items.push({ skill: "Nghe", topic: r.topic, band: r.band || "", label: "Nghe ngắn: " + r.topic, open: open({ type: "skillListen", idx: i }) }); items.push({ skill: "Shadowing", topic: r.topic, band: r.band || "", label: "Shadowing: " + r.topic, open: open({ type: "skillListen", idx: i, shadow: true, shadowMode: "practice", shadowIdx: 0, shadowTurn: "listen" }) }); });
   CONTENT.listeningPlus.forEach(function (r, i) {
@@ -16753,6 +16760,246 @@ function renderSkillDrill(app, l) {
 var EXAM_MOCK_MIN = { listening: 30, reading: 60, writing: 60, speaking: 14 };
 var EXAM_PHASE_MIN = { listening: 10, reading: 20, writing: 40 };
 var EXAM_SPEAK_PART_MIN = { 1: 5, 2: 4, 3: 5 };
+/* ===== v157 S19 phan 2/3 — DRILL LAP 1 CAU (P9) =====
+   P9 (KE_HOACH_HOC_TU_MOI_NOI.md §1.10 Cake + muc P9 item 20): "Che do Drill
+   (lap mot cau den troi chay)" — lap mot cau den khi troi chay roi moi sang
+   cau sau, mo rong tu Shadowing 10 buoc da co; nguon Cake/EWA hoc qua clip.
+   Nghien cuu KHONG ghi ro: so cau/luot, cach cham, duong thoat khi khong co
+   mic — chot theo luat dung (ghi ro de Bui lat lai 1 cau): 5 cau/luot;
+   cham tang 1 SR nhi phan nhu buoc 4 the tu (dung -> qua cau, sai -> lap
+   dung cau do, khong nhay cau); khong mic -> che do "nghe + go lai" (luat
+   thoat mic v112); cau lap nhieu nhat vao So loi sai theo luat dung
+   (recordQuizError: nac giu nguyen, chuoi ve 0, hen mai).
+   Nguon cau: phu de that VIDEO_LINES cua video dang hoc, hoac cau trong bai
+   doc tu soan cua web (EN: CONTENT.reading; ZH: ZH_READING; TC: TC_LISTEN
+   .script; TP: TP_READ.passage, chi lay bai co doan van that, bo bai cloze
+   co "[...]") — KHONG bia cau, KHONG dung de Cam.
+   Ca 4 track cung luat, cung man tong ket; chi khac giong doc/giong SR theo
+   track (en/tc: en-GB; zh: zh-CN; tp: ko-KR). Khong cham % tung am. */
+function drillSrLang(track) { return track === "zh" ? "zh-CN" : track === "tp" ? "ko-KR" : "en-GB"; }
+function drillSpeak(text, track, rate) {
+  if (track === "zh") zhSpeak(text, rate || 0.85);
+  else if (track === "tp") tpSpeak(text, rate || 0.85);
+  else speak(text, rate || 0.85);
+}
+function videoTrackOf(key) {
+  /* VOA la video phu de that duy nhat chua vao VIDEO_NEW (the rieng tu v117):
+     key chi co trong VIDEO_LINES, track EN. */
+  if (key === "voa-break-the-news") return "en";
+  var found = null;
+  ["en", "zh", "tc", "tp"].forEach(function (tr) {
+    (videoNewList(tr) || []).forEach(function (v) { if (v && v.key === key) found = tr; });
+  });
+  return found || "en";
+}
+function drillSplitCjk(text) { return (String(text || "").match(/[^。！？；]+[。！？；]?/g) || []).map(function (x) { return x.trim(); }).filter(function (x) { return x.length > 1; }); }
+function drillSplitTp(text) { return (String(text || "").match(/[^.!?]+[.!?]?/g) || []).map(function (x) { return x.trim(); }).filter(function (x) { return x.length > 1; }); }
+function drillCleanSents(list) { return (list || []).filter(function (s) { return s && s.text && s.text.trim().length > 1 && s.text.indexOf("[") < 0 && s.text.indexOf("]") < 0; }).slice(0, 5); }
+function drillSentsFor(l) {
+  var out = [], parts;
+  if (l.vkey) {
+    out = (myLinkLines(l.vkey) || []).map(function (x) { return { text: x.en, vi: x.vi || "", py: x.py || "" }; });
+  } else if (l.readKind === "en") {
+    var r = CONTENT.reading[l.readIdx];
+    if (r && r.text) parts = splitSentencesEN(r.text);
+    out = (parts || []).map(function (t) { return { text: t, vi: "", py: "" }; });
+  } else if (l.readKind === "zh") {
+    var z = (typeof ZH_READING !== "undefined") ? ZH_READING[l.readIdx] : null;
+    if (z && z.text) parts = drillSplitCjk(z.text);
+    var pyParts = (z && z.pinyin) ? String(z.pinyin).split(/\. /).map(function (x) { return x.replace(/\.$/, "").trim(); }) : [];
+    out = (parts || []).map(function (t, i) { return { text: t, vi: "", py: pyParts[i] || "" }; });
+  } else if (l.readKind === "tc") {
+    var t2 = (typeof TC_LISTEN !== "undefined") ? TC_LISTEN[l.readIdx] : null;
+    if (t2 && t2.script) parts = splitSentencesEN(t2.script);
+    out = (parts || []).map(function (t) { return { text: t, vi: "", py: "" }; });
+  } else if (l.readKind === "tp") {
+    var p = (typeof TP_READ !== "undefined") ? TP_READ[l.readIdx] : null;
+    if (p && p.passage) parts = drillSplitTp(p.passage);
+    out = (parts || []).map(function (t) { return { text: t, vi: "", py: "" }; });
+  }
+  return drillCleanSents(out);
+}
+function drillSrcKey(l) { return l.vkey ? ("video:" + l.vkey) : ("read:" + l.readKind + ":" + l.readIdx); }
+function drillSrcTitle(l) {
+  if (l.vkey) { if (l.vkey === "voa-break-the-news") return "VOA: Break the News — English in a Minute"; var v = null; ["en", "zh", "tc", "tp"].forEach(function (tr) { (videoNewList(tr) || []).forEach(function (x) { if (x && x.key === l.vkey) v = x; }); }); return v ? (v.title || v.key) : l.vkey; }
+  if (l.readKind === "en") { var r = CONTENT.reading[l.readIdx]; return r ? (r.title || r.topic || "Bài đọc") : "Bài đọc"; }
+  if (l.readKind === "zh") { var z = (typeof ZH_READING !== "undefined") ? ZH_READING[l.readIdx] : null; return z ? (z.title || z.topic || "Bài đọc") : "Bài đọc"; }
+  if (l.readKind === "tc") { var t2 = (typeof TC_LISTEN !== "undefined") ? TC_LISTEN[l.readIdx] : null; return t2 ? (t2.title || "Bài nghe") : "Bài nghe"; }
+  if (l.readKind === "tp") { var p = (typeof TP_READ !== "undefined") ? TP_READ[l.readIdx] : null; return p ? (p.title || "Bài đọc") : "Bài đọc"; }
+  return "Drill lặp 1 câu";
+}
+function drillHasSr() { try { return !!(window.SpeechRecognition || window.webkitSpeechRecognition); } catch (e) { return false; } }
+function drillMode(l) { return (drillHasSr() && !mrNoMic()) ? "speak" : "type"; } /* v112: khong mic/khong SR -> go lai, khong bat doc to cho loi */
+function drillSrCheck(l, sent, ok, bad) {
+  var SR = null;
+  try { SR = window.SpeechRecognition || window.webkitSpeechRecognition; } catch (e) {}
+  if (!SR) { bad(""); return; }
+  var rec;
+  try { rec = new SR(); } catch (e) { bad(""); return; }
+  rec.lang = drillSrLang(l.track || "en");
+  rec.interimResults = false; rec.maxAlternatives = 1;
+  rec.onresult = function (e) {
+    var tx = "";
+    try { tx = (e.results[0][0] || {}).transcript || ""; } catch (err) {}
+    if (gameNormSent(tx) === gameNormSent(sent)) ok(tx); else bad(tx);
+  };
+  rec.onerror = function () { bad(""); };
+  try { rec.start(); } catch (e) { bad(""); }
+}
+function drillMark(l, ok, heard, typed) {
+  var i = l.drillIdx;
+  l.drillTries[i] = (l.drillTries[i] || 0) + 1;
+  l.drillHeard = heard || ""; l.drillTyped = typed || "";
+  if (ok) {
+    if (l.drillTries[i] === 1) l.drillFirst++;
+    l.drillIdx++;
+    l.drillMsg = "Đúng rồi — sang câu tiếp theo!";
+    if (l.drillIdx >= l.drillSents.length) drillFinish(l);
+  } else {
+    l.drillRepeats++;
+    l.drillMsg = "Chưa đúng — nghe lại rồi đọc lại đúng câu này nhé.";
+  }
+  saveState(); render();
+}
+function drillSkip(l) {
+  l.drillSkipped = (l.drillSkipped || 0) + 1;
+  l.drillIdx++;
+  l.drillMsg = "Đã bỏ qua câu này — sang câu tiếp theo.";
+  if (l.drillIdx >= l.drillSents.length) drillFinish(l);
+  saveState(); render();
+}
+function drillFinish(l) {
+  l.drillDone = true;
+  var worst = -1, worstTries = 1;
+  (l.drillTries || []).forEach(function (t, i) { if (t > worstTries) { worstTries = t; worst = i; } });
+  if (worst >= 0) {
+    var s = l.drillSents[worst];
+    recordQuizError("drill:" + l.drillSrcKey, worst, { q: "Drill lặp 1 câu — câu lặp " + worstTries + " lần: " + s.text, o: [s.text], a: 0, why: "Câu này bạn lặp lại " + worstTries + " lần mới đọc đúng — ôn lại trong Sổ lỗi sai nhé." });
+    l.drillWorst = worst;
+  }
+  var key = "drill:" + l.drillSrcKey;
+  var was = !!(state.skillDone && state.skillDone[key]);
+  if (!state.skillDone) state.skillDone = {};
+  state.skillDone[key] = true; awardXp(was ? 5 : 10);
+  logLessonMinutes(l);
+  saveState();
+}
+function drillReadOptions(track) {
+  var out = [];
+  if (track === "en") {
+    CONTENT.reading.forEach(function (r, idx) { if (r && r.text && drillSentsFor({ readKind: "en", readIdx: idx }).length >= 5) out.push({ kind: "en", idx: idx, title: r.title || r.topic || ("Bài đọc " + (idx + 1)) }); });
+  } else if (track === "zh") {
+    (typeof ZH_READING !== "undefined" ? ZH_READING : []).forEach(function (r, idx) { if (r && r.text && drillSentsFor({ readKind: "zh", readIdx: idx }).length >= 5) out.push({ kind: "zh", idx: idx, title: r.title || r.topic || ("Bài đọc " + (idx + 1)) }); });
+  } else if (track === "tc") {
+    (typeof TC_LISTEN !== "undefined" ? TC_LISTEN : []).forEach(function (r, idx) { if (r && r.script && drillSentsFor({ readKind: "tc", readIdx: idx }).length >= 5) out.push({ kind: "tc", idx: idx, title: r.title || ("Bài nghe " + (idx + 1)) }); });
+  } else if (track === "tp") {
+    (typeof TP_READ !== "undefined" ? TP_READ : []).forEach(function (r, idx) { if (r && r.passage && drillSentsFor({ readKind: "tp", readIdx: idx }).length >= 5) out.push({ kind: "tp", idx: idx, title: r.title || ("Bài đọc " + (idx + 1)) }); });
+  }
+  return out;
+}
+function drillVideoOptions(track) {
+  var out = (videoNewList(track) || []).filter(function (v) { return v && v.key && (myLinkLines(v.key) || []).length >= 5; }).map(function (v) { return { key: v.key, title: v.title || v.key }; });
+  /* VOA la video phu de that duy nhat chua vao VIDEO_NEW (the rieng tu v117):
+     key chi co trong VIDEO_LINES — them tay vao danh sach EN. */
+  if (track === "en" && (myLinkLines("voa-break-the-news") || []).length >= 5 && !out.some(function (x) { return x.key === "voa-break-the-news"; })) {
+    out.unshift({ key: "voa-break-the-news", title: "VOA: Break the News — English in a Minute" });
+  }
+  return out;
+}
+function renderDrill(app, l) {
+  var track = l.track || "en";
+  if (!l.drillInit) {
+    l.drillInit = true;
+    l.drillSrcKey = drillSrcKey(l);
+    l.drillSents = drillSentsFor(l);
+    l.drillIdx = 0; l.drillTries = []; l.drillFirst = 0; l.drillRepeats = 0; l.drillSkipped = 0; l.drillMsg = ""; l.drillHeard = ""; l.drillTyped = "";
+    if (MR_HAS_AUDIO === null) mrCheckDevices(function () { if (curLesson === l) render(); });
+  }
+  /* Chon nguon cau (mo tu Luyen tap hoac nut Drill chua gan nguon). */
+  if (!l.vkey && l.readIdx == null) {
+    var vids = drillVideoOptions(track), reads = drillReadOptions(track);
+    var vh = vids.map(function (v) { return '<button class="btn" data-drillvideo="' + esc(v.key) + '">' + esc(v.title) + '</button>'; }).join("");
+    var rh = reads.map(function (r) { return '<option value="' + r.kind + ':' + r.idx + '">' + esc(r.title) + '</option>'; }).join("");
+    app.innerHTML = skillHead("🔁 Drill lặp 1 câu", "Lặp một câu đến khi trôi chảy rồi mới sang câu sau — mỗi lượt 5 câu, lấy từ phụ đề thật hoặc bài đọc tự soạn của web.")
+      + '<div class="qblock"><p><b>Chọn video có phụ đề thật:</b></p><div class="row">' + (vh || '<span class="mut">Track này chưa có video đủ 5 câu phụ đề thật.</span>') + '</div>'
+      + '<p style="margin-top:10px"><b>Hoặc chọn bài đọc / bài nghe tự soạn:</b></p><div class="row"><select id="drillReadSel">' + rh + '</select><button class="btn btn-primary" id="drillReadGo">Bắt đầu Drill →</button></div>'
+      + '<p class="mut">Nghe câu mẫu rồi đọc to lại — đọc đúng mới qua câu sau, đọc sai thì lặp đúng câu này. Máy không có mic thì chuyển sang nghe + gõ lại.</p></div>';
+    wireBack();
+    $$("[data-drillvideo]").forEach(function (b) { b.onclick = function () { openLesson({ type: "drill", vkey: b.dataset.drillvideo, track: track }); }; });
+    var go = $("#drillReadGo");
+    if (go) go.onclick = function () {
+      var sel = $("#drillReadSel"); if (!sel || !sel.value) return;
+      var parts = sel.value.split(":");
+      openLesson({ type: "drill", readKind: parts[0], readIdx: +parts[1], track: track });
+    };
+    return;
+  }
+  if (!l.drillSents.length) {
+    app.innerHTML = skillHead("🔁 Drill lặp 1 câu", "") + '<div class="qblock"><p>Nguồn này chưa có đủ câu để Drill (cần ít nhất 5 câu). Chọn nguồn khác nhé.</p><div class="row"><button class="btn btn-primary" id="drBack2">Chọn nguồn khác</button></div></div>';
+    wireBack();
+    $("#drBack2").onclick = function () { openLesson({ type: "drill", track: track }); };
+    return;
+  }
+  if (l.drillDone) {
+    var total = l.drillSents.length, worst = l.drillWorst;
+    var worstHtml = "";
+    if (worst != null && worst >= 0) {
+      var ws = l.drillSents[worst];
+      worstHtml = '<p><b>Câu lặp nhiều nhất (' + (l.drillTries[worst] || 0) + ' lần):</b> “' + esc(ws.text) + '” — đã vào Sổ lỗi sai, ôn lại ngày mai nhé.</p>';
+    } else worstHtml = '<p>Không có câu nào phải lặp lại — trôi chảy ngay từ lần đầu!</p>';
+    app.innerHTML = skillHead("🔁 Drill lặp 1 câu — Tổng kết", drillSrcTitle(l))
+      + '<div class="summarybox"><h2>Xong lượt Drill!</h2>'
+      + '<p>Đúng ngay lần đầu: <b>' + l.drillFirst + '/' + total + ' câu</b> · Lặp lại: <b>' + l.drillRepeats + ' lần</b>' + (l.drillSkipped ? ' · Bỏ qua: <b>' + l.drillSkipped + ' câu</b>' : '') + '.</p>'
+      + worstHtml
+      + '<div class="row"><button class="btn btn-primary" id="drAgain">🔁 Làm lại lượt Drill</button><button class="btn" id="drBack3">Về Luyện tập</button></div></div>';
+    wireBack();
+    $("#drAgain").onclick = function () { openLesson({ type: "drill", vkey: l.vkey, readKind: l.readKind, readIdx: l.readIdx, track: track }); };
+    $("#drBack3").onclick = function () { backFromLesson(); };
+    return;
+  }
+  var si = Math.min(l.drillIdx, l.drillSents.length - 1), cur = l.drillSents[si], mode = drillMode(l);
+  var tries = l.drillTries[si] || 0;
+  var sub = drillSrcTitle(l) + ' · Câu ' + (si + 1) + '/' + l.drillSents.length + ' · Đúng ngay lần đầu: ' + l.drillFirst + ' · Lặp lại: ' + l.drillRepeats;
+  var h = skillHead("🔁 Drill lặp 1 câu", sub)
+    + '<div class="qblock"><p><b>Câu ' + (si + 1) + '/' + l.drillSents.length + ':</b></p>'
+    + '<p style="font-size:20px"><b>' + esc(cur.text) + '</b></p>'
+    + (cur.py ? '<p class="mut">' + esc(cur.py) + '</p>' : '')
+    + (cur.vi ? '<p class="mut">' + esc(cur.vi) + '</p>' : '')
+    + '<div class="row"><button class="btn" id="drPlay">🔊 Nghe câu mẫu</button><button class="btn" id="drSlow">🐌 Nghe chậm 0,5x</button></div>';
+  if (mode === "speak") {
+    h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="drSpeak">🎤 Đọc to câu này</button><button class="btn" id="drSkip">Tiếp tục →</button></div>'
+      + '<p class="mut">Đọc to đúng câu trên — máy chỉ kiểm tra có nghe ra đúng câu không (chấm tầng 1). Đọc sai thì lặp đúng câu này. Nút “Tiếp tục →” bỏ qua câu này để sang câu tiếp theo.</p>';
+  } else {
+    h += '<p class="mut">Máy này không có mic / chưa cấp quyền mic nên Drill chuyển sang chế độ nghe + gõ lại.</p>'
+      + '<div class="row" style="margin-top:8px"><input id="drType" placeholder="Nghe rồi gõ lại đúng câu trên…" style="flex:1;min-width:200px"><button class="btn btn-primary" id="drCheck">Kiểm tra</button><button class="btn" id="drSkip">Tiếp tục →</button></div>';
+  }
+  if (l.drillMsg) h += '<p><b>' + esc(l.drillMsg) + '</b></p>';
+  if (l.drillHeard) h += '<p class="mut">Máy nghe được: “' + esc(l.drillHeard) + '”</p>';
+  if (l.drillTyped) h += '<p class="mut">Bạn gõ: “' + esc(l.drillTyped) + '”</p>';
+  h += '<p class="mut">Câu này đã lặp: ' + tries + ' lần.</p></div>';
+  app.innerHTML = h;
+  wireBack();
+  $("#drPlay").onclick = function () { drillSpeak(cur.text, track); };
+  $("#drSlow").onclick = function () { drillSpeak(cur.text, track, 0.5); };
+  var sp = $("#drSpeak");
+  if (sp) sp.onclick = function () {
+    sp.disabled = true; sp.textContent = "🎙 Đang nghe…";
+    drillSrCheck(l, cur.text, function (tx) { drillMark(l, true, tx, ""); }, function (tx) { drillMark(l, false, tx, ""); });
+  };
+  var ck = $("#drCheck");
+  if (ck) {
+    var doCheck = function () {
+      var inp = $("#drType"); if (!inp) return;
+      var v = inp.value || "";
+      if (gameNormSent(v) === gameNormSent(cur.text)) drillMark(l, true, "", v); else drillMark(l, false, "", v);
+    };
+    ck.onclick = doCheck;
+    var inp2 = $("#drType");
+    if (inp2) inp2.addEventListener("keydown", function (e) { if (e.key === "Enter") doCheck(); });
+  }
+  var sk = $("#drSkip");
+  if (sk) sk.onclick = function () { drillSkip(l); };
+}
 function examClockText(ms) {
   var s = Math.max(0, Math.ceil(ms / 1000));
   var m = Math.floor(s / 60), r = s % 60;
