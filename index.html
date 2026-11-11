@@ -14831,6 +14831,17 @@ function renderShadowListen(app, l, item, isLong) {
 /* ---------- Lọc 3 trục + mục tiêu thi ở trang Luyện tập (mới) ---------- */
 /* v118 (N1): the loc co o ca 4 track — tham so track chon san muc tieu thi
    + muc trinh do theo track (IELTS: band; HSK: cap 1-6; TOEIC/TOPIK: chang). */
+/* v149 (S12): lua chon ky nang cua bo loc chi hien loai co bai that o track do —
+   dem tu pfBuildItems(exam), giu dung thu tu mac dinh. EN du 11 loai; ZH chi
+   Tu vung; TC Tu vung/Ngu phap/Doc/Nghe/Noi; TP them Viet. Loai 0 bai (vd
+   Truyen ngan o ZH/TC/TP, Nghe chep/Shadowing/Podcast o TC/TP) khong hien. */
+function pfSkillOptions(tr) {
+  var exam = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[tr] || "IELTS";
+  var order = ["Từ vựng", "Ngữ pháp", "Đọc", "Nghe", "Nói", "Viết", "Gõ câu", "Nghe chép", "Shadowing", "Truyện ngắn", "Podcast"];
+  var have = {};
+  try { pfBuildItems(exam).forEach(function (it) { if (it.skill) have[it.skill] = true; }); } catch (e) {}
+  return '<option value="">Mọi kỹ năng</option>' + order.filter(function (s) { return have[s]; }).map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join("");
+}
 function practiceFilterHTML(extra, track) {
   var tr = track || "en";
   var examVal = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[tr] || "IELTS";
@@ -14843,7 +14854,7 @@ function practiceFilterHTML(extra, track) {
   return '<details class="card" id="practiceFilterCard"><summary><b>🔎 Tìm bài / Vào nhanh</b></summary><h3>🔎 Tìm bài theo kỹ năng, chủ đề, trình độ, mục tiêu thi</h3>'
     + '<p class="mut">Vào nhanh theo loại bài, hoặc lọc kho bài tự soạn theo kỹ năng, chặng và cấp độ — kết quả hiện ngay dưới đây. Lọc chỉ để tìm bài luyện thêm, không đổi lộ trình đan xen và số bước mỗi chặng.</p>'
     + (extra || "")
-    + '<div class="row"><select id="pfSkill"><option value="">Mọi kỹ năng</option><option value="Từ vựng">Từ vựng</option><option value="Ngữ pháp">Ngữ pháp</option><option value="Đọc">Đọc</option><option value="Nghe">Nghe</option><option value="Nói">Nói</option><option value="Viết">Viết</option><option value="Gõ câu">Gõ câu</option><option value="Nghe chép">Nghe chép</option><option value="Shadowing">Shadowing</option><option value="Truyện ngắn">Truyện ngắn</option><option value="Podcast">Podcast</option></select> '
+    + '<div class="row"><select id="pfSkill">' + pfSkillOptions(tr) + '</select> '
     + '<select id="pfBand">' + bandOpts + '</select> '
     + '<select id="pfExam">' + examOpts + '</select></div>'
     + '<p><input type="text" id="pfTopic" style="width:100%;padding:10px" placeholder="Chủ đề, ví dụ: giáo dục, du lịch, sức khỏe… (để trống là không lọc chủ đề)"></p>'
@@ -14864,7 +14875,7 @@ function pfBuildItems(exam) {
     var stages = (exam === "TOEIC") ? TC_STAGES : TP_STAGES;
     var metaFn = (exam === "TOEIC") ? tcStepMeta : tpStepMeta;
     var openFn = (exam === "TOEIC") ? tcOpenStep : tpOpenStep;
-    var skillOf = { vocab: "Từ vựng", gram: "Ngữ pháp", listen: "Nghe", read: "Đọc", write: "Viết" };
+    var skillOf = { vocab: "Từ vựng", gram: "Ngữ pháp", listen: "Nghe", read: "Đọc", speak: "Nói", write: "Viết" }; /* v149 (S12): bai Noi TC/TP co that (TC 8, TP 16) phai co nhan "Nói" de bo loc tim duoc — truoc day roi ve skill "" nen loc "Nói" tra 0 bai */
     stages.forEach(function (st) {
       st.steps.forEach(function (id) {
         var m = metaFn(id); if (!m) return;
