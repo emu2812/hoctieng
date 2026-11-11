@@ -18296,7 +18296,10 @@ function zhSetNodeHTML(d) {
   return '<button class="path-node ' + (st === "next" ? "future" : st) + '" data-zhset="' + d.key + '"><span class="dotwrap"><span class="dot">📚</span></span><span><span class="pn-title">' + esc(d.set.topic) + '</span><br><span class="pn-type">Tiếng Trung · Từ vựng chặng ' + d.stage + ' · ' + d.set.cards.length + ' thẻ · đã học ' + pp + '/' + d.set.cards.length + '</span><br><span class="pn-st">' + stTxt + '</span>' + flags + '</span></button>';
 }
 function zhStageBanner(st, done, total, extra) {
-  return '<div class="unit-banner"><b>Chặng ' + st.stage + ': ' + esc(st.title) + '</b><p class="mut">' + esc(st.desc) + ' · Từ tích lũy (sách cũ): ' + st.oldCum + ' · Hệ E: ' + st.eCum + (total != null ? ' · Đã xong ' + done + '/' + total + ' bước học' : '') + (extra || '') + '</p></div>';
+  /* v143 (S6): the chang ghi ro cap HSK — chang N = HSK N (chung minh: nguong
+     xep chang entry 0-3→1, 4-6→2, 7-9→3, 10-12→4, 13-14→5, 15-16→6; bo tu
+     rieng HSK2/HSK3 o chang 2/3; thi thu HSK1-6 song song kiem tra cuoi chang 1-6). */
+  return '<div class="unit-banner"><b>Chặng ' + st.stage + ' · HSK ' + st.stage + ': ' + esc(st.title) + '</b><p class="mut">' + esc(st.desc) + ' · Từ tích lũy (sách cũ): ' + st.oldCum + ' · Hệ E: ' + st.eCum + (total != null ? ' · Đã xong ' + done + '/' + total + ' bước học' : '') + (extra || '') + '</p></div>';
 }
 /* FIX-V32 R2 (V3): khoi Muc tieu + Hoc xong lam duoc cho chang ZH (mau TOEIC/TOPIK). */
 function zhStageGoalsHTML(stage) {
