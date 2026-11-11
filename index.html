@@ -1013,7 +1013,7 @@ function videoLinesEnsure(key) {
   var ri = CONTENT.reading.length;
   CONTENT.reading.push({ title: title, topic: title, level: "", text: lines.map(function (x) { return x.en; }).join(" "), translation: lines.map(function (x) { return x.vi; }).join(" "), phrases: [], questions: [] });
   var si = CONTENT.speaking.length;
-  CONTENT.speaking.push({ topic: title, part: "Shadowing", band: "", lines: lines.map(function (x) { return { who: x.who || "Lời thoại", en: x.en, vi: x.vi, py: x.py || "" }; }) }); /* v122b: bai Shadowing phai hien nhan Shadowing */ /* v126: giu who + py cua video ZH */
+  CONTENT.speaking.push({ topic: title, part: "Shadowing", band: "", videoKey: key, lines: lines.map(function (x) { return { who: x.who || "Lời thoại", en: x.en, vi: x.vi, py: x.py || "" }; }) }); /* v122b: bai Shadowing phai hien nhan Shadowing */ /* v126: giu who + py cua video ZH */ /* v140 (S4): videoKey de man ly thuyet + tieu de nhan ra bai Shadowing tu video co phu de that */
   window.__videoLinesIdx[key] = { listen: li, read: ri, speak: si };
   return window.__videoLinesIdx[key];
 }
@@ -10553,6 +10553,24 @@ function speakTheoryHTML(s) {
     + videoSlotIf("speakEp:" + CONTENT.speaking.indexOf(s))
     + '<p class="mut">Học khung và cụm câu trước, rồi mới vào bài mẫu và tập nói.</p></div>';
 }
+/* v140 (S4): man ly thuyet Shadowing TIENG TRUNG cho bai Noi tao tu video
+   co phu de that (videoLinesEnsure, vd zh-e10) — KHONG dung khung IELTS
+   (khung tra loi Part 1/2/3, "4 tieu chi cham noi", video The IELTS Workshop /
+   LangGo / Enfreenity). Vi du lay tu chinh cau dau cua bai, khong che;
+   so cau + nguoi noi dem that tu s.lines. */
+function isZhShadowLesson(s) { return !!(s && s.videoKey && s.lines && s.lines.length && hasCJK((s.lines[0] || {}).en || "")); }
+function zhShadowTheoryHTML(s) {
+  var lines = s.lines || [], n = lines.length, first = lines[0] || {};
+  var seen = {}, whos = [];
+  lines.forEach(function (ln) { if (ln.who && !seen[ln.who]) { seen[ln.who] = true; whos.push(ln.who); } });
+  return '<div class="qblock"><p><b>Shadowing tiếng Trung — nhại theo video thật:</b> ' + esc(s.topic) + '</p>'
+    + '<p>Bài có ' + n + ' câu hội thoại' + (whos.length ? ' của ' + whos.map(function (w) { return esc(w); }).join(' / ') : '') + ' — nghe từng câu rồi nhắc lại giống mẫu.</p>'
+    + '<p><b>Bước 1 — Nghe từng câu:</b> bấm 🔊 nghe giọng mẫu từng câu, nghe kỹ thanh điệu và nhịp câu.</p>'
+    + '<p><b>Bước 2 — Nhắc lại đúng thanh điệu:</b> đọc theo từng câu, chú ý thanh điệu từng chữ (thanh 1–4 và thanh nhẹ); đọc chậm trước, đúng thanh điệu rồi mới đọc đúng nhịp như mẫu.</p>'
+    + '<p><b>Bước 3 — So sánh với mẫu:</b> bấm 🎤 “Đọc câu này”, máy nghe ra đúng câu là được (chưa phải điểm từng âm); nghe lại rồi đọc lại cho giống mẫu hơn.</p>'
+    + (first.en ? '<p class="mut">Ví dụ câu đầu' + (first.who ? ' — ' + esc(first.who) : '') + ': ' + esc(first.en) + (first.py ? ' (' + esc(first.py) + ')' : '') + (first.vi ? ' — ' + esc(first.vi) : '') + '</p>' : '')
+    + '<p class="mut">Bài này chỉ để nghe và nhại theo — không có câu hỏi trắc nghiệm, không chấm điểm từng âm.</p></div>';
+}
 function roleplayTheoryHTML(r) {
   return '<div class="qblock"><p><b>Bối cảnh:</b> ' + esc(r.setting) + '</p><p><b>Mục tiêu:</b> ' + esc(r.goal) + '</p>'
     + '<p><b>Cụm câu dùng trong tình huống này:</b> ' + r.chunks.map(function (ch) { return esc(ch); }).join(" · ") + '</p>'
@@ -15316,9 +15334,12 @@ function renderSkillSpeak(app, l) {
   var s = CONTENT.speaking[l.idx];
   if (!s) { curLesson = null; render(); return; }
   l.title = "Nói — " + s.topic; l.skillKey = "speak:" + l.idx;
-  l.sub = (s.part ? s.part + " · " : "") + (s.band ? s.band + " · " : "") + (s.quiz || []).length + " câu hỏi từ bài mẫu";
+  /* v140 (S4): bai Shadowing tu video co phu de that dem theo so cau hoi thoai
+     that (vd zh-e10: 24 cau), khong dem "cau hoi tu bai mau" vi bai nay
+     khong co quiz. */
+  l.sub = (s.part ? s.part + " · " : "") + (s.band ? s.band + " · " : "") + (s.videoKey ? (s.lines || []).length + " câu hội thoại" : (s.quiz || []).length + " câu hỏi từ bài mẫu");
   if (!l.theoryDone) {
-    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + (RB_SPEAK_FAMILIAR[l.idx] ? '<div class="qblock"><p class="mut">Bài làm quen Part 3: Part 3 chính thức từ Band 4,5 — bài này chỉ để làm quen trước, không tính vào số bước mở kiểm tra của chương.</p></div>' : '') + speakTheoryHTML(s)
+    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + (RB_SPEAK_FAMILIAR[l.idx] ? '<div class="qblock"><p class="mut">Bài làm quen Part 3: Part 3 chính thức từ Band 4,5 — bài này chỉ để làm quen trước, không tính vào số bước mở kiểm tra của chương.</p></div>' : '') + (isZhShadowLesson(s) ? zhShadowTheoryHTML(s) : speakTheoryHTML(s))
       + (l.idx === 1 ? videoSlotIf("speak:1") : "")
       + (l.idx === 3 ? videoSlotIf("speak:dailyroutine") : "")
       + '<div class="qblock"><button class="btn btn-primary" id="spTheoryGo">Vào luyện tập →</button></div>';
