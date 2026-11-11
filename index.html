@@ -21114,9 +21114,9 @@ function renderTcSpeak(app, m, id, back, skipBanner) {
     var crit = String(RB_SPEAK_CRITERIA_TXT || "").split(";").map(function (c) { return c.trim(); }).filter(function (c) { return c; });
     var critHTML = crit.map(function (c, i) { return '<label style="display:block;margin:4px 0"><input type="checkbox" data-tcspeakcrit="' + i + '"> ' + esc(c) + '</label>'; }).join("");
     return tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(s.title) + '</h2>'
-      + '<h3>1. Nói theo mẫu</h3><p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Nút “Xong bài này” chỉ mở khi đã nghe hết các câu mẫu.</p>'
+      + '<h3>1. Nói theo mẫu</h3><p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Nút “Xong bài này” chỉ mở khi đã nghe hết các câu mẫu và đọc to ít nhất 1 câu (đọc sai cũng được, chỉ cần máy nghe thấy bạn nói). Máy không có mic hoặc trình duyệt không hỗ trợ ghi âm thì vẫn bấm Xong được sau khi nghe hết mẫu.</p>'
       + '<div class="row"><button class="btn" id="tcSpeakAll">🔊 Nghe toàn đoạn</button></div>'
-      + '<p class="mut" id="tcSpeakHeard">Đã nghe: 0/' + s.lines.length + ' câu.</p>' + lines
+      + '<p class="mut" id="tcSpeakHeard">Đã nghe: 0/' + s.lines.length + ' câu.</p><p class="mut" id="tcSpeakRead">Đã đọc to: 0 câu — cần ít nhất 1 câu để mở nút Xong.</p>' + lines
       + '<h3>2. Nói tự do</h3><div class="qblock"><p><b>Đề bài:</b> ' + esc(s.free.prompt) + '</p>'
       + '<p><b>Gợi ý:</b> ' + s.free.hints.map(function (h) { return esc(h); }).join(" · ") + '</p>'
       + '<div class="row"><button class="btn" id="tcSpeakFree">🎤 Nói câu trả lời của bạn</button></div>'
@@ -21130,14 +21130,20 @@ function renderTcSpeak(app, m, id, back, skipBanner) {
   app.innerHTML = theoryHTML();
   tcWireBack(back);
   document.getElementById("tcSpeakStart").onclick = function () {
-    var heard = {}, res = {};
+    var heard = {}, res = {}, spoke = {}; /* v142 S5: spoke[i]=true khi doc to cau i va may nghe thay loi (co transcript) */
+    function srAvail() { try { return !!(window.SpeechRecognition || window.webkitSpeechRecognition); } catch (e) { return false; } }
+    function noMicGate() { return !mrSupported() || mrNoMic() || !srAvail(); } /* v142: may khong mic / khong SR thi mien doc to */
     app.innerHTML = practiceHTML();
     tcWireBack(back);
     var fin = document.getElementById("tcSpeakFinish");
+    mrCheckDevices(function () { refresh(); }); /* v142: kiem xong neu may khong mic thi mo cua mien doc to */
     function refresh() {
       var n = 0; (s.lines || []).forEach(function (_, i) { if (heard[i]) n++; });
+      var ns = 0; (s.lines || []).forEach(function (_, i) { if (spoke[i]) ns++; });
       var el = document.getElementById("tcSpeakHeard"); if (el) el.textContent = "Đã nghe: " + n + "/" + s.lines.length + " câu.";
-      if (fin) fin.disabled = n < s.lines.length;
+      var rl = document.getElementById("tcSpeakRead");
+      if (rl) rl.textContent = noMicGate() ? "Đã đọc to: " + ns + " câu — máy này không có mic / không hỗ trợ ghi âm nên không cần đọc to." : "Đã đọc to: " + ns + " câu — cần ít nhất 1 câu để mở nút Xong.";
+      if (fin) fin.disabled = !(n >= s.lines.length && (ns >= 1 || noMicGate()));
     }
     function lineResult(i) {
       var r = res[i] || {}; var box = document.getElementById("tcSpeakRes-" + i), err = document.getElementById("tcSpeakErr-" + i);
@@ -21158,9 +21164,11 @@ function renderTcSpeak(app, m, id, back, skipBanner) {
         var i = +b.dataset.tcspeakrec, ref = s.lines[i].en;
         pronTier1Start("en", function (heardTx) {
           var sc = pronTier1Score(heardTx, ref, "en");
-          res[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" }; lineResult(i);
+          res[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" };
+          if (heardTx && String(heardTx).trim()) spoke[i] = true; /* v142 S5: doc to that — dung/sai deu duoc, chi can may nghe thay loi */
+          lineResult(i); refresh();
         }, function (kind) {
-          res[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; lineResult(i);
+          res[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; lineResult(i); refresh();
         });
       };
     });
@@ -22038,9 +22046,9 @@ function renderTpSpeak(app, m, id, back, skipBanner) {
     var crit = String(RB_SPEAK_CRITERIA_TXT || "").split(";").map(function (c) { return c.trim(); }).filter(function (c) { return c; });
     var critHTML = crit.map(function (c, i) { return '<label style="display:block;margin:4px 0"><input type="checkbox" data-tpspeakcrit="' + i + '"> ' + esc(c) + '</label>'; }).join("");
     return tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(s.title) + '</h2>'
-      + '<h3>1. Nói theo mẫu</h3><p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Nút “Xong bài này” chỉ mở khi đã nghe hết các câu mẫu.</p>'
+      + '<h3>1. Nói theo mẫu</h3><p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Nút “Xong bài này” chỉ mở khi đã nghe hết các câu mẫu và đọc to ít nhất 1 câu (đọc sai cũng được, chỉ cần máy nghe thấy bạn nói). Máy không có mic hoặc trình duyệt không hỗ trợ ghi âm thì vẫn bấm Xong được sau khi nghe hết mẫu.</p>'
       + '<div class="row"><button class="btn" id="tpSpeakAll">🔊 Nghe toàn đoạn</button></div>'
-      + '<p class="mut" id="tpSpeakHeard">Đã nghe: 0/' + s.lines.length + ' câu.</p>' + lines
+      + '<p class="mut" id="tpSpeakHeard">Đã nghe: 0/' + s.lines.length + ' câu.</p><p class="mut" id="tpSpeakRead">Đã đọc to: 0 câu — cần ít nhất 1 câu để mở nút Xong.</p>' + lines
       + '<h3>2. Nói tự do</h3><div class="qblock"><p><b>Đề bài:</b> ' + esc(s.free.prompt) + '</p>'
       + '<p><b>Gợi ý:</b> ' + s.free.hints.map(function (h) { return esc(h); }).join(" · ") + '</p>'
       + '<div class="row"><button class="btn" id="tpSpeakFree">🎤 Nói câu trả lời của bạn</button></div>'
@@ -22054,14 +22062,20 @@ function renderTpSpeak(app, m, id, back, skipBanner) {
   app.innerHTML = theoryHTML();
   tpWireBack(back);
   document.getElementById("tpSpeakStart").onclick = function () {
-    var heard = {}, res = {};
+    var heard = {}, res = {}, spoke = {}; /* v142 S5: spoke[i]=true khi doc to cau i va may nghe thay loi (co transcript) */
+    function srAvail() { try { return !!(window.SpeechRecognition || window.webkitSpeechRecognition); } catch (e) { return false; } }
+    function noMicGate() { return !mrSupported() || mrNoMic() || !srAvail(); } /* v142: may khong mic / khong SR thi mien doc to */
     app.innerHTML = practiceHTML();
     tpWireBack(back);
     var fin = document.getElementById("tpSpeakFinish");
+    mrCheckDevices(function () { refresh(); }); /* v142: kiem xong neu may khong mic thi mo cua mien doc to */
     function refresh() {
       var n = 0; (s.lines || []).forEach(function (_, i) { if (heard[i]) n++; });
+      var ns = 0; (s.lines || []).forEach(function (_, i) { if (spoke[i]) ns++; });
       var el = document.getElementById("tpSpeakHeard"); if (el) el.textContent = "Đã nghe: " + n + "/" + s.lines.length + " câu.";
-      if (fin) fin.disabled = n < s.lines.length;
+      var rl = document.getElementById("tpSpeakRead");
+      if (rl) rl.textContent = noMicGate() ? "Đã đọc to: " + ns + " câu — máy này không có mic / không hỗ trợ ghi âm nên không cần đọc to." : "Đã đọc to: " + ns + " câu — cần ít nhất 1 câu để mở nút Xong.";
+      if (fin) fin.disabled = !(n >= s.lines.length && (ns >= 1 || noMicGate()));
     }
     function lineResult(i) {
       var r = res[i] || {}; var box = document.getElementById("tpSpeakRes-" + i), err = document.getElementById("tpSpeakErr-" + i);
@@ -22082,9 +22096,11 @@ function renderTpSpeak(app, m, id, back, skipBanner) {
         var i = +b.dataset.tpspeakrec, ref = s.lines[i].ko;
         pronTier1Start("tp", function (heardTx) {
           var sc = pronTier1Score(heardTx, ref, "tp");
-          res[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" }; lineResult(i);
+          res[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" };
+          if (heardTx && String(heardTx).trim()) spoke[i] = true; /* v142 S5: doc to that — dung/sai deu duoc, chi can may nghe thay loi */
+          lineResult(i); refresh();
         }, function (kind) {
-          res[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; lineResult(i);
+          res[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; lineResult(i); refresh();
         });
       };
     });
