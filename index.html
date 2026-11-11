@@ -7377,6 +7377,11 @@ function renderSylDetail(app, l) {
       }
     });
     h += '<p class="mut">Khi nối âm tiết, batchim có thể đổi âm theo âm tiết sau — gặp từ ghép cụ thể thì cần đối chiếu giáo trình, không đoán.</p>';
+    h += '<div id="sylTpSoundChange"><p><b>Biến âm — âm đổi khi nối âm tiết</b></p>'
+      + '<p class="mut">Đọc theo chữ viết sẽ sai: khi đọc liền, âm cuối của âm tiết trước đổi theo âm tiết sau. Đây là điểm khó nhất của phát âm tiếng Hàn — phải đọc theo âm đã biến, không đọc theo chữ viết.</p>'
+      + '<p><b>1 · Liên âm (연음)</b> — “국어” đọc là [구거] “gugeo” (tiếng Hàn — môn quốc ngữ): batchim ㄱ của 국 chuyển sang làm phụ âm đầu của 어, nên đọc 구거 chứ không đọc “guk-eo”. <button class="btn" id="sylTpSc1">🔊 Nghe 국어</button></p>'
+      + '<p><b>2 · Đồng hóa (동화) — mũi hóa (비음화)</b> — “업무” đọc là [엄무] “eommu” (công việc): batchim ㅂ gặp ㅁ thì đồng hóa thành âm mũi ㅁ, nên đọc 엄무 chứ không đọc “eopmu”. <button class="btn" id="sylTpSc2">🔊 Nghe 업무</button></p>'
+      + '<p><b>3 · Căng hóa (경음화)</b> — “학교” đọc là [학꾜] “hakkyo” (trường học): sau batchim ㄱ, phụ âm ㄱ của 교 đọc căng thành ㄲ, nên đọc 학꾜 chứ không đọc “hakgyo”. <button class="btn" id="sylTpSc3">🔊 Nghe 학교</button></p></div>';
   }
   h += '<div class="row"><button class="btn" id="phMirrorOpen">👁 Soi gương quỹ đạo (tùy chọn)</button></div>' + phMirrorBoxHTML()
     + '<p class="mut">Gương chỉ để nhìn miệng mình lúc đọc — không chấm điểm, không bắt mic + camera cùng lúc.</p></div>';
@@ -7456,6 +7461,9 @@ function renderSylDetail(app, l) {
     if (info && info.target) pronDiagLearn(track, { sym: sym, target: info.target });
     else go("practice");
   }; });
+  var sc1 = $("#sylTpSc1"); if (sc1) sc1.onclick = function () { speakFn("국어"); };
+  var sc2 = $("#sylTpSc2"); if (sc2) sc2.onclick = function () { speakFn("업무"); };
+  var sc3 = $("#sylTpSc3"); if (sc3) sc3.onclick = function () { speakFn("학교"); };
   var wg = $("#sylWeakGo"); if (wg) wg.onclick = function () { if (track === "en") go("practice"); else pronWeakGo(track); };
 }
 /* v93: dong "Phát âm lần gần nhất" tren mat the — chi hien khi da do duoc
