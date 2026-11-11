@@ -3823,14 +3823,18 @@ function viewGamesHub(app) {
   var wl91 = gameWordLabel91();
   var cards = [
     { key: "go", icon: "⌨️", title: "⌨️ Luyện Gõ",
-      desc: "20 từ · 3 tim" },
+      desc: "20 từ · 3 tim",
+      rule: "Gõ đúng từ đang rơi để bắn hạ — gõ sai chỉ gõ lại, không mất tim; từ rơi xuống đáy hoặc đâm phải thiên thạch thì mất 1 tim; gõ đúng hết 20 từ là thắng." },
     { key: "dragon", icon: "🐉", title: "🐉 Rồng Bay Trên Mây",
-      desc: "10 vòng · 3 tim" },
+      desc: "10 vòng · 3 tim",
+      rule: "Đổi làn bằng phím ↑ ↓ hoặc bấm vào làn muốn bay — bay vào mây có từ đúng nghĩa cho trước, né mây giông; bay nhầm mây hoặc đâm phải mây giông mất 1 tim; hết 10 vòng còn tim là thắng." },
     { key: "bubble", icon: "🫧", title: "🫧 Bắn Bong Bóng",
-      desc: "Đủ 99 điểm thắng · 3 tim · " + wl91 },
+      desc: "Đủ 99 điểm thắng · 3 tim · " + wl91,
+      rule: "Ngắm pháo bằng chuột/cảm ứng/phím rồi bắn vỡ bong bóng đúng từ — bắn đúng +9 điểm, đủ 99 điểm là thắng; bắn nhầm mất 1 tim." },
     { key: "ronglua", icon: "🔥", title: "🔥 Rồng Lửa — 5 Vùng",
       img: "assets/ronglua/rung-1.jpg", imgAlt: "Rừng Xanh — cửa rừng nắng",
-      desc: "5 vùng × 10 ải · 5 tim" },
+      desc: "5 vùng × 10 ải · 5 tim",
+      rule: "Chạm quái để khóa rồi gõ đúng từ tung chiêu — đúng hệ gây sát thương tối đa, sai hệ chỉ một nửa; quái chạm tới rồng mất 1 tim, hết 5 tim thua ải; đánh bại hết quái trong trận là thắng trận, qua đủ 3 trận là qua ải, thắng trùm Núi Lửa mở Vô Tận." },
     { key: "giaido", icon: "❓", title: "❓ Giải Đố",
       desc: "Máy đưa câu hỏi, bạn gõ đáp án — cho nghĩa tiếng Việt thì gõ từ, cho câu thiếu từ thì gõ từ còn thiếu. Đúng +10 điểm (chuỗi đúng từ 3 câu trở lên +15), sai mất 1 tim, hết 3 tim là thua. Một lượt 10 câu, hỏi từ kho từ/câu thật của track đang học." }
   ];
@@ -3839,7 +3843,7 @@ function viewGamesHub(app) {
   html += '<div class="g91-games-grid">';
   cards.forEach(function (c) {
     html += '<section class="card">' + (c.img ? '<div style="position:relative;margin-bottom:10px"><img src="' + c.img + '" alt="' + (c.imgAlt || "") + '" style="display:block;width:100%;height:150px;object-fit:cover;border-radius:16px;box-shadow:0 8px 20px rgba(4,6,15,.18)"><span style="position:absolute;left:10px;bottom:10px;background:rgba(4,6,15,.72);color:#FFFBEB;border-radius:999px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:24px" aria-hidden="true">' + c.icon + '</span></div>' : '<div style="font-size:44px;line-height:1.15" aria-hidden="true">' + c.icon + '</div>')
-      + '<h3>' + c.title + '</h3><p>' + c.desc + '</p>'
+      + '<h3>' + c.title + '</h3><p>' + c.desc + '</p>' + (c.rule ? '<p class="mut">Luật: ' + c.rule + '</p>' : '') /* v150 S13: 1 dong luat ngan duoi mo ta the; Giai Do da du luat nen khong them */
       + '<div class="row"><button class="btn btn-primary" data-g71game="' + c.key + '">Chơi ngay</button></div></section>';
   });
   html += '</div>';
