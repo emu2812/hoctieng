@@ -3962,7 +3962,7 @@ var ZH_PH_STEPS = [
       { q: "“q” trong pinyin đọc gần giống gì?", o: ["k", "ch mềm, bật hơi nhẹ", "s", "z"], a: 1, why: "q mềm hơn ch và có bật hơi.", speak: "去" },
       { q: "Từ “Zhōngguó” bắt đầu bằng thanh mẫu nào?", o: ["z", "zh", "j", "ch"], a: 1, why: "Zhōng = zh + ōng.", speak: "中国" },
       { q: "Cặp nào khác nhau ở bật hơi?", o: ["b – m", "d – t", "n – l", "g – h"], a: 1, why: "d không bật hơi, t bật hơi mạnh.", speak: "大他" },
-      { q: "“r” trong pinyin (như trong rén) đọc gần giống gì?", o: ["r rung mạnh như tiếng Việt", "r mềm, gần như “z” nhẹ có rung", "l", "y"], a: 1, why: "r tiếng Trung mềm và có ma sát, không rung mạnh.", speak: "人" }
+      { q: "“r” trong pinyin (như trong rén) đọc gần giống gì?", o: ["r rung mạnh như tiếng Việt", "r mềm, gần như “z” nhẹ, dây thanh rung", "l", "y"], a: 1, why: "r tiếng Trung mềm và có ma sát, dây thanh rung — đầu lưỡi cuộn lên nhưng không rung lưỡi.", speak: "人" }
     ] },
 { id: "finals", title: "Vận mẫu cơ bản",
     hook: "Vận mẫu là phần vần sau thanh mẫu: b + ao = bao.",
