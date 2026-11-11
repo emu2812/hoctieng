@@ -71145,6 +71145,7 @@ var VIDEO_NEW = [
   { key: "tc-e2", track: "tc", kind: "giaitri", id: "NA-Q2GM07dU", title: "Frozen - Let It Go (Cover by Feng Timo - Phùng Đề Mạc - 冯提莫) [Vietsub]", channel: "冯提莫 Feng Timo - Ni Tac", lang: "Tiếng Anh + Vietsub", level: "Mọi trình độ · Nhạc phim", note: "Nhạc phim Frozen “Let It Go” do Phùng Đề Mạc cover, bản Vietsub. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
   { key: "tc-e3", track: "tc", kind: "giaitri", id: "mDq4KmOg3oI", title: "Friends 48: Học Tiếng Anh giao tiếp (Level A2+) - Make it on my own", channel: "Learn English with Om", lang: "Tiếng Anh + giải thích tiếng Việt từng câu", level: "Mọi trình độ · Phim", note: "Đoạn phim Friends 48 (Make it on my own — sống tự lập), trình độ A2+: hội thoại + giải thích tiếng Việt. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
   { key: "tc-e4", track: "tc", kind: "giaitri", id: "lngnmt2xKmQ", title: "Tập 4 - p2 Cách HỌC TIẾNG ANH nhớ lâu TỪ VỰNG cùng phim Friends. Lần đầu nhận lương của Rachel", channel: "Thích học ENG", lang: "Tiếng Anh + giải thích tiếng Việt từng câu", level: "Mọi trình độ · Phim", note: "Học tiếng Anh qua phim Friends tập 4 phần 2: từ vựng qua cảnh Rachel nhận lương lần đầu; có giải thích tiếng Việt. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
+  { key: "tc-e5", track: "tc", kind: "giaitri", id: "NzYxS_Xy0oM", title: "How to offer help — Hội thoại công sở (BBC Learning English)", channel: "BBC Learning English", lang: "Tiếng Anh + phụ đề tiếng Anh (kịch bản chính thức)", level: "TOEIC · Công sở", note: "Hội thoại văn phòng (English at Work, tập 6): Tom bị trùng hai cuộc họp với khách hàng quan trọng, Anna đề nghị giúp đỡ và tiếp khách (ông Lime, Citrus Ventures). Phụ đề thật từ kịch bản chính thức kênh đăng trong mô tả video.", verify: "A" }, /* v139 (M7): video TC dau tien co phu de that — xem VIDEO_TC_E5_NGUON.md */
   { key: "tp-w13", track: "tp", kind: "day", id: "ZDaV9K85WiI", title: "#huongiu Chữa nhanh TRẮC NGHIỆM NGỮ PHÁP THI TOPIK II | Phần 2", channel: "huongiu", lang: "Dạy bằng tiếng Việt", level: "TOPIK II · Ngữ pháp", note: "Chữa nhanh trắc nghiệm ngữ pháp TOPIK II, phần 2: cặp ngữ pháp đồng nghĩa.", verify: "B" },
   { key: "tp-w14", track: "tp", kind: "day", id: "RXvrbicfSPM", title: "DỰ ĐOÁN ĐỀ TOPIK II 쓰기 K109 (01) - video record ngày 31.10.2026", channel: "TIẾNG HÀN PHƯƠNG ANH", lang: "Dạy bằng tiếng Việt", level: "TOPIK II · Viết", note: "Dự đoán đề TOPIK II 쓰기 kỳ 109 (bản ghi livestream ngày 31.10.2026).", verify: "B" },
   { key: "tp-w15", track: "tp", kind: "day", id: "Zzkr06l5ma8", title: "TOPIK II 쓰기 54번| Đề số 5: Ưu và nhược điểm của lớp học trực tuyến (실시간 온라인 수업의 장단점) |Tiếng Hàn Dahee", channel: "Tiếng Hàn Dahee", lang: "Dạy bằng tiếng Việt", level: "TOPIK II · Viết", note: "TOPIK II 쓰기 câu 54, đề số 5: ưu và nhược điểm của lớp học trực tuyến — mở bài dựa ra vấn đề thực tế.", verify: "B" },
@@ -71154,7 +71155,8 @@ var VIDEO_NEW = [
   { key: "tp-e6", track: "tp", kind: "giaitri", id: "VaTu8Rg2ySE", title: "Tayo Phần6 Tập20 🚌 Long và Bong Bong đi chơi l Phim hoạt hình cho trẻ em l Tayo xe buýt nhỏ", channel: "Tayo xe buýt bé nhỏ Tayo Vietnamese", lang: "Lồng tiếng Việt", level: "Mọi trình độ · Hoạt hình", note: "Hoạt hình Tayo xe buýt nhỏ, phần 6 tập 20 (Long và Bong Bong đi chơi), lồng tiếng Việt chính thức. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
   { key: "tp-e7", track: "tp", kind: "giaitri", id: "lJiR_kvQRlw", title: "[WELCOME TO VIETNAM] BLACKPINK - 'Pink Venom' Dance Cover", channel: "PinkPunkVN Subteam", lang: "Tiếng Hàn + phụ đề Việt", level: "Mọi trình độ · MV ca nhạc", note: "BLACKPINK “Pink Venom” dance cover tại Việt Nam (Huế, Hà Nội, Đà Nẵng, Hồ Chí Minh), bản Vietsub. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
   { key: "tp-e8", track: "tp", kind: "giaitri", id: "LK4R4CGxoVA", title: "[Vietsub][도깨비 OST Part 1] 찬열, 펀치 (CHANYEOL, PUNCH) - Stay With Me MV", channel: "열 베스트YeolBest", lang: "Tiếng Hàn + phụ đề Việt", level: "Mọi trình độ · Nhạc phim", note: "Nhạc phim Goblin “Stay With Me” (Chanyeol, Punch), bản Vietsub. Chưa lấy được phụ đề dùng được nên chỉ xem, chưa có bài tập.", verify: "B" },
-  { key: "tp-e9", track: "tp", kind: "giaitri", id: "ArmDp-zijuc", title: "NewJeans (뉴진스) 'Super Shy' Official MV", channel: "HYBE LABELS", lang: "Tiếng Hàn + tiếng Anh (chưa có phụ đề tiếng Việt)", level: "Mọi trình độ · MV ca nhạc", note: "MV chính thức “Super Shy” của NewJeans — CHƯA có phụ đề tiếng Việt nên chỉ xem cho vui, chưa có bài tập.", verify: "B" }
+  { key: "tp-e9", track: "tp", kind: "giaitri", id: "ArmDp-zijuc", title: "NewJeans (뉴진스) 'Super Shy' Official MV", channel: "HYBE LABELS", lang: "Tiếng Hàn + tiếng Anh (chưa có phụ đề tiếng Việt)", level: "Mọi trình độ · MV ca nhạc", note: "MV chính thức “Super Shy” của NewJeans — CHƯA có phụ đề tiếng Việt nên chỉ xem cho vui, chưa có bài tập.", verify: "B" },
+  { key: "tp-e10", track: "tp", kind: "giaitri", id: "O8cvIyMcBUY", title: "Gọi điện rủ đi ăn thịt nướng — Hội thoại tiếng Hàn (akapinn 한국어)", channel: "akapinn 한국어", lang: "Tiếng Hàn + phụ đề tiếng Hàn", level: "TOPIK 1 · Hội thoại", note: "Hội thoại gọi điện: 비누 gọi cho 자피, hẹn nhau mai 7 giờ tối đi ăn thịt ba chỉ nướng (삼겹살). Phụ đề thật từ bản transcript đầy đủ kênh đăng trên website chính thức akapinn.com.", verify: "A" } /* v139 (M7): video TP dau tien co phu de that — xem VIDEO_TP_E10_NGUON.md */
 ];
 
 /* DOT VIDEO 03/11/2026: cau mau TU SOAN de thu co che 4 dang bai tu video (KHONG phai phu de that cua video nao).
@@ -71225,6 +71227,66 @@ var VIDEO_LINES = {
     { who: "小红", en: "那祝你好运！", py: "Nà zhù nǐ hǎo yùn!", vi: "Thế thì chúc cậu may mắn nhé!" },
     { who: "小红", en: "有消息一定要告诉我。", py: "Yǒu xiāo xi yī ding yào gào sù wǒ.", vi: "Có tin gì nhất định phải nói với mình đấy." },
     { who: "小爱", en: "好的，谢谢！", py: "Hǎo de, xiè xiè!", vi: "Ừ, cảm ơn nhé!" }
+  ],
+  /* DOT v139 (M7) — VIDEO TC DAU TIEN CO PHU DE THAT (tc-e5, xem VIDEO_TC_E5_NGUON.md).
+     Kich ban day du do chinh kenh BBC Learning English dang trong mo ta video
+     (muc TRANSCRIPT); doi chieu tung cau en voi mo ta goc: 0 lech. Loi Narrator,
+     tieng goi nen va cau do dang khong dua vao. vi = dich Viet TU SOAN don gian
+     theo dung thu tu cau Anh. Khong co truong py (chi video tieng Trung moi co py). */
+  "tc-e5": [
+    { who: "Anna", en: "Look forward to hearing from you soon. Kind regards, Anna.", vi: "Mong sớm nhận được hồi âm của bạn. Trân trọng, Anna." },
+    { who: "Tom", en: "Oh for goodness sake! What a disaster! I can't believe it!", vi: "Trời ơi! Thật là thảm họa! Tôi không thể tin được!" },
+    { who: "Anna", en: "Are you okay Tom?", vi: "Anh có sao không, Tom?" },
+    { who: "Tom", en: "No.", vi: "Không." },
+    { who: "Anna", en: "Is there anything I can do?", vi: "Có việc gì tôi giúp được không?" },
+    { who: "Tom", en: "No.", vi: "Không." },
+    { who: "Anna", en: "Oh. What's wrong?", vi: "Ồ. Có chuyện gì vậy?" },
+    { who: "Tom", en: "Everything.", vi: "Mọi chuyện." },
+    { who: "Anna", en: "I see. Can I give you a hand?", vi: "Tôi hiểu rồi. Tôi giúp anh một tay nhé?" },
+    { who: "Tom", en: "My computer has crashed. I've lost my phone. And there's a big, big problem with my timetable. I’ve got two meetings scheduled at the same time with two extremely important clients. I can't do them both at once!", vi: "Máy tính của tôi bị sập rồi. Tôi làm mất điện thoại rồi. Và lịch làm việc của tôi có vấn đề lớn, lớn lắm. Tôi có hai cuộc họp trùng giờ với hai khách hàng cực kỳ quan trọng. Tôi không thể dự cả hai cùng lúc được!" },
+    { who: "Anna", en: "Let me help.", vi: "Để tôi giúp." },
+    { who: "Tom", en: "Thanks Anna, but these are big, big clients. They need someone of experience.", vi: "Cảm ơn Anna, nhưng đây là những khách hàng lớn, lớn lắm. Họ cần người có kinh nghiệm." },
+    { who: "Anna", en: "Well, give me a shout if you need anything!", vi: "Vậy thì cứ gọi tôi nếu anh cần gì nhé!" },
+    { who: "Tom", en: "I can handle this, alright?", vi: "Tôi tự lo được, được chứ?" },
+    { who: "Tom", en: "Anna? Could you help me?", vi: "Anna? Cô giúp tôi được không?" },
+    { who: "Tom", en: "They've both arrived at once! Oh god! I'll deal with Mrs Kumquat...", vi: "Cả hai người cùng đến một lúc rồi! Ôi trời! Tôi sẽ tiếp bà Kumquat..." },
+    { who: "Anna", en: "Okay.", vi: "Được ạ." },
+    { who: "Tom", en: "You talk to Mr Lime, he's from a company called Citrus Ventures. They own hundreds of juice bars.", vi: "Cô nói chuyện với ông Lime nhé, ông ấy đến từ công ty Citrus Ventures. Họ sở hữu hàng trăm quán nước ép." },
+    { who: "Denise", en: "Are you sure that's a good idea Tom?", vi: "Anh chắc đó là ý hay chứ, Tom?" },
+    { who: "Tom", en: "I don't have much choice, do I?", vi: "Tôi còn lựa chọn nào khác đâu, đúng không?" },
+    { who: "Tom", en: "Just keep him occupied Anna, tell him how great he is... no, no, tell him how great I am. Find out what he wants. If it's about the - well, never mind, just be nice.", vi: "Cứ giữ ông ấy lại trò chuyện đi Anna, kể cho ông ấy nghe ông ấy tuyệt vời thế nào... không, không, kể cho ông ấy nghe tôi tuyệt vời thế nào. Tìm hiểu xem ông ấy muốn gì. Nếu là về chuyện đó thì... thôi, cứ niềm nở là được." },
+    { who: "Anna", en: "Understood.", vi: "Rõ rồi ạ." },
+    { who: "Tom", en: "Mr Lime! Are you well?", vi: "Ông Lime! Ông khỏe chứ?" },
+    { who: "Mr Lime", en: "Yes, but I'm actually rather angry too.", vi: "Vâng, nhưng thực ra tôi cũng đang khá bực." },
+    { who: "Tom", en: "Ah, well let me introduce you to Anna!", vi: "À, để tôi giới thiệu cô Anna với ông nhé!" },
+    { who: "Anna", en: "Mr Lime, it's a pleasure to meet you! Let me help with your coat.", vi: "Ông Lime, rất vui được gặp ông! Để tôi giúp ông cởi áo khoác nhé." },
+    { who: "Mr Lime", en: "Oh er... Thank you.", vi: "Ồ ừ... Cảm ơn cô." },
+    { who: "Anna", en: "Can I give you a hand with your scarf too, Mr Lime?", vi: "Tôi giúp ông cởi khăn quàng nữa nhé, ông Lime?" },
+    { who: "Mr Lime", en: "Oh... Thanks.", vi: "Ồ... Cảm ơn." },
+    { who: "Anna", en: "Now, please come this way and you can tell me what's wrong.", vi: "Giờ mời ông đi lối này, ông cứ kể cho tôi nghe có chuyện gì nhé." }
+  ],
+  /* DOT v139 (M7) — VIDEO TP DAU TIEN CO PHU DE THAT (tp-e10, xem VIDEO_TP_E10_NGUON.md).
+     Transcript day du do chinh kenh akapinn dang tren website chinh thuc cua kenh
+     (akapinn.com/korean-short-story-phone-conversation/); doi chieu tung cau en voi
+     bang song ngu tren trang: 11/11 khop (cau 8 trang ghi "가고 싶어요 ?" — chuan hoa
+     bo khoang trang truoc "?" theo chinh ta tieng Han). py = phien am Revised
+     Romanization TU SOAN (kenh khong dang py), doi chieu tung am tiet gom bien am
+     (같이 "gachi", 있어요 "isseoyo", 7시 "ilgop-si"). who SUY theo mach cuoc goi
+     (trang khong ghi ten nguoi noi tung cau): nguoi nghe may noi "여보세요?" truoc
+     la 자피, nguoi goi tu gioi thieu "저 비누예요!" la 비누 — can Bui xem video doi
+     chieu lai. vi = dich Viet TU SOAN. py CHI hien o man Shadowing + Podcast. */
+  "tp-e10": [
+    { who: "자피", en: "여보세요?", py: "Yeoboseyo?", vi: "A-lô?" },
+    { who: "비누", en: "여보세요 자피 씨, 저 비누예요!", py: "Yeoboseyo, Japi-ssi, jeo Binuyeyo!", vi: "A-lô, bạn 자피, mình là 비누 đây!" },
+    { who: "자피", en: "오, 안녕하세요 비누 씨. 오랜만이에요.", py: "O, annyeonghaseyo, Binu-ssi. Oraenmanieyo.", vi: "Ồ, chào 비누. Lâu rồi không gặp." },
+    { who: "비누", en: "네, 오랜만이에요. 혹시 내일 시간 있어요?", py: "Ne, oraenmanieyo. Hoksi naeil sigan isseoyo?", vi: "Vâng, lâu rồi không gặp. Không biết mai bạn có thời gian không?" },
+    { who: "자피", en: "네, 시간 있어요. 왜요?", py: "Ne, sigan isseoyo. Waeyo?", vi: "Có, mình rảnh. Có chuyện gì vậy?" },
+    { who: "비누", en: "왜냐하면 저는 삼겹살을 먹고 싶어요.", py: "Waenyahamyeon jeoneun samgyeopsareul meokgo sipeoyo.", vi: "Vì mình muốn ăn thịt ba chỉ nướng." },
+    { who: "자피", en: "정말요? 저도 먹고 싶어요! 같이 식당에 가요.", py: "Jeongmalyo? Jeodo meokgo sipeoyo! Gachi sikdange gayo.", vi: "Thật sao? Mình cũng muốn ăn! Cùng đi quán ăn nhé." },
+    { who: "비누", en: "좋아요! 언제 가고 싶어요?", py: "Joayo! Eonje gago sipeoyo?", vi: "Được đấy! Bạn muốn đi lúc nào?" },
+    { who: "자피", en: "저녁 7시 어때요?", py: "Jeonyeok ilgop-si eottaeyo?", vi: "7 giờ tối được không?" },
+    { who: "비누", en: "좋아요. 그럼, 내일 7시에 만나요.", py: "Joayo. Geureom, naeil ilgop-sie mannayo.", vi: "Được. Vậy mai 7 giờ mình gặp nhau nhé." },
+    { who: "자피", en: "내일 봐요!", py: "Naeil bwayo!", vi: "Mai gặp nhé!" }
   ]
 };
 

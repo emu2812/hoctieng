@@ -3893,17 +3893,19 @@ function workspaceData(l) {
   var lines = (typeof VIDEO_LINES !== "undefined" && VIDEO_LINES[key]) || [];
   var trackName = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[track] || "IELTS";
   var kindLabel = (v.kind === "day") ? "Video dạy" : "Video giải trí";
-  return { video: v, lines: lines, key: key, trackName: trackName, kindLabel: kindLabel };
+  return { video: v, lines: lines, key: key, track: track, trackName: trackName, kindLabel: kindLabel }; /* v139: tra them track de TTS dung giong */
 }
 function wsWords(sent) { return String(sent || "").replace(/[“”"']/g, "").split(/\s+/).filter(Boolean); }
 function wsScaffold(sent, level) {
   var words = wsWords(sent);
-  if (level === "easy") return words.map(function (w) { return w.charAt(0) + "_".repeat(Math.max(0, w.length - 1)); }).join(" ");
+  if (hasCJK(sent)) { var ch = String(sent || "").replace(/\s+/g, ""); if (!ch.length) return ""; if (level === "easy") return ch.slice(0, 2) + "_".repeat(Math.max(0, ch.length - 2)); if (level === "medium") return ch.charAt(0) + "_".repeat(Math.max(0, ch.length - 1)); return ""; } /* v139 (M7): cau tieng Trung khong tach tu bang khoang trang — goi y theo tung ky tu */
+  if (level === "easy") return words.map(function (w) { return w.charAt(0) + "_".repeat(Math.max(0, w.length - 1)); }).join(" "); /* v139b: khoi phuc nhanh easy cho cau khong CJK (v139 lam mat, test_ui_home_workspace do) */
   if (level === "medium") return words.length ? words[0] + " " + words.slice(1).map(function () { return "___"; }).join(" ") : "";
   return "";
 }
 function wsChips(sent, level) {
   var words = wsWords(sent);
+  if (hasCJK(sent)) return []; /* v139 (M7): cau tieng Trung chi co 1 "tu" la ca cau — chip se lo dap an */
   if (level === "hard") return [];
   if (level === "medium") return words.filter(function (w) { return w.replace(/[^A-Za-z]/g, "").length >= 6; });
   return words.slice();
@@ -3946,6 +3948,7 @@ function wsRecToggle(l) {
 }
 function renderLessonWorkspace(app, l) {
   var d = workspaceData(l), lines = d.lines;
+  var wsSay = (d.track === "zh") ? zhSpeak : (d.track === "tp") ? tpSpeak : speak; /* v139 (M7): giong doc mau dung ngon ngu cua video — zh-CN/ko-KR thay vi en-GB cung */
   if (!lines.length) { curLesson = null; render(); return; }
   if (l.wsSi == null) l.wsSi = 0;
   if (!l.wsLevel) l.wsLevel = "medium";
@@ -4046,7 +4049,7 @@ function renderLessonWorkspace(app, l) {
   $("#wsStart").onclick = function () {
     var gen = ++playGen;
     try {
-      speak(cur.en, null, function () {
+      wsSay(cur.en, null, function () {
         if (gen !== playGen) return;
         if (l.wsAutoStop) return;
         if (si + 1 < total) { l.wsSi = si + 1; l.wsRecUrl = ""; render(); var nx2 = $("#wsStart"); if (nx2) nx2.click(); }
@@ -4054,7 +4057,7 @@ function renderLessonWorkspace(app, l) {
     } catch (e) {}
     var inp = $("#wsInp"); if (inp) inp.focus();
   };
-  $("#wsReplay").onclick = function () { try { speak(cur.en); } catch (e) {} };
+  $("#wsReplay").onclick = function () { try { wsSay(cur.en); } catch (e) {} };
   var pv = $("#wsPrev"); if (pv) pv.onclick = function () { l.wsSi = Math.max(0, si - 1); l.wsRecUrl = ""; render(); };
   var nx = $("#wsNext"); if (nx) nx.onclick = function () { l.wsSi = si + 1; l.wsRecUrl = ""; render(); };
   var fn = $("#wsFinish"); if (fn) fn.onclick = function () { l.wsDone = true; render(); };
@@ -14353,14 +14356,15 @@ var LISTEN_HUB_ROWS = {
    le vang mat. EN du 7 hang nen khong co ghi chu thieu. */
 var LISTEN_HUB_NOTE = {
   en: "",
-  zh: "Shadowing 10 bước chưa có — đang chờ chuyển khung Shadowing 10 bước sang tiếng Trung. Hàng \"Video có phụ đề thật\" vẫn mở không gian VOA tiếng Anh — đang chờ chuyển không gian video sang video tiếng Trung.", /* v126: ZH da co Nghe chep + Shadowing + Podcast qua video zh-e10 */
-  tc: "Track TOEIC chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật. Bài tập 4 dạng bài qua video hiện chỉ mở được với video có phụ đề thật (hiện chỉ có video VOA tiếng Anh).",
-  tp: "Track TOPIK chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật. Bài tập 4 dạng bài qua video hiện chỉ mở được với video có phụ đề thật (hiện chỉ có video VOA tiếng Anh)."
+  zh: "Shadowing 10 bước chưa có — đang chờ chuyển khung Shadowing 10 bước sang tiếng Trung.", /* v139 (M7): hang video ZH nay mo zh-e10, khong mo VOA nua */
+  tc: "Track TOEIC chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật.",
+  tp: "Track TOPIK chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật."
 };
 function listenHubHTML(track) {
   var rows = LISTEN_HUB_ROWS[track] || LISTEN_HUB_ROWS.en;
+  var hasVideo = !!(typeof LISTEN_VIDEO_KEY !== "undefined" && LISTEN_VIDEO_KEY[track]);
   var videoRow = null;
-  rows.forEach(function (r) { if (r.k === "video") videoRow = r; });
+  rows.forEach(function (r) { if (r.k === "video" && hasVideo) videoRow = r; }); /* v139 (M7): track chua co video that thi an han video */
   /* v117c L2: hang "Video co phu de that" RA NGOAI lam hang rieng trong G3,
      thay ngay khi mo G3 — truoc day nam trong the hub (details dong san)
      ben trong G3 (dong san) nen phai mo 2 lop moi thay. Cac hang hub khac
@@ -14418,14 +14422,17 @@ function listenHubScrollTo(el) {
   if (!el) return;
   try { el.scrollIntoView({ block: "start" }); } catch (e) { try { el.scrollIntoView(); } catch (e2) {} }
 }
+/* v139 (M7): moi track mo video CO PHU DE THAT cua chinh track do qua
+   workspace (wsVideoKey). Chi EN (VOA) va ZH (zh-e10) co video that da
+   kiem chung; TC/TP chua co — hang video an han, khong mo video tieng Anh. */
+var LISTEN_VIDEO_KEY = { en: "voa-break-the-news", zh: "zh-e10", tc: "tc-e5", tp: "tp-e10" }; /* v139 (M7): TC mo tc-e5 (BBC English at Work), TP mo tp-e10 (akapinn); ca 4 track deu co video phu de that */
 function listenHubGo(track, key) {
   var i, idx;
-  /* v117b L1c: hang "Video co phu de that" mo thang bai tap VOA (khong
-     gian nghe chep video) — truoc day chi cuon toi the Video moi nen
-     khong mo duoc bai. Hien chi video VOA tieng Anh co phu de that. */
   if (key === "video") {
     lessonStart = Date.now(); runWrong = []; runFirstTry = {};
-    openLesson({ type: "workspace" });
+    var vk = (typeof LISTEN_VIDEO_KEY !== "undefined") ? LISTEN_VIDEO_KEY[track] : null;
+    if (!vk) { toast("Track này chưa có video có phụ đề thật nên chưa mở được — đang chờ tìm video thật đã kiểm chứng."); return; }
+    openLesson({ type: "workspace", wsVideoKey: vk });
     return;
   }
   if (key === "link") {
@@ -21816,7 +21823,7 @@ function viewReviewTc(app) {
 /* cấp thi thử chỉ là ước lượng nội bộ (tổng 200: từ 140 = cấp 2, 80–139 = cấp 1), KHÔNG phải bảng chính thức. */
 /* TOPIK II cấp 3–6: có lộ trình đầy đủ — mỗi cấp một chặng (TP_STAGE_EXPAND16_L3–L6: từ vựng/ngữ pháp/nghe/đọc/viết + kiểm tra cuối cấp + thi thử); xem thêm TP_WRITE 63–70. */
 var tpMockTimer = null;
-function tpSpeak(text, rate) { try { if (window.speechSynthesis && window.SpeechSynthesisUtterance) { window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "ko-KR"; u.rate = rate || 0.85; window.speechSynthesis.speak(u); } } catch (e) {} } /* v131: them rate cho nut nghe cham "oc sen" 0,5x o man chi tiet am tiet */
+function tpSpeak(text, rate, onend) { try { if (window.speechSynthesis && window.SpeechSynthesisUtterance) { window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "ko-KR"; u.rate = rate || 0.85; if (onend) u.onend = onend; window.speechSynthesis.speak(u); } } catch (e) {} } /* v131: them rate cho nut nghe cham "oc sen" 0,5x o man chi tiet am tiet; v139 (M7): them onend cho workspace tu dong sang cau */
 function tpNorm() {
   if (!state.tpDone || typeof state.tpDone !== "object") state.tpDone = {};
   if (!Array.isArray(state.tpHard)) state.tpHard = [];
