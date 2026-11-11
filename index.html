@@ -7296,6 +7296,81 @@ function sylWaveSVG(peaks) {
   var d2 = peaks.map(function (p, i) { var x = (i / (n - 1 || 1)) * W; return "L" + x.toFixed(1) + "," + (mid + p * (mid - 4)).toFixed(1); }).join(" ");
   return '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" style="max-width:100%;background:#FFFBEB;border:1px solid #E7C46B;border-radius:12px"><path d="' + d + " " + d2 + ' Z" fill="#FDE68A" stroke="#B45309" stroke-width="1"/></svg><p class="mut">Dạng sóng bản ghi của bạn — chỗ cao là lúc nói to, chỗ thấp là lúc nói nhỏ hoặc ngập ngừng.</p>';
 }
+/* Duong bao tham chieu cho giong mau (ELSA muc 6 / S18): ve tu cau truc am
+   tiet cua tu — trong am (EN/TC), duong thanh (ZH), so am tiet (TP) — KHONG
+   phai song do duoc tu giong mau (giong mau la TTS cua trinh duyet, khong lay
+   duoc du lieu am thanh). Tra ve 60 diem bien do [0,1] (cung truc thoi gian
+   voi duong "minh") hoac null khi khong co du lieu am tiet. */
+function sylModelPeaks(track, syls, zhChars, tpChars) {
+  var units = [], i;
+  if (track === "zh") {
+    (zhChars || []).forEach(function (z) { units.push({ w: (z.tone === 3 ? 1.2 : (z.tone === 0 ? 0.6 : 1)), tone: z.tone }); });
+  } else if (track === "tp") {
+    (tpChars || []).forEach(function () { units.push({ w: 1, tone: null }); });
+  } else {
+    (syls || []).forEach(function (s) { units.push({ w: s.stressed ? 1.4 : 1, tone: null, stressed: !!s.stressed }); });
+  }
+  if (!units.length) return null;
+  var N = 60, total = 0;
+  units.forEach(function (x) { total += x.w; });
+  var gapN = units.length - 1, body = N - gapN;
+  var counts = units.map(function (x) { return Math.max(2, Math.round(body * x.w / total)); });
+  var sum = 0; counts.forEach(function (c) { sum += c; });
+  var big = 0; units.forEach(function (x, ix) { if (x.w > units[big].w) big = ix; });
+  var d = body - sum;
+  while (d > 0) { counts[big]++; d--; }
+  while (d < 0) { var mx = 0; counts.forEach(function (c, ix) { if (c > counts[mx]) mx = ix; }); if (counts[mx] <= 2) break; counts[mx]--; d++; }
+  var peaks = [];
+  for (i = 0; i < units.length; i++) {
+    var cnt = counts[i];
+    for (var k = 0; k < cnt; k++) {
+      var u = cnt === 1 ? 0.5 : k / (cnt - 1);
+      var hump = Math.pow(Math.sin(Math.PI * u), 0.7);
+      var amp, v;
+      if (track === "zh") {
+        var t = units[i].tone;
+        if (t === 1) amp = 0.9;
+        else if (t === 2) amp = 0.45 + 0.45 * u;
+        else if (t === 3) amp = 0.75 - 0.4 * Math.sin(Math.PI * u);
+        else if (t === 4) amp = 0.95 - 0.55 * u;
+        else amp = 0.4;
+        v = amp * (0.75 + 0.25 * hump); /* duong thanh la hinh dang chinh, chi nhe dau/cuoi am tiet */
+      } else if (track === "tp") {
+        v = 0.7 * (0.3 + 0.7 * hump);
+      } else {
+        amp = units[i].stressed ? 0.95 : 0.55;
+        v = amp * (0.25 + 0.75 * hump);
+      }
+      peaks.push(Math.min(1, Math.max(0.05, v)));
+    }
+    if (i + 1 < units.length) peaks.push(0.06); /* khoang nghi giua cac am tiet */
+  }
+  return peaks;
+}
+/* Waveform 2 duong cung truc thoi gian (S18): lan tren = giong mau (duong bao
+   tham chieu, xem sylModelPeaks), lan duoi = ban ghi cua ban (song that tu
+   MediaRecorder, 60 diem). Hai lan cung thang thoi gian (60 diem) de so sanh
+   nhịp doc. Ghi ro ngay duoi hinh: duong mau chi la minh hoa. */
+function sylWavePairSVG(model, mine) {
+  var W = 300, laneH = 44, gap = 10, H = laneH * 2 + gap + 4;
+  function lanePath(peaks, y0) {
+    var n = peaks.length, mid = y0 + laneH / 2, amp = laneH / 2 - 3;
+    var up = peaks.map(function (p, i) { var x = (i / (n - 1 || 1)) * W; return (i === 0 ? "M" : "L") + x.toFixed(1) + "," + (mid - p * amp).toFixed(1); }).join(" ");
+    var dn = peaks.map(function (p, i) { var x = (i / (n - 1 || 1)) * W; return "L" + x.toFixed(1) + "," + (mid + p * amp).toFixed(1); }).join(" ");
+    return up + " " + dn + " Z";
+  }
+  var s = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" data-points="60" style="max-width:100%;background:#FFFBEB;border:1px solid #E7C46B;border-radius:12px">';
+  s += '<text x="6" y="14" font-size="11" fill="#92400E">Mẫu</text>';
+  if (model && model.length) s += '<path data-lane="model" d="' + lanePath(model, 4) + '" fill="#FDE68A" stroke="#B45309" stroke-width="1"/>';
+  else s += '<text x="40" y="26" font-size="11" fill="#92400E">Chưa vẽ được đường mẫu — cần đối chiếu giáo trình.</text>';
+  s += '<line x1="0" y1="' + (laneH + gap / 2 + 2) + '" x2="' + W + '" y2="' + (laneH + gap / 2 + 2) + '" stroke="#E7C46B" stroke-width="1" stroke-dasharray="3 3"/>';
+  s += '<text x="6" y="' + (laneH + gap + 14) + '" font-size="11" fill="#92400E">Mình</text>';
+  if (mine && mine.length) s += '<path data-lane="mine" d="' + lanePath(mine, laneH + gap + 4) + '" fill="#CCFBF1" stroke="#0D9488" stroke-width="1"/>';
+  else s += '<text x="40" y="' + (laneH + gap + 26) + '" font-size="11" fill="#92400E">Chưa có bản ghi — đọc to ở mục 4 để vẽ dạng sóng của bạn.</text>';
+  s += '</svg>';
+  s += '<p class="mut">Đường mẫu là hình minh họa nhịp đọc, không phải sóng đo được từ giọng mẫu. Dạng sóng của bạn là sóng thật từ bản ghi — chỗ cao là lúc nói to, chỗ thấp là lúc nói nhỏ hoặc ngập ngừng.</p>';
+  return s;
+}
 /* Ghi song song bang MediaRecorder trong luc doc to (tang 1 dung SR rieng).
    Tra ve ham dung ghi; onDone(peaks, url) goi khi giai ma xong. May khong
    ghi duoc thi tra ve null — man chi tiet van cham bang giong noi. */
@@ -7411,6 +7486,7 @@ function renderSylDetail(app, l) {
     syls = elsaSplitSyllables(l.ipa);
     if (l.aiRes && sym) verdict = elsaSoundVerdict(sym, word, l.aiRes);
   }
+  var modelPeaks = sylModelPeaks(track, syls, zhChars, tpChars); /* v155 S18: duong bao tham chieu cho giong mau */
   var readLine = track === "zh" ? ("Pinyin: " + (l.pinyin || "chưa có")) : (track === "tp" ? ("Phiên âm Latinh: " + (l.ipa || "chưa có trong kho")) : ("IPA: " + (l.ipa || "chưa có phiên âm trong kho")));
   var h = lessonHead({ id: "", title: "Chi tiết âm tiết — “" + word + "”", type: "Phát âm" }, "");
   /* --- Tu + cach doc + verdict --- */
@@ -7537,12 +7613,14 @@ function renderSylDetail(app, l) {
   var noMic = (!mrSupported() || mrNoMic());
   h += '<div class="qblock"><h3>4 · Đọc lại — chấm lại</h3>';
   if (noMic) {
-    h += '<p>Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="sylNoMicNext">Tiếp tục →</button></div>';
+    h += '<p>Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p>'
+      + '<div id="sylWave">' + sylWavePairSVG(modelPeaks, null) + '</div>'
+      + '<div class="row"><button class="btn btn-primary" id="sylNoMicNext">Tiếp tục →</button></div>';
   } else {
     h += '<p class="mut">Đọc to từ này — máy nghe ra đúng từ là được. Không khóa, đọc lại bao nhiêu lần cũng được. Đọc đúng nghe chuông, đọc sai nghe tiếng báo sai.</p>'
       + '<div class="row"><button class="btn btn-primary" id="sylRec">🎤 Đọc to</button></div>'
       + '<div id="sylRecRes">' + (l.sylRead ? pronTier1VerdictHTML(!!l.sylRead.ok, l.sylRead.heard) + (l.sylRead.ok ? '<p>🔔 Đúng rồi — chuông báo đúng.</p>' : '<p>🔕 Chưa đúng — tiếng báo sai, đọc lại chậm hơn.</p>') : '') + '</div>'
-      + '<div id="sylWave">' + (l.sylWave ? ((l.sylWave.peaks && l.sylWave.peaks.length ? sylWaveSVG(l.sylWave.peaks) : "") + (l.sylWave.url ? '<audio controls src="' + esc(l.sylWave.url) + '"></audio>' : "")) : "") + '</div>'
+      + '<div id="sylWave">' + sylWavePairSVG(modelPeaks, (l.sylWave && l.sylWave.peaks && l.sylWave.peaks.length) ? l.sylWave.peaks : null) + (l.sylWave && l.sylWave.url ? '<audio controls src="' + esc(l.sylWave.url) + '"></audio>' : "") + '</div>'
       + (l.sylRead && !l.sylWave ? '<p class="mut">Chưa vẽ được dạng sóng bản ghi (máy này không ghi song song được) — vẫn chấm bằng giọng nói.</p>' : '')
       + '<p class="mut" id="sylRecErr">' + esc(l.sylErr || "") + '</p>'
       + (l.sylErr ? '<div class="row"><button class="btn btn-primary" id="sylNoMicNext">Tiếp tục →</button></div>' : '');
