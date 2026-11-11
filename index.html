@@ -5721,8 +5721,11 @@ function viewMine(app) {
     + '<details style="margin-top:8px"><summary><b>Cách nhận XP</b></summary><h4>Bảng XP và cấp</h4><ul>' + xpItems + '</ul><p>Mốc lên cấp: ' + xpLevels + '; từ cấp 9 trở đi mỗi cấp thêm ' + RB_XP_LEVEL_STEP + ' XP.</p></details></section>';
   html += gd23MasteryHTML();
   html += '<section class="card"><h3>Mục tiêu ngày</h3><div class="row">'
-    + '<button class="btn" id="goalMinus">−</button><input type="number" id="goalInp" value="' + goal + '" min="15" max="180" style="width:90px">'
-    + '<button class="btn" id="goalPlus">+</button><span>phút/ngày</span></div>'
+    + '<button class="btn" id="goalMinus">−</button><input type="number" id="goalInp" value="' + goal + '" min="10" max="180" style="width:90px">'
+    + '<button class="btn" id="goalPlus">+</button>'
+    /* v146 S9: 3 nut preset 10/15/20 — nut dang chon to dam mau ho phach (btn-amber). */
+    + [10, 15, 20].map(function (v) { return '<button class="btn goalPreset' + (goal === v ? ' btn-amber' : '') + '" data-goal="' + v + '">' + v + '</button>'; }).join("")
+    + '<span>phút/ngày</span></div>'
     + '<p><span class="chip">Chuỗi ' + streak + ' ngày</span> <button class="btn" id="checkinBtn">' + (state.checkin[todayStr()] ? "Đã điểm danh" : "Điểm danh hôm nay (+5 XP)") + '</button></p>'
     + '<p class="mut">' + (weeks != null ? ('Với mục tiêu này, bạn còn khoảng ' + weeks + ' tuần nữa để xong chương 1 (ước tính). ') : ('Với mục tiêu này, bạn còn ' + scope89.remainCount + ' bước chưa xong ở ' + scope89.scopeLabel + '. ')) + 'Web tĩnh không gửi thông báo khi bạn đóng trang — hãy tự mở web mỗi ngày để giữ chuỗi.</p>' + clPlanHTML(scope89, goal) + '</section>';
   html += freezeStatusHTML();
@@ -5774,10 +5777,12 @@ function viewMine(app) {
   })();
   /* v84: heatmap đã dời về đây từ trang chủ — bấm ô ngày hiện chi tiết. */
   $$("#heatCard [data-heatday]").forEach(function (b) { b.onclick = function () { var d = $("#heatDetail"); if (d) d.textContent = heatDetailFor(b.dataset.heatday); }; });
-  var setGoal = function (v) { v = Math.max(15, Math.min(180, Math.round(v) || 30)); state.goal = v; state.goalSet = true; saveState(); render(); };
+  /* v146 S9: muc toi thieu ha 15 -> 10 de nut preset 10 dat dung 10 (khong kep len 15); khop dai ELSA 5-40 phut, giu toi da 180 + buoc 5. */
+  var setGoal = function (v) { v = Math.max(10, Math.min(180, Math.round(v) || 30)); state.goal = v; state.goalSet = true; saveState(); render(); };
   $("#goalMinus").onclick = function () { setGoal((state.goal || 30) - 5); };
   $("#goalPlus").onclick = function () { setGoal((state.goal || 30) + 5); };
   $("#goalInp").onchange = function (e) { setGoal(+e.target.value); };
+  $$(".goalPreset").forEach(function (b) { b.onclick = function () { setGoal(+b.dataset.goal); }; });
   $("#checkinBtn").onclick = checkinToday;
   var mnB = $("#mineNextBtn"); if (mnB) mnB.onclick = function () { if (state.track === "zh") zhOpenTarget(mineT); else openPracticeNext(mineT); };
   var miB = $("#mineIntro"); if (miB) miB.onclick = function () { introForced = true; render(); };
