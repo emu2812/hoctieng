@@ -8297,7 +8297,10 @@ function pronT1BlockHTML(l, key, label, vi, track) {
     + '<button class="btn btn-primary" data-t1-rec="' + esc(key) + '">🎤 Đọc to</button></div>'
     + '<div class="t1-res" id="t1res-' + esc(key) + '">' + (r.tried ? pronTier1VerdictHTML(!!r.ok, r.heard || "") : '') + '</div>'
     + '<p class="mut" id="t1err-' + esc(key) + '">' + esc(r.err || '') + '</p>';
-  if (r.tried) h += '<div class="row"><button class="btn" data-t1-selfrec="' + esc(key) + '">🎙 Ghi giọng mình để tự nghe</button></div><div id="t1self-' + esc(key) + '">' + (r.selfUrl ? '<audio controls src="' + esc(r.selfUrl) + '"></audio>' : '') + '</div>';
+  /* v164 P3: khoi tu doi chieu hien ngay sau lan doc cham diem (ghi song song
+     trong pronT1Wire); nut ghi rieng chi la du phong khi ban ghi song song
+     chua co — an khi da co ban ghi. */
+  if (r.tried) h += (r.selfUrl ? '' : '<div class="row" id="t1selfrow-' + esc(key) + '"><button class="btn" data-t1-selfrec="' + esc(key) + '">🎙 Ghi giọng mình để tự nghe</button></div>') + '<div id="t1self-' + esc(key) + '">' + p3SelfCompareInner(track, label, "", r, true, "Chưa ghi được giọng của bạn trong lượt đọc này — bấm “🎙 Ghi giọng mình để tự nghe” để ghi riêng một lượt.") + '</div>';
   return h + '</div>';
 }
 /* v123: kho trang thai tang 1 theo track (EN/TC dung chung phSpeak/phDiff/phDone; ZH/TP rieng). */
@@ -8920,10 +8923,18 @@ function pronT1Wire(l, sym, track) {
     var key = b.dataset.t1Rec, tx = texts[key]; if (!tx) return;
     var errEl = document.getElementById("t1err-" + key);
     var tr = tx.track || track || "en";
+    /* v164 P3: ghi song song giong minh trong luc doc to cham tang 1 — dung
+       trong ca 2 callback (dung/sai + loi mic); ban ghi dong bo vao
+       l.phT1[key].selfUrl de khoi tu doi chieu hien ngay. */
+    if (!l.p3Par) l.p3Par = {};
+    var par = l.p3Par[key] || (l.p3Par[key] = {});
+    p3StartParallel(par, "t1self-" + key, "t1selfrow-" + key, tr, tx.text, "", function (peaks, url) { var r2 = l.phT1[key]; if (r2) { r2.selfUrl = url; r2.selfPeaks = peaks; } });
     pronTier1Start(tr, function (heard) {
+      p3StopParallel(par);
       var sc = pronTier1Score(heard, tx.ref, tr);
       if (!l.phT1) l.phT1 = {};
-      l.phT1[key] = { tried: true, ok: sc === 100, heard: heard, err: "" };
+      var prev = l.phT1[key] || {};
+      l.phT1[key] = { tried: true, ok: sc === 100, heard: heard, err: "", selfUrl: prev.selfUrl, selfPeaks: prev.selfPeaks };
       if (tx.persist) {
         var st = pronT1Store(tr, "speak");
         var sp = st[sym] || (st[sym] = {});
@@ -8932,9 +8943,11 @@ function pronT1Wire(l, sym, track) {
       }
       render();
     }, function (kind) {
+      p3StopParallel(par);
       var msg = pronTier1ErrText(kind);
       if (!l.phT1) l.phT1 = {};
-      l.phT1[key] = { tried: true, ok: false, heard: "", err: msg };
+      var prev2 = l.phT1[key] || {};
+      l.phT1[key] = { tried: true, ok: false, heard: "", err: msg, selfUrl: prev2.selfUrl, selfPeaks: prev2.selfPeaks };
       render();
     });
   }; });
@@ -8956,7 +8969,10 @@ function pronT1Wire(l, sym, track) {
         var url = URL.createObjectURL(new Blob(chunks, { type: rec.mimeType || "audio/webm" }));
         if (!l.phT1) l.phT1 = {}; if (!l.phT1[key]) l.phT1[key] = { tried: true };
         l.phT1[key].selfUrl = url;
-        if (slot) slot.innerHTML = '<audio controls src="' + esc(url) + '"></audio>';
+        /* v164 P3: nut ghi rieng la du phong — hien ca khoi tu doi chieu
+           (audio + song mau) thay vi chi audio, cho dong nhat voi ban ghi
+           song song trong lan doc cham diem. */
+        if (slot) { var tx2 = (l.__t1texts || {})[key] || {}; slot.innerHTML = p3SelfCompareInner(tx2.track || "en", tx2.text || "", "", l.phT1[key], true); }
       };
       rec.start();
     }).catch(function () { if (slot) slot.innerHTML = '<p class="mut">Không mở được mic — kiểm tra quyền mic rồi thử lại.</p>'; });
@@ -10375,7 +10391,7 @@ function vkEnPanelHTML(vk, c, cards, pos) {
     else if (vk.pronAttempted) h += '<p class="mut">' + (vk.t1 ? esc(vk.t1) : 'Chưa ghi được điểm lần này') + ' — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
     else if (enNoMic) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
     if (!enNoMic) {
-      h += '<div class="qblock"><p><b>Đọc to</b> <span class="mut">(chỉ cần mic, không cần camera)</span></p>' + p3BannerHTML(enP3, true) + (enP3.pass === 2 && enP3.err ? p3GuideHTML("en", enP3.err.word, enP3.err.heard) : '') + '<div class="row"><button class="btn" id="enT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!enAttempted ? ' btn-primary' : '') + '" id="enT1Rec">' + esc(p3SpeakLabel(enP3, true)) + '</button></div><p class="mut" id="enT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
+      h += '<div class="qblock"><p><b>Đọc to</b> <span class="mut">(chỉ cần mic, không cần camera)</span></p>' + p3BannerHTML(enP3, true) + (enP3.pass === 2 && enP3.err ? p3GuideHTML("en", enP3.err.word, enP3.err.heard) : '') + '<div class="row"><button class="btn" id="enT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!enAttempted ? ' btn-primary' : '') + '" id="enT1Rec">' + esc(p3SpeakLabel(enP3, true)) + '</button></div><p class="mut" id="enT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p><div id="p3SelfCompare">' + p3SelfCompareInner("en", c.w, c.ipa || "", vk, enAttempted) + '</div></div>';
     }
     if (mrNoCamera() && !enNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
     var sym4 = c.ipa ? firstSymFromIpa(c.ipa) : "";
@@ -10451,6 +10467,7 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
       else if (zt1.tried && zt1.err) h += '<p class="mut">' + esc(zt1.err) + '</p>';
       else if (zt1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(zt1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
       if (zt1.p3msg) h += '<p class="mut">' + esc(zt1.p3msg) + '</p>';
+      h += '<div id="p3SelfCompare">' + p3SelfCompareInner("zh", c.han, c.pinyin || "", vk, zhAttempted) + '</div>';
       h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
     }
     var ztP = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || "");
@@ -11121,7 +11138,11 @@ function renderVocab(app, l) {
        do binh thuong. pronDone van mo khi luot 1 dung (giu hanh vi cu) nhung
        nut Tiep tuc chi la nut chinh khi xong luot 3. */
     var p3 = vk.p3 || (vk.p3 = p3New());
+    /* v164 P3: ghi song song giong minh trong luc doc to cham tang 1 — dung
+       trong ca 2 callback (dung/sai + loi mic). */
+    p3StartParallel(vk, "p3SelfCompare", null, "en", c.w, c.ipa || "");
     pronTier1Start("en", function (heard) {
+      p3StopParallel(vk);
       /* v163: cham theo muc tieu cua luot hien tai (p3Target) — luot 2 chi
          doc tu loi; tu don thi tu loi CHINH LA ca tu nen luot 2 van la lan
          cham day du: luu wordPron khi muc tieu luot nay == ca tu. */
@@ -11134,7 +11155,7 @@ function renderVocab(app, l) {
       vk.t1 = (sc === 100 ? "✓ Máy nghe ra đúng từ “" + c.w + "”. " : "✗ Máy chưa nghe ra từ “" + c.w + "”" + (heard ? " — nghe được: “" + heard + "”" : "") + ". ") + p3.msg;
       try { if (tgt === c.w) { if (!state.wordPron) state.wordPron = {}; state.wordPron["s" + l.setIdx + ":" + pos] = { ai: sc === 100 ? 100 : 0, sym: c.ipa ? firstSymFromIpa(c.ipa) : "", word: c.w, date: todayStr() }; saveState(); } } catch (e) {}
       render();
-    }, function (kind) { vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; render(); });
+    }, function (kind) { p3StopParallel(vk); vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; render(); });
   };
   var enPe = $("#p3ErrHear"); if (enPe) enPe.onclick = function () { speak(c.w); };
   var vpl = $("#vocabPhLink"); if (vpl) vpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4]) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); };
@@ -17472,6 +17493,71 @@ function p3AfterRead(p, ok, heard, expected, track, isWord) {
   p.msg = "✗ Chưa đúng — đọc lại " + (isWord ? "cả từ" : "cả câu") + " ở tốc độ bình thường.";
   return "stay3";
 }
+
+/* v164 P3 — NGHE LẠI GIỌNG MÌNH VS GIỌNG MẪU TRONG VÒNG CHẤM (ELSA P3:
+   "play it all back so you can hear the differences"). Đưa khối tự đối
+   chiếu vào vòng chấm bước 4 thẻ từ + bài âm. ĐÃ CÓ TỪ TRƯỚC, KHÔNG làm
+   lại: v155 có cặp sóng mẫu-vs-mình ở MÀN CHI TIẾT âm tiết (sylWavePairSVG);
+   v162 có tự đối chiếu (nghe lại + sóng 2 đường) trong vòng nói-chấm siêu âm
+   đoạn. Phần thiếu thật ở đây: vòng chấm bước 4 và bài âm chưa ghi lại giọng
+   của lần chấm điểm. Cách làm: ghi song song bằng sylStartWave (cơ chế đã có
+   từ v155/v162) trong lúc đọc to chấm tầng 1, dừng trong cả 2 callback
+   (đúng/sai + lỗi mic), lưu peaks + url rồi hiện ngay khối tự đối chiếu:
+   audio "Nghe lại giọng mình" + cặp sóng 2 đường (đường mẫu = minh họa nhịp
+   đọc, không phải sóng đo được — ghi rõ dưới hình như v155). KHÔNG chấm điểm
+   phần nghe lại — chỉ để tự nghe ra lỗi. Không mic → chỉ dòng ghi chú lặng
+   (luật thoát mic v112), không bắt ghi. */
+function p3ModelPeaks(track, text, ipa) {
+  try {
+    if (track === "zh") {
+      var pys = String(ipa || "").split(/\s+/).filter(Boolean);
+      var zc = String(text || "").split("").map(function (ch, i) {
+        var py = pys[i] || "";
+        if (!py) { var zf = null; try { zf = sylFindZh(ch); } catch (e) {} if (zf && zf.py) py = String(zf.py).split(/\s+/)[0] || ""; }
+        var pp = null; try { pp = zhPinyinParts(py, ch); } catch (e) {}
+        return { tone: pp ? pp.tone : undefined };
+      });
+      return sylModelPeaks("zh", null, zc, null);
+    }
+    if (track === "tp") return sylModelPeaks("tp", null, null, String(text || "").split(""));
+    if (ipa) { var syls = elsaSplitSyllables(ipa); if (syls && syls.length) return sylModelPeaks(track, syls, null, null); }
+    if (typeof pronTopicModelPeaks === "function") return pronTopicModelPeaks(text);
+    return null;
+  } catch (e) { return null; }
+}
+function p3SelfCompareInner(track, text, ipa, st, attempted, noteNoRec) {
+  if (!attempted) return "";
+  var url = st && (st.p3Url || st.selfUrl);
+  var peaks = st && (st.p3Peaks || st.selfPeaks);
+  if (url) {
+    return '<p><b>🎙 Nghe lại giọng mình:</b></p><audio controls src="' + esc(url) + '"></audio>'
+      + sylWavePairSVG(p3ModelPeaks(track, text, ipa), peaks || null)
+      + '<p class="mut">Tự nghe lại giọng mình rồi đối chiếu với giọng mẫu — không có điểm máy ở đây, chỉ để bạn tự nghe ra lỗi.</p>';
+  }
+  return '<p class="mut">' + esc(noteNoRec || "Chưa ghi được giọng của bạn trên máy này — vẫn chấm được bằng nhận giọng; tự đối chiếu bằng cách nghe lại giọng mẫu.") + '</p>';
+}
+function p3StartParallel(st, boxId, rowId, track, text, ipa, onDoneCb) {
+  if (!st) return null;
+  var tok = (st.p3WaveToken = (st.p3WaveToken || 0) + 1);
+  st.p3Track = track; st.p3Text = text; st.p3Ipa = ipa || "";
+  var stopFn = null;
+  try {
+    stopFn = sylStartWave(function (peaks, url) {
+      if (st.p3WaveToken !== tok) return;
+      st.p3Peaks = peaks; st.p3Url = url;
+      var box = document.getElementById(boxId);
+      if (box) box.innerHTML = p3SelfCompareInner(track, text, ipa || "", st, true);
+      var row = rowId ? document.getElementById(rowId) : null;
+      if (row) row.style.display = "none";
+      if (onDoneCb) { try { onDoneCb(peaks, url); } catch (e) {} }
+      try { saveState(); } catch (e) {}
+    });
+  } catch (e) { stopFn = null; }
+  st.p3StopWave = stopFn;
+  return stopFn;
+}
+function p3StopParallel(st) { try { if (st && st.p3StopWave) st.p3StopWave(); } catch (e) {} if (st) st.p3StopWave = null; }
+
 function drillMark(l, ok, heard, typed) {
   /* v163 P1: moi cau tap 3 luot (p3) — luot 1 baseline, luot 2 chi sua 1 loi
      (tu nghe sai dau tien), luot 3 doc lai ca cau o toc do binh thuong. Chi
@@ -21648,7 +21734,11 @@ function renderZhVocab(app, l) {
        hien tai (p3Target) — luot 2 chi doc 1 chu Han loi nen chi cham chu do;
        luu wordPron chi khi muc tieu luot nay == ca tu (luot 1/3). */
     var p3 = zvk.p3 || (zvk.p3 = p3New());
+    /* v164 P3: ghi song song giong minh trong luc doc to cham tang 1 — dung
+       trong ca 2 callback (dung/sai + loi mic). */
+    p3StartParallel(zvk, "p3SelfCompare", null, "zh", c.han, c.pinyin || "");
     pronTier1Start("zh", function (heard) {
+      p3StopParallel(zvk);
       var tgt = p3Target(p3, c.han);
       var sc = pronTier1Score(heard, tgt, "zh");
       var res = p3AfterRead(p3, sc === 100, heard, c.han, "zh", true);
@@ -21657,7 +21747,7 @@ function renderZhVocab(app, l) {
       zvk.pronAttempted = true;
       try { if (tgt === c.han) { if (!state.wordPron) state.wordPron = {}; var zt = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || ""); state.wordPron["zh:" + d.key + ":" + pos] = { ai: sc === 100 ? 100 : 0, sym: zhToneName(zt.tone), word: c.han, date: todayStr() }; saveState(); } } catch (e) {}
       render();
-    }, function (kind) { zvk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; zvk.pronAttempted = true; render(); });
+    }, function (kind) { p3StopParallel(zvk); zvk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; zvk.pronAttempted = true; render(); });
   };
   var zhPe = $("#p3ErrHear"); if (zhPe) zhPe.onclick = function () { zhSpeak(c.han); };
   var zhTB = $("#zhToneBtn"); if (zhTB) zhTB.onclick = function () {
@@ -23031,7 +23121,7 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
       else if (vk.pronAttempted) h += '<p class="mut">' + (vk.t1 ? esc(vk.t1) : 'Chưa ghi được điểm lần này') + ' — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
       else if (tcNoMic) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button></div>';
       if (!tcNoMic) {
-        h += '<div class="qblock"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p>' + p3BannerHTML(tcP3, true) + (tcP3.pass === 2 && tcP3.err ? p3GuideHTML("tc", tcP3.err.word, tcP3.err.heard) : '') + '<div class="row"><button class="btn" id="tcT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!tcAttempted ? ' btn-primary' : '') + '" id="tcT1Rec">' + esc(p3SpeakLabel(tcP3, true)) + '</button></div><p class="mut" id="tcT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
+        h += '<div class="qblock"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p>' + p3BannerHTML(tcP3, true) + (tcP3.pass === 2 && tcP3.err ? p3GuideHTML("tc", tcP3.err.word, tcP3.err.heard) : '') + '<div class="row"><button class="btn" id="tcT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!tcAttempted ? ' btn-primary' : '') + '" id="tcT1Rec">' + esc(p3SpeakLabel(tcP3, true)) + '</button></div><p class="mut" id="tcT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p><div id="p3SelfCompare">' + p3SelfCompareInner("tc", c.w, c.ipa || "", vk, tcAttempted) + '</div></div>';
       }
       if (mrNoCamera() && !tcNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
       if (vk.pronWhy) h += '<div class="why show" id="ttPronWhy">' + esc(vk.pronWhy) + '</div>';
@@ -23054,6 +23144,7 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
         else if (tp1.tried && tp1.err) h += '<p class="mut">' + esc(tp1.err) + '</p>';
         else if (tp1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(tp1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
         if (tp1.p3msg) h += '<p class="mut">' + esc(tp1.p3msg) + '</p>';
+        h += '<div id="p3SelfCompare">' + p3SelfCompareInner("tp", c.w, "", vk, tpAttempted) + '</div>';
         h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
       }
       if (mrNoCamera() && !tpNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
@@ -23327,7 +23418,11 @@ function renderTcTpVocab5(track, stepId, back) {
     /* v163 P1: nhu the Anh — phien 3 luot (p3); cham theo muc tieu luot hien
        tai (p3Target); luu wordPron khi muc tieu luot nay == ca tu. */
     var p3 = vk.p3 || (vk.p3 = p3New());
+    /* v164 P3: ghi song song giong minh trong luc doc to cham tang 1 — dung
+       trong ca 2 callback (dung/sai + loi mic). */
+    p3StartParallel(vk, "p3SelfCompare", null, "tc", c.w, c.ipa || "");
     pronTier1Start("en", function (heard) {
+      p3StopParallel(vk);
       var tgt = p3Target(p3, c.w);
       var sc = pronTier1Score(heard, tgt, "en");
       var res = p3AfterRead(p3, sc === 100, heard, c.w, "tc", true);
@@ -23337,7 +23432,7 @@ function renderTcTpVocab5(track, stepId, back) {
       vk.t1 = (sc === 100 ? "✓ Máy nghe ra đúng từ “" + c.w + "”. " : "✗ Máy chưa nghe ra từ “" + c.w + "”" + (heard ? " — nghe được: “" + heard + "”" : "") + ". ") + p3.msg;
       try { if (tgt === c.w) { if (!state.wordPron) state.wordPron = {}; state.wordPron[tcTpVocab5Key(track, stepId, sess.pos)] = { ai: sc === 100 ? 100 : 0, sym: c.ipa ? firstSymFromIpa(c.ipa) : "", word: c.w, date: todayStr() }; saveState(); } } catch (e) {}
       renderTcTpVocab5(track, stepId, backTab);
-    }, function (kind) { vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; renderTcTpVocab5(track, stepId, backTab); });
+    }, function (kind) { p3StopParallel(vk); vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; renderTcTpVocab5(track, stepId, backTab); });
   };
   var tpl = $("#ttPhLink"); if (tpl) tpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4]) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); };
   var mf = $("#ttMultiFinish"); if (mf) mf.onclick = function () { tcTpVocab5Advance(sess, Object.keys(vk.recorded).length === 0 && !vk.peeked); vkScrollCardTop(); };
@@ -23348,7 +23443,11 @@ function renderTcTpVocab5(track, stepId, back) {
     /* v163 P1: nhu the Anh/TC — phien 3 luot (p3); cham theo muc tieu luot
        hien tai (p3Target); luu wordPron khi muc tieu luot nay == ca tu. */
     var p3 = vk.p3 || (vk.p3 = p3New());
+    /* v164 P3: ghi song song giong minh trong luc doc to cham tang 1 — dung
+       trong ca 2 callback (dung/sai + loi mic). */
+    p3StartParallel(vk, "p3SelfCompare", null, "tp", c.w, "");
     pronTier1Start("tp", function (heard) {
+      p3StopParallel(vk);
       var tgt = p3Target(p3, c.w);
       var sc = pronTier1Score(heard, tgt, "tp");
       var res = p3AfterRead(p3, sc === 100, heard, c.w, "tp", true);
@@ -23357,7 +23456,7 @@ function renderTcTpVocab5(track, stepId, back) {
       vk.pronDone = sc === 100; vk.pronAttempted = sc !== 100; /* v124b: dat co nhu EN/TC de panel buoc 4 doi nut chinh theo trang thai thu */
       try { if (tgt === c.w) { if (!state.wordPron) state.wordPron = {}; var j3 = tpJamo(c.w); state.wordPron[tcTpVocab5Key(track, stepId, sess.pos)] = { ai: sc === 100 ? 100 : 0, sym: j3 ? TP_INIT_JAMO[j3.init] : "", word: c.w, date: todayStr() }; saveState(); } } catch (e) {}
       renderTcTpVocab5(track, stepId, backTab);
-    }, function (kind) { vk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; vk.pronDone = false; vk.pronAttempted = true; /* v124b: dat co nhu EN/TC */ renderTcTpVocab5(track, stepId, backTab); });
+    }, function (kind) { p3StopParallel(vk); vk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; vk.pronDone = false; vk.pronAttempted = true; /* v124b: dat co nhu EN/TC */ renderTcTpVocab5(track, stepId, backTab); });
   };
   var tplTp = $("#ttPhLinkTp"); if (tplTp) tplTp.onclick = function () { var j2 = tpJamo(c.w); if (j2) openLesson({ type: "tpPron", sound: TP_INIT_JAMO[j2.init], sub: 0 }); };
   /* v112b L1: nhu the Anh — kiem thiet bi ghi am 1 lan/phien, ve lai neu may
