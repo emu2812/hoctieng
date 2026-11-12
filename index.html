@@ -9328,16 +9328,256 @@ function renderSkillGramOld(app, l) {
 
 
 
+/* ---------- v162 S20 phan 4 — 12 CHU DE SIEU AM DOAN THANH BAI NOI-CHAM (ELSA 7)
+   Moi chu de (RB_PRON_TOPICS) co them vong noi-cham sau ly thuyet: nghe phan
+   biet (1 cau hoi nghe, tu soan theo dung vi du + quy tac cua chu de) -> doc
+   to 3 cau mau (cham tang 1 SR nhi phan: nghe ra dung cau hay khong) + TU
+   DOI CHIEU BAT BUOC (nghe lai giong minh ghi bang MediaRecorder song song
+   + dang song 2 duong mau/minh) -> noi tu do 1-2 cau theo chu de (tu ghi am
+   + tu doi chieu, khong cham diem gia). KHONG bia diem % ngu dieu/trong am/
+   tung am: may chi kiem tra nghe ra dung cau khong; trong am/ngu dieu thi
+   nguoi hoc tu nghe lai giong minh + xem dang song de doi chieu — vi cham
+   ngu dieu bang may rat de sai (ELSA tung bi loi phat lai chinh ban ghi mau
+   cua app ma van bi cham sai). Noi o toc do binh thuong (nhac o moi cau) de
+   tranh bay "san diem" noi cham bat tu nhien. May khong mic / khong SR ->
+   che do nghe + go lai (luat thoat mic v112). Cau doc sai nhat vao So loi
+   sai o tong ket (nhu Drill v157); vong noi-cham khong tinh vao cong 80%
+   cua buoc (doneKey van la quiz "pronTopic:"+band). */
+function pronTopicMode() { return (drillHasSr() && !mrNoMic()) ? "speak" : "type"; }
+function pronTopicModelPeaks(sent) {
+  var FN = { a:1, an:1, the:1, to:1, of:1, and:1, for:1, is:1, are:1, am:1, was:1, were:1, it:1, i:1, you:1, he:1, she:1, we:1, they:1, this:1, that:1, do:1, does:1, did:1, "don't":1, "isn't":1, on:1, in:1, at:1, with:1, by:1, or:1, not:1, my:1, your:1, his:1, her:1, our:1, their:1 };
+  var words = String(sent || "").split(/\s+/).filter(function (x) { return !!x; });
+  var syls = words.map(function (w) {
+    var bare = w.replace(/[^A-Za-z']/g, "");
+    var caps = bare.length > 1 && bare === bare.toUpperCase();
+    return { stressed: caps || !FN[bare.toLowerCase()] };
+  });
+  return sylModelPeaks("en", syls);
+}
+function pronTopicSpeakInit(l) {
+  l.ptStage = "intro"; l.ptIdx = 0; l.ptTries = []; l.ptFirst = 0; l.ptRepeats = 0; l.ptSkipped = 0;
+  l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptLastOk = false; l.ptBusy = false;
+  l.ptPeaks = null; l.ptUrl = ""; l.ptDiscOk = false; l.ptDiscTried = false;
+  l.ptFreeDone = false; l.ptFreeSkipped = false; l.ptFreeRec = false; l.ptFreePeaks = null; l.ptFreeUrl = "";
+  l.ptStopWave = null; l.ptFreeStop = null; l.ptWaveToken = 0; l.ptFreeToken = 0; l.ptWorst = -1; l.ptWorstTries = 1;
+  if (MR_HAS_AUDIO === null) mrCheckDevices(function () { if (curLesson === l) render(); });
+}
+function pronTopicSpeakMark(l, ok, heard, typed) {
+  var i = l.ptIdx;
+  l.ptTries[i] = (l.ptTries[i] || 0) + 1;
+  l.ptHeard = heard || ""; l.ptTyped = typed || ""; l.ptBusy = false;
+  if (ok) {
+    if (l.ptTries[i] === 1) l.ptFirst++;
+    l.ptMsg = "✓ Đúng! Máy nghe ra đúng câu này.";
+    l.ptLastOk = true; awardXp(5);
+  } else {
+    l.ptRepeats++;
+    l.ptMsg = "✗ Máy chưa nghe ra đúng câu này — nghe lại mẫu rồi đọc lại đúng câu này nhé.";
+    l.ptLastOk = false;
+  }
+  saveState(); render();
+}
+function pronTopicSpeakNext(l) {
+  l.ptWaveToken = (l.ptWaveToken || 0) + 1;
+  l.ptIdx++; l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptLastOk = false; l.ptPeaks = null; l.ptUrl = "";
+  if (l.ptIdx >= 3) l.ptStage = "free";
+  saveState(); render();
+}
+function pronTopicSpeakFinish(l, t) {
+  var worst = -1, worstTries = 1;
+  (l.ptTries || []).forEach(function (n, i) { if (n > worstTries) { worstTries = n; worst = i; } });
+  l.ptWorst = worst; l.ptWorstTries = worstTries;
+  if (worst >= 0) {
+    var s = t.examples[worst];
+    recordQuizError("pronTopicSpeak:" + l.band, worst, { q: "Nói-chấm siêu âm đoạn — câu lặp " + worstTries + " lần: " + s, o: [s], a: 0, why: "Câu này bạn lặp lại " + worstTries + " lần mới đọc đúng — ôn lại trong Sổ lỗi sai nhé." });
+  }
+  l.ptStage = "done";
+  if (!state.skillDone) state.skillDone = {};
+  var key = "pronTopicSpeak:" + l.band;
+  var was = !!state.skillDone[key];
+  state.skillDone[key] = true; awardXp(was ? 5 : 10);
+  logLessonMinutes(l);
+  saveState();
+}
+function pronTopicSelfCompareHTML(l, sent) {
+  var h = '<div id="ptSelfAudio">' + (l.ptUrl ? '<p><b>🎙 Nghe lại giọng mình:</b></p><audio controls src="' + esc(l.ptUrl) + '"></audio>' : '<p class="mut">Chưa ghi được giọng của bạn trên máy này — vẫn chấm được bằng nhận giọng; tự đối chiếu bằng cách nghe lại giọng mẫu.</p>') + '</div>';
+  h += '<div id="ptWave">' + sylWavePairSVG(pronTopicModelPeaks(sent), l.ptPeaks) + '</div>';
+  h += '<p class="mut">Trọng âm/ngữ điệu không có điểm máy — tự nghe lại giọng mình và xem dạng sóng để đối chiếu với nhịp mẫu.</p>';
+  return h;
+}
+function renderPronTopicSpeak(app, l, t) {
+  if (l.ptStage == null) pronTopicSpeakInit(l);
+  var mode = pronTopicMode();
+  var h = "", sent, d;
+  if (l.ptStage === "intro") {
+    h = skillHead(t.title, "Nói-chấm · " + l.band) + phaseBarHTML(2) + '<div class="qblock">'
+      + '<p><b>Vòng nói-chấm của chủ đề này:</b></p>'
+      + '<p>1 · <b>Nghe phân biệt</b> — nghe câu mẫu, trả lời 1 câu hỏi về trọng âm/ngữ điệu.</p>'
+      + '<p>2 · <b>Đọc to 3 câu mẫu</b> — máy chỉ kiểm tra có nghe ra đúng câu không (chấm tầng 1); đọc xong nghe lại giọng mình + xem dạng sóng để tự đối chiếu trọng âm/ngữ điệu.</p>'
+      + '<p>3 · <b>Nói tự do 1–2 câu</b> theo chủ đề — nói ở tốc độ bình thường như đang nói chuyện thật, đừng nói chậm từng từ để lấy điểm.</p>'
+      + '<p class="mut">Trọng âm/ngữ điệu không có điểm máy — không có con số nào ở đây là điểm từng âm.</p>'
+      + '<div class="row"><button class="btn btn-primary" id="ptStart">Bắt đầu nghe phân biệt →</button><button class="btn" id="ptSkipSpeak">Bỏ qua vòng nói-chấm →</button></div></div>';
+    app.innerHTML = h;
+    wireBack();
+    $("#ptStart").onclick = function () { l.ptStage = "disc"; saveState(); render(); };
+    $("#ptSkipSpeak").onclick = function () { l.quiz = true; l.speak = false; saveState(); render(); };
+    return;
+  }
+  if (l.ptStage === "disc") {
+    d = t.disc; sent = t.examples[d.sent];
+    h = skillHead(t.title, "Nói-chấm · Nghe phân biệt · " + l.band) + phaseBarHTML(2) + '<div class="qblock">'
+      + '<p><b>1 · Nghe phân biệt:</b> nghe câu mẫu (bình thường + chậm 0,5x), chú ý: ' + esc(t.focus) + '</p>'
+      + '<p style="font-size:22px"><b>' + esc(sent) + '</b></p>'
+      + '<div class="row"><button class="btn" id="ptDiscPlay">🔊 Nghe mẫu</button><button class="btn" id="ptDiscSlow">🐌 Nghe chậm 0,5x</button></div>'
+      + '<p><b>' + esc(d.q) + '</b></p>';
+    if (!l.ptDiscTried) {
+      h += '<div class="row">' + d.o.map(function (o, i) { return '<button class="btn" data-ptdisc="' + i + '">' + esc(o) + '</button>'; }).join("") + '</div>';
+    } else {
+      h += '<p><b>' + (l.ptDiscOk ? '✓ Đúng!' : '✗ Chưa đúng.') + '</b> ' + esc(d.why) + '</p>'
+        + '<div class="row"><button class="btn btn-primary" id="ptDiscNext">Sang vòng nói →</button></div>';
+    }
+    h += '</div>';
+    app.innerHTML = h;
+    wireBack();
+    $("#ptDiscPlay").onclick = function () { speak(sent, 0.85); };
+    $("#ptDiscSlow").onclick = function () { speak(sent, 0.5); };
+    $$("[data-ptdisc]").forEach(function (b) { b.onclick = function () { l.ptDiscTried = true; l.ptDiscOk = (+b.dataset.ptdisc === d.a); saveState(); render(); }; });
+    var dn = $("#ptDiscNext");
+    if (dn) dn.onclick = function () { l.ptStage = "sent"; l.ptIdx = 0; saveState(); render(); };
+    return;
+  }
+  if (l.ptStage === "sent") {
+    sent = t.examples[l.ptIdx];
+    h = skillHead(t.title, "Nói-chấm · Câu " + (l.ptIdx + 1) + "/3 · " + l.band) + phaseBarHTML(2) + '<div class="qblock">'
+      + '<p><b>1 · Nghe phân biệt:</b> ' + esc(t.focus) + '</p>'
+      + '<p style="font-size:22px"><b>' + esc(sent) + '</b></p>'
+      + '<div class="row"><button class="btn" id="ptPlay">🔊 Nghe mẫu</button><button class="btn" id="ptSlow">🐌 Nghe chậm 0,5x</button></div>'
+      + '<p><b>2 · Đọc to:</b> nói ở tốc độ bình thường như đang nói chuyện thật — đừng nói chậm từng từ để lấy điểm.</p>';
+    if (!l.ptMsg) {
+      if (mode === "speak") {
+        h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="ptSpeak" data-pronmic="1">🎤 Đọc to</button><button class="btn" id="ptSkip">Câu tiếp theo →</button></div>'
+          + '<p class="mut">Máy chỉ kiểm tra có nghe ra đúng câu không (chấm tầng 1) — trọng âm/ngữ điệu thì tự đối chiếu ở dưới sau khi đọc.</p>';
+      } else {
+        h += '<p class="mut">Máy này không có mic / chưa cấp quyền mic nên chuyển sang chế độ nghe + gõ lại.</p>'
+          + '<div class="row" style="margin-top:8px"><input id="ptType" placeholder="Nghe rồi gõ lại đúng câu trên…" style="flex:1;min-width:200px"><button class="btn btn-primary" id="ptCheck">Kiểm tra</button><button class="btn" id="ptSkip">Câu tiếp theo →</button></div>';
+      }
+    }
+    if (l.ptMsg) {
+      h += '<p><b>' + esc(l.ptMsg) + '</b></p>'
+        + pronTier1VerdictHTML(l.ptLastOk, l.ptHeard)
+        + (l.ptTyped ? '<p class="mut">Bạn gõ: “' + esc(l.ptTyped) + '”</p>' : '')
+        + pronTopicSelfCompareHTML(l, sent)
+        + '<div class="row">' + (l.ptLastOk ? '' : '<button class="btn" id="ptRetry">🔁 ' + (mode === "speak" ? "Đọc lại" : "Gõ lại") + '</button>') + '<button class="btn btn-primary" id="ptNext">Câu tiếp theo →</button></div>';
+    }
+    h += '</div>';
+    app.innerHTML = h;
+    wireBack();
+    $("#ptPlay").onclick = function () { speak(sent, 0.85); };
+    $("#ptSlow").onclick = function () { speak(sent, 0.5); };
+    var sp = $("#ptSpeak");
+    if (sp) sp.onclick = function () {
+      if (l.ptBusy) return;
+      l.ptBusy = true; sp.disabled = true; sp.textContent = "🎙 Đang nghe…";
+      var tok = (l.ptWaveToken = (l.ptWaveToken || 0) + 1);
+      l.ptStopWave = sylStartWave(function (peaks, url) {
+        if (l.ptWaveToken !== tok) return;
+        l.ptPeaks = peaks; l.ptUrl = url;
+        var wv = document.getElementById("ptWave");
+        if (wv) wv.innerHTML = sylWavePairSVG(pronTopicModelPeaks(sent), peaks);
+        var au = document.getElementById("ptSelfAudio");
+        if (au && url) au.innerHTML = '<p><b>🎙 Nghe lại giọng mình:</b></p><audio controls src="' + esc(url) + '"></audio>';
+        saveState();
+      });
+      drillSrCheck({ track: "en" }, sent, function (tx) { if (l.ptStopWave) l.ptStopWave(); pronTopicSpeakMark(l, true, tx, ""); }, function (tx) { if (l.ptStopWave) l.ptStopWave(); pronTopicSpeakMark(l, false, tx, ""); });
+    };
+    var ck = $("#ptCheck");
+    if (ck) {
+      var doCheck = function () {
+        var inp = $("#ptType"); if (!inp) return;
+        var v = inp.value || "";
+        if (gameNormSent(v) === gameNormSent(sent)) pronTopicSpeakMark(l, true, "", v); else pronTopicSpeakMark(l, false, "", v);
+      };
+      ck.onclick = doCheck;
+      var inp2 = $("#ptType");
+      if (inp2) inp2.addEventListener("keydown", function (ev) { if (ev.key === "Enter") doCheck(); });
+    }
+    var sk = $("#ptSkip");
+    if (sk) sk.onclick = function () { l.ptSkipped++; pronTopicSpeakNext(l); };
+    var rt = $("#ptRetry");
+    if (rt) rt.onclick = function () { l.ptWaveToken = (l.ptWaveToken || 0) + 1; l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptPeaks = null; l.ptUrl = ""; saveState(); render(); };
+    var nx = $("#ptNext");
+    if (nx) nx.onclick = function () { pronTopicSpeakNext(l); };
+    return;
+  }
+  if (l.ptStage === "free") {
+    h = skillHead(t.title, "Nói-chấm · Nói tự do · " + l.band) + phaseBarHTML(2) + '<div class="qblock">'
+      + '<p><b>3 · Nói tự do:</b> ' + esc(t.free) + '</p>'
+      + '<p class="mut">Nói ở tốc độ bình thường như đang nói chuyện thật — đừng nói chậm từng từ để lấy điểm. Bài này không chấm điểm: ghi âm lại rồi tự nghe để đối chiếu với quy tắc.</p>';
+    if (mode === "speak") {
+      h += '<div class="row"><button class="btn btn-primary" id="ptFreeRec" data-pronmic="1">🎤 Bắt đầu ghi</button><button class="btn" id="ptFreeDone">Tôi đã nói xong →</button><button class="btn" id="ptFreeSkip">Bỏ qua →</button></div>'
+        + '<div id="ptFreeAudio">' + (l.ptFreeUrl ? '<audio controls src="' + esc(l.ptFreeUrl) + '"></audio>' : '') + '</div>'
+        + '<div id="ptFreeWave">' + (l.ptFreePeaks ? sylWaveSVG(l.ptFreePeaks) : '') + '</div>';
+    } else {
+      h += '<p class="mut">Máy này không có mic nên ghi lại bằng chữ: viết 1–2 câu bạn sẽ nói theo chủ đề này.</p>'
+        + '<div class="row"><input id="ptFreeText" placeholder="Viết 1–2 câu theo chủ đề…" style="flex:1;min-width:200px"></div>'
+        + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="ptFreeDone">Tôi đã nói xong →</button><button class="btn" id="ptFreeSkip">Bỏ qua →</button></div>';
+    }
+    h += '</div>';
+    app.innerHTML = h;
+    wireBack();
+    var fr = $("#ptFreeRec");
+    if (fr) fr.onclick = function () {
+      if (l.ptFreeRec) {
+        if (l.ptFreeStop) l.ptFreeStop();
+        l.ptFreeRec = false; fr.textContent = "🎤 Bắt đầu ghi";
+        return;
+      }
+      var tok = (l.ptFreeToken = (l.ptFreeToken || 0) + 1);
+      l.ptFreeStop = sylStartWave(function (peaks, url) {
+        if (l.ptFreeToken !== tok) return;
+        l.ptFreePeaks = peaks; l.ptFreeUrl = url;
+        var au = document.getElementById("ptFreeAudio");
+        if (au && url) au.innerHTML = '<audio controls src="' + esc(url) + '"></audio>';
+        var wv = document.getElementById("ptFreeWave");
+        if (wv && peaks) wv.innerHTML = sylWaveSVG(peaks);
+        saveState();
+      });
+      l.ptFreeRec = true; fr.textContent = "⏹ Dừng ghi";
+    };
+    var fd = $("#ptFreeDone");
+    if (fd) fd.onclick = function () { l.ptFreeDone = true; pronTopicSpeakFinish(l, t); render(); };
+    var fs = $("#ptFreeSkip");
+    if (fs) fs.onclick = function () { l.ptFreeSkipped = true; pronTopicSpeakFinish(l, t); render(); };
+    return;
+  }
+  /* --- done: tong ket --- */
+  var worstLine = (l.ptWorst >= 0)
+    ? '<p><b>Câu lặp nhiều nhất:</b> “' + esc(t.examples[l.ptWorst]) + '” — lặp ' + l.ptWorstTries + ' lần, đã vào Sổ lỗi sai.</p>'
+    : '<p>Mọi câu đều đọc đúng ngay lần đầu — giỏi lắm!</p>';
+  h = skillHead(t.title, "Nói-chấm · Xong · " + l.band) + '<div class="qblock"><h2>Xong vòng nói-chấm!</h2>'
+    + '<p>Đúng ngay lần đầu: <b>' + l.ptFirst + '/3</b> câu · Lặp lại: ' + l.ptRepeats + ' lần · Bỏ qua: ' + l.ptSkipped + ' câu · Nghe phân biệt: ' + (l.ptDiscOk ? 'đúng ngay' : 'cần xem lại') + ' · Nói tự do: ' + (l.ptFreeSkipped ? 'đã bỏ qua' : 'đã nói xong') + '.</p>'
+    + worstLine
+    + '<p class="mut">Máy chỉ kiểm tra nghe ra đúng câu không (chấm tầng 1). Trọng âm/ngữ điệu không có điểm máy — bạn đã tự đối chiếu bằng cách nghe lại giọng mình và xem dạng sóng.</p>'
+    + '<div class="row"><button class="btn btn-primary" id="ptToQuiz">Vào luyện tập (quiz) →</button><button class="btn" id="ptBackTheory">Quay lại lý thuyết</button></div></div>';
+  app.innerHTML = h;
+  wireBack();
+  $("#ptToQuiz").onclick = function () { l.quiz = true; l.speak = false; saveState(); render(); };
+  $("#ptBackTheory").onclick = function () { l.speak = false; l.ptStage = null; saveState(); render(); };
+}
+
 function renderSkillPronTopic(app, l) {
   var t = RB_PRON_TOPICS_BY_BAND[l.band];
   if (!t) { toast("Bước phát âm này chưa có."); backFromLesson(); return; }
   if (l.quiz) { l.skillKey = "pronTopic:" + l.band; renderQuizEngine(app, l, t.quiz, "skill", "pronTopic:" + l.band, 2); return; }
+  if (l.speak) { renderPronTopicSpeak(app, l, t); return; }
   app.innerHTML = skillHead(l.title || t.title, "Phát âm · " + l.band) + phaseBarHTML(1) + '<div class="qblock"><p><b>Ví dụ trước — bấm 🔊 để nghe mẫu:</b></p>'
     + t.examples.map(function (e, i) { return '<p>· ' + esc(e) + ' <button class="btn" data-pronsay="' + i + '">🔊 Nghe</button></p>'; }).join("")
     + '<p><b>Quy tắc:</b> ' + esc(t.explain) + '</p>'
-    + '<p class="mut">Bài này có ' + t.quiz.length + ' câu hỏi thực hành.</p><p><button class="btn btn-primary" id="pronTopicStart">Vào luyện tập →</button></p></div>';
+    + '<p><b>🎤 Vòng nói-chấm:</b> nghe phân biệt → đọc to 3 câu mẫu (máy chỉ kiểm tra nghe ra đúng câu không) → tự nghe lại giọng mình → nói tự do 1–2 câu.</p>'
+    + '<p class="mut">Bài này có ' + t.quiz.length + ' câu hỏi thực hành.</p><p><button class="btn btn-primary" id="pronTopicSpeak">🎤 Vòng nói-chấm →</button> <button class="btn" id="pronTopicStart">Vào luyện tập (quiz) →</button></p></div>';
   wireBack();
   $$("[data-pronsay]").forEach(function (b) { b.onclick = function () { speak(t.examples[+b.dataset.pronsay]); }; });
+  $("#pronTopicSpeak").onclick = function () { l.speak = true; lessonStart = Date.now(); render(); };
   $("#pronTopicStart").onclick = function () { l.quiz = true; lessonStart = Date.now(); render(); };
 }
 
