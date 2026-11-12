@@ -533,7 +533,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", myWords: [], myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", myWords: [], myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -1522,7 +1522,100 @@ function dueHard() {
   });
   return out;
 }
-function dueCount() { return dueCards().length + dueHard().length; }
+function dueCount() { return dueCards().length + dueHard().length + pronSrsDue("en").length; }
+/* ---------- v159 S20 phan 1: SRS PHAT AM (ELSA §3 cai 10 + §1.8) ----------
+   Am yeu (chan doan + bai am) va tu con sai (buoc 4 / man chi tiet am tiet)
+   vao hang doi on rieng theo gian cach 1-3-7-14-30 ngay (RB_INTERVALS, cung
+   luat SRS cua tu vung + So loi sai): dung 2 lan lien tiep o cac lan on
+   cach quang moi "tot nghiep" am (streak >= 2); sai -> nac giu nguyen,
+   chuoi dung ve 0, hen on lai ngay mai (khong reset ve 0).
+   1 muc on = 1 am (kind "sound", khoa "s:<track>:<sym>") hoac 1 tu con sai
+   (kind "word", khoa "w:<track>:<tu>"). On gom theo AM, khong gom theo bai.
+   pronSrsEnsure() dong bo luoi tu pronWeakData + wordPron (chi them muc
+   thieu, khong bao gio dat lai muc da co) — goi trong moi ham dem/liet ke
+   nen nguoi dung cu (da co am yeu truoc v159) cung tu co hang doi. */
+function pronSrsNorm() { if (!state.pronSrs) state.pronSrs = {}; return state.pronSrs; }
+function pronSrsEnsure() {
+  var ps = pronSrsNorm(), added = false, t = todayStr();
+  ["en", "zh", "tc", "tp"].forEach(function (tr) {
+    var d = null; try { d = pronWeakData(tr); } catch (e) {}
+    (d && d.sounds || []).forEach(function (s) {
+      var k = "s:" + tr + ":" + s.sym;
+      if (!ps[k]) { ps[k] = { track: tr, kind: "sound", sym: s.sym, symVi: s.symVi || "", word: "", level: 0, streak: 0, fails: 0, due: addDaysStr(t, 1), done: false }; added = true; }
+    });
+  });
+  Object.keys(state.wordPron || {}).forEach(function (k) {
+    var p = state.wordPron[k]; if (!p || p.ai == null || p.ai >= 80 || !p.sym || !p.word) return;
+    var tr = k.indexOf("zh:") === 0 ? "zh" : k.indexOf("tc:") === 0 ? "tc" : k.indexOf("tp:") === 0 ? "tp" : "en";
+    var wk = "w:" + tr + ":" + p.word;
+    if (!ps[wk]) { ps[wk] = { track: tr, kind: "word", sym: p.sym, symVi: "", word: p.word, level: 0, streak: 0, fails: 0, due: addDaysStr(t, 1), done: false }; added = true; }
+  });
+  if (added) saveState();
+  return ps;
+}
+function pronSrsDue(track) {
+  pronSrsEnsure();
+  var t = todayStr(), out = [];
+  Object.keys(pronSrsNorm()).forEach(function (k) {
+    var e = state.pronSrs[k];
+    if (e && e.track === track && !e.done && (!e.due || e.due <= t)) out.push({ key: k, e: e });
+  });
+  out.sort(function (a, b) { var fa = a.e.fails || 0, fb = b.e.fails || 0; if (fb !== fa) return fb - fa; var da = a.e.due || "", db = b.e.due || ""; if (da !== db) return da < db ? -1 : 1; return a.key < b.key ? -1 : (a.key > b.key ? 1 : 0); });
+  return out;
+}
+function pronSrsUndue(track) {
+  pronSrsEnsure();
+  var t = todayStr(), out = [];
+  Object.keys(pronSrsNorm()).forEach(function (k) {
+    var e = state.pronSrs[k];
+    if (e && e.track === track && !e.done && e.due && e.due > t) out.push({ key: k, e: e });
+  });
+  out.sort(function (a, b) { var da = a.e.due || "", db = b.e.due || ""; if (da !== db) return da < db ? -1 : 1; return a.key < b.key ? -1 : (a.key > b.key ? 1 : 0); });
+  return out;
+}
+function pronSrsJudge(key, ok) {
+  var e = (state.pronSrs || {})[key]; if (!e) return null;
+  if (ok) {
+    e.streak = (e.streak || 0) + 1;
+    if (e.streak >= 2) { e.done = true; e.due = ""; }
+    else { e.level = (e.level || 0) + 1; e.due = addDaysStr(todayStr(), RB_INTERVALS[Math.min(e.level, RB_INTERVALS.length - 1)]); }
+  } else { e.fails = (e.fails || 0) + 1; e.streak = 0; e.due = addDaysStr(todayStr(), 1); }
+  saveState(); return e;
+}
+function pronSrsLabel(e) { return e.kind === "word" ? ('Từ "' + e.word + '" — âm /' + e.sym + '/') : ('Âm /' + e.sym + '/' + (e.symVi ? ' — ' + e.symVi : '')); }
+function pronSrsWordFor(e) {
+  if (e.kind === "word") return e.word;
+  var d = null; try { d = pronWeakData(e.track); } catch (err) {}
+  var s = null; if (d) (d.sounds || []).forEach(function (x) { if (x.sym === e.sym) s = x; });
+  if (s && s.words && s.words.length) return s.words[0].w || s.words[0].show || "";
+  var dg = pronWeakDiagSym(e.track, e.sym);
+  if (dg && dg.w) return dg.w;
+  if (dg && dg.show) return dg.show;
+  var ex = (typeof RB_PH_ALL_EXAMPLES !== "undefined") ? RB_PH_ALL_EXAMPLES[e.sym] : null;
+  if (ex) return ex;
+  return e.sym;
+}
+function pronSrsReviewHTML(track) {
+  var due = pronSrsDue(track), undue = pronSrsUndue(track), h = "";
+  if (due.length) {
+    h += '<section class="card"><h3>🎤 Ôn phát âm đến hạn (' + due.length + ')</h3><p class="mut">Âm yếu + từ còn sai — đọc lại đúng 2 lần cách quãng mới tốt nghiệp âm. Sai thì nấc giữ nguyên, hẹn ôn lại ngày mai.</p>';
+    due.forEach(function (it) {
+      h += '<div class="sumcard"><p><b>' + esc(pronSrsLabel(it.e)) + '</b></p><p class="mut">Đến hạn: ' + esc(it.e.due || "ngay hôm nay") + ' · Nấc ' + (it.e.level || 0) + '/5' + ((it.e.fails || 0) > 0 ? ' · Đã sai ' + it.e.fails + ' lần' : '') + ' · Chuỗi đúng: ' + (it.e.streak || 0) + '/2</p><div class="row"><button class="btn btn-primary" data-pronsrs="' + esc(it.key) + '">🎤 Ôn phát âm này</button></div></div>';
+    });
+    h += '</section>';
+  }
+  if (undue.length) {
+    h += '<section class="card"><h3>🎤 Ôn phát âm — chưa đến hạn (' + undue.length + ')</h3><p class="mut">Các âm/từ đã xếp lịch ôn phát âm nhưng chưa tới ngày — tới ngày sẽ tự về mục đến hạn ở trên.</p>';
+    undue.forEach(function (it) {
+      h += '<div class="sumcard"><p><b>' + esc(pronSrsLabel(it.e)) + '</b></p><p class="mut">Về buổi ôn ngày ' + esc(it.e.due || "chưa rõ") + ' · Nấc ' + (it.e.level || 0) + '/5</p></div>';
+    });
+    h += '</section>';
+  }
+  return h;
+}
+function pronSrsWireReview() {
+  $$("[data-pronsrs]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); openLesson({ type: "pronSrs", key: b.dataset.pronsrs }); }; });
+}
 
 /* ---------- v90: SM-2 DUNG CHUNG 4 TRACK ----------
    Lich gian cach 1-3-7-14-30 ngay (RB_INTERVALS); tot nghiep khi tra loi
@@ -1694,9 +1787,9 @@ function zhFreshCards90() {
 function trackDueCount90() {
   var t = (typeof state !== "undefined" && state.track) || "en";
   try {
-    if (t === "zh") return zhDueHard().length;
-    if (t === "tc") return tcDueHard().length + tcDueCards90().length;
-    if (t === "tp") return tpDueHard().length + tpDueCards90().length;
+    if (t === "zh") return zhDueHard().length + pronSrsDue("zh").length;
+    if (t === "tc") return tcDueHard().length + tcDueCards90().length + pronSrsDue("tc").length;
+    if (t === "tp") return tpDueHard().length + tpDueCards90().length + pronSrsDue("tp").length;
   } catch (e) {}
   return dueCount();
 }
@@ -1904,12 +1997,13 @@ function specUnfinishedVocab() {
 function specTodayItems(nextCard) {
   var items = [];
   var due = dueCount();
+  var pdEn = 0; try { pdEn = pronSrsDue("en").length; } catch (e) {}
   /* FIX-V33 02/11 (B1): the chinh da la "ON TRUOC" thi muc on trong VIEC HOM NAY
      la lan hien thi thu hai cua cung mot viec — an no di (giong luat an muc
      trung buoc/kiem tra/bai hoc o duoi). Neu khong con muc nao thi an ca the
      (hiddenWork) chu khong bao "da xong het viec" sai. */
   var hideReview = !!(nextCard && nextCard.kind === "review");
-  if (due > 0 && !hideReview) items.push({ kind: "review", title: "Ôn " + due + " mục đến hạn", detail: "Thẻ từ và Sổ lỗi sai đến hạn hôm nay — ôn đúng lúc sắp quên.", action: "review" });
+  if (due > 0 && !hideReview) items.push({ kind: "review", title: "Ôn " + due + " mục đến hạn", detail: (pdEn ? "Thẻ từ, Sổ lỗi sai và phát âm (" + pdEn + " mục) đến hạn hôm nay — ôn đúng lúc sắp quên." : "Thẻ từ và Sổ lỗi sai đến hạn hôm nay — ôn đúng lúc sắp quên."), action: "review" });
   var ns = nextLearnStep();
   /* FIX-V32 R2-B2: bo muc trung voi the "Tiep theo" o man chinh (mot thong tin
      mot lan): man chinh da hien dung buoc/kiem tra/bai hoc do thi VIEC HOM NAY
@@ -1932,6 +2026,8 @@ function specTodayItems(nextCard) {
   var head = todayWeakTasks("en");
   var ww = todayWrongWordTask("en");
   if (ww) head.push(ww);
+  var psT = todayPronSrsTask("en");
+  if (psT) head.push(psT);
   if (isNewUser() && !head.length) { var st0 = todayStartTask("en"); if (st0) head.push(st0); }
   items = head.concat(items);
   /* v147 S10: Ke hoach ngay — 3 nhiệm vụ: the hom nay chi trinh bay toi da
@@ -2004,6 +2100,11 @@ function todayWrongWordTask(track) {
     detail: track === "en" ? "Từ này còn sai trong Sổ lỗi sai — ôn lại ở tab Ôn tập." : "Từ này còn sai trong Sổ lỗi sai — mở đúng bộ từ chứa nó.",
     action: action };
 }
+function todayPronSrsTask(track) {
+  var n = 0; try { n = pronSrsDue(track).length; } catch (e) {}
+  if (!n) return null;
+  return { kind: "pronSrs", title: "Ôn phát âm: " + n + " mục đến hạn", detail: "Âm yếu + từ còn sai đến hạn ôn phát âm — đọc lại đúng 2 lần cách quãng mới tốt nghiệp.", action: "pronSrs" };
+}
 function todayStartTask(track) {
   if (track === "zh") return { kind: "start", title: "Bắt đầu: kiểm tra trình độ HSK", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "zhEntry" };
   if (track === "tc") return { kind: "start", title: "Bắt đầu: kiểm tra trình độ TOEIC", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "tcEntry" };
@@ -2048,6 +2149,7 @@ function specTodayHTML(nextCard) {
 function specTodayGo(action) {
   var parts = String(action || "").split(":");
   if (parts[0] === "review") { go("review"); return; }
+  if (parts[0] === "pronSrs") { go("review"); return; }
   if (parts[0] === "step") { var st = stepById(parts[1]); if (st) openStep(st, { noNudge: true }); return; }
   if (parts[0] === "test") { openStep(stepById("test")); return; }
   if (parts[0] === "lesson") { openSessionTarget(sessionTarget()); return; }
@@ -2073,7 +2175,7 @@ function specTodayGo(action) {
    man chinh Trung da hien dung buoc tiep theo thi VIEC HOM NAY khong lap lai. */
 function specTodayZhItems(mainTitle) {
   var items = [];
-  var due = 0; try { due = zhDueHard().length; } catch (e) {}
+  var due = 0; try { due = zhDueHard().length + pronSrsDue("zh").length; } catch (e) {}
   if (due > 0) items.push({ kind: "zhReview", title: "Ôn " + due + " mục tiếng Trung đến hạn", detail: "Sổ lỗi sai và thẻ khó track Trung đến hạn hôm nay.", action: "zhReview" });
   var t = null; try { t = zhSessionTarget(); } catch (e) {}
   var hiddenTarget = !!(mainTitle && t && t.title === mainTitle);
@@ -2089,6 +2191,8 @@ function specTodayZhItems(mainTitle) {
   var headZh = todayWeakTasks("zh");
   var wwZh = todayWrongWordTask("zh");
   if (wwZh) headZh.push(wwZh);
+  var psZh = todayPronSrsTask("zh");
+  if (psZh) headZh.push(psZh);
   if (isZhNewUser() && !headZh.length) { var stZh = todayStartTask("zh"); if (stZh) headZh.push(stZh); }
   items = headZh.concat(items);
   var plZh = todayPlanOf(items);
@@ -3548,11 +3652,12 @@ function stepTypeIcon(type) {
    tien do chang + so muc den han on. */
 function homeProgressText() {
   try {
-    if (state.track === "zh") { var zp = zhPositionCurrent(); return { prog: zp.done + "/" + zp.total, due: trackDueCount90() }; }
-    if (state.track === "tc") { var n = tcNextStep(); var si = (n && n.id) ? tcStepStage(n.id) : 0; var st = TC_STAGES[si] || TC_STAGES[0]; var d = 0; st.steps.forEach(function (s) { if (state.tcDone && state.tcDone[s]) d++; }); return { prog: d + "/" + st.steps.length, due: trackDueCount90() }; }
-    if (state.track === "tp") { var n2 = tpNextStep(); var si2 = (n2 && n2.id) ? tpStepStage(n2.id) : 0; var st2 = TP_STAGES[si2] || TP_STAGES[0]; var d2 = 0; st2.steps.forEach(function (s) { if (state.tpDone && state.tpDone[s]) d2++; }); return { prog: d2 + "/" + st2.steps.length, due: trackDueCount90() }; }
-    var hp = homePathInfo(); return { prog: hp.done + "/" + hp.total, due: trackDueCount90() };
-  } catch (e) { return { prog: "—", due: 0 }; }
+    var pd = 0; try { pd = pronSrsDue(state.track || "en").length; } catch (e) {}
+    if (state.track === "zh") { var zp = zhPositionCurrent(); return { prog: zp.done + "/" + zp.total, due: trackDueCount90(), pronDue: pd }; }
+    if (state.track === "tc") { var n = tcNextStep(); var si = (n && n.id) ? tcStepStage(n.id) : 0; var st = TC_STAGES[si] || TC_STAGES[0]; var d = 0; st.steps.forEach(function (s) { if (state.tcDone && state.tcDone[s]) d++; }); return { prog: d + "/" + st.steps.length, due: trackDueCount90(), pronDue: pd }; }
+    if (state.track === "tp") { var n2 = tpNextStep(); var si2 = (n2 && n2.id) ? tpStepStage(n2.id) : 0; var st2 = TP_STAGES[si2] || TP_STAGES[0]; var d2 = 0; st2.steps.forEach(function (s) { if (state.tpDone && state.tpDone[s]) d2++; }); return { prog: d2 + "/" + st2.steps.length, due: trackDueCount90(), pronDue: pd }; }
+    var hp = homePathInfo(); return { prog: hp.done + "/" + hp.total, due: trackDueCount90(), pronDue: pd };
+  } catch (e) { return { prog: "—", due: 0, pronDue: 0 }; }
 }
 function goalStripText() {
   var g = state.goal || 30;
@@ -4249,7 +4354,7 @@ function viewHome(app) {
   var streak = streakDays();
   var lv = xpLevel(state.xp || 0);
   var info = homePathInfo();
-  var html = trackSwitchHTML(true) + '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  var html = trackSwitchHTML(true) + '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục' + (hp.pronDue ? ' (' + hp.pronDue + ' phát âm)' : '') + '</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += homeSearchHTML();
   html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (trulyNew ? 'Hôm nay 2812 cùng bạn học nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếp nhé.') + '</p>';
@@ -5246,9 +5351,10 @@ function g1ReviewRegroup(app, startCardId) {
 function viewReview(app) {
   var cards = dueCards(), hards = dueHard();
   var html = trackSwitchHTML() + '<h2>Ôn tập</h2><p class="mut">Lịch ôn: ' + RB_SCHEDULE_TEXT + '.</p>';
-  if (cards.length || hards.length) {
-    var dueN = cards.length + hards.length;
-    html += '<section class="card next-card" id="reviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + hards.length + ' câu lỗi sai + ' + cards.length + ' thẻ)</h3><p class="mut">Một phiên trộn: câu sai cũ trước, thêm vài thẻ mới làm quen. Làm đúng ở đây chưa tốt nghiệp mục — ôn lại đúng 2 lần cách quãng ở tab này mới tính.</p><button class="btn btn-primary" id="reviewStartBtn">Bắt đầu buổi ôn</button></section>';
+  var pdEn = pronSrsDue("en");
+  if (cards.length || hards.length || pdEn.length) {
+  var dueN = cards.length + hards.length + pdEn.length;
+    html += '<section class="card next-card" id="reviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + hards.length + ' câu lỗi sai + ' + cards.length + ' thẻ' + (pdEn.length ? ' + ' + pdEn.length + ' phát âm' : '') + ')</h3><p class="mut">Một phiên trộn: câu sai cũ trước, thêm vài thẻ mới làm quen. Làm đúng ở đây chưa tốt nghiệp mục — ôn lại đúng 2 lần cách quãng ở tab này mới tính. Mục phát âm ôn riêng bằng nút “Ôn phát âm này” ở dưới.</p><button class="btn btn-primary" id="reviewStartBtn">Bắt đầu buổi ôn</button></section>';
   }
   html += gd23ReviewMixHTML();
   if (hards.length) {
@@ -5265,6 +5371,7 @@ function viewReview(app) {
     });
     html += '</div></section>';
   }
+  html += pronSrsReviewHTML("en");
   var undue = undueHard();
   if (undue.length) {
     html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + undue.length + ')</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p><div>';
@@ -5286,7 +5393,7 @@ function viewReview(app) {
   html += '<section class="card"><h3>Đánh giá quá trình</h3><p><b>Nhiệm vụ thực chiến:</b> Tình huống đời sống — xử lý việc thật bằng tiếng Anh (mở ở tab Luyện tập, mục Tình huống đời sống).</p><div class="row"><button class="btn" id="reviewToPracticeBk">Mở Tình huống đời sống ở Luyện tập →</button></div></section>';
   html += gd23UnsureHTML();
   html += u8SavedPhrasesHTML();
-  if (!cards.length && !hards.length) html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="reviewNextStep">Học tiếp bước kế tiếp</button><button class="btn" id="reviewRoadmap">Xem lộ trình</button></div></section>';
+  if (!cards.length && !hards.length && !pronSrsDue("en").length) html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="reviewNextStep">Học tiếp bước kế tiếp</button><button class="btn" id="reviewRoadmap">Xem lộ trình</button></div></section>';
   app.innerHTML = html;
   g1ReviewRegroup(app, "reviewStartCard");
   var rns = $("#reviewNextStep"); if (rns) rns.onclick = function () { openSessionTarget(sessionTarget()); };
@@ -5305,6 +5412,7 @@ function viewReview(app) {
   $$("[data-unsure-del]").forEach(function (b) {
     b.onclick = function () { delete state.unsure[b.dataset.unsureDel]; saveState(); render(); };
   });
+  pronSrsWireReview();
   $$("[data-card-review]").forEach(function (b) {
     b.onclick = function () { lessonStart = Date.now(); openLesson({ type: "reviewCard", cardKey: b.dataset.cardReview }); };
   });
@@ -8833,6 +8941,8 @@ function pronDiagFinish(l, track) {
   weak = weak.slice(0, 5);
   if (!state.pronDiag) state.pronDiag = {};
   state.pronDiag[track] = { weak: weak, date: todayStr(), scores: l.scores || [] };
+  /* v159 S20: chan doan lai ma am van yeu -> am da tot nghiep truoc do vao lai hang doi on phat am. */
+  try { weak.forEach(function (w) { var e = (state.pronSrs || {})["s:" + track + ":" + w.sym]; if (e && e.done) { e.done = false; e.level = 0; e.streak = 0; e.fails = 0; e.due = addDaysStr(todayStr(), 1); } }); } catch (err) {}
   saveState();
   l.done = true;
 }
@@ -9257,6 +9367,7 @@ function renderLesson(app) {
   else if (l.type === "skillDrill") renderSkillDrill(app, l);
   else if (l.type === "drill") renderDrill(app, l); /* v157 S19 phan 2/3 — Drill lap 1 cau (P9) */
   else if (l.type === "freeWrite") renderFreeWrite(app, l); /* v158 S19 phan 3/3 — bai tap viet cau tu do (P4) */
+  else if (l.type === "pronSrs") renderPronSrs(app, l); /* v159 S20 phan 1 — SRS phat am */
   else if (l.type === "phaseExam") renderPhaseExam(app, l);
   else if (l.type === "phaseSkill") renderPhaseSkill(app, l);
   else if (l.type === "mockTest") renderMockTest(app, l);
@@ -16914,6 +17025,90 @@ function drillVideoOptions(track) {
   }
   return out;
 }
+/* ---------- v159 S20 phan 1: VONG ON PHAT AM (SRS) ----------
+   1 muc on = 1 am yeu hoac 1 tu con sai. Vong on: nghe mau -> doc to lai
+   (mic, cham tang 1 SR nhi phan nhu buoc 4) -> dung/sai theo luat SRS
+   (pronSrsJudge): dung 2 lan lien tiep o cac lan on cach quang moi tot
+   nghiep; sai -> nac giu nguyen, chuoi ve 0, hen mai. May khong mic /
+   khong SR -> che do nghe + go lai (luat thoat mic v112). Khong bia diem %
+   tung am, khong khoa bai. Da cham 1 lan trong luot nay thi an nut doc/go
+   de khoi cham lap 2 lan trong cung mot ngay (tot nghiep doi 2 lan cach
+   quang, khong phai 2 lan lien nhau trong mot luot). */
+function renderPronSrs(app, l) {
+  var e = (state.pronSrs || {})[l.key];
+  if ((!e || e.done) && !l.psMsg) {
+    app.innerHTML = skillHead("🎤 Ôn phát âm", "") + '<div class="qblock"><p>Âm này đã tốt nghiệp rồi — không còn trong hàng đợi ôn.</p><div class="row"><button class="btn btn-primary" id="psBack">Về Ôn tập</button></div></div>';
+    wireBack();
+    $("#psBack").onclick = function () { go("review"); };
+    return;
+  }
+  var track = e.track || "en";
+  var word = pronSrsWordFor(e);
+  if (MR_HAS_AUDIO === null) mrCheckDevices(function () { if (curLesson === l) render(); });
+  var mode = (drillHasSr() && !mrNoMic()) ? "speak" : "type";
+  var sub = pronSrsLabel(e) + ' · Nấc ' + (e.level || 0) + '/5 · Chuỗi đúng: ' + (e.streak || 0) + '/2 — đúng 2 lần cách quãng mới tốt nghiệp';
+  var h = skillHead("🎤 Ôn phát âm", sub)
+    + '<div class="qblock"><p><b>' + esc(pronSrsLabel(e)) + '</b></p>'
+    + '<p style="font-size:22px"><b>' + esc(word) + '</b></p>'
+    + '<div class="row"><button class="btn" id="psPlay">🔊 Nghe mẫu</button><button class="btn" id="psSlow">🐌 Nghe chậm 0,5x</button></div>';
+  if (!l.psMsg) {
+    if (mode === "speak") {
+      h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="psSpeak">🎤 Đọc to</button><button class="btn" id="psSkip">Bỏ qua →</button></div>'
+        + '<p class="mut">Đọc to đúng từ trên — máy chỉ kiểm tra có nghe ra đúng từ không (chấm tầng 1). Đọc đúng 2 lần cách quãng mới tốt nghiệp âm này.</p>';
+    } else {
+      h += '<p class="mut">Máy này không có mic / chưa cấp quyền mic nên chuyển sang chế độ nghe + gõ lại.</p>'
+        + '<div class="row" style="margin-top:8px"><input id="psType" placeholder="Nghe rồi gõ lại đúng từ trên…" style="flex:1;min-width:200px"><button class="btn btn-primary" id="psCheck">Kiểm tra</button><button class="btn" id="psSkip">Bỏ qua →</button></div>';
+    }
+  }
+  if (l.psMsg) h += '<p><b>' + esc(l.psMsg) + '</b></p>';
+  if (l.psHeard) h += '<p class="mut">Máy nghe được: “' + esc(l.psHeard) + '”</p>';
+  if (l.psTyped) h += '<p class="mut">Bạn gõ: “' + esc(l.psTyped) + '”</p>';
+  if (l.psMsg) h += '<div class="row"><button class="btn btn-primary" id="psNext">Mục phát âm tiếp theo →</button><button class="btn" id="psDone">Về Ôn tập</button></div>';
+  h += '</div>';
+  app.innerHTML = h;
+  wireBack();
+  $("#psPlay").onclick = function () { drillSpeak(word, track); };
+  $("#psSlow").onclick = function () { drillSpeak(word, track, 0.5); };
+  var sp = $("#psSpeak");
+  if (sp) sp.onclick = function () {
+    sp.disabled = true; sp.textContent = "🎙 Đang nghe…";
+    drillSrCheck({ track: track }, word, function (tx) { pronSrsMark(l, true, tx, ""); }, function (tx) { pronSrsMark(l, false, tx, ""); });
+  };
+  var ck = $("#psCheck");
+  if (ck) {
+    var doCheck = function () {
+      var inp = $("#psType"); if (!inp) return;
+      var v = inp.value || "";
+      if (gameNormSent(v) === gameNormSent(word)) pronSrsMark(l, true, "", v); else pronSrsMark(l, false, "", v);
+    };
+    ck.onclick = doCheck;
+    var inp2 = $("#psType");
+    if (inp2) inp2.addEventListener("keydown", function (ev) { if (ev.key === "Enter") doCheck(); });
+  }
+  var sk = $("#psSkip");
+  if (sk) sk.onclick = function () { pronSrsNext(l); };
+  var nx = $("#psNext");
+  if (nx) nx.onclick = function () { pronSrsNext(l); };
+  var dn = $("#psDone");
+  if (dn) dn.onclick = function () { go("review"); };
+}
+function pronSrsMark(l, ok, heard, typed) {
+  var e = pronSrsJudge(l.key, ok);
+  l.psHeard = heard || ""; l.psTyped = typed || "";
+  if (ok) {
+    awardXp(5);
+    l.psMsg = (e && e.done) ? "✓ Đúng! Âm này đã tốt nghiệp — rời hàng đợi ôn." : "✓ Đúng! Chuỗi đúng: " + (e ? e.streak : 1) + "/2 — hẹn ôn lại ngày " + (e ? (e.due || "mai") : "mai") + ".";
+  } else {
+    l.psMsg = "✗ Máy chưa nghe ra đúng từ — nấc giữ nguyên, chuỗi đúng về 0, hẹn ôn lại ngày mai.";
+  }
+  saveState(); render();
+}
+function pronSrsNext(l) {
+  var track = ((state.pronSrs || {})[l.key] || {}).track || "en";
+  var next = pronSrsDue(track).filter(function (it) { return it.key !== l.key; })[0];
+  if (next) openLesson({ type: "pronSrs", key: next.key });
+  else go("review");
+}
 function renderDrill(app, l) {
   var track = l.track || "en";
   if (!l.drillInit) {
@@ -19786,7 +19981,7 @@ function viewHomeZh(app) {
   var lv = xpLevel(state.xp || 0);
   var tZh = fresh ? null : zhSessionTarget();
   var html = trackSwitchHTML(true);
-  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục' + (hp.pronDue ? ' (' + hp.pronDue + ' phát âm)' : '') + '</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += homeSearchHTML(); /* v122: o ket qua tim kiem tren moi track (truoc day chi trang chu EN co) */
   html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (fresh ? 'Hôm nay 2812 cùng bạn học tiếng Trung nhé.' : 'Chào bạn! Hôm nay mình cùng 2812 học tiếng Trung nhé.') + '</p>';
@@ -20215,9 +20410,10 @@ function zhHardItemHTML(key, h, isDue) {
 function viewReviewZh(app) {
   var items = Object.keys(state.zhHard || {}).filter(function (k) { return !(state.zhHard[k] && state.zhHard[k].done); });
   var due = zhDueHard();
+  var pdZh = pronSrsDue("zh");
   var html = trackSwitchHTML() + '<h2>Ôn tập · Tiếng Trung</h2><p class="mut">Lịch ôn: ' + RB_SCHEDULE_TEXT + '.</p>';
-  if (due.length) {
-    html += '<section class="card next-card" id="zhReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + due.length + ' mục đến hạn</h3><button class="btn btn-primary" id="zhReviewStartBtn">Bắt đầu buổi ôn</button></section>';
+  if (due.length || pdZh.length) {
+    html += '<section class="card next-card" id="zhReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + (due.length + pdZh.length) + ' mục đến hạn' + (pdZh.length ? ' (' + pdZh.length + ' phát âm)' : '') + '</h3><button class="btn btn-primary" id="zhReviewStartBtn">Bắt đầu buổi ôn</button></section>';
     var freshN90 = due.length ? Math.round(due.length / 4) : 0;
     var freshCount90 = freshN90 ? zhFreshCards90().slice(0, freshN90).length : 0;
     html += '<section class="card" id="reviewMix"><h3>Hàng đợi ôn trộn — 80% mục cũ + 20% mục mới</h3><p>Hôm nay: <b>' + due.length + ' mục cũ đến hạn</b> + <b>' + freshCount90 + ' mục mới</b> (nhãn "Mới").</p>' + (freshCount90 ? '<p class="mut">' + freshCount90 + ' thẻ mới làm quen (không hiện tên trước để khỏi lộ đáp án khi vào buổi ôn).</p>' : '<p class="mut">Không còn thẻ mới chưa học trong kho từ vựng.</p>') + '</section>';
@@ -20228,6 +20424,7 @@ function viewReviewZh(app) {
     if (dueReviewing.length) { html += '<h4>Thẻ đang ôn (' + dueReviewing.length + ')</h4>'; dueReviewing.forEach(function (it) { html += zhHardItemHTML(it.key, it.h, true); }); }
     html += '</section>';
   }
+  html += pronSrsReviewHTML("zh");
   if (items.length) {
     var dueKeys = {}; due.forEach(function (it) { dueKeys[it.key] = true; });
     var bookItems = items.filter(function (k) { return !dueKeys[k]; });
@@ -20238,7 +20435,7 @@ function viewReviewZh(app) {
     if (bookReviewing.length) { html += '<h4>Thẻ đang ôn (' + bookReviewing.length + ')</h4>'; bookReviewing.forEach(function (k) { html += zhHardItemHTML(k, state.zhHard[k], false); }); }
     html += '</section><div class="row"><button class="' + (due.length ? 'btn' : 'btn btn-primary') + '" id="zhReviewNextBtn">Học tiếp bước kế tiếp</button></div>';
   }
-  if (!due.length && items.length) html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div></section>';
+  if (!due.length && !pdZh.length && items.length) html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div></section>';
   var zhMock90 = state.zhMockTests || [];
   html += '<section class="card"><h3>Mốc đã thi thử</h3><p class="mut">Xem ở Của tôi → Tiến trình.</p>' + (zhMock90.length ? '' : '<p class="mut">Chưa có mốc thi thử nào — thi thử HSK ở Bản đồ, mốc sẽ hiện ở đây.</p>') + '<p><b>Luyện HSKK:</b> thi nói riêng theo cấp (Sơ cấp / Trung cấp / Cao cấp) — xem ở Luyện tập, cụm Thi &amp; Kiểm tra.</p><div class="row"><button class="btn" id="zhReviewToMineMock">Xem mốc ở Của tôi →</button> <button class="btn" id="zhReviewToHskk">Luyện HSKK ở Luyện tập →</button></div></section>';
   html += '<details class="card"><summary><b>🎬 Video ôn thêm</b> — HSK1 + HSK3</summary><h3>HSK1</h3><p class="mut">Ôn từ vựng bằng video — xem cho vui mà vẫn ôn, không tính điểm, không gắn vào từng thẻ.</p>' + videoSlotIf("zhReview:words300") + videoSlotIf("zhReview:family") + videoSlotIf("zhReview:objects") + '<h3>HSK3</h3><p class="mut">Ôn từ vựng HSK3 bằng video — xem cho vui mà vẫn ôn, không tính điểm, không gắn vào từng thẻ.</p>' + videoSlotIf("zhReview:hsk3words") + '</details>';
@@ -20252,6 +20449,7 @@ function viewReviewZh(app) {
   var rb = $("#zhReviewNextBtn"); if (rb) rb.onclick = function () { zhOpenTarget(zhSessionTarget()); };
   var zth = $("#zhReviewToHskk"); if (zth) zth.onclick = function () { go("practice"); };
   var zmm = $("#zhReviewToMineMock"); if (zmm) zmm.onclick = function () { go("mine"); };
+  pronSrsWireReview();
   var sb = $("#zhReviewStartBtn"); if (sb) sb.onclick = function () { lessonStart = Date.now(); openLesson({ type: "zhReviewSession" }); };
   $$("[data-zhhard-review]").forEach(function (b) { b.onclick = function () {
     var h = state.zhHard[b.dataset.zhhardReview];
@@ -22724,6 +22922,8 @@ function specTodayTcItems(nextId) {
   var headTc = todayWeakTasks("tc");
   var wwTc = todayWrongWordTask("tc");
   if (wwTc) headTc.push(wwTc);
+  var psTc = todayPronSrsTask("tc");
+  if (psTc) headTc.push(psTc);
   if (isTcNewUser() && !headTc.length) { var stTc = todayStartTask("tc"); if (stTc) headTc.push(stTc); }
   items = headTc.concat(items);
   var plTc = todayPlanOf(items);
@@ -22753,7 +22953,7 @@ function viewHomeTc(app) {
   var lv = xpLevel(state.xp || 0);
   var n = tcNextStep();
   var html = trackSwitchHTML(true);
-  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục' + (hp.pronDue ? ' (' + hp.pronDue + ' phát âm)' : '') + '</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += homeSearchHTML(); /* v122: o ket qua tim kiem tren moi track (truoc day chi trang chu EN co) */
   html += '<div class="home-main">';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng 2812 luyện TOEIC nhé.</p>';
@@ -23191,12 +23391,14 @@ function viewReviewTc(app) {
   tcNorm();
   var dueH = tcDueHard(), undueH = tcUndueHard(), dueC = tcDueCards90();
   var dueN = dueH.length + dueC.length;
+  var pdTc = pronSrsDue("tc");
+  dueN += pdTc.length;
   var freshN = dueN ? Math.round(dueN / 4) : 0;
   var freshTotal = tcFreshCards90().length;
   var freshShown = Math.min(freshTotal, freshN);
   var html = trackSwitchHTML() + '<h2>Ôn tập · TOEIC</h2><p class="mut">Lịch ôn: ' + RB_SCHEDULE_TEXT + '.</p>';
   if (dueN > 0) {
-    html += '<section class="card next-card" id="tcReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + dueH.length + ' câu lỗi sai + ' + dueC.length + ' thẻ)</h3><button class="btn btn-primary" id="tcReviewStartBtn">Bắt đầu buổi ôn</button></section>';
+    html += '<section class="card next-card" id="tcReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + dueH.length + ' câu lỗi sai + ' + dueC.length + ' thẻ' + (pdTc.length ? ' + ' + pdTc.length + ' phát âm' : '') + ')</h3><button class="btn btn-primary" id="tcReviewStartBtn">Bắt đầu buổi ôn</button></section>';
     html += '<section class="card" id="reviewMix"><h3>Hàng đợi ôn trộn — 80% mục cũ + 20% mục mới</h3><p>Hôm nay: <b>' + dueN + ' mục cũ đến hạn</b> + <b>' + freshShown + ' mục mới</b> (nhãn "Mới").</p>' + (freshShown ? '<p class="mut">' + freshShown + ' thẻ mới làm quen (không hiện tên trước để khỏi lộ đáp án khi vào buổi ôn).</p>' : '<p class="mut">Không còn mục mới chưa học trong kho từ vựng.</p>') + '</section>';
   }
   if (dueH.length) {
@@ -23223,6 +23425,7 @@ function viewReviewTc(app) {
     });
     html += '</section>';
   }
+  html += pronSrsReviewHTML("tc");
   html += '<section class="card"><h3>Đánh giá quá trình</h3>';
   if (state.tcMockTests.length > 0) {
     html += '<h4>Lịch sử thi thử TOEIC</h4>';
@@ -23234,7 +23437,7 @@ function viewReviewTc(app) {
     html += '<p class="mut">Chưa có mốc thi thử nào — thi thử TOEIC ở Bản đồ, mốc sẽ hiện ở đây.</p>';
   }
   html += '</section>';
-  if (!dueH.length && !undueH.length && !dueC.length) {
+  if (!dueH.length && !undueH.length && !dueC.length && !pdTc.length) {
     html += '<section class="card"><h3>Không còn lỗi sai TOEIC 🎉</h3><p class="mut">Các câu bạn làm sai trong track TOEIC sẽ hiện ở đây để ôn lại đúng bước đó, cho tới khi bạn trả lời đúng trong buổi ôn.</p></section>';
   } else if (dueN === 0) {
     html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="tcReviewNextBtn">Học tiếp bước kế tiếp</button></div></section>';
@@ -23248,6 +23451,7 @@ function viewReviewTc(app) {
      (giong ban Anh: chi doi ngay). */
   app.querySelectorAll("[data-tcdone]").forEach(function (b) { b.onclick = function () { var h = state.tcHard[+b.dataset.tcdone]; if (!h) return; h.due = addDaysStr(todayStr(), RB_INTERVALS[Math.min(h.level || 0, RB_INTERVALS.length - 1)]); saveState(); viewReviewTc(app); wireTc(app); }; });
   app.querySelectorAll("[data-tcretry]").forEach(function (b) { b.onclick = function () { var sid = b.dataset.tcretry; if (sid.indexOf("game:") === 0) { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: sid.slice(5) }); return; } tcOpenStep(sid, "review"); }; });
+  pronSrsWireReview();
   app.querySelectorAll("[data-tccard-review]").forEach(function (b) { b.onclick = function () { var parts = (b.dataset.tccardReview || "").split(":"); var stepId = parts[0], ci = +parts[1]; tcOpenStep(stepId, "review"); if (window.__tcShow && !isNaN(ci)) window.__tcShow(ci); }; });
 }
 
@@ -23773,6 +23977,8 @@ function specTodayTpItems(nextId) {
   var headTp = todayWeakTasks("tp");
   var wwTp = todayWrongWordTask("tp");
   if (wwTp) headTp.push(wwTp);
+  var psTp = todayPronSrsTask("tp");
+  if (psTp) headTp.push(psTp);
   if (isTpNewUser() && !headTp.length) { var stTp = todayStartTask("tp"); if (stTp) headTp.push(stTp); }
   items = headTp.concat(items);
   var plTp = todayPlanOf(items);
@@ -23802,7 +24008,7 @@ function viewHomeTp(app) {
   var lv = xpLevel(state.xp || 0);
   var n = tpNextStep();
   var html = trackSwitchHTML(true);
-  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục' + (hp.pronDue ? ' (' + hp.pronDue + ' phát âm)' : '') + '</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
   html += homeSearchHTML(); /* v122: o ket qua tim kiem tren moi track (truoc day chi trang chu EN co) */
   html += '<div class="home-main">';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng 2812 luyện TOPIK nhé.</p>';
@@ -24021,12 +24227,14 @@ function viewReviewTp(app) {
   tpNorm();
   var dueH = tpDueHard(), undueH = tpUndueHard(), dueC = tpDueCards90();
   var dueN = dueH.length + dueC.length;
+  var pdTp = pronSrsDue("tp");
+  dueN += pdTp.length;
   var freshN = dueN ? Math.round(dueN / 4) : 0;
   var freshTotal = tpFreshCards90().length;
   var freshShown = Math.min(freshTotal, freshN);
   var html = trackSwitchHTML() + '<h2>Ôn tập · TOPIK</h2><p class="mut">Lịch ôn: ' + RB_SCHEDULE_TEXT + '.</p>';
   if (dueN > 0) {
-    html += '<section class="card next-card" id="tpReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + dueH.length + ' câu lỗi sai + ' + dueC.length + ' thẻ)</h3><button class="btn btn-primary" id="tpReviewStartBtn">Bắt đầu buổi ôn</button></section>';
+    html += '<section class="card next-card" id="tpReviewStartCard"><p class="eyebrow">BUỔI ÔN HÔM NAY</p><h3>Ôn ' + dueN + ' mục đến hạn (' + dueH.length + ' câu lỗi sai + ' + dueC.length + ' thẻ' + (pdTp.length ? ' + ' + pdTp.length + ' phát âm' : '') + ')</h3><button class="btn btn-primary" id="tpReviewStartBtn">Bắt đầu buổi ôn</button></section>';
     html += '<section class="card" id="reviewMix"><h3>Hàng đợi ôn trộn — 80% mục cũ + 20% mục mới</h3><p>Hôm nay: <b>' + dueN + ' mục cũ đến hạn</b> + <b>' + freshShown + ' mục mới</b> (nhãn "Mới").</p>' + (freshShown ? '<p class="mut">' + freshShown + ' thẻ mới làm quen (không hiện tên trước để khỏi lộ đáp án khi vào buổi ôn).</p>' : '<p class="mut">Không còn mục mới chưa học trong kho từ vựng.</p>') + '</section>';
   }
   if (dueH.length) {
@@ -24053,6 +24261,7 @@ function viewReviewTp(app) {
     });
     html += '</section>';
   }
+  html += pronSrsReviewHTML("tp");
   html += '<section class="card"><h3>Đánh giá quá trình</h3>';
   if (state.tpMockTests.length > 0) {
     html += '<h4>Lịch sử thi thử TOPIK</h4>';
@@ -24065,7 +24274,7 @@ function viewReviewTp(app) {
     html += '<p class="mut">Chưa có mốc thi thử nào — thi thử TOPIK ở Bản đồ, mốc sẽ hiện ở đây.</p>';
   }
   html += '</section>';
-  if (!dueH.length && !undueH.length && !dueC.length) {
+  if (!dueH.length && !undueH.length && !dueC.length && !pdTp.length) {
     html += '<section class="card"><h3>Không còn lỗi sai TOPIK 🎉</h3><p class="mut">Các câu bạn làm sai trong track TOPIK sẽ hiện ở đây để ôn lại đúng bước đó, cho tới khi bạn trả lời đúng trong buổi ôn.</p></section>';
   } else if (dueN === 0) {
     html += '<section class="card"><div class="hero-pair">' + heroMascot("snake") + '<div class="hero-text"><p>Hôm nay không có mục nào đến hạn ôn. Tốt lắm! Cứ học tiếp, mục khó sẽ tự về đây đúng ngày.</p></div></div><div class="row"><button class="btn btn-primary" id="tpReviewNextBtn">Học tiếp bước kế tiếp</button></div></section>';
@@ -24079,6 +24288,7 @@ function viewReviewTp(app) {
      (giong ban Anh: chi doi ngay). */
   app.querySelectorAll("[data-tpdone]").forEach(function (b) { b.onclick = function () { var h = state.tpHard[+b.dataset.tpdone]; if (!h) return; h.due = addDaysStr(todayStr(), RB_INTERVALS[Math.min(h.level || 0, RB_INTERVALS.length - 1)]); saveState(); viewReviewTp(app); wireTp(app); }; });
   app.querySelectorAll("[data-tpretry]").forEach(function (b) { b.onclick = function () { var sid = b.dataset.tpretry; if (sid.indexOf("game:") === 0) { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: sid.slice(5) }); return; } tpOpenStep(sid, "review"); }; });
+  pronSrsWireReview();
   app.querySelectorAll("[data-tpcard-review]").forEach(function (b) { b.onclick = function () { var parts = (b.dataset.tpcardReview || "").split(":"); var stepId = parts[0], ci = +parts[1]; tpOpenStep(stepId, "review"); if (window.__tpShow && !isNaN(ci)) window.__tpShow(ci); }; });
 }
 
