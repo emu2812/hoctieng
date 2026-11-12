@@ -7869,6 +7869,7 @@ function renderSylDetail(app, l) {
   h += '<div class="row"><button class="btn" id="phMirrorOpen">👁 Soi gương quỹ đạo (tùy chọn)</button></div>' + phMirrorBoxHTML()
     + '<p class="mut">Gương chỉ để nhìn miệng mình lúc đọc — không chấm điểm, không bắt mic + camera cùng lúc.</p></div>';
   /* --- 4. Doc lai — cham lai tang 1 --- */
+  var sp3 = l.sylP3 || (l.sylP3 = p3New());
   var noMic = (!mrSupported() || mrNoMic());
   h += '<div class="qblock"><h3>4 · Đọc lại — chấm lại</h3>';
   if (noMic) {
@@ -7876,9 +7877,11 @@ function renderSylDetail(app, l) {
       + '<div id="sylWave">' + sylWavePairSVG(modelPeaks, null) + '</div>'
       + '<div class="row"><button class="btn btn-primary" id="sylNoMicNext">Tiếp tục →</button></div>';
   } else {
-    h += '<p class="mut">Đọc to từ này — máy nghe ra đúng từ là được. Không khóa, đọc lại bao nhiêu lần cũng được. Đọc đúng nghe chuông, đọc sai nghe tiếng báo sai.</p>'
-      + '<div class="row"><button class="btn btn-primary" id="sylRec">🎤 Đọc to</button></div>'
-      + '<div id="sylRecRes">' + (l.sylRead ? pronTier1VerdictHTML(!!l.sylRead.ok, l.sylRead.heard) + (l.sylRead.ok ? '<p>🔔 Đúng rồi — chuông báo đúng.</p>' : '<p>🔕 Chưa đúng — tiếng báo sai, đọc lại chậm hơn.</p>') : '') + '</div>'
+    h += '<p class="mut">Đọc to từ này — mỗi lần tập 3 lượt: nói tự nhiên → chỉ sửa 1 lỗi → đọc lại cả từ ở tốc độ bình thường. Máy nghe ra đúng từ là được. Không khóa, đọc lại bao nhiêu lần cũng được. Đọc đúng nghe chuông, đọc sai nghe tiếng báo sai.</p>'
+      + p3BannerHTML(sp3, true)
+      + (sp3.pass === 2 && sp3.err ? p3GuideHTML(track, sp3.err.word, sp3.err.heard) : '')
+      + '<div class="row"><button class="btn btn-primary" id="sylRec">' + esc(p3SpeakLabel(sp3, true)) + '</button></div>'
+      + '<div id="sylRecRes">' + (l.sylRead ? pronTier1VerdictHTML(!!l.sylRead.ok, l.sylRead.heard) + (l.sylRead.ok ? '<p>🔔 Đúng rồi — chuông báo đúng.</p>' : '<p>🔕 Chưa đúng — tiếng báo sai, đọc lại chậm hơn.</p>') : '') + (sp3.msg ? '<p><b>' + esc(sp3.msg) + '</b></p>' : '') + '</div>'
       + '<div id="sylWave">' + sylWavePairSVG(modelPeaks, (l.sylWave && l.sylWave.peaks && l.sylWave.peaks.length) ? l.sylWave.peaks : null) + (l.sylWave && l.sylWave.url ? '<audio controls src="' + esc(l.sylWave.url) + '"></audio>' : "") + '</div>'
       + (l.sylRead && !l.sylWave ? '<p class="mut">Chưa vẽ được dạng sóng bản ghi (máy này không ghi song song được) — vẫn chấm bằng giọng nói.</p>' : '')
       + '<p class="mut" id="sylRecErr">' + esc(l.sylErr || "") + '</p>'
@@ -7918,9 +7921,17 @@ function renderSylDetail(app, l) {
     pronTier1Start(track, function (heard) {
       if (stopWave) stopWave();
       l.sylRecBusy = false;
-      var sc = pronTier1Score(heard, word, track);
+      /* v163 P1: cham theo muc tieu luot hien tai (p3Target) — luot 2 chi doc
+         1 loi (1 chu Han / 1 am tiet yeu) nen chi cham loi do; luu wordPron
+         chi khi muc tieu luot nay == ca tu. */
+      var sp3 = l.sylP3 || (l.sylP3 = p3New());
+      var tgt = p3Target(sp3, word);
+      var sc = pronTier1Score(heard, tgt, track);
+      var res = p3AfterRead(sp3, sc === 100, heard, word, track, true);
+      if (res === "retry") { l.sylErr = sp3.msg; render(); return; }
       l.sylRead = { heard: heard, sc: sc, ok: sc === 100 };
       try {
+        if (tgt === word) {
         if (!state.wordPron) state.wordPron = {};
         var s2 = sym;
         if (!s2) {
@@ -7930,6 +7941,7 @@ function renderSylDetail(app, l) {
         }
         state.wordPron[track + ":syl:" + word] = { ai: sc, sym: s2, word: word, date: todayStr() };
         saveState();
+        }
       } catch (e) {}
       sylBeep(sc === 100);
       render();
@@ -7950,6 +7962,7 @@ function renderSylDetail(app, l) {
   var sc2 = $("#sylTpSc2"); if (sc2) sc2.onclick = function () { speakFn("업무"); };
   var sc3 = $("#sylTpSc3"); if (sc3) sc3.onclick = function () { speakFn("학교"); };
   var wg = $("#sylWeakGo"); if (wg) wg.onclick = function () { if (track === "en") go("practice"); else pronWeakGo(track); };
+  var spe = $("#p3ErrHear"); if (spe) spe.onclick = function () { var p3x = l.sylP3; speakFn(p3x && p3x.err ? p3x.err.word : word); };
 }
 /* v93: dong "Phát âm lần gần nhất" tren mat the — chi hien khi da do duoc
    (EN: state.wordPron luu tu vocabKnownGrade; ZH: ZH_PRON cua phien nay);
@@ -9356,30 +9369,33 @@ function pronTopicModelPeaks(sent) {
 }
 function pronTopicSpeakInit(l) {
   l.ptStage = "intro"; l.ptIdx = 0; l.ptTries = []; l.ptFirst = 0; l.ptRepeats = 0; l.ptSkipped = 0;
-  l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptLastOk = false; l.ptBusy = false;
+  l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptLastOk = false; l.ptBusy = false; l.ptP3 = p3New(); l.ptSent = "";
   l.ptPeaks = null; l.ptUrl = ""; l.ptDiscOk = false; l.ptDiscTried = false;
   l.ptFreeDone = false; l.ptFreeSkipped = false; l.ptFreeRec = false; l.ptFreePeaks = null; l.ptFreeUrl = "";
   l.ptStopWave = null; l.ptFreeStop = null; l.ptWaveToken = 0; l.ptFreeToken = 0; l.ptWorst = -1; l.ptWorstTries = 1;
   if (MR_HAS_AUDIO === null) mrCheckDevices(function () { if (curLesson === l) render(); });
 }
 function pronTopicSpeakMark(l, ok, heard, typed) {
+  /* v163 P1: moi cau mau tap 3 luot (p3) — luot 1 baseline, luot 2 chi sua 1
+     loi (tu nghe sai dau tien), luot 3 doc lai ca cau o toc do binh thuong.
+     Chi luot 1/3 tinh vao "dung ngay lan dau" va so lan lap cau. */
+  var p = l.ptP3 || (l.ptP3 = p3New());
   var i = l.ptIdx;
-  l.ptTries[i] = (l.ptTries[i] || 0) + 1;
+  var wasPass = p.pass;
+  var res = p3AfterRead(p, ok, heard || typed, l.ptSent || "", "en", false);
+  if (res === "retry") { l.ptMsg = p.msg; l.ptBusy = false; saveState(); render(); return; }
   l.ptHeard = heard || ""; l.ptTyped = typed || ""; l.ptBusy = false;
-  if (ok) {
-    if (l.ptTries[i] === 1) l.ptFirst++;
-    l.ptMsg = "✓ Đúng! Máy nghe ra đúng câu này.";
-    l.ptLastOk = true; awardXp(5);
-  } else {
-    l.ptRepeats++;
-    l.ptMsg = "✗ Máy chưa nghe ra đúng câu này — nghe lại mẫu rồi đọc lại đúng câu này nhé.";
-    l.ptLastOk = false;
-  }
+  if (wasPass === 1 || wasPass === 3) l.ptTries[i] = (l.ptTries[i] || 0) + 1;
+  if (wasPass === 1 && ok && l.ptTries[i] === 1) l.ptFirst++;
+  if (!ok) l.ptRepeats++;
+  if (ok && (wasPass === 1 || wasPass === 3)) awardXp(5);
+  l.ptMsg = (wasPass === 2 ? p.msg : (ok ? "✓ Đúng! Máy nghe ra đúng câu này. " : "✗ Máy chưa nghe ra đúng câu này. ") + p.msg);
+  l.ptLastOk = ok; /* verdict hien ket qua luot doc vua roi; nut Cau tiep theo chi mo khi p.done */
   saveState(); render();
 }
 function pronTopicSpeakNext(l) {
   l.ptWaveToken = (l.ptWaveToken || 0) + 1;
-  l.ptIdx++; l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptLastOk = false; l.ptPeaks = null; l.ptUrl = "";
+  l.ptIdx++; l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptLastOk = false; l.ptPeaks = null; l.ptUrl = ""; l.ptP3 = p3New();
   if (l.ptIdx >= 3) l.ptStage = "free";
   saveState(); render();
 }
@@ -9413,7 +9429,7 @@ function renderPronTopicSpeak(app, l, t) {
     h = skillHead(t.title, "Nói-chấm · " + l.band) + phaseBarHTML(2) + '<div class="qblock">'
       + '<p><b>Vòng nói-chấm của chủ đề này:</b></p>'
       + '<p>1 · <b>Nghe phân biệt</b> — nghe câu mẫu, trả lời 1 câu hỏi về trọng âm/ngữ điệu.</p>'
-      + '<p>2 · <b>Đọc to 3 câu mẫu</b> — máy chỉ kiểm tra có nghe ra đúng câu không (chấm tầng 1); đọc xong nghe lại giọng mình + xem dạng sóng để tự đối chiếu trọng âm/ngữ điệu.</p>'
+      + '<p>2 · <b>Đọc to 3 câu mẫu</b> — mỗi câu 3 lượt: nói tự nhiên → chỉ sửa 1 lỗi → nói lại cả câu ở tốc độ bình thường; máy chỉ kiểm tra có nghe ra đúng câu không (chấm tầng 1); đọc xong nghe lại giọng mình + xem dạng sóng để tự đối chiếu trọng âm/ngữ điệu.</p>'
       + '<p>3 · <b>Nói tự do 1–2 câu</b> theo chủ đề — nói ở tốc độ bình thường như đang nói chuyện thật, đừng nói chậm từng từ để lấy điểm.</p>'
       + '<p class="mut">Trọng âm/ngữ điệu không có điểm máy — không có con số nào ở đây là điểm từng âm.</p>'
       + '<div class="row"><button class="btn btn-primary" id="ptStart">Bắt đầu nghe phân biệt →</button><button class="btn" id="ptSkipSpeak">Bỏ qua vòng nói-chấm →</button></div></div>';
@@ -9448,18 +9464,22 @@ function renderPronTopicSpeak(app, l, t) {
   }
   if (l.ptStage === "sent") {
     sent = t.examples[l.ptIdx];
+    l.ptSent = sent;
+    var p3 = l.ptP3 || (l.ptP3 = p3New());
     h = skillHead(t.title, "Nói-chấm · Câu " + (l.ptIdx + 1) + "/3 · " + l.band) + phaseBarHTML(2) + '<div class="qblock">'
       + '<p><b>1 · Nghe phân biệt:</b> ' + esc(t.focus) + '</p>'
       + '<p style="font-size:22px"><b>' + esc(sent) + '</b></p>'
       + '<div class="row"><button class="btn" id="ptPlay">🔊 Nghe mẫu</button><button class="btn" id="ptSlow">🐌 Nghe chậm 0,5x</button></div>'
-      + '<p><b>2 · Đọc to:</b> nói ở tốc độ bình thường như đang nói chuyện thật — đừng nói chậm từng từ để lấy điểm.</p>';
+      + '<p><b>2 · Đọc to:</b> mỗi câu tập 3 lượt — nói tự nhiên, chỉ sửa 1 lỗi, rồi nói lại cả câu ở tốc độ bình thường.</p>'
+      + p3BannerHTML(p3, false)
+      + (p3.pass === 2 && p3.err ? p3GuideHTML("en", p3.err.word, p3.err.heard) : '');
     if (!l.ptMsg) {
       if (mode === "speak") {
-        h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="ptSpeak" data-pronmic="1">🎤 Đọc to</button><button class="btn" id="ptSkip">Câu tiếp theo →</button></div>'
+        h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="ptSpeak" data-pronmic="1">' + esc(p3SpeakLabel(p3, false)) + '</button><button class="btn" id="ptSkip">Câu tiếp theo →</button></div>'
           + '<p class="mut">Máy chỉ kiểm tra có nghe ra đúng câu không (chấm tầng 1) — trọng âm/ngữ điệu thì tự đối chiếu ở dưới sau khi đọc.</p>';
       } else {
         h += '<p class="mut">Máy này không có mic / chưa cấp quyền mic nên chuyển sang chế độ nghe + gõ lại.</p>'
-          + '<div class="row" style="margin-top:8px"><input id="ptType" placeholder="Nghe rồi gõ lại đúng câu trên…" style="flex:1;min-width:200px"><button class="btn btn-primary" id="ptCheck">Kiểm tra</button><button class="btn" id="ptSkip">Câu tiếp theo →</button></div>';
+          + '<div class="row" style="margin-top:8px"><input id="ptType" placeholder="' + esc(p3TypeHint(p3, false)) + '" style="flex:1;min-width:200px"><button class="btn btn-primary" id="ptCheck">Kiểm tra</button><button class="btn" id="ptSkip">Câu tiếp theo →</button></div>';
       }
     }
     if (l.ptMsg) {
@@ -9467,7 +9487,7 @@ function renderPronTopicSpeak(app, l, t) {
         + pronTier1VerdictHTML(l.ptLastOk, l.ptHeard)
         + (l.ptTyped ? '<p class="mut">Bạn gõ: “' + esc(l.ptTyped) + '”</p>' : '')
         + pronTopicSelfCompareHTML(l, sent)
-        + '<div class="row">' + (l.ptLastOk ? '' : '<button class="btn" id="ptRetry">🔁 ' + (mode === "speak" ? "Đọc lại" : "Gõ lại") + '</button>') + '<button class="btn btn-primary" id="ptNext">Câu tiếp theo →</button></div>';
+        + '<div class="row">' + (!p3.done ? '<button class="btn btn-primary" id="ptContinue">' + esc(mode === "speak" ? p3SpeakLabel(p3, false) : p3TypeHint(p3, false)) + '</button><button class="btn" id="ptRetry">🔁 ' + (mode === "speak" ? "Đọc lại từ lượt 1" : "Gõ lại từ lượt 1") + '</button>' : '') + (p3.done ? '<button class="btn btn-primary" id="ptNext">Câu tiếp theo →</button>' : '<button class="btn" id="ptSkip">Bỏ qua câu này →</button>') + '</div>';
     }
     h += '</div>';
     app.innerHTML = h;
@@ -9488,14 +9508,16 @@ function renderPronTopicSpeak(app, l, t) {
         if (au && url) au.innerHTML = '<p><b>🎙 Nghe lại giọng mình:</b></p><audio controls src="' + esc(url) + '"></audio>';
         saveState();
       });
-      drillSrCheck({ track: "en" }, sent, function (tx) { if (l.ptStopWave) l.ptStopWave(); pronTopicSpeakMark(l, true, tx, ""); }, function (tx) { if (l.ptStopWave) l.ptStopWave(); pronTopicSpeakMark(l, false, tx, ""); });
+      drillSrCheck({ track: "en" }, p3Target(l.ptP3, sent), function (tx) { if (l.ptStopWave) l.ptStopWave(); pronTopicSpeakMark(l, true, tx, ""); }, function (tx) { if (l.ptStopWave) l.ptStopWave(); pronTopicSpeakMark(l, false, tx, ""); });
     };
+    var pe = $("#p3ErrHear");
+    if (pe) pe.onclick = function () { speak(l.ptP3.err.word, 0.85); };
     var ck = $("#ptCheck");
     if (ck) {
       var doCheck = function () {
         var inp = $("#ptType"); if (!inp) return;
         var v = inp.value || "";
-        if (gameNormSent(v) === gameNormSent(sent)) pronTopicSpeakMark(l, true, "", v); else pronTopicSpeakMark(l, false, "", v);
+        if (gameNormSent(v) === gameNormSent(p3Target(l.ptP3, sent))) pronTopicSpeakMark(l, true, "", v); else pronTopicSpeakMark(l, false, "", v);
       };
       ck.onclick = doCheck;
       var inp2 = $("#ptType");
@@ -9503,8 +9525,10 @@ function renderPronTopicSpeak(app, l, t) {
     }
     var sk = $("#ptSkip");
     if (sk) sk.onclick = function () { l.ptSkipped++; pronTopicSpeakNext(l); };
+    var ct = $("#ptContinue");
+    if (ct) ct.onclick = function () { l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; saveState(); render(); };
     var rt = $("#ptRetry");
-    if (rt) rt.onclick = function () { l.ptWaveToken = (l.ptWaveToken || 0) + 1; l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptPeaks = null; l.ptUrl = ""; saveState(); render(); };
+    if (rt) rt.onclick = function () { l.ptWaveToken = (l.ptWaveToken || 0) + 1; l.ptMsg = ""; l.ptHeard = ""; l.ptTyped = ""; l.ptPeaks = null; l.ptUrl = ""; l.ptP3 = p3New(); saveState(); render(); };
     var nx = $("#ptNext");
     if (nx) nx.onclick = function () { pronTopicSpeakNext(l); };
     return;
@@ -10119,7 +10143,7 @@ function vkScrollCardTop() {
   } catch (e) {}
 }
 function vkMultiState(l, key) {
-  if (!l.vk || l.vk.key !== key) l.vk = { key: key, step: 0, flipped: false, typeDone: false, typeDraft: "", typeWhy: "", choiceDone: 0, choiceWhy: "", choiceAnswered: false, pronDone: false, pronRecorded: false, pronAttempted: false, pronWhy: "", recorded: {}, peeked: false, peekShow: false, heard: false, pronScore: null, pronMirror: null, pronResultHTML: "" };
+  if (!l.vk || l.vk.key !== key) l.vk = { key: key, step: 0, flipped: false, typeDone: false, typeDraft: "", typeWhy: "", choiceDone: 0, choiceWhy: "", choiceAnswered: false, pronDone: false, pronRecorded: false, pronAttempted: false, pronWhy: "", recorded: {}, peeked: false, peekShow: false, heard: false, pronScore: null, pronMirror: null, pronResultHTML: "", p3: null };
   return l.vk;
 }
 /* v108c: muc dich ghi nho cua tung buoc — hien ngay duoi ten buoc (Bui 15:03
@@ -10343,11 +10367,15 @@ function vkEnPanelHTML(vk, c, cards, pos) {
        cho loi). Khoi T1 an khi khong mic (nhu v124). */
     var enNoMic = !mrSupported() || mrNoMic();
     var enAttempted = vk.pronDone || vk.pronAttempted;
+    var enP3 = vk.p3 || (vk.p3 = p3New());
+    /* v124b (giu nguyen): "Doc to" chi la nut chinh khi chua thu lan nao;
+       da thu (du dung/sai) thi "Tiep tuc" la nut chinh — p3 chi doi NHAN
+       nut doc (theo luot) + them banner/hop loi, khong doi thu tu nut chinh. */
     if (vk.pronDone) h += '<p>Đã đọc ✓</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
     else if (vk.pronAttempted) h += '<p class="mut">' + (vk.t1 ? esc(vk.t1) : 'Chưa ghi được điểm lần này') + ' — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
     else if (enNoMic) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><button class="btn btn-primary" id="vocabPronNext">Tiếp tục →</button>';
     if (!enNoMic) {
-      h += '<div class="qblock"><p><b>Đọc to</b> <span class="mut">(chỉ cần mic, không cần camera)</span></p><div class="row"><button class="btn" id="enT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!enAttempted ? ' btn-primary' : '') + '" id="enT1Rec">🎤 Đọc to</button></div><p class="mut" id="enT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
+      h += '<div class="qblock"><p><b>Đọc to</b> <span class="mut">(chỉ cần mic, không cần camera)</span></p>' + p3BannerHTML(enP3, true) + (enP3.pass === 2 && enP3.err ? p3GuideHTML("en", enP3.err.word, enP3.err.heard) : '') + '<div class="row"><button class="btn" id="enT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!enAttempted ? ' btn-primary' : '') + '" id="enT1Rec">' + esc(p3SpeakLabel(enP3, true)) + '</button></div><p class="mut" id="enT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
     }
     if (mrNoCamera() && !enNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
     var sym4 = c.ipa ? firstSymFromIpa(c.ipa) : "";
@@ -10406,6 +10434,7 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
        quy dao (may khong camera thi nut nay la duong cut). */
     var zhNoMic = !mrSupported() || mrNoMic();
     var zhAttempted = vk.pronRecorded || vk.pronDone || vk.pronAttempted || !!zp;
+    var zhP3 = vk.p3 || (vk.p3 = p3New());
     var zhKey = d ? (d.key + ":" + pos) : "";
     var zhHasTraj = zhKey !== "" && (typeof MR !== "undefined" && MR.lastTraj && MR.lastTraj.n >= 6 && MR.zhKey === zhKey);
     if (zhAttempted) h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhPronNext">Tiếp tục →</button></div>';
@@ -10417,10 +10446,11 @@ function vkZhPanelHTML(vk, c, cards, pos, d) {
     /* v123: tang 1 (chi mic, khach cung duoc) + cham thanh dieu YIN (tang 3) + link bai am — song song voi AI soi guong, khong thay the. */
     var zt1 = vk.t1 || {};
     if (!zhNoMic) {
-      h += '<div class="qblock" id="zhT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="zhT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!zhAttempted ? ' btn-primary' : '') + '" id="zhT1Rec">🎤 Đọc to</button></div>'; /* v124b: Doc to la nut chinh duy nhat khi chua thu lan nao (nhu EN/TC/TP) */
+      h += '<div class="qblock" id="zhT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p>' + p3BannerHTML(zhP3, true) + (zhP3.pass === 2 && zhP3.err ? p3GuideHTML("zh", zhP3.err.word, zhP3.err.heard) : '') + '<div class="row"><button class="btn" id="zhT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!zhAttempted ? ' btn-primary' : '') + '" id="zhT1Rec">' + esc(p3SpeakLabel(zhP3, true)) + '</button></div>'; /* v124b: Doc to la nut chinh duy nhat khi chua thu lan nao (nhu EN/TC/TP) */
       if (zt1.ok) h += '<p class="ok" style="font-size:18px">✓ Nghe ra đúng — ' + esc(zt1.heard || "") + '</p>';
       else if (zt1.tried && zt1.err) h += '<p class="mut">' + esc(zt1.err) + '</p>';
       else if (zt1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(zt1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
+      if (zt1.p3msg) h += '<p class="mut">' + esc(zt1.p3msg) + '</p>';
       h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
     }
     var ztP = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || "");
@@ -11086,14 +11116,27 @@ function renderVocab(app, l) {
      pronAttempted + luu {ai:0}. Loi mic thi pronAttempted + hien ly do. */
   var enT1H = $("#enT1Hear"); if (enT1H) enT1H.onclick = function () { speak(c.w); };
   var enT1R = $("#enT1Rec"); if (enT1R) enT1R.onclick = function () {
+    /* v163 P1: buoc 4 doc to theo phien 3 luot (p3) — luot 1 baseline, luot 2
+       chi sua 1 loi (am tiet yeu nhat trong tu), luot 3 doc lai ca tu o toc
+       do binh thuong. pronDone van mo khi luot 1 dung (giu hanh vi cu) nhung
+       nut Tiep tuc chi la nut chinh khi xong luot 3. */
+    var p3 = vk.p3 || (vk.p3 = p3New());
     pronTier1Start("en", function (heard) {
-      var sc = pronTier1Score(heard, c.w, "en");
-      if (sc === 100) { vk.pronDone = true; vk.pronAttempted = false; vk.t1 = "✓ Máy nghe ra đúng từ “" + c.w + "”. "; }
-      else { vk.pronDone = false; vk.pronAttempted = true; vk.t1 = "✗ Máy chưa nghe ra từ “" + c.w + "”" + (heard ? " — nghe được: “" + heard + "”" : "") + ". Nghe mẫu rồi đọc to lại. "; }
-      try { if (!state.wordPron) state.wordPron = {}; state.wordPron["s" + l.setIdx + ":" + pos] = { ai: sc === 100 ? 100 : 0, sym: c.ipa ? firstSymFromIpa(c.ipa) : "", word: c.w, date: todayStr() }; saveState(); } catch (e) {}
+      /* v163: cham theo muc tieu cua luot hien tai (p3Target) — luot 2 chi
+         doc tu loi; tu don thi tu loi CHINH LA ca tu nen luot 2 van la lan
+         cham day du: luu wordPron khi muc tieu luot nay == ca tu. */
+      var tgt = p3Target(p3, c.w);
+      var sc = pronTier1Score(heard, tgt, "en");
+      var res = p3AfterRead(p3, sc === 100, heard, c.w, "en", true);
+      if (res === "retry") { vk.t1 = p3.msg; render(); return; }
+      if (sc === 100) { vk.pronDone = true; vk.pronAttempted = false; }
+      else { vk.pronDone = false; vk.pronAttempted = true; }
+      vk.t1 = (sc === 100 ? "✓ Máy nghe ra đúng từ “" + c.w + "”. " : "✗ Máy chưa nghe ra từ “" + c.w + "”" + (heard ? " — nghe được: “" + heard + "”" : "") + ". ") + p3.msg;
+      try { if (tgt === c.w) { if (!state.wordPron) state.wordPron = {}; state.wordPron["s" + l.setIdx + ":" + pos] = { ai: sc === 100 ? 100 : 0, sym: c.ipa ? firstSymFromIpa(c.ipa) : "", word: c.w, date: todayStr() }; saveState(); } } catch (e) {}
       render();
     }, function (kind) { vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; render(); });
   };
+  var enPe = $("#p3ErrHear"); if (enPe) enPe.onclick = function () { speak(c.w); };
   var vpl = $("#vocabPhLink"); if (vpl) vpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4]) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); };
   /* DOT UI-FIX 31/10: xem truoc thi an nut Phat am cham diem (phan cham diem khoa). */
   if (l.preview) { var bp = $("#btnPronounce"); if (bp) bp.style.display = "none"; wirePreviewLock(); }
@@ -17347,24 +17390,116 @@ function drillSrCheck(l, sent, ok, bad) {
   rec.onerror = function () { bad(""); };
   try { rec.start(); } catch (e) { bad(""); }
 }
+/* ---------- v163 P1 — PHIÊN 3 LƯỢT (AnyGen, ELSA_NGHIEN_CUU_TRIET_DE §1.3/P1) ----------
+   Lượt 1: nói tự nhiên lấy baseline (chấm tầng 1 SR nhị phân).
+   Lượt 2: CHỈ sửa 1 lỗi quan sát được — từ nghe sai đầu tiên (câu) hoặc âm
+   tiết yếu nhất (từ đơn) + hướng dẫn sửa đúng lỗi đó, tập lại chỉ lỗi đó.
+   Lượt 3: nói lại CẢ CÂU ở tốc độ bình thường (chống bẫy "săn điểm" nói chậm
+   bất tự nhiên để được điểm cao).
+   Lượt 1 nghe ra hết → ghi rõ "không thấy lỗi nào" rồi đi thẳng lượt 3,
+   KHÔNG bịa ra một lỗi. Không mic → nghe + gõ lại (luật thoát mic v112):
+   lượt 1/3 gõ lại cả câu, lượt 2 gõ lại đúng từ lỗi. Cơ chế chấm duy nhất
+   vẫn là tầng 1 SR nhị phân; tuyệt đối không bịa điểm % từng âm.
+   Dùng chung cho bước 4 thẻ từ, màn chi tiết âm tiết, Drill, vòng nói-chấm
+   siêu âm đoạn. */
+function p3New() { return { pass: 1, err: null, heard: "", typed: "", noErr: false, done: false, msg: "" }; }
+function p3Tokens(s, track) {
+  var t = gameNormSent(s || "");
+  if (track === "zh") return t.replace(/\s+/g, "").split("");
+  return t ? t.split(" ") : [];
+}
+function p3FirstErr(expected, heard, track) {
+  var eN = p3Tokens(expected, track), hN = p3Tokens(heard, track);
+  if (!hN.length) return { empty: true };
+  var eO = String(expected || "").split(/\s+/).filter(function (x) { return !!x; });
+  for (var i = 0; i < eN.length; i++) {
+    if (hN[i] !== eN[i]) {
+      var w = track === "zh" ? eN[i] : (eO[i] || eN[i]).replace(/[.!?,;:'"]+$/g, "");
+      return { word: w, idx: i, heard: hN[i] || "" };
+    }
+  }
+  return null;
+}
+function p3ReadOf(track, word) {
+  try {
+    if (track === "zh") { var z = sylFindZh(word); return z ? (z.py || "") : ""; }
+    return sylFindRead(track, word) || "";
+  } catch (e) { return ""; }
+}
+function p3GuideHTML(track, errWord, errHeard) {
+  var read = p3ReadOf(track, errWord);
+  var guess = "";
+  try { guess = sylGuessWeak(errWord, errHeard || "", track); } catch (e) {}
+  var h = '<div class="why show" id="p3ErrBox"><p><b>Lỗi duy nhất lần này: “' + esc(errWord) + '”</b>' + (read ? ' <span class="mut">(' + esc(read) + ')</span>' : '') + '</p>';
+  if (guess) h += '<p>' + esc(guess) + '</p>';
+  h += '<p class="mut">Chỉ sửa lỗi này thôi — các từ khác máy đã nghe ra đúng rồi.</p>'
+    + '<div class="row"><button class="btn" id="p3ErrHear">🔊 Nghe mẫu từ này</button></div></div>';
+  return h;
+}
+function p3BannerHTML(p, isWord) {
+  var h = '<p class="mut" id="p3Pass">Lượt ' + p.pass + '/3 · ' + (p.pass === 1 ? 'Nói tự nhiên — lấy điểm ban đầu.' : p.pass === 2 ? 'Chỉ sửa 1 lỗi — tập lại đúng lỗi này thôi.' : 'Nói lại ' + (isWord ? 'cả từ' : 'cả câu') + ' ở tốc độ bình thường — đừng nói chậm từng từ để lấy điểm.') + '</p>';
+  if (p.pass === 3 && p.noErr) h += '<p class="mut">Lượt 1 máy nghe ra hết — không thấy lỗi nào, đi thẳng lượt 3.</p>';
+  return h;
+}
+function p3SpeakLabel(p, isWord) {
+  if (p.pass === 2) return "🎤 Đọc lại từ “" + p.err.word + "”";
+  if (p.pass === 3) return "🎤 Đọc lại " + (isWord ? "cả từ" : "cả câu") + " (tốc độ bình thường)";
+  return "🎤 Đọc to";
+}
+function p3TypeHint(p, isWord) {
+  if (p.pass === 2) return "Gõ lại đúng từ “" + p.err.word + "”";
+  if (p.pass === 3) return "Gõ lại " + (isWord ? "cả từ" : "cả câu") + " ở tốc độ bình thường";
+  return "Nghe rồi gõ lại đúng câu trên…";
+}
+function p3Target(p, expected) { return (p.pass === 2 && p.err && !p.err.empty) ? p.err.word : expected; }
+function p3AfterRead(p, ok, heard, expected, track, isWord) {
+  var h = heard || "";
+  if (!gameNormSent(h)) { p.msg = "Máy chưa nghe được gì — đọc lại nhé."; return "retry"; }
+  p.heard = h;
+  if (p.pass === 1) {
+    if (ok) { p.pass = 3; p.noErr = true; p.msg = "✓ Đúng! Không thấy lỗi nào — lượt 3: đọc lại " + (isWord ? "cả từ" : "cả câu") + " ở tốc độ bình thường."; return "pass3"; }
+    var e = p3FirstErr(expected, h, track);
+    p.err = (e && !e.empty) ? e : { word: (p3Tokens(expected, track)[0] || expected), idx: 0, heard: "" };
+    p.pass = 2; p.msg = "✗ Máy chưa nghe ra đúng" + (isWord ? " từ này." : " câu này.") + " Lượt 2 chỉ sửa 1 lỗi: “" + p.err.word + "”.";
+    return "pass2";
+  }
+  if (p.pass === 2) {
+    if (ok) { p.pass = 3; p.msg = "✓ Đúng từ “" + p.err.word + "” rồi — lượt 3: đọc lại " + (isWord ? "cả từ" : "cả câu") + " ở tốc độ bình thường."; return "pass3"; }
+    p.msg = "✗ Chưa đúng từ “" + p.err.word + "” — nghe mẫu rồi đọc lại đúng từ này.";
+    return "stay2";
+  }
+  if (ok) { p.done = true; p.msg = "✓ Đúng! Đọc lại đúng ở tốc độ bình thường."; return "done"; }
+  p.msg = "✗ Chưa đúng — đọc lại " + (isWord ? "cả từ" : "cả câu") + " ở tốc độ bình thường.";
+  return "stay3";
+}
 function drillMark(l, ok, heard, typed) {
+  /* v163 P1: moi cau tap 3 luot (p3) — luot 1 baseline, luot 2 chi sua 1 loi
+     (tu nghe sai dau tien), luot 3 doc lai ca cau o toc do binh thuong. Chi
+     luot 1/3 tinh vao "dung ngay lan dau" va so lan lap cau; luot 2 chi tap
+     tu loi, khong tinh vao so lan lap cau. */
+  var p = l.drillP3 || (l.drillP3 = p3New());
   var i = l.drillIdx;
-  l.drillTries[i] = (l.drillTries[i] || 0) + 1;
+  var cur = l.drillSents[i];
+  if (!cur) return;
+  var wasPass = p.pass;
+  var res = p3AfterRead(p, ok, heard || typed, cur.text, l.track || "en", false);
+  if (res === "retry") { l.drillMsg = p.msg; saveState(); render(); return; }
   l.drillHeard = heard || ""; l.drillTyped = typed || "";
-  if (ok) {
-    if (l.drillTries[i] === 1) l.drillFirst++;
+  if (wasPass === 1 || wasPass === 3) l.drillTries[i] = (l.drillTries[i] || 0) + 1;
+  if (wasPass === 1 && ok && l.drillTries[i] === 1) l.drillFirst++;
+  if (!ok) l.drillRepeats++;
+  l.drillMsg = p.msg;
+  if (p.done) {
     l.drillIdx++;
-    l.drillMsg = "Đúng rồi — sang câu tiếp theo!";
+    l.drillP3 = p3New();
     if (l.drillIdx >= l.drillSents.length) drillFinish(l);
-  } else {
-    l.drillRepeats++;
-    l.drillMsg = "Chưa đúng — nghe lại rồi đọc lại đúng câu này nhé.";
   }
   saveState(); render();
 }
 function drillSkip(l) {
   l.drillSkipped = (l.drillSkipped || 0) + 1;
   l.drillIdx++;
+  l.drillP3 = p3New();
   l.drillMsg = "Đã bỏ qua câu này — sang câu tiếp theo.";
   if (l.drillIdx >= l.drillSents.length) drillFinish(l);
   saveState(); render();
@@ -17684,7 +17819,7 @@ function renderDrill(app, l) {
     l.drillInit = true;
     l.drillSrcKey = drillSrcKey(l);
     l.drillSents = drillSentsFor(l);
-    l.drillIdx = 0; l.drillTries = []; l.drillFirst = 0; l.drillRepeats = 0; l.drillSkipped = 0; l.drillMsg = ""; l.drillHeard = ""; l.drillTyped = "";
+    l.drillIdx = 0; l.drillTries = []; l.drillFirst = 0; l.drillRepeats = 0; l.drillSkipped = 0; l.drillMsg = ""; l.drillHeard = ""; l.drillTyped = ""; l.drillP3 = p3New();
     if (MR_HAS_AUDIO === null) mrCheckDevices(function () { if (curLesson === l) render(); });
   }
   /* Chon nguon cau (mo tu Luyen tap hoac nut Drill chua gan nguon). */
@@ -17695,7 +17830,7 @@ function renderDrill(app, l) {
     app.innerHTML = skillHead("🔁 Drill lặp 1 câu", "Lặp một câu đến khi trôi chảy rồi mới sang câu sau — mỗi lượt 5 câu, lấy từ phụ đề thật hoặc bài đọc tự soạn của web.")
       + '<div class="qblock"><p><b>Chọn video có phụ đề thật:</b></p><div class="row">' + (vh || '<span class="mut">Track này chưa có video đủ 5 câu phụ đề thật.</span>') + '</div>'
       + '<p style="margin-top:10px"><b>Hoặc chọn bài đọc / bài nghe tự soạn:</b></p><div class="row"><select id="drillReadSel">' + rh + '</select><button class="btn btn-primary" id="drillReadGo">Bắt đầu Drill →</button></div>'
-      + '<p class="mut">Nghe câu mẫu rồi đọc to lại — đọc đúng mới qua câu sau, đọc sai thì lặp đúng câu này. Máy không có mic thì chuyển sang nghe + gõ lại.</p></div>';
+      + '<p class="mut">Mỗi câu tập 3 lượt: nói tự nhiên → chỉ sửa 1 lỗi → nói lại cả câu ở tốc độ bình thường. Đọc đúng cả 3 lượt mới qua câu sau, đọc sai thì lặp đúng câu này. Máy không có mic thì chuyển sang nghe + gõ lại.</p></div>';
     wireBack();
     $$("[data-drillvideo]").forEach(function (b) { b.onclick = function () { openLesson({ type: "drill", vkey: b.dataset.drillvideo, track: track }); }; });
     var go = $("#drillReadGo");
@@ -17730,6 +17865,7 @@ function renderDrill(app, l) {
     return;
   }
   var si = Math.min(l.drillIdx, l.drillSents.length - 1), cur = l.drillSents[si], mode = drillMode(l);
+  var p3 = l.drillP3 || (l.drillP3 = p3New());
   var tries = l.drillTries[si] || 0;
   var sub = drillSrcTitle(l) + ' · Câu ' + (si + 1) + '/' + l.drillSents.length + ' · Đúng ngay lần đầu: ' + l.drillFirst + ' · Lặp lại: ' + l.drillRepeats;
   var h = skillHead("🔁 Drill lặp 1 câu", sub)
@@ -17737,13 +17873,15 @@ function renderDrill(app, l) {
     + '<p style="font-size:20px"><b>' + esc(cur.text) + '</b></p>'
     + (cur.py ? '<p class="mut">' + esc(cur.py) + '</p>' : '')
     + (cur.vi ? '<p class="mut">' + esc(cur.vi) + '</p>' : '')
-    + '<div class="row"><button class="btn" id="drPlay">🔊 Nghe câu mẫu</button><button class="btn" id="drSlow">🐌 Nghe chậm 0,5x</button></div>';
+    + '<div class="row"><button class="btn" id="drPlay">🔊 Nghe câu mẫu</button><button class="btn" id="drSlow">🐌 Nghe chậm 0,5x</button></div>'
+    + p3BannerHTML(p3, false)
+    + (p3.pass === 2 && p3.err ? p3GuideHTML(track, p3.err.word, p3.err.heard) : '');
   if (mode === "speak") {
-    h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="drSpeak">🎤 Đọc to câu này</button><button class="btn" id="drSkip">Tiếp tục →</button></div>'
-      + '<p class="mut">Đọc to đúng câu trên — máy chỉ kiểm tra có nghe ra đúng câu không (chấm tầng 1). Đọc sai thì lặp đúng câu này. Nút “Tiếp tục →” bỏ qua câu này để sang câu tiếp theo.</p>';
+    h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="drSpeak">' + esc(p3SpeakLabel(p3, false)) + '</button><button class="btn" id="drSkip">Tiếp tục →</button></div>'
+      + '<p class="mut">Máy chỉ kiểm tra có nghe ra đúng câu không (chấm tầng 1). Mỗi câu tập 3 lượt: nói tự nhiên → chỉ sửa 1 lỗi → nói lại cả câu ở tốc độ bình thường. Nút “Tiếp tục →” bỏ qua câu này để sang câu tiếp theo.</p>';
   } else {
     h += '<p class="mut">Máy này không có mic / chưa cấp quyền mic nên Drill chuyển sang chế độ nghe + gõ lại.</p>'
-      + '<div class="row" style="margin-top:8px"><input id="drType" placeholder="Nghe rồi gõ lại đúng câu trên…" style="flex:1;min-width:200px"><button class="btn btn-primary" id="drCheck">Kiểm tra</button><button class="btn" id="drSkip">Tiếp tục →</button></div>';
+      + '<div class="row" style="margin-top:8px"><input id="drType" placeholder="' + esc(p3TypeHint(p3, false)) + '" style="flex:1;min-width:200px"><button class="btn btn-primary" id="drCheck">Kiểm tra</button><button class="btn" id="drSkip">Tiếp tục →</button></div>';
   }
   if (l.drillMsg) h += '<p><b>' + esc(l.drillMsg) + '</b></p>';
   if (l.drillHeard) h += '<p class="mut">Máy nghe được: “' + esc(l.drillHeard) + '”</p>';
@@ -17756,14 +17894,17 @@ function renderDrill(app, l) {
   var sp = $("#drSpeak");
   if (sp) sp.onclick = function () {
     sp.disabled = true; sp.textContent = "🎙 Đang nghe…";
-    drillSrCheck(l, cur.text, function (tx) { drillMark(l, true, tx, ""); }, function (tx) { drillMark(l, false, tx, ""); });
+    var tgt = p3Target(l.drillP3, cur.text);
+    drillSrCheck(l, tgt, function (tx) { drillMark(l, true, tx, ""); }, function (tx) { drillMark(l, false, tx, ""); });
   };
+  var pe = $("#p3ErrHear");
+  if (pe) pe.onclick = function () { drillSpeak(l.drillP3.err.word, track); };
   var ck = $("#drCheck");
   if (ck) {
     var doCheck = function () {
       var inp = $("#drType"); if (!inp) return;
       var v = inp.value || "";
-      if (gameNormSent(v) === gameNormSent(cur.text)) drillMark(l, true, "", v); else drillMark(l, false, "", v);
+      if (gameNormSent(v) === gameNormSent(p3Target(l.drillP3, cur.text))) drillMark(l, true, "", v); else drillMark(l, false, "", v);
     };
     ck.onclick = doCheck;
     var inp2 = $("#drType");
@@ -21503,14 +21644,22 @@ function renderZhVocab(app, l) {
   /* v123: tang 1 + cham thanh dieu YIN + link bai am o buoc 4 the ZH. */
   var zhT1H = $("#zhT1Hear"); if (zhT1H) zhT1H.onclick = function () { zhSpeak(c.han); };
   var zhT1R = $("#zhT1Rec"); if (zhT1R) zhT1R.onclick = function () {
+    /* v163 P1: nhu the Anh/TC/TP — phien 3 luot (p3); cham theo muc tieu luot
+       hien tai (p3Target) — luot 2 chi doc 1 chu Han loi nen chi cham chu do;
+       luu wordPron chi khi muc tieu luot nay == ca tu (luot 1/3). */
+    var p3 = zvk.p3 || (zvk.p3 = p3New());
     pronTier1Start("zh", function (heard) {
-      var sc = pronTier1Score(heard, c.han, "zh");
-      zvk.t1 = { tried: true, ok: sc === 100, heard: heard, err: "" };
+      var tgt = p3Target(p3, c.han);
+      var sc = pronTier1Score(heard, tgt, "zh");
+      var res = p3AfterRead(p3, sc === 100, heard, c.han, "zh", true);
+      if (res === "retry") { zvk.t1 = { tried: true, ok: false, heard: "", err: p3.msg }; zvk.pronAttempted = true; render(); return; }
+      zvk.t1 = { tried: true, ok: sc === 100, heard: heard, err: "", p3msg: p3.msg };
       zvk.pronAttempted = true;
-      try { if (!state.wordPron) state.wordPron = {}; var zt = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || ""); state.wordPron["zh:" + d.key + ":" + pos] = { ai: sc === 100 ? 100 : 0, sym: zhToneName(zt.tone), word: c.han, date: todayStr() }; saveState(); } catch (e) {}
+      try { if (tgt === c.han) { if (!state.wordPron) state.wordPron = {}; var zt = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || ""); state.wordPron["zh:" + d.key + ":" + pos] = { ai: sc === 100 ? 100 : 0, sym: zhToneName(zt.tone), word: c.han, date: todayStr() }; saveState(); } } catch (e) {}
       render();
     }, function (kind) { zvk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; zvk.pronAttempted = true; render(); });
   };
+  var zhPe = $("#p3ErrHear"); if (zhPe) zhPe.onclick = function () { zhSpeak(c.han); };
   var zhTB = $("#zhToneBtn"); if (zhTB) zhTB.onclick = function () {
     zhTB.disabled = true; zhTB.textContent = "⏺ Đang ghi — đọc to ngay…";
     var zt2 = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || "");
@@ -22875,11 +23024,14 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
          khong mic (nhu v124). */
       var tcNoMic = !mrSupported() || mrNoMic();
       var tcAttempted = vk.pronDone || vk.pronAttempted;
+      var tcP3 = vk.p3 || (vk.p3 = p3New());
+      /* v124b (giu nguyen): "Tiep tuc" la nut chinh khi da thu; "Doc to" chi
+         la nut chinh khi chua thu lan nao — p3 chi doi nhan + banner/hop loi. */
       if (vk.pronDone) h += '<p>Đã đọc ✓</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
       else if (vk.pronAttempted) h += '<p class="mut">' + (vk.t1 ? esc(vk.t1) : 'Chưa ghi được điểm lần này') + ' — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button><button class="btn" id="ttPronRetry">🎤 Đọc to lại</button></div>';
       else if (tcNoMic) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p><div class="row"><button class="btn btn-primary" id="ttPronNext">Tiếp tục →</button></div>';
       if (!tcNoMic) {
-        h += '<div class="qblock"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="tcT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!tcAttempted ? ' btn-primary' : '') + '" id="tcT1Rec">🎤 Đọc to</button></div><p class="mut" id="tcT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
+        h += '<div class="qblock"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p>' + p3BannerHTML(tcP3, true) + (tcP3.pass === 2 && tcP3.err ? p3GuideHTML("tc", tcP3.err.word, tcP3.err.heard) : '') + '<div class="row"><button class="btn" id="tcT1Hear">🔊 Nghe mẫu</button><button class="btn' + (!tcAttempted ? ' btn-primary' : '') + '" id="tcT1Rec">' + esc(p3SpeakLabel(tcP3, true)) + '</button></div><p class="mut" id="tcT1Res">' + (vk.t1 ? esc(vk.t1) : 'Máy nghe ra đúng từ là được — chưa phải điểm từng âm.') + '</p></div>';
       }
       if (mrNoCamera() && !tcNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
       if (vk.pronWhy) h += '<div class="why show" id="ttPronWhy">' + esc(vk.pronWhy) + '</div>';
@@ -22894,12 +23046,14 @@ function tcTpVkPanelHTML(sess, vk, c, cards, pos) {
          Khoi T1 an khi khong mic (nhu EN/TC). */
       var tpNoMic = !mrSupported() || mrNoMic();
       var tpAttempted = vk.pronDone || vk.pronAttempted || (vk.t1 && vk.t1.tried);
+      var tpP3 = vk.p3 || (vk.p3 = p3New());
       if (tpNoMic && !tpAttempted) h += '<p class="mut">Máy này không có mic để ghi âm — bấm “Tiếp tục →” để học tiếp (không tính điểm phát âm).</p>';
       if (!tpNoMic) {
-        h += '<div class="qblock" id="tpT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p><div class="row"><button class="btn" id="ttPronListen">🔊 Nghe mẫu</button><button class="btn' + (tpAttempted ? '' : ' btn-primary') + '" id="ttT1Rec">🎤 Đọc to</button></div>';
+        h += '<div class="qblock" id="tpT1Block"><p><b>Đọc to (chỉ cần mic, không cần camera):</b></p>' + p3BannerHTML(tpP3, true) + (tpP3.pass === 2 && tpP3.err ? p3GuideHTML("tp", tpP3.err.word, tpP3.err.heard) : '') + '<div class="row"><button class="btn" id="ttPronListen">🔊 Nghe mẫu</button><button class="btn' + (tpAttempted ? '' : ' btn-primary') + '" id="ttT1Rec">' + esc(p3SpeakLabel(tpP3, true)) + '</button></div>';
         if (tp1.ok) h += '<p class="ok" style="font-size:18px">✓ Nghe ra đúng — ' + esc(tp1.heard || "") + '</p>';
         else if (tp1.tried && tp1.err) h += '<p class="mut">' + esc(tp1.err) + '</p>';
         else if (tp1.tried) h += '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(tp1.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
+        if (tp1.p3msg) h += '<p class="mut">' + esc(tp1.p3msg) + '</p>';
         h += '<p class="mut">Khách cũng chấm được — không cần đăng nhập, không cần camera.</p></div>';
       }
       if (mrNoCamera() && !tpNoMic) h += '<p class="mut">Máy này không có camera — gương quỹ đạo không mở được; vẫn đọc to chấm bằng mic được.</p>';
@@ -23116,7 +23270,8 @@ function renderTcTpVocab5(track, stepId, back) {
   var tlm = $("#ttListenModel"); if (tlm) tlm.onclick = function () { vkSpeakBtnState(tlm, c.w, function (done) { if (isTc) speak(c.w, null, done); else tpSpeak(c.w); }, vk); /* v107d: nhu nut Nghe cua the Anh/Trung — bam Nghe cung dua dau the ve khung nhin. */ vkScrollCardTop(); };
   var thn = $("#ttHeardNext"); if (thn) thn.onclick = function () { vk.heard = true; vk.step = 1; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   var tpn = $("#ttPronNext"); if (tpn) tpn.onclick = function () { vk.step = 4; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
-  var tpr = $("#ttPronRetry"); if (tpr) tpr.onclick = function () { vk.pronDone = false; vk.pronAttempted = false; vk.pronScore = null; vk.pronMirror = null; vk.pronResultHTML = ""; vk.t1 = ""; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
+  var tpr = $("#ttPronRetry"); if (tpr) tpr.onclick = function () { vk.pronDone = false; vk.pronAttempted = false; vk.pronScore = null; vk.pronMirror = null; vk.pronResultHTML = ""; vk.t1 = ""; vk.p3 = p3New(); renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
+  var tcPe = $("#p3ErrHear"); if (tcPe) tcPe.onclick = function () { if (track === "tc") speak(c.w); else tpSpeak(c.w); };
   var tc = $("#ttTypeCheck"); if (tc) tc.onclick = function () {
     var inp = $("#ttTypeInp"); var val = inp ? inp.value : "";
     vk.typeDraft = val;
@@ -23169,11 +23324,18 @@ function renderTcTpVocab5(track, stepId, back) {
   /* v124: tang 1 TC o buoc 4 (chi mic, khach cung duoc) + luu wordPron de gom Am yeu. */
   var tcT1H = $("#tcT1Hear"); if (tcT1H) tcT1H.onclick = function () { speak(c.w); };
   var tcT1R = $("#tcT1Rec"); if (tcT1R) tcT1R.onclick = function () {
+    /* v163 P1: nhu the Anh — phien 3 luot (p3); cham theo muc tieu luot hien
+       tai (p3Target); luu wordPron khi muc tieu luot nay == ca tu. */
+    var p3 = vk.p3 || (vk.p3 = p3New());
     pronTier1Start("en", function (heard) {
-      var sc = pronTier1Score(heard, c.w, "en");
-      if (sc === 100) { vk.pronDone = true; vk.pronAttempted = false; vk.t1 = "✓ Máy nghe ra đúng từ “" + c.w + "”. "; }
-      else { vk.pronDone = false; vk.pronAttempted = true; vk.t1 = "✗ Máy chưa nghe ra từ “" + c.w + "”" + (heard ? " — nghe được: “" + heard + "”" : "") + ". Nghe mẫu rồi đọc to lại. "; }
-      try { if (!state.wordPron) state.wordPron = {}; state.wordPron[tcTpVocab5Key(track, stepId, sess.pos)] = { ai: sc === 100 ? 100 : 0, sym: c.ipa ? firstSymFromIpa(c.ipa) : "", word: c.w, date: todayStr() }; saveState(); } catch (e) {}
+      var tgt = p3Target(p3, c.w);
+      var sc = pronTier1Score(heard, tgt, "en");
+      var res = p3AfterRead(p3, sc === 100, heard, c.w, "tc", true);
+      if (res === "retry") { vk.t1 = p3.msg; renderTcTpVocab5(track, stepId, backTab); return; }
+      if (sc === 100) { vk.pronDone = true; vk.pronAttempted = false; }
+      else { vk.pronDone = false; vk.pronAttempted = true; }
+      vk.t1 = (sc === 100 ? "✓ Máy nghe ra đúng từ “" + c.w + "”. " : "✗ Máy chưa nghe ra từ “" + c.w + "”" + (heard ? " — nghe được: “" + heard + "”" : "") + ". ") + p3.msg;
+      try { if (tgt === c.w) { if (!state.wordPron) state.wordPron = {}; state.wordPron[tcTpVocab5Key(track, stepId, sess.pos)] = { ai: sc === 100 ? 100 : 0, sym: c.ipa ? firstSymFromIpa(c.ipa) : "", word: c.w, date: todayStr() }; saveState(); } } catch (e) {}
       renderTcTpVocab5(track, stepId, backTab);
     }, function (kind) { vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; renderTcTpVocab5(track, stepId, backTab); });
   };
@@ -23183,11 +23345,17 @@ function renderTcTpVocab5(track, stepId, back) {
   var pd = $("#ttPronDone"); if (pd) pd.onclick = function () { vk.pronDone = true; vk.step = 4; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
   /* v123: tang 1 TP o buoc 4 (chi mic) + link bai am Hangul; luu diem vao wordPron de gom Am yeu. */
   var t1r = $("#ttT1Rec"); if (t1r) t1r.onclick = function () {
+    /* v163 P1: nhu the Anh/TC — phien 3 luot (p3); cham theo muc tieu luot
+       hien tai (p3Target); luu wordPron khi muc tieu luot nay == ca tu. */
+    var p3 = vk.p3 || (vk.p3 = p3New());
     pronTier1Start("tp", function (heard) {
-      var sc = pronTier1Score(heard, c.w, "tp");
-      vk.t1 = { tried: true, ok: sc === 100, heard: heard, err: "" };
+      var tgt = p3Target(p3, c.w);
+      var sc = pronTier1Score(heard, tgt, "tp");
+      var res = p3AfterRead(p3, sc === 100, heard, c.w, "tp", true);
+      if (res === "retry") { vk.t1 = { tried: true, ok: false, heard: "", err: p3.msg }; vk.pronDone = false; vk.pronAttempted = true; renderTcTpVocab5(track, stepId, backTab); return; }
+      vk.t1 = { tried: true, ok: sc === 100, heard: heard, err: "", p3msg: p3.msg };
       vk.pronDone = sc === 100; vk.pronAttempted = sc !== 100; /* v124b: dat co nhu EN/TC de panel buoc 4 doi nut chinh theo trang thai thu */
-      try { if (!state.wordPron) state.wordPron = {}; var j3 = tpJamo(c.w); state.wordPron[tcTpVocab5Key(track, stepId, sess.pos)] = { ai: sc === 100 ? 100 : 0, sym: j3 ? TP_INIT_JAMO[j3.init] : "", word: c.w, date: todayStr() }; saveState(); } catch (e) {}
+      try { if (tgt === c.w) { if (!state.wordPron) state.wordPron = {}; var j3 = tpJamo(c.w); state.wordPron[tcTpVocab5Key(track, stepId, sess.pos)] = { ai: sc === 100 ? 100 : 0, sym: j3 ? TP_INIT_JAMO[j3.init] : "", word: c.w, date: todayStr() }; saveState(); } } catch (e) {}
       renderTcTpVocab5(track, stepId, backTab);
     }, function (kind) { vk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; vk.pronDone = false; vk.pronAttempted = true; /* v124b: dat co nhu EN/TC */ renderTcTpVocab5(track, stepId, backTab); });
   };
