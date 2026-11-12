@@ -533,7 +533,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, pronDiagInviteDismissed: {}, gramRuleOpen: {}, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -4511,6 +4511,7 @@ function viewHome(app) {
   var todayHTML = specTodayHTML(t); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero de Your Journey nam trong hero khi the hom nay an */
   if (!todayHTML) html += yourJourneyHTML("en"); /* v161: the hom nay an (buoc tiep theo da hien o hero, khong con viec cho) thi Your Journey nam TRONG hero — thay ngay tren man dau, dong thoi giu khung v92 (hero dau tien, con lai toan details dong) */
   html += '</div>';
+  html += pronDiagInviteHTML("en"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v113: khoi phuc khoi chao mung nguoi moi (Why + FAQ) — bi xoa qua tay
      khi don Trang chu; chi hien khi moi (fresh), nam trong details dong,
      khong chen man chinh. FAQ giu cau "Band uoc luong" (nguoi moi can biet). */
@@ -4556,6 +4557,7 @@ function viewHome(app) {
     + '<p><button class="dimlink" id="mapGo">Xem bản đồ 13 chương →</button>' + (fresh ? '' : ' · <button class="dimlink" id="entryRedoLink">Làm lại kiểm tra đầu vào</button>') + ' · <button class="dimlink" id="loginLink">Đăng nhập</button></p>'
     + '</details></div></div>';
   app.innerHTML = html;
+  pronDiagInviteWire(app); /* v166 F1 */
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var ll = $("#loginLink"); if (ll) { try { ll.textContent = (typeof authState !== "undefined" && authState.user) ? "Tài khoản: " + authState.user.email : "Đăng nhập"; } catch (e) {} }
   var nbHome = $("#nextBtn"); if (nbHome) nbHome.onclick = function () {
@@ -6304,6 +6306,8 @@ function mergeGuestIntoAccount(guest, acc) {
      tai khoan, khong thi lay khach) — truoc day doi may/dang nhap la mat. */
   mergeMap("skillDone");
   mergeMap("writingAttempts");
+  mergeMap("pronDiagInviteDismissed"); /* v166 F1: da bo qua loi moi chan doan (khach + tai khoan gop) */
+  mergeMap("gramRuleOpen"); /* v166 F7: trang thai dong/mo quy tac ngu phap (khach + tai khoan gop) */
   (function () {
     function unionByKey(a, b, keyFn) { var out = (a || []).slice(), seen = {}; out.forEach(function (it) { seen[keyFn(it)] = true; }); (b || []).forEach(function (it) { var k = keyFn(it); if (!seen[k]) { seen[k] = true; out.push(it); } }); return out; }
     merged.mockTests = unionByKey(guest.mockTests, acc && acc.mockTests, function (it) { return (it.milestone || "") + "|" + (it.date || ""); });
@@ -9060,6 +9064,57 @@ function pronDiagWireEntry(scope) {
     b.onclick = function () { openLesson({ type: "pronDiag", track: b.dataset.pdEntry }); };
   });
 }
+/* v166 F1 (soi thu tu hoc): LOI MOI CHAN DOAN PHAT AM sau khi xep chang.
+   Kiem tra xep chang khong do duoc phat am, ma nguoi xep chang cao lai bo qua
+   han khoa am/chu cai dau (EN 44 am, ZH Pinyin, TP Hangul; TC thi lo trinh
+   von khong co buoc phat am nao) — nen ngay sau khi xep chang xong, man chinh
+   hien 1 loi moi lam chan doan phat am TRUOC KHI vao buoc dau tien cua chang
+   da xep. Loi moi KHONG chan duong hoc: nut "De sau" chi an the nay (nho
+   state.pronDiagInviteDismissed[track]); da lam chan doan roi thi khong hien
+   lai. EN xep Band 2,0+ ma chua hoc pron1 thi them nut "On nhanh 44 am"
+   (mo ban do 44 am, mo het khong khoa, khong phai cong). */
+function pronDiagInvitePlaced(track) {
+  if (track === "zh") return state.zhEntryPlaced || null;
+  if (track === "tc") return state.tcEntryPlaced || null;
+  if (track === "tp") return state.tpEntryPlaced || null;
+  return state.entryPlaced || null;
+}
+function pronDiagInviteNeeded(track) {
+  if (!pronDiagInvitePlaced(track)) return false;
+  if ((state.pronDiag || {})[track]) return false; /* da lam chan doan roi */
+  var dis = state.pronDiagInviteDismissed || {};
+  if (dis[track]) return false; /* da bam De sau roi */
+  return true;
+}
+function pronDiagInviteHTML(track) {
+  if (!pronDiagInviteNeeded(track)) return "";
+  var trackName = track === "zh" ? "tiếng Trung" : track === "tc" ? "TOEIC" : track === "tp" ? "tiếng Hàn" : "tiếng Anh";
+  var placed = pronDiagInvitePlaced(track);
+  var isEnHigh = track === "en" && placed && placed.band && placed.band !== "Band 0";
+  var pron1Done = track === "en" ? stepDone("pron1") : false;
+  var html = '<section class="card" id="pronDiagInviteCard"><h3>🎯 Trước khi học tiếp: kiểm tra phát âm của bạn</h3>'
+    + '<p class="mut">Kiểm tra xếp chặng không đo được phát âm. Làm chẩn đoán phát âm nhanh (12 mẫu đọc to) để biết mình yếu âm nào, rồi học đúng âm đó — không khóa bài nào.</p>';
+  if (isEnHigh && !pron1Done) html += '<p class="mut">Bạn được xếp thẳng lên ' + esc(placed.band) + ' nên chưa học 44 âm tiếng Anh. Muốn ôn nhanh thì bấm "Ôn nhanh 44 âm" — mở hết, học âm nào cũng được.</p>';
+  html += '<p><button class="btn" data-pd-invite-go="' + track + '" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button>'
+    + (isEnHigh && !pron1Done ? ' <button class="btn" data-pd-invite-pron="en">Ôn nhanh 44 âm</button>' : '')
+    + ' <button class="dimlink" data-pd-invite-skip="' + track + '">Để sau, học tiếp →</button></p></section>';
+  return html;
+}
+function pronDiagInviteWire(scope) {
+  (scope || document).querySelectorAll("[data-pd-invite-go]").forEach(function (b) {
+    b.onclick = function () { openLesson({ type: "pronDiag", track: b.dataset.pdInviteGo }); };
+  });
+  (scope || document).querySelectorAll("[data-pd-invite-pron]").forEach(function (b) {
+    b.onclick = function () { pronDiagOpenArea("en"); };
+  });
+  (scope || document).querySelectorAll("[data-pd-invite-skip]").forEach(function (b) {
+    b.onclick = function () {
+      if (!state.pronDiagInviteDismissed) state.pronDiagInviteDismissed = {};
+      state.pronDiagInviteDismissed[b.dataset.pdInviteSkip] = true;
+      saveState(); render();
+    };
+  });
+}
 function pronDiagLearn(track, w) {
   var t = w.target || {};
   if (t.kind === "ph") {
@@ -11168,6 +11223,23 @@ function renderVocab(app, l) {
 }
 
 /* ----- Trạm ngữ pháp ----- */
+/* v166 F7: quy tac ngu phap MO SAN o LAN DAU vao bai; cac lan sau nho trang
+   thai dong/mo cua nguoi hoc (state.gramRuleOpen[key] = true/false). Khong
+   khoa nut "Vao luyen tap" sau quy tac (trai luat khong gay ap luc). */
+function gramRuleOpenAttr(key) {
+  var m = state.gramRuleOpen || {};
+  if (m[key] === undefined) return " open"; /* lan dau: mo san */
+  return m[key] ? " open" : "";
+}
+function gramRuleWire(scope, key) {
+  var d = (scope || document).querySelector("[data-gram-rule]");
+  if (!d) return;
+  d.addEventListener("toggle", function () {
+    if (!state.gramRuleOpen) state.gramRuleOpen = {};
+    state.gramRuleOpen[key] = d.open;
+    saveState();
+  });
+}
 function renderGrammar(app, l) {
   var g = RB_NEW_GRAMMAR[l.gIdx];
   if (!g) { toast("Trạm ngữ pháp này chưa có."); backFromLesson(); return; }
@@ -11177,7 +11249,7 @@ function renderGrammar(app, l) {
   var html = stepHeader(step);
   html += gramPhaseBarHTML("theory") + '<div class="qblock"><p class="mut">' + esc(g.hook) + '</p>'
     + '<p><b>Nghe ví dụ trước:</b></p>' + g.examples.map(function (e, ei) { return '<p>· ' + esc(e) + ' <button class="btn" data-gramex="' + ei + '">🔊 Nghe</button></p>'; }).join("")
-    + '<details class="rule-more"><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(g.explain) + '</p>'
+    + '<details class="rule-more" data-gram-rule="en:' + l.gIdx + '"' + gramRuleOpenAttr("en:" + l.gIdx) + '><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(g.explain) + '</p>'
     + '<p>💡 <b>Mẹo hình ảnh:</b> ' + esc(g.tip) + '</p></details>'
     + '<div class="sumcard"><b>Làm mẫu:</b><p>' + esc(g.model) + '</p><p class="mut">' + esc(g.modelVi) + '</p></div>'
     + ((typeof RB_NEW_GRAMMAR_MISTAKES !== "undefined" && RB_NEW_GRAMMAR_MISTAKES[l.gIdx]) ? '<p><b>Lỗi hay gặp:</b> ' + esc(RB_NEW_GRAMMAR_MISTAKES[l.gIdx]) + '</p>' : "")
@@ -11185,6 +11257,7 @@ function renderGrammar(app, l) {
     + '<p class="mut">Bài này có 8 câu hỏi thực hành.</p>' + (l.preview ? previewLockHTML() : '<button class="btn btn-primary" id="gramStart">Vào luyện tập →</button>') + '</div>';
   app.innerHTML = html;
   wireBack();
+  gramRuleWire(app, "en:" + l.gIdx); /* v166 F7 */
   $$("[data-gramex]").forEach(function (b) { b.onclick = function () { try { speak(g.examples[+b.dataset.gramex]); } catch (e) {} }; });
   if (l.preview) { wirePreviewLock(); } else $("#gramStart").onclick = function () { l.quiz = true; lessonStart = Date.now(); render(); };
 }
@@ -20793,6 +20866,7 @@ function viewHomeZh(app) {
   var todayZhHTML = specTodayZhHTML(tZh ? tZh.title : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
   if (!todayZhHTML) html += yourJourneyHTML("zh"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 (hero dau tien, con lai toan details dong) */
   html += '</div>';
+  html += pronDiagInviteHTML("zh"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN — màn đầu chỉ lời chào + MỘT việc
      tiếp theo + dòng tiến trình; các khối còn lại vào details đóng sẵn, cùng
      thứ tự mục ở cả 4 track. "VÀO NHANH THEO LOẠI" đã có đủ ở Luyện tập
@@ -20808,6 +20882,7 @@ function viewHomeZh(app) {
     + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p>'
     + '</details></div></div>';
   app.innerHTML = html;
+  pronDiagInviteWire(app); /* v166 F1 */
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = $("#zhNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.zhEntrySkipped = true; saveState(); openLesson({ type: "zhPh", idx: 0 }); return; }
@@ -21945,12 +22020,13 @@ function renderZhGram(app, l) {
   html += phaseBarHTML(1) + '<div class="qblock"><p class="mut">' + esc(g.hook) + '</p>'
     + '<p><b>Ví dụ trước:</b></p>' + g.examples.map(function (e) { return '<p>· ' + esc(e) + '</p>'; }).join("")
     + '<div class="row"><button class="btn" id="zhGramListen">🔊 Nghe ví dụ</button></div>'
-    + '<details class="rule-more"><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(g.rule) + '</p><p>💡 <b>Mẹo:</b> ' + esc(g.tip) + '</p></details>'
+    + '<details class="rule-more" data-gram-rule="zh:' + l.idx + '"' + gramRuleOpenAttr("zh:" + l.idx) + '><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(g.rule) + '</p><p>💡 <b>Mẹo:</b> ' + esc(g.tip) + '</p></details>'
     + videoSlotIf("zhGram:" + g.id)
     + '<p class="mut">Bài này có ' + g.quiz.length + ' câu hỏi thực hành.</p>'
     + '<div class="row"><button class="btn btn-primary" id="zhGramStart">Vào luyện tập →</button></div></div>';
   app.innerHTML = html;
   wireBack();
+  gramRuleWire(app, "zh:" + l.idx); /* v166 F7 */
   var gl = $("#zhGramListen"); if (gl) gl.onclick = function () { zhSpeak(g.speak); };
   $("#zhGramStart").onclick = function () { l.quiz = true; l.qi = 0; l.score = 0; l.picked = -1; l.finished = false; l.wrong = []; lessonStart = Date.now(); render(); };
 }
@@ -23809,6 +23885,7 @@ function viewHomeTc(app) {
   var todayTcHTML = specTodayTcHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
   if (!todayTcHTML) html += yourJourneyHTML("tc"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 */
   html += '</div>';
+  html += pronDiagInviteHTML("tc"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
   if (todayTcHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayTcHTML + '</details>';
   html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="tcHomePath"><h3>Lộ trình TOEIC của bạn</h3>';
@@ -23819,6 +23896,7 @@ function viewHomeTc(app) {
   html += '<details class="card" id="homeSuggestMore"><summary><b>Gợi ý học hôm nay</b></summary>' + msHomeHTML("tc") + '<details class="card"><summary><b>TOEIC Nghe–Đọc là gì?</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></details>';
   html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tcEntryRedoLink">Làm lại kiểm tra đầu vào TOEIC</button></p>') + '</details></div></div>';
   app.innerHTML = html;
+  pronDiagInviteWire(app); /* v166 F1 */
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tcNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.tcEntrySkipped = true; saveState(); tcOpenStep(TC_STAGES[0].steps[0], "home"); return; }
@@ -24867,6 +24945,7 @@ function viewHomeTp(app) {
   var todayTpHTML = specTodayTpHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
   if (!todayTpHTML) html += yourJourneyHTML("tp"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 */
   html += '</div>';
+  html += pronDiagInviteHTML("tp"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
   if (todayTpHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayTpHTML + '</details>';
   html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="tpHomePath"><h3>Lộ trình TOPIK của bạn</h3>';
@@ -24877,6 +24956,7 @@ function viewHomeTp(app) {
   html += '<details class="card" id="homeSuggestMore"><summary><b>Gợi ý học hôm nay</b></summary>' + msHomeHTML("tp") + '<details class="card"><summary><b>TOPIK là gì?</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></details>';
   html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tpEntryRedoLink">Làm lại kiểm tra đầu vào TOPIK</button></p>') + '</details></div></div>';
   app.innerHTML = html;
+  pronDiagInviteWire(app); /* v166 F1 */
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tpNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.tpEntrySkipped = true; saveState(); tpOpenStep(TP_STAGES[0].steps[0], "home"); return; }

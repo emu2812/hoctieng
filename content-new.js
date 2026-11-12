@@ -246,18 +246,18 @@ var RB_AI = {
 // Hàng kiểm tra cuối chương đứng sau 7 bước học.
 // Cổng mở khi học xong 6/7 bước học (mốc 80% — chuẩn nội bộ của web, không phải chuẩn IELTS).
 var RB_CH1_STEPS = [
+  { id: "pron1", kind: "pron", wave: 1, title: "Học xong: đọc đúng 44 âm tiếng Anh", type: "Phát âm · 44 âm", mins: 15 },
   { id: "classroom", kind: "vocab", setIdx: 24, deckNo: 2, title: "Học xong: hiểu và nói 20 từ dùng trong lớp học", type: "Từ vựng · Từ lớp học", mins: 8 },
   { id: "gram0", kind: "grammar", gIdx: 0, title: "Học xong: tự giới thiệu 'Tôi là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
   { id: "listen0", kind: "ch1listen", title: "Học xong: nghe hiểu đoạn chào hỏi ngắn dùng 'Tôi là...'", type: "Nghe · Chào hỏi", mins: 5 },
   { id: "gram1", kind: "grammar", gIdx: 1, title: "Học xong: chỉ đồ vật và giới thiệu người 'Đây là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
   { id: "read0", kind: "ch1read", title: "Học xong: đọc hiểu đoạn giới thiệu ngắn dùng 'Đây là...'", type: "Đọc · Giới thiệu", mins: 5 },
   { id: "gram2", kind: "grammar", gIdx: 2, title: "Học xong: nói tên mình 'Tôi tên là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
-  { id: "pron1", kind: "pron", wave: 1, title: "Học xong: đọc đúng 44 âm tiếng Anh", type: "Phát âm · 44 âm", mins: 15 },
   { id: "test", kind: "test", title: "Bài kiểm tra cuối chương 1", type: "Đánh giá", mins: 10 },
 ];
 var RB_CH1_GATE_NEED = 6; /* 80% của 7 bước học (làm tròn lên: ceil(0,8×7) = 6) */
 var RB_CH1_GUIDEBOOK = {
-  goal: "Học xong chương này, bạn hiểu 20 từ dùng trong lớp học, nói được 3 câu đầu tiên: I am..., This is..., My name is..., nghe hiểu đoạn chào hỏi ngắn dùng I am..., đọc hiểu đoạn giới thiệu ngắn dùng This is..., và đọc đúng 44 âm tiếng Anh theo đợt khó.",
+  goal: "Học xong chương này, bạn đọc đúng 44 âm tiếng Anh theo đợt khó, rồi dùng âm đó để hiểu 20 từ dùng trong lớp học, nói được 3 câu đầu tiên: I am..., This is..., My name is..., nghe hiểu đoạn chào hỏi ngắn dùng I am... và đọc hiểu đoạn giới thiệu ngắn dùng This is....",
   grammar: ["Tôi là... (I am...)", "Đây là... (This is...)", "Tôi tên là... (My name is...)"],
   phrases: ["Hello! (Xin chào!)", "My name is... (Tôi tên là...)", "Thank you! (Cảm ơn bạn!)", "Nice to meet you! (Rất vui được gặp bạn!)"],
   mistakes: ["Đọc âm dài thành âm ngắn (ship thành sheep do /ɪ/ và /i:/ lẫn nhau)", "Nuốt âm cuối của từ tiếng Anh (life thiếu /f/)", "Đọc /r/ rung như r tiếng Việt"]
@@ -463,7 +463,7 @@ var RB_PH_PAIR_REASONS = {
 // Mục tiêu và năng lực làm được tự soạn theo chuẩn IELTS từng band, không sao chép.
 // Chương chưa dựng xong ghi "sắp mở" — không bịa nội dung bài học bên trong.
 var RB_CHAPTER_MAP = [
-  { band: "Band 0", title: "Chào hỏi và 44 âm", status: "open", goal: "Hiểu 20 từ lớp học, nói được 3 câu I am... / This is... / My name is..., đọc đúng 44 âm tiếng Anh theo đợt khó.", can: ["Chào hỏi và giới thiệu tên", "Hiểu 20 từ lớp học", "Đọc đúng 44 âm tiếng Anh"] },
+  { band: "Band 0", title: "Chào hỏi và 44 âm", status: "open", goal: "Đọc đúng 44 âm tiếng Anh theo đợt khó, rồi dùng âm đó để hiểu 20 từ lớp học và nói được 3 câu I am... / This is... / My name is....", can: ["Đọc đúng 44 âm tiếng Anh", "Hiểu 20 từ lớp học", "Chào hỏi và giới thiệu tên"] },
   { band: "Band 2,0", title: "Câu đơn giản và từ quen thuộc", status: "open", goal: "Hiểu và nói những câu rất đơn giản về bản thân và những việc quen thuộc hằng ngày.", can: ["Nói câu đơn về tên, tuổi, nơi ở", "Hiểu câu hỏi đơn giản khi nói chậm và rõ"] },
   { band: "Band 2,5", title: "Nói về bản thân và gia đình", status: "open", goal: "Kể ngắn gọn về gia đình, bạn bè và thói quen hằng ngày bằng câu đơn nối nhau.", can: ["Giới thiệu gia đình bằng vài câu đơn", "Nói về việc mình làm mỗi ngày"] },
   { band: "Band 3,0", title: "Giao tiếp đơn giản hằng ngày", status: "open", goal: "Xoay xở trong các tình huống quen thuộc: mua đồ, hỏi đường, hỏi giờ.", can: ["Hỏi và trả lời về giá cả, giờ giấc", "Hiểu biển báo và thông báo ngắn"] },
@@ -15306,7 +15306,7 @@ var RB_STAGE_INFO = {
   /* ---- ROADMAP-1: can-do moi theo lo trinh chuan (N10, dau chuong) ---- */
   /* Can-do cuoi chuong hien o man ket qua kiem tra cuoi chuong (index.html). */
   var RB_CAN_ROADMAP = {
-    "Band 0": ["Đọc được bảng chữ cái, nhận ra các âm cơ bản và đọc được từ đơn quen thuộc", "Chào hỏi, giới thiệu tên, hỏi thăm đơn giản", "Nghe và nhắc lại được từ đơn, cụm ngắn"],
+    "Band 0": ["Đọc đúng 44 âm tiếng Anh, nhận ra các âm cơ bản và đọc được từ đơn quen thuộc", "Chào hỏi, giới thiệu tên, hỏi thăm đơn giản", "Nghe và nhắc lại được từ đơn, cụm ngắn"],
     "Band 2,0": ["Giới thiệu bản thân, gia đình, công việc, thói quen hàng ngày bằng câu đơn", "Hỏi và trả lời câu hỏi đơn giản: bạn làm gì, bạn thích gì, bạn ở đâu", "Đọc được biển báo, tin nhắn ngắn; viết được đoạn 3-5 câu về bản thân"],
     "Band 2,5": ["Kể lại một ngày, một chuyến đi, một kỷ niệm bằng câu quá khứ đơn", "Hỏi về chuyện đã qua: “Bạn đã đi đâu cuối tuần rồi?”", "Đọc đoạn văn ngắn kể chuyện; viết đoạn văn kể chuyện có mở đầu và kết thúc"],
     "Band 3,0": ["Nói về kinh nghiệm: “Tôi đã từng đi Đà Lạt.” / “Tôi chưa bao giờ ăn món này.”", "So sánh: “Hà Nội đông hơn Huế.” / “Đây là cuốn sách hay nhất của tôi.”", "Viết thư ngắn hỏi thăm, cảm ơn, mời mọc"],
