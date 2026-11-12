@@ -1867,6 +1867,7 @@ function nextLearnStep() { var ls = learningSteps(); for (var i = 0; i < ls.leng
 function finishStep(id) {
   var was = stepDone(id);
   state.progress["ch1:" + id] = { done: true, at: Date.now() };
+  if (!was) logStepDone(); /* v161: ghi buoc lo trinh xong vao stepLog cho Your Journey */
   if (state.skipped.indexOf(id) >= 0) state.skipped = state.skipped.filter(function (x) { return x !== id; });
   awardXp(was ? 5 : 10); saveState();
 }
@@ -2138,11 +2139,139 @@ function todayJourneyText(track) {
   } catch (e3) { stage = ""; }
   return (stage ? stage + " · " : "") + "Chuỗi " + streak + " ngày · " + xp + " XP";
 }
+/* ---------- v161 S20 phan 3: YOUR JOURNEY (ELSA 8) ----------
+   Khoi theo doi tien do truc quan ngay duoi ke hoach ngay trong the
+   "Viec hom nay" (ca 4 track cung vi tri/cau truc): cap hien tai ->
+   cap tiep theo -> thanh % da xong chang hien tai -> uoc tinh thoi gian
+   toi moc tiep theo (ELSA §1.4: cap hien tai -> cap tiep theo -> % ->
+   thoi gian hoc/ngay nen duy tri -> uoc tinh thoi gian toi muc tieu).
+   - % + so buoc lay tu du lieu tien do THAT: EN quet RB_CHAPTER_MAP
+     (chang 1 = 10 buoc, tu Band 2,0 tro di = rbChSteps), ZH
+     zhPositionProgress (chang HSK), TC/TP dem that tren TC_STAGES/
+     TP_STAGES (cung mau so voi tcStagePct/tpStagePct o man "Duong di").
+   - Uoc tinh: so buoc con lai cua chang / toc do du kien (buoc/ngay).
+     Toc do that = buoc lo trinh xong trong 7 ngay gan nhat / 7, doc tu
+     state.stepLog (chi ghi buoc lo trinh vua xong lan dau — xem
+     logStepDone; buoc tu vung suy tu vi tri (vocabPos/zhSetPos) khong
+     co moc danh dau nen CHUA dem vao toc do). Toc do du kien = toc do
+     that x (muc tieu ngay / phut hoc that trung binh/ngay trong 7 ngay,
+     tu state.studyLog), ti le kep trong [0,5 .. 2] de khoi ngoai suy vo
+     ly; khong co du lieu phut thi dung toc do that nguyen.
+   - "Chua du du lieu" khi trong 7 ngay gan nhat co < 2 buoc xong hoac
+     < 2 ngay co buoc xong (1 ngay buot phat khong lap duoc toc do
+     ngay) — ghi ro, KHONG bia so. */
+function logStepDone() {
+  try {
+    if (!state.stepLog || typeof state.stepLog !== "object") state.stepLog = {};
+    var t = todayStr();
+    state.stepLog[t] = (state.stepLog[t] || 0) + 1;
+    var cut = addDaysStr(t, -30);
+    Object.keys(state.stepLog).forEach(function (k) { if (k < cut) delete state.stepLog[k]; });
+  } catch (e) {}
+}
+function rbStepDoneKey(key) {
+  if (!key || String(key).indexOf("vocabPos:") === 0) return false;
+  try {
+    var bands = ["Band 2,0", "Band 2,5", "Band 3,0", "Band 3,5", "Band 4,0", "Band 4,5", "Band 5,0", "Band 5,5", "Band 6,0", "Band 6,5", "Band 7,0", "Band 7,5+"];
+    for (var i = 0; i < bands.length; i++) {
+      var steps = rbChSteps(bands[i]);
+      for (var j = 0; j < steps.length; j++) if (steps[j].doneKey === key) return true;
+    }
+  } catch (e) {}
+  return false;
+}
+function logStepDoneIfRb(key) { if (rbStepDoneKey(key)) logStepDone(); }
+function journeyLast7() {
+  var steps = 0, days = 0, mins = 0;
+  try {
+    var t = todayStr();
+    for (var i = 0; i < 7; i++) {
+      var d = addDaysStr(t, -i);
+      var n = (state.stepLog && state.stepLog[d]) || 0;
+      if (n > 0) { steps += n; days++; }
+      mins += (state.studyLog && state.studyLog[d]) || 0;
+    }
+  } catch (e) {}
+  return { steps: steps, days: days, mins: mins };
+}
+function journeyEstimate(remaining, goal) {
+  var w = journeyLast7();
+  if (w.steps < 2 || w.days < 2) return { ok: false, text: "chưa đủ dữ liệu để ước tính — học thêm vài ngày nữa" };
+  var pace = w.steps / 7;
+  var expect = pace;
+  if (w.mins > 0) {
+    var ratio = (goal || 30) / (w.mins / 7);
+    if (ratio < 0.5) ratio = 0.5; else if (ratio > 2) ratio = 2;
+    expect = pace * ratio;
+  }
+  if (!(expect > 0)) return { ok: false, text: "chưa đủ dữ liệu để ước tính — học thêm vài ngày nữa" };
+  var daysLeft = remaining / expect, y;
+  if (daysLeft <= 1) y = "1 ngày";
+  else if (daysLeft < 7) y = Math.round(daysLeft) + " ngày";
+  else if (daysLeft < 30) y = fmtBandComma(daysLeft / 7) + " tuần";
+  else y = fmtBandComma(daysLeft / 30) + " tháng";
+  return { ok: true, text: "còn khoảng " + y };
+}
+function yourJourneyInfo(track) {
+  var goal = state.goal || 30;
+  if (track === "zh") {
+    var p = null; try { p = zhPositionCurrent(); } catch (e) {}
+    if (!p) return null;
+    return { cur: "HSK " + p.stage, curSub: "Chặng " + p.stage, next: p.stage < 6 ? "HSK " + (p.stage + 1) : null, done: p.done, total: p.total, goal: goal };
+  }
+  if (track === "tc" || track === "tp") {
+    var stages = track === "tc" ? TC_STAGES : TP_STAGES;
+    var doneMap = track === "tc" ? state.tcDone : state.tpDone;
+    var placed = track === "tc" ? state.tcEntryPlaced : state.tpEntryPlaced;
+    var startI = (placed && typeof placed.stage === "number") ? Math.max(0, Math.min(stages.length - 1, placed.stage)) : 0;
+    var cur = null;
+    for (var i = startI; i < stages.length; i++) {
+      var dn = 0; stages[i].steps.forEach(function (s) { if (doneMap && doneMap[s]) dn++; });
+      if (dn < stages[i].steps.length) { cur = { idx: i, done: dn, total: stages[i].steps.length }; break; }
+    }
+    if (!cur) { var li = stages.length - 1; cur = { idx: li, done: stages[li].steps.length, total: stages[li].steps.length }; }
+    return { cur: stages[cur.idx].title, curSub: track === "tc" ? "TOEIC" : "TOPIK", next: cur.idx + 1 < stages.length ? stages[cur.idx + 1].title : null, done: cur.done, total: cur.total, goal: goal };
+  }
+  var startCi = 0;
+  try {
+    if (state.entryPlaced && state.entryPlaced.band && state.entryPlaced.band !== "Band 0") {
+      RB_CHAPTER_MAP.forEach(function (c, i) { if (c.band === state.entryPlaced.band) startCi = i; });
+    }
+  } catch (e) {}
+  if (startCi === 0) {
+    var ls = learningSteps(), dn0 = doneLearnCount();
+    if (dn0 < ls.length) return { cur: "Band 0", curSub: "Chào hỏi và 44 âm", next: RB_CHAPTER_MAP[1].band, done: dn0, total: ls.length, goal: goal };
+  }
+  for (var ci = Math.max(1, startCi); ci < RB_CHAPTER_MAP.length; ci++) {
+    var steps = rbChSteps(RB_CHAPTER_MAP[ci].band), dnc = 0;
+    steps.forEach(function (st) { if (rbStepDone(st)) dnc++; });
+    if (dnc < steps.length) return { cur: RB_CHAPTER_MAP[ci].band, curSub: RB_CHAPTER_MAP[ci].title, next: ci + 1 < RB_CHAPTER_MAP.length ? RB_CHAPTER_MAP[ci + 1].band : null, done: dnc, total: steps.length, goal: goal };
+  }
+  var last = RB_CHAPTER_MAP.length - 1, lsteps = rbChSteps(RB_CHAPTER_MAP[last].band);
+  return { cur: RB_CHAPTER_MAP[last].band, curSub: RB_CHAPTER_MAP[last].title, next: null, done: lsteps.length, total: lsteps.length, goal: goal };
+}
+function yourJourneyHTML(track) {
+  var info = null;
+  try { info = yourJourneyInfo(track); } catch (e) {}
+  if (!info) return "";
+  var pct = info.total ? Math.round(info.done / info.total * 100) : 0;
+  var h = '<div class="card" id="yourJourney" data-track="' + track + '" style="margin-top:8px"><p class="eyebrow">YOUR JOURNEY</p>';
+  h += '<p><b>' + esc(info.cur) + '</b>' + (info.curSub ? ' <span class="mut">· ' + esc(info.curSub) + '</span>' : '') + (info.next ? ' → <b>' + esc(info.next) + '</b>' : ' <span class="mut">· đã xong hết các chặng hiện có 🎉</span>') + '</p>';
+  h += '<div class="bar"><i style="width:' + pct + '%"></i></div>';
+  h += '<p class="mut">Đã xong ' + info.done + '/' + info.total + ' bước chặng này (' + pct + '%)</p>';
+  if (info.next) {
+    var est = null; try { est = journeyEstimate(info.total - info.done, info.goal); } catch (e2) {}
+    if (est && est.ok) h += '<p class="mut">Học ' + info.goal + ' phút/ngày thì ' + esc(est.text) + ' tới ' + esc(info.next) + '.</p>';
+    else h += '<p class="mut">Chưa đủ dữ liệu để ước tính — học thêm vài ngày nữa.</p>';
+  }
+  return h + '</div>';
+}
 function specTodayHTML(nextCard) {
   var d = specTodayItems(nextCard);
   if (!d.items.length && d.hiddenWork) return "";
   var h = '<section class="card" id="specToday"><p class="eyebrow">VIỆC HÔM NAY</p>';
   h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("en")) + '</p>';
+  h += yourJourneyHTML("en"); /* v161 S20 phan 3: Your Journey ngay duoi ke hoach ngay */
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc 🎉</h3><p class="mut">Không còn mục đến hạn, không còn bộ từ dở dang, không còn bài thi chờ chấm.</p>'; }
   else {
     h += '<h3>' + d.plan.length + ' việc hôm nay</h3>';
@@ -2212,6 +2341,7 @@ function specTodayZhHTML(mainTitle) {
   if (!d.items.length && d.hiddenWork) return "";
   var h = '<section class="card" id="specTodayZh"><p class="eyebrow">VIỆC HÔM NAY · TIẾNG TRUNG</p>';
   h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("zh")) + '</p>';
+  h += yourJourneyHTML("zh"); /* v161 S20 phan 3: Your Journey ngay duoi ke hoach ngay */
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc 🎉</h3><p class="mut">Không còn mục đến hạn và không còn bộ từ dở dang.</p>'; }
   else {
     h += '<h3>' + d.plan.length + ' việc hôm nay</h3>';
@@ -4378,6 +4508,8 @@ function viewHome(app) {
     var xpVal = t.step ? (stepDone(t.step.id) ? 5 : 10) : 0;
     html += '<section class="card next-card" id="nextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ ' + heroEyebrow + '</p><h2>' + esc(t.title) + '</h2><p class="mut">' + heroSub + '</p><button class="btn btn-primary" id="nextBtn">Học tiếp: ' + esc(t.title) + ' →' + (xpVal ? ' · +' + xpVal + ' XP' : '') + '</button></div></div></section>';
   }
+  var todayHTML = specTodayHTML(t); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero de Your Journey nam trong hero khi the hom nay an */
+  if (!todayHTML) html += yourJourneyHTML("en"); /* v161: the hom nay an (buoc tiep theo da hien o hero, khong con viec cho) thi Your Journey nam TRONG hero — thay ngay tren man dau, dong thoi giu khung v92 (hero dau tien, con lai toan details dong) */
   html += '</div>';
   /* v113: khoi phuc khoi chao mung nguoi moi (Why + FAQ) — bi xoa qua tay
      khi don Trang chu; chi hien khi moi (fresh), nam trong details dong,
@@ -4390,8 +4522,8 @@ function viewHome(app) {
 
   /* v84: Vào nhanh theo loại đã có đủ ở Luyện tập (thẻ Tìm bài, 7 nút) —
      bỏ khỏi trang chủ để màn chính chỉ còn một việc tiếp theo. */
-  var todayHTML = specTodayHTML(t); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) */
   if (todayHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayHTML + '</details>';
+  /* v161: the hom nay an thi Your Journey da nam trong hero (xem tren) — khong render the rieng ngoai hero (v92: hero dau tien, con lai toan details dong) */
   var curStep = null, curTitle = "";
   if (info.kind === "ch1") { var nsH = nextLearnStep(); curStep = nsH; }
   else { var undH = info.steps.filter(function (st) { return !rbStepDone(st); }); curStep = undH.length ? undH[0] : null; }
@@ -7919,7 +8051,7 @@ function renderTypingLesson(app, l) {
   if (l.si >= set.sentences.length) {
     l.phasesDone[l.phase] = true;
     var allDone = l.phasesDone[0] && l.phasesDone[1] && l.phasesDone[2];
-    if (allDone && !l.xpGiven) { if (!state.skillDone) state.skillDone = {}; var was = typingDone(l.mode || "coban", l.setIdx); state.skillDone[typingDoneKey(l.mode || "coban", l.setIdx)] = true; awardXp(was ? 5 : 10); l.xpGiven = true; saveState(); }
+    if (allDone && !l.xpGiven) { if (!state.skillDone) state.skillDone = {}; var was = typingDone(l.mode || "coban", l.setIdx); state.skillDone[typingDoneKey(l.mode || "coban", l.setIdx)] = true; if (!was) logStepDoneIfRb(typingDoneKey(l.mode || "coban", l.setIdx)); /* v161 */ awardXp(was ? 5 : 10); l.xpGiven = true; saveState(); }
     app.innerHTML = head + '<div class="summarybox"><h2>Xong Pha ' + (l.phase + 1) + '</h2><p>Đúng ngay lần đầu: ' + (l.correct || 0) + '/' + set.sentences.length + ' câu.</p>' + (allDone ? '<p><b>Đã xong cả 3 pha của bộ này.</b></p>' : '<p><button class="btn btn-primary" id="tpNextPhase">Sang Pha ' + (l.phase + 2) + '</button></p>') + '<p><button class="btn" id="tpBackSets">Chọn bộ khác</button></p></div>';
     wireBack();
     var nx = $("#tpNextPhase"); if (nx) nx.onclick = function () { l.phase++; l.si = 0; l.correct = 0; render(); };
@@ -9169,7 +9301,7 @@ function renderSkillGramOld(app, l) {
       if (res.firstN >= res.total) {
         if (!state.skillDone) state.skillDone = {};
         var wasQ = !!state.skillDone["gramOld:" + l.idx];
-        state.skillDone["gramOld:" + l.idx] = true; awardXp(wasQ ? 5 : 10); saveState();
+        state.skillDone["gramOld:" + l.idx] = true; if (!wasQ) logStepDoneIfRb("gramOld:" + l.idx); /* v161 */ awardXp(wasQ ? 5 : 10); saveState();
         app.innerHTML = skillHead("Kiểm tra nhanh — " + g.name, "") + '<div class="summarybox"><h2>Bạn đã qua kiểm tra nhanh!</h2><p>Bạn đúng ' + res.firstN + '/' + res.total + ' câu ngay lần đầu — trạm này đã ghi là xong, bạn không cần học lại.</p><p class="mut">Kiểm tra nhanh chỉ bỏ qua bước dạy lại — bạn vẫn làm kiểm tra cuối chương như thường.</p><div class="row" style="margin-top:10px"><button class="btn btn-primary" id="qcBack">Về Lộ trình</button></div></div>';
       } else {
         app.innerHTML = skillHead("Kiểm tra nhanh — " + g.name, "") + '<div class="summarybox"><h2>Chưa qua kiểm tra nhanh</h2><p>Bạn đúng ' + res.firstN + '/' + res.total + ' câu — học bài đầy đủ nhé, bài này có ' + (g.quiz || []).length + ' câu luyện tập.</p><div class="row" style="margin-top:10px"><button class="btn btn-primary" id="qcLearn">Vào học bài đầy đủ</button></div></div>';
@@ -9217,7 +9349,7 @@ function renderSkillPronTopic(app, l) {
 function bkMarkDone(key) {
   var was = !!(state.skillDone && state.skillDone[key]);
   if (!state.skillDone) state.skillDone = {};
-  state.skillDone[key] = true; awardXp(was ? 5 : 10); saveState();
+  state.skillDone[key] = true; if (!was) logStepDoneIfRb(key); /* v161: chi ghi khi key la buoc lo trinh RB (bkErr/bkLife/bkTone tu loai) */ awardXp(was ? 5 : 10); saveState();
 }
 function renderBkErr(app, l) {
   var e = BK_VIET_ERRORS[l.idx];
@@ -11591,7 +11723,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
     stats += selfRelResultStats(l, qs, lessonId, mode, firstN, total);
     if (mode === "practice") {
       if (stepIdx(step.id) >= 0) finishStep(step.id);
-      else { if (!state.skillDone) state.skillDone = {}; var wasP = !!state.skillDone[step.id]; state.skillDone[step.id] = true; awardXp(wasP ? 5 : 10); saveState(); }
+      else { if (!state.skillDone) state.skillDone = {}; var wasP = !!state.skillDone[step.id]; state.skillDone[step.id] = true; if (!wasP) logStepDoneIfRb(step.id); /* v161 */ awardXp(wasP ? 5 : 10); saveState(); }
       /* v158 S19 phan 3/3: buoc cuoi cua bai ngu phap — viet cau tu do sau bai tap kiem soat. */
       var fwBtn158 = (l.type === "grammar" && l.gIdx != null) ? '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="gramFreeWrite">✍️ Viết câu tự do →</button></div><p class="mut">Bước cuối của bài ngữ pháp: tự viết 1 câu dùng đúng mẫu vừa học.</p>' : "";
       app.innerHTML = stepHeader(step) + finishSummaryHTML("Hoàn thành bài luyện!", stats, wrongHTML, { chest: { key: step.id, title: step.title }, starsKey: step.id, appeal: "gram:" + step.id }) + fwBtn158 + clRetrySectionHTML();
@@ -11602,7 +11734,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
     } else if (mode === "skill") {
       var was = !!(state.skillDone && state.skillDone[l.skillKey]);
       if (!state.skillDone) state.skillDone = {};
-      state.skillDone[l.skillKey] = true; if (l.fixReturn) { l.fixReturn = false; } else { awardXp(was ? 5 : 10); } saveState(); logLessonMinutes(l);
+      state.skillDone[l.skillKey] = true; if (!was) logStepDoneIfRb(l.skillKey); /* v161: chi ghi khi skillKey la buoc lo trinh RB */ if (l.fixReturn) { l.fixReturn = false; } else { awardXp(was ? 5 : 10); } saveState(); logLessonMinutes(l);
       if (l.type === "entryCheck") {
         var band = entryBandFor(l.part, firstN, total);
         state.entryPlaced = { band: band, part: l.part, score: firstN, total: total, at: Date.now() };
@@ -14836,7 +14968,7 @@ function renderDictation(app, l) {
     for (var i2 = 0; i2 < total; i2++) if (l.res[i2] === "good") srsEnqueueSentence("dictation", l.idx, i2, l.sents[i2], others);
     if (!state.skillDone) state.skillDone = {};
     var was = !!state.skillDone[l.skillKey];
-    state.skillDone[l.skillKey] = true; awardXp(was ? 5 : 10);
+    state.skillDone[l.skillKey] = true; if (!was) logStepDoneIfRb(l.skillKey); /* v161 */ awardXp(was ? 5 : 10);
     logLessonMinutes(l);
     l.done = true; saveState(); render();
   };
@@ -16027,7 +16159,7 @@ function renderPodcast(app, l) {
   $("#podDoneBtn").onclick = function () {
     if (!state.skillDone) state.skillDone = {};
     var was = !!state.skillDone[l.skillKey];
-    state.skillDone[l.skillKey] = true; awardXp(was ? 5 : 10); logLessonMinutes(l); l.podDone = true; saveState(); render();
+    state.skillDone[l.skillKey] = true; if (!was) logStepDoneIfRb(l.skillKey); /* v161 */ awardXp(was ? 5 : 10); logLessonMinutes(l); l.podDone = true; saveState(); render();
   };
   $$("[data-pplay]").forEach(function (b) { b.onclick = function () { l.podStop = false; podPlayFrom(l, +b.dataset.pplay); }; });
   $$("[data-prepeat]").forEach(function (b) { b.onclick = function () { speakAuto(lines[+b.dataset.repeat].en, 1); }; }); /* v126 */
@@ -16472,7 +16604,7 @@ function renderSkillRoleplay(app, l) {
   $("#rpDone").onclick = function () {
     var was = !!(state.skillDone && state.skillDone["roleplay:" + l.idx]);
     if (!state.skillDone) state.skillDone = {};
-    state.skillDone["roleplay:" + l.idx] = true; awardXp(was ? 5 : 10); saveState();
+    state.skillDone["roleplay:" + l.idx] = true; if (!was) logStepDoneIfRb("roleplay:" + l.idx); /* v161 */ awardXp(was ? 5 : 10); saveState();
     l.done = true; render();
   };
 }
@@ -16826,7 +16958,7 @@ function renderSkillWrite(app, l) {
     state.writingAttempts[key] = { draft: l.draft || "", rewrite: v, aiBand: l.aiBand, selfCheck: !!l.selfCheckW, at: todayStr() };
     var was = !!(state.skillDone && state.skillDone[key]);
     if (!state.skillDone) state.skillDone = {};
-    state.skillDone[key] = true; awardXp(was ? 5 : 10); saveState();
+    state.skillDone[key] = true; if (!was) logStepDoneIfRb(key); /* v161 */ awardXp(was ? 5 : 10); saveState();
     l.wstep = 3; render();
   };
 }
@@ -16844,7 +16976,7 @@ function renderSkillDrill(app, l) {
     $("#drOk").onclick = function () {
       var was = !!(state.skillDone && state.skillDone[key]);
       if (!state.skillDone) state.skillDone = {};
-      state.skillDone[key] = true; awardXp(was ? 5 : 10); saveState();
+      state.skillDone[key] = true; if (!was) logStepDoneIfRb(key); /* v161: key "drill:"+idx la buoc lo trinh RB */ awardXp(was ? 5 : 10); saveState();
       app.innerHTML = skillHead("Luyện viết — " + d.title, "") + finishSummaryHTML("Làm đúng rồi!", '<p>Câu của bạn khớp với bài mẫu. Luyện tiếp bài khác trong Luyện tập → Viết nhé.</p>', "", { starsKey: "drill:" + l.idx, appeal: "drill:" + l.idx });
       wireBack();
       var ns = $("#btnNextStep"); if (ns) { ns.textContent = "Về Luyện tập"; ns.onclick = function () { backFromLesson(); }; }
@@ -20003,7 +20135,7 @@ function zhSessionTarget() {
 }
 function zhOpenTarget(t) { if (t && t.kind === "zhLesson") openLesson(t.lesson); }
 function zhAwardOnce(key) {
-  if (!state.zhDone[key]) { state.zhDone[key] = true; awardXp(10); saveState(); return true; }
+  if (!state.zhDone[key]) { state.zhDone[key] = true; if (String(key).indexOf("ph:") !== 0) logStepDone(); /* v161: buoc pinyin (ph:) nam ngoai zhStageSeq nen khong dem vao toc do */ awardXp(10); saveState(); return true; }
   return false;
 }
 function zhPhNodeHTML(i) {
@@ -20190,13 +20322,14 @@ function viewHomeZh(app) {
     var zhXp = (tZh.title.indexOf("Ôn lại") === 0) ? "" : " · +10 XP";
     html += '<section class="card next-card" id="zhNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TIẾNG TRUNG</p><h2>' + esc(tZh.title) + '</h2><p class="mut">' + esc(tZh.type) + '</p><button class="btn btn-primary" id="zhNextBtn">Học tiếp: ' + esc(tZh.title) + ' →' + zhXp + '</button></div></div></section>';
   }
+  var todayZhHTML = specTodayZhHTML(tZh ? tZh.title : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
+  if (!todayZhHTML) html += yourJourneyHTML("zh"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 (hero dau tien, con lai toan details dong) */
   html += '</div>';
   /* v92: cùng khung trang chủ kiểu v84 EN — màn đầu chỉ lời chào + MỘT việc
      tiếp theo + dòng tiến trình; các khối còn lại vào details đóng sẵn, cùng
      thứ tự mục ở cả 4 track. "VÀO NHANH THEO LOẠI" đã có đủ ở Luyện tập
      nên không còn ở trang chủ. Nội dung thật từng track giữ nguyên, chỉ
      xếp lại vào khung chung. */
-  var todayZhHTML = specTodayZhHTML(tZh ? tZh.title : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) */
   if (todayZhHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayZhHTML + '</details>';
   var zp = zhPositionCurrent() || { stage: 1, done: 0, total: 0 };
   html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="zhHomePath"><h3>Chặng hiện tại: Chặng ' + zp.stage + '</h3><p class="mut">Đã xong ' + zp.done + '/' + zp.total + ' bước học.</p><div class="row"><button class="btn" id="zhHomeStageBtn">Xem chặng này ở Bản đồ →</button></div></section></details>';
@@ -22288,6 +22421,7 @@ function tcMarkDone(id) {
   tcNorm();
   if (state.tcDone[id]) return false;
   state.tcDone[id] = true;
+  logStepDone(); /* v161: ghi buoc lo trinh xong vao stepLog cho Your Journey */
   if (state.tcSkipped.indexOf(id) >= 0) state.tcSkipped = state.tcSkipped.filter(function (x) { return x !== id; });
   state.xp = (state.xp || 0) + 10; saveState(); return true;
 }
@@ -23131,6 +23265,7 @@ function specTodayTcHTML(nextId) {
   if (!d.items.length && d.hiddenWork) return "";
   var h = '<section class="card" id="specTodayTc"><p class="eyebrow">VIỆC HÔM NAY · TOEIC</p>';
   h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("tc")) + '</p>';
+  h += yourJourneyHTML("tc"); /* v161 S20 phan 3: Your Journey ngay duoi ke hoach ngay */
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc TOEIC 🎉</h3><p class="mut">Không còn lỗi sai chưa sửa và đã xong hết các bước TOEIC hiện có.</p>'; }
   else {
     h += '<h3>' + d.plan.length + ' việc hôm nay</h3>';
@@ -23163,9 +23298,10 @@ function viewHomeTc(app) {
   } else {
     html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOEIC</p><h2>Bạn đã xong hết các bước TOEIC hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p></div></div></section>';
   }
+  var todayTcHTML = specTodayTcHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
+  if (!todayTcHTML) html += yourJourneyHTML("tc"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 */
   html += '</div>';
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
-  var todayTcHTML = specTodayTcHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) */
   if (todayTcHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayTcHTML + '</details>';
   html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="tcHomePath"><h3>Lộ trình TOEIC của bạn</h3>';
   TC_STAGES.forEach(function (st, i) {
@@ -23731,6 +23867,7 @@ function tpMarkDone(id) {
   tpNorm();
   if (state.tpDone[id]) return false;
   state.tpDone[id] = true;
+  logStepDone(); /* v161: ghi buoc lo trinh xong vao stepLog cho Your Journey */
   if (state.tpSkipped.indexOf(id) >= 0) state.tpSkipped = state.tpSkipped.filter(function (x) { return x !== id; });
   state.xp = (state.xp || 0) + 10; saveState(); return true;
 }
@@ -24186,6 +24323,7 @@ function specTodayTpHTML(nextId) {
   if (!d.items.length && d.hiddenWork) return "";
   var h = '<section class="card" id="specTodayTp"><p class="eyebrow">VIỆC HÔM NAY · TOPIK</p>';
   h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("tp")) + '</p>';
+  h += yourJourneyHTML("tp"); /* v161 S20 phan 3: Your Journey ngay duoi ke hoach ngay */
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc TOPIK 🎉</h3><p class="mut">Không còn lỗi sai chưa sửa và đã xong hết các bước TOPIK hiện có.</p>'; }
   else {
     h += '<h3>' + d.plan.length + ' việc hôm nay</h3>';
@@ -24218,9 +24356,10 @@ function viewHomeTp(app) {
   } else {
     html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOPIK</p><h2>Bạn đã xong hết các bước TOPIK hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p></div></div></section>';
   }
+  var todayTpHTML = specTodayTpHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
+  if (!todayTpHTML) html += yourJourneyHTML("tp"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 */
   html += '</div>';
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
-  var todayTpHTML = specTodayTpHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) */
   if (todayTpHTML) html += '<details class="card" id="homeTodayMore"><summary><b>Việc hôm nay</b></summary>' + todayTpHTML + '</details>';
   html += '<details class="card" id="homePathMore"><summary><b>Đường đi chặng hiện tại</b></summary><section class="card" id="tpHomePath"><h3>Lộ trình TOPIK của bạn</h3>';
   TP_STAGES.forEach(function (st, i) {
