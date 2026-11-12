@@ -9256,6 +9256,7 @@ function renderLesson(app) {
   else if (l.type === "specTutor") renderSpecTutor(app, l);
   else if (l.type === "skillDrill") renderSkillDrill(app, l);
   else if (l.type === "drill") renderDrill(app, l); /* v157 S19 phan 2/3 — Drill lap 1 cau (P9) */
+  else if (l.type === "freeWrite") renderFreeWrite(app, l); /* v158 S19 phan 3/3 — bai tap viet cau tu do (P4) */
   else if (l.type === "phaseExam") renderPhaseExam(app, l);
   else if (l.type === "phaseSkill") renderPhaseSkill(app, l);
   else if (l.type === "mockTest") renderMockTest(app, l);
@@ -10613,6 +10614,7 @@ function renderVocab(app, l) {
 function renderGrammar(app, l) {
   var g = RB_NEW_GRAMMAR[l.gIdx];
   if (!g) { toast("Trạm ngữ pháp này chưa có."); backFromLesson(); return; }
+  if (l.freeWrite) { renderFreeWrite(app, l); return; } /* v158 S19 phan 3/3: buoc cuoi — viet cau tu do sau bai tap kiem soat */
   var step = l.step || { id: "gramNew:" + l.gIdx, title: g.name, type: "Ngữ pháp · Câu đầu tiên" };
   if (l.quiz) { renderQuizEngine(app, l, g.quiz, "practice", "gram" + l.gIdx, 2); return; }
   var html = stepHeader(step);
@@ -11469,8 +11471,11 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
     if (mode === "practice") {
       if (stepIdx(step.id) >= 0) finishStep(step.id);
       else { if (!state.skillDone) state.skillDone = {}; var wasP = !!state.skillDone[step.id]; state.skillDone[step.id] = true; awardXp(wasP ? 5 : 10); saveState(); }
-      app.innerHTML = stepHeader(step) + finishSummaryHTML("Hoàn thành bài luyện!", stats, wrongHTML, { chest: { key: step.id, title: step.title }, starsKey: step.id, appeal: "gram:" + step.id }) + clRetrySectionHTML();
+      /* v158 S19 phan 3/3: buoc cuoi cua bai ngu phap — viet cau tu do sau bai tap kiem soat. */
+      var fwBtn158 = (l.type === "grammar" && l.gIdx != null) ? '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="gramFreeWrite">✍️ Viết câu tự do →</button></div><p class="mut">Bước cuối của bài ngữ pháp: tự viết 1 câu dùng đúng mẫu vừa học.</p>' : "";
+      app.innerHTML = stepHeader(step) + finishSummaryHTML("Hoàn thành bài luyện!", stats, wrongHTML, { chest: { key: step.id, title: step.title }, starsKey: step.id, appeal: "gram:" + step.id }) + fwBtn158 + clRetrySectionHTML();
       wireBack(); wireNextStep(); clWireRetry(l);
+      var gfw158 = $("#gramFreeWrite"); if (gfw158) gfw158.onclick = function () { l.freeWrite = true; render(); };
       if (stepIdx(step.id) < 0) { var nsP = $("#btnNextStep"); if (nsP) { nsP.textContent = "Về Luyện tập"; nsP.onclick = function () { backFromLesson(); }; } }
       $("#btnRedo").onclick = function () { l.qi = 0; l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
     } else if (mode === "skill") {
@@ -15544,7 +15549,7 @@ function renderShadowListen(app, l, item, isLong) {
    Truyen ngan o ZH/TC/TP, Nghe chep/Shadowing/Podcast o TC/TP) khong hien. */
 function pfSkillOptions(tr) {
   var exam = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[tr] || "IELTS";
-  var order = ["Từ vựng", "Ngữ pháp", "Đọc", "Nghe", "Nói", "Viết", "Gõ câu", "Nghe chép", "Shadowing", "Drill", "Truyện ngắn", "Podcast"]; /* v157 S19 phan 2/3: them Drill sau Shadowing (mo rong tu Shadowing) */
+  var order = ["Từ vựng", "Ngữ pháp", "Đọc", "Nghe", "Nói", "Viết", "Viết câu", "Gõ câu", "Nghe chép", "Shadowing", "Drill", "Truyện ngắn", "Podcast"]; /* v157 S19 phan 2/3: them Drill sau Shadowing (mo rong tu Shadowing); v158 S19 phan 3/3: them "Viết câu" sau "Viết" */
   var have = {};
   try { pfBuildItems(exam).forEach(function (it) { if (it.skill) have[it.skill] = true; }); } catch (e) {}
   return '<option value="">Mọi kỹ năng</option>' + order.filter(function (s) { return have[s]; }).map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join("");
@@ -15578,6 +15583,7 @@ function pfBuildItems(exam) {
     zhSets().forEach(function (d) { items.push({ skill: "Từ vựng", topic: d.set.topic, band: "HSK " + d.stage, label: "Từ vựng: " + d.set.topic + " (" + d.set.cards.length + " từ)", open: open({ type: "zhVocab", setKey: d.key }) }); });
     items.push({ skill: "Đọc", topic: "Luyện trộn 60/20/20", band: "", label: "Luyện trộn 60/20/20 — 10 câu Đọc (6 vừa sức · 2 mới · 2 thử thách)", open: open({ type: "mix60", track: "zh" }) }); /* v154 S17 */
     items.push({ skill: "Drill", topic: "Drill lặp 1 câu", band: "", label: "🔁 Drill lặp 1 câu — lặp 1 câu đến trôi chảy (video/bài đọc)", open: open({ type: "drill", track: "zh" }) }); /* v157 S19 phan 2/3 */
+    items.push({ skill: "Viết câu", topic: "Viết câu tự do", band: "", label: "✍️ Viết câu tự do — tự viết 1 câu dùng đúng mẫu ngữ pháp vừa học", open: open({ type: "freeWrite", track: "zh", picker: true }) }); /* v158 S19 phan 3/3 */
     return items;
   }
   if (exam === "TOEIC" || exam === "TOPIK") {
@@ -15587,6 +15593,7 @@ function pfBuildItems(exam) {
     var skillOf = { vocab: "Từ vựng", gram: "Ngữ pháp", listen: "Nghe", read: "Đọc", speak: "Nói", write: "Viết" }; /* v149 (S12): bai Noi TC/TP co that (TC 8, TP 16) phai co nhan "Nói" de bo loc tim duoc — truoc day roi ve skill "" nen loc "Nói" tra 0 bai */
     items.push({ skill: "Đọc", topic: "Luyện trộn 60/20/20", band: "", label: "Luyện trộn 60/20/20 — 10 câu Đọc (6 vừa sức · 2 mới · 2 thử thách)", open: open({ type: "mix60", track: exam === "TOEIC" ? "tc" : "tp" }) }); /* v154 S17: de DAU — loc chi hien 50 bai dau */
     items.push({ skill: "Drill", topic: "Drill lặp 1 câu", band: "", label: "🔁 Drill lặp 1 câu — lặp 1 câu đến trôi chảy (video/bài đọc)", open: open({ type: "drill", track: exam === "TOEIC" ? "tc" : "tp" }) }); /* v157 S19 phan 2/3 */
+    items.push({ skill: "Viết câu", topic: "Viết câu tự do", band: "", label: "✍️ Viết câu tự do — tự viết 1 câu dùng đúng mẫu ngữ pháp vừa học", open: open({ type: "freeWrite", track: exam === "TOEIC" ? "tc" : "tp", picker: true }) }); /* v158 S19 phan 3/3 */
     stages.forEach(function (st) {
       st.steps.forEach(function (id) {
         var m = metaFn(id); if (!m) return;
@@ -15600,6 +15607,7 @@ function pfBuildItems(exam) {
   CONTENT.grammar.forEach(function (g, i) { items.push({ skill: "Ngữ pháp", topic: g.name, band: g.level || "", label: "Ngữ pháp (kho cũ): " + g.name, open: open({ type: "skillGramOld", idx: i, skillKey: "gramOld:" + i, title: g.name }) }); });
   items.push({ skill: "Đọc", topic: "Luyện trộn 60/20/20", band: "", label: "Luyện trộn 60/20/20 — 10 câu Đọc (6 vừa sức · 2 mới · 2 thử thách)", open: open({ type: "mix60", track: "en" }) }); /* v154 S17: de DAU kho Doc — loc chi hien 50 bai dau, de cuoi se khong thay */
     items.push({ skill: "Drill", topic: "Drill lặp 1 câu", band: "", label: "🔁 Drill lặp 1 câu — lặp 1 câu đến trôi chảy (video/bài đọc)", open: open({ type: "drill", track: "en" }) }); /* v157 S19 phan 2/3 */
+  items.push({ skill: "Viết câu", topic: "Viết câu tự do", band: "", label: "✍️ Viết câu tự do — tự viết 1 câu dùng đúng mẫu ngữ pháp vừa học", open: open({ type: "freeWrite", track: "en", picker: true }) }); /* v158 S19 phan 3/3 */
   CONTENT.reading.forEach(function (r, i) { items.push({ skill: "Đọc", topic: r.topic, band: r.level || "", label: "Đọc: " + r.topic, open: open({ type: "skillRead", idx: i }) }); });
   CONTENT.listening.forEach(function (r, i) { items.push({ skill: "Nghe", topic: r.topic, band: r.band || "", label: "Nghe ngắn: " + r.topic, open: open({ type: "skillListen", idx: i }) }); items.push({ skill: "Shadowing", topic: r.topic, band: r.band || "", label: "Shadowing: " + r.topic, open: open({ type: "skillListen", idx: i, shadow: true, shadowMode: "practice", shadowIdx: 0, shadowTurn: "listen" }) }); });
   CONTENT.listeningPlus.forEach(function (r, i) {
@@ -17000,6 +17008,170 @@ function renderDrill(app, l) {
   var sk = $("#drSkip");
   if (sk) sk.onclick = function () { drillSkip(l); };
 }
+/* ---------- v158 S19 phan 3/3: BAI TAP VIET CAU TU DO (P4) ----------
+   P4 (KE_HOACH §11, mau bai ngu phap 2 mat kieu Murphy + Babbel): bai ngu phap
+   di theo chuoi tinh huong -> cong thuc -> khi nao dung -> dong thoi gian ->
+   so sanh de nham -> bai tap kiem soat -> TU DO. Viet cau tu do la buoc cuoi:
+   sau bai tap kiem soat (trac nghiem/dien), nguoi hoc TU VIET 1 cau moi dung
+   dung mau vua hoc trong tinh huong cho truoc. Khung 3 buoc theo dung khung
+   Viet da co cua web (renderSkillWrite): (1) viet cau -> (2) tu cham theo
+   3 tieu chi + doi chieu cau mau tu soan (2 cot) -> (3) viet lai ban sua
+   (luu ca hai ban). KHONG tu cham thay bang may: khong VIP thi tu cham
+   (khong band may); VIP thi AI cham 4 tieu chi qua callAiTutorWriting
+   (cong VIP mau v104; AI loi -> bao loi ro, khong ghi band, van hoan thanh
+   viec viet). Khong khoa bai. */
+function freeWriteModelFromExplain(explain) {
+  var ex = String(explain || "");
+  var m = ex.match(/Ví dụ trước:\s*'([^']{3,})'/) || ex.match(/'([^']{3,})'/);
+  if (!m) return { model: "", modelVi: "" };
+  var after = ex.slice(m.index + m[0].length);
+  var vm = after.match(/^\s*\(([^)]+)\)/);
+  return { model: m[1], modelVi: vm ? vm[1] : "" };
+}
+function freeWriteSrcFor(track, gramIdx) {
+  var gi = +gramIdx;
+  if (track === "en") {
+    var g = (typeof RB_NEW_GRAMMAR !== "undefined") ? RB_NEW_GRAMMAR[gi] : null;
+    if (!g) return null;
+    return { track: "en", key: "fw:en:gramNew:" + gi, title: g.name, level: g.level || "", pattern: g.name, situation: g.hook || "", rule: g.explain || "", model: g.model || "", modelVi: g.modelVi || "", examLabel: "Writing IELTS" };
+  }
+  if (track === "zh") {
+    var z = (typeof ZH_GRAMMAR !== "undefined") ? ZH_GRAMMAR[gi] : null;
+    if (!z) return null;
+    return { track: "zh", key: "fw:zh:zhGram:" + gi, title: z.title, level: "HSK " + z.stage, pattern: z.title, situation: z.hook || "", rule: z.rule || "", model: (z.examples && z.examples[0]) || "", modelVi: "", examLabel: "Writing HSK" };
+  }
+  if (track === "tc") {
+    var t = (typeof TC_GRAMMAR !== "undefined") ? TC_GRAMMAR[gi] : null;
+    if (!t) return null;
+    var tm = freeWriteModelFromExplain(t.explain);
+    return { track: "tc", key: "fw:tc:tcGram:" + gi, title: t.name, level: t.level || "", pattern: t.name, situation: "", rule: t.explain || "", model: tm.model, modelVi: tm.modelVi, examLabel: "Writing TOEIC" };
+  }
+  if (track === "tp") {
+    var p = (typeof TP_GRAMMAR !== "undefined") ? TP_GRAMMAR[gi] : null;
+    if (!p) return null;
+    var pm = freeWriteModelFromExplain(p.explain);
+    return { track: "tp", key: "fw:tp:tpGram:" + gi, title: p.name, level: p.level || "", pattern: p.name, situation: "", rule: p.explain || "", model: pm.model, modelVi: pm.modelVi, examLabel: "Writing TOPIK" };
+  }
+  return null;
+}
+function freeWriteTrackLabel(track) { return { en: "Tiếng Anh · IELTS", zh: "Tiếng Trung · HSK", tc: "Tiếng Anh · TOEIC", tp: "Tiếng Hàn · TOPIK" }[track] || "Ngữ pháp"; }
+function freeWriteGramList(track) {
+  if (track === "zh") return (typeof ZH_GRAMMAR !== "undefined" ? ZH_GRAMMAR : []).map(function (g, i) { return { idx: i, name: g.title, level: "HSK " + g.stage }; });
+  if (track === "tc") return (typeof TC_GRAMMAR !== "undefined" ? TC_GRAMMAR : []).map(function (g, i) { return { idx: i, name: g.name, level: g.level || "" }; });
+  if (track === "tp") return (typeof TP_GRAMMAR !== "undefined" ? TP_GRAMMAR : []).map(function (g, i) { return { idx: i, name: g.name, level: g.level || "" }; });
+  return (typeof RB_NEW_GRAMMAR !== "undefined" ? RB_NEW_GRAMMAR : []).map(function (g, i) { return { idx: i, name: g.name, level: g.level || "" }; });
+}
+function renderFreeWrite(app, l) {
+  var track = l.track || (l.type === "zhGram" ? "zh" : "en");
+  var gramIdx = (l.gramIdx != null) ? l.gramIdx : (l.gIdx != null ? l.gIdx : l.idx);
+  /* Che do chon mau: mo tu tab Luyen tap (nhom Ngu phap) — chon 1 mau ngu phap roi moi viet. */
+  if (l.picker && gramIdx == null) {
+    var list = freeWriteGramList(track);
+    app.innerHTML = skillHead("Viết câu tự do", freeWriteTrackLabel(track) + " · Ngữ pháp") + '<div class="qblock"><p>Chọn 1 mẫu ngữ pháp rồi tự viết 1 câu dùng đúng mẫu đó:</p>' + list.map(function (it) { return '<p><button class="btn" data-fwpat="' + it.idx + '">' + esc(it.name) + (it.level ? ' <span class="mut">(' + esc(it.level) + ')</span>' : '') + '</button></p>'; }).join("") + '</div>';
+    wireBack();
+    $$("[data-fwpat]").forEach(function (b) { b.onclick = function () { l.gramIdx = +b.dataset.fwpat; l.picker = false; render(); }; });
+    return;
+  }
+  var src = freeWriteSrcFor(track, gramIdx);
+  if (!src) { toast("Mẫu ngữ pháp này chưa có."); backFromLesson(); return; }
+  var key = src.key;
+  var step = l.fwStep || 0;
+  var trackLabel = freeWriteTrackLabel(track);
+  var situationHTML = src.situation ? '<p><b>Tình huống:</b> ' + esc(src.situation) + '</p>' : '<p><b>Tình huống:</b> Viết 1 câu của riêng bạn dùng đúng mẫu “' + esc(src.pattern) + '” trong một tình huống đời thật của bạn.</p>';
+  var twoColHTML = function (leftTitle, leftText, rightTitle, rightText, rightSub) {
+    return '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>' + leftTitle + '</b><p>' + esc(leftText || "") + '</p></div><div style="flex:1"><b>' + rightTitle + '</b><p>' + esc(rightText || "") + '</p>' + (rightSub ? '<p class="mut">' + esc(rightSub) + '</p>' : '') + '</div></div></div>';
+  };
+  if (step === 3) {
+    var att = (state.freeWriteAttempts || {})[key] || {};
+    var attBandLine = att.selfCheck ? "Tự đánh giá — không có band máy (AI chấm chỉ mở cho VIP)"
+      : (att.aiBand != null ? "Band AI chấm: <b>" + fmtBandComma(att.aiBand) + '</b> <span class="mut">(Máy ước lượng — không phải điểm thi thật)</span>' : "Band AI chấm: <b>?</b> <span class=\"mut\">(Máy ước lượng — không phải điểm thi thật)</span>");
+    app.innerHTML = skillHead("Viết câu tự do — " + src.title, trackLabel + " · Ngữ pháp") + finishSummaryHTML("Bạn đã hoàn thành bài viết câu tự do!", '<p>' + attBandLine + '</p><p class="mut">Cả hai bản đã lưu trong tiến trình của bạn.</p>', "", { starsKey: key })
+      + '<div class="qblock"><h3>Đối chiếu 2 cột — câu gốc và câu sửa</h3><div class="row"><div style="flex:1"><b>Câu gốc</b><p>' + esc(att.draft || "") + '</p></div><div style="flex:1"><b>Câu sửa (đã lưu)</b><p>' + esc(att.rewrite || "") + '</p></div></div><p class="mut">Câu gốc để đối chiếu, câu sửa là câu bạn đã sửa theo ' + (att.selfCheck ? 'những gì rút ra khi tự chấm và đối chiếu câu mẫu' : 'góp ý AI') + ' — cả hai đều đã lưu.</p></div>';
+    wireBack();
+    var ns = $("#btnNextStep"); if (ns) { ns.textContent = "Về Luyện tập"; ns.onclick = function () { backFromLesson(); }; }
+    $("#btnRedo").onclick = function () { l.fwStep = 0; l.fwDraft = ""; l.fwRewrite = ""; l.fwAi = null; l.fwAiBand = null; l.fwSelfCheck = false; l.fwSelf = {}; lessonStart = Date.now(); render(); };
+    return;
+  }
+  if (step === 0) {
+    app.innerHTML = skillHead("Viết câu tự do — " + src.title, trackLabel + " · Ngữ pháp" + (src.level ? " · " + src.level : "") + " · Bước 1: Viết câu của bạn") + phaseBarHTML(2)
+      + '<div class="qblock">' + situationHTML
+      + '<p><b>Mẫu cần dùng:</b> ' + esc(src.pattern) + '</p>'
+      + '<details class="rule-more"><summary><b>Xem lại quy tắc</b></summary><p>' + esc(src.rule) + '</p></details>'
+      + '<textarea id="fwDraft" rows="4" style="width:100%;padding:10px" placeholder="Viết 1 câu của bạn dùng đúng mẫu trên...">' + esc(l.fwDraft || "") + '</textarea>'
+      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="fwNext1">' + (msIsVip() ? "Xong câu của mình → AI chấm" : "Xong câu của mình → Tự chấm") + '</button></div></div>';
+    wireBack();
+    $("#fwNext1").onclick = function () { var v = $("#fwDraft").value; if (!v.trim()) { toast("Hãy viết 1 câu trước đã."); return; } l.fwDraft = v; l.fwStep = 1; render(); };
+    return;
+  }
+  if (step === 1) {
+    /* Khong VIP: tu cham theo 3 tieu chi + doi chieu cau mau 2 cot (mau v104:
+       khong goi AI, khong co band may, bai luu ghi ro "Tu danh gia"). */
+    if (!msIsVip()) {
+      var crit = ["Dùng đúng mẫu ngữ pháp “" + src.pattern + "”", "Trật tự từ đúng", "Hợp tình huống đã cho"];
+      app.innerHTML = skillHead("Viết câu tự do — " + src.title, trackLabel + " · Ngữ pháp · Bước 2: Tự chấm + đối chiếu câu mẫu") + phaseBarHTML(2)
+        + '<div class="qblock">' + aiVipNoticeHTML("writing") + '</div>'
+        + '<div class="qblock"><h3>Tự chấm câu của bạn — tích đủ 3 tiêu chí</h3>' + crit.map(function (c, i) { return '<p><label><input type="checkbox" data-fwcrit="' + i + '"' + ((l.fwSelf || {})[i] ? ' checked' : '') + '> ' + esc(c) + '</label></p>'; }).join("") + '</div>'
+        + twoColHTML("Câu của bạn", l.fwDraft, "Câu mẫu", src.model || "Bài này chưa có câu mẫu riêng — hãy đối chiếu với ví dụ trong phần quy tắc.", src.modelVi)
+        + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="fwNext2">Đã đối chiếu xong → Viết lại bản sửa</button></div>';
+      wireBack();
+      $$("[data-fwcrit]").forEach(function (cb) { cb.onchange = function () { if (!l.fwSelf) l.fwSelf = {}; l.fwSelf[+cb.dataset.fwcrit] = cb.checked; }; });
+      $("#fwNext2").onclick = function () { var ok = [0, 1, 2].every(function (i) { return (l.fwSelf || {})[i]; }); if (!ok) { toast("Hãy tích đủ 3 tiêu chí đã tự chấm trước đã."); return; } l.fwAiBand = null; l.fwSelfCheck = true; l.fwStep = 2; render(); };
+      return;
+    }
+    var aw = l.fwAi || {};
+    var awHtml = '<div class="qblock"><h3>AI chấm 4 tiêu chí</h3>';
+    if (aw.err) awHtml += '<p>' + esc(aw.err) + '</p>';
+    if (!aw.parsed && !aw.err) awHtml += '<p class="mut">Bấm “AI chấm Viết 4 tiêu chí” để AI chấm câu của bạn theo 4 tiêu chí (cần đăng nhập; chưa đăng nhập thì web không gọi mạng — hãy đăng nhập rồi bấm lại).</p>';
+    if (aw.parsed && aw.parsed.full) {
+      aw.parsed.criteria.forEach(function (c) { awHtml += '<p><b>' + esc(c.name) + ': Band ' + fmtBandComma(c.band) + '</b> — ' + esc(c.note) + '</p>'; });
+      awHtml += '<p><b>Band câu của bạn (Máy ước lượng): ' + fmtBandComma(aw.parsed.overall) + '</b></p>';
+      if (aw.parsed.good && aw.parsed.good.length) awHtml += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + aw.parsed.good.map(function (g) { return '<p><span class="ai-seg ai-seg-green">' + esc(g.quote) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(g.why) + '</p>'; }).join("") + '</div>';
+      if (aw.parsed.fix && aw.parsed.fix.length) awHtml += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + aw.parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+      if (aw.parsed.tips && aw.parsed.tips.length) awHtml += '<div class="sumcard"><h3>NOTE — VIẾT HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + aw.parsed.tips.map(function (tp) { return '<p>Đoạn: “' + esc(tp.quote) + '” — ' + esc(tp.why) + (tp.rewrite ? ' — <b>Viết lại: ' + esc(tp.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+    } else if (aw.parsed && !aw.parsed.full) {
+      awHtml += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(aw.parsed.raw || "") + '</p><p class="mut">Band chưa có vì AI trả dở dang — bạn vẫn có thể bấm “Đã chấm xong → Viết lại bản sửa” để viết lại theo góp ý (nếu có), hoặc bấm “AI chấm Viết 4 tiêu chí” để chấm lại.</p>';
+    }
+    awHtml += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="fwAiBtn"' + (aw.busy ? ' disabled' : '') + '>' + (aw.busy ? 'Đang chấm...' : 'AI chấm Viết 4 tiêu chí') + '</button></div></div>';
+    app.innerHTML = skillHead("Viết câu tự do — " + src.title, trackLabel + " · Ngữ pháp · Bước 2: AI chấm 4 tiêu chí + đối chiếu câu mẫu") + phaseBarHTML(2) + awHtml
+      + twoColHTML("Câu của bạn", l.fwDraft, "Câu mẫu", src.model || "Bài này chưa có câu mẫu riêng — hãy đối chiếu với ví dụ trong phần quy tắc.", src.modelVi)
+      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="fwNext2">Đã chấm xong → Viết lại bản sửa</button></div>';
+    wireBack();
+    (function () {
+      var b = $("#fwAiBtn"); if (!b) return;
+      b.onclick = function () {
+        var tries = 0;
+        (function gradeOnce() {
+          l.fwAi = { busy: true, err: "" }; render();
+          callAiTutorWriting("Viết câu tự do — " + src.title, (src.situation || "Viết 1 câu dùng đúng mẫu") + " Mẫu: " + src.pattern, l.fwDraft || "", src.examLabel).then(function (res) {
+            var p = parseAiDetailReply(res.reply, "writing");
+            if (!p.full && tries < 2) { tries++; gradeOnce(); return; }
+            l.fwAi = { parsed: p }; render();
+          }, function (err) { l.fwAi = { err: (err && err.message) || String(err) }; render(); });
+        })();
+      };
+    })();
+    $("#fwNext2").onclick = function () {
+      if (!l.fwAi || !l.fwAi.parsed) { toast("Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần Viết chỉ có AI chấm, không tự chấm."); return; }
+      l.fwAiBand = l.fwAi.parsed.full ? l.fwAi.parsed.overall : null; l.fwStep = 2; render();
+    };
+    return;
+  }
+  var fwStep2Band = l.fwSelfCheck ? "Bạn tự chấm theo 3 tiêu chí — không có band máy (AI chấm chỉ mở cho VIP)" : (l.fwAiBand == null ? "Band chưa có vì AI trả dở dang — hãy viết lại theo góp ý AI (nếu có)" : "Band AI chấm câu của bạn: " + fmtBandComma(l.fwAiBand) + ' <span class="mut">(Máy ước lượng)</span>');
+  app.innerHTML = skillHead("Viết câu tự do — " + src.title, trackLabel + " · Ngữ pháp · Bước 3: Viết lại bản sửa") + phaseBarHTML(2) + '<div class="qblock"><p><b>' + fwStep2Band + '</b></p><p>' + (l.fwSelfCheck ? "Viết lại câu, sửa theo những gì rút ra khi tự chấm và đối chiếu câu mẫu:" : "Viết lại câu, sửa theo góp ý AI:") + '</p>'
+    + '<textarea id="fwRewrite" rows="4" style="width:100%;padding:10px">' + esc(l.fwRewrite || l.fwDraft || "") + '</textarea>'
+    + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="fwSave">Lưu bản sửa</button></div></div>';
+  wireBack();
+  $("#fwSave").onclick = function () {
+    var v = $("#fwRewrite").value; if (!v.trim()) { toast("Hãy viết bản sửa trước đã."); return; }
+    if (!state.freeWriteAttempts) state.freeWriteAttempts = {};
+    state.freeWriteAttempts[key] = { draft: l.fwDraft || "", rewrite: v, selfCheck: !!l.fwSelfCheck, aiBand: l.fwAiBand, at: todayStr() };
+    var was = !!(state.skillDone && state.skillDone[key]);
+    if (!state.skillDone) state.skillDone = {};
+    state.skillDone[key] = true; awardXp(was ? 5 : 10); saveState();
+    l.fwStep = 3; render();
+  };
+}
+
 function examClockText(ms) {
   var s = Math.max(0, Math.ceil(ms / 1000));
   var m = Math.floor(s / 60), r = s % 60;
@@ -20752,11 +20924,13 @@ function renderZhPh(app, l) {
 function renderZhGram(app, l) {
   var g = ZH_GRAMMAR[l.idx];
   if (!g) { curLesson = null; render(); return; }
+  if (l.freeWrite) { renderFreeWrite(app, l); return; } /* v158 S19 phan 3/3: buoc cuoi — viet cau tu do sau bai tap kiem soat */
   if (l.quiz) {
     l.title = "Ngữ pháp: " + g.title; l.typeLabel = "Tiếng Trung · Ngữ pháp chặng " + g.stage;
     l.recordErrors = true; l.zhQuizLesson = "zhGram:" + g.id;
     /* B6c: tram ngu phap lam dung het tu hen on lai theo SRS (nhu the tu). */
-    renderZhQuiz(app, l, g.quiz, function (score, total) { zhAwardOnce("zhGram:" + g.id); if (score === total) { var gk = "zhGram:" + g.id; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[gk]) state.zhHard[gk] = { kind: "gram", gramIdx: l.idx, title: g.title, streak: 0, level: 0, fails: 0, due: addDaysStr(todayStr(), 1) }; } }, null, {});
+    renderZhQuiz(app, l, g.quiz, function (score, total) { zhAwardOnce("zhGram:" + g.id); if (score === total) { var gk = "zhGram:" + g.id; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[gk]) state.zhHard[gk] = { kind: "gram", gramIdx: l.idx, title: g.title, streak: 0, level: 0, fails: 0, due: addDaysStr(todayStr(), 1) }; } }, function (score, total) { return '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhGramFreeWrite">✍️ Viết câu tự do →</button></div><p class="mut">Bước cuối của bài ngữ pháp: tự viết 1 câu dùng đúng mẫu vừa học.</p>'; }, {});
+    var zfw158 = $("#zhGramFreeWrite"); if (zfw158) zfw158.onclick = function () { l.freeWrite = true; render(); }; /* v158 S19 phan 3/3 */
     return;
   }
   var html = lessonHead({ title: "Ngữ pháp: " + g.title, type: "Tiếng Trung · Ngữ pháp chặng " + g.stage }, g.note || "");
@@ -22408,11 +22582,12 @@ function tcOpenStep(id, backTab) {
     /* DOT SOI-D9d 02/11: tach ly thuyet rieng 1 man, roi moi cau 1 man (phan trang
        nhu kiem tra cuoi chang) thay vi don ly thuyet + 6 cau vao 1 man. */
     var renderGramQuiz = function () {
-      var htmlQ = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2>' + tcQuizBlockHTML(g.quiz, "g") + '<div class="row"><button class="btn btn-primary" id="tcFinishBtn">Xong bài này (+10 XP)</button></div></section>';
+      var htmlQ = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2>' + tcQuizBlockHTML(g.quiz, "g") + '<div class="row"><button class="btn btn-primary" id="tcFinishBtn">Xong bài này (+10 XP)</button><button class="btn" id="tcFreeWriteBtn">✍️ Viết câu tự do →</button></div><p class="mut">Bước cuối của bài ngữ pháp: tự viết 1 câu dùng đúng mẫu vừa học.</p></section>';
       app.innerHTML = htmlQ; app._tcQs = g.quiz;
       tcWireQuiz(app, id, "tcFinishBtn");
       paginateQuiz(app, "tcq", "tc", "tcFinishBtn");
       document.getElementById("tcFinishBtn").onclick = function () { if (tcMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
+      document.getElementById("tcFreeWriteBtn").onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "freeWrite", track: "tc", gramIdx: m.ref }); }; /* v158 S19 phan 3/3 */
       tcWireBack(back);
     };
     var html2 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2><p>' + esc(g.explain) + '</p>' + (g.tenseTable ? tcTenseTableHTML(g.tenseTable) : '') + '<div class="row"><button class="btn btn-primary" id="tcGramStart">Vào luyện tập →</button></div></section>';
@@ -23366,10 +23541,11 @@ function tpOpenStep(id, backTab) {
   if (m.kind === "speak") { renderTpSpeak(app, m, id, back, skipBanner); return; } /* v136: bai Noi TOPIK (M6) */
   if (m.kind === "gram") {
     var g = TP_GRAMMAR[m.ref];
-    var html2 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2><p>' + esc(g.explain) + '</p>' + tpQuizBlockHTML(g.quiz, "g") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button></div></section>';
+    var html2 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2><p>' + esc(g.explain) + '</p>' + tpQuizBlockHTML(g.quiz, "g") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button><button class="btn" id="tpFreeWriteBtn">✍️ Viết câu tự do →</button></div><p class="mut">Bước cuối của bài ngữ pháp: tự viết 1 câu dùng đúng mẫu vừa học.</p></section>';
     app.innerHTML = html2; app._tpQs = g.quiz;
     tpWireQuiz(app, id, "tpFinishBtn");
     document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
+    document.getElementById("tpFreeWriteBtn").onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "freeWrite", track: "tp", gramIdx: m.ref }); }; /* v158 S19 phan 3/3 */
     tpWireBack(back); return;
   }
   if (m.kind === "listen") {
