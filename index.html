@@ -533,7 +533,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", myWords: [], myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -1251,7 +1251,9 @@ function supplementHTML() {
     + '<input type="file" id="phFPickFile" accept="image/*" style="display:none"></p>'
     + '<p class="mut" id="phFStatus"></p>'
     + '<div id="photoDraftArea">' + photoDraftHTML() + '</div></section>';
-  html += '<section class="card"><h3>Từ của tôi (' + words.length + ' từ)</h3>';
+  html += '<section class="card"><h3>Từ của tôi (' + words.length + ' từ)</h3>'
+    + '<div class="row" style="margin:6px 0"><label>Track: <select id="mwPronTrack">' + mwPronTrackOptions() + '</select></label> <button class="btn" id="myWordsPronBtn" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">🎤 Luyện phát âm bộ từ này</button></div>'
+    + myWordsPronNextHTML();
   if (!words.length) {
     html += '<p class="mut">Chưa có từ nào — nhập từ đầu tiên ở form phía trên.</p>';
   } else {
@@ -1338,6 +1340,13 @@ function wireSupplement() {
       myWordOpenSet(parts[0], +parts[1]);
     };
   });
+  var mpb = $("#myWordsPronBtn");
+  if (mpb) mpb.onclick = function () {
+    var tr = ($("#mwPronTrack") || {}).value || state.track || "en";
+    var n = (state.myWords || []).filter(function (m) { return m && m.bank === tr; }).length;
+    if (!n) { toast("Chưa có từ nào — chụp ảnh thêm từ hoặc lưu từ vào bộ."); return; }
+    lessonStart = Date.now(); openLesson({ type: "myWordsPron", track: tr });
+  };
   wirePhotoWord();
 }
 
@@ -9368,6 +9377,7 @@ function renderLesson(app) {
   else if (l.type === "drill") renderDrill(app, l); /* v157 S19 phan 2/3 — Drill lap 1 cau (P9) */
   else if (l.type === "freeWrite") renderFreeWrite(app, l); /* v158 S19 phan 3/3 — bai tap viet cau tu do (P4) */
   else if (l.type === "pronSrs") renderPronSrs(app, l); /* v159 S20 phan 1 — SRS phat am */
+  else if (l.type === "myWordsPron") renderMyWordsPron(app, l); /* v160 S20 phan 2 — Study Sets phat am "Tu cua toi" (ELSA 9) */
   else if (l.type === "phaseExam") renderPhaseExam(app, l);
   else if (l.type === "phaseSkill") renderPhaseSkill(app, l);
   else if (l.type === "mockTest") renderMockTest(app, l);
@@ -17024,6 +17034,193 @@ function drillVideoOptions(track) {
     out.unshift({ key: "voa-break-the-news", title: "VOA: Break the News — English in a Minute" });
   }
   return out;
+}
+/* ---------- v160 S20 phan 2 — STUDY SETS PHAT AM "TU CUA TOI" (ELSA 9) ----------
+   Tu bo "Tu cua toi" (myWords) them che do luyen phat am: chon toi da 10 tu
+   cua minh -> vong thay-noi-cham tung tu (nghe mau -> doc to cham tang 1 SR
+   nhi phan nhu buoc 4) -> tom tat cuoi buoi (tu nao dat, tu nao con yeu).
+   Khong lam kho tu moi. So 10 tu/luot va hen on lai sau 7 ngay la goi y tu
+   nguon thu cap (anygen.io — routine ELSA: luu 1-3 loi vao Study Set, hen
+   lam lai sau 7 ngay), KHONG phai luat cung — ghi ro trong UI. Tu doc sai
+   vao So loi sai (recordQuizError) + hang doi SRS phat am v159 (pronSrsJudge,
+   khong lam luat SRS moi); chi goi pronSrsJudge(true) khi muc da den han
+   (due <= hom nay) de dung 2 lan cach quang moi tot nghiep. May khong mic /
+   khong SR -> che do nghe + go lai (luat thoat mic v112). Khong bia IPA:
+   tu chua co phien am thi hien dong canh bao, giong mau van la TTS va ghi ro
+   do la giong may. Khong bia diem % tung am, khong khoa bai/bo tu. */
+function myWordsPronPhon(m) { return (m && (m.ipa || m.pinyin || m.r)) || ""; }
+function myWordsPronSym(m, track) {
+  try {
+    if (track === "zh") {
+      var parts = zhPinyinParts(String((m && m.pinyin) || "").split(/\s+/)[0] || "");
+      if (parts && parts.tone != null) return zhToneName(parts.tone);
+    } else if (track === "tp") {
+      var j = tpJamo(m ? m.w : "");
+      if (j && j.init != null && TP_INIT_JAMO[j.init]) return TP_INIT_JAMO[j.init];
+    } else {
+      var s = firstSymFromIpa((m && m.ipa) || "");
+      if (s) return s;
+    }
+  } catch (e) {}
+  return myWordsPronPhon(m) || (m ? m.w : "");
+}
+function myWordsPronWords(track) {
+  var words = (state.myWords || []).filter(function (m) { return m && m.bank === track; });
+  var pronWords = {};
+  Object.keys(state.wordPron || {}).forEach(function (k) { var p = state.wordPron[k]; if (p && p.word) pronWords[p.word] = true; });
+  var ps = state.pronSrs || {};
+  words.sort(function (a, b) {
+    var pa = pronWords[a.w] ? 1 : 0, pb = pronWords[b.w] ? 1 : 0;
+    if (pa !== pb) return pa - pb;
+    var fa = (ps["w:" + track + ":" + a.w] || {}).fails || 0, fb = (ps["w:" + track + ":" + b.w] || {}).fails || 0;
+    if (fb !== fa) return fb - fa;
+    return (a.createdAt || 0) - (b.createdAt || 0);
+  });
+  return words.slice(0, 10).map(function (m) { return { m: m, w: m.w, vi: m.vi || "", phon: myWordsPronPhon(m), sym: myWordsPronSym(m, track) }; });
+}
+function myWordsPronTrackLabel(tr) { var l = tr; myWordBanks().forEach(function (b) { if (b.key === tr) l = b.label; }); return l; }
+function mwPronTrackOptions() {
+  var counts = {};
+  (state.myWords || []).forEach(function (m) { if (m && m.bank) counts[m.bank] = (counts[m.bank] || 0) + 1; });
+  /* v160b: chi hien track CO TU trong bo — khong hien "IELTS (0 tu)" o tab
+     track khac (probe test_mine_unified_v89: tab Cua toi cua ZH/TC/TP khong
+     duoc co chu "ielts"); bo trong het thi 1 lua chon rong. */
+  var banks = myWordBanks().filter(function (b) { return (counts[b.key] || 0) > 0; });
+  if (!banks.length) return '<option value="">Chưa có từ nào</option>';
+  var def = (counts[state.track] || 0) > 0 ? state.track : banks[0].key;
+  return banks.map(function (b) { return '<option value="' + b.key + '"' + (b.key === def ? ' selected' : '') + '>' + b.label + ' (' + (counts[b.key] || 0) + ' từ)</option>'; }).join("");
+}
+function myWordsPronNextHTML() {
+  var nx = state.myWordsPronNext || {}, parts = [];
+  ["en", "zh", "tc", "tp"].forEach(function (tr) {
+    var n = nx[tr];
+    if (n && n.due) parts.push(myWordsPronTrackLabel(tr) + " hẹn ôn lại: " + n.due);
+  });
+  return parts.length ? '<p class="mut" id="mwPronNext">' + esc(parts.join(" · ")) + '</p>' : "";
+}
+function renderMyWordsPron(app, l) {
+  if (!l.mwpInit) {
+    l.mwpInit = true;
+    l.mwpTrack = l.track || "en";
+    l.mwpWords = myWordsPronWords(l.mwpTrack);
+    l.mwpIdx = 0; l.mwpTries = []; l.mwpFirst = 0; l.mwpWrong = []; l.mwpSkipped = 0; l.mwpDone = false;
+    l.mwpMsg = ""; l.mwpHeard = ""; l.mwpTyped = ""; l.mwpLastOk = false;
+    if (MR_HAS_AUDIO === null) mrCheckDevices(function () { if (curLesson === l) render(); });
+  }
+  var track = l.mwpTrack;
+  if (!l.mwpWords.length) {
+    app.innerHTML = skillHead("🎤 Luyện phát âm — Từ của tôi", "") + '<div class="qblock"><p>Chưa có từ nào — chụp ảnh thêm từ hoặc lưu từ vào bộ.</p><div class="row"><button class="btn btn-primary" id="mwpBack">Về Từ của tôi</button></div></div>';
+    wireBack(); $("#mwpBack").onclick = function () { go("mine"); };
+    return;
+  }
+  if (l.mwpDone) {
+    var nx = (state.myWordsPronNext || {})[track];
+    var wrongList = l.mwpWrong.length ? '<p><b>Từ còn sai:</b> ' + l.mwpWrong.map(function (x) { return esc(x.w) + ' — ' + esc(x.vi); }).join("; ") + '</p>' : '<p>Mọi từ đều đọc đúng ngay lần đầu — giỏi lắm!</p>';
+    app.innerHTML = skillHead("🎤 Luyện phát âm — Từ của tôi", "Xong phiên luyện")
+      + '<div class="qblock"><h2>Xong phiên luyện!</h2>'
+      + '<p>Đúng ngay lần đầu: <b>' + l.mwpFirst + '/' + l.mwpWords.length + '</b> từ · Bỏ qua: ' + l.mwpSkipped + ' từ.</p>'
+      + wrongList
+      + '<p class="mut">Từ còn sai đã vào Sổ lỗi sai + hàng đợi ôn phát âm (1-3-7-14-30 ngày). Hẹn ôn lại bộ từ này sau 7 ngày: <b>' + (nx ? esc(nx.due) : '—') + '</b> (7 ngày là gợi ý từ nghiên cứu ELSA, không phải luật cứng).</p>'
+      + '<div class="row"><button class="btn btn-primary" id="mwpAgain">Luyện lại</button><button class="btn" id="mwpBack2">Về Từ của tôi</button></div></div>';
+    wireBack();
+    $("#mwpAgain").onclick = function () { openLesson({ type: "myWordsPron", track: track }); };
+    $("#mwpBack2").onclick = function () { go("mine"); };
+    return;
+  }
+  var it = l.mwpWords[l.mwpIdx];
+  var mode = drillMode(l);
+  var h = skillHead("🎤 Luyện phát âm — Từ của tôi", "Từ " + (l.mwpIdx + 1) + "/" + l.mwpWords.length + " · " + myWordsPronTrackLabel(track) + " — tối đa 10 từ/lượt")
+    + '<div class="qblock"><p style="font-size:22px"><b>' + esc(it.w) + '</b></p>'
+    + (it.phon ? '<p class="mut">' + esc(it.phon) + '</p>' : '<p class="mut">Chưa có phát âm mẫu cho từ này — cần đối chiếu giáo trình. Giọng mẫu dưới đây là giọng máy (TTS).</p>')
+    + (it.vi ? '<p class="mut">Nghĩa: ' + esc(it.vi) + '</p>' : '')
+    + '<div class="row"><button class="btn" id="mwpPlay">🔊 Nghe mẫu</button><button class="btn" id="mwpSlow">🐌 Nghe chậm 0,5x</button></div>';
+  if (!l.mwpMsg) {
+    if (mode === "speak") {
+      h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="mwpSpeak">🎤 Đọc to</button><button class="btn" id="mwpSkip">Bỏ qua →</button></div>'
+        + '<p class="mut">Đọc to đúng từ trên — máy chỉ kiểm tra có nghe ra đúng từ không (chấm tầng 1).</p>';
+    } else {
+      h += '<p class="mut">Máy này không có mic / chưa cấp quyền mic nên chuyển sang chế độ nghe + gõ lại.</p>'
+        + '<div class="row" style="margin-top:8px"><input id="mwpType" placeholder="Nghe rồi gõ lại đúng từ trên…" style="flex:1;min-width:200px"><button class="btn btn-primary" id="mwpCheck">Kiểm tra</button><button class="btn" id="mwpSkip">Bỏ qua →</button></div>';
+    }
+  }
+  if (l.mwpMsg) h += '<p><b>' + esc(l.mwpMsg) + '</b></p>';
+  if (l.mwpHeard) h += '<p class="mut">Máy nghe được: “' + esc(l.mwpHeard) + '”</p>';
+  if (l.mwpTyped) h += '<p class="mut">Bạn gõ: “' + esc(l.mwpTyped) + '”</p>';
+  if (l.mwpMsg) h += '<div class="row">' + (l.mwpLastOk ? '' : '<button class="btn" id="mwpRetry">🔁 Đọc lại</button>') + '<button class="btn btn-primary" id="mwpNext">Từ tiếp theo →</button></div>';
+  h += '</div>';
+  app.innerHTML = h;
+  wireBack();
+  $("#mwpPlay").onclick = function () { drillSpeak(it.w, track); };
+  $("#mwpSlow").onclick = function () { drillSpeak(it.w, track, 0.5); };
+  var sp = $("#mwpSpeak");
+  if (sp) sp.onclick = function () {
+    sp.disabled = true; sp.textContent = "🎙 Đang nghe…";
+    drillSrCheck({ track: track }, it.w, function (tx) { myWordsPronMark(l, true, tx, ""); }, function (tx) { myWordsPronMark(l, false, tx, ""); });
+  };
+  var ck = $("#mwpCheck");
+  if (ck) {
+    var doCheck = function () {
+      var inp = $("#mwpType"); if (!inp) return;
+      var v = inp.value || "";
+      if (gameNormSent(v) === gameNormSent(it.w)) myWordsPronMark(l, true, "", v); else myWordsPronMark(l, false, "", v);
+    };
+    ck.onclick = doCheck;
+    var inp2 = $("#mwpType");
+    if (inp2) inp2.addEventListener("keydown", function (ev) { if (ev.key === "Enter") doCheck(); });
+  }
+  var sk = $("#mwpSkip");
+  if (sk) sk.onclick = function () { l.mwpSkipped++; myWordsPronNextWord(l); };
+  var rt = $("#mwpRetry");
+  if (rt) rt.onclick = function () { l.mwpMsg = ""; l.mwpHeard = ""; l.mwpTyped = ""; saveState(); render(); };
+  var nx2 = $("#mwpNext");
+  if (nx2) nx2.onclick = function () { myWordsPronNextWord(l); };
+}
+function myWordsPronMark(l, ok, heard, typed) {
+  var it = l.mwpWords[l.mwpIdx];
+  var i = l.mwpIdx;
+  l.mwpTries[i] = (l.mwpTries[i] || 0) + 1;
+  l.mwpHeard = heard || ""; l.mwpTyped = typed || "";
+  var track = l.mwpTrack;
+  var key = "w:" + track + ":" + it.w;
+  if (!state.wordPron) state.wordPron = {};
+  if (ok) {
+    if (l.mwpTries[i] === 1) l.mwpFirst++;
+    state.wordPron[track + ":mywords:" + it.w] = { ai: 100, sym: it.sym, word: it.w, date: todayStr() };
+    var e = (state.pronSrs || {})[key];
+    if (e && !e.done && e.due && e.due <= todayStr()) pronSrsJudge(key, true);
+    l.mwpMsg = "✓ Đúng! Sang từ tiếp theo nhé.";
+    l.mwpLastOk = true;
+    awardXp(5);
+  } else {
+    if (l.mwpTries[i] === 1) {
+      recordQuizError("myWordsPron:" + track, i, { q: "Luyện phát âm Từ của tôi — đọc sai từ: " + it.w, o: [it.w], a: 0, why: "Từ này bạn đọc chưa đúng — nghe lại mẫu rồi đọc lại nhé." });
+      l.mwpWrong.push(it);
+    }
+    state.wordPron[track + ":mywords:" + it.w] = { ai: 0, sym: it.sym, word: it.w, date: todayStr() };
+    pronSrsEnsure();
+    pronSrsJudge(key, false);
+    l.mwpMsg = "✗ Máy chưa nghe ra đúng từ — từ này đã vào Sổ lỗi sai + hàng đợi ôn phát âm, hẹn ôn lại ngày mai.";
+    l.mwpLastOk = false;
+  }
+  saveState(); render();
+}
+function myWordsPronNextWord(l) {
+  l.mwpIdx++;
+  l.mwpMsg = ""; l.mwpHeard = ""; l.mwpTyped = ""; l.mwpLastOk = false;
+  if (l.mwpIdx >= l.mwpWords.length) myWordsPronFinish(l);
+  saveState(); render();
+}
+function myWordsPronFinish(l) {
+  l.mwpDone = true;
+  var track = l.mwpTrack;
+  if (!state.myWordsPronNext) state.myWordsPronNext = {};
+  state.myWordsPronNext[track] = { last: todayStr(), due: addDaysStr(todayStr(), 7) };
+  if (!state.skillDone) state.skillDone = {};
+  var key = "myWordsPron:" + track;
+  var was = !!state.skillDone[key];
+  state.skillDone[key] = true; awardXp(was ? 5 : 10);
+  logLessonMinutes(l);
+  saveState();
 }
 /* ---------- v159 S20 phan 1: VONG ON PHAT AM (SRS) ----------
    1 muc on = 1 am yeu hoac 1 tu con sai. Vong on: nghe mau -> doc to lai
