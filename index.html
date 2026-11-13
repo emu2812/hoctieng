@@ -9512,6 +9512,22 @@ function pronWeakDiagSym(track, sym) {
   for (var i = 0; i < sets.length; i++) if (sets[i].sym === sym) return sets[i];
   return null;
 }
+/* v172 F5: anh xa am yeu ZH ve dung buoc Pinyin de on lai — thanh dieu ve
+   buoc "tones" (idx 2), bien dieu (3+3 / 不 / 一) ve buoc "sandhi" (idx 4),
+   thanh mau ve "initials" (idx 0), van mau ve "finals" (idx 1). Tra -1 neu
+   am khong thuoc mach Pinyin. */
+function zhPhStepForSym(sym) {
+  if (!sym) return -1;
+  var s = String(sym);
+  if (s.indexOf("biến điệu") === 0) return 4; /* sandhi: 3+3 / 不 / 一 */
+  if (s.indexOf("thanh") === 0) return 2; /* thanh 1–4, thanh nhe */
+  var e = (typeof zhPronEntry === "function") ? zhPronEntry(sym) : null;
+  if (!e) return -1;
+  if (e.group === "init") return 0;
+  if (e.group === "fin") return 1;
+  if (e.group === "tone") return 2;
+  return -1;
+}
 function pronWeakSymInfo(track, sym) {
   var d = pronWeakDiagSym(track, sym);
   if (d) return { sym: sym, symVi: d.symVi, target: d.target };
@@ -9578,7 +9594,11 @@ function pronWeakHTML(track, hideEntry) {
     h += d.sounds.map(function (s, i) {
       var shown = s.words.slice(0, 6);
       var more = s.words.length - shown.length;
-      return '<div class="weak-sound" data-weak-sym="' + esc(s.sym) + '"><p><b>/' + esc(s.sym) + '/</b> — ' + esc(s.symVi) + ' · <b>' + s.words.length + ' từ còn sai</b> <button class="btn btn-sm" data-pd-weak-learn="' + i + '">Học ngay âm này →</button></p>'
+      /* v172 F5: nguoi xep chang >=2 ma chan doan yeu thanh/van mau thi goi y
+         on lai dung buoc Pinyin do (nut phu, khong thay nut "Hoc ngay"). */
+      var zhPhIdx = (track === "zh" && state.zhEntryPlaced && state.zhEntryPlaced.stage >= 2) ? zhPhStepForSym(s.sym) : -1;
+      return '<div class="weak-sound" data-weak-sym="' + esc(s.sym) + '"><p><b>/' + esc(s.sym) + '/</b> — ' + esc(s.symVi) + ' · <b>' + s.words.length + ' từ còn sai</b> <button class="btn btn-sm" data-pd-weak-learn="' + i + '">Học ngay âm này →</button>'
+        + (zhPhIdx >= 0 ? ' <button class="btn btn-sm" data-pd-zhph-learn="' + i + '">Ôn lại bước Pinyin: ' + esc(ZH_PH_STEPS[zhPhIdx].title) + '</button>' : '') + '</p>'
         + (shown.length ? '<p class="mut">Từ còn sai (bấm vào từ để xem chi tiết từng âm tiết): ' + shown.map(function (w) { return '<span class="ai-seg" data-elsa-word="' + esc(w.w || w.show) + '" data-elsa-track="' + track + '" data-elsa-sym="' + esc(s.sym) + '" title="Bấm để xem chi tiết từng âm tiết">' + esc(w.show) + '</span>' + (w.read ? ' (' + esc(w.read) + ')' : '') + (w.vi ? ' — ' + esc(w.vi) : ''); }).join('; ') + (more > 0 ? '; …còn ' + more + ' từ nữa' : '') + '.</p>' : '<p class="mut">Âm này yếu trong chẩn đoán — chưa ghi từ sai cụ thể.</p>')
         + '</div>';
     }).join("");
@@ -9592,6 +9612,9 @@ function pronWeakWire(scope, track) {
   var d = pronWeakData(track);
   card.querySelectorAll("[data-pd-weak-learn]").forEach(function (b) {
     b.onclick = function () { var s = d.sounds[+b.dataset.pdWeakLearn]; if (s && s.target) pronDiagLearn(track, s); };
+  });
+  card.querySelectorAll("[data-pd-zhph-learn]").forEach(function (b) { /* v172 F5 */
+    b.onclick = function () { var s = d.sounds[+b.dataset.pdZhphLearn]; var ix = s ? zhPhStepForSym(s.sym) : -1; if (ix >= 0) openLesson({ type: "zhPh", idx: ix }); };
   });
 }
 function pronWeakGo(track) {
@@ -22293,6 +22316,7 @@ function renderZhPh(app, l) {
   html += phaseBarHTML(1) + '<div class="qblock"><p class="mut">' + esc(step.hook) + '</p>'
     + '<p><b>Ví dụ trước:</b></p>' + step.examples.map(function (e) { return '<p>· ' + esc(e) + '</p>'; }).join("")
     + (step.id === "tones" ? '<div class="row"><button class="btn" id="zhPhListen">🔊 Nghe 4 thanh mẫu (mā má mǎ mà)</button></div>' : '')
+    + (step.id === "sandhi" ? '<div class="row"><button class="btn" id="zhPhListenSandhi">🔊 Nghe cặp thanh 2–3: 你好，我很好 (ní hǎo, hén hǎo)</button></div>' : '') /* v172 F5: nghe phan biet thanh 2–3 qua bien dieu 3+3 */
     + '<details class="rule-more"><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(step.rule) + '</p><p>💡 <b>Mẹo:</b> ' + esc(step.tip) + '</p></details>'
     + (step.id === "tones" ? (function () { var vs = [videoSlotIf("zhPh:tones"), videoSlotIf("zhPh:pairs"), videoSlotIf("zhPh:sandhi"), videoSlotIf("zhPh:bu"), videoSlotIf("zhPh:song")].filter(function (x) { return !!x; }); if (!vs.length) return ""; if (vs.length === 1) return vs[0]; return vs[0] + '<details class="guide-more"><summary><b>Xem thêm video về thanh điệu</b></summary>' + vs.slice(1).join("") + '</details>'; })() : '')
     /* DOT NOI-DUNG-GIAI-TRI 01/11: 4 clip pinyin con lai (cap thanh, bien dieu,
@@ -22306,6 +22330,7 @@ function renderZhPh(app, l) {
   app.innerHTML = html;
   wireBack();
   var pl = $("#zhPhListen"); if (pl) pl.onclick = function () { zhSpeak("妈麻马骂吗"); };
+  var pls = $("#zhPhListenSandhi"); if (pls) pls.onclick = function () { zhSpeak("你好，我很好"); }; /* v172 F5: nghe phan biet 3+3 (你好→ní hǎo, 很好→hén hǎo) */
   $("#zhPhStart").onclick = function () { l.quiz = true; l.qi = 0; l.score = 0; l.picked = -1; l.finished = false; l.wrong = []; lessonStart = Date.now(); render(); };
   var sk = $("#zhPhSkip"); if (sk) sk.onclick = function () {
     if (state.zhPhSkipped.indexOf(step.id) < 0) state.zhPhSkipped.push(step.id);
@@ -24784,6 +24809,10 @@ function tpStepMeta(id) {
   if (k === "s") { var sp = (typeof TP_SPEAK !== "undefined") ? TP_SPEAK[n] : null; return sp ? { kind: "speak", title: "Nói: " + sp.title, ref: n } : null; } /* v136: bai Noi TOPIK s0-s15 (M6) */
   if (k === "k") { var ck2 = (typeof TP_CHECK !== "undefined") ? TP_CHECK[n] : null; return ck2 ? { kind: "check", title: ck2.title, ref: n } : null; }
   if (k === "w") { return (typeof TP_WRITE !== "undefined") ? { kind: "write", title: n === 0 ? "Viết TOPIK II: nhiệm vụ 51–52 (điền câu)" : n === 1 ? "Viết TOPIK II: nhiệm vụ 53–54 (luận)" : n === 2 ? "Luyện viết Cấp 1: điền câu đơn giản" : n === 3 ? "Luyện viết Cấp 2: điền câu ghép + đoạn ngắn" : n === 4 ? "Luyện viết Cấp 3: điền câu 51–52" : n === 5 ? "Luyện viết Cấp 3: luận ngắn 53" : n === 6 ? "Luyện viết Cấp 4: điền câu 51–52" : n === 7 ? "Luyện viết Cấp 4: luận ngắn 53 nâng cao" : n === 8 ? "Luyện viết Cấp 5: điền câu 51–52 học thuật" : n === 9 ? "Luyện viết Cấp 5: luận 53 + làm quen 54" : n === 10 ? "Luyện viết Cấp 6: điền câu 52 khó" : "Luyện viết Cấp 6: luận dài 54", ref: n } : null; }
+  /* v172 F4: buoc bien am "b0".."b6" — 1 quy tac moi chang 2–8 (TP_STAGES[1..7]).
+     Du lieu TP_SANDHI (content-new.js), dung lai noi dung man chi tiet am tiet
+     (v141) cho b0–b2, b3–b6 doi chieu chuan bien am Han truoc khi viet. */
+  if (k === "b") { var sd = (typeof TP_SANDHI !== "undefined") ? TP_SANDHI[n] : null; return sd ? { kind: "sandhi", title: "Biến âm: " + sd.title, ref: n } : null; }
   if (id === "m0") return { kind: "mock", title: "Thi thử TOPIK I rút gọn (70 câu · 100 phút)", ref: 0 }; /* v151 S14: ghi 100 phut len the (lay tu man chi tiet tpOpenMock) */
   if (id === "m1") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 3 (đủ 104 nhiệm vụ)", ref: 1 };
   if (id === "m2") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 4 (đủ 104 nhiệm vụ)", ref: 2 };
@@ -25051,6 +25080,18 @@ function tpOpenStep(id, backTab) {
     tpWireQuiz(app, id, "tpFinishBtn");
     document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     document.getElementById("tpFreeWriteBtn").onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "freeWrite", track: "tp", gramIdx: m.ref }); }; /* v158 S19 phan 3/3 */
+    tpWireBack(back); return;
+  }
+  if (m.kind === "sandhi") { /* v172 F4: bai bien am — ly thuyet (vi du truoc + quy tac) -> nghe mau -> thuc hanh 2 cau -> xong bai */
+    var sd = TP_SANDHI[m.ref];
+    var htmlS = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · BIẾN ÂM · CHẶNG ' + (tpStepStage(id) + 1) + '</p><h2>' + esc(sd.title) + '</h2><p class="mut">Học biến âm TRƯỚC khi đọc/nghe dùng chúng: viết một đằng, đọc một nẻo — nắm quy tắc này thì không còn đọc theo mặt chữ nữa.</p><p><b>Quy tắc:</b> ' + esc(sd.rule) + '</p>'
+      + sd.examples.map(function (e) { return '<div class="qblock"><p><b style="font-size:22px">' + esc(e.w) + '</b> — đọc là <b>[' + esc(e.read) + ']</b> ' + esc(e.rr) + ' (' + esc(e.vi) + ')</p><p class="mut">' + esc(e.why) + '</p><p><button class="btn tpsandhispeak" data-w="' + esc(e.w) + '">🔊 Nghe ' + esc(e.w) + '</button></p></div>'; }).join("")
+      + tpQuizBlockHTML(sd.quiz, "b")
+      + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button></div><p class="mut">Phiên âm Latin (RR) ghi theo cách viết — [cách đọc] mới là cách đọc thật. Gặp từ mới có cùng mẫu thì đọc theo đúng quy tắc này.</p></section>';
+    app.innerHTML = htmlS; app._tpQs = sd.quiz;
+    app.querySelectorAll(".tpsandhispeak").forEach(function (b) { b.onclick = function () { try { tpSpeak(b.dataset.w); } catch (e) {} }; });
+    tpWireQuiz(app, id, "tpFinishBtn");
+    document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     tpWireBack(back); return;
   }
   if (m.kind === "listen") {
