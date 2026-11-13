@@ -7661,26 +7661,26 @@ function elsaSplitSyllables(ipa) {
      chuan hoa ve ":" truoc khi tach; tu 1 am tiet thi am tiet do la trong am. */
   var s = String(ipa || "").replace(/[\/ ]/g, "").replace(/ː/g, ":");
   if (!s) return [];
-  var toks = [], stressed = false, i = 0;
+  var toks = [], stressed = 0, i = 0;
   while (i < s.length) {
     var ch = s[i];
-    if (ch === "ˈ" || ch === "ˌ") { stressed = (ch === "ˈ"); i++; continue; }
+    if (ch === "ˈ" || ch === "ˌ") { stressed = (ch === "ˈ") ? 1 : 2; i++; continue; }
     var m = null;
     for (var k = 0; k < PH_TOK_ORDER.length; k++) { if (s.indexOf(PH_TOK_ORDER[k], i) === i) { m = PH_TOK_ORDER[k]; break; } }
     if (!m) { i++; continue; }
-    toks.push({ t: m, stress: stressed }); stressed = false; i += m.length;
+    toks.push({ t: m, stress: stressed }); stressed = 0; i += m.length;
   }
   var isVow = function (t) { return SYL_VOWELS.indexOf(t) >= 0; };
   var nuc = [];
   for (var j = 0; j < toks.length; j++) if (isVow(toks[j].t)) nuc.push(j);
-  if (!nuc.length) return [{ text: toks.map(function (x) { return x.t; }).join("").replace(/:/g, "ː"), stressed: false, phonemes: toks.map(function (x) { return x.t; }) }];
+  if (!nuc.length) return [{ text: toks.map(function (x) { return x.t; }).join("").replace(/:/g, "ː"), stressed: false, secStressed: false, phonemes: toks.map(function (x) { return x.t; }) }];
   var syls = [], start = 0;
   for (var n = 0; n < nuc.length; n++) {
     var end;
     if (n === nuc.length - 1) end = toks.length;
     else { var cl = toks.slice(nuc[n] + 1, nuc[n + 1]).map(function (x) { return x.t; }); end = nuc[n + 1] - sylOnsetLen(cl); }
     var part = toks.slice(start, end);
-    syls.push({ text: part.map(function (x) { return x.t; }).join("").replace(/:/g, "ː"), stressed: part.some(function (x) { return x.stress; }), phonemes: part.map(function (x) { return x.t; }) });
+    syls.push({ text: part.map(function (x) { return x.t; }).join("").replace(/:/g, "ː"), stressed: part.some(function (x) { return x.stress === 1; }), secStressed: part.some(function (x) { return x.stress === 2; }), phonemes: part.map(function (x) { return x.t; }) });
     start = end;
   }
   var last = syls[syls.length - 1];
@@ -7688,8 +7688,8 @@ function elsaSplitSyllables(ipa) {
   if (last && last.phonemes.length >= 3) {
     var lp = last.phonemes, tail = lp[lp.length - 1];
     if ((tail === "n" || tail === "l") && !isVow(lp[lp.length - 2])) {
-      syls[syls.length - 1] = { text: lp.slice(0, -1).join("").replace(/:/g, "ː"), stressed: last.stressed, phonemes: lp.slice(0, -1) };
-      syls.push({ text: tail, stressed: false, phonemes: [tail] });
+      syls[syls.length - 1] = { text: lp.slice(0, -1).join("").replace(/:/g, "ː"), stressed: last.stressed, secStressed: last.secStressed, phonemes: lp.slice(0, -1) };
+      syls.push({ text: tail, stressed: false, secStressed: false, phonemes: [tail], note: "/" + tail + "/ ở đây làm nhân âm tiết (đọc như một âm tiết ngắn)" });
     }
   }
   return syls;
@@ -7699,14 +7699,14 @@ function elsaSplitSyllables(ipa) {
 var SYL_GUESS_EN = [
   { w: "th", h: "t", msg: "có thể bạn đọc /θ/ thành /t/ — đầu lưỡi chưa đưa ra giữa hai răng" },
   { w: "th", h: "d", msg: "có thể bạn đọc /ð/ thành /d/ — đầu lưỡi chưa đưa ra giữa hai răng" },
-  { w: "sh", h: "s", msg: "có thể bạn đọc /ʃ/ thành /s/ — môi chưa tròn, lưỡi chưa cuộn lên" },
+  { w: "sh", h: "s", msg: "có thể bạn đọc /ʃ/ thành /s/ — môi chưa tròn, đầu lưỡi chưa nâng lên phía sau lợi trên" },
   { w: "s", h: "sh", msg: "có thể bạn đọc /s/ thành /ʃ/ — lưỡi chưa hạ thấp" },
   { w: "l", h: "n", msg: "có thể bạn đọc /l/ thành /n/ — đầu lưỡi chưa chạm nướu trên" },
-  { w: "r", h: "l", msg: "có thể bạn đọc /r/ thành /l/ — lưỡi chưa cuộn lên" },
+  { w: "r", h: "l", msg: "có thể bạn đọc /r/ thành /l/ — đầu lưỡi chưa cong lên và lùi vào trong mà vẫn chạm nướu trên như khi đọc /l/" },
   { w: "v", h: "b", msg: "có thể bạn đọc /v/ thành /b/ — răng trên chưa chạm môi dưới" },
   { w: "z", h: "s", msg: "có thể bạn đọc /z/ thành /s/ — dây thanh chưa rung" },
   { w: "ng", h: "n", msg: "có thể bạn đọc /ŋ/ thành /n/ — lưỡi chưa lùi về sau" },
-  { w: "ch", h: "t", msg: "có thể bạn đọc /tʃ/ thành /t/ — lưỡi chưa bật lên" },
+  { w: "ch", h: "t", msg: "có thể bạn đọc /tʃ/ thành /t/ — thiếu pha xì hơi sau khi bật lưỡi (âm /tʃ/ là bật + xì, không chỉ bật)" },
   { w: "j", h: "ch", msg: "có thể bạn đọc /dʒ/ thành /tʃ/ — dây thanh chưa rung" }
 ];
 function sylGuessWeak(word, heard, track) {
@@ -7945,6 +7945,16 @@ if (typeof document !== "undefined" && !window.__sylDeleg) { window.__sylDeleg =
 
 /* Man chi tiet tung am tiet — thu tu su pham: nghe phan biet truoc -> nghe mau
    (co oc sen) -> doc theo tung am tiet -> doc lai cham tang 1. */
+function tpBatchimNote(fin) {
+  if (fin === "ㅁ" || fin === "ㅂ" || fin === "ㅍ") return "Batchim /" + fin + "/ là phụ âm cuối âm tiết — đọc mím môi lại ở phụ âm đó, không bật hơi ra ngoài.";
+  if (fin === "ㅇ") return "Batchim /ㅇ/ là phụ âm cuối âm tiết — đọc [ŋ], hơi đi qua mũi, miệng vẫn mở.";
+  if (fin === "ㄴ") return "Batchim /ㄴ/ là phụ âm cuối âm tiết — đầu lưỡi chạm lợi trên, hơi đi qua mũi.";
+  if (fin === "ㄹ") return "Batchim /ㄹ/ là phụ âm cuối âm tiết — đầu lưỡi chạm lợi trên, hơi đi hai bên lưỡi.";
+  if (fin === "ㄱ" || fin === "ㄲ" || fin === "ㅋ") return "Batchim /" + fin + "/ là phụ âm cuối âm tiết — cuống lưỡi chạm vòm mềm, hơi dừng lại ở đó, không bật ra.";
+  if (fin === "ㅎ") return "Batchim /ㅎ/ là phụ âm cuối âm tiết — bản thân nó không khép miệng mà làm bật hơi phụ âm sau (vd 좋다 đọc [조타]).";
+  if (fin === "ㅅ" || fin === "ㅆ" || fin === "ㅈ" || fin === "ㅉ" || fin === "ㅊ" || fin === "ㅌ" || fin === "ㄷ") return "Batchim /" + fin + "/ là phụ âm cuối âm tiết — đọc thành [t], tắc nhẹ ở đầu lưỡi, không bật hơi ra ngoài.";
+  return "Batchim /" + fin + "/ là phụ âm cuối âm tiết (batchim kép) — khi đọc chỉ phát một trong hai phụ âm; âm đọc thật xem mục Biến âm bên dưới.";
+}
 function renderSylDetail(app, l) {
   var track = l.track || "en";
   var word = l.word || "";
@@ -7987,8 +7997,8 @@ function renderSylDetail(app, l) {
   h += '<div class="qblock"><p style="font-size:26px"><b>' + esc(word) + '</b></p><p class="mut">' + esc(readLine) + '</p>';
   if (track === "en" || track === "tc") {
     if (syls.length) {
-      h += '<p id="sylSplit">Tách âm tiết: ' + syls.map(function (s) { return '<span class="ai-seg' + (s.stressed ? ' ai-seg-amber' : '') + '">' + esc(s.text) + (s.stressed ? ' ●' : '') + '</span>'; }).join(" · ") + '</p>'
-        + '<p class="mut">● là âm tiết mang trọng âm — đọc mạnh hơn, cao hơn. Âm tiết là một nhịp khi đọc từ — ví dụ “think” có 1 âm tiết, “meeting” có 2 âm tiết. Tách theo nguyên âm trong phiên âm IPA.</p>';
+      h += '<p id="sylSplit">Tách âm tiết: ' + syls.map(function (s) { return '<span class="ai-seg' + (s.stressed ? ' ai-seg-amber' : '') + '">' + esc(s.text) + (s.stressed ? ' ●' : '') + (s.secStressed ? ' ◐' : '') + '</span>'; }).join(" · ") + '</p>'
+        + '<p class="mut">● là âm tiết mang trọng âm — đọc mạnh hơn, cao hơn.' + (syls.some(function (s) { return s.secStressed; }) ? ' ◐ là trọng âm phụ — đọc mạnh hơn âm tiết thường nhưng nhẹ hơn trọng âm chính.' : '') + (syls.some(function (s) { return s.note; }) ? ' Âm tiết chỉ gồm một phụ âm /n/ hoặc /l/ là âm tiết có phụ âm làm nhân — đọc như một âm tiết ngắn.' : '') + ' Âm tiết là một nhịp khi đọc từ — ví dụ “think” có 1 âm tiết, “meeting” có 2 âm tiết. Tách theo nguyên âm trong phiên âm IPA.</p>';
     } else h += '<p class="mut">Chưa tách được âm tiết vì chưa có phiên âm trong kho từ của web — cần đối chiếu giáo trình.</p>';
   }
   if (track === "zh") {
@@ -8053,7 +8063,7 @@ function renderSylDetail(app, l) {
     if (syls.length) {
       syls.forEach(function (s, i) {
         var weak = sym && s.phonemes.indexOf(sym) >= 0;
-        h += '<p><b>Âm tiết ' + (i + 1) + ': /' + esc(s.text) + '/</b>' + (s.stressed ? ' ● trọng âm — đọc mạnh hơn, cao hơn' : '') + (weak ? ' · <span class="ai-seg ai-seg-red">âm cần sửa</span>' : '') + '</p>';
+        h += '<p><b>Âm tiết ' + (i + 1) + ': /' + esc(s.text) + '/</b>' + (s.stressed ? ' ● trọng âm — đọc mạnh hơn, cao hơn' : '') + (s.secStressed ? ' ◐ trọng âm phụ — đọc mạnh hơn âm tiết thường nhưng nhẹ hơn trọng âm chính' : '') + (s.note ? ' · ' + esc(s.note) : '') + (weak ? ' · <span class="ai-seg ai-seg-red">âm cần sửa</span>' : '') + '</p>';
         if (weak) {
           var guideTxt = verdict ? verdict.guide.join(" · ") : "";
           if (!guideTxt) { var pe = phEntry(sym) || {}; var mir = (typeof RB_MIRROR_TARGETS !== "undefined" && RB_MIRROR_TARGETS[sym]) || null; guideTxt = ((mir && mir.hint) ? ("Nhìn miệng: " + mir.hint + " · ") : "") + (pe.ex ? ("Cách đặt lưỡi/môi: " + pe.ex) : "cần đối chiếu giáo trình"); }
@@ -8085,10 +8095,10 @@ function renderSylDetail(app, l) {
   if (track === "tp") {
     tpChars.forEach(function (c, i) {
       var weak = (c.init === sym) || (c.fin === sym) || (c.med === sym);
-      h += '<p><b>Âm tiết ' + (i + 1) + ': ' + esc(c.ch) + '</b> — phụ âm đầu /' + esc(c.init || "—") + '/ · nguyên âm /' + esc(c.med || "—") + '/ · batchim /' + esc(c.fin || "không có") + '/' + (weak ? ' · <span class="ai-seg ai-seg-red">âm cần sửa</span>' : '') + '</p>';
-      if (c.fin) h += '<p class="mut">Batchim /' + esc(c.fin) + '/ là phụ âm cuối âm tiết — đọc khép miệng ở phụ âm đó, không bật hơi ra ngoài.</p>';
+      h += '<p><b>Âm tiết ' + (i + 1) + ': ' + esc(c.ch) + '</b> — phụ âm đầu /' + esc(c.init || "—") + '/ · nguyên âm /' + esc(c.med || "—") + '/ · batchim /' + esc(c.fin || "không có") + '/' + (weak ? ' · <span class="ai-seg ai-seg-red">âm cần sửa</span>' : '') + (c.fin ? ' · <span class="mut">âm đọc thật có thể đổi — xem Biến âm bên dưới</span>' : '') + '</p>';
+      if (c.fin) h += '<p class="mut">' + esc(tpBatchimNote(c.fin)) + '</p>';
       else h += '<p class="mut">Âm tiết mở (không có batchim) — đọc thoáng, không khép miệng cuối âm tiết.</p>';
-      if (weak && SYL_TP_TRIPLES[c.init]) h += '<p class="mut">Bộ ba căng/chùng/bật hơi: ' + esc(SYL_TP_TRIPLES[c.init]) + '.</p>';
+      if (weak && c.init === sym && SYL_TP_TRIPLES[c.init]) h += '<p class="mut">Bộ ba căng/chùng/bật hơi: ' + esc(SYL_TP_TRIPLES[c.init]) + '.</p>';
       if (weak) {
         var tpe = (typeof tpPronEntry === "function") ? tpPronEntry(sym) : null;
         if (tpe && tpe.vi) h += '<p class="mut">' + esc(tpe.vi) + '</p>';
@@ -8480,9 +8490,9 @@ var PRON_DIAG_SETS = {
     { w: "바", show: "바", read: "ba", vi: "âm ㅂ chùng — đọc nhẹ như “b”", sym: "ㅂ chùng", symVi: "phụ âm ㅂ chùng — đầu âm tiết đọc nhẹ như “b”", target: { kind: "tpPron", sym: "ㅂ" } },
     { w: "빠", show: "빠", read: "ppa", vi: "âm ㅃ căng — đọc “p” căng, không bật hơi", sym: "ㅃ căng", symVi: "phụ âm ㅃ căng — đọc “p” căng, không bật hơi", target: { kind: "tpPron", sym: "ㅃ" } },
     { w: "파", show: "파", read: "pa", vi: "âm ㅍ bật hơi — đọc “ph” bật hơi mạnh", sym: "ㅍ bật hơi", symVi: "phụ âm ㅍ bật hơi — đọc “ph” bật hơi mạnh", target: { kind: "tpPron", sym: "ㅍ" } },
-    { w: "밥", show: "밥", read: "bap", vi: "받침 ㅂ — âm cuối đọc thành “p”", sym: "batchim ㅂ", symVi: "받침 ㅂ — âm cuối đọc thành “p” (như cơm)", target: { kind: "tpPron", sym: "받침 ㅂ/ㅍ" } },
-    { w: "책", show: "책", read: "chaek", vi: "받침 ㄱ — âm cuối đọc thành “k”", sym: "batchim ㄱ", symVi: "받침 ㄱ — âm cuối đọc thành “k”", target: { kind: "tpPron", sym: "받침 ㄱ/ㄲ/ㅋ" } },
-    { w: "산", show: "산", read: "san", vi: "받침 ㄴ — âm cuối đọc thành “n”", sym: "batchim ㄴ", symVi: "받침 ㄴ — âm cuối đọc thành “n”", target: { kind: "tpPron", sym: "받침 ㄴ" } }
+    { w: "밥", show: "밥", read: "bap", vi: "cơm", sym: "batchim ㅂ", symVi: "받침 ㅂ — âm cuối đọc thành “p”", target: { kind: "tpPron", sym: "받침 ㅂ/ㅍ" } },
+    { w: "책", show: "책", read: "chaek", vi: "sách", sym: "batchim ㄱ", symVi: "받침 ㄱ — âm cuối đọc thành “k”", target: { kind: "tpPron", sym: "받침 ㄱ/ㄲ/ㅋ" } },
+    { w: "산", show: "산", read: "san", vi: "núi", sym: "batchim ㄴ", symVi: "받침 ㄴ — âm cuối đọc thành “n”", target: { kind: "tpPron", sym: "받침 ㄴ" } }
   ]
 };
 function pronDiagNorm(s) { return String(s || "").toLowerCase().replace(/[.!?,;:'"。、，；：？！·…]/g, "").replace(/\s+/g, " ").trim(); }
@@ -8603,7 +8613,7 @@ function zhToneName(t) { return t === 0 ? "thanh nhẹ" : "thanh " + t; }
 var ZH_PRON_TONES = [
   { sym: "thanh 1", group: "tone", tone: 1, han: "妈", py: "mā", vi: "mẹ", pair: "thanh 3", pairHan: "马", pairPy: "mǎ", pairVi: "ngựa", desc: "Thanh 1 — đọc cao và đều, giữ nguyên một nốt cao." },
   { sym: "thanh 2", group: "tone", tone: 2, han: "麻", py: "má", vi: "tê, gai", pair: "thanh 4", pairHan: "骂", pairPy: "mà", pairVi: "mắng", desc: "Thanh 2 — đọc đi lên, như đang hỏi “hả?”." },
-  { sym: "thanh 3", group: "tone", tone: 3, han: "马", py: "mǎ", vi: "ngựa", pair: "thanh 4", pairHan: "骂", pairPy: "mà", pairVi: "mắng", desc: "Thanh 3 — đọc xuống rồi lên, như võng xuống rồi hất lên." },
+  { sym: "thanh 3", group: "tone", tone: 3, han: "马", py: "mǎ", vi: "ngựa", pair: "thanh 4", pairHan: "骂", pairPy: "mà", pairVi: "mắng", desc: "Thanh 3 — đọc xuống rồi lên, như võng xuống rồi hất lên. Trong lời nói liền, thanh 3 trước thanh khác thường chỉ xuống rồi dừng (không lên lại) — thanh 3 nửa; riêng hai thanh 3 đi liền thì thanh đầu đọc thành thanh 2 (đã dạy riêng)." },
   { sym: "thanh 4", group: "tone", tone: 4, han: "骂", py: "mà", vi: "mắng", pair: "thanh 1", pairHan: "妈", pairPy: "mā", pairVi: "mẹ", desc: "Thanh 4 — đọc đi xuống, dứt khoát như quát." },
   { sym: "thanh nhẹ", group: "tone", tone: 0, han: "吗", py: "ma", vi: "trợ từ hỏi", pair: "thanh 1", pairHan: "妈", pairPy: "mā", pairVi: "mẹ", desc: "Thanh nhẹ — đọc ngắn và lướt, không nhấn." }
 ];
@@ -8620,14 +8630,14 @@ var ZH_PRON_INITIALS = [
   { sym: "k", group: "init", han: "看", py: "kàn", vi: "nhìn", pair: "g", pairHan: "干", pairPy: "gàn", pairVi: "khô", desc: "Thanh mẫu k — bật hơi mạnh." },
   { sym: "h", group: "init", han: "汉", py: "hàn", vi: "người Hán", pair: "f", pairHan: "饭", pairPy: "fàn", pairVi: "cơm", desc: "Thanh mẫu h — hơi thở ra từ cổ họng." },
   { sym: "j", group: "init", han: "鸡", py: "jī", vi: "gà", pair: "q", pairHan: "七", pairPy: "qī", pairVi: "bảy", desc: "Thanh mẫu j — mặt lưỡi nâng lên, không bật hơi." },
-  { sym: "q", group: "init", han: "七", py: "qī", vi: "bảy", pair: "j", pairHan: "鸡", pairPy: "jī", pairVi: "gà", desc: "Thanh mẫu q — bật hơi mạnh." },
+  { sym: "q", group: "init", han: "七", py: "qī", vi: "bảy", pair: "j", pairHan: "鸡", pairPy: "jī", pairVi: "gà", desc: "Thanh mẫu q — mặt lưỡi nâng lên gần vòm cứng, bật hơi mạnh." },
   { sym: "x", group: "init", han: "细", py: "xì", vi: "nhỏ, tỉ mỉ", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu x — mặt lưỡi nâng lên, hơi thoát nhẹ." },
   { sym: "zh", group: "init", han: "中", py: "zhōng", vi: "giữa", pair: "ch", pairHan: "充", pairPy: "chōng", pairVi: "đổ đầy", desc: "Thanh mẫu zh — đầu lưỡi cuộn lên, không bật hơi." },
   { sym: "ch", group: "init", han: "充", py: "chōng", vi: "đổ đầy", pair: "zh", pairHan: "中", pairPy: "zhōng", pairVi: "giữa", desc: "Thanh mẫu ch — đầu lưỡi cuộn lên, bật hơi mạnh." },
   { sym: "sh", group: "init", han: "是", py: "shì", vi: "là", pair: "r", pairHan: "日", pairPy: "rì", pairVi: "ngày", desc: "Thanh mẫu sh — đầu lưỡi cuộn lên, hơi thoát nhẹ." },
   { sym: "r", group: "init", han: "日", py: "rì", vi: "ngày", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu r — đầu lưỡi cuộn lên, hơi ma sát nhẹ, dây thanh rung." },
   { sym: "z", group: "init", han: "在", py: "zài", vi: "ở", pair: "c", pairHan: "菜", pairPy: "cài", pairVi: "rau", desc: "Thanh mẫu z — đầu lưỡi chạm răng, không bật hơi." },
-  { sym: "c", group: "init", han: "菜", py: "cài", vi: "rau", pair: "z", pairHan: "在", pairPy: "zài", pairVi: "ở", desc: "Thanh mẫu c — bật hơi mạnh." },
+  { sym: "c", group: "init", han: "菜", py: "cài", vi: "rau", pair: "z", pairHan: "在", pairPy: "zài", pairVi: "ở", desc: "Thanh mẫu c — đầu lưỡi chạm chân răng trên, bật hơi mạnh." },
   { sym: "s", group: "init", han: "三", py: "sān", vi: "ba", pair: "sh", pairHan: "山", pairPy: "shān", pairVi: "núi", desc: "Thanh mẫu s — đầu lưỡi đưa gần răng trên nhưng không chạm, hơi xì qua khe hẹp." }
 ];
 var ZH_PRON_FINALS = [
@@ -12813,6 +12823,7 @@ function phDetailHTML(p) {
   var html = '<div class="qblock" data-ph-detail><h3>Cách đọc âm /' + esc(p.s) + '/</h3>'
     + '<p><b>Ví dụ:</b> <b>' + esc(p.w) + '</b> — ' + esc(p.vi) + '.</p>'
     + phDetailLines(phDescFull(p)).map(function (ln) { return '<p>' + esc(ln) + '</p>'; }).join("")
+    + (p.tipText ? '<p><b>Mẹo:</b> ' + esc(p.tipText) + '</p>' : '')
     + (hint ? '<p><b>Nhìn miệng:</b> ' + esc(hint) + '</p>' : '')
     + '<details class="guide-more"><summary><b>Xem thêm: câu mẫu + chú ý cho người Việt</b></summary>'
     + '<p><b>Câu mẫu:</b> <b>' + esc(p.sen) + '</b> — ' + esc(p.senVi) + '.</p>'
@@ -22425,7 +22436,7 @@ var TC_ENTRY_QS = [
   { q: "“Where is the meeting room?” — “___”", o: ["It's on the third floor.", "It's at 3 o'clock.", "It's Mr. Lee.", "It's a report."], a: 0, why: "Hỏi “ở đâu” thì đáp bằng vị trí: It's on the third floor." },
   { q: "The package ___ yesterday afternoon.", o: ["was delivered", "delivered", "is delivering", "delivers"], a: 0, why: "“yesterday” + bưu kiện được giao → bị động quá khứ: was delivered." },
   { q: "The manager gave a ___ presentation.", o: ["clear", "clearly", "clearness", "clarify"], a: 0, why: "Trước danh từ “presentation” cần tính từ: clear." },
-  { q: "Thông báo: “All staff: The office will close at 5 p.m. on Friday for maintenance. Please save your work before leaving.” — Why will the office close early on Friday?", o: ["For maintenance.", "For a holiday.", "For a meeting.", "For training."], a: 0, why: "Thông báo ghi rõ: for maintenance (để bảo trì)." },
+  { q: "Thông báo: “All staff: The office will close at 5 p.m. on Friday for maintenance. Please save your work before leaving.” — Why will the office close at 5 p.m. on Friday?", o: ["For maintenance.", "For a holiday.", "For a meeting.", "For training."], a: 0, why: "Thông báo ghi rõ: for maintenance (để bảo trì)." },
   { q: "Employees ___ work in the Hanoi office must attend the training.", o: ["who", "which", "whose", "whom"], a: 0, why: "Mệnh đề quan hệ chỉ người làm chủ ngữ: who." },
   { q: "We apologize for the delay. The shipment ___ arrive on Tuesday.", o: ["will", "would have", "is arrive", "arriving"], a: 0, why: "Hứa hẹn tương lai: will arrive." },
   { q: "SALE: “All office supplies are 20% off this weekend only at City Stationery. Bring this coupon to the store.” — What must customers do to get the discount?", o: ["Bring the coupon to the store.", "Buy online.", "Call the store.", "Show an ID card."], a: 0, why: "Thông báo ghi rõ: bring this coupon to the store." },
@@ -22573,7 +22584,7 @@ function renderTpEntry(app, l) {
     });
     return;
   }
-  app.innerHTML = lessonHead({ title: "Kiểm tra trình độ TOPIK", type: "TOPIK · Xếp chặng" }, "16 câu — xếp chặng Hangul tới TOPIK II Cấp 6.") + '<div class="qblock"><div class="row"><button class="btn btn-primary" id="tpEntryGo">Bắt đầu làm bài →</button></div></div>';
+  app.innerHTML = lessonHead({ title: "Kiểm tra trình độ TOPIK", type: "TOPIK · Xếp chặng" }, "16 câu — xếp chặng Hangul tới TOPIK II Cấp 6.") + '<div class="qblock"><div class="row"><button class="btn btn-primary" id="tpEntryGo">Bắt đầu làm bài →</button></div><p class="mut">Bài có 2 câu ngữ pháp nâng cao ở cuối (câu 13–14) để phân biệt trình độ trung cấp — làm chưa được cũng không sao, cứ chọn đáp án thấy hợp nhất rồi làm tiếp.</p></div>';
   wireBack();
   $("#tpEntryGo").onclick = function () { l.quiz = true; l.qi = 0; l.score = 0; l.picked = -1; l.finished = false; l.wrong = []; lessonStart = Date.now(); render(); };
 }

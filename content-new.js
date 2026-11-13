@@ -145,59 +145,59 @@ var RB_PH_WAVES = {
   3: ["æ", "ɜ:", "θ", "ð", "ʒ", "ʃ"]
 };
 // Dữ liệu đợt 1: ký hiệu, từ ví dụ, nghĩa, lời giải thích bằng lời thường, câu mẫu,
-// video riêng từng âm (vid, dạy bằng tiếng Việt, thấy rõ miệng) + mốc đoạn video BBC cũ (seg, chỉ giữ để đối chiếu) và tham số khẩu hình cũ (hình vẽ đã bỏ, chỉ giữ để đối chiếu).
+// video riêng từng âm (vid, dạy bằng tiếng Việt, thấy rõ miệng) + mốc đoạn video BBC cũ (seg, chỉ giữ để đối chiếu — không dùng để render) và tham số khẩu hình cũ (hình vẽ đã bỏ, chỉ giữ để đối chiếu).
 // Lời giải thích f/j/k/ɡ/ŋ là bản viết lại đã kiểm chứng; các âm còn lại giữ lời giải thích cũ đã tốt.
 var RB_PH1 = [
-  { s: "m", vid: "8meCF9Hrj4U", vch: "Dan Hauer", w: "man", vi: "người đàn ông", ex: "Hai môi mím lại, hơi đi qua mũi, có rung. Giống âm m tiếng Việt.", sen: "The man is my father.", senVi: "Người đàn ông đó là bố tôi.", seg: [3506, 3625], h: .4, f: .5, r: 0, o: .05, tip: .1, teeth: 0 },
-  { s: "n", vid: "AbAk0jnUMlg", vch: "Dan Hauer", w: "no", vi: "không", ex: "Đầu lưỡi chạm nướu trên, hơi đi qua mũi. Giống âm n tiếng Việt.", sen: "No, thank you.", senVi: "Không, cảm ơn bạn.", seg: [3625, 3750], h: .5, f: .8, r: 0, o: .2, tip: .85, teeth: 1 },
-  { s: "p", vid: "CxtAwAfEhao", vch: "Dan Hauer", w: "pen", vi: "cái bút", ex: "Hai môi mím chặt rồi bật mở đẩy hơi ra. Âm không rung dây thanh.", sen: "This is my pen.", senVi: "Đây là bút của tôi.", seg: [1723, 1860], h: .4, f: .5, r: 0, o: .1, tip: .1, teeth: 0 },
-  { s: "b", vid: "fCenV8TgWpQ", vch: "Dan Hauer", w: "bag", vi: "cái túi", ex: "Giống âm p nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", sen: "My bag is red.", senVi: "Túi của tôi màu đỏ.", seg: [1860, 1994], h: .4, f: .5, r: 0, o: .1, tip: .1, teeth: 0 },
-  { s: "f", vid: "pz7QO_Ye3YQ", vch: "Dan Hauer", w: "fish", vi: "con cá", ex: "Tiếng Việt đã có âm này: chữ 'ph' trong 'phở' chính là /f/. Răng trên chạm nhẹ vào môi dưới, thổi hơi qua khe hẹp. Chỉ cần chú ý bật rõ âm cuối trong tiếng Anh (ví dụ 'life' phải nghe rõ /f/ cuối từ — tiếng Việt thường nuốt âm cuối).", sen: "I like fish.", senVi: "Tôi thích cá.", seg: [2684, 2780], h: .4, f: .7, r: 0, o: .15, tip: .3, teeth: 1 },
-  { s: "s", vid: "Yof1BQPaRc4", vch: "Dan Hauer", w: "see", vi: "nhìn thấy", ex: "Đầu lưỡi gần nướu trên, hai hàm răng gần khép, thổi hơi xì dài và mảnh.", sen: "I see a cat.", senVi: "Tôi nhìn thấy một con mèo.", seg: [3113, 3209], h: .6, f: .8, r: 0, o: .15, tip: .7, teeth: 1 },
-  { s: "h", vid: "2AvwyD-bihM", vch: "Dan Hauer", w: "hat", vi: "cái mũ", ex: "Miệng mở theo hình của nguyên âm sau nó, đẩy hơi từ cổ họng ra nhẹ nhàng như thở dài.", sen: "This is my hat.", senVi: "Đây là mũ của tôi.", seg: [3879, 3945], h: .4, f: .5, r: 0, o: .5, tip: .1, teeth: 0 },
-  { s: "l", vid: "7Ma-SGB3fug", vch: "Dan Hauer", w: "leg", vi: "cái chân", ex: "Đầu lưỡi chạm nướu trên, hơi đi qua hai bên lưỡi. Giống âm l tiếng Việt khi ở đầu từ. Cuối từ (vd 'feel'), phần sau lưỡi nâng lên, nghe trầm và tối hơn — gọi là dark l [ɫ], đừng đọc thành 'l' nhẹ như đầu từ.", sen: "I have two legs.", senVi: "Tôi có hai chân.", seg: [3945, 4160], h: .5, f: .8, r: 0, o: .25, tip: .85, teeth: 1 },
-  { s: "t", vid: "EDfOv-WhWmE", vch: "Dan Hauer", w: "ten", vi: "số mười", ex: "Đầu lưỡi chạm vào nướu sau răng trên rồi bật ra kèm hơi mạnh.", sen: "I am ten years old.", senVi: "Tôi mười tuổi.", seg: [1994, 2124], h: .5, f: .8, r: 0, o: .25, tip: .85, teeth: 1 },
-  { s: "d", vid: "xPPGX4dv5Eo", vch: "Dan Hauer", w: "dog", vi: "con chó", ex: "Giống âm t nhưng có rung cổ họng.", sen: "The dog is big.", senVi: "Con chó to.", seg: [2124, 2249], h: .5, f: .8, r: 0, o: .25, tip: .85, teeth: 1 },
-  { s: "k", vid: "eMlci4X6SeI", vch: "Dan Hauer", w: "key", vi: "chìa khóa", ex: "Phần vòm miệng mềm ở phía trong cùng nâng lên chặn hơi rồi bật ra. Miệng mở vừa.", sen: "This is a key.", senVi: "Đây là một chiếc chìa khóa.", seg: [2459, 2579], h: .45, f: .15, r: 0, o: .4, tip: 0, teeth: 0 },
-  { s: "ɡ", vid: "hIm7BwZMqPo", vch: "Dan Hauer", w: "go", vi: "đi", ex: "Giống âm k nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung. Phần vòm miệng mềm ở phía trong cùng nâng lên chặn hơi rồi bật ra.", sen: "I go to school.", senVi: "Tôi đi học.", seg: [2579, 2684], h: .45, f: .15, r: 0, o: .4, tip: 0, teeth: 0 },
-  { s: "ŋ", vid: "wnxutoJOLoQ", vch: "Dan Hauer", w: "sing", vi: "hát", ex: "Lưng lưỡi nâng chạm vòm mềm, vòm mềm hạ xuống để hơi đi qua mũi — là âm ng ở cuối từ, đừng thêm g phía sau.", sen: "I sing a song.", senVi: "Tôi hát một bài hát.", seg: [3750, 3879], h: .45, f: .15, r: 0, o: .3, tip: 0, teeth: 0 },
-  { s: "j", vid: "MTXxsNEE8EY", vch: "Dan Hauer", w: "yes", vi: "vâng", ex: "Gần giống âm 'i' đọc thật nhanh rồi trượt sang âm sau. Lưỡi nâng cao ra trước rồi trượt nhanh sang nguyên âm sau.", sen: "Yes, I am ready.", senVi: "Vâng, tôi sẵn sàng.", seg: [4490, null], h: .85, f: .9, r: 0, o: .25, tip: .25, teeth: 0 },
-  { s: "i:", vid: "PjnoeDmSO_w", vch: "Dan Hauer", w: "see", vi: "nhìn thấy", ex: "Môi dẹt và kéo sang hai bên như đang cười. Lưỡi cao và đưa ra trước, đầu lưỡi chạm nhẹ răng dưới.", sen: "I see a bird.", senVi: "Tôi nhìn thấy một con chim.", seg: [0, 131], h: .95, f: .95, r: 0, o: .18, tip: .3, teeth: 0 },
-  { s: "e", vid: "kmNc8FGNGMk", vch: "Dan Hauer", w: "bed", vi: "cái giường", ex: "Miệng mở vừa, môi thả lỏng. Lưỡi ở giữa, đầu lưỡi chạm răng dưới. Âm ngắn.", sen: "The bed is soft.", senVi: "Chiếc giường mềm.", seg: [345, 455], h: .55, f: .8, r: 0, o: .45, tip: .25, teeth: 0 },
-  { s: "ɑ:", vid: "guge8DCl8ho", vch: "Dan Hauer", w: "car", vi: "xe hơi", ex: "Miệng mở to, lưỡi thấp và lùi hẳn về sau. Âm dài, nghe như tiếng a kéo dài từ cổ họng.", sen: "My father has a car.", senVi: "Bố tôi có một chiếc xe hơi.", seg: [957, 996], h: .1, f: .1, r: 0, o: .9, tip: 0, teeth: 0 },
-  { s: "ɔ:", vid: "hUIpo2hD8b0", vch: "Dan Hauer", w: "horse", vi: "con ngựa", ex: "Âm dài hơn ɒ. Môi tròn vừa, lưỡi lùi về sau và hơi nâng lên. Âm dài.", sen: "The horse is white.", senVi: "Con ngựa màu trắng.", seg: [750, 800], h: .4, f: .15, r: .55, o: .5, tip: 0, teeth: 0 },
-  { s: "u:", vid: "HOZngteqqzM", vch: "Dan Hauer", w: "food", vi: "thức ăn", ex: "Môi tròn và chu mạnh ra trước như thổi nến. Lưỡi cao và lùi hẳn về sau. Âm dài.", sen: "I like this food.", senVi: "Tôi thích món ăn này.", seg: [292, 345], h: .92, f: .08, r: 1, o: .22, tip: 0, teeth: 0 },
-  { s: "eɪ", vid: "26zPMG2rzuI", vch: "Dan Hauer", w: "day", vi: "ngày", ex: "Bắt đầu như âm e rồi trượt nhẹ lên âm ɪ. Môi hơi dẹt dần khi trượt.", sen: "Today is a good day.", senVi: "Hôm nay là một ngày đẹp.", seg: [1103, 1205], h: .6, f: .85, r: 0, o: .4, tip: .25, teeth: 0 },
-  { s: "aɪ", vid: "Y4uYs85BoLU", vch: "Dan Hauer", w: "night", vi: "ban đêm", ex: "Bắt đầu như âm a (miệng mở to) rồi trượt lên âm ɪ (miệng khép và dẹt lại).", sen: "Good night!", senVi: "Chúc ngủ ngon!", seg: [1526, 1586], h: .3, f: .6, r: 0, o: .7, tip: .2, teeth: 0 },
-  { s: "aʊ", vid: "8wSdmU8CmLU", vch: "Dan Hauer", w: "now", vi: "bây giờ", ex: "Bắt đầu như âm a rồi trượt về âm ʊ, môi tròn lại và miệng khép dần.", sen: "I am ready now.", senVi: "Bây giờ tôi đã sẵn sàng.", seg: [1586, 1723], h: .35, f: .35, r: .5, o: .65, tip: .05, teeth: 0 },
-  { s: "ɔɪ", vid: "aH1QN2CmkY0", vch: "Dan Hauer", w: "boy", vi: "cậu bé", ex: "Bắt đầu như âm ɔ (môi hơi tròn) rồi trượt lên âm ɪ (môi dẹt ra).", sen: "The boy is happy.", senVi: "Cậu bé vui vẻ.", seg: [1259, 1313], h: .45, f: .5, r: .3, o: .5, tip: .1, teeth: 0 }
+  { s: "m", vid: "8meCF9Hrj4U", vch: "Dan Hauer", w: "man", vi: "người đàn ông", ex: "Hai môi mím lại, hơi đi qua mũi, có rung. Giống âm m tiếng Việt.", tipText: "Mím môi rồi ngân 'mmm' — nếu mũi không rung thì đang đọc thành /b/.", sen: "The man is my father.", senVi: "Người đàn ông đó là bố tôi.", seg: [3506, 3625], h: .4, f: .5, r: 0, o: .05, tip: .1, teeth: 0 },
+  { s: "n", vid: "AbAk0jnUMlg", vch: "Dan Hauer", w: "no", vi: "không", ex: "Đầu lưỡi chạm nướu trên, hơi đi qua mũi. Giống âm n tiếng Việt.", tipText: "Đầu lưỡi chạm nướu trên rồi ngân qua mũi — nghe như 'n' nhưng ngân dài hơn.", sen: "No, thank you.", senVi: "Không, cảm ơn bạn.", seg: [3625, 3750], h: .5, f: .8, r: 0, o: .2, tip: .85, teeth: 1 },
+  { s: "p", vid: "CxtAwAfEhao", vch: "Dan Hauer", w: "pen", vi: "cái bút", ex: "Hai môi mím chặt rồi bật mở đẩy hơi ra. Âm không rung dây thanh.", tipText: "Đặt tờ giấy trước miệng — đọc /p/ đúng thì tờ giấy rung lên vì hơi bật ra.", sen: "This is my pen.", senVi: "Đây là bút của tôi.", seg: [1723, 1860], h: .4, f: .5, r: 0, o: .1, tip: .1, teeth: 0 },
+  { s: "b", vid: "fCenV8TgWpQ", vch: "Dan Hauer", w: "bag", vi: "cái túi", ex: "Giống âm p nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", tipText: "Đọc /b/ như /p/ nhưng cổ họng rung — đặt tay lên cổ để cảm nhận.", sen: "My bag is red.", senVi: "Túi của tôi màu đỏ.", seg: [1860, 1994], h: .4, f: .5, r: 0, o: .1, tip: .1, teeth: 0 },
+  { s: "f", vid: "pz7QO_Ye3YQ", vch: "Dan Hauer", w: "fish", vi: "con cá", ex: "Tiếng Việt đã có âm này: chữ 'ph' trong 'phở' chính là /f/. Răng trên chạm nhẹ vào môi dưới, thổi hơi qua khe hẹp. Chỉ cần chú ý bật rõ âm cuối trong tiếng Anh (ví dụ 'life' phải nghe rõ /f/ cuối từ — tiếng Việt thường nuốt âm cuối).", tipText: "Cắn nhẹ môi dưới bằng răng trên rồi thổi — chính là âm 'ph' trong 'phở'.", sen: "I like fish.", senVi: "Tôi thích cá.", seg: [2684, 2780], h: .4, f: .7, r: 0, o: .15, tip: .3, teeth: 1 },
+  { s: "s", vid: "Yof1BQPaRc4", vch: "Dan Hauer", w: "see", vi: "nhìn thấy", ex: "Đầu lưỡi gần nướu trên, hai hàm răng gần khép, thổi hơi xì dài và mảnh.", tipText: "Răng gần khép, lưỡi gần nướu — thổi xì dài; nếu nghe thành 'x' thì lưỡi đang chạm nướu.", sen: "I see a cat.", senVi: "Tôi nhìn thấy một con mèo.", seg: [3113, 3209], h: .6, f: .8, r: 0, o: .15, tip: .7, teeth: 1 },
+  { s: "h", vid: "2AvwyD-bihM", vch: "Dan Hauer", w: "hat", vi: "cái mũ", ex: "Miệng mở theo hình của nguyên âm sau nó, đẩy hơi từ cổ họng ra nhẹ nhàng như thở dài.", tipText: "Chỉ là một hơi thở mạnh — há miệng theo nguyên âm sau rồi thở ra.", sen: "This is my hat.", senVi: "Đây là mũ của tôi.", seg: [3879, 3945], h: .4, f: .5, r: 0, o: .5, tip: .1, teeth: 0 },
+  { s: "l", vid: "7Ma-SGB3fug", vch: "Dan Hauer", w: "leg", vi: "cái chân", ex: "Đầu lưỡi chạm nướu trên, hơi đi qua hai bên lưỡi. Giống âm l tiếng Việt khi ở đầu từ. Cuối từ (vd 'feel'), phần sau lưỡi nâng lên, nghe trầm và tối hơn — gọi là dark l [ɫ], đừng đọc thành 'l' nhẹ như đầu từ.", tipText: "Đầu lưỡi chạm nướu trên, để hơi đi hai bên — cuối từ thì nâng phần sau lưỡi lên, đừng đọc 'l' nhẹ.", sen: "I have two legs.", senVi: "Tôi có hai chân.", seg: [3945, 4160], h: .5, f: .8, r: 0, o: .25, tip: .85, teeth: 1 },
+  { s: "t", vid: "EDfOv-WhWmE", vch: "Dan Hauer", w: "ten", vi: "số mười", ex: "Đầu lưỡi chạm vào nướu sau răng trên rồi bật ra kèm hơi mạnh.", tipText: "Đầu lưỡi bật khỏi nướu kèm hơi mạnh — đặt tay trước miệng sẽ thấy hơi phả ra.", sen: "I am ten years old.", senVi: "Tôi mười tuổi.", seg: [1994, 2124], h: .5, f: .8, r: 0, o: .25, tip: .85, teeth: 1 },
+  { s: "d", vid: "xPPGX4dv5Eo", vch: "Dan Hauer", w: "dog", vi: "con chó", ex: "Giống âm t nhưng có rung cổ họng.", tipText: "Giống /t/ nhưng cổ họng rung — đọc 'd' mà không rung sẽ thành /t/.", sen: "The dog is big.", senVi: "Con chó to.", seg: [2124, 2249], h: .5, f: .8, r: 0, o: .25, tip: .85, teeth: 1 },
+  { s: "k", vid: "eMlci4X6SeI", vch: "Dan Hauer", w: "key", vi: "chìa khóa", ex: "Lưng lưỡi nâng lên chạm vòm mềm, chặn hơi rồi bật ra. Miệng mở vừa.", tipText: "Lưng lưỡi chạm vòm mềm rồi bật — đặt tay trước miệng, hơi bật ra mới đúng.", sen: "This is a key.", senVi: "Đây là một chiếc chìa khóa.", seg: [2459, 2579], h: .45, f: .15, r: 0, o: .4, tip: 0, teeth: 0 },
+  { s: "ɡ", vid: "hIm7BwZMqPo", vch: "Dan Hauer", w: "go", vi: "đi", ex: "Giống âm k nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung. Lưng lưỡi nâng lên chạm vòm mềm, chặn hơi rồi bật ra.", tipText: "Giống /k/ nhưng cổ họng rung — nếu không rung sẽ thành /k/.", sen: "I go to school.", senVi: "Tôi đi học.", seg: [2579, 2684], h: .45, f: .15, r: 0, o: .4, tip: 0, teeth: 0 },
+  { s: "ŋ", vid: "wnxutoJOLoQ", vch: "Dan Hauer", w: "sing", vi: "hát", ex: "Lưng lưỡi nâng chạm vòm mềm, vòm mềm hạ xuống để hơi đi qua mũi — là âm ng ở cuối từ, đừng thêm g phía sau.", tipText: "Đọc 'ng' cuối từ rồi DỪNG — đừng thêm 'g' phía sau (sing, không phải 'sing-gờ').", sen: "I sing a song.", senVi: "Tôi hát một bài hát.", seg: [3750, 3879], h: .45, f: .15, r: 0, o: .3, tip: 0, teeth: 0 },
+  { s: "j", vid: "MTXxsNEE8EY", vch: "Dan Hauer", w: "yes", vi: "vâng", ex: "Gần giống âm 'i' đọc thật nhanh rồi trượt sang âm sau. Lưỡi nâng cao ra trước rồi trượt nhanh sang nguyên âm sau.", tipText: "Đọc 'i' thật nhanh rồi trượt ngay sang nguyên âm sau — lưỡi nâng cao ra trước, không dừng lại ở 'i'.", sen: "Yes, I am ready.", senVi: "Vâng, tôi sẵn sàng.", seg: [4490, null], h: .85, f: .9, r: 0, o: .25, tip: .25, teeth: 0 },
+  { s: "i:", vid: "PjnoeDmSO_w", vch: "Dan Hauer", w: "see", vi: "nhìn thấy", ex: "Môi dẹt và kéo sang hai bên như đang cười. Lưỡi cao và đưa ra trước, đầu lưỡi chạm nhẹ răng dưới.", tipText: "Môi cười, lưỡi cao — kéo dài âm ra, dài gấp đôi /ɪ/ trong 'ship'.", sen: "I see a bird.", senVi: "Tôi nhìn thấy một con chim.", seg: [0, 131], h: .95, f: .95, r: 0, o: .18, tip: .3, teeth: 0 },
+  { s: "e", vid: "kmNc8FGNGMk", vch: "Dan Hauer", w: "bed", vi: "cái giường", ex: "Miệng mở vừa, môi thả lỏng. Lưỡi ở giữa, đầu lưỡi chạm răng dưới. Âm ngắn.", tipText: "Âm ngắn, miệng mở vừa — đừng kéo dài thành 'ê' như tiếng Việt.", sen: "The bed is soft.", senVi: "Chiếc giường mềm.", seg: [345, 455], h: .55, f: .8, r: 0, o: .45, tip: .25, teeth: 0 },
+  { s: "ɑ:", vid: "guge8DCl8ho", vch: "Dan Hauer", w: "car", vi: "xe hơi", ex: "Miệng mở to, lưỡi thấp và lùi hẳn về sau. Âm dài, nghe như tiếng a kéo dài từ cổ họng.", tipText: "Há to miệng, lưỡi lùi sâu — kéo dài như đang nói 'a' khi khám họng.", sen: "My father has a car.", senVi: "Bố tôi có một chiếc xe hơi.", seg: [957, 996], h: .1, f: .1, r: 0, o: .9, tip: 0, teeth: 0 },
+  { s: "ɔ:", vid: "hUIpo2hD8b0", vch: "Dan Hauer", w: "horse", vi: "con ngựa", ex: "Âm dài hơn ɒ. Môi tròn vừa, lưỡi lùi về sau và hơi nâng lên. Âm dài.", tipText: "Môi tròn vừa, âm dài — dài hơn hẳn /ɒ/ trong 'hot'.", sen: "The horse is white.", senVi: "Con ngựa màu trắng.", seg: [750, 800], h: .4, f: .15, r: .55, o: .5, tip: 0, teeth: 0 },
+  { s: "u:", vid: "HOZngteqqzM", vch: "Dan Hauer", w: "food", vi: "thức ăn", ex: "Môi tròn và chu mạnh ra trước như thổi nến. Lưỡi cao và lùi hẳn về sau. Âm dài.", tipText: "Môi chu mạnh như thổi nến rồi kéo dài — dài gấp đôi /ʊ/ trong 'book'.", sen: "I like this food.", senVi: "Tôi thích món ăn này.", seg: [292, 345], h: .92, f: .08, r: 1, o: .22, tip: 0, teeth: 0 },
+  { s: "eɪ", vid: "26zPMG2rzuI", vch: "Dan Hauer", w: "day", vi: "ngày", ex: "Bắt đầu như âm e rồi trượt nhẹ lên âm ɪ. Môi hơi dẹt dần khi trượt.", tipText: "Đọc 'ê' rồi trượt lên 'i' — miệng dẹt dần, như đang cười.", sen: "Today is a good day.", senVi: "Hôm nay là một ngày đẹp.", seg: [1103, 1205], h: .6, f: .85, r: 0, o: .4, tip: .25, teeth: 0 },
+  { s: "aɪ", vid: "Y4uYs85BoLU", vch: "Dan Hauer", w: "night", vi: "ban đêm", ex: "Bắt đầu như âm a (miệng mở to) rồi trượt lên âm ɪ (miệng khép và dẹt lại).", tipText: "Há to 'a' rồi khép dần lên 'i' — nghe như 'ai' nhưng miệng khép lại.", sen: "Good night!", senVi: "Chúc ngủ ngon!", seg: [1526, 1586], h: .3, f: .6, r: 0, o: .7, tip: .2, teeth: 0 },
+  { s: "aʊ", vid: "8wSdmU8CmLU", vch: "Dan Hauer", w: "now", vi: "bây giờ", ex: "Bắt đầu như âm a rồi trượt về âm ʊ, môi tròn lại và miệng khép dần.", tipText: "Há to 'a' rồi tròn môi về 'u' — như đang nói 'ao' nhưng tròn môi hơn.", sen: "I am ready now.", senVi: "Bây giờ tôi đã sẵn sàng.", seg: [1586, 1723], h: .35, f: .35, r: .5, o: .65, tip: .05, teeth: 0 },
+  { s: "ɔɪ", vid: "aH1QN2CmkY0", vch: "Dan Hauer", w: "boy", vi: "cậu bé", ex: "Bắt đầu như âm ɔ (môi hơi tròn) rồi trượt lên âm ɪ (môi dẹt ra).", tipText: "Môi tròn 'o' rồi dẹt ra 'i' — giống 'oi' nhưng âm đầu tròn hơn.", sen: "The boy is happy.", senVi: "Cậu bé vui vẻ.", seg: [1259, 1313], h: .45, f: .5, r: .3, o: .5, tip: .1, teeth: 0 }
 ];
 // ---------- 11b. GIAI ĐOẠN 1.6: BÀI HỌC ĐỦ 44 ÂM (đợt 2/3, dữ kiện cũ) ----------
 // ex lấy từ mô tả khẩu hình của web cũ, đã chuẩn hóa: không nói "giống" khi chỉ
 // gần giống (trừ cặp rung/không rung cùng cách đặt miệng, ghi rõ "cách đặt miệng
 // giống"); ʌ/ə/ʃ dùng đúng bản đã kiểm chứng trong trường ex của RB_PH2.
 var RB_PH2 = [
-  { s: "ɪ", vid: "HsKWHxhSwnc", vch: "Dan Hauer", w: "ship", vi: "con tàu", ex: "Giống âm i: nhưng ngắn và thả lỏng hơn. Miệng mở hơi rộng hơn một chút, lưỡi thấp hơn một chút.", sen: "The ship is big.", senVi: "Con tàu lớn.", seg: [131, 251], h: .8, f: .85, r: 0, o: .3, tip: .25, teeth: 0 },
-  { s: "ʊ", vid: "cnqb2qGhdbU", vch: "Dan Hauer", w: "book", vi: "quyển sách", ex: "Môi tròn nhẹ và hơi chu ra, lưỡi lùi về sau, ở giữa cao. Âm ngắn và thả lỏng.", sen: "This is my book.", senVi: "Đây là quyển sách của tôi.", seg: [251, 292], h: .65, f: .2, r: .6, o: .3, tip: 0, teeth: 0 },
-  { s: "ʌ", vid: "5cOVsoZiuU0", vch: "Dan Hauer", w: "cup", vi: "cái cốc", ex: "Âm này tiếng Việt không có; nghe gần giống âm 'ă' nhưng miệng mở khác và lưỡi đặt khác — nghe nút loa mới là chuẩn, chữ 'ă' chỉ là điểm tựa ban đầu. Miệng mở vừa, môi thả lỏng, lưỡi ở giữa và hơi lùi, âm ngắn.", sen: "My cup is red.", senVi: "Cái cốc của tôi màu đỏ.", seg: [846, 957], h: .35, f: .4, r: 0, o: .55, tip: .15, teeth: 0 },
-  { s: "ɒ", vid: "-YdaPHOeXqI", vch: "Mrs Chung English", w: "hot", vi: "nóng", ex: "Môi hơi tròn nhẹ, miệng mở rộng, lưỡi thấp và lùi về sau. Âm ngắn.", sen: "It is hot today.", senVi: "Hôm nay trời nóng.", seg: [996, 1036], h: .12, f: .15, r: .35, o: .75, tip: 0, teeth: 0 },
-  { s: "ɪə", vid: "HiwVDA-tjfo", vch: "Dan Hauer", w: "here", vi: "ở đây", ex: "Bắt đầu như âm ɪ rồi trượt nhẹ về âm ə ở giữa miệng. Lưỡi hạ dần.", sen: "Come here, please.", senVi: "Đến đây nào.", seg: [1036, 1103], h: .65, f: .6, r: 0, o: .35, tip: .15, teeth: 0 },
-  { s: "eə", vid: "pHARyStoz3w", vch: "Dan Hauer", w: "hair", vi: "tóc", ex: "Bắt đầu như âm e rồi trượt về âm ə. Miệng mở dần một chút.", sen: "Her hair is long.", senVi: "Tóc của cô ấy dài.", seg: [1423, 1526], h: .5, f: .6, r: 0, o: .45, tip: .15, teeth: 0 },
-  { s: "ʊə", vid: "a66rvhBXBd4", vch: "Ngoại Ngữ Vnn", w: "sure", vi: "chắc chắn", ex: "Bắt đầu như âm ʊ (môi hơi tròn) rồi trượt về âm ə, môi thả lỏng dần.", sen: "I am sure.", senVi: "Tôi chắc chắn.", seg: [1205, 1259], h: .6, f: .35, r: .3, o: .35, tip: .05, teeth: 0 },
-  { s: "əʊ", vid: "hS6I--dmtkM", vch: "Dan Hauer", w: "go", vi: "đi", ex: "Bắt đầu ở giữa miệng rồi trượt về sau, môi tròn dần lên như âm ʊ.", sen: "Let's go home.", senVi: "Đi về nhà thôi.", seg: [1313, 1423], h: .6, f: .3, r: .5, o: .35, tip: .05, teeth: 0 },
-  { s: "ə", vid: "8gwWFwxbJNw", vch: "Dan Hauer", w: "about", vi: "về", ex: "Âm chỉ xuất hiện ở vần đọc lướt, không nhấn mạnh — khác với âm ơ đầy đủ của tiếng Việt. Miệng gần như thả lỏng hoàn toàn, lưỡi ở giữa. Ví dụ âm đầu của 'about' đọc lướt, không đọc rõ thành 'ơ-bao'.", sen: "Tell me about you.", senVi: "Kể cho tôi nghe về bạn.", seg: [455, 696], h: .5, f: .5, r: 0, o: .35, tip: .1, teeth: 0 },
-  { s: "v", vid: "ui-UtFPZYds", vch: "Dan Hauer", w: "van", vi: "xe tải nhỏ", ex: "Cách đặt miệng giống âm f, nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", sen: "The van is blue.", senVi: "Chiếc xe tải nhỏ màu xanh dương.", seg: [2780, 2970], h: .4, f: .7, r: 0, o: .15, tip: .3, teeth: 1 },
-  { s: "z", vid: "dGTIMhKR4n0", vch: "Dan Hauer", w: "zoo", vi: "sở thú", ex: "Cách đặt miệng giống âm s, nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", sen: "We go to the zoo.", senVi: "Chúng tôi đi sở thú.", seg: [3209, 3305], h: .6, f: .8, r: 0, o: .15, tip: .7, teeth: 1 },
-  { s: "tʃ", vid: "WIvIrCz-k1M", vch: "Dan Hauer", w: "chair", vi: "cái ghế", ex: "Đầu lưỡi chạm nướu trên như âm t rồi thả hơi xì ra như âm ʃ nối tiếp, môi hơi chu.", sen: "This chair is new.", senVi: "Chiếc ghế này mới.", seg: [2249, 2354], h: .55, f: .7, r: .35, o: .3, tip: .8, teeth: 1 },
-  { s: "dʒ", vid: "m8jaDyWq4zk", vch: "Dan Hauer", w: "job", vi: "công việc", ex: "Cách đặt miệng giống âm tʃ, nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", sen: "I like my job.", senVi: "Tôi thích công việc của tôi.", seg: [2354, 2459], h: .55, f: .7, r: .35, o: .3, tip: .8, teeth: 1 },
-  { s: "r", vid: "ZMV0aNx-1Jg", vch: "Dan Hauer", w: "red", vi: "màu đỏ", ex: "Đầu lưỡi cong lên và lùi vào giữa, không chạm vào đâu cả, môi hơi tròn. Không rung lưỡi và không đọc như chữ r giọng Hà Nội (âm /z/).", sen: "The pen is red.", senVi: "Cây bút màu đỏ.", seg: [4160, 4367], h: .55, f: .55, r: .4, o: .3, tip: .5, teeth: 0 },
-  { s: "w", vid: "HpfPSzMF63Q", vch: "Dan Hauer", w: "water", vi: "nước", ex: "Môi tròn và chu mạnh như âm u: rồi mở nhanh sang nguyên âm sau. Bắt đầu bằng môi, không phải răng.", sen: "I drink water.", senVi: "Tôi uống nước.", seg: [4367, 4490], h: .7, f: .2, r: .9, o: .25, tip: 0, teeth: 0 },
-  { s: "æ", vid: "ouMXAWG8hZ0", vch: "Dan Hauer", w: "cat", vi: "con mèo", ex: "Miệng mở khá rộng, hàm hạ xuống. Lưỡi thấp và ra trước. Đây là âm giữa a và e.", sen: "The cat is black.", senVi: "Con mèo màu đen.", seg: [800, 846], h: .25, f: .85, r: 0, o: .8, tip: .2, teeth: 0 },
-  { s: "ɜ:", vid: "Mhb55KK8P1g", vch: "Dan Hauer", w: "bird", vi: "con chim", ex: "Môi thả lỏng, lưỡi ở giữa miệng không chạm đâu cả. Âm dài, nghe như ơ kéo dài.", sen: "The bird can sing.", senVi: "Con chim biết hót.", seg: [696, 750], h: .55, f: .5, r: .1, o: .4, tip: .1, teeth: 0 },
-  { s: "θ", vid: "iDlbkyzJNcY", vch: "Dan Hauer", w: "think", vi: "nghĩ", ex: "Đầu lưỡi đặt giữa hai hàm răng, thò ra một chút, thổi hơi qua. Người Việt hay đọc thành âm 'th' kiểu tiếng Việt hoặc âm t.", sen: "I think so.", senVi: "Tôi nghĩ vậy.", seg: [2970, 3041], h: .4, f: .95, r: 0, o: .2, tip: 1, teeth: 1 },
-  { s: "ð", vid: "kCHZoPZcPXg", vch: "Dan Hauer", w: "this", vi: "cái này", ex: "Cách đặt miệng giống âm θ (lưỡi giữa hai răng), nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", sen: "This pen is mine.", senVi: "Cây bút này là của tôi.", seg: [3041, 3113], h: .4, f: .95, r: 0, o: .2, tip: 1, teeth: 1 },
-  { s: "ʒ", vid: "mUCFMXqU43o", vch: "Dan Hauer", w: "television", vi: "ti vi", ex: "Cách đặt miệng giống âm ʃ, nhưng có rung cổ họng. Âm này ít gặp, hay ở giữa từ.", sen: "I watch television.", senVi: "Tôi xem ti vi.", seg: [3462, 3506], h: .6, f: .6, r: .45, o: .25, tip: .55, teeth: 0 },
-  { s: "ʃ", vid: "cN4ZkIktnTo", vch: "Dan Hauer", w: "she", vi: "cô ấy", ex: "Âm này tiếng Việt chuẩn không có; người miền Nam nghe chữ 's' của mình gần giống âm này, nhưng để đọc đúng 'she' thì lưỡi phải đặt sau lợi trên và thổi hẹp hơn. Lưỡi nâng ở giữa, môi hơi chu ra, thổi hơi xì tròn và mềm hơn âm s.", sen: "She is my friend.", senVi: "Cô ấy là bạn của tôi.", seg: [3305, 3462], h: .6, f: .6, r: .45, o: .25, tip: .55, teeth: 0 }
+  { s: "ɪ", vid: "HsKWHxhSwnc", vch: "Dan Hauer", w: "ship", vi: "con tàu", ex: "Giống âm i: nhưng ngắn và thả lỏng hơn. Miệng mở hơi rộng hơn một chút, lưỡi thấp hơn một chút.", tipText: "Ngắn và thả lỏng — đừng đọc thành 'i' dài như tiếng Việt.", sen: "The ship is big.", senVi: "Con tàu lớn.", seg: [131, 251], h: .8, f: .85, r: 0, o: .3, tip: .25, teeth: 0 },
+  { s: "ʊ", vid: "cnqb2qGhdbU", vch: "Dan Hauer", w: "book", vi: "quyển sách", ex: "Môi tròn nhẹ và hơi chu ra, lưỡi lùi về sau, ở giữa cao. Âm ngắn và thả lỏng.", tipText: "Môi tròn nhẹ, âm ngắn — như 'u' nhưng ngắn và thả lỏng hơn.", sen: "This is my book.", senVi: "Đây là quyển sách của tôi.", seg: [251, 292], h: .65, f: .2, r: .6, o: .3, tip: 0, teeth: 0 },
+  { s: "ʌ", vid: "5cOVsoZiuU0", vch: "Dan Hauer", w: "cup", vi: "cái cốc", ex: "Âm này tiếng Việt không có; nghe gần giống âm 'ă' nhưng miệng mở khác và lưỡi đặt khác — nghe nút loa mới là chuẩn, chữ 'ă' chỉ là điểm tựa ban đầu. Miệng mở vừa, môi thả lỏng, lưỡi ở giữa và hơi lùi, âm ngắn.", tipText: "Miệng mở vừa, âm ngắn — tựa 'ă' nhưng lưỡi ở giữa, đừng đọc hẳn thành 'ă'.", sen: "My cup is red.", senVi: "Cái cốc của tôi màu đỏ.", seg: [846, 957], h: .35, f: .4, r: 0, o: .55, tip: .15, teeth: 0 },
+  { s: "ɒ", vid: "-YdaPHOeXqI", vch: "Mrs Chung English", w: "hot", vi: "nóng", ex: "Môi hơi tròn nhẹ, miệng mở rộng, lưỡi thấp và lùi về sau. Âm ngắn.", tipText: "Miệng mở rộng, môi hơi tròn, âm NGẮN — đừng kéo dài thành /ɔ:/.", sen: "It is hot today.", senVi: "Hôm nay trời nóng.", seg: [996, 1036], h: .12, f: .15, r: .35, o: .75, tip: 0, teeth: 0 },
+  { s: "ɪə", vid: "HiwVDA-tjfo", vch: "Dan Hauer", w: "here", vi: "ở đây", ex: "Bắt đầu như âm ɪ rồi trượt nhẹ về âm ə ở giữa miệng. Lưỡi hạ dần.", tipText: "Đọc 'i' ngắn rồi lướt về âm 'ơ' nhẹ ở giữa miệng.", sen: "Come here, please.", senVi: "Đến đây nào.", seg: [1036, 1103], h: .65, f: .6, r: 0, o: .35, tip: .15, teeth: 0 },
+  { s: "eə", vid: "pHARyStoz3w", vch: "Dan Hauer", w: "hair", vi: "tóc", ex: "Bắt đầu như âm e rồi trượt về âm ə. Miệng mở dần một chút.", tipText: "Đọc 'e' rồi lướt về 'ơ' — miệng mở dần một chút.", sen: "Her hair is long.", senVi: "Tóc của cô ấy dài.", seg: [1423, 1526], h: .5, f: .6, r: 0, o: .45, tip: .15, teeth: 0 },
+  { s: "ʊə", vid: "a66rvhBXBd4", vch: "Ngoại Ngữ Vnn", w: "sure", vi: "chắc chắn", ex: "Bắt đầu như âm ʊ (môi hơi tròn) rồi trượt về âm ə, môi thả lỏng dần.", tipText: "Môi tròn nhẹ 'u' rồi thả lỏng về 'ơ'.", sen: "I am sure.", senVi: "Tôi chắc chắn.", seg: [1205, 1259], h: .6, f: .35, r: .3, o: .35, tip: .05, teeth: 0 },
+  { s: "əʊ", vid: "hS6I--dmtkM", vch: "Dan Hauer", w: "go", vi: "đi", ex: "Bắt đầu ở giữa miệng rồi trượt về sau, môi tròn dần lên như âm ʊ.", tipText: "Bắt đầu ở giữa miệng rồi tròn môi dần về 'u' — như 'âu' nhưng bắt đầu từ giữa.", sen: "Let's go home.", senVi: "Đi về nhà thôi.", seg: [1313, 1423], h: .6, f: .3, r: .5, o: .35, tip: .05, teeth: 0 },
+  { s: "ə", vid: "8gwWFwxbJNw", vch: "Dan Hauer", w: "about", vi: "về", ex: "Âm chỉ xuất hiện ở vần đọc lướt, không nhấn mạnh — khác với âm ơ đầy đủ của tiếng Việt. Miệng gần như thả lỏng hoàn toàn, lưỡi ở giữa. Ví dụ âm đầu của 'about' đọc lướt, không đọc rõ thành 'ơ-bao'.", tipText: "Âm lướt, đọc thật nhẹ và nhanh — không bao giờ đọc rõ thành 'ơ' đầy đủ.", sen: "Tell me about you.", senVi: "Kể cho tôi nghe về bạn.", seg: [455, 696], h: .5, f: .5, r: 0, o: .35, tip: .1, teeth: 0 },
+  { s: "v", vid: "ui-UtFPZYds", vch: "Dan Hauer", w: "van", vi: "xe tải nhỏ", ex: "Cách đặt miệng giống âm f, nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", tipText: "Giống /f/ nhưng cổ họng rung — đặt tay lên cổ, rung mới đúng.", sen: "The van is blue.", senVi: "Chiếc xe tải nhỏ màu xanh dương.", seg: [2780, 2970], h: .4, f: .7, r: 0, o: .15, tip: .3, teeth: 1 },
+  { s: "z", vid: "dGTIMhKR4n0", vch: "Dan Hauer", w: "zoo", vi: "sở thú", ex: "Cách đặt miệng giống âm s, nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", tipText: "Giống /s/ nhưng cổ họng rung — ong ong như tiếng ong bay.", sen: "We go to the zoo.", senVi: "Chúng tôi đi sở thú.", seg: [3209, 3305], h: .6, f: .8, r: 0, o: .15, tip: .7, teeth: 1 },
+  { s: "tʃ", vid: "WIvIrCz-k1M", vch: "Dan Hauer", w: "chair", vi: "cái ghế", ex: "Đầu lưỡi chạm nướu trên như âm t rồi thả hơi xì ra như âm ʃ nối tiếp, môi hơi chu.", tipText: "Bật lưỡi như /t/ rồi xì hơi ngay như /ʃ/ — hai pha dính liền nhau.", sen: "This chair is new.", senVi: "Chiếc ghế này mới.", seg: [2249, 2354], h: .55, f: .7, r: .35, o: .3, tip: .8, teeth: 1 },
+  { s: "dʒ", vid: "m8jaDyWq4zk", vch: "Dan Hauer", w: "job", vi: "công việc", ex: "Cách đặt miệng giống âm tʃ, nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", tipText: "Giống /tʃ/ nhưng cổ họng rung — như chữ 'j' trong 'job'.", sen: "I like my job.", senVi: "Tôi thích công việc của tôi.", seg: [2354, 2459], h: .55, f: .7, r: .35, o: .3, tip: .8, teeth: 1 },
+  { s: "r", vid: "ZMV0aNx-1Jg", vch: "Dan Hauer", w: "red", vi: "màu đỏ", ex: "Đầu lưỡi cong lên và lùi vào giữa, không chạm vào đâu cả, môi hơi tròn. Không rung lưỡi và không đọc như chữ r giọng Hà Nội (âm /z/).", tipText: "Đầu lưỡi cong lên nhưng KHÔNG chạm đâu cả — tuyệt đối không rung lưỡi, không đọc như 'r' Hà Nội.", sen: "The pen is red.", senVi: "Cây bút màu đỏ.", seg: [4160, 4367], h: .55, f: .55, r: .4, o: .3, tip: .5, teeth: 0 },
+  { s: "w", vid: "HpfPSzMF63Q", vch: "Dan Hauer", w: "water", vi: "nước", ex: "Môi tròn và chu mạnh như âm u: rồi mở nhanh sang nguyên âm sau. Bắt đầu bằng môi, không phải răng.", tipText: "Chu môi như 'u' rồi mở nhanh — bắt đầu bằng môi, không dùng răng.", sen: "I drink water.", senVi: "Tôi uống nước.", seg: [4367, 4490], h: .7, f: .2, r: .9, o: .25, tip: 0, teeth: 0 },
+  { s: "æ", vid: "ouMXAWG8hZ0", vch: "Dan Hauer", w: "cat", vi: "con mèo", ex: "Miệng mở khá rộng, hàm hạ xuống. Lưỡi thấp và ra trước. Đây là âm giữa a và e.", tipText: "Há rộng miệng, hàm hạ thấp — âm giữa 'a' và 'e', rộng hơn 'e' của 'bed'.", sen: "The cat is black.", senVi: "Con mèo màu đen.", seg: [800, 846], h: .25, f: .85, r: 0, o: .8, tip: .2, teeth: 0 },
+  { s: "ɜ:", vid: "Mhb55KK8P1g", vch: "Dan Hauer", w: "bird", vi: "con chim", ex: "Môi thả lỏng, lưỡi ở giữa miệng không chạm đâu cả. Âm dài, nghe như ơ kéo dài.", tipText: "Miệng thả lỏng hoàn toàn, kéo dài — như 'ơ' kéo dài, lưỡi ở giữa không chạm đâu.", sen: "The bird can sing.", senVi: "Con chim biết hót.", seg: [696, 750], h: .55, f: .5, r: .1, o: .4, tip: .1, teeth: 0 },
+  { s: "θ", vid: "iDlbkyzJNcY", vch: "Dan Hauer", w: "think", vi: "nghĩ", ex: "Đầu lưỡi đặt giữa hai hàm răng, thò ra một chút, thổi hơi qua. Người Việt hay đọc thành âm 'th' kiểu tiếng Việt hoặc âm t.", tipText: "Thò đầu lưỡi ra giữa hai răng rồi thổi — nếu đọc thành 't' là lưỡi chưa thò ra.", sen: "I think so.", senVi: "Tôi nghĩ vậy.", seg: [2970, 3041], h: .4, f: .95, r: 0, o: .2, tip: 1, teeth: 1 },
+  { s: "ð", vid: "kCHZoPZcPXg", vch: "Dan Hauer", w: "this", vi: "cái này", ex: "Cách đặt miệng giống âm θ (lưỡi giữa hai răng), nhưng có rung cổ họng: đặt tay lên cổ sẽ thấy rung.", tipText: "Giống /θ/ nhưng cổ họng rung — đặt tay lên cổ để kiểm tra.", sen: "This pen is mine.", senVi: "Cây bút này là của tôi.", seg: [3041, 3113], h: .4, f: .95, r: 0, o: .2, tip: 1, teeth: 1 },
+  { s: "ʒ", vid: "mUCFMXqU43o", vch: "Dan Hauer", w: "television", vi: "ti vi", ex: "Cách đặt miệng giống âm ʃ, nhưng có rung cổ họng. Âm này ít gặp, hay ở giữa từ.", tipText: "Giống /ʃ/ nhưng cổ họng rung — âm này hay ở giữa từ như 'television'.", sen: "I watch television.", senVi: "Tôi xem ti vi.", seg: [3462, 3506], h: .6, f: .6, r: .45, o: .25, tip: .55, teeth: 0 },
+  { s: "ʃ", vid: "cN4ZkIktnTo", vch: "Dan Hauer", w: "she", vi: "cô ấy", ex: "Âm này tiếng Việt chuẩn không có; người miền Nam nghe chữ 's' của mình gần giống âm này (chỉ đúng với giọng miền Nam — 's' miền Bắc đọc là [s], xa âm này hơn), nhưng để đọc đúng 'she' thì lưỡi phải đặt sau lợi trên và thổi hẹp hơn. Lưỡi nâng ở giữa, môi hơi chu ra, thổi hơi xì tròn và mềm hơn âm s.", tipText: "Môi hơi chu, lưỡi nâng sau lợi trên — thổi xì tròn và mềm, không xì mảnh như /s/.", sen: "She is my friend.", senVi: "Cô ấy là bạn của tôi.", seg: [3305, 3462], h: .6, f: .6, r: .45, o: .25, tip: .55, teeth: 0 }
 ];
 // Độ mở hàm tương đối do trang tự gán (thang 0-4) + âm đích của nguyên âm đôi (dùng cho hình trượt).
 var RB_PH_JAW = { "i:": 1, "ɪ": 1.5, "e": 2, "æ": 3.5, "ɑ:": 4, "ɒ": 3.5, "ɔ:": 2.5, "ʊ": 1.5, "u:": 1, "ʌ": 2.5, "ɜ:": 2, "ə": 1.5, "eɪ": 2, "aɪ": 3.5, "ɔɪ": 2.5, "əʊ": 1.5, "aʊ": 3.5, "ɪə": 1.5, "eə": 2, "ʊə": 1.5, "p": 0.5, "b": 0.5, "t": 1, "d": 1, "k": 1.5, "ɡ": 1.5, "tʃ": 1.5, "dʒ": 1.5, "f": 0.5, "v": 0.5, "θ": 1, "ð": 1, "s": 0.5, "z": 0.5, "ʃ": 1, "ʒ": 1, "h": 2, "m": 0.5, "n": 1, "ŋ": 1.5, "l": 1, "r": 1.5, "w": 1, "j": 0.5 };
@@ -3966,7 +3966,7 @@ var ZH_PH_STEPS = [
     ] },
 { id: "finals", title: "Vận mẫu cơ bản",
     hook: "Vận mẫu là phần vần sau thanh mẫu: b + ao = bao.",
-    examples: ["a, o, e, i, u, ü — 6 vận mẫu đơn", "ai, ei, ui, ao, ou, iu, ie, üe, er, ia, iao, ua, uo, uai — 14 vận mẫu kép, đọc trượt từ âm này sang âm kia", "an, en, in, un, ün, ian, uan, üan — 8 vận mẫu mũi trước, kết thúc bằng n", "ang, eng, ing, ong, iang, uang, iong, ueng — 8 vận mẫu mũi sau, kết thúc bằng ng"], /* v137 (M5): vi du du 36 van mau (6 don + 14 kep + 8 mui truoc + 8 mui sau) */
+    examples: ["a, o, e, i, u, ü, er — 7 vận mẫu đơn", "ai, ei, ui, ao, ou, iu, ie, üe, ia, iao, ua, uo, uai — 13 vận mẫu kép, đọc trượt từ âm này sang âm kia", "an, en, in, un, ün, ian, uan, üan — 8 vận mẫu mũi trước, kết thúc bằng n", "ang, eng, ing, ong, iang, uang, iong, ueng — 8 vận mẫu mũi sau, kết thúc bằng ng"], /* v137 (M5): vi du du 36 van mau (7 don + 13 kep + 8 mui truoc + 8 mui sau) */
     rule: "Một âm tiết = thanh mẫu (không bắt buộc) + vận mẫu (bắt buộc) + thanh điệu. Vận mẫu quyết định vần của âm tiết.",
     tip: "Đọc vận mẫu mũi thì hơi thoát ra mũi ở cuối: an khác ang ở độ sâu của âm mũi.",
     quiz: [
@@ -3991,17 +3991,17 @@ var ZH_PH_STEPS = [
       { q: "Hai thanh 3 đi liền nhau thì thanh đầu đọc thành gì?", o: ["Vẫn thanh 3", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 1, why: "Quy tắc biến điệu: 3 + 3 đọc thành 2 + 3.", speak: "你好" }
     ] },
 { id: "rules", title: "Quy tắc viết pinyin hay nhầm",
-    hook: "Viết pinyin có vài chỗ gọn lại — nhớ 4 quy tắc này là đủ đọc đúng.",
-    examples: ["ü sau j, q, x, y → u: ju, qu, xu, yu", "iou có thanh mẫu → iu: jiu (không viết jiou)", "uen có thanh mẫu → un: lun (không viết luen)", "i đứng một mình → yi; u đứng một mình → wu; ü đứng một mình → yu"],
-    rule: "Các quy tắc gọn này chỉ đổi CÁCH VIẾT, không đổi cách đọc. Ngoài ra: hai thanh 3 liền nhau thì thanh đầu đọc thành thanh 2. Biến điệu 不 và 一: khi VIẾT pinyin thì luôn viết thanh gốc — 不 viết bù, 一 viết yī (chuẩn GB/T 16159-2012); chỉ khi ĐỌC mới đổi thanh: 不 trước thanh 4 đọc thành bú (bù huì, đọc bú huì), trước thanh 1/2/3 vẫn đọc bù (duìbùqǐ); 一 trước thanh 4 đọc thành yí (yī gè, đọc yí gè), trước thanh 1/2/3 đọc thành yì (yībiān, đọc yìbiān; shíyī diǎn, đọc shíyì diǎn). Riêng biến điệu 3+3 thì chỉ đổi cách đọc, không đổi cách viết (vẫn viết nǐ hǎo, đọc thành ní hǎo).",
+    hook: "Viết pinyin có vài chỗ gọn lại — nhớ 6 quy tắc này là đủ đọc đúng.",
+    examples: ["ü sau j, q, x, y → u: ju, qu, xu, yu; nhưng ü sau n, l vẫn giữ hai chấm: nǚ (nữ), lǜ (xanh lá)", "iou có thanh mẫu → iu: jiu (không viết jiou)", "uen có thanh mẫu → un: lun (không viết luen)", "i đứng một mình → yi; u đứng một mình → wu; ü đứng một mình → yu", "iong đứng một mình → yong; ueng đứng một mình → weng"],
+    rule: "Các quy tắc gọn này chỉ đổi CÁCH VIẾT, không đổi cách đọc — ngoại lệ: ü sau n, l vẫn giữ hai chấm (nǚ nữ, lǜ xanh lá). Thêm 2 quy tắc: iong đứng một mình viết thành yong; ueng đứng một mình viết thành weng. Ngoài ra: hai thanh 3 liền nhau thì thanh đầu đọc thành thanh 2. Biến điệu 不 và 一: khi VIẾT pinyin thì luôn viết thanh gốc — 不 viết bù, 一 viết yī (chuẩn GB/T 16159-2012); chỉ khi ĐỌC mới đổi thanh: 不 trước thanh 4 đọc thành bú (bù huì, đọc bú huì), trước thanh 1/2/3 vẫn đọc bù (duìbùqǐ); 一 trước thanh 4 đọc thành yí (yī gè, đọc yí gè), trước thanh 1/2/3 đọc thành yì (yībiān, đọc yìbiān; shíyī diǎn, đọc shíyì diǎn). Riêng biến điệu 3+3 thì chỉ đổi cách đọc, không đổi cách viết (vẫn viết nǐ hǎo, đọc thành ní hǎo).",
     tip: "Gặp pinyin lạ thì tách ra: thanh mẫu + vận mẫu + dấu thanh, đọc từng phần rồi nối lại.",
     quiz: [
-      { q: "“ü” sau j, q, x, y viết thành gì?", o: ["ü", "u", "v", "yu"], a: 1, why: "Bỏ hai chấm: ju, qu, xu, yu.", speak: "句" },
+      { q: "“ü” sau j, q, x, y viết thành gì?", o: ["ü", "u", "v", "yu"], a: 1, why: "Bỏ hai chấm sau j, q, x, y: ju, qu, xu, yu — nhưng ü sau n, l vẫn giữ hai chấm: nǚ, lǜ.", speak: "句" },
       { q: "“iou” khi có thanh mẫu đi trước viết gọn thành gì?", o: ["iou", "iu", "io", "u"], a: 1, why: "Bỏ o giữa: jiu thay cho jiou.", speak: "九" },
       { q: "“uen” khi có thanh mẫu đi trước viết gọn thành gì?", o: ["uen", "un", "ueng", "en"], a: 1, why: "Bỏ e giữa: lun thay cho luen.", speak: "论" },
       { q: "Âm “i” đứng một mình, thêm gì ở đầu?", o: ["Không thêm", "y → yi", "w → wi", "j → ji"], a: 1, why: "i đứng một mình thêm y: yi.", speak: "一" },
       { q: "Âm “u” đứng một mình, thêm gì ở đầu?", o: ["y → yu", "w → wu", "j → ju", "Không thêm"], a: 1, why: "u đứng một mình thêm w: wu.", speak: "五" },
-      { q: "Hai thanh 3 đi liền nhau (ví dụ nǐ hǎo) thì thanh 3 đầu tiên đọc thành gì?", o: ["Vẫn thanh 3", "Thanh 2", "Thanh 4", "Thanh nhẹ"], a: 1, why: "Quy tắc biến điệu: 3 + 3 → 2 + 3.", speak: "你好" }
+      { q: "不会 đọc thành gì?", o: ["bù huì", "bú huì", "bù huí", "bú huí"], a: 1, why: "不 trước thanh 4 (会 huì) đọc thành bú: bú huì (viết vẫn là bù).", speak: "不会" }
     ] }
 ];
 // Bộ từ khởi động chặng 1 (tự soạn theo chủ đề sách HSK1: chào hỏi, bản thân,
@@ -16280,9 +16280,9 @@ var TP_HANGUL = [
 { k: "ㅜ", r: "u", vi: "Đọc là 'u', môi chu lại như huýt sáo nhẹ.", ex: "우유", exr: "uyu", exv: "sữa" },
 { k: "ㅡ", r: "eu", vi: "Đọc là 'ư' nhưng môi không tròn, miệng hơi dẹt.", ex: "음식", exr: "eumsik", exv: "thức ăn" },
 { k: "ㅣ", r: "i", vi: "Đọc là 'i', miệng cười nhẹ.", ex: "미소", exr: "miso", exv: "nụ cười" },
-{ k: "ㅐ", r: "ae", vi: "Đọc là 'e' mở miệng rộng, giống 'ae' trong tiếng Anh 'cat' nhưng nhẹ hơn.", ex: "개", exr: "gae", exv: "chó" },
+{ k: "ㅐ", r: "ae", vi: "Đọc là 'e' mở miệng — giống 'e' trong tiếng Việt 'em' nhưng mở rộng hơn một chút. (Tiếng Hàn hiện đại thường đọc ㅐ và ㅔ gần như nhau, nhưng giáo trình TOPIK vẫn dạy phân biệt hai âm này.)", ex: "개", exr: "gae", exv: "chó" },
 { k: "ㅔ", r: "e", vi: "Đọc là 'ê', miệng mở vừa.", ex: "네", exr: "ne", exv: "vâng" },
-{ k: "ㅚ", r: "oe", vi: "Nguyên âm đơn: đọc là 'uê' (môi tròn, âm ngắn) — viết bằng ㅗ + ㅣ nhưng đọc thành một âm.", ex: "외국", exr: "oeguk", exv: "nước ngoài" },
+{ k: "ㅚ", r: "oe", vi: "Nguyên âm đơn [ø]: môi tròn, đọc thành một âm duy nhất, không trượt — viết bằng ㅗ + ㅣ nhưng đọc thành một âm.", ex: "외국", exr: "oeguk", exv: "nước ngoài" },
 { k: "ㅟ", r: "wi", vi: "Nguyên âm đơn: đọc là 'uy' — viết bằng ㅜ + ㅣ nhưng đọc thành một âm.", ex: "쉬다", exr: "swida", exv: "nghỉ ngơi" }
 ] },
 { title: "Nguyên âm đôi (có y, có w)", items: [
@@ -16290,12 +16290,12 @@ var TP_HANGUL = [
 { k: "ㅕ", r: "yeo", vi: "ㅣ + ㅓ: đọc là 'yơ'.", ex: "여자", exr: "yeoja", exv: "phụ nữ" },
 { k: "ㅛ", r: "yo", vi: "ㅣ + ㅗ: đọc là 'yô'.", ex: "요리", exr: "yori", exv: "nấu ăn" },
 { k: "ㅠ", r: "yu", vi: "ㅣ + ㅜ: đọc là 'yu'.", ex: "휴일", exr: "hyuil", exv: "ngày nghỉ" },
-{ k: "ㅒ", r: "yae", vi: "ㅣ + ㅐ: đọc là 'ye' mở miệng.", ex: "얘기", exr: "yaegi", exv: "câu chuyện" },
-{ k: "ㅖ", r: "ye", vi: "ㅣ + ㅔ: đọc là 'yê'.", ex: "예쁘다", exr: "yeppeuda", exv: "đẹp" },
+{ k: "ㅒ", r: "yae", vi: "ㅣ + ㅐ: đọc là 'ye' [jɛ] — mở miệng rộng, âm 'e' mở.", ex: "얘기", exr: "yaegi", exv: "câu chuyện" },
+{ k: "ㅖ", r: "ye", vi: "ㅣ + ㅔ: đọc là 'yê' [je] — miệng mở vừa, âm 'ê' đóng hơn ㅒ.", ex: "예쁘다", exr: "yeppeuda", exv: "đẹp" },
 { k: "ㅘ", r: "wa", vi: "ㅗ + ㅏ: đọc là 'oa'.", ex: "과자", exr: "gwaja", exv: "bánh kẹo" },
 { k: "ㅙ", r: "wae", vi: "ㅗ + ㅐ: đọc là 'oe' mở miệng.", ex: "왜", exr: "wae", exv: "tại sao" },
 { k: "ㅝ", r: "wo", vi: "ㅜ + ㅓ: đọc là 'uơ'.", ex: "원하다", exr: "wonhada", exv: "muốn" },
-{ k: "ㅞ", r: "we", vi: "ㅜ + ㅔ: đọc là 'uê' mở miệng.", ex: "웨이터", exr: "weiteo", exv: "người phục vụ" },
+{ k: "ㅞ", r: "we", vi: "ㅜ + ㅔ: đọc là 'uê' [we] — trượt từ u sang ê, miệng mở dần.", ex: "웨이터", exr: "weiteo", exv: "người phục vụ" },
 { k: "ㅢ", r: "ui", vi: "ㅡ + ㅣ: đọc là 'ưi' (đầu từ); giữa từ đọc nhẹ thành 'i'. Riêng 의 làm trợ từ (của…) thì đọc thành 'ê': 나의 [나에].", ex: "의사", exr: "uisa", exv: "bác sĩ" }
 ] },
 { title: "Phụ âm cơ bản", items: [
@@ -16307,7 +16307,7 @@ var TP_HANGUL = [
 { k: "ㅂ", r: "b/p", vi: "Đầu âm tiết đọc nhẹ như 'b'; cuối âm tiết đọc thành 'p'.", ex: "밥", exr: "bap", exv: "cơm" },
 { k: "ㅅ", r: "s", vi: "Đầu âm tiết đọc là 's'; trước ㅣ và các nguyên âm có y (ㅑ/ㅕ/ㅛ/ㅠ/ㅖ) đọc mềm thành [ɕ] gần 'sh' (vd 시); cuối âm tiết đọc thành 't'.", ex: "사과", exr: "sagwa", exv: "táo" },
 { k: "ㅇ", r: "(không đọc)/ng", vi: "Đầu âm tiết không đọc (chỉ làm chỗ tựa); cuối âm tiết đọc thành 'ng'.", ex: "오이", exr: "oi", exv: "dưa chuột" },
-{ k: "ㅈ", r: "j", vi: "Đọc như 'ch' nhẹ (giống 'j' tiếng Anh nhưng nhẹ hơn).", ex: "자전거", exr: "jajeongeo", exv: "xe đạp" },
+{ k: "ㅈ", r: "j", vi: "Đọc như 'ch' nhẹ, không rung dây thanh (khác 'j' tiếng Anh [dʒ] vốn rung).", ex: "자전거", exr: "jajeongeo", exv: "xe đạp" },
 { k: "ㅊ", r: "ch", vi: "Đọc là 'ch' bật hơi mạnh.", ex: "친구", exr: "chingu", exv: "bạn" },
 { k: "ㅋ", r: "k", vi: "Đọc là 'kh' bật hơi mạnh.", ex: "커피", exr: "keopi", exv: "cà phê" },
 { k: "ㅌ", r: "t", vi: "Đọc là 'th' bật hơi mạnh.", ex: "토마토", exr: "tomato", exv: "cà chua" },
@@ -17608,8 +17608,8 @@ var TP_VOCAB_EXPAND2 = [
 // TOPIK mở rộng đợt 30/10 — ngữ pháp, Nghe, Đọc, thi thử bổ sung, kiểm tra cuối chặng.
 // Tự soạn 100%. Cách đọc/nghĩa chưa đối chiếu độc lập với giáo trình TOPIK.
 var TP_GRAMMAR_EXPAND = [
-{ name: "에 / 에서 — nơi đến và nơi diễn ra", level: "TOPIK I",
-  explain: "Ví dụ trước: '저는 학교에 가요.' (Tôi đi đến trường.) '학교에서 공부해요.' (Tôi học ở trường.) Quy tắc: 에 = đến nơi nào, đi về phía nào; 에서 = tại nơi nào diễn ra hành động. Đừng nhầm: 가다 (đi) dùng 에, hành động tại chỗ dùng 에서.",
+{ name: "에 / 에서 (ôn + mở rộng) — nơi đến và nơi diễn ra", level: "TOPIK I",
+  explain: "Ví dụ trước: '저는 학교에 가요.' (Tôi đi đến trường.) '학교에서 공부해요.' (Tôi học ở trường.) Quy tắc: 에 = đến nơi nào, đi về phía nào; 에서 = tại nơi nào diễn ra hành động. Đừng nhầm: 가다 (đi) dùng 에, hành động tại chỗ dùng 에서. Đây là trạm ôn + mở rộng của trạm [2]: ngoài 'đến nơi' và 'tại nơi', 에서 còn chỉ nơi xuất phát — '저는 한국에서 왔어요.' (Tôi đến từ Hàn Quốc.)",
   quiz: [
   { q: "Điền đúng: '저는 집___ 가요.'", o: ["에", "에서", "를"], a: 0, why: "Đi về nhà: 에." },
   { q: "Điền đúng: '도서관___ 공부해요.'", o: ["에", "에서", "를"], a: 1, why: "Học tại thư viện: 에서." },
@@ -17618,15 +17618,15 @@ var TP_GRAMMAR_EXPAND = [
   { q: "Câu nào đúng?", o: ["식당에 밥을 먹어요.", "식당에서 밥을 먹어요.", "식당을 밥을 먹어요."], a: 1, why: "Ăn cơm tại nhà hàng: 식당에서." },
   { q: "Câu nào đúng?", o: ["학교에서 가요.", "학교에 가요.", "학교를 가요."], a: 1, why: "Đi đến trường: 학교에 가요." }
   ] },
-{ name: "하고 싶다 — muốn làm gì", level: "TOPIK I",
-  explain: "Ví dụ trước: '저는 영화를 보고 싶어요.' (Tôi muốn xem phim.) Quy tắc: động từ bỏ 다 + 고 싶다 = muốn làm gì. Dạng lịch sự: 고 싶어요. Phủ định: 고 싶지 않아요 (không muốn).",
+{ name: "하고 싶다 (ôn + mở rộng) — muốn làm gì", level: "TOPIK I",
+  explain: "Ví dụ trước: '저는 영화를 보고 싶어요.' (Tôi muốn xem phim.) Quy tắc: động từ bỏ 다 + 고 싶다 = muốn làm gì. Dạng lịch sự: 고 싶어요. Phủ định: 고 싶지 않아요 (không muốn). Đây là trạm ôn + mở rộng của trạm [4] (đã học 고 싶어요 ở đó): trạm này luyện thêm phủ định 고 싶지 않아요 và câu hỏi '주말에 뭐 하고 싶어요?' (Cuối tuần bạn muốn làm gì?).",
   quiz: [
   { q: "Điền đúng: '저는 한국에 (가다) 싶어요.'", o: ["가고", "가서", "가면"], a: 0, why: "가다 → 가고 싶어요." },
   { q: "Điền đúng: '저는 물을 (마시다) 싶어요.'", o: ["마시고", "마셔서", "마시면"], a: 0, why: "마시다 → 마시고 싶어요." },
   { q: "'Tôi không muốn ăn.' nói thế nào?", o: ["먹고 싶지 않아요.", "먹고 싶어요.", "먹었어요."], a: 0, why: "Phủ định: 고 싶지 않아요." },
   { q: "'Bạn muốn làm gì cuối tuần?' hỏi thế nào?", o: ["주말에 뭐 하고 싶어요?", "주말에 뭐 했어요?", "주말에 뭐예요?"], a: 0, why: "Hỏi muốn làm gì: 뭐 하고 싶어요?" },
   { q: "Điền đúng: '저는 새 책을 (사다) 싶어요.'", o: ["사서", "사고", "사면"], a: 1, why: "사다 → 사고 싶어요." },
-  { q: "Câu nào đúng?", o: ["저는 자고 싶지 않아요.", "저는 자고 싶어요.", "Cả hai đều đúng tùy ý."], a: 2, why: "Cả hai đều đúng ngữ pháp: muốn ngủ / không muốn ngủ." }
+  { q: "Điền đúng: '저는 (자다) 싶어요.' (muốn ngủ)", o: ["자고", "자서", "자면"], a: 0, why: "자다 → 자고 싶어요: muốn ngủ." }
   ] },
 { name: "기 때문에 — vì (lý do)", level: "TOPIK I",
   explain: "Ví dụ trước: '비가 오기 때문에 우산을 가져왔어요.' (Vì trời mưa nên tôi đã mang ô.) Quy tắc: động từ/tính từ + 기 때문에 = vì... Dùng khi nêu lý do một cách trang trọng hơn -서. Sau 기 때문에 là kết quả.",
@@ -53058,7 +53058,7 @@ var TP_LISTEN_EXPAND16_L4 = [
 { part: 3, title: "Nói về giá nhà ở thành phố", script: "여자: 집값이 비싸요. 남자: 네, 월세가 올라요. 여자: 교통이 좋은 곳은 더 비싸요. 남자: 그래서 멀리 살아요. 여자: 출근 시간이 길어요.", scriptv: "Nữ: Giá nhà đắt. Nam: Vâng, tiền thuê tháng tăng. Nữ: Nơi giao thông tốt thì còn đắt hơn. Nam: Vì vậy tôi sống xa. Nữ: Thời gian đi làm dài.", qs: [
 { q: "Giá nhà thế nào?", o: ["Đắt", "Rẻ", "Bình thường", "Miễn phí"], a: 0, why: "집값이 비싸요." },
 { q: "Nơi giao thông tốt thì sao?", o: ["Đắt hơn", "Rẻ hơn", "Yên tĩnh hơn", "Xa hơn"], a: 0, why: "교통이 좋은 곳은 더 비싸요." },
-{ q: "Vì sao người nam sống xa?", o: ["Vì giá nhà đắt", "Vì thích xa", "Vì không có xe", "Vì thích yên tĩnh"], a: 0, why: "집값이 비싸서 멀리 살아요 — bài nói '그래서 멀리 살아요' sau khi nói giá đắt." }
+{ q: "Vì sao người nam sống xa?", o: ["Vì giá nhà đắt", "Vì thích xa", "Vì không có xe", "Vì thích yên tĩnh"], a: 0, why: "Bài nói '그래서 멀리 살아요' ngay sau khi nói giá nhà đắt — 그래서 ở đây chỉ nguyên nhân là giá đắt." }
 ] },
 { part: 4, title: "Bài nói về sức khỏe cộng đồng", script: "건강검진을 받아요. 매일 걸어요. 물을 많이 마셔요. 스트레스를 줄여요. 잠을 잘 자요. 건강이 중요해요.", scriptv: "Đi khám sức khỏe định kỳ. Đi bộ mỗi ngày. Uống nhiều nước. Giảm căng thẳng. Ngủ ngon. Sức khỏe rất quan trọng.", qs: [
 { q: "Bài nói khuyên làm gì định kỳ?", o: ["Khám sức khỏe định kỳ", "Đi du lịch", "Mua thuốc", "Tập gym"], a: 0, why: "건강검진을 받아요." },
@@ -54465,7 +54465,7 @@ var LP_EXPAND18_A = [
      "8 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lan thức dậy lúc 6 giờ vì câu đầu tiên nói rõ giờ thức dậy của cô bé”. Vì vậy đáp án “6 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Lan wakes up at 6 o'clock”. Vì vậy đáp án “6 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lan thức dậy lúc 6 giờ vì câu đầu tiên nói rõ giờ thức dậy của cô bé",
     "whyU7": true
    },
@@ -54479,7 +54479,7 @@ var LP_EXPAND18_A = [
      "Eggs"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lan ăn bánh mì vào bữa sáng vì bài nghe nói cô bé ăn bánh mì”. Vì vậy đáp án “Bread” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “She washes her face and eats bread for breakfast”. Vì vậy đáp án “Bread” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lan ăn bánh mì vào bữa sáng vì bài nghe nói cô bé ăn bánh mì",
     "whyU7": true
    },
@@ -54493,7 +54493,7 @@ var LP_EXPAND18_A = [
      "In her pocket"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lan bỏ sách vào cặp vì bài nghe nói cô bé bỏ sách vào cặp”. Vì vậy đáp án “In her school bag” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “She puts her books in her school bag”. Vì vậy đáp án “In her school bag” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lan bỏ sách vào cặp vì bài nghe nói cô bé bỏ sách vào cặp",
     "whyU7": true
    },
@@ -54507,7 +54507,7 @@ var LP_EXPAND18_A = [
      "On foot"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mẹ đưa Lan đến trường bằng xe máy vì bài nghe nói mẹ đưa cô bé đi bằng xe máy”. Vì vậy đáp án “By motorbike with her mother” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Her mother takes her to school by motorbike”. Vì vậy đáp án “By motorbike with her mother” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mẹ đưa Lan đến trường bằng xe máy vì bài nghe nói mẹ đưa cô bé đi bằng xe máy",
     "whyU7": true
    },
@@ -54521,7 +54521,7 @@ var LP_EXPAND18_A = [
      "Her brother"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lan rất thích cô giáo của mình vì câu cuối bài nghe nói như vậy”. Vì vậy đáp án “Her teacher” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Lan likes her teacher very much”. Vì vậy đáp án “Her teacher” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lan rất thích cô giáo của mình vì câu cuối bài nghe nói như vậy",
     "whyU7": true
    }
@@ -54544,7 +54544,7 @@ var LP_EXPAND18_A = [
      "Only his mother"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nam sống cùng bố, mẹ và em gái nhỏ vì câu đầu tiên liệt kê cả nhà”. Vì vậy đáp án “His father, mother and little sister” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Nam lives with his father, his mother and his little sister”. Vì vậy đáp án “His father, mother and little sister” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nam sống cùng bố, mẹ và em gái nhỏ vì câu đầu tiên liệt kê cả nhà",
     "whyU7": true
    },
@@ -54558,7 +54558,7 @@ var LP_EXPAND18_A = [
      "A farmer"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bố của Nam là tài xế vì bài nghe nói bố bạn ấy làm tài xế”. Vì vậy đáp án “A driver” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “His father is a driver”. Vì vậy đáp án “A driver” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bố của Nam là tài xế vì bài nghe nói bố bạn ấy làm tài xế",
     "whyU7": true
    },
@@ -54572,7 +54572,7 @@ var LP_EXPAND18_A = [
      "A cook"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mẹ của Nam là giáo viên vì bài nghe nói mẹ bạn ấy làm giáo viên”. Vì vậy đáp án “A teacher” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “His mother is a teacher”. Vì vậy đáp án “A teacher” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mẹ của Nam là giáo viên vì bài nghe nói mẹ bạn ấy làm giáo viên",
     "whyU7": true
    },
@@ -54586,7 +54586,7 @@ var LP_EXPAND18_A = [
      "Six years old"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Em gái của Nam năm tuổi vì bài nghe nói em gái bạn ấy năm tuổi”. Vì vậy đáp án “Five years old” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “His sister is five years old”. Vì vậy đáp án “Five years old” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Em gái của Nam năm tuổi vì bài nghe nói em gái bạn ấy năm tuổi",
     "whyU7": true
    },
@@ -54600,7 +54600,7 @@ var LP_EXPAND18_A = [
      "Read books"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Buổi tối cả nhà ăn tối cùng nhau và xem ti vi vì câu cuối bài nghe nói như vậy”. Vì vậy đáp án “Eat dinner together and watch TV” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the evening, they eat dinner together and watch TV”. Vì vậy đáp án “Eat dinner together and watch TV” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Buổi tối cả nhà ăn tối cùng nhau và xem ti vi vì câu cuối bài nghe nói như vậy",
     "whyU7": true
    }
@@ -54623,7 +54623,7 @@ var LP_EXPAND18_A = [
      "On Sunday evening"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hoa đi chợ vào sáng Chủ nhật vì câu đầu tiên nói rõ ngày đi chợ”. Vì vậy đáp án “On Sunday morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Hoa goes to the market on Sunday morning”. Vì vậy đáp án “On Sunday morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hoa đi chợ vào sáng Chủ nhật vì câu đầu tiên nói rõ ngày đi chợ",
     "whyU7": true
    },
@@ -54637,7 +54637,7 @@ var LP_EXPAND18_A = [
      "Four kilos"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hoa mua hai cân cam vì bài nghe nói cô ấy mua hai cân cam”. Vì vậy đáp án “Two kilos” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “She buys two kilos of oranges and one kilo of bananas”. Vì vậy đáp án “Two kilos” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hoa mua hai cân cam vì bài nghe nói cô ấy mua hai cân cam",
     "whyU7": true
    },
@@ -54651,7 +54651,7 @@ var LP_EXPAND18_A = [
      "35,000 dong"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cam giá 30.000 đồng một cân vì bài nghe nêu rõ giá cam”. Vì vậy đáp án “30,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The oranges cost 30,000 dong a kilo”. Vì vậy đáp án “30,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cam giá 30.000 đồng một cân vì bài nghe nêu rõ giá cam",
     "whyU7": true
    },
@@ -54665,7 +54665,7 @@ var LP_EXPAND18_A = [
      "A hat"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hoa mua một chiếc bánh nhỏ cho con trai vì bài nghe nói cô ấy mua bánh cho con trai”. Vì vậy đáp án “A small cake” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Hoa also buys a small cake for her son”. Vì vậy đáp án “A small cake” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hoa mua một chiếc bánh nhỏ cho con trai vì bài nghe nói cô ấy mua bánh cho con trai",
     "whyU7": true
    },
@@ -54679,7 +54679,7 @@ var LP_EXPAND18_A = [
      "At 11 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hoa về nhà lúc 9 giờ vì câu cuối bài nghe nói như vậy”. Vì vậy đáp án “At 9 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “She goes home at 9 o'clock”. Vì vậy đáp án “At 9 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hoa về nhà lúc 9 giờ vì câu cuối bài nghe nói như vậy",
     "whyU7": true
    }
@@ -54702,7 +54702,7 @@ var LP_EXPAND18_A = [
      "A fish"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Minh có một con mèo nhỏ vì câu đầu tiên nói rõ Minh có mèo”. Vì vậy đáp án “A small cat” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Minh has a small cat”. Vì vậy đáp án “A small cat” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Minh có một con mèo nhỏ vì câu đầu tiên nói rõ Minh có mèo",
     "whyU7": true
    },
@@ -54716,7 +54716,7 @@ var LP_EXPAND18_A = [
      "Grey"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Con mèo màu trắng vì bài nghe nói con mèo màu trắng”. Vì vậy đáp án “White” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The cat is white and its name is Snow”. Vì vậy đáp án “White” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Con mèo màu trắng vì bài nghe nói con mèo màu trắng",
     "whyU7": true
    },
@@ -54730,7 +54730,7 @@ var LP_EXPAND18_A = [
      "Moon"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Con mèo tên là Snow vì bài nghe nói tên của nó là Snow”. Vì vậy đáp án “Snow” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The cat is white and its name is Snow”. Vì vậy đáp án “Snow” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Con mèo tên là Snow vì bài nghe nói tên của nó là Snow",
     "whyU7": true
    },
@@ -54744,7 +54744,7 @@ var LP_EXPAND18_A = [
      "Some bread"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mỗi sáng Minh cho Snow uống sữa vì bài nghe nói Minh cho mèo uống sữa vào buổi sáng”. Vì vậy đáp án “Some milk” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Every morning, Minh gives Snow some milk”. Vì vậy đáp án “Some milk” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mỗi sáng Minh cho Snow uống sữa vì bài nghe nói Minh cho mèo uống sữa vào buổi sáng",
     "whyU7": true
    },
@@ -54758,7 +54758,7 @@ var LP_EXPAND18_A = [
      "On the chair"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Buổi chiều Snow ngủ dưới cây to trong vườn vì bài nghe nói nó ngủ dưới cây to trong vườn”. Vì vậy đáp án “Under the big tree in the garden” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the afternoon, Snow sleeps under the big tree in the garden”. Vì vậy đáp án “Under the big tree in the garden” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Buổi chiều Snow ngủ dưới cây to trong vườn vì bài nghe nói nó ngủ dưới cây to trong vườn",
     "whyU7": true
    }
@@ -54781,7 +54781,7 @@ var LP_EXPAND18_A = [
      "She is a driver"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cô Thu là giáo viên vì câu đầu tiên nói rõ nghề của cô”. Vì vậy đáp án “She is a teacher” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Miss Thu is a teacher”. Vì vậy đáp án “She is a teacher” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cô Thu là giáo viên vì câu đầu tiên nói rõ nghề của cô",
     "whyU7": true
    },
@@ -54795,7 +54795,7 @@ var LP_EXPAND18_A = [
      "35 students"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lớp của cô có 30 học sinh vì bài nghe nêu rõ số học sinh”. Vì vậy đáp án “30 students” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Her class has 30 students”. Vì vậy đáp án “30 students” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lớp của cô có 30 học sinh vì bài nghe nêu rõ số học sinh",
     "whyU7": true
    },
@@ -54809,7 +54809,7 @@ var LP_EXPAND18_A = [
      "At 9 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lớp học bắt đầu lúc 7 giờ sáng vì bài nghe nói lớp bắt đầu lúc 7 giờ”. Vì vậy đáp án “At 7 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The class starts at 7 o'clock in the morning”. Vì vậy đáp án “At 7 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lớp học bắt đầu lúc 7 giờ sáng vì bài nghe nói lớp bắt đầu lúc 7 giờ",
     "whyU7": true
    },
@@ -54823,7 +54823,7 @@ var LP_EXPAND18_A = [
      "Science and English"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh học tiếng Anh và Toán vì bài nghe nói các em học hai môn đó”. Vì vậy đáp án “English and Maths” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The students learn English and Maths”. Vì vậy đáp án “English and Maths” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh học tiếng Anh và Toán vì bài nghe nói các em học hai môn đó",
     "whyU7": true
    },
@@ -54837,7 +54837,7 @@ var LP_EXPAND18_A = [
      "They eat lunch"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Giờ ra chơi các em chơi ở sân trường vì bài nghe nói các em chơi ở sân trường”. Vì vậy đáp án “They play in the school yard” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “At break time, they play in the school yard”. Vì vậy đáp án “They play in the school yard” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Giờ ra chơi các em chơi ở sân trường vì bài nghe nói các em chơi ở sân trường",
     "whyU7": true
    }
@@ -54860,7 +54860,7 @@ var LP_EXPAND18_A = [
      "Linh's friend"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tuấn là anh trai của Linh vì câu đầu tiên nói Linh có một anh trai tên Tuấn”. Vì vậy đáp án “Linh's elder brother” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Linh has an elder brother”. Vì vậy đáp án “Linh's elder brother” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tuấn là anh trai của Linh vì câu đầu tiên nói Linh có một anh trai tên Tuấn",
     "whyU7": true
    },
@@ -54874,7 +54874,7 @@ var LP_EXPAND18_A = [
      "16 years old"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tuấn 15 tuổi vì bài nghe nói Tuấn 15 tuổi”. Vì vậy đáp án “15 years old” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tuan is 15 years old and he is a student”. Vì vậy đáp án “15 years old” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tuấn 15 tuổi vì bài nghe nói Tuấn 15 tuổi",
     "whyU7": true
    },
@@ -54888,7 +54888,7 @@ var LP_EXPAND18_A = [
      "Swimming"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tuấn thích bóng đá vì bài nghe nói anh ấy thích bóng đá”. Vì vậy đáp án “Football” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “He likes football and he plays football every Sunday”. Vì vậy đáp án “Football” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tuấn thích bóng đá vì bài nghe nói anh ấy thích bóng đá",
     "whyU7": true
    },
@@ -54902,7 +54902,7 @@ var LP_EXPAND18_A = [
      "Every day"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tuấn chơi bóng đá mỗi Chủ nhật vì bài nghe nói anh ấy chơi bóng đá mỗi Chủ nhật”. Vì vậy đáp án “Every Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “He likes football and he plays football every Sunday”. Vì vậy đáp án “Every Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tuấn chơi bóng đá mỗi Chủ nhật vì bài nghe nói anh ấy chơi bóng đá mỗi Chủ nhật",
     "whyU7": true
    },
@@ -54916,7 +54916,7 @@ var LP_EXPAND18_A = [
      "Play football"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Linh và Tuấn thường chơi cờ vua vào buổi tối vì bài nghe nói hai anh em thường chơi cờ vua buổi tối”. Vì vậy đáp án “Play chess” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Linh and Tuan often play chess in the evening”. Vì vậy đáp án “Play chess” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Linh và Tuấn thường chơi cờ vua vào buổi tối vì bài nghe nói hai anh em thường chơi cờ vua buổi tối",
     "whyU7": true
    }
@@ -54939,7 +54939,7 @@ var LP_EXPAND18_A = [
      "Near a school"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhà của An ở gần một con sông nhỏ vì câu đầu tiên nói nhà ở gần sông nhỏ”. Vì vậy đáp án “Near a small river” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “An's house is near a small river”. Vì vậy đáp án “Near a small river” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhà của An ở gần một con sông nhỏ vì câu đầu tiên nói nhà ở gần sông nhỏ",
     "whyU7": true
    },
@@ -54953,7 +54953,7 @@ var LP_EXPAND18_A = [
      "Five bedrooms"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ngôi nhà có ba phòng ngủ vì bài nghe nói nhà có ba phòng ngủ”. Vì vậy đáp án “Three bedrooms” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The house has three bedrooms and a big kitchen”. Vì vậy đáp án “Three bedrooms” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ngôi nhà có ba phòng ngủ vì bài nghe nói nhà có ba phòng ngủ",
     "whyU7": true
    },
@@ -54967,7 +54967,7 @@ var LP_EXPAND18_A = [
      "A bus stop"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Trước nhà có một khu vườn nhiều hoa vì bài nghe nói trước nhà có vườn hoa”. Vì vậy đáp án “A garden with many flowers” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In front of the house, there is a garden with many flowers”. Vì vậy đáp án “A garden with many flowers” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Trước nhà có một khu vườn nhiều hoa vì bài nghe nói trước nhà có vườn hoa",
     "whyU7": true
    },
@@ -54981,7 +54981,7 @@ var LP_EXPAND18_A = [
      "Orchids and roses"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mẹ của An trồng hoa hồng và hoa hướng dương vì bài nghe nói mẹ trồng hai loại hoa đó”. Vì vậy đáp án “Roses and sunflowers” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “An's mother grows roses and sunflowers”. Vì vậy đáp án “Roses and sunflowers” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mẹ của An trồng hoa hồng và hoa hướng dương vì bài nghe nói mẹ trồng hai loại hoa đó",
     "whyU7": true
    },
@@ -54995,7 +54995,7 @@ var LP_EXPAND18_A = [
      "Sleep"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “An thích đọc sách trong vườn vì câu cuối bài nghe nói An thích đọc sách trong vườn”. Vì vậy đáp án “Read books” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “An likes to read books in the garden”. Vì vậy đáp án “Read books” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "An thích đọc sách trong vườn vì câu cuối bài nghe nói An thích đọc sách trong vườn",
     "whyU7": true
    }
@@ -55018,7 +55018,7 @@ var LP_EXPAND18_A = [
      "At a shop"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bác sĩ Hoa làm việc ở một bệnh viện nhỏ vì câu đầu tiên nói cô làm ở bệnh viện nhỏ”. Vì vậy đáp án “At a small hospital” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Doctor Hoa works at a small hospital”. Vì vậy đáp án “At a small hospital” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bác sĩ Hoa làm việc ở một bệnh viện nhỏ vì câu đầu tiên nói cô làm ở bệnh viện nhỏ",
     "whyU7": true
    },
@@ -55032,7 +55032,7 @@ var LP_EXPAND18_A = [
      "At 10 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cô bắt đầu làm việc lúc 8 giờ sáng vì bài nghe nói cô bắt đầu lúc 8 giờ”. Vì vậy đáp án “At 8 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “She starts work at 8 o'clock in the morning”. Vì vậy đáp án “At 8 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cô bắt đầu làm việc lúc 8 giờ sáng vì bài nghe nói cô bắt đầu lúc 8 giờ",
     "whyU7": true
    },
@@ -55046,7 +55046,7 @@ var LP_EXPAND18_A = [
      "She reads books"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Buổi sáng cô khám cho nhiều bệnh nhân vì bài nghe nói buổi sáng cô gặp nhiều bệnh nhân”. Vì vậy đáp án “She sees many patients” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the morning, she sees many patients”. Vì vậy đáp án “She sees many patients” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Buổi sáng cô khám cho nhiều bệnh nhân vì bài nghe nói buổi sáng cô gặp nhiều bệnh nhân",
     "whyU7": true
    },
@@ -55060,7 +55060,7 @@ var LP_EXPAND18_A = [
      "Her students"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Buổi trưa cô ăn trưa cùng bạn bè vì bài nghe nói cô ăn trưa với bạn bè”. Vì vậy đáp án “Her friends” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “At noon, she eats lunch with her friends”. Vì vậy đáp án “Her friends” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Buổi trưa cô ăn trưa cùng bạn bè vì bài nghe nói cô ăn trưa với bạn bè",
     "whyU7": true
    },
@@ -55074,7 +55074,7 @@ var LP_EXPAND18_A = [
      "She plays football"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sau khi về nhà cô nấu bữa tối cho gia đình vì câu cuối bài nghe nói cô nấu bữa tối cho gia đình”. Vì vậy đáp án “She cooks dinner for her family” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the afternoon, she goes home at 4 o'clock and cooks dinner for her family”. Vì vậy đáp án “She cooks dinner for her family” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sau khi về nhà cô nấu bữa tối cho gia đình vì câu cuối bài nghe nói cô nấu bữa tối cho gia đình",
     "whyU7": true
    }
@@ -55097,7 +55097,7 @@ var LP_EXPAND18_A = [
      "Four nights"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người đàn ông muốn phòng trong hai đêm vì bài nghe nói anh ấy đặt phòng hai đêm”. Vì vậy đáp án “Two nights” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “He wants a room for two nights, from Friday to Sunday”. Vì vậy đáp án “Two nights” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người đàn ông muốn phòng trong hai đêm vì bài nghe nói anh ấy đặt phòng hai đêm",
     "whyU7": true
    },
@@ -55111,7 +55111,7 @@ var LP_EXPAND18_A = [
      "From Friday to Monday"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Từ thứ Sáu đến Chủ nhật vì bài nghe nói anh ấy ở từ thứ Sáu đến Chủ nhật”. Vì vậy đáp án “From Friday to Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “He wants a room for two nights, from Friday to Sunday”. Vì vậy đáp án “From Friday to Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Từ thứ Sáu đến Chủ nhật vì bài nghe nói anh ấy ở từ thứ Sáu đến Chủ nhật",
     "whyU7": true
    },
@@ -55125,7 +55125,7 @@ var LP_EXPAND18_A = [
      "600,000 dong"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Phòng giá 400.000 đồng một đêm vì bài nghe nêu rõ giá phòng”. Vì vậy đáp án “400,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The room costs 400,000 dong a night and breakfast is free”. Vì vậy đáp án “400,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Phòng giá 400.000 đồng một đêm vì bài nghe nêu rõ giá phòng",
     "whyU7": true
    },
@@ -55139,7 +55139,7 @@ var LP_EXPAND18_A = [
      "A bus ticket"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bữa sáng miễn phí vì bài nghe nói bữa sáng được miễn phí”. Vì vậy đáp án “Breakfast” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The room costs 400,000 dong a night and breakfast is free”. Vì vậy đáp án “Breakfast” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bữa sáng miễn phí vì bài nghe nói bữa sáng được miễn phí",
     "whyU7": true
    },
@@ -55153,7 +55153,7 @@ var LP_EXPAND18_A = [
      "At 4 o'clock"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Anh ấy sẽ đến lúc 3 giờ chiều thứ Sáu vì câu cuối bài nghe nói anh ấy đến lúc 3 giờ”. Vì vậy đáp án “At 3 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “He will arrive at 3 o'clock on Friday afternoon”. Vì vậy đáp án “At 3 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Anh ấy sẽ đến lúc 3 giờ chiều thứ Sáu vì câu cuối bài nghe nói anh ấy đến lúc 3 giờ",
     "whyU7": true
    }
@@ -55176,7 +55176,7 @@ var LP_EXPAND18_A = [
      "A hat"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Anna muốn mua áo sơ mi vì câu đầu tiên nói cô ấy đến cửa hàng để mua áo sơ mi”. Vì vậy đáp án “A shirt” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Anna goes to a clothes shop to buy a shirt”. Vì vậy đáp án “A shirt” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Anna muốn mua áo sơ mi vì câu đầu tiên nói cô ấy đến cửa hàng để mua áo sơ mi",
     "whyU7": true
    },
@@ -55190,7 +55190,7 @@ var LP_EXPAND18_A = [
      "It is the wrong colour"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chiếc áo xanh quá rộng vì bài nghe nói chiếc áo đó quá rộng với cô ấy”. Vì vậy đáp án “It is too big” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “She likes a blue shirt, but it is too big”. Vì vậy đáp án “It is too big” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chiếc áo xanh quá rộng vì bài nghe nói chiếc áo đó quá rộng với cô ấy",
     "whyU7": true
    },
@@ -55204,7 +55204,7 @@ var LP_EXPAND18_A = [
      "A cheaper shirt"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhân viên cho cô xem một chiếc nhỏ hơn vì bài nghe nói nhân viên đưa chiếc nhỏ hơn”. Vì vậy đáp án “A smaller shirt” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The shop assistant shows her a smaller one”. Vì vậy đáp án “A smaller shirt” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhân viên cho cô xem một chiếc nhỏ hơn vì bài nghe nói nhân viên đưa chiếc nhỏ hơn",
     "whyU7": true
    },
@@ -55218,7 +55218,7 @@ var LP_EXPAND18_A = [
      "300,000 dong"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chiếc áo mới giá 250.000 đồng vì bài nghe nêu rõ giá áo”. Vì vậy đáp án “250,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The new shirt costs 250,000 dong”. Vì vậy đáp án “250,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chiếc áo mới giá 250.000 đồng vì bài nghe nêu rõ giá áo",
     "whyU7": true
    },
@@ -55232,7 +55232,7 @@ var LP_EXPAND18_A = [
      "By cheque"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Anna trả bằng tiền mặt vì bài nghe nói cô ấy trả bằng tiền mặt”. Vì vậy đáp án “By cash” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Anna pays by cash and the assistant puts the shirt in a bag for her”. Vì vậy đáp án “By cash” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Anna trả bằng tiền mặt vì bài nghe nói cô ấy trả bằng tiền mặt",
     "whyU7": true
    }
@@ -55255,7 +55255,7 @@ var LP_EXPAND18_A = [
      "The station"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người phụ nữ tìm bệnh viện vì câu đầu tiên nói cô ấy hỏi đường đến bệnh viện”. Vì vậy đáp án “The hospital” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “A woman stops a man on the street and asks the way to the hospital”. Vì vậy đáp án “The hospital” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người phụ nữ tìm bệnh viện vì câu đầu tiên nói cô ấy hỏi đường đến bệnh viện",
     "whyU7": true
    },
@@ -55269,7 +55269,7 @@ var LP_EXPAND18_A = [
      "At the shop"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cô ấy rẽ trái ở đèn giao thông vì bài nghe nói rẽ trái ở đèn giao thông”. Vì vậy đáp án “At the traffic lights” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The man says: go straight, turn left at the traffic lights, and the hospital is on your right, next to a big park”. Vì vậy đáp án “At the traffic lights” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cô ấy rẽ trái ở đèn giao thông vì bài nghe nói rẽ trái ở đèn giao thông",
     "whyU7": true
    },
@@ -55283,7 +55283,7 @@ var LP_EXPAND18_A = [
      "Opposite the station"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bệnh viện ở bên phải, cạnh một công viên lớn vì bài nghe nói bệnh viện ở bên phải cạnh công viên lớn”. Vì vậy đáp án “On the right, next to a big park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The man says: go straight, turn left at the traffic lights, and the hospital is on your right, next to a big park”. Vì vậy đáp án “On the right, next to a big park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bệnh viện ở bên phải, cạnh một công viên lớn vì bài nghe nói bệnh viện ở bên phải cạnh công viên lớn",
     "whyU7": true
    },
@@ -55297,7 +55297,7 @@ var LP_EXPAND18_A = [
      "About twenty minutes"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Đi bộ mất khoảng mười phút vì bài nghe nói đi bộ mất khoảng mười phút”. Vì vậy đáp án “About ten minutes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “It takes about ten minutes on foot”. Vì vậy đáp án “About ten minutes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Đi bộ mất khoảng mười phút vì bài nghe nói đi bộ mất khoảng mười phút",
     "whyU7": true
    },
@@ -55311,7 +55311,7 @@ var LP_EXPAND18_A = [
      "She goes home"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cô ấy đi bộ đến bệnh viện vì câu cuối bài nghe nói cô ấy đi bộ đến bệnh viện”. Vì vậy đáp án “She walks to the hospital” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The woman thanks him and walks to the hospital”. Vì vậy đáp án “She walks to the hospital” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cô ấy đi bộ đến bệnh viện vì câu cuối bài nghe nói cô ấy đi bộ đến bệnh viện",
     "whyU7": true
    }
@@ -55334,7 +55334,7 @@ var LP_EXPAND18_A = [
      "On Saturday evening"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Peter tham gia lớp nấu ăn sáng thứ Bảy vì câu đầu tiên nói lớp học vào sáng thứ Bảy”. Vì vậy đáp án “On Saturday morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “On Saturday morning, Peter joins a cooking class at the community centre”. Vì vậy đáp án “On Saturday morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Peter tham gia lớp nấu ăn sáng thứ Bảy vì câu đầu tiên nói lớp học vào sáng thứ Bảy",
     "whyU7": true
    },
@@ -55348,7 +55348,7 @@ var LP_EXPAND18_A = [
      "At Peter's house"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lớp học ở trung tâm cộng đồng vì bài nghe nói lớp học ở trung tâm cộng đồng”. Vì vậy đáp án “At the community centre” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “On Saturday morning, Peter joins a cooking class at the community centre”. Vì vậy đáp án “At the community centre” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lớp học ở trung tâm cộng đồng vì bài nghe nói lớp học ở trung tâm cộng đồng",
     "whyU7": true
    },
@@ -55362,7 +55362,7 @@ var LP_EXPAND18_A = [
      "Salad"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lớp học cách nấu súp rau vì bài nghe nói giáo viên hướng dẫn nấu súp rau”. Vì vậy đáp án “Vegetable soup” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The teacher shows the class how to make vegetable soup”. Vì vậy đáp án “Vegetable soup” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lớp học cách nấu súp rau vì bài nghe nói giáo viên hướng dẫn nấu súp rau",
     "whyU7": true
    },
@@ -55376,7 +55376,7 @@ var LP_EXPAND18_A = [
      "Bread and cheese"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Peter cắt cà rốt và khoai tây vì bài nghe nói Peter cắt hai thứ đó”. Vì vậy đáp án “Carrots and potatoes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Peter cuts carrots and potatoes, and his friend Mary adds salt”. Vì vậy đáp án “Carrots and potatoes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Peter cắt cà rốt và khoai tây vì bài nghe nói Peter cắt hai thứ đó",
     "whyU7": true
    },
@@ -55390,7 +55390,7 @@ var LP_EXPAND18_A = [
      "At 1 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lớp học kết thúc lúc 11 giờ vì bài nghe nói lớp kết thúc lúc 11 giờ”. Vì vậy đáp án “At 11 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The class finishes at 11 o'clock”. Vì vậy đáp án “At 11 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lớp học kết thúc lúc 11 giờ vì bài nghe nói lớp kết thúc lúc 11 giờ",
     "whyU7": true
    }
@@ -55413,7 +55413,7 @@ var LP_EXPAND18_A = [
      "Last Monday"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mai thăm bà vào Chủ nhật tuần trước vì câu đầu tiên nói chuyến đi vào Chủ nhật tuần trước”. Vì vậy đáp án “Last Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Last Sunday, Mai took a bus to visit her grandmother in the countryside”. Vì vậy đáp án “Last Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mai thăm bà vào Chủ nhật tuần trước vì câu đầu tiên nói chuyến đi vào Chủ nhật tuần trước",
     "whyU7": true
    },
@@ -55427,7 +55427,7 @@ var LP_EXPAND18_A = [
      "By motorbike"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mai đi bằng xe buýt vì bài nghe nói Mai đi xe buýt về quê”. Vì vậy đáp án “By bus” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Last Sunday, Mai took a bus to visit her grandmother in the countryside”. Vì vậy đáp án “By bus” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mai đi bằng xe buýt vì bài nghe nói Mai đi xe buýt về quê",
     "whyU7": true
    },
@@ -55441,7 +55441,7 @@ var LP_EXPAND18_A = [
      "At 12 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Xe buýt đến nơi lúc 10 giờ vì bài nghe nói xe đến lúc 10 giờ”. Vì vậy đáp án “At 10 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The bus left at 7 o'clock in the morning and arrived at 10 o'clock”. Vì vậy đáp án “At 10 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Xe buýt đến nơi lúc 10 giờ vì bài nghe nói xe đến lúc 10 giờ",
     "whyU7": true
    },
@@ -55455,7 +55455,7 @@ var LP_EXPAND18_A = [
      "Vegetable salad"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bà nấu cơm gà cho bữa trưa vì bài nghe nói bà nấu cơm gà”. Vì vậy đáp án “Chicken rice” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Mai's grandmother cooked chicken rice for lunch”. Vì vậy đáp án “Chicken rice” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bà nấu cơm gà cho bữa trưa vì bài nghe nói bà nấu cơm gà",
     "whyU7": true
    },
@@ -55469,7 +55469,7 @@ var LP_EXPAND18_A = [
      "They read books"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Buổi chiều hai bà cháu hái cam trong vườn vì bài nghe nói họ đi dạo trong vườn và hái cam”. Vì vậy đáp án “They picked oranges” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the afternoon, they walked in the garden and picked oranges”. Vì vậy đáp án “They picked oranges” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Buổi chiều hai bà cháu hái cam trong vườn vì bài nghe nói họ đi dạo trong vườn và hái cam",
     "whyU7": true
    }
@@ -55492,7 +55492,7 @@ var LP_EXPAND18_A = [
      "Next Sunday"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Khóa học bắt đầu vào thứ Hai đầu tiên của tháng tới vì bài nghe nói khóa bắt đầu vào thứ Hai đầu tiên tháng tới”. Vì vậy đáp án “On the first Monday of next month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The course starts on the first Monday of next month and lasts eight weeks”. Vì vậy đáp án “On the first Monday of next month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Khóa học bắt đầu vào thứ Hai đầu tiên của tháng tới vì bài nghe nói khóa bắt đầu vào thứ Hai đầu tiên tháng tới",
     "whyU7": true
    },
@@ -55506,7 +55506,7 @@ var LP_EXPAND18_A = [
      "Ten weeks"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Khóa học kéo dài tám tuần vì bài nghe nói khóa kéo dài tám tuần”. Vì vậy đáp án “Eight weeks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The course starts on the first Monday of next month and lasts eight weeks”. Vì vậy đáp án “Eight weeks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Khóa học kéo dài tám tuần vì bài nghe nói khóa kéo dài tám tuần",
     "whyU7": true
    },
@@ -55520,7 +55520,7 @@ var LP_EXPAND18_A = [
      "On Sunday afternoons"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Các buổi học vào tối thứ Hai và thứ Tư vì bài nghe nói lịch học tối thứ Hai và thứ Tư”. Vì vậy đáp án “On Monday and Wednesday evenings” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Lessons are on Monday and Wednesday evenings, from 6 to 7 o'clock”. Vì vậy đáp án “On Monday and Wednesday evenings” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Các buổi học vào tối thứ Hai và thứ Tư vì bài nghe nói lịch học tối thứ Hai và thứ Tư",
     "whyU7": true
    },
@@ -55534,7 +55534,7 @@ var LP_EXPAND18_A = [
      "The teachers' group"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tom đăng ký nhóm người mới bắt đầu vì bài nghe nói anh chưa từng học bơi nên vào nhóm mới bắt đầu”. Vì vậy đáp án “The beginners' group” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tom has never learned to swim before, so he joins the beginners' group”. Vì vậy đáp án “The beginners' group” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tom đăng ký nhóm người mới bắt đầu vì bài nghe nói anh chưa từng học bơi nên vào nhóm mới bắt đầu",
     "whyU7": true
    },
@@ -55548,7 +55548,7 @@ var LP_EXPAND18_A = [
      "600,000 dong"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tom trả trước một nửa, tức 400.000 đồng, vì khóa học giá 800.000 đồng và anh trả một nửa ngay”. Vì vậy đáp án “400,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The course costs 800,000 dong and Tom pays half now”. Vì vậy đáp án “400,000 dong” đúng (một nửa của 800.000 đồng). Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tom trả trước một nửa, tức 400.000 đồng, vì khóa học giá 800.000 đồng và anh trả một nửa ngay",
     "whyU7": true
    }
@@ -55571,7 +55571,7 @@ var LP_EXPAND18_A = [
      "At home"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lan làm mất ví trên xe buýt vì câu đầu tiên nói cô làm mất ví trên xe buýt”. Vì vậy đáp án “On the bus” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Yesterday, Lan lost her wallet on the bus”. Vì vậy đáp án “On the bus” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lan làm mất ví trên xe buýt vì câu đầu tiên nói cô làm mất ví trên xe buýt",
     "whyU7": true
    },
@@ -55585,7 +55585,7 @@ var LP_EXPAND18_A = [
      "Money and a photo"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Trong ví có 500.000 đồng và thẻ học sinh vì bài nghe nói trong ví có tiền và thẻ học sinh”. Vì vậy đáp án “500,000 dong and her student card” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The wallet had 500,000 dong and her student card inside”. Vì vậy đáp án “500,000 dong and her student card” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Trong ví có 500.000 đồng và thẻ học sinh vì bài nghe nói trong ví có tiền và thẻ học sinh",
     "whyU7": true
    },
@@ -55599,7 +55599,7 @@ var LP_EXPAND18_A = [
      "Her friend"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tài xế xe buýt gọi điện cho Lan buổi tối vì bài nghe nói tài xế gọi điện cho cô”. Vì vậy đáp án “The bus driver” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the evening, the bus driver phoned her and said a passenger had found the wallet”. Vì vậy đáp án “The bus driver” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tài xế xe buýt gọi điện cho Lan buổi tối vì bài nghe nói tài xế gọi điện cho cô",
     "whyU7": true
    },
@@ -55613,7 +55613,7 @@ var LP_EXPAND18_A = [
      "A policeman"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Một hành khách đã nhặt được ví vì bài nghe nói một hành khách tìm thấy ví”. Vì vậy đáp án “A passenger” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the evening, the bus driver phoned her and said a passenger had found the wallet”. Vì vậy đáp án “A passenger” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Một hành khách đã nhặt được ví vì bài nghe nói một hành khách tìm thấy ví",
     "whyU7": true
    },
@@ -55627,7 +55627,7 @@ var LP_EXPAND18_A = [
      "Tomorrow"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sáng nay Lan nhận lại ví vì bài nghe nói sáng nay cô đến bến xe và nhận lại ví”. Vì vậy đáp án “This morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “This morning, Lan went to the bus station and got her wallet back”. Vì vậy đáp án “This morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sáng nay Lan nhận lại ví vì bài nghe nói sáng nay cô đến bến xe và nhận lại ví",
     "whyU7": true
    }
@@ -55650,7 +55650,7 @@ var LP_EXPAND18_A = [
      "Only on Sunday"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chợ đêm mở mỗi tối thứ Sáu và thứ Bảy vì câu đầu tiên nói chợ mở tối thứ Sáu và thứ Bảy”. Vì vậy đáp án “Every Friday and Saturday evening” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The night market in the old town opens every Friday and Saturday evening”. Vì vậy đáp án “Every Friday and Saturday evening” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chợ đêm mở mỗi tối thứ Sáu và thứ Bảy vì câu đầu tiên nói chợ mở tối thứ Sáu và thứ Bảy",
     "whyU7": true
    },
@@ -55664,7 +55664,7 @@ var LP_EXPAND18_A = [
      "More than 200 stalls"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Có hơn 100 gian hàng nhỏ vì bài nghe nói chợ có hơn 100 gian hàng”. Vì vậy đáp án “More than 100 stalls” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “There are more than 100 small stalls selling clothes, food and souvenirs”. Vì vậy đáp án “More than 100 stalls” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Có hơn 100 gian hàng nhỏ vì bài nghe nói chợ có hơn 100 gian hàng",
     "whyU7": true
    },
@@ -55678,7 +55678,7 @@ var LP_EXPAND18_A = [
      "Books and toys"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Các gian hàng bán quần áo, đồ ăn và đồ lưu niệm vì bài nghe liệt kê ba thứ đó”. Vì vậy đáp án “Clothes, food and souvenirs” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “There are more than 100 small stalls selling clothes, food and souvenirs”. Vì vậy đáp án “Clothes, food and souvenirs” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Các gian hàng bán quần áo, đồ ăn và đồ lưu niệm vì bài nghe liệt kê ba thứ đó",
     "whyU7": true
    },
@@ -55692,7 +55692,7 @@ var LP_EXPAND18_A = [
      "Fruit and cakes"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Món được yêu thích nhất là ngô nướng và chè vì bài nghe nói ngô nướng và chè được yêu thích nhất”. Vì vậy đáp án “Grilled corn and sweet soup” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The most popular food is grilled corn and sweet soup”. Vì vậy đáp án “Grilled corn and sweet soup” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Món được yêu thích nhất là ngô nướng và chè vì bài nghe nói ngô nướng và chè được yêu thích nhất",
     "whyU7": true
    },
@@ -55706,7 +55706,7 @@ var LP_EXPAND18_A = [
      "Because it rains later"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Du khách nên đến trước 7 giờ vì sau đó chợ rất đông, theo bài nghe”. Vì vậy đáp án “Because the market gets very busy after that” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Visitors should arrive before 7 o'clock because the market gets very busy after that”. Vì vậy đáp án “Because the market gets very busy after that” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Du khách nên đến trước 7 giờ vì sau đó chợ rất đông, theo bài nghe",
     "whyU7": true
    }
@@ -55729,7 +55729,7 @@ var LP_EXPAND18_A = [
      "Because it was dirty"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tuấn mang xe đi sửa vì xe bị hỏng hôm qua, theo câu đầu tiên”. Vì vậy đáp án “Because it broke yesterday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tuan's bicycle broke yesterday, so he took it to a small repair shop near his house”. Vì vậy đáp án “Because it broke yesterday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tuấn mang xe đi sửa vì xe bị hỏng hôm qua, theo câu đầu tiên",
     "whyU7": true
    },
@@ -55743,7 +55743,7 @@ var LP_EXPAND18_A = [
      "The seat was lost"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lốp sau bị xẹp và xích bị lỏng vì bài nghe nói thợ sửa tìm thấy hai lỗi đó”. Vì vậy đáp án “The back tyre was flat and the chain was loose” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The repairman said the back tyre was flat and the chain was loose”. Vì vậy đáp án “The back tyre was flat and the chain was loose” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lốp sau bị xẹp và xích bị lỏng vì bài nghe nói thợ sửa tìm thấy hai lỗi đó",
     "whyU7": true
    },
@@ -55757,7 +55757,7 @@ var LP_EXPAND18_A = [
      "Three hours"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Việc sửa mất một giờ vì bài nghe nói việc sửa mất một giờ”. Vì vậy đáp án “One hour” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The repair took one hour and cost 120,000 dong”. Vì vậy đáp án “One hour” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Việc sửa mất một giờ vì bài nghe nói việc sửa mất một giờ",
     "whyU7": true
    },
@@ -55771,7 +55771,7 @@ var LP_EXPAND18_A = [
      "200,000 dong"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Việc sửa tốn 120.000 đồng vì bài nghe nêu rõ chi phí sửa”. Vì vậy đáp án “120,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The repair took one hour and cost 120,000 dong”. Vì vậy đáp án “120,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Việc sửa tốn 120.000 đồng vì bài nghe nêu rõ chi phí sửa",
     "whyU7": true
    },
@@ -55785,7 +55785,7 @@ var LP_EXPAND18_A = [
      "He phoned a friend"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tuấn đợi ở tiệm và đọc sách vì bài nghe nói anh đợi ở tiệm và đọc sách”. Vì vậy đáp án “He read a book” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tuan waited at the shop and read a book”. Vì vậy đáp án “He read a book” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tuấn đợi ở tiệm và đọc sách vì bài nghe nói anh đợi ở tiệm và đọc sách",
     "whyU7": true
    }
@@ -55808,7 +55808,7 @@ var LP_EXPAND18_A = [
      "Tomorrow"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh nhật của Mai vào thứ Bảy tuần tới vì câu đầu tiên nói sinh nhật vào thứ Bảy tuần tới”. Vì vậy đáp án “Next Saturday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Mai's birthday is next Saturday”. Vì vậy đáp án “Next Saturday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh nhật của Mai vào thứ Bảy tuần tới vì câu đầu tiên nói sinh nhật vào thứ Bảy tuần tới",
     "whyU7": true
    },
@@ -55822,7 +55822,7 @@ var LP_EXPAND18_A = [
      "Twelve friends"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mai sẽ mời mười người bạn vì bài nghe nói cô mời mười bạn”. Vì vậy đáp án “Ten friends” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “She will invite ten friends to her house”. Vì vậy đáp án “Ten friends” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mai sẽ mời mười người bạn vì bài nghe nói cô mời mười bạn",
     "whyU7": true
    },
@@ -55836,7 +55836,7 @@ var LP_EXPAND18_A = [
      "Vegetable salad"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mẹ của Mai sẽ nấu gà rán vì bài nghe nói mẹ nấu gà rán”. Vì vậy đáp án “Fried chicken” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Her mother will cook fried chicken and make a big birthday cake”. Vì vậy đáp án “Fried chicken” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mẹ của Mai sẽ nấu gà rán vì bài nghe nói mẹ nấu gà rán",
     "whyU7": true
    },
@@ -55850,7 +55850,7 @@ var LP_EXPAND18_A = [
      "Read books"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Buổi chiều các bạn sẽ chơi trò chơi và hát vì bài nghe nói buổi chiều họ chơi trò chơi và hát”. Vì vậy đáp án “Play games and sing songs” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the afternoon, they will play games and sing songs”. Vì vậy đáp án “Play games and sing songs” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Buổi chiều các bạn sẽ chơi trò chơi và hát vì bài nghe nói buổi chiều họ chơi trò chơi và hát",
     "whyU7": true
    },
@@ -55864,7 +55864,7 @@ var LP_EXPAND18_A = [
      "Because she will cook dinner"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mai rất háo hức vì cô sẽ được bố mẹ tặng xe đạp mới, theo câu cuối bài nghe”. Vì vậy đáp án “Because she will get a new bicycle from her parents” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Mai is very excited because she will get a new bicycle from her parents”. Vì vậy đáp án “Because she will get a new bicycle from her parents” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mai rất háo hức vì cô sẽ được bố mẹ tặng xe đạp mới, theo câu cuối bài nghe",
     "whyU7": true
    }
@@ -55890,7 +55890,7 @@ var LP_EXPAND18_B = [
      "Next Friday"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Trường tổ chức ngày hội đọc sách thứ Bảy tới vì bài nghe nói ngày hội vào thứ Bảy tới”. Vì vậy đáp án “Next Saturday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Next Saturday, our school will hold a reading festival in the main hall”. Vì vậy đáp án “Next Saturday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Trường tổ chức ngày hội đọc sách thứ Bảy tới vì bài nghe nói ngày hội vào thứ Bảy tới",
     "whyU7": true
    },
@@ -55904,7 +55904,7 @@ var LP_EXPAND18_B = [
      "In a classroom"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ngày hội ở hội trường chính vì bài nghe nói ngày hội ở hội trường chính”. Vì vậy đáp án “In the main hall” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Next Saturday, our school will hold a reading festival in the main hall”. Vì vậy đáp án “In the main hall” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ngày hội ở hội trường chính vì bài nghe nói ngày hội ở hội trường chính",
     "whyU7": true
    },
@@ -55918,7 +55918,7 @@ var LP_EXPAND18_B = [
      "At 5 o'clock"
     ],
     "a": 2,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ngày hội kết thúc lúc 4 giờ vì bài nghe nói ngày hội kết thúc lúc 4 giờ”. Vì vậy đáp án “At 4 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The festival starts at 8 o'clock and finishes at 4 o'clock”. Vì vậy đáp án “At 4 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ngày hội kết thúc lúc 4 giờ vì bài nghe nói ngày hội kết thúc lúc 4 giờ",
     "whyU7": true
    },
@@ -55932,7 +55932,7 @@ var LP_EXPAND18_B = [
      "Their bicycles"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh có thể mang sách yêu thích vì bài nghe nói học sinh có thể mang sách yêu thích đến”. Vì vậy đáp án “Their favourite books” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Students can bring their favourite books and read with friends”. Vì vậy đáp án “Their favourite books” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh có thể mang sách yêu thích vì bài nghe nói học sinh có thể mang sách yêu thích đến",
     "whyU7": true
    },
@@ -55946,7 +55946,7 @@ var LP_EXPAND18_B = [
      "Meet famous writers"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh có thể mua sách giá thấp ở hội chợ sách nhỏ vì bài nghe nói hội chợ bán sách giá thấp”. Vì vậy đáp án “Buy books at low prices” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “There will also be a small book fair, where you can buy books at low prices”. Vì vậy đáp án “Buy books at low prices” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh có thể mua sách giá thấp ở hội chợ sách nhỏ vì bài nghe nói hội chợ bán sách giá thấp",
     "whyU7": true
    }
@@ -55969,7 +55969,7 @@ var LP_EXPAND18_B = [
      "The rice fields"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Du khách thăm xưởng gốm trước vì bài nghe nói đầu tiên thăm xưởng gốm”. Vì vậy đáp án “The pottery workshop” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “First, we will visit the pottery workshop, where workers make bowls and cups by hand”. Vì vậy đáp án “The pottery workshop” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Du khách thăm xưởng gốm trước vì bài nghe nói đầu tiên thăm xưởng gốm",
     "whyU7": true
    },
@@ -55983,7 +55983,7 @@ var LP_EXPAND18_B = [
      "Paper flowers"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thợ làm bát và cốc bằng tay ở xưởng gốm vì bài nghe nói thợ làm bát và cốc bằng tay”. Vì vậy đáp án “Bowls and cups by hand” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “First, we will visit the pottery workshop, where workers make bowls and cups by hand”. Vì vậy đáp án “Bowls and cups by hand” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thợ làm bát và cốc bằng tay ở xưởng gốm vì bài nghe nói thợ làm bát và cốc bằng tay",
     "whyU7": true
    },
@@ -55997,7 +55997,7 @@ var LP_EXPAND18_B = [
      "Walk with the group"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Du khách không được chạm vào máy móc vì bài nghe dặn đừng chạm vào máy móc”. Vì vậy đáp án “Touch the machines” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Please do not touch the machines, and please stay with your group”. Vì vậy đáp án “Touch the machines” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Du khách không được chạm vào máy móc vì bài nghe dặn đừng chạm vào máy móc",
     "whyU7": true
    },
@@ -56011,7 +56011,7 @@ var LP_EXPAND18_B = [
      "Four hours"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chuyến tham quan kéo dài hai giờ vì bài nghe nói chuyến tham quan kéo dài hai giờ”. Vì vậy đáp án “Two hours” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The tour lasts two hours, and we will finish at the village shop, where you can buy small gifts for your family”. Vì vậy đáp án “Two hours” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chuyến tham quan kéo dài hai giờ vì bài nghe nói chuyến tham quan kéo dài hai giờ",
     "whyU7": true
    },
@@ -56025,7 +56025,7 @@ var LP_EXPAND18_B = [
      "At the silk workshop"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chuyến tham quan kết thúc ở cửa hàng của làng vì bài nghe nói kết thúc ở cửa hàng của làng”. Vì vậy đáp án “At the village shop” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The tour lasts two hours, and we will finish at the village shop, where you can buy small gifts for your family”. Vì vậy đáp án “At the village shop” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chuyến tham quan kết thúc ở cửa hàng của làng vì bài nghe nói kết thúc ở cửa hàng của làng",
     "whyU7": true
    }
@@ -56048,7 +56048,7 @@ var LP_EXPAND18_B = [
      "A sports club"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Trường mở các lớp tiếng Anh thêm buổi tối từ tuần tới vì bài nghe nói trường mở lớp tiếng Anh thêm buổi tối”. Vì vậy đáp án “Extra English classes in the evening” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The school will open extra English classes in the evening from next week”. Vì vậy đáp án “Extra English classes in the evening” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Trường mở các lớp tiếng Anh thêm buổi tối từ tuần tới vì bài nghe nói trường mở lớp tiếng Anh thêm buổi tối",
     "whyU7": true
    },
@@ -56062,7 +56062,7 @@ var LP_EXPAND18_B = [
      "Teachers only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Các lớp dành cho học sinh khối 6 và 7 vì bài nghe nói lớp dành cho khối 6 và 7”. Vì vậy đáp án “Students in grades 6 and 7” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The classes are for students in grades 6 and 7”. Vì vậy đáp án “Students in grades 6 and 7” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Các lớp dành cho học sinh khối 6 và 7 vì bài nghe nói lớp dành cho khối 6 và 7",
     "whyU7": true
    },
@@ -56076,7 +56076,7 @@ var LP_EXPAND18_B = [
      "Every day"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Các lớp học thứ Ba và thứ Năm vì bài nghe nói lớp học thứ Ba và thứ Năm”. Vì vậy đáp án “On Tuesday and Thursday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “They will be on Tuesday and Thursday, from 5 to 6.30 in the afternoon”. Vì vậy đáp án “On Tuesday and Thursday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Các lớp học thứ Ba và thứ Năm vì bài nghe nói lớp học thứ Ba và thứ Năm",
     "whyU7": true
    },
@@ -56090,7 +56090,7 @@ var LP_EXPAND18_B = [
      "200,000 dong a month"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Các lớp miễn phí vì bài nghe nói các lớp miễn phí”. Vì vậy đáp án “They are free” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The classes are free, but students must sign up before Friday”. Vì vậy đáp án “They are free” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Các lớp miễn phí vì bài nghe nói các lớp miễn phí",
     "whyU7": true
    },
@@ -56104,7 +56104,7 @@ var LP_EXPAND18_B = [
      "Meet the teacher"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh phải đăng ký trước thứ Sáu vì bài nghe nói học sinh phải đăng ký trước thứ Sáu”. Vì vậy đáp án “Sign up” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The classes are free, but students must sign up before Friday”. Vì vậy đáp án “Sign up” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh phải đăng ký trước thứ Sáu vì bài nghe nói học sinh phải đăng ký trước thứ Sáu",
     "whyU7": true
    }
@@ -56127,7 +56127,7 @@ var LP_EXPAND18_B = [
      "Yesterday"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thư viện mới mở cửa tháng trước vì bài nghe nói thư viện mở tháng trước”. Vì vậy đáp án “Last month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Our new school library opened last month”. Vì vậy đáp án “Last month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thư viện mới mở cửa tháng trước vì bài nghe nói thư viện mở tháng trước",
     "whyU7": true
    },
@@ -56141,7 +56141,7 @@ var LP_EXPAND18_B = [
      "More than 10,000 books"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thư viện có hơn 5.000 cuốn sách vì bài nghe nói thư viện có hơn 5.000 cuốn”. Vì vậy đáp án “More than 5,000 books” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “It has more than 5,000 books, including story books, science books and dictionaries”. Vì vậy đáp án “More than 5,000 books” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thư viện có hơn 5.000 cuốn sách vì bài nghe nói thư viện có hơn 5.000 cuốn",
     "whyU7": true
    },
@@ -56155,7 +56155,7 @@ var LP_EXPAND18_B = [
      "Four books"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh có thể mượn hai cuốn một lúc vì bài nghe nói học sinh mượn hai cuốn một lúc”. Vì vậy đáp án “Two books” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Students can borrow two books at a time and keep them for two weeks”. Vì vậy đáp án “Two books” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh có thể mượn hai cuốn một lúc vì bài nghe nói học sinh mượn hai cuốn một lúc",
     "whyU7": true
    },
@@ -56169,7 +56169,7 @@ var LP_EXPAND18_B = [
      "For one month"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh giữ sách trong hai tuần vì bài nghe nói giữ sách hai tuần”. Vì vậy đáp án “For two weeks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Students can borrow two books at a time and keep them for two weeks”. Vì vậy đáp án “For two weeks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh giữ sách trong hai tuần vì bài nghe nói giữ sách hai tuần",
     "whyU7": true
    },
@@ -56183,7 +56183,7 @@ var LP_EXPAND18_B = [
      "From Monday to Sunday"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thư viện mở thứ Hai đến thứ Sáu, 7 giờ sáng đến 5 giờ chiều, theo bài nghe”. Vì vậy đáp án “From Monday to Friday, 7 a.m. to 5 p.m.” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The library is open from Monday to Friday, from 7 in the morning to 5 in the afternoon”. Vì vậy đáp án “From Monday to Friday, 7 a.m. to 5 p.m.” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thư viện mở thứ Hai đến thứ Sáu, 7 giờ sáng đến 5 giờ chiều, theo bài nghe",
     "whyU7": true
    }
@@ -56206,7 +56206,7 @@ var LP_EXPAND18_B = [
      "Next Monday"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Khu phố tổ chức ngày hội thể thao Chủ nhật tới vì bài nghe nói ngày hội vào Chủ nhật tới”. Vì vậy đáp án “Next Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Next Sunday, our neighbourhood will hold a sports day at the community park”. Vì vậy đáp án “Next Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Khu phố tổ chức ngày hội thể thao Chủ nhật tới vì bài nghe nói ngày hội vào Chủ nhật tới",
     "whyU7": true
    },
@@ -56220,7 +56220,7 @@ var LP_EXPAND18_B = [
      "At the beach"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ngày hội ở công viên cộng đồng vì bài nghe nói ngày hội ở công viên cộng đồng”. Vì vậy đáp án “At the community park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Next Sunday, our neighbourhood will hold a sports day at the community park”. Vì vậy đáp án “At the community park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ngày hội ở công viên cộng đồng vì bài nghe nói ngày hội ở công viên cộng đồng",
     "whyU7": true
    },
@@ -56234,7 +56234,7 @@ var LP_EXPAND18_B = [
      "Gloves"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người tham gia phải mang giày thể thao vì bài nghe nói phải mang giày thể thao”. Vì vậy đáp án “Sports shoes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “People can join a team for free, but they must wear sports shoes”. Vì vậy đáp án “Sports shoes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người tham gia phải mang giày thể thao vì bài nghe nói phải mang giày thể thao",
     "whyU7": true
    },
@@ -56248,7 +56248,7 @@ var LP_EXPAND18_B = [
      "At 10 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ngày hội bắt đầu lúc 8 giờ sáng vì bài nghe nói ngày hội bắt đầu lúc 8 giờ sáng”. Vì vậy đáp án “At 8 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The sports day starts at 8 o'clock in the morning”. Vì vậy đáp án “At 8 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ngày hội bắt đầu lúc 8 giờ sáng vì bài nghe nói ngày hội bắt đầu lúc 8 giờ sáng",
     "whyU7": true
    },
@@ -56262,7 +56262,7 @@ var LP_EXPAND18_B = [
      "Sandwiches"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mọi người được uống nước trái cây miễn phí vì bài nghe nói mọi người được uống nước trái cây miễn phí”. Vì vậy đáp án “Fruit juice” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The best teams will get small prizes, and everyone can enjoy free fruit juice”. Vì vậy đáp án “Fruit juice” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mọi người được uống nước trái cây miễn phí vì bài nghe nói mọi người được uống nước trái cây miễn phí",
     "whyU7": true
    }
@@ -56285,7 +56285,7 @@ var LP_EXPAND18_B = [
      "Every day"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Câu lạc bộ họp mỗi sáng thứ Bảy vì bài nghe nói câu lạc bộ họp sáng thứ Bảy”. Vì vậy đáp án “Every Saturday morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The neighbourhood reading club meets every Saturday morning at the community house”. Vì vậy đáp án “Every Saturday morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Câu lạc bộ họp mỗi sáng thứ Bảy vì bài nghe nói câu lạc bộ họp sáng thứ Bảy",
     "whyU7": true
    },
@@ -56299,7 +56299,7 @@ var LP_EXPAND18_B = [
      "At a cafe"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Câu lạc bộ họp ở nhà cộng đồng vì bài nghe nói câu lạc bộ họp ở nhà cộng đồng”. Vì vậy đáp án “At the community house” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The neighbourhood reading club meets every Saturday morning at the community house”. Vì vậy đáp án “At the community house” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Câu lạc bộ họp ở nhà cộng đồng vì bài nghe nói câu lạc bộ họp ở nhà cộng đồng",
     "whyU7": true
    },
@@ -56313,7 +56313,7 @@ var LP_EXPAND18_B = [
      "A book about history"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tháng trước các thành viên đọc sách về cậu bé đi du lịch vòng quanh thế giới vì bài nghe nói như vậy”. Vì vậy đáp án “A book about a boy who travels around the world” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Last month, members read a book about a boy who travels around the world”. Vì vậy đáp án “A book about a boy who travels around the world” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tháng trước các thành viên đọc sách về cậu bé đi du lịch vòng quanh thế giới vì bài nghe nói như vậy",
     "whyU7": true
    },
@@ -56327,7 +56327,7 @@ var LP_EXPAND18_B = [
      "A book about music"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tháng này họ sẽ đọc sách về động vật trong rừng vì bài nghe nói tháng này đọc sách về động vật trong rừng”. Vì vậy đáp án “A book about animals in the forest” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “This month, they will read a book about animals in the forest”. Vì vậy đáp án “A book about animals in the forest” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tháng này họ sẽ đọc sách về động vật trong rừng vì bài nghe nói tháng này đọc sách về động vật trong rừng",
     "whyU7": true
    },
@@ -56341,7 +56341,7 @@ var LP_EXPAND18_B = [
      "20,000 dong a month"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thành viên mới không cần trả tiền vì bài nghe nói họ không cần trả tiền để tham gia”. Vì vậy đáp án “Nothing” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “New members are welcome, and they do not need to pay anything to join”. Vì vậy đáp án “Nothing” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thành viên mới không cần trả tiền vì bài nghe nói họ không cần trả tiền để tham gia",
     "whyU7": true
    }
@@ -56364,7 +56364,7 @@ var LP_EXPAND18_B = [
      "Bus number 20"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Xe buýt số 12 đi đến chợ cuối tuần vì bài nghe nói xe số 12 đi đến chợ cuối tuần”. Vì vậy đáp án “Bus number 12” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Bus number 12 goes from the city centre to the weekend market”. Vì vậy đáp án “Bus number 12” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Xe buýt số 12 đi đến chợ cuối tuần vì bài nghe nói xe số 12 đi đến chợ cuối tuần",
     "whyU7": true
    },
@@ -56378,7 +56378,7 @@ var LP_EXPAND18_B = [
      "Every hour"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Xe chạy mỗi 20 phút vì bài nghe nói xe chạy mỗi 20 phút”. Vì vậy đáp án “Every 20 minutes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The bus leaves every 20 minutes, from 6 o'clock in the morning to 9 o'clock at night”. Vì vậy đáp án “Every 20 minutes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Xe chạy mỗi 20 phút vì bài nghe nói xe chạy mỗi 20 phút",
     "whyU7": true
    },
@@ -56392,7 +56392,7 @@ var LP_EXPAND18_B = [
      "20,000 dong"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Vé giá 10.000 đồng vì bài nghe nêu rõ giá vé”. Vì vậy đáp án “10,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The ticket costs 10,000 dong, and you can buy it on the bus”. Vì vậy đáp án “10,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Vé giá 10.000 đồng vì bài nghe nêu rõ giá vé",
     "whyU7": true
    },
@@ -56406,7 +56406,7 @@ var LP_EXPAND18_B = [
      "At the bus station"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hành khách xuống ở trạm thứ ba, trước siêu thị lớn, theo bài nghe”. Vì vậy đáp án “At the third stop, in front of the big supermarket” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Please get off at the third stop, in front of the big supermarket”. Vì vậy đáp án “At the third stop, in front of the big supermarket” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hành khách xuống ở trạm thứ ba, trước siêu thị lớn, theo bài nghe",
     "whyU7": true
    },
@@ -56420,7 +56420,7 @@ var LP_EXPAND18_B = [
      "A two-minute walk"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chợ cách trạm xe năm phút đi bộ vì bài nghe nói chợ cách đó năm phút đi bộ”. Vì vậy đáp án “A five-minute walk” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The market is a five-minute walk from there”. Vì vậy đáp án “A five-minute walk” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chợ cách trạm xe năm phút đi bộ vì bài nghe nói chợ cách đó năm phút đi bộ",
     "whyU7": true
    }
@@ -56443,7 +56443,7 @@ var LP_EXPAND18_B = [
      "From today"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bể bơi mở sớm hơn từ thứ Hai tới vì bài nghe nói từ thứ Hai tới bể mở sớm hơn”. Vì vậy đáp án “From next Monday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “From next Monday, the swimming pool will open one hour earlier, at 6 o'clock in the morning, so that people can swim before work”. Vì vậy đáp án “From next Monday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bể bơi mở sớm hơn từ thứ Hai tới vì bài nghe nói từ thứ Hai tới bể mở sớm hơn",
     "whyU7": true
    },
@@ -56457,7 +56457,7 @@ var LP_EXPAND18_B = [
      "At 8 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bể bơi mở lúc 6 giờ sáng vì bài nghe nói bể mở lúc 6 giờ sáng”. Vì vậy đáp án “At 6 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “From next Monday, the swimming pool will open one hour earlier, at 6 o'clock in the morning, so that people can swim before work”. Vì vậy đáp án “At 6 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bể bơi mở lúc 6 giờ sáng vì bài nghe nói bể mở lúc 6 giờ sáng",
     "whyU7": true
    },
@@ -56471,7 +56471,7 @@ var LP_EXPAND18_B = [
      "Because the pool is busy"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bể mở sớm hơn để mọi người bơi trước giờ làm việc vì bài nghe nói bể mở sớm để mọi người bơi trước giờ làm”. Vì vậy đáp án “So people can swim before work” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “From next Monday, the swimming pool will open one hour earlier, at 6 o'clock in the morning, so that people can swim before work”. Vì vậy đáp án “So people can swim before work” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bể mở sớm hơn để mọi người bơi trước giờ làm việc vì bài nghe nói bể mở sớm để mọi người bơi trước giờ làm",
     "whyU7": true
    },
@@ -56485,7 +56485,7 @@ var LP_EXPAND18_B = [
      "At noon every day"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bể đóng cửa Chủ nhật để vệ sinh vì bài nghe nói Chủ nhật bể đóng cửa để vệ sinh”. Vì vậy đáp án “On Sundays, for cleaning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “On Sundays, the pool will be closed for cleaning”. Vì vậy đáp án “On Sundays, for cleaning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bể đóng cửa Chủ nhật để vệ sinh vì bài nghe nói Chủ nhật bể đóng cửa để vệ sinh",
     "whyU7": true
    },
@@ -56499,7 +56499,7 @@ var LP_EXPAND18_B = [
      "Their own food"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người bơi phải mang khăn của mình vì bài nghe nói bể không còn cho mượn khăn nữa”. Vì vậy đáp án “Their own towel” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Please bring your own towel, because the pool does not lend towels anymore”. Vì vậy đáp án “Their own towel” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người bơi phải mang khăn của mình vì bài nghe nói bể không còn cho mượn khăn nữa",
     "whyU7": true
    }
@@ -56522,7 +56522,7 @@ var LP_EXPAND18_B = [
      "Tomorrow"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Các hàng xóm dọn công viên thứ Bảy này vì bài nghe nói thứ Bảy này dọn công viên”. Vì vậy đáp án “This Saturday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “This Saturday, we will clean the park together”. Vì vậy đáp án “This Saturday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Các hàng xóm dọn công viên thứ Bảy này vì bài nghe nói thứ Bảy này dọn công viên",
     "whyU7": true
    },
@@ -56536,7 +56536,7 @@ var LP_EXPAND18_B = [
      "At the community house"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Họ gặp nhau ở cổng công viên vì bài nghe nói gặp nhau ở cổng công viên”. Vì vậy đáp án “At the park gate” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “We will meet at the park gate at 8 o'clock in the morning”. Vì vậy đáp án “At the park gate” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Họ gặp nhau ở cổng công viên vì bài nghe nói gặp nhau ở cổng công viên",
     "whyU7": true
    },
@@ -56550,7 +56550,7 @@ var LP_EXPAND18_B = [
      "At 10 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Họ gặp nhau lúc 8 giờ sáng vì bài nghe nói gặp nhau lúc 8 giờ sáng”. Vì vậy đáp án “At 8 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “We will meet at the park gate at 8 o'clock in the morning”. Vì vậy đáp án “At 8 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Họ gặp nhau lúc 8 giờ sáng vì bài nghe nói gặp nhau lúc 8 giờ sáng",
     "whyU7": true
    },
@@ -56564,7 +56564,7 @@ var LP_EXPAND18_B = [
      "Money and a phone"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mọi người nên mang găng tay và chai nước vì bài nghe dặn mang găng tay và chai nước”. Vì vậy đáp án “Gloves and a water bottle” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Please bring gloves and a water bottle”. Vì vậy đáp án “Gloves and a water bottle” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mọi người nên mang găng tay và chai nước vì bài nghe dặn mang găng tay và chai nước",
     "whyU7": true
    },
@@ -56578,7 +56578,7 @@ var LP_EXPAND18_B = [
      "Plant trees"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Buổi trưa họ ăn trưa cùng nhau trong công viên vì bài nghe nói buổi trưa ăn trưa cùng nhau trong công viên”. Vì vậy đáp án “Have lunch together in the park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “At noon, we will have lunch together in the park”. Vì vậy đáp án “Have lunch together in the park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Buổi trưa họ ăn trưa cùng nhau trong công viên vì bài nghe nói buổi trưa ăn trưa cùng nhau trong công viên",
     "whyU7": true
    }
@@ -56601,7 +56601,7 @@ var LP_EXPAND18_B = [
      "Every day"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hội chợ thủ công tổ chức mỗi tháng vì bài nghe nói mỗi tháng thị trấn tổ chức hội chợ”. Vì vậy đáp án “Every month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Every month, the town holds a craft fair in the central square”. Vì vậy đáp án “Every month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hội chợ thủ công tổ chức mỗi tháng vì bài nghe nói mỗi tháng thị trấn tổ chức hội chợ",
     "whyU7": true
    },
@@ -56615,7 +56615,7 @@ var LP_EXPAND18_B = [
      "At the beach"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hội chợ ở quảng trường trung tâm vì bài nghe nói hội chợ ở quảng trường trung tâm”. Vì vậy đáp án “In the central square” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Every month, the town holds a craft fair in the central square”. Vì vậy đáp án “In the central square” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hội chợ ở quảng trường trung tâm vì bài nghe nói hội chợ ở quảng trường trung tâm",
     "whyU7": true
    },
@@ -56629,7 +56629,7 @@ var LP_EXPAND18_B = [
      "Books and phones"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người dân bán túi, mũ, tranh và đồ chơi gỗ làm bằng tay vì bài nghe liệt kê các mặt hàng đó”. Vì vậy đáp án “Handmade bags, hats, paintings and wooden toys” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Local people sell handmade bags, hats, paintings and wooden toys”. Vì vậy đáp án “Handmade bags, hats, paintings and wooden toys” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người dân bán túi, mũ, tranh và đồ chơi gỗ làm bằng tay vì bài nghe liệt kê các mặt hàng đó",
     "whyU7": true
    },
@@ -56643,7 +56643,7 @@ var LP_EXPAND18_B = [
      "Cook a local dish"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Du khách có thể học vẽ một chiếc chậu nhỏ vì bài nghe nói du khách học cách vẽ chậu nhỏ”. Vì vậy đáp án “Paint a small pot” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Visitors can also watch workers make pottery and learn how to paint a small pot”. Vì vậy đáp án “Paint a small pot” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Du khách có thể học vẽ một chiếc chậu nhỏ vì bài nghe nói du khách học cách vẽ chậu nhỏ",
     "whyU7": true
    },
@@ -56657,7 +56657,7 @@ var LP_EXPAND18_B = [
      "Because food is very expensive"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Du khách nên mang tiền mặt vì hầu hết người bán không nhận thẻ, theo bài nghe”. Vì vậy đáp án “Because most sellers do not take cards” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The fair is free to enter, but visitors should bring cash because most sellers do not take cards”. Vì vậy đáp án “Because most sellers do not take cards” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Du khách nên mang tiền mặt vì hầu hết người bán không nhận thẻ, theo bài nghe",
     "whyU7": true
    }
@@ -56680,7 +56680,7 @@ var LP_EXPAND18_B = [
      "A job at a school"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người nói phỏng vấn việc làm thêm ở hiệu sách vì câu đầu tiên nói người nói phỏng vấn việc làm thêm ở hiệu sách”. Vì vậy đáp án “A part-time job at the bookshop” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I am here to interview for a part-time job at the bookshop”. Vì vậy đáp án “A part-time job at the bookshop” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người nói phỏng vấn việc làm thêm ở hiệu sách vì câu đầu tiên nói người nói phỏng vấn việc làm thêm ở hiệu sách",
     "whyU7": true
    },
@@ -56694,7 +56694,7 @@ var LP_EXPAND18_B = [
      "Only on Sunday"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người nói có thể làm chiều thứ Bảy và Chủ nhật vì bài nghe nói người nói làm được chiều thứ Bảy và Chủ nhật”. Vì vậy đáp án “On Saturday and Sunday afternoons” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I am a second-year student, and I can work on Saturday and Sunday afternoons”. Vì vậy đáp án “On Saturday and Sunday afternoons” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người nói có thể làm chiều thứ Bảy và Chủ nhật vì bài nghe nói người nói làm được chiều thứ Bảy và Chủ nhật",
     "whyU7": true
    },
@@ -56708,7 +56708,7 @@ var LP_EXPAND18_B = [
      "Learn English"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người nói thường giúp bạn chọn sách để đọc vì bài nghe nói người nói giúp bạn chọn sách”. Vì vậy đáp án “Choose books to read” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I love books and I often help my friends choose books to read”. Vì vậy đáp án “Choose books to read” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người nói thường giúp bạn chọn sách để đọc vì bài nghe nói người nói giúp bạn chọn sách",
     "whyU7": true
    },
@@ -56722,7 +56722,7 @@ var LP_EXPAND18_B = [
      "Quiet and shy"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người nói nói mình cẩn thận và thân thiện vì bài nghe nói người nói cẩn thận và thân thiện”. Vì vậy đáp án “Careful and friendly” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I am careful and friendly, and I can use a computer well”. Vì vậy đáp án “Careful and friendly” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người nói nói mình cẩn thận và thân thiện vì bài nghe nói người nói cẩn thận và thân thiện",
     "whyU7": true
    },
@@ -56736,7 +56736,7 @@ var LP_EXPAND18_B = [
      "How to sell clothes"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người nói mong học cách một hiệu sách hoạt động vì câu cuối bài nghe nói người nói mong học cách hiệu sách hoạt động”. Vì vậy đáp án “How a bookshop works” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I hope to learn how a bookshop works while I study at university”. Vì vậy đáp án “How a bookshop works” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người nói mong học cách một hiệu sách hoạt động vì câu cuối bài nghe nói người nói mong học cách hiệu sách hoạt động",
     "whyU7": true
    }
@@ -56759,7 +56759,7 @@ var LP_EXPAND18_B = [
      "Growing vegetables"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bài nói về tiết kiệm nước ở nhà vì câu đầu tiên nói bài nói về tiết kiệm nước ở nhà”. Vì vậy đáp án “Saving water at home” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Today I will talk about saving water at home”. Vì vậy đáp án “Saving water at home” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bài nói về tiết kiệm nước ở nhà vì câu đầu tiên nói bài nói về tiết kiệm nước ở nhà",
     "whyU7": true
    },
@@ -56773,7 +56773,7 @@ var LP_EXPAND18_B = [
      "Brush for ten minutes"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bạn nên khóa vòi khi đánh răng vì bài nghe khuyên khóa vòi khi đánh răng”. Vì vậy đáp án “Turn off the tap” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “First, turn off the tap while you brush your teeth”. Vì vậy đáp án “Turn off the tap” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bạn nên khóa vòi khi đánh răng vì bài nghe khuyên khóa vòi khi đánh răng",
     "whyU7": true
    },
@@ -56787,7 +56787,7 @@ var LP_EXPAND18_B = [
      "About twenty litres"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thói quen này tiết kiệm khoảng sáu lít nước mỗi lần vì bài nghe nói tiết kiệm khoảng sáu lít mỗi lần”. Vì vậy đáp án “About six litres” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “This simple habit can save about six litres of water each time”. Vì vậy đáp án “About six litres” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thói quen này tiết kiệm khoảng sáu lít nước mỗi lần vì bài nghe nói tiết kiệm khoảng sáu lít mỗi lần",
     "whyU7": true
    },
@@ -56801,7 +56801,7 @@ var LP_EXPAND18_B = [
      "Washing with a bucket"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tắm vòi sen ngắn tốt hơn tắm bồn vì bài nghe khuyên tắm vòi sen ngắn thay vì tắm bồn”. Vì vậy đáp án “A short shower” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Second, take a short shower instead of a bath”. Vì vậy đáp án “A short shower” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tắm vòi sen ngắn tốt hơn tắm bồn vì bài nghe khuyên tắm vòi sen ngắn thay vì tắm bồn",
     "whyU7": true
    },
@@ -56815,7 +56815,7 @@ var LP_EXPAND18_B = [
      "Because water is dirty"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bạn nên kiểm tra vòi thường xuyên vì vòi rò rỉ lãng phí rất nhiều nước mỗi ngày, theo bài nghe”. Vì vậy đáp án “Because a leaking tap can waste a lot of water every day” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Third, check your taps often, because a leaking tap can waste a lot of water every day”. Vì vậy đáp án “Because a leaking tap can waste a lot of water every day” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bạn nên kiểm tra vòi thường xuyên vì vòi rò rỉ lãng phí rất nhiều nước mỗi ngày, theo bài nghe",
     "whyU7": true
    }
@@ -56838,7 +56838,7 @@ var LP_EXPAND18_B = [
      "A school trip"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Minh và Hoa lên kế hoạch bán sách gây quỹ ở trường vì câu đầu tiên nói hai bạn lên kế hoạch bán sách gây quỹ”. Vì vậy đáp án “A charity book sale at their school” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Minh and Hoa are planning a charity book sale at their school”. Vì vậy đáp án “A charity book sale at their school” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Minh và Hoa lên kế hoạch bán sách gây quỹ ở trường vì câu đầu tiên nói hai bạn lên kế hoạch bán sách gây quỹ",
     "whyU7": true
    },
@@ -56852,7 +56852,7 @@ var LP_EXPAND18_B = [
      "School uniforms"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Họ sẽ xin học sinh tặng sách cũ không còn đọc vì bài nghe nói họ xin sách cũ mà học sinh không còn đọc”. Vì vậy đáp án “Old books they no longer read” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “They will ask students to give old books they no longer read”. Vì vậy đáp án “Old books they no longer read” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Họ sẽ xin học sinh tặng sách cũ không còn đọc vì bài nghe nói họ xin sách cũ mà học sinh không còn đọc",
     "whyU7": true
    },
@@ -56866,7 +56866,7 @@ var LP_EXPAND18_B = [
      "Tomorrow"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Buổi bán vào thứ Sáu cuối cùng của tháng này vì bài nghe nói buổi bán vào thứ Sáu cuối tháng”. Vì vậy đáp án “On the last Friday of this month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The sale will be on the last Friday of this month, in the school hall, from 8 o'clock to 12 o'clock”. Vì vậy đáp án “On the last Friday of this month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Buổi bán vào thứ Sáu cuối cùng của tháng này vì bài nghe nói buổi bán vào thứ Sáu cuối tháng",
     "whyU7": true
    },
@@ -56880,7 +56880,7 @@ var LP_EXPAND18_B = [
      "A new computer"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Số tiền sẽ mua sách mới cho trường làng nhỏ vì bài nghe nói tiền mua sách mới cho trường làng nhỏ”. Vì vậy đáp án “New books for a small village school” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The money will buy new books for a small village school”. Vì vậy đáp án “New books for a small village school” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Số tiền sẽ mua sách mới cho trường làng nhỏ vì bài nghe nói tiền mua sách mới cho trường làng nhỏ",
     "whyU7": true
    },
@@ -56894,7 +56894,7 @@ var LP_EXPAND18_B = [
      "Collect the money"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hoa sẽ viết thông báo ngắn cho đài phát thanh trường vì bài nghe nói Hoa viết thông báo cho đài trường”. Vì vậy đáp án “Write a short announcement for the school radio” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Minh will make posters, and Hoa will write a short announcement for the school radio”. Vì vậy đáp án “Write a short announcement for the school radio” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hoa sẽ viết thông báo ngắn cho đài phát thanh trường vì bài nghe nói Hoa viết thông báo cho đài trường",
     "whyU7": true
    }
@@ -56917,7 +56917,7 @@ var LP_EXPAND18_B = [
      "Full-time workers"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thư viện thành phố tìm tình nguyện viên cuối tuần vì câu đầu tiên nói thư viện tìm tình nguyện viên cuối tuần”. Vì vậy đáp án “Weekend volunteers” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The city library is looking for weekend volunteers”. Vì vậy đáp án “Weekend volunteers” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thư viện thành phố tìm tình nguyện viên cuối tuần vì câu đầu tiên nói thư viện tìm tình nguyện viên cuối tuần",
     "whyU7": true
    },
@@ -56931,7 +56931,7 @@ var LP_EXPAND18_B = [
      "Teach English"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tình nguyện viên đọc truyện cho trẻ nhỏ sáng thứ Bảy vì bài nghe nói tình nguyện viên đọc truyện cho trẻ sáng thứ Bảy”. Vì vậy đáp án “Read stories to young children” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Volunteers will help visitors find books, put returned books back on the shelves, and read stories to young children on Saturday mornings”. Vì vậy đáp án “Read stories to young children” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tình nguyện viên đọc truyện cho trẻ nhỏ sáng thứ Bảy vì bài nghe nói tình nguyện viên đọc truyện cho trẻ sáng thứ Bảy",
     "whyU7": true
    },
@@ -56945,7 +56945,7 @@ var LP_EXPAND18_B = [
      "20 years old"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tình nguyện viên phải ít nhất 15 tuổi vì bài nghe nói tình nguyện viên phải ít nhất 15 tuổi”. Vì vậy đáp án “15 years old” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Volunteers must be at least 15 years old and able to work four hours a week”. Vì vậy đáp án “15 years old” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tình nguyện viên phải ít nhất 15 tuổi vì bài nghe nói tình nguyện viên phải ít nhất 15 tuổi",
     "whyU7": true
    },
@@ -56959,7 +56959,7 @@ var LP_EXPAND18_B = [
      "Eight hours"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tình nguyện viên làm bốn giờ một tuần vì bài nghe nói tình nguyện viên làm được bốn giờ một tuần”. Vì vậy đáp án “Four hours” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Volunteers must be at least 15 years old and able to work four hours a week”. Vì vậy đáp án “Four hours” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tình nguyện viên làm bốn giờ một tuần vì bài nghe nói tình nguyện viên làm được bốn giờ một tuần",
     "whyU7": true
    },
@@ -56973,7 +56973,7 @@ var LP_EXPAND18_B = [
      "Come on Saturday"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Người quan tâm nên điền đơn ở quầy thư viện trước cuối tháng này vì câu cuối bài nghe nói như vậy”. Vì vậy đáp án “Fill in a form at the library desk before the end of this month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Anyone interested should fill in a form at the library desk before the end of this month”. Vì vậy đáp án “Fill in a form at the library desk before the end of this month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Người quan tâm nên điền đơn ở quầy thư viện trước cuối tháng này vì câu cuối bài nghe nói như vậy",
     "whyU7": true
    }
@@ -56996,7 +56996,7 @@ var LP_EXPAND18_B = [
      "A farm"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lớp thăm một nhà máy tái chế vì câu đầu tiên nói lớp thăm nhà máy tái chế”. Vì vậy đáp án “A recycling factory” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Today, our class visited a recycling factory outside the town”. Vì vậy đáp án “A recycling factory” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lớp thăm một nhà máy tái chế vì câu đầu tiên nói lớp thăm nhà máy tái chế",
     "whyU7": true
    },
@@ -57010,7 +57010,7 @@ var LP_EXPAND18_B = [
      "Plastic bags and food"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Công nhân phân loại chai, giấy và lon thành các nhóm vì bài nghe nói công nhân phân loại chai, giấy và lon”. Vì vậy đáp án “Bottles, paper and cans into different groups” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “First, workers sort bottles, paper and cans into different groups”. Vì vậy đáp án “Bottles, paper and cans into different groups” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Công nhân phân loại chai, giấy và lon thành các nhóm vì bài nghe nói công nhân phân loại chai, giấy và lon",
     "whyU7": true
    },
@@ -57024,7 +57024,7 @@ var LP_EXPAND18_B = [
      "Sell the materials"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Máy rửa và cắt vật liệu thành mảnh nhỏ vì bài nghe nói máy rửa và cắt vật liệu thành mảnh nhỏ”. Vì vậy đáp án “Wash and cut the materials into small pieces” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Then machines wash and cut the materials into small pieces”. Vì vậy đáp án “Wash and cut the materials into small pieces” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Máy rửa và cắt vật liệu thành mảnh nhỏ vì bài nghe nói máy rửa và cắt vật liệu thành mảnh nhỏ",
     "whyU7": true
    },
@@ -57038,7 +57038,7 @@ var LP_EXPAND18_B = [
      "Clothes only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Các mảnh được làm thành sản phẩm mới như chai mới và vở mới vì bài nghe nói các mảnh thành sản phẩm mới”. Vì vậy đáp án “New products, such as new bottles and notebooks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Finally, the pieces are made into new products, such as new bottles and notebooks”. Vì vậy đáp án “New products, such as new bottles and notebooks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Các mảnh được làm thành sản phẩm mới như chai mới và vở mới vì bài nghe nói các mảnh thành sản phẩm mới",
     "whyU7": true
    },
@@ -57052,7 +57052,7 @@ var LP_EXPAND18_B = [
      "Plant more trees"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh đồng ý phân loại rác ở nhà từ nay vì câu cuối bài nghe nói học sinh đồng ý phân loại rác ở nhà”. Vì vậy đáp án “Sort their rubbish at home” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “We all agreed to sort our rubbish at home from now on”. Vì vậy đáp án “Sort their rubbish at home” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh đồng ý phân loại rác ở nhà từ nay vì câu cuối bài nghe nói học sinh đồng ý phân loại rác ở nhà",
     "whyU7": true
    }
@@ -57075,7 +57075,7 @@ var LP_EXPAND18_B = [
      "Recycling"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Dự án nhóm về ô nhiễm không khí ở thành phố vì Lan nói dự án về ô nhiễm không khí”. Vì vậy đáp án “Air pollution in their city” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Lan: Our group project is about air pollution in our city”. Vì vậy đáp án “Air pollution in their city” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Dự án nhóm về ô nhiễm không khí ở thành phố vì Lan nói dự án về ô nhiễm không khí",
     "whyU7": true
    },
@@ -57089,7 +57089,7 @@ var LP_EXPAND18_B = [
      "Interview people"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Minh gợi ý thu thập thông tin về nguyên nhân chính vì Minh nói nên thu thập thông tin về nguyên nhân chính”. Vì vậy đáp án “Collect information about the main causes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Minh: I think we should collect information about the main causes”. Vì vậy đáp án “Collect information about the main causes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Minh gợi ý thu thập thông tin về nguyên nhân chính vì Minh nói nên thu thập thông tin về nguyên nhân chính",
     "whyU7": true
    },
@@ -57103,7 +57103,7 @@ var LP_EXPAND18_B = [
      "Collect data online"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hoa đề nghị phỏng vấn người dân trong khu phố vì Hoa nói cô có thể phỏng vấn người dân khu phố”. Vì vậy đáp án “Interview people in the neighbourhood” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I can interview people in our neighbourhood about what they see every day”. Vì vậy đáp án “Interview people in the neighbourhood” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hoa đề nghị phỏng vấn người dân trong khu phố vì Hoa nói cô có thể phỏng vấn người dân khu phố",
     "whyU7": true
    },
@@ -57117,7 +57117,7 @@ var LP_EXPAND18_B = [
      "Make a poster"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lan sẽ chụp ảnh đường đông đúc buổi sáng vì Lan nói cô sẽ chụp ảnh đường đông buổi sáng”. Vì vậy đáp án “Take photos of busy roads in the morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Lan: And I will take photos of busy roads in the morning”. Vì vậy đáp án “Take photos of busy roads in the morning” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lan sẽ chụp ảnh đường đông đúc buổi sáng vì Lan nói cô sẽ chụp ảnh đường đông buổi sáng",
     "whyU7": true
    },
@@ -57131,7 +57131,7 @@ var LP_EXPAND18_B = [
      "On Monday"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhóm sẽ gặp lại vào thứ Năm vì Minh nói nhóm gặp lại thứ Năm để cùng viết báo cáo”. Vì vậy đáp án “On Thursday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Minh: Then we can meet again on Thursday and write our report together”. Vì vậy đáp án “On Thursday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhóm sẽ gặp lại vào thứ Năm vì Minh nói nhóm gặp lại thứ Năm để cùng viết báo cáo",
     "whyU7": true
    }
@@ -57154,7 +57154,7 @@ var LP_EXPAND18_B = [
      "Writing in English"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh cần giúp bắt đầu bài luận vì học sinh nói em không biết bắt đầu thế nào”. Vì vậy đáp án “Starting the essay” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I do not know how to start”. Vì vậy đáp án “Starting the essay” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh cần giúp bắt đầu bài luận vì học sinh nói em không biết bắt đầu thế nào",
     "whyU7": true
    },
@@ -57168,7 +57168,7 @@ var LP_EXPAND18_B = [
      "List all the ideas"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mở bài nên nói bài luận về điều gì vì gia sư nói mở bài nói bài luận về gì”. Vì vậy đáp án “Say what the essay is about” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “First, write a short introduction that says what your essay is about”. Vì vậy đáp án “Say what the essay is about” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mở bài nên nói bài luận về điều gì vì gia sư nói mở bài nói bài luận về gì",
     "whyU7": true
    },
@@ -57182,7 +57182,7 @@ var LP_EXPAND18_B = [
      "Ten"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh nên chọn hai hoặc ba ý chính cho thân bài vì gia sư nói chọn hai hoặc ba ý chính”. Vì vậy đáp án “Two or three” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Then choose two or three main ideas for the body”. Vì vậy đáp án “Two or three” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh nên chọn hai hoặc ba ý chính cho thân bài vì gia sư nói chọn hai hoặc ba ý chính",
     "whyU7": true
    },
@@ -57196,7 +57196,7 @@ var LP_EXPAND18_B = [
      "Five examples"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Gia sư gợi ý một ví dụ cho mỗi ý vì gia sư nói một ví dụ cho mỗi ý là đủ”. Vì vậy đáp án “One example” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tutor: Yes, one example for each idea is enough”. Vì vậy đáp án “One example” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Gia sư gợi ý một ví dụ cho mỗi ý vì gia sư nói một ví dụ cho mỗi ý là đủ",
     "whyU7": true
    },
@@ -57210,7 +57210,7 @@ var LP_EXPAND18_B = [
      "Copy the introduction"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Kết bài nên nhắc lại quan điểm chính một cách ngắn gọn vì gia sư nói kết bài nhắc lại quan điểm chính”. Vì vậy đáp án “Repeat the main opinion in a short way” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Finally, finish with a short conclusion that repeats your main opinion”. Vì vậy đáp án “Repeat the main opinion in a short way” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Kết bài nên nhắc lại quan điểm chính một cách ngắn gọn vì gia sư nói kết bài nhắc lại quan điểm chính",
     "whyU7": true
    }
@@ -57233,7 +57233,7 @@ var LP_EXPAND18_B = [
      "Study time"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Khảo sát của lớp về giấc ngủ vì bài nghe nói hai sinh viên nói về khảo sát về giấc ngủ”. Vì vậy đáp án “Sleep” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Two students are talking about a class survey on sleep”. Vì vậy đáp án “Sleep” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Khảo sát của lớp về giấc ngủ vì bài nghe nói hai sinh viên nói về khảo sát về giấc ngủ",
     "whyU7": true
    },
@@ -57247,7 +57247,7 @@ var LP_EXPAND18_B = [
      "About ten hours"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hầu hết học sinh ngủ ít hơn bảy giờ mỗi đêm vì Anna nói hầu hết học sinh ngủ ít hơn bảy giờ”. Vì vậy đáp án “Less than seven hours” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Anna says most students in their class sleep less than seven hours a night”. Vì vậy đáp án “Less than seven hours” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hầu hết học sinh ngủ ít hơn bảy giờ mỗi đêm vì Anna nói hầu hết học sinh ngủ ít hơn bảy giờ",
     "whyU7": true
    },
@@ -57261,7 +57261,7 @@ var LP_EXPAND18_B = [
      "Because they play sports late"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tom nghĩ học sinh dùng điện thoại quá muộn vào ban đêm nên không ngủ sớm được, theo bài nghe”. Vì vậy đáp án “Because they use their phones too late at night” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tom thinks students use their phones too late at night, so they cannot fall asleep early”. Vì vậy đáp án “Because they use their phones too late at night” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tom nghĩ học sinh dùng điện thoại quá muộn vào ban đêm nên không ngủ sớm được, theo bài nghe",
     "whyU7": true
    },
@@ -57275,7 +57275,7 @@ var LP_EXPAND18_B = [
      "Reading before bed only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Anna gợi ý không dùng điện thoại sau 10 giờ và giờ đi ngủ đều đặn vì Anna nói lớp nên làm kế hoạch đó”. Vì vậy đáp án “No phones after 10 o'clock, and a regular bedtime” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Anna suggests the class should make a simple plan: no phones after 10 o'clock, and a regular bedtime”. Vì vậy đáp án “No phones after 10 o'clock, and a regular bedtime” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Anna gợi ý không dùng điện thoại sau 10 giờ và giờ đi ngủ đều đặn vì Anna nói lớp nên làm kế hoạch đó",
     "whyU7": true
    },
@@ -57289,7 +57289,7 @@ var LP_EXPAND18_B = [
      "For one week"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tom nói mọi người nên thử kế hoạch ít nhất hai tuần vì Tom nói kế hoạch chỉ hiệu quả nếu mọi người thử ít nhất hai tuần”. Vì vậy đáp án “For at least two weeks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tom agrees, but he says the plan will only work if everyone tries it for at least two weeks”. Vì vậy đáp án “For at least two weeks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tom nói mọi người nên thử kế hoạch ít nhất hai tuần vì Tom nói kế hoạch chỉ hiệu quả nếu mọi người thử ít nhất hai tuần",
     "whyU7": true
    }
@@ -57312,7 +57312,7 @@ var LP_EXPAND18_B = [
      "Near the market"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Trạm chia sẻ xe đạp mới gần trường của họ vì học sinh A nói trạm gần trường”. Vì vậy đáp án “Near their school” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Student A: Have you heard about the new bike-sharing station near our school?”. Vì vậy đáp án “Near their school” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Trạm chia sẻ xe đạp mới gần trường của họ vì học sinh A nói trạm gần trường",
     "whyU7": true
    },
@@ -57326,7 +57326,7 @@ var LP_EXPAND18_B = [
      "A ticket"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh có thể mượn xe bằng thẻ học sinh vì học sinh B nói mượn xe bằng thẻ học sinh”. Vì vậy đáp án “A student card” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “You can borrow a bike with a student card and return it to any station in the city”. Vì vậy đáp án “A student card” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh có thể mượn xe bằng thẻ học sinh vì học sinh B nói mượn xe bằng thẻ học sinh",
     "whyU7": true
    },
@@ -57340,7 +57340,7 @@ var LP_EXPAND18_B = [
      "To their home"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh có thể trả xe ở bất kỳ trạm nào trong thành phố vì học sinh B nói trả xe ở bất kỳ trạm nào”. Vì vậy đáp án “To any station in the city” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “You can borrow a bike with a student card and return it to any station in the city”. Vì vậy đáp án “To any station in the city” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh có thể trả xe ở bất kỳ trạm nào trong thành phố vì học sinh B nói trả xe ở bất kỳ trạm nào",
     "whyU7": true
    },
@@ -57354,7 +57354,7 @@ var LP_EXPAND18_B = [
      "15,000 dong"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “30 phút đầu miễn phí cho học sinh vì học sinh B nói 30 phút đầu miễn phí cho học sinh”. Vì vậy đáp án “Free” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Student B: The first 30 minutes are free for students, and after that it costs 5,000 dong every 30 minutes”. Vì vậy đáp án “Free” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "30 phút đầu miễn phí cho học sinh vì học sinh B nói 30 phút đầu miễn phí cho học sinh",
     "whyU7": true
    },
@@ -57368,7 +57368,7 @@ var LP_EXPAND18_B = [
      "20,000 dong a day"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sau 30 phút đầu, giá 5.000 đồng mỗi 30 phút vì học sinh B nói sau đó giá 5.000 đồng mỗi 30 phút”. Vì vậy đáp án “5,000 dong every 30 minutes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Student B: The first 30 minutes are free for students, and after that it costs 5,000 dong every 30 minutes”. Vì vậy đáp án “5,000 dong every 30 minutes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sau 30 phút đầu, giá 5.000 đồng mỗi 30 phút vì học sinh B nói sau đó giá 5.000 đồng mỗi 30 phút",
     "whyU7": true
    }
@@ -57391,7 +57391,7 @@ var LP_EXPAND18_B = [
      "A job as a cook"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ứng viên phỏng vấn việc làm cuối tuần làm hướng dẫn viên vì người phỏng vấn hỏi về công việc hướng dẫn viên cuối tuần”. Vì vậy đáp án “A weekend job as a tour guide” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Interviewer: Why do you want this weekend job as a tour guide?”. Vì vậy đáp án “A weekend job as a tour guide” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ứng viên phỏng vấn việc làm cuối tuần làm hướng dẫn viên vì người phỏng vấn hỏi về công việc hướng dẫn viên cuối tuần",
     "whyU7": true
    },
@@ -57405,7 +57405,7 @@ var LP_EXPAND18_B = [
      "Because he likes travelling"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ứng viên muốn công việc vì yêu thị trấn và thích nói chuyện với du khách, theo bài nghe”. Vì vậy đáp án “Because he loves his town and enjoys talking to visitors” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Applicant: Because I love my town and I enjoy talking to visitors”. Vì vậy đáp án “Because he loves his town and enjoys talking to visitors” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ứng viên muốn công việc vì yêu thị trấn và thích nói chuyện với du khách, theo bài nghe",
     "whyU7": true
    },
@@ -57419,7 +57419,7 @@ var LP_EXPAND18_B = [
      "The weather"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ứng viên biết nhiều về phố cổ và lịch sử thị trấn vì ứng viên nói biết nhiều về phố cổ và lịch sử”. Vì vậy đáp án “The old streets and the history of the town” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I know a lot about the old streets and the history of our town”. Vì vậy đáp án “The old streets and the history of the town” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ứng viên biết nhiều về phố cổ và lịch sử thị trấn vì ứng viên nói biết nhiều về phố cổ và lịch sử",
     "whyU7": true
    },
@@ -57433,7 +57433,7 @@ var LP_EXPAND18_B = [
      "Only a little"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ứng viên nói tiếng Anh khá tốt vì ứng viên nói mình nói tiếng Anh khá tốt”. Vì vậy đáp án “Quite well” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Applicant: Yes, I can speak English quite well, and I am learning more every day”. Vì vậy đáp án “Quite well” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ứng viên nói tiếng Anh khá tốt vì ứng viên nói mình nói tiếng Anh khá tốt",
     "whyU7": true
    },
@@ -57447,7 +57447,7 @@ var LP_EXPAND18_B = [
      "Next year"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ứng viên có thể bắt đầu từ cuối tuần tới vì ứng viên nói có thể bắt đầu cuối tuần tới”. Vì vậy đáp án “Next weekend” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Applicant: Yes, I am free both days, and I can start next weekend”. Vì vậy đáp án “Next weekend” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ứng viên có thể bắt đầu từ cuối tuần tới vì ứng viên nói có thể bắt đầu cuối tuần tới",
     "whyU7": true
    }
@@ -57473,7 +57473,7 @@ var LP_EXPAND18_C = [
      "In a restaurant"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mai làm việc ở quán cà phê sáng thứ Bảy vì bài nghe nói Mai làm ở quán cà phê sáng thứ Bảy”. Vì vậy đáp án “In a coffee shop on Saturday mornings” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Mai works in a coffee shop on Saturday mornings, and she says the job teaches her to talk to customers politely”. Vì vậy đáp án “In a coffee shop on Saturday mornings” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mai làm việc ở quán cà phê sáng thứ Bảy vì bài nghe nói Mai làm ở quán cà phê sáng thứ Bảy",
     "whyU7": true
    },
@@ -57487,7 +57487,7 @@ var LP_EXPAND18_C = [
      "To speak French"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Công việc dạy Mai nói chuyện lịch sự với khách hàng vì bài nghe nói công việc dạy Mai nói chuyện lịch sự với khách”. Vì vậy đáp án “To talk to customers politely” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Mai works in a coffee shop on Saturday mornings, and she says the job teaches her to talk to customers politely”. Vì vậy đáp án “To talk to customers politely” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Công việc dạy Mai nói chuyện lịch sự với khách hàng vì bài nghe nói công việc dạy Mai nói chuyện lịch sự với khách",
     "whyU7": true
    },
@@ -57501,7 +57501,7 @@ var LP_EXPAND18_C = [
      "He cleans offices"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nam làm gia sư cho học sinh nhỏ hơn vì bài nghe nói Nam làm gia sư cho học sinh nhỏ hơn”. Vì vậy đáp án “He works as a tutor for younger students” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Nam works as a tutor for younger students, and he says explaining lessons helps him understand his own subjects better”. Vì vậy đáp án “He works as a tutor for younger students” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nam làm gia sư cho học sinh nhỏ hơn vì bài nghe nói Nam làm gia sư cho học sinh nhỏ hơn",
     "whyU7": true
    },
@@ -57515,7 +57515,7 @@ var LP_EXPAND18_C = [
      "It teaches him to cook"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Việc giảng bài giúp Nam hiểu rõ hơn môn học của mình vì bài nghe nói giảng bài giúp Nam hiểu môn học của mình hơn”. Vì vậy đáp án “It helps him understand his own subjects better” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Nam works as a tutor for younger students, and he says explaining lessons helps him understand his own subjects better”. Vì vậy đáp án “It helps him understand his own subjects better” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Việc giảng bài giúp Nam hiểu rõ hơn môn học của mình vì bài nghe nói giảng bài giúp Nam hiểu môn học của mình hơn",
     "whyU7": true
    },
@@ -57529,7 +57529,7 @@ var LP_EXPAND18_C = [
      "Twenty hours"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cả hai đồng ý việc làm thêm không nên quá mười giờ một tuần vì bài nghe nói không nên quá mười giờ một tuần”. Vì vậy đáp án “Ten hours” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Both agree that a part-time job should not take more than ten hours a week, because study must come first”. Vì vậy đáp án “Ten hours” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cả hai đồng ý việc làm thêm không nên quá mười giờ một tuần vì bài nghe nói không nên quá mười giờ một tuần",
     "whyU7": true
    }
@@ -57552,7 +57552,7 @@ var LP_EXPAND18_C = [
      "To a farm"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chuyến dã ngoại đến một vườn quốc gia vì bài nghe nói chuyến đi đến vườn quốc gia”. Vì vậy đáp án “To a national park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “A teacher and two students are planning a class trip to a national park”. Vì vậy đáp án “To a national park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chuyến dã ngoại đến một vườn quốc gia vì bài nghe nói chuyến đi đến vườn quốc gia",
     "whyU7": true
    },
@@ -57566,7 +57566,7 @@ var LP_EXPAND18_C = [
      "Next Sunday"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chuyến đi vào thứ Bảy thứ hai của tháng tới vì bài nghe nói chuyến đi vào thứ Bảy thứ hai tháng tới”. Vì vậy đáp án “On the second Saturday of next month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The teacher says the trip will be on the second Saturday of next month, and the bus will leave school at 7 o'clock in the morning”. Vì vậy đáp án “On the second Saturday of next month” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chuyến đi vào thứ Bảy thứ hai của tháng tới vì bài nghe nói chuyến đi vào thứ Bảy thứ hai tháng tới",
     "whyU7": true
    },
@@ -57580,7 +57580,7 @@ var LP_EXPAND18_C = [
      "At 9 o'clock"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Xe buýt rời trường lúc 7 giờ sáng vì bài nghe nói xe rời trường lúc 7 giờ sáng”. Vì vậy đáp án “At 7 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The teacher says the trip will be on the second Saturday of next month, and the bus will leave school at 7 o'clock in the morning”. Vì vậy đáp án “At 7 o'clock” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Xe buýt rời trường lúc 7 giờ sáng vì bài nghe nói xe rời trường lúc 7 giờ sáng",
     "whyU7": true
    },
@@ -57594,7 +57594,7 @@ var LP_EXPAND18_C = [
      "Books and pens"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mỗi học sinh nên mang mũ, chai nước và áo mưa vì bài nghe nói mỗi học sinh mang ba thứ đó”. Vì vậy đáp án “A hat, a water bottle, and a raincoat” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Each student should bring a hat, a water bottle, and a raincoat, because the weather in the forest can change quickly”. Vì vậy đáp án “A hat, a water bottle, and a raincoat” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mỗi học sinh nên mang mũ, chai nước và áo mưa vì bài nghe nói mỗi học sinh mang ba thứ đó",
     "whyU7": true
    },
@@ -57608,7 +57608,7 @@ var LP_EXPAND18_C = [
      "250,000 dong"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chuyến đi giá 150.000 đồng mỗi học sinh vì bài nghe nêu rõ giá chuyến đi”. Vì vậy đáp án “150,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The trip costs 150,000 dong per student, including lunch”. Vì vậy đáp án “150,000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chuyến đi giá 150.000 đồng mỗi học sinh vì bài nghe nêu rõ giá chuyến đi",
     "whyU7": true
    }
@@ -57631,7 +57631,7 @@ var LP_EXPAND18_C = [
      "Because she does not need books"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Linh thích bài học trực tuyến vì cô có thể xem lại khi không hiểu, theo bài nghe”. Vì vậy đáp án “Because she can watch them again when she does not understand” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Linh likes online lessons because she can watch them again when she does not understand something”. Vì vậy đáp án “Because she can watch them again when she does not understand” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Linh thích bài học trực tuyến vì cô có thể xem lại khi không hiểu, theo bài nghe",
     "whyU7": true
    },
@@ -57645,7 +57645,7 @@ var LP_EXPAND18_C = [
      "Because he dislikes computers"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tuấn thích lớp trực tiếp vì anh hỏi giáo viên ngay và nói chuyện với bạn sau giờ học, theo bài nghe”. Vì vậy đáp án “Because he can ask the teacher questions at once and talk to friends after class” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tuan prefers face-to-face classes because he can ask the teacher questions at once and talk to friends after class”. Vì vậy đáp án “Because he can ask the teacher questions at once and talk to friends after class” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tuấn thích lớp trực tiếp vì anh hỏi giáo viên ngay và nói chuyện với bạn sau giờ học, theo bài nghe",
     "whyU7": true
    },
@@ -57659,7 +57659,7 @@ var LP_EXPAND18_C = [
      "Good books"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cả hai đồng ý học trực tuyến cần tính tự giác cao vì bài nghe nói học trực tuyến cần tự giác cao”. Vì vậy đáp án “Strong self-discipline” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Both agree that online learning needs strong self-discipline, because it is easy to get distracted at home”. Vì vậy đáp án “Strong self-discipline” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cả hai đồng ý học trực tuyến cần tính tự giác cao vì bài nghe nói học trực tuyến cần tự giác cao",
     "whyU7": true
    },
@@ -57673,7 +57673,7 @@ var LP_EXPAND18_C = [
      "Because exams are hard"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Tính tự giác quan trọng vì ở nhà rất dễ bị xao nhãng, theo bài nghe”. Vì vậy đáp án “Because it is easy to get distracted at home” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Both agree that online learning needs strong self-discipline, because it is easy to get distracted at home”. Vì vậy đáp án “Because it is easy to get distracted at home” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Tính tự giác quan trọng vì ở nhà rất dễ bị xao nhãng, theo bài nghe",
     "whyU7": true
    },
@@ -57687,7 +57687,7 @@ var LP_EXPAND18_C = [
      "Only at weekends"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Họ quyết định học cùng nhau hai lần một tuần, một ngày trực tuyến và một ngày ở thư viện, theo bài nghe”. Vì vậy đáp án “Twice a week, one day online and one day in the library” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “They decide to study together twice a week, one day online and one day in the library”. Vì vậy đáp án “Twice a week, one day online and one day in the library” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Họ quyết định học cùng nhau hai lần một tuần, một ngày trực tuyến và một ngày ở thư viện, theo bài nghe",
     "whyU7": true
    }
@@ -57710,7 +57710,7 @@ var LP_EXPAND18_C = [
      "Climate change"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hoa gợi ý ăn uống lành mạnh vì bài nghe nói Hoa gợi ý ăn uống lành mạnh”. Vì vậy đáp án “Healthy eating” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Hoa suggests healthy eating, because many young people eat too much fast food”. Vì vậy đáp án “Healthy eating” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hoa gợi ý ăn uống lành mạnh vì bài nghe nói Hoa gợi ý ăn uống lành mạnh",
     "whyU7": true
    },
@@ -57724,7 +57724,7 @@ var LP_EXPAND18_C = [
      "Because there is a lot of data"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hoa gợi ý ăn uống lành mạnh vì nhiều người trẻ ăn quá nhiều đồ ăn nhanh, theo bài nghe”. Vì vậy đáp án “Because many young people eat too much fast food” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Hoa suggests healthy eating, because many young people eat too much fast food”. Vì vậy đáp án “Because many young people eat too much fast food” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hoa gợi ý ăn uống lành mạnh vì nhiều người trẻ ăn quá nhiều đồ ăn nhanh, theo bài nghe",
     "whyU7": true
    },
@@ -57738,7 +57738,7 @@ var LP_EXPAND18_C = [
      "Because Hoa likes it"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Minh gợi ý giao thông công cộng vì giao thông thành phố ngày càng tệ mỗi năm, theo bài nghe”. Vì vậy đáp án “Because traffic in their city is getting worse every year” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Minh suggests public transport, because traffic in their city is getting worse every year”. Vì vậy đáp án “Because traffic in their city is getting worse every year” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Minh gợi ý giao thông công cộng vì giao thông thành phố ngày càng tệ mỗi năm, theo bài nghe",
     "whyU7": true
    },
@@ -57752,7 +57752,7 @@ var LP_EXPAND18_C = [
      "Because it is too hard"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhóm không chọn thói quen đọc vì không có đủ dữ liệu mới, theo bài nghe”. Vì vậy đáp án “Because there is not enough recent data” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Lan suggests a third topic, reading habits, but the group thinks there is not enough recent data”. Vì vậy đáp án “Because there is not enough recent data” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhóm không chọn thói quen đọc vì không có đủ dữ liệu mới, theo bài nghe",
     "whyU7": true
    },
@@ -57766,7 +57766,7 @@ var LP_EXPAND18_C = [
      "Choose the topic"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lan sẽ luyện nói vì bài nghe nói Lan luyện bài nói”. Vì vậy đáp án “Practise the talk” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In the end, they choose public transport, and they divide the work: Hoa will collect data, Minh will make slides, and Lan will practise the talk”. Vì vậy đáp án “Practise the talk” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lan sẽ luyện nói vì bài nghe nói Lan luyện bài nói",
     "whyU7": true
    }
@@ -57789,7 +57789,7 @@ var LP_EXPAND18_C = [
      "A volunteer trip"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh viên đang nghĩ về thực tập hè ở công ty khởi nghiệp nhỏ vì sinh viên nói đang nghĩ về thực tập hè ở công ty khởi nghiệp nhỏ”. Vì vậy đáp án “A summer internship at a small start-up company” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Student: I am thinking about a summer internship at a small start-up company”. Vì vậy đáp án “A summer internship at a small start-up company” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh viên đang nghĩ về thực tập hè ở công ty khởi nghiệp nhỏ vì sinh viên nói đang nghĩ về thực tập hè ở công ty khởi nghiệp nhỏ",
     "whyU7": true
    },
@@ -57803,7 +57803,7 @@ var LP_EXPAND18_C = [
      "The working hours are short"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lợi thế của công ty nhỏ là được thử nhiều việc khác nhau vì gia sư nói ở công ty nhỏ có thể thử nhiều việc”. Vì vậy đáp án “You may try many different tasks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tutor: It can be a good choice, because in a small company you may try many different tasks, from talking to customers to helping with social media”. Vì vậy đáp án “You may try many different tasks” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lợi thế của công ty nhỏ là được thử nhiều việc khác nhau vì gia sư nói ở công ty nhỏ có thể thử nhiều việc",
     "whyU7": true
    },
@@ -57817,7 +57817,7 @@ var LP_EXPAND18_C = [
      "No friends and no food"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh viên lo lương thấp và không có kế hoạch đào tạo rõ ràng vì sinh viên nói lo hai điều đó”. Vì vậy đáp án “Low pay and no clear training plan” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Student: But I worry the pay is low and there is no clear training plan”. Vì vậy đáp án “Low pay and no clear training plan” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh viên lo lương thấp và không có kế hoạch đào tạo rõ ràng vì sinh viên nói lo hai điều đó",
     "whyU7": true
    },
@@ -57831,7 +57831,7 @@ var LP_EXPAND18_C = [
      "What to wear, what to eat, and where to live"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh viên nên hỏi sẽ học gì, ai hướng dẫn, và công việc được đánh giá thế nào, theo lời gia sư”. Vì vậy đáp án “What you will learn, who will guide you, and how your work will be checked” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Before you accept, ask what you will learn, who will guide you, and how your work will be checked”. Vì vậy đáp án “What you will learn, who will guide you, and how your work will be checked” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh viên nên hỏi sẽ học gì, ai hướng dẫn, và công việc được đánh giá thế nào, theo lời gia sư",
     "whyU7": true
    },
@@ -57845,7 +57845,7 @@ var LP_EXPAND18_C = [
      "Free lunch"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thực tập tốt nên cho nhiệm vụ rõ ràng và phản hồi thường xuyên, không chỉ làm việc miễn phí, theo gia sư”. Vì vậy đáp án “Clear tasks and regular feedback, not just free work” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “A good internship should give you clear tasks and regular feedback, not just free work”. Vì vậy đáp án “Clear tasks and regular feedback, not just free work” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thực tập tốt nên cho nhiệm vụ rõ ràng và phản hồi thường xuyên, không chỉ làm việc miễn phí, theo gia sư",
     "whyU7": true
    }
@@ -57868,7 +57868,7 @@ var LP_EXPAND18_C = [
      "They grow very tall"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cây làm mát không khí vì lá tạo bóng mát và thải nước vào không khí, theo bài giảng”. Vì vậy đáp án “Their leaves give shade and release water into the air” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Trees cool the air in summer, because their leaves give shade and release water into the air”. Vì vậy đáp án “Their leaves give shade and release water into the air” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cây làm mát không khí vì lá tạo bóng mát và thải nước vào không khí, theo bài giảng",
     "whyU7": true
    },
@@ -57882,7 +57882,7 @@ var LP_EXPAND18_C = [
      "By cooling the soil"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Cây làm sạch không khí bằng cách giữ bụi trên lá vì bài giảng nói cây giữ bụi trên lá”. Vì vậy đáp án “By catching dust on their leaves” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Trees also clean the air by catching dust on their leaves”. Vì vậy đáp án “By catching dust on their leaves” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Cây làm sạch không khí bằng cách giữ bụi trên lá vì bài giảng nói cây giữ bụi trên lá",
     "whyU7": true
    },
@@ -57896,7 +57896,7 @@ var LP_EXPAND18_C = [
      "They attract tourists only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Không gian xanh giúp mọi người bình tĩnh hơn và khuyến khích đi bộ, tập thể dục, theo bài giảng”. Vì vậy đáp án “They help people feel calmer and encourage walking and exercise” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In addition, green spaces help people feel calmer and encourage them to walk and exercise”. Vì vậy đáp án “They help people feel calmer and encourage walking and exercise” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Không gian xanh giúp mọi người bình tĩnh hơn và khuyến khích đi bộ, tập thể dục, theo bài giảng",
     "whyU7": true
    },
@@ -57910,7 +57910,7 @@ var LP_EXPAND18_C = [
      "Plant trees in winter only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thành phố phải bảo vệ cây già, tưới cây non tháng khô, và chọn loại cây phù hợp, theo bài giảng”. Vì vậy đáp án “Protect old trees, water young trees in dry months, and choose suitable kinds of trees” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “However, planting trees is not enough: cities must also protect old trees, water young trees in dry months, and choose kinds of trees that suit the local climate”. Vì vậy đáp án “Protect old trees, water young trees in dry months, and choose suitable kinds of trees” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thành phố phải bảo vệ cây già, tưới cây non tháng khô, và chọn loại cây phù hợp, theo bài giảng",
     "whyU7": true
    },
@@ -57924,7 +57924,7 @@ var LP_EXPAND18_C = [
      "Green spaces are expensive"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thông điệp chính là thành phố có cây khỏe mạnh thì mát hơn, sạch hơn và dễ sống hơn, theo câu cuối bài giảng”. Vì vậy đáp án “A city with healthy trees is cooler, cleaner, and more pleasant to live in” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “A city with healthy trees is cooler, cleaner, and more pleasant to live in”. Vì vậy đáp án “A city with healthy trees is cooler, cleaner, and more pleasant to live in” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thông điệp chính là thành phố có cây khỏe mạnh thì mát hơn, sạch hơn và dễ sống hơn, theo câu cuối bài giảng",
     "whyU7": true
    }
@@ -57947,7 +57947,7 @@ var LP_EXPAND18_C = [
      "The electricity bill is too low"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Học sinh phát hiện lớp học dùng nhiều điện ngay cả khi không có ai vì bài nghe nói lớp dùng nhiều điện dù không có ai trong phòng”. Vì vậy đáp án “Classrooms use a lot of electricity even when empty” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “They found that classrooms use a lot of electricity for lights and air conditioners, even when no one is in the room”. Vì vậy đáp án “Classrooms use a lot of electricity even when empty” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Học sinh phát hiện lớp học dùng nhiều điện ngay cả khi không có ai vì bài nghe nói lớp dùng nhiều điện dù không có ai trong phòng",
     "whyU7": true
    },
@@ -57961,7 +57961,7 @@ var LP_EXPAND18_C = [
      "Turn off air conditioners all day"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Phần đầu của kế hoạch là dán nhắc nhở tắt đèn vì bài nghe nói kế hoạch gồm dán nhắc nhở tắt đèn”. Vì vậy đáp án “Put up reminders to turn off lights” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Their plan has three parts: put up reminders to turn off lights, ask teachers to set air conditioners at 26 degrees, and check electricity use every week”. Vì vậy đáp án “Put up reminders to turn off lights” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Phần đầu của kế hoạch là dán nhắc nhở tắt đèn vì bài nghe nói kế hoạch gồm dán nhắc nhở tắt đèn",
     "whyU7": true
    },
@@ -57975,7 +57975,7 @@ var LP_EXPAND18_C = [
      "30 degrees"
     ],
     "a": 1,
-    "why": "Ví dụ: trong đoạn nghe có câu “Họ đề nghị đặt điều hòa ở 26 độ vì bài nghe nói đề nghị đặt điều hòa 26 độ”. Vì vậy đáp án “26 degrees” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Their plan has three parts: put up reminders to turn off lights, ask teachers to set air conditioners at 26 degrees, and check electricity use every week”. Vì vậy đáp án “26 degrees” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Họ đề nghị đặt điều hòa ở 26 độ vì bài nghe nói đề nghị đặt điều hòa 26 độ",
     "whyU7": true
    },
@@ -57989,7 +57989,7 @@ var LP_EXPAND18_C = [
      "Every year"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Họ sẽ kiểm tra mức dùng điện mỗi tuần vì bài nghe nói kiểm tra mức dùng điện mỗi tuần”. Vì vậy đáp án “Every week” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Their plan has three parts: put up reminders to turn off lights, ask teachers to set air conditioners at 26 degrees, and check electricity use every week”. Vì vậy đáp án “Every week” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Họ sẽ kiểm tra mức dùng điện mỗi tuần vì bài nghe nói kiểm tra mức dùng điện mỗi tuần",
     "whyU7": true
    },
@@ -58003,7 +58003,7 @@ var LP_EXPAND18_C = [
      "By fifty per cent in six months"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Họ hy vọng giảm mười phần trăm trong ba tháng vì bài nghe nói hy vọng giảm mười phần trăm trong ba tháng”. Vì vậy đáp án “By ten per cent in three months” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “They hope the project will cut the school's electricity use by ten per cent in three months”. Vì vậy đáp án “By ten per cent in three months” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Họ hy vọng giảm mười phần trăm trong ba tháng vì bài nghe nói hy vọng giảm mười phần trăm trong ba tháng",
     "whyU7": true
    }
@@ -58026,7 +58026,7 @@ var LP_EXPAND18_C = [
      "How students choose friends"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Đề tài nghiên cứu về cách sinh viên dùng mạng xã hội để học vì sinh viên nói dự án về cách sinh viên dùng mạng xã hội để học”. Vì vậy đáp án “How students use social media for study” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Student: I am planning a small research project about how students use social media for study”. Vì vậy đáp án “How students use social media for study” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Đề tài nghiên cứu về cách sinh viên dùng mạng xã hội để học vì sinh viên nói dự án về cách sinh viên dùng mạng xã hội để học",
     "whyU7": true
    },
@@ -58040,7 +58040,7 @@ var LP_EXPAND18_C = [
      "How many students use phones?"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Gia sư đưa ví dụ câu hỏi rõ ràng về nhóm học trực tuyến so với tự học vì gia sư nói ví dụ đó”. Vì vậy đáp án “Do students who join study groups online get better results than those who study alone?” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “For example: do students who join study groups online get better results than those who study alone?”. Vì vậy đáp án “Do students who join study groups online get better results than those who study alone?” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Gia sư đưa ví dụ câu hỏi rõ ràng về nhóm học trực tuyến so với tự học vì gia sư nói ví dụ đó",
     "whyU7": true
    },
@@ -58054,7 +58054,7 @@ var LP_EXPAND18_C = [
      "5 students"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh viên nên hỏi 30 đến 40 sinh viên vì gia sư nói với dự án nhỏ 30 đến 40 sinh viên là đủ”. Vì vậy đáp án “30 to 40 students” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tutor: For a small project, 30 to 40 students is enough, but you must ask students from different classes, not only your friends”. Vì vậy đáp án “30 to 40 students” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh viên nên hỏi 30 đến 40 sinh viên vì gia sư nói với dự án nhỏ 30 đến 40 sinh viên là đủ",
     "whyU7": true
    },
@@ -58068,7 +58068,7 @@ var LP_EXPAND18_C = [
      "Because different classes are easier"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh viên phải hỏi các lớp khác nhau, không chỉ bạn bè, vì gia sư nói phải hỏi sinh viên từ các lớp khác nhau, không chỉ bạn bè”. Vì vậy đáp án “Not only friends, to avoid a one-sided sample” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tutor: For a small project, 30 to 40 students is enough, but you must ask students from different classes, not only your friends”. Vì vậy đáp án “Not only friends, to avoid a one-sided sample” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh viên phải hỏi các lớp khác nhau, không chỉ bạn bè, vì gia sư nói phải hỏi sinh viên từ các lớp khác nhau, không chỉ bạn bè",
     "whyU7": true
    },
@@ -58082,7 +58082,7 @@ var LP_EXPAND18_C = [
      "Show photos only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh viên nên dùng biểu đồ đơn giản và giải thích bằng lời đơn giản vì gia sư nói dùng biểu đồ đơn giản và giải thích”. Vì vậy đáp án “Use a simple chart and explain what it shows in plain words” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tutor: Use a simple chart and explain what the chart shows in plain words”. Vì vậy đáp án “Use a simple chart and explain what it shows in plain words” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh viên nên dùng biểu đồ đơn giản và giải thích bằng lời đơn giản vì gia sư nói dùng biểu đồ đơn giản và giải thích",
     "whyU7": true
    }
@@ -58105,7 +58105,7 @@ var LP_EXPAND18_C = [
      "Your brain needs food"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Khi học điều mới, não lưu trữ nó ở dạng dễ mất vì bài giảng nói não lưu thông tin mới ở dạng dễ mất”. Vì vậy đáp án “Your brain first stores it in a fragile form” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “When you learn something new, your brain first stores it in a fragile form”. Vì vậy đáp án “Your brain first stores it in a fragile form” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Khi học điều mới, não lưu trữ nó ở dạng dễ mất vì bài giảng nói não lưu thông tin mới ở dạng dễ mất",
     "whyU7": true
    },
@@ -58119,7 +58119,7 @@ var LP_EXPAND18_C = [
      "It forgets old information"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Trong giấc ngủ sâu, não phát lại thông tin mới và chuyển vào trí nhớ dài hạn vì bài giảng nói não phát lại và chuyển thông tin vào trí nhớ dài hạn”. Vì vậy đáp án “It replays new information and moves it into long-term memory” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “During deep sleep, the brain replays the new information and moves it into long-term memory”. Vì vậy đáp án “It replays new information and moves it into long-term memory” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Trong giấc ngủ sâu, não phát lại thông tin mới và chuyển vào trí nhớ dài hạn vì bài giảng nói não phát lại và chuyển thông tin vào trí nhớ dài hạn",
     "whyU7": true
    },
@@ -58133,7 +58133,7 @@ var LP_EXPAND18_C = [
      "Because they are smarter"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh viên ngủ ngon nhớ nhiều hơn vì giấc ngủ chuyển việc học mới vào trí nhớ dài hạn, theo bài giảng”. Vì vậy đáp án “Because sleep moves new learning into long-term memory” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “During deep sleep, the brain replays the new information and moves it into long-term memory”. Vì vậy đáp án “Because sleep moves new learning into long-term memory” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh viên ngủ ngon nhớ nhiều hơn vì giấc ngủ chuyển việc học mới vào trí nhớ dài hạn, theo bài giảng",
     "whyU7": true
    },
@@ -58147,7 +58147,7 @@ var LP_EXPAND18_C = [
      "They harm memory"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Giấc ngủ ngắn có thể giúp nhưng không thay thế hoàn toàn giấc ngủ đêm đầy đủ vì bài giảng nói ngủ ngắn không thay thế hoàn toàn giấc ngủ đêm”. Vì vậy đáp án “They can help, but cannot fully replace a full night of sleep” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Short naps can also help, but they cannot fully replace a full night of sleep”. Vì vậy đáp án “They can help, but cannot fully replace a full night of sleep” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Giấc ngủ ngắn có thể giúp nhưng không thay thế hoàn toàn giấc ngủ đêm đầy đủ vì bài giảng nói ngủ ngắn không thay thế hoàn toàn giấc ngủ đêm",
     "whyU7": true
    },
@@ -58161,7 +58161,7 @@ var LP_EXPAND18_C = [
      "Do not review at all"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lời khuyên là học ban ngày, ôn ngắn buổi tối, rồi ngủ ngon, theo câu cuối bài giảng”. Vì vậy đáp án “Study in the day, review briefly in the evening, and then sleep well” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The practical advice is simple: study in the day, review briefly in the evening, and then sleep well”. Vì vậy đáp án “Study in the day, review briefly in the evening, and then sleep well” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lời khuyên là học ban ngày, ôn ngắn buổi tối, rồi ngủ ngon, theo câu cuối bài giảng",
     "whyU7": true
    }
@@ -58184,7 +58184,7 @@ var LP_EXPAND18_C = [
      "Wrong topic"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Khảo sát chỉ có 20 câu trả lời, hầu hết từ lớp của sinh viên, vì sinh viên nói khảo sát chỉ nhận 20 câu trả lời từ lớp mình”. Vì vậy đáp án “Only 20 replies, mostly from the student's own class” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Student: My survey about study habits got only 20 replies, and most of them are from my own class”. Vì vậy đáp án “Only 20 replies, mostly from the student's own class” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Khảo sát chỉ có 20 câu trả lời, hầu hết từ lớp của sinh viên, vì sinh viên nói khảo sát chỉ nhận 20 câu trả lời từ lớp mình",
     "whyU7": true
    },
@@ -58198,7 +58198,7 @@ var LP_EXPAND18_C = [
      "Because the topic is boring"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Kết quả có thể một chiều vì người trả lời khảo sát trực tuyến thường đã quan tâm đến chủ đề, theo gia sư”. Vì vậy đáp án “Because people who answer online surveys often already care about the topic” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “People who answer online surveys are often those who already care about the topic, so your results may be one-sided”. Vì vậy đáp án “Because people who answer online surveys often already care about the topic” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Kết quả có thể một chiều vì người trả lời khảo sát trực tuyến thường đã quan tâm đến chủ đề, theo gia sư",
     "whyU7": true
    },
@@ -58212,7 +58212,7 @@ var LP_EXPAND18_C = [
      "Make the survey longer"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Gợi ý đầu tiên là tiếp cận thêm sinh viên từ các khóa và môn khác nhau vì gia sư nói đầu tiên hãy tiếp cận thêm sinh viên khác khóa khác môn”. Vì vậy đáp án “Reach more students from different years and subjects” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Tutor: First, try to reach more students from different years and subjects”. Vì vậy đáp án “Reach more students from different years and subjects” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Gợi ý đầu tiên là tiếp cận thêm sinh viên từ các khóa và môn khác nhau vì gia sư nói đầu tiên hãy tiếp cận thêm sinh viên khác khóa khác môn",
     "whyU7": true
    },
@@ -58226,7 +58226,7 @@ var LP_EXPAND18_C = [
      "Under five questions"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Khảo sát nên dưới mười câu hỏi vì gia sư nói giữ khảo sát ngắn, dưới mười câu hỏi”. Vì vậy đáp án “Under ten questions” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Second, keep the survey short, under ten questions, so more people finish it”. Vì vậy đáp án “Under ten questions” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Khảo sát nên dưới mười câu hỏi vì gia sư nói giữ khảo sát ngắn, dưới mười câu hỏi",
     "whyU7": true
    },
@@ -58240,7 +58240,7 @@ var LP_EXPAND18_C = [
      "Nothing about the sample"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sinh viên nên nói rõ ai đã trả lời và ai không để người đọc đánh giá giới hạn, theo gia sư”. Vì vậy đáp án “Who answered and who did not, so readers can judge the limits” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Finally, say clearly in your report who answered and who did not, so readers can judge the limits of your results”. Vì vậy đáp án “Who answered and who did not, so readers can judge the limits” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sinh viên nên nói rõ ai đã trả lời và ai không để người đọc đánh giá giới hạn, theo gia sư",
     "whyU7": true
    }
@@ -58263,7 +58263,7 @@ var LP_EXPAND18_C = [
      "The topic was too hard"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lan nói chỉ hai người làm hầu hết việc, thành viên thứ ba hầu như không họp, theo bài nghe”. Vì vậy đáp án “Only two members did most of the work; the third hardly came to meetings” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In our group presentation, only two of us did most of the work. The third member hardly came to meetings”. Vì vậy đáp án “Only two members did most of the work; the third hardly came to meetings” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lan nói chỉ hai người làm hầu hết việc, thành viên thứ ba hầu như không họp, theo bài nghe",
     "whyU7": true
    },
@@ -58277,7 +58277,7 @@ var LP_EXPAND18_C = [
      "Make slides first"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Kế hoạch tới nên chia việc bằng văn bản, đặt hạn chót từng phần, và họp ngắn mỗi tuần, theo Minh”. Vì vậy đáp án “Divide work in writing, set a deadline for each part, and meet briefly every week” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “We need a clear plan next time: divide the work in writing, set a deadline for each part, and meet briefly every week to check progress”. Vì vậy đáp án “Divide work in writing, set a deadline for each part, and meet briefly every week” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Kế hoạch tới nên chia việc bằng văn bản, đặt hạn chót từng phần, và họp ngắn mỗi tuần, theo Minh",
     "whyU7": true
    },
@@ -58291,7 +58291,7 @@ var LP_EXPAND18_C = [
      "Do his work for him"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhóm nên nói trực tiếp với thành viên đó và giao một nhiệm vụ rõ ràng kèm hạn chót vì Minh nói hãy nói trực tiếp trước”. Vì vậy đáp án “Talk to him directly and give him one clear task with a deadline” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Minh: First, talk to the member directly and give him one clear task with a deadline”. Vì vậy đáp án “Talk to him directly and give him one clear task with a deadline” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhóm nên nói trực tiếp với thành viên đó và giao một nhiệm vụ rõ ràng kèm hạn chót vì Minh nói hãy nói trực tiếp trước",
     "whyU7": true
    },
@@ -58305,7 +58305,7 @@ var LP_EXPAND18_C = [
      "Change the topic"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nếu anh ấy vẫn không làm gì, hãy nói với giáo viên bằng sự thật, không phải lời phàn nàn, theo Minh”. Vì vậy đáp án “Tell the teacher with facts, not complaints” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “If he still does nothing, then tell the teacher with facts, not complaints”. Vì vậy đáp án “Tell the teacher with facts, not complaints” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nếu anh ấy vẫn không làm gì, hãy nói với giáo viên bằng sự thật, không phải lời phàn nàn, theo Minh",
     "whyU7": true
    },
@@ -58319,7 +58319,7 @@ var LP_EXPAND18_C = [
      "Quit the group"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ngày mai Lan sẽ nói chuyện với thành viên đó vì Lan nói ngày mai cô sẽ nói chuyện với anh ấy”. Vì vậy đáp án “Talk to the inactive member” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “I will talk to him tomorrow”. Vì vậy đáp án “Talk to the inactive member” đúng (Lan sẽ nói chuyện với bạn ấy vào ngày mai). Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ngày mai Lan sẽ nói chuyện với thành viên đó vì Lan nói ngày mai cô sẽ nói chuyện với anh ấy",
     "whyU7": true
    }
@@ -58342,7 +58342,7 @@ var LP_EXPAND18_C = [
      "It has no effect"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bài giảng nói ảnh hưởng của làm việc từ xa đến năng suất không đơn giản vì bài giảng nói ảnh hưởng không đơn giản”. Vì vậy đáp án “It is not simple” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Remote work has changed how many people work, but its effect on productivity is not simple”. Vì vậy đáp án “It is not simple” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bài giảng nói ảnh hưởng của làm việc từ xa đến năng suất không đơn giản vì bài giảng nói ảnh hưởng không đơn giản",
     "whyU7": true
    },
@@ -58356,7 +58356,7 @@ var LP_EXPAND18_C = [
      "Workers meet more people"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Lợi thế là tiết kiệm thời gian đi lại và tập trung tốt hơn không có tiếng ồn văn phòng, theo bài giảng”. Vì vậy đáp án “Workers save travel time and can focus better without office noise” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “On the one hand, workers save travel time and can focus better at home without office noise”. Vì vậy đáp án “Workers save travel time and can focus better without office noise” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Lợi thế là tiết kiệm thời gian đi lại và tập trung tốt hơn không có tiếng ồn văn phòng, theo bài giảng",
     "whyU7": true
    },
@@ -58370,7 +58370,7 @@ var LP_EXPAND18_C = [
      "Workers forget their tasks"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhược điểm là một số người cảm thấy cô đơn và quản lý khó hướng dẫn nhân viên mới từ xa, theo bài giảng”. Vì vậy đáp án “Some workers feel lonely, and managers find it harder to guide new staff from a distance” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “On the other hand, some workers feel lonely, and managers find it harder to guide new staff from a distance”. Vì vậy đáp án “Some workers feel lonely, and managers find it harder to guide new staff from a distance” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhược điểm là một số người cảm thấy cô đơn và quản lý khó hướng dẫn nhân viên mới từ xa, theo bài giảng",
     "whyU7": true
    },
@@ -58384,7 +58384,7 @@ var LP_EXPAND18_C = [
      "Tasks that need meetings"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sản lượng tăng với những việc cần tập trung yên tĩnh vì bài giảng nói sản lượng tăng với việc cần tập trung yên tĩnh”. Vì vậy đáp án “Tasks that need quiet focus” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Research shows mixed results: output rises for tasks that need quiet focus, but falls for tasks that need quick teamwork and new ideas”. Vì vậy đáp án “Tasks that need quiet focus” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sản lượng tăng với những việc cần tập trung yên tĩnh vì bài giảng nói sản lượng tăng với việc cần tập trung yên tĩnh",
     "whyU7": true
    },
@@ -58398,7 +58398,7 @@ var LP_EXPAND18_C = [
      "Working only at weekends"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhiều chuyên gia khuyên kết hợp: vài ngày ở nhà cho việc tập trung và vài ngày ở văn phòng cho làm việc nhóm và đào tạo, theo bài giảng”. Vì vậy đáp án “A mix: some days at home for focused work, and some days in the office for teamwork and training” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The best approach, many experts say, is a mix: some days at home for focused work, and some days in the office for teamwork and training”. Vì vậy đáp án “A mix: some days at home for focused work, and some days in the office for teamwork and training” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhiều chuyên gia khuyên kết hợp: vài ngày ở nhà cho việc tập trung và vài ngày ở văn phòng cho làm việc nhóm và đào tạo, theo bài giảng",
     "whyU7": true
    }
@@ -58421,7 +58421,7 @@ var LP_EXPAND18_C = [
      "From the air"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Hầu hết nhựa đại dương đến từ đất liền: rác từ đường phố và sông trôi ra biển, theo bài giảng”. Vì vậy đáp án “From land: rubbish washed from streets and rivers into the sea” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Most of it comes from land: rubbish washed from streets and rivers into the sea”. Vì vậy đáp án “From land: rubbish washed from streets and rivers into the sea” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Hầu hết nhựa đại dương đến từ đất liền: rác từ đường phố và sông trôi ra biển, theo bài giảng",
     "whyU7": true
    },
@@ -58435,7 +58435,7 @@ var LP_EXPAND18_C = [
      "It turns into sand"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhựa ở biển vỡ thành mảnh nhỏ hơn nhưng không biến mất vì bài giảng nói nhựa vỡ thành mảnh nhỏ nhưng không biến mất”. Vì vậy đáp án “It breaks into smaller pieces but does not disappear” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Once in the sea, plastic breaks into smaller and smaller pieces, but it does not disappear”. Vì vậy đáp án “It breaks into smaller pieces but does not disappear” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhựa ở biển vỡ thành mảnh nhỏ hơn nhưng không biến mất vì bài giảng nói nhựa vỡ thành mảnh nhỏ nhưng không biến mất",
     "whyU7": true
    },
@@ -58449,7 +58449,7 @@ var LP_EXPAND18_C = [
      "They clean the water"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Động vật biển có thể ăn nhầm mảnh nhựa, và mảnh nhựa mang hóa chất độc hại, theo bài giảng”. Vì vậy đáp án “Sea animals may eat them by mistake, and the pieces can carry harmful chemicals” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Sea animals may eat these pieces by mistake, and the pieces can also carry harmful chemicals”. Vì vậy đáp án “Sea animals may eat them by mistake, and the pieces can carry harmful chemicals” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Động vật biển có thể ăn nhầm mảnh nhựa, và mảnh nhựa mang hóa chất độc hại, theo bài giảng",
     "whyU7": true
    },
@@ -58463,7 +58463,7 @@ var LP_EXPAND18_C = [
      "Because animals eat the plastic"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Chỉ dọn đại dương không giải quyết được vì nhựa mới vẫn tiếp tục đến, theo bài giảng”. Vì vậy đáp án “Because new plastic keeps arriving” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Cleaning the oceans alone cannot solve the problem, because new plastic keeps arriving”. Vì vậy đáp án “Because new plastic keeps arriving” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Chỉ dọn đại dương không giải quyết được vì nhựa mới vẫn tiếp tục đến, theo bài giảng",
     "whyU7": true
    },
@@ -58477,7 +58477,7 @@ var LP_EXPAND18_C = [
      "Clean beaches every day only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bài giảng khuyên dùng ít nhựa dùng một lần, phân loại rác đúng cách, và thiết kế sản phẩm dùng lại hoặc tái chế dễ dàng, theo câu cuối”. Vì vậy đáp án “Use less single-use plastic, sort rubbish properly, and design reusable or easily recyclable products” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The real solution must start on land: use less single-use plastic, sort rubbish properly, and design products that can be used again or recycled easily”. Vì vậy đáp án “Use less single-use plastic, sort rubbish properly, and design reusable or easily recyclable products” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bài giảng khuyên dùng ít nhựa dùng một lần, phân loại rác đúng cách, và thiết kế sản phẩm dùng lại hoặc tái chế dễ dàng, theo câu cuối",
     "whyU7": true
    }
@@ -58500,7 +58500,7 @@ var LP_EXPAND18_C = [
      "It stops all routine work"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “AI đảm nhận nhiệm vụ lặp lại và tạo ra công việc mới vì bài giảng nói AI thay đổi công việc theo hai cách: đảm nhận việc lặp lại và tạo việc mới”. Vì vậy đáp án “It takes over routine tasks and creates new work” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “First, it takes over routine tasks, such as sorting data or answering simple questions, which can make some jobs disappear”. Vì vậy đáp án “It takes over routine tasks and creates new work” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "AI đảm nhận nhiệm vụ lặp lại và tạo ra công việc mới vì bài giảng nói AI thay đổi công việc theo hai cách: đảm nhận việc lặp lại và tạo việc mới",
     "whyU7": true
    },
@@ -58514,7 +58514,7 @@ var LP_EXPAND18_C = [
      "Making laws"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ví dụ nhiệm vụ lặp lại là sắp xếp dữ liệu hoặc trả lời câu hỏi đơn giản vì bài giảng nêu hai ví dụ đó”. Vì vậy đáp án “Sorting data or answering simple questions” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “First, it takes over routine tasks, such as sorting data or answering simple questions, which can make some jobs disappear”. Vì vậy đáp án “Sorting data or answering simple questions” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ví dụ nhiệm vụ lặp lại là sắp xếp dữ liệu hoặc trả lời câu hỏi đơn giản vì bài giảng nêu hai ví dụ đó",
     "whyU7": true
    },
@@ -58528,7 +58528,7 @@ var LP_EXPAND18_C = [
      "Driving cars only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ví dụ công việc mới là kiểm tra kết quả AI, đào tạo hệ thống AI, và thiết kế dịch vụ dùng AI an toàn, theo bài giảng”. Vì vậy đáp án “Checking AI results, training AI systems, and designing services that use AI safely” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Second, it creates new work, such as checking AI results, training AI systems, and designing services that use AI safely”. Vì vậy đáp án “Checking AI results, training AI systems, and designing services that use AI safely” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ví dụ công việc mới là kiểm tra kết quả AI, đào tạo hệ thống AI, và thiết kế dịch vụ dùng AI an toàn, theo bài giảng",
     "whyU7": true
    },
@@ -58542,7 +58542,7 @@ var LP_EXPAND18_C = [
      "Whether companies will save money"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Câu hỏi then chốt là người lao động có được đào tạo để chuyển từ nhiệm vụ cũ sang mới hay không, theo bài giảng”. Vì vậy đáp án “Whether workers will get training to move from old tasks to new ones” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The key question is not whether jobs will change, but whether workers will get the training to move from old tasks to new ones”. Vì vậy đáp án “Whether workers will get training to move from old tasks to new ones” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Câu hỏi then chốt là người lao động có được đào tạo để chuyển từ nhiệm vụ cũ sang mới hay không, theo bài giảng",
     "whyU7": true
    },
@@ -58556,7 +58556,7 @@ var LP_EXPAND18_C = [
      "Those that cut all training"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Các quốc gia và công ty đầu tư đào tạo lại sớm có khả năng thích ứng suôn sẻ hơn, theo bài giảng”. Vì vậy đáp án “Countries and companies that invest in retraining early” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Countries and companies that invest in retraining early are likely to adjust more smoothly than those that wait until jobs are already lost”. Vì vậy đáp án “Countries and companies that invest in retraining early” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Các quốc gia và công ty đầu tư đào tạo lại sớm có khả năng thích ứng suôn sẻ hơn, theo bài giảng",
     "whyU7": true
    }
@@ -58579,7 +58579,7 @@ var LP_EXPAND18_C = [
      "Bad weather only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ba áp lực thành phố là nhà ở chật chội, đi lại dài, và tiếng ồn liên tục vì bài giảng nêu ba áp lực đó”. Vì vậy đáp án “Crowded housing, long commutes, and constant noise” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Crowded housing, long commutes, and constant noise can raise stress, especially for people who rarely see green space”. Vì vậy đáp án “Crowded housing, long commutes, and constant noise” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ba áp lực thành phố là nhà ở chật chội, đi lại dài, và tiếng ồn liên tục vì bài giảng nêu ba áp lực đó",
     "whyU7": true
    },
@@ -58593,7 +58593,7 @@ var LP_EXPAND18_C = [
      "Old people only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Những người hiếm khi thấy không gian xanh đặc biệt chịu căng thẳng vì bài giảng nói căng thẳng tăng đặc biệt với người hiếm thấy không gian xanh”. Vì vậy đáp án “People who rarely see green space” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Crowded housing, long commutes, and constant noise can raise stress, especially for people who rarely see green space”. Vì vậy đáp án “People who rarely see green space” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Những người hiếm khi thấy không gian xanh đặc biệt chịu căng thẳng vì bài giảng nói căng thẳng tăng đặc biệt với người hiếm thấy không gian xanh",
     "whyU7": true
    },
@@ -58607,7 +58607,7 @@ var LP_EXPAND18_C = [
      "More cars"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thành phố mang lại tiếp cận chăm sóc sức khỏe, giáo dục và hỗ trợ xã hội tốt hơn vì bài giảng nêu ba lợi thế đó”. Vì vậy đáp án “Better access to health care, education, and social support” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Yet cities also offer strong advantages: better access to health care, education, and social support”. Vì vậy đáp án “Better access to health care, education, and social support” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thành phố mang lại tiếp cận chăm sóc sức khỏe, giáo dục và hỗ trợ xã hội tốt hơn vì bài giảng nêu ba lợi thế đó",
     "whyU7": true
    },
@@ -58621,7 +58621,7 @@ var LP_EXPAND18_C = [
      "Having no traffic at all"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Thành phố khỏe mạnh nhất cân bằng mật độ với thiên nhiên: công viên gần, đường an toàn, khu phố mọi người biết nhau, theo nghiên cứu trong bài giảng”. Vì vậy đáp án “Balancing density with nature: parks within walking distance, safe streets, and neighbourhoods where people know each other” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Research suggests the healthiest cities are not the quietest ones, but those that balance density with nature: parks within walking distance, safe streets for walking, and neighbourhoods where people know each other”. Vì vậy đáp án “Balancing density with nature: parks within walking distance, safe streets, and neighbourhoods where people know each other” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Thành phố khỏe mạnh nhất cân bằng mật độ với thiên nhiên: công viên gần, đường an toàn, khu phố mọi người biết nhau, theo nghiên cứu trong bài giảng",
     "whyU7": true
    },
@@ -58635,7 +58635,7 @@ var LP_EXPAND18_C = [
      "Only parks"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Quy hoạch đô thị không chỉ về tòa nhà mà về đời sống hằng ngày và hạnh phúc, theo câu cuối bài giảng”. Vì vậy đáp án “Not only buildings, but daily life and well-being” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Urban design, in this view, is not only about buildings, but about daily life and well-being”. Vì vậy đáp án “Not only buildings, but daily life and well-being” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Quy hoạch đô thị không chỉ về tòa nhà mà về đời sống hằng ngày và hạnh phúc, theo câu cuối bài giảng",
     "whyU7": true
    }
@@ -58658,7 +58658,7 @@ var LP_EXPAND18_C = [
      "A luxury"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Giáo dục thường được mô tả là công cụ san bằng vĩ đại vì bài giảng nói giáo dục thường được mô tả như vậy”. Vì vậy đáp án “The great equaliser” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Education is often described as the great equaliser, but in practice it can also widen gaps”. Vì vậy đáp án “The great equaliser” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Giáo dục thường được mô tả là công cụ san bằng vĩ đại vì bài giảng nói giáo dục thường được mô tả như vậy",
     "whyU7": true
    },
@@ -58672,7 +58672,7 @@ var LP_EXPAND18_C = [
      "Better teachers only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Trẻ em gia đình khá giả thường được học thêm, sách và không gian học yên tĩnh vì bài giảng nêu ba lợi thế đó”. Vì vậy đáp án “Extra tutoring, books, and quiet study space” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Children from wealthier families often get extra tutoring, books, and quiet study space, while children from poorer families may work part-time and study in crowded homes”. Vì vậy đáp án “Extra tutoring, books, and quiet study space” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Trẻ em gia đình khá giả thường được học thêm, sách và không gian học yên tĩnh vì bài giảng nêu ba lợi thế đó",
     "whyU7": true
    },
@@ -58686,7 +58686,7 @@ var LP_EXPAND18_C = [
      "No books at school"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Trẻ em gia đình nghèo hơn có thể làm thêm và học trong nhà chật chội vì bài giảng nói trẻ nghèo hơn làm thêm và học trong nhà chật”. Vì vậy đáp án “Working part-time and studying in crowded homes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Children from wealthier families often get extra tutoring, books, and quiet study space, while children from poorer families may work part-time and study in crowded homes”. Vì vậy đáp án “Working part-time and studying in crowded homes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Trẻ em gia đình nghèo hơn có thể làm thêm và học trong nhà chật chội vì bài giảng nói trẻ nghèo hơn làm thêm và học trong nhà chật",
     "whyU7": true
    },
@@ -58700,7 +58700,7 @@ var LP_EXPAND18_C = [
      "New buildings only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ba biện pháp giúp ích là giúp thêm học sinh khó khăn, bữa ăn miễn phí, và không gian học an toàn sau giờ học, theo bài giảng”. Vì vậy đáp án “Extra help for struggling students, free meals, and safe study spaces after school” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Extra help for struggling students, free meals, and safe study spaces after school have all been shown to help”. Vì vậy đáp án “Extra help for struggling students, free meals, and safe study spaces after school” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ba biện pháp giúp ích là giúp thêm học sinh khó khăn, bữa ăn miễn phí, và không gian học an toàn sau giờ học, theo bài giảng",
     "whyU7": true
    },
@@ -58714,7 +58714,7 @@ var LP_EXPAND18_C = [
      "Closing all private schools"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Giáo dục bình đẳng có nghĩa là hỗ trợ nhiều hơn cho người bắt đầu với ít hơn, không phải đối xử giống hệt nhau, theo câu cuối bài giảng”. Vì vậy đáp án “Giving more support to those who start with less, not identical treatment” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Equal education, therefore, does not mean identical treatment: it means giving more support to those who start with less”. Vì vậy đáp án “Giving more support to those who start with less, not identical treatment” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Giáo dục bình đẳng có nghĩa là hỗ trợ nhiều hơn cho người bắt đầu với ít hơn, không phải đối xử giống hệt nhau, theo câu cuối bài giảng",
     "whyU7": true
    }
@@ -58737,7 +58737,7 @@ var LP_EXPAND18_C = [
      "They stop all rain"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhiệt độ cao hơn có thể rút ngắn mùa sinh trưởng của một số cây trồng vì bài giảng nói nhiệt độ cao rút ngắn mùa sinh trưởng”. Vì vậy đáp án “They can shorten the growing season for some crops” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Higher temperatures can shorten the growing season for some crops, while heavier rain can wash away soil and damage young plants”. Vì vậy đáp án “They can shorten the growing season for some crops” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhiệt độ cao hơn có thể rút ngắn mùa sinh trưởng của một số cây trồng vì bài giảng nói nhiệt độ cao rút ngắn mùa sinh trưởng",
     "whyU7": true
    },
@@ -58751,7 +58751,7 @@ var LP_EXPAND18_C = [
      "It cools the soil only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Mưa lớn hơn có thể cuốn trôi đất và làm hỏng cây non vì bài giảng nói mưa lớn cuốn trôi đất và làm hỏng cây non”. Vì vậy đáp án “It can wash away soil and damage young plants” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Higher temperatures can shorten the growing season for some crops, while heavier rain can wash away soil and damage young plants”. Vì vậy đáp án “It can wash away soil and damage young plants” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Mưa lớn hơn có thể cuốn trôi đất và làm hỏng cây non vì bài giảng nói mưa lớn cuốn trôi đất và làm hỏng cây non",
     "whyU7": true
    },
@@ -58765,7 +58765,7 @@ var LP_EXPAND18_C = [
      "Using more chemicals only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nông dân trồng giống chịu nóng và hạn, tích trữ nước mưa, và thay đổi ngày gieo trồng, theo bài giảng”. Vì vậy đáp án “Planting heat- and drought-resistant crops, saving rainwater, and changing planting dates” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Farmers are responding in several ways: planting kinds of crops that resist heat and drought, saving rainwater for dry months, and changing planting dates to match new weather patterns”. Vì vậy đáp án “Planting heat- and drought-resistant crops, saving rainwater, and changing planting dates” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nông dân trồng giống chịu nóng và hạn, tích trữ nước mưa, và thay đổi ngày gieo trồng, theo bài giảng",
     "whyU7": true
    },
@@ -58779,7 +58779,7 @@ var LP_EXPAND18_C = [
      "They have no crops"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nông dân nhỏ thường thiếu tiền và thông tin để tự thay đổi vì bài giảng nói nông dân nhỏ thiếu tiền và thông tin”. Vì vậy đáp án “They lack money and information to make changes alone” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “However, small farmers often lack money and information to make these changes alone”. Vì vậy đáp án “They lack money and information to make changes alone” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nông dân nhỏ thường thiếu tiền và thông tin để tự thay đổi vì bài giảng nói nông dân nhỏ thiếu tiền và thông tin",
     "whyU7": true
    },
@@ -58793,7 +58793,7 @@ var LP_EXPAND18_C = [
      "More rain"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Dự báo thời tiết rẻ và khoản vay nhỏ có thể quyết định gia đình nông dân thích ứng hay tụt lại, theo bài giảng”. Vì vậy đáp án “Cheap weather forecasts and small loans from governments and researchers” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Support from governments and researchers, such as cheap weather forecasts and small loans, can decide whether a farming family adapts or falls behind”. Vì vậy đáp án “Cheap weather forecasts and small loans from governments and researchers” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Dự báo thời tiết rẻ và khoản vay nhỏ có thể quyết định gia đình nông dân thích ứng hay tụt lại, theo bài giảng",
     "whyU7": true
    }
@@ -58816,7 +58816,7 @@ var LP_EXPAND18_C = [
      "That travel will stop"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Nhiều người lo văn hóa địa phương sẽ biến mất vì bài giảng nói nhiều người lo văn hóa địa phương biến mất”. Vì vậy đáp án “That local cultures will disappear” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “Globalisation spreads films, food, and fashion around the world, and many people worry that local cultures will disappear”. Vì vậy đáp án “That local cultures will disappear” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Nhiều người lo văn hóa địa phương sẽ biến mất vì bài giảng nói nhiều người lo văn hóa địa phương biến mất",
     "whyU7": true
    },
@@ -58830,7 +58830,7 @@ var LP_EXPAND18_C = [
      "They are banned everywhere"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Bằng chứng cho thấy sản phẩm toàn cầu thường được điều chỉnh theo khẩu vị địa phương vì bài giảng nói sản phẩm toàn cầu được điều chỉnh theo khẩu vị địa phương”. Vì vậy đáp án “They are often adapted to local tastes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In many places, global products are adapted to local tastes: fast-food menus change, films are remade with local stories, and festivals gain new forms without losing their core meaning”. Vì vậy đáp án “They are often adapted to local tastes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Bằng chứng cho thấy sản phẩm toàn cầu thường được điều chỉnh theo khẩu vị địa phương vì bài giảng nói sản phẩm toàn cầu được điều chỉnh theo khẩu vị địa phương",
     "whyU7": true
    },
@@ -58844,7 +58844,7 @@ var LP_EXPAND18_C = [
      "All food becomes the same"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ví dụ điều chỉnh địa phương là thực đơn thức ăn nhanh thay đổi, phim làm lại với chuyện địa phương, lễ hội có hình thức mới, theo bài giảng”. Vì vậy đáp án “Fast-food menus change, films are remade with local stories, and festivals gain new forms” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “In many places, global products are adapted to local tastes: fast-food menus change, films are remade with local stories, and festivals gain new forms without losing their core meaning”. Vì vậy đáp án “Fast-food menus change, films are remade with local stories, and festivals gain new forms” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ví dụ điều chỉnh địa phương là thực đơn thức ăn nhanh thay đổi, phim làm lại với chuyện địa phương, lễ hội có hình thức mới, theo bài giảng",
     "whyU7": true
    },
@@ -58858,7 +58858,7 @@ var LP_EXPAND18_C = [
      "Fast food only"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Ngôn ngữ nhỏ và nghề thủ công thực sự chịu áp lực, đặc biệt khi người trẻ chuyển đến thành phố lớn, theo bài giảng”. Vì vậy đáp án “Small languages and crafts, especially when young people move to big cities” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “At the same time, small languages and crafts do face real pressure, especially when young people move to big cities”. Vì vậy đáp án “Small languages and crafts, especially when young people move to big cities” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Ngôn ngữ nhỏ và nghề thủ công thực sự chịu áp lực, đặc biệt khi người trẻ chuyển đến thành phố lớn, theo bài giảng",
     "whyU7": true
    },
@@ -58872,7 +58872,7 @@ var LP_EXPAND18_C = [
      "Moving to small villages"
     ],
     "a": 0,
-    "why": "Ví dụ: trong đoạn nghe có câu “Sự bảo vệ mạnh nhất là sử dụng tích cực hằng ngày, không phải tách biệt, theo câu cuối bài giảng”. Vì vậy đáp án “Active daily use: speaking, cooking, singing, and celebrating in one's own way, not isolation” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
+    "why": "Ví dụ: trong đoạn nghe có câu “The strongest protection for a culture, researchers argue, is not isolation, but active use: when people speak, cook, sing, and celebrate in their own way every day, a culture stays alive even in a connected world”. Vì vậy đáp án “Active daily use: speaking, cooking, singing, and celebrating in one's own way, not isolation” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.",
     "whyOrig": "Sự bảo vệ mạnh nhất là sử dụng tích cực hằng ngày, không phải tách biệt, theo câu cuối bài giảng",
     "whyU7": true
    }
@@ -61697,11 +61697,11 @@ var READING_EXPAND19 = [
  "topic": "Bản thân và gia đình",
  "text": "Hello! This is my family. My father is a teacher. My mother is a nurse.\n\nI have one sister. Her name is Mai. She is ten years old. We play together every day.\n\nWe are a happy family. We eat dinner together at home.",
  "questions": [
-  {"type": "MC", "q": "How many sisters does the child have?", "options": ["One", "Two", "Three"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bạn nhỏ có một chị gái tên Mai. Vì vậy đáp án đúng là một”. Vì vậy đáp án “One” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ có một chị gái tên Mai. Vì vậy đáp án đúng là một", "whyU7": true},
-  {"type": "MC", "q": "What is the sister's name?", "options": ["Mai", "Hoa", "Lan"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, chị gái của bạn nhỏ tên là Mai. Vì vậy đáp án đúng là Mai”. Vì vậy đáp án “Mai” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, chị gái của bạn nhỏ tên là Mai. Vì vậy đáp án đúng là Mai", "whyU7": true},
-  {"type": "MC", "q": "How old is Mai?", "options": ["Ten", "Eight", "Twelve"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, Mai mười tuổi. Vì vậy đáp án đúng là mười”. Vì vậy đáp án “Ten” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Mai mười tuổi. Vì vậy đáp án đúng là mười", "whyU7": true},
-  {"type": "MC", "q": "What does the father do?", "options": ["A teacher", "A doctor", "A driver"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bố của bạn nhỏ là giáo viên. Vì vậy đáp án đúng là giáo viên”. Vì vậy đáp án “A teacher” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bố của bạn nhỏ là giáo viên. Vì vậy đáp án đúng là giáo viên", "whyU7": true},
-  {"type": "MC", "q": "When do the children play together?", "options": ["Every day", "On Sunday", "In the morning"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, hai chị em chơi cùng nhau mỗi ngày. Vì vậy đáp án đúng là mỗi ngày”. Vì vậy đáp án “Every day” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hai chị em chơi cùng nhau mỗi ngày. Vì vậy đáp án đúng là mỗi ngày", "whyU7": true}
+  {"type": "MC", "q": "How many sisters does the child have?", "options": ["One", "Two", "Three"], "a": 0, "why": "Ví dụ: trong bài có câu “I have one sister”. Vì vậy đáp án “One” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ có một chị gái tên Mai. Vì vậy đáp án đúng là một", "whyU7": true},
+  {"type": "MC", "q": "What is the sister's name?", "options": ["Mai", "Hoa", "Lan"], "a": 0, "why": "Ví dụ: trong bài có câu “Her name is Mai”. Vì vậy đáp án “Mai” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, chị gái của bạn nhỏ tên là Mai. Vì vậy đáp án đúng là Mai", "whyU7": true},
+  {"type": "MC", "q": "How old is Mai?", "options": ["Ten", "Eight", "Twelve"], "a": 0, "why": "Ví dụ: trong bài có câu “She is ten years old”. Vì vậy đáp án “Ten” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Mai mười tuổi. Vì vậy đáp án đúng là mười", "whyU7": true},
+  {"type": "MC", "q": "What does the father do?", "options": ["A teacher", "A doctor", "A driver"], "a": 0, "why": "Ví dụ: trong bài có câu “My father is a teacher”. Vì vậy đáp án “A teacher” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bố của bạn nhỏ là giáo viên. Vì vậy đáp án đúng là giáo viên", "whyU7": true},
+  {"type": "MC", "q": "When do the children play together?", "options": ["Every day", "On Sunday", "In the morning"], "a": 0, "why": "Ví dụ: trong bài có câu “We play together every day”. Vì vậy đáp án “Every day” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hai chị em chơi cùng nhau mỗi ngày. Vì vậy đáp án đúng là mỗi ngày", "whyU7": true}
  ],
  "translation": "Xin chào! Đây là gia đình của tôi. Bố tôi là giáo viên. Mẹ tôi là y tá.\n\nTôi có một chị gái. Chị ấy tên là Mai. Chị ấy mười tuổi. Chúng tôi chơi cùng nhau mỗi ngày.\n\nChúng tôi là một gia đình vui vẻ. Chúng tôi ăn tối cùng nhau ở nhà.",
  "phrases": [{"en": "my family", "vi": "gia đình của tôi"}, {"en": "every day", "vi": "mỗi ngày"}, {"en": "play together", "vi": "chơi cùng nhau"}, {"en": "happy family", "vi": "gia đình vui vẻ"}]
@@ -61712,11 +61712,11 @@ var READING_EXPAND19 = [
  "topic": "Động vật và thú cưng",
  "text": "This is my cat. His name is Tom. He is white and small.\n\nTom likes fish. He drinks milk every morning. He sleeps on my bed.\n\nI like Tom very much. He is my good friend.",
  "questions": [
-  {"type": "MC", "q": "What is the cat's name?", "options": ["Tom", "Jerry", "Max"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, con mèo tên là Tom. Vì vậy đáp án đúng là Tom”. Vì vậy đáp án “Tom” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, con mèo tên là Tom. Vì vậy đáp án đúng là Tom", "whyU7": true},
-  {"type": "MC", "q": "What colour is Tom?", "options": ["White", "Black", "Brown"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, Tom có màu trắng. Vì vậy đáp án đúng là trắng”. Vì vậy đáp án “White” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Tom có màu trắng. Vì vậy đáp án đúng là trắng", "whyU7": true},
-  {"type": "MC", "q": "What does Tom like to eat?", "options": ["Fish", "Rice", "Bread"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, Tom thích ăn cá. Vì vậy đáp án đúng là cá”. Vì vậy đáp án “Fish” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Tom thích ăn cá. Vì vậy đáp án đúng là cá", "whyU7": true},
-  {"type": "MC", "q": "What does Tom drink every morning?", "options": ["Milk", "Water", "Juice"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, Tom uống sữa mỗi buổi sáng. Vì vậy đáp án đúng là sữa”. Vì vậy đáp án “Milk” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Tom uống sữa mỗi buổi sáng. Vì vậy đáp án đúng là sữa", "whyU7": true},
-  {"type": "MC", "q": "Where does Tom sleep?", "options": ["On my bed", "In the garden", "On a chair"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, Tom ngủ trên giường của bạn nhỏ. Vì vậy đáp án đúng là trên giường”. Vì vậy đáp án “On my bed” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Tom ngủ trên giường của bạn nhỏ. Vì vậy đáp án đúng là trên giường", "whyU7": true}
+  {"type": "MC", "q": "What is the cat's name?", "options": ["Tom", "Jerry", "Max"], "a": 0, "why": "Ví dụ: trong bài có câu “His name is Tom”. Vì vậy đáp án “Tom” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, con mèo tên là Tom. Vì vậy đáp án đúng là Tom", "whyU7": true},
+  {"type": "MC", "q": "What colour is Tom?", "options": ["White", "Black", "Brown"], "a": 0, "why": "Ví dụ: trong bài có câu “He is white and small”. Vì vậy đáp án “White” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Tom có màu trắng. Vì vậy đáp án đúng là trắng", "whyU7": true},
+  {"type": "MC", "q": "What does Tom like to eat?", "options": ["Fish", "Rice", "Bread"], "a": 0, "why": "Ví dụ: trong bài có câu “Tom likes fish”. Vì vậy đáp án “Fish” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Tom thích ăn cá. Vì vậy đáp án đúng là cá", "whyU7": true},
+  {"type": "MC", "q": "What does Tom drink every morning?", "options": ["Milk", "Water", "Juice"], "a": 0, "why": "Ví dụ: trong bài có câu “He drinks milk every morning”. Vì vậy đáp án “Milk” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Tom uống sữa mỗi buổi sáng. Vì vậy đáp án đúng là sữa", "whyU7": true},
+  {"type": "MC", "q": "Where does Tom sleep?", "options": ["On my bed", "In the garden", "On a chair"], "a": 0, "why": "Ví dụ: trong bài có câu “He sleeps on my bed”. Vì vậy đáp án “On my bed” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Tom ngủ trên giường của bạn nhỏ. Vì vậy đáp án đúng là trên giường", "whyU7": true}
  ],
  "translation": "Đây là con mèo của tôi. Nó tên là Tom. Nó màu trắng và nhỏ.\n\nTom thích ăn cá. Nó uống sữa mỗi buổi sáng. Nó ngủ trên giường của tôi.\n\nTôi rất thích Tom. Nó là bạn tốt của tôi.",
  "phrases": [{"en": "my cat", "vi": "con mèo của tôi"}, {"en": "likes fish", "vi": "thích ăn cá"}, {"en": "every morning", "vi": "mỗi buổi sáng"}, {"en": "good friend", "vi": "bạn tốt"}]
@@ -61727,11 +61727,11 @@ var READING_EXPAND19 = [
  "topic": "Thức ăn và đồ uống",
  "text": "It is lunch time. I open my lunch box. I have rice, one egg and one apple.\n\nMy friend Minh has bread and milk. We eat together at school.\n\nI like my lunch. The apple is red and sweet.",
  "questions": [
-  {"type": "MC", "q": "When does the child open the lunch box?", "options": ["At lunch time", "In the morning", "In the evening"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bạn nhỏ mở hộp cơm vào giờ ăn trưa. Vì vậy đáp án đúng là giờ ăn trưa”. Vì vậy đáp án “At lunch time” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ mở hộp cơm vào giờ ăn trưa. Vì vậy đáp án đúng là giờ ăn trưa", "whyU7": true},
-  {"type": "MC", "q": "What is in the child's lunch box?", "options": ["Rice, one egg and one apple", "Bread and milk", "Noodles and cake"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, hộp cơm của bạn nhỏ có cơm, một quả trứng và một quả táo. Vì vậy đáp án đúng là cơm, trứng và táo”. Vì vậy đáp án “Rice, one egg and one apple” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hộp cơm của bạn nhỏ có cơm, một quả trứng và một quả táo. Vì vậy đáp án đúng là cơm, trứng và táo", "whyU7": true},
-  {"type": "MC", "q": "What does Minh have?", "options": ["Bread and milk", "Rice and egg", "Apple and cake"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, Minh có bánh mì và sữa. Vì vậy đáp án đúng là bánh mì và sữa”. Vì vậy đáp án “Bread and milk” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Minh có bánh mì và sữa. Vì vậy đáp án đúng là bánh mì và sữa", "whyU7": true},
-  {"type": "MC", "q": "What colour is the apple?", "options": ["Red", "Green", "Yellow"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, quả táo màu đỏ. Vì vậy đáp án đúng là đỏ”. Vì vậy đáp án “Red” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, quả táo màu đỏ. Vì vậy đáp án đúng là đỏ", "whyU7": true},
-  {"type": "MC", "q": "Where do the children eat?", "options": ["At school", "At home", "In the park"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, hai bạn ăn cùng nhau ở trường. Vì vậy đáp án đúng là ở trường”. Vì vậy đáp án “At school” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hai bạn ăn cùng nhau ở trường. Vì vậy đáp án đúng là ở trường", "whyU7": true}
+  {"type": "MC", "q": "When does the child open the lunch box?", "options": ["At lunch time", "In the morning", "In the evening"], "a": 0, "why": "Ví dụ: trong bài có câu “It is lunch time”. Vì vậy đáp án “At lunch time” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ mở hộp cơm vào giờ ăn trưa. Vì vậy đáp án đúng là giờ ăn trưa", "whyU7": true},
+  {"type": "MC", "q": "What is in the child's lunch box?", "options": ["Rice, one egg and one apple", "Bread and milk", "Noodles and cake"], "a": 0, "why": "Ví dụ: trong bài có câu “I have rice, one egg and one apple”. Vì vậy đáp án “Rice, one egg and one apple” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hộp cơm của bạn nhỏ có cơm, một quả trứng và một quả táo. Vì vậy đáp án đúng là cơm, trứng và táo", "whyU7": true},
+  {"type": "MC", "q": "What does Minh have?", "options": ["Bread and milk", "Rice and egg", "Apple and cake"], "a": 0, "why": "Ví dụ: trong bài có câu “My friend Minh has bread and milk”. Vì vậy đáp án “Bread and milk” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, Minh có bánh mì và sữa. Vì vậy đáp án đúng là bánh mì và sữa", "whyU7": true},
+  {"type": "MC", "q": "What colour is the apple?", "options": ["Red", "Green", "Yellow"], "a": 0, "why": "Ví dụ: trong bài có câu “The apple is red and sweet”. Vì vậy đáp án “Red” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, quả táo màu đỏ. Vì vậy đáp án đúng là đỏ", "whyU7": true},
+  {"type": "MC", "q": "Where do the children eat?", "options": ["At school", "At home", "In the park"], "a": 0, "why": "Ví dụ: trong bài có câu “We eat together at school”. Vì vậy đáp án “At school” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hai bạn ăn cùng nhau ở trường. Vì vậy đáp án đúng là ở trường", "whyU7": true}
  ],
  "translation": "Đã đến giờ ăn trưa. Tôi mở hộp cơm của mình. Tôi có cơm, một quả trứng và một quả táo.\n\nBạn Minh của tôi có bánh mì và sữa. Chúng tôi ăn cùng nhau ở trường.\n\nTôi thích bữa trưa của mình. Quả táo màu đỏ và ngọt.",
  "phrases": [{"en": "lunch time", "vi": "giờ ăn trưa"}, {"en": "lunch box", "vi": "hộp cơm"}, {"en": "eat together", "vi": "ăn cùng nhau"}, {"en": "red and sweet", "vi": "đỏ và ngọt"}]
@@ -61742,11 +61742,11 @@ var READING_EXPAND19 = [
  "topic": "Nhà ở và nơi sống",
  "text": "This is my house. It is big and clean.\n\nThere are three rooms. My room is small. My bed is blue. My desk is near the window.\n\nI like my house. I read books in my room every day.",
  "questions": [
-  {"type": "MC", "q": "How is the house?", "options": ["Big and clean", "Small and old", "Big and dirty"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, ngôi nhà được tả là to và sạch. Vì vậy đáp án đúng là to và sạch”. Vì vậy đáp án “Big and clean” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, ngôi nhà được tả là to và sạch. Vì vậy đáp án đúng là to và sạch", "whyU7": true},
-  {"type": "MC", "q": "How many rooms are there in the house?", "options": ["Three", "Two", "Four"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, ngôi nhà có ba phòng. Vì vậy đáp án đúng là ba”. Vì vậy đáp án “Three” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, ngôi nhà có ba phòng. Vì vậy đáp án đúng là ba", "whyU7": true},
-  {"type": "MC", "q": "What colour is the bed?", "options": ["Blue", "Red", "Green"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, chiếc giường màu xanh dương. Vì vậy đáp án đúng là xanh dương”. Vì vậy đáp án “Blue” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, chiếc giường màu xanh dương. Vì vậy đáp án đúng là xanh dương", "whyU7": true},
-  {"type": "MC", "q": "Where is the desk?", "options": ["Near the window", "Near the door", "In the garden"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, chiếc bàn học ở gần cửa sổ. Vì vậy đáp án đúng là gần cửa sổ”. Vì vậy đáp án “Near the window” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, chiếc bàn học ở gần cửa sổ. Vì vậy đáp án đúng là gần cửa sổ", "whyU7": true},
-  {"type": "MC", "q": "What does the child do in the room every day?", "options": ["Reads books", "Watches TV", "Plays games"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bạn nhỏ đọc sách trong phòng mỗi ngày. Vì vậy đáp án đúng là đọc sách”. Vì vậy đáp án “Reads books” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ đọc sách trong phòng mỗi ngày. Vì vậy đáp án đúng là đọc sách", "whyU7": true}
+  {"type": "MC", "q": "How is the house?", "options": ["Big and clean", "Small and old", "Big and dirty"], "a": 0, "why": "Ví dụ: trong bài có câu “It is big and clean”. Vì vậy đáp án “Big and clean” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, ngôi nhà được tả là to và sạch. Vì vậy đáp án đúng là to và sạch", "whyU7": true},
+  {"type": "MC", "q": "How many rooms are there in the house?", "options": ["Three", "Two", "Four"], "a": 0, "why": "Ví dụ: trong bài có câu “There are three rooms”. Vì vậy đáp án “Three” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, ngôi nhà có ba phòng. Vì vậy đáp án đúng là ba", "whyU7": true},
+  {"type": "MC", "q": "What colour is the bed?", "options": ["Blue", "Red", "Green"], "a": 0, "why": "Ví dụ: trong bài có câu “My bed is blue”. Vì vậy đáp án “Blue” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, chiếc giường màu xanh dương. Vì vậy đáp án đúng là xanh dương", "whyU7": true},
+  {"type": "MC", "q": "Where is the desk?", "options": ["Near the window", "Near the door", "In the garden"], "a": 0, "why": "Ví dụ: trong bài có câu “My desk is near the window”. Vì vậy đáp án “Near the window” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, chiếc bàn học ở gần cửa sổ. Vì vậy đáp án đúng là gần cửa sổ", "whyU7": true},
+  {"type": "MC", "q": "What does the child do in the room every day?", "options": ["Reads books", "Watches TV", "Plays games"], "a": 0, "why": "Ví dụ: trong bài có câu “I read books in my room every day”. Vì vậy đáp án “Reads books” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ đọc sách trong phòng mỗi ngày. Vì vậy đáp án đúng là đọc sách", "whyU7": true}
  ],
  "translation": "Đây là ngôi nhà của tôi. Nó to và sạch.\n\nNgôi nhà có ba phòng. Phòng của tôi nhỏ. Giường của tôi màu xanh dương. Bàn học của tôi ở gần cửa sổ.\n\nTôi thích ngôi nhà của mình. Tôi đọc sách trong phòng mỗi ngày.",
  "phrases": [{"en": "my house", "vi": "ngôi nhà của tôi"}, {"en": "near the window", "vi": "gần cửa sổ"}, {"en": "every day", "vi": "mỗi ngày"}, {"en": "read books", "vi": "đọc sách"}]
@@ -61757,11 +61757,11 @@ var READING_EXPAND19 = [
  "topic": "Giải trí và cuối tuần",
  "text": "It is Sunday. I go to the park with my mother.\n\nWe see many trees and flowers. The flowers are yellow and pink. We sit on a bench.\n\nI play with a ball. We are happy at the park.",
  "questions": [
-  {"type": "MC", "q": "Which day is it?", "options": ["Sunday", "Saturday", "Monday"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, hôm đó là Chủ nhật. Vì vậy đáp án đúng là Chủ nhật”. Vì vậy đáp án “Sunday” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hôm đó là Chủ nhật. Vì vậy đáp án đúng là Chủ nhật", "whyU7": true},
-  {"type": "MC", "q": "Who does the child go to the park with?", "options": ["My mother", "My father", "My friend"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bạn nhỏ đi công viên cùng mẹ. Vì vậy đáp án đúng là mẹ”. Vì vậy đáp án “My mother” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ đi công viên cùng mẹ. Vì vậy đáp án đúng là mẹ", "whyU7": true},
-  {"type": "MC", "q": "What colours are the flowers?", "options": ["Yellow and pink", "Red and blue", "White and black"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, hoa có màu vàng và hồng. Vì vậy đáp án đúng là vàng và hồng”. Vì vậy đáp án “Yellow and pink” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hoa có màu vàng và hồng. Vì vậy đáp án đúng là vàng và hồng", "whyU7": true},
-  {"type": "MC", "q": "Where do they sit?", "options": ["On a bench", "On the grass", "In a car"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, hai mẹ con ngồi trên ghế dài. Vì vậy đáp án đúng là trên ghế dài”. Vì vậy đáp án “On a bench” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hai mẹ con ngồi trên ghế dài. Vì vậy đáp án đúng là trên ghế dài", "whyU7": true},
-  {"type": "MC", "q": "What does the child play with?", "options": ["A ball", "A kite", "A rope"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bạn nhỏ chơi với một quả bóng. Vì vậy đáp án đúng là bóng”. Vì vậy đáp án “A ball” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ chơi với một quả bóng. Vì vậy đáp án đúng là bóng", "whyU7": true}
+  {"type": "MC", "q": "Which day is it?", "options": ["Sunday", "Saturday", "Monday"], "a": 0, "why": "Ví dụ: trong bài có câu “It is Sunday”. Vì vậy đáp án “Sunday” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hôm đó là Chủ nhật. Vì vậy đáp án đúng là Chủ nhật", "whyU7": true},
+  {"type": "MC", "q": "Who does the child go to the park with?", "options": ["My mother", "My father", "My friend"], "a": 0, "why": "Ví dụ: trong bài có câu “I go to the park with my mother”. Vì vậy đáp án “My mother” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ đi công viên cùng mẹ. Vì vậy đáp án đúng là mẹ", "whyU7": true},
+  {"type": "MC", "q": "What colours are the flowers?", "options": ["Yellow and pink", "Red and blue", "White and black"], "a": 0, "why": "Ví dụ: trong bài có câu “The flowers are yellow and pink”. Vì vậy đáp án “Yellow and pink” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hoa có màu vàng và hồng. Vì vậy đáp án đúng là vàng và hồng", "whyU7": true},
+  {"type": "MC", "q": "Where do they sit?", "options": ["On a bench", "On the grass", "In a car"], "a": 0, "why": "Ví dụ: trong bài có câu “We sit on a bench”. Vì vậy đáp án “On a bench” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hai mẹ con ngồi trên ghế dài. Vì vậy đáp án đúng là trên ghế dài", "whyU7": true},
+  {"type": "MC", "q": "What does the child play with?", "options": ["A ball", "A kite", "A rope"], "a": 0, "why": "Ví dụ: trong bài có câu “I play with a ball”. Vì vậy đáp án “A ball” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ chơi với một quả bóng. Vì vậy đáp án đúng là bóng", "whyU7": true}
  ],
  "translation": "Hôm nay là Chủ nhật. Tôi đi công viên cùng mẹ.\n\nChúng tôi thấy nhiều cây và hoa. Hoa có màu vàng và hồng. Chúng tôi ngồi trên ghế dài.\n\nTôi chơi với một quả bóng. Chúng tôi vui vẻ ở công viên.",
  "phrases": [{"en": "go to the park", "vi": "đi công viên"}, {"en": "sit on a bench", "vi": "ngồi trên ghế dài"}, {"en": "play with a ball", "vi": "chơi với một quả bóng"}, {"en": "happy", "vi": "vui vẻ"}]
@@ -61772,11 +61772,11 @@ var READING_EXPAND19 = [
  "topic": "Bản thân và gia đình",
  "text": "This is my best friend. His name is An. He is nine years old.\n\nAn likes football. He plays football after school. I watch him play.\n\nWe go home together. We are good friends.",
  "questions": [
-  {"type": "MC", "q": "What is the friend's name?", "options": ["An", "Binh", "Tuan"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, người bạn thân tên là An. Vì vậy đáp án đúng là An”. Vì vậy đáp án “An” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, người bạn thân tên là An. Vì vậy đáp án đúng là An", "whyU7": true},
-  {"type": "MC", "q": "How old is An?", "options": ["Nine", "Eight", "Ten"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, An chín tuổi. Vì vậy đáp án đúng là chín”. Vì vậy đáp án “Nine” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, An chín tuổi. Vì vậy đáp án đúng là chín", "whyU7": true},
-  {"type": "MC", "q": "What sport does An like?", "options": ["Football", "Basketball", "Tennis"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, An thích bóng đá. Vì vậy đáp án đúng là bóng đá”. Vì vậy đáp án “Football” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, An thích bóng đá. Vì vậy đáp án đúng là bóng đá", "whyU7": true},
-  {"type": "MC", "q": "When does An play football?", "options": ["After school", "In the morning", "At night"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, An chơi bóng đá sau giờ học. Vì vậy đáp án đúng là sau giờ học”. Vì vậy đáp án “After school” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, An chơi bóng đá sau giờ học. Vì vậy đáp án đúng là sau giờ học", "whyU7": true},
-  {"type": "MC", "q": "How do the two friends go home?", "options": ["Together", "Alone", "With a teacher"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, hai bạn cùng về nhà với nhau. Vì vậy đáp án đúng là cùng nhau”. Vì vậy đáp án “Together” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hai bạn cùng về nhà với nhau. Vì vậy đáp án đúng là cùng nhau", "whyU7": true}
+  {"type": "MC", "q": "What is the friend's name?", "options": ["An", "Binh", "Tuan"], "a": 0, "why": "Ví dụ: trong bài có câu “His name is An”. Vì vậy đáp án “An” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, người bạn thân tên là An. Vì vậy đáp án đúng là An", "whyU7": true},
+  {"type": "MC", "q": "How old is An?", "options": ["Nine", "Eight", "Ten"], "a": 0, "why": "Ví dụ: trong bài có câu “He is nine years old”. Vì vậy đáp án “Nine” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, An chín tuổi. Vì vậy đáp án đúng là chín", "whyU7": true},
+  {"type": "MC", "q": "What sport does An like?", "options": ["Football", "Basketball", "Tennis"], "a": 0, "why": "Ví dụ: trong bài có câu “An likes football”. Vì vậy đáp án “Football” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, An thích bóng đá. Vì vậy đáp án đúng là bóng đá", "whyU7": true},
+  {"type": "MC", "q": "When does An play football?", "options": ["After school", "In the morning", "At night"], "a": 0, "why": "Ví dụ: trong bài có câu “He plays football after school”. Vì vậy đáp án “After school” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, An chơi bóng đá sau giờ học. Vì vậy đáp án đúng là sau giờ học", "whyU7": true},
+  {"type": "MC", "q": "How do the two friends go home?", "options": ["Together", "Alone", "With a teacher"], "a": 0, "why": "Ví dụ: trong bài có câu “We go home together”. Vì vậy đáp án “Together” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hai bạn cùng về nhà với nhau. Vì vậy đáp án đúng là cùng nhau", "whyU7": true}
  ],
  "translation": "Đây là người bạn thân nhất của tôi. Bạn ấy tên là An. Bạn ấy chín tuổi.\n\nAn thích bóng đá. Bạn ấy chơi bóng đá sau giờ học. Tôi xem bạn ấy chơi.\n\nChúng tôi cùng về nhà với nhau. Chúng tôi là bạn tốt của nhau.",
  "phrases": [{"en": "best friend", "vi": "bạn thân nhất"}, {"en": "plays football", "vi": "chơi bóng đá"}, {"en": "after school", "vi": "sau giờ học"}, {"en": "go home together", "vi": "cùng về nhà với nhau"}]
@@ -61787,11 +61787,11 @@ var READING_EXPAND19 = [
  "topic": "Thời tiết và thiên nhiên",
  "text": "Today is sunny. The sky is blue. I wear a hat.\n\nI go to school on foot. I see birds in the trees. The birds sing.\n\nI like sunny days. I play outside after school.",
  "questions": [
-  {"type": "MC", "q": "How is the weather today?", "options": ["Sunny", "Rainy", "Cloudy"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, hôm nay trời nắng. Vì vậy đáp án đúng là nắng”. Vì vậy đáp án “Sunny” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hôm nay trời nắng. Vì vậy đáp án đúng là nắng", "whyU7": true},
-  {"type": "MC", "q": "What colour is the sky?", "options": ["Blue", "Grey", "White"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bầu trời màu xanh dương. Vì vậy đáp án đúng là xanh dương”. Vì vậy đáp án “Blue” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bầu trời màu xanh dương. Vì vậy đáp án đúng là xanh dương", "whyU7": true},
-  {"type": "MC", "q": "What does the child wear?", "options": ["A hat", "A coat", "A scarf"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bạn nhỏ đội một chiếc mũ. Vì vậy đáp án đúng là mũ”. Vì vậy đáp án “A hat” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ đội một chiếc mũ. Vì vậy đáp án đúng là mũ", "whyU7": true},
-  {"type": "MC", "q": "How does the child go to school?", "options": ["On foot", "By bus", "By bike"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bạn nhỏ đi bộ tới trường. Vì vậy đáp án đúng là đi bộ”. Vì vậy đáp án “On foot” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ đi bộ tới trường. Vì vậy đáp án đúng là đi bộ", "whyU7": true},
-  {"type": "MC", "q": "What do the birds do?", "options": ["Sing", "Sleep", "Swim"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, những con chim hót. Vì vậy đáp án đúng là hót”. Vì vậy đáp án “Sing” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, những con chim hót. Vì vậy đáp án đúng là hót", "whyU7": true}
+  {"type": "MC", "q": "How is the weather today?", "options": ["Sunny", "Rainy", "Cloudy"], "a": 0, "why": "Ví dụ: trong bài có câu “Today is sunny”. Vì vậy đáp án “Sunny” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, hôm nay trời nắng. Vì vậy đáp án đúng là nắng", "whyU7": true},
+  {"type": "MC", "q": "What colour is the sky?", "options": ["Blue", "Grey", "White"], "a": 0, "why": "Ví dụ: trong bài có câu “The sky is blue”. Vì vậy đáp án “Blue” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bầu trời màu xanh dương. Vì vậy đáp án đúng là xanh dương", "whyU7": true},
+  {"type": "MC", "q": "What does the child wear?", "options": ["A hat", "A coat", "A scarf"], "a": 0, "why": "Ví dụ: trong bài có câu “I wear a hat”. Vì vậy đáp án “A hat” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ đội một chiếc mũ. Vì vậy đáp án đúng là mũ", "whyU7": true},
+  {"type": "MC", "q": "How does the child go to school?", "options": ["On foot", "By bus", "By bike"], "a": 0, "why": "Ví dụ: trong bài có câu “I go to school on foot”. Vì vậy đáp án “On foot” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ đi bộ tới trường. Vì vậy đáp án đúng là đi bộ", "whyU7": true},
+  {"type": "MC", "q": "What do the birds do?", "options": ["Sing", "Sleep", "Swim"], "a": 0, "why": "Ví dụ: trong bài có câu “The birds sing”. Vì vậy đáp án “Sing” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, những con chim hót. Vì vậy đáp án đúng là hót", "whyU7": true}
  ],
  "translation": "Hôm nay trời nắng. Bầu trời màu xanh dương. Tôi đội một chiếc mũ.\n\nTôi đi bộ tới trường. Tôi thấy những con chim trên cây. Những con chim hót.\n\nTôi thích những ngày nắng. Tôi chơi ngoài trời sau giờ học.",
  "phrases": [{"en": "sunny day", "vi": "ngày nắng"}, {"en": "the sky is blue", "vi": "bầu trời màu xanh dương"}, {"en": "on foot", "vi": "đi bộ"}, {"en": "play outside", "vi": "chơi ngoài trời"}]
@@ -61802,11 +61802,11 @@ var READING_EXPAND19 = [
  "topic": "Học tập và giáo dục",
  "text": "This is my school. It is near my house.\n\nMy teacher is Miss Lan. She is kind. We learn English and maths.\n\nI have many friends at school. We sing and play every day. I like my school.",
  "questions": [
-  {"type": "MC", "q": "Where is the school?", "options": ["Near my house", "Far from my house", "In the town centre"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, trường học ở gần nhà của bạn nhỏ. Vì vậy đáp án đúng là gần nhà”. Vì vậy đáp án “Near my house” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, trường học ở gần nhà của bạn nhỏ. Vì vậy đáp án đúng là gần nhà", "whyU7": true},
-  {"type": "MC", "q": "Who is the teacher?", "options": ["Miss Lan", "Miss Hoa", "Mr Tuan"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, cô giáo tên là Lan. Vì vậy đáp án đúng là cô Lan”. Vì vậy đáp án “Miss Lan” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, cô giáo tên là Lan. Vì vậy đáp án đúng là cô Lan", "whyU7": true},
-  {"type": "MC", "q": "What do the children learn?", "options": ["English and maths", "English and music", "Maths and art"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, các bạn học tiếng Anh và toán. Vì vậy đáp án đúng là tiếng Anh và toán”. Vì vậy đáp án “English and maths” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, các bạn học tiếng Anh và toán. Vì vậy đáp án đúng là tiếng Anh và toán", "whyU7": true},
-  {"type": "MC", "q": "How many friends does the child have at school?", "options": ["Many", "A few", "Two"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, bạn nhỏ có nhiều bạn ở trường. Vì vậy đáp án đúng là nhiều”. Vì vậy đáp án “Many” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ có nhiều bạn ở trường. Vì vậy đáp án đúng là nhiều", "whyU7": true},
-  {"type": "MC", "q": "What do the children do every day at school?", "options": ["Sing and play", "Read and sleep", "Swim and run"], "a": 0, "why": "Ví dụ: trong bài có câu “Trong bài, các bạn hát và chơi mỗi ngày ở trường. Vì vậy đáp án đúng là hát và chơi”. Vì vậy đáp án “Sing and play” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, các bạn hát và chơi mỗi ngày ở trường. Vì vậy đáp án đúng là hát và chơi", "whyU7": true}
+  {"type": "MC", "q": "Where is the school?", "options": ["Near my house", "Far from my house", "In the town centre"], "a": 0, "why": "Ví dụ: trong bài có câu “It is near my house”. Vì vậy đáp án “Near my house” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, trường học ở gần nhà của bạn nhỏ. Vì vậy đáp án đúng là gần nhà", "whyU7": true},
+  {"type": "MC", "q": "Who is the teacher?", "options": ["Miss Lan", "Miss Hoa", "Mr Tuan"], "a": 0, "why": "Ví dụ: trong bài có câu “My teacher is Miss Lan”. Vì vậy đáp án “Miss Lan” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, cô giáo tên là Lan. Vì vậy đáp án đúng là cô Lan", "whyU7": true},
+  {"type": "MC", "q": "What do the children learn?", "options": ["English and maths", "English and music", "Maths and art"], "a": 0, "why": "Ví dụ: trong bài có câu “We learn English and maths”. Vì vậy đáp án “English and maths” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, các bạn học tiếng Anh và toán. Vì vậy đáp án đúng là tiếng Anh và toán", "whyU7": true},
+  {"type": "MC", "q": "How many friends does the child have at school?", "options": ["Many", "A few", "Two"], "a": 0, "why": "Ví dụ: trong bài có câu “I have many friends at school”. Vì vậy đáp án “Many” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, bạn nhỏ có nhiều bạn ở trường. Vì vậy đáp án đúng là nhiều", "whyU7": true},
+  {"type": "MC", "q": "What do the children do every day at school?", "options": ["Sing and play", "Read and sleep", "Swim and run"], "a": 0, "why": "Ví dụ: trong bài có câu “We sing and play every day”. Vì vậy đáp án “Sing and play” đúng. Cách làm: đọc kỹ câu hỏi rồi tìm đoạn câu trong bài nói giống đáp án. Đáp án nghe quen nhưng bài không nói thì không chọn.", "whyOrig": "Trong bài, các bạn hát và chơi mỗi ngày ở trường. Vì vậy đáp án đúng là hát và chơi", "whyU7": true}
  ],
  "translation": "Đây là trường học của tôi. Trường ở gần nhà tôi.\n\nCô giáo của tôi là cô Lan. Cô rất tốt bụng. Chúng tôi học tiếng Anh và toán.\n\nTôi có nhiều bạn ở trường. Chúng tôi hát và chơi mỗi ngày. Tôi thích trường học của mình.",
  "phrases": [{"en": "my school", "vi": "trường học của tôi"}, {"en": "near my house", "vi": "gần nhà tôi"}, {"en": "learn English", "vi": "học tiếng Anh"}, {"en": "sing and play", "vi": "hát và chơi"}]
