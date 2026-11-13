@@ -4380,7 +4380,7 @@ function workspaceData(l) {
       (videoNewList(tr) || []).forEach(function (x) { if (x.key === key) { v = x; track = tr; } });
     });
   } catch (e) {}
-  if (!v) v = { id: "BKNJxpdNAtY", title: "VOA: Break the News — English in a Minute", channel: "VOA Learning English", kind: "giaitri" };
+  if (!v) v = { key: key, id: "BKNJxpdNAtY", title: "VOA: Break the News — English in a Minute", channel: "VOA Learning English", kind: "giaitri" }; /* v174 N7: fallback VOA phai co key de hien 5 nut dang bai (VIDEO_NEW khong co muc VOA) */
   var lines = (typeof VIDEO_LINES !== "undefined" && VIDEO_LINES[key]) || [];
   var trackName = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[track] || "IELTS";
   var kindLabel = (v.kind === "day") ? "Video dạy" : "Video giải trí";
@@ -4454,10 +4454,11 @@ function renderLessonWorkspace(app, l) {
     var good = 0; for (var k = 0; k < total; k++) if (l.wsRes[k] === "good") good++;
     app.innerHTML = '<div class="lessonframe"><div class="row"><button class="btn" id="btnBack">← Quay lại</button><span class="chip cur">Không gian bài học</span></div>'
       + '<p class="mut" id="wsBreadcrumb">' + d.trackName + ' &gt; ' + d.kindLabel + ' &gt; ' + esc(d.video.title) + ' &gt; Nghe chép</p></div>'
+      + ((d.video && d.video.key && lines.length) ? '<section class="card" id="wsFormats"><h3>🎬 5 dạng bài của video này</h3>' + videoFormatStatusHTML(d.video) + '</section>' : '') /* v174 N7 */
       + '<div class="summarybox"><h2>Xong bài nghe chép video!</h2>'
       + "<p>Kết quả: " + good + "/" + total + " câu đúng ngay lần đầu.</p>"
       + '<div class="row"><button class="btn btn-primary" id="wsAgain">Làm lại bài</button><button class="btn" id="wsBack">Về Luyện tập</button></div></div>';
-    wireBack();
+    wireBack(); videoLinkWire(); videoVOAWire(); /* v174 N7: noi 5 nut dang bai */
     $("#wsAgain").onclick = function () { l.wsDone = false; l.wsSi = 0; l.wsRes = {}; l.wsTried = {}; l.wsGapRes = {}; l.wsGapMiss = {}; l.wsRecUrl = ""; render(); };
     $("#wsBack").onclick = function () { backFromLesson(); };
     return;
@@ -4514,6 +4515,7 @@ function renderLessonWorkspace(app, l) {
   }
   app.innerHTML = '<div class="lessonframe"><div class="row"><button class="btn" id="btnBack">← Quay lại</button><span class="chip cur">Không gian bài học</span></div>'
     + '<p class="mut" id="wsBreadcrumb">' + d.trackName + ' &gt; ' + d.kindLabel + ' &gt; ' + esc(d.video.title) + ' &gt; Nghe chép</p></div>'
+    + ((d.video && d.video.key && lines.length) ? '<section class="card" id="wsFormats"><h3>🎬 5 dạng bài của video này</h3>' + videoFormatStatusHTML(d.video) + '</section>' : '') /* v174 N7: du 5 dang bai ngay tren man workspace khi mo tu hub video */
     + '<div class="ws-progress"><p class="mut">Tiến độ câu ' + (si + 1) + "/" + total + " · " + pct + '%</p><div class="les-progress"><i style="width:' + pct + '%"></i></div></div>'
     + '<div class="ws-grid">'
     + '<section class="card ws-col" id="wsMediaCol"><h3>🎬 Video</h3><div id="wsMediaBody" style="display:' + (l.wsHideMedia ? "none" : "block") + '"><iframe src="https://www.youtube-nocookie.com/embed/' + d.video.id + '?rel=0" loading="lazy" allowfullscreen></iframe><p class="mut">' + esc(d.video.title) + " (" + esc(d.video.channel) + ')</p></div>'
@@ -4535,7 +4537,7 @@ function renderLessonWorkspace(app, l) {
     + '<p id="wsResult">' + resTxt + "</p></section>"
     + '<section class="card ws-col" id="wsTransCol"><h3>📖 Bản chép</h3><div class="row">' + subModeHTML() + '</div><div id="wsTransBody" style="display:' + (l.wsHideTrans ? "none" : "block") + '"><ol>' + lines.map(function (x, i) { return transLine(x, i); }).join("") + "</ol></div><button class=\"btn\" id=\"wsTransToggle\">" + (l.wsHideTrans ? "Hiện bản chép" : "Ẩn bản chép") + "</button></section>"
     + "</div>";
-  wireBack();
+  wireBack(); videoLinkWire(); videoVOAWire(); /* v174 N7: noi 5 nut dang bai */
   $$("[data-wslevel]").forEach(function (b) { b.onclick = function () { l.wsLevel = b.dataset.wslevel; render(); }; });
   $$("[data-wsmode]").forEach(function (b) { b.onclick = function () { l.wsMode = b.dataset.wsmode; render(); }; });
   $$("[data-wschip]").forEach(function (b) { b.onclick = function () { var inp = $("#wsInp"); if (!inp) return; var w = chips[+b.dataset.wschip]; if (w) inp.value = (inp.value ? inp.value + " " : "") + w; inp.focus(); }; });
@@ -12845,6 +12847,7 @@ function phDetailHTML(p) {
   var hint = RB_MIRROR_TARGETS[p.s] ? RB_MIRROR_TARGETS[p.s].hint : "";
   var html = '<div class="qblock" data-ph-detail><h3>Cách đọc âm /' + esc(p.s) + '/</h3>'
     + '<p><b>Ví dụ:</b> <b>' + esc(p.w) + '</b> — ' + esc(p.vi) + '.</p>'
+    + ((typeof state !== "undefined" && state.track === "tc" && p.tcSen) ? '<p><b>Ví dụ công sở:</b> <b>' + esc(p.tcSen) + '</b> — ' + esc(p.tcSenVi) + '.</p><div class="row"><button class="btn" id="phTcSenHear">🔊 Nghe câu công sở</button></div>' : '')
     + phDetailLines(phDescFull(p)).map(function (ln) { return '<p>' + esc(ln) + '</p>'; }).join("")
     + (p.tipText ? '<p><b>Mẹo:</b> ' + esc(p.tipText) + '</p>' : '')
     + (hint ? '<p><b>Nhìn miệng:</b> ' + esc(hint) + '</p>' : '')
@@ -13131,6 +13134,7 @@ function renderPronLesson(app, l) {
   var psNext2 = $("#phNextSound2");
   if (psNext2) psNext2.onclick = function () { if (next44) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; render(); } };
   var phHe = $("#phHearEx"); if (phHe) phHe.onclick = function () { speak(p.w); l.shadowDone = true; l.shadowDoneSym = sym; render(); };
+  var phTc = $("#phTcSenHear"); if (phTc) phTc.onclick = function () { speak(p.tcSen); }; /* v174 S3: nghe cau cong so (chi track TC) */
   if (sub === 2 || sub === 3 || sub === 4) { pronT1Wire(l, sym); }
   if (sub === 0 || sub === 2 || sub === 3 || sub === 4) { phMirrorWire(l); } /* v125c: guong o ca buoc 1 nhu ZH/TP */
   var phBack = $("#phBackToPractice");
