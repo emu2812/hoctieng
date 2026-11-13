@@ -7374,8 +7374,8 @@ function elsaZhSyllableHTML(aiRes) {
    ghi ro la suy ra tu ket qua theo tu + noi dung day. */
 var SYL_RES = {}; /* khoa track:word -> aiRes gan nhat (man chi tiet lay verdict + "AI nghe duoc…") */
 var SYL_IPA_CACHE = {};
-/* Nguyen am IPA (theo PH_TOK_ORDER: 2 am doi dau + 20 nguyen am don/doi). */
-var SYL_VOWELS = ["i:", "u:", "ɑ:", "ɔ:", "eɪ", "aɪ", "ɔɪ", "əʊ", "aʊ", "ɪə", "eə", "ʊə", "ɪ", "e", "æ", "ɒ", "ʊ", "ʌ", "ɜ:", "ə"];
+/* Nguyen am IPA (theo PH_TOK_ORDER: 2 am doi dau + 22 nguyen am don/doi). */
+var SYL_VOWELS = ["i:", "u:", "i", "u", "ɑ:", "ɔ:", "eɪ", "aɪ", "ɔɪ", "əʊ", "aʊ", "ɪə", "eə", "ʊə", "ɪ", "e", "æ", "ɒ", "ʊ", "ʌ", "ɜ:", "ə"]; /* v168 (N12): +i, +u — elsaSplitSyllables bo roi am tiet co hat nhan /i/, /u/ */
 /* Tra cach doc cua mot tu trong kho tu vung cua track (EN/TC: IPA; TP: phien am
    Latinh). Tra ve "" neu khong co trong kho — man chi tiet ghi ro chu khong doan. */
 function sylFindRead(track, word) {
@@ -7416,17 +7416,18 @@ function sylFindZh(han) {
   return null;
 }
 /* Do dai onset hop le o cuoi cum phu am giua 2 nguyen am (maximal onset):
-   3 phu am s + tac am vo thanh + l/r/w; 2 phu am tac am + l/r/w hoac s +
+   3 phu am s + tac am vo thanh + l/r/w/j; 2 phu am tac am + l/r/w/j hoac s +
    tac am/mui; 1 phu am bat ky tru /ŋ/, /ʒ/ (khong mo dau am tiet tieng Anh).
-   /j/ khong tinh vao onset doi (vd curriculum tach "rɪk-jə", khong phai "rɪ-kjə"). */
+   /j/ TINH vao onset doi (vd curriculum tach "rɪ-kjə" — /kj/ la onset hop le
+   nhu 'cute' /kjuːt/; v168 N13 sua nhan xet cu 'rɪk-jə' la sai). */
 function sylOnsetLen(cluster) {
   if (!cluster.length) return 0;
   var L = cluster.length;
-  if (L >= 3) { var t3 = cluster.slice(L - 3); if (t3[0] === "s" && (t3[1] === "p" || t3[1] === "t" || t3[1] === "k") && (t3[2] === "l" || t3[2] === "r" || t3[2] === "w")) return 3; }
+  if (L >= 3) { var t3 = cluster.slice(L - 3); if (t3[0] === "s" && (t3[1] === "p" || t3[1] === "t" || t3[1] === "k") && (t3[2] === "l" || t3[2] === "r" || t3[2] === "w" || t3[2] === "j")) return 3; }
   if (L >= 2) {
     var t2 = cluster.slice(L - 2);
     var obs = ["p", "b", "t", "d", "k", "ɡ", "f", "v", "θ", "ð", "s", "z", "ʃ", "ʒ", "tʃ", "dʒ", "h"];
-    if (obs.indexOf(t2[0]) >= 0 && ["l", "r", "w"].indexOf(t2[1]) >= 0) return 2;
+    if (obs.indexOf(t2[0]) >= 0 && ["l", "r", "w", "j"].indexOf(t2[1]) >= 0) return 2;
     if (t2[0] === "s" && ["p", "t", "k", "m", "n"].indexOf(t2[1]) >= 0) return 2;
   }
   var last1 = cluster[L - 1];
@@ -7509,16 +7510,11 @@ function sylGuessWeak(word, heard, track) {
   }
   return "Máy nghe thành “" + heard + "” — chưa định vị được âm nào lệch; nghe mẫu rồi đọc lại, chú ý từng âm tiết. (Suy luận từ bản ghi, không phải kết luận chấm.)";
 }
-/* So do mieng tinh ve bang code: mat cat khoang mieng, to sang vung can chu y. */
-function sylMouthZone(guideText) {
-  var t = String(guideText || "");
-  if (/mũi/i.test(t)) return "mũi";
-  if (/răng|nướu|lợi/i.test(t)) return "răng";
-  if (/vòm|hàm/i.test(t)) return "vòm";
-  if (/cổ|dây thanh|rung/i.test(t)) return "cổ họng";
-  if (/môi/i.test(t)) return "môi";
-  return "lưỡi";
-}
+/* So do mieng tinh ve bang code: mat cat khoang mieng, to sang vung can chu y.
+   v168 (N14): bang TINH theo am (sym) — khong doan bang tu khoa trong van ban
+   huong dan ('rung'/'rang' de bi nham sang vung khac). */
+var SYL_MOUTH_MAP = { "p":"môi","b":"môi","m":"môi","w":"môi","u:":"môi","ʊ":"môi","ɔ:":"môi","əʊ":"môi","aʊ":"môi","ʊə":"môi","ɒ":"môi", "t":"răng","d":"răng","n":"răng","l":"răng","s":"răng","z":"răng","θ":"răng","ð":"răng","tʃ":"răng","dʒ":"răng","ʃ":"răng","ʒ":"răng","f":"răng","v":"răng", "r":"lưỡi","i:":"lưỡi","ɪ":"lưỡi","e":"lưỡi","æ":"lưỡi","ʌ":"lưỡi","ɑ:":"lưỡi","ə":"lưỡi","ɜ:":"lưỡi","eɪ":"lưỡi","aɪ":"lưỡi","ɔɪ":"lưỡi","ɪə":"lưỡi","eə":"lưỡi", "k":"vòm","ɡ":"vòm","ŋ":"vòm", "h":"cổ họng" };
+function sylMouthZone(sym) { return SYL_MOUTH_MAP[String(sym || "")] || "lưỡi"; }
 function sylMouthSVG(zone) {
   var label = { "môi": "Môi", "răng": "Răng trên", "lưỡi": "Lưỡi", "vòm": "Vòm miệng", "mũi": "Mũi", "cổ họng": "Cổ họng" }[zone] || "Lưỡi";
   var vom = (zone === "vòm") ? ' stroke="#B45309" stroke-width="4"' : ' stroke="#94A3B8" stroke-width="2"';
@@ -7826,7 +7822,7 @@ function renderSylDetail(app, l) {
         if (weak) {
           var guideTxt = verdict ? verdict.guide.join(" · ") : "";
           if (!guideTxt) { var pe = phEntry(sym) || {}; var mir = (typeof RB_MIRROR_TARGETS !== "undefined" && RB_MIRROR_TARGETS[sym]) || null; guideTxt = ((mir && mir.hint) ? ("Nhìn miệng: " + mir.hint + " · ") : "") + (pe.ex ? ("Cách đặt lưỡi/môi: " + pe.ex) : "cần đối chiếu giáo trình"); }
-          h += sylMouthSVG(sylMouthZone(guideTxt)) + '<p class="mut">' + esc(guideTxt) + '</p>';
+          h += sylMouthSVG(sylMouthZone(sym)) + '<p class="mut">' + esc(guideTxt) + '</p>';
           var pr2 = (typeof RB_PH_PAIRS !== "undefined") ? RB_PH_PAIRS[sym] : null;
           if (pr2) h += '<p class="mut">Cặp âm dễ nhầm với người Việt: /' + esc(sym) + '/ — /' + esc(pr2.partner) + '/ (vd “' + esc(pr2.a) + '” — “' + esc(pr2.b) + '”). Nghe phân biệt ở mục 1 rồi đọc theo.</p>';
         }
@@ -8191,7 +8187,7 @@ function renderReviewSession(app, l) {
    / cang / bat hoi / 받침). */
 var PRON_DIAG_SETS = {
   en: [
-    { w: "think", show: "think", read: "/θɪŋk/", vi: "nghĩ", sym: "θ", symVi: "âm /θ/ — đầu lưỡi chạm răng cửa trên", target: { kind: "ph", sym: "θ" } },
+    { w: "think", show: "think", read: "/θɪŋk/", vi: "nghĩ", sym: "θ", symVi: "âm /θ/ — đầu lưỡi đặt giữa hai hàm răng, thò ra một chút, thổi hơi qua", target: { kind: "ph", sym: "θ" } },
     { w: "this", show: "this", read: "/ðɪs/", vi: "cái này", sym: "ð", symVi: "âm /ð/ — đầu lưỡi chạm răng, rung dây thanh", target: { kind: "ph", sym: "ð" } },
     { w: "she", show: "she", read: "/ʃi:/", vi: "cô ấy", sym: "ʃ", symVi: "âm /ʃ/ — môi tròn, lưỡi cong", target: { kind: "ph", sym: "ʃ" } },
     { w: "measure", show: "measure", read: "/ˈmeʒə/", vi: "đo lường", sym: "ʒ", symVi: "âm /ʒ/ — như /ʃ/ nhưng rung dây thanh", target: { kind: "ph", sym: "ʒ" } },
@@ -8200,12 +8196,12 @@ var PRON_DIAG_SETS = {
     { w: "cats", show: "cats", read: "/kæts/", vi: "những con mèo", sym: "s", symVi: "phụ âm cuối /s/ — đọc rõ tiếng /s/ cuối từ", target: { kind: "ph", sym: "s" } },
     { w: "dogs", show: "dogs", read: "/dɒɡz/", vi: "những con chó", sym: "z", symVi: "phụ âm cuối /z/ — đọc rõ tiếng /z/ cuối từ", target: { kind: "ph", sym: "z" } },
     { w: "sing", show: "sing", read: "/sɪŋ/", vi: "hát", sym: "ŋ", symVi: "phụ âm cuối /ŋ/ — âm mũi, lưỡi chạm vòm mềm", target: { kind: "ph", sym: "ŋ" } },
-    { w: "watch", show: "watch", read: "/wɒtʃ/", vi: "xem", sym: "tʃ", symVi: "âm /tʃ/ — như “ch” tiếng Việt nhưng bật hơi", target: { kind: "ph", sym: "tʃ" } },
+    { w: "watch", show: "watch", read: "/wɒtʃ/", vi: "xem", sym: "tʃ", symVi: "âm /tʃ/ — chặn hơi như /t/ rồi xát ra như /ʃ/; môi hơi chu", target: { kind: "ph", sym: "tʃ" } },
     { w: "book", show: "book", read: "/bʊk/", vi: "quyển sách", sym: "ʊ", symVi: "nguyên âm ngắn /ʊ/ — môi tròn nhẹ, đọc ngắn", target: { kind: "ph", sym: "ʊ" } },
     { w: "cat", show: "cat", read: "/kæt/", vi: "con mèo", sym: "æ", symVi: "nguyên âm /æ/ — miệng mở rộng, âm trầm", target: { kind: "ph", sym: "æ" } }
   ],
   tc: [
-    { w: "three", show: "three", read: "/θri:/", vi: "ba", sym: "θ", symVi: "âm /θ/ — đầu lưỡi chạm răng cửa trên", target: { kind: "ph", sym: "θ" } },
+    { w: "three", show: "three", read: "/θri:/", vi: "ba", sym: "θ", symVi: "âm /θ/ — đầu lưỡi đặt giữa hai hàm răng, thò ra một chút, thổi hơi qua", target: { kind: "ph", sym: "θ" } },
     { w: "that", show: "that", read: "/ðæt/", vi: "kia / đó", sym: "ð", symVi: "âm /ð/ — đầu lưỡi chạm răng, rung dây thanh", target: { kind: "ph", sym: "ð" } },
     { w: "schedule", show: "schedule", read: "/ˈʃedjuːl/", vi: "lịch trình", sym: "ʃ", symVi: "âm /ʃ/ — môi tròn, lưỡi cong", target: { kind: "ph", sym: "ʃ" } },
     { w: "decision", show: "decision", read: "/dɪˈsɪʒn/", vi: "quyết định", sym: "ʒ", symVi: "âm /ʒ/ — như /ʃ/ nhưng rung dây thanh", target: { kind: "ph", sym: "ʒ" } },
@@ -8214,7 +8210,7 @@ var PRON_DIAG_SETS = {
     { w: "reports", show: "reports", read: "/rɪˈpɔ:ts/", vi: "báo cáo", sym: "s", symVi: "phụ âm cuối /s/ — đọc rõ tiếng /s/ cuối từ", target: { kind: "ph", sym: "s" } },
     { w: "orders", show: "orders", read: "/ˈɔ:dəz/", vi: "đơn hàng", sym: "z", symVi: "phụ âm cuối /z/ — đọc rõ tiếng /z/ cuối từ", target: { kind: "ph", sym: "z" } },
     { w: "meeting", show: "meeting", read: "/ˈmi:tɪŋ/", vi: "cuộc họp", sym: "ŋ", symVi: "phụ âm cuối /ŋ/ — âm mũi, lưỡi chạm vòm mềm", target: { kind: "ph", sym: "ŋ" } },
-    { w: "message", show: "message", read: "/ˈmesɪdʒ/", vi: "tin nhắn", sym: "dʒ", symVi: "âm /dʒ/ — như “gi” tiếng Việt nhưng bật hơi nhẹ", target: { kind: "ph", sym: "dʒ" } },
+    { w: "message", show: "message", read: "/ˈmesɪdʒ/", vi: "tin nhắn", sym: "dʒ", symVi: "âm /dʒ/ — như /tʃ/ nhưng rung dây thanh; chặn hơi rồi xát ra, không bật hơi", target: { kind: "ph", sym: "dʒ" } },
     { w: "full", show: "full", read: "/fʊl/", vi: "đầy đủ", sym: "ʊ", symVi: "nguyên âm ngắn /ʊ/ — môi tròn nhẹ, đọc ngắn", target: { kind: "ph", sym: "ʊ" } },
     { w: "plan", show: "plan", read: "/plæn/", vi: "kế hoạch", sym: "æ", symVi: "nguyên âm /æ/ — miệng mở rộng, âm trầm", target: { kind: "ph", sym: "æ" } }
   ],
@@ -8333,7 +8329,7 @@ function pronT1MarkDoneTrack(track, sym) {
 /* --- pinyin: tach thanh mau / van mau / thanh dieu (v123) --- */
 var ZH_TONE_MARKS = { "ā":1,"á":2,"ǎ":3,"à":4, "ē":1,"é":2,"ě":3,"è":4, "ī":1,"í":2,"ǐ":3,"ì":4, "ō":1,"ó":2,"ǒ":3,"ò":4, "ū":1,"ú":2,"ǔ":3,"ù":4, "ǖ":1,"ǘ":2,"ǚ":3,"ǜ":4 };
 var ZH_TONE_BASE = { "ā":"a","á":"a","ǎ":"a","à":"a","ē":"e","é":"e","ě":"e","è":"e","ī":"i","í":"i","ǐ":"i","ì":"i","ō":"o","ó":"o","ǒ":"o","ò":"o","ū":"u","ú":"u","ǔ":"u","ù":"u","ǖ":"ü","ǘ":"ü","ǚ":"ü","ǜ":"ü" };
-var ZH_INITIALS = ["zh","ch","sh","b","p","m","f","d","t","n","l","g","k","h","j","q","x","r","z","c","s","y","w"];
+var ZH_INITIALS = ["zh","ch","sh","b","p","m","f","d","t","n","l","g","k","h","j","q","x","r","z","c","s"]; /* v168 (N10): y/w KHONG phai thanh mau — chi 21 thanh mau that */
 function zhPinyinParts(py, han) {
   var s = String(py || "").split(/[\s·\-]/)[0] || "";
   var tone = 0, base = "";
@@ -8341,6 +8337,12 @@ function zhPinyinParts(py, han) {
   /* v123: chi lay am tiet DAU (thanh mau + van mau gom nguyen am + duoi n/ng/r) — bo phan am tiet sau, vd "xiexie" chi lay "xie", "buhao" chi lay "bu" (thanh 4). */
   var mm = base.match(/^(zh|ch|sh|[bpmfdtnlgkhjqxzcsrwy]?)([aeiou\u00fcv]+(?:ng?|r)?)/);
   if (mm) base = mm[0];
+  /* v168 (N10): am tiet y/w tra bang rieng — y/w khong phai thanh mau (GB/T:
+     yong=iong, wen=un, wo=uo, you=iu, wan=uan, weng=ueng; doi chieu GTC HSK).
+     Regex tren van giu w/y chi de cat dung am tiet dau, khong phai de nhan
+     chung la thanh mau. */
+  var ZH_YW = { yi:"i", ya:"ia", ye:"ie", yao:"iao", you:"iu", yan:"ian", yin:"in", yang:"iang", ying:"ing", yong:"iong", yu:"ü", yue:"üe", yuan:"üan", yun:"ün", wu:"u", wa:"ua", wo:"uo", wai:"uai", wei:"uei", wan:"uan", wen:"un", wang:"uang", weng:"ueng" };
+  if (ZH_YW[base]) return { initial: "", final: ZH_YW[base], tone: tone, base: base };
   var init = "";
   for (var k = 0; k < ZH_INITIALS.length; k++) { if (base.indexOf(ZH_INITIALS[k]) === 0) { init = ZH_INITIALS[k]; break; } }
   var fin = base.slice(init.length);
@@ -8388,7 +8390,7 @@ var ZH_PRON_INITIALS = [
 ];
 var ZH_PRON_FINALS = [
   { sym: "a", group: "fin", han: "大", py: "dà", vi: "lớn", pair: "an", pairHan: "班", pairPy: "bān", pairVi: "lớp", desc: "Vận mẫu a — miệng mở rộng." },
-  { sym: "o", group: "fin", han: "我", py: "wǒ", vi: "tôi", pair: "ou", pairHan: "头", pairPy: "tóu", pairVi: "đầu", desc: "Vận mẫu o — môi tròn lại." },
+  { sym: "o", group: "fin", han: "播", py: "bō", vi: "gieo hạt; phát sóng", pair: "ou", pairHan: "头", pairPy: "tóu", pairVi: "đầu", desc: "Vận mẫu o — môi tròn lại." }, /* v168 (N11): vi du cu 我 wǒ la van 'uo', khong phai 'o' — doi sang 播 bō */
   { sym: "e", group: "fin", han: "个", py: "gè", vi: "cái", pair: "ao", pairHan: "好", pairPy: "hǎo", pairVi: "tốt", desc: "Vận mẫu e — miệng mở vừa, lưỡi hơi lùi." },
   { sym: "i", group: "fin", han: "你", py: "nǐ", vi: "bạn", pair: "ü", pairHan: "绿", pairPy: "lǜ", pairVi: "xanh lá", desc: "Vận mẫu i — miệng cười nhẹ, lưỡi nâng cao." },
   { sym: "u", group: "fin", han: "不", py: "bù", vi: "không", pair: "ai", pairHan: "白", pairPy: "bái", pairVi: "trắng", desc: "Vận mẫu u — môi chu lại như huýt sáo." },
@@ -12365,7 +12367,7 @@ function phBtnHTML(sym) {
 /* Tách IPA thành từng âm bằng phép khớp dài nhất với bảng 44 âm (kỹ thuật của
    web cũ, dữ kiện là phiên âm của chính thẻ từ trong kho) — "từ chứa âm X"
    là chứa thật theo phiên âm đó, không đoán theo chữ viết. */
-var PH_TOK_ORDER = ["tʃ", "dʒ", "i:", "u:", "ɑ:", "ɔ:", "eɪ", "aɪ", "ɔɪ", "əʊ", "aʊ", "ɪə", "eə", "ʊə", "ɪ", "e", "æ", "ɒ", "ʊ", "ʌ", "ɜ:", "ə", "p", "b", "t", "d", "k", "ɡ", "f", "v", "θ", "ð", "s", "z", "ʃ", "ʒ", "h", "m", "n", "ŋ", "l", "r", "w", "j"];
+var PH_TOK_ORDER = ["tʃ", "dʒ", "i:", "u:", "i", "u", "ɑ:", "ɔ:", "eɪ", "aɪ", "ɔɪ", "əʊ", "aʊ", "ɪə", "eə", "ʊə", "ɪ", "e", "æ", "ɒ", "ʊ", "ʌ", "ɜ:", "ə", "p", "b", "t", "d", "k", "ɡ", "f", "v", "θ", "ð", "s", "z", "ʃ", "ʒ", "h", "m", "n", "ŋ", "l", "r", "w", "j"]; /* v168 (N12): +i, +u sau "u:" — "i:"/"u:" dung truoc nen tach dai van dung */
 function phTokIpa(ipa) {
   var raw = String(ipa || "").replace(/[/.]/g, "").replace(/ː/g, ":");
   var toks = [], stressed = {};
