@@ -7307,7 +7307,11 @@ function elsaSoundVerdict(sym, targetWord, aiRes) {
   if (mir && mir.hint) guide.push("Nhìn miệng: " + mir.hint);
   if (ent.ex) guide.push("Cách đặt lưỡi/môi: " + ent.ex);
   var pr = (typeof RB_PH_PAIRS !== "undefined") ? RB_PH_PAIRS[sym] : null;
-  if (pr && RB_PH_PAIR_REASONS && RB_PH_PAIR_REASONS[sym]) guide.push("Dễ nhầm với /" + pr + "/: " + RB_PH_PAIR_REASONS[sym]);
+  if (pr && RB_PH_PAIR_REASONS && RB_PH_PAIR_REASONS[sym]) {
+    var prPartner = (pr && typeof pr === "object") ? pr.partner : pr;
+    if (prPartner && String(prPartner).indexOf("không có") === 0) guide.push("Dễ nhầm: tiếng Việt " + prPartner + " — " + RB_PH_PAIR_REASONS[sym]);
+    else guide.push("Dễ nhầm với /" + prPartner + "/: " + RB_PH_PAIR_REASONS[sym]);
+  }
   if (!guide.length) guide.push("cần đối chiếu giáo trình");
   if (!aiRes) return { level: "none", label: "Chưa đo được", heard: "", guide: guide };
   var p = elsaWordPct(targetWord, aiRes);
@@ -7503,10 +7507,27 @@ function sylGuessWeak(word, heard, track) {
   }
   if (track === "zh") return "Máy nghe thành “" + heard + "” — so thanh điệu ở từng chữ bên dưới để biết mình lệch thanh nào. (Suy luận từ bản ghi, không phải kết luận chấm.)";
   var w = String(word).toLowerCase(), h = String(heard).toLowerCase();
-  for (var i = 0; i < SYL_GUESS_EN.length; i++) {
-    var g = SYL_GUESS_EN[i];
-    var wi = w.indexOf(g.w);
-    if (wi >= 0 && h.indexOf(g.h, Math.max(0, wi - 1)) >= 0) return "Máy nghe thành “" + heard + "” — " + g.msg + ". (Suy luận từ bản ghi, không phải kết luận chấm — nghe mẫu rồi đọc lại để kiểm chứng.)";
+  /* v169 (N37): tach tu thanh don vi am — "sh"/"ch"/"th"/"ng" la 1 don vi,
+     khong khop nham chu "s" nam trong "sh" (ship→sheep: /ʃ/ nghe dung, loi o nguyen am).
+     So sanh don vi theo dung vi tri, chi lay lech dau tien. */
+  function sylUnits(s) {
+    var out = [], i = 0;
+    while (i < s.length) {
+      var two = s.slice(i, i + 2);
+      if (two === "sh" || two === "ch" || two === "th" || two === "ng") { out.push(two); i += 2; }
+      else { out.push(s[i]); i += 1; }
+    }
+    return out;
+  }
+  var wu = sylUnits(w), hu = sylUnits(h);
+  for (var i = 0; i < Math.min(wu.length, hu.length); i++) {
+    if (wu[i] !== hu[i]) {
+      for (var j = 0; j < SYL_GUESS_EN.length; j++) {
+        var g = SYL_GUESS_EN[j];
+        if (g.w === wu[i] && g.h === hu[i]) return "Máy nghe thành “" + heard + "” — " + g.msg + ". (Suy luận từ bản ghi, không phải kết luận chấm — nghe mẫu rồi đọc lại để kiểm chứng.)";
+      }
+      break;
+    }
   }
   return "Máy nghe thành “" + heard + "” — chưa định vị được âm nào lệch; nghe mẫu rồi đọc lại, chú ý từng âm tiết. (Suy luận từ bản ghi, không phải kết luận chấm.)";
 }
@@ -7989,6 +8010,13 @@ function lastZhPronLineHTML(key) {
    helper game) để tab Luyện tập vẽ được nhãn ngay cả khi file game riêng
    chưa tải xong — nút game mới gọi helper này trong enPracticeEntHTML. */
 function gameShuffle(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = a[i]; a[i] = a[j]; a[j] = tmp; } return a; }
+/* v169 (N23-N26): xao tron vi tri dap an luc hien thi — giu nguyen chi so dap an dung trong du lieu
+   (data-i/data-oi/data-examopt van la chi so goc). Thu tu hien thi duoc cache theo khoa (bai + so cau
+   + cau hoi) trong mot luot lam, xoa khi lam lai / mo luot moi. */
+var quizOrderCache = {};
+function quizDispIdx(key, n) { if (!quizOrderCache[key] || quizOrderCache[key].length !== n) { var arr = []; for (var i = 0; i < n; i++) arr.push(i); quizOrderCache[key] = gameShuffle(arr); } return quizOrderCache[key]; }
+function quizDispClear() { quizOrderCache = {}; }
+function quizOptByOrig(sel, origIdx) { var found = null; $$(sel).forEach(function (b) { if (+b.dataset.i === origIdx) found = b; }); return found; }
 function gameNormSent(s) { return String(s || "").toLowerCase().replace(/[.!?,;:'"。、，；：？！·…「」『』（）《》〈〉【】—]/g, "").replace(/\s+/g, " ").trim(); } /* v126: bo ca dau cau tieng Trung */
 /* DOT 2e: nguon game track Trung (chi lay tu ngan hang Trung san co).
    - Noi tu: chu Han <-> nghia (the tu zhSets).
@@ -8206,7 +8234,7 @@ var PRON_DIAG_SETS = {
     { w: "schedule", show: "schedule", read: "/ˈʃedjuːl/", vi: "lịch trình", sym: "ʃ", symVi: "âm /ʃ/ — môi tròn, lưỡi cong", target: { kind: "ph", sym: "ʃ" } },
     { w: "decision", show: "decision", read: "/dɪˈsɪʒn/", vi: "quyết định", sym: "ʒ", symVi: "âm /ʒ/ — như /ʃ/ nhưng rung dây thanh", target: { kind: "ph", sym: "ʒ" } },
     { w: "leave", show: "leave", read: "/li:v/", vi: "rời đi / nghỉ phép", sym: "i:", symVi: "nguyên âm dài /i:/ — kéo dài, miệng cười", target: { kind: "ph", sym: "i:" } },
-    { w: "live", show: "live", read: "/lɪv/", vi: "sống / trực tiếp", sym: "ɪ", symVi: "nguyên âm ngắn /ɪ/ — đọc ngắn, dứt khoát", target: { kind: "ph", sym: "ɪ" } },
+    { w: "live", show: "live", read: "/lɪv/", vi: "sống", sym: "ɪ", symVi: "nguyên âm ngắn /ɪ/ — đọc ngắn, dứt khoát", target: { kind: "ph", sym: "ɪ" } },
     { w: "reports", show: "reports", read: "/rɪˈpɔ:ts/", vi: "báo cáo", sym: "s", symVi: "phụ âm cuối /s/ — đọc rõ tiếng /s/ cuối từ", target: { kind: "ph", sym: "s" } },
     { w: "orders", show: "orders", read: "/ˈɔ:dəz/", vi: "đơn hàng", sym: "z", symVi: "phụ âm cuối /z/ — đọc rõ tiếng /z/ cuối từ", target: { kind: "ph", sym: "z" } },
     { w: "meeting", show: "meeting", read: "/ˈmi:tɪŋ/", vi: "cuộc họp", sym: "ŋ", symVi: "phụ âm cuối /ŋ/ — âm mũi, lưỡi chạm vòm mềm", target: { kind: "ph", sym: "ŋ" } },
@@ -8225,8 +8253,8 @@ var PRON_DIAG_SETS = {
     { w: "师", show: "师", read: "shī", vi: "thầy", sym: "sh", symVi: "thanh mẫu sh — quặt lưỡi", target: { kind: "zhPron", sym: "sh" } },
     { w: "绿", show: "绿", read: "lǜ", vi: "xanh lá", sym: "ü", symVi: "vận mẫu ü — môi tròn, lưỡi đưa ra trước", target: { kind: "zhPron", sym: "ü" } },
     { w: "人", show: "人", read: "rén", vi: "người", sym: "r", symVi: "thanh mẫu r — quặt lưỡi, dây thanh rung", target: { kind: "zhPron", sym: "r" } },
-    { w: "你好", show: "你好", read: "nǐ hǎo · đọc ní hǎo", vi: "xin chào", sym: "biến điệu 3+3", symVi: "biến điệu 3+3 — hai thanh 3 liền nhau, thanh đầu đọc thành thanh 2", target: { kind: "zhPron", sym: "thanh 3" } },
-    { w: "不会", show: "不会", read: "bù huì · đọc bú huì", vi: "không biết / không thể", sym: "biến điệu 不", symVi: "biến điệu 不 — 不 trước thanh 4 đọc thành thanh 2", target: { kind: "zhPron", sym: "thanh 2" } }
+    { w: "你好", show: "你好", read: "nǐ hǎo · đọc ní hǎo", vi: "xin chào", sym: "biến điệu 3+3", symVi: "biến điệu 3+3 — hai thanh 3 liền nhau, thanh đầu đọc thành thanh 2", target: { kind: "zhPron", sym: "biến điệu 3+3" } },
+    { w: "不会", show: "不会", read: "bù huì · đọc bú huì", vi: "không biết / không thể", sym: "biến điệu 不", symVi: "biến điệu 不 — 不 trước thanh 4 đọc thành thanh 2", target: { kind: "zhPron", sym: "biến điệu 不" } }
   ],
   tp: [
     { w: "가", show: "가", read: "ga", vi: "âm ㄱ chùng — đọc nhẹ như “g”", sym: "ㄱ chùng", symVi: "phụ âm ㄱ chùng — đầu âm tiết đọc nhẹ như “g”", target: { kind: "tpPron", sym: "ㄱ" } },
@@ -8368,66 +8396,66 @@ var ZH_PRON_TONES = [
 var ZH_PRON_INITIALS = [
   { sym: "b", group: "init", han: "爸", py: "bà", vi: "bố", pair: "p", pairHan: "怕", pairPy: "pà", pairVi: "sợ", desc: "Thanh mẫu b — môi mím rồi bật nhẹ, không bật hơi." },
   { sym: "p", group: "init", han: "怕", py: "pà", vi: "sợ", pair: "b", pairHan: "爸", pairPy: "bà", pairVi: "bố", desc: "Thanh mẫu p — bật hơi mạnh ra ngoài." },
-  { sym: "m", group: "init", han: "妈", py: "mā", vi: "mẹ", pair: "n", pairHan: "拿", pairPy: "ná", pairVi: "lấy", desc: "Thanh mẫu m — môi mím, hơi ra bằng mũi." },
+  { sym: "m", group: "init", han: "马", py: "mǎ", vi: "ngựa", pair: "n", pairHan: "哪", pairPy: "nǎ", pairVi: "nào, đâu", desc: "Thanh mẫu m — môi mím, hơi ra bằng mũi." },
   { sym: "f", group: "init", han: "饭", py: "fàn", vi: "cơm", pair: "h", pairHan: "汉", pairPy: "hàn", pairVi: "người Hán", desc: "Thanh mẫu f — răng trên chạm môi dưới, hơi thổi ra." },
-  { sym: "d", group: "init", han: "大", py: "dà", vi: "lớn", pair: "t", pairHan: "他", pairPy: "tā", pairVi: "anh ấy", desc: "Thanh mẫu d — đầu lưỡi chạm lợi trên, không bật hơi." },
-  { sym: "t", group: "init", han: "他", py: "tā", vi: "anh ấy", pair: "d", pairHan: "打", pairPy: "dǎ", pairVi: "đánh", desc: "Thanh mẫu t — bật hơi mạnh." },
-  { sym: "n", group: "init", han: "你", py: "nǐ", vi: "bạn", pair: "l", pairHan: "来", pairPy: "lái", pairVi: "đến", desc: "Thanh mẫu n — đầu lưỡi chạm lợi trên, hơi ra bằng mũi." },
-  { sym: "l", group: "init", han: "来", py: "lái", vi: "đến", pair: "n", pairHan: "奶", pairPy: "nǎi", pairVi: "sữa", desc: "Thanh mẫu l — đầu lưỡi chạm lợi trên, hơi thoát hai bên lưỡi." },
-  { sym: "g", group: "init", han: "高", py: "gāo", vi: "cao", pair: "k", pairHan: "看", pairPy: "kàn", pairVi: "nhìn", desc: "Thanh mẫu g — cuống lưỡi nâng lên, không bật hơi." },
+  { sym: "d", group: "init", han: "大", py: "dà", vi: "lớn", pair: "t", pairHan: "踏", pairPy: "tà", pairVi: "giẫm, bước lên", desc: "Thanh mẫu d — đầu lưỡi chạm lợi trên, không bật hơi." },
+  { sym: "t", group: "init", han: "踏", py: "tà", vi: "giẫm, bước lên", pair: "d", pairHan: "大", pairPy: "dà", pairVi: "lớn", desc: "Thanh mẫu t — bật hơi mạnh." },
+  { sym: "n", group: "init", han: "你", py: "nǐ", vi: "bạn", pair: "l", pairHan: "里", pairPy: "lǐ", pairVi: "bên trong", desc: "Thanh mẫu n — đầu lưỡi chạm lợi trên, hơi ra bằng mũi." },
+  { sym: "l", group: "init", han: "里", py: "lǐ", vi: "bên trong", pair: "n", pairHan: "你", pairPy: "nǐ", pairVi: "bạn", desc: "Thanh mẫu l — đầu lưỡi chạm lợi trên, hơi thoát hai bên lưỡi." },
+  { sym: "g", group: "init", han: "干", py: "gàn", vi: "khô", pair: "k", pairHan: "看", pairPy: "kàn", pairVi: "nhìn", desc: "Thanh mẫu g — cuống lưỡi nâng lên, không bật hơi." },
   { sym: "k", group: "init", han: "看", py: "kàn", vi: "nhìn", pair: "g", pairHan: "干", pairPy: "gàn", pairVi: "khô", desc: "Thanh mẫu k — bật hơi mạnh." },
-  { sym: "h", group: "init", han: "好", py: "hǎo", vi: "tốt", pair: "f", pairHan: "饭", pairPy: "fàn", pairVi: "cơm", desc: "Thanh mẫu h — hơi thở ra từ cổ họng." },
-  { sym: "j", group: "init", han: "家", py: "jiā", vi: "nhà", pair: "q", pairHan: "七", pairPy: "qī", pairVi: "bảy", desc: "Thanh mẫu j — mặt lưỡi nâng lên, không bật hơi." },
+  { sym: "h", group: "init", han: "汉", py: "hàn", vi: "người Hán", pair: "f", pairHan: "饭", pairPy: "fàn", pairVi: "cơm", desc: "Thanh mẫu h — hơi thở ra từ cổ họng." },
+  { sym: "j", group: "init", han: "鸡", py: "jī", vi: "gà", pair: "q", pairHan: "七", pairPy: "qī", pairVi: "bảy", desc: "Thanh mẫu j — mặt lưỡi nâng lên, không bật hơi." },
   { sym: "q", group: "init", han: "七", py: "qī", vi: "bảy", pair: "j", pairHan: "鸡", pairPy: "jī", pairVi: "gà", desc: "Thanh mẫu q — bật hơi mạnh." },
-  { sym: "x", group: "init", han: "学", py: "xué", vi: "học", pair: "sh", pairHan: "十", pairPy: "shí", pairVi: "mười", desc: "Thanh mẫu x — mặt lưỡi nâng lên, hơi thoát nhẹ." },
+  { sym: "x", group: "init", han: "细", py: "xì", vi: "nhỏ, tỉ mỉ", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu x — mặt lưỡi nâng lên, hơi thoát nhẹ." },
   { sym: "zh", group: "init", han: "中", py: "zhōng", vi: "giữa", pair: "ch", pairHan: "充", pairPy: "chōng", pairVi: "đổ đầy", desc: "Thanh mẫu zh — đầu lưỡi cuộn lên, không bật hơi." },
   { sym: "ch", group: "init", han: "充", py: "chōng", vi: "đổ đầy", pair: "zh", pairHan: "中", pairPy: "zhōng", pairVi: "giữa", desc: "Thanh mẫu ch — đầu lưỡi cuộn lên, bật hơi mạnh." },
   { sym: "sh", group: "init", han: "是", py: "shì", vi: "là", pair: "r", pairHan: "日", pairPy: "rì", pairVi: "ngày", desc: "Thanh mẫu sh — đầu lưỡi cuộn lên, hơi thoát nhẹ." },
-  { sym: "r", group: "init", han: "人", py: "rén", vi: "người", pair: "sh", pairHan: "十", pairPy: "shí", pairVi: "mười", desc: "Thanh mẫu r — đầu lưỡi cuộn lên, hơi ma sát nhẹ, dây thanh rung." },
-  { sym: "z", group: "init", han: "在", py: "zài", vi: "ở", pair: "c", pairHan: "才", pairPy: "cái", pairVi: "mới", desc: "Thanh mẫu z — đầu lưỡi chạm răng, không bật hơi." },
-  { sym: "c", group: "init", han: "才", py: "cái", vi: "mới", pair: "z", pairHan: "在", pairPy: "zài", pairVi: "ở", desc: "Thanh mẫu c — bật hơi mạnh." },
-  { sym: "s", group: "init", han: "三", py: "sān", vi: "ba", pair: "sh", pairHan: "十", pairPy: "shí", pairVi: "mười", desc: "Thanh mẫu s — đầu lưỡi chạm răng, hơi thoát nhẹ." }
+  { sym: "r", group: "init", han: "日", py: "rì", vi: "ngày", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu r — đầu lưỡi cuộn lên, hơi ma sát nhẹ, dây thanh rung." },
+  { sym: "z", group: "init", han: "在", py: "zài", vi: "ở", pair: "c", pairHan: "菜", pairPy: "cài", pairVi: "rau", desc: "Thanh mẫu z — đầu lưỡi chạm răng, không bật hơi." },
+  { sym: "c", group: "init", han: "菜", py: "cài", vi: "rau", pair: "z", pairHan: "在", pairPy: "zài", pairVi: "ở", desc: "Thanh mẫu c — bật hơi mạnh." },
+  { sym: "s", group: "init", han: "三", py: "sān", vi: "ba", pair: "sh", pairHan: "山", pairPy: "shān", pairVi: "núi", desc: "Thanh mẫu s — đầu lưỡi đưa gần răng trên nhưng không chạm, hơi xì qua khe hẹp." }
 ];
 var ZH_PRON_FINALS = [
-  { sym: "a", group: "fin", han: "大", py: "dà", vi: "lớn", pair: "an", pairHan: "班", pairPy: "bān", pairVi: "lớp", desc: "Vận mẫu a — miệng mở rộng." },
-  { sym: "o", group: "fin", han: "播", py: "bō", vi: "gieo hạt; phát sóng", pair: "ou", pairHan: "头", pairPy: "tóu", pairVi: "đầu", desc: "Vận mẫu o — môi tròn lại." }, /* v168 (N11): vi du cu 我 wǒ la van 'uo', khong phai 'o' — doi sang 播 bō */
-  { sym: "e", group: "fin", han: "个", py: "gè", vi: "cái", pair: "ao", pairHan: "好", pairPy: "hǎo", pairVi: "tốt", desc: "Vận mẫu e — miệng mở vừa, lưỡi hơi lùi." },
-  { sym: "i", group: "fin", han: "你", py: "nǐ", vi: "bạn", pair: "ü", pairHan: "绿", pairPy: "lǜ", pairVi: "xanh lá", desc: "Vận mẫu i — miệng cười nhẹ, lưỡi nâng cao." },
-  { sym: "u", group: "fin", han: "不", py: "bù", vi: "không", pair: "ai", pairHan: "白", pairPy: "bái", pairVi: "trắng", desc: "Vận mẫu u — môi chu lại như huýt sáo." },
-  { sym: "ü", group: "fin", han: "绿", py: "lǜ", vi: "xanh lá", pair: "u", pairHan: "路", pairPy: "lù", pairVi: "đường", desc: "Vận mẫu ü — môi chu như u, lưỡi như i." },
-  { sym: "ai", group: "fin", han: "来", py: "lái", vi: "đến", pair: "ei", pairHan: "飞", pairPy: "fēi", pairVi: "bay", desc: "Vận mẫu ai — miệng mở rộng rồi khép dần." },
-  { sym: "ei", group: "fin", han: "飞", py: "fēi", vi: "bay", pair: "ai", pairHan: "来", pairPy: "lái", pairVi: "đến", desc: "Vận mẫu ei — miệng mở vừa rồi khép dần." },
-  { sym: "ao", group: "fin", han: "好", py: "hǎo", vi: "tốt", pair: "ou", pairHan: "头", pairPy: "tóu", pairVi: "đầu", desc: "Vận mẫu ao — miệng mở rộng rồi tròn lại." },
-  { sym: "ou", group: "fin", han: "头", py: "tóu", vi: "đầu", pair: "ao", pairHan: "好", pairPy: "hǎo", pairVi: "tốt", desc: "Vận mẫu ou — môi tròn rồi khép dần." },
-  { sym: "an", group: "fin", han: "安", py: "ān", vi: "yên ổn", pair: "ang", pairHan: "上", pairPy: "shàng", pairVi: "trên", desc: "Vận mẫu an — kết thúc bằng n, đầu lưỡi chạm lợi." },
-  { sym: "en", group: "fin", han: "人", py: "rén", vi: "người", pair: "eng", pairHan: "生", pairPy: "shēng", pairVi: "sinh", desc: "Vận mẫu en — kết thúc bằng n, âm ngắn." },
-  { sym: "ang", group: "fin", han: "上", py: "shàng", vi: "trên", pair: "an", pairHan: "安", pairPy: "ān", pairVi: "yên ổn", desc: "Vận mẫu ang — kết thúc bằng ng, âm vang ở mũi sau." },
-  { sym: "eng", group: "fin", han: "生", py: "shēng", vi: "sinh", pair: "en", pairHan: "人", pairPy: "rén", pairVi: "người", desc: "Vận mẫu eng — kết thúc bằng ng, âm vang ở mũi sau." },
+  { sym: "a", group: "fin", han: "大", py: "dà", vi: "lớn", pair: "an", pairHan: "蛋", pairPy: "dàn", pairVi: "trứng", desc: "Vận mẫu a — miệng mở rộng." },
+  { sym: "o", group: "fin", han: "哦", py: "ō", vi: "ồ (thán từ)", pair: "ou", pairHan: "欧", pairPy: "ōu", pairVi: "châu Âu", desc: "Vận mẫu o — môi tròn lại." }, /* v169 (N28): cap toi thieu that 哦 ō / 欧 ōu (cung khong thanh mau, cung thanh 1) — 歌 gē la van 'e', khong phai 'o' */
+  { sym: "e", group: "fin", han: "个", py: "gè", vi: "cái", pair: "ao", pairHan: "告", pairPy: "gào", pairVi: "báo cho biết", desc: "Vận mẫu e — miệng mở vừa, lưỡi hơi lùi." },
+  { sym: "i", group: "fin", han: "里", py: "lǐ", vi: "bên trong", pair: "ü", pairHan: "旅", pairPy: "lǚ", pairVi: "du lịch", desc: "Vận mẫu i — miệng cười nhẹ, lưỡi nâng cao." },
+  { sym: "u", group: "fin", han: "不", py: "bù", vi: "không", pair: "ai", pairHan: "拜", pairPy: "bài", pairVi: "bái lạy", desc: "Vận mẫu u — môi chu lại như huýt sáo." },
+  { sym: "ü", group: "fin", han: "旅", py: "lǚ", vi: "du lịch", pair: "i", pairHan: "里", pairPy: "lǐ", pairVi: "bên trong", desc: "Vận mẫu ü — môi chu như u, lưỡi như i." },
+  { sym: "ai", group: "fin", han: "拜", py: "bài", vi: "bái lạy", pair: "ei", pairHan: "背", pairPy: "bèi", pairVi: "lưng; cõng", desc: "Vận mẫu ai — miệng mở rộng rồi khép dần." },
+  { sym: "ei", group: "fin", han: "美", py: "měi", vi: "đẹp", pair: "ai", pairHan: "买", pairPy: "mǎi", pairVi: "mua", desc: "Vận mẫu ei — miệng mở vừa rồi khép dần." },
+  { sym: "ao", group: "fin", han: "高", py: "gāo", vi: "cao", pair: "ou", pairHan: "勾", pairPy: "gōu", pairVi: "móc, câu", desc: "Vận mẫu ao — miệng mở rộng rồi tròn lại." },
+  { sym: "ou", group: "fin", han: "勾", py: "gōu", vi: "móc, câu", pair: "ao", pairHan: "高", pairPy: "gāo", pairVi: "cao", desc: "Vận mẫu ou — môi tròn rồi khép dần." },
+  { sym: "an", group: "fin", han: "班", py: "bān", vi: "lớp", pair: "ang", pairHan: "帮", pairPy: "bāng", pairVi: "giúp", desc: "Vận mẫu an — kết thúc bằng n, đầu lưỡi chạm lợi." },
+  { sym: "en", group: "fin", han: "奔", py: "bēn", vi: "chạy nhanh", pair: "eng", pairHan: "崩", pairPy: "bēng", pairVi: "sụp đổ", desc: "Vận mẫu en — kết thúc bằng n, âm ngắn." },
+  { sym: "ang", group: "fin", han: "帮", py: "bāng", vi: "giúp", pair: "an", pairHan: "班", pairPy: "bān", pairVi: "lớp", desc: "Vận mẫu ang — kết thúc bằng ng, âm vang ở mũi sau." },
+  { sym: "eng", group: "fin", han: "崩", py: "bēng", vi: "sụp đổ", pair: "en", pairHan: "奔", pairPy: "bēn", pairVi: "chạy nhanh", desc: "Vận mẫu eng — kết thúc bằng ng, âm vang ở mũi sau." },
   /* v135 (M4): bo sung 19 van mau con thieu — moi muc nhu 14 muc cu: chu Han that
      (tu HSK1/thuong dung) + pinyin + nghia Viet + cap de nham + 1 dong huong dan. */
   { sym: "ia", group: "fin", han: "家", py: "jiā", vi: "nhà", pair: "iao", pairHan: "交", pairPy: "jiāo", pairVi: "giao, đưa", desc: "Vận mẫu ia — đọc i rồi trượt nhanh sang a, miệng mở rộng dần." },
-  { sym: "ie", group: "fin", han: "姐", py: "jiě", vi: "chị gái", pair: "ia", pairHan: "家", pairPy: "jiā", pairVi: "nhà", desc: "Vận mẫu ie — đọc i rồi trượt sang e, miệng mở vừa." },
+  { sym: "ie", group: "fin", han: "姐", py: "jiě", vi: "chị gái", pair: "ia", pairHan: "假", pairPy: "jiǎ", pairVi: "giả", desc: "Vận mẫu ie — đọc i rồi trượt sang e, miệng mở vừa." },
   /* v137 (M5): bo sung 3 van mau chuan con thieu (üe/üan/ün) — he chuan 36 van. */
-  { sym: "üe", group: "fin", han: "学", py: "xué", vi: "học", pair: "ie", pairHan: "姐", pairPy: "jiě", pairVi: "chị gái", desc: "Vận mẫu üe — môi chu như u, lưỡi như i rồi trượt sang e. Chỉ đi sau j, q, x, y (viết gọn thành ue: xué)." },
+  { sym: "üe", group: "fin", han: "学", py: "xué", vi: "học", pair: "ie", pairHan: "鞋", pairPy: "xié", pairVi: "giày", desc: "Vận mẫu üe — môi chu như u, lưỡi như i rồi trượt sang e. Chỉ đi sau j, q, x, y (viết gọn thành ue: xué)." },
   { sym: "iao", group: "fin", han: "交", py: "jiāo", vi: "giao, đưa", pair: "ia", pairHan: "家", pairPy: "jiā", pairVi: "nhà", desc: "Vận mẫu iao — trượt từ i qua a rồi khép về o, đọc liền một hơi." },
-  { sym: "iu", group: "fin", han: "九", py: "jiǔ", vi: "chín (số 9)", pair: "ui", pairHan: "贵", pairPy: "guì", pairVi: "quý, đắt", desc: "Vận mẫu iu — đọc i rồi khép về u, môi tròn dần. Đừng nhầm với ui (u rồi i)." },
-  { sym: "ian", group: "fin", han: "点", py: "diǎn", vi: "điểm; một chút", pair: "in", pairHan: "心", pairPy: "xīn", pairVi: "tim, lòng", desc: "Vận mẫu ian — đọc i rồi sang a, kết thúc bằng n, đầu lưỡi chạm lợi." },
-  { sym: "in", group: "fin", han: "心", py: "xīn", vi: "tim, lòng", pair: "ian", pairHan: "点", pairPy: "diǎn", pairVi: "điểm; một chút", desc: "Vận mẫu in — đọc i rồi kết thúc bằng n, âm ngắn, đầu lưỡi chạm lợi." },
-  { sym: "iang", group: "fin", han: "两", py: "liǎng", vi: "hai", pair: "ian", pairHan: "点", pairPy: "diǎn", pairVi: "điểm; một chút", desc: "Vận mẫu iang — đọc i rồi sang a, kết thúc bằng ng, âm vang mũi sâu." },
-  { sym: "ing", group: "fin", han: "听", py: "tīng", vi: "nghe", pair: "in", pairHan: "心", pairPy: "xīn", pairVi: "tim, lòng", desc: "Vận mẫu ing — đọc i rồi kết thúc bằng ng, âm vang mũi sâu, lưỡi nâng cao." },
-  { sym: "iong", group: "fin", han: "穷", py: "qióng", vi: "nghèo", pair: "ong", pairHan: "东", pairPy: "dōng", pairVi: "phía đông", desc: "Vận mẫu iong — đọc i rồi sang o, kết thúc bằng ng. Chỉ đi sau j, q, x, y." },
-  { sym: "ua", group: "fin", han: "花", py: "huā", vi: "hoa", pair: "uo", pairHan: "火", pairPy: "huǒ", pairVi: "lửa", desc: "Vận mẫu ua — đọc u rồi trượt sang a, miệng mở rộng dần." },
-  { sym: "uo", group: "fin", han: "我", py: "wǒ", vi: "tôi", pair: "ua", pairHan: "花", pairPy: "huā", pairVi: "hoa", desc: "Vận mẫu uo — đọc u rồi trượt sang o, môi tròn dần." },
-  { sym: "uai", group: "fin", han: "快", py: "kuài", vi: "nhanh", pair: "ui", pairHan: "会", pairPy: "huì", pairVi: "biết, có thể", desc: "Vận mẫu uai — trượt từ u qua a rồi khép về i, đọc liền một hơi." },
-  { sym: "ui", group: "fin", han: "会", py: "huì", vi: "biết, có thể", pair: "uai", pairHan: "快", pairPy: "kuài", pairVi: "nhanh", desc: "Vận mẫu ui — đọc u rồi khép về i. Đừng nhầm với iu (i rồi u)." },
-  { sym: "uan", group: "fin", han: "短", py: "duǎn", vi: "ngắn", pair: "üan", pairHan: "元", pairPy: "yuán", pairVi: "đơn vị tiền; nguyên", desc: "Vận mẫu uan — đọc u rồi sang a, kết thúc bằng n." },
-  { sym: "üan", group: "fin", han: "元", py: "yuán", vi: "đơn vị tiền; nguyên", pair: "uan", pairHan: "短", pairPy: "duǎn", pairVi: "ngắn", desc: "Vận mẫu üan — môi chu như u rồi trượt sang a, kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành uan: yuán). Đừng nhầm với uan (u thật) như 短 duǎn." },
-  { sym: "un", group: "fin", han: "问", py: "wèn", vi: "hỏi", pair: "uan", pairHan: "短", pairPy: "duǎn", pairVi: "ngắn", desc: "Vận mẫu un — đọc u rồi kết thúc bằng n, âm ngắn." },
-  { sym: "ün", group: "fin", han: "运", py: "yùn", vi: "vận chuyển; vận may", pair: "un", pairHan: "问", pairPy: "wèn", pairVi: "hỏi", desc: "Vận mẫu ün — môi chu như u, lưỡi như i rồi kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành un: yùn)." },
-  { sym: "uang", group: "fin", han: "双", py: "shuāng", vi: "đôi, cặp", pair: "uan", pairHan: "短", pairPy: "duǎn", pairVi: "ngắn", desc: "Vận mẫu uang — đọc u rồi sang a, kết thúc bằng ng, âm vang mũi sâu." },
-  { sym: "ueng", group: "fin", han: "翁", py: "wēng", vi: "ông lão", pair: "eng", pairHan: "风", pairPy: "fēng", pairVi: "gió", desc: "Vận mẫu ueng — đọc u rồi sang e, kết thúc bằng ng. Hiếm gặp, chủ yếu trong chữ 翁 (ông lão)." },
+  { sym: "iu", group: "fin", han: "九", py: "jiǔ", vi: "chín (số 9)", pair: "i", pairHan: "挤", pairPy: "jǐ", pairVi: "chen chúc", desc: "Vận mẫu iu — đọc i rồi khép về u, môi tròn dần. Đừng nhầm với ui (u rồi i)." },
+  { sym: "ian", group: "fin", han: "剪", py: "jiǎn", vi: "cắt", pair: "in", pairHan: "紧", pairPy: "jǐn", pairVi: "chặt", desc: "Vận mẫu ian — đọc i rồi sang a, kết thúc bằng n, đầu lưỡi chạm lợi." },
+  { sym: "in", group: "fin", han: "紧", py: "jǐn", vi: "chặt", pair: "ian", pairHan: "剪", pairPy: "jiǎn", pairVi: "cắt", desc: "Vận mẫu in — đọc i rồi kết thúc bằng n, âm ngắn, đầu lưỡi chạm lợi." },
+  { sym: "iang", group: "fin", han: "两", py: "liǎng", vi: "hai", pair: "ian", pairHan: "脸", pairPy: "liǎn", pairVi: "mặt", desc: "Vận mẫu iang — đọc i rồi sang a, kết thúc bằng ng, âm vang mũi sâu." },
+  { sym: "ing", group: "fin", han: "星", py: "xīng", vi: "ngôi sao", pair: "in", pairHan: "心", pairPy: "xīn", pairVi: "tim, lòng", desc: "Vận mẫu ing — đọc i rồi kết thúc bằng ng, âm vang mũi sâu, lưỡi nâng cao." },
+  { sym: "iong", group: "fin", han: "穷", py: "qióng", vi: "nghèo", pair: "iang", pairHan: "强", pairPy: "qiáng", pairVi: "mạnh, khỏe", desc: "Vận mẫu iong — đọc i rồi sang o, kết thúc bằng ng. Chỉ đi sau j, q, x, y." }, /* v169 (N28): cap toi thieu that 穷 qióng / 强 qiáng (cung q, cung thanh 2) — giu vi du goc N10; 窘 jiǒng it gap hon */
+  { sym: "ua", group: "fin", han: "瓜", py: "guā", vi: "dưa", pair: "uo", pairHan: "锅", pairPy: "guō", pairVi: "nồi", desc: "Vận mẫu ua — đọc u rồi trượt sang a, miệng mở rộng dần." },
+  { sym: "uo", group: "fin", han: "锅", py: "guō", vi: "nồi", pair: "ua", pairHan: "瓜", pairPy: "guā", pairVi: "dưa", desc: "Vận mẫu uo — đọc u rồi trượt sang o, môi tròn dần." },
+  { sym: "uai", group: "fin", han: "快", py: "kuài", vi: "nhanh", pair: "ui", pairHan: "愧", pairPy: "kuì", pairVi: "hổ thẹn", desc: "Vận mẫu uai — trượt từ u qua a rồi khép về i, đọc liền một hơi." },
+  { sym: "ui", group: "fin", han: "会", py: "huì", vi: "biết, có thể", pair: "u", pairHan: "户", pairPy: "hù", pairVi: "hộ gia đình", desc: "Vận mẫu ui — đọc u rồi khép về i. Đừng nhầm với iu (i rồi u)." },
+  { sym: "uan", group: "fin", han: "短", py: "duǎn", vi: "ngắn", pair: "an", pairHan: "胆", pairPy: "dǎn", pairVi: "gan, mật", desc: "Vận mẫu uan — đọc u rồi sang a, kết thúc bằng n." },
+  { sym: "üan", group: "fin", han: "愿", py: "yuàn", vi: "nguyện, mong muốn", pair: "ian", pairHan: "宴", pairPy: "yàn", pairVi: "tiệc", desc: "Vận mẫu üan — môi chu như u rồi trượt sang a, kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành uan: yuán). Đừng nhầm với uan (u thật) như 短 duǎn." },
+  { sym: "un", group: "fin", han: "温", py: "wēn", vi: "ấm", pair: "uan", pairHan: "弯", pairPy: "wān", pairVi: "cong", desc: "Vận mẫu un — đọc u rồi kết thúc bằng n, âm ngắn." },
+  { sym: "ün", group: "fin", han: "运", py: "yùn", vi: "vận chuyển; vận may", pair: "in", pairHan: "印", pairPy: "yìn", pairVi: "in, dấu", desc: "Vận mẫu ün — môi chu như u, lưỡi như i rồi kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành un: yùn)." },
+  { sym: "uang", group: "fin", han: "黄", py: "huáng", vi: "vàng", pair: "uan", pairHan: "还", pairPy: "huán", pairVi: "trả lại", desc: "Vận mẫu uang — đọc u rồi sang a, kết thúc bằng ng, âm vang mũi sâu." },
+  { sym: "ueng", group: "fin", han: "翁", py: "wēng", vi: "ông lão", pair: "uang", pairHan: "汪", pairPy: "wāng", pairVi: "nước mênh mông", desc: "Vận mẫu ueng — đọc u rồi sang e, kết thúc bằng ng. Hiếm gặp, chủ yếu trong chữ 翁 (ông lão)." },
   { sym: "er", group: "fin", han: "二", py: "èr", vi: "hai (số 2)", pair: "e", pairHan: "饿", pairPy: "è", pairVi: "đói", desc: "Vận mẫu er — đầu lưỡi cuộn lên, âm vang như r cuối, chỉ đứng một mình thành âm tiết." },
-  { sym: "ong", group: "fin", han: "东", py: "dōng", vi: "phía đông", pair: "iong", pairHan: "用", pairPy: "yòng", pairVi: "dùng", desc: "Vận mẫu ong — đọc o rồi kết thúc bằng ng, môi tròn, âm vang mũi sâu." }
+  { sym: "ong", group: "fin", han: "东", py: "dōng", vi: "phía đông", pair: "ang", pairHan: "当", pairPy: "dāng", pairVi: "làm, đảm nhiệm", desc: "Vận mẫu ong — đọc o rồi kết thúc bằng ng, môi tròn, âm vang mũi sâu." }
 ];
 function zhPronSounds() { return ZH_PRON_INITIALS.concat(ZH_PRON_FINALS, ZH_PRON_TONES); } /* v137 (M5): thu tu dung su pham — thanh mau -> van mau -> thanh dieu */
 function zhPronEntry(sym) {
@@ -8512,6 +8540,18 @@ function tpPronMapHTML() {
     });
     h += '</div>';
   });
+  /* v169 (N33): Phu am cuoi doi (겹받침) — 11 to hop, khong phai 11 am moi nen
+     khong them vao ban do 49 am; day o day dang bang quy tac. Truoc phu am/cuoi tu
+     chi doc 1 am: 8 nhom doc am trai (ㄳㄱ·ㄵㄴ·ㄶㄴ·ㄼㄹ·ㄽㄹ·ㄾㄹ·ㅄㅂ·ㅀㄹ),
+     3 nhom doc am phai (ㄺㄱ·ㄻㅁ·ㄿㅂ). Truoc nguyen am: am sau nhay sang
+     am tiet sau. Ngoai le: 밟다 [밥따]; ㄺ + duoi -고/-게 thi doc am trai (읽고 [일꼬]). */
+  h += '<div class="qblock"><h3>Phụ âm cuối đôi (겹받침) — 11 tổ hợp</h3>'
+    + '<p class="mut">Hai phụ âm đứng cuối một âm tiết. Đứng trước phụ âm hoặc cuối từ, chỉ đọc MỘT âm — nhớ 2 nhóm: <b>đọc âm trái</b> (8): ㄳ→ㄱ, ㄵ→ㄴ, ㄶ→ㄴ, ㄼ→ㄹ, ㄽ→ㄹ, ㄾ→ㄹ, ㅄ→ㅂ, ㅀ→ㄹ (ㅎ trong ㄶ/ㅀ rơi đi); <b>đọc âm phải</b> (3): ㄺ→ㄱ, ㄻ→ㅁ, ㄿ→ㅂ. Đứng trước nguyên âm thì âm sau “nhảy” sang âm tiết sau (연음), vd 읽어 [일거] — chỉ ㄶ/ㅀ là ㅎ rơi đi, còn lại cả hai âm đều nghe thấy.</p>'
+    + '<p>· ㄳ [ㄱ] — 몫 [목] (phần, cổ phần) · ㄵ [ㄴ] — 앉다 [안따] (ngồi) · ㄶ [ㄴ] — 많다 [만타] (nhiều)<br>'
+    + '· ㄺ [ㄱ] — 읽다 [익따] (đọc) · ㄻ [ㅁ] — 삶 [삼] (cuộc sống) · ㄼ [ㄹ] — 넓다 [널따] (rộng)<br>'
+    + '· ㄽ [ㄹ] — 외곬 [외골] (một đường) · ㄾ [ㄹ] — 핥다 [할따] (liếm) · ㅀ [ㄹ] — 싫다 [실타] (ghét)<br>'
+    + '· ㅄ [ㅂ] — 값 [갑] (giá) · 없다 [업따] (không có) · ㄿ [ㅂ] — 읊다 [읍따] (ngâm thơ)</p>'
+    + '<p class="mut">Ngoại lệ cần nhớ: 밟다 đọc [밥따] (ㄼ đọc âm phải ㅂ); ㄺ gặp đuôi bắt đầu bằng ㄱ thì đọc âm trái: 읽고 [일꼬] (đọc), 맑고 [말꼬] (trong).</p></div>';
   h += '</section>';
   return h;
 }
@@ -10867,7 +10907,7 @@ function renderCh1Skill(app, l, d, isListen) {
     renderShadowListen(app, l, { text: d.script, topic: d.title }, false);
     return;
   }
-  if (!l.ans) l.ans = {};
+  if (!l.ans) { l.ans = {}; quizDispClear(); }
   var qs = d.qs;
   var html = stepHeader(step);
   html += '<div class="qblock"><p class="mut">' + esc(d.intro) + '</p>';
@@ -10888,8 +10928,8 @@ function renderCh1Skill(app, l, d, isListen) {
     qs.forEach(function (q, qi) {
       var picked = (l.ans[qi] !== undefined) ? l.ans[qi] : -1;
       html += '<div class="qblock"><p><b>Câu ' + (qi + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">';
-      q.o.forEach(function (op, oi) {
-        html += '<button class="btn ch1opt" data-qi="' + qi + '" data-oi="' + oi + '"' + (picked >= 0 ? ' disabled' : '') + '>' + esc(op) + '</button>';
+      quizDispIdx("ch1:" + step.id + ":" + qi + ":" + String(q.q).slice(0, 24), q.o.length).forEach(function (oi) {
+        html += '<button class="btn ch1opt" data-qi="' + qi + '" data-oi="' + oi + '"' + (picked >= 0 ? ' disabled' : '') + '>' + esc(q.o[oi]) + '</button>';
       });
       html += '</div>';
       if (picked >= 0) html += '<p class="why show">' + (picked === q.a ? '✓ Đúng. ' : '✗ Chưa đúng. Đáp án đúng: <b>' + esc(q.o[q.a]) + '</b>. ') + esc(q.why) + '</p>';
@@ -10924,7 +10964,7 @@ function renderCh1Skill(app, l, d, isListen) {
     var note = anyWrong ? '<p class="mut">Câu sai đã vào Sổ lỗi sai để ôn lại sau.</p>' : (answered < total ? '<p class="mut">Bạn chưa trả lời hết các câu — bấm Làm lại để làm tiếp khi muốn.</p>' : '<p>Đúng hết — tốt lắm!</p>');
     app.innerHTML = stepHeader(step) + '<div class="summarybox"><h2>Bạn đã học xong bài này!</h2><p>Kết quả: ' + firstN + '/' + total + ' câu đúng ngay lần đầu (' + answered + '/' + total + ' câu đã trả lời).</p>' + note + '<div class="row"><button class="btn btn-primary" id="ch1Again">Làm lại</button><button class="btn" id="ch1Back2">Về màn chính</button></div></div>';
     wireBack();
-    $("#ch1Again").onclick = function () { l.ans = {}; render(); };
+    $("#ch1Again").onclick = function () { l.ans = {}; quizDispClear(); render(); };
     $("#ch1Back2").onclick = function () { backFromLesson(); };
   };
 }
@@ -11631,7 +11671,7 @@ function fixStepHTML(l, lessonId, qs) {
       ? '<p><b>✓ Đúng rồi — bạn đã nắm được dạng ' + esc(typeName) + '.</b></p>'
       : '<p><b>✗ Chưa đúng.</b> Đáp án đúng: <b>' + esc(pAns) + '</b> — ' + esc(pqn.why || "") + '</p><p class="mut">Câu này đã vào Sổ lỗi sai để ôn lại sau.</p>';
   } else if (pqn.o) {
-    out += pqn.o.map(function (opt, i) { return '<button class="q-opt rf-opt" data-i="' + i + '">' + esc(opt) + '</button>'; }).join("");
+    out += quizDispIdx("rf:" + lessonId + ":" + String(pqn.q).slice(0, 24), pqn.o.length).map(function (i) { return '<button class="q-opt rf-opt" data-i="' + i + '">' + esc(pqn.o[i]) + '</button>'; }).join("");
   } else {
     out += '<input type="text" id="fixPracticeInp" placeholder="Gõ đáp án của bạn..." style="width:100%;padding:10px;margin:8px 0"><button class="btn btn-primary" id="fixPracticeSend">Trả lời</button>';
   }
@@ -12110,7 +12150,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
       wireBack(); wireNextStep(); clWireRetry(l);
       var gfw158 = $("#gramFreeWrite"); if (gfw158) gfw158.onclick = function () { l.freeWrite = true; render(); };
       if (stepIdx(step.id) < 0) { var nsP = $("#btnNextStep"); if (nsP) { nsP.textContent = "Về Luyện tập"; nsP.onclick = function () { backFromLesson(); }; } }
-      $("#btnRedo").onclick = function () { l.qi = 0; l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
+      $("#btnRedo").onclick = function () { l.qi = 0; quizDispClear(); l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
     } else if (mode === "skill") {
       var was = !!(state.skillDone && state.skillDone[l.skillKey]);
       if (!state.skillDone) state.skillDone = {};
@@ -12131,17 +12171,17 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
       /* v153 S16: mo man chua loi 6 buoc cho bai Doc EN. */
       $$("[data-fixstep]").forEach(function (b) { b.onclick = function () { l.fixStep = { qi: +b.dataset.fixstep, step: 1, pq: null, pqState: null }; render(); }; });
       var ns = $("#btnNextStep"); if (ns && l.type !== "entryCheck") { ns.textContent = "Về Luyện tập"; ns.onclick = function () { backFromLesson(); }; }
-      $("#btnRedo").onclick = function () { l.qi = 0; l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
+      $("#btnRedo").onclick = function () { l.qi = 0; quizDispClear(); l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
     } else if (mode === "phase" || mode === "mock") {
       if (typeof l.onDone === "function") { l.onDone({ firstN: firstN, total: total, wrong: runWrong.slice(), questions: qs }); return; }
       app.innerHTML = head + finishSummaryHTML("Hoàn thành bài kiểm tra!", stats, wrongHTML);
       wireBack();
       var ns2 = $("#btnNextStep"); if (ns2) { ns2.textContent = "Về Luyện tập"; ns2.onclick = function () { backFromLesson(); }; }
-      $("#btnRedo").onclick = function () { l.qi = 0; l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
+      $("#btnRedo").onclick = function () { l.qi = 0; quizDispClear(); l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
     } else {
       app.innerHTML = stepHeader(step) + finishSummaryHTML("Hoàn thành bài kiểm tra!", stats, wrongHTML);
       wireBack(); wireNextStep();
-      $("#btnRedo").onclick = function () { l.qi = 0; l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
+      $("#btnRedo").onclick = function () { l.qi = 0; quizDispClear(); l.streak = 0; l.encourage = ""; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; runFirstTry = {}; runWrong = []; lessonStart = Date.now(); render(); };
     }
     return;
   }
@@ -12165,8 +12205,8 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
     + (l.encourage && !l.encourageShown ? '<div class="sumcard" id="quizEncourage"><b>' + esc(l.encourage) + '</b><p><button class="btn btn-primary" id="encOk">Tiếp tục →</button></p></div>' : '')
     + '<p><b>' + esc(q.q) + '</b></p>';
   if (q.o) {
-    q.o.forEach(function (opt, i) {
-      html += '<button class="q-opt" data-i="' + i + '"' + (answered ? " disabled" : "") + '>' + esc(opt) + '</button>';
+    quizDispIdx("qe:" + lessonId + ":" + qi + ":" + String(q.q).slice(0, 24), q.o.length).forEach(function (i) {
+      html += '<button class="q-opt" data-i="' + i + '"' + (answered ? " disabled" : "") + '>' + esc(q.o[i]) + '</button>';
     });
   } else {
     html += '<input type="text" id="quizInp" placeholder="Gõ đáp án của bạn..." style="width:100%;padding:10px;margin:8px 0">'
@@ -12265,7 +12305,7 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
         var i = +b.dataset.i;
         if (mode === "phase" || mode === "mock" || mode === "test") {
           if (i === q.a) { b.classList.add("ok"); if (runFirstTry[qi] === undefined) { runFirstTry[qi] = true; bumpStreak(); } }
-          else { b.classList.add("bad"); markWrong(); $$("#quizBox .q-opt")[q.a].classList.add("ok"); }
+          else { b.classList.add("bad"); markWrong(); var okB169 = quizOptByOrig("#quizBox .q-opt", q.a); if (okB169) okB169.classList.add("ok"); }
           finishOneShot();
           return;
         }
@@ -12726,7 +12766,7 @@ function phShadowQuizHTML(l, sym) {
     var qi = sh.qi || 0, q = qs[qi];
     html += '<div id="shadowQuizBox"><div class="row"><span class="chip">Câu ' + (qi + 1) + '/' + qs.length + '</span></div>'
       + '<p><b>' + esc(q.q) + '</b></p>'
-      + q.o.map(function (opt, i) { return '<button class="btn shadow-opt" data-i="' + i + '"' + ((sh.disabled && sh.disabled.indexOf(i) >= 0) || sh.answered ? ' disabled' : '') + '>' + esc(opt) + '</button>'; }).join("")
+      + quizDispIdx("sh:" + sym + ":" + qi + ":" + String(q.q).slice(0, 24), q.o.length).map(function (i) { return '<button class="btn shadow-opt" data-i="' + i + '"' + ((sh.disabled && sh.disabled.indexOf(i) >= 0) || sh.answered ? ' disabled' : '') + '>' + esc(q.o[i]) + '</button>'; }).join("")
       + '<div class="why' + (sh.whyText ? ' show' : '') + '" id="shadowQuizWhy">' + esc(sh.whyText || '') + '</div>'
       + '<button class="btn btn-primary" id="shadowQuizNext" style="display:' + (sh.answered ? 'inline-block' : 'none') + '">Tiếp tục →</button></div>';
   }
@@ -12878,11 +12918,11 @@ function renderPronLesson(app, l) {
   var sqStart = $("#shadowQuizStart");
   if (sqStart) sqStart.onclick = function () {
     if (!phShadowReady(l, sym)) { toast("Hãy xem video và nghe từ ví dụ trước đã — quiz shadowing chỉ mở sau khi bạn đã nghe mẫu một lần cho âm này."); return; }
-    l.shadow = { sym: sym, started: true, qi: 0, wrongs: 0, wrongList: [], firstN: 0, answered: false, revealed: false, disabled: [], logged: [], whyText: "" };
+    l.shadow = { sym: sym, started: true, qi: 0, wrongs: 0, wrongList: [], firstN: 0, answered: false, revealed: false, disabled: [], logged: [], whyText: "" }; quizDispClear();
     render();
   };
   var sqRedo = $("#shadowQuizRedo");
-  if (sqRedo) sqRedo.onclick = function () { l.shadow = { sym: sym, started: true, qi: 0, wrongs: 0, wrongList: [], firstN: 0, answered: false, revealed: false, disabled: [], logged: [], whyText: "" }; render(); };
+  if (sqRedo) sqRedo.onclick = function () { l.shadow = { sym: sym, started: true, qi: 0, wrongs: 0, wrongList: [], firstN: 0, answered: false, revealed: false, disabled: [], logged: [], whyText: "" }; quizDispClear(); render(); };
   $$("#shadowQuizBox .shadow-opt").forEach(function (b) {
     b.onclick = function () {
       var sh = l.shadow, qs = phShadowQuizQs(sym), qi = sh.qi || 0, q = qs[qi], i = +b.dataset.i;
@@ -14642,7 +14682,7 @@ function msOpen(track, stageKey) { lessonStart = Date.now(); openLesson({ type: 
 function msWire(scope) {
   (scope || document).querySelectorAll("[data-ms]").forEach(function (b) { b.onclick = function () { var parts = b.dataset.ms.split(":"); var tr = parts[0]; var sk = parts.slice(1).join(":"); if (tr !== "en") sk = +sk; msOpen(tr, sk); }; });
 }
-function msResetLesson(l) { l.msPhase = 0; l.msDraft = ""; l.msRewrite = ""; l.msAi = null; l.msAiTried = false; l.msAns = {}; l.msOk = {}; l.msShowVi = false; l.msTranscript = ""; l.msAiSpk = null; l.msAiSpkBusy = false; l.msUrl = ""; l.msRecording = false; }
+function msResetLesson(l) { quizDispClear(); l.msPhase = 0; l.msDraft = ""; l.msRewrite = ""; l.msAi = null; l.msAiTried = false; l.msAns = {}; l.msOk = {}; l.msShowVi = false; l.msTranscript = ""; l.msAiSpk = null; l.msAiSpkBusy = false; l.msUrl = ""; l.msRecording = false; }
 function renderMilestone(app, l) {
   var track = l.track || "en";
   var stageKey = (track === "en") ? l.stageKey : +l.stageKey;
@@ -14733,11 +14773,11 @@ function renderMilestone(app, l) {
     var allOk = qs.length > 0 && qs.every(function (q, qi) { return !!((l.msOk || {})[qi]); });
     var qHTML = qs.map(function (q, qi) {
       var picked = (l.msAns || {})[qi]; var ok = !!((l.msOk || {})[qi]);
-      var opts = q.o.map(function (o, oi) {
+      var opts = quizDispIdx("ms:" + key + ":" + qi + ":" + String(q.q).slice(0, 24), q.o.length).map(function (oi) {
         var mark = "";
         if (picked === oi && ok) mark = " ✓";
         if (picked === oi && !ok) mark = " ✗";
-        return '<button class="btn" data-msq="' + qi + ':' + oi + '">' + esc(o) + mark + '</button>';
+        return '<button class="btn" data-msq="' + qi + ':' + oi + '">' + esc(q.o[oi]) + mark + '</button>';
       }).join(" ");
       return '<div class="qblock"><p><b>Câu ' + (qi + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + opts + '</div>' + (picked != null ? '<p class="' + (ok ? 'ai-good' : 'ai-bad') + '">' + (ok ? 'Đúng rồi! ' : 'Chưa đúng — nghe lại đoạn hội thoại rồi chọn lại. ') + esc(q.why) + '</p>' : '') + '</div>';
     }).join("");
@@ -14892,7 +14932,7 @@ function renderTest(app, l) {
       backFromLesson();
       openStep(weakest.name === "Âm và câu nói hàng ngày" ? stepById("pron1") : stepById("classroom"), { noNudge: true });
     };
-    $("#btnRedo").onclick = function () { curLesson = { type: "test", qi: 0, answers: {}, score: 0 }; runWrong = []; runFirstTry = {}; lessonStart = Date.now(); render(); };
+    $("#btnRedo").onclick = function () { quizDispClear(); curLesson = { type: "test", qi: 0, answers: {}, score: 0 }; runWrong = []; runFirstTry = {}; lessonStart = Date.now(); render(); };
     $("#btnHome").onclick = function () { backFromLesson(); go("home"); };
     return;
   }
@@ -14905,7 +14945,7 @@ function renderTest(app, l) {
   var html = stepHeader(step);
   html += '<div class="qblock" id="quizBox"><div class="row"><span class="chip">Câu ' + (qi + 1) + '/' + questions.length + '</span></div>'
     + '<p><b>' + esc(q.q) + '</b></p>';
-  q.o.forEach(function (opt, i) { html += '<button class="q-opt" data-i="' + i + '">' + esc(opt) + '</button>'; });
+  quizDispIdx("test:" + qi + ":" + String(q.q).slice(0, 24), q.o.length).forEach(function (i) { html += '<button class="q-opt" data-i="' + i + '">' + esc(q.o[i]) + '</button>'; });
   html += '<div class="why" id="quizWhy"></div><button class="btn btn-primary" id="quizNext" style="display:none">Tiếp tục →</button></div>';
   app.innerHTML = html;
   wireBack();
@@ -14926,7 +14966,7 @@ function renderTest(app, l) {
       if (answered) return; answered = true;
       var i = +b.dataset.i;
       if (i === q.a) { b.classList.add("ok"); l2.answers[qi] = true; l2.score++; }
-      else { b.classList.add("bad"); $$("#quizBox .q-opt")[q.a].classList.add("ok"); l2.answers[qi] = false; if (runWrong.indexOf(qi) < 0) { runWrong.push(qi); recordQuizError("test", qi, q); } }
+      else { b.classList.add("bad"); var okB169 = quizOptByOrig("#quizBox .q-opt", q.a); if (okB169) okB169.classList.add("ok"); l2.answers[qi] = false; if (runWrong.indexOf(qi) < 0) { runWrong.push(qi); recordQuizError("test", qi, q); } }
       finishTestQ();
     };
   });
@@ -14935,7 +14975,7 @@ function renderTest(app, l) {
 /* ----- Kiểm tra nhanh (tùy chọn, không bao giờ là cổng) ----- */
 function renderQuickcheck(app, l) {
   var qs = [RB_CH1_TEST.questions[0], RB_CH1_TEST.questions[2], RB_CH1_TEST.questions[4], RB_CH1_TEST.questions[6]];
-  if (l.qi === undefined) l.qi = 0;
+  if (l.qi === undefined) { l.qi = 0; quizDispClear(); }
   if (l.qi >= qs.length) {
     var score = l.score || 0;
     var sug = score >= 3
@@ -14952,7 +14992,7 @@ function renderQuickcheck(app, l) {
   var q = qs[l.qi];
   var html = '<div class="lessonframe"><div class="row"><button class="btn" id="btnBack">← Quay lại</button><span class="chip">Kiểm tra nhanh (tùy chọn) · Câu ' + (l.qi + 1) + '/' + qs.length + '</span></div></div>'
     + '<div class="qblock" id="quizBox"><p><b>' + esc(q.q) + '</b></p>';
-  q.o.forEach(function (opt, i) { html += '<button class="q-opt" data-i="' + i + '">' + esc(opt) + '</button>'; });
+  quizDispIdx("qc:" + l.qi + ":" + String(q.q).slice(0, 24), q.o.length).forEach(function (i) { html += '<button class="q-opt" data-i="' + i + '">' + esc(q.o[i]) + '</button>'; });
   html += '<div class="why" id="quizWhy"></div><button class="btn btn-primary" id="quizNext" style="display:none">Tiếp tục →</button></div>';
   app.innerHTML = html;
   wireBack();
@@ -14969,7 +15009,7 @@ function renderQuickcheck(app, l) {
       if (answered) return; answered = true;
       var i = +b.dataset.i;
       if (i === q.a) { b.classList.add("ok"); l.score = (l.score || 0) + 1; }
-      else { b.classList.add("bad"); $$("#quizBox .q-opt")[q.a].classList.add("ok"); }
+      else { b.classList.add("bad"); var okB169 = quizOptByOrig("#quizBox .q-opt", q.a); if (okB169) okB169.classList.add("ok"); }
       finishQcQ();
     };
   });
@@ -18317,8 +18357,8 @@ function renderExamListen(slot, l, questions, opts) {
     var ans = l.examAns[i] || {};
     html += '<div class="qblock exam-q" data-qi="' + i + '"><p><b>Câu ' + (i + 1) + '. ' + esc(q.q) + '</b></p>';
     if (q.o) {
-      q.o.forEach(function (opt, j) {
-        html += '<button class="q-opt' + (ans.v === j && !ans.dk ? ' q-opt-sel' : '') + '" data-examopt="' + i + ':' + j + '"' + (ans.dk ? ' disabled' : '') + '>' + esc(opt) + '</button>';
+      quizDispIdx("exam:" + (opts.lessonId || "") + ":" + i + ":" + String(q.q).slice(0, 24), q.o.length).forEach(function (j) {
+        html += '<button class="q-opt' + (ans.v === j && !ans.dk ? ' q-opt-sel' : '') + '" data-examopt="' + i + ':' + j + '"' + (ans.dk ? ' disabled' : '') + '>' + esc(q.o[j]) + '</button>';
       });
     } else {
       html += '<input type="text" data-examinput="' + i + '" value="' + esc(ans.v || '') + '" placeholder="Gõ đáp án của bạn..." style="width:100%;padding:10px;margin:8px 0"' + (ans.dk ? ' disabled' : '') + '>';
@@ -18412,8 +18452,8 @@ function renderExamRead(slot, l, questions, opts) {
     var ans = l.examAns[i] || {};
     html += '<div class="qblock exam-q" data-qi="' + i + '"><p><b>Câu ' + (i + 1) + '. ' + esc(q.q) + '</b></p>';
     if (q.o) {
-      q.o.forEach(function (opt, j) {
-        html += '<button class="q-opt' + (ans.v === j ? ' q-opt-sel' : '') + '" data-examopt="' + i + ':' + j + '">' + esc(opt) + '</button>';
+      quizDispIdx("exam:" + (opts.lessonId || "") + ":" + i + ":" + String(q.q).slice(0, 24), q.o.length).forEach(function (j) {
+        html += '<button class="q-opt' + (ans.v === j ? ' q-opt-sel' : '') + '" data-examopt="' + i + ':' + j + '">' + esc(q.o[j]) + '</button>';
       });
     } else {
       html += '<input type="text" data-examinput="' + i + '" value="' + esc(ans.v || '') + '" placeholder="Gõ đáp án của bạn..." style="width:100%;padding:10px;margin:8px 0">';
@@ -19251,7 +19291,7 @@ function renderPhaseSkill(app, l) {
     }
     l.onDone = function (res) {
       phaseRun.results.reading = { c: res.firstN, n: res.total, band: rawToBand(res.firstN, res.total, "reading"), timedOut: !!l.examTimedOut };
-      l.examTimedOut = false; l.examAns = {}; l.examReview = null; l._examSubmit = null;
+      l.examTimedOut = false; l.examAns = {}; l.examReview = null; l._examSubmit = null; quizDispClear();
       openLesson({ type: "phaseExam", phase: ph });
     };
     app.innerHTML = examClockBlock(EXAM_PHASE_MIN.reading)
@@ -19508,7 +19548,7 @@ function renderMockTest(app, l) {
     l.title = "Thi thử " + mLabel + " — Nghe (" + (mockRun.listen.gi + 1) + "/" + mockRun.listen.groups.length + ")";
     l.onDone = function (res) {
       mockRun.listen.c += res.firstN;
-      l.examAns = {}; l.examReview = null; l.examTimedOut = false; l._examSubmit = null;
+      l.examAns = {}; l.examReview = null; l.examTimedOut = false; l._examSubmit = null; quizDispClear();
       if (res.timedOut) { mockRun.listenTimedOut = true; mockRun.times.listen = Date.now() - mockRun.times.listenStart; mockRun.stage = "read"; mockRun.times.readStart = Date.now(); }
       else mockRun.listen.gi++;
       l.qi = 0; runWrong = []; runFirstTry = []; lessonStart = Date.now(); render();
@@ -19532,7 +19572,7 @@ function renderMockTest(app, l) {
       mockRun.read.c += res.firstN;
       if (l.examTimedOut) { mockRun.readTimedOut = true; mockRun.times.read = Date.now() - mockRun.times.readStart; mockRun.stage = "write"; mockRun.times.writeStart = Date.now(); }
       else mockRun.read.pi++;
-      l.examTimedOut = false; l.examAns = {}; l.examReview = null; l._examSubmit = null;
+      l.examTimedOut = false; l.examAns = {}; l.examReview = null; l._examSubmit = null; quizDispClear();
       l.qi = 0; runWrong = []; runFirstTry = []; lessonStart = Date.now(); render();
     };
     app.innerHTML = (mockRun.guided ? '<div class="qblock"><p><b>Thi có hướng dẫn — phần Đọc (không bấm giờ):</b> đọc câu hỏi trước, gạch ý cần tìm; đọc lướt đoạn để tìm chỗ chứa đáp án rồi đọc kỹ chỗ đó; câu khó làm sau.</p></div>' : examClockBlock(EXAM_MOCK_MIN.reading, "Đồng hồ chung cho cả phần Đọc — hết giờ bài tự nộp, các câu chưa trả lời tính là sai."))
@@ -22737,14 +22777,18 @@ function renderZhMock(app, l) {
     var prev = (state.zhMockTests || []).filter(function (m) { return m.hsk === hsk; });
     var prevHTML = prev.length ? '<p class="mut">Đã thi trước đây: ' + prev.map(function (m) { return m.date + ' — Nghe ' + m.listen.c + '/' + m.listen.n + ', Đọc ' + m.read.c + '/' + m.read.n + ', Viết ' + m.write.c + '/' + m.write.n; }).join(" · ") + '</p>' : '<p class="mut">Chưa có mốc thi thử ' + label + ' nào.</p>';
     var zhFull = mock.total >= ({ 1: 40, 2: 60, 3: 70, 4: 70, 5: 72, 6: 82 })[hsk];
-    app.innerHTML = lessonHead({ title: "Thi thử " + label + (zhFull ? " (đủ câu)" : " (bản rút gọn)"), type: "Tiếng Trung · Thi thử HSK" })
+    /* v169 (N42): HSK5/HSK6 du tong so cau (79/72, 90/82) nhung phan Viet khac dang
+       de that (web luyen sap xep/dien tu, de that la 2 bai luan) — khong goi la
+       "du cau theo de mau" tron ven, ghi ro o tieu de + verdict. */
+    var zhFullTag = (hsk === 5 || hsk === 6) ? (zhFull ? " (đủ tổng số câu — Viết khác dạng đề thật)" : " (bản rút gọn)") : (zhFull ? " (đủ câu)" : " (bản rút gọn)");
+    app.innerHTML = lessonHead({ title: "Thi thử " + label + zhFullTag, type: "Tiếng Trung · Thi thử HSK" })
       + '<div class="qblock">'
-      + (hsk === 1 ? '<p><b>Nghe + Đọc đủ 40 câu theo đề thật;</b> cộng thêm 10 câu Viết luyện thêm của web (đề thật cấp 1 không có Viết) — số câu đếm thật từ ngân hàng của web.</p>' : zhFull ? '<p><b>✓ Đủ câu theo đề mẫu HSK 3.0:</b> số câu dưới đây đếm thật từ ngân hàng của web, đúng tỉ lệ Nghe/Đọc/Viết của đề mẫu.</p>' : '<p><b>⚠️ Đây là BẢN RÚT GỌN, không phải đề HSK thật:</b> đề HSK thật nhiều câu hơn rất nhiều; số câu dưới đây đếm thật từ ngân hàng của web.</p>')
+      + (hsk === 1 ? '<p><b>Nghe + Đọc đủ 40 câu theo đề thật;</b> cộng thêm 10 câu Viết luyện thêm của web (đề thật cấp 1 không có Viết) — số câu đếm thật từ ngân hàng của web.</p>' : (hsk === 5 || hsk === 6) ? '<p><b>✓ Đủ tổng số câu theo đề mẫu HSK 3.0, nhưng phần Viết khác dạng đề thật:</b> web luyện sắp xếp/điền từ (HSK5: 9 câu; HSK6: 10 câu), đề thật là 2 bài luận. Nghe/Đọc đúng tỉ lệ đề mẫu; số câu đếm thật từ ngân hàng của web.</p>' : zhFull ? '<p><b>✓ Đủ câu theo đề mẫu HSK 3.0:</b> số câu dưới đây đếm thật từ ngân hàng của web, đúng tỉ lệ Nghe/Đọc/Viết của đề mẫu.</p>' : '<p><b>⚠️ Đây là BẢN RÚT GỌN, không phải đề HSK thật:</b> đề HSK thật nhiều câu hơn rất nhiều; số câu dưới đây đếm thật từ ngân hàng của web.</p>')
       + '<p><b>Nghe:</b> ' + mock.listen.n + ' câu (đồng hồ 10 phút) — ' + mock.listen.segments.map(function (s) { return esc(s.title); }).join(" · ") + '</p>'
       + '<p><b>Đọc:</b> ' + mock.read.n + ' câu (đồng hồ 15 phút) — ' + mock.read.passages.map(function (r) { return esc(r.title); }).join(" · ") + '</p>'
-      + (mock.write.n === 0 ? '<p><b>Viết:</b> không có phần này — đề thật HSK cấp 1 không có phần Viết.</p>' : '<p><b>Viết' + (zhFull ? "" : " (rút gọn)") + ':</b> ' + mock.write.n + ' câu (đồng hồ 10 phút) — sắp xếp từ thành câu + điền từ của ZH_WRITE trong phần thi thử này.' + ((hsk === 5 || hsk === 6) ? ' Ngoài ra, dạng viết đoạn theo đề thật ở cấp này luyện thành bước Viết trong lộ trình (viết bản nháp → đối chiếu bài mẫu 2 cột).' : ' Chưa phải dạng viết đoạn của đề thật.') + (hsk === 5 ? ' HSK5 hiện có 9 câu Viết trong ngân hàng — đã lấy hết.' : '') + '</p>')
+      + (mock.write.n === 0 ? '<p><b>Viết:</b> không có phần này — đề thật HSK cấp 1 không có phần Viết.</p>' : '<p><b>Viết' + (zhFull ? "" : " (rút gọn)") + ':</b> ' + mock.write.n + ' câu (đồng hồ 10 phút) — sắp xếp từ thành câu + điền từ của ZH_WRITE trong phần thi thử này.' + ((hsk === 5 || hsk === 6) ? ' Ngoài ra, dạng viết đoạn theo đề thật ở cấp này luyện thành bước Viết trong lộ trình (viết bản nháp → đối chiếu bài mẫu 2 cột).' : ' Chưa phải dạng viết đoạn của đề thật.') + (hsk === 5 ? ' HSK5 hiện có 9 câu Viết trong ngân hàng — đã lấy hết.' : (hsk === 6 ? ' HSK6 hiện có 10 câu Viết trong ngân hàng — đã lấy hết.' : '')) + '</p>')
       + '<p><b>Tổng: ' + mock.total + ' câu.</b> Mỗi phần có đồng hồ đếm ngược chạy thật, hết giờ phần tự chuyển phần tiếp theo; các câu chưa trả lời tính là sai.</p>'
-      + (function () { var zhReal = { 1: 40, 2: 60, 3: 70, 4: 70, 5: 72, 6: 82 }; var rt = zhReal[hsk] || 0; var base = (hsk === 1) ? (mock.listen.n + mock.read.n) : mock.total; return rt ? '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): ' + base + '/' + rt + ' câu' + (hsk === 1 ? ' (Nghe + Đọc; chưa tính 10 câu Viết luyện thêm)' : '') + ' — ' + (base >= rt ? 'đủ câu để gọi sẵn sàng thi.' : 'chưa đủ câu để gọi sẵn sàng thi.') + '</p>' : ''; })()
+      + (function () { var zhReal = { 1: 40, 2: 60, 3: 70, 4: 70, 5: 72, 6: 82 }; var rt = zhReal[hsk] || 0; var base = (hsk === 1) ? (mock.listen.n + mock.read.n) : mock.total; return rt ? '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): ' + base + '/' + rt + ' câu' + (hsk === 1 ? ' (Nghe + Đọc; chưa tính 10 câu Viết luyện thêm)' : '') + ' — ' + (base >= rt ? 'đủ câu để gọi sẵn sàng thi.' : 'chưa đủ câu để gọi sẵn sàng thi.') + ((hsk === 5 || hsk === 6) ? ' Lưu ý: chỉ đủ tổng số câu — phần Viết khác dạng đề thật (web luyện sắp xếp/điền từ, đề thật là 2 bài luận), chưa đủ để gọi sẵn sàng thi ở phần Viết.' : '') + '</p>' : ''; })()
       + '<p class="mut">Không có phần Nói trong đề này — nói thi riêng ở mục HSKK (HSKK là bài thi nói riêng). Chấm Nghe/Đọc/Viết rút gọn theo đáp án; không có AI chấm tiếng Trung trong đợt này (chờ nâng cấp).</p>'
       + '<p class="mut">Thi thử này theo hệ 6 cấp cũ (Giáo trình chuẩn HSK); HSK 3.0 ra mắt toàn cầu 13/12/2026 có cấu trúc mới — xem thêm ở Bản đồ → Lớp bổ sung HSK 3.0.</p>'
       + prevHTML
@@ -23008,7 +23052,7 @@ function tcAddHard(stepId, q, correct, why) {
 function tcQuizBlockHTML(qs, prefix) {
   return qs.map(function (q, qi) {
     return '<div class="qblock tcq" data-qi="' + qi + '"><p><b>Câu ' + (qi + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">'
-      + q.o.map(function (op, oi) { return '<button class="btn tcopt" data-qi="' + qi + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("")
+      + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tcopt" data-qi="' + qi + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") /* v169 (N23-N26): xao tron vi tri dap an moi lan ve — data-oi giu chi so goc */
       + '</div><div class="tcwhy"></div></div>';
   }).join("");
 }
@@ -23822,11 +23866,11 @@ function tcOpenMock(back, stepId) {
     var qhtml = '<p><b>Thời gian còn lại: <span id="tcMockClock">' + mins + ':00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
     qhtml += '<h3>Phần Nghe (' + ML.length + ' câu)</h3>';
     qhtml += ML.map(function (q, i) {
-      return '<div class="qblock tcq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tcmocklisten" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + q.o.map(function (op, oi) { return '<button class="btn tcopt" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("") + '</div><div class="tcwhy"></div></div>';
+      return '<div class="qblock tcq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tcmocklisten" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tcopt" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tcwhy"></div></div>';
     }).join("");
     qhtml += '<h3>Phần Đọc (' + MR.length + ' câu)</h3>';
     qhtml += MR.map(function (q, i) {
-      return '<div class="qblock tcq" data-qi="R' + i + '">' + (q.passage ? '<p>' + esc(q.passage) + '</p>' : '') + '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + q.o.map(function (op, oi) { return '<button class="btn tcopt" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("") + '</div><div class="tcwhy"></div></div>';
+      return '<div class="qblock tcq" data-qi="R' + i + '">' + (q.passage ? '<p>' + esc(q.passage) + '</p>' : '') + '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tcopt" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tcwhy"></div></div>';
     }).join("");
     qhtml += '<div class="row"><button class="btn btn-primary" id="tcMockSubmit">Nộp bài</button></div><div id="tcMockResult"></div>';
     body.innerHTML = qhtml;
@@ -24522,7 +24566,7 @@ function tpAddHard(stepId, q, correct, why) {
 function tpQuizBlockHTML(qs, prefix) {
   return qs.map(function (q, qi) {
     return '<div class="qblock tpq" data-qi="' + qi + '"><p><b>Câu ' + (qi + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">'
-      + q.o.map(function (op, oi) { return '<button class="btn tpopt" data-qi="' + qi + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("")
+      + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt" data-qi="' + qi + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") /* v169 (N23-N26): xao tron vi tri dap an moi lan ve — data-oi giu chi so goc */
       + '</div><div class="tpwhy"></div></div>';
   }).join("");
 }
@@ -24810,11 +24854,11 @@ function tpOpenMock(back) {
     var qhtml = '<p><b>Thời gian còn lại: <span id="tpMockClock">100:00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
     qhtml += '<h3>Phần Nghe (35 câu)</h3>';
     qhtml += TP_MOCK_L.map(function (q, i) {
-      return '<div class="qblock tpq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tpmocklisten" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + q.o.map(function (op, oi) { return '<button class="btn tpopt" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
+      return '<div class="qblock tpq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tpmocklisten" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
     qhtml += '<h3>Phần Đọc (35 câu)</h3>';
     qhtml += TP_MOCK_R.map(function (q, i) {
-      return '<div class="qblock tpq" data-qi="R' + i + '"><p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + q.o.map(function (op, oi) { return '<button class="btn tpopt" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
+      return '<div class="qblock tpq" data-qi="R' + i + '"><p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
     qhtml += '<div class="row"><button class="btn btn-primary" id="tpMockSubmit">Nộp bài</button></div><div id="tpMockResult"></div>';
     body.innerHTML = qhtml;
@@ -24878,11 +24922,11 @@ function tpOpenMock2(back, stepId) {
     var qhtml = '<p><b>Thời gian còn lại: <span id="tpMock2Clock">180:00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
     qhtml += '<h3>Phần Nghe (50 câu)</h3>';
     qhtml += TP_MOCK2_L.map(function (q, i) {
-      return '<div class="qblock tpq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tpmock2listen" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + q.o.map(function (op, oi) { return '<button class="btn tpopt2" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
+      return '<div class="qblock tpq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tpmock2listen" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt2" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
     qhtml += '<h3>Phần Đọc (50 câu)</h3>';
     qhtml += TP_MOCK2_R.map(function (q, i) {
-      return '<div class="qblock tpq" data-qi="R' + i + '"><p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + q.o.map(function (op, oi) { return '<button class="btn tpopt2" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(op) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
+      return '<div class="qblock tpq" data-qi="R' + i + '"><p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt2" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
     qhtml += '<h3>Phần Viết (4 nhiệm vụ — tự luyện, không cộng điểm)</h3>';
     qhtml += TP_MOCK2_W.map(function (w, i) {
