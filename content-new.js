@@ -16758,7 +16758,7 @@ var TC_VOCAB_EXPAND2 = [
 { w: "handbook", ipa: "/ˈhændbʊk/", vi: "sổ tay hướng dẫn", col: "read the handbook", ex: "Read the handbook before your first day at work.", exv: "Hãy đọc sổ tay hướng dẫn trước ngày làm việc đầu tiên." },
 { w: "procedure", ipa: "/prəˈsiːdʒə/", vi: "quy trình", col: "follow the procedure", ex: "Follow the safety procedure in every workshop.", exv: "Hãy làm theo quy trình an toàn trong mọi buổi tập huấn." }
 ] },
-{ topic: "Quản lý dự án (4)", cards: [
+{ topic: "Quản lý dự án — phần 4: mục tiêu, phạm vi và tiến độ", cards: [
 { w: "milestone", ipa: "/ˈmaɪlstəʊn/", vi: "cột mốc (dự án)", col: "reach a milestone", ex: "We reached an important milestone yesterday: the first version is ready.", exv: "Hôm qua chúng tôi đã đạt một cột mốc quan trọng: phiên bản đầu tiên đã xong." },
 { w: "timeline", ipa: "/ˈtaɪmlaɪn/", vi: "tiến độ, lịch trình", col: "follow the timeline", ex: "Follow the timeline, or the project will be late.", exv: "Hãy theo đúng tiến độ, nếu không dự án sẽ trễ." },
 { w: "task", ipa: "/tɑːsk/", vi: "nhiệm vụ", col: "finish a task", ex: "Finish this task before the meeting tomorrow.", exv: "Hãy hoàn thành nhiệm vụ này trước cuộc họp ngày mai." },
@@ -26003,7 +26003,7 @@ var TC_VOCAB_EXPAND6 = [
     ]
   },
   {
-    "topic": "Quản trị rủi ro (2)",
+    "topic": "Quản trị rủi ro — phần 2: nhận diện và đánh giá rủi ro",
     "cards": [
       {
         "w": "risk management",
@@ -26128,7 +26128,7 @@ var TC_VOCAB_EXPAND6 = [
     ]
   },
   {
-    "topic": "Sáp nhập và đầu tư (2)",
+    "topic": "Sáp nhập và đầu tư — phần 2: mua lại và thị trường vốn",
     "cards": [
       {
         "w": "a merger",
@@ -34349,7 +34349,7 @@ CONTENT.vocab.push.apply(CONTENT.vocab, IELTS_VOCAB_EXPAND4);
 // cach doc + nghia tieng Han, chu Han + pinyin HSK cung chua doi chieu doc lap
 // voi giao trinh/tu dien (ghi chu o bao cao dot 5).
 var TC_VOCAB_EXPAND7 = [
-  { "topic": "Email công việc hằng ngày (2)",
+  { "topic": "Email công việc hằng ngày — phần 2: trả lời, chuyển tiếp và sắp xếp hộp thư",
     "cards": [
       { "w": "to answer an email promptly", "ipa": "/tə ˈɑːnsər ən ˈiːmeɪl ˈprɒmptli/", "vi": "trả lời email nhanh chóng", "col": "to answer an email promptly", "ex": "Answer emails promptly every day.", "exv": "Hãy trả lời email nhanh chóng mỗi ngày." },
       { "w": "an email subject", "ipa": "/ən ˈiːmeɪl ˈsʌbdʒekt/", "vi": "tiêu đề email", "col": "an email subject", "ex": "Write a clear email subject.", "exv": "Hãy viết tiêu đề email rõ ràng." },
@@ -34367,7 +34367,7 @@ var TC_VOCAB_EXPAND7 = [
       { "w": "a junk folder", "ipa": "/ə dʒʌŋk ˈfəʊldə/", "vi": "thư mục rác", "col": "a junk folder", "ex": "Check the junk folder too.", "exv": "Hãy kiểm tra cả thư mục rác." },
       { "w": "to opt out of emails", "ipa": "/tə ɒpt aʊt əv ˈiːmeɪlz/", "vi": "ngừng nhận email", "col": "to opt out of emails", "ex": "You can opt out of emails any time.", "exv": "Bạn có thể ngừng nhận email bất cứ lúc nào." }
     ] },
-  { "topic": "Điện thoại văn phòng (2)",
+  { "topic": "Điện thoại văn phòng — phần 2: nghe, gọi lại và nhắn thoại",
     "cards": [
       { "w": "to pick up the phone", "ipa": "/tə pɪk ʌp ðə fəʊn/", "vi": "nhấc điện thoại", "col": "to pick up the phone", "ex": "Please pick up the phone.", "exv": "Hãy nhấc điện thoại lên." },
       { "w": "to end a call", "ipa": "/tə end ə kɔːl/", "vi": "kết thúc cuộc gọi", "col": "to end a call", "ex": "End the call politely.", "exv": "Hãy kết thúc cuộc gọi một cách lịch sự." },
@@ -34493,7 +34493,7 @@ var TC_VOCAB_EXPAND7 = [
       { "w": "a background check", "ipa": "/ə ˈbækɡraʊnd tʃek/", "vi": "kiểm tra lý lịch", "col": "a background check", "ex": "We do a background check first.", "exv": "Chúng ta kiểm tra lý lịch trước." },
       { "w": "to hire", "ipa": "/tə ˈhaɪə/", "vi": "tuyển dụng", "col": "to hire", "ex": "We plan to hire ten people.", "exv": "Chúng ta dự định tuyển mười người." }
     ] },
-  { "topic": "Lương và phúc lợi cơ bản (2)",
+  { "topic": "Lương và phúc lợi cơ bản — phần 2: lương, thưởng và phụ cấp",
     "cards": [
       { "w": "a salary", "ipa": "/ə ˈsæləri/", "vi": "lương (tháng)", "col": "a salary", "ex": "My salary is paid monthly.", "exv": "Lương của tôi trả theo tháng." },
       { "w": "a wage", "ipa": "/ə weɪdʒ/", "vi": "tiền công (theo giờ/ngày)", "col": "a wage", "ex": "Workers get a weekly wage.", "exv": "Công nhân nhận tiền công theo tuần." },
@@ -34511,7 +34511,7 @@ var TC_VOCAB_EXPAND7 = [
       { "w": "an allowance", "ipa": "/ən əˈlaʊəns/", "vi": "phụ cấp", "col": "an allowance", "ex": "We get a travel allowance.", "exv": "Chúng ta được phụ cấp đi lại." },
       { "w": "income tax", "ipa": "/ˈɪnkʌm tæks/", "vi": "thuế thu nhập", "col": "income tax", "ex": "Income tax is taken from salary.", "exv": "Thuế thu nhập được trừ từ lương." }
     ] },
-  { "topic": "An toàn nơi làm việc (2)",
+  { "topic": "An toàn nơi làm việc — phần 2: quy tắc an toàn và thoát hiểm",
     "cards": [
       { "w": "safety rules", "ipa": "/ˈseɪfti ruːlz/", "vi": "quy tắc an toàn", "col": "safety rules", "ex": "Follow the safety rules.", "exv": "Hãy tuân theo quy tắc an toàn." },
       { "w": "a helmet", "ipa": "/ə ˈhelmɪt/", "vi": "mũ bảo hộ", "col": "a helmet", "ex": "Wear a helmet on site.", "exv": "Hãy đội mũ bảo hộ ở công trường." },
@@ -34583,7 +34583,7 @@ var TC_VOCAB_EXPAND7 = [
       { "w": "a long-term partner", "ipa": "/ə ˈlɒŋ tɜːm ˈpɑːtnə/", "vi": "đối tác lâu dài", "col": "a long-term partner", "ex": "They are our long-term partner.", "exv": "Họ là đối tác lâu dài của chúng ta." },
       { "w": "to build trust", "ipa": "/tə bɪld trʌst/", "vi": "xây dựng lòng tin", "col": "to build trust", "ex": "Fair prices build trust.", "exv": "Giá cả công bằng xây dựng lòng tin." }
     ] },
-  { "topic": "Quản lý dự án (2)",
+  { "topic": "Quản lý dự án — phần 2: lập kế hoạch và triển khai",
     "cards": [
       { "w": "a project lead", "ipa": "/ə ˈprɒdʒekt liːd/", "vi": "người dẫn dắt dự án", "col": "a project lead", "ex": "The project lead guides the team.", "exv": "Người dẫn dắt dự án hướng dẫn nhóm." },
       { "w": "a project plan", "ipa": "/ə ˈprɒdʒekt plæn/", "vi": "kế hoạch dự án", "col": "a project plan", "ex": "Write a clear project plan.", "exv": "Hãy viết kế hoạch dự án rõ ràng." },
@@ -34691,7 +34691,7 @@ var TC_VOCAB_EXPAND7 = [
       { "w": "a promotion", "ipa": "/ə prəˈməʊʃn/", "vi": "thăng chức", "col": "a promotion", "ex": "She got a promotion.", "exv": "Cô ấy đã được thăng chức." },
       { "w": "to get promoted", "ipa": "/tə ɡet prəˈməʊtɪd/", "vi": "được thăng chức", "col": "to get promoted", "ex": "Work hard to get promoted.", "exv": "Hãy làm việc chăm chỉ để được thăng chức." }
     ] },
-  { "topic": "Đào tạo nhân viên mới (2)",
+  { "topic": "Đào tạo nhân viên mới — phần 2: hội nhập và kèm cặp",
     "cards": [
       { "w": "new staff orientation", "ipa": "/njuː stɑːf ˌɔːriənˈteɪʃn/", "vi": "định hướng nhân viên mới", "col": "new staff orientation", "ex": "New staff orientation takes one week.", "exv": "Định hướng nhân viên mới kéo dài một tuần." },
       { "w": "an orientation", "ipa": "/ən ˌɔːriənˈteɪʃn/", "vi": "buổi định hướng", "col": "an orientation", "ex": "Join the orientation on Monday.", "exv": "Hãy tham gia buổi định hướng vào thứ Hai." },
@@ -34709,7 +34709,7 @@ var TC_VOCAB_EXPAND7 = [
       { "w": "a buddy system", "ipa": "/ə ˈbʌdi ˈsɪstəm/", "vi": "chế độ bạn đồng hành", "col": "a buddy system", "ex": "We use a buddy system.", "exv": "Chúng ta dùng chế độ bạn đồng hành." },
       { "w": "a welcome meeting", "ipa": "/ə ˈwelkəm ˈmiːtɪŋ/", "vi": "buổi gặp chào đón", "col": "a welcome meeting", "ex": "Join the welcome meeting.", "exv": "Hãy tham gia buổi gặp chào đón." }
     ] },
-  { "topic": "Chiến lược kinh doanh (2)",
+  { "topic": "Chiến lược kinh doanh — phần 2: vị thế thị trường và đối thủ",
     "cards": [
       { "w": "a company strategy", "ipa": "/ə ˈkʌmpəni ˈstrætədʒi/", "vi": "chiến lược công ty", "col": "a company strategy", "ex": "Our company strategy is clear.", "exv": "Chiến lược công ty của chúng ta rõ ràng." },
       { "w": "a market advantage", "ipa": "/ə ˈmɑːkɪt ədˈvɑːntɪdʒ/", "vi": "lợi thế trên thị trường", "col": "a market advantage", "ex": "Low cost is our market advantage.", "exv": "Chi phí thấp là lợi thế trên thị trường của chúng ta." },
@@ -36036,7 +36036,7 @@ TP_VOCAB.push.apply(TP_VOCAB, TP_VOCAB_EXPAND6);
 CONTENT.zhVocab.push.apply(CONTENT.zhVocab, ZH_VOCAB_EXPAND6);
 CONTENT.vocab.push.apply(CONTENT.vocab, IELTS_VOCAB_EXPAND5);
 var TC_VOCAB_EXPAND8 = [
-  { "topic": "Văn phòng phẩm và thiết bị (2)",
+  { "topic": "Văn phòng phẩm và thiết bị — phần 2: thao tác với đồ văn phòng",
     "cards": [
       { "w": "to staple the pages together", "ipa": "/tə ˈsteɪpl ðə ˈpeɪdʒɪz təˈɡeðə/", "vi": "ghim các trang lại với nhau", "col": "to staple the pages together", "ex": "Please staple the pages together.", "exv": "Hãy ghim các trang lại với nhau." },
       { "w": "a box of paper clips", "ipa": "/ə bɒks əv ˈpeɪpə klɪps/", "vi": "một hộp ghim giấy", "col": "a box of paper clips", "ex": "Buy a box of paper clips.", "exv": "Hãy mua một hộp ghim giấy." },
@@ -36360,7 +36360,7 @@ var TC_VOCAB_EXPAND8 = [
       { "w": "an engagement rate", "ipa": "/ən ɪnˈɡeɪdʒmənt reɪt/", "vi": "tỉ lệ tương tác", "col": "an engagement rate", "ex": "Track the engagement rate.", "exv": "Hãy theo dõi tỉ lệ tương tác." },
       { "w": "an audience segment", "ipa": "/ən ˈɔːdiəns ˈseɡmənt/", "vi": "phân khúc khán giả", "col": "an audience segment", "ex": "Target an audience segment.", "exv": "Hãy nhắm phân khúc khán giả." }
     ] },
-  { "topic": "Quản lý dự án (3)",
+  { "topic": "Quản lý dự án — phần 3: tiến độ, bàn giao và báo cáo",
     "cards": [
       { "w": "a project schedule", "ipa": "/ə ˈprɒdʒekt ˈʃedjuːl/", "vi": "lịch trình dự án", "col": "a project schedule", "ex": "Share the project schedule.", "exv": "Hãy chia sẻ lịch trình dự án." },
       { "w": "a deliverable", "ipa": "/ə dɪˈlɪvərəbl/", "vi": "sản phẩm bàn giao", "col": "a deliverable", "ex": "Deliver every deliverable.", "exv": "Hãy bàn giao mọi sản phẩm." },
@@ -36396,7 +36396,7 @@ var TC_VOCAB_EXPAND8 = [
       { "w": "an equity holder", "ipa": "/ən ˈekwɪti ˈhəʊldə/", "vi": "người nắm cổ phần", "col": "an equity holder", "ex": "Inform every equity holder.", "exv": "Hãy thông báo mọi người nắm cổ phần." },
       { "w": "a stock price", "ipa": "/ə stɒk praɪs/", "vi": "giá cổ phiếu", "col": "a stock price", "ex": "The stock price rises.", "exv": "Giá cổ phiếu tăng." }
     ] },
-  { "topic": "Chiến lược kinh doanh (3)",
+  { "topic": "Chiến lược kinh doanh — phần 3: mục tiêu tăng trưởng và giá cả",
     "cards": [
       { "w": "a corporate strategy", "ipa": "/ə ˈkɔːpərət ˈstrætədʒi/", "vi": "chiến lược công ty", "col": "a corporate strategy", "ex": "Set a corporate strategy.", "exv": "Hãy đặt chiến lược công ty." },
       { "w": "a market edge", "ipa": "/ə ˈmɑːkɪt edʒ/", "vi": "lợi thế thị trường", "col": "a market edge", "ex": "Keep a market edge.", "exv": "Hãy giữ lợi thế thị trường." },
@@ -36468,7 +36468,7 @@ var TC_VOCAB_EXPAND8 = [
       { "w": "a stock exchange", "ipa": "/ə stɒk ɪksˈtʃeɪndʒ/", "vi": "sàn chứng khoán", "col": "a stock exchange", "ex": "List on the stock exchange.", "exv": "Hãy niêm yết trên sàn chứng khoán." },
       { "w": "an initial public offering", "ipa": "/ən ɪˈnɪʃl ˈpʌblɪk ˈɒfərɪŋ/", "vi": "phát hành cổ phiếu lần đầu", "col": "an initial public offering", "ex": "Plan an initial public offering.", "exv": "Hãy lên kế hoạch phát hành cổ phiếu lần đầu." }
     ] },
-  { "topic": "Quản lý chuỗi cung ứng (2)",
+  { "topic": "Quản lý chuỗi cung ứng — phần 2: kho vận và nhà cung cấp",
     "cards": [
       { "w": "a logistics network", "ipa": "/ə ləˈdʒɪstɪks ˈnetwɜːk/", "vi": "mạng lưới hậu cần", "col": "a logistics network", "ex": "Build a logistics network.", "exv": "Hãy xây mạng lưới hậu cần." },
       { "w": "a service provider", "ipa": "/ə ˈsɜːvɪs prəˈvaɪdə/", "vi": "nhà cung cấp dịch vụ", "col": "a service provider", "ex": "Pay a service provider.", "exv": "Hãy trả nhà cung cấp dịch vụ." },
@@ -36540,7 +36540,7 @@ var TC_VOCAB_EXPAND8 = [
       { "w": "a labour inspector", "ipa": "/ə ˈleɪbər ɪnˈspektə/", "vi": "thanh tra lao động", "col": "a labour inspector", "ex": "Welcome the labour inspector.", "exv": "Hãy đón tiếp thanh tra lao động." },
       { "w": "a labour dispute", "ipa": "/ə ˈleɪbər dɪˈspjuːt/", "vi": "tranh chấp lao động", "col": "a labour dispute", "ex": "Mediate the labour dispute.", "exv": "Hãy hòa giải tranh chấp lao động." }
     ] },
-  { "topic": "Quản trị doanh nghiệp (2)",
+  { "topic": "Quản trị doanh nghiệp — phần 2: hội đồng quản trị và kiểm toán",
     "cards": [
       { "w": "board governance", "ipa": "/bɔːd ˈɡʌvənəns/", "vi": "quản trị hội đồng", "col": "board governance", "ex": "Improve board governance.", "exv": "Hãy cải thiện quản trị hội đồng." },
       { "w": "a supervisory board", "ipa": "/ə ˈsuːpəvaɪzəri bɔːd/", "vi": "hội đồng giám sát", "col": "a supervisory board", "ex": "Elect a supervisory board.", "exv": "Hãy bầu hội đồng giám sát." },
@@ -45781,7 +45781,7 @@ var TC_VOCAB_EXPAND11 = [
     { "w": "to negotiate freight rates", "ipa": "/tə nɪˈɡəʊʃieɪt freɪt reɪts/", "vi": "đàm phán cước vận chuyển", "col": "to negotiate freight rates", "ex": "Negotiate freight rates yearly.", "exv": "Hãy đàm phán cước vận chuyển hằng năm." },
     { "w": "a logistics dashboard", "ipa": "/ə ləˈdʒɪstɪks ˈdæʃbɔːd/", "vi": "bảng điều khiển logistics", "col": "a logistics dashboard", "ex": "Monitor a logistics dashboard.", "exv": "Hãy theo dõi bảng điều khiển logistics." }
   ] },
-  { "topic": "Chuyển đổi số và dữ liệu (2)", "cards": [
+  { "topic": "Chuyển đổi số và dữ liệu — phần 2: chuyển đổi số và bảo mật", "cards": [
     { "w": "a digital transformation plan", "ipa": "/ə ˈdɪdʒɪtl ˌtrænsfəˈmeɪʃn plæn/", "vi": "kế hoạch chuyển đổi số", "col": "a digital transformation plan", "ex": "Approve a digital transformation plan.", "exv": "Hãy phê duyệt kế hoạch chuyển đổi số." },
     { "w": "to migrate to the cloud", "ipa": "/tə maɪˈɡreɪt tə ðə klaʊd/", "vi": "chuyển lên điện toán đám mây", "col": "to migrate to the cloud", "ex": "Migrate to the cloud in stages.", "exv": "Hãy chuyển lên điện toán đám mây theo từng giai đoạn." },
     { "w": "an outdated legacy system", "ipa": "/ən ˌaʊtˈdeɪtɪd ˈleɡəsi ˈsɪstəm/", "vi": "hệ thống cũ lạc hậu đã lỗi thời", "col": "an outdated legacy system", "ex": "Replace an outdated legacy system.", "exv": "Hãy thay thế hệ thống cũ lạc hậu đã lỗi thời." },
@@ -45815,7 +45815,7 @@ var TC_VOCAB_EXPAND11 = [
     { "w": "to overcome resistance", "ipa": "/tə ˌəʊvəˈkʌm rɪˈzɪstəns/", "vi": "vượt qua sự kháng cự", "col": "to overcome resistance", "ex": "Overcome resistance with dialogue.", "exv": "Hãy vượt qua sự kháng cự bằng đối thoại." },
     { "w": "a town hall meeting", "ipa": "/ə taʊn hɔːl ˈmiːtɪŋ/", "vi": "buổi họp toàn thể công ty", "col": "a town hall meeting", "ex": "Host a town hall meeting.", "exv": "Hãy tổ chức buổi họp toàn thể công ty." }
   ] },
-  { "topic": "Quản trị công ty và cổ đông (2)", "cards": [
+  { "topic": "Quản trị công ty và cổ đông — phần 2: họp hội đồng và quyền cổ đông", "cards": [
     { "w": "an independent board of directors", "ipa": "/ən ˌɪndɪˈpendənt bɔːd əv daɪˈrektəz/", "vi": "hội đồng quản trị độc lập", "col": "an independent board of directors", "ex": "Elect an independent board of directors.", "exv": "Hãy bầu hội đồng quản trị độc lập." },
     { "w": "to convene a board meeting", "ipa": "/tə kənˈviːn ə bɔːd ˈmiːtɪŋ/", "vi": "triệu tập họp hội đồng quản trị", "col": "to convene a board meeting", "ex": "Convene a board meeting.", "exv": "Hãy triệu tập họp hội đồng quản trị." },
     { "w": "a special shareholder resolution", "ipa": "/ə ˈspeʃl ˈʃeəhəʊldə ˌrezəˈluːʃn/", "vi": "nghị quyết cổ đông đặc biệt", "col": "a special shareholder resolution", "ex": "Pass a special shareholder resolution.", "exv": "Hãy thông qua nghị quyết cổ đông đặc biệt." },
