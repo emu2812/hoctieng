@@ -12489,6 +12489,7 @@ function phCompleteSound(app, step, l, sym) {
   var next = phNextSym();
   if (!next) {
     finishStep(step.id);
+    if (l.tcStep && typeof tcMarkDone === "function") tcMarkDone(l.tcStep); /* v167 F3: hoc xong 44 am tu buoc TOEIC p0 thi ghi nhan luon buoc p0 */
     app.innerHTML = stepHeader(step) + finishSummaryHTML("Bạn đã học xong 44 âm!",
       '<p>Bạn đã học xong 44 âm tiếng Anh trong ' + elapsedText() + '.</p>', "", { chest: { key: step.id, title: step.title }, starsKey: step.id, appeal: "pron1" });
     wireBack(); wireNextStep();
@@ -16180,7 +16181,7 @@ function renderShadowListen(app, l, item, isLong) {
    Truyen ngan o ZH/TC/TP, Nghe chep/Shadowing/Podcast o TC/TP) khong hien. */
 function pfSkillOptions(tr) {
   var exam = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" }[tr] || "IELTS";
-  var order = ["Từ vựng", "Ngữ pháp", "Đọc", "Nghe", "Nói", "Viết", "Viết câu", "Gõ câu", "Nghe chép", "Shadowing", "Drill", "Truyện ngắn", "Podcast"]; /* v157 S19 phan 2/3: them Drill sau Shadowing (mo rong tu Shadowing); v158 S19 phan 3/3: them "Viết câu" sau "Viết" */
+  var order = ["Từ vựng", "Ngữ pháp", "Đọc", "Nghe", "Nói", "Phát âm", "Viết", "Viết câu", "Gõ câu", "Nghe chép", "Shadowing", "Drill", "Truyện ngắn", "Podcast"]; /* v157 S19 phan 2/3: them Drill sau Shadowing (mo rong tu Shadowing); v158 S19 phan 3/3: them "Viết câu" sau "Viết"; v167 F3: them "Phát âm" sau "Nói" (chi TC co bai pron) */
   var have = {};
   try { pfBuildItems(exam).forEach(function (it) { if (it.skill) have[it.skill] = true; }); } catch (e) {}
   return '<option value="">Mọi kỹ năng</option>' + order.filter(function (s) { return have[s]; }).map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join("");
@@ -16221,7 +16222,7 @@ function pfBuildItems(exam) {
     var stages = (exam === "TOEIC") ? TC_STAGES : TP_STAGES;
     var metaFn = (exam === "TOEIC") ? tcStepMeta : tpStepMeta;
     var openFn = (exam === "TOEIC") ? tcOpenStep : tpOpenStep;
-    var skillOf = { vocab: "Từ vựng", gram: "Ngữ pháp", listen: "Nghe", read: "Đọc", speak: "Nói", write: "Viết" }; /* v149 (S12): bai Noi TC/TP co that (TC 8, TP 16) phai co nhan "Nói" de bo loc tim duoc — truoc day roi ve skill "" nen loc "Nói" tra 0 bai */
+    var skillOf = { vocab: "Từ vựng", gram: "Ngữ pháp", listen: "Nghe", read: "Đọc", speak: "Nói", write: "Viết", pron: "Phát âm" }; /* v149 (S12): bai Noi TC/TP co that (TC 8, TP 16) phai co nhan "Nói" de bo loc tim duoc — truoc day roi ve skill "" nen loc "Nói" tra 0 bai; v167 F3: buoc Phat am TC p0-p3 co nhan "Phát âm" (TP khong co kind pron nen khong doi) */
     items.push({ skill: "Đọc", topic: "Luyện trộn 60/20/20", band: "", label: "Luyện trộn 60/20/20 — 10 câu Đọc (6 vừa sức · 2 mới · 2 thử thách)", open: open({ type: "mix60", track: exam === "TOEIC" ? "tc" : "tp" }) }); /* v154 S17: de DAU — loc chi hien 50 bai dau */
     items.push({ skill: "Drill", topic: "Drill lặp 1 câu", band: "", label: "🔁 Drill lặp 1 câu — lặp 1 câu đến trôi chảy (video/bài đọc)", open: open({ type: "drill", track: exam === "TOEIC" ? "tc" : "tp" }) }); /* v157 S19 phan 2/3 */
     items.push({ skill: "Viết câu", topic: "Viết câu tự do", band: "", label: "✍️ Viết câu tự do — tự viết 1 câu dùng đúng mẫu ngữ pháp vừa học", open: open({ type: "freeWrite", track: exam === "TOEIC" ? "tc" : "tp", picker: true }) }); /* v158 S19 phan 3/3 */
@@ -22128,7 +22129,7 @@ var TC_ENTRY_QS = [
 ];
 var TP_ENTRY_QS = [
   { q: "Chữ “ㅏ” đọc là gì?", o: ["a", "eo", "o", "u"], a: 0, why: "ㅏ đọc là “a”." },
-  { q: "Đọc theo từng âm tiết, “학교” gồm những âm nào?", o: ["hak-gyo", "hak-go", "hak-kyo", "ha-gyo"], a: 0, why: "Đọc theo từng âm tiết: 학 hak + 교 gyo = hak-gyo. Đọc liền thành câu thì biến âm (경음화): sau batchim ㄱ, ㄱ của 교 đọc căng thành ㄲ nên đọc [학꾜] hakkyo — xem bài biến âm ở màn chi tiết âm tiết." },
+  { q: "“학교” phiên âm Latin là gì?", o: ["hakgyo", "hakkyo", "hak-go", "hak-kyo"], a: 0, why: "Phiên âm Latin chuẩn (RR) là “hakgyo” (학 hak + 교 gyo). Cách đọc thật có biến âm (경음화): sau batchim ㄱ, ㄱ của 교 đọc căng thành ㄲ nên đọc [학꾜] hakkyo — xem bài biến âm ở màn chi tiết âm tiết." },
   { q: "“가족” nghĩa là gì?", o: ["Gia đình", "Trường học", "Bạn bè", "Công ty"], a: 0, why: "가족 là gia đình." },
   { q: "“사랑” nghĩa là gì?", o: ["Tình yêu", "Thời gian", "Tiền bạc", "Sức khỏe"], a: 0, why: "사랑 là tình yêu." },
   { q: "Điền đúng: “저는 학생___” (Tôi là học sinh.)", o: ["입니다", "있습니다", "합니다", "갑니다"], a: 0, why: "입니다 dùng sau danh từ để nói “là”: 학생입니다." },
@@ -22932,6 +22933,7 @@ function tcStepMeta(id) {
   if (k === "r") { var r = (typeof TC_READ !== "undefined") ? TC_READ[n] : null; return r ? { kind: "read", title: "Đọc Part " + r.part + ": " + r.title, ref: n } : null; }
   if (k === "s") { var sp = (typeof TC_SPEAK !== "undefined") ? TC_SPEAK[n] : null; return sp ? { kind: "speak", title: "Nói: " + sp.title, ref: n } : null; } /* v127: bai Noi TOEIC */
   if (k === "w") { var wr = (typeof TC_WRITE !== "undefined") ? TC_WRITE[n] : null; return wr ? { kind: "write", title: "Viết: " + wr.title, ref: n } : null; } /* v152 S15: bai Viet TOEIC w0-w7 (2 moi chang) */
+  if (k === "p") { var pr = (typeof TC_PRON !== "undefined") ? TC_PRON[n] : null; return pr ? { kind: "pron", title: pr.title, ref: n } : null; } /* v167 F3: buoc Phat am TOEIC p0-p3 (1 dau moi chang) */
   if (k === "c") { var ck = (typeof TC_CHECK_ALL !== "undefined") ? TC_CHECK_ALL[n] : null; return ck ? { kind: "check", title: ck.title, ref: n } : null; }
   if (id === "m0") return { kind: "mock", title: "Thi thử TOEIC chặng 900 — đủ 200 câu", ref: 0 };
   if (id === "m450") return { kind: "mock", title: "Thi thử TOEIC chặng 450 — 120 câu", ref: 450 };
@@ -23681,6 +23683,43 @@ function renderTcWrite(app, m, id, back, skipBanner) {
   }
   render();
 }
+/* v167 F3 13/11/2026: BUOC PHAT AM TOEIC — 1 buoc dau moi chang (am truoc, tu sau).
+   p0 = on/he thong hoa 44 am (mo ban do 44 am + bai am 6 buoc cua TC, mo het
+   khong khoa); p1-p3 = 1 chu de sieu doan moi chang, dung lai RB_PRON_TOPICS
+   da co (topic 0 Trong am tu, 3 Noi am, 7 Nhip dieu cau). Man nay chi la cua
+   vao: mo dung bai phat am da co; nut "Xong bai nay" ghi nhan buoc lo trinh. */
+function renderTcPron(app, m, id, back, skipBanner) {
+  var pr = TC_PRON[m.ref]; if (!pr) return;
+  var st = TC_STAGES[tcStepStage(id)] || {};
+  var eyebrow = "TOEIC · PHÁT ÂM · " + esc(st.title || "");
+  var head = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(pr.title) + '</h2>';
+  if (pr.mode === "map") {
+    var done = 0; try { done = Object.keys(state.phDone || {}).filter(function (k) { return state.phDone[k]; }).length; } catch (e) {}
+    app.innerHTML = head
+      + '<p class="mut">Học phát âm trước khi học từ mới — thuộc 44 âm rồi thì nghe và đọc từ nào cũng dễ hơn. Bản đồ 44 âm mở hết, học âm nào cũng được, không khóa.</p>'
+      + '<p><b>Đã thuộc ' + done + '/44 âm.</b></p>'
+      + '<div class="row"><button class="btn btn-primary" id="tcPronMapGo">Vào bản đồ 44 âm →</button></div>'
+      + '<div class="row" style="margin-top:8px"><button class="btn" id="tcPronFinish">Xong bài này (+10 XP)</button></div></section>';
+    tcWireBack(back);
+    document.getElementById("tcPronMapGo").onclick = function () { openLesson({ type: "pron", step: stepById("pron1"), tcStep: id }); };
+    var fin = document.getElementById("tcPronFinish");
+    fin.onclick = function () { if (tcMarkDone(id)) { fin.textContent = "Đã xong ✓"; fin.disabled = true; } };
+    return;
+  }
+  var t = (typeof RB_PRON_TOPICS !== "undefined") ? RB_PRON_TOPICS[pr.topic] : null;
+  if (!t) return;
+  var ex = (t.examples || []).map(function (e) { return '<p>· ' + esc(e) + '</p>'; }).join("");
+  app.innerHTML = head
+    + '<p>' + esc(t.explain || "") + '</p>' + ex
+    + '<p class="mut">Chủ đề siêu âm đoạn: ' + (t.quiz ? t.quiz.length : 0) + ' câu luyện nghe phân biệt + vòng nói–chấm (nghe phân biệt → đọc to 3 câu mẫu → nói tự do).</p>'
+    + '<div class="row"><button class="btn btn-primary" id="tcPronTopicGo">🎤 Vòng nói–chấm →</button> <button class="btn" id="tcPronTopicQuiz">Vào luyện tập (quiz) →</button></div>'
+    + '<div class="row" style="margin-top:8px"><button class="btn" id="tcPronFinish">Xong bài này (+10 XP)</button></div></section>';
+  tcWireBack(back);
+  document.getElementById("tcPronTopicGo").onclick = function () { openLesson({ type: "skillPronTopic", band: t.band, title: t.title, speak: true, tcStep: id }); };
+  document.getElementById("tcPronTopicQuiz").onclick = function () { openLesson({ type: "skillPronTopic", band: t.band, title: t.title, quiz: true, tcStep: id }); };
+  var fin2 = document.getElementById("tcPronFinish");
+  fin2.onclick = function () { if (tcMarkDone(id)) { fin2.textContent = "Đã xong ✓"; fin2.disabled = true; } };
+}
 function tcOpenStep(id, backTab) {
   tcNorm();
   var m = tcStepMeta(id); if (!m) return;
@@ -23690,6 +23729,7 @@ function tcOpenStep(id, backTab) {
   if (m.kind === "vocab") { renderTcTpVocab5("tc", id, back); /* v107e: vao bai tu vung TOEIC thi dua dau the ve khung nhin ngay (nhu openLesson cua EN/ZH). */ vkScrollCardTop(); return; }
   if (m.kind === "speak") { renderTcSpeak(app, m, id, back, skipBanner); return; } /* v127 */
   if (m.kind === "write") { renderTcWrite(app, m, id, back, skipBanner); return; } /* v152 S15 */
+  if (m.kind === "pron") { renderTcPron(app, m, id, back, skipBanner); return; } /* v167 F3 */
   if (m.kind === "gram") {
     var g = TC_GRAMMAR[m.ref];
     /* DOT SOI-D9d 02/11: tach ly thuyet rieng 1 man, roi moi cau 1 man (phan trang
@@ -23937,6 +23977,7 @@ function tcTpKindLabel(kind) {
   if (kind === "listen") return "Nghe";
   if (kind === "read") return "Đọc";
   if (kind === "write") return "Viết";
+  if (kind === "pron") return "Phát âm"; /* v167 F3 */
   if (kind === "hangul") return "Hangul";
   if (kind === "check") return "Kiểm tra cuối chặng";
   if (kind === "mock") return "Thi thử";
