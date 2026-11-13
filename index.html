@@ -15317,9 +15317,10 @@ function renderSkillRead(app, l) {
     gd23DictWire();
     return;
   }
-  app.innerHTML = '<div class="qblock" id="readPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="readPassageToggle">Ẩn bài đọc</button></div><div id="readPassageBody">' + paraHTML(r.text) + '</div></div><div id="quizSlot"></div>';
+  app.innerHTML = '<div class="qblock" id="readPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="readPassageToggle">Ẩn bài đọc</button><button class="btn" id="readListenAgain">🔊 Nghe lại bài đọc</button></div><div id="readPassageBody">' + paraHTML(r.text) + '</div></div><div id="quizSlot"></div>';
   renderQuizEngine($("#quizSlot"), l, r.questions, "skill", "read:" + l.idx, 2);
   var rpt = $("#readPassageToggle"); if (rpt) rpt.onclick = function () { var rb = $("#readPassageBody"); if (!rb) return; var hid = rb.style.display === "none"; rb.style.display = hid ? "" : "none"; rpt.textContent = hid ? "Ẩn bài đọc" : "Hiện bài đọc"; };
+  var rla = $("#readListenAgain"); if (rla) rla.onclick = function () { try { speak(r.text); } catch (e) {} }; /* v173 F8: pha lam bai co nut nghe lai nhu ZH */
 }
 /* ROADMAP-N8: doc them de hon mot nac — chi doc, khong tinh diem, khong quiz. */
 function renderSkillReadEasy(app, l) {
@@ -24090,8 +24091,17 @@ function tcOpenStep(id, backTab) {
       document.getElementById("tcFreeWriteBtn").onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "freeWrite", track: "tc", gramIdx: m.ref }); }; /* v158 S19 phan 3/3 */
       tcWireBack(back);
     };
-    var html2 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2><p>' + esc(g.explain) + '</p>' + (g.tenseTable ? tcTenseTableHTML(g.tenseTable) : '') + '<div class="row"><button class="btn btn-primary" id="tcGramStart">Vào luyện tập →</button></div></section>';
+    var tcGramEx = (g.examples && g.examples.length) ? g.examples : null; /* v173 F6: vi du tach ra khoi explain, co nut Nghe tung vi du nhu EN/ZH */
+    var tcGramRule = g.rule || g.explain;
+    var html2 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2>' + gramPhaseBarHTML("theory")
+      + (tcGramEx ? '<p><b>Nghe ví dụ trước:</b></p>' + tcGramEx.map(function (e, ei) { return '<p>· ' + esc(e.t) + ' <button class="btn" data-tcgramex="' + ei + '">🔊 Nghe</button></p>'; }).join("") : '<p>' + esc(g.explain) + '</p>')
+      + '<details class="rule-more" data-gram-rule="tc:' + m.ref + '"' + gramRuleOpenAttr("tc:" + m.ref) + '><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(tcGramRule) + '</p></details>'
+      + (g.mistakes ? '<p><b>Lỗi hay gặp:</b> ' + esc(g.mistakes) + '</p>' : '')
+      + (g.tenseTable ? tcTenseTableHTML(g.tenseTable) : '') + videoSlotIf("tcGram:" + m.ref)
+      + '<p class="mut">Bài này có ' + g.quiz.length + ' câu hỏi thực hành.</p><div class="row"><button class="btn btn-primary" id="tcGramStart">Vào luyện tập →</button></div></section>';
     app.innerHTML = html2;
+    gramRuleWire(app, "tc:" + m.ref);
+    if (tcGramEx) app.querySelectorAll("[data-tcgramex]").forEach(function (b) { b.onclick = function () { try { speak(tcGramEx[+b.dataset.tcgramex].s); } catch (e) {} }; });
     document.getElementById("tcGramStart").onclick = renderGramQuiz;
     tcWireBack(back); return;
   }
@@ -24120,10 +24130,29 @@ function tcOpenStep(id, backTab) {
   }
   if (m.kind === "read") {
     var r = TC_READ[m.ref];
-    var html4 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>';
-    if (r.passage) html4 += '<p>' + esc(r.passage) + '</p>';
-    html4 += tcQuizBlockHTML(r.qs, "r") + '<div class="row"><button class="btn btn-primary" id="tcFinishBtn">Xong bài này (+10 XP)</button></div></section>';
-    app.innerHTML = html4; app._tcQs = r.qs;
+    /* v173 F8: bai co doan van thi tach 2 pha nhu EN/ZH — pha 1 doc ky, pha 2 lam bai + nghe lai; bai Part 5 khong co doan van thi giu 1 man quiz nhu cu. */
+    var renderReadQuiz = function () {
+      var htmlQ = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(2)
+        + '<div class="qblock" id="tcReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="tcReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="tcReadListenAgain">🔊 Nghe lại bài đọc</button></div><div id="tcReadPassageBody"><p>' + esc(r.passage) + '</p></div></div>'
+        + tcQuizBlockHTML(r.qs, "r") + '<div class="row"><button class="btn btn-primary" id="tcFinishBtn">Xong bài này (+10 XP)</button></div></section>';
+      app.innerHTML = htmlQ; app._tcQs = r.qs;
+      tcWireQuiz(app, id, "tcFinishBtn");
+      var tpt = document.getElementById("tcReadPassageToggle"); if (tpt) tpt.onclick = function () { var rb = document.getElementById("tcReadPassageBody"); if (!rb) return; var hid = rb.style.display === "none"; rb.style.display = hid ? "" : "none"; tpt.textContent = hid ? "Ẩn bài đọc" : "Hiện bài đọc"; };
+      var tla = document.getElementById("tcReadListenAgain"); if (tla) tla.onclick = function () { try { speak(r.passage); } catch (e) {} };
+      document.getElementById("tcFinishBtn").onclick = function () { if (tcMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
+      tcWireBack(back);
+    };
+    if (r.passage) {
+      var html4 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(1) + '<p>' + esc(r.passage) + '</p>'
+        + '<p class="mut">Đọc kỹ bài rồi bấm "Làm bài" — khi làm câu hỏi vẫn xem lại được bài đọc bằng nút Ẩn/Hiện.</p>'
+        + '<div class="row"><button class="btn btn-primary" id="tcReadStart">Làm bài (' + r.qs.length + ' câu) →</button></div></section>';
+      app.innerHTML = html4;
+      document.getElementById("tcReadStart").onclick = renderReadQuiz;
+      tcWireBack(back); return;
+    }
+    var html4b = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>'
+      + tcQuizBlockHTML(r.qs, "r") + '<div class="row"><button class="btn btn-primary" id="tcFinishBtn">Xong bài này (+10 XP)</button></div></section>';
+    app.innerHTML = html4b; app._tcQs = r.qs;
     tcWireQuiz(app, id, "tcFinishBtn");
     document.getElementById("tcFinishBtn").onclick = function () { if (tcMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     tcWireBack(back); return;
@@ -25075,11 +25104,28 @@ function tpOpenStep(id, backTab) {
   if (m.kind === "speak") { renderTpSpeak(app, m, id, back, skipBanner); return; } /* v136: bai Noi TOPIK (M6) */
   if (m.kind === "gram") {
     var g = TP_GRAMMAR[m.ref];
-    var html2 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2><p>' + esc(g.explain) + '</p>' + tpQuizBlockHTML(g.quiz, "g") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button><button class="btn" id="tpFreeWriteBtn">✍️ Viết câu tự do →</button></div><p class="mut">Bước cuối của bài ngữ pháp: tự viết 1 câu dùng đúng mẫu vừa học.</p></section>';
-    app.innerHTML = html2; app._tpQs = g.quiz;
-    tpWireQuiz(app, id, "tpFinishBtn");
-    document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
-    document.getElementById("tpFreeWriteBtn").onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "freeWrite", track: "tp", gramIdx: m.ref }); }; /* v158 S19 phan 3/3 */
+    /* v173 F6: tach ly thuyet / thuc hanh nhu TC (DOT SOI-D9d) + mau EN/ZH — vi du truoc (nghe tung vi du) -> quy tac trong details -> vao luyen tap moi thay quiz. */
+    var renderGramQuiz = function () {
+      var htmlQ = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2>' + tpQuizBlockHTML(g.quiz, "g") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button><button class="btn" id="tpFreeWriteBtn">✍️ Viết câu tự do →</button></div><p class="mut">Bước cuối của bài ngữ pháp: tự viết 1 câu dùng đúng mẫu vừa học.</p></section>';
+      app.innerHTML = htmlQ; app._tpQs = g.quiz;
+      tpWireQuiz(app, id, "tpFinishBtn");
+      paginateQuiz(app, "tpq", "tp", "tpFinishBtn");
+      document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
+      document.getElementById("tpFreeWriteBtn").onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "freeWrite", track: "tp", gramIdx: m.ref }); }; /* v158 S19 phan 3/3 */
+      tpWireBack(back);
+    };
+    var tpGramEx = (g.examples && g.examples.length) ? g.examples : null;
+    var tpGramRule = g.rule || g.explain;
+    var html2 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · NGỮ PHÁP · MỨC ' + esc(g.level) + '</p><h2>' + esc(g.name) + '</h2>' + gramPhaseBarHTML("theory")
+      + (tpGramEx ? '<p><b>Nghe ví dụ trước:</b></p>' + tpGramEx.map(function (e, ei) { return '<p>· ' + esc(e.t) + ' <button class="btn" data-tpgramex="' + ei + '">🔊 Nghe</button></p>'; }).join("") : '<p>' + esc(g.explain) + '</p>')
+      + '<details class="rule-more" data-gram-rule="tp:' + m.ref + '"' + gramRuleOpenAttr("tp:" + m.ref) + '><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(tpGramRule) + '</p></details>'
+      + (g.mistakes ? '<p><b>Lỗi hay gặp:</b> ' + esc(g.mistakes) + '</p>' : '')
+      + videoSlotIf("tpGram:" + m.ref)
+      + '<p class="mut">Bài này có ' + g.quiz.length + ' câu hỏi thực hành.</p><div class="row"><button class="btn btn-primary" id="tpGramStart">Vào luyện tập →</button></div></section>';
+    app.innerHTML = html2;
+    gramRuleWire(app, "tp:" + m.ref);
+    if (tpGramEx) app.querySelectorAll("[data-tpgramex]").forEach(function (b) { b.onclick = function () { try { tpSpeak(tpGramEx[+b.dataset.tpgramex].s); } catch (e) {} }; });
+    document.getElementById("tpGramStart").onclick = renderGramQuiz;
     tpWireBack(back); return;
   }
   if (m.kind === "sandhi") { /* v172 F4: bai bien am — ly thuyet (vi du truoc + quy tac) -> nghe mau -> thuc hanh 2 cau -> xong bai */
@@ -25115,16 +25161,30 @@ function tpOpenStep(id, backTab) {
   }
   if (m.kind === "read") {
     var r = TP_READ[m.ref];
-    var html4 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · ĐỌC</p><h2>' + esc(r.title) + '</h2>';
-    if (r.passage) html4 += '<p>' + esc(r.passage) + '</p>';
-    /* DOT 19 UI GATE (31/10/2026): hien tom tat Viet ngay sau doan van, cung kieu
-       <p class="mut"> nhu cac ban dich Viet khac cua track TOPIK (scriptv o Nghe).
-       Renderer truoc day bo qua passagev o MOI cap (grep passagev trong index.html
-       cu = 0), khong rieng cap 6 — sua chung o day nen cap 6 va cap 1/2 (EXPAND18)
-       hien giong nhau; bai khong co passagev thi khong doi. */
-    if (r.passagev) html4 += '<p class="mut">' + esc(r.passagev) + '</p>';
-    html4 += tpQuizBlockHTML(r.qs, "r") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button></div></section>';
-    app.innerHTML = html4; app._tpQs = r.qs;
+    /* v173 F8: bai co doan van thi tach 2 pha nhu EN/ZH — pha 1 doc ky + tom tat Viet, pha 2 lam bai + nghe lai; bai khong co doan van thi giu 1 man quiz nhu cu.
+       DOT 19 UI GATE (31/10/2026): tom tat Viet (passagev) hien ngay sau doan van, kieu <p class="mut">, o MOI cap (cap 6 va cap 1/2 EXPAND18 hien giong nhau); bai khong co passagev thi khong doi. */
+    var renderReadQuiz = function () {
+      var htmlQ = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · ĐỌC</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(2)
+        + '<div class="qblock" id="tpReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="tpReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="tpReadListenAgain">🔊 Nghe lại bài đọc</button></div><div id="tpReadPassageBody"><p>' + esc(r.passage) + '</p>' + (r.passagev ? '<p class="mut">' + esc(r.passagev) + '</p>' : '') + '</div></div>'
+        + tpQuizBlockHTML(r.qs, "r") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button></div></section>';
+      app.innerHTML = htmlQ; app._tpQs = r.qs;
+      tpWireQuiz(app, id, "tpFinishBtn");
+      var tpt = document.getElementById("tpReadPassageToggle"); if (tpt) tpt.onclick = function () { var rb = document.getElementById("tpReadPassageBody"); if (!rb) return; var hid = rb.style.display === "none"; rb.style.display = hid ? "" : "none"; tpt.textContent = hid ? "Ẩn bài đọc" : "Hiện bài đọc"; };
+      var tla = document.getElementById("tpReadListenAgain"); if (tla) tla.onclick = function () { try { tpSpeak(r.passage); } catch (e) {} };
+      document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
+      tpWireBack(back);
+    };
+    if (r.passage) {
+      var html4 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · ĐỌC</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(1) + '<p>' + esc(r.passage) + '</p>' + (r.passagev ? '<p class="mut">' + esc(r.passagev) + '</p>' : '')
+        + '<p class="mut">Đọc kỹ bài rồi bấm "Làm bài" — khi làm câu hỏi vẫn xem lại được bài đọc bằng nút Ẩn/Hiện.</p>'
+        + '<div class="row"><button class="btn btn-primary" id="tpReadStart">Làm bài (' + r.qs.length + ' câu) →</button></div></section>';
+      app.innerHTML = html4;
+      document.getElementById("tpReadStart").onclick = renderReadQuiz;
+      tpWireBack(back); return;
+    }
+    var html4b = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · ĐỌC</p><h2>' + esc(r.title) + '</h2>'
+      + tpQuizBlockHTML(r.qs, "r") + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button></div></section>';
+    app.innerHTML = html4b; app._tpQs = r.qs;
     tpWireQuiz(app, id, "tpFinishBtn");
     document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     tpWireBack(back); return;
