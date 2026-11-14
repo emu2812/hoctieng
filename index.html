@@ -18748,6 +18748,400 @@ function wireSpLessonAi(l, s) {
   var sa = l.spAi || (l.spAi = {});
   wireSpeakAi(l, sa, spLessonAiParts(l, s), { onReRecord: function () { l.spLessonSpoken = false; l.spRec = null; l.spAi = null; l.spAiScore = null; render(); } });
 }
+/* ===== v187 TID U10 — Speaking: goi y 4 tang + noi lai so sanh =====
+   Mot engine dung chung ca 4 track (QT-05). Nguon: TID_NOTES §7 U10 + §3
+   dong 109 (4 tang goi y Part 3: "Moi lan chi mo them mot tang. So tang da
+   mo duoc ghi lai de do ban con can bao nhieu ho tro.").
+   - 4 tang goi y: T1 cau hoi goi y bang tieng Viet -> T2 tu khoa/collocation
+     -> T3 cau mo dau -> T4 nghe cau mau roi tu noi. Moi lan chi mo them 1
+     tang; so tang da mo hien ro va ghi vao state.sp10[key].
+   - Sau phan hoi (transcript + WPM + tu dem + tu doi chieu 4 tieu chi +
+     nang cap tu vung theo quy tac + bai mau tu y cua nguoi hoc) thi NOI LAI
+     KHONG GOI Y; he thong so lan moi voi lan cu (so tu, toc do, tu dem,
+     tu can nang cap; band AI khong cham o day — band AI 4 tieu chi nam o
+     khoi "Noi lai toan bai" cua bai EN, chi VIP).
+   - WPM do that tu thoi gian ghi am (dung lai rpSpeech5Stats v178, chuan
+     100–140 tu/phut, ghi "chi de tham khao"); tu dem dem tu transcript.
+   - KHONG co Live Nudge khi im lang (can theo doi mic lien tuc — de sau):
+     ghi ro trong man bai. KHONG cham am vi chi tiet (QT-09). KHONG tu tao
+     chu de Speaking. KHONG nhan VIP/tra phi, khong khoa bai. */
+var SP10_FILLERS = {
+  en: ["uh", "um", "like", "you know", "er", "hmm"],
+  tc: ["uh", "um", "like", "you know", "er", "hmm"],
+  zh: ["呃", "嗯", "那个", "啊"],
+  tp: ["어", "음", "그", "아", "저"]
+};
+var SP10_UPGRADE = {
+  en: [["very", "really"], ["good", "excellent"], ["bad", "terrible"], ["big", "huge"], ["small", "tiny"], ["happy", "delighted"], ["important", "crucial"], ["like", "enjoy"], ["think", "believe"], ["say", "mention"]],
+  tc: [["very", "really"], ["good", "excellent"], ["bad", "terrible"], ["big", "huge"], ["small", "tiny"], ["happy", "delighted"], ["important", "crucial"], ["like", "enjoy"], ["think", "believe"], ["say", "mention"]],
+  zh: [["很好", "非常好"], ["很高兴", "非常高兴"], ["很喜欢", "特别喜欢"], ["很多", "非常多"]],
+  tp: [["좋아요", "정말 좋아요"], ["감사합니다", "정말 감사합니다"], ["맛있어요", "정말 맛있어요"], ["재미있어요", "정말 재미있어요"]]
+};
+var SP10_STOP_EN = { a: 1, an: 1, the: 1, and: 1, or: 1, but: 1, of: 1, to: 1, in: 1, on: 1, at: 1, for: 1, with: 1, is: 1, are: 1, was: 1, were: 1, i: 1, you: 1, he: 1, she: 1, it: 1, we: 1, they: 1, my: 1, your: 1, his: 1, her: 1, our: 1, their: 1, this: 1, that: 1, there: 1, here: 1, so: 1, very: 1, just: 1, really: 1, like: 1, have: 1, has: 1, had: 1, do: 1, does: 1, did: 1, can: 1, could: 1, will: 1, would: 1, am: 1, be: 1, been: 1, not: 1, no: 1, yes: 1, if: 1, when: 1, where: 1, what: 1, which: 1, who: 1, how: 1, about: 1, from: 1, into: 1, over: 1, after: 1, before: 1, then: 1, than: 1, too: 1, also: 1, because: 1 };
+function sp10EscReg(s) { return String(s || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+function sp10Sid(key) { return String(key || "").replace(/[^a-zA-Z0-9_-]/g, "_"); }
+function sp10CountFillers(track, text) {
+  var list = SP10_FILLERS[track] || SP10_FILLERS.en;
+  var t = String(text || "");
+  var found = [], n = 0;
+  if (track === "zh" || track === "tp") {
+    /* Tu dem CJK chi dem khi dung doc lap: hai ben la dau/cuoi chuoi, khoang
+       trang hoac dau cau — khong dem "어" trong "한국어", khong dem "저" trong
+       "저는", khong dem "啊" cuoi cau "很好啊" (la tro tu cuoi cau, khong phai
+       tu dem), khong dem "那个" dau cau "那个很好" (la dai tu chi dinh). */
+    var isB = function (ch) { return ch === "" || /[\s，。！？、；：…,.!?;:'"()（）「」『』《》]/.test(ch); };
+    list.forEach(function (f) {
+      var c = 0, idx = t.indexOf(f);
+      while (idx >= 0) {
+        var prev = idx === 0 ? "" : t[idx - 1];
+        var next = idx + f.length >= t.length ? "" : t[idx + f.length];
+        if (isB(prev) && isB(next)) c++;
+        idx = t.indexOf(f, idx + 1);
+      }
+      if (c > 0) { found.push({ f: f, c: c }); n += c; }
+    });
+  } else {
+    var low = t.toLowerCase();
+    list.forEach(function (f) {
+      var m = low.match(new RegExp("\\b" + sp10EscReg(f) + "\\b", "g"));
+      if (m && m.length) { found.push({ f: f, c: m.length }); n += m.length; }
+    });
+  }
+  return { n: n, found: found };
+}
+function sp10Keywords(track, text, model) {
+  var out = [], seen = {};
+  var t = String(text || "");
+  if (track === "zh") {
+    /* Tach tu tieng Trung bang kho tu vung (rpSpeech5ZhWords, khop dai nhat
+       2–4 chu) — khong cat cua so 2 chu (cat "叫什么" thanh "叫小"/"么名" la
+       sai). Chi lay tu co trong bai mau (giao nhau) de noi dung "tu y cua
+       nguoi hoc". */
+    var seg = function (x) { try { return rpSpeech5ZhWords(x); } catch (e) { return []; } };
+    var modelWords = {};
+    seg(model).forEach(function (w) { if (w.length >= 2) modelWords[w] = 1; });
+    seg(t).forEach(function (w) {
+      if (w.length >= 2 && modelWords[w] && !seen[w] && out.length < 6) { seen[w] = 1; out.push(w); }
+    });
+    if (!out.length) {
+      seg(t).forEach(function (w) {
+        if (w.length >= 2 && !seen[w] && out.length < 3) { seen[w] = 1; out.push(w); }
+      });
+    }
+  } else if (track === "tp") {
+    t.split(/\s+/).forEach(function (w) {
+      w = w.replace(/[.,!?。？！]+$/g, "");
+      if (w.length >= 2 && !seen[w] && out.length < 6) { seen[w] = 1; out.push(w); }
+    });
+  } else {
+    t.toLowerCase().split(/[^a-zà-ỹ']+/).forEach(function (w) {
+      if (w.length >= 4 && !SP10_STOP_EN[w] && !seen[w] && out.length < 6) { seen[w] = 1; out.push(w); }
+    });
+  }
+  return out;
+}
+function sp10Upgrade(track, text) {
+  var list = SP10_UPGRADE[track] || SP10_UPGRADE.en;
+  var t = String(text || "");
+  var out = [];
+  var sents = t.match(/[^.!?。？！]+[.!?。？！]?/g) || [t];
+  var cjk = (track === "zh" || track === "tp");
+  var usedSent = {}; /* 1 cau chi 1 goi y — tranh gop 2 tu doi trong cung cau thanh cau sai ("very excellent") */
+  list.forEach(function (pair) {
+    if (out.length >= 3) return;
+    var from = pair[0], to = pair[1];
+    for (var i = 0; i < sents.length; i++) {
+      if (usedSent[i]) continue;
+      var s = sents[i];
+      var idx = cjk ? s.indexOf(from) : s.toLowerCase().search(new RegExp("\\b" + sp10EscReg(from) + "\\b"));
+      if (idx < 0) continue;
+      var matched = cjk ? from : s.slice(idx, idx + from.length);
+      var rep = to;
+      if (/^[A-Z]/.test(matched)) rep = to.charAt(0).toUpperCase() + to.slice(1);
+      usedSent[i] = 1;
+      out.push({ from: from, to: to, sent: (s.slice(0, idx) + rep + s.slice(idx + matched.length)).trim() });
+      break;
+    }
+  });
+  return out;
+}
+function sp10AttemptStats(track, a) {
+  var st = { words: 0, wpm: null, verdict: "", unit: track === "zh" ? "chữ" : "từ", fillers: { n: 0, found: [] }, perMin: null, upgrades: [] };
+  try {
+    var r = rpSpeech5Stats(track, [{ answer: a.text, via: a.via, secs: (typeof a.secs === "number" ? a.secs : null) }]);
+    st.words = r.words; st.wpm = r.wpm; st.verdict = r.verdict; st.unit = r.unit;
+  } catch (e) {
+    st.words = String(a.text || "").split(/\s+/).filter(Boolean).length;
+  }
+  var f = sp10CountFillers(track, a.text);
+  st.fillers = f;
+  if (typeof a.secs === "number" && a.secs > 0) st.perMin = Math.round(f.n / (a.secs / 60) * 10) / 10;
+  st.upgrades = sp10Upgrade(track, a.text);
+  return st;
+}
+function sp10NewHolder(key, track) {
+  var h = { key: key, track: track, tiers: 0, phase: "hint", attempts: [], selfCheck: [false, false, false, false], err: "", typing: false };
+  try {
+    var saved = (state.sp10 || {})[key];
+    if (saved) {
+      if (typeof saved.tiers === "number") h.tiers = saved.tiers;
+      if (Array.isArray(saved.attempts)) h.attempts = saved.attempts;
+      if (Array.isArray(saved.selfCheck)) h.selfCheck = saved.selfCheck;
+      if (h.attempts.length === 1) h.phase = "fb";
+      else if (h.attempts.length >= 2) h.phase = "done";
+    }
+  } catch (e) {}
+  return h;
+}
+function sp10Persist(h) {
+  try {
+    state.sp10 = state.sp10 || {};
+    state.sp10[h.key] = { tiers: h.tiers, attempts: h.attempts, selfCheck: h.selfCheck };
+    saveState();
+  } catch (e) {}
+}
+function sp10TierHTML(task, n) {
+  if (n === 1) return '<p><b>Tầng 1 — Câu hỏi gợi ý (tiếng Việt):</b> ' + esc(task.guideVi) + '</p>';
+  if (n === 2) return '<p><b>Tầng 2 — Từ khóa/cụm từ dùng được:</b> ' + ((task.keywords && task.keywords.length) ? task.keywords.map(esc).join(" · ") : "—") + '</p>';
+  if (n === 3) return '<p><b>Tầng 3 — Câu mở đầu gợi ý:</b> ' + esc(task.opener) + (task.openerVi ? ' <span class="mut">— ' + esc(task.openerVi) + '</span>' : '') + '</p>';
+  return '<p><b>Tầng 4 — Nghe câu mẫu rồi tự nói:</b> ' + esc(task.model) + (task.modelVi ? ' <span class="mut">— ' + esc(task.modelVi) + '</span>' : '') + ' <button class="btn" data-sp10-hear="1">🔊 Nghe câu mẫu</button></p>';
+}
+function sp10CriteriaHTML(h) {
+  var crits = String((typeof RB_SPEAK_CRITERIA_TXT !== "undefined" ? RB_SPEAK_CRITERIA_TXT : "trôi chảy và mạch lạc; từ vựng; ngữ pháp đúng và đa dạng; phát âm.")).split(";");
+  return crits.map(function (c, i) {
+    return '<label style="display:block;margin:4px 0"><input type="checkbox" data-sp10-crit="' + i + '"' + (h.selfCheck[i] ? ' checked' : '') + '> ' + esc(c.trim().replace(/\.$/, "")) + '</label>';
+  }).join("");
+}
+function sp10FeedbackHTML(h, task, a) {
+  var st = a.stats;
+  var out = '<p><b>Bạn đã nói:</b> “' + esc(a.text) + '”</p>';
+  out += '<p><b>Tốc độ nói:</b> ' + (st.wpm != null ? st.wpm + ' ' + st.unit + '/phút — ' + esc(st.verdict) + ' <span class="mut">(chuẩn 100–140 ' + st.unit + '/phút, chỉ để tham khảo)</span>' : 'Chưa đo được tốc độ — chỉ đo được khi nói bằng mic (bản gõ không có thời gian nói).') + '</p>';
+  out += '<p><b>Từ đệm:</b> ' + st.fillers.n + ' lần' + (st.perMin != null ? ' (' + st.perMin + ' lần/phút)' : '') + (st.fillers.found.length ? ' — ' + st.fillers.found.map(function (f) { return '“' + esc(f.f) + '” ×' + f.c; }).join(", ") : ' — không có từ đệm trong câu này, tốt.') + '</p>';
+  out += '<p><b>Tự đối chiếu 4 tiêu chí</b> <span class="mut">(tích vào tiêu chí bạn thấy mình làm được ở lần nói này)</span>:</p>' + sp10CriteriaHTML(h);
+  if (st.upgrades.length) {
+    out += '<p><b>Cách nói hay hơn — gợi ý từ chính câu của bạn</b> <span class="mut">(chỉ là gợi ý, bạn tự quyết có dùng không; máy không viết hộ bài)</span>:</p>';
+    st.upgrades.forEach(function (u) {
+      out += '<p>“' + esc(u.sent) + '” <span class="mut">— thay “' + esc(u.from) + '” bằng “' + esc(u.to) + '”.</span></p>';
+    });
+  } else {
+    out += '<p class="mut">Câu của bạn chưa có từ nào trong danh sách nâng cấp — cứ nói tiếp, càng nói càng hay.</p>';
+  }
+  var kw = sp10Keywords(task.track, a.text, task.model);
+  out += '<p><b>Bài mẫu từ ý của bạn:</b> ' + (kw.length ? 'Từ khóa bạn đã nói: ' + kw.map(esc).join(" · ") + '. ' : '') + 'Bài mẫu nói cùng ý đó: “' + esc(task.model) + '”' + (task.modelVi ? ' <span class="mut">— ' + esc(task.modelVi) + '</span>' : '') + ' Hãy mượn cấu trúc của bài mẫu khi nói lại.</p>';
+  return out;
+}
+function sp10CompareHTML(h) {
+  var a = h.attempts[0], b = h.attempts[1];
+  if (!a || !b) return "";
+  var row = function (label, v1, v2) { return '<tr><td>' + label + '</td><td>' + v1 + '</td><td>' + v2 + '</td></tr>'; };
+  var out = '<p><b>So sánh lần 1 và lần 2</b> <span class="mut">(lần 2 nói không gợi ý)</span>:</p>'
+    + '<table><tr><th></th><th>Lần 1 (có gợi ý)</th><th>Lần 2 (không gợi ý)</th></tr>'
+    + row("Số từ", a.stats.words + " " + a.stats.unit, b.stats.words + " " + b.stats.unit)
+    + row("Tốc độ nói", (a.stats.wpm != null ? a.stats.wpm + " " + a.stats.unit + "/phút" : "chưa đo được"), (b.stats.wpm != null ? b.stats.wpm + " " + b.stats.unit + "/phút" : "chưa đo được"))
+    + row("Từ đệm", a.stats.fillers.n + " lần" + (a.stats.perMin != null ? " (" + a.stats.perMin + "/phút)" : ""), b.stats.fillers.n + " lần" + (b.stats.perMin != null ? " (" + b.stats.perMin + "/phút)" : ""))
+    + row("Từ cần nâng cấp", a.stats.upgrades.length + " từ", b.stats.upgrades.length + " từ")
+    + '</table>';
+  out += '<p class="mut">Band AI không chấm ở bài luyện này — band AI 4 tiêu chí nằm ở khối “Nói lại toàn bài” phía dưới.</p>';
+  var vs = [];
+  if (b.stats.words > a.stats.words) vs.push("Lần 2 dài hơn lần 1 (" + a.stats.words + " → " + b.stats.words + " " + a.stats.unit + ").");
+  else if (b.stats.words < a.stats.words) vs.push("Lần 2 ngắn hơn lần 1 (" + a.stats.words + " → " + b.stats.words + " " + a.stats.unit + ").");
+  else vs.push("Hai lần dài bằng nhau (" + a.stats.words + " " + a.stats.unit + ").");
+  if (a.stats.wpm != null && b.stats.wpm != null) {
+    var d1 = Math.abs(a.stats.wpm - 120), d2 = Math.abs(b.stats.wpm - 120);
+    if (d2 < d1) vs.push("Tốc độ lần 2 gần chuẩn 100–140 hơn lần 1.");
+    else if (d2 > d1) vs.push("Tốc độ lần 2 xa chuẩn 100–140 hơn lần 1.");
+    else vs.push("Tốc độ hai lần gần chuẩn như nhau.");
+  }
+  if (b.stats.fillers.n < a.stats.fillers.n) vs.push("Lần 2 ít từ đệm hơn lần 1 (" + a.stats.fillers.n + " → " + b.stats.fillers.n + ").");
+  else if (b.stats.fillers.n > a.stats.fillers.n) vs.push("Lần 2 nhiều từ đệm hơn lần 1 (" + a.stats.fillers.n + " → " + b.stats.fillers.n + ").");
+  else vs.push("Số từ đệm hai lần bằng nhau (" + a.stats.fillers.n + ").");
+  if (b.stats.upgrades.length < a.stats.upgrades.length) vs.push("Lần 2 ít từ cần nâng cấp hơn lần 1 (" + a.stats.upgrades.length + " → " + b.stats.upgrades.length + ").");
+  else if (b.stats.upgrades.length > a.stats.upgrades.length) vs.push("Lần 2 nhiều từ cần nâng cấp hơn lần 1 (" + a.stats.upgrades.length + " → " + b.stats.upgrades.length + ").");
+  out += '<p>' + vs.join(" ") + '</p>';
+  out += '<div class="row"><div style="flex:1"><p><b>Lần 1:</b></p><p>“' + esc(a.text) + '”</p></div><div style="flex:1"><p><b>Lần 2:</b></p><p>“' + esc(b.text) + '”</p></div></div>';
+  return out;
+}
+function sp10Render(c, h, task, opts) {
+  opts = opts || {};
+  var sid = sp10Sid(h.key);
+  var speakId = opts.speakId || ("sp10Speak-" + sid);
+  var errId = opts.errId || ("sp10Err-" + sid);
+  var resId = opts.resId || ("sp10Res-" + sid);
+  var typeId = opts.typeId || ("sp10Type-" + sid);
+  var html = '<div class="qblock" data-sp10="1"><p><b>🎤 Trả lời câu hỏi nói — gợi ý 4 tầng</b></p>'
+    + '<p><b>Câu hỏi:</b> ' + esc(task.question) + (task.questionVi && task.questionVi !== task.question ? ' <span class="mut">— ' + esc(task.questionVi) + '</span>' : '') + '</p>'
+    + '<p>Đã mở <b>' + h.tiers + '/4 tầng gợi ý</b> <span class="mut">— càng mở ít tầng, bạn càng tự lực.</span></p>';
+  if (h.phase === "hint" || h.phase === "retry") {
+    if (h.phase === "retry") {
+      html += '<p class="mut">Lượt nói lại: gợi ý đã khóa — bạn nói hoàn toàn không gợi ý.</p>';
+    } else {
+      for (var i = 1; i <= h.tiers; i++) html += sp10TierHTML(task, i);
+      if (h.tiers < 4) html += '<div class="row"><button class="btn" data-sp10-hint="1">💡 Mở gợi ý tầng ' + (h.tiers + 1) + '/4</button></div>';
+      else html += '<p class="mut">Đã mở hết 4 tầng gợi ý.</p>';
+    }
+    html += '<div class="row"><button class="btn btn-primary" id="' + speakId + '">🎤 Nói câu trả lời của bạn</button> <button class="btn" id="' + typeId + '">⌨️ Gõ câu trả lời thay vì nói</button></div>'
+      + '<p class="mut" id="' + errId + '">' + esc(h.err || "") + '</p>'
+      + '<div id="' + resId + '"></div>'
+      + '<p class="mut">Chưa có nhắc khi im lặng (Live Nudge) — khi bạn im lặng, máy không nhắc; bạn tự bấm Dừng khi nói xong.</p>'
+      + '<p class="mut">Máy không chấm điểm phần này — chỉ để bạn tự luyện nói. Không có mic vẫn học tiếp được: bấm “⌨️ Gõ câu trả lời thay vì nói” rồi tự đối chiếu 4 tiêu chí ở dưới.</p>';
+    if (h.typing) {
+      html += '<div class="row"><textarea id="sp10TypeBox-' + sid + '" rows="3" style="flex:1" placeholder="Gõ câu trả lời của bạn bằng ' + esc(task.typeLabel || "ngôn ngữ đang học") + '..."></textarea></div><div class="row"><button class="btn btn-primary" data-sp10-typesend="1">Gửi bản gõ →</button></div>';
+    }
+  } else if (h.phase === "fb") {
+    html += sp10FeedbackHTML(h, task, h.attempts[0]);
+    html += '<div class="row"><button class="btn btn-primary" data-sp10-retry="1">🔁 Nói lại không gợi ý →</button></div><p class="mut">Lượt nói lại này KHÔNG mở gợi ý — để đo xem bạn nói được bao nhiêu khi không còn gợi ý.</p>';
+  } else if (h.phase === "done") {
+    html += sp10FeedbackHTML(h, task, h.attempts[1]);
+    html += sp10CompareHTML(h);
+    html += '<div class="row"><button class="btn" data-sp10-again="1">↺ Luyện lại từ đầu</button></div>';
+  }
+  html += '</div>';
+  c.innerHTML = html;
+  sp10Wire(c, h, task, opts);
+}
+function sp10Wire(c, h, task, opts) {
+  opts = opts || {};
+  var sid = sp10Sid(h.key);
+  var speakId = opts.speakId || ("sp10Speak-" + sid);
+  var errId = opts.errId || ("sp10Err-" + sid);
+  var typeId = opts.typeId || ("sp10Type-" + sid);
+  var hintBtn = c.querySelector('[data-sp10-hint]');
+  if (hintBtn) hintBtn.onclick = function () {
+    if (h.tiers < 4) { h.tiers++; h.err = ""; sp10Persist(h); sp10Render(c, h, task, opts); }
+  };
+  var hearBtn = c.querySelector('[data-sp10-hear]');
+  if (hearBtn) hearBtn.onclick = function () { try { speakAuto(task.modelSpeak || task.model); } catch (e) {} };
+  var spBtn = c.querySelector("#" + speakId);
+  if (spBtn) spBtn.onclick = function () { sp10Speak(c, h, task, opts); };
+  var tyBtn = c.querySelector("#" + typeId);
+  if (tyBtn) tyBtn.onclick = function () { h.typing = true; h.err = ""; sp10Render(c, h, task, opts); var tb = c.querySelector("textarea"); if (tb) tb.focus(); };
+  var tsBtn = c.querySelector('[data-sp10-typesend]');
+  if (tsBtn) tsBtn.onclick = function () {
+    var tb = c.querySelector("textarea");
+    sp10Record(c, h, task, opts, tb ? tb.value : "", "type", null);
+  };
+  var rtBtn = c.querySelector('[data-sp10-retry]');
+  if (rtBtn) rtBtn.onclick = function () { h.phase = "retry"; h.typing = false; h.err = ""; sp10Render(c, h, task, opts); };
+  var agBtn = c.querySelector('[data-sp10-again]');
+  if (agBtn) agBtn.onclick = function () { h.attempts = []; h.phase = "hint"; h.typing = false; h.err = ""; sp10Persist(h); sp10Render(c, h, task, opts); };
+  c.querySelectorAll('[data-sp10-crit]').forEach(function (cb) {
+    cb.onchange = function () { h.selfCheck[+cb.dataset.sp10Crit] = !!cb.checked; sp10Persist(h); };
+  });
+}
+function sp10Speak(c, h, task, opts) {
+  opts = opts || {};
+  var sid = sp10Sid(h.key);
+  var errEl = c.querySelector("#" + (opts.errId || ("sp10Err-" + sid)));
+  var resEl = c.querySelector("#" + (opts.resId || ("sp10Res-" + sid)));
+  var t0 = Date.now();
+  try {
+    pronTier1Start(task.srTrack, function (tx) {
+      var secs = (Date.now() - t0) / 1000;
+      if (resEl) resEl.textContent = tx || "";
+      sp10Record(c, h, task, opts, tx, "mic", secs);
+    }, function (kind) {
+      if (errEl) errEl.textContent = pronTier1ErrText(kind);
+    });
+  } catch (e) {
+    if (errEl) errEl.textContent = "Không ghi âm được — kiểm tra mic rồi bấm lại, hoặc gõ câu trả lời thay vì nói.";
+  }
+}
+function sp10Record(c, h, task, opts, text, via, secs) {
+  var tx = String(text || "").trim();
+  if (!tx) {
+    h.err = "Chưa nghe thấy gì — nói to hơn rồi thử lại, hoặc gõ câu trả lời.";
+    h.typing = true;
+    sp10Render(c, h, task, opts);
+    return;
+  }
+  var a = { text: tx, via: via, secs: (typeof secs === "number" ? Math.round(secs * 10) / 10 : null) };
+  a.stats = sp10AttemptStats(task.track, a);
+  h.attempts.push(a);
+  h.typing = false;
+  h.err = "";
+  h.phase = (h.attempts.length >= 2) ? "done" : "fb";
+  sp10Persist(h);
+  sp10Render(c, h, task, opts);
+  if (opts && typeof opts.onDone === "function" && h.phase === "done") { try { opts.onDone(h); } catch (e) {} }
+}
+function sp10Mount(c, task, opts) {
+  if (!c) return null;
+  var h = sp10NewHolder(task.key, task.track);
+  sp10Render(c, h, task, opts || {});
+  return h;
+}
+/* v187: dung task U10 tu du lieu bai da co (khong bia de moi). */
+function sp10TaskEn(l, s) {
+  var lines = s.lines || [];
+  var exam = null, cand = [];
+  lines.forEach(function (ln) {
+    if (!exam && ln.who === "Examiner") exam = ln;
+    if (ln.who === "Candidate") cand.push(ln);
+  });
+  if (!exam) exam = lines[0] || { en: s.topic, vi: s.topic };
+  var frame = (typeof RB_SPEAK_PART_FRAME !== "undefined" && RB_SPEAK_PART_FRAME[s.partNum]) || { frame: "", phrases: [] };
+  var frameVi = s.partNum === 2 ? "Mở đầu (nói về cái gì), rồi kể 2–3 ý theo gợi ý trên thẻ, kết bằng cảm nghĩ."
+    : s.partNum === 3 ? "Nêu quan điểm, rồi lý do + ví dụ, có thể thêm ý trái chiều."
+    : "Trả lời trực tiếp, rồi thêm 1 lý do và 1 ví dụ ngắn.";
+  var model = cand.map(function (x) { return x.en; }).join(" ");
+  var modelVi = cand.map(function (x) { return x.vi; }).join(" ");
+  var kw = (frame.phrases || []).slice();
+  cand.forEach(function (x) { sp10Keywords("en", x.en, "").forEach(function (w) { if (kw.indexOf(w) < 0) kw.push(w); }); });
+  return {
+    key: "en-speak:" + l.idx, track: "en", srTrack: "en", title: s.topic,
+    question: exam.en, questionVi: exam.vi,
+    guideVi: (exam.vi || exam.en) + " — " + frameVi,
+    keywords: kw.slice(0, 6),
+    opener: cand.length ? cand[0].en : model,
+    openerVi: cand.length ? cand[0].vi : modelVi,
+    model: model, modelVi: modelVi, modelSpeak: model,
+    typeLabel: "tiếng Anh"
+  };
+}
+function sp10TaskZh(s) {
+  var lines = s.lines || [];
+  var q = null, bLine = null;
+  lines.forEach(function (ln) {
+    if (!q && /？\s*$/.test(ln.han || "")) q = ln;
+    if (!bLine && ln.sp === "B") bLine = ln;
+  });
+  if (!bLine) bLine = lines[0] || { han: "", py: "", vi: "" };
+  var allHan = lines.map(function (x) { return x.han; }).join(" ");
+  var allVi = lines.map(function (x) { return x.vi; }).join(" ");
+  return {
+    key: "zh-speak:" + s.id, track: "zh", srTrack: "zh", title: s.title,
+    question: q ? q.han : "Nói lại cả đoạn bằng lời của bạn",
+    questionVi: q ? q.vi : "Nói lại cả đoạn bằng lời của bạn",
+    guideVi: q ? q.vi + " — bạn sẽ trả lời thế nào? Nói 2–3 ý bằng lời của mình." : "Nói lại cả đoạn bằng lời của bạn — kể lại các ý chính trong đoạn hội thoại.",
+    keywords: sp10Keywords("zh", allHan, allHan).slice(0, 6),
+    opener: bLine.han, openerVi: bLine.vi + (bLine.py ? " (" + bLine.py + ")" : ""),
+    model: allHan, modelVi: allVi, modelSpeak: allHan,
+    typeLabel: "tiếng Trung"
+  };
+}
+function sp10TaskTcTp(track, s, ref) {
+  var hints = (s.free && s.free.hints) || [];
+  var viParts = [], tgtParts = [];
+  hints.forEach(function (h) {
+    var p = String(h || "").split(" — ");
+    if (p.length >= 2) { tgtParts.push(p[0].trim()); viParts.push(p.slice(1).join(" — ").trim()); }
+    else { tgtParts.push(String(h)); }
+  });
+  var sample = s.sample || "";
+  var firstSent = (sample.match(/[^.!?。？！]+[.!?。？！]?/) || [""])[0];
+  return {
+    key: track + "-speak:" + ref, track: track, srTrack: track, title: s.title,
+    question: (s.free && s.free.prompt) || s.title,
+    questionVi: (s.free && s.free.prompt) || s.title,
+    guideVi: viParts.length ? "Bạn cần nói về: " + viParts.join("; ").replace(/[.。]+$/, "") + "." : ((s.free && s.free.prompt) || s.title),
+    keywords: (s.chunks || []).concat(tgtParts).slice(0, 6),
+    opener: firstSent.trim(),
+    openerVi: s.sampleVi ? s.sampleVi.split(/[.!?]/)[0] : "",
+    model: sample, modelVi: s.sampleVi || "", modelSpeak: sample,
+    typeLabel: track === "tp" ? "tiếng Hàn" : "tiếng Anh"
+  };
+}
+
 function renderSkillSpeak(app, l) {
   var s = CONTENT.speaking[l.idx];
   if (!s) { curLesson = null; render(); return; }
@@ -18793,13 +19187,17 @@ function renderSkillSpeak(app, l) {
      v104 Chặng 7: man tong ket them khoi "Noi lai toan bai — AI cham 4 tieu chi"
      (VIP) / tu doi chieu (thuong) trong #spLessonAiSlot; dien + noi day sau
      moi lan render vi khoi nay phu thuoc trang thai ghi am. */
-  l.finishExtraHTML = '<details open style="margin-bottom:10px"><summary><b>Xem lại bài mẫu</b></summary><div class="qblock"><div class="row">' + subModeHTML() + '</div>' + speakLinesHTML(s) + '</div></details><div id="spLessonAiSlot"></div>';
+  l.finishExtraHTML = '<details open style="margin-bottom:10px"><summary><b>Xem lại bài mẫu</b></summary><div class="qblock"><div class="row">' + subModeHTML() + '</div>' + speakLinesHTML(s) + '</div></details><div id="sp10Slot"></div><div id="spLessonAiSlot"></div>';
   app.innerHTML = '<p class="mut">Sau khi làm xong, nói lại toàn bộ bài mẫu thành tiếng ở cuối trang — tài khoản VIP được AI chấm 4 tiêu chí, tài khoản thường tự đối chiếu theo bảng tiêu chí.</p><div id="quizSlot"></div>';
   $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speakAuto(s.lines[+b.dataset.speakline].en); }; }); /* v126: cau tieng Trung doc bang zh-CN */
   renderQuizEngine($("#quizSlot"), l, s.quiz || [], "skill", "speak:" + l.idx, 2);
   subModeWire(); /* v156 S19: nut phu de trong khoi "Xem lai bai mau" o man tong ket */
   var spSlot = $("#spLessonAiSlot");
   if (spSlot) { spSlot.innerHTML = spLessonAiHTML(l, s); wireSpLessonAi(l, s); }
+  /* v187 TID U10: khoi "Tra loi cau hoi noi — goi y 4 tang" o man tong ket,
+     truoc khoi AI. Mount sau moi lan render; holder khoi phuc tu state.sp10. */
+  var sp10Slot = $("#sp10Slot");
+  if (sp10Slot) sp10Mount(sp10Slot, sp10TaskEn(l, s));
 }
 function renderSkillRoleplay(app, l) {
   var r = CONTENT.roleplay[l.idx];
@@ -25306,8 +25704,13 @@ function renderZhSpeak(app, l) {
       + '<div class="row"><button class="btn" data-zhspeakline="' + i + '">🔊 Nghe lượt này</button><button class="btn" data-zhspeakmirror="' + i + '">🪞 Soi gương quỹ đạo</button></div>'
       + '<div id="zhSpeakMirrorSlot-' + i + '" style="display:none"></div><div id="zhSpeakMirrorResult-' + i + '"></div></div>';
   });
+  /* v187 TID U10: muc "Noi tu do" — tra loi bang loi cua minh voi goi y 4 tang
+     + noi lai so sanh. Them vao, khong doi cong "Da luyen xong" (chi can nghe
+     het cac luot) — day la cho thieu theo QT-05 (ZH truoc day chi shadowing). */
+  html += '<div id="zhSp10Slot"></div>';
   app.innerHTML = html;
   wireBack();
+  sp10Mount($("#zhSp10Slot"), sp10TaskZh(s));
   setBarLessonDone("zhSpeakDone", "Đã luyện xong →", function () { try { mirrorStop(); } catch (e) {} l.xpEarned = zhAwardOnce("zhSpeak:" + s.id) ? 10 : 0; l.done = true; render(); }, !zhSpeakAllHeard(s, l));
   var al = $("#zhSpeakAll"); if (al) al.onclick = function () { zhSpeak(zhSpeakAllText(s)); if (!l.heard) l.heard = {}; (s.lines || []).forEach(function (_, i) { l.heard[i] = true; }); zhSpeakRefreshCur(s, l); };
   $$("[data-zhspeakline]").forEach(function (b) { b.onclick = function () { var li = +b.dataset.zhspeakline; zhSpeak(s.lines[li].han); if (!l.heard) l.heard = {}; l.heard[li] = true; zhSpeakRefreshCur(s, l); }; });
@@ -26598,11 +27001,7 @@ function renderTcSpeak(app, m, id, back, skipBanner) {
       + '<h3>1. Nói theo mẫu</h3><p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Nút “Xong bài này” chỉ mở khi đã nghe hết các câu mẫu và đọc to ít nhất 1 câu (đọc sai cũng được, chỉ cần máy nghe thấy bạn nói). Máy không có mic hoặc trình duyệt không hỗ trợ ghi âm thì vẫn bấm Xong được sau khi nghe hết mẫu.</p>'
       + '<div class="row"><button class="btn" id="tcSpeakAll">🔊 Nghe toàn đoạn</button></div>'
       + '<p class="mut" id="tcSpeakHeard">Đã nghe: 0/' + s.lines.length + ' câu.</p><p class="mut" id="tcSpeakRead">Đã đọc to: 0 câu — cần ít nhất 1 câu để mở nút Xong.</p>' + lines
-      + '<h3>2. Nói tự do</h3><div class="qblock"><p><b>Đề bài:</b> ' + esc(s.free.prompt) + '</p>'
-      + '<p><b>Gợi ý:</b> ' + s.free.hints.map(function (h) { return esc(h); }).join(" · ") + '</p>'
-      + '<div class="row"><button class="btn" id="tcSpeakFree">🎤 Nói câu trả lời của bạn</button></div>'
-      + '<div id="tcSpeakFreeRes"></div><div id="tcSpeakFreeErr" class="mut"></div>'
-      + '<p class="mut">Máy chỉ ghi lại lời bạn nói để bạn tự nghe lại — không chấm điểm phần này. Không có mic vẫn học tiếp được: đọc thầm câu trả lời theo gợi ý rồi tự đối chiếu 4 tiêu chí ở dưới.</p></div>'
+      + '<h3>2. Nói tự do</h3><div id="tcSp10Slot"></div>'
       + '<h3>3. Tự đối chiếu 4 tiêu chí</h3><div class="qblock"><p class="mut">Nghe lại giọng mình (nếu đã ghi) rồi tích vào tiêu chí bạn thấy mình đã làm được. Tài khoản VIP được AI chấm 4 tiêu chí ở bài thi Nói; bài luyện này chỉ tự đối chiếu.</p>'
       + critHTML
       + '<details><summary><b>Xem bài mẫu để đối chiếu</b></summary><p>' + esc(s.sample) + '</p></details></div>'
@@ -26653,15 +27052,11 @@ function renderTcSpeak(app, m, id, back, skipBanner) {
         });
       };
     });
-    document.getElementById("tcSpeakFree").onclick = function () {
-      var box = document.getElementById("tcSpeakFreeRes"), err = document.getElementById("tcSpeakFreeErr");
-      pronTier1Start("en", function (heardTx) {
-        if (box) box.innerHTML = '<p>Máy nghe được: “' + esc(heardTx || "") + '”</p><p class="mut">Nghe lại câu mình vừa nói rồi đối chiếu 4 tiêu chí ở dưới — phần này không chấm điểm.</p>';
-        if (err) err.textContent = "";
-      }, function (kind) {
-        if (err) err.textContent = pronTier1ErrText(kind);
-      });
-    };
+    /* v187 TID U10: muc 2 thanh engine goi y 4 tang + noi lai so sanh (sp10).
+       Giu id nut Noi tu do + o loi/transcript cu (tcSpeakFree/tcSpeakFreeErr/
+       tcSpeakFreeRes) de probe v127/v136 cu van thay dung cho; holder giu
+       trong closure nhu wbL v185 vi ham nay khong co doi tuong bai l. */
+    sp10Mount(document.getElementById("tcSp10Slot"), sp10TaskTcTp("tc", s, id), { speakId: "tcSpeakFree", errId: "tcSpeakFreeErr", resId: "tcSpeakFreeRes" });
     fin.onclick = function () { if (tcMarkDone(id)) { fin.textContent = "Đã xong ✓"; fin.disabled = true; } };
   };
 }
@@ -27744,11 +28139,7 @@ function renderTpSpeak(app, m, id, back, skipBanner) {
       + '<h3>1. Nói theo mẫu</h3><p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Nút “Xong bài này” chỉ mở khi đã nghe hết các câu mẫu và đọc to ít nhất 1 câu (đọc sai cũng được, chỉ cần máy nghe thấy bạn nói). Máy không có mic hoặc trình duyệt không hỗ trợ ghi âm thì vẫn bấm Xong được sau khi nghe hết mẫu.</p>'
       + '<div class="row"><button class="btn" id="tpSpeakAll">🔊 Nghe toàn đoạn</button></div>'
       + '<p class="mut" id="tpSpeakHeard">Đã nghe: 0/' + s.lines.length + ' câu.</p><p class="mut" id="tpSpeakRead">Đã đọc to: 0 câu — cần ít nhất 1 câu để mở nút Xong.</p>' + lines
-      + '<h3>2. Nói tự do</h3><div class="qblock"><p><b>Đề bài:</b> ' + esc(s.free.prompt) + '</p>'
-      + '<p><b>Gợi ý:</b> ' + s.free.hints.map(function (h) { return esc(h); }).join(" · ") + '</p>'
-      + '<div class="row"><button class="btn" id="tpSpeakFree">🎤 Nói câu trả lời của bạn</button></div>'
-      + '<div id="tpSpeakFreeRes"></div><div id="tpSpeakFreeErr" class="mut"></div>'
-      + '<p class="mut">Máy chỉ ghi lại lời bạn nói để bạn tự nghe lại — không chấm điểm phần này. Không có mic vẫn học tiếp được: đọc thầm câu trả lời theo gợi ý rồi tự đối chiếu 4 tiêu chí ở dưới.</p></div>'
+      + '<h3>2. Nói tự do</h3><div id="tpSp10Slot"></div>'
       + '<h3>3. Tự đối chiếu 4 tiêu chí</h3><div class="qblock"><p class="mut">Nghe lại giọng mình (nếu đã ghi) rồi tích vào tiêu chí bạn thấy mình đã làm được. Tài khoản VIP được AI chấm 4 tiêu chí ở bài thi Nói; bài luyện này chỉ tự đối chiếu.</p>'
       + critHTML
       + '<details><summary><b>Xem bài mẫu để đối chiếu</b></summary><p>' + esc(s.sample) + '</p><p class="mut">' + esc(s.sampleVi || "") + '</p></details></div>'
@@ -27799,15 +28190,9 @@ function renderTpSpeak(app, m, id, back, skipBanner) {
         });
       };
     });
-    document.getElementById("tpSpeakFree").onclick = function () {
-      var box = document.getElementById("tpSpeakFreeRes"), err = document.getElementById("tpSpeakFreeErr");
-      pronTier1Start("tp", function (heardTx) {
-        if (box) box.innerHTML = '<p>Máy nghe được: “' + esc(heardTx || "") + '”</p><p class="mut">Nghe lại câu mình vừa nói rồi đối chiếu 4 tiêu chí ở dưới — phần này không chấm điểm.</p>';
-        if (err) err.textContent = "";
-      }, function (kind) {
-        if (err) err.textContent = pronTier1ErrText(kind);
-      });
-    };
+    /* v187 TID U10: nhu TC — muc 2 thanh engine sp10; giu id cu tpSpeakFree/
+       tpSpeakFreeErr/tpSpeakFreeRes cho probe v136. */
+    sp10Mount(document.getElementById("tpSp10Slot"), sp10TaskTcTp("tp", s, id), { speakId: "tpSpeakFree", errId: "tpSpeakFreeErr", resId: "tpSpeakFreeRes" });
     fin.onclick = function () { if (tpMarkDone(id)) { fin.textContent = "Đã xong ✓"; fin.disabled = true; } };
   };
 }
