@@ -4269,7 +4269,7 @@ function homeSearchEntries() {
   /* v122: muc phat am vao chi muc tim kiem (truoc day go "Phat am"/"Am yeu"
      khong tra ket qua o TC/TP, va khong co muc nao dan toi chan doan). */
   var trk = (typeof state !== "undefined" && state.track) || "en";
-  out.push({ label: "Chẩn đoán phát âm đầu vào", sub: "12 mẫu đọc to · biết mình yếu âm nào", kind: "prondiag", keys: "phát âm chẩn đoán âm yếu kiểm tra đầu vào" });
+  out.push({ label: "Chẩn đoán phát âm đầu vào", sub: "đọc to · biết mình yếu âm nào", kind: "prondiag", keys: "phát âm chẩn đoán âm yếu kiểm tra đầu vào" });
   out.push({ label: "Âm yếu của tôi", sub: "Âm còn yếu + từ còn sai, gom theo âm", kind: "pronweak", keys: "phát âm âm yếu từ còn sai" });
   if (trk === "en" || trk === "tc") out.push({ label: "Phát âm · 44 âm", sub: "Bản đồ 44 âm tiếng Anh", kind: "pronmap", keys: "phát âm 44 âm" });
   if (trk === "zh") out.push({ label: "Phát âm · Pinyin", sub: "Bản đồ thanh mẫu · vận mẫu · 4 thanh điệu", kind: "pronmapzh", keys: "phát âm pinyin thanh điệu thanh mẫu vận mẫu" });
@@ -8423,7 +8423,8 @@ function renderReviewSession(app, l) {
 /* v119 P1 (ELSA muc 1): CHAN DOAN PHAT AM DAU VAO — du 4 track, CUNG MOT KHUNG
    (Bui 10:10 + 10:19 09/11: cung man hinh, cung buoc, cung cach cham, cung dang
    ket qua; chi khac noi dung theo he am tung ngon ngu; khong track nao mong hon).
-   Moi track 12 mau doc to, cham nhi phan 0/100 bang SpeechRecognition cua trinh
+   Moi track 12 mau doc to (TP 25 mau tu v176 — them batchim ㄹ/ㅁ/ㅇ, bo ba
+   ㅈ/ㅉ/ㅊ, ㅅ/ㅆ, nguyen am doi ㅚ/ㅢ/ㅘ, bien am), cham nhi phan 0/100 bang SpeechRecognition cua trinh
    duyet (khong can dang nhap, dung duoc cho khach) — cung ham cham cho ca 4 track,
    chi khac cach tach tu theo he chu (EN/TC tach theo khoang trang; ZH/TP so khop
    chuoi ky tu vi tieng Trung/Han khong tach tu bang khoang trang).
@@ -8494,7 +8495,20 @@ var PRON_DIAG_SETS = {
     { w: "파", show: "파", read: "pa", vi: "âm ㅍ bật hơi — đọc “ph” bật hơi mạnh", sym: "ㅍ bật hơi", symVi: "phụ âm ㅍ bật hơi — đọc “ph” bật hơi mạnh", target: { kind: "tpPron", sym: "ㅍ" } },
     { w: "밥", show: "밥", read: "bap", vi: "cơm", sym: "batchim ㅂ", symVi: "받침 ㅂ — âm cuối đọc thành “p”", target: { kind: "tpPron", sym: "받침 ㅂ/ㅍ" } },
     { w: "책", show: "책", read: "chaek", vi: "sách", sym: "batchim ㄱ", symVi: "받침 ㄱ — âm cuối đọc thành “k”", target: { kind: "tpPron", sym: "받침 ㄱ/ㄲ/ㅋ" } },
-    { w: "산", show: "산", read: "san", vi: "núi", sym: "batchim ㄴ", symVi: "받침 ㄴ — âm cuối đọc thành “n”", target: { kind: "tpPron", sym: "받침 ㄴ" } }
+    { w: "산", show: "산", read: "san", vi: "núi", sym: "batchim ㄴ", symVi: "받침 ㄴ — âm cuối đọc thành “n”", target: { kind: "tpPron", sym: "받침 ㄴ" } },
+    { w: "달", show: "달", read: "dal", vi: "mặt trăng", sym: "batchim ㄹ", symVi: "받침 ㄹ — âm cuối đọc thành “l”", target: { kind: "tpPron", sym: "받침 ㄹ" } },
+    { w: "밤", show: "밤", read: "bam", vi: "đêm", sym: "batchim ㅁ", symVi: "받침 ㅁ — âm cuối đọc thành “m”", target: { kind: "tpPron", sym: "받침 ㅁ" } },
+    { w: "방", show: "방", read: "bang", vi: "phòng", sym: "batchim ㅇ", symVi: "받침 ㅇ — âm cuối đọc thành “ng”", target: { kind: "tpPron", sym: "받침 ㅇ" } },
+    { w: "자", show: "자", read: "ja", vi: "âm ㅈ chùng — đọc nhẹ như “ch” (không rung dây thanh)", sym: "ㅈ chùng", symVi: "phụ âm ㅈ chùng — đọc như “ch” nhẹ, không rung dây thanh", target: { kind: "tpPron", sym: "ㅈ" } },
+    { w: "짜", show: "짜", read: "jja", vi: "âm ㅉ căng — đọc “ch” căng, không bật hơi", sym: "ㅉ căng", symVi: "phụ âm ㅉ căng — đọc “ch” căng, không bật hơi", target: { kind: "tpPron", sym: "ㅉ" } },
+    { w: "차", show: "차", read: "cha", vi: "âm ㅊ bật hơi — đọc “ch” bật hơi mạnh", sym: "ㅊ bật hơi", symVi: "phụ âm ㅊ bật hơi — đọc “ch” bật hơi mạnh", target: { kind: "tpPron", sym: "ㅊ" } },
+    { w: "사", show: "사", read: "sa", vi: "âm ㅅ chùng — đọc nhẹ như “s”", sym: "ㅅ chùng", symVi: "phụ âm ㅅ chùng — đọc nhẹ như “s”", target: { kind: "tpPron", sym: "ㅅ" } },
+    { w: "싸", show: "싸", read: "ssa", vi: "âm ㅆ căng — đọc “s” căng, mạnh hơn ㅅ", sym: "ㅆ căng", symVi: "phụ âm ㅆ căng — đọc “s” căng, mạnh hơn ㅅ", target: { kind: "tpPron", sym: "ㅆ" } },
+    { w: "회", show: "회", read: "hoe", vi: "cuộc họp", sym: "ㅚ", symVi: "nguyên âm ㅚ — môi tròn, đọc thành một âm duy nhất, không trượt", target: { kind: "tpPron", sym: "ㅚ" } },
+    { w: "의사", show: "의사", read: "uisa", vi: "bác sĩ", sym: "ㅢ", symVi: "nguyên âm đôi ㅢ — ㅡ + ㅣ, đầu từ đọc là “ưi”", target: { kind: "tpPron", sym: "ㅢ" } },
+    { w: "와", show: "와", read: "wa", vi: "đến; và", sym: "ㅘ", symVi: "nguyên âm đôi ㅘ — ㅗ + ㅏ, đọc là “oa”", target: { kind: "tpPron", sym: "ㅘ" } },
+    { w: "학교", show: "학교", read: "hakgyo · đọc [학꾜] hakkyo", vi: "trường học", sym: "biến âm · căng hóa", symVi: "biến âm · căng hóa — sau batchim ㄱ, phụ âm ㄱ của 교 đọc căng thành ㄲ nên đọc [학꾜], không đọc “hakgyo”", target: { kind: "tpPron", sym: "biến âm · căng hóa" } },
+    { w: "국어", show: "국어", read: "gugeo · đọc [구거]", vi: "tiếng Hàn — môn quốc ngữ", sym: "biến âm · liên âm", symVi: "biến âm · liên âm — batchim ㄱ của 국 chuyển sang làm phụ âm đầu của 어 nên đọc [구거], không đọc “gugeo”", target: { kind: "tpPron", sym: "biến âm · liên âm" } }
   ]
 };
 function pronDiagNorm(s) { return String(s || "").toLowerCase().replace(/[.!?,;:'"。、，；：？！·…]/g, "").replace(/\s+/g, " ").trim(); }
@@ -8576,7 +8590,7 @@ function pronT1MarkDoneTrack(track, sym) {
 
 /* ============ v123 — PHAT AM RIENG ZH/TP + CHAM THANH DIEU ZH BANG YIN ============ */
 /* Luat 4 ngon ngu giong nhau (Bui chot 10:10 09/11): TC/TP co muc phat am rieng
-   CUNG cau truc voi EN (ban do am, bai am 6 buoc, chan doan 12 mau, muc Am yeu),
+   CUNG cau truc voi EN (ban do am, bai am 6 buoc, chan doan 12 mau — TP 25 mau tu v176, muc Am yeu),
    chi khac he am tung ngon ngu. Du lieu lay tu kho bai hoc co san trong web
    (TP_HANGUL, zhSets()/TP_VOCAB); cho nao chua chac ghi ro "can doi chieu giao trinh". */
 
@@ -9042,7 +9056,7 @@ function renderTrackPron(app, l, track) {
   var idx = 0; for (var i = 0; i < all2.length; i++) if (all2[i].sym === sym) idx = i;
   var prevSym = idx > 0 ? all2[idx - 1].sym : null;
   var nextSym = idx < all2.length - 1 ? all2[idx + 1].sym : null;
-  var goSound = function (s) { l.sound = s; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.phT1 = {}; l.toneRes = null; l.toneErr = ""; render(); };
+  var goSound = function (s) { l.sound = s; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; l.toneRes = null; l.toneErr = ""; render(); };
   var h = lessonHead({ title: "Âm " + sym + (isZh ? " · Pinyin" : " · Hangul"), type: isZh ? "Tiếng Trung · Phát âm" : "Tiếng Hàn · Phát âm" });
   h += pronStepPillsHTML(track, sym, sub);
   var mainWord = "", pairWord = "", pairNote = "cặp hay nhầm.";
@@ -9098,7 +9112,7 @@ function renderTrackPron(app, l, track) {
     /* nhu EN (10026): bai dat __t1texts truoc khi goi block — persist moi luu vao state. */
     l.__t1texts = {};
     l.__t1texts[key] = { text: lbl, ref: lbl, persist: sub === 2 ? "word" : (sub === 3 ? "phr" : "sen"), track: track };
-    h += pronT1BlockHTML(l, key, lbl, lblVi, track);
+    h += pronP3BlockHTML(l, key, lbl, lblVi, track, sub === 2); /* v176 N8: muc tieu chinh doc theo phien 3 luot */
     if (isZh && sub === 2) {
       h += '<div class="qblock" id="toneBlock"><p><b>🎵 Chấm thanh điệu (tầng 3):</b> đọc to một âm tiết “' + esc(toneWord) + '” (' + esc(tonePy) + ', ' + esc(zhToneName(wTone)) + '), máy đo cao độ giọng bằng YIN rồi vẽ đường giọng của bạn so với đường chuẩn.</p>'
         + '<div class="row"><button class="btn btn-primary" id="toneRecBtn">🎵 Chấm thanh điệu</button></div>'
@@ -9160,7 +9174,8 @@ function renderTrackPron(app, l, track) {
   };
   if (l.diffRevealed && !l.diffOk) fillDiffChoices();
   if (sub >= 2 && sub <= 4) {
-    pronT1Wire(l, sym, track);
+    pronT1Wire(l, sym, track); /* van noi nut ghi rieng 🎙 trong khoi P3 */
+    pronP3Wire(l, key, sym, track); /* v176 N8: muc tieu chinh doc theo phien 3 luot */
     var tb = $("#toneRecBtn");
     if (tb) tb.onclick = function () {
       tb.disabled = true; tb.textContent = "⏺ Đang ghi — đọc to ngay…";
@@ -9206,7 +9221,7 @@ function pronT1Wire(l, sym, track) {
       var sc = pronTier1Score(heard, tx.ref, tr);
       if (!l.phT1) l.phT1 = {};
       var prev = l.phT1[key] || {};
-      l.phT1[key] = { tried: true, ok: sc === 100, heard: heard, err: "", selfUrl: prev.selfUrl, selfPeaks: prev.selfPeaks };
+      l.phT1[key] = { tried: true, ok: sc === 100, heard: heard, err: "", spoke: true, selfUrl: prev.selfUrl, selfPeaks: prev.selfPeaks };
       if (tx.persist) {
         var st = pronT1Store(tr, "speak");
         var sp = st[sym] || (st[sym] = {});
@@ -9219,7 +9234,7 @@ function pronT1Wire(l, sym, track) {
       var msg = pronTier1ErrText(kind);
       if (!l.phT1) l.phT1 = {};
       var prev2 = l.phT1[key] || {};
-      l.phT1[key] = { tried: true, ok: false, heard: "", err: msg, selfUrl: prev2.selfUrl, selfPeaks: prev2.selfPeaks };
+      l.phT1[key] = { tried: true, ok: false, heard: "", err: msg, spoke: true, selfUrl: prev2.selfUrl, selfPeaks: prev2.selfPeaks };
       render();
     });
   }; });
@@ -9249,6 +9264,103 @@ function pronT1Wire(l, sym, track) {
       rec.start();
     }).catch(function () { if (slot) slot.innerHTML = '<p class="mut">Không mở được mic — kiểm tra quyền mic rồi thử lại.</p>'; });
   }; });
+}
+/* ---------- v176 N8 — PHIÊN 3 LƯỢT (P1/v163) CHO BÀI ÂM 6 BƯỚC ----------
+   Bài âm 6 bước (renderPronLesson EN/TC + renderTrackPron ZH/TP) trước đây chỉ
+   đọc 1 lượt + chấm tầng 1 một lần ở bước 2/3/4. Nay mục tiêu chính (từ/cụm/
+   câu mẫu) đọc theo phiên 3 lượt P1 đã có: lượt 1 nói tự nhiên lấy baseline →
+   lượt 2 chỉ sửa 1 lỗi quan sát được → lượt 3 nói lại cả câu tốc độ bình
+   thường; lượt 1 nghe ra hết thì đi thẳng lượt 3, không bịa lỗi. Dùng chung
+   helper p3* (p3New/p3AfterRead/p3GuideHTML/p3BannerHTML/p3Target/p3SpeakLabel/
+   p3TypeHint) + ghi song song giọng mình (p3StartParallel, v164) — KHÔNG viết
+   cơ chế mới. Các mục thêm (exw/exp/exs, kho cũ) giữ khối 1 lượt pronT1BlockHTML.
+   Ghi điểm: lượt nào đọc đúng CẢ mục tiêu (tgt === text) thì ghi vào
+   pronT1Store như đọc 1 lượt cũ (lượt 2 chỉ đọc từ lỗi thì không ghi) — ngữ
+   nghĩa chấm cũ giữ nguyên, chỉ đổi phiên đọc. Không mic/không SR → gõ lại
+   (drillMode, luật thoát mic v112); nút "Bước tiếp theo" vốn luôn mở. */
+function pronP3BlockHTML(l, key, label, vi, track, isWord) {
+  if (!l.__p3) l.__p3 = {};
+  var p3 = l.__p3[key] || (l.__p3[key] = p3New());
+  var r = (l.phT1 || {})[key] || {};
+  var noMic = !drillHasSr() || mrNoMic();
+  var h = '<div class="qblock" data-p3="' + esc(key) + '"><p><b>' + esc(label) + '</b>' + (vi ? ' <span class="mut">— ' + esc(vi) + '</span>' : '') + '</p>'
+    + p3BannerHTML(p3, isWord)
+    + (p3.pass === 2 && p3.err ? p3GuideHTML(track || "en", p3.err.word, p3.err.heard) : '')
+    + '<div class="row"><button class="btn" data-p3-hear="' + esc(key) + '">🔊 Nghe mẫu</button>';
+  if (noMic) {
+    h += '</div><p class="mut">Máy này không có mic / chưa cấp quyền mic nên chuyển sang nghe + gõ lại.</p>'
+      + '<div class="row"><input id="p3type-' + esc(key) + '" placeholder="' + esc(p3TypeHint(p3, isWord)) + '" style="flex:1;min-width:200px"><button class="btn btn-primary" data-p3-check="' + esc(key) + '">Kiểm tra</button></div>';
+  } else {
+    h += '<button class="btn btn-primary" data-p3-rec="' + esc(key) + '">' + esc(p3SpeakLabel(p3, isWord)) + '</button></div>';
+  }
+  h += '<div class="t1-res" id="p3res-' + esc(key) + '">' + (p3.msg ? '<p><b>' + esc(p3.msg) + '</b></p>' : '') + (p3.heard ? '<p class="mut">Máy nghe được: “' + esc(p3.heard) + '”</p>' : '') + (r.tried && r.spoke ? pronTier1VerdictHTML(!!r.ok, r.heard || "") : "") + '</div>'
+    + '<p class="mut" id="p3err-' + esc(key) + '">' + esc(r.err || '') + '</p>';
+  if (r.tried) h += (r.selfUrl ? '' : '<div class="row" id="t1selfrow-' + esc(key) + '"><button class="btn" data-t1-selfrec="' + esc(key) + '">🎙 Ghi giọng mình để tự nghe</button></div>') + '<div id="t1self-' + esc(key) + '">' + p3SelfCompareInner(track || "en", label, "", r, true, "Chưa ghi được giọng của bạn trong lượt đọc này — bấm “🎙 Ghi giọng mình để tự nghe” để ghi riêng một lượt.") + '</div>';
+  return h + '</div>';
+}
+function pronP3Wire(l, key, sym, track) {
+  var tx = (l.__t1texts || {})[key];
+  if (!tx) return;
+  var tr = tx.track || track || "en";
+  var isWord = tx.persist === "word";
+  if (!l.__p3) l.__p3 = {};
+  var p3 = l.__p3[key] || (l.__p3[key] = p3New());
+  var persist = function (ok) {
+    if (!tx.persist) return;
+    var st = pronT1Store(tr, "speak");
+    var sp = st[sym] || (st[sym] = {});
+    sp[tx.persist] = ok;
+    saveState(); pronT1MarkDoneTrack(tr, sym);
+  };
+  $$("[data-p3-hear]").forEach(function (b) { b.onclick = function () { pronDiagSpeak(tr, tx.text); }; });
+  var pe = document.getElementById("p3ErrHear");
+  if (pe) pe.onclick = function () { if (p3.err) pronDiagSpeak(tr, p3.err.word); };
+  $$("[data-p3-rec]").forEach(function (b) { b.onclick = function () {
+    var tgt = p3Target(p3, tx.text);
+    if (!l.p3Par) l.p3Par = {};
+    var par = l.p3Par[key] || (l.p3Par[key] = {});
+    p3StartParallel(par, "t1self-" + key, "t1selfrow-" + key, tr, tx.text, "", function (peaks, url) { var r2 = (l.phT1 || {})[key]; if (r2) { r2.selfUrl = url; r2.selfPeaks = peaks; } });
+    pronTier1Start(tr, function (heard) {
+      p3StopParallel(par);
+      var sc = pronTier1Score(heard, tgt, tr);
+      var res = p3AfterRead(p3, sc === 100, heard, tx.text, tr, isWord);
+      if (res === "retry") { render(); return; }
+      if (!l.phT1) l.phT1 = {};
+      var prev = l.phT1[key] || {};
+      l.phT1[key] = { tried: true, ok: sc === 100, heard: heard, err: "", spoke: true, selfUrl: prev.selfUrl, selfPeaks: prev.selfPeaks };
+      if (tgt === tx.text) persist(sc === 100);
+      render();
+    }, function (kind) {
+      p3StopParallel(par);
+      var msg = pronTier1ErrText(kind);
+      if (!l.phT1) l.phT1 = {};
+      var prev2 = l.phT1[key] || {};
+      l.phT1[key] = { tried: true, ok: false, heard: "", err: msg, spoke: true, selfUrl: prev2.selfUrl, selfPeaks: prev2.selfPeaks };
+      render();
+    });
+  }; });
+  $$("[data-p3-check]").forEach(function (b) {
+    var doCheck = function () {
+      var inp = document.getElementById("p3type-" + key);
+      if (!inp) return;
+      var v = inp.value || "";
+      var tgt = p3Target(p3, tx.text);
+      var ok = gameNormSent(v) === gameNormSent(tgt);
+      var res = p3AfterRead(p3, ok, v, tx.text, tr, isWord);
+      if (res === "retry") { render(); return; }
+      if (!l.phT1) l.phT1 = {};
+      var prev = l.phT1[key] || {};
+      l.phT1[key] = { tried: true, ok: ok, heard: v, err: "", spoke: false, selfUrl: prev.selfUrl, selfPeaks: prev.selfPeaks };
+      if (tgt === tx.text) persist(ok);
+      render();
+    };
+    b.onclick = doCheck;
+    var inp2 = document.getElementById("p3type-" + key);
+    if (inp2) inp2.addEventListener("keydown", function (e) { if (e.key === "Enter") doCheck(); });
+  });
+  /* v112b: kiem thiet bi ghi am 1 lan/phien — neu may that su khong co mic thi
+     ve lai de hien o go thay vi nut Doc to (noMic doi theo mrNoMic). */
+  try { mrCheckDevices(function () { if (curLesson === l) render(); }); } catch (e) {}
 }
 /* Guong chi de NHIN (v122): camera thuong, khong nhan dien, khong cham diem.
    Chi hien nut mo khi may co camera (kiem bang enumerateDevices, cache 1 lan/
@@ -9322,8 +9434,9 @@ function pronDiagLang(track) { return track === "zh" ? "zh-CN" : track === "tp" 
 function pronDiagSpeak(track, text) { if (track === "zh") zhSpeak(text); else if (track === "tp") tpSpeak(text); else speak(text); }
 function pronDiagEntryHTML(track) {
   var prev = (state.pronDiag || {})[track];
+  var nDiag = (PRON_DIAG_SETS[track] || []).length;
   return '<section class="card" id="' + track + 'PronDiagCard"><h3>🎯 Chẩn đoán phát âm đầu vào</h3>'
-    + '<p class="mut">12 mẫu đọc to — mỗi mẫu phủ một âm khó của người Việt. Đọc to từng mẫu, xem mình yếu âm nào, rồi học đúng âm đó. Không khóa bài nào.</p>'
+    + '<p class="mut">' + nDiag + ' mẫu đọc to — mỗi mẫu phủ một âm khó của người Việt. Đọc to từng mẫu, xem mình yếu âm nào, rồi học đúng âm đó. Không khóa bài nào.</p>'
     + (prev ? '<p>Lần chẩn đoán gần nhất (' + esc(prev.date || "") + '): âm nên học trước ' + (prev.weak || []).map(function (w) { return "/" + esc(w.sym) + "/"; }).join(" ") + '</p>' : '')
     + '<p><button class="btn" data-pd-entry="' + track + '" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button></p></section>';
 }
@@ -9360,8 +9473,9 @@ function pronDiagInviteHTML(track) {
   var placed = pronDiagInvitePlaced(track);
   var isEnHigh = track === "en" && placed && placed.band && placed.band !== "Band 0";
   var pron1Done = track === "en" ? stepDone("pron1") : false;
+  var nDiagInv = (PRON_DIAG_SETS[track] || []).length;
   var html = '<section class="card" id="pronDiagInviteCard"><h3>🎯 Trước khi học tiếp: kiểm tra phát âm của bạn</h3>'
-    + '<p class="mut">Kiểm tra xếp chặng không đo được phát âm. Làm chẩn đoán phát âm nhanh (12 mẫu đọc to) để biết mình yếu âm nào, rồi học đúng âm đó — không khóa bài nào.</p>';
+    + '<p class="mut">Kiểm tra xếp chặng không đo được phát âm. Làm chẩn đoán phát âm nhanh (' + nDiagInv + ' mẫu đọc to) để biết mình yếu âm nào, rồi học đúng âm đó — không khóa bài nào.</p>';
   if (isEnHigh && !pron1Done) html += '<p class="mut">Bạn được xếp thẳng lên ' + esc(placed.band) + ' nên chưa học 44 âm tiếng Anh. Muốn ôn nhanh thì bấm "Ôn nhanh 44 âm" — mở hết, học âm nào cũng được.</p>';
   html += '<p><button class="btn" data-pd-invite-go="' + track + '" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button>'
     + (isEnHigh && !pron1Done ? ' <button class="btn" data-pd-invite-pron="en">Ôn nhanh 44 âm</button>' : '')
@@ -9443,7 +9557,7 @@ function renderPronDiag(app, l) {
   var track = l.track || "en";
   var sets = PRON_DIAG_SETS[track] || PRON_DIAG_SETS.en;
   var names = { en: "Tiếng Anh · IELTS", zh: "Tiếng Trung · HSK", tc: "Tiếng Anh · TOEIC", tp: "Tiếng Hàn · TOPIK" };
-  var head = skillHead("Chẩn đoán phát âm đầu vào", "12 mẫu đọc to — " + (names[track] || "") + ". Đọc to từng mẫu để biết mình yếu âm nào. Kết quả chỉ là ước lượng tại chỗ (nghe bằng trình duyệt), không tính đạt chuẩn; âm yếu sẽ được gợi ý học trước.");
+  var head = skillHead("Chẩn đoán phát âm đầu vào", sets.length + " mẫu đọc to — " + (names[track] || "") + ". Đọc to từng mẫu để biết mình yếu âm nào. Kết quả chỉ là ước lượng tại chỗ (nghe bằng trình duyệt), không tính đạt chuẩn; âm yếu sẽ được gợi ý học trước.");
   if (l.i === undefined) { l.i = 0; l.scores = []; l.done = false; l.scored = false; l.heard = ""; l.listenMode = false; }
   if (l.done) {
     var prev = (state.pronDiag || {})[track] || { weak: [], scores: l.scores || [] };
@@ -9454,7 +9568,7 @@ function renderPronDiag(app, l) {
     if (weak.length) {
       h += '<p><b>Âm nên học trước (' + weak.length + '):</b></p>' + weak.map(function (w, wi) { return '<p>/' + esc(w.sym) + '/ — ' + esc(w.symVi) + ' <button class="btn btn-sm" data-pd-learn="' + wi + '">Học ngay âm này →</button></p>'; }).join("");
     } else {
-      h += '<p><b>Bạn đọc đúng hết 12 mẫu! 🎉</b></p><p class="mut">Các âm khó trong đợt chẩn đoán này bạn đều đọc được. Hãy xem các âm khó khác nên luyện thêm ở khu phát âm.</p><p><button class="btn" id="pdMore">Xem các âm khó nên luyện thêm →</button></p>';
+      h += '<p><b>Bạn đọc đúng hết ' + sets.length + ' mẫu! 🎉</b></p><p class="mut">Các âm khó trong đợt chẩn đoán này bạn đều đọc được. Hãy xem các âm khó khác nên luyện thêm ở khu phát âm.</p><p><button class="btn" id="pdMore">Xem các âm khó nên luyện thêm →</button></p>';
     }
     h += '<p class="mut">Chẩn đoán này chấm được âm đơn và phụ âm cuối bằng cách nghe qua trình duyệt — chưa chấm được trọng âm, ngữ điệu hay biến điệu (máy nghe có thể trả đúng chữ dù thanh hơi lệch). Trọng âm và ngữ điệu luyện ở 12 chủ đề phát âm theo band. Chuẩn 80 là chuẩn nội bộ “đủ tốt để đi tiếp” — chẩn đoán không khóa thẻ hay bài nào.</p>'
       + '<p><button class="btn btn-primary" id="pdAgain">Kiểm tra lại</button></p></div>';
@@ -9591,7 +9705,7 @@ function pronWeakHTML(track, hideEntry) {
     + '<p class="mut">Âm yếu từ chẩn đoán phát âm + từ còn sai khi đọc lại thẻ từ (bước 4) — gom theo âm, không gom theo bài. Bấm vào một âm để học ngay âm đó. Đọc lại đúng thì âm/từ tự biến mất khỏi danh sách này.</p>';
   if (!d.sounds.length) {
     if (d.hasDiag) h += '<p><b>Chưa có âm yếu nào được ghi nhận.</b></p><p class="mut">Chẩn đoán gần nhất bạn đọc đúng hết các mẫu khó. Từ còn sai sẽ hiện ở đây khi bạn đọc sai trong chẩn đoán hoặc khi đọc lại thẻ từ chưa đạt 80.</p>';
-    else h += '<p><b>Chưa có dữ liệu — làm chẩn đoán phát âm đầu vào để biết mình yếu âm nào.</b></p><p class="mut">Chẩn đoán đọc to 12 mẫu phủ âm khó của người Việt; kết quả liệt kê âm yếu + từ còn sai ở đây.</p>' + (hideEntry ? '' : '<p><button class="btn" data-pd-entry="' + track + '" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button></p>');
+    else h += '<p><b>Chưa có dữ liệu — làm chẩn đoán phát âm đầu vào để biết mình yếu âm nào.</b></p><p class="mut">Chẩn đoán đọc to ' + ((PRON_DIAG_SETS[track] || []).length) + ' mẫu phủ âm khó của người Việt; kết quả liệt kê âm yếu + từ còn sai ở đây.</p>' + (hideEntry ? '' : '<p><button class="btn" data-pd-entry="' + track + '" style="font-size:20px;padding:12px 22px;background:#B45309;color:#fff">Làm chẩn đoán phát âm</button></p>');
   } else {
     h += d.sounds.map(function (s, i) {
       var shown = s.words.slice(0, 6);
@@ -13161,7 +13275,7 @@ function renderPronLesson(app, l) {
     l.__t1texts = { w: { text: p.w, ref: p.w, persist: "word" } };
     extraW.forEach(function (wd, i) { l.__t1texts["exw" + i] = { text: wd.w, ref: wd.w }; });
     html += '<p class="mut">Nghe mẫu rồi đọc to — máy nghe ra đúng từ là được. Chỉ cần mic, không cần camera.</p><p style="font-size:30px"><b>' + esc(p.w) + '</b> <span class="mut">— ' + esc(p.vi) + '</span></p>'
-      + pronT1BlockHTML(l, "w", p.w, p.vi)
+      + pronP3BlockHTML(l, "w", p.w, p.vi, "en", true)
       + '<div class="row"><button class="btn" id="phMirrorOpen">👁 Soi gương (tùy chọn)</button></div>' + phMirrorBoxHTML()
       + (extraW.length ? '<p class="mut">Thêm từ chứa âm /' + esc(sym) + '/:</p>' + extraW.map(function (wd, i) { return pronT1BlockHTML(l, "exw" + i, wd.w, (wd.vi || "") + (wd.ipa ? " " + wd.ipa : "")); }).join("") : '<p class="mut">Kho cũ không còn từ nào khác chứa âm này.</p>');
   } else if (sub === 3) {
@@ -13170,7 +13284,7 @@ function renderPronLesson(app, l) {
     l.__t1texts = { phr: { text: phr.ph, ref: phr.ph, persist: "phr" } };
     extraP.forEach(function (cp, i) { l.__t1texts["exp" + i] = { text: cp.w, ref: cp.w }; });
     html += '<p class="mut">Đọc từ trong một cụm ngắn, không đọc rời rạc từng từ. Nghe mẫu rồi đọc to — máy nghe ra đúng cụm là được.</p><p style="font-size:26px"><b>' + esc(phr.ph) + '</b></p><p class="mut">' + esc(phr.vi) + '</p>'
-      + pronT1BlockHTML(l, "phr", phr.ph, phr.vi)
+      + pronP3BlockHTML(l, "phr", phr.ph, phr.vi, "en", false)
       + '<div class="row"><button class="btn" id="phMirrorOpen">👁 Soi gương (tùy chọn)</button></div>' + phMirrorBoxHTML()
       + (extraP.length ? '<p class="mut">Thêm cụm trong kho cũ chứa âm /' + esc(sym) + '/:</p>' + extraP.map(function (cp, i) { return pronT1BlockHTML(l, "exp" + i, cp.w, cp.vi || ""); }).join("") : '');
   } else if (sub === 4) {
@@ -13178,7 +13292,7 @@ function renderPronLesson(app, l) {
     l.__t1texts = { sen: { text: p.sen, ref: p.sen, persist: "sen" } };
     extraS.forEach(function (sn, i) { l.__t1texts["exs" + i] = { text: sn.ex, ref: sn.ex }; });
     html += '<p class="mut">Shadowing — nghe câu mẫu rồi nhại lại ngay theo nhịp mẫu. Máy nghe ra đúng câu là được.</p><p style="font-size:22px"><b>' + esc(p.sen) + '</b></p><p class="mut">' + esc(p.senVi) + '</p>'
-      + pronT1BlockHTML(l, "sen", p.sen, p.senVi)
+      + pronP3BlockHTML(l, "sen", p.sen, p.senVi, "en", false)
       + '<div class="row"><button class="btn" id="phMirrorOpen">👁 Soi gương (tùy chọn)</button></div>' + phMirrorBoxHTML()
       + (extraS.length ? '<p class="mut">Thêm câu trong kho cũ chứa từ có âm /' + esc(sym) + '/:</p>' + extraS.map(function (sn, i) { return pronT1BlockHTML(l, "exs" + i, sn.ex, sn.exv || ""); }).join("") : '');
   } else {
@@ -13208,18 +13322,18 @@ function renderPronLesson(app, l) {
     b.onclick = function () {
       var sym2 = b.dataset.s;
       if (!phTryOpenSound(sym2)) return;
-      l.sound = sym2; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; render();
+      l.sound = sym2; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; render();
     };
   });
   var psPrev = $("#phPrevSound");
-  if (psPrev) psPrev.onclick = function () { if (phTryOpenSound(prev44)) { l.sound = prev44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; render(); } };
+  if (psPrev) psPrev.onclick = function () { if (phTryOpenSound(prev44)) { l.sound = prev44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; render(); } };
   var psNext = $("#phNextSound");
-  if (psNext) psNext.onclick = function () { if (phTryOpenSound(next44)) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; render(); } };
+  if (psNext) psNext.onclick = function () { if (phTryOpenSound(next44)) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; render(); } };
   var psNext2 = $("#phNextSound2");
-  if (psNext2) psNext2.onclick = function () { if (next44) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; render(); } };
+  if (psNext2) psNext2.onclick = function () { if (next44) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; render(); } };
   var phHe = $("#phHearEx"); if (phHe) phHe.onclick = function () { speak(p.w); l.shadowDone = true; l.shadowDoneSym = sym; render(); };
   var phTc = $("#phTcSenHear"); if (phTc) phTc.onclick = function () { speak(p.tcSen); }; /* v174 S3: nghe cau cong so (chi track TC) */
-  if (sub === 2 || sub === 3 || sub === 4) { pronT1Wire(l, sym); }
+  if (sub === 2 || sub === 3 || sub === 4) { pronT1Wire(l, sym); pronP3Wire(l, sub === 2 ? "w" : (sub === 3 ? "phr" : "sen"), sym); /* v176 N8: muc tieu chinh doc theo phien 3 luot; cac muc them (exw/exp/exs) van 1 luot qua pronT1Wire */ }
   if (sub === 0 || sub === 2 || sub === 3 || sub === 4) { phMirrorWire(l); } /* v125c: guong o ca buoc 1 nhu ZH/TP */
   var phBack = $("#phBackToPractice");
   if (phBack) phBack.onclick = function () { l.sub = 0; render(); };
