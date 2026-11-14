@@ -5483,6 +5483,7 @@ function viewPractice(app) {
     put(G6, byId("practiceGrpTutor"));
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("en");
     if (tc6.firstChild) put(G6, tc6.firstChild);
+    var rp6 = roleplayAICardEl("en"); if (rp6) put(G6, rp6); /* v177 ELSA 11 */
     /* Bo tro chuong 1 (T4): 6 nut trung 100% buoc chuong 1 o Ban do — TRU nut
        Phat am 44 am (mo bang phat am, khong phai buoc chuong 1) thi chuyen
        vao G3 thay vi xoa. */
@@ -10243,6 +10244,7 @@ function renderLesson(app) {
   else if (l.type === "podcast") renderPodcast(app, l);
   else if (l.type === "skillSpeak") renderSkillSpeak(app, l);
   else if (l.type === "skillRoleplay") renderSkillRoleplay(app, l);
+  else if (l.type === "roleplayAI") renderRoleplayAI(app, l);
   else if (l.type === "skillWrite") renderSkillWrite(app, l);
   else if (l.type === "specTutor") renderSpecTutor(app, l);
   else if (l.type === "skillDrill") renderSkillDrill(app, l);
@@ -17600,6 +17602,349 @@ function renderSkillRoleplay(app, l) {
   };
 }
 
+/* ---------- v177 (ELSA 11) — ĐÓNG VAI AI ----------
+   1 tình huống + 5 câu hỏi tiếp nối + tóm tắt sau buổi chấm 3 chiều
+   (từ vựng, ngữ pháp, phát âm) + điểm mạnh + điểm sửa + câu đúng gợi ý.
+   Cùng cấu trúc/luồng/kết quả ở cả 4 track (QT-05); AI chấm sâu chỉ cho
+   VIP (mẫu v104/v129); không VIP vẫn chơi trọn buổi + tự đối chiếu.
+   Nói tự do theo lượt: trả lời 1 câu rồi mới sang câu hỏi tiếp theo;
+   máy không mic thì gõ lại, nút "Câu tiếp theo →" luôn mở (luật v112).
+   Dữ liệu: ROLEPLAY_SCEN + ROLEPLAY_GENERIC_Q trong content-new.js. */
+function rpTrackLabel(track) { return { en: "IELTS", zh: "tiếng Trung", tc: "TOEIC", tp: "TOPIK" }[track] || "IELTS"; }
+function rpSrTrack(track) { return track === "zh" ? "zh" : track === "tp" ? "tp" : "en"; }
+function rpLangName(track) { return { en: "tiếng Anh", zh: "tiếng Trung", tc: "tiếng Anh công sở", tp: "tiếng Hàn" }[track] || "tiếng Anh"; }
+function rpScenList(track) { try { return (typeof ROLEPLAY_SCEN !== "undefined" && ROLEPLAY_SCEN[track]) || []; } catch (e) { return []; } }
+function rpCustomList(track) { if (!state.roleplayCustom) state.roleplayCustom = {}; if (!Array.isArray(state.roleplayCustom[track])) state.roleplayCustom[track] = []; return state.roleplayCustom[track]; }
+function rpLogList() { if (!Array.isArray(state.roleplayLog)) state.roleplayLog = []; return state.roleplayLog; }
+function rpSaveLogEntry(entry) { var log = rpLogList(); log.unshift(entry); if (log.length > 50) log.length = 50; saveState(); }
+function rpQSub(q, track) { if (track === "zh") return q.py || ""; if (track === "tp") return q.rr || ""; return ""; }
+function rpSurprise(track, excludeId) {
+  var arr = rpScenList(track).concat(rpCustomList(track));
+  if (!arr.length) return null;
+  /* v177 fix E6: nho id lan Surprise truoc vao state (ben qua cac lan mo man),
+     de 2 lan Surprise lien tiep luon ra tinh huong khac nhau. */
+  var ex = excludeId || (state.roleplayLastSurprise && state.roleplayLastSurprise[track]);
+  var pool = arr.filter(function (s) { return s.id !== ex; });
+  if (!pool.length) pool = arr;
+  var pick = pool[Math.floor(Math.random() * pool.length)];
+  if (!state.roleplayLastSurprise) state.roleplayLastSurprise = {};
+  state.roleplayLastSurprise[track] = pick.id;
+  saveState();
+  return pick;
+}
+function rpFmtDate(ts) { try { var d = new Date(ts); return d.toLocaleDateString("vi-VN") + " " + d.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+function rpSelfChecks() {
+  return [
+    { key: "lex", label: "Từ vựng — Tôi đã dùng được từ đúng chủ đề của tình huống." },
+    { key: "gram", label: "Ngữ pháp — Câu của tôi đủ chủ ngữ + động từ, đúng thì." },
+    { key: "pron", label: "Phát âm — Máy nghe ra đúng hầu hết các từ tôi nói." }
+  ];
+}
+function rpTurnsHTML(turns, scen) {
+  return (turns || []).map(function (a, i) {
+    var q = (scen && scen.q && scen.q[i]) ? scen.q[i] : null;
+    var qt = (a && a.q) || (q ? q.t : ("Câu hỏi " + (i + 1)));
+    var ans = (a && a.answer) ? a.answer : "";
+    return '<div class="qblock"><p><b>Câu ' + (i + 1) + ' — ' + esc(scen ? scen.partner : "Đối tác") + ':</b> ' + esc(qt) + '</p>'
+      + '<p><b>Bạn:</b> ' + (ans ? esc(ans) : '<span class="mut">(bỏ qua — chưa trả lời)</span>') + '</p></div>';
+  }).join("");
+}
+function rpAiSummaryHTML(parsed) {
+  if (!parsed) return "";
+  var h = "";
+  var dims = parsed.dims || {};
+  var names = { lex: "Từ vựng", gram: "Ngữ pháp", pron: "Phát âm" };
+  var anyDim = dims.lex || dims.gram || dims.pron;
+  if (anyDim) {
+    h += '<div class="sumcard"><h3>Tóm tắt sau buổi — 3 chiều</h3>';
+    ["lex", "gram", "pron"].forEach(function (k) { if (dims[k]) h += '<p><b>' + names[k] + ':</b> ' + esc(dims[k]) + '</p>'; });
+    h += '</div>';
+  }
+  if (parsed.good && parsed.good.length) h += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + parsed.good.map(function (g) { return '<p><span class="ai-seg ai-seg-green">' + esc(g.quote) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(g.why) + '</p>'; }).join("") + '</div>';
+  if (parsed.fix && parsed.fix.length) h += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  if (parsed.tips && parsed.tips.length) h += '<div class="sumcard"><h3>NOTE — NÓI HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + parsed.tips.map(function (t) { return '<p>Câu: “' + esc(t.quote) + '” — ' + esc(t.why) + (t.rewrite ? ' — <b>Viết lại: ' + esc(t.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  return h;
+}
+/* Thẻ Đóng vai AI trong nhóm G6 "Trò chuyện AI" — cùng chỗ ở cả 4 track. */
+function roleplayAICardHTML(track) {
+  return '<details class="card" id="roleplayAICard' + track + '"><summary><b>🎭 Đóng vai AI</b></summary>'
+    + '<p class="mut">Đóng vai theo tình huống ' + rpTrackLabel(track) + ': 1 tình huống + 5 câu hỏi tiếp nối, bạn trả lời bằng lời của mình, rồi xem tóm tắt sau buổi (từ vựng, ngữ pháp, phát âm + điểm mạnh + điểm sửa + câu đúng gợi ý).</p>'
+    + '<div class="row"><button class="btn" data-roleplayai="' + track + '">🎭 Mở Đóng vai AI →</button></div></details>';
+}
+function roleplayAICardEl(track) {
+  var d = document.createElement("div"); d.innerHTML = roleplayAICardHTML(track);
+  var el = d.firstChild;
+  var b = el ? el.querySelector("[data-roleplayai]") : null;
+  if (b) b.onclick = function () { openLesson({ type: "roleplayAI", track: track }); };
+  return el;
+}
+function renderRoleplayAI(app, l) {
+  var track = l.rpTrack || (state && state.track) || "en";
+  var scen = l.rpScen || null;
+  if (!l.rpPhase) l.rpPhase = "pick";
+  if (!l.rpAnswers) l.rpAnswers = [];
+  if (!l.rpAi) l.rpAi = {};
+  if (!l.rpSelf) l.rpSelf = {};
+  var head = skillHead("🎭 Đóng vai AI — " + rpTrackLabel(track), "1 tình huống + 5 câu hỏi tiếp nối + tóm tắt sau buổi");
+  function startSession(s) {
+    l.rpScen = s; l.rpPhase = "session"; l.rpTurn = 0; l.rpAnswers = [];
+    l.rpAi = {}; l.rpSelf = {}; l.rpSaved = false; l.rpXped = false;
+    l.rpSessionId = "rp" + Date.now(); l.rpDraft = ""; l.rpRecErr = "";
+    render();
+  }
+  function answeredCount() { return l.rpAnswers.filter(function (a) { return a && a.answer; }).length; }
+  function saveSessionToLog() {
+    if (l.rpSaved) return;
+    l.rpSaved = true;
+    rpSaveLogEntry({ id: l.rpSessionId, at: Date.now(), track: track, scenId: scen ? scen.id : "", title: scen ? scen.title : "", turns: l.rpAnswers.slice(), ai: null, self: {} });
+  }
+  function updateLogField(field, value) {
+    var log = rpLogList(), e = null;
+    log.forEach(function (x) { if (x.id === l.rpSessionId) e = x; });
+    if (e) { e[field] = value; saveState(); }
+  }
+  function finishToSummary() {
+    if (answeredCount() < 1) { toast("Hãy trả lời ít nhất 1 câu rồi kết thúc buổi."); return; }
+    l.rpPhase = "summary";
+    saveSessionToLog();
+    if (!l.rpXped) { l.rpXped = true; awardXp(10); }
+    render();
+  }
+  /* ---------- PHA CHỌN TÌNH HUỐNG ---------- */
+  function pickHTML() {
+    var h = head + phaseBarHTML(1)
+      + '<div class="qblock"><p><b>Cách chơi:</b> chọn 1 tình huống, trả lời 5 câu hỏi của đối tác bằng lời của bạn (nói to hoặc gõ), rồi xem tóm tắt sau buổi: từ vựng, ngữ pháp, phát âm + điểm mạnh + điểm sửa + câu đúng gợi ý.</p>'
+      + '<p class="mut">AI chấm 3 chiều chỉ mở cho VIP — không VIP vẫn chơi trọn buổi và tự đối chiếu theo bảng tiêu chí. Mỗi buổi xong được +10 XP.</p></div>';
+    h += '<h3>Chọn tình huống</h3>';
+    rpScenList(track).forEach(function (s, i) {
+      h += '<div class="qblock"><p><b>' + esc(s.title) + '</b></p><p class="mut">' + esc(s.setting) + '</p><p class="mut">Mục tiêu: ' + esc(s.goal) + '</p><div class="row"><button class="btn" data-rpscen="' + i + '">Bắt đầu →</button></div></div>';
+    });
+    var customs = rpCustomList(track);
+    if (customs.length) {
+      h += '<h3>Tình huống của bạn</h3>';
+      customs.forEach(function (s, i) {
+        h += '<div class="qblock"><p><b>' + esc(s.title) + '</b> <span class="mut">(tự tạo)</span></p><p class="mut">' + esc(s.setting) + '</p><div class="row"><button class="btn" data-rpcustom="' + i + '">Bắt đầu →</button><button class="btn" data-rpcustomdel="' + i + '">✕ Xóa</button></div></div>';
+      });
+    }
+    h += '<div class="row"><button class="btn" id="rpSurprise">🎲 Surprise me — chọn ngẫu nhiên</button><button class="btn" id="rpCustomNew">＋ Tự tạo tình huống</button></div>';
+    var log = rpLogList().filter(function (e) { return e.track === track; });
+    if (log.length) {
+      h += '<details class="card"><summary><b>📚 Buổi đã luyện (' + log.length + ')</b></summary>'
+        + log.map(function (e, i) { return '<p>' + esc(rpFmtDate(e.at)) + ' — <b>' + esc(e.title || "Đóng vai") + '</b> (' + (e.turns || []).filter(function (t) { return t && t.answer; }).length + '/5 câu đã trả lời) <button class="btn" data-rphist="' + i + '">Xem lại</button></p>'; }).join("") + '</details>';
+    }
+    return h;
+  }
+  function pickWire() {
+    $$("[data-rpscen]").forEach(function (b) { b.onclick = function () { startSession(rpScenList(track)[+b.dataset.rpscen]); }; });
+    $$("[data-rpcustom]").forEach(function (b) { b.onclick = function () { startSession(rpCustomList(track)[+b.dataset.rpcustom]); }; });
+    $$("[data-rpcustomdel]").forEach(function (b) { b.onclick = function () { var cs = rpCustomList(track); cs.splice(+b.dataset.rpcustomdel, 1); saveState(); render(); }; });
+    $$("[data-rphist]").forEach(function (b) { b.onclick = function () { var log = rpLogList().filter(function (e) { return e.track === track; }); l.rpHistEntry = log[+b.dataset.rphist]; l.rpPhase = "history"; render(); }; });
+    var sp = $("#rpSurprise");
+    if (sp) sp.onclick = function () { var s = rpSurprise(track, l.rpLastSurprise); if (!s) { toast("Chưa có tình huống nào."); return; } l.rpLastSurprise = s.id; startSession(s); };
+    var cn = $("#rpCustomNew");
+    if (cn) cn.onclick = function () { l.rpPhase = "custom"; render(); };
+  }
+  /* ---------- PHA TỰ TẠO TÌNH HUỐNG ---------- */
+  function customHTML() {
+    var gq = (typeof ROLEPLAY_GENERIC_Q !== "undefined" && ROLEPLAY_GENERIC_Q[track]) || [];
+    var h = head + phaseBarHTML(1) + '<div class="qblock"><p><b>Tự tạo tình huống của bạn:</b> viết bối cảnh + 5 câu hỏi của đối tác (đã điền sẵn 5 câu hỏi chung — sửa lại theo ý bạn rồi lưu).</p>'
+      + '<p><label>Tiêu đề tình huống<br><input id="rpCTitle" style="width:100%" placeholder="Ví dụ: Hỏi mua vé tàu"></label></p>'
+      + '<p><label>Bối cảnh<br><textarea id="rpCSetting" style="width:100%" rows="2" placeholder="Bạn đang ở đâu, gặp ai, cần làm gì?"></textarea></label></p>'
+      + '<p><label>Vai của bạn<br><input id="rpCYou" style="width:100%" placeholder="Ví dụ: Khách mua vé"></label></p>'
+      + '<p><label>Vai của đối tác<br><input id="rpCPartner" style="width:100%" placeholder="Ví dụ: Nhân viên bán vé"></label></p>'
+      + '<p><label>Mục tiêu<br><textarea id="rpCGoal" style="width:100%" rows="2" placeholder="Luyện xong buổi này bạn làm được gì?"></textarea></label></p>';
+    for (var i = 0; i < 5; i++) {
+      var g = gq[i] || { t: "", vi: "" };
+      h += '<p><label>Câu hỏi ' + (i + 1) + ' (bằng ' + rpLangName(track) + ')<br><textarea id="rpCQ' + i + '" style="width:100%" rows="2">' + esc(g.t) + '</textarea></label></p>'
+        + '<p><label>Dịch nghĩa câu ' + (i + 1) + ' (tiếng Việt, không bắt buộc)<br><input id="rpCQi' + i + '" style="width:100%" value="' + esc(g.vi || "") + '"></label></p>';
+    }
+    h += '<div class="row"><button class="btn btn-primary" id="rpCSave">Lưu tình huống này và bắt đầu →</button><button class="btn" id="rpCBack">Quay lại</button></div></div>';
+    return h;
+  }
+  function customWire() {
+    var back = $("#rpCBack");
+    if (back) back.onclick = function () { l.rpPhase = "pick"; render(); };
+    var sv = $("#rpCSave");
+    if (sv) sv.onclick = function () {
+      var val = function (id) { var el = document.getElementById(id); return el ? (el.value || "").trim() : ""; };
+      var title = val("rpCTitle");
+      if (!title) { toast("Hãy đặt tiêu đề cho tình huống."); return; }
+      var qs = [];
+      for (var i = 0; i < 5; i++) {
+        var t = val("rpCQ" + i);
+        if (!t) { toast("Câu hỏi " + (i + 1) + " chưa có nội dung — sửa lại hoặc giữ câu hỏi mẫu."); return; }
+        qs.push({ t: t, vi: val("rpCQi" + i), hint: "Trả lời bằng lời của bạn, 1–3 câu — nói rõ ý chính rồi thêm 1 chi tiết." });
+      }
+      var s = { id: "custom-" + Date.now(), custom: true, title: title, setting: val("rpCSetting") || title, you: val("rpCYou") || "Bạn", partner: val("rpCPartner") || "Đối tác", goal: val("rpCGoal") || "Trả lời 5 câu hỏi của đối tác bằng lời của mình.", q: qs, tip: "Trả lời ngắn, mỗi câu 1–3 ý là đủ. Chưa nghĩ ra thì nói ý chính trước, rồi thêm 1 chi tiết." };
+      var cs = rpCustomList(track);
+      cs.unshift(s); if (cs.length > 10) cs.length = 10;
+      saveState(); startSession(s);
+    };
+  }
+  /* ---------- PHA BUỔI ĐÓNG VAI ---------- */
+  function sessionHTML() {
+    var turn = l.rpTurn || 0;
+    var q = scen.q[turn];
+    var cur = l.rpAnswers[turn] || {};
+    var noMic = true;
+    try { noMic = !mrSupported() || mrNoMic() || !(window.SpeechRecognition || window.webkitSpeechRecognition); } catch (e) {}
+    var h = head + phaseBarHTML(2)
+      + '<div class="qblock"><p><b>' + esc(scen.title) + '</b></p><p class="mut">' + esc(scen.setting) + '</p><p><b>Bạn là:</b> ' + esc(scen.you) + ' · <b>Đối tác:</b> ' + esc(scen.partner) + '</p><p><b>Mục tiêu:</b> ' + esc(scen.goal) + '</p><p>💡 <b>Mẹo thực chiến:</b> ' + esc(scen.tip) + '</p></div>'
+      + '<div class="qblock"><p><b>Câu hỏi ' + (turn + 1) + '/5 — ' + esc(scen.partner) + ' hỏi:</b></p>'
+      + '<p style="font-size:20px"><b>' + esc(q.t) + '</b></p>'
+      + (rpQSub(q, track) ? '<p class="mut">' + esc(rpQSub(q, track)) + '</p>' : '')
+      + '<p class="mut">' + esc(q.vi) + '</p>'
+      + '<p>💡 <b>Gợi ý:</b> ' + esc(q.hint) + '</p>'
+      + '<div class="row"><button class="btn" id="rpHear">🔊 Nghe câu hỏi</button></div>'
+      + '<div class="row"><button class="btn" id="rpRec">🎤 Nói câu trả lời</button></div>'
+      + '<div id="rpRecRes">' + (cur.answer ? '<p>✓ Máy nghe được: “' + esc(cur.answer) + '”</p><p class="mut">Nghe lại câu mình vừa nói rồi bấm “Câu tiếp theo →”.</p>' : '') + '</div>'
+      + '<p class="mut" id="rpRecErr">' + esc(l.rpRecErr || "") + '</p>'
+      + (noMic ? '<p class="mut">Máy này không có mic / không hỗ trợ ghi âm — gõ câu trả lời vào ô dưới.</p>' : '')
+      + '<textarea id="rpType" style="width:100%" rows="3" placeholder="Gõ câu trả lời của bạn bằng ' + rpLangName(track) + '...">' + esc(l.rpDraft || cur.answer || "") + '</textarea>'
+      + '<div class="row"><button class="btn" id="rpSendType">Gửi câu trả lời</button></div>'
+      + '<div class="row"><button class="btn btn-primary" id="rpNext">' + (turn < 4 ? 'Câu tiếp theo →' : 'Xem tóm tắt sau buổi →') + '</button><button class="btn" id="rpEnd">Kết thúc buổi</button></div></div>';
+    var prev = l.rpAnswers.slice(0, turn);
+    if (prev.length) h += '<div class="qblock"><h3>Bạn đã trả lời</h3>' + prev.map(function (a, i) { return '<p><b>Câu ' + (i + 1) + ':</b> ' + esc(scen.q[i].t) + '<br><b>Bạn:</b> ' + (a && a.answer ? esc(a.answer) : '<span class="mut">(bỏ qua)</span>') + '</p>'; }).join("") + '</div>';
+    return h;
+  }
+  function sessionWire() {
+    var turn = l.rpTurn || 0;
+    var q = scen.q[turn];
+    var hear = $("#rpHear");
+    if (hear) hear.onclick = function () { try { pronDiagSpeak(rpSrTrack(track), q.t); } catch (e) {} };
+    var ta = $("#rpType");
+    if (ta) ta.oninput = function () { l.rpDraft = ta.value; };
+    var rec = $("#rpRec");
+    if (rec) rec.onclick = function () {
+      var box = $("#rpRecRes"), err = $("#rpRecErr");
+      if (box) box.innerHTML = '<p class="mut">Đang nghe… nói xong câu trả lời của bạn rồi dừng.</p>';
+      if (err) err.textContent = "";
+      pronTier1Start(rpSrTrack(track), function (heardTx) {
+        l.rpAnswers[turn] = { q: q.t, answer: heardTx || "", via: "mic" };
+        l.rpDraft = heardTx || "";
+        var b2 = document.getElementById("rpRecRes"), e2 = document.getElementById("rpRecErr"), t2 = document.getElementById("rpType");
+        if (b2) b2.innerHTML = '<p>✓ Máy nghe được: “' + esc(heardTx || "") + '”</p><p class="mut">Nghe lại câu mình vừa nói rồi bấm “Câu tiếp theo →”.</p>';
+        if (e2) e2.textContent = "";
+        if (t2) t2.value = heardTx || "";
+      }, function (kind) {
+        l.rpRecErr = pronTier1ErrText(kind);
+        var e2 = document.getElementById("rpRecErr"), b2 = document.getElementById("rpRecRes");
+        if (e2) e2.textContent = l.rpRecErr;
+        if (b2) b2.innerHTML = "";
+      });
+    };
+    var send = $("#rpSendType");
+    if (send) send.onclick = function () {
+      var t2 = document.getElementById("rpType");
+      var v = t2 ? (t2.value || "").trim() : "";
+      if (!v) { toast("Hãy gõ câu trả lời trước đã."); return; }
+      l.rpAnswers[turn] = { q: q.t, answer: v, via: "type" };
+      l.rpDraft = v;
+      var b2 = document.getElementById("rpRecRes");
+      if (b2) b2.innerHTML = '<p>✓ Đã ghi câu trả lời: “' + esc(v) + '”</p><p class="mut">Bấm “Câu tiếp theo →” để sang câu hỏi tiếp theo.</p>';
+    };
+    var next = $("#rpNext");
+    if (next) next.onclick = function () {
+      var t2 = document.getElementById("rpType");
+      var v = t2 ? (t2.value || "").trim() : "";
+      if (!l.rpAnswers[turn] || !l.rpAnswers[turn].answer) {
+        if (v) l.rpAnswers[turn] = { q: q.t, answer: v, via: "type" };
+        else l.rpAnswers[turn] = { q: q.t, answer: "", via: "skip" };
+      }
+      l.rpDraft = "";
+      if (turn < 4) { l.rpTurn = turn + 1; render(); }
+      else finishToSummary();
+    };
+    var end = $("#rpEnd");
+    if (end) end.onclick = function () {
+      var t2 = document.getElementById("rpType");
+      var v = t2 ? (t2.value || "").trim() : "";
+      if ((!l.rpAnswers[turn] || !l.rpAnswers[turn].answer) && v) l.rpAnswers[turn] = { q: q.t, answer: v, via: "type" };
+      else if (!l.rpAnswers[turn]) l.rpAnswers[turn] = { q: q.t, answer: "", via: "skip" };
+      l.rpDraft = "";
+      finishToSummary();
+    };
+  }
+  /* ---------- PHA TÓM TẮT SAU BUỔI ---------- */
+  function summaryHTML() {
+    var h = head + phaseBarHTML(2)
+      + '<div class="qblock"><p><b>Buổi đóng vai đã xong — ' + esc(scen.title) + '</b> · ' + answeredCount() + '/5 câu đã trả lời · +10 XP</p></div>'
+      + '<div class="qblock"><h3>📝 Toàn văn buổi đóng vai</h3>' + rpTurnsHTML(l.rpAnswers, scen) + '</div>';
+    if (msIsVip()) {
+      h += '<div class="qblock"><h3>🤖 AI chấm 3 chiều</h3>';
+      if (l.rpAi.parsed) {
+        h += rpAiSummaryHTML(l.rpAi.parsed);
+        if (!l.rpAi.parsed.full) h += '<p class="mut">AI trả lời chưa đúng định dạng 3 chiều nên chưa tách được đủ 3 chiều — toàn văn AI trả lời:</p><p>' + esc(l.rpAi.parsed.raw || "") + '</p>';
+        h += '<div class="row"><button class="btn" id="rpAiAgain">Chấm lại</button></div>';
+      } else if (l.rpAi.busy) {
+        h += '<p class="mut">AI đang chấm…</p>';
+      } else {
+        if (l.rpAi.err) h += '<p>' + esc(l.rpAi.err) + '</p>';
+        h += '<p class="mut">AI chấm theo 3 chiều: từ vựng, ngữ pháp, phát âm — không band, không điểm số. Phát âm chỉ nhận xét theo bản ghi nghe được, không chấm % từng âm.</p>'
+          + '<div class="row"><button class="btn btn-primary" id="rpAiGo">🤖 AI chấm 3 chiều</button></div>';
+      }
+      h += '</div>';
+    } else {
+      h += '<div class="qblock"><h3>🤖 AI chấm 3 chiều — chỉ mở cho VIP</h3>'
+        + '<p>AI chấm 3 chiều chỉ mở cho tài khoản VIP. <button class="btn" id="aiVipReqBtn">Yêu cầu VIP</button></p>'
+        + '<h3>Tự đối chiếu theo bảng tiêu chí</h3><p class="mut">Bảng dưới đây là tự đối chiếu, không phải điểm máy chấm — không có band.</p>'
+        + rpSelfChecks().map(function (c) { return '<label style="display:block;margin:4px 0"><input type="checkbox" data-rpself="' + c.key + '"' + (l.rpSelf[c.key] ? ' checked' : '') + '> ' + esc(c.label) + '</label>'; }).join("")
+        + '<details><summary><b>Xem gợi ý trả lời từng câu</b></summary>' + scen.q.map(function (qq, i) { return '<p><b>Câu ' + (i + 1) + ':</b> ' + esc(qq.t) + '<br><span class="mut">Gợi ý: ' + esc(qq.hint) + '</span></p>'; }).join("") + '</details></div>';
+    }
+    h += '<div class="row"><button class="btn btn-primary" id="rpAgain">Luyện tình huống khác</button><button class="btn" id="rpRetryScen">Luyện lại tình huống này</button></div>';
+    return h;
+  }
+  function summaryWire() {
+    var go = $("#rpAiGo");
+    if (go) go.onclick = function () {
+      l.rpAi.busy = true; l.rpAi.err = ""; render();
+      callAiTutorRoleplay(track, scen, l.rpAnswers).then(function (res) {
+        l.rpAi.busy = false; l.rpAi.parsed = res.parsed; l.rpAi.err = "";
+        updateLogField("ai", res.parsed);
+        render();
+      }, function (err) {
+        l.rpAi.busy = false; l.rpAi.err = (err && err.message) || String(err);
+        render();
+      });
+    };
+    var ag = $("#rpAiAgain");
+    if (ag) ag.onclick = function () { l.rpAi.parsed = null; l.rpAi.err = ""; render(); var g2 = document.getElementById("rpAiGo"); if (g2) g2.click(); };
+    $$("[data-rpself]").forEach(function (cb) { cb.onchange = function () { l.rpSelf[cb.dataset.rpself] = !!cb.checked; updateLogField("self", l.rpSelf); }; });
+    var ag2 = $("#rpAgain");
+    if (ag2) ag2.onclick = function () { l.rpPhase = "pick"; l.rpScen = null; render(); };
+    var rt = $("#rpRetryScen");
+    if (rt) rt.onclick = function () { startSession(scen); };
+  }
+  /* ---------- PHA XEM LẠI BUỔI CŨ ---------- */
+  function historyHTML() {
+    var e = l.rpHistEntry;
+    if (!e) { l.rpPhase = "pick"; render(); return ""; }
+    var sc = null;
+    rpScenList(track).concat(rpCustomList(track)).forEach(function (s) { if (s.id === e.scenId) sc = s; });
+    if (!sc) sc = { title: e.title || "Đóng vai", partner: "Đối tác", q: (e.turns || []).map(function (t) { return { t: t.q || "" }; }) };
+    var h = head + '<div class="qblock"><p><b>' + esc(e.title || "Đóng vai") + '</b> · ' + esc(rpFmtDate(e.at)) + '</p></div>'
+      + '<div class="qblock"><h3>📝 Toàn văn buổi đóng vai</h3>' + rpTurnsHTML(e.turns, sc) + '</div>';
+    if (e.ai && e.ai.full) h += '<div class="qblock"><h3>🤖 AI chấm 3 chiều</h3>' + rpAiSummaryHTML(e.ai) + '</div>';
+    else if (e.ai) h += '<div class="qblock"><h3>🤖 AI chấm 3 chiều</h3><p class="mut">AI trả lời chưa đúng định dạng 3 chiều nên chưa tách được — toàn văn AI trả lời:</p><p>' + esc(e.ai.raw || "") + '</p></div>';
+    else if (e.self && (e.self.lex || e.self.gram || e.self.pron)) {
+      h += '<div class="qblock"><h3>Tự đối chiếu của bạn</h3>' + rpSelfChecks().map(function (c) { return '<p>' + (e.self[c.key] ? '✓ ' : '○ ') + esc(c.label) + '</p>'; }).join("") + '<p class="mut">Đây là tự đối chiếu, không phải điểm máy chấm — không có band.</p></div>';
+    } else h += '<div class="qblock"><p class="mut">Buổi này chưa có tóm tắt AI (tự đối chiếu).</p></div>';
+    h += '<div class="row"><button class="btn btn-primary" id="rpHistBack">Về danh sách tình huống</button></div>';
+    return h;
+  }
+  /* ---------- ĐIỀU PHỐI ---------- */
+  if (l.rpPhase === "pick") { app.innerHTML = pickHTML(); wireBack(); pickWire(); return; }
+  if (l.rpPhase === "custom") { app.innerHTML = customHTML(); wireBack(); customWire(); return; }
+  if (l.rpPhase === "session") {
+    if (!scen || !scen.q || scen.q.length !== 5) { l.rpPhase = "pick"; render(); return; }
+    app.innerHTML = sessionHTML(); wireBack(); sessionWire(); return;
+  }
+  if (l.rpPhase === "history") { app.innerHTML = historyHTML(); wireBack(); var hb = $("#rpHistBack"); if (hb) hb.onclick = function () { l.rpPhase = "pick"; render(); }; return; }
+  /* summary (mặc định) */
+  if (!scen) { l.rpPhase = "pick"; render(); return; }
+  app.innerHTML = summaryHTML(); wireBack(); summaryWire();
+}
+
 /* ---------- SPEC 29/10/2026 (2): TRO GIANG ----------
    Hoc vien TU lap Outline Writing hoac TU soan cau tra loi Speaking bang y
    cua minh, AI chi NANG CAP chinh bai do: giu y goc, giu thu tu y, chi sua
@@ -19595,6 +19940,62 @@ function callAiTutorSpeaking(transcript, refText, pronounceScore, pronounceDetai
     }, function () { reject(loginMsg); });
   });
 }
+/* v177: AI chấm buổi đóng vai theo 3 chiều (từ vựng, ngữ pháp, phát âm) —
+   KHÔNG band, KHÔNG điểm số. Dùng mode chat của ai-tutor (máy chủ chặn
+   VIP thật: 403 vip_required). Phát âm chỉ nhận xét theo bản ghi nghe
+   được, không bịa % từng âm (QT-09). */
+function callAiTutorRoleplay(track, scen, turns) {
+  return new Promise(function (resolve, reject) {
+    var loginMsg = authLoginMsg("AI chấm đóng vai");
+    var ready = window.__supabaseReady;
+    if (!ready || typeof ready.then !== "function") { reject(new Error(loginMsg)); return; }
+    ready.then(function (client) {
+      if (!client || !client.auth || !client.auth.getSession) { reject(new Error(loginMsg)); return; }
+      client.auth.getSession().then(function (res) {
+        var sess = res && res.data && res.data.session;
+        if (!sess || !sess.access_token) { reject(new Error(loginMsg)); return; }
+        var transcript = (turns || []).map(function (t, i) { return "Câu hỏi " + (i + 1) + ": " + (t.q || "") + "\nTrả lời: " + ((t.answer && t.answer.trim()) || "(bỏ qua — chưa trả lời)"); }).join("\n");
+        var msg = "Chấm buổi đóng vai " + rpLangName(track) + " này theo đúng 3 chiều: (1) Từ vựng, (2) Ngữ pháp, (3) Phát âm. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: 3 dòng 'TỪ VỰNG: <nhận xét ngắn>' / 'NGỮ PHÁP: <nhận xét ngắn>' / 'PHÁT ÂM: <nhận xét ngắn>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng câu/từ người học nói> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng câu/từ yếu> — <vì sao yếu/sai> — Sửa thành: <câu đúng>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng câu/từ> — <vì sao nên nâng cấp để nói hay hơn> — Viết lại: <câu nói hay hơn>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau. LƯU Ý PHÁT ÂM: chỉ nhận xét dựa trên bản ghi nghe được (máy nghe ra đúng/sai từ nào) — không bịa điểm % từng âm; nếu bản ghi trống hoặc quá ít thì ghi rõ 'chưa đủ dữ liệu để nhận xét phát âm'. KHÔNG cho điểm số, không band.";
+        var body = { message: msg, mode: "chat", context: "TÌNH HUỐNG: " + (scen.title || "") + " — " + (scen.setting || "") + "\nBUỔI ĐÓNG VAI (5 câu hỏi tiếp nối):\n" + transcript };
+        fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify(body) })
+          .then(function (resp) {
+            if (!resp.ok) {
+              return resp.json().catch(function () { return {}; }).then(function (d) {
+                if (resp.status === 403 && d && d.error === "vip_required") throw new Error("AI chấm 3 chiều chỉ mở cho tài khoản VIP do quản trị viên cấp.");
+                throw new Error(aiErrMessage(resp.status, d && d.error, loginMsg));
+              });
+            }
+            return resp.json();
+          })
+          .then(function (data) { if (data && data.reply) resolve({ reply: data.reply, parsed: parseRoleplayReply(data.reply) }); else reject(new Error("AI trả về trống — hãy thử gửi lại.")); })
+          .catch(function (e) { reject(new Error((e && e.message) || "Mất mạng — hãy kiểm tra kết nối rồi gửi lại.")); });
+      }, function () { reject(new Error(loginMsg)); });
+    }, function () { reject(new Error(loginMsg)); });
+  });
+}
+/* Parser tóm tắt đóng vai (3 chiều, không band): đủ 3 dòng chiều thì
+   full=true; AI trả sai định dạng thì full=false, hiện toàn văn, không bịa. */
+function parseRoleplayReply(reply) {
+  var lines = String(reply || "").split(/\n/);
+  var dims = {}, good = [], fix = [], tips = [];
+  lines.forEach(function (ln) {
+    var m = ln.match(/^(TỪ VỰNG|NGỮ PHÁP|PHÁT ÂM):\s*(.+)$/i);
+    if (m) { var k = /từ vựng/i.test(m[1]) ? "lex" : /ngữ pháp/i.test(m[1]) ? "gram" : "pron"; dims[k] = m[2].trim(); return; }
+    var g = ln.match(/^(?:TỐT|PHẦN ỔN):\s*(.+?)\s*—\s*(.+)$/);
+    if (g) { good.push({ quote: g[1].trim(), why: g[2].trim() }); return; }
+    var f = ln.match(/^SỬA:\s*(.+?)\s*—\s*(.+?)\s*—\s*Sửa thành:\s*(.+)$/);
+    if (f) { fix.push({ quote: f[1].trim(), why: f[2].trim(), fix: f[3].trim() }); return; }
+    var f2 = ln.match(/^SỬA:\s*(.+?)\s*—\s*(.+)$/);
+    if (f2) { fix.push({ quote: f2[1].trim(), why: f2[2].trim(), fix: "" }); return; }
+    var t = ln.match(/^(?:KHUYẾN NGHỊ|NÂNG CẤP):\s*(.+?)\s*—\s*(.+?)\s*—\s*Viết lại:\s*(.+)$/);
+    if (t) { tips.push({ quote: t[1].trim(), why: t[2].trim(), rewrite: t[3].trim() }); return; }
+    var t2 = ln.match(/^(?:KHUYẾN NGHỊ|NÂNG CẤP):\s*(.+?)\s*—\s*(.+)$/);
+    if (t2) { tips.push({ quote: t2[1].trim(), why: t2[2].trim(), rewrite: "" }); return; }
+  });
+  var full = !!(dims.lex && dims.gram && dims.pron);
+  return { dims: dims, full: full, good: good, fix: fix, tips: tips, raw: reply };
+}
+
 /* Ghep transcript thanh cau voi % phat am tung cau (tu pronounce theo bai mau, cung thu tu). */
 function speakTranscriptSegments(transcript, refLines, words, issues) {
   var tSegs = segmentEssay(transcript);
@@ -21716,6 +22117,7 @@ function viewPracticeZh(app) {
     put(G6, byId("practiceGrpTutor")); /* v129: Tro giang AI NGUYEN THE vao G6 nhu EN */
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("zh");
     if (tc6.firstChild) put(G6, tc6.firstChild);
+    var rp6 = roleplayAICardEl("zh"); if (rp6) put(G6, rp6); /* v177 ELSA 11 */
     var anchor = byId("typeEntryRow") || byId("zhPracticeNextCard");
     [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
@@ -24989,6 +25391,7 @@ function viewPracticeTc(app) {
     put(G6, byId("practiceGrpTutor")); /* v129: Tro giang AI NGUYEN THE vao G6 nhu EN */
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("tc");
     if (tc6.firstChild) put(G6, tc6.firstChild);
+    var rp6 = roleplayAICardEl("tc"); if (rp6) put(G6, rp6); /* v177 ELSA 11 */
     var anchor = byId("typeEntryRow") || byId("tcPracticeNextCard");
     [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
@@ -26083,6 +26486,7 @@ function viewPracticeTp(app) {
     put(G6, byId("practiceGrpTutor")); /* v129: Tro giang AI NGUYEN THE vao G6 nhu EN */
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("tp");
     if (tc6.firstChild) put(G6, tc6.firstChild);
+    var rp6 = roleplayAICardEl("tp"); if (rp6) put(G6, rp6); /* v177 ELSA 11 */
     var anchor = byId("typeEntryRow") || byId("tpPracticeNextCard");
     [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
