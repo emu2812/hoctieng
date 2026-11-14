@@ -17688,7 +17688,7 @@ function renderRoleplayAI(app, l) {
   var head = skillHead("🎭 Đóng vai AI — " + rpTrackLabel(track), "1 tình huống + 5 câu hỏi tiếp nối + tóm tắt sau buổi");
   function startSession(s) {
     l.rpScen = s; l.rpPhase = "session"; l.rpTurn = 0; l.rpAnswers = [];
-    l.rpAi = {}; l.rpSelf = {}; l.rpSaved = false; l.rpXped = false;
+    l.rpAi = {}; l.rpSelf = {}; l.rpS5 = { self: {}, rephrases: {} }; l.rpSaved = false; l.rpXped = false;
     l.rpSessionId = "rp" + Date.now(); l.rpDraft = ""; l.rpRecErr = "";
     render();
   }
@@ -17702,6 +17702,13 @@ function renderRoleplayAI(app, l) {
     var log = rpLogList(), e = null;
     log.forEach(function (x) { if (x.id === l.rpSessionId) e = x; });
     if (e) { e[field] = value; saveState(); }
+  }
+  /* v178: lưu báo cáo 5 chiều vào buổi trong lịch sử (kèm số đo + tra kho). */
+  function saveS5Log() {
+    var st = rpSpeech5Stats(track, l.rpAnswers);
+    var transcript = (l.rpAnswers || []).filter(function (a) { return a && a.answer; }).map(function (a) { return a.answer; }).join(" ");
+    var stress = rpSpeech5Stress(track, transcript);
+    updateLogField("speech5", { parsed: l.rpS5.parsed || null, stats: st, stress: { kind: stress.kind, found: stress.found, total: stress.total, items: stress.items }, self: l.rpS5.self || {}, rephrases: l.rpS5.rephrases || {}, at: Date.now() });
   }
   function finishToSummary() {
     if (answeredCount() < 1) { toast("Hãy trả lời ít nhất 1 câu rồi kết thúc buổi."); return; }
@@ -17819,8 +17826,10 @@ function renderRoleplayAI(app, l) {
       var box = $("#rpRecRes"), err = $("#rpRecErr");
       if (box) box.innerHTML = '<p class="mut">Đang nghe… nói xong câu trả lời của bạn rồi dừng.</p>';
       if (err) err.textContent = "";
+      var rpT0 = Date.now(); /* v178: đo thời gian nói thật cho WPM */
       pronTier1Start(rpSrTrack(track), function (heardTx) {
-        l.rpAnswers[turn] = { q: q.t, answer: heardTx || "", via: "mic" };
+        var rpSecs = Math.max(0, (Date.now() - rpT0) / 1000);
+        l.rpAnswers[turn] = { q: q.t, answer: heardTx || "", via: "mic", secs: Math.round(rpSecs * 10) / 10 };
         l.rpDraft = heardTx || "";
         var b2 = document.getElementById("rpRecRes"), e2 = document.getElementById("rpRecErr"), t2 = document.getElementById("rpType");
         if (b2) b2.innerHTML = '<p>✓ Máy nghe được: “' + esc(heardTx || "") + '”</p><p class="mut">Nghe lại câu mình vừa nói rồi bấm “Câu tiếp theo →”.</p>';
@@ -17891,6 +17900,7 @@ function renderRoleplayAI(app, l) {
         + rpSelfChecks().map(function (c) { return '<label style="display:block;margin:4px 0"><input type="checkbox" data-rpself="' + c.key + '"' + (l.rpSelf[c.key] ? ' checked' : '') + '> ' + esc(c.label) + '</label>'; }).join("")
         + '<details><summary><b>Xem gợi ý trả lời từng câu</b></summary>' + scen.q.map(function (qq, i) { return '<p><b>Câu ' + (i + 1) + ':</b> ' + esc(qq.t) + '<br><span class="mut">Gợi ý: ' + esc(qq.hint) + '</span></p>'; }).join("") + '</details></div>';
     }
+    h += rpSpeech5HTML(l, track, scen);
     h += '<div class="row"><button class="btn btn-primary" id="rpAgain">Luyện tình huống khác</button><button class="btn" id="rpRetryScen">Luyện lại tình huống này</button></div>';
     return h;
   }
@@ -17910,6 +17920,43 @@ function renderRoleplayAI(app, l) {
     var ag = $("#rpAiAgain");
     if (ag) ag.onclick = function () { l.rpAi.parsed = null; l.rpAi.err = ""; render(); var g2 = document.getElementById("rpAiGo"); if (g2) g2.click(); };
     $$("[data-rpself]").forEach(function (cb) { cb.onchange = function () { l.rpSelf[cb.dataset.rpself] = !!cb.checked; updateLogField("self", l.rpSelf); }; });
+    /* v178: wiring báo cáo 5 chiều */
+    var s5go = $("#rpS5Go");
+    if (s5go) s5go.onclick = function () {
+      l.rpS5.busy = true; l.rpS5.err = ""; render();
+      var st = rpSpeech5Stats(track, l.rpAnswers);
+      callAiTutorSpeech5(track, scen, l.rpAnswers, st).then(function (res) {
+        l.rpS5.busy = false; l.rpS5.parsed = res.parsed; l.rpS5.err = "";
+        saveS5Log();
+        render();
+      }, function (err) {
+        l.rpS5.busy = false; l.rpS5.err = (err && err.message) || String(err);
+        render();
+      });
+    };
+    var s5ag = $("#rpS5Again");
+    if (s5ag) s5ag.onclick = function () { l.rpS5.parsed = null; l.rpS5.err = ""; render(); var g2 = document.getElementById("rpS5Go"); if (g2) g2.click(); };
+    $$("[data-rps5self]").forEach(function (cb) { cb.onchange = function () { l.rpS5.self[cb.dataset.rps5self] = !!cb.checked; saveS5Log(); }; });
+    $$("[data-rps5word]").forEach(function (b) { b.onclick = function () { l.rpS5.selWord = b.dataset.rps5word; l.rpS5.rephraseErr = ""; render(); }; });
+    var s5cw = $("#rpS5CloseWord");
+    if (s5cw) s5cw.onclick = function () { l.rpS5.selWord = ""; render(); };
+    var s5rp = $("#rpS5Rephrase");
+    if (s5rp) s5rp.onclick = function () {
+      var sent = rpSpeech5SentenceOf(track, l.rpAnswers, l.rpS5.selWord);
+      if (!sent) return;
+      l.rpS5.rephraseBusy = true; l.rpS5.rephraseErr = ""; render();
+      callAiTutorRephrase(track, sent).then(function (res) {
+        l.rpS5.rephraseBusy = false;
+        if (!l.rpS5.rephrases) l.rpS5.rephrases = {};
+        l.rpS5.rephrases[sent] = { rewrite: res.rewrite, why: res.why };
+        saveS5Log();
+        render();
+      }, function (err) {
+        l.rpS5.rephraseBusy = false; l.rpS5.rephraseErr = (err && err.message) || String(err);
+        render();
+      });
+    };
+    $$("[data-rps5vipreq]").forEach(function (b) { b.onclick = function () { try { sendVipRequest(); } catch (e) {} }; });
     var ag2 = $("#rpAgain");
     if (ag2) ag2.onclick = function () { l.rpPhase = "pick"; l.rpScen = null; render(); };
     var rt = $("#rpRetryScen");
@@ -17926,6 +17973,7 @@ function renderRoleplayAI(app, l) {
       + '<div class="qblock"><h3>📝 Toàn văn buổi đóng vai</h3>' + rpTurnsHTML(e.turns, sc) + '</div>';
     if (e.ai && e.ai.full) h += '<div class="qblock"><h3>🤖 AI chấm 3 chiều</h3>' + rpAiSummaryHTML(e.ai) + '</div>';
     else if (e.ai) h += '<div class="qblock"><h3>🤖 AI chấm 3 chiều</h3><p class="mut">AI trả lời chưa đúng định dạng 3 chiều nên chưa tách được — toàn văn AI trả lời:</p><p>' + esc(e.ai.raw || "") + '</p></div>';
+    if (e.speech5) h += rpSpeech5SavedHTML(e.speech5, track);
     else if (e.self && (e.self.lex || e.self.gram || e.self.pron)) {
       h += '<div class="qblock"><h3>Tự đối chiếu của bạn</h3>' + rpSelfChecks().map(function (c) { return '<p>' + (e.self[c.key] ? '✓ ' : '○ ') + esc(c.label) + '</p>'; }).join("") + '<p class="mut">Đây là tự đối chiếu, không phải điểm máy chấm — không có band.</p></div>';
     } else h += '<div class="qblock"><p class="mut">Buổi này chưa có tóm tắt AI (tự đối chiếu).</p></div>';
@@ -19994,6 +20042,378 @@ function parseRoleplayReply(reply) {
   });
   var full = !!(dims.lex && dims.gram && dims.pron);
   return { dims: dims, full: full, good: good, fix: fix, tips: tips, raw: reply };
+}
+
+/* ============ v178 — ELSA 12: BÁO CÁO NÓI DÀI 5 CHIỀU ============
+   Đính vào tóm tắt đóng vai AI (v177): dùng toàn văn 5 câu trả lời
+   của buổi làm bài nói dài. 5 chiều ĐÚNG 5 TÊN, đúng thứ tự: phát âm,
+   ngữ điệu, trôi chảy, ngữ pháp, từ vựng — mỗi chiều mức (tốt/cần sửa)
+   + mẹo đúng 1 câu. Không % từng âm (QT-09). WPM đo thật từ thời gian
+   ghi SR (secs lưu ở mỗi lượt mic). Word Stress tra kho IPA (EN/TC),
+   thanh điệu (ZH), RR (TP) — chỉ hiển thị trọng âm chuẩn, không chấm.
+   AI chỉ cho VIP (máy chủ chặn 403 vip_required như v177). */
+function rpSpeech5Scale(track) {
+  return { en: { band: "Band IELTS", range: "0–9" }, zh: { band: "Cấp HSK", range: "1–6" }, tc: { band: "Điểm TOEIC", range: "10–990" }, tp: { band: "Cấp TOPIK", range: "1–6" } }[track] || { band: "Band IELTS", range: "0–9" };
+}
+function rpSpeech5CountWords(track, text) {
+  var s = String(text || "");
+  if (track === "zh") return (s.match(/[\u4e00-\u9fff]/g) || []).length;
+  return s.split(/\s+/).filter(function (t) { return /[A-Za-z0-9\uAC00-\uD7A3\u3130-\u318F]/.test(t); }).length;
+}
+function rpSpeech5Stats(track, turns) {
+  var words = 0, micWords = 0, micSecs = 0, micTurns = 0, answered = 0;
+  (turns || []).forEach(function (a) {
+    if (!a || !a.answer) return;
+    answered++;
+    var w = rpSpeech5CountWords(track, a.answer);
+    words += w;
+    if (a.via === "mic" && typeof a.secs === "number" && a.secs > 0) { micWords += w; micSecs += a.secs; micTurns++; }
+  });
+  var wpm = (micSecs > 0) ? Math.round(micWords / (micSecs / 60)) : null;
+  var verdict = "";
+  if (wpm == null) verdict = "";
+  else if (track === "zh") verdict = "chưa có chuẩn riêng cho tiếng Trung — chỉ để tham khảo";
+  else if (wpm < 100) verdict = "chậm hơn chuẩn 100–140 từ/phút";
+  else if (wpm <= 140) verdict = "đúng chuẩn 100–140 từ/phút";
+  else verdict = "nhanh hơn chuẩn 100–140 từ/phút";
+  return { words: words, answered: answered, micTurns: micTurns, micSecs: Math.round(micSecs * 10) / 10, wpm: wpm, verdict: verdict, short: words < 40, unit: track === "zh" ? "chữ" : "từ" };
+}
+/* Kho tra trọng âm/thanh điệu/RR — xây lười 1 lần/track, từ kho từ vựng
+   đã có trong web (không bịa IPA/pinyin/RR ngoài kho). */
+var RP_S5_MAP = null;
+function rpSpeech5Map(track) {
+  if (RP_S5_MAP && RP_S5_MAP.track === track) return RP_S5_MAP;
+  var map = {}, kind = "ipa";
+  var addSets = function (sets, keyW, keyR) {
+    (sets || []).forEach(function (s) {
+      (s.cards || []).forEach(function (c) {
+        if (c && c[keyW] && c[keyR]) map[String(c[keyW]).toLowerCase()] = c[keyR];
+      });
+    });
+  };
+  if (track === "en") addSets(typeof CONTENT !== "undefined" ? CONTENT.vocab : [], "w", "ipa");
+  else if (track === "tc") {
+    addSets(typeof TC_VOCAB !== "undefined" ? TC_VOCAB : [], "w", "ipa");
+    ["TC_VOCAB_EXPAND", "TC_VOCAB_EXPAND2", "TC_VOCAB_EXPAND3", "TC_VOCAB_EXPAND4", "TC_VOCAB_EXPAND5"].forEach(function (n) { try { var v = eval(n); if (v) addSets(v, "w", "ipa"); } catch (e) {} });
+  } else if (track === "zh") { kind = "pinyin"; addSets((typeof CONTENT !== "undefined" && CONTENT.zhVocab) || [], "han", "pinyin"); }
+  else if (track === "tp") {
+    kind = "rr";
+    addSets(typeof TP_VOCAB !== "undefined" ? TP_VOCAB : [], "w", "r");
+    ["TP_VOCAB_EXPAND1", "TP_VOCAB_EXPAND2"].forEach(function (n) { try { var v2 = eval(n); if (v2) addSets(v2, "w", "r"); } catch (e) {} });
+  }
+  RP_S5_MAP = { track: track, map: map, kind: kind };
+  return RP_S5_MAP;
+}
+/* Tách từ tiếng Trung theo kho (khớp dài nhất tối đa 4 chữ, rớt về từng chữ). */
+function rpSpeech5ZhWords(text) {
+  var m = rpSpeech5Map("zh").map, out = [], s = String(text || ""), i = 0;
+  while (i < s.length) {
+    var ch = s[i];
+    if (!/[\u4e00-\u9fff]/.test(ch)) { i++; continue; }
+    var found = null;
+    for (var len = 4; len >= 2; len--) { var sub = s.slice(i, i + len); if (m[sub]) { found = sub; break; } }
+    out.push(found || ch);
+    i += found ? found.length : 1;
+  }
+  return out;
+}
+function rpSpeech5Stress(track, transcript) {
+  var info = rpSpeech5Map(track), map = info.map, items = [], seen = {};
+  var words;
+  if (track === "zh") words = rpSpeech5ZhWords(transcript);
+  else words = String(transcript || "").split(/\s+/).map(function (t) { return t.replace(/^[^A-Za-z0-9\uAC00-\uD7A3\u3130-\u318F]+|[^A-Za-z0-9\uAC00-\uD7A3\u3130-\u318F]+$/g, ""); }).filter(Boolean);
+  words.forEach(function (w) {
+    var key = (track === "zh" || track === "tp") ? w : w.toLowerCase();
+    var val = map[key];
+    var disp = w;
+    /* TP: từ nói ra thường dính hậu tố/ngữ pháp (가족입니다, 학교에서) — tra gốc
+       dài nhất có trong kho (가족, 학교); không tra được thì ghi rõ chưa có. */
+    if (track === "tp" && !val) {
+      for (var L = w.length - 1; L >= 2; L--) { var pre = w.slice(0, L); if (map[pre]) { val = map[pre]; disp = pre; key = pre; break; } }
+    }
+    if (seen[key]) return; seen[key] = true;
+    if (track === "en" || track === "tc") {
+      if (!val) { items.push({ word: w, found: false }); return; }
+      var syls = [];
+      try { syls = elsaSplitSyllables(val) || []; } catch (e) {}
+      var si = -1;
+      syls.forEach(function (sy, idx) { if (sy.stressed) si = idx; });
+      items.push({ word: w, found: true, ipa: val, syls: syls, stressedIdx: si, multi: syls.length >= 2 });
+    } else if (track === "zh") {
+      if (!val) { items.push({ word: w, found: false }); return; }
+      items.push({ word: w, found: true, py: val });
+    } else {
+      if (!val) { items.push({ word: w, found: false }); return; }
+      items.push({ word: disp, found: true, rr: val });
+    }
+  });
+  var foundN = items.filter(function (x) { return x.found; }).length;
+  var multi = items.filter(function (x) { return x.found && x.multi; });
+  return { kind: info.kind, items: items, found: foundN, total: items.length, multi: multi };
+}
+function rpSpeech5TranscriptWords(track, transcript) {
+  if (track === "zh") return rpSpeech5ZhWords(transcript);
+  return String(transcript || "").split(/\s+/).map(function (t) { return t.replace(/^[^A-Za-z0-9\uAC00-\uD7A3\u3130-\u318F]+|[^A-Za-z0-9\uAC00-\uD7A3\u3130-\u318F]+$/g, ""); }).filter(Boolean);
+}
+function rpSpeech5SentenceOf(track, turns, word) {
+  var ans = "";
+  (turns || []).forEach(function (a) { if (a && a.answer && a.answer.indexOf(word) >= 0 && !ans) ans = a.answer; });
+  if (!ans) return "";
+  if (track === "zh") return ans;
+  var segs = segmentEssay(ans);
+  for (var i = 0; i < segs.length; i++) if (segs[i].indexOf(word) >= 0) return segs[i];
+  return ans;
+}
+function rpSpeech5WordFeedback(parsed, word, track) {
+  if (!parsed) return '<span class="mut">Chưa có nhận xét AI cho từ này — bấm “AI chấm 5 chiều” để AI chấm cả bài, hoặc xem mẹo chung từng chiều bên dưới.</span>';
+  var has = function (list) {
+    return ((list || []).filter(function (x) {
+      var q = String(x.quote || "");
+      if (track === "zh" || track === "tp") return q.indexOf(word) >= 0;
+      return q.toLowerCase().split(/[^a-z0-9\u00c0-\u024f]+/).indexOf(word.toLowerCase()) >= 0;
+    }))[0];
+  };
+  var fx = has(parsed.fix);
+  if (fx) return '<span class="ai-seg ai-seg-red">' + esc(word) + ' <span class="ai-seg-lab">cần sửa</span></span> — ' + esc(fx.why) + (fx.fix ? ' — <b>Sửa thành: ' + esc(fx.fix) + '</b>' : '');
+  var gd = has(parsed.good);
+  if (gd) return '<span class="ai-seg ai-seg-green">' + esc(word) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(gd.why);
+  var tp = has(parsed.tips);
+  if (tp) return '<span class="ai-seg">' + esc(word) + '</span> — ' + esc(tp.why) + (tp.rewrite ? ' — <b>Viết lại: ' + esc(tp.rewrite) + '</b>' : '');
+  return '<span class="mut">AI chưa gắn nhận xét riêng cho từ này — xem mẹo chung từng chiều bên dưới.</span>';
+}
+/* AI chấm bài nói dài 5 chiều (VIP, mode speaking — máy chủ chặn thật
+   403 vip_required như v177). Phát âm/ngữ điệu chỉ nhận xét theo bản ghi
+   nghe được, không bịa % từng âm; không chấm Coherence/Interaction. */
+function callAiTutorSpeech5(track, scen, turns, stats) {
+  return new Promise(function (resolve, reject) {
+    var loginMsg = authLoginMsg("AI chấm 5 chiều");
+    var ready = window.__supabaseReady;
+    if (!ready || typeof ready.then !== "function") { reject(new Error(loginMsg)); return; }
+    ready.then(function (client) {
+      if (!client || !client.auth || !client.auth.getSession) { reject(new Error(loginMsg)); return; }
+      client.auth.getSession().then(function (res) {
+        var sess = res && res.data && res.data.session;
+        if (!sess || !sess.access_token) { reject(new Error(loginMsg)); return; }
+        var sc = rpSpeech5Scale(track);
+        var transcript = (turns || []).map(function (t, i) { return "Câu hỏi " + (i + 1) + ": " + (t.q || "") + "\nTrả lời: " + ((t.answer && t.answer.trim()) || "(bỏ qua — chưa trả lời)"); }).join("\n");
+        var msg = "Chấm bài nói dài " + rpLangName(track) + " này theo đúng 5 chiều, theo đúng thứ tự: (1) Phát âm, (2) Ngữ điệu, (3) Trôi chảy, (4) Ngữ pháp, (5) Từ vựng. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: 5 dòng 'PHÁT ÂM: <tốt/cần sửa> — <mẹo sửa đúng 1 câu>' / 'NGỮ ĐIỆU: <tốt/cần sửa> — <mẹo sửa đúng 1 câu>' / 'TRÔI CHẢY: <tốt/cần sửa> — <mẹo sửa đúng 1 câu>' / 'NGỮ PHÁP: <tốt/cần sửa> — <mẹo sửa đúng 1 câu>' / 'TỪ VỰNG: <tốt/cần sửa> — <mẹo sửa đúng 1 câu>'; một dòng 'BAND DỰ ĐOÁN: <số theo thang " + sc.band + " (" + sc.range + ")>'; một dòng 'CEFR: <A1/A2/B1/B2/C1/C2>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng câu/từ người học nói> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng câu/từ yếu> — <vì sao yếu/sai> — Sửa thành: <câu đúng>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng câu/từ> — <vì sao nên nâng cấp để nói hay hơn> — Viết lại: <câu nói hay hơn>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau. LƯU Ý PHÁT ÂM VÀ NGỮ ĐIỆU: chỉ nhận xét dựa trên bản ghi nghe được (máy nghe ra đúng/sai từ nào) — không bịa điểm % từng âm, không bịa trọng âm từng từ; nếu bản ghi trống hoặc quá ít thì ghi rõ 'chưa đủ dữ liệu để nhận xét'. KHÔNG chấm Coherence (mạch lạc) và Interaction (tương tác) — không nhắc tới 2 chiều này. Band dự đoán chỉ để tham khảo, không phải điểm thi.";
+        var body = { message: msg, mode: "speaking", context: "TÌNH HUỐNG: " + (scen.title || "") + " — " + (scen.setting || "") + "\nBÀI NÓI DÀI (5 câu trả lời):\n" + transcript + "\nSỐ ĐO THẬT: " + stats.words + " " + stats.unit + ", " + stats.micSecs + " giây nói qua mic (" + stats.micTurns + " lượt), tốc độ " + (stats.wpm == null ? "chưa đo được" : stats.wpm + " " + stats.unit + "/phút") + "." };
+        fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify(body) })
+          .then(function (resp) {
+            if (!resp.ok) {
+              return resp.json().catch(function () { return {}; }).then(function (d) {
+                if (resp.status === 403 && d && d.error === "vip_required") throw new Error("AI chấm 5 chiều chỉ mở cho tài khoản VIP do quản trị viên cấp.");
+                throw new Error(aiErrMessage(resp.status, d && d.error, loginMsg));
+              });
+            }
+            return resp.json();
+          })
+          .then(function (data) { if (data && data.reply) resolve({ reply: data.reply, parsed: parseSpeech5Reply(data.reply) }); else reject(new Error("AI trả về trống — hãy thử gửi lại.")); })
+          .catch(function (e) { reject(new Error((e && e.message) || "Mất mạng — hãy kiểm tra kết nối rồi gửi lại.")); });
+      }, function () { reject(new Error(loginMsg)); });
+    }, function () { reject(new Error(loginMsg)); });
+  });
+}
+/* Parser báo cáo 5 chiều: đủ 5 chiều + band + CEFR thì full=true;
+   AI trả sai định dạng thì full=false, hiện toàn văn, không bịa mục. */
+function parseSpeech5Reply(reply) {
+  var lines = String(reply || "").split(/\n/);
+  var dims = {}, order = ["pron", "inton", "flu", "gram", "lex"];
+  var dimName = { pron: "Phát âm", inton: "Ngữ điệu", flu: "Trôi chảy", gram: "Ngữ pháp", lex: "Từ vựng" };
+  var dimKey = function (n) {
+    n = String(n || "").toLowerCase();
+    if (/phát âm/.test(n)) return "pron";
+    if (/ngữ điệu/.test(n)) return "inton";
+    if (/trôi chảy/.test(n)) return "flu";
+    if (/ngữ pháp/.test(n)) return "gram";
+    if (/từ vựng/.test(n)) return "lex";
+    return null;
+  };
+  var band = null, cefr = null, good = [], fix = [], tips = [];
+  lines.forEach(function (ln) {
+    var m = ln.match(/^(PHÁT ÂM|NGỮ ĐIỆU|TRÔI CHẢY|NGỮ PHÁP|TỪ VỰNG):\s*(.+)$/i);
+    if (m) {
+      var k = dimKey(m[1]);
+      if (k) {
+        var body = m[2].trim();
+        var parts = body.split("—");
+        var level = /tốt/.test(parts[0]) ? "good" : "fix";
+        var tip = parts.length > 1 ? parts.slice(1).join("—").trim() : body;
+        dims[k] = { level: level, tip: tip };
+      }
+      return;
+    }
+    var b = ln.match(/^BAND DỰ ĐOÁN:\s*([0-9]+(?:[.,][0-9]+)?)/i);
+    if (b) { band = parseFloat(b[1].replace(",", ".")); return; }
+    var c = ln.match(/^CEFR:\s*(A1|A2|B1|B2|C1|C2)/i);
+    if (c) { cefr = c[1].toUpperCase(); return; }
+    var g = ln.match(/^(?:TỐT|PHẦN ỔN):\s*(.+?)\s*—\s*(.+)$/);
+    if (g) { good.push({ quote: g[1].trim(), why: g[2].trim() }); return; }
+    var f = ln.match(/^SỬA:\s*(.+?)\s*—\s*(.+?)\s*—\s*Sửa thành:\s*(.+)$/);
+    if (f) { fix.push({ quote: f[1].trim(), why: f[2].trim(), fix: f[3].trim() }); return; }
+    var f2 = ln.match(/^SỬA:\s*(.+?)\s*—\s*(.+)$/);
+    if (f2) { fix.push({ quote: f2[1].trim(), why: f2[2].trim(), fix: "" }); return; }
+    var t = ln.match(/^(?:KHUYẾN NGHỊ|NÂNG CẤP):\s*(.+?)\s*—\s*(.+?)\s*—\s*Viết lại:\s*(.+)$/);
+    if (t) { tips.push({ quote: t[1].trim(), why: t[2].trim(), rewrite: t[3].trim() }); return; }
+    var t2 = ln.match(/^(?:KHUYẾN NGHỊ|NÂNG CẤP):\s*(.+?)\s*—\s*(.+)$/);
+    if (t2) { tips.push({ quote: t2[1].trim(), why: t2[2].trim(), rewrite: "" }); return; }
+  });
+  var full = order.every(function (k) { return !!dims[k]; }) && band != null && !!cefr;
+  return { dims: dims, dimName: dimName, order: order, band: band, cefr: cefr, full: full, good: good, fix: fix, tips: tips, raw: reply };
+}
+/* Rephrase: AI viết lại 1 câu giữ ý + 1 dòng vì sao (VIP, mode chat). */
+function callAiTutorRephrase(track, sentence) {
+  return new Promise(function (resolve, reject) {
+    var loginMsg = authLoginMsg("AI viết lại câu");
+    var ready = window.__supabaseReady;
+    if (!ready || typeof ready.then !== "function") { reject(new Error(loginMsg)); return; }
+    ready.then(function (client) {
+      if (!client || !client.auth || !client.auth.getSession) { reject(new Error(loginMsg)); return; }
+      client.auth.getSession().then(function (res) {
+        var sess = res && res.data && res.data.session;
+        if (!sess || !sess.access_token) { reject(new Error(loginMsg)); return; }
+        var msg = "Viết lại câu " + rpLangName(track) + " này cho tự nhiên và đúng hơn, giữ nguyên ý, không thêm ý mới. Trả lời ĐÚNG định dạng: 1 dòng 'VIẾT LẠI: <câu viết lại>' + 1 dòng 'VÌ SAO: <giải thích ngắn bằng tiếng Việt>'.";
+        var body = { message: msg, mode: "chat", context: "CÂU GỐC: " + sentence };
+        fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify(body) })
+          .then(function (resp) {
+            if (!resp.ok) {
+              return resp.json().catch(function () { return {}; }).then(function (d) {
+                if (resp.status === 403 && d && d.error === "vip_required") throw new Error("Rephrase chỉ mở cho tài khoản VIP do quản trị viên cấp.");
+                throw new Error(aiErrMessage(resp.status, d && d.error, loginMsg));
+              });
+            }
+            return resp.json();
+          })
+          .then(function (data) {
+            if (!data || !data.reply) { reject(new Error("AI trả về trống — hãy thử gửi lại.")); return; }
+            var rw = (data.reply.match(/VIẾT LẠI:\s*(.+)/) || [])[1] || "";
+            var why = (data.reply.match(/VÌ SAO:\s*(.+)/) || [])[1] || "";
+            resolve({ rewrite: rw.trim(), why: why.trim(), raw: data.reply });
+          })
+          .catch(function (e) { reject(new Error((e && e.message) || "Mất mạng — hãy kiểm tra kết nối rồi gửi lại.")); });
+      }, function () { reject(new Error(loginMsg)); });
+    }, function () { reject(new Error(loginMsg)); });
+  });
+}
+function rpSpeech5SelfChecks() {
+  return [
+    { key: "pron", label: "Phát âm — Máy nghe ra đúng hầu hết các từ tôi nói." },
+    { key: "inton", label: "Ngữ điệu — Giọng tôi lên xuống tự nhiên, không đều đều." },
+    { key: "flu", label: "Trôi chảy — Tôi nói liền mạch, ít ngập ngừng." },
+    { key: "gram", label: "Ngữ pháp — Câu của tôi đủ chủ ngữ + động từ, đúng thì." },
+    { key: "lex", label: "Từ vựng — Tôi đã dùng được từ đúng chủ đề của tình huống." }
+  ];
+}
+function rpSpeech5ParsedHTML(track, parsed) {
+  var sc = rpSpeech5Scale(track);
+  var h = '<div class="sumcard"><h3>Báo cáo 5 chiều (Máy ước lượng)</h3>';
+  parsed.order.forEach(function (k) {
+    var d = parsed.dims[k];
+    if (!d) return;
+    h += '<p><b>' + esc(parsed.dimName[k]) + ': ' + (d.level === "good" ? "tốt ✓" : "cần sửa") + '</b> — ' + esc(d.tip) + '</p>';
+  });
+  h += '<p><b>' + esc(sc.band) + ' dự đoán: ' + (parsed.band != null ? String(parsed.band).replace(".", ",") : "—") + ' (chỉ để tham khảo)</b> · <b>CEFR dự đoán: ' + (parsed.cefr || "—") + ' (chỉ để tham khảo)</b></p></div>';
+  if (parsed.good && parsed.good.length) h += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + parsed.good.map(function (g) { return '<p><span class="ai-seg ai-seg-green">' + esc(g.quote) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(g.why) + '</p>'; }).join("") + '</div>';
+  if (parsed.fix && parsed.fix.length) h += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  if (parsed.tips && parsed.tips.length) h += '<div class="sumcard"><h3>NOTE — NÓI HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + parsed.tips.map(function (t) { return '<p>Câu: “' + esc(t.quote) + '” — ' + esc(t.why) + (t.rewrite ? ' — <b>Viết lại: ' + esc(t.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  return h;
+}
+function rpSpeech5StressHTML(track, stress) {
+  var h = '<div class="qblock"><h3>🔊 Trọng âm từ — chỉ số riêng trong chiều Phát âm</h3>';
+  if (track === "tp") {
+    h += '<p class="mut">Tiếng Hàn không có trọng âm từ như tiếng Anh — trọng âm rơi vào ngữ điệu câu, xem chiều Ngữ điệu. Dưới đây là các từ trong bài nói, tra phiên âm RR trong kho:</p>';
+    h += '<p>' + stress.items.map(function (it) { return esc(it.word) + (it.found ? ' [' + esc(it.rr) + ']' : ' <span class="mut">(chưa có trong kho)</span>'); }).join(" · ") + '</p>';
+  } else if (track === "zh") {
+    h += '<p class="mut">Tiếng Trung không dùng trọng âm từ như tiếng Anh — thay vào đó là thanh điệu từng âm tiết (tra pinyin trong kho):</p>';
+    h += '<p>' + stress.items.map(function (it) { return esc(it.word) + (it.found ? ' ' + esc(it.py) : ' <span class="mut">(chưa có trong kho)</span>'); }).join(" · ") + '</p>';
+  } else {
+    var multi = stress.multi;
+    h += '<p class="mut">Máy chỉ nghe ra từ, không đo được trọng âm thật — đối chiếu trọng âm chuẩn trong kho để tập lại. Tra được ' + stress.found + '/' + stress.total + ' từ trong kho.</p>';
+    if (multi.length) h += '<p>' + multi.map(function (it) {
+      var sylTxt = it.syls.map(function (sy, i) { return (i === it.stressedIdx ? '<b>' + esc(sy.text) + ' ●</b>' : esc(sy.text)); }).join(" · ");
+      return esc(it.word) + ' ' + esc(it.ipa) + ' — ' + sylTxt;
+    }).join("<br>") + '</p>';
+    else h += '<p class="mut">Bài này chưa có từ đa âm tiết tra được trong kho.</p>';
+    var nf = stress.items.filter(function (x) { return !x.found; });
+    if (nf.length) h += '<p class="mut">Chưa có trong kho: ' + nf.map(function (x) { return esc(x.word); }).join(", ") + '</p>';
+  }
+  h += '<p class="mut">Trọng âm chỉ tra theo từ điển trong kho, không phải điểm máy chấm — tập lại bằng cách nghe mẫu rồi đọc theo.</p></div>';
+  return h;
+}
+/* Khối báo cáo 5 chiều trong màn tóm tắt đóng vai (l.rpS5 là state riêng). */
+function rpSpeech5HTML(l, track, scen) {
+  var s5 = l.rpS5 || (l.rpS5 = { self: {}, rephrases: {} });
+  if (!s5.self) s5.self = {};
+  if (!s5.rephrases) s5.rephrases = {};
+  var st = rpSpeech5Stats(track, l.rpAnswers);
+  var transcript = (l.rpAnswers || []).filter(function (a) { return a && a.answer; }).map(function (a) { return a.answer; }).join(" ");
+  var stress = rpSpeech5Stress(track, transcript);
+  var h = '<div class="qblock" id="rpS5Block"><h3>📊 Báo cáo nói dài 5 chiều</h3>'
+    + '<p class="mut">Điểm/band chỉ là hướng dẫn luyện, không phải điểm thi. AI chưa chấm được Coherence (mạch lạc) và Interaction (tương tác) — 2 chiều này không có trong báo cáo.</p>';
+  h += '<p><b>Bài nói của bạn:</b> ' + st.words + ' ' + st.unit + ' · ' + st.micSecs + ' giây nói qua mic (' + st.micTurns + ' lượt)' + (st.wpm == null ? ' · tốc độ: chưa đo được (bài gõ hoặc bỏ qua)' : ' · tốc độ: <b>' + st.wpm + ' ' + st.unit + '/phút</b> — ' + esc(st.verdict)) + '</p>';
+  if (track === "zh") h += '<p class="mut">Tốc độ tính theo chữ Hán/phút; chuẩn 100–140 từ/phút là chuẩn cho tiếng Anh, chưa có chuẩn riêng cho tiếng Trung — chỉ để tham khảo.</p>';
+  if (track === "tp") h += '<p class="mut">Chuẩn 100–140 từ/phút là chuẩn tham chiếu từ tiếng Anh — chỉ để tham khảo.</p>';
+  h += '<p class="mut">Thời gian nói đo từ lúc bấm 🎤 tới khi máy nghe xong (gồm khoảng chờ ngắn cuối câu).</p>';
+  if (st.short) h += '<p class="mut">Bài nói còn ngắn (' + st.words + ' ' + st.unit + ', dưới 40) — báo cáo 5 chiều dưới đây chỉ mang tính gợi ý; lần sau trả lời mỗi câu 2–3 câu để báo cáo đầy đủ hơn.</p>';
+  if (st.micTurns === 0) h += '<p class="mut">Bài này gõ lại, không qua mic — chiều Phát âm và Ngữ điệu cần mic mới chấm được; tốc độ nói chưa đo được.</p>';
+  var words = rpSpeech5TranscriptWords(track, transcript);
+  h += '<div class="qblock"><h3>Transcript — bấm vào từng từ để xem phản hồi</h3><p>' + words.map(function (wd) {
+    return '<button class="btn" data-rps5word="' + esc(wd) + '"' + (s5.selWord === wd ? ' style="background:#FDE68A"' : '') + '>' + esc(wd) + '</button>';
+  }).join(" ") + '</p>';
+  if (s5.selWord) {
+    var sent = rpSpeech5SentenceOf(track, l.rpAnswers, s5.selWord);
+    h += '<div class="qblock"><p><b>Từ “' + esc(s5.selWord) + '”</b> — trong câu: “' + esc(sent) + '”</p>';
+    h += '<p>' + rpSpeech5WordFeedback(s5.parsed, s5.selWord, track) + '</p>';
+    var rp0 = s5.rephrases[sent];
+    if (msIsVip()) {
+      if (rp0) h += '<p><b>Viết lại:</b> ' + esc(rp0.rewrite) + (rp0.why ? ' — <span class="mut">' + esc(rp0.why) + '</span>' : '') + '</p>';
+      else h += '<div class="row"><button class="btn" id="rpS5Rephrase"' + (s5.rephraseBusy ? ' disabled' : '') + '>' + (s5.rephraseBusy ? 'AI đang viết lại...' : '✏️ Rephrase câu này') + '</button></div>';
+      if (s5.rephraseErr) h += '<p>' + esc(s5.rephraseErr) + '</p>';
+    }
+    h += '<div class="row"><button class="btn" id="rpS5CloseWord">Đóng</button></div></div>';
+  }
+  h += '</div>';
+  h += rpSpeech5StressHTML(track, stress);
+  if (msIsVip()) {
+    h += '<div class="qblock"><h3>🤖 AI chấm 5 chiều</h3>';
+    if (s5.parsed) {
+      h += rpSpeech5ParsedHTML(track, s5.parsed);
+      if (!s5.parsed.full) h += '<p class="mut">AI trả lời chưa đúng định dạng 5 chiều nên chưa tách được đủ 5 chiều — toàn văn AI trả lời:</p><p>' + esc(s5.parsed.raw || "") + '</p>';
+      h += '<div class="row"><button class="btn" id="rpS5Again">Chấm lại</button></div>';
+    } else if (s5.busy) h += '<p class="mut">AI đang chấm…</p>';
+    else {
+      if (s5.err) h += '<p>' + esc(s5.err) + '</p>';
+      h += '<p class="mut">AI chấm theo đúng 5 chiều: phát âm, ngữ điệu, trôi chảy, ngữ pháp, từ vựng — mỗi chiều 1 mẹo sửa. Band dự đoán chỉ để tham khảo, không phải điểm thi.</p>'
+        + '<div class="row"><button class="btn btn-primary" id="rpS5Go">🤖 AI chấm 5 chiều</button></div>';
+    }
+    h += '</div>';
+  } else {
+    h += '<div class="qblock"><h3>🤖 AI chấm 5 chiều — chỉ mở cho VIP</h3>'
+      + '<p>AI chấm 5 chiều chỉ mở cho tài khoản VIP. <button class="btn" data-rps5vipreq="1">Yêu cầu VIP</button></p>'
+      + '<h3>Tự đối chiếu 5 chiều</h3><p class="mut">Bảng dưới đây là tự đối chiếu, không phải điểm máy chấm — không có band.</p>'
+      + rpSpeech5SelfChecks().map(function (c) { return '<label style="display:block;margin:4px 0"><input type="checkbox" data-rps5self="' + c.key + '"' + (s5.self[c.key] ? ' checked' : '') + '> ' + esc(c.label) + '</label>'; }).join("") + '</div>';
+  }
+  h += '</div>';
+  return h;
+}
+/* Khối báo cáo 5 chiều đã lưu — dùng ở màn xem lại buổi cũ. */
+function rpSpeech5SavedHTML(sp, track) {
+  var h = '<div class="qblock"><h3>📊 Báo cáo nói dài 5 chiều (đã lưu)</h3>';
+  if (sp.stats) {
+    var st = sp.stats;
+    h += '<p><b>Bài nói:</b> ' + st.words + ' ' + esc(st.unit || "từ") + ' · ' + st.micSecs + ' giây nói qua mic' + (st.wpm != null ? ' · tốc độ: <b>' + st.wpm + ' ' + esc(st.unit || "từ") + '/phút</b> — ' + esc(st.verdict || '') : ' · tốc độ: chưa đo được') + '</p>';
+  }
+  if (sp.parsed) {
+    if (sp.parsed.full) h += rpSpeech5ParsedHTML(track, sp.parsed);
+    else h += '<p class="mut">AI trả lời chưa đúng định dạng 5 chiều — toàn văn:</p><p>' + esc(sp.parsed.raw || "") + '</p>';
+  } else if (sp.self && (sp.self.pron || sp.self.inton || sp.self.flu || sp.self.gram || sp.self.lex)) {
+    h += '<div class="qblock"><h3>Tự đối chiếu 5 chiều của bạn</h3>' + rpSpeech5SelfChecks().map(function (c) { return '<p>' + (sp.self[c.key] ? '✓ ' : '○ ') + esc(c.label) + '</p>'; }).join("") + '<p class="mut">Đây là tự đối chiếu, không phải điểm máy chấm — không có band.</p></div>';
+  } else h += '<p class="mut">Buổi này chưa có báo cáo 5 chiều.</p>';
+  if (sp.rephrases) {
+    var keys = Object.keys(sp.rephrases);
+    if (keys.length) h += '<div class="qblock"><h3>✏️ Câu đã viết lại (Rephrase)</h3>' + keys.map(function (k) { var r = sp.rephrases[k]; return '<p>Gốc: “' + esc(k) + '”<br><b>Viết lại:</b> ' + esc(r.rewrite) + (r.why ? ' — <span class="mut">' + esc(r.why) + '</span>' : '') + '</p>'; }).join("") + '</div>';
+  }
+  return h + '</div>';
 }
 
 /* Ghep transcript thanh cau voi % phat am tung cau (tu pronounce theo bai mau, cung thu tu). */
