@@ -1373,7 +1373,7 @@ function loadState() {
   var st = freshState();
   try {
     var raw = localStorage.getItem(LS_NEW);
-    if (raw) { Object.assign(st, JSON.parse(raw)); normHardFails(st); migrateTcTpCards103(st); return st; }
+    if (raw) { Object.assign(st, JSON.parse(raw)); normHardFails(st); migrateTcTpCards103(st); migrateZhSandhi180(st); return st; }
   } catch (e) {}
   try {
     var old = JSON.parse(localStorage.getItem(LS_OLD) || "null");
@@ -1746,6 +1746,22 @@ function migrateTcTpCards103(st) {
   if (st.tpCardBox) { delete st.tpCardBox; moved = true; }
   if (st.tpCardDue) { delete st.tpCardDue; moved = true; }
   if (moved && typeof state !== "undefined" && st === state) { try { saveState(); } catch (e) {} }
+}
+/* v180: buoc "sandhi" gop cu tach thanh 3 buoc rieng (sandhi33/sandhiBu/
+   sandhiYi) — nguoi da xong buoc cu thi ca 3 buoc moi deu tinh la xong,
+   buoc cu da bo qua thi ca 3 buoc moi cung bo qua. Goi trong loadState
+   + cuoi mergeGuestIntoAccount de tien trinh tu may chu cung duoc chuyen. */
+function migrateZhSandhi180(st) {
+  st = st || (typeof state !== "undefined" ? state : null);
+  if (!st) return;
+  if (st.zhPhDone && st.zhPhDone["sandhi"]) {
+    ["sandhi33", "sandhiBu", "sandhiYi"].forEach(function (id) { if (!st.zhPhDone[id]) st.zhPhDone[id] = true; });
+    delete st.zhPhDone["sandhi"];
+  }
+  if (st.zhPhSkipped && st.zhPhSkipped.indexOf("sandhi") >= 0) {
+    st.zhPhSkipped = st.zhPhSkipped.filter(function (x) { return x !== "sandhi"; });
+    ["sandhi33", "sandhiBu", "sandhiYi"].forEach(function (id) { if (st.zhPhSkipped.indexOf(id) < 0) st.zhPhSkipped.push(id); });
+  }
 }
 function tcTpDueCards90(isTc) {
   if (isTc) tcNorm(); else tpNorm();
@@ -6854,6 +6870,7 @@ function mergeGuestIntoAccount(guest, acc) {
   var note = hadAccount
     ? ("Đã gộp từ máy này: " + added.cards + " thẻ, " + added.hard + " mục khó, " + added.progress + " bước tiến trình. Phần tài khoản đã có được giữ nguyên.")
     : "Tài khoản chưa có tiến trình — đã đưa toàn bộ tiến trình trên máy lên tài khoản.";
+  migrateZhSandhi180(merged);
   normHardFails(merged);
   return { state: merged, report: { note: note, added: added, keptAccount: hadAccount, xpGuest: guest.xp || 0, xpTotal: merged.xp } };
 }
@@ -9863,14 +9880,18 @@ function pronWeakDiagSym(track, sym) {
   for (var i = 0; i < sets.length; i++) if (sets[i].sym === sym) return sets[i];
   return null;
 }
-/* v172 F5: anh xa am yeu ZH ve dung buoc Pinyin de on lai — thanh dieu ve
-   buoc "tones" (idx 2), bien dieu (3+3 / 不 / 一) ve buoc "sandhi" (idx 4),
+/* v172 F5 + v180: anh xa am yeu ZH ve dung buoc Pinyin de on lai — thanh
+   dieu ve buoc "tones" (idx 2), bien dieu 3+3 ve "sandhi33" (idx 4), bien
+   dieu 不 ve "sandhiBu" (idx 5), bien dieu 一 ve "sandhiYi" (idx 6),
    thanh mau ve "initials" (idx 0), van mau ve "finals" (idx 1). Tra -1 neu
    am khong thuoc mach Pinyin. */
 function zhPhStepForSym(sym) {
   if (!sym) return -1;
   var s = String(sym);
-  if (s.indexOf("biến điệu") === 0) return 4; /* sandhi: 3+3 / 不 / 一 */
+  if (s === "biến điệu 3+3") return 4; /* sandhi33 */
+  if (s === "biến điệu 不") return 5; /* sandhiBu */
+  if (s === "biến điệu 一") return 6; /* sandhiYi */
+  if (s.indexOf("biến điệu") === 0) return 4; /* du phong: ve bai 3+3 */
   if (s.indexOf("thanh") === 0) return 2; /* thanh 1–4, thanh nhe */
   var e = (typeof zhPronEntry === "function") ? zhPronEntry(sym) : null;
   if (!e) return -1;
@@ -23703,6 +23724,7 @@ function renderZhFace(app, l) {
 function renderZhPh(app, l) {
   var step = ZH_PH_STEPS[l.idx];
   if (!step) { curLesson = null; render(); return; }
+  if (step.sandhi) { renderZhSandhi(app, l, step); return; } /* v180: 3 bai bien dieu rieng, 4 pha */
   var st = zhPhStatus(l.idx);
   if (st === "future") {
     app.innerHTML = lessonHead({ title: "Phát âm: " + step.title, type: "Tiếng Trung · Pinyin" }) + '<div class="qblock"><p>Bước này chưa mở — mạch pinyin đi theo thứ tự, học xong bước trước đã.</p><div class="row"><button class="btn" id="zhPhBack">Quay lại</button></div></div>';
@@ -23736,7 +23758,6 @@ function renderZhPh(app, l) {
   html += phaseBarHTML(1) + '<div class="qblock"><p class="mut">' + esc(step.hook) + '</p>'
     + '<p><b>Ví dụ trước:</b></p>' + step.examples.map(function (e) { return '<p>· ' + esc(e) + '</p>'; }).join("")
     + (step.id === "tones" ? '<div class="row"><button class="btn" id="zhPhListen">🔊 Nghe 4 thanh mẫu (mā má mǎ mà)</button></div>' : '')
-    + (step.id === "sandhi" ? '<div class="row"><button class="btn" id="zhPhListenSandhi">🔊 Nghe cặp thanh 2–3: 你好，我很好 (ní hǎo, hén hǎo)</button></div>' : '') /* v172 F5: nghe phan biet thanh 2–3 qua bien dieu 3+3 */
     + '<details class="rule-more"><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(step.rule) + '</p><p>💡 <b>Mẹo:</b> ' + esc(step.tip) + '</p></details>'
     + (step.id === "tones" ? (function () { var vs = [videoSlotIf("zhPh:tones"), videoSlotIf("zhPh:pairs"), videoSlotIf("zhPh:sandhi"), videoSlotIf("zhPh:bu"), videoSlotIf("zhPh:song")].filter(function (x) { return !!x; }); if (!vs.length) return ""; if (vs.length === 1) return vs[0]; return vs[0] + '<details class="guide-more"><summary><b>Xem thêm video về thanh điệu</b></summary>' + vs.slice(1).join("") + '</details>'; })() : '')
     /* DOT NOI-DUNG-GIAI-TRI 01/11: 4 clip pinyin con lai (cap thanh, bien dieu,
@@ -23750,7 +23771,6 @@ function renderZhPh(app, l) {
   app.innerHTML = html;
   wireBack();
   var pl = $("#zhPhListen"); if (pl) pl.onclick = function () { zhSpeak("妈麻马骂吗"); };
-  var pls = $("#zhPhListenSandhi"); if (pls) pls.onclick = function () { zhSpeak("你好，我很好"); }; /* v172 F5: nghe phan biet 3+3 (你好→ní hǎo, 很好→hén hǎo) */
   $("#zhPhStart").onclick = function () { l.quiz = true; l.qi = 0; l.score = 0; l.picked = -1; l.finished = false; l.wrong = []; lessonStart = Date.now(); render(); };
   var sk = $("#zhPhSkip"); if (sk) sk.onclick = function () {
     if (state.zhPhSkipped.indexOf(step.id) < 0) state.zhPhSkipped.push(step.id);
@@ -23758,6 +23778,211 @@ function renderZhPh(app, l) {
     var t = zhSessionTarget();
     if (t.kind === "zhLesson") openLesson(t.lesson); else { curLesson = null; go("home"); }
   };
+}
+/* ---------- v180: 3 BAI BIEN DIEU RIENG (ZH) — 4 PHA ---------- */
+/* Moi bai bien dieu (3+3 / 不 / 一) co 4 pha: 0 ly thuyet -> 1 nghe phan
+   biet (doc lien vs doc tach; nghe roi chon pinyin dung; ngu dieu cau)
+   -> 2 doc theo (tang 1 SR + cham thanh dieu YIN) -> 3 kiem tra
+   (renderZhQuiz, dat 80% moi tinh xong nhu cac buoc Pinyin khac).
+   Nghe phan biet dung TTS that: TTS doc chu Han lien se tu ap bien dieu;
+   doc tach (chen 。) cho dang doc rieng tung am tiet, thanh 3 day du. */
+function zhSandhiPhaseChip(ph) {
+  var names = ["1. Lý thuyết", "2. Nghe phân biệt", "3. Đọc theo", "4. Kiểm tra"];
+  return '<span class="chip">Pha ' + (ph + 1) + '/4 · ' + names.map(function (n, i) { return i === ph ? "<b>" + n + "</b>" : n; }).join(" → ") + '</span>';
+}
+function zhSandhiItems(L) {
+  var out = (L.pairs || []).map(function (it) { return it; });
+  (L.inton || []).forEach(function (it) { out.push({ kind: "inton", han: it.han, py: it.py, vi: it.vi, intonKind: it.kind, ans: it.ans, why: it.why }); });
+  return out;
+}
+function renderZhSandhi(app, l, step) {
+  var L = (typeof ZH_SANDHI_LESSONS !== "undefined") ? ZH_SANDHI_LESSONS[step.sandhi] : null;
+  if (!L) { curLesson = null; render(); return; }
+  var st = zhPhStatus(l.idx);
+  if (st === "future") {
+    app.innerHTML = lessonHead({ title: "Biến điệu: " + step.title, type: "Tiếng Trung · Pinyin" }) + '<div class="qblock"><p>Bước này chưa mở — mạch pinyin đi theo thứ tự, học xong bước trước đã.</p><div class="row"><button class="btn" id="zhSdBack">Quay lại</button></div></div>';
+    wireBack();
+    var bb = $("#zhSdBack"); if (bb) bb.onclick = function () { backFromLesson(); };
+    return;
+  }
+  if (l.sdPhase == null) l.sdPhase = 0;
+  if (l.sdIdx == null) l.sdIdx = 0;
+  /* --- PHA 3: kiem tra (giong hanh renderZhPh) --- */
+  if (l.sdPhase === 3) {
+    l.title = "Biến điệu: " + step.title; l.typeLabel = "Tiếng Trung · Pinyin";
+    l.recordErrors = true; l.zhQuizLesson = "zhPh:" + step.id;
+    renderZhQuiz(app, l, step.quiz, function (score, total) {
+      if (total > 0 && score / total >= 0.8) {
+        if (state.zhPhSkipped.indexOf(step.id) >= 0) state.zhPhSkipped.splice(state.zhPhSkipped.indexOf(step.id), 1);
+        state.zhPhDone[step.id] = true;
+        zhAwardOnce("ph:" + step.id);
+      }
+    }, function (score, total) {
+      return (total > 0 && score / total >= 0.8) ? "" : '<p class="mut">Chưa đạt 80% nên bước này chưa tính là xong — bấm Làm lại để đạt chuẩn.</p>';
+    }, {
+      listen: true, barNext: false, repeatWrong: true,
+      onSkip: function () {
+        if (state.zhPhSkipped.indexOf(step.id) < 0) state.zhPhSkipped.push(step.id);
+        saveState();
+        var t = zhSessionTarget();
+        if (t.kind === "zhLesson") openLesson(t.lesson); else { curLesson = null; go("home"); }
+      }
+    });
+    return;
+  }
+  var skipBtn = function () {
+    if (state.zhPhSkipped.indexOf(step.id) < 0) state.zhPhSkipped.push(step.id);
+    saveState();
+    var t = zhSessionTarget();
+    if (t.kind === "zhLesson") openLesson(t.lesson); else { curLesson = null; go("home"); }
+  };
+  /* --- PHA 0: ly thuyet --- */
+  if (l.sdPhase === 0) {
+    var html = lessonHead({ title: "Biến điệu: " + step.title, type: "Tiếng Trung · Pinyin" });
+    html += zhSandhiPhaseChip(0) + '<div class="qblock"><p class="mut">' + esc(step.hook) + '</p>'
+      + '<p><b>Ví dụ trước:</b></p>' + step.examples.map(function (e) { return '<p>· ' + esc(e) + '</p>'; }).join("")
+      + '<div class="row"><button class="btn" id="zhSdListen">🔊 Nghe ví dụ: ' + esc(L.listen) + '</button></div>'
+      + '<details class="rule-more"><summary><b>Xem quy tắc + mẹo</b></summary><p><b>Quy tắc:</b> ' + esc(step.rule) + '</p><p>💡 <b>Mẹo:</b> ' + esc(step.tip) + '</p></details>'
+      + '<p class="mut">Bài này có 4 pha: lý thuyết → nghe phân biệt → đọc theo → kiểm tra (' + step.quiz.length + ' câu).</p>'
+      + '<div class="row"><button class="btn btn-primary" id="zhSdNext">Nghe phân biệt →</button>' + (st === "done" ? '' : ' <button class="btn" id="zhSdSkip">Bỏ qua bước này</button>') + '</div>'
+      + (st === "skipped" ? '<p class="mut">Bước này bạn đã bỏ qua trước đó — làm lại để tính là xong.</p>' : '')
+      + '</div>';
+    app.innerHTML = html;
+    wireBack();
+    var sl = $("#zhSdListen"); if (sl) sl.onclick = function () { zhSpeak(L.listen); };
+    $("#zhSdNext").onclick = function () { l.sdPhase = 1; l.sdIdx = 0; l.sdPicked = -1; l.sdScore = 0; render(); };
+    var sk = $("#zhSdSkip"); if (sk) sk.onclick = skipBtn;
+    return;
+  }
+  /* --- PHA 1: nghe phan biet --- */
+  if (l.sdPhase === 1) {
+    var items = zhSandhiItems(L);
+    if (l.sdIdx >= items.length) {
+      var html2 = lessonHead({ title: "Biến điệu: " + step.title, type: "Tiếng Trung · Pinyin" });
+      html2 += zhSandhiPhaseChip(1) + '<div class="qblock"><p><b>Nghe phân biệt xong: ' + (l.sdScore || 0) + '/' + items.length + ' câu đúng.</b></p><p class="mut">Tai đã phân biệt được cách đọc liền và cách đọc tách — giờ đọc theo từng câu.</p><div class="row"><button class="btn btn-primary" id="zhSdToRead">Đọc theo →</button></div></div>';
+      app.innerHTML = html2;
+      wireBack();
+      $("#zhSdToRead").onclick = function () { l.sdPhase = 2; l.sdIdx = 0; l.sdRead = {}; render(); };
+      return;
+    }
+    var it = items[l.sdIdx];
+    var isInton = it.kind === "inton";
+    var isPick = it.kind === "pick";
+    var html3 = lessonHead({ title: "Biến điệu: " + step.title, type: "Tiếng Trung · Pinyin" });
+    html3 += zhSandhiPhaseChip(1) + '<div class="qblock"><p>Câu ' + (l.sdIdx + 1) + '/' + items.length + ' · Điểm: ' + (l.sdScore || 0) + '</p>'
+      + '<p style="font-size:28px"><b>' + esc(it.han) + '</b> <span class="mut">— ' + esc(it.vi) + '</span></p>'
+      + (isInton
+        ? '<p class="mut">Nghe câu này rồi chọn: ngữ điệu cuối câu đi lên hay đi xuống?</p><div class="row"><button class="btn" id="zhSdHear">🔊 Nghe câu</button></div>'
+        : (isPick
+          ? '<p class="mut">Nghe từ này rồi chọn pinyin ĐÚNG với cách đọc bạn nghe được:</p><div class="row"><button class="btn" id="zhSdHear">🔊 Nghe từ</button></div>'
+          : '<p class="mut">Nghe hai cách đọc rồi chọn cách đọc TỰ NHIÊN khi nói liền:</p><div class="row"><button class="btn" id="zhSdHearA">🔊 Cách đọc A</button> <button class="btn" id="zhSdHearB">🔊 Cách đọc B</button></div>'))
+      + '<div style="margin-top:10px">' + (function () {
+        var opts;
+        if (isInton) opts = ["Đi lên ⤴ cuối câu", "Đi xuống ⤵ cuối câu"];
+        else if (isPick) opts = it.opts;
+        else opts = ["A — đọc liền (tự nhiên)", "B — đọc tách từng âm"];
+        /* v180: dao thu tu A/B theo vi tri cau de khong doan mo: cau chan thi
+           dap an dung o nut dau, cau le thi dap an dung o nut sau. */
+        var order = (l.sdIdx % 2 === 0) ? [0, 1] : [1, 0];
+        return order.map(function (oi) { return '<button class="btn q-opt" data-sd-opt="' + oi + '">' + esc(opts[oi]) + '</button>'; }).join("");
+      })() + '</div>';
+    if (l.sdPicked >= 0) {
+      var okP = l.sdPicked === l.sdCorrect;
+      html3 += '<div class="why show"><p><b>' + (okP ? 'Đúng rồi!' : 'Chưa đúng — đáp án đúng: ' + esc(l.sdCorrectText)) + '</b></p><p>' + esc(it.why) + '</p><p class="mut">' + esc(it.han) + ' — viết ' + esc(it.py) + ', đọc ' + esc(it.read || it.py) + '.</p><div class="row"><button class="btn btn-primary" id="zhSdNextQ">' + (l.sdIdx + 1 >= items.length ? 'Xem kết quả →' : 'Câu tiếp →') + '</button></div></div>';
+    }
+    html3 += '</div>';
+    app.innerHTML = html3;
+    wireBack();
+    var hA = $("#zhSdHearA"); if (hA) hA.onclick = function () { zhSpeak(it.han); };
+    var hB = $("#zhSdHearB"); if (hB) hB.onclick = function () { zhSpeak(it.wrongHan); };
+    var h1 = $("#zhSdHear"); if (h1) h1.onclick = function () { zhSpeak(it.han); };
+    $$("[data-sd-opt]").forEach(function (b) {
+      b.onclick = function () {
+        if (l.sdPicked >= 0) return;
+        var picked = +b.dataset.sdOpt;
+        var correct, correctText;
+        if (isInton) { correct = it.ans === "up" ? 0 : 1; correctText = it.ans === "up" ? "Đi lên ⤴ cuối câu" : "Đi xuống ⤵ cuối câu"; }
+        else if (isPick) { correct = it.a; correctText = it.opts[it.a]; }
+        else { correct = 0; correctText = "A — đọc liền (tự nhiên)"; }
+        l.sdPicked = picked; l.sdCorrect = correct; l.sdCorrectText = correctText;
+        if (picked === correct) { l.sdScore = (l.sdScore || 0) + 1; }
+        else { try { recordZhQuizError("zhPh:" + step.id, l.sdIdx, { q: "Nghe phân biệt: " + it.han + " (" + it.vi + ")", o: [], a: 0, why: it.why }); } catch (e) {} }
+        saveState(); render();
+      };
+    });
+    var nq = $("#zhSdNextQ"); if (nq) nq.onclick = function () { l.sdIdx++; l.sdPicked = -1; render(); };
+    return;
+  }
+  /* --- PHA 2: doc theo (tang 1 SR + YIN) --- */
+  if (l.sdPhase === 2) {
+    var reads = L.read || [];
+    if (l.sdIdx >= reads.length) {
+      var html4 = lessonHead({ title: "Biến điệu: " + step.title, type: "Tiếng Trung · Pinyin" });
+      html4 += zhSandhiPhaseChip(2) + '<div class="qblock"><p><b>Đọc theo xong ' + reads.length + ' câu.</b></p><p class="mut">Giờ kiểm tra ngắn ' + step.quiz.length + ' câu để tính là xong bước này.</p><div class="row"><button class="btn btn-primary" id="zhSdToQuiz">Vào kiểm tra →</button></div></div>';
+      app.innerHTML = html4;
+      wireBack();
+      $("#zhSdToQuiz").onclick = function () { l.sdPhase = 3; l.qi = 0; l.score = 0; l.picked = -1; l.finished = false; l.wrong = []; lessonStart = Date.now(); render(); };
+      return;
+    }
+    var ri = reads[l.sdIdx];
+    var rr = (l.sdRead || {})[l.sdIdx] || {};
+    var html5 = lessonHead({ title: "Biến điệu: " + step.title, type: "Tiếng Trung · Pinyin" });
+    html5 += zhSandhiPhaseChip(2) + '<div class="qblock"><p>Câu ' + (l.sdIdx + 1) + '/' + reads.length + '</p>'
+      + '<p style="font-size:30px"><b>' + esc(ri.han) + '</b></p>'
+      + '<p>Viết: <b>' + esc(ri.py) + '</b> · Đọc: <b>' + esc(ri.read) + '</b></p>'
+      + '<p class="mut">' + esc(ri.vi) + '</p>'
+      + '<div class="row"><button class="btn" id="zhSdReadHear">🔊 Nghe mẫu</button> <button class="btn btn-primary" id="zhSdReadRec">🎤 Đọc to</button> <button class="btn" id="zhSdReadTone">🎵 Chấm thanh điệu</button></div>'
+      + '<div id="zhSdReadRes">' + (rr.tried ? pronTier1VerdictHTML(!!rr.ok, rr.heard || "") : '') + '</div>'
+      + (rr.err ? '<p class="mut">' + esc(rr.err) + '</p>' : '')
+      + (rr.toneRes ? toneYinResultHTML(rr.toneRes.points, rr.toneRes.sc, rr.toneRes.tone) + '<p class="mut">YIN đo cả cụm từ nên điểm chỉ để tham khảo — nghe mẫu rồi so bằng tai mới là chuẩn.</p>' : '')
+      + (rr.toneErr ? '<p class="mut">' + esc(rr.toneErr) + '</p>' : '')
+      + '<p class="mut">Không có mic? Gõ lại cách đọc (pinyin có dấu) rồi bấm Kiểm tra:</p>'
+      + '<div class="row"><input id="zhSdTypeInp" value="' + esc(rr.typed || "") + '" placeholder="vd: ' + esc(ri.read) + '" style="flex:1;min-width:140px"> <button class="btn" id="zhSdTypeCheck">Kiểm tra</button></div>'
+      + (rr.typedChecked ? '<p><b>' + (rr.typedOk ? '✓ Đúng rồi — ' + esc(ri.read) : '✗ Chưa đúng — cách đọc là: ' + esc(ri.read)) + '</b></p>' : '')
+      + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="zhSdNextRead">' + (l.sdIdx + 1 >= reads.length ? 'Vào kiểm tra →' : 'Câu tiếp →') + '</button></div>'
+      + '</div>';
+    app.innerHTML = html5;
+    wireBack();
+    var rh = $("#zhSdReadHear"); if (rh) rh.onclick = function () { zhSpeak(ri.han); };
+    var rrec = $("#zhSdReadRec"); if (rrec) rrec.onclick = function () {
+      rrec.disabled = true; rrec.textContent = "⏺ Đang nghe…";
+      pronTier1Start("zh", function (heard) {
+        var sc = pronTier1Score(heard, ri.han, "zh");
+        if (!l.sdRead) l.sdRead = {};
+        l.sdRead[l.sdIdx] = Object.assign({}, rr, { tried: true, ok: sc === 100, heard: heard, err: "" });
+        render();
+      }, function (kind) {
+        if (!l.sdRead) l.sdRead = {};
+        l.sdRead[l.sdIdx] = Object.assign({}, rr, { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) });
+        render();
+      });
+    };
+    var rt = $("#zhSdReadTone"); if (rt) rt.onclick = function () {
+      rt.disabled = true; rt.textContent = "⏺ Đang ghi — đọc to ngay…";
+      toneYinRecord(ri.tone, function (points, sc) {
+        if (!l.sdRead) l.sdRead = {};
+        l.sdRead[l.sdIdx] = Object.assign({}, rr, { toneRes: { points: points, sc: sc, tone: ri.tone }, toneErr: "" });
+        render();
+      }, function (kind) {
+        if (!l.sdRead) l.sdRead = {};
+        l.sdRead[l.sdIdx] = Object.assign({}, rr, { toneErr: kind === "mic" ? "Không mở được mic — kiểm tra quyền mic rồi thử lại." : (kind === "no-voice" ? "Không nghe thấy giọng — đọc to hơn, một hơi một âm tiết rồi thử lại." : "Không ghi được âm thanh trên máy này — học bằng tai: bấm “Nghe mẫu” rồi đọc theo.") });
+        render();
+      });
+    };
+    var tc = $("#zhSdTypeCheck"); if (tc) tc.onclick = function () {
+      var inp = $("#zhSdTypeInp"); var val = inp ? inp.value : "";
+      var norm = function (x) { return String(x || "").toLowerCase().replace(/[\s。？！，、.,!?]+/g, ""); };
+      if (!l.sdRead) l.sdRead = {};
+      l.sdRead[l.sdIdx] = Object.assign({}, rr, { typed: val, typedChecked: true, typedOk: norm(val) === norm(ri.read) });
+      render();
+    };
+    var nr = $("#zhSdNextRead"); if (nr) nr.onclick = function () {
+      l.sdIdx++;
+      if (l.sdIdx >= reads.length) { l.sdPhase = 3; l.qi = 0; l.score = 0; l.picked = -1; l.finished = false; l.wrong = []; lessonStart = Date.now(); }
+      render();
+    };
+    return;
+  }
 }
 /* ---------- DOT 2c: NGU PHAP / DOC / NGHE TRACK TRUNG ----------
    Ngu phap theo dung mau renderZhPh: ly thuyet (vi du truoc, quy tac +

@@ -3945,7 +3945,7 @@ var RB_NEW_GRAMMAR_MISTAKES = [
 // Hệ đếm HSK 3.0 dùng hệ E (đề cương thi 2025, đã đối chiếu văn bản gốc):
 // tích lũy 300/500/1000/2000/3600/5400/11000. KHÔNG dùng số hệ F.
 var ZH_STAGES = [
-  { stage: 1, title: "Phát âm và chào hỏi", oldCum: 150, eCum: 300, desc: "Mạch pinyin 5 bước + bộ từ chào hỏi; nghe–nói là trục chính", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
+  { stage: 1, title: "Phát âm và chào hỏi", oldCum: 150, eCum: 300, desc: "Mạch pinyin 7 bước + bộ từ chào hỏi; nghe–nói là trục chính", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
   { stage: 2, title: "Thanh điệu và so sánh bước đầu", oldCum: 300, eCum: 500, desc: "Thanh điệu, ngữ pháp 了/过/着/比较 + bộ từ đời sống", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
   { stage: 3, title: "Từ hội thoại sang đoạn văn", oldCum: 600, eCum: 1000, desc: "Bổ ngữ, câu chữ 把, câu chữ 被, đoạn văn ngắn", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
   { stage: 4, title: "Học theo chủ đề, mở rộng theo chữ", oldCum: 1200, eCum: 2000, desc: "Mỗi bài 1 chủ đề lớn; dùng chữ dẫn từ; cặp điểm dễ nhầm", note: "Nhãn HSK là mức đặt chủ đề theo tiến trình cấp." },
@@ -4017,20 +4017,105 @@ var ZH_PH_STEPS = [
       { q: "Âm “u” đứng một mình, thêm gì ở đầu?", o: ["y → yu", "w → wu", "j → ju", "Không thêm"], a: 1, why: "u đứng một mình thêm w: wu.", speak: "五" },
       { q: "不会 đọc thành gì?", o: ["bù huì", "bú huì", "bù huí", "bú huí"], a: 1, why: "不 trước thanh 4 (会 huì) đọc thành bú: bú huì (viết vẫn là bù).", speak: "不会" }
     ] },
-{ id: "sandhi", title: "Luyện biến điệu: 3+3, 不, 一",
-    hook: "Viết thì giữ thanh gốc, đọc mới đổi thanh: 不 trước thanh 4 đọc bú, 一 trước thanh 4 đọc yí, hai thanh 3 liền nhau thì thanh đầu thành thanh 2.",
-    examples: ["你好 nǐ hǎo — viết nǐ hǎo, đọc ní hǎo (3+3: thanh đầu thành thanh 2)", "不会 bù huì — viết bù huì, đọc bú huì (不 trước thanh 4 thành bú)", "一个 yī gè — viết yī gè, đọc yí gè (一 trước thanh 4 thành yí)", "一边 yībiān — viết yībiān, đọc yìbiān (一 trước thanh 1/2/3 thành yì)", "对不起 duìbùqǐ — 不 đứng trước thanh 3 nên vẫn đọc bù", "十一点 shíyī diǎn — viết shíyī diǎn, đọc shíyì diǎn (一 trước thanh 3 thành yì)"],
-    rule: "Biến điệu chỉ đổi CÁCH ĐỌC, không đổi cách viết (chuẩn GB/T 16159-2012 — khi viết pinyin luôn viết thanh gốc: 不 viết bù, 一 viết yī, 你好 viết nǐ hǎo). Khi đọc: hai thanh 3 liền nhau thì thanh đầu thành thanh 2 (你好 đọc ní hǎo); 不 trước thanh 4 đọc thành bú (不会 đọc bú huì), trước thanh 1/2/3 vẫn đọc bù (对不起 đọc duìbùqǐ); 一 trước thanh 4 đọc thành yí (一个 đọc yí gè), trước thanh 1/2/3 đọc thành yì (一边 đọc yìbiān, 十一点 đọc shíyì diǎn).",
+{ id: "sandhi33", title: "Biến điệu 3+3: hai thanh 3 liền nhau", sandhi: "33",
+    hook: "Hai thanh 3 đi liền nhau thì âm đầu đọc thành thanh 2: 你好 viết nǐ hǎo, đọc ní hǎo.",
+    examples: ["你好 nǐ hǎo — viết nǐ hǎo, đọc ní hǎo (xin chào)", "很好 hěn hǎo — viết hěn hǎo, đọc hén hǎo (rất tốt)", "买马 mǎi mǎ — viết mǎi mǎ, đọc mái mǎ (mua ngựa)", "水果 shuǐ guǒ — viết shuǐ guǒ, đọc shuí guǒ (hoa quả)", "我想 wǒ xiǎng — viết wǒ xiǎng, đọc wó xiǎng (tôi muốn)", "可以 kě yǐ — viết kě yǐ, đọc ké yǐ (có thể)"],
+    rule: "Hai thanh 3 liền nhau thì thanh đầu đọc thành thanh 2, thanh sau giữ nguyên thanh 3 (chuẩn GB/T 16159-2012 — khi viết pinyin luôn viết thanh gốc: 你好 viết nǐ hǎo, chỉ khi đọc mới đổi thành ní hǎo). Quy tắc này chỉ áp khi cả hai âm tiết đều mang thanh 3 đầy đủ; trợ từ thanh nhẹ như 吗 không tính (你吗 không đổi thanh).",
     tip: "Nghe cặp tối thiểu trước: bấm Nghe để nghe 你好 đọc thành ní hǎo, rồi nhại theo — tay vẽ đường giọng thanh 2 đi lên.",
     quiz: [
       { q: "“你好” đọc thành gì?", o: ["nǐ hǎo (giữ nguyên)", "ní hǎo (thanh đầu thành thanh 2)"], a: 1, why: "Hai thanh 3 liền nhau thì thanh đầu đọc thành thanh 2: ní hǎo (viết vẫn là nǐ hǎo).", speak: "你好" },
+      { q: "“很好” đọc thành gì?", o: ["hěn hǎo (giữ nguyên)", "hén hǎo (thanh đầu thành thanh 2)"], a: 1, why: "很好 có hai thanh 3 liền nhau nên đọc hén hǎo (viết vẫn là hěn hǎo).", speak: "很好" },
+      { q: "“买马” đọc thành gì?", o: ["mǎi mǎ (giữ nguyên)", "mái mǎ (thanh đầu thành thanh 2)"], a: 1, why: "买 (thanh 3) + 马 (thanh 3) nên đọc mái mǎ.", speak: "买马" },
+      { q: "“我想” — âm nào đổi thanh khi đọc liền?", o: ["想 → xiáng", "我 → wó"], a: 1, why: "我 (thanh 3) đứng trước 想 (thanh 3) nên đọc thành wó: wó xiǎng; 想 giữ nguyên xiǎng.", speak: "我想" },
+      { q: "Cặp nào KHÔNG đổi thanh khi đọc liền?", o: ["你好", "你吗"], a: 1, why: "吗 là thanh nhẹ, không phải thanh 3 nên 你 không đổi thanh; 你好 có hai thanh 3 liền nhau nên đổi thành ní hǎo.", speak: "你吗" },
+      { q: "Viết pinyin của “你好” thì viết thế nào?", o: ["ní hǎo (viết như đọc)", "nǐ hǎo (viết thanh gốc)"], a: 1, why: "Chuẩn GB/T 16159-2012: khi viết luôn viết thanh gốc; chỉ khi đọc mới đổi thanh.", speak: "你好" }
+    ] },
+{ id: "sandhiBu", title: "Biến điệu 不: bù → bú trước thanh 4", sandhi: "bu",
+    hook: "不 trước thanh 4 đọc thành bú, trước thanh 1/2/3 vẫn đọc bù: 不会 đọc bú huì, 不好 vẫn đọc bù hǎo.",
+    examples: ["不会 bù huì — viết bù huì, đọc bú huì (không biết)", "不是 bù shì — viết bù shì, đọc bú shì (không phải)", "不对 bù duì — viết bù duì, đọc bú duì (không đúng)", "不好 bù hǎo — vẫn đọc bù hǎo (không tốt; 好 là thanh 3)", "不多 bù duō — vẫn đọc bù duō (không nhiều; 多 là thanh 1)", "对不起 duìbùqǐ — 不 đứng trước 起 (thanh 3) nên vẫn đọc bù"],
+    rule: "不 trước thanh 4 đọc thành thanh 2 (bú), trước thanh 1/2/3 vẫn đọc thanh 4 (bù). Khi viết pinyin luôn viết thanh gốc bù (chuẩn GB/T 16159-2012); chỉ khi đọc mới đổi thanh.",
+    tip: "Nhìn thanh của chữ SAU 不: thanh 4 thì đọc bú, còn lại đọc bù. Đọc chậm từng cặp rồi đọc liền cả câu.",
+    quiz: [
       { q: "“不会” đọc thành gì?", o: ["bù huì", "bú huì"], a: 1, why: "不 trước thanh 4 (会 huì) đọc thành bú: bú huì (viết vẫn là bù).", speak: "不会" },
+      { q: "“不是” đọc thành gì?", o: ["bù shì", "bú shì"], a: 1, why: "不 trước thanh 4 (是 shì) đọc thành bú: bú shì.", speak: "不是" },
+      { q: "“不好” đọc thành gì?", o: ["bú hǎo", "bù hǎo"], a: 1, why: "不 đứng trước 好 (thanh 3) nên vẫn đọc bù: bù hǎo.", speak: "不好" },
+      { q: "“不多” đọc thành gì?", o: ["bú duō", "bù duō"], a: 1, why: "不 đứng trước 多 (thanh 1) nên vẫn đọc bù: bù duō.", speak: "不多" },
+      { q: "“对不起” — 不 đọc thành gì?", o: ["bú (thành thanh 2)", "bù (giữ nguyên)"], a: 1, why: "不 đứng trước 起 (thanh 3) nên vẫn đọc bù: duìbùqǐ.", speak: "对不起" },
+      { q: "不 đứng trước thanh 4 thì đọc thành gì?", o: ["bù (giữ nguyên)", "bú (thành thanh 2)"], a: 1, why: "Quy tắc biến điệu 不: trước thanh 4 đọc thành bú.", speak: "不会" }
+    ] },
+{ id: "sandhiYi", title: "Biến điệu 一: yī → yí / yì", sandhi: "yi",
+    hook: "一 trước thanh 4 đọc yí, trước thanh 1/2/3 đọc yì, đứng cuối hoặc làm số thứ tự đọc yī: 一个 yí gè, 一天 yì tiān, 十一 shí yī.",
+    examples: ["一个 yī gè — viết yī gè, đọc yí gè (một cái)", "一天 yī tiān — viết yī tiān, đọc yì tiān (một ngày)", "一边 yībiān — viết yībiān, đọc yìbiān (một bên)", "一起 yīqǐ — viết yīqǐ, đọc yìqǐ (cùng nhau)", "一次 yī cì — viết yī cì, đọc yí cì (một lần)", "十一 shí yī — viết shí yī, đọc shí yī (mười một; 一 đứng cuối)"],
+    rule: "一 trước thanh 4 đọc thành thanh 2 (yí), trước thanh 1/2/3 đọc thành thanh 4 (yì), đứng một mình / đứng cuối / làm số thứ tự đọc thanh 1 (yī). Khi viết pinyin luôn viết thanh gốc yī (chuẩn GB/T 16159-2012); chỉ khi đọc mới đổi thanh.",
+    tip: "Nhìn thanh của chữ SAU 一: thanh 4 thì yí, thanh 1/2/3 thì yì, không có chữ sau thì yī.",
+    quiz: [
       { q: "“一个” đọc thành gì?", o: ["yī gè", "yí gè"], a: 1, why: "一 trước thanh 4 (个 gè) đọc thành yí: yí gè (viết vẫn là yī).", speak: "一个" },
       { q: "“一边” đọc thành gì?", o: ["yībiān", "yìbiān"], a: 1, why: "一 trước thanh 1 (边 biān) đọc thành yì: yìbiān (viết vẫn là yī).", speak: "一边" },
-      { q: "“对不起” — 不 đọc thành gì?", o: ["bú (thành thanh 2)", "bù (giữ nguyên)"], a: 1, why: "不 đứng trước 起 (thanh 3) nên vẫn đọc bù: duìbùqǐ.", speak: "对不起" },
+      { q: "“一天” đọc thành gì?", o: ["yī tiān", "yì tiān"], a: 1, why: "一 trước thanh 1 (天 tiān) đọc thành yì: yì tiān.", speak: "一天" },
+      { q: "“十一” — 一 ở cuối đọc thành gì?", o: ["yì (thanh 4)", "yī (thanh 1)"], a: 1, why: "一 đứng cuối (mười một) nên đọc thanh 1: shí yī.", speak: "十一" },
+      { q: "Câu “你是学生吗？” — ngữ điệu cuối câu thế nào?", o: ["Đi xuống", "Đi lên"], a: 1, why: "Câu hỏi với 吗: giọng đi lên ở cuối câu.", speak: "你是学生吗" },
       { q: "Viết pinyin của “不” và “一” thì viết thanh nào?", o: ["Viết thanh đọc được (bú, yí)", "Luôn viết thanh gốc (bù, yī)"], a: 1, why: "Chuẩn GB/T 16159-2012: khi viết luôn viết thanh gốc; chỉ khi đọc mới đổi thanh.", speak: "不一" }
     ] }
-];
+]
+/* v180: du lieu luyen bien dieu rieng cho 3 bai sandhi — moi bai: pairs (nghe
+   phan biet: kind "ab" = doc lien vs doc tach, kind "pick" = nghe roi chon
+   pinyin dung), read (doc theo: han + pinyin viet + cach doc + nghia +
+   tone = thanh cua am doi thanh, de YIN cham), inton (chi bai yi: ngu
+   dieu cau hoi / tran thuat / cam than). Tat ca vi du deu la tu/cau that,
+   pinyin theo giao trinh HSK; viet pinyin luon viet thanh goc. */
+var ZH_SANDHI_LESSONS = {
+"33": {
+  listen: "你好，我很好",
+  pairs: [
+    { kind: "ab", han: "你好", py: "nǐ hǎo", read: "ní hǎo", vi: "xin chào", wrongHan: "你。好。", wrongRead: "nǐ hǎo (đọc tách từng âm)", why: "Nói liền: hai thanh 3 đi liền thì âm đầu đọc thành thanh 2 — ní hǎo. Đọc tách từng âm (nǐ hǎo) nghe rời rạc, không phải cách người bản ngữ nói." },
+    { kind: "ab", han: "很好", py: "hěn hǎo", read: "hén hǎo", vi: "rất tốt", wrongHan: "很。好。", wrongRead: "hěn hǎo (đọc tách từng âm)", why: "很 (thanh 3) + 好 (thanh 3) nên đọc hén hǎo khi nói liền." },
+    { kind: "ab", han: "买马", py: "mǎi mǎ", read: "mái mǎ", vi: "mua ngựa", wrongHan: "买。马。", wrongRead: "mǎi mǎ (đọc tách từng âm)", why: "买 (thanh 3) + 马 (thanh 3) nên đọc mái mǎ khi nói liền." },
+    { kind: "ab", han: "我想", py: "wǒ xiǎng", read: "wó xiǎng", vi: "tôi muốn", wrongHan: "我。想。", wrongRead: "wǒ xiǎng (đọc tách từng âm)", why: "我 (thanh 3) đứng trước 想 (thanh 3) nên đọc thành wó: wó xiǎng." }
+  ],
+  read: [
+    { han: "你好。", py: "nǐ hǎo", read: "ní hǎo", vi: "Xin chào.", tone: 2 },
+    { han: "你好吗？", py: "nǐ hǎo ma", read: "ní hǎo ma", vi: "Bạn có khỏe không?", tone: 2 },
+    { han: "我很好，谢谢。", py: "wǒ hěn hǎo, xièxie", read: "wǒ hén hǎo, xièxie", vi: "Tôi rất khỏe, cảm ơn.", tone: 2 },
+    { han: "我想买水果。", py: "wǒ xiǎng mǎi shuǐguǒ", read: "wó xiǎng mái shuǐguǒ", vi: "Tôi muốn mua hoa quả.", tone: 2 }
+  ]
+},
+"bu": {
+  listen: "不会，不是，不好",
+  pairs: [
+    { kind: "ab", han: "不会", py: "bù huì", read: "bú huì", vi: "không biết / không thể", wrongHan: "不。会。", wrongRead: "bù huì (đọc tách từng âm)", why: "不 trước thanh 4 (会 huì) nên đọc thành bú: bú huì." },
+    { kind: "ab", han: "不是", py: "bù shì", read: "bú shì", vi: "không phải", wrongHan: "不。是。", wrongRead: "bù shì (đọc tách từng âm)", why: "不 trước thanh 4 (是 shì) nên đọc thành bú: bú shì." },
+    { kind: "pick", han: "不好", py: "bù hǎo", read: "bù hǎo", vi: "không tốt", opts: ["bù hǎo", "bú hǎo"], a: 0, why: "不 đứng trước 好 (thanh 3) nên vẫn đọc bù — chỉ trước thanh 4 mới thành bú." },
+    { kind: "pick", han: "不多", py: "bù duō", read: "bù duō", vi: "không nhiều", opts: ["bú duō", "bù duō"], a: 1, why: "不 đứng trước 多 (thanh 1) nên vẫn đọc bù." }
+  ],
+  read: [
+    { han: "我不会说中文。", py: "wǒ bù huì shuō Zhōngwén", read: "wǒ bú huì shuō Zhōngwén", vi: "Tôi không biết nói tiếng Trung.", tone: 2 },
+    { han: "这不是我的书。", py: "zhè bù shì wǒ de shū", read: "zhè bú shì wǒ de shū", vi: "Đây không phải sách của tôi.", tone: 2 },
+    { han: "今天我不去。", py: "jīntiān wǒ bù qù", read: "jīntiān wǒ bú qù", vi: "Hôm nay tôi không đi.", tone: 2 },
+    { han: "对不起，我不忙。", py: "duìbùqǐ, wǒ bù máng", read: "duìbùqǐ, wǒ bù máng", vi: "Xin lỗi, tôi không bận.", tone: 4 }
+  ]
+},
+"yi": {
+  listen: "一个，一天，一边",
+  pairs: [
+    { kind: "ab", han: "一个", py: "yī gè", read: "yí gè", vi: "một cái", wrongHan: "一。个。", wrongRead: "yī gè (đọc tách từng âm)", why: "一 trước thanh 4 (个 gè) nên đọc thành yí: yí gè." },
+    { kind: "pick", han: "一边", py: "yībiān", read: "yìbiān", vi: "một bên", opts: ["yíbiān", "yìbiān"], a: 1, why: "一 trước 边 (thanh 1) nên đọc thành yì — chỉ trước thanh 4 mới thành yí." },
+    { kind: "pick", han: "十一点", py: "shíyī diǎn", read: "shíyì diǎn", vi: "11 giờ", opts: ["shíyī diǎn", "shíyì diǎn"], a: 1, why: "一 đứng trước 点 (thanh 3) nên đọc thành yì: shíyì diǎn." },
+    { kind: "pick", han: "十一", py: "shí yī", read: "shí yī", vi: "mười một", opts: ["shí yì", "shí yī"], a: 1, why: "一 đứng cuối (mười một) nên đọc thanh 1: shí yī." }
+  ],
+  inton: [
+    { han: "我是学生。", py: "wǒ shì xuésheng", vi: "Tôi là học sinh.", kind: "trần thuật", ans: "down", why: "Câu trần thuật: giọng đi xuống ở cuối câu." },
+    { han: "你是学生吗？", py: "nǐ shì xuésheng ma", vi: "Bạn là học sinh à?", kind: "câu hỏi", ans: "up", why: "Câu hỏi với 吗: giọng đi lên ở cuối câu." },
+    { han: "太好了！", py: "tài hǎo le", vi: "Tốt quá!", kind: "cảm thán", ans: "down", why: "Câu cảm thán: giọng đi xuống ở cuối câu (rơi mạnh, dứt khoát)." }
+  ],
+  read: [
+    { han: "我有一个问题。", py: "wǒ yǒu yī gè wèntí", read: "wǒ yǒu yí gè wèntí", vi: "Tôi có một câu hỏi.", tone: 2 },
+    { han: "我们一起去。", py: "wǒmen yīqǐ qù", read: "wǒmen yìqǐ qù", vi: "Chúng ta cùng đi.", tone: 4 },
+    { han: "今天是星期一。", py: "jīntiān shì xīngqīyī", read: "jīntiān shì xīngqīyī", vi: "Hôm nay là thứ Hai.", tone: 1 },
+    { han: "十一点见。", py: "shíyī diǎn jiàn", read: "shíyì diǎn jiàn", vi: "11 giờ gặp nhé.", tone: 4 }
+  ]
+}
+};
+
 // Bộ từ khởi động chặng 1 (tự soạn theo chủ đề sách HSK1: chào hỏi, bản thân,
 // giao tiếp tối thiểu). Các từ là từ cơ bản thông dụng; câu ví dụ tự soạn,
 // không trích nguyên văn giáo trình.
