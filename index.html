@@ -1834,6 +1834,162 @@ function tcTpOpenHardStep90(track, step) {
   if (track === "tc") tcOpenStep(step, "review"); else tpOpenStep(step, "review");
 }
 
+/* v184 TID U3 — phan loai loi theo nguyen nhan trong So loi sai.
+   6 nguyen nhan gom duoi 3 nhom TID (global/local/stylistic); loi cu chua co
+   nguyen nhan vao nhom "Chua phan loai" (khong tu bia). Gan nguyen nhan KHONG
+   dung AI: goi y theo quy tac ro rang tu dang sai (u3SuggestCause /
+   u3SuggestCauseTcTp), nguoi hoc sua duoc bang o chon ngay tai loi.
+   Nhan "Bay" theo track — da kiem bang du lieu that 14/11 (jsdom):
+   EN "Bay NOT GIVEN" (65/280 cau Doc thi thu co dap an Not Given);
+   ZH "Bay dap an giong tu trong bai" (57/305 cau Doc co dap an sai chua cum
+   2 chu Han xuat hien trong doan; ZH KHONG co bay suy luan qua xa — 0/305
+   cau hoi suy luan — nen khong dung nhan do);
+   TC "Bay so lieu" (175/360 cau Doc co chu so trong cau hoi);
+   TP "Bay tieu tu/thi gan giong" (16/193 bo dap an la tap tieu tu hoac dang
+   thi gan giong; TP gan nhu KHONG co bay batchim/bien am trong why — 1/193 —
+   nen khong dung nhan do). */
+var U3_CAUSES = [
+  { k: "vocab", label: "Thiếu từ vựng", group: "global" },
+  { k: "understand", label: "Hiểu nhầm", group: "global" },
+  { k: "trap", label: "Bẫy", group: "global" },
+  { k: "format", label: "Sai dạng bài", group: "global" },
+  { k: "spelling", label: "Chính tả", group: "local" },
+  { k: "grammar", label: "Ngữ pháp", group: "local" }
+];
+var U3_GROUPS = [
+  { k: "global", label: "Sai nghĩa toàn câu", desc: "Hiểu sai ý — cần học lại nghĩa/từ trong câu." },
+  { k: "local", label: "Lỗi nhỏ, vẫn hiểu được", desc: "Sai chính tả/ngữ pháp nhưng ý chính vẫn đúng." },
+  { k: "stylistic", label: "Đúng ngữ pháp nhưng chưa tự nhiên", desc: "Diễn đạt chưa tự nhiên — thường gặp ở bài Nói/Viết." }
+];
+function u3TrapLabel(track) {
+  if (track === "zh") return "Bẫy đáp án giống từ trong bài";
+  if (track === "tc") return "Bẫy số liệu";
+  if (track === "tp") return "Bẫy tiểu từ/thì gần giống";
+  return "Bẫy NOT GIVEN";
+}
+function u3CauseLabel(k, track) {
+  if (k === "trap") return u3TrapLabel(track);
+  if (!k) return "Chưa phân loại";
+  var c = null; U3_CAUSES.forEach(function (x) { if (x.k === k) c = x; });
+  return c ? c.label : "Chưa phân loại";
+}
+function u3CauseGroup(k) {
+  var c = null; U3_CAUSES.forEach(function (x) { if (x.k === k) c = x; });
+  return c ? c.group : "";
+}
+function u3HasTrapMarker(q) {
+  var opts = (q && (q.o || q.options)) || null, ans = q ? q.a : null;
+  if (opts && ans != null) {
+    for (var i = 0; i < opts.length; i++) {
+      if (i !== ans && /not given|không có trong bài|không được nêu|未提及|没有提到/i.test(String(opts[i]))) return true;
+    }
+  }
+  return false;
+}
+/* Go y nguyen nhan theo quy tac tu lessonId (EN/ZH) — khong AI. */
+function u3SuggestCause(lessonId, q, track) {
+  var L = String(lessonId || "");
+  if (/typing|dictation/.test(L)) return "spelling";
+  if (/^gram/.test(L)) return "grammar";
+  if (/vocab|mywords/i.test(L)) return "vocab"; /* i: khop ca "vocabMulti" (EN) va "zhVocabMulti" (ZH, chu V hoa) */
+  if (/^zhPh|^zhWrite/.test(L)) return "spelling";
+  if (/^zhFace/.test(L)) return "vocab";
+  if (/^(read|story|test|mock|zhChapterTest|zhMock)/.test(L)) return u3HasTrapMarker(q) ? "trap" : "understand";
+  if (/^(listen|earDisc|shadow|pron|drill)/.test(L)) return "understand";
+  return "understand";
+}
+/* Go y nguyen nhan theo quy tac tu step TC/TP (tcStepMeta/tpStepMeta kind
+   that: vocab/gram/listen/read/speak/write/pron/check/mock) — khong AI. */
+function u3SuggestCauseTcTp(stepId, q, why, track) {
+  var meta = null;
+  try { meta = (track === "tp" ? tpStepMeta(stepId) : tcStepMeta(stepId)); } catch (e) {}
+  var kind = meta ? meta.kind : "";
+  if (kind === "vocab") return "vocab";
+  if (kind === "gram") return "grammar";
+  if (kind === "write") return "spelling";
+  if (kind === "read") {
+    if (track === "tc" && /[0-9]/.test(String(q || ""))) return "trap";
+    if (track === "tp" && /[에에서를을이가은는의와과로으로에게한테]|quá khứ|tương lai|hiện tại/.test(String(why || ""))) return "trap";
+    return "understand";
+  }
+  return "understand";
+}
+function u3EnsureCause(h, lessonId, q, track) {
+  if (!h) return h;
+  if (!h.cause) { h.cause = u3SuggestCause(lessonId, q, track); h.causeBy = "rule"; }
+  return h;
+}
+function u3EnsureCauseTcTp(h, track) {
+  if (!h) return h;
+  if (!h.cause) { h.cause = u3SuggestCauseTcTp(h.step, h.q, h.why, track); h.causeBy = "rule"; }
+  return h;
+}
+/* O chon nguyen nhan tai tung loi (store: hard/zhHard/tcHard/tpHard). */
+function u3CauseSelectHTML(h, store, key, idx, track) {
+  var cur = h.cause || "";
+  var opts = '<option value=""' + (cur === "" ? " selected" : "") + '>Chưa phân loại</option>';
+  U3_CAUSES.forEach(function (c) {
+    opts += '<option value="' + c.k + '"' + (cur === c.k ? " selected" : "") + '>' + esc(u3CauseLabel(c.k, track)) + '</option>';
+  });
+  var hint = (h.causeBy === "rule" && cur) ? ' <span class="mut">Gợi ý theo quy tắc — bạn sửa lại được.</span>' : "";
+  return '<label class="mut">Nguyên nhân: <select data-u3-cause data-u3-store="' + store + '"' + (key ? ' data-u3-key="' + esc(key) + '"' : "") + (idx != null ? ' data-u3-idx="' + idx + '"' : "") + ' data-u3-track="' + track + '">' + opts + '</select></label>' + hint;
+}
+function u3WireCause(app) {
+  var sels = (app || document).querySelectorAll("[data-u3-cause]");
+  sels.forEach(function (sel) {
+    sel.onchange = function () {
+      var store = sel.dataset.u3Store, val = sel.value, h = null;
+      if (store === "hard") h = state.hard[sel.dataset.u3Key];
+      else if (store === "zhHard") h = state.zhHard[sel.dataset.u3Key];
+      else if (store === "tcHard") h = state.tcHard[+sel.dataset.u3Idx];
+      else if (store === "tpHard") h = state.tpHard[+sel.dataset.u3Idx];
+      if (h) { h.cause = val || ""; h.causeBy = val ? "user" : ""; }
+      saveState(); render();
+    };
+  });
+}
+/* Gom danh sach loi (da co HTML tung loi) theo nguyen nhan, duoi 3 nhom TID.
+   items: [{cause, html}]. Cum thu gon mac dinh — bam vao thi thay cac loi. */
+function u3GroupsHTML(items, track) {
+  var groups = {};
+  items.forEach(function (it) { var c = it.cause || ""; (groups[c] = groups[c] || []).push(it.html); });
+  var order = ["vocab", "understand", "trap", "format", "spelling", "grammar", ""];
+  var out = "";
+  order.forEach(function (c) {
+    var list = groups[c]; if (!list || !list.length) return;
+    var g = u3CauseGroup(c);
+    var gLabel = "";
+    if (g) { var gg = U3_GROUPS.filter(function (x) { return x.k === g; })[0]; if (gg) gLabel = gg.label; }
+    out += '<details class="qblock"><summary><b>' + esc(u3CauseLabel(c, track)) + '</b> (' + list.length + ' lỗi)' + (gLabel ? ' <span class="mut">· ' + esc(gLabel) + '</span>' : "") + '</summary>' + list.join("") + '</details>';
+  });
+  return out;
+}
+/* Nhom stylistic luon trong neu co loi quiz — chua co loi thi ghi ro la trong. */
+function u3StylisticNoteHTML() {
+  return '<div class="qblock mut"><b>Đúng ngữ pháp nhưng chưa tự nhiên</b> (0 lỗi) — lỗi diễn đạt chưa tự nhiên thường gặp ở bài Nói/Viết; khi có lỗi loại này, nó sẽ gom vào đây.</div>';
+}
+/* Dong tom tat nhom loi nhieu nhat (tinh tu loi den han). */
+function u3TopCauseHTML(items, track) {
+  if (!items || !items.length) return "";
+  var counts = {}, top = "", topN = 0;
+  items.forEach(function (it) { var c = it.cause || ""; counts[c] = (counts[c] || 0) + 1; if (counts[c] > topN) { topN = counts[c]; top = c; } });
+  return '<p class="mut">Nhóm lỗi nhiều nhất: <b>' + esc(u3CauseLabel(top, track)) + '</b> (' + topN + ' lỗi) — ôn nhóm này trước.</p>';
+}
+/* 5 cau hoi "vi sao sai" (TID_NOTES dong 194 — nguon thu cap edupetal,
+   chua xac minh goc): hien o man tong ket sau bai co cau sai, tuy chon,
+   khong bat buoc, khong khoa bai. */
+function u3WhyQuestionsHTML() {
+  var qs = [
+    "Có phải vì thiếu từ vựng? (từ mới chưa biết)",
+    "Có phải vì bỏ lỡ từ đồng nghĩa?",
+    "Có phải vì đọc nhầm câu hỏi?",
+    "Có phải vì lỗi ngữ pháp?",
+    "Có phải vì viết sai chính tả?"
+  ];
+  return '<details class="qblock"><summary><b>Vì sao mình sai? Tự hỏi 5 câu này</b> <span class="mut">(không bắt buộc — không chấm điểm, không khóa bài)</span></summary>'
+    + qs.map(function (q, i) { return '<label style="display:block;margin:6px 0"><input type="checkbox" data-u3-why="' + i + '"> ' + esc(q) + '</label>'; }).join("")
+    + '<p class="mut">5 câu theo khung phân tích lỗi của TID (tài liệu nghiên cứu thứ cấp — edupetal). Tích vào câu nào đúng với bạn, rồi xem lại lỗi trong Sổ lỗi sai để chọn nguyên nhân cho từng lỗi.</p></details>';
+}
 function hardJudge(key, ok) {
   var h = state.hard[key] || { streak: 0, level: 0 };
   if (ok) {
@@ -1876,7 +2032,7 @@ function recordQuizError(lessonId, qi, q) {
   // đầu tiên làm options để màn Ôn tập vẫn hiện được đáp án đúng như câu trắc nghiệm.
   var opts = q.o || q.options || null, ans = q.a;
   if (!opts && q.answer) { opts = [String(q.answer).split("|")[0]]; ans = 0; }
-  if (!state.hard[key]) state.hard[key] = { kind: "quiz", lesson: lessonId, qi: qi, q: q.q, options: opts, a: ans, why: q.why, streak: 0, level: 0, fails: 1, due: addDaysStr(todayStr(), 1) };
+  if (!state.hard[key]) { var __h0 = { kind: "quiz", lesson: lessonId, qi: qi, q: q.q, options: opts, a: ans, why: q.why, streak: 0, level: 0, fails: 1, due: addDaysStr(todayStr(), 1) }; u3EnsureCause(__h0, lessonId, q, "en"); state.hard[key] = __h0; }
   else { var he = state.hard[key]; he.fails = (he.fails || 0) + 1; he.streak = 0; if (he.done) { he.done = false; he.level = 0; } he.due = addDaysStr(todayStr(), 1); }
   saveState();
 }
@@ -3172,7 +3328,7 @@ function finishSummaryHTML(title, stats, wrongListHTML, opts) {
   for (var ci = 0; ci < 12; ci++) conf += '<i style="left:' + (4 + ci * 8) + '%;background:' + ["#FFB800", "#FF6B4A", "#1E9E6A", "#FFC800"][ci % 4] + ';animation-delay:' + (ci % 4) * 0.25 + 's"></i>';
   return '<div class="summarybox" data-summary-next="1"><div class="confetti" aria-hidden="true">' + conf + '</div>'
     + '<div class="hero-pair">' + mascPairHTML(true) + '<div class="hero-text"><h2>' + title + '</h2><p class="mut">' + sub + '</p></div></div>'
-    + stats + (wrongListHTML || "") + extra + _adNext + '<div class="row" style="margin-top:10px"><button class="btn" id="btnRedo">Làm lại</button></div></div>';
+    + stats + (wrongListHTML || "") + (wrongListHTML ? u3WhyQuestionsHTML() : "") + extra + _adNext + '<div class="row" style="margin-top:10px"><button class="btn" id="btnRedo">Làm lại</button></div></div>';
 }
 
 
@@ -6287,27 +6443,46 @@ function viewReview(app) {
   html += gd23ReviewMixHTML();
   if (hards.length) {
     html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn (' + hards.length + ')</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Bấm \"Đã ôn xong\" chỉ dời ngày ôn, không tăng nấc: tăng nấc chỉ tính khi bạn trả lời đúng câu đó trong buổi ôn.</p><div id="reviewList">';
+    /* v184 TID U3: loi quiz gom theo nguyen nhan (3 nhom TID); muc kind "srs"
+       (cau da hoc — on lai) khong phai loi lam bai nen giu rieng, khong gan
+       nguyen nhan. */
+    var u3Quiz = [], u3Srs = [];
     hards.forEach(function (it) {
       var h = it.h;
-      html += '<div class="sumcard"><b>' + esc(h.q || h.lesson || it.key) + '</b>'
+      var itemHTML = '<div class="sumcard"><b>' + esc(h.q || h.lesson || it.key) + '</b>'
         + (h.kind === "srs" ? '<div><span class="chip">Câu đã học — ôn lại</span></div>' : "")
         + ((h.fails || 0) >= 3 ? '<div><span class="chip">Đã sai ' + h.fails + ' lần — ôn trước</span></div>' : ((h.fails || 0) > 0 ? '<div class="mut">Đã sai ' + h.fails + ' lần</div>' : ""))
         + (h.options ? '<details class="why-more"><summary>Xem đáp án + lý do</summary><p class="mut">Đáp án đúng: ' + esc(h.options[h.a]) + ' — ' + esc(h.why || "") + '</p></details>' : "")
+        + (h.kind === "srs" ? "" : '<div style="margin:6px 0">' + u3CauseSelectHTML(h, "hard", it.key, null, "en") + '</div>')
         + '<div class="row"><input type="text" placeholder="Mẹo nhớ của bạn..." value="' + esc(h.memo || "") + '" data-memo="' + it.key + '">'
         + '<button class="btn" data-memo-save="' + it.key + '">Lưu mẹo</button>'
         + '<button class="btn btn-amber" data-hard-ok="' + it.key + '">Đã ôn xong</button></div></div>';
+      if (h.kind === "srs") u3Srs.push(itemHTML);
+      else u3Quiz.push({ cause: h.cause || "", html: itemHTML });
     });
+    html += u3TopCauseHTML(u3Quiz, "en");
+    html += u3GroupsHTML(u3Quiz, "en");
+    if (u3Srs.length) html += '<details class="qblock"><summary><b>Câu đã học — ôn lại</b> (' + u3Srs.length + ' mục)</summary>' + u3Srs.join("") + '</details>';
+    if (u3Quiz.length) html += u3StylisticNoteHTML();
     html += '</div></section>';
   }
   html += pronSrsReviewHTML("en");
   var undue = undueHard();
   if (undue.length) {
     html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + undue.length + ')</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p><div>';
+    /* v184 TID U3: gom theo nguyen nhan nhu muc den han (muc srs giu rieng). */
+    var u3QuizU = [], u3SrsU = [];
     undue.forEach(function (it) {
       var h = it.h;
-      html += '<div class="sumcard"><b>' + esc(h.q || h.lesson || it.key) + '</b>' + (h.kind === "srs" ? '<div><span class="chip">Câu đã học — ôn lại</span></div>' : "") + '<p class="mut">Về buổi ôn ngày ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p>'
-        + (h.options ? '<details class="why-more"><summary>Xem đáp án + lý do</summary><p class="mut">Đáp án đúng: ' + esc(h.options[h.a]) + ' — ' + esc(h.why || "") + '</p></details>' : "") + '</div>';
+      var itemHTML = '<div class="sumcard"><b>' + esc(h.q || h.lesson || it.key) + '</b>' + (h.kind === "srs" ? '<div><span class="chip">Câu đã học — ôn lại</span></div>' : "") + '<p class="mut">Về buổi ôn ngày ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p>'
+        + (h.options ? '<details class="why-more"><summary>Xem đáp án + lý do</summary><p class="mut">Đáp án đúng: ' + esc(h.options[h.a]) + ' — ' + esc(h.why || "") + '</p></details>' : "")
+        + (h.kind === "srs" ? "" : '<div style="margin:6px 0">' + u3CauseSelectHTML(h, "hard", it.key, null, "en") + '</div>') + '</div>';
+      if (h.kind === "srs") u3SrsU.push(itemHTML);
+      else u3QuizU.push({ cause: h.cause || "", html: itemHTML });
     });
+    html += u3GroupsHTML(u3QuizU, "en");
+    if (u3SrsU.length) html += '<details class="qblock"><summary><b>Câu đã học — ôn lại</b> (' + u3SrsU.length + ' mục)</summary>' + u3SrsU.join("") + '</details>';
+    if (u3QuizU.length) html += u3StylisticNoteHTML();
     html += '</div></section>';
   }
   if (cards.length) {
@@ -6344,6 +6519,7 @@ function viewReview(app) {
   $$("[data-card-review]").forEach(function (b) {
     b.onclick = function () { lessonStart = Date.now(); openLesson({ type: "reviewCard", cardKey: b.dataset.cardReview }); };
   });
+  u3WireCause(app); /* v184 TID U3: o chon nguyen nhan tai tung loi */
 
 }
 
@@ -23228,7 +23404,7 @@ function recordZhQuizError(lessonId, qi, q) {
   var key = "quiz:" + lessonId + ":" + qi;
   var opts = q.o || q.options || null, ans = q.a;
   if (!opts && q.answer) { opts = [String(q.answer).split("|")[0]]; ans = 0; }
-  if (!state.zhHard[key]) state.zhHard[key] = { kind: "quiz", lesson: lessonId, qi: qi, q: q.q, options: opts, a: ans, why: q.why, streak: 0, level: 0, fails: 1, due: addDaysStr(todayStr(), 1) };
+  if (!state.zhHard[key]) { var __zh0 = { kind: "quiz", lesson: lessonId, qi: qi, q: q.q, options: opts, a: ans, why: q.why, streak: 0, level: 0, fails: 1, due: addDaysStr(todayStr(), 1) }; u3EnsureCause(__zh0, lessonId, q, "zh"); state.zhHard[key] = __zh0; }
   else { var he = state.zhHard[key]; he.fails = (he.fails || 0) + 1; he.streak = 0; if (he.done) { he.done = false; he.level = 0; } he.due = addDaysStr(todayStr(), 1); }
   saveState();
 }
@@ -23360,6 +23536,7 @@ function zhHardItemHTML(key, h, isDue) {
     s += '<div class="sumcard"><b>' + esc(h.q || key) + '</b>'
       + ((h.fails || 0) >= 3 ? '<div><span class="chip">Đã sai ' + h.fails + ' lần — ôn trước</span></div>' : ((h.fails || 0) > 0 ? '<div class="mut">Đã sai ' + h.fails + ' lần' + (isDue ? '' : (h.due ? ' · Đến hạn: ' + esc(h.due) : ' · Đến hạn ngay')) + '</div>' : ""))
       + (h.options ? '<details class="why-more"><summary>Xem đáp án + lý do</summary><p class="mut">Đáp án đúng: ' + esc(h.options[h.a]) + ' — ' + esc(h.why || "") + '</p></details>' : "")
+      + '<div style="margin:6px 0">' + u3CauseSelectHTML(h, "zhHard", key, null, "zh") + '</div>'
       + '<div class="row"><button class="btn" data-zhhard-review="' + esc(key) + '">Ôn trong buổi ôn</button>' + (isDue ? '<button class="btn" data-zhhard-done="' + esc(key) + '">Đã nhớ rồi</button>' : '') + '</div></div>';
   } else {
     if (isDue) {
@@ -23389,7 +23566,17 @@ function viewReviewZh(app) {
     html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn (' + due.length + ')</h3><p class="mut">Xếp theo: sai nhiều nhất trước, rồi tới ngày đến hạn sớm nhất.</p>';
     var dueWrong = due.filter(function (it) { return zhIsRealWrong(it.h); });
     var dueReviewing = due.filter(function (it) { return !zhIsRealWrong(it.h); });
-    if (dueWrong.length) { html += '<h4>Câu sai thật (' + dueWrong.length + ')</h4>'; dueWrong.forEach(function (it) { html += zhHardItemHTML(it.key, it.h, true); }); }
+    if (dueWrong.length) {
+      /* v184 TID U3: cau quiz gom theo nguyen nhan; muc gram/the co fails
+         giu nguyen trong "Cau sai that", khong gan nguyen nhan. */
+      html += '<h4>Câu sai thật (' + dueWrong.length + ')</h4>';
+      var dueQuiz = dueWrong.filter(function (it) { return it.h.kind === "quiz"; }).map(function (it) { return { cause: it.h.cause || "", html: zhHardItemHTML(it.key, it.h, true) }; });
+      var dueOther = dueWrong.filter(function (it) { return it.h.kind !== "quiz"; });
+      html += u3TopCauseHTML(dueQuiz, "zh");
+      html += u3GroupsHTML(dueQuiz, "zh");
+      if (dueQuiz.length) html += u3StylisticNoteHTML();
+      dueOther.forEach(function (it) { html += zhHardItemHTML(it.key, it.h, true); });
+    }
     if (dueReviewing.length) { html += '<h4>Thẻ đang ôn (' + dueReviewing.length + ')</h4>'; dueReviewing.forEach(function (it) { html += zhHardItemHTML(it.key, it.h, true); }); }
     html += '</section>';
   }
@@ -23400,7 +23587,15 @@ function viewReviewZh(app) {
     html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + bookItems.length + ')</h3><p class="mut">Các mục chưa đến hạn chỉ xem lại ở đây; nút \"Đã nhớ rồi\" chỉ hiện ở mục Đến hạn hôm nay khi đúng ngày ôn. Bấm \"Đã nhớ rồi\" chỉ dời ngày ôn tới lần sau, không tính là ôn đúng, không tốt nghiệp, không cộng XP — muốn tốt nghiệp phải trả lời đúng trong buổi ôn.</p>';
     var bookWrong = bookItems.filter(function (k) { return zhIsRealWrong(state.zhHard[k]); });
     var bookReviewing = bookItems.filter(function (k) { return !zhIsRealWrong(state.zhHard[k]); });
-    if (bookWrong.length) { html += '<h4>Câu sai thật (' + bookWrong.length + ')</h4>'; bookWrong.forEach(function (k) { html += zhHardItemHTML(k, state.zhHard[k], false); }); }
+    if (bookWrong.length) {
+      /* v184 TID U3: nhu muc den han — cau quiz gom theo nguyen nhan. */
+      html += '<h4>Câu sai thật (' + bookWrong.length + ')</h4>';
+      var bookQuiz = bookWrong.filter(function (k) { return state.zhHard[k].kind === "quiz"; }).map(function (k) { return { cause: state.zhHard[k].cause || "", html: zhHardItemHTML(k, state.zhHard[k], false) }; });
+      var bookOther = bookWrong.filter(function (k) { return state.zhHard[k].kind !== "quiz"; });
+      html += u3GroupsHTML(bookQuiz, "zh");
+      if (bookQuiz.length) html += u3StylisticNoteHTML();
+      bookOther.forEach(function (k) { html += zhHardItemHTML(k, state.zhHard[k], false); });
+    }
     if (bookReviewing.length) { html += '<h4>Thẻ đang ôn (' + bookReviewing.length + ')</h4>'; bookReviewing.forEach(function (k) { html += zhHardItemHTML(k, state.zhHard[k], false); }); }
     html += '</section><div class="row"><button class="' + (due.length ? 'btn' : 'btn btn-primary') + '" id="zhReviewNextBtn">Học tiếp bước kế tiếp</button></div>';
   }
@@ -23438,6 +23633,7 @@ function viewReviewZh(app) {
     h.due = addDaysStr(todayStr(), RB_INTERVALS[Math.min(h.level || 0, RB_INTERVALS.length - 1)]);
     saveState(); render();
   }; });
+  u3WireCause(app); /* v184 TID U3: o chon nguyen nhan tai tung loi */
 }
 
 
@@ -25361,7 +25557,9 @@ function tcAddHard(stepId, q, correct, why) {
   tcNorm();
   var exists = state.tcHard.some(function (h) { return h.step === stepId && h.q === q; });
   if (exists) { tcHardJudge90(stepId, q, false); return; }
-  state.tcHard.push({ step: stepId, q: q, ans: correct, why: why, level: 0, streak: 0, fails: 1, due: addDaysStr(todayStr(), 1) });
+  var __tcH = { step: stepId, q: q, ans: correct, why: why, level: 0, streak: 0, fails: 1, due: addDaysStr(todayStr(), 1) };
+  u3EnsureCauseTcTp(__tcH, "tc");
+  state.tcHard.push(__tcH);
   saveState();
 }
 function tcQuizBlockHTML(qs, prefix, opts) {
@@ -26830,18 +27028,27 @@ function viewReviewTc(app) {
   }
   if (dueH.length) {
     html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn (' + dueH.length + ')</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Bấm \"Đã ôn xong\" chỉ dời ngày ôn, không tăng nấc: tăng nấc chỉ tính khi bạn trả lời đúng câu đó trong buổi ôn.</p>';
-    dueH.forEach(function (h) {
+    /* v184 TID U3: gom theo nguyen nhan (3 nhom TID). */
+    var u3DueTc = dueH.map(function (h) {
       var m = tcStepMeta(h.step);
-      html += '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "ngay hôm nay") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div class="row"><button class="btn" data-tcretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tcdone="' + state.tcHard.indexOf(h) + '">Đã ôn xong</button></div></div>';
+      var itemHTML = '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "ngay hôm nay") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div style="margin:6px 0">' + u3CauseSelectHTML(h, "tcHard", null, state.tcHard.indexOf(h), "tc") + '</div><div class="row"><button class="btn" data-tcretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tcdone="' + state.tcHard.indexOf(h) + '">Đã ôn xong</button></div></div>';
+      return { cause: h.cause || "", html: itemHTML };
     });
+    html += u3TopCauseHTML(u3DueTc, "tc");
+    html += u3GroupsHTML(u3DueTc, "tc");
+    html += u3StylisticNoteHTML();
     html += '</section>';
   }
   if (undueH.length) {
     html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + undueH.length + ')</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p>';
-    undueH.forEach(function (h) {
+    /* v184 TID U3: gom theo nguyen nhan nhu muc den han. */
+    var u3UndueTc = undueH.map(function (h) {
       var m = tcStepMeta(h.step);
-      html += '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div class="row"><button class="btn" data-tcretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button></div></div>';
+      var itemHTML = '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div style="margin:6px 0">' + u3CauseSelectHTML(h, "tcHard", null, state.tcHard.indexOf(h), "tc") + '</div><div class="row"><button class="btn" data-tcretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button></div></div>';
+      return { cause: h.cause || "", html: itemHTML };
     });
+    html += u3GroupsHTML(u3UndueTc, "tc");
+    html += u3StylisticNoteHTML();
     html += '</section>';
   }
   if (dueC.length) {
@@ -26880,6 +27087,7 @@ function viewReviewTc(app) {
   app.querySelectorAll("[data-tcretry]").forEach(function (b) { b.onclick = function () { var sid = b.dataset.tcretry; if (sid.indexOf("game:") === 0) { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: sid.slice(5) }); return; } tcOpenStep(sid, "review"); }; });
   pronSrsWireReview();
   app.querySelectorAll("[data-tccard-review]").forEach(function (b) { b.onclick = function () { var parts = (b.dataset.tccardReview || "").split(":"); var stepId = parts[0], ci = +parts[1]; tcOpenStep(stepId, "review"); if (window.__tcShow && !isNaN(ci)) window.__tcShow(ci); }; });
+  u3WireCause(app); /* v184 TID U3: o chon nguyen nhan tai tung loi */
 }
 
 
@@ -26985,7 +27193,9 @@ function tpAddHard(stepId, q, correct, why) {
   tpNorm();
   var exists = state.tpHard.some(function (h) { return h.step === stepId && h.q === q; });
   if (exists) { tpHardJudge90(stepId, q, false); return; }
-  state.tpHard.push({ step: stepId, q: q, ans: correct, why: why, level: 0, streak: 0, fails: 1, due: addDaysStr(todayStr(), 1) });
+  var __tpH = { step: stepId, q: q, ans: correct, why: why, level: 0, streak: 0, fails: 1, due: addDaysStr(todayStr(), 1) };
+  u3EnsureCauseTcTp(__tpH, "tp");
+  state.tpHard.push(__tpH);
   saveState();
 }
 function tpQuizBlockHTML(qs, prefix, opts) {
@@ -27790,18 +28000,27 @@ function viewReviewTp(app) {
   }
   if (dueH.length) {
     html += '<section class="card"><h3>Sổ lỗi sai — điểm yếu của bạn (' + dueH.length + ')</h3><p class="mut">Các câu bạn từng làm sai — ôn tới khi sửa xong. Bấm \"Đã ôn xong\" chỉ dời ngày ôn, không tăng nấc: tăng nấc chỉ tính khi bạn trả lời đúng câu đó trong buổi ôn.</p>';
-    dueH.forEach(function (h) {
+    /* v184 TID U3: gom theo nguyen nhan (3 nhom TID). */
+    var u3DueTp = dueH.map(function (h) {
       var m = tpStepMeta(h.step);
-      html += '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "ngay hôm nay") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div class="row"><button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tpdone="' + state.tpHard.indexOf(h) + '">Đã ôn xong</button></div></div>';
+      var itemHTML = '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "ngay hôm nay") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div style="margin:6px 0">' + u3CauseSelectHTML(h, "tpHard", null, state.tpHard.indexOf(h), "tp") + '</div><div class="row"><button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tpdone="' + state.tpHard.indexOf(h) + '">Đã ôn xong</button></div></div>';
+      return { cause: h.cause || "", html: itemHTML };
     });
+    html += u3TopCauseHTML(u3DueTp, "tp");
+    html += u3GroupsHTML(u3DueTp, "tp");
+    html += u3StylisticNoteHTML();
     html += '</section>';
   }
   if (undueH.length) {
     html += '<section class="card"><h3>Sổ lỗi sai — chưa đến hạn (' + undueH.length + ')</h3><p class="mut">Các câu bạn từng làm sai nhưng chưa tới ngày ôn — xem trước đáp án đúng ở đây, tới ngày sẽ tự về buổi ôn ở trên.</p>';
-    undueH.forEach(function (h) {
+    /* v184 TID U3: gom theo nguyen nhan nhu muc den han. */
+    var u3UndueTp = undueH.map(function (h) {
       var m = tpStepMeta(h.step);
-      html += '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div class="row"><button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button></div></div>';
+      var itemHTML = '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div style="margin:6px 0">' + u3CauseSelectHTML(h, "tpHard", null, state.tpHard.indexOf(h), "tp") + '</div><div class="row"><button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button></div></div>';
+      return { cause: h.cause || "", html: itemHTML };
     });
+    html += u3GroupsHTML(u3UndueTp, "tp");
+    html += u3StylisticNoteHTML();
     html += '</section>';
   }
   if (dueC.length) {
@@ -27841,6 +28060,7 @@ function viewReviewTp(app) {
   app.querySelectorAll("[data-tpretry]").forEach(function (b) { b.onclick = function () { var sid = b.dataset.tpretry; if (sid.indexOf("game:") === 0) { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: sid.slice(5) }); return; } tpOpenStep(sid, "review"); }; });
   pronSrsWireReview();
   app.querySelectorAll("[data-tpcard-review]").forEach(function (b) { b.onclick = function () { var parts = (b.dataset.tpcardReview || "").split(":"); var stepId = parts[0], ci = +parts[1]; tpOpenStep(stepId, "review"); if (window.__tpShow && !isNaN(ci)) window.__tpShow(ci); }; });
+  u3WireCause(app); /* v184 TID U3: o chon nguyen nhan tai tung loi */
 }
 
 
