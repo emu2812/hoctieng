@@ -71733,7 +71733,7 @@ var MILESTONES = {
    TOEIC; TP TOPIK. Cùng cấu trúc 4 track (QT-05). */
 var ROLEPLAY_SCEN = {
 en: [
-{ id: "en-job", title: "Phỏng vấn xin việc bán thời gian", setting: "Bạn đến phỏng vấn cho một công việc bán thời gian tại một cửa hàng. Người phỏng vấn hỏi về bạn, lý do xin việc, điểm mạnh và giờ làm được.", you: "Ứng viên", partner: "Nhà tuyển dụng", goal: "Trả lời rõ ràng, lịch sự và thuyết phục để được nhận vào làm.",
+{ id: "en-job", ind: "cong-so", int: ["kinh-doanh"], title: "Phỏng vấn xin việc bán thời gian", setting: "Bạn đến phỏng vấn cho một công việc bán thời gian tại một cửa hàng. Người phỏng vấn hỏi về bạn, lý do xin việc, điểm mạnh và giờ làm được.", you: "Ứng viên", partner: "Nhà tuyển dụng", goal: "Trả lời rõ ràng, lịch sự và thuyết phục để được nhận vào làm.",
   q: [
    { t: "Good afternoon. Could you tell me a little about yourself?", vi: "Chào buổi chiều. Bạn giới thiệu một chút về bản thân được không?", hint: "Tên + đang học/làm gì + vì sao muốn việc này, mỗi ý 1 câu ngắn." },
    { t: "Why do you want this job?", vi: "Vì sao bạn muốn công việc này?", hint: "Nói thật: cần thu nhập + muốn kinh nghiệm thực tế. Đừng chỉ nói vì tiền." },
@@ -71742,7 +71742,7 @@ en: [
    { t: "Do you have any questions for us?", vi: "Bạn có câu hỏi nào cho chúng tôi không?", hint: "Hỏi 1 câu về giờ làm hoặc công việc cụ thể. Đừng nói “không có gì”." }
   ],
   tip: "Phỏng vấn chỉ cần 3 ý: bạn là ai — bạn làm được gì — bạn rảnh lúc nào. Trả lời ngắn, mỗi câu 1–2 ý là đủ." },
-{ id: "en-meeting", title: "Họp nhóm báo cáo tiến độ", setting: "Cuộc họp nhóm sáng thứ Hai. Bạn báo cáo tiến độ của nhóm mình trước quản lý và các nhóm khác.", you: "Nhân viên báo cáo", partner: "Quản lý nhóm", goal: "Báo cáo đã xong gì, đang làm gì, có vấn đề gì và cần giúp gì.",
+{ id: "en-meeting", ind: "cong-so", int: ["kinh-doanh"], title: "Họp nhóm báo cáo tiến độ", setting: "Cuộc họp nhóm sáng thứ Hai. Bạn báo cáo tiến độ của nhóm mình trước quản lý và các nhóm khác.", you: "Nhân viên báo cáo", partner: "Quản lý nhóm", goal: "Báo cáo đã xong gì, đang làm gì, có vấn đề gì và cần giúp gì.",
   q: [
    { t: "Good morning, everyone. Let's start — what did your team finish last week?", vi: "Chào buổi sáng mọi người. Bắt đầu nhé — nhóm bạn đã xong gì tuần trước?", hint: "Kể 1–2 việc đã xong, nói rõ kết quả (xong đúng hạn hay chưa)." },
    { t: "What is your team working on now?", vi: "Nhóm bạn đang làm gì bây giờ?", hint: "Nói việc đang làm + dự kiến xong khi nào." },
@@ -71751,7 +71751,7 @@ en: [
    { t: "Anything else before we finish?", vi: "Còn gì nữa không trước khi kết thúc?", hint: "Tóm tắt 1 câu: tiến độ ổn + cần giúp 1 việc, hoặc nói “không còn gì”." }
   ],
   tip: "Báo cáo tiến độ theo đúng 3 ý: đã xong — đang làm — cần giúp. Nói số liệu cụ thể (mấy ngày, mấy người) thì người nghe tin được." },
-{ id: "en-colleague", title: "Giới thiệu bản thân với đồng nghiệp mới", setting: "Ngày đầu tiên ở văn phòng mới. Một đồng nghiệp tới làm quen với bạn ở khu vực nghỉ trưa.", you: "Nhân viên mới", partner: "Đồng nghiệp", goal: "Giới thiệu tên, quê quán, công việc cũ và sở thích một cách thân thiện.",
+{ id: "en-colleague", ind: "cong-so", int: ["doi-song"], title: "Giới thiệu bản thân với đồng nghiệp mới", setting: "Ngày đầu tiên ở văn phòng mới. Một đồng nghiệp tới làm quen với bạn ở khu vực nghỉ trưa.", you: "Nhân viên mới", partner: "Đồng nghiệp", goal: "Giới thiệu tên, quê quán, công việc cũ và sở thích một cách thân thiện.",
   q: [
    { t: "Hi, I'm Anna. What's your name?", vi: "Chào bạn, tôi là Anna. Bạn tên là gì?", hint: "Tên + chào lại + hỏi tên bạn ấy (nếu chưa biết)." },
    { t: "Where are you from?", vi: "Bạn đến từ đâu?", hint: "Quê quán + đang sống ở đâu bây giờ." },
@@ -71760,7 +71760,7 @@ en: [
    { t: "Would you like to have lunch with us today?", vi: "Hôm nay bạn ăn trưa cùng chúng tôi nhé?", hint: "Nhận lời hoặc từ chối lịch sự + hẹn lần khác nếu bận." }
   ],
   tip: "Làm quen chỉ cần ngắn và thân thiện: chào + hỏi thăm 1 câu + chia sẻ 1 ý về mình. Hỏi lại người ta 1 câu thì cuộc trò chuyện mới tiếp tục được." },
-{ id: "en-directions", title: "Hỏi đường ở thành phố mới", setting: "Bạn đang đi bộ ở trung tâm một thành phố mới và cần tìm nhà ga. Bạn hỏi một người dân địa phương.", you: "Khách du lịch", partner: "Người dân địa phương", goal: "Hỏi đường tới nhà ga, hỏi xa hay gần, đi bộ hay đi xe, mất bao lâu.",
+{ id: "en-directions", ind: "du-lich", int: ["du-lich"], title: "Hỏi đường ở thành phố mới", setting: "Bạn đang đi bộ ở trung tâm một thành phố mới và cần tìm nhà ga. Bạn hỏi một người dân địa phương.", you: "Khách du lịch", partner: "Người dân địa phương", goal: "Hỏi đường tới nhà ga, hỏi xa hay gần, đi bộ hay đi xe, mất bao lâu.",
   q: [
    { t: "Hello. How can I help you?", vi: "Chào bạn. Tôi giúp gì được cho bạn?", hint: "Nói rõ bạn cần tìm nhà ga + bạn đang ở đâu." },
    { t: "Do you want to walk there, or take a bus?", vi: "Bạn muốn đi bộ tới đó hay đi xe buýt?", hint: "Chọn 1 cách + hỏi mất bao lâu với cách đó." },
@@ -71769,7 +71769,7 @@ en: [
    { t: "Is there anything else you need in this area?", vi: "Bạn còn cần gì nữa ở khu này không?", hint: "Hỏi thêm 1 thứ gần đó (quán ăn, nhà vệ sinh) hoặc cảm ơn và chào." }
   ],
   tip: "Hỏi đường luôn có 3 ý: mình cần tới đâu — mình đang ở đâu — đi bằng cách nào. Nghe xong nhắc lại 1 câu để chắc mình hiểu đúng." },
-{ id: "en-restaurant", title: "Gọi món ở nhà hàng", setting: "Tối thứ Bảy ở một nhà hàng. Bạn đi ăn cùng một người bạn. Nhân viên phục vụ tới hỏi.", you: "Khách ăn", partner: "Nhân viên phục vụ", goal: "Chọn chỗ ngồi, gọi đồ uống và món ăn, hỏi món tráng miệng.",
+{ id: "en-restaurant", ind: "giao-tiep", int: ["am-thuc"], title: "Gọi món ở nhà hàng", setting: "Tối thứ Bảy ở một nhà hàng. Bạn đi ăn cùng một người bạn. Nhân viên phục vụ tới hỏi.", you: "Khách ăn", partner: "Nhân viên phục vụ", goal: "Chọn chỗ ngồi, gọi đồ uống và món ăn, hỏi món tráng miệng.",
   q: [
    { t: "Good evening. How many people are in your party?", vi: "Chào buổi tối. Nhóm của quý khách có mấy người?", hint: "Số người + có cần bàn gần cửa sổ không." },
    { t: "Would you like to see the menu?", vi: "Quý khách có muốn xem thực đơn không?", hint: "Nhận thực đơn + hỏi món nào ngon/đặc biệt của quán." },
@@ -71778,7 +71778,7 @@ en: [
    { t: "Would you like anything for dessert?", vi: "Quý khách có muốn món tráng miệng gì không?", hint: "Gọi món tráng miệng hoặc từ chối lịch sự + xin tính tiền." }
   ],
   tip: "Gọi món chỉ cần 3 ý: món gì — số lượng mấy phần — yêu cầu gì thêm. Chưa quyết được thì nói “cho tôi thêm vài phút” thay vì im lặng." },
-{ id: "en-complaint", title: "Phàn nàn về đơn hàng giao trễ", setting: "Bạn gọi điện cho cửa hàng vì đơn hàng của bạn đã giao trễ 3 ngày. Nhân viên chăm sóc khách hàng nghe máy.", you: "Khách hàng", partner: "Nhân viên chăm sóc khách hàng", goal: "Nói rõ vấn đề, đưa số đơn hàng, hỏi cách xử lý và hẹn lại.",
+{ id: "en-complaint", ind: "cong-so", int: ["kinh-doanh"], title: "Phàn nàn về đơn hàng giao trễ", setting: "Bạn gọi điện cho cửa hàng vì đơn hàng của bạn đã giao trễ 3 ngày. Nhân viên chăm sóc khách hàng nghe máy.", you: "Khách hàng", partner: "Nhân viên chăm sóc khách hàng", goal: "Nói rõ vấn đề, đưa số đơn hàng, hỏi cách xử lý và hẹn lại.",
   q: [
    { t: "Hello, how can I help you today?", vi: "Chào bạn, hôm nay tôi giúp gì được cho bạn?", hint: "Nói ngắn gọn: đơn hàng giao trễ + bạn muốn xử lý." },
    { t: "Could you tell me your order number, please?", vi: "Bạn cho tôi xin số đơn hàng được không?", hint: "Đọc số đơn hàng (bịa số hợp lý, ví dụ 8 chữ số) + ngày đặt hàng." },
@@ -71789,7 +71789,7 @@ en: [
   tip: "Phàn nàn theo đúng thứ tự: nói rõ vấn đề — đưa bằng chứng (số đơn, ngày hẹn) — nói rõ mình muốn gì. Không bao giờ cãi lại nhân viên." }
 ],
 zh: [
-{ id: "zh-shop", title: "Ở cửa hàng", setting: "Bạn vào một cửa hàng quần áo. Nhân viên cửa hàng tới hỏi bạn muốn mua gì.", you: "Khách mua hàng", partner: "Nhân viên cửa hàng", goal: "Nói thứ muốn mua, hỏi giá, chọn màu và cỡ, hỏi cách trả tiền.",
+{ id: "zh-shop", ind: "giao-tiep", int: ["doi-song"], title: "Ở cửa hàng", setting: "Bạn vào một cửa hàng quần áo. Nhân viên cửa hàng tới hỏi bạn muốn mua gì.", you: "Khách mua hàng", partner: "Nhân viên cửa hàng", goal: "Nói thứ muốn mua, hỏi giá, chọn màu và cỡ, hỏi cách trả tiền.",
   q: [
    { t: "欢迎光临！您想买什么？", py: "Huānyíng guānglín! Nín xiǎng mǎi shénme?", vi: "Chào mừng quý khách! Quý khách muốn mua gì?", hint: "Nói thứ bạn muốn mua + hỏi giá." },
    { t: "您喜欢什么颜色？", py: "Nín xǐhuān shénme yánsè?", vi: "Bạn thích màu gì?", hint: "Nói màu bạn thích + hỏi còn màu nào khác không." },
@@ -71798,7 +71798,7 @@ zh: [
    { t: "您用现金还是手机支付？", py: "Nín yòng xiànjīn háishi shǒujī zhīfù?", vi: "Bạn trả tiền mặt hay trả bằng điện thoại?", hint: "Chọn 1 cách trả tiền + hỏi có hóa đơn không." }
   ],
   tip: "Mua hàng chỉ cần 3 ý: mua gì — cỡ/màu nào — trả tiền thế nào. Chưa quyết được thì nói “我先看一下” (tôi xem trước đã)." },
-{ id: "zh-restaurant", title: "Ở nhà hàng", setting: "Bạn vào một nhà hàng cùng một người bạn. Nhân viên phục vụ tới hỏi.", you: "Khách ăn", partner: "Nhân viên phục vụ", goal: "Chọn chỗ ngồi, gọi đồ uống và món ăn, nói rõ ăn cay được hay không.",
+{ id: "zh-restaurant", ind: "giao-tiep", int: ["am-thuc"], title: "Ở nhà hàng", setting: "Bạn vào một nhà hàng cùng một người bạn. Nhân viên phục vụ tới hỏi.", you: "Khách ăn", partner: "Nhân viên phục vụ", goal: "Chọn chỗ ngồi, gọi đồ uống và món ăn, nói rõ ăn cay được hay không.",
   q: [
    { t: "您几位用餐？", py: "Nín jǐ wèi yòngcān?", vi: "Quý khách mấy người dùng bữa?", hint: "Số người + có cần bàn gần cửa sổ không." },
    { t: "您想喝点儿什么？", py: "Nín xiǎng hē diǎnr shénme?", vi: "Bạn muốn uống gì?", hint: "Tên đồ uống + số lượng; chưa chọn được thì nhờ gợi ý." },
@@ -71807,7 +71807,7 @@ zh: [
    { t: "您还要别的吗？", py: "Nín hái yào biéde ma?", vi: "Bạn còn muốn gì nữa không?", hint: "Gọi thêm món hoặc nói đủ rồi + xin tính tiền." }
   ],
   tip: "Gọi món chỉ cần 3 ý: món gì — mấy phần — yêu cầu gì thêm. Nhớ nói rõ ăn cay được hay không trước khi gọi món cay." },
-{ id: "zh-rent", title: "Thuê nhà", setting: "Bạn muốn thuê một căn phòng gần trường. Bạn gặp người cho thuê để hỏi giá và điều kiện.", you: "Người thuê nhà", partner: "Người cho thuê", goal: "Hỏi giá thuê, đồ đạc trong phòng, thời gian dọn vào và thời hạn thuê.",
+{ id: "zh-rent", ind: "giao-tiep", int: ["doi-song"], title: "Thuê nhà", setting: "Bạn muốn thuê một căn phòng gần trường. Bạn gặp người cho thuê để hỏi giá và điều kiện.", you: "Người thuê nhà", partner: "Người cho thuê", goal: "Hỏi giá thuê, đồ đạc trong phòng, thời gian dọn vào và thời hạn thuê.",
   q: [
    { t: "您想租什么样的房子？", py: "Nín xiǎng zū shénme yàng de fángzi?", vi: "Bạn muốn thuê nhà thế nào?", hint: "Nói loại phòng + gần đâu + cần mấy phòng ngủ." },
    { t: "一个月多少钱您可以接受？", py: "Yí gè yuè duōshao qián nín kěyǐ jiēshòu?", vi: "Một tháng bao nhiêu tiền bạn chấp nhận được?", hint: "Nói khoảng giá của bạn + hỏi giá đã gồm điện nước chưa." },
@@ -71816,7 +71816,7 @@ zh: [
    { t: "您打算住多长时间？", py: "Nín dǎsuàn zhù duō cháng shíjiān?", vi: "Bạn định ở bao lâu?", hint: "Nói thời hạn thuê (mấy tháng/mấy năm) + hỏi ký hợp đồng thế nào." }
   ],
   tip: "Hỏi thuê nhà luôn hỏi rõ 3 ý: giá bao nhiêu — giá đã gồm điện nước chưa — ở được bao lâu. Hỏi giá thì hỏi rõ giá đã gồm điện nước chưa, rồi mới chốt ngày dọn vào." },
-{ id: "zh-doctor", title: "Khám bệnh", setting: "Bạn bị ho và đau họng hai ngày nay. Bạn tới phòng khám gặp bác sĩ.", you: "Bệnh nhân", partner: "Bác sĩ", goal: "Nói rõ triệu chứng, số ngày bị bệnh, hỏi thuốc uống mấy ngày và tái khám khi nào.",
+{ id: "zh-doctor", ind: "y-te", int: ["doi-song"], title: "Khám bệnh", setting: "Bạn bị ho và đau họng hai ngày nay. Bạn tới phòng khám gặp bác sĩ.", you: "Bệnh nhân", partner: "Bác sĩ", goal: "Nói rõ triệu chứng, số ngày bị bệnh, hỏi thuốc uống mấy ngày và tái khám khi nào.",
   q: [
    { t: "您哪里不舒服？", py: "Nín nǎlǐ bù shūfu?", vi: "Bạn khó chịu ở đâu?", hint: "Nói rõ triệu chứng: ho, đau họng, mệt..." },
    { t: "您不舒服几天了？", py: "Nín bù shūfu jǐ tiān le?", vi: "Bạn khó chịu mấy ngày rồi?", hint: "Số ngày + triệu chứng nặng lên hay đỡ đi." },
@@ -71825,7 +71825,7 @@ zh: [
    { t: "您下周能来复查吗？", py: "Nín xià zhōu néng lái fùchá ma?", vi: "Tuần sau bạn tới tái khám được không?", hint: "Nhận lời tái khám + hỏi ngày giờ cụ thể, hoặc đề xuất ngày khác." }
   ],
   tip: "Khám bệnh nói rõ 3 ý trước: triệu chứng gì — bị mấy ngày rồi — có sốt không. Nói rõ triệu chứng và số ngày bị bệnh trước, rồi mới hỏi thuốc uống mấy ngày." },
-{ id: "zh-directions", title: "Hỏi đường", setting: "Bạn mới tới một thành phố và cần tìm nhà ga. Bạn hỏi một người dân địa phương.", you: "Khách du lịch", partner: "Người dân địa phương", goal: "Hỏi đường tới nhà ga, hỏi đi bằng gì, mất bao lâu và nhờ giúp gọi xe.",
+{ id: "zh-directions", ind: "du-lich", int: ["du-lich"], title: "Hỏi đường", setting: "Bạn mới tới một thành phố và cần tìm nhà ga. Bạn hỏi một người dân địa phương.", you: "Khách du lịch", partner: "Người dân địa phương", goal: "Hỏi đường tới nhà ga, hỏi đi bằng gì, mất bao lâu và nhờ giúp gọi xe.",
   q: [
    { t: "您要去哪儿？", py: "Nín yào qù nǎr?", vi: "Bạn muốn đi đâu?", hint: "Nói rõ bạn cần tới nhà ga + bạn đang ở đâu." },
    { t: "您怎么去？坐车还是走路？", py: "Nín zěnme qù? Zuò chē háishi zǒu lù?", vi: "Bạn đi thế nào? Đi xe hay đi bộ?", hint: "Chọn 1 cách + hỏi mất bao lâu với cách đó." },
@@ -71834,7 +71834,7 @@ zh: [
    { t: "您需要我帮您叫车吗？", py: "Nín xūyào wǒ bāng nín jiào chē ma?", vi: "Bạn có cần tôi giúp gọi xe không?", hint: "Nhận lời nhờ gọi xe + nói điểm đến, hoặc cảm ơn và tự đi." }
   ],
   tip: "Hỏi đường luôn có 3 ý: mình cần tới đâu — mình đang ở đâu — đi bằng cách nào. Nghe xong nhắc lại 1 câu để chắc mình hiểu đúng." },
-{ id: "zh-interview", title: "Phỏng vấn xin việc", setting: "Bạn tới phỏng vấn cho một công việc bán thời gian. Người phỏng vấn hỏi về bạn, lý do xin việc, điểm mạnh và giờ làm được.", you: "Ứng viên", partner: "Nhà tuyển dụng", goal: "Giới thiệu bản thân, nói lý do xin việc và điểm mạnh, trả lời về giờ làm.",
+{ id: "zh-interview", ind: "cong-so", int: ["kinh-doanh"], title: "Phỏng vấn xin việc", setting: "Bạn tới phỏng vấn cho một công việc bán thời gian. Người phỏng vấn hỏi về bạn, lý do xin việc, điểm mạnh và giờ làm được.", you: "Ứng viên", partner: "Nhà tuyển dụng", goal: "Giới thiệu bản thân, nói lý do xin việc và điểm mạnh, trả lời về giờ làm.",
   q: [
    { t: "请先介绍一下你自己。", py: "Qǐng xiān jièshào yí xià nǐ zìjǐ.", vi: "Hãy giới thiệu về bản thân bạn trước.", hint: "Tên + đang học/làm gì + vì sao muốn việc này, mỗi ý 1 câu ngắn." },
    { t: "你为什么想来我们公司工作？", py: "Nǐ wèi shénme xiǎng lái wǒmen gōngsī gōngzuò?", vi: "Vì sao bạn muốn tới công ty chúng tôi làm việc?", hint: "Nói thật: muốn kinh nghiệm + thích công việc này; đừng chỉ nói vì tiền." },
@@ -71845,7 +71845,7 @@ zh: [
   tip: "Phỏng vấn chỉ cần 3 ý: bạn là ai — bạn làm được gì — bạn rảnh lúc nào. Chưa rõ giờ làm hay lương thì hỏi lại bằng câu đơn giản, đừng im lặng." }
 ],
 tc: [
-{ id: "tc-morning", title: "Chào hỏi đồng nghiệp buổi sáng", setting: "Sáng thứ Hai ở văn phòng. Bạn gặp đồng nghiệp ở hành lang.", you: "Nhân viên", partner: "Đồng nghiệp", goal: "Chào hỏi và hỏi thăm ngắn bằng tiếng Anh công sở.",
+{ id: "tc-morning", ind: "cong-so", int: ["doi-song"], title: "Chào hỏi đồng nghiệp buổi sáng", setting: "Sáng thứ Hai ở văn phòng. Bạn gặp đồng nghiệp ở hành lang.", you: "Nhân viên", partner: "Đồng nghiệp", goal: "Chào hỏi và hỏi thăm ngắn bằng tiếng Anh công sở.",
   q: [
    { t: "Good morning! How are you today?", vi: "Chào buổi sáng! Hôm nay bạn thế nào?", hint: "Trả lời ngắn (khỏe/bận...) + hỏi lại bạn ấy 1 câu." },
    { t: "How was your weekend?", vi: "Cuối tuần của bạn thế nào?", hint: "Kể 1 việc đã làm cuối tuần + cảm thấy thế nào." },
@@ -71854,7 +71854,7 @@ tc: [
    { t: "Would you like to have lunch together?", vi: "Bạn ăn trưa cùng nhau nhé?", hint: "Nhận lời hoặc từ chối lịch sự + hẹn lần khác nếu bận." }
   ],
   tip: "Chào hỏi công sở chỉ cần ngắn và thân thiện: chào + hỏi thăm 1 câu + chúc 1 câu là đủ. Đừng trả lời quá dài." },
-{ id: "tc-room", title: "Hỏi giờ họp và đặt phòng", setting: "Bạn cần đặt phòng họp cho nhóm vào sáng mai.", you: "Nhân viên", partner: "Lễ tân văn phòng", goal: "Hỏi phòng trống và đặt phòng bằng tiếng Anh.",
+{ id: "tc-room", ind: "cong-so", int: ["kinh-doanh"], title: "Hỏi giờ họp và đặt phòng", setting: "Bạn cần đặt phòng họp cho nhóm vào sáng mai.", you: "Nhân viên", partner: "Lễ tân văn phòng", goal: "Hỏi phòng trống và đặt phòng bằng tiếng Anh.",
   q: [
    { t: "Hello. Which room do you need?", vi: "Chào bạn. Bạn cần phòng nào?", hint: "Nói tên/số phòng + ngày giờ cần dùng." },
    { t: "What time do you need the room?", vi: "Bạn cần phòng lúc mấy giờ?", hint: "Nói rõ giờ bắt đầu và giờ kết thúc (from... to...)." },
@@ -71863,7 +71863,7 @@ tc: [
    { t: "Is there anything else you need for the meeting?", vi: "Bạn còn cần gì nữa cho cuộc họp không?", hint: "Nói thêm 1 thứ cần chuẩn bị hoặc cảm ơn và xác nhận lại giờ phòng." }
   ],
   tip: "Đặt phòng chỉ cần 3 ý: phòng nào, lúc nào, để làm gì. Nói rõ giờ bằng “from ... to ...”." },
-{ id: "tc-guest", title: "Giới thiệu bản thân với khách", setting: "Một vị khách tới văn phòng. Bạn đón khách ở sảnh.", you: "Nhân viên lễ tân", partner: "Khách", goal: "Giới thiệu tên, bộ phận và hỏi khách cần gì.",
+{ id: "tc-guest", ind: "cong-so", int: ["kinh-doanh"], title: "Giới thiệu bản thân với khách", setting: "Một vị khách tới văn phòng. Bạn đón khách ở sảnh.", you: "Nhân viên lễ tân", partner: "Khách", goal: "Giới thiệu tên, bộ phận và hỏi khách cần gì.",
   q: [
    { t: "Hello, my name is Lan. May I have your name, please?", vi: "Chào bạn, tôi tên là Lan. Cho tôi xin tên của bạn được không?", hint: "Trả lời tên của bạn (đóng vai khách) + nói bạn tới gặp ai." },
    { t: "Who are you here to meet?", vi: "Bạn tới đây gặp ai?", hint: "Tên người cần gặp + giờ hẹn (nếu có)." },
@@ -71872,7 +71872,7 @@ tc: [
    { t: "Is there anything else I can help you with?", vi: "Còn gì nữa tôi giúp được cho bạn không?", hint: "Nói thêm 1 nhu cầu (chỗ ngồi, wifi...) hoặc nói đủ rồi + cảm ơn." }
   ],
   tip: "Với khách, nói chậm và rõ: chào + tên + bộ phận + hỏi nhu cầu. Luôn mời khách ngồi hoặc uống nước sau khi xác nhận." },
-{ id: "tc-phone", title: "Nghe điện thoại: nhận tin nhắn", setting: "Điện thoại văn phòng reo. Khách gọi tìm quản lý nhưng quản lý đang họp.", you: "Nhân viên nghe máy", partner: "Người gọi", goal: "Nghe điện thoại công sở, ghi lại tin nhắn và hẹn gọi lại.",
+{ id: "tc-phone", ind: "cong-so", int: ["kinh-doanh"], title: "Nghe điện thoại: nhận tin nhắn", setting: "Điện thoại văn phòng reo. Khách gọi tìm quản lý nhưng quản lý đang họp.", you: "Nhân viên nghe máy", partner: "Người gọi", goal: "Nghe điện thoại công sở, ghi lại tin nhắn và hẹn gọi lại.",
   q: [
    { t: "Hello, this is the sales department. How can I help you?", vi: "Chào bạn, đây là phòng kinh doanh. Tôi giúp gì được cho bạn?", hint: "Nói bạn cần gặp ai + về việc gì." },
    { t: "May I ask who is calling, please?", vi: "Cho tôi hỏi ai đang gọi được không?", hint: "Trả lời tên của bạn (đóng vai người gọi) + công ty của bạn." },
@@ -71881,7 +71881,7 @@ tc: [
    { t: "When is the best time for him to call you back?", vi: "Lúc nào là tiện nhất để anh ấy gọi lại cho bạn?", hint: "Nói khung giờ bạn rảnh + cảm ơn trước khi chào." }
   ],
   tip: "Nghe điện thoại công sở luôn có 4 ý: chào + tên mình, nói rõ người cần gặp đang làm gì, ghi lời nhắn, hẹn gọi lại." },
-{ id: "tc-report", title: "Báo cáo tiến độ công việc", setting: "Cuộc họp nhóm sáng thứ Hai. Bạn báo cáo tiến độ dự án của mình.", you: "Nhân viên báo cáo", partner: "Quản lý", goal: "Báo cáo ngắn: đã làm xong gì, đang làm gì, cần giúp gì.",
+{ id: "tc-report", ind: "cong-so", int: ["kinh-doanh"], title: "Báo cáo tiến độ công việc", setting: "Cuộc họp nhóm sáng thứ Hai. Bạn báo cáo tiến độ dự án của mình.", you: "Nhân viên báo cáo", partner: "Quản lý", goal: "Báo cáo ngắn: đã làm xong gì, đang làm gì, cần giúp gì.",
   q: [
    { t: "Good morning. What did you finish last week?", vi: "Chào buổi sáng. Tuần trước bạn đã xong gì?", hint: "Kể 1–2 việc đã xong, nói rõ kết quả (xong đúng hạn hay chưa)." },
    { t: "What are you working on this week?", vi: "Tuần này bạn đang làm gì?", hint: "Nói việc đang làm + dự kiến xong khi nào." },
@@ -71890,7 +71890,7 @@ tc: [
    { t: "What help do you need from the team?", vi: "Bạn cần nhóm giúp gì?", hint: "Nói cụ thể: cần ai, cần cái gì, cần trước khi nào." }
   ],
   tip: "Báo cáo tiến độ theo đúng 3 ý: đã xong — đang làm — cần giúp. Nói số liệu cụ thể (mấy ngày, mấy người) thì người nghe tin được." },
-{ id: "tc-complaint", title: "Xử lý phàn nàn của khách", setting: "Khách gọi tới phàn nàn: đơn hàng giao trễ 3 ngày.", you: "Nhân viên chăm sóc khách hàng", partner: "Khách hàng", goal: "Xin lỗi, hỏi rõ vấn đề, đề xuất cách xử lý.",
+{ id: "tc-complaint", ind: "cong-so", int: ["kinh-doanh"], title: "Xử lý phàn nàn của khách", setting: "Khách gọi tới phàn nàn: đơn hàng giao trễ 3 ngày.", you: "Nhân viên chăm sóc khách hàng", partner: "Khách hàng", goal: "Xin lỗi, hỏi rõ vấn đề, đề xuất cách xử lý.",
   q: [
    { t: "Hello, how can I help you today?", vi: "Chào bạn, hôm nay tôi giúp gì được cho bạn?", hint: "Nói ngắn gọn: đơn hàng giao trễ + bạn muốn xử lý." },
    { t: "Could you tell me your order number, please?", vi: "Bạn cho tôi xin số đơn hàng được không?", hint: "Đọc số đơn hàng (ví dụ 8 chữ số) + ngày đặt hàng." },
@@ -71901,7 +71901,7 @@ tc: [
   tip: "Xử lý phàn nàn theo đúng thứ tự: xin lỗi trước — hỏi rõ — đề xuất cách xử lý. Không bao giờ cãi lại khách." }
 ],
 tp: [
-{ id: "tp-hello", title: "Chào hỏi bạn mới", setting: "Buổi học tiếng Hàn đầu tiên. Bạn gặp một người bạn Hàn Quốc mới.", you: "Học viên", partner: "Bạn Hàn Quốc", goal: "Chào hỏi, hỏi tên, quê quán, thời gian học tiếng Hàn và sở thích.",
+{ id: "tp-hello", ind: "giao-tiep", int: ["doi-song"], title: "Chào hỏi bạn mới", setting: "Buổi học tiếng Hàn đầu tiên. Bạn gặp một người bạn Hàn Quốc mới.", you: "Học viên", partner: "Bạn Hàn Quốc", goal: "Chào hỏi, hỏi tên, quê quán, thời gian học tiếng Hàn và sở thích.",
   q: [
    { t: "안녕하세요? 이름이 뭐예요?", rr: "Annyeonghaseyo? Ireumi mwoyeyo?", vi: "Xin chào? Bạn tên là gì?", hint: "Tên của bạn + hỏi lại tên bạn ấy." },
    { t: "어디에서 왔어요?", rr: "Eodieseo wasseoyo?", vi: "Bạn đến từ đâu?", hint: "Quê quán + đang sống ở đâu bây giờ." },
@@ -71910,7 +71910,7 @@ tp: [
    { t: "주말에 보통 뭐 해요?", rr: "Jumare botong mwo haeyo?", vi: "Cuối tuần bạn thường làm gì?", hint: "1 việc thường làm cuối tuần + rủ bạn ấy cùng làm lần sau." }
   ],
   tip: "Chào hỏi chỉ cần ngắn và thân thiện: chào + hỏi tên + hỏi 1 câu về bạn ấy. Hỏi lại người ta 1 câu thì cuộc trò chuyện mới tiếp tục được." },
-{ id: "tp-intro", title: "Giới thiệu bản thân và gia đình", setting: "Giờ học tiếng Hàn. Giáo viên nhờ bạn giới thiệu bản thân và gia đình trước lớp.", you: "Học viên", partner: "Giáo viên", goal: "Giới thiệu tên, gia đình, nghề nghiệp của bố mẹ và việc thường làm cùng gia đình.",
+{ id: "tp-intro", ind: "hoc-thuat", int: ["doi-song"], title: "Giới thiệu bản thân và gia đình", setting: "Giờ học tiếng Hàn. Giáo viên nhờ bạn giới thiệu bản thân và gia đình trước lớp.", you: "Học viên", partner: "Giáo viên", goal: "Giới thiệu tên, gia đình, nghề nghiệp của bố mẹ và việc thường làm cùng gia đình.",
   q: [
    { t: "자기소개를 해 주세요.", rr: "Jagisogaereul hae juseyo.", vi: "Hãy giới thiệu về bản thân bạn.", hint: "Tên + tuổi/nghề nghiệp + đang học gì, mỗi ý 1 câu ngắn." },
    { t: "가족이 몇 명이에요?", rr: "Gajogi myeot myeongieyo?", vi: "Gia đình bạn có mấy người?", hint: "Số người + kể tên các thành viên (bố, mẹ, anh/chị...)." },
@@ -71919,7 +71919,7 @@ tp: [
    { t: "가족과 주말에 보통 뭐 해요?", rr: "Gajokgwa jumare botong mwo haeyo?", vi: "Cuối tuần bạn thường làm gì cùng gia đình?", hint: "1 việc thường làm cùng gia đình + cảm thấy thế nào." }
   ],
   tip: "Giới thiệu gia đình chỉ cần 3 ý: nhà có mấy người — bố mẹ làm gì — cuối tuần làm gì cùng nhau. Nói chậm, mỗi câu 1 ý." },
-{ id: "tp-directions", title: "Hỏi đường", setting: "Bạn mới tới một thành phố ở Hàn Quốc và cần tìm nhà ga. Bạn hỏi một người dân địa phương.", you: "Khách du lịch", partner: "Người dân địa phương", goal: "Hỏi đường tới nhà ga, hỏi đi bằng gì, mất bao lâu và nhờ giúp gọi xe.",
+{ id: "tp-directions", ind: "du-lich", int: ["du-lich"], title: "Hỏi đường", setting: "Bạn mới tới một thành phố ở Hàn Quốc và cần tìm nhà ga. Bạn hỏi một người dân địa phương.", you: "Khách du lịch", partner: "Người dân địa phương", goal: "Hỏi đường tới nhà ga, hỏi đi bằng gì, mất bao lâu và nhờ giúp gọi xe.",
   q: [
    { t: "어디에 가고 싶어요?", rr: "Eodie gago sipeoyo?", vi: "Bạn muốn đi đâu?", hint: "Nói rõ bạn cần tới nhà ga + bạn đang ở đâu." },
    { t: "지하철로 갈 거예요, 아니면 버스로 갈 거예요?", rr: "Jihacheollo gal geoyeyo, animyeon beoseuro gal geoyeyo?", vi: "Bạn sẽ đi tàu điện ngầm hay đi xe buýt?", hint: "Chọn 1 cách + hỏi mất bao lâu với cách đó." },
@@ -71928,7 +71928,7 @@ tp: [
    { t: "도와드릴까요?", rr: "Dowadeurilkkayo?", vi: "Tôi giúp bạn nhé?", hint: "Nhận lời nhờ giúp gọi xe + nói điểm đến, hoặc cảm ơn và tự đi." }
   ],
   tip: "Hỏi đường luôn có 3 ý: mình cần tới đâu — mình đang ở đâu — đi bằng cách nào. Nghe xong nhắc lại 1 câu để chắc mình hiểu đúng." },
-{ id: "tp-shop", title: "Mua sắm ở cửa hàng", setting: "Bạn vào một cửa hàng quần áo ở Hàn Quốc. Nhân viên cửa hàng tới hỏi.", you: "Khách mua hàng", partner: "Nhân viên cửa hàng", goal: "Nói thứ muốn mua, hỏi màu và cỡ, mặc thử và hỏi cách trả tiền.",
+{ id: "tp-shop", ind: "giao-tiep", int: ["doi-song"], title: "Mua sắm ở cửa hàng", setting: "Bạn vào một cửa hàng quần áo ở Hàn Quốc. Nhân viên cửa hàng tới hỏi.", you: "Khách mua hàng", partner: "Nhân viên cửa hàng", goal: "Nói thứ muốn mua, hỏi màu và cỡ, mặc thử và hỏi cách trả tiền.",
   q: [
    { t: "어서 오세요. 무엇을 찾으세요?", rr: "Eoseo oseyo. Mueoseul chajeuseyo?", vi: "Chào mừng quý khách. Quý khách đang tìm gì?", hint: "Nói thứ bạn muốn mua + hỏi giá." },
    { t: "어떤 색을 좋아하세요?", rr: "Eotteon saegeul joahaseyo?", vi: "Bạn thích màu gì?", hint: "Nói màu bạn thích + hỏi còn màu nào khác không." },
@@ -71937,7 +71937,7 @@ tp: [
    { t: "현금으로 내시겠어요, 아니면 카드로 내시겠어요?", rr: "Hyeongeumeuro naesigesseoyo, animyeon kadeuro naesigesseoyo?", vi: "Bạn trả tiền mặt hay trả bằng thẻ?", hint: "Chọn 1 cách trả tiền + hỏi có hóa đơn không." }
   ],
   tip: "Mua hàng chỉ cần 3 ý: mua gì — cỡ/màu nào — trả tiền thế nào. Chưa quyết được thì nói “좀 더 볼게요” (tôi xem thêm đã)." },
-{ id: "tp-restaurant", title: "Gọi món ở nhà hàng", setting: "Tối thứ Bảy ở một nhà hàng Hàn Quốc. Bạn đi ăn cùng một người bạn. Nhân viên phục vụ tới hỏi.", you: "Khách ăn", partner: "Nhân viên phục vụ", goal: "Chọn chỗ ngồi, gọi đồ uống và món ăn, nói rõ ăn cay được hay không.",
+{ id: "tp-restaurant", ind: "giao-tiep", int: ["am-thuc"], title: "Gọi món ở nhà hàng", setting: "Tối thứ Bảy ở một nhà hàng Hàn Quốc. Bạn đi ăn cùng một người bạn. Nhân viên phục vụ tới hỏi.", you: "Khách ăn", partner: "Nhân viên phục vụ", goal: "Chọn chỗ ngồi, gọi đồ uống và món ăn, nói rõ ăn cay được hay không.",
   q: [
    { t: "몇 분이세요?", rr: "Myeot buniseyo?", vi: "Quý khách mấy người?", hint: "Số người + có cần bàn gần cửa sổ không." },
    { t: "뭘 드시겠어요?", rr: "Mwol deusigesseoyo?", vi: "Quý khách muốn ăn gì?", hint: "Tên món + số lượng; hỏi món nào ngon của quán." },
@@ -71946,7 +71946,7 @@ tp: [
    { t: "디저트가 필요하세요?", rr: "Dijeoteuga piryohaseyo?", vi: "Quý khách có cần món tráng miệng không?", hint: "Gọi món tráng miệng hoặc từ chối lịch sự + xin tính tiền." }
   ],
   tip: "Gọi món chỉ cần 3 ý: món gì — mấy phần — yêu cầu gì thêm. Nhớ nói rõ ăn cay được hay không trước khi gọi món cay." },
-{ id: "tp-interview", title: "Phỏng vấn xin việc", setting: "Bạn tới phỏng vấn cho một công việc bán thời gian. Người phỏng vấn hỏi về bạn, lý do xin việc, điểm mạnh và giờ làm được.", you: "Ứng viên", partner: "Nhà tuyển dụng", goal: "Giới thiệu bản thân, nói lý do xin việc và điểm mạnh, trả lời về giờ làm.",
+{ id: "tp-interview", ind: "cong-so", int: ["kinh-doanh"], title: "Phỏng vấn xin việc", setting: "Bạn tới phỏng vấn cho một công việc bán thời gian. Người phỏng vấn hỏi về bạn, lý do xin việc, điểm mạnh và giờ làm được.", you: "Ứng viên", partner: "Nhà tuyển dụng", goal: "Giới thiệu bản thân, nói lý do xin việc và điểm mạnh, trả lời về giờ làm.",
   q: [
    { t: "먼저 자기소개를 부탁합니다.", rr: "Meonjeo jagisogaereul butakamnida.", vi: "Trước tiên, xin hãy giới thiệu về bản thân bạn.", hint: "Tên + đang học/làm gì + vì sao muốn việc này, mỗi ý 1 câu ngắn." },
    { t: "왜 우리 회사에서 일하고 싶어요?", rr: "Wae uri hoesaeseo ilhago sipeoyo?", vi: "Vì sao bạn muốn làm việc ở công ty chúng tôi?", hint: "Nói thật: muốn kinh nghiệm + thích công việc này; đừng chỉ nói vì tiền." },

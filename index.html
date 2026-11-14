@@ -523,7 +523,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, pronDiagInviteDismissed: {}, gramRuleOpen: {}, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", adaptiveDone: {}, earDisc: {}, myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, pronDiagInviteDismissed: {}, gramRuleOpen: {}, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", adaptiveDone: {}, earDisc: {}, onboardingProfile: null, onboardingDone: false, myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -2281,9 +2281,229 @@ function adaptiveProfileHTML(track) {
   if (wm) h += '<h4>Kỹ năng nhỏ yếu nhất</h4><p><b>' + esc(wm.label) + '</b> (' + esc(wm.branch) + ') — ' + wm.ok + '/' + wm.total + ' đúng. <button class="btn" data-micro-practice="' + esc(wm.key) + '">Luyện ' + esc(wm.label) + ' →</button></p>';
   else h += '<h4>Kỹ năng nhỏ yếu nhất</h4><p class="mut">Chưa có dữ liệu — làm vài bài Đọc rồi quay lại.</p>';
   h += '<h4>Việc hôm nay</h4><p class="mut">' + (doneN ? '✓ Đã xong hôm nay: ' + doneN + ' việc.' : 'Chưa xong việc nào hôm nay — xem kế hoạch ngày ở trang chủ.') + '</p>';
+  /* v183: nganh + so thich tu onboarding. */
+  var _op = onbProfile();
+  if (_op) {
+    h += '<h4>Ngành và sở thích của tôi</h4><p><b>Ngành:</b> ' + esc(onbLabelOf(_op.industry)) + (_op.interests && _op.interests.length ? '<br><b>Sở thích:</b> ' + _op.interests.map(function (k) { return esc(onbLabelOf(k)); }).join(", ") : '<br><span class="mut">Chưa chọn sở thích.</span>') + ' <button class="btn" data-adaptive-go="onbEdit">Đổi ngành/sở thích →</button></p>';
+  } else {
+    h += '<h4>Ngành và sở thích của tôi</h4><p class="mut">Chưa chọn — chọn để web gợi ý bài hợp với ngành và sở thích của bạn. <button class="btn" data-adaptive-go="onbEdit">Chọn ngành/sở thích →</button></p>';
+  }
   if (guest) h += '<p class="mut">Bạn đang học với tư cách khách — hồ sơ chỉ lưu trên máy này. Đăng nhập để đồng bộ đầy đủ sang máy khác.</p>';
   return h + '</section>';
 }
+/* ============ v183: ONBOARDING NGANH/SO THICH ============
+   Man chao nguoi hoc moi (2 buoc, 1 man 1 viec): buoc 1 chon nganh,
+   buoc 2 chon so thich. Chi hien cho nguoi moi (cung dieu kien voi the
+   CHAO BAN MOI cua tung track) + chua lam/bo qua onboarding. Khong khoa
+   gi, khong hoi them thong tin ca nhan, khong nhan VIP/tra phi.
+   Ho so dung vao 3 cho that: the goi y o "Goi y hoc hom nay" (trang chu),
+   thu tu danh sach dong vai AI, va "Ho so hoc cua toi" (tab Cua toi). */
+var ONB_INDUSTRIES = [
+  { k: "y-te", label: "Y tế", hint: "Từ vựng bệnh viện, khám bệnh, sức khỏe" },
+  { k: "cong-so", label: "Công sở / Văn phòng", hint: "Họp, email, phỏng vấn, báo cáo" },
+  { k: "hoc-thuat", label: "Học thuật / Du học", hint: "Lớp học, trường, du học" },
+  { k: "du-lich", label: "Du lịch", hint: "Đặt phòng, hỏi đường, sân bay" },
+  { k: "giao-tiep", label: "Giao tiếp hàng ngày", hint: "Chào hỏi, mua sắm, ăn uống mỗi ngày" },
+  { k: "thi-cu", label: "Thi cử", hint: "Luyện thi, thi thử, giữ phong độ" }
+];
+var ONB_INTERESTS = [
+  { k: "am-thuc", label: "Ẩm thực" },
+  { k: "du-lich", label: "Du lịch" },
+  { k: "the-thao", label: "Thể thao" },
+  { k: "cong-nghe", label: "Công nghệ" },
+  { k: "am-nhac-phim", label: "Âm nhạc / Phim" },
+  { k: "kinh-doanh", label: "Kinh doanh" },
+  { k: "doi-song", label: "Đời sống hàng ngày" }
+];
+var onbEdit = false, onbStep = 1;
+var onbSel = { industry: null, interests: [] };
+function onbLabelOf(k) {
+  var all = ONB_INDUSTRIES.concat(ONB_INTERESTS);
+  for (var i = 0; i < all.length; i++) if (all[i].k === k) return all[i].label;
+  return k;
+}
+function onbProfile() { try { return (state && state.onboardingProfile) || null; } catch (e) { return null; } }
+/* v183: người đã làm chẩn đoán phát âm (có điểm chẩn đoán / điểm đọc từ)
+   cũng là người đã có dữ liệu học — không chặn họ bằng onboarding nữa,
+   để kế hoạch ngày thích ứng (v179: mục luyện âm yếu) vẫn thấy được. */
+function onbHasDiagData() {
+  try {
+    var pd = state.pronDiag || {};
+    if (Object.keys(pd).some(function (k) { return pd[k] && pd[k].scores && pd[k].scores.length > 0; })) return true;
+    var wp = state.wordPron || {};
+    if (Object.keys(wp).some(function (k) { var v = wp[k]; return v && typeof v === "object" && Object.keys(v).length > 0; })) return true;
+  } catch (e) {}
+  return false;
+}
+function onbShouldShow(track) {
+  if (onbEdit) return true;
+  try { if (state.onboardingDone) return false; } catch (e) { return false; }
+  try {
+    /* XP là chung toàn web (state.xp) — người đã có XP/tiến trình ở bất kỳ
+       track nào cũng không bị onboarding chặn kế hoạch ngày (v179: mục
+       luyện âm yếu trong kế hoạch ngày phải thấy được). */
+    if ((state.xp || 0) > 0) return false;
+    if (onbHasDiagData()) return false;
+    if (track === "zh") return isZhNewUser();
+    if (track === "tc") return isTcNewUser();
+    if (track === "tp") return isTpNewUser();
+    return isNewUser();
+  } catch (e) { return false; }
+}
+function onbOpenEdit() {
+  var p = onbProfile();
+  onbSel = { industry: p ? p.industry : null, interests: p ? (p.interests || []).slice() : [] };
+  onbStep = 1; onbEdit = true; go("home");
+}
+function onbFinish(skip) {
+  if (!skip) {
+    state.onboardingProfile = { industry: onbSel.industry, interests: onbSel.interests.slice() };
+  }
+  state.onboardingDone = true; saveState();
+  var wasEdit = onbEdit; onbEdit = false; onbStep = 1;
+  onbSel = { industry: null, interests: [] };
+  if (wasEdit) go("mine"); else render();
+}
+function onbHTML(track) {
+  var labels = { en: "TIẾNG ANH", zh: "TIẾNG TRUNG", tc: "TOEIC", tp: "TOPIK" };
+  var h = '<section class="card next-card" id="onbCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text">';
+  h += '<p class="eyebrow">CHÀO BẠN MỚI · ' + (labels[track] || "TIẾNG ANH") + '</p>';
+  if (onbStep === 1) {
+    h += '<h2>Bạn học ngoại ngữ để làm gì?</h2><p class="mut">Chọn 1 ngành gần với bạn nhất — web sẽ gợi ý bài hợp với ngành đó.</p>';
+    h += '<div class="row">' + ONB_INDUSTRIES.map(function (it) {
+      var sel = onbSel.industry === it.k;
+      return '<button class="btn' + (sel ? ' btn-amber' : '') + '" data-onb-ind="' + it.k + '"><b>' + esc(it.label) + '</b><br><span class="mut">' + esc(it.hint) + '</span></button>';
+    }).join("") + '</div>';
+    h += '<div class="row"><button class="btn btn-primary" id="onbNext" ' + (onbSel.industry ? '' : 'disabled') + '>Tiếp tục →</button><button class="btn" id="onbSkip">Bỏ qua, học ngay</button></div>';
+  } else {
+    h += '<h2>Bạn thích chủ đề nào?</h2><p class="mut">Chọn những chủ đề bạn thích — có thể chọn nhiều, hoặc không chọn chủ đề nào.</p>';
+    h += '<div class="row">' + ONB_INTERESTS.map(function (it) {
+      var sel = onbSel.interests.indexOf(it.k) >= 0;
+      return '<button class="btn' + (sel ? ' btn-amber' : '') + '" data-onb-int="' + it.k + '">' + esc(it.label) + '</button>';
+    }).join("") + '</div>';
+    h += '<div class="row"><button class="btn" id="onbBack">← Quay lại</button><button class="btn btn-primary" id="onbDone">Xong, bắt đầu học →</button><button class="btn" id="onbSkip">Bỏ qua, học ngay</button></div>';
+  }
+  h += '<p class="mut">Web chỉ dùng 2 lựa chọn này để gợi ý bài hợp với bạn — không hỏi thêm thông tin gì, không khóa bài nào.</p>';
+  return h + '</div></div></section>';
+}
+function onbWire(app, track) {
+  $$("[data-onb-ind]").forEach(function (b) { b.onclick = function () { onbSel.industry = b.dataset.onbInd; render(); }; });
+  $$("[data-onb-int]").forEach(function (b) { b.onclick = function () { var k = b.dataset.onbInt, i = onbSel.interests.indexOf(k); if (i >= 0) onbSel.interests.splice(i, 1); else onbSel.interests.push(k); render(); }; });
+  var nx = $("#onbNext"); if (nx) nx.onclick = function () { if (!onbSel.industry) return; onbStep = 2; render(); };
+  var bk = $("#onbBack"); if (bk) bk.onclick = function () { onbStep = 1; render(); };
+  var dn = $("#onbDone"); if (dn) dn.onclick = function () { onbFinish(false); };
+  var sk = $("#onbSkip"); if (sk) sk.onclick = function () { onbFinish(true); };
+  $$("[data-onb-rp]").forEach(function (b) { b.onclick = function () { openLesson({ type: "roleplayAI", track: track, rpScenId: b.dataset.onbRp }); }; });
+  $$("[data-onb-vocab]").forEach(function (b) { b.onclick = function () { onbOpenVocab(track, b.dataset.onbVocab); }; });
+}
+/* Diem khop dong vai: nganh khop +2, moi so thich khop +1. */
+function onbRpScore(scen, prof) {
+  if (!prof || !scen) return { score: 0, reason: "" };
+  var sc = 0, reason = "";
+  if (scen.ind && prof.industry && scen.ind === prof.industry) { sc += 2; reason = "Hợp với ngành " + onbLabelOf(prof.industry) + " của bạn"; }
+  var ints = prof.interests || [];
+  for (var i = 0; i < ints.length; i++) {
+    if (scen.int && scen.int.indexOf(ints[i]) >= 0) { sc += 1; if (!reason) reason = "Hợp với sở thích " + onbLabelOf(ints[i]) + " của bạn"; }
+  }
+  return { score: sc, reason: reason };
+}
+function rpScenSorted(track) {
+  var list = rpScenList(track).slice();
+  var prof = onbProfile();
+  if (!prof) return list;
+  var scored = list.map(function (s, i) { return { s: s, i: i, r: onbRpScore(s, prof) }; });
+  scored.sort(function (a, b) { if (b.r.score !== a.r.score) return b.r.score - a.r.score; return a.i - b.i; });
+  return scored.map(function (x) { return x.s; });
+}
+function rpScenReason(scen) {
+  var prof = onbProfile(); if (!prof) return "";
+  return onbRpScore(scen, prof).reason || "";
+}
+/* Khop bo tu theo chu de: dung cum tu (khong dung tu don — "kham" tran
+   dinh "kham pha", "truong" tran dinh "thi truong"). Nganh khop +2, moi
+   so thich khop +1; chi chon bo chua xong co diem cao nhat. */
+var ONB_TOPIC_KEYS = {
+  "y-te": ["y tế", "sức khỏe", "bệnh", "khám bệnh", "bác sĩ", "thuốc", "bệnh viện"],
+  "cong-so": ["công sở", "văn phòng", "công việc", "quản lý", "nhân viên", "phỏng vấn", "xin việc", "hợp đồng"],
+  "hoc-thuat": ["trường học", "lớp học", "giáo dục", "đại học", "sinh viên", "học thuật", "môn học"],
+  "du-lich": ["du lịch", "khách sạn", "sân bay", "đặt vé"],
+  "giao-tiep": ["giao tiếp", "chào hỏi", "làm quen"],
+  "thi-cu": ["thi cử", "thi thử", "kiểm tra"],
+  "am-thuc": ["ăn uống", "nhà hàng", "món ăn", "ẩm thực", "dinh dưỡng", "đồ ăn", "đồ uống"],
+  "the-thao": ["thể thao", "thể dục", "bóng đá"],
+  "cong-nghe": ["công nghệ", "máy tính", "internet", "điện thoại", "phần mềm"],
+  "am-nhac-phim": ["âm nhạc", "phim", "điện ảnh", "ca sĩ", "bài hát"],
+  "kinh-doanh": ["kinh doanh", "thị trường", "bán hàng", "khách hàng", "hợp đồng", "marketing", "tài chính"],
+  "doi-song": ["gia đình", "đời sống", "hàng ngày", "mua sắm", "nhà ở", "quần áo", "thời tiết", "nhà bếp", "việc nhà"]
+};
+function onbTopicScore(topic, prof) {
+  if (!prof || !topic) return 0;
+  var t = String(topic).toLowerCase(), sc = 0;
+  function has(key) { var ks = ONB_TOPIC_KEYS[key] || []; for (var i = 0; i < ks.length; i++) if (t.indexOf(ks[i]) >= 0) return true; return false; }
+  if (prof.industry && has(prof.industry)) sc += 2;
+  (prof.interests || []).forEach(function (k) { if (has(k)) sc += 1; });
+  return sc;
+}
+function onbVocabMatch(track) {
+  var prof = onbProfile(); if (!prof) return null;
+  var best = null, bestScore = 0;
+  function consider(topic, open, done) {
+    if (done) return;
+    var sc = onbTopicScore(topic, prof);
+    if (sc > bestScore) { bestScore = sc; best = { topic: topic, open: open }; }
+  }
+  try {
+    if (track === "en") {
+      var sets = CONTENT.vocab || [];
+      var order = sets.map(function (x, i) { return i; });
+      order.sort(function (a, b) {
+        var ba = sets[a].band || "Chưa xếp band", bb = sets[b].band || "Chưa xếp band";
+        if (ba === "Chưa xếp band" && bb !== "Chưa xếp band") return 1;
+        if (bb === "Chưa xếp band" && ba !== "Chưa xếp band") return -1;
+        if (ba === bb) return a - b;
+        return bandSortVal(ba) - bandSortVal(bb);
+      });
+      order.forEach(function (i) {
+        var done = false; try { done = rbStepDone({ doneKey: "vocabPos:" + i }); } catch (e) { done = false; }
+        consider(sets[i].topic, "en:" + i, done);
+      });
+    } else if (track === "zh") {
+      zhSets().forEach(function (d) { consider(d.set.topic, "zh:" + d.key, zhSetDone(d)); });
+    } else if (track === "tc" || track === "tp") {
+      var isTc = track === "tc";
+      var flat = isTc ? tcFlatOrder() : tpFlatOrder();
+      var meta = isTc ? tcStepMeta : tpStepMeta, st = isTc ? tcStepStatus : tpStepStatus;
+      flat.forEach(function (id) {
+        var m = meta(id); if (!m || m.kind !== "vocab") return;
+        consider((m.title || "").replace(/^Từ vựng:\s*/, ""), track + ":" + id, st(id) === "done");
+      });
+    }
+  } catch (e) { return null; }
+  return best;
+}
+function onbOpenVocab(track, val) {
+  lessonStart = Date.now(); runWrong = []; runFirstTry = {};
+  var parts = String(val || "").split(":");
+  if (parts[0] === "en") { openLesson({ type: "vocab", setIdx: +parts[1] }); return; }
+  if (parts[0] === "zh") { var d = zhSetByKey(parts.slice(1).join(":")); openLesson({ type: "zhVocab", setKey: d ? d.key : parts.slice(1).join(":"), idx: d ? zhSetPos(d) : 0 }); return; }
+  if (parts[0] === "tc") { tcOpenStep(parts.slice(1).join(":"), "home"); return; }
+  if (parts[0] === "tp") { tpOpenStep(parts.slice(1).join(":"), "home"); return; }
+}
+function onbSuggestHTML(track) {
+  var prof = onbProfile(); if (!prof) return "";
+  var rp = null, rpReason = "";
+  try {
+    var list = rpScenSorted(track);
+    if (list.length) { var r0 = onbRpScore(list[0], prof); if (r0.score > 0) { rp = list[0]; rpReason = r0.reason; } }
+  } catch (e) {}
+  var vm = null; try { vm = onbVocabMatch(track); } catch (e) {}
+  if (!rp && !vm) return "";
+  var h = '<section class="card" id="onbSuggest"><h3>🎯 Gợi ý theo ngành/sở thích của bạn</h3>';
+  if (rp) h += '<p><b>Đóng vai: ' + esc(rp.title) + '</b><br><span class="mut">' + esc(rpReason) + '.</span> <button class="btn" data-onb-rp="' + esc(rp.id) + '">Bắt đầu tình huống này →</button></p>';
+  if (vm) h += '<p><b>Học bộ từ: ' + esc(vm.topic) + '</b><br><span class="mut">Bộ từ hợp với ngành/sở thích của bạn.</span> <button class="btn" data-onb-vocab="' + esc(vm.open) + '">Học bộ từ này →</button></p>';
+  return h + '</section>';
+}
+
 /* v181: da xoa dinh nghia drillSpeak(track, text, rate) chet o day — bi dinh nghia drillSpeak(text, track, rate) phia sau che hoan toan; cho goi duy nhat sai thu tu (renderWeakPronDrill) da sua sang (word, track, rate). */
 function weakPronDrillBuild(track) {
   var items = [];
@@ -2661,6 +2881,7 @@ function specTodayGo(action) {
   var parts = String(action || "").split(":");
   if (parts[0] === "review") { go("review"); return; }
   if (parts[0] === "profile") { go("mine"); return; }
+  if (parts[0] === "onbEdit") { onbOpenEdit(); return; }
   if (parts[0] === "weakDrill") { openLesson({ type: "weakPronDrill", track: parts[1] || "en" }); return; }
   if (parts[0] === "weakSym") { var _ws = null; try { var _wd = pronWeakData(parts[1]); _wd.sounds.forEach(function (s) { if (s.sym === parts[2]) _ws = s; }); } catch (e) {} if (_ws) { pronDiagLearn(parts[1], _ws); return; } pronDiagOpenArea(parts[1]); return; }
   if (parts[0] === "diag") { pronDiagOpenArea(parts[1] || "en"); return; }
@@ -4984,7 +5205,9 @@ function viewHome(app) {
   var t = trulyNew ? null : sessionTarget();
   var todayHTML = specTodayHTML(t); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
   var planHTML = todayHTML || yourJourneyHTML("en"); /* v182: ke hoach ngay nam TRONG the Buoi hoc hom nay, khong the rieng */
-  if (trulyNew) {
+  if (onbShouldShow("en")) {
+    html += onbHTML("en");
+  } else if (trulyNew) {
     html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra trình độ đầu vào (trắc nghiệm) để web xếp đúng chặng cho bạn.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra trình độ đầu vào (trắc nghiệm)</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div>' + planHTML + '</div></div></section>';
   } else {
     var heroEyebrow = "BUỔI HỌC HÔM NAY" + (t.kind === "review" ? " · ÔN TRƯỚC" : "");
@@ -5004,7 +5227,7 @@ function viewHome(app) {
 
   /* v84: Vào nhanh theo loại đã có đủ ở Luyện tập (thẻ Tìm bài, 7 nút) —
      bỏ khỏi trang chủ để màn chính chỉ còn một việc tiếp theo. */
-  html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML("en") + homeListenHTML("en") + msHomeHTML("en") + homeQuickHTML("en") + u8DailyHTML() + '</details>';
+  html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + onbSuggestHTML("en") + homeWordsHTML("en") + homeListenHTML("en") + msHomeHTML("en") + homeQuickHTML("en") + u8DailyHTML() + '</details>';
   /* v84: tiến trình chi tiết (heatmap/tổng kết/mốc) dời sang Của tôi →
      Tiến trình của tôi — trang chủ chỉ giữ dòng tiến trình ở stat-strip. */
   html += '<details class="card" id="homeMore"><summary><b>Xem thêm: trò chơi, bản đồ, kiểm tra đầu vào</b></summary>'
@@ -5013,6 +5236,7 @@ function viewHome(app) {
     + '</details></div></div>';
   app.innerHTML = html;
   pronDiagInviteWire(app); /* v166 F1 */
+  onbWire(app, (state && state.track) || "en"); /* v183 */
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var ll = $("#loginLink"); if (ll) { try { ll.textContent = (typeof authState !== "undefined" && authState.user) ? "Tài khoản: " + authState.user.email : "Đăng nhập"; } catch (e) {} }
   var nbHome = $("#nextBtn"); if (nbHome) nbHome.onclick = function () {
@@ -6912,6 +7136,8 @@ function mergeGuestIntoAccount(guest, acc) {
   merged.personalPath = (acc && acc.personalPath) || (guest && guest.personalPath) || null;
   merged.entryPlaced = (acc && acc.entryPlaced) || (guest && guest.entryPlaced) || null;
   merged.entrySkipped = !!((acc && acc.entrySkipped) || (guest && guest.entrySkipped));
+  merged.onboardingProfile = (acc && acc.onboardingProfile) || (guest && guest.onboardingProfile) || null;
+  merged.onboardingDone = !!((acc && acc.onboardingDone) || (guest && guest.onboardingDone));
   merged.track = (acc && acc.track) ? acc.track : (guest.track || "en");
   merged.trackChosen = !!((acc && acc.trackChosen) || (guest && guest.trackChosen));
   merged.authSkipped = !!((acc && acc.authSkipped) || (guest && guest.authSkipped));
@@ -7059,6 +7285,8 @@ function syncPull(uid) {
           else if (k === "tpMockTests") acc.tpMockTests = r.state || [];
           else if (k === "pronDiag") acc.pronDiag = r.state || {};
           else if (k === "adaptiveDone") acc.adaptiveDone = r.state || {};
+          else if (k === "onboardingProfile") acc.onboardingProfile = r.state || null;
+          else if (k === "onboardingDone") acc.onboardingDone = !!r.state;
           else if (k === "skillDone") acc.skillDone = r.state || {};
           else if (k === "mockTests") acc.mockTests = r.state || [];
           else if (k === "phaseExams") acc.phaseExams = r.state || [];
@@ -7152,6 +7380,8 @@ function syncPush() {
       row("rb", "tpMockTests", state.tpMockTests || []);
       row("rb", "pronDiag", state.pronDiag || {});
       row("rb", "adaptiveDone", state.adaptiveDone || {});
+      row("rb", "onboardingProfile", state.onboardingProfile || null);
+      row("rb", "onboardingDone", !!state.onboardingDone);
       row("rb", "skillDone", state.skillDone || {});
       row("rb", "mockTests", state.mockTests || []);
       row("rb", "phaseExams", state.phaseExams || []);
@@ -18065,6 +18295,8 @@ function renderRoleplayAI(app, l) {
   var track = l.rpTrack || (state && state.track) || "en";
   var scen = l.rpScen || null;
   if (!l.rpPhase) l.rpPhase = "pick";
+  /* v183: mo thang 1 tinh huong tu the goi y onboarding (rpScenId). */
+  if (l.rpScenId && l.rpPhase === "pick") { var _rs = null; rpScenList(track).forEach(function (x) { if (x.id === l.rpScenId) _rs = x; }); l.rpScenId = null; if (_rs) { startSession(_rs); return; } }
   if (!l.rpAnswers) l.rpAnswers = [];
   if (!l.rpAi) l.rpAi = {};
   if (!l.rpSelf) l.rpSelf = {};
@@ -18106,8 +18338,9 @@ function renderRoleplayAI(app, l) {
       + '<div class="qblock"><p><b>Cách chơi:</b> chọn 1 tình huống, trả lời 5 câu hỏi của đối tác bằng lời của bạn (nói to hoặc gõ), rồi xem tóm tắt sau buổi: từ vựng, ngữ pháp, phát âm + điểm mạnh + điểm sửa + câu đúng gợi ý.</p>'
       + '<p class="mut">AI chấm 3 chiều chỉ mở cho VIP — không VIP vẫn chơi trọn buổi và tự đối chiếu theo bảng tiêu chí. Mỗi buổi xong được +10 XP.</p></div>';
     h += '<h3>Chọn tình huống</h3>';
-    rpScenList(track).forEach(function (s, i) {
-      h += '<div class="qblock"><p><b>' + esc(s.title) + '</b></p><p class="mut">' + esc(s.setting) + '</p><p class="mut">Mục tiêu: ' + esc(s.goal) + '</p><div class="row"><button class="btn" data-rpscen="' + i + '">Bắt đầu →</button></div></div>';
+    rpScenSorted(track).forEach(function (s, i) {
+      var _rr = rpScenReason(s);
+      h += '<div class="qblock"><p><b>' + esc(s.title) + '</b></p>' + (_rr ? '<p class="mut">⭐ ' + esc(_rr) + '</p>' : '') + '<p class="mut">' + esc(s.setting) + '</p><p class="mut">Mục tiêu: ' + esc(s.goal) + '</p><div class="row"><button class="btn" data-rpscen="' + i + '">Bắt đầu →</button></div></div>';
     });
     var customs = rpCustomList(track);
     if (customs.length) {
@@ -18125,7 +18358,7 @@ function renderRoleplayAI(app, l) {
     return h;
   }
   function pickWire() {
-    $$("[data-rpscen]").forEach(function (b) { b.onclick = function () { startSession(rpScenList(track)[+b.dataset.rpscen]); }; });
+    $$("[data-rpscen]").forEach(function (b) { b.onclick = function () { startSession(rpScenSorted(track)[+b.dataset.rpscen]); }; });
     $$("[data-rpcustom]").forEach(function (b) { b.onclick = function () { startSession(rpCustomList(track)[+b.dataset.rpcustom]); }; });
     $$("[data-rpcustomdel]").forEach(function (b) { b.onclick = function () { var cs = rpCustomList(track); cs.splice(+b.dataset.rpcustomdel, 1); saveState(); render(); }; });
     $$("[data-rphist]").forEach(function (b) { b.onclick = function () { var log = rpLogList().filter(function (e) { return e.track === track; }); l.rpHistEntry = log[+b.dataset.rphist]; l.rpPhase = "history"; render(); }; });
@@ -22693,7 +22926,9 @@ function viewHomeZh(app) {
   html += '<div class="home-clean"><div class="home-hero">';
   var todayZhHTML = specTodayZhHTML(tZh ? tZh.title : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
   var planZhHTML = todayZhHTML || yourJourneyHTML("zh"); /* v182: ke hoach ngay nam TRONG the Buoi hoc hom nay, khong the rieng */
-  if (fresh) {
+  if (onbShouldShow("zh")) {
+    html += onbHTML("zh");
+  } else if (fresh) {
     html += '<section class="card next-card" id="zhEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TIẾNG TRUNG</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi HSK thật. Bỏ qua thì học từ chặng 1.</p><div class="row"><button class="btn btn-primary" id="zhEntryStartBtn">Kiểm tra trình độ HSK</button><button class="btn" id="zhNextBtn">Bỏ qua, học từ chặng 1</button></div>' + planZhHTML + '</div></div></section>';
   } else {
     html += '<section class="card next-card" id="zhNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TIẾNG TRUNG</p><h2>' + esc(tZh.title) + '</h2><p class="mut">' + esc(tZh.type) + '</p><button class="btn btn-primary" id="zhNextBtn">Học tiếp →</button>' + planZhHTML + '</div></div></section>';
@@ -22705,7 +22940,7 @@ function viewHomeZh(app) {
      thứ tự mục ở cả 4 track. "VÀO NHANH THEO LOẠI" đã có đủ ở Luyện tập
      nên không còn ở trang chủ. Nội dung thật từng track giữ nguyên, chỉ
      xếp lại vào khung chung. */
-  html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML("zh") + homeListenHTML("zh") + homeQuickHTML("zh") + msHomeHTML("zh") + '<section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Bản đồ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Bản đồ →</button></div></section>' + zhSystemEHTML() + '</details>';
+  html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + onbSuggestHTML("zh") + homeWordsHTML("zh") + homeListenHTML("zh") + homeQuickHTML("zh") + msHomeHTML("zh") + '<section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Bản đồ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Bản đồ →</button></div></section>' + zhSystemEHTML() + '</details>';
   html += '<details class="card" id="homeMore"><summary><b>' + (fresh ? 'Xem thêm: bản đồ, đăng nhập' : 'Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập') + '</b></summary>'
     + '<p><button class="btn" id="zhHomeFullMapBtn">Xem toàn bộ bản đồ 6 chặng →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>'
     + '<p>' + (fresh ? '' : '<button class="dimlink" id="zhEntryRedoLink">Làm lại kiểm tra đầu vào HSK</button> · ') + '<button class="dimlink" id="zhToRoadmap">Xem bản đồ tiếng Trung →</button> · <button class="dimlink" id="zhLoginLink">Đăng nhập</button></p>'
@@ -22713,6 +22948,7 @@ function viewHomeZh(app) {
     + '</details></div></div>';
   app.innerHTML = html;
   pronDiagInviteWire(app); /* v166 F1 */
+  onbWire(app, (state && state.track) || "en"); /* v183 */
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = $("#zhNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.zhEntrySkipped = true; saveState(); openLesson({ type: "zhPh", idx: 0 }); return; }
@@ -26127,7 +26363,9 @@ function viewHomeTc(app) {
   html += '<div class="home-clean"><div class="home-hero">';
   var todayTcHTML = specTodayTcHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
   var planTcHTML = todayTcHTML || yourJourneyHTML("tc"); /* v182: ke hoach ngay nam TRONG the Buoi hoc hom nay, khong the rieng */
-  if (fresh) {
+  if (onbShouldShow("tc")) {
+    html += onbHTML("tc");
+  } else if (fresh) {
     html += '<section class="card next-card" id="tcEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOEIC</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOEIC thật. Bỏ qua thì học từ Chặng 450.</p><div class="row"><button class="btn btn-primary" id="tcEntryStartBtn">Kiểm tra trình độ TOEIC</button><button class="btn" id="tcNextBtn">Bỏ qua, học từ Chặng 450</button></div>' + planTcHTML + '</div></div></section>';
   } else if (n) {
     html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TOEIC</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOEIC Nghe–Đọc, từ 450 tới 900+.</p><button class="btn btn-primary" id="tcNextBtn">Học tiếp →</button>' + planTcHTML + '</div></div></section>';
@@ -26137,10 +26375,11 @@ function viewHomeTc(app) {
   html += '</div>';
   html += pronDiagInviteHTML("tc"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
-  html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML("tc") + homeListenHTML("tc") + homeQuickHTML("tc") + msHomeHTML("tc") + '<details class="card"><summary><b>TOEIC Nghe–Đọc là gì?</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></details>';
+  html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + onbSuggestHTML("tc") + homeWordsHTML("tc") + homeListenHTML("tc") + homeQuickHTML("tc") + msHomeHTML("tc") + '<details class="card"><summary><b>TOEIC Nghe–Đọc là gì?</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></details>';
   html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tcEntryRedoLink">Làm lại kiểm tra đầu vào TOEIC</button></p>') + '</details></div></div>';
   app.innerHTML = html;
   pronDiagInviteWire(app); /* v166 F1 */
+  onbWire(app, (state && state.track) || "en"); /* v183 */
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tcNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.tcEntrySkipped = true; saveState(); tcOpenStep(TC_STAGES[0].steps[0], "home"); return; }
@@ -27309,7 +27548,9 @@ function viewHomeTp(app) {
   html += '<div class="home-clean"><div class="home-hero">';
   var todayTpHTML = specTodayTpHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
   var planTpHTML = todayTpHTML || yourJourneyHTML("tp"); /* v182: ke hoach ngay nam TRONG the Buoi hoc hom nay, khong the rieng */
-  if (fresh) {
+  if (onbShouldShow("tp")) {
+    html += onbHTML("tp");
+  } else if (fresh) {
     html += '<section class="card next-card" id="tpEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOPIK</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOPIK thật. Bỏ qua thì học từ bảng chữ Hangul.</p><div class="row"><button class="btn btn-primary" id="tpEntryStartBtn">Kiểm tra trình độ TOPIK</button><button class="btn" id="tpNextBtn">Bỏ qua, học từ Hangul</button></div>' + planTpHTML + '</div></div></section>';
   } else if (n) {
     html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TOPIK</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOPIK: Hangul trước, rồi TOPIK I cấp 1–2, hướng lên TOPIK II.</p><button class="btn btn-primary" id="tpNextBtn">Học tiếp →</button>' + planTpHTML + '</div></div></section>';
@@ -27319,10 +27560,11 @@ function viewHomeTp(app) {
   html += '</div>';
   html += pronDiagInviteHTML("tp"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
-  html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML("tp") + homeListenHTML("tp") + homeQuickHTML("tp") + msHomeHTML("tp") + '<details class="card"><summary><b>TOPIK là gì?</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></details>';
+  html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + onbSuggestHTML("tp") + homeWordsHTML("tp") + homeListenHTML("tp") + homeQuickHTML("tp") + msHomeHTML("tp") + '<details class="card"><summary><b>TOPIK là gì?</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></details>';
   html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tpEntryRedoLink">Làm lại kiểm tra đầu vào TOPIK</button></p>') + '</details></div></div>';
   app.innerHTML = html;
   pronDiagInviteWire(app); /* v166 F1 */
+  onbWire(app, (state && state.track) || "en"); /* v183 */
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tpNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.tpEntrySkipped = true; saveState(); tpOpenStep(TP_STAGES[0].steps[0], "home"); return; }
