@@ -489,7 +489,7 @@ function fmtBandComma(b) { return (Math.round(b * 10) / 10).toFixed(1).replace("
 function speak(text, rate, onend) { try { if (window.speechSynthesis && window.SpeechSynthesisUtterance) { window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; if (rate) u.rate = rate; if (onend) u.onend = onend; window.speechSynthesis.speak(u); } } catch (e) {} }
 /* v126: doc cau tieng Trung phai dung giong zh-CN (zhSpeak), khong dung giong en-GB. */
 function hasCJK(s) { return /[\u3400-\u9FFF\uF900-\uFAFF]/.test(String(s || "")); }
-function speakAuto(text, rate, onend) { if (hasCJK(text)) zhSpeak(text, rate, onend); else speak(text, rate, onend); }
+function speakAuto(text, rate, onend) { if (hasCJK(text)) zhSpeak(text, rate, onend); else if (/[\uAC00-\uD7A3]/.test(String(text || ""))) tpSpeak(text, rate, onend); else speak(text, rate, onend); } /* v186 U9: cau Han doc bang ko-KR (truoc day roi ve en-GB) */
 /* v107b: trang thai dang phat cho nut "Nghe giong mau" (buoc 1 tu vung) — truoc
    day bam nut khong co phan hoi nhin thay duoc. Khoi phuc qua onend (speak) hoac
    timeout uoc luong (zhSpeak/tpSpeak khong co onend); timeout tham chieu nut cu
@@ -1888,6 +1888,7 @@ function u3HasTrapMarker(q) {
 }
 /* Go y nguyen nhan theo quy tac tu lessonId (EN/ZH) — khong AI. */
 function u3SuggestCause(lessonId, q, track) {
+  if (q && q.u9 === "paraphrase") return "understand"; /* v186 U9: chep dung ma chon sai dap an = loi hieu, khong phai loi chinh ta */
   var L = String(lessonId || "");
   if (/typing|dictation/.test(L)) return "spelling";
   if (/^gram/.test(L)) return "grammar";
@@ -1932,7 +1933,7 @@ function u3CauseSelectHTML(h, store, key, idx, track) {
     opts += '<option value="' + c.k + '"' + (cur === c.k ? " selected" : "") + '>' + esc(u3CauseLabel(c.k, track)) + '</option>';
   });
   var hint = (h.causeBy === "rule" && cur) ? ' <span class="mut">Gợi ý theo quy tắc — bạn sửa lại được.</span>' : "";
-  return '<label class="mut">Nguyên nhân: <select data-u3-cause data-u3-store="' + store + '"' + (key ? ' data-u3-key="' + esc(key) + '"' : "") + (idx != null ? ' data-u3-idx="' + idx + '"' : "") + ' data-u3-track="' + track + '">' + opts + '</select></label>' + hint;
+  return '<label class="mut">Nguyên nhân: <select data-u3-cause data-u3-store="' + store + '"' + (key ? ' data-u3-key="' + esc(key) + '"' : "") + (idx != null ? ' data-u3-idx="' + idx + '"' : "") + ' data-u3-track="' + track + '">' + opts + '</select></label>' + hint + u9LabelHTML(h); /* v186 U9 */
 }
 function u3WireCause(app) {
   var sels = (app || document).querySelectorAll("[data-u3-cause]");
@@ -2032,8 +2033,8 @@ function recordQuizError(lessonId, qi, q) {
   // đầu tiên làm options để màn Ôn tập vẫn hiện được đáp án đúng như câu trắc nghiệm.
   var opts = q.o || q.options || null, ans = q.a;
   if (!opts && q.answer) { opts = [String(q.answer).split("|")[0]]; ans = 0; }
-  if (!state.hard[key]) { var __h0 = { kind: "quiz", lesson: lessonId, qi: qi, q: q.q, options: opts, a: ans, why: q.why, streak: 0, level: 0, fails: 1, due: addDaysStr(todayStr(), 1) }; u3EnsureCause(__h0, lessonId, q, "en"); state.hard[key] = __h0; }
-  else { var he = state.hard[key]; he.fails = (he.fails || 0) + 1; he.streak = 0; if (he.done) { he.done = false; he.level = 0; } he.due = addDaysStr(todayStr(), 1); }
+  if (!state.hard[key]) { var __h0 = { kind: "quiz", lesson: lessonId, qi: qi, q: q.q, options: opts, a: ans, why: q.why, streak: 0, level: 0, fails: 1, due: addDaysStr(todayStr(), 1) }; if (q.u9) __h0.u9 = q.u9; /* v186 U9: nhan loi nghe/paraphrase */ u3EnsureCause(__h0, lessonId, q, "en"); state.hard[key] = __h0; }
+  else { var he = state.hard[key]; he.fails = (he.fails || 0) + 1; he.streak = 0; if (q.u9) he.u9 = q.u9; /* v186 U9: nhan moi nhat thang */ if (he.done) { he.done = false; he.level = 0; } he.due = addDaysStr(todayStr(), 1); }
   saveState();
 }
 
@@ -16698,10 +16699,11 @@ function dictToks(sent) {
   if (/[\u3400-\u9FFF\uF900-\uFAFF]/.test(String(sent || ""))) return { toks: Array.from(String(sent || "")), join: "" };
   return { toks: String(sent || "").split(" "), join: " " };
 }
-function dictMaskFor(sent, level) {
+function dictMaskFor(sent, level, strict, track) {
   var dt = dictToks(sent);
   return dt.toks.map(function (tok, i) {
-    if (i === 0 || !/[A-Za-z0-9\u3400-\u9FFF\uF900-\uFAFF]/.test(tok)) return false;
+    if (i === 0 || !/[A-Za-z0-9\u3400-\u9FFF\uF900-\uFAFF\uAC00-\uD7A3]/.test(tok)) return false; /* v186 U9: tu Han cung che duoc */
+    if (!strict && u9IsFiller(tok, track)) return false; /* v186 U9: che do thuong — tu dem luon hien, khong phai nghe ra */
     if (level === "easy") return i % 4 === 3;
     if (level === "hard") return true;
     return i % 2 === 1;
@@ -16712,6 +16714,7 @@ function dictScaffold(sent, mask, revealed) {
   return dt.toks.map(function (tok, i) {
     if (!mask[i] || (revealed && revealed[i])) return tok;
     if (/[\u3400-\u9FFF\uF900-\uFAFF]/.test(tok)) return "＿";
+    if (/[\uAC00-\uD7A3]/.test(tok)) return tok.replace(/[\uAC00-\uD7A3]/g, "＿"); /* v186 U9: che tu Han theo am tiet */
     return tok.replace(/[A-Za-z0-9]+/g, "___");
   }).join(dt.join);
 }
@@ -16770,6 +16773,217 @@ function refreshGoalStrips() {
   if (gs) gs.textContent = goalStripToday() + " · 🔥 Chuỗi " + streakDays() + " ngày";
 }
 
+/* ================= v186 U9 (TID T9): LISTENING — tach loi nghe vs loi paraphrase
+   + phan loai tu trong chua nghe chep + che do nghiem ngat cham ca tu dem.
+   Nhan U9 chi noi ve DAC DIEM THAT cua tu bi sai (tu yeu, duoi -s, so, tu dem,
+   bien dieu, batchim) — khong doan nguyen nhan. Luat Latin (-s/-ed/noi am) chi
+   ap EN/TC; ZH/TP dung luat rieng cua he chu. Che do nghiem ngat chi mo o bai
+   co transcript that da kiem chung (130 bai kho + 4 video phu de that). */
+var U9_FILLERS = {
+  en: ["oh", "wow", "uhm", "uh", "um", "hmm", "ah", "yeah", "er"],
+  zh: ["啊", "呃", "嗯", "哦", "哎"],
+  tc: ["oh", "wow", "uhm", "uh", "um", "hmm", "ah", "yeah", "er"],
+  tp: ["어", "음", "아", "에"]
+};
+var U9_WEAK_EN = ["the", "a", "an", "to", "of", "in", "on", "at", "for", "with", "from", "and", "but", "or", "so", "is", "are", "was", "were", "be", "been", "have", "has", "had", "will", "would", "can", "could", "should", "it", "its", "this", "that", "these", "those", "there", "here", "when", "where", "which", "who", "what", "how", "not", "as", "by", "he", "she", "they", "we", "you", "i", "me", "him", "her", "them", "his", "their", "my", "your", "our", "do", "does", "did", "am"];
+var U9_WEAK_ZH = ["吗", "呢", "吧", "的", "了", "着", "过", "们"];
+var U9_WEAK_TP = ["이", "가", "을", "를", "은", "는", "의", "에", "도", "만"];
+var U9_NUM_EN = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety", "hundred", "thousand", "million"];
+var U9_NUM_TP = ["하나", "둘", "셋", "넷", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구", "십", "백", "천"];
+var U9_LINK = ["a lot of", "lot of", "kind of", "sort of", "out of", "one of", "some of", "want to", "going to", "got to", "pick up", "turn on", "turn off", "look at", "come on", "let me", "give me"];
+var U9_S_EXCL = ["yes", "always", "sometimes", "across", "business", "glass", "class", "plus", "thus", "news", "series", "chaos"];
+var U9_ED_EXCL = ["bed", "red", "need", "feed", "seed", "speed", "indeed", "weed", "greed", "breed", "bleed"];
+/* 3 cau hoi hieu tu soan cho video ZH/TC/TP — tu transcript that + ban dich Viet
+   trong VIDEO_LINES; dap an dung dien dat lai y trong cau thoai, why trich dung cau. */
+var U9_VIDEO_QUIZ = {
+  "zh-e10": [
+    { q: "Vì sao Tiểu Ái nghỉ việc ở công ty cũ?", o: ["Lương không cao, lại không có chỗ để phát triển", "Công ty phá sản", "Cô ấy muốn đi du học", "Sếp đuổi việc cô ấy"], a: 0, why: "Câu 5: “工资不高，然后也没有什么发展的空间。” — Lương không cao, mà cũng chẳng có chỗ để phát triển." },
+    { q: "Công ty Pháp tuyển dụng như thế nào?", o: ["Chỉ phỏng vấn thôi", "Vừa thi viết vừa thi nói", "Chỉ thi viết", "Không tuyển nữa"], a: 0, why: "Câu 13: “法国的公司只有面试。” — Công ty Pháp chỉ phỏng vấn thôi." },
+    { q: "Khi nào Tiểu Ái biết kết quả phỏng vấn?", o: ["Muộn nhất là tuần sau", "Ngay hôm sau", "Cuối tháng", "Chưa biết khi nào"], a: 0, why: "Câu 20: “最晚下星期。” — Muộn nhất là tuần sau." }
+  ],
+  "tc-e5": [
+    { q: "Tom gặp rắc rối gì với lịch làm việc?", o: ["Hai cuộc họp trùng giờ với hai khách hàng cực kỳ quan trọng", "Quên mất giờ họp", "Cuộc họp bị hủy", "Khách hàng không đến"], a: 0, why: "Câu 9: “I’ve got two meetings scheduled at the same time with two extremely important clients.”" },
+    { q: "Anna giúp Tom như thế nào?", o: ["Tiếp ông Lime thay Tom", "Hủy một cuộc họp", "Gọi điện xin lỗi khách hàng", "Làm lại lịch cho Tom"], a: 0, why: "Câu 17: “You talk to Mr Lime…” và câu 20: Tom nhờ Anna giữ ông Lime lại trò chuyện, tìm hiểu xem ông ấy muốn gì." },
+    { q: "Ông Lime đến từ công ty nào?", o: ["Citrus Ventures — sở hữu hàng trăm quán nước ép", "Một chuỗi nhà hàng", "Một ngân hàng", "Một hãng luật"], a: 0, why: "Câu 17: “He's from a company called Citrus Ventures. They own hundreds of juice bars.”" }
+  ],
+  "tp-e10": [
+    { q: "비누 gọi điện cho 자피 để làm gì?", o: ["Rủ đi ăn thịt ba chỉ nướng", "Mượn tiền", "Hỏi bài tập", "Chúc mừng sinh nhật"], a: 0, why: "Câu 5: “왜냐하면 저는 삼겹살을 먹고 싶어요.” — Vì mình muốn ăn thịt ba chỉ nướng." },
+    { q: "Hai người hẹn nhau lúc nào?", o: ["Mai 7 giờ tối", "Hôm nay 7 giờ tối", "Cuối tuần", "Mai buổi trưa"], a: 0, why: "Câu 8: “저녁 7시 어때요?” và câu 9: “내일 7시에 만나요.” — 7 giờ tối mai gặp nhau." },
+    { q: "자피 phản ứng thế nào khi được rủ đi ăn?", o: ["Cũng muốn ăn, rủ cùng đi quán", "Từ chối vì bận", "Bảo để hôm khác", "Không trả lời"], a: 0, why: "Câu 6: “정말요? 저도 먹고 싶어요! 같이 식당에 가요.” — Mình cũng muốn ăn! Cùng đi quán nhé." }
+  ]
+};
+function u9NormWord(w) { return String(w || "").toLowerCase().replace(/^[^a-z0-9\u3400-\u9FFF\uF900-\uFAFF\uAC00-\uD7A3]+|[^a-z0-9\u3400-\u9FFF\uF900-\uFAFF\uAC00-\uD7A3]+$/g, ""); }
+function u9IsFiller(w, track) { var list = (U9_FILLERS[track] || U9_FILLERS.en); return list.indexOf(u9NormWord(w)) >= 0; }
+function u9IsNumber(w, track) {
+  var x = u9NormWord(w); if (!x) return false;
+  if (/\d/.test(x)) return true;
+  if (track === "zh") return /^[一二三四五六七八九十百千两]$/.test(x);
+  if (track === "tp") return U9_NUM_TP.indexOf(x) >= 0;
+  return U9_NUM_EN.indexOf(x) >= 0;
+}
+function u9IsWeak(w, track) {
+  var x = u9NormWord(w); if (!x) return false;
+  if (track === "zh") return U9_WEAK_ZH.indexOf(x) >= 0;
+  if (track === "tp") return U9_WEAK_TP.indexOf(x) >= 0;
+  return U9_WEAK_EN.indexOf(x) >= 0;
+}
+/* TP: am tiet cuoi co batchim + tu sau bat dau bang am tiet ㅇ (nguyen am) → 연음 (noi am lien am tiet). Kiem bang ma Unicode Hangul. */
+function u9TpBatchimLink(word, next) {
+  if (!word || !next) return false;
+  var last = String(word).charAt(String(word).length - 1), first = String(next).charAt(0);
+  var lc = last.charCodeAt(0), fc = first.charCodeAt(0);
+  if (lc < 0xAC00 || lc > 0xD7A3 || fc < 0xAC00 || fc > 0xD7A3) return false;
+  var fin = (lc - 0xAC00) % 28;
+  var init = Math.floor((fc - 0xAC00) / 588);
+  return fin !== 0 && init === 11;
+}
+/* Phan loai 1 tu bi sai theo DAC DIEM THAT cua tu do. Thu tu: tu dem → so → tu yeu
+   → duoi -s → duoi -ed → noi am → bien dieu (ZH) / batchim (TP). Khong co luat nao bat → null (chi "loi nghe" chung). */
+function u9ClassifyWord(word, track, prev, next) {
+  var w = u9NormWord(word); if (!w) return null;
+  if (u9IsFiller(w, track)) return "filler";
+  if (track === "zh" && (w === "不" || w === "一")) return "tone"; /* v186: 一 bien dieu truoc so (一 vua la so 1 vua doi thanh theo ngu canh — diem day o v180) */
+  if (u9IsNumber(w, track)) return "number";
+  if (track === "zh") { if (u9IsWeak(w, track)) return "weak"; return null; }
+  if (track === "tp") { if (u9IsWeak(w, track)) return "weak"; if (u9TpBatchimLink(w, next)) return "batchim"; return null; }
+  var p = u9NormWord(prev), n = u9NormWord(next);
+  if (p && U9_LINK.indexOf(p + " " + w) >= 0) return "link"; /* v186: noi am truoc tu yeu — "of" trong "a lot of" / "to" trong "want to" la cum, dung mot minh moi la tu yeu */
+  if (n && U9_LINK.indexOf(w + " " + n) >= 0) return "link";
+  if (u9IsWeak(w, track)) return "weak";
+  if (/s$/.test(w) && w.length > 2 && U9_S_EXCL.indexOf(w) < 0) return "s";
+  if (/ed$/.test(w) && w.length > 3 && U9_ED_EXCL.indexOf(w) < 0) return "ed";
+  return null;
+}
+function u9ClassifyDiff(user, target, track) {
+  var d = wordDiff(user, target);
+  var tToks = normWordsForDiff(target);
+  var list = [], ti = 0;
+  d.forEach(function (x) {
+    if (x.missing) {
+      var prev = ti > 0 ? tToks[ti - 1] : "", next = ti + 1 < tToks.length ? tToks[ti + 1] : "";
+      list.push({ w: x.w, cls: u9ClassifyWord(x.w, track, prev, next), missing: true });
+      ti++;
+    } else if (x.ok) { ti++; }
+    else if (x.extra) { list.push({ w: x.w, cls: u9ClassifyWord(x.w, track, "", ""), extra: true }); }
+  });
+  return { list: list };
+}
+function u9Label(cls) {
+  var m = { filler: "từ đệm", weak: "từ yếu", s: "đuôi -s (số nhiều / ngôi thứ 3)", ed: "đuôi -ed (quá khứ / phân từ)", link: "nối âm", number: "số", tone: "biến điệu", batchim: "batchim / nối âm", listen: "lỗi nghe", paraphrase: "lỗi paraphrase" };
+  return m[cls] || "lỗi nghe";
+}
+function u9LabelHTML(h) {
+  if (!h || !h.u9) return "";
+  if (h.u9 === "paraphrase") return '<p class="mut">🔀 <b>Lỗi paraphrase</b> — chép đúng mà vẫn chọn sai: lỗi nằm ở cách hiểu, không phải ở tai.</p>';
+  return '<p class="mut">🎧 <b>Lỗi nghe — ' + esc(u9Label(h.u9)) + '</b></p>';
+}
+/* Track cua bai nghe chep: bai kho → en; video → tra nguoc key roi videoTrackOf. */
+function u9VideoKeyOf(l) {
+  if (!l) return null;
+  try {
+    var idxs = window.__videoLinesIdx || {};
+    for (var k in idxs) if (idxs[k] && idxs[k].listen === l.idx) return k;
+    if (window.__videoVOAIdx && window.__videoVOAIdx.listen === l.idx) return "voa-break-the-news";
+    if (window.__videoSampleIdx && window.__videoSampleIdx.listen === l.idx) return "sample-en";
+  } catch (e) {}
+  return null;
+}
+function u9TrackOfLesson(l, item) {
+  var key = u9VideoKeyOf(l);
+  if (key) { try { return videoTrackOf(key); } catch (e) { return "en"; } }
+  return "en";
+}
+/* Che do nghiem ngat chi mo o bai co transcript that da kiem chung: 130 bai kho
+   (van ban bai nghe = transcript chinh xac TTS doc) + 4 video phu de that.
+   Mau thu sample-en (cau tu soan) khong duoc mo. */
+function u9StrictAvailable(l, item) {
+  var key = u9VideoKeyOf(l);
+  if (key) return ["voa-break-the-news", "zh-e10", "tc-e5", "tp-e10"].indexOf(key) >= 0;
+  return true;
+}
+/* Cau hoi hieu cho pha paraphrase (toi da 3 cau dau): bai kho dung questions san;
+   VOA/sample dung cau hoi cua bai doc cap; video ZH/TC/TP dung U9_VIDEO_QUIZ. */
+function u9QuizQuestions(l, item) {
+  if (item && (item.questions || []).length) return item.questions.slice(0, 3);
+  var key = u9VideoKeyOf(l);
+  if (!key) return null;
+  try {
+    if (key === "voa-break-the-news" && window.__videoVOAIdx) { var r = CONTENT.reading[window.__videoVOAIdx.read]; if (r && (r.questions || []).length) return r.questions.slice(0, 3); }
+    if (key === "sample-en" && window.__videoSampleIdx) { var r2 = CONTENT.reading[window.__videoSampleIdx.read]; if (r2 && (r2.questions || []).length) return r2.questions.slice(0, 3); }
+  } catch (e) {}
+  if (U9_VIDEO_QUIZ[key]) return U9_VIDEO_QUIZ[key];
+  return null;
+}
+function u9DoneSummaryHTML(l) {
+  if (!l.u9quizDone || !l.u9quizQs || !l.u9quizQs.length) return "";
+  var qs = l.u9quizQs, okN = 0, labels = [];
+  qs.forEach(function (q, i) {
+    var a = (l.u9ans || {})[i];
+    if (a && a.ok) okN++;
+    else if (a && a.u9 === "paraphrase") labels.push("Câu " + (i + 1) + ": lỗi paraphrase");
+    else if (a) labels.push("Câu " + (i + 1) + ": lỗi nghe");
+  });
+  var h = '<div class="sumcard"><b>🔀 Kiểm tra hiểu sau khi chép: ' + okN + '/' + qs.length + ' đúng.</b>';
+  if (labels.length) h += '<p>' + labels.map(esc).join('<br>') + '</p><p class="mut">Lỗi paraphrase = chép đúng mà vẫn chọn sai — lỗi nằm ở cách hiểu, không phải ở tai. Lỗi nghe = chưa nghe ra nên chưa hiểu. Cả hai đều đã vào Sổ lỗi sai để ôn lại.</p>';
+  else h += '<p class="mut">Chép đúng và hiểu đúng — không có lỗi paraphrase.</p>';
+  return h + '</div>';
+}
+/* Logic ket thuc bai nghe chep (tach tu nut dcFinish de pha quiz goi lai duoc). */
+function finishDictationNow(l, item) {
+  var total = (l.sents || []).length, others = (l.sents || []).slice();
+  for (var i2 = 0; i2 < total; i2++) if (l.res[i2] === "good") srsEnqueueSentence("dictation", l.idx, i2, l.sents[i2], others);
+  if (!state.skillDone) state.skillDone = {};
+  var was = !!state.skillDone[l.skillKey];
+  state.skillDone[l.skillKey] = true; if (!was) logStepDoneIfRb(l.skillKey); /* v161 */ awardXp(was ? 5 : 10);
+  logLessonMinutes(l);
+  l.done = true; l.u9phase = false; saveState(); render();
+}
+/* Pha kiem tra hieu sau chep (1 man 1 cau hoi). Nhan tung cau sai: chep dung >=80%
+   ma chon sai → paraphrase; chep dung <80% → loi nghe. */
+function renderU9QuizPhase(app, l, item, total) {
+  var qs = l.u9quizQs || [];
+  var qi = l.u9qi || 0;
+  if (!qs.length || qi >= qs.length) { l.u9phase = false; l.u9quizDone = true; saveState(); render(); return; }
+  var q = qs[qi];
+  var opts = q.o || q.options || [];
+  var ans = (l.u9ans || {})[qi];
+  var goodN = 0; for (var k = 0; k < total; k++) if (l.res[k] === "good") goodN++;
+  var goodRate = total ? goodN / total : 0;
+  var body = "";
+  if (ans) {
+    var kind = ans.u9 || null;
+    body = '<p><b>Câu ' + (qi + 1) + '/' + qs.length + ':</b> ' + esc(q.q) + '</p>'
+      + '<p>' + (ans.ok ? '✓ Đúng.' : '✗ Chưa đúng — đáp án đúng: <b>' + esc(String(opts[q.a])) + '</b>.') + '</p>'
+      + (q.why ? '<p class="mut">' + esc(q.why) + '</p>' : '')
+      + (!ans.ok && kind === "paraphrase" ? '<p><b>🔀 Lỗi paraphrase</b> — Chép đúng hết mà vẫn sai — lỗi nằm ở paraphrase, không phải ở tai. (Bạn chép đúng ' + goodN + '/' + total + ' câu mà vẫn chọn sai đáp án.) Câu này đã vào Sổ lỗi sai.</p>' : '') /* v186: cau TID dung nguyen van (TID_NOTES §7 U9 / dong 82) */
+      + (!ans.ok && kind === "listen" ? '<p><b>🎧 Lỗi nghe</b> — bạn mới chép đúng ' + goodN + '/' + total + ' câu nên câu này sai có thể do chưa nghe ra — ôn lại phần nghe chép trước đã. Câu này đã vào Sổ lỗi sai.</p>' : '')
+      + '<div class="row">' + (qi + 1 < qs.length ? '<button class="btn btn-primary" id="u9Next">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="u9Finish">Xem kết quả →</button>') + '</div>';
+  } else {
+    body = '<p><b>Câu ' + (qi + 1) + '/' + qs.length + ':</b> ' + esc(q.q) + '</p>'
+      + '<p class="mut">Nghe chép xong rồi — giờ kiểm tra xem bạn có hiểu đúng nội dung mình vừa chép không.</p>'
+      + opts.map(function (o, i) { return '<p><button class="btn" style="width:100%;text-align:left" data-u9opt="' + i + '">' + esc(String(o)) + '</button></p>'; }).join("");
+  }
+  app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(3)
+    + '<div class="qblock"><h3>🔀 Kiểm tra hiểu sau khi chép</h3>' + body + '</div>';
+  wireBack();
+  $$("[data-u9opt]").forEach(function (b) {
+    b.onclick = function () {
+      var pick = +b.dataset.u9opt;
+      var ok = pick === q.a;
+      var kind = null;
+      if (!ok) kind = goodRate >= 0.8 ? "paraphrase" : "listen";
+      if (!l.u9ans) l.u9ans = {};
+      l.u9ans[qi] = { ok: ok, u9: kind };
+      if (!ok) recordQuizError("dictation", l.idx * 1000 + 500 + qi, { q: q.q, o: opts, a: q.a, why: q.why, u9: kind }); /* v186 U9: +500 de khong dung khoa loi chep cau (idx*100+si) — bai idx=0 thi 0*1000+0 trung 0*100+0 */
+      saveState(); render();
+    };
+  });
+  var nx = $("#u9Next");
+  if (nx) nx.onclick = function () { l.u9qi = qi + 1; saveState(); render(); };
+  var fn = $("#u9Finish");
+  if (fn) fn.onclick = function () { l.u9phase = false; l.u9quizDone = true; saveState(); finishDictationNow(l, item); };
+}
+
 /* ---------- Nghe chép chính tả theo câu (mới) ---------- */
 function renderDictation(app, l) {
   var item = CONTENT.listeningPlus[l.idx];
@@ -16778,15 +16992,19 @@ function renderDictation(app, l) {
   l.sub = item.section + (item.band ? " · " + item.band : "") + " · Nghe từng câu rồi gõ lại đúng chính tả";
   if (!l.sents) l.sents = splitSentencesEN(item.text);
   var total = l.sents.length;
+  var u9track = u9TrackOfLesson(l, item); /* v186 U9 */
+  var u9strictOk = u9StrictAvailable(l, item);
+  var u9theoryNote = u9strictOk ? '<p class="mut">🎧 Chế độ nghiêm ngặt (chấm cả từ đệm như oh, 啊, 어): chỉ mở ở bài có phụ đề/văn bản thật — bật ở màn nghe chép.</p>' : '<p class="mut">Bài mẫu thử cơ chế — chưa có phụ đề thật nên không bật chế độ nghiêm ngặt.</p>';
   if (!total) { curLesson = null; render(); return; }
   if (!l.theoryDone) {
     app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1)
       + '<div class="qblock">'
       + '<p class="mut">3 mức che từ: Dễ che ít nhất, Vừa che một nửa, Khó che gần hết. Bấm “💡 Gợi ý” để mở 1 từ thì câu đó bị trừ điểm và vào Sổ lỗi sai — chỉ bấm khi thật sự bí.</p>'
+      + u9theoryNote
       + '<div class="row"><button class="btn btn-primary" id="dcTheoryGo">Vào nghe chép →</button></div></div>';
     wireBack();
     wireListenMethods108(app, l, true);
-    $("#dcTheoryGo").onclick = function () { l.theoryDone = true; l.si = 0; l.res = {}; l.score = 0; l.hints = 0; l.level = "medium"; l.hideScaffold = false; l.rate = 1; l.typed = {}; l.retrying = {}; l.retryOk = {}; l.retryFail = {}; lessonStart = Date.now(); render(); };
+    $("#dcTheoryGo").onclick = function () { l.theoryDone = true; l.si = 0; l.res = {}; l.score = 0; l.hints = 0; l.level = "medium"; l.hideScaffold = false; l.rate = 1; l.typed = {}; l.retrying = {}; l.retryOk = {}; l.retryFail = {}; l.u9phase = false; l.u9quizDone = false; l.u9ans = {}; l.u9quizQs = null; lessonStart = Date.now(); render(); };
     return;
   }
   if (l.done) {
@@ -16797,23 +17015,26 @@ function renderDictation(app, l) {
     for (var k2 = 0; k2 < total; k2++) {
       if (l.res[k2] !== "good") wrongList += "<p>· Câu " + (k2 + 1) + ": <b>" + esc(l.sents[k2]) + "</b>" + (l.retryOk && l.retryOk[k2] ? ' <span class="mut">(đã sửa đúng khi làm lại — điểm lần đầu không đổi)</span>' : '') + "</p>";
     }
+    var u9sum = u9DoneSummaryHTML(l); /* v186 U9 */
     app.innerHTML = skillHead(l.title, l.sub) + '<div class="summarybox">' + summaryBadgeSVG() + '<h2>Xong bài nghe chép!</h2>'
       + "<p>Kết quả: " + good + "/" + total + " câu đúng ngay lần đầu (" + pct + "%) · Gợi ý đã dùng: " + hintN + " lần · Câu sai: " + wrongN + ".</p>"
       + "<p>" + esc(goalStripToday()) + "</p>"
       + (wrongList ? '<div class="sumcard"><b>Câu cần ôn lại:</b>' + wrongList + '<p class="mut">Câu sai đã vào Sổ lỗi sai; câu đúng đã vào hàng đợi ôn 1-3-7-14-30 ngày.</p></div>' : "<p>Câu nào cũng đúng ngay lần đầu — các câu đã vào hàng đợi ôn đúng ngày.</p>")
+      + u9sum
       + '<div class="row"><button class="btn btn-primary" id="dcAgain">Làm lại bài</button><button class="btn" id="dcBack">Về Luyện tập</button></div></div>';
     wireBack();
-    $("#dcAgain").onclick = function () { l.done = false; l.si = 0; l.res = {}; l.score = 0; l.hints = 0; l.minutesLogged = false; l.typed = {}; l.retrying = {}; l.retryOk = {}; l.retryFail = {}; lessonStart = Date.now(); render(); };
+    $("#dcAgain").onclick = function () { l.done = false; l.si = 0; l.res = {}; l.score = 0; l.hints = 0; l.minutesLogged = false; l.typed = {}; l.retrying = {}; l.retryOk = {}; l.retryFail = {}; l.u9phase = false; l.u9quizDone = false; l.u9ans = {}; l.u9quizQs = null; lessonStart = Date.now(); render(); };
     $("#dcBack").onclick = function () { backFromLesson(); };
     return;
   }
+  if (l.u9phase) { renderU9QuizPhase(app, l, item, total); return; } /* v186 U9: kiem tra hieu sau chep */
   var si = l.si || 0;
   var sent = l.sents[si];
   if (!l.typed) l.typed = {};
   if (!l.retrying) l.retrying = {};
   if (!l.retryOk) l.retryOk = {};
   if (!l.retryFail) l.retryFail = {};
-  var mask = dictMaskFor(sent, l.level || "medium");
+  var mask = dictMaskFor(sent, l.level || "medium", !!l.u9strict, u9track); /* v186 U9 */
   if (!l.revealed) l.revealed = {};
   if (!l.revealed[si]) l.revealed[si] = {};
   var pctDone = Math.round(si / total * 100);
@@ -16823,7 +17044,7 @@ function renderDictation(app, l) {
   var resBlock = "";
   if (res && !l.retrying[si]) {
     resBlock = '<p><b>Kết quả câu này:</b> ' + (res === "good" ? '✓ Đúng ngay lần đầu.' : res === "hint" ? 'Đúng nhưng đã dùng gợi ý nên tính là lỗi — câu này đã vào Sổ lỗi sai.' : '✗ Chưa đúng — câu đúng: <b>' + esc(sent) + '</b> (đã vào Sổ lỗi sai).') + '</p>'
-      + (res === "wrong" && l.typed[si] ? dictCorrectionHTML(l.typed[si], sent) : '')
+      + (res === "wrong" && l.typed[si] ? dictCorrectionHTML(l.typed[si], sent, u9track, !!l.u9strict) : '') /* v186 U9 */
       + (l.retryOk[si] ? '<p>✓ Làm lại: bạn đã sửa đúng câu này (điểm lần đầu không đổi).</p>' : '')
       + (l.retryFail[si] ? '<p>✗ Làm lại: vẫn chưa đúng — thử lại nữa nhé.</p>' : '')
       + '<div class="row">' + (si > 0 ? '<button class="btn" id="dcPrev">← Câu trước</button>' : '') + (res === "wrong" ? '<button class="btn" id="dcRetry">Làm lại câu này</button>' : '') + (si + 1 < total ? '<button class="btn btn-primary" id="dcNext">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="dcFinish">Xem kết quả →</button>') + '</div>';
@@ -16833,6 +17054,7 @@ function renderDictation(app, l) {
   app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2)
     + '<div class="qblock"><p><b>Câu ' + (si + 1) + '/' + total + ' · Tiến độ ' + pctDone + '%</b></p>'
     + '<p>Mức che từ: ' + levelBtn("easy", "Dễ — che ít") + ' ' + levelBtn("medium", "Vừa — che nửa") + ' ' + levelBtn("hard", "Khó — che gần hết") + '</p>'
+    + (u9strictOk ? '<p><label><input type="checkbox" id="dcStrict"' + (l.u9strict ? ' checked' : '') + '> Chế độ nghiêm ngặt — chấm cả từ đệm (oh, 啊, 어…): từ đệm cũng bị che như từ thường, phải gõ đúng mới qua.</label></p>' : '<p class="mut">Bài mẫu thử cơ chế — chưa có phụ đề thật nên không bật chế độ nghiêm ngặt.</p>')
     + '<p><label><input type="checkbox" id="dcHide"' + (l.hideScaffold ? ' checked' : '') + '> Ẩn bản chép (chỉ nghe rồi gõ)</label> · Tốc độ: <select id="dcRate"><option value="0.75"' + (l.rate === 0.75 ? ' selected' : '') + '>0,75</option><option value="1"' + (l.rate !== 0.75 && l.rate !== 1.25 ? ' selected' : '') + '>1</option><option value="1.25"' + (l.rate === 1.25 ? ' selected' : '') + '>1,25</option></select></p>'
     + (l.hideScaffold ? '<p class="mut">Bản chép đang ẩn — nghe kỹ rồi gõ lại câu.</p>' : '<p>Bản chép gợi ý: <b>' + esc(scaffold) + '</b></p>')
     + '<div class="row"><button class="btn" id="dcPlay">🔊 Nghe câu</button><button class="btn" id="dcHint">💡 Gợi ý: mở 1 từ</button></div>' + listenVoiceNoteHTML()    + resBlock
@@ -16840,6 +17062,8 @@ function renderDictation(app, l) {
   wireBack();
   $$("[data-dclevel]").forEach(function (b) { b.onclick = function () { l.level = b.dataset.dclevel; render(); }; });
   $("#dcHide").onchange = function () { l.hideScaffold = $("#dcHide").checked; render(); };
+  var dcStrictBox = $("#dcStrict");
+  if (dcStrictBox) dcStrictBox.onchange = function () { l.u9strict = dcStrictBox.checked; render(); }; /* v186 U9 */
   $("#dcRate").onchange = function () { l.rate = parseFloat($("#dcRate").value) || 1; };
   $("#dcPlay").onclick = function () { speakAuto(sent, l.rate || 1); }; /* v126: cau tieng Trung doc bang zh-CN */
   $("#dcHint").onclick = function () {
@@ -16856,13 +17080,8 @@ function renderDictation(app, l) {
   if (nextBtn) nextBtn.onclick = function () { l.si = si + 1; l.hintUsed = false; render(); };
   var finBtn = $("#dcFinish");
   if (finBtn) finBtn.onclick = function () {
-    var others = l.sents.slice();
-    for (var i2 = 0; i2 < total; i2++) if (l.res[i2] === "good") srsEnqueueSentence("dictation", l.idx, i2, l.sents[i2], others);
-    if (!state.skillDone) state.skillDone = {};
-    var was = !!state.skillDone[l.skillKey];
-    state.skillDone[l.skillKey] = true; if (!was) logStepDoneIfRb(l.skillKey); /* v161 */ awardXp(was ? 5 : 10);
-    logLessonMinutes(l);
-    l.done = true; saveState(); render();
+    if (!l.u9quizDone && u9QuizQuestions(l, item)) { l.u9phase = true; l.u9qi = 0; l.u9ans = {}; l.u9quizQs = u9QuizQuestions(l, item); saveState(); render(); return; } /* v186 U9 */
+    finishDictationNow(l, item);
   };
   var checkBtn = $("#dcCheck");
   if (checkBtn) {
@@ -16878,8 +17097,8 @@ function renderDictation(app, l) {
       }
       l.typed[si] = v;
       if (ok && !l.hintUsed) { l.res[si] = "good"; l.score++; }
-      else if (ok) { l.res[si] = "hint"; l.hints++; recordQuizError("dictation", l.idx * 100 + si, { q: "Nghe chép: " + sent, o: [sent], a: 0, why: "Câu đúng trong bài " + item.topic + " là: " + sent }); }
-      else { l.res[si] = "wrong"; recordQuizError("dictation", l.idx * 100 + si, { q: "Nghe chép: " + sent, o: [sent], a: 0, why: "Câu đúng trong bài " + item.topic + " là: " + sent }); }
+      else if (ok) { l.res[si] = "hint"; l.hints++; var u9h = {}; var dt2 = dictToks(sent); dt2.toks.forEach(function (tw, ti2) { if (mask[ti2] && l.revealed[si] && l.revealed[si][ti2] && !u9h.u9) { var c2 = u9ClassifyWord(tw, u9track, "", ""); if (c2) u9h.u9 = c2; } }); recordQuizError("dictation", l.idx * 100 + si, { q: "Nghe chép: " + sent, o: [sent], a: 0, why: "Câu đúng trong bài " + item.topic + " là: " + sent, u9: u9h.u9 }); } /* v186 U9: tu duoc mo goi y la tu khong nghe ra */
+      else { l.res[si] = "wrong"; var u9cl = u9ClassifyDiff(v, sent, u9track); var u9first = "listen"; u9cl.list.forEach(function (it) { if (u9first === "listen" && it.cls) u9first = it.cls; }); recordQuizError("dictation", l.idx * 100 + si, { q: "Nghe chép: " + sent, o: [sent], a: 0, why: "Câu đúng trong bài " + item.topic + " là: " + sent, u9: u9first }); } /* v186 U9 */
       saveState(); render();
     };
     checkBtn.onclick = doCheck;
@@ -17815,6 +18034,7 @@ function practiceFilterWire() {
 /* ---------- Sua chi tiet tung tu cho cau nghe chep sai (LCS tren tu) ---------- */
 function normWordsForDiff(s) {
   if (/[\u3400-\u9FFF\uF900-\uFAFF]/.test(String(s || ""))) return Array.from(String(s || "")).filter(function (ch) { return /[\u3400-\u9FFF\uF900-\uFAFFa-z0-9']/i.test(ch); }); /* v126: cau tieng Trung so theo tung ky tu */
+  if (/[\uAC00-\uD7A3]/.test(String(s || ""))) return String(s || "").split(/\s+/).map(function (x) { return x.replace(/^[.!?,;:'"~…]+|[.!?,;:'"~…]+$/g, ""); }).filter(Boolean); /* v186 U9: cau Han tach theo tu (truoc day wordDiff tra rong) */
   return (s || "").toLowerCase().replace(/[^a-z0-9'\s]/g, " ").split(/\s+/).filter(Boolean);
 }
 function wordDiff(user, target) {
@@ -17832,7 +18052,7 @@ function wordDiff(user, target) {
   while (j < n) { out.push({ w: t[j], missing: true }); j++; }
   return out;
 }
-function dictCorrectionHTML(user, target) {
+function dictCorrectionHTML(user, target, track, strict) {
   var d = wordDiff(user, target);
   var right = d.filter(function (x) { return x.ok; }).length;
   var total = normWordsForDiff(target).length;
@@ -17842,7 +18062,18 @@ function dictCorrectionHTML(user, target) {
   var note = 'Bạn viết đúng ' + right + '/' + total + ' từ. ';
   if (wrongWords.length) note += 'Từ đúng cần có: ' + wrongWords.map(esc).join(', ') + '. ';
   if (extraWords.length) note += 'Từ thừa cần bỏ: ' + extraWords.map(esc).join(', ') + '. ';
-  return '<div class="sumcard"><b>Sửa chi tiết từng từ:</b><p>' + sent + '</p><p class="mut">' + note + 'Tô vàng là từ bạn viết sai hoặc viết thiếu.</p><p><b>Đáp án đúng:</b> ' + esc(target) + '</p></div>';
+  var u9block = "";
+  if (track) { /* v186 U9: phan loai loi nghe theo dac diem that cua tu bi sai */
+    var cl = u9ClassifyDiff(user, target, track);
+    if (cl.list.length) {
+      u9block = '<p><b>🎧 Phân loại lỗi nghe:</b></p>' + cl.list.map(function (it) {
+        var lab = it.cls ? u9Label(it.cls) : "lỗi nghe";
+        var tag = (it.cls === "filler" && strict) ? " (chế độ nghiêm ngặt: từ đệm cũng phải gõ đúng)" : "";
+        return '<p>· “' + esc(it.w) + '” — ' + esc(lab) + esc(tag) + (it.extra ? ' (từ thừa bạn viết thêm)' : '') + '</p>';
+      }).join("") + '<p class="mut">Nhãn này nói về ĐẶC ĐIỂM của từ bạn nghe sai (từ yếu, đuôi -s, số, từ đệm…) để biết nên luyện chỗ nào — không phải kết luận nguyên nhân.</p>';
+    }
+  }
+  return '<div class="sumcard"><b>Sửa chi tiết từng từ:</b><p>' + sent + '</p><p class="mut">' + note + 'Tô vàng là từ bạn viết sai hoặc viết thiếu.</p>' + u9block + '<p><b>Đáp án đúng:</b> ' + esc(target) + '</p></div>';
 }
 
 /* ---------- Truyen ngan kieu moi (tu bai Doc san co, ban dich khop tung cau) ---------- */
