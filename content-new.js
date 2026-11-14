@@ -246,13 +246,13 @@ var RB_AI = {
 // Hàng kiểm tra cuối chương đứng sau 7 bước học.
 // Cổng mở khi học xong 6/7 bước học (mốc 80% — chuẩn nội bộ của web, không phải chuẩn IELTS).
 var RB_CH1_STEPS = [
-  { id: "pron1", kind: "pron", wave: 1, title: "Học xong: đọc đúng 44 âm tiếng Anh", type: "Phát âm · 44 âm", mins: 15 },
-  { id: "classroom", kind: "vocab", setIdx: 24, deckNo: 2, title: "Học xong: hiểu và nói 20 từ dùng trong lớp học", type: "Từ vựng · Từ lớp học", mins: 8 },
-  { id: "gram0", kind: "grammar", gIdx: 0, title: "Học xong: tự giới thiệu 'Tôi là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
-  { id: "listen0", kind: "ch1listen", title: "Học xong: nghe hiểu đoạn chào hỏi ngắn dùng 'Tôi là...'", type: "Nghe · Chào hỏi", mins: 5 },
-  { id: "gram1", kind: "grammar", gIdx: 1, title: "Học xong: chỉ đồ vật và giới thiệu người 'Đây là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
-  { id: "read0", kind: "ch1read", title: "Học xong: đọc hiểu đoạn giới thiệu ngắn dùng 'Đây là...'", type: "Đọc · Giới thiệu", mins: 5 },
-  { id: "gram2", kind: "grammar", gIdx: 2, title: "Học xong: nói tên mình 'Tôi tên là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
+  { id: "pron1", kind: "pron", wave: 1, title: "đọc đúng 44 âm tiếng Anh", type: "Phát âm · 44 âm", mins: 15 },
+  { id: "classroom", kind: "vocab", setIdx: 24, deckNo: 2, title: "hiểu và nói 20 từ dùng trong lớp học", type: "Từ vựng · Từ lớp học", mins: 8 },
+  { id: "gram0", kind: "grammar", gIdx: 0, title: "tự giới thiệu 'Tôi là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
+  { id: "listen0", kind: "ch1listen", title: "nghe hiểu đoạn chào hỏi ngắn dùng 'Tôi là...'", type: "Nghe · Chào hỏi", mins: 5 },
+  { id: "gram1", kind: "grammar", gIdx: 1, title: "chỉ đồ vật và giới thiệu người 'Đây là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
+  { id: "read0", kind: "ch1read", title: "đọc hiểu đoạn giới thiệu ngắn dùng 'Đây là...'", type: "Đọc · Giới thiệu", mins: 5 },
+  { id: "gram2", kind: "grammar", gIdx: 2, title: "nói tên mình 'Tôi tên là...'", type: "Ngữ pháp · Câu đầu tiên", mins: 6 },
   { id: "test", kind: "test", title: "Bài kiểm tra cuối chương 1", type: "Đánh giá", mins: 10 },
 ];
 var RB_CH1_GATE_NEED = 6; /* 80% của 7 bước học (làm tròn lên: ceil(0,8×7) = 6) */

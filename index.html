@@ -131,7 +131,7 @@ iframe{width:100%;aspect-ratio:16/9;border:1.5px solid var(--line2);border-radiu
 .path-node.cur .pn-st{color:#8A6100;font-weight:700}
 .ch-node>.chip,.stage-node>.chip{margin-left:auto;align-self:center}
 .chapter-body[hidden],.stage-body[hidden]{display:none}
-body.landing-on #tabBar,body.landing-on #previewBanner,body.landing-on #tutorFloatBtn{display:none}
+body.landing-on #previewBanner,body.landing-on #tutorFloatBtn{display:none}
 .land-grid{display:grid;gap:12px;margin:16px 0}
 @media(min-width:700px){.land-grid{grid-template-columns:1fr 1fr}}
 .land-opt{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:64px;padding:14px 16px;text-align:left;border-width:1.5px}
@@ -220,6 +220,10 @@ body.sidebar-collapsed .app-frame{grid-template-columns:64px minmax(0,1fr)}
 body.sidebar-collapsed .sb-logo h1,body.sidebar-collapsed .sb-tag,body.sidebar-collapsed .sb-txt,body.sidebar-collapsed .sb-profile{display:none}
 body.sidebar-collapsed .sb-mark{display:block;font-size:28px;text-align:center}
 body.sidebar-collapsed .app-sidebar .home-navbtn{justify-content:center;padding:12px 8px}
+.sb-arrow{position:absolute;top:10px;right:10px;width:34px;height:34px;padding:0;border-radius:50%;font-size:18px;line-height:1;z-index:2}
+.sb-logo{padding-right:48px}
+body.sidebar-collapsed .sb-logo{margin-top:38px;padding-right:12px}
+body.sidebar-collapsed .sb-arrow{top:8px;right:15px}
 body.landing-on .app-sidebar,body.landing-on .app-topbar,body.landing-on #appFooter{display:none}
 body.landing-on .app-frame{display:block}
 /* ---- V72: DUONG UON + NUT SAO (hoc Duolingo: chi lay ban do/duong) ---- */
@@ -297,7 +301,7 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .tracksw .lang-soon .soon-tag{display:block;font-size:12px;color:var(--mut);font-weight:400}
 @media(max-width:699px){.tracksw{grid-template-columns:1fr 1fr}}
 .stat-strip{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px 16px;align-items:center}
-@media(max-width:699px){.stat-strip{grid-template-columns:1fr 1fr}.stat-strip #statProgressLink{grid-column:1/-1}}
+@media(max-width:699px){.stat-strip{grid-template-columns:1fr 1fr}}
 #nextCard h2,#zhNextCard h2,#tcNextCard h2,#tpNextCard h2,#entryWelcome h2,#zhEntryWelcome h2,#tcEntryWelcome h2,#tpEntryWelcome h2,#landingScreen h2,#landingAuth h2{font-size:28px;line-height:1.25;margin:4px 0 8px}
 #nextCard .dragon,#nextCard .snake,#zhNextCard .dragon,#zhNextCard .snake,#entryWelcome .dragon,#entryWelcome .snake,#zhEntryWelcome .dragon,#zhEntryWelcome .snake,#tcEntryWelcome .dragon,#tcEntryWelcome .snake,#tpEntryWelcome .dragon,#tpEntryWelcome .snake,#landingScreen .dragon,#landingScreen .snake{width:88px;height:88px}
 @media(max-width:699px){#nextCard .dragon,#nextCard .snake,#zhNextCard .dragon,#zhNextCard .snake,#entryWelcome .dragon,#entryWelcome .snake,#zhEntryWelcome .dragon,#zhEntryWelcome .snake,#tcEntryWelcome .dragon,#tcEntryWelcome .snake,#tpEntryWelcome .dragon,#tpEntryWelcome .snake,#landingScreen .dragon,#landingScreen .snake{width:64px;height:64px}}
@@ -350,7 +354,6 @@ details>summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .rw-stars{font-size:44px;letter-spacing:6px;line-height:1.2}
 .rw-star{display:inline-block;animation:rwPop .5s both}
 @keyframes rwPop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
-body.in-lesson #tabBar{position:static}
 .bento-side{display:none}
 @media (min-width:1200px){#app.lesson-view:has(>.lesson-main){grid-template-columns:minmax(0,820px) 300px;justify-content:center}#app.lesson-view:has(>.lesson-main)>.bento-side{display:block;position:sticky;top:78px}}/* v106c: top cot phai = 66 (topbar) + 12 — frame khong con dinh nen khong cong chieu cao frame nua */
 /* v94 — trang bài học 3 cột: Nội dung | Thực hành | Tham khảo (cột 3 là .bento-side sẵn có).
@@ -439,23 +442,13 @@ input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,input[ty
 <div class="app-frame" id="appFrame">
 <aside class="app-sidebar home-sidebar" id="appSidebar" aria-label="Điều hướng chính">
 <div class="sb-logo"><span class="sb-mark" aria-hidden="true">🐉</span><h1 id="siteTitle">Học tiếng Anh từ đầu</h1><p class="sb-tag mut">Học từ đầu, tới giao tiếp thật</p></div>
+<button class="btn sb-arrow" id="sbCollapseBtn" aria-label="Thu gọn hoặc mở rộng thanh bên" title="Thu gọn / Mở rộng thanh bên">«</button>
 <nav id="appSidebarNav"></nav>
-<div class="sb-bottom"><button class="btn" id="sbCollapseBtn">« Thu gọn</button><div class="sb-profile" id="sbProfile"></div></div>
+<div class="sb-bottom"><div class="sb-profile" id="sbProfile"></div></div>
 </aside>
 <div class="app-col">
 <header class="app-topbar"><button class="btn" id="tbMenuBtn" aria-label="Mở hoặc đóng thanh bên">☰</button><input type="text" id="tbSearchInp" placeholder="🔍 Tìm bài học…" aria-label="Tìm bài học"><span class="tb-spacer"></span><span class="tb-track" id="tbTrackLabel"></span><button id="tutorFloatBtn" aria-label="Gia sư AI" title="Gia sư AI">🤖 <span>Gia sư AI</span></button><button class="btn" id="fmMusicBtn" aria-label="Tắt nhạc rừng" title="Nhạc rừng">🔊</button><button class="btn" id="tbAccountBtn">Tài khoản</button></header>
 <div id="previewBanner"></div>
-<nav class="tabbar" id="tabBar">
-<button class="tab" data-tab="home">Học</button>
-<button class="tab" data-tab="roadmap">Bản đồ</button>
-<button class="tab" data-tab="practice">Luyện tập</button>
-<button class="tab" data-tab="review">Ôn tập</button>
-<button class="tab" data-tab="games">Trò chơi</button>
-<button class="tab" data-tab="native">Giao tiếp bản địa</button>
-<button class="tab" data-tab="mypath">Lộ trình riêng</button>
-<button class="tab" data-tab="mine">Của tôi</button>
-<button class="tab" data-tab="guide">Hướng dẫn</button>
-</nav>
 <main id="app"><div class="card"><p>Đang tải bài học…</p></div></main>
 <footer id="appFooter"><div><b>🐉 Học ngoại ngữ từ đầu</b><p class="mut">Miễn phí · Không quảng cáo giữa bài.</p></div><p class="mut">Học từ đầu, tới giao tiếp thật.</p></footer>
 </div>
@@ -1999,6 +1992,21 @@ function placedTarget() {
   var st = rbFirstUndoneStep(p.band) || rbFirstUndoneFromBand(p.band);
   return st ? { kind: "lesson", title: st.title, type: st.type, lesson: st.lesson } : null;
 }
+/* v182: buoc hien tai tren Ban do — dong bo voi placedTarget()/sessionTarget():
+   nguoi da xep chang (kiem tra dau vao) thi buoc hien tai nam o chuong da xep,
+   khong phai buoc mo dau chuong 1; chuong da xep xong het thi ve buoc chua
+   xong som nhat. Tra null khi buoc hien tai la bai chuong RB (khong nam trong
+   danh sach buoc mo dau chuong 1) de vong chuong 1 khong to them .cur. */
+function mapCurStep() {
+  try {
+    var p = state.entryPlaced;
+    if (p && p.band && p.band !== "Band 0") {
+      var steps = rbChSteps(p.band);
+      if (steps.some(function (st) { return !rbStepDone(st); })) return null;
+    }
+  } catch (e) {}
+  return nextLearnStep();
+}
 function sessionTarget() {
   var due = dueCount();
   if (due > 0) return { kind: "review", title: "Ôn " + due + " mục đến hạn", type: "Ôn đúng ngày · Sổ lỗi sai" };
@@ -2633,10 +2641,9 @@ function yourJourneyHTML(track) {
 function specTodayHTML(nextCard) {
   var d = specTodayItems(nextCard);
   if (!d.items.length && d.hiddenWork) return "";
-  var h = '<section class="card" id="specToday"><p class="eyebrow">VIỆC HÔM NAY</p>';
+  var h = '<div id="specToday">';
   h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("en")) + '</p>';
   if (d.doneToday) h += '<p class="mut">✓ Đã xong hôm nay: ' + d.doneToday + ' việc.</p>';
-  h += '<p><button class="btn" data-adaptive-go="profile">📋 Hồ sơ học của tôi →</button></p>';
   h += yourJourneyHTML("en"); /* v161 S20 phan 3: Your Journey ngay duoi ke hoach ngay */
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc 🎉</h3><p class="mut">Không còn mục đến hạn, không còn bộ từ dở dang, không còn bài thi chờ chấm.</p>'; }
   else {
@@ -2648,7 +2655,7 @@ function specTodayHTML(nextCard) {
       h += d.extras.map(function (it) { return '<p class="mut">Đang chờ chấm: <b>' + esc(it.title) + '</b> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>'; }).join("");
     }
   }
-  return h + '</section>';
+  return h + '</div>';
 }
 function specTodayGo(action) {
   var parts = String(action || "").split(":");
@@ -2709,10 +2716,9 @@ function specTodayZhItems(mainTitle) {
 function specTodayZhHTML(mainTitle) {
   var d = specTodayZhItems(mainTitle);
   if (!d.items.length && d.hiddenWork) return "";
-  var h = '<section class="card" id="specTodayZh"><p class="eyebrow">VIỆC HÔM NAY · TIẾNG TRUNG</p>';
+  var h = '<div id="specTodayZh">';
   h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("zh")) + '</p>';
   if (d.doneToday) h += '<p class="mut">✓ Đã xong hôm nay: ' + d.doneToday + ' việc.</p>';
-  h += '<p><button class="btn" data-adaptive-go="profile">📋 Hồ sơ học của tôi →</button></p>';
   h += yourJourneyHTML("zh"); /* v161 S20 phan 3: Your Journey ngay duoi ke hoach ngay */
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc 🎉</h3><p class="mut">Không còn mục đến hạn và không còn bộ từ dở dang.</p>'; }
   else {
@@ -2724,7 +2730,7 @@ function specTodayZhHTML(mainTitle) {
       h += d.extras.map(function (it) { return '<p class="mut">Đang chờ chấm: <b>' + esc(it.title) + '</b> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>'; }).join("");
     }
   }
-  return h + '</section>';
+  return h + '</div>';
 }
 
 function skClassFor(type) {
@@ -3613,7 +3619,6 @@ function render() {
     }
     document.title = "Giới thiệu — Học ngoại ngữ từ đầu";
     document.body.classList.add("landing-on");
-    $$("#tabBar .tab").forEach(function (b) { b.classList.remove("on"); });
     updateBottomBar();
     return;
   }
@@ -3628,12 +3633,10 @@ function render() {
       else { appL.innerHTML = landingHTML(); wireLanding(); }
     }
     document.body.classList.add("landing-on");
-    $$("#tabBar .tab").forEach(function (b) { b.classList.remove("on"); });
     updateBottomBar();
     return;
   }
   document.body.classList.remove("landing-on");
-  $$("#tabBar .tab").forEach(function (b) { b.classList.toggle("on", b.dataset.tab === curTab); });
   var app = $("#app");
   if (curLesson) { renderLesson(app); applyLessonLayout(app); u7PositionUpdate(); g3FocusOrder(app); g3VocabFocus(app); updateBottomBar(); return; }
   app.classList.remove("lesson-view");
@@ -3648,11 +3651,6 @@ function render() {
   else viewMine(app);
   u7PositionUpdate(); g3FocusOrder(app); g3VocabFocus(app); updateBottomBar(); wireTrackSwitch(); wireTypeEntryRow();
 }
-/* v170 L2 (sua): tabbar khoi phuc theo lua chon (b) cua bao cao — hien tren mobile,
-   an tren desktop (sidebar); giu trong DOM cho 51 probe + JS app (v113). */
-$("#tabBar").addEventListener("click", function (e) {
-  var b = e.target.closest(".tab"); if (b) go(b.dataset.tab);
-});
 
 
 /* ---------- WEB PUSH: NHAC HOC (nguoi hoc tu bat/tat, mac dinh tat) ---------- */
@@ -3958,7 +3956,11 @@ function zhPositionProgress(stage) {
   } catch (e) { return null; }
 }
 function zhPositionCurrent() {
-  for (var st = 1; st <= 6; st++) {
+  /* v182: da xep chang thi chang hien tai bat dau tu chang da xep (nhu
+     zhSessionTarget/zhSeqMarks/tcNextStep v125d), khong quay ve chang 1. */
+  var start = 1;
+  try { var pl = state.zhEntryPlaced ? state.zhEntryPlaced.stage : 0; if (pl >= 2) start = pl; } catch (e) {}
+  for (var st = start; st <= 6; st++) {
     var p = zhPositionProgress(st);
     if (p && p.done < p.total) return p;
   }
@@ -4203,10 +4205,11 @@ function homeProgressText() {
     var hp = homePathInfo(); return { prog: hp.done + "/" + hp.total, due: trackDueCount90(), pronDue: pd };
   } catch (e) { return { prog: "—", due: 0, pronDue: 0 }; }
 }
-function goalStripText() {
+/* v182: gop 2 dong muc tieu ngay thanh 1 — so 30 phut chi xuat hien 1 lan. */
+function goalStripMerged() {
   var g = state.goal || 30;
   var userSet = !!state.goalSet || (state.goal && state.goal !== 30);
-  return userSet ? "Mục tiêu " + g + " phút/ngày" : "Mục tiêu gợi ý: " + g + " phút/ngày";
+  return goalStripToday() + (userSet ? "" : " · mục tiêu gợi ý");
 }
 /* ============ TRANG CHỦ MỚI: ĐIỀU HƯỚNG, TÌM KIẾM, HEATMAP, TỔNG KẾT, MỐC (04/11/2026) ============
    Nguồn số liệu duy nhất: state (localStorage ielts_rebuild_v1).
@@ -4243,8 +4246,8 @@ function homeNavGo(entry) {
 /* V75 — KHUNG UNG DUNG: thanh ben + thanh tren dung chung moi trang.
    Thanh ben dung HOME_NAV_MAP du 9 muc (them Lo trinh rieng, On tap,
    Giao tiep ban dia, Cua toi; Luyen tap gop 1 muc, cac muc con van la
-   nhom trong trang Luyen tap). Muc hien tai to dam theo curTab, khop
-   tabBar o mobile va co trang thai active cho Cua toi. */
+   nhom trong trang Luyen tap). Muc hien tai to dam theo curTab, co
+   trang thai active cho Cua toi. (v182: thanh ben la cho dieu huong duy nhat.) */
 function syncAppFrame() {
   if (curLesson) document.body.classList.remove("sidebar-open");
   var nav = document.getElementById("appSidebarNav");
@@ -4253,7 +4256,7 @@ function syncAppFrame() {
       var ix = e.label.indexOf(" ");
       var ico = ix > 0 ? e.label.slice(0, ix) : "";
       var txt = ix > 0 ? e.label.slice(ix + 1) : e.label;
-      return '<button class="btn home-navbtn" data-homenav="' + i + '"><span class="sb-ico">' + ico + '</span><span class="sb-txt">' + txt + '</span></button>';
+      return '<button class="btn home-navbtn" data-homenav="' + i + '" data-tab="' + e.target + '"><span class="sb-ico">' + ico + '</span><span class="sb-txt">' + txt + '</span></button>'; /* v182: data-tab tren nut thanh ben — hook dieu huong duy nhat (hang nut tren da bo); cac probe kd + dong bo di qua day */
     }).join("");
     nav.dataset.built = "1";
     $$("#appSidebarNav .home-navbtn").forEach(function (b) {
@@ -4289,16 +4292,24 @@ function syncAppFrame() {
     ft.dataset.wired = "1";
     $$("#appFooter [data-footgo]").forEach(function (b) { b.onclick = function () { go(b.dataset.footgo); }; });
   }
+  /* v182: nut mui ten co/mo rong thanh ben — nho trang thai tren may (localStorage). */
+  function sbSetCollapsed(c) {
+    document.body.classList.toggle("sidebar-collapsed", !!c);
+    var b = document.getElementById("sbCollapseBtn");
+    if (b) b.textContent = c ? "»" : "«";
+    try { localStorage.setItem("ielts_sb_collapsed", c ? "1" : "0"); } catch (e) {}
+  }
+  if (!syncAppFrame._sbRestored) {
+    syncAppFrame._sbRestored = true;
+    try { if (localStorage.getItem("ielts_sb_collapsed") === "1") sbSetCollapsed(true); } catch (e) {}
+  }
   if (!syncAppFrame._wired) {
     syncAppFrame._wired = true;
     var cb = document.getElementById("sbCollapseBtn");
-    if (cb) cb.onclick = function () {
-      var c = document.body.classList.toggle("sidebar-collapsed");
-      cb.textContent = c ? "»" : "« Thu gọn";
-    };
+    if (cb) cb.onclick = function () { sbSetCollapsed(!document.body.classList.contains("sidebar-collapsed")); };
     var mb = document.getElementById("tbMenuBtn");
     if (mb) mb.onclick = function () {
-      if (window.innerWidth >= 901) document.body.classList.toggle("sidebar-collapsed");
+      if (window.innerWidth >= 901) sbSetCollapsed(!document.body.classList.contains("sidebar-collapsed"));
       else document.body.classList.toggle("sidebar-open");
     };
     var ab = document.getElementById("tbAccountBtn");
@@ -4965,24 +4976,21 @@ function viewHome(app) {
   var trulyNew = fresh && (state.xp || 0) === 0;
   var streak = streakDays();
   var lv = xpLevel(state.xp || 0);
-  var info = homePathInfo();
-  var html = trackSwitchHTML(true) + '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục' + (hp.pronDue ? ' (' + hp.pronDue + ' phát âm)' : '') + '</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  var html = trackSwitchHTML(true) + '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span id="homeTodayGoal">' + esc(goalStripMerged()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + pronWeakStripHTML() + '</div>';
   html += homeSearchHTML();
   html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (trulyNew ? 'Hôm nay Rồng Lửa cùng bạn học nhé.' : 'Chào bạn! Hôm nay mình cùng Rồng Lửa học tiếp nhé.') + '</p>';
-  html += pronWeakHomeHTML(); /* v119b */
   html += '<div class="home-clean"><div class="home-hero">';
+  var t = trulyNew ? null : sessionTarget();
+  var todayHTML = specTodayHTML(t); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
+  var planHTML = todayHTML || yourJourneyHTML("en"); /* v182: ke hoach ngay nam TRONG the Buoi hoc hom nay, khong the rieng */
   if (trulyNew) {
-    html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra trình độ đầu vào (trắc nghiệm) để web xếp đúng chặng cho bạn.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra trình độ đầu vào (trắc nghiệm)</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div></div></div></section>';
+    html += '<section class="card next-card" id="entryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra trình độ đầu vào (trắc nghiệm) để web xếp đúng chặng cho bạn.</p><div class="row"><button class="btn btn-primary" id="entryStartBtn">Kiểm tra trình độ đầu vào (trắc nghiệm)</button><button class="btn" id="nextBtn">Bỏ qua, học từ đầu</button></div>' + planHTML + '</div></div></section>';
   } else {
-    var t = sessionTarget();
-    var heroEyebrow = t.kind === "review" ? "BUỔI HỌC HÔM NAY · ÔN TRƯỚC" : (t.fromPp ? "TIẾP THEO · LỘ TRÌNH RIÊNG" : "TIẾP THEO");
+    var heroEyebrow = "BUỔI HỌC HÔM NAY" + (t.kind === "review" ? " · ÔN TRƯỚC" : "");
     var heroSub = esc(t.type) + (t.step ? " · khoảng " + t.step.mins + " phút (ước tính)" : "");
-    var xpVal = t.step ? (stepDone(t.step.id) ? 5 : 10) : 0;
-    html += '<section class="card next-card" id="nextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ ' + heroEyebrow + '</p><h2>' + esc(t.title) + '</h2><p class="mut">' + heroSub + '</p><button class="btn btn-primary" id="nextBtn">Học tiếp: ' + esc(t.title) + ' →' + (xpVal ? ' · +' + xpVal + ' XP' : '') + '</button></div></div></section>';
+    html += '<section class="card next-card" id="nextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ ' + heroEyebrow + '</p><h2>' + esc(t.title) + '</h2><p class="mut">' + heroSub + '</p><button class="btn btn-primary" id="nextBtn">Học tiếp →</button>' + planHTML + '</div></div></section>';
   }
-  var todayHTML = specTodayHTML(t); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero de Your Journey nam trong hero khi the hom nay an */
-  if (!todayHTML) html += yourJourneyHTML("en"); /* v161: the hom nay an (buoc tiep theo da hien o hero, khong con viec cho) thi Your Journey nam TRONG hero — thay ngay tren man dau, dong thoi giu khung v92 (hero dau tien, con lai toan details dong) */
   html += '</div>';
   html += pronDiagInviteHTML("en"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v113: khoi phuc khoi chao mung nguoi moi (Why + FAQ) — bi xoa qua tay
@@ -4996,32 +5004,6 @@ function viewHome(app) {
 
   /* v84: Vào nhanh theo loại đã có đủ ở Luyện tập (thẻ Tìm bài, 7 nút) —
      bỏ khỏi trang chủ để màn chính chỉ còn một việc tiếp theo. */
-  if (todayHTML) html += '<details class="card" id="homeTodayMore" open><summary><b>Việc hôm nay</b></summary>' + todayHTML + '</details>';
-  /* v161: the hom nay an thi Your Journey da nam trong hero (xem tren) — khong render the rieng ngoai hero (v92: hero dau tien, con lai toan details dong) */
-  var curStep = null, curTitle = "";
-  if (info.kind === "ch1") { var nsH = nextLearnStep(); curStep = nsH; }
-  else { var undH = info.steps.filter(function (st) { return !rbStepDone(st); }); curStep = undH.length ? undH[0] : null; }
-  var bannerSk = curStep ? skClassFor(curStep.type) : "";
-  html += '<details class="card" id="homePathMore" open><summary><b>Đường đi hiện tại</b></summary><section id="homePath"><div class="unit-banner' + (bannerSk ? ' ' + bannerSk : '') + '"><b>PHẦN ' + (info.kind === "ch1" ? 1 : (info.ci + 2)) + ' · Chương ' + (info.ci + 1) + ': ' + esc(info.title) + '</b><p class="mut">Đã xong ' + info.done + '/' + info.total + ' nấc' + (info.kind === "ch1" ? ' (7 mở đầu · 10 Viết Band 0)' : '') + (info.done < info.total ? ' · còn ' + (info.total - info.done) + ' nấc nữa là hết chương' : ' · đã xong chương này') + '</p></div><div class="duo-path">';
-  if (info.kind === "ch1") {
-    var curId = nextLearnStep() ? nextLearnStep().id : null;
-    learningSteps().forEach(function (s, pi) {
-      var st = stepDone(s.id) ? "done" : (state.skipped.indexOf(s.id) >= 0 ? "skipped" : (s.id === curId ? "cur" : "future"));
-      var stTxt = st === "done" ? "Đã xong" : st === "cur" ? "Đang học · Bạn đang ở đây" : st === "skipped" ? "Đã bỏ qua — bấm để học lại" : "Chưa tới";
-      html += duoNodeHTML({ cls: "path-node duo-node pos" + (pi % 8) + " " + st, attrs: 'data-path-step="' + s.id + '"', star: duoStar(st), title: esc(s.title), sub: esc(s.type) + " · khoảng " + s.mins + " phút", status: stTxt, flag: st === "cur" ? "📍 Bạn đang ở đây" : "", guide: st === "cur" });
-    });
-    var gateSt = state.testDone ? "done" : (gateOpen() ? "cur" : "future");
-    var gateTxt = state.testDone ? "Đã xong" : (gateOpen() ? "Đang học · Bạn đang ở đây" : "Chưa tới · Mở khi xong 80% chương 1");
-    html += duoNodeHTML({ cls: "path-node duo-node pos" + (learningSteps().length % 8) + " " + gateSt, attrs: 'data-path-test="1"', star: "📝", title: "Bài kiểm tra cuối chương 1", sub: "Kiểm tra cuối chương", status: gateTxt, flag: "", guide: false });
-  } else {
-    info.steps.forEach(function (st, si) {
-      var stt = rbStepDone(st) ? "done" : (si === info.steps.findIndex(function (x) { return !rbStepDone(x); }) ? "cur" : "future");
-
-      var stTxt2 = stt === "done" ? "Đã xong" : stt === "cur" ? "Đang học · Bạn đang ở đây" : "Chưa tới";
-      html += duoNodeHTML({ cls: "path-node duo-node pos" + (si % 8) + " " + stt, attrs: 'data-path-rstep="' + esc(info.band) + ':' + si + '"', star: duoStar(stt), title: esc(st.title), sub: esc(st.type), status: stTxt2, flag: stt === "cur" ? "📍 Bạn đang ở đây" : "", guide: stt === "cur" });
-    });
-  }
-  html += '</div></section></details>';
   html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML("en") + homeListenHTML("en") + msHomeHTML("en") + homeQuickHTML("en") + u8DailyHTML() + '</details>';
   /* v84: tiến trình chi tiết (heatmap/tổng kết/mốc) dời sang Của tôi →
      Tiến trình của tôi — trang chủ chỉ giữ dòng tiến trình ở stat-strip. */
@@ -5034,12 +5016,13 @@ function viewHome(app) {
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var ll = $("#loginLink"); if (ll) { try { ll.textContent = (typeof authState !== "undefined" && authState.user) ? "Tài khoản: " + authState.user.email : "Đăng nhập"; } catch (e) {} }
   var nbHome = $("#nextBtn"); if (nbHome) nbHome.onclick = function () {
-    if (fresh) { state.entrySkipped = true; saveState(); var first = learningSteps()[0]; if (first) openStep(first, { noNudge: true }); return; }
-    openSessionTarget(sessionTarget());
+    if (trulyNew) { state.entrySkipped = true; saveState(); var first = learningSteps()[0]; if (first) openStep(first, { noNudge: true }); return; } /* nguoi moi tinh: nut Bo qua mo thang bai dau de thang ngay */
+    if (fresh) { state.entrySkipped = true; saveState(); go("roadmap"); return; } /* v182: nut Hoc tiep di qua Ban do */
+    if (t && t.kind === "review") { go("review"); return; } /* v182: nut Hoc tiep di qua Ban do */
+    go("roadmap");
   };
   var esb = $("#entryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "entryPlace" }); };
   var erl = $("#entryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "entryPlace" }); };
-  var spl = $("#statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
   var hwl = $("#homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "en"); }; /* v119b */
 
   $$("[data-home-vocabset]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "vocab", setIdx: +b.dataset.homeVocabset }); }; });
@@ -5047,9 +5030,6 @@ function viewHome(app) {
   $$("[data-home-quick]").forEach(function (b) { b.onclick = function () { openLesson({ type: "vocabQuick", setIdx: +b.dataset.homeQuick }); }; });
   $$("[data-home-goreview]").forEach(function (b) { b.onclick = function () { go("review"); }; });
 
-  $$("#homePath [data-path-step]").forEach(function (b) { b.onclick = function () { openStep(stepById(b.dataset.pathStep)); }; });
-  $$("#homePath [data-path-test]").forEach(function (b) { b.onclick = function () { openStep(stepById("test")); }; });
-  $$("#homePath [data-path-rstep]").forEach(function (b) { b.onclick = function () { var parts = b.dataset.pathRstep.split(":"); var st = rbChSteps(parts[0])[+parts[1]]; if (st) openRoadmapStepLesson(st.lesson); }; });
 
   var mg = $("#mapGo"); if (mg) mg.onclick = function () { go("roadmap"); };
   var qcl = $("#quickCheckLink"); if (qcl) qcl.onclick = function () { openLesson({ type: "quickcheck" }); };
@@ -5227,6 +5207,20 @@ function trailHeadHTML(sub) {
 }
 /* v170 V14+N3: chuong hien tai — con o buoc mo dau chuong 1 thi la Band 0. */
 function rbCurChapterBand() {
+  /* v182: nguoi da xep chang thi chuong hien tai la chuong da xep (con buoc
+     chua xong) hoac chuong ke tiep con buoc chua xong — dong bo voi
+     placedTarget()/sessionTarget(), thay vi luon ve Band 0 khi buoc mo dau
+     chuong 1 chua xong. */
+  try {
+    var p = state.entryPlaced;
+    if (p && p.band && p.band !== "Band 0") {
+      var bands = RB_CHAPTER_MAP.map(function (c) { return c.band; });
+      var start = bands.indexOf(p.band); if (start < 0) start = 0;
+      for (var i = start; i < bands.length; i++) {
+        if (rbChSteps(bands[i]).some(function (st) { return !rbStepDone(st); })) return bands[i];
+      }
+    }
+  } catch (e) {}
   var cl = nextLearnStep();
   if (cl) return RB_CHAPTER_MAP[0].band;
   for (var cbi = 0; cbi < RB_CHAPTER_MAP.length; cbi++) {
@@ -5374,6 +5368,7 @@ function viewRoadmap(app) {
   html += '<div class="row" id="myPathLink"><button class="btn btn-primary" id="mapNextGo">Học tiếp →</button><button class="dimlink" id="myPathGo">Lộ trình riêng →</button></div>';
   html += '<section class="card forest-band-1"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + ch1DoneAll + '/' + ch1TotalAll + ' bước (7 mở đầu · 10 Viết Band 0)</b></div><div id="roadmapBox"><div class="path-v">';
   var clCur = nextLearnStep(); var clCurIdx = clCur ? stepIdx(clCur.id) : -1;
+  var mapCur = mapCurStep(); /* v182: buoc hien tai tren ban do (ton trong chang da xep) */
   var gateHTML = "";
   RB_CH1_STEPS.forEach(function (s, i) {
     if (s.id === "test") {
@@ -5383,7 +5378,7 @@ function viewRoadmap(app) {
         + '<button class="btn" id="gateBtn" ' + (open ? "" : "disabled") + '>' + (state.testDone ? "Đã qua — làm lại" : open ? "Làm bài kiểm tra" : "Chưa mở") + '</button></div>';
       return;
     }
-    var st = stepDone(s.id) ? "done" : (state.skipped.indexOf(s.id) >= 0 ? "skipped" : (nextLearnStep() && nextLearnStep().id === s.id ? "cur" : "future"));
+    var st = stepDone(s.id) ? "done" : (state.skipped.indexOf(s.id) >= 0 ? "skipped" : (mapCur && mapCur.id === s.id ? "cur" : "future"));
     var clFlag = "";
     if (st === "cur") clFlag = "📍 Bạn đang ở đây";
     /* FIX-V32 01/11: khong gan chip "Tiep theo" cho buoc ke sau buoc hien tai —
@@ -5393,7 +5388,7 @@ function viewRoadmap(app) {
     /* v86: nut .path-node theo mau HSK; giu nguyen data-step, class step-row,
        co "Ban dang o day" va chip "Tiep theo" o buoc hien tai (buoc tiep theo
        con o Chuong 1 — thay cach dat chip cu cua FIX-V32). */
-    var stTxt = st === "done" ? "Đã xong" : st === "skipped" ? "Đã bỏ qua — bấm để học lại" : st === "cur" ? "Đang học" : "Chưa tới";
+    var stTxt = st === "done" ? "Đã xong" : st === "skipped" ? "Đã bỏ qua" : st === "cur" ? "Đang học" : "Chưa tới";
     html += '<button class="path-node step-row ' + st + '" data-step="' + s.id + '" data-status="' + st + '"><span class="dotwrap"><span class="dot">' + mapStepEmoji(s.kind) + '</span></span><span><span class="pn-title">' + esc(s.title) + '</span><br><span class="pn-type">' + esc(s.type) + ' · khoảng ' + s.mins + ' phút (ước tính)</span><br><span class="pn-st">' + stTxt + '</span>' + (clFlag ? ' <span class="chip cl-flag">' + clFlag + '</span>' : '') + (st === "cur" ? ' <span class="chip cl-flag">Tiếp theo</span>' : '') + '</span></button>';
   });
   html += '</div>' + gateHTML + gd23MidHTML() + '</div>';
@@ -10125,12 +10120,13 @@ function pronWeakGo(track) {
     if (track === "tc" || track === "tp") setTimeout(function () { try { var cl = document.querySelector('[data-g6="G3"]'); if (cl && !cl.open) cl.open = true; } catch (e) {} }, 150);
   } catch (e) {}
 }
-function pronWeakHomeHTML() {
+/* v182: am yeu chi con 1 cho — 1 nut trong stat-strip (khong con dong rieng). */
+function pronWeakStripHTML() {
   var track = (typeof state !== "undefined" && state.track) || "en";
   var d = pronWeakData(track);
   if (!d.sounds.length) return "";
   var syms = d.sounds.slice(0, 5).map(function (s) { return "/" + s.sym + "/"; }).join(" ");
-  return '<p id="homeWeakLine">🎯 Âm yếu của tôi: ' + esc(syms) + ' — ' + d.totalWords + ' từ còn sai · <button class="dimlink" id="homeWeakLink">Xem ở khu phát âm →</button></p>';
+  return '<button class="dimlink" id="homeWeakLink">🎯 Âm yếu: ' + esc(syms) + ' · ' + d.totalWords + ' từ còn sai →</button>';
 }
 /* 9. Danh gia muc do /100 tung ky nang (tu tien trinh that, khong phai diem thi). */
 function skillLevelRows() {
@@ -22505,10 +22501,16 @@ function zhAwardOnce(key) {
 function zhPhNodeHTML(i) {
   var s = ZH_PH_STEPS[i];
   var st = zhPhStatus(i);
-  var icon = st === "skipped" ? "↩" : "🎤";
-  var txt = st === "done" ? "Đã xong" : st === "cur" ? "Đang học · Bạn đang ở đây" : st === "skipped" ? "Đã bỏ qua — bấm để học lại" : "Chưa tới · Học theo thứ tự";
+  /* v182: co "cur" theo zhSeqMarks (da ton trong chang da xep) thay vi theo
+     zhPhCurrent() — nguoi da xep chang 2+ thi buoc pinyin khong con la buoc
+     hien tai tren ban do (van bam mo duoc de on lai: cong mo dung zhPhStatus
+     goc o wireZhMap, khong dung class hien thi nay). */
+  var seqCur = (zhNodeMark({ type: "zhPh", idx: i }) === "cur");
+  var dispSt = (st === "cur" && !seqCur) ? "future" : st;
+  var icon = dispSt === "skipped" ? "↩" : "🎤";
+  var txt = dispSt === "done" ? "Đã xong" : dispSt === "cur" ? "Đang học · Bạn đang ở đây" : dispSt === "skipped" ? "Đã bỏ qua" : "Chưa tới · Học theo thứ tự";
   var flag = (zhNodeMark({ type: "zhPh", idx: i }) === "next") ? '<span class="chip cl-flag">Tiếp theo</span>' : '';
-  return '<button class="path-node ' + st + '" data-zhph="' + i + '"><span class="dotwrap"><span class="dot">' + icon + '</span></span><span><span class="pn-title">Phát âm: ' + esc(s.title) + '</span><br><span class="pn-type">Tiếng Trung · Pinyin · lý thuyết trước, thực hành sau</span><br><span class="pn-st">' + txt + '</span>' + flag + '</span></button>';
+  return '<button class="path-node ' + dispSt + '" data-zhph="' + i + '"><span class="dotwrap"><span class="dot">' + icon + '</span></span><span><span class="pn-title">Phát âm: ' + esc(s.title) + '</span><br><span class="pn-type">Tiếng Trung · Pinyin · lý thuyết trước, thực hành sau</span><br><span class="pn-st">' + txt + '</span>' + flag + '</span></button>';
 }
 function zhSetNodeHTML(d) {
   var dd = zhSetDone(d);
@@ -22684,20 +22686,18 @@ function viewHomeZh(app) {
   var lv = xpLevel(state.xp || 0);
   var tZh = fresh ? null : zhSessionTarget();
   var html = trackSwitchHTML(true);
-  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục' + (hp.pronDue ? ' (' + hp.pronDue + ' phát âm)' : '') + '</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span id="homeTodayGoal">' + esc(goalStripMerged()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + pronWeakStripHTML() + '</div>';
   html += homeSearchHTML(); /* v122: o ket qua tim kiem tren moi track (truoc day chi trang chu EN co) */
   html += '<div class="home-main">';
   html += '<p id="homeGreet">' + (fresh ? 'Hôm nay Rồng Lửa cùng bạn học tiếng Trung nhé.' : 'Chào bạn! Hôm nay mình cùng Rồng Lửa học tiếng Trung nhé.') + '</p>';
-  html += pronWeakHomeHTML(); /* v119b */
   html += '<div class="home-clean"><div class="home-hero">';
-  if (fresh) {
-    html += '<section class="card next-card" id="zhEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TIẾNG TRUNG</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi HSK thật. Bỏ qua thì học từ chặng 1.</p><div class="row"><button class="btn btn-primary" id="zhEntryStartBtn">Kiểm tra trình độ HSK</button><button class="btn" id="zhNextBtn">Bỏ qua, học từ chặng 1</button></div></div></div></section>';
-  } else {
-    var zhXp = (tZh.title.indexOf("Ôn lại") === 0) ? "" : " · +10 XP";
-    html += '<section class="card next-card" id="zhNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TIẾNG TRUNG</p><h2>' + esc(tZh.title) + '</h2><p class="mut">' + esc(tZh.type) + '</p><button class="btn btn-primary" id="zhNextBtn">Học tiếp: ' + esc(tZh.title) + ' →' + zhXp + '</button></div></div></section>';
-  }
   var todayZhHTML = specTodayZhHTML(tZh ? tZh.title : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
-  if (!todayZhHTML) html += yourJourneyHTML("zh"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 (hero dau tien, con lai toan details dong) */
+  var planZhHTML = todayZhHTML || yourJourneyHTML("zh"); /* v182: ke hoach ngay nam TRONG the Buoi hoc hom nay, khong the rieng */
+  if (fresh) {
+    html += '<section class="card next-card" id="zhEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TIẾNG TRUNG</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi HSK thật. Bỏ qua thì học từ chặng 1.</p><div class="row"><button class="btn btn-primary" id="zhEntryStartBtn">Kiểm tra trình độ HSK</button><button class="btn" id="zhNextBtn">Bỏ qua, học từ chặng 1</button></div>' + planZhHTML + '</div></div></section>';
+  } else {
+    html += '<section class="card next-card" id="zhNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TIẾNG TRUNG</p><h2>' + esc(tZh.title) + '</h2><p class="mut">' + esc(tZh.type) + '</p><button class="btn btn-primary" id="zhNextBtn">Học tiếp →</button>' + planZhHTML + '</div></div></section>';
+  }
   html += '</div>';
   html += pronDiagInviteHTML("zh"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN — màn đầu chỉ lời chào + MỘT việc
@@ -22705,9 +22705,6 @@ function viewHomeZh(app) {
      thứ tự mục ở cả 4 track. "VÀO NHANH THEO LOẠI" đã có đủ ở Luyện tập
      nên không còn ở trang chủ. Nội dung thật từng track giữ nguyên, chỉ
      xếp lại vào khung chung. */
-  if (todayZhHTML) html += '<details class="card" id="homeTodayMore" open><summary><b>Việc hôm nay</b></summary>' + todayZhHTML + '</details>';
-  var zp = zhPositionCurrent() || { stage: 1, done: 0, total: 0 };
-  html += '<details class="card" id="homePathMore" open><summary><b>Đường đi hiện tại</b></summary><section class="card" id="zhHomePath"><h3>Chặng hiện tại: Chặng ' + zp.stage + '</h3><p class="mut">Đã xong ' + zp.done + '/' + zp.total + ' bước học.</p><div class="row"><button class="btn" id="zhHomeStageBtn">Xem chặng này ở Bản đồ →</button></div></section></details>';
   html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML("zh") + homeListenHTML("zh") + homeQuickHTML("zh") + msHomeHTML("zh") + '<section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Bản đồ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Bản đồ →</button></div></section>' + zhSystemEHTML() + '</details>';
   html += '<details class="card" id="homeMore"><summary><b>' + (fresh ? 'Xem thêm: bản đồ, đăng nhập' : 'Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập') + '</b></summary>'
     + '<p><button class="btn" id="zhHomeFullMapBtn">Xem toàn bộ bản đồ 6 chặng →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>'
@@ -22719,11 +22716,11 @@ function viewHomeZh(app) {
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = $("#zhNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.zhEntrySkipped = true; saveState(); openLesson({ type: "zhPh", idx: 0 }); return; }
-    zhOpenTarget(zhSessionTarget());
+    if (tZh && tZh.title && tZh.title.indexOf("Ôn lại") === 0) { go("review"); return; } /* v182: nut Hoc tiep di qua Ban do */
+    go("roadmap");
   };
   var esb = $("#zhEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "zhEntry" }); };
   var erl = $("#zhEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "zhEntry" }); };
-  var spl = $("#statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
   var hwl = $("#homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "zh"); }; /* v119b */
   var mg = $("#zhToRoadmap"); if (mg) mg.onclick = function () { go("roadmap"); };
   var wsBtn = $("#wsOpenBtn"); if (wsBtn) wsBtn.onclick = function () { openLesson({ type: "workspace" }); };
@@ -22733,7 +22730,6 @@ function viewHomeZh(app) {
   $$("[data-home-goreview]").forEach(function (b) { b.onclick = function () { go("review"); }; });
   var hhb = $("#zhHomeHskkBtn"); if (hhb) hhb.onclick = function () { go("roadmap"); };
   var hfm = $("#zhHomeFullMapBtn"); if (hfm) hfm.onclick = function () { go("roadmap"); };
-  var zhs = $("#zhHomeStageBtn"); if (zhs) zhs.onclick = function () { go("roadmap"); };
   var lg = $("#zhLoginLink"); if (lg) lg.onclick = function () { go("mine"); };
   wireZhMap(app);
   wireZhHskk();
@@ -26101,10 +26097,9 @@ function specTodayTcItems(nextId) {
 function specTodayTcHTML(nextId) {
   var d = specTodayTcItems(nextId);
   if (!d.items.length && d.hiddenWork) return "";
-  var h = '<section class="card" id="specTodayTc"><p class="eyebrow">VIỆC HÔM NAY · TOEIC</p>';
+  var h = '<div id="specTodayTc">';
   h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("tc")) + '</p>';
   if (d.doneToday) h += '<p class="mut">✓ Đã xong hôm nay: ' + d.doneToday + ' việc.</p>';
-  h += '<p><button class="btn" data-adaptive-go="profile">📋 Hồ sơ học của tôi →</button></p>';
   h += yourJourneyHTML("tc"); /* v161 S20 phan 3: Your Journey ngay duoi ke hoach ngay */
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc TOEIC 🎉</h3><p class="mut">Không còn lỗi sai chưa sửa và đã xong hết các bước TOEIC hiện có.</p>'; }
   else {
@@ -26116,7 +26111,7 @@ function specTodayTcHTML(nextId) {
       h += d.extras.map(function (it) { return '<p class="mut">Đang chờ chấm: <b>' + esc(it.title) + '</b> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>'; }).join("");
     }
   }
-  return h + '</section>';
+  return h + '</div>';
 }
 function viewHomeTc(app) {
   tcNorm();
@@ -26125,30 +26120,23 @@ function viewHomeTc(app) {
   var lv = xpLevel(state.xp || 0);
   var n = tcNextStep();
   var html = trackSwitchHTML(true);
-  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục' + (hp.pronDue ? ' (' + hp.pronDue + ' phát âm)' : '') + '</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span id="homeTodayGoal">' + esc(goalStripMerged()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + pronWeakStripHTML() + '</div>';
   html += homeSearchHTML(); /* v122: o ket qua tim kiem tren moi track (truoc day chi trang chu EN co) */
   html += '<div class="home-main">';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng Rồng Lửa luyện TOEIC nhé.</p>';
-  html += pronWeakHomeHTML(); /* v119b */
   html += '<div class="home-clean"><div class="home-hero">';
-  if (fresh) {
-    html += '<section class="card next-card" id="tcEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOEIC</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOEIC thật. Bỏ qua thì học từ Chặng 450.</p><div class="row"><button class="btn btn-primary" id="tcEntryStartBtn">Kiểm tra trình độ TOEIC</button><button class="btn" id="tcNextBtn">Bỏ qua, học từ Chặng 450</button></div></div></div></section>';
-  } else if (n) {
-    html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TOEIC</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOEIC Nghe–Đọc, từ 450 tới 900+.</p><button class="btn btn-primary" id="tcNextBtn">Học tiếp: ' + esc(n.meta.title) + ' → · +10 XP</button></div></div></section>';
-  } else {
-    html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOEIC</p><h2>Bạn đã xong hết các bước TOEIC hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p></div></div></section>';
-  }
   var todayTcHTML = specTodayTcHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
-  if (!todayTcHTML) html += yourJourneyHTML("tc"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 */
+  var planTcHTML = todayTcHTML || yourJourneyHTML("tc"); /* v182: ke hoach ngay nam TRONG the Buoi hoc hom nay, khong the rieng */
+  if (fresh) {
+    html += '<section class="card next-card" id="tcEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOEIC</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOEIC thật. Bỏ qua thì học từ Chặng 450.</p><div class="row"><button class="btn btn-primary" id="tcEntryStartBtn">Kiểm tra trình độ TOEIC</button><button class="btn" id="tcNextBtn">Bỏ qua, học từ Chặng 450</button></div>' + planTcHTML + '</div></div></section>';
+  } else if (n) {
+    html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TOEIC</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOEIC Nghe–Đọc, từ 450 tới 900+.</p><button class="btn btn-primary" id="tcNextBtn">Học tiếp →</button>' + planTcHTML + '</div></div></section>';
+  } else {
+    html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOEIC</p><h2>Bạn đã xong hết các bước TOEIC hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p>' + planTcHTML + '</div></div></section>';
+  }
   html += '</div>';
   html += pronDiagInviteHTML("tc"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
-  if (todayTcHTML) html += '<details class="card" id="homeTodayMore" open><summary><b>Việc hôm nay</b></summary>' + todayTcHTML + '</details>';
-  html += '<details class="card" id="homePathMore" open><summary><b>Đường đi hiện tại</b></summary><section class="card" id="tcHomePath"><h3>Lộ trình TOEIC của bạn</h3>';
-  TC_STAGES.forEach(function (st, i) {
-    html += '<p><b>' + esc(st.title) + '</b> — đã xong ' + tcStagePct(i) + '%</p>';
-  });
-  html += '</section></details>';
   html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML("tc") + homeListenHTML("tc") + homeQuickHTML("tc") + msHomeHTML("tc") + '<details class="card"><summary><b>TOEIC Nghe–Đọc là gì?</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></details>';
   html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tcEntryRedoLink">Làm lại kiểm tra đầu vào TOEIC</button></p>') + '</details></div></div>';
   app.innerHTML = html;
@@ -26156,11 +26144,10 @@ function viewHomeTc(app) {
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tcNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.tcEntrySkipped = true; saveState(); tcOpenStep(TC_STAGES[0].steps[0], "home"); return; }
-    var nn = tcNextStep(); if (nn) tcOpenStep(nn.id, "home");
+    go("roadmap"); /* v182: nut Hoc tiep di qua Ban do */
   };
   var esb = document.getElementById("tcEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "tcEntry" }); };
   var erl = document.getElementById("tcEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "tcEntry" }); };
-  var spl = document.getElementById("statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
   var hwl = document.getElementById("homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "tc"); }; /* v119b */
   var mg = document.getElementById("tcHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
   var wsBtnTc = $("#wsOpenBtn"); if (wsBtnTc) wsBtnTc.onclick = function () { openLesson({ type: "workspace" }); };
@@ -27292,10 +27279,9 @@ function specTodayTpItems(nextId) {
 function specTodayTpHTML(nextId) {
   var d = specTodayTpItems(nextId);
   if (!d.items.length && d.hiddenWork) return "";
-  var h = '<section class="card" id="specTodayTp"><p class="eyebrow">VIỆC HÔM NAY · TOPIK</p>';
+  var h = '<div id="specTodayTp">';
   h += '<p class="mut">📋 Kế hoạch ngày · 🧭 Hành trình của bạn: ' + esc(todayJourneyText("tp")) + '</p>';
   if (d.doneToday) h += '<p class="mut">✓ Đã xong hôm nay: ' + d.doneToday + ' việc.</p>';
-  h += '<p><button class="btn" data-adaptive-go="profile">📋 Hồ sơ học của tôi →</button></p>';
   h += yourJourneyHTML("tp"); /* v161 S20 phan 3: Your Journey ngay duoi ke hoach ngay */
   if (d.done) { h += '<h3>Hôm nay đã xong hết việc TOPIK 🎉</h3><p class="mut">Không còn lỗi sai chưa sửa và đã xong hết các bước TOPIK hiện có.</p>'; }
   else {
@@ -27307,7 +27293,7 @@ function specTodayTpHTML(nextId) {
       h += d.extras.map(function (it) { return '<p class="mut">Đang chờ chấm: <b>' + esc(it.title) + '</b> <button class="btn" data-spec-today="' + esc(it.action) + '">Vào làm →</button></p>'; }).join("");
     }
   }
-  return h + '</section>';
+  return h + '</div>';
 }
 function viewHomeTp(app) {
   tpNorm();
@@ -27316,30 +27302,23 @@ function viewHomeTp(app) {
   var lv = xpLevel(state.xp || 0);
   var n = tpNextStep();
   var html = trackSwitchHTML(true);
-  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span>' + goalStripText() + '</span><span id="homeTodayGoal">' + esc(goalStripToday()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục' + (hp.pronDue ? ' (' + hp.pronDue + ' phát âm)' : '') + '</span>'; })() + '<button class="dimlink" id="statProgressLink">Tiến trình của tôi →</button></div>';
+  html += '<div class="stat-strip" id="homeStatusStrip"><span>🔥 Chuỗi ' + streak + ' ngày</span><span>' + (state.xp || 0) + ' XP · Cấp ' + lv.level + '</span><span id="homeTodayGoal">' + esc(goalStripMerged()) + '</span>' + (function () { var hp = homeProgressText(); return '<span>Tiến độ chặng: ' + hp.prog + ' bước</span><span>Đến hạn ôn: ' + hp.due + ' mục</span>'; })() + pronWeakStripHTML() + '</div>';
   html += homeSearchHTML(); /* v122: o ket qua tim kiem tren moi track (truoc day chi trang chu EN co) */
   html += '<div class="home-main">';
   html += '<p id="homeGreet">Chào bạn! Hôm nay mình cùng Rồng Lửa luyện TOPIK nhé.</p>';
-  html += pronWeakHomeHTML(); /* v119b */
   html += '<div class="home-clean"><div class="home-hero">';
-  if (fresh) {
-    html += '<section class="card next-card" id="tpEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOPIK</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOPIK thật. Bỏ qua thì học từ bảng chữ Hangul.</p><div class="row"><button class="btn btn-primary" id="tpEntryStartBtn">Kiểm tra trình độ TOPIK</button><button class="btn" id="tpNextBtn">Bỏ qua, học từ Hangul</button></div></div></div></section>';
-  } else if (n) {
-    html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TIẾP THEO · TOPIK</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOPIK: Hangul trước, rồi TOPIK I cấp 1–2, hướng lên TOPIK II.</p><button class="btn btn-primary" id="tpNextBtn">Học tiếp: ' + esc(n.meta.title) + ' → · +10 XP</button></div></div></section>';
-  } else {
-    html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOPIK</p><h2>Bạn đã xong hết các bước TOPIK hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p></div></div></section>';
-  }
   var todayTpHTML = specTodayTpHTML(n ? n.id : null); /* v147 S10: khach moi cung thay the hom nay (1 viec bat dau) — tinh truoc khi dong hero */
-  if (!todayTpHTML) html += yourJourneyHTML("tp"); /* v161: the hom nay an thi Your Journey nam TRONG hero — thay ngay tren man dau, giu khung v92 */
+  var planTpHTML = todayTpHTML || yourJourneyHTML("tp"); /* v182: ke hoach ngay nam TRONG the Buoi hoc hom nay, khong the rieng */
+  if (fresh) {
+    html += '<section class="card next-card" id="tpEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOPIK</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOPIK thật. Bỏ qua thì học từ bảng chữ Hangul.</p><div class="row"><button class="btn btn-primary" id="tpEntryStartBtn">Kiểm tra trình độ TOPIK</button><button class="btn" id="tpNextBtn">Bỏ qua, học từ Hangul</button></div>' + planTpHTML + '</div></div></section>';
+  } else if (n) {
+    html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TOPIK</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOPIK: Hangul trước, rồi TOPIK I cấp 1–2, hướng lên TOPIK II.</p><button class="btn btn-primary" id="tpNextBtn">Học tiếp →</button>' + planTpHTML + '</div></div></section>';
+  } else {
+    html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ TOPIK</p><h2>Bạn đã xong hết các bước TOPIK hiện có 🎉</h2><p class="mut">Thi thử lại để giữ phong độ, hoặc ôn lỗi sai ở tab Ôn tập.</p>' + planTpHTML + '</div></div></section>';
+  }
   html += '</div>';
   html += pronDiagInviteHTML("tp"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
-  if (todayTpHTML) html += '<details class="card" id="homeTodayMore" open><summary><b>Việc hôm nay</b></summary>' + todayTpHTML + '</details>';
-  html += '<details class="card" id="homePathMore" open><summary><b>Đường đi hiện tại</b></summary><section class="card" id="tpHomePath"><h3>Lộ trình TOPIK của bạn</h3>';
-  TP_STAGES.forEach(function (st, i) {
-    html += '<p><b>' + esc(st.title) + '</b> — đã xong ' + tpStagePct(i) + '%</p>';
-  });
-  html += '</section></details>';
   html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + homeWordsHTML("tp") + homeListenHTML("tp") + homeQuickHTML("tp") + msHomeHTML("tp") + '<details class="card"><summary><b>TOPIK là gì?</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></details>';
   html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tpEntryRedoLink">Làm lại kiểm tra đầu vào TOPIK</button></p>') + '</details></div></div>';
   app.innerHTML = html;
@@ -27347,11 +27326,10 @@ function viewHomeTp(app) {
   $$("[data-spec-today]").forEach(function (b) { b.onclick = function () { specTodayGo(b.dataset.specToday); }; });
   var nb = document.getElementById("tpNextBtn"); if (nb) nb.onclick = function () {
     if (fresh) { state.tpEntrySkipped = true; saveState(); tpOpenStep(TP_STAGES[0].steps[0], "home"); return; }
-    var nn = tpNextStep(); if (nn) tpOpenStep(nn.id, "home");
+    go("roadmap"); /* v182: nut Hoc tiep di qua Ban do */
   };
   var esb = document.getElementById("tpEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "tpEntry" }); };
   var erl = document.getElementById("tpEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "tpEntry" }); };
-  var spl = document.getElementById("statProgressLink"); if (spl) spl.onclick = function () { go("mine"); };
   var hwl = document.getElementById("homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "tp"); }; /* v119b */
   var mg = document.getElementById("tpHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
   var wsBtnTp = $("#wsOpenBtn"); if (wsBtnTp) wsBtnTp.onclick = function () { openLesson({ type: "workspace" }); };
