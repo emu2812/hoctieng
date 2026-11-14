@@ -15939,6 +15939,269 @@ function msWire(scope) {
   (scope || document).querySelectorAll("[data-ms]").forEach(function (b) { b.onclick = function () { var parts = b.dataset.ms.split(":"); var tr = parts[0]; var sk = parts.slice(1).join(":"); if (tr !== "en") sk = +sk; msOpen(tr, sk); }; });
 }
 function msResetLesson(l) { quizDispClear(); l.msPhase = 0; l.msDraft = ""; l.msRewrite = ""; l.msAi = null; l.msAiTried = false; l.msAns = {}; l.msOk = {}; l.msShowVi = false; l.msTranscript = ""; l.msAiSpk = null; l.msAiSpkBusy = false; l.msUrl = ""; l.msRecording = false; }
+/* v185: TID U7 — Writing Builder 6 bước (đọc đề → lên ý → dàn ý → viết từng
+   câu → ghép bài → chấm + so bài mẫu). Gợi ý 4 bậc theo TID: tự nghĩ trước, xem
+   gợi ý sau; gợi ý càng nhiều, điểm tự lực càng giảm (thang U4 SELF_REL_TIERS);
+   gợi ý mờ dần khi người học làm tốt (faded scaffolding). AI chỉ chấm ở bước 5
+   theo đúng đường v128, KHÔNG viết hộ — câu chữ luôn là của người học, gợi ý
+   không bao giờ tự điền vào ô viết. Một engine dùng chung cả 4 track (QT-05):
+   renderMilestone (viết cột mốc), renderZhWrite (free), renderTcWrite, bài luận
+   TP. Dạng điền câu / xếp câu / trắc nghiệm KHÔNG phải bài luận nên không áp
+   Builder. */
+var WB_STEPS = ["Đọc đề", "Lên ý", "Dàn ý", "Viết từng câu", "Ghép bài", "Chấm + so bài mẫu"];
+var WB_HINTS = [
+  ["Đọc kỹ đề một lần nữa, gạch chân từ khóa chính trong đề.",
+   "Đề này hỏi gì — viết gì, viết cho ai, viết bao nhiêu câu? Trả lời 3 câu đó trước khi viết.",
+   "Tóm tắt đề bằng 1 câu của bạn vào ô dưới — viết được câu tóm tắt là bạn đã hiểu đề.",
+   "Đọc lại đề một lần nữa rồi tự nói lại yêu cầu của đề thành lời — nói được là hiểu đề."],
+  ["Viết ra 2–3 ý chính bạn định viết — mỗi ý 1 dòng, chưa cần câu hoàn chỉnh.",
+   "Mỗi ý nên có 1 lý do + 1 ví dụ cụ thể đi kèm.",
+   "Ý đầu tiên nên trả lời thẳng câu hỏi của đề — đừng vòng vo.",
+   "Khung 3 ý: ý kiến của bạn là gì? Vì sao bạn nghĩ vậy? Ví dụ nào chứng minh? Điền 3 dòng theo khung này."],
+  ["Xếp các ý theo thứ tự: mở đầu → thân bài → kết bài.",
+   "Mỗi ý chính thành 1 đoạn — ghi 1 câu chủ đề cho mỗi đoạn.",
+   "Ghi từ nối giữa các đoạn: Đầu tiên… / Ngoài ra… / Tóm lại…",
+   "Khung dàn ý chung: Mở đầu — trả lời thẳng đề (1 câu) · Thân bài — ý 1 + ví dụ, ý 2 + ví dụ · Kết bài — tóm lại ý kiến (1 câu)."],
+  ["Viết 1 câu đơn giản trước — đúng ngữ pháp là được, chưa cần câu hay.",
+   "Mỗi câu chỉ nói 1 ý — tránh câu quá dài, nhiều ý chồng nhau.",
+   "Dùng từ nối đầu câu: Đầu tiên… / Ngoài ra… / Vì vậy… / Tóm lại…",
+   "Khung câu gợi ý: Mở đầu — Tôi nghĩ rằng… · Thân bài — Đầu tiên… / Ngoài ra… · Kết — Tóm lại… Chỉ là khung câu — hãy điền ý của bạn vào."],
+  ["Đọc lại toàn bài một lượt — ý có nối nhau mạch lạc không?",
+   "Thêm từ nối giữa các đoạn nếu thấy bài rời rạc.",
+   "Kiểm tra mỗi đoạn có đúng 1 ý chính không — đoạn nào 2 ý thì tách ra.",
+   "Đọc to bài của bạn 1 lần (đọc thành lời) — câu nào đọc vấp thì sửa câu đó."]
+];
+function wbGoodCount(track, step) { try { return (((state.wbGood || {})[track] || {})[step]) || 0; } catch (e) { return 0; } }
+/* Luật mờ dần (faded scaffolding): "làm tốt" 1 bước = qua bước đó mà không mở
+   gợi ý nào. Mới: 4 bậc; làm tốt >=2 lần: 3 bậc; >=4 lần: 2 bậc; >=6 lần: 1 bậc. */
+function wbMaxLevel(track, step) {
+  var g = wbGoodCount(track, step);
+  if (g >= 6) return 1;
+  if (g >= 4) return 2;
+  if (g >= 2) return 3;
+  return 4;
+}
+function wbEnsure(l) {
+  if (!l.wb) l.wb = { step: 0, restate: "", ideas: "", outline: "", sentences: [""], essay: "", essayEdited: false, rewrite: "", hints: {}, goodCounted: {}, done: false };
+  if (!l.wb.sentences || !l.wb.sentences.length) l.wb.sentences = [""];
+  return l.wb;
+}
+function wbStepScore(wb, step) { var opened = (wb.hints || {})[step] || 0; return SELF_REL_TIERS[Math.min(opened, 3)]; }
+function wbAvgScore(wb) { var s = 0; for (var i = 0; i < 5; i++) s += wbStepScore(wb, i); return Math.round((s / 5) * 100) / 100; }
+/* Gợi ý bậc 4 lấy từ dữ liệu đã có của nhiệm vụ (khung/dàn ý/cụm dùng được) —
+   không bịa nội dung mới; không có dữ liệu thì dùng khung chung. */
+function wbHintText(task, step, level) {
+  if (level === 4) {
+    if (step === 0 && task.guide) return "Hướng dẫn của bài này: " + task.guide;
+    if (step === 2 && task.outline && task.outline.length) return "Dàn ý gợi ý của bài này (chỉ là khung — hãy điền ý của bạn vào): " + task.outline.join(" → ");
+    if (step === 3 && task.phrases && task.phrases.length) return "Cụm câu dùng được trong bài này (chỉ là khung — hãy điền ý của bạn vào): " + task.phrases.join(" · ");
+  }
+  return WB_HINTS[step][level - 1];
+}
+function wbStepBarHTML(wb) {
+  var h = '<div class="row" style="flex-wrap:wrap;gap:6px;margin:8px 0">';
+  WB_STEPS.forEach(function (nm, i) {
+    var done = i < wb.step;
+    h += '<button class="btn' + (i === wb.step ? ' btn-primary' : '') + '" data-wbstep="' + i + '">' + (done ? '✓ ' : '') + 'Bước ' + i + ': ' + esc(nm) + '</button>';
+  });
+  return h + '</div>';
+}
+function wbHintBlockHTML(task, wb, track, step) {
+  var max = wbMaxLevel(track, step), opened = (wb.hints || {})[step] || 0;
+  var good = wbGoodCount(track, step);
+  var h = '<div class="qblock" id="wbHintBox"><h3>💡 Gợi ý theo bậc</h3>';
+  if (max < 4) h += '<p class="mut">Gợi ý đã mờ dần: bạn đã làm tốt bước này ' + good + ' lần nên chỉ còn ' + max + ' bậc gợi ý.</p>';
+  else h += '<p class="mut">Tự nghĩ trước, xem gợi ý sau — gợi ý càng nhiều, điểm tự lực càng thấp (1,0 → 0,7 → 0,4 → 0,1).</p>';
+  for (var lv = 1; lv <= opened; lv++) h += '<p><b>Gợi ý bậc ' + lv + ':</b> ' + esc(wbHintText(task, step, lv)) + '</p>';
+  if (opened > 0) h += '<p><b>Điểm tự lực bước này: ' + fmtS(wbStepScore(wb, step)) + '</b> — điểm này tính cả mức gợi ý.</p>';
+  if (opened < max) h += '<div class="row"><button class="btn" id="wbHintBtn">💡 Gợi ý (bậc ' + (opened + 1) + '/' + max + ')</button></div>';
+  else h += '<p class="mut">Đã mở hết gợi ý ở bước này.</p>';
+  return h + '</div>';
+}
+function wbSelfRelChipHTML(wb, step) {
+  return '<span class="chip">Điểm tự lực bước này: ' + fmtS(wbStepScore(wb, step)) + '</span>';
+}
+/* Đọc nội dung ô nhập của bước hiện tại vào l.wb trước khi rời bước. */
+function wbReadStep(wb, step) {
+  var g = function (id) { var el = document.getElementById(id); return el ? el.value : null; };
+  if (step === 0) { var r = g("wbRestate"); if (r != null) wb.restate = r; }
+  if (step === 1) { var v = g("wbIdeas"); if (v != null) wb.ideas = v; }
+  if (step === 2) { var o = g("wbOutline"); if (o != null) wb.outline = o; }
+  if (step === 3) {
+    var els = document.querySelectorAll(".wbSent"); var arr = [];
+    els.forEach(function (el) { arr.push(el.value); });
+    if (arr.length) wb.sentences = arr;
+  }
+  if (step === 4) { var e = g("wbEssay"); if (e != null) wb.essay = e; }
+  if (step === 5) { var rw = g("wbRewrite"); if (rw != null) wb.rewrite = rw; }
+}
+function wbStepEmptyNote(wb, step) {
+  if (step === 1 && !String(wb.ideas || "").trim()) return "Bạn chưa viết ý nào ở bước 1 — có thể quay lại bất cứ lúc nào.";
+  if (step === 2 && !String(wb.outline || "").trim()) return "Bạn chưa viết dàn ý ở bước 2 — có thể quay lại bất cứ lúc nào.";
+  if (step === 3 && !(wb.sentences || []).some(function (s) { return String(s || "").trim(); })) return "Bạn chưa viết câu nào ở bước 3 — có thể quay lại bất cứ lúc nào.";
+  if (step === 4 && !String(wb.essay || "").trim()) return "Bạn chưa có bài để ghép ở bước 4 — hãy viết vài câu ở bước 3 trước.";
+  if (step === 5 && !String(wb.essay || "").trim()) return "Bạn chưa có bài để chấm ở bước 5 — hãy viết bài ở các bước trước rồi quay lại.";
+  return "";
+}
+/* Khối AI chấm 4 tiêu chí ở bước 5 — giữ nguyên đường v128 (chỉ aiMode
+   "milestone" mới có; ZH/TC/TP tự chấm, không AI).
+   v128: dung chung callAiTutorWriting + parseAiDetailReply cho ca 4 track —
+   chi khac nhan de theo ngon ngu; 4 tieu chi + dinh dang tra loi giong EN. */
+function wbMsAiBlockHTML(l, task) {
+  var aw = l.msAi || {};
+  var h = '<div class="qblock"><h3>AI chấm 4 tiêu chí</h3>';
+  if (aw.err) h += '<p>' + esc(aw.err) + '</p><p class="mut">AI lỗi nên lần này dùng đối chiếu mẫu bên dưới — không tính là AI chấm.</p>';
+  if (!aw.parsed && !aw.raw && !aw.err) h += '<p class="mut">Bấm “AI chấm 4 tiêu chí” để AI chấm bản nháp (chỉ mở cho tài khoản VIP).</p>';
+  if (aw.parsed && aw.parsed.full) {
+    aw.parsed.criteria.forEach(function (c) { h += '<p><b>' + esc(c.name) + ': Band ' + fmtBandComma(c.band) + '</b> — ' + esc(c.note) + '</p>'; });
+    h += '<p><b>Band bản nháp (Máy ước lượng): ' + fmtBandComma(aw.parsed.overall) + '</b></p>';
+    if (aw.parsed.good && aw.parsed.good.length) h += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + aw.parsed.good.map(function (g) { return '<p><span class="ai-seg ai-seg-green">' + esc(g.quote) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(g.why) + '</p>'; }).join("") + '</div>';
+    if (aw.parsed.fix && aw.parsed.fix.length) h += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + aw.parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  } else if (aw.raw) { h += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(aw.raw) + '</p>'; }
+  h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wbAiBtn"' + (aw.busy ? ' disabled' : '') + '>' + (aw.busy ? 'Đang chấm...' : 'AI chấm 4 tiêu chí') + '</button></div></div>';
+  return h;
+}
+function wbRender(app, l, task, opts) {
+  var wb = wbEnsure(l);
+  var track = task.track || "en";
+  var head = (opts.backHTML || "") + '<section class="card"><p class="eyebrow">✍️ Writing Builder · ' + esc(task.eyebrow || "") + '</p><h2>' + esc(task.title) + '</h2>'
+    + '<p class="mut">Builder 6 bước — tự nghĩ trước, xem gợi ý sau. Gợi ý càng nhiều, điểm tự lực càng thấp. Bước nào cũng vào được, không khóa bài.</p>'
+    + (task.headNote ? '<p class="mut">' + esc(task.headNote) + '</p>' : '') + '</section>';
+  if (wb.done) {
+    app.innerHTML = head + finishSummaryHTML("Bạn đã hoàn thành bài viết 6 bước!", '<p>Điểm tự lực trung bình: <b>' + fmtS(wbAvgScore(wb)) + '/1,0</b> — điểm này tính cả mức gợi ý.</p><p class="mut">Cả hai bản đã lưu trong tiến trình của bạn (bản nháp và bản sửa).</p>', "", { adaptive: false })
+      + '<div class="row"><button class="btn btn-primary" id="wbRedo2">Làm lại bài này</button>' + (opts.doneBackHTML || '') + '</div>';
+    if (opts.wireBack) opts.wireBack();
+    var rb2 = document.getElementById("wbRedo2"); if (rb2) rb2.onclick = function () { l.wb = null; opts.rerender(); };
+    return;
+  }
+  var step = wb.step;
+  var html = head + wbStepBarHTML(wb);
+  var emptyNote = wbStepEmptyNote(wb, step);
+  if (emptyNote) html += '<p class="mut">' + esc(emptyNote) + '</p>';
+  if (step === 0) {
+    html += '<div class="qblock"><h3>Bước 0: Đọc đề</h3>'
+      + (task.situation ? '<p><b>Tình huống:</b> ' + esc(task.situation) + '</p>' : '')
+      + '<p><b>Đề bài:</b> ' + esc(task.prompt) + '</p>'
+      + '<p><b>Tóm tắt đề bằng lời của bạn (1 câu, không bắt buộc):</b></p><textarea id="wbRestate" rows="2" style="width:100%;padding:10px" placeholder="Ví dụ: Đề yêu cầu viết đoạn ngắn kể về một ngày của mình.">' + esc(wb.restate || "") + '</textarea>'
+      + '<div class="row" style="margin-top:8px"><span class="chip">Điểm tự lực bước này: ' + fmtS(wbStepScore(wb, 0)) + '</span><button class="btn btn-primary" id="wbNext">Hiểu đề rồi, lên ý →</button></div></div>'
+      + wbHintBlockHTML(task, wb, track, 0);
+  } else if (step === 1) {
+    html += '<div class="qblock"><h3>Bước 1: Lên ý</h3><p class="mut">Viết ra 2–3 ý chính bạn định viết — mỗi ý 1 dòng, chưa cần câu hoàn chỉnh.</p>'
+      + '<textarea id="wbIdeas" rows="5" style="width:100%;padding:10px" placeholder="Ý 1: …&#10;Ý 2: …&#10;Ý 3: …">' + esc(wb.ideas || "") + '</textarea>'
+      + '<div class="row" style="margin-top:8px">' + wbSelfRelChipHTML(wb, 1) + '<button class="btn btn-primary" id="wbNext">Xếp thành dàn ý →</button></div></div>'
+      + wbHintBlockHTML(task, wb, track, 1);
+  } else if (step === 2) {
+    html += '<div class="qblock"><h3>Bước 2: Dàn ý</h3><p class="mut">Xếp các ý thành dàn ý: mở đầu → thân bài → kết bài.</p>'
+      + '<textarea id="wbOutline" rows="5" style="width:100%;padding:10px" placeholder="Mở đầu: …&#10;Thân bài: …&#10;Kết bài: …">' + esc(wb.outline || "") + '</textarea>'
+      + '<div class="row" style="margin-top:8px">' + wbSelfRelChipHTML(wb, 2) + '<button class="btn btn-primary" id="wbNext">Viết từng câu →</button></div></div>'
+      + wbHintBlockHTML(task, wb, track, 2);
+  } else if (step === 3) {
+    var sents = wb.sentences;
+    html += '<div class="qblock"><h3>Bước 3: Viết từng câu</h3><p class="mut">Viết từng câu một — mỗi ô 1 câu, câu chữ là của bạn. Xong 1 câu thì bấm “Thêm câu”.</p>'
+      + (task.typeNote ? '<p class="mut">' + esc(task.typeNote) + '</p>' : '');
+    sents.forEach(function (s, i) {
+      html += '<p><b>Câu ' + (i + 1) + ':</b></p><textarea class="wbSent" data-i="' + i + '" rows="2" style="width:100%;padding:10px" placeholder="Viết câu ' + (i + 1) + ' của bạn…">' + esc(s || "") + '</textarea>';
+    });
+    html += '<div class="row" style="margin-top:8px">' + wbSelfRelChipHTML(wb, 3) + '<button class="btn" id="wbAddSent">＋ Thêm câu</button><button class="btn btn-primary" id="wbNext">Ghép thành bài →</button></div></div>'
+      + wbHintBlockHTML(task, wb, track, 3);
+  } else if (step === 4) {
+    html += '<div class="qblock"><h3>Bước 4: Ghép bài</h3><p class="mut">Các câu đã viết ghép thành 1 bài — sửa trực tiếp ở đây nếu cần.</p>'
+      + '<textarea id="wbEssay" rows="8" style="width:100%;padding:10px">' + esc(wb.essay || "") + '</textarea>'
+      + '<div class="row" style="margin-top:8px">' + wbSelfRelChipHTML(wb, 4) + '<button class="btn btn-primary" id="wbNext">Chấm + so bài mẫu →</button></div></div>'
+      + wbHintBlockHTML(task, wb, track, 4);
+  } else {
+    /* Bước 5: chấm + so bài mẫu — tự chấm 4 tiêu chí + đối chiếu 2 cột + AI
+       (chỉ milestone) + viết lại bản sửa. */
+    var avg = wbAvgScore(wb);
+    var crit = msWriteChecks().map(function (c) { return '<label style="display:block;margin:4px 0"><input type="checkbox" class="wbCheck"> ' + esc(c) + '</label>'; }).join("");
+    html += '<div class="qblock"><h3>Bước 5: Chấm + so bài mẫu</h3>'
+      + '<p><b>Điểm tự lực trung bình: ' + fmtS(avg) + '/1,0</b> <span class="mut">— điểm này tính cả mức gợi ý (tự làm hết 1,0; gợi ý bậc 1: 0,7; gợi ý bậc 2: 0,4; gợi ý bậc 3+: 0,1).</span></p>'
+      + '<h3>Tự đối chiếu theo bảng tiêu chí</h3><p class="mut">Tích vào tiêu chí bạn thấy mình đã làm được. Đây là tự đối chiếu, không phải điểm máy chấm.</p>' + crit + '</div>';
+    if (opts.aiMode === "milestone") {
+      if (msIsVip()) { if (l.msDraft !== wb.essay) l.msDraft = wb.essay; html += wbMsAiBlockHTML(l, task); }
+      else html += '<div class="qblock"><h3>Tự đối chiếu theo bảng tiêu chí</h3><p class="mut">Bạn đang dùng tài khoản thường nên web không gọi AI chấm — bảng dưới đây là tự đối chiếu, không phải điểm máy chấm.</p><ul>' + msWriteChecks().map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul></div>';
+    } else if (opts.aiMode === "skill") {
+      /* EN Task 1/2: khối AI VIP đầy đủ do điểm gắn cung cấp (chấm lại tối đa
+         2 lần, mục NOTE — VIẾT HAY HƠN, nút lưu cụm vào Sổ từ/cụm). Khách thấy
+         thông báo VIP mẫu v104 + tự đối chiếu. */
+      if (msIsVip()) html += opts.aiBlockHTML(l, task);
+      else html += '<div class="qblock">' + aiVipNoticeHTML("writing") + '</div>';
+    } else if (opts.noAiNote) {
+      html += '<div class="qblock"><p class="mut">' + esc(opts.noAiNote) + '</p></div>';
+    }
+    html += '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>Bản của bạn</b><p>' + esc(wb.essay || "") + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(task.model || "") + '</p></div></div>'
+      + (task.modelNote ? '<p><b>Phân tích bài mẫu:</b> ' + esc(task.modelNote) + '</p>' : '')
+      + (task.phrases && task.phrases.length ? '<p><b>Cụm câu dùng được:</b> ' + task.phrases.map(function (p) { return esc(p); }).join(" · ") + '</p>' : '')
+      + (task.checklist && task.checklist.length ? '<p><b>Bảng tiêu chí tự chấm của bài này:</b></p><ul>' + task.checklist.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul>' : '')
+      + '</div>'
+      + '<div class="qblock"><h3>Viết lại bản sửa</h3><p>Viết lại bài, sửa theo góp ý và đối chiếu bài mẫu:</p>'
+      + '<textarea id="wbRewrite" rows="8" style="width:100%;padding:10px">' + esc(wb.rewrite || wb.essay || "") + '</textarea>'
+      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wbSave">' + esc(opts.saveLabel || "Lưu bản sửa") + '</button></div></div>';
+  }
+  app.innerHTML = html;
+  if (opts.wireBack) opts.wireBack();
+  document.querySelectorAll("[data-wbstep]").forEach(function (b) {
+    b.onclick = function () { wbReadStep(wb, step); wb.step = +b.dataset.wbstep; opts.rerender(); };
+  });
+  var hb = document.getElementById("wbHintBtn");
+  if (hb) hb.onclick = function () { wbReadStep(wb, step); var cur = (wb.hints[step] || 0); if (cur < wbMaxLevel(track, step)) { wb.hints[step] = cur + 1; opts.rerender(); } };
+  var ee = document.getElementById("wbEssay");
+  if (ee) ee.addEventListener("input", function () { wb.essayEdited = true; });
+  var addS = document.getElementById("wbAddSent");
+  if (addS) addS.onclick = function () { wbReadStep(wb, 3); wb.sentences.push(""); opts.rerender(); };
+  var nx = document.getElementById("wbNext");
+  if (nx) nx.onclick = function () {
+    wbReadStep(wb, step);
+    if (step === 1 && !String(wb.ideas || "").trim()) { toast("Hãy viết 2–3 ý chính trước đã."); return; }
+    if (step === 2 && !String(wb.outline || "").trim()) { toast("Hãy viết dàn ý trước đã."); return; }
+    if (step === 3 && !(wb.sentences || []).some(function (s) { return String(s || "").trim(); })) { toast("Hãy viết ít nhất 1 câu trước đã."); return; }
+    if (step === 4 && !String(wb.essay || "").trim()) { toast("Hãy ghép bài trước đã."); return; }
+    if (step === 3 && !wb.essayEdited) wb.essay = (wb.sentences || []).filter(function (s) { return String(s || "").trim(); }).join(" ");
+    if (step === 4 && !String(wb.essay || "").trim()) { toast("Hãy ghép bài trước đã."); return; }
+    /* Ghi "làm tốt" khi qua bước mà không mở gợi ý nào ở bước đó. */
+    if (((wb.hints || {})[step] || 0) === 0 && !wb.goodCounted[step]) {
+      wb.goodCounted[step] = true;
+      try {
+        if (!state.wbGood) state.wbGood = {};
+        if (!state.wbGood[track]) state.wbGood[track] = {};
+        state.wbGood[track][step] = (state.wbGood[track][step] || 0) + 1;
+        saveState();
+      } catch (e) {}
+    }
+    wb.step = step + 1; opts.rerender();
+  };
+  if (opts.aiMode === "milestone") {
+    var ab = document.getElementById("wbAiBtn");
+    if (ab) ab.onclick = function () {
+      l.msAi = { busy: true }; opts.rerender();
+      var examLabel = track === "zh" ? "Viết tiếng Trung" : track === "tc" ? "Viết email công việc tiếng Anh" : track === "tp" ? "Viết tiếng Hàn" : "Writing IELTS";
+      callAiTutorWriting("Nhiệm vụ giao tiếp thật — " + task.title, task.prompt, l.msDraft || "", examLabel).then(function (res) {
+        var p = parseAiDetailReply(res.reply, "writing");
+        l.msAi = p.full ? { parsed: p } : { raw: res.reply };
+        l.msAiTried = true; opts.rerender();
+      }, function (err) { l.msAi = { err: (err && err.message) || String(err) }; l.msAiTried = true; opts.rerender(); });
+    };
+  }
+  if (opts.aiMode === "skill" && opts.aiWire) opts.aiWire(l, task);
+  var sv = document.getElementById("wbSave");
+  if (sv) sv.onclick = function () {
+    wbReadStep(wb, 5);
+    var rw = String(wb.rewrite || "").trim();
+    if (!rw) { toast("Hãy viết bản sửa trước đã."); return; }
+    if (opts.aiMode === "milestone" && msIsVip() && !l.msAiTried) { toast("Hãy bấm AI chấm 4 tiêu chí để AI chấm đã — phần Viết của VIP chỉ có AI chấm, không tự chấm."); return; }
+    if (opts.aiMode === "skill" && msIsVip() && !(l.aiWrite && l.aiWrite.parsed)) { toast("Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần Viết chỉ có AI chấm, không tự chấm."); return; }
+    var avg2 = wbAvgScore(wb);
+    try {
+      if (!state.selfReliance) state.selfReliance = { n: 0, sum: 0, last: 1 };
+      for (var i = 0; i < 5; i++) { state.selfReliance.n += 1; state.selfReliance.sum += wbStepScore(wb, i); }
+      state.selfReliance.last = avg2;
+      if (!state.writingAttempts) state.writingAttempts = {};
+      state.writingAttempts[task.key] = { draft: wb.essay || "", rewrite: rw, selfRel: avg2, hints: JSON.parse(JSON.stringify(wb.hints || {})), at: todayStr() };
+      saveState();
+    } catch (e) {}
+    opts.onSave(wb.essay || "", rw, wb);
+  };
+}
 function renderMilestone(app, l) {
   var track = l.track || "en";
   var stageKey = (track === "en") ? l.stageKey : +l.stageKey;
@@ -16049,72 +16312,23 @@ function renderMilestone(app, l) {
     var dl2 = $("#msDoneListen"); if (dl2) dl2.onclick = function () { msComplete(key, { kind: "listen", outcome: m.outcome, at: todayStr() }); l.msPhase = 3; render(); };
     return;
   }
-  /* kind === "write": dung mau Writing 3 buoc san co: viet -> doi chieu bai mau
-     2 cot -> viet lai ban sua. Khach: doi chieu mau + tu doi chieu (ghi ro khong
-     phai diem may cham). VIP: AI cham theo 4 tieu chi bang callAiTutorWriting +
-     parseAiDetailReply dung chung ca 4 track (v128: chi khac nhan de theo ngon
-     ngu); 4 tieu chi + dinh dang tra loi giong EN nen tach diem giong het. */
-  var phase = l.msPhase || 0;
-  if (phase === 0) {
-    app.innerHTML = head + intro + '<div class="qblock"><h3>Bước 1: Viết bản nháp</h3><p><b>Đề bài:</b> ' + esc(m.prompt) + '</p>'
-      + '<textarea id="msDraft" rows="8" style="width:100%;padding:10px">' + esc(l.msDraft || "") + '</textarea>'
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="msNext1">Xong bản nháp → Đối chiếu</button></div></div>';
-    wireBack();
-    $("#msNext1").onclick = function () { var v = $("#msDraft").value; if (!v.trim()) { toast("Hãy viết vài câu trước đã."); return; } l.msDraft = v; l.msPhase = 1; render(); };
-    return;
-  }
-  if (phase === 1) {
-    var aw = l.msAi || {};
-    var vip = msIsVip();
-    var aiBlock = "";
-    if (vip) {
-      aiBlock = '<div class="qblock"><h3>AI chấm 4 tiêu chí</h3>';
-      if (aw.err) aiBlock += '<p>' + esc(aw.err) + '</p><p class="mut">AI lỗi nên lần này dùng đối chiếu mẫu bên dưới — không tính là AI chấm.</p>';
-      if (!aw.parsed && !aw.raw && !aw.err) aiBlock += '<p class="mut">Bấm “AI chấm 4 tiêu chí” để AI chấm bản nháp (chỉ mở cho tài khoản VIP).</p>';
-      if (aw.parsed && aw.parsed.full) {
-        aw.parsed.criteria.forEach(function (c) { aiBlock += '<p><b>' + esc(c.name) + ': Band ' + fmtBandComma(c.band) + '</b> — ' + esc(c.note) + '</p>'; });
-        aiBlock += '<p><b>Band bản nháp (Máy ước lượng): ' + fmtBandComma(aw.parsed.overall) + '</b></p>';
-        if (aw.parsed.good && aw.parsed.good.length) aiBlock += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + aw.parsed.good.map(function (g) { return '<p><span class="ai-seg ai-seg-green">' + esc(g.quote) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(g.why) + '</p>'; }).join("") + '</div>';
-        if (aw.parsed.fix && aw.parsed.fix.length) aiBlock += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + aw.parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
-      } else if (aw.raw) { aiBlock += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(aw.raw) + '</p>'; }
-      aiBlock += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="msAiWriteBtn"' + (aw.busy ? ' disabled' : '') + '>' + (aw.busy ? 'Đang chấm...' : 'AI chấm 4 tiêu chí') + '</button></div></div>';
-    } else {
-      aiBlock = '<div class="qblock"><h3>Tự đối chiếu theo bảng tiêu chí</h3><p class="mut">Bạn đang dùng tài khoản thường nên web không gọi AI chấm — bảng dưới đây là tự đối chiếu, không phải điểm máy chấm.</p><ul>' + msWriteChecks().map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul></div>';
+  /* kind === "write": v185 TID U7 — Writing Builder 6 bước (thay khung 3 bước cũ:
+     viết → đối chiếu → viết lại). Bước 5 giữ nguyên đường AI 4 tiêu chí v128 +
+     đối chiếu 2 cột + viết lại bản sửa; VIP vẫn phải bấm AI chấm trước khi lưu. */
+  var wbTask = { key: "ms:" + key, track: track, title: m.title, prompt: m.prompt, model: m.model, modelNote: m.modelNote, guide: m.guide, situation: m.situation, eyebrow: "Nhiệm vụ giao tiếp thật · bước cuối của " + stageLabel };
+  wbRender(app, l, wbTask, {
+    backHTML: head + intro,
+    wireBack: wireBack,
+    rerender: render,
+    aiMode: "milestone",
+    saveLabel: "Lưu bản sửa",
+    onSave: function (essay, rewrite, wb) {
+      var rec = { kind: "write", outcome: m.outcome, at: todayStr(), draft: essay, rewrite: rewrite, selfRel: wbAvgScore(wb), hints: wb.hints };
+      if (l.msAi && l.msAi.parsed && l.msAi.parsed.full) rec.aiBand = l.msAi.parsed.overall;
+      msComplete(key, rec); l.msPhase = 3; render();
     }
-    app.innerHTML = head + intro + aiBlock
-      + '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>Bản của bạn</b><p>' + esc(l.msDraft || "") + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(m.model) + '</p></div></div>'
-      + '<p><b>Phân tích bài mẫu:</b> ' + esc(m.modelNote) + '</p>'
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="msNext2">Đã đối chiếu xong → Viết lại bản sửa</button></div></div>';
-    wireBack();
-    var ab = $("#msAiWriteBtn");
-    if (ab) ab.onclick = function () {
-      l.msAi = { busy: true }; render();
-      /* v128: dung chung callAiTutorWriting + parseAiDetailReply cho ca 4 track —
-         chi khac nhan de theo ngon ngu; 4 tieu chi + dinh dang tra loi giong EN. */
-      var examLabel = track === "zh" ? "Viết tiếng Trung" : track === "tc" ? "Viết email công việc tiếng Anh" : track === "tp" ? "Viết tiếng Hàn" : "Writing IELTS";
-      callAiTutorWriting("Nhiệm vụ giao tiếp thật — " + m.title, m.prompt, l.msDraft || "", examLabel).then(function (res) {
-        var p = parseAiDetailReply(res.reply, "writing");
-        l.msAi = p.full ? { parsed: p } : { raw: res.reply };
-        l.msAiTried = true; render();
-      }, function (err) { l.msAi = { err: (err && err.message) || String(err) }; l.msAiTried = true; render(); });
-    };
-    $("#msNext2").onclick = function () {
-      if (vip && !l.msAiTried) { toast("Hãy bấm AI chấm 4 tiêu chí để AI chấm đã — phần Viết của VIP chỉ có AI chấm, không tự chấm."); return; }
-      l.msPhase = 2; render();
-    };
-    return;
-  }
-  /* phase === 2: viet lai ban sua roi luu. */
-  app.innerHTML = head + intro + '<div class="qblock"><h3>Bước 3: Viết lại bản sửa</h3><p>Viết lại bài, sửa theo góp ý AI (nếu có) và đối chiếu bài mẫu:</p>'
-    + '<textarea id="msRewrite" rows="8" style="width:100%;padding:10px">' + esc(l.msRewrite || l.msDraft || "") + '</textarea>'
-    + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="msSave">Lưu bản sửa</button></div></div>';
-  wireBack();
-  $("#msSave").onclick = function () {
-    var v = $("#msRewrite").value; if (!v.trim()) { toast("Hãy viết bản sửa trước đã."); return; }
-    var rec = { kind: "write", outcome: m.outcome, at: todayStr(), draft: l.msDraft || "", rewrite: v };
-    if (l.msAi && l.msAi.parsed && l.msAi.parsed.full) rec.aiBand = l.msAi.parsed.overall;
-    msComplete(key, rec); l.msPhase = 3; render();
-  };
+  });
+  return;
 }
 function renderChapterTest(app, l) {
   var band = l.band;
@@ -19053,90 +19267,67 @@ function renderSkillWrite(app, l) {
        máy"; bài VIP có band AI thì giữ nhãn Máy ước lượng như cũ. */
     var attBandLine = att.selfCheck ? "Tự đánh giá — không có band máy (AI chấm chỉ mở cho VIP)"
       : (att.aiBand != null ? "Band AI chấm: <b>" + fmtBandComma(att.aiBand) + '</b> <span class="mut">(Máy ước lượng — không phải điểm thi thật)</span>' : "Band AI chấm: <b>?</b> <span class=\"mut\">(Máy ước lượng — không phải điểm thi thật)</span>");
-    app.innerHTML = skillHead("Viết — " + w.title, w.type + (w.band ? " · " + w.band : "")) + finishSummaryHTML("Bạn đã hoàn thành bài viết 3 bước!", '<p>' + attBandLine + '</p><p class="mut">Cả hai bản đã lưu trong tiến trình của bạn.</p>', "") + '<div class="qblock"><h3>Đối chiếu 2 cột — bản gốc và bản sửa</h3><div class="row"><div style="flex:1"><b>Bản gốc (bản nháp)</b><p>' + esc(att.draft || "") + '</p></div><div style="flex:1"><b>Bản sửa (đã lưu)</b><p>' + esc(att.rewrite || "") + '</p></div></div><p class="mut">Bản gốc để đối chiếu, bản sửa là bản bạn đã sửa theo ' + (att.selfCheck ? 'những gì rút ra khi đối chiếu bài mẫu' : 'góp ý AI') + ' — cả hai đều đã lưu.</p></div>';
+    app.innerHTML = skillHead("Viết — " + w.title, w.type + (w.band ? " · " + w.band : "")) + finishSummaryHTML("Bạn đã hoàn thành bài viết 6 bước!", '<p>' + attBandLine + '</p><p class="mut">Cả hai bản đã lưu trong tiến trình của bạn.</p>', "") + '<div class="qblock"><h3>Đối chiếu 2 cột — bản gốc và bản sửa</h3><div class="row"><div style="flex:1"><b>Bản gốc (bản nháp)</b><p>' + esc(att.draft || "") + '</p></div><div style="flex:1"><b>Bản sửa (đã lưu)</b><p>' + esc(att.rewrite || "") + '</p></div></div><p class="mut">Bản gốc để đối chiếu, bản sửa là bản bạn đã sửa theo ' + (att.selfCheck ? 'những gì rút ra khi đối chiếu bài mẫu' : 'góp ý AI') + ' — cả hai đều đã lưu.</p></div>';
     wireBack();
     var ns = $("#btnNextStep"); if (ns) { ns.textContent = "Về Luyện tập"; ns.onclick = function () { backFromLesson(); }; }
-    $("#btnRedo").onclick = function () { l.wstep = 0; l.draft = ""; l.rewrite = ""; l.aiWrite = null; l.aiBand = null; l.selfCheckW = false; lessonStart = Date.now(); render(); };
+    $("#btnRedo").onclick = function () { l.wstep = 0; l.wb = null; l.draft = ""; l.rewrite = ""; l.aiWrite = null; l.aiBand = null; l.selfCheckW = false; lessonStart = Date.now(); render(); };
     return;
   }
-  if (step === 0) {
-    app.innerHTML = skillHead("Viết — " + w.title, w.type + (w.band ? " · " + w.band : "") + " · Bước 1: Viết bản nháp") + phaseBarHTML(2) + '<div class="qblock"><p><b>Đề bài:</b> ' + esc(w.prompt) + '</p>'
-      + (w.dataDesc ? '<p class="mut">' + esc(w.dataDesc) + '</p>' : "")
-      + '<textarea id="wrDraft" rows="8" style="width:100%;padding:10px">' + esc(l.draft || "") + '</textarea>'
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrNext1">' + (msIsVip() ? "Xong bản nháp → AI chấm" : "Xong bản nháp → Đối chiếu") + '</button></div></div>';
-    wireBack();
-    $("#wrNext1").onclick = function () { var v = $("#wrDraft").value; if (!v.trim()) { toast("Hãy viết vài câu trước đã."); return; } l.draft = v; l.wstep = 1; l.aiWrite = l.aiWrite || null; render(); };
-    return;
-  }
-  if (step === 1) {
-    /* v104 Chặng 7: tài khoản thường — không gọi AI; tự đối chiếu theo bảng
-       tiêu chí + đối chiếu bài mẫu 2 cột rồi viết lại bản sửa. Không có band
-       máy, bài lưu ghi rõ "Tự đánh giá". */
-    if (!msIsVip()) {
-      app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 2: Tự đối chiếu + đối chiếu bài mẫu") + phaseBarHTML(2)
-        + '<div class="qblock">' + aiVipNoticeHTML("writing") + '</div>'
-        + '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>Bản của bạn</b><p>' + esc(l.draft || "") + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(w.model || "") + '</p></div></div>'
-        + (w.analysis ? '<p><b>Phân tích bài mẫu:</b> ' + esc(w.analysis) + '</p>' : "")
-        + (w.phrases ? '<p><b>Cụm câu dùng được:</b> ' + w.phrases.map(function (p) { return esc(p.en) + " (" + esc(p.vi) + ")"; }).join(" · ") + '</p>' : "")
-        + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrNext2">Đã đối chiếu xong → Viết lại bản sửa</button></div></div>';
-      wireBack();
-      $("#wrNext2").onclick = function () { l.aiBand = null; l.selfCheckW = true; l.wstep = 2; render(); };
-      return;
-    }
-    var aw = l.aiWrite || {};
-    var awHtml = '<div class="qblock"><h3>AI chấm 4 tiêu chí</h3>';
-    if (aw.err) awHtml += '<p>' + esc(aw.err) + '</p>';
-    if (!aw.parsed && !aw.err) awHtml += '<p class="mut">Bấm “AI chấm Viết 4 tiêu chí” để AI chấm bản nháp theo 4 tiêu chí (cần đăng nhập; chưa đăng nhập thì web không gọi mạng — hãy đăng nhập rồi bấm lại).</p>';
-    if (aw.parsed && aw.parsed.full) {
-      aw.parsed.criteria.forEach(function (c) { awHtml += '<p><b>' + esc(c.name) + ': Band ' + fmtBandComma(c.band) + '</b> — ' + esc(c.note) + '</p>'; });
-      awHtml += '<p><b>Band bản nháp (Máy ước lượng): ' + fmtBandComma(aw.parsed.overall) + '</b></p>';
-      if (aw.parsed.good && aw.parsed.good.length) awHtml += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + aw.parsed.good.map(function (g) { return '<p><span class="ai-seg ai-seg-green">' + esc(g.quote) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(g.why) + ' <button class="btn" data-spec-good="' + esc(g.quote) + '" data-spec-good-why="' + esc(g.why) + '">Lưu cụm này vào Sổ từ/cụm</button></p>'; }).join("") + '</div>';
-      if (aw.parsed.fix && aw.parsed.fix.length) awHtml += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + aw.parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
-      if (aw.parsed.tips && aw.parsed.tips.length) awHtml += '<div class="sumcard"><h3>NOTE — VIẾT HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + aw.parsed.tips.map(function (tp) { return '<p>Đoạn: “' + esc(tp.quote) + '” — ' + esc(tp.why) + (tp.rewrite ? ' — <b>Viết lại: ' + esc(tp.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
-    } else if (aw.parsed && !aw.parsed.full) {
-      awHtml += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(aw.parsed.raw || "") + '</p><p class="mut">Band chưa có vì AI trả dở dang — bạn vẫn có thể bấm “Đã chấm xong → Viết lại bản sửa” để viết lại theo góp ý (nếu có), hoặc bấm “AI chấm Viết 4 tiêu chí” để chấm lại.</p>';
-    }
-    awHtml += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrAiBtn"' + (aw.busy ? ' disabled' : '') + '>' + (aw.busy ? 'Đang chấm...' : 'AI chấm Viết 4 tiêu chí') + '</button></div></div>';
-    app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 2: AI chấm 4 tiêu chí + đối chiếu bài mẫu") + phaseBarHTML(2) + awHtml
-      + '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>Bản của bạn</b><p>' + esc(l.draft || "") + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(w.model || "") + '</p></div></div>'
-      + (w.analysis ? '<p><b>Phân tích bài mẫu:</b> ' + esc(w.analysis) + '</p>' : "")
-      + (w.phrases ? '<p><b>Cụm câu dùng được:</b> ' + w.phrases.map(function (p) { return esc(p.en) + " (" + esc(p.vi) + ")"; }).join(" · ") + '</p>' : "")
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrNext2">Đã chấm xong → Viết lại bản sửa</button></div></div>';
-    wireBack();
-    (function () {
-      var b = $("#wrAiBtn"); if (!b) return;
+  /* v185 TID U7 — Writing Builder 6 bước (thay khung 3 bước cũ: nháp → chấm/
+     đối chiếu → viết lại). Màn lý thuyết (writeTheoryHTML) giữ nguyên ở trên.
+     Bước 5 giữ NGUYÊN khối AI VIP đầy đủ: chấm lại tối đa 2 lần khi AI trả dở
+     dang, mục NOTE — VIẾT HAY HƠN, nút lưu cụm vào Sổ từ/cụm (delegate toàn
+     cục specDocClick). */
+  var skTask = { key: key, track: "en", title: "Viết — " + w.title, prompt: w.prompt, model: w.model, modelNote: w.analysis, phrases: (w.phrases || []).map(function (pp) { return pp.en + " (" + pp.vi + ")"; }), guide: w.dataDesc || "", eyebrow: w.type + (w.band ? " · " + w.band : "") };
+  wbRender(app, l, skTask, {
+    backHTML: skillHead("Viết — " + w.title, w.type + (w.band ? " · " + w.band : "")),
+    wireBack: wireBack,
+    rerender: render,
+    aiMode: "skill",
+    saveLabel: "Lưu bản sửa",
+    aiBlockHTML: function (ll, tk) {
+      var aw = ll.aiWrite || {};
+      var h = '<div class="qblock"><h3>AI chấm 4 tiêu chí</h3>';
+      if (aw.err) h += '<p>' + esc(aw.err) + '</p>';
+      if (!aw.parsed && !aw.err) h += '<p class="mut">Bấm “AI chấm Viết 4 tiêu chí” để AI chấm bản nháp theo 4 tiêu chí (cần đăng nhập; chưa đăng nhập thì web không gọi mạng — hãy đăng nhập rồi bấm lại).</p>';
+      if (aw.parsed && aw.parsed.full) {
+        aw.parsed.criteria.forEach(function (c) { h += '<p><b>' + esc(c.name) + ': Band ' + fmtBandComma(c.band) + '</b> — ' + esc(c.note) + '</p>'; });
+        h += '<p><b>Band bản nháp (Máy ước lượng): ' + fmtBandComma(aw.parsed.overall) + '</b></p>';
+        if (aw.parsed.good && aw.parsed.good.length) h += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + aw.parsed.good.map(function (g) { return '<p><span class="ai-seg ai-seg-green">' + esc(g.quote) + ' <span class="ai-seg-lab">đúng</span></span> — ' + esc(g.why) + ' <button class="btn" data-spec-good="' + esc(g.quote) + '" data-spec-good-why="' + esc(g.why) + '">Lưu cụm này vào Sổ từ/cụm</button></p>'; }).join("") + '</div>';
+        if (aw.parsed.fix && aw.parsed.fix.length) h += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + aw.parsed.fix.map(function (f) { return '<p><span class="ai-seg ai-seg-red">' + esc(f.quote) + ' <span class="ai-seg-lab">sai</span></span> — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+        if (aw.parsed.tips && aw.parsed.tips.length) h += '<div class="sumcard"><h3>NOTE — VIẾT HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + aw.parsed.tips.map(function (tp) { return '<p>Đoạn: “' + esc(tp.quote) + '” — ' + esc(tp.why) + (tp.rewrite ? ' — <b>Viết lại: ' + esc(tp.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+      } else if (aw.parsed && !aw.parsed.full) {
+        h += '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(aw.parsed.raw || "") + '</p><p class="mut">Band chưa có vì AI trả dở dang — bạn vẫn có thể viết lại bản sửa theo góp ý (nếu có), hoặc bấm “AI chấm Viết 4 tiêu chí” để chấm lại.</p>';
+      }
+      h += '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrAiBtn"' + (aw.busy ? ' disabled' : '') + '>' + (aw.busy ? 'Đang chấm...' : 'AI chấm Viết 4 tiêu chí') + '</button></div></div>';
+      return h;
+    },
+    aiWire: function (ll, tk) {
+      var b = document.getElementById("wrAiBtn"); if (!b) return;
       b.onclick = function () {
         var tries = 0;
         (function gradeOnce() {
-          l.aiWrite = { busy: true, err: "" }; render();
-          callAiTutorWriting(w.type, w.prompt, l.draft || "").then(function (res) {
-            var p = parseAiDetailReply(res.reply, "writing");
-            if (!p.full && tries < 2) { tries++; gradeOnce(); return; }
-            l.aiWrite = { parsed: p }; render();
-          }, function (err) { l.aiWrite = { err: (err && err.message) || String(err) }; render(); });
+          ll.aiWrite = { busy: true, err: "" }; render();
+          callAiTutorWriting(w.type, w.prompt, (ll.wb && ll.wb.essay) || ll.draft || "").then(function (res) {
+            var pp = parseAiDetailReply(res.reply, "writing");
+            if (!pp.full && tries < 2) { tries++; gradeOnce(); return; }
+            ll.aiWrite = { parsed: pp }; render();
+          }, function (err) { ll.aiWrite = { err: (err && err.message) || String(err) }; render(); });
         })();
       };
-    })();
-    $("#wrNext2").onclick = function () {
-      if (!l.aiWrite || !l.aiWrite.parsed) { toast("Hãy bấm AI chấm Viết 4 tiêu chí để AI chấm đã — phần Viết chỉ có AI chấm, không tự chấm."); return; }
-      l.aiBand = l.aiWrite.parsed.full ? l.aiWrite.parsed.overall : null; l.wstep = 2; render();
-    };
-    return;
-  }
-  var wrStep3Band = l.selfCheckW ? "Bạn tự đối chiếu theo bảng tiêu chí — không có band máy (AI chấm chỉ mở cho VIP)" : (l.aiBand == null ? "Band chưa có vì AI trả dở dang — hãy viết lại theo góp ý AI (nếu có)" : "Band AI chấm bản nháp: " + fmtBandComma(l.aiBand) + ' <span class="mut">(Máy ước lượng)</span>');
-  app.innerHTML = skillHead("Viết — " + w.title, w.type + " · Bước 3: Viết lại bản sửa") + phaseBarHTML(2) + '<div class="qblock"><p><b>' + wrStep3Band + '</b></p><p>' + (l.selfCheckW ? "Viết lại bài, sửa theo những gì rút ra khi đối chiếu bài mẫu:" : "Viết lại bài, sửa theo góp ý AI:") + '</p>'
-    + '<textarea id="wrRewrite" rows="8" style="width:100%;padding:10px">' + esc(l.rewrite || l.draft || "") + '</textarea>'
-    + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="wrSave">Lưu bản sửa</button></div></div>';
-  wireBack();
-  $("#wrSave").onclick = function () {
-    var v = $("#wrRewrite").value; if (!v.trim()) { toast("Hãy viết bản sửa trước đã."); return; }
-    if (!state.writingAttempts) state.writingAttempts = {};
-    state.writingAttempts[key] = { draft: l.draft || "", rewrite: v, aiBand: l.aiBand, selfCheck: !!l.selfCheckW, at: todayStr() };
-    var was = !!(state.skillDone && state.skillDone[key]);
-    if (!state.skillDone) state.skillDone = {};
-    state.skillDone[key] = true; if (!was) logStepDoneIfRb(key); /* v161 */ awardXp(was ? 5 : 10); saveState();
-    l.wstep = 3; render();
-  };
+    },
+    onSave: function (essay, rewrite, wb) {
+      if (!state.writingAttempts) state.writingAttempts = {};
+      l.aiBand = (msIsVip() && l.aiWrite && l.aiWrite.parsed && l.aiWrite.parsed.full) ? l.aiWrite.parsed.overall : null;
+      l.selfCheckW = !msIsVip();
+      state.writingAttempts[key] = { draft: essay, rewrite: rewrite, aiBand: l.aiBand, selfCheck: !!l.selfCheckW, selfRel: wbAvgScore(wb), hints: wb.hints, at: todayStr() };
+      var was = !!(state.skillDone && state.skillDone[key]);
+      if (!state.skillDone) state.skillDone = {};
+      state.skillDone[key] = true; if (!was) logStepDoneIfRb(key); awardXp(was ? 5 : 10); saveState();
+      l.wstep = 3; render();
+    }
+  });
+  return;
 }
 function renderSkillDrill(app, l) {
   var d = CONTENT.writingDrills[l.idx];
@@ -25003,50 +25194,35 @@ function renderZhWrite(app, l) {
     };
     return;
   }
-  /* free: luong 3 buoc cua track Anh nhung KHONG co AI cham. */
+  if (l.wstep === 3) {
+    l.zhNext = true;
+    app.innerHTML = lessonHead({ title: "Viết: " + w.title, type: "Tiếng Trung · Viết chặng " + w.stage }) + finishSummaryHTML("Bạn đã hoàn thành bài viết 6 bước!", '<p>Cả hai bản đã lưu trong tiến trình của bạn (bản nháp và bản sửa).</p><p class="mut">Bài này chỉ đối chiếu mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt.</p>', "", { adaptive: false }) + zhNextStepHTML();
+    wireBack();
+    var rb2 = $("#btnRedo"); if (rb2) rb2.onclick = function () { l.wstep = 0; l.wb = null; l.draft = ""; l.rewrite = ""; render(); };
+    return;
+  }
+  /* free: v185 TID U7 — Writing Builder 6 bước (thay khung 3 bước cũ).
+     Giữ nguyên: KHÔNG có AI chấm tiếng Trung (ghi rõ ở bước 5), lưu
+     state.writingAttempts + zhAwardOnce. */
   var key = "zhWrite:" + w.id;
-  var step = l.wstep || 0;
-  if (step === 0) {
-    app.innerHTML = lessonHead({ title: "Viết: " + w.title, type: "Tiếng Trung · Viết chặng " + w.stage + " · Bước 1: Viết bản nháp" }, w.note || "")
-      + '<div class="qblock"><p><b>Đề bài:</b> ' + esc(w.prompt) + '</p>'
-      + '<p class="mut">Gõ chữ Hán: gõ pinyin trên điện thoại hoặc máy tính rồi chọn chữ Hán hiện ra — đó là cách gõ thật, không cần viết tay từng nét.</p>'
-      + '<textarea id="zhWriteDraft" rows="8" style="width:100%;padding:10px">' + esc(l.draft || "") + '</textarea>'
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhWriteNext1">Xong bản nháp → Đối chiếu mẫu</button></div></div>';
-    wireBack();
-    $("#zhWriteNext1").onclick = function () { var v = $("#zhWriteDraft").value; if (!v.trim()) { toast("Hãy viết vài câu trước đã."); return; } l.draft = v; l.wstep = 1; render(); };
-    return;
-  }
-  if (step === 1) {
-    app.innerHTML = lessonHead({ title: "Viết: " + w.title, type: "Tiếng Trung · Viết chặng " + w.stage + " · Bước 2: Đối chiếu bài mẫu" }, w.note || "")
-      + '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>Bản của bạn</b><p>' + esc(l.draft || "") + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(w.model || "") + '</p></div></div>'
-      + '<p><b>Phân tích bài mẫu:</b> ' + esc(w.analysis) + '</p>'
-      + '<p><b>Cụm câu dùng được:</b> ' + w.phrases.map(function (p) { return esc(p); }).join(" · ") + '</p>'
-      + '<p class="mut">Chưa có AI chấm tiếng Trung — phần này chỉ đối chiếu mẫu, không có điểm, không tính đạt cũng không tính chưa đạt. AI chấm đang chờ nâng cấp.</p>'
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhWriteNext2">Đã đối chiếu → Viết lại bản sửa</button></div></div>';
-    wireBack();
-    $("#zhWriteNext2").onclick = function () { l.wstep = 2; render(); };
-    return;
-  }
-  if (step === 2) {
-    app.innerHTML = lessonHead({ title: "Viết: " + w.title, type: "Tiếng Trung · Viết chặng " + w.stage + " · Bước 3: Viết lại bản sửa" }, w.note || "")
-      + '<div class="qblock"><p>Viết lại bài, sửa theo những gì rút ra khi đối chiếu bài mẫu:</p>'
-      + '<textarea id="zhWriteRewrite" rows="8" style="width:100%;padding:10px">' + esc(l.rewrite || l.draft || "") + '</textarea>'
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhWriteSave">Lưu bản sửa</button></div></div>';
-    wireBack();
-    $("#zhWriteSave").onclick = function () {
-      var v = $("#zhWriteRewrite").value; if (!v.trim()) { toast("Hãy viết bản sửa trước đã."); return; }
+  var zhTask = { key: key, track: "zh", title: "Viết: " + w.title, prompt: w.prompt, model: w.model, modelNote: w.analysis, phrases: w.phrases, guide: w.note, typeNote: "Gõ chữ Hán: gõ pinyin trên điện thoại hoặc máy tính rồi chọn chữ Hán hiện ra — đó là cách gõ thật, không cần viết tay từng nét.", eyebrow: "Tiếng Trung · Viết chặng " + w.stage };
+  wbRender(app, l, zhTask, {
+    backHTML: lessonHead({ title: "Viết: " + w.title, type: "Tiếng Trung · Viết chặng " + w.stage }, w.note || ""),
+    wireBack: wireBack,
+    rerender: render,
+    aiMode: "none",
+    noAiNote: "Chưa có AI chấm tiếng Trung — phần này chỉ đối chiếu mẫu, không có điểm, không tính đạt cũng không tính chưa đạt. AI chấm đang chờ nâng cấp.",
+    saveLabel: "Lưu bản sửa",
+    onSave: function (essay, rewrite, wb) {
       if (!state.writingAttempts) state.writingAttempts = {};
-      state.writingAttempts[key] = { draft: l.draft || "", rewrite: v, at: todayStr() };
+      state.writingAttempts[key] = { draft: essay, rewrite: rewrite, selfRel: wbAvgScore(wb), hints: wb.hints, at: todayStr() };
       zhAwardOnce("zhWrite:" + w.id); saveState();
       l.wstep = 3; render();
-    };
-    return;
-  }
-  l.zhNext = true;
-  app.innerHTML = lessonHead({ title: "Viết: " + w.title, type: "Tiếng Trung · Viết chặng " + w.stage }) + finishSummaryHTML("Bạn đã hoàn thành bài viết 3 bước!", '<p>Cả hai bản đã lưu trong tiến trình của bạn (bản nháp và bản sửa).</p><p class="mut">Bài này chỉ đối chiếu mẫu, chưa có AI chấm tiếng Trung — AI chấm đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt.</p>', "", { adaptive: false }) + zhNextStepHTML();
-  wireBack();
-  var rb2 = $("#btnRedo"); if (rb2) rb2.onclick = function () { l.wstep = 0; l.draft = ""; l.rewrite = ""; render(); };
+    }
+  });
+  return;
 }
+
 
 /* ---------- DOT 2e (26/10/2026): KIEM TRA CUOI CHANG + THI THU HSK TRACK TRUNG ----------
    - Kiem tra cuoi chang (chi chang 2-3, noi co du phan he): tron tu dung ngan hang cua
@@ -26267,43 +26443,31 @@ function renderTcWrite(app, m, id, back, skipBanner) {
   var w = TC_WRITE[m.ref]; if (!w) return;
   var st = TC_STAGES[tcStepStage(id)] || {};
   var eyebrow = "TOEIC · VIẾT · " + esc(st.title || "");
-  var phase = 0, draft = "", rewrite = "";
+  /* v185 TID U7 — Writing Builder 6 bước (thay khung 3 bước cũ).
+     Giữ nguyên: tự chấm theo bảng tiêu chí, không có máy chấm tự động; lưu
+     xong tcMarkDone(id). Holder wbL giữ state Builder ngoài render() vì hàm
+     này giữ state trong closure, không có đối tượng bài l. */
+  var wbL = {};
+  var head = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(w.title) + '</h2>'
+    + '<p class="mut">TOEIC thi thật (Nghe–Đọc) không có phần Viết — đây là bài luyện viết email công sở để dùng thật trong công việc. Tự chấm theo bảng tiêu chí, không có máy chấm tự động.</p></section>';
+  var tcTask = { key: "tcWrite:" + m.ref, track: "tc", title: "Viết: " + w.title, prompt: w.prompt, model: w.model, modelNote: w.modelNote, phrases: w.hints, eyebrow: "TOEIC · VIẾT · " + (st.title || "") };
   function render() {
-    var head = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(w.title) + '</h2>'
-      + '<p class="mut">TOEIC thi thật (Nghe–Đọc) không có phần Viết — đây là bài luyện viết email công sở để dùng thật trong công việc. Tự chấm theo bảng tiêu chí, không có máy chấm tự động.</p></section>';
-    if (phase === 0) {
-      app.innerHTML = head + '<div class="qblock"><h3>Bước 1: Viết bản nháp</h3><p><b>Đề bài:</b> ' + esc(w.prompt) + '</p>'
-        + '<p><b>Gợi ý từ/cụm dùng được:</b> ' + w.hints.map(function (h) { return esc(h); }).join(" · ") + '</p>'
-        + '<textarea id="tcWriteDraft" rows="8" style="width:100%;padding:10px">' + esc(draft) + '</textarea>'
-        + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="tcWriteNext1">Xong bản nháp → Đối chiếu</button></div></div>';
-      tcWireBack(back);
-      document.getElementById("tcWriteNext1").onclick = function () { var v = document.getElementById("tcWriteDraft").value; if (!v.trim()) { toast("Hãy viết vài câu trước đã."); return; } draft = v; phase = 1; render(); };
-      return;
+  wbRender(app, wbL, tcTask, {
+    backHTML: head,
+    wireBack: function () { tcWireBack(back); },
+    rerender: render,
+    aiMode: "none",
+    noAiNote: "Bài luyện này chỉ tự chấm theo bảng tiêu chí — không có máy chấm tự động.",
+    saveLabel: "Lưu bản sửa (+10 XP)",
+    onSave: function (essay, rewrite, wb) {
+      if (!state.writingAttempts) state.writingAttempts = {};
+      state.writingAttempts[tcTask.key] = { draft: essay, rewrite: rewrite, selfRel: wbAvgScore(wb), hints: wb.hints, at: todayStr() };
+      saveState(); tcMarkDone(id); wb.done = true; render();
     }
-    if (phase === 1) {
-      var crit = msWriteChecks().map(function (c) { return '<label style="display:block;margin:4px 0"><input type="checkbox"> ' + esc(c) + '</label>'; }).join("");
-      app.innerHTML = head
-        + '<div class="qblock"><h3>Tự đối chiếu theo bảng tiêu chí</h3><p class="mut">Bài luyện này chỉ tự chấm — tích vào tiêu chí bạn thấy mình đã làm được. Đây không phải điểm máy chấm.</p>' + crit + '</div>'
-        + '<div class="qblock"><h3>Đối chiếu 2 cột</h3><div class="row"><div style="flex:1"><b>Bản của bạn</b><p>' + esc(draft) + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(w.model) + '</p></div></div>'
-        + '<p><b>Phân tích bài mẫu:</b> ' + esc(w.modelNote) + '</p>'
-        + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="tcWriteNext2">Đã đối chiếu xong → Viết lại bản sửa</button></div></div>';
-      tcWireBack(back);
-      document.getElementById("tcWriteNext2").onclick = function () { phase = 2; render(); };
-      return;
-    }
-    app.innerHTML = head + '<div class="qblock"><h3>Bước 3: Viết lại bản sửa</h3><p>Viết lại bài, sửa theo bảng tiêu chí và đối chiếu bài mẫu:</p>'
-      + '<textarea id="tcWriteRewrite" rows="8" style="width:100%;padding:10px">' + esc(rewrite || draft) + '</textarea>'
-      + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="tcWriteSave">Lưu bản sửa (+10 XP)</button></div></div>';
-    tcWireBack(back);
-    document.getElementById("tcWriteSave").onclick = function () { var v = document.getElementById("tcWriteRewrite").value; if (!v.trim()) { toast("Hãy viết bản sửa trước đã."); return; } rewrite = v; if (tcMarkDone(id)) { var b = document.getElementById("tcWriteSave"); if (b) { b.textContent = "Đã xong ✓"; b.disabled = true; } } };
+  });
   }
   render();
 }
-/* v167 F3 13/11/2026: BUOC PHAT AM TOEIC — 1 buoc dau moi chang (am truoc, tu sau).
-   p0 = on/he thong hoa 44 am (mo ban do 44 am + bai am 6 buoc cua TC, mo het
-   khong khoa); p1-p3 = 1 chu de sieu doan moi chang, dung lai RB_PRON_TOPICS
-   da co (topic 0 Trong am tu, 3 Noi am, 7 Nhip dieu cau). Man nay chi la cua
-   vao: mo dung bai phat am da co; nut "Xong bai nay" ghi nhan buoc lo trinh. */
 function renderTcPron(app, m, id, back, skipBanner) {
   var pr = TC_PRON[m.ref]; if (!pr) return;
   var st = TC_STAGES[tcStepStage(id)] || {};
@@ -27416,6 +27580,33 @@ function renderTpSpeak(app, m, id, back, skipBanner) {
     fin.onclick = function () { if (tpMarkDone(id)) { fin.textContent = "Đã xong ✓"; fin.disabled = true; } };
   };
 }
+/* v185 TID U7 — Writing Builder 6 bước cho từng đề luận TOPIK II (53/54/64/
+   66/68/70). Mở từ trang danh sách bài Viết; quay lại về đúng trang đó.
+   Giữ nguyên: tự chấm theo bảng tiêu chí của bài, không có máy chấm tự động;
+   lưu xong tpMarkDone(id). Dạng điền câu (items[]) giữ nguyên, không Builder. */
+function renderTpWriteBuilder(app, id, back, t, i) {
+  var T = TP_WRITE[t]; if (!T || !T.prompts || !T.prompts[i]) return;
+  var pr = T.prompts[i];
+  var wbL = {};
+  var skipBanner = tpSkipBanner(id);
+  var task = { key: "tpWrite:" + t + ":" + i, track: "tp", title: "Viết: " + T.name + " — " + pr.topic, prompt: pr.prompt, model: pr.model, modelNote: pr.note, outline: pr.outline, checklist: T.checklist, eyebrow: "TOPIK · VIẾT" };
+  function render() {
+    wbRender(app, wbL, task, {
+      backHTML: skipBanner + '<div class="row"><button class="btn" id="wbTpBack">← Về danh sách bài Viết</button></div>',
+      wireBack: function () { var b = document.getElementById("wbTpBack"); if (b) b.onclick = function () { tpOpenStep(id, back); }; },
+      rerender: render,
+      aiMode: "none",
+      noAiNote: "Phần này tự luyện, tự chấm theo bảng tiêu chí — không có máy chấm tự động.",
+      saveLabel: "Lưu bản sửa (+10 XP)",
+      onSave: function (essay, rewrite, wb) {
+        if (!state.writingAttempts) state.writingAttempts = {};
+        state.writingAttempts[task.key] = { draft: essay, rewrite: rewrite, selfRel: wbAvgScore(wb), hints: wb.hints, at: todayStr() };
+        saveState(); tpMarkDone(id); wb.done = true; render();
+      }
+    });
+  }
+  render();
+}
 function tpOpenStep(id, backTab) {
   tpNorm();
   var m = tpStepMeta(id); if (!m) return;
@@ -27554,6 +27745,7 @@ function tpOpenStep(id, backTab) {
         if (T.checklist) htmlW += '<p><b>Bảng tiêu chí tự chấm:</b></p><ul>' + T.checklist.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul>';
         T.prompts.forEach(function (pr, i) {
           htmlW += '<div class="qblock"><p><b>Đề: ' + esc(pr.topic) + '</b></p><p>' + esc(pr.prompt) + '</p><p><textarea rows="5" style="width:100%" placeholder="Viết nháp của bạn vào đây…"></textarea></p>';
+          htmlW += '<p><button class="btn btn-primary tpwbuilder" data-t="' + t + '" data-i="' + i + '">✍️ Vào Builder 6 bước →</button></p>';
           if (pr.outline) htmlW += '<p><b>Dàn ý:</b></p><ul>' + pr.outline.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join("") + '</ul>';
           htmlW += '<p><button class="btn tpwshow2" data-t="' + t + '" data-i="' + i + '">Hiện bài mẫu</button></p><p class="tpwans2 mut" data-t="' + t + '" data-i="' + i + '" style="display:none">' + esc(pr.model) + (pr.note ? '<br><i>' + esc(pr.note) + '</i>' : '') + '</p></div>';
         });
@@ -27563,6 +27755,7 @@ function tpOpenStep(id, backTab) {
     app.innerHTML = htmlW;
     app.querySelectorAll(".tpwshow").forEach(function (b) { b.onclick = function () { var p = app.querySelector('.tpwans[data-t="' + b.dataset.t + '"][data-i="' + b.dataset.i + '"]'); if (p) p.style.display = (p.style.display === "none") ? "block" : "none"; }; });
     app.querySelectorAll(".tpwshow2").forEach(function (b) { b.onclick = function () { var p = app.querySelector('.tpwans2[data-t="' + b.dataset.t + '"][data-i="' + b.dataset.i + '"]'); if (p) p.style.display = (p.style.display === "none") ? "block" : "none"; }; });
+    app.querySelectorAll(".tpwbuilder").forEach(function (b) { b.onclick = function () { renderTpWriteBuilder(app, id, back, +b.dataset.t, +b.dataset.i); }; });
     document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     tpWireBack(back); return;
   }
