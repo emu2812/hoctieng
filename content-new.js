@@ -459,6 +459,54 @@ var RB_PH_PAIR_REASONS = {
   "ə": "Hai từ này khác nhau nhiều âm, không phải cặp tối thiểu — bài này chỉ luyện nhận diện âm /ə/ đọc lướt trong about.",
   "ʒ": "Hai từ này khác nhau nhiều âm, không phải cặp tối thiểu — bài này chỉ luyện nhận diện âm /ʒ/ trong television."
 };
+/* v181: NGHE-CHON-PHIEN-AM — cap toi thieu de luyen tai phan biet am.
+   Moi cap: items = cac tu de nghe (w = tu de doc, t = phien am de chon, vi = nghia).
+   Phien am deu lay tu kho da xac minh: EN/TC tu PRON_DIAG_SETS (read) + RB_PH_PAIRS
+   (IPA chuan en-GB cua tu thuong); ZH tu PRON_DIAG_SETS + ZH_PH_STEPS (an/ang, j/q/x,
+   bien dieu theo GB/T 16159-2012); TP tu PRON_DIAG_SETS (read = RR chuan NIKL:
+   am cang KHONG ghi khi ghep hinh vi; hakgyo chi la cach viet, [hakkyo] la cach doc). */
+var EAR_DISC = {
+  en: [
+    { key: "en-th-dh", label: "/θ/ – /ð/", syms: ["θ", "ð"], tip: "/θ/ thổi hơi qua kẽ răng, không rung dây thanh; /ð/ rung dây thanh — nghe kỹ có rung hay không.", items: [{ w: "think", t: "/θɪŋk/", vi: "nghĩ" }, { w: "this", t: "/ðɪs/", vi: "cái này" }] },
+    { key: "en-th-s", label: "/θ/ – /s/", syms: ["θ", "s"], tip: "/θ/ đầu lưỡi chạm răng; /s/ đầu lưỡi chạm nướu, tiếng xát sắc hơn.", items: [{ w: "think", t: "/θɪŋk/", vi: "nghĩ" }, { w: "sink", t: "/sɪŋk/", vi: "chìm" }] },
+    { key: "en-s-sh", label: "/s/ – /ʃ/", syms: ["s", "ʃ"], tip: "/ʃ/ môi tròn, lưỡi cong; /s/ môi dẹt — nghe tiếng xát trầm hay sắc.", items: [{ w: "see", t: "/si:/", vi: "nhìn" }, { w: "she", t: "/ʃi:/", vi: "cô ấy" }] },
+    { key: "en-ee-i", label: "/i:/ – /ɪ/", syms: ["i:", "ɪ"], tip: "/i:/ kéo dài, miệng cười; /ɪ/ đọc ngắn, dứt khoát.", items: [{ w: "sheep", t: "/ʃi:p/", vi: "con cừu" }, { w: "ship", t: "/ʃɪp/", vi: "con tàu" }] },
+    { key: "en-s-z", label: "/s/ – /z/", syms: ["s", "z"], tip: "/z/ rung dây thanh như tiếng ong; /s/ không rung.", items: [{ w: "sip", t: "/sɪp/", vi: "nhấp" }, { w: "zip", t: "/zɪp/", vi: "khóa kéo" }] },
+    { key: "en-ch-sh", label: "/tʃ/ – /ʃ/", syms: ["tʃ", "ʃ"], tip: "/tʃ/ chặn hơi rồi bật ra; /ʃ/ chỉ xát, không chặn.", items: [{ w: "chair", t: "/tʃeə/", vi: "ghế" }, { w: "share", t: "/ʃeə/", vi: "chia sẻ" }] },
+    { key: "en-l-r", label: "/l/ – /r/", syms: ["l", "r"], tip: "/l/ đầu lưỡi chạm nướu; /r/ lưỡi cuộn lên, không chạm gì.", items: [{ w: "light", t: "/laɪt/", vi: "nhẹ; sáng" }, { w: "right", t: "/raɪt/", vi: "đúng; phải" }] },
+    { key: "en-a-u", label: "/æ/ – /ʌ/", syms: ["æ", "ʌ"], tip: "/æ/ miệng mở rộng, âm trầm; /ʌ/ miệng mở nhỏ hơn, âm ngắn.", items: [{ w: "cat", t: "/kæt/", vi: "con mèo" }, { w: "cut", t: "/kʌt/", vi: "cắt" }] }
+  ],
+  tc: [
+    { key: "tc-th-dh", label: "/θ/ – /ð/", syms: ["θ", "ð"], tip: "/θ/ thổi hơi qua kẽ răng, không rung dây thanh; /ð/ rung dây thanh — nghe kỹ có rung hay không.", items: [{ w: "three", t: "/θri:/", vi: "ba" }, { w: "that", t: "/ðæt/", vi: "kia; đó" }] },
+    { key: "tc-sh-zh", label: "/ʃ/ – /ʒ/", syms: ["ʃ", "ʒ"], tip: "/ʒ/ như /ʃ/ nhưng rung dây thanh — nghe kỹ tiếng rung.", items: [{ w: "schedule", t: "/ˈʃedjuːl/", vi: "lịch trình" }, { w: "decision", t: "/dɪˈsɪʒn/", vi: "quyết định" }] },
+    { key: "tc-ee-i", label: "/i:/ – /ɪ/", syms: ["i:", "ɪ"], tip: "/i:/ kéo dài, miệng cười; /ɪ/ đọc ngắn, dứt khoát.", items: [{ w: "leave", t: "/li:v/", vi: "rời đi; nghỉ phép" }, { w: "live", t: "/lɪv/", vi: "sống" }] },
+    { key: "tc-s-z", label: "/s/ – /z/ (âm cuối)", syms: ["s", "z"], tip: "Âm cuối /s/ không rung; /z/ rung — nghe đuôi từ.", items: [{ w: "reports", t: "/rɪˈpɔ:ts/", vi: "báo cáo" }, { w: "orders", t: "/ˈɔ:dəz/", vi: "đơn hàng" }] },
+    { key: "tc-s-sh", label: "/s/ – /ʃ/", syms: ["s", "ʃ"], tip: "/ʃ/ môi tròn, lưỡi cong; /s/ môi dẹt — nghe tiếng xát trầm hay sắc.", items: [{ w: "see", t: "/si:/", vi: "nhìn" }, { w: "she", t: "/ʃi:/", vi: "cô ấy" }] },
+    { key: "tc-ch-sh", label: "/tʃ/ – /ʃ/", syms: ["tʃ", "ʃ"], tip: "/tʃ/ chặn hơi rồi bật ra; /ʃ/ chỉ xát, không chặn.", items: [{ w: "chair", t: "/tʃeə/", vi: "ghế" }, { w: "share", t: "/ʃeə/", vi: "chia sẻ" }] },
+    { key: "tc-l-r", label: "/l/ – /r/", syms: ["l", "r"], tip: "/l/ đầu lưỡi chạm nướu; /r/ lưỡi cuộn lên, không chạm gì.", items: [{ w: "light", t: "/laɪt/", vi: "nhẹ; sáng" }, { w: "right", t: "/raɪt/", vi: "đúng; phải" }] },
+    { key: "tc-th-s", label: "/θ/ – /s/", syms: ["θ", "s"], tip: "/θ/ đầu lưỡi chạm răng; /s/ đầu lưỡi chạm nướu, tiếng xát sắc hơn.", items: [{ w: "think", t: "/θɪŋk/", vi: "nghĩ" }, { w: "sink", t: "/sɪŋk/", vi: "chìm" }] }
+  ],
+  zh: [
+    { key: "zh-tones", label: "Thanh 1 – 2 – 3 – 4", syms: ["thanh 1", "thanh 2", "thanh 3", "thanh 4"], tip: "Thanh 1 cao đều, thanh 2 đi lên, thanh 3 xuống rồi lên, thanh 4 đi xuống — nghe đường đi của giọng.", items: [{ w: "妈", t: "mā", vi: "mẹ" }, { w: "麻", t: "má", vi: "tê" }, { w: "马", t: "mǎ", vi: "ngựa" }, { w: "骂", t: "mà", vi: "mắng" }] },
+    { key: "zh-zhchsh", label: "zh – ch – sh", syms: ["zh", "ch", "sh"], tip: "Cả ba đều quặt lưỡi; ch bật hơi mạnh hơn zh, sh không bật hơi.", items: [{ w: "知", t: "zhī", vi: "biết" }, { w: "吃", t: "chī", vi: "ăn" }, { w: "师", t: "shī", vi: "thầy" }] },
+    { key: "zh-jqx", label: "j – q – x", syms: ["j", "q", "x"], tip: "j không bật hơi, q bật hơi nhẹ, x xát nhẹ — nghe hơi thở.", items: [{ w: "机", t: "jī", vi: "máy" }, { w: "七", t: "qī", vi: "bảy" }, { w: "西", t: "xī", vi: "phía tây" }] },
+    { key: "zh-anang", label: "-n – -ng", syms: ["an", "ang"], tip: "an kết thúc bằng n, mũi nông; ang kết thúc bằng ng, mũi sâu.", items: [{ w: "安", t: "ān", vi: "yên" }, { w: "昂", t: "áng", vi: "ngẩng cao" }] },
+    { key: "zh-sandhi33", label: "Biến điệu 3+3", syms: ["biến điệu 3+3"], tip: "Hai thanh 3 liền nhau thì thanh đầu đọc thành thanh 2 — viết nǐ hǎo, đọc ní hǎo.", items: [{ w: "你好", t: "ní hǎo", vi: "xin chào (cách đọc)" }, { w: "你好", t: "nǐ hǎo", vi: "xin chào (cách viết)" }, { w: "你好", t: "nǐ hào", vi: "xin chào (sai thanh)" }, { w: "你好", t: "ní hào", vi: "xin chào (sai thanh)" }] },
+    { key: "zh-sandhibu", label: "Biến điệu 不", syms: ["biến điệu 不"], tip: "不 trước thanh 4 đọc thành bú — viết bù huì, đọc bú huì.", items: [{ w: "不会", t: "bú huì", vi: "không biết (cách đọc)" }, { w: "不会", t: "bù huì", vi: "không biết (cách viết)" }, { w: "不会", t: "bú huí", vi: "không biết (sai thanh)" }, { w: "不会", t: "bù huí", vi: "không biết (sai thanh)" }] },
+    { key: "zh-sandhiyi", label: "Biến điệu 一", syms: ["biến điệu 一"], tip: "一 trước thanh 4 đọc thành yí; trước thanh 1/2/3 đọc yì; đứng một mình đọc yī.", items: [{ w: "一个", t: "yí gè", vi: "một cái (cách đọc)" }, { w: "一个", t: "yì gè", vi: "một cái (sai thanh)" }, { w: "一个", t: "yī gè", vi: "một cái (cách viết)" }, { w: "一个", t: "yí gé", vi: "một cái (sai thanh)" }] },
+    { key: "zh-neutral", label: "Thanh nhẹ – thanh 1", syms: ["thanh nhẹ", "thanh 1"], tip: "Thanh nhẹ đọc ngắn và lướt; thanh 1 cao và đều.", items: [{ w: "吗", t: "ma", vi: "trợ từ hỏi" }, { w: "妈", t: "mā", vi: "mẹ" }] }
+  ],
+  tp: [
+    { key: "tp-j", label: "ㅈ – ㅉ – ㅊ", syms: ["ㅈ", "ㅉ", "ㅊ"], tip: "ㅈ đọc nhẹ như “ch”; ㅉ đọc “ch” căng, không bật hơi; ㅊ bật hơi mạnh.", items: [{ w: "자", t: "ja", vi: "âm ㅈ chùng" }, { w: "짜", t: "jja", vi: "âm ㅉ căng" }, { w: "차", t: "cha", vi: "âm ㅊ bật hơi" }] },
+    { key: "tp-s", label: "ㅅ – ㅆ", syms: ["ㅅ", "ㅆ"], tip: "ㅆ đọc “s” căng, mạnh hơn ㅅ.", items: [{ w: "사", t: "sa", vi: "âm ㅅ chùng" }, { w: "싸", t: "ssa", vi: "âm ㅆ căng" }] },
+    { key: "tp-bat1", label: "받침 ㄹ – ㅁ – ㅇ", syms: ["ㄹ", "ㅁ", "ㅇ"], tip: "Nghe âm cuối: ㄹ thành “l”, ㅁ thành “m”, ㅇ thành “ng”.", items: [{ w: "달", t: "dal", vi: "mặt trăng" }, { w: "밤", t: "bam", vi: "đêm" }, { w: "방", t: "bang", vi: "phòng" }] },
+    { key: "tp-bat2", label: "받침 ㅂ – ㄱ – ㄴ", syms: ["ㅂ", "ㄱ", "ㄴ"], tip: "Nghe âm cuối: ㅂ thành “p”, ㄱ thành “k”, ㄴ thành “n”.", items: [{ w: "밥", t: "bap", vi: "cơm" }, { w: "책", t: "chaek", vi: "sách" }, { w: "산", t: "san", vi: "núi" }] },
+    { key: "tp-dip", label: "ㅚ – ㅢ – ㅘ", syms: ["ㅚ", "ㅢ", "ㅘ"], tip: "ㅚ đọc thành một âm duy nhất, không trượt; ㅢ đầu từ đọc “ưi”; ㅘ đọc “oa”.", items: [{ w: "회", t: "hoe", vi: "cuộc họp" }, { w: "의사", t: "uisa", vi: "bác sĩ" }, { w: "와", t: "wa", vi: "đến; và" }] },
+    { key: "tp-g", label: "ㄱ – ㄲ – ㅋ", syms: ["ㄱ", "ㄲ", "ㅋ"], tip: "ㄱ đọc nhẹ như “g”; ㄲ đọc “k” căng, không bật hơi; ㅋ bật hơi mạnh.", items: [{ w: "가", t: "ga", vi: "âm ㄱ chùng" }, { w: "까", t: "kka", vi: "âm ㄲ căng" }, { w: "카", t: "ka", vi: "âm ㅋ bật hơi" }] },
+    { key: "tp-d", label: "ㄷ – ㄸ – ㅌ", syms: ["ㄷ", "ㄸ", "ㅌ"], tip: "ㄷ nhẹ như “d”; ㄸ căng, không bật hơi; ㅌ bật hơi mạnh.", items: [{ w: "다", t: "da", vi: "âm ㄷ chùng" }, { w: "따", t: "tta", vi: "âm ㄸ căng" }, { w: "타", t: "ta", vi: "âm ㅌ bật hơi" }] },
+    { key: "tp-b", label: "ㅂ – ㅃ – ㅍ", syms: ["ㅂ", "ㅃ", "ㅍ"], tip: "ㅂ nhẹ như “b”; ㅃ căng, không bật hơi; ㅍ bật hơi mạnh.", items: [{ w: "바", t: "ba", vi: "âm ㅂ chùng" }, { w: "빠", t: "ppa", vi: "âm ㅃ căng" }, { w: "파", t: "pa", vi: "âm ㅍ bật hơi" }] }
+  ]
+};
 // ---------- 13. GIAI ĐOẠN 2 (a20): BẢN ĐỒ 13 CHƯƠNG ----------
 // Mục tiêu và năng lực làm được tự soạn theo chuẩn IELTS từng band, không sao chép.
 // Chương chưa dựng xong ghi "sắp mở" — không bịa nội dung bài học bên trong.

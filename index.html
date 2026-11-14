@@ -530,7 +530,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, pronDiagInviteDismissed: {}, gramRuleOpen: {}, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", adaptiveDone: {}, myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, pronDiagInviteDismissed: {}, gramRuleOpen: {}, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", adaptiveDone: {}, earDisc: {}, myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -2276,19 +2276,7 @@ function adaptiveProfileHTML(track) {
   if (guest) h += '<p class="mut">Bạn đang học với tư cách khách — hồ sơ chỉ lưu trên máy này. Đăng nhập để đồng bộ đầy đủ sang máy khác.</p>';
   return h + '</section>';
 }
-function drillSpeak(track, text, rate) {
-  try {
-    if (window.speechSynthesis && window.SpeechSynthesisUtterance) {
-      window.speechSynthesis.cancel();
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang = track === "zh" ? "zh-CN" : track === "tp" ? "ko-KR" : "en-GB";
-      if (rate) u.rate = rate;
-      window.speechSynthesis.speak(u);
-      return;
-    }
-  } catch (e) {}
-  try { pronDiagSpeak(track, text); } catch (e2) {}
-}
+/* v181: da xoa dinh nghia drillSpeak(track, text, rate) chet o day — bi dinh nghia drillSpeak(text, track, rate) phia sau che hoan toan; cho goi duy nhat sai thu tu (renderWeakPronDrill) da sua sang (word, track, rate). */
 function weakPronDrillBuild(track) {
   var items = [];
   var due = [];
@@ -2306,6 +2294,137 @@ function weakPronDrillBuild(track) {
     });
   }
   return items.slice(0, 8);
+}
+/* v181: NGHE-CHON-PHIEN-AM — luyen tai phan biet am (nghe tu -> chon dung phien am).
+   10 cau/buoi; uu tien: cap da sai chua tot nghiep (~20%) -> cap chua am yeu -> con lai.
+   Dung 2 lan lien tiep CACH QUANG (khac ngay) thi cap tot nghiep (rời danh sach luyen lai).
+   Sai vao So loi sai qua recordQuizError; KHONG % tung am (QT-09). */
+function earDiscState(track) { if (!state.earDisc) state.earDisc = {}; if (!state.earDisc[track]) state.earDisc[track] = {}; return state.earDisc[track]; }
+function earDiscWeakSyms(track) { try { return (pronWeakData(track).sounds || []).map(function (x) { return x.sym; }); } catch (e) { return []; } }
+function earDiscPairWeak(pair, weakSyms) {
+  if (!weakSyms || !weakSyms.length) return false;
+  for (var i = 0; i < (pair.syms || []).length; i++) { var tok = pair.syms[i];
+    for (var j = 0; j < weakSyms.length; j++) { var ws = weakSyms[j];
+      if (ws === tok || ws.indexOf(tok) >= 0 || tok.indexOf(ws) >= 0) return true; } }
+  return false;
+}
+function earDiscShuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function earDiscBuildQs(track) {
+  var pairs = (typeof EAR_DISC !== "undefined" && EAR_DISC[track]) ? EAR_DISC[track] : [];
+  if (!pairs.length) return [];
+  var st = earDiscState(track), weak = earDiscWeakSyms(track);
+  var wrong = [], weakP = [], rest = [];
+  pairs.forEach(function (pp) { var rec = st[pp.key];
+    if (rec && (rec.fails || 0) > 0 && !rec.grad) wrong.push(pp);
+    else if (earDiscPairWeak(pp, weak)) weakP.push(pp);
+    else rest.push(pp); });
+  var order = wrong.concat(weakP, rest);
+  var poolAll = [];
+  pairs.forEach(function (pp) { pp.items.forEach(function (it) { if (poolAll.indexOf(it.t) < 0) poolAll.push(it.t); }); });
+  var qs = [];
+  for (var i = 0; i < 10; i++) {
+    var pp = order[i % order.length];
+    var side = Math.floor(Math.random() * pp.items.length);
+    var target = pp.items[side];
+    var opts = [target.t];
+    var cands = [];
+    pp.items.forEach(function (it, j) { if (j !== side && opts.indexOf(it.t) < 0) cands.push(it.t); });
+    earDiscShuffle(cands);
+    poolAll.forEach(function (t) { if (opts.indexOf(t) < 0 && cands.indexOf(t) < 0) cands.push(t); });
+    earDiscShuffle(cands);
+    while (opts.length < 4 && cands.length) opts.push(cands.shift());
+    opts = earDiscShuffle(opts);
+    qs.push({ pair: pp.key, label: pp.label, w: target.w, t: target.t, vi: target.vi, tip: pp.tip, opts: opts, a: opts.indexOf(target.t), side: side });
+  }
+  return qs;
+}
+function earDiscGrade(track, pairKey, ok) {
+  var st = earDiscState(track);
+  var rec = st[pairKey] || (st[pairKey] = { streak: 0, fails: 0, lastDay: "" });
+  var today = todayStr();
+  if (ok) {
+    if (rec.lastDay !== today) { rec.streak = (rec.streak || 0) + 1; rec.lastDay = today; }
+    if (rec.streak >= 2) rec.grad = true;
+  } else {
+    rec.fails = (rec.fails || 0) + 1; rec.streak = 0; rec.lastDay = today; rec.grad = false;
+  }
+  saveState();
+}
+function renderEarDisc(app, l) {
+  var track = l.track || state.track || "en";
+  var labels = { en: "IELTS", zh: "HSK", tc: "TOEIC", tp: "TOPIK" };
+  var qWord = track === "zh" ? "pinyin" : "phiên âm";
+  if (!l.qs) l.qs = earDiscBuildQs(track);
+  var qs = l.qs;
+  if (!qs.length) {
+    app.innerHTML = lessonHead({ title: "Nghe-chọn-phiên-âm", type: "Luyện nghe" }, "") + '<div class="qblock"><p>Chưa có cặp âm cho track này.</p></div>';
+    wireBack(); return;
+  }
+  if (typeof l.i !== "number") l.i = 0;
+  if (!l.res) l.res = [];
+  var idx = l.i;
+  if (idx >= qs.length) {
+    var okN = 0; (l.res || []).forEach(function (r) { if (r) okN++; });
+    var grads = l.graduated || [];
+    if (!l.xpGiven) { awardXp(10); l.xpGiven = true; }
+    var wrongHtml = "";
+    var wrongs = [];
+    qs.forEach(function (q, i) { if (l.res && l.res[i] === false) wrongs.push(q); });
+    if (wrongs.length) wrongHtml = '<div class="qblock"><h3>Câu còn sai — ôn lại:</h3>' + wrongs.map(function (q) { return '<p>“' + esc(q.w) + '” — đáp án đúng: <b>' + esc(q.t) + '</b> (' + esc(q.vi) + '). ' + esc(q.tip) + '</p>'; }).join("") + '<p class="mut">Các câu sai đã vào Sổ lỗi sai, ôn theo lịch 1-3-7-14-30 ngày.</p></div>';
+    app.innerHTML = lessonHead({ title: "Nghe-chọn-phiên-âm — " + (labels[track] || track), type: "Luyện nghe" }, "Nghe đúng thì mới nói đúng — luyện tai trước, luyện miệng sau.")
+      + finishSummaryHTML("Luyện xong 10 câu!", "<p>Bạn đúng <b>" + okN + "/10</b> câu ngay lần đầu.</p>" + (grads.length ? "<p>Nghe vững thêm: <b>" + grads.map(esc).join(", ") + "</b> ✓</p>" : "") + '<p class="mut">+10 XP. Cặp nào đúng 2 lần liên tiếp cách quãng sẽ tự rời khỏi danh sách luyện lại.</p>', wrongHtml, { sub: "Nghe đúng thì mới nói đúng — luyện tai trước, luyện miệng sau." });
+    wireBack();
+    var rb = document.getElementById("btnRedo"); if (rb) rb.onclick = function () { l.qs = null; l.i = 0; l.res = []; l.graduated = []; l.xpGiven = false; render(); };
+    return;
+  }
+  var q = qs[idx];
+  var otherWord = null;
+  /* tu de nham: muc khac trong cung cap (neu cung tu thi nghe lai chinh tu do cham hon) */
+  var pairDef = null;
+  (EAR_DISC[track] || []).forEach(function (pp) { if (pp.key === q.pair) pairDef = pp; });
+  if (pairDef) pairDef.items.forEach(function (it) { if (it.w !== q.w && !otherWord) otherWord = it.w; });
+  app.innerHTML = lessonHead({ title: "Nghe-chọn-phiên-âm — " + (labels[track] || track), type: "Luyện nghe" }, "Nghe từ rồi chọn đúng " + qWord + ". Nghe lại bao nhiêu lần cũng được.")
+    + '<div class="qblock"><p class="eyebrow">CÂU ' + (idx + 1) + '/10 · CẶP ' + esc(q.label) + '</p>'
+    + '<p class="mut">Nghe từ này rồi chọn ' + qWord + ' đúng của nó:</p>'
+    + '<div class="row"><button class="btn btn-primary" id="edHear">🔊 Nghe từ</button><button class="btn" id="edSlow">🐌 Nghe chậm 0,5×</button></div>'
+    + '<div id="edOpts" style="margin-top:10px">' + q.opts.map(function (o, i) { return '<p><button class="btn ear-opt" data-i="' + i + '" style="width:100%;text-align:left;font-size:20px;padding:12px 16px">' + esc(o) + '</button></p>'; }).join("") + '</div>'
+    + '<div id="edFeed"></div>'
+    + '<div class="row"><button class="btn" id="edSkip">Bỏ qua →</button></div></div>';
+  wireBack();
+  var hear = function (rate) { try { drillSpeak(q.w, track, rate || 1); } catch (e) {} };
+  var hb = document.getElementById("edHear"); if (hb) hb.onclick = function () { hear(1); };
+  var sb = document.getElementById("edSlow"); if (sb) sb.onclick = function () { hear(0.5); };
+  var sk = document.getElementById("edSkip"); if (sk) sk.onclick = function () { l.i = idx + 1; render(); };
+  hear(1); /* v181: tu phat khi mo cau — nguoi hoc vua vao da nghe ngay */
+  $$("#edOpts .ear-opt").forEach(function (b) {
+    b.onclick = function () {
+      if (l["answered" + idx]) return;
+      var i = +b.dataset.i;
+      var feed = document.getElementById("edFeed");
+      if (i === q.a) {
+        b.classList.add("ok");
+        var firstOk = !l["tried" + idx];
+        if (!l.res) l.res = [];
+        l.res[idx] = firstOk;
+        l["answered" + idx] = true;
+        earDiscGrade(track, q.pair, true);
+        var rec = earDiscState(track)[q.pair];
+        if (rec && rec.grad) { if (!l.graduated) l.graduated = []; if (l.graduated.indexOf(q.label) < 0) l.graduated.push(q.label); }
+        if (feed) feed.innerHTML = '<p><b>Đúng rồi ✓</b> — “' + esc(q.w) + '” là <b>' + esc(q.t) + '</b> (' + esc(q.vi) + ').</p><p class="mut">' + esc(q.tip) + '</p><p><button class="btn btn-primary" id="edNext">Câu tiếp →</button></p>';
+        var nx = document.getElementById("edNext"); if (nx) nx.onclick = function () { l.i = idx + 1; render(); };
+      } else {
+        b.classList.add("bad"); b.disabled = true;
+        l["tried" + idx] = true;
+        if (!l["errLogged" + idx]) {
+          l["errLogged" + idx] = true;
+          try { recordQuizError("earDisc:" + track, idx, { q: "Nghe từ “" + q.w + "” — " + qWord + " đúng là gì?", o: q.opts, a: q.a, why: q.tip }); } catch (e) {}
+          earDiscGrade(track, q.pair, false);
+        }
+        if (feed) feed.innerHTML = '<p><b>Chưa đúng.</b> Nghe lại từ dễ nhầm rồi chọn lại — điểm câu này tính lần chọn đầu.</p><p><button class="btn" id="edHearAlt">🔊 Nghe từ dễ nhầm</button></p>';
+        var ha = document.getElementById("edHearAlt"); if (ha) ha.onclick = function () { try { drillSpeak(otherWord || q.w, track, otherWord ? 1 : 0.5); } catch (e) {} };
+      }
+    };
+  });
 }
 function renderWeakPronDrill(app, l) {
   var track = l.track || "en";
@@ -2333,7 +2452,7 @@ function renderWeakPronDrill(app, l) {
     + '<p id="wpFeed"></p>'
     + '<div class="row"><button class="btn" id="wpSkip">Bỏ qua →</button></div></div>';
   wireBack();
-  var hear = function (rate) { try { drillSpeak(track, word, rate); } catch (e) {} };
+  var hear = function (rate) { try { drillSpeak(word, track, rate); } catch (e) {} }; /* v181: sua thu tu doi so — drillSpeak(text, track, rate) dang chay; truoc day doc ten track thay vi doc tu */
   var hb = document.getElementById("wpHear"); if (hb) hb.onclick = function () { hear(1); };
   var sb = document.getElementById("wpSlow"); if (sb) sb.onclick = function () { hear(0.5); };
   var judge = function (ok) {
@@ -3928,7 +4047,7 @@ function u7PositionText() {
      "<Loai bai> · Chuong <X> · done/total buoc da xong" (khong tien to
      "Vi tri:", khong ten tab o che do xem tab — ten tab da co o H1 +
      chip dang chon; chi con tien do thi hien, khong thi an dong). */
-  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Chẩn đoán phát âm đầu vào", pronDiag: "Chẩn đoán phát âm", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra trình độ đầu vào (trắc nghiệm)", entryPlace: "Xếp lớp đầu vào", tcEntry: "Kiểm tra trình độ TOEIC", tpEntry: "Kiểm tra trình độ TOPIK", dictation: "Nghe chép chính tả", reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", weakPronDrill: "Luyện âm yếu", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
+  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Chẩn đoán phát âm đầu vào", pronDiag: "Chẩn đoán phát âm", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra trình độ đầu vào (trắc nghiệm)", entryPlace: "Xếp lớp đầu vào", tcEntry: "Kiểm tra trình độ TOEIC", tpEntry: "Kiểm tra trình độ TOPIK", dictation: "Nghe chép chính tả", reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", weakPronDrill: "Luyện âm yếu", earDisc: "Nghe-chọn-phiên-âm", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
   if (typeof curLesson !== "undefined" && curLesson) {
     if (curLesson.step) {
       var ls = learningSteps(); var li = -1;
@@ -5741,6 +5860,12 @@ function viewPractice(app) {
     /* v117: Video moi NGUYEN THE vao G3 (link tu gan + video mau nam trong
        the) — khong tach myListenLinkBox hay qblock mau nua. */
     put(G3, byId("videoNewCarden"));
+    (function () { /* v181: nut Nghe-chon-phien-am vao G3 */
+      var b = document.createElement("button"); b.className = "btn"; b.id = "earDiscBtnEn";
+      b.textContent = "👂 Nghe-chọn-phiên-âm — luyện tai phân biệt âm";
+      b.onclick = function () { openLesson({ type: "earDisc", track: "en" }); };
+      var row = document.createElement("div"); row.className = "row"; row.appendChild(b); G3.appendChild(row);
+    })();
     put(G5, byId("u7PlayCardPractice"));
     /* Xep cum theo thu tu G1-G6 ngay sau the Tim bai; Lop hoc giu lai
        cuoi trang, ngoai luong nhom (T5). */
@@ -10511,6 +10636,7 @@ function renderLesson(app) {
   else if (l.type === "freeWrite") renderFreeWrite(app, l); /* v158 S19 phan 3/3 — bai tap viet cau tu do (P4) */
   else if (l.type === "pronSrs") renderPronSrs(app, l); /* v159 S20 phan 1 — SRS phat am */
   else if (l.type === "weakPronDrill") renderWeakPronDrill(app, l);
+  else if (l.type === "earDisc") renderEarDisc(app, l); /* v181: nghe-chon-phien-am */
   else if (l.type === "myWordsPron") renderMyWordsPron(app, l); /* v160 S20 phan 2 — Study Sets phat am "Tu cua toi" (ELSA 9) */
   else if (l.type === "phaseExam") renderPhaseExam(app, l);
   else if (l.type === "phaseSkill") renderPhaseSkill(app, l);
@@ -22801,6 +22927,12 @@ function viewPracticeZh(app) {
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("zh");
     if (tc6.firstChild) put(G6, tc6.firstChild);
     var rp6 = roleplayAICardEl("zh"); if (rp6) put(G6, rp6); /* v177 ELSA 11 */
+    (function () { /* v181: nut Nghe-chon-phien-am vao G3 */
+      var b = document.createElement("button"); b.className = "btn"; b.id = "earDiscBtnZh";
+      b.textContent = "👂 Nghe-chọn-phiên-âm — luyện tai phân biệt âm";
+      b.onclick = function () { openLesson({ type: "earDisc", track: "zh" }); };
+      var row = document.createElement("div"); row.className = "row"; row.appendChild(b); G3.appendChild(row);
+    })();
     var anchor = byId("typeEntryRow") || byId("zhPracticeNextCard");
     [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
@@ -26281,6 +26413,12 @@ function viewPracticeTc(app) {
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("tc");
     if (tc6.firstChild) put(G6, tc6.firstChild);
     var rp6 = roleplayAICardEl("tc"); if (rp6) put(G6, rp6); /* v177 ELSA 11 */
+    (function () { /* v181: nut Nghe-chon-phien-am vao G3 */
+      var b = document.createElement("button"); b.className = "btn"; b.id = "earDiscBtnTc";
+      b.textContent = "👂 Nghe-chọn-phiên-âm — luyện tai phân biệt âm";
+      b.onclick = function () { openLesson({ type: "earDisc", track: "tc" }); };
+      var row = document.createElement("div"); row.className = "row"; row.appendChild(b); G3.appendChild(row);
+    })();
     var anchor = byId("typeEntryRow") || byId("tcPracticeNextCard");
     [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
@@ -27378,6 +27516,12 @@ function viewPracticeTp(app) {
     var tc6 = document.createElement("div"); tc6.innerHTML = tutorCardHTML("tp");
     if (tc6.firstChild) put(G6, tc6.firstChild);
     var rp6 = roleplayAICardEl("tp"); if (rp6) put(G6, rp6); /* v177 ELSA 11 */
+    (function () { /* v181: nut Nghe-chon-phien-am vao G3 */
+      var b = document.createElement("button"); b.className = "btn"; b.id = "earDiscBtnTp";
+      b.textContent = "👂 Nghe-chọn-phiên-âm — luyện tai phân biệt âm";
+      b.onclick = function () { openLesson({ type: "earDisc", track: "tp" }); };
+      var row = document.createElement("div"); row.className = "row"; row.appendChild(b); G3.appendChild(row);
+    })();
     var anchor = byId("typeEntryRow") || byId("tpPracticeNextCard");
     [G1, G2, G3, G4, G5, G6].forEach(function (cl) {
       if (anchor && anchor.parentNode) { anchor.parentNode.insertBefore(cl, anchor.nextSibling); anchor = cl; }
