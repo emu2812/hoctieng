@@ -55356,6 +55356,138 @@ var TC_GRAMMAR_EXPAND17 = [
 
 TC_GRAMMAR.push.apply(TC_GRAMMAR, TC_GRAMMAR_EXPAND17);
 
+// v191 — bo sung 10 muc ngu phap TOEIC thieu theo kiem do phu ngu phap 15/11
+// (TC-24, TC-23, TC-29, TC-30, TC-31, TC-32, TC-05, TC-07, TC-26, TC-27).
+// TC_GRAMMAR 22 -> 32 muc, 132 -> 192 cau quiz. 22 muc cu giu nguyen tuyet doi.
+// Moi muc: explain bat dau bang vi du that, rule la nguyen van doan "Quy tac: ..."
+// trong explain; 2 vi du + 6 cau quiz. Chi mo rong kho ngu phap (hub), khong
+// chen buoc vao TC_STAGES (tien le v190 TP) — xem AGENT_v191_STATUS.md.
+var TC_GRAMMAR_EXPAND18 = [
+{ name: "Danh từ đếm được/không đếm được và lượng từ trong email công sở", level: "450",
+  explain: "Nghe ví dụ trước: 'We need more information about the order.' (Chúng tôi cần thêm thông tin về đơn hàng.) 'There are many employees in this office.' (Có nhiều nhân viên trong văn phòng này.) Quy tắc: danh từ đếm được (employees, reports, boxes) dùng many/few/a few/số đếm được (three reports); danh từ không đếm được (information, money, advice, equipment, furniture) không có số nhiều và dùng much/little/a little (much information, little time). Không bao giờ nói 'many informations' hay 'a few advices'.",
+  examples: [{"t": "'We need more information about the order.' (Chúng tôi cần thêm thông tin về đơn hàng.)", "s": "We need more information about the order."}, {"t": "'There are many employees in this office.' (Có nhiều nhân viên trong văn phòng này.)", "s": "There are many employees in this office."}],
+  rule: "danh từ đếm được (employees, reports, boxes) dùng many/few/a few/số đếm được (three reports); danh từ không đếm được (information, money, advice, equipment, furniture) không có số nhiều và dùng much/little/a little (much information, little time). Không bao giờ nói 'many informations' hay 'a few advices'.",
+  quiz: [
+  { q: "We need ___ information about the new policy.", o: ["much", "many", "a few"], a: 0, why: "Information không đếm được nên dùng much (many/a few chỉ dùng cho danh từ đếm được)." },
+  { q: "There are ___ employees in the sales team.", o: ["much", "many", "little"], a: 1, why: "Employees đếm được số nhiều nên dùng many." },
+  { q: "She gave me ___ useful advice.", o: ["a few", "some", "many"], a: 1, why: "Advice không đếm được: dùng some, không dùng many hay a few." },
+  { q: "We have ___ time left before the meeting.", o: ["few", "a few", "little"], a: 2, why: "Time không đếm được: little time (few/a few chỉ dùng cho danh từ đếm được)." },
+  { q: "He bought three ___ for the office.", o: ["furniture", "pieces of furniture", "furnitures"], a: 1, why: "Furniture không đếm được, không có dạng số nhiều 'furnitures'; muốn đếm thì dùng three pieces of furniture." },
+  { q: "___ reports are on your desk.", o: ["A few", "A little", "Much"], a: 0, why: "Reports đếm được số nhiều: a few reports." }
+  ] },
+{ name: "Đại từ và định từ trong văn bản công sở", level: "600",
+  explain: "Nghe ví dụ trước: 'Each employee should submit his or her report.' (Mỗi nhân viên nên nộp báo cáo của mình.) 'The manager himself approved the plan.' (Chính quản lý đã duyệt kế hoạch.) Quy tắc: đại từ sở hữu (his, her, their, its) đứng trước danh từ (their report); đại từ phản thân (himself, herself, themselves) nhấn mạnh chính người đó làm; each/every + danh từ số ít + động từ số ít; this/that + danh từ số ít, these/those + danh từ số nhiều.",
+  examples: [{"t": "'Each employee should submit his or her report.' (Mỗi nhân viên nên nộp báo cáo của mình.)", "s": "Each employee should submit his or her report."}, {"t": "'The manager himself approved the plan.' (Chính quản lý đã duyệt kế hoạch.)", "s": "The manager himself approved the plan."}],
+  rule: "đại từ sở hữu (his, her, their, its) đứng trước danh từ (their report); đại từ phản thân (himself, herself, themselves) nhấn mạnh chính người đó làm; each/every + danh từ số ít + động từ số ít; this/that + danh từ số ít, these/those + danh từ số nhiều.",
+  quiz: [
+  { q: "Each employee should submit ___ report by Friday.", o: ["his or her", "they", "them"], a: 0, why: "Each + danh từ số ít: dùng his or her (they/them không đứng trước danh từ)." },
+  { q: "The manager ___ approved the budget.", o: ["himself", "him", "his"], a: 0, why: "Nhấn mạnh chính quản lý làm: himself." },
+  { q: "___ reports on the desk are yours.", o: ["This", "These", "That"], a: 1, why: "Reports số nhiều + ở gần: these." },
+  { q: "Please send the file to ___ as soon as possible.", o: ["we", "us", "our"], a: 1, why: "Sau giới từ to cần đại từ tân ngữ us." },
+  { q: "We asked everyone, but ___ knew the answer.", o: ["nobody", "somebody", "anybody"], a: 0, why: "'But' + ý phủ định: nobody knew (somebody mâu thuẫn với 'but', anybody không dùng trong câu khẳng định)." },
+  { q: "This is ___ office, not theirs.", o: ["our", "ours", "us"], a: 0, why: "Trước danh từ office cần tính từ sở hữu our (ours đứng một mình, không kèm danh từ)." }
+  ] },
+{ name: "Câu hỏi gián tiếp trong email và cuộc gọi", level: "600",
+  explain: "Nghe ví dụ trước: 'Could you tell me where the meeting is?' (Bạn có thể cho tôi biết cuộc họp ở đâu không?) 'Do you know when the report is due?' (Bạn có biết khi nào phải nộp báo cáo không?) Quy tắc: câu hỏi gián tiếp dùng trật tự câu khẳng định (where the meeting is, không đảo thành where is the meeting) và lùi thì khi cần; mở đầu bằng Could you tell me / Do you know / I wonder + if/whether + mệnh đề.",
+  examples: [{"t": "'Could you tell me where the meeting is?' (Bạn có thể cho tôi biết cuộc họp ở đâu không?)", "s": "Could you tell me where the meeting is?"}, {"t": "'Do you know when the report is due?' (Bạn có biết khi nào phải nộp báo cáo không?)", "s": "Do you know when the report is due?"}],
+  rule: "câu hỏi gián tiếp dùng trật tự câu khẳng định (where the meeting is, không đảo thành where is the meeting) và lùi thì khi cần; mở đầu bằng Could you tell me / Do you know / I wonder + if/whether + mệnh đề.",
+  quiz: [
+  { q: "Could you tell me where ___?", o: ["is the meeting", "the meeting is", "does the meeting"], a: 1, why: "Câu hỏi gián tiếp giữ trật tự khẳng định: where the meeting is." },
+  { q: "Do you know when ___?", o: ["the report is due", "is the report due", "does the report due"], a: 0, why: "Trật tự khẳng định: when the report is due." },
+  { q: "I wonder ___ the manager is in today.", o: ["if", "that", "what"], a: 0, why: "Câu hỏi yes/no gián tiếp dùng if (hoặc whether)." },
+  { q: "Could you tell me ___ to contact about the order?", o: ["who", "what", "which"], a: 0, why: "Hỏi về người liên hệ: who to contact." },
+  { q: "She asked me ___ I had finished the report.", o: ["if", "that", "when"], a: 0, why: "Câu hỏi gián tiếp yes/no: asked if I had finished (lùi thì had finished)." },
+  { q: "Please let me know ___ the delivery will arrive.", o: ["when", "that", "what"], a: 0, why: "Hỏi thời gian: let me know when the delivery will arrive." }
+  ] },
+{ name: "Cụm động từ (phrasal verbs) trong công sở", level: "600",
+  explain: "Nghe ví dụ trước: 'The manager will take over the project next month.' (Quản lý sẽ tiếp quản dự án vào tháng sau.) 'Please put off the meeting until Friday.' (Xin hãy hoãn cuộc họp đến thứ Sáu.) Quy tắc: cụm động từ = động từ + giới từ/trạng từ (take over = tiếp quản, put off = hoãn, call off = hủy, look into = điều tra, set up = thành lập, carry out = thực hiện); nghĩa của cả cụm khác hẳn nghĩa từng từ, phải học thuộc cả cụm; tân ngữ đại từ đứng giữa động từ và giới từ (put it off, không nói put off it).",
+  examples: [{"t": "'The manager will take over the project next month.' (Quản lý sẽ tiếp quản dự án vào tháng sau.)", "s": "The manager will take over the project next month."}, {"t": "'Please put off the meeting until Friday.' (Xin hãy hoãn cuộc họp đến thứ Sáu.)", "s": "Please put off the meeting until Friday."}],
+  rule: "cụm động từ = động từ + giới từ/trạng từ (take over = tiếp quản, put off = hoãn, call off = hủy, look into = điều tra, set up = thành lập, carry out = thực hiện); nghĩa của cả cụm khác hẳn nghĩa từng từ, phải học thuộc cả cụm; tân ngữ đại từ đứng giữa động từ và giới từ (put it off, không nói put off it).",
+  quiz: [
+  { q: "The new director will ___ the project next month.", o: ["take over", "take off", "take up"], a: 0, why: "Take over = tiếp quản dự án (take off = cất cánh, take up = bắt đầu một việc mới)." },
+  { q: "We have to ___ the meeting until Friday.", o: ["put off", "put on", "put up"], a: 0, why: "Put off = hoãn lại." },
+  { q: "The company decided to ___ the event because of the storm.", o: ["call off", "call on", "call up"], a: 0, why: "Call off = hủy bỏ." },
+  { q: "Please ___ the problem and report back to me.", o: ["look into", "look after", "look up"], a: 0, why: "Look into = điều tra, xem xét vấn đề." },
+  { q: "They plan to ___ a new branch in Da Nang.", o: ["set up", "set off", "set out"], a: 0, why: "Set up = thành lập, mở (chi nhánh)." },
+  { q: "Please put ___ until tomorrow; I need more time.", o: ["it off", "off it", "it on"], a: 0, why: "Tân ngữ đại từ đứng giữa: put it off (không nói put off it)." }
+  ] },
+{ name: "Trật tự từ trong câu mô tả", level: "600",
+  explain: "Nghe ví dụ trước: 'She is a highly experienced manager.' (Cô ấy là một quản lý rất giàu kinh nghiệm.) 'She bought a beautiful red leather bag.' (Cô ấy đã mua một chiếc túi da đỏ đẹp.) Quy tắc: thứ tự tính từ trước danh từ là ý kiến → kích cỡ → tuổi → hình dạng → màu sắc → nguồn gốc → chất liệu → mục đích (a beautiful new red leather bag); trạng từ chỉ cách thức đứng sau động từ hoặc cuối câu (works carefully); trạng từ chỉ tần suất (always, usually, often, never) đứng trước động từ thường, sau be (is always).",
+  examples: [{"t": "'She is a highly experienced manager.' (Cô ấy là một quản lý rất giàu kinh nghiệm.)", "s": "She is a highly experienced manager."}, {"t": "'She bought a beautiful red leather bag.' (Cô ấy đã mua một chiếc túi da đỏ đẹp.)", "s": "She bought a beautiful red leather bag."}],
+  rule: "thứ tự tính từ trước danh từ là ý kiến → kích cỡ → tuổi → hình dạng → màu sắc → nguồn gốc → chất liệu → mục đích (a beautiful new red leather bag); trạng từ chỉ cách thức đứng sau động từ hoặc cuối câu (works carefully); trạng từ chỉ tần suất (always, usually, often, never) đứng trước động từ thường, sau be (is always).",
+  quiz: [
+  { q: "She bought a ___ bag.", o: ["leather red beautiful", "beautiful red leather", "red beautiful leather"], a: 1, why: "Thứ tự tính từ: ý kiến (beautiful) → màu (red) → chất liệu (leather)." },
+  { q: "She is ___ on time.", o: ["usually", "usual", "use"], a: 0, why: "Sau be dùng trạng từ usually (usual là tính từ)." },
+  { q: "They work ___.", o: ["careful", "carefully", "care"], a: 1, why: "Sau động từ work cần trạng từ carefully." },
+  { q: "She ___ late for work.", o: ["is never", "never is", "is not never"], a: 0, why: "Trạng từ tần suất đứng sau be: is never late." },
+  { q: "This is an ___ report.", o: ["important very", "very important", "importantly very"], a: 1, why: "Very + tính từ đứng trước danh từ: a very important report." },
+  { q: "He speaks English ___.", o: ["fluently", "fluent", "fluency"], a: 0, why: "Sau động từ speaks cần trạng từ fluently." }
+  ] },
+{ name: "Cấu trúc câu: câu đơn, câu ghép, câu phức", level: "600",
+  explain: "Nghe ví dụ trước: 'The meeting ended, and everyone left.' (Cuộc họp kết thúc, và mọi người ra về.) 'Because the report was late, we missed the deadline.' (Vì báo cáo nộp muộn nên chúng tôi lỡ hạn chót.) Quy tắc: câu đơn có 1 mệnh đề; câu ghép nối 2 mệnh đề độc lập bằng and/but/so + dấu phẩy; câu phức có 1 mệnh đề chính + 1 mệnh đề phụ (because, although, when, if). Câu thiếu chủ ngữ hoặc động từ là fragment (lỗi); nối 2 câu độc lập chỉ bằng dấu phẩy là run-on (lỗi).",
+  examples: [{"t": "'The meeting ended, and everyone left.' (Cuộc họp kết thúc, và mọi người ra về.)", "s": "The meeting ended, and everyone left."}, {"t": "'Because the report was late, we missed the deadline.' (Vì báo cáo nộp muộn nên chúng tôi lỡ hạn chót.)", "s": "Because the report was late, we missed the deadline."}],
+  rule: "câu đơn có 1 mệnh đề; câu ghép nối 2 mệnh đề độc lập bằng and/but/so + dấu phẩy; câu phức có 1 mệnh đề chính + 1 mệnh đề phụ (because, although, when, if). Câu thiếu chủ ngữ hoặc động từ là fragment (lỗi); nối 2 câu độc lập chỉ bằng dấu phẩy là run-on (lỗi).",
+  quiz: [
+  { q: "The meeting ended, ___ everyone left.", o: ["and", "because", "although"], a: 0, why: "Nối 2 mệnh đề độc lập: and (because/although mở mệnh đề phụ, không đứng đây)." },
+  { q: "___ the report was late, we missed the deadline.", o: ["Because", "And", "But"], a: 0, why: "Mệnh đề phụ chỉ lý do: Because the report was late..." },
+  { q: "She finished the report ___ she went home.", o: ["and", "because", "although"], a: 0, why: "Hai hành động nối tiếp: and." },
+  { q: "Although it rained, ___.", o: ["we went to work", "went to work", "working"], a: 0, why: "Mệnh đề chính phải đủ chủ ngữ + động từ: we went to work (went to work thiếu chủ ngữ là fragment)." },
+  { q: "The new policy, ___ was announced yesterday, affects all staff.", o: ["which", "and", "because"], a: 0, why: "Mệnh đề quan hệ xen giữa: which was announced yesterday." },
+  { q: "He was tired, ___ he stayed to finish the report.", o: ["but", "and", "so"], a: 0, why: "Mệt nhưng vẫn ở lại: tương phản nên dùng but (so chỉ kết quả, không hợp nghĩa)." }
+  ] },
+{ name: "Thì tương lai hoàn thành và tương lai tiếp diễn", level: "750",
+  explain: "Nghe ví dụ trước: 'By 5 PM, we will have finished the report.' (Trước 5 giờ chiều, chúng tôi sẽ hoàn thành xong báo cáo.) 'This time tomorrow, we will be meeting the client.' (Giờ này ngày mai, chúng tôi sẽ đang gặp khách hàng.) Quy tắc: tương lai hoàn thành = will have + phân từ 2 (will have finished), dùng với mốc 'by + thời gian' để nói việc sẽ xong trước mốc đó; tương lai tiếp diễn = will be + V-ing (will be meeting), dùng để nói việc sẽ đang diễn ra tại một thời điểm tương lai cụ thể.",
+  examples: [{"t": "'By 5 PM, we will have finished the report.' (Trước 5 giờ chiều, chúng tôi sẽ hoàn thành xong báo cáo.)", "s": "By 5 PM, we will have finished the report."}, {"t": "'This time tomorrow, we will be meeting the client.' (Giờ này ngày mai, chúng tôi sẽ đang gặp khách hàng.)", "s": "This time tomorrow, we will be meeting the client."}],
+  rule: "tương lai hoàn thành = will have + phân từ 2 (will have finished), dùng với mốc 'by + thời gian' để nói việc sẽ xong trước mốc đó; tương lai tiếp diễn = will be + V-ing (will be meeting), dùng để nói việc sẽ đang diễn ra tại một thời điểm tương lai cụ thể.",
+  quiz: [
+  { q: "By 5 PM, we ___ the report.", o: ["will have finished", "will finish", "have finished"], a: 0, why: "'By 5 PM' = xong trước mốc đó: will have finished." },
+  { q: "This time tomorrow, we ___ the client.", o: ["will be meeting", "will meet", "meet"], a: 0, why: "Việc đang diễn ra tại thời điểm tương lai: will be meeting." },
+  { q: "By next year, she ___ here for ten years.", o: ["will have worked", "will work", "works"], a: 0, why: "By next year + khoảng thời gian: will have worked." },
+  { q: "At 9 tomorrow, he ___ a presentation.", o: ["will be giving", "will give", "gives"], a: 0, why: "At 9 tomorrow = thời điểm cụ thể trong tương lai, việc đang diễn ra: will be giving." },
+  { q: "By the time you arrive tomorrow, I ___ the report.", o: ["will have finished", "will finish", "finish"], a: 0, why: "'By the time you arrive' = việc phải xong trước lúc bạn đến: will have finished." },
+  { q: "Do not call at 8 tonight. I ___ dinner with my family.", o: ["will be having", "will have", "have"], a: 0, why: "Đang ăn tối lúc 8 giờ tối nay: will be having." }
+  ] },
+{ name: "Câu bị động với động từ khuyết thiếu", level: "600",
+  explain: "Nghe ví dụ trước: 'The report should be finished by Friday.' (Báo cáo nên được hoàn thành trước thứ Sáu.) 'All visitors must be registered at the desk.' (Mọi khách thăm phải được đăng ký tại quầy.) Quy tắc: bị động với động từ khuyết thiếu = modal (should/must/can/may/might) + be + phân từ 2 (should be finished, must be registered); không dùng 'should finished' hay 'must registering'.",
+  examples: [{"t": "'The report should be finished by Friday.' (Báo cáo nên được hoàn thành trước thứ Sáu.)", "s": "The report should be finished by Friday."}, {"t": "'All visitors must be registered at the desk.' (Mọi khách thăm phải được đăng ký tại quầy.)", "s": "All visitors must be registered at the desk."}],
+  rule: "bị động với động từ khuyết thiếu = modal (should/must/can/may/might) + be + phân từ 2 (should be finished, must be registered); không dùng 'should finished' hay 'must registering'.",
+  quiz: [
+  { q: "The report should ___ by Friday.", o: ["be finished", "finished", "be finish"], a: 0, why: "Should + be + phân từ 2: should be finished." },
+  { q: "All visitors must ___ at the desk.", o: ["be registered", "register", "be register"], a: 0, why: "Must + be + phân từ 2: must be registered." },
+  { q: "The goods can ___ by air.", o: ["be shipped", "ship", "be ship"], a: 0, why: "Can + be + phân từ 2: can be shipped." },
+  { q: "This form ___ filled in before the interview.", o: ["must be", "must", "must is"], a: 0, why: "Must be + phân từ 2: must be filled in." },
+  { q: "The meeting might ___ to next week.", o: ["be postponed", "postpone", "be postpone"], a: 0, why: "Might + be + phân từ 2: might be postponed." },
+  { q: "Smoking ___ in this building.", o: ["is not allowed", "is not allow", "not allowed"], a: 0, why: "Bị động hiện tại: is not allowed (allow là động từ thường, cần be + allowed)." }
+  ] },
+{ name: "Causative: have/get something done, make/let", level: "750",
+  explain: "Nghe ví dụ trước: 'We had the office cleaned last weekend.' (Chúng tôi đã thuê người dọn văn phòng cuối tuần trước.) 'The manager made us finish the report on time.' (Quản lý bắt chúng tôi hoàn thành báo cáo đúng hạn.) Quy tắc: have/get + tân ngữ + phân từ 2 (had the office cleaned) nghĩa là thuê/nhờ ai làm gì cho mình; make + tân ngữ + động từ nguyên thể (made us finish) nghĩa là bắt buộc; let + tân ngữ + động từ nguyên thể (let us leave) nghĩa là cho phép.",
+  examples: [{"t": "'We had the office cleaned last weekend.' (Chúng tôi đã thuê người dọn văn phòng cuối tuần trước.)", "s": "We had the office cleaned last weekend."}, {"t": "'The manager made us finish the report on time.' (Quản lý bắt chúng tôi hoàn thành báo cáo đúng hạn.)", "s": "The manager made us finish the report on time."}],
+  rule: "have/get + tân ngữ + phân từ 2 (had the office cleaned) nghĩa là thuê/nhờ ai làm gì cho mình; make + tân ngữ + động từ nguyên thể (made us finish) nghĩa là bắt buộc; let + tân ngữ + động từ nguyên thể (let us leave) nghĩa là cho phép.",
+  quiz: [
+  { q: "We had the office ___ last weekend.", o: ["cleaned", "clean", "cleaning"], a: 0, why: "Have + tân ngữ + phân từ 2: had the office cleaned." },
+  { q: "The manager made us ___ the report on time.", o: ["finish", "finished", "to finish"], a: 0, why: "Make + tân ngữ + động từ nguyên thể (không to): made us finish." },
+  { q: "Please get the printer ___ as soon as possible.", o: ["fixed", "fix", "fixing"], a: 0, why: "Get + tân ngữ + phân từ 2: get the printer fixed." },
+  { q: "She let her team ___ early on Friday.", o: ["leave", "left", "to leave"], a: 0, why: "Let + tân ngữ + động từ nguyên thể: let her team leave." },
+  { q: "I had my hair ___ yesterday.", o: ["cut", "cutting", "to cut"], a: 0, why: "Have + tân ngữ + phân từ 2: had my hair cut." },
+  { q: "The new rules made employees ___ their badges at all times.", o: ["wear", "wore", "wearing"], a: 0, why: "Make + tân ngữ + động từ nguyên thể: made employees wear." }
+  ] },
+{ name: "Câu giả định (subjunctive) trong yêu cầu và đề xuất", level: "900",
+  explain: "Nghe ví dụ trước: 'We suggest that he attend the meeting.' (Chúng tôi đề nghị anh ấy dự cuộc họp.) 'It is essential that the report be submitted on time.' (Việc nộp báo cáo đúng hạn là rất quan trọng.) Quy tắc: sau các động từ demand, suggest, recommend, request, insist + that + chủ ngữ + động từ nguyên thể (không chia, không to, không -s): suggest that he attend; sau It is essential/important/necessary + that + chủ ngữ + động từ nguyên thể: It is essential that the report be submitted.",
+  examples: [{"t": "'We suggest that he attend the meeting.' (Chúng tôi đề nghị anh ấy dự cuộc họp.)", "s": "We suggest that he attend the meeting."}, {"t": "'It is essential that the report be submitted on time.' (Việc nộp báo cáo đúng hạn là rất quan trọng.)", "s": "It is essential that the report be submitted on time."}],
+  rule: "sau các động từ demand, suggest, recommend, request, insist + that + chủ ngữ + động từ nguyên thể (không chia, không to, không -s): suggest that he attend; sau It is essential/important/necessary + that + chủ ngữ + động từ nguyên thể: It is essential that the report be submitted.",
+  quiz: [
+  { q: "We suggest that he ___ the meeting.", o: ["attend", "attends", "to attend"], a: 0, why: "Subjunctive sau suggest that: động từ nguyên thể attend (không -s, không to)." },
+  { q: "It is essential that the report ___ on time.", o: ["be submitted", "is submitted", "submitted"], a: 0, why: "It is essential that + nguyên thể bị động: be submitted." },
+  { q: "The manager demanded that the team ___ the deadline.", o: ["meet", "meets", "to meet"], a: 0, why: "Sau demand that: meet (nguyên thể)." },
+  { q: "It is important that she ___ the contract before signing.", o: ["read", "reads", "reading"], a: 0, why: "It is important that + nguyên thể: read." },
+  { q: "We recommend that the company ___ more staff.", o: ["hire", "hires", "to hire"], a: 0, why: "Sau recommend that: hire (nguyên thể)." },
+  { q: "The committee insisted that the proposal ___ again.", o: ["be reviewed", "is reviewed", "reviewed"], a: 0, why: "Sau insist that + bị động nguyên thể: be reviewed." }
+  ] }
+];
+
+TC_GRAMMAR.push.apply(TC_GRAMMAR, TC_GRAMMAR_EXPAND18);
+
+
 
 // ============================================================
 // EXPAND18 — DOT LAP DAY IELTS (31/10/2026, CHI BAN NHAP)
