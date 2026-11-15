@@ -12237,7 +12237,7 @@ function renderVocab(app, l) {
     + '<div id="vocabMeaningBody">'
     + (vkShowEx ? '<p>' + esc(vkMaskEx ? vkMaskWord(c.col || "", c.w) : (c.col || "")) + ((c.col && c.ex) ? ' — ' : '') + esc(vkMaskEx ? vkMaskWord(c.ex || "", c.w) : (c.ex || "")) + '</p>' : '')
     + (vkShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '')
-    + (vkShowExtras ? ((c.ex2 ? '<p class="mut">Thêm: ' + esc(c.ex2) + '</p>' : "") + (c.snd ? '<div class="why show">' + esc(c.snd) + '</div>' : "") + (c.note ? '<p class="mut">' + esc(c.note) + '</p>' : "") + (c.tip ? '<p>💡 ' + esc(c.tip) + '</p>' : "")) : "")
+    + (vkShowExtras ? ((c.ex2 ? '<p class="mut">Thêm: ' + esc(c.ex2) + '</p>' : "") + (c.snd ? '<div class="why show">' + esc(c.snd) + '</div>' : "") + (c.note ? '<p class="mut">' + esc(c.note) + '</p>' : "") + (c.tip ? '<p>💡 ' + esc(c.tip) + '</p>' : "") + (c.use ? '<p>📖 <b>Cách dùng:</b> ' + esc(c.use) + '</p>' : "") + (c.err ? '<p>⚠️ <b>Lỗi thường gặp:</b> ' + esc(c.err) + '</p>' : "")) : "")
     + (vkShowExtras && c.personal ? '<p><span class="chip">Cá nhân</span>' + ((c.myEx && c.sen) ? ' Giải thích: ' + esc(c.myEx) : '') + '</p>' : "")
     + '</div>'
     + (l.preview ? previewLockHTML() : '<div id="vocabMulti">' + vkEnPanelHTML(vk, c, cards, pos) + '</div>')
@@ -25187,6 +25187,7 @@ function renderZhVocab(app, l) {
     + '<div id="zhMeaningBody">'
     + (zhShowBody ? '<p class="mut">Cụm đi kèm: ' + esc(c.col || "") + '</p>' : '')
     + (zhShowBody ? (c.personal ? (c.sen ? '<p>Ví dụ: ' + esc(zhMaskEx ? vkMaskWord(c.ex || "", c.han) : (c.ex || "")) + '</p>' + (zhShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '') + '<p><span class="chip">Cá nhân</span>' + (zhStep === 0 && c.myEx ? ' Giải thích: ' + esc(c.myEx) : '') + '</p>' : '<p><span class="chip">Cá nhân</span>' + (zhStep === 0 && c.myEx ? ' Giải thích: ' + esc(c.myEx) : '') + '</p>') : '<p>Ví dụ: ' + esc(zhMaskEx ? vkMaskWord(c.ex || "", c.han) : (c.ex || "")) + '</p>' + (zhShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '')) : '')
+    + (zhShowBody ? ((c.use ? '<p>📖 <b>Cách dùng:</b> ' + esc(c.use) + '</p>' : '') + (c.err ? '<p>⚠️ <b>Lỗi thường gặp:</b> ' + esc(c.err) + '</p>' : '')) : '')
     + '</div>'
     + '<div id="zhMulti">' + vkZhPanelHTML(zvk, c, cards, pos, d) + '</div>'
     + '</div>'
@@ -27093,7 +27094,7 @@ function renderTcTpVocab5(track, stepId, back) {
     + (ttWordMode === "mask" ? '<p class="mut" style="text-align:center;margin-top:4px">Từ đang được che đi — hãy nhớ lại rồi trả lời</p>' : '')
     + (ttWordMode === "big" ? '<p class="vocab-focus-line"><span class="mut">' + esc(pronShow) + '</span>' + (c.personal ? ' <span class="chip">Cá nhân</span>' : '') + vkUnsureHTML(c) + '</p>' : '')
     + vkCardImageHTML(c, ttShowImg)
-    + (ttShowBody ? '<div id="vocabMeaningBody">' + (ttShowMeaning ? '<p class="vocab-focus-line"><b>' + esc(c.vi || "") + '</b></p>' : '') + '<p>' + esc(ttMaskEx ? vkMaskWord(c.col || "", c.w) : (c.col || "")) + ((c.col && c.ex) ? ' — ' : '') + esc(ttMaskEx ? vkMaskWord(c.ex || "", c.w) : (c.ex || "")) + '</p>' + (ttShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '') + (ttStep === 0 && c.personal && c.myEx && c.sen ? '<p class="mut">Giải thích: ' + esc(c.myEx) + '</p>' : '') + '</div>' : '')
+    + (ttShowBody ? '<div id="vocabMeaningBody">' + (ttShowMeaning ? '<p class="vocab-focus-line"><b>' + esc(c.vi || "") + '</b></p>' : '') + '<p>' + esc(ttMaskEx ? vkMaskWord(c.col || "", c.w) : (c.col || "")) + ((c.col && c.ex) ? ' — ' : '') + esc(ttMaskEx ? vkMaskWord(c.ex || "", c.w) : (c.ex || "")) + '</p>' + (ttShowExv ? '<p class="mut">' + esc(c.exv || "") + '</p>' : '') + (c.use ? '<p>📖 <b>Cách dùng:</b> ' + esc(c.use) + '</p>' : '') + (c.err ? '<p>⚠️ <b>Lỗi thường gặp:</b> ' + esc(c.err) + '</p>' : '') + (ttStep === 0 && c.personal && c.myEx && c.sen ? '<p class="mut">Giải thích: ' + esc(c.myEx) + '</p>' : '') + '</div>' : '')
     + tcTpVkPanelHTML(sess, vk, c, cards, pos)
     /* v124: bo guong video thuong o buoc 4 — thay bang nut guong quy dao MR trong panel (chi-camera, co quy dao). */
     + (ttStep !== 4 ? '<div class="row" style="margin-top:8px"><button class="btn" id="ttListen">🔊 Nghe</button></div>' : '')
