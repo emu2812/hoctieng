@@ -54071,6 +54071,590 @@ var TP_CHECK_EXPAND16_L6 = {"stage": 7, "title": "Kiểm tra cuối TOPIK II —
 var TP_STAGE_EXPAND16_L6 = {"title": "TOPIK II — Cấp 6", "steps": ["v180","v181","b6","v263","v264","v265","v293","v294","v295","g24","l50","r54","v182","v183","v266","v267","v268","v296","v297","v298","l51","r55","v184","v185","v269","v270","v271","v299","v300","g25","l52","r56","w10","v186","v187","v272","v273","v274","v301","v302","v303","l53","r57","v188","v189","v275","v276","v277","v304","v305","v306","l54","r58","v190","v191","v278","v279","v280","v307","v308","g26","l55","r59","v192","v193","v281","v282","v283","v309","v310","v311","l56","r60","v194","v195","v284","v285","v286","v312","v313","v314","g27","l57","r61","w11","v196","v197","v287","v288","v289","v315","v316","l58","r62","v198","v199","v290","v291","v292","v317","v318","l59","r63","s14","s15","k7","m4"]};
 TP_VOCAB.push.apply(TP_VOCAB, TP_VOCAB_EXPAND16_L6);
 TP_GRAMMAR.push.apply(TP_GRAMMAR, TP_GRAMMAR_EXPAND16_L6);
+var TP_GRAMMAR_EXPAND_V190 = [
+{ name: "-하고 — và (nối danh từ)", level: "TOPIK I", explain: "Ví dụ trước: '사과하고 바나나를 샀어요.' (Tôi đã mua táo và chuối.) '저는 한국어하고 영어를 공부해요.' (Tôi học tiếng Hàn và tiếng Anh.) Quy tắc: -하고 nối hai danh từ trở lên với nghĩa 'và', dùng trong cả nói và viết. Dạng không đổi dù danh từ kết thúc bằng nguyên âm hay phụ âm; thân mật và phổ biến hơn -와/과.",
+  examples: [{"t": "'사과하고 바나나를 샀어요.' (Tôi đã mua táo và chuối.)", "s": "사과하고 바나나를 샀어요."}, {"t": "'저는 한국어하고 영어를 공부해요.' (Tôi học tiếng Hàn và tiếng Anh.)", "s": "저는 한국어하고 영어를 공부해요."}],
+  rule: "-하고 nối hai danh từ trở lên với nghĩa 'và', dùng trong cả nói và viết. Dạng không đổi dù danh từ kết thúc bằng nguyên âm hay phụ âm; thân mật và phổ biến hơn -와/과.", quiz: [
+{ q: "Điền đúng: '사과___ 바나나를 샀어요.'", o: ["하고", "을", "에서"], a: 0, why: "-하고 nối hai danh từ 'táo và chuối'; 을 là tiểu từ tân ngữ, 에서 chỉ nơi chốn, không dùng để nối." },
+{ q: "Câu nào dùng -하고 để nối hai danh từ?", o: ["저는 밥하고 김치를 먹어요.", "저는 밥을 먹어요.", "저는 집에서 쉬어요."], a: 0, why: "밥하고 김치 = cơm và kim chi, -하고 nối hai danh từ." },
+{ q: "Chọn câu đúng: 'Tôi học tiếng Hàn và tiếng Anh.'", o: ["저는 한국어하고 영어를 공부해요.", "저는 한국어를 영어를 공부해요.", "저는 한국어에 영어를 공부해요."], a: 0, why: "-하고 nối 'tiếng Hàn và tiếng Anh'; lặp 을/를 hoặc dùng 에 đều sai." },
+{ q: "Điền đúng: '커피___ 우유를 마셔요.' (cà phê và sữa)", o: ["하고", "에서", "이"], a: 0, why: "Nối hai danh từ dùng -하고." },
+{ q: "-하고 dùng để làm gì?", o: ["Nối hai danh từ với nghĩa 'và'", "Chỉ nơi diễn ra hành động", "Chỉ thời gian"], a: 0, why: "-하고 nối danh từ; nơi chốn dùng 에서, thời gian dùng 에." },
+{ q: "Chọn câu SAI:", o: ["저는 사과하고 바나나를 좋아해요.", "저는 책하고 공책을 샀어요.", "저는 학교하고 가요."], a: 2, why: "'Đi học' là 학교에 가요 — -하고 chỉ nối danh từ, không nối với động từ 가다." }
+] },
+{ name: "-와/과 — và (sau nguyên âm/phụ âm)", level: "TOPIK I", explain: "Ví dụ trước: '사과와 바나나를 샀어요.' (Tôi đã mua táo và chuối.) '책과 공책이 있어요.' (Có sách và vở.) Quy tắc: -와/과 nối hai danh từ với nghĩa 'và', trang trọng và thiên về văn viết hơn -하고. Sau nguyên âm dùng -와, sau phụ âm dùng -과.",
+  examples: [{"t": "'사과와 바나나를 샀어요.' (Tôi đã mua táo và chuối.)", "s": "사과와 바나나를 샀어요."}, {"t": "'책과 공책이 있어요.' (Có sách và vở.)", "s": "책과 공책이 있어요."}],
+  rule: "-와/과 nối hai danh từ với nghĩa 'và', trang trọng và thiên về văn viết hơn -하고. Sau nguyên âm dùng -와, sau phụ âm dùng -과.", quiz: [
+{ q: "Điền đúng: '사과___ 바나나를 샀어요.'", o: ["와", "을", "에서"], a: 0, why: "사과 kết thúc bằng nguyên âm ㅘ nên dùng -와 để nối." },
+{ q: "Điền đúng: '책___ 공책이 있어요.'", o: ["과", "와", "을"], a: 0, why: "책 kết thúc bằng phụ âm ㄱ nên dùng -과 để nối." },
+{ q: "Chọn câu đúng: 'Tôi và bạn tôi đi học.'", o: ["저와 제 친구는 학교에 가요.", "저을 제 친구는 학교에 가요.", "저에서 제 친구는 학교에 가요."], a: 0, why: "저 kết thúc bằng nguyên âm ㅓ nên dùng -와." },
+{ q: "-와/과 khác -하고 ở điểm nào?", o: ["-와/과 trang trọng hơn, thiên về văn viết", "-와/과 chỉ dùng sau phụ âm", "-와/과 nối động từ"], a: 0, why: "-와/과 và -하고 cùng nghĩa 'và'; -와/과 trang trọng hơn, còn -하고 thân mật hơn." },
+{ q: "Điền đúng: '한국___ 일본에 가요.' (Hàn Quốc và Nhật Bản)", o: ["과", "와", "을"], a: 0, why: "한국 kết thúc bằng phụ âm ㄱ nên dùng -과; 와 dùng sau nguyên âm, 을 là tiểu từ tân ngữ." },
+{ q: "Chọn câu SAI:", o: ["사과와 바나나를 샀어요.", "책과 공책이 있어요.", "밥과 먹어요."], a: 2, why: "-와/과 chỉ nối danh từ; 'ăn cơm' là 밥을 먹어요, không dùng -와/과 trước động từ." }
+] },
+{ name: "-도 — cũng (thêm vào)", level: "TOPIK I", explain: "Ví dụ trước: '저도 학생입니다.' (Tôi cũng là học sinh.) '저는 사과도 좋아해요.' (Tôi cũng thích táo.) Quy tắc: -도 gắn sau danh từ với nghĩa 'cũng', thêm một thứ tương tự vào câu chuyện. -도 thay thế tiểu từ 은/는, 이/가, 을/를 (저 + 도 = 저도, không nói 저는도).",
+  examples: [{"t": "'저도 학생입니다.' (Tôi cũng là học sinh.)", "s": "저도 학생입니다."}, {"t": "'저는 사과도 좋아해요.' (Tôi cũng thích táo.)", "s": "저는 사과도 좋아해요."}],
+  rule: "-도 gắn sau danh từ với nghĩa 'cũng', thêm một thứ tương tự vào câu chuyện. -도 thay thế tiểu từ 은/는, 이/가, 을/를 (저 + 도 = 저도, không nói 저는도).", quiz: [
+{ q: "Điền đúng: '저___ 학생입니다.' (Tôi cũng là học sinh.)", o: ["도", "는", "를"], a: 0, why: "-도 nghĩa là 'cũng'; 는 và 를 không mang nghĩa 'cũng'." },
+{ q: "Chọn câu đúng: 'Tôi cũng thích táo.'", o: ["저는 사과도 좋아해요.", "저는 사과를도 좋아해요.", "저는 사과에도 좋아해요."], a: 0, why: "-도 thay thế 을/를 nên nói 사과도, không nói 사과를도." },
+{ q: "Câu nào có nghĩa 'cũng'?", o: ["저도 가요.", "저는 가요.", "저를 가요."], a: 0, why: "저도 = tôi cũng; 저는 chỉ là chủ đề, 저를 là tân ngữ." },
+{ q: "Điền đúng: '한국어도 ___ 공부해요.' (Tôi cũng học tiếng Hàn.)", o: ["한국어도", "한국어를도", "한국어에도"], a: 0, why: "-도 gắn thẳng sau danh từ, thay thế tiểu từ khác." },
+{ q: "-도 dùng để làm gì?", o: ["Thêm một thứ tương tự, nghĩa 'cũng'", "Chỉ nơi diễn ra hành động", "Chỉ thời gian"], a: 0, why: "-도 nghĩa 'cũng'; nơi chốn dùng 에서, thời gian dùng 에." },
+{ q: "Chọn câu SAI:", o: ["저도 학생입니다.", "사과도 좋아해요.", "저는도 학생입니다."], a: 2, why: "-도 thay thế 는 nên nói 저도, không nói 저는도." }
+] },
+{ name: "-아/어 주세요 — nhờ vả lịch sự", level: "TOPIK I", explain: "Ví dụ trước: '문을 열어 주세요.' (Xin hãy mở cửa giúp tôi.) '사진을 찍어 주세요.' (Xin hãy chụp ảnh giúp tôi.) Quy tắc: động từ + -아/어 주세요 dùng để nhờ ai làm gì một cách lịch sự. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 주세요, các nguyên âm khác dùng -어 주세요; 하다 thành 해 주세요.",
+  examples: [{"t": "'문을 열어 주세요.' (Xin hãy mở cửa giúp tôi.)", "s": "문을 열어 주세요."}, {"t": "'사진을 찍어 주세요.' (Xin hãy chụp ảnh giúp tôi.)", "s": "사진을 찍어 주세요."}],
+  rule: "động từ + -아/어 주세요 dùng để nhờ ai làm gì một cách lịch sự. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 주세요, các nguyên âm khác dùng -어 주세요; 하다 thành 해 주세요.", quiz: [
+{ q: "Điền đúng: '문을 열어 ___.' (Xin hãy mở cửa giúp tôi.)", o: ["주세요", "세요", "까요"], a: 0, why: "Nhờ vả lịch sự dùng -아/어 주세요; 세요 là kính ngữ chung, 까요 là đề nghị." },
+{ q: "Chọn câu đúng: 'Xin hãy chụp ảnh giúp tôi.'", o: ["사진을 찍어 주세요.", "사진을 찍어요.", "사진을 찍을까요?"], a: 0, why: "Nhờ vả lịch sự dùng 찍어 주세요." },
+{ q: "Điền đúng: '이 책을 좀 읽어 ___.'", o: ["주세요", "세요", "아요"], a: 0, why: "읽다 + -어 주세요 = 읽어 주세요 (nhờ đọc giúp)." },
+{ q: "'도와 주세요' có nghĩa là gì?", o: ["Xin hãy giúp tôi.", "Tôi đang giúp bạn.", "Bạn có giúp tôi không?"], a: 0, why: "돕다 + -아 주세요 = 도와 주세요, nhờ giúp đỡ một cách lịch sự." },
+{ q: "Điền đúng: '조용히 해 ___.' (Xin hãy giữ yên lặng giúp tôi.)", o: ["주세요", "세요", "까요"], a: 0, why: "하다 → 해 주세요 trong câu nhờ vả lịch sự." },
+{ q: "Chọn câu SAI:", o: ["문을 열어 주세요.", "물을 좀 주세요.", "밥을 먹어 세요."], a: 2, why: "먹다 + -어 주세요 = 먹어 주세요; '먹어 세요' không phải dạng nhờ vả." }
+] },
+{ name: "-지 마세요 — đừng làm gì (cấm)", level: "TOPIK I", explain: "Ví dụ trước: '여기서 담배를 피우지 마세요.' (Xin đừng hút thuốc ở đây.) '사진을 찍지 마세요.' (Xin đừng chụp ảnh.) Quy tắc: động từ + -지 마세요 dùng để cấm hoặc nhắc ai đừng làm gì, lịch sự nhưng dứt khoát. Khác với -(으)면 안 되다 (nói về quy định 'không được làm').",
+  examples: [{"t": "'여기서 담배를 피우지 마세요.' (Xin đừng hút thuốc ở đây.)", "s": "여기서 담배를 피우지 마세요."}, {"t": "'사진을 찍지 마세요.' (Xin đừng chụp ảnh.)", "s": "사진을 찍지 마세요."}],
+  rule: "động từ + -지 마세요 dùng để cấm hoặc nhắc ai đừng làm gì, lịch sự nhưng dứt khoát. Khác với -(으)면 안 되다 (nói về quy định 'không được làm').", quiz: [
+{ q: "Điền đúng: '여기서 담배를 피우지 ___.'", o: ["마세요", "주세요", "세요"], a: 0, why: "Cấm làm gì dùng -지 마세요; 주세요 là nhờ làm, 세요 là kính ngữ chung." },
+{ q: "Chọn câu đúng: 'Xin đừng chụp ảnh.'", o: ["사진을 찍지 마세요.", "사진을 찍어 주세요.", "사진을 찍을까요?"], a: 0, why: "Cấm dùng 찍지 마세요." },
+{ q: "Điền đúng: '도서관에서 떠들지 ___.' (Xin đừng ồn ào trong thư viện.)", o: ["마세요", "주세요", "아요"], a: 0, why: "떠들다 + -지 마세요 = 떠들지 마세요." },
+{ q: "'들어가지 마세요' có nghĩa là gì?", o: ["Xin đừng vào.", "Xin hãy vào.", "Bạn có vào không?"], a: 0, why: "들어가다 + -지 마세요 = đừng vào." },
+{ q: "Điền đúng: '이것을 만지지 ___.' (Xin đừng chạm vào cái này.)", o: ["마세요", "주세요", "까요"], a: 0, why: "만지다 + -지 마세요 = 만지지 마세요." },
+{ q: "Chọn câu SAI:", o: ["사진을 찍지 마세요.", "여기서 피우지 마세요.", "밥을 먹지 주세요."], a: 2, why: "-지 마세요 là mẫu cấm; '먹지 주세요' không phải dạng đúng (nhờ ăn giúp là 먹어 주세요)." }
+] },
+{ name: "-아/어요 — thì hiện tại thân mật lịch sự", level: "TOPIK I", explain: "Ví dụ trước: '저는 학교에 가요.' (Tôi đi học.) '저는 밥을 먹어요.' (Tôi ăn cơm.) Quy tắc: đây là đuôi thì hiện tại thân mật lịch sự, dùng nhiều nhất trong giao tiếp hằng ngày. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아요, các nguyên âm khác dùng -어요; 하다 thành 해요. Động từ bất quy tắc biến đổi thân: 듣다 → 들어요, 춥다 → 추워요.",
+  examples: [{"t": "'저는 학교에 가요.' (Tôi đi học.)", "s": "저는 학교에 가요."}, {"t": "'저는 밥을 먹어요.' (Tôi ăn cơm.)", "s": "저는 밥을 먹어요."}],
+  rule: "đây là đuôi thì hiện tại thân mật lịch sự, dùng nhiều nhất trong giao tiếp hằng ngày. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아요, các nguyên âm khác dùng -어요; 하다 thành 해요. Động từ bất quy tắc biến đổi thân: 듣다 → 들어요, 춥다 → 추워요.", quiz: [
+{ q: "Điền đúng: '저는 학교에 ___.' (Tôi đi học.)", o: ["가요", "갑니다", "가"], a: 0, why: "가다 + -아요 = 가요 (thân mật lịch sự); 갑니다 là đuôi trang trọng, 가 là 반말." },
+{ q: "Điền đúng: '저는 밥을 ___.' (Tôi ăn cơm.)", o: ["먹어요", "먹아요", "먹습니다"], a: 0, why: "먹다 có nguyên âm ㅓ nên dùng -어요 = 먹어요." },
+{ q: "Điền đúng: '저는 한국어를 ___.' (Tôi học tiếng Hàn.)", o: ["공부해요", "공부아요", "공부어요"], a: 0, why: "하다 thành 해요: 공부하다 → 공부해요." },
+{ q: "Chọn câu đúng: 'Tôi nghe nhạc.'", o: ["저는 음악을 들어요.", "저는 음악을 듣어요.", "저는 음악을 들어요요."], a: 0, why: "듣다 là động từ bất quy tắc ㄷ: 듣다 → 들어요." },
+{ q: "Điền đúng: '날씨가 ___.' (Trời lạnh.)", o: ["추워요", "추워요요", "춥어요"], a: 0, why: "춥다 là động từ bất quy tắc ㅂ: 춥다 → 추워요." },
+{ q: "Chọn câu SAI:", o: ["저는 학교에 가요.", "저는 밥을 먹어요.", "저는 책을 읽아요."], a: 2, why: "읽다 có nguyên âm ㅣ nên dùng -어요: 읽어요, không phải 읽아요." }
+] },
+{ name: "-(으)세요 — kính ngữ (mời/yêu cầu lịch sự)", level: "TOPIK I", explain: "Ví dụ trước: '이쪽으로 오세요.' (Xin mời qua bên này.) '앉으세요.' (Xin mời ngồi.) Quy tắc: động từ + -(으)세요 là đuôi kính ngữ, dùng khi nói với người lớn tuổi hoặc cấp trên. Sau nguyên âm dùng -세요 (가세요, 오세요), sau phụ âm dùng -으세요 (앉으세요, 먹으세요). Động từ kính ngữ đặc biệt: 먹다 → 드시다, 자다 → 주무시다, 있다 → 계시다.",
+  examples: [{"t": "'이쪽으로 오세요.' (Xin mời qua bên này.)", "s": "이쪽으로 오세요."}, {"t": "'앉으세요.' (Xin mời ngồi.)", "s": "앉으세요."}],
+  rule: "động từ + -(으)세요 là đuôi kính ngữ, dùng khi nói với người lớn tuổi hoặc cấp trên. Sau nguyên âm dùng -세요 (가세요, 오세요), sau phụ âm dùng -으세요 (앉으세요, 먹으세요). Động từ kính ngữ đặc biệt: 먹다 → 드시다, 자다 → 주무시다, 있다 → 계시다.", quiz: [
+{ q: "Điền đúng: '이쪽으로 오___.' (Xin mời qua bên này.)", o: ["세요", "아요", "어요"], a: 0, why: "오다 kết thúc bằng nguyên âm nên dùng -세요: 오세요." },
+{ q: "Điền đúng: '앉___.' (Xin mời ngồi.)", o: ["으세요", "세요", "아요"], a: 0, why: "앉다 kết thúc bằng phụ âm ㅈ nên dùng -으세요: 앉으세요." },
+{ q: "Chọn câu đúng: 'Xin mời ăn cơm.' (nói với người lớn tuổi)", o: ["식사하세요.", "밥 먹어요.", "밥 먹어."], a: 0, why: "Nói với người lớn tuổi dùng kính ngữ -세요: 식사하세요 (hoặc 드세요)." },
+{ q: "'주무세요' là dạng kính ngữ của động từ nào?", o: ["자다 (ngủ)", "먹다 (ăn)", "가다 (đi)"], a: 0, why: "자다 → 주무시다, dạng kính ngữ thân mật là 주무세요." },
+{ q: "Điền đúng: '책을 읽___.' (Xin mời đọc sách — nói với thầy cô.)", o: ["으세요", "세요", "어요"], a: 0, why: "읽다 kết thúc bằng phụ âm ㄱ nên dùng -으세요: 읽으세요." },
+{ q: "Chọn câu SAI:", o: ["오세요.", "앉으세요.", "가세요요."], a: 2, why: "가다 + -세요 = 가세요; '가세요요' thừa đuôi." }
+] },
+{ name: "-(으)ㄹ까요 — đề nghị/hỏi ý kiến", level: "TOPIK I", explain: "Ví dụ trước: '우리 같이 갈까요?' (Chúng ta cùng đi nhé?) '커피를 마실까요?' (Uống cà phê nhé?) Quy tắc: động từ + -(으)ㄹ까요 dùng để đề nghị cùng làm gì hoặc hỏi ý kiến người nghe ('shall we?'). Sau nguyên âm dùng -ㄹ까요, sau phụ âm dùng -을까요. Thường dùng với ngôi 'chúng ta' hoặc hỏi người nghe nên làm gì.",
+  examples: [{"t": "'우리 같이 갈까요?' (Chúng ta cùng đi nhé?)", "s": "우리 같이 갈까요?"}, {"t": "'커피를 마실까요?' (Uống cà phê nhé?)", "s": "커피를 마실까요?"}],
+  rule: "động từ + -(으)ㄹ까요 dùng để đề nghị cùng làm gì hoặc hỏi ý kiến người nghe ('shall we?'). Sau nguyên âm dùng -ㄹ까요, sau phụ âm dùng -을까요. Thường dùng với ngôi 'chúng ta' hoặc hỏi người nghe nên làm gì.", quiz: [
+{ q: "Điền đúng: '우리 같이 갈___?' (Chúng ta cùng đi nhé?)", o: ["까요", "세요", "아요"], a: 0, why: "가다 + -ㄹ까요 = 갈까요 (đề nghị cùng đi)." },
+{ q: "Điền đúng: '커피를 마실___?' (Uống cà phê nhé?)", o: ["까요", "세요", "어요"], a: 0, why: "마시다 kết thúc bằng nguyên âm ㅣ nên dùng -ㄹ까요: 마실까요." },
+{ q: "Chọn câu đúng: 'Chúng ta ăn cơm nhé?'", o: ["우리 밥을 먹을까요?", "우리 밥을 먹어요.", "우리 밥을 먹지 마세요."], a: 0, why: "먹다 kết thúc bằng phụ âm ㄱ nên dùng -을까요: 먹을까요." },
+{ q: "'갈까요?' dùng trong tình huống nào?", o: ["Đề nghị cùng đi, hỏi ý kiến", "Ra lệnh cho ai đi", "Kể chuyện đã đi rồi"], a: 0, why: "-(으)ㄹ까요 là đề nghị/hỏi ý kiến, không phải mệnh lệnh hay kể quá khứ." },
+{ q: "Điền đúng: '영화를 볼___?' (Xem phim nhé?)", o: ["까요", "세요", "아요"], a: 0, why: "보다 kết thúc bằng nguyên âm ㅗ nên dùng -ㄹ까요: 볼까요." },
+{ q: "Chọn câu SAI:", o: ["우리 같이 갈까요?", "커피를 마실까요?", "저는 학교에 갈까요."], a: 2, why: "-(으)ㄹ까요 là câu hỏi đề nghị, không dùng để kể 'tôi đi học' (저는 학교에 가요)." }
+] },
+{ name: "-(으)ㄹ 수 있어요/없어요 — có thể/không thể", level: "TOPIK I", explain: "Ví dụ trước: '저는 수영할 수 있어요.' (Tôi biết bơi.) '저는 한국어를 잘할 수 없어요.' (Tôi chưa nói giỏi tiếng Hàn.) Quy tắc: động từ + -(으)ㄹ 수 있다 diễn tả khả năng ('có thể'), + -(으)ㄹ 수 없다 diễn tả không thể. Sau nguyên âm dùng -ㄹ 수 있다, sau phụ âm dùng -을 수 있다. 수 là danh từ 'cách, khả năng'.",
+  examples: [{"t": "'저는 수영할 수 있어요.' (Tôi biết bơi.)", "s": "저는 수영할 수 있어요."}, {"t": "'저는 한국어를 잘할 수 없어요.' (Tôi chưa nói giỏi tiếng Hàn.)", "s": "저는 한국어를 잘할 수 없어요."}],
+  rule: "động từ + -(으)ㄹ 수 있다 diễn tả khả năng ('có thể'), + -(으)ㄹ 수 없다 diễn tả không thể. Sau nguyên âm dùng -ㄹ 수 있다, sau phụ âm dùng -을 수 있다. 수 là danh từ 'cách, khả năng'.", quiz: [
+{ q: "Điền đúng: '저는 수영할 수 ___.' (Tôi biết bơi.)", o: ["있어요", "없어요", "세요"], a: 0, why: "Biết bơi = có khả năng: 수영할 수 있어요." },
+{ q: "Điền đúng: '저는 운전할 수 ___.' (Tôi không biết lái xe.)", o: ["없어요", "있어요", "세요"], a: 0, why: "Không biết lái xe = không có khả năng: 운전할 수 없어요." },
+{ q: "Chọn câu đúng: 'Tôi có thể nói tiếng Hàn.'", o: ["저는 한국어를 말할 수 있어요.", "저는 한국어를 말해요.", "저는 한국어를 말할까요?"], a: 0, why: "Có thể nói dùng 말할 수 있어요; 말해요 chỉ là 'nói', 말할까요 là đề nghị." },
+{ q: "Điền đúng: '이 책을 읽___ 있어요.' (Tôi có thể đọc cuốn sách này.)", o: ["을 수", "ㄹ 수", "수"], a: 0, why: "읽다 kết thúc bằng phụ âm ㄱ nên dùng -을 수 있어요: 읽을 수 있어요." },
+{ q: "'갈 수 없어요' có nghĩa là gì?", o: ["Không thể đi.", "Có thể đi.", "Đi nhé?"], a: 0, why: "가다 + -ㄹ 수 없다 = 갈 수 없어요, không thể đi." },
+{ q: "Chọn câu SAI:", o: ["저는 수영할 수 있어요.", "저는 운전할 수 없어요.", "저는 수영할 있어요."], a: 2, why: "Phải có 수: 수영할 수 있어요; thiếu 수 là sai." }
+] },
+{ name: "-아/어 보다 — thử làm gì", level: "TOPIK I", explain: "Ví dụ trước: '이 옷을 입어 보세요.' (Hãy thử mặc chiếc áo này xem.) '한국 음식을 먹어 봤어요.' (Tôi đã thử ăn món Hàn.) Quy tắc: động từ + -아/어 보다 nghĩa là 'thử làm gì xem sao'. 보다 ở đây là trợ động từ 'thử', khác với 보다 'nhìn'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 보다, còn lại dùng -어 보다.",
+  examples: [{"t": "'이 옷을 입어 보세요.' (Hãy thử mặc chiếc áo này xem.)", "s": "이 옷을 입어 보세요."}, {"t": "'한국 음식을 먹어 봤어요.' (Tôi đã thử ăn món Hàn.)", "s": "한국 음식을 먹어 봤어요."}],
+  rule: "động từ + -아/어 보다 nghĩa là 'thử làm gì xem sao'. 보다 ở đây là trợ động từ 'thử', khác với 보다 'nhìn'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 보다, còn lại dùng -어 보다.", quiz: [
+{ q: "Điền đúng: '이 옷을 입어 ___' (Hãy thử mặc chiếc áo này xem.)", o: ["보세요", "주세요", "세요"], a: 0, why: "입다 + -어 보다 = 입어 보다 (thử mặc); 보세요 là dạng kính ngữ của 보다." },
+{ q: "Chọn câu đúng: 'Tôi đã thử ăn món Hàn.'", o: ["한국 음식을 먹어 봤어요.", "한국 음식을 먹었어요.", "한국 음식을 먹을까요?"], a: 0, why: "Thử ăn dùng 먹어 봤어요; 먹었어요 chỉ là 'đã ăn'." },
+{ q: "Điền đúng: '이 노래를 들어 ___.' (Hãy thử nghe bài hát này xem.)", o: ["보세요", "주세요", "아요"], a: 0, why: "듣다 + -어 보다 = 들어 보다 (thử nghe); 듣다 là động từ bất quy tắc ㄷ." },
+{ q: "'마셔 보세요' có nghĩa là gì?", o: ["Hãy thử uống xem.", "Hãy uống giúp tôi.", "Uống nhé?"], a: 0, why: "마시다 + -어 보다 = 마셔 보다, thử uống xem sao." },
+{ q: "Điền đúng: '한 번 해 ___.' (Hãy thử làm một lần xem.)", o: ["보세요", "주세요", "까요"], a: 0, why: "하다 → 해 보다: 해 보세요 (thử làm xem)." },
+{ q: "Chọn câu SAI:", o: ["이 옷을 입어 보세요.", "한국 음식을 먹어 봤어요.", "저는 책을 읽어 봤어요요."], a: 2, why: "읽다 + -어 보다 = 읽어 봤어요; '봤어요요' thừa đuôi." }
+] },
+{ name: "-고 있다 — đang làm gì", level: "TOPIK I", explain: "Ví dụ trước: '지금 밥을 먹고 있어요.' (Bây giờ tôi đang ăn cơm.) '저는 한국어를 공부하고 있어요.' (Tôi đang học tiếng Hàn.) Quy tắc: động từ + -고 있다 diễn tả hành động đang diễn ra ngay lúc này. Khác với -아/어 있다 (trạng thái sau khi hành động xong, như 앉아 있다 'đang ngồi').",
+  examples: [{"t": "'지금 밥을 먹고 있어요.' (Bây giờ tôi đang ăn cơm.)", "s": "지금 밥을 먹고 있어요."}, {"t": "'저는 한국어를 공부하고 있어요.' (Tôi đang học tiếng Hàn.)", "s": "저는 한국어를 공부하고 있어요."}],
+  rule: "động từ + -고 있다 diễn tả hành động đang diễn ra ngay lúc này. Khác với -아/어 있다 (trạng thái sau khi hành động xong, như 앉아 있다 'đang ngồi').", quiz: [
+{ q: "Điền đúng: '지금 밥을 먹고 ___.' (Bây giờ tôi đang ăn cơm.)", o: ["있어요", "가요", "봤어요"], a: 0, why: "Đang ăn dùng 먹고 있어요." },
+{ q: "Chọn câu đúng: 'Tôi đang học tiếng Hàn.'", o: ["저는 한국어를 공부하고 있어요.", "저는 한국어를 공부해요.", "저는 한국어를 공부했어요."], a: 0, why: "Đang học dùng 공부하고 있어요; 공부해요 là hiện tại chung, 공부했어요 là quá khứ." },
+{ q: "Điền đúng: '지금 뭐 하고 ___.' (Bây giờ bạn đang làm gì?)", o: ["있어요", "세요", "까요"], a: 0, why: "뭐 하고 있어요? = đang làm gì?" },
+{ q: "'지금 자고 있어요' có nghĩa là gì?", o: ["Bây giờ tôi đang ngủ.", "Bây giờ tôi đã ngủ.", "Bây giờ tôi sẽ ngủ."], a: 0, why: "자다 + -고 있다 = 자고 있다, đang ngủ." },
+{ q: "Điền đúng: '친구가 지금 책을 읽고 ___.' (Bạn tôi đang đọc sách.)", o: ["있어요", "봤어요", "가요"], a: 0, why: "Đang đọc dùng 읽고 있어요." },
+{ q: "Chọn câu SAI:", o: ["지금 밥을 먹고 있어요.", "저는 한국어를 공부하고 있어요.", "지금 밥을 먹고 있다요."], a: 2, why: "Đuôi đúng là 있어요; '있다요' không phải dạng đúng." }
+] },
+{ name: "-(으)ㄹ 때 — khi (thời gian)", level: "TOPIK I", explain: "Ví dụ trước: '한국에 갈 때 우산을 가져가세요.' (Khi đi Hàn Quốc thì mang theo ô nhé.) '어렸을 때 서울에 살았어요.' (Khi còn nhỏ tôi sống ở Seoul.) Quy tắc: động từ + -(으)ㄹ 때 chỉ thời điểm 'khi...'. Sau nguyên âm dùng -ㄹ 때, sau phụ âm dùng -을 때. Nói về quá khứ dùng -았/었을 때; danh từ dùng + 일 때.",
+  examples: [{"t": "'한국에 갈 때 우산을 가져가세요.' (Khi đi Hàn Quốc thì mang theo ô nhé.)", "s": "한국에 갈 때 우산을 가져가세요."}, {"t": "'어렸을 때 서울에 살았어요.' (Khi còn nhỏ tôi sống ở Seoul.)", "s": "어렸을 때 서울에 살았어요."}],
+  rule: "động từ + -(으)ㄹ 때 chỉ thời điểm 'khi...'. Sau nguyên âm dùng -ㄹ 때, sau phụ âm dùng -을 때. Nói về quá khứ dùng -았/었을 때; danh từ dùng + 일 때.", quiz: [
+{ q: "Điền đúng: '한국에 갈 ___ 우산을 가져가세요.' (Khi đi Hàn Quốc thì mang ô.)", o: ["때", "동안", "전에"], a: 0, why: "Khi đi dùng 갈 때; 동안 là 'trong khi', 전에 là 'trước khi'." },
+{ q: "Điền đúng: '어렸___ 서울에 살았어요.' (Khi còn nhỏ tôi sống ở Seoul.)", o: ["을 때", "ㄹ 때", "때"], a: 0, why: "어렸- là thân quá khứ (kết thúc bằng phụ âm ㅆ) nên dùng -을 때: 어렸을 때 = khi còn nhỏ." },
+{ q: "Chọn câu đúng: 'Khi ăn cơm thì đừng nói chuyện.'", o: ["밥을 먹을 때 이야기하지 마세요.", "밥을 먹기 전에 이야기하지 마세요.", "밥을 먹는 동안 이야기하지 마세요."], a: 0, why: "Khi ăn dùng 먹을 때." },
+{ q: "'학생일 때' có nghĩa là gì?", o: ["Khi còn là học sinh", "Trước khi là học sinh", "Sau khi là học sinh"], a: 0, why: "Danh từ + 일 때 = khi là...; 학생일 때 = khi còn là học sinh." },
+{ q: "Điền đúng: '비가 올 ___ 우산을 가져가세요.' (Khi trời mưa thì mang ô.)", o: ["때", "동안", "전에"], a: 0, why: "올 때 = khi trời mưa (sắp mưa)." },
+{ q: "Chọn câu SAI:", o: ["한국에 갈 때 우산을 가져가세요.", "어렸을 때 서울에 살았어요.", "밥을 먹을 전에 이야기하세요."], a: 2, why: "'Trước khi ăn' là 먹기 전에; '먹을 전에' không phải dạng đúng." }
+] },
+{ name: "-거나 — hoặc (nối động từ/tính từ)", level: "TOPIK I", explain: "Ví dụ trước: '커피를 마시거나 차를 마셔요.' (Tôi uống cà phê hoặc trà.) '주말에 영화를 보거나 책을 읽어요.' (Cuối tuần tôi xem phim hoặc đọc sách.) Quy tắc: động từ/tính từ + -거나 nghĩa là 'hoặc', nối hai hành động hoặc trạng thái để lựa chọn. Danh từ dùng -(이)나, không dùng -거나.",
+  examples: [{"t": "'커피를 마시거나 차를 마셔요.' (Tôi uống cà phê hoặc trà.)", "s": "커피를 마시거나 차를 마셔요."}, {"t": "'주말에 영화를 보거나 책을 읽어요.' (Cuối tuần tôi xem phim hoặc đọc sách.)", "s": "주말에 영화를 보거나 책을 읽어요."}],
+  rule: "động từ/tính từ + -거나 nghĩa là 'hoặc', nối hai hành động hoặc trạng thái để lựa chọn. Danh từ dùng -(이)나, không dùng -거나.", quiz: [
+{ q: "Điền đúng: '커피를 마시___ 차를 마셔요.' (Tôi uống cà phê hoặc trà.)", o: ["거나", "고", "지만"], a: 0, why: "Hoặc (lựa chọn) dùng -거나; 고 là 'và', 지만 là 'nhưng'." },
+{ q: "Chọn câu đúng: 'Cuối tuần tôi xem phim hoặc đọc sách.'", o: ["주말에 영화를 보거나 책을 읽어요.", "주말에 영화를 보고 책을 읽어요.", "주말에 영화를 보지만 책을 읽어요."], a: 0, why: "Hoặc dùng -거나; 보고 là 'và', 보지만 là 'nhưng'." },
+{ q: "Điền đúng: '버스를 타___ 걸어가요.' (Đi xe buýt hoặc đi bộ.)", o: ["거나", "고", "서"], a: 0, why: "Lựa chọn dùng -거나." },
+{ q: "-거나 dùng với từ loại nào?", o: ["Động từ và tính từ", "Chỉ danh từ", "Chỉ tiểu từ"], a: 0, why: "-거나 nối động từ/tính từ; danh từ dùng -(이)나." },
+{ q: "Điền đúng: '집에서 쉬___ 운동해요.' (Ở nhà nghỉ hoặc tập thể dục.)", o: ["거나", "고", "지만"], a: 0, why: "Hoặc dùng -거나." },
+{ q: "Chọn câu SAI:", o: ["커피를 마시거나 차를 마셔요.", "영화를 보거나 책을 읽어요.", "사과거나 바나나를 샀어요."], a: 2, why: "Danh từ dùng -(이)나 (사과나 바나나), không dùng -거나." }
+] },
+{ name: "-아/어 가지고 — mang theo / vì (khẩu ngữ)", level: "TOPIK I", explain: "Ví dụ trước: '우산을 가지고 가요.' (Tôi mang theo ô đi.) '친구가 선물을 가지고 왔어요.' (Bạn tôi mang quà đến.) Quy tắc: động từ + -아/어 가지고 nghĩa chính là 'mang theo, cầm theo' (gắn với 가다/오다). Trong nói thân mật, -아/어 가지고 còn chỉ lý do nhẹ, tương tự -아/어서: '비가 와 가지고 늦었어요.' (Vì trời mưa nên tôi đến muộn.)",
+  examples: [{"t": "'우산을 가지고 가요.' (Tôi mang theo ô đi.)", "s": "우산을 가지고 가요."}, {"t": "'친구가 선물을 가지고 왔어요.' (Bạn tôi mang quà đến.)", "s": "친구가 선물을 가지고 왔어요."}],
+  rule: "động từ + -아/어 가지고 nghĩa chính là 'mang theo, cầm theo' (gắn với 가다/오다). Trong nói thân mật, -아/어 가지고 còn chỉ lý do nhẹ, tương tự -아/어서: '비가 와 가지고 늦었어요.' (Vì trời mưa nên tôi đến muộn.)", quiz: [
+{ q: "Điền đúng: '우산을 가지고 ___.' (Tôi mang theo ô đi.)", o: ["가요", "있어요", "보세요"], a: 0, why: "가지고 가다 = mang theo đi; 가지고 있다 là 'đang có', không hợp nghĩa này." },
+{ q: "Chọn câu đúng: 'Bạn tôi mang quà đến.'", o: ["친구가 선물을 가지고 왔어요.", "친구가 선물을 가지고 있어요.", "친구가 선물을 가지고 보세요."], a: 0, why: "Mang đến dùng 가지고 왔어요." },
+{ q: "'책을 가지고 가세요' có nghĩa là gì?", o: ["Hãy mang sách theo đi.", "Hãy đọc sách đi.", "Hãy mua sách đi."], a: 0, why: "가지고 가다 = mang theo đi." },
+{ q: "Điền đúng: '비가 와 ___ 늦었어요.' (Vì trời mưa nên tôi đến muộn — nói thân mật.)", o: ["가지고", "서", "도"], a: 0, why: "Trong nói thân mật, 와 가지고 chỉ lý do 'vì trời mưa'." },
+{ q: "-아/어 가지고 có nghĩa chính nào?", o: ["Mang theo, cầm theo", "Đang làm gì", "Trước khi làm gì"], a: 0, why: "Nghĩa chính là mang theo; 'đang làm' là -고 있다, 'trước khi' là -기 전에." },
+{ q: "Chọn câu SAI:", o: ["우산을 가지고 가요.", "친구가 선물을 가지고 왔어요.", "우산을 가지고 먹어요."], a: 2, why: "가지고 đi với 가다/오다 (mang theo); '가지고 먹어요' không hợp nghĩa." }
+] },
+{ name: "-기 전에 — trước khi", level: "TOPIK I", explain: "Ví dụ trước: '자기 전에 이를 닦아요.' (Trước khi ngủ tôi đánh răng.) '밥을 먹기 전에 손을 씻어요.' (Trước khi ăn cơm tôi rửa tay.) Quy tắc: động từ + -기 전에 nghĩa là 'trước khi làm gì'. Ngược lại là -기 후에 hoặc -(으)ㄴ 후에 ('sau khi'). Danh từ dùng + 전에.",
+  examples: [{"t": "'자기 전에 이를 닦아요.' (Trước khi ngủ tôi đánh răng.)", "s": "자기 전에 이를 닦아요."}, {"t": "'밥을 먹기 전에 손을 씻어요.' (Trước khi ăn cơm tôi rửa tay.)", "s": "밥을 먹기 전에 손을 씻어요."}],
+  rule: "động từ + -기 전에 nghĩa là 'trước khi làm gì'. Ngược lại là -기 후에 hoặc -(으)ㄴ 후에 ('sau khi'). Danh từ dùng + 전에.", quiz: [
+{ q: "Điền đúng: '자기 ___ 이를 닦아요.' (Trước khi ngủ tôi đánh răng.)", o: ["전에", "후에", "동안"], a: 0, why: "Trước khi ngủ dùng 자기 전에; 후에 là 'sau khi', 동안 là 'trong khi'." },
+{ q: "Chọn câu đúng: 'Trước khi ăn cơm tôi rửa tay.'", o: ["밥을 먹기 전에 손을 씻어요.", "밥을 먹은 후에 손을 씻어요.", "밥을 먹는 동안 손을 씻어요."], a: 0, why: "Trước khi ăn dùng 먹기 전에." },
+{ q: "Điền đúng: '시험 ___ 열심히 공부해요.' (Trước kỳ thi tôi học chăm.)", o: ["전에", "후에", "때"], a: 0, why: "시험 전에 = trước kỳ thi (danh từ + 전에)." },
+{ q: "'가기 전에' có nghĩa là gì?", o: ["Trước khi đi", "Sau khi đi", "Trong khi đi"], a: 0, why: "가다 + -기 전에 = 가기 전에, trước khi đi." },
+{ q: "Điền đúng: '출발하기 ___ 전화하세요.' (Trước khi khởi hành hãy gọi điện.)", o: ["전에", "후에", "동안"], a: 0, why: "출발하기 전에 = trước khi khởi hành." },
+{ q: "Chọn câu SAI:", o: ["자기 전에 이를 닦아요.", "밥을 먹기 전에 손을 씻어요.", "밥을 먹을 전에 손을 씻어요."], a: 2, why: "'Trước khi ăn' là 먹기 전에; '먹을 전에' không phải dạng đúng." }
+] },
+{ name: "-아/어야 하다 — phải làm gì", level: "TOPIK II", explain: "Ví dụ trước: '매일 공부해야 해요.' (Tôi phải học mỗi ngày.) '내일까지 보고서를 내야 해요.' (Tôi phải nộp báo cáo trước ngày mai.) Quy tắc: động từ + -아/어야 하다 diễn tả nghĩa vụ 'phải làm gì'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아야 하다, còn lại dùng -어야 하다; 하다 thành 해야 하다. Trong nói thân mật hay dùng -아야 돼요. Phủ định 'không cần làm' là -지 않아도 되다.",
+  examples: [{"t": "'매일 공부해야 해요.' (Tôi phải học mỗi ngày.)", "s": "매일 공부해야 해요."}, {"t": "'내일까지 보고서를 내야 해요.' (Tôi phải nộp báo cáo trước ngày mai.)", "s": "내일까지 보고서를 내야 해요."}],
+  rule: "động từ + -아/어야 하다 diễn tả nghĩa vụ 'phải làm gì'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아야 하다, còn lại dùng -어야 하다; 하다 thành 해야 하다. Trong nói thân mật hay dùng -아야 돼요. Phủ định 'không cần làm' là -지 않아도 되다.", quiz: [
+{ q: "Điền đúng: '매일 공부___ 해요.' (Tôi phải học mỗi ngày.)", o: ["해야", "하고", "할"], a: 0, why: "공부하다 → 공부해야 하다 = phải học; 하고 là 'và', 할 là dạng tương lai." },
+{ q: "Chọn câu đúng: 'Tôi phải nộp báo cáo trước ngày mai.'", o: ["내일까지 보고서를 내야 해요.", "내일까지 보고서를 내고 있어요.", "내일까지 보고서를 낼까요?"], a: 0, why: "Phải nộp dùng 내야 해요." },
+{ q: "Điền đúng: '내일 일찍 일어나___ 해요.' (Ngày mai tôi phải dậy sớm.)", o: ["야", "고", "면"], a: 0, why: "일어나다 + -아야 하다 = 일어나야 해요." },
+{ q: "'먹어야 해요' có nghĩa là gì?", o: ["Phải ăn.", "Đang ăn.", "Ăn nhé?"], a: 0, why: "먹다 + -어야 하다 = 먹어야 해요, phải ăn." },
+{ q: "Điền đúng: '약을 꼭 먹___ 돼요.' (Nhất định phải uống thuốc — nói thân mật.)", o: ["어야", "고", "면"], a: 0, why: "Nói thân mật dùng -어야 돼요: 먹어야 돼요." },
+{ q: "Chọn câu SAI:", o: ["매일 공부해야 해요.", "내일까지 보고서를 내야 해요.", "매일 공부하여 해요."], a: 2, why: "공부하다 → 공부해야 해요; '공부하여 해요' không phải dạng của -아/어야 하다." }
+] },
+{ name: "-(으)ㄴ/는 것 같다 — có vẻ như", level: "TOPIK II", explain: "Ví dụ trước: '비가 오는 것 같아요.' (Có vẻ như trời đang mưa.) '이 음식이 맛있는 것 같아요.' (Món này có vẻ ngon.) Quy tắc: diễn tả phỏng đoán nhẹ 'có vẻ như, hình như'. Động từ hiện tại + -는 것 같다, tính từ + -(으)ㄴ 것 같다, danh từ + 인 것 같다. Nói về tương lai dùng -(으)ㄹ 것 같다.",
+  examples: [{"t": "'비가 오는 것 같아요.' (Có vẻ như trời đang mưa.)", "s": "비가 오는 것 같아요."}, {"t": "'이 음식이 맛있는 것 같아요.' (Món này có vẻ ngon.)", "s": "이 음식이 맛있는 것 같아요."}],
+  rule: "diễn tả phỏng đoán nhẹ 'có vẻ như, hình như'. Động từ hiện tại + -는 것 같다, tính từ + -(으)ㄴ 것 같다, danh từ + 인 것 같다. Nói về tương lai dùng -(으)ㄹ 것 같다.", quiz: [
+{ q: "Điền đúng: '비가 오는 것 ___.' (Có vẻ như trời đang mưa.)", o: ["같아요", "있어요", "해요"], a: 0, why: "Có vẻ như dùng -는 것 같아요." },
+{ q: "Chọn câu đúng: 'Món này có vẻ ngon.'", o: ["이 음식이 맛있는 것 같아요.", "이 음식이 맛있어요.", "이 음식이 맛있을까요?"], a: 0, why: "Có vẻ ngon dùng 맛있는 것 같아요; 맛있어요 là khẳng định chắc chắn." },
+{ q: "Điền đúng: '그 사람이 학생인 것 ___.' (Có vẻ người đó là học sinh.)", o: ["같아요", "있어요", "해요"], a: 0, why: "Danh từ + 인 것 같다: 학생인 것 같아요." },
+{ q: "'피곤한 것 같아요' có nghĩa là gì?", o: ["Có vẻ như tôi mệt.", "Tôi mệt.", "Tôi sẽ mệt."], a: 0, why: "피곤하다 + -ㄴ 것 같다 = 피곤한 것 같아요, có vẻ mệt." },
+{ q: "Điền đúng: '지금 사람들이 많이 오는 것 ___.' (Có vẻ bây giờ nhiều người đang đến.)", o: ["같아요", "있어요", "봤어요"], a: 0, why: "오는 것 같아요 = có vẻ đang đến." },
+{ q: "Chọn câu SAI:", o: ["비가 오는 것 같아요.", "이 음식이 맛있는 것 같아요.", "비가 오은 것 같아요."], a: 2, why: "Động từ hiện tại dùng -는 것 같다 (오는 것 같다); '오은 것 같다' không phải dạng đúng." }
+] },
+{ name: "-고 나다 — làm xong rồi", level: "TOPIK II", explain: "Ví dụ trước: '밥을 먹고 나서 공부했어요.' (Sau khi ăn cơm xong tôi đã học.) '숙제를 하고 나면 놀 수 있어요.' (Làm bài tập xong rồi thì được chơi.) Quy tắc: động từ + -고 나다/-고 나서 diễn tả 'làm xong việc trước rồi (mới làm việc sau)'. -고 나서 thường dùng hơn trong câu kể; -고 나면 dùng khi việc sau là điều kiện.",
+  examples: [{"t": "'밥을 먹고 나서 공부했어요.' (Sau khi ăn cơm xong tôi đã học.)", "s": "밥을 먹고 나서 공부했어요."}, {"t": "'숙제를 하고 나면 놀 수 있어요.' (Làm bài tập xong rồi thì được chơi.)", "s": "숙제를 하고 나면 놀 수 있어요."}],
+  rule: "động từ + -고 나다/-고 나서 diễn tả 'làm xong việc trước rồi (mới làm việc sau)'. -고 나서 thường dùng hơn trong câu kể; -고 나면 dùng khi việc sau là điều kiện.", quiz: [
+{ q: "Điền đúng: '밥을 먹고 ___ 공부했어요.' (Sau khi ăn cơm xong tôi đã học.)", o: ["나서", "나면", "서"], a: 0, why: "Sau khi ăn xong (kể chuyện đã xảy ra) dùng -고 나서: 먹고 나서." },
+{ q: "Chọn câu đúng: 'Làm bài tập xong rồi thì được chơi.'", o: ["숙제를 하고 나면 놀 수 있어요.", "숙제를 하고 나서 놀았어요.", "숙제를 하고 나면 놀았어요."], a: 0, why: "Việc sau là điều kiện 'thì được chơi' dùng -고 나면 + 놀 수 있어요; 놀았어요 là quá khứ, không hợp với 'được chơi'." },
+{ q: "Điền đúng: '집에 가고 ___ 전화할게요.' (Về nhà rồi tôi sẽ gọi điện.)", o: ["나서", "나면", "도"], a: 0, why: "Về nhà xong rồi gọi: 가고 나서." },
+{ q: "'씻고 나서' có nghĩa là gì?", o: ["Sau khi rửa xong", "Trước khi rửa", "Trong khi rửa"], a: 0, why: "씻다 + -고 나서 = 씻고 나서, sau khi rửa xong." },
+{ q: "Điền đúng: '일을 끝내고 ___ 집에 가요.' (Làm việc xong rồi về nhà.)", o: ["나서", "나면", "서"], a: 0, why: "끝내고 나서 = sau khi làm xong." },
+{ q: "Chọn câu SAI:", o: ["밥을 먹고 나서 공부했어요.", "숙제를 하고 나면 놀 수 있어요.", "밥을 먹고 나다서 공부했어요."], a: 2, why: "Dạng đúng là 먹고 나서; '나다서' không phải dạng của -고 나다." }
+] },
+{ name: "-(으)ㄴ/는 데 — chỗ (địa điểm/việc)", level: "TOPIK II", explain: "Ví dụ trước: '여기 앉을 데가 없어요.' (Ở đây không có chỗ ngồi.) '한국어를 배우는 데 시간이 걸려요.' (Học tiếng Hàn tốn thời gian.) Quy tắc: -(으)ㄴ/는 데 là danh từ phụ thuộc, nghĩa là 'chỗ, nơi' hoặc 'việc'. Động từ tương lai + -(으)ㄹ 데, hiện tại + -는 데, quá khứ + -(으)ㄴ 데. Chú ý phân biệt với -(으)ㄴ/는데 (đưa nền, tương phản nhẹ) — 데 không có 은/는 sau nó.",
+  examples: [{"t": "'여기 앉을 데가 없어요.' (Ở đây không có chỗ ngồi.)", "s": "여기 앉을 데가 없어요."}, {"t": "'한국어를 배우는 데 시간이 걸려요.' (Học tiếng Hàn tốn thời gian.)", "s": "한국어를 배우는 데 시간이 걸려요."}],
+  rule: "-(으)ㄴ/는 데 là danh từ phụ thuộc, nghĩa là 'chỗ, nơi' hoặc 'việc'. Động từ tương lai + -(으)ㄹ 데, hiện tại + -는 데, quá khứ + -(으)ㄴ 데. Chú ý phân biệt với -(으)ㄴ/는데 (đưa nền, tương phản nhẹ) — 데 không có 은/는 sau nó.", quiz: [
+{ q: "Điền đúng: '여기 앉을 ___ 없어요.' (Ở đây không có chỗ ngồi.)", o: ["데가", "는데가", "때가"], a: 0, why: "Chỗ ngồi dùng 앉을 데가; 는데 là mẫu đưa nền, 때 là 'khi'." },
+{ q: "Chọn câu đúng: 'Học tiếng Hàn tốn thời gian.'", o: ["한국어를 배우는 데 시간이 걸려요.", "한국어를 배우는 데에 시간이 걸려요.", "한국어를 배우는데 시간이 걸려요."], a: 0, why: "Việc học dùng 배우는 데; 배우는데 là mẫu đưa nền (nghĩa khác)." },
+{ q: "Điền đúng: '이 근처에 먹을 ___ 있어요?' (Gần đây có chỗ ăn không?)", o: ["데가", "는데가", "때가"], a: 0, why: "Chỗ ăn dùng 먹을 데가." },
+{ q: "'쉴 데' có nghĩa là gì?", o: ["Chỗ nghỉ", "Lúc nghỉ", "Vì nghỉ"], a: 0, why: "쉬다 + -(으)ㄹ 데 = 쉴 데, chỗ nghỉ." },
+{ q: "Điền đúng: '사진을 찍는 ___ 좋아요.' (Chỗ chụp ảnh thì tốt — việc chụp ảnh thì tốt.)", o: ["데가", "는데가", "때가"], a: 0, why: "Việc chụp ảnh dùng 찍는 데가." },
+{ q: "Chọn câu SAI:", o: ["여기 앉을 데가 없어요.", "한국어를 배우는 데 시간이 걸려요.", "여기 앉은 데가 없어요."], a: 2, why: "Chỗ ngồi (tương lai/chưa xảy ra) dùng 앉을 데; 앉은 데 là dạng quá khứ, không hợp nghĩa này." }
+] },
+{ name: "-기로 하다 — quyết định làm gì", level: "TOPIK II", explain: "Ví dụ trước: '내일 도서관에 가기로 했어요.' (Tôi đã quyết định ngày mai đi thư viện.) '우리는 매주 토요일에 만나기로 했어요.' (Chúng tôi đã quyết định gặp nhau mỗi thứ Bảy.) Quy tắc: động từ + -기로 하다 diễn tả quyết định 'đã quyết là sẽ làm gì'. Khác với -기로 되어 있다 (đã định sẵn theo kế hoạch, lịch trình).",
+  examples: [{"t": "'내일 도서관에 가기로 했어요.' (Tôi đã quyết định ngày mai đi thư viện.)", "s": "내일 도서관에 가기로 했어요."}, {"t": "'우리는 매주 토요일에 만나기로 했어요.' (Chúng tôi đã quyết định gặp nhau mỗi thứ Bảy.)", "s": "우리는 매주 토요일에 만나기로 했어요."}],
+  rule: "động từ + -기로 하다 diễn tả quyết định 'đã quyết là sẽ làm gì'. Khác với -기로 되어 있다 (đã định sẵn theo kế hoạch, lịch trình).", quiz: [
+{ q: "Điền đúng: '내일 도서관에 가___ 했어요.' (Tôi đã quyết định ngày mai đi thư viện.)", o: ["기로", "고", "면"], a: 0, why: "Quyết định dùng -기로 하다: 가기로 했어요." },
+{ q: "Chọn câu đúng: 'Chúng tôi đã quyết định gặp nhau mỗi thứ Bảy.'", o: ["우리는 매주 토요일에 만나기로 했어요.", "우리는 매주 토요일에 만나고 있어요.", "우리는 매주 토요일에 만날까요?"], a: 0, why: "Quyết định dùng 만나기로 했어요." },
+{ q: "Điền đúng: '다음 달에 한국에 가___ 했어요.' (Tôi đã quyết định tháng sau đi Hàn Quốc.)", o: ["기로", "고", "서"], a: 0, why: "가기로 했어요 = đã quyết định đi." },
+{ q: "'공부하기로 했어요' có nghĩa là gì?", o: ["Tôi đã quyết định học.", "Tôi đang học.", "Tôi sẽ học à?"], a: 0, why: "공부하다 + -기로 하다 = 공부하기로 했어요, đã quyết định học." },
+{ q: "Điền đúng: '오늘부터 매일 운동하___ 했어요.' (Từ hôm nay tôi quyết định tập thể dục mỗi ngày.)", o: ["기로", "고", "면"], a: 0, why: "운동하기로 했어요 = đã quyết định tập." },
+{ q: "Chọn câu SAI:", o: ["내일 도서관에 가기로 했어요.", "우리는 매주 토요일에 만나기로 했어요.", "내일 도서관에 가고로 했어요."], a: 2, why: "Dạng đúng là 가기로 했어요; '가고로' không phải dạng của -기로 하다." }
+] },
+{ name: "-아/어 주다 — làm giúp ai", level: "TOPIK II", explain: "Ví dụ trước: '동생이 숙제를 도와줬어요.' (Em tôi đã giúp tôi làm bài tập.) '친구가 이 책을 빌려 줬어요.' (Bạn tôi đã cho tôi mượn cuốn sách này.) Quy tắc: động từ + -아/어 주다 nghĩa là 'làm giúp ai đó'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 주다, còn lại dùng -어 주다. Dạng nhờ vả lịch sự là -아/어 주세요.",
+  examples: [{"t": "'동생이 숙제를 도와줬어요.' (Em tôi đã giúp tôi làm bài tập.)", "s": "동생이 숙제를 도와줬어요."}, {"t": "'친구가 이 책을 빌려 줬어요.' (Bạn tôi đã cho tôi mượn cuốn sách này.)", "s": "친구가 이 책을 빌려 줬어요."}],
+  rule: "động từ + -아/어 주다 nghĩa là 'làm giúp ai đó'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 주다, còn lại dùng -어 주다. Dạng nhờ vả lịch sự là -아/어 주세요.", quiz: [
+{ q: "Điền đúng: '동생이 숙제를 도와___.' (Em tôi đã giúp tôi làm bài tập.)", o: ["줬어요", "있어요", "봤어요"], a: 0, why: "돕다 + -아 주다 = 도와주다, quá khứ 도와줬어요." },
+{ q: "Chọn câu đúng: 'Bạn tôi đã cho tôi mượn cuốn sách này.'", o: ["친구가 이 책을 빌려 줬어요.", "친구가 이 책을 빌렸어요.", "친구가 이 책을 빌려 보세요."], a: 0, why: "Cho mượn (làm giúp) dùng 빌려 줬어요." },
+{ q: "Điền đúng: '선생님이 문을 열어 ___.' (Thầy cô đã mở cửa giúp.)", o: ["줬어요", "있어요", "봤어요"], a: 0, why: "열다 + -어 주다 = 열어 주다, quá khứ 열어 줬어요." },
+{ q: "'사 줬어요' có nghĩa là gì?", o: ["Đã mua giúp tôi.", "Đã mua cho mình.", "Đang mua."], a: 0, why: "사다 + -아 주다 = 사 주다, mua giúp ai." },
+{ q: "Điền đúng: '엄마가 맛있는 음식을 만들어 ___.' (Mẹ đã nấu món ngon cho tôi.)", o: ["줬어요", "있어요", "봤어요"], a: 0, why: "만들다 + -어 주다 = 만들어 주다, quá khứ 만들어 줬어요." },
+{ q: "Chọn câu SAI:", o: ["동생이 숙제를 도와줬어요.", "친구가 이 책을 빌려 줬어요.", "동생이 숙제를 도와 주었어요요."], a: 2, why: "Quá khứ đúng là 도와줬어요; '주었어요요' thừa đuôi." }
+] },
+{ name: "-고 말다 — rốt cuộc làm gì (kết cục)", level: "TOPIK II", explain: "Ví dụ trước: '결국 울고 말았어요.' (Rốt cuộc tôi đã khóc mất.) '참으려고 했지만 결국 말하고 말았어요.' (Tôi định nhịn nhưng rốt cuộc đã nói ra mất.) Quy tắc: động từ + -고 말다 nhấn mạnh kết cục 'rốt cuộc đã làm gì (dù không định, hoặc sau nhiều cố gắng)'. Thường đi với 결국 (rốt cuộc), 마침내 (cuối cùng).",
+  examples: [{"t": "'결국 울고 말았어요.' (Rốt cuộc tôi đã khóc mất.)", "s": "결국 울고 말았어요."}, {"t": "'참으려고 했지만 결국 말하고 말았어요.' (Tôi định nhịn nhưng rốt cuộc đã nói ra mất.)", "s": "참으려고 했지만 결국 말하고 말았어요."}],
+  rule: "động từ + -고 말다 nhấn mạnh kết cục 'rốt cuộc đã làm gì (dù không định, hoặc sau nhiều cố gắng)'. Thường đi với 결국 (rốt cuộc), 마침내 (cuối cùng).", quiz: [
+{ q: "Điền đúng: '결국 울고 ___.' (Rốt cuộc tôi đã khóc mất.)", o: ["말았어요", "있어요", "봤어요"], a: 0, why: "Rốt cuộc đã khóc dùng 울고 말았어요." },
+{ q: "Chọn câu đúng: 'Tôi định nhịn nhưng rốt cuộc đã nói ra mất.'", o: ["참으려고 했지만 결국 말하고 말았어요.", "참으려고 했지만 결국 말하고 있어요.", "참으려고 했지만 결국 말할까요?"], a: 0, why: "Rốt cuộc đã nói dùng 말하고 말았어요." },
+{ q: "Điền đúng: '다이어트를 하려고 했지만 결국 케이크를 먹고 ___.' (Tôi định ăn kiêng nhưng rốt cuộc đã ăn bánh mất.)", o: ["말았어요", "있어요", "봤어요"], a: 0, why: "먹고 말았어요 = rốt cuộc đã ăn mất." },
+{ q: "'웃고 말았어요' có nghĩa là gì?", o: ["Rốt cuộc đã cười mất.", "Đang cười.", "Sẽ cười."], a: 0, why: "웃다 + -고 말다 = 웃고 말았어요, rốt cuộc đã cười mất." },
+{ q: "Điền đúng: '마침내 합격하고 ___.' (Cuối cùng đã đỗ mất rồi — đỗ rồi.)", o: ["말았어요", "있어요", "봤어요"], a: 0, why: "합격하고 말았어요 = cuối cùng đã đỗ." },
+{ q: "Chọn câu SAI:", o: ["결국 울고 말았어요.", "참으려고 했지만 결국 말하고 말았어요.", "결국 울고 말어요."], a: 2, why: "Quá khứ của -고 말다 là -고 말았어요; '말어요' không phải dạng đúng ở đây." }
+] },
+{ name: "-(으)ㄹ 것 같다 — có lẽ sẽ", level: "TOPIK II", explain: "Ví dụ trước: '내일 비가 올 것 같아요.' (Có lẽ ngày mai sẽ mưa.) '시험이 어려울 것 같아요.' (Có lẽ kỳ thi sẽ khó.) Quy tắc: động từ/tính từ + -(으)ㄹ 것 같다 diễn tả phỏng đoán về tương lai 'có lẽ sẽ...'. Sau nguyên âm dùng -ㄹ 것 같다, sau phụ âm dùng -을 것 같다. Khác với -(으)ㄴ/는 것 같다 (phỏng đoán về hiện tại).",
+  examples: [{"t": "'내일 비가 올 것 같아요.' (Có lẽ ngày mai sẽ mưa.)", "s": "내일 비가 올 것 같아요."}, {"t": "'시험이 어려울 것 같아요.' (Có lẽ kỳ thi sẽ khó.)", "s": "시험이 어려울 것 같아요."}],
+  rule: "động từ/tính từ + -(으)ㄹ 것 같다 diễn tả phỏng đoán về tương lai 'có lẽ sẽ...'. Sau nguyên âm dùng -ㄹ 것 같다, sau phụ âm dùng -을 것 같다. Khác với -(으)ㄴ/는 것 같다 (phỏng đoán về hiện tại).", quiz: [
+{ q: "Điền đúng: '내일 비가 올 것 ___.' (Có lẽ ngày mai sẽ mưa.)", o: ["같아요", "있어요", "해요"], a: 0, why: "Có lẽ sẽ mưa dùng 올 것 같아요." },
+{ q: "Chọn câu đúng: 'Có lẽ kỳ thi sẽ khó.'", o: ["시험이 어려울 것 같아요.", "시험이 어려워요.", "시험이 어려울까요?"], a: 0, why: "Có lẽ sẽ khó dùng 어려울 것 같아요." },
+{ q: "Điền đúng: '내일 날씨가 좋___ 것 같아요.' (Có lẽ ngày mai thời tiết sẽ tốt.)", o: ["을", "ㄹ", "는"], a: 0, why: "좋다 kết thúc bằng phụ âm ㅎ nên dùng -을 것 같다: 좋을 것 같아요." },
+{ q: "'내일 늦을 것 같아요' có nghĩa là gì?", o: ["Có lẽ ngày mai tôi sẽ muộn.", "Ngày mai tôi muộn rồi.", "Ngày mai tôi có muộn không?"], a: 0, why: "늦다 + -을 것 같다 = 늦을 것 같아요, có lẽ sẽ muộn." },
+{ q: "Điền đúng: '그 영화가 재미있___ 것 같아요.' (Có lẽ bộ phim đó sẽ hay.)", o: ["을", "ㄹ", "는"], a: 0, why: "재미있다 kết thúc bằng phụ âm ㅆ nên dùng -을 것 같다." },
+{ q: "Chọn câu SAI:", o: ["내일 비가 올 것 같아요.", "시험이 어려울 것 같아요.", "내일 비가 오는 것 같아요."], a: 2, why: "Câu này nói về tương lai (ngày mai) nên dùng 올 것 같아요; 오는 것 같아요 là phỏng đoán hiện tại, không hợp '내일'." }
+] },
+{ name: "-(으)ㄹ지도 모르다 — có lẽ, không chừng", level: "TOPIK II", explain: "Ví dụ trước: '내일 비가 올지도 몰라요.' (Không chừng ngày mai sẽ mưa.) '그 사람이 올지도 몰라요.' (Có lẽ người đó sẽ đến.) Quy tắc: động từ/tính từ + -(으)ㄹ지도 모르다 nghĩa là 'có lẽ, không chừng, biết đâu'. Sau nguyên âm dùng -ㄹ지도 모르다, sau phụ âm dùng -을지도 모르다. 모르다 vốn là 'không biết', nên mẫu này mang nghĩa 'không biết chừng'.",
+  examples: [{"t": "'내일 비가 올지도 몰라요.' (Không chừng ngày mai sẽ mưa.)", "s": "내일 비가 올지도 몰라요."}, {"t": "'그 사람이 올지도 몰라요.' (Có lẽ người đó sẽ đến.)", "s": "그 사람이 올지도 몰라요."}],
+  rule: "động từ/tính từ + -(으)ㄹ지도 모르다 nghĩa là 'có lẽ, không chừng, biết đâu'. Sau nguyên âm dùng -ㄹ지도 모르다, sau phụ âm dùng -을지도 모르다. 모르다 vốn là 'không biết', nên mẫu này mang nghĩa 'không biết chừng'.", quiz: [
+{ q: "Điền đúng: '내일 비가 올지도 ___.' (Không chừng ngày mai sẽ mưa.)", o: ["몰라요", "같아요", "있어요"], a: 0, why: "Có lẽ/không chừng dùng -(으)ㄹ지도 모르다: 올지도 몰라요." },
+{ q: "Chọn câu dùng mẫu -(으)ㄹ지도 모르다: 'Có lẽ người đó sẽ đến.'", o: ["그 사람이 올지도 몰라요.", "그 사람이 올 것 같아요.", "그 사람이 오고 있어요."], a: 0, why: "Mẫu -(으)ㄹ지도 모르다: 올지도 몰라요. (올 것 같아요 cũng đúng nhưng là mẫu khác.)" },
+{ q: "Điền đúng: '시험이 어려울지도 ___.' (Không chừng kỳ thi sẽ khó.)", o: ["몰라요", "같아요", "있어요"], a: 0, why: "어렵다 + -을지도 모르다 = 어려울지도 몰라요." },
+{ q: "'늦을지도 몰라요' có nghĩa là gì?", o: ["Không chừng sẽ muộn.", "Chắc chắn sẽ muộn.", "Đã muộn rồi."], a: 0, why: "늦다 + -을지도 모르다 = 늦을지도 몰라요, không chừng sẽ muộn." },
+{ q: "Điền đúng: '그 영화를 볼지도 ___.' (Không chừng sẽ xem bộ phim đó.)", o: ["몰라요", "같아요", "있어요"], a: 0, why: "보다 + -ㄹ지도 모르다 = 볼지도 몰라요." },
+{ q: "Chọn câu SAI:", o: ["내일 비가 올지도 몰라요.", "그 사람이 올지도 몰라요.", "내일 비가 오는지도 몰라요."], a: 2, why: "Mẫu này dùng -(으)ㄹ지도 모르다 (올지도); 오는지도 không phải dạng đúng." }
+] },
+{ name: "-아/어 있다 — trạng thái kết quả (đang ở trạng thái đã...)", level: "TOPIK II", explain: "Ví dụ trước: '의자에 앉아 있어요.' (Tôi đang ngồi trên ghế.) '문이 열려 있어요.' (Cửa đang mở.) Quy tắc: động từ chỉ vị trí/trạng thái + -아/어 있다 diễn tả trạng thái còn duy trì sau khi hành động xong. Thường dùng với 앉다 (ngồi), 서다 (đứng), 눕다 (nằm), 열리다 (mở), 닫히다 (đóng). Khác với -고 있다 (hành động đang diễn ra).",
+  examples: [{"t": "'의자에 앉아 있어요.' (Tôi đang ngồi trên ghế.)", "s": "의자에 앉아 있어요."}, {"t": "'문이 열려 있어요.' (Cửa đang mở.)", "s": "문이 열려 있어요."}],
+  rule: "động từ chỉ vị trí/trạng thái + -아/어 있다 diễn tả trạng thái còn duy trì sau khi hành động xong. Thường dùng với 앉다 (ngồi), 서다 (đứng), 눕다 (nằm), 열리다 (mở), 닫히다 (đóng). Khác với -고 있다 (hành động đang diễn ra).", quiz: [
+{ q: "Điền đúng: '의자에 앉아 ___.' (Tôi đang ngồi trên ghế.)", o: ["있어요", "가요", "봤어요"], a: 0, why: "Đang ngồi (trạng thái) dùng 앉아 있어요." },
+{ q: "Chọn câu đúng: 'Cửa đang mở.'", o: ["문이 열려 있어요.", "문이 열리고 있어요.", "문이 열었어요."], a: 0, why: "Cửa đang mở (trạng thái sau khi mở) dùng 열려 있어요." },
+{ q: "Điền đúng: '침대에 누워 ___.' (Tôi đang nằm trên giường.)", o: ["있어요", "가요", "봤어요"], a: 0, why: "눕다 + -어 있다 = 누워 있어요, đang nằm." },
+{ q: "'서 있어요' có nghĩa là gì?", o: ["Đang đứng.", "Đang đi.", "Đang ngồi."], a: 0, why: "서다 + -어 있다 = 서 있어요, đang đứng." },
+{ q: "Điền đúng: '책이 책상 위에 놓여 ___.' (Cuốn sách đang đặt trên bàn.)", o: ["있어요", "가요", "봤어요"], a: 0, why: "놓이다 + -여 있다 = 놓여 있어요, đang đặt (trạng thái)." },
+{ q: "Câu nào KHÔNG phải là -아/어 있다?", o: ["의자에 앉아 있어요.", "문이 열려 있어요.", "밥을 먹고 있어요."], a: 2, why: "밥을 먹고 있어요 là -고 있다 (đang ăn, hành động diễn ra); 앉아 있어요 và 열려 있어요 mới là -아/어 있다 (trạng thái)." }
+] },
+{ name: "-는 중이다 — đang trong quá trình", level: "TOPIK II", explain: "Ví dụ trước: '지금 공부하는 중이에요.' (Bây giờ tôi đang trong lúc học.) '회의하는 중이에요.' (Tôi đang trong lúc họp.) Quy tắc: động từ + -는 중이다 diễn tả 'đang trong quá trình làm gì'. 중 là danh từ 'giữa, trong lúc', nên sau nó dùng 이에요/예요. Nói tắt: -는 중 (đang...).",
+  examples: [{"t": "'지금 공부하는 중이에요.' (Bây giờ tôi đang trong lúc học.)", "s": "지금 공부하는 중이에요."}, {"t": "'회의하는 중이에요.' (Tôi đang trong lúc họp.)", "s": "회의하는 중이에요."}],
+  rule: "động từ + -는 중이다 diễn tả 'đang trong quá trình làm gì'. 중 là danh từ 'giữa, trong lúc', nên sau nó dùng 이에요/예요. Nói tắt: -는 중 (đang...).", quiz: [
+{ q: "Điền đúng: '지금 공부하는 ___.' (Bây giờ tôi đang trong lúc học.)", o: ["중이에요", "있어요", "가요"], a: 0, why: "Đang trong lúc học dùng 공부하는 중이에요." },
+{ q: "Chọn câu dùng mẫu -는 중이다: 'Tôi đang trong lúc họp.'", o: ["회의하는 중이에요.", "회의하고 있어요.", "회의했어요."], a: 0, why: "Mẫu -는 중이다: 회의하는 중이에요. (회의하고 있어요 cũng đúng nhưng là mẫu -고 있다.)" },
+{ q: "Điền đúng: '지금 운전하는 ___.' (Bây giờ tôi đang trong lúc lái xe.)", o: ["중이에요", "있어요", "가요"], a: 0, why: "운전하는 중이에요 = đang trong lúc lái xe." },
+{ q: "'준비하는 중이에요' có nghĩa là gì?", o: ["Tôi đang trong lúc chuẩn bị.", "Tôi đã chuẩn bị xong.", "Tôi sẽ chuẩn bị."], a: 0, why: "준비하는 중이에요 = đang trong lúc chuẩn bị." },
+{ q: "Điền đúng: '지금 밥을 먹는 ___.' (Bây giờ tôi đang trong lúc ăn cơm.)", o: ["중이에요", "있어요", "가요"], a: 0, why: "먹는 중이에요 = đang trong lúc ăn." },
+{ q: "Chọn câu SAI:", o: ["지금 공부하는 중이에요.", "회의하는 중이에요.", "지금 공부하는 중이다요."], a: 2, why: "Đuôi đúng là 중이에요; '중이다요' không phải dạng đúng." }
+] },
+{ name: "-(으)ㄹ 뿐(만) 아니다 — không chỉ... mà", level: "TOPIK II", explain: "Ví dụ trước: '그는 의사일 뿐만 아니라 작가예요.' (Anh ấy không chỉ là bác sĩ mà còn là nhà văn.) '이 책은 재미있을 뿐만 아니라 유익해요.' (Cuốn sách này không chỉ hay mà còn bổ ích.) Quy tắc: danh từ/động từ/tính từ + -(으)ㄹ 뿐만 아니라... nghĩa là 'không chỉ... mà còn...'. 뿐 là 'chỉ', 만 là 'chỉ', 아니라 phủ định 'không chỉ'.",
+  examples: [{"t": "'그는 의사일 뿐만 아니라 작가예요.' (Anh ấy không chỉ là bác sĩ mà còn là nhà văn.)", "s": "그는 의사일 뿐만 아니라 작가예요."}, {"t": "'이 책은 재미있을 뿐만 아니라 유익해요.' (Cuốn sách này không chỉ hay mà còn bổ ích.)", "s": "이 책은 재미있을 뿐만 아니라 유익해요."}],
+  rule: "danh từ/động từ/tính từ + -(으)ㄹ 뿐만 아니라... nghĩa là 'không chỉ... mà còn...'. 뿐 là 'chỉ', 만 là 'chỉ', 아니라 phủ định 'không chỉ'.", quiz: [
+{ q: "Điền đúng: '그는 의사일 뿐만 ___ 작가예요.' (Anh ấy không chỉ là bác sĩ mà còn là nhà văn.)", o: ["아니라", "아니고", "아니에요"], a: 0, why: "Mẫu cố định: -(으)ㄹ 뿐만 아니라." },
+{ q: "Chọn câu đúng: 'Cuốn sách này không chỉ hay mà còn bổ ích.'", o: ["이 책은 재미있을 뿐만 아니라 유익해요.", "이 책은 재미있고 유익해요.", "이 책은 재미있지만 유익해요."], a: 0, why: "Không chỉ... mà còn dùng 재미있을 뿐만 아니라 유익해요." },
+{ q: "Điền đúng: '한국어는 어려울 뿐만 ___ 재미있어요.' (Tiếng Hàn không chỉ khó mà còn thú vị.)", o: ["아니라", "아니고", "아니에요"], a: 0, why: "어려울 뿐만 아니라 재미있어요." },
+{ q: "'뿐만 아니라' có nghĩa là gì?", o: ["Không chỉ... mà còn...", "Chỉ... thôi", "Nhưng..."], a: 0, why: "뿐만 아니라 = không chỉ... mà còn..." },
+{ q: "Điền đúng: '그녀는 노래를 잘할 뿐만 ___ 춤도 잘 춰요.' (Cô ấy không chỉ hát hay mà nhảy cũng giỏi.)", o: ["아니라", "아니고", "아니에요"], a: 0, why: "잘할 뿐만 아니라 춤도 잘 춰요." },
+{ q: "Chọn câu SAI:", o: ["그는 의사일 뿐만 아니라 작가예요.", "이 책은 재미있을 뿐만 아니라 유익해요.", "그는 의사뿐만 아니라 작가예요."], a: 2, why: "Danh từ cần 일 뿐만 아니라 (의사일 뿐만 아니라); thiếu 일 là sai." }
+] },
+{ name: "-다시피 — như thể, gần như", level: "TOPIK II", explain: "Ví dụ trước: '아시다시피 내일은 휴일이에요.' (Như các bạn đã biết, ngày mai là ngày nghỉ.) '그는 죽다시피 아팠어요.' (Anh ấy đau gần chết.) Quy tắc: động từ + -다시피 nghĩa là 'như thể, gần như, như... đã biết'. Dạng hay gặp nhất: 아시다시피 (như đã biết). Dùng để nhấn mạnh mức độ gần như đạt tới cực điểm.",
+  examples: [{"t": "'아시다시피 내일은 휴일이에요.' (Như các bạn đã biết, ngày mai là ngày nghỉ.)", "s": "아시다시피 내일은 휴일이에요."}, {"t": "'그는 죽다시피 아팠어요.' (Anh ấy đau gần chết.)", "s": "그는 죽다시피 아팠어요."}],
+  rule: "động từ + -다시피 nghĩa là 'như thể, gần như, như... đã biết'. Dạng hay gặp nhất: 아시다시피 (như đã biết). Dùng để nhấn mạnh mức độ gần như đạt tới cực điểm.", quiz: [
+{ q: "Điền đúng: '아시다시피 내일은 ___이에요.' (Như các bạn đã biết, ngày mai là ngày nghỉ.)", o: ["휴일", "휴일에", "휴일을"], a: 0, why: "내일은 휴일이에요 (danh từ + 이에요); 아시다시피 = như đã biết." },
+{ q: "Chọn câu đúng: 'Anh ấy đau gần chết.'", o: ["그는 죽다시피 아팠어요.", "그는 죽고 아팠어요.", "그는 죽을 아팠어요."], a: 0, why: "Gần chết dùng 죽다시피 아팠어요." },
+{ q: "'아시다시피' có nghĩa là gì?", o: ["Như đã biết", "Như sẽ biết", "Không biết"], a: 0, why: "알다 + -다시피 = 아시다시피, như đã biết." },
+{ q: "Điền đúng: '보시다시피 이 방은 아주 ___.' (Như các bạn thấy, căn phòng này rất nhỏ.)", o: ["작아요", "작은", "작을"], a: 0, why: "보시다시피 = như đã thấy; 이 방은 아주 작아요." },
+{ q: "'날다시피' dùng để nói gì?", o: ["Gần như bay (rất nhanh)", "Đang bay", "Sẽ bay"], a: 0, why: "날다 + -다시피 = 날다시피, gần như bay (nhanh như bay)." },
+{ q: "Chọn câu SAI:", o: ["아시다시피 내일은 휴일이에요.", "그는 죽다시피 아팠어요.", "아시다시피 내일은 휴일이다시피예요."], a: 2, why: "아시다시피 chỉ dùng một lần trong câu; '이다시피예요' là thừa." }
+] },
+{ name: "-(이)나 — hoặc là (lựa chọn, danh từ)", level: "TOPIK II", explain: "Ví dụ trước: '사과나 바나나를 주세요.' (Cho tôi táo hoặc chuối.) '커피나 차를 마셔요.' (Tôi uống cà phê hoặc trà.) Quy tắc: danh từ + -(이)나 nghĩa là 'hoặc là', dùng để lựa chọn giữa các danh từ. Sau nguyên âm dùng -나, sau phụ âm dùng -이나. Động từ/tính từ dùng -거나, không dùng -(이)나.",
+  examples: [{"t": "'사과나 바나나를 주세요.' (Cho tôi táo hoặc chuối.)", "s": "사과나 바나나를 주세요."}, {"t": "'커피나 차를 마셔요.' (Tôi uống cà phê hoặc trà.)", "s": "커피나 차를 마셔요."}],
+  rule: "danh từ + -(이)나 nghĩa là 'hoặc là', dùng để lựa chọn giữa các danh từ. Sau nguyên âm dùng -나, sau phụ âm dùng -이나. Động từ/tính từ dùng -거나, không dùng -(이)나.", quiz: [
+{ q: "Điền đúng: '사과___ 바나나를 주세요.' (Cho tôi táo hoặc chuối.)", o: ["나", "이나", "거나"], a: 0, why: "사과 kết thúc bằng nguyên âm ㅘ nên dùng -나." },
+{ q: "Điền đúng: '책___ 공책을 주세요.' (Cho tôi sách hoặc vở.)", o: ["이나", "나", "거나"], a: 0, why: "책 kết thúc bằng phụ âm ㄱ nên dùng -이나." },
+{ q: "Chọn câu đúng: 'Tôi uống cà phê hoặc trà.'", o: ["커피나 차를 마셔요.", "커피거나 차를 마셔요.", "커피하고 차를 마셔요."], a: 0, why: "Hoặc (danh từ) dùng 커피나 차; -거나 dùng cho động từ, -하고 là 'và'." },
+{ q: "Điền đúng: '주말___ 평일에 만나요.' (Gặp nhau vào cuối tuần hoặc ngày thường.)", o: ["이나", "나", "거나"], a: 0, why: "주말 kết thúc bằng phụ âm ㄹ nên dùng -이나." },
+{ q: "-(이)나 dùng với từ loại nào?", o: ["Danh từ", "Động từ", "Tính từ"], a: 0, why: "-(이)나 nối danh từ; động từ/tính từ dùng -거나." },
+{ q: "Chọn câu SAI:", o: ["사과나 바나나를 주세요.", "책이나 공책을 주세요.", "먹거나 마시나 해요."], a: 2, why: "Động từ dùng -거나 (먹거나 마시거나); '마시나' không phải dạng đúng ở đây." }
+] },
+{ name: "-(이)나마 — ít ra cũng", level: "TOPIK II", explain: "Ví dụ trước: '이것이나마 받으세요.' (Ít ra xin hãy nhận cái này.) '조금이나마 도움이 되었으면 좋겠어요.' (Mong rằng dù chỉ một chút cũng giúp được.) Quy tắc: danh từ + -(이)나마 nghĩa là 'ít ra cũng, dù chỉ...'. Sau nguyên âm dùng -나마, sau phụ âm dùng -이나마. Mang sắc thái khiêm tốn, an ủi: tuy ít nhưng cũng có.",
+  examples: [{"t": "'이것이나마 받으세요.' (Ít ra xin hãy nhận cái này.)", "s": "이것이나마 받으세요."}, {"t": "'조금이나마 도움이 되었으면 좋겠어요.' (Mong rằng dù chỉ một chút cũng giúp được.)", "s": "조금이나마 도움이 되었으면 좋겠어요."}],
+  rule: "danh từ + -(이)나마 nghĩa là 'ít ra cũng, dù chỉ...'. Sau nguyên âm dùng -나마, sau phụ âm dùng -이나마. Mang sắc thái khiêm tốn, an ủi: tuy ít nhưng cũng có.", quiz: [
+{ q: "Điền đúng: '이것___ 받으세요.' (Ít ra xin hãy nhận cái này.)", o: ["이나마", "나마", "라도"], a: 0, why: "이것 kết thúc bằng phụ âm ㅅ nên dùng -이나마." },
+{ q: "Chọn câu dùng mẫu -(이)나마: 'Mong rằng dù chỉ một chút cũng giúp được.'", o: ["조금이나마 도움이 되었으면 좋겠어요.", "조금이라도 도움이 되었으면 좋겠어요.", "조금이나 도움이 되었으면 좋겠어요."], a: 0, why: "Mẫu -(이)나마: 조금이나마. (조금이라도 cũng đúng nhưng là mẫu khác.)" },
+{ q: "Điền đúng: '이 돈___ 받으세요.' (Ít ra xin hãy nhận số tiền này.)", o: ["이나마", "나마", "라도"], a: 0, why: "돈 kết thúc bằng phụ âm ㄴ nên dùng -이나마." },
+{ q: "'(이)나마' mang sắc thái gì?", o: ["Khiêm tốn, an ủi: tuy ít nhưng cũng có", "Ra lệnh, dứt khoát", "Phủ định hoàn toàn"], a: 0, why: "-(이)나마 nghĩa 'ít ra cũng', dùng khi khiêm tốn hoặc an ủi." },
+{ q: "Điền đúng: '이것___ 드릴게요.' (Ít ra tôi sẽ đưa cái này cho bạn.)", o: ["이나마", "나마", "라도"], a: 0, why: "이것 + -이나마 = 이것이나마." },
+{ q: "Chọn câu SAI:", o: ["이것이나마 받으세요.", "조금이나마 도움이 되었으면 좋겠어요.", "이것나마 받으세요."], a: 2, why: "이것 kết thúc bằng phụ âm ㅅ nên phải dùng -이나마, không phải -나마." }
+] },
+{ name: "-(이)라도 — dù chỉ là", level: "TOPIK II", explain: "Ví dụ trước: '물이라도 마셔요.' (Dù chỉ là nước thì cũng uống đi.) '시간이 없으면 전화라도 해 주세요.' (Nếu không có thời gian thì dù chỉ gọi điện cũng được.) Quy tắc: danh từ + -(이)라도 nghĩa là 'dù chỉ là..., ít nhất cũng...'. Sau nguyên âm dùng -라도, sau phụ âm dùng -이라도. Mang sắc thái nhượng bộ: thứ tối thiểu cũng chấp nhận.",
+  examples: [{"t": "'물이라도 마셔요.' (Dù chỉ là nước thì cũng uống đi.)", "s": "물이라도 마셔요."}, {"t": "'시간이 없으면 전화라도 해 주세요.' (Nếu không có thời gian thì dù chỉ gọi điện cũng được.)", "s": "시간이 없으면 전화라도 해 주세요."}],
+  rule: "danh từ + -(이)라도 nghĩa là 'dù chỉ là..., ít nhất cũng...'. Sau nguyên âm dùng -라도, sau phụ âm dùng -이라도. Mang sắc thái nhượng bộ: thứ tối thiểu cũng chấp nhận.", quiz: [
+{ q: "Điền đúng: '물___ 마셔요.' (Dù chỉ là nước thì cũng uống đi.)", o: ["이라도", "라도", "나마"], a: 0, why: "물 kết thúc bằng phụ âm ㄹ nên dùng -이라도." },
+{ q: "Chọn câu đúng: 'Nếu không có thời gian thì dù chỉ gọi điện cũng được.'", o: ["시간이 없으면 전화라도 해 주세요.", "시간이 없으면 전화나 해 주세요.", "시간이 없으면 전화하고 해 주세요."], a: 0, why: "Dù chỉ gọi điện dùng 전화라도 해 주세요." },
+{ q: "Điền đúng: '빵___ 먹어요.' (Dù chỉ là bánh mì thì cũng ăn đi.)", o: ["이라도", "라도", "나마"], a: 0, why: "빵 kết thúc bằng phụ âm ㅇ nên dùng -이라도." },
+{ q: "'(이)라도' mang sắc thái gì?", o: ["Nhượng bộ: thứ tối thiểu cũng chấp nhận", "Ra lệnh, dứt khoát", "Phủ định hoàn toàn"], a: 0, why: "-(이)라도 nghĩa 'dù chỉ là', chấp nhận cả thứ tối thiểu." },
+{ q: "Điền đúng: '커피___ 마셔요.' (Dù chỉ là cà phê thì cũng uống đi.)", o: ["라도", "이라도", "나마"], a: 0, why: "커피 kết thúc bằng nguyên âm ㅣ nên dùng -라도." },
+{ q: "Chọn câu SAI:", o: ["물이라도 마셔요.", "빵이라도 먹어요.", "물나도 마셔요."], a: 2, why: "Dạng đúng là 물이라도; '물나도' không phải dạng của -(이)라도." }
+] },
+{ name: "-조차 — ngay cả", level: "TOPIK II", explain: "Ví dụ trước: '물조차 없어요.' (Ngay cả nước cũng không có.) '그는 이름조차 몰라요.' (Anh ấy ngay cả tên cũng không biết.) Quy tắc: danh từ + -조차 nghĩa là 'ngay cả', nhấn mạnh cả thứ tối thiểu cũng không có/không làm. Mạnh hơn -도 ('cũng'). Thường dùng trong câu phủ định.",
+  examples: [{"t": "'물조차 없어요.' (Ngay cả nước cũng không có.)", "s": "물조차 없어요."}, {"t": "'그는 이름조차 몰라요.' (Anh ấy ngay cả tên cũng không biết.)", "s": "그는 이름조차 몰라요."}],
+  rule: "danh từ + -조차 nghĩa là 'ngay cả', nhấn mạnh cả thứ tối thiểu cũng không có/không làm. Mạnh hơn -도 ('cũng'). Thường dùng trong câu phủ định.", quiz: [
+{ q: "Điền đúng: '물___ 없어요.' (Ngay cả nước cũng không có.)", o: ["조차", "도", "나"], a: 0, why: "Ngay cả nước cũng không có dùng 물조차; 도 chỉ là 'cũng', nhẹ hơn." },
+{ q: "Chọn câu đúng: 'Anh ấy ngay cả tên cũng không biết.'", o: ["그는 이름조차 몰라요.", "그는 이름도 몰라요.", "그는 이름을 몰라요."], a: 0, why: "Câu này hỏi mẫu -조차: 이름조차 몰라요. (이름도 몰라요 cũng đúng nhưng nhẹ hơn.)" },
+{ q: "Điền đúng: '시간___ 없어요.' (Ngay cả thời gian cũng không có.)", o: ["조차", "도", "나"], a: 0, why: "시간조차 없어요 = ngay cả thời gian cũng không có." },
+{ q: "'-조차' mạnh hơn '-도' ở điểm nào?", o: ["Nhấn mạnh cả thứ tối thiểu cũng không có", "Chỉ dùng sau nguyên âm", "Chỉ dùng trong câu hỏi"], a: 0, why: "-조차 nhấn mạnh mạnh hơn -도; dùng được sau cả nguyên âm lẫn phụ âm, thường trong câu phủ định." },
+{ q: "Điền đúng: '그는 밥___ 먹지 않았어요.' (Anh ấy ngay cả cơm cũng không ăn.)", o: ["조차", "도", "나"], a: 0, why: "밥조차 먹지 않았어요 = ngay cả cơm cũng không ăn." },
+{ q: "Chọn câu SAI:", o: ["물조차 없어요.", "그는 이름조차 몰라요.", "물조차 있어요요."], a: 2, why: "Đuôi đúng là 없어요; '있어요요' thừa đuôi." }
+] },
+{ name: "-마저 — thậm chí cả", level: "TOPIK II", explain: "Ví dụ trước: '마지막 희망마저 사라졌어요.' (Ngay cả hy vọng cuối cùng cũng biến mất.) '돈마저 다 썼어요.' (Thậm chí cả tiền cũng tiêu hết rồi.) Quy tắc: danh từ + -마저 nghĩa là 'thậm chí cả', nhấn mạnh cả thứ cuối cùng còn lại cũng mất/không còn. Khác -조차 (ngay cả thứ tối thiểu): -마저 thiên về 'thứ cuối cùng còn sót lại'.",
+  examples: [{"t": "'마지막 희망마저 사라졌어요.' (Ngay cả hy vọng cuối cùng cũng biến mất.)", "s": "마지막 희망마저 사라졌어요."}, {"t": "'돈마저 다 썼어요.' (Thậm chí cả tiền cũng tiêu hết rồi.)", "s": "돈마저 다 썼어요."}],
+  rule: "danh từ + -마저 nghĩa là 'thậm chí cả', nhấn mạnh cả thứ cuối cùng còn lại cũng mất/không còn. Khác -조차 (ngay cả thứ tối thiểu): -마저 thiên về 'thứ cuối cùng còn sót lại'.", quiz: [
+{ q: "Điền đúng: '마지막 희망___ 사라졌어요.' (Ngay cả hy vọng cuối cùng cũng biến mất.)", o: ["마저", "조차", "도"], a: 0, why: "Thứ cuối cùng còn lại cũng mất dùng -마저: 희망마저." },
+{ q: "Chọn câu đúng: 'Thậm chí cả tiền cũng tiêu hết rồi.'", o: ["돈마저 다 썼어요.", "돈조차 다 썼어요.", "돈도 다 썼어요."], a: 0, why: "Câu này hỏi mẫu -마저: 돈마저 다 썼어요." },
+{ q: "Điền đúng: '친구___ 떠났어요.' (Thậm chí cả bạn bè cũng bỏ đi.)", o: ["마저", "조차", "도"], a: 0, why: "친구마저 떠났어요 = thậm chí cả bạn cũng bỏ đi." },
+{ q: "'-마저' khác '-조차' ở điểm nào?", o: ["-마저 nhấn mạnh thứ cuối cùng còn lại cũng mất", "-마저 chỉ dùng sau nguyên âm", "-마저 chỉ dùng trong câu hỏi"], a: 0, why: "-마저 thiên về 'thứ cuối cùng còn sót lại'; -조차 thiên về 'ngay cả thứ tối thiểu'." },
+{ q: "Điền đúng: '집___ 팔았어요.' (Thậm chí cả nhà cũng bán rồi.)", o: ["마저", "조차", "도"], a: 0, why: "집마저 팔았어요 = thậm chí cả nhà cũng bán rồi." },
+{ q: "Chọn câu SAI:", o: ["마지막 희망마저 사라졌어요.", "돈마저 다 썼어요.", "돈마저 다 썼어요요."], a: 2, why: "Đuôi đúng là 썼어요; '썼어요요' thừa đuôi." }
+] },
+{ name: "-(은/는)커녕 — đừng nói là... (xa vời)", level: "TOPIK II", explain: "Ví dụ trước: '밥은커녕 물도 못 마셨어요.' (Đừng nói là cơm, ngay cả nước cũng không uống được.) '쉬는 것은커녕 잠도 못 잤어요.' (Đừng nói là nghỉ, ngay cả ngủ cũng không ngủ được.) Quy tắc: danh từ/động từ + -(은/는)커녕 nghĩa là 'đừng nói là..., xa vời lắm'. Cấu trúc thường gặp: A(은/는)커녕 B도 못... = đừng nói A, B cũng không làm được.",
+  examples: [{"t": "'밥은커녕 물도 못 마셨어요.' (Đừng nói là cơm, ngay cả nước cũng không uống được.)", "s": "밥은커녕 물도 못 마셨어요."}, {"t": "'쉬는 것은커녕 잠도 못 잤어요.' (Đừng nói là nghỉ, ngay cả ngủ cũng không ngủ được.)", "s": "쉬는 것은커녕 잠도 못 잤어요."}],
+  rule: "danh từ/động từ + -(은/는)커녕 nghĩa là 'đừng nói là..., xa vời lắm'. Cấu trúc thường gặp: A(은/는)커녕 B도 못... = đừng nói A, B cũng không làm được.", quiz: [
+{ q: "Điền đúng: '밥___ 물도 못 마셨어요.' (Đừng nói là cơm, ngay cả nước cũng không uống được.)", o: ["은커녕", "는커녕", "커녕"], a: 0, why: "밥 kết thúc bằng phụ âm ㅂ nên dùng -은커녕: 밥은커녕." },
+{ q: "Chọn câu đúng: 'Đừng nói là nghỉ, ngay cả ngủ cũng không ngủ được.'", o: ["쉬는 것은커녕 잠도 못 잤어요.", "쉬는 것은커녕 잠을 잤어요.", "쉬는 것은커녕 잠을 잘까요?"], a: 0, why: "쉬는 것은커녕 잠도 못 잤어요." },
+{ q: "Điền đúng: '돈___ 시간도 없어요.' (Đừng nói là tiền, ngay cả thời gian cũng không có.)", o: ["은커녕", "는커녕", "커녕"], a: 0, why: "돈 kết thúc bằng phụ âm ㄴ nên dùng -은커녕." },
+{ q: "'(은/는)커녕' có nghĩa là gì?", o: ["Đừng nói là... (xa vời)", "Chắc chắn là...", "Có lẽ là..."], a: 0, why: "-(은/는)커녕 nghĩa 'đừng nói là...', nhấn mạnh điều đó còn xa vời." },
+{ q: "Điền đúng: '한국어는커녕 영어___ 못해요.' (Đừng nói là tiếng Hàn, tiếng Anh cũng không nói được.)", o: ["도", "는", "를"], a: 0, why: "Cấu trúc A커녕 B도 못...: 영어 → 영어도 못해요." },
+{ q: "Chọn câu SAI:", o: ["밥은커녕 물도 못 마셨어요.", "쉬는 것은커녕 잠도 못 잤어요.", "밥는커녕 물도 못 마셨어요."], a: 2, why: "밥 kết thúc bằng phụ âm ㅂ nên dùng -은커녕, không phải -는커녕." }
+] },
+{ name: "-을/를 통해 — thông qua", level: "TOPIK II", explain: "Ví dụ trước: '인터넷을 통해 배워요.' (Tôi học thông qua Internet.) '친구를 통해 그 사람을 만났어요.' (Tôi gặp người đó thông qua bạn tôi.) Quy tắc: danh từ + -을/를 통해 nghĩa là 'thông qua, nhờ vào (phương tiện, con đường)'. Sau phụ âm dùng -을 통해, sau nguyên âm dùng -를 통해.",
+  examples: [{"t": "'인터넷을 통해 배워요.' (Tôi học thông qua Internet.)", "s": "인터넷을 통해 배워요."}, {"t": "'친구를 통해 그 사람을 만났어요.' (Tôi gặp người đó thông qua bạn tôi.)", "s": "친구를 통해 그 사람을 만났어요."}],
+  rule: "danh từ + -을/를 통해 nghĩa là 'thông qua, nhờ vào (phương tiện, con đường)'. Sau phụ âm dùng -을 통해, sau nguyên âm dùng -를 통해.", quiz: [
+{ q: "Điền đúng: '인터넷___ 배워요.' (Tôi học thông qua Internet.)", o: ["을 통해", "를 통해", "를"], a: 0, why: "인터넷 kết thúc bằng phụ âm ㅅ nên dùng -을 통해." },
+{ q: "Chọn câu đúng: 'Tôi gặp người đó thông qua bạn tôi.'", o: ["친구를 통해 그 사람을 만났어요.", "친구에서 그 사람을 만났어요.", "친구로 그 사람을 만났어요."], a: 0, why: "Thông qua bạn dùng 친구를 통해." },
+{ q: "Điền đúng: '전화___ 연락하세요.' (Hãy liên lạc thông qua điện thoại.)", o: ["를 통해", "을 통해", "를"], a: 0, why: "전화 kết thúc bằng nguyên âm ㅘ nên dùng -를 통해." },
+{ q: "'-을/를 통해' có nghĩa là gì?", o: ["Thông qua, nhờ vào (phương tiện)", "Ở trong, ở tại", "Vì, bởi vì"], a: 0, why: "-을/를 통해 = thông qua (phương tiện, con đường)." },
+{ q: "Điền đúng: '이 책___ 한국어를 배웠어요.' (Tôi đã học tiếng Hàn thông qua cuốn sách này.)", o: ["을 통해", "를 통해", "를"], a: 0, why: "책 kết thúc bằng phụ âm ㄱ nên dùng -을 통해." },
+{ q: "Chọn câu SAI:", o: ["인터넷을 통해 배워요.", "친구를 통해 그 사람을 만났어요.", "인터넷에 통해 배워요."], a: 2, why: "Mẫu đúng là -을/를 통해; '에 통해' không phải dạng đúng." }
+] },
+{ name: "-에 비해 — so với", level: "TOPIK II", explain: "Ví dụ trước: '작년에 비해 올해는 더워요.' (So với năm ngoái, năm nay nóng hơn.) '다른 사람에 비해 그는 키가 커요.' (So với người khác, anh ấy cao hơn.) Quy tắc: danh từ + -에 비해 nghĩa là 'so với'. 비해 là dạng của 비하다 (so sánh). Thường dùng khi so sánh hai thời điểm, hai người, hai vật.",
+  examples: [{"t": "'작년에 비해 올해는 더워요.' (So với năm ngoái, năm nay nóng hơn.)", "s": "작년에 비해 올해는 더워요."}, {"t": "'다른 사람에 비해 그는 키가 커요.' (So với người khác, anh ấy cao hơn.)", "s": "다른 사람에 비해 그는 키가 커요."}],
+  rule: "danh từ + -에 비해 nghĩa là 'so với'. 비해 là dạng của 비하다 (so sánh). Thường dùng khi so sánh hai thời điểm, hai người, hai vật.", quiz: [
+{ q: "Điền đúng: '작년에 ___ 올해는 더워요.' (So với năm ngoái, năm nay nóng hơn.)", o: ["비해", "통해", "비해서"], a: 0, why: "So với năm ngoái dùng 작년에 비해; 통해 là 'thông qua'." },
+{ q: "Chọn câu dùng mẫu -에 비해: 'So với người khác, anh ấy cao hơn.'", o: ["다른 사람에 비해 그는 키가 커요.", "다른 사람을 통해 그는 키가 커요.", "다른 사람보다 그는 키가 커요."], a: 0, why: "Mẫu -에 비해: 다른 사람에 비해. (보다 cũng đúng nhưng là mẫu khác.)" },
+{ q: "Điền đúng: '어제___ 오늘은 더 추워요.' (So với hôm qua, hôm nay lạnh hơn.)", o: ["에 비해", "을 통해", "에"], a: 0, why: "어제에 비해 = so với hôm qua." },
+{ q: "'-에 비해' có nghĩa là gì?", o: ["So với", "Thông qua", "Vì"], a: 0, why: "-에 비해 = so với; 통해 = thông qua; 기 때문에 = vì." },
+{ q: "Điền đúng: '지난달___ 이번 달은 매출이 늘었어요.' (So với tháng trước, tháng này doanh số tăng.)", o: ["에 비해", "을 통해", "에"], a: 0, why: "지난달에 비해 = so với tháng trước." },
+{ q: "Chọn câu SAI:", o: ["작년에 비해 올해는 더워요.", "다른 사람에 비해 그는 키가 커요.", "작년보다 비해 올해는 더워요."], a: 2, why: "Mẫu đúng là 작년에 비해; '작년보다 비해' trộn hai mẫu, sai." }
+] },
+{ name: "-만큼 — bằng, cỡ như", level: "TOPIK II", explain: "Ví dụ trước: '너만큼 열심히 공부해요.' (Tôi học chăm như bạn.) '먹을 만큼 가져가세요.' (Hãy mang đi đủ ăn.) Quy tắc: -만큼 nghĩa là 'bằng, cỡ như, đến mức'. Sau danh từ/đại từ: 너만큼 (như bạn); sau động từ + -을 만큼: 먹을 만큼 (đủ ăn), 할 수 있을 만큼 (đến mức có thể làm).",
+  examples: [{"t": "'너만큼 열심히 공부해요.' (Tôi học chăm như bạn.)", "s": "너만큼 열심히 공부해요."}, {"t": "'먹을 만큼 가져가세요.' (Hãy mang đi đủ ăn.)", "s": "먹을 만큼 가져가세요."}],
+  rule: "-만큼 nghĩa là 'bằng, cỡ như, đến mức'. Sau danh từ/đại từ: 너만큼 (như bạn); sau động từ + -을 만큼: 먹을 만큼 (đủ ăn), 할 수 있을 만큼 (đến mức có thể làm).", quiz: [
+{ q: "Điền đúng: '너___ 열심히 공부해요.' (Tôi học chăm như bạn.)", o: ["만큼", "통해", "비해"], a: 0, why: "Như bạn dùng 너만큼; 통해 là 'thông qua', 비해 là 'so với'." },
+{ q: "Chọn câu đúng: 'Hãy mang đi đủ ăn.'", o: ["먹을 만큼 가져가세요.", "먹을 비해 가져가세요.", "먹을 통해 가져가세요."], a: 0, why: "Đủ ăn dùng 먹을 만큼." },
+{ q: "Điền đúng: '그 사람___ 키가 커요.' (Anh ấy cao bằng người đó.)", o: ["만큼", "통해", "비해"], a: 0, why: "그 사람만큼 = bằng người đó." },
+{ q: "'-만큼' có nghĩa là gì?", o: ["Bằng, cỡ như, đến mức", "Thông qua", "Trước khi"], a: 0, why: "-만큼 = bằng, cỡ như; 통해 = thông qua; 전에 = trước khi." },
+{ q: "Điền đúng: '할 수 있을 ___ 도와주세요.' (Xin hãy giúp đến mức có thể làm được.)", o: ["만큼", "통해", "비해"], a: 0, why: "할 수 있을 만큼 = đến mức có thể làm." },
+{ q: "Chọn câu SAI:", o: ["너만큼 열심히 공부해요.", "먹을 만큼 가져가세요.", "너만큼을 열심히 공부해요."], a: 2, why: "-만큼 gắn thẳng sau danh từ, không thêm 을: 너만큼." }
+] },
+{ name: "-(으)ㄹ 만하다 — đáng để làm", level: "TOPIK II", explain: "Ví dụ trước: '이 영화는 볼 만해요.' (Bộ phim này đáng xem.) '그 책은 읽을 만해요.' (Cuốn sách đó đáng đọc.) Quy tắc: động từ + -(으)ㄹ 만하다 nghĩa là 'đáng để làm gì, đáng...'. Sau nguyên âm dùng -ㄹ 만하다, sau phụ âm dùng -을 만하다. Dạng định ngữ: 볼 만한 영화 (bộ phim đáng xem).",
+  examples: [{"t": "'이 영화는 볼 만해요.' (Bộ phim này đáng xem.)", "s": "이 영화는 볼 만해요."}, {"t": "'그 책은 읽을 만해요.' (Cuốn sách đó đáng đọc.)", "s": "그 책은 읽을 만해요."}],
+  rule: "động từ + -(으)ㄹ 만하다 nghĩa là 'đáng để làm gì, đáng...'. Sau nguyên âm dùng -ㄹ 만하다, sau phụ âm dùng -을 만하다. Dạng định ngữ: 볼 만한 영화 (bộ phim đáng xem).", quiz: [
+{ q: "Điền đúng: '이 영화는 볼 ___.' (Bộ phim này đáng xem.)", o: ["만해요", "있어요", "가요"], a: 0, why: "Đáng xem dùng 볼 만해요." },
+{ q: "Chọn câu đúng: 'Cuốn sách đó đáng đọc.'", o: ["그 책은 읽을 만해요.", "그 책은 읽어요.", "그 책은 읽을까요?"], a: 0, why: "Đáng đọc dùng 읽을 만해요." },
+{ q: "Điền đúng: '이 음식은 먹___ 만해요.' (Món này đáng ăn.)", o: ["을", "ㄹ", "는"], a: 0, why: "먹다 kết thúc bằng phụ âm ㄱ nên dùng -을 만하다: 먹을 만해요." },
+{ q: "'볼 만한 영화' có nghĩa là gì?", o: ["Bộ phim đáng xem", "Bộ phim đã xem", "Bộ phim sẽ xem"], a: 0, why: "볼 만한 영화 = bộ phim đáng xem (định ngữ)." },
+{ q: "Điền đúng: '이곳은 살___ 만해요.' (Chỗ này đáng sống.)", o: ["ㄹ", "을", "는"], a: 0, why: "살다 kết thúc bằng nguyên âm ㅏ nên dùng -ㄹ 만하다: 살 만해요." },
+{ q: "Chọn câu SAI:", o: ["이 영화는 볼 만해요.", "그 책은 읽을 만해요.", "이 영화는 볼 만하다요."], a: 2, why: "Đuôi đúng là 볼 만해요; '만하다요' không phải dạng đúng." }
+] },
+{ name: "-기는 하지만 — tuy là... nhưng", level: "TOPIK II", explain: "Ví dụ trước: '알기는 하지만 말하기 어려워요.' (Tuy là biết nhưng khó nói ra.) '좋기는 하지만 비싸요.' (Tuy là tốt nhưng đắt.) Quy tắc: động từ/tính từ + -기는 하지만 nghĩa là 'tuy là... nhưng...', thừa nhận vế trước rồi chuyển sang vế sau trái ngược. 기는 là danh từ hóa + 는 nhấn mạnh.",
+  examples: [{"t": "'알기는 하지만 말하기 어려워요.' (Tuy là biết nhưng khó nói ra.)", "s": "알기는 하지만 말하기 어려워요."}, {"t": "'좋기는 하지만 비싸요.' (Tuy là tốt nhưng đắt.)", "s": "좋기는 하지만 비싸요."}],
+  rule: "động từ/tính từ + -기는 하지만 nghĩa là 'tuy là... nhưng...', thừa nhận vế trước rồi chuyển sang vế sau trái ngược. 기는 là danh từ hóa + 는 nhấn mạnh.", quiz: [
+{ q: "Điền đúng: '알___ 하지만 말하기 어려워요.' (Tuy là biết nhưng khó nói ra.)", o: ["기는", "고", "면"], a: 0, why: "Tuy là biết dùng 알기는 하지만." },
+{ q: "Chọn câu dùng mẫu -기는 하지만: 'Tuy là tốt nhưng đắt.'", o: ["좋기는 하지만 비싸요.", "좋지만 비싸요.", "좋아서 비싸요."], a: 0, why: "Mẫu -기는 하지만: 좋기는 하지만 비싸요. (좋지만 cũng đúng nhưng là mẫu khác.)" },
+{ q: "Điền đúng: '가___ 하지만 멀어요.' (Tuy là đi được nhưng xa.)", o: ["기는", "고", "면"], a: 0, why: "가기는 하지만 = tuy là đi được nhưng..." },
+{ q: "'-기는 하지만' có nghĩa là gì?", o: ["Tuy là... nhưng...", "Vì... nên...", "Nếu... thì..."], a: 0, why: "-기는 하지만 = tuy là... nhưng...; vì là 기 때문에, nếu là -(으)면." },
+{ q: "Điền đúng: '재미있___ 하지만 어려워요.' (Tuy là thú vị nhưng khó.)", o: ["기는", "고", "면"], a: 0, why: "재미있기는 하지만 = tuy là thú vị nhưng..." },
+{ q: "Chọn câu SAI:", o: ["알기는 하지만 말하기 어려워요.", "좋기는 하지만 비싸요.", "알기은 하지만 말하기 어려워요."], a: 2, why: "Dạng đúng là 알기는 하지만; '알기은' không phải dạng đúng." }
+] },
+{ name: "-잖아요 — mà (nhấn mạnh điều hiển nhiên)", level: "TOPIK II", explain: "Ví dụ trước: '어제 만났잖아요.' (Hôm qua mình đã gặp nhau mà.) '그거 알아요, 쉬운 거잖아요.' (Cái đó thì biết chứ, dễ mà.) Quy tắc: động từ/tính từ + -잖아요 dùng để nhấn mạnh điều người nghe đã biết hoặc hiển nhiên ('mà'). Dạng 반말 là -잖아. Thường dùng khi nhắc lại, thuyết phục, hoặc hơi trách nhẹ.",
+  examples: [{"t": "'어제 만났잖아요.' (Hôm qua mình đã gặp nhau mà.)", "s": "어제 만났잖아요."}, {"t": "'그거 알아요, 쉬운 거잖아요.' (Cái đó thì biết chứ, dễ mà.)", "s": "그거 알아요, 쉬운 거잖아요."}],
+  rule: "động từ/tính từ + -잖아요 dùng để nhấn mạnh điều người nghe đã biết hoặc hiển nhiên ('mà'). Dạng 반말 là -잖아. Thường dùng khi nhắc lại, thuyết phục, hoặc hơi trách nhẹ.", quiz: [
+{ q: "Điền đúng: '어제 만났___.' (Hôm qua mình đã gặp nhau mà.)", o: ["잖아요", "있어요", "가요"], a: 0, why: "Nhấn mạnh điều đã biết dùng 만났잖아요." },
+{ q: "Chọn câu đúng: 'Cái đó thì biết chứ, dễ mà.'", o: ["그거 알아요, 쉬운 거잖아요.", "그거 알아요, 쉬운 거예요.", "그거 알아요, 쉬운 거가요."], a: 0, why: "Dễ mà dùng 쉬운 거잖아요." },
+{ q: "Điền đúng: '그거 비싸___.' (Cái đó đắt mà.)", o: ["잖아요", "있어요", "가요"], a: 0, why: "비싸잖아요 = đắt mà." },
+{ q: "'-잖아요' dùng trong tình huống nào?", o: ["Nhấn mạnh điều hiển nhiên, người nghe đã biết", "Ra lệnh cho người khác", "Kể chuyện quá khứ"], a: 0, why: "-잖아요 nhấn mạnh điều hiển nhiên; mệnh lệnh dùng -(으)세요, kể quá khứ dùng -았/었어요." },
+{ q: "Điền đúng: '내일 휴일___.' (Ngày mai là ngày nghỉ mà.)", o: ["잖아요", "있어요", "가요"], a: 0, why: "휴일잖아요 = là ngày nghỉ mà." },
+{ q: "Chọn câu SAI:", o: ["어제 만났잖아요.", "그거 알아요, 쉬운 거잖아요.", "어제 만났잖아요요."], a: 2, why: "Đuôi đúng là 만났잖아요; '잖아요요' thừa đuôi." }
+] },
+{ name: "-거든요 — vì... mà (giải thích)", level: "TOPIK II", explain: "Ví dụ trước: '오늘은 안 돼요. 약속이 있거든요.' (Hôm nay không được. Vì tôi có hẹn mà.) '조금 늦었어요. 길이 막혔거든요.' (Tôi đến muộn một chút. Vì đường tắc mà.) Quy tắc: động từ/tính từ + -거든요 dùng để giải thích lý do, thường đứng ở câu sau, đáp lại câu hỏi 'tại sao'. Mang sắc thái thân mật, giải thích nhẹ nhàng.",
+  examples: [{"t": "'오늘은 안 돼요. 약속이 있거든요.' (Hôm nay không được. Vì tôi có hẹn mà.)", "s": "오늘은 안 돼요. 약속이 있거든요."}, {"t": "'조금 늦었어요. 길이 막혔거든요.' (Tôi đến muộn một chút. Vì đường tắc mà.)", "s": "조금 늦었어요. 길이 막혔거든요."}],
+  rule: "động từ/tính từ + -거든요 dùng để giải thích lý do, thường đứng ở câu sau, đáp lại câu hỏi 'tại sao'. Mang sắc thái thân mật, giải thích nhẹ nhàng.", quiz: [
+{ q: "Điền đúng: '오늘은 안 돼요. 약속이 있___.' (Hôm nay không được. Vì tôi có hẹn mà.)", o: ["거든요", "잖아요", "있어요"], a: 0, why: "Giải thích lý do dùng 있거든요." },
+{ q: "Chọn câu đúng: 'Tôi đến muộn một chút. Vì đường tắc mà.'", o: ["조금 늦었어요. 길이 막혔거든요.", "조금 늦었어요. 길이 막혔잖아요.", "조금 늦었어요. 길이 막혔어요."], a: 0, why: "Câu này hỏi mẫu -거든요: 길이 막혔거든요." },
+{ q: "Điền đúng: '못 갔어요. 비가 오___.' (Tôi không đi được. Vì trời mưa mà.)", o: ["거든요", "잖아요", "있어요"], a: 0, why: "비가 오거든요 = vì trời mưa mà." },
+{ q: "'-거든요' thường đứng ở đâu?", o: ["Câu sau, để giải thích lý do", "Đầu câu, để ra lệnh", "Cuối câu hỏi"], a: 0, why: "-거든요 đứng ở câu sau, giải thích lý do cho câu trước." },
+{ q: "Điền đúng: '배가 고파요. 아침을 안 먹었___.' (Tôi đói. Vì sáng tôi không ăn mà.)", o: ["거든요", "잖아요", "있어요"], a: 0, why: "안 먹었거든요 = vì không ăn mà." },
+{ q: "Chọn câu SAI:", o: ["오늘은 안 돼요. 약속이 있거든요.", "조금 늦었어요. 길이 막혔거든요.", "오늘은 안 돼요. 약속이 있거든요요."], a: 2, why: "Đuôi đúng là 있거든요; '거든요요' thừa đuôi." }
+] },
+{ name: "-던 — thì quá khứ hồi tưởng", level: "TOPIK II", explain: "Ví dụ trước: '어렸을 때 살던 집이 아직 있어요.' (Ngôi nhà tôi từng sống hồi nhỏ vẫn còn.) '그때 먹던 음식이 생각나요.' (Tôi nhớ món ăn mình từng ăn hồi đó.) Quy tắc: động từ + -던 là định ngữ quá khứ hồi tưởng: 'cái mà đã từng...'. Khác với -(으)ㄴ (quá khứ đã hoàn tất): 살던 집 (nhà từng sống, hồi tưởng) khác 산 집 (nhà đã mua xong).",
+  examples: [{"t": "'어렸을 때 살던 집이 아직 있어요.' (Ngôi nhà tôi từng sống hồi nhỏ vẫn còn.)", "s": "어렸을 때 살던 집이 아직 있어요."}, {"t": "'그때 먹던 음식이 생각나요.' (Tôi nhớ món ăn mình từng ăn hồi đó.)", "s": "그때 먹던 음식이 생각나요."}],
+  rule: "động từ + -던 là định ngữ quá khứ hồi tưởng: 'cái mà đã từng...'. Khác với -(으)ㄴ (quá khứ đã hoàn tất): 살던 집 (nhà từng sống, hồi tưởng) khác 산 집 (nhà đã mua xong).", quiz: [
+{ q: "Điền đúng: '어렸을 때 살___ 집이 아직 있어요.' (Ngôi nhà tôi từng sống hồi nhỏ vẫn còn.)", o: ["던", "은", "는"], a: 0, why: "Hồi tưởng 'từng sống' dùng 살던 집; 산 집 là 'nhà đã mua xong'." },
+{ q: "Chọn câu dùng mẫu -던: 'Tôi nhớ món ăn mình từng ăn hồi đó.'", o: ["그때 먹던 음식이 생각나요.", "그때 먹은 음식이 생각나요.", "그때 먹는 음식이 생각나요."], a: 0, why: "Mẫu -던: 먹던 음식 (từng ăn, hồi tưởng). (먹은 음식 cũng đúng nhưng là mẫu quá khứ hoàn tất.)" },
+{ q: "Điền đúng: '예전에 다니___ 학교가 문을 닫았어요.' (Ngôi trường tôi từng học ngày xưa đã đóng cửa.)", o: ["던", "은", "는"], a: 0, why: "다니던 학교 = trường từng học (hồi tưởng)." },
+{ q: "'-던' khác '-(으)ㄴ' ở điểm nào?", o: ["-던 là hồi tưởng 'đã từng', -(으)ㄴ là quá khứ hoàn tất", "-던 chỉ dùng với tính từ", "-던 chỉ dùng trong câu hỏi"], a: 0, why: "-던 mang sắc thái hồi tưởng; -(으)ㄴ chỉ quá khứ đã hoàn tất." },
+{ q: "Điền đúng: '어릴 때 입___ 옷이 아직 있어요.' (Bộ quần áo tôi từng mặc hồi nhỏ vẫn còn.)", o: ["던", "은", "는"], a: 0, why: "입던 옷 = quần áo từng mặc (hồi tưởng)." },
+{ q: "Chọn câu SAI:", o: ["어렸을 때 살던 집이 아직 있어요.", "그때 먹던 음식이 생각나요.", "어렸을 때 살은 집이 아직 있어요."], a: 2, why: "Dạng hồi tưởng là 살던 집; '살은 집' không phải dạng đúng (quá khứ hoàn tất là 산 집)." }
+] },
+{ name: "-았/었더라면 — giá mà (giả định trái quá khứ)", level: "TOPIK II", explain: "Ví dụ trước: '공부했더라면 시험을 잘 봤을 거예요.' (Giá mà đã học thì đã thi tốt rồi.) '돈이 많았더라면 여행을 갔을 거예요.' (Giá mà có nhiều tiền thì đã đi du lịch rồi.) Quy tắc: động từ/tính từ + -았/었더라면 diễn tả giả định trái với quá khứ ('giá mà... thì đã...'). Mệnh đề chính thường dùng -았/었을 거예요, -았/었을 텐데, -았/었어요.",
+  examples: [{"t": "'공부했더라면 시험을 잘 봤을 거예요.' (Giá mà đã học thì đã thi tốt rồi.)", "s": "공부했더라면 시험을 잘 봤을 거예요."}, {"t": "'돈이 많았더라면 여행을 갔을 거예요.' (Giá mà có nhiều tiền thì đã đi du lịch rồi.)", "s": "돈이 많았더라면 여행을 갔을 거예요."}],
+  rule: "động từ/tính từ + -았/었더라면 diễn tả giả định trái với quá khứ ('giá mà... thì đã...'). Mệnh đề chính thường dùng -았/었을 거예요, -았/었을 텐데, -았/었어요.", quiz: [
+{ q: "Điền đúng: '공부했___ 시험을 잘 봤을 거예요.' (Giá mà đã học thì đã thi tốt rồi.)", o: ["더라면", "면", "으면"], a: 0, why: "Giả định trái quá khứ dùng 공부했더라면." },
+{ q: "Chọn câu đúng: 'Giá mà có nhiều tiền thì đã đi du lịch rồi.'", o: ["돈이 많았더라면 여행을 갔을 거예요.", "돈이 많으면 여행을 갔을 거예요.", "돈이 많을 때 여행을 갔을 거예요."], a: 0, why: "Giá mà (trái quá khứ) dùng 많았더라면." },
+{ q: "Điền đúng: '일찍 일어났___ 지각하지 않았을 거예요.' (Giá mà dậy sớm thì đã không muộn rồi.)", o: ["더라면", "면", "으면"], a: 0, why: "일어났더라면 = giá mà đã dậy sớm." },
+{ q: "'-았/었더라면' dùng để nói về điều gì?", o: ["Giả định trái với quá khứ ('giá mà... thì đã...')", "Điều kiện có thật ở hiện tại", "Kế hoạch tương lai"], a: 0, why: "-았/었더라면 là giả định trái quá khứ; điều kiện có thật dùng -(으)면." },
+{ q: "Điền đúng: '우산을 가져왔___ 비에 안 젖었을 거예요.' (Giá mà mang ô thì đã không bị ướt mưa rồi.)", o: ["더라면", "면", "으면"], a: 0, why: "가져왔더라면 = giá mà đã mang theo." },
+{ q: "Chọn câu SAI:", o: ["공부했더라면 시험을 잘 봤을 거예요.", "돈이 많았더라면 여행을 갔을 거예요.", "공부하더라면 시험을 잘 봤을 거예요."], a: 2, why: "Giả định trái quá khứ cần dạng quá khứ -았/었더라면 (공부했더라면); 공부하더라면 là hiện tại, không hợp." }
+] },
+{ name: "-았/었으면 — giá mà... thì đã...", level: "TOPIK II", explain: "Ví dụ trước: '돈이 많았으면 좋겠어요.' (Ước gì có nhiều tiền.) '시간이 더 있었으면 여행을 갔을 거예요.' (Giá mà có thêm thời gian thì đã đi du lịch rồi.) Quy tắc: động từ/tính từ + -았/었으면 diễn tả ước muốn hoặc giả định trái quá khứ ('giá mà...'). Dạng hay gặp: -았/었으면 좋겠다 (ước gì...). Khác -았/었더라면 (nhấn mạnh giả định trái sự thật đã xảy ra).",
+  examples: [{"t": "'돈이 많았으면 좋겠어요.' (Ước gì có nhiều tiền.)", "s": "돈이 많았으면 좋겠어요."}, {"t": "'시간이 더 있었으면 여행을 갔을 거예요.' (Giá mà có thêm thời gian thì đã đi du lịch rồi.)", "s": "시간이 더 있었으면 여행을 갔을 거예요."}],
+  rule: "động từ/tính từ + -았/었으면 diễn tả ước muốn hoặc giả định trái quá khứ ('giá mà...'). Dạng hay gặp: -았/었으면 좋겠다 (ước gì...). Khác -았/었더라면 (nhấn mạnh giả định trái sự thật đã xảy ra).", quiz: [
+{ q: "Điền đúng: '돈이 많았___ 좋겠어요.' (Ước gì có nhiều tiền.)", o: ["으면", "면", "더라면"], a: 0, why: "Ước gì dùng 많았으면 좋겠어요." },
+{ q: "Chọn câu đúng: 'Giá mà có thêm thời gian thì đã đi du lịch rồi.'", o: ["시간이 더 있었으면 여행을 갔을 거예요.", "시간이 더 있으면 여행을 갔을 거예요.", "시간이 더 있을 때 여행을 갔을 거예요."], a: 0, why: "Giá mà (quá khứ) dùng 있었으면." },
+{ q: "Điền đúng: '한국어를 잘했___ 좋겠어요.' (Ước gì nói giỏi tiếng Hàn.)", o: ["으면", "면", "더라면"], a: 0, why: "잘했으면 좋겠어요 = ước gì đã giỏi." },
+{ q: "'-았/었으면 좋겠다' có nghĩa là gì?", o: ["Ước gì...", "Chắc chắn là...", "Đã là..."], a: 0, why: "-았/었으면 좋겠다 = ước gì..." },
+{ q: "Điền đúng: '어제 비가 안 왔___ 좋았을 텐데요.' (Giá mà hôm qua trời không mưa thì tốt biết mấy.)", o: ["으면", "면", "더라면"], a: 0, why: "안 왔으면 = giá mà đã không mưa." },
+{ q: "Chọn câu SAI:", o: ["돈이 많았으면 좋겠어요.", "시간이 더 있었으면 여행을 갔을 거예요.", "돈이 많았면 좋겠어요."], a: 2, why: "Dạng đúng là 많았으면; '많았면' thiếu 으, sai." }
+] },
+{ name: "-길래 — vì... nên (lý do)", level: "TOPIK II", explain: "Ví dụ trước: '배가 고프길래 밥을 먹었어요.' (Vì đói nên tôi đã ăn cơm.) '날씨가 좋길래 공원에 갔어요.' (Vì thời tiết đẹp nên tôi đã đi công viên.) Quy tắc: động từ/tính từ + -길래 nghĩa là 'vì... nên...', dùng trong nói thân mật để giải thích lý do dẫn tới hành động sau. Khác 기 때문에 (trang trọng hơn) và -아/어서 (lý do nhẹ).",
+  examples: [{"t": "'배가 고프길래 밥을 먹었어요.' (Vì đói nên tôi đã ăn cơm.)", "s": "배가 고프길래 밥을 먹었어요."}, {"t": "'날씨가 좋길래 공원에 갔어요.' (Vì thời tiết đẹp nên tôi đã đi công viên.)", "s": "날씨가 좋길래 공원에 갔어요."}],
+  rule: "động từ/tính từ + -길래 nghĩa là 'vì... nên...', dùng trong nói thân mật để giải thích lý do dẫn tới hành động sau. Khác 기 때문에 (trang trọng hơn) và -아/어서 (lý do nhẹ).", quiz: [
+{ q: "Điền đúng: '배가 고프___ 밥을 먹었어요.' (Vì đói nên tôi đã ăn cơm.)", o: ["길래", "서", "면"], a: 0, why: "Vì đói (nói thân mật) dùng 고프길래." },
+{ q: "Chọn câu dùng mẫu -길래: 'Vì thời tiết đẹp nên tôi đã đi công viên.'", o: ["날씨가 좋길래 공원에 갔어요.", "날씨가 좋아서 공원에 갔어요.", "날씨가 좋으면 공원에 갔어요."], a: 0, why: "Mẫu -길래: 좋길래 공원에 갔어요. (좋아서 cũng đúng nhưng là mẫu khác.)" },
+{ q: "Điền đúng: '피곤하___ 일찍 잤어요.' (Vì mệt nên tôi ngủ sớm.)", o: ["길래", "서", "면"], a: 0, why: "피곤하길래 = vì mệt nên..." },
+{ q: "'-길래' khác '기 때문에' ở điểm nào?", o: ["-길래 thân mật hơn, 기 때문에 trang trọng hơn", "-길래 chỉ dùng trong câu hỏi", "-길래 chỉ dùng với danh từ"], a: 0, why: "-길래 dùng trong nói thân mật; 기 때문에 trang trọng hơn." },
+{ q: "Điền đúng: '시간이 없___ 택시를 탔어요.' (Vì không có thời gian nên tôi đi taxi.)", o: ["길래", "서", "면"], a: 0, why: "없길래 = vì không có nên..." },
+{ q: "Chọn câu SAI:", o: ["배가 고프길래 밥을 먹었어요.", "날씨가 좋길래 공원에 갔어요.", "배가 고프길래요 밥을 먹었어요."], a: 2, why: "-길래 gắn thẳng vào thân động từ/tính từ; '길래요' thừa đuôi." }
+] },
+{ name: "-느라고 — vì mải làm gì", level: "TOPIK II", explain: "Ví dụ trước: '공부하느라고 전화를 못 받았어요.' (Vì mải học nên tôi không nghe được điện thoại.) '일하느라고 밥을 못 먹었어요.' (Vì mải làm việc nên tôi không ăn cơm được.) Quy tắc: động từ + -느라고 nghĩa là 'vì mải làm gì (nên không làm được việc khác)'. Vế sau thường là kết quả tiêu cực (không làm được, muộn, mệt). -느라고 gắn vào thân động từ đã bỏ 다, dạng không đổi: 공부하다 → 공부하느라고, 먹다 → 먹느라고.",
+  examples: [{"t": "'공부하느라고 전화를 못 받았어요.' (Vì mải học nên tôi không nghe được điện thoại.)", "s": "공부하느라고 전화를 못 받았어요."}, {"t": "'일하느라고 밥을 못 먹었어요.' (Vì mải làm việc nên tôi không ăn cơm được.)", "s": "일하느라고 밥을 못 먹었어요."}],
+  rule: "động từ + -느라고 nghĩa là 'vì mải làm gì (nên không làm được việc khác)'. Vế sau thường là kết quả tiêu cực (không làm được, muộn, mệt). -느라고 gắn vào thân động từ đã bỏ 다, dạng không đổi: 공부하다 → 공부하느라고, 먹다 → 먹느라고.", quiz: [
+{ q: "Điền đúng: '공부하___ 전화를 못 받았어요.' (Vì mải học nên tôi không nghe được điện thoại.)", o: ["느라고", "서", "면"], a: 0, why: "Vì mải học dùng 공부하느라고." },
+{ q: "Chọn câu đúng: 'Vì mải làm việc nên tôi không ăn cơm được.'", o: ["일하느라고 밥을 못 먹었어요.", "일해서 밥을 못 먹었어요.", "일하면 밥을 못 먹었어요."], a: 0, why: "Câu này hỏi mẫu -느라고: 일하느라고 밥을 못 먹었어요." },
+{ q: "Điền đúng: '게임하___ 숙제를 못 했어요.' (Vì mải chơi game nên tôi không làm bài tập được.)", o: ["느라고", "서", "면"], a: 0, why: "게임하느라고 = vì mải chơi game." },
+{ q: "'-느라고' thường đi với vế sau như thế nào?", o: ["Kết quả tiêu cực (không làm được, muộn, mệt)", "Kết quả tích cực (thành công, vui vẻ)", "Câu hỏi"], a: 0, why: "-느라고 thường dẫn tới kết quả tiêu cực vì mải làm việc này mà lỡ việc khác." },
+{ q: "Điền đúng: '청소하___ 손님이 온 줄 몰랐어요.' (Vì mải dọn dẹp nên tôi không biết khách đến.)", o: ["느라고", "서", "면"], a: 0, why: "청소하느라고 = vì mải dọn dẹp." },
+{ q: "Chọn câu SAI:", o: ["공부하느라고 전화를 못 받았어요.", "일하느라고 밥을 못 먹었어요.", "공부하느라요 전화를 못 받았어요."], a: 2, why: "Dạng đúng là 공부하느라고; '하느라요' không phải dạng đúng." }
+] },
+{ name: "-는 바람에 — vì... nên (kết quả ngoài ý muốn)", level: "TOPIK II", explain: "Ví dụ trước: '비가 오는 바람에 우산을 샀어요.' (Vì trời mưa nên tôi đã mua ô — ngoài ý muốn.) '교통사고가 나는 바람에 회의에 늦었어요.' (Vì xảy ra tai nạn giao thông nên tôi đến họp muộn.) Quy tắc: động từ + -는 바람에 nghĩa là 'vì... nên...', nhấn mạnh kết quả xảy ra ngoài ý muốn, không lường trước. 바람 vốn là 'gió', mang sắc thái 'bị cuốn theo'.",
+  examples: [{"t": "'비가 오는 바람에 우산을 샀어요.' (Vì trời mưa nên tôi đã mua ô — ngoài ý muốn.)", "s": "비가 오는 바람에 우산을 샀어요."}, {"t": "'교통사고가 나는 바람에 회의에 늦었어요.' (Vì xảy ra tai nạn giao thông nên tôi đến họp muộn.)", "s": "교통사고가 나는 바람에 회의에 늦었어요."}],
+  rule: "động từ + -는 바람에 nghĩa là 'vì... nên...', nhấn mạnh kết quả xảy ra ngoài ý muốn, không lường trước. 바람 vốn là 'gió', mang sắc thái 'bị cuốn theo'.", quiz: [
+{ q: "Điền đúng: '비가 오는 ___ 우산을 샀어요.' (Vì trời mưa nên tôi đã mua ô.)", o: ["바람에", "탓에", "길래"], a: 0, why: "Kết quả ngoài ý muốn dùng 오는 바람에; 탓에 là đổ lỗi, 길래 là lý do thân mật." },
+{ q: "Chọn câu dùng mẫu -는 바람에: 'Vì xảy ra tai nạn giao thông nên tôi đến họp muộn.'", o: ["교통사고가 나는 바람에 회의에 늦었어요.", "교통사고가 나는 탓에 회의에 늦었어요.", "교통사고가 나서 회의에 늦었어요."], a: 0, why: "Mẫu -는 바람에: 나는 바람에." },
+{ q: "Điền đúng: '갑자기 비가 오는 ___ 옷이 다 젖었어요.' (Vì trời đột nhiên mưa nên quần áo ướt hết.)", o: ["바람에", "탓에", "길래"], a: 0, why: "오는 바람에 = vì trời mưa (ngoài ý muốn)." },
+{ q: "'-는 바람에' nhấn mạnh điều gì?", o: ["Kết quả xảy ra ngoài ý muốn, không lường trước", "Lỗi của ai đó, đổ lỗi", "Kế hoạch đã định sẵn"], a: 0, why: "-는 바람에 nhấn mạnh ngoài ý muốn; đổ lỗi là -는 탓에." },
+{ q: "Điền đúng: '버스가 늦게 오는 ___ 지각했어요.' (Vì xe buýt đến muộn nên tôi đi học muộn.)", o: ["바람에", "탓에", "길래"], a: 0, why: "오는 바람에 = vì xe buýt đến muộn (ngoài ý muốn)." },
+{ q: "Chọn câu SAI:", o: ["비가 오는 바람에 우산을 샀어요.", "교통사고가 나는 바람에 회의에 늦었어요.", "비가 오은 바람에 우산을 샀어요."], a: 2, why: "Dạng đúng là 오는 바람에; '오은 바람에' không phải dạng đúng." }
+] },
+{ name: "-는 탓에 — tại vì (đổ lỗi)", level: "TOPIK II", explain: "Ví dụ trước: '네 탓에 늦었어요.' (Tại cậu mà tôi muộn rồi.) '비가 오는 탓에 경기가 취소됐어요.' (Tại trời mưa mà trận đấu bị hủy.) Quy tắc: động từ/danh từ + -는 탓에 nghĩa là 'tại vì, tại... mà...', đổ lỗi cho nguyên nhân. 탓 là 'lỗi, trách nhiệm'. Khác -는 바람에 (ngoài ý muốn, không đổ lỗi cho ai).",
+  examples: [{"t": "'네 탓에 늦었어요.' (Tại cậu mà tôi muộn rồi.)", "s": "네 탓에 늦었어요."}, {"t": "'비가 오는 탓에 경기가 취소됐어요.' (Tại trời mưa mà trận đấu bị hủy.)", "s": "비가 오는 탓에 경기가 취소됐어요."}],
+  rule: "động từ/danh từ + -는 탓에 nghĩa là 'tại vì, tại... mà...', đổ lỗi cho nguyên nhân. 탓 là 'lỗi, trách nhiệm'. Khác -는 바람에 (ngoài ý muốn, không đổ lỗi cho ai).", quiz: [
+{ q: "Điền đúng: '네 ___ 늦었어요.' (Tại cậu mà tôi muộn rồi.)", o: ["탓에", "바람에", "길래"], a: 0, why: "Đổ lỗi dùng 네 탓에; 바람에 là ngoài ý muốn." },
+{ q: "Chọn câu dùng mẫu -는 탓에: 'Tại trời mưa mà trận đấu bị hủy.'", o: ["비가 오는 탓에 경기가 취소됐어요.", "비가 오는 바람에 경기가 취소됐어요.", "비가 와서 경기가 취소됐어요."], a: 0, why: "Mẫu -는 탓에: 오는 탓에. (오는 바람에 cũng đúng nhưng là mẫu khác.)" },
+{ q: "Điền đúng: '그 사람___ 일이 늦어졌어요.' (Tại người đó mà việc bị chậm.)", o: ["탓에", "바람에", "길래"], a: 0, why: "그 사람 탓에 = tại người đó." },
+{ q: "'-는 탓에' khác '-는 바람에' ở điểm nào?", o: ["-는 탓에 đổ lỗi, -는 바람에 chỉ ngoài ý muốn", "-는 탓에 chỉ dùng với danh từ", "-는 탓에 chỉ dùng trong câu hỏi"], a: 0, why: "-는 탓에 đổ lỗi cho nguyên nhân; -는 바람에 nhấn mạnh kết quả ngoài ý muốn." },
+{ q: "Điền đúng: '날씨가 나쁜 ___ 소풍이 취소됐어요.' (Tại thời tiết xấu mà chuyến dã ngoại bị hủy.)", o: ["탓에", "바람에", "길래"], a: 0, why: "날씨가 나쁜 탓에 = tại thời tiết xấu." },
+{ q: "Chọn câu SAI:", o: ["네 탓에 늦었어요.", "비가 오는 탓에 경기가 취소됐어요.", "네 탓이 늦었어요."], a: 2, why: "Mẫu đúng là 네 탓에 늦었어요; '탓이' không phải dạng của -는 탓에." }
+] },
+{ name: "-아/어 놓다 — làm xong để đấy (trạng thái duy trì)", level: "TOPIK II", explain: "Ví dụ trước: '문을 열어 놓았어요.' (Tôi đã mở cửa để đấy.) '밥을 해 놓았어요.' (Tôi đã nấu cơm để sẵn rồi.) Quy tắc: động từ + -아/어 놓다 nghĩa là 'làm xong rồi để đấy (trạng thái còn duy trì)'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 놓다, còn lại dùng -어 놓다. Khác -아/어 두다 (làm sẵn cho tương lai).",
+  examples: [{"t": "'문을 열어 놓았어요.' (Tôi đã mở cửa để đấy.)", "s": "문을 열어 놓았어요."}, {"t": "'밥을 해 놓았어요.' (Tôi đã nấu cơm để sẵn rồi.)", "s": "밥을 해 놓았어요."}],
+  rule: "động từ + -아/어 놓다 nghĩa là 'làm xong rồi để đấy (trạng thái còn duy trì)'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 놓다, còn lại dùng -어 놓다. Khác -아/어 두다 (làm sẵn cho tương lai).", quiz: [
+{ q: "Điền đúng: '문을 열어 ___.' (Tôi đã mở cửa để đấy.)", o: ["놓았어요", "두었어요", "버렸어요"], a: 0, why: "Mở cửa để đấy dùng 열어 놓았어요." },
+{ q: "Chọn câu dùng mẫu -아/어 놓다: 'Tôi đã nấu cơm để sẵn rồi.'", o: ["밥을 해 놓았어요.", "밥을 해 두었어요.", "밥을 해 버렸어요."], a: 0, why: "Mẫu -아/어 놓다: 해 놓았어요. (해 두었어요 cũng đúng nhưng là mẫu khác.)" },
+{ q: "Điền đúng: '책을 책상 위에 올려 ___.' (Tôi đã đặt sách lên bàn để đấy.)", o: ["놓았어요", "두었어요", "버렸어요"], a: 0, why: "올려 놓았어요 = đặt lên để đấy." },
+{ q: "'-아/어 놓다' diễn tả điều gì?", o: ["Làm xong rồi để đấy, trạng thái còn duy trì", "Làm mất tiêu, hoàn tất dứt khoát", "Làm sẵn cho tương lai"], a: 0, why: "-아/어 놓다 = làm xong để đấy; làm mất là -아/어 버리다, làm sẵn là -아/어 두다." },
+{ q: "Điền đúng: '창문을 닫아 ___.' (Tôi đã đóng cửa sổ để đấy.)", o: ["놓았어요", "두었어요", "버렸어요"], a: 0, why: "닫아 놓았어요 = đóng để đấy." },
+{ q: "Chọn câu SAI:", o: ["문을 열어 놓았어요.", "밥을 해 놓았어요.", "문을 열어 놓아요요."], a: 2, why: "Đuôi đúng là 놓았어요; '놓아요요' thừa đuôi." }
+] },
+{ name: "-아/어 두다 — làm sẵn để đấy", level: "TOPIK II", explain: "Ví dụ trước: '미리 준비해 두세요.' (Hãy chuẩn bị sẵn trước đi.) '내일 입을 옷을 꺼내 두었어요.' (Tôi đã lấy sẵn quần áo để mai mặc.) Quy tắc: động từ + -아/어 두다 nghĩa là 'làm sẵn để đấy (cho việc sau, cho tương lai)'. Nhấn mạnh sự chuẩn bị trước. Khác -아/어 놓다 (làm xong để đấy, trạng thái duy trì).",
+  examples: [{"t": "'미리 준비해 두세요.' (Hãy chuẩn bị sẵn trước đi.)", "s": "미리 준비해 두세요."}, {"t": "'내일 입을 옷을 꺼내 두었어요.' (Tôi đã lấy sẵn quần áo để mai mặc.)", "s": "내일 입을 옷을 꺼내 두었어요."}],
+  rule: "động từ + -아/어 두다 nghĩa là 'làm sẵn để đấy (cho việc sau, cho tương lai)'. Nhấn mạnh sự chuẩn bị trước. Khác -아/어 놓다 (làm xong để đấy, trạng thái duy trì).", quiz: [
+{ q: "Điền đúng: '미리 준비해 ___.' (Hãy chuẩn bị sẵn trước đi.)", o: ["두세요", "놓으세요", "버리세요"], a: 0, why: "Chuẩn bị sẵn dùng 준비해 두세요." },
+{ q: "Chọn câu dùng mẫu -아/어 두다: 'Tôi đã lấy sẵn quần áo để mai mặc.'", o: ["내일 입을 옷을 꺼내 두었어요.", "내일 입을 옷을 꺼내 놓았어요.", "내일 입을 옷을 꺼내 버렸어요."], a: 0, why: "Mẫu -아/어 두다: 꺼내 두었어요. (꺼내 놓았어요 cũng đúng nhưng là mẫu khác.)" },
+{ q: "Điền đúng: '음식을 미리 만들어 ___.' (Hãy nấu thức ăn sẵn trước đi.)", o: ["두세요", "놓으세요", "버리세요"], a: 0, why: "만들어 두세요 = nấu sẵn trước." },
+{ q: "'-아/어 두다' nhấn mạnh điều gì?", o: ["Chuẩn bị sẵn cho việc sau, cho tương lai", "Làm mất tiêu, hoàn tất dứt khoát", "Trạng thái còn duy trì"], a: 0, why: "-아/어 두다 = làm sẵn cho tương lai; làm mất là -아/어 버리다, trạng thái duy trì là -아/어 놓다." },
+{ q: "Điền đúng: '표를 미리 사 ___.' (Hãy mua vé sẵn trước đi.)", o: ["두세요", "놓으세요", "버리세요"], a: 0, why: "사 두세요 = mua sẵn trước." },
+{ q: "Chọn câu SAI:", o: ["미리 준비해 두세요.", "내일 입을 옷을 꺼내 두었어요.", "미리 준비해 두어요요."], a: 2, why: "Đuôi đúng là 두세요; '두어요요' thừa đuôi." }
+] },
+{ name: "-아/어 버리다 — làm mất tiêu (hoàn tất dứt khoát)", level: "TOPIK II", explain: "Ví dụ trước: '우산을 잃어버렸어요.' (Tôi đã làm mất ô mất rồi.) '숙제를 다 해 버렸어요.' (Tôi đã làm xong hết bài tập rồi.) Quy tắc: động từ + -아/어 버리다 nghĩa là 'làm mất tiêu, làm xong dứt khoát (thường kèm tiếc nuối hoặc nhẹ nhõm)'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 버리다, còn lại dùng -어 버리다.",
+  examples: [{"t": "'우산을 잃어버렸어요.' (Tôi đã làm mất ô mất rồi.)", "s": "우산을 잃어버렸어요."}, {"t": "'숙제를 다 해 버렸어요.' (Tôi đã làm xong hết bài tập rồi.)", "s": "숙제를 다 해 버렸어요."}],
+  rule: "động từ + -아/어 버리다 nghĩa là 'làm mất tiêu, làm xong dứt khoát (thường kèm tiếc nuối hoặc nhẹ nhõm)'. Thân động từ có nguyên âm ㅏ/ㅗ dùng -아 버리다, còn lại dùng -어 버리다.", quiz: [
+{ q: "Điền đúng: '우산을 잃어___.' (Tôi đã làm mất ô mất rồi.)", o: ["버렸어요", "놓았어요", "두었어요"], a: 0, why: "Làm mất tiêu dùng 잃어버렸어요." },
+{ q: "Chọn câu dùng mẫu -아/어 버리다: 'Tôi đã làm xong hết bài tập rồi.'", o: ["숙제를 다 해 버렸어요.", "숙제를 다 해 놓았어요.", "숙제를 다 해 두었어요."], a: 0, why: "Mẫu -아/어 버리다: 해 버렸어요." },
+{ q: "Điền đúng: '돈을 다 써 ___.' (Tôi đã tiêu hết tiền mất rồi.)", o: ["버렸어요", "놓았어요", "두었어요"], a: 0, why: "써 버렸어요 = tiêu hết mất rồi." },
+{ q: "'-아/어 버리다' thường kèm sắc thái gì?", o: ["Tiếc nuối hoặc nhẹ nhõm (xong dứt khoát)", "Chuẩn bị cho tương lai", "Đang trong quá trình"], a: 0, why: "-아/어 버리다 mang sắc thái tiếc nuối hoặc nhẹ nhõm; chuẩn bị là -아/어 두다." },
+{ q: "Điền đúng: '그 책을 읽어 ___.' (Tôi đã đọc xong cuốn sách đó rồi.)", o: ["버렸어요", "놓았어요", "두었어요"], a: 0, why: "읽어 버렸어요 = đọc xong rồi (dứt khoát)." },
+{ q: "Chọn câu SAI:", o: ["우산을 잃어버렸어요.", "숙제를 다 해 버렸어요.", "우산을 잃어버려요요."], a: 2, why: "Quá khứ đúng là 잃어버렸어요; '잃어버려요요' thừa đuôi." }
+] },
+{ name: "-고 보다 — làm rồi mới biết (thử rồi đánh giá)", level: "TOPIK II", explain: "Ví dụ trước: '직접 해 보고 결정하세요.' (Hãy tự làm thử rồi hãy quyết định.) '먹어 보고 맛을 알려 주세요.' (Hãy ăn thử rồi cho tôi biết vị thế nào.) Quy tắc: động từ + -고 보다 nghĩa là 'làm rồi mới biết, thử rồi đánh giá'. Khác -아/어 보다 (thử làm xem sao): -고 보다 nhấn mạnh việc đánh giá, kết luận sau khi thử.",
+  examples: [{"t": "'직접 해 보고 결정하세요.' (Hãy tự làm thử rồi hãy quyết định.)", "s": "직접 해 보고 결정하세요."}, {"t": "'먹어 보고 맛을 알려 주세요.' (Hãy ăn thử rồi cho tôi biết vị thế nào.)", "s": "먹어 보고 맛을 알려 주세요."}],
+  rule: "động từ + -고 보다 nghĩa là 'làm rồi mới biết, thử rồi đánh giá'. Khác -아/어 보다 (thử làm xem sao): -고 보다 nhấn mạnh việc đánh giá, kết luận sau khi thử.", quiz: [
+{ q: "Điền đúng: '직접 해 ___ 결정하세요.' (Hãy tự làm thử rồi hãy quyết định.)", o: ["보고", "보세요", "봐요"], a: 0, why: "Làm rồi mới biết dùng 해 보고 결정하세요." },
+{ q: "Chọn câu đúng: 'Hãy ăn thử rồi cho tôi biết vị thế nào.'", o: ["먹어 보고 맛을 알려 주세요.", "먹어 봐서 맛을 알려 주세요.", "먹어 보세요 맛을 알려 주세요."], a: 0, why: "Ăn thử rồi đánh giá dùng 먹어 보고 알려 주세요." },
+{ q: "Điền đúng: '입어 ___ 크기를 알려 주세요.' (Hãy mặc thử rồi cho tôi biết cỡ.)", o: ["보고", "보세요", "봐요"], a: 0, why: "입어 보고 = mặc thử rồi đánh giá." },
+{ q: "'-고 보다' khác '-아/어 보다' ở điểm nào?", o: ["-고 보다 nhấn mạnh đánh giá sau khi thử", "-고 보다 chỉ dùng với tính từ", "-고 보다 là thì quá khứ"], a: 0, why: "-고 보다 nhấn mạnh việc đánh giá, kết luận sau khi thử; -아/어 보다 chỉ là 'thử làm xem sao'." },
+{ q: "Điền đúng: '써 ___ 어때요?' (Hãy viết thử rồi xem thế nào?)", o: ["보고", "보세요", "봐요"], a: 0, why: "써 보고 = viết thử rồi đánh giá." },
+{ q: "Chọn câu SAI:", o: ["직접 해 보고 결정하세요.", "먹어 보고 맛을 알려 주세요.", "직접 해 보고요 결정하세요."], a: 2, why: "Dạng đúng là 해 보고 결정하세요; '보고요' thừa đuôi." }
+] },
+{ name: "-(으)면 안 되다 — không được làm gì", level: "TOPIK II", explain: "Ví dụ trước: '여기서 담배를 피우면 안 돼요.' (Ở đây không được hút thuốc.) '수업 시간에 핸드폰을 쓰면 안 돼요.' (Trong giờ học không được dùng điện thoại.) Quy tắc: động từ + -(으)면 안 되다 nghĩa là 'không được làm gì' (quy định, cấm). Sau nguyên âm dùng -면 안 되다, sau phụ âm dùng -으면 안 되다. Khác -지 마세요 (nhắc đừng làm, lịch sự).",
+  examples: [{"t": "'여기서 담배를 피우면 안 돼요.' (Ở đây không được hút thuốc.)", "s": "여기서 담배를 피우면 안 돼요."}, {"t": "'수업 시간에 핸드폰을 쓰면 안 돼요.' (Trong giờ học không được dùng điện thoại.)", "s": "수업 시간에 핸드폰을 쓰면 안 돼요."}],
+  rule: "động từ + -(으)면 안 되다 nghĩa là 'không được làm gì' (quy định, cấm). Sau nguyên âm dùng -면 안 되다, sau phụ âm dùng -으면 안 되다. Khác -지 마세요 (nhắc đừng làm, lịch sự).", quiz: [
+{ q: "Điền đúng: '여기서 담배를 피우___ 안 돼요.' (Ở đây không được hút thuốc.)", o: ["면", "지", "고"], a: 0, why: "Không được làm dùng 피우면 안 돼요." },
+{ q: "Chọn câu dùng mẫu -(으)면 안 되다: 'Trong giờ học không được dùng điện thoại.'", o: ["수업 시간에 핸드폰을 쓰면 안 돼요.", "수업 시간에 핸드폰을 쓰지 마세요.", "수업 시간에 핸드폰을 쓸까요?"], a: 0, why: "Mẫu -(으)면 안 되다: 쓰면 안 돼요. (쓰지 마세요 cũng đúng nhưng là mẫu nhắc đừng làm.)" },
+{ q: "Điền đúng: '도서관에서 떠들___ 안 돼요.' (Trong thư viện không được ồn ào.)", o: ["면", "지", "고"], a: 0, why: "떠들면 안 돼요 = không được ồn ào." },
+{ q: "'-(으)면 안 되다' nói về điều gì?", o: ["Quy định, cấm (không được làm)", "Đề nghị cùng làm", "Phỏng đoán tương lai"], a: 0, why: "-(으)면 안 되다 = không được làm (quy định); đề nghị là -(으)ㄹ까요." },
+{ q: "Điền đúng: '여기에 주차하___ 안 돼요.' (Ở đây không được đỗ xe.)", o: ["면", "지", "고"], a: 0, why: "주차하면 안 돼요 = không được đỗ xe." },
+{ q: "Chọn câu SAI:", o: ["여기서 담배를 피우면 안 돼요.", "수업 시간에 핸드폰을 쓰면 안 돼요.", "여기서 담배를 피우면 안 되다요."], a: 2, why: "Đuôi đúng là 안 돼요; '안 되다요' không phải dạng đúng." }
+] },
+{ name: "-(으)ㄹ 줄 알다/모르다 — biết/không biết cách làm", level: "TOPIK II", explain: "Ví dụ trước: '저는 수영할 줄 알아요.' (Tôi biết bơi.) '저는 운전할 줄 몰라요.' (Tôi không biết lái xe.) Quy tắc: động từ + -(으)ㄹ 줄 알다 nghĩa là 'biết cách làm gì', + -(으)ㄹ 줄 모르다 nghĩa là 'không biết cách làm gì'. Sau nguyên âm dùng -ㄹ 줄, sau phụ âm dùng -을 줄. 줄 ở đây là 'cách, phương pháp'.",
+  examples: [{"t": "'저는 수영할 줄 알아요.' (Tôi biết bơi.)", "s": "저는 수영할 줄 알아요."}, {"t": "'저는 운전할 줄 몰라요.' (Tôi không biết lái xe.)", "s": "저는 운전할 줄 몰라요."}],
+  rule: "động từ + -(으)ㄹ 줄 알다 nghĩa là 'biết cách làm gì', + -(으)ㄹ 줄 모르다 nghĩa là 'không biết cách làm gì'. Sau nguyên âm dùng -ㄹ 줄, sau phụ âm dùng -을 줄. 줄 ở đây là 'cách, phương pháp'.", quiz: [
+{ q: "Điền đúng: '저는 수영할 줄 ___.' (Tôi biết bơi.)", o: ["알아요", "몰라요", "있어요"], a: 0, why: "Biết cách làm dùng 수영할 줄 알아요." },
+{ q: "Điền đúng: '저는 운전할 줄 ___.' (Tôi không biết lái xe.)", o: ["몰라요", "알아요", "있어요"], a: 0, why: "Không biết cách làm dùng 운전할 줄 몰라요." },
+{ q: "Chọn câu dùng mẫu -(으)ㄹ 줄 알다: 'Tôi biết nấu cơm.'", o: ["저는 밥을 할 줄 알아요.", "저는 밥을 할 수 있어요.", "저는 밥을 해요."], a: 0, why: "Mẫu -(으)ㄹ 줄 알다: 할 줄 알아요. (할 수 있어요 cũng đúng nhưng là mẫu 'có thể'.)" },
+{ q: "Điền đúng: '저는 한국어를 말할 줄 ___.' (Tôi biết nói tiếng Hàn.)", o: ["알아요", "몰라요", "있어요"], a: 0, why: "말할 줄 알아요 = biết nói." },
+{ q: "'자전거를 탈 줄 몰라요' có nghĩa là gì?", o: ["Tôi không biết đi xe đạp.", "Tôi biết đi xe đạp.", "Tôi đang đi xe đạp."], a: 0, why: "타다 + -ㄹ 줄 모르다 = 탈 줄 몰라요, không biết đi xe đạp." },
+{ q: "Chọn câu SAI:", o: ["저는 수영할 줄 알아요.", "저는 운전할 줄 몰라요.", "저는 수영할 줄 알어요."], a: 2, why: "Dạng đúng là 줄 알아요; '줄 알어요' thiếu 아, sai." }
+] },
+{ name: "-(으)ㄴ/는 줄 알다 — tưởng là...", level: "TOPIK II", explain: "Ví dụ trước: '벌써 간 줄 알았어요.' (Tôi tưởng là anh ấy đã đi rồi.) '그게 사실인 줄 알았어요.' (Tôi tưởng đó là sự thật.) Quy tắc: động từ/tính từ/danh từ + -(으)ㄴ/는 줄 알다 nghĩa là 'tưởng là..., cứ ngỡ là...'. Hiện tại: -는 줄 알다 (động từ), -(으)ㄴ 줄 알다 (tính từ), -인 줄 알다 (danh từ); quá khứ: -았/었을 줄 알다. Thường dùng khi nhận ra mình đã hiểu lầm.",
+  examples: [{"t": "'벌써 간 줄 알았어요.' (Tôi tưởng là anh ấy đã đi rồi.)", "s": "벌써 간 줄 알았어요."}, {"t": "'그게 사실인 줄 알았어요.' (Tôi tưởng đó là sự thật.)", "s": "그게 사실인 줄 알았어요."}],
+  rule: "động từ/tính từ/danh từ + -(으)ㄴ/는 줄 알다 nghĩa là 'tưởng là..., cứ ngỡ là...'. Hiện tại: -는 줄 알다 (động từ), -(으)ㄴ 줄 알다 (tính từ), -인 줄 알다 (danh từ); quá khứ: -았/었을 줄 알다. Thường dùng khi nhận ra mình đã hiểu lầm.", quiz: [
+{ q: "Điền đúng: '벌써 간 줄 ___.' (Tôi tưởng là anh ấy đã đi rồi.)", o: ["알았어요", "알아요", "몰라요"], a: 0, why: "Tưởng (quá khứ) dùng 간 줄 알았어요." },
+{ q: "Chọn câu đúng: 'Tôi tưởng đó là sự thật.'", o: ["그게 사실인 줄 알았어요.", "그게 사실이에요.", "그게 사실일까요?"], a: 0, why: "Tưởng là dùng 사실인 줄 알았어요." },
+{ q: "Điền đúng: '비가 오는 줄 ___.' (Tôi tưởng là trời đang mưa.)", o: ["알았어요", "알아요", "몰라요"], a: 0, why: "오는 줄 알았어요 = tưởng là đang mưa." },
+{ q: "'-았/었을 줄 알다' dùng khi nào?", o: ["Tưởng về chuyện đã xảy ra trong quá khứ", "Tưởng về chuyện tương lai", "Hỏi ý kiến"], a: 0, why: "-았/었을 줄 알다 = tưởng là đã... (quá khứ)." },
+{ q: "Điền đúng: '그 사람이 학생인 줄 ___.' (Tôi tưởng người đó là học sinh.)", o: ["알았어요", "알아요", "몰라요"], a: 0, why: "학생인 줄 알았어요 = tưởng là học sinh." },
+{ q: "Chọn câu SAI:", o: ["벌써 간 줄 알았어요.", "그게 사실인 줄 알았어요.", "벌써 가은 줄 알았어요."], a: 2, why: "Quá khứ của 가다 là 간 줄; '가은 줄' không phải dạng đúng." }
+] },
+{ name: "-기로 되어 있다 — đã định sẵn là...", level: "TOPIK II", explain: "Ví dụ trước: '내일 출발하기로 되어 있어요.' (Ngày mai đã định sẵn là khởi hành.) '회의는 3시에 시작하기로 되어 있어요.' (Cuộc họp đã định sẵn là bắt đầu lúc 3 giờ.) Quy tắc: động từ + -기로 되어 있다 nghĩa là 'đã định sẵn là..., theo kế hoạch là...'. Khác -기로 하다 (ai đó quyết định): -기로 되어 있다 nhấn mạnh kế hoạch, lịch trình đã có sẵn.",
+  examples: [{"t": "'내일 출발하기로 되어 있어요.' (Ngày mai đã định sẵn là khởi hành.)", "s": "내일 출발하기로 되어 있어요."}, {"t": "'회의는 3시에 시작하기로 되어 있어요.' (Cuộc họp đã định sẵn là bắt đầu lúc 3 giờ.)", "s": "회의는 3시에 시작하기로 되어 있어요."}],
+  rule: "động từ + -기로 되어 있다 nghĩa là 'đã định sẵn là..., theo kế hoạch là...'. Khác -기로 하다 (ai đó quyết định): -기로 되어 있다 nhấn mạnh kế hoạch, lịch trình đã có sẵn.", quiz: [
+{ q: "Điền đúng: '내일 출발하___ 되어 있어요.' (Ngày mai đã định sẵn là khởi hành.)", o: ["기로", "고", "면"], a: 0, why: "Đã định sẵn dùng 출발하기로 되어 있어요." },
+{ q: "Chọn câu dùng mẫu -기로 되어 있다: 'Cuộc họp đã định sẵn là bắt đầu lúc 3 giờ.'", o: ["회의는 3시에 시작하기로 되어 있어요.", "회의는 3시에 시작하기로 했어요.", "회의는 3시에 시작하고 있어요."], a: 0, why: "Mẫu -기로 되어 있다: 시작하기로 되어 있어요. (시작하기로 했어요 là 'đã quyết định', mẫu khác.)" },
+{ q: "Điền đúng: '다음 주에 시험을 보___ 되어 있어요.' (Tuần sau đã định sẵn là thi.)", o: ["기로", "고", "면"], a: 0, why: "보기로 되어 있어요 = đã định sẵn là thi." },
+{ q: "'-기로 되어 있다' khác '-기로 하다' ở điểm nào?", o: ["-기로 되어 있다 là kế hoạch đã có sẵn, -기로 하다 là ai đó quyết định", "-기로 되어 있다 chỉ dùng trong câu hỏi", "-기로 되어 있다 là thì quá khứ"], a: 0, why: "-기로 되어 있다 nhấn mạnh lịch trình đã định sẵn; -기로 하다 là quyết định của ai đó." },
+{ q: "Điền đúng: '이 버스는 서울에 가___ 되어 있어요.' (Xe buýt này đã định sẵn là đi Seoul.)", o: ["기로", "고", "면"], a: 0, why: "가기로 되어 있어요 = đã định sẵn là đi Seoul." },
+{ q: "Chọn câu SAI:", o: ["내일 출발하기로 되어 있어요.", "회의는 3시에 시작하기로 되어 있어요.", "내일 출발하고로 되어 있어요."], a: 2, why: "Dạng đúng là 출발하기로 되어 있어요; '출발하고로' không phải dạng đúng." }
+] },
+{ name: "-아/어야겠다 — nhất định phải / sẽ...", level: "TOPIK II", explain: "Ví dụ trước: '내일은 일찍 자야겠어요.' (Ngày mai nhất định tôi sẽ ngủ sớm.) '이 문제를 꼭 해결해야겠어요.' (Nhất định tôi sẽ giải quyết vấn đề này.) Quy tắc: động từ + -아/어야겠다 diễn tả quyết tâm mạnh mẽ ('nhất định phải...') hoặc dự đoán chắc chắn ('sẽ...'). Thân động từ có nguyên âm ㅏ/ㅗ dùng -아야겠다, còn lại dùng -어야겠다; 하다 thành 해야겠다.",
+  examples: [{"t": "'내일은 일찍 자야겠어요.' (Ngày mai nhất định tôi sẽ ngủ sớm.)", "s": "내일은 일찍 자야겠어요."}, {"t": "'이 문제를 꼭 해결해야겠어요.' (Nhất định tôi sẽ giải quyết vấn đề này.)", "s": "이 문제를 꼭 해결해야겠어요."}],
+  rule: "động từ + -아/어야겠다 diễn tả quyết tâm mạnh mẽ ('nhất định phải...') hoặc dự đoán chắc chắn ('sẽ...'). Thân động từ có nguyên âm ㅏ/ㅗ dùng -아야겠다, còn lại dùng -어야겠다; 하다 thành 해야겠다.", quiz: [
+{ q: "Điền đúng: '내일은 일찍 자___.' (Ngày mai nhất định tôi sẽ ngủ sớm.)", o: ["야겠어요", "야 해요", "야 돼요"], a: 0, why: "Nhất định sẽ ngủ sớm dùng 자야겠어요." },
+{ q: "Chọn câu dùng mẫu -아/어야겠다: 'Nhất định tôi sẽ giải quyết vấn đề này.'", o: ["이 문제를 꼭 해결해야겠어요.", "이 문제를 꼭 해결해야 해요.", "이 문제를 꼭 해결할까요?"], a: 0, why: "Mẫu -아/어야겠다: 해결해야겠어요. (해결해야 해요 cũng đúng nhưng là mẫu 'phải làm'.)" },
+{ q: "Điền đúng: '내일부터 열심히 공부___겠어요.' (Từ ngày mai nhất định tôi sẽ học chăm.)", o: ["해", "하", "할"], a: 0, why: "공부하다 → 공부해야겠어요: 공부해야겠어요." },
+{ q: "'-아/어야겠다' diễn tả điều gì?", o: ["Quyết tâm mạnh mẽ hoặc dự đoán chắc chắn", "Đề nghị cùng làm", "Phỏng đoán nhẹ 'có vẻ'"], a: 0, why: "-아/어야겠다 = nhất định phải / sẽ... (quyết tâm); đề nghị là -(으)ㄹ까요." },
+{ q: "Điền đúng: '비가 오면 우산을 가져가___겠어요.' (Nếu trời mưa thì nhất định tôi sẽ mang ô.)", o: ["야", "고", "면"], a: 0, why: "가져가야겠어요 = nhất định sẽ mang theo." },
+{ q: "Chọn câu SAI:", o: ["내일은 일찍 자야겠어요.", "이 문제를 꼭 해결해야겠어요.", "내일은 일찍 자야겠다요."], a: 2, why: "Đuôi đúng là 자야겠어요; '자야겠다요' thừa đuôi." }
+] },
+{ name: "-(으)ㄹ까 봐 — sợ rằng...", level: "TOPIK II", explain: "Ví dụ trước: '비가 올까 봐 우산을 가져갔어요.' (Sợ rằng trời sẽ mưa nên tôi đã mang theo ô.) '시험에 떨어질까 봐 걱정돼요.' (Tôi lo sợ rằng sẽ trượt kỳ thi.) Quy tắc: động từ/tính từ + -(으)ㄹ까 봐 nghĩa là 'sợ rằng, lo rằng...'. Sau nguyên âm dùng -ㄹ까 봐, sau phụ âm dùng -을까 봐. Vế sau thường là hành động phòng ngừa hoặc cảm xúc lo lắng.",
+  examples: [{"t": "'비가 올까 봐 우산을 가져갔어요.' (Sợ rằng trời sẽ mưa nên tôi đã mang theo ô.)", "s": "비가 올까 봐 우산을 가져갔어요."}, {"t": "'시험에 떨어질까 봐 걱정돼요.' (Tôi lo sợ rằng sẽ trượt kỳ thi.)", "s": "시험에 떨어질까 봐 걱정돼요."}],
+  rule: "động từ/tính từ + -(으)ㄹ까 봐 nghĩa là 'sợ rằng, lo rằng...'. Sau nguyên âm dùng -ㄹ까 봐, sau phụ âm dùng -을까 봐. Vế sau thường là hành động phòng ngừa hoặc cảm xúc lo lắng.", quiz: [
+{ q: "Điền đúng: '비가 올까 ___ 우산을 가져갔어요.' (Sợ rằng trời sẽ mưa nên tôi đã mang theo ô.)", o: ["봐", "요", "서"], a: 0, why: "Sợ rằng trời mưa dùng 올까 봐." },
+{ q: "Chọn câu đúng: 'Tôi lo sợ rằng sẽ trượt kỳ thi.'", o: ["시험에 떨어질까 봐 걱정돼요.", "시험에 떨어지면 걱정돼요.", "시험에 떨어져서 걱정돼요."], a: 0, why: "Câu này hỏi mẫu -(으)ㄹ까 봐: 떨어질까 봐 걱정돼요." },
+{ q: "Điền đúng: '늦을까 ___ 일찍 출발했어요.' (Sợ rằng sẽ muộn nên tôi đã khởi hành sớm.)", o: ["봐", "요", "서"], a: 0, why: "늦을까 봐 = sợ rằng sẽ muộn." },
+{ q: "'-(으)ㄹ까 봐' diễn tả điều gì?", o: ["Sợ rằng, lo rằng...", "Chắc chắn rằng...", "Đã biết rằng..."], a: 0, why: "-(으)ㄹ까 봐 = sợ rằng, lo rằng..." },
+{ q: "Điền đúng: '아플까 ___ 약을 먹었어요.' (Sợ rằng sẽ ốm nên tôi đã uống thuốc.)", o: ["봐", "요", "서"], a: 0, why: "아플까 봐 = sợ rằng sẽ ốm." },
+{ q: "Chọn câu SAI:", o: ["비가 올까 봐 우산을 가져갔어요.", "시험에 떨어질까 봐 걱정돼요.", "비가 올까 봐요 우산을 가져갔어요."], a: 2, why: "Dạng đúng là 올까 봐; '올까 봐요' thừa đuôi." }
+] },
+];
+TP_GRAMMAR.push.apply(TP_GRAMMAR, TP_GRAMMAR_EXPAND_V190);
+
 TP_LISTEN.push.apply(TP_LISTEN, TP_LISTEN_EXPAND16_L6);
 TP_READ.push.apply(TP_READ, TP_READ_EXPAND16_L6);
 TP_CHECK.push(TP_CHECK_EXPAND16_L6);
