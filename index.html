@@ -16517,18 +16517,19 @@ function renderSkillRead(app, l) {
     return;
   }
   if (!l.quiz) {
-    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + readNewWordHTML(r) + '<div class="qblock">' + gd23DictParaHTML(r.text) + gd23DictBoxHTML()
+    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + readNewWordHTML(r) + '<div class="qblock">' + u11ParaHTML("en", r.text) + u11BoxHTML("en")
       + '<p class="mut">Đọc kỹ bài rồi bấm "Làm bài" — câu hỏi hiện ngay dưới bài, bài đọc vẫn xem lại được trong lúc làm.</p>'
       + '<button class="btn btn-primary" id="readStart">Làm bài (' + r.questions.length + ' câu)</button></div>';
     wireBack();
     $("#readStart").onclick = function () { l.quiz = true; lessonStart = Date.now(); runWrong = []; runFirstTry = {}; render(); };
-    gd23DictWire();
+    u11Wire(app, "en", "read:" + l.idx);
     return;
   }
-  app.innerHTML = '<div class="qblock" id="readPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="readPassageToggle">Ẩn bài đọc</button><button class="btn" id="readListenAgain">🔊 Nghe lại bài đọc</button></div><div id="readPassageBody">' + paraHTML(r.text) + '</div></div><div id="quizSlot"></div>';
+  app.innerHTML = '<div class="qblock" id="readPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="readPassageToggle">Ẩn bài đọc</button><button class="btn" id="readListenAgain">🔊 Nghe lại bài đọc</button></div><div id="readPassageBody">' + u11ParaHTML("en", r.text) + '</div>' + u11BoxHTML("en") + '</div><div id="quizSlot"></div>';
   renderQuizEngine($("#quizSlot"), l, r.questions, "skill", "read:" + l.idx, 2);
   var rpt = $("#readPassageToggle"); if (rpt) rpt.onclick = function () { var rb = $("#readPassageBody"); if (!rb) return; var hid = rb.style.display === "none"; rb.style.display = hid ? "" : "none"; rpt.textContent = hid ? "Ẩn bài đọc" : "Hiện bài đọc"; };
   var rla = $("#readListenAgain"); if (rla) rla.onclick = function () { try { speak(r.text); } catch (e) {} }; /* v173 F8: pha lam bai co nut nghe lai nhu ZH */
+  u11Wire(app, "en", "read:" + l.idx);
 }
 /* ROADMAP-N8: doc them de hon mot nac — chi doc, khong tinh diem, khong quiz. */
 function renderSkillReadEasy(app, l) {
@@ -16537,11 +16538,12 @@ function renderSkillReadEasy(app, l) {
   l.title = "Đọc thêm — " + r.title;
   app.innerHTML = skillHead(l.title, r.topic + " · " + r.level + " · Đọc dễ hơn một nấc, không tính điểm")
     + '<div class="qblock"><p class="mut">Bài này chỉ để đọc thêm cho vui, không tính điểm, không vào tiến trình chương. Đọc xong thì bấm “Quay lại”.</p>'
-    + paraHTML(r.text)
+    + u11ParaHTML("en", r.text) + u11BoxHTML("en")
     + (r.translation ? '<p class="mut">' + esc(r.translation) + '</p>' : '')
     + ((r.phrases || []).length ? '<p><b>Từ hay gặp:</b> ' + r.phrases.map(function (pp) { return esc(pp.en) + " (" + esc(pp.vi) + ")"; }).join(" · ") + '</p>' : '')
     + '</div>';
   wireBack();
+  u11Wire(app, "en", "readEasy:" + l.idx);
 }
 /* ROADMAP-N7: diem on xen ke — tron ngu phap + tu vung cua chuong, khong tinh cong. */
 function renderSkillReview(app, l) {
@@ -22837,6 +22839,253 @@ function gd23DictWire() {
     if (r) r.innerHTML = gd23DictResultHTML(gd23DictLookup(v ? v.value : ""));
   };
 }
+/* ============ v188 — TID U11: DOC BAO SONG NGU, BAM TU TRA NGAY TRONG BAI ============
+   1 engine u11* chung ca 4 track (QT-05): bam vao tu trong bai doc -> hien nghia
+   + phat am + nut Luu vao SRS ngay tai cho, khong roi khoi bai doc. Nghia + phat
+   am chi lay tu kho tu vung tu soan cua web; tu ngoai kho ghi ro chua co trong
+   kho, khong bia nghia, khong doan phat am. Luu SRS dung dung dinh dang key
+   srs:saved:<lessonKey>:w:<tu> nhu saveWordToSRS (SRS M1) nen % tu moi + So
+   loi sai tu nhan duoc. TP: tu trong bai thuong kem tieu tu (학교에) nen tra
+   them dang goc sau khi bo tieu tu cuoi; dong tu chia thi khong tra duoc. */
+var U11_POOL = {};
+var U11_TP_PARTICLES = ["에서", "에게", "한테", "부터", "까지", "으로", "로", "와", "과", "의", "은", "는", "을", "를", "이", "가", "에", "도", "만"];
+function u11TpStem(w) {
+  for (var i = 0; i < U11_TP_PARTICLES.length; i++) {
+    var p = U11_TP_PARTICLES[i];
+    if (w.length > p.length + 1 && w.slice(-p.length) === p) return w.slice(0, -p.length);
+  }
+  return w;
+}
+function u11FindCard(track, word) {
+  var w = String(word || "");
+  var wl = w.toLowerCase();
+  var scan = function (arr) {
+    if (!arr) return null;
+    for (var i = 0; i < arr.length; i++) {
+      var s = arr[i]; if (!s || !s.cards) continue;
+      for (var j = 0; j < s.cards.length; j++) {
+        var c = s.cards[j];
+        if (c && String(c.w || "").toLowerCase() === wl) return c;
+      }
+    }
+    return null;
+  };
+  try {
+    if (track === "en") {
+      if (typeof CONTENT !== "undefined" && CONTENT.vocab) return scan(CONTENT.vocab);
+    } else if (track === "tc") {
+      var f = null;
+      if (typeof TC_VOCAB !== "undefined") f = scan(TC_VOCAB);
+      if (!f && typeof TC_VOCAB_EXPAND !== "undefined") f = scan(TC_VOCAB_EXPAND);
+      if (!f) for (var k = 2; k <= 14 && !f; k++) { var v = window["TC_VOCAB_EXPAND" + k]; if (v) f = scan(v); }
+      return f;
+    } else if (track === "tp") {
+      var f2 = null;
+      var tryWord = function (ww) {
+        wl = String(ww || "").toLowerCase();
+        if (typeof TP_VOCAB !== "undefined") f2 = scan(TP_VOCAB);
+        if (!f2) for (var k2 = 1; k2 <= 16 && !f2; k2++) { var v2 = window["TP_VOCAB_EXPAND" + k2]; if (v2) f2 = scan(v2); }
+        if (!f2) ["L3", "L4", "L5", "L6"].forEach(function (suf) { if (!f2) { var v3 = window["TP_VOCAB_EXPAND16_" + suf]; if (v3) f2 = scan(v3); } });
+      };
+      tryWord(w);
+      if (!f2) { var stem = u11TpStem(w); if (stem !== w) tryWord(stem); }
+      return f2;
+    } else if (track === "zh") {
+      var found = null;
+      try {
+        zhSets().forEach(function (sd) {
+          if (found) return;
+          (sd.set.cards || []).forEach(function (c) { if (!found && c.han === w) found = c; });
+        });
+      } catch (e) {}
+      return found;
+    }
+  } catch (e) {}
+  return null;
+}
+function u11Pron(track, card) {
+  if (!card) return "";
+  if (track === "zh") return card.pinyin || "";
+  return card.ipa || card.r || "";
+}
+function u11NormWord(track, word) {
+  var w = String(word || "").trim();
+  if (track === "zh") return w;
+  return w.toLowerCase().replace(/^[^a-z\uAC00-\uD7A3]+|[^a-z\uAC00-\uD7A3]+$/g, "");
+}
+function u11Lookup(track, word) {
+  var key = u11NormWord(track, word);
+  if (!key) return { found: false, word: String(word || "") };
+  var c = u11FindCard(track, key);
+  if (!c) return { found: false, word: key };
+  return { found: true, w: (track === "zh" ? c.han : c.w) || key, pron: u11Pron(track, c), vi: c.vi || "", ex: c.ex || "", exv: c.exv || "" };
+}
+function u11WordBtn(track, key, disp) {
+  return '<button class="btn dict-word u11-word" data-u11-track="' + esc(track) + '" data-u11-word="' + esc(key) + '">' + esc(disp) + '</button>';
+}
+function u11ParaHTML(track, text) {
+  return String(text || "").split(/\n\s*\n/).map(function (p) {
+    if (track === "zh") {
+      var parts = p.split(/([\u4e00-\u9fff]+)/);
+      return '<p>' + parts.map(function (seg) {
+        if (/^[\u4e00-\u9fff]+$/.test(seg)) {
+          return zhSegWords(seg).map(function (w) { return u11WordBtn("zh", w, w); }).join("");
+        }
+        return esc(seg);
+      }).join("") + '</p>';
+    }
+    if (track === "tp") {
+      var toks = p.split(/(\s+)/);
+      return '<p>' + toks.map(function (t) {
+        if (/^\s+$/.test(t) || !t) return esc(t);
+        var key = t.replace(/^[^\uAC00-\uD7A3a-zA-Z]+|[^\uAC00-\uD7A3a-zA-Z]+$/g, "");
+        if (/[\uAC00-\uD7A3]/.test(key)) return u11WordBtn("tp", key, t);
+        return esc(t);
+      }).join("") + '</p>';
+    }
+    var words = p.split(/([A-Za-z][A-Za-z'-]*)/g);
+    return '<p>' + words.map(function (seg) {
+      if (/^[A-Za-z][A-Za-z'-]*$/.test(seg)) return u11WordBtn(track, seg.toLowerCase(), seg);
+      return esc(seg);
+    }).join("") + '</p>';
+  }).join("");
+}
+function u11BoxHTML(track) {
+  return '<div class="qblock" id="dictBox"><h3>Tra từ trong bài</h3>'
+    + '<p class="mut">Bấm vào một từ trong bài, hoặc gõ từ vào ô dưới — nghĩa + phát âm lấy từ kho từ vựng tự soạn sẵn có của web. Từ lưu vào ôn tập sẽ hiện dấu đã lưu ngay trong bài.</p>'
+    + '<div class="row"><input type="text" id="dictInp" placeholder="Gõ từ cần tra..."><button class="btn" id="dictBtn">Tra từ</button></div>'
+    + '<div id="dictResult"></div></div>';
+}
+function u11ResultHTML(track, res, lessonKey) {
+  if (!res.found) {
+    return '<p class="mut">Từ \'' + esc(res.word) + '\' chưa có trong kho — web không bịa nghĩa. Hãy tra từ khác trong kho từ vựng của web.</p>';
+  }
+  var saved = false;
+  try { saved = u11IsSaved(track, lessonKey || "", res.w); } catch (e) {}
+  var h = '<p><b>' + esc(res.w) + '</b>' + (res.pron ? ' <span class="mut">' + esc(res.pron) + '</span>' : '') + ': ' + esc(res.vi) + '</p>'
+    + (res.ex ? '<p>' + esc(res.ex) + '</p><p class="mut">' + esc(res.exv) + '</p>' : '');
+  h += '<div class="row"><button class="btn" id="u11Hear">🔊 Nghe phát âm</button>'
+    + (saved ? '<button class="btn" disabled>✓ Đã lưu vào Sổ lỗi sai</button>'
+             : '<button class="btn btn-primary" id="u11Save">💾 Lưu vào Sổ lỗi sai</button>')
+    + '</div>';
+  return h;
+}
+function u11ViPool(track) {
+  if (U11_POOL[track]) return U11_POOL[track];
+  var pool = [];
+  var add = function (arr) {
+    if (!arr) return;
+    arr.forEach(function (s) { (s.cards || []).forEach(function (c) { if (c.vi) pool.push(c.vi); }); });
+  };
+  try {
+    if (track === "en") { if (typeof CONTENT !== "undefined" && CONTENT.vocab) add(CONTENT.vocab); }
+    else if (track === "tc") {
+      if (typeof TC_VOCAB !== "undefined") add(TC_VOCAB);
+      if (typeof TC_VOCAB_EXPAND !== "undefined") add(TC_VOCAB_EXPAND);
+      for (var k = 2; k <= 14; k++) { var v = window["TC_VOCAB_EXPAND" + k]; if (v) add(v); }
+    } else if (track === "tp") {
+      if (typeof TP_VOCAB !== "undefined") add(TP_VOCAB);
+      for (var k2 = 1; k2 <= 16; k2++) { var v2 = window["TP_VOCAB_EXPAND" + k2]; if (v2) add(v2); }
+      ["L3", "L4", "L5", "L6"].forEach(function (suf) { var v3 = window["TP_VOCAB_EXPAND16_" + suf]; if (v3) add(v3); });
+    } else if (track === "zh") {
+      zhSets().forEach(function (sd) { (sd.set.cards || []).forEach(function (c) { if (c.vi) pool.push(c.vi); }); });
+    }
+  } catch (e) {}
+  if (!pool.length) pool = ["chưa rõ nghĩa"];
+  U11_POOL[track] = pool;
+  return pool;
+}
+/* v188 sua: tu da luu phai nam trong KHO RIENG cua tung track — tab On tap chi
+   doc kho cua track do (EN: state.hard; ZH: state.zhHard; TC: state.tcHard;
+   TP: state.tpHard). Ban dau ghi het vao state.hard thi tu ZH/TC/TP vo hinh
+   o tab On tap cua track do ma lai lot sang buoi on EN (dung bai hoc v103
+   P2.8 da ghi trong recordGameMiss). */
+function u11IsSaved(track, lessonKey, word) {
+  var w = u11NormWord(track, word), ref = String(lessonKey || "").split(":")[1] || "";
+  if (track === "zh") return !!(state.zhHard || {})["srs:saved:" + lessonKey + ":w:" + w];
+  if (track === "tc" || track === "tp") {
+    var list = track === "tc" ? (state.tcHard || []) : (state.tpHard || []);
+    var hit = list.some(function (h) { return h && h.kind === "srs" && h.step === "r" + ref && h.qi === "w:" + w; });
+    if (!hit && track === "tp") { var st = u11TpStem(w); if (st !== w) hit = list.some(function (h) { return h && h.kind === "srs" && h.step === "r" + ref && h.qi === "w:" + st; }); }
+    return hit;
+  }
+  return !!(state.hard || {})["srs:saved:" + lessonKey + ":w:" + w];
+}
+function u11SaveWord(track, word, vi, lessonKey) {
+  var res = u11Lookup(track, word), w = res.w, v = res.vi || vi;
+  var ref = String(lessonKey).split(":")[1] || "";
+  var q = "Từ đã lưu: " + w + " — nghĩa tiếng Việt là gì?";
+  var why = w + " — " + v;
+  if (track === "en") return saveWordToSRS(w, v, lessonKey); /* dung dung mau EN san co */
+  if (track === "zh") {
+    if (!state.zhHard) state.zhHard = {};
+    var key = "srs:saved:" + lessonKey + ":w:" + u11NormWord(track, w);
+    if (state.zhHard[key]) return false;
+    var pool = u11ViPool(track), others = [], guard = 0;
+    while (others.length < 2 && guard < 40) { guard++; var cand = pool[Math.floor(Math.random() * pool.length)]; if (cand && cand !== v && others.indexOf(cand) < 0) others.push(cand); }
+    while (others.length < 2) others.push("chưa rõ nghĩa");
+    var opts = gameShuffle([v].concat(others));
+    /* mau muc quiz ZH (:24449): q + options + a de buoi on ZH xao dap an va cham
+       duoc; tu da luu KHONG phai loi sai nen khong gan nguyen nhan U3 goi y. */
+    state.zhHard[key] = { kind: "quiz", lesson: lessonKey, qi: "w:" + w, q: q, options: opts, a: opts.indexOf(v), why: why, streak: 0, level: 0, fails: 0, due: addDaysStr(todayStr(), 1) };
+    saveState(); return true;
+  }
+  if (track === "tc" || track === "tp") {
+    var list = track === "tc" ? (state.tcHard || (state.tcHard = [])) : (state.tpHard || (state.tpHard = []));
+    var step = "r" + ref; /* id buoc that cua bai Doc — nut "On lai buoc" o So loi sai mo dung bai */
+    if (list.some(function (h) { return h && h.kind === "srs" && h.step === step && h.qi === "w:" + w; })) return false;
+    /* mau tcAddHard: q + ans (buoi on TC/TP dung ans de xao dap an luc on, khong
+       dung options luu san); tu da luu KHONG phai loi sai nen khong gan nguyen nhan U3 goi y. */
+    list.push({ kind: "srs", step: step, qi: "w:" + w, q: q, ans: v, why: why, streak: 0, level: 0, fails: 0, due: addDaysStr(todayStr(), 1) });
+    saveState(); return true;
+  }
+  return false;
+}
+function u11MarkSaved(root, track, lessonKey, word) {
+  var btns = root.querySelectorAll ? root.querySelectorAll(".u11-word") : [];
+  btns.forEach(function (b) {
+    var key = b.dataset.u11Word || "";
+    var hit = false;
+    try { hit = u11IsSaved(track, lessonKey, key); } catch (e) {}
+    if (!hit && word) {
+      var res = u11Lookup(track, key);
+      if (res.found && res.w === word) hit = true;
+    }
+    if (hit) { b.classList.add("u11-saved"); b.title = "Đã lưu vào Sổ lỗi sai"; b.style.borderColor = "#15803d"; b.style.color = "#15803d"; }
+  });
+}
+function u11Wire(scopeEl, track, lessonKey) {
+  var root = scopeEl || document;
+  var show = function (word) {
+    var res = u11Lookup(track, word);
+    var r = root.querySelector ? root.querySelector("#dictResult") : null;
+    if (!r) r = document.getElementById("dictResult");
+    if (!r) return;
+    r.innerHTML = u11ResultHTML(track, res, lessonKey);
+    var hb = document.getElementById("u11Hear");
+    if (hb) hb.onclick = function () { try { speakAuto(res.w); } catch (e) {} };
+    var sb = document.getElementById("u11Save");
+    if (sb) sb.onclick = function () {
+      if (u11SaveWord(track, res.w, res.vi, lessonKey)) {
+        r.innerHTML = u11ResultHTML(track, res, lessonKey);
+        var hb2 = document.getElementById("u11Hear");
+        if (hb2) hb2.onclick = function () { try { speakAuto(res.w); } catch (e) {} };
+        u11MarkSaved(root, track, lessonKey, res.w);
+      }
+    };
+  };
+  var btns = root.querySelectorAll ? root.querySelectorAll(".u11-word") : [];
+  btns.forEach(function (b) {
+    b.onclick = function () { show(b.dataset.u11Word || b.textContent); };
+  });
+  var db = root.querySelector ? root.querySelector("#dictBtn") : null;
+  if (db) db.onclick = function () {
+    var v = root.querySelector ? root.querySelector("#dictInp") : null;
+    show(v ? v.value : "");
+  };
+  u11MarkSaved(root, track, lessonKey, null);
+}
+
 
 /* ----- b20: khung 5 nhịp cho bài nghe ----- */
 function gd23ListenSteps() {
@@ -25409,22 +25658,24 @@ function renderZhRead(app, l) {
   }
   if (!l.quiz) {
     var html = lessonHead({ title: "Đọc: " + r.title, type: "Tiếng Trung · Đọc chặng " + r.stage + " · " + r.topic }, r.note || "");
-    html += phaseBarHTML(1) + '<div class="qblock"><p class="zh-han">' + esc(r.text) + '</p><p><b>' + esc(r.pinyin) + '</b></p>'
+    html += phaseBarHTML(1) + '<div class="qblock"><div class="zh-han">' + u11ParaHTML("zh", r.text) + '</div>' + u11BoxHTML("zh") + '<p><b>' + esc(r.pinyin) + '</b></p>'
       + '<details class="rule-more"><summary><b>Xem bản dịch tiếng Việt</b></summary><p>' + esc(r.vi) + '</p></details>'
       + '<p class="mut">Đọc kỹ bài rồi bấm "Làm bài" — khi làm câu hỏi vẫn xem lại được bài đọc bằng nút Ẩn/Hiện.</p>'
       + '<div class="row"><button class="btn btn-primary" id="zhReadStart">Làm bài (' + r.questions.length + ' câu) →</button></div></div>' + zhReadNewWordHTML(r);
     app.innerHTML = html;
     wireBack();
+    u11Wire(app, "zh", "zhRead:" + r.id);
     $("#zhReadStart").onclick = function () { l.quiz = true; l.qi = 0; l.score = 0; l.picked = -1; l.finished = false; l.wrong = []; l.hintTier = {}; l.selfRel = {}; l.qOk = {}; l.wrongQs = []; l.hintText = {}; l.fixStep = null; lessonStart = Date.now(); render(); };
     return;
   }
   l.title = "Đọc: " + r.title; l.typeLabel = "Tiếng Trung · Đọc chặng " + r.stage;
   l.recordErrors = true; l.zhQuizLesson = "zhRead:" + r.id;
-  app.innerHTML = '<div class="qblock" id="zhReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="zhReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="zhReadListen">🔊 Nghe đoạn</button></div><div id="zhReadPassageBody"><p class="zh-han">' + esc(r.text) + '</p><p><b>' + esc(r.pinyin) + '</b></p></div></div><div id="zhQuizSlot"></div>';
+  app.innerHTML = '<div class="qblock" id="zhReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="zhReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="zhReadListen">🔊 Nghe đoạn</button></div><div id="zhReadPassageBody"><div class="zh-han">' + u11ParaHTML("zh", r.text) + '</div><p><b>' + esc(r.pinyin) + '</b></p></div>' + u11BoxHTML("zh") + '</div><div id="zhQuizSlot"></div>';
   wireBack();
   var rpt = $("#zhReadPassageToggle"); if (rpt) rpt.onclick = function () { var rb = $("#zhReadPassageBody"); if (!rb) return; var hid = rb.style.display === "none"; rb.style.display = hid ? "" : "none"; rpt.textContent = hid ? "Ẩn bài đọc" : "Hiện bài đọc"; };
   var rl = $("#zhReadListen"); if (rl) rl.onclick = function () { zhSpeak(r.text); };
   renderZhQuiz($("#zhQuizSlot"), l, r.questions, function (score, total) { zhAwardOnce("zhRead:" + r.id); }, null, { hints: true, readFix: true, micro: { track: "zh", branch: "read" } });
+  u11Wire(app, "zh", "zhRead:" + r.id);
 }
 function zhListenSpeakText(r) { return (r.lines || []).map(function (ln) { return ln.han; }).join(" "); }
 function zhListenTranscriptHTML(r) {
@@ -27191,20 +27442,22 @@ function tcOpenStep(id, backTab) {
     /* v173 F8: bai co doan van thi tach 2 pha nhu EN/ZH — pha 1 doc ky, pha 2 lam bai + nghe lai; bai Part 5 khong co doan van thi giu 1 man quiz nhu cu. */
     var renderReadQuiz = function () {
       var htmlQ = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(2)
-        + '<div class="qblock" id="tcReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="tcReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="tcReadListenAgain">🔊 Nghe lại bài đọc</button></div><div id="tcReadPassageBody"><p>' + esc(r.passage) + '</p></div></div>'
+        + '<div class="qblock" id="tcReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="tcReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="tcReadListenAgain">🔊 Nghe lại bài đọc</button></div><div id="tcReadPassageBody">' + u11ParaHTML("tc", r.passage) + '</div>' + u11BoxHTML("tc") + '</div>'
         + tcQuizBlockHTML(r.qs, "r", { hints: true }) + '<div class="row"><button class="btn btn-primary" id="tcFinishBtn">Xong bài này (+10 XP)</button></div></section>';
       app.innerHTML = htmlQ; app._tcQs = r.qs;
       tcWireQuiz(app, id, "tcFinishBtn", { hints: true, lessonId: "tcRead:" + m.ref, micro: { track: "tc", branch: "read", part: r.part }, fix: { back: back, ref: m.ref } });
       var tpt = document.getElementById("tcReadPassageToggle"); if (tpt) tpt.onclick = function () { var rb = document.getElementById("tcReadPassageBody"); if (!rb) return; var hid = rb.style.display === "none"; rb.style.display = hid ? "" : "none"; tpt.textContent = hid ? "Ẩn bài đọc" : "Hiện bài đọc"; };
       var tla = document.getElementById("tcReadListenAgain"); if (tla) tla.onclick = function () { try { speak(r.passage); } catch (e) {} };
+      u11Wire(app, "tc", "tcRead:" + m.ref);
       document.getElementById("tcFinishBtn").onclick = function () { if (tcMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
       tcWireBack(back);
     };
     if (r.passage) {
-      var html4 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(1) + '<p>' + esc(r.passage) + '</p>'
+      var html4 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(1) + u11ParaHTML("tc", r.passage) + u11BoxHTML("tc")
         + '<p class="mut">Đọc kỹ bài rồi bấm "Làm bài" — khi làm câu hỏi vẫn xem lại được bài đọc bằng nút Ẩn/Hiện.</p>'
         + '<div class="row"><button class="btn btn-primary" id="tcReadStart">Làm bài (' + r.qs.length + ' câu) →</button></div>' + tcReadNewWordHTML(r) + '</section>';
       app.innerHTML = html4;
+      u11Wire(app, "tc", "tcRead:" + m.ref);
       document.getElementById("tcReadStart").onclick = renderReadQuiz;
       tcWireBack(back); return;
     }
@@ -28311,20 +28564,22 @@ function tpOpenStep(id, backTab) {
        DOT 19 UI GATE (31/10/2026): tom tat Viet (passagev) hien ngay sau doan van, kieu <p class="mut">, o MOI cap (cap 6 va cap 1/2 EXPAND18 hien giong nhau); bai khong co passagev thi khong doi. */
     var renderReadQuiz = function () {
       var htmlQ = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · ĐỌC</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(2)
-        + '<div class="qblock" id="tpReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="tpReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="tpReadListenAgain">🔊 Nghe lại bài đọc</button></div><div id="tpReadPassageBody"><p>' + esc(r.passage) + '</p>' + (r.passagev ? '<p class="mut">' + esc(r.passagev) + '</p>' : '') + '</div></div>'
+        + '<div class="qblock" id="tpReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="tpReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="tpReadListenAgain">🔊 Nghe lại bài đọc</button></div><div id="tpReadPassageBody">' + u11ParaHTML("tp", r.passage) + (r.passagev ? '<p class="mut">' + esc(r.passagev) + '</p>' : '') + '</div>' + u11BoxHTML("tp") + '</div>'
         + tpQuizBlockHTML(r.qs, "r", { hints: true }) + '<div class="row"><button class="btn btn-primary" id="tpFinishBtn">Xong bài này (+10 XP)</button></div></section>';
       app.innerHTML = htmlQ; app._tpQs = r.qs;
       tpWireQuiz(app, id, "tpFinishBtn", { hints: true, lessonId: "tpRead:" + m.ref, micro: { track: "tp", branch: "read", part: r.part }, fix: { back: back, ref: m.ref } });
       var tpt = document.getElementById("tpReadPassageToggle"); if (tpt) tpt.onclick = function () { var rb = document.getElementById("tpReadPassageBody"); if (!rb) return; var hid = rb.style.display === "none"; rb.style.display = hid ? "" : "none"; tpt.textContent = hid ? "Ẩn bài đọc" : "Hiện bài đọc"; };
       var tla = document.getElementById("tpReadListenAgain"); if (tla) tla.onclick = function () { try { tpSpeak(r.passage); } catch (e) {} };
+      u11Wire(app, "tp", "tpRead:" + m.ref);
       document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
       tpWireBack(back);
     };
     if (r.passage) {
-      var html4 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · ĐỌC</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(1) + '<p>' + esc(r.passage) + '</p>' + (r.passagev ? '<p class="mut">' + esc(r.passagev) + '</p>' : '')
+      var html4 = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · ĐỌC</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(1) + u11ParaHTML("tp", r.passage) + (r.passagev ? '<p class="mut">' + esc(r.passagev) + '</p>' : '') + u11BoxHTML("tp")
         + '<p class="mut">Đọc kỹ bài rồi bấm "Làm bài" — khi làm câu hỏi vẫn xem lại được bài đọc bằng nút Ẩn/Hiện.</p>'
         + '<div class="row"><button class="btn btn-primary" id="tpReadStart">Làm bài (' + r.qs.length + ' câu) →</button></div>' + tpReadNewWordHTML(r) + '</section>';
       app.innerHTML = html4;
+      u11Wire(app, "tp", "tpRead:" + m.ref);
       document.getElementById("tpReadStart").onclick = renderReadQuiz;
       tpWireBack(back); return;
     }
