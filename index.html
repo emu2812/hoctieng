@@ -27442,7 +27442,7 @@ function tcOpenStep(id, backTab) {
     /* v173 F8: bai co doan van thi tach 2 pha nhu EN/ZH — pha 1 doc ky, pha 2 lam bai + nghe lai; bai Part 5 khong co doan van thi giu 1 man quiz nhu cu. */
     var renderReadQuiz = function () {
       var htmlQ = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(2)
-        + '<div class="qblock" id="tcReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="tcReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="tcReadListenAgain">🔊 Nghe lại bài đọc</button></div><div id="tcReadPassageBody">' + u11ParaHTML("tc", r.passage) + '</div>' + u11BoxHTML("tc") + '</div>'
+        + '<div class="qblock" id="tcReadPassage"><div class="row"><b>Bài đọc</b><button class="btn" id="tcReadPassageToggle">Ẩn bài đọc</button><button class="btn" id="tcReadListenAgain">🔊 Nghe lại bài đọc</button></div><div id="tcReadPassageBody">' + u11ParaHTML("tc", r.passage) + (r.passagev ? '<p class="mut">' + esc(r.passagev) + '</p>' : '') + '</div>' + u11BoxHTML("tc") + '</div>'
         + tcQuizBlockHTML(r.qs, "r", { hints: true }) + '<div class="row"><button class="btn btn-primary" id="tcFinishBtn">Xong bài này (+10 XP)</button></div></section>';
       app.innerHTML = htmlQ; app._tcQs = r.qs;
       tcWireQuiz(app, id, "tcFinishBtn", { hints: true, lessonId: "tcRead:" + m.ref, micro: { track: "tc", branch: "read", part: r.part }, fix: { back: back, ref: m.ref } });
@@ -27453,7 +27453,7 @@ function tcOpenStep(id, backTab) {
       tcWireBack(back);
     };
     if (r.passage) {
-      var html4 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(1) + u11ParaHTML("tc", r.passage) + u11BoxHTML("tc")
+      var html4 = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · ĐỌC PART ' + r.part + '</p><h2>' + esc(r.title) + '</h2>' + phaseBarHTML(1) + u11ParaHTML("tc", r.passage) + (r.passagev ? '<p class="mut">' + esc(r.passagev) + '</p>' : '') + u11BoxHTML("tc")
         + '<p class="mut">Đọc kỹ bài rồi bấm "Làm bài" — khi làm câu hỏi vẫn xem lại được bài đọc bằng nút Ẩn/Hiện.</p>'
         + '<div class="row"><button class="btn btn-primary" id="tcReadStart">Làm bài (' + r.qs.length + ' câu) →</button></div>' + tcReadNewWordHTML(r) + '</section>';
       app.innerHTML = html4;
