@@ -73791,6 +73791,1534 @@ var ZH_GRAMMAR_EXPAND192E = [
 ];
 
 ZH_GRAMMAR.push.apply(ZH_GRAMMAR, ZH_GRAMMAR_EXPAND192E);
+// v194 (15/11/2026): bo sung ngu phap HSK con thieu — dot A (5 mục chặng 1: phó từ mức độ cơ bản, 不/没, tính từ làm vị ngữ, 能, 正在…呢).
+var ZH_GRAMMAR_EXPAND194A = [
+ {
+  "examples": [
+   "他很高。(Tā hěn gāo.) — Anh ấy cao.",
+   "今天非常冷。(Jīntiān fēicháng lěng.) — Hôm nay rất lạnh.",
+   "我特别喜欢中国菜。(Wǒ tèbié xǐhuan Zhōngguó cài.) — Tôi đặc biệt thích món Trung Quốc.",
+   "这件衣服挺好看的。(Zhè jiàn yīfu tǐng hǎokàn de.) — Bộ quần áo này khá đẹp."
+  ],
+  "hook": "“他很高。” — anh ấy cao: 很 đứng trước tính từ, nhẹ nhàng, không hẳn là “rất”.",
+  "id": "zh19g-hen-feichang",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Anh ấy cao",
+     "Anh ấy rất rất cao",
+     "Anh ấy không cao",
+     "Anh ấy cao hơn tôi"
+    ],
+    "q": "“他很高” nghĩa là gì?",
+    "why": "很 ở đây nhẹ, câu chỉ nói anh ấy cao."
+   },
+   {
+    "a": 0,
+    "o": [
+     "非常",
+     "一点儿",
+     "比较",
+     "挺"
+    ],
+    "q": "Từ nào mạnh hơn 很?",
+    "why": "非常 mạnh hơn 很."
+   },
+   {
+    "a": 0,
+    "o": [
+     "特别",
+     "很不",
+     "非常不",
+     "比较不"
+    ],
+    "q": "“我___喜欢中国菜” — điền từ chỉ “đặc biệt”?",
+    "why": "特别 = đặc biệt."
+   },
+   {
+    "a": 0,
+    "o": [
+     "跑步 (chạy bộ)",
+     "喜欢 (thích)",
+     "想 (muốn)",
+     "怕 (sợ)"
+    ],
+    "q": "很 không đứng trước động từ nào?",
+    "why": "很 chỉ đứng trước tính từ hoặc động từ tâm lý, không đứng trước động từ hành động như 跑步."
+   },
+   {
+    "a": 0,
+    "o": [
+     "挺",
+     "非常不",
+     "很不",
+     "一点儿"
+    ],
+    "q": "“这件衣服___好看” — điền “khá”?",
+    "why": "挺 = khá (khẩu ngữ)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "khá, tương đối",
+     "cực kỳ",
+     "một chút",
+     "quá"
+    ],
+    "q": "“相当” nghĩa gần nhất với?",
+    "why": "相当 = khá, tương đối."
+   }
+  ],
+  "rule": "很: rất (nhẹ, thường dùng sau chủ ngữ + tính từ; nói “他很高” thường chỉ là “anh ấy cao” chứ không nhấn “rất”). 非常: vô cùng, rất (mạnh hơn 很). 特别: đặc biệt, nhất là. 相当: khá, tương đối (trang trọng hơn). 比较: tương đối, khá (so với bình thường). 挺: khá, cũng (khẩu ngữ). Tất cả đứng TRƯỚC tính từ hoặc động từ tâm lý (喜欢, 想, 怕); không đứng trước động từ hành động (không nói “我很跑步”).",
+  "speak": "他很高。今天非常冷。我特别喜欢中国菜。这件衣服挺好看的。",
+  "stage": 1,
+  "tip": "“他很高” nghe như “anh ấy cao” — 很 ở đây nhẹ, không nhấn “rất”; muốn nhấn mạnh thì dùng 非常/特别.",
+  "title": "Phó từ mức độ cơ bản — 很/非常/特别/相当/比较/挺"
+ },
+ {
+  "examples": [
+   "我今天不去学校。(Wǒ jīntiān bú qù xuéxiào.) — Hôm nay tôi không đi học.",
+   "他昨天没去学校。(Tā zuótiān méi qù xuéxiào.) — Hôm qua anh ấy đã không đi học.",
+   "我没有钱。(Wǒ méiyǒu qián.) — Tôi không có tiền.",
+   "他不高兴。(Tā bù gāoxìng.) — Anh ấy không vui."
+  ],
+  "hook": "“我不去，他没去。” — tôi không đi, anh ấy đã không đi: 不 phủ định hiện tại/tương lai, 没 phủ định quá khứ.",
+  "id": "zh19g-bu-mei",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "没",
+     "不",
+     "没有不",
+     "不没"
+    ],
+    "q": "“我昨天___去学校” — quá khứ?",
+    "why": "Quá khứ dùng 没."
+   },
+   {
+    "a": 0,
+    "o": [
+     "不",
+     "没",
+     "没有",
+     "不没"
+    ],
+    "q": "“他___高兴” — trạng thái hiện tại?",
+    "why": "Trạng thái hiện tại dùng 不."
+   },
+   {
+    "a": 0,
+    "o": [
+     "没有",
+     "不",
+     "没去",
+     "不是"
+    ],
+    "q": "“我___钱” — không có tiền?",
+    "why": "没有 = không có."
+   },
+   {
+    "a": 0,
+    "o": [
+     "不",
+     "没",
+     "没有",
+     "不没"
+    ],
+    "q": "“我今天___去” — hôm nay không đi?",
+    "why": "Hiện tại/tương lai dùng 不."
+   },
+   {
+    "a": 0,
+    "o": [
+     "没",
+     "不",
+     "没有不",
+     "不没"
+    ],
+    "q": "“他昨天___吃饭” — hôm qua chưa ăn?",
+    "why": "没 + động từ = đã không làm (quá khứ)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "我不是学生",
+     "我没是学生",
+     "我不没是学生",
+     "我是没学生"
+    ],
+    "q": "Câu nào đúng?",
+    "why": "是 chỉ phủ định bằng 不, không dùng 没."
+   }
+  ],
+  "rule": "不: phủ định hiện tại, tương lai, thói quen, trạng thái (我不去, 他不高兴, 我不喜欢). 没: phủ định quá khứ — việc đã không xảy ra (我没去 = tôi đã không đi; 他没吃饭 = anh ấy chưa ăn cơm). 没 + 有 = không có (我没有钱). Chú ý: 不 đi với 是 (不是), 没 không đi với 是; hỏi quá khứ dùng 没 (你昨天没去吗？).",
+  "speak": "我今天不去学校。他昨天没去学校。我没有钱。他不高兴。",
+  "stage": 1,
+  "tip": "“没去 = đã không đi (quá khứ); 不去 = không đi (hiện tại/tương lai). Đổi 不/没 là đổi thì.”",
+  "title": "Phủ định — 不/没"
+ },
+ {
+  "examples": [
+   "天气很好。(Tiānqì hěn hǎo.) — Thời tiết rất tốt.",
+   "他很高兴。(Tā hěn gāoxìng.) — Anh ấy rất vui.",
+   "这件衣服很漂亮。(Zhè jiàn yīfu hěn piàoliang.) — Bộ quần áo này rất đẹp.",
+   "你今天忙不忙？(Nǐ jīntiān máng bù máng?) — Hôm nay bạn có bận không?"
+  ],
+  "hook": "“天气很好。” — thời tiết rất tốt: tính từ làm vị ngữ, không cần 是.",
+  "id": "zh19g-xingrong-weiyu",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "很好",
+     "是很好",
+     "是好",
+     "很好是"
+    ],
+    "q": "“天气___” — thời tiết tốt?",
+    "why": "Tính từ làm vị ngữ không dùng 是."
+   },
+   {
+    "a": 0,
+    "o": [
+     "他不高兴",
+     "他不是高兴",
+     "他没高兴",
+     "他高兴不"
+    ],
+    "q": "Phủ định của “他很高兴” là?",
+    "why": "Phủ định tính từ dùng 不."
+   },
+   {
+    "a": 0,
+    "o": [
+     "你忙不忙？",
+     "你是不是忙？",
+     "你忙吗不？",
+     "你忙不？"
+    ],
+    "q": "Hỏi “bạn có bận không” bằng câu chính-phản?",
+    "why": "忙不忙 = chính-phản của tính từ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "很",
+     "是",
+     "有",
+     "在"
+    ],
+    "q": "“这件衣服___漂亮”",
+    "why": "很 + tính từ làm vị ngữ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "天气是很好",
+     "天气很好",
+     "天气不太好",
+     "天气非常好"
+    ],
+    "q": "Câu nào SAI?",
+    "why": "Tính từ làm vị ngữ không dùng 是."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Nhẹ, làm câu tự nhiên (gần như không nhấn “rất”)",
+     "Luôn luôn là “rất”",
+     "Là động từ",
+     "Là phủ định"
+    ],
+    "q": "很 trong “天气很好” có nghĩa là?",
+    "why": "很 ở đây nhẹ, chỉ làm câu nghe tự nhiên."
+   }
+  ],
+  "rule": "Câu vị ngữ tính từ: chủ ngữ + (很) + tính từ, KHÔNG dùng 是 (天气很好, 他很高兴, 这件衣服很漂亮). 很 ở đây nhẹ, gần như không có nghĩa “rất” — nó chỉ làm câu nghe tự nhiên (nói “天气好” cũng đúng nhưng ít tự nhiên hơn khi đứng một mình). Phủ định: 不 + tính từ (他不高兴). Hỏi: tính từ + 不 + tính từ (你高兴不高兴？/ 好不好？).",
+  "speak": "天气很好。他很高兴。这件衣服很漂亮。你今天忙不忙？",
+  "stage": 1,
+  "tip": "Đừng thêm 是: nói “天气很好”, không nói “天气是很好”.",
+  "title": "Tính từ làm vị ngữ — Chủ ngữ + 很 + tính từ"
+ },
+ {
+  "examples": [
+   "我能游泳。(Wǒ néng yóuyǒng.) — Tôi bơi được.",
+   "你能帮我一下吗？(Nǐ néng bāng wǒ yíxià ma?) — Bạn giúp tôi một chút được không?",
+   "今天我不能去。(Jīntiān wǒ bù néng qù.) — Hôm nay tôi không đi được.",
+   "这件事能做吗？(Zhè jiàn shì néng zuò ma?) — Việc này làm được không?"
+  ],
+  "hook": "“我能游泳。” — tôi bơi được: 能 nói khả năng, sự cho phép, khả năng xảy ra.",
+  "id": "zh19g-neng",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "能",
+     "会不",
+     "是在",
+     "有"
+    ],
+    "q": "“我___游泳” — tôi bơi được (điều kiện cho phép)?",
+    "why": "能 = làm được vì điều kiện cho phép."
+   },
+   {
+    "a": 0,
+    "o": [
+     "能",
+     "会是",
+     "在",
+     "有"
+    ],
+    "q": "“你___帮我一下吗？” — xin phép giúp?",
+    "why": "能 dùng để xin phép."
+   },
+   {
+    "a": 0,
+    "o": [
+     "不能",
+     "没能",
+     "不是能",
+     "不有能"
+    ],
+    "q": "Phủ định của 能 là?",
+    "why": "Phủ định 能 là 不能."
+   },
+   {
+    "a": 0,
+    "o": [
+     "会",
+     "能",
+     "是",
+     "在"
+    ],
+    "q": "“我___游泳” — tôi biết bơi vì đã học?",
+    "why": "会 = biết làm vì đã học."
+   },
+   {
+    "a": 0,
+    "o": [
+     "不能",
+     "不会",
+     "没有",
+     "不是"
+    ],
+    "q": "“今天我___去” — hôm nay không đi được?",
+    "why": "不能 = không đi được (điều kiện không cho phép)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "能",
+     "会是",
+     "在",
+     "有"
+    ],
+    "q": "“这件事___做吗？”",
+    "why": "能 hỏi khả năng làm được."
+   }
+  ],
+  "rule": "能 + động từ: (1) khả năng do điều kiện cho phép (我能游泳 — tôi bơi được; 今天我不能去 — hôm nay tôi không đi được); (2) xin phép/cho phép (你能帮我吗？— bạn giúp tôi được không?); (3) khả năng xảy ra (这件事能做吗？— việc này làm được không?). Phân biệt 会/能: 会 = biết làm vì đã học (我会游泳 — tôi biết bơi vì đã học); 能 = làm được vì điều kiện cho phép. Phủ định: 不能. Hỏi: 你能…吗？",
+  "speak": "我能游泳。你能帮我一下吗？今天我不能去。这件事能做吗？",
+  "stage": 1,
+  "tip": "会 = biết vì đã học; 能 = làm được vì điều kiện cho phép. “我会游泳” khác “我能游泳”.",
+  "title": "Động từ khuyết thiếu 能 — có thể"
+ },
+ {
+  "examples": [
+   "他正在看书呢。(Tā zhèngzài kàn shū ne.) — Anh ấy đang đọc sách.",
+   "我正在吃饭呢。(Wǒ zhèngzài chī fàn ne.) — Tôi đang ăn cơm.",
+   "你在干什么？我正在写作业。(Nǐ zài gàn shénme? Wǒ zhèngzài xiě zuòyè.) — Bạn đang làm gì? Tôi đang làm bài tập.",
+   "别说话，他正在睡觉呢。(Bié shuōhuà, tā zhèngzài shuìjiào ne.) — Đừng nói chuyện, anh ấy đang ngủ."
+  ],
+  "hook": "“他正在看书呢。” — anh ấy đang đọc sách: 正在…呢 nói việc đang diễn ra ngay lúc này.",
+  "id": "zh19g-zhengzai-ne",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "正在",
+     "已经",
+     "会",
+     "要"
+    ],
+    "q": "“他___看书呢”",
+    "why": "正在…呢 = đang đọc sách ngay lúc này."
+   },
+   {
+    "a": 0,
+    "o": [
+     "正在",
+     "在完",
+     "会",
+     "了"
+    ],
+    "q": "“我___吃饭呢”",
+    "why": "正在 + động từ + 呢."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Đang diễn ra đúng lúc này",
+     "Đã xong",
+     "Sẽ làm",
+     "Đã từng làm"
+    ],
+    "q": "正在 nhấn mạnh điều gì?",
+    "why": "正在 nói việc đang diễn ra ngay lúc nói."
+   },
+   {
+    "a": 0,
+    "o": [
+     "他正在看书呢",
+     "他正看书在呢",
+     "他看书正在呢",
+     "他正在呢看书"
+    ],
+    "q": "Câu nào đúng?",
+    "why": "正在 đứng trước động từ, 呢 cuối câu."
+   },
+   {
+    "a": 0,
+    "o": [
+     "正在",
+     "已经",
+     "会",
+     "要"
+    ],
+    "q": "“别说话，他___睡觉呢”",
+    "why": "正在…呢 = đang ngủ ngay lúc này."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Trạng thái kéo dài (门开着)",
+     "Đang làm ngay lúc này",
+     "Đã xong",
+     "Sẽ làm"
+    ],
+    "q": "Phân biệt: 着 nói gì?",
+    "why": "着 nói trạng thái giữ nguyên, 正在 nói hành động đang diễn ra."
+   }
+  ],
+  "rule": "正在 + động từ (+ 呢 cuối câu) = đang làm việc đó ngay lúc nói (他正在看书呢; 我正在吃饭呢). 呢 cuối câu nhấn mạnh “ngay lúc này”. Chỉ dùng 正在 cũng được (他正在看书), thêm 呢 thì nhấn hơn. Phân biệt: 在 + động từ cũng nói đang làm (他在看书), nhưng 正在 nhấn “đúng lúc này”; 着 nói trạng thái kéo dài (门开着), không phải “đang làm”.",
+  "speak": "他正在看书呢。我正在吃饭呢。你在干什么？我正在写作业。别说话，他正在睡觉呢。",
+  "stage": 1,
+  "tip": "正在…呢 = đang làm ngay lúc này. 呢 cuối câu làm câu nghe tự nhiên, nhấn “ngay bây giờ”.",
+  "title": "Thể tiếp diễn — 正在…呢"
+ }
+];
+ZH_GRAMMAR.push.apply(ZH_GRAMMAR, ZH_GRAMMAR_EXPAND194A);
+// v194 (15/11/2026): bo sung ngu phap HSK con thieu — dot B (6 mục chặng 2: phó từ mức độ nâng cao, lượng từ, song tân ngữ, 可能/可以/应该/愿意, liên động, bổ ngữ kết quả 错/好/对/见).
+var ZH_GRAMMAR_EXPAND194B = [
+ {
+  "examples": [
+   "这儿多好啊！(Zhèr duō hǎo a!) — Chỗ này tốt biết bao!",
+   "他多么高兴啊！(Tā duōme gāoxìng a!) — Anh ấy vui biết bao!",
+   "我有点儿累。(Wǒ yǒudiǎnr lèi.) — Tôi hơi mệt.",
+   "这件衣服有点儿贵。(Zhè jiàn yīfu yǒudiǎnr guì.) — Bộ quần áo này hơi đắt."
+  ],
+  "hook": "“这儿多好啊！” — chỗ này tốt biết bao!: 多/多么 dùng trong câu cảm thán.",
+  "id": "zh19g-duo-duome",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "多",
+     "很",
+     "非常",
+     "比较"
+    ],
+    "q": "“这儿___好啊！” — cảm thán?",
+    "why": "多 dùng trong câu cảm thán."
+   },
+   {
+    "a": 0,
+    "o": [
+     "有点儿",
+     "多么",
+     "非常不",
+     "极其不"
+    ],
+    "q": "“我___累” — hơi mệt?",
+    "why": "有点儿 = hơi."
+   },
+   {
+    "a": 0,
+    "o": [
+     "多么",
+     "有点儿",
+     "比较",
+     "相当"
+    ],
+    "q": "“他___高兴啊！”",
+    "why": "多么 dùng trong câu cảm thán."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Hơi tiêu cực hoặc khiêm tốn (累, 贵)",
+     "Cực kỳ tích cực",
+     "Quá khứ",
+     "Tương lai"
+    ],
+    "q": "有点儿 thường đi với tính từ mang nghĩa?",
+    "why": "有点儿 nói điều hơi chưa vừa ý."
+   },
+   {
+    "a": 0,
+    "o": [
+     "这儿多好啊！",
+     "这儿很多好",
+     "这儿好多啊",
+     "这儿多好吗"
+    ],
+    "q": "Câu cảm thán đúng là?",
+    "why": "多 + tính từ + 啊 = cảm thán."
+   },
+   {
+    "a": 0,
+    "o": [
+     "有点儿",
+     "多么",
+     "多",
+     "极其"
+    ],
+    "q": "“这件衣服___贵” — hơi đắt?",
+    "why": "有点儿 = hơi."
+   }
+  ],
+  "rule": "多/多么: biết bao, làm sao (dùng trong câu cảm thán: 这儿多好啊！/ 他多么高兴啊！). 有点儿: hơi, một chút (thường trước tính từ/động từ tâm lý mang nghĩa hơi tiêu cực hoặc khiêm tốn: 我有点儿累; 这件衣服有点儿贵). Đã dạy: 十分/极其/稍微/格外 (mục Phó từ mức độ — 十分/极其/稍微/格外), 更 (qua câu so sánh), 太 (mục 太...了).",
+  "speak": "这儿多好啊！他多么高兴啊！我有点儿累。这件衣服有点儿贵。",
+  "stage": 2,
+  "tip": "多/多么 chỉ dùng trong câu cảm thán (có 啊 cuối câu). 有点儿 = hơi, thường nói điều chưa vừa ý.",
+  "title": "Phó từ mức độ nâng cao — 多/多么/有点儿"
+ },
+ {
+  "examples": [
+   "这座楼有五层。(Zhè zuò lóu yǒu wǔ céng.) — Tòa nhà này có năm tầng.",
+   "我收到一封信。(Wǒ shōudào yì fēng xìn.) — Tôi nhận được một bức thư.",
+   "他买了一件衣服。(Tā mǎi le yí jiàn yīfu.) — Anh ấy đã mua một bộ quần áo.",
+   "这位老师很好。(Zhè wèi lǎoshī hěn hǎo.) — Vị giáo viên này rất tốt."
+  ],
+  "hook": "“一封信，一件衣服。” — một bức thư, một bộ quần áo: mỗi đồ vật có lượng từ riêng.",
+  "id": "zh19g-liangci-2",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "封",
+     "层",
+     "件",
+     "条"
+    ],
+    "q": "“一___信”",
+    "why": "Thư dùng 封."
+   },
+   {
+    "a": 0,
+    "o": [
+     "件",
+     "封",
+     "层",
+     "位"
+    ],
+    "q": "“一___衣服”",
+    "why": "Quần áo dùng 件."
+   },
+   {
+    "a": 0,
+    "o": [
+     "位",
+     "个",
+     "条",
+     "封"
+    ],
+    "q": "“一___老师” (trang trọng)?",
+    "why": "Người trang trọng dùng 位."
+   },
+   {
+    "a": 0,
+    "o": [
+     "层",
+     "封",
+     "件",
+     "条"
+    ],
+    "q": "“这座楼有五___”",
+    "why": "Tầng nhà dùng 层."
+   },
+   {
+    "a": 0,
+    "o": [
+     "条",
+     "封",
+     "件",
+     "位"
+    ],
+    "q": "“一___鱼”",
+    "why": "Vật dài như cá dùng 条."
+   },
+   {
+    "a": 0,
+    "o": [
+     "件",
+     "封",
+     "层",
+     "条"
+    ],
+    "q": "“一___事” — một việc?",
+    "why": "Việc dùng 件 (一件事)."
+   }
+  ],
+  "rule": "层: tầng, lớp (一层楼 — một tầng nhà; 这座楼有五层). 封: bức thư (一封信). 件: bộ quần áo, việc (一件衣服, 一件事). 条: vật dài (一条路, 一条鱼, 一条裤子). 位: vị (người, trang trọng: 一位老师, 一位客人). Công thức: số + lượng từ + danh từ. Đã dạy: 本 (sách), 口 (người trong nhà), 个 (chung), 斤 (cân).",
+  "speak": "这座楼有五层。我收到一封信。他买了一件衣服。这位老师很好。",
+  "stage": 2,
+  "tip": "位 trang trọng hơn 个 khi nói về người: 一位老师 (lịch sự) khác 一个老师 (thường).",
+  "title": "Lượng từ cụ thể — 层/封/件/条/位"
+ },
+ {
+  "examples": [
+   "我给他一本书。(Wǒ gěi tā yì běn shū.) — Tôi đưa anh ấy một quyển sách.",
+   "他送我一朵花。(Tā sòng wǒ yì duǒ huā.) — Anh ấy tặng tôi một bông hoa.",
+   "老师送给我们每人一支笔。(Lǎoshī sòng gěi wǒmen měi rén yì zhī bǐ.) — Thầy tặng mỗi người chúng tôi một cây bút.",
+   "请把这封信给他。(Qǐng bǎ zhè fēng xìn gěi tā.) — Xin đưa bức thư này cho anh ấy."
+  ],
+  "hook": "“我给他一本书。” — tôi đưa anh ấy một quyển sách: động từ + người + vật.",
+  "id": "zh19g-shuang-binyu",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "给",
+     "把",
+     "在",
+     "和"
+    ],
+    "q": "“我___他一本书”",
+    "why": "给 + người + vật = đưa ai cái gì."
+   },
+   {
+    "a": 0,
+    "o": [
+     "我",
+     "把",
+     "在",
+     "和"
+    ],
+    "q": "“他送___一朵花”",
+    "why": "送 + người + vật."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Tôi mua hộ anh ấy một quyển sách",
+     "Tôi đưa anh ấy một quyển sách",
+     "Tôi mua sách của anh ấy",
+     "Tôi bán sách cho anh ấy"
+    ],
+    "q": "“我给他买了一本书” nghĩa là?",
+    "why": "给他买 = mua hộ (给 làm giới từ)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "给",
+     "送给",
+     "在",
+     "把"
+    ],
+    "q": "“请把这封信___他”",
+    "why": "把 + vật + 给 + người."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Động từ + người + vật",
+     "Động từ + vật + người",
+     "Người + động từ + vật",
+     "Động từ + người + động từ"
+    ],
+    "q": "Cấu trúc song tân ngữ là?",
+    "why": "给/送 + người nhận + vật."
+   },
+   {
+    "a": 0,
+    "o": [
+     "给我们",
+     "把我们",
+     "在我们",
+     "和我们"
+    ],
+    "q": "“老师送___每人一支笔”",
+    "why": "送给我们 = tặng chúng tôi."
+   }
+  ],
+  "rule": "给/送 + người + vật: đưa/tặng ai cái gì (我给他一本书 — tôi đưa anh ấy một quyển sách; 他送我一朵花 — anh ấy tặng tôi một bông hoa). Cấu trúc: chủ ngữ + 给/送 + người nhận + vật. Phân biệt: 给 còn làm giới từ chỉ người hưởng lợi (我给他买了一本书 = tôi mua hộ anh ấy một quyển sách — 给 + người + động từ, khác cấu trúc song tân ngữ).",
+  "speak": "我给他一本书。他送我一朵花。老师送给我们每人一支笔。请把这封信给他。",
+  "stage": 2,
+  "tip": "给 + người + vật (我给他一本书) khác 给 + người + động từ (我给他买书 = mua hộ anh ấy).",
+  "title": "Song tân ngữ — 给/送 + người + vật"
+ },
+ {
+  "examples": [
+   "明天可能下雨。(Míngtiān kěnéng xià yǔ.) — Ngày mai có lẽ mưa.",
+   "你可以进来。(Nǐ kěyǐ jìnlái.) — Bạn có thể vào.",
+   "你应该早点儿来。(Nǐ yīnggāi zǎo diǎnr lái.) — Bạn nên đến sớm hơn.",
+   "我愿意帮你。(Wǒ yuànyì bāng nǐ.) — Tôi sẵn lòng giúp bạn."
+  ],
+  "hook": "“你可以进来，应该早点儿来。” — bạn có thể vào, nên đến sớm hơn: 可以 nói được phép, 应该 nói nên làm.",
+  "id": "zh19g-keneng-keyi",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "可能",
+     "可以",
+     "应该",
+     "愿意"
+    ],
+    "q": "“明天___下雨” — có lẽ mưa?",
+    "why": "可能 = có lẽ (dự đoán)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "可以",
+     "可能",
+     "应该",
+     "愿意"
+    ],
+    "q": "“你___进来” — được phép vào?",
+    "why": "可以 = được phép."
+   },
+   {
+    "a": 0,
+    "o": [
+     "应该",
+     "可能",
+     "可以",
+     "愿意"
+    ],
+    "q": "“你___早点儿来” — nên đến sớm?",
+    "why": "应该 = nên."
+   },
+   {
+    "a": 0,
+    "o": [
+     "愿意",
+     "可能",
+     "可以",
+     "应该"
+    ],
+    "q": "“我___帮你” — sẵn lòng giúp?",
+    "why": "愿意 = sẵn lòng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "不可以",
+     "没可以",
+     "不是可以",
+     "不有可以"
+    ],
+    "q": "Phủ định của 可以 là?",
+    "why": "不可以 = không được phép."
+   },
+   {
+    "a": 0,
+    "o": [
+     "可以",
+     "可能",
+     "应该",
+     "愿意"
+    ],
+    "q": "“这里___拍照吗？” — hỏi được phép chụp ảnh?",
+    "why": "可以 hỏi sự cho phép."
+   }
+  ],
+  "rule": "可能: có thể, có lẽ (dự đoán: 明天可能下雨 — ngày mai có lẽ mưa). 可以: được phép, có thể (你可以进来 — bạn có thể vào; 这里可以拍照吗？). 应该: nên, phải (你应该早点儿来 — bạn nên đến sớm hơn). 愿意: sẵn lòng, muốn (我愿意帮你 — tôi sẵn lòng giúp bạn). Phân biệt 会/能: 会 = biết vì đã học; 能 = làm được vì điều kiện cho phép. Phủ định: 不可能, 不可以, 不应该, 不愿意.",
+  "speak": "明天可能下雨。你可以进来。你应该早点儿来。我愿意帮你。",
+  "stage": 2,
+  "tip": "可以 = được phép; 应该 = nên làm; 可能 = có lẽ; 愿意 = sẵn lòng. Đừng lẫn 可能 (dự đoán) với 可以 (cho phép).",
+  "title": "Động từ khuyết thiếu — 可能/可以/应该/愿意"
+ },
+ {
+  "examples": [
+   "他去商店买东西。(Tā qù shāngdiàn mǎi dōngxi.) — Anh ấy đi cửa hàng mua đồ.",
+   "我坐飞机去北京。(Wǒ zuò fēijī qù Běijīng.) — Tôi đi máy bay tới Bắc Kinh.",
+   "他跑来告诉我。(Tā pǎo lái gàosu wǒ.) — Anh ấy chạy tới nói với tôi.",
+   "我们去公园玩儿。(Wǒmen qù gōngyuán wánr.) — Chúng tôi đi công viên chơi."
+  ],
+  "hook": "“他去商店买东西。” — anh ấy đi cửa hàng mua đồ: hai động từ cùng một chủ ngữ, làm liên tiếp.",
+  "id": "zh19g-liandong",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "买",
+     "买着",
+     "买了买",
+     "买买"
+    ],
+    "q": "“他去商店___东西”",
+    "why": "去…买…: hai động từ liên tiếp."
+   },
+   {
+    "a": 0,
+    "o": [
+     "去",
+     "去着",
+     "去了去",
+     "去去"
+    ],
+    "q": "“我坐飞机___北京”",
+    "why": "坐飞机去北京: liên động."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Liên động làm lần lượt, 一边…一边… làm cùng lúc",
+     "Liên động chỉ có một động từ",
+     "一边…一边… chỉ có một việc",
+     "Không khác nhau"
+    ],
+    "q": "Liên động khác 一边…一边… ở điểm nào?",
+    "why": "Liên động = lần lượt; 一边…一边… = cùng lúc."
+   },
+   {
+    "a": 0,
+    "o": [
+     "告诉",
+     "告诉着",
+     "告诉了告诉",
+     "告诉告诉"
+    ],
+    "q": "“他跑来___我”",
+    "why": "跑来告诉我: chạy tới rồi nói."
+   },
+   {
+    "a": 0,
+    "o": [
+     "我们去公园玩儿",
+     "我们一边走一边说话",
+     "他在看书",
+     "他很高兴"
+    ],
+    "q": "Câu nào là câu liên động?",
+    "why": "去公园玩儿: hai động từ liên tiếp."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Hai (去, 买)",
+     "Một (去)",
+     "Ba",
+     "Không có"
+    ],
+    "q": "“他去商店买东西” có mấy động từ?",
+    "why": "去 và 买 — hai động từ cùng chủ ngữ."
+   }
+  ],
+  "rule": "Câu liên động: chủ ngữ + động từ 1 + (tân ngữ 1) + động từ 2 (+ tân ngữ 2), hai việc làm liên tiếp, cùng một người (他去商店买东西 — anh ấy đi cửa hàng mua đồ; 我坐飞机去北京 — tôi đi máy bay tới Bắc Kinh; 他跑来告诉我 — anh ấy chạy tới nói với tôi). Phân biệt 一边…一边… (#32): hai việc CÙNG LÚC (一边走一边说话); liên động là hai việc LẦN LƯỢT. Lưu ý: mẫu này trước đây chỉ được nhắc một câu trong mục điệp từ (去商店买东西) — đây là mục dạy riêng.",
+  "speak": "他去商店买东西。我坐飞机去北京。他跑来告诉我。我们去公园玩儿。",
+  "stage": 2,
+  "tip": "Liên động = lần lượt (đi rồi mua); 一边…一边… = cùng lúc (vừa đi vừa nói).",
+  "title": "Câu liên động — hai động từ liên tiếp"
+ },
+ {
+  "examples": [
+   "他写错了一个字。(Tā xiě cuò le yí gè zì.) — Anh ấy viết sai một chữ.",
+   "饭做好了。(Fàn zuò hǎo le.) — Cơm làm xong rồi.",
+   "你看见他了吗？(Nǐ kànjiàn tā le ma?) — Bạn có nhìn thấy anh ấy không?",
+   "我猜对了！(Wǒ cāi duì le!) — Tôi đoán đúng rồi!"
+  ],
+  "hook": "“他写错了，我看对了。” — anh ấy viết sai, tôi nhìn đúng: bổ ngữ kết quả nói kết quả của động từ.",
+  "id": "zh19g-jieguo-buyu-2",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "错",
+     "好",
+     "对",
+     "见"
+    ],
+    "q": "“他写___了一个字” — viết sai?",
+    "why": "写错了 = viết sai."
+   },
+   {
+    "a": 0,
+    "o": [
+     "好",
+     "错",
+     "对",
+     "见"
+    ],
+    "q": "“饭做___了” — làm xong?",
+    "why": "做好了 = làm xong."
+   },
+   {
+    "a": 0,
+    "o": [
+     "见",
+     "错",
+     "好",
+     "对"
+    ],
+    "q": "“你看___他了吗？” — nhìn thấy?",
+    "why": "看见 = nhìn thấy."
+   },
+   {
+    "a": 0,
+    "o": [
+     "对",
+     "错",
+     "好",
+     "见"
+    ],
+    "q": "“我猜___了！” — đoán đúng?",
+    "why": "猜对了 = đoán đúng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "没写错",
+     "不写错",
+     "写不错",
+     "写没错"
+    ],
+    "q": "Phủ định của “写错了” là?",
+    "why": "没 chèn giữa động từ và bổ ngữ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "好",
+     "错",
+     "对",
+     "见"
+    ],
+    "q": "“准备___了” — chuẩn bị xong?",
+    "why": "准备好了 = chuẩn bị xong."
+   }
+  ],
+  "rule": "Động từ + 错/好/对/见 + tân ngữ: 错 = sai (写错了 — viết sai; 说错了 — nói sai); 好 = xong, tốt (做好了 — làm xong; 准备好了 — chuẩn bị xong); 对 = đúng (看对了 — nhìn đúng; 猜对了 — đoán đúng); 见 = thấy, nhận ra (看见了 — nhìn thấy; 听见了 — nghe thấy). Phủ định: chèn 不/没 giữa động từ và bổ ngữ (没写错, 没看见). Đã dạy: 完/懂/到 (#59), 住/成/开/清楚 (mục Bổ ngữ kết quả nâng cao).",
+  "speak": "他写错了一个字。饭做好了。你看见他了吗？我猜对了！",
+  "stage": 2,
+  "tip": "错/好/对/见 đều đứng SAU động từ. 没 + động từ + bổ ngữ = đã không… (没写错 = đã không viết sai).",
+  "title": "Bổ ngữ kết quả — 错/好/对/见"
+ }
+];
+ZH_GRAMMAR.push.apply(ZH_GRAMMAR, ZH_GRAMMAR_EXPAND194B);
+// v194 (15/11/2026): bo sung ngu phap HSK con thieu — dot C (3 mục chặng 3-4: bổ ngữ mức độ Adj+得, 却/倒, 进来/出去).
+var ZH_GRAMMAR_EXPAND194C = [
+ {
+  "examples": [
+   "他忙得很。(Tā máng de hěn.) — Anh ấy bận lắm.",
+   "我累极了。(Wǒ lèi jí le.) — Tôi mệt cực kỳ.",
+   "我饿死了。(Wǒ è sǐ le.) — Tôi đói muốn chết.",
+   "今天热极了。(Jīntiān rè jí le.) — Hôm nay nóng cực kỳ."
+  ],
+  "hook": "“他忙得很，我累极了。” — anh ấy bận lắm, tôi mệt muốn chết: tính từ + 得很/极了/死了 nói mức độ cực cao.",
+  "id": "zh19g-chengdu-buyu",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "得很",
+     "极了得",
+     "很极了",
+     "得死了"
+    ],
+    "q": "“他忙___” — bận lắm?",
+    "why": "忙得很 = bận lắm."
+   },
+   {
+    "a": 0,
+    "o": [
+     "极",
+     "得极",
+     "很极",
+     "死得"
+    ],
+    "q": "“我累___了” — mệt cực kỳ?",
+    "why": "累极了 = mệt cực kỳ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "死",
+     "得死",
+     "很死",
+     "极死"
+    ],
+    "q": "“我饿___了” — đói muốn chết?",
+    "why": "饿死了 = đói muốn chết (khẩu ngữ)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "他很极了",
+     "他忙得很",
+     "我累极了",
+     "今天热极了"
+    ],
+    "q": "Câu nào SAI?",
+    "why": "Không nói “很极了”."
+   },
+   {
+    "a": 0,
+    "o": [
+     "极",
+     "得很极",
+     "很",
+     "得死"
+    ],
+    "q": "“今天热___了”",
+    "why": "热极了 = nóng cực kỳ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "得很 có 得, 极了 không có 得",
+     "Cả hai đều có 得",
+     "Cả hai đều không có 得",
+     "极了 có 很"
+    ],
+    "q": "得很 khác 极了 ở điểm nào?",
+    "why": "忙得很 có 得; 累极了 không có 得."
+   }
+  ],
+  "rule": "Tính từ + 得很/极了/死了: 得很 = lắm, rất (忙得很 — bận lắm; 好得很 — tốt lắm); 极了 = cực kỳ (累极了 — mệt cực kỳ; 高兴极了 — vui cực kỳ); 死了 = … muốn chết, cực kỳ (khẩu ngữ: 饿死了 — đói muốn chết; 忙死了 — bận muốn chết). Phân biệt bổ ngữ mức độ sau ĐỘNG từ (#4/#47: 跑得很快 — động từ + 得 + mức độ) với sau TÍNH từ (tính từ + 得很/极了/死了, không có 得 ở giữa với 极了/死了). Chú ý: không nói “很极了” hay “很死了”.",
+  "speak": "他忙得很。我累极了。我饿死了。今天热极了。",
+  "stage": 3,
+  "tip": "极了/死了 đứng TRỰC TIẾP sau tính từ, không có 得; 得很 thì có 得. Đừng nói “很极了”.",
+  "title": "Bổ ngữ mức độ — Adj + 得很/极了/死了"
+ },
+ {
+  "examples": [
+   "他说他不来，却来了。(Tā shuō tā bù lái, què lái le.) — Anh ấy nói không đến, vậy mà lại đến.",
+   "虽然很累，他却坚持工作。(Suīrán hěn lèi, tā què jiānchí gōngzuò.) — Tuy rất mệt, anh ấy vậy mà vẫn kiên trì làm việc.",
+   "我倒觉得这个办法不错。(Wǒ dào juéde zhège bànfǎ bú cuò.) — Tôi thì lại thấy cách này không tệ.",
+   "大家都说难，我倒觉得不难。(Dàjiā dōu shuō nán, wǒ dào juéde bù nán.) — Mọi người đều nói khó, tôi thì lại thấy không khó."
+  ],
+  "hook": "“他说他不来，却来了。” — anh ấy nói không đến, vậy mà lại đến: 却 nói điều trái với dự đoán.",
+  "id": "zh19g-que-dao",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "却",
+     "但是",
+     "而且",
+     "因为"
+    ],
+    "q": "“他说他不来，___来了”",
+    "why": "却 = vậy mà (trái dự đoán)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "倒",
+     "却",
+     "但是",
+     "而且"
+    ],
+    "q": "“我___觉得这个办法不错” — thì lại thấy?",
+    "why": "倒 = thì lại (ý kiến ngược)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Sau chủ ngữ, trước động từ",
+     "Đầu câu",
+     "Cuối câu",
+     "Trước chủ ngữ"
+    ],
+    "q": "却 đứng ở đâu?",
+    "why": "他却来了: 却 sau chủ ngữ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "却",
+     "倒",
+     "但是",
+     "而且"
+    ],
+    "q": "“虽然很累，他___坚持工作”",
+    "why": "却 nhấn trái với dự đoán (mệt mà vẫn làm)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "倒 nhấn ý kiến ngược lại, 但是 nối hai vế đối lập",
+     "倒 nối hai vế, 但是 nhấn ý kiến",
+     "Không khác nhau",
+     "倒 chỉ dùng cuối câu"
+    ],
+    "q": "倒 khác 但是 ở điểm nào?",
+    "why": "倒 nhấn ý kiến ngược; 但是 nối vế đối lập."
+   },
+   {
+    "a": 0,
+    "o": [
+     "倒",
+     "却",
+     "但是",
+     "而且"
+    ],
+    "q": "“大家都说难，我___觉得不难”",
+    "why": "倒 = thì lại (ý kiến ngược với mọi người)."
+   }
+  ],
+  "rule": "却: vậy mà, lại (đứng sau chủ ngữ, trước động từ: 他说他不来，却来了 — anh ấy nói không đến, vậy mà lại đến; 虽然很累，他却坚持工作 — tuy rất mệt, anh ấy vậy mà vẫn kiên trì làm việc). 倒: ngược lại, thực ra (dùng khi ý kiến trái với điều người khác nghĩ: 我倒觉得这个办法不错 — tôi thì lại thấy cách này không tệ; 你倒说说看 — bạn thử nói xem). Phân biệt với 但是: 但是 nối hai vế đối lập; 却 nhấn “trái với dự đoán” trong cùng một câu; 倒 nhấn “ý kiến ngược lại”.",
+  "speak": "他说他不来，却来了。虽然很累，他却坚持工作。我倒觉得这个办法不错。大家都说难，我倒觉得不难。",
+  "stage": 4,
+  "tip": "却 = “vậy mà” (trái dự đoán); 倒 = “thì lại” (ý kiến ngược). Cả hai đều đứng sau chủ ngữ.",
+  "title": "却/倒 — đối lập bất ngờ"
+ },
+ {
+  "examples": [
+   "请进来。(Qǐng jìnlái.) — Xin mời vào.",
+   "他走进来了。(Tā zǒu jìnlái le.) — Anh ấy đi vào rồi.",
+   "快出去！(Kuài chūqù!) — Mau ra ngoài!",
+   "他跑出去了。(Tā pǎo chūqù le.) — Anh ấy chạy ra ngoài rồi."
+  ],
+  "hook": "“请进来，快出去！” — xin mời vào, mau ra ngoài!: 进来/出去 nói hướng vào/ra.",
+  "id": "zh19g-jinlai-chuqu",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "进来",
+     "出去",
+     "上去",
+     "下去"
+    ],
+    "q": "“请___” — xin mời vào (về phía tôi)?",
+    "why": "进来 = vào đây."
+   },
+   {
+    "a": 0,
+    "o": [
+     "出去",
+     "进来",
+     "上去",
+     "下去"
+    ],
+    "q": "“快___！” — mau ra ngoài!",
+    "why": "出去 = ra ngoài."
+   },
+   {
+    "a": 0,
+    "o": [
+     "进来",
+     "出去",
+     "上去",
+     "下去"
+    ],
+    "q": "“他走___了” — anh ấy đi vào rồi?",
+    "why": "走进来 = đi vào đây."
+   },
+   {
+    "a": 0,
+    "o": [
+     "来 = về phía người nói, 去 = xa người nói",
+     "来 = xa, 去 = về phía người nói",
+     "Không phân biệt",
+     "来 = lên, 去 = xuống"
+    ],
+    "q": "来 và 去 phân biệt thế nào?",
+    "why": "来 về phía người nói, 去 xa người nói."
+   },
+   {
+    "a": 0,
+    "o": [
+     "出去",
+     "进来",
+     "上去",
+     "下去"
+    ],
+    "q": "“他跑___了” — chạy ra ngoài?",
+    "why": "跑出去 = chạy ra ngoài."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Dạng đơn chỉ vào/ra, dạng kép thêm lên/xuống/về",
+     "Dạng đơn chỉ lên/xuống",
+     "Không khác nhau",
+     "Dạng kép không có 来/去"
+    ],
+    "q": "Dạng đơn khác dạng kép (#58) ở điểm nào?",
+    "why": "进来/出去 chỉ hướng vào/ra; 上来/下去/回来 thêm hướng lên/xuống/về."
+   }
+  ],
+  "rule": "Động từ + 进来/出去: 进来 = vào đây (hướng về phía người nói: 请进来 — xin mời vào; 他走进来了 — anh ấy đi vào); 出去 = ra ngoài (hướng xa người nói: 快出去！— mau ra ngoài!; 他跑出去了 — anh ấy chạy ra ngoài). Phân biệt dạng kép (#58: 上来/下去/回来 — có thêm hướng lên/xuống/về) với dạng đơn (进来/出去 — chỉ vào/ra, không nói lên/xuống). Cũng có 进去 (đi vào, xa người nói) và 出来 (ra đây, về phía người nói) — cùng họ với 进来/出去.",
+  "speak": "请进来。他走进来了。快出去！他跑出去了。",
+  "stage": 4,
+  "tip": "进来/出去: 来 = về phía người nói, 去 = xa người nói. 请进来 (mời vào đây) khác 请进去 (mời vào kia).",
+  "title": "Bổ ngữ xu hướng đơn — 进来/出去"
+ }
+];
+ZH_GRAMMAR.push.apply(ZH_GRAMMAR, ZH_GRAMMAR_EXPAND194C);
+// v194 (15/11/2026): bo sung ngu phap HSK con thieu — dot D (4 mục chặng 5-6: 这/那, tân ngữ HSK5, tân ngữ HSK6, câu phức nhiều tầng).
+var ZH_GRAMMAR_EXPAND194D = [
+ {
+  "examples": [
+   "这是我的书。(Zhè shì wǒ de shū.) — Đây là sách của tôi.",
+   "那个人是谁？(Nà gè rén shì shéi?) — Người kia là ai?",
+   "这本书很好看。(Zhè běn shū hěn hǎokàn.) — Quyển sách này rất hay.",
+   "那是你的吗？(Nà shì nǐ de ma?) — Kia là của bạn à?"
+  ],
+  "hook": "“这是我的书，那是你的。” — đây là sách của tôi, kia là của bạn: 这/那 chỉ gần/xa.",
+  "id": "zh19g-zhe-na",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "这",
+     "那",
+     "这么",
+     "那么"
+    ],
+    "q": "“___是我的书” — đây là sách tôi?",
+    "why": "这 = đây (gần)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "那",
+     "这",
+     "这么",
+     "那么"
+    ],
+    "q": "“___个人是谁？” — người kia là ai?",
+    "why": "那 = kia (xa)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "这",
+     "那",
+     "这么",
+     "那么"
+    ],
+    "q": "“___本书很好看” — quyển sách này?",
+    "why": "这 + lượng từ + danh từ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "那",
+     "这",
+     "这么",
+     "那么"
+    ],
+    "q": "“___是你的吗？” — kia là của bạn à?",
+    "why": "那 = kia (xa)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "这么 là phó từ chỉ mức độ, 这 là đại từ chỉ vật",
+     "Cả hai đều là đại từ",
+     "Cả hai đều là phó từ",
+     "这么 chỉ xa, 这 chỉ gần"
+    ],
+    "q": "这么 khác 这 ở điểm nào?",
+    "why": "这么好 = tốt thế này (mức độ); 这本书 = quyển sách này (chỉ vật)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "是",
+     "有",
+     "在",
+     "很"
+    ],
+    "q": "“这___什么？” — đây là cái gì?",
+    "why": "这是什么？— hỏi vật gần."
+   }
+  ],
+  "rule": "这 = đây, này (gần người nói); 那 = kia, đó (xa người nói). 这/那 + lượng từ + danh từ (这本书 — quyển sách này; 那个人 — người kia). 这/那 đứng một mình làm chủ ngữ/tân ngữ (这是我的书 — đây là sách của tôi; 那是你的 — kia là của bạn). Hỏi: 这是什么？/ 那是什么？ Phân biệt với 这么/那么 (mục phó từ chỉ thị): 这么/那么 là phó từ chỉ mức độ (这么好 — tốt thế này), 这/那 là đại từ chỉ vật/người.",
+  "speak": "这是我的书。那个人是谁？这本书很好看。那是你的吗？",
+  "stage": 5,
+  "tip": "这 = gần (này/đây), 那 = xa (kia/đó). 这/那 + lượng từ + danh từ; 这么/那么 là phó từ chỉ mức độ, khác hẳn.",
+  "title": "Chỉ thị — 这/那"
+ },
+ {
+  "examples": [
+   "桌子上放着一本书。(Zhuōzi shàng fàng zhe yì běn shū.) — Trên bàn để một quyển sách.",
+   "墙上挂着一幅画。(Qiáng shàng guà zhe yì fú huà.) — Trên tường treo một bức tranh.",
+   "请把书放在桌子上。(Qǐng bǎ shū fàng zài zhuōzi shàng.) — Xin đặt sách lên bàn.",
+   "书被他拿走了。(Shū bèi tā ná zǒu le.) — Sách bị anh ấy lấy đi mất."
+  ],
+  "hook": "“桌子上放着一本书，把书放在桌子上。” — trên bàn để một quyển sách, đặt sách lên bàn: cùng một quyển sách, làm tân ngữ theo hai cách khác nhau.",
+  "id": "zh19g-binyu-yuyi-5",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "一本书",
+     "把书",
+     "被书",
+     "给书"
+    ],
+    "q": "“桌子上放着___” — trên bàn để một quyển sách?",
+    "why": "放着一本书: tân ngữ tồn tại."
+   },
+   {
+    "a": 0,
+    "o": [
+     "放在",
+     "放着",
+     "被放",
+     "给放"
+    ],
+    "q": "“请把书___桌子上”",
+    "why": "把书放在…: tân ngữ chịu tác động với 把."
+   },
+   {
+    "a": 0,
+    "o": [
+     "一幅画",
+     "把画",
+     "被画",
+     "给画"
+    ],
+    "q": "“墙上挂着___”",
+    "why": "挂着一幅画: tân ngữ tồn tại."
+   },
+   {
+    "a": 0,
+    "o": [
+     "被",
+     "把",
+     "给",
+     "在"
+    ],
+    "q": "“书___他拿走了”",
+    "why": "书被他拿走了: tân ngữ chịu tác động với 被."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Có cái gì ở đâu",
+     "Làm gì với cái gì",
+     "Ai làm việc gì",
+     "Khi nào làm"
+    ],
+    "q": "Tân ngữ tồn tại nói gì?",
+    "why": "Tồn tại = có gì ở đâu."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Chịu tác động (với 把)",
+     "Tồn tại",
+     "Chỉ nơi chốn",
+     "Chỉ thời gian"
+    ],
+    "q": "“把书放好” — 书 là tân ngữ loại nào?",
+    "why": "把 + vật = vật chịu tác động."
+   }
+  ],
+  "rule": "Tân ngữ tồn tại (存现宾语): trong câu tồn tại, tân ngữ là vật xuất hiện ở một nơi (桌子上放着一本书 — trên bàn để một quyển sách; 墙上挂着一幅画 — trên tường treo một bức tranh; công thức: nơi chốn + động từ + 着 + vật). Tân ngữ chịu tác động (受事宾语): vật bị hành động tác động, thường đi với 把/被 (把书放在桌子上 — đặt sách lên bàn; 书被他拿走了 — sách bị anh ấy lấy đi mất). Cùng một vật có thể làm tân ngữ tồn tại (放着一本书) hoặc tân ngữ chịu tác động (把书放好) — nghĩa khác nhau: tồn tại nói “có cái gì ở đâu”, chịu tác động nói “làm gì với cái gì”.",
+  "speak": "桌子上放着一本书。墙上挂着一幅画。请把书放在桌子上。书被他拿走了。",
+  "stage": 5,
+  "tip": "Tân ngữ tồn tại nói “có gì ở đâu” (放着一本书); tân ngữ chịu tác động nói “làm gì với nó” (把书放好).",
+  "title": "Ngữ nghĩa tân ngữ HSK5 — tân ngữ tồn tại và chịu tác động"
+ },
+ {
+  "examples": [
+   "他住在宿舍里。(Tā zhù zài sùshè lǐ.) — Anh ấy ở trong ký túc xá.",
+   "他走进教室。(Tā zǒu jìn jiàoshì.) — Anh ấy đi vào lớp học.",
+   "他写成了一本书。(Tā xiěchéng le yì běn shū.) — Anh ấy đã viết xong thành một quyển sách.",
+   "他当了老师。(Tā dāng le lǎoshī.) — Anh ấy đã làm giáo viên."
+  ],
+  "hook": "“他住在宿舍里，写成了一本书。” — anh ấy ở trong ký túc xá, đã viết xong một quyển sách: tân ngữ có thể là nơi chốn, cũng có thể là kết quả.",
+  "id": "zh19g-binyu-yuyi-6",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "宿舍里",
+     "一本书",
+     "老师",
+     "吃饭"
+    ],
+    "q": "“他住在___” — ở trong ký túc xá?",
+    "why": "宿舍里: tân ngữ nơi chốn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "本书",
+     "宿舍",
+     "老师",
+     "教室"
+    ],
+    "q": "“他写成了一___” — viết xong thành một quyển sách?",
+    "why": "一本书: tân ngữ kết quả."
+   },
+   {
+    "a": 0,
+    "o": [
+     "教室",
+     "一本书",
+     "老师",
+     "吃饭"
+    ],
+    "q": "“他走进___”",
+    "why": "教室: tân ngữ nơi chốn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "老师",
+     "宿舍",
+     "一本书",
+     "教室"
+    ],
+    "q": "“他当了___” — làm giáo viên?",
+    "why": "当了老师: tân ngữ kết quả (nghề nghiệp đạt được)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Làm ra cái gì",
+     "Ở đâu",
+     "Ai làm",
+     "Khi nào"
+    ],
+    "q": "Tân ngữ kết quả trả lời câu hỏi nào?",
+    "why": "Kết quả = làm ra cái gì."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Nơi chốn",
+     "Kết quả",
+     "Chịu tác động với 把",
+     "Tồn tại"
+    ],
+    "q": "“坐在椅子上” — 椅子 là tân ngữ loại nào?",
+    "why": "椅子上: nơi ngồi."
+   }
+  ],
+  "rule": "Tân ngữ nơi chốn (处所宾语): tân ngữ chỉ nơi diễn ra hành động hoặc nơi hành động hướng tới (住在宿舍里 — ở trong ký túc xá; 他走进教室 — anh ấy đi vào lớp học; 坐在椅子上 — ngồi trên ghế). Tân ngữ kết quả (结果宾语): tân ngữ là thứ được tạo ra nhờ hành động (写成了一本书 — viết xong thành một quyển sách; 盖了一座楼 — xây một tòa nhà; 他当了老师 — anh ấy làm giáo viên). Phân biệt với tân ngữ thường (đối tượng bị tác động trực tiếp: 吃饭 — ăn cơm): tân ngữ nơi chốn trả lời “ở đâu”, tân ngữ kết quả trả lời “làm ra cái gì”.",
+  "speak": "他住在宿舍里。他走进教室。他写成了一本书。他当了老师。",
+  "stage": 6,
+  "tip": "Tân ngữ nơi chốn trả lời “ở đâu” (住在宿舍里); tân ngữ kết quả trả lời “làm ra cái gì” (写成了一本书).",
+  "title": "Ngữ nghĩa tân ngữ HSK6 — tân ngữ nơi chốn và kết quả"
+ },
+ {
+  "examples": [
+   "他不但学习好，而且身体也很好，还很热心，因为他从小就喜欢帮助别人。(Tā búdàn xuéxí hǎo, érqiě shēntǐ yě hěn hǎo, hái hěn rèxīn, yīnwèi tā cóng xiǎo jiù xǐhuan bāngzhù biérén.) — Anh ấy không những học giỏi mà sức khỏe cũng rất tốt, lại còn rất nhiệt tình, vì từ nhỏ đã thích giúp đỡ người khác.",
+   "虽然他很忙，但是如果有时间，他还是会来。(Suīrán tā hěn máng, dànshì rúguǒ yǒu shíjiān, tā háishi huì lái.) — Tuy anh ấy rất bận, nhưng nếu có thời gian, anh ấy vẫn sẽ đến.",
+   "如果明天下雨，我们就不去公园，而是在家看书，因为在家也可以学习。(Rúguǒ míngtiān xià yǔ, wǒmen jiù bú qù gōngyuán, érshì zài jiā kàn shū, yīnwèi zài jiā yě kěyǐ xuéxí.) — Nếu ngày mai mưa, chúng tôi sẽ không đi công viên mà ở nhà đọc sách, vì ở nhà cũng có thể học.",
+   "他学习这么好，不是因为他聪明，而是因为他很努力。(Tā xuéxí zhème hǎo, bú shì yīnwèi tā cōngmíng, érshì yīnwèi tā hěn nǔlì.) — Anh ấy học giỏi thế không phải vì thông minh mà vì rất chăm chỉ."
+  ],
+  "hook": "“他不但学习好，而且身体也很好，还很热心，因为他从小就喜欢帮助别人。” — anh ấy không những học giỏi mà sức khỏe cũng tốt, lại còn nhiệt tình, vì từ nhỏ đã thích giúp người khác: một câu có hai tầng liên từ lồng nhau.",
+  "id": "zh19g-duoceng-fuhe",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "因为",
+     "但是",
+     "如果",
+     "而且"
+    ],
+    "q": "“他不但学习好，而且身体也很好，还很热心，___他从小就喜欢帮助别人”",
+    "why": "因为…: tầng trong chỉ lý do."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Hai tầng quan hệ lồng nhau",
+     "Chỉ có một vế",
+     "Không có liên từ",
+     "Chỉ có một liên từ"
+    ],
+    "q": "Câu nhiều tầng có đặc điểm nào?",
+    "why": "Nhiều tầng = tầng ngoài + tầng trong lồng nhau."
+   },
+   {
+    "a": 0,
+    "o": [
+     "如果",
+     "因为",
+     "不但",
+     "而且"
+    ],
+    "q": "“虽然他很忙，但是___有时间，他还是会来”",
+    "why": "如果…: tầng trong là điều kiện."
+   },
+   {
+    "a": 0,
+    "o": [
+     "因为…因为",
+     "如果…如果",
+     "但是…但是",
+     "而且…而且"
+    ],
+    "q": "“他学习这么好，不是___他聪明，而是___他很努力”",
+    "why": "不是因为…而是因为…: tầng trong chỉ lý do thật."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Tách tầng ngoài (cặp liên từ chính) trước",
+     "Đọc từ cuối lên",
+     "Bỏ qua liên từ",
+     "Chỉ đọc vế đầu"
+    ],
+    "q": "Đọc câu nhiều tầng nên làm gì trước?",
+    "why": "Tách tầng ngoài trước, rồi đọc từng tầng trong."
+   },
+   {
+    "a": 0,
+    "o": [
+     "他不但学习好，而且身体也很好，还很热心，因为他从小就喜欢帮助别人",
+     "他学习很好",
+     "他很高兴",
+     "他去商店买东西"
+    ],
+    "q": "Câu nào là câu phức nhiều tầng?",
+    "why": "Câu này có 不但…而且…还… (tầng ngoài) + 因为… (tầng trong)."
+   }
+  ],
+  "rule": "Câu phức nhiều tầng: trong một câu có hai (hoặc hơn) tầng quan hệ lồng nhau — tầng ngoài nối các vế lớn, tầng trong là một câu phức nhỏ (他不但学习好，而且身体也很好，还很热心，因为他从小就喜欢帮助别人 — tầng ngoài: 不但…而且…还…; tầng trong: 因为… (lý do)). Một dạng khác: 虽然…但是… + 如果…就… (虽然他很忙，但是如果有时间，他还是会来 — tuy bận, nhưng nếu có thời gian, anh ấy vẫn sẽ đến). Đọc câu nhiều tầng: tách tầng ngoài trước (tìm cặp liên từ chính), rồi đọc từng tầng trong.",
+  "speak": "他不但学习好，而且身体也很好，还很热心，因为他从小就喜欢帮助别人。虽然他很忙，但是如果有时间，他还是会来。如果明天下雨，我们就不去公园，而是在家看书，因为在家也可以学习。他学习这么好，不是因为他聪明，而是因为他很努力。",
+  "stage": 6,
+  "tip": "Đọc câu nhiều tầng: tách tầng ngoài trước (cặp liên từ chính), rồi đọc từng tầng trong. Dấu phẩy ngắt tầng.",
+  "title": "Câu phức nhiều tầng — câu lồng trong câu"
+ }
+];
+ZH_GRAMMAR.push.apply(ZH_GRAMMAR, ZH_GRAMMAR_EXPAND194D);
 ZH_WRITE.push.apply(ZH_WRITE, ZH_WRITE_EXPAND_E2);
 
 // DOT DAN-XEN v47 (03/11/2026): chuan hoa CUOI CUNG thu tu buoc TOEIC/TOPIK
