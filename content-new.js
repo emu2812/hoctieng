@@ -22207,6 +22207,383 @@ CONTENT.grammar.push.apply(CONTENT.grammar, [
       { q: "Count: ten, eleven, ___, thirteen.", o: ["twelve", "twenty", "eleven"], a: 0, why: "Ví dụ đếm: ten, eleven, twelve, thirteen — sau eleven là twelve." }
     ]
   }
+
+]);
+// ============================================================
+//  v193 (15/11/2026): bo sung 23 muc ngu phap EN thieu theo kiem do phu 15/11
+//  (15 diem THIEU + 8 diem CAN DOI CHIEU) — noi dung TU SOAN 100%.
+//  Khong sua kho cu; chen APPEND CUOI MANG (khong chen vao giua) vi GRAM_REVIEW
+//  doi ten theo CHI SO (0-93) — chen giua se lech chi so va doi ten sai muc.
+// ============================================================
+CONTENT.grammar.push.apply(CONTENT.grammar, [
+  {
+    fam: "Danh từ và lượng từ", level: "Band 2,0", name: "Đại từ chỉ định this/that/these/those",
+    hook: "This là cái này ngay trước mặt bạn, that là cái kia xa hơn — chỉ cần nhớ gần hay xa là chọn đúng.",
+    explain: "Ví dụ trước nhé: This book is mine (Cuốn sách này là của tôi — cuốn sách đang ở ngay trước mặt tôi). That house is very old (Ngôi nhà kia rất cũ — ngôi nhà ở xa tôi). Sau ví dụ là quy tắc. This và these chỉ thứ ở GẦN người nói: this + danh từ số ít (this book), these + danh từ số nhiều (these books). That và those chỉ thứ ở XA người nói: that + danh từ số ít (that house), those + danh từ số nhiều (those houses). This còn dùng cho thứ sắp được nói tới, that dùng cho thứ đã nhắc tới trước đó. Trong IELTS, this/that hay dùng để nối ý: This problem… / That is why…",
+    examples: ["This book is mine. — Cuốn sách này là của tôi.", "That house is very old. — Ngôi nhà kia rất cũ.", "These shoes are new, but those shoes are old. — Đôi giày này mới, còn đôi giày kia cũ."],
+    quiz: [
+      { q: "___ pen is mine; the other one is yours.", o: ["This", "That", "These"], a: 0, why: "Cây bút ở ngay trước mặt người nói nên dùng This." },
+      { q: "Look at ___ birds in the sky!", o: ["those", "this", "that"], a: 0, why: "Chim ở xa + số nhiều nên dùng those." },
+      { q: "___ apples are sweet.", o: ["These", "This", "That"], a: 0, why: "Táo ở gần + số nhiều: these." },
+      { q: "I don't like ___ film. It was boring.", o: ["that", "these", "this"], a: 0, why: "Bộ phim đã nhắc tới trước đó, ở xa về thời gian: that." },
+      { q: "___ is my mother.", o: ["This", "Those", "These"], a: 0, why: "Một người ở gần: This is my mother." },
+      { q: "___ chairs are broken.", o: ["Those", "This", "These"], a: 0, why: "Ghế ở xa + số nhiều: those." },
+      { q: "___ book on the shelf over there is very thick.", o: ["That", "This", "These"], a: 0, why: "Cuốn sách ở xa trên kệ kia: that." },
+      { q: "___ days, the weather is very hot.", o: ["These", "This", "Those"], a: 0, why: "'These days' là cụm cố định nghĩa là dạo này." }
+    ]
+  },
+  {
+    fam: "Tính từ, trạng từ và so sánh", level: "Band 2,5", name: "Trạng từ tần suất: always, usually, often, sometimes, never",
+    hook: "Always là lúc nào cũng, never là không bao giờ — và chúng luôn đứng giữa chủ ngữ với động từ chính.",
+    explain: "Ví dụ trước nhé: I always brush my teeth in the morning (Tôi lúc nào cũng đánh răng vào buổi sáng). She is never late for school (Cô ấy không bao giờ đi học muộn). Sau ví dụ là quy tắc. Trạng từ tần suất nói việc xảy ra thường xuyên tới mức nào: always (100% — lúc nào cũng), usually (thường xuyên), often (thường), sometimes (thỉnh thoảng), rarely (hiếm khi), never (0% — không bao giờ). Vị trí: đứng TRƯỚC động từ thường (I always drink tea), đứng SAU động từ be (She is usually busy), đứng GIỮA trợ động từ và động từ chính (I have never been to Hanoi). Chú ý: never đi với động từ khẳng định, không dùng don't never (sai — hai phủ định).",
+    examples: ["I always brush my teeth in the morning. — Tôi lúc nào cũng đánh răng vào buổi sáng.", "She usually takes the bus to school. — Cô ấy thường đi xe buýt tới trường.", "They are never late for class. — Họ không bao giờ đi học muộn."],
+    quiz: [
+      { q: "I ___ drink coffee in the morning.", o: ["always", "never late", "sometimes to"], a: 0, why: "Trạng từ tần suất đứng trước động từ thường: I always drink coffee." },
+      { q: "She is ___ on time.", o: ["usually", "usual", "usually to"], a: 0, why: "Sau động từ be dùng trạng từ: is usually on time." },
+      { q: "They ___ go to the cinema at weekends.", o: ["often", "oftenly", "often to"], a: 0, why: "Often là trạng từ, không thêm -ly." },
+      { q: "He has ___ seen snow.", o: ["never", "ever", "never not"], a: 0, why: "Never đứng giữa have và seen; không dùng never not." },
+      { q: "My mother ___ cooks dinner at home.", o: ["sometimes", "sometime", "some times"], a: 0, why: "Sometimes (thỉnh thoảng) — sometime là lúc nào đó, khác nghĩa." },
+      { q: "We ___ visit our grandparents.", o: ["rarely", "rare", "rarely to"], a: 0, why: "Rarely là trạng từ tần suất: We rarely visit…" },
+      { q: "He ___ late for work.", o: ["is never", "never is", "is never to"], a: 0, why: "Sau be: is never late." },
+      { q: "Choose the correct sentence.", o: ["I never eat fast food.", "I don't never eat fast food.", "I never to eat fast food."], a: 0, why: "Never đi với động từ khẳng định; don't never là hai phủ định, sai." }
+    ]
+  },
+  {
+    fam: "Mẫu động từ", level: "Band 3,0", name: "Would like / want + to-V — mong muốn và yêu cầu lịch sự",
+    hook: "Muốn một cách lịch sự thì nói I would like…, còn muốn bình thường thì I want to… — cả hai đều đi với to + động từ.",
+    explain: "Ví dụ trước nhé: I would like a cup of tea (Tôi muốn một tách trà — nói lịch sự). I want to learn English (Tôi muốn học tiếng Anh). Sau ví dụ là quy tắc. Would like + to-V hoặc + danh từ diễn tả mong muốn một cách lịch sự, nhẹ nhàng hơn want: I would like to sit down. Want + to-V diễn tả mong muốn trực tiếp: I want to go home. Hỏi lịch sự: Would you like + to-V / + danh từ? (Would you like some more rice?). Phân biệt: like + V-ing nói sở thích chung (I like swimming), còn would like + to-V nói muốn cụ thể ngay lúc này (I would like to swim now).",
+    examples: ["I would like a cup of tea, please. — Tôi muốn một tách trà.", "Would you like to come with us? — Bạn có muốn đi cùng chúng tôi không?", "I want to learn English well. — Tôi muốn học giỏi tiếng Anh."],
+    quiz: [
+      { q: "I ___ to visit London one day.", o: ["would like", "like", "would liking"], a: 0, why: "Would like + to-V: mong muốn lịch sự." },
+      { q: "___ you like a glass of water?", o: ["Would", "Do", "Are"], a: 0, why: "Câu hỏi lịch sự: Would you like…?" },
+      { q: "She ___ to be a doctor.", o: ["wants", "is wanting", "want"], a: 0, why: "Want + to-V; chủ ngữ she nên wants; want là động từ trạng thái nên không dùng is wanting." },
+      { q: "I like swimming, but now I ___ to rest.", o: ["would like", "like", "liking"], a: 0, why: "Muốn cụ thể lúc này: would like + to-V." },
+      { q: "They would like ___ in a big city.", o: ["to live", "living", "live"], a: 0, why: "Would like + to-V." },
+      { q: "He wants ___ English every day.", o: ["to practise", "practising", "practise"], a: 0, why: "Want + to-V: wants to practise." },
+      { q: "Would you like ___ tea or coffee?", o: ["some", "any", "many"], a: 0, why: "Lời mời dùng some: Would you like some tea?" },
+      { q: "I ___ like a table near the window.", o: ["would", "will", "do"], a: 0, why: "Would like là cụm cố định diễn tả mong muốn lịch sự." }
+    ]
+  },
+  {
+    fam: "Tính từ, trạng từ và so sánh", level: "Band 3,0", name: "Từ tăng cường: very, really, quite",
+    hook: "Very là rất, really là thật sự, quite là khá — ba từ nhỏ này làm câu của bạn mạnh hơn hẳn.",
+    explain: "Ví dụ trước nhé: The film was very interesting (Bộ phim rất thú vị). I'm really tired today (Hôm nay tôi thật sự mệt). Sau ví dụ là quy tắc. Very + tính từ/trạng từ: rất (very good, very quickly). Really + tính từ/trạng từ: thật sự, nhấn mạnh hơn very (really good, really fast). Quite có hai nghĩa: với tính từ thường = khá, hơi (quite good = khá tốt, quite big = khá lớn); với tính từ chỉ mức tuyệt đối hoặc động từ = hoàn toàn (quite sure = hoàn toàn chắc chắn, quite different = hoàn toàn khác). Chú ý: không dùng very với tính từ cực đoan (tính từ đã mang nghĩa tuyệt đối như excellent, perfect, awful): nói absolutely excellent, không nói very excellent.",
+    examples: ["The film was very interesting. — Bộ phim rất thú vị.", "I'm really tired today. — Hôm nay tôi thật sự mệt.", "The soup is quite hot. — Món súp khá nóng."],
+    quiz: [
+      { q: "The weather is ___ cold today.", o: ["very", "very much", "much"], a: 0, why: "Very + tính từ: very cold." },
+      { q: "She is ___ beautiful.", o: ["really", "real", "really much"], a: 0, why: "Really là trạng từ nhấn mạnh: really beautiful." },
+      { q: "The food is ___ good.", o: ["quite", "quiet", "quit"], a: 0, why: "Quite = khá; quiet là yên tĩnh, quit là bỏ." },
+      { q: "I'm ___ sure I locked the door.", o: ["quite", "very", "much"], a: 0, why: "Quite sure = hoàn toàn chắc chắn." },
+      { q: "It was ___ perfect!", o: ["absolutely", "very", "quite"], a: 0, why: "Perfect là tính từ cực đoan nên dùng absolutely, không dùng very." },
+      { q: "He runs ___ fast.", o: ["really", "real", "very much"], a: 0, why: "Really + trạng từ: really fast." },
+      { q: "The test was ___ difficult, but I passed.", o: ["quite", "quiet", "quites"], a: 0, why: "Quite difficult = khá khó." },
+      { q: "She speaks English ___ well.", o: ["very", "much", "a lot of"], a: 0, why: "Very + trạng từ: very well." }
+    ]
+  },
+  {
+    fam: "Mẫu động từ", level: "Band 4,0", name: "Cụm động từ (phrasal verbs): động từ + tiểu từ",
+    hook: "Turn off không phải là quay rồi tắt — cụm động từ có nghĩa riêng, phải học cả cụm như một từ mới.",
+    explain: "Ví dụ trước nhé: Please turn off the lights (Hãy tắt đèn đi — turn off = tắt, không suy ra từ turn + off). I look after my little brother (Tôi chăm sóc em trai tôi — look after = chăm sóc). Sau ví dụ là quy tắc. Cụm động từ = động từ + tiểu từ (up, down, out, in, on, off, after, for…) và có nghĩa riêng, không đoán được từ từng từ: give up = từ bỏ, look for = tìm kiếm. Có loại TÁCH ĐƯỢC: tân ngữ đứng giữa hoặc sau (turn the light off / turn off the light; nhưng đại từ phải đứng giữa: turn it off, không nói turn off it). Có loại KHÔNG TÁCH ĐƯỢC: tân ngữ luôn đứng sau (look after the baby — không nói look the baby after). Có loại BA TỪ: look forward to (mong đợi), put up with (chịu đựng).",
+    examples: ["Please turn off the lights before you leave. — Hãy tắt đèn trước khi bạn rời đi.", "I look after my little brother every afternoon. — Tôi chăm sóc em trai mỗi buổi chiều.", "She gave up smoking last year. — Cô ấy đã bỏ hút thuốc năm ngoái."],
+    quiz: [
+      { q: "Please turn ___ the music. It's too loud.", o: ["down", "up", "off"], a: 0, why: "Turn down = vặn nhỏ âm lượng." },
+      { q: "I need to ___ my keys. I can't find them.", o: ["look for", "look after", "look at"], a: 0, why: "Look for = tìm kiếm." },
+      { q: "She ___ smoking last year.", o: ["gave up", "gave in", "gave out"], a: 0, why: "Give up = từ bỏ." },
+      { q: "Turn ___ the light, please. It's dark.", o: ["on", "in", "up"], a: 0, why: "Turn on = bật (đèn)." },
+      { q: "I look ___ my little sister.", o: ["after", "for", "at"], a: 0, why: "Look after = chăm sóc." },
+      { q: "Please turn it ___. I want to watch TV.", o: ["on", "on it", "it on"], a: 0, why: "Đại từ it phải đứng giữa: turn it on." },
+      { q: "I'm looking forward ___ your visit.", o: ["to", "for", "at"], a: 0, why: "Look forward to = mong đợi." },
+      { q: "He ran ___ money and had to borrow some.", o: ["out of", "out", "off"], a: 0, why: "Run out of = hết (tiền)." }
+    ]
+  },
+  {
+    fam: "Động từ khuyết thiếu", level: "Band 3,5", name: "Will — quyết định tức thì, lời hứa và lời đề nghị",
+    hook: "Quyết định ngay lúc nói thì dùng will — I'll do it! Hứa hẹn cũng will, đề nghị giúp cũng will.",
+    explain: "Ví dụ trước nhé: I'll open the window (Tôi sẽ mở cửa sổ — quyết định ngay lúc nói vì trời nóng). I promise I'll help you (Tôi hứa sẽ giúp bạn — lời hứa). Sau ví dụ là quy tắc. Will + động từ nguyên thể dùng cho: quyết định tức thì (ngay lúc nói mới quyết: I'll get the phone); lời hứa (I promise I'll call you tonight); lời đề nghị giúp đỡ (I'll carry your bag); từ chối (I won't do it). Dạng phủ định: won't. Chú ý: KHÔNG dùng will trong vế if của điều kiện loại 1 (If it rains, I will stay — không nói If it will rain). Dùng will để dự đoán đã dạy ở mục dự đoán biểu đồ (#17).",
+    examples: ["I'll open the window — it's hot in here. — Tôi sẽ mở cửa sổ, trong này nóng quá.", "I promise I'll help you with your homework. — Tôi hứa sẽ giúp bạn làm bài tập.", "I'll carry your bag for you. — Tôi sẽ xách túi giúp bạn."],
+    quiz: [
+      { q: "The phone is ringing. I ___ it.", o: ["'ll answer", "answer", "am answering"], a: 0, why: "Quyết định ngay lúc nói: I'll answer it." },
+      { q: "I promise I ___ you tomorrow.", o: ["will call", "call", "am calling"], a: 0, why: "Lời hứa dùng will: I promise I'll call you." },
+      { q: "Don't worry, I ___ be there on time.", o: ["will", "am", "do"], a: 0, why: "Lời hứa: I will be there on time." },
+      { q: "If it rains tomorrow, we ___ stay at home.", o: ["will", "would", "shall"], a: 0, why: "Điều kiện loại 1: vế chính dùng will." },
+      { q: "I ___ lend you my pen.", o: ["will", "am", "do"], a: 0, why: "Đề nghị giúp đỡ: I'll lend you my pen." },
+      { q: "He won't help us. This means:", o: ["He refuses to help us.", "He isn't helping us now.", "He didn't help us."], a: 0, why: "Won't diễn tả từ chối: He won't help us." },
+      { q: "Choose the correct sentence.", o: ["If I have time, I'll help you.", "If I will have time, I'll help you.", "If I have time, I help you."], a: 0, why: "Không dùng will trong vế if loại 1." },
+      { q: "I ___ forget your birthday.", o: ["won't", "don't", "am not"], a: 0, why: "Lời hứa phủ định: I won't forget." }
+    ]
+  },
+  {
+    fam: "Câu điều kiện và giả định", level: "Band 4,0", name: "Câu điều kiện loại 0 (zero conditional) — sự thật luôn đúng",
+    hook: "If you heat ice, it melts — sự thật luôn đúng thì cả hai vế đều dùng hiện tại đơn.",
+    explain: "Ví dụ trước nhé: If you heat water to 100°C, it boils (Nếu bạn đun nước tới 100°C, nước sẽ sôi — sự thật khoa học luôn đúng). Sau ví dụ là quy tắc. Câu điều kiện loại 0 nói về sự thật, quy luật tự nhiên, việc luôn xảy ra: If + hiện tại đơn, hiện tại đơn. Cả hai vế đều dùng hiện tại đơn, không dùng will. Có thể dùng when thay if khi nói về việc lặp lại thường xuyên (When it rains, the streets get wet). Khác loại 1 (#53): loại 1 nói việc CÓ THỂ xảy ra trong tương lai (If it rains tomorrow, we will stay at home), loại 0 nói việc LUÔN ĐÚNG.",
+    examples: ["If you heat water to 100°C, it boils. — Nếu bạn đun nước tới 100°C, nước sôi.", "If it rains, the grass gets wet. — Nếu trời mưa, cỏ sẽ ướt.", "When you mix red and white, you get pink. — Khi bạn trộn đỏ với trắng, bạn được màu hồng."],
+    quiz: [
+      { q: "If you ___ ice, it melts.", o: ["heat", "will heat", "heated"], a: 0, why: "Loại 0: vế if dùng hiện tại đơn." },
+      { q: "If it rains, the grass ___ wet.", o: ["gets", "will get", "got"], a: 0, why: "Loại 0: vế chính dùng hiện tại đơn." },
+      { q: "If you mix blue and yellow, you ___ green.", o: ["get", "will get", "got"], a: 0, why: "Sự thật luôn đúng: hiện tại đơn cả hai vế." },
+      { q: "When water freezes, it ___ ice.", o: ["becomes", "will become", "became"], a: 0, why: "When thay if trong loại 0; vế chính hiện tại đơn." },
+      { q: "If you don't water the plants, they ___.", o: ["die", "will die", "died"], a: 0, why: "Loại 0: they die." },
+      { q: "If I eat too much, I ___ sick.", o: ["feel", "will feel", "felt"], a: 0, why: "Sự thật chung: If I eat too much, I feel sick." },
+      { q: "Choose the zero conditional sentence.", o: ["If you press this button, the door opens.", "If you press this button, the door will open.", "If you pressed this button, the door would open."], a: 0, why: "Loại 0: cả hai vế hiện tại đơn." },
+      { q: "If you leave milk in the sun, it ___ bad.", o: ["goes", "will go", "went"], a: 0, why: "Quy luật: sữa để ngoài nắng sẽ hỏng — loại 0." }
+    ]
+  },
+  {
+    fam: "Mẫu động từ", level: "Band 4,0", name: "To + V chỉ mục đích (infinitive of purpose)",
+    hook: "I went to the market to buy fruit — to + động từ đứng sau để nói MỤC ĐÍCH.",
+    explain: "Ví dụ trước nhé: I went to the library to borrow a book (Tôi tới thư viện để mượn sách — to borrow nói mục đích của việc đi). Sau ví dụ là quy tắc. To + động từ nguyên thể đứng sau một hành động để nói MỤC ĐÍCH của hành động đó: She went home to rest. Trang trọng hơn: in order to / so as to (He saved money in order to buy a car). Phủ định: in order not to / so as not to (He spoke quietly so as not to wake the baby). Phân biệt: stop to V (dừng lại ĐỂ làm việc khác — I stopped to buy some bread) khác stop V-ing (ngừng hẳn — I stopped smoking). To-V chỉ mục đích thường đi sau động từ di chuyển (go, come, run, travel) hoặc hành động (study, work, save).",
+    examples: ["I went to the library to borrow a book. — Tôi tới thư viện để mượn sách.", "She studies hard in order to pass the exam. — Cô ấy học chăm chỉ để thi đậu.", "He saved money to buy a new bike. — Anh ấy tiết kiệm tiền để mua xe đạp mới."],
+    quiz: [
+      { q: "I went to the shop ___ some bread.", o: ["to buy", "buying", "buy"], a: 0, why: "To + V chỉ mục đích." },
+      { q: "She turned on the light ___ read.", o: ["to", "for", "so"], a: 0, why: "To read: để đọc sách." },
+      { q: "He studies hard in order ___ a good job.", o: ["to get", "getting", "get"], a: 0, why: "In order to + V." },
+      { q: "They went to the park ___ football.", o: ["to play", "playing", "play"], a: 0, why: "Mục đích của việc đi: to play football." },
+      { q: "He spoke quietly so as not ___ the baby.", o: ["to wake", "waking", "wake"], a: 0, why: "So as not to + V: phủ định của mục đích." },
+      { q: "I stopped ___ some water on the way home.", o: ["to buy", "buying", "buy"], a: 0, why: "Stop to V = dừng lại để làm việc khác." },
+      { q: "She came here ___ English.", o: ["to study", "studying", "study"], a: 0, why: "To study: mục đích tới đây." },
+      { q: "We went to Da Nang ___ the summer holiday.", o: ["to spend", "spending", "spend"], a: 0, why: "To spend: mục đích của chuyến đi." }
+    ]
+  },
+  {
+    fam: "Tính từ, trạng từ và so sánh", level: "Band 4,5", name: "Cụm trạng ngữ và trật tự từ: cách thức – nơi chốn – thời gian",
+    hook: "She walked slowly to school yesterday — cách thức, nơi chốn, thời gian: cứ theo đúng thứ tự đó mà xếp.",
+    explain: "Ví dụ trước nhé: We meet every Sunday at the park (Chúng tôi gặp nhau mỗi chủ nhật ở công viên — every Sunday là cụm trạng ngữ thời gian, at the park là cụm trạng ngữ nơi chốn). Sau ví dụ là quy tắc. Cụm trạng ngữ là nhóm từ chỉ thời gian (in the morning, every day, last week), nơi chốn (at home, in Hanoi, to school) hoặc tần suất (every Sunday, twice a week). Khi một câu có nhiều trạng ngữ, xếp theo thứ tự: CÁCH THỨC – NƠI CHỐN – THỜI GIAN (Manner – Place – Time): She drove carefully (cách thức) to work (nơi chốn) this morning (thời gian). Trạng ngữ thời gian có thể đưa lên ĐẦU câu để nhấn mạnh (Yesterday, we visited the museum). Cụm giới từ chỉ thời gian/nơi chốn đã dạy ở #9; mệnh đề trạng ngữ thời gian (when/while) đã dạy ở #12.",
+    examples: ["We meet every Sunday at the park. — Chúng tôi gặp nhau mỗi chủ nhật ở công viên.", "He drove carefully to work this morning. — Anh ấy lái xe cẩn thận tới chỗ làm sáng nay.", "In 2020, my family moved to Hanoi. — Năm 2020, gia đình tôi chuyển tới Hà Nội."],
+    quiz: [
+      { q: "She walked ___ to school ___. Choose the correct order.", o: ["slowly / yesterday", "yesterday / slowly", "to school / slowly"], a: 0, why: "Thứ tự: cách thức (slowly) trước thời gian (yesterday)." },
+      { q: "We visited the museum ___.", o: ["last Sunday", "in last Sunday", "on last Sunday"], a: 0, why: "Last Sunday không dùng giới từ." },
+      { q: "He works ___.", o: ["in Hanoi", "at Hanoi", "on Hanoi"], a: 0, why: "Nơi chốn: in Hanoi." },
+      { q: "___ , we went to the beach.", o: ["Yesterday", "In yesterday", "At yesterday"], a: 0, why: "Trạng ngữ thời gian có thể đứng đầu câu." },
+      { q: "I go to the gym ___.", o: ["twice a week", "two a week", "twice week"], a: 0, why: "Twice a week = hai lần một tuần (tần suất)." },
+      { q: "She spoke ___ at the meeting ___. Choose the correct order.", o: ["quietly / yesterday", "yesterday / quietly", "yesterday / at quietly"], a: 0, why: "Cách thức trước thời gian." },
+      { q: "They live ___ a small village.", o: ["in", "at", "on"], a: 0, why: "In a small village." },
+      { q: "Choose the correct order.", o: ["She reads books quietly in her room every evening.", "She reads books every evening in her room quietly.", "She reads books in her room quietly every evening."], a: 0, why: "Thứ tự đúng: cách thức (quietly) – nơi chốn (in her room) – thời gian (every evening)." }
+    ]
+  },
+  {
+    fam: "Thì và thể của động từ", level: "Band 4,5", name: "Hiện tại tiếp diễn cho sắp xếp tương lai",
+    hook: "I'm meeting Anna tomorrow — đã hẹn chắc rồi thì dùng hiện tại tiếp diễn để nói tương lai.",
+    explain: "Ví dụ trước nhé: I'm having lunch with my teacher tomorrow (Tôi sẽ ăn trưa với cô giáo ngày mai — đã hẹn chắc chắn). Sau ví dụ là quy tắc. Dùng hiện tại tiếp diễn (be + V-ing) cho việc đã SẮP XẾP CHẮC CHẮN trong tương lai gần, thường có mốc thời gian: I'm meeting Anna at 3 o'clock. Phân biệt: going to nói DỰ ĐỊNH (I'm going to study tonight — tôi dự định học); will nói QUYẾT ĐỊNH TỨC THÌ (I'll open the window); hiện tại tiếp diễn nói SẮP XẾP ĐÃ HẸN (We're flying to Da Nang on Friday — vé đã đặt). Dùng hiện tại tiếp diễn cho tương lai chỉ với các động từ chỉ hành động có hẹn trước (meet, come, go, fly, have lunch…), không dùng với động từ trạng thái (know, like).",
+    examples: ["I'm having lunch with my teacher tomorrow. — Tôi sẽ ăn trưa với cô giáo ngày mai.", "We're flying to Da Nang on Friday. — Chúng tôi sẽ bay tới Đà Nẵng vào thứ Sáu.", "What are you doing this weekend? — Cuối tuần này bạn làm gì?"],
+    quiz: [
+      { q: "I have an appointment. I ___ my dentist tomorrow morning.", o: ["am seeing", "see", "am see"], a: 0, why: "Đã hẹn trước: hiện tại tiếp diễn." },
+      { q: "What ___ this weekend?", o: ["are you doing", "do you do", "you are doing"], a: 0, why: "Hỏi kế hoạch cuối tuần: What are you doing…?" },
+      { q: "We ___ to the cinema tonight. I bought the tickets.", o: ["are going", "go", "will go"], a: 0, why: "Vé đã mua — sắp xếp chắc chắn: are going." },
+      { q: "She ___ her friend at the station at 5. They agreed yesterday.", o: ["is meeting", "meets", "meet"], a: 0, why: "Đã hẹn từ hôm qua: is meeting." },
+      { q: "I'm ___ my grandmother this Sunday.", o: ["visiting", "visit", "will visiting"], a: 0, why: "Sắp xếp: I'm visiting…" },
+      { q: "They ___ married next month.", o: ["are getting", "get", "are get"], a: 0, why: "Are getting married: sắp xếp tương lai." },
+      { q: "Choose the sentence about a fixed arrangement.", o: ["We're having a test tomorrow.", "We will have a test tomorrow.", "We have tests every month."], a: 0, why: "We're having a test tomorrow — dùng tiếp diễn vì lịch thi đã xếp sẵn." },
+      { q: "He ___ for Hanoi tonight.", o: ["is leaving", "leaves", "leave"], a: 0, why: "Is leaving: kế hoạch đã định tối nay." }
+    ]
+  },
+  {
+    fam: "Thì và thể của động từ", level: "Band 5,5", name: "Hiện tại hoàn thành tiếp diễn",
+    hook: "I have been studying for three hours — việc bắt đầu từ trước và vẫn đang tiếp diễn, nhấn mạnh cả quá trình.",
+    explain: "Ví dụ trước nhé: It has been raining since morning (Trời mưa từ sáng tới giờ — mưa bắt đầu sáng nay và vẫn đang mưa). Sau ví dụ là quy tắc. Hiện tại hoàn thành tiếp diễn = have/has + been + V-ing. Dùng khi việc bắt đầu trong quá khứ và VẪN ĐANG TIẾP DIỄN tới lúc nói, nhấn mạnh QUÁ TRÌNH và THỜI GIAN KÉO DÀI: She has been learning English for five years. Hay đi với for (khoảng thời gian) và since (mốc bắt đầu). Khác hiện tại hoàn thành đơn (#47/#52): hoàn thành đơn nhấn mạnh KẾT QUẢ (I have finished my homework — đã xong), hoàn thành tiếp diễn nhấn mạnh QUÁ TRÌNH (I have been doing my homework for two hours — vẫn đang làm). Không dùng với động từ trạng thái (know, like, believe, want).",
+    examples: ["It has been raining since morning. — Trời mưa từ sáng tới giờ.", "She has been learning English for five years. — Cô ấy học tiếng Anh được năm năm rồi.", "They have been working on this project all week. — Họ làm dự án này cả tuần nay."],
+    quiz: [
+      { q: "It ___ since morning.", o: ["has been raining", "has rained", "is raining"], a: 0, why: "Since morning → have/has been + V-ing." },
+      { q: "She ___ for the exam all day. She looks very tired.", o: ["has been studying", "has studied", "studies"], a: 0, why: "Nhấn mạnh quá trình cả ngày: has been studying." },
+      { q: "They ___ on this project all week.", o: ["have been working", "have worked", "work"], a: 0, why: "All week + quá trình: have been working." },
+      { q: "I ___ for three hours. My eyes hurt.", o: ["have been reading", "have read", "read"], a: 0, why: "Quá trình kéo dài 3 giờ: have been reading." },
+      { q: "How long ___ waiting?", o: ["have you been", "have you", "are you"], a: 0, why: "How long + have/has been + V-ing." },
+      { q: "He ___ tennis for two hours.", o: ["has been playing", "has played", "plays"], a: 0, why: "For two hours + quá trình: has been playing." },
+      { q: "It has been snowing ___ yesterday.", o: ["since", "for", "from"], a: 0, why: "Since + mốc thời gian (yesterday)." },
+      { q: "I have been learning English ___ 2019.", o: ["since", "for", "in"], a: 0, why: "Since + năm 2019 (mốc bắt đầu)." }
+    ]
+  },
+  {
+    fam: "Tính từ, trạng từ và so sánh", level: "Band 5,0", name: "So / such (+ that) — đến nỗi mà",
+    hook: "It was so hot that we stayed inside — so đi với tính từ, such đi với danh từ, cả hai đều dẫn tới that.",
+    explain: "Ví dụ trước nhé: It was so hot that we stayed inside (Trời nóng đến nỗi chúng tôi ở trong nhà). She is such a kind person (Cô ấy là một người tốt bụng làm sao). Sau ví dụ là quy tắc. So + tính từ/trạng từ (+ that + mệnh đề): so hot that…, so quickly that…. Such + (a/an) + tính từ + danh từ (+ that + mệnh đề): such a kind person, such beautiful weather. Nhớ: sau such có a/an khi danh từ đếm được số ít (such a good film — không nói such good film). Dùng that để nói KẾT QUẢ (so tired that I fell asleep). Trong IELTS Writing, so/such that giúp viết câu phức diễn tả nguyên nhân – kết quả rất hay.",
+    examples: ["It was so hot that we stayed inside. — Trời nóng đến nỗi chúng tôi ở trong nhà.", "She is such a kind person. — Cô ấy là một người tốt bụng làm sao.", "The test was so difficult that few students passed. — Bài kiểm tra khó đến nỗi ít học sinh làm được."],
+    quiz: [
+      { q: "It was ___ hot that we stayed inside.", o: ["so", "such", "so a"], a: 0, why: "So + tính từ: so hot that…" },
+      { q: "She is ___ kind person.", o: ["such a", "so a", "such"], a: 0, why: "Such + a + tính từ + danh từ: such a kind person." },
+      { q: "The film was ___ interesting that I watched it twice.", o: ["so", "such", "very"], a: 0, why: "So + tính từ + that." },
+      { q: "It was ___ beautiful day that we went for a picnic.", o: ["such a", "so a", "such"], a: 0, why: "Such a + tính từ + danh từ: such a beautiful day." },
+      { q: "He ran ___ fast that nobody could catch him.", o: ["so", "such", "very"], a: 0, why: "So + trạng từ: so fast that…" },
+      { q: "They are ___ nice people.", o: ["such", "so", "such a"], a: 0, why: "Such + tính từ + danh từ số nhiều (không a/an): such nice people." },
+      { q: "The music was so loud ___ we couldn't talk.", o: ["that", "what", "which"], a: 0, why: "So… that + kết quả." },
+      { q: "It was such bad weather ___ we stayed at home.", o: ["that", "so", "because"], a: 0, why: "Such… that + kết quả." }
+    ]
+  },
+  {
+    fam: "Thì và thể của động từ", level: "Band 5,5", name: "Tương lai tiếp diễn",
+    hook: "This time tomorrow, I'll be flying to London — tại một thời điểm trong tương lai, việc đang diễn ra.",
+    explain: "Ví dụ trước nhé: At 8 o'clock tonight, we will be having dinner (Lúc 8 giờ tối nay, chúng tôi sẽ đang ăn tối — việc đang diễn ra tại mốc đó). Sau ví dụ là quy tắc. Tương lai tiếp diễn = will + be + V-ing. Dùng cho việc ĐANG DIỄN RA tại một thời điểm cụ thể trong tương lai: This time next week, I'll be sitting on a beach. Còn dùng cho việc sẽ xảy ra theo lịch trình bình thường, không cần quyết định (The train will be leaving at 6 — tàu sẽ khởi hành lúc 6 giờ theo lịch). Dùng để hỏi lịch sự về kế hoạch của người khác: Will you be using your laptop this evening? (Tối nay bạn có dùng laptop không — hỏi nhẹ nhàng, không ép buộc.)",
+    examples: ["At 8 o'clock tonight, we will be having dinner. — Lúc 8 giờ tối nay, chúng tôi sẽ đang ăn tối.", "This time tomorrow, I'll be flying to London. — Giờ này ngày mai, tôi sẽ đang bay tới London.", "Will you be using your laptop this evening? — Tối nay bạn có dùng laptop không?"],
+    quiz: [
+      { q: "This time tomorrow, I ___ to Hanoi.", o: ["will be flying", "will fly", "fly"], a: 0, why: "Việc đang diễn ra tại mốc đó: will be flying." },
+      { q: "At 8 tonight, we ___ dinner.", o: ["will be having", "will have", "have"], a: 0, why: "Will be having: đang ăn tối lúc 8 giờ." },
+      { q: "Don't call at 10 — I ___.", o: ["will be sleeping", "will sleep", "sleep"], a: 0, why: "Đang ngủ lúc 10 giờ: will be sleeping." },
+      { q: "Will you ___ your car tomorrow?", o: ["be using", "use", "using"], a: 0, why: "Hỏi lịch sự về kế hoạch: Will you be using…?" },
+      { q: "This time next week, she ___ on a beach.", o: ["will be lying", "will lie", "lies"], a: 0, why: "Đang nằm trên bãi biển tại mốc đó: will be lying." },
+      { q: "I ___ working all day tomorrow, so I can't meet you.", o: ["will be", "will", "am"], a: 0, why: "Will be working: đang làm việc cả ngày mai." },
+      { q: "At this time next month, they ___ in their new house.", o: ["will be living", "will live", "live"], a: 0, why: "Đang sống trong nhà mới tại mốc đó: will be living." },
+      { q: "Choose the future continuous sentence.", o: ["She will be waiting for you at the station.", "She will wait for you at the station.", "She is waiting for you at the station."], a: 0, why: "Will be waiting = tương lai tiếp diễn." }
+    ]
+  },
+  {
+    fam: "Thì và thể của động từ", level: "Band 6,0", name: "Tương lai hoàn thành",
+    hook: "By 2030, I will have finished university — việc sẽ HOÀN THÀNH trước một mốc trong tương lai.",
+    explain: "Ví dụ trước nhé: By next year, they will have built the new bridge (Tới năm sau, họ sẽ xây xong cây cầu mới — việc hoàn thành trước mốc năm sau). Sau ví dụ là quy tắc. Tương lai hoàn thành = will + have + V3 (quá khứ phân từ). Dùng cho việc sẽ HOÀN THÀNH trước một mốc thời gian trong tương lai. Hay đi với by + mốc (by 2030, by next year, by the time…): By the time you arrive, I will have cooked dinner. Khác tương lai đơn (will + V: nói việc sẽ xảy ra) và tương lai tiếp diễn (will be + V-ing: việc đang diễn ra tại mốc đó). Trong IELTS Writing Task 1, tương lai hoàn thành hay dùng để dự đoán xu hướng tới một năm mốc: The population will have reached 10 million by 2050.",
+    examples: ["By next year, they will have built the new bridge. — Tới năm sau, họ sẽ xây xong cây cầu mới.", "I will have saved enough money by December. — Tôi sẽ tiết kiệm đủ tiền trước tháng Mười hai.", "By 2030, the population will have reached 10 million. — Tới năm 2030, dân số sẽ đạt 10 triệu."],
+    quiz: [
+      { q: "By 2030, I ___ university.", o: ["will have finished", "will finish", "will be finishing"], a: 0, why: "Hoàn thành trước mốc 2030: will have finished." },
+      { q: "By the time you arrive, I ___ dinner.", o: ["will have cooked", "will cook", "will be cooking"], a: 0, why: "By the time…: will have cooked." },
+      { q: "They ___ the bridge by next year.", o: ["will have built", "will build", "will be building"], a: 0, why: "Xây xong trước năm sau: will have built." },
+      { q: "She ___ three books by 2027.", o: ["will have written", "will write", "will be writing"], a: 0, why: "Viết xong 3 cuốn trước 2027: will have written." },
+      { q: "By December, we ___ enough money.", o: ["will have saved", "will save", "will be saving"], a: 0, why: "Tiết kiệm đủ trước tháng 12: will have saved." },
+      { q: "I will have finished my homework ___ 9 o'clock.", o: ["by", "at", "in"], a: 0, why: "By + mốc thời gian: hoàn thành trước 9 giờ." },
+      { q: "By 2050, scientists ___ a cure for cancer.", o: ["will have found", "will find", "will be finding"], a: 0, why: "Tìm ra trước 2050: will have found." },
+      { q: "Choose the future perfect sentence.", o: ["By next week, I will have read this book.", "Next week, I will read this book.", "Next week, I will be reading this book."], a: 0, why: "Will have read + by: tương lai hoàn thành." }
+    ]
+  },
+  {
+    fam: "Thì và thể của động từ", level: "Band 6,5", name: "Tương lai hoàn thành tiếp diễn",
+    hook: "By June, I will have been working here for ten years — nhấn mạnh thời gian KÉO DÀI tới một mốc tương lai.",
+    explain: "Ví dụ trước nhé: By June, I will have been working here for ten years (Tới tháng Sáu, tôi sẽ làm việc ở đây được mười năm — nhấn mạnh 10 năm liên tục tới mốc đó). Sau ví dụ là quy tắc. Tương lai hoàn thành tiếp diễn = will + have + been + V-ing. Dùng khi muốn nhấn mạnh việc KÉO DÀI LIÊN TỤC tới một mốc trong tương lai, hay đi với for + khoảng thời gian: By 2030, she will have been teaching for 20 years. Khác tương lai hoàn thành (will have + V3: nhấn mạnh HOÀN THÀNH — I will have finished by June) và tương lai tiếp diễn (will be + V-ing: việc đang diễn ra tại mốc đó — I will be working at 9 tomorrow). Chỉ dùng cho việc kéo dài, không dùng với động từ trạng thái (know, like).",
+    examples: ["By June, I will have been working here for ten years. — Tới tháng Sáu, tôi sẽ làm việc ở đây được mười năm.", "By 2030, she will have been teaching for 20 years. — Tới năm 2030, cô ấy sẽ dạy học được 20 năm.", "In July, we will have been living here for five years. — Tới tháng Bảy, chúng tôi sẽ sống ở đây được năm năm."],
+    quiz: [
+      { q: "By June, I ___ here for ten years.", o: ["will have been working", "will have worked", "will be working"], a: 0, why: "Nhấn mạnh 10 năm liên tục: will have been working." },
+      { q: "By 2030, she ___ for 20 years.", o: ["will have been teaching", "will have taught", "will teach"], a: 0, why: "Dạy liên tục 20 năm tới 2030: will have been teaching." },
+      { q: "In July, we ___ here for five years.", o: ["will have been living", "will have lived", "will live"], a: 0, why: "Sống liên tục 5 năm: will have been living." },
+      { q: "By midnight, he ___ for twelve hours.", o: ["will have been driving", "will have driven", "will drive"], a: 0, why: "Lái liên tục 12 giờ: will have been driving." },
+      { q: "By next year, they ___ on this project for three years.", o: ["will have been working", "will have worked", "will work"], a: 0, why: "Làm liên tục 3 năm: will have been working." },
+      { q: "Choose the future perfect continuous sentence.", o: ["By 2028, I will have been studying English for ten years.", "By 2028, I will have studied English.", "In 2028, I will study English."], a: 0, why: "Will have been studying + for: tương lai hoàn thành tiếp diễn." },
+      { q: "How long ___ by the time you retire?", o: ["will you have been working", "will you have worked", "will you work"], a: 0, why: "Hỏi thời gian kéo dài: will you have been working." },
+      { q: "By the end of this year, I ___ for this company for a decade.", o: ["will have been working", "will have worked", "will work"], a: 0, why: "Làm liên tục một thập kỷ: will have been working." }
+    ]
+  },
+  {
+    fam: "Thì và thể của động từ", level: "Band 6,5", name: "Quá khứ hoàn thành tiếp diễn",
+    hook: "She was tired because she had been working all day — việc kéo dài TRƯỚC một việc khác trong quá khứ.",
+    explain: "Ví dụ trước nhé: She was tired because she had been working all day (Cô ấy mệt vì đã làm việc cả ngày — việc làm kéo dài trước lúc mệt). Sau ví dụ là quy tắc. Quá khứ hoàn thành tiếp diễn = had + been + V-ing. Dùng cho việc KÉO DÀI một thời gian rồi mới tới một việc khác trong quá khứ: I had been waiting for an hour when the bus arrived. Nhấn mạnh QUÁ TRÌNH và THỜI GIAN KÉO DÀI, thường giải thích nguyên nhân của một tình trạng quá khứ (mệt, ướt, bẩn…). Khác quá khứ hoàn thành đơn (#78: had + V3 — nhấn mạnh HOÀN THÀNH/KẾT QUẢ: The train had left before we arrived). Không dùng với động từ trạng thái (know, like).",
+    examples: ["She was tired because she had been working all day. — Cô ấy mệt vì đã làm việc cả ngày.", "They had been playing football for two hours before it started to rain. — Họ đã đá bóng được hai giờ trước khi trời mưa.", "I had been studying English for a year before I took the test. — Tôi đã học tiếng Anh được một năm trước khi thi."],
+    quiz: [
+      { q: "She was tired because she ___ all day.", o: ["had been working", "has been working", "worked"], a: 0, why: "Làm việc kéo dài trước lúc mệt: had been working." },
+      { q: "I ___ for an hour when the bus arrived.", o: ["had been waiting", "have been waiting", "waited"], a: 0, why: "Chờ kéo dài trước khi xe tới: had been waiting." },
+      { q: "They ___ football for two hours before it rained.", o: ["had been playing", "have been playing", "played"], a: 0, why: "Đá bóng kéo dài 2 giờ trước khi mưa: had been playing." },
+      { q: "His clothes were dirty because he ___ in the garden.", o: ["had been working", "has been working", "worked"], a: 0, why: "Làm vườn kéo dài giải thích quần áo bẩn: had been working." },
+      { q: "We ___ for hours before we found the hotel.", o: ["had been driving", "have been driving", "drove"], a: 0, why: "Lái xe kéo dài trước khi tìm thấy khách sạn: had been driving." },
+      { q: "She ___ English for a year before she took the test.", o: ["had been studying", "has been studying", "studied"], a: 0, why: "Học kéo dài một năm trước kỳ thi: had been studying." },
+      { q: "It ___ for hours when we left the house.", o: ["had been raining", "has been raining", "rained"], a: 0, why: "Mưa kéo dài trước khi chúng tôi rời nhà: had been raining." },
+      { q: "Choose the past perfect continuous sentence.", o: ["They had been travelling for a week before they reached the city.", "They have been travelling for a week.", "They travelled for a week."], a: 0, why: "Had been travelling: quá khứ hoàn thành tiếp diễn." }
+    ]
+  },
+  {
+    fam: "Câu điều kiện và giả định", level: "Band 6,5", name: "Câu điều kiện hỗn hợp (mixed conditionals)",
+    hook: "If I had studied harder, I would have a better job now — điều kiện ở quá khứ, kết quả ở hiện tại: trộn hai loại lại.",
+    explain: "Ví dụ trước nhé: If I had studied harder, I would have a better job now (Nếu hồi đó tôi học chăm hơn, giờ tôi đã có công việc tốt hơn — điều kiện ở QUÁ KHỨ, kết quả ở HIỆN TẠI). Sau ví dụ là quy tắc. Điều kiện hỗn hợp TRỘN hai loại: vế if của loại 3 (If + had + V3 — giả sử quá khứ khác đi) với vế chính của loại 2 (would + V nguyên thể — kết quả ở hiện tại): If she had taken the earlier train, she would be here now. Ngược lại cũng có: vế if loại 2 (If + quá khứ đơn — giả sử hiện tại khác) với vế chính loại 3 (would have + V3 — kết quả ở quá khứ): If I were rich, I would have bought that house yesterday. Loại này hay gặp ở Band 7+ vì thể hiện khả năng suy luận phức tạp. Ôn lại: loại 2 (#7/#53) và loại 3 (#19) trước khi học trộn.",
+    examples: ["If I had studied harder, I would have a better job now. — Nếu hồi đó tôi học chăm hơn, giờ tôi đã có công việc tốt hơn.", "If she had taken the earlier train, she would be here now. — Nếu cô ấy đi chuyến tàu sớm hơn, giờ cô ấy đã ở đây.", "If I were rich, I would have bought that house yesterday. — Nếu tôi giàu, hôm qua tôi đã mua ngôi nhà đó."],
+    quiz: [
+      { q: "If I had studied harder, I ___ a better job now.", o: ["would have", "would have had", "will have"], a: 0, why: "Kết quả ở hiện tại: would + V nguyên thể." },
+      { q: "If she had taken the earlier train, she ___ here now.", o: ["would be", "would have been", "will be"], a: 0, why: "Kết quả hiện tại: would be here now." },
+      { q: "If I ___ rich, I would have bought that house yesterday.", o: ["were", "had been", "am"], a: 0, why: "Vế if loại 2 (giả sử hiện tại): If I were rich." },
+      { q: "If you had listened to me, you ___ in trouble now.", o: ["wouldn't be", "wouldn't have been", "won't be"], a: 0, why: "Điều kiện quá khứ → kết quả hiện tại: wouldn't be." },
+      { q: "If he had saved money, he ___ a car now.", o: ["would have", "would have had", "will have"], a: 0, why: "Would have + danh từ: kết quả hiện tại." },
+      { q: "If I hadn't missed the bus, I ___ on time now.", o: ["would be", "would have been", "will be"], a: 0, why: "Would be on time now: kết quả hiện tại." },
+      { q: "Choose the mixed conditional sentence.", o: ["If I had practised more, I would speak English better now.", "If I practise more, I will speak English better.", "If I had practised more, I would have spoken English better."], a: 0, why: "If + had V3 (quá khứ) + would + V (hiện tại): trộn loại 3 và loại 2." },
+      { q: "If she had taken the job, she ___ in London now.", o: ["would be living", "would have lived", "will live"], a: 0, why: "Would be living now: kết quả hiện tại." }
+    ]
+  },
+  {
+    fam: "Mẫu động từ", level: "Band 6,0", name: "Causative: have/get something done — nhờ ai làm hộ",
+    hook: "I had my hair cut — tôi không tự cắt tóc, tôi NHỜ người khác cắt: have + tân ngữ + V3.",
+    explain: "Ví dụ trước nhé: I had my hair cut yesterday (Hôm qua tôi đi cắt tóc — tôi nhờ thợ cắt, không tự cắt). Sau ví dụ là quy tắc. Causative have/get something done dùng khi bạn nhờ/ thuê người khác làm việc gì cho mình: have/get + tân ngữ (vật) + V3 (quá khứ phân từ): I had my house painted. She gets her eyes tested every year. Dạng chủ động: have someone do something (I had the mechanic repair my car); get someone to do something (I got him to help me). Phân biệt với câu bị động (#3/#100): bị động nhấn mạnh việc xảy ra với chủ ngữ (My car was repaired), causative nhấn mạnh bạn NHỜ người khác làm (I had my car repaired). Make/let cũng là causative: make someone do something (bắt ai làm — The teacher made us rewrite it); let someone do something (để ai làm — Let me help you).",
+    examples: ["I had my hair cut yesterday. — Hôm qua tôi đi cắt tóc.", "She gets her eyes tested every year. — Cô ấy đi khám mắt mỗi năm.", "We had a plumber fix the leak. — Chúng tôi nhờ thợ sửa ống nước sửa chỗ rò."],
+    quiz: [
+      { q: "I had my house ___ last month.", o: ["painted", "paint", "to paint"], a: 0, why: "Have + tân ngữ + V3: had my house painted." },
+      { q: "She gets her eyes ___ every year.", o: ["tested", "test", "to test"], a: 0, why: "Get + tân ngữ + V3: gets her eyes tested." },
+      { q: "We had a plumber ___ the leak.", o: ["fix", "fixed", "to fix"], a: 0, why: "Have someone do something: had a plumber fix…" },
+      { q: "I got him ___ me with my homework.", o: ["to help", "help", "helped"], a: 0, why: "Get someone to do something: got him to help me." },
+      { q: "They had their car ___ yesterday.", o: ["repaired", "repair", "to repair"], a: 0, why: "Have + tân ngữ + V3: had their car repaired." },
+      { q: "The teacher made us ___ the essay.", o: ["rewrite", "rewrote", "to rewrite"], a: 0, why: "Make someone do something: made us rewrite." },
+      { q: "Let me ___ you with your bags.", o: ["help", "to help", "helped"], a: 0, why: "Let someone do something: Let me help you." },
+      { q: "I need to have my computer ___.", o: ["fixed", "fix", "to fix"], a: 0, why: "Have + tân ngữ + V3: have my computer fixed." }
+    ]
+  },
+  {
+    fam: "Cấu trúc nhấn mạnh và đặc biệt", level: "Band 7,0", name: "Lược bỏ và thay thế: ellipsis & substitution (one/do/so/not)",
+    hook: "'Have you finished?' 'Yes, I have.' — từ đã rõ nghĩa thì lược đi, từ lặp lại thì thay bằng one, do, so.",
+    explain: "Ví dụ trước nhé: 'Do you like it?' 'Yes, I do.' (Bạn có thích không? — Có, tôi thích — do thay cho like it, không lặp lại). Sau ví dụ là quy tắc. Ellipsis (lược bỏ): bỏ từ đã rõ nghĩa từ ngữ cảnh — 'Have you finished?' 'Yes, I have.' (lược finished); 'I like tea, and Mary (likes) coffee.' Substitution (thay thế): dùng one/ones thay danh từ (I need a pen — Take this one); do thay động từ (He sings better than I do); so/not thay cả mệnh đề (I think so — tôi nghĩ vậy; I hope not — tôi hy vọng không). Lược bỏ that trong mệnh đề danh từ đã dạy ở #86 (I think (that) he is right). Trong IELTS, ellipsis và substitution giúp bài viết gọn, tránh lặp từ — tiêu chí Lexical Resource Band 7+.",
+    examples: ["'Do you like it?' 'Yes, I do.' — Bạn có thích không? — Có, tôi thích.", "I lost my umbrella, so I bought a new one. — Tôi làm mất ô nên mua một cái mới.", "'Will it rain?' 'I hope not.' — Trời có mưa không? — Tôi hy vọng không."],
+    quiz: [
+      { q: "'Have you finished?' 'Yes, I ___.'", o: ["have", "have finished", "do"], a: 0, why: "Lược finished đã rõ nghĩa: Yes, I have." },
+      { q: "I need a pen. Can I borrow ___?", o: ["one", "it", "that"], a: 0, why: "One thay cho a pen." },
+      { q: "He sings better than I ___.", o: ["do", "sing", "am"], a: 0, why: "Do thay cho sing." },
+      { q: "'Will it rain tomorrow?' 'I hope ___.'", o: ["not", "no", "don't"], a: 0, why: "I hope not: thay cả mệnh đề phủ định." },
+      { q: "She bought a red dress, and I bought a blue ___.", o: ["one", "it", "dress"], a: 0, why: "One thay cho dress: a blue one." },
+      { q: "'Do you think he will come?' 'I think ___.'", o: ["so", "yes", "it"], a: 0, why: "I think so: thay cả mệnh đề." },
+      { q: "I have two cats: a black ___ and a white ___.", o: ["one / one", "it / it", "ones / ones"], a: 0, why: "One thay cho cat (số ít)." },
+      { q: "Choose the sentence with substitution.", o: ["I wanted the red shirt, so I bought that one.", "I wanted the red shirt, so I bought the red shirt.", "I wanted the red shirt, so I bought it red."], a: 0, why: "That one thay cho the red shirt, tránh lặp từ." }
+    ]
+  },
+  {
+    fam: "Cấu trúc nhấn mạnh và đặc biệt", level: "Band 7,5+", name: "Fronting — đưa thành phần lên đầu câu để nhấn mạnh",
+    hook: "That movie I have watched twice — đưa thứ muốn nhấn mạnh lên ĐẦU câu, không cần đảo trợ động từ.",
+    explain: "Ví dụ trước nhé: That movie I have watched twice (Bộ phim đó tôi đã xem hai lần — đưa that movie lên đầu để nhấn mạnh, thay vì I have watched that movie twice). Sau ví dụ là quy tắc. Fronting là đưa một thành phần (thường là tân ngữ hoặc bổ ngữ) lên ĐẦU câu để nhấn mạnh: Your advice I will always remember. Her kindness I will never forget. Động từ và chủ ngữ GIỮ NGUYÊN vị trí — đây là điểm khác với ĐẢO NGỮ (#25/#28/#30) là đảo trợ động từ lên trước chủ ngữ (Never have I seen…). Fronting với trạng ngữ chỉ nơi chốn + động từ vị trí (stand, lie, sit) thì động từ đảo lên trước chủ ngữ: In front of the house stood a big tree. Trong IELTS Writing Band 7+, fronting giúp câu đa dạng và nhấn mạnh đúng ý người viết muốn nói.",
+    examples: ["That movie I have watched twice. — Bộ phim đó tôi đã xem hai lần.", "Your advice I will always remember. — Lời khuyên của bạn tôi sẽ luôn nhớ.", "In front of the house stood a big tree. — Trước nhà có một cây lớn."],
+    quiz: [
+      { q: "___ I have watched twice.", o: ["That movie", "That movie have", "That movie watched"], a: 0, why: "Fronting: đưa tân ngữ lên đầu câu." },
+      { q: "Your advice I ___ always remember.", o: ["will", "would", "shall"], a: 0, why: "Your advice I will always remember." },
+      { q: "___ I will never forget.", o: ["Her kindness", "Her kindness will", "Her kindness never"], a: 0, why: "Fronting tân ngữ: Her kindness I will never forget." },
+      { q: "In front of the house ___ a big tree.", o: ["stood", "stands", "standing"], a: 0, why: "Trạng ngữ nơi chốn + động từ vị trí đảo lên trước chủ ngữ: stood a big tree." },
+      { q: "This problem we ___ solve first.", o: ["must", "must to", "musts"], a: 0, why: "This problem we must solve first." },
+      { q: "Choose the fronting sentence.", o: ["That book I have read three times.", "I have read that book three times.", "That book has been read three times."], a: 0, why: "Tân ngữ That book đưa lên đầu câu để nhấn mạnh." },
+      { q: "___ she could not forgive.", o: ["His behaviour", "His behaviour could", "His behaviour not"], a: 0, why: "His behaviour she could not forgive — fronting tân ngữ." },
+      { q: "Fronting is different from inversion because ___.", o: ["it does not move the auxiliary before the subject.", "it moves the auxiliary before the subject.", "it changes the verb tense."], a: 0, why: "Fronting giữ nguyên vị trí động từ–chủ ngữ; đảo ngữ mới đảo trợ động từ lên trước." }
+    ]
+  },
+  {
+    fam: "Động từ khuyết thiếu", level: "Band 5,5", name: "Động từ khuyết thiếu suy luận: must/can't/might/may/could",
+    hook: "The lights are on — someone must be at home. Đoán chắc chắn thì must, đoán không thể thì can't.",
+    explain: "Ví dụ trước nhé: The lights are on — someone must be at home (Đèn đang sáng — chắc chắn có người ở nhà). He can't be the thief; he was with me all day (Anh ta không thể là tên trộm; cả ngày anh ta ở cùng tôi). Sau ví dụ là quy tắc. Suy luận ở HIỆN TẠI: must be + tính từ/danh từ (chắc chắn đúng — She must be tired); can't be (chắc chắn sai — It can't be true); might/may/could be (có thể đúng — He might be ill). Suy luận về QUÁ KHỨ: must have + V3 (chắc chắn đã — The road is wet; it must have rained); can't have + V3 (chắc chắn không — She can't have forgotten; I told her twice); might/may/could have + V3 (có thể đã — He might have missed the train). Phân biệt: must bắt buộc (#91: You must wear a helmet) khác must suy luận (You must be joking — chắc chắn bạn đang đùa). Trong IELTS Speaking, must/can't giúp diễn đạt suy luận chắc chắn, might/may diễn đạt dè dặt.",
+    examples: ["The lights are on — someone must be at home. — Đèn đang sáng, chắc chắn có người ở nhà.", "He can't be the thief; he was with me all day. — Anh ta không thể là tên trộm; cả ngày anh ta ở cùng tôi.", "She might have left her keys at the office. — Cô ấy có thể đã để quên chìa khóa ở văn phòng."],
+    quiz: [
+      { q: "The lights are on. Someone ___ at home.", o: ["must be", "must", "can be"], a: 0, why: "Chắc chắn đúng: must be." },
+      { q: "He ___ the thief; he was with me all day.", o: ["can't be", "must be", "might be"], a: 0, why: "Chắc chắn sai: can't be." },
+      { q: "She ___ ill. She looks very pale.", o: ["might be", "must be", "can't be"], a: 0, why: "Có thể: might be (chưa chắc chắn)." },
+      { q: "The road is wet. It ___ last night.", o: ["must have rained", "must rain", "must be rained"], a: 0, why: "Suy luận quá khứ chắc chắn: must have + V3." },
+      { q: "She ___ the meeting; I told her twice.", o: ["can't have forgotten", "can't forget", "must have forgotten"], a: 0, why: "Chắc chắn không: can't have + V3." },
+      { q: "He ___ the train. That's why he's late.", o: ["might have missed", "might miss", "must miss"], a: 0, why: "Có thể đã: might have + V3." },
+      { q: "You ___ joking! That's impossible.", o: ["must be", "must have", "can be"], a: 0, why: "Must be joking: chắc chắn đang đùa (suy luận, không phải bắt buộc)." },
+      { q: "They ___ at home. The car isn't there.", o: ["can't be", "must be", "might be"], a: 0, why: "Xe không ở đó nên chắc chắn họ không ở nhà: can't be." }
+    ]
+  },
+  {
+    fam: "Thì quá khứ", level: "Band 6,0", name: "Would cho thói quen trong quá khứ",
+    hook: "Every summer, we would go to the beach — thói quen quá khứ còn có thể nói bằng would, không chỉ used to.",
+    explain: "Ví dụ trước nhé: Every summer, we would go to the beach (Mỗi mùa hè, chúng tôi thường đi biển — thói quen quá khứ). Sau ví dụ là quy tắc. Would + động từ nguyên thể tả thói quen lặp lại trong quá khứ, giống used to (#45: My grandfather used to get up at four). Khác biệt quan trọng: would CHỈ dùng với động từ HÀNH ĐỘNG (go, play, read, visit), KHÔNG dùng với động từ TRẠNG THÁI (have, be, know, like): nói I used to have a bike (đúng), không nói I would have a bike (sai). Would thường đi kèm từ chỉ thời gian/tần suất trong quá khứ (every summer, when I was young, each morning). Trong văn kể chuyện, would tạo giọng hoài niệm, sinh động hơn used to.",
+    examples: ["Every summer, we would go to the beach. — Mỗi mùa hè, chúng tôi thường đi biển.", "My father would read me a story every night. — Bố tôi thường đọc truyện cho tôi mỗi tối.", "When I was young, I would play football after school. — Hồi nhỏ, tôi thường đá bóng sau giờ học."],
+    quiz: [
+      { q: "Every summer, we ___ to the beach.", o: ["would go", "would went", "would going"], a: 0, why: "Would + V nguyên thể: would go." },
+      { q: "My father ___ me a story every night.", o: ["would read", "would reads", "would reading"], a: 0, why: "Would + V nguyên thể: would read." },
+      { q: "When I was young, I ___ football after school.", o: ["would play", "would played", "would playing"], a: 0, why: "Thói quen quá khứ: would play." },
+      { q: "Choose the correct sentence.", o: ["I used to have a bike when I was ten.", "I would have a bike when I was ten.", "I would had a bike when I was ten."], a: 0, why: "Have là động từ trạng thái — dùng used to, không dùng would." },
+      { q: "Each morning, she ___ breakfast for the family.", o: ["would make", "would made", "would making"], a: 0, why: "Would + V nguyên thể: would make." },
+      { q: "We ___ in the park every afternoon.", o: ["would meet", "would met", "would meeting"], a: 0, why: "Would meet: thói quen quá khứ." },
+      { q: "He ___ to school by bus when he was a child.", o: ["would go", "would went", "would going"], a: 0, why: "Would + V nguyên thể." },
+      { q: "Choose the sentence that does NOT use would correctly.", o: ["I would know all my neighbours when I was young.", "I would visit my grandmother every Sunday.", "I would swim in the river every summer."], a: 0, why: "Know là động từ trạng thái — không dùng would; phải dùng used to know." }
+    ]
+  },
+  {
+    fam: "Động từ khuyết thiếu", level: "Band 6,5", name: "Perfect modals: should/must/might/could have + V3",
+    hook: "You should have called me — lẽ ra bạn nên gọi: should/must/might have + V3 nói về quá khứ đã qua.",
+    explain: "Ví dụ trước nhé: You should have called me earlier (Lẽ ra bạn nên gọi tôi sớm hơn — tiếc vì đã không gọi). Sau ví dụ là quy tắc. Perfect modals = should/must/might/could + have + V3 (quá khứ phân từ), dùng để nói về quá khứ: should have + V3: lẽ ra nên làm mà đã không làm — tiếc nuối hoặc trách móc (You should have studied harder); must have + V3: chắc chắn đã xảy ra — suy luận về quá khứ (The road is wet; it must have rained); might/could have + V3: có thể đã xảy ra (He might have forgotten the meeting); couldn't have + V3: chắc chắn đã không xảy ra (She couldn't have done it alone). Phân biệt với điều kiện loại 3 (#19: would have + V3 — giả sử quá khứ khác đi); perfect modals không cần mệnh đề if.",
+    examples: ["You should have called me earlier. — Lẽ ra bạn nên gọi tôi sớm hơn.", "The road is wet; it must have rained last night. — Đường ướt; chắc chắn đêm qua đã mưa.", "She might have forgotten the meeting. — Cô ấy có thể đã quên cuộc họp."],
+    quiz: [
+      { q: "You ___ called me earlier.", o: ["should have", "should", "should be"], a: 0, why: "Should have + V3: lẽ ra nên gọi." },
+      { q: "The road is wet. It ___ last night.", o: ["must have rained", "must rain", "must be raining"], a: 0, why: "Must have + V3: chắc chắn đã mưa." },
+      { q: "She ___ the meeting.", o: ["might have forgotten", "might forget", "might be forgetting"], a: 0, why: "Might have + V3: có thể đã quên." },
+      { q: "He ___ it alone. It was too heavy.", o: ["couldn't have done", "couldn't do", "couldn't be done"], a: 0, why: "Couldn't have + V3: chắc chắn đã không làm được một mình." },
+      { q: "I ___ harder for the exam.", o: ["should have studied", "should study", "should be studying"], a: 0, why: "Should have studied: lẽ ra nên học chăm hơn." },
+      { q: "They ___ the train; that's why they're late.", o: ["could have missed", "could miss", "could be missing"], a: 0, why: "Could have + V3: có thể đã lỡ tàu." },
+      { q: "You ___ me the truth from the start.", o: ["should have told", "should tell", "should be telling"], a: 0, why: "Should have told: lẽ ra nên nói thật từ đầu." },
+      { q: "Choose the perfect modal sentence.", o: ["She must have left her umbrella at home.", "She must leave her umbrella at home.", "She must be leaving her umbrella at home."], a: 0, why: "Must have + V3: suy luận về quá khứ." }
+    ]
+  }
 ]);
 CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, [
   {
@@ -55486,6 +55863,35 @@ var TC_GRAMMAR_EXPAND18 = [
 ];
 
 TC_GRAMMAR.push.apply(TC_GRAMMAR, TC_GRAMMAR_EXPAND18);
+
+var TC_GRAMMAR_EXPAND19 = [
+{ name: "Thì quá khứ tiếp diễn trong email và báo cáo công sở", level: "600",
+  explain: "Nghe ví dụ trước: 'While I was writing the report, the manager called me.' (Trong lúc tôi đang viết báo cáo, quản lý gọi cho tôi.) 'At 9 a.m. yesterday, we were discussing the new project.' (Lúc 9 giờ sáng hôm qua, chúng tôi đang thảo luận dự án mới.) Quy tắc: quá khứ tiếp diễn = was/were + V-ing; dùng cho việc ĐANG DIỄN RA tại một thời điểm trong quá khứ, hoặc việc đang diễn ra thì bị một việc khác (quá khứ đơn) cắt ngang: While I was writing…, the manager called. Trong email và báo cáo TOEIC, quá khứ tiếp diễn hay dùng để mô tả việc đang làm dở khi có việc khác xảy ra, khác quá khứ đơn (#0) là việc đã xong hẳn và có mốc thời gian.",
+  examples: [{ "t": "'While I was writing the report, the manager called me.' (Trong lúc tôi đang viết báo cáo, quản lý gọi cho tôi.)", "s": "While I was writing the report, the manager called me." }, { "t": "'At 9 a.m. yesterday, we were discussing the new project.' (Lúc 9 giờ sáng hôm qua, chúng tôi đang thảo luận dự án mới.)", "s": "At 9 a.m. yesterday, we were discussing the new project." }],
+  rule: "quá khứ tiếp diễn = was/were + V-ing; dùng cho việc ĐANG DIỄN RA tại một thời điểm trong quá khứ, hoặc việc đang diễn ra thì bị một việc khác (quá khứ đơn) cắt ngang: While I was writing…, the manager called. Trong email và báo cáo TOEIC, quá khứ tiếp diễn hay dùng để mô tả việc đang làm dở khi có việc khác xảy ra, khác quá khứ đơn (#0) là việc đã xong hẳn và có mốc thời gian.",
+  quiz: [
+  { q: "While I ___ the report, the manager called me.", o: ["was writing", "wrote", "write"], a: 0, why: "Việc đang diễn ra thì bị cắt ngang: was writing." },
+  { q: "At 9 a.m. yesterday, we ___ the new project.", o: ["were discussing", "discussed", "discuss"], a: 0, why: "Đang diễn ra lúc 9 giờ sáng hôm qua: were discussing." },
+  { q: "She ___ to a client when the phone rang.", o: ["was talking", "talked", "talks"], a: 0, why: "Was talking: đang nói chuyện thì điện thoại reo." },
+  { q: "They ___ in the meeting room all morning.", o: ["were working", "worked", "work"], a: 0, why: "Were working: đang làm việc suốt buổi sáng." },
+  { q: "What ___ at this time yesterday?", o: ["were you doing", "did you do", "you were doing"], a: 0, why: "Hỏi việc đang diễn ra tại mốc quá khứ: were you doing." },
+  { q: "I was reading the contract ___ the lawyer arrived.", o: ["when", "while", "because"], a: 0, why: "When + quá khứ đơn cắt ngang quá khứ tiếp diễn." }
+  ] },
+{ name: "Trạng từ tần suất và vị trí trạng từ trong câu", level: "600",
+  explain: "Nghe ví dụ trước: 'She always arrives on time.' (Cô ấy lúc nào cũng tới đúng giờ.) 'He is usually busy on Mondays.' (Anh ấy thường bận vào thứ Hai.) Quy tắc: trạng từ tần suất nói việc xảy ra thường xuyên tới mức nào: always (lúc nào cũng), usually (thường xuyên), often (thường), sometimes (thỉnh thoảng), rarely (hiếm khi), never (không bao giờ). Vị trí: đứng TRƯỚC động từ thường (She always arrives); đứng SAU động từ be (He is usually busy); đứng GIỮA trợ động từ và động từ chính (I have never been late). Chú ý: never đi với động từ khẳng định, không dùng don't never; sometimes và occasionally có thể đứng cuối câu, các trạng từ khác không đứng cuối.",
+  examples: [{ "t": "'She always arrives on time.' (Cô ấy lúc nào cũng tới đúng giờ.)", "s": "She always arrives on time." }, { "t": "'He is usually busy on Mondays.' (Anh ấy thường bận vào thứ Hai.)", "s": "He is usually busy on Mondays." }],
+  rule: "trạng từ tần suất nói việc xảy ra thường xuyên tới mức nào: always (lúc nào cũng), usually (thường xuyên), often (thường), sometimes (thỉnh thoảng), rarely (hiếm khi), never (không bao giờ). Vị trí: đứng TRƯỚC động từ thường (She always arrives); đứng SAU động từ be (He is usually busy); đứng GIỮA trợ động từ và động từ chính (I have never been late). Chú ý: never đi với động từ khẳng định, không dùng don't never; sometimes và occasionally có thể đứng cuối câu, các trạng từ khác không đứng cuối.",
+  quiz: [
+  { q: "She ___ arrives on time.", o: ["always", "always to", "alway"], a: 0, why: "Trạng từ tần suất đứng trước động từ thường." },
+  { q: "He is ___ busy on Mondays.", o: ["usually", "usual", "usually to"], a: 0, why: "Sau be: is usually busy." },
+  { q: "I have ___ been late for work.", o: ["never", "ever", "never not"], a: 0, why: "Never đứng giữa have và been." },
+  { q: "They ___ work on Sundays.", o: ["rarely", "rare", "rarely to"], a: 0, why: "Rarely: hiếm khi làm việc vào chủ nhật." },
+  { q: "Choose the correct sentence.", o: ["I never eat fast food.", "I don't never eat fast food.", "I never to eat fast food."], a: 0, why: "Never đi với động từ khẳng định." },
+  { q: "We ___ meet our clients online.", o: ["sometimes", "sometime", "some times"], a: 0, why: "Sometimes: thỉnh thoảng." }
+  ] }
+];
+
+TC_GRAMMAR.push.apply(TC_GRAMMAR, TC_GRAMMAR_EXPAND19);
 
 
 
