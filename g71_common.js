@@ -278,12 +278,12 @@
       helpBox = document.createElement("div");
       helpBox.id = "g71HelpBox";
       helpBox.style.cssText = "position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:rgba(4,6,15,.55);padding:16px;";
-      var body = helpText || "Luật chơi đầy đủ nằm ở tab Hướng dẫn.";
+      var body = helpText || "Luật chơi đầy đủ nằm ở tab Trợ giúp.";
       helpBox.innerHTML = '<div style="background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.12);padding:22px 20px;max-width:520px;width:100%;">'
         + '<h2 style="margin:0 0 8px;">❓ Hướng dẫn — ' + escHtml(title) + '</h2>'
         + '<p style="margin:6px 0;line-height:1.6;">' + escHtml(body) + '</p>'
         + '<div class="row" style="justify-content:center;margin-top:12px;"><button class="btn btn-primary" id="g71HelpClose">Đóng — quay lại game</button>'
-        + '<button class="btn" id="g71HelpFull">Xem đầy đủ ở tab Hướng dẫn</button></div></div>';
+        + '<button class="btn" id="g71HelpFull">Xem đầy đủ ở tab Trợ giúp</button></div></div>';
       var wrap = ov.querySelector("#g71CanvasWrap");
       if (wrap) wrap.appendChild(helpBox); else ov.appendChild(helpBox);
       var cb = helpBox.querySelector("#g71HelpClose");
