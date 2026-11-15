@@ -28154,7 +28154,7 @@ function tpStepMeta(id) {
   var k = String(id || "")[0], n = parseInt(String(id || "").slice(1), 10);
   if (k === "h") { var h = (typeof TP_HANGUL !== "undefined") ? TP_HANGUL[n] : null; return h ? { kind: "hangul", title: "Hangul: " + h.title, ref: n } : null; }
   if (k === "v") { var s = (typeof TP_VOCAB !== "undefined") ? TP_VOCAB[n] : null; return s ? { kind: "vocab", title: "Từ vựng: " + s.topic, ref: n } : null; }
-  if (k === "g") { var g = (typeof TP_GRAMMAR !== "undefined") ? TP_GRAMMAR[n] : null; return g ? { kind: "gram", title: "Ngữ pháp: " + g.name, ref: n } : null; }
+  if (k === "g") { var g = (typeof TP_GRAMMAR !== "undefined") ? TP_GRAMMAR[n] : null; return g ? { kind: "gram", title: (g.cat === "honorific" ? "Kính ngữ: " : g.cat === "idiom" ? "Thành ngữ: " : "Ngữ pháp: ") + g.name, ref: n } : null; } /* v195: tien to tieu de theo cat (honorific/idiom) */
   /* v96: tieu de TP_LISTEN tu ngay 10 tro di da co san tien to "Nghe: " — them
      "Nghe: " nua se thanh "Nghe: Nghe:". Boc tien to cu neu co roi moi them. */
   if (k === "l") { var l = (typeof TP_LISTEN !== "undefined") ? TP_LISTEN[n] : null; return l ? { kind: "listen", title: "Nghe: " + String(l.title || "").replace(/^Nghe: /, ""), ref: n } : null; }
@@ -28920,7 +28920,10 @@ function viewPracticeTp(app) {
   html += practiceFilterHTML("", "tp");
   html += typeEntryRowHTML("tp");
   html += vocabGroupsHTML(TP_STAGES, tpStepBtnHTML, tpStepStatus, tpStepMeta, "tpVocabSearch", "tpVocabGroups", "Từ vựng đời sống", "tp");
-  html += '<section class="card"><h3>Ngữ pháp trọng tâm (' + TP_GRAMMAR.length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return tpStepBtnHTML("g" + i); }).join("") + '</div></section>';
+  /* v195: muc Kinh ngu/Thanh ngu co cat rieng — khong tron vao Ngu phap trong tam; 2 muc rieng (tieu de bat dau "Ngữ pháp" -> vao cum G2 tu dong). */
+  html += '<section class="card"><h3>Ngữ pháp trọng tâm (' + TP_GRAMMAR.filter(function (g) { return !g.cat; }).length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return g.cat ? "" : tpStepBtnHTML("g" + i); }).join("") + '</div></section>';
+  html += '<section class="card"><h3>Ngữ pháp · Kính ngữ — 존댓말 (' + TP_GRAMMAR.filter(function (g) { return g.cat === "honorific"; }).length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return g.cat === "honorific" ? tpStepBtnHTML("g" + i) : ""; }).join("") + '</div></section>';
+  html += '<section class="card"><h3>Ngữ pháp · Thành ngữ Hàn (' + TP_GRAMMAR.filter(function (g) { return g.cat === "idiom"; }).length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return g.cat === "idiom" ? tpStepBtnHTML("g" + i) : ""; }).join("") + '</div></section>';
   html += listenHubHTML("tp");
   html += pronDiagEntryHTML("tp");
   html += pronWeakHTML("tp"); /* v119b */

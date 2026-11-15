@@ -55031,6 +55031,3328 @@ var TP_GRAMMAR_EXPAND_V190 = [
 ] },
 ];
 TP_GRAMMAR.push.apply(TP_GRAMMAR, TP_GRAMMAR_EXPAND_V190);
+/* v195: 12 muc Kinh ngu Han (존댓말) + 30 thanh ngu Han — hub-only, khong chen buoc vao TP_STAGES; TP_GRAMMAR 86 -> 128 muc, 516 -> 768 cau quiz; moi muc co truong cat (honorific/idiom); explain gom vi du + quy tac nguyen van theo luat F6 */
+var TP_GRAMMAR_EXPAND_V195 = [
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "선생님, 안녕하세요?",
+    "t": "'선생님, 안녕하세요?' (Thầy/cô khỏe không ạ?)"
+   },
+   {
+    "s": "야, 밥 먹었어?",
+    "t": "'야, 밥 먹었어?' (Này, ăn cơm chưa? — chỉ với bạn thân.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '저는 학생입니다.' (Tôi là học sinh — 합쇼체, trang trọng nhất.) '저는 학생이에요.' (Tôi là học sinh — 해요체, lịch sự hằng ngày.) '나는 학생이야.' (Tao là học sinh — 해체/반말, chỉ với bạn thân/em nhỏ.) '선생님, 안녕하세요?' (Thầy/cô khỏe không ạ?) '야, 밥 먹었어?' (Này, ăn cơm chưa? — chỉ với bạn thân.) Quy tắc: tiếng Hàn chia cách nói theo mức độ trang trọng: 합쇼체 (trang trọng nhất: -ㅂ니다/습니까), 해요체 (lịch sự hằng ngày: -아/어요), 해체 (반말: -아/어), 하오체 (trang trọng cổ: -오), 하게체 (thân mật với người dưới: -네), 해라체 (văn viết/mệnh lệnh: -다/-어라). Dùng sai mức độ là bất lịch sự — với người lớn tuổi/cấp trên LUÔN dùng 존댓말 (합쇼체 hoặc 해요체), KHÔNG dùng 반말. 6 cách nói theo mức độ trang trọng: 합쇼체 > 해요체 > 하오체 > 하게체 > 해라체 > 해체 (반말). Với người lớn tuổi/cấp trên luôn dùng 존댓말 (합쇼체 hoặc 해요체); 반말 chỉ với bạn thân, em nhỏ, người dưới rất thân.",
+  "level": "TOPIK II",
+  "name": "Kính ngữ Hàn tổng quan — 6 cách nói (존댓말/반말)",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "합쇼체/해요체 (존댓말)",
+     "반말 (해체)",
+     "하게체"
+    ],
+    "q": "Nói với thầy giáo lần đầu gặp, dùng cách nói nào?",
+    "why": "Với thầy giáo — người lớn tuổi, cấp trên — phải dùng 존댓말."
+   },
+   {
+    "a": 0,
+    "o": [
+     "합쇼체",
+     "해요체",
+     "해라체"
+    ],
+    "q": "'저는 학생입니다.' thuộc cách nói nào?",
+    "why": "-ㅂ니다 là đuôi 합쇼체."
+   },
+   {
+    "a": 0,
+    "o": [
+     "나는 학생이야.",
+     "저는 학생입니다.",
+     "저는 학생이에요."
+    ],
+    "q": "Câu nào là 반말?",
+    "why": "나는 + -이야 là 해체 (반말)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "합쇼체",
+     "해요체",
+     "하게체"
+    ],
+    "q": "Cách nói nào trang trọng NHẤT?",
+    "why": "합쇼체 (-ㅂ니다/습니까) trang trọng nhất."
+   },
+   {
+    "a": 0,
+    "o": [
+     "반말 (해체)",
+     "합쇼체",
+     "하오체"
+    ],
+    "q": "Với bạn thân cùng tuổi, dùng cách nói nào tự nhiên nhất?",
+    "why": "Với bạn thân cùng tuổi, 반말 là tự nhiên."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Gặp sếp lần đầu nói 반말 là lịch sự.",
+     "Với người lớn tuổi phải dùng 존댓말.",
+     "해요체 dùng được hằng ngày với người lớn."
+    ],
+    "q": "Chọn câu SAI về kính ngữ:",
+    "why": "Gặp sếp lần đầu mà dùng 반말 là bất lịch sự."
+   }
+  ],
+  "rule": "tiếng Hàn chia cách nói theo mức độ trang trọng: 합쇼체 (trang trọng nhất: -ㅂ니다/습니까), 해요체 (lịch sự hằng ngày: -아/어요), 해체 (반말: -아/어), 하오체 (trang trọng cổ: -오), 하게체 (thân mật với người dưới: -네), 해라체 (văn viết/mệnh lệnh: -다/-어라). Dùng sai mức độ là bất lịch sự — với người lớn tuổi/cấp trên LUÔN dùng 존댓말 (합쇼체 hoặc 해요체), KHÔNG dùng 반말. 6 cách nói theo mức độ trang trọng: 합쇼체 > 해요체 > 하오체 > 하게체 > 해라체 > 해체 (반말). Với người lớn tuổi/cấp trên luôn dùng 존댓말 (합쇼체 hoặc 해요체); 반말 chỉ với bạn thân, em nhỏ, người dưới rất thân."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "회의는 3시에 시작합니다.",
+    "t": "'회의는 3시에 시작합니다.' (Cuộc họp bắt đầu lúc 3 giờ.)"
+   },
+   {
+    "s": "저는 한국어를 공부합니다.",
+    "t": "'저는 한국어를 공부합니다.' (Tôi học tiếng Hàn.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '저는 김민수입니다.' (Tôi là Kim Minsu.) '이것은 무엇입니까?' (Đây là cái gì ạ?) '회의는 3시에 시작합니다.' (Cuộc họp bắt đầu lúc 3 giờ.) '저는 한국어를 공부합니다.' (Tôi học tiếng Hàn.) Quy tắc: 합쇼체 là cách nói trang trọng nhất, dùng trong lễ nghi, công sở, với cấp trên/người lớn tuổi chưa thân. Đuôi khẳng định: -ㅂ니다/습니다 (sau nguyên âm -ㅂ니다, sau phụ âm -습니다); câu hỏi: -ㅂ니까/습니까; mệnh lệnh/yêu cầu: -십시오. Động từ: 가다 → 갑니다, 먹다 → 먹습니다, 오다 → 옵니다. 합쇼체: khẳng định -ㅂ니다/습니다, hỏi -ㅂ니까/습니까, yêu cầu -십시오. Dùng trong lễ nghi, công sở, với cấp trên và người lớn tuổi chưa thân.",
+  "level": "TOPIK I",
+  "name": "합쇼체 — 입니다/습니까, 습니다 (trang trọng nhất)",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "입니다",
+     "이에요",
+     "이야"
+    ],
+    "q": "Điền đúng: '저는 학생___.' (trang trọng nhất)",
+    "why": "Trang trọng nhất dùng 입니다 (합쇼체)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "가다",
+     "먹다",
+     "오다"
+    ],
+    "q": "'갑니다' là dạng 합쇼체 của động từ nào?",
+    "why": "가다 → 갑니다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "이것은 무엇입니까?",
+     "이것은 뭐예요?",
+     "이것은 뭐야?"
+    ],
+    "q": "Câu hỏi hợp쇼체 đúng là:",
+    "why": "Hỏi trang trọng dùng -ㅂ니까/습니까."
+   },
+   {
+    "a": 0,
+    "o": [
+     "먹다",
+     "마시다",
+     "보다"
+    ],
+    "q": "'먹습니다' — động từ gốc là gì?",
+    "why": "먹다 → 먹습니다 (sau phụ âm dùng -습니다)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "앉으십시오.",
+     "앉아요.",
+     "앉아."
+    ],
+    "q": "Yêu cầu trang trọng 'Mời ngồi' là:",
+    "why": "Yêu cầu hợp쇼체 dùng -십시오."
+   },
+   {
+    "a": 0,
+    "o": [
+     "선생님께 '밥 먹었어?' (nói 반말 với thầy).",
+     "사장님, 회의는 3시에 시작합니다.",
+     "저는 한국어를 공부합니다."
+    ],
+    "q": "Chọn câu SAI:",
+    "why": "Với thầy phải dùng 존댓말, không nói 반말 '밥 먹었어?'."
+   }
+  ],
+  "rule": "합쇼체 là cách nói trang trọng nhất, dùng trong lễ nghi, công sở, với cấp trên/người lớn tuổi chưa thân. Đuôi khẳng định: -ㅂ니다/습니다 (sau nguyên âm -ㅂ니다, sau phụ âm -습니다); câu hỏi: -ㅂ니까/습니까; mệnh lệnh/yêu cầu: -십시오. Động từ: 가다 → 갑니다, 먹다 → 먹습니다, 오다 → 옵니다. 합쇼체: khẳng định -ㅂ니다/습니다, hỏi -ㅂ니까/습니까, yêu cầu -십시오. Dùng trong lễ nghi, công sở, với cấp trên và người lớn tuổi chưa thân."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "오늘 날씨가 좋아요.",
+    "t": "'오늘 날씨가 좋아요.' (Hôm nay thời tiết đẹp.)"
+   },
+   {
+    "s": "저는 커피를 마셔요.",
+    "t": "'저는 커피를 마셔요.' (Tôi uống cà phê.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '저는 밥을 먹어요.' (Tôi ăn cơm.) '학교에 가요.' (Tôi đi học.) '오늘 날씨가 좋아요.' (Hôm nay thời tiết đẹp.) '저는 커피를 마셔요.' (Tôi uống cà phê.) Quy tắc: 해요체 là cách nói lịch sự dùng hằng ngày với người lớn tuổi, người quen, đồng nghiệp — thân mật hơn 합쇼체 nhưng vẫn lịch sự. Đuôi: động từ/tính từ bỏ 다 + -아/어요 (가다 → 가요, 먹다 → 먹어요, 좋다 → 좋아요); câu hỏi lên giọng: '가세요?' (Đi ạ?). Phủ định: 안 + động từ (안 가요), -지 않아요 (가지 않아요). 해요체: bỏ 다 + -아/어요. Lịch sự hằng ngày với người lớn tuổi, người quen, đồng nghiệp; thân mật hơn 합쇼체.",
+  "level": "TOPIK I",
+  "name": "해요체 — 아/어요 (lịch sự hằng ngày)",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "가다",
+     "오다",
+     "보다"
+    ],
+    "q": "'가요' là dạng 해요체 của động từ nào?",
+    "why": "가다 → 가요."
+   },
+   {
+    "a": 0,
+    "o": [
+     "먹어요",
+     "먹어",
+     "먹습니다"
+    ],
+    "q": "Điền đúng: '저는 밥을 ___.' (Tôi ăn cơm — lịch sự hằng ngày)",
+    "why": "해요체: 먹다 → 먹어요."
+   },
+   {
+    "a": 0,
+    "o": [
+     "안 가요",
+     "안 가",
+     "가지 마"
+    ],
+    "q": "Phủ định lịch sự của '가요' là:",
+    "why": "Phủ định 해요체: 안 + động từ (안 가요)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "좋다",
+     "나쁘다",
+     "크다"
+    ],
+    "q": "'좋아요' là dạng 해요체 của tính từ nào?",
+    "why": "좋다 → 좋아요."
+   },
+   {
+    "a": 0,
+    "o": [
+     "학교에 가요.",
+     "학교에 가.",
+     "학교에 갑니다."
+    ],
+    "q": "Câu nào là 해요체?",
+    "why": "가요 là 해요체; 가 là 반말; 갑니다 là 합쇼체."
+   },
+   {
+    "a": 0,
+    "o": [
+     "가세요?",
+     "가?",
+     "갑니까?"
+    ],
+    "q": "Hỏi lịch sự hằng ngày 'Đi ạ?' là:",
+    "why": "가세요? là câu hỏi 해요체 (lịch sự hằng ngày)."
+   }
+  ],
+  "rule": "해요체 là cách nói lịch sự dùng hằng ngày với người lớn tuổi, người quen, đồng nghiệp — thân mật hơn 합쇼체 nhưng vẫn lịch sự. Đuôi: động từ/tính từ bỏ 다 + -아/어요 (가다 → 가요, 먹다 → 먹어요, 좋다 → 좋아요); câu hỏi lên giọng: '가세요?' (Đi ạ?). Phủ định: 안 + động từ (안 가요), -지 않아요 (가지 않아요). 해요체: bỏ 다 + -아/어요. Lịch sự hằng ngày với người lớn tuổi, người quen, đồng nghiệp; thân mật hơn 합쇼체."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "야, 뭐 해?",
+    "t": "'야, 뭐 해?' (Này, đang làm gì đấy? — chỉ với bạn thân.)"
+   },
+   {
+    "s": "나도 같이 가.",
+    "t": "'나도 같이 가.' (Tao cũng đi cùng.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '밥 먹었어?' (Ăn cơm chưa?) '나도 가.' (Tao cũng đi.) '야, 뭐 해?' (Này, đang làm gì đấy? — chỉ với bạn thân.) '나도 같이 가.' (Tao cũng đi cùng.) Quy tắc: 해체 (반말) bỏ đuôi 요: 가요 → 가, 먹어요 → 먹어, 좋아요 → 좋아. CHỈ dùng với bạn thân cùng tuổi, em nhỏ, người dưới rất thân. KHÔNG dùng với người lớn tuổi, cấp trên, người lạ, lần đầu gặp — đó là bất lịch sự nghiêm trọng. Người Việt hay mắc: quen nói 반말 trong phim rồi dùng với người thật. 반말 = 해요체 bỏ 요. Chỉ với bạn thân cùng tuổi, em nhỏ, người dưới rất thân. Tuyệt đối không dùng với người lớn tuổi, cấp trên, người lạ.",
+  "level": "TOPIK I",
+  "name": "해체/반말 — 아/어 (chỉ với bạn thân, em nhỏ)",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "먹다",
+     "마시다",
+     "가다"
+    ],
+    "q": "'먹어' là dạng 반말 của động từ nào?",
+    "why": "먹다 → 먹어 (반말)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "밥 먹었어?",
+     "밥 먹었어요?",
+     "밥 먹었습니까?"
+    ],
+    "q": "Câu nào là 반말?",
+    "why": "먹었어? không có 요 là 반말."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Bạn thân cùng tuổi",
+     "Thầy giáo",
+     "Sếp mới gặp"
+    ],
+    "q": "Được dùng 반말 với ai?",
+    "why": "반말 chỉ với bạn thân cùng tuổi, em nhỏ, người dưới rất thân."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Bất lịch sự nghiêm trọng",
+     "Lịch sự",
+     "Bình thường"
+    ],
+    "q": "Nói với người lạ lớn tuổi mà dùng 반말 thì sao?",
+    "why": "Dùng 반말 với người lớn tuổi/người lạ là bất lịch sự nghiêm trọng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "가",
+     "갑니다",
+     "가세요"
+    ],
+    "q": "'가요' bỏ 요 thành gì?",
+    "why": "가요 bỏ 요 → 가 (반말)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Lần đầu gặp sếp nói '야, 뭐 해?' là đúng.",
+     "Bạn thân cùng tuổi nói 반말 là tự nhiên.",
+     "Với em nhỏ thân thiết có thể dùng 반말."
+    ],
+    "q": "Chọn câu SAI:",
+    "why": "Lần đầu gặp sếp mà nói 반말 là sai nghiêm trọng."
+   }
+  ],
+  "rule": "해체 (반말) bỏ đuôi 요: 가요 → 가, 먹어요 → 먹어, 좋아요 → 좋아. CHỈ dùng với bạn thân cùng tuổi, em nhỏ, người dưới rất thân. KHÔNG dùng với người lớn tuổi, cấp trên, người lạ, lần đầu gặp — đó là bất lịch sự nghiêm trọng. Người Việt hay mắc: quen nói 반말 trong phim rồi dùng với người thật. 반말 = 해요체 bỏ 요. Chỉ với bạn thân cùng tuổi, em nhỏ, người dưới rất thân. Tuyệt đối không dùng với người lớn tuổi, cấp trên, người lạ."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "어서 오시오.",
+    "t": "'어서 오시오.' (Mời vào — 하오체.)"
+   },
+   {
+    "s": "내일 다시 오라.",
+    "t": "'내일 다시 오라.' (Ngày mai lại đến — 해라체, mệnh lệnh.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '어서 오시오.' (Mời vào — 하오체, trang trọng cổ.) '자네, 이리 오게.' (Này, lại đây — 하게체, người trên nói với người dưới thân thiết.) '조용히 하라.' (Im lặng — 해라체, mệnh lệnh/văn viết.) '어서 오시오.' (Mời vào — 하오체.) '내일 다시 오라.' (Ngày mai lại đến — 해라체, mệnh lệnh.) Quy tắc: 하오체 (-오/-소): trang trọng cổ, nay ít dùng, gặp trong phim cổ trang/lễ nghi; 하게체 (-네/-게): người lớn tuổi/cấp trên nói với người dưới thân thiết, gần như không dùng với người lạ; 해라체 (-다/-어라/-자): văn viết, báo chí, mệnh lệnh, nhật ký. Người học TOPIK II chỉ cần NHẬN BIẾT, không cần dùng chủ động. 하오체 (-오/-소): trang trọng cổ, ít dùng. 하게체 (-네/-게): người trên nói với người dưới thân thiết. 해라체 (-다/-어라): văn viết, mệnh lệnh. TOPIK II chỉ cần nhận biết.",
+  "level": "TOPIK II",
+  "name": "하오체/하게체/해라체 — trang trọng cổ và văn viết",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "하오체",
+     "해요체",
+     "합쇼체"
+    ],
+    "q": "'어서 오시오.' thuộc cách nói nào?",
+    "why": "-오시오 là đuôi 하오체."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Văn viết, báo chí, mệnh lệnh",
+     "Nói chuyện với bạn thân",
+     "Nói với sếp hằng ngày"
+    ],
+    "q": "해라체 thường gặp ở đâu?",
+    "why": "해라체 dùng trong văn viết, báo chí, mệnh lệnh."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Người trên nói với người dưới thân thiết",
+     "Người dưới nói với cấp trên",
+     "Bạn cùng tuổi"
+    ],
+    "q": "'자네, 이리 오게.' — người nói là ai?",
+    "why": "하게체 là người trên nói với người dưới thân thiết."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Nhận biết là đủ, không cần dùng chủ động",
+     "Dùng thành thạo hằng ngày",
+     "Dùng với sếp thay 합쇼체"
+    ],
+    "q": "Người học TOPIK II cần làm gì với 3 cách nói này?",
+    "why": "하오체/하게체/해라체 nay ít dùng — chỉ cần nhận biết."
+   },
+   {
+    "a": 0,
+    "o": [
+     "-어라",
+     "-어요",
+     "-ㅂ니다"
+    ],
+    "q": "Đuôi nào là 해라체?",
+    "why": "-어라 là đuôi mệnh lệnh 해라체."
+   },
+   {
+    "a": 0,
+    "o": [
+     "하오체 dùng hằng ngày với bạn bè.",
+     "하게체 là người trên nói với người dưới thân thiết.",
+     "해라체 gặp trong văn viết và mệnh lệnh."
+    ],
+    "q": "Chọn câu SAI:",
+    "why": "하오체 nay ít dùng, không dùng hằng ngày với bạn bè."
+   }
+  ],
+  "rule": "하오체 (-오/-소): trang trọng cổ, nay ít dùng, gặp trong phim cổ trang/lễ nghi; 하게체 (-네/-게): người lớn tuổi/cấp trên nói với người dưới thân thiết, gần như không dùng với người lạ; 해라체 (-다/-어라/-자): văn viết, báo chí, mệnh lệnh, nhật ký. Người học TOPIK II chỉ cần NHẬN BIẾT, không cần dùng chủ động. 하오체 (-오/-소): trang trọng cổ, ít dùng. 하게체 (-네/-게): người trên nói với người dưới thân thiết. 해라체 (-다/-어라): văn viết, mệnh lệnh. TOPIK II chỉ cần nhận biết."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "아버지께서 지금 오십니다.",
+    "t": "'아버지께서 지금 오십니다.' (Bố đang đến ạ.)"
+   },
+   {
+    "s": "선생님께서 책을 읽으십니다.",
+    "t": "'선생님께서 책을 읽으십니다.' (Thầy đang đọc sách ạ.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '할머니께서 오십니다.' (Bà đến ạ.) '선생님은 예쁘십니다.' (Cô giáo đẹp ạ.) '아버지께서 지금 오십니다.' (Bố đang đến ạ.) '선생님께서 책을 읽으십니다.' (Thầy đang đọc sách ạ.) Quy tắc: thêm -시- vào thân động từ/tính từ khi chủ ngữ là người đáng kính (người lớn tuổi, cấp trên, khách): 가다 → 가시다, 오다 → 오시다, 예쁘다 → 예쁘시다, 있다 → 계시다 (dạng đặc biệt). -시- đứng trước đuôi: 가십니다, 가세요, 가셨어요. KHÔNG dùng -시- cho hành động của chính mình (nói về mình dùng khiêm nhường, xem trạm khiêm nhường). Thêm -시- vào thân động từ/tính từ khi chủ ngữ là người đáng kính: 가시다, 오시다, 예쁘시다. Không dùng -시- cho hành động của chính mình.",
+  "level": "TOPIK I",
+  "name": "Hậu tố kính ngữ -시- — 가시다, 예쁘시다",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "가다",
+     "오다",
+     "보다"
+    ],
+    "q": "'가시다' là dạng kính ngữ của động từ nào?",
+    "why": "가다 + -시- → 가시다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "오십니다",
+     "와요",
+     "옵니다"
+    ],
+    "q": "Điền đúng: '할머니께서 ___' (Bà đến ạ.)",
+    "why": "Chủ ngữ là bà (người đáng kính) → 오시다 + ㅂ니다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "예쁘다",
+     "예뻐요",
+     "예쁘"
+    ],
+    "q": "'예쁘시다' — tính từ gốc là gì?",
+    "why": "예쁘다 + -시- → 예쁘시다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Hành động của chính mình",
+     "Hành động của thầy giáo",
+     "Hành động của khách"
+    ],
+    "q": "Khi nào KHÔNG dùng -시-?",
+    "why": "Không dùng -시- cho hành động của chính mình."
+   },
+   {
+    "a": 0,
+    "o": [
+     "읽다",
+     "쓰다",
+     "듣다"
+    ],
+    "q": "'읽으십니다' — động từ gốc là gì?",
+    "why": "읽다 + -으시- → 읽으십니다 (sau phụ âm dùng -으시-)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'제가 가십니다.' (Tôi đi ạ — dùng -시- cho mình).",
+     "'선생님께서 오십니다.'",
+     "'할머니께서 주무십니다.'"
+    ],
+    "q": "Chọn câu SAI:",
+    "why": "Dùng -시- cho hành động của chính mình là sai."
+   }
+  ],
+  "rule": "thêm -시- vào thân động từ/tính từ khi chủ ngữ là người đáng kính (người lớn tuổi, cấp trên, khách): 가다 → 가시다, 오다 → 오시다, 예쁘다 → 예쁘시다, 있다 → 계시다 (dạng đặc biệt). -시- đứng trước đuôi: 가십니다, 가세요, 가셨어요. KHÔNG dùng -시- cho hành động của chính mình (nói về mình dùng khiêm nhường, xem trạm khiêm nhường). Thêm -시- vào thân động từ/tính từ khi chủ ngữ là người đáng kính: 가시다, 오시다, 예쁘시다. Không dùng -시- cho hành động của chính mình."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "할아버지께서 진지를 드십니다.",
+    "t": "'할아버지께서 진지를 드십니다.' (Ông dùng bữa ạ.)"
+   },
+   {
+    "s": "사장님께서 지금 주무십니다.",
+    "t": "'사장님께서 지금 주무십니다.' (Giám đốc đang ngủ ạ.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '할아버지께서 진지를 드십니다.' (Ông dùng bữa ạ.) '사장님께서 주무십니다.' (Giám đốc đang ngủ ạ.) '할아버지께서 진지를 드십니다.' (Ông dùng bữa ạ.) '사장님께서 지금 주무십니다.' (Giám đốc đang ngủ ạ.) Quy tắc: một số động từ có dạng kính ngữ RIÊNG (không thêm -시- máy móc): 먹다 → 드시다/잡수시다, 자다 → 주무시다, 있다 → 계시다, 말하다 → 말씀하시다, 가다/오다 → 가시다/오시다, 죽다 → 돌아가시다, 아프다 → 편찮으시다. Nhớ theo cặp, không đoán. Động từ kính ngữ riêng: 먹다→드시다/잡수시다, 자다→주무시다, 있다→계시다, 말하다→말씀하시다, 가다/오다→가시다/오시다, 죽다→돌아가시다, 아프다→편찮으시다.",
+  "level": "TOPIK II",
+  "name": "Động từ kính ngữ — 드시다, 주무시다, 계시다",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "먹다",
+     "마시다",
+     "보다"
+    ],
+    "q": "'드시다' là dạng kính ngữ của động từ nào?",
+    "why": "먹다 → 드시다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "자다",
+     "일어나다",
+     "앉다"
+    ],
+    "q": "'주무시다' — động từ gốc là gì?",
+    "why": "자다 → 주무시다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "있다",
+     "없다",
+     "살다"
+    ],
+    "q": "'계시다' là dạng kính ngữ của động từ nào?",
+    "why": "있다 → 계시다 (nói về người lớn đang ở đâu)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "말하다",
+     "듣다",
+     "묻다"
+    ],
+    "q": "'말씀하시다' — động từ gốc là gì?",
+    "why": "말하다 → 말씀하시다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "돌아가시다",
+     "가시다",
+     "오시다"
+    ],
+    "q": "Nói kính ngữ về người đã mất: '죽다' → ?",
+    "why": "죽다 → 돌아가시다 (nói kính ngữ về người đã mất)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'할머니께서 밥을 먹어요.'",
+     "'할머니께서 진지를 드십니다.'",
+     "'할머니가 밥을 먹어요.'"
+    ],
+    "q": "Chọn câu ĐÚNG (nói về bà):",
+    "why": "Nói về bà phải dùng dạng kính ngữ: 진지를 드십니다."
+   }
+  ],
+  "rule": "một số động từ có dạng kính ngữ RIÊNG (không thêm -시- máy móc): 먹다 → 드시다/잡수시다, 자다 → 주무시다, 있다 → 계시다, 말하다 → 말씀하시다, 가다/오다 → 가시다/오시다, 죽다 → 돌아가시다, 아프다 → 편찮으시다. Nhớ theo cặp, không đoán. Động từ kính ngữ riêng: 먹다→드시다/잡수시다, 자다→주무시다, 있다→계시다, 말하다→말씀하시다, 가다/오다→가시다/오시다, 죽다→돌아가시다, 아프다→편찮으시다."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "성함이 어떻게 되세요?",
+    "t": "'성함이 어떻게 되세요?' (Quý danh của ông/bà là gì ạ?) — 성함 (seongham) là dạng kính ngữ của 이름."
+   },
+   {
+    "s": "어머님 댁이 어디세요?",
+    "t": "'어머님 댁이 어디세요?' (Nhà của mẹ ở đâu ạ?) — 댁 (daek) là dạng kính ngữ của 집."
+   }
+  ],
+  "explain": "Ví dụ trước: '성함이 어떻게 되세요?' (Quý danh của ông/bà là gì ạ?) '댁이 어디세요?' (Nhà của ông/bà ở đâu ạ?) '성함이 어떻게 되세요?' (Quý danh của ông/bà là gì ạ?) — 성함 (seongham) là dạng kính ngữ của 이름. '어머님 댁이 어디세요?' (Nhà của mẹ ở đâu ạ?) — 댁 (daek) là dạng kính ngữ của 집. Quy tắc: danh từ chỉ người/vật của người đáng kính đổi sang dạng kính ngữ: 밥 → 진지, 집 → 댁, 이름 → 성함, 나이 → 연세, 말 → 말씀, 생일 → 생신, 사람 → 분, 아들/딸 (của người khác) → 아드님/따님. Dùng sai (gọi cơm của ông là 밥, nhà của thầy là 집) là thiếu lịch sự. Danh từ kính ngữ: 밥→진지, 집→댁, 이름→성함, 나이→연세, 말→말씀, 생일→생신, 사람→분, 아들/딸 (của người khác)→아드님/따님.",
+  "level": "TOPIK II",
+  "name": "Danh từ kính ngữ — 진지, 댁, 성함, 연세, 말씀",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "이름",
+     "나이",
+     "집"
+    ],
+    "q": "'성함' là dạng kính ngữ của danh từ nào?",
+    "why": "이름 → 성함."
+   },
+   {
+    "a": 0,
+    "o": [
+     "집",
+     "밥",
+     "말"
+    ],
+    "q": "'댁' là dạng kính ngữ của danh từ nào?",
+    "why": "집 → 댁."
+   },
+   {
+    "a": 0,
+    "o": [
+     "나이",
+     "이름",
+     "생일"
+    ],
+    "q": "'연세' là dạng kính ngữ của danh từ nào?",
+    "why": "나이 → 연세."
+   },
+   {
+    "a": 0,
+    "o": [
+     "밥",
+     "집",
+     "이름"
+    ],
+    "q": "'진지' là dạng kính ngữ của danh từ nào?",
+    "why": "밥 → 진지."
+   },
+   {
+    "a": 0,
+    "o": [
+     "말",
+     "밥",
+     "집"
+    ],
+    "q": "'말씀' là dạng kính ngữ của danh từ nào?",
+    "why": "말 → 말씀."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'할머니, 밥 드세요.'",
+     "'할머니, 진지 드세요.'",
+     "'할머니, 밥 먹어.'"
+    ],
+    "q": "Chọn câu ĐÚNG (mời bà ăn cơm):",
+    "why": "Mời bà ăn cơm phải dùng 진지 + 드세요 (kính ngữ)."
+   }
+  ],
+  "rule": "danh từ chỉ người/vật của người đáng kính đổi sang dạng kính ngữ: 밥 → 진지, 집 → 댁, 이름 → 성함, 나이 → 연세, 말 → 말씀, 생일 → 생신, 사람 → 분, 아들/딸 (của người khác) → 아드님/따님. Dùng sai (gọi cơm của ông là 밥, nhà của thầy là 집) là thiếu lịch sự. Danh từ kính ngữ: 밥→진지, 집→댁, 이름→성함, 나이→연세, 말→말씀, 생일→생신, 사람→분, 아들/딸 (của người khác)→아드님/따님."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "저는 김민수입니다.",
+    "t": "'저는 김민수입니다.' (Tôi là Kim Minsu — 저 khiêm nhường, không dùng 나 với người trên.)"
+   },
+   {
+    "s": "선생님을 뵙고 싶어요.",
+    "t": "'선생님을 뵙고 싶어요.' (Tôi muốn gặp thầy ạ.) — 뵙다 (boepda) là dạng khiêm nhường của 만나다."
+   }
+  ],
+  "explain": "Ví dụ trước: '저는 김민수입니다.' (Tôi là Kim Minsu — 저 khiêm nhường, không dùng 나 với người trên.) '선생님을 뵙고 싶어요.' (Tôi muốn gặp thầy ạ.) '저는 김민수입니다.' (Tôi là Kim Minsu — 저 khiêm nhường, không dùng 나 với người trên.) '선생님을 뵙고 싶어요.' (Tôi muốn gặp thầy ạ.) — 뵙다 (boepda) là dạng khiêm nhường của 만나다. Quy tắc: nói về CHÍNH MÌNH với người trên thì HẠ mình xuống (낮춤말), không nâng mình lên: 나 → 저, 우리 → 저희, 주다 → 드리다 (đưa cho người trên), 만나다 → 뵙다, 묻다 → 여쭈다 (hỏi người trên), 모시다 (đưa đón người trên). Lỗi kinh điển: '제가 드릴게요' (tôi sẽ đưa cho thầy ạ) là đúng; '제가 주겠어요' với sếp là sai — 주다 không dùng khi đưa cho người trên. Khiêm nhường khi nói về mình với người trên: 나→저, 우리→저희, 주다→드리다, 만나다→뵙다, 묻다→여쭈다, 모시다. Không dùng -시- cho hành động của mình.",
+  "level": "TOPIK II",
+  "name": "Khiêm nhường — 저, 드리다, 뵙다, 모시다, 여쭈다",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "나",
+     "우리",
+     "너"
+    ],
+    "q": "'저' là dạng khiêm nhường của đại từ nào?",
+    "why": "나 → 저 (khiêm nhường, nói với người trên)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "주다",
+     "받다",
+     "가다"
+    ],
+    "q": "'드리다' là dạng khiêm nhường của động từ nào?",
+    "why": "주다 → 드리다 khi đưa cho người trên."
+   },
+   {
+    "a": 0,
+    "o": [
+     "만나다",
+     "보다",
+     "묻다"
+    ],
+    "q": "'뵙다' là dạng khiêm nhường của động từ nào?",
+    "why": "만나다 → 뵙다 (gặp người trên)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "묻다",
+     "답하다",
+     "말하다"
+    ],
+    "q": "'여쭈다' là dạng khiêm nhường của động từ nào?",
+    "why": "묻다 → 여쭈다 (hỏi người trên)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'제가 드릴게요.'",
+     "'제가 주겠어요.' (nói với sếp)",
+     "'제가 줄게.'"
+    ],
+    "q": "Chọn câu ĐÚNG khi đưa đồ cho sếp:",
+    "why": "Đưa cho người trên dùng 드리다: 제가 드릴게요."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Hạ mình xuống",
+     "Nâng mình lên",
+     "Nói 반말"
+    ],
+    "q": "Khiêm nhường là khi nói về mình thì làm gì?",
+    "why": "Khiêm nhường (낮춤말): nói về mình thì hạ mình xuống."
+   }
+  ],
+  "rule": "nói về CHÍNH MÌNH với người trên thì HẠ mình xuống (낮춤말), không nâng mình lên: 나 → 저, 우리 → 저희, 주다 → 드리다 (đưa cho người trên), 만나다 → 뵙다, 묻다 → 여쭈다 (hỏi người trên), 모시다 (đưa đón người trên). Lỗi kinh điển: '제가 드릴게요' (tôi sẽ đưa cho thầy ạ) là đúng; '제가 주겠어요' với sếp là sai — 주다 không dùng khi đưa cho người trên. Khiêm nhường khi nói về mình với người trên: 나→저, 우리→저희, 주다→드리다, 만나다→뵙다, 묻다→여쭈다, 모시다. Không dùng -시- cho hành động của mình."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "김 선생님, 안녕하세요?",
+    "t": "'김 선생님, 안녕하세요?' (Thầy Kim, thầy khỏe không ạ?)"
+   },
+   {
+    "s": "박 사장님께 여쭤 보세요.",
+    "t": "'박 사장님께 여쭤 보세요.' (Hãy hỏi giám đốc Park ạ.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '김 선생님, 안녕하세요?' (Thầy Kim, thầy khỏe không ạ?) '박 사장님께 여쭤 보세요.' (Hãy hỏi giám đốc Park ạ.) '김 선생님, 안녕하세요?' (Thầy Kim, thầy khỏe không ạ?) '박 사장님께 여쭤 보세요.' (Hãy hỏi giám đốc Park ạ.) Quy tắc: gọi người lớn tuổi/cấp trên bằng chức danh + -님 (선생님, 사장님, 부장님, 어머님/아버님); -씨 chỉ dùng với người ngang hàng hoặc dưới, KHÔNG dùng -씨 với cấp trên (không nói '사장님 씨'). Anh/chị/em: 형/오빠 (nam gọi anh), 누나/언니 (nam/nữ gọi chị) — dùng với người thân thiết; với người lạ lớn tuổi gọi 아주머니/아저씨/할머니/할아버지. Chức danh + -님 với người trên (선생님, 사장님); -씨 chỉ với người ngang hàng/dưới; 형/누나/오빠/언니 với người thân thiết; người lạ lớn tuổi: 아주머니/아저씨/할머니/할아버지.",
+  "level": "TOPIK I",
+  "name": "Xưng hô — 선생님, 사장님, -님 và 씨",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "선생님",
+     "선생님 씨",
+     "선생"
+    ],
+    "q": "Gọi thầy giáo lịch sự nhất là:",
+    "why": "Chức danh + -님: 선생님."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Người ngang hàng hoặc dưới",
+     "Cấp trên",
+     "Người lớn tuổi chưa quen"
+    ],
+    "q": "-씨 dùng với ai?",
+    "why": "-씨 chỉ với người ngang hàng hoặc dưới, không dùng với cấp trên."
+   },
+   {
+    "a": 0,
+    "o": [
+     "사장님",
+     "사장님 씨",
+     "사장 씨"
+    ],
+    "q": "Gọi giám đốc lịch sự là:",
+    "why": "사장님 — không thêm 씨 sau -님."
+   },
+   {
+    "a": 0,
+    "o": [
+     "형",
+     "누나",
+     "오빠"
+    ],
+    "q": "Nam gọi anh trai thân thiết là:",
+    "why": "Nam gọi anh là 형; nữ gọi anh là 오빠."
+   },
+   {
+    "a": 0,
+    "o": [
+     "언니",
+     "누나",
+     "형"
+    ],
+    "q": "Nữ gọi chị gái thân thiết là:",
+    "why": "Nữ gọi chị là 언니; nam gọi chị là 누나."
+   },
+   {
+    "a": 0,
+    "o": [
+     "아주머니/아저씨",
+     "야",
+     "너"
+    ],
+    "q": "Gọi người lạ lớn tuổi (phụ nữ) lịch sự là:",
+    "why": "Người lạ lớn tuổi: 아주머니 (nữ), 아저씨 (nam)."
+   }
+  ],
+  "rule": "gọi người lớn tuổi/cấp trên bằng chức danh + -님 (선생님, 사장님, 부장님, 어머님/아버님); -씨 chỉ dùng với người ngang hàng hoặc dưới, KHÔNG dùng -씨 với cấp trên (không nói '사장님 씨'). Anh/chị/em: 형/오빠 (nam gọi anh), 누나/언니 (nam/nữ gọi chị) — dùng với người thân thiết; với người lạ lớn tuổi gọi 아주머니/아저씨/할머니/할아버지. Chức danh + -님 với người trên (선생님, 사장님); -씨 chỉ với người ngang hàng/dưới; 형/누나/오빠/언니 với người thân thiết; người lạ lớn tuổi: 아주머니/아저씨/할머니/할아버지."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "할머니께서 진지를 드세요.",
+    "t": "'할머니께서 진지를 드세요.' (Bà dùng bữa đi ạ.) — đúng: 진지 + 드시다."
+   },
+   {
+    "s": "선생님, 이것을 봐 주세요.",
+    "t": "'선생님, 이것을 봐 주세요.' (Thầy xem giúp cái này ạ.) — đúng: -아/어 주세요 với người trên."
+   }
+  ],
+  "explain": "Ví dụ trước: '할머니가 밥을 먹어요.' → SAI (nói về bà phải dùng 진지를 드세요). '선생님, 이거 봐.' → SAI (với thầy phải nói '봐 주세요'). '할머니께서 진지를 드세요.' (Bà dùng bữa đi ạ.) — đúng: 진지 + 드시다. '선생님, 이것을 봐 주세요.' (Thầy xem giúp cái này ạ.) — đúng: -아/어 주세요 với người trên. Quy tắc: 3 lỗi người Việt hay mắc nhất: (1) Quên -시- và từ kính ngữ khi chủ ngữ là người lớn (할머니가 가요 → 할머니께서 가세요); (2) Dùng 반말 với người lớn tuổi/cấp trên, người lạ (học 반말 trong phim rồi dùng ngoài đời); (3) Kính ngữ quá mức với bạn bè/người dưới (gọi bạn cùng lớp là '선생님', nói '드시다' với em trai) — nghe xa cách, buồn cười. Mẹo: không chắc thì dùng 해요체 + -시- là an toàn nhất. 3 lỗi hay gặp: quên -시-/từ kính ngữ với người lớn; 반말 với người trên/người lạ; kính ngữ quá mức với bạn bè. Không chắc thì dùng 해요체 + -시-.",
+  "level": "TOPIK II",
+  "name": "Lỗi thường gặp của người Việt — quên -시-, 반말, kính ngữ quá mức",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "할머니께서 진지를 드세요.",
+     "할머니가 밥을 먹어요.",
+     "할머니가 밥 먹어."
+    ],
+    "q": "Chọn câu ĐÚNG (nói bà ăn cơm):",
+    "why": "Nói về bà phải dùng 진지 + 드시다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Quên -시- và từ kính ngữ",
+     "Dùng 해요체",
+     "Dùng 저 thay 나"
+    ],
+    "q": "Lỗi nào người Việt hay mắc nhất?",
+    "why": "Quên -시- và từ kính ngữ khi chủ ngữ là người lớn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Bất lịch sự nghiêm trọng",
+     "Lịch sự",
+     "Bình thường"
+    ],
+    "q": "Nói 반말 với người lạ lớn tuổi thì sao?",
+    "why": "반말 với người lớn tuổi/người lạ là bất lịch sự nghiêm trọng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Nghe xa cách, buồn cười",
+     "Rất lịch sự",
+     "Chuẩn mực"
+    ],
+    "q": "Dùng kính ngữ quá mức với bạn bè thì sao?",
+    "why": "Kính ngữ quá mức với bạn bè nghe xa cách, buồn cười."
+   },
+   {
+    "a": 0,
+    "o": [
+     "해요체 + -시-",
+     "반말",
+     "합쇼체 với bạn thân"
+    ],
+    "q": "Không chắc mức độ thì dùng gì an toàn nhất?",
+    "why": "Không chắc thì dùng 해요체 + -시- là an toàn nhất."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'선생님, 이거 봐.'",
+     "'선생님, 이것을 봐 주세요.'",
+     "'선생님, 이것 좀 봐 주시겠어요?'"
+    ],
+    "q": "Chọn câu SAI (nói với thầy):",
+    "why": "'이거 봐' là 반말 — với thầy phải nói 봐 주세요."
+   }
+  ],
+  "rule": "3 lỗi người Việt hay mắc nhất: (1) Quên -시- và từ kính ngữ khi chủ ngữ là người lớn (할머니가 가요 → 할머니께서 가세요); (2) Dùng 반말 với người lớn tuổi/cấp trên, người lạ (học 반말 trong phim rồi dùng ngoài đời); (3) Kính ngữ quá mức với bạn bè/người dưới (gọi bạn cùng lớp là '선생님', nói '드시다' với em trai) — nghe xa cách, buồn cười. Mẹo: không chắc thì dùng 해요체 + -시- là an toàn nhất. 3 lỗi hay gặp: quên -시-/từ kính ngữ với người lớn; 반말 với người trên/người lạ; kính ngữ quá mức với bạn bè. Không chắc thì dùng 해요체 + -시-."
+ },
+ {
+  "cat": "honorific",
+  "examples": [
+   {
+    "s": "확인 부탁드립니다.",
+    "t": "'확인 부탁드립니다.' (Nhờ anh/chị xác nhận giúp ạ.)"
+   },
+   {
+    "s": "보고서를 올립니다.",
+    "t": "'보고서를 올립니다.' (Tôi xin trình báo cáo ạ.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '확인 부탁드립니다.' (Nhờ anh/chị xác nhận giúp ạ.) '보고서를 올립니다.' (Tôi xin trình báo cáo ạ.) '확인 부탁드립니다.' (Nhờ anh/chị xác nhận giúp ạ.) '보고서를 올립니다.' (Tôi xin trình báo cáo ạ.) Quy tắc: email/công sở dùng 합쇼체 + khiêm nhường: 부탁드립니다 (nhờ vả), 올리다 (trình lên), 송구합니다/죄송합니다 (xin lỗi trang trọng), 검토해 주시면 감사하겠습니다 (nếu anh/chị xem giúp tôi xin cảm ơn). Mở đầu: 안녕하십니까 (trang trọng hơn 안녕하세요); kết: 감사합니다/잘 부탁드립니다. Tránh 반말 và 해체 tuyệt đối trong email công việc. Email/công sở: 합쇼체 + khiêm nhường — 부탁드립니다, 올리다, 송구합니다/죄송합니다, 안녕하십니까. Tuyệt đối không 반말 trong email công việc.",
+  "level": "TOPIK II",
+  "name": "Kính ngữ trong email và công sở — 부탁드립니다, 올리다",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "부탁드립니다",
+     "부탁해",
+     "부탁할게"
+    ],
+    "q": "Nhờ vả trang trọng trong email: '확인 ___'",
+    "why": "Email công sở dùng 부탁드립니다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "올리다",
+     "올라가다",
+     "올라오다"
+    ],
+    "q": "'보고서를 올립니다.' — 올리다 nghĩa là gì?",
+    "why": "올리다 = trình lên (khiêm nhường, dùng trong công sở)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "안녕하십니까",
+     "안녕",
+     "야"
+    ],
+    "q": "Mở đầu email trang trọng nhất là:",
+    "why": "안녕하십니까 trang trọng hơn 안녕하세요."
+   },
+   {
+    "a": 0,
+    "o": [
+     "죄송합니다",
+     "미안해",
+     "미안"
+    ],
+    "q": "Xin lỗi trang trọng trong email là:",
+    "why": "죄송합니다/송구합니다 là xin lỗi trang trọng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "감사합니다",
+     "고마워",
+     "고맙다"
+    ],
+    "q": "Kết email công sở lịch sự là:",
+    "why": "감사합니다 là kết thúc lịch sự, trang trọng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Dùng 반말 trong email công việc.",
+     "Dùng 합쇼체 + khiêm nhường.",
+     "Mở đầu bằng 안녕하십니까."
+    ],
+    "q": "Chọn câu SAI:",
+    "why": "Tuyệt đối không dùng 반말 trong email công việc."
+   }
+  ],
+  "rule": "email/công sở dùng 합쇼체 + khiêm nhường: 부탁드립니다 (nhờ vả), 올리다 (trình lên), 송구합니다/죄송합니다 (xin lỗi trang trọng), 검토해 주시면 감사하겠습니다 (nếu anh/chị xem giúp tôi xin cảm ơn). Mở đầu: 안녕하십니까 (trang trọng hơn 안녕하세요); kết: 감사합니다/잘 부탁드립니다. Tránh 반말 và 해체 tuyệt đối trong email công việc. Email/công sở: 합쇼체 + khiêm nhường — 부탁드립니다, 올리다, 송구합니다/죄송합니다, 안녕하십니까. Tuyệt đối không 반말 trong email công việc."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "가는 말이 고와야 오는 말이 곱다고, 먼저 친절하게 말해 보세요.",
+    "t": "'가는 말이 고와야 오는 말이 곱다고, 먼저 친절하게 말해 보세요.' (Lời nói đi có đẹp thì lời nói lại mới đẹp, nên hãy nói thân thiện trước.)"
+   },
+   {
+    "s": "그분께 먼저 예쁘게 말씀드리세요. 가는 말이 고와야 오는 말이 곱습니다.",
+    "t": "'그분께 먼저 예쁘게 말씀드리세요. 가는 말이 고와야 오는 말이 곱습니다.' (Hãy nói đẹp với người ấy trước. Lời nói đi có đẹp thì lời nói lại mới đẹp.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '가는 말이 고와야 오는 말이 곱다.' (ganeun mari gowaya oneun mari gopda — Lời nói đi có đẹp thì lời nói lại mới đẹp.) '가는 말이 고와야 오는 말이 곱다고, 먼저 친절하게 말해 보세요.' (Lời nói đi có đẹp thì lời nói lại mới đẹp, nên hãy nói thân thiện trước.) '그분께 먼저 예쁘게 말씀드리세요. 가는 말이 고와야 오는 말이 곱습니다.' (Hãy nói đẹp với người ấy trước. Lời nói đi có đẹp thì lời nói lại mới đẹp.) Quy tắc: Nghĩa đen: lời mình nói đi mà đẹp thì lời người ta nói lại cũng đẹp. Nghĩa bóng: muốn người khác nói năng tử tế với mình thì trước hết mình phải nói tử tế với họ. Quy tắc dùng: dùng khi khuyên ai đó ăn nói lịch sự, nhẹ nhàng; thường đi với '먼저' (trước hết). Quy tắc dùng: dùng khi khuyên ai ăn nói lịch sự, nhẹ nhàng; thường đi với '먼저' (trước hết mình nói đẹp).",
+  "level": "TOPIK II",
+  "name": "가는 말이 고와야 오는 말이 곱다 — lời nói đi thì lời nói lại",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Muốn người khác nói tử tế với mình thì mình phải nói tử tế trước.",
+     "Nói to thì người ta nghe rõ.",
+     "Nói nhiều thì được nhiều."
+    ],
+    "q": "'가는 말이 고와야 오는 말이 곱다' nghĩa là gì?",
+    "why": "Nghĩa bóng: muốn người khác nói tử tế với mình thì mình phải nói tử tế trước."
+   },
+   {
+    "a": 0,
+    "o": [
+     "가는 말이 고와야 오는 말이 곱다",
+     "발 없는 말이 천 리 간다",
+     "티끌 모아 태산"
+    ],
+    "q": "Điền đúng: '친절하게 말하면 상대방도 친절해져요. ___'",
+    "why": "Khuyên ăn nói lịch sự: 가는 말이 고와야 오는 말이 곱다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Lời nói đi có đẹp thì lời nói lại mới đẹp.",
+     "Lời nói đi xa thì khó quay lại.",
+     "Nói ít thì tốt hơn."
+    ],
+    "q": "Nghĩa đen của câu này là gì?",
+    "why": "Nghĩa đen: lời đi có đẹp thì lời lại mới đẹp."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi khuyên ai ăn nói lịch sự",
+     "Khi kể chuyện đi du lịch",
+     "Khi nói về thời tiết"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi khuyên ai đó ăn nói lịch sự, nhẹ nhàng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "먼저 친절하게 말해 보세요.",
+     "먼저 소리쳐 보세요.",
+     "먼저 화를 내 보세요."
+    ],
+    "q": "Điền đúng: '가는 말이 고와야 오는 말이 곱다고, ___'",
+    "why": "Muốn lời lại đẹp thì trước hết mình nói thân thiện."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'가는 말이 고와야 오는 말이 곱다고, 먼저 예쁘게 말씀드리세요.'",
+     "'가는 말이 고와야 오는 말이 곱다고, 먼저 욕하세요.'",
+     "'가는 말이 고와야 오는 말이 곱다고, 아무 말이나 하세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'예쁘게 말씀드리세요' (nói đẹp trước) mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: lời mình nói đi mà đẹp thì lời người ta nói lại cũng đẹp. Nghĩa bóng: muốn người khác nói năng tử tế với mình thì trước hết mình phải nói tử tế với họ. Quy tắc dùng: dùng khi khuyên ai đó ăn nói lịch sự, nhẹ nhàng; thường đi với '먼저' (trước hết). Quy tắc dùng: dùng khi khuyên ai ăn nói lịch sự, nhẹ nhàng; thường đi với '먼저' (trước hết mình nói đẹp)."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "나쁜 소문은 금방 퍼져요. 발 없는 말이 천 리 간다고 하잖아요.",
+    "t": "'나쁜 소문은 금방 퍼져요. 발 없는 말이 천 리 간다고 하잖아요.' (Tin xấu lan nhanh lắm. Người ta vẫn nói lời không chân mà đi nghìn dặm đấy.)"
+   },
+   {
+    "s": "조심하세요. 발 없는 말이 천 리 간대요.",
+    "t": "'조심하세요. 발 없는 말이 천 리 간대요.' (Cẩn thận nhé. Lời không chân mà đi nghìn dặm đấy.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '발 없는 말이 천 리 간다.' (bal eomneun mari cheon ri ganda — Lời không có chân mà đi được nghìn dặm.) '나쁜 소문은 금방 퍼져요. 발 없는 말이 천 리 간다고 하잖아요.' (Tin xấu lan nhanh lắm. Người ta vẫn nói lời không chân mà đi nghìn dặm đấy.) '조심하세요. 발 없는 말이 천 리 간대요.' (Cẩn thận nhé. Lời không chân mà đi nghìn dặm đấy.) Quy tắc: Nghĩa đen: lời nói không có chân mà đi xa nghìn dặm. Nghĩa bóng: tin đồn, nhất là tin xấu, lan truyền rất nhanh và rất xa. Quy tắc dùng: dùng khi cảnh báo ai đừng nói bậy, hoặc khi một tin đồn lan quá nhanh; sắc thái cảnh báo.",
+  "level": "TOPIK II",
+  "name": "발 없는 말이 천 리 간다 — tin đồn lan nhanh",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Tin đồn lan truyền rất nhanh và rất xa.",
+     "Đi bộ nghìn dặm rất mệt.",
+     "Ngựa không chân chạy nhanh."
+    ],
+    "q": "'발 없는 말이 천 리 간다' nghĩa là gì?",
+    "why": "Nghĩa bóng: tin đồn lan rất nhanh và rất xa."
+   },
+   {
+    "a": 0,
+    "o": [
+     "발 없는 말이 천 리 간다",
+     "가는 말이 고와야 오는 말이 곱다",
+     "시작이 반이다"
+    ],
+    "q": "Điền đúng: '회사 소문이 벌써 다 퍼졌어요. ___'",
+    "why": "Tin đồn lan nhanh: 발 없는 말이 천 리 간다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "천 리",
+     "백 리",
+     "십 리"
+    ],
+    "q": "'발 없는 말이 ___ 간다' — điền số đúng:",
+    "why": "Nguyên văn: 천 리 (nghìn dặm)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi cảnh báo ai đừng nói bậy",
+     "Khi khen ai chạy nhanh",
+     "Khi nói về ngựa"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi cảnh báo đừng nói bậy, hoặc khi tin đồn lan nhanh."
+   },
+   {
+    "a": 0,
+    "o": [
+     "나쁜 소문",
+     "좋은 소식",
+     "날씨"
+    ],
+    "q": "Thành ngữ này thường nói về loại tin nào?",
+    "why": "Nhất là tin xấu, tin đồn lan nhanh."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'조심하세요. 발 없는 말이 천 리 간대요.'",
+     "'발 없는 말이 천 리 간다고, 빨리 달려요.'",
+     "'발 없는 말이 천 리 간다고, 말을 타요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'조심하세요' + thành ngữ mới đúng sắc thái cảnh báo."
+   }
+  ],
+  "rule": "Nghĩa đen: lời nói không có chân mà đi xa nghìn dặm. Nghĩa bóng: tin đồn, nhất là tin xấu, lan truyền rất nhanh và rất xa. Quy tắc dùng: dùng khi cảnh báo ai đừng nói bậy, hoặc khi một tin đồn lan quá nhanh; sắc thái cảnh báo."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "힘들게 공부한 끝에 합격했어요. 고생 끝에 낙이 온다고 하잖아요.",
+    "t": "'힘들게 공부한 끝에 합격했어요. 고생 끝에 낙이 온다고 하잖아요.' (Học vất vả rồi cũng đỗ. Khổ tận cam lai mà.)"
+   },
+   {
+    "s": "조금만 참으세요. 고생 끝에 낙이 와요.",
+    "t": "'조금만 참으세요. 고생 끝에 낙이 와요.' (Cố chịu thêm chút nữa. Sau khổ đau sẽ đến niềm vui.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '고생 끝에 낙이 온다.' (gosaeng kkeute nagi onda — Sau khổ đau, niềm vui sẽ đến.) '힘들게 공부한 끝에 합격했어요. 고생 끝에 낙이 온다고 하잖아요.' (Học vất vả rồi cũng đỗ. Khổ tận cam lai mà.) '조금만 참으세요. 고생 끝에 낙이 와요.' (Cố chịu thêm chút nữa. Sau khổ đau sẽ đến niềm vui.) Quy tắc: Nghĩa đen: cuối sự khổ cực thì niềm vui đến. Nghĩa bóng: chịu khó, vất vả rồi sẽ được đền đáp, hạnh phúc sẽ đến — tương đương 'khổ tận cam lai'. Quy tắc dùng: dùng để an ủi, động viên ai đang vất vả; sắc thái lạc quan.",
+  "level": "TOPIK I",
+  "name": "고생 끝에 낙이 온다 — khổ tận cam lai",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Chịu khó rồi sẽ được đền đáp, hạnh phúc sẽ đến.",
+     "Khổ đau thì không bao giờ hết.",
+     "Vui vẻ rồi sẽ khổ."
+    ],
+    "q": "'고생 끝에 낙이 온다' nghĩa là gì?",
+    "why": "Nghĩa bóng: vất vả rồi sẽ được đền đáp, niềm vui sẽ đến."
+   },
+   {
+    "a": 0,
+    "o": [
+     "고생 끝에 낙이 온다",
+     "발 없는 말이 천 리 간다",
+     "그림의 떡"
+    ],
+    "q": "Điền đúng: '힘들게 일한 끝에 성공했어요. ___'",
+    "why": "Vất vả rồi thành công: 고생 끝에 낙이 온다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "낙",
+     "고생",
+     "끝"
+    ],
+    "q": "'고생 끝에 ___이 온다' — điền đúng:",
+    "why": "Nguyên văn: 낙이 온다 (niềm vui đến)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi an ủi, động viên ai đang vất vả",
+     "Khi chê ai lười biếng",
+     "Khi kể chuyện buồn"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng để an ủi, động viên người đang vất vả."
+   },
+   {
+    "a": 0,
+    "o": [
+     "khổ tận cam lai",
+     "sướng trước khổ sau",
+     "khổ mãi không hết"
+    ],
+    "q": "Thành ngữ Việt tương đương là:",
+    "why": "'Khổ tận cam lai' tương đương 고생 끝에 낙이 온다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'조금만 참으세요. 고생 끝에 낙이 와요.'",
+     "'고생 끝에 낙이 온다고, 포기하세요.'",
+     "'고생 끝에 낙이 온다고, 쉬지 말고 울어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'조금만 참으세요' (động viên) mới đúng sắc thái."
+   }
+  ],
+  "rule": "Nghĩa đen: cuối sự khổ cực thì niềm vui đến. Nghĩa bóng: chịu khó, vất vả rồi sẽ được đền đáp, hạnh phúc sẽ đến — tương đương 'khổ tận cam lai'. Quy tắc dùng: dùng để an ủi, động viên ai đang vất vả; sắc thái lạc quan."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "조금씩 모으면 큰돈이 돼요. 티끌 모아 태산이라고 하잖아요.",
+    "t": "'조금씩 모으면 큰돈이 돼요. 티끌 모아 태산이라고 하잖아요.' (Góp ít một rồi cũng thành tiền lớn. Tích tiểu thành đại mà.)"
+   },
+   {
+    "s": "매일 한 단어씩 외우세요. 티끌 모아 태산이에요.",
+    "t": "'매일 한 단어씩 외우세요. 티끌 모아 태산이에요.' (Mỗi ngày học thuộc một từ thôi. Tích tiểu thành đại mà.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '티끌 모아 태산.' (tikkeul moa taesan — Hạt bụi gom lại thành núi Thái Sơn.) '조금씩 모으면 큰돈이 돼요. 티끌 모아 태산이라고 하잖아요.' (Góp ít một rồi cũng thành tiền lớn. Tích tiểu thành đại mà.) '매일 한 단어씩 외우세요. 티끌 모아 태산이에요.' (Mỗi ngày học thuộc một từ thôi. Tích tiểu thành đại mà.) Quy tắc: Nghĩa đen: hạt bụi nhỏ gom lại thành núi lớn. Nghĩa bóng: góp nhặt từng chút một, lâu ngày sẽ thành lớn — tương đương 'tích tiểu thành đại', 'góp gió thành bão'. Quy tắc dùng: dùng khi khuyên ai kiên trì làm việc nhỏ, tiết kiệm từng chút; sắc thái khích lệ.",
+  "level": "TOPIK I",
+  "name": "티끌 모아 태산 — tích tiểu thành đại",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Góp nhặt từng chút một, lâu ngày sẽ thành lớn.",
+     "Bụi bay lên núi rất nhanh.",
+     "Núi Thái Sơn rất cao."
+    ],
+    "q": "'티끌 모아 태산' nghĩa là gì?",
+    "why": "Nghĩa bóng: góp từng chút một, lâu ngày thành lớn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "티끌 모아 태산",
+     "그림의 떡",
+     "우물 안 개구리"
+    ],
+    "q": "Điền đúng: '매일 조금씩 저금하면 큰돈이 돼요. ___'",
+    "why": "Góp ít một thành lớn: 티끌 모아 태산."
+   },
+   {
+    "a": 0,
+    "o": [
+     "tích tiểu thành đại",
+     "nước chảy đá mòn",
+     "có công mài sắt"
+    ],
+    "q": "Thành ngữ Việt tương đương là:",
+    "why": "'Tích tiểu thành đại' tương đương 티끌 모아 태산."
+   },
+   {
+    "a": 0,
+    "o": [
+     "태산",
+     "티끌",
+     "모아"
+    ],
+    "q": "'티끌 모아 ___' — điền đúng:",
+    "why": "Nguyên văn: 티끌 모아 태산."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi khuyên ai kiên trì làm việc nhỏ",
+     "Khi chê ai lười",
+     "Khi nói về núi cao"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi khuyên kiên trì làm việc nhỏ, tiết kiệm từng chút."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'매일 한 단어씩 외우세요. 티끌 모아 태산이에요.'",
+     "'티끌 모아 태산이라고, 한 번에 다 외우세요.'",
+     "'티끌 모아 태산이라고, 그만두세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Mỗi ngày một từ' (tích lũy dần) mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: hạt bụi nhỏ gom lại thành núi lớn. Nghĩa bóng: góp nhặt từng chút một, lâu ngày sẽ thành lớn — tương đương 'tích tiểu thành đại', 'góp gió thành bão'. Quy tắc dùng: dùng khi khuyên ai kiên trì làm việc nhỏ, tiết kiệm từng chút; sắc thái khích lệ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "혼자 하기 어려우면 같이 해요. 백지장도 맞들면 낫다고 하잖아요.",
+    "t": "'혼자 하기 어려우면 같이 해요. 백지장도 맞들면 낫다고 하잖아요.' (Một mình làm khó thì làm cùng nhau đi. Một cây làm chẳng nên non mà.)"
+   },
+   {
+    "s": "무거운 짐은 둘이 들어요. 백지장도 맞들면 낫대요.",
+    "t": "'무거운 짐은 둘이 들어요. 백지장도 맞들면 낫대요.' (Đồ nặng thì hai người khiêng. Một cây làm chẳng nên non mà.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '백지장도 맞들면 낫다.' (baekjijangdo matdeulmyeon natda — Ngay cả tờ giấy trắng mỏng, hai người cùng đỡ cũng nhẹ hơn.) '혼자 하기 어려우면 같이 해요. 백지장도 맞들면 낫다고 하잖아요.' (Một mình làm khó thì làm cùng nhau đi. Một cây làm chẳng nên non mà.) '무거운 짐은 둘이 들어요. 백지장도 맞들면 낫대요.' (Đồ nặng thì hai người khiêng. Một cây làm chẳng nên non mà.) Quy tắc: Nghĩa đen: ngay cả một tờ giấy trắng cũng nhẹ hơn khi hai người cùng đỡ. Nghĩa bóng: việc gì cùng nhau làm cũng dễ hơn làm một mình — tương đương 'một cây làm chẳng nên non, ba cây chụm lại nên hòn núi cao'. Quy tắc dùng: dùng khi rủ ai cùng làm, nhấn mạnh sức mạnh hợp tác.",
+  "level": "TOPIK II",
+  "name": "백지장도 맞들면 낫다 — một cây làm chẳng nên non",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Việc gì cùng nhau làm cũng dễ hơn làm một mình.",
+     "Giấy trắng rất nhẹ.",
+     "Hai người thì chậm hơn một người."
+    ],
+    "q": "'백지장도 맞들면 낫다' nghĩa là gì?",
+    "why": "Nghĩa bóng: cùng nhau làm thì việc gì cũng dễ hơn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "백지장도 맞들면 낫다",
+     "티끌 모아 태산",
+     "발 없는 말이 천 리 간다"
+    ],
+    "q": "Điền đúng: '이 일은 혼자 하기 힘들어요. 같이 해요. ___'",
+    "why": "Rủ cùng làm: 백지장도 맞들면 낫다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "một cây làm chẳng nên non",
+     "lá lành đùm lá rách",
+     "ăn quả nhớ kẻ trồng cây"
+    ],
+    "q": "Thành ngữ Việt tương đương là:",
+    "why": "'Một cây làm chẳng nên non' tương đương 백지장도 맞들면 낫다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "맞들면",
+     "들면",
+     "맞으면"
+    ],
+    "q": "'백지장도 ___ 낫다' — điền đúng:",
+    "why": "Nguyên văn: 백지장도 맞들면 낫다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi rủ ai cùng làm việc",
+     "Khi nói về giấy trắng",
+     "Khi làm một mình"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi rủ ai cùng làm, nhấn mạnh sức mạnh hợp tác."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'무거운 짐은 둘이 들어요. 백지장도 맞들면 낫대요.'",
+     "'백지장도 맞들면 낫다고, 혼자 하세요.'",
+     "'백지장도 맞들면 낫다고, 도와주지 마세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Hai người cùng khiêng' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: ngay cả một tờ giấy trắng cũng nhẹ hơn khi hai người cùng đỡ. Nghĩa bóng: việc gì cùng nhau làm cũng dễ hơn làm một mình — tương đương 'một cây làm chẳng nên non, ba cây chụm lại nên hòn núi cao'. Quy tắc dùng: dùng khi rủ ai cùng làm, nhấn mạnh sức mạnh hợp tác."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "소 잃고 외양간 고친다고, 일이 터진 뒤에야 조심하면 늦어요.",
+    "t": "'소 잃고 외양간 고친다고, 일이 터진 뒤에야 조심하면 늦어요.' (Mất bò mới lo làm chuồng thì muộn rồi — việc xảy ra rồi mới cẩn thận thì đã muộn.)"
+   },
+   {
+    "s": "비밀번호가 털린 뒤에야 바꾸면 소 잃고 외양간 고치는 거예요.",
+    "t": "'비밀번호가 털린 뒤에야 바꾸면 소 잃고 외양간 고치는 거예요.' (Mật khẩu bị lộ rồi mới đổi thì đúng là mất bò mới lo làm chuồng.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '소 잃고 외양간 고친다.' (so ilko oeyanggan gochinda — Mất bò rồi mới sửa chuồng.) '소 잃고 외양간 고친다고, 일이 터진 뒤에야 조심하면 늦어요.' (Mất bò mới lo làm chuồng thì muộn rồi — việc xảy ra rồi mới cẩn thận thì đã muộn.) '비밀번호가 털린 뒤에야 바꾸면 소 잃고 외양간 고치는 거예요.' (Mật khẩu bị lộ rồi mới đổi thì đúng là mất bò mới lo làm chuồng.) Quy tắc: Nghĩa đen: để mất con bò rồi mới sửa chuồng bò. Nghĩa bóng: việc đã xảy ra rồi mới lo phòng ngừa thì đã muộn — tương đương 'mất bò mới lo làm chuồng'. Quy tắc dùng: dùng khi phê bình ai đó xử lý quá muộn, hoặc tự nhắc mình phòng ngừa trước; sắc thái tiếc nuối, cảnh báo. Quy tắc dùng: dùng khi phê bình ai xử lý quá muộn, hoặc tự nhắc mình phòng ngừa trước; sắc thái tiếc nuối, cảnh báo.",
+  "level": "TOPIK II",
+  "name": "소 잃고 외양간 고친다 — mất bò mới lo làm chuồng",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Việc đã xảy ra rồi mới lo phòng ngừa thì đã muộn.",
+     "Mất bò thì mua bò khác.",
+     "Chuồng bò phải sửa thường xuyên."
+    ],
+    "q": "'소 잃고 외양간 고친다' nghĩa là gì?",
+    "why": "Nghĩa bóng: xảy ra rồi mới lo phòng ngừa thì đã muộn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "소 잃고 외양간 고친다",
+     "백지장도 맞들면 낫다",
+     "고생 끝에 낙이 온다"
+    ],
+    "q": "Điền đúng: '비밀번호가 털린 뒤에야 바꾸면 ___'",
+    "why": "Mất rồi mới lo: 소 잃고 외양간 고친다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "mất bò mới lo làm chuồng",
+     "mất bò mới lo mua bò",
+     "mất chuồng mới lo làm bò"
+    ],
+    "q": "Thành ngữ Việt tương đương là:",
+    "why": "'Mất bò mới lo làm chuồng' tương đương 소 잃고 외양간 고친다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "외양간",
+     "소",
+     "잃고"
+    ],
+    "q": "'소 잃고 ___ 고친다' — điền đúng:",
+    "why": "Nguyên văn: 소 잃고 외양간 고친다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi phê bình ai xử lý quá muộn",
+     "Khi khen ai nhanh nhẹn",
+     "Khi nói về chăn nuôi"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi phê bình ai xử lý quá muộn, hoặc tự nhắc phòng ngừa trước."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'소 잃고 외양간 고친다고, 일이 터진 뒤에야 조심하면 늦어요.'",
+     "'소 잃고 외양간 고친다고, 미리 준비하세요.'",
+     "'소 잃고 외양간 고친다고, 소를 사세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Việc xảy ra rồi mới cẩn thận thì muộn' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: để mất con bò rồi mới sửa chuồng bò. Nghĩa bóng: việc đã xảy ra rồi mới lo phòng ngừa thì đã muộn — tương đương 'mất bò mới lo làm chuồng'. Quy tắc dùng: dùng khi phê bình ai đó xử lý quá muộn, hoặc tự nhắc mình phòng ngừa trước; sắc thái tiếc nuối, cảnh báo. Quy tắc dùng: dùng khi phê bình ai xử lý quá muộn, hoặc tự nhắc mình phòng ngừa trước; sắc thái tiếc nuối, cảnh báo."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "남의 험담은 조심하세요. 낮말은 새가 듣고 밤말은 쥐가 듣는다고 해요.",
+    "t": "'남의 험담은 조심하세요. 낮말은 새가 듣고 밤말은 쥐가 듣는다고 해요.' (Nói xấu người khác thì cẩn thận nhé. Ban ngày nói thì chim nghe, ban đêm nói thì chuột nghe đấy.)"
+   },
+   {
+    "s": "비밀 이야기는 아무 데서나 하지 마세요. 낮말은 새가 듣고 밤말은 쥐가 듣습니다.",
+    "t": "'비밀 이야기는 아무 데서나 하지 마세요. 낮말은 새가 듣고 밤말은 쥐가 듣습니다.' (Chuyện bí mật đừng nói ở đâu cũng được. Ban ngày nói thì chim nghe, ban đêm nói thì chuột nghe.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '낮말은 새가 듣고 밤말은 쥐가 듣는다.' (nanmareun saega deutgo bammareun jwiga deutneunda — Lời ban ngày chim nghe, lời ban đêm chuột nghe.) '남의 험담은 조심하세요. 낮말은 새가 듣고 밤말은 쥐가 듣는다고 해요.' (Nói xấu người khác thì cẩn thận nhé. Ban ngày nói thì chim nghe, ban đêm nói thì chuột nghe đấy.) '비밀 이야기는 아무 데서나 하지 마세요. 낮말은 새가 듣고 밤말은 쥐가 듣습니다.' (Chuyện bí mật đừng nói ở đâu cũng được. Ban ngày nói thì chim nghe, ban đêm nói thì chuột nghe.) Quy tắc: Nghĩa đen: ban ngày nói thì chim nghe thấy, ban đêm nói thì chuột nghe thấy. Nghĩa bóng: lời nói bí mật ở đâu cũng có thể bị nghe thấy — tương đương 'vách có tai'. Quy tắc dùng: dùng khi cảnh báo ai đừng nói chuyện riêng tư, nói xấu ở nơi công cộng; sắc thái cảnh báo.",
+  "level": "TOPIK II",
+  "name": "낮말은 새가 듣고 밤말은 쥐가 듣는다 — vách có tai",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Lời nói bí mật ở đâu cũng có thể bị nghe thấy.",
+     "Chim và chuột nghe rất thính.",
+     "Ban ngày nên im lặng."
+    ],
+    "q": "'낮말은 새가 듣고 밤말은 쥐가 듣는다' nghĩa là gì?",
+    "why": "Nghĩa bóng: lời bí mật ở đâu cũng có thể bị nghe thấy."
+   },
+   {
+    "a": 0,
+    "o": [
+     "낮말은 새가 듣고 밤말은 쥐가 듣는다",
+     "발 없는 말이 천 리 간다",
+     "소 잃고 외양간 고친다"
+    ],
+    "q": "Điền đúng: '비밀 이야기는 조심하세요. ___'",
+    "why": "Cảnh báo chuyện bí mật: 낮말은 새가 듣고 밤말은 쥐가 듣는다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "vách có tai",
+     "tai vách mạch rừng",
+     "bức tường có tai"
+    ],
+    "q": "Thành ngữ Việt tương đương là:",
+    "why": "'Vách có tai' tương đương 낮말은 새가 듣고 밤말은 쥐가 듣는다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "새",
+     "쥐",
+     "새 và 쥐"
+    ],
+    "q": "'낮말은 ___가 듣고 밤말은 쥐가 듣는다' — điền đúng:",
+    "why": "Nguyên văn: 낮말은 새가 듣고 밤말은 쥐가 듣는다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi cảnh báo đừng nói chuyện riêng tư ở nơi công cộng",
+     "Khi kể chuyện về chim",
+     "Khi kể chuyện về chuột"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi cảnh báo đừng nói riêng tư, nói xấu ở nơi công cộng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'비밀 이야기는 아무 데서나 하지 마세요. 낮말은 새가 듣고 밤말은 쥐가 듣습니다.'",
+     "'낮말은 새가 듣고 밤말은 쥐가 듣는다고, 큰 소리로 말하세요.'",
+     "'낮말은 새가 듣고 밤말은 쥐가 듣는다고, 비밀을 퍼뜨리세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Đừng nói bí mật ở đâu cũng được' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: ban ngày nói thì chim nghe thấy, ban đêm nói thì chuột nghe thấy. Nghĩa bóng: lời nói bí mật ở đâu cũng có thể bị nghe thấy — tương đương 'vách có tai'. Quy tắc dùng: dùng khi cảnh báo ai đừng nói chuyện riêng tư, nói xấu ở nơi công cộng; sắc thái cảnh báo."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "우연히 친구를 만났어요. 가는 날이 장날이라고 하잖아요.",
+    "t": "'우연히 친구를 만났어요. 가는 날이 장날이라고 하잖아요.' (Tình cờ gặp bạn. Đúng là đi đâu cũng gặp ngày phiên chợ mà.)"
+   },
+   {
+    "s": "가려고 하니까 비가 오네요. 가는 날이 장날이에요.",
+    "t": "'가려고 하니까 비가 오네요. 가는 날이 장날이에요.' (Định đi thì trời mưa. Đúng là hễ đi là gặp ngày xấu mà.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '가는 날이 장날이다.' (ganeun nari jangnarida — Ngày mình đi lại đúng ngày họp chợ.) '우연히 친구를 만났어요. 가는 날이 장날이라고 하잖아요.' (Tình cờ gặp bạn. Đúng là đi đâu cũng gặp ngày phiên chợ mà.) '가려고 하니까 비가 오네요. 가는 날이 장날이에요.' (Định đi thì trời mưa. Đúng là hễ đi là gặp ngày xấu mà.) Quy tắc: Nghĩa đen: ngày mình đi thì đúng ngày họp chợ (đông đúc, ồn ào). Nghĩa bóng: cứ hễ làm việc gì thì lại gặp đúng điều không may, trùng hợp éo le — tương đương 'hễ đi là gặp chuyện', 'đúng lúc không may'. Quy tắc dùng: dùng khi than thở về sự trùng hợp không may, éo le; sắc thái hài hước, tự giễu.",
+  "level": "TOPIK II",
+  "name": "가는 날이 장날이다 — hễ đi là gặp chuyện",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Cứ hễ làm việc gì thì lại gặp đúng điều không may.",
+     "Ngày họp chợ rất đông.",
+     "Đi chợ thì vui."
+    ],
+    "q": "'가는 날이 장날이다' nghĩa là gì?",
+    "why": "Nghĩa bóng: hễ làm gì lại gặp đúng điều không may, trùng hợp éo le."
+   },
+   {
+    "a": 0,
+    "o": [
+     "가는 날이 장날이다",
+     "고생 끝에 낙이 온다",
+     "티끌 모아 태산"
+    ],
+    "q": "Điền đúng: '가려고 하니까 비가 오네요. ___'",
+    "why": "Định đi thì gặp chuyện không may: 가는 날이 장날이다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "장날",
+     "가는 날",
+     "오는 날"
+    ],
+    "q": "'가는 날이 ___이다' — điền đúng:",
+    "why": "Nguyên văn: 가는 날이 장날이다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi than thở về sự trùng hợp không may",
+     "Khi khen ai may mắn",
+     "Khi đi chợ"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi than thở về trùng hợp không may; sắc thái hài hước, tự giễu."
+   },
+   {
+    "a": 0,
+    "o": [
+     "hễ đi là gặp chuyện",
+     "đi chợ gặp bạn",
+     "ngày nào cũng là ngày chợ"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Hễ đi là gặp chuyện' tương đương 가는 날이 장날이다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'가려고 하니까 비가 오네요. 가는 날이 장날이에요.'",
+     "'가는 날이 장날이라고, 오늘은 운이 좋아요.'",
+     "'가는 날이 장날이라고, 일부러 시장에 갔어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Định đi thì mưa' (trùng hợp không may) mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: ngày mình đi thì đúng ngày họp chợ (đông đúc, ồn ào). Nghĩa bóng: cứ hễ làm việc gì thì lại gặp đúng điều không may, trùng hợp éo le — tương đương 'hễ đi là gặp chuyện', 'đúng lúc không may'. Quy tắc dùng: dùng khi than thở về sự trùng hợp không may, éo le; sắc thái hài hước, tự giễu."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "세상에는 자기가 제일인 줄 아는 사람이 많아요. 우물 안 개구리예요.",
+    "t": "'세상에는 자기가 제일인 줄 아는 사람이 많아요. 우물 안 개구리예요.' (Trên đời có nhiều người tưởng mình là nhất. Đúng là ếch ngồi đáy giếng.)"
+   },
+   {
+    "s": "작은 동네에서만 지내면 우물 안 개구리가 되기 쉬워요.",
+    "t": "'작은 동네에서만 지내면 우물 안 개구리가 되기 쉬워요.' (Chỉ quanh quẩn ở xóm nhỏ thì dễ thành ếch ngồi đáy giếng.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '우물 안 개구리.' (umul an gaeguri — Con ếch trong giếng.) '세상에는 자기가 제일인 줄 아는 사람이 많아요. 우물 안 개구리예요.' (Trên đời có nhiều người tưởng mình là nhất. Đúng là ếch ngồi đáy giếng.) '작은 동네에서만 지내면 우물 안 개구리가 되기 쉬워요.' (Chỉ quanh quẩn ở xóm nhỏ thì dễ thành ếch ngồi đáy giếng.) Quy tắc: Nghĩa đen: con ếch chỉ sống trong giếng, tưởng bầu trời chỉ bằng miệng giếng. Nghĩa bóng: người tầm nhìn hẹp, chỉ biết thế giới nhỏ của mình mà tưởng mình giỏi nhất — tương đương 'ếch ngồi đáy giếng'. Quy tắc dùng: dùng khi phê bình ai đó thiển cận, tự mãn; sắc thái chê nhẹ.",
+  "level": "TOPIK I",
+  "name": "우물 안 개구리 — ếch ngồi đáy giếng",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Người tầm nhìn hẹp, chỉ biết thế giới nhỏ của mình.",
+     "Con ếch sống trong giếng.",
+     "Người thích bơi."
+    ],
+    "q": "'우물 안 개구리' nghĩa là gì?",
+    "why": "Nghĩa bóng: người tầm nhìn hẹp, tưởng mình giỏi nhất."
+   },
+   {
+    "a": 0,
+    "o": [
+     "우물 안 개구리",
+     "그림의 떡",
+     "티끌 모아 태산"
+    ],
+    "q": "Điền đúng: '세상에는 자기가 제일인 줄 아는 사람이 많아요. ___'",
+    "why": "Tưởng mình là nhất, tầm nhìn hẹp: 우물 안 개구리."
+   },
+   {
+    "a": 0,
+    "o": [
+     "ếch ngồi đáy giếng",
+     "ếch kêu đáy giếng",
+     "ếch nhảy khỏi giếng"
+    ],
+    "q": "Thành ngữ Việt tương đương là:",
+    "why": "'Ếch ngồi đáy giếng' tương đương 우물 안 개구리."
+   },
+   {
+    "a": 0,
+    "o": [
+     "개구리",
+     "우물",
+     "안"
+    ],
+    "q": "'우물 안 ___' — điền đúng:",
+    "why": "Nguyên văn: 우물 안 개구리."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi phê bình ai thiển cận, tự mãn",
+     "Khi khen ai hiểu biết rộng",
+     "Khi nói về ếch"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi phê bình ai thiển cận, tự mãn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'작은 동네에서만 지내면 우물 안 개구리가 되기 쉬워요.'",
+     "'우물 안 개구리라서 세상을 다 알아요.'",
+     "'우물 안 개구리는 시야가 넓어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Chỉ quanh quẩn xóm nhỏ thì dễ thành ếch đáy giếng' mới đúng ý."
+   }
+  ],
+  "rule": "Nghĩa đen: con ếch chỉ sống trong giếng, tưởng bầu trời chỉ bằng miệng giếng. Nghĩa bóng: người tầm nhìn hẹp, chỉ biết thế giới nhỏ của mình mà tưởng mình giỏi nhất — tương đương 'ếch ngồi đáy giếng'. Quy tắc dùng: dùng khi phê bình ai đó thiển cận, tự mãn; sắc thái chê nhẹ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "월급이 오르지 않아서 사고 싶은 걸 못 사요. 그림의 떡이에요.",
+    "t": "'월급이 오르지 않아서 사고 싶은 걸 못 사요. 그림의 떡이에요.' (Lương không tăng nên muốn mua gì cũng không mua được. Đúng là bánh vẽ.)"
+   },
+   {
+    "s": "멀리서 보기만 하는 건 그림의 떡과 같아요.",
+    "t": "'멀리서 보기만 하는 건 그림의 떡과 같아요.' (Chỉ nhìn từ xa thì cũng như bánh vẽ vậy.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '그림의 떡.' (geurim-ui tteok — Cái bánh trong tranh.) '월급이 오르지 않아서 사고 싶은 걸 못 사요. 그림의 떡이에요.' (Lương không tăng nên muốn mua gì cũng không mua được. Đúng là bánh vẽ.) '멀리서 보기만 하는 건 그림의 떡과 같아요.' (Chỉ nhìn từ xa thì cũng như bánh vẽ vậy.) Quy tắc: Nghĩa đen: cái bánh vẽ trong tranh, nhìn thấy mà không ăn được. Nghĩa bóng: thứ chỉ nhìn thấy mà không với tới được, không dùng được — tương đương 'bánh vẽ'. Quy tắc dùng: dùng khi nói về điều mong muốn nhưng không đạt được; sắc thái tiếc nuối.",
+  "level": "TOPIK I",
+  "name": "그림의 떡 — bánh vẽ",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Thứ chỉ nhìn thấy mà không với tới được.",
+     "Bánh trong tranh rất ngon.",
+     "Tranh vẽ bánh rất đẹp."
+    ],
+    "q": "'그림의 떡' nghĩa là gì?",
+    "why": "Nghĩa bóng: thứ chỉ nhìn thấy mà không với tới, không dùng được."
+   },
+   {
+    "a": 0,
+    "o": [
+     "그림의 떡",
+     "우물 안 개구리",
+     "티끌 모아 태산"
+    ],
+    "q": "Điền đúng: '월급이 오르지 않아서 사고 싶은 걸 못 사요. ___'",
+    "why": "Muốn mà không với tới: 그림의 떡."
+   },
+   {
+    "a": 0,
+    "o": [
+     "bánh vẽ",
+     "bánh chưng",
+     "bánh mì"
+    ],
+    "q": "Thành ngữ Việt tương đương là:",
+    "why": "'Bánh vẽ' tương đương 그림의 떡."
+   },
+   {
+    "a": 0,
+    "o": [
+     "떡",
+     "그림",
+     "의"
+    ],
+    "q": "'그림의 ___' — điền đúng:",
+    "why": "Nguyên văn: 그림의 떡."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi nói về điều mong muốn nhưng không đạt được",
+     "Khi khen tranh đẹp",
+     "Khi nói về bánh ngon"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi nói về điều mong muốn nhưng không đạt được."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'멀리서 보기만 하는 건 그림의 떡과 같아요.'",
+     "'그림의 떡을 먹었어요. 맛있었어요.'",
+     "'그림의 떡은 진짜 떡보다 맛있어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Chỉ nhìn từ xa' mới đúng ý — bánh vẽ thì không ăn được."
+   }
+  ],
+  "rule": "Nghĩa đen: cái bánh vẽ trong tranh, nhìn thấy mà không ăn được. Nghĩa bóng: thứ chỉ nhìn thấy mà không với tới được, không dùng được — tương đương 'bánh vẽ'. Quy tắc dùng: dùng khi nói về điều mong muốn nhưng không đạt được; sắc thái tiếc nuối."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "시험 준비에 일이 많아서 눈코 뜰 새가 없어요.",
+    "t": "'시험 준비에 일이 많아서 눈코 뜰 새가 없어요.' (Chuẩn bị thi nhiều việc quá nên bận tối mắt tối mũi.)"
+   },
+   {
+    "s": "새 학기가 시작되니까 눈코 뜰 새 없이 바빠요.",
+    "t": "'새 학기가 시작되니까 눈코 뜰 새 없이 바빠요.' (Học kỳ mới bắt đầu nên bận tối mắt tối mũi.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '눈코 뜰 새 없다.' (nunko tteul sae eopda — Không có cả thời gian để mở mắt mở mũi.) '시험 준비에 일이 많아서 눈코 뜰 새가 없어요.' (Chuẩn bị thi nhiều việc quá nên bận tối mắt tối mũi.) '새 학기가 시작되니까 눈코 뜰 새 없이 바빠요.' (Học kỳ mới bắt đầu nên bận tối mắt tối mũi.) Quy tắc: Nghĩa đen: bận đến mức không có cả khoảnh khắc để mở mắt, mở mũi. Nghĩa bóng: cực kỳ bận rộn, không có thời gian rảnh — tương đương 'bận tối mắt tối mũi', 'bận tối tăm mặt mũi'. Quy tắc dùng: dùng khi than thở mình quá bận; sắc thái than thở, hài hước nhẹ.",
+  "level": "TOPIK II",
+  "name": "눈코 뜰 새 없다 — bận tối mắt tối mũi",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Cực kỳ bận rộn, không có thời gian rảnh.",
+     "Mắt mũi bị đau.",
+     "Không mở được mắt."
+    ],
+    "q": "'눈코 뜰 새 없다' nghĩa là gì?",
+    "why": "Nghĩa bóng: cực kỳ bận rộn, không có thời gian rảnh."
+   },
+   {
+    "a": 0,
+    "o": [
+     "눈코 뜰 새 없다",
+     "발이 넓다",
+     "입이 무겁다"
+    ],
+    "q": "Điền đúng: '시험 준비에 일이 많아서 ___'",
+    "why": "Bận rộn không có thời gian: 눈코 뜰 새 없다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "bận tối mắt tối mũi",
+     "bận rộn vui vẻ",
+     "bận mà nhàn"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Bận tối mắt tối mũi' tương đương 눈코 뜰 새 없다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "뜰",
+     "눈코",
+     "새"
+    ],
+    "q": "'눈코 ___ 새 없다' — điền đúng:",
+    "why": "Nguyên văn: 눈코 뜰 새 없다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi than thở mình quá bận",
+     "Khi nói mắt bị đau",
+     "Khi khen ai nhàn rỗi"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi than thở mình quá bận."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'새 학기가 시작되니까 눈코 뜰 새 없이 바빠요.'",
+     "'눈코 뜰 새 없어서 한가해요.'",
+     "'눈코 뜰 새 없어서 아무 일도 안 해요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Bận' mới đúng ý — thành ngữ nói về sự bận rộn."
+   }
+  ],
+  "rule": "Nghĩa đen: bận đến mức không có cả khoảnh khắc để mở mắt, mở mũi. Nghĩa bóng: cực kỳ bận rộn, không có thời gian rảnh — tương đương 'bận tối mắt tối mũi', 'bận tối tăm mặt mũi'. Quy tắc dùng: dùng khi than thở mình quá bận; sắc thái than thở, hài hước nhẹ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "그분은 아는 사람이 많아요. 발이 넓다고 하잖아요.",
+    "t": "'그분은 아는 사람이 많아요. 발이 넓다고 하잖아요.' (Người ấy quen biết rộng lắm. Chân rộng mà.)"
+   },
+   {
+    "s": "사장이 발이 넓어서 어디에 가도 아는 사람이 있어요.",
+    "t": "'사장이 발이 넓어서 어디에 가도 아는 사람이 있어요.' (Giám đốc quen biết rộng nên đi đâu cũng có người quen.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '발이 넓다.' (bari neolda — Chân rộng.) '그분은 아는 사람이 많아요. 발이 넓다고 하잖아요.' (Người ấy quen biết rộng lắm. Chân rộng mà.) '사장이 발이 넓어서 어디에 가도 아는 사람이 있어요.' (Giám đốc quen biết rộng nên đi đâu cũng có người quen.) Quy tắc: Nghĩa đen: bàn chân rộng, đi được nhiều nơi. Nghĩa bóng: quen biết rộng, đi đâu cũng có người quen, quan hệ rộng — tương đương 'quen biết rộng', 'chân rộng'. Quy tắc dùng: dùng khi khen/chê ai đó quan hệ rộng; sắc thái trung tính, thường khen.",
+  "level": "TOPIK II",
+  "name": "발이 넓다 — quen biết rộng",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Quen biết rộng, đi đâu cũng có người quen.",
+     "Chân to, đi nhanh.",
+     "Thích đi bộ."
+    ],
+    "q": "'발이 넓다' nghĩa là gì?",
+    "why": "Nghĩa bóng: quen biết rộng, quan hệ rộng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "발이 넓다",
+     "손이 크다",
+     "귀가 얇다"
+    ],
+    "q": "Điền đúng: '그분은 아는 사람이 많아요. ___'",
+    "why": "Quen biết rộng: 발이 넓다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "넓다",
+     "크다",
+     "길다"
+    ],
+    "q": "'발이 ___' — điền đúng:",
+    "why": "Nguyên văn: 발이 넓다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi nói ai đó quan hệ rộng",
+     "Khi nói ai chân to",
+     "Khi nói ai thích chạy"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi nói ai đó quan hệ rộng."
+   },
+   {
+    "a": 0,
+    "o": [
+     "quen biết rộng",
+     "chân dài",
+     "đi nhanh"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Quen biết rộng' tương đương 발이 넓다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'사장이 발이 넓어서 어디에 가도 아는 사람이 있어요.'",
+     "'발이 넓어서 신발을 못 사요.'",
+     "'발이 넓어서 빨리 달려요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Đi đâu cũng có người quen' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: bàn chân rộng, đi được nhiều nơi. Nghĩa bóng: quen biết rộng, đi đâu cũng có người quen, quan hệ rộng — tương đương 'quen biết rộng', 'chân rộng'. Quy tắc dùng: dùng khi khen/chê ai đó quan hệ rộng; sắc thái trung tính, thường khen."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "그분은 비밀을 잘 지켜요. 입이 무겁다고 하잖아요.",
+    "t": "'그분은 비밀을 잘 지켜요. 입이 무겁다고 하잖아요.' (Người ấy giữ bí mật rất tốt. Miệng kín mà.)"
+   },
+   {
+    "s": "민수 씨는 입이 무거워서 믿을 수 있어요.",
+    "t": "'민수 씨는 입이 무거워서 믿을 수 있어요.' (Anh Minsu miệng kín nên đáng tin.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '입이 무겁다.' (ibi mugeopda — Miệng nặng.) '그분은 비밀을 잘 지켜요. 입이 무겁다고 하잖아요.' (Người ấy giữ bí mật rất tốt. Miệng kín mà.) '민수 씨는 입이 무거워서 믿을 수 있어요.' (Anh Minsu miệng kín nên đáng tin.) Quy tắc: Nghĩa đen: cái miệng nặng, khó mở ra. Nghĩa bóng: kín miệng, giữ bí mật rất tốt, không hay nói lộ — tương đương 'kín miệng', 'miệng kín như bưng'. Quy tắc dùng: dùng khi khen ai giữ bí mật tốt; trái nghĩa: 입이 가볍다 (hay nói lộ).",
+  "level": "TOPIK II",
+  "name": "입이 무겁다 — kín miệng",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Kín miệng, giữ bí mật rất tốt.",
+     "Miệng nặng, ăn nhiều.",
+     "Nói nhiều."
+    ],
+    "q": "'입이 무겁다' nghĩa là gì?",
+    "why": "Nghĩa bóng: kín miệng, giữ bí mật rất tốt."
+   },
+   {
+    "a": 0,
+    "o": [
+     "입이 무겁다",
+     "귀가 얇다",
+     "발이 넓다"
+    ],
+    "q": "Điền đúng: '그분은 비밀을 잘 지켜요. ___'",
+    "why": "Giữ bí mật tốt: 입이 무겁다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "입이 가볍다",
+     "입이 크다",
+     "입이 작다"
+    ],
+    "q": "Trái nghĩa của '입이 무겁다' là:",
+    "why": "입이 가볍다 = hay nói lộ (trái với kín miệng)."
+   },
+   {
+    "a": 0,
+    "o": [
+     "무겁다",
+     "가볍다",
+     "크다"
+    ],
+    "q": "'입이 ___' — điền đúng:",
+    "why": "Nguyên văn: 입이 무겁다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi khen ai giữ bí mật tốt",
+     "Khi chê ai nói nhiều",
+     "Khi nói về ăn uống"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi khen ai giữ bí mật tốt."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'민수 씨는 입이 무거워서 믿을 수 있어요.'",
+     "'입이 무거워서 비밀을 다 말했어요.'",
+     "'입이 무거워서 밥을 많이 먹어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Miệng kín nên đáng tin' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: cái miệng nặng, khó mở ra. Nghĩa bóng: kín miệng, giữ bí mật rất tốt, không hay nói lộ — tương đương 'kín miệng', 'miệng kín như bưng'. Quy tắc dùng: dùng khi khen ai giữ bí mật tốt; trái nghĩa: 입이 가볍다 (hay nói lộ)."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "그분은 남의 말을 잘 믿어요. 귀가 얇다고 하잖아요.",
+    "t": "'그분은 남의 말을 잘 믿어요. 귀가 얇다고 하잖아요.' (Người ấy dễ tin lời người khác. Tai mỏng mà.)"
+   },
+   {
+    "s": "귀가 얇으면 남에게 속기 쉬워요.",
+    "t": "'귀가 얇으면 남에게 속기 쉬워요.' (Tai mỏng thì dễ bị người khác lừa.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '귀가 얇다.' (gwiga yalda — Tai mỏng.) '그분은 남의 말을 잘 믿어요. 귀가 얇다고 하잖아요.' (Người ấy dễ tin lời người khác. Tai mỏng mà.) '귀가 얇으면 남에게 속기 쉬워요.' (Tai mỏng thì dễ bị người khác lừa.) Quy tắc: Nghĩa đen: vành tai mỏng, dễ rung động. Nghĩa bóng: dễ tin lời người khác, dễ bị thuyết phục, dễ bị lừa — tương đương 'cả tin', 'nhẹ dạ'. Quy tắc dùng: dùng khi chê/cảnh báo ai dễ tin người; sắc thái chê nhẹ, cảnh báo.",
+  "level": "TOPIK II",
+  "name": "귀가 얇다 — cả tin, nhẹ dạ",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Dễ tin lời người khác, dễ bị lừa.",
+     "Tai mỏng, nghe kém.",
+     "Thích nghe nhạc."
+    ],
+    "q": "'귀가 얇다' nghĩa là gì?",
+    "why": "Nghĩa bóng: dễ tin lời người khác, dễ bị thuyết phục."
+   },
+   {
+    "a": 0,
+    "o": [
+     "귀가 얇다",
+     "입이 무겁다",
+     "손이 크다"
+    ],
+    "q": "Điền đúng: '그분은 남의 말을 잘 믿어요. ___'",
+    "why": "Dễ tin người: 귀가 얇다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "cả tin, nhẹ dạ",
+     "khôn ngoan",
+     "cứng đầu"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Cả tin, nhẹ dạ' tương đương 귀가 얇다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "얇다",
+     "두껍다",
+     "크다"
+    ],
+    "q": "'귀가 ___' — điền đúng:",
+    "why": "Nguyên văn: 귀가 얇다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi chê/cảnh báo ai dễ tin người",
+     "Khi khen ai thông minh",
+     "Khi nói về tai"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi chê/cảnh báo ai dễ tin người."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'귀가 얇으면 남에게 속기 쉬워요.'",
+     "'귀가 얇으면 아무 말도 안 믿어요.'",
+     "'귀가 얇으면 귀가 잘 들려요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Tai mỏng thì dễ bị lừa' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: vành tai mỏng, dễ rung động. Nghĩa bóng: dễ tin lời người khác, dễ bị thuyết phục, dễ bị lừa — tương đương 'cả tin', 'nhẹ dạ'. Quy tắc dùng: dùng khi chê/cảnh báo ai dễ tin người; sắc thái chê nhẹ, cảnh báo."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "그분은 손이 커서 손님을 많이 초대해요.",
+    "t": "'그분은 손이 커서 손님을 많이 초대해요.' (Người ấy tay to nên hay mời nhiều khách.)"
+   },
+   {
+    "s": "명절에는 손이 큰 할머니께서 음식을 많이 만드세요.",
+    "t": "'명절에는 손이 큰 할머니께서 음식을 많이 만드세요.' (Ngày lễ, bà tay to nên nấu rất nhiều món.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '손이 크다.' (soni keuda — Tay to.) '그분은 손이 커서 손님을 많이 초대해요.' (Người ấy tay to nên hay mời nhiều khách.) '명절에는 손이 큰 할머니께서 음식을 많이 만드세요.' (Ngày lễ, bà tay to nên nấu rất nhiều món.) Quy tắc: Nghĩa đen: bàn tay to, làm được nhiều. Nghĩa bóng: hào phóng, rộng rãi (thường về nấu ăn, chi tiêu, mời khách) — tương đương 'rộng rãi', 'hào phóng'. Quy tắc dùng: dùng khi khen ai hào phóng, nhất là nấu nhiều, mời nhiều; sắc thái khen.",
+  "level": "TOPIK II",
+  "name": "손이 크다 — hào phóng, rộng rãi",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Hào phóng, rộng rãi (nấu ăn, mời khách, chi tiêu).",
+     "Tay to, khỏe mạnh.",
+     "Thích làm việc tay chân."
+    ],
+    "q": "'손이 크다' nghĩa là gì?",
+    "why": "Nghĩa bóng: hào phóng, rộng rãi."
+   },
+   {
+    "a": 0,
+    "o": [
+     "손이 크다",
+     "발이 넓다",
+     "귀가 얇다"
+    ],
+    "q": "Điền đúng: '그분은 손님을 많이 초대해요. ___'",
+    "why": "Hay mời nhiều khách, hào phóng: 손이 크다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "hào phóng, rộng rãi",
+     "keo kiệt",
+     "tay to"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Hào phóng, rộng rãi' tương đương 손이 크다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "크다",
+     "작다",
+     "길다"
+    ],
+    "q": "'손이 ___' — điền đúng:",
+    "why": "Nguyên văn: 손이 크다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi khen ai hào phóng",
+     "Khi chê ai keo kiệt",
+     "Khi nói về tay to"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi khen ai hào phóng, nhất là nấu nhiều, mời nhiều."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'명절에는 손이 큰 할머니께서 음식을 많이 만드세요.'",
+     "'손이 커서 돈을 아껴 써요.'",
+     "'손이 커서 아무것도 안 해요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Bà tay to nên nấu nhiều món' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: bàn tay to, làm được nhiều. Nghĩa bóng: hào phóng, rộng rãi (thường về nấu ăn, chi tiêu, mời khách) — tương đương 'rộng rãi', 'hào phóng'. Quy tắc dùng: dùng khi khen ai hào phóng, nhất là nấu nhiều, mời nhiều; sắc thái khen."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "작은 선물을 사려고 배보다 배꼽이 더 크게 포장비를 썼어요.",
+    "t": "'작은 선물을 사려고 배보다 배꼽이 더 크게 포장비를 썼어요.' (Mua món quà nhỏ mà tiền gói còn nhiều hơn tiền quà — đúng là rốn to hơn bụng.)"
+   },
+   {
+    "s": "수리비보다 출장비가 더 비싸요. 배보다 배꼽이 더 크네요.",
+    "t": "'수리비보다 출장비가 더 비싸요. 배보다 배꼽이 더 크네요.' (Tiền đi lại còn đắt hơn tiền sửa. Đúng là rốn to hơn bụng.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '배보다 배꼽이 더 크다.' (baeboda baekkobi deo keuda — Rốn còn to hơn bụng.) '작은 선물을 사려고 배보다 배꼽이 더 크게 포장비를 썼어요.' (Mua món quà nhỏ mà tiền gói còn nhiều hơn tiền quà — đúng là rốn to hơn bụng.) '수리비보다 출장비가 더 비싸요. 배보다 배꼽이 더 크네요.' (Tiền đi lại còn đắt hơn tiền sửa. Đúng là rốn to hơn bụng.) Quy tắc: Nghĩa đen: cái rốn còn to hơn cả cái bụng. Nghĩa bóng: phần phụ tốn kém hơn phần chính, chi phí phụ vượt chi phí chính — tương đương 'tiền mất tật mang' (theo nghĩa phụ phí lấn át), 'rốn to hơn bụng'. Quy tắc dùng: dùng khi phàn nàn chi phí phụ quá lớn so với việc chính; sắc thái than thở, hài hước.",
+  "level": "TOPIK II",
+  "name": "배보다 배꼽이 더 크다 — rốn to hơn bụng",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Phần phụ tốn kém hơn phần chính.",
+     "Rốn to hơn bụng thật.",
+     "Bụng rất to."
+    ],
+    "q": "'배보다 배꼽이 더 크다' nghĩa là gì?",
+    "why": "Nghĩa bóng: chi phí phụ vượt chi phí chính."
+   },
+   {
+    "a": 0,
+    "o": [
+     "배보다 배꼽이 더 크다",
+     "티끌 모아 태산",
+     "시작이 반이다"
+    ],
+    "q": "Điền đúng: '수리비보다 출장비가 더 비싸요. ___'",
+    "why": "Phụ phí lớn hơn chính: 배보다 배꼽이 더 크다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "배꼽",
+     "배",
+     "크다"
+    ],
+    "q": "'배보다 ___이 더 크다' — điền đúng:",
+    "why": "Nguyên văn: 배보다 배꼽이 더 크다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi phàn nàn chi phí phụ quá lớn",
+     "Khi khen ai nấu ăn ngon",
+     "Khi nói về bụng to"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi phàn nàn chi phí phụ quá lớn so với việc chính."
+   },
+   {
+    "a": 0,
+    "o": [
+     "rốn to hơn bụng",
+     "bụng to hơn rốn",
+     "tiền nào của nấy"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Rốn to hơn bụng' tương đương 배보다 배꼽이 더 크다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'작은 선물을 사려고 배보다 배꼽이 더 크게 포장비를 썼어요.'",
+     "'배보다 배꼽이 더 커서 배가 고파요.'",
+     "'배보다 배꼽이 더 커서 운동을 해요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Tiền gói nhiều hơn tiền quà' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: cái rốn còn to hơn cả cái bụng. Nghĩa bóng: phần phụ tốn kém hơn phần chính, chi phí phụ vượt chi phí chính — tương đương 'tiền mất tật mang' (theo nghĩa phụ phí lấn át), 'rốn to hơn bụng'. Quy tắc dùng: dùng khi phàn nàn chi phí phụ quá lớn so với việc chính; sắc thái than thở, hài hước."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "이번 일은 꿩 먹고 알 먹기입니다. 일도 하고 돈도 벌었어요.",
+    "t": "'이번 일은 꿩 먹고 알 먹기입니다. 일도 하고 돈도 벌었어요.' (Việc này đúng là ăn thịt chim trĩ còn lấy cả trứng — vừa làm việc vừa kiếm tiền.)"
+   },
+   {
+    "s": "한국어 공부로 친구도 사귀고 장학금도 받았어요. 꿩 먹고 알 먹기예요.",
+    "t": "'한국어 공부로 친구도 사귀고 장학금도 받았어요. 꿩 먹고 알 먹기예요.' (Học tiếng Hàn vừa kết bạn vừa được học bổng. Đúng là một công đôi việc.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '꿩 먹고 알 먹기.' (kkwong meokgo al meokgi — Ăn thịt chim trĩ, lại ăn cả trứng.) '이번 일은 꿩 먹고 알 먹기입니다. 일도 하고 돈도 벌었어요.' (Việc này đúng là ăn thịt chim trĩ còn lấy cả trứng — vừa làm việc vừa kiếm tiền.) '한국어 공부로 친구도 사귀고 장학금도 받았어요. 꿩 먹고 알 먹기예요.' (Học tiếng Hàn vừa kết bạn vừa được học bổng. Đúng là một công đôi việc.) Quy tắc: Nghĩa đen: ăn thịt chim trĩ rồi còn lấy cả trứng của nó. Nghĩa bóng: một việc mà được hai lợi, một công đôi việc — tương đương 'một mũi tên trúng hai đích', 'một công đôi việc'. Quy tắc dùng: dùng khi khoe/mừng vì một việc đem lại hai lợi ích; sắc thái vui vẻ, hài lòng.",
+  "level": "TOPIK II",
+  "name": "꿩 먹고 알 먹기 — một công đôi việc",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Một việc mà được hai lợi.",
+     "Ăn chim trĩ rất ngon.",
+     "Trứng chim trĩ rất bổ."
+    ],
+    "q": "'꿩 먹고 알 먹기' nghĩa là gì?",
+    "why": "Nghĩa bóng: một việc mà được hai lợi."
+   },
+   {
+    "a": 0,
+    "o": [
+     "꿩 먹고 알 먹기",
+     "배보다 배꼽이 더 크다",
+     "그림의 떡"
+    ],
+    "q": "Điền đúng: '한국어 공부로 친구도 사귀고 장학금도 받았어요. ___'",
+    "why": "Một việc hai lợi: 꿩 먹고 알 먹기."
+   },
+   {
+    "a": 0,
+    "o": [
+     "một công đôi việc",
+     "một mũi tên trúng hai đích",
+     "cả hai đều đúng"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Một công đôi việc' và 'một mũi tên trúng hai đích' đều tương đương."
+   },
+   {
+    "a": 0,
+    "o": [
+     "알",
+     "꿩",
+     "먹기"
+    ],
+    "q": "'꿩 먹고 ___ 먹기' — điền đúng:",
+    "why": "Nguyên văn: 꿩 먹고 알 먹기."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi mừng vì một việc đem lại hai lợi ích",
+     "Khi nói về chim trĩ",
+     "Khi nấu ăn"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi mừng vì một việc đem lại hai lợi ích."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'이번 일은 꿩 먹고 알 먹기입니다. 일도 하고 돈도 벌었어요.'",
+     "'꿩 먹고 알 먹기라서 배가 고파요.'",
+     "'꿩 먹고 알 먹기라서 손해 봤어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Vừa làm việc vừa kiếm tiền' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: ăn thịt chim trĩ rồi còn lấy cả trứng của nó. Nghĩa bóng: một việc mà được hai lợi, một công đôi việc — tương đương 'một mũi tên trúng hai đích', 'một công đôi việc'. Quy tắc dùng: dùng khi khoe/mừng vì một việc đem lại hai lợi ích; sắc thái vui vẻ, hài lòng."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "이 문제는 누워서 떡 먹기예요. 너무 쉬워요.",
+    "t": "'이 문제는 누워서 떡 먹기예요. 너무 쉬워요.' (Bài này dễ như nằm ăn bánh vậy. Quá dễ.)"
+   },
+   {
+    "s": "그 시험은 누워서 떡 먹기였어요.",
+    "t": "'그 시험은 누워서 떡 먹기였어요.' (Kỳ thi đó dễ như nằm ăn bánh vậy.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '누워서 떡 먹기.' (nuwoseo tteok meokgi — Nằm mà ăn bánh.) '이 문제는 누워서 떡 먹기예요. 너무 쉬워요.' (Bài này dễ như nằm ăn bánh vậy. Quá dễ.) '그 시험은 누워서 떡 먹기였어요.' (Kỳ thi đó dễ như nằm ăn bánh vậy.) Quy tắc: Nghĩa đen: nằm dài ra mà ăn bánh — việc dễ nhất. Nghĩa bóng: việc cực kỳ dễ, làm không tốn chút sức nào — tương đương 'dễ như ăn kẹo', 'dễ ợt'. Quy tắc dùng: dùng khi nói việc gì đó rất dễ; sắc thái nhẹ nhàng, đôi khi khoe khoang.",
+  "level": "TOPIK I",
+  "name": "누워서 떡 먹기 — dễ như ăn kẹo",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Việc cực kỳ dễ, làm không tốn chút sức nào.",
+     "Nằm ăn bánh rất ngon.",
+     "Bánh rất dễ làm."
+    ],
+    "q": "'누워서 떡 먹기' nghĩa là gì?",
+    "why": "Nghĩa bóng: việc cực kỳ dễ, không tốn sức."
+   },
+   {
+    "a": 0,
+    "o": [
+     "누워서 떡 먹기",
+     "돌다리도 두들겨 보고 건너라",
+     "열 번 찍어 안 넘어가는 나무 없다"
+    ],
+    "q": "Điền đúng: '이 문제는 ___예요. 너무 쉬워요.'",
+    "why": "Việc rất dễ: 누워서 떡 먹기."
+   },
+   {
+    "a": 0,
+    "o": [
+     "dễ như ăn kẹo",
+     "khó như lên trời",
+     "dễ như trở bàn tay"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Dễ như ăn kẹo' tương đương 누워서 떡 먹기."
+   },
+   {
+    "a": 0,
+    "o": [
+     "떡",
+     "밥",
+     "과자"
+    ],
+    "q": "'누워서 ___ 먹기' — điền đúng:",
+    "why": "Nguyên văn: 누워서 떡 먹기."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi nói việc gì đó rất dễ",
+     "Khi nói về bánh",
+     "Khi nằm nghỉ"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi nói việc gì đó rất dễ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'이 문제는 누워서 떡 먹기예요. 너무 쉬워요.'",
+     "'누워서 떡 먹기라서 어려웠어요.'",
+     "'누워서 떡 먹기라서 밤새 공부했어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Quá dễ' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: nằm dài ra mà ăn bánh — việc dễ nhất. Nghĩa bóng: việc cực kỳ dễ, làm không tốn chút sức nào — tương đương 'dễ như ăn kẹo', 'dễ ợt'. Quy tắc dùng: dùng khi nói việc gì đó rất dễ; sắc thái nhẹ nhàng, đôi khi khoe khoang."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "계약하기 전에 돌다리도 두들겨 보고 건너라는 말처럼 꼼꼼히 확인하세요.",
+    "t": "'계약하기 전에 돌다리도 두들겨 보고 건너라는 말처럼 꼼꼼히 확인하세요.' (Trước khi ký hợp đồng, hãy kiểm tra kỹ như câu 'cầu đá cũng gõ thử rồi hãy qua'.)"
+   },
+   {
+    "s": "큰돈을 쓰기 전에는 돌다리도 두들겨 보고 건너야 해요.",
+    "t": "'큰돈을 쓰기 전에는 돌다리도 두들겨 보고 건너야 해요.' (Trước khi tiêu số tiền lớn, phải cẩn thận như gõ thử cầu đá rồi mới qua.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '돌다리도 두들겨 보고 건너라.' (doldarido dudeulgyeo bogo geonneora — Ngay cả cầu đá cũng gõ thử rồi hãy bước qua.) '계약하기 전에 돌다리도 두들겨 보고 건너라는 말처럼 꼼꼼히 확인하세요.' (Trước khi ký hợp đồng, hãy kiểm tra kỹ như câu 'cầu đá cũng gõ thử rồi hãy qua'.) '큰돈을 쓰기 전에는 돌다리도 두들겨 보고 건너야 해요.' (Trước khi tiêu số tiền lớn, phải cẩn thận như gõ thử cầu đá rồi mới qua.) Quy tắc: Nghĩa đen: ngay cả cầu bằng đá chắc chắn cũng gõ thử rồi mới bước qua. Nghĩa bóng: việc gì cũng phải cẩn thận, kiểm tra kỹ trước khi làm — tương đương 'cẩn tắc vô áy náy'. Quy tắc dùng: dùng khi khuyên ai cẩn thận, kiểm tra kỹ trước khi quyết định; sắc thái khuyên nhủ.",
+  "level": "TOPIK II",
+  "name": "돌다리도 두들겨 보고 건너라 — cẩn tắc vô áy náy",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Việc gì cũng phải cẩn thận, kiểm tra kỹ trước khi làm.",
+     "Cầu đá rất chắc chắn.",
+     "Đi qua cầu phải gõ thử."
+    ],
+    "q": "'돌다리도 두들겨 보고 건너라' nghĩa là gì?",
+    "why": "Nghĩa bóng: việc gì cũng cẩn thận, kiểm tra kỹ trước khi làm."
+   },
+   {
+    "a": 0,
+    "o": [
+     "돌다리도 두들겨 보고 건너라",
+     "누워서 떡 먹기",
+     "시작이 반이다"
+    ],
+    "q": "Điền đúng: '계약하기 전에 꼼꼼히 확인하세요. ___'",
+    "why": "Khuyên cẩn thận, kiểm tra kỹ: 돌다리도 두들겨 보고 건너라."
+   },
+   {
+    "a": 0,
+    "o": [
+     "cẩn tắc vô áy náy",
+     "cẩn thận quá hóa dở",
+     "đi đâu cũng phải cẩn thận"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Cẩn tắc vô áy náy' tương đương 돌다리도 두들겨 보고 건너라."
+   },
+   {
+    "a": 0,
+    "o": [
+     "두들겨 보고 건너라",
+     "건너고 두들겨 봐라",
+     "보고 두들겨 건너라"
+    ],
+    "q": "'돌다리도 ___' — điền đúng:",
+    "why": "Nguyên văn: 돌다리도 두들겨 보고 건너라."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi khuyên ai cẩn thận trước khi quyết định",
+     "Khi nói về cầu đá",
+     "Khi qua sông"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi khuyên ai cẩn thận, kiểm tra kỹ trước khi quyết định."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'큰돈을 쓰기 전에는 돌다리도 두들겨 보고 건너야 해요.'",
+     "'돌다리도 두들겨 보고 건너라고, 빨리 건너세요.'",
+     "'돌다리도 두들겨 보고 건너라고, 확인하지 마세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Trước khi tiêu tiền lớn phải cẩn thận' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: ngay cả cầu bằng đá chắc chắn cũng gõ thử rồi mới bước qua. Nghĩa bóng: việc gì cũng phải cẩn thận, kiểm tra kỹ trước khi làm — tương đương 'cẩn tắc vô áy náy'. Quy tắc dùng: dùng khi khuyên ai cẩn thận, kiểm tra kỹ trước khi quyết định; sắc thái khuyên nhủ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "호랑이도 제 말 하면 온다고, 그분이 지금 오시네요!",
+    "t": "'호랑이도 제 말 하면 온다고, 그분이 지금 오시네요!' (Đúng là vừa nhắc hổ, hổ đến — người ấy đang đến kìa!) (호랑이도 제 말 하면 온다: horangido je mal hamyeon onda.)"
+   },
+   {
+    "s": "방금 네 이야기했더니 네가 왔네. 호랑이도 제 말 하면 온다더니!",
+    "t": "'방금 네 이야기했더니 네가 왔네. 호랑이도 제 말 하면 온다더니!' (Vừa nhắc đến cậu thì cậu đến. Đúng là vừa nhắc hổ, hổ đến!) (호랑이도 제 말 하면 온다: horangido je mal hamyeon onda.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '호랑이도 제 말 하면 온다.' (horangido je mal hamyeon onda — Hổ cũng đến khi nghe nhắc đến tên mình.) '호랑이도 제 말 하면 온다고, 그분이 지금 오시네요!' (Đúng là vừa nhắc hổ, hổ đến — người ấy đang đến kìa!) (호랑이도 제 말 하면 온다: horangido je mal hamyeon onda.) '방금 네 이야기했더니 네가 왔네. 호랑이도 제 말 하면 온다더니!' (Vừa nhắc đến cậu thì cậu đến. Đúng là vừa nhắc hổ, hổ đến!) (호랑이도 제 말 하면 온다: horangido je mal hamyeon onda.) Quy tắc: Nghĩa đen: ngay cả con hổ cũng đến khi nghe người ta nhắc đến nó. Nghĩa bóng: vừa nhắc đến ai thì người ấy xuất hiện ngay — tương đương 'vừa nhắc Tào Tháo, Tào Tháo đến'. Quy tắc dùng: dùng khi ai đó xuất hiện đúng lúc mọi người vừa nhắc đến; sắc thái ngạc nhiên, vui vẻ.",
+  "level": "TOPIK II",
+  "name": "호랑이도 제 말 하면 온다 — vừa nhắc Tào Tháo, Tào Tháo đến",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Vừa nhắc đến ai thì người ấy xuất hiện ngay.",
+     "Hổ nghe thấy tiếng người thì đến.",
+     "Hổ rất thích nghe người ta nói."
+    ],
+    "q": "'호랑이도 제 말 하면 온다' nghĩa là gì?",
+    "why": "Nghĩa bóng: vừa nhắc đến ai thì người ấy xuất hiện ngay."
+   },
+   {
+    "a": 0,
+    "o": [
+     "호랑이도 제 말 하면 온다",
+     "발 없는 말이 천 리 간다",
+     "가는 날이 장날이다"
+    ],
+    "q": "Điền đúng: '방금 네 이야기했더니 네가 왔네. ___'",
+    "why": "Vừa nhắc thì người đến: 호랑이도 제 말 하면 온다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "vừa nhắc Tào Tháo, Tào Tháo đến",
+     "vừa nhắc hổ, hổ đến",
+     "cả hai đều đúng"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "Cả 'vừa nhắc Tào Tháo, Tào Tháo đến' và 'vừa nhắc hổ, hổ đến' đều tương đương."
+   },
+   {
+    "a": 0,
+    "o": [
+     "호랑이",
+     "제 말",
+     "온다"
+    ],
+    "q": "'___도 제 말 하면 온다' — điền đúng:",
+    "why": "Nguyên văn: 호랑이도 제 말 하면 온다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi ai đó xuất hiện đúng lúc mọi người vừa nhắc đến",
+     "Khi kể chuyện về hổ",
+     "Khi gọi hổ"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi ai đó xuất hiện đúng lúc vừa nhắc đến."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'호랑이도 제 말 하면 온다고, 그분이 지금 오시네요!'",
+     "'호랑이도 제 말 하면 온다고, 아무도 안 왔어요.'",
+     "'호랑이도 제 말 하면 온다고, 그분은 내일 와요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Người ấy đang đến kìa' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: ngay cả con hổ cũng đến khi nghe người ta nhắc đến nó. Nghĩa bóng: vừa nhắc đến ai thì người ấy xuất hiện ngay — tương đương 'vừa nhắc Tào Tháo, Tào Tháo đến'. Quy tắc dùng: dùng khi ai đó xuất hiện đúng lúc mọi người vừa nhắc đến; sắc thái ngạc nhiên, vui vẻ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "이미 엎질러진 물이에요. 후회해도 소용없어요.",
+    "t": "'이미 엎질러진 물이에요. 후회해도 소용없어요.' (Nước đã đổ rồi. Hối hận cũng vô ích.)"
+   },
+   {
+    "s": "그 일은 엎질러진 물이니까 이제 앞으로 나아가세요.",
+    "t": "'그 일은 엎질러진 물이니까 이제 앞으로 나아가세요.' (Việc đó như nước đã đổ rồi, giờ hãy tiến về phía trước.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '엎질러진 물.' (eopjilleojin mul — Nước đã đổ.) '이미 엎질러진 물이에요. 후회해도 소용없어요.' (Nước đã đổ rồi. Hối hận cũng vô ích.) '그 일은 엎질러진 물이니까 이제 앞으로 나아가세요.' (Việc đó như nước đã đổ rồi, giờ hãy tiến về phía trước.) Quy tắc: Nghĩa đen: nước đã bị đổ ra, không hốt lại được. Nghĩa bóng: việc đã rồi, không thể thay đổi, hối hận cũng vô ích — tương đương 'nước đổ khó hốt', 'việc đã rồi'. Quy tắc dùng: dùng khi an ủi ai hối hận về việc đã qua, hoặc khi nói việc không thể cứu vãn; sắc thái chấp nhận, an ủi.",
+  "level": "TOPIK II",
+  "name": "엎질러진 물 — nước đổ khó hốt",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Việc đã rồi, không thể thay đổi, hối hận cũng vô ích.",
+     "Nước đổ ra rất bẩn.",
+     "Đổ nước thì phải lau."
+    ],
+    "q": "'엎질러진 물' nghĩa là gì?",
+    "why": "Nghĩa bóng: việc đã rồi, không thể thay đổi."
+   },
+   {
+    "a": 0,
+    "o": [
+     "엎질러진 물",
+     "소 잃고 외양간 고친다",
+     "돌다리도 두들겨 보고 건너라"
+    ],
+    "q": "Điền đúng: '이미 ___이에요. 후회해도 소용없어요.'",
+    "why": "Việc đã rồi: 엎질러진 물."
+   },
+   {
+    "a": 0,
+    "o": [
+     "nước đổ khó hốt",
+     "nước đổ lá khoai",
+     "nước chảy đá mòn"
+    ],
+    "q": "Thành ngữ Việt tương đương là:",
+    "why": "'Nước đổ khó hốt' tương đương 엎질러진 물."
+   },
+   {
+    "a": 0,
+    "o": [
+     "엎질러진",
+     "엎지른",
+     "엎질러"
+    ],
+    "q": "'___ 물' — điền đúng:",
+    "why": "Nguyên văn: 엎질러진 물."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi an ủi ai hối hận về việc đã qua",
+     "Khi đổ nước",
+     "Khi lau nhà"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi an ủi ai hối hận về việc đã qua."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'그 일은 엎질러진 물이니까 이제 앞으로 나아가세요.'",
+     "'엎질러진 물이니까 다시 되돌리세요.'",
+     "'엎질러진 물이니까 물을 다시 주우세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Hãy tiến về phía trước' mới đúng ý — việc đã rồi."
+   }
+  ],
+  "rule": "Nghĩa đen: nước đã bị đổ ra, không hốt lại được. Nghĩa bóng: việc đã rồi, không thể thay đổi, hối hận cũng vô ích — tương đương 'nước đổ khó hốt', 'việc đã rồi'. Quy tắc dùng: dùng khi an ủi ai hối hận về việc đã qua, hoặc khi nói việc không thể cứu vãn; sắc thái chấp nhận, an ủi."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "한국어를 한 달 배웠다고 유창해질 수 없어요. 첫술에 배부르랴고 하잖아요.",
+    "t": "'한국어를 한 달 배웠다고 유창해질 수 없어요. 첫술에 배부르랴고 하잖아요.' (Học tiếng Hàn một tháng mà đòi trôi chảy sao được. Mới thìa đầu đã đòi no à.)"
+   },
+   {
+    "s": "첫술에 배부르랴. 천천히 꾸준히 해요.",
+    "t": "'첫술에 배부르랴. 천천히 꾸준히 해요.' (Mới thìa đầu đã đòi no à. Cứ từ từ, đều đặn thôi.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '첫술에 배부르랴.' (cheotsure baebureurya — Mới thìa đầu đã no được sao?) '한국어를 한 달 배웠다고 유창해질 수 없어요. 첫술에 배부르랴고 하잖아요.' (Học tiếng Hàn một tháng mà đòi trôi chảy sao được. Mới thìa đầu đã đòi no à.) '첫술에 배부르랴. 천천히 꾸준히 해요.' (Mới thìa đầu đã đòi no à. Cứ từ từ, đều đặn thôi.) Quy tắc: Nghĩa đen: mới ăn thìa đầu tiên làm sao đã no được. Nghĩa bóng: việc gì cũng phải từ từ, không thể thành công ngay lần đầu — tương đương 'dục tốc bất đạt', 'mới thìa đầu đã đòi no'. Quy tắc dùng: dùng khi nhắc ai đừng nóng vội, phải kiên nhẫn; sắc thái khuyên nhủ, an ủi.",
+  "level": "TOPIK II",
+  "name": "첫술에 배부르랴 — dục tốc bất đạt",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Việc gì cũng phải từ từ, không thể thành công ngay lần đầu.",
+     "Ăn thìa đầu thì chưa no.",
+     "Thìa đầu tiên rất quan trọng."
+    ],
+    "q": "'첫술에 배부르랴' nghĩa là gì?",
+    "why": "Nghĩa bóng: việc gì cũng phải từ từ, không thành công ngay lần đầu."
+   },
+   {
+    "a": 0,
+    "o": [
+     "첫술에 배부르랴",
+     "시작이 반이다",
+     "누워서 떡 먹기"
+    ],
+    "q": "Điền đúng: '한국어를 한 달 배웠다고 유창해질 수 없어요. ___'",
+    "why": "Đừng nóng vội: 첫술에 배부르랴."
+   },
+   {
+    "a": 0,
+    "o": [
+     "dục tốc bất đạt",
+     "chậm mà chắc",
+     "nóng vội thành công"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Dục tốc bất đạt' tương đương 첫술에 배부르랴."
+   },
+   {
+    "a": 0,
+    "o": [
+     "첫술에",
+     "배부르랴",
+     "첫술"
+    ],
+    "q": "'___ 배부르랴' — điền đúng:",
+    "why": "Nguyên văn: 첫술에 배부르랴."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi nhắc ai đừng nóng vội, phải kiên nhẫn",
+     "Khi ăn cơm",
+     "Khi khen ai ăn nhanh"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi nhắc ai đừng nóng vội, phải kiên nhẫn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'첫술에 배부르랴. 천천히 꾸준히 해요.'",
+     "'첫술에 배부르랴고, 빨리 서두르세요.'",
+     "'첫술에 배부르랴고, 오늘 끝내세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Cứ từ từ, đều đặn' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: mới ăn thìa đầu tiên làm sao đã no được. Nghĩa bóng: việc gì cũng phải từ từ, không thể thành công ngay lần đầu — tương đương 'dục tốc bất đạt', 'mới thìa đầu đã đòi no'. Quy tắc dùng: dùng khi nhắc ai đừng nóng vội, phải kiên nhẫn; sắc thái khuyên nhủ, an ủi."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "가난한 집에서 태어난 그분이 대통령이 됐어요. 개천에서 용 난다고 하잖아요.",
+    "t": "'가난한 집에서 태어난 그분이 대통령이 됐어요. 개천에서 용 난다고 하잖아요.' (Người ấy sinh ra trong nhà nghèo mà thành tổng thống. Đúng là rồng bay lên từ mương mà.)"
+   },
+   {
+    "s": "작은 시골 마을에서 세계적인 과학자가 나왔어요. 개천에서 용 났어요.",
+    "t": "'작은 시골 마을에서 세계적인 과학자가 나왔어요. 개천에서 용 났어요.' (Làng quê nhỏ mà sinh ra nhà khoa học tầm thế giới. Đúng là rồng bay lên từ mương.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '개천에서 용 난다.' (gaecheoneseo yong nanda — Rồng bay lên từ con mương nhỏ.) '가난한 집에서 태어난 그분이 대통령이 됐어요. 개천에서 용 난다고 하잖아요.' (Người ấy sinh ra trong nhà nghèo mà thành tổng thống. Đúng là rồng bay lên từ mương mà.) '작은 시골 마을에서 세계적인 과학자가 나왔어요. 개천에서 용 났어요.' (Làng quê nhỏ mà sinh ra nhà khoa học tầm thế giới. Đúng là rồng bay lên từ mương.) Quy tắc: Nghĩa đen: con rồng bay lên từ con mương nhỏ. Nghĩa bóng: người xuất thân nghèo hèn, quê mùa mà thành công lớn, trở thành nhân vật lớn — tương đương 'rồng bay lên từ mương', 'xuất thân hàn vi mà thành danh'. Quy tắc dùng: dùng khi khen ai xuất thân thấp mà thành công lớn; sắc thái ngưỡng mộ.",
+  "level": "TOPIK II",
+  "name": "개천에서 용 난다 — rồng bay lên từ mương",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Người xuất thân nghèo hèn mà thành công lớn.",
+     "Rồng sống ở mương.",
+     "Mương nhỏ có rồng."
+    ],
+    "q": "'개천에서 용 난다' nghĩa là gì?",
+    "why": "Nghĩa bóng: xuất thân nghèo hèn mà thành công lớn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "개천에서 용 난다",
+     "하늘의 별 따기",
+     "우물 안 개구리"
+    ],
+    "q": "Điền đúng: '가난한 집에서 태어난 그분이 대통령이 됐어요. ___'",
+    "why": "Xuất thân nghèo mà thành công lớn: 개천에서 용 난다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "용",
+     "개천",
+     "난다"
+    ],
+    "q": "'개천에서 ___ 난다' — điền đúng:",
+    "why": "Nguyên văn: 개천에서 용 난다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi khen ai xuất thân thấp mà thành công lớn",
+     "Khi nói về rồng",
+     "Khi nói về mương"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi khen ai xuất thân thấp mà thành công lớn."
+   },
+   {
+    "a": 0,
+    "o": [
+     "rồng bay lên từ mương",
+     "cá chép hóa rồng",
+     "rồng đến nhà tôm"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Rồng bay lên từ mương' tương đương 개천에서 용 난다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'작은 시골 마을에서 세계적인 과학자가 나왔어요. 개천에서 용 났어요.'",
+     "'개천에서 용 난다고, 그분은 가난해요.'",
+     "'개천에서 용 난다고, 그분은 실패했어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Làng quê nhỏ sinh ra nhà khoa học lớn' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: con rồng bay lên từ con mương nhỏ. Nghĩa bóng: người xuất thân nghèo hèn, quê mùa mà thành công lớn, trở thành nhân vật lớn — tương đương 'rồng bay lên từ mương', 'xuất thân hàn vi mà thành danh'. Quy tắc dùng: dùng khi khen ai xuất thân thấp mà thành công lớn; sắc thái ngưỡng mộ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "유명 가수가 되는 건 하늘의 별 따기예요.",
+    "t": "'유명 가수가 되는 건 하늘의 별 따기예요.' (Trở thành ca sĩ nổi tiếng khó như hái sao trên trời.)"
+   },
+   {
+    "s": "그 대학에 들어가기는 하늘의 별 따기만큼 어려워요.",
+    "t": "'그 대학에 들어가기는 하늘의 별 따기만큼 어려워요.' (Vào được trường đại học đó khó như hái sao trên trời.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '하늘의 별 따기.' (haneurui byeol ttagi — Hái sao trên trời.) '유명 가수가 되는 건 하늘의 별 따기예요.' (Trở thành ca sĩ nổi tiếng khó như hái sao trên trời.) '그 대학에 들어가기는 하늘의 별 따기만큼 어려워요.' (Vào được trường đại học đó khó như hái sao trên trời.) Quy tắc: Nghĩa đen: hái ngôi sao trên trời xuống. Nghĩa bóng: việc gần như không thể, cực kỳ khó đạt được — tương đương 'khó như hái sao trên trời', 'mò kim đáy bể'. Quy tắc dùng: dùng khi nói việc gì đó gần như không thể làm được; sắc thái than thở, nhấn mạnh độ khó.",
+  "level": "TOPIK I",
+  "name": "하늘의 별 따기 — khó như hái sao trên trời",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Việc gần như không thể, cực kỳ khó đạt được.",
+     "Hái sao trên trời rất đẹp.",
+     "Sao trên trời rất nhiều."
+    ],
+    "q": "'하늘의 별 따기' nghĩa là gì?",
+    "why": "Nghĩa bóng: việc gần như không thể, cực kỳ khó."
+   },
+   {
+    "a": 0,
+    "o": [
+     "하늘의 별 따기",
+     "누워서 떡 먹기",
+     "시작이 반이다"
+    ],
+    "q": "Điền đúng: '유명 가수가 되는 건 ___예요.'",
+    "why": "Việc gần như không thể: 하늘의 별 따기."
+   },
+   {
+    "a": 0,
+    "o": [
+     "khó như hái sao trên trời",
+     "dễ như ăn kẹo",
+     "mò kim đáy bể"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Khó như hái sao trên trời' tương đương 하늘의 별 따기."
+   },
+   {
+    "a": 0,
+    "o": [
+     "별",
+     "하늘",
+     "따기"
+    ],
+    "q": "'하늘의 ___ 따기' — điền đúng:",
+    "why": "Nguyên văn: 하늘의 별 따기."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi nói việc gì đó gần như không thể",
+     "Khi ngắm sao",
+     "Khi nói về ca sĩ"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi nói việc gì đó gần như không thể làm được."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'그 대학에 들어가기는 하늘의 별 따기만큼 어려워요.'",
+     "'하늘의 별 따기라서 쉬워요.'",
+     "'하늘의 별 따기라서 누구나 할 수 있어요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Khó như hái sao' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: hái ngôi sao trên trời xuống. Nghĩa bóng: việc gần như không thể, cực kỳ khó đạt được — tương đương 'khó như hái sao trên trời', 'mò kim đáy bể'. Quy tắc dùng: dùng khi nói việc gì đó gần như không thể làm được; sắc thái than thở, nhấn mạnh độ khó."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "열심히 노력하면 좋은 결과가 와요. 콩 심은 데 콩 나고 팥 심은 데 팥 난다고 하잖아요.",
+    "t": "'열심히 노력하면 좋은 결과가 와요. 콩 심은 데 콩 나고 팥 심은 데 팥 난다고 하잖아요.' (Nỗ lực chăm chỉ thì kết quả tốt sẽ đến. Gieo đậu thì mọc đậu, gieo đậu đỏ thì mọc đậu đỏ mà.)"
+   },
+   {
+    "s": "나쁜 짓을 하면 나쁜 결과를 얻어요. 콩 심은 데 콩 나고 팥 심은 데 팥 나요.",
+    "t": "'나쁜 짓을 하면 나쁜 결과를 얻어요. 콩 심은 데 콩 나고 팥 심은 데 팥 나요.' (Làm điều xấu thì nhận kết quả xấu. Gieo gì gặt nấy mà.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '콩 심은 데 콩 나고 팥 심은 데 팥 난다.' (kong simeun de kong nago pat simeun de pat nanda — Gieo đậu thì mọc đậu, gieo đậu đỏ thì mọc đậu đỏ.) '열심히 노력하면 좋은 결과가 와요. 콩 심은 데 콩 나고 팥 심은 데 팥 난다고 하잖아요.' (Nỗ lực chăm chỉ thì kết quả tốt sẽ đến. Gieo đậu thì mọc đậu, gieo đậu đỏ thì mọc đậu đỏ mà.) '나쁜 짓을 하면 나쁜 결과를 얻어요. 콩 심은 데 콩 나고 팥 심은 데 팥 나요.' (Làm điều xấu thì nhận kết quả xấu. Gieo gì gặt nấy mà.) Quy tắc: Nghĩa đen: trồng đậu thì mọc đậu, trồng đậu đỏ thì mọc đậu đỏ. Nghĩa bóng: làm gì thì nhận nấy, gieo nhân nào gặt quả nấy — tương đương 'gieo gì gặt nấy', 'gieo gió gặt bão'. Quy tắc dùng: dùng khi nói về nhân quả, khuyên ai làm điều tốt; sắc thái răn dạy nhẹ.",
+  "level": "TOPIK II",
+  "name": "콩 심은 데 콩 나고 팥 심은 데 팥 난다 — gieo gì gặt nấy",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Làm gì thì nhận nấy, gieo nhân nào gặt quả nấy.",
+     "Trồng đậu thì tốt hơn trồng đậu đỏ.",
+     "Đậu rất dễ trồng."
+    ],
+    "q": "'콩 심은 데 콩 나고 팥 심은 데 팥 난다' nghĩa là gì?",
+    "why": "Nghĩa bóng: làm gì thì nhận nấy, gieo nhân nào gặt quả nấy."
+   },
+   {
+    "a": 0,
+    "o": [
+     "콩 심은 데 콩 나고 팥 심은 데 팥 난다",
+     "개천에서 용 난다",
+     "하늘의 별 따기"
+    ],
+    "q": "Điền đúng: '열심히 노력하면 좋은 결과가 와요. ___'",
+    "why": "Nỗ lực thì kết quả tốt: gieo gì gặt nấy."
+   },
+   {
+    "a": 0,
+    "o": [
+     "gieo gì gặt nấy",
+     "gieo gió gặt bão",
+     "cả hai đều đúng"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "Cả 'gieo gì gặt nấy' và 'gieo gió gặt bão' đều tương đương."
+   },
+   {
+    "a": 0,
+    "o": [
+     "콩",
+     "팥",
+     "심은 데"
+    ],
+    "q": "'___ 심은 데 콩 나고 팥 심은 데 팥 난다' — điền đúng:",
+    "why": "Nguyên văn: 콩 심은 데 콩 나고 팥 심은 데 팥 난다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi nói về nhân quả, khuyên ai làm điều tốt",
+     "Khi trồng đậu",
+     "Khi nấu ăn"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi nói về nhân quả, khuyên ai làm điều tốt."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'나쁜 짓을 하면 나쁜 결과를 얻어요. 콩 심은 데 콩 나고 팥 심은 데 팥 나요.'",
+     "'콩 심은 데 콩 나고 팥 심은 데 팥 난다고, 팥을 심으면 콩이 나요.'",
+     "'콩 심은 데 콩 나고 팥 심은 데 팥 난다고, 아무것도 안 심으면 콩이 나요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Làm xấu thì nhận xấu' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: trồng đậu thì mọc đậu, trồng đậu đỏ thì mọc đậu đỏ. Nghĩa bóng: làm gì thì nhận nấy, gieo nhân nào gặt quả nấy — tương đương 'gieo gì gặt nấy', 'gieo gió gặt bão'. Quy tắc dùng: dùng khi nói về nhân quả, khuyên ai làm điều tốt; sắc thái răn dạy nhẹ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "회의에서 의견이 너무 많으면 사공이 많으면 배가 산으로 간다고 하잖아요.",
+    "t": "'회의에서 의견이 너무 많으면 사공이 많으면 배가 산으로 간다고 하잖아요.' (Họp mà ý kiến quá nhiều thì đúng là lắm thầy nhiều ma, thuyền lên núi mất.)"
+   },
+   {
+    "s": "결정은 한 사람이 해야 해요. 사공이 많으면 배가 산으로 가요.",
+    "t": "'결정은 한 사람이 해야 해요. 사공이 많으면 배가 산으로 가요.' (Quyết định phải do một người đưa ra. Lắm người lái thì thuyền lên núi mất.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '사공이 많으면 배가 산으로 간다.' (sagongi maneumyeon baega saneuro ganda — Người lái đò nhiều thì thuyền đi lên núi.) '회의에서 의견이 너무 많으면 사공이 많으면 배가 산으로 간다고 하잖아요.' (Họp mà ý kiến quá nhiều thì đúng là lắm thầy nhiều ma, thuyền lên núi mất.) '결정은 한 사람이 해야 해요. 사공이 많으면 배가 산으로 가요.' (Quyết định phải do một người đưa ra. Lắm người lái thì thuyền lên núi mất.) Quy tắc: Nghĩa đen: người chèo thuyền nhiều quá thì thuyền lại đi lên núi (thay vì đi trên sông). Nghĩa bóng: nhiều người cùng chỉ đạo thì việc rối tung, hỏng việc — tương đương 'lắm thầy nhiều ma', 'chín người mười ý'. Quy tắc dùng: dùng khi phê bình tình trạng nhiều người cùng chỉ đạo, không ai quyết; sắc thái phê bình, hài hước.",
+  "level": "TOPIK II",
+  "name": "사공이 많으면 배가 산으로 간다 — lắm thầy nhiều ma",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Nhiều người cùng chỉ đạo thì việc rối tung, hỏng việc.",
+     "Thuyền đi lên núi rất nhanh.",
+     "Lái đò nhiều thì thuyền đi nhanh."
+    ],
+    "q": "'사공이 많으면 배가 산으로 간다' nghĩa là gì?",
+    "why": "Nghĩa bóng: nhiều người cùng chỉ đạo thì việc rối tung."
+   },
+   {
+    "a": 0,
+    "o": [
+     "사공이 많으면 배가 산으로 간다",
+     "백지장도 맞들면 낫다",
+     "티끌 모아 태산"
+    ],
+    "q": "Điền đúng: '회의에서 의견이 너무 많으면 ___'",
+    "why": "Nhiều người cùng chỉ đạo: 사공이 많으면 배가 산으로 간다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "lắm thầy nhiều ma",
+     "chín người mười ý",
+     "cả hai đều đúng"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "Cả 'lắm thầy nhiều ma' và 'chín người mười ý' đều tương đương."
+   },
+   {
+    "a": 0,
+    "o": [
+     "사공",
+     "배",
+     "산"
+    ],
+    "q": "'___이 많으면 배가 산으로 간다' — điền đúng:",
+    "why": "Nguyên văn: 사공이 많으면 배가 산으로 간다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi phê bình tình trạng nhiều người cùng chỉ đạo",
+     "Khi đi thuyền",
+     "Khi leo núi"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi phê bình tình trạng nhiều người cùng chỉ đạo."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'결정은 한 사람이 해야 해요. 사공이 많으면 배가 산으로 가요.'",
+     "'사공이 많으면 배가 산으로 간다고, 모두 지휘하세요.'",
+     "'사공이 많으면 배가 산으로 간다고, 빨리 가요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Quyết định phải do một người đưa ra' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: người chèo thuyền nhiều quá thì thuyền lại đi lên núi (thay vì đi trên sông). Nghĩa bóng: nhiều người cùng chỉ đạo thì việc rối tung, hỏng việc — tương đương 'lắm thầy nhiều ma', 'chín người mười ý'. Quy tắc dùng: dùng khi phê bình tình trạng nhiều người cùng chỉ đạo, không ai quyết; sắc thái phê bình, hài hước."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "서울역이 어디인지 몰라요? 아는 길도 물어가라고 하잖아요.",
+    "t": "'서울역이 어디인지 몰라요? 아는 길도 물어가라고 하잖아요.' (Không biết ga Seoul ở đâu à? Đường biết rồi cũng cứ hỏi mà đi.)"
+   },
+   {
+    "s": "자신 있어도 아는 길도 물어가세요. 길을 잘못 들 수 있어요.",
+    "t": "'자신 있어도 아는 길도 물어가세요. 길을 잘못 들 수 있어요.' (Tự tin mấy cũng cứ hỏi đường mà đi. Có thể đi nhầm đường đấy.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '아는 길도 물어가라.' (aneun gildo mureogara — Đường biết rồi cũng cứ hỏi mà đi.) '서울역이 어디인지 몰라요? 아는 길도 물어가라고 하잖아요.' (Không biết ga Seoul ở đâu à? Đường biết rồi cũng cứ hỏi mà đi.) '자신 있어도 아는 길도 물어가세요. 길을 잘못 들 수 있어요.' (Tự tin mấy cũng cứ hỏi đường mà đi. Có thể đi nhầm đường đấy.) Quy tắc: Nghĩa đen: ngay cả con đường mình biết cũng cứ hỏi rồi hãy đi. Nghĩa bóng: việc gì tưởng đã biết rõ cũng nên hỏi lại, kiểm tra lại cho chắc — tương đương 'biết rồi cũng cứ hỏi', 'cẩn thận vẫn hơn'. Quy tắc dùng: dùng khi khuyên ai đừng chủ quan, nên xác nhận lại; sắc thái khuyên nhủ.",
+  "level": "TOPIK II",
+  "name": "아는 길도 물어가라 — biết rồi cũng cứ hỏi",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Việc tưởng đã biết rõ cũng nên hỏi lại, kiểm tra lại cho chắc.",
+     "Đường biết rồi thì không cần hỏi.",
+     "Hỏi đường rất mất thời gian."
+    ],
+    "q": "'아는 길도 물어가라' nghĩa là gì?",
+    "why": "Nghĩa bóng: việc tưởng biết rõ cũng nên hỏi lại cho chắc."
+   },
+   {
+    "a": 0,
+    "o": [
+     "아는 길도 물어가라",
+     "돌다리도 두들겨 보고 건너라",
+     "첫술에 배부르랴"
+    ],
+    "q": "Điền đúng: '서울역이 어디인지 몰라요? ___'",
+    "why": "Đường biết rồi cũng hỏi: 아는 길도 물어가라."
+   },
+   {
+    "a": 0,
+    "o": [
+     "물어가라",
+     "가라",
+     "물어봐라"
+    ],
+    "q": "'아는 길도 ___' — điền đúng:",
+    "why": "Nguyên văn: 아는 길도 물어가라."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi khuyên ai đừng chủ quan, nên xác nhận lại",
+     "Khi hỏi đường",
+     "Khi đi lạc"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi khuyên ai đừng chủ quan, nên xác nhận lại."
+   },
+   {
+    "a": 0,
+    "o": [
+     "biết rồi cũng cứ hỏi",
+     "đường nào cũng phải hỏi",
+     "đi đâu cũng hỏi đường"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Biết rồi cũng cứ hỏi' tương đương 아는 길도 물어가라."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'자신 있어도 아는 길도 물어가세요. 길을 잘못 들 수 있어요.'",
+     "'아는 길도 물어가라고, 혼자 가세요.'",
+     "'아는 길도 물어가라고, 묻지 마세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Tự tin mấy cũng cứ hỏi đường' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: ngay cả con đường mình biết cũng cứ hỏi rồi hãy đi. Nghĩa bóng: việc gì tưởng đã biết rõ cũng nên hỏi lại, kiểm tra lại cho chắc — tương đương 'biết rồi cũng cứ hỏi', 'cẩn thận vẫn hơn'. Quy tắc dùng: dùng khi khuyên ai đừng chủ quan, nên xác nhận lại; sắc thái khuyên nhủ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "포기하지 마세요. 열 번 찍어 안 넘어가는 나무 없다고 하잖아요.",
+    "t": "'포기하지 마세요. 열 번 찍어 안 넘어가는 나무 없다고 하잖아요.' (Đừng bỏ cuộc. Không có cây nào chặt mười lần mà không đổ mà.)"
+   },
+   {
+    "s": "계속 도전하면 돼요. 열 번 찍어 안 넘어가는 나무 없어요.",
+    "t": "'계속 도전하면 돼요. 열 번 찍어 안 넘어가는 나무 없어요.' (Cứ tiếp tục thử thì sẽ được. Không có cây nào chặt mười lần mà không đổ.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '열 번 찍어 안 넘어가는 나무 없다.' (yeol beon jjigeo an neomeoganeun namu eopda — Không có cây nào chặt mười lần mà không đổ.) '포기하지 마세요. 열 번 찍어 안 넘어가는 나무 없다고 하잖아요.' (Đừng bỏ cuộc. Không có cây nào chặt mười lần mà không đổ mà.) '계속 도전하면 돼요. 열 번 찍어 안 넘어가는 나무 없어요.' (Cứ tiếp tục thử thì sẽ được. Không có cây nào chặt mười lần mà không đổ.) Quy tắc: Nghĩa đen: không có cái cây nào mà chặt mười lần vẫn không đổ. Nghĩa bóng: kiên trì làm đi làm lại thì việc khó đến mấy cũng thành công — tương đương 'có công mài sắt, có ngày nên kim', 'kiên trì thì thành công'. Quy tắc dùng: dùng để động viên ai đang nản chí, khuyên kiên trì; sắc thái khích lệ mạnh.",
+  "level": "TOPIK II",
+  "name": "열 번 찍어 안 넘어가는 나무 없다 — có công mài sắt",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Kiên trì làm đi làm lại thì việc khó đến mấy cũng thành công.",
+     "Chặt cây mười lần rất mệt.",
+     "Cây nào cũng đổ sau mười lần chặt."
+    ],
+    "q": "'열 번 찍어 안 넘어가는 나무 없다' nghĩa là gì?",
+    "why": "Nghĩa bóng: kiên trì thì việc khó đến mấy cũng thành công."
+   },
+   {
+    "a": 0,
+    "o": [
+     "열 번 찍어 안 넘어가는 나무 없다",
+     "첫술에 배부르랴",
+     "누워서 떡 먹기"
+    ],
+    "q": "Điền đúng: '포기하지 마세요. ___'",
+    "why": "Động viên kiên trì: 열 번 찍어 안 넘어가는 나무 없다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "có công mài sắt, có ngày nên kim",
+     "chặt cây mười lần",
+     "kiên trì là vàng"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Có công mài sắt, có ngày nên kim' tương đương 열 번 찍어 안 넘어가는 나무 없다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "나무",
+     "열 번",
+     "찍어"
+    ],
+    "q": "'열 번 찍어 안 넘어가는 ___ 없다' — điền đúng:",
+    "why": "Nguyên văn: 열 번 찍어 안 넘어가는 나무 없다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi động viên ai đang nản chí",
+     "Khi chặt cây",
+     "Khi nói về cây"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng để động viên ai đang nản chí, khuyên kiên trì."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'계속 도전하면 돼요. 열 번 찍어 안 넘어가는 나무 없어요.'",
+     "'열 번 찍어 안 넘어가는 나무 없다고, 포기하세요.'",
+     "'열 번 찍어 안 넘어가는 나무 없다고, 한 번만 하세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Cứ tiếp tục thử thì sẽ được' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: không có cái cây nào mà chặt mười lần vẫn không đổ. Nghĩa bóng: kiên trì làm đi làm lại thì việc khó đến mấy cũng thành công — tương đương 'có công mài sắt, có ngày nên kim', 'kiên trì thì thành công'. Quy tắc dùng: dùng để động viên ai đang nản chí, khuyên kiên trì; sắc thái khích lệ mạnh."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "한국어 공부를 시작했어요. 시작이 반이라고 하잖아요.",
+    "t": "'한국어 공부를 시작했어요. 시작이 반이라고 하잖아요.' (Tôi đã bắt đầu học tiếng Hàn. Bắt đầu là đã được một nửa mà.)"
+   },
+   {
+    "s": "일단 시작하세요. 시작이 반이에요.",
+    "t": "'일단 시작하세요. 시작이 반이에요.' (Cứ bắt đầu đi đã. Bắt đầu là đã được một nửa.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '시작이 반이다.' (sijagi banida — Bắt đầu là đã được một nửa.) '한국어 공부를 시작했어요. 시작이 반이라고 하잖아요.' (Tôi đã bắt đầu học tiếng Hàn. Bắt đầu là đã được một nửa mà.) '일단 시작하세요. 시작이 반이에요.' (Cứ bắt đầu đi đã. Bắt đầu là đã được một nửa.) Quy tắc: Nghĩa đen: bắt đầu việc gì thì đã hoàn thành một nửa. Nghĩa bóng: bước khởi đầu là quan trọng nhất và khó nhất; chỉ cần bắt đầu thì đã thành công một nửa — tương đương 'vạn sự khởi đầu nan', 'bắt đầu là đã được một nửa'. Quy tắc dùng: dùng để động viên ai bắt đầu việc gì đó; sắc thái khích lệ.",
+  "level": "TOPIK I",
+  "name": "시작이 반이다 — vạn sự khởi đầu nan",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Bước khởi đầu là quan trọng nhất; chỉ cần bắt đầu thì đã thành công một nửa.",
+     "Bắt đầu thì được một nửa tiền.",
+     "Bắt đầu rất khó."
+    ],
+    "q": "'시작이 반이다' nghĩa là gì?",
+    "why": "Nghĩa bóng: bước khởi đầu quan trọng nhất, bắt đầu là thành công một nửa."
+   },
+   {
+    "a": 0,
+    "o": [
+     "시작이 반이다",
+     "첫술에 배부르랴",
+     "고생 끝에 낙이 온다"
+    ],
+    "q": "Điền đúng: '한국어 공부를 시작했어요. ___'",
+    "why": "Động viên bắt đầu: 시작이 반이다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "vạn sự khởi đầu nan",
+     "đầu xuôi đuôi lọt",
+     "cả hai đều đúng"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "Cả 'vạn sự khởi đầu nan' và 'đầu xuôi đuôi lọt' đều gần nghĩa."
+   },
+   {
+    "a": 0,
+    "o": [
+     "반",
+     "시작",
+     "이다"
+    ],
+    "q": "'시작이 ___이다' — điền đúng:",
+    "why": "Nguyên văn: 시작이 반이다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi động viên ai bắt đầu việc gì đó",
+     "Khi kết thúc việc gì đó",
+     "Khi nói về một nửa"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng để động viên ai bắt đầu việc gì đó."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'일단 시작하세요. 시작이 반이에요.'",
+     "'시작이 반이라고, 시작하지 마세요.'",
+     "'시작이 반이라고, 끝까지 미루세요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Cứ bắt đầu đi đã' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: bắt đầu việc gì thì đã hoàn thành một nửa. Nghĩa bóng: bước khởi đầu là quan trọng nhất và khó nhất; chỉ cần bắt đầu thì đã thành công một nửa — tương đương 'vạn sự khởi đầu nan', 'bắt đầu là đã được một nửa'. Quy tắc dùng: dùng để động viên ai bắt đầu việc gì đó; sắc thái khích lệ."
+ },
+ {
+  "cat": "idiom",
+  "examples": [
+   {
+    "s": "선생님 앞에서는 찬물도 위아래가 있다고 조심해야 해요.",
+    "t": "'선생님 앞에서는 찬물도 위아래가 있다고 조심해야 해요.' (Trước mặt thầy thì ngay cả nước lạnh cũng có trên dưới, phải cẩn thận.)"
+   },
+   {
+    "s": "어른 앞에서는 찬물도 위아래가 있어요. 예의를 지켜야 해요.",
+    "t": "'어른 앞에서는 찬물도 위아래가 있어요. 예의를 지켜야 해요.' (Trước mặt người lớn thì ngay cả nước lạnh cũng có trên dưới. Phải giữ lễ phép.)"
+   }
+  ],
+  "explain": "Ví dụ trước: '찬물도 위아래가 있다.' (chanmuldo wiaraega itda — Ngay cả nước lạnh cũng có trên có dưới.) '선생님 앞에서는 찬물도 위아래가 있다고 조심해야 해요.' (Trước mặt thầy thì ngay cả nước lạnh cũng có trên dưới, phải cẩn thận.) '어른 앞에서는 찬물도 위아래가 있어요. 예의를 지켜야 해요.' (Trước mặt người lớn thì ngay cả nước lạnh cũng có trên dưới. Phải giữ lễ phép.) Quy tắc: Nghĩa đen: ngay cả nước lạnh (vô tri) cũng có trên có dưới. Nghĩa bóng: ở đâu cũng có thứ bậc, lễ nghĩa — ngay cả việc nhỏ nhất cũng phải giữ lễ phép với người trên — tương đương 'đi đâu cũng phải giữ lễ', 'trên dưới phân minh'. Quy tắc dùng: dùng khi nhắc ai giữ lễ phép với người trên, kể cả việc nhỏ; sắc thái răn dạy nhẹ.",
+  "level": "TOPIK II",
+  "name": "찬물도 위아래가 있다 — trên dưới phân minh",
+  "quiz": [
+   {
+    "a": 0,
+    "o": [
+     "Ở đâu cũng có thứ bậc, lễ nghĩa — việc nhỏ cũng phải giữ lễ với người trên.",
+     "Nước lạnh có trên có dưới.",
+     "Uống nước lạnh phải cẩn thận."
+    ],
+    "q": "'찬물도 위아래가 있다' nghĩa là gì?",
+    "why": "Nghĩa bóng: ở đâu cũng có thứ bậc, lễ nghĩa."
+   },
+   {
+    "a": 0,
+    "o": [
+     "찬물도 위아래가 있다",
+     "호랑이도 제 말 하면 온다",
+     "발 없는 말이 천 리 간다"
+    ],
+    "q": "Điền đúng: '선생님 앞에서는 ___ 조심해야 해요.'",
+    "why": "Trước mặt thầy phải giữ lễ: 찬물도 위아래가 있다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "위아래",
+     "찬물",
+     "있다"
+    ],
+    "q": "'찬물도 ___가 있다' — điền đúng:",
+    "why": "Nguyên văn: 찬물도 위아래가 있다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "Khi nhắc ai giữ lễ phép với người trên",
+     "Khi uống nước lạnh",
+     "Khi nói về nước"
+    ],
+    "q": "Câu này thường dùng khi nào?",
+    "why": "Dùng khi nhắc ai giữ lễ phép với người trên, kể cả việc nhỏ."
+   },
+   {
+    "a": 0,
+    "o": [
+     "trên dưới phân minh",
+     "uống nước nhớ nguồn",
+     "đi đâu cũng phải giữ lễ"
+    ],
+    "q": "Cách diễn đạt Việt tương đương là:",
+    "why": "'Trên dưới phân minh' tương đương 찬물도 위아래가 있다."
+   },
+   {
+    "a": 0,
+    "o": [
+     "'어른 앞에서는 찬물도 위아래가 있어요. 예의를 지켜야 해요.'",
+     "'찬물도 위아래가 있어서 마음대로 해도 돼요.'",
+     "'찬물도 위아래가 있어서 반말을 써요.'"
+    ],
+    "q": "Chọn câu dùng ĐÚNG thành ngữ:",
+    "why": "'Phải giữ lễ phép' mới đúng ý thành ngữ."
+   }
+  ],
+  "rule": "Nghĩa đen: ngay cả nước lạnh (vô tri) cũng có trên có dưới. Nghĩa bóng: ở đâu cũng có thứ bậc, lễ nghĩa — ngay cả việc nhỏ nhất cũng phải giữ lễ phép với người trên — tương đương 'đi đâu cũng phải giữ lễ', 'trên dưới phân minh'. Quy tắc dùng: dùng khi nhắc ai giữ lễ phép với người trên, kể cả việc nhỏ; sắc thái răn dạy nhẹ."
+ }
+];
+TP_GRAMMAR.push.apply(TP_GRAMMAR, TP_GRAMMAR_EXPAND_V195);
 
 TP_LISTEN.push.apply(TP_LISTEN, TP_LISTEN_EXPAND16_L6);
 TP_READ.push.apply(TP_READ, TP_READ_EXPAND16_L6);
