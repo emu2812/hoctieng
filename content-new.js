@@ -80810,3 +80810,34 @@ P.forEach(function(r){var c=TC_VOCAB[r[0]].cards[r[1]];c.use=r[2];c.err=r[3];});
 ];
 P.forEach(function(r){var c=TP_VOCAB[r[0]].cards[r[1]];c.col=r[2];c.use=r[3];c.err=r[4];});
 })();
+(function(){/* v201: 26 the tu vung HSK1 chang 1 (11 chu v192 + 15 chu v194) — bo sung the con thieu, khong sua the cu */
+var N=[
+[18,{han:"跟",pinyin:"gēn",vi:"và; cùng với",col:"跟我一起",ex:"他跟我一起学习汉语。",exv:"Anh ấy cùng tôi học tiếng Trung。"}],
+[18,{han:"都",pinyin:"dōu",vi:"đều",col:"我们都喜欢汉语",ex:"我们都喜欢汉语。",exv:"Chúng tôi đều thích tiếng Trung。"}],
+[18,{han:"话",pinyin:"huà",vi:"lời nói",col:"说话",ex:"他喜欢说话。",exv:"Anh ấy thích nói chuyện。"}],
+[21,{han:"英",pinyin:"yīng",vi:"Anh (nước Anh; tiếng Anh)",col:"英语",ex:"他会说英语，我也会。",exv:"Anh ấy biết nói tiếng Anh, tôi cũng biết。"}],
+[27,{han:"几",pinyin:"jǐ",vi:"mấy; bao nhiêu",col:"现在几点？",ex:"现在几点？",exv:"Bây giờ mấy giờ?"}],
+[27,{han:"半",pinyin:"bàn",vi:"rưỡi; một nửa",col:"三点半",ex:"现在三点半。",exv:"Bây giờ ba giờ rưỡi。"}],
+[29,{han:"杯",pinyin:"bēi",vi:"cốc; ly",col:"一杯咖啡",ex:"我要一杯咖啡。",exv:"Tôi muốn một cốc cà phê。"}],
+[30,{han:"谁",pinyin:"shéi",vi:"ai",col:"他是谁？",ex:"他是谁？",exv:"Anh ấy là ai?"}],
+[37,{han:"想",pinyin:"xiǎng",vi:"muốn; nghĩ",col:"想喝水",ex:"我想喝水。",exv:"Tôi muốn uống nước。"}],
+[37,{han:"怎",pinyin:"zěn",vi:"như thế nào (trong 怎么)",col:"怎么去学校",ex:"你怎么去学校？",exv:"Bạn đi học bằng cách nào?"}],
+[37,{han:"非",pinyin:"fēi",vi:"rất (trong 非常)",col:"非常冷",ex:"今天非常冷。",exv:"Hôm nay rất lạnh。"}],
+[37,{han:"常",pinyin:"cháng",vi:"thường; (trong 非常: rất)",col:"非常喜欢",ex:"我非常喜欢汉语。",exv:"Tôi rất thích tiếng Trung。"}],
+[37,{han:"特",pinyin:"tè",vi:"đặc biệt (trong 特别)",col:"特别喜欢",ex:"我特别喜欢中国菜。",exv:"Tôi đặc biệt thích món Trung Quốc。"}],
+[37,{han:"挺",pinyin:"tǐng",vi:"khá; cũng (khẩu ngữ)",col:"挺冷",ex:"今天挺冷的。",exv:"Hôm nay khá lạnh。"}],
+[38,{han:"别",pinyin:"bié",vi:"đừng",col:"别说话",ex:"别说话，他正在睡觉呢。",exv:"Đừng nói chuyện, anh ấy đang ngủ。"}],
+[38,{han:"忙",pinyin:"máng",vi:"bận",col:"很忙",ex:"你今天忙不忙？",exv:"Hôm nay bạn có bận không?"}],
+[38,{han:"能",pinyin:"néng",vi:"có thể",col:"你能帮我吗",ex:"你能帮我一下吗？",exv:"Bạn giúp tôi một chút được không?"}],
+[38,{han:"游",pinyin:"yóu",vi:"bơi (trong 游泳)",col:"游泳",ex:"我能游泳。",exv:"Tôi bơi được。"}],
+[38,{han:"泳",pinyin:"yǒng",vi:"bơi (trong 游泳)",col:"游泳",ex:"我会游泳。",exv:"Tôi biết bơi。"}],
+[38,{han:"帮",pinyin:"bāng",vi:"giúp",col:"帮我",ex:"他帮我学习汉语。",exv:"Anh ấy giúp tôi học tiếng Trung。"}],
+[38,{han:"事",pinyin:"shì",vi:"việc; chuyện",col:"这件事",ex:"这件事能做吗？",exv:"Việc này làm được không?"}],
+[38,{han:"正",pinyin:"zhèng",vi:"đang (trong 正在)",col:"正在看书",ex:"他正在看书呢。",exv:"Anh ấy đang đọc sách。"}],
+[39,{han:"东",pinyin:"dōng",vi:"đông; đồ đạc (trong 东西)",col:"买东西",ex:"我和妈妈去买东西。",exv:"Tôi và mẹ đi mua đồ。"}],
+[39,{han:"西",pinyin:"xī",vi:"tây; đồ đạc (trong 东西)",col:"买东西",ex:"你去买东西吗？",exv:"Bạn đi mua đồ à?"}],
+[229,{han:"件",pinyin:"jiàn",vi:"cái; món (lượng từ)",col:"一件衣服",ex:"这件衣服挺好看的。",exv:"Bộ quần áo này khá đẹp。"}],
+[229,{han:"服",pinyin:"fú",vi:"quần áo (trong 衣服)",col:"衣服",ex:"这件衣服很漂亮。",exv:"Bộ quần áo này rất đẹp。"}]
+];
+N.forEach(function(r){CONTENT.zhVocab[r[0]].cards.push(r[1]);});
+})();
