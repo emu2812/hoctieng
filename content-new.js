@@ -81163,4 +81163,41 @@ N.forEach(function(r){CONTENT.zhVocab[r[0]].cards.push(r[1]);});
   rotSets(typeof TP_READ !== "undefined" ? TP_READ : null);
   rotSets(typeof TC_LISTEN !== "undefined" ? TC_LISTEN : null);
   rotSets(typeof TP_LISTEN !== "undefined" ? TP_LISTEN : null);
+  /* DOT v206 16/11/2026 — V204-15: xoay readingMock (thi thu IELTS Doc).
+     Ly do: 280 cau co 58,2% dap an dung o A; 215 cau 4 lua chon co 63,3% o A,
+     0% o D (SC 24/24 o A; MC 94/140 o A) — nguoi hoc doan A la trung.
+     Chi xoay cau 4 lua chon dang MC (MC/MSEND/SC/MATCH); KHONG xoay TFNG/YNNG
+     (lua chon True/False/Not Given, Yes/No/Not Given co thu tu chuan cua IELTS).
+     Cung luat skipQ nhu tren (trung lua chon, meta, so xep thu tu) + xoay CA 2
+     truong o va options cung mot shift (bai hoc V204-6b); bam FNV-1a cua
+     (cau hoi + dap an dung) nen on dinh moi lan nap. */
+  function skipMockQ(q) {
+    var opts = (q && (q.o || q.options)) || null;
+    if (!q || !opts || opts.length !== 4) return true;
+    if (typeof q.a !== "number" || q.a < 0 || q.a >= opts.length) return true;
+    if (q.type && ["MC", "MSEND", "SC", "MATCH"].indexOf(q.type) < 0) return true;
+    var seen = {}, nums = true, i, j, n;
+    for (i = 0; i < opts.length; i++) {
+      n = norm(opts[i]);
+      if (seen[n]) return true; seen[n] = 1;
+      for (j = 0; j < META.length; j++) if (n.indexOf(META[j]) >= 0) return true;
+      if (!/^\d+([.,]\d+)?$/.test(n)) nums = false;
+    }
+    if (nums) {
+      var vals = opts.map(function (x) { return parseFloat(String(x).replace(",", ".")); });
+      var asc = true, desc = true;
+      for (i = 1; i < vals.length; i++) { if (vals[i] < vals[i - 1]) asc = false; if (vals[i] > vals[i - 1]) desc = false; }
+      if (asc || desc) return true;
+    }
+    return false;
+  }
+  if (typeof CONTENT !== "undefined" && CONTENT) {
+    (CONTENT.readingMock || []).forEach(function (r) {
+      (r.questions || []).forEach(function (q) {
+        if (skipMockQ(q)) return;
+        var opts = q.o || q.options;
+        rot(q, fnv((q.q || "") + "\u0000" + String(opts[q.a])));
+      });
+    });
+  }
 })();
