@@ -3239,7 +3239,7 @@ function updateBottomBar() {
     btn.className = "btn btn-primary";
     btn.textContent = "Bài tiếp theo →";
     btn.onclick = function () { var t = zhSessionTarget(); backFromLesson(); if (t.kind === "zhLesson") openLesson(t.lesson); };
-  } else if (curLesson.type === "entryCheck" && curLesson.placedTarget) {
+  } else if ((curLesson.type === "entryCheck" || curLesson.type === "entryFour") && curLesson.placedTarget) {
     var pt = curLesson.placedTarget;
     btn.className = "btn btn-primary";
     btn.textContent = "Học tiếp: " + pt.title + " →";
@@ -4427,7 +4427,7 @@ function u7PositionText() {
      "<Loai bai> · Chuong <X> · done/total buoc da xong" (khong tien to
      "Vi tri:", khong ten tab o che do xem tab — ten tab da co o H1 +
      chip dang chon; chi con tien do thi hien, khong thi an dong). */
-  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Chẩn đoán phát âm đầu vào", pronDiag: "Chẩn đoán phát âm", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra trình độ đầu vào (trắc nghiệm)", entryPlace: "Xếp lớp đầu vào", tcEntry: "Kiểm tra trình độ TOEIC", tpEntry: "Kiểm tra trình độ TOPIK", dictation: "Nghe chép chính tả", reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", weakPronDrill: "Luyện âm yếu", earDisc: "Nghe-chọn-phiên-âm", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
+  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Chẩn đoán phát âm đầu vào", pronDiag: "Chẩn đoán phát âm", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra trình độ đầu vào (trắc nghiệm)", entryFour: "Kiểm tra đầu vào 4 kỹ năng", entryPlace: "Xếp lớp đầu vào", tcEntry: "Kiểm tra trình độ TOEIC", tpEntry: "Kiểm tra trình độ TOPIK", dictation: "Nghe chép chính tả", reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", weakPronDrill: "Luyện âm yếu", earDisc: "Nghe-chọn-phiên-âm", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
   if (typeof curLesson !== "undefined" && curLesson) {
     if (curLesson.step) {
       var ls = learningSteps(); var li = -1;
@@ -6127,10 +6127,10 @@ function viewPractice(app) {
     + '<button class="step-row" data-practice="gram2"><span>Ngữ pháp: Tôi tên là... (My name is...)</span><span class="st">→</span></button>'
     + '<button class="step-row" data-practice="pron1"><span>Phát âm · 44 âm</span><span class="st">→</span></button>'
     + '<button class="step-row" data-practice="test"><span>Bài kiểm tra cuối chương 1</span><span class="st">→</span></button></details>';
-  /* --- Kiem tra dau vao (trial + zeroTest) --- */
-  var entryNext = doneK("entryZero") ? (doneK("entryTrial") ? null : "Kiểm tra trình độ đầu vào — Band 5,0–7,5+") : "Kiểm tra trình độ đầu vào — Band 0";
-  html += '<details class="card" id="practiceGrpEntry"><summary><b>📝 Kiểm tra trình độ đầu vào (trắc nghiệm)' + (entryNext ? ' · tiếp theo: ' + entryNext : ' · đã xong hết') + '</b></summary>'
-   
+  /* --- Kiem tra dau vao (trial + zeroTest + entryFour 4 ky nang v209) --- */
+  var entryNext = doneK("entryFour") ? (doneK("entryZero") ? (doneK("entryTrial") ? null : "Kiểm tra trình độ đầu vào — Band 5,0–7,5+") : "Kiểm tra trình độ đầu vào — Band 0") : "Kiểm tra đầu vào 4 kỹ năng — Nghe · Đọc · Nói · Viết";
+  html += '<details class="card" id="practiceGrpEntry"><summary><b>📝 Kiểm tra trình độ đầu vào' + (entryNext ? ' · tiếp theo: ' + entryNext : ' · đã xong hết') + '</b></summary>'
+    + '<button class="step-row" data-entrycheck="four"><span>Kiểm tra đầu vào 4 kỹ năng — Nghe · Đọc · Nói · Viết (~15 phút, khuyên dùng)</span><span class="st">' + (doneK("entryFour") ? '✓' : '→') + '</span></button>'
     + '<button class="step-row" data-entrycheck="zero"><span>Kiểm tra trình độ đầu vào — Band 0 (6 câu)</span><span class="st">' + (doneK("entryZero") ? '✓' : '→') + '</span></button>'
     + '<button class="step-row" data-entrycheck="trial"><span>Kiểm tra trình độ đầu vào — Band 5,0–7,5+ (16 câu)</span><span class="st">' + (doneK("entryTrial") ? '✓' : '→') + '</span></button></details>';
   html += videoNewBlockHTML("en");
@@ -6328,7 +6328,7 @@ function viewPractice(app) {
   wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   $$("[data-vocabquick]").forEach(function (b) { b.onclick = function () { openLesson({ type: "vocabQuick", setIdx: +b.dataset.vocabquick }); }; });
   $$("[data-gramnew]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "grammar", gIdx: +b.dataset.gramnew }); }; });
-  $$("[data-entrycheck]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "entryCheck", part: b.dataset.entrycheck }); }; });
+  $$("[data-entrycheck]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; if (b.dataset.entrycheck === "four") openLesson({ type: "entryFour" }); else openLesson({ type: "entryCheck", part: b.dataset.entrycheck }); }; });
   var pnPr = $("#u7PlayNowPractice"); if (pnPr) pnPr.onclick = function () { openLesson({ type: "u7trial" }); };
   (function () { var jobs = [{ id: "u7PlayCardPractice", html: enPracticeEntHTML, wire: enPracticeEntWire }]; if (videoNewEntHTML["en"]) jobs.push({ id: "videoNewEnten", html: function () { return videoNewEntHTML["en"]; }, wire: null }); practiceEntLazy("en", jobs); })(); /* v95: EN nay co video giai tri moi (en-e1..e4) — chen luoi nhu ZH/TC/TP, truoc day EN chua co video giai tri nen khong co job nay */
 }
@@ -10973,6 +10973,291 @@ function bkPracticeHTML() {
   return html;
 }
 
+/* v209: Kiem tra dau vao 4 ky nang (EN) — Nghe, Doc, Noi, Viet; ~15 phut.
+   Kho Nghe/Doc lay theo CHI SO tu kho da co (khong them bai moi):
+   Nghe = LP[74] (Band 0, 3 cau MC dau) + LP[63] (Band 5,0, 3 cau MC dau);
+   Doc = CONTENT.reading[29] (Band 4,5, 5 cau). Noi = 3 cau tu soan (cau lenh).
+   Viet = 1 de tu soan + bai mau tu soan + tu danh gia 4 tieu chi chinh thuc.
+   Thang xep RIENG cho bai xep lop (khong dung rawToBand — bai ngan + tron do
+   kho nen diem tho khong phan anh dung trinh do): ti le dung >=0,99 -> 6,0;
+   >=0,8 -> 5,5; >=0,6 -> 5,0; >=0,4 -> 4,0; >=0,2 -> 2,5; >0 -> 2,0; 0 -> 0.
+   Bai nay xep toi da toi Band 6,5 — cao hon thi lam thi thu de do chinh xac.
+   Cham Noi chi bang tang 1 SR (nghe ra dung tu hay khong — QT-09). */
+var ENTRY4_LISTEN = [{ lp: 74, take: 3 }, { lp: 63, take: 3 }];
+var ENTRY4_READ = { rd: 29 };
+var ENTRY4_SPEAK = [
+  { en: "Hello, my name is Lan. I am a student.", vi: "Xin chào, tên tôi là Lan. Tôi là học sinh." },
+  { en: "I live in Hanoi with my family. We eat dinner together every evening.", vi: "Tôi sống ở Hà Nội với gia đình. Chúng tôi ăn tối cùng nhau mỗi buổi tối." },
+  { en: "I usually ride my bike to school because it is fast and good for my health.", vi: "Tôi thường đạp xe đi học vì xe đạp nhanh và tốt cho sức khỏe." }
+];
+var ENTRY4_WRITE = {
+  prompt: "Viết 30–50 từ bằng tiếng Anh giới thiệu về bản thân và một ngày bình thường của bạn.",
+  model: "Hello, my name is Lan. I am 16 years old and I live in Hanoi with my family. I get up at 6 o'clock and ride my bike to school. After school, I do my homework and help my mother cook dinner. I read English books before bed.",
+  criteria: [
+    { key: "task", name: "Trả lời đúng yêu cầu đề", lv: { 5: "Trả lời được yêu cầu chính, có ý lạc đề hoặc thiếu ý nhỏ.", 6: "Trả lời đủ yêu cầu, các ý chính đều có, có thể còn chung chung.", 7: "Trả lời đầy đủ, ý rõ và đúng trọng tâm." } },
+    { key: "coh", name: "Mạch lạc và liên kết", lv: { 5: "Có trình tự ý nhưng còn rời rạc, ít từ nối.", 6: "Ý sắp xếp mạch lạc, có từ nối cơ bản (and, but, because...).", 7: "Ý nối liền mạch, từ nối đa dạng và đúng chỗ." } },
+    { key: "lex", name: "Từ vựng", lv: { 5: "Dùng được từ cơ bản đúng nghĩa, còn lặp từ và lỗi chọn từ.", 6: "Vốn từ đủ rộng, có vài cụm từ/cách nói tự nhiên.", 7: "Từ dùng đa dạng, chính xác, có cụm từ tự nhiên." } },
+    { key: "gram", name: "Ngữ pháp và câu", lv: { 5: "Câu đơn là chính, có lỗi ngữ pháp nhưng vẫn hiểu được.", 6: "Có câu đơn + câu ghép, lỗi ít, không gây khó hiểu.", 7: "Câu đa dạng (ghép, phức), lỗi rất ít." } }
+  ]
+};
+function entryFourRatioBand(r) {
+  r = +r || 0;
+  if (r >= 0.99) return "Band 6,0";
+  if (r >= 0.8) return "Band 5,5";
+  if (r >= 0.6) return "Band 5,0";
+  if (r >= 0.4) return "Band 4,0";
+  if (r >= 0.2) return "Band 2,5";
+  if (r > 0) return "Band 2,0";
+  return "Band 0";
+}
+function entryFourSpeakMatch(transcript, ref) {
+  var norm = function (x) { return String(x || "").toLowerCase().replace(/[^a-z\s']/g, " ").replace(/\s+/g, " ").trim(); };
+  var rw = norm(ref).split(" ").filter(function (w) { return !!w; });
+  var tw = norm(transcript).split(" ").filter(function (w) { return !!w; });
+  var hit = 0, seen = {};
+  rw.forEach(function (wd) { if (!seen[wd] && tw.indexOf(wd) >= 0) { seen[wd] = 1; hit++; } });
+  return { hit: hit, total: rw.length, ratio: rw.length ? hit / rw.length : 0 };
+}
+function entryFourWriteBand(levels) {
+  if (!levels || !levels.length) return null;
+  var avg = 0; levels.forEach(function (v) { avg += +v || 0; }); avg /= levels.length;
+  if (avg >= 6.5) return "Band 6,5";
+  if (avg >= 6) return "Band 6,0";
+  if (avg >= 5.5) return "Band 5,5";
+  return "Band 5,0";
+}
+function entryFourOverallBand(perSkill) {
+  var nums = [];
+  ["listen", "read", "speak", "write"].forEach(function (k) {
+    var b = perSkill && perSkill[k];
+    if (b && typeof bandNumOf === "function") { var n = bandNumOf(b); if (n != null && !isNaN(n)) nums.push(n); }
+  });
+  if (!nums.length) return "Band 0";
+  /* Diem tuyet doi (Nghe/Doc/Noi deu 6,0 + Viet 6,5) -> dat tran 6,5. */
+  if (nums.length >= 2 && perSkill && perSkill.write && nums.every(function (n) { return n >= 6; })) return "Band 6,5";
+  var avg = 0; nums.forEach(function (n) { avg += n; }); avg /= nums.length;
+  var bestBand = "Band 0", bestD = 1e9;
+  (RB_CHAPTER_MAP || []).forEach(function (c) {
+    var n = bandNumOf(c.band);
+    if (n == null || isNaN(n) || n > 6.5) return;
+    var d = Math.abs(avg - n);
+    if (d < bestD - 1e-9 || (Math.abs(d - bestD) < 1e-9 && n > bandNumOf(bestBand))) { bestBand = c.band; bestD = d; }
+  });
+  return bestBand;
+}
+function e4WordCount(s) {
+  return String(s || "").trim() ? String(s || "").trim().split(/\s+/).filter(function (w) { return !!w; }).length : 0;
+}
+function e4ResetQuiz(l) {
+  l.qi = 0; l.clRetry = false; l.clRetryQs = null; l.fixStep = null; l.streak = 0; l.encourage = ""; l.encourageShown = false; l.wrongs = 0; l.revealed = false; l.hint = ""; l.answered = false; l.hintTier = {}; l.selfReliance = {}; l.onDone = null;
+  quizDispClear(); runWrong = []; runFirstTry = {}; lessonStart = Date.now();
+}
+function e4PhaseChips(cur) {
+  var names = ["Nghe", "Đọc", "Nói", "Viết", "Kết quả"];
+  return '<div class="row">' + names.map(function (n, i) { return '<span class="chip' + (i === cur ? ' cur' : '') + '">' + (i + 1) + '. ' + n + '</span>'; }).join("") + '</div>';
+}
+function renderEntryFour(app, l) {
+  if (!l.e4) l.e4 = { phase: 0, li: 0, quiz: false, listened: {}, listen: { c: 0, n: 0 }, readQuiz: false, read: null, speak: { res: [null, null, null], skipped: false }, write: null, saved: false, result: null };
+  var e4 = l.e4;
+  l.title = "Kiểm tra đầu vào 4 kỹ năng";
+  l.skillKey = "entryFour";
+  if (e4.phase === 0) {
+    var prev = state.entryFour || null;
+    var prevHTML = prev ? '<div class="sumcard"><p><b>Lần trước bạn làm:</b> ' + esc(prev.band) + ' (ước lượng) · Nghe ' + esc(prev.listen.band) + ' · Đọc ' + esc(prev.read.band) + ' · Nói ' + (prev.speak ? esc(prev.speak.band) : 'chưa đo được') + ' · Viết ' + (prev.write ? esc(prev.write.band) : 'chưa đo được') + '.</p></div>' : '';
+    app.innerHTML = skillHead("Kiểm tra đầu vào 4 kỹ năng", "Nghe · Đọc · Nói · Viết — khoảng 15 phút · Không cần đăng nhập") + e4PhaseChips(-1)
+      + '<div class="qblock"><p>Bài này đo cả 4 kỹ năng để xếp đúng chặng bắt đầu cho bạn. Làm xong, web cho bạn biết trình độ từng kỹ năng và chặng bắt đầu.</p>'
+      + '<p><b>1. Nghe</b> — 6 câu (2 đoạn ngắn) · <b>2. Đọc</b> — 5 câu (1 bài ngắn) · <b>3. Nói</b> — đọc to 3 câu (cần mic; không có mic thì bỏ qua, không tính trượt) · <b>4. Viết</b> — 1 đoạn ngắn 30–50 từ + tự đánh giá theo bảng tiêu chí.</p>'
+      + '<p class="mut">Band ở đây là band ước lượng, chỉ để tham khảo — không phải điểm thi thật. Thoát giữa chừng thì kết quả lần này không được lưu.</p>'
+      + '<div class="row"><button class="btn btn-primary" id="e4Start">Bắt đầu kiểm tra →</button></div></div>' + prevHTML;
+    wireBack();
+    $("#e4Start").onclick = function () { e4.phase = 1; render(); };
+    return;
+  }
+  if (e4.phase === 1) {
+    var sel = ENTRY4_LISTEN[e4.li];
+    var item = CONTENT.listeningPlus[sel.lp];
+    var qs = (item.questions || []).slice(0, sel.take);
+    l.sub = "Nghe · Đoạn " + (e4.li + 1) + "/" + ENTRY4_LISTEN.length + " · " + item.topic + " (" + item.band + ")";
+    if (!e4.quiz) {
+      app.innerHTML = skillHead(l.title + " — Nghe", l.sub) + e4PhaseChips(0) + listenVoiceNoteHTML()
+        + '<div class="qblock"><div class="row"><button class="btn" id="e4LisPlay">🔊 Nghe đoạn</button><button class="btn btn-primary" id="e4LisStart"' + (e4.listened[e4.li] ? "" : " disabled") + '>Làm ' + qs.length + ' câu hỏi</button></div><p class="mut">Nghe kỹ rồi hãy làm bài — nghe lại bao nhiêu lần cũng được.</p></div><div id="e4QuizSlot"></div>';
+      wireBack();
+      $("#e4LisPlay").onclick = function () { speak(item.text); e4.listened[e4.li] = true; var st = $("#e4LisStart"); if (st) st.disabled = false; };
+      $("#e4LisStart").onclick = function () { if (!e4.listened[e4.li]) { toast("Hãy bấm 🔊 Nghe trước đã."); return; } e4.quiz = true; e4ResetQuiz(l); render(); };
+      return;
+    }
+    l.title = "Kiểm tra đầu vào 4 kỹ năng — Nghe";
+    app.innerHTML = '<div class="row" style="margin-bottom:10px"><button class="btn btn-primary" id="e4LisAgain">🔊 Nghe lại đoạn</button></div>' + listenVoiceNoteHTML() + '<div id="e4QuizSlot"></div>';
+    $("#e4LisAgain").onclick = function () { speak(item.text); };
+    l.onDone = function (res) {
+      l.onDone = null; e4.listen.c += res.firstN; e4.listen.n += res.total; e4.quiz = false; e4.li++;
+      if (e4.li >= ENTRY4_LISTEN.length) e4.phase = 2;
+      render();
+    };
+    renderQuizEngine($("#e4QuizSlot"), l, qs, "phase", "entryFour:listen" + e4.li);
+    return;
+  }
+  if (e4.phase === 2) {
+    var rd = CONTENT.reading[ENTRY4_READ.rd];
+    l.sub = "Đọc · " + rd.title + " (" + rd.level + ") · " + rd.questions.length + " câu hỏi";
+    if (!e4.readQuiz) {
+      app.innerHTML = skillHead(l.title + " — Đọc", l.sub) + e4PhaseChips(1)
+        + '<div class="qblock">' + paraHTML(rd.text) + '</div>'
+        + '<details style="margin-bottom:10px"><summary><b>Bản dịch tiếng Việt (mở để đối chiếu sau khi đọc)</b></summary><div class="qblock">' + esc(rd.translation || "") + '</div></details>'
+        + '<div class="qblock"><button class="btn btn-primary" id="e4ReadStart">Làm ' + rd.questions.length + ' câu hỏi →</button></div><div id="e4QuizSlot"></div>';
+      wireBack();
+      $("#e4ReadStart").onclick = function () { e4.readQuiz = true; e4ResetQuiz(l); render(); };
+      return;
+    }
+    l.title = "Kiểm tra đầu vào 4 kỹ năng — Đọc";
+    app.innerHTML = '<div class="qblock">' + paraHTML(rd.text) + '</div><div id="e4QuizSlot"></div>';
+    l.onDone = function (res) {
+      l.onDone = null; e4.read = { c: res.firstN, n: res.total }; e4.phase = 3; render();
+    };
+    renderQuizEngine($("#e4QuizSlot"), l, rd.questions, "phase", "entryFour:read");
+    return;
+  }
+  if (e4.phase === 3) {
+    var sp = e4.speak;
+    var si = 0; while (si < ENTRY4_SPEAK.length && sp.res[si]) si++;
+    if (sp.skipped || si >= ENTRY4_SPEAK.length) {
+      var doneN = sp.res.filter(function (r) { return !!r; }).length;
+      app.innerHTML = skillHead(l.title + " — Nói", "Đã xong phần Nói") + e4PhaseChips(2)
+        + '<div class="qblock"><p>' + (sp.skipped ? 'Bạn đã bỏ qua phần Nói — phần này ghi là "chưa đo được", không tính vào trình độ chung.' : 'Bạn đã đọc xong ' + doneN + '/' + ENTRY4_SPEAK.length + ' câu.') + '</p><div class="row"><button class="btn btn-primary" id="e4SpkToWrite">Sang phần Viết →</button></div></div>';
+      wireBack();
+      $("#e4SpkToWrite").onclick = function () { e4.phase = 4; render(); };
+      return;
+    }
+    var s = ENTRY4_SPEAK[si];
+    var res = sp.res[si];
+    var srOK = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+    app.innerHTML = skillHead(l.title + " — Nói", "Câu " + (si + 1) + "/" + ENTRY4_SPEAK.length + " · Đọc to câu mẫu") + e4PhaseChips(2)
+      + '<p class="mut">Máy chỉ kiểm tra có nghe ra đúng từ không (chấm tầng 1, chưa phải chấm từng âm). Không có mic thì bỏ qua phần này — không tính là trượt.</p>'
+      + '<div class="qblock"><p><b>' + esc(s.en) + '</b></p><p class="mut">' + esc(s.vi) + '</p><div class="row"><button class="btn" id="e4SpkPlay">🔊 Nghe mẫu</button><button class="btn btn-primary" id="e4SpkRec"' + (srOK ? '' : ' disabled') + '>🎤 Đọc to câu này</button></div>'
+      + (srOK ? '' : '<p class="mut">Trình duyệt này không nhận giọng nói thành chữ — hãy bỏ qua phần Nói.</p>')
+      + (res ? '<p><b>Máy nghe được:</b> ' + esc(res.transcript) + '</p><p>Đúng <b>' + res.hit + '/' + res.total + ' từ</b> (' + Math.round(res.ratio * 100) + '%).</p><div class="row"><button class="btn" id="e4SpkAgain">Đọc lại</button><button class="btn btn-primary" id="e4SpkNext">' + (si + 1 >= ENTRY4_SPEAK.length ? 'Sang phần Viết →' : 'Câu tiếp theo →') + '</button></div>' : '')
+      + '</div><div class="qblock"><button class="btn" id="e4SpkSkip">Bỏ qua phần Nói →</button></div>';
+    wireBack();
+    $("#e4SpkPlay").onclick = function () { speak(s.en); };
+    var rb2 = $("#e4SpkRec");
+    if (rb2) rb2.onclick = function () {
+      try {
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SR) { toast("Trình duyệt này không nhận giọng nói thành chữ."); return; }
+        var r = new SR(); r.lang = "en-US"; r.interimResults = false; r.maxAlternatives = 1;
+        r.onresult = function (ev) { try { var t = ev.results[0][0].transcript || ""; var m = entryFourSpeakMatch(t, s.en); sp.res[si] = { transcript: t, hit: m.hit, total: m.total, ratio: m.ratio }; } catch (e) {} render(); };
+        r.onerror = function () { toast("Không nghe được — hãy thử lại hoặc bỏ qua phần Nói."); };
+        r.start();
+      } catch (e) { toast("Không mở được mic — hãy thử lại hoặc bỏ qua phần Nói."); }
+    };
+    var ag = $("#e4SpkAgain"); if (ag) ag.onclick = function () { sp.res[si] = null; render(); };
+    var nx = $("#e4SpkNext"); if (nx) nx.onclick = function () { if (si + 1 >= ENTRY4_SPEAK.length) { e4.phase = 4; } render(); };
+    $("#e4SpkSkip").onclick = function () { sp.skipped = true; e4.phase = 4; render(); };
+    return;
+  }
+  if (e4.phase === 4) {
+    var wr = e4.write || (e4.write = { draft: "", saved: false, self: {}, ai: null, aiBusy: false, aiErr: "" });
+    if (!wr.saved) {
+      app.innerHTML = skillHead(l.title + " — Viết", "Viết 30–50 từ bằng tiếng Anh") + e4PhaseChips(3)
+        + '<div class="qblock"><p><b>Đề:</b> ' + esc(ENTRY4_WRITE.prompt) + '</p><textarea id="e4WriteArea" rows="6" style="width:100%">' + esc(wr.draft) + '</textarea><p class="mut"><span id="e4WriteCount">0 từ</span> · Gợi ý 30–50 từ.</p><div class="row"><button class="btn btn-primary" id="e4WriteSave">Lưu bản nháp →</button></div></div>';
+      wireBack();
+      var ta = $("#e4WriteArea");
+      var upd = function () { var c = $("#e4WriteCount"); if (c) c.textContent = e4WordCount(ta.value) + " từ"; };
+      ta.oninput = upd; upd();
+      $("#e4WriteSave").onclick = function () { wr.draft = ta.value; if (!wr.draft.trim()) { toast("Hãy viết vài câu trước đã."); return; } wr.saved = true; render(); };
+      return;
+    }
+    var words = e4WordCount(wr.draft);
+    var tooShort = words < 10;
+    var crit = ENTRY4_WRITE.criteria;
+    var selfDone = !tooShort && crit.every(function (c) { return wr.self[c.key] != null; });
+    var selfBand = selfDone ? entryFourWriteBand(crit.map(function (c) { return wr.self[c.key]; })) : null;
+    var aiParsed = (wr.ai && wr.ai.parsed && wr.ai.parsed.full) ? wr.ai.parsed : null;
+    var aiBand = aiParsed ? aiParsed.overall : null;
+    var html = skillHead(l.title + " — Viết", "Đối chiếu bài mẫu rồi tự đánh giá 4 tiêu chí") + e4PhaseChips(3)
+      + '<div class="qblock"><h3>Đối chiếu 2 cột — bản của bạn và bài mẫu</h3><div class="row"><div style="flex:1"><b>Bản của bạn (' + words + ' từ)</b><p>' + esc(wr.draft) + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(ENTRY4_WRITE.model) + '</p></div></div></div>';
+    if (tooShort) {
+      html += '<div class="qblock"><p><b>Bài viết quá ngắn (' + words + ' từ) nên chưa đủ để chấm.</b> Phần Viết sẽ ghi là "chưa đo được" và không tính vào trình độ chung.</p></div>';
+    } else {
+      html += '<div class="qblock"><h3>Tự đánh giá 4 tiêu chí</h3><p class="mut">Đọc bài mẫu rồi tự chấm từng tiêu chí — chọn mức ĐÚNG NHẤT với bài của bạn.</p>';
+      crit.forEach(function (c) {
+        html += '<p><b>' + esc(c.name) + '</b></p><div class="row">' + [5, 6, 7].map(function (lv) { return '<button class="btn' + (wr.self[c.key] === lv ? ' btn-primary' : '') + '" data-e4crit="' + c.key + ':' + lv + '">Band ' + lv + ' — ' + esc(c.lv[lv]) + '</button>'; }).join("") + '</div>';
+      });
+      html += (selfBand ? '<p><b>Tự đánh giá chung: ' + esc(selfBand) + '</b></p>' : '') + '</div>';
+      if (typeof msIsVip === "function" && msIsVip()) {
+        html += '<div class="qblock"><h3>AI chấm 4 tiêu chí (VIP)</h3>'
+          + (wr.aiBusy ? '<p>Đang chấm...</p>' : '')
+          + (wr.aiErr ? '<p>' + esc(wr.aiErr) + '</p>' : '')
+          + (aiParsed ? aiParsed.criteria.map(function (cc) { return '<p><b>' + esc(cc.name) + ': Band ' + fmtBandComma(cc.band) + '</b> — ' + esc(cc.note) + '</p>'; }).join("") + '<p><b>Band AI chấm (Máy ước lượng): ' + fmtBandComma(aiParsed.overall) + '</b></p>' : '<p class="mut">Bấm để AI chấm bản nháp theo 4 tiêu chí — band AI (nếu có) sẽ dùng thay cho tự đánh giá.</p>')
+          + '<div class="row"><button class="btn btn-primary" id="e4WriteAi"' + (wr.aiBusy ? ' disabled' : '') + '>' + (wr.aiBusy ? 'Đang chấm...' : 'AI chấm 4 tiêu chí') + '</button></div></div>';
+      } else {
+        html += '<p class="mut">AI chấm chỉ mở cho VIP — bạn đang tự đánh giá theo bảng tiêu chí trên.</p>';
+      }
+    }
+    html += '<div class="qblock"><div class="row"><button class="btn" id="e4WriteEdit">Sửa lại bản nháp</button><button class="btn btn-primary" id="e4WriteDone"' + ((tooShort || selfDone || aiBand) ? '' : ' disabled') + '>Xem kết quả →</button></div>' + ((tooShort || selfDone || aiBand) ? '' : '<p class="mut">Hãy chấm đủ 4 tiêu chí ở trên để xem kết quả.</p>') + '</div>';
+    app.innerHTML = html; wireBack();
+    $$("[data-e4crit]").forEach(function (b) { b.onclick = function () { var p = b.dataset.e4crit.split(":"); wr.self[p[0]] = +p[1]; render(); }; });
+    $("#e4WriteEdit").onclick = function () { wr.saved = false; render(); };
+    var ab = $("#e4WriteAi");
+    if (ab) ab.onclick = function () {
+      wr.aiBusy = true; wr.aiErr = ""; render();
+      callAiTutorWriting("Kiểm tra đầu vào 4 kỹ năng", ENTRY4_WRITE.prompt, wr.draft, "Kiểm tra đầu vào").then(function (res) {
+        wr.ai = { parsed: parseAiDetailReply(res.reply, "writing") }; wr.aiBusy = false; render();
+      }, function (err) { wr.aiErr = (err && err.message) || String(err); wr.aiBusy = false; render(); });
+    };
+    $("#e4WriteDone").onclick = function () {
+      if (tooShort) { wr.band = null; }
+      else if (aiBand) { wr.band = "Band " + String(aiBand).replace(".", ","); }
+      else if (selfBand) { wr.band = selfBand; }
+      else { toast("Hãy chấm đủ 4 tiêu chí ở trên để xem kết quả."); return; }
+      e4.phase = 5; render();
+    };
+    return;
+  }
+  /* phase 5: ket qua — tinh 1 lan roi luu vao state (cung shape voi bai cu). */
+  if (!e4.saved) {
+    var lb = entryFourRatioBand(e4.listen.c / e4.listen.n);
+    var rdb = entryFourRatioBand(e4.read.c / e4.read.n);
+    var spkRatio = null;
+    if (!e4.speak.skipped) {
+      var rs = e4.speak.res.filter(function (r) { return !!r; });
+      if (rs.length) { var s = 0; rs.forEach(function (r) { s += r.ratio; }); spkRatio = s / rs.length; }
+    }
+    var spkBand = spkRatio == null ? null : entryFourRatioBand(spkRatio);
+    var wb = (e4.write && e4.write.band) || null;
+    var overall = entryFourOverallBand({ listen: lb, read: rdb, speak: spkBand, write: wb });
+    e4.result = {
+      listen: { c: e4.listen.c, n: e4.listen.n, band: lb },
+      read: { c: e4.read.c, n: e4.read.n, band: rdb },
+      speak: spkRatio == null ? null : { ratio: Math.round(spkRatio * 100) / 100, band: spkBand },
+      write: wb ? { band: wb, ai: !!(e4.write && e4.write.ai && e4.write.ai.parsed && e4.write.ai.parsed.full) } : null,
+      band: overall
+    };
+    state.entryPlaced = { band: overall, part: "four", score: e4.listen.c + e4.read.c, total: e4.listen.n + e4.read.n, at: Date.now() };
+    state.entryFour = { listen: e4.result.listen, read: e4.result.read, speak: e4.result.speak, write: e4.result.write, band: overall, at: Date.now() };
+    var was = !!(state.skillDone && state.skillDone["entryFour"]);
+    if (!state.skillDone) state.skillDone = {};
+    state.skillDone["entryFour"] = true; if (!was) logStepDoneIfRb("entryFour");
+    awardXp(was ? 5 : 10); saveState(); logLessonMinutes(l);
+    l.placedTarget = placedTarget();
+    e4.saved = true;
+  }
+  var r = e4.result;
+  var ciP = -1;
+  RB_CHAPTER_MAP.forEach(function (c, i) { if (c.band === r.band) ciP = i; });
+  var bandLabel = ciP >= 0 ? ("Chương " + (ciP + 1) + ": " + RB_CHAPTER_MAP[ciP].title) : r.band;
+  app.innerHTML = skillHead("Kết quả kiểm tra đầu vào 4 kỹ năng", "Band ước lượng, chỉ để tham khảo — không phải điểm thi thật.") + e4PhaseChips(4)
+    + '<div class="qblock"><p><b>Nghe:</b> ' + r.listen.c + '/' + r.listen.n + ' câu đúng → ' + esc(r.listen.band) + ' (ước lượng)</p>'
+    + '<p><b>Đọc:</b> ' + r.read.c + '/' + r.read.n + ' câu đúng → ' + esc(r.read.band) + ' (ước lượng)</p>'
+    + '<p><b>Nói:</b> ' + (r.speak ? ('Máy nghe được ' + Math.round(r.speak.ratio * 100) + '% số từ → ' + esc(r.speak.band) + ' (ước lượng)') : 'chưa đo được (bạn đã bỏ qua phần Nói)') + '</p>'
+    + '<p><b>Viết:</b> ' + (r.write ? ((r.write.ai ? 'AI chấm (VIP): ' : 'Tự đánh giá: ') + esc(r.write.band)) : 'chưa đo được (bài quá ngắn)') + '</p></div>'
+    + '<div class="sumcard"><p><b>Trình độ chung (ước lượng): ' + esc(r.band) + ' — Bạn bắt đầu ở ' + esc(bandLabel) + '.</b></p>'
+    + '<p class="mut">Bài kiểm tra này xếp tối đa tới Band 6,5. Nếu bạn cao hơn, hãy làm thi thử để đo chính xác hơn. Từ giờ màn chính chỉ còn nút “Học tiếp” tới đúng bước đó.</p></div>'
+    + '<div class="qblock"><div class="row"><button class="btn" id="e4Redo">Làm lại bài kiểm tra</button><button class="btn" id="e4Home">Về màn chính</button></div></div>';
+  wireBack();
+  $("#e4Redo").onclick = function () { l.e4 = null; l.placedTarget = null; render(); };
+  $("#e4Home").onclick = function () { backFromLesson(); };
+}
 function renderEntryCheck(app, l) {
   if (l.part === "zero") { l.title = "Kiểm tra trình độ đầu vào — Band 0"; l.skillKey = "entryZero"; renderQuizEngine(app, l, CONTENT.zeroTest, "skill", "entryZero"); }
   else { l.title = "Kiểm tra trình độ đầu vào — Band 5,0–7,5+"; l.skillKey = "entryTrial"; renderQuizEngine(app, l, CONTENT.trial, "skill", "entryTrial"); }
@@ -10980,12 +11265,13 @@ function renderEntryCheck(app, l) {
 
 function renderEntryPlace(app, l) {
   var html = skillHead("Kiểm tra trình độ đầu vào (trắc nghiệm)", "Làm xong, web tự xếp chặng bắt đầu cho bạn.");
-  html += '<div class="qblock"><p class="mut">Chọn 1 trong 2 bài. Làm xong là có chặng bắt đầu ngay, không cần chọn thêm.</p>'
-    + '<button class="step-row" data-entrypart="zero"><span><b>Kiểm tra Band 0</b><br><span class="mut">6 câu · Cho người mới bắt đầu</span></span><span class="st">→</span></button>'
-    + '<button class="step-row" data-entrypart="trial"><span><b>Kiểm tra Band 5,0–7,5+</b><br><span class="mut">16 câu · Cho người đã học tiếng Anh</span></span><span class="st">→</span></button>'
+  html += '<div class="qblock"><p class="mut">Chọn 1 trong 3 bài. Làm xong là có chặng bắt đầu ngay, không cần chọn thêm.</p>'
+    + '<button class="step-row" data-entrypart="four"><span><b>Kiểm tra đầu vào 4 kỹ năng — Nghe · Đọc · Nói · Viết</b><br><span class="mut">~15 phút · Đo cả 4 kỹ năng · Khuyên dùng</span></span><span class="st">' + ((state.skillDone && state.skillDone["entryFour"]) ? '✓' : '→') + '</span></button>'
+    + '<button class="step-row" data-entrypart="zero"><span><b>Kiểm tra Band 0</b><br><span class="mut">6 câu · Cho người mới bắt đầu · Kiểm tra nhanh (chỉ trắc nghiệm)</span></span><span class="st">→</span></button>'
+    + '<button class="step-row" data-entrypart="trial"><span><b>Kiểm tra Band 5,0–7,5+</b><br><span class="mut">16 câu · Cho người đã học tiếng Anh · Kiểm tra nhanh (chỉ trắc nghiệm)</span></span><span class="st">→</span></button>'
     + '<p><button class="dimlink" id="entryPlaceBack">Quay lại màn chính</button></p></div>';
   app.innerHTML = html; wireBack();
-  $$("[data-entrypart]").forEach(function (b) { b.onclick = function () { openLesson({ type: "entryCheck", part: b.dataset.entrypart }); }; });
+  $$("[data-entrypart]").forEach(function (b) { b.onclick = function () { if (b.dataset.entrypart === "four") openLesson({ type: "entryFour" }); else openLesson({ type: "entryCheck", part: b.dataset.entrypart }); }; });
   var bk = $("#entryPlaceBack"); if (bk) bk.onclick = function () { backFromLesson(); };
 }
 function renderLesson(app) {
@@ -11059,6 +11345,7 @@ function renderLesson(app) {
   else if (l.type === "skillGramOld") renderSkillGramOld(app, l);
   else if (l.type === "skillPronTopic") renderSkillPronTopic(app, l);
   else if (l.type === "entryCheck") renderEntryCheck(app, l);
+  else if (l.type === "entryFour") renderEntryFour(app, l);
   else if (l.type === "entryPlace") renderEntryPlace(app, l);
   else if (l.type === "bkErr") renderBkErr(app, l);
   else if (l.type === "bkLife") renderBkLife(app, l);
@@ -12975,7 +13262,7 @@ function selfRelAllowed(l, mode, lessonId) {
      mode) nen cang theo LOAI BAI: chan cac loai thi/kiem tra/dau vao, con lai (bai luyen ky nang,
      tron 60/20/20, on tap, luyen phan yeu...) deu duoc goi y. */
   var t = (l && l.type) || "";
-  var blocked = { mockTest: 1, test: 1, chapterTest: 1, phaseExam: 1, milestone: 1, entryCheck: 1, tcEntry: 1, tpEntry: 1, quickcheck: 1, vocabQuick: 1 };
+  var blocked = { mockTest: 1, test: 1, chapterTest: 1, phaseExam: 1, milestone: 1, entryCheck: 1, entryFour: 1, tcEntry: 1, tpEntry: 1, quickcheck: 1, vocabQuick: 1 };
   if (blocked[t]) return false;
   return true;
 }
@@ -13474,11 +13761,11 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
   wireBack();
   /* DOT SOI-D2 02/11: trong kiem tra dau vao, nut Quay lai thuc chat la thoat bai
      (tien trinh lan nay khong luu) nen doi nhan + hoi xac nhan truoc khi thoat. */
-  if (l.type === "entryCheck") {
+  if (l.type === "entryCheck" || l.type === "entryFour") {
     var eb = $("#btnBack");
     if (eb) { eb.textContent = "Thoát bài kiểm tra"; eb.onclick = function () { if (window.confirm("Thoát kiểm tra đầu vào? Các câu bạn đã làm trong lần này sẽ không được lưu.")) backFromLesson(); }; }
     var ebb = $("#bbBack");
-    if (ebb) ebb.onclick = function () { if (curLesson && curLesson.type === "entryCheck") { if (window.confirm("Thoát kiểm tra đầu vào? Các câu bạn đã làm trong lần này sẽ không được lưu.")) backFromLesson(); } else backFromLesson(); };
+    if (ebb) ebb.onclick = function () { if (curLesson && (curLesson.type === "entryCheck" || curLesson.type === "entryFour")) { if (window.confirm("Thoát kiểm tra đầu vào? Các câu bạn đã làm trong lần này sẽ không được lưu.")) backFromLesson(); } else backFromLesson(); };
   }
   var whyEl = $("#quizWhy");
   if (whyEl && whyText) setWhy(whyEl, whyText);
