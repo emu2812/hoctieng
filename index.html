@@ -8415,7 +8415,10 @@ function sylFindZh(han) {
 }
 /* Do dai onset hop le o cuoi cum phu am giua 2 nguyen am (maximal onset):
    3 phu am s + tac am vo thanh + l/r/w/j; 2 phu am tac am + l/r/w/j hoac s +
-   tac am/mui; 1 phu am bat ky tru /ŋ/, /ʒ/ (khong mo dau am tiet tieng Anh).
+   tac am/mui; 1 phu am bat ky tru /ŋ/ (khong mo dau am tiet tieng Anh; /ʒ/ MOI
+   mo dau duoc — v204 V204-2: bo /ʒ/ khoi luat return 0, vi /ʒ/ giua 2 nguyen am
+   la onset cua am tiet sau (measure "me·ʒə", pleasure "ple·ʒə"); chi /ŋ/ la
+   khong bao gio mo dau am tiet (sing "sɪŋ", khong "sɪ·ŋ").
    /j/ TINH vao onset doi (vd curriculum tach "rɪ-kjə" — /kj/ la onset hop le
    nhu 'cute' /kjuːt/; v168 N13 sua nhan xet cu 'rɪk-jə' la sai). */
 function sylOnsetLen(cluster) {
@@ -8426,10 +8429,11 @@ function sylOnsetLen(cluster) {
     var t2 = cluster.slice(L - 2);
     var obs = ["p", "b", "t", "d", "k", "ɡ", "f", "v", "θ", "ð", "s", "z", "ʃ", "ʒ", "tʃ", "dʒ", "h"];
     if (obs.indexOf(t2[0]) >= 0 && ["l", "r", "w", "j"].indexOf(t2[1]) >= 0) return 2;
+    if ((t2[0] === "m" || t2[0] === "n") && t2[1] === "j") return 2; /* mj/nj: chi truoc /j/ moi la onset kep (amuse, renew); mr/nr/ml/nl khong phai onset tieng Anh */
     if (t2[0] === "s" && ["p", "t", "k", "m", "n"].indexOf(t2[1]) >= 0) return 2;
   }
   var last1 = cluster[L - 1];
-  if (last1 === "ŋ" || last1 === "ʒ") return 0;
+  if (last1 === "ŋ") return 0;
   return 1;
 }
 /* Tach IPA thanh tung am tiet theo nguyen am (onset maximization don gian:
@@ -9423,15 +9427,15 @@ var ZH_PRON_INITIALS = [
   { sym: "g", group: "init", han: "干", py: "gàn", vi: "khô", pair: "k", pairHan: "看", pairPy: "kàn", pairVi: "nhìn", desc: "Thanh mẫu g — cuống lưỡi nâng lên, không bật hơi." },
   { sym: "k", group: "init", han: "看", py: "kàn", vi: "nhìn", pair: "g", pairHan: "干", pairPy: "gàn", pairVi: "khô", desc: "Thanh mẫu k — bật hơi mạnh." },
   { sym: "h", group: "init", han: "汉", py: "hàn", vi: "người Hán", pair: "f", pairHan: "饭", pairPy: "fàn", pairVi: "cơm", desc: "Thanh mẫu h — hơi thở ra từ cổ họng." },
-  { sym: "j", group: "init", han: "鸡", py: "jī", vi: "gà", pair: "q", pairHan: "七", pairPy: "qī", pairVi: "bảy", desc: "Thanh mẫu j — mặt lưỡi nâng lên, không bật hơi." },
-  { sym: "q", group: "init", han: "七", py: "qī", vi: "bảy", pair: "j", pairHan: "鸡", pairPy: "jī", pairVi: "gà", desc: "Thanh mẫu q — mặt lưỡi nâng lên gần vòm cứng, bật hơi mạnh." },
-  { sym: "x", group: "init", han: "细", py: "xì", vi: "nhỏ, tỉ mỉ", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu x — mặt lưỡi nâng lên, hơi thoát nhẹ." },
+  { sym: "j", group: "init", han: "鸡", py: "jī", vi: "gà", pair: "q", pairHan: "七", pairPy: "qī", pairVi: "bảy", desc: "Thanh mẫu j [tɕ] — mặt lưỡi nâng lên gần vòm cứng, bật ra thành âm tắc-xát, không bật hơi." },
+  { sym: "q", group: "init", han: "七", py: "qī", vi: "bảy", pair: "j", pairHan: "鸡", pairPy: "jī", pairVi: "gà", desc: "Thanh mẫu q [tɕʰ] — mặt lưỡi nâng lên gần vòm cứng, bật ra thành âm tắc-xát, bật hơi mạnh." },
+  { sym: "x", group: "init", han: "细", py: "xì", vi: "nhỏ, tỉ mỉ", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu x [ɕ] — mặt lưỡi nâng lên gần vòm cứng, hơi xì qua khe hẹp." },
   { sym: "zh", group: "init", han: "中", py: "zhōng", vi: "giữa", pair: "ch", pairHan: "充", pairPy: "chōng", pairVi: "đổ đầy", desc: "Thanh mẫu zh — đầu lưỡi cuộn lên, không bật hơi." },
   { sym: "ch", group: "init", han: "充", py: "chōng", vi: "đổ đầy", pair: "zh", pairHan: "中", pairPy: "zhōng", pairVi: "giữa", desc: "Thanh mẫu ch — đầu lưỡi cuộn lên, bật hơi mạnh." },
   { sym: "sh", group: "init", han: "是", py: "shì", vi: "là", pair: "r", pairHan: "日", pairPy: "rì", pairVi: "ngày", desc: "Thanh mẫu sh — đầu lưỡi cuộn lên, hơi thoát nhẹ." },
   { sym: "r", group: "init", han: "日", py: "rì", vi: "ngày", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu r — đầu lưỡi cuộn lên, hơi ma sát nhẹ, dây thanh rung." },
   { sym: "z", group: "init", han: "在", py: "zài", vi: "ở", pair: "c", pairHan: "菜", pairPy: "cài", pairVi: "rau", desc: "Thanh mẫu z — đầu lưỡi chạm răng, không bật hơi." },
-  { sym: "c", group: "init", han: "菜", py: "cài", vi: "rau", pair: "z", pairHan: "在", pairPy: "zài", pairVi: "ở", desc: "Thanh mẫu c — đầu lưỡi chạm chân răng trên, bật hơi mạnh." },
+  { sym: "c", group: "init", han: "菜", py: "cài", vi: "rau", pair: "z", pairHan: "在", pairPy: "zài", pairVi: "ở", desc: "Thanh mẫu c [tsʰ] — đầu lưỡi chạm chân răng trên, bật ra thành âm tắc-xát, bật hơi mạnh." },
   { sym: "s", group: "init", han: "三", py: "sān", vi: "ba", pair: "sh", pairHan: "山", pairPy: "shān", pairVi: "núi", desc: "Thanh mẫu s — đầu lưỡi đưa gần răng trên nhưng không chạm, hơi xì qua khe hẹp." }
 ];
 var ZH_PRON_FINALS = [
@@ -25770,6 +25774,65 @@ var TP_ENTRY_QS = [
   { q: "Đoạn văn: “최근에 많은 사람이 건강을 위해 매일 걷습니다. 걷기는 몸에 좋고 돈이 들지 않습니다.” — 왜 많은 사람이 매일 걷습니까?", o: ["건강을 위해서", "돈을 벌기 위해서", "시간을 보내기 위해서", "친구를 만나기 위해서"], a: 0, why: "건강을 위해 매일 걷습니다 (đi bộ mỗi ngày vì sức khỏe)." },
   { q: "Đoạn văn: “도서관에서는 조용히 해야 합니다. 큰 소리로 이야기하면 다른 사람에게 방해가 됩니다.” — 도서관에서 왜 조용히 해야 합니까?", o: ["다른 사람에게 방해가 되기 때문에", "책이 비싸기 때문에", "문이 닫혀 있기 때문에", "전기가 나가기 때문에"], a: 0, why: "큰 소리로 이야기하면 다른 사람에게 방해가 됩니다 (nói to làm phiền người khác)." }
 ];
+
+// DOT v204 16/11/2026 — xoay dap an entry TC/TP theo ma noi dung cau (xem DOT v204 o cuoi
+// content-new.js; ly do: entry TC 12/12 o A, entry TP 16/16 o A). Chi doi vi tri lua chon,
+// dap an dung (noi dung cau) khong doi; bam FNV-1a cua (cau hoi + dap an dung).
+(function () {
+  function rot(q, shift) {
+    /* SUA v204b (16/11, nhu DOT v204 o cuoi content-new.js): cau co CA 2 truong
+       o va options phai xoay CA 2 cung mot shift, neu lech do dai thi bo qua. */
+    var keys = [];
+    if (Array.isArray(q.o)) keys.push("o");
+    if (Array.isArray(q.options)) keys.push("options");
+    if (!keys.length) return;
+    var o = q[keys[0]]; if (!o || o.length < 2) return;
+    if (keys.length > 1 && q[keys[1]].length !== o.length) return;
+    var s = ((shift % o.length) + o.length) % o.length; if (!s) return;
+    keys.forEach(function (k) { q[k] = q[k].slice(s).concat(q[k].slice(0, s)); });
+    q.a = (q.a - s + o.length) % o.length;
+  }
+  function fnv(str) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+    return h >>> 0;
+  }
+  function norm(s) { return String(s == null ? "" : s).replace(/\s+/g, " ").trim().toLowerCase(); }
+  var META = ["tất cả các đáp án trên", "all of the above", "không có đáp án nào đúng",
+    "none of the above", "cả a và b", "both a and", "cả a và c", "cả b và c",
+    "tất cả đều đúng", "tất cả đều sai"];
+  function skipQ(q) {
+    var opts = (q && (q.o || q.options)) || null;
+    if (!q || !opts || opts.length < 2) return true;
+    if (typeof q.a !== "number" || q.a < 0 || q.a >= opts.length) return true;
+    if (q.type && q.type !== "MC") return true;
+    var seen = {}, nums = true, i, j, n;
+    for (i = 0; i < opts.length; i++) {
+      n = norm(opts[i]);
+      if (seen[n]) return true; seen[n] = 1;
+      for (j = 0; j < META.length; j++) if (n.indexOf(META[j]) >= 0) return true;
+      if (!/^\d+([.,]\d+)?$/.test(n)) nums = false;
+    }
+    if (nums) {
+      var vals = opts.map(function (x) { return parseFloat(String(x).replace(",", ".")); });
+      var asc = true, desc = true;
+      for (i = 1; i < vals.length; i++) { if (vals[i] < vals[i - 1]) asc = false; if (vals[i] > vals[i - 1]) desc = false; }
+      if (asc || desc) return true;
+    }
+    return false;
+  }
+  function rotList(list) {
+    if (!list) return;
+    for (var i = 0; i < list.length; i++) {
+      var q = list[i];
+      if (skipQ(q)) continue;
+      var opts = q.o || q.options;
+      rot(q, fnv((q.q || "") + "\u0000" + String(opts[q.a])));
+    }
+  }
+  rotList(typeof TC_ENTRY_QS !== "undefined" ? TC_ENTRY_QS : null);
+  rotList(typeof TP_ENTRY_QS !== "undefined" ? TP_ENTRY_QS : null);
+})();
 function tcEntryStageFor(score, total) {
   if (score >= 10) return 3;
   if (score >= 7) return 2;

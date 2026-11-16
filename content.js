@@ -1637,7 +1637,7 @@ const CONTENT = {
     },
     {
      "w": "distance learning",
-     "ipa": "/ˈdɪstəns ˈlɜːnɪŋ/",
+     "ipa": "/ˈdɪstəns ˌlɜːnɪŋ/",
      "vi": "học từ xa",
      "col": "distance learning courses",
      "ex": "Distance learning allows people in remote areas to access quality education.",
@@ -1708,7 +1708,7 @@ const CONTENT = {
    "cards": [
     {
      "w": "pollution",
-     "ipa": "/pəˈluːʃn/",
+     "ipa": "/pəˈluːʃən/",
      "vi": "sự ô nhiễm",
      "col": "air pollution",
      "ex": "Air pollution is a major cause of respiratory diseases in large cities.",
@@ -1724,7 +1724,7 @@ const CONTENT = {
     },
     {
      "w": "carbon footprint",
-     "ipa": "/ˈkɑːbən ˈfʊtprɪnt/",
+     "ipa": "/ˌkɑːbən ˈfʊtprɪnt/",
      "vi": "dấu chân carbon (lượng khí thải gây ra)",
      "col": "reduce your carbon footprint",
      "ex": "Flying less often is an effective way to reduce your carbon footprint.",
@@ -1780,7 +1780,7 @@ const CONTENT = {
     },
     {
      "w": "recycle",
-     "ipa": "/ˌriːˈsaɪkl/",
+     "ipa": "/ˌriːˈsaɪkəl/",
      "vi": "tái chế",
      "col": "recycle plastic",
      "ex": "Households should be encouraged to recycle plastic, glass and paper.",
@@ -3275,7 +3275,7 @@ const CONTENT = {
     },
     {
      "w": "passenger",
-     "ipa": "/ˈpæsɪndʒə(r)/",
+     "ipa": "/ˈpæsɪndʒə/",
      "vi": "hành khách",
      "col": "a passenger train",
      "ex": "The passenger train was full, so many people had to stand for the whole journey.",
@@ -4023,7 +4023,7 @@ const CONTENT = {
     },
     {
      "w": "mountain",
-     "ipa": "/ˈmaʊntən/",
+     "ipa": "/ˈmaʊntɪn/",
      "vi": "núi",
      "col": "a mountain range",
      "ex": "A long mountain range separates the dry plains from the wet coastal region.",
@@ -6018,7 +6018,7 @@ const CONTENT = {
     },
     {
      "w": "doctor",
-     "ipa": "/ˈdɒktə(r)/",
+     "ipa": "/ˈdɒktə/",
      "vi": "Bác sĩ",
      "col": "see a doctor",
      "ex": "You should see a doctor today.",
@@ -6034,7 +6034,7 @@ const CONTENT = {
     },
     {
      "w": "driver",
-     "ipa": "/ˈdraɪvə(r)/",
+     "ipa": "/ˈdraɪvə/",
      "vi": "tài xế, người lái xe",
      "col": "a bus driver",
      "ex": "The bus driver is very careful.",
@@ -6949,7 +6949,7 @@ const CONTENT = {
     },
     {
      "w": "medicine",
-     "ipa": "/ˈmedsn/",
+     "ipa": "/ˈmedɪsən/",
      "vi": "thuốc chữa bệnh nói chung",
      "col": "take medicine",
      "ex": "Remember to take your medicine after lunch.",
@@ -6989,7 +6989,7 @@ const CONTENT = {
     },
     {
      "w": "blood pressure",
-     "ipa": "/ˈblʌd preʃə/",
+     "ipa": "/ˈblʌd ˌpreʃə/",
      "vi": "huyết áp",
      "col": "check your blood pressure",
      "ex": "The nurse will check your blood pressure first.",
@@ -12587,7 +12587,7 @@ const CONTENT = {
     },
     {
      "w": "medicine",
-     "ipa": "/ˈmedsən/",
+     "ipa": "/ˈmedɪsən/",
      "vi": "thuốc",
      "col": "take medicine",
      "ex": "Take this medicine twice a day.",
@@ -14600,7 +14600,7 @@ const CONTENT = {
     },
     {
      "w": "blood pressure",
-     "ipa": "/blʌd ˈpreʃə/",
+     "ipa": "/ˈblʌd ˌpreʃə/",
      "vi": "huyết áp",
      "col": "high blood pressure",
      "ex": "The nurse checks my blood pressure every morning.",
@@ -14656,7 +14656,7 @@ const CONTENT = {
     },
     {
      "w": "medicine",
-     "ipa": "/ˈmedɪsn/",
+     "ipa": "/ˈmedɪsən/",
      "vi": "thuốc",
      "col": "take medicine",
      "ex": "Take this medicine twice a day after meals.",
