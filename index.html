@@ -11293,6 +11293,7 @@ function renderLesson(app) {
   else if (l.type === "zhRole") renderZhRole(app, l);
   else if (l.type === "zhWrite") renderZhWrite(app, l);
   else if (l.type === "zhStroke") renderZhStroke(app, l);
+  else if (l.type === "tpStroke") renderTpStroke(app, l); /* v210: viet chu Hangul */
   else if (l.type === "zhReviewSession") renderZhReviewSession(app, l);
   else if (l.type === "tcTpReviewSession") renderTcTpReviewSession(app, l);
   else if (l.type === "zhChapterTest") renderZhChapterTest(app, l);
@@ -25387,6 +25388,225 @@ function renderZhStroke(app, l) {
     cv.addEventListener("pointerleave", stopDraw);
   }
 }
+/* ---------- v210 (17/11/2026): Viet chu Hangul track Han — mau ZH (DOT 2f) ----------
+   Du lieu net o content-new.js (TP_STROKES, 47 muc: 40 chu cai + 7 am tiet
+   mau). Cung cau truc/luong nhu bai zhStroke: video mau (TP_WRITE_VIDEOS,
+   hien CHUA CO video nao duoc kiem chung nen de rong) -> thu tu net SVG ->
+   khung tap viet tu do (canvas + mau mo) -> 3 dang luyen: order (tap theo
+   thu tu net, hien tung net), fill (dien net con thieu), free (viet tu tri
+   nho, nhu recall mode cua ZH) -> tu danh dau Nho roi / Chua nho (vao hang
+   doi on SRS tpHard step "tpStroke"). KHONG may cham net ve (quyet dinh
+   28/10 cua ZH: may khong phan biet duoc net ve tay). So net theo giao
+   trinh Sejong Korean 1 (net gap tinh 1 net); xem ghi chu trong TP_STROKES.
+   Khong chen vao luong chang TP (nhu ZH): mo tu tab Luyen tap TP, bai
+   Hangul chặng 1, nut "On lai chu" o So loi sai TP. */
+function tpStrokesList() { return (typeof TP_STROKES !== "undefined") ? TP_STROKES : []; }
+function tpStrokeByHan(ch) {
+  var list = tpStrokesList();
+  for (var i = 0; i < list.length; i++) if (list[i].han === ch) return list[i];
+  return null;
+}
+function tpWriteVideoId(han) {
+  var m = (typeof TP_WRITE_VIDEOS !== "undefined") ? TP_WRITE_VIDEOS : null;
+  var id = (m && m[han]) || null;
+  return (id && /^[A-Za-z0-9_-]{11}$/.test(id)) ? id : null;
+}
+function tpStrokeVideoHTML(e) {
+  var id = tpWriteVideoId(e.han);
+  if (!id) return '<div id="tpStrokeVideo"><p>Chưa có video mẫu cho chữ ' + esc(e.han) + ' — tập theo thứ tự nét ở hình bên dưới, đừng học vẹt theo trí nhớ.</p></div>';
+  return '<div id="tpStrokeVideo"><iframe id="tpStrokeVideoFrame" src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0" loading="lazy" allowfullscreen></iframe>'
+    + '<p class="mut">Video mẫu cách viết chữ ' + esc(e.han) + ' — xem kỹ từng nét rồi tập viết ở khung bên dưới.</p></div>';
+}
+function tpStrokeStart(path) {
+  var m = String(path || "").match(/M(-?\d*\.?\d+)[,\s]+(-?\d*\.?\d+)/);
+  return m ? { x: parseFloat(m[1]), y: parseFloat(m[2]) } : { x: 50, y: 50 };
+}
+/* Hien thu tu net: shown = so net dang hien (order mode: tang dan theo nut
+   "Net tiep theo"); hidden = chi so net dang an (fill mode); cur = chi so
+   net dang tap (to mau ho phach + danh so tai diem bat dau). Net chua toi
+   chi hien mo 0,12; net da qua hien dam. */
+function tpStrokeOrderSVG(e, opts) {
+  opts = opts || {};
+  var shown = (typeof opts.shown === "number") ? opts.shown : e.d.length;
+  var hidden = (typeof opts.hidden === "number") ? opts.hidden : -1;
+  var cur = (typeof opts.cur === "number") ? opts.cur : -1;
+  var parts = e.d.map(function (path, i) {
+    var vis = (i < shown && i !== hidden);
+    var col = (i === cur) ? "#b45309" : "#222";
+    var op = vis ? "1" : "0.12";
+    var sp = tpStrokeStart(path);
+    var badge = (i === cur)
+      ? '<circle cx="' + sp.x + '" cy="' + sp.y + '" r="8" fill="#b45309"/><text x="' + sp.x + '" y="' + (sp.y + 3.5) + '" font-size="10" fill="#fff" text-anchor="middle">' + (i + 1) + '</text>'
+      : "";
+    return '<path d="' + esc(path) + '" fill="none" stroke="' + col + '" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="' + op + '"/>' + badge;
+  }).join("");
+  return '<svg viewBox="0 0 100 100" style="width:180px;height:180px;border:1px solid #ddd;background:#fff" role="img" aria-label="Thứ tự nét chữ ' + esc(e.han) + '">' + parts + '</svg>';
+}
+function tpStrokeGroupsHTML() {
+  var groups = ["Phụ âm cơ bản", "Phụ âm căng", "Nguyên âm cơ bản", "Nguyên âm đôi", "Âm tiết mẫu"];
+  return groups.map(function (g) {
+    var items = tpStrokesList().filter(function (e) { return e.g === g; });
+    if (!items.length) return "";
+    return '<p><b>' + esc(g) + ' (' + items.length + ')</b></p><div class="row">' + items.map(function (e) { return '<button class="btn" data-tpstroke-list="' + esc(e.han) + '"><span style="font-size:22px">' + esc(e.han) + '</span> ' + esc(e.py) + '</button>'; }).join("") + '</div>';
+  }).join("");
+}
+function tpHangulStrokeHan(it) {
+  var k = String((it && it.k) || "");
+  if (k.length === 1) return tpStrokeByHan(k) ? k : null;
+  var eq = k.split("=");
+  if (eq.length === 2) { var s = eq[1].trim(); return tpStrokeByHan(s) ? s : null; }
+  return null;
+}
+function renderTpStroke(app, l) {
+  var e = tpStrokeByHan(l.han);
+  if (!e) { curLesson = null; render(); return; }
+  var list = tpStrokesList();
+  var idx = list.indexOf(e);
+  var prev = list[(idx - 1 + list.length) % list.length];
+  var next = list[(idx + 1) % list.length];
+  var mode = l.tpMode || "order";
+  var compared = !!l.compared;
+  var isSyl = (e.g === "Âm tiết mẫu");
+  var title = mode === "free" ? "Viết chữ từ trí nhớ" : (mode === "fill" ? "Điền nét còn thiếu" : "Viết chữ: " + e.han);
+  var html = lessonHead({ title: title, type: "Tiếng Hàn · Viết chữ" });
+  html += '<p class="mut">40 chữ cái + 7 âm tiết mẫu. Số nét theo giáo trình Sejong Korean 1: nét gập tính là 1 nét (vd ㄱ 1 nét, ㄴ 1 nét, ㄷ 2 nét). Một số bảng khác đếm mỗi đoạn thẳng là 1 nét — bản này dùng một kiểu thống nhất là Sejong.</p>';
+  html += '<div class="row">'
+    + '<button class="btn' + (mode === "order" ? ' btn-primary' : '') + '" data-tpmode="order">1 · Tập theo thứ tự</button>'
+    + '<button class="btn' + (mode === "fill" ? ' btn-primary' : '') + '" data-tpmode="fill">2 · Điền nét còn thiếu</button>'
+    + '<button class="btn' + (mode === "free" ? ' btn-primary' : '') + '" data-tpmode="free">3 · Viết từ trí nhớ</button></div>';
+  if (mode === "free" && !compared) {
+    html += '<div class="qblock"><p>Viết từ trí nhớ ' + (isSyl ? 'âm tiết' : 'chữ cái') + ' có phiên âm <b>' + esc(e.py) + '</b> — ' + esc(e.vi) + '</p>'
+      + '<p class="mut">Tổng số nét: ' + e.d.length + '</p>'
+      + '<div class="row"><button class="btn" id="tpStrokeListen">🔊 Nghe đọc mẫu</button></div></div>';
+  } else {
+    html += '<div class="qblock"><p style="font-size:34px">' + esc(e.han) + '</p><p><b>' + esc(e.py) + '</b> — ' + esc(e.vi) + (e.nm ? ' · Tên chữ: ' + esc(e.nm) : '') + '</p>'
+      + '<p class="mut">' + esc(e.src) + '</p>' + (e.note ? '<p class="mut">' + esc(e.note) + '</p>' : '')
+      + tpStrokeVideoHTML(e)
+      + '<div class="row"><button class="btn" id="tpStrokeListen">🔊 Nghe đọc mẫu</button></div>'
+      + '<p class="mut">Tổng số nét: ' + e.d.length + '</p></div>';
+  }
+  var orderShown = (typeof l.orderShown === "number") ? l.orderShown : 1;
+  if (orderShown < 1) orderShown = 1;
+  if (orderShown > e.d.length) orderShown = e.d.length;
+  var fillHidden = e.d.length - 1;
+  if (mode === "order") {
+    var cur = orderShown - 1;
+    html += '<div class="qblock"><h3>Thứ tự nét</h3>'
+      + tpStrokeOrderSVG(e, { shown: orderShown, cur: cur })
+      + '<ol>' + e.st.map(function (s, i) { return '<li' + (i === cur ? ' style="font-weight:700;color:#b45309"' : '') + '>Nét ' + (i + 1) + ': ' + esc(s) + '</li>'; }).join("") + '</ol>'
+      + '<div class="row"><button class="btn" id="tpOrderPrev">← Nét trước</button><button class="btn btn-primary" id="tpOrderNext"' + (orderShown >= e.d.length ? ' disabled' : '') + '>Nét tiếp theo (' + orderShown + '/' + e.d.length + ')</button><button class="btn" id="tpOrderAll">Hiện hết</button></div>'
+      + '<p class="mut">Viết theo đúng thứ tự từ trên xuống dưới, từ trái sang phải — nét ngang trước nét dọc khi hai nét giao nhau.</p></div>';
+  } else if (mode === "fill") {
+    html += '<div class="qblock"><h3>Điền nét còn thiếu</h3>'
+      + tpStrokeOrderSVG(e, { shown: e.d.length, hidden: fillHidden })
+      + '<p>Nét còn thiếu là <b>nét số ' + e.d.length + ': ' + esc(e.st[fillHidden]) + '</b>. Vẽ nét đó vào khung bên dưới, rồi bấm So với mẫu.</p>'
+      + '<p class="mut">Các nét còn lại đã hiện sẵn — chỉ vẽ thêm đúng nét còn thiếu.</p></div>';
+  } else if (compared) {
+    html += '<div class="qblock"><h3>So với mẫu</h3>' + tpStrokeOrderSVG(e, {})
+      + '<ol>' + e.st.map(function (s, i) { return '<li>Nét ' + (i + 1) + ': ' + esc(s) + '</li>'; }).join("") + '</ol></div>';
+  }
+  var frameTitle = compared ? "So với mẫu" : (mode === "free" ? "Viết từ trí nhớ" : (mode === "fill" ? "Điền nét còn thiếu" : "Khung tập viết tự do"));
+  var frameNote = compared ? "Mẫu mờ hiện đè lên bài viết của bạn — so mắt từng nét rồi tự đánh dấu."
+    : (mode === "free" ? "Chỉ hiện phiên âm và nghĩa — viết chữ vào khung từ trí nhớ, rồi bấm So với mẫu."
+    : (mode === "fill" ? "Chỉ vẽ nét còn thiếu vào khung, rồi bấm So với mẫu."
+    : "Xem thứ tự nét ở trên, bật mẫu mờ rồi tập viết. Khi thuộc rồi, chuyển sang mục 3 · Viết từ trí nhớ để kiểm tra."));
+  var frameBtns = compared
+    ? '<button class="btn btn-primary" id="tpRememberedBtn">Nhớ rồi ✓</button><button class="btn" id="tpForgotBtn">Chưa nhớ, ôn lại</button><button class="btn" id="tpRewriteBtn">Viết lại</button>'
+    : '<button class="btn" id="tpCanvasModel">Hiện mẫu mờ</button><button class="btn" id="tpCanvasClear">Xóa</button><button class="btn btn-primary" id="tpCompareBtn">So với mẫu</button>';
+  html += '<div class="qblock"><h3>' + frameTitle + '</h3><p class="mut">' + frameNote + '</p>'
+    + '<canvas id="tpWriteCanvas" width="300" height="300" style="border:1px solid #ccc;background:#fff;touch-action:none"></canvas>'
+    + '<div class="row">' + frameBtns + '</div><div id="tpRecallMsg"></div></div>'
+  + '<div class="row" style="margin-top:10px"><button class="btn" id="tpStrokePrevChar">← Chữ trước: ' + prev.han + '</button><button class="btn" id="tpStrokeNextChar">Chữ sau: ' + next.han + ' →</button></div><p style="text-align:center;margin-top:6px"><button class="dimlink" id="tpStrokeBackList">Về danh sách viết chữ</button></p>';
+  app.innerHTML = html;
+  wireBack();
+  $("#tpStrokeListen").onclick = function () { try { tpSpeak(e.nm || e.han); } catch (err) {} };
+  $("#tpStrokePrevChar").onclick = function () { openLesson({ type: "tpStroke", han: prev.han, tpMode: mode }); };
+  $("#tpStrokeNextChar").onclick = function () { openLesson({ type: "tpStroke", han: next.han, tpMode: mode }); };
+  $("#tpStrokeBackList").onclick = function () { go("practice"); };
+  $$("[data-tpmode]").forEach(function (b) { b.onclick = function () { l.tpMode = b.dataset.tpmode; l.compared = false; l.writeStrokes = []; l.modelOn = false; delete l.orderShown; render(); }; });
+  var opn = $("#tpOrderNext"); if (opn) opn.onclick = function () { l.orderShown = Math.min(orderShown + 1, e.d.length); render(); };
+  var opp = $("#tpOrderPrev"); if (opp) opp.onclick = function () { l.orderShown = Math.max(orderShown - 1, 1); render(); };
+  var opa = $("#tpOrderAll"); if (opa) opa.onclick = function () { l.orderShown = e.d.length; render(); };
+  var cv = $("#tpWriteCanvas");
+  var ctx = null;
+  try { ctx = cv && cv.getContext ? cv.getContext("2d") : null; } catch (err) { ctx = null; }
+  var modelOn = !!l.modelOn;
+  if (!l.writeStrokes) l.writeStrokes = [];
+  var drawUserStrokes = function () {
+    if (!ctx) return;
+    ctx.strokeStyle = "#222"; ctx.lineWidth = 4; ctx.lineCap = "round"; ctx.lineJoin = "round";
+    (l.writeStrokes || []).forEach(function (st) {
+      if (st.length < 2) return;
+      ctx.beginPath(); ctx.moveTo(st[0].x, st[0].y);
+      for (var i = 1; i < st.length; i++) ctx.lineTo(st[i].x, st[i].y);
+      ctx.stroke();
+    });
+  };
+  var drawGuide = function () {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, 300, 300);
+    ctx.strokeStyle = "#ddd"; ctx.lineWidth = 1;
+    ctx.strokeRect(1, 1, 298, 298);
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath(); ctx.moveTo(150, 0); ctx.lineTo(150, 300); ctx.moveTo(0, 150); ctx.lineTo(300, 150); ctx.stroke();
+    ctx.setLineDash([]);
+    if (modelOn) {
+      ctx.font = "200px serif"; ctx.fillStyle = "rgba(0,0,0,0.10)";
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(e.han, 150, 155);
+    }
+    drawUserStrokes();
+  };
+  drawGuide();
+  var mb = $("#tpCanvasModel"); if (mb) mb.onclick = function () { modelOn = !modelOn; l.modelOn = modelOn; mb.textContent = modelOn ? "Ẩn mẫu mờ" : "Hiện mẫu mờ"; drawGuide(); };
+  var cb = $("#tpCanvasClear"); if (cb) cb.onclick = function () { l.writeStrokes = []; drawGuide(); };
+  var cpb = $("#tpCompareBtn"); if (cpb) cpb.onclick = function () {
+    var msg = $("#tpRecallMsg");
+    if (!l.writeStrokes || !l.writeStrokes.length) { if (msg) msg.innerHTML = "<p>Viết vào khung trước đã, rồi bấm So với mẫu.</p>"; return; }
+    l.compared = true; l.modelOn = true; render();
+  };
+  var rmb = $("#tpRememberedBtn"); if (rmb) rmb.onclick = function () {
+    var q = "Viết chữ " + e.han + " (" + e.py + ")";
+    if ((state.tpHard || []).some(function (h) { return h.step === "tpStroke" && h.q === q; })) tpHardJudge90("tpStroke", q, true);
+    try { awardXp(1); } catch (err) {}
+    openLesson({ type: "tpStroke", han: next.han, tpMode: mode });
+  };
+  var fgb = $("#tpForgotBtn"); if (fgb) fgb.onclick = function () {
+    var q = "Viết chữ " + e.han + " (" + e.py + ")";
+    var why = "Thứ tự nét: " + e.st.join(" → ") + " (tổng " + e.d.length + " nét).";
+    tpAddHard("tpStroke", q, e.han, why);
+    openLesson({ type: "tpStroke", han: next.han, tpMode: mode });
+  };
+  var rwb = $("#tpRewriteBtn"); if (rwb) rwb.onclick = function () { l.compared = false; l.writeStrokes = []; l.modelOn = false; render(); };
+  if (ctx && cv) {
+    var drawing = false, lastX = 0, lastY = 0, curStroke = null;
+    var posOf = function (ev) {
+      var r = cv.getBoundingClientRect();
+      return { x: (ev.clientX - r.left) * (cv.width / (r.width || 300)), y: (ev.clientY - r.top) * (cv.height / (r.height || 300)) };
+    };
+    cv.addEventListener("pointerdown", function (ev) { var p = posOf(ev); drawing = true; lastX = p.x; lastY = p.y; curStroke = [p]; });
+    cv.addEventListener("pointermove", function (ev) {
+      if (!drawing) return;
+      var p = posOf(ev);
+      if (curStroke) { var lp = curStroke[curStroke.length - 1]; if (Math.hypot(p.x - lp.x, p.y - lp.y) >= 2) curStroke.push(p); }
+      ctx.strokeStyle = "#222"; ctx.lineWidth = 4; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(p.x, p.y); ctx.stroke();
+      lastX = p.x; lastY = p.y;
+    });
+    var stopDraw = function () {
+      if (drawing && curStroke) {
+        var len = 0;
+        for (var i = 1; i < curStroke.length; i++) len += Math.hypot(curStroke[i].x - curStroke[i - 1].x, curStroke[i].y - curStroke[i - 1].y);
+        if (curStroke.length >= 2 && len >= 6) {
+          l.writeStrokes.push(curStroke);
+        }
+      }
+      drawing = false; curStroke = null;
+    };
+    cv.addEventListener("pointerup", stopDraw);
+    cv.addEventListener("pointerleave", stopDraw);
+  }
+}
 /* DOT honest 28/10/2026: vong on ngan Trung — giong ban Anh, chen sau moi 5 the
    khi con the sai trong khoi vua roi; goi sau khi pos+1, tra ve true neu da mo vong on. */
 function zhMaybeBlockReview(l, d, cards, pos) {
@@ -28840,7 +29060,8 @@ function tpOpenStep(id, backTab) {
     var h = TP_HANGUL[m.ref];
     var html = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · HANGUL · HỌC THEO THỨ TỰ</p><h2>' + esc(h.title) + '</h2><p class="mut">' + h.items.length + ' mục. Học theo thứ tự: bài sau chỉ mở khi xong bài trước. Bấm vào từng mục để hiện cách đọc và ví dụ, bấm 🔊 để nghe tiếng Hàn bằng giọng máy.</p><p class="mut">Bài Hangul chưa có video phát âm — tạm nghe giọng máy ở từng mục (bấm 🔊) để luyện khẩu hình theo mô tả cách đọc.</p>';
     html += h.items.map(function (it, i) {
-      return '<div class="qblock"><p><b style="font-size:22px">' + esc(it.k) + '</b> <button class="btn tphshow" data-i="' + i + '">Hiện cách đọc</button> <button class="btn tpspeak" data-i="' + i + '">🔊 Nghe</button></p><p class="tphide mut" data-mean="' + i + '" style="display:none">Cách đọc: <b>' + esc(it.r) + '</b><br>Nghĩa: ' + esc(it.vi) + '<br>Ví dụ: ' + esc(it.ex) + ' (' + esc(it.exr) + ') — ' + esc(it.exv) + '</p></div>';
+      var wh = tpHangulStrokeHan(it); /* v210: nut Tap viet khi chu cai / am tiet da co thu tu net */
+      return '<div class="qblock"><p><b style="font-size:22px">' + esc(it.k) + '</b> <button class="btn tphshow" data-i="' + i + '">Hiện cách đọc</button> <button class="btn tpspeak" data-i="' + i + '">🔊 Nghe</button>' + (wh ? ' <button class="btn tpwrite" data-han="' + esc(wh) + '">✍️ Tập viết</button>' : '') + '</p><p class="tphide mut" data-mean="' + i + '" style="display:none">Cách đọc: <b>' + esc(it.r) + '</b><br>Nghĩa: ' + esc(it.vi) + '<br>Ví dụ: ' + esc(it.ex) + ' (' + esc(it.exr) + ') — ' + esc(it.exv) + '</p></div>';
     }).join("");
     /* DOT SOI-D8 02/11: nut Xong bai la yeu cau cap bai (nghe du tung muc cua bai nay),
        khac voi khoa cap bai (bai sau chi mo khi xong bai truoc, noi o tieu de). */
@@ -28850,6 +29071,7 @@ function tpOpenStep(id, backTab) {
     var tpHeard = {}, tpHeardN = 0;
     app.querySelectorAll(".tphshow").forEach(function (b) { b.onclick = function () { var p = app.querySelector('[data-mean="' + b.dataset.i + '"]'); if (p) { p.style.display = (p.style.display === "none") ? "block" : "none"; } b.textContent = (p && p.style.display !== "none") ? "Ẩn cách đọc" : "Hiện cách đọc"; }; });
     app.querySelectorAll(".tpspeak").forEach(function (b) { b.onclick = function () { try { tpSpeak(h.items[+b.dataset.i].ex); } catch (e) {} if (!tpHeard[b.dataset.i]) { tpHeard[b.dataset.i] = true; tpHeardN++; var nt = document.getElementById("tpHangulHeardNote"); if (nt) nt.textContent = "Đã nghe " + tpHeardN + "/" + h.items.length + " mục" + (tpHeardN >= h.items.length ? " — đủ rồi, bấm xong bài nhé." : " — nghe đủ " + h.items.length + " mục rồi mới bấm xong bài."); if (tpHeardN >= h.items.length) { var fb = document.getElementById("tpFinishBtn"); if (fb) fb.disabled = false; } } }; });
+    app.querySelectorAll(".tpwrite").forEach(function (b) { b.onclick = function () { openLesson({ type: "tpStroke", han: b.dataset.han }); }; }); /* v210: mo bai viet chu Hangul tu bai Hangul */
     document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     tpWireBack(back); return;
   }
@@ -29271,6 +29493,7 @@ function viewPracticeTp(app) {
     html += '<section class="card" id="tpFunVideoPractice"><div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Đang tải video…</p></div></section>';
   html += videoNewBlockHTML("tp");
   html += '<section class="card"><h3>Hangul — học theo thứ tự (5 bài)</h3><div class="row">' + TP_HANGUL.map(function (h, i) { return tpStepBtnHTML("h" + i); }).join("") + '</div></section>';
+  html += '<section class="card" id="tpStrokeCard"><h3>✍️ Viết chữ Hangul</h3><p class="mut">40 chữ cái + 7 âm tiết mẫu — bấm vào một chữ để xem thứ tự nét và tập viết (3 dạng: tập theo thứ tự, điền nét còn thiếu, viết từ trí nhớ). Số nét theo giáo trình Sejong Korean 1.</p><details><summary><b>Xem ' + tpStrokesList().length + ' mục — theo nhóm</b></summary>' + tpStrokeGroupsHTML() + '</details></section>';
   html += practiceFilterHTML("", "tp");
   html += typeEntryRowHTML("tp");
   html += vocabGroupsHTML(TP_STAGES, tpStepBtnHTML, tpStepStatus, tpStepMeta, "tpVocabSearch", "tpVocabGroups", "Từ vựng đời sống", "tp");
@@ -29347,7 +29570,7 @@ function viewPracticeTp(app) {
     kids.forEach(function (el) {
       if (el.id === "tpPracticeNextCard" || el.id === "typeEntryRow" || el.tagName === "H2") return;
       var h3 = h3Text(el), id = el.id || "";
-      if (h3.indexOf("Hangul") === 0 || id === "tpVocabGroups") put(G1, el);
+      if (h3.indexOf("Hangul") === 0 || id === "tpVocabGroups" || id === "tpStrokeCard") put(G1, el); /* v210: the Viet chu Hangul vao G1 cung Hangul */
       else if (h3.indexOf("Ngữ pháp") === 0) put(G2, el);
       else if (id === "listenVideoRow") put(G3, el);
       else if (id === "listenHubCard") put(G3, el);
@@ -29400,6 +29623,7 @@ function viewPracticeTp(app) {
   listenHubWire();
 
   wireVocabSearch("tpVocabSearch", "tpVocabGroups");
+  $$("[data-tpstroke-list]").forEach(function (b) { b.onclick = function () { openLesson({ type: "tpStroke", han: b.dataset.tpstrokeList }); }; }); /* v210: nut mo bai viet chu Hangul */
   wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   pronDiagWireEntry(app); pronWeakWire(app, "tp"); pronAreaWire(app); /* v119b + v123 */
   var ebTp = document.getElementById("tpPracticeEntryBtn"); if (ebTp) ebTp.onclick = function () { openLesson({ type: "tpEntry" }); };
@@ -29424,7 +29648,10 @@ function viewReviewTp(app) {
     /* v184 TID U3: gom theo nguyen nhan (3 nhom TID). */
     var u3DueTp = dueH.map(function (h) {
       var m = tpStepMeta(h.step);
-      var itemHTML = '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "ngay hôm nay") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div style="margin:6px 0">' + u3CauseSelectHTML(h, "tpHard", null, state.tpHard.indexOf(h), "tp") + '</div><div class="row"><button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button><button class="btn" data-tpdone="' + state.tpHard.indexOf(h) + '">Đã ôn xong</button></div></div>';
+      var retryBtnTp = (h.step === "tpStroke") /* v210: muc viet chu — mo thang bai viet chu do, khong phai buoc TP */
+        ? '<button class="btn" data-tpretry="tpStroke" data-tpstroke-han="' + esc(h.ans || "") + '">Ôn lại chữ: ' + esc(h.ans || "") + '</button>'
+        : '<button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button>';
+      var itemHTML = '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "ngay hôm nay") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div style="margin:6px 0">' + u3CauseSelectHTML(h, "tpHard", null, state.tpHard.indexOf(h), "tp") + '</div><div class="row">' + retryBtnTp + '<button class="btn" data-tpdone="' + state.tpHard.indexOf(h) + '">Đã ôn xong</button></div></div>';
       return { cause: h.cause || "", html: itemHTML };
     });
     html += u3TopCauseHTML(u3DueTp, "tp");
@@ -29437,7 +29664,10 @@ function viewReviewTp(app) {
     /* v184 TID U3: gom theo nguyen nhan nhu muc den han. */
     var u3UndueTp = undueH.map(function (h) {
       var m = tpStepMeta(h.step);
-      var itemHTML = '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div style="margin:6px 0">' + u3CauseSelectHTML(h, "tpHard", null, state.tpHard.indexOf(h), "tp") + '</div><div class="row"><button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button></div></div>';
+      var retryBtnTp2 = (h.step === "tpStroke") /* v210: muc viet chu — mo thang bai viet chu do */
+        ? '<button class="btn" data-tpretry="tpStroke" data-tpstroke-han="' + esc(h.ans || "") + '">Ôn lại chữ: ' + esc(h.ans || "") + '</button>'
+        : '<button class="btn" data-tpretry="' + esc(h.step) + '">Ôn lại bước: ' + esc(m ? m.title : h.step) + '</button>';
+      var itemHTML = '<div class="qblock"><p><b>' + esc(h.q) + '</b></p><p class="mut">Đáp án đúng: ' + esc(h.ans) + ' · ' + esc(h.why) + '</p><p class="mut">Đến hạn: ' + esc(h.due || "chưa rõ") + ((h.fails || 0) > 0 ? ' · Đã sai ' + h.fails + ' lần' : '') + '</p><div style="margin:6px 0">' + u3CauseSelectHTML(h, "tpHard", null, state.tpHard.indexOf(h), "tp") + '</div><div class="row">' + retryBtnTp2 + '</div></div>';
       return { cause: h.cause || "", html: itemHTML };
     });
     html += u3GroupsHTML(u3UndueTp, "tp");
@@ -29478,7 +29708,7 @@ function viewReviewTp(app) {
      nghiep, khong XP — muon tot nghiep phai tra loi dung trong buoi on
      (giong ban Anh: chi doi ngay). */
   app.querySelectorAll("[data-tpdone]").forEach(function (b) { b.onclick = function () { var h = state.tpHard[+b.dataset.tpdone]; if (!h) return; h.due = addDaysStr(todayStr(), RB_INTERVALS[Math.min(h.level || 0, RB_INTERVALS.length - 1)]); saveState(); viewReviewTp(app); wireTp(app); }; });
-  app.querySelectorAll("[data-tpretry]").forEach(function (b) { b.onclick = function () { var sid = b.dataset.tpretry; if (sid.indexOf("game:") === 0) { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: sid.slice(5) }); return; } tpOpenStep(sid, "review"); }; });
+  app.querySelectorAll("[data-tpretry]").forEach(function (b) { b.onclick = function () { var sid = b.dataset.tpretry; if (sid.indexOf("game:") === 0) { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "game", gameId: sid.slice(5) }); return; } if (sid === "tpStroke") { var hh = b.dataset.tpstrokeHan; if (hh && tpStrokeByHan(hh)) { openLesson({ type: "tpStroke", han: hh }); return; } } tpOpenStep(sid, "review"); }; }); /* v210: nut On lai chu mo bai tpStroke */
   pronSrsWireReview();
   app.querySelectorAll("[data-tpcard-review]").forEach(function (b) { b.onclick = function () { var parts = (b.dataset.tpcardReview || "").split(":"); var stepId = parts[0], ci = +parts[1]; tpOpenStep(stepId, "review"); if (window.__tpShow && !isNaN(ci)) window.__tpShow(ci); }; });
   u3WireCause(app); /* v184 TID U3: o chon nguyen nhan tai tung loi */
