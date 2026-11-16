@@ -66,6 +66,7 @@ p{margin:8px 0}
 .ph-btn.done{border-color:var(--green)}
 .ph-btn.cur{border-color:var(--amber);border-width:2px;background:#FFFBEA}
 .ph-btn.lock{opacity:.55}
+.btn.lock{opacity:.55} /* v211: nut am ZH/TP bi khoa */
 .ph-map{margin:10px 0}
 .ph-map summary{cursor:pointer;font-weight:700}
 .q-opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:14px 16px;margin:8px 0;font-size:16px;cursor:pointer}
@@ -9494,11 +9495,12 @@ function zhPronNextSym() {
 function zhPronMapHTML() {
   /* v135 (M4): nhan dem dong — tu dem tu mang, khong ghi cung (truoc day "Van mau (14)" + "(40 am)" sai sau khi bo sung 19 van mau). */
   var groups = [["Thanh mẫu (21)", ZH_PRON_INITIALS], ["Vận mẫu (" + ZH_PRON_FINALS.length + ")", ZH_PRON_FINALS], ["4 thanh điệu + thanh nhẹ (5)", ZH_PRON_TONES]]; /* v137 (M5): ban do xep theo thu tu day */
-  var h = '<section class="card" id="zhPronMapCard"><h3>🗺 Bản đồ âm · Pinyin (' + zhPronSounds().length + ' âm)</h3><p class="mut">Bấm vào một âm để vào bài luyện 6 bước của âm đó. Học âm nào cũng được, không khóa.</p>';
+  var h = '<section class="card" id="zhPronMapCard"><h3>🗺 Bản đồ âm · Pinyin (' + zhPronSounds().length + ' âm)</h3><p class="mut">Bấm vào một âm để vào bài luyện 6 bước của âm đó. Học theo thứ tự: xong âm trước mới mở âm sau — âm chưa mở có 🔒.</p>';
   groups.forEach(function (g) {
     h += '<p><b>' + esc(g[0]) + '</b></p><div class="row">';
     g[1].forEach(function (e) {
-      h += '<button class="btn" data-pron-sound="' + esc(e.sym) + '" data-pron-track="zh">' + esc(e.sym) + ' · ' + esc(e.han) + ' ' + esc(e.py) + (zhPronDone(e.sym) ? ' ✓' : '') + '</button>';
+      var openZh = trackPronOpen("zh", e.sym); /* v211: khoa tuan tu */
+      h += '<button class="btn' + (openZh ? '' : ' lock') + '" data-pron-sound="' + esc(e.sym) + '" data-pron-track="zh">' + esc(e.sym) + ' · ' + esc(e.han) + ' ' + esc(e.py) + (zhPronDone(e.sym) ? ' ✓' : '') + (openZh ? '' : ' 🔒') + '</button>';
     });
     h += '</div>';
   });
@@ -9552,13 +9554,44 @@ function tpPronNextSym() {
   for (var i = 0; i < all.length; i++) if (!tpPronDone(all[i].sym) && (state.tpPronSkipped || []).indexOf(all[i].sym) < 0) return all[i].sym;
   return all.length ? all[0].sym : null;
 }
+/* v211: KHOA TUAN TU PHAT AM (that) cho ZH/TP — nhu phOpenSym/phTryOpenSound
+   cua EN: am o vi tri i chi mo khi moi am truoc no da xong HOAC da bo qua;
+   am dau tien luon mo; xong het thi mo het; am la thi mo. trackPronNext tra
+   am dau tien chua xong + chua bo qua, hoac null khi xong het (khac
+   zhPronNextSym/tpPronNextSym — hai ham do tra am dau khi xong het). */
+function trackPronNext(track) {
+  var all = track === "zh" ? zhPronSounds() : tpPronSounds();
+  var doneFn = track === "zh" ? zhPronDone : tpPronDone;
+  var skipKey = track === "zh" ? "zhPronSkipped" : "tpPronSkipped";
+  for (var i = 0; i < all.length; i++) if (!doneFn(all[i].sym) && (state[skipKey] || []).indexOf(all[i].sym) < 0) return all[i].sym;
+  return null;
+}
+function trackPronOpen(track, sym) {
+  var all = track === "zh" ? zhPronSounds() : tpPronSounds();
+  var idx = -1;
+  for (var i = 0; i < all.length; i++) if (all[i].sym === sym) idx = i;
+  if (idx < 0) return true;
+  var cur = trackPronNext(track);
+  if (!cur) return true;
+  var ci = -1;
+  for (var j = 0; j < all.length; j++) if (all[j].sym === cur) ci = j;
+  return idx <= ci;
+}
+function trackPronTryOpen(track, sym) {
+  if (trackPronOpen(track, sym)) return true;
+  var cur = trackPronNext(track);
+  var lt = track === "zh" ? "zhPron" : "tpPron";
+  showLockModal("Âm " + sym + " mở khi bạn học xong âm " + cur + " trước đã — phát âm học theo thứ tự: xong âm trước mới tới âm sau. Âm nào đã bỏ qua thì không chặn đường.", cur, function () { openLesson({ type: lt, sound: cur, sub: 0 }); });
+  return false;
+}
 function tpPronMapHTML() {
   var groups = (typeof TP_HANGUL !== "undefined" ? TP_HANGUL : []);
-  var h = '<section class="card" id="tpPronMapCard"><h3>🗺 Bản đồ âm · Hangul (' + tpPronSounds().length + ' âm)</h3><p class="mut">Bấm vào một âm để vào bài luyện 6 bước của âm đó. Học âm nào cũng được, không khóa.</p>';
+  var h = '<section class="card" id="tpPronMapCard"><h3>🗺 Bản đồ âm · Hangul (' + tpPronSounds().length + ' âm)</h3><p class="mut">Bấm vào một âm để vào bài luyện 6 bước của âm đó. Học theo thứ tự: xong âm trước mới mở âm sau — âm chưa mở có 🔒.</p>';
   groups.forEach(function (g) {
     h += '<p><b>' + esc(g.title) + '</b></p><div class="row">';
     (g.items || []).forEach(function (it) {
-      h += '<button class="btn" data-pron-sound="' + esc(it.k) + '" data-pron-track="tp">' + esc(it.k) + ' · ' + esc(it.ex || "") + (tpPronDone(it.k) ? ' ✓' : '') + '</button>';
+      var openTp = trackPronOpen("tp", it.k); /* v211: khoa tuan tu */
+      h += '<button class="btn' + (openTp ? '' : ' lock') + '" data-pron-sound="' + esc(it.k) + '" data-pron-track="tp">' + esc(it.k) + ' · ' + esc(it.ex || "") + (tpPronDone(it.k) ? ' ✓' : '') + (openTp ? '' : ' 🔒') + '</button>';
     });
     h += '</div>';
   });
@@ -9815,6 +9848,7 @@ function renderTrackPron(app, l, track) {
   var doneKey = isZh ? "zhPronDone" : "tpPronDone";
   var skipKey = isZh ? "zhPronSkipped" : "tpPronSkipped";
   var lessonType = isZh ? "zhPron" : "tpPron";
+  if (l.sound && !trackPronTryOpen(track, l.sound)) { l.sound = null; l.sub = 0; } /* v211: chot chan — duong mo bai nao lot qua cong thi quay ve ban do + hien hop khoa */
   /* --- ban do am (chua chon am) --- */
   if (!l.sound) {
     var all = soundsFn();
@@ -9826,7 +9860,7 @@ function renderTrackPron(app, l, track) {
       + (isZh ? zhPronMapHTML() : tpPronMapHTML());
     wireBack();
     pronDiagWireEntry(app); pronWeakWire(app, track);
-    $$("[data-pron-sound]").forEach(function (b) { b.onclick = function () { openLesson({ type: lessonType, sound: b.dataset.pronSound, sub: 0 }); }; });
+    $$("[data-pron-sound]").forEach(function (b) { b.onclick = function () { if (!trackPronTryOpen(track, b.dataset.pronSound)) return; openLesson({ type: lessonType, sound: b.dataset.pronSound, sub: 0 }); }; }); /* v211: khoa tuan tu */
     return;
   }
   /* --- bai am 6 buoc --- */
@@ -9838,7 +9872,7 @@ function renderTrackPron(app, l, track) {
   var idx = 0; for (var i = 0; i < all2.length; i++) if (all2[i].sym === sym) idx = i;
   var prevSym = idx > 0 ? all2[idx - 1].sym : null;
   var nextSym = idx < all2.length - 1 ? all2[idx + 1].sym : null;
-  var goSound = function (s) { l.sound = s; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; l.toneRes = null; l.toneErr = ""; render(); };
+  var goSound = function (s) { if (!s) return; if (!trackPronTryOpen(track, s)) return; /* v211: khoa tuan tu — nut Am sau khong nhay qua am khoa */ l.sound = s; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; l.toneRes = null; l.toneErr = ""; render(); };
   var h = lessonHead({ title: "Âm " + sym + (isZh ? " · Pinyin" : " · Hangul"), type: isZh ? "Tiếng Trung · Phát âm" : "Tiếng Hàn · Phát âm" });
   h += pronStepPillsHTML(track, sym, sub);
   var mainWord = "", pairWord = "", pairNote = "cặp hay nhầm.";
@@ -10288,8 +10322,8 @@ function pronDiagLearn(track, w) {
     if (phTryOpenSound(sym)) openLesson({ type: "pron", step: stepById("pron1"), sound: sym, sub: 0 });
     return;
   }
-  if (t.kind === "zhPron") { var zs = t.sym; if (zs && zhPronEntry(zs)) openLesson({ type: "zhPron", sound: zs, sub: 0 }); else openLesson({ type: "zhPron" }); return; }
-  if (t.kind === "tpPron") { var ts = t.sym; if (ts && tpPronEntry(ts)) openLesson({ type: "tpPron", sound: ts, sub: 0 }); else openLesson({ type: "tpPron" }); return; }
+  if (t.kind === "zhPron") { var zs = t.sym; if (zs && zhPronEntry(zs)) { if (!trackPronTryOpen("zh", zs)) return; openLesson({ type: "zhPron", sound: zs, sub: 0 }); } else openLesson({ type: "zhPron" }); return; }
+  if (t.kind === "tpPron") { var ts = t.sym; if (ts && tpPronEntry(ts)) { if (!trackPronTryOpen("tp", ts)) return; openLesson({ type: "tpPron", sound: ts, sub: 0 }); } else openLesson({ type: "tpPron" }); return; }
   if (t.kind === "zhPh") {
     var idx = t.idx;
     if (zhPhStatus(idx) === "future") { toast("Học xong bước phát âm trước đã — mạch pinyin đi theo thứ tự."); return; }
@@ -12711,7 +12745,7 @@ function renderVocab(app, l) {
     }, function (kind) { p3StopParallel(vk); vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; render(); });
   };
   var enPe = $("#p3ErrHear"); if (enPe) enPe.onclick = function () { speak(c.w); };
-  var vpl = $("#vocabPhLink"); if (vpl) vpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4]) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); };
+  var vpl = $("#vocabPhLink"); if (vpl) vpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4] && phTryOpenSound(s4)) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); /* v211: khoa tuan tu */ };
   /* DOT UI-FIX 31/10: xem truoc thi an nut Phat am cham diem (phan cham diem khoa). */
   if (l.preview) { var bp = $("#btnPronounce"); if (bp) bp.style.display = "none"; wirePreviewLock(); }
   /* v112b L1: kiem thiet bi ghi am 1 lan/phien (cache trong mrCheckDevices) —
@@ -13928,20 +13962,36 @@ function renderQuizEngine(app, l, questions, mode, lessonId, phase) {
    (phOpenSym/phTryOpenSound luon tra true); chi "Bo qua am nay" co chu y
    (phSkipSound) moi ghi vao state.phSkipped. */
 function phIdx(sym) { return phAllOrder().indexOf(sym); }
-/* v122: mo het 44 am — khong con khoa tuan tu o danh sach am. Nguoi hoc bam
-   vao am nao cung hoc duoc ngay; thu tu dot chi la goi y. */
-function phOpenSym(sym) { return true; }
-/* v122: phNudge da go — 44 am mo het nen khong con hop nhac khoa am. */
+/* v211: KHOA TUAN TU PHAT AM (that) — am o vi tri i chi mo khi moi am truoc
+   no da xong (phDone) HOAC da bo qua (phSkipped); am dau tien luon mo; xong
+   het thi mo het; am la (khong co trong thu tu 44 am) thi mo de bai am bao
+   "chua co bai hoc" nhu cu. phOpenSym la kiem tra thuan (khong tac dung phu),
+   phTryOpenSound hien hop khoa + nut sang am dang hoc khi khoa. (v122 da go
+   khoa tuan tu; v211 lam lai khoa that theo lenh Bui.) */
+function phOpenSym(sym) {
+  var o = phAllOrder(), i = o.indexOf(sym);
+  if (i < 0) return true;
+  var cur = phNextSym();
+  if (!cur) return true;
+  return i <= o.indexOf(cur);
+}
 /* v122: mo thang — khong day am chua hoc vao "Da bo qua" nua (nhan do sai
    ban chat). Chi "Bo qua am nay" co chu y (phSkipSound) moi ghi vao
    state.phSkipped. */
-function phTryOpenSound(sym) { return true; }
+function phTryOpenSound(sym) {
+  if (phOpenSym(sym)) return true;
+  var cur = phNextSym();
+  var tc = (typeof curLesson !== "undefined" && curLesson && curLesson.tcStep) ? curLesson.tcStep : null;
+  showLockModal("Âm /" + sym + "/ mở khi bạn học xong âm /" + cur + "/ trước đã — phát âm học theo thứ tự: xong âm trước mới tới âm sau. Âm nào đã bỏ qua thì không chặn đường.", "/" + cur + "/", function () { var l2 = { type: "pron", step: stepById("pron1"), sound: cur, sub: 0 }; if (tc) l2.tcStep = tc; openLesson(l2); });
+  return false;
+}
 function phBtnHTML(sym) {
   var ex = RB_PH_ALL_EXAMPLES[sym] || "";
   var cls = "", st = "";
   var cur = phNextSym();
   if (phDone(sym)) { cls = "done"; st = " ✓ Đã xong"; }
   else if (sym === cur) { cls = "cur"; st = " ▶ Đang học"; }
+  else if (!phOpenSym(sym)) { cls = "lock"; st = " 🔒 Chưa mở"; } /* v211: khoa tuan tu */
   return '<button class="ph-btn ' + cls + '" data-s="' + esc(sym) + '">/' + esc(sym) + '/<br><span class="mut">' + esc(ex) + '</span><br><span class="mut">' + st + '</span></button>';
 }
 /* Tách IPA thành từng âm bằng phép khớp dài nhất với bảng 44 âm (kỹ thuật của
@@ -14036,7 +14086,7 @@ function phMapHTML(sym) {
     var note = RB_PH_DIFF_NOTES[tri[0]];
     return '<h3>' + tri[1] + ' (' + RB_PH_WAVES[tri[2]].length + ' âm)</h3><p class="mut"><b>' + esc(note.t) + '</b></p><details class="guide-more"><summary><b>Xem ghi chú về nhóm âm</b></summary><p class="mut">' + esc(note.d) + '</p></details><div class="ph-table">' + RB_PH_WAVES[tri[2]].map(phBtnHTML).join("") + '</div>';
   }).join("");
-  return '<section class="ph-map"><details id="phMap"' + open + '><summary>Bản đồ 44 âm — đang học Đợt ' + wave + ' · Đã thuộc ' + donePh + '/44 âm · bấm để ' + (open ? "thu gọn" : "mở đủ bản đồ") + '</summary>' + groups + '<details class="guide-more"><summary><b>Xem chú thích bản đồ 44 âm</b></summary><p class="mut">Âm đã thuộc có ✓, âm đang học nổi bật. Cả 44 âm đều mở — bấm vào âm nào cũng học được ngay.</p>' + (function () { var cur = (typeof phNextSym === "function") ? phNextSym() : null; return cur ? '<p class="mut">Âm gợi ý học tiếp: /' + esc(cur) + '/.</p>' : '<p class="mut">Đã thuộc hết 44 âm — giỏi lắm!</p>'; })() + '</details></details></section>';
+  return '<section class="ph-map"><details id="phMap"' + open + '><summary>Bản đồ 44 âm — đang học Đợt ' + wave + ' · Đã thuộc ' + donePh + '/44 âm · bấm để ' + (open ? "thu gọn" : "mở đủ bản đồ") + '</summary>' + groups + '<details class="guide-more"><summary><b>Xem chú thích bản đồ 44 âm</b></summary><p class="mut">Âm đã thuộc có ✓, âm đang học nổi bật, âm chưa mở có 🔒. Xong âm trước mới mở âm sau — âm nào đã bỏ qua thì không chặn đường.</p>' + (function () { var cur = (typeof phNextSym === "function") ? phNextSym() : null; return cur ? '<p class="mut">Âm gợi ý học tiếp: /' + esc(cur) + '/.</p>' : '<p class="mut">Đã thuộc hết 44 âm — giỏi lắm!</p>'; })() + '</details></details></section>';
 }
 var PH_STEP_NAMES = ["Xem + tập", "Nghe phân biệt", "Từ đơn", "Cụm từ", "Câu mẫu", "Thuộc"];
 function phStepGoal(sub, sym) {
@@ -14201,8 +14251,9 @@ function phPracticeWaitGrade(app, step, l, sym) {
 }
 function renderPron(app, l) {
   var step = l.step;
+  if (l.sound && !phTryOpenSound(l.sound)) { l.sound = null; l.sub = 0; } /* v211: chot chan — duong mo bai nao lot qua cong thi quay ve ban do + hien hop khoa */
   if (l.sound) { renderPronLesson(app, l); return; }
-  var html = stepHeader(step, "Thứ tự học gợi ý: đi từ trên xuống theo đợt. Cả 44 âm đều mở — bấm vào âm nào cũng học được ngay, không bị khóa.");
+  var html = stepHeader(step, "Học theo thứ tự: xong âm trước mới mở âm sau. Âm đang học nổi bật, âm chưa mở có 🔒 — bấm vào sẽ thấy cần học âm nào trước.");
   var donePh = phAllOrder().filter(function (s) { return phDone(s); }).length;
   html += '<p><b>Đã học xong ' + donePh + ' trên 44 âm</b></p><div class="bar" style="margin-top:8px"><i style="width:' + Math.round(donePh / 44 * 100) + '%"></i></div>';
   var phFirstUndone = phAllOrder().filter(function (s) { return !phDone(s); })[0];
@@ -14414,7 +14465,7 @@ function renderPronLesson(app, l) {
   var psNext = $("#phNextSound");
   if (psNext) psNext.onclick = function () { if (phTryOpenSound(next44)) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; render(); } };
   var psNext2 = $("#phNextSound2");
-  if (psNext2) psNext2.onclick = function () { if (next44) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; render(); } };
+  if (psNext2) psNext2.onclick = function () { if (next44 && phTryOpenSound(next44)) { l.sound = next44; l.sub = 0; l.diffOk = false; l.diffHeard1 = false; l.diffHeard2 = false; l.diffRevealed = false; l.diffLogged = false; l.phT1 = {}; l.__p3 = {}; l.p3Par = {}; render(); } }; /* v211: khoa tuan tu (truoc day nhay thang khong qua cong) */
   var phHe = $("#phHearEx"); if (phHe) phHe.onclick = function () { speak(p.w); l.shadowDone = true; l.shadowDoneSym = sym; render(); };
   var phTc = $("#phTcSenHear"); if (phTc) phTc.onclick = function () { speak(p.tcSen); }; /* v174 S3: nghe cau cong so (chi track TC) */
   if (sub === 2 || sub === 3 || sub === 4) { pronT1Wire(l, sym); pronP3Wire(l, sub === 2 ? "w" : (sub === 3 ? "phr" : "sen"), sym); /* v176 N8: muc tieu chinh doc theo phien 3 luot; cac muc them (exw/exp/exs) van 1 luot qua pronT1Wire */ }
@@ -25757,7 +25808,7 @@ function renderZhVocab(app, l) {
     var zt2 = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || "");
     toneYinRecord(zt2.tone, function (points, sc) { zvk.toneRes = { points: points, sc: sc, tone: zt2.tone }; zvk.toneErr = ""; render(); }, function (kind) { zvk.toneErr = kind === "mic" ? "Không mở được mic — kiểm tra quyền mic rồi thử lại." : (kind === "no-voice" ? "Không nghe thấy giọng — đọc to hơn, một hơi một âm tiết rồi thử lại." : "Không ghi được âm thanh trên máy này — học bằng tai: bấm “Nghe mẫu” rồi đọc theo."); render(); });
   };
-  var zhPL = $("#zhPhLink"); if (zhPL) zhPL.onclick = function () { var zt3 = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || ""); openLesson({ type: "zhPron", sound: zhToneName(zt3.tone), sub: 0 }); };
+  var zhPL = $("#zhPhLink"); if (zhPL) zhPL.onclick = function () { var zt3 = zhPinyinParts(String(c.pinyin || "").split(/\s+/)[0] || ""); if (trackPronTryOpen("zh", zhToneName(zt3.tone))) openLesson({ type: "zhPron", sound: zhToneName(zt3.tone), sub: 0 }); }; /* v211: khoa tuan tu */
   /* B6b: the hoc xong tron 5 buoc tu hen on lai theo SRS (1-3-7-14-30, dung 2 lan cach quang moi tot nghiep) — cung khuon muc kho, khong reset muc da co. */
   var zhFinishCard = function () { try { mirrorStop(); } catch (e) {} var hk = d.key + ":" + pos; if (!state.zhHard) state.zhHard = {}; if (!state.zhHard[hk]) state.zhHard[hk] = { kind: "card", han: c.han, pinyin: c.pinyin, vi: c.vi, setKey: d.key, idx: pos, fails: (Object.keys(zvk.recorded).length > 0 || zvk.peeked) ? 1 : 0, streak: 0, level: 0, due: addDaysStr(todayStr(), 1) }; /* v107b: the Trung xong +1 XP nhu the Anh (Bui quyet 09:38 07/11); hoc that the nay thi xoa khoi danh sach bo qua. */ if (state.zhSkipped && state.zhSkipped.indexOf(hk) >= 0) state.zhSkipped = state.zhSkipped.filter(function (x) { return x !== hk; }); /* v107c: ghi the hoc xong co thuoc ngay lan dau khong (dung dieu kien nhu fails o tren: co ghi am hoac peek thi khong tinh thuoc ngay). */ if (!l.zhFirstTry) l.zhFirstTry = {}; l.zhFirstTry[pos] = !(Object.keys(zvk.recorded).length > 0 || zvk.peeked); /* v108c: chan +XP khi hoc lai the da thuoc trong cung ngay — nhu the Anh/TC/TP (boxDay): truoc day +1 XP moi lan xong the, ke ca hoc lai cung the cung ngay. */ var zhKnown108c = !(Object.keys(zvk.recorded).length > 0 || zvk.peeked); var zhHe108c = state.zhHard[hk]; var zhTDay108c = todayStr(); var zhGained108c = zhKnown108c && zhHe108c.finDay !== zhTDay108c; if (zhGained108c || !zhKnown108c) awardXp(1); if (zhKnown108c) zhHe108c.finDay = zhTDay108c; state.zhPos[d.key] = pos + 1; saveState(); zhMaybeBlockReview(l, d, cards, pos); render(); vkScrollCardTop(); };
   var zhFin = $("#zhMultiFinish"); if (zhFin) zhFin.onclick = zhFinishCard;
@@ -27764,7 +27815,7 @@ function renderTcTpVocab5(track, stepId, back) {
       renderTcTpVocab5(track, stepId, backTab);
     }, function (kind) { p3StopParallel(vk); vk.t1 = pronTier1ErrText(kind); vk.pronDone = false; vk.pronAttempted = true; renderTcTpVocab5(track, stepId, backTab); });
   };
-  var tpl = $("#ttPhLink"); if (tpl) tpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4]) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); };
+  var tpl = $("#ttPhLink"); if (tpl) tpl.onclick = function () { var s4 = c.ipa ? firstSymFromIpa(c.ipa) : ""; if (s4 && RB_PH_ALL_EXAMPLES[s4] && phTryOpenSound(s4)) openLesson({ type: "pron", step: stepById("pron1"), sound: s4, sub: 0 }); /* v211: khoa tuan tu */ };
   var mf = $("#ttMultiFinish"); if (mf) mf.onclick = function () { tcTpVocab5Advance(sess, Object.keys(vk.recorded).length === 0 && !vk.peeked); vkScrollCardTop(); };
   var pl = $("#ttPronListen"); if (pl) pl.onclick = function () { tpSpeak(c.w); };
   var pd = $("#ttPronDone"); if (pd) pd.onclick = function () { vk.pronDone = true; vk.step = 4; renderTcTpVocab5(track, stepId, backTab); vkScrollCardTop(); };
@@ -27788,7 +27839,7 @@ function renderTcTpVocab5(track, stepId, back) {
       renderTcTpVocab5(track, stepId, backTab);
     }, function (kind) { p3StopParallel(vk); vk.t1 = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; vk.pronDone = false; vk.pronAttempted = true; /* v124b: dat co nhu EN/TC */ renderTcTpVocab5(track, stepId, backTab); });
   };
-  var tplTp = $("#ttPhLinkTp"); if (tplTp) tplTp.onclick = function () { var j2 = tpJamo(c.w); if (j2) openLesson({ type: "tpPron", sound: TP_INIT_JAMO[j2.init], sub: 0 }); };
+  var tplTp = $("#ttPhLinkTp"); if (tplTp) tplTp.onclick = function () { var j2 = tpJamo(c.w); if (j2 && trackPronTryOpen("tp", TP_INIT_JAMO[j2.init])) openLesson({ type: "tpPron", sound: TP_INIT_JAMO[j2.init], sub: 0 }); }; /* v211: khoa tuan tu */
   /* v112b L1: nhu the Anh — kiem thiet bi ghi am 1 lan/phien, ve lai neu may
      that su khong co mic/camera de hien nut thoat o buoc 4 ngay khi vao buoc. */
   mrCheckDevices(function () { if (vk.step === 3) renderTcTpVocab5(track, stepId, backTab); });
@@ -27927,7 +27978,7 @@ function renderTcPron(app, m, id, back, skipBanner) {
   if (pr.mode === "map") {
     var done = 0; try { done = Object.keys(state.phDone || {}).filter(function (k) { return state.phDone[k]; }).length; } catch (e) {}
     app.innerHTML = head
-      + '<p class="mut">Học phát âm trước khi học từ mới — thuộc 44 âm rồi thì nghe và đọc từ nào cũng dễ hơn. Bản đồ 44 âm mở hết, học âm nào cũng được, không khóa.</p>'
+      + '<p class="mut">Học phát âm trước khi học từ mới — thuộc 44 âm rồi thì nghe và đọc từ nào cũng dễ hơn. Bản đồ 44 âm học theo thứ tự: xong âm trước mới mở âm sau.</p>'
       + '<p><b>Đã thuộc ' + done + '/44 âm.</b></p>'
       + '<div class="row"><button class="btn btn-primary" id="tcPronMapGo">Vào bản đồ 44 âm →</button></div>'
       + '<div class="row" style="margin-top:8px"><button class="btn" id="tcPronFinish">Xong bài này (+10 XP)</button></div></section>';
