@@ -22585,6 +22585,237 @@ CONTENT.grammar.push.apply(CONTENT.grammar, [
     ]
   }
 ]);
+/* v203: 14 MUC NGU PHAP EN — TRANG TRONG / THAN MAT (register) — parity QT-05: EN 0 muc chuyen biet vs TP 12 muc kinh ngu (v195) + ZH 1 muc (v192/v194). Append cuoi CONTENT.grammar idx 134-147, fam "Trang trong va than mat", 112 cau quiz. */
+/* v203: 14 MUC NGU PHAP EN — TRANG TRONG / THAN MAT (register).
+   Append CUOI CONTENT.grammar (idx 134-147), fam moi "Trang trong va than mat".
+   Shape EN dung chuan: fam/hook/level/name/explain/examples x3/quiz x8 (moi cau 3 lua chon).
+   Chu thich trong kho khong dung dau ngoac kep doi ben trong chuoi — dung ‘…’. */
+CONTENT.grammar.push.apply(CONTENT.grammar, [
+  {
+    fam: "Trang trọng và thân mật", level: "Band 3,5", name: "Trang trọng và thân mật — tổng quan: chọn giọng điệu đúng người, đúng chỗ",
+    hook: "Nói với bạn thân khác nói với thầy cô: cùng một ý, đổi cách nói là đổi cả thái độ — đó là đăng ký ngôn ngữ (register).",
+    explain: "Ví dụ trước nhé: ‘Hi, can you help me?’ (Chào bạn, bạn giúp tôi được không? — nói với bạn) và ‘Good morning. Could you possibly help me, please?’ (Chào buổi sáng, liệu bạn có thể giúp tôi được không? — nói với người lạ, cấp trên). Sau ví dụ là quy tắc. Đăng ký ngôn ngữ (register) là cách chọn từ và câu cho phù hợp với người nghe và hoàn cảnh: trang trọng (formal) dùng với người lớn tuổi, cấp trên, trong thư công việc và bài viết học thuật; thân mật (informal) dùng với bạn bè, người thân, trong tin nhắn. Dấu hiệu nhận biết: câu trang trọng dài hơn, dùng từ gốc La-tinh (request, assist), không rút gọn (do not thay vì don’t), dùng could/would; câu thân mật ngắn, dùng phrasal verbs (ask for, help out), rút gọn (don’t, can’t). Quy tắc vàng: khi không chắc, hãy chọn cách trang trọng hơn — lịch sự thừa không bao giờ bị coi là sai, còn thân mật quá với người lạ thì dễ bị coi là bất lịch sự.",
+    examples: ["Hi, can you help me? — Chào bạn, bạn giúp tôi được không? (thân mật)", "Good morning. Could you possibly help me, please? — Chào buổi sáng. Liệu bạn có thể giúp tôi được không? (trang trọng)", "Thanks a lot! — Cảm ơn nhiều nhé! (thân mật) / Thank you very much indeed. — Xin chân thành cảm ơn. (trang trọng)"],
+    quiz: [
+      { q: "Bạn viết email xin việc. Câu mở đầu nào phù hợp nhất?", o: ["Hi there!", "Dear Sir or Madam,", "Hey you!"], a: 1, why: "Email xin việc là văn trang trọng: mở đầu bằng Dear Sir or Madam,." },
+      { q: "Câu nào là cách nói trang trọng của ‘I want to see the manager’?", o: ["Get me the manager!", "I would like to speak to the manager, please.", "I wanna see the manager."], a: 1, why: "Would like + to-V là cách nói mong muốn lịch sự, trang trọng." },
+      { q: "Với bạn thân, câu nào tự nhiên nhất?", o: ["Can you give me a hand?", "I would be most grateful if you could assist me.", "I hereby request your assistance."], a: 0, why: "Với bạn thân dùng cách thân mật: Can you give me a hand?" },
+      { q: "Trong bài viết học thuật, nên tránh điều gì?", o: ["Từ rút gọn như don’t, can’t", "Từ nối however", "Câu bị động"], a: 0, why: "Văn học thuật trang trọng không dùng dạng rút gọn: viết do not, cannot." },
+      { q: "Câu nào trang trọng hơn?", o: ["Send me the report.", "Could you please send me the report?", "Send the report, OK?"], a: 1, why: "Could you please… là yêu cầu lịch sự, trang trọng; câu mệnh lệnh trần là thân mật, thậm chí thô." },
+      { q: "Khi không chắc nên dùng giọng nào, quy tắc vàng là:", o: ["Dùng tiếng lóng cho gần gũi", "Chọn cách thân mật hơn", "Chọn cách trang trọng hơn"], a: 2, why: "Lịch sự thừa không bao giờ sai; thân mật quá với người lạ dễ bị coi là bất lịch sự." },
+      { q: "‘Thanks!’ là cách nói:", o: ["Trang trọng", "Thân mật", "Học thuật"], a: 1, why: "Thanks! ngắn gọn, thân mật; trang trọng nói Thank you very much." },
+      { q: "Trong thư công việc, câu kết nào phù hợp?", o: ["I look forward to hearing from you.", "Bye for now!", "See you soon!"], a: 0, why: "I look forward to hearing from you là câu kết trang trọng chuẩn của thư công việc." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 4,5", name: "Từ trang trọng và từ thân mật — ask/enquire, buy/purchase, help/assist",
+    hook: "Cùng một nghĩa, hai bộ mặt: ask là hỏi bình thường, enquire là hỏi trang trọng — biết cả hai thì mới chọn đúng chỗ.",
+    explain: "Ví dụ trước nhé: ‘Can I ask you a question?’ (Tôi hỏi bạn một câu được không? — thân mật) và ‘May I enquire about the course fees?’ (Tôi có thể hỏi về học phí khóa học được không? — trang trọng). Sau ví dụ là quy tắc. Nhiều từ tiếng Anh có hai dạng: dạng thân mật thường ngắn, gốc Anglo-Saxon (ask, get, buy, help, kids, start, end, find out); dạng trang trọng thường dài, gốc La-tinh (enquire, receive, purchase, assist, children, commence, conclude, discover). Quy tắc: trong bài viết học thuật và thư công việc, ưu tiên dạng trang trọng; trong nói chuyện hằng ngày, dạng thân mật tự nhiên hơn. Nhớ các cặp hay gặp: ask/enquire, get/receive, buy/purchase, help/assist, show/demonstrate, tell/inform, need/require, start/commence, end/terminate, find out/discover, look into/investigate, put off/postpone.",
+    examples: ["I need to buy a ticket. — Tôi cần mua một vé. (thân mật) / I need to purchase a ticket. — Tôi cần mua một vé. (trang trọng)", "Can you help me? — Bạn giúp tôi được không? (thân mật) / Could you assist me, please? — Bạn có thể giúp tôi được không? (trang trọng)", "The meeting starts at nine. — Cuộc họp bắt đầu lúc chín giờ. (thân mật) / The meeting commences at nine. — Cuộc họp bắt đầu lúc chín giờ. (trang trọng)"],
+    quiz: [
+      { q: "Từ trang trọng của ‘buy’ là:", o: ["get", "purchase", "take"], a: 1, why: "Buy (thân mật) → purchase (trang trọng)." },
+      { q: "Từ trang trọng của ‘ask’ (trong thư công việc) là:", o: ["beg", "enquire", "wonder"], a: 1, why: "Ask → enquire trong văn trang trọng." },
+      { q: "Trong bài luận IELTS, nên dùng từ nào thay ‘kids’?", o: ["youngsters", "little ones", "children"], a: 2, why: "Kids là từ thân mật; trong bài luận dùng children." },
+      { q: "Cặp nào ĐÚNG (thân mật → trang trọng)?", o: ["discover → find out", "find out → look", "find out → discover"], a: 2, why: "Find out (thân mật) → discover (trang trọng)." },
+      { q: "Từ nào trang trọng nhất?", o: ["want", "require", "need"], a: 1, why: "Require là dạng trang trọng của need." },
+      { q: "Trong thư công việc: ‘Please ___ me if there are any changes.’", o: ["tell", "say", "inform"], a: 2, why: "Trong thư trang trọng dùng inform thay vì tell." },
+      { q: "‘The course will ___ next Monday.’ (trang trọng)", o: ["kick off", "start", "commence"], a: 2, why: "Start → commence trong văn trang trọng." },
+      { q: "Câu nào phù hợp trong bài viết học thuật?", o: ["The study checks out the problem.", "The study investigates the problem.", "The study looks into the problem."], a: 1, why: "Trong bài viết học thuật dùng investigate, không dùng look into hay check out." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 3,5", name: "Câu yêu cầu lịch sự — Could you…? / Would you mind…? / I wonder if…",
+    hook: "Muốn nhờ ai làm gì mà không nghe như ra lệnh: thêm could, would, mind — càng dài càng lịch sự.",
+    explain: "Ví dụ trước nhé: ‘Open the window.’ (Mở cửa sổ ra — mệnh lệnh, nghe thô) và ‘Could you open the window, please?’ (Bạn mở cửa sổ giúp tôi được không? — lịch sự). Sau ví dụ là quy tắc. Thang lịch sự của câu yêu cầu, từ thấp tới cao: (1) mệnh lệnh + please: ‘Please open the window.’; (2) Can you…? ‘Can you help me?’; (3) Could you…? ‘Could you help me, please?’; (4) Would you mind + V-ing? ‘Would you mind opening the window?’; (5) I wonder if you could…? ‘I wonder if you could help me?’. Càng dùng could/would và câu càng dài thì càng lịch sự — dùng với người lạ, cấp trên, khách hàng. Chú ý: sau Would you mind phải dùng V-ing (Would you mind waiting? — không nói Would you mind wait?). Trả lời đồng ý: ‘Of course.’ / ‘Not at all.’; từ chối lịch sự: ‘I’m afraid I can’t at the moment.’",
+    examples: ["Could you pass me the salt, please? — Bạn đưa tôi lọ muối được không?", "Would you mind closing the door? — Bạn có phiền đóng cửa giúp tôi không?", "I wonder if you could help me with this form. — Liệu bạn có thể giúp tôi với mẫu đơn này không?"],
+    quiz: [
+      { q: "___ you open the window, please? (lịch sự nhất)", o: ["Do", "Can", "Could"], a: 2, why: "Could lịch sự hơn Can trong câu yêu cầu." },
+      { q: "Would you mind ___ the door?", o: ["to close", "close", "closing"], a: 2, why: "Sau Would you mind dùng V-ing: Would you mind closing…?" },
+      { q: "Câu yêu cầu nào lịch sự nhất?", o: ["Can you check this?", "I wonder if you could check this for me?", "Check this for me."], a: 1, why: "I wonder if you could… là mẫu lịch sự nhất trong ba câu." },
+      { q: "Trả lời đồng ý với ‘Would you mind waiting a moment?’ — câu nào đúng?", o: ["Yes, I mind.", "No, I mind.", "Not at all."], a: 2, why: "‘Not at all’ nghĩa là ‘không phiền gì đâu’ — đồng ý. ‘Yes, I mind’ là từ chối." },
+      { q: "‘___ you possibly help me carry this bag?’ — câu nào lịch sự nhất?", o: ["Can", "Will", "Could"], a: 2, why: "Could + possibly là cách nhờ vả rất lịch sự." },
+      { q: "Câu nào nghe như ra lệnh, KHÔNG lịch sự?", o: ["Could you give me the report, please?", "Give me the report.", "Would you mind giving me the report?"], a: 1, why: "Câu mệnh lệnh trần ‘Give me the report.’ nghe như ra lệnh." },
+      { q: "I wonder if you ___ send me the details.", o: ["could", "could to", "can to"], a: 0, why: "I wonder if you could + động từ nguyên thể." },
+      { q: "Khi nhờ người lạ, nên dùng:", o: ["Could you…? / Would you mind…?", "Mệnh lệnh trần", "Câu hỏi Yes/No ngắn"], a: 0, why: "Với người lạ dùng Could you…? hoặc Would you mind…? cho lịch sự." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 5,5", name: "Câu hỏi gián tiếp nâng cao — I was wondering if… / Do you happen to know…?",
+    hook: "Hỏi gián tiếp đã học ở mục câu hỏi gián tiếp đơn giản; lên một nấc nữa: I was wondering if… — câu hỏi dài hơn, lịch sự hơn, dùng với người lạ và trong thư.",
+    explain: "Ví dụ trước nhé: ‘Where is the station?’ (Ga ở đâu? — hỏi trực tiếp) và ‘I was wondering if you could tell me where the station is.’ (Tôi tự hỏi liệu bạn có thể cho tôi biết ga ở đâu không — rất lịch sự). Sau ví dụ là quy tắc. Câu hỏi gián tiếp nâng cao có ba mẫu: (1) I was wondering if/whether + mệnh đề: ‘I was wondering if you could help me.’; (2) Do you happen to know + từ hỏi + mệnh đề: ‘Do you happen to know what time the shop closes?’; (3) Could you tell me + từ hỏi + mệnh đề: ‘Could you tell me how much it costs?’ (mở rộng của mục câu hỏi gián tiếp đơn giản). Quy tắc chung như mục đơn giản: sau từ hỏi, dùng thứ tự câu kể (chủ ngữ + động từ, không đảo): ‘where the station is’ (không nói ‘where is the station’). Thì: I was wondering dùng quá khứ tiếp diễn nhưng nghĩa là hiện tại — càng ‘xa’ về thì càng lịch sự. Dùng trong email, điện thoại với người lạ, và khi hỏi việc nhạy cảm (giá cả, thời gian riêng tư).",
+    examples: ["I was wondering if you could tell me where the station is. — Tôi tự hỏi liệu bạn có thể cho tôi biết ga ở đâu không.", "Do you happen to know what time the museum opens? — Bạn có tình cờ biết bảo tàng mở cửa lúc mấy giờ không?", "Could you tell me how much this costs? — Bạn cho tôi biết cái này giá bao nhiêu được không?"],
+    quiz: [
+      { q: "I was wondering if you ___ tell me the time.", o: ["can to", "could", "will to"], a: 1, why: "I was wondering if you could + động từ nguyên thể." },
+      { q: "Do you happen to know where the library ___?", o: ["is", "is it", "does"], a: 0, why: "Thứ tự câu kể: where the library is." },
+      { q: "Câu nào lịch sự nhất?", o: ["Can you help me?", "Help me.", "I was wondering if you could help me."], a: 2, why: "I was wondering if you could… là mẫu lịch sự nhất." },
+      { q: "Could you tell me what time the bus ___?", o: ["leaves", "leave", "does leave"], a: 0, why: "Thứ tự câu kể: what time the bus leaves." },
+      { q: "‘I was wondering…’ dùng thì quá khứ tiếp diễn nhưng nghĩa là:", o: ["Hiện tại — cách nói lịch sự", "Tương lai", "Quá khứ thật"], a: 0, why: "I was wondering dùng quá khứ tiếp diễn để nói lịch sự về hiện tại." },
+      { q: "Chọn câu đúng:", o: ["Do you know where does he live?", "Do you know where he live?", "Do you know where he lives?"], a: 2, why: "Câu hỏi gián tiếp dùng thứ tự câu kể: where he lives." },
+      { q: "Khi hỏi giá cả với người bán hàng lạ, nên dùng:", o: ["Could you tell me how much this is?", "How much is this? Give me the price.", "Price?"], a: 0, why: "Could you tell me… là cách hỏi giá lịch sự với người lạ." },
+      { q: "I was wondering ___ you could send me the file.", o: ["that", "if", "what"], a: 1, why: "I was wondering if + mệnh đề." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 5,0", name: "Email trang trọng — mở đầu và kết thúc: Dear Sir or Madam → Yours faithfully",
+    hook: "Email xin việc, email gửi thầy cô: mở đầu Dear… và kết thúc Yours faithfully — sai một chữ là mất điểm lịch sự.",
+    explain: "Ví dụ trước nhé: ‘Dear Sir or Madam, I am writing to apply for the position of sales assistant.’ (Kính gửi ông/bà, tôi viết thư này để ứng tuyển vị trí trợ lý bán hàng.) và kết thúc ‘Yours faithfully, Nguyen Van An’ (Trân trọng, Nguyễn Văn An). Sau ví dụ là quy tắc. Cấu trúc email trang trọng: (1) Mở đầu: không biết tên → ‘Dear Sir or Madam,’; biết tên → ‘Dear Mr Nguyen,’ / ‘Dear Ms Tran,’ (dùng họ, không dùng tên riêng; không viết ‘Dear teacher’ — trong tiếng Anh phải dùng họ tên: Dear Mr Nguyen,). (2) Câu mở: ‘I am writing to enquire about… / to apply for… / to complain about…’. (3) Thân thư: câu đầy đủ, không rút gọn, dùng could/would. (4) Kết thúc: không biết tên → ‘Yours faithfully,’; biết tên → ‘Yours sincerely,’; rồi ký tên đầy đủ. Nhớ: sau Dear có dấu phẩy; ‘I look forward to hearing from you’ là câu kết chuẩn trước lời chào kết.",
+    examples: ["Dear Sir or Madam, I am writing to enquire about the English course. — Kính gửi ông/bà, tôi viết thư để hỏi về khóa học tiếng Anh.", "Dear Mr Nguyen, I am writing to apply for the position advertised on your website. — Kính gửi ông Nguyễn, tôi viết thư để ứng tuyển vị trí đăng trên trang web của ông.", "Yours faithfully, Tran Thi Mai — Trân trọng, Trần Thị Mai (dùng khi mở đầu là Dear Sir or Madam)"],
+    quiz: [
+      { q: "Không biết tên người nhận, mở đầu email nào đúng?", o: ["Dear friend,", "Dear Sir or Madam,", "Hi there,"], a: 1, why: "Không biết tên thì mở đầu bằng Dear Sir or Madam,." },
+      { q: "Mở đầu ‘Dear Sir or Madam,’ thì kết thúc nào đúng?", o: ["Yours faithfully,", "Yours sincerely,", "Cheers,"], a: 0, why: "Dear Sir or Madam → Yours faithfully, (không biết tên)." },
+      { q: "Biết tên người nhận là Mr Nguyen, kết thúc nào đúng?", o: ["Yours faithfully,", "Love,", "Yours sincerely,"], a: 2, why: "Biết tên (Dear Mr Nguyen) → Yours sincerely,." },
+      { q: "Câu nào KHÔNG nên dùng trong email xin việc?", o: ["Dear Mr Nguyen, I am writing to apply for the position.", "Dear teacher, I want a job.", "Dear Sir or Madam, I am writing to enquire about the vacancy."], a: 1, why: "‘Dear teacher’ không dùng trong tiếng Anh; phải dùng họ tên. ‘I want a job’ quá trực tiếp." },
+      { q: "Câu mở email trang trọng nào đúng?", o: ["Give me the job, please.", "I am writing to apply for the position.", "I want the job."], a: 1, why: "Câu mở chuẩn: I am writing to apply for… / to enquire about…" },
+      { q: "Câu kết nào chuẩn trước lời chào kết?", o: ["Write back ASAP.", "Reply soon!", "I look forward to hearing from you."], a: 2, why: "I look forward to hearing from you là câu kết trang trọng chuẩn." },
+      { q: "Trong email trang trọng, nên viết:", o: ["I don’t understand.", "I dunno.", "I do not understand."], a: 2, why: "Email trang trọng không dùng dạng rút gọn: I do not understand." },
+      { q: "Sau ‘Dear Mr Nguyen’ dùng dấu gì?", o: ["Dấu chấm (.)", "Dấu phẩy (,)", "Dấu chấm than (!)"], a: 1, why: "Sau lời chào mở đầu trong thư Anh dùng dấu phẩy." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 4,5", name: "Tin nhắn và email thân mật — Hi Anna → Best wishes / Cheers",
+    hook: "Nhắn cho bạn thì Hi Anna! là đủ, kết bằng Cheers! — biết ranh giới thân mật thì không bao giờ viết quá trang trọng với bạn bè.",
+    explain: "Ví dụ trước nhé: ‘Hi Anna, How are you? Are you free on Saturday? Let me know! Cheers, Mai’ (Chào Anna, bạn khỏe không? Thứ Bảy bạn rảnh không? Cho mình biết nhé! Thân, Mai). Sau ví dụ là quy tắc. Tin nhắn và email thân mật: (1) Mở đầu: ‘Hi + tên riêng,’ / ‘Hello Anna,’ — không dùng Dear Sir/Madam; (2) Câu ngắn, dùng rút gọn (I’m, don’t, can’t), phrasal verbs (catch up, hang out), từ cảm thán (Great! Sounds good!); (3) Kết thúc: ‘Best wishes,’ / ‘Cheers,’ / ‘See you soon!’ / ‘Love, Mai’ (chỉ với người rất thân). Quy tắc: không dùng từ La-tinh dài (purchase, enquire) với bạn bè — nghe xa cách; không dùng Love với đồng nghiệp hay thầy cô. Khi viết cho bạn mà dùng giọng trang trọng quá, người đọc sẽ thấy lạ và xa cách.",
+    examples: ["Hi Tom, Are you free this weekend? — Chào Tom, cuối tuần này bạn rảnh không?", "Sounds great! See you at 7. — Nghe hay đấy! Gặp bạn lúc 7 giờ nhé.", "Thanks for your help! Cheers, Lan — Cảm ơn bạn đã giúp! Thân, Lan"],
+    quiz: [
+      { q: "Mở đầu tin nhắn cho bạn nào đúng?", o: ["Hi Anna,", "Dear Ms Anna,", "Dear Sir or Madam,"], a: 0, why: "Tin nhắn thân mật mở đầu bằng Hi + tên riêng." },
+      { q: "Kết thúc nào phù hợp cho email bạn bè?", o: ["Yours faithfully,", "Yours sincerely,", "Best wishes,"], a: 2, why: "Email bạn bè kết bằng Best wishes, hoặc Cheers,." },
+      { q: "Câu nào thân mật, tự nhiên?", o: ["I look forward to our forthcoming rendezvous.", "Let’s catch up soon!", "I hereby propose a meeting."], a: 1, why: "Let’s catch up soon! là cách nói thân mật, tự nhiên." },
+      { q: "Không nên kết email cho đồng nghiệp bằng:", o: ["Love,", "Kind regards,", "Best regards,"], a: 0, why: "Love chỉ dùng với người rất thân (gia đình, người yêu)." },
+      { q: "Trong tin nhắn thân mật, dùng dạng nào?", o: ["I’m, don’t, can’t (rút gọn)", "I am, do not, cannot", "I hereby, furthermore"], a: 0, why: "Tin nhắn thân mật dùng dạng rút gọn: I’m, don’t, can’t." },
+      { q: "Câu nào phù hợp nhắn cho bạn?", o: ["Could you possibly spare some time on Saturday?", "I would be most grateful if you could meet me on Saturday.", "Can you hang out on Saturday?"], a: 2, why: "Nhắn cho bạn dùng cách thân mật: Can you hang out…?" },
+      { q: "‘Cheers’ ở cuối email thân mật nghĩa là:", o: ["Chúc mừng uống bia", "Cảm ơn trang trọng", "Thân ái (lời chào kết thân mật)"], a: 2, why: "Cheers ở cuối thư là lời chào kết thân mật của người Anh." },
+      { q: "Viết cho bạn mà dùng giọng quá trang trọng sẽ khiến người đọc thấy:", o: ["Thân thiết hơn", "Vui vẻ hơn", "Xa cách, lạ lẫm"], a: 2, why: "Giọng quá trang trọng với bạn bè nghe xa cách, lạ lẫm." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 5,0", name: "Nói và viết khác nhau thế nào — rút gọn, câu ngắn, từ nối",
+    hook: "Nói thì I’m gonna… được, viết luận thì không: nói dùng rút gọn và câu ngắn, viết dùng câu đầy đủ và từ nối trang trọng.",
+    explain: "Ví dụ trước nhé: Nói: ‘I’m gonna check it out, it’s really good.’ (Tôi sẽ xem thử, nó hay lắm — nói tự nhiên) và Viết: ‘I am going to examine it; it is highly effective.’ (Tôi sẽ xem xét nó; nó rất hiệu quả — viết trang trọng). Sau ví dụ là quy tắc. Nói và viết khác nhau ở bốn điểm: (1) Rút gọn: nói dùng I’m, don’t, can’t; viết trang trọng dùng I am, do not, cannot. (2) Độ dài câu: nói dùng câu ngắn, ngắt quãng; viết dùng câu dài, nhiều mệnh đề. (3) Từ nối: nói dùng and, but, so; viết dùng however, therefore, furthermore, nevertheless. (4) Từ ngữ: nói dùng gonna, wanna, kinda, stuff, a lot of; viết dùng going to, want to, kind of, things, many/much. Chú ý: gonna/wanna/kinda chỉ dùng khi nói, tuyệt đối không viết trong bài luận hay email công việc. Trong IELTS, bài Nói (Speaking) được phép nói tự nhiên, nhưng bài Viết (Writing) phải dùng giọng trang trọng.",
+    examples: ["I’m gonna call you later. — Tôi sẽ gọi lại cho bạn sau. (nói) / I am going to call you later. — Tôi sẽ gọi lại cho bạn sau. (viết)", "It’s really good, you know? — Nó hay lắm, bạn biết đấy. (nói) / It is highly effective. — Nó rất hiệu quả. (viết)", "A lot of people think so. — Rất nhiều người nghĩ vậy. (nói) / Many people hold this view. — Nhiều người có quan điểm này. (viết)"],
+    quiz: [
+      { q: "Trong bài luận IELTS, không nên viết:", o: ["gonna", "going to", "will"], a: 0, why: "Gonna chỉ dùng khi nói; trong bài luận viết going to." },
+      { q: "Dạng viết trang trọng của ‘don’t’ là:", o: ["doesn’t", "do not", "dont"], a: 1, why: "Văn trang trọng không rút gọn: do not." },
+      { q: "Từ nối trang trọng thay cho ‘so’ trong bài viết là:", o: ["so yeah", "and then", "therefore"], a: 2, why: "Trong bài viết dùng therefore thay cho so." },
+      { q: "Câu nào phù hợp trong bài viết học thuật?", o: ["Lots of people reckon so.", "A lot of people think so, you know?", "Many people hold this view."], a: 2, why: "Bài viết học thuật dùng many + hold this view; tránh a lot of và reckon." },
+      { q: "Trong bài Nói IELTS, bạn:", o: ["Được nói tự nhiên, dùng rút gọn", "Phải nói như viết luận", "Không được dùng I’m"], a: 0, why: "Bài Nói được phép nói tự nhiên, dùng dạng rút gọn." },
+      { q: "‘kinda’ là dạng rút gọn của:", o: ["kind", "kinder", "kind of"], a: 2, why: "Kinda = kind of, chỉ dùng khi nói." },
+      { q: "Trong email công việc, nên viết:", o: ["I ain’t coming.", "I cannot attend the meeting.", "I can’t make it, sorry!"], a: 1, why: "Email công việc dùng câu đầy đủ, không rút gọn: I cannot attend…" },
+      { q: "Từ nối nào trang trọng?", o: ["Furthermore", "Plus", "And also"], a: 0, why: "Furthermore là từ nối trang trọng; plus và and also là thân mật." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 5,5", name: "Phrasal verbs và động từ trang trọng — put off/postpone, look into/investigate",
+    hook: "put off là hoãn (nói), postpone là hoãn (viết): cùng một việc, chọn đúng từ là chọn đúng giọng.",
+    explain: "Ví dụ trước nhé: ‘We need to put off the meeting.’ (Chúng ta cần hoãn cuộc họp — nói, thân mật) và ‘We need to postpone the meeting.’ (Chúng ta cần hoãn cuộc họp — viết, trang trọng). Sau ví dụ là quy tắc. Phrasal verbs (động từ + tiểu từ: put off, look into, find out, come up with) là cách nói tự nhiên trong giao tiếp hằng ngày; động từ một từ gốc La-tinh (postpone, investigate, discover, propose) là cách nói trang trọng trong bài viết và thư công việc. Quy tắc: nói và nhắn tin dùng phrasal verbs; viết luận, email công việc dùng động từ trang trọng. Các cặp hay gặp: put off/postpone (hoãn), look into/investigate (điều tra), find out/discover (phát hiện), come up with/propose (đề xuất), go on/continue (tiếp tục), set up/establish (thành lập), turn down/reject (từ chối), cut down on/reduce (cắt giảm). (Nối với mục phrasal verbs đã học — mục này dạy chọn giọng điệu khi dùng chúng.)",
+    examples: ["Let’s put off the trip. — Hoãn chuyến đi nhé. (nói) / Let us postpone the trip. — Hãy hoãn chuyến đi. (viết)", "The police are looking into the case. — Cảnh sát đang điều tra vụ việc. (nói) / The police are investigating the case. — Cảnh sát đang điều tra vụ việc. (viết)", "She came up with a great idea. — Cô ấy đã nghĩ ra một ý tưởng hay. (nói) / She proposed an excellent idea. — Cô ấy đã đề xuất một ý tưởng tuyệt vời. (viết)"],
+    quiz: [
+      { q: "Dạng trang trọng của ‘put off’ là:", o: ["postpone", "delay off", "put on"], a: 0, why: "Put off (thân mật) → postpone (trang trọng)." },
+      { q: "Dạng trang trọng của ‘look into’ là:", o: ["investigate", "look up", "look at"], a: 0, why: "Look into (thân mật) → investigate (trang trọng)." },
+      { q: "Trong bài luận, thay ‘come up with’ bằng:", o: ["propose", "think up", "come up"], a: 0, why: "Come up with (thân mật) → propose (trang trọng)." },
+      { q: "Câu nào phù hợp trong thư công việc?", o: ["We have decided to postpone the meeting.", "We have decided to put off the meeting.", "We have decided to put the meeting off, you know."], a: 0, why: "Thư công việc dùng postpone, không dùng put off." },
+      { q: "Dạng trang trọng của ‘set up’ (công ty) là:", o: ["set down", "establish", "set in"], a: 1, why: "Set up (thân mật) → establish (trang trọng)." },
+      { q: "‘Turn down’ trong văn trang trọng viết là:", o: ["reject", "turn away", "turn off"], a: 0, why: "Turn down (thân mật) → reject (trang trọng)." },
+      { q: "Trong nói chuyện hằng ngày, câu nào tự nhiên nhất?", o: ["I ascertained yesterday.", "I discovered yesterday.", "I found out yesterday."], a: 2, why: "Nói hằng ngày dùng phrasal verb found out; discover và ascertain nghe trang trọng, gượng." },
+      { q: "Cặp nào ĐÚNG (thân mật → trang trọng)?", o: ["cut down on → reduce", "cut down → cut up", "reduce → cut down on"], a: 0, why: "Cut down on (thân mật) → reduce (trang trọng)." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 5,5", name: "Xin lỗi và cảm ơn trang trọng — sincere apologies, most grateful",
+    hook: "‘Sorry!’ thì nhanh, nhưng ‘Please accept my sincere apologies’ mới đủ nặng khi bạn viết thư xin lỗi khách hàng hay thầy cô.",
+    explain: "Ví dụ trước nhé: ‘Sorry I’m late!’ (Xin lỗi tôi đến muộn! — nói với bạn) và ‘Please accept my sincere apologies for the delay.’ (Xin chân thành xin lỗi về sự chậm trễ — viết thư trang trọng). Sau ví dụ là quy tắc. Thang xin lỗi: thân mật ‘Sorry! / My bad!’; lịch sự thường ‘I’m sorry. / I’m sorry about that.’; trang trọng ‘I sincerely apologise for… / Please accept my apologies for… / I regret to inform you…’. Thang cảm ơn: thân mật ‘Thanks! / Thanks a lot!’; lịch sự ‘Thank you. / Thank you so much.’; trang trọng ‘Thank you very much indeed. / I am most grateful for… / I would like to express my gratitude for…’. Quy tắc: xin lỗi trang trọng luôn nêu rõ lý do (for the delay / for any inconvenience caused) và dùng apologise (en-GB, không dùng apologize trong bài thi theo chuẩn Anh); cảm ơn trang trọng dùng grateful/gratitude thay vì thanks. Trong email công việc, câu ‘Thank you for your understanding.’ (Cảm ơn sự thông cảm của bạn) rất hay dùng.",
+    examples: ["I’m sorry I’m late. — Tôi xin lỗi vì đến muộn. (lịch sự thường)", "Please accept my sincere apologies for the delay. — Xin chân thành xin lỗi về sự chậm trễ. (trang trọng)", "I am most grateful for your help. — Tôi vô cùng biết ơn sự giúp đỡ của bạn. (trang trọng)"],
+    quiz: [
+      { q: "Câu xin lỗi trang trọng nhất là:", o: ["Sorry!", "My bad!", "Please accept my sincere apologies for the delay."], a: 2, why: "Please accept my sincere apologies… là mẫu xin lỗi trang trọng nhất." },
+      { q: "Trong bài thi theo chuẩn Anh (en-GB), nên viết:", o: ["apologizee", "apologize", "apologise"], a: 2, why: "Chuẩn Anh viết apologise với -ise, không phải apologize." },
+      { q: "Câu cảm ơn trang trọng là:", o: ["Cheers!", "Thanks a bunch!", "I am most grateful for your support."], a: 2, why: "I am most grateful for… là cảm ơn trang trọng." },
+      { q: "‘Thank you for your understanding’ dùng khi nào?", o: ["Khi cảm ơn món quà", "Khi chào tạm biệt", "Khi xin lỗi và mong người khác thông cảm"], a: 2, why: "Câu này dùng khi xin lỗi và mong người khác thông cảm." },
+      { q: "Viết thư xin lỗi khách hàng, câu nào phù hợp?", o: ["We sincerely apologise for any inconvenience caused.", "Our bad, haha.", "Sorry about that, oops!"], a: 0, why: "Thư xin lỗi khách hàng dùng We sincerely apologise for any inconvenience caused." },
+      { q: "Câu nào là cách cảm ơn thân mật?", o: ["Thanks a lot!", "I am most grateful.", "I would like to express my gratitude."], a: 0, why: "Thanks a lot! là cảm ơn thân mật." },
+      { q: "‘I regret to inform you that…’ là cách nói:", o: ["Trang trọng, thường báo tin không hay", "Tục tĩu", "Thân mật, đùa vui"], a: 0, why: "I regret to inform you… là mở đầu trang trọng khi báo tin không hay." },
+      { q: "Điền vào chỗ trống (trang trọng): ‘Please accept my sincere ___ for the mistake.’", o: ["sorry", "apologies", "sorries"], a: 1, why: "Cụm cố định: Please accept my sincere apologies for…" }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 6,0", name: "Từ chối lịch sự — I’m afraid I can’t… + lý do + đề xuất thay thế",
+    hook: "Không phải lúc nào cũng nói được ‘yes’: I’m afraid I can’t… + lý do — từ chối mà người nghe vẫn thấy dễ chịu.",
+    explain: "Ví dụ trước nhé: ‘No, I can’t.’ (Không, tôi không thể — nghe cộc) và ‘I’m afraid I can’t make it on Friday, as I have a prior engagement.’ (Tôi e là thứ Sáu tôi không tới được, vì tôi đã có hẹn trước — lịch sự). Sau ví dụ là quy tắc. Từ chối lịch sự có ba bước: (1) Mở đầu mềm: ‘I’m afraid… / Unfortunately… / I’d love to, but…’; (2) Nêu lý do ngắn gọn: ‘…I have a prior engagement / …I’m tied up that day / …my schedule is full’; (3) Đề xuất thay thế (nếu được): ‘Could we meet next week instead? / Perhaps another time?’. Quy tắc: không bao giờ từ chối bằng ‘No’ trần với cấp trên hay khách hàng; dùng would love to + but để tỏ thiện chí (‘I’d love to help, but I’m afraid I’m too busy this week.’); ‘I’m afraid’ ở đây không có nghĩa là ‘tôi sợ’ mà là ‘tôi e rằng’ — cách nói lịch sự chuẩn của người Anh. Tránh nói dối dài dòng — lý do ngắn, thật, đủ.",
+    examples: ["I’m afraid I can’t come to the meeting tomorrow. — Tôi e là ngày mai tôi không dự họp được.", "I’d love to help, but I’m afraid I’m tied up this week. — Tôi rất muốn giúp, nhưng e là tuần này tôi bận quá.", "Unfortunately, I won’t be able to make it. Could we meet next week instead? — Thật không may, tôi không tới được. Chúng ta gặp nhau tuần sau được không?"],
+    quiz: [
+      { q: "Câu từ chối lịch sự nhất là:", o: ["No.", "I can’t. Go away.", "I’m afraid I can’t make it on Friday."], a: 2, why: "I’m afraid I can’t… là mẫu từ chối lịch sự." },
+      { q: "‘I’m afraid I can’t…’ — ‘I’m afraid’ ở đây nghĩa là:", o: ["Tôi sợ hãi", "Tôi xin lỗi", "Tôi e rằng (cách nói lịch sự)"], a: 2, why: "I’m afraid ở đây nghĩa là ‘tôi e rằng’, cách nói lịch sự chuẩn." },
+      { q: "Từ chối lịch sự nên có bước nào?", o: ["Nói dối dài dòng", "Chỉ nói No", "Mở đầu mềm + lý do + đề xuất thay thế"], a: 2, why: "Từ chối lịch sự: mở đầu mềm, lý do ngắn, đề xuất thay thế." },
+      { q: "Câu nào tỏ thiện chí khi từ chối?", o: ["I don’t care.", "I’d love to, but I’m afraid I’m busy.", "No way!"], a: 1, why: "I’d love to, but… tỏ thiện chí trước khi từ chối." },
+      { q: "Điền vào chỗ trống: ‘Unfortunately, I ___ be able to attend.’", o: ["am not", "don’t", "won’t"], a: 2, why: "Unfortunately, I won’t be able to attend." },
+      { q: "Sau khi từ chối, nên làm gì?", o: ["Cúp máy ngay", "Đề xuất thời gian khác nếu được", "Không nói gì thêm"], a: 1, why: "Sau khi từ chối nên đề xuất thời gian khác nếu được." },
+      { q: "‘I have a prior engagement’ nghĩa là:", o: ["Tôi bận việc nhà", "Tôi đã có hẹn trước", "Tôi đã đính hôn"], a: 1, why: "A prior engagement = một cuộc hẹn đã có từ trước." },
+      { q: "Với cấp trên, từ chối nào phù hợp?", o: ["Do it yourself.", "I’m afraid I won’t be able to finish it today, but I can do it tomorrow.", "No, I won’t do it."], a: 1, why: "Với cấp trên: từ chối mềm + đề xuất làm vào ngày mai." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 5,0", name: "Đề nghị và gợi ý lịch sự — Shall I…? / Why don’t we…? / How about + V-ing?",
+    hook: "Shall I…? Why don’t we…? Perhaps we could…? — gợi ý hay mà nghe như ra lệnh thì mất hết tác dụng.",
+    explain: "Ví dụ trước nhé: ‘Let’s go.’ (Đi thôi — ra lệnh nhẹ) và ‘Why don’t we go for a walk?’ (Sao chúng ta không đi dạo nhỉ? — gợi ý lịch sự). Sau ví dụ là quy tắc. Bốn mẫu gợi ý, từ trực tiếp tới lịch sự: (1) Let’s + V: ‘Let’s start now.’ (thân mật, với bạn); (2) Why don’t we + V? ‘Why don’t we meet at six?’; (3) Shall I/we + V? ‘Shall I open the window?’ (đề nghị làm giúp); (4) Perhaps we could… / How about + V-ing? ‘Perhaps we could discuss this later.’ / ‘How about having lunch together?’ (lịch sự nhất, dùng trong họp, với cấp trên). Quy tắc: Shall I…? dùng khi đề nghị làm giúp người khác; Shall we…? dùng khi rủ làm chung; How about + V-ing (không dùng to-V: How about going… — không nói How about to go…). Trả lời đồng ý: ‘That’s a great idea.’ / ‘Sounds good.’; từ chối nhẹ: ‘I’m not sure that’s the best idea.’",
+    examples: ["Shall I help you with those bags? — Để tôi giúp bạn xách mấy túi này nhé?", "Why don’t we meet at six? — Sao chúng ta không gặp nhau lúc sáu giờ nhỉ?", "How about having lunch together tomorrow? — Ngày mai cùng ăn trưa nhé?"],
+    quiz: [
+      { q: "Đề nghị làm giúp người khác, dùng mẫu nào?", o: ["Will I…?", "Shall you…?", "Shall I…?"], a: 2, why: "Shall I…? dùng khi đề nghị làm giúp người khác." },
+      { q: "How about ___ lunch together?", o: ["have", "having", "to have"], a: 1, why: "Sau How about dùng V-ing: How about having…?" },
+      { q: "Câu gợi ý lịch sự nhất trong cuộc họp là:", o: ["Perhaps we could discuss this later.", "Let’s discuss this later, now!", "Discuss this later."], a: 0, why: "Perhaps we could… là mẫu gợi ý lịch sự nhất, dùng trong họp." },
+      { q: "Trả lời đồng ý với gợi ý, câu nào đúng?", o: ["No way.", "I don’t care.", "Sounds good."], a: 2, why: "Sounds good. là cách đồng ý với gợi ý." },
+      { q: "‘Why don’t we ___ at six?’ — điền từ đúng:", o: ["meeting", "to meet", "meet"], a: 2, why: "Why don’t we + động từ nguyên thể: Why don’t we meet…?" },
+      { q: "‘Shall we start?’ nghĩa là:", o: ["Tôi sẽ bắt đầu một mình", "Bạn bắt đầu đi", "Chúng ta bắt đầu nhé? (rủ làm chung)"], a: 2, why: "Shall we…? là rủ làm chung." },
+      { q: "Từ chối gợi ý một cách nhẹ nhàng:", o: ["That’s stupid.", "I’m not sure that’s the best idea.", "No!"], a: 1, why: "I’m not sure that’s the best idea. là cách từ chối gợi ý nhẹ nhàng." },
+      { q: "Câu nào là gợi ý (không phải ra lệnh)?", o: ["Why don’t we take a break?", "You must take a break.", "Take a break now."], a: 0, why: "Why don’t we…? là gợi ý; hai câu còn lại là mệnh lệnh." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 6,0", name: "Phàn nàn lịch sự — I’m afraid there’s a problem… + từ giảm nhẹ",
+    hook: "Phàn nàn mà vẫn được việc: I’m afraid there’s a problem with… + I was wondering if you could… — giận thì giận, lời vẫn lịch sự.",
+    explain: "Ví dụ trước nhé: ‘This food is terrible!’ (Món này dở tệ! — thô, gây khó chịu) và ‘I’m afraid the food is a little cold. I was wondering if you could heat it up for me?’ (Tôi e là món ăn hơi nguội. Liệu bạn có thể hâm nóng giúp tôi được không? — lịch sự mà vẫn đạt mục đích). Sau ví dụ là quy tắc. Phàn nàn lịch sự có ba bước: (1) Mở đầu mềm: ‘I’m afraid… / I’m sorry to say… / There’s a small problem with…’; (2) Nêu vấn đề bằng từ giảm nhẹ (a little, a bit, slightly, rather): ‘The room is a bit noisy.’ (không nói ‘The room is horrible!’); (3) Đề nghị cách khắc phục lịch sự: ‘I was wondering if you could… / Would it be possible to…?’. Quy tắc: không dùng từ tuyệt đối (terrible, awful, disgusting) khi phàn nàn với nhân viên — dùng từ giảm nhẹ để người nghe dễ chấp nhận; luôn cảm ơn sau khi được giải quyết (‘Thank you for sorting this out.’). Mẫu hay dùng: ‘I’m afraid there’s a problem with the bill.’ / ‘I’m sorry, but the Wi-Fi doesn’t seem to be working.’",
+    examples: ["I’m afraid there’s a problem with my order. — Tôi e là đơn hàng của tôi có vấn đề.", "I’m sorry, but the room is a bit noisy. Could I possibly change rooms? — Xin lỗi, phòng hơi ồn. Liệu tôi có thể đổi phòng được không?", "I was wondering if you could look into this for me. — Liệu bạn có thể xem xét việc này giúp tôi được không?"],
+    quiz: [
+      { q: "Mở đầu phàn nàn lịch sự nào đúng?", o: ["This is terrible!", "Your bill is wrong! Fix it!", "I’m afraid there’s a problem with the bill."], a: 2, why: "I’m afraid there’s a problem with… là mở đầu phàn nàn lịch sự." },
+      { q: "Từ giảm nhẹ nào dùng khi phàn nàn lịch sự?", o: ["very very / extremely", "a bit / a little / slightly", "terrible / awful / disgusting"], a: 1, why: "Phàn nàn lịch sự dùng từ giảm nhẹ: a bit, a little, slightly." },
+      { q: "Câu nào là phàn nàn lịch sự?", o: ["Fix the Wi-Fi now!", "I’m sorry, but the Wi-Fi doesn’t seem to be working.", "The Wi-Fi is rubbish!"], a: 1, why: "I’m sorry, but the Wi-Fi doesn’t seem to be working. là phàn nàn lịch sự." },
+      { q: "Đề nghị khắc phục lịch sự:", o: ["I was wondering if you could help me with this.", "Do it now.", "You must fix it."], a: 0, why: "I was wondering if you could… là cách đề nghị khắc phục lịch sự." },
+      { q: "Sau khi được giải quyết, nên nói:", o: ["About time!", "Thank you for sorting this out.", "Finally!"], a: 1, why: "Sau khi được giải quyết nên cảm ơn: Thank you for sorting this out." },
+      { q: "‘The room is ___ noisy.’ (giảm nhẹ, lịch sự)", o: ["terribly", "a bit", "awfully"], a: 1, why: "Dùng từ giảm nhẹ a bit: The room is a bit noisy." },
+      { q: "Phàn nàn về món ăn, câu nào lịch sự?", o: ["I’m afraid the soup is a little cold.", "This soup is disgusting!", "I hate this soup!"], a: 0, why: "I’m afraid the soup is a little cold. là phàn nàn lịch sự, có từ giảm nhẹ." },
+      { q: "Bước nào KHÔNG có trong phàn nàn lịch sự?", o: ["Đề nghị cách khắc phục", "Mở đầu mềm", "Chửi mắng nhân viên"], a: 2, why: "Phàn nàn lịch sự không bao giờ chửi mắng nhân viên." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 6,5", name: "Nói trang trọng trong thuyết trình và phỏng vấn — từ nối dẫn dắt, câu đầy đủ",
+    hook: "Thuyết trình, phỏng vấn xin việc: câu đầy đủ, không ừm à, có từ nối dẫn dắt — giọng nói trang trọng là một kỹ năng riêng.",
+    explain: "Ví dụ trước nhé: Nói thường: ‘Ừm, cái này thì… kiểu như là tốt ấy.’ và Nói trang trọng: ‘First, I would like to outline the main benefits. Secondly, the data shows a clear improvement. Finally, I would like to conclude by…’ (Trước tiên, tôi xin trình bày các lợi ích chính. Thứ hai, số liệu cho thấy sự cải thiện rõ rệt. Cuối cùng, tôi xin kết luận bằng…). Sau ví dụ là quy tắc. Nói trang trọng trong thuyết trình và phỏng vấn có bốn điểm: (1) Dùng từ nối dẫn dắt: First / Secondly / Moreover / In conclusion / To sum up; (2) Câu đầy đủ, tránh từ đệm ừm à (um, er, like, you know); (3) Dùng could/would và câu bị động để nghe khách quan: ‘It could be argued that… / The results were analysed…’; (4) Xưng hô và chào hỏi đầy đủ: ‘Good morning, everyone. Thank you for giving me the opportunity to speak today.’ Quy tắc: trong phỏng vấn, trả lời bằng câu hoàn chỉnh, không trả lời cụt (‘Yes.’ → ‘Yes, I have three years of experience in sales.’); kết thúc bằng câu cảm ơn (‘Thank you for your time and consideration.’). (Nối với mục hedging và danh hóa đã học — đây là phần nói, không phải viết.)",
+    examples: ["Good morning, everyone. Today I would like to talk about our new project. — Chào buổi sáng mọi người. Hôm nay tôi xin trình bày về dự án mới của chúng ta.", "Secondly, the data shows a clear improvement. — Thứ hai, số liệu cho thấy sự cải thiện rõ rệt.", "Thank you for your time and consideration. — Cảm ơn quý vị đã dành thời gian và sự quan tâm."],
+    quiz: [
+      { q: "Mở đầu thuyết trình trang trọng nào đúng?", o: ["Good morning, everyone. Today I would like to talk about…", "Hi guys, let’s get this over with.", "Um, so, yeah, let’s start."], a: 0, why: "Mở đầu thuyết trình trang trọng: Good morning, everyone. Today I would like to talk about…" },
+      { q: "Từ nối nào dùng để kết luận thuyết trình?", o: ["So yeah", "To sum up", "Anyway"], a: 1, why: "Kết luận dùng To sum up / In conclusion." },
+      { q: "Trong phỏng vấn, trả lời ‘Do you have experience?’ nên nói:", o: ["Yes, I have three years of experience in sales.", "Yes.", "Yeah, loads."], a: 0, why: "Trả lời phỏng vấn bằng câu hoàn chỉnh, không trả lời cụt." },
+      { q: "Khi nói trang trọng, nên tránh:", o: ["um, er, like, you know", "Moreover, furthermore", "First, secondly"], a: 0, why: "Nói trang trọng tránh từ đệm um, er, like, you know." },
+      { q: "Câu nào nghe khách quan, trang trọng?", o: ["I think the policy is awesome.", "The policy is great, trust me.", "It could be argued that the policy is effective."], a: 2, why: "It could be argued that… là cách nói khách quan, trang trọng." },
+      { q: "Kết thúc phỏng vấn, nên nói:", o: ["Thank you for your time and consideration.", "Bye, see ya!", "OK, I’m done."], a: 0, why: "Kết thúc phỏng vấn: Thank you for your time and consideration." },
+      { q: "Từ nối nào dùng để thêm ý trong thuyết trình?", o: ["And stuff", "Moreover", "Plus"], a: 1, why: "Thêm ý trang trọng dùng Moreover / Furthermore." },
+      { q: "‘Firstly, … Secondly, … Finally, …’ dùng để:", o: ["Kể chuyện cười", "Hỏi đáp nhanh", "Dẫn dắt các ý theo trình tự rõ ràng"], a: 2, why: "Firstly/Secondly/Finally dẫn dắt các ý theo trình tự rõ ràng." }
+    ]
+  },
+  {
+    fam: "Trang trọng và thân mật", level: "Band 6,0", name: "Lỗi thường gặp của người Việt khi chọn giọng điệu — Dear teacher, I want…",
+    hook: "Dear teacher, I want… — hai lỗi kinh điển của người Việt trong một câu: xưng hô sai và câu quá trực tiếp. Sửa hai lỗi này là lên hẳn một giọng.",
+    explain: "Ví dụ trước nhé: Sai: ‘Dear teacher, I want to ask you about my grade.’ (Kính gửi thầy, tôi muốn hỏi thầy về điểm của tôi — dịch sát tiếng Việt, nghe thô trong tiếng Anh) và Đúng: ‘Dear Mr Nguyen, I was wondering if you could explain my grade for the last test.’ (Kính gửi ông Nguyễn, liệu ông có thể giải thích điểm bài kiểm tra vừa rồi của tôi được không?). Sau ví dụ là quy tắc. Bốn lỗi người Việt hay mắc khi chọn giọng điệu: (1) Xưng hô: viết ‘Dear teacher’ — trong tiếng Anh phải dùng họ tên: ‘Dear Mr Nguyen,’ / ‘Dear Dr Tran,’; gọi trực tiếp thì ‘Excuse me, Mr Nguyen’. (2) Quá trực tiếp: ‘I want…’ / ‘Give me…’ — đổi thành ‘I would like…’ / ‘Could you please…?’. (3) Dùng từ thân mật trong bài viết: ‘kids, a lot of, stuff, get’ — đổi thành ‘children, many, things, receive/obtain’ trong bài luận. (4) Lạm dụng ‘I think’ và ‘very very’: thay bằng ‘In my opinion, … / It seems that…’ và ‘extremely / highly’ hoặc một từ mạnh (‘very very good’ → ‘excellent’). Quy tắc: trước khi gửi email hay nộp bài, đọc lại và hỏi: ‘Câu này nói với thầy cô/cấp trên có ổn không?’ — nếu nghe như nói với bạn thân thì viết lại.",
+    examples: ["Dear teacher, I want a new book. — SAI (xưng hô sai + quá trực tiếp) / Dear Mr Nguyen, I would like to request a new book. — ĐÚNG", "A lot of kids like stuff. — Thân mật, không dùng trong bài luận / Many children enjoy these things. — Trang trọng, dùng trong bài viết", "I think it is very very good. — Lặp từ, yếu / In my opinion, it is excellent. — Trang trọng, gọn"],
+    quiz: [
+      { q: "Viết email cho thầy giáo, mở đầu nào ĐÚNG?", o: ["Dear Mr Nguyen,", "Dear teacher,", "Hey teacher,"], a: 0, why: "Trong tiếng Anh phải dùng họ tên: Dear Mr Nguyen, — không viết Dear teacher,." },
+      { q: "Câu nào lịch sự hơn?", o: ["I would like to ask about my grade.", "Tell me my grade.", "I want to ask about my grade."], a: 0, why: "I would like… lịch sự hơn I want… rất nhiều." },
+      { q: "Trong bài luận, thay ‘a lot of kids’ bằng:", o: ["a lot of little ones", "many children", "lots of kids"], a: 1, why: "Trong bài luận dùng many children thay cho a lot of kids." },
+      { q: "Thay ‘very very good’ bằng từ nào hay hơn?", o: ["good good", "excellent", "very very very good"], a: 1, why: "Very very good → excellent: một từ mạnh, gọn và trang trọng." },
+      { q: "Thay ‘I think’ trong bài luận bằng:", o: ["I think think", "In my opinion, / It seems that…", "Me think"], a: 1, why: "Trong bài luận dùng In my opinion, hoặc It seems that… thay cho I think lặp lại." },
+      { q: "Câu nào SAI giọng điệu trong email công việc?", o: ["Dear Sir or Madam, I am writing to request the report.", "Hi, give me the report ASAP!", "Dear Mr Smith, could you please send me the report?"], a: 1, why: "‘Hi, give me the report ASAP!’ quá trực tiếp, sai giọng điệu email công việc." },
+      { q: "Trước khi gửi email, nên tự hỏi:", o: ["Có dùng đủ tiếng lóng không?", "Email này có đủ dài không?", "Câu này nói với thầy cô/cấp trên có ổn không?"], a: 2, why: "Tự hỏi: câu này nói với thầy cô/cấp trên có ổn không? — nếu nghe như nói với bạn thân thì viết lại." },
+      { q: "‘Get’ trong bài viết trang trọng nên đổi thành:", o: ["got", "getting", "receive / obtain"], a: 2, why: "Trong bài viết trang trọng dùng receive/obtain thay cho get." }
+    ]
+  }
+]);
 CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, [
   {
     section: "Section 1", band: "Band 0", topic: "Mai đi chợ mua đồ",
