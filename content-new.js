@@ -526,6 +526,19 @@ var RB_CHAPTER_MAP = [
   { band: "Band 7,5+", title: "Gần như người bản địa trong học thuật và công việc", status: "open", goal: "Giao tiếp gần như trôi chảy, hiểu cả hàm ý và sắc thái trong văn bản và hội thoại phức tạp.", can: ["Hiểu hàm ý và giọng điệu trong bài khó", "Viết và nói có phong cách riêng, chính xác cao"] }
 ];
 
+/* v212: KHUNG CEFR — 6 cấp, mô tả "làm được gì" diễn đạt lại bằng tiếng Việt
+   đơn giản từ khung CEFR Companion Volume (không chép nguyên văn nguồn nào).
+   A1 thấp nhất, C2 cao nhất. Dùng làm khung tổ chức hiển thị xuyên suốt 4 track;
+   thang riêng từng kỳ thi (band IELTS, cấp HSK, điểm TOEIC, cấp TOPIK) giữ nguyên. */
+var CEFR_LEVELS = [
+  { level: "A1", name: "Khởi đầu", can: "Hiểu và dùng những câu quen thuộc hằng ngày; giới thiệu bản thân đơn giản." },
+  { level: "A2", name: "Sơ cấp", can: "Giao tiếp được trong việc quen thuộc hằng ngày bằng câu đơn giản." },
+  { level: "B1", name: "Trung cấp", can: "Xoay xở được trong hầu hết tình huống quen thuộc; kể được chuyện, nêu được ý kiến đơn giản." },
+  { level: "B2", name: "Trung cấp cao", can: "Giao tiếp trôi chảy với người bản ngữ; trình bày ý kiến rõ ràng, có lập luận." },
+  { level: "C1", name: "Nâng cao", can: "Dùng ngôn ngữ linh hoạt, chính xác trong học tập và công việc; hiểu văn bản dài, khó." },
+  { level: "C2", name: "Thành thạo", can: "Hiểu gần như mọi thứ nghe/đọc được; diễn đạt chính xác, tinh tế như người bản địa." }
+];
+
 // ---------- DON LON XON (25/10/2026): BUOC LO TRINH CHANG 2-13 TU KHO CO SAN ----------
 // Moi buoc la mot bai kho co san, xep theo chang (band) cua chinh bai do.
 // Thứ tự trong chương: Từ vựng -> Ngữ pháp -> Đọc -> Nghe ngắn -> Nghe dài ->

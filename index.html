@@ -4905,6 +4905,7 @@ function viewGuide(app) {
     + '<details class="guide-sec" id="guideScore"><summary><b>📊 Cách tính điểm</b></summary>'
     + '<p>AI góp ý (nhiệm vụ giao tiếp thật): bấm "Nhận giọng nói thành chữ" trước, rồi mới bấm "AI góp ý". AI chỉ đọc được bản ghi chữ nên chỉ góp ý về ý, từ, câu — không chấm phát âm, không phải điểm thi.</p>'
     + notesScoreHTML89()
+    + cefrGuideHTML() /* v212: mục giải thích khung CEFR */
     + '<details><summary><b>Luật đạt/không đạt cần biết</b></summary>' + (tr === "zh" ? '<p>Kiểm tra cuối chặng: mỗi phần cần từ 50% đúng lần đầu mới tính qua; chưa qua chỉ cần học lại đúng phần yếu, các phần đã đạt không cần làm lại.</p>' : tr === "tp" ? '<p>Thi thử TOPIK I rút gọn: tổng /200; từ 140 = cấp 2, 80–139 = cấp 1.</p>' : '') + '<p>Thẻ từ: quyền mic bị từ chối thì không tính đạt chuẩn (gương không tính điểm, chỉ để tự nhìn).</p></details></details>'
     + '<details class="guide-sec" id="guideTerms"><summary><b>📖 Thuật ngữ hay gặp</b></summary>' + trackGlossary89().map(function (g) { return '<p><b>' + esc(g.t) + ':</b> ' + esc(g.d) + '</p>'; }).join("") + '</details>'
     + '<details class="guide-sec" id="guideAccount"><summary><b>👤 Tài khoản &amp; VIP</b></summary>'
@@ -4921,7 +4922,7 @@ function viewGuide(app) {
     + '<p><b>Luyện Gõ:</b> Gõ đúng từ để bắn hạ. Gõ sai chỉ gõ lại, không mất tim. Phím ← → (hoặc kéo chuột/cảm ứng) lái tàu né thiên thạch; để từ rơi xuống đáy hoặc đâm phải thiên thạch là mất tim.</p><p><b>Bắn Bong Bóng:</b> bắn đúng +9 điểm, đủ 99 là thắng; bắn nhầm mất tim.</p>'
     + '</details>'
     + (tr === "en" ? '<section class="card" id="bkRoadmapCard"><h3>📚 Nội dung mới theo nghiên cứu sách</h3><details><summary><b>Xem phạm vi nội dung mới theo sách</b></summary><p class="mut">Lỗi người Việt có ở các chặng từ Band 0 tới Band 6,5; ví dụ đời sống người Việt có ở Band 2,0 tới Band 6,0; sắc thái và phong cách chỉ ở chặng 7,5+ — không đưa xuống chặng thấp hơn. Mở ở tab Luyện tập.</p></details><button class="btn" id="bkRoadmapGo">Mở ở tab Luyện tập</button></section>' : '')
-    + (tr === "en" ? '<section class="card" id="clCanDo"><h3>Trang cấp độ — bạn làm được gì ở mỗi cấp</h3><details><summary><b>Xem năng lực từng cấp</b></summary>' + RB_CHAPTER_MAP.map(function (ch) { return '<p><b>' + esc(ch.band) + ' — ' + esc(ch.title) + ':</b> ' + esc(ch.can.join("; ")) + '</p>'; }).join("") + '</details></section>' : '')
+    + (tr === "en" ? '<section class="card" id="clCanDo"><h3>Trang cấp độ — bạn làm được gì ở mỗi cấp</h3><details><summary><b>Xem năng lực từng cấp</b></summary>' + RB_CHAPTER_MAP.map(function (ch) { var cf = ieltsBandCefr(ch.band); return '<p><b>' + esc(ch.band) + ' — ' + esc(ch.title) + (cf ? ' (CEFR ' + esc(cf.label) + ')' : '') + ':</b> ' + esc(ch.can.join("; ")) + '</p>'; }).join("") + '</details></section>' : '')
     + '</div>';
   var bkg = document.getElementById("bkRoadmapGo"); if (bkg) bkg.onclick = function () { go("practice"); };
 }
@@ -5490,6 +5491,7 @@ function personalPathCardHTML() {
   var h = '<section class="card" id="ppCard"><h3>Lộ trình cá nhân — Cá nhân hóa cực chi tiết</h3>';
   h += '<p>Nhịp độ: ' + paceBtn("nhanh", "Tăng tốc") + ' ' + paceBtn("vua", "Vừa") + ' ' + paceBtn("ky", "Kỹ hơn") + '</p>';
   h += '<p>Đã xong ' + pp.done + '/' + pp.total + ' bước ' + (pp.scopeLabel || 'chương 1') + (pp.dueCount ? ' · ' + pp.dueCount + ' ' + (pp.dueLabel || 'mục đến hạn ôn') : '') + '</p>';
+  h += curCefrLine(); /* v212: trình độ CEFR hiện tại của người học */
   if (pp.reasons.length) h += '<ul>' + pp.reasons.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join("") + '</ul>';
   if (!pp.items.length) { h += '<p>Chưa có bước tiếp theo trong lộ trình riêng.</p>'; }
   else {
@@ -5625,8 +5627,9 @@ function rbChBody(ch, ci, opts) {
   var passedCh = !!((state.chapterTestDone || {})[ch.band]);
   var isCurCh = rbCurChapterBand() === ch.band;
   var isOpen = ch.status === "open";
+  var chCefr = ieltsBandCefr(ch.band); /* v212: nhãn CEFR của chương (khung tổ chức) */
   var body = '';
-  if (!opts.embed) body += '<div class="row unit-banner"><b>PHẦN ' + (ci + 1) + ' · Chương ' + esc(ch.band) + ': ' + esc(ch.title) + '</b><button class="btn" data-gbopen="' + esc(ch.band) + '">📖 Sổ tay chương</button></div>';
+  if (!opts.embed) body += '<div class="row unit-banner"><b>PHẦN ' + (ci + 1) + ' · Chương ' + esc(ch.band) + ': ' + esc(ch.title) + (chCefr ? ' · CEFR ' + esc(chCefr.label) : '') + '</b><button class="btn" data-gbopen="' + esc(ch.band) + '">📖 Sổ tay chương</button></div>';
   else body += '<button class="btn" data-gbopen="' + esc(ch.band) + '">📖 Sổ tay chương</button>'; /* v170 FIX (13/11): than nhung bo banner (the tren da co) nhung nut So tay van phai co — moi chuong 1 nut mo so tay */
   body += '<details><summary><b>Mục tiêu</b></summary><p>' + esc(ch.goal) + '</p></details>'
 
@@ -5748,7 +5751,7 @@ function viewRoadmap(app) {
   var ch1TotalAll = total + ch1WSteps.length, ch1DoneAll = done + ch1WDone;
   var html = trackSwitchHTML() + '<h2>Thế giới cấp độ</h2><p class="mut">Bài kiểm tra cuối chương mở khi bạn học xong 80% số bước của chương đó.</p>' + trailHeadHTML("Đi dọc đường mòn, thu nhặt từng bài học — mỗi trạm là một bước học, đi hết đường mòn là hết lộ trình.");
   html += '<div class="row" id="myPathLink"><button class="btn btn-primary" id="mapNextGo">Học tiếp →</button><button class="dimlink" id="myPathGo">Lộ trình cá nhân →</button></div>';
-  html += '<section class="card forest-band-1"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm — ' + ch1DoneAll + '/' + ch1TotalAll + ' bước (7 mở đầu · 10 Viết Band 0)</b></div><div id="roadmapBox"><div class="path-v">';
+  html += '<section class="card forest-band-1"><div class="unit-banner"><b>PHẦN 1 · Chương 1: Chào hỏi và 44 âm · CEFR Dưới A1 — ' + ch1DoneAll + '/' + ch1TotalAll + ' bước (7 mở đầu · 10 Viết Band 0)</b></div><div id="roadmapBox"><div class="path-v">';
   var clCur = nextLearnStep(); var clCurIdx = clCur ? stepIdx(clCur.id) : -1;
   var mapCur = mapCurStep(); /* v182: buoc hien tai tren ban do (ton trong chang da xep) */
   var gateHTML = "";
@@ -6563,6 +6566,211 @@ function clCalHTML() {
   return '<section class="card" id="clCal"><h3>Lịch điểm danh tháng này</h3><p class="mut">Ngày nào có dấu ✓ là ngày bạn đã điểm danh.</p><div>' + cells + '</div></section>';
 }
 
+/* v212: KHUNG CEFR DÙNG CHUNG (xuyên suốt 4 track).
+   - IELTS↔CEFR: bảng chính thức IELTS.org + IDP (map này tách ra từ
+     notesBandTableHTML, giá trị giữ nguyên y hệt); vùng biên theo quyết đã
+     chốt: 5,0 = cuối B1 - bắt đầu B2, 5,5 = B2 (đầu dải); 8,0 là vùng biên
+     C1/C2 vì hai nguồn không thống nhất tuyệt đối ở mốc này.
+   - HSK↔CEFR: KHÔNG có bảng 1-1 chính thức; chuẩn HSK 3.0 (GF0025-2021) chỉ
+     đối chiếu theo 3 bậc: sơ cấp (cấp 1-3) ≈ A1-A2, trung cấp (4-6) ≈ B1-B2,
+     cao cấp (7-9) ≈ C1-C2 — nên zhStageCefr chỉ trả KHOẢNG theo bậc, kèm
+     "(ước lượng)", không bịa số từng cấp.
+   - TOEIC↔CEFR: bảng ETS ("Mapping the TOEIC Tests on the CEFR") — điểm tối
+     thiểu từng phần Nghe 60/110/275/400/490, Đọc 60/115/275/385/455 cho
+     A1/A2/B1/B2/C1; tổng tối thiểu 120/225/550/785/945; TOEIC chỉ quy đổi
+     tới C1, KHÔNG có C2. Dải tổng = mốc tối thiểu của mức sau trừ 1.
+   - TOPIK↔CEFR: NIKL chưa công bố bảng quy đổi nào — chặng TOPIK ghi rõ
+     "cần đối chiếu giáo trình", không dùng bảng tương đương không chính thức. */
+var IELTS_BAND_CEFR = {
+  "0": { code: null, label: "Dưới A1" },
+  "2,0": { code: "A1", label: "A1" }, "2,5": { code: "A1", label: "A1" },
+  "3,0": { code: "A2", label: "A2" }, "3,5": { code: "A2", label: "A2" },
+  "4,0": { code: "B1", label: "B1" }, "4,5": { code: "B1", label: "B1" },
+  "5,0": { code: "B1", label: "cuối B1 - bắt đầu B2" }, "5,5": { code: "B2", label: "B2 (đầu dải)" },
+  "6,0": { code: "B2", label: "B2" }, "6,5": { code: "B2", label: "B2" },
+  "7,0": { code: "C1", label: "C1" }, "7,5": { code: "C1", label: "C1" },
+  "8,0": { code: "C1", label: "C1–C2 (vùng biên)" }, "8,5": { code: "C2", label: "C2" }, "9,0": { code: "C2", label: "C2" }
+};
+function ieltsBandCefr(band) {
+  if (band == null) return null;
+  var k = String(band).replace(/^Band\s*/i, "").replace(/\+$/, "").trim();
+  var e = IELTS_BAND_CEFR[k];
+  return e ? { code: e.code, label: e.label } : null;
+}
+function cefrCan(code) {
+  if (!code) return "";
+  var list = (typeof CEFR_LEVELS !== "undefined" ? CEFR_LEVELS : []);
+  for (var i = 0; i < list.length; i++) { if (list[i].level === code) return list[i].can; }
+  return "";
+}
+function cefrLevelName(code) {
+  if (!code) return "";
+  var list = (typeof CEFR_LEVELS !== "undefined" ? CEFR_LEVELS : []);
+  for (var i = 0; i < list.length; i++) { if (list[i].level === code) return list[i].name; }
+  return "";
+}
+function zhStageCefr(stage) {
+  var s = +stage;
+  if (s >= 1 && s <= 3) return { code: "A1–A2", label: "A1–A2 (ước lượng)" };
+  if (s >= 4 && s <= 6) return { code: "B1–B2", label: "B1–B2 (ước lượng)" };
+  return null;
+}
+function cefrOfToeic(score) {
+  var s = +score;
+  if (!(s >= 0)) return null;
+  if (s < 120) return { code: null, label: "Dưới A1" };
+  if (s < 225) return { code: "A1", label: "A1" };
+  if (s < 550) return { code: "A2", label: "A2" };
+  if (s < 785) return { code: "B1", label: "B1" };
+  if (s < 945) return { code: "B2", label: "B2" };
+  return { code: "C1", label: "C1" };
+}
+function tcStageCefr(score) { return cefrOfToeic(score); }
+var CEFR_TBD_TXT = "cần đối chiếu giáo trình";
+/* Dòng trình độ CEFR hiện tại của người học theo track (dùng ở Hồ sơ + Lộ trình cá nhân). */
+function curCefrLine() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  if (t === "en") {
+    var b = null;
+    if (state.entryPlaced && state.entryPlaced.band) b = state.entryPlaced.band;
+    else if (typeof rbCurChapterBand === "function") { try { b = rbCurChapterBand(); } catch (e) {} }
+    if (!b) return "";
+    var e = ieltsBandCefr(b);
+    if (!e) return "";
+    return '<p><b>Khung CEFR (tham khảo): ' + esc(e.label) + '</b>' + (e.code ? ' — ' + esc(cefrCan(e.code)) : '') + '</p>';
+  }
+  if (t === "zh") {
+    var st = state.zhEntryPlaced ? state.zhEntryPlaced.stage : 0;
+    if (!st) return "";
+    var z = zhStageCefr(st);
+    return '<p><b>Khung CEFR: ' + esc(z.label) + '</b> — chặng ' + st + ' (HSK ' + st + ').</p>';
+  }
+  if (t === "tc") {
+    var pl = state.tcEntryPlaced;
+    if (pl == null) return "";
+    var sc = (typeof TC_STAGES !== "undefined" && TC_STAGES[pl.stage] || {}).score;
+    if (sc == null) return "";
+    var c = cefrOfToeic(sc);
+    return '<p><b>Khung CEFR (tham khảo): ' + esc(c.label) + '</b> — mục tiêu chặng ' + sc + ' điểm TOEIC.</p>';
+  }
+  return '<p><b>Khung CEFR: ' + CEFR_TBD_TXT + '</b> <span class="mut">(NIKL chưa công bố bảng quy đổi TOPIK↔CEFR.)</span></p>';
+}
+/* v212 QT-24/QT-25: độ phủ nội dung theo CEFR — số thật đếm trực tiếp từ kho
+   (không ghi tay, không lấy mẫu: quét toàn bộ chương/chặng/kỹ năng con).
+   Một cấp được tính là đủ khi có bài học + kiểm tra cuối cấp + thi thử
+   (chuẩn Bùi 29/10: mỗi cấp đủ cả phần học và phần thi). Cấp nào chưa đủ
+   thì ghi rõ "Chưa đủ"/"Chưa có bài học", không hiện như đã đủ. */
+var CEFR_KIND_VI = { vocab: "Từ vựng", gram: "Ngữ pháp", listen: "Nghe", read: "Đọc", speak: "Nói", write: "Viết", pron: "Phát âm", hangul: "Hangul", sandhi: "Biến âm", check: "Kiểm tra cuối chặng", mock: "Thi thử" };
+function cefrCoverageHTML() {
+  var t = (typeof state !== "undefined" && state.track) || "en";
+  var head = '<p><b>Độ phủ nội dung theo CEFR — số thật trên web:</b></p><p class="mut">Một cấp được tính là đủ khi có bài học + kiểm tra cuối cấp + thi thử. Số bước đếm trực tiếp từ bài học của web, không ghi tay.</p>';
+  if (t === "en") {
+    var groups = [["Dưới A1", null], ["A1", "A1"], ["A2", "A2"], ["B1", "B1"], ["B2", "B2"], ["C1", "C1"], ["C2", "C2"]];
+    var mockBands = { "Band 4,5": "4,5", "Band 5,5": "5,5", "Band 6,5": "6,5", "Band 7,5+": "7,5+" };
+    var rows = groups.map(function (g) {
+      var chs = RB_CHAPTER_MAP.filter(function (ch) { var m = ieltsBandCefr(ch.band); return g[1] === null ? (m && !m.code) : (m && m.code === g[1]); });
+      if (!chs.length) return '<p><b>' + g[0] + ':</b> Chưa có bài học trên web.</p>';
+      var steps = 0, miss = {}, qCounts = [], mocks = [];
+      chs.forEach(function (ch) {
+        steps += rbChSteps(ch.band).length;
+        rbChMissing(ch.band).forEach(function (ty) { miss[ty] = true; });
+        var parts = chapterTestQuestions(ch.band);
+        if (parts.length) qCounts.push(parts.reduce(function (a, p) { return a + p.qs.length; }, 0));
+        if (mockBands[ch.band]) mocks.push(mockBands[ch.band]);
+      });
+      var missList = Object.keys(miss);
+      var testOk = qCounts.length === chs.length;
+      var qTxt = testOk ? (qCounts[0] + " câu/chương") : (qCounts.length ? "có ở " + qCounts.length + "/" + chs.length + " chương" : "chưa có");
+      var verdict = testOk && mocks.length ? "Đủ." : (testOk ? "Chưa đủ." : "Chưa đủ — thiếu kiểm tra cuối chương.");
+      var extra = g[0] === "Dưới A1" ? " 44 âm và các bài đầu nằm ở 8 bước Chương 1 (mục Bắt đầu), không nằm trong 10 bước này." : "";
+      return '<p><b>' + g[0] + ':</b> ' + chs.length + ' chương (' + chs.map(function (c) { return c.band; }).join(", ") + '): ' + steps + ' bước' +
+        (missList.length ? ' · thiếu loại bước: ' + missList.join(", ") : ' · đủ 12 loại bước') +
+        ' · kiểm tra cuối chương: ' + qTxt +
+        ' · thi thử: ' + (mocks.length ? 'có (chặng ' + mocks.join(", ") + ')' : 'chưa có') +
+        ' — <b>' + verdict + '</b>' + extra + '</p>';
+    }).join("");
+    return head + rows;
+  }
+  if (t === "zh") {
+    var zgroups = [["A1–A2", [1, 2, 3]], ["B1–B2", [4, 5, 6]], ["C1", []], ["C2", []]];
+    var zrows = zgroups.map(function (g) {
+      if (!g[1].length) return '<p><b>' + g[0] + ':</b> Chưa có bài học trên web (chuẩn HSK 3.0 cao cấp 7–9 chưa có trên web).</p>';
+      var steps = 0, kinds = {}, mockTxt = [];
+      g[1].forEach(function (s) {
+        var seq = zhStageSeq(s); steps += seq.length;
+        seq.forEach(function (it) {
+          var ty = (it.target && it.target.type) || "";
+          var k = ty.indexOf("Từ vựng") >= 0 ? "Từ vựng" : ty.indexOf("Ngữ pháp") >= 0 ? "Ngữ pháp" : ty.indexOf("Đọc") >= 0 ? "Đọc" : ty.indexOf("Nghe") >= 0 ? "Nghe" : ty.indexOf("Nhập vai") >= 0 ? "Nhập vai" : ty.indexOf("Nói") >= 0 ? "Nói" : ty.indexOf("Viết") >= 0 ? "Viết" : "";
+          if (k) kinds[k] = true;
+        });
+        var mk = zhMockBuild(s); mockTxt.push("HSK " + s + ": " + mk.total + " câu");
+      });
+      var testOk = g[1].every(function (s) { return zhChapterTestQuestions(s).length > 0; });
+      return '<p><b>' + g[0] + ':</b> chặng ' + g[1].join(", ") + ' (HSK ' + g[1].join(", ") + '): ' + steps + ' bước · kỹ năng con: ' + Object.keys(kinds).join(", ") +
+        ' · kiểm tra cuối chặng: ' + (testOk ? 'có' : 'chưa đủ') +
+        ' · thi thử: ' + mockTxt.join("; ") + ' (rút gọn so với đề thật)' +
+        ' — <b>' + (testOk ? 'Đủ.' : 'Chưa đủ.') + '</b></p>';
+    }).join("");
+    return head + zrows + '<p class="mut">Phát âm tiếng Trung học theo mạch Pinyin riêng (62 âm: 21 thanh mẫu + 36 vận mẫu + 5 thanh điệu) ở chặng 1, không nằm trong số bước trên.</p>';
+  }
+  if (t === "tc") {
+    var tgroups = [["A1", []], ["A2", [0]], ["B1", [1, 2]], ["B2", [3]], ["C1", []], ["C2", []]];
+    var trows = tgroups.map(function (g) {
+      if (!g[1].length) return '<p><b>' + g[0] + ':</b> Chưa có bài học trên web' + (g[0] === "A1" ? ' (chưa có chặng dưới 450 điểm).' : '.') + '</p>';
+      var steps = 0, kinds = {}, mocks = [];
+      g[1].forEach(function (i) {
+        var st = TC_STAGES[i]; steps += st.steps.length;
+        st.steps.forEach(function (id) { var m = tcStepMeta(id); if (m) kinds[m.kind] = (kinds[m.kind] || 0) + 1; });
+        st.steps.forEach(function (id) { var m = tcStepMeta(id); if (m && m.kind === "mock") mocks.push(m.title); });
+      });
+      var kindTxt = Object.keys(kinds).map(function (k) { return (CEFR_KIND_VI[k] || k) + " " + kinds[k]; }).join(", ");
+      return '<p><b>' + g[0] + ':</b> chặng ' + g[1].map(function (i) { return TC_STAGES[i].score; }).join(", ") + ': ' + steps + ' bước · ' + kindTxt +
+        ' · kiểm tra cuối chặng: ' + (kinds.check ? 'có' : 'chưa có') +
+        ' · thi thử: ' + (mocks.length ? mocks.join("; ") : 'chưa có') +
+        ' — <b>' + (kinds.check && mocks.length ? 'Đủ.' : 'Chưa đủ.') + '</b></p>';
+    }).join("");
+    return head + trows;
+  }
+  /* TP: NIKL chưa công bố bảng quy đổi nên không xếp chặng theo CEFR — liệt kê
+     từng chặng với số thật, không bịa nhãn CEFR. */
+  var tpRows = TP_STAGES.map(function (st, i) {
+    var kinds = {};
+    st.steps.forEach(function (id) { var m = tpStepMeta(id); if (m) kinds[m.kind] = (kinds[m.kind] || 0) + 1; });
+    var kindTxt = Object.keys(kinds).map(function (k) { return (CEFR_KIND_VI[k] || k) + " " + kinds[k]; }).join(", ");
+    var mm = null;
+    st.steps.forEach(function (id) { var m = tpStepMeta(id); if (m && m.kind === "mock" && !mm) mm = m; });
+    return '<p><b>Chặng ' + (i + 1) + ' — ' + esc(st.title) + ':</b> ' + st.steps.length + ' bước · ' + kindTxt +
+      ' · kiểm tra cuối chặng: ' + (kinds.check ? 'có' : 'chưa có') +
+      ' · thi thử: ' + (mm ? mm.title : 'chưa có') +
+      ' — <b>' + (kinds.check && mm ? 'Đủ.' : 'Chưa đủ.') + '</b></p>';
+  }).join("");
+  return head + '<p class="mut">TOPIK chưa có bảng quy đổi chính thức sang CEFR (NIKL chưa công bố) nên web không xếp chặng theo CEFR — các chặng dưới đây ghi số thật từng chặng, không bịa nhãn CEFR.</p>' + tpRows;
+}
+/* Mục giải thích khung CEFR trong tab Trợ giúp — theo track: chỉ hiện đoạn
+   quy đổi của track đang học (mục Ghi chú theo track, test mine_unified_v89). */
+function cefrGuideHTML() {
+  var tr = (typeof state !== "undefined" && state.track) || "en";
+  var rows = (typeof CEFR_LEVELS !== "undefined" ? CEFR_LEVELS : []).map(function (lv) {
+    return '<p><b>' + lv.level + ' — ' + esc(lv.name) + ':</b> ' + esc(lv.can) + '</p>';
+  }).join("");
+  var conv = "";
+  if (tr === "en") conv = '<p>· IELTS: theo bảng IELTS–CEFR chính thức (IELTS.org + IDP) — xem bảng điểm ở mục "Cách tính điểm" ngay trên đây. Band 5,0 = cuối B1 – bắt đầu B2; Band 5,5 = B2 (đầu dải); Band 8,0 là vùng biên C1/C2.</p>';
+  else if (tr === "zh") conv = '<p>· HSK: chuẩn HSK 3.0 chỉ đối chiếu theo 3 bậc (sơ cấp cấp 1–3 ≈ A1–A2, trung cấp 4–6 ≈ B1–B2, cao cấp 7–9 ≈ C1–C2), không có bảng quy đổi 1–1 chính thức — nên web chỉ ghi khoảng và kèm "ước lượng".</p>';
+  else if (tr === "tc") conv = '<p>· TOEIC: theo bảng ETS ("Mapping the TOEIC Tests on the CEFR") — điểm tối thiểu từng phần Nghe 60/110/275/400/490, Đọc 60/115/275/385/455 cho A1/A2/B1/B2/C1; tổng tối thiểu 120/225/550/785/945. TOEIC chỉ quy đổi tới C1, không có C2.</p>';
+  else if (tr === "tp") conv = '<p>· TOPIK: NIKL chưa công bố bảng quy đổi TOPIK↔CEFR — các chặng TOPIK ghi "cần đối chiếu giáo trình", web không tự bịa số.</p>';
+  else conv = '<p>· IELTS: theo bảng IELTS–CEFR chính thức (IELTS.org + IDP). Band 5,0 = cuối B1 – bắt đầu B2; Band 5,5 = B2 (đầu dải); Band 8,0 là vùng biên C1/C2.</p>'
+    + '<p>· HSK: chuẩn HSK 3.0 chỉ đối chiếu theo 3 bậc (sơ cấp cấp 1–3 ≈ A1–A2, trung cấp 4–6 ≈ B1–B2, cao cấp 7–9 ≈ C1–C2), không có bảng quy đổi 1–1 chính thức — nên web chỉ ghi khoảng và kèm "ước lượng".</p>'
+    + '<p>· TOEIC: theo bảng ETS ("Mapping the TOEIC Tests on the CEFR") — tổng tối thiểu 120/225/550/785/945 cho A1/A2/B1/B2/C1. TOEIC chỉ quy đổi tới C1, không có C2.</p>'
+    + '<p>· TOPIK: NIKL chưa công bố bảng quy đổi TOPIK↔CEFR — các chặng TOPIK ghi "cần đối chiếu giáo trình", web không tự bịa số.</p>';
+  return '<section class="card" id="cefrGuide"><h3>Khung CEFR — bạn đang ở đâu</h3>'
+    + '<p class="mut">CEFR là khung trình độ chung châu Âu (A1 thấp nhất tới C2 cao nhất), dùng để nói "bạn làm được gì" bằng ngôn ngữ đó. Web dùng CEFR làm khung tổ chức chung cho cả 4 track — thang riêng từng kỳ thi vẫn giữ nguyên.</p>'
+    + rows
+    + '<p><b>Quy đổi sang CEFR (tham khảo):</b></p>'
+    + conv
+    + cefrCoverageHTML()
+    + '</section>';
+}
+
 function notesBandTableHTML(skill, label) {
   var rows = RB_BAND_TABLE[skill] || [];
   /* Cột CEFR (tham khảo) — đợt 2a 27/10 bổ sung cho đủ trụ "chuẩn quốc tế":
@@ -6570,7 +6778,8 @@ function notesBandTableHTML(skill, label) {
      vùng biên ghi rõ theo quyết đã chốt: 5,0 = cuối B1 - bắt đầu B2,
      5,5 = B2 (đầu dải); 8,0 cũng là vùng biên C1/C2 vì hai nguồn không
      thống nhất tuyệt đối ở mốc này. Band ước lượng chỉ để tham khảo. */
-  var cefr = { "9,0": "C2", "8,5": "C2", "8,0": "C1–C2 (vùng biên)", "7,5": "C1", "7,0": "C1", "6,5": "B2", "6,0": "B2", "5,5": "B2 (đầu dải)", "5,0": "cuối B1 - bắt đầu B2", "4,5": "B1", "4,0": "B1", "3,5": "A2", "3,0": "A2", "2,5": "A1", "2,0": "A1" };
+  var cefr = {};
+  Object.keys(IELTS_BAND_CEFR).forEach(function (k) { cefr[k] = IELTS_BAND_CEFR[k].label; });
   var out = '<table><tr><th>Điểm thô ' + label + '</th><th>Band</th><th>CEFR (tham khảo)</th></tr>';
   for (var i = 0; i < rows.length; i++) {
     var lo = rows[i][0];
@@ -6810,16 +7019,18 @@ function trackPlanOptions89() {
 }
 /* Một mốc thi thử thành một dòng, theo track. */
 function zhMockLine89(m) {
-  return 'Thi thử HSK ' + esc(String(m.hsk)) + ' (' + esc(m.date) + '): Nghe ' + m.listen.c + '/' + m.listen.n + ' · Đọc ' + m.read.c + '/' + m.read.n + (m.write.n === 0 ? ' · Viết: không có phần này' : ' · Viết ' + m.write.c + '/' + m.write.n) + ' · Tổng ' + m.total.c + '/' + m.total.n + ' câu';
+  var zc = zhStageCefr(m.hsk); /* v212: CEFR theo bậc HSK 3.0 (khoảng, ước lượng) */
+  return 'Thi thử HSK ' + esc(String(m.hsk)) + ' (' + esc(m.date) + '): Nghe ' + m.listen.c + '/' + m.listen.n + ' · Đọc ' + m.read.c + '/' + m.read.n + (m.write.n === 0 ? ' · Viết: không có phần này' : ' · Viết ' + m.write.c + '/' + m.write.n) + ' · Tổng ' + m.total.c + '/' + m.total.n + ' câu' + (zc ? ' · CEFR (ước lượng): ' + zc.label : '');
 }
 function tcMockLine89(m) {
   var lab = { "tc-mock-200": "đủ 200 câu", "tc-mock-450": "chặng 450", "tc-mock-600": "chặng 600", "tc-mock-750": "chặng 750" }[m.milestone] || m.milestone;
-  return 'Thi thử TOEIC — ' + lab + ' (' + fmtDateTs89(m.at) + '): Nghe ' + m.l + '/' + m.nl + ' · Đọc ' + m.r + '/' + m.nr + ' · Điểm ước lượng ' + m.est + '/990';
+  var tc = cefrOfToeic(m.est); /* v212: CEFR theo bảng ETS */
+  return 'Thi thử TOEIC — ' + lab + ' (' + fmtDateTs89(m.at) + '): Nghe ' + m.l + '/' + m.nl + ' · Đọc ' + m.r + '/' + m.nr + ' · Điểm ước lượng ' + m.est + '/990' + (tc ? ' · CEFR (tham khảo): ' + tc.label : '');
 }
 function tpMockLine89(m) {
   var d = fmtDateTs89(m.at);
-  if (m.milestone === "tp-mock-II") return 'Thi thử TOPIK II đủ 104 nhiệm vụ (' + d + '): Nghe ' + m.l + '/50 · Đọc ' + m.r + '/50 · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "");
-  return 'Thi thử TOPIK I rút gọn (' + d + '): Nghe ' + m.l + '/35 · Đọc ' + m.r + '/35 · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "");
+  if (m.milestone === "tp-mock-II") return 'Thi thử TOPIK II đủ 104 nhiệm vụ (' + d + '): Nghe ' + m.l + '/50 · Đọc ' + m.r + '/50 · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "") + ' · CEFR: ' + CEFR_TBD_TXT;
+  return 'Thi thử TOPIK I rút gọn (' + d + '): Nghe ' + m.l + '/35 · Đọc ' + m.r + '/35 · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "") + ' · CEFR: ' + CEFR_TBD_TXT;
 }
 /* Thẻ "Đánh giá mức độ" theo track. EN giữ nguyên y hệt. */
 function trackLevelHTML89() {
@@ -6831,6 +7042,7 @@ function trackLevelHTML89() {
       var weakestP = lt.parts.slice().sort(function (a, b) { return a.pct - b.pct; })[0];
       levelHTML = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
         + '<p><b>Band ước lượng: ' + fmtBandComma(lt.band) + '</b> <span class="mut">(kiểm tra cuối chương 1, ngày ' + esc(lt.date) + ')</span></p>'
+        + curCefrLine()
         + lt.parts.map(function (pt) { return '<p>Phần "' + esc(pt.name) + '": ' + pt.c + '/' + pt.n + ' (' + pt.pct + '%)</p>'; }).join("")
         + '<p><b>Phần yếu nhất: ' + esc(weakestP.name) + ' (' + weakestP.pct + '%)</b> — hãy luyện lại bước tương ứng trong chương 1.</p>'
         + '<p class="mut">Band ước lượng, chỉ để tham khảo.</p>'
@@ -6838,6 +7050,7 @@ function trackLevelHTML89() {
     } else {
       levelHTML = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
         + '<div class="hero-pair">' + heroMascot("dragon") + '<div class="hero-text"><p>Chưa có bài kiểm tra — bạn chưa làm bài kiểm tra cuối chương nào.</p></div></div>'
+        + curCefrLine()
         + '<p class="mut">Làm bài kiểm tra cuối chương 1 ở Lộ trình để xem mức độ của mình (band ước lượng + % từng phần + phần yếu nhất).</p></section>';
     }
     return levelHTML;
@@ -6846,9 +7059,10 @@ function trackLevelHTML89() {
   if (t === "zh") {
     var passed = 0; Object.keys(state.zhChapterTestDone || {}).forEach(function (k) { if (state.zhChapterTestDone[k]) passed++; });
     var mocks = state.zhMockTests || [];
-    if (!mocks.length && !passed) return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + examHero + '<p class="mut">Làm kiểm tra cuối chặng HSK ở Thế giới cấp độ để xem mức độ tiếng Trung của mình (đúng/sai từng phần + phần yếu nhất).</p></section>';
+    if (!mocks.length && !passed) return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + examHero + curCefrLine() + '<p class="mut">Làm kiểm tra cuối chặng HSK ở Thế giới cấp độ để xem mức độ tiếng Trung của mình (đúng/sai từng phần + phần yếu nhất).</p></section>';
     var h = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
-      + '<p><b>Đã qua kiểm tra cuối chặng: ' + passed + '/6 chặng</b> <span class="mut">(mỗi phần cần từ 50% đúng lần đầu mới tính qua)</span></p>';
+      + '<p><b>Đã qua kiểm tra cuối chặng: ' + passed + '/6 chặng</b> <span class="mut">(mỗi phần cần từ 50% đúng lần đầu mới tính qua)</span></p>'
+      + curCefrLine();
     if (mocks.length) { var m = mocks[mocks.length - 1]; h += '<p><b>' + zhMockLine89(m) + '</b></p><p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p>'; }
     else h += '<p class="mut">Chưa thi thử HSK — thi thử ở cuối Thế giới cấp độ để lưu mốc.</p>';
     return h + '</section>';
@@ -6860,10 +7074,11 @@ function trackLevelHTML89() {
   if (!mk.length && !ck[0]) {
     var emptyTxt = isTc ? "Làm kiểm tra cuối chặng TOEIC ở Thế giới cấp độ để xem mức độ của mình (đúng/sai từng phần + phần yếu nhất)."
       : "Làm kiểm tra cuối chặng TOPIK ở Thế giới cấp độ để xem mức độ tiếng Hàn của mình (đúng/sai từng phần + phần yếu nhất).";
-    return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + examHero + '<p class="mut">' + emptyTxt + '</p></section>';
+    return '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>' + examHero + curCefrLine() + '<p class="mut">' + emptyTxt + '</p></section>';
   }
   var h2 = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
-    + '<p><b>Đã qua kiểm tra cuối chặng: ' + ck[0] + '/' + ck[1] + ' chặng</b></p>';
+    + '<p><b>Đã qua kiểm tra cuối chặng: ' + ck[0] + '/' + ck[1] + ' chặng</b></p>'
+    + curCefrLine();
   if (mk.length) {
     var m2 = mk[mk.length - 1];
     if (isTc) h2 += '<p><b>' + tcMockLine89(m2) + '</b></p><p class="mut">Điểm ước lượng, chỉ để tham khảo.</p>';
@@ -11280,12 +11495,13 @@ function renderEntryFour(app, l) {
   var ciP = -1;
   RB_CHAPTER_MAP.forEach(function (c, i) { if (c.band === r.band) ciP = i; });
   var bandLabel = ciP >= 0 ? ("Chương " + (ciP + 1) + ": " + RB_CHAPTER_MAP[ciP].title) : r.band;
+  var e4Cefr = ieltsBandCefr(r.band); /* v212: nhãn CEFR của band chung (khung tổ chức) */
   app.innerHTML = skillHead("Kết quả kiểm tra đầu vào 4 kỹ năng", "Band ước lượng, chỉ để tham khảo — không phải điểm thi thật.") + e4PhaseChips(4)
     + '<div class="qblock"><p><b>Nghe:</b> ' + r.listen.c + '/' + r.listen.n + ' câu đúng → ' + esc(r.listen.band) + ' (ước lượng)</p>'
     + '<p><b>Đọc:</b> ' + r.read.c + '/' + r.read.n + ' câu đúng → ' + esc(r.read.band) + ' (ước lượng)</p>'
     + '<p><b>Nói:</b> ' + (r.speak ? ('Máy nghe được ' + Math.round(r.speak.ratio * 100) + '% số từ → ' + esc(r.speak.band) + ' (ước lượng)') : 'chưa đo được (bạn đã bỏ qua phần Nói)') + '</p>'
     + '<p><b>Viết:</b> ' + (r.write ? ((r.write.ai ? 'AI chấm (VIP): ' : 'Tự đánh giá: ') + esc(r.write.band)) : 'chưa đo được (bài quá ngắn)') + '</p></div>'
-    + '<div class="sumcard"><p><b>Trình độ chung (ước lượng): ' + esc(r.band) + ' — Bạn bắt đầu ở ' + esc(bandLabel) + '.</b></p>'
+    + '<div class="sumcard"><p><b>Trình độ chung (ước lượng): ' + esc(r.band) + ' — Bạn bắt đầu ở ' + esc(bandLabel) + '.</b>' + (e4Cefr ? ' CEFR (tham khảo): <b>' + esc(e4Cefr.label) + '</b>' + (e4Cefr.code ? ' — ' + esc(cefrCan(e4Cefr.code)) : '') : '') + '</p>'
     + '<p class="mut">Bài kiểm tra này xếp tối đa tới Band 6,5. Nếu bạn cao hơn, hãy làm thi thử để đo chính xác hơn. Từ giờ màn chính chỉ còn nút “Học tiếp” tới đúng bước đó.</p></div>'
     + '<div class="qblock"><div class="row"><button class="btn" id="e4Redo">Làm lại bài kiểm tra</button><button class="btn" id="e4Home">Về màn chính</button></div></div>';
   wireBack();
@@ -23057,7 +23273,7 @@ function renderMockTest(app, l) {
         + '<p>Đọc: <b>' + fmtBandComma(rb) + '</b> (' + mockRun.read.c + '/' + mockRun.read.n + ' câu)</p>'
         + '<p>Viết: <b>' + fmtBandComma(wb) + '</b> ' + (mockRun.write.ai ? '(Máy ước lượng)' : '(Tự đánh giá)') + '</p>'
         + '<p>Nói: <b>' + fmtBandComma(sb) + '</b> ' + (mockRun.speak.ai ? '(Máy ước lượng)' : '(Tự đánh giá)') + (mockRun.speak.revisedBand != null ? ' · chấm lại bản sửa: Band ' + fmtBandComma(mockRun.speak.revisedBand) + ' (chỉ luyện thêm)' : '') + (mockRun.speak.aiParts && mockRun.speak.aiParts.some(function (p) { return p.score != null; }) ? ' · AI phát âm: ' + mockRun.speak.aiParts.map(function (p) { return 'Part ' + p.part + ' ' + (p.score != null ? p.score + '%' : 'chưa chấm'); }).join(', ') + ' (Máy ước lượng)' : '') + '</p>'
-        + '<p><b>Overall ước lượng: ' + fmtBandComma(overall) + '</b></p>'
+        + '<p><b>Overall ước lượng: ' + fmtBandComma(overall) + '</b>' + (function () { var mc = ieltsBandCefr(fmtBandComma(overall)); return mc ? ' · CEFR (tham khảo): <b>' + esc(mc.label) + '</b>' + (mc.code ? ' — ' + esc(cefrCan(mc.code)) : '') : ''; })() + '</p>'
         + '<p class="mut">' + RB_BAND_NOTE + '</p>'
         
         + u8AppealHTML("mock:" + l.milestone) + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="mkBack">Về Luyện tập</button> <button class="btn" id="mkRetakeSaved">Thi lại từ đầu</button></div></div>';
@@ -24349,7 +24565,8 @@ function zhStageBanner(st, done, total, extra) {
   /* v143 (S6): the chang ghi ro cap HSK — chang N = HSK N (chung minh: nguong
      xep chang entry 0-3→1, 4-6→2, 7-9→3, 10-12→4, 13-14→5, 15-16→6; bo tu
      rieng HSK2/HSK3 o chang 2/3; thi thu HSK1-6 song song kiem tra cuoi chang 1-6). */
-  return '<div class="unit-banner"><b>Chặng ' + st.stage + ' · HSK ' + st.stage + ': ' + esc(st.title) + '</b><p class="mut">' + esc(st.desc) + ' · Từ tích lũy (sách cũ): ' + st.oldCum + ' · Hệ E: ' + st.eCum + (total != null ? ' · Đã xong ' + done + '/' + total + ' bước học' : '') + (extra || '') + '</p></div>';
+  var zhCefr = zhStageCefr(st.stage); /* v212: nhãn CEFR theo bậc HSK 3.0 (khoảng, ước lượng) */
+  return '<div class="unit-banner"><b>Chặng ' + st.stage + ' · HSK ' + st.stage + (zhCefr ? ' · CEFR ' + esc(zhCefr.label) : '') + ': ' + esc(st.title) + '</b><p class="mut">' + esc(st.desc) + ' · Từ tích lũy (sách cũ): ' + st.oldCum + ' · Hệ E: ' + st.eCum + (total != null ? ' · Đã xong ' + done + '/' + total + ' bước học' : '') + (extra || '') + '</p></div>';
 }
 /* FIX-V32 R2 (V3): khoi Muc tieu + Hoc xong lam duoc cho chang ZH (mau TOEIC/TOPIK). */
 function zhStageGoalsHTML(stage) {
@@ -26287,7 +26504,7 @@ function renderZhEntry(app, l) {
       var nearSet = null;
       if (st >= 2) { var allSets = zhSets(); for (var si = 0; si < allSets.length; si++) { if (allSets[si].stage === st) { nearSet = allSets[si]; break; } } }
       var nearNote = nearSet ? '<p>Học nối: kết quả này xếp bạn vào chặng ' + st + ' — bạn bắt đầu từ bộ từ gần nhất với trình độ này là “' + esc(nearSet.set.topic) + '”, không cần học lại từ đầu.</p>' : '';
-      return '<p><b>Kết quả này xếp bạn bắt đầu ở chặng ' + st + '.</b> (Đúng ' + score + '/' + total + ': 0–3 → chặng 1, 4–6 → chặng 2, 7–9 → chặng 3, 10–12 → chặng 4, 13–14 → chặng 5, 15–16 → chặng 6.)</p>' + nearNote + '<p class="mut">Đây là kiểm tra xếp chặng nội bộ của web, không phải đề thi HSK thật. ' + nextNote + '</p>';
+      return '<p><b>Kết quả này xếp bạn bắt đầu ở chặng ' + st + '.</b> CEFR (ước lượng): ' + esc(zhStageCefr(st).label) + '. (Đúng ' + score + '/' + total + ': 0–3 → chặng 1, 4–6 → chặng 2, 7–9 → chặng 3, 10–12 → chặng 4, 13–14 → chặng 5, 15–16 → chặng 6.)</p>' + nearNote + '<p class="mut">Đây là kiểm tra xếp chặng nội bộ của web, không phải đề thi HSK thật. ' + nextNote + '</p>';
     });
     return;
   }
@@ -26488,7 +26705,8 @@ function renderTcEntry(app, l) {
       var st = pl ? pl.stage : 0;
       var stTitle = (TC_STAGES[st] || {}).title || ("Chặng " + (st + 1));
       var nextNote = l.placedTarget ? 'Nút "Học tiếp" ở thanh dưới sẽ đưa bạn tới bước đầu tiên của ' + stTitle + ' là "' + l.placedTarget.title + '".' : 'Nút "Bài tiếp theo" ở thanh dưới sẽ đưa bạn tới bước đầu tiên của ' + stTitle + '.';
-      return '<p><b>Kết quả này xếp bạn bắt đầu ở ' + esc(stTitle) + '.</b> (Đúng ' + score + '/' + total + ': 0–3 → Chặng 450, 4–6 → Chặng 600, 7–9 → Chặng 750, 10–12 → Chặng 900.)</p><p class="mut">Đây là kiểm tra xếp chặng nội bộ của web, không phải đề thi TOEIC thật. ' + nextNote + '</p>';
+      var tcCefr = cefrOfToeic((TC_STAGES[st] || {}).score); /* v212: nhãn CEFR của chặng TOEIC (bảng ETS) */
+      return '<p><b>Kết quả này xếp bạn bắt đầu ở ' + esc(stTitle) + '.</b> CEFR (tham khảo): ' + esc(tcCefr ? tcCefr.label : '') + (tcCefr && tcCefr.code ? ' — ' + esc(cefrCan(tcCefr.code)) : '') + '. (Đúng ' + score + '/' + total + ': 0–3 → Chặng 450, 4–6 → Chặng 600, 7–9 → Chặng 750, 10–12 → Chặng 900.)</p><p class="mut">Đây là kiểm tra xếp chặng nội bộ của web, không phải đề thi TOEIC thật. ' + nextNote + '</p>';
     });
     return;
   }
@@ -26512,7 +26730,7 @@ function renderTpEntry(app, l) {
       var st = pl ? pl.stage : 0;
       var stTitle = (TP_STAGES[st] || {}).title || ("Chặng " + (st + 1));
       var nextNote = l.placedTarget ? 'Nút "Học tiếp" ở thanh dưới sẽ đưa bạn tới bước đầu tiên của ' + stTitle + ' là "' + l.placedTarget.title + '".' : 'Nút "Bài tiếp theo" ở thanh dưới sẽ đưa bạn tới bước đầu tiên của ' + stTitle + '.';
-      return '<p><b>Kết quả này xếp bạn bắt đầu ở ' + esc(stTitle) + '.</b> (Đúng ' + score + '/' + total + ': 0–1 → Hangul, 2–3 → TOPIK I Cấp 1, 4–5 → TOPIK I Cấp 2, 6–7 → nền tảng TOPIK II, 8–9 → TOPIK II Cấp 3, 10–11 → Cấp 4, 12–13 → Cấp 5, 14–16 → Cấp 6.)</p><p class="mut">Đây là kiểm tra xếp chặng nội bộ của web, không phải đề thi TOPIK thật. ' + nextNote + '</p>';
+      return '<p><b>Kết quả này xếp bạn bắt đầu ở ' + esc(stTitle) + '.</b> CEFR: ' + CEFR_TBD_TXT + ' (NIKL chưa công bố bảng quy đổi TOPIK↔CEFR). (Đúng ' + score + '/' + total + ': 0–1 → Hangul, 2–3 → TOPIK I Cấp 1, 4–5 → TOPIK I Cấp 2, 6–7 → nền tảng TOPIK II, 8–9 → TOPIK II Cấp 3, 10–11 → Cấp 4, 12–13 → Cấp 5, 14–16 → Cấp 6.)</p><p class="mut">Đây là kiểm tra xếp chặng nội bộ của web, không phải đề thi TOPIK thật. ' + nextNote + '</p>';
     });
     return;
   }
@@ -27019,7 +27237,7 @@ function renderZhMock(app, l) {
         return '<p>· ' + esc(qq.q) + '<br>Bạn chọn: <b>' + esc(mine) + '</b> — Đáp án đúng: <b>' + esc(qq.o[qq.a]) + '</b> — ' + esc(qq.why || "") + '</p>';
       }).join("") + '</details>';
     }).join("");
-    var scoreHTML = '<p>Nghe: <b>' + lc.c + '/' + lc.n + ' câu</b></p><p>Đọc: <b>' + rc.c + '/' + rc.n + ' câu</b></p>' + (wc.n === 0 ? '<p>Viết: <b>không có phần này (đề thật HSK cấp 1 không có Viết)</b></p>' : '<p>Viết: <b>' + wc.c + '/' + wc.n + ' câu</b></p>') + '<p><b>Tổng: ' + tc + '/' + tn + ' câu</b></p><p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p>';
+    var scoreHTML = '<p>Nghe: <b>' + lc.c + '/' + lc.n + ' câu</b></p><p>Đọc: <b>' + rc.c + '/' + rc.n + ' câu</b></p>' + (wc.n === 0 ? '<p>Viết: <b>không có phần này (đề thật HSK cấp 1 không có Viết)</b></p>' : '<p>Viết: <b>' + wc.c + '/' + wc.n + ' câu</b></p>') + '<p><b>Tổng: ' + tc + '/' + tn + ' câu</b></p><p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p><p>CEFR (ước lượng): ' + esc((zhStageCefr(hsk) || {}).label || '') + '.</p>';
     if (l.saved) {
       app.innerHTML = lessonHead({ title: "Thi thử " + label + " (bản rút gọn)", type: "Tiếng Trung · Thi thử HSK" }, "Đã lưu mốc thi thử.")
         + '<div class="summarybox"><h2>Bảng điểm thi thử — ' + label + ' (rút gọn)</h2>' + scoreHTML + reviewHTML + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="zhMockBack">Về Luyện tập</button></div></div>';
@@ -28156,7 +28374,7 @@ function tcOpenMock(back, stepId) {
       MR.forEach(function (q, i) { if (answers["R" + i] === q.a) rc++; });
       var est = tcEst(lc, rc, ML.length, MR.length);
       tcNorm(); state.tcMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, milestone: spec.milestone, nl: ML.length, nr: MR.length }); saveState(); tcMarkDone(spec.step);
-      var rev = '<h3>' + esc(spec.resultTitle) + '</h3><p>Nghe: ' + lc + '/' + ML.length + ' · Đọc: ' + rc + '/' + MR.length + ' · <b>Điểm ước lượng: ' + est.total + '/990</b> (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p class="mut">' + spec.resultNote + '</p>';
+      var rev = '<h3>' + esc(spec.resultTitle) + '</h3><p>Nghe: ' + lc + '/' + ML.length + ' · Đọc: ' + rc + '/' + MR.length + ' · <b>Điểm ước lượng: ' + est.total + '/990</b> · CEFR (tham khảo): ' + esc((cefrOfToeic(est.total) || {}).label || '') + ' (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p class="mut">' + spec.resultNote + '</p>';
       rev += '<h3>Xem lại từng câu</h3><p class="mut">Sửa thế này: câu nào chưa đúng thì xem lại lý thuyết của chặng đó rồi mở lại thi thử từ Thế giới cấp độ để làm lại.</p>';
       ML.forEach(function (q, i) { rev += '<p><b>Nghe ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["L" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
       MR.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
@@ -28362,8 +28580,9 @@ function tcTpStageCardHTML(st, i, isTc, forceBody) {
     /* DOT v56: nhiem vu giao tiep that — buoc cuoi cua chang, sau kiem tra/thi thu. */
     bodyInner += msRowHTML(isTc ? "tc" : "tp", isTc ? st.score : i);
   }
+  var stageCefr = isTc ? tcStageCefr(st.score) : null; /* v212: nhãn CEFR của chặng (TC theo bảng ETS; TP ghi "cần đối chiếu giáo trình") */
   var html = '<section class="card chapter-row forest-band-' + bandN + '">'
-    + '<button class="path-node row stage-node' + (isDoneStage ? ' done' : isCurStage ? ' cur' : '') + '" data-stage-node="' + i + '" aria-expanded="' + (isCurStage ? 'true' : 'false') + '"><span class="dotwrap"><span class="dot">' + stIcon + '</span></span><span><span class="pn-title"><b>' + esc(st.title) + '</b></span><br><span class="pn-type">' + (isTc ? 'TOEIC' : 'TOPIK') + ' · ' + (learn.length + finals.length) + ' bước (' + learn.length + ' học · ' + finals.length + ' kiểm tra/thi thử)</span><br><span class="pn-st">' + stTxt + '</span>' + (isCurStage ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span><span class="chip cur">' + stTxt + ' · ' + (doneLearn + doneFinals) + '/' + (learn.length + finals.length) + ' bước</span></button>'
+    + '<button class="path-node row stage-node' + (isDoneStage ? ' done' : isCurStage ? ' cur' : '') + '" data-stage-node="' + i + '" aria-expanded="' + (isCurStage ? 'true' : 'false') + '"><span class="dotwrap"><span class="dot">' + stIcon + '</span></span><span><span class="pn-title"><b>' + esc(st.title) + '</b></span><br><span class="pn-type">' + (isTc ? 'TOEIC' : 'TOPIK') + ' · CEFR ' + (isTc ? esc(stageCefr ? stageCefr.label : '') : CEFR_TBD_TXT) + ' · ' + (learn.length + finals.length) + ' bước (' + learn.length + ' học · ' + finals.length + ' kiểm tra/thi thử)</span><br><span class="pn-st">' + stTxt + '</span>' + (isCurStage ? ' <span class="chip cl-flag">📍 Bạn đang ở đây</span>' : '') + '</span><span class="chip cur">' + stTxt + ' · ' + (doneLearn + doneFinals) + '/' + (learn.length + finals.length) + ' bước</span></button>'
     + (showBody ? ('<div class="stage-body"' + (isCurStage ? '' : ' hidden') + '>' + bodyInner + '</div>') : ('<div class="stage-body" hidden data-lazy-stage="' + i + '"></div>'))
     + '</section>';
   return html;
@@ -29303,7 +29522,7 @@ function tpOpenMock(back) {
       TP_MOCK_R.forEach(function (q, i) { if (answers["R" + i] === q.a) rc++; });
       var est = tpEst(lc, rc);
       tpNorm(); state.tpMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, level: est.level, milestone: "tp-mock-I" }); saveState(); tpMarkDone("m0");
-      var rev = '<h3>Kết quả thi thử rút gọn</h3><p>Nghe: ' + lc + '/' + TP_MOCK_L.length + ' · Đọc: ' + rc + '/' + TP_MOCK_R.length + ' · <b>Điểm ước lượng: ' + est.total + '/200 — ' + esc(est.level) + ' (tham khảo)</b> (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p class="mut">Cấp này chỉ để tham khảo — bài rút gọn 70 câu (35 Nghe + 35 Đọc, khác tỉ lệ thi thật 30 Nghe + 40 Đọc); ngưỡng 80/140 là quy ước nội bộ của web theo thang PBT /200, không phải bảng chính thức.</p>';
+      var rev = '<h3>Kết quả thi thử rút gọn</h3><p>Nghe: ' + lc + '/' + TP_MOCK_L.length + ' · Đọc: ' + rc + '/' + TP_MOCK_R.length + ' · <b>Điểm ước lượng: ' + est.total + '/200 — ' + esc(est.level) + ' (tham khảo)</b> · CEFR: ' + CEFR_TBD_TXT + ' (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p class="mut">Cấp này chỉ để tham khảo — bài rút gọn 70 câu (35 Nghe + 35 Đọc, khác tỉ lệ thi thật 30 Nghe + 40 Đọc); ngưỡng 80/140 là quy ước nội bộ của web theo thang PBT /200, không phải bảng chính thức.</p>';
       rev += '<h3>Xem lại từng câu</h3><p class="mut">Sửa thế này: câu nào chưa đúng thì xem lại lý thuyết của chặng đó rồi mở lại thi thử từ Thế giới cấp độ để làm lại.</p>';
       TP_MOCK_L.forEach(function (q, i) { rev += '<p><b>Nghe ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["L" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
       TP_MOCK_R.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
@@ -29376,7 +29595,7 @@ function tpOpenMock2(back, stepId) {
       TP_MOCK2_R.forEach(function (q, i) { if (answers["R" + i] === q.a) rc++; });
       var est = tpEst2(lc, rc);
       tpNorm(); state.tpMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, level: "TOPIK II đủ câu — Nghe+Đọc tham khảo, Viết tự chấm", kind: "II", milestone: "tp-mock-II" }); if (stepId) tpMarkDone(stepId); saveState();
-      var rev = '<h3>Kết quả thi thử TOPIK II đủ câu</h3><p>Nghe: ' + lc + '/50 · Đọc: ' + rc + '/50 · <b>Điểm ước lượng Nghe + Đọc: ' + est.total + '/200 (tham khảo)</b> (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p><b>' + tpLevelMin(est.total) + '</b> <span class="mut">Công thức hiển thị: điểm Nghe + Đọc quy về /200, Viết tự chấm KHÔNG cộng vào; tổng thật = điểm này + điểm Viết (0–100). Ngưỡng cấp chính thức /300: cấp 3 ≥120, cấp 4 ≥150, cấp 5 ≥190, cấp 6 ≥230. Đây là ước lượng nội bộ, không phải kết quả chính thức.</span></p><p class="mut">Điểm này là ước lượng có giới hạn: đề thật TOPIK II tính trên tổng 300 điểm gồm Viết 100 điểm, còn bài này Viết chỉ tự chấm theo bảng tiêu chí, KHÔNG cộng vào điểm số. Phần Viết hãy tự chấm theo bảng tiêu chí ở trên.</p>';
+      var rev = '<h3>Kết quả thi thử TOPIK II đủ câu</h3><p>Nghe: ' + lc + '/50 · Đọc: ' + rc + '/50 · <b>Điểm ước lượng Nghe + Đọc: ' + est.total + '/200 (tham khảo)</b> · CEFR: ' + CEFR_TBD_TXT + ' (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p><b>' + tpLevelMin(est.total) + '</b> <span class="mut">Công thức hiển thị: điểm Nghe + Đọc quy về /200, Viết tự chấm KHÔNG cộng vào; tổng thật = điểm này + điểm Viết (0–100). Ngưỡng cấp chính thức /300: cấp 3 ≥120, cấp 4 ≥150, cấp 5 ≥190, cấp 6 ≥230. Đây là ước lượng nội bộ, không phải kết quả chính thức.</span></p><p class="mut">Điểm này là ước lượng có giới hạn: đề thật TOPIK II tính trên tổng 300 điểm gồm Viết 100 điểm, còn bài này Viết chỉ tự chấm theo bảng tiêu chí, KHÔNG cộng vào điểm số. Phần Viết hãy tự chấm theo bảng tiêu chí ở trên.</p>';
       rev += '<h3>Xem lại từng câu trắc nghiệm</h3><p class="mut">Sửa thế này: câu nào chưa đúng thì xem lại lý thuyết của chặng đó rồi mở lại thi thử từ Thế giới cấp độ để làm lại.</p>';
       TP_MOCK2_L.forEach(function (q, i) { rev += '<p><b>Nghe ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["L" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
       TP_MOCK2_R.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
