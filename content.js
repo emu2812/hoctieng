@@ -21050,7 +21050,7 @@ const CONTENT = {
    "hook": "Tường thuật như người đưa tin lùi lại một bước: is thành was, today thành that day, vì ta kể lại lời người khác về sau.",
    "level": "Band 6,0",
    "name": "Câu tường thuật cơ bản và đầy đủ",
-   "explain": "Ví dụ đời sống trước nhé: Mẹ nói với Hùng: 'Mẹ sẽ nấu cơm lúc sáu giờ tối nay.' Hùng kể lại cho chị gái: Hùng said his mother would cook dinner at six that night. Bạn thấy will đã thành would và tonight đã thành that night. Đó là câu tường thuật (câu kể lại lời của người khác mà không chép nguyên văn). Quy tắc một: với câu trần thuật (câu kể lại một sự việc), động từ thường lùi thì (lùi về quá khứ một nấc, như is thành was và will thành would). Quy tắc hai: với câu hỏi yes/no (câu hỏi chỉ cần đáp có hoặc không), ta dùng if hoặc whether rồi viết tiếp như câu kể, không đảo trợ động từ (từ phụ như do hay did) lên trước chủ ngữ. Quy tắc ba: với câu hỏi có từ hỏi như what, where hay when, ta giữ nguyên từ hỏi rồi cũng viết tiếp như câu kể. Quy tắc bốn: với câu mệnh lệnh và câu yêu cầu (câu bảo hoặc nhờ ai làm một việc), ta dùng tell hoặc ask rồi cộng to và động từ nguyên thể (dạng gốc chưa chia của động từ). Các từ chỉ thời gian cũng đổi theo lúc kể, như today thành that day và tomorrow thành the next day.",
+   "explain": "Ví dụ trước: Mẹ nói: 'I will cook dinner at six tonight.' Hùng kể lại: He said his mother would cook dinner at six that night. (Mẹ nói mẹ sẽ nấu cơm lúc sáu giờ tối nay.) Quy tắc: kể lại lời người khác thì lùi thì một nấc (will → would, is → was) và đổi từ chỉ thời gian (tonight → that night, today → that day). Câu hỏi yes/no dùng if/whether rồi viết như câu kể, không đảo ngữ; câu hỏi có từ hỏi thì giữ từ hỏi; câu mệnh lệnh dùng tell/ask + to + động từ.",
    "examples": [
     "Lan said that she was tired after the trip.",
     "He asked me if I could help him carry the bag."
@@ -21502,7 +21502,7 @@ const CONTENT = {
    "hook": "Whose nói về đồ của ai, whom chỉ người ở vị trí tân ngữ: như hai chiếc chìa khóa mở hai ổ khóa khác nhau trong câu dài.",
    "level": "Band 6,5",
    "name": "Mệnh đề quan hệ chuyên sâu: whose, whom và giới từ đứng trước",
-   "explain": "Ví dụ đời sống trước nhé: Bà Tư ở đầu ngõ có con trai làm bác sĩ ở Đà Nẵng, ai cũng quý bà. Câu tiếng Anh là: The woman whose son is a doctor in Da Nang is my neighbour. Quy tắc một: whose (từ thay cho tên người hoặc vật và cho biết của ai) luôn đứng trước một danh từ, như whose son hay whose roof. Quy tắc hai: whom (từ thay cho tên người khi người đó là người nhận hành động, hay gặp trong văn trang trọng) đứng sau động từ hoặc sau giới từ (từ nhỏ như to, with hay for đứng trước danh từ). Quy tắc ba: khi giới từ đứng ngay trước từ thay thế thì chỉ dùng whom cho người và which cho vật, không dùng that hay who. Quy tắc bốn: mệnh đề quan hệ không xác định (phần thêm thông tin phụ, bỏ đi vẫn hiểu đang nói về ai, luôn có dấu phẩy ở hai đầu hoặc một đầu) không dùng that và không bỏ được từ thay thế.",
+   "explain": "Ví dụ trước: The woman whose son is a doctor is my neighbour. (Người phụ nữ mà con trai làm bác sĩ là hàng xóm của tôi.) Quy tắc: whose đứng trước danh từ để chỉ sở hữu (whose son); whom chỉ người nhận hành động, hay gặp trong văn trang trọng; giới từ đứng ngay trước từ quan hệ thì chỉ dùng whom (người) hoặc which (vật), không dùng that/who. Mệnh đề không xác định (thêm thông tin, có dấu phẩy) không dùng that.",
    "examples": [
     "The woman whose son won the prize is my aunt.",
     "The hotel, which was built in 1990, is very famous."
@@ -21615,7 +21615,7 @@ const CONTENT = {
    "hook": "The giống ngón tay chỉ vào đúng một vật mà cả hai người cùng thấy; khi nói điều chung chung như water hay honesty thì bỏ mạo từ.",
    "level": "Band 6,0",
    "name": "Mạo từ nâng cao",
-   "explain": "Ví dụ đời sống trước nhé: Mỗi tối, em gái tôi ngồi vào đàn và chơi piano rất hay: My sister plays the piano. Nhưng khi em đi học thì ta nói go to school, không có the trước school. Quy tắc một: mạo từ (từ nhỏ a, an hoặc the đặt ngay trước danh từ) là the dùng với nhạc cụ, với biển, sông và đại dương, và trong cụm the cộng tính từ để chỉ cả một nhóm người, như the elderly nghĩa là những người cao tuổi. Quy tắc hai: mạo từ rỗng (trường hợp không đặt mạo từ nào trước danh từ) dùng khi nói trường học, bệnh viện hay nhà thờ theo đúng mục đích chính, như đi học hay đi khám chữa bệnh, và cũng dùng cho bữa ăn, môn thể thao và tên ngôn ngữ. Quy tắc ba: a hay an chọn theo âm nghe được đầu tiên, không theo chữ cái, nên ta nói an hour vì chữ h không phát âm, nhưng a university vì từ này bắt đầu bằng âm yu.",
+   "explain": "Ví dụ trước: My sister plays the piano. (Em gái tôi chơi piano.) Nhưng đi học thì nói go to school, không có the. Quy tắc: the dùng với nhạc cụ, biển/sông/đại dương và the + tính từ chỉ nhóm người (the elderly). Không dùng mạo từ khi nói trường học, bệnh viện, nhà thờ theo đúng mục đích chính, và với bữa ăn, môn thể thao, tên ngôn ngữ. Chọn a/an theo âm đầu nghe được: an hour, a university.",
    "examples": [
     "She can play the piano very well.",
     "The children go to school by bus every day."
