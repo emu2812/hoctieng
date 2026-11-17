@@ -3817,7 +3817,7 @@ function typeEntryResolve(track, kind) {
            nao thi khoa trung thuc o chang 1, khong day nguoi moi vao thi thu. */
         var hp = 0;
         for (var ps = 1; ps <= 6; ps++) if (zhChapterTestPassed(ps)) hp = ps;
-        if (hp) { var mh = Math.min(hp + 1, 6); return { title: "Thi thử HSK" + mh + " (rút gọn)", status: "open", open: (function (mm) { return function () { lessonStart = Date.now(); openLesson({ type: "zhMock", hsk: mm }); }; })(mh) }; }
+        if (hp) { var mh = Math.min(hp + 1, 6); return { title: "Thi thử HSK" + mh, status: "open", open: (function (mm) { return function () { lessonStart = Date.now(); openLesson({ type: "zhMock", hsk: mm }); }; })(mh) }; }
         return { title: "Kiểm tra cuối chặng 1", status: "locked", open: function () { showLockModal("Kiểm tra cuối chặng 1 mở khi bạn học xong 80% chặng 1.", "Xem bản đồ chặng 1", function () { curTab = "roadmap"; render(); }); } };
       }
       return { title: "", status: "missing", open: noop };
@@ -6709,7 +6709,7 @@ function cefrCoverageHTML() {
       var testOk = g[1].every(function (s) { return zhChapterTestQuestions(s).length > 0; });
       return '<p><b>' + g[0] + ':</b> chặng ' + g[1].join(", ") + ' (HSK ' + g[1].join(", ") + '): ' + steps + ' bước · kỹ năng con: ' + Object.keys(kinds).join(", ") +
         ' · kiểm tra cuối chặng: ' + (testOk ? 'có' : 'chưa đủ') +
-        ' · thi thử: ' + mockTxt.join("; ") + ' (rút gọn so với đề thật)' +
+        ' · thi thử: ' + mockTxt.join("; ") +
         ' — <b>' + (testOk ? 'Đủ.' : 'Chưa đủ.') + '</b></p>';
     }).join("");
     return head + zrows + '<p class="mut">Phát âm tiếng Trung học theo mạch Pinyin riêng (62 âm: 21 thanh mẫu + 36 vận mẫu + 5 thanh điệu) ở chặng 1, không nằm trong số bước trên.</p>';
@@ -6821,7 +6821,7 @@ function notesScoreHTML89() {
   }
   if (t === "zh") {
     return '<h4>Điểm HSK</h4>'
-      + '<p>Thi thử HSK (bản rút gọn): điểm là số câu đúng từng phần, không phải điểm HSK chính thức.</p>'
+      + '<p>Thi thử HSK: điểm là số câu đúng từng phần, không phải điểm HSK chính thức.</p>'
       + '<p>Thẻ từ tiếng Trung: đọc to chỉ cần mic — máy chỉ kiểm tra có nghe ra đúng từ không, chưa phải chấm từng âm; 80 là mức đủ tốt để đi tiếp, không khóa thẻ, đọc chưa đạt vẫn bấm “Tiếp tục →” được.</p>'
       + PRON_TIER_GUIDE_HTML;
   }
@@ -7021,7 +7021,7 @@ function trackPlanOptions89() {
 /* Một mốc thi thử thành một dòng, theo track. */
 function zhMockLine89(m) {
   var zc = zhStageCefr(m.hsk); /* v212: CEFR theo bậc HSK 3.0 (khoảng, ước lượng) */
-  return 'Thi thử HSK ' + esc(String(m.hsk)) + ' (' + esc(m.date) + '): Nghe ' + m.listen.c + '/' + m.listen.n + ' · Đọc ' + m.read.c + '/' + m.read.n + (m.write.n === 0 ? ' · Viết: không có phần này' : ' · Viết ' + m.write.c + '/' + m.write.n) + ' · Tổng ' + m.total.c + '/' + m.total.n + ' câu' + (zc ? ' · CEFR (ước lượng): ' + zc.label : '');
+  return 'Thi thử HSK ' + esc(String(m.hsk)) + ' (' + esc(m.date) + '): Nghe ' + m.listen.c + '/' + m.listen.n + ' · Đọc ' + m.read.c + '/' + m.read.n + (m.write.essay ? ' · Viết: 1 bài luận (tự chấm)' : m.write.n === 0 ? ' · Viết: không có phần này' : ' · Viết ' + m.write.c + '/' + m.write.n) + ' · Tổng ' + m.total.c + '/' + m.total.n + ' câu' + (zc ? ' · CEFR (ước lượng): ' + zc.label : '');
 }
 function tcMockLine89(m) {
   var lab = { "tc-mock-200": "đủ 200 câu", "tc-mock-450": "chặng 450", "tc-mock-600": "chặng 600", "tc-mock-750": "chặng 750" }[m.milestone] || m.milestone;
@@ -7064,7 +7064,7 @@ function trackLevelHTML89() {
     var h = '<section class="card" id="mineLevel"><h3>Đánh giá mức độ</h3>'
       + '<p><b>Đã qua kiểm tra cuối chặng: ' + passed + '/6 chặng</b> <span class="mut">(mỗi phần cần từ 50% đúng lần đầu mới tính qua)</span></p>'
       + curCefrLine();
-    if (mocks.length) { var m = mocks[mocks.length - 1]; h += '<p><b>' + zhMockLine89(m) + '</b></p><p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p>'; }
+    if (mocks.length) { var m = mocks[mocks.length - 1]; h += '<p><b>' + zhMockLine89(m) + '</b></p><p class="mut">Điểm này là số câu đúng từng phần, không phải điểm HSK chính thức.</p>'; }
     else h += '<p class="mut">Chưa thi thử HSK — thi thử ở cuối Thế giới cấp độ để lưu mốc.</p>';
     return h + '</section>';
   }
@@ -7126,7 +7126,7 @@ function trackMockHTML89() {
   }
   if (t === "zh") {
     var zl = state.zhMockTests || []; if (!zl.length) return "";
-    return '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + zl.map(function (m) { return '<p>' + zhMockLine89(m) + '</p>'; }).join("") + '<p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p></section>';
+    return '<section class="card" id="mineMock"><h3>Mốc đã thi thử</h3>' + zl.map(function (m) { return '<p>' + zhMockLine89(m) + '</p>'; }).join("") + '<p class="mut">Điểm này là số câu đúng từng phần, không phải điểm HSK chính thức.</p></section>';
   }
   if (t === "tc") {
     var tl = state.tcMockTests || []; if (!tl.length) return "";
@@ -24626,7 +24626,7 @@ function zhMockCardHTML() {
   /* UI 28/10 (GD-02): the thi thu giu tren ca man chinh (chi 2 nut phu,
      khong phai nut ban do) vi day la loi tat nguoi dung + test ghim. */
   var mm2 = zhMockBuild(2), mm3 = zhMockBuild(3);
-  return '<section class="card"><h3>🎓 Thi thử HSK</h3><p class="mut">Thi thử từ đúng ngân hàng của web — HSK2 và HSK3 đủ câu theo đề mẫu HSK 3.0 (60 và 80 câu); HSK4–6 là bản rút gọn. Không có phần Nói (HSKK riêng).</p><div class="row"><button class="btn" data-zhmock="2">Thi thử HSK2 (đủ câu: Nghe ' + mm2.listen.n + ' + Đọc ' + mm2.read.n + ')</button><button class="btn" data-zhmock="3">Thi thử HSK3 (đủ câu: Nghe ' + mm3.listen.n + ' + Đọc ' + mm3.read.n + ' + Viết ' + mm3.write.n + ' câu)</button></div></section>';
+  return '<section class="card"><h3>🎓 Thi thử HSK</h3><p class="mut">Thi thử từ đúng ngân hàng của web — HSK1–6 đủ câu theo đề mẫu HSK 3.0 (40, 60, 80, 100, 100 và 101 câu). Không có phần Nói (HSKK riêng).</p><div class="row"><button class="btn" data-zhmock="2">Thi thử HSK2 (đủ câu: Nghe ' + mm2.listen.n + ' + Đọc ' + mm2.read.n + ')</button><button class="btn" data-zhmock="3">Thi thử HSK3 (đủ câu: Nghe ' + mm3.listen.n + ' + Đọc ' + mm3.read.n + ' + Viết ' + mm3.write.n + ' câu)</button></div></section>';
 }
 function zhStage1BodyHTML() {
   var s1Body = '<div class="path-v">';
@@ -24787,7 +24787,7 @@ function viewHomeZh(app) {
 }
 function viewRoadmapZh(app) {
   var html = trackSwitchHTML() + '<h2>Thế giới cấp độ · Tiếng Trung</h2>' + trailHeadHTML("6 chặng theo Giáo trình chuẩn HSK — đi dọc đường mòn, thu nhặt từng bộ từ, từng bài ngữ pháp dọc đường.");
-  html += '<p class="mut">6 chặng theo Giáo trình chuẩn HSK (hệ 6 cấp cũ) + lớp bổ sung HSK 3.0 hệ E. Chặng 1–6 đã có bộ từ riêng cùng ngữ pháp, đọc, nghe, nói, nhập vai, viết, kiểm tra cuối chặng và thi thử HSK (bản rút gọn); viết chữ (50 chữ nét đơn giản) và từ điển bấm tra đã mở trong tab Luyện tập.</p>';
+  html += '<p class="mut">6 chặng theo Giáo trình chuẩn HSK (hệ 6 cấp cũ) + lớp bổ sung HSK 3.0 hệ E. Chặng 1–6 đã có bộ từ riêng cùng ngữ pháp, đọc, nghe, nói, nhập vai, viết, kiểm tra cuối chặng và thi thử HSK; viết chữ (368 chữ) và từ điển bấm tra đã mở trong tab Luyện tập.</p>';
   var rt = zhSessionTarget();
   html += '<div class="row"><button class="btn btn-primary" id="zhRoadmapNextBtn">Học tiếp: ' + esc(rt.title) + ' →</button></div>';
   html += zhMapHTML(true);
@@ -24861,7 +24861,7 @@ function viewPracticeZh(app) {
   var zhFaceOpts = '<optgroup label="Bộ mở đầu">' + zhFaceOpt(zhSetByKey("starter")) + '</optgroup>'
     + [1, 2, 3, 4, 5, 6].map(function (st) { return '<optgroup label="Chặng ' + st + '">' + zhStageSets(st).map(zhFaceOpt).join("") + '</optgroup>'; }).join(""); /* DOT trung 28/10/2026 (T-V2): zhSets() nay da du 28 bo; giu gop tay o day de khoi doi hanh vi tab (day la danh sach option rieng, khong trung). */
   html += '<section class="card" id="zhFaceCard"><h3>👁 Nhận mặt chữ — nhớ mặt chữ từng bộ</h3><p class="mut">Thẻ từ luôn hiện pinyin kèm chữ nên dễ học vẹt bằng pinyin mà chưa nhớ mặt chữ. Bài này tách riêng kỹ năng đó: nhìn chữ Hán (không có pinyin) rồi chọn đúng nghĩa — và ngược lại, nhìn nghĩa chọn đúng chữ. Mỗi lượt 10 câu, lấy từ một bộ thật, đáp án nhiễu cũng là từ thật trong cùng bộ (thiếu đáp án nhiễu thì bỏ câu, không bịa). Trả lời sai vào Sổ lỗi sai. Sau khi trả lời mới hiện pinyin và nút nghe để gắn thêm âm thanh.</p><div class="row"><input id="zhFaceFilter" placeholder="Lọc bộ theo chủ điểm…" style="flex:1"><select id="zhFaceSet">' + zhFaceOpts + '</select><button class="btn" id="zhFaceStartBtn">Bắt đầu luyện →</button></div></section>';
-  html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">50 chữ nét đơn giản — sẽ bổ sung dần. Bấm vào một chữ để xem video mẫu cách viết và tập viết.</p><details><summary><b>Xem ' + zhStrokesList().length + ' chữ — theo nhóm 10 chữ</b></summary>' + zhStrokeGroupsHTML() + '</details><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
+  html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">368 chữ — sẽ bổ sung dần. Bấm vào một chữ để xem video mẫu cách viết và tập viết.</p><details><summary><b>Xem ' + zhStrokesList().length + ' chữ — theo nhóm 10 chữ</b></summary>' + zhStrokeGroupsHTML() + '</details><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
   html += pronDiagEntryHTML("zh");
   html += pronWeakHTML("zh"); /* v119b */
   html += specTutorGroupHTML("zh"); /* v129: nhom Tro giang AI nhu EN */
@@ -24886,7 +24886,7 @@ function viewPracticeZh(app) {
   html += '<details><summary><b>Nói chặng 1–6 (' + ZH_SPEAK.length + ' kịch bản)</b></summary>' + zhSkillPracticeHTML("speak") + '</details>';
   html += '<details><summary><b>Nhập vai chặng 1–6 (' + ZH_ROLE.length + ' tình huống)</b></summary>' + zhSkillPracticeHTML("role") + '</details>';
   html += '<details><summary><b>Viết chặng 1–6 (' + ZH_WRITE.length + ' bài)</b></summary>' + zhSkillPracticeHTML("write") + '</details>';
-  html += '<details><summary><b>🎓 Thi — kiểm tra cuối chặng + thi thử HSK (bản rút gọn)</b></summary>' + zhPracticeExamHTML() + '</details>';
+  html += '<details><summary><b>🎓 Thi — kiểm tra cuối chặng + thi thử HSK</b></summary>' + zhPracticeExamHTML() + '</details>';
     html += '<section class="card" id="zhGameCardPractice"><h3>🎬 Video hoạt hình track Trung — xem cho vui</h3><p class="mut">Đang tải video…</p></section>';
   html += videoNewBlockHTML("zh");
   html += '<details><summary><b>HSKK — thi nói riêng</b></summary>' + zhHskkHTML() + '</details>';
@@ -25544,7 +25544,7 @@ function renderZhStroke(app, l) {
   var next = list[(idx + 1) % list.length];
   var recalling = !!l.recallMode && !l.compared;
   var html = lessonHead({ title: recalling ? "Viết chữ từ trí nhớ" : "Viết chữ: " + e.han, type: "Tiếng Trung · Viết chữ" });
-  html += '<p class="mut">50 chữ nét đơn giản — sẽ bổ sung dần. Xem video mẫu cách viết đúng chuẩn, rồi tập viết ở khung bên dưới.</p>';
+  html += '<p class="mut">368 chữ — sẽ bổ sung dần. Xem video mẫu cách viết đúng chuẩn, rồi tập viết ở khung bên dưới.</p>';
   if (recalling) {
     html += '<div class="qblock"><p>Viết từ trí nhớ chữ có pinyin <b>' + esc(e.py) + '</b> — nghĩa: ' + esc(e.vi) + '</p>'
       + '<p class="mut">Tổng số nét: ' + e.d.length + '</p>'
@@ -25664,7 +25664,7 @@ function renderZhStroke(app, l) {
   }
 }
 /* ---------- v210 (17/11/2026): Viet chu Hangul track Han — mau ZH (DOT 2f) ----------
-   Du lieu net o content-new.js (TP_STROKES, 47 muc: 40 chu cai + 7 am tiet
+   Du lieu net o content-new.js (TP_STROKES, 65 muc: 40 chu cai + 25 am tiet
    mau). Cung cau truc/luong nhu bai zhStroke: video mau (TP_WRITE_VIDEOS,
    hien CHUA CO video nao duoc kiem chung nen de rong) -> thu tu net SVG ->
    khung tap viet tu do (canvas + mau mo) -> 3 dang luyen: order (tap theo
@@ -25718,7 +25718,7 @@ function tpStrokeOrderSVG(e, opts) {
   return '<svg viewBox="0 0 100 100" style="width:180px;height:180px;border:1px solid #ddd;background:#fff" role="img" aria-label="Thứ tự nét chữ ' + esc(e.han) + '">' + parts + '</svg>';
 }
 function tpStrokeGroupsHTML() {
-  var groups = ["Phụ âm cơ bản", "Phụ âm căng", "Nguyên âm cơ bản", "Nguyên âm đôi", "Âm tiết mẫu"];
+  var groups = ["Phụ âm cơ bản", "Phụ âm căng", "Nguyên âm cơ bản", "Nguyên âm đôi", "Âm tiết mẫu", "Batchim ㄱ", "Batchim ㄴ", "Batchim ㄷ", "Batchim ㄹ", "Batchim ㅁ", "Batchim ㅂ", "Batchim ㅇ", "Batchim đôi (đọc âm đầu)", "Batchim đôi (đọc âm sau)"];
   return groups.map(function (g) {
     var items = tpStrokesList().filter(function (e) { return e.g === g; });
     if (!items.length) return "";
@@ -25744,7 +25744,7 @@ function renderTpStroke(app, l) {
   var isSyl = (e.g === "Âm tiết mẫu");
   var title = mode === "free" ? "Viết chữ từ trí nhớ" : (mode === "fill" ? "Điền nét còn thiếu" : "Viết chữ: " + e.han);
   var html = lessonHead({ title: title, type: "Tiếng Hàn · Viết chữ" });
-  html += '<p class="mut">40 chữ cái + 7 âm tiết mẫu. Số nét theo giáo trình Sejong Korean 1: nét gập tính là 1 nét (vd ㄱ 1 nét, ㄴ 1 nét, ㄷ 2 nét). Một số bảng khác đếm mỗi đoạn thẳng là 1 nét — bản này dùng một kiểu thống nhất là Sejong.</p>';
+  html += '<p class="mut">40 chữ cái + 25 âm tiết mẫu (7 mẫu + 18 batchim). Số nét theo giáo trình Sejong Korean 1: nét gập tính là 1 nét (vd ㄱ 1 nét, ㄴ 1 nét, ㄷ 2 nét). Một số bảng khác đếm mỗi đoạn thẳng là 1 nét — bản này dùng một kiểu thống nhất là Sejong.</p>';
   html += '<div class="row">'
     + '<button class="btn' + (mode === "order" ? ' btn-primary' : '') + '" data-tpmode="order">1 · Tập theo thứ tự</button>'
     + '<button class="btn' + (mode === "fill" ? ' btn-primary' : '') + '" data-tpmode="fill">2 · Điền nét còn thiếu</button>'
@@ -26942,7 +26942,7 @@ function renderZhWrite(app, l) {
   var key = "zhWrite:" + w.id;
   var zhTask = { key: key, track: "zh", title: "Viết: " + w.title, prompt: w.prompt, model: w.model, modelNote: w.analysis, phrases: w.phrases, guide: w.note, typeNote: "Gõ chữ Hán: gõ pinyin trên điện thoại hoặc máy tính rồi chọn chữ Hán hiện ra — đó là cách gõ thật, không cần viết tay từng nét.", eyebrow: "Tiếng Trung · Viết chặng " + w.stage };
   wbRender(app, l, zhTask, {
-    backHTML: lessonHead({ title: "Viết: " + w.title, type: "Tiếng Trung · Viết chặng " + w.stage }, w.note || ""),
+    backHTML: lessonHead({ title: "Viết: " + w.title, type: "Tiếng Trung · Viết chặng " + w.stage }, w.note || "") + ((w.kind === "essay" && w.passage) ? '<div class="qblock"><p><b>Đoạn văn để đọc rồi viết luận:</b></p><p class="zh-han">' + esc(w.passage) + '</p></div>' : ""),
     wireBack: wireBack,
     rerender: render,
     aiMode: "none",
@@ -27138,16 +27138,19 @@ function zhMockBuild(hsk) {
   reads.forEach(function (r) { (r.questions || []).forEach(function (qq) { rQs.push(qq); }); });
   var writes = (ZH_WRITE || []).filter(function (x) { return x.stage === stage; });
   var wQs = [];
+  var essayQs = [];
   writes.forEach(function (w) {
     if (w.kind === "order") wQs.push(zhMockOrderMCQ(w, wQs.length));
     else if (w.kind === "fill") (w.questions || []).forEach(function (qq) { wQs.push(qq); });
+    else if (w.kind === "essay") essayQs.push({ kind: "essay", q: w.prompt, passage: w.passage, minChars: w.minChars || 400, model: w.model, analysis: w.analysis || "", why: w.analysis || "" });
   });
   // v213 A2: lat cat theo de mau HSK 3.0 — HSK2 [35,25,0], HSK3 [40,30,10],
-  // HSK4 [40,40,12]=92/100, HSK5 [40,45,9]=94/100 (het ngan hang Viet: 7 sap xep + 2 cau dien),
-  // HSK6 [40,50,0]=90/101 (Viet de that la 1 bai luan, luyen o buoc Viet trong chang).
+  // v214 (d): HSK4 [45,40,15]=100, HSK5 [45,45,10]=100,
+  // HSK6 [50,50,1]=101 (Viet la 1 bai luan kind "essay", khong phai MCQ).
   if (hsk >= 2 && hsk <= 6) {
-    var tgt = { 2: [35, 25, 0], 3: [40, 30, 10], 4: [40, 40, 12], 5: [40, 45, 9], 6: [40, 50, 0] }[hsk]; /* v213 A2: lat cat theo de mau HSK 3.0 — HSK2/3/6 Viet 0 (de that khong co Viet / Viet la 1 bai luan), HSK4 92/100, HSK5 94/100 (het ngan hang Viet 9 cau). */
+    var tgt = { 2: [35, 25, 0], 3: [40, 30, 10], 4: [45, 40, 15], 5: [45, 45, 10], 6: [50, 50, 1] }[hsk]; /* v214 (d): lat cat theo de mau HSK 3.0 — HSK4/5/6 du cau. */
     lQs = lQs.slice(0, tgt[0]); rQs = rQs.slice(0, tgt[1]); wQs = wQs.slice(0, tgt[2]);
+    if (hsk === 6) wQs = essayQs.slice(0, tgt[2]); /* v214 (d): HSK6 Viet chi co 1 bai luan. */
     return { hsk: hsk, listen: { qs: lQs, n: lQs.length, segments: listens }, read: { qs: rQs, n: rQs.length, passages: reads }, write: { qs: wQs, n: wQs.length }, total: lQs.length + rQs.length + wQs.length };
   }
   // DOT 18 31/10: HSK1 ve dung co cau de that (20 Nghe + 20 Doc): 16 cau tu 4 doan dau
@@ -27164,17 +27167,18 @@ function zhMockBuild(hsk) {
   return { hsk: hsk, listen: { qs: lQs1, n: lQs1.length, segments: segs1 }, read: { qs: rQs1, n: rQs1.length, passages: reads.slice(0, 4) }, write: { qs: wQs1, n: wQs1.length }, total: lQs1.length + rQs1.length + wQs1.length };
 }
 var ZH_MOCK_MIN = { listen: 10, read: 15, write: 10 };
+function zhMockMinutes(hsk, key) { if (key === "write" && hsk === 6) return 45; return ZH_MOCK_MIN[key]; } /* v214 (d): dong ho Viet HSK6 45 phut — can doi chieu giao trinh. */
 var ZH_MOCK_ORDER = ["listen", "read", "write"];
-function zhMockPartMeta(mock, key) {
-  if (key === "listen") return { name: "Nghe", minutes: ZH_MOCK_MIN.listen, qs: mock.listen.qs };
-  if (key === "read") return { name: "Đọc", minutes: ZH_MOCK_MIN.read, qs: mock.read.qs };
-  return { name: "Viết", minutes: ZH_MOCK_MIN.write, qs: mock.write.qs };
+function zhMockPartMeta(mock, key, hsk) {
+  if (key === "listen") return { name: "Nghe", minutes: zhMockMinutes(hsk, key), qs: mock.listen.qs };
+  if (key === "read") return { name: "Đọc", minutes: zhMockMinutes(hsk, key), qs: mock.read.qs };
+  return { name: "Viết", minutes: zhMockMinutes(hsk, key), qs: mock.write.qs };
 }
 function zhMockAdvance(l, timedOut) {
   var mock = l.mock, key = l.stage;
-  var meta = zhMockPartMeta(mock, key);
+  var meta = zhMockPartMeta(mock, key, l.hsk);
   var ans = l.ans[key] || [];
-  var c = 0; meta.qs.forEach(function (qq, i) { if (ans[i] === qq.a) c++; });
+  var c = 0; meta.qs.forEach(function (qq, i) { if (qq.o && ans[i] === qq.a) c++; }); /* v214 (d): cau luan khong co o nen khong tinh dung — luan khong cham tu dong. */
   if (!l.scores) l.scores = {};
   l.scores[key] = { c: c, n: meta.qs.length };
   examTimerStop();
@@ -27187,7 +27191,7 @@ function zhMockAdvance(l, timedOut) {
 function renderZhMock(app, l) {
   var hsk = l.hsk;
   if (hsk < 1 || hsk > 6) {
-    app.innerHTML = lessonHead({ title: "Thi thử HSK (bản rút gọn)", type: "Tiếng Trung · Thi thử HSK" })
+    app.innerHTML = lessonHead({ title: "Thi thử HSK", type: "Tiếng Trung · Thi thử HSK" })
       + '<div class="qblock"><p>Thi thử này chưa có — chặng này chưa có bài nên web không bịa bài thi thử.</p><p><button class="btn btn-primary" id="zhMockBack">Về bản đồ</button></p></div>';
     wireBack(); $("#zhMockBack").onclick = function () { backFromLesson(); }; return;
   }
@@ -27199,18 +27203,18 @@ function renderZhMock(app, l) {
     var prev = (state.zhMockTests || []).filter(function (m) { return m.hsk === hsk; });
     var prevHTML = prev.length ? '<p class="mut">Đã thi trước đây: ' + prev.map(function (m) { return m.date + ' — Nghe ' + m.listen.c + '/' + m.listen.n + ', Đọc ' + m.read.c + '/' + m.read.n + (m.write.n ? ', Viết ' + m.write.c + '/' + m.write.n : ''); }).join(" · ") + '</p>' : '<p class="mut">Chưa có mốc thi thử ' + label + ' nào.</p>';
     var zhFull = mock.total >= ({ 1: 40, 2: 60, 3: 80, 4: 100, 5: 100, 6: 101 })[hsk];
-    /* v213 A2: HSK5 94/100, HSK6 90/101 — ca hai deu la ban rut gon; phan Viet
-       khac dang de that (web luyen sap xep/dien tu, de that la 2 bai luan / 1 bai
-       luan) — khong goi la "du cau theo de mau" tron ven, ghi ro o tieu de + verdict. */
-    var zhFullTag = (hsk === 5 || hsk === 6) ? (zhFull ? " (đủ tổng số câu — Viết khác dạng đề thật)" : " (bản rút gọn)") : (zhFull ? " (đủ câu)" : " (bản rút gọn)");
+    /* v214 (d): HSK4/6 du cau dung dang; HSK5 du tong so cau nhung phan Viet
+       khac dang de that (web luyen sap xep/dien tu, de that la dien tu + 2 bai
+       luan) — ghi ro o tieu de + verdict. */
+    var zhFullTag = (hsk === 5) ? (zhFull ? " (đủ tổng số câu — Viết khác dạng đề thật)" : " (bản rút gọn)") : (zhFull ? " (đủ câu)" : " (bản rút gọn)");
     app.innerHTML = lessonHead({ title: "Thi thử " + label + zhFullTag, type: "Tiếng Trung · Thi thử HSK" })
       + '<div class="qblock">'
-      + (hsk === 1 ? '<p><b>Nghe + Đọc đủ 40 câu theo đề thật (Nghe 20 + Đọc 20);</b> đề thật cấp 1 không có Viết — số câu đếm thật từ ngân hàng của web.</p>' : (hsk === 5 || hsk === 6) ? ((hsk === 5) ? '<p><b>⚠️ BẢN RÚT GỌN 94/100 câu:</b> Nghe 40/45, Đọc 45/45, Viết 9/10 — thiếu Nghe 5 + Viết 1. Phần Viết khác dạng đề thật (web luyện sắp xếp/điền từ, đề thật: điền từ + 2 bài luận); số câu đếm thật từ ngân hàng của web.</p>' : '<p><b>⚠️ BẢN RÚT GỌN 90/101 câu:</b> Nghe 40/50, Đọc 50/50 — thiếu Nghe 10; Viết đề thật là 1 bài luận, luyện ở bước Viết trong chặng. Số câu đếm thật từ ngân hàng của web.</p>') : zhFull ? '<p><b>✓ Đủ câu theo đề mẫu HSK 3.0:</b> số câu dưới đây đếm thật từ ngân hàng của web, đúng tỉ lệ Nghe/Đọc/Viết của đề mẫu.</p>' : '<p><b>⚠️ Đây là BẢN RÚT GỌN, không phải đề HSK thật:</b> ' + (hsk === 4 ? 'HSK4 có 92/100 câu (Nghe 40/45, Đọc 40/40, Viết 12/15) — thiếu Nghe 5 + Viết 3. ' : 'đề HSK thật nhiều câu hơn. ') + 'Số câu dưới đây đếm thật từ ngân hàng của web.</p>')
+      + (hsk === 1 ? '<p><b>Nghe + Đọc đủ 40 câu theo đề thật (Nghe 20 + Đọc 20);</b> đề thật cấp 1 không có Viết — số câu đếm thật từ ngân hàng của web.</p>' : (hsk === 5 || hsk === 6) ? ((hsk === 5) ? '<p><b>✓ Đủ 100 câu theo đề mẫu HSK 3.0:</b> Nghe 45/45, Đọc 45/45, Viết 10/10. Phần Viết khác dạng đề thật (web luyện sắp xếp/điền từ, đề thật: điền từ + 2 bài luận); số câu đếm thật từ ngân hàng của web.</p>' : '<p><b>✓ Đủ 101 câu theo đề mẫu HSK 3.0:</b> Nghe 50/50, Đọc 50/50, Viết 1/1 bài luận. Bài luận không chấm điểm tự động — tự chấm theo 4 tiêu chí và đối chiếu với bài mẫu; số câu đếm thật từ ngân hàng của web.</p>') : zhFull ? '<p><b>✓ Đủ câu theo đề mẫu HSK 3.0:</b> số câu dưới đây đếm thật từ ngân hàng của web, đúng tỉ lệ Nghe/Đọc/Viết của đề mẫu.</p>' : '<p><b>⚠️ Đây là BẢN RÚT GỌN, không phải đề HSK thật:</b> ' + (hsk === 4 ? 'HSK4 có 92/100 câu (Nghe 40/45, Đọc 40/40, Viết 12/15) — thiếu Nghe 5 + Viết 3. ' : 'đề HSK thật nhiều câu hơn. ') + 'Số câu dưới đây đếm thật từ ngân hàng của web.</p>')
       + '<p><b>Nghe:</b> ' + mock.listen.n + ' câu (đồng hồ 10 phút) — ' + mock.listen.segments.map(function (s) { return esc(s.title); }).join(" · ") + '</p>'
       + '<p><b>Đọc:</b> ' + mock.read.n + ' câu (đồng hồ 15 phút) — ' + mock.read.passages.map(function (r) { return esc(r.title); }).join(" · ") + '</p>'
-      + (mock.write.n === 0 ? '<p><b>Viết:</b> luyện thêm ngoài đề thi — bài Viết có sẵn ở bước Viết trong chặng. <button class="btn" id="zhMockWriteGo">Mở bài Viết chặng ' + hsk + ' →</button></p>' : '<p><b>Viết' + (zhFull ? "" : " (rút gọn)") + ':</b> ' + mock.write.n + ' câu (đồng hồ 10 phút) — sắp xếp từ thành câu + điền từ của ZH_WRITE trong phần thi thử này.' + ((hsk === 5 || hsk === 6) ? ' Ngoài ra, dạng viết đoạn theo đề thật ở cấp này luyện thành bước Viết trong lộ trình (viết bản nháp → đối chiếu bài mẫu 2 cột).' : ' Chưa phải dạng viết đoạn của đề thật.') + (hsk === 5 ? ' HSK5 hiện có 9 câu Viết trong ngân hàng — đã lấy hết.' : (hsk === 6 ? ' HSK6 hiện có 10 câu Viết trong ngân hàng — đã lấy hết.' : '')) + '</p>')
+      + (mock.write.n === 0 ? '<p><b>Viết:</b> luyện thêm ngoài đề thi — bài Viết có sẵn ở bước Viết trong chặng. <button class="btn" id="zhMockWriteGo">Mở bài Viết chặng ' + hsk + ' →</button></p>' : (hsk === 6 ? '<p><b>Viết:</b> 1 bài luận (đồng hồ 45 phút) — đọc đoạn văn rồi viết bài luận khoảng 400 chữ, tự chấm 4 tiêu chí + đối chiếu bài mẫu.</p>' : '<p><b>Viết' + (zhFull ? "" : " (rút gọn)") + ':</b> ' + mock.write.n + ' câu (đồng hồ 10 phút) — sắp xếp từ thành câu + điền từ của ZH_WRITE trong phần thi thử này.' + (hsk === 5 ? ' Ngoài ra, dạng viết đoạn theo đề thật ở cấp này luyện thành bước Viết trong lộ trình (viết bản nháp → đối chiếu bài mẫu 2 cột).' : ' Chưa phải dạng viết đoạn của đề thật.') + (hsk === 5 ? ' HSK5 hiện có 10 câu Viết trong ngân hàng — đã lấy hết.' : '') + '</p>'))
       + '<p><b>Tổng: ' + mock.total + ' câu.</b> Mỗi phần có đồng hồ đếm ngược chạy thật, hết giờ phần tự chuyển phần tiếp theo; các câu chưa trả lời tính là sai.</p>'
-      + (function () { var zr = { 1: [20, 20, 0], 2: [35, 25, 0], 3: [40, 30, 10], 4: [45, 40, 15], 5: [45, 45, 10], 6: [50, 50, 1] }[hsk] || [0, 0, 0]; var zt = { 1: 40, 2: 60, 3: 80, 4: 100, 5: 100, 6: 101 }[hsk] || 0; var wTxt = hsk === 6 ? 'Viết 0/1 bài luận' : (zr[2] === 0 ? 'Viết: đề thật không có phần Viết' : 'Viết ' + mock.write.n + '/' + zr[2]); return '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): Nghe ' + mock.listen.n + '/' + zr[0] + ' · Đọc ' + mock.read.n + '/' + zr[1] + ' · ' + wTxt + ' — tổng ' + mock.total + '/' + zt + ' câu' + (mock.total >= zt ? ' — đủ câu để gọi sẵn sàng thi.' : ' — chưa đủ câu để gọi sẵn sàng thi.') + (hsk === 5 ? ' Lưu ý: phần Viết khác dạng đề thật (web luyện sắp xếp/điền từ, đề thật: điền từ + 2 bài luận).' : (hsk === 6 ? ' Lưu ý: Viết đề thật là 1 bài luận — luyện ở bước Viết trong chặng.' : '')) + '</p>'; })()
+      + (function () { var zr = { 1: [20, 20, 0], 2: [35, 25, 0], 3: [40, 30, 10], 4: [45, 40, 15], 5: [45, 45, 10], 6: [50, 50, 1] }[hsk] || [0, 0, 0]; var zt = { 1: 40, 2: 60, 3: 80, 4: 100, 5: 100, 6: 101 }[hsk] || 0; var wTxt = hsk === 6 ? 'Viết ' + mock.write.n + '/1 bài luận' : (zr[2] === 0 ? 'Viết: đề thật không có phần Viết' : 'Viết ' + mock.write.n + '/' + zr[2]); return '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): Nghe ' + mock.listen.n + '/' + zr[0] + ' · Đọc ' + mock.read.n + '/' + zr[1] + ' · ' + wTxt + ' — tổng ' + mock.total + '/' + zt + ' câu' + (mock.total >= zt ? ' — đủ câu để gọi sẵn sàng thi.' : ' — chưa đủ câu để gọi sẵn sàng thi.') + (hsk === 5 ? ' Lưu ý: phần Viết khác dạng đề thật (web luyện sắp xếp/điền từ, đề thật: điền từ + 2 bài luận).' : (hsk === 6 ? ' Lưu ý: Viết là 1 bài luận, tự chấm theo 4 tiêu chí, không chấm điểm tự động.' : '')) + '</p>'; })()
       + '<p class="mut">Không có phần Nói trong đề này — nói thi riêng ở mục HSKK (HSKK là bài thi nói riêng). Chấm Nghe/Đọc/Viết rút gọn theo đáp án; không có AI chấm tiếng Trung trong đợt này (chờ nâng cấp).</p>'
       + '<p class="mut">Thi thử này theo hệ 6 cấp cũ (Giáo trình chuẩn HSK); HSK 3.0 ra mắt toàn cầu 13/12/2026 có cấu trúc mới — xem thêm ở Thế giới cấp độ → Lớp bổ sung HSK 3.0.</p>'
       + prevHTML
@@ -27218,7 +27222,7 @@ function renderZhMock(app, l) {
     wireBack();
     $("#zhMockStart").onclick = function () {
       l.mockDisp = {}; l.zhDisp = {};
-      l.ans = {}; ZH_MOCK_ORDER.forEach(function (k) { var mq = zhMockPartMeta(mock, k).qs; l.ans[k] = mq.map(function () { return -1; }); });
+      l.ans = {}; ZH_MOCK_ORDER.forEach(function (k) { var mq = zhMockPartMeta(mock, k, hsk).qs; l.ans[k] = mq.map(function () { return -1; }); });
       l.scores = {}; l.stage = "listen"; l.qi = 0; lessonStart = Date.now(); render();
     };
     var wg = document.getElementById("zhMockWriteGo");
@@ -27233,56 +27237,66 @@ function renderZhMock(app, l) {
     if (!l.recorded) {
       l.recorded = true;
       ZH_MOCK_ORDER.forEach(function (k) {
-        var mq = zhMockPartMeta(mock, k).qs; var an = l.ans[k] || [];
-        mq.forEach(function (qq, i) { if (an[i] !== qq.a) { try { recordZhQuizError("zhMock:" + hsk, i, qq); } catch (e) {} } });
+        var mq = zhMockPartMeta(mock, k, hsk).qs; var an = l.ans[k] || [];
+        mq.forEach(function (qq, i) { if (qq.kind === "essay") return; /* v214 (d): luan khong vao So loi sai. */ if (an[i] !== qq.a) { try { recordZhQuizError("zhMock:" + hsk, i, qq); } catch (e) {} } });
       });
       saveState();
     }
     var reviewHTML = ZH_MOCK_ORDER.map(function (k) {
-      var mq = zhMockPartMeta(mock, k); var an = l.ans[k] || [];
+      var mq = zhMockPartMeta(mock, k, hsk); var an = l.ans[k] || [];
       if (!mq.qs.length) return '';
       return '<details class="rule-more"><summary><b>Xem lại phần ' + mq.name + ' (' + (sc[k] ? sc[k].c : 0) + '/' + mq.qs.length + ')</b></summary>' + mq.qs.map(function (qq, i) {
+        if (qq.kind === "essay") { var etxt = l.essayText || ""; var ech = etxt.replace(/\s/g, "").length; var esub = (an[i] === 1); return '<p>· <b>Bài luận:</b> ' + esc(qq.q) + '<br>Bài của bạn (' + (esub ? 'đã nộp, ' + ech + '/' + (qq.minChars || 400) + ' chữ' : 'chưa nộp') + '):<br>' + esc(etxt || "(chưa viết gì)") + '<br><b>Bài mẫu:</b><br>' + esc(qq.model || "") + '<br><span class="mut">' + esc(qq.analysis || "") + '</span></p>'; }
         var mine = an[i] == null || an[i] < 0 ? "(chưa trả lời)" : qq.o[an[i]];
         return '<p>· ' + esc(qq.q) + '<br>Bạn chọn: <b>' + esc(mine) + '</b> — Đáp án đúng: <b>' + esc(qq.o[qq.a]) + '</b> — ' + esc(qq.why || "") + '</p>';
       }).join("") + '</details>';
     }).join("");
-    var scoreHTML = '<p>Nghe: <b>' + lc.c + '/' + lc.n + ' câu</b></p><p>Đọc: <b>' + rc.c + '/' + rc.n + ' câu</b></p>' + (wc.n === 0 ? '<p>Viết: <b>luyện thêm ngoài đề thi — bài Viết có sẵn ở bước Viết trong chặng.</b></p>' : '<p>Viết: <b>' + wc.c + '/' + wc.n + ' câu</b></p>') + '<p><b>Tổng: ' + tc + '/' + tn + ' câu</b></p><p class="mut">Đây là bản rút gọn — điểm này không phải điểm HSK chính thức.</p><p>CEFR (ước lượng): ' + esc((zhStageCefr(hsk) || {}).label || '') + '.</p>';
+    var essaySubmitted = hsk === 6 && (l.ans.write || [])[0] === 1;
+    var essayChars = (l.essayText || "").replace(/\s/g, "").length;
+    var writeLineHTML = wc.n === 0 ? '<p>Viết: <b>luyện thêm ngoài đề thi — bài Viết có sẵn ở bước Viết trong chặng.</b></p>' : (hsk === 6 ? '<p>Viết: <b>1 bài luận — ' + (essaySubmitted ? 'đã nộp ' + essayChars + '/400 chữ (tự chấm, không tính điểm trắc nghiệm)' : 'chưa nộp (tự chấm, không tính điểm trắc nghiệm)') + '</b></p>' : '<p>Viết: <b>' + wc.c + '/' + wc.n + ' câu</b></p>');
+    var totalLineHTML = hsk === 6 ? '<p><b>Tổng trắc nghiệm: ' + (lc.c + rc.c) + '/100 câu đúng</b> + Viết luận 1 bài (tự chấm).</p>' : '<p><b>Tổng: ' + tc + '/' + tn + ' câu</b></p>';
+    var scoreHTML = '<p>Nghe: <b>' + lc.c + '/' + lc.n + ' câu</b></p><p>Đọc: <b>' + rc.c + '/' + rc.n + ' câu</b></p>' + writeLineHTML + totalLineHTML + '<p class="mut">Điểm này là số câu đúng từng phần, không phải điểm HSK chính thức.</p><p>CEFR (ước lượng): ' + esc((zhStageCefr(hsk) || {}).label || '') + '.</p>';
     if (l.saved) {
-      app.innerHTML = lessonHead({ title: "Thi thử " + label + " (bản rút gọn)", type: "Tiếng Trung · Thi thử HSK" }, "Đã lưu mốc thi thử.")
-        + '<div class="summarybox"><h2>Bảng điểm thi thử — ' + label + ' (rút gọn)</h2>' + scoreHTML + reviewHTML + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="zhMockBack">Về Luyện tập</button></div></div>';
+      app.innerHTML = lessonHead({ title: "Thi thử " + label, type: "Tiếng Trung · Thi thử HSK" }, "Đã lưu mốc thi thử.")
+        + '<div class="summarybox"><h2>Bảng điểm thi thử — ' + label + '</h2>' + scoreHTML + reviewHTML + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="zhMockBack">Về Luyện tập</button></div></div>';
       wireBack();
       $("#zhMockBack").onclick = function () { backFromLesson(); };
       return;
     }
-    app.innerHTML = lessonHead({ title: "Thi thử " + label + " (bản rút gọn)", type: "Tiếng Trung · Thi thử HSK" }, "Bảng điểm (xem lại trước khi lưu)")
-      + '<div class="summarybox"><h2>Bảng điểm thi thử — ' + label + ' (rút gọn)</h2>' + scoreHTML + reviewHTML + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="zhMockSave">Lưu mốc thi thử</button></div></div>';
+    app.innerHTML = lessonHead({ title: "Thi thử " + label, type: "Tiếng Trung · Thi thử HSK" }, "Bảng điểm (xem lại trước khi lưu)")
+      + '<div class="summarybox"><h2>Bảng điểm thi thử — ' + label + '</h2>' + scoreHTML + reviewHTML + '<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="zhMockSave">Lưu mốc thi thử</button></div></div>';
     wireBack();
     $("#zhMockSave").onclick = function () {
       if (!state.zhMockTests) state.zhMockTests = [];
-      state.zhMockTests.push({ hsk: hsk, date: todayStr(), listen: lc, read: rc, write: wc, total: { c: tc, n: tn } });
+      var saveWrite = hsk === 6 ? { c: 0, n: 1, essay: true, essayChars: (l.essayText || "").replace(/\s/g, "").length } : wc;
+      state.zhMockTests.push({ hsk: hsk, date: todayStr(), listen: lc, read: rc, write: saveWrite, total: { c: tc, n: tn } });
       saveState(); l.saved = true; render();
     };
     return;
   }
-  var key = l.stage, meta = zhMockPartMeta(mock, key);
+  var key = l.stage, meta = zhMockPartMeta(mock, key, hsk);
   if (l.qi == null) l.qi = 0;
   if (l.qi >= meta.qs.length) { zhMockAdvance(l, false); return; }
   var mq = meta.qs[l.qi];
   var mdisp = zhDispFor(l, key + ":" + l.qi, (mq.o || []).length);
+  /* v214 (d): cau luan HSK6 — textarea + dem chu, khong phuong an MCQ. */
+  var essayCharsNow = mq.kind === "essay" ? (l.essayText || "").replace(/\s/g, "").length : 0;
+  var essayBlockHTML = mq.kind === "essay" ? '<div class="qblock"><p><b>Đoạn văn để đọc rồi viết luận:</b></p><p class="zh-han">' + esc(mq.passage || "") + '</p><p><b>Đề bài:</b> ' + esc(mq.q) + '</p><textarea id="zhMockEssayText" rows="8" style="width:100%" placeholder="Viết bài luận khoảng ' + (mq.minChars || 400) + ' chữ...">' + esc(l.essayText || "") + '</textarea><p class="mut" id="zhMockEssayCount">Đã viết ' + essayCharsNow + '/' + (mq.minChars || 400) + ' chữ</p><p class="mut">Bài luận không chấm điểm tự động — sau khi nộp, tự chấm theo 4 tiêu chí và đối chiếu với bài mẫu ở màn bảng điểm.</p><div class="row" style="margin-top:8px">' + (l.qi > 0 ? '<button class="btn" id="zhMockPrev">← Câu trước</button>' : '') + '<button class="btn" id="zhMockNext"' + (l.qi + 1 < meta.qs.length ? '' : ' style="display:none"') + '>Câu tiếp theo →</button><button class="btn btn-primary" id="zhMockSubmit">Nộp phần này</button></div></div>' : null;
   var ans = l.ans[key] || [];
   var extra = "";
   if (key === "listen") extra = '<div class="qblock"><p class="mut">Nghe các đoạn rồi trả lời:</p>' + mock.listen.segments.map(function (sg, si) { return '<p><b>' + esc(sg.title) + '</b> <button class="btn" data-zhmocklisten="' + si + '">🔊 Nghe đoạn</button></p>'; }).join("") + '</div>';
   if (key === "read") extra = '<details class="rule-more"><summary><b>Bài đọc để đối chiếu</b></summary>' + mock.read.passages.map(function (r) { return '<p><b>' + esc(r.title) + ':</b></p><p class="zh-han">' + esc(r.text) + '</p><p><b>' + esc(r.pinyin) + '</b></p>'; }).join("") + '</details>';
   app.innerHTML = lessonHead({ title: "Thi thử " + label + " — " + meta.name, type: "Tiếng Trung · Thi thử HSK" }, "Phần " + meta.name + ": " + meta.qs.length + " câu · " + (mock.total >= ({ 1: 40, 2: 60, 3: 80, 4: 100, 5: 100, 6: 101 })[hsk] ? "Đủ câu theo đề mẫu HSK 3.0" : "Bản rút gọn — đề HSK thật nhiều câu hơn") + ".")
-    + examClockBlock(ZH_MOCK_MIN[key], "Hết giờ phần này tự chuyển phần tiếp theo.")
+    + examClockBlock(zhMockMinutes(hsk, key), "Hết giờ phần này tự chuyển phần tiếp theo.")
     + extra
-    + '<div class="qblock"><p><b>Câu ' + (l.qi + 1) + '/' + meta.qs.length + ':</b> ' + esc(mq.q) + '</p>'
+    + (essayBlockHTML || ('<div class="qblock"><p><b>Câu ' + (l.qi + 1) + '/' + meta.qs.length + ':</b> ' + esc(mq.q) + '</p>'
     + mdisp.map(function (oi, d) { return '<p><button class="btn' + (ans[l.qi] === oi ? ' btn-amber' : '') + '" data-zhmockopt="' + d + '">' + esc(mq.o[oi]) + '</button></p>'; }).join("")
-    + '<div class="row" style="margin-top:8px">' + (l.qi > 0 ? '<button class="btn" id="zhMockPrev">← Câu trước</button>' : '') + '<button class="btn" id="zhMockNext"' + (l.qi + 1 < meta.qs.length ? '' : ' style="display:none"') + '>Câu tiếp theo →</button><button class="btn btn-primary" id="zhMockSubmit">Nộp phần này</button></div></div>';
+    + '<div class="row" style="margin-top:8px">' + (l.qi > 0 ? '<button class="btn" id="zhMockPrev">← Câu trước</button>' : '') + '<button class="btn" id="zhMockNext"' + (l.qi + 1 < meta.qs.length ? '' : ' style="display:none"') + '>Câu tiếp theo →</button><button class="btn btn-primary" id="zhMockSubmit">Nộp phần này</button></div></div>'));
   wireBack();
-  examTimerStart("zhmock:" + hsk + ":" + key, ZH_MOCK_MIN[key], function () { zhMockAdvance(l, true); });
+  examTimerStart("zhmock:" + hsk + ":" + key, zhMockMinutes(hsk, key), function () { zhMockAdvance(l, true); });
   $$("[data-zhmocklisten]").forEach(function (b) { b.onclick = function () { var sg = mock.listen.segments[+b.dataset.zhmocklisten]; if (sg) zhSpeak(zhListenSpeakText(sg)); }; });
   $$("[data-zhmockopt]").forEach(function (b) { b.onclick = function () { ans[l.qi] = mdisp[+b.dataset.zhmockopt]; saveState(); render(); }; });
+  var et = $("#zhMockEssayText"); if (et) et.oninput = function () { l.essayText = et.value; var n = et.value.replace(/\s/g, "").length; if (!l.ans[key]) l.ans[key] = []; l.ans[key][l.qi] = n > 0 ? 1 : -1; var cc = $("#zhMockEssayCount"); if (cc) cc.textContent = "Đã viết " + n + "/" + (mq.minChars || 400) + " chữ"; saveState(); };
   var pv = $("#zhMockPrev"); if (pv) pv.onclick = function () { if (l.qi > 0) { l.qi--; render(); } };
   var nx = $("#zhMockNext"); if (nx) nx.onclick = function () { if (l.qi + 1 < meta.qs.length) { l.qi++; render(); } };
   var sb = $("#zhMockSubmit"); if (sb) sb.onclick = function () { zhMockAdvance(l, false); };
@@ -28231,8 +28245,8 @@ function renderTcWrite(app, m, id, back, skipBanner) {
      này giữ state trong closure, không có đối tượng bài l. */
   var wbL = {};
   var head = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(w.title) + '</h2>'
-    + '<p class="mut">TOEIC thi thật (Nghe–Đọc) không có phần Viết — đây là bài luyện viết email công sở để dùng thật trong công việc. Tự chấm theo bảng tiêu chí, không có máy chấm tự động.</p></section>';
-  var tcTask = { key: "tcWrite:" + m.ref, track: "tc", title: "Viết: " + w.title, prompt: w.prompt, model: w.model, modelNote: w.modelNote, phrases: w.hints, eyebrow: "TOEIC · VIẾT · " + (st.title || "") };
+    + '<p class="mut">Bài Viết TOEIC theo dạng bài thi TOEIC Writing (thuộc bộ thi TOEIC Speaking &amp; Writing của ETS, riêng với bài thi Nghe–Đọc): 8 câu — 5 câu viết câu theo tranh, 2 email trả lời, 1 bài luận. Tự chấm theo bảng tiêu chí, không có máy chấm tự động.</p></section>';
+  var tcTask = { key: "tcWrite:" + m.ref, track: "tc", title: "Viết: " + w.title, prompt: w.prompt, model: w.model, modelNote: w.modelNote, phrases: w.hints, checklist: w.checklist, eyebrow: "TOEIC · VIẾT · " + (st.title || "") };
   function render() {
   wbRender(app, wbL, tcTask, {
     backHTML: head,
@@ -29835,7 +29849,7 @@ function viewPracticeTp(app) {
     html += '<section class="card" id="tpFunVideoPractice"><div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Đang tải video…</p></div></section>';
   html += videoNewBlockHTML("tp");
   html += '<section class="card"><h3>Hangul — học theo thứ tự (5 bài)</h3><div class="row">' + TP_HANGUL.map(function (h, i) { return tpStepBtnHTML("h" + i); }).join("") + '</div><p class="mut">Học xong nhóm trước mới mở nhóm sau — bấm vào nhóm khóa để xem cần học nhóm nào trước.</p></section>'; /* v213 A2 */
-  html += '<section class="card" id="tpStrokeCard"><h3>✍️ Viết chữ Hangul</h3><p class="mut">40 chữ cái + 7 âm tiết mẫu — bấm vào một chữ để xem thứ tự nét và tập viết (3 dạng: tập theo thứ tự, điền nét còn thiếu, viết từ trí nhớ). Số nét theo giáo trình Sejong Korean 1.</p><details><summary><b>Xem ' + tpStrokesList().length + ' mục — theo nhóm</b></summary>' + tpStrokeGroupsHTML() + '</details></section>';
+  html += '<section class="card" id="tpStrokeCard"><h3>✍️ Viết chữ Hangul</h3><p class="mut">40 chữ cái + 25 âm tiết mẫu (7 mẫu + 18 batchim) — bấm vào một chữ để xem thứ tự nét và tập viết (3 dạng: tập theo thứ tự, điền nét còn thiếu, viết từ trí nhớ). Số nét theo giáo trình Sejong Korean 1.</p><details><summary><b>Xem ' + tpStrokesList().length + ' mục — theo nhóm</b></summary>' + tpStrokeGroupsHTML() + '</details></section>';
   html += practiceFilterHTML("", "tp");
   html += typeEntryRowHTML("tp");
   html += vocabGroupsHTML(TP_STAGES, tpStepBtnHTML, tpStepStatus, tpStepMeta, "tpVocabSearch", "tpVocabGroups", "Từ vựng đời sống", "tp");
