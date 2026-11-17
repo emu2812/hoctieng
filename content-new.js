@@ -1843,7 +1843,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
      "han": "合同",
      "pinyin": "hétóng",
      "vi": "hợp đồng",
-     "col": "签合同",
+     "col": "履行合同",
      "ex": "第一次发货前要签合同。",
      "exv": "Trước lô hàng đầu tiên phải ký hợp đồng."
     },
@@ -2439,7 +2439,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
      "han": "方法",
      "pinyin": "fāngfǎ",
      "vi": "phương pháp",
-     "col": "研究方法",
+     "col": "方法得当",
      "ex": "好的研究方法能避免偏差。",
      "exv": "Phương pháp nghiên cứu tốt tránh được thiên lệch."
     },
@@ -6377,7 +6377,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "竖",
       "横",
       "撇",
-      "竖折折钩",
+      "竖弯钩",
       "撇",
       "横折",
       "撇",
@@ -6461,7 +6461,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "横",
       "横",
       "撇",
-      "竖折折钩",
+      "竖弯钩",
       "横"
     ],
     "d": [
@@ -6857,7 +6857,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "横",
       "横折钩",
       "竖",
-      "竖折折钩"
+      "竖弯钩"
     ],
     "d": [
       "M25,25 L29,30 L20,74 L36,84 L39,89",
@@ -7815,7 +7815,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "横",
       "横折钩",
       "竖",
-      "竖折折钩"
+      "竖弯钩"
     ],
     "d": [
       "M13,50 L39,45",
@@ -9420,7 +9420,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "横折",
       "竖",
       "横",
-      "竖折折钩"
+      "竖弯钩"
     ],
     "d": [
       "M34,22 L35,27 L32,31 L17,41",
@@ -9557,7 +9557,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "竖",
       "横折",
       "撇",
-      "竖折折钩"
+      "竖弯钩"
     ],
     "d": [
       "M13,38 L37,34",
@@ -9697,7 +9697,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "横折",
       "横",
       "横",
-      "竖折折钩"
+      "竖弯钩"
     ],
     "d": [
       "M20,45 L26,51 L32,81",
@@ -9768,7 +9768,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "横",
       "横",
       "横",
-      "竖折折钩"
+      "竖弯钩"
     ],
     "d": [
       "M43,16 L46,21 L36,35",
@@ -10163,7 +10163,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
       "撇",
       "横",
       "横",
-      "竖折折钩"
+      "竖弯钩"
     ],
     "d": [
       "M28,22 L30,26 L28,32 L16,47",
@@ -13408,6 +13408,80 @@ ZH_STROKES.push.apply(ZH_STROKES, [
 
 // Tổng: 318 mục mới (16 đợt). Sau khi chèn: ZH_STROKES = 368 mục
 // (353 chữ HSK1 riêng biệt + 15 chữ ngoài HSK1 đã có từ trước).
+
+// ============================================================================
+// v215 (b) — NÉT CHỮ HÁN: bổ sung 2 chữ HSK1 còn thiếu 是 + 呢 (368 -> 370 mục).
+// Nguồn thứ tự + số nét: GF 0023-2020 《通用规范汉字笔顺规范》 (quốc gia, 2020).
+// Hình dạng nét + đường d: hanzi-writer-data (medians). Tên nét đối chiếu KanjiVG
+// (是) + hình học median (呢 — KanjiVG không có file 05462.svg, xem SPEC.md §3).
+// Pinyin: kho từ vựng HSK1 hiện có + pinyin-data. Nghĩa Việt: tự soạn.
+// Video: KHÔNG có trường video trong mục (theo cấu trúc hiện có); video nằm ở
+// ZH_WRITE_VIDEOS riêng. 是/呢 hiện chưa có video — KHÔNG bịa ID.
+// Chèn: sau khối v214 (c) (dòng "// Tổng: 318 mục mới..."), trước comment
+// "// Video mau cach viet chuan...". Xem SPEC.md.
+// ============================================================================
+
+// v215 (b) DOT 1 (17/11/2026) — 2 chữ: 是 … 呢
+ZH_STROKES.push.apply(ZH_STROKES, [
+  {
+    "han": "是",
+    "py": "shì",
+    "vi": "là",
+    "src": "Từ HSK1: 是 (shì — là)",
+    "note": "",
+    "st": [
+      "竖",
+      "横折",
+      "横",
+      "横",
+      "横",
+      "竖",
+      "横",
+      "撇",
+      "捺"
+    ],
+    "d": [
+      "M33,26 L37,30 L41,51",
+      "M38,26 L59,24 L64,26 L60,49",
+      "M42,38 L55,36",
+      "M43,48 L57,45",
+      "M14,62 L77,54 L86,56",
+      "M47,60 L50,63 L52,86",
+      "M53,74 L70,71",
+      "M31,66 L34,70 L28,82 L12,98",
+      "M35,76 L45,85 L67,97 L89,97"
+    ]
+  },
+  {
+    "han": "呢",
+    "py": "ne",
+    "vi": "trợ từ (còn… thì sao)",
+    "src": "Từ HSK1: 呢 (ne — trợ từ (còn… thì sao))",
+    "note": "",
+    "st": [
+      "竖",
+      "横折",
+      "横",
+      "横折",
+      "横",
+      "撇",
+      "撇",
+      "竖弯钩"
+    ],
+    "d": [
+      "M11,40 L14,44 L17,67",
+      "M17,43 L28,39 L33,42 L27,56",
+      "M19,62 L34,59",
+      "M50,30 L72,28 L74,30 L68,41",
+      "M48,50 L74,45",
+      "M43,29 L47,33 L46,42 L40,71 L31,86 L18,96",
+      "M75,56 L76,60 L56,75",
+      "M51,59 L55,64 L54,89 L59,95 L74,97 L89,93 L89,76"
+    ]
+  }
+]);
+
+// Tổng: 2 mục mới (1 đợt). Sau khi chèn: ZH_STROKES = 370 mục
 // Video mau cach viet chuan cho tung chu ZH_STROKES (27/10/2026, theo lenh Bui:
 // bo trinh dien net ve AI, thay bang video tim san; du lieu net ZH_STROKES giu
 // nguyen lam tham chieu cham diem noi bo). Nhung youtube-nocookie, phat trong
@@ -34344,8 +34418,8 @@ ZH_VOCAB_EXPAND4.push(
   hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
 { han: "气温", pinyin: "qìwēn", vi: "nhiệt độ", col: "气温下降", ex: "气温下降了。", exv: "Nhiệt độ đã giảm." },
-{ han: "地震", pinyin: "dìzhèn", vi: "động đất", col: "发生地震", ex: "昨天发生了地震。", exv: "Hôm qua xảy ra động đất." },
-{ han: "洪水", pinyin: "hóngshuǐ", vi: "lũ lụt", col: "洪水过后", ex: "洪水过后要尽快恢复生产。", exv: "Sau lũ lụt phải nhanh chóng khôi phục sản xuất." },
+{ han: "地震", pinyin: "dìzhèn", vi: "động đất", col: "地震带", ex: "昨天发生了地震。", exv: "Hôm qua xảy ra động đất." },
+{ han: "洪水", pinyin: "hóngshuǐ", vi: "lũ lụt", col: "洪水退去", ex: "洪水过后要尽快恢复生产。", exv: "Sau lũ lụt phải nhanh chóng khôi phục sản xuất." },
 { han: "干旱", pinyin: "gānhàn", vi: "hạn hán", col: "干旱少雨", ex: "今年这里发生了严重干旱。", exv: "Năm nay nơi đây xảy ra hạn hán nghiêm trọng." },
 { han: "森林", pinyin: "sēnlín", vi: "rừng", col: "保护森林", ex: "我们要保护森林。", exv: "Chúng ta cần bảo vệ rừng." },
 { han: "海洋", pinyin: "hǎiyáng", vi: "đại dương", col: "海洋生物", ex: "海洋生物很丰富。", exv: "Sinh vật biển rất phong phú." },
@@ -41625,7 +41699,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "理论",
         "pinyin": "lǐlùn",
         "vi": "lý thuyết",
-        "col": "理论学习",
+        "col": "理论联系实际",
         "ex": "要加强理论学习。",
         "exv": "Cần tăng cường học lý thuyết."
       },
@@ -41657,7 +41731,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "结论",
         "pinyin": "jiélùn",
         "vi": "kết luận",
-        "col": "结论可靠",
+        "col": "得出正确结论",
         "ex": "不要急着得出结论。",
         "exv": "Đừng vội vàng đưa ra kết luận."
       },
@@ -41673,7 +41747,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "分析",
         "pinyin": "fēnxī",
         "vi": "phân tích",
-        "col": "认真分析",
+        "col": "仔细分析问题",
         "ex": "我们要仔细分析问题。",
         "exv": "Chúng ta cần phân tích vấn đề cẩn thận."
       },
@@ -41713,7 +41787,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "逻辑",
         "pinyin": "luójí",
         "vi": "logic; lô-gíc",
-        "col": "逻辑严密",
+        "col": "逻辑顺序",
         "ex": "他的发言逻辑清楚，很有说服力。",
         "exv": "Bài phát biểu của anh ấy lô-gíc rõ ràng, rất thuyết phục."
       },
@@ -41832,7 +41906,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "律师",
         "pinyin": "lǜshī",
         "vi": "luật sư",
-        "col": "律师建议",
+        "col": "找律师",
         "ex": "签合同前可以咨询律师。",
         "exv": "Trước khi ký hợp đồng có thể hỏi ý kiến luật sư."
       },
@@ -41840,7 +41914,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "诉讼",
         "pinyin": "sùsòng",
         "vi": "kiện tụng",
-        "col": "诉讼案件",
+        "col": "诉讼费用",
         "ex": "他决定提起诉讼。",
         "exv": "Anh ấy quyết định khởi kiện."
       },
@@ -41848,7 +41922,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "判决",
         "pinyin": "pànjué",
         "vi": "phán quyết",
-        "col": "法院判决",
+        "col": "判决生效",
         "ex": "法院作出了判决。",
         "exv": "Tòa án đã đưa ra phán quyết."
       },
@@ -41864,7 +41938,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "违法",
         "pinyin": "wéifǎ",
         "vi": "vi phạm pháp luật",
-        "col": "违法成本",
+        "col": "违法必究",
         "ex": "违法行为会受到处罚。",
         "exv": "Hành vi vi phạm pháp luật sẽ bị xử phạt."
       },
@@ -41951,7 +42025,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "哲学",
         "pinyin": "zhéxué",
         "vi": "triết học",
-        "col": "哲学思考",
+        "col": "当代哲学思想",
         "ex": "学习哲学可以帮助我们思考。",
         "exv": "Học triết học có thể giúp chúng ta suy nghĩ sâu hơn."
       },
@@ -42214,7 +42288,7 @@ var ZH_VOCAB_EXPAND5 = [
         "han": "协议",
         "pinyin": "xiéyì",
         "vi": "thỏa thuận; hiệp định",
-        "col": "签订协议",
+        "col": "协议书",
         "ex": "双方终于达成了协议。",
         "exv": "Hai bên cuối cùng đã đạt được thỏa thuận."
       },
@@ -46204,13 +46278,13 @@ var ZH_VOCAB_EXPAND6 = [
     "hsk": "HSK6",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
-      { "han": "心理", "pinyin": "xīnlǐ", "vi": "tâm lý", "col": "心理负担", "ex": "心理健康和身体健康一样重要。", "exv": "Sức khỏe tâm lý cũng quan trọng như sức khỏe thể chất." },
-      { "han": "情绪", "pinyin": "qíngxù", "vi": "cảm xúc", "col": "情绪不好", "ex": "生气的时候要学会控制情绪。", "exv": "Khi tức giận phải học cách kiềm chế cảm xúc." },
-      { "han": "焦虑", "pinyin": "jiāolǜ", "vi": "lo âu", "col": "焦虑不安", "ex": "考试前他常常感到焦虑。", "exv": "Trước kỳ thi, anh ấy thường cảm thấy lo âu." },
+      { "han": "心理", "pinyin": "xīnlǐ", "vi": "tâm lý", "col": "心理准备", "ex": "心理健康和身体健康一样重要。", "exv": "Sức khỏe tâm lý cũng quan trọng như sức khỏe thể chất." },
+      { "han": "情绪", "pinyin": "qíngxù", "vi": "cảm xúc", "col": "情绪高涨", "ex": "生气的时候要学会控制情绪。", "exv": "Khi tức giận phải học cách kiềm chế cảm xúc." },
+      { "han": "焦虑", "pinyin": "jiāolǜ", "vi": "lo âu", "col": "焦虑不已", "ex": "考试前他常常感到焦虑。", "exv": "Trước kỳ thi, anh ấy thường cảm thấy lo âu." },
       { "han": "抑郁", "pinyin": "yìyù", "vi": "trầm cảm", "col": "抑郁倾向", "ex": "长期抑郁情绪需要及时疏导。", "exv": "Trạng thái trầm cảm kéo dài cần được giải tỏa kịp thời." },
       { "han": "孤独", "pinyin": "gūdú", "vi": "cô đơn", "col": "孤独的时候", "ex": "一个人在外地容易感到孤独。", "exv": "Một mình ở nơi xa quê dễ cảm thấy cô đơn." },
       { "han": "自卑", "pinyin": "zìbēi", "vi": "tự ti", "col": "不要自卑", "ex": "不要自卑。", "exv": "Đừng tự ti." },
-      { "han": "自信", "pinyin": "zìxìn", "vi": "tự tin", "col": "恢复自信", "ex": "一次次成功可以增强自信。", "exv": "Thành công lặp đi lặp lại có thể tăng cường sự tự tin." },
+      { "han": "自信", "pinyin": "zìxìn", "vi": "tự tin", "col": "自信大方", "ex": "一次次成功可以增强自信。", "exv": "Thành công lặp đi lặp lại có thể tăng cường sự tự tin." },
       { "han": "自尊", "pinyin": "zìzūn", "vi": "tự trọng; lòng tự trọng", "col": "自尊心强", "ex": "批评别人时也要注意维护自尊。", "exv": "Khi phê bình người khác cũng cần chú ý giữ gìn lòng tự trọng của họ." },
       { "han": "宽容", "pinyin": "kuānróng", "vi": "khoan dung", "col": "学会宽容", "ex": "要学会宽容。", "exv": "Phải học khoan dung." },
       { "han": "耐心", "pinyin": "nàixīn", "vi": "kiên nhẫn", "col": "要有耐心", "ex": "对孩子要有耐心。", "exv": "Với trẻ con phải kiên nhẫn." },
@@ -47436,7 +47510,7 @@ var ZH_VOCAB_EXPAND7 = [
       { "han": "道理", "pinyin": "dàolǐ", "vi": "đạo lý", "col": "讲道理", "ex": "老师给他讲道理。", "exv": "Thầy giáo giảng đạo lý cho anh ấy." },
       { "han": "怀疑", "pinyin": "huáiyí", "vi": "nghi ngờ; hoài nghi", "col": "产生怀疑", "ex": "他对这个结论产生怀疑。", "exv": "Anh ấy nghi ngờ kết luận này." },
       { "han": "本质", "pinyin": "běnzhì", "vi": "bản chất", "col": "本质问题", "ex": "思考要看清本质，不要只看表面。", "exv": "Suy nghĩ phải nhìn rõ bản chất, đừng chỉ nhìn bề ngoài." },
-      { "han": "现象", "pinyin": "xiànxiàng", "vi": "hiện tượng", "col": "常见现象", "ex": "这个社会现象值得研究。", "exv": "Hiện tượng xã hội này đáng để nghiên cứu." },
+      { "han": "现象", "pinyin": "xiànxiàng", "vi": "hiện tượng", "col": "当代社会现象", "ex": "这个社会现象值得研究。", "exv": "Hiện tượng xã hội này đáng để nghiên cứu." },
       { "han": "原因", "pinyin": "yuányīn", "vi": "nguyên nhân", "col": "分析原因", "ex": "我们要分析原因。", "exv": "Chúng ta phải phân tích nguyên nhân." },
       { "han": "结果", "pinyin": "jiéguǒ", "vi": "kết quả", "col": "调查结果", "ex": "调查结果出来了。", "exv": "Kết quả khảo sát đã có." },
       { "han": "推理", "pinyin": "tuīlǐ", "vi": "suy luận", "col": "推理过程", "ex": "推理过程要一步一步来。", "exv": "Quá trình suy luận phải làm từng bước một." },
@@ -47458,19 +47532,19 @@ var ZH_VOCAB_EXPAND7 = [
     "hsk": "HSK6",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
-      { "han": "文学", "pinyin": "wénxué", "vi": "văn học", "col": "文学创作", "ex": "文学作品影响深远。", "exv": "Tác phẩm văn học ảnh hưởng sâu rộng." },
-      { "han": "小说", "pinyin": "xiǎoshuō", "vi": "tiểu thuyết", "col": "小说情节", "ex": "他写了一部长篇小说。", "exv": "Anh ấy đã viết một tiểu thuyết dài." },
-      { "han": "诗歌", "pinyin": "shīgē", "vi": "thơ ca", "col": "诗歌朗诵", "ex": "学校举办了诗歌朗诵。", "exv": "Trường đã tổ chức ngâm thơ." },
+      { "han": "文学", "pinyin": "wénxué", "vi": "văn học", "col": "当代文学作品", "ex": "文学作品影响深远。", "exv": "Tác phẩm văn học ảnh hưởng sâu rộng." },
+      { "han": "小说", "pinyin": "xiǎoshuō", "vi": "tiểu thuyết", "col": "当代长篇小说", "ex": "他写了一部长篇小说。", "exv": "Anh ấy đã viết một tiểu thuyết dài." },
+      { "han": "诗歌", "pinyin": "shīgē", "vi": "thơ ca", "col": "当代诗歌朗诵", "ex": "学校举办了诗歌朗诵。", "exv": "Trường đã tổ chức ngâm thơ." },
       { "han": "画家", "pinyin": "huàjiā", "vi": "họa sĩ", "col": "著名画家", "ex": "他是一位著名画家。", "exv": "Anh ấy là một họa sĩ nổi tiếng." },
       { "han": "音乐家", "pinyin": "yīnyuèjiā", "vi": "nhạc sĩ", "col": "著名音乐家", "ex": "他是著名的音乐家。", "exv": "Anh ấy là nhạc sĩ nổi tiếng." },
       { "han": "演奏", "pinyin": "yǎnzòu", "vi": "biểu diễn nhạc", "col": "演奏钢琴", "ex": "她在演奏钢琴。", "exv": "Cô ấy đang biểu diễn piano." },
-      { "han": "舞蹈", "pinyin": "wǔdǎo", "vi": "múa; khiêu vũ, múa", "col": "舞蹈训练", "ex": "舞蹈表演非常精彩。", "exv": "Tiết mục múa vô cùng đặc sắc." },
+      { "han": "舞蹈", "pinyin": "wǔdǎo", "vi": "múa; khiêu vũ, múa", "col": "当代舞蹈表演", "ex": "舞蹈表演非常精彩。", "exv": "Tiết mục múa vô cùng đặc sắc." },
       { "han": "戏剧", "pinyin": "xìjù", "vi": "kịch", "col": "当代戏剧表演", "ex": "戏剧表演很精彩，值得思考。", "exv": "Biểu diễn kịch rất đặc sắc." },
       { "han": "电影", "pinyin": "diànyǐng", "vi": "phim; điện ảnh; phim điện ảnh", "col": "电影院里", "ex": "周末我们一起去看电影。", "exv": "Cuối tuần chúng tôi cùng đi xem phim." },
       { "han": "导演", "pinyin": "dǎoyǎn", "vi": "đạo diễn", "col": "著名导演", "ex": "这位著名导演拍了很多好片子。", "exv": "Vị đạo diễn nổi tiếng này đã quay nhiều bộ phim hay." },
       { "han": "演员", "pinyin": "yǎnyuán", "vi": "diễn viên", "col": "著名演员", "ex": "她是一位著名演员。", "exv": "Cô ấy là một diễn viên nổi tiếng." },
       { "han": "观众", "pinyin": "guānzhòng", "vi": "khán giả", "col": "观众反应", "ex": "观众反应非常热烈。", "exv": "Phản ứng của khán giả vô cùng nồng nhiệt." },
-      { "han": "展览", "pinyin": "zhǎnlǎn", "vi": "triển lãm", "col": "展览门票", "ex": "博物馆举办展览讲述过去的故事。", "exv": "Bảo tàng tổ chức triển lãm để kể câu chuyện quá khứ." },
+      { "han": "展览", "pinyin": "zhǎnlǎn", "vi": "triển lãm", "col": "举办展览会", "ex": "博物馆举办展览讲述过去的故事。", "exv": "Bảo tàng tổ chức triển lãm để kể câu chuyện quá khứ." },
       { "han": "古典", "pinyin": "gǔdiǎn", "vi": "cổ điển", "col": "古典音乐", "ex": "他喜欢听古典音乐。", "exv": "Anh ấy thích nghe nhạc cổ điển." },
       { "han": "节奏", "pinyin": "jiézòu", "vi": "nhịp điệu", "col": "音乐节奏", "ex": "这首歌的节奏很快。", "exv": "Nhịp điệu bài hát này rất nhanh." },
       { "han": "精美", "pinyin": "jīngměi", "vi": "tinh xảo; đẹp đẽ", "col": "精美的礼物", "ex": "这是一件精美的礼物。", "exv": "Đây là một món quà tinh xảo." },
@@ -47534,7 +47608,7 @@ var ZH_VOCAB_EXPAND7 = [
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "感觉", "pinyin": "gǎnjué", "vi": "cảm giác", "col": "感觉良好", "ex": "我的感觉良好。", "exv": "Cảm giác của tôi rất tốt." },
-      { "han": "态度", "pinyin": "tàidù", "vi": "thái độ", "col": "端正态度", "ex": "学习要端正态度。", "exv": "Học tập phải có thái độ đúng đắn." },
+      { "han": "态度", "pinyin": "tàidù", "vi": "thái độ", "col": "态度端正", "ex": "学习要端正态度。", "exv": "Học tập phải có thái độ đúng đắn." },
       { "han": "行为", "pinyin": "xíngwéi", "vi": "hành vi", "col": "行为习惯", "ex": "行为习惯是在日常生活中养成的。", "exv": "Thói quen hành vi được hình thành trong đời sống hằng ngày." },
       { "han": "习惯", "pinyin": "xíguàn", "vi": "thói quen", "col": "习惯成自然", "ex": "每天读书是个好习惯。", "exv": "Đọc sách mỗi ngày là một thói quen tốt." },
       { "han": "性格", "pinyin": "xìnggé", "vi": "tính cách", "col": "性格内向", "ex": "她的性格开朗，朋友很多。", "exv": "Tính cách cô ấy cởi mở nên có nhiều bạn bè." },
@@ -47543,7 +47617,7 @@ var ZH_VOCAB_EXPAND7 = [
       { "han": "友谊", "pinyin": "yǒuyì", "vi": "tình bạn", "col": "友谊长存", "ex": "我们要让友谊长存。", "exv": "Chúng ta phải trân trọng tình bạn." },
       { "han": "信任", "pinyin": "xìnrèn", "vi": "tin tưởng", "col": "取得信任", "ex": "他取得了大家的信任。", "exv": "Anh ấy đã giành được sự tin tưởng của mọi người." },
       { "han": "尊重", "pinyin": "zūnzhòng", "vi": "tôn trọng", "col": "值得尊重", "ex": "同学要互相尊重。", "exv": "Bạn học phải tôn trọng lẫn nhau." },
-      { "han": "理解", "pinyin": "lǐjiě", "vi": "thấu hiểu; hiểu", "col": "增进理解", "ex": "朋友要互相理解。", "exv": "Bạn bè phải thấu hiểu lẫn nhau." },
+      { "han": "理解", "pinyin": "lǐjiě", "vi": "thấu hiểu; hiểu", "col": "理解能力", "ex": "朋友要互相理解。", "exv": "Bạn bè phải thấu hiểu lẫn nhau." },
       { "han": "关心", "pinyin": "guānxīn", "vi": "quan tâm", "col": "关心别人", "ex": "要多关心别人。", "exv": "Phải quan tâm người khác nhiều hơn." },
       { "han": "安慰", "pinyin": "ānwèi", "vi": "an ủi", "col": "互相安慰", "ex": "她在安慰朋友。", "exv": "Cô ấy đang an ủi bạn." },
       { "han": "鼓励", "pinyin": "gǔlì", "vi": "khuyến khích", "col": "给予鼓励", "ex": "老师鼓励学生。", "exv": "Thầy cô khuyến khích học sinh." },
@@ -47561,15 +47635,15 @@ var ZH_VOCAB_EXPAND7 = [
       { "han": "历史", "pinyin": "lìshǐ", "vi": "lịch sử", "col": "历史知识", "ex": "学习历史可以帮助我们了解过去。", "exv": "Học lịch sử có thể giúp chúng ta hiểu về quá khứ." },
       { "han": "古代", "pinyin": "gǔdài", "vi": "thời cổ đại", "col": "古代建筑", "ex": "这座古代建筑很有名。", "exv": "Kiến trúc cổ đại này rất nổi tiếng." },
       { "han": "现代", "pinyin": "xiàndài", "vi": "hiện đại", "col": "现代社会", "ex": "现代社会变化很快。", "exv": "Xã hội hiện đại thay đổi rất nhanh." },
-      { "han": "传统", "pinyin": "chuántǒng", "vi": "truyền thống", "col": "传统观念", "ex": "传统节日要一代代传下去。", "exv": "Lễ hội truyền thống phải được truyền từ đời này sang đời khác." },
-      { "han": "文化", "pinyin": "wénhuà", "vi": "văn hóa", "col": "文化自信", "ex": "两国文化交流越来越多。", "exv": "Giao lưu văn hóa hai nước rất nhiều." },
-      { "han": "遗产", "pinyin": "yíchǎn", "vi": "di sản", "col": "遗产保护", "ex": "文化遗产属于全人类。", "exv": "Di sản văn hóa thuộc về toàn nhân loại." },
+      { "han": "传统", "pinyin": "chuántǒng", "vi": "truyền thống", "col": "弘扬传统文化", "ex": "传统节日要一代代传下去。", "exv": "Lễ hội truyền thống phải được truyền từ đời này sang đời khác." },
+      { "han": "文化", "pinyin": "wénhuà", "vi": "văn hóa", "col": "中外文化交流", "ex": "两国文化交流越来越多。", "exv": "Giao lưu văn hóa hai nước rất nhiều." },
+      { "han": "遗产", "pinyin": "yíchǎn", "vi": "di sản", "col": "保护文化遗产", "ex": "文化遗产属于全人类。", "exv": "Di sản văn hóa thuộc về toàn nhân loại." },
       { "han": "古迹", "pinyin": "gǔjì", "vi": "di tích cổ", "col": "参观古迹", "ex": "游客参观古迹。", "exv": "Du khách thăm di tích cổ." },
-      { "han": "博物馆", "pinyin": "bówùguǎn", "vi": "bảo tàng", "col": "博物馆展品", "ex": "博物馆展品吸引了很多学生。", "exv": "Cuối tuần chúng tôi đi tham quan bảo tàng." },
+      { "han": "博物馆", "pinyin": "bówùguǎn", "vi": "bảo tàng", "col": "去博物馆参观", "ex": "博物馆展品吸引了很多学生。", "exv": "Cuối tuần chúng tôi đi tham quan bảo tàng." },
       { "han": "革命", "pinyin": "gémìng", "vi": "cách mạng", "col": "革命时期", "ex": "革命时期的故事感动了很多人。", "exv": "Câu chuyện thời kỳ cách mạng đã làm nhiều người xúc động." },
       { "han": "独立", "pinyin": "dúlì", "vi": "độc lập", "col": "争取独立", "ex": "人民为争取独立付出了很多。", "exv": "Nhân dân đã hy sinh rất nhiều vì giành độc lập." },
       { "han": "宗教", "pinyin": "zōngjiào", "vi": "tôn giáo", "col": "宗教信仰", "ex": "尊重宗教信仰。", "exv": "Hãy tôn trọng tín ngưỡng tôn giáo." },
-      { "han": "习俗", "pinyin": "xísú", "vi": "phong tục", "col": "地方习俗", "ex": "要了解当地习俗。", "exv": "Phải tìm hiểu phong tục địa phương." },
+      { "han": "习俗", "pinyin": "xísú", "vi": "phong tục", "col": "了解当地习俗", "ex": "要了解当地习俗。", "exv": "Phải tìm hiểu phong tục địa phương." },
       { "han": "节日", "pinyin": "jiérì", "vi": "ngày lễ", "col": "节日气氛", "ex": "春节是重要的传统节日。", "exv": "Tết Nguyên đán là ngày lễ truyền thống." },
       { "han": "庆祝", "pinyin": "qìngzhù", "vi": "kỷ niệm, ăn mừng", "col": "共同庆祝", "ex": "大家一起庆祝节日。", "exv": "Mọi người cùng ăn mừng ngày lễ." },
       { "han": "纪念", "pinyin": "jìniàn", "vi": "tưởng niệm; kỷ niệm", "col": "纪念活动", "ex": "学校举办了纪念活动。", "exv": "Trường học đã tổ chức hoạt động tưởng niệm." },
@@ -48637,7 +48711,7 @@ var ZH_VOCAB_EXPAND8 = [
       { "han": "微观", "pinyin": "wēiguān", "vi": "vi mô", "col": "微观经济", "ex": "微观经济也很重要。", "exv": "Kinh tế vi mô cũng rất quan trọng." },
       { "han": "供需", "pinyin": "gōngxū", "vi": "cung cầu", "col": "供需关系", "ex": "供需关系影响价格。", "exv": "Quan hệ cung cầu ảnh hưởng giá cả." },
       { "han": "垄断", "pinyin": "lǒngduàn", "vi": "độc quyền", "col": "打破垄断", "ex": "政府要打破垄断。", "exv": "Chính phủ phải phá độc quyền." },
-      { "han": "竞争", "pinyin": "jìngzhēng", "vi": "cạnh tranh", "col": "竞争压力", "ex": "市场竞争越来越激烈。", "exv": "Cạnh tranh trên thị trường ngày càng gay gắt." },
+      { "han": "竞争", "pinyin": "jìngzhēng", "vi": "cạnh tranh", "col": "竞争对手", "ex": "市场竞争越来越激烈。", "exv": "Cạnh tranh trên thị trường ngày càng gay gắt." },
       { "han": "补贴", "pinyin": "bǔtiē", "vi": "trợ cấp", "col": "政府补贴", "ex": "政府提供了补贴。", "exv": "Chính phủ đã trợ cấp." },
       { "han": "关税", "pinyin": "guānshuì", "vi": "thuế quan", "col": "降低关税", "ex": "降低关税可以促进贸易。", "exv": "Giảm thuế quan có thể thúc đẩy thương mại." },
       { "han": "顺差", "pinyin": "shùnchā", "vi": "xuất siêu; thặng dư", "col": "贸易顺差", "ex": "贸易顺差扩大了。", "exv": "Xuất siêu thương mại đã mở rộng." },
@@ -48688,7 +48762,7 @@ var ZH_VOCAB_EXPAND8 = [
       { "han": "装置", "pinyin": "zhuāngzhì", "vi": "sắp đặt", "col": "装置艺术", "ex": "装置艺术很新颖。", "exv": "Nghệ thuật sắp đặt rất mới lạ." },
       { "han": "行为艺术", "pinyin": "xíngwéi yìshù", "vi": "nghệ thuật trình diễn", "col": "行为艺术表演", "ex": "她表演了行为艺术。", "exv": "Cô ấy đã trình diễn nghệ thuật trình diễn." },
       { "han": "摄影", "pinyin": "shèyǐng", "vi": "nhiếp ảnh", "col": "摄影展览", "ex": "摄影展览吸引了许多人。", "exv": "Triển lãm nhiếp ảnh đã thu hút nhiều người." },
-      { "han": "雕塑", "pinyin": "diāosù", "vi": "điêu khắc", "col": "雕塑艺术", "ex": "广场上有一座雕塑作品。", "exv": "Trên quảng trường có một tác phẩm điêu khắc." },
+      { "han": "雕塑", "pinyin": "diāosù", "vi": "điêu khắc", "col": "当代雕塑作品", "ex": "广场上有一座雕塑作品。", "exv": "Trên quảng trường có một tác phẩm điêu khắc." },
       { "han": "油画", "pinyin": "yóuhuà", "vi": "tranh sơn dầu", "col": "油画展览", "ex": "博物馆举办了油画展览。", "exv": "Bảo tàng đã tổ chức triển lãm tranh sơn dầu." },
       { "han": "水墨", "pinyin": "shuǐmò", "vi": "thủy mặc", "col": "水墨画", "ex": "他擅长水墨画。", "exv": "Anh ấy giỏi tranh thủy mặc." },
       { "han": "书法", "pinyin": "shūfǎ", "vi": "thư pháp", "col": "书法作品", "ex": "他的书法作品很美。", "exv": "Tác phẩm thư pháp của anh ấy rất đẹp." },
@@ -48730,13 +48804,13 @@ var ZH_VOCAB_EXPAND8 = [
     "hsk": "HSK6",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
-      { "han": "生态", "pinyin": "shēngtài", "vi": "sinh thái", "col": "生态建设", "ex": "生态保护关系到每个人的生活。", "exv": "Bảo vệ sinh thái liên quan đến cuộc sống của mỗi người." },
+      { "han": "生态", "pinyin": "shēngtài", "vi": "sinh thái", "col": "生态文明", "ex": "生态保护关系到每个人的生活。", "exv": "Bảo vệ sinh thái liên quan đến cuộc sống của mỗi người." },
       { "han": "遗传", "pinyin": "yíchuán", "vi": "di truyền", "col": "遗传基因", "ex": "遗传基因决定了特征。", "exv": "Gen di truyền quyết định đặc điểm." },
       { "han": "抗体", "pinyin": "kàngtǐ", "vi": "kháng thể", "col": "抗体水平", "ex": "身体产生了抗体。", "exv": "Cơ thể đã tạo kháng thể." },
-      { "han": "污染", "pinyin": "wūrǎn", "vi": "ô nhiễm", "col": "污染来源", "ex": "城市正在努力减少污染。", "exv": "Thành phố đang cố gắng giảm ô nhiễm." },
-      { "han": "排放", "pinyin": "páifàng", "vi": "thải ra", "col": "排放问题", "ex": "工厂的排放问题受到关注。", "exv": "Vấn đề thải ra của nhà máy được quan tâm." },
+      { "han": "污染", "pinyin": "wūrǎn", "vi": "ô nhiễm", "col": "污染源", "ex": "城市正在努力减少污染。", "exv": "Thành phố đang cố gắng giảm ô nhiễm." },
+      { "han": "排放", "pinyin": "páifàng", "vi": "thải ra", "col": "排放量", "ex": "工厂的排放问题受到关注。", "exv": "Vấn đề thải ra của nhà máy được quan tâm." },
       { "han": "温室效应", "pinyin": "wēnshì xiàoyìng", "vi": "hiệu ứng nhà kính", "col": "温室效应加剧", "ex": "温室效应正在加剧。", "exv": "Hiệu ứng nhà kính đang tăng mạnh." },
-      { "han": "臭氧", "pinyin": "chòuyǎng", "vi": "ozone; ô-zôn", "col": "臭氧层", "ex": "臭氧层正在恢复。", "exv": "Tầng ozone đang hồi phục." },
+      { "han": "臭氧", "pinyin": "chòuyǎng", "vi": "ozone; ô-zôn", "col": "臭氧空洞", "ex": "臭氧层正在恢复。", "exv": "Tầng ozone đang hồi phục." },
       { "han": "沙漠化", "pinyin": "shāmòhuà", "vi": "sa mạc hóa", "col": "防止沙漠化", "ex": "要防止土地沙漠化。", "exv": "Phải ngăn sa mạc hóa đất." },
       { "han": "濒危", "pinyin": "bīnwēi", "vi": "nguy cấp", "col": "濒危物种", "ex": "大熊猫是濒危物种。", "exv": "Gấu trúc là loài nguy cấp." },
       { "han": "灭绝", "pinyin": "mièjué", "vi": "tuyệt chủng", "col": "防止灭绝", "ex": "要防止物种灭绝。", "exv": "Phải ngăn loài tuyệt chủng." },
@@ -56455,7 +56529,7 @@ var ZH_VOCAB_EXPAND10 = [
   { "topic": "HSK6 — Biến đổi khí hậu và chính sách", "hsk": "HSK6",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
-      { "han": "气候", "pinyin": "qìhòu", "vi": "khí hậu", "col": "气候特点", "ex": "气候变化影响着每个人的生活。", "exv": "Biến đổi khí hậu ảnh hưởng đến cuộc sống của mỗi người." },
+      { "han": "气候", "pinyin": "qìhòu", "vi": "khí hậu", "col": "气候宜人", "ex": "气候变化影响着每个人的生活。", "exv": "Biến đổi khí hậu ảnh hưởng đến cuộc sống của mỗi người." },
       { "han": "变暖", "pinyin": "biànnuǎn", "vi": "ấm lên", "col": "气温变暖", "ex": "气温变暖了。", "exv": "Nhiệt độ đã ấm lên." },
       { "han": "温室", "pinyin": "wēnshì", "vi": "nhà kính; nhà kính; hiệu ứng nhà kính", "col": "温室问题", "ex": "温室气体过多会加剧升温。", "exv": "Khí nhà kính quá nhiều sẽ làm tình trạng tăng nhiệt thêm nặng." },
       { "han": "冰川", "pinyin": "bīngchuān", "vi": "sông băng", "col": "冰川地区", "ex": "冰川融化速度正在加快。", "exv": "Tốc độ tan chảy của sông băng đang tăng nhanh." },
@@ -56467,7 +56541,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "中和", "pinyin": "zhōnghé", "vi": "trung hòa", "col": "碳中和", "ex": "碳中和是目标。", "exv": "Trung hòa carbon là mục tiêu." },
       { "han": "适应", "pinyin": "shìyìng", "vi": "thích ứng", "col": "适应新环境", "ex": "农民要学会适应变化的气候。", "exv": "Nông dân phải học cách thích ứng với khí hậu đang thay đổi." },
       { "han": "脆弱", "pinyin": "cuìruò", "vi": "dễ tổn thương", "col": "生态脆弱", "ex": "沿海低地属于脆弱地区。", "exv": "Vùng đất thấp ven biển thuộc khu vực dễ tổn thương." },
-      { "han": "灾害", "pinyin": "zāihài", "vi": "thiên tai", "col": "自然灾害", "ex": "自然灾害损失大。", "exv": "Thiên tai gây thiệt hại lớn." },
+      { "han": "灾害", "pinyin": "zāihài", "vi": "thiên tai", "col": "灾害防治", "ex": "自然灾害损失大。", "exv": "Thiên tai gây thiệt hại lớn." },
       { "han": "损失", "pinyin": "sǔnshī", "vi": "tổn thất", "col": "减少损失", "ex": "预警减少损失。", "exv": "Cảnh báo trước giảm tổn thất." },
       { "han": "救援", "pinyin": "jiùyuán", "vi": "cứu trợ", "col": "救援队伍", "ex": "救援队伍到了。", "exv": "Đội cứu trợ đã đến." },
       { "han": "重建", "pinyin": "chóngjiàn", "vi": "tái thiết", "col": "灾后重建", "ex": "灾后重建很快。", "exv": "Tái thiết sau thiên tai rất nhanh." },
@@ -57413,7 +57487,7 @@ var ZH_VOCAB_EXPAND11 = [
   { "topic": "HSK6 — Kinh tế vĩ mô (2)", "hsk": "HSK6",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
-      { "han": "通货膨胀", "pinyin": "tōnghuò péngzhàng", "vi": "lạm phát", "col": "通货膨胀压力", "ex": "今年通货膨胀率有所上升。", "exv": "Tỉ lệ lạm phát năm nay có tăng lên." },
+      { "han": "通货膨胀", "pinyin": "tōnghuò péngzhàng", "vi": "lạm phát", "col": "通货膨胀率上升", "ex": "今年通货膨胀率有所上升。", "exv": "Tỉ lệ lạm phát năm nay có tăng lên." },
       { "han": "汇率", "pinyin": "huìlǜ", "vi": "tỉ giá hối đoái; tỉ giá", "col": "汇率稳定", "ex": "汇率波动很大，值得思考。", "exv": "Tỉ giá hối đoái biến động rất lớn." },
       { "han": "消费", "pinyin": "xiāofèi", "vi": "tiêu dùng", "col": "消费观念", "ex": "消费水平提高了，值得思考。", "exv": "Mức tiêu dùng đã tăng lên." },
       { "han": "需求", "pinyin": "xūqiú", "vi": "nhu cầu", "col": "需求增加", "ex": "市场需求很大，值得思考。", "exv": "Nhu cầu thị trường rất lớn." },
@@ -57432,10 +57506,10 @@ var ZH_VOCAB_EXPAND11 = [
   { "topic": "HSK6 — Pháp luật và xã hội", "hsk": "HSK6",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
-      { "han": "法规", "pinyin": "fǎguī", "vi": "quy định pháp luật", "col": "法规要求", "ex": "企业要了解相关法规。", "exv": "Doanh nghiệp cần tìm hiểu quy định pháp luật liên quan." },
+      { "han": "法规", "pinyin": "fǎguī", "vi": "quy định pháp luật", "col": "遵守法规", "ex": "企业要了解相关法规。", "exv": "Doanh nghiệp cần tìm hiểu quy định pháp luật liên quan." },
       { "han": "法庭", "pinyin": "fǎtíng", "vi": "tòa án", "col": "法庭审判", "ex": "法庭审判很严格。", "exv": "Tòa án xét xử rất nghiêm ngặt." },
-      { "han": "义务", "pinyin": "yìwù", "vi": "nghĩa vụ", "col": "义务范围", "ex": "双方都要履行义务。", "exv": "Hai bên đều phải thực hiện nghĩa vụ." },
-      { "han": "责任", "pinyin": "zérèn", "vi": "trách nhiệm", "col": "负起责任", "ex": "每个人都要承担自己的责任。", "exv": "Mỗi người đều phải gánh vác trách nhiệm của mình." },
+      { "han": "义务", "pinyin": "yìwù", "vi": "nghĩa vụ", "col": "公民义务", "ex": "双方都要履行义务。", "exv": "Hai bên đều phải thực hiện nghĩa vụ." },
+      { "han": "责任", "pinyin": "zérèn", "vi": "trách nhiệm", "col": "责任重大", "ex": "每个人都要承担自己的责任。", "exv": "Mỗi người đều phải gánh vác trách nhiệm của mình." },
       { "han": "犯罪", "pinyin": "fànzuì", "vi": "phạm tội", "col": "打击犯罪", "ex": "犯罪行为很少。", "exv": "Hành vi phạm tội rất ít." },
       { "han": "审判", "pinyin": "shěnpàn", "vi": "xét xử", "col": "公正审判", "ex": "公开审判很重要。", "exv": "Xét xử công khai rất quan trọng." },
       { "han": "条款", "pinyin": "tiáokuǎn", "vi": "điều khoản", "col": "条款细节", "ex": "条款细节一定要看明白。", "exv": "Chi tiết điều khoản nhất định phải đọc cho rõ." },
@@ -57459,9 +57533,9 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "环境", "pinyin": "huánjìng", "vi": "môi trường", "col": "环境优美", "ex": "环境保护很重要，值得思考。", "exv": "Bảo vệ môi trường rất quan trọng." },
       { "han": "能源", "pinyin": "néngyuán", "vi": "năng lượng", "col": "能源利用", "ex": "新能源很重要，值得思考。", "exv": "Năng lượng mới rất quan trọng." },
       { "han": "资源", "pinyin": "zīyuán", "vi": "tài nguyên", "col": "资源利用", "ex": "节约资源人人有责。", "exv": "Tiết kiệm tài nguyên là trách nhiệm của mọi người." },
-      { "han": "节约", "pinyin": "jiéyuē", "vi": "tiết kiệm", "col": "节约资源", "ex": "我们要从小事做起，节约粮食。", "exv": "Chúng ta phải bắt đầu từ việc nhỏ, tiết kiệm lương thực." },
+      { "han": "节约", "pinyin": "jiéyuē", "vi": "tiết kiệm", "col": "节约成本", "ex": "我们要从小事做起，节约粮食。", "exv": "Chúng ta phải bắt đầu từ việc nhỏ, tiết kiệm lương thực." },
       { "han": "浪费", "pinyin": "làngfèi", "vi": "lãng phí", "col": "杜绝浪费", "ex": "学校提倡杜绝浪费。", "exv": "Nhà trường kêu gọi kiên quyết chống lãng phí." },
-      { "han": "回收", "pinyin": "huíshōu", "vi": "thu hồi, tái chế", "col": "回收渠道", "ex": "废纸可以通过回收渠道再利用。", "exv": "Giấy vụn có thể tái sử dụng qua kênh thu hồi." },
+      { "han": "回收", "pinyin": "huíshōu", "vi": "thu hồi, tái chế", "col": "回收废品", "ex": "废纸可以通过回收渠道再利用。", "exv": "Giấy vụn có thể tái sử dụng qua kênh thu hồi." },
       { "han": "沙漠", "pinyin": "shāmò", "vi": "sa mạc", "col": "沙漠绿洲", "ex": "沙漠地区很干旱。", "exv": "Vùng sa mạc rất khô hạn." },
       { "han": "淡水", "pinyin": "dànshuǐ", "vi": "nước ngọt", "col": "淡水资源", "ex": "淡水资源很少。", "exv": "Tài nguyên nước ngọt rất ít." },
       { "han": "土壤", "pinyin": "tǔrǎng", "vi": "đất", "col": "土壤肥沃", "ex": "土壤非常肥沃。", "exv": "Đất vô cùng màu mỡ." },
@@ -57480,8 +57554,8 @@ var ZH_VOCAB_EXPAND11 = [
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
     "cards": [
       { "han": "仪式", "pinyin": "yíshì", "vi": "nghi lễ", "col": "传统仪式", "ex": "传统仪式很隆重。", "exv": "Nghi lễ truyền thống rất trang trọng." },
-      { "han": "艺术", "pinyin": "yìshù", "vi": "nghệ thuật", "col": "艺术教育", "ex": "艺术作品打动了观众。", "exv": "Tác phẩm nghệ thuật đã chạm đến khán giả." },
-      { "han": "音乐", "pinyin": "yīnyuè", "vi": "âm nhạc", "col": "音乐教育", "ex": "今晚有一场音乐会。", "exv": "Tối nay có một buổi hòa nhạc." },
+      { "han": "艺术", "pinyin": "yìshù", "vi": "nghệ thuật", "col": "当代艺术作品", "ex": "艺术作品打动了观众。", "exv": "Tác phẩm nghệ thuật đã chạm đến khán giả." },
+      { "han": "音乐", "pinyin": "yīnyuè", "vi": "âm nhạc", "col": "当代音乐会", "ex": "今晚有一场音乐会。", "exv": "Tối nay có một buổi hòa nhạc." },
       { "han": "绘画", "pinyin": "huìhuà", "vi": "hội họa", "col": "绘画风格", "ex": "他的绘画风格很独特。", "exv": "Phong cách hội họa của anh ấy rất độc đáo." },
       { "han": "建筑", "pinyin": "jiànzhù", "vi": "kiến trúc", "col": "古老建筑", "ex": "这座建筑风格很独特。", "exv": "Phong cách kiến trúc của tòa nhà này rất độc đáo." },
       { "han": "表演", "pinyin": "biǎoyǎn", "vi": "biểu diễn", "col": "欣赏精彩表演", "ex": "精彩表演很多人看。", "exv": "Biểu diễn đặc sắc có rất nhiều người xem." },
@@ -95461,3 +95535,287 @@ var ZH_WRITE_EXPAND_V214D = [
   note: "Nhãn HSK là mức đặt theo chủ đề/trình độ. Bài luận này là 1 bài Viết trong thi thử HSK6 (theo đề mẫu HSK 3.0: Viết 1 bài luận). Không chấm điểm tự động — tự chấm 4 tiêu chí + đối chiếu bài mẫu; AI chấm tiếng Trung đang chờ nâng cấp, không có điểm, không tính đạt cũng không tính chưa đạt." }
 ];
 ZH_WRITE.push.apply(ZH_WRITE, ZH_WRITE_EXPAND_V214D);
+// ---------- v215 (a) HSK6 +190 TU MOI — lap 28 bo mong (moi bo du 20 the) ----------
+// Diem chen: append vao cuoi CONTENT.zhVocab[idx].cards (idx = so bo trong SPEC,
+// da doi chieu bang may: idx trung so bo, topic trung ten bo, so the truoc khi ap dung
+// dung bang tong hop SPEC). Khong them bo moi. 4 the co truong note "cần đối chiếu giáo trình"
+// (UI the tu render c.note — index.html, phan extras); 57 the gan long giu theo SPEC
+// (tien le SPEC v214 (b) §4). Vi lay theo SPEC; col/ex/exv tu soan moi.
+// [MARKER v215-a-hsk6-190]
+(function () {
+  if (typeof CONTENT === "undefined" || !CONTENT.zhVocab) return;
+  // Bo #115 — HSK6 — Nghệ thuật đương đại (them 2 -> du 20 the)
+  CONTENT.zhVocab[115].cards.push(
+    { "han": "展览会", "pinyin": "zhǎnlǎnhuì", "vi": "triển lãm; hội chợ triển lãm", "col": "参观展览会", "ex": "周末我们去参观展览会。", "exv": "Cuối tuần chúng tôi đi tham quan triển lãm." },
+    { "han": "画展", "pinyin": "huàzhǎn", "vi": "triển lãm tranh", "col": "举办画展", "ex": "美术馆举办了一个画展。", "exv": "Bảo tàng mỹ thuật đã tổ chức một triển lãm tranh." }
+  );
+  // Bo #116 — HSK6 — Ngoại giao và xung đột (them 1 -> du 20 the)
+  CONTENT.zhVocab[116].cards.push(
+    { "han": "打仗", "pinyin": "dǎzhàng", "vi": "đánh nhau; giao chiến; ra trận", "col": "打仗的日子", "ex": "他们不想打仗，只想过和平的生活。", "exv": "Họ không muốn đánh nhau, chỉ muốn sống cuộc sống hòa bình." }
+  );
+  // Bo #118 — HSK6 — Lịch sử hiện đại (them 5 -> du 20 the)
+  CONTENT.zhVocab[118].cards.push(
+    { "han": "记忆犹新", "pinyin": "jìyìyóuxīn", "vi": "nhớ như in; còn nhớ rõ mồn một", "col": "记忆犹新的一天", "ex": "那天的事我至今记忆犹新。", "exv": "Chuyện hôm đó đến giờ tôi vẫn nhớ như in." },
+    { "han": "国学", "pinyin": "guóxué", "vi": "quốc học; văn hóa cổ truyền Trung Quốc", "col": "学习国学", "ex": "他很喜欢学习国学。", "exv": "Anh ấy rất thích học quốc học." },
+    { "han": "殖民地", "pinyin": "zhímíndì", "vi": "thuộc địa", "col": "沦为殖民地", "ex": "那块土地曾经沦为殖民地。", "exv": "Mảnh đất đó từng trở thành thuộc địa." },
+    { "han": "传奇", "pinyin": "chuánqí", "vi": "truyền kỳ; mang tính huyền thoại", "col": "传奇故事", "ex": "这是一个传奇故事。", "exv": "Đây là một câu chuyện truyền kỳ." },
+    { "han": "继往开来", "pinyin": "jìwǎngkāilái", "vi": "kế thừa quá khứ, mở ra tương lai", "col": "继往开来，再创辉煌", "ex": "我们要继往开来，创造美好的未来。", "exv": "Chúng ta phải kế thừa quá khứ, mở ra tương lai tươi đẹp." }
+  );
+  // Bo #129 — HSK6 — Triết học và tư tưởng (3) (them 5 -> du 20 the)
+  CONTENT.zhVocab[129].cards.push(
+    { "han": "下意识", "pinyin": "xiàyìshí", "vi": "tiềm thức; một cách vô thức", "col": "下意识地", "ex": "他下意识地看了看手表。", "exv": "Anh ấy vô thức liếc nhìn đồng hồ." },
+    { "han": "踏实", "pinyin": "tāshi", "vi": "vững chắc; chắc chắn; yên tâm", "col": "踏实做事", "ex": "他做事很踏实，大家都很信任他。", "exv": "Anh ấy làm việc rất chắc chắn, mọi người đều tin tưởng anh ấy." },
+    { "han": "缘故", "pinyin": "yuángù", "vi": "nguyên cớ; lý do", "col": "不知什么缘故", "ex": "不知什么缘故，他今天没有来。", "exv": "Không biết vì lý do gì, hôm nay anh ấy không đến." },
+    { "han": "自言自语", "pinyin": "zìyánzìyǔ", "vi": "tự nói một mình; lẩm bẩm", "col": "自言自语地说", "ex": "他一个人坐在那里自言自语。", "exv": "Anh ấy ngồi một mình ở đó lẩm bẩm một mình." },
+    { "han": "在意", "pinyin": "zàiyì", "vi": "để tâm; bận tâm; quan tâm", "col": "不在意", "ex": "他不在意别人怎么说。", "exv": "Anh ấy không để tâm người khác nói gì." }
+  );
+  // Bo #145 — HSK6 — Kinh tế số và thương mại điện tử (them 1 -> du 20 the)
+  CONTENT.zhVocab[145].cards.push(
+    { "han": "后勤", "pinyin": "hòuqín", "vi": "hậu cần; logistics", "col": "后勤保障", "ex": "后勤保障工作很重要。", "exv": "Công tác bảo đảm hậu cần rất quan trọng." }
+  );
+  // Bo #146 — HSK6 — Biến đổi khí hậu và chính sách (them 3 -> du 20 the)
+  CONTENT.zhVocab[146].cards.push(
+    { "han": "二氧化碳", "pinyin": "èryǎnghuàtàn", "vi": "khí CO2; carbon dioxide", "col": "排放二氧化碳", "ex": "工厂排放了大量的二氧化碳。", "exv": "Nhà máy đã thải ra một lượng lớn khí CO2." },
+    { "han": "泛滥", "pinyin": "fànlàn", "vi": "tràn lan; lũ lụt; lan tràn", "col": "洪水泛滥", "ex": "大雨过后，河水泛滥了。", "exv": "Sau cơn mưa lớn, nước sông tràn lan." },
+    { "han": "淹没", "pinyin": "yānmò", "vi": "nhấn chìm; ngập; chìm ngập", "col": "被水淹没", "ex": "低洼的地方被水淹没了。", "exv": "Những nơi trũng thấp đã bị nước nhấn chìm." }
+  );
+  // Bo #150 — HSK6 — Ngôn ngữ và dịch thuật (them 8 -> du 20 the)
+  CONTENT.zhVocab[150].cards.push(
+    { "han": "解读", "pinyin": "jiědú", "vi": "giải mã; diễn giải; đọc hiểu (văn bản)", "col": "解读文章", "ex": "老师帮我们解读这篇文章。", "exv": "Thầy giúp chúng tôi diễn giải bài văn này." },
+    { "han": "译", "pinyin": "yì", "vi": "dịch; phiên dịch", "col": "翻译成中文", "ex": "请把这句话译成中文。", "exv": "Hãy dịch câu này sang tiếng Trung." },
+    { "han": "俄语", "pinyin": "éyǔ", "vi": "tiếng Nga", "col": "学习俄语", "ex": "他在大学学习俄语。", "exv": "Anh ấy học tiếng Nga ở đại học." },
+    { "han": "阿拉伯语", "pinyin": "ālābóyǔ", "vi": "tiếng Ả Rập", "col": "学习阿拉伯语", "ex": "阿拉伯语很难学。", "exv": "Tiếng Ả Rập rất khó học." },
+    { "han": "隔阂", "pinyin": "géhé", "vi": "ngăn cách; rào cản (ngôn ngữ/tình cảm)", "col": "消除隔阂", "ex": "多交流才能消除隔阂。", "exv": "Giao tiếp nhiều mới xóa được ngăn cách." },
+    { "han": "眼神", "pinyin": "yǎnshén", "vi": "ánh mắt; cái nhìn", "col": "温柔的眼神", "ex": "她的眼神很温柔。", "exv": "Ánh mắt của cô ấy rất dịu dàng." },
+    { "han": "吹牛", "pinyin": "chuīniú", "vi": "khoác lác; nói khoác", "col": "喜欢吹牛", "ex": "他最喜欢吹牛了。", "exv": "Anh ấy thích khoác lác nhất." },
+    { "han": "重叠", "pinyin": "chóngdié", "vi": "chồng chéo; trùng lặp", "col": "内容重叠", "ex": "这两部分内容有些重叠。", "exv": "Hai phần này có nội dung hơi trùng lặp." }
+  );
+  // Bo #155 — HSK6 — Triết học và tư duy (them 14 -> du 20 the)
+  CONTENT.zhVocab[155].cards.push(
+    { "han": "辩解", "pinyin": "biànjiě", "vi": "biện giải; bào chữa; giải thích (để bảo vệ quan điểm)", "col": "为自己辩解", "ex": "他一直在为自己辩解。", "exv": "Anh ấy cứ mãi biện giải cho bản thân." },
+    { "han": "看得起", "pinyin": "kàndeqǐ", "vi": "coi trọng; đánh giá cao", "col": "看得起自己", "ex": "你要先看得起自己。", "exv": "Bạn phải coi trọng chính mình trước đã." },
+    { "han": "为此", "pinyin": "wèicǐ", "vi": "vì thế; vì điều này", "col": "为此付出努力", "ex": "为此，他付出了很多努力。", "exv": "Vì điều này, anh ấy đã bỏ ra rất nhiều nỗ lực." },
+    { "han": "有事", "pinyin": "yǒushì", "vi": "có việc; bận việc; có chuyện (trong đầu)", "col": "今天有事", "ex": "我今天有事，不能去了。", "exv": "Hôm nay tôi có việc, không đi được." },
+    { "han": "思念", "pinyin": "sīniàn", "vi": "nhớ nhung; tưởng nhớ", "col": "思念家乡", "ex": "他在国外很思念家乡。", "exv": "Ở nước ngoài, anh ấy rất nhớ quê hương." },
+    { "han": "莫名其妙", "pinyin": "mòmíngqímiào", "vi": "khó hiểu; không sao hiểu nổi", "col": "莫名其妙地", "ex": "他莫名其妙地笑了起来。", "exv": "Anh ấy bỗng dưng cười một cách khó hiểu." },
+    { "han": "着想", "pinyin": "zhuóxiǎng", "vi": "nghĩ cho (người khác); suy nghĩ (cho ai)", "col": "为别人着想", "ex": "她总是为别人着想。", "exv": "Cô ấy luôn nghĩ cho người khác." },
+    { "han": "想方设法", "pinyin": "xiǎngfāngshèfǎ", "vi": "nghĩ đủ mọi cách", "col": "想方设法解决问题", "ex": "他想方设法解决问题。", "exv": "Anh ấy nghĩ đủ mọi cách để giải quyết vấn đề." },
+    { "han": "思索", "pinyin": "sīsuǒ", "vi": "suy nghĩ sâu; trầm tư", "col": "认真思索", "ex": "他认真思索了很久。", "exv": "Anh ấy suy nghĩ sâu rất lâu." },
+    { "han": "惦记", "pinyin": "diànjì", "vi": "nhớ đến; lo lắng cho", "col": "心里惦记", "ex": "妈妈心里一直惦记着我。", "exv": "Mẹ trong lòng luôn nhớ đến tôi." },
+    { "han": "觉醒", "pinyin": "juéxǐng", "vi": "tỉnh ngộ; thức tỉnh", "col": "开始觉醒", "ex": "他终于开始觉醒了。", "exv": "Cuối cùng anh ấy cũng tỉnh ngộ." },
+    { "han": "实事求是", "pinyin": "shíshìqiúshì", "vi": "thực sự cầu thị; tìm sự thật từ thực tế", "col": "实事求是的态度", "ex": "我们做事要实事求是。", "exv": "Chúng ta làm việc phải thực sự cầu thị." },
+    { "han": "见义勇为", "pinyin": "jiànyìyǒngwéi", "vi": "thấy việc nghĩa thì dũng cảm làm", "col": "见义勇为的好人", "ex": "他是一个见义勇为的好人。", "exv": "Anh ấy là người tốt thấy việc nghĩa thì dũng cảm làm." },
+    { "han": "心眼儿", "pinyin": "xīnyǎnr", "vi": "tâm tư; ý nghĩ; lòng dạ", "col": "心眼儿多", "ex": "他心眼儿多，想得也多。", "exv": "Anh ấy nhiều tâm tư, nghĩ cũng nhiều." }
+  );
+  // Bo #156 — HSK6 — Kinh tế vĩ mô (2) (them 5 -> du 20 the)
+  CONTENT.zhVocab[156].cards.push(
+    { "han": "市场经济", "pinyin": "shìchǎngjīngjì", "vi": "kinh tế thị trường", "col": "发展市场经济", "ex": "这个国家正在发展市场经济。", "exv": "Đất nước này đang phát triển kinh tế thị trường." },
+    { "han": "征收", "pinyin": "zhēngshōu", "vi": "thu (thuế); trưng thu", "col": "征收税款", "ex": "政府依法征收税款。", "exv": "Chính phủ thu thuế theo pháp luật." },
+    { "han": "通货", "pinyin": "tōnghuò", "vi": "tiền tệ; tiền lưu thông", "col": "通货流通", "ex": "通货在市场上流通。", "exv": "Tiền tệ lưu thông trên thị trường." },
+    { "han": "投机", "pinyin": "tóujī", "vi": "đầu cơ", "col": "投机行为", "ex": "这种投机行为很危险。", "exv": "Hành vi đầu cơ này rất nguy hiểm." },
+    { "han": "缴纳", "pinyin": "jiǎonà", "vi": "nộp (thuế, phí)", "col": "缴纳费用", "ex": "请按时缴纳费用。", "exv": "Hãy nộp phí đúng hạn." }
+  );
+  // Bo #158 — HSK6 — Môi trường và tài nguyên (them 2 -> du 20 the)
+  CONTENT.zhVocab[158].cards.push(
+    { "han": "开采", "pinyin": "kāicǎi", "vi": "khai thác (khoáng sản, tài nguyên)", "col": "开采石油", "ex": "这里正在开采石油。", "exv": "Ở đây đang khai thác dầu mỏ." },
+    { "han": "守护", "pinyin": "shǒuhù", "vi": "bảo vệ; gìn giữ", "col": "守护家园", "ex": "我们要守护自己的家园。", "exv": "Chúng ta phải bảo vệ quê hương của mình." }
+  );
+  // Bo #173 — HSK6 — Đạo đức nghề nghiệp và trách nhiệm xã hội (them 6 -> du 20 the)
+  CONTENT.zhVocab[173].cards.push(
+    { "han": "品行", "pinyin": "pǐnxíng", "vi": "phẩm hạnh; đạo đức", "col": "品行端正", "ex": "他品行端正，大家都很尊重他。", "exv": "Anh ấy phẩm hạnh ngay thẳng, mọi người đều tôn trọng anh ấy." },
+    { "han": "正气", "pinyin": "zhèngqì", "vi": "chính khí; khí phách ngay thẳng", "col": "一身正气", "ex": "他一身正气，从不怕坏人。", "exv": "Anh ấy đầy chính khí, không bao giờ sợ kẻ xấu." },
+    { "han": "骨气", "pinyin": "gǔqì", "vi": "cốt khí; khí tiết", "col": "有骨气", "ex": "他很有骨气，从不低头。", "exv": "Anh ấy rất có cốt khí, không bao giờ cúi đầu." },
+    { "han": "责任感", "pinyin": "zérèngǎn", "vi": "ý thức trách nhiệm", "col": "有责任感", "ex": "他很有责任感，工作从不马虎。", "exv": "Anh ấy rất có ý thức trách nhiệm, làm việc không bao giờ cẩu thả." },
+    { "han": "品德", "pinyin": "pǐndé", "vi": "phẩm đức; đạo đức", "col": "品德高尚", "ex": "她品德高尚，值得我们学习。", "exv": "Cô ấy phẩm đức cao đẹp, đáng để chúng ta học tập." },
+    { "han": "人品", "pinyin": "rénpǐn", "vi": "nhân phẩm; tư cách", "col": "人品很好", "ex": "他的人品很好，朋友很多。", "exv": "Nhân phẩm của anh ấy rất tốt, bạn bè nhiều." }
+  );
+  // Bo #175 — HSK6 — Khoa học thần kinh và nhận thức (them 9 -> du 20 the)
+  CONTENT.zhVocab[175].cards.push(
+    { "han": "脑海", "pinyin": "nǎohǎi", "vi": "trong đầu; tâm trí", "col": "脑海里", "ex": "他的样子一直在我脑海里。", "exv": "Hình dáng của anh ấy cứ ở trong đầu tôi." },
+    { "han": "脑筋", "pinyin": "nǎojīn", "vi": "đầu óc; trí não", "col": "动脑筋", "ex": "遇到难题要多动脑筋。", "exv": "Gặp bài khó phải động não nhiều." },
+    { "han": "知觉", "pinyin": "zhījué", "vi": "tri giác; nhận thức", "col": "失去知觉", "ex": "他受伤后失去了知觉。", "exv": "Sau khi bị thương, anh ấy mất tri giác." },
+    { "han": "智商", "pinyin": "zhìshāng", "vi": "chỉ số IQ; trí tuệ", "col": "智商很高", "ex": "这个孩子的智商很高。", "exv": "Đứa trẻ này có chỉ số IQ rất cao." },
+    { "han": "痴呆", "pinyin": "chīdāi", "vi": "mất trí; sa sút trí tuệ", "col": "老年痴呆", "ex": "老年痴呆需要家人的照顾。", "exv": "Người bị sa sút trí tuệ tuổi già cần gia đình chăm sóc." },
+    { "han": "精神病", "pinyin": "jīngshénbìng", "vi": "bệnh tâm thần", "col": "患精神病", "ex": "他患精神病已经很多年了。", "exv": "Anh ấy mắc bệnh tâm thần đã nhiều năm." },
+    { "han": "伤脑筋", "pinyin": "shāngnǎojīn", "vi": "đau đầu; nhức óc (việc khó)", "col": "真伤脑筋", "ex": "这件事真伤脑筋。", "exv": "Việc này thật đau đầu." },
+    { "han": "麻木", "pinyin": "mámù", "vi": "tê dại; chai lì", "col": "手脚麻木", "ex": "坐久了，手脚都麻木了。", "exv": "Ngồi lâu, tay chân đều tê dại." },
+    { "han": "头晕", "pinyin": "tóuyūn", "vi": "chóng mặt; hoa mắt", "col": "觉得头晕", "ex": "他站起来觉得有点头晕。", "exv": "Anh ấy đứng dậy thấy hơi chóng mặt." }
+  );
+  // Bo #176 — HSK6 — Ngoại giao đa phương (them 15 -> du 20 the)
+  CONTENT.zhVocab[176].cards.push(
+    { "han": "抵制", "pinyin": "dǐzhì", "vi": "chống lại; tẩy chay; kháng cự", "col": "抵制这种行为", "ex": "我们要坚决抵制这种行为。", "exv": "Chúng ta phải kiên quyết chống lại hành vi này." },
+    { "han": "交涉", "pinyin": "jiāoshè", "vi": "đàm phán; thương lượng (với)", "col": "进行交涉", "ex": "两国正在进行交涉。", "exv": "Hai nước đang đàm phán với nhau." },
+    { "han": "订立", "pinyin": "dìnglì", "vi": "ký kết (hiệp ước, hợp đồng); lập ra (quy tắc)", "col": "订立条约", "ex": "两国订立了和平条约。", "exv": "Hai nước đã ký kết hiệp ước hòa bình." },
+    { "han": "国防", "pinyin": "guófáng", "vi": "quốc phòng", "col": "加强国防", "ex": "国家要加强国防建设。", "exv": "Đất nước phải tăng cường xây dựng quốc phòng." },
+    { "han": "跨国", "pinyin": "kuàguó", "vi": "xuyên quốc gia; đa quốc gia", "col": "跨国公司", "ex": "这是一家跨国公司。", "exv": "Đây là một công ty đa quốc gia." },
+    { "han": "邻国", "pinyin": "línguó", "vi": "nước láng giềng", "col": "友好邻国", "ex": "我们和邻国保持着友好关系。", "exv": "Chúng ta giữ quan hệ hữu nghị với nước láng giềng." },
+    { "han": "共和国", "pinyin": "gònghéguó", "vi": "nước cộng hòa", "col": "人民共和国", "ex": "中华人民共和国成立于1949年。", "exv": "Nước Cộng hòa Nhân dân Trung Hoa thành lập năm 1949." },
+    { "han": "国务院", "pinyin": "guówùyuàn", "vi": "Quốc vụ viện (Trung Quốc); Bộ Ngoại giao (Mỹ)", "col": "国务院会议", "ex": "国务院召开了会议。", "exv": "Quốc vụ viện đã họp." },
+    { "han": "帝国主义", "pinyin": "dìguózhǔyì", "vi": "chủ nghĩa đế quốc", "col": "反对帝国主义", "ex": "人民反对帝国主义的侵略。", "exv": "Nhân dân phản đối sự xâm lược của chủ nghĩa đế quốc." },
+    { "han": "国土", "pinyin": "guótǔ", "vi": "lãnh thổ (quốc gia)", "col": "保卫国土", "ex": "军人保卫着祖国的国土。", "exv": "Quân nhân bảo vệ lãnh thổ của tổ quốc." },
+    { "han": "元首", "pinyin": "yuánshǒu", "vi": "nguyên thủ (quốc gia)", "col": "国家元首", "ex": "国家元首会见了外国客人。", "exv": "Nguyên thủ quốc gia đã gặp khách nước ngoài." },
+    { "han": "论坛", "pinyin": "lùntán", "vi": "diễn đàn", "col": "参加论坛", "ex": "他去参加了一个国际论坛。", "exv": "Anh ấy đã đi tham dự một diễn đàn quốc tế." },
+    { "han": "领事馆", "pinyin": "lǐngshìguǎn", "vi": "lãnh sự quán", "col": "中国领事馆", "ex": "他在领事馆办了签证。", "exv": "Anh ấy đã làm visa ở lãnh sự quán." },
+    { "han": "侵略", "pinyin": "qīnlüè", "vi": "xâm lược", "col": "受到侵略", "ex": "那个国家受到了侵略。", "exv": "Đất nước đó đã bị xâm lược." },
+    { "han": "一带一路", "pinyin": "yīdàiyīlù", "vi": "Vành đai và Con đường (sáng kiến)", "col": "一带一路", "ex": "大家都在谈论一带一路。", "exv": "Mọi người đều đang bàn về Vành đai và Con đường.", "note": "cần đối chiếu giáo trình" }
+  );
+  // Bo #177 — HSK6 — Văn học hiện thực (them 12 -> du 20 the)
+  CONTENT.zhVocab[177].cards.push(
+    { "han": "主义", "pinyin": "zhǔyì", "vi": "chủ nghĩa; -ism", "col": "现实主义", "ex": "他信奉现实主义。", "exv": "Anh ấy theo chủ nghĩa hiện thực." },
+    { "han": "官僚主义", "pinyin": "guānliáozhǔyì", "vi": "chủ nghĩa quan liêu", "col": "反对官僚主义", "ex": "我们要反对官僚主义。", "exv": "Chúng ta phải chống chủ nghĩa quan liêu." },
+    { "han": "塑造", "pinyin": "sùzào", "vi": "tạo dựng (nhân vật, hình tượng); điêu khắc", "col": "塑造人物", "ex": "作者成功塑造了这个人物。", "exv": "Tác giả đã tạo dựng thành công nhân vật này." },
+    { "han": "素材", "pinyin": "sùcái", "vi": "chất liệu; tư liệu (văn học, nghệ thuật)", "col": "收集素材", "ex": "写文章要先收集素材。", "exv": "Viết văn phải thu thập tư liệu trước." },
+    { "han": "主人公", "pinyin": "zhǔréngōng", "vi": "nhân vật chính", "col": "小说的主人公", "ex": "小说的主人公是一个年轻人。", "exv": "Nhân vật chính của tiểu thuyết là một người trẻ." },
+    { "han": "口径", "pinyin": "kǒujìng", "vi": "đường kính nòng; (nghĩa bóng) lập trường; cách nói", "col": "统一口径", "ex": "大家要统一口径，不能乱说。", "exv": "Mọi người phải thống nhất cách nói, không được nói lung tung." },
+    { "han": "新奇", "pinyin": "xīnqí", "vi": "mới lạ", "col": "新奇的东西", "ex": "孩子们喜欢新奇的东西。", "exv": "Trẻ con thích những thứ mới lạ." },
+    { "han": "侦探", "pinyin": "zhēntàn", "vi": "thám tử; trinh thám", "col": "当侦探", "ex": "他小时候想当侦探。", "exv": "Hồi nhỏ anh ấy muốn làm thám tử." },
+    { "han": "序言", "pinyin": "xùyán", "vi": "lời tựa; lời mở đầu", "col": "写序言", "ex": "这本书的序言是作者写的。", "exv": "Lời tựa của cuốn sách này do tác giả viết." },
+    { "han": "武侠", "pinyin": "wǔxiá", "vi": "võ hiệp", "col": "武侠小说", "ex": "他很喜欢看武侠小说。", "exv": "Anh ấy rất thích đọc tiểu thuyết võ hiệp." },
+    { "han": "科幻", "pinyin": "kēhuàn", "vi": "khoa học viễn tưởng", "col": "科幻电影", "ex": "这部科幻电影很好看。", "exv": "Bộ phim khoa học viễn tưởng này rất hay." },
+    { "han": "段落", "pinyin": "duànluò", "vi": "đoạn văn", "col": "每个段落", "ex": "每个段落都有一个中心意思。", "exv": "Mỗi đoạn văn đều có một ý chính." }
+  );
+  // Bo #179 — HSK6 — Trí tuệ nhân tạo và đạo đức dữ liệu (them 10 -> du 20 the)
+  CONTENT.zhVocab[179].cards.push(
+    { "han": "机器学习", "pinyin": "jīqìxuéxí", "vi": "học máy (machine learning)", "col": "机器学习", "ex": "大家都在学习机器学习。", "exv": "Mọi người đều đang học về học máy.", "note": "cần đối chiếu giáo trình" },
+    { "han": "深度学习", "pinyin": "shēndùxuéxí", "vi": "học sâu (deep learning)", "col": "深度学习", "ex": "他正在研究深度学习。", "exv": "Anh ấy đang nghiên cứu học sâu.", "note": "cần đối chiếu giáo trình" },
+    { "han": "破解", "pinyin": "pòjiě", "vi": "phá giải; bẻ khóa; giải mã", "col": "破解密码", "ex": "他花了很久才破解密码。", "exv": "Anh ấy mất rất lâu mới phá giải được mật khẩu." },
+    { "han": "驱动", "pinyin": "qūdòng", "vi": "điều khiển; dẫn động; trình điều khiển (driver)", "col": "驱动程序", "ex": "电脑需要安装驱动程序。", "exv": "Máy tính cần cài đặt trình điều khiển." },
+    { "han": "浏览器", "pinyin": "liúlǎnqì", "vi": "trình duyệt (web)", "col": "打开浏览器", "ex": "请打开浏览器看这个网页。", "exv": "Hãy mở trình duyệt để xem trang web này." },
+    { "han": "失灵", "pinyin": "shīlíng", "vi": "hỏng; không hoạt động (máy móc, hệ thống)", "col": "机器失灵", "ex": "机器突然失灵了。", "exv": "Máy móc bỗng dưng hỏng." },
+    { "han": "灌", "pinyin": "guàn", "vi": "tưới; rót; cài đặt (phần mềm)", "col": "灌水", "ex": "他给花灌了一点水。", "exv": "Anh ấy đã tưới cho hoa một ít nước." },
+    { "han": "游戏机", "pinyin": "yóuxìjī", "vi": "máy chơi game", "col": "玩游戏机", "ex": "孩子们喜欢玩游戏机。", "exv": "Trẻ con thích chơi máy chơi game." },
+    { "han": "纲领", "pinyin": "gānglǐng", "vi": "cương lĩnh; chương trình hành động", "col": "行动纲领", "ex": "这是我们的行动纲领。", "exv": "Đây là cương lĩnh hành động của chúng ta." },
+    { "han": "栏目", "pinyin": "lánmù", "vi": "chuyên mục (báo, phát thanh, truyền hình)", "col": "新栏目", "ex": "报纸开了一个新栏目。", "exv": "Tờ báo đã mở một chuyên mục mới." }
+  );
+  // Bo #198 — HSK6 — Kinh tế vĩ mô và lạm phát (them 9 -> du 20 the)
+  CONTENT.zhVocab[198].cards.push(
+    { "han": "膨胀", "pinyin": "péngzhàng", "vi": "phình to; lạm phát (giá cả); bành trướng", "col": "通货膨胀", "ex": "通货膨胀让物价上涨了。", "exv": "Lạm phát làm giá cả tăng lên." },
+    { "han": "紧缩", "pinyin": "jǐnsuō", "vi": "thắt chặt; thu hẹp (kinh tế)", "col": "紧缩政策", "ex": "政府采取了紧缩政策。", "exv": "Chính phủ đã áp dụng chính sách thắt chặt." },
+    { "han": "低价", "pinyin": "dījià", "vi": "giá thấp", "col": "低价销售", "ex": "这家店低价销售商品。", "exv": "Cửa hàng này bán hàng giá thấp." },
+    { "han": "恶性", "pinyin": "èxìng", "vi": "ác tính; xấu (vòng luẩn quẩn, lạm phát phi mã)", "col": "恶性循环", "ex": "这样下去会形成恶性循环。", "exv": "Cứ thế này sẽ tạo thành vòng luẩn quẩn xấu." },
+    { "han": "价位", "pinyin": "jiàwèi", "vi": "mức giá", "col": "价位不高", "ex": "这里的价位不高，很受欢迎。", "exv": "Mức giá ở đây không cao, rất được ưa chuộng." },
+    { "han": "售价", "pinyin": "shòujià", "vi": "giá bán", "col": "售价多少", "ex": "请问这件衣服的售价是多少？", "exv": "Xin hỏi giá bán của chiếc áo này là bao nhiêu?" },
+    { "han": "挂钩", "pinyin": "guàgōu", "vi": "móc nối; gắn với", "col": "与工资挂钩", "ex": "奖金与工资挂钩。", "exv": "Tiền thưởng gắn với lương." },
+    { "han": "平价", "pinyin": "píngjià", "vi": "giá bình dân; giá ổn định", "col": "平价商店", "ex": "平价商店的东西很便宜。", "exv": "Đồ ở cửa hàng giá bình dân rất rẻ." },
+    { "han": "回落", "pinyin": "huíluò", "vi": "giảm trở lại; hạ xuống (sau khi tăng)", "col": "价格回落", "ex": "价格上涨后又回落了。", "exv": "Giá tăng lên rồi lại giảm trở lại." }
+  );
+  // Bo #201 — HSK6 — Trí tuệ nhân tạo và dữ liệu (them 9 -> du 20 the)
+  CONTENT.zhVocab[201].cards.push(
+    { "han": "观测", "pinyin": "guāncè", "vi": "quan sát; quan trắc", "col": "观测天气", "ex": "他们每天观测天气的变化。", "exv": "Họ quan sát sự thay đổi của thời tiết mỗi ngày." },
+    { "han": "情报", "pinyin": "qíngbào", "vi": "tình báo; tin tức (tình hình)", "col": "收集情报", "ex": "他们正在收集情报。", "exv": "Họ đang thu thập tình báo." },
+    { "han": "内存", "pinyin": "nèicún", "vi": "bộ nhớ trong (RAM)", "col": "内存不够", "ex": "这台电脑的内存不够了。", "exv": "Bộ nhớ trong của máy tính này không đủ." },
+    { "han": "筹码", "pinyin": "chóumǎ", "vi": "phỉnh (đánh bạc); vốn liếng mặc cả", "col": "谈判的筹码", "ex": "这是他谈判的筹码。", "exv": "Đây là vốn liếng mặc cả của anh ấy." },
+    { "han": "填写", "pinyin": "tiánxiě", "vi": "điền vào (biểu mẫu)", "col": "填写表格", "ex": "请认真填写表格。", "exv": "Hãy điền biểu mẫu một cách cẩn thận." },
+    { "han": "栏", "pinyin": "lán", "vi": "cột (bảng, văn bản); hàng rào", "col": "这一栏", "ex": "请在这一栏写上你的名字。", "exv": "Hãy viết tên của bạn vào cột này." },
+    { "han": "筹", "pinyin": "chóu", "vi": "phỉnh; trù tính; chuẩn bị", "col": "筹钱", "ex": "他们正在筹钱办这件事。", "exv": "Họ đang chuẩn bị tiền để làm việc này." },
+    { "han": "使唤", "pinyin": "shǐhuan", "vi": "sai bảo; sử dụng (công cụ)", "col": "使唤别人", "ex": "他不喜欢使唤别人。", "exv": "Anh ấy không thích sai bảo người khác." },
+    { "han": "数字货币", "pinyin": "shùzìhuòbì", "vi": "tiền kỹ thuật số", "col": "数字货币", "ex": "数字货币是新的话题。", "exv": "Tiền kỹ thuật số là chủ đề mới.", "note": "cần đối chiếu giáo trình" }
+  );
+  // Bo #202 — HSK6 — Môi trường và năng lượng sạch (them 9 -> du 20 the)
+  CONTENT.zhVocab[202].cards.push(
+    { "han": "发电机", "pinyin": "fādiànjī", "vi": "máy phát điện", "col": "发电机坏了", "ex": "发电机坏了，家里停电了。", "exv": "Máy phát điện hỏng, nhà mất điện." },
+    { "han": "能耗", "pinyin": "nénghào", "vi": "mức tiêu thụ năng lượng", "col": "降低能耗", "ex": "我们要想办法降低能耗。", "exv": "Chúng ta phải tìm cách giảm mức tiêu thụ năng lượng." },
+    { "han": "正能量", "pinyin": "zhèngnéngliàng", "vi": "năng lượng tích cực", "col": "充满正能量", "ex": "他身上充满了正能量。", "exv": "Anh ấy tràn đầy năng lượng tích cực." },
+    { "han": "清洁工", "pinyin": "qīngjiégōng", "vi": "công nhân vệ sinh", "col": "当清洁工", "ex": "他妈妈是一名清洁工。", "exv": "Mẹ anh ấy là một công nhân vệ sinh." },
+    { "han": "节气", "pinyin": "jiéqi", "vi": "tiết khí (24 tiết khí)", "col": "二十四节气", "ex": "二十四节气是中国传统文化的一部分。", "exv": "24 tiết khí là một phần của văn hóa truyền thống Trung Quốc." },
+    { "han": "煤矿", "pinyin": "méikuàng", "vi": "mỏ than", "col": "煤矿工人", "ex": "煤矿工人的工作很辛苦。", "exv": "Công việc của thợ mỏ than rất vất vả." },
+    { "han": "闸", "pinyin": "zhá", "vi": "van; cửa cống; công tắc điện", "col": "关上闸", "ex": "请把水闸关上。", "exv": "Hãy đóng van nước lại." },
+    { "han": "朝气蓬勃", "pinyin": "zhāoqìpéngbó", "vi": "tràn đầy sức sống", "col": "朝气蓬勃的年轻人", "ex": "他们是一群朝气蓬勃的年轻人。", "exv": "Họ là một nhóm người trẻ tràn đầy sức sống." },
+    { "han": "精", "pinyin": "jīng", "vi": "tinh hoa; tinh túy; năng lượng; tinh thần", "col": "精力充沛", "ex": "他每天都精力充沛。", "exv": "Ngày nào anh ấy cũng tràn đầy năng lượng." }
+  );
+  // Bo #204 — HSK6 — Giáo dục đại học và nghiên cứu (2) (them 9 -> du 20 the)
+  CONTENT.zhVocab[204].cards.push(
+    { "han": "高等", "pinyin": "gāoděng", "vi": "cao cấp; cao đẳng; đại học (giáo dục bậc cao)", "col": "高等教育", "ex": "高等教育越来越重要。", "exv": "Giáo dục bậc cao ngày càng quan trọng." },
+    { "han": "学士", "pinyin": "xuéshì", "vi": "cử nhân; học sĩ", "col": "学士学位", "ex": "他获得了学士学位。", "exv": "Anh ấy đã nhận bằng cử nhân." },
+    { "han": "研发", "pinyin": "yánfā", "vi": "nghiên cứu và phát triển", "col": "研发新产品", "ex": "公司正在研发新产品。", "exv": "Công ty đang nghiên cứu và phát triển sản phẩm mới." },
+    { "han": "师范", "pinyin": "shīfàn", "vi": "sư phạm (đào tạo giáo viên)", "col": "师范大学", "ex": "她在师范大学读书。", "exv": "Cô ấy học ở trường đại học sư phạm." },
+    { "han": "攻读", "pinyin": "gōngdú", "vi": "theo học (để lấy bằng cao hơn)", "col": "攻读博士", "ex": "他正在攻读博士学位。", "exv": "Anh ấy đang theo học để lấy bằng tiến sĩ." },
+    { "han": "治学", "pinyin": "zhìxué", "vi": "nghiên cứu học thuật; làm học vấn", "col": "治学严谨", "ex": "这位老师治学严谨。", "exv": "Thầy giáo này nghiên cứu học thuật rất nghiêm túc." },
+    { "han": "工科", "pinyin": "gōngkē", "vi": "ngành kỹ thuật (đại học)", "col": "学工科", "ex": "他大学学的是工科。", "exv": "Đại học anh ấy học ngành kỹ thuật." },
+    { "han": "名誉", "pinyin": "míngyù", "vi": "danh dự; danh tiếng; (giáo sư) danh dự", "col": "名誉教授", "ex": "他被聘为名誉教授。", "exv": "Ông được mời làm giáo sư danh dự." },
+    { "han": "兼顾", "pinyin": "jiāngù", "vi": "cân bằng; quan tâm cả hai mặt", "col": "兼顾学习和工作", "ex": "他要兼顾学习和工作，很辛苦。", "exv": "Anh ấy phải cân bằng cả học và làm, rất vất vả." }
+  );
+  // Bo #205 — HSK6 — Pháp luật dân sự và hợp đồng (them 3 -> du 20 the)
+  CONTENT.zhVocab[205].cards.push(
+    { "han": "索赔", "pinyin": "suǒpéi", "vi": "đòi bồi thường", "col": "提出索赔", "ex": "他向保险公司提出索赔。", "exv": "Anh ấy đã đòi bồi thường với công ty bảo hiểm." },
+    { "han": "过失", "pinyin": "guòshī", "vi": "lỗi; sơ suất; (luật) lỗi vô ý", "col": "工作过失", "ex": "这次事故是他的工作过失。", "exv": "Tai nạn lần này là lỗi sơ suất trong công việc của anh ấy." },
+    { "han": "殴打", "pinyin": "ōudǎ", "vi": "đánh đập; hành hung", "col": "殴打他人", "ex": "殴打他人是违法的。", "exv": "Đánh đập người khác là vi phạm pháp luật." }
+  );
+  // Bo #214 — HSK6 — An ninh mạng và bảo mật dữ liệu (them 1 -> du 20 the)
+  CONTENT.zhVocab[214].cards.push(
+    { "han": "袭击", "pinyin": "xíjī", "vi": "tấn công (bất ngờ); tập kích", "col": "受到袭击", "ex": "那座城市受到了袭击。", "exv": "Thành phố đó đã bị tấn công bất ngờ." }
+  );
+  // Bo #215 — HSK6 — Biến đổi khí hậu và thích ứng (them 8 -> du 20 the)
+  CONTENT.zhVocab[215].cards.push(
+    { "han": "迁就", "pinyin": "qiānjiù", "vi": "nhân nhượng; thích ứng; chiều theo", "col": "互相迁就", "ex": "两个人要互相迁就，才能好好相处。", "exv": "Hai người phải nhân nhượng lẫn nhau mới sống hòa thuận được." },
+    { "han": "改编", "pinyin": "gǎibiān", "vi": "chuyển thể; biên soạn lại (cho phù hợp)", "col": "改编成电影", "ex": "这部小说被改编成了电影。", "exv": "Tiểu thuyết này đã được chuyển thể thành phim." },
+    { "han": "淹", "pinyin": "yān", "vi": "ngập; nhấn chìm", "col": "被水淹了", "ex": "大雨把房子淹了。", "exv": "Mưa lớn đã làm ngập nhà." },
+    { "han": "泻", "pinyin": "xiè", "vi": "chảy xiết; tràn ra (lũ)", "col": "洪水泻下来", "ex": "洪水从山上泻下来。", "exv": "Nước lũ tràn xuống từ trên núi." },
+    { "han": "旱", "pinyin": "hàn", "vi": "hạn hán; khô hạn", "col": "大旱", "ex": "今年大旱，庄稼都干死了。", "exv": "Năm nay hạn hán lớn, hoa màu đều khô chết." },
+    { "han": "防汛", "pinyin": "fángxùn", "vi": "phòng chống lũ", "col": "防汛工作", "ex": "防汛工作正在紧张进行。", "exv": "Công tác phòng chống lũ đang được triển khai gấp rút." },
+    { "han": "滞留", "pinyin": "zhìliú", "vi": "lưu lại; bị kẹt lại (do hoàn cảnh)", "col": "滞留在机场", "ex": "很多旅客滞留在机场。", "exv": "Nhiều hành khách bị kẹt lại ở sân bay." },
+    { "han": "机动", "pinyin": "jīdòng", "vi": "cơ động; linh hoạt; chạy bằng máy", "col": "机动灵活", "ex": "这个办法很机动灵活。", "exv": "Cách này rất cơ động, linh hoạt." }
+  );
+  // Bo #216 — HSK6 — Khoa học vũ trụ và khám phá (them 4 -> du 20 the)
+  CONTENT.zhVocab[216].cards.push(
+    { "han": "航天", "pinyin": "hángtiān", "vi": "hàng không vũ trụ; du hành vũ trụ", "col": "航天事业", "ex": "航天事业发展很快。", "exv": "Sự nghiệp hàng không vũ trụ phát triển rất nhanh." },
+    { "han": "盘旋", "pinyin": "pánxuán", "vi": "lượn vòng; bay vòng; xoay quanh (quỹ đạo)", "col": "在空中盘旋", "ex": "飞机在空中盘旋了很久。", "exv": "Máy bay đã lượn vòng trên không rất lâu." },
+    { "han": "时空", "pinyin": "shíkōng", "vi": "thời gian và không gian; không-thời gian", "col": "穿越时空", "ex": "这部电影讲的是穿越时空的故事。", "exv": "Bộ phim này kể câu chuyện vượt thời gian và không gian." },
+    { "han": "航天员", "pinyin": "hángtiānyuán", "vi": "phi hành gia", "col": "成为航天员", "ex": "他的梦想是成为航天员。", "exv": "Ước mơ của anh ấy là trở thành phi hành gia." }
+  );
+  // Bo #217 — HSK6 — Triết học hiện đại và tư duy phản biện (them 14 -> du 20 the)
+  CONTENT.zhVocab[217].cards.push(
+    { "han": "辩", "pinyin": "biàn", "vi": "tranh luận; biện luận", "col": "辩论", "ex": "他们正在辩论这个问题。", "exv": "Họ đang tranh luận về vấn đề này." },
+    { "han": "疑惑", "pinyin": "yíhuò", "vi": "nghi ngờ; hoài nghi; băn khoăn", "col": "心存疑惑", "ex": "他心里充满了疑惑。", "exv": "Trong lòng anh ấy đầy nghi ngờ." },
+    { "han": "琢磨", "pinyin": "zuómo", "vi": "suy ngẫm; nghiền ngẫm", "col": "慢慢琢磨", "ex": "这个问题要慢慢琢磨。", "exv": "Vấn đề này phải suy ngẫm từ từ." },
+    { "han": "咀嚼", "pinyin": "jǔjué", "vi": "nhai; (nghĩa bóng) nghiền ngẫm", "col": "细细咀嚼", "ex": "吃饭要细细咀嚼。", "exv": "Ăn cơm phải nhai kỹ." },
+    { "han": "无理取闹", "pinyin": "wúlǐqǔnào", "vi": "gây sự vô lý", "col": "不要无理取闹", "ex": "你不要在这里无理取闹。", "exv": "Bạn đừng gây sự vô lý ở đây." },
+    { "han": "胸怀", "pinyin": "xiōnghuái", "vi": "lòng dạ; tầm lòng; hoài bão", "col": "胸怀宽广", "ex": "他胸怀宽广，从不计较。", "exv": "Anh ấy lòng dạ rộng rãi, không bao giờ so đo." },
+    { "han": "举足轻重", "pinyin": "jǔzúqīngzhòng", "vi": "có vai trò quan trọng; có ảnh hưởng lớn", "col": "举足轻重的作用", "ex": "他在公司里起着举足轻重的作用。", "exv": "Anh ấy có vai trò rất quan trọng trong công ty." },
+    { "han": "情理", "pinyin": "qínglǐ", "vi": "tình và lý; lẽ phải", "col": "合情理", "ex": "他的做法很合情理。", "exv": "Cách làm của anh ấy rất hợp tình hợp lý." },
+    { "han": "出神", "pinyin": "chūshén", "vi": "xuất thần; đắm chìm suy nghĩ", "col": "看得出神", "ex": "他看书看得出神了。", "exv": "Anh ấy đọc sách đến xuất thần." },
+    { "han": "之所以", "pinyin": "zhīsuǒyǐ", "vi": "sở dĩ; lý do mà...", "col": "之所以这样", "ex": "他之所以这样做，是有原因的。", "exv": "Sở dĩ anh ấy làm vậy là có lý do." },
+    { "han": "思绪", "pinyin": "sīxù", "vi": "dòng suy nghĩ; tâm trạng", "col": "思绪万千", "ex": "他思绪万千，睡不着觉。", "exv": "Anh ấy dòng suy nghĩ ngổn ngang, không ngủ được." },
+    { "han": "发呆", "pinyin": "fādāi", "vi": "ngẩn người; đờ đẫn suy nghĩ", "col": "坐在那里发呆", "ex": "他坐在那里发呆。", "exv": "Anh ấy ngồi đó ngẩn người." },
+    { "han": "偏偏", "pinyin": "piānpiān", "vi": "lại cứ; khăng khăng (trái với mong muốn)", "col": "偏偏这时候", "ex": "偏偏这时候下起了雨。", "exv": "Đúng lúc này trời lại cứ mưa." },
+    { "han": "愚蠢", "pinyin": "yúchǔn", "vi": "ngu xuẩn; ngốc nghếch", "col": "愚蠢的行为", "ex": "这是一种愚蠢的行为。", "exv": "Đây là một hành vi ngu xuẩn." }
+  );
+  // Bo #219 — HSK6 — Ngôn ngữ học và đa ngữ (them 5 -> du 20 the)
+  CONTENT.zhVocab[219].cards.push(
+    { "han": "文", "pinyin": "wén", "vi": "văn; ngôn ngữ; văn hóa; chữ viết", "col": "中文", "ex": "他在学习中文。", "exv": "Anh ấy đang học tiếng Trung." },
+    { "han": "格", "pinyin": "gé", "vi": "ô; khung; quy tắc; (ngữ pháp) cách", "col": "性格", "ex": "他的性格很好。", "exv": "Tính cách của anh ấy rất tốt." },
+    { "han": "语气", "pinyin": "yǔqì", "vi": "ngữ khí; giọng điệu", "col": "说话的语气", "ex": "他说话的语气很温和。", "exv": "Giọng điệu nói chuyện của anh ấy rất ôn hòa." },
+    { "han": "瞅", "pinyin": "chǒu", "vi": "liếc nhìn; nhìn (phương ngữ)", "col": "瞅了一眼", "ex": "他瞅了我一眼，没说话。", "exv": "Anh ấy liếc nhìn tôi một cái, không nói gì." },
+    { "han": "咋", "pinyin": "zǎ", "vi": "sao; thế nào (phương ngữ, = 怎么)", "col": "你咋了", "ex": "你咋了？怎么不高兴？", "exv": "Bạn sao thế? Sao lại không vui?" }
+  );
+  // Bo #220 — HSK6 — Lịch sử hiện đại và ký ức cộng đồng (them 12 -> du 20 the)
+  CONTENT.zhVocab[220].cards.push(
+    { "han": "回忆录", "pinyin": "huíyìlù", "vi": "hồi ký", "col": "写回忆录", "ex": "老人在写自己的回忆录。", "exv": "Cụ già đang viết hồi ký của mình." },
+    { "han": "记性", "pinyin": "jìxing", "vi": "trí nhớ", "col": "记性很好", "ex": "奶奶的记性很好。", "exv": "Trí nhớ của bà rất tốt." },
+    { "han": "悠久", "pinyin": "yōujiǔ", "vi": "lâu đời; lâu dài (truyền thống, lịch sử)", "col": "历史悠久", "ex": "这座城市历史悠久。", "exv": "Thành phố này có lịch sử lâu đời." },
+    { "han": "铭记", "pinyin": "míngjì", "vi": "khắc ghi; ghi nhớ sâu sắc", "col": "铭记在心", "ex": "我们要把这件事铭记在心。", "exv": "Chúng ta phải khắc ghi việc này trong lòng." },
+    { "han": "巅峰", "pinyin": "diānfēng", "vi": "đỉnh cao; tột đỉnh", "col": "达到巅峰", "ex": "他达到了事业的巅峰。", "exv": "Anh ấy đã đạt đến đỉnh cao của sự nghiệp." },
+    { "han": "相传", "pinyin": "xiāngchuán", "vi": "tương truyền; lưu truyền", "col": "相传很久以前", "ex": "相传很久以前，这里是一片大海。", "exv": "Tương truyền rất lâu trước đây, nơi này là một biển lớn." },
+    { "han": "秉承", "pinyin": "bǐngchéng", "vi": "tuân theo; kế thừa (truyền thống)", "col": "秉承传统", "ex": "我们要秉承传统，不断创新。", "exv": "Chúng ta phải kế thừa truyền thống, không ngừng đổi mới." },
+    { "han": "起义", "pinyin": "qǐyì", "vi": "khởi nghĩa", "col": "农民起义", "ex": "历史上发生过多次农民起义。", "exv": "Trong lịch sử đã xảy ra nhiều cuộc khởi nghĩa nông dân." },
+    { "han": "改革开放", "pinyin": "gǎigékāifàng", "vi": "cải cách mở cửa", "col": "改革开放以来", "ex": "改革开放以来，生活变化很大。", "exv": "Từ khi cải cách mở cửa, cuộc sống thay đổi rất nhiều." },
+    { "han": "偏远", "pinyin": "piānyuǎn", "vi": "hẻo lánh; xa xôi", "col": "偏远地区", "ex": "偏远地区的孩子上学很不容易。", "exv": "Trẻ em ở vùng hẻo lánh đi học rất khó khăn." },
+    { "han": "沿", "pinyin": "yán", "vi": "dọc theo; theo (truyền thống); tiếp nối", "col": "沿着这条路", "ex": "沿着这条路一直走，就到了。", "exv": "Đi dọc theo con đường này là tới." },
+    { "han": "祖先", "pinyin": "zǔxiān", "vi": "tổ tiên", "col": "我们的祖先", "ex": "我们的祖先很早就住在这里。", "exv": "Tổ tiên của chúng ta đã sống ở đây từ rất sớm." }
+  );
+  // Bo #222 — HSK6 — Điện ảnh và phê bình phim (them 7 -> du 20 the)
+  CONTENT.zhVocab[222].cards.push(
+    { "han": "上映", "pinyin": "shàngyìng", "vi": "công chiếu (phim)", "col": "电影上映", "ex": "这部电影下个月上映。", "exv": "Bộ phim này tháng sau công chiếu." },
+    { "han": "银幕", "pinyin": "yínmù", "vi": "màn ảnh (rạp chiếu phim)", "col": "走上银幕", "ex": "她第一次走上银幕。", "exv": "Cô ấy lần đầu xuất hiện trên màn ảnh." },
+    { "han": "上演", "pinyin": "shàngyǎn", "vi": "công diễn; trình chiếu (phim, kịch)", "col": "正在上演", "ex": "这部电影正在上演。", "exv": "Bộ phim này đang được trình chiếu." },
+    { "han": "影迷", "pinyin": "yǐngmí", "vi": "người mê phim", "col": "很多影迷", "ex": "他有很多影迷。", "exv": "Anh ấy có rất nhiều người mê phim." },
+    { "han": "放映", "pinyin": "fàngyìng", "vi": "chiếu (phim)", "col": "放映电影", "ex": "电影院每天放映很多电影。", "exv": "Rạp chiếu phim mỗi ngày chiếu nhiều phim." },
+    { "han": "拍戏", "pinyin": "pāixì", "vi": "quay phim; đóng phim", "col": "拍戏很辛苦", "ex": "拍戏很辛苦，但他很喜欢。", "exv": "Quay phim rất vất vả, nhưng anh ấy rất thích." },
+    { "han": "影星", "pinyin": "yǐngxīng", "vi": "ngôi sao điện ảnh", "col": "当红影星", "ex": "她是一位当红影星。", "exv": "Cô ấy là một ngôi sao điện ảnh đang nổi." }
+  );
+  // Bo #227 — HSK6 — Năng lượng tái tạo và lưới điện (them 2 -> du 20 the)
+  CONTENT.zhVocab[227].cards.push(
+    { "han": "风力", "pinyin": "fēnglì", "vi": "sức gió; điện gió", "col": "风力发电", "ex": "这里用风力发电。", "exv": "Ở đây dùng sức gió để phát điện." },
+    { "han": "功率", "pinyin": "gōnglǜ", "vi": "công suất", "col": "功率很大", "ex": "这台机器的功率很大。", "exv": "Công suất của cỗ máy này rất lớn." }
+  );
+})();
