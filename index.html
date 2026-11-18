@@ -2135,7 +2135,7 @@ function openLessonFor(step, opts) {
   else if (step.kind === "ch1listen") openLesson({ type: "ch1listen", step: step, preview: pv });
   else if (step.kind === "ch1read") openLesson({ type: "ch1read", step: step, preview: pv });
 }
-function openLesson(l) { examTimerStop(); examPartTimerStop(); curLesson = l; returnTab = curTab; lessonStart = Date.now(); render(); /* v107e: vao bai tu vung EN/ZH thi dua dau the ve khung nhin ngay — truoc day trang giu scrollY cua man truoc (ban do/danh sach dai) nen vua vao bai the da bi cat o mep tren, phai bam Home moi thay dau the. */ if (l && (l.type === "vocab" || l.type === "zhVocab")) vkScrollCardTop(); }
+function openLesson(l) { examTimerStop(); examPartTimerStop(); speakTimerStop(); curLesson = l; returnTab = curTab; lessonStart = Date.now(); render(); /* v107e: vao bai tu vung EN/ZH thi dua dau the ve khung nhin ngay — truoc day trang giu scrollY cua man truoc (ban do/danh sach dai) nen vua vao bai the da bi cat o mep tren, phai bam Home moi thay dau the. */ if (l && (l.type === "vocab" || l.type === "zhVocab")) vkScrollCardTop(); }
 
 /* ---------- v2 (2026-10-26): BUOI HOC HOM NAY + DAT CHANG TU KIEM TRA ---------- */
 /* Thu tu buoi hoc: (a) muc on toi han trong ngay truoc; (b) buoc lo trinh
@@ -2333,9 +2333,9 @@ function todayPronSrsTask(track) {
   return { kind: "pronSrs", key: "pronSrs:" + track, title: "Ôn phát âm đến hạn", detail: "Âm yếu + từ còn sai đến hạn ôn phát âm — đọc lại đúng 2 lần cách quãng mới tốt nghiệp.", action: "pronSrs" };
 }
 function todayStartTask(track) {
-  if (track === "zh") return { kind: "start", key: "start:" + track, title: "Bắt đầu: kiểm tra trình độ HSK", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "zhEntry" };
-  if (track === "tc") return { kind: "start", key: "start:" + track, title: "Bắt đầu: kiểm tra trình độ TOEIC", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "tcEntry" };
-  if (track === "tp") return { kind: "start", key: "start:" + track, title: "Bắt đầu: kiểm tra trình độ TOPIK", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "tpEntry" };
+  if (track === "zh") return { kind: "start", key: "start:" + track, title: "Bắt đầu: kiểm tra đầu vào 4 kỹ năng", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "zhEntryFour" };
+  if (track === "tc") return { kind: "start", key: "start:" + track, title: "Bắt đầu: kiểm tra đầu vào 4 kỹ năng", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "tcEntryFour" };
+  if (track === "tp") return { kind: "start", key: "start:" + track, title: "Bắt đầu: kiểm tra đầu vào 4 kỹ năng", detail: "Làm kiểm tra xếp chặng để web xếp đúng chặng cho bạn.", action: "tpEntryFour" };
   return { kind: "start", key: "start:" + track, title: "Bắt đầu: kiểm tra trình độ đầu vào", detail: "Làm kiểm tra trình độ để web xếp đúng chặng cho bạn.", action: "entry" };
 }
 function todayPlanOf(items, track) {
@@ -3036,8 +3036,11 @@ function DaySum_nextTitle(opts) {
   if (opts && opts.nextTitle) return opts.nextTitle;
   try {
     var t = null;
-    if ((state.track || "en") === "zh" && typeof zhSessionTarget === "function") t = zhSessionTarget();
-    else if (typeof practiceNextTarget === "function") t = practiceNextTarget();
+    /* v217-fix: tieu de buoc tiep theo dung track — adaptiveNextStep da dung
+       4 track (EN sessionTarget, ZH zhSessionTarget, TC tcNextStep, TP
+       tpNextStep); truoc day TC/TP roi ve practiceNextTarget() = sessionTarget()
+       cua EN nen hien "On 3 muc den han" cua EN tren trang TC/TP. */
+    if (typeof adaptiveNextStep === "function") t = adaptiveNextStep(state.track || "en");
     if (t && t.title) return t.title;
   } catch (e) {}
   try { var n = nextLearnStep(); if (n && n.title) return n.title; } catch (e2) {}
@@ -3219,8 +3222,16 @@ function DaySum_wire(app) {
     });
     root.querySelectorAll("[data-daysum-next]").forEach(function (b) {
       b.onclick = function () {
-        var nb = document.getElementById("nextBtn");
-        if (nb) { nb.click(); return; }
+        /* v217-fix: nut "Bat dau" mo buoc tiep theo dung track — truoc day chi
+           tim #nextBtn (EN) nen tren ZH/TC/TP bam chi ve lai home. Uu tien nut
+           cua track hien tai, roi moi thu cac nut con lai. */
+        var tr = (typeof state !== "undefined" && state.track) || "en";
+        var first = tr === "zh" ? "zhNextBtn" : tr === "tc" ? "tcNextBtn" : tr === "tp" ? "tpNextBtn" : "nextBtn";
+        var ids = [first, "nextBtn", "zhNextBtn", "tcNextBtn", "tpNextBtn"];
+        for (var i = 0; i < ids.length; i++) {
+          var nb = document.getElementById(ids[i]);
+          if (nb) { nb.click(); return; }
+        }
         try { go("home"); } catch (e) {}
       };
     });
@@ -3373,8 +3384,11 @@ function specTodayGo(action) {
   if (parts[0] === "sylw") { var sw = null, ssy = ""; try { var dd = pronWeakData(parts[1]); var ss = dd.sounds[+parts[2]]; if (ss) { sw = ss.words[+parts[3]]; ssy = ss.sym; } } catch (e) {} if (sw) sylOpen(parts[1], { word: sw.w || sw.show, sym: ssy }); return; }
   if (parts[0] === "entry") { openLesson({ type: "entryPlace" }); return; }
   if (parts[0] === "zhEntry") { openLesson({ type: "zhEntry" }); return; }
+  if (parts[0] === "zhEntryFour") { openLesson({ type: "zhEntryFour" }); return; }
   if (parts[0] === "tcEntry") { openLesson({ type: "tcEntry" }); return; }
+  if (parts[0] === "tcEntryFour") { openLesson({ type: "tcEntryFour" }); return; }
   if (parts[0] === "tpEntry") { openLesson({ type: "tpEntry" }); return; }
+  if (parts[0] === "tpEntryFour") { openLesson({ type: "tpEntryFour" }); return; }
 }
 /* FIX-V33 02/11 (A4): ap luat an muc trung voi the chinh nhu ban EN — the chinh
    man chinh Trung da hien dung buoc tiep theo thi VIEC HOM NAY khong lap lai. */
@@ -3556,13 +3570,19 @@ function updateBottomBar() {
     btn.className = "btn btn-primary";
     btn.textContent = "Học tiếp: " + pt.title + " →";
     btn.onclick = function () { backFromLesson(); openSessionTarget(pt); };
-  } else if ((curLesson.type === "tcEntry" || curLesson.type === "tpEntry") && curLesson.placedTarget) {
+  } else if ((curLesson.type === "tcEntry" || curLesson.type === "tpEntry" || curLesson.type === "tcEntryFour" || curLesson.type === "tpEntryFour") && curLesson.placedTarget) {
     /* v125d: nhu nhanh entryCheck cua track Anh — nut thanh duoi dua toi buoc dau chặng da xep. */
     var pt2 = curLesson.placedTarget;
-    var isTc2 = curLesson.type === "tcEntry";
+    var isTc2 = curLesson.type === "tcEntry" || curLesson.type === "tcEntryFour";
     btn.className = "btn btn-primary";
     btn.textContent = "Học tiếp: " + pt2.title + " →";
     btn.onclick = function () { backFromLesson(); if (isTc2) tcOpenStep(pt2.id, "home"); else tpOpenStep(pt2.id, "home"); };
+  } else if (curLesson.type === "zhEntryFour" && curLesson.placedTarget) {
+    /* v217 (1): nut thanh duoi dua toi buoc dau chặng da xep (bai 4 ky nang ZH). */
+    var pt3 = curLesson.placedTarget;
+    btn.className = "btn btn-primary";
+    btn.textContent = "Học tiếp: " + pt3.title + " →";
+    btn.onclick = function () { backFromLesson(); openLesson(pt3.lesson); };
   } else if (curLesson.step && stepIdx(curLesson.step.id) >= 0) {
     btn.className = "btn btn-primary";
     btn.textContent = "Bài tiếp theo →";
@@ -3596,7 +3616,7 @@ function guideLine(id, text) {
     return '<p class="mut" data-guide="' + esc(id) + '">' + esc(text) + '</p>';
   } catch (e) { return ""; }
 }
-function backFromLesson() { examTimerStop(); examPartTimerStop(); try { mirrorStop(); } catch (e) {} curLesson = null; go(returnTab || "home"); }
+function backFromLesson() { examTimerStop(); examPartTimerStop(); speakTimerStop(); try { mirrorStop(); } catch (e) {} curLesson = null; go(returnTab || "home"); }
 function nextStepButtonHTML() { return '<button class="btn btn-primary" id="btnNextStep">Tiếp tục sang bài tiếp →</button>'; }
 function wireNextStep() { updateBottomBar(); }
 function elapsedText() { if (!lessonStart) return "—"; var s = Math.max(0, Math.round((Date.now() - lessonStart) / 1000)); if (s < 60) return s + " giây"; if (s < 3600) return Math.floor(s / 60) + " phút " + (s % 60) + " giây"; return Math.floor(s / 3600) + " giờ " + Math.floor((s % 3600) / 60) + " phút"; }
@@ -4005,7 +4025,7 @@ function applyLessonLayout(app) {
      chieu cao frame; khong can tinh lai khi resize/mo <details> nua. */
   try { side.style.top = "78px"; } catch (e) {}
 }
-function go(tab) { examTimerStop(); examPartTimerStop(); curTab = tab; curLesson = null; render(); }
+function go(tab) { examTimerStop(); examPartTimerStop(); speakTimerStop(); curTab = tab; curLesson = null; render(); }
 /* ---------- V59: TAI LUOI THE GIAI TRI (tab Luyen tap) ----------
    The giai tri chi duoc dung khi nguoi hoc mo tab Luyen tap: luc render
    tab, the chi la khung rong (tieu de + dong "Dang tai..."), khong iframe,
@@ -4659,7 +4679,7 @@ function zhPositionCurrent() {
 function zhPositionText() {
   var phSeg = "";
   try { if (typeof ZH_PH_STEPS !== "undefined" && ZH_PH_STEPS.length && state && state.zhPhDone) { var pd = 0; ZH_PH_STEPS.forEach(function (s) { if (state.zhPhDone[s.id]) pd++; }); if (pd > 0) phSeg = " · Pinyin " + pd + "/" + ZH_PH_STEPS.length; } } catch (e) {}
-  var zhTypeMap = { zhVocab: "Từ vựng", zhPh: "Phát âm Pinyin", zhGram: "Ngữ pháp", zhRead: "Bài Đọc", zhListen: "Bài Nghe", zhSpeak: "Bài Nói", zhRole: "Nhập vai", zhWrite: "Bài Viết", zhStroke: "Viết chữ", zhFace: "Nhận mặt chữ", zhEntry: "Kiểm tra trình độ HSK", zhHskk: "Luyện HSKK", zhReviewSession: "Buổi ôn trộn", zhChapterTest: "Kiểm tra cuối chặng", zhMock: "Thi thử HSK" };
+  var zhTypeMap = { zhVocab: "Từ vựng", zhPh: "Phát âm Pinyin", zhGram: "Ngữ pháp", zhRead: "Bài Đọc", zhListen: "Bài Nghe", zhSpeak: "Bài Nói", zhRole: "Nhập vai", zhWrite: "Bài Viết", zhStroke: "Viết chữ", zhFace: "Nhận mặt chữ", zhEntry: "Kiểm tra trình độ HSK", zhEntryFour: "Kiểm tra đầu vào 4 kỹ năng", zhHskk: "Luyện HSKK", zhReviewSession: "Buổi ôn trộn", zhChapterTest: "Kiểm tra cuối chặng", zhMock: "Thi thử HSK" };
   if (typeof curLesson !== "undefined" && curLesson && zhTypeMap[curLesson.type]) {
     var base = zhTypeMap[curLesson.type];
     var st = zhPositionStage(curLesson);
@@ -12429,6 +12449,420 @@ function renderEntryFour(app, l) {
   $("#e4Redo").onclick = function () { l.e4 = null; l.placedTarget = null; render(); };
   $("#e4Home").onclick = function () { backFromLesson(); };
 }
+/* ============ v217 (1): KIEM TRA DAU VAO 4 KY NANG ZH/TC/TP ============
+   1 renderer chung renderEntryFourTrack + 3 wrapper mong (QT-05: cung cau
+   truc/luong/dang ket qua voi entryFour cua EN (v209), chi khac noi dung
+   theo he am tung track). 5 pha: 0 gioi thieu + ket qua lan truoc, 1 Nghe
+   (2 doan x 3 cau), 2 Doc (1 bai x 5 cau), 3 Noi (3 cau doc to), 4 Viet
+   (30-50 tu/chu + tu cham 4 tieu chi), 5 Ket qua.
+   - Noi: bat giong bang pronTier1Start (tang 1 SR: may chi kiem tra nghe
+     ra dung tu/chu khong — QT-09). Khop bang e4SpeakMatch: ZH theo chu Han,
+     TC theo tu tieng Anh, TP theo tu tieng Han. Bo qua duoc, bo qua thi ghi
+     "chua do duoc", KHONG tinh truot. Tuyet doi KHONG cham % tung am vi.
+   - Viet: ZH dem chu Han (e4ZhCharCount), TC/TP dem tu (e4WordCount).
+     Bai qua ngan (<10 tu/chu) thi Viet ghi "chua do duoc". Tu cham muc
+     5/6/7 nhu EN; VIP duoc AI cham qua callAiTutorWriting, band may tra ve
+     (thang chung 0-9) doi sang muc 5/6/7 bang e4AiBandToLevel — chi hien
+     muc, khong hien band chung cua track khac.
+   - Xep chang: ti le dung trung binh cua cac ky nang da do (Nghe/Doc/Noi/
+     Viet) -> diem tuong duong tren thang cua bai mini cu (ZH/TP x16, TC
+     x12, lam tron) -> dung lai dung ham xep chang cua bai mini:
+     zhEntryStageFor (0-3->1, 4-6->2, 7-9->3, 10-12->4, 13-14->5, 15-16->6),
+     tcEntryStageFor (0-3->0, 4-6->1, 7-9->2, 10-12->3),
+     tpEntryStageFor (0-1->0, 2-3->1, 4-5->2, 6-7->3, 8-9->4, 10-11->5,
+     12-13->6, 14-16->7). Nhan tung ky nang lay tu chinh chang tuong ung
+     voi ti le do (HSK n / TOEIC ~diem chang / tieu de chang TP).
+   - CEFR (v212): ZH zhStageCefr; TC cefrOfToeic(diem chang); TP
+     CEFR_TBD_TXT (NIKL chua cong bo bang quy doi). Moi muc deu ghi
+     "uoc luong, chi de tham khao — khong phai diem thi that". */
+/* ---------- v217 (1): DU LIEU KIEM TRA DAU VAO 4 KY NANG ZH/TC/TP ----------
+   Dat O DAY (inline index.html) theo dung mau ENTRY4_* cua EN (v209, index.html
+   12156-12172) — KHONG dat o content-new.js: cac probe cu (v201/v211/v215_b)
+   load content-new.js cua backup (khong co du lieu moi) cung inline MOI, nen
+   du lieu ma inline tham chieu phai song trong inline. */
+/* ---------- v217 (1): KIEM TRA DAU VAO 4 KY NANG ZH/TC/TP ----------
+   Sao chep dung mau ENTRY4_* cua EN (v209): Nghe 2 doan x 3 cau -> Doc 1 bai
+   x 5 cau -> Noi 3 cau doc to -> Viet 30-50 tu/chu + tu cham 4 tieu chi ->
+   Ket qua (muc tung ky nang + chang xep + CEFR). Noi dung TU SOAN 100%,
+   khong chep de thi that; phan Nghe/Doc DUNG LAI chi so kho da co.
+   - ZH Nghe: ZH_LISTENING[37] "Chao hoi" (chang 1, lay 3/4 cau dau) +
+     [5] "Xin nghi mot ngay" (chang 3, lay 3/4 cau dau). ZH Doc:
+     ZH_READING[4] "Ngay dau di lam" (chang 3, du 5 cau).
+   - TC Nghe: TC_LISTEN[6] "Hoi thoai: doi lich hop" (part 3, 3 cau) +
+     [8] "Thong bao: chuyen van phong" (part 4, 3 cau). TC Doc: TC_READ[11]
+     "Quang cao tuyen dung" (part 7) chi co 4 cau san -> tu soan them 1 cau
+     ve luong tu chinh doan do (kho TC_READ moi bai toi da 4 cau).
+   - TP Nghe: TP_LISTEN[6] "Ke hoach cuoi tuan" (part 3, 3 cau) + [8]
+     "Thong bao thu vien" (part 4, 3 cau). TP Doc: TP_READ[10] "Doc hieu:
+     mot ngay cua Minjun" (part 3) chi co 4 cau san -> tu soan them 1 cau
+     ve bua trua tu chinh doan do (kho TP_READ moi bai toi da 4 cau).
+   - Noi/Viet tu soan moi: ZH 3 cau (han + pinyin + nghia Viet), TC 3 cau
+     tieng Anh cong so, TP 3 cau (tieng Han + romanization + nghia Viet).
+     Bai mau Viet: ZH 46 chu Han, TC 42 tu, TP 30 tu (dem bang code, xem
+     probe test_v217_entry_*.js). Tieu chi Viet: 4 tieu chi x muc 5/6/7
+     (giong mau EN), rieng tieu chi thu 4 theo tung track. */
+var ZH4_LISTEN = [{ li: 37, take: 3 }, { li: 5, take: 3 }];
+var ZH4_READ = { ri: 4 };
+var ZH4_SPEAK = [
+  { han: "你好！我叫小明，我是学生。", py: "Nǐ hǎo! Wǒ jiào Xiǎo Míng, wǒ shì xuésheng.", vi: "Xin chào! Tôi tên là Tiểu Minh, tôi là học sinh." },
+  { han: "我家在北京，我每天坐地铁去学校。", py: "Wǒ jiā zài Běijīng, wǒ měitiān zuò dìtiě qù xuéxiào.", vi: "Nhà tôi ở Bắc Kinh, mỗi ngày tôi đi tàu điện ngầm tới trường." },
+  { han: "我喜欢学中文，因为中文很有意思。", py: "Wǒ xǐhuan xué Zhōngwén, yīnwèi Zhōngwén hěn yǒu yìsi.", vi: "Tôi thích học tiếng Trung vì tiếng Trung rất thú vị." }
+];
+var ZH4_WRITE = {
+  prompt: "Viết 30–50 chữ Hán giới thiệu về bản thân và một ngày bình thường của bạn.",
+  model: "大家好，我叫小明，今年十六岁。我家在北京。我每天早上六点起床，坐地铁去学校。放学以后，我做作业，帮助妈妈做饭。",
+  criteria: [
+    { key: "task", name: "Trả lời đúng yêu cầu đề", lv: { 5: "Trả lời được yêu cầu chính, có ý lạc đề hoặc thiếu ý nhỏ.", 6: "Trả lời đủ yêu cầu, các ý chính đều có, có thể còn chung chung.", 7: "Trả lời đầy đủ, ý rõ và đúng trọng tâm." } },
+    { key: "lex", name: "Từ vựng", lv: { 5: "Dùng được từ cơ bản đúng nghĩa, còn lặp từ và lỗi chọn từ.", 6: "Vốn từ đủ rộng, có vài cụm từ/cách nói tự nhiên.", 7: "Từ dùng đa dạng, chính xác, có cụm từ tự nhiên." } },
+    { key: "gram", name: "Ngữ pháp", lv: { 5: "Câu đơn là chính, có lỗi ngữ pháp nhưng vẫn hiểu được.", 6: "Có câu đơn + câu ghép, lỗi ít, không gây khó hiểu.", 7: "Câu đa dạng (ghép, phức), lỗi rất ít." } },
+    { key: "char", name: "Chữ viết", lv: { 5: "Chữ viết được, còn sai nét hoặc viết chưa đúng vài chữ.", 6: "Chữ viết đúng và rõ ràng, ít lỗi nét.", 7: "Chữ viết đúng, rõ ràng, đúng thứ tự nét cơ bản." } }
+  ]
+};
+var TC4_LISTEN = [{ li: 6 }, { li: 8 }];
+var TC4_READ = {
+  ri: 11,
+  extra: [{ q: "Lương của vị trí trợ lý bán hàng là bao nhiêu?", o: ["12–15 triệu đồng một tháng cộng tiền thưởng.", "10–12 triệu đồng một tháng, không có thưởng.", "15–20 triệu đồng một tháng cộng tiền thưởng.", "Lương thỏa thuận khi phỏng vấn."], a: 0, why: "Quảng cáo ghi rõ: Salary: 12-15 million dong per month plus bonus." }]
+};
+var TC4_SPEAK = [
+  { en: "Hello, my name is Lan. I work in an office in Hanoi.", vi: "Xin chào, tên tôi là Lan. Tôi làm việc trong một văn phòng ở Hà Nội." },
+  { en: "Every morning, I check my emails and prepare for the meeting at 9 o'clock.", vi: "Mỗi buổi sáng, tôi kiểm tra email và chuẩn bị cho cuộc họp lúc 9 giờ." },
+  { en: "I usually speak English with my foreign clients because it helps my work.", vi: "Tôi thường nói tiếng Anh với khách hàng nước ngoài vì điều đó giúp ích cho công việc của tôi." }
+];
+var TC4_WRITE = {
+  prompt: "Viết 30–50 từ bằng tiếng Anh giới thiệu về bản thân và một ngày làm việc bình thường của bạn.",
+  model: "Hello, my name is Lan. I am 28 years old and I work in an office in Hanoi. Every morning, I check my emails and join a meeting at 9 o'clock. After work, I cook dinner and read English books before bed.",
+  criteria: [
+    { key: "task", name: "Trả lời đúng yêu cầu đề", lv: { 5: "Trả lời được yêu cầu chính, có ý lạc đề hoặc thiếu ý nhỏ.", 6: "Trả lời đủ yêu cầu, các ý chính đều có, có thể còn chung chung.", 7: "Trả lời đầy đủ, ý rõ và đúng trọng tâm." } },
+    { key: "lex", name: "Từ vựng", lv: { 5: "Dùng được từ cơ bản đúng nghĩa, còn lặp từ và lỗi chọn từ.", 6: "Vốn từ đủ rộng, có vài cụm từ/cách nói tự nhiên trong công việc.", 7: "Từ dùng đa dạng, chính xác, có cụm từ tự nhiên." } },
+    { key: "gram", name: "Ngữ pháp", lv: { 5: "Câu đơn là chính, có lỗi ngữ pháp nhưng vẫn hiểu được.", 6: "Có câu đơn + câu ghép, lỗi ít, không gây khó hiểu.", 7: "Câu đa dạng (ghép, phức), lỗi rất ít." } },
+    { key: "spell", name: "Chính tả & dấu câu", lv: { 5: "Còn lỗi chính tả hoặc dấu câu, nhưng vẫn đọc được.", 6: "Chính tả và dấu câu đúng phần lớn, lỗi nhỏ.", 7: "Chính tả và dấu câu đúng, kể cả viết hoa và dấu phẩy." } }
+  ]
+};
+var TP4_LISTEN = [{ li: 6 }, { li: 8 }];
+var TP4_READ = {
+  ri: 10,
+  extra: [{ q: "Buổi trưa Minjun ăn cơm ở đâu?", o: ["Ở nhà ăn.", "Ở nhà.", "Ở trường.", "Ở công ty."], a: 0, why: "식당에서 밥을 먹습니다: ăn cơm ở nhà ăn." }]
+};
+var TP4_SPEAK = [
+  { ko: "안녕하세요. 저는 민수입니다. 저는 학생입니다.", rr: "Annyeonghaseyo. Jeoneun Minsu-imnida. Jeoneun haksaeng-imnida.", vi: "Xin chào. Tôi là Minsu. Tôi là học sinh." },
+  { ko: "저는 매일 아침 7시에 일어나요. 학교에 버스로 가요.", rr: "Jeoneun maeil achim 7-sie ireonayo. Hakgyoe beoseuro gayo.", vi: "Mỗi ngày tôi dậy lúc 7 giờ sáng. Tôi đi xe buýt tới trường." },
+  { ko: "저는 한국어를 좋아해요. 한국 드라마를 보면서 공부해요.", rr: "Jeoneun hangugeoreul joahaeyo. Hanguk deuramareul bomyeonseo gongbuhaeyo.", vi: "Tôi thích tiếng Hàn. Tôi học trong lúc xem phim truyền hình Hàn Quốc." }
+];
+var TP4_WRITE = {
+  prompt: "Viết 30–50 từ bằng tiếng Hàn giới thiệu về bản thân và một ngày bình thường của bạn.",
+  model: "안녕하세요. 저는 민수입니다. 스물여덟 살이고 하노이 회사에서 일합니다. 매일 아침 7시에 일어나서 이메일을 확인하고 9시에 회의에 참석합니다. 퇴근 후에 저녁을 만들고 자기 전에 한국어 책을 읽습니다. 주말에는 친구하고 한국어로 이야기합니다.",
+  criteria: [
+    { key: "task", name: "Trả lời đúng yêu cầu đề", lv: { 5: "Trả lời được yêu cầu chính, có ý lạc đề hoặc thiếu ý nhỏ.", 6: "Trả lời đủ yêu cầu, các ý chính đều có, có thể còn chung chung.", 7: "Trả lời đầy đủ, ý rõ và đúng trọng tâm." } },
+    { key: "lex", name: "Từ vựng", lv: { 5: "Dùng được từ cơ bản đúng nghĩa, còn lặp từ và lỗi chọn từ.", 6: "Vốn từ đủ rộng, có vài cụm từ/cách nói tự nhiên.", 7: "Từ dùng đa dạng, chính xác, có cụm từ tự nhiên." } },
+    { key: "gram", name: "Ngữ pháp", lv: { 5: "Câu đơn là chính, có lỗi ngữ pháp nhưng vẫn hiểu được.", 6: "Có câu đơn + câu ghép, lỗi ít, không gây khó hiểu.", 7: "Câu đa dạng (ghép, phức), lỗi rất ít." } },
+    { key: "spell", name: "Chính tả & khoảng trắng", lv: { 5: "Còn lỗi chính tả hoặc khoảng trắng (띄어쓰기), nhưng vẫn đọc được.", 6: "Chính tả và khoảng trắng đúng phần lớn, lỗi nhỏ.", 7: "Chính tả và khoảng trắng đúng, kể cả trợ từ và đuôi câu." } }
+  ]
+};
+function e4ZhCharCount(s) { var m = String(s || "").match(/[\u4e00-\u9fff]/g); return m ? m.length : 0; }
+function e4SpeakMatch(transcript, ref, track) {
+  /* Dem theo da tap (chu/tu lap lai trong cau mau van tinh du): cau doc
+     dung tuyet doi -> ti le 1,0; thieu chu/tu -> ti le giam theo so luong. */
+  if (track === "zh") {
+    var normZh = function (x) { return String(x || "").replace(/[^\u4e00-\u9fff]/g, ""); };
+    var rw = normZh(ref).split(""), tw = normZh(transcript);
+    var counts = {};
+    for (var i = 0; i < tw.length; i++) counts[tw[i]] = (counts[tw[i]] || 0) + 1;
+    var hit = 0;
+    rw.forEach(function (ch) { if (counts[ch] > 0) { counts[ch]--; hit++; } });
+    return { hit: hit, total: rw.length, ratio: rw.length ? hit / rw.length : 0 };
+  }
+  var norm = function (x) {
+    var s = String(x || "").toLowerCase();
+    if (track === "tp") s = s.replace(/[^\uac00-\ud7a3a-z0-9\s']/g, " ");
+    else s = s.replace(/[^a-z0-9\s']/g, " ");
+    return s.replace(/\s+/g, " ").trim();
+  };
+  var rw2 = norm(ref).split(" ").filter(function (w) { return !!w; });
+  var tw2 = norm(transcript).split(" ").filter(function (w) { return !!w; });
+  var counts2 = {};
+  tw2.forEach(function (wd) { counts2[wd] = (counts2[wd] || 0) + 1; });
+  var hit2 = 0;
+  rw2.forEach(function (wd) { if (counts2[wd] > 0) { counts2[wd]--; hit2++; } });
+  return { hit: hit2, total: rw2.length, ratio: rw2.length ? hit2 / rw2.length : 0 };
+}
+function e4WriteRatioFromAvg(avg) { var r = (avg - 5) / 2; if (r < 0) r = 0; if (r > 1) r = 1; return r; }
+function e4AiBandToLevel(band) { var b = +band || 0; if (b >= 6.5) return 7; if (b >= 5.5) return 6; return 5; }
+var E4_TRACK_CFG = {
+  zh: {
+    track: "zh", title: "Kiểm tra đầu vào 4 kỹ năng — Tiếng Trung", langName: "tiếng Trung",
+    skillKey: "zhEntryFour", stateKey: "zhEntryFour", placedKey: "zhEntryPlaced",
+    speakTrack: "zh", countKind: "zh", countLabel: "chữ Hán", eqTotal: 16,
+    stageFor: function (eq, total) { return zhEntryStageFor(eq, total); },
+    stageLabel: function (stage) { return "HSK " + stage; },
+    stageSentence: function (stage) { return "Bạn bắt đầu ở chặng " + stage + " (HSK " + stage + ")."; },
+    maxNote: "Bài kiểm tra này xếp tối đa tới HSK 6. Nếu bạn cao hơn, hãy làm thi thử để đo chính xác hơn.",
+    cefrHTML: function (stage) { var z = zhStageCefr(stage); return z ? ' CEFR (ước lượng): <b>' + esc(z.label) + '</b>' : ''; },
+    listenAt: function (i) { var sel = ZH4_LISTEN[i]; var it = ZH_LISTENING[sel.li]; return { sub: "Nghe · Đoạn " + (i + 1) + "/2 · " + it.title + " (chặng " + it.stage + ")", play: function () { zhSpeak(zhListenSpeakText(it)); }, qs: (it.questions || []).slice(0, sel.take) }; },
+    read: function () { var rd = ZH_READING[ZH4_READ.ri]; return { sub: "Đọc · " + rd.title + " (chặng " + rd.stage + ") · 5 câu hỏi", body: '<div class="qblock">' + paraHTML(rd.text) + '<p><b>' + esc(rd.pinyin) + '</b></p></div>', vi: rd.vi, qs: rd.questions }; },
+    speak: ZH4_SPEAK,
+    speakText: function (s) { return s.han; },
+    speakPlay: function (s) { zhSpeak(s.han); },
+    speakShow: function (s) { return '<p><b>' + esc(s.han) + '</b></p><p class="mut">' + esc(s.py) + ' — ' + esc(s.vi) + '</p>'; },
+    write: ZH4_WRITE,
+    placed: function (stage) {
+      if (stage <= 1) return { title: "Phát âm Pinyin chặng 1", lesson: { type: "zhPh", idx: 0 } };
+      var allSets = zhSets();
+      for (var si = 0; si < allSets.length; si++) { if (allSets[si].stage === stage) return { title: allSets[si].set.topic, lesson: { type: "zhVocab", setKey: allSets[si].key, idx: allSets[si].idx } }; }
+      return null;
+    }
+  },
+  tc: {
+    track: "tc", title: "Kiểm tra đầu vào 4 kỹ năng — TOEIC", langName: "tiếng Anh",
+    skillKey: "tcEntryFour", stateKey: "tcEntryFour", placedKey: "tcEntryPlaced",
+    speakTrack: "en", countKind: "word", countLabel: "từ", eqTotal: 12,
+    stageFor: function (eq, total) { return tcEntryStageFor(eq, total); },
+    stageLabel: function (stage) { return "TOEIC ~" + ((TC_STAGES[stage] || {}).score || 0); },
+    stageSentence: function (stage) { return "Bạn bắt đầu ở " + ((TC_STAGES[stage] || {}).title || ("Chặng " + (stage + 1))) + "."; },
+    maxNote: "Bài kiểm tra này xếp tối đa tới Chặng 900. Nếu bạn cao hơn, hãy làm thi thử để đo chính xác hơn.",
+    cefrHTML: function (stage) { var c = cefrOfToeic((TC_STAGES[stage] || {}).score); return c ? ' CEFR (tham khảo): <b>' + esc(c.label) + '</b>' + (c.code ? ' — ' + esc(cefrCan(c.code)) : '') : ''; },
+    listenAt: function (i) { var sel = TC4_LISTEN[i]; var it = TC_LISTEN[sel.li]; return { sub: "Nghe · Đoạn " + (i + 1) + "/2 · " + it.title, play: function () { speak(it.script); }, qs: it.qs }; },
+    read: function () { var rd = TC_READ[TC4_READ.ri]; return { sub: "Đọc · " + rd.title + " · 5 câu hỏi", body: '<div class="qblock">' + paraHTML(rd.passage) + '</div>', vi: rd.passagev, qs: (rd.qs || []).concat(TC4_READ.extra) }; },
+    speak: TC4_SPEAK,
+    speakText: function (s) { return s.en; },
+    speakPlay: function (s) { speak(s.en); },
+    speakShow: function (s) { return '<p><b>' + esc(s.en) + '</b></p><p class="mut">' + esc(s.vi) + '</p>'; },
+    write: TC4_WRITE,
+    placed: function (stage) { var st = TC_STAGES[stage]; var firstId = st ? st.steps[0] : null; var firstMeta = firstId ? tcStepMeta(firstId) : null; return firstId ? { id: firstId, title: firstMeta ? firstMeta.title : st.title } : null; }
+  },
+  tp: {
+    track: "tp", title: "Kiểm tra đầu vào 4 kỹ năng — TOPIK", langName: "tiếng Hàn",
+    skillKey: "tpEntryFour", stateKey: "tpEntryFour", placedKey: "tpEntryPlaced",
+    speakTrack: "tp", countKind: "word", countLabel: "từ", eqTotal: 16,
+    stageFor: function (eq, total) { return tpEntryStageFor(eq, total); },
+    stageLabel: function (stage) { return (TP_STAGES[stage] || {}).title || ("Chặng " + (stage + 1)); },
+    stageSentence: function (stage) { return "Bạn bắt đầu ở " + ((TP_STAGES[stage] || {}).title || ("Chặng " + (stage + 1))) + "."; },
+    maxNote: "Bài kiểm tra này xếp tối đa tới TOPIK II Cấp 6. Nếu bạn cao hơn, hãy làm thi thử để đo chính xác hơn.",
+    cefrHTML: function (stage) { return ' CEFR: <b>' + CEFR_TBD_TXT + '</b> <span class="mut">(NIKL chưa công bố bảng quy đổi TOPIK↔CEFR.)</span>'; },
+    listenAt: function (i) { var sel = TP4_LISTEN[i]; var it = TP_LISTEN[sel.li]; return { sub: "Nghe · Đoạn " + (i + 1) + "/2 · " + it.title, play: function () { tpSpeak(it.script); }, qs: it.qs }; },
+    read: function () { var rd = TP_READ[TP4_READ.ri]; return { sub: "Đọc · " + rd.title + " · 5 câu hỏi", body: '<div class="qblock">' + paraHTML(rd.passage) + '</div>', vi: rd.passagev, qs: (rd.qs || []).concat(TP4_READ.extra) }; },
+    speak: TP4_SPEAK,
+    speakText: function (s) { return s.ko; },
+    speakPlay: function (s) { tpSpeak(s.ko); },
+    speakShow: function (s) { return '<p><b>' + esc(s.ko) + '</b></p><p class="mut">' + esc(s.rr) + ' — ' + esc(s.vi) + '</p>'; },
+    write: TP4_WRITE,
+    placed: function (stage) { var st = TP_STAGES[stage]; var firstId = st ? st.steps[0] : null; var firstMeta = firstId ? tpStepMeta(firstId) : null; return firstId ? { id: firstId, title: firstMeta ? firstMeta.title : st.title } : null; }
+  }
+};
+function e4SkillLevel(cfg, ratio) {
+  var eq = Math.round((+ratio || 0) * cfg.eqTotal);
+  var stage = cfg.stageFor(eq, cfg.eqTotal);
+  return cfg.stageLabel(stage);
+}
+function e4Count(cfg, s) { return cfg.countKind === "zh" ? e4ZhCharCount(s) : e4WordCount(s); }
+function renderEntryFourTrack(app, l, cfg) {
+  if (!l.e4t) l.e4t = { phase: 0, li: 0, quiz: false, listened: {}, listen: { c: 0, n: 0 }, readQuiz: false, read: null, speak: { res: [null, null, null], skipped: false }, write: null, saved: false, result: null };
+  var e4 = l.e4t;
+  l.title = cfg.title;
+  l.skillKey = cfg.skillKey;
+  if (e4.phase === 0) {
+    var prev = state[cfg.stateKey] || null;
+    var prevHTML = prev ? '<div class="sumcard"><p><b>Lần trước bạn làm:</b> ' + esc(prev.stageLabel) + ' (ước lượng) · Nghe ' + esc(prev.listen.level) + ' · Đọc ' + esc(prev.read.level) + ' · Nói ' + (prev.speak ? esc(prev.speak.level) : 'chưa đo được') + ' · Viết ' + (prev.write ? esc(prev.write.level) : 'chưa đo được') + '.</p></div>' : '';
+    app.innerHTML = skillHead(cfg.title, "Nghe · Đọc · Nói · Viết — khoảng 15 phút · Không cần đăng nhập") + e4PhaseChips(-1)
+      + '<div class="qblock"><p>Bài này đo cả 4 kỹ năng để xếp đúng chặng bắt đầu cho bạn. Làm xong, web cho bạn biết trình độ từng kỹ năng và chặng bắt đầu.</p>'
+      + '<p><b>1. Nghe</b> — 6 câu (2 đoạn ngắn) · <b>2. Đọc</b> — 5 câu (1 bài ngắn) · <b>3. Nói</b> — đọc to 3 câu (cần mic; không có mic thì bỏ qua, không tính trượt) · <b>4. Viết</b> — 1 đoạn ngắn 30–50 ' + cfg.countLabel + ' + tự đánh giá theo bảng tiêu chí.</p>'
+      + '<p class="mut">Mức ở đây là mức ước lượng, chỉ để tham khảo — không phải điểm thi thật. Thoát giữa chừng thì kết quả lần này không được lưu.</p>'
+      + '<div class="row"><button class="btn btn-primary" id="e4tStart">Bắt đầu kiểm tra →</button></div></div>' + prevHTML;
+    wireBack();
+    $("#e4tStart").onclick = function () { e4.phase = 1; render(); };
+    return;
+  }
+  if (e4.phase === 1) {
+    var sel = cfg.listenAt(e4.li);
+    var qs = sel.qs;
+    l.sub = sel.sub;
+    if (!e4.quiz) {
+      app.innerHTML = skillHead(l.title + " — Nghe", l.sub) + e4PhaseChips(0) + listenVoiceNoteHTML()
+        + '<div class="qblock"><div class="row"><button class="btn" id="e4tLisPlay">🔊 Nghe đoạn</button><button class="btn btn-primary" id="e4tLisStart"' + (e4.listened[e4.li] ? "" : " disabled") + '>Làm ' + qs.length + ' câu hỏi</button></div><p class="mut">Nghe kỹ rồi hãy làm bài — nghe lại bao nhiêu lần cũng được.</p></div><div id="e4tQuizSlot"></div>';
+      wireBack();
+      $("#e4tLisPlay").onclick = function () { sel.play(); e4.listened[e4.li] = true; var st = $("#e4tLisStart"); if (st) st.disabled = false; };
+      $("#e4tLisStart").onclick = function () { if (!e4.listened[e4.li]) { toast("Hãy bấm 🔊 Nghe trước đã."); return; } e4.quiz = true; e4ResetQuiz(l); render(); };
+      return;
+    }
+    l.title = cfg.title + " — Nghe";
+    app.innerHTML = '<div class="row" style="margin-bottom:10px"><button class="btn btn-primary" id="e4tLisAgain">🔊 Nghe lại đoạn</button></div>' + listenVoiceNoteHTML() + '<div id="e4tQuizSlot"></div>';
+    $("#e4tLisAgain").onclick = function () { sel.play(); };
+    l.onDone = function (res) {
+      l.onDone = null; e4.listen.c += res.firstN; e4.listen.n += res.total; e4.quiz = false; e4.li++;
+      if (e4.li >= 2) e4.phase = 2;
+      render();
+    };
+    renderQuizEngine($("#e4tQuizSlot"), l, qs, "phase", cfg.skillKey + ":listen" + e4.li);
+    return;
+  }
+  if (e4.phase === 2) {
+    var rd = cfg.read();
+    l.sub = rd.sub;
+    if (!e4.readQuiz) {
+      app.innerHTML = skillHead(l.title + " — Đọc", l.sub) + e4PhaseChips(1)
+        + rd.body
+        + '<details style="margin-bottom:10px"><summary><b>Bản dịch tiếng Việt (mở để đối chiếu sau khi đọc)</b></summary><div class="qblock">' + esc(rd.vi || "") + '</div></details>'
+        + '<div class="qblock"><button class="btn btn-primary" id="e4tReadStart">Làm ' + rd.qs.length + ' câu hỏi →</button></div><div id="e4tQuizSlot"></div>';
+      wireBack();
+      $("#e4tReadStart").onclick = function () { e4.readQuiz = true; e4ResetQuiz(l); render(); };
+      return;
+    }
+    l.title = cfg.title + " — Đọc";
+    app.innerHTML = rd.body + '<div id="e4tQuizSlot"></div>';
+    l.onDone = function (res) {
+      l.onDone = null; e4.read = { c: res.firstN, n: res.total }; e4.phase = 3; render();
+    };
+    renderQuizEngine($("#e4tQuizSlot"), l, rd.qs, "phase", cfg.skillKey + ":read");
+    return;
+  }
+  if (e4.phase === 3) {
+    var sp = e4.speak;
+    var si = 0; while (si < cfg.speak.length && sp.res[si]) si++;
+    if (sp.skipped || si >= cfg.speak.length) {
+      var doneN = sp.res.filter(function (r) { return !!r; }).length;
+      app.innerHTML = skillHead(l.title + " — Nói", "Đã xong phần Nói") + e4PhaseChips(2)
+        + '<div class="qblock"><p>' + (sp.skipped ? 'Bạn đã bỏ qua phần Nói — phần này ghi là "chưa đo được", không tính vào trình độ chung.' : 'Bạn đã đọc xong ' + doneN + '/' + cfg.speak.length + ' câu.') + '</p><div class="row"><button class="btn btn-primary" id="e4tSpkToWrite">Sang phần Viết →</button></div></div>';
+      wireBack();
+      $("#e4tSpkToWrite").onclick = function () { e4.phase = 4; render(); };
+      return;
+    }
+    var s = cfg.speak[si];
+    var res = sp.res[si];
+    var srOK = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+    app.innerHTML = skillHead(l.title + " — Nói", "Câu " + (si + 1) + "/" + cfg.speak.length + " · Đọc to câu mẫu") + e4PhaseChips(2)
+      + '<p class="mut">Máy chỉ kiểm tra có nghe ra đúng từ/chữ không. Không có mic thì bỏ qua phần này — không tính là trượt.</p>'
+      + '<div class="qblock">' + cfg.speakShow(s) + '<div class="row"><button class="btn" id="e4tSpkPlay">🔊 Nghe mẫu</button><button class="btn btn-primary" id="e4tSpkRec"' + (srOK ? '' : ' disabled') + '>🎤 Đọc to câu này</button></div>'
+      + (srOK ? '' : '<p class="mut">Trình duyệt này không nhận giọng nói thành chữ — hãy bỏ qua phần Nói.</p>')
+      + (res ? '<p><b>Máy nghe được:</b> ' + esc(res.transcript) + '</p><p>Đúng <b>' + res.hit + '/' + res.total + ' từ/chữ</b> (' + Math.round(res.ratio * 100) + '%).</p><div class="row"><button class="btn" id="e4tSpkAgain">Đọc lại</button><button class="btn btn-primary" id="e4tSpkNext">' + (si + 1 >= cfg.speak.length ? 'Sang phần Viết →' : 'Câu tiếp theo →') + '</button></div>' : '')
+      + '</div><div class="qblock"><button class="btn" id="e4tSpkSkip">Bỏ qua phần Nói →</button></div>';
+    wireBack();
+    $("#e4tSpkPlay").onclick = function () { cfg.speakPlay(s); };
+    var rb2 = $("#e4tSpkRec");
+    if (rb2) rb2.onclick = function () {
+      var ref = cfg.speakText(s);
+      pronTier1Start(cfg.speakTrack, function (tx) {
+        var m = e4SpeakMatch(tx, ref, cfg.track);
+        sp.res[si] = { transcript: tx, hit: m.hit, total: m.total, ratio: m.ratio };
+        render();
+      }, function (kind) { toast(pronTier1ErrText(kind)); });
+    };
+    var ag = $("#e4tSpkAgain"); if (ag) ag.onclick = function () { sp.res[si] = null; render(); };
+    var nx = $("#e4tSpkNext"); if (nx) nx.onclick = function () { if (si + 1 >= cfg.speak.length) { e4.phase = 4; } render(); };
+    $("#e4tSpkSkip").onclick = function () { sp.skipped = true; e4.phase = 4; render(); };
+    return;
+  }
+  if (e4.phase === 4) {
+    var wr = e4.write || (e4.write = { draft: "", saved: false, self: {}, ai: null, aiBusy: false, aiErr: "" });
+    if (!wr.saved) {
+      app.innerHTML = skillHead(l.title + " — Viết", "Viết 30–50 " + cfg.countLabel + " bằng " + cfg.langName) + e4PhaseChips(3)
+        + '<div class="qblock"><p><b>Đề:</b> ' + esc(cfg.write.prompt) + '</p><textarea id="e4tWriteArea" rows="6" style="width:100%">' + esc(wr.draft) + '</textarea><p class="mut"><span id="e4tWriteCount">0 ' + cfg.countLabel + '</span> · Gợi ý 30–50 ' + cfg.countLabel + '.</p><div class="row"><button class="btn btn-primary" id="e4tWriteSave">Lưu bản nháp →</button></div></div>';
+      wireBack();
+      var ta = $("#e4tWriteArea");
+      var upd = function () { var c = $("#e4tWriteCount"); if (c) c.textContent = e4Count(cfg, ta.value) + " " + cfg.countLabel; };
+      ta.oninput = upd; upd();
+      $("#e4tWriteSave").onclick = function () { wr.draft = ta.value; if (!wr.draft.trim()) { toast("Hãy viết vài câu trước đã."); return; } wr.saved = true; render(); };
+      return;
+    }
+    var words = e4Count(cfg, wr.draft);
+    var tooShort = words < 10;
+    var crit = cfg.write.criteria;
+    var selfDone = !tooShort && crit.every(function (c) { return wr.self[c.key] != null; });
+    var selfAvg = null;
+    if (selfDone) { var ssum = 0; crit.forEach(function (c) { ssum += wr.self[c.key]; }); selfAvg = ssum / crit.length; }
+    var aiParsed = (wr.ai && wr.ai.parsed && wr.ai.parsed.full) ? wr.ai.parsed : null;
+    var aiLevel = aiParsed ? e4AiBandToLevel(aiParsed.overall) : null;
+    var html = skillHead(l.title + " — Viết", "Đối chiếu bài mẫu rồi tự đánh giá 4 tiêu chí") + e4PhaseChips(3)
+      + '<div class="qblock"><h3>Đối chiếu 2 cột — bản của bạn và bài mẫu</h3><div class="row"><div style="flex:1"><b>Bản của bạn (' + words + ' ' + cfg.countLabel + ')</b><p>' + esc(wr.draft) + '</p></div><div style="flex:1"><b>Bài mẫu</b><p>' + esc(cfg.write.model) + '</p></div></div></div>';
+    if (tooShort) {
+      html += '<div class="qblock"><p><b>Bài viết quá ngắn (' + words + ' ' + cfg.countLabel + ') nên chưa đủ để chấm.</b> Phần Viết sẽ ghi là "chưa đo được" và không tính vào trình độ chung.</p></div>';
+    } else {
+      html += '<div class="qblock"><h3>Tự đánh giá 4 tiêu chí</h3><p class="mut">Đọc bài mẫu rồi tự chấm từng tiêu chí — chọn mức ĐÚNG NHẤT với bài của bạn.</p>';
+      crit.forEach(function (c) {
+        html += '<p><b>' + esc(c.name) + '</b></p><div class="row">' + [5, 6, 7].map(function (lv) { return '<button class="btn' + (wr.self[c.key] === lv ? ' btn-primary' : '') + '" data-e4tcrit="' + c.key + ':' + lv + '">Mức ' + lv + ' — ' + esc(c.lv[lv]) + '</button>'; }).join("") + '</div>';
+      });
+      html += (selfAvg != null ? '<p><b>Tự đánh giá chung: Mức ' + esc(e4SkillLevel(cfg, e4WriteRatioFromAvg(selfAvg))) + ' (trung bình mức ' + selfAvg.toFixed(1).replace(".", ",") + ')</b></p>' : '') + '</div>';
+      if (typeof msIsVip === "function" && msIsVip()) {
+        html += '<div class="qblock"><h3>AI chấm 4 tiêu chí (VIP)</h3>'
+          + (wr.aiBusy ? '<p>Đang chấm...</p>' : '')
+          + (wr.aiErr ? '<p>' + esc(wr.aiErr) + '</p>' : '')
+          + (aiParsed ? aiParsed.criteria.map(function (cc) { return '<p><b>' + esc(cc.name) + ': Mức ' + e4AiBandToLevel(cc.band) + '</b> — ' + esc(cc.note) + '</p>'; }).join("") + '<p><b>AI chấm (VIP): Mức ' + esc(e4SkillLevel(cfg, e4WriteRatioFromAvg(aiLevel))) + '</b> <span class="mut">(máy ước lượng — sẽ dùng thay cho tự đánh giá)</span></p>' : '<p class="mut">Bấm để AI chấm bản nháp theo 4 tiêu chí — mức AI (nếu có) sẽ dùng thay cho tự đánh giá.</p>')
+          + '<div class="row"><button class="btn btn-primary" id="e4tWriteAi"' + (wr.aiBusy ? ' disabled' : '') + '>' + (wr.aiBusy ? 'Đang chấm...' : 'AI chấm 4 tiêu chí') + '</button></div></div>';
+      } else {
+        html += '<p class="mut">AI chấm chỉ mở cho VIP — bạn đang tự đánh giá theo bảng tiêu chí trên.</p>';
+      }
+    }
+    html += '<div class="qblock"><div class="row"><button class="btn" id="e4tWriteEdit">Sửa lại bản nháp</button><button class="btn btn-primary" id="e4tWriteDone"' + ((tooShort || selfDone || aiLevel) ? '' : ' disabled') + '>Xem kết quả →</button></div>' + ((tooShort || selfDone || aiLevel) ? '' : '<p class="mut">Hãy chấm đủ 4 tiêu chí ở trên để xem kết quả.</p>') + '</div>';
+    app.innerHTML = html; wireBack();
+    $$("[data-e4tcrit]").forEach(function (b) { b.onclick = function () { var p = b.dataset.e4tcrit.split(":"); wr.self[p[0]] = +p[1]; render(); }; });
+    $("#e4tWriteEdit").onclick = function () { wr.saved = false; render(); };
+    var ab = $("#e4tWriteAi");
+    if (ab) ab.onclick = function () {
+      wr.aiBusy = true; wr.aiErr = ""; render();
+      callAiTutorWriting(cfg.title, cfg.write.prompt, wr.draft, "Kiểm tra đầu vào").then(function (res) {
+        wr.ai = { parsed: parseAiDetailReply(res.reply, "writing") }; wr.aiBusy = false; render();
+      }, function (err) { wr.aiErr = (err && err.message) || String(err); wr.aiBusy = false; render(); });
+    };
+    $("#e4tWriteDone").onclick = function () {
+      if (tooShort) { wr.levelAvg = null; }
+      else if (aiLevel) { wr.levelAvg = aiLevel; }
+      else if (selfAvg != null) { wr.levelAvg = selfAvg; }
+      else { toast("Hãy chấm đủ 4 tiêu chí ở trên để xem kết quả."); return; }
+      e4.phase = 5; render();
+    };
+    return;
+  }
+  /* phase 5: ket qua — tinh 1 lan roi luu vao state (cung shape voi EN
+     entryFour: listen/read/speak/write + muc chung; o day muc chung la
+     chang xep + stageLabel, khong phai band). */
+  if (!e4.saved) {
+    var lb = e4SkillLevel(cfg, e4.listen.c / e4.listen.n);
+    var rdb = e4SkillLevel(cfg, e4.read.c / e4.read.n);
+    var spkRatio = null;
+    if (!e4.speak.skipped) {
+      var rs = e4.speak.res.filter(function (r) { return !!r; });
+      if (rs.length) { var ssum2 = 0; rs.forEach(function (r) { ssum2 += r.ratio; }); spkRatio = ssum2 / rs.length; }
+    }
+    var spkLevel = spkRatio == null ? null : e4SkillLevel(cfg, spkRatio);
+    var wrRatio = (e4.write && e4.write.levelAvg != null) ? e4WriteRatioFromAvg(e4.write.levelAvg) : null;
+    var wrLevel = wrRatio == null ? null : e4SkillLevel(cfg, wrRatio);
+    var ratios = [e4.listen.c / e4.listen.n, e4.read.c / e4.read.n];
+    if (spkRatio != null) ratios.push(spkRatio);
+    if (wrRatio != null) ratios.push(wrRatio);
+    var mean = 0; ratios.forEach(function (x) { mean += x; }); mean /= ratios.length;
+    var eqScore = Math.round(mean * cfg.eqTotal);
+    var stage = cfg.stageFor(eqScore, cfg.eqTotal);
+    var stageLabel = cfg.stageLabel(stage);
+    e4.result = {
+      listen: { c: e4.listen.c, n: e4.listen.n, level: lb },
+      read: { c: e4.read.c, n: e4.read.n, level: rdb },
+      speak: spkRatio == null ? null : { ratio: Math.round(spkRatio * 100) / 100, level: spkLevel },
+      write: wrLevel ? { level: wrLevel, levelAvg: e4.write.levelAvg, ai: !!(e4.write && e4.write.ai && e4.write.ai.parsed && e4.write.ai.parsed.full) } : null,
+      stage: stage, stageLabel: stageLabel, eqScore: eqScore, eqTotal: cfg.eqTotal
+    };
+    state[cfg.placedKey] = { stage: stage, score: eqScore, total: cfg.eqTotal, at: Date.now() };
+    state[cfg.stateKey] = { listen: e4.result.listen, read: e4.result.read, speak: e4.result.speak, write: e4.result.write, stage: stage, stageLabel: stageLabel, at: Date.now() };
+    var was = !!(state.skillDone && state.skillDone[cfg.skillKey]);
+    if (!state.skillDone) state.skillDone = {};
+    state.skillDone[cfg.skillKey] = true; if (!was) logStepDoneIfRb(cfg.skillKey);
+    awardXp(was ? 5 : 10); saveState(); logLessonMinutes(l);
+    l.placedTarget = cfg.placed(stage);
+    e4.saved = true;
+  }
+  var r = e4.result;
+  app.innerHTML = skillHead("Kết quả kiểm tra đầu vào 4 kỹ năng", "Mức ước lượng, chỉ để tham khảo — không phải điểm thi thật.") + e4PhaseChips(4)
+    + '<div class="qblock"><p><b>Nghe:</b> ' + r.listen.c + '/' + r.listen.n + ' câu đúng → ' + esc(r.listen.level) + ' (ước lượng)</p>'
+    + '<p><b>Đọc:</b> ' + r.read.c + '/' + r.read.n + ' câu đúng → ' + esc(r.read.level) + ' (ước lượng)</p>'
+    + '<p><b>Nói:</b> ' + (r.speak ? ('Máy nghe được ' + Math.round(r.speak.ratio * 100) + '% số từ/chữ → ' + esc(r.speak.level) + ' (ước lượng)') : 'chưa đo được (bạn đã bỏ qua phần Nói)') + '</p>'
+    + '<p><b>Viết:</b> ' + (r.write ? ((r.write.ai ? 'AI chấm (VIP): ' : 'Tự đánh giá: ') + esc(r.write.level)) : 'chưa đo được (bài quá ngắn)') + '</p></div>'
+    + '<div class="sumcard"><p><b>Trình độ chung (ước lượng): ' + esc(r.stageLabel) + ' — ' + esc(cfg.stageSentence(r.stage)) + '</b>' + cfg.cefrHTML(r.stage) + '</p>'
+    + '<p class="mut">' + esc(cfg.maxNote) + ' Từ giờ màn chính chỉ còn nút “Học tiếp” tới đúng bước đó.</p></div>'
+    + '<div class="qblock"><div class="row"><button class="btn" id="e4tRedo">Làm lại bài kiểm tra</button><button class="btn" id="e4tHome">Về màn chính</button></div></div>';
+  wireBack();
+  $("#e4tRedo").onclick = function () { l.e4t = null; l.placedTarget = null; render(); };
+  $("#e4tHome").onclick = function () { backFromLesson(); };
+}
+function renderZhEntryFour(app, l) { renderEntryFourTrack(app, l, E4_TRACK_CFG.zh); }
+function renderTcEntryFour(app, l) { renderEntryFourTrack(app, l, E4_TRACK_CFG.tc); }
+function renderTpEntryFour(app, l) { renderEntryFourTrack(app, l, E4_TRACK_CFG.tp); }
 function renderEntryCheck(app, l) {
   if (l.part === "zero") { l.title = "Kiểm tra trình độ đầu vào — Band 0"; l.skillKey = "entryZero"; renderQuizEngine(app, l, CONTENT.zeroTest, "skill", "entryZero"); }
   else { l.title = "Kiểm tra trình độ đầu vào — Band 5,0–7,5+"; l.skillKey = "entryTrial"; renderQuizEngine(app, l, CONTENT.trial, "skill", "entryTrial"); }
@@ -12454,8 +12888,11 @@ function renderLesson(app) {
   else if (l.type === "zhPron") renderZhPron(app, l);
   else if (l.type === "tpPron") renderTpPron(app, l);
   else if (l.type === "zhEntry") renderZhEntry(app, l);
+  else if (l.type === "zhEntryFour") renderZhEntryFour(app, l); /* v217 (1): kiem tra dau vao 4 ky nang ZH */
   else if (l.type === "tcEntry") renderTcEntry(app, l);
+  else if (l.type === "tcEntryFour") renderTcEntryFour(app, l); /* v217 (1): kiem tra dau vao 4 ky nang TC */
   else if (l.type === "tpEntry") renderTpEntry(app, l);
+  else if (l.type === "tpEntryFour") renderTpEntryFour(app, l); /* v217 (1): kiem tra dau vao 4 ky nang TP */
   else if (l.type === "zhHskk") renderZhHskk(app, l);
   else if (l.type === "tcSpeak") renderTcSpeakExam(app, l); /* v213 A2: thi noi rieng TOEIC */
   else if (l.type === "tpSpeak") renderTpSpeakExam(app, l); /* v213 A2: thi noi rieng TOPIK */
@@ -25806,7 +26243,7 @@ function viewHomeZh(app) {
   if (onbShouldShow("zh")) {
     html += onbHTML("zh");
   } else if (fresh) {
-    html += '<section class="card next-card" id="zhEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TIẾNG TRUNG</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi HSK thật. Bỏ qua thì học từ chặng 1.</p><div class="row"><button class="btn btn-primary" id="zhEntryStartBtn">Kiểm tra trình độ HSK</button><button class="btn" id="zhNextBtn">Bỏ qua, học từ chặng 1</button></div>' + planZhHTML + '</div></div></section>';
+    html += '<section class="card next-card" id="zhEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TIẾNG TRUNG</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi HSK thật. Bỏ qua thì học từ chặng 1.</p><div class="row"><button class="btn btn-primary" id="zhEntryStartBtn">Kiểm tra đầu vào 4 kỹ năng</button><button class="btn" id="zhEntryQuickBtn">Kiểm tra nhanh (chỉ trắc nghiệm)</button><button class="btn" id="zhNextBtn">Bỏ qua, học từ chặng 1</button></div>' + planZhHTML + '</div></div></section>';
   } else {
     html += '<section class="card next-card" id="zhNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TIẾNG TRUNG</p><h2>' + esc(tZh.title) + '</h2><p class="mut">' + esc(tZh.type) + '</p><button class="btn btn-primary" id="zhNextBtn">Học tiếp →</button>' + planZhHTML + '</div></div></section>';
   }
@@ -25822,7 +26259,7 @@ function viewHomeZh(app) {
   html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + onbSuggestHTML("zh") + homeWordsHTML("zh") + homeListenHTML("zh") + homeQuickHTML("zh") + msHomeHTML("zh") + '<section class="card" id="zhHomeHskkLink"><h3>Luyện HSKK — thi nói riêng</h3><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Luyện nghe–nhắc lại theo cấp — xem bản đầy đủ ở Thế giới cấp độ.</p><div class="row"><button class="btn" id="zhHomeHskkBtn">Xem luyện HSKK ở Thế giới cấp độ →</button></div></section>' + zhSystemEHTML() + '</details>';
   html += '<details class="card" id="homeMore"><summary><b>' + (fresh ? 'Xem thêm: bản đồ, đăng nhập' : 'Xem thêm: kiểm tra đầu vào, bản đồ, đăng nhập') + '</b></summary>'
     + '<p><button class="btn" id="zhHomeFullMapBtn">Xem toàn bộ bản đồ 6 chặng →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>'
-    + '<p>' + (fresh ? '' : '<button class="dimlink" id="zhEntryRedoLink">Làm lại kiểm tra đầu vào HSK</button> · ') + '<button class="dimlink" id="zhToRoadmap">Xem bản đồ tiếng Trung →</button> · <button class="dimlink" id="zhLoginLink">Đăng nhập</button></p>'
+    + '<p>' + (fresh ? '' : '<button class="dimlink" id="zhEntryRedoLink">Làm lại kiểm tra đầu vào HSK</button> · <button class="dimlink" id="zhEntryQuickLink">Kiểm tra nhanh (chỉ trắc nghiệm)</button> · ') + '<button class="dimlink" id="zhToRoadmap">Xem bản đồ tiếng Trung →</button> · <button class="dimlink" id="zhLoginLink">Đăng nhập</button></p>'
     + '<p>❄️ Đóng băng chuỗi: còn <b>' + (function () { normFreeze(state); return state.freeze.count; })() + ' lượt</b> (tối đa 3, miễn phí). Lỡ ngày mà còn lượt thì chuỗi tự giữ.</p>'
     + '</details></div></div>';
   app.innerHTML = html;
@@ -25835,8 +26272,10 @@ function viewHomeZh(app) {
     if (tZh && tZh.title && tZh.title.indexOf("Ôn lại") === 0) { go("review"); return; } /* v182: nut Hoc tiep di qua Ban do */
     go("roadmap");
   };
-  var esb = $("#zhEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "zhEntry" }); };
-  var erl = $("#zhEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "zhEntry" }); };
+  var esb = $("#zhEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "zhEntryFour" }); };
+  var eqb = $("#zhEntryQuickBtn"); if (eqb) eqb.onclick = function () { openLesson({ type: "zhEntry" }); };
+  var erl = $("#zhEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "zhEntryFour" }); };
+  var eql = $("#zhEntryQuickLink"); if (eql) eql.onclick = function () { openLesson({ type: "zhEntry" }); };
   var hwl = $("#homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "zh"); }; /* v119b */
   var mg = $("#zhToRoadmap"); if (mg) mg.onclick = function () { go("roadmap"); };
   var wsBtn = $("#wsOpenBtn"); if (wsBtn) wsBtn.onclick = function () { openLesson({ type: "workspace" }); };
@@ -25955,13 +26394,14 @@ function viewPracticeZh(app) {
     html += '<section class="card" id="zhGameCardPractice"><h3>🎬 Video hoạt hình track Trung — xem cho vui</h3><p class="mut">Đang tải video…</p></section>';
   html += videoNewBlockHTML("zh");
   html += '<details><summary><b>HSKK — thi nói riêng</b></summary>' + zhHskkHTML() + '</details>';
-  html += '<p><button class="btn" id="zhPracticeEntryBtn">Làm lại kiểm tra đầu vào HSK</button></p>';
+  html += '<p><button class="btn" id="zhPracticeEntryBtn">Làm lại kiểm tra đầu vào HSK</button> <button class="btn" id="zhPracticeEntryQuickBtn">Kiểm tra nhanh (chỉ trắc nghiệm)</button></p>';
   app.innerHTML = html;
   practiceFilterWire();
   var pb = $("#zhPracticeNextBtn"); if (pb) pb.onclick = function () { zhOpenTarget(zhSessionTarget()); };
   listenHubWire();
   pronDiagWireEntry(app); pronWeakWire(app, "zh"); pronAreaWire(app); /* v119b + v123 */
-  var eb = $("#zhPracticeEntryBtn"); if (eb) eb.onclick = function () { openLesson({ type: "zhEntry" }); };
+  var eb = $("#zhPracticeEntryBtn"); if (eb) eb.onclick = function () { openLesson({ type: "zhEntryFour" }); };
+  var eqb2 = $("#zhPracticeEntryQuickBtn"); if (eqb2) eqb2.onclick = function () { openLesson({ type: "zhEntry" }); };
   var fb = $("#zhFaceStartBtn"); if (fb) fb.onclick = function () { var sel = $("#zhFaceSet"); openLesson({ type: "zhFace", setKey: sel ? sel.value : "starter" }); };
   var ff = $("#zhFaceFilter"); if (ff) ff.oninput = function () {
     var q = normSearch(ff.value);
@@ -28373,6 +28813,82 @@ function renderZhMock(app, l) {
 /* DOT 18 HSKK (31/10/2026): luyen theo dung phan cua de chinh thuc, giu nguyen hanh vi cu:
    nut "Muc tiep theo" van khoa cho toi khi hoc vien bam Nghe cua chinh muc nay (C6b);
    done key hskk:elem/inter/adv khong doi; bai luyen chua cham diem. */
+/* v217 (2): DONG HO THI NOI theo giay cho TC/TP/HSKK (dung chung ca 3 bai).
+   Khac examTimer (tinh theo phut + Date.now): dem lui theo so tick 1 giay
+   nen probe duoc bang fake timer; het gio goi onTimeout. Khoa key chong
+   khoi dong lai khi render() ve lai cung muc/cung pha. Dong ho duoc don
+   sach o openLesson/backFromLesson/go (cung cho voi examTimer).
+   Pha: phases = [{id, label, secs}] — secs=null la pha THU CONG (khong dem
+   nguoc, bam nut de sang pha sau; chi dung khi de that khong cong bo thoi
+   gian rieng tung cau o phan nay — ghi ro "can doi chieu giao trinh"). */
+function speakClockText(s) { s = Math.max(0, Math.floor(s)); var m = Math.floor(s / 60), r = s % 60; return (m > 0 ? m + " phút " : "") + r + " giây"; }
+function makeSpeakTimer() {
+  var t = null;
+  return {
+    start: function (key, seconds, onTimeout, elId) {
+      if (t && t.key === key) return;
+      if (t && t.intId) clearInterval(t.intId);
+      t = { key: key, left: seconds, onTimeout: onTimeout, elId: elId || "speakClock" };
+      var tick = function () {
+        if (!t) return;
+        t.left--;
+        var el = document.getElementById(t.elId);
+        if (t.left <= 0) { if (el) el.textContent = "Hết giờ!"; var cb = t.onTimeout; if (t.intId) clearInterval(t.intId); t = null; if (cb) cb(); return; }
+        if (el) el.textContent = speakClockText(t.left);
+      };
+      t.intId = setInterval(tick, 1000);
+      var el0 = document.getElementById(t.elId);
+      if (el0) el0.textContent = speakClockText(t.left);
+    },
+    stop: function () { if (t && t.intId) clearInterval(t.intId); t = null; },
+    running: function () { return !!t; },
+    key: function () { return t ? t.key : ""; }
+  };
+}
+var speakTimer = makeSpeakTimer();
+function speakTimerStop() { speakTimer.stop(); }
+/* May pha thi noi dung chung: l.speakKey reset khi doi muc; l.speakPhase la
+   chi so pha hien tai; l.speakDone=true thi mo nut Tiep theo.
+   l.speakInst: id rieng cua tung object lesson — cung muc mo lai bang object
+   moi thi key timer doi theo, timer cu khong chiem key nua. */
+var speakInstSeq = 0;
+function speakPhaseInit(l, baseKey, phases) {
+  if (!l.speakInst) l.speakInst = "sp" + (++speakInstSeq);
+  var key = baseKey + ":" + l.speakInst;
+  if (l.speakKey !== key) { l.speakKey = key; l.speakPhase = 0; l.speakDone = false; l.speakMicKey = ""; }
+  if (l.speakPhase == null) l.speakPhase = 0;
+  return phases[Math.min(l.speakPhase, phases.length - 1)];
+}
+function speakPhaseAdvance(l, phases) {
+  speakTimerStop();
+  if ((l.speakPhase || 0) + 1 >= phases.length) { l.speakDone = true; }
+  else { l.speakPhase = (l.speakPhase || 0) + 1; }
+  render();
+}
+function speakPhaseStartTimer(l, key, phases) {
+  if (l.speakDone) return;
+  var ph = phases[Math.min(l.speakPhase || 0, phases.length - 1)];
+  if (!ph || ph.secs == null) return;
+  speakTimer.start(key + ":" + (l.speakPhase || 0), ph.secs, function () { speakPhaseAdvance(l, phases); }, "speakClock");
+}
+/* Tong ket trung thuc dung chung: chi dem phan may nghe ra dung o muc doc to
+   (tang 1 SR), muc tra loi mo ghi ro may khong cham duoc; KHONG tinh diem
+   thang thi that (0-200 / 0-100), chi ghi thang de tham khao. */
+function speakSummaryCounts(l, storeKey, micFlags) {
+  var recs = l[storeKey] || {}, ok = 0, tried = 0;
+  micFlags.forEach(function (isMic, i) { if (!isMic) return; var r = recs[i]; if (r && r.tried) { tried++; if (r.ok) ok++; } });
+  return { micTotal: micFlags.filter(Boolean).length, ok: ok, tried: tried };
+}
+function speakSummaryHTML(l, storeKey, micFlags, openCount, openLabel, scaleNote) {
+  var c = speakSummaryCounts(l, storeKey, micFlags);
+  var pct = c.micTotal ? Math.round(c.ok / c.micTotal * 100) : 0;
+  var h = '<p><b>Đọc to bài mẫu:</b> máy nghe ra đúng <b>' + c.ok + '/' + c.micTotal + ' mục (' + pct + '%)</b>' + (c.tried < c.micTotal ? ' — trong đó ' + (c.micTotal - c.tried) + ' mục chưa thử mic' : '') + '.</p>'
+    + '<p class="mut">Chỉ tính phần đọc to mẫu — máy chỉ kiểm tra có nghe ra không, chưa phải điểm từng âm, chưa có AI chấm sâu.</p>';
+  if (openCount > 0) h += '<p><b>' + esc(openLabel) + ' (' + openCount + ' mục):</b> câu trả lời mở — máy không chấm được, tự đối chiếu bài mẫu.</p>';
+  h += '<p class="mut">' + esc(scaleNote) + '</p>'
+    + '<p class="mut">Web KHÔNG tính ra điểm thang thi thật — kết quả trên chỉ đếm số mục máy nghe ra, chỉ để tham khảo, không phải điểm thi.</p>';
+  return h;
+}
 function zhHskkItems(lv) {
   if (lv === "inter") return [
     { part: "Phần 1 · Nghe nhắc lại", items: ZH_HSKK_INTER },
@@ -28396,20 +28912,80 @@ function zhHskkFlat(lv) {
   zhHskkItems(lv).forEach(function (sec) { sec.items.forEach(function (it) { out.push({ part: sec.part, adapt: !!sec.adapt, official: sec.official !== false, it: it }); }); });
   return out;
 }
+/* v217 (2): thoi gian tung phan theo de cuong chinh thuc (chinesetest.cn,
+   ban doi chieu cua coordinator 18/11). Tong: So cap ~17 phut, Trung cap
+   ~21 phut, Cao cap ~24 phut. So cap: P1 4 phut/15 cau, P2 3 phut/10 cau,
+   P3 3 phut/2 cau (+ 7 phut chuan bi chung cho ca phan); Trung cap P2:
+   4 phut/2 tranh (khong tach rieng tung tranh — cac nguon venh nhau);
+   Cao cap P2 chuan bi 2 phut, P3 chuan bi 2 phut/cau + noi 3 phut/cau. */
+function zhHskkPartTimes(lv) {
+  if (lv === "inter") return { total: "21 phút", byPart: { 1: "Phần 1 · Nghe nhắc lại: 10 câu", 2: "Phần 2 · Mô tả tình huống: 4 phút (2 tranh) — thời gian từng tranh: cần đối chiếu giáo trình", 3: "Phần 3 · Trả lời câu hỏi: chuẩn bị 30 giây/câu, nói khoảng 2 phút/câu (cần đối chiếu giáo trình)" } };
+  if (lv === "adv") return { total: "24 phút", byPart: { 1: "Phần 1 · Nghe đoạn văn rồi nhắc lại/tóm tắt: 3 đoạn văn", 2: "Phần 2 · Đọc to đoạn văn: chuẩn bị 2 phút", 3: "Phần 3 · Trả lời câu hỏi: chuẩn bị 2 phút/câu, nói 3 phút/câu" } };
+  return { total: "17 phút", byPart: { 1: "Phần 1 · Nghe nhắc lại: 4 phút (15 câu)", 2: "Phần 2 · Nghe trả lời: 3 phút (10 câu)", 3: "Phần 3 · Trả lời câu hỏi: 3 phút (2 câu) + 7 phút chuẩn bị chung cho cả phần — thời gian chuẩn bị từng câu: cần đối chiếu giáo trình (bản luyện dùng 10 giây/câu theo bản đối chiếu)" } };
+}
+/* Pha tung muc HSKK (xem ghi chu o zhHskkPartTimes). secs=null: pha thu cong.
+   Noi 10 giay (So cap P1/P2, luyen them Cao cap): theo tai khoan thi that
+   "~10 seconds" + tong thoi gian phan theo de cuong (P1 4 phut/15 cau,
+   P2 3 phut/10 cau). Noi 15 giay (Trung cap P1): suy tu tong thoi gian phan
+   5 phut/10 cau — can doi chieu giao trinh. Noi 90 giay (So cap P3): de
+   cuong ghi P3 3 phut/2 cau. Noi 120 giay (Trung cap P3): khoang 2 phut/cau
+   theo cac nguon tham khao — can doi chieu giao trinh. */
+function zhHskkPhases(lv, entry) {
+  var part = entry.part || "";
+  var isP1 = part.indexOf("Phần 1") === 0, isP2 = part.indexOf("Phần 2") === 0, isP3 = part.indexOf("Phần 3") === 0;
+  var listen = { id: "listen", label: "Nghe mẫu", secs: null };
+  var speak = function (secs) { return { id: "speak", label: "Nói", secs: secs }; };
+  if (!entry.official) return [listen, speak(10)];
+  if (lv === "elem") {
+    if (isP3) return [{ id: "prep", label: "Chuẩn bị", secs: 10 }, speak(90)];
+    return [listen, speak(10)];
+  }
+  if (lv === "inter") {
+    if (isP2) return [{ id: "prep", label: "Chuẩn bị", secs: null }, speak(null)];
+    if (isP3) return [{ id: "prep", label: "Chuẩn bị", secs: 30 }, speak(120)];
+    return [listen, speak(15)];
+  }
+  if (isP2) return [{ id: "prep", label: "Chuẩn bị", secs: 120 }, speak(null)];
+  if (isP3) return [{ id: "prep", label: "Chuẩn bị", secs: 120 }, speak(180)];
+  return [listen, speak(null)];
+}
+/* Mic tang 1 chi cham muc doc to/nhac lai mau (han). Cau tra loi mo
+   (question/describe) khong co mic — may khong cham duoc. */
+function zhHskkMicRef(entry) {
+  var it = entry.it || {};
+  if (it.kind === "question" || it.kind === "describe") return "";
+  return it.han || "";
+}
+function zhHskkPartNo(entry) {
+  var part = entry.part || "";
+  if (part.indexOf("Phần 1") === 0) return 1;
+  if (part.indexOf("Phần 2") === 0) return 2;
+  if (part.indexOf("Phần 3") === 0) return 3;
+  return 0;
+}
 function renderZhHskk(app, l) {
   var lv = l.hskkLevel || "elem";
   var meta = { elem: { name: "Sơ cấp", done: "hskk:elem" }, inter: { name: "Trung cấp", done: "hskk:inter" }, adv: { name: "Cao cấp", done: "hskk:adv" } }[lv] || { name: "Sơ cấp", done: "hskk:elem" };
+  var times = zhHskkPartTimes(lv);
   var flat = zhHskkFlat(lv);
   var i = l.i || 0;
   if (i >= flat.length) {
+    speakTimerStop();
     zhAwardOnce(meta.done);
     l.zhNext = true;
-    app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + finishSummaryHTML("Xong bài luyện HSKK " + meta.name + "!", '<p>Bạn đã luyện ' + flat.length + ' mục trong ' + elapsedText() + '.</p><p class="mut">Đọc to câu mẫu — máy chỉ kiểm tra có nghe ra không — chưa có AI chấm sâu 4 tiêu chí; chấm nói AI cho track Trung sẽ có ở đợt sau.</p>', "", { adaptive: false }) + zhNextStepHTML();
+    var micFlags = flat.map(function (e) { return !!zhHskkMicRef(e); });
+    var openN = flat.filter(function (e) { var k = (e.it || {}).kind; return k === "question" || k === "describe"; }).length;
+    var sum = speakSummaryHTML(l, "hskkT1", micFlags, openN, "Câu trả lời mở", "Thang điểm chính thức của HSKK là 0–100, đậu từ 60 điểm. Thời gian thi thật cấp " + meta.name + " khoảng " + times.total + ".");
+    app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + finishSummaryHTML("Xong bài luyện HSKK " + meta.name + "!", '<p>Bạn đã luyện ' + flat.length + ' mục trong ' + elapsedText() + '.</p>' + sum + '<p class="mut">HSK 3.0 (thi từ 13/12/2026): phần nói gộp vào bài thi chính từ cấp HSK 3 trở lên — chi tiết cần đối chiếu giáo trình.</p>', "", { adaptive: false }) + zhNextStepHTML();
     wireBack();
-    var rb = $("#btnRedo"); if (rb) rb.onclick = function () { l.i = 0; render(); };
+    var rb = $("#btnRedo"); if (rb) rb.onclick = function () { l.i = 0; l.hskkT1 = {}; render(); };
     return;
   }
   var entry = flat[i], it = entry.it;
+  var phases = zhHskkPhases(lv, entry);
+  var ph = speakPhaseInit(l, "hskk:" + lv + ":" + i, phases);
+  var key = l.speakKey;
+  var micRef = zhHskkMicRef(entry);
   var hskkHeard = !!(l.hskkHeard || {})[i];
   var body = "";
   if (it.sitVi) body += '<p><b>Tình huống:</b> ' + esc(it.sitVi) + '</p><p class="mut">Dạng chuyển thể: đề thật dùng tranh; ở đây tình huống được mô tả bằng chữ thay cho tranh.</p>';
@@ -28435,16 +29011,31 @@ function renderZhHskk(app, l) {
     else if (hskkT1r.err) hskkT1Html = '<p class="mut">' + esc(hskkT1r.err) + '</p>';
     else if (hskkT1r.tried) hskkT1Html = '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(hskkT1r.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
   }
+  var pno = zhHskkPartNo(entry);
+  var partTimeTxt = pno ? times.byPart[pno] : "Bài luyện thêm · Nghe nhắc lại câu (không phải format Phần 1 Cao cấp)";
+  var clockTxt = ph.secs == null ? "Pha này không đếm giờ — bấm nút dưới khi xong." : speakClockText(ph.secs);
+  var lastPhase = (l.speakPhase || 0) >= phases.length - 1;
+  var phaseBtnLabel = ph.secs == null ? (lastPhase ? "Đã nói xong →" : "Bắt đầu nói →") : "⏭ Sang pha sau ngay";
   /* v144 S7: muc Cao cap danh dau ro "Câu chính thức" (muc 1-6, dung de chinh thuc 3+1+2) hay "Luyện thêm" (muc 7-16); So/Trung toan bo la cau chinh thuc nen khong danh dau them. */
-  app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + '<div class="qblock"><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp.</p><p class="mut">' + esc(entry.part) + ' · Mục ' + (i + 1) + '/' + flat.length + (lv === "adv" ? (entry.official ? ' · Câu chính thức' : ' · Luyện thêm') : '') + '.</p>'
+  app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + '<div class="qblock"><p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Cấp ' + meta.name + ': thi thật khoảng ' + times.total + '.</p><p class="mut">' + esc(entry.part) + ' · Mục ' + (i + 1) + '/' + flat.length + (lv === "adv" ? (entry.official ? ' · Câu chính thức' : ' · Luyện thêm') : '') + '.</p>'
+    + '<p class="mut">' + esc(partTimeTxt) + '</p>'
+    + '<div class="qblock"><b>⏱ ' + esc(ph.label) + ': <span id="speakClock">' + esc(clockTxt) + '</span></b> <button class="btn" id="speakPhaseNext">' + phaseBtnLabel + '</button></div>'
     + body
-    + '<p class="mut">Đọc to câu mẫu — máy chỉ kiểm tra có nghe ra không — câu trả lời mở thì máy không chấm được, chỉ chấm phần đọc to mẫu.</p>'
-    + '<div class="row"><button class="btn" id="zhHskkListen">🔊 Nghe</button><button class="btn" id="zhHskkRec">🎤 Đọc to câu mẫu</button><button class="btn btn-primary" id="zhHskkNext"' + (hskkHeard ? '' : ' disabled') + '>Mục tiếp theo →</button></div>'
+    + '<p class="mut">' + (micRef ? 'Đọc to câu mẫu — máy chỉ kiểm tra có nghe ra không.' : 'Câu trả lời mở — máy không chấm được, tự đối chiếu bài mẫu.') + '</p>'
+    + '<div class="row"><button class="btn" id="zhHskkListen">🔊 Nghe</button>' + (micRef ? '<button class="btn" id="zhHskkRec">🎤 Đọc to câu mẫu</button>' : '') + '<button class="btn btn-primary" id="zhHskkNext"' + (l.speakDone ? '' : ' disabled') + '>Mục tiếp theo →</button></div>'
     + '<div id="zhHskkT1">' + hskkT1Html + '</div></div>';
   wireBack();
-  $("#zhHskkListen").onclick = function () { zhSpeak(speakText); if (!l.hskkHeard) l.hskkHeard = {}; l.hskkHeard[i] = true; var nx = $("#zhHskkNext"); if (nx) nx.disabled = false; };
-  var hskkRec = $("#zhHskkRec"); if (hskkRec) hskkRec.onclick = function () { var ref = it.han || ""; if (!ref) return; pronTier1Start("zh", function (heard) { var sc = pronTier1Score(heard, ref, "zh"); if (!l.hskkT1) l.hskkT1 = {}; l.hskkT1[i] = { tried: true, ok: sc === 100, heard: heard, err: "" }; render(); }, function (kind) { if (!l.hskkT1) l.hskkT1 = {}; l.hskkT1[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; render(); }); };
-  $("#zhHskkNext").onclick = function () { l.i = i + 1; render(); };
+  speakPhaseStartTimer(l, key, phases);
+  $("#zhHskkListen").onclick = function () { zhSpeak(speakText); if (!l.hskkHeard) l.hskkHeard = {}; l.hskkHeard[i] = true; };
+  var hskkRec = $("#zhHskkRec"); if (hskkRec) hskkRec.onclick = function () { var ref = micRef; if (!ref) return; pronTier1Start("zh", function (heard) { var sc = pronTier1Score(heard, ref, "zh"); if (!l.hskkT1) l.hskkT1 = {}; l.hskkT1[i] = { tried: true, ok: sc === 100, heard: heard, err: "" }; render(); }, function (kind) { if (!l.hskkT1) l.hskkT1 = {}; l.hskkT1[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; render(); }); };
+  $("#speakPhaseNext").onclick = function () { speakPhaseAdvance(l, phases); };
+  $("#zhHskkNext").onclick = function () { speakTimerStop(); l.i = i + 1; render(); };
+  /* v217 (2): pha Noi cua muc doc to thi chay mic tang 1 trong luc dem nguoc
+     (chi 1 lan/muc; khong co mic thi hien loi de bam lai bang tay). */
+  if (ph.id === "speak" && micRef && l.speakMicKey !== key) {
+    l.speakMicKey = key;
+    try { pronTier1Start("zh", function (heard) { var sc = pronTier1Score(heard, micRef, "zh"); if (!l.hskkT1) l.hskkT1 = {}; l.hskkT1[i] = { tried: true, ok: sc === 100, heard: heard, err: "" }; render(); }, function (kind) { if (!l.hskkT1) l.hskkT1 = {}; l.hskkT1[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; render(); }); } catch (e) {}
+  }
 }
 
 
@@ -28456,7 +29047,7 @@ function renderZhHskk(app, l) {
    xong goi tcMarkDone("speak") / tpMarkDone("speak") (+10 XP). */
 function tcSpeakHTML() {
   return '<section class="card" id="tcSpeakCard"><h3>🗣️ Luyện Nói TOEIC — thi nói riêng</h3>'
-    + '<p class="mut">TOEIC Speaking là bài thi nói riêng, thi trên máy, gồm 11 nhiệm vụ: đọc to 2, mô tả tranh 2, trả lời câu hỏi 3, trả lời theo thông tin cho sẵn 3, nêu ý kiến 1. Tranh thật được mô tả bằng chữ (dạng chuyển thể, như HSKK Trung cấp).</p>'
+    + '<p class="mut">TOEIC Speaking là bài thi nói riêng, thi trên máy trong khoảng 20 phút, gồm 11 nhiệm vụ: đọc to 2, mô tả tranh 2, trả lời câu hỏi 3, trả lời theo thông tin cho sẵn 3, nêu ý kiến 1. Thời gian từng phần: đọc to (chuẩn bị 45 giây, nói 45 giây); mô tả tranh (45 giây / 30 giây); trả lời câu hỏi (3 giây / 15–30 giây); trả lời theo thông tin cho sẵn (đọc thông tin chung 45 giây, chuẩn bị 3 giây/câu, nói 15–30 giây); nêu ý kiến (45 giây / 60 giây). Tranh thật được mô tả bằng chữ (dạng chuyển thể, như HSKK Trung cấp).</p>'
     + '<div class="row"><button class="btn" id="tcSpeakExamBtn">Luyện Nói TOEIC →</button></div>'
     + '<p class="mut">Nghe mẫu rồi đọc to từng câu — máy kiểm tra có nghe ra không. Không chấm điểm AI sâu.</p></section>';
 }
@@ -28473,15 +29064,68 @@ function tcTpSpeakExamItems(track) {
 }
 function tcTpSpeakExamNorm(track, it, i) {
   it = it || {};
-  var line = (it.lines && it.lines[0]) || {};
-  var ref = track === "tc" ? (it.en || line.en || it.sample || "") : (it.w || line.ko || it.sample || "");
-  var rom = track === "tc" ? "" : (it.rom || line.rom || "");
-  var vi = it.vi || line.vi || it.prompt || it.goal || it.setting || "";
   var title = it.title || ("Nhiệm vụ " + (i + 1));
   var kind = it.task || it.type || it.kind || "";
-  var prep = (it.prep != null) ? it.prep : ((it.prepSec != null) ? it.prepSec : ((it.prepS != null) ? it.prepS : null));
-  var speak = (it.speak != null) ? it.speak : ((it.speakSec != null) ? it.speakSec : ((it.speakS != null) ? it.speakS : null));
-  return { title: title, kind: kind, ref: ref, rom: rom, vi: vi, prep: prep, speak: speak };
+  var prep = (it.prep != null) ? it.prep : null;
+  var speak = (it.speak != null) ? it.speak : null;
+  if (track === "tc") {
+    var rk = it.kind || "";
+    return {
+      title: title, kind: kind, rk: rk, prep: prep, speak: speak, no: it.no || (i + 1),
+      infoEn: it.infoEn || "", infoVi: it.infoVi || "", infoSecs: it.infoSecs || null, twice: !!it.twice,
+      q: it.q || "", qvi: it.qvi || "",
+      sitEn: it.sitEn || "", sitVi: it.sitVi || "",
+      prompt: it.en || "", promptVi: it.vi || "",
+      topic: it.topic || "", guide: it.guide || "",
+      model: it.model || "", modelVi: it.modelVi || "",
+      listen: (rk === "describe") ? (it.sitEn || "") : (rk === "readaloud" ? (it.en || "") : (it.q || it.en || "")),
+      micRef: (rk === "describe") ? "" : (rk === "question" ? (it.model || "") : (it.en || ""))
+    };
+  }
+  return {
+    title: title, kind: kind, prep: prep, speak: speak, no: it.no || (i + 1),
+    sitKo: it.sitKo || "", sitRom: it.sitRom || "", sitVi: it.sitVi || "",
+    prompt: it.w || "", rom: it.rom || "", promptVi: it.vi || "",
+    ans: it.ans || "", ansRom: it.ansRom || "", ansVi: it.ansVi || "",
+    listen: ((it.sitKo || "") + " " + (it.w || "")).trim(),
+    micRef: it.ans || ""
+  };
+}
+/* v217 (2): pha thi noi TC/TP theo dung de that — TC Q8 doc thong tin chung
+   45 giay truoc (infoSecs), roi moi cau chuan bi 3 giay; Q10 cau hoi doc 2 lan
+   (ghi o body, khong phai pha rieng). */
+function tcTpSpeakPhases(track, n) {
+  var ph = [];
+  if (track === "tc" && n.infoSecs) ph.push({ id: "info", label: "Đọc thông tin", secs: n.infoSecs });
+  if (n.prep != null) ph.push({ id: "prep", label: "Chuẩn bị", secs: n.prep });
+  if (n.speak != null) ph.push({ id: "speak", label: "Nói", secs: n.speak });
+  return ph;
+}
+function tcTpSpeakBodyHTML(track, n, i) {
+  var h = "";
+  if (track === "tc") {
+    if (n.sitEn || n.sitVi) h += '<p><b>Tranh (dạng chuyển thể — mô tả bằng chữ):</b></p><p>' + esc(n.sitEn) + '</p><p class="mut">' + esc(n.sitVi) + '</p>';
+    if (n.infoEn || n.infoVi) {
+      h += '<p><b>Thông tin cho sẵn:</b></p><p>' + esc(n.infoEn) + '</p><p class="mut">' + esc(n.infoVi) + '</p>';
+      if (i !== 7) h += '<p class="mut">Thông tin chung này đã đọc ở Câu 8 (45 giây) — ở câu này chỉ còn chuẩn bị 3 giây rồi nói.</p>';
+    }
+    if (n.q) h += '<p><b>Câu hỏi:</b> ' + esc(n.q) + '</p><p class="mut">' + esc(n.qvi) + '</p>';
+    if (n.rk === "readaloud") h += '<p><b>Đọc to đoạn sau:</b></p><p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p>';
+    else if (n.rk === "describe") h += '<p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p><p class="mut">Mô tả mở — máy không chấm được, tự đối chiếu mô tả tranh trên.</p>';
+    else if (n.rk === "answer" || n.rk === "info") h += '<p>Câu trả lời mẫu (bạn có thể trả lời khác, miễn là đúng ý):</p><p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p>';
+    else if (n.rk === "question") {
+      if (n.topic) h += '<p><b>Chủ đề:</b> ' + esc(n.topic) + '</p>';
+      h += '<p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p>';
+      if (n.guide) h += '<p class="mut">' + esc(n.guide) + '</p>';
+      if (n.model) h += '<p>Bài mẫu (đọc to để luyện):</p><p><b>' + esc(n.model) + '</b></p><p class="mut">' + esc(n.modelVi) + '</p>';
+    }
+    if (n.twice) h += '<p class="mut">Trong đề thật, câu hỏi này được đọc 2 lần.</p>';
+  } else {
+    if (n.sitKo || n.sitVi) h += '<p><b>Tình huống (dạng chuyển thể — mô tả bằng chữ):</b></p>' + (n.sitKo ? '<p><b>' + esc(n.sitKo) + '</b></p><p class="mut">' + esc(n.sitRom) + '</p>' : '') + '<p class="mut">' + esc(n.sitVi) + '</p>';
+    h += '<p><b>' + esc(n.prompt) + '</b></p>' + (n.rom ? '<p class="mut">' + esc(n.rom) + '</p>' : '') + '<p class="mut">' + esc(n.promptVi) + '</p>';
+    if (n.ans) h += '<p>Câu trả lời mẫu (đọc to để luyện; bài nói thật là câu trả lời mở của bạn):</p><p><b>' + esc(n.ans) + '</b></p>' + (n.ansRom ? '<p class="mut">' + esc(n.ansRom) + '</p>' : '') + '<p class="mut">' + esc(n.ansVi) + '</p>';
+  }
+  return h;
 }
 function renderTcTpSpeakExam(app, l, track) {
   var items = tcTpSpeakExamItems(track);
@@ -28492,18 +29136,29 @@ function renderTcTpSpeakExam(app, l, track) {
   var speakFn = isTc ? speakAuto : tpSpeak;
   var i = l.i || 0;
   if (!items.length) {
+    speakTimerStop();
     app.innerHTML = lessonHead({ title: "Luyện Nói " + examName, type: examName + " · Nói" }) + '<div class="qblock"><p>Chưa có nhiệm vụ nói — chờ đợt bổ sung dữ liệu.</p></div>';
     wireBack(); return;
   }
   if (i >= items.length) {
+    speakTimerStop();
     try { if (!l.examDone) { l.examDone = true; markDone("speak"); } } catch (e) {}
-    app.innerHTML = lessonHead({ title: "Luyện Nói " + examName, type: examName + " · Nói" }) + '<div class="summarybox"><h2>Xong bài luyện Nói ' + examName + '!</h2><p>Bạn đã luyện ' + items.length + ' nhiệm vụ trong ' + elapsedText() + '.</p><p class="mut">Đọc to câu mẫu được chấm bằng mic (máy có nghe ra không) — chưa có AI chấm sâu 4 tiêu chí.</p><div class="row"><button class="btn btn-primary" id="speakExamBack">Về Luyện tập</button></div></div>';
+    var micFlags = items.map(function (raw, j) { return !!tcTpSpeakExamNorm(track, raw, j).micRef; });
+    /* v217 (2): TC chi 2 muc mo ta tranh la cau mo; TP ca 6 nhiem vu deu la
+       cau tra loi mo — mic chi cham phan doc to bai mau de luyen. */
+    var openN = isTc ? items.filter(function (raw, j) { return !tcTpSpeakExamNorm(track, raw, j).micRef; }).length : items.length;
+    var openLabel = isTc ? "Mô tả tranh" : "Bài nói thật";
+    var scale = isTc ? "Thang điểm chính thức của TOEIC Speaking là 0–200 (Q1–10 chấm 0–3, Q11 chấm 0–5, tổng thô tối đa 35). Thời gian thi thật khoảng 20 phút." : "Thang điểm chính thức của TOPIK Speaking là 0–200, cấp 1–6 (L1 20–49, L2 50–89, L3 90–109, L4 110–129, L5 130–159, L6 160–200). Thời gian thi thật 30 phút.";
+    var sum = speakSummaryHTML(l, "examT1", micFlags, openN, openLabel, scale);
+    app.innerHTML = lessonHead({ title: "Luyện Nói " + examName, type: examName + " · Nói" }) + '<div class="summarybox"><h2>Xong bài luyện Nói ' + examName + '!</h2><p>Bạn đã luyện ' + items.length + ' nhiệm vụ trong ' + elapsedText() + '.</p>' + sum + '<div class="row"><button class="btn btn-primary" id="speakExamBack">Về Luyện tập</button></div></div>';
     wireBack();
     var bb = document.getElementById("speakExamBack"); if (bb) bb.onclick = function () { backFromLesson(); };
     return;
   }
   var it = tcTpSpeakExamNorm(track, items[i], i);
-  var heard = !!(l.examHeard || {})[i];
+  var phases = tcTpSpeakPhases(track, it);
+  var ph = speakPhaseInit(l, "speak:" + track + ":" + i, phases);
+  var key = l.speakKey;
   var r = (l.examT1 || {})[i] || null;
   var rHtml = "";
   if (r) {
@@ -28511,22 +29166,31 @@ function renderTcTpSpeakExam(app, l, track) {
     else if (r.err) rHtml = '<p class="mut">' + esc(r.err) + '</p>';
     else if (r.tried) rHtml = '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(r.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
   }
-  var timeTxt = (it.prep != null || it.speak != null) ? '<p class="mut">Chuẩn bị ' + (it.prep != null ? it.prep + ' giây' : '—') + ' · Nói ' + (it.speak != null ? it.speak + ' giây' : '—') + '.</p>' : '';
+  var clockTxt = ph.secs == null ? "Pha này không đếm giờ." : speakClockText(ph.secs);
+  var lastPhase = (l.speakPhase || 0) >= phases.length - 1;
+  var phaseBtnLabel = ph.secs == null ? (lastPhase ? "Đã nói xong →" : "Bắt đầu nói →") : "⏭ Sang pha sau ngay";
+  var totalTxt = isTc ? "Thi thật khoảng 20 phút, 11 nhiệm vụ." : "Thi thật 30 phút, 6 nhiệm vụ.";
   app.innerHTML = lessonHead({ title: "Luyện Nói " + examName, type: examName + " · Nói" }) + '<div class="qblock">'
-    + '<p class="mut">' + esc(it.kind ? it.kind + ' · ' : '') + 'Nhiệm vụ ' + (i + 1) + '/' + items.length + '.</p>'
+    + '<p class="mut">' + esc(it.kind ? it.kind + ' · ' : '') + 'Nhiệm vụ ' + (i + 1) + '/' + items.length + ' · ' + totalTxt + '</p>'
     + '<h2>' + esc(it.title) + '</h2>'
-    + (it.vi ? '<p>' + esc(it.vi) + '</p>' : '')
-    + timeTxt
-    + (it.ref ? '<p><b>' + esc(it.ref) + '</b></p>' : '')
-    + (it.rom ? '<p class="mut">' + esc(it.rom) + '</p>' : '')
-    + '<p class="mut">Nghe mẫu rồi đọc to câu mẫu thành tiếng — máy kiểm tra có nghe ra không.</p>'
-    + '<div class="row"><button class="btn" id="speakExamListen">🔊 Nghe mẫu</button><button class="btn" id="speakExamRec">🎤 Đọc to câu mẫu</button><button class="btn btn-primary" id="speakExamNext"' + (heard ? '' : ' disabled') + '>Nhiệm vụ tiếp theo →</button></div>'
+    + '<div class="qblock"><b>⏱ ' + esc(ph.label) + ': <span id="speakClock">' + esc(clockTxt) + '</span></b> <button class="btn" id="speakPhaseNext">' + phaseBtnLabel + '</button></div>'
+    + tcTpSpeakBodyHTML(track, it, i)
+    + '<p class="mut">' + (it.micRef ? 'Nghe mẫu rồi đọc to câu mẫu thành tiếng trong lúc đồng hồ chạy — máy kiểm tra có nghe ra không.' : 'Nghe mẫu rồi tự nói thành tiếng trong lúc đồng hồ chạy — câu trả lời mở, máy không chấm được.') + '</p>'
+    + '<div class="row"><button class="btn" id="speakExamListen">🔊 Nghe mẫu</button>' + (it.micRef ? '<button class="btn" id="speakExamRec">🎤 Đọc to câu mẫu</button>' : '') + '<button class="btn btn-primary" id="speakExamNext"' + (l.speakDone ? '' : ' disabled') + '>Nhiệm vụ tiếp theo →</button></div>'
     + '<div id="speakExamT1">' + rHtml + '</div></div>';
   wireBack();
-  document.getElementById("speakExamListen").onclick = function () { try { speakFn(it.ref); } catch (e) {} if (!l.examHeard) l.examHeard = {}; l.examHeard[i] = true; var nx = document.getElementById("speakExamNext"); if (nx) nx.disabled = false; };
+  speakPhaseStartTimer(l, key, phases);
+  document.getElementById("speakExamListen").onclick = function () { try { speakFn(it.listen || it.micRef || it.prompt); } catch (e) {} if (!l.examHeard) l.examHeard = {}; l.examHeard[i] = true; };
   var rec = document.getElementById("speakExamRec");
-  if (rec) rec.onclick = function () { if (!it.ref) return; pronTier1Start(srTrack, function (heardTx) { var sc = pronTier1Score(heardTx, it.ref, srTrack); if (!l.examT1) l.examT1 = {}; l.examT1[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" }; render(); }, function (kind) { if (!l.examT1) l.examT1 = {}; l.examT1[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; render(); }); };
-  document.getElementById("speakExamNext").onclick = function () { l.i = i + 1; render(); };
+  if (rec) rec.onclick = function () { if (!it.micRef) return; pronTier1Start(srTrack, function (heardTx) { var sc = pronTier1Score(heardTx, it.micRef, srTrack); if (!l.examT1) l.examT1 = {}; l.examT1[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" }; render(); }, function (kind) { if (!l.examT1) l.examT1 = {}; l.examT1[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; render(); }); };
+  document.getElementById("speakPhaseNext").onclick = function () { speakPhaseAdvance(l, phases); };
+  document.getElementById("speakExamNext").onclick = function () { speakTimerStop(); l.i = i + 1; render(); };
+  /* v217 (2): pha Noi cua muc doc to thi chay mic tang 1 trong luc dem nguoc
+     (chi 1 lan/muc; khong co mic thi hien loi de bam lai bang tay). */
+  if (ph.id === "speak" && it.micRef && l.speakMicKey !== key) {
+    l.speakMicKey = key;
+    try { pronTier1Start(srTrack, function (heardTx) { var sc = pronTier1Score(heardTx, it.micRef, srTrack); if (!l.examT1) l.examT1 = {}; l.examT1[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" }; render(); }, function (kind) { if (!l.examT1) l.examT1 = {}; l.examT1[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; render(); }); } catch (e) {}
+  }
 }
 function renderTcSpeakExam(app, l) { renderTcTpSpeakExam(app, l, "tc"); }
 function renderTpSpeakExam(app, l) { renderTcTpSpeakExam(app, l, "tp"); }
@@ -29609,7 +30273,7 @@ function viewHomeTc(app) {
   if (onbShouldShow("tc")) {
     html += onbHTML("tc");
   } else if (fresh) {
-    html += '<section class="card next-card" id="tcEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOEIC</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOEIC thật. Bỏ qua thì học từ Chặng 450.</p><div class="row"><button class="btn btn-primary" id="tcEntryStartBtn">Kiểm tra trình độ TOEIC</button><button class="btn" id="tcNextBtn">Bỏ qua, học từ Chặng 450</button></div>' + planTcHTML + '</div></div></section>';
+    html += '<section class="card next-card" id="tcEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOEIC</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOEIC thật. Bỏ qua thì học từ Chặng 450.</p><div class="row"><button class="btn btn-primary" id="tcEntryStartBtn">Kiểm tra đầu vào 4 kỹ năng</button><button class="btn" id="tcEntryQuickBtn">Kiểm tra nhanh (chỉ trắc nghiệm)</button><button class="btn" id="tcNextBtn">Bỏ qua, học từ Chặng 450</button></div>' + planTcHTML + '</div></div></section>';
   } else if (n) {
     html += '<section class="card next-card" id="tcNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TOEIC</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOEIC Nghe–Đọc, từ 450 tới 900+.</p><button class="btn btn-primary" id="tcNextBtn">Học tiếp →</button>' + planTcHTML + '</div></div></section>';
   } else {
@@ -29621,7 +30285,7 @@ function viewHomeTc(app) {
   html += pronDiagInviteHTML("tc"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
   html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + onbSuggestHTML("tc") + homeWordsHTML("tc") + homeListenHTML("tc") + homeQuickHTML("tc") + msHomeHTML("tc") + tcSpeakHTML() + '<details class="card"><summary><b>TOEIC Nghe–Đọc là gì?</b></summary><p class="mut">Bài thi TOEIC Nghe–Đọc thi thật gồm 200 câu trong 2 giờ: Nghe 100 câu (Part 1–4) và Đọc 100 câu (Part 5–7), thang điểm 10–990. Track này luyện đúng các dạng đó bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật — hãy nghe kỹ script và tập trung vào từ khóa.</p></details></details>';
-  html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tcEntryRedoLink">Làm lại kiểm tra đầu vào TOEIC</button></p>') + '</details></div></div>';
+  html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tcHomeMapBtn">Xem toàn bộ bản đồ TOEIC →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tcEntryRedoLink">Làm lại kiểm tra đầu vào TOEIC</button> · <button class="dimlink" id="tcEntryQuickLink">Kiểm tra nhanh (chỉ trắc nghiệm)</button></p>') + '</details></div></div>';
   app.innerHTML = html;
   pronDiagInviteWire(app); /* v166 F1 */
   DaySum_wire(app); /* v215 (5b) */
@@ -29631,8 +30295,10 @@ function viewHomeTc(app) {
     if (fresh) { state.tcEntrySkipped = true; saveState(); tcOpenStep(TC_STAGES[0].steps[0], "home"); return; }
     go("roadmap"); /* v182: nut Hoc tiep di qua Ban do */
   };
-  var esb = document.getElementById("tcEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "tcEntry" }); };
-  var erl = document.getElementById("tcEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "tcEntry" }); };
+  var esb = document.getElementById("tcEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "tcEntryFour" }); };
+  var eqb = document.getElementById("tcEntryQuickBtn"); if (eqb) eqb.onclick = function () { openLesson({ type: "tcEntry" }); };
+  var erl = document.getElementById("tcEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "tcEntryFour" }); };
+  var eql = document.getElementById("tcEntryQuickLink"); if (eql) eql.onclick = function () { openLesson({ type: "tcEntry" }); };
   var hwl = document.getElementById("homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "tc"); }; /* v119b */
   var mg = document.getElementById("tcHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
   var wsBtnTc = $("#wsOpenBtn"); if (wsBtnTc) wsBtnTc.onclick = function () { openLesson({ type: "workspace" }); };
@@ -29829,7 +30495,7 @@ function viewPracticeTc(app) {
   /* DOT V32 PLATFORMER 01/11: the giai tri TC — chi 1 game Di canh nhat sao (canvas that); 3 game cu con code nhung khong con nut vao tu the. */
     html += '<section class="card" id="tcGameCardPractice"><h3>🎬 Video hoạt hình — xem cho vui</h3><p class="mut">Đang tải video…</p></section>';
   html += videoNewBlockHTML("tc");
-  html += '<p><button class="btn" id="tcPracticeEntryBtn">Làm lại kiểm tra đầu vào TOEIC</button></p>';
+  html += '<p><button class="btn" id="tcPracticeEntryBtn">Làm lại kiểm tra đầu vào TOEIC</button> <button class="btn" id="tcPracticeEntryQuickBtn">Kiểm tra nhanh (chỉ trắc nghiệm)</button></p>';
   app.innerHTML = html;
   /* v117 P1: gom Luyen tap TC thanh 6 nhom G1-G6 (Bui lenh 19:01 08/11).
      Chi gom lai, khong xoa noi dung. Luat 1-mo; G5 luon dong khi moi vao.
@@ -29926,7 +30592,8 @@ function viewPracticeTc(app) {
   wireVocabSearch("tcVocabSearch", "tcVocabGroups");
   wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   pronDiagWireEntry(app); pronWeakWire(app, "tc"); pronAreaWire(app); /* v119b + v123 */
-  var ebTc = document.getElementById("tcPracticeEntryBtn"); if (ebTc) ebTc.onclick = function () { openLesson({ type: "tcEntry" }); };
+  var ebTc = document.getElementById("tcPracticeEntryBtn"); if (ebTc) ebTc.onclick = function () { openLesson({ type: "tcEntryFour" }); };
+  var eqbTc = document.getElementById("tcPracticeEntryQuickBtn"); if (eqbTc) eqbTc.onclick = function () { openLesson({ type: "tcEntry" }); };
   (function () { var jobs = [{ id: "tcGameCardPractice", html: tcPracticeEntHTML, wire: tcPracticeEntWire }]; if (videoNewEntHTML["tc"]) jobs.push({ id: "videoNewEnttc", html: function () { return videoNewEntHTML["tc"]; }, wire: null }); practiceEntLazy("tc", jobs); })();
 }
 /* ---------- v103 P1.6 — BUOI ON TRON TC/TP (giong buoi on tron EN/ZH) ----------
@@ -30852,7 +31519,7 @@ function viewHomeTp(app) {
   if (onbShouldShow("tp")) {
     html += onbHTML("tp");
   } else if (fresh) {
-    html += '<section class="card next-card" id="tpEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOPIK</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOPIK thật. Bỏ qua thì học từ bảng chữ Hangul.</p><div class="row"><button class="btn btn-primary" id="tpEntryStartBtn">Kiểm tra trình độ TOPIK</button><button class="btn" id="tpNextBtn">Bỏ qua, học từ Hangul</button></div>' + planTpHTML + '</div></div></section>';
+    html += '<section class="card next-card" id="tpEntryWelcome"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">CHÀO BẠN MỚI · TOPIK</p><h2>Bạn muốn bắt đầu từ đâu?</h2><p class="mut">Làm kiểm tra xếp chặng nội bộ của web để xếp đúng chặng (khuyên dùng) — đây không phải đề thi TOPIK thật. Bỏ qua thì học từ bảng chữ Hangul.</p><div class="row"><button class="btn btn-primary" id="tpEntryStartBtn">Kiểm tra đầu vào 4 kỹ năng</button><button class="btn" id="tpEntryQuickBtn">Kiểm tra nhanh (chỉ trắc nghiệm)</button><button class="btn" id="tpNextBtn">Bỏ qua, học từ Hangul</button></div>' + planTpHTML + '</div></div></section>';
   } else if (n) {
     html += '<section class="card next-card" id="tpNextCard"><div class="hero-pair">' + mascPairHTML(false) + '<div class="hero-text"><p class="eyebrow">▶ BUỔI HỌC HÔM NAY · TOPIK</p><h2>' + esc(n.meta.title) + '</h2><p class="mut">Lộ trình TOPIK: Hangul trước, rồi TOPIK I cấp 1–2, hướng lên TOPIK II.</p><button class="btn btn-primary" id="tpNextBtn">Học tiếp →</button>' + planTpHTML + '</div></div></section>';
   } else {
@@ -30864,7 +31531,7 @@ function viewHomeTp(app) {
   html += pronDiagInviteHTML("tp"); /* v166 F1: moi chan doan phat am sau khi xep chang */
   /* v92: cùng khung trang chủ kiểu v84 EN (xem ghi chú ở viewHomeZh). */
   html += '<details class="card" id="homeSuggestMore" open><summary><b>Gợi ý học hôm nay</b></summary>' + onbSuggestHTML("tp") + homeWordsHTML("tp") + homeListenHTML("tp") + homeQuickHTML("tp") + msHomeHTML("tp") + tpSpeakHTML() + '<details class="card"><summary><b>TOPIK là gì?</b></summary><p class="mut">TOPIK I thi thật (dạng giấy) gồm Nghe 30 + Đọc 40 = 70 câu trong 100 phút, cấp 1–2. TOPIK II gồm Nghe 50 + Viết 4 + Đọc 50 = 104 câu trong 180 phút, cấp 3–6 (Viết = 100/300 điểm). Track này bắt đầu từ bảng chữ Hangul (học theo thứ tự, không nhảy cóc), rồi luyện đúng các dạng TOPIK I bằng nội dung tự soạn, dạy bằng tiếng Việt, có giải thích từng câu. Phần Nghe dùng giọng đọc của trình duyệt, không phải giọng thi thật. Chặng cuối là nền tảng hướng lên TOPIK II, đã có phần Viết 51–54 (tự luyện, tự chấm theo bảng tiêu chí, chưa có máy chấm tự động).</p></details></details>';
-  html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tpEntryRedoLink">Làm lại kiểm tra đầu vào TOPIK</button></p>') + '</details></div></div>';
+  html += '<details class="card" id="homeMore"><summary><b>Xem thêm: ' + (fresh ? 'bản đồ' : 'kiểm tra đầu vào, bản đồ') + '</b></summary><p><button class="btn" id="tpHomeMapBtn">Xem toàn bộ bản đồ TOPIK →</button> <button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button></p>' + (fresh ? '' : '<p><button class="dimlink" id="tpEntryRedoLink">Làm lại kiểm tra đầu vào TOPIK</button> · <button class="dimlink" id="tpEntryQuickLink">Kiểm tra nhanh (chỉ trắc nghiệm)</button></p>') + '</details></div></div>';
   app.innerHTML = html;
   pronDiagInviteWire(app); /* v166 F1 */
   DaySum_wire(app); /* v215 (5b) */
@@ -30874,8 +31541,10 @@ function viewHomeTp(app) {
     if (fresh) { state.tpEntrySkipped = true; saveState(); tpOpenStep(TP_STAGES[0].steps[0], "home"); return; }
     go("roadmap"); /* v182: nut Hoc tiep di qua Ban do */
   };
-  var esb = document.getElementById("tpEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "tpEntry" }); };
-  var erl = document.getElementById("tpEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "tpEntry" }); };
+  var esb = document.getElementById("tpEntryStartBtn"); if (esb) esb.onclick = function () { openLesson({ type: "tpEntryFour" }); };
+  var eqb = document.getElementById("tpEntryQuickBtn"); if (eqb) eqb.onclick = function () { openLesson({ type: "tpEntry" }); };
+  var erl = document.getElementById("tpEntryRedoLink"); if (erl) erl.onclick = function () { openLesson({ type: "tpEntryFour" }); };
+  var eql = document.getElementById("tpEntryQuickLink"); if (eql) eql.onclick = function () { openLesson({ type: "tpEntry" }); };
   var hwl = document.getElementById("homeWeakLink"); if (hwl) hwl.onclick = function () { pronWeakGo((state.track) || "tp"); }; /* v119b */
   var mg = document.getElementById("tpHomeMapBtn"); if (mg) mg.onclick = function () { go("roadmap"); };
   var wsBtnTp = $("#wsOpenBtn"); if (wsBtnTp) wsBtnTp.onclick = function () { openLesson({ type: "workspace" }); };
@@ -30974,7 +31643,7 @@ function viewPracticeTp(app) {
   html += tpSpeakHTML(); /* v213 A2 */
   html += '<section class="card"><h3>Thi thử TOPIK I rút gọn</h3><p class="mut">70 câu: 35 câu Nghe + 35 câu Đọc, 100 phút tham khảo, cấp ước lượng chỉ để tham khảo.</p><div class="row">' + tpStepBtnHTML("m0") + '</div></section>';
   if (state.tpHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOPIK chưa sửa: ' + state.tpHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
-  html += '<p><button class="btn" id="tpPracticeEntryBtn">Làm lại kiểm tra đầu vào TOPIK</button></p>';
+  html += '<p><button class="btn" id="tpPracticeEntryBtn">Làm lại kiểm tra đầu vào TOPIK</button> <button class="btn" id="tpPracticeEntryQuickBtn">Kiểm tra nhanh (chỉ trắc nghiệm)</button></p>';
     app.innerHTML = html;
   /* v113 G1: gom Luyen tap TP thanh cum K0-K4/K6-K9 (them K6 Viet TOPIK II). */
   (function () {
@@ -31085,7 +31754,8 @@ function viewPracticeTp(app) {
   $$("[data-tpstroke-list]").forEach(function (b) { b.onclick = function () { openLesson({ type: "tpStroke", han: b.dataset.tpstrokeList }); }; }); /* v210: nut mo bai viet chu Hangul */
   wirePhotoEntry(); /* v118c: nut vao chup anh o muc lon G1 */
   pronDiagWireEntry(app); pronWeakWire(app, "tp"); pronAreaWire(app); /* v119b + v123 */
-  var ebTp = document.getElementById("tpPracticeEntryBtn"); if (ebTp) ebTp.onclick = function () { openLesson({ type: "tpEntry" }); };
+  var ebTp = document.getElementById("tpPracticeEntryBtn"); if (ebTp) ebTp.onclick = function () { openLesson({ type: "tpEntryFour" }); };
+  var eqbTp = document.getElementById("tpPracticeEntryQuickBtn"); if (eqbTp) eqbTp.onclick = function () { openLesson({ type: "tpEntry" }); };
   (function () { var jobs = [{ id: "tpFunVideoPractice", html: tpPracticeFunHTML, wire: null }]; if (videoNewEntHTML["tp"]) jobs.push({ id: "videoNewEnttp", html: function () { return videoNewEntHTML["tp"]; }, wire: null }); practiceEntLazy("tp", jobs); })();
 }
 function viewReviewTp(app) {

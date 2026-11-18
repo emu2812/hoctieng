@@ -13820,7 +13820,7 @@ var ZH_HSKK_ELEM_Q18 = [{"kind":"question","topic":"Giới thiệu bản thân",
 var ZH_HSKK_INTER_DESCRIBE18 = [{"kind":"describe","sitVi":"Một bạn học sinh đang ở thư viện: bạn ấy ngồi đọc sách, bên cạnh có một cốc nước, ngoài cửa sổ trời đang mưa.","han":"请说说这个情况。","pinyin":"Qǐng shuō shuo zhège qíngkuàng.","vi":"Hãy nói về tình huống này."},{"kind":"describe","sitVi":"Cuối tuần, một gia đình đi chợ mua rau và hoa quả; người mẹ chọn táo, đứa trẻ cầm một quả bóng bay màu đỏ.","han":"请说说这个情况。","pinyin":"Qǐng shuō shuo zhège qíngkuàng.","vi":"Hãy nói về tình huống này."}];
 var ZH_HSKK_INTER_Q18 = [{"kind":"question","topic":"Sở thích","han":"请谈谈你的爱好。","pinyin":"Qǐng tántan nǐ de àihào.","vi":"Hãy nói về sở thích của bạn.","guide":"Trả lời thành vài câu đầy đủ, nói rõ bạn thích gì và vì sao."},{"kind":"question","topic":"Vì sao học tiếng Trung","han":"你为什么学习汉语？","pinyin":"Nǐ wèishénme xuéxí Hànyǔ?","vi":"Vì sao bạn học tiếng Trung?","guide":"Trả lời thành vài câu đầy đủ, nói rõ lý do và mục tiêu của bạn."}];
 var ZH_HSKK_ADV_PASSAGE18 = [{"kind":"passage","han":"现在很多人喜欢在网上买东西，因为很方便。他们可以在家里选东西，东西很快就送到家里。但是有时候东西和照片不一样，所以买东西的时候要小心。","pinyin":"Xiànzài hěn duō rén xǐhuan zài wǎngshàng mǎi dōngxi, yīnwèi hěn fāngbiàn. Tāmen kěyǐ zài jiālǐ xuǎn dōngxi, dōngxi hěn kuài jiù sòng dào jiālǐ. Dànshì yǒu shíhou dōngxi hé zhàopiàn bù yīyàng, suǒyǐ mǎi dōngxi de shíhou yào xiǎoxīn.","vi":"Hiện nay nhiều người thích mua đồ trên mạng vì rất tiện lợi. Họ có thể chọn đồ ở nhà, hàng rất nhanh được giao đến nhà. Nhưng đôi khi hàng khác với ảnh, nên khi mua đồ phải cẩn thận."},{"kind":"passage","han":"学习外语的时候，多说多听很重要。每天说一点儿，听一点儿，慢慢就会说得越来越好。不要怕说错，说错了才能进步。","pinyin":"Xuéxí wàiyǔ de shíhou, duō shuō duō tīng hěn zhòngyào. Měitiān shuō yīdiǎnr, tīng yīdiǎnr, mànmàn jiù huì shuō de yuè lái yuè hǎo. Bù yào pà shuō cuò, shuō cuò le cái néng jìnbù.","vi":"Khi học ngoại ngữ, nói nhiều và nghe nhiều rất quan trọng. Mỗi ngày nói một chút, nghe một chút, dần dần sẽ nói càng ngày càng tốt. Đừng sợ nói sai, nói sai rồi mới tiến bộ được."},{"kind":"passage","han":"一个城市要发展经济，也要保护环境。如果只看重钱，不注意环境，空气和水都会变差。大家一起努力，城市才会越来越好。","pinyin":"Yī gè chéngshì yào fāzhǎn jīngjì, yě yào bǎohù huánjìng. Rúguǒ zhǐ kàn zhòng qián, bù zhùyì huánjìng, kōngqì hé shuǐ dōu huì biàn chà. Dàjiā yīqǐ nǔlì, chéngshì cái huì yuè lái yuè hǎo.","vi":"Một thành phố muốn phát triển kinh tế cũng phải bảo vệ môi trường. Nếu chỉ coi trọng tiền mà không chú ý đến môi trường, không khí và nước đều sẽ xấu đi. Mọi người cùng cố gắng thì thành phố mới càng ngày càng tốt."}];
-var ZH_HSKK_ADV_READ18 = [{"kind":"readaloud","han":"春天来了，天气变暖了。公园里的花开了，树也绿了。很多人去公园散步，孩子们在草地上玩儿。大家都喜欢春天，因为春天很美，也很有希望。","pinyin":"Chūntiān lái le, tiānqì biàn nuǎn le. Gōngyuán lǐ de huā kāi le, shù yě lǜ le. Hěn duō rén qù gōngyuán sànbù, háizi men zài cǎodì shàng wánr. Dàjiā dōu xǐhuan chūntiān, yīnwèi chūntiān hěn měi, yě hěn yǒu xīwàng.","vi":"Mùa xuân đến, thời tiết ấm lên. Hoa trong công viên đã nở, cây cũng xanh. Nhiều người đi dạo trong công viên, trẻ em chơi trên bãi cỏ. Mọi người đều thích mùa xuân, vì mùa xuân rất đẹp và cũng đầy hy vọng."}];
+var ZH_HSKK_ADV_READ18 = [{"kind":"readaloud","han":"春天来了，天气变暖了。公园里的花开了，树也绿了。很多人去公园散步，孩子们在草地上玩儿。大家都喜欢春天，因为春天很美，也很有希望。","pinyin":"Chūntiān lái le, tiānqì biàn nuǎn le. Gōngyuán lǐ de huā kāi le, shù yě lǜ le. Hěn duō rén qù gōngyuán sànbù, háizimen zài cǎodì shàng wánr. Dàjiā dōu xǐhuan chūntiān, yīnwèi chūntiān hěn měi, yě hěn yǒu xīwàng.","vi":"Mùa xuân đến, thời tiết ấm lên. Hoa trong công viên đã nở, cây cũng xanh. Nhiều người đi dạo trong công viên, trẻ em chơi trên bãi cỏ. Mọi người đều thích mùa xuân, vì mùa xuân rất đẹp và cũng đầy hy vọng."}];
 var ZH_HSKK_ADV_Q18 = [{"kind":"question","topic":"Điều khó nhất khi học tiếng Trung","han":"你觉得学习汉语最难的是什么？为什么？","pinyin":"Nǐ juéde xuéxí Hànyǔ zuì nán de shì shénme? Wèishénme?","vi":"Bạn thấy học tiếng Trung khó nhất là gì? Vì sao?","guide":"Trả lời thành vài câu đầy đủ, nêu rõ điều khó nhất và lý do."},{"kind":"question","topic":"Người trẻ và môi trường","han":"现在的年轻人应该为保护环境做什么？","pinyin":"Xiànzài de niánqīng rén yīnggāi wèi bǎohù huánjìng zuò shénme?","vi":"Người trẻ hiện nay nên làm gì để bảo vệ môi trường?","guide":"Trả lời thành vài câu đầy đủ, nêu rõ việc nên làm và lý do."}];
 // v213 DOT D (17/11/2026): Du lieu Speaking TOEIC (TC_SPEAK_MOCK, 11 nhiem vu theo ETS) + Speaking TOPIK
 // (TP_SPEAK_MOCK, 6 nhiem vu theo NIKL, thi rieng tren may 30 phut). Shape bat chuoc ZH_HSKK_* (kind + en/w
@@ -13852,8 +13852,8 @@ var TC_SPEAK_MOCK = [
     "sitVi": "Dạng chuyển thể — tranh mô tả bằng chữ: Trong một công viên nhỏ, một người phụ nữ ngồi trên ghế đọc sách. Bên cạnh, một con chó nằm trên cỏ. Phía sau, hai đứa trẻ đang chơi bóng gần một cái cây.",
     "en": "Describe the picture in as much detail as you can.",
     "vi": "Hãy mô tả bức tranh càng chi tiết càng tốt.",
-    "prep": 30,
-    "speak": 45
+    "prep": 45,
+    "speak": 30
   },
   {
     "kind": "describe",
@@ -13863,8 +13863,8 @@ var TC_SPEAK_MOCK = [
     "sitVi": "Dạng chuyển thể — tranh mô tả bằng chữ: Ở một sân bay đông người, một người đàn ông đang làm thủ tục cho một chiếc vali lớn tại quầy. Người phụ nữ phía sau đang xem bảng giờ bay. Ngoài cửa sổ, một chiếc máy bay đang chờ trên đường băng.",
     "en": "Describe the picture in as much detail as you can.",
     "vi": "Hãy mô tả bức tranh càng chi tiết càng tốt.",
-    "prep": 30,
-    "speak": 45
+    "prep": 45,
+    "speak": 30
   },
   {
     "kind": "answer",
@@ -13905,11 +13905,12 @@ var TC_SPEAK_MOCK = [
     "task": "Trả lời theo thông tin cho sẵn",
     "infoEn": "A train timetable: Train A leaves Hanoi at 7:00 and arrives in Hai Phong at 9:30. Train B leaves Hanoi at 9:00 and arrives at 11:00. A one-way ticket costs 120,000 dong.",
     "infoVi": "Bảng giờ tàu mô tả bằng chữ: Tàu A rời Hà Nội lúc 7 giờ và đến Hải Phòng lúc 9 giờ 30. Tàu B rời Hà Nội lúc 9 giờ và đến lúc 11 giờ. Vé một chiều giá 120.000 đồng.",
+    "infoSecs": 45,
     "q": "What time does the first train leave Hanoi?",
     "qvi": "Chuyến tàu đầu tiên rời Hà Nội lúc mấy giờ?",
     "en": "The first train leaves Hanoi at 7:00 in the morning.",
     "vi": "Chuyến tàu đầu tiên rời Hà Nội lúc 7 giờ sáng.",
-    "prep": 30,
+    "prep": 3,
     "speak": 15
   },
   {
@@ -13922,7 +13923,7 @@ var TC_SPEAK_MOCK = [
     "qvi": "Vé một chiều giá bao nhiêu?",
     "en": "A one-way ticket costs 120,000 dong.",
     "vi": "Vé một chiều giá 120.000 đồng.",
-    "prep": 30,
+    "prep": 3,
     "speak": 15
   },
   {
@@ -13935,8 +13936,9 @@ var TC_SPEAK_MOCK = [
     "qvi": "Tôi nên đi chuyến tàu nào nếu muốn đến trước 10 giờ?",
     "en": "You should take Train A, because it arrives at 9:30, before 10:00.",
     "vi": "Bạn nên đi tàu A vì tàu đến lúc 9 giờ 30, trước 10 giờ.",
-    "prep": 30,
-    "speak": 30
+    "prep": 3,
+    "speak": 30,
+    "twice": true,
   },
   {
     "kind": "question",
@@ -13948,7 +13950,7 @@ var TC_SPEAK_MOCK = [
     "guide": "Nói đủ 3 phần: chọn một bên, đưa 2 lý do, kết luận ngắn.",
     "model": "I prefer to work from home because I can save time on travel and focus better in a quiet place. However, I also enjoy meeting my colleagues in the office once a week.",
     "modelVi": "Tôi thích làm việc ở nhà hơn vì tôi tiết kiệm được thời gian đi lại và tập trung tốt hơn ở nơi yên tĩnh. Tuy nhiên, tôi cũng thích gặp đồng nghiệp ở văn phòng một lần mỗi tuần.",
-    "prep": 15,
+    "prep": 45,
     "speak": 60
   }
 ];
@@ -14019,7 +14021,7 @@ var TP_SPEAK_MOCK = [
     "no": 5,
     "task": "Đọc hiểu dữ liệu",
     "sitKo": "표: 2025년 한국 방문객 — 1월 100만 명, 6월 150만 명, 12월 200만 명.",
-    "sitRom": "pyo: 2025nyeon hanguk bangmun gaek — 1wol 100man myeong, 6wol 150man myeong, 12wol 200man myeong.",
+    "sitRom": "pyo: 2025nyeon hanguk bangmungaek — 1wol 100man myeong, 6wol 150man myeong, 12wol 200man myeong.",
     "sitVi": "Dạng chuyển thể — bảng số liệu mô tả bằng chữ: Số khách thăm Hàn Quốc năm 2025 — tháng 1: 1 triệu người, tháng 6: 1,5 triệu người, tháng 12: 2 triệu người.",
     "w": "자료를 보고 설명해 보세요.",
     "rom": "jaryoreul bogo seolmyeonghae boseyo.",
