@@ -17146,6 +17146,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 ]
 }
 ]);
+
 ZH_READING.push.apply(ZH_READING, [
 {
 "id": "s4-reading-congviec", "stage": 4, "title": "Tuần đầu đi làm của Tiểu Vương", "topic": "Công việc",
@@ -91545,6 +91546,20337 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    { q: "或A或B dùng khi nào?", o: ["Nêu hai khả năng để chọn một", "Phủ định cả hai khả năng", "Nói hai việc cùng xảy ra", "Nói việc đã xong"], a: 0, why: "或A或B: hoặc A hoặc B." },
    { q: "Câu nào dùng 无A无B đúng?", o: ["他无忧无虑，每天都很开心", "他无忧虑，每天都很开心", "他无无忧虑，每天都很开心", "他忧无虑无，每天都很开心"], a: 0, why: "无忧无虑 là thành ngữ bốn chữ cố định." },
    { q: "Chọn câu đúng:", o: ["或去或留，你自己决定", "或去留或，你自己决定", "去或留或，你自己决定", "或或去留，你自己决定"], a: 0, why: "或去或留: 或 + A + 或 + B." } ] }
+]);
+
+ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
+ {
+  "id": "v218-l1-01",
+  "stage": 1,
+  "title": "人称代词 — tôi, bạn, anh ấy, chúng ta…",
+  "hook": "“我是学生，你呢？” — tôi là học sinh, còn bạn thì sao: đại từ nhân xưng thay cho người nói, người nghe và người được nhắc tới.",
+  "examples": [
+   "我是越南人。(Wǒ shì Yuènán rén.) — Tôi là người Việt Nam.",
+   "你姓什么？(Nǐ xìng shénme?) — Bạn họ gì?",
+   "他是我的老师，她是我的同学。(Tā shì wǒ de lǎoshī, tā shì wǒ de tóngxué.) — Anh ấy là thầy của tôi, cô ấy là bạn học của tôi.",
+   "我们一起去学校，你们呢？(Wǒmen yīqǐ qù xuéxiào, nǐmen ne?) — Chúng tôi cùng nhau đi học, còn các bạn thì sao?"
+  ],
+  "speak": "我是越南人。你姓什么？他是我的老师，她是我的同学。我们一起去学校，你们呢？",
+  "rule": "Đại từ nhân xưng gồm ngôi thứ nhất 我/我们, ngôi thứ hai 你/你们 và 您 (lịch sự), ngôi thứ ba 他/她/他们/她们. Thêm 们 sau 我/你/他/她 thành số nhiều; 他 dùng cho nam, 她 dùng cho nữ, nói thì giống nhau, viết thì khác chữ. Đại từ làm chủ ngữ đứng trước động từ, làm tân ngữ đứng sau động từ.",
+  "tip": "Người Việt hay quên 您: gặp thầy cô, khách lớn tuổi thì dùng 您 thay cho 你, và đừng thêm 们 sau 您 (không nói 您们).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我们” nghĩa là gì?",
+    "o": [
+     "Tôi",
+     "Các bạn",
+     "Chúng tôi",
+     "Anh ấy"
+    ],
+    "a": 2,
+    "why": "我们 là ngôi thứ nhất số nhiều: chúng tôi."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___是我的老师。",
+    "o": [
+     "他",
+     "你",
+     "我",
+     "我们"
+    ],
+    "a": 0,
+    "why": "他 là ngôi thứ ba số ít, chỉ anh ấy: 他是我的老师."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我是学生",
+     "她是医生",
+     "他们是朋友",
+     "您们好"
+    ],
+    "a": 3,
+    "why": "Không nói 您们; 您 đã lịch sự, không thêm 们."
+   },
+   {
+    "q": "“她” khác “他” ở điểm nào?",
+    "o": [
+     "Nghĩa khác nhau",
+     "Chỉ khác chữ viết, chỉ nữ",
+     "Phát âm khác nhau",
+     "Một cái là số nhiều"
+    ],
+    "a": 1,
+    "why": "他 và 她 đều đọc là tā, chỉ khác chữ viết: 她 chỉ nữ."
+   },
+   {
+    "q": "Muốn nói lịch sự với thầy giáo, dùng từ nào?",
+    "o": [
+     "您",
+     "他",
+     "你",
+     "你们"
+    ],
+    "a": 0,
+    "why": "您 là dạng lịch sự của 你, dùng với người lớn tuổi hoặc thầy cô."
+   },
+   {
+    "q": "“你们” là số nhiều của từ nào?",
+    "o": [
+     "我",
+     "他",
+     "你",
+     "她"
+    ],
+    "a": 2,
+    "why": "你 + 们 = 你们: các bạn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-02",
+  "stage": 1,
+  "title": "指示代词 — này, kia, đây, đó, những cái này…",
+  "hook": "“这是我的书，那是你的书。” — đây là sách của tôi, kia là sách của bạn: 这 chỉ gần, 那 chỉ xa.",
+  "examples": [
+   "这本书很好看。(Zhè běn shū hěn hǎokàn.) — Quyển sách này rất hay.",
+   "那个人是我的朋友。(Nà ge rén shì wǒ de péngyou.) — Người kia là bạn của tôi.",
+   "这儿很好，那儿也很好。(Zhèr hěn hǎo, nàr yě hěn hǎo.) — Chỗ này rất tốt, chỗ kia cũng rất tốt.",
+   "这些是我的，别的我不要。(Zhèxiē shì wǒ de, biéde wǒ bù yào.) — Những cái này là của tôi, cái khác tôi không cần."
+  ],
+  "speak": "这本书很好看。那个人是我的朋友。这儿很好，那儿也很好。这些是我的，别的我不要。",
+  "rule": "这 chỉ vật gần người nói, 那 chỉ vật xa người nói; 这儿/这里 là chỗ này, 那儿/那里 là chỗ kia. 这/那 + lượng từ + danh từ thành cụm chỉ định (这本书, 那个人); 这些/那些 là số nhiều (những cái này/kia). 别的 nghĩa là cái khác, 有的 nghĩa là có cái, có người.",
+  "tip": "Người Việt hay nhầm 这儿 với 这里: hai từ nghĩa như nhau, 这儿 khẩu ngữ hơn; đừng viết 这里儿 hay 那儿里.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Muốn chỉ quyển sách ở gần mình, nói thế nào?",
+    "o": [
+     "那本书",
+     "这本书",
+     "别的书",
+     "有的书"
+    ],
+    "a": 1,
+    "why": "这 chỉ vật gần người nói: 这本书 là quyển sách này."
+   },
+   {
+    "q": "“那里” nghĩa là gì?",
+    "o": [
+     "Chỗ này",
+     "Chỗ khác",
+     "Chỗ nào",
+     "Chỗ kia"
+    ],
+    "a": 3,
+    "why": "那里 là chỗ kia, xa người nói."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___些是我的书。",
+    "o": [
+     "这",
+     "那",
+     "别",
+     "有"
+    ],
+    "a": 0,
+    "why": "这些 là những cái này: 这些是我的书."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这儿很冷",
+     "那是我的车",
+     "这里儿很大",
+     "那些是苹果"
+    ],
+    "a": 2,
+    "why": "Không nói 这里儿; chỉ nói 这里 hoặc 这儿."
+   },
+   {
+    "q": "“有的同学喜欢唱歌” nghĩa là gì?",
+    "o": [
+     "Mọi bạn đều thích hát",
+     "Có bạn thích hát",
+     "Bạn khác thích hát",
+     "Không bạn nào thích hát"
+    ],
+    "a": 1,
+    "why": "有的 nghĩa là có (một số): có bạn thích hát."
+   },
+   {
+    "q": "“别的” trong “我要别的” nghĩa là gì?",
+    "o": [
+     "Cái khác",
+     "Cái kia",
+     "Cái này",
+     "Cái nào"
+    ],
+    "a": 0,
+    "why": "别的 nghĩa là cái khác, không phải cái vừa nói."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-03",
+  "stage": 1,
+  "title": "数词 — một, hai, mười, trăm, nửa…",
+  "hook": "“一、二、三，十、百、半。” — đếm số là bước đầu tiên để nói tuổi, giờ, giá tiền và số lượng.",
+  "examples": [
+   "我家有三口人。(Wǒ jiā yǒu sān kǒu rén.) — Nhà tôi có ba người.",
+   "这个杯子十块钱。(Zhè ge bēizi shí kuài qián.) — Cái cốc này mười đồng.",
+   "我有一百本书。(Wǒ yǒu yī bǎi běn shū.) — Tôi có một trăm quyển sách.",
+   "半个小时以后见。(Bàn ge xiǎoshí yǐhòu jiàn.) — Gặp nhau sau nửa tiếng nữa."
+  ],
+  "speak": "我家有三口人。这个杯子十块钱。我有一百本书。半个小时以后见。",
+  "rule": "Số đếm cơ bản: 一二三四五六七八九零; 十 là mười, 百 là trăm. Số 2 làm số lượng dùng 两 (两个人), làm số đếm thứ tự hay số điện thoại thì dùng 二. Ghép số: mười một là 十一, hai mươi là 二十, một trăm linh năm là 一百零五. 半 nghĩa là nửa, đứng trước lượng từ (半个小时) hoặc sau số (三个半小时).",
+  "tip": "Lỗi quen thuộc của người Việt: nói 两个书 là sai lượng từ thì phải sửa, nhưng số 2 thì nhớ dùng 两 + lượng từ (两本书), đừng nói 二本书 khi đếm số lượng.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“二十” là số mấy?",
+    "o": [
+     "20",
+     "12",
+     "200",
+     "2"
+    ],
+    "a": 0,
+    "why": "二十 = hai mươi: 二 (2) + 十 (10)."
+   },
+   {
+    "q": "Đếm số lượng “hai quyển sách”, nói thế nào?",
+    "o": [
+     "二本书",
+     "十本书",
+     "两本书",
+     "半本书"
+    ],
+    "a": 2,
+    "why": "Số lượng 2 dùng 两: 两本书."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我有三个苹果",
+     "他今年十岁",
+     "一百个人",
+     "二本书在桌子上"
+    ],
+    "a": 3,
+    "why": "Đếm số lượng phải dùng 两本书, không dùng 二本书."
+   },
+   {
+    "q": "“半个小时” nghĩa là gì?",
+    "o": [
+     "Một tiếng",
+     "Nửa tiếng",
+     "Hai tiếng",
+     "Mười lăm phút"
+    ],
+    "a": 1,
+    "why": "半 là nửa: 半个小时 là nửa tiếng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这个书包___十块钱。",
+    "o": [
+     "一",
+     "二",
+     "九",
+     "零"
+    ],
+    "a": 2,
+    "why": "九十 là chín mươi: cái cặp này chín mươi đồng."
+   },
+   {
+    "q": "“零” nghĩa là gì?",
+    "o": [
+     "Không (số 0)",
+     "Một",
+     "Mười",
+     "Trăm"
+    ],
+    "a": 0,
+    "why": "零 là số 0, dùng trong số điện thoại và số ghép như 一百零五."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-04",
+  "stage": 1,
+  "title": "名量词 — cái, quyển, cốc, nhà, gian, người…",
+  "hook": "“一杯水，一本书。” — một cốc nước, một quyển sách: tiếng Trung đếm đồ vật phải có lượng từ đi kèm.",
+  "examples": [
+   "请给我一杯水。(Qǐng gěi wǒ yī bēi shuǐ.) — Xin cho tôi một cốc nước.",
+   "我买了三本书。(Wǒ mǎi le sān běn shū.) — Tôi đã mua ba quyển sách.",
+   "我家有四口人。(Wǒ jiā yǒu sì kǒu rén.) — Nhà tôi có bốn người.",
+   "我买了一套新衣服。(Wǒ mǎi le yī tào xīn yīfu.) — Tôi đã mua một bộ quần áo mới."
+  ],
+  "speak": "请给我一杯水。我买了三本书。我家有四口人。我买了一套新衣服。",
+  "rule": "Công thức: số từ + lượng từ + danh từ. 个 là lượng từ chung nhất (一个人, 一个苹果); 本 dùng cho sách vở, 杯 cho cốc nước, 家 cho cửa hàng hoặc gia đình (一家商店, 一家人), 间 cho phòng, 口 cho người trong nhà, 块 cho tiền hoặc miếng (五块钱, 一块面包), 页 cho trang sách (十页).",
+  "tip": "Người Việt hay dùng 个 cho mọi thứ: được chấp nhận trong khẩu ngữ, nhưng sách thì dùng 本, nước thì dùng 杯 mới chuẩn và tự nhiên.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“三本书” dùng lượng từ nào?",
+    "o": [
+     "个",
+     "杯",
+     "本",
+     "块"
+    ],
+    "a": 2,
+    "why": "Sách dùng lượng từ 本: 三本书."
+   },
+   {
+    "q": "Muốn gọi một cốc trà, nói thế nào?",
+    "o": [
+     "一个茶",
+     "一杯茶",
+     "一本茶",
+     "一家茶"
+    ],
+    "a": 1,
+    "why": "Trà uống bằng cốc dùng 杯: 一杯茶."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我家有五___人。",
+    "o": [
+     "口",
+     "本",
+     "页",
+     "间"
+    ],
+    "a": 0,
+    "why": "Đếm người trong nhà dùng 口: 五口人."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "一杯水",
+     "两本词典",
+     "三家商店",
+     "五本水"
+    ],
+    "a": 3,
+    "why": "水 không dùng 本, phải dùng 杯: 五杯水."
+   },
+   {
+    "q": "“五块钱” nghĩa là gì?",
+    "o": [
+     "Năm quyển sách",
+     "Năm đồng tiền",
+     "Năm cốc nước",
+     "Năm trang giấy"
+    ],
+    "a": 1,
+    "why": "块 đếm tiền: 五块钱 là năm đồng."
+   },
+   {
+    "q": "Lượng từ nào dùng cho phòng?",
+    "o": [
+     "杯",
+     "本",
+     "间",
+     "口"
+    ],
+    "a": 2,
+    "why": "Phòng dùng 间: 一间卧室 là một phòng ngủ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-05",
+  "stage": 1,
+  "title": "时间副词 — sắp, trước, thỉnh thoảng, đang…",
+  "hook": "“我马上来，你先吃吧。” — tôi đến ngay đây, bạn ăn trước đi: phó từ thời gian nói việc xảy ra khi nào.",
+  "examples": [
+   "我马上回家。(Wǒ mǎshàng huí jiā.) — Tôi về nhà ngay đây.",
+   "你先吃，我后吃。(Nǐ xiān chī, wǒ hòu chī.) — Bạn ăn trước, tôi ăn sau.",
+   "我有时去学校看书。(Wǒ yǒushí qù xuéxiào kàn shū.) — Thỉnh thoảng tôi đến trường đọc sách.",
+   "他正看书，别说话。(Tā zhèng kàn shū, bié shuō huà.) — Anh ấy đang đọc sách, đừng nói chuyện."
+  ],
+  "speak": "我马上回家。你先吃，我后吃。我有时去学校看书。他正看书，别说话。",
+  "rule": "Phó từ thời gian đứng trước động từ. 马上 nghĩa là ngay lập tức, sắp xảy ra; 先 nghĩa là làm trước, việc khác làm sau; 有时 nghĩa là thỉnh thoảng, không phải lúc nào cũng vậy; 正 nhấn mạnh hành động đang diễn ra đúng lúc nói, thường đi với 呢 ở cuối câu (他正看书呢). Đừng nhầm 正 với 正在: 正在 đã có mục riêng dạy.",
+  "tip": "Người Việt hay dịch 先 thành “đầu tiên” rồi đặt sai chỗ: 先 luôn đứng trước động từ (先吃), không đứng đầu câu một mình.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“马上” nghĩa là gì?",
+    "o": [
+     "Từ từ",
+     "Ngay lập tức",
+     "Thỉnh thoảng",
+     "Hôm qua"
+    ],
+    "a": 1,
+    "why": "马上 nghĩa là ngay, sắp xảy ra liền."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你___吃，我去买东西。",
+    "o": [
+     "正",
+     "马上",
+     "先",
+     "有时"
+    ],
+    "a": 2,
+    "why": "先吃: bạn ăn trước, tôi đi mua đồ sau."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我马上来",
+     "他正看书",
+     "我有时去游泳",
+     "先我去买东西"
+    ],
+    "a": 3,
+    "why": "先 đứng trước động từ: phải nói 我先去买东西."
+   },
+   {
+    "q": "“有时” khác “常常” ở điểm nào?",
+    "o": [
+     "有时 là thỉnh thoảng, 常常 là thường xuyên",
+     "Hai từ giống nhau",
+     "有时 là luôn luôn",
+     "常常 là thỉnh thoảng"
+    ],
+    "a": 0,
+    "why": "有时 là đôi khi, thỉnh thoảng; 常常 là thường xuyên, tần suất cao hơn."
+   },
+   {
+    "q": "“他正吃饭呢” nhấn mạnh điều gì?",
+    "o": [
+     "Anh ấy sắp ăn",
+     "Anh ấy vừa ăn xong",
+     "Anh ấy đang ăn ngay lúc này",
+     "Anh ấy ăn trước"
+    ],
+    "a": 2,
+    "why": "正 + động từ + 呢 nhấn mạnh hành động đang diễn ra."
+   },
+   {
+    "q": "Muốn nói “tôi đến ngay”, dùng từ nào?",
+    "o": [
+     "有时",
+     "马上",
+     "正",
+     "先"
+    ],
+    "a": 1,
+    "why": "马上来: đến ngay lập tức."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-06",
+  "stage": 1,
+  "title": "频率、重复副词 — thường, thường xuyên, lại…",
+  "hook": "“我常常去跑步，明天再去。” — tôi thường xuyên đi chạy bộ, mai lại đi nữa: 常 nói thói quen, 再 nói lặp lại.",
+  "examples": [
+   "我常去图书馆看书。(Wǒ cháng qù túshūguǎn kàn shū.) — Tôi thường đến thư viện đọc sách.",
+   "她常常早上六点起床。(Tā chángcháng zǎoshang liù diǎn qǐchuáng.) — Cô ấy thường xuyên dậy lúc sáu giờ sáng.",
+   "今天下雨了，明天再去。(Jīntiān xià yǔ le, míngtiān zài qù.) — Hôm nay mưa rồi, mai đi nữa.",
+   "我常吃米饭，他也常常吃。(Wǒ cháng chī mǐfàn, tā yě chángcháng chī.) — Tôi thường ăn cơm, anh ấy cũng thường xuyên ăn."
+  ],
+  "speak": "我常去图书馆看书。她常常早上六点起床。今天下雨了，明天再去。我常吃米饭，他也常常吃。",
+  "rule": "常 và 常常 đều nghĩa là thường, đứng trước động từ; 常常 nhấn mạnh hơn 常 một chút, hai từ có thể thay nhau trong nhiều câu. 再 nghĩa là lại, thêm một lần nữa, dùng cho việc CHƯA xảy ra hoặc sẽ làm lại (明天再去, 再说一遍); việc đã lặp lại trong quá khứ thì dùng 又, không dùng 再.",
+  "tip": "Lỗi kinh điển của người Việt: dùng 再 cho việc đã xảy ra (昨天再去 là sai, phải nói 昨天又去); 再 chỉ hướng tới tương lai.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“常常” nghĩa là gì?",
+    "o": [
+     "Thỉnh thoảng",
+     "Thường xuyên",
+     "Lại một lần nữa",
+     "Chưa bao giờ"
+    ],
+    "a": 1,
+    "why": "常常 nghĩa là thường xuyên, tần suất cao."
+   },
+   {
+    "q": "Điền vào chỗ trống: 明天我们___去看电影。",
+    "o": [
+     "常",
+     "有时",
+     "常常",
+     "再"
+    ],
+    "a": 3,
+    "why": "Mai đi nữa, việc chưa xảy ra, dùng 再."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我常喝茶",
+     "她常常跑步",
+     "昨天我再去了学校",
+     "明天再说吧"
+    ],
+    "a": 2,
+    "why": "Việc đã xảy ra hôm qua phải dùng 又, không dùng 再."
+   },
+   {
+    "q": "“再说一遍” nghĩa là gì?",
+    "o": [
+     "Nói lại một lần nữa",
+     "Nói một lần",
+     "Đừng nói nữa",
+     "Nói trước đi"
+    ],
+    "a": 0,
+    "why": "再 + động từ: làm lại một lần nữa."
+   },
+   {
+    "q": "常 và 常常 khác nhau thế nào?",
+    "o": [
+     "Nghĩa trái nhau",
+     "常常 nhấn mạnh hơn, tần suất cao hơn",
+     "常 chỉ dùng cho quá khứ",
+     "常常 chỉ dùng cho tương lai"
+    ],
+    "a": 1,
+    "why": "Hai từ cùng nghĩa thường, 常常 mạnh hơn một chút."
+   },
+   {
+    "q": "Muốn nói “tôi thường đọc sách buổi tối”, dùng từ nào?",
+    "o": [
+     "再",
+     "马上",
+     "先",
+     "常"
+    ],
+    "a": 3,
+    "why": "Thói quen thường làm dùng 常: 我常看书."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-07",
+  "stage": 1,
+  "title": "介词 从 — từ…",
+  "hook": "“我从家来，从北京出发。” — tôi từ nhà đến, xuất phát từ Bắc Kinh: 从 nói điểm bắt đầu.",
+  "examples": [
+   "我从学校回家。(Wǒ cóng xuéxiào huí jiā.) — Tôi từ trường về nhà.",
+   "他从越南来。(Tā cóng Yuènán lái.) — Anh ấy đến từ Việt Nam.",
+   "我们从早上八点看书。(Wǒmen cóng zǎoshang bā diǎn kàn shū.) — Chúng tôi đọc sách từ tám giờ sáng.",
+   "他从今天学汉语。(Tā cóng jīntiān xué Hànyǔ.) — Anh ấy học tiếng Trung từ hôm nay."
+  ],
+  "speak": "我从学校回家。他从越南来。我们从早上八点看书。他从今天学汉语。",
+  "rule": "从 là giới từ, đứng trước danh từ chỉ nơi chốn hoặc thời gian, tạo thành cụm “从 + nơi chốn/thời gian + động từ” để nói điểm bắt đầu: 从学校来 (từ trường đến), 从八点开始 (bắt đầu từ tám giờ). 从 thường đi cặp với 到 (从…到…: từ… đến…), và hay đứng sau động từ 来/去 trong mẫu “从…来/去”.",
+  "tip": "Người Việt hay bỏ 从 mà nói thẳng “我学校回家” là sai: muốn nói “từ trường” phải có 从 — 我从学校回家.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“从学校来” nghĩa là gì?",
+    "o": [
+     "Đến trường",
+     "Từ trường đến",
+     "Ở trường",
+     "Đi qua trường"
+    ],
+    "a": 1,
+    "why": "从…来: xuất phát từ trường mà đến."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我们___八点开始工作。",
+    "o": [
+     "从",
+     "在",
+     "到",
+     "和"
+    ],
+    "a": 0,
+    "why": "Bắt đầu từ tám giờ: 从八点开始."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我从家来",
+     "他从北京出发",
+     "学校我从回家",
+     "从今天开始"
+    ],
+    "a": 2,
+    "why": "从 phải đứng trước nơi chốn: 我从学校回家."
+   },
+   {
+    "q": "“从北京到上海” nghĩa là gì?",
+    "o": [
+     "Ở Bắc Kinh và Thượng Hải",
+     "Bắc Kinh ở Thượng Hải",
+     "Bắc Kinh hay Thượng Hải",
+     "Từ Bắc Kinh đến Thượng Hải"
+    ],
+    "a": 3,
+    "why": "从…到…: từ điểm này đến điểm kia."
+   },
+   {
+    "q": "从 đứng ở đâu trong câu?",
+    "o": [
+     "Cuối câu",
+     "Trước danh từ chỉ nơi chốn/thời gian",
+     "Sau tân ngữ",
+     "Trước chủ ngữ"
+    ],
+    "a": 1,
+    "why": "Công thức: 从 + nơi chốn/thời gian + động từ."
+   },
+   {
+    "q": "Muốn nói “tôi từ Hà Nội đến”, dùng từ nào?",
+    "o": [
+     "从",
+     "在",
+     "到",
+     "和"
+    ],
+    "a": 0,
+    "why": "Điểm xuất phát dùng 从: 我从河内来."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-08",
+  "stage": 1,
+  "title": "动态助词 了1 — 了 sau động từ, việc đã xong",
+  "hook": "“我买了三本书。” — tôi đã mua ba quyển sách: 了1 đứng sau động từ, báo việc đã hoàn thành.",
+  "examples": [
+   "昨天我买了一件衣服。(Zuótiān wǒ mǎi le yī jiàn yīfu.) — Hôm qua tôi đã mua một chiếc áo.",
+   "他喝了两杯水。(Tā hē le liǎng bēi shuǐ.) — Anh ấy đã uống hai cốc nước.",
+   "我们看了这本书。(Wǒmen kàn le zhè běn shū.) — Chúng tôi đã đọc quyển sách này.",
+   "妈妈做了很多好吃的菜。(Māma zuò le hěn duō hǎochī de cài.) — Mẹ đã nấu rất nhiều món ngon."
+  ],
+  "speak": "昨天我买了一件衣服。他喝了两杯水。我们看了这本书。妈妈做了很多好吃的菜。",
+  "rule": "了1 là trợ từ động thái, đứng NGAY SAU động từ (động từ + 了 + tân ngữ), báo hành động đã hoàn thành: 买了书, 喝了水. Khi tân ngữ dài, 了 có thể đứng sau tân ngữ ở cuối câu (我吃饭了) — đó là cách nói gọn của động từ + 了 + tân ngữ. Phân biệt với 了2 ở cuối câu báo tình huống mới (下雨了): 了1 nói việc xong, 了2 nói tình huống đổi khác.",
+  "tip": "Người Việt hay đặt 了 trước động từ (我了买书) hoặc quên 了 khi kể việc đã xong; nhớ công thức: động từ + 了, không đảo vị trí.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他喝了水” nghĩa là gì?",
+    "o": [
+     "Anh ấy đang uống nước",
+     "Anh ấy sắp uống nước",
+     "Anh ấy đã uống nước",
+     "Anh ấy chưa uống nước"
+    ],
+    "a": 2,
+    "why": "了1 sau 喝 báo việc uống đã hoàn thành."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我昨天买___一本书。",
+    "o": [
+     "的",
+     "了",
+     "过",
+     "着"
+    ],
+    "a": 1,
+    "why": "Mua đã xong, động từ + 了: 买了一本书."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我了看电影",
+     "他买了书",
+     "我吃了饭",
+     "她喝了水"
+    ],
+    "a": 0,
+    "why": "了 không đứng trước động từ: phải nói 我看了电影."
+   },
+   {
+    "q": "了1 khác 了2 ở điểm nào?",
+    "o": [
+     "了1 chỉ dùng cho tương lai",
+     "Hai từ giống nhau",
+     "了1 ở cuối câu, 了2 sau động từ",
+     "了1 sau động từ báo việc xong, 了2 cuối câu báo tình huống mới"
+    ],
+    "a": 3,
+    "why": "了1 gắn với động từ (việc xong); 了2 ở cuối câu (tình huống mới)."
+   },
+   {
+    "q": "“我吃饭了” có thể hiểu là dạng gọn của câu nào?",
+    "o": [
+     "我在吃饭",
+     "我要吃饭",
+     "我吃了饭",
+     "我没吃饭"
+    ],
+    "a": 2,
+    "why": "我吃饭了 là cách nói gọn của 我吃了饭 khi tân ngữ ngắn."
+   },
+   {
+    "q": "Muốn nói “mẹ đã nấu cơm”, chọn câu đúng.",
+    "o": [
+     "妈妈了做饭",
+     "妈妈做饭了",
+     "妈妈做饭",
+     "妈妈在做饭了"
+    ],
+    "a": 1,
+    "why": "做了饭: động từ 做 + 了 báo việc nấu đã xong."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-09",
+  "stage": 1,
+  "title": "名词、代词或名词性短语作主语 — chủ ngữ là danh từ/đại từ",
+  "hook": "“我爱中国，汉语很难吗？” — tôi yêu Trung Quốc, tiếng Trung khó không: chủ ngữ nói “ai/cái gì” làm việc gì.",
+  "examples": [
+   "我喜欢学汉语。(Wǒ xǐhuan xué Hànyǔ.) — Tôi thích học tiếng Trung.",
+   "这个苹果很好吃。(Zhège píngguǒ hěn hǎochī.) — Quả táo này rất ngon.",
+   "我的老师很好。(Wǒ de lǎoshī hěn hǎo.) — Thầy của tôi rất tốt.",
+   "学习汉语很好。(Xuéxí Hànyǔ hěn hǎo.) — Học tiếng Trung rất tốt."
+  ],
+  "speak": "我喜欢学汉语。这个苹果很好吃。我的老师很好。学习汉语很好。",
+  "rule": "Chủ ngữ đứng đầu câu, nói rõ ai hoặc cái gì thực hiện hành động hay mang đặc điểm. Chủ ngữ có thể là danh từ (老师, 书), đại từ (我, 这), hoặc cụm danh từ (这本书, 我的老师, 学习汉语). Trong câu “学习汉语不容易”, cả cụm động từ 学习汉语 làm chủ ngữ, nghĩa là “việc học tiếng Trung”.",
+  "tip": "Người Việt hay thêm “là” thừa trước vị ngữ tính từ: nói 我的老师很年轻, không nói 我的老师是很年轻.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Chủ ngữ trong câu “我喜欢学汉语” là gì?",
+    "o": [
+     "喜欢",
+     "学汉语",
+     "我",
+     "汉语"
+    ],
+    "a": 2,
+    "why": "我 là chủ ngữ, đứng đầu câu, thực hiện hành động thích."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___很好。",
+    "o": [
+     "很",
+     "我的老师",
+     "喜欢",
+     "学习"
+    ],
+    "a": 1,
+    "why": "Cụm danh từ 我的老师 làm chủ ngữ: thầy của tôi rất tốt."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这个苹果很好吃",
+     "我喜欢学汉语",
+     "学习汉语很好",
+     "很年轻我的老师"
+    ],
+    "a": 3,
+    "why": "Chủ ngữ phải đứng đầu câu: 我的老师很好."
+   },
+   {
+    "q": "“学习汉语很好” nghĩa là gì?",
+    "o": [
+     "Học tiếng Trung rất tốt",
+     "Học tiếng Trung rất khó",
+     "Dạy tiếng Trung rất tốt",
+     "Học tiếng Trung rất vui"
+    ],
+    "a": 0,
+    "why": "Cả cụm 学习汉语 làm chủ ngữ: việc học tiếng Trung rất tốt."
+   },
+   {
+    "q": "“这个苹果” làm chủ ngữ trong câu nào?",
+    "o": [
+     "我看这个苹果",
+     "这个苹果很好吃",
+     "我喜欢这个苹果",
+     "他买了这个苹果"
+    ],
+    "a": 1,
+    "why": "这个苹果 đứng đầu câu, làm chủ ngữ của 很好吃."
+   },
+   {
+    "q": "Chủ ngữ thường đứng ở đâu?",
+    "o": [
+     "Cuối câu",
+     "Sau động từ",
+     "Đầu câu",
+     "Giữa tân ngữ"
+    ],
+    "a": 2,
+    "why": "Chủ ngữ đứng đầu câu, trước vị ngữ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-10",
+  "stage": 1,
+  "title": "动词或动词性短语、形容词或形容词性短语作谓语 — vị ngữ là động từ/tính từ",
+  "hook": "“我吃饭，他很忙。” — tôi ăn cơm, anh ấy rất bận: vị ngữ nói chủ ngữ làm gì hoặc như thế nào.",
+  "examples": [
+   "我每天早上看书。(Wǒ měitiān zǎoshang kàn shū.) — Tôi đọc sách mỗi sáng.",
+   "他很忙，今天不来。(Tā hěn máng, jīntiān bù lái.) — Anh ấy rất bận, hôm nay không đến.",
+   "这件衣服很漂亮。(Zhè jiàn yīfu hěn piàoliang.) — Chiếc áo này rất đẹp.",
+   "我们喜欢一起学汉语。(Wǒmen xǐhuan yìqǐ xué Hànyǔ.) — Chúng tôi thích cùng nhau học tiếng Trung."
+  ],
+  "speak": "我每天早上看书。他很忙，今天不来。这件衣服很漂亮。我们喜欢一起学汉语。",
+  "rule": "Vị ngữ đứng sau chủ ngữ, nói chủ ngữ làm gì hoặc có đặc điểm gì. Vị ngữ có thể là động từ (跑步, 吃饭), cụm động từ (喜欢打球, 每天跑步), tính từ (忙, 漂亮) hoặc cụm tính từ (很忙, 很漂亮). Vị ngữ tính từ thường có 很 đứng trước, nhưng 很 ở đây không nhấn mạnh “rất” mà chỉ làm câu đầy đủ; muốn nhấn mạnh thật thì dùng 非常 hoặc 太.",
+  "tip": "Người Việt hay thêm 是 trước tính từ (他是忙 là sai); vị ngữ tính từ không cần 是, chỉ nói 他很忙.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Vị ngữ trong câu “我每天早上看书” là gì?",
+    "o": [
+     "我",
+     "每天早上",
+     "看书",
+     "早上"
+    ],
+    "a": 2,
+    "why": "看书 là vị ngữ động từ, nói tôi làm gì."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这件衣服很___。",
+    "o": [
+     "跑步",
+     "漂亮",
+     "吃饭",
+     "喜欢"
+    ],
+    "a": 1,
+    "why": "漂亮 là tính từ làm vị ngữ: chiếc áo này rất đẹp."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他是忙",
+     "我们喜欢一起学汉语",
+     "他很忙",
+     "这件衣服很漂亮"
+    ],
+    "a": 0,
+    "why": "Vị ngữ tính từ không dùng 是: phải nói 他很忙."
+   },
+   {
+    "q": "“他很忙，今天不来” nghĩa là gì?",
+    "o": [
+     "Anh ấy rất rảnh, hôm nay đến",
+     "Anh ấy đang bận ăn cơm",
+     "Anh ấy không bận lắm",
+     "Anh ấy rất bận, hôm nay không đến"
+    ],
+    "a": 3,
+    "why": "很 trước tính từ thường chỉ làm câu đầy đủ, muốn nhấn mạnh dùng 非常."
+   },
+   {
+    "q": "Vị ngữ trong “我们喜欢一起学汉语” là gì?",
+    "o": [
+     "我们",
+     "喜欢一起学汉语",
+     "一起",
+     "学汉语"
+    ],
+    "a": 1,
+    "why": "Cả cụm động từ 喜欢一起学汉语 làm vị ngữ."
+   },
+   {
+    "q": "Vị ngữ thường đứng ở đâu?",
+    "o": [
+     "Sau chủ ngữ",
+     "Đầu câu",
+     "Cuối tân ngữ",
+     "Trước chủ ngữ"
+    ],
+    "a": 0,
+    "why": "Vị ngữ đứng sau chủ ngữ, nói chủ ngữ làm gì hoặc như thế nào."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-11",
+  "stage": 1,
+  "title": "名词、代词或名词性短语作宾语 — tân ngữ là danh từ/đại từ",
+  "hook": "“我爱你，我看这本书。” — tôi yêu bạn, tôi đọc quyển sách này: tân ngữ là người/vật chịu tác động.",
+  "examples": [
+   "我喜欢汉语。(Wǒ xǐhuan Hànyǔ.) — Tôi thích tiếng Trung.",
+   "他给我一本书。(Tā gěi wǒ yī běn shū.) — Anh ấy cho tôi một quyển sách.",
+   "我们想去学校。(Wǒmen xiǎng qù xuéxiào.) — Chúng tôi muốn đi học.",
+   "妈妈买了很多水果。(Māma mǎi le hěn duō shuǐguǒ.) — Mẹ đã mua rất nhiều hoa quả."
+  ],
+  "speak": "我喜欢汉语。他给我一本书。我们想去学校。妈妈买了很多水果。",
+  "rule": "Tân ngữ đứng sau động từ, là người hoặc vật chịu tác động của hành động. Tân ngữ có thể là danh từ (汉语, 水果), đại từ (你, 我, 他), hoặc cụm danh từ (一本书, 很多水果, 这部电影). Một số động từ có hai tân ngữ: tân ngữ người đứng trước, tân ngữ vật đứng sau (给我一本书: cho tôi — một quyển sách).",
+  "tip": "Người Việt hay đặt tân ngữ trước động từ theo thói quen tiếng Việt trong câu phủ định; nhớ thứ tự tiếng Trung: chủ ngữ + động từ + tân ngữ (我不喜欢他, không nói 我他不喜欢).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Tân ngữ trong câu “我喜欢汉语” là gì?",
+    "o": [
+     "我",
+     "喜欢",
+     "汉语",
+     "学"
+    ],
+    "a": 2,
+    "why": "汉语 đứng sau động từ 喜欢, là vật được thích."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他给我___。",
+    "o": [
+     "一本书",
+     "喜欢",
+     "很高兴",
+     "跑步"
+    ],
+    "a": 0,
+    "why": "一本书 là cụm danh từ làm tân ngữ vật sau tân ngữ người 我."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我喜欢汉语",
+     "他给我一本书",
+     "妈妈买了很多水果",
+     "我他不喜欢"
+    ],
+    "a": 3,
+    "why": "Thứ tự đúng là 我不喜欢他: tân ngữ đứng sau động từ."
+   },
+   {
+    "q": "Trong “他给我一本书”, tân ngữ người là gì?",
+    "o": [
+     "他",
+     "我",
+     "给",
+     "一本书"
+    ],
+    "a": 1,
+    "why": "我 là tân ngữ người, đứng trước tân ngữ vật 一本书."
+   },
+   {
+    "q": "“妈妈买了很多水果” nghĩa là gì?",
+    "o": [
+     "Mẹ đã mua rất nhiều hoa quả",
+     "Mẹ muốn mua hoa quả",
+     "Mẹ đang bán hoa quả",
+     "Mẹ không thích hoa quả"
+    ],
+    "a": 0,
+    "why": "很多水果 đứng sau 买, chịu tác động của việc mua."
+   },
+   {
+    "q": "Tân ngữ thường đứng ở đâu?",
+    "o": [
+     "Đầu câu",
+     "Trước động từ",
+     "Sau động từ",
+     "Trước chủ ngữ"
+    ],
+    "a": 2,
+    "why": "Tân ngữ đứng sau động từ, là người/vật chịu tác động."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-12",
+  "stage": 1,
+  "title": "名词性词语、形容词性词语、数量短语作定语 — định ngữ bổ nghĩa cho danh từ",
+  "hook": "“红色的车，三个学生。” — chiếc xe màu đỏ, ba học sinh: định ngữ đứng trước danh từ, nói rõ nó là cái nào.",
+  "examples": [
+   "红色的车是我的。(Hóngsè de chē shì wǒ de.) — Chiếc xe màu đỏ là của tôi.",
+   "三个学生去图书馆。(Sān ge xuésheng qù túshūguǎn.) — Ba học sinh đi thư viện.",
+   "我的书在桌子上。(Wǒ de shū zài zhuōzi shang.) — Sách của tôi ở trên bàn.",
+   "这是一本很好的书。(Zhè shì yī běn hěn hǎo de shū.) — Đây là một quyển sách rất hay."
+  ],
+  "speak": "红色的车是我的。三个学生去图书馆。我的书在桌子上。这是一本很好的书。",
+  "rule": "Định ngữ đứng TRƯỚC danh từ nó bổ nghĩa, nói rõ danh từ đó là cái nào, của ai, bao nhiêu, như thế nào. Định ngữ có thể là danh từ (我的书), tính từ (红色的车, 很有意思的书), hoặc cụm số lượng (三个学生, 一本书). Định ngữ tính từ dài thường có 的 ở giữa (红色的车); định ngữ số lượng đứng trước danh từ, không cần 的 (三个学生).",
+  "tip": "Người Việt hay đặt tính từ sau danh từ theo tiếng Việt (车红色 là sai); tiếng Trung luôn đặt định ngữ trước danh từ: 红色的车.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Định ngữ trong “红色的车” là gì?",
+    "o": [
+     "车",
+     "红色",
+     "的",
+     "是"
+    ],
+    "a": 1,
+    "why": "红色 bổ nghĩa cho 车, đứng trước danh từ."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___学生去图书馆。",
+    "o": [
+     "三个",
+     "红色",
+     "我的",
+     "很"
+    ],
+    "a": 0,
+    "why": "Cụm số lượng 三个 làm định ngữ: ba học sinh."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "红色的车是我的",
+     "我的书在桌子上",
+     "车红色是我的",
+     "三个学生去图书馆"
+    ],
+    "a": 2,
+    "why": "Định ngữ phải đứng trước danh từ: 红色的车, không nói 车红色."
+   },
+   {
+    "q": "“我的” trong “我的书” là định ngữ loại nào?",
+    "o": [
+     "Cụm số lượng",
+     "Tính từ",
+     "Động từ",
+     "Danh từ/đại từ sở hữu"
+    ],
+    "a": 3,
+    "why": "我的 là đại từ sở hữu làm định ngữ: sách của tôi."
+   },
+   {
+    "q": "“很好的书” nghĩa là gì?",
+    "o": [
+     "Quyển sách rất hay",
+     "Quyển sách màu đỏ",
+     "Ba quyển sách",
+     "Sách của tôi"
+    ],
+    "a": 0,
+    "why": "很好的 là định ngữ tính từ: quyển sách rất hay."
+   },
+   {
+    "q": "Định ngữ số lượng có cần 的 không?",
+    "o": [
+     "Luôn cần",
+     "Không cần: 三个学生",
+     "Chỉ cần khi đếm người",
+     "Chỉ cần khi đếm sách"
+    ],
+    "a": 1,
+    "why": "Cụm số lượng đứng trước danh từ không cần 的: 三个学生."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-13",
+  "stage": 1,
+  "title": "副词、形容词作状语；表示时间、处所的词语作状语 — trạng ngữ nói cách thức, thời gian, nơi chốn",
+  "hook": "“他慢慢地走，早上在公园跑步。” — anh ấy đi chậm rãi, buổi sáng chạy bộ ở công viên: trạng ngữ nói làm như thế nào, khi nào, ở đâu.",
+  "examples": [
+   "他慢慢地走回家。(Tā mànmàn de zǒu huí jiā.) — Anh ấy chậm rãi đi về nhà.",
+   "我们早上在公园看书。(Wǒmen zǎoshang zài gōngyuán kàn shū.) — Chúng tôi đọc sách ở công viên vào buổi sáng.",
+   "她很高兴地说话。(Tā hěn gāoxìng de shuō huà.) — Cô ấy nói chuyện rất vui vẻ.",
+   "孩子们在教室看书。(Háizimen zài jiàoshì kàn shū.) — Các em nhỏ đọc sách trong lớp học."
+  ],
+  "speak": "他慢慢地走回家。我们早上在公园看书。她很高兴地说话。孩子们在教室看书。",
+  "rule": "Trạng ngữ đứng trước động từ, nói hành động diễn ra như thế nào, khi nào, ở đâu. Phó từ làm trạng ngữ đứng trực tiếp trước động từ (慢慢走, 常常去); tính từ làm trạng ngữ phải thêm 地 (慢慢地走, 高兴地笑); từ chỉ thời gian (早上, 今天) và từ chỉ nơi chốn (在公园, 在教室里) làm trạng ngữ cũng đứng trước động từ. Thứ tự thường gặp: thời gian + nơi chốn + cách thức + động từ (早上在公园慢慢跑).",
+  "tip": "Người Việt hay nhầm 的 và 地: bổ nghĩa cho danh từ dùng 的 (红色的车), bổ nghĩa cho động từ dùng 地 (慢慢地走); nhớ “địa” đi với động từ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Trạng ngữ trong “他慢慢地走” là gì?",
+    "o": [
+     "他",
+     "慢慢地",
+     "走",
+     "回家"
+    ],
+    "a": 1,
+    "why": "慢慢地 bổ nghĩa cho động từ 走, nói đi như thế nào."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我们___在公园看书。",
+    "o": [
+     "早上",
+     "慢慢地",
+     "很高兴",
+     "红色"
+    ],
+    "a": 0,
+    "why": "早上 là từ chỉ thời gian làm trạng ngữ, đứng trước động từ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他慢慢地走",
+     "她很高兴地说话",
+     "他慢慢的走",
+     "孩子们在教室看书"
+    ],
+    "a": 2,
+    "why": "Tính từ bổ nghĩa cho động từ dùng 地, không dùng 的: 慢慢地走."
+   },
+   {
+    "q": "“在公园” trong “我们早上在公园看书” làm gì?",
+    "o": [
+     "Chủ ngữ",
+     "Tân ngữ",
+     "Định ngữ",
+     "Trạng ngữ nơi chốn"
+    ],
+    "a": 3,
+    "why": "在公园 nói hành động đọc sách diễn ra ở đâu, là trạng ngữ nơi chốn."
+   },
+   {
+    "q": "Thứ tự đúng của trạng ngữ là gì?",
+    "o": [
+     "Động từ + thời gian + nơi chốn",
+     "Thời gian + nơi chốn + cách thức + động từ",
+     "Nơi chốn + động từ + thời gian",
+     "Cách thức + chủ ngữ + động từ"
+    ],
+    "a": 1,
+    "why": "Thứ tự thường gặp: thời gian, nơi chốn, cách thức, rồi mới đến động từ."
+   },
+   {
+    "q": "“很高兴地说话” nghĩa là gì?",
+    "o": [
+     "Đi học rất vui vẻ",
+     "Đọc sách rất vui vẻ",
+     "Nói chuyện rất vui vẻ",
+     "Ăn cơm rất vui vẻ"
+    ],
+    "a": 2,
+    "why": "很高兴地 là trạng ngữ cách thức: nói chuyện rất vui vẻ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-14",
+  "stage": 1,
+  "title": "动词谓语句 — chủ ngữ + động từ",
+  "hook": "“妈妈做饭。” — mẹ nấu cơm: chủ ngữ + động từ là xương sống của câu tiếng Trung.",
+  "examples": [
+   "妈妈做饭。(Māma zuò fàn.) — Mẹ nấu cơm.",
+   "我每天看书。(Wǒ měitiān kàn shū.) — Tôi đọc sách mỗi ngày.",
+   "弟弟在学校学习汉语。(Dìdi zài xuéxiào xuéxí Hànyǔ.) — Em trai học tiếng Trung ở trường.",
+   "我们明天去学校。(Wǒmen míngtiān qù xuéxiào.) — Ngày mai chúng tôi đi học."
+  ],
+  "speak": "妈妈做饭。我每天看书。弟弟在学校学习汉语。我们明天去学校。",
+  "rule": "Câu động từ vị ngữ có dạng chủ ngữ + động từ (+ tân ngữ): động từ đứng sau chủ ngữ, tân ngữ (nếu có) đứng sau động từ. Trạng ngữ thời gian thường đứng trước động từ, sau chủ ngữ (我每天跑步); trạng ngữ nơi chốn dùng 在 + nơi chốn, cũng đứng trước động từ (在学校学习).",
+  "tip": "Người Việt hay đặt thời gian ở cuối câu như tiếng Việt; trong tiếng Trung thời gian đứng trước động từ: nói 我明天去北京, không nói 我去北京明天.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“妈妈做饭” nghĩa là gì?",
+    "o": [
+     "Mẹ nấu cơm",
+     "Mẹ ăn cơm",
+     "Mẹ mua cơm",
+     "Mẹ thích cơm"
+    ],
+    "a": 0,
+    "why": "做饭 là nấu cơm, chủ ngữ 妈妈 + động từ 做饭."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我每天___。",
+    "o": [
+     "吗",
+     "很",
+     "看书",
+     "的"
+    ],
+    "a": 2,
+    "why": "Vị ngữ cần một động từ: 看书 (đọc sách)."
+   },
+   {
+    "q": "Câu nào đặt thời gian đúng chỗ?",
+    "o": [
+     "我去学校明天",
+     "我们明天去学校",
+     "我去明天学校",
+     "明天我们去学校去"
+    ],
+    "a": 1,
+    "why": "Trạng ngữ thời gian 明天 đứng trước động từ 去."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "妈妈做饭",
+     "我每天看书",
+     "弟弟在学校学习汉语",
+     "我去学校明天"
+    ],
+    "a": 3,
+    "why": "明天 phải đứng trước động từ: 我们明天去学校."
+   },
+   {
+    "q": "Trong “弟弟在学校学习汉语”, 在学校 là gì?",
+    "o": [
+     "Chủ ngữ",
+     "Tân ngữ",
+     "Trạng ngữ nơi chốn",
+     "Vị ngữ"
+    ],
+    "a": 2,
+    "why": "在学校 chỉ nơi chốn, đứng trước động từ 学习."
+   },
+   {
+    "q": "Câu nào có tân ngữ sau động từ?",
+    "o": [
+     "我跑步",
+     "他睡觉",
+     "我们回家",
+     "妈妈做饭"
+    ],
+    "a": 3,
+    "why": "做饭 có tân ngữ 饭 đứng sau động từ 做; các câu còn lại không có tân ngữ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-15",
+  "stage": 1,
+  "title": "形容词谓语句 — chủ ngữ + tính từ",
+  "hook": "“今天很冷。” — hôm nay rất lạnh: tính từ đứng sau chủ ngữ, không cần 是.",
+  "examples": [
+   "今天很冷。(Jīntiān hěn lěng.) — Hôm nay rất lạnh.",
+   "这件衣服很漂亮。(Zhè jiàn yīfu hěn piàoliang.) — Chiếc áo này rất đẹp.",
+   "弟弟很高兴。(Dìdi hěn gāoxìng.) — Em trai rất vui.",
+   "今天很冷，明天很热。(Jīntiān hěn lěng, míngtiān hěn rè.) — Hôm nay rất lạnh, ngày mai rất nóng."
+  ],
+  "speak": "今天很冷。这件衣服很漂亮。弟弟很高兴。今天很冷，明天很热。",
+  "rule": "Vị ngữ tính từ có dạng chủ ngữ + (phó từ mức độ như 很/非常/太) + tính từ; không dùng 是 trước tính từ. 很 ở đây thường chỉ là từ đệm cho câu hoàn chỉnh, chưa hẳn nghĩa là “rất”; muốn nhấn mạnh mới dùng 非常, 特别 hoặc 太…了.",
+  "tip": "Lỗi hay gặp của người Việt là thêm 是 trước tính từ: không nói 我是高兴, chỉ nói 我很高兴.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“今天很冷” nghĩa là gì?",
+    "o": [
+     "Hôm nay rất nóng",
+     "Hôm nay trời mưa",
+     "Hôm nay rất đẹp",
+     "Hôm nay rất lạnh"
+    ],
+    "a": 3,
+    "why": "冷 là lạnh; 今天很冷: hôm nay rất lạnh."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "今天很冷",
+     "这件衣服很漂亮",
+     "我是很高兴",
+     "弟弟很高兴"
+    ],
+    "a": 2,
+    "why": "Tính từ làm vị ngữ thì không có 是: phải nói 我很高兴."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这件衣服很___。",
+    "o": [
+     "漂亮",
+     "跑步",
+     "吃饭",
+     "去"
+    ],
+    "a": 0,
+    "why": "Vị ngữ cần một tính từ: 漂亮 (đẹp)."
+   },
+   {
+    "q": "“很” trong “今天很冷” có tác dụng gì?",
+    "o": [
+     "Hỏi có hay không",
+     "Phủ định",
+     "Làm từ đệm, câu mới hoàn chỉnh",
+     "Chỉ thời gian"
+    ],
+    "a": 2,
+    "why": "很 ở đây thường chỉ là từ đệm; muốn nhấn mạnh “rất” thì dùng 非常."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他是忙",
+     "他是忙很",
+     "他忙是很",
+     "他很忙"
+    ],
+    "a": 3,
+    "why": "Tính từ 忙 làm vị ngữ: 他很忙, không dùng 是."
+   },
+   {
+    "q": "“夏天很热” nghĩa là gì?",
+    "o": [
+     "Mùa hè rất lạnh",
+     "Mùa đông rất nóng",
+     "Mùa hè rất nóng",
+     "Mùa hè rất đẹp"
+    ],
+    "a": 2,
+    "why": "热 là nóng; 夏天很热: mùa hè rất nóng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-16",
+  "stage": 1,
+  "title": "非主谓句 — câu không chủ–vị",
+  "hook": "“下雨了！” — mưa rồi!: câu không có chủ ngữ lẫn vị ngữ mà vẫn đủ nghĩa.",
+  "examples": [
+   "下雨了！(Xià yǔ le!) — Mưa rồi!",
+   "对不起！(Duìbuqǐ!) — Xin lỗi!",
+   "谢谢你！(Xièxie nǐ!) — Cảm ơn bạn!",
+   "多好的天气！(Duō hǎo de tiānqì!) — Thời tiết đẹp quá!"
+  ],
+  "speak": "下雨了！对不起！谢谢你！多好的天气！",
+  "rule": "Câu phi chủ–vị không có đủ chủ ngữ + vị ngữ: có thể chỉ có một từ hoặc một cụm (下雨了, 谢谢), hoặc chỉ có vị ngữ mà lược chủ ngữ trong lời nói (请进 = mời (bạn) vào). Loại câu này thường gặp khi chào hỏi, cảm ơn, xin lỗi, mời mọc, ra lệnh, cảm thán và mô tả thời tiết.",
+  "tip": "Đừng cố thêm chủ ngữ vào mọi câu: nói 下雨了 là đủ trong lời nói hằng ngày, không cần nói 天下雨了.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“下雨了” nghĩa là gì?",
+    "o": [
+     "Mưa rồi",
+     "Trời nắng",
+     "Trời đẹp",
+     "Trời lạnh"
+    ],
+    "a": 0,
+    "why": "下雨了 là câu phi chủ–vị tả thời tiết: mưa rồi."
+   },
+   {
+    "q": "Câu nào là câu phi chủ–vị?",
+    "o": [
+     "谢谢你",
+     "我吃饭",
+     "他学习",
+     "今天很冷"
+    ],
+    "a": 0,
+    "why": "谢谢你 không có chủ ngữ + vị ngữ đầy đủ; ba câu còn lại đều có chủ ngữ và vị ngữ."
+   },
+   {
+    "q": "Điền vào chỗ trống để xin lỗi: “___！”",
+    "o": [
+     "我吃饭",
+     "他很高",
+     "天气冷",
+     "对不起"
+    ],
+    "a": 3,
+    "why": "对不起 là câu phi chủ–vị: xin lỗi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "下雨了 là câu phi chủ–vị",
+     "谢谢你 là câu phi chủ–vị",
+     "我看书 là câu phi chủ–vị",
+     "请进 là câu phi chủ–vị"
+    ],
+    "a": 2,
+    "why": "我看书 có đủ chủ ngữ 我 và vị ngữ 看书 nên không phải câu phi chủ–vị; ba câu còn lại đều thiếu chủ–vị."
+   },
+   {
+    "q": "“谢谢你” thường dùng khi nào?",
+    "o": [
+     "Khi chào tạm biệt",
+     "Khi hỏi đường",
+     "Khi xin lỗi",
+     "Khi cảm ơn ai đó"
+    ],
+    "a": 3,
+    "why": "谢谢 nghĩa là cảm ơn."
+   },
+   {
+    "q": "Câu nào đúng để nói khi trời bắt đầu mưa?",
+    "o": [
+     "我下雨",
+     "雨下我",
+     "下雨了",
+     "天下雨我"
+    ],
+    "a": 2,
+    "why": "Nói thời tiết dùng câu phi chủ–vị: 下雨了."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-17",
+  "stage": 1,
+  "title": "陈述句 — câu kể",
+  "hook": "“我明天去学校。” — ngày mai tôi đi học: câu kể chỉ nói một sự việc, giọng xuống ở cuối câu.",
+  "examples": [
+   "我明天去学校。(Wǒ míngtiān qù xuéxiào.) — Ngày mai tôi đi học.",
+   "他是我的好朋友。(Tā shì wǒ de hǎo péngyou.) — Anh ấy là bạn tốt của tôi.",
+   "这个人是我的老师。(Zhège rén shì wǒ de lǎoshī.) — Người này là thầy của tôi.",
+   "我们昨天没有去公园。(Wǒmen zuótiān méi yǒu qù gōngyuán.) — Hôm qua chúng tôi không đi công viên."
+  ],
+  "speak": "我明天去学校。他是我的好朋友。这个人是我的老师。我们昨天没有去公园。",
+  "rule": "Câu trần thuật kể lại một sự việc, khẳng định hoặc phủ định, cuối câu xuống giọng và dùng dấu chấm 。. Trật tự cơ bản là chủ ngữ + vị ngữ; phủ định đặt 不 hoặc 没/没有 trước động từ hoặc tính từ. Việc đã qua phủ định dùng 没/没有, việc ở hiện tại hoặc tương lai phủ định dùng 不.",
+  "tip": "Câu kể phủ định quá khứ dùng 没/没有, không dùng 不: nói 我昨天没去, không nói 我昨天不去.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我明天去学校” nghĩa là gì?",
+    "o": [
+     "Hôm qua tôi đi học",
+     "Ngày mai tôi đi học",
+     "Hôm nay tôi đi học",
+     "Tôi không đi học"
+    ],
+    "a": 1,
+    "why": "明天 là ngày mai; câu kể: ngày mai tôi đi học."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我们昨天___去公园。",
+    "o": [
+     "没有",
+     "吗",
+     "呢",
+     "吧"
+    ],
+    "a": 0,
+    "why": "Việc quá khứ phủ định dùng 没有."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我明天去学校。",
+     "他是我的好朋友。",
+     "这个人是我的老师？",
+     "我们昨天没有去公园。"
+    ],
+    "a": 2,
+    "why": "Câu kể kết thúc bằng dấu chấm 。, không dùng dấu hỏi ？."
+   },
+   {
+    "q": "Câu kể phủ định việc đã qua dùng từ nào?",
+    "o": [
+     "吗",
+     "呢",
+     "吧",
+     "没/没有"
+    ],
+    "a": 3,
+    "why": "Quá khứ phủ định dùng 没/没有; 不 dùng cho hiện tại và tương lai."
+   },
+   {
+    "q": "Câu nào là câu trần thuật?",
+    "o": [
+     "你去吗？",
+     "你去学校。",
+     "你快去！",
+     "多好啊！"
+    ],
+    "a": 1,
+    "why": "你去学校。 kể một sự việc, kết thúc bằng dấu chấm."
+   },
+   {
+    "q": "“他是我的好朋友” nói về điều gì?",
+    "o": [
+     "Anh ấy đi học",
+     "Anh ấy rất bận",
+     "Anh ấy không đi học",
+     "Anh ấy là bạn tốt của tôi"
+    ],
+    "a": 3,
+    "why": "是…的: anh ấy là bạn tốt của tôi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-18",
+  "stage": 1,
+  "title": "疑问句 — câu hỏi",
+  "hook": "“你去学校吗？” — bạn đi học không?: câu hỏi có nhiều cách hỏi, không chỉ dùng 吗.",
+  "examples": [
+   "你去学校吗？(Nǐ qù xuéxiào ma?) — Bạn đi học không?",
+   "这是谁的书？(Zhè shì shéi de shū?) — Đây là sách của ai?",
+   "你喜欢茶还是咖啡？(Nǐ xǐhuan chá háishi kāfēi?) — Bạn thích trà hay cà phê?",
+   "你明天去不去学校？(Nǐ míngtiān qù bù qù xuéxiào?) — Ngày mai bạn có đi học không?"
+  ],
+  "speak": "你去学校吗？这是谁的书？你喜欢茶还是咖啡？你明天去不去学校？",
+  "rule": "Câu hỏi ở cấp 1 có bốn cách chính: dùng 吗 hỏi có/không; dùng từ hỏi (谁, 什么, 哪, 怎么, 为什么…); dùng 还是 để chọn một trong hai; dùng dạng chính–phản (去不去). Cuối câu lên giọng và dùng dấu ？.",
+  "tip": "Đừng dịch “hay” nào cũng là 还是: 还是 dùng để chọn một trong hai, còn 或者 dùng trong câu kể để liệt kê lựa chọn.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“你去学校吗？” nghĩa là gì?",
+    "o": [
+     "Bạn đi học không?",
+     "Bạn đang đi học",
+     "Bạn thích đi học",
+     "Bạn đừng đi học"
+    ],
+    "a": 0,
+    "why": "吗 cuối câu hỏi có/không: bạn đi học không?"
+   },
+   {
+    "q": "Điền vào chỗ trống: 这是___的书？",
+    "o": [
+     "谁",
+     "吗",
+     "吧",
+     "很"
+    ],
+    "a": 0,
+    "why": "Hỏi sở hữu dùng từ hỏi 谁: sách của ai?"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你去学校吗？",
+     "你喜欢茶还是咖啡？",
+     "你明天去不去学校？",
+     "你去学校吧？"
+    ],
+    "a": 3,
+    "why": "吧 là trợ từ đề nghị, không dùng để hỏi có/không như 吗."
+   },
+   {
+    "q": "Hỏi để chọn một trong hai dùng từ nào?",
+    "o": [
+     "吗",
+     "还是",
+     "呢",
+     "吧"
+    ],
+    "a": 1,
+    "why": "还是 nối hai lựa chọn để hỏi: 茶还是咖啡."
+   },
+   {
+    "q": "“你明天去不去学校？” là cách hỏi gì?",
+    "o": [
+     "Hỏi có/không bằng 吗",
+     "Hỏi chính–phản",
+     "Hỏi bằng từ hỏi",
+     "Hỏi lựa chọn bằng 还是"
+    ],
+    "a": 1,
+    "why": "去不去 là dạng khẳng định + phủ định: chính–phản."
+   },
+   {
+    "q": "Câu nào là câu hỏi?",
+    "o": [
+     "我去学校。",
+     "你去学校吗？",
+     "你快去学校！",
+     "天气多好啊！"
+    ],
+    "a": 1,
+    "why": "Có 吗 và dấu ？ nên đây là câu hỏi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-19",
+  "stage": 1,
+  "title": "祈使句 — câu cầu khiến",
+  "hook": "“请坐！” — mời ngồi!: câu cầu khiến dùng để nhờ, mời, khuyên hoặc ra lệnh.",
+  "examples": [
+   "请喝水！(Qǐng hē shuǐ!) — Mời uống nước!",
+   "请你帮我一下。(Qǐng nǐ bāng wǒ yīxià.) — Nhờ bạn giúp tôi một chút.",
+   "别说话！(Bié shuō huà!) — Đừng nói chuyện!",
+   "我们一起去学校！(Wǒmen yìqǐ qù xuéxiào!) — Chúng ta cùng đi học!"
+  ],
+  "speak": "请喝水！请你帮我一下。别说话！我们一起去学校！",
+  "rule": "Câu cầu khiến thường lược chủ ngữ, bắt đầu bằng 请, 别, 不要 hoặc kết thúc bằng 吧 để nhẹ giọng. 请 + động từ là lời mời hoặc nhờ lịch sự; 别/不要 + động từ là cấm; động từ + 吧 là rủ rê, đề nghị cùng làm.",
+  "tip": "Đừng ghép 请 với 别 theo kiểu tiếng Việt “xin đừng”: nói 别说话 là đủ; chỉ thêm 请 khi thật lịch sự: 请别说话.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“请坐” nghĩa là gì?",
+    "o": [
+     "Đừng ngồi",
+     "Bạn ngồi không?",
+     "Mời ngồi",
+     "Ngồi xuống đi học"
+    ],
+    "a": 2,
+    "why": "请坐 là lời mời lịch sự: mời ngồi."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___说话！",
+    "o": [
+     "别",
+     "吗",
+     "很",
+     "是"
+    ],
+    "a": 0,
+    "why": "Cấm làm gì dùng 别 + động từ: 别说话."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "请坐！",
+     "请你帮我一下。",
+     "别说话！",
+     "请别吗说话！"
+    ],
+    "a": 3,
+    "why": "吗 là trợ từ hỏi, không đứng trong câu cầu khiến."
+   },
+   {
+    "q": "“我们一起去吧” có ý gì?",
+    "o": [
+     "Ra lệnh phải đi",
+     "Rủ cùng đi",
+     "Hỏi có đi không",
+     "Cấm đi"
+    ],
+    "a": 1,
+    "why": "吧 cuối câu làm nhẹ giọng rủ rê: cùng đi nhé."
+   },
+   {
+    "q": "Muốn cấm ai làm gì thì dùng từ nào?",
+    "o": [
+     "请",
+     "吗",
+     "别/不要",
+     "呢"
+    ],
+    "a": 2,
+    "why": "别/不要 + động từ nghĩa là đừng, cấm."
+   },
+   {
+    "q": "Câu nào là câu cầu khiến?",
+    "o": [
+     "你去学校吗？",
+     "请你帮我一下。",
+     "今天很冷。",
+     "他是老师。"
+    ],
+    "a": 1,
+    "why": "请你帮我一下 là lời nhờ: câu cầu khiến."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-20",
+  "stage": 1,
+  "title": "感叹句 — câu cảm thán",
+  "hook": "“多好的天气啊！” — thời tiết đẹp quá!: câu cảm thán bộc lộ cảm xúc mạnh, cuối câu thường có 啊.",
+  "examples": [
+   "多好的天气！(Duō hǎo de tiānqì!) — Thời tiết đẹp quá!",
+   "你太漂亮了！(Nǐ tài piàoliang le!) — Bạn đẹp quá!",
+   "这件衣服太贵了！(Zhè jiàn yīfu tài guì le!) — Chiếc áo này đắt quá!",
+   "好大的苹果！(Hǎo dà de píngguǒ!) — Quả táo to quá!"
+  ],
+  "speak": "多好的天气！你太漂亮了！这件衣服太贵了！好大的苹果！",
+  "rule": "Câu cảm thán dùng mẫu 多么/多 + tính từ + 的 + danh từ + 啊 (多好的天气啊), hoặc 太 + tính từ + 了 (太贵了), hoặc 真/好 + tính từ (你真漂亮, 好大的房子). Cuối câu dùng dấu ！, thường có trợ từ cảm thán 啊 hoặc 呀.",
+  "tip": "太…了 trong câu cảm thán mang cảm xúc “quá…!”, khác với 太 trong câu kể chỉ mức độ: 这件衣服太贵了 vừa là nhận xét vừa là lời than thở.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“多好的天气” nghĩa là gì?",
+    "o": [
+     "Thời tiết xấu quá",
+     "Thời tiết đẹp quá",
+     "Thời tiết lạnh quá",
+     "Thời tiết nóng quá"
+    ],
+    "a": 1,
+    "why": "多好… là mẫu cảm thán: đẹp quá!"
+   },
+   {
+    "q": "Điền vào chỗ trống: 你___漂亮了！",
+    "o": [
+     "太",
+     "吗",
+     "别",
+     "是"
+    ],
+    "a": 0,
+    "why": "太 + tính từ + 了 là mẫu cảm thán: đẹp quá!"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "多好的天气！",
+     "你太漂亮了！",
+     "这件衣服太贵了！",
+     "你吗漂亮！"
+    ],
+    "a": 3,
+    "why": "吗 là trợ từ hỏi, không dùng trong câu cảm thán."
+   },
+   {
+    "q": "“好大的苹果” nhấn mạnh điều gì?",
+    "o": [
+     "Táo rất to",
+     "Táo rất nhỏ",
+     "Táo rất đẹp",
+     "Táo rất cũ"
+    ],
+    "a": 0,
+    "why": "好 + tính từ trong cảm thán nghĩa là rất: to quá!"
+   },
+   {
+    "q": "Câu cảm thán thường kết thúc bằng gì?",
+    "o": [
+     "Dấu chấm 。",
+     "Dấu ！và 啊/呀",
+     "Dấu hỏi ？",
+     "Dấu phẩy ，"
+    ],
+    "a": 1,
+    "why": "Câu cảm thán dùng dấu ！, thường có 啊 hoặc 呀 cuối câu."
+   },
+   {
+    "q": "Câu nào là câu cảm thán?",
+    "o": [
+     "天气很好。",
+     "你去学校吗？",
+     "多好的天气！",
+     "请坐！"
+    ],
+    "a": 2,
+    "why": "多好的天气！ có mẫu 多… và dấu ！."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-21",
+  "stage": 1,
+  "title": "并列复句 — câu ghép song song",
+  "hook": "“他唱歌，我跳舞。” — anh ấy hát, tôi nhảy: hai vế ngang nhau, không vế nào phụ thuộc vế nào.",
+  "examples": [
+   "他看书，我看电视。(Tā kàn shū, wǒ kàn diànshì.) — Anh ấy đọc sách, tôi xem ti-vi.",
+   "我喜欢茶，弟弟喜欢咖啡。(Wǒ xǐhuan chá, dìdi xǐhuan kāfēi.) — Tôi thích trà, em trai thích cà phê.",
+   "今天天气很好，我们去公园。(Jīntiān tiānqì hěn hǎo, wǒmen qù gōngyuán.) — Hôm nay thời tiết rất đẹp, chúng ta đi công viên.",
+   "我吃饭，他喝水。(Wǒ chī fàn, tā hē shuǐ.) — Tôi ăn cơm, anh ấy uống nước."
+  ],
+  "speak": "他看书，我看电视。我喜欢茶，弟弟喜欢咖啡。今天天气很好，我们去公园。我吃饭，他喝水。",
+  "rule": "Câu ghép song song gồm hai vế trở lên ngang hàng, mỗi vế là một câu trọn vẹn, giữa các vế dùng dấu phẩy; có thể thêm 一边…一边… hoặc 既…又… để nhấn mạnh cùng lúc. Khác với câu ghép chính–phụ: không có vế nào là điều kiện hay nguyên nhân của vế kia.",
+  "tip": "Đừng nối hai vế bằng 和 như tiếng Việt “và” giữa hai câu: nói 他唱歌，我跳舞, không nói 他唱歌和我跳舞.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他看书，我看电视” nghĩa là gì?",
+    "o": [
+     "Anh ấy đọc sách, tôi xem ti-vi",
+     "Anh ấy đọc sách hay hơn tôi",
+     "Anh ấy đọc sách vì tôi xem ti-vi",
+     "Nếu anh ấy đọc sách thì tôi xem ti-vi"
+    ],
+    "a": 0,
+    "why": "Hai vế ngang nhau: anh ấy đọc sách, tôi xem ti-vi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他一边吃饭，一边___。",
+    "o": [
+     "看电视",
+     "吗",
+     "很",
+     "是"
+    ],
+    "a": 0,
+    "why": "一边…一边… nối hai việc cùng lúc: vừa ăn vừa xem ti-vi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他看书，我看电视。",
+     "我喜欢茶，弟弟喜欢咖啡。",
+     "他看书和我看电视。",
+     "今天天气很好，我们去公园。"
+    ],
+    "a": 2,
+    "why": "和 chỉ nối từ hoặc cụm từ, không nối hai câu: phải dùng dấu phẩy."
+   },
+   {
+    "q": "“一边…一边…” nghĩa là gì?",
+    "o": [
+     "Trước… rồi…",
+     "Nếu… thì…",
+     "Tuy… nhưng…",
+     "Vừa… vừa…"
+    ],
+    "a": 3,
+    "why": "一边…一边… nói hai việc diễn ra cùng lúc."
+   },
+   {
+    "q": "Câu ghép song song có đặc điểm gì?",
+    "o": [
+     "Một vế là điều kiện của vế kia",
+     "Một vế là nguyên nhân của vế kia",
+     "Hai vế hỏi đáp nhau",
+     "Các vế ngang nhau, không phụ thuộc nhau"
+    ],
+    "a": 3,
+    "why": "Song song nghĩa là các vế ngang hàng, độc lập với nhau."
+   },
+   {
+    "q": "Câu nào là câu ghép song song?",
+    "o": [
+     "如果下雨，我不去。",
+     "他看书，我看电视。",
+     "因为很累，所以我睡觉。",
+     "你去吗？"
+    ],
+    "a": 1,
+    "why": "他看书，我看电视 có hai vế ngang nhau; các câu còn lại có quan hệ điều kiện, nguyên nhân hoặc chỉ là câu hỏi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-22",
+  "stage": 1,
+  "title": "了2 — tình huống mới xuất hiện",
+  "hook": "“下雨了。” — mưa rồi: 了 cuối câu báo một tình huống mới vừa xuất hiện.",
+  "examples": [
+   "下雨了。(Xià yǔ le.) — Mưa rồi.",
+   "他会说汉语了。(Tā huì shuō Hànyǔ le.) — Anh ấy đã biết nói tiếng Trung rồi.",
+   "天冷了，我要回家。(Tiān lěng le, wǒ yào huí jiā.) — Trời lạnh rồi, tôi muốn về nhà.",
+   "我现在不饿了。(Wǒ xiànzài bù è le.) — Bây giờ tôi không đói nữa rồi."
+  ],
+  "speak": "下雨了。他会说汉语了。天冷了，我要回家。我现在不饿了。",
+  "rule": "了2 đứng cuối câu, báo sự thay đổi: trước đây chưa, bây giờ đã (下雨了, 天冷了), hoặc trạng thái mới so với trước (会说汉语了, 不饿了). Khác với 了1 đứng sau động từ: 了2 không gắn với một động tác cụ thể đã xong mà gắn với cả câu.",
+  "tip": "Đừng nhầm 了2 với 了1: 我吃饭了 có thể vừa là “ăn xong” vừa là “đã ăn rồi (tình huống mới)”; muốn nhấn mạnh thay đổi thì dựa vào ngữ cảnh, ví dụ 天冷了 chỉ có thể là 了2.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“下雨了” nghĩa là gì?",
+    "o": [
+     "Trời sắp mưa",
+     "Hôm qua mưa",
+     "Mưa rồi",
+     "Mưa rất to"
+    ],
+    "a": 2,
+    "why": "了 cuối câu báo tình huống mới: trời đã mưa rồi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天___了，我要回家。",
+    "o": [
+     "冷",
+     "吗",
+     "很",
+     "去"
+    ],
+    "a": 0,
+    "why": "天冷了: trời lạnh rồi, tình huống mới xuất hiện."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "下雨了。",
+     "他会说汉语了。",
+     "天冷了。",
+     "我了现在不饿。"
+    ],
+    "a": 3,
+    "why": "了2 đứng cuối câu, không đứng giữa câu trước động từ."
+   },
+   {
+    "q": "了2 báo điều gì?",
+    "o": [
+     "Việc đang làm",
+     "Tình huống mới xuất hiện",
+     "Việc sắp làm",
+     "Câu hỏi"
+    ],
+    "a": 1,
+    "why": "了2 cuối câu báo một sự thay đổi, một tình huống mới."
+   },
+   {
+    "q": "“他会说汉语了” nhấn mạnh điều gì?",
+    "o": [
+     "Trước không biết, giờ biết rồi",
+     "Anh ấy muốn học tiếng Trung",
+     "Anh ấy đang học tiếng Trung",
+     "Anh ấy học rất giỏi"
+    ],
+    "a": 0,
+    "why": "了2 nhấn mạnh sự thay đổi: trước chưa biết, bây giờ đã biết."
+   },
+   {
+    "q": "Câu nào dùng 了2?",
+    "o": [
+     "我昨天买了一本书。",
+     "下雨了。",
+     "他吃了饭。",
+     "我去过北京。"
+    ],
+    "a": 1,
+    "why": "下雨了 có 了 cuối câu báo tình huống mới; các câu còn lại dùng 了1 hoặc 过."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-23",
+  "stage": 1,
+  "title": "了1 — việc đã hoàn thành",
+  "hook": "“我买了一本书。” — tôi đã mua một quyển sách: 了 sau động từ báo việc đã xong.",
+  "examples": [
+   "我买了一本书。(Wǒ mǎi le yī běn shū.) — Tôi đã mua một quyển sách.",
+   "他昨天去了学校。(Tā zuótiān qù le xuéxiào.) — Hôm qua anh ấy đã đi học.",
+   "我喝了一杯水。(Wǒ hē le yī bēi shuǐ.) — Tôi đã uống một cốc nước.",
+   "妈妈做了饭，我们一起吃。(Māma zuò le fàn, wǒmen yìqǐ chī.) — Mẹ đã nấu cơm xong, chúng ta cùng ăn."
+  ],
+  "speak": "我买了一本书。他昨天去了学校。我喝了一杯水。妈妈做了饭，我们一起吃。",
+  "rule": "了1 đứng ngay sau động từ (hoặc sau tân ngữ ngắn), báo hành động đã hoàn thành: 买了书, 去了北京. Thường đi với thời gian quá khứ (昨天, 刚才) hoặc số lượng đã xong (一本书, 一杯水); phủ định dùng 没 + động từ, không dùng 了.",
+  "tip": "了1 chỉ nói việc xong, không nói kinh nghiệm: 我去了北京 (đã đi) khác 我去过北京 (từng đi); phủ định quá khứ là 没去, không phải 不去了.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“我买了一本书” nghĩa là gì?",
+    "o": [
+     "Tôi muốn mua một quyển sách",
+     "Tôi đang mua một quyển sách",
+     "Tôi sẽ mua một quyển sách",
+     "Tôi đã mua một quyển sách"
+    ],
+    "a": 3,
+    "why": "了 sau 买 báo việc mua đã xong."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他昨天___学校。",
+    "o": [
+     "去了",
+     "吗",
+     "很",
+     "在"
+    ],
+    "a": 0,
+    "why": "昨天 là quá khứ, việc đi đã xong: 去了学校."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我买了一本书。",
+     "他昨天去了学校。",
+     "我不去了北京。",
+     "我喝了一杯水。"
+    ],
+    "a": 2,
+    "why": "Phủ định quá khứ dùng 没去, không nói 不去了."
+   },
+   {
+    "q": "Phủ định của “去了” là gì?",
+    "o": [
+     "不去",
+     "不去了",
+     "没去了",
+     "没去"
+    ],
+    "a": 3,
+    "why": "Việc quá khứ chưa xảy ra dùng 没 + động từ: 没去."
+   },
+   {
+    "q": "了1 đứng ở đâu?",
+    "o": [
+     "Trước chủ ngữ",
+     "Cuối câu",
+     "Ngay sau động từ",
+     "Trước động từ"
+    ],
+    "a": 2,
+    "why": "Công thức: động từ + 了1 (+ tân ngữ)."
+   },
+   {
+    "q": "“我喝了一杯水” báo điều gì?",
+    "o": [
+     "Việc đang làm",
+     "Việc sắp làm",
+     "Việc chưa làm",
+     "Việc uống đã xong"
+    ],
+    "a": 3,
+    "why": "了1 sau 喝 báo việc uống đã hoàn thành."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-24",
+  "stage": 1,
+  "title": "钱数表示法 — nói số tiền",
+  "hook": "“这本书二十块钱。” — quyển sách này hai mươi đồng: nói tiền có 元/块, 角/毛, 分, đừng nhầm thứ tự.",
+  "examples": [
+   "这本书二十块钱。(Zhè běn shū èrshí kuài qián.) — Quyển sách này hai mươi đồng.",
+   "一杯咖啡十五块五毛。(Yī bēi kāfēi shíwǔ kuài wǔ máo.) — Một cốc cà phê mười lăm đồng năm hào.",
+   "这个苹果三块钱一斤。(Zhège píngguǒ sān kuài qián yī jīn.) — Quả táo này ba đồng một cân.",
+   "你有零钱吗？我要买一个苹果。(Nǐ yǒu língqián ma? Wǒ yào mǎi yī ge píngguǒ.) — Bạn có tiền lẻ không? Tôi muốn mua một quả táo."
+  ],
+  "speak": "这本书二十块钱。一杯咖啡十五块五毛。这个苹果三块钱一斤。你有零钱吗？我要买一个苹果。",
+  "rule": "Nói số tiền theo thứ tự 元/块 + 角/毛 + 分, số 0 ở giữa đọc 零 (十五块零五分), cuối có thể thêm 钱. Khẩu ngữ dùng 块/毛, văn viết và trường hợp trang trọng dùng 元/角; 一斤 là nửa ki-lô-gam, hay dùng khi mua bán theo cân.",
+  "tip": "Người Việt hay nói “hai mươi tiền”: nhớ trong tiếng Trung số tiền luôn có đơn vị 块/元 sau số, và đừng quên 毛/分 khi có số lẻ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“这本书二十块钱” nghĩa là gì?",
+    "o": [
+     "Quyển sách này hai mươi đồng",
+     "Quyển sách này hai đồng",
+     "Quyển sách này hai trăm đồng",
+     "Quyển sách này miễn phí"
+    ],
+    "a": 0,
+    "why": "二十块钱 là hai mươi đồng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 一杯咖啡十五块___。",
+    "o": [
+     "五毛",
+     "吗",
+     "很",
+     "去"
+    ],
+    "a": 0,
+    "why": "Số lẻ sau 块 là 毛: 十五块五毛."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这本书二十块钱。",
+     "一杯咖啡十五块五毛。",
+     "这个苹果三块钱一斤。",
+     "这本书二十钱块。"
+    ],
+    "a": 3,
+    "why": "Thứ tự là số + 块 + 钱, không nói 钱块."
+   },
+   {
+    "q": "“十五块零五分” đọc số 0 ở giữa là gì?",
+    "o": [
+     "不",
+     "没",
+     "空",
+     "零"
+    ],
+    "a": 3,
+    "why": "Số 0 giữa các đơn vị tiền đọc là 零."
+   },
+   {
+    "q": "Khẩu ngữ nói “đồng” dùng từ nào?",
+    "o": [
+     "元",
+     "角",
+     "块",
+     "分"
+    ],
+    "a": 2,
+    "why": "Khẩu ngữ dùng 块, văn viết dùng 元."
+   },
+   {
+    "q": "“三块钱一斤” nghĩa là gì?",
+    "o": [
+     "Ba đồng một quả",
+     "Ba đồng một cân",
+     "Ba đồng một cái",
+     "Ba đồng một gói"
+    ],
+    "a": 1,
+    "why": "一斤 là một cân (nửa ki-lô-gam): ba đồng một cân."
+   }
+  ]
+ },
+ {
+  "id": "v218-l1-25",
+  "stage": 1,
+  "title": "时间表示法 — nói giờ, ngày",
+  "hook": "“现在三点半。” — bây giờ ba giờ rưỡi: nói giờ, ngày, tháng có thứ tự riêng, đừng đảo như tiếng Việt.",
+  "examples": [
+   "现在三点半。(Xiànzài sān diǎn bàn.) — Bây giờ ba giờ rưỡi.",
+   "今天是十一月十八号，星期三。(Jīntiān shì shíyī yuè shíbā hào, xīngqīsān.) — Hôm nay là ngày 18 tháng 11, thứ Tư.",
+   "我们七点一刻上课。(Wǒmen qī diǎn yī kè shàng kè.) — Chúng tôi vào học lúc bảy giờ mười lăm.",
+   "我们八点差十分上课。(Wǒmen bā diǎn chà shí fēn shàng kè.) — Chúng tôi vào học lúc tám giờ kém mười phút."
+  ],
+  "speak": "现在三点半。今天是十一月十八号，星期三。我们七点一刻上课。我们八点差十分上课。",
+  "rule": "Nói giờ: số + 点 + 分; 半 là 30 phút (三点半), 刻 là 15 phút (七点一刻), 差…分 là kém… phút (八点差十分). Nói ngày: năm + 年 + tháng + 月 + ngày + 号/日, rồi mới đến thứ (星期三); thứ tự từ lớn đến nhỏ, ngược với cách nói ngày–tháng của tiếng Việt.",
+  "tip": "Đừng nói “mười tám tháng mười một” theo thứ tự tiếng Việt: tiếng Trung nói tháng trước, ngày sau — 十一月十八号.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“现在三点半” nghĩa là gì?",
+    "o": [
+     "Bây giờ ba giờ kém",
+     "Bây giờ ba giờ đúng",
+     "Bây giờ ba giờ rưỡi",
+     "Bây giờ ba giờ mười lăm"
+    ],
+    "a": 2,
+    "why": "半 sau 点 là 30 phút: ba giờ rưỡi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我们七点___上课。",
+    "o": [
+     "一刻",
+     "吗",
+     "很",
+     "去"
+    ],
+    "a": 0,
+    "why": "一刻 là 15 phút: bảy giờ mười lăm."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "现在三点半。",
+     "今天是十一月十八号。",
+     "我们七点一刻上课。",
+     "今天是十八号十一月。"
+    ],
+    "a": 3,
+    "why": "Thứ tự là tháng trước, ngày sau: 十一月十八号."
+   },
+   {
+    "q": "“一刻” là bao nhiêu phút?",
+    "o": [
+     "5 phút",
+     "15 phút",
+     "30 phút",
+     "45 phút"
+    ],
+    "a": 1,
+    "why": "一刻 là một khắc, bằng 15 phút."
+   },
+   {
+    "q": "“八点差十分” nghĩa là gì?",
+    "o": [
+     "Tám giờ kém mười phút",
+     "Tám giờ mười phút",
+     "Tám giờ rưỡi",
+     "Tám giờ kém năm phút"
+    ],
+    "a": 0,
+    "why": "差…分 nghĩa là kém… phút: tám giờ kém mười."
+   },
+   {
+    "q": "Nói ngày trong tiếng Trung theo thứ tự nào?",
+    "o": [
+     "Ngày trước, tháng sau",
+     "Tháng trước, ngày sau",
+     "Thứ trước, ngày sau",
+     "Năm sau, tháng trước"
+    ],
+    "a": 1,
+    "why": "Thứ tự từ lớn đến nhỏ: năm – tháng – ngày – thứ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-01",
+  "stage": 2,
+  "title": "能愿动词 可能、可以 — có thể, được phép",
+  "hook": "“我可能去不了，明天可以吗？” — 可能 nói khả năng xảy ra, 可以 nói được phép làm.",
+  "examples": [
+   "明天可能下雨，带一把伞吧。(Míngtiān kěnéng xià yǔ, dài yī bǎ sǎn ba.) — Ngày mai có thể mưa, mang theo một cái ô nhé.",
+   "你可以在这里看书。(Nǐ kěyǐ zài zhèlǐ kàn shū.) — Bạn có thể đọc sách ở đây.",
+   "他可能在家，你打电话问问。(Tā kěnéng zài jiā, nǐ dǎ diànhuà wènwen.) — Anh ấy có thể đang ở nhà, bạn gọi điện hỏi thử xem.",
+   "这件衣服太贵了，我可能买不起。(Zhè jiàn yīfu tài guì le, wǒ kěnéng mǎi bu qǐ.) — Cái áo này đắt quá, có thể tôi mua không nổi."
+  ],
+  "speak": "明天可能下雨，带一把伞吧。你可以在这里看书。他可能在家，你打电话问问。这件衣服太贵了，我可能买不起。",
+  "rule": "可能 đứng trước động từ, nói khả năng xảy ra: đoán việc gì có thể thành sự thật (可能下雨、可能在家). 可以 cũng đứng trước động từ, nói được phép hoặc có điều kiện làm được (可以在这里看书、可以进来吗). 可能 không dùng để xin phép, 可以 không dùng để đoán khả năng. Phủ định: 不可能 (không thể nào), 不可以 (không được phép).",
+  "tip": "Người Việt hay dùng 可以 để đoán, như “明天可以下雨” — sai. Đoán khả năng phải dùng 可能: 明天下雨 là 可能下雨.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“可能” nghĩa là gì?",
+    "o": [
+     "Có thể xảy ra (khả năng)",
+     "Được phép làm",
+     "Nhất định phải làm",
+     "Muốn làm"
+    ],
+    "a": 0,
+    "why": "可能 nói khả năng xảy ra, không phải xin phép hay bắt buộc."
+   },
+   {
+    "q": "Điền vào chỗ trống: 明天___下雨，带伞吧。",
+    "o": [
+     "可以",
+     "可能",
+     "应该",
+     "愿意"
+    ],
+    "a": 1,
+    "why": "Đoán thời tiết có thể mưa thì dùng 可能."
+   },
+   {
+    "q": "Câu nào dùng 可能/可以 SAI?",
+    "o": [
+     "他可能不在家",
+     "你可以在这里坐",
+     "明天可以下雨",
+     "我可以进来吗"
+    ],
+    "a": 2,
+    "why": "可以 không dùng để đoán khả năng; mưa có thể xảy ra thì nói 可能下雨."
+   },
+   {
+    "q": "Câu nào dùng 可以 đúng để xin phép?",
+    "o": [
+     "我可能问一个问题吗",
+     "我可以下雨吗",
+     "我可能进来吗",
+     "我可以问一个问题吗"
+    ],
+    "a": 3,
+    "why": "Xin phép làm gì thì dùng 可以: 我可以问一个问题吗?"
+   },
+   {
+    "q": "Trong “他可能在家”, 可能 nói điều gì?",
+    "o": [
+     "Anh ấy muốn ở nhà",
+     "Khả năng anh ấy ở nhà",
+     "Anh ấy được phép ở nhà",
+     "Anh ấy nhất định ở nhà"
+    ],
+    "a": 1,
+    "why": "可能 là suy đoán: có khả năng anh ấy đang ở nhà."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这件衣服太贵，我___买不起。",
+    "o": [
+     "可以",
+     "应该",
+     "可能",
+     "愿意"
+    ],
+    "a": 2,
+    "why": "Mua không nổi là suy đoán về khả năng, dùng 可能."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-02",
+  "stage": 2,
+  "title": "动词重叠 AA、A一A、A了A、ABAB — lặp động từ thử một chút",
+  "hook": "“你看看这本书，试一试，很好玩。” — lặp động từ làm việc nhẹ nhàng, thử một chút rồi thôi.",
+  "examples": [
+   "你看看这张照片，多好看！(Nǐ kànkan zhè zhāng zhàopiàn, duō hǎokàn!) — Bạn xem thử tấm ảnh này, đẹp lắm!",
+   "他跑一跑就出汗了。(Tā pǎo yī pǎo jiù chū hàn le.) — Anh ấy chạy một lát là ra mồ hôi.",
+   "我们吃了饭，休息休息再走。(Wǒmen chī le fàn, xiūxi xiūxi zài zǒu.) — Chúng tôi ăn cơm xong, nghỉ một lát rồi đi.",
+   "她笑了笑，没说话。(Tā xiào le xiào, méi shuō huà.) — Cô ấy cười một cái, không nói gì."
+  ],
+  "speak": "你看看这张照片，多好看！他跑一跑就出汗了。我们吃了饭，休息休息再走。她笑了笑，没说话。",
+  "rule": "Động từ đơn âm tiết lặp thành AA (看看、试试), thêm 一 thành A一A (看一看、跑一跑), thêm 了 thành A了A (笑了笑、想了想); động từ hai âm tiết lặp thành ABAB (休息休息、学习学习). Lặp làm hành động nhẹ, ngắn, thử một chút; không lặp các động từ chỉ trạng thái hay tồn tại như 是、在、有.",
+  "tip": "Chỉ lặp động từ, không lặp tân ngữ: 看看书 đúng, 看书看书 sai. Lặp rồi thì hành động nghe nhẹ nhàng, đừng dùng khi việc đó quan trọng, kéo dài.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“看看” có nghĩa là gì?",
+    "o": [
+     "Xem một chút, thử xem",
+     "Xem rất lâu",
+     "Xem đi xem lại nhiều lần",
+     "Không xem nữa"
+    ],
+    "a": 0,
+    "why": "看看 là dạng AA: xem thử một chút, nhẹ nhàng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你___这件衣服，喜欢就买。",
+    "o": [
+     "试试试",
+     "试一试",
+     "试了",
+     "试试了"
+    ],
+    "a": 1,
+    "why": "试一试 là dạng A一A: thử một chút."
+   },
+   {
+    "q": "Câu nào dùng động từ lặp SAI?",
+    "o": [
+     "他想了想",
+     "我们休息休息",
+     "你看看书",
+     "他是是老师"
+    ],
+    "a": 3,
+    "why": "是 không lặp được; phải nói 他是老师."
+   },
+   {
+    "q": "“笑了笑” thuộc dạng lặp nào?",
+    "o": [
+     "AA",
+     "A了A",
+     "A一A",
+     "ABAB"
+    ],
+    "a": 1,
+    "why": "笑了笑 là dạng A了A: cười một cái rồi thôi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我们___，再去打球。",
+    "o": [
+     "休息了休息",
+     "休息一休息",
+     "休息休息",
+     "休息休息了"
+    ],
+    "a": 2,
+    "why": "休息 là động từ hai âm tiết, lặp thành ABAB: 休息休息."
+   },
+   {
+    "q": "“学习学习” là dạng lặp nào?",
+    "o": [
+     "AA",
+     "A一A",
+     "A了A",
+     "ABAB"
+    ],
+    "a": 3,
+    "why": "学习 là động từ hai âm tiết, lặp thành 学习学习 là dạng ABAB."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-03",
+  "stage": 2,
+  "title": "人称代词 别人、大家、它、它们、咱、咱们、自己 — người khác, mọi người, nó, chính mình",
+  "hook": "“大家自己想一想，别人怎么说不重要。” — đại từ chỉ người khác, mọi người và chính mình.",
+  "examples": [
+   "大家都喜欢这首歌。(Dàjiā dōu xǐhuan zhè shǒu gē.) — Mọi người đều thích bài hát này.",
+   "别管别人怎么说，你自己决定。(Bié guǎn biéren zěnme shuō, nǐ zìjǐ juédìng.) — Đừng để ý người khác nói gì, tự bạn quyết định.",
+   "这只猫很可爱，它叫小白。(Zhè zhī māo hěn kě'ài, tā jiào Xiǎobái.) — Con mèo này rất đáng yêu, nó tên là Tiểu Bạch.",
+   "咱们明天一起去市场吧。(Zánmen míngtiān yīqǐ qù shìchǎng ba.) — Ngày mai chúng ta cùng đi chợ nhé."
+  ],
+  "speak": "大家都喜欢这首歌。别管别人怎么说，你自己决定。这只猫很可爱，它叫小白。咱们明天一起去市场吧。",
+  "rule": "大家 là mọi người (số nhiều, thân mật); 别人 là người khác; 它 là nó, chỉ một vật hoặc con vật, 它们 là chúng nó (số nhiều); 咱/咱们 là chúng ta trong khẩu ngữ, gồm cả người đang nghe; 自己 là tự mình, chính mình, đứng sau chủ ngữ hoặc tân ngữ để nhấn mạnh (我自己做、你自己决定).",
+  "tip": "它 chỉ vật, không chỉ người: nói học sinh thì dùng 他/她, không dùng 它. 咱们 gồm cả người nghe nên nghe thân mật hơn 我们 khi rủ rê, mời mọc.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“大家” nghĩa là gì?",
+    "o": [
+     "Mọi người",
+     "Người khác",
+     "Chính mình",
+     "Chúng nó"
+    ],
+    "a": 0,
+    "why": "大家 là mọi người, số nhiều, thân mật."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这两本书很好，___我都喜欢。",
+    "o": [
+     "它",
+     "它们",
+     "自己",
+     "别人"
+    ],
+    "a": 1,
+    "why": "两本书 là số nhiều, dùng 它们."
+   },
+   {
+    "q": "Câu nào dùng đại từ SAI?",
+    "o": [
+     "咱们一起去吧",
+     "大家都来了",
+     "你自己想一想",
+     "它是一个学生"
+    ],
+    "a": 3,
+    "why": "它 chỉ vật hoặc con vật, không chỉ người; nói học sinh thì dùng 他/她."
+   },
+   {
+    "q": "“咱们” khác “我们” ở điểm nào?",
+    "o": [
+     "咱们只 dùng trong văn viết",
+     "咱们 là số ít",
+     "咱们 gồm cả người nghe",
+     "咱们 chỉ người lạ"
+    ],
+    "a": 2,
+    "why": "咱们 là cách nói thân mật, gồm cả người đang nghe."
+   },
+   {
+    "q": "Điền vào chỗ trống: 别看___，先做好自己的事。",
+    "o": [
+     "大家",
+     "别人",
+     "咱们",
+     "它们"
+    ],
+    "a": 1,
+    "why": "别看别人: đừng nhìn người khác nói gì, làm gì."
+   },
+   {
+    "q": "“自己” trong “我自己做” nhấn mạnh điều gì?",
+    "o": [
+     "Làm cho người khác",
+     "Làm rất nhanh",
+     "Tự mình làm",
+     "Làm cùng mọi người"
+    ],
+    "a": 2,
+    "why": "自己 nhấn mạnh tự mình làm, không nhờ ai."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-04",
+  "stage": 2,
+  "title": "动量词 遍、次、场、回、下 — đếm số lần làm việc",
+  "hook": "“这首歌我听了三遍，电影看了两次。” — động lượng từ đếm một việc làm mấy lần.",
+  "examples": [
+   "这首歌我听了三遍，还想再听一遍。(Zhè shǒu gē wǒ tīng le sān biàn, hái xiǎng zài tīng yī biàn.) — Bài hát này tôi nghe ba lần rồi, còn muốn nghe thêm một lần nữa.",
+   "我去过两次北京。(Wǒ qù guo liǎng cì Běijīng.) — Tôi từng đi Bắc Kinh hai lần.",
+   "昨天下了一场大雨。(Zuótiān xià le yī chǎng dà yǔ.) — Hôm qua có một trận mưa lớn.",
+   "他敲了三下门，没人开。(Tā qiāo le sān xià mén, méi rén kāi.) — Anh ấy gõ cửa ba cái, không ai mở."
+  ],
+  "speak": "这首歌我听了三遍，还想再听一遍。我去过两次北京。昨天下了一场大雨。他敲了三下门，没人开。",
+  "rule": "Động lượng từ đứng sau động từ, đếm số lần làm việc: 遍 nhấn mạnh làm trọn vẹn từ đầu đến cuối (看一遍书、听两遍歌); 次 đếm lần chung chung (去过两次); 场 dùng cho sự việc kéo dài như mưa, trận đấu, buổi biểu diễn (一场雨、一场比赛); 回 dùng cho lần đi về, quay lại hoặc sự việc xảy ra (来过两回); 下 đếm động tác ngắn, nhẹ (敲一下、打一下).",
+  "tip": "遍 khác 次: 看了一遍 là xem hết một lượt từ đầu đến cuối, 看了一次 chỉ là xem một lần, có thể chưa xem hết.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“听了三遍” nghĩa là gì?",
+    "o": [
+     "Nghe trọn vẹn ba lượt",
+     "Nghe ba bài khác nhau",
+     "Nghe ba phút",
+     "Nghe rất to"
+    ],
+    "a": 0,
+    "why": "遍 nhấn mạnh nghe trọn vẹn từ đầu đến cuối, ba lượt."
+   },
+   {
+    "q": "Điền vào chỗ trống: 昨天下了一___大雨。",
+    "o": [
+     "次",
+     "遍",
+     "场",
+     "下"
+    ],
+    "a": 2,
+    "why": "Mưa lớn dùng 场: 下了一场大雨."
+   },
+   {
+    "q": "Câu nào dùng động lượng từ SAI?",
+    "o": [
+     "这首歌他听了三场",
+     "这首歌他听了三遍",
+     "他去过两次北京",
+     "他敲了三下门"
+    ],
+    "a": 0,
+    "why": "Nghe nhạc đếm bằng 遍 hoặc 次, không dùng 场; 场 dùng cho mưa, trận đấu, buổi diễn."
+   },
+   {
+    "q": "“敲了三下门” — 下 đếm cái gì?",
+    "o": [
+     "Việc kéo dài như trận mưa",
+     "Việc đi về",
+     "Động tác ngắn như gõ cửa",
+     "Việc nghe nhạc"
+    ],
+    "a": 2,
+    "why": "下 đếm động tác ngắn, nhẹ như gõ, chạm, đánh."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我去过三___北京。",
+    "o": [
+     "遍",
+     "次",
+     "场",
+     "下"
+    ],
+    "a": 1,
+    "why": "Đi đâu mấy lần thì dùng 次: 去过三次北京."
+   },
+   {
+    "q": "“回” thường dùng với việc nào?",
+    "o": [
+     "Nghe nhạc",
+     "Gõ cửa",
+     "Xem phim",
+     "Đi về, quay lại"
+    ],
+    "a": 3,
+    "why": "回 đếm lần đi về hoặc quay lại: 回了一趟家、来过两回."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-05",
+  "stage": 2,
+  "title": "时量词 分钟、年、天、周 — đếm thời gian kéo dài",
+  "hook": "“我等了十分钟，他学了三年中文。” — thời lượng từ nói một việc kéo dài bao lâu.",
+  "examples": [
+   "我每天跑步三十分钟。(Wǒ měitiān pǎobù sānshí fēnzhōng.) — Mỗi ngày tôi chạy bộ ba mươi phút.",
+   "他学中文学了两年。(Tā xué Zhōngwén xué le liǎng nián.) — Anh ấy học tiếng Trung được hai năm rồi.",
+   "我们在北京住了五天。(Wǒmen zài Běijīng zhù le wǔ tiān.) — Chúng tôi ở Bắc Kinh năm ngày.",
+   "这个活动要做两周。(Zhège huódòng yào zuò liǎng zhōu.) — Hoạt động này phải làm trong hai tuần."
+  ],
+  "speak": "我每天跑步三十分钟。他学中文学了两年。我们在北京住了五天。这个活动要做两周。",
+  "rule": "Thời lượng từ đứng sau động từ để nói việc kéo dài bao lâu: 等了十分钟、学了两年、住了五天、做两周. Động từ có tân ngữ thì thường lặp động từ: 学中文学了两年; cũng có thể nói 学了两年中文. 分钟 đếm phút, 天 đếm ngày, 周 đếm tuần, 年 đếm năm.",
+  "tip": "Người Việt hay đặt thời gian trước động từ như tiếng Việt (“我两年学中文”) — sai. Thời lượng phải đứng sau động từ: 学中文学了两年.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“学了两年” nghĩa là gì?",
+    "o": [
+     "Học được hai năm",
+     "Học hai môn",
+     "Học năm thứ hai",
+     "Học hai lần"
+    ],
+    "a": 0,
+    "why": "两年 là thời gian học kéo dài: học được hai năm."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他每天运动___。",
+    "o": [
+     "三年",
+     "五天",
+     "三十分钟",
+     "两周"
+    ],
+    "a": 2,
+    "why": "Mỗi ngày vận động thì đếm bằng phút: 三十分钟."
+   },
+   {
+    "q": "Câu nào dùng thời lượng từ SAI?",
+    "o": [
+     "我在北京住了五天",
+     "我两年学中文",
+     "他学了两年中文",
+     "我们等了十分钟"
+    ],
+    "a": 1,
+    "why": "Thời lượng phải đứng sau động từ: 学中文学了两年 hoặc 学了两年中文, không nói 我两年学中文."
+   },
+   {
+    "q": "“住了五天” — 五天 nói điều gì?",
+    "o": [
+     "Ở ngày thứ năm",
+     "Ở trong năm ngày",
+     "Ở năm lần",
+     "Ở năm chỗ"
+    ],
+    "a": 1,
+    "why": "五天 là thời gian ở kéo dài: ở trong năm ngày."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这个工作要做___才能完成。",
+    "o": [
+     "两分钟",
+     "两年",
+     "两天",
+     "两周"
+    ],
+    "a": 3,
+    "why": "Một công việc cần làm trong hai tuần: 做两周."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "我学中文两年了",
+     "我两年学中文了",
+     "我学两年中文",
+     "我学了中文两年"
+    ],
+    "a": 0,
+    "why": "Thời lượng đứng cuối câu sau động từ + tân ngữ: 学中文两年了."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-06",
+  "stage": 2,
+  "title": "程度副词 更、十分、好 — càng, rất, lắm",
+  "hook": "“今天比昨天更冷，这件衣服十分好看，好贵啊！” — 更、十分、好 nói mức độ mạnh yếu.",
+  "examples": [
+   "今天比昨天更冷了。(Jīntiān bǐ zuótiān gèng lěng le.) — Hôm nay lạnh hơn hôm qua.",
+   "这件衣服十分好看。(Zhè jiàn yīfu shífēn hǎokàn.) — Cái áo này rất đẹp.",
+   "这本书好贵，我买不起。(Zhè běn shū hǎo guì, wǒ mǎi bu qǐ.) — Cuốn sách này đắt quá, tôi mua không nổi.",
+   "他跑得更快了。(Tā pǎo de gèng kuài le.) — Anh ấy chạy nhanh hơn rồi."
+  ],
+  "speak": "今天比昨天更冷了。这件衣服十分好看。这本书好贵，我买不起。他跑得更快了。",
+  "rule": "更 là càng, hơn (so sánh mức độ tăng lên, thường đi với 比: 比昨天更冷); 十分 là rất, mức độ cao, trang trọng hơn 很; 好 + tính từ là rất trong khẩu ngữ, nhấn mạnh cảm xúc (好大、好贵、好冷). Cả ba đứng trước tính từ hoặc động từ.",
+  "tip": "更 phải có cái để so sánh, ngầm hoặc rõ: nói “今天更冷” người nghe tự hiểu là hơn hôm qua. Đừng dùng 更 thay cho 很 khi không có so sánh.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“更冷” nghĩa là gì?",
+    "o": [
+     "Lạnh hơn",
+     "Rất lạnh",
+     "Hơi lạnh",
+     "Không lạnh"
+    ],
+    "a": 0,
+    "why": "更 là càng, hơn: lạnh hơn (so với trước đó)."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这件衣服___好看，我很喜欢。",
+    "o": [
+     "更",
+     "十分",
+     "好",
+     "才"
+    ],
+    "a": 1,
+    "why": "十分好看: rất đẹp, mức độ cao, trang trọng."
+   },
+   {
+    "q": "Câu nào dùng phó từ mức độ SAI?",
+    "o": [
+     "今天比昨天更热",
+     "这本书十分有意思",
+     "这个菜好吃好",
+     "他跑得更快了"
+    ],
+    "a": 2,
+    "why": "好 phải đứng trước tính từ: 好吃, không nói 好吃好."
+   },
+   {
+    "q": "“好贵” trong khẩu ngữ nghĩa là gì?",
+    "o": [
+     "Hơi đắt",
+     "Rất đắt",
+     "Không đắt",
+     "Đắt vừa"
+    ],
+    "a": 1,
+    "why": "好 + tính từ trong khẩu ngữ nghĩa là rất: 好贵 là rất đắt."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他比我___高一点儿。",
+    "o": [
+     "十分",
+     "好",
+     "都",
+     "更"
+    ],
+    "a": 3,
+    "why": "So sánh hơn thì dùng 更: 比我更高一点儿."
+   },
+   {
+    "q": "“十分” khác “很” ở điểm nào?",
+    "o": [
+     "十分只 dùng trong câu hỏi",
+     "十分 là số lượng",
+     "十分 trang trọng và mạnh hơn",
+     "十分 không đứng trước tính từ"
+    ],
+    "a": 2,
+    "why": "十分 nghĩa như 很 nhưng mức độ cao hơn và trang trọng hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-07",
+  "stage": 2,
+  "title": "范围、协同副词 全、一共、只 — cả, tổng cộng, chỉ",
+  "hook": "“全班一共三十个人，只有他没来。” — 全、一共、只 nói phạm vi bao quát hay giới hạn.",
+  "examples": [
+   "全班同学都来了。(Quán bān tóngxué dōu lái le.) — Cả lớp đều đến rồi.",
+   "我们一共买了五本书。(Wǒmen yīgòng mǎi le wǔ běn shū.) — Chúng tôi mua tổng cộng năm quyển sách.",
+   "我只会说一点儿中文。(Wǒ zhǐ huì shuō yīdiǎnr Zhōngwén.) — Tôi chỉ biết nói một chút tiếng Trung.",
+   "全家都喜欢吃饺子。(Quánjiā dōu xǐhuan chī jiǎozi.) — Cả nhà đều thích ăn sủi cảo."
+  ],
+  "speak": "全班同学都来了。我们一共买了五本书。我只会说一点儿中文。全家都喜欢吃饺子。",
+  "rule": "全 là toàn bộ, cả (đứng trước danh từ chỉ tập thể: 全班、全家, thường đi với 都); 一共 là tổng cộng (đứng trước số lượng, cộng dồn: 一共五本书、一共三十个人); 只 là chỉ (giới hạn: 只会、只有、只买). 全 nói phạm vi bao quát, 只 nói giới hạn thu hẹp, ngược nhau.",
+  "tip": "一共 phải đi với con số tổng: “一共五本书” đúng; đừng nói “一共书”. 只 đứng trước động từ: 只会、只有、只买.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“一共五本” nghĩa là gì?",
+    "o": [
+     "Tổng cộng năm quyển",
+     "Chỉ năm quyển",
+     "Cả năm quyển",
+     "Mỗi quyển năm đồng"
+    ],
+    "a": 0,
+    "why": "一共 là tổng cộng: cộng dồn lại là năm quyển."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___家都去旅游了。",
+    "o": [
+     "只",
+     "全",
+     "一共",
+     "都"
+    ],
+    "a": 1,
+    "why": "全家: cả nhà."
+   },
+   {
+    "q": "Câu nào dùng 全/一共/只 SAI?",
+    "o": [
+     "我们一共去了三个人",
+     "我只买了一个面包",
+     "全班都来了",
+     "一共我买了五本书"
+    ],
+    "a": 3,
+    "why": "一共 đứng trước số lượng: 一共买了五本书, không đứng đầu câu như 一共我买了."
+   },
+   {
+    "q": "“只会说一点儿” — 只 có tác dụng gì?",
+    "o": [
+     "Giới hạn: chỉ biết một chút",
+     "Bao quát: biết hết",
+     "Cộng tổng số lượng",
+     "Nhấn mạnh thời gian"
+    ],
+    "a": 0,
+    "why": "只 giới hạn phạm vi: chỉ biết một chút thôi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 教室里___有他一个人。",
+    "o": [
+     "全",
+     "一共",
+     "只",
+     "都"
+    ],
+    "a": 2,
+    "why": "只有他一个人: chỉ có một mình anh ấy."
+   },
+   {
+    "q": "“全班都来了” — 全 nói phạm vi nào?",
+    "o": [
+     "Một bạn",
+     "Cả lớp",
+     "Tổng số sách",
+     "Chỉ một người"
+    ],
+    "a": 1,
+    "why": "全班 là cả lớp, toàn bộ học sinh trong lớp."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-08",
+  "stage": 2,
+  "title": "频率、重复副词 重新、经常、老、老是、又 — lại, thường, cứ",
+  "hook": "“他经常跑步，写错了又重新写，老是忘记带伞。” — năm phó từ nói làm lại, làm thường xuyên.",
+  "examples": [
+   "我经常去那家小店买早饭。(Wǒ jīngcháng qù nà jiā xiǎodiàn mǎi zǎofàn.) — Tôi thường đến quán nhỏ đó mua bữa sáng.",
+   "这道题写错了，重新写一遍。(Zhè dào tí xiě cuò le, chóngxīn xiě yī biàn.) — Bài này viết sai rồi, viết lại một lượt.",
+   "他老是忘记带钥匙。(Tā lǎoshi wàngjì dài yàoshi.) — Anh ấy cứ quên mang chìa khóa.",
+   "雨停了，又下起来了。(Yǔ tíng le, yòu xià qǐlái le.) — Mưa tạnh rồi, lại mưa nữa."
+  ],
+  "speak": "我经常去那家小店买早饭。这道题写错了，重新写一遍。他老是忘记带钥匙。雨停了，又下起来了。",
+  "rule": "经常 là thường xuyên (thói quen); 重新 là làm lại từ đầu; 老/老是 là cứ, luôn trong khẩu ngữ, hay mang ý phàn nàn khi nói tật xấu (老是迟到、老忘记); 又 là lại (việc đã xảy ra rồi lại xảy ra, hoặc thêm một việc nữa). Cả năm từ đều đứng trước động từ.",
+  "tip": "又 khác 再: 又 nói việc đã lặp lại rồi (quá khứ, hiện tại: 又下雨了), 再 nói việc sẽ lặp lại trong tương lai (明天再来).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“经常” nghĩa là gì?",
+    "o": [
+     "Thường xuyên",
+     "Lại một lần nữa",
+     "Làm lại từ đầu",
+     "Cứ mãi không dứt"
+    ],
+    "a": 0,
+    "why": "经常 là thường xuyên, chỉ thói quen lặp lại."
+   },
+   {
+    "q": "Điền vào chỗ trống: 字写错了，___写一遍。",
+    "o": [
+     "经常",
+     "老是",
+     "重新",
+     "又"
+    ],
+    "a": 2,
+    "why": "Viết sai thì viết lại từ đầu: 重新写一遍."
+   },
+   {
+    "q": "Câu nào dùng phó từ tần suất SAI?",
+    "o": [
+     "他经常去游泳",
+     "明天他又去游泳",
+     "他老是迟到",
+     "他重新经常去游泳"
+    ],
+    "a": 3,
+    "why": "重新 và 经常 không xếp chồng lên nhau như vậy; nói 他又去游泳 hoặc 他重新开始游泳."
+   },
+   {
+    "q": "“老是忘记” mang sắc thái gì?",
+    "o": [
+     "Khen ngợi",
+     "Hỏi han",
+     "Phàn nàn vì cứ lặp lại",
+     "Nói chuyện tương lai"
+    ],
+    "a": 2,
+    "why": "老是 hay đi với tật xấu và mang ý phàn nàn: cứ quên mãi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他走了，___回来了。",
+    "o": [
+     "经常",
+     "又",
+     "重新",
+     "老"
+    ],
+    "a": 1,
+    "why": "Việc đã xảy ra rồi lại xảy ra: 又回来了."
+   },
+   {
+    "q": "“又下雨了” — 又 nói điều gì?",
+    "o": [
+     "Mưa lặp lại",
+     "Mưa lần đầu",
+     "Sắp mưa",
+     "Mưa rất to"
+    ],
+    "a": 0,
+    "why": "又 nói việc lặp lại: trước đó đã mưa, giờ lại mưa."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-09",
+  "stage": 2,
+  "title": "关联副词 就1 — vừa… là… (nối liền hai việc)",
+  "hook": "“我一回家就吃饭。” — 就 nối hai việc: việc trước vừa xong là việc sau tới ngay.",
+  "examples": [
+   "我一回家就吃饭。(Wǒ yī huí jiā jiù chī fàn.) — Tôi vừa về nhà là ăn cơm ngay.",
+   "他一看就会了。(Tā yī kàn jiù huì le.) — Anh ấy xem một cái là biết làm ngay.",
+   "下课就去打球。(Xià kè jiù qù dǎ qiú.) — Tan học là đi chơi bóng ngay.",
+   "你一说我就明白了。(Nǐ yī shuō wǒ jiù míngbai le.) — Bạn vừa nói là tôi hiểu ngay."
+  ],
+  "speak": "我一回家就吃饭。他一看就会了。下课就去打球。你一说我就明白了。",
+  "rule": "就1 là phó từ liên kết: đứng trước động từ thứ hai, nối hai việc xảy ra liền nhau — việc trước vừa xong thì việc sau xảy ra ngay. Cấu trúc hay gặp: 一…就… (vừa… là…), và 就 đứng một mình sau mệnh đề thời gian (下课就去). 就 còn có nghĩa nhấn mạnh khác, nhưng ở điểm này chỉ học nghĩa nối liền.",
+  "tip": "Đừng nhầm 就1 (nối liền) với 就2 (ngữ khí, nhấn mạnh kết quả): “一回家就吃饭” là hai việc liền nhau, không phải “chỉ ăn cơm”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“一回家就吃饭” nghĩa là gì?",
+    "o": [
+     "Vừa về nhà là ăn cơm ngay",
+     "Về nhà rồi ăn cơm muộn",
+     "Chỉ ăn cơm ở nhà",
+     "Về nhà ăn cơm một mình"
+    ],
+    "a": 0,
+    "why": "一…就…: vừa về nhà là ăn cơm ngay, hai việc liền nhau."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他一听___明白了。",
+    "o": [
+     "才",
+     "就",
+     "又",
+     "都"
+    ],
+    "a": 1,
+    "why": "一…就…: vừa nghe là hiểu ngay."
+   },
+   {
+    "q": "Câu nào dùng 就 SAI?",
+    "o": [
+     "我一下课就回家",
+     "他一说我就懂了",
+     "我就一回家吃饭",
+     "你一来我就走"
+    ],
+    "a": 2,
+    "why": "就 phải đứng trước động từ thứ hai: 一回家就吃饭, không nói 就一回家吃饭."
+   },
+   {
+    "q": "“一…就…” nói quan hệ gì giữa hai việc?",
+    "o": [
+     "Ngược nhau",
+     "Cùng lúc bắt đầu",
+     "Liền nhau, ngay sau",
+     "Không liên quan"
+    ],
+    "a": 2,
+    "why": "一…就… nối hai việc xảy ra liền nhau: việc trước vừa xong, việc sau tới ngay."
+   },
+   {
+    "q": "Điền vào chỗ trống: 下雨了，我们___回家吧。",
+    "o": [
+     "才",
+     "又",
+     "就",
+     "老"
+    ],
+    "a": 2,
+    "why": "Mưa rồi thì về ngay: 就回家吧."
+   },
+   {
+    "q": "Trong “他一看就会了”, 就 nhấn mạnh điều gì?",
+    "o": [
+     "Học rất nhanh",
+     "Chỉ xem một lần",
+     "Xem rất lâu",
+     "Vừa xem là biết"
+    ],
+    "a": 3,
+    "why": "一…就… nhấn mạnh vừa xem là biết ngay, rất nhanh."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-10",
+  "stage": 2,
+  "title": "方式副词 故意 — cố tình, cố ý",
+  "hook": "“他故意不理我，我问他，他故意笑。” — 故意: cố tình làm vậy, không phải vô ý.",
+  "examples": [
+   "他故意不理我。(Tā gùyì bù lǐ wǒ.) — Anh ấy cố tình không để ý đến tôi.",
+   "小明故意把我的笔藏起来了。(Xiǎomíng gùyì bǎ wǒ de bǐ cáng qǐlái le.) — Tiểu Minh cố tình giấu bút của tôi đi.",
+   "她不是不小心，是故意的。(Tā bù shì bù xiǎoxīn, shì gùyì de.) — Cô ấy không phải vô ý, mà là cố ý.",
+   "别故意气妈妈，快道歉。(Bié gùyì qì māma, kuài dàoqiàn.) — Đừng cố tình chọc giận mẹ, mau xin lỗi đi."
+  ],
+  "speak": "他故意不理我。小明故意把我的笔藏起来了。她不是不小心，是故意的。别故意气妈妈，快道歉。",
+  "rule": "故意 đứng trước động từ, nói hành động làm ra là cố tình, có chủ ý — ngược với 不小心 (vô ý). Dạng hay gặp: 故意 + 不 + động từ (故意不来、故意不理我), và 是故意的 (là cố ý đấy) để khẳng định.",
+  "tip": "故意 thường mang ý xấu hoặc trêu chọc; đừng dùng khi nói việc tốt bình thường — “他故意帮我” nghe rất lạ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“故意” nghĩa là gì?",
+    "o": [
+     "Cố tình",
+     "Vô tình",
+     "Tình cờ",
+     "Đột nhiên"
+    ],
+    "a": 0,
+    "why": "故意 là cố tình, có chủ ý, ngược với 不小心."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___不接我的电话。",
+    "o": [
+     "经常",
+     "故意",
+     "一共",
+     "十分"
+    ],
+    "a": 1,
+    "why": "Cố tình không nghe điện thoại: 故意不接."
+   },
+   {
+    "q": "Câu nào dùng 故意 SAI?",
+    "o": [
+     "他故意迟到了",
+     "他是故意的",
+     "他故意帮我学习",
+     "别故意气他"
+    ],
+    "a": 2,
+    "why": "故意 thường mang ý xấu hoặc trêu chọc; nói giúp người ta học thì không dùng 故意."
+   },
+   {
+    "q": "“不是不小心，是故意的” — câu này nhấn mạnh gì?",
+    "o": [
+     "Làm do sơ ý",
+     "Làm có chủ ý",
+     "Làm rất nhanh",
+     "Làm do quên"
+    ],
+    "a": 1,
+    "why": "是故意的 khẳng định việc đó làm có chủ ý, không phải vô ý."
+   },
+   {
+    "q": "Điền vào chỗ trống: 小猫___把水打翻了。",
+    "o": [
+     "重新",
+     "一共",
+     "经常",
+     "故意"
+    ],
+    "a": 3,
+    "why": "Mèo con cố tình làm đổ nước: 故意把水打翻了."
+   },
+   {
+    "q": "“故意” thường dùng với sắc thái nào?",
+    "o": [
+     "Khen ngợi",
+     "Hỏi han",
+     "Trêu chọc hoặc có ý xấu",
+     "Trang trọng"
+    ],
+    "a": 2,
+    "why": "故意 hay đi với việc trêu chọc, chọc giận hoặc làm sai có chủ ý."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-11",
+  "stage": 2,
+  "title": "情态副词 必须、差不多、好像、一定、也许 — phải, khoảng, hình như, nhất định, có lẽ",
+  "hook": "“你必须来，也许他不来，差不多七点，好像下雨了，一定很好玩。” — năm phó từ nói thái độ và mức chắc chắn.",
+  "examples": [
+   "你必须按时交作业。(Nǐ bìxū ànshí jiāo zuòyè.) — Bạn phải nộp bài tập đúng hạn.",
+   "我们差不多七点出发，也许他晚一点儿来。(Wǒmen chàbuduō qī diǎn chūfā, yěxǔ tā wǎn yīdiǎnr lái.) — Chúng tôi xuất phát khoảng bảy giờ, có lẽ anh ấy đến muộn một chút.",
+   "外面好像下雨了，地上都湿了。(Wàimiàn hǎoxiàng xià yǔ le, dìshang dōu shī le.) — Bên ngoài hình như mưa rồi, mặt đất đều ướt.",
+   "他一定会来的，你放心吧。(Tā yīdìng huì lái de, nǐ fàngxīn ba.) — Anh ấy nhất định sẽ đến, bạn cứ yên tâm."
+  ],
+  "speak": "你必须按时交作业。我们差不多七点出发，也许他晚一点儿来。外面好像下雨了，地上都湿了。他一定会来的，你放心吧。",
+  "rule": "必须 là bắt buộc phải (mệnh lệnh, quy định); 一定 là nhất định, chắc chắn (người nói tin tưởng cao); 也许 là có lẽ (khả năng thấp, không chắc); 好像 là hình như (suy đoán theo dấu hiệu nhìn thấy); 差不多 là gần như, khoảng (số lượng, thời gian xấp xỉ). Mức chắc chắn giảm dần: 必须/一定 cao nhất, rồi 好像, rồi 也许; 差不多 nói số lượng gần đúng.",
+  "tip": "必须 khác 一定: 必须 là bắt buộc theo quy định, 一定 là người nói tin chắc sẽ xảy ra. “你必须来” (bắt buộc) khác “你一定来” (tôi tin bạn sẽ đến).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“必须” nghĩa là gì?",
+    "o": [
+     "Bắt buộc phải",
+     "Có lẽ",
+     "Hình như",
+     "Gần như"
+    ],
+    "a": 0,
+    "why": "必须 là bắt buộc phải, theo mệnh lệnh hoặc quy định."
+   },
+   {
+    "q": "Điền vào chỗ trống: 外面___下雨了，带伞吧。",
+    "o": [
+     "必须",
+     "一定",
+     "好像",
+     "差不多"
+    ],
+    "a": 2,
+    "why": "Nhìn dấu hiệu mà đoán: 好像下雨了 (hình như mưa rồi)."
+   },
+   {
+    "q": "Câu nào dùng phó từ tình thái SAI?",
+    "o": [
+     "你必须按时来",
+     "我们差不多七点走",
+     "他也许一定会来",
+     "他一定会来"
+    ],
+    "a": 2,
+    "why": "也许 (không chắc) và 一定 (chắc chắn) mâu thuẫn nhau, không đi cùng nhau."
+   },
+   {
+    "q": "“差不多七点” nghĩa là gì?",
+    "o": [
+     "Đúng bảy giờ",
+     "Khoảng bảy giờ",
+     "Sau bảy giờ",
+     "Trước bảy giờ"
+    ],
+    "a": 1,
+    "why": "差不多 nói số lượng, thời gian xấp xỉ: khoảng bảy giờ."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___他今天不舒服，所以没来。",
+    "o": [
+     "必须",
+     "一定",
+     "差不多",
+     "也许"
+    ],
+    "a": 3,
+    "why": "Đoán lý do không chắc chắn: 也许他不舒服."
+   },
+   {
+    "q": "Từ nào nói người nói tin chắc nhất?",
+    "o": [
+     "也许",
+     "好像",
+     "差不多",
+     "一定"
+    ],
+    "a": 3,
+    "why": "一定 là chắc chắn nhất; 也许 là không chắc nhất."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-12",
+  "stage": 2,
+  "title": "语气副词 才1、都2、就2、正好 — mới, đều, chính là, vừa đúng",
+  "hook": "“他才来，正好我也到，大家都来了，就是他！” — 才、都、就、正好 nói giọng điệu và nhấn mạnh.",
+  "examples": [
+   "他九点才来，我们等了很久。(Tā jiǔ diǎn cái lái, wǒmen děng le hěn jiǔ.) — Anh ấy chín giờ mới đến, chúng tôi đợi rất lâu.",
+   "大家都喜欢这部电影。(Dàjiā dōu xǐhuan zhè bù diànyǐng.) — Mọi người đều thích bộ phim này.",
+   "这件衣服正好合适，你穿吧。(Zhè jiàn yīfu zhènghǎo héshì, nǐ chuān ba.) — Cái áo này vừa đúng hợp, bạn mặc đi.",
+   "我就是想去看看，没别的意思。(Wǒ jiù shì xiǎng qù kànkan, méi bié de yìsi.) — Tôi chỉ là muốn đi xem thử thôi, không có ý gì khác."
+  ],
+  "speak": "他九点才来，我们等了很久。大家都喜欢这部电影。这件衣服正好合适，你穿吧。我就是想去看看，没别的意思。",
+  "rule": "才1 là mới (việc xảy ra muộn hơn mong đợi: 九点才来); 都2 là đều (bao quát toàn bộ chủ ngữ: 大家都…); 就2 là chính là, chỉ là (nhấn mạnh, khẳng định: 就是他、就想去); 正好 là vừa đúng, vừa hay (vừa khớp thời gian, kích cỡ, ý muốn). Cả bốn đều đứng trước động từ hoặc trước thành phần được nhấn mạnh.",
+  "tip": "才1 khác 就1: 才 nói muộn (“九点才来”), 就 nói sớm, nhanh (“九点就来了”). Đừng lẫn hai nghĩa của 就 — 就1 nối liền hai việc, 就2 nhấn mạnh.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“九点才来” — 才 nói điều gì?",
+    "o": [
+     "Đến muộn hơn mong đợi",
+     "Đến rất sớm",
+     "Đến đúng giờ",
+     "Đến một mình"
+    ],
+    "a": 0,
+    "why": "才1 nói việc xảy ra muộn hơn mong đợi: chín giờ mới đến."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这双鞋___合适，不大不小。",
+    "o": [
+     "才",
+     "都",
+     "就",
+     "正好"
+    ],
+    "a": 3,
+    "why": "Vừa đúng hợp, không to không nhỏ: 正好合适."
+   },
+   {
+    "q": "Câu nào dùng 才/都/就/正好 SAI?",
+    "o": [
+     "大家都来了",
+     "他才九点来",
+     "这件衣服正好",
+     "我就是他"
+    ],
+    "a": 1,
+    "why": "才 đứng sau thời gian: 九点才来, không nói 才九点来."
+   },
+   {
+    "q": "“大家都喜欢” — 都 có tác dụng gì?",
+    "o": [
+     "Bao quát: mọi người đều",
+     "Chỉ một người",
+     "Nói thời gian",
+     "Nói số lượng"
+    ],
+    "a": 0,
+    "why": "都 bao quát toàn bộ chủ ngữ: mọi người đều thích."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___是你，我找的就是你。",
+    "o": [
+     "才",
+     "都",
+     "就",
+     "正好"
+    ],
+    "a": 2,
+    "why": "就是你: chính là bạn."
+   },
+   {
+    "q": "“正好” nghĩa là gì?",
+    "o": [
+     "Mới xảy ra",
+     "Đều như nhau",
+     "Vừa đúng, vừa hay",
+     "Chỉ có thế"
+    ],
+    "a": 2,
+    "why": "正好 là vừa đúng, vừa hay: vừa khớp thời gian, kích cỡ hoặc ý muốn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-13",
+  "stage": 2,
+  "title": "介词 对 — với, đối với",
+  "hook": "“他对我说，这个办法对身体好。” — 对: hướng về ai, liên quan đến cái gì.",
+  "examples": [
+   "老师对我们很好。(Lǎoshī duì wǒmen hěn hǎo.) — Thầy cô rất tốt với chúng tôi.",
+   "他对我说，明天要下雨。(Tā duì wǒ shuō, míngtiān yào xià yǔ.) — Anh ấy nói với tôi, ngày mai sẽ mưa.",
+   "运动对身体有好处。(Yùndòng duì shēntǐ yǒu hǎochù.) — Vận động có lợi cho sức khỏe.",
+   "你对这个问题有什么想法？(Nǐ duì zhège wèntí yǒu shénme xiǎngfǎ?) — Bạn có suy nghĩ gì về vấn đề này?"
+  ],
+  "speak": "老师对我们很好。他对我说，明天要下雨。运动对身体有好处。你对这个问题有什么想法？",
+  "rule": "对 + người, vật + động từ: chỉ đối tượng chịu tác động của hành động (对我说、对他笑); 对 + sự vật + tính từ hoặc động từ: chỉ phương diện liên quan (对身体好、对问题有想法). 对 luôn đi kèm tân ngữ, không đứng một mình cuối câu.",
+  "tip": "Người Việt hay bỏ 对 mà nói “他我说” — sai; muốn nói “nói với ai” phải có 对: 对我说. Đừng lẫn 对 với 给: 给 là đưa vật cho ai, 对 là hướng hành động về ai.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“对我说” nghĩa là gì?",
+    "o": [
+     "Nói với tôi",
+     "Nói về tôi",
+     "Nói thay tôi",
+     "Nói cùng tôi"
+    ],
+    "a": 0,
+    "why": "对我说 là nói với tôi, tôi là đối tượng nghe."
+   },
+   {
+    "q": "Điền vào chỗ trống: 老师___我们很好。",
+    "o": [
+     "给",
+     "对",
+     "在",
+     "从"
+    ],
+    "a": 1,
+    "why": "Tốt với ai thì dùng 对: 对我们很好."
+   },
+   {
+    "q": "Câu nào dùng 对 SAI?",
+    "o": [
+     "他对我笑了",
+     "运动对身体好",
+     "他我说了一个故事",
+     "你对这个问题怎么看"
+    ],
+    "a": 2,
+    "why": "Nói với ai phải có 对: 他对我说了一个故事, không nói 他我说."
+   },
+   {
+    "q": "“对身体有好处” — 对 chỉ điều gì?",
+    "o": [
+     "Người nhận đồ",
+     "Nơi chốn",
+     "Phương diện liên quan: sức khỏe",
+     "Thời gian"
+    ],
+    "a": 2,
+    "why": "对 + sự vật chỉ phương diện liên quan: đối với sức khỏe thì có lợi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你___这件事有什么想法？",
+    "o": [
+     "给",
+     "在",
+     "从",
+     "对"
+    ],
+    "a": 3,
+    "why": "Có ý kiến về việc gì thì dùng 对: 对这件事有什么想法."
+   },
+   {
+    "q": "“对” khác “给” ở điểm nào?",
+    "o": [
+     "给 hướng về đối tượng, 对 là đưa cho",
+     "Hai từ giống nhau",
+     "对 hướng về đối tượng, 给 là đưa cho",
+     "对 chỉ dùng với đồ vật"
+    ],
+    "a": 2,
+    "why": "对 hướng về đối tượng chịu tác động, 给 là đưa vật cho ai."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-14",
+  "stage": 2,
+  "title": "介词 离 — cách, xa",
+  "hook": "“我家离学校很远，离这里三公里。” — 离: cách bao xa, xa nhau bao lâu.",
+  "examples": [
+   "我家离学校很近，走路十分钟。(Wǒ jiā lí xuéxiào hěn jìn, zǒulù shí fēnzhōng.) — Nhà tôi cách trường rất gần, đi bộ mười phút.",
+   "火车站离这儿三公里。(Huǒchēzhàn lí zhèr sān gōnglǐ.) — Ga tàu cách đây ba cây số.",
+   "他离家三年了，很想妈妈。(Tā lí jiā sān nián le, hěn xiǎng māma.) — Anh ấy xa nhà ba năm rồi, rất nhớ mẹ.",
+   "请离窗户远一点儿，别掉下去。(Qǐng lí chuānghu yuǎn yīdiǎnr, bié diào xiàqù.) — Xin đứng cách cửa sổ xa một chút, đừng ngã xuống."
+  ],
+  "speak": "我家离学校很近，走路十分钟。火车站离这儿三公里。他离家三年了，很想妈妈。请离窗户远一点儿，别掉下去。",
+  "rule": "离 + nơi chốn, người + tính từ khoảng cách (近/远) hoặc số đo (三公里、十分钟): nói khoảng cách không gian. 离 + 家, 人 + thời gian: nói xa cách bao lâu (离家三年). Cấu trúc: A 离 B + 远/近/多远/多少.",
+  "tip": "Hỏi khoảng cách dùng “离…多远” hoặc “离…有多远”, không dùng “离…多少”. “我家离学校很远” đúng, “我家离学校很多” sai.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我家离学校很近” nghĩa là gì?",
+    "o": [
+     "Nhà tôi cách trường rất gần",
+     "Nhà tôi ở trong trường",
+     "Nhà tôi xa trường",
+     "Nhà tôi gần nhà bạn"
+    ],
+    "a": 0,
+    "why": "离学校很近: cách trường rất gần."
+   },
+   {
+    "q": "Điền vào chỗ trống: 火车站___这儿三公里。",
+    "o": [
+     "对",
+     "离",
+     "在",
+     "从"
+    ],
+    "a": 1,
+    "why": "Nói khoảng cách thì dùng 离: 离这儿三公里."
+   },
+   {
+    "q": "Câu nào dùng 离 SAI?",
+    "o": [
+     "我家离学校很远",
+     "他离家三年了",
+     "我家离学校很多",
+     "请离窗户远一点儿"
+    ],
+    "a": 2,
+    "why": "离 + nơi chốn đi với 远/近 hoặc số đo, không đi với 很多."
+   },
+   {
+    "q": "Hỏi khoảng cách thì hỏi thế nào?",
+    "o": [
+     "你家离学校多少",
+     "你家离学校多远",
+     "你家离学校多久",
+     "你家离学校多高"
+    ],
+    "a": 1,
+    "why": "Hỏi khoảng cách dùng 多远: 离学校多远?"
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___家很久了，很想回家。",
+    "o": [
+     "对",
+     "在",
+     "给",
+     "离"
+    ],
+    "a": 3,
+    "why": "Xa nhà đã lâu: 离家很久了."
+   },
+   {
+    "q": "“离家三年” — 离 nói gì?",
+    "o": [
+     "Ở nhà ba năm",
+     "Về nhà ba năm",
+     "Xa nhà ba năm",
+     "Rời nhà ba lần"
+    ],
+    "a": 2,
+    "why": "离家三年: xa nhà đã ba năm rồi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-15",
+  "stage": 2,
+  "title": "介词 为1 — vì, cho",
+  "hook": "“他为我买了一本书，我为他高兴。” — 为: làm vì ai, mừng cho ai.",
+  "examples": [
+   "妈妈为我做了一件新衣服。(Māma wèi wǒ zuò le yī jiàn xīn yīfu.) — Mẹ làm cho tôi một cái áo mới.",
+   "他为这件事忙了一个星期。(Tā wèi zhè jiàn shì máng le yī ge xīngqī.) — Anh ấy bận rộn cả tuần vì việc này.",
+   "大家都为他高兴。(Dàjiā dōu wèi tā gāoxìng.) — Mọi người đều mừng cho anh ấy.",
+   "我们为你加油！(Wǒmen wèi nǐ jiāyóu!) — Chúng tôi cổ vũ cho bạn!"
+  ],
+  "speak": "妈妈为我做了一件新衣服。他为这件事忙了一个星期。大家都为他高兴。我们为你加油！",
+  "rule": "为1 + người, việc + động từ: chỉ đối tượng được phục vụ hoặc lý do (为我做衣服、为他高兴、为你加油). 为 thường mang nghĩa “vì, cho” trong quan hệ tình cảm hoặc mục đích. Cấu trúc hay gặp: 为…忙、为…高兴、为…加油.",
+  "tip": "为我做 khác 给我做: 为 nhấn mạnh vì ai mà làm (tình cảm, mục đích), 给 nhấn mạnh đưa vật cho ai. “妈妈为我做衣服” (mẹ làm vì tôi) khác “妈妈给我做衣服” (mẹ làm rồi đưa tôi).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“为我做衣服” — 为 nghĩa là gì?",
+    "o": [
+     "Làm cho tôi / vì tôi",
+     "Làm thay tôi mặc",
+     "Làm cùng tôi",
+     "Làm giống tôi"
+    ],
+    "a": 0,
+    "why": "为我做衣服: làm áo vì tôi, cho tôi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 大家都___他高兴。",
+    "o": [
+     "对",
+     "为",
+     "给",
+     "在"
+    ],
+    "a": 1,
+    "why": "Mừng cho ai thì dùng 为: 为他高兴."
+   },
+   {
+    "q": "Câu nào dùng 为 SAI?",
+    "o": [
+     "妈妈为我做饭",
+     "我们为你加油",
+     "他为这件事忙了一个星期",
+     "他为我一本书"
+    ],
+    "a": 3,
+    "why": "为 phải đi với động từ: 为我买了一本书, không nói 为我一本书."
+   },
+   {
+    "q": "“为你加油” nghĩa là gì?",
+    "o": [
+     "Đổ xăng cho bạn",
+     "Cổ vũ cho bạn",
+     "Giúp bạn làm bài",
+     "Mua đồ cho bạn"
+    ],
+    "a": 1,
+    "why": "为你加油 là cổ vũ cho bạn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___工作忙了一个月。",
+    "o": [
+     "对",
+     "离",
+     "为",
+     "给"
+    ],
+    "a": 2,
+    "why": "Bận vì công việc: 为工作忙了一个月."
+   },
+   {
+    "q": "“为” khác “给” ở điểm nào?",
+    "o": [
+     "给 nhấn mạnh vì ai mà làm, 为 là đưa cho",
+     "Hai từ giống hệt nhau",
+     "为 nhấn mạnh vì ai mà làm, 给 nhấn mạnh đưa cho ai",
+     "为 chỉ dùng với đồ vật"
+    ],
+    "a": 2,
+    "why": "为 nhấn mạnh làm vì ai (tình cảm, mục đích), 给 nhấn mạnh đưa vật cho ai."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-16",
+  "stage": 2,
+  "title": "连接分句或句子 不过、但、但是、而且、那、如果、虽然、只要 — nối hai vế câu",
+  "hook": "“虽然下雨，但是我们去了；如果你来，那我就等你。” — tám từ nối hai vế, hai câu.",
+  "examples": [
+   "虽然今天下雨，但是我们还是去爬山了。(Suīrán jīntiān xià yǔ, dànshì wǒmen háishi qù pá shān le.) — Tuy hôm nay mưa, nhưng chúng tôi vẫn đi leo núi.",
+   "这件衣服很好看，不过有点儿贵。(Zhè jiàn yīfu hěn hǎokàn, bùguò yǒudiǎnr guì.) — Cái áo này rất đẹp, có điều hơi đắt.",
+   "如果明天下雨，我们就不去了；那我们就在家看书。(Rúguǒ míngtiān xià yǔ, wǒmen jiù bù qù le; nà wǒmen jiù zài jiā kàn shū.) — Nếu ngày mai mưa, chúng tôi không đi; vậy thì chúng tôi ở nhà đọc sách.",
+   "他会说中文，而且说得很好；只要多练习，就会更好。(Tā huì shuō Zhōngwén, érqiě shuō de hěn hǎo; zhǐyào duō liànxí, jiù huì gèng hǎo.) — Anh ấy biết nói tiếng Trung, hơn nữa nói rất hay; chỉ cần luyện tập nhiều, sẽ còn hay hơn."
+  ],
+  "speak": "虽然今天下雨，但是我们还是去爬山了。这件衣服很好看，不过有点儿贵。如果明天下雨，我们就不去了；那我们就在家看书。他会说中文，而且说得很好；只要多练习，就会更好。",
+  "rule": "虽然…但是/但 là tuy… nhưng (nhượng bộ); 不过 là có điều, nhưng mà (chuyển ý nhẹ, khẩu ngữ); 而且 là hơn nữa, và còn (thêm ý cùng chiều); 如果…就 là nếu… thì (giả định); 只要…就 là chỉ cần… thì (điều kiện đủ); 那 là vậy thì (nối tiếp kết quả, đứng đầu vế sau). 但 và 但是 nghĩa như nhau, 但 ngắn gọn hơn, hay dùng trong văn viết.",
+  "tip": "虽然 phải đi với 但是/但, không đi một mình. 如果…就: vế 如果 đặt trước, vế 就 đặt sau — đừng đảo ngược, đừng ghép 如果 với 但是.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“虽然…但是…” nghĩa là gì?",
+    "o": [
+     "Tuy… nhưng…",
+     "Nếu… thì…",
+     "Chỉ cần… thì…",
+     "Hơn nữa…"
+    ],
+    "a": 0,
+    "why": "虽然…但是… là cặp nhượng bộ: tuy… nhưng…"
+   },
+   {
+    "q": "Điền vào chỗ trống: ___明天下雨，我们就不去了。",
+    "o": [
+     "虽然",
+     "而且",
+     "如果",
+     "不过"
+    ],
+    "a": 2,
+    "why": "Đặt giả định về thời tiết: 如果明天下雨."
+   },
+   {
+    "q": "Câu nào nối câu SAI?",
+    "o": [
+     "虽然下雨，但是我们去了",
+     "如果明天下雨，但是我们去",
+     "只要你努力，就能成功",
+     "这件衣服好看，不过有点儿贵"
+    ],
+    "a": 1,
+    "why": "如果 phải đi với 就, không đi với 但是."
+   },
+   {
+    "q": "“而且” có tác dụng gì?",
+    "o": [
+     "Chuyển ý ngược",
+     "Đặt điều kiện",
+     "Thêm ý cùng chiều",
+     "Nói kết quả"
+    ],
+    "a": 2,
+    "why": "而且 thêm một ý cùng chiều: đã biết nói, hơn nữa còn nói hay."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这本书很有意思，___有点儿难。",
+    "o": [
+     "如果",
+     "只要",
+     "虽然",
+     "不过"
+    ],
+    "a": 3,
+    "why": "Chuyển ý nhẹ, có điều hơi khó: 不过有点儿难."
+   },
+   {
+    "q": "“那” trong “那我们就在家看书” nghĩa là gì?",
+    "o": [
+     "Nhưng mà",
+     "Nếu như",
+     "Vậy thì",
+     "Chỉ cần"
+    ],
+    "a": 2,
+    "why": "那 đứng đầu vế sau, nối tiếp kết quả: vậy thì chúng tôi ở nhà đọc sách."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-17",
+  "stage": 2,
+  "title": "叹词 喂 — alo, này",
+  "hook": "“喂，你好！喂，听得见吗？” — 喂: mở đầu cuộc gọi, gọi ai đó chú ý.",
+  "examples": [
+   "喂，你好，我是小李。(Wèi, nǐ hǎo, wǒ shì Xiǎo Lǐ.) — Alo, xin chào, tôi là Tiểu Lý.",
+   "喂，听得见我说话吗？(Wèi, tīng de jiàn wǒ shuō huà ma?) — Alo, nghe thấy tôi nói không?",
+   "喂，你去哪儿？等我一下！(Wèi, nǐ qù nǎr? Děng wǒ yīxià!) — Này, bạn đi đâu đấy? Đợi tôi một chút!",
+   "他打电话来，我一接就说：“喂？”(Tā dǎ diànhuà lái, wǒ yī jiē jiù shuō: “Wèi?”) — Anh ấy gọi điện đến, tôi vừa bắt máy liền nói: “Alo?”"
+  ],
+  "speak": "喂，你好，我是小李。喂，听得见我说话吗？喂，你去哪儿？等我一下！他打电话来，我一接就说：“喂？”",
+  "rule": "喂 đứng đầu câu, dùng khi bắt đầu cuộc gọi điện thoại (tương đương “alo”) hoặc gọi ai đó từ xa để gây chú ý (tương đương “này”). Sau 喂 thường là câu chào hoặc câu hỏi; không dùng 喂 trong văn viết trang trọng, không dùng để gọi người lớn tuổi một cách suồng sã.",
+  "tip": "Nghe điện thoại nói “喂，你好” là lịch sự; chỉ nói “喂？” ngắn gọn khi chưa biết ai gọi. Đừng dùng 喂 để gọi thầy cô — hãy nói “老师，您好”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“喂” thường dùng khi nào?",
+    "o": [
+     "Bắt đầu cuộc gọi điện thoại",
+     "Kết thúc cuộc gọi",
+     "Viết thư",
+     "Gặp mặt chào hỏi"
+    ],
+    "a": 0,
+    "why": "喂 mở đầu cuộc gọi điện thoại hoặc gọi ai đó chú ý."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___，你是小王吗？",
+    "o": [
+     "吗",
+     "喂",
+     "呢",
+     "吧"
+    ],
+    "a": 1,
+    "why": "Gọi điện thoại thì mở đầu bằng 喂."
+   },
+   {
+    "q": "Câu nào dùng 喂 SAI?",
+    "o": [
+     "喂，你好，我是小李",
+     "喂，听得见吗",
+     "喂，老师，我想问一个问题",
+     "喂，你去哪儿"
+    ],
+    "a": 2,
+    "why": "喂 là cách gọi suồng sã, không dùng để gọi thầy cô; hãy nói 老师，您好."
+   },
+   {
+    "q": "“喂” khi nghe điện thoại có nghĩa là gì trong tiếng Việt?",
+    "o": [
+     "Chào bạn",
+     "Alo",
+     "Tạm biệt",
+     "Cảm ơn"
+    ],
+    "a": 1,
+    "why": "喂 khi nghe điện thoại tương đương “alo”."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他打电话来，我说：“___？”",
+    "o": [
+     "吗",
+     "呢",
+     "喂",
+     "吧"
+    ],
+    "a": 2,
+    "why": "Bắt máy thì nói 喂?"
+   },
+   {
+    "q": "Gọi ai từ xa để gây chú ý, dùng từ nào?",
+    "o": [
+     "吗",
+     "呢",
+     "吧",
+     "喂"
+    ],
+    "a": 3,
+    "why": "Gọi ai từ xa thì dùng 喂: 喂，你去哪儿?"
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-20",
+  "stage": 2,
+  "title": "名词性短语 — cụm danh từ",
+  "hook": "“我的新书” — quyển sách mới của tôi: mấy từ nhỏ ghép quanh danh từ thành một cụm danh từ.",
+  "examples": [
+   "我的新书在桌子上。(Wǒ de xīn shū zài zhuōzi shang.) — Quyển sách mới của tôi ở trên bàn.",
+   "三本中文书都很贵。(Sān běn Zhōngwén shū dōu hěn guì.) — Ba quyển sách tiếng Trung đều rất đắt.",
+   "学习汉语的学生很多。(Xuéxí Hànyǔ de xuésheng hěn duō.) — Học sinh học tiếng Trung rất đông.",
+   "那个穿红衣服的女孩是我的朋友。(Nà gè chuān hóng yīfu de nǚhái shì wǒ de péngyou.) — Cô gái mặc áo đỏ kia là bạn tôi."
+  ],
+  "speak": "我的新书在桌子上。三本中文书都很贵。学习汉语的学生很多。那个穿红衣服的女孩是我的朋友。",
+  "rule": "Cụm danh từ lấy danh từ làm trung tâm, phía trước thêm định ngữ: sở hữu (我的书), số lượng (三本书), tính chất (新书), cả một cụm động từ (学习汉语的学生). Định ngữ dài thường có 的 ở giữa: 穿红衣服的女孩. Cụm danh từ làm chủ ngữ, tân ngữ, định ngữ trong câu.",
+  "tip": "Định ngữ dài phải có 的: nói 学习汉语的学生, đừng bỏ 的 thành 学习汉语学生.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Cụm danh từ lấy từ nào làm trung tâm?",
+    "o": [
+     "Phó từ",
+     "Động từ",
+     "Danh từ",
+     "Tính từ"
+    ],
+    "a": 2,
+    "why": "Cụm danh từ lấy danh từ làm trung tâm, các từ khác bổ nghĩa cho nó."
+   },
+   {
+    "q": "“三本中文书” có mấy thành phần trước danh từ 书?",
+    "o": [
+     "Hai",
+     "Không có",
+     "Ba",
+     "Một"
+    ],
+    "a": 0,
+    "why": "三本 (số lượng) và 中文 (tính chất) là hai định ngữ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 学习汉语___学生很多。",
+    "o": [
+     "的",
+     "得",
+     "着",
+     "地"
+    ],
+    "a": 0,
+    "why": "Định ngữ là cụm động từ thì nối với danh từ bằng 的."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "学习汉语学生很多",
+     "我的新书在桌子上",
+     "那个穿红衣服的女孩是我的朋友",
+     "三本中文书都很贵"
+    ],
+    "a": 0,
+    "why": "Thiếu 的: phải nói 学习汉语的学生很多."
+   },
+   {
+    "q": "“那个穿红衣服的女孩” nghĩa là gì?",
+    "o": [
+     "Cô gái bán áo đỏ",
+     "Cô gái thích màu đỏ",
+     "Cô gái mua áo đỏ",
+     "Cô gái mặc áo đỏ kia"
+    ],
+    "a": 3,
+    "why": "穿红衣服的女孩: cô gái mặc áo đỏ."
+   },
+   {
+    "q": "Trong “我的新书”, 我的 là gì?",
+    "o": [
+     "Định ngữ",
+     "Trung tâm của cụm",
+     "Tân ngữ",
+     "Vị ngữ"
+    ],
+    "a": 0,
+    "why": "我的 là định ngữ sở hữu, 书 mới là trung tâm."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-21",
+  "stage": 2,
+  "title": "动词性短语 — cụm động từ",
+  "hook": "“慢慢地走路” — đi bộ chầm chậm: động từ cũng ghép thêm từ trước, từ sau thành cụm động từ.",
+  "examples": [
+   "他慢慢地走路。(Tā mànman de zǒu lù.) — Anh ấy đi bộ chầm chậm.",
+   "我们认真学习汉语。(Wǒmen rènzhēn xuéxí Hànyǔ.) — Chúng tôi học tiếng Trung chăm chỉ.",
+   "妈妈在厨房做饭。(Māma zài chúfáng zuò fàn.) — Mẹ đang nấu cơm trong bếp.",
+   "他想去中国旅行。(Tā xiǎng qù Zhōngguó lǚxíng.) — Anh ấy muốn đi Trung Quốc du lịch."
+  ],
+  "speak": "他慢慢地走路。我们认真学习汉语。妈妈在厨房做饭。他想去中国旅行。",
+  "rule": "Cụm động từ lấy động từ làm trung tâm: trước động từ thêm trạng ngữ chỉ cách thức (慢慢地, 认真) hoặc động từ khuyết thiếu (想, 会); sau động từ thêm tân ngữ (学习汉语) hoặc bổ ngữ. Cụm động từ làm vị ngữ, làm chủ ngữ, làm định ngữ đều được.",
+  "tip": "Muốn nói “làm một cách…” thì dùng tính từ + 地: 认真地学习; đừng dùng 的 thay 地.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Cụm động từ lấy từ nào làm trung tâm?",
+    "o": [
+     "Động từ",
+     "Số từ",
+     "Tính từ",
+     "Danh từ"
+    ],
+    "a": 0,
+    "why": "Cụm động từ lấy động từ làm trung tâm."
+   },
+   {
+    "q": "“认真学习汉语” có nghĩa là gì?",
+    "o": [
+     "Học tiếng Trung rất nhanh",
+     "Học tiếng Trung mỗi ngày",
+     "Học tiếng Trung chăm chỉ",
+     "Dạy tiếng Trung chăm chỉ"
+    ],
+    "a": 2,
+    "why": "认真 là trạng ngữ chỉ cách thức: học một cách chăm chỉ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他慢慢___走路。",
+    "o": [
+     "地",
+     "的",
+     "着",
+     "得"
+    ],
+    "a": 0,
+    "why": "Trạng ngữ cách thức dùng 地: 慢慢地走路."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我们认真学习汉语",
+     "他慢慢地走路",
+     "他认真地学习汉语的",
+     "妈妈在厨房做饭"
+    ],
+    "a": 2,
+    "why": "Thừa 的 cuối câu: phải nói 他认真地学习汉语."
+   },
+   {
+    "q": "Trong “妈妈在厨房做饭”, 在厨房 là gì?",
+    "o": [
+     "Bổ ngữ",
+     "Trạng ngữ chỉ nơi chốn",
+     "Định ngữ",
+     "Tân ngữ"
+    ],
+    "a": 1,
+    "why": "在厨房 nói mẹ nấu cơm ở đâu."
+   },
+   {
+    "q": "Câu nào có cụm động từ làm vị ngữ?",
+    "o": [
+     "我的新书在桌子上",
+     "学习汉语的学生很多",
+     "他想去中国旅行",
+     "那个女孩很漂亮"
+    ],
+    "a": 2,
+    "why": "想去中国旅行 là cụm động từ làm vị ngữ của 他."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-22",
+  "stage": 2,
+  "title": "形容词性短语 — cụm tính từ",
+  "hook": "“非常漂亮” — rất đẹp: tính từ thêm từ chỉ mức độ vào trước là thành cụm tính từ.",
+  "examples": [
+   "今天天气非常好。(Jīntiān tiānqì fēicháng hǎo.) — Hôm nay thời tiết rất tốt.",
+   "这件衣服有点儿贵。(Zhè jiàn yīfu yǒudiǎnr guì.) — Chiếc áo này hơi đắt.",
+   "他比我高一点儿。(Tā bǐ wǒ gāo yīdiǎnr.) — Anh ấy cao hơn tôi một chút.",
+   "她高兴极了。(Tā gāoxìng jí le.) — Cô ấy vui lắm."
+  ],
+  "speak": "今天天气非常好。这件衣服有点儿贵。他比我高一点儿。她高兴极了。",
+  "rule": "Cụm tính từ lấy tính từ làm trung tâm: trước thêm phó từ mức độ (很, 非常, 有点儿, 太); sau có thể thêm 一点儿 (高一点儿) hoặc 极了 (高兴极了). Cụm tính từ làm vị ngữ, làm định ngữ (很漂亮的衣服), làm trạng ngữ đều được.",
+  "tip": "有点儿 chỉ mức độ nhẹ và thường đi với điều không mong muốn: 有点儿贵 (hơi đắt); đừng dùng 有点儿 để khen.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Cụm tính từ lấy từ nào làm trung tâm?",
+    "o": [
+     "Động từ",
+     "Đại từ",
+     "Danh từ",
+     "Tính từ"
+    ],
+    "a": 3,
+    "why": "Cụm tính từ lấy tính từ làm trung tâm."
+   },
+   {
+    "q": "“有点儿贵” nghĩa là gì?",
+    "o": [
+     "Không đắt",
+     "Rất đắt",
+     "Hơi đắt",
+     "Đắt nhất"
+    ],
+    "a": 2,
+    "why": "有点儿 chỉ mức độ nhẹ: hơi đắt."
+   },
+   {
+    "q": "Điền vào chỗ trống: 今天天气非常___。",
+    "o": [
+     "书",
+     "去",
+     "做",
+     "好"
+    ],
+    "a": 3,
+    "why": "非常 là phó từ mức độ, sau nó phải là tính từ 好."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这件衣服有点儿贵",
+     "他比我高一点儿",
+     "她高兴极了得",
+     "今天天气非常好"
+    ],
+    "a": 2,
+    "why": "Thừa 得: phải nói 她高兴极了."
+   },
+   {
+    "q": "“高兴极了” có nghĩa là gì?",
+    "o": [
+     "Vui lắm",
+     "Hơi vui",
+     "Vui một chút",
+     "Không vui"
+    ],
+    "a": 0,
+    "why": "极了 đứng sau tính từ nhấn mạnh mức độ rất cao."
+   },
+   {
+    "q": "Trong “很漂亮的衣服”, 很漂亮 là gì?",
+    "o": [
+     "Trung tâm của cụm",
+     "Định ngữ",
+     "Vị ngữ",
+     "Tân ngữ"
+    ],
+    "a": 1,
+    "why": "很漂亮 là định ngữ bổ nghĩa cho 衣服."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-23",
+  "stage": 2,
+  "title": "不一会儿 — chẳng bao lâu",
+  "hook": "“不一会儿，天就黑了。” — chẳng bao lâu, trời đã tối: 不一会儿 nói việc gì xảy ra rất nhanh sau đó.",
+  "examples": [
+   "不一会儿，天就黑了。(Bù yīhuìr, tiān jiù hēi le.) — Chẳng bao lâu, trời đã tối.",
+   "他刚坐下，不一会儿就睡着了。(Tā gāng zuò xià, bù yīhuìr jiù shuì zháo le.) — Anh ấy vừa ngồi xuống, chẳng bao lâu đã ngủ thiếp đi.",
+   "不一会儿，雨停了。(Bù yīhuìr, yǔ tíng le.) — Chẳng bao lâu, mưa đã tạnh.",
+   "我们刚到家，不一会儿妈妈就回来了。(Wǒmen gāng dào jiā, bù yīhuìr māma jiù huí lái le.) — Chúng tôi vừa về đến nhà, chẳng bao lâu mẹ đã về."
+  ],
+  "speak": "不一会儿，天就黑了。他刚坐下，不一会儿就睡着了。不一会儿，雨停了。我们刚到家，不一会儿妈妈就回来了。",
+  "rule": "不一会儿 nghĩa là “chẳng bao lâu, một lát sau”, đứng đầu câu hoặc đầu vế sau, thường đi với 就: 不一会儿…就…. Nó nói khoảng thời gian rất ngắn giữa hai việc: việc trước vừa xong, việc sau đã xảy ra.",
+  "tip": "不一会儿 nói thời gian NGẮN: đừng dùng khi hai việc cách nhau cả ngày, cả năm.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "不一会儿 nghĩa là gì?",
+    "o": [
+     "Ngày mai",
+     "Rất lâu sau",
+     "Hôm qua",
+     "Chẳng bao lâu"
+    ],
+    "a": 3,
+    "why": "不一会儿: chẳng bao lâu, một lát sau."
+   },
+   {
+    "q": "不一会儿 thường đi với từ nào?",
+    "o": [
+     "才",
+     "都",
+     "就",
+     "也"
+    ],
+    "a": 2,
+    "why": "Cấu trúc quen thuộc: 不一会儿…就…."
+   },
+   {
+    "q": "Điền vào chỗ trống: 不一会儿，雨___了。",
+    "o": [
+     "去",
+     "停",
+     "下",
+     "来"
+    ],
+    "a": 1,
+    "why": "雨停了: mưa đã tạnh."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他刚坐下，不一会儿就睡着了",
+     "不一会儿，天就黑了",
+     "不一会儿，雨停了",
+     "不一会儿，去年他就来了"
+    ],
+    "a": 3,
+    "why": "不一会儿 nói thời gian ngắn, không đi với 去年."
+   },
+   {
+    "q": "“不一会儿，天就黑了” nói điều gì?",
+    "o": [
+     "Trời tối rất chậm",
+     "Trời tối ngay sau đó không lâu",
+     "Trời tối hôm qua",
+     "Trời không tối"
+    ],
+    "a": 1,
+    "why": "Trời tối chỉ một lát sau đó."
+   },
+   {
+    "q": "Câu nào dùng 不一会儿 đúng?",
+    "o": [
+     "不一会儿，我去年去了北京",
+     "不一会儿，明天就下雨",
+     "不一会儿，十年过去了",
+     "不一会儿，妈妈就回来了"
+    ],
+    "a": 3,
+    "why": "Mẹ về ngay sau đó không lâu — đúng nghĩa thời gian ngắn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-24",
+  "stage": 2,
+  "title": "什么的 — nào là… nào là…",
+  "hook": "“书、笔什么的，都放在桌子上。” — nào là sách, nào là bút, đều để trên bàn: 什么的 dùng để liệt kê ví dụ.",
+  "examples": [
+   "书、笔什么的，都放在桌子上。(Shū, bǐ shénme de, dōu fàng zài zhuōzi shang.) — Nào là sách, nào là bút, đều để trên bàn.",
+   "他买了很多水果，苹果、香蕉什么的。(Tā mǎi le hěn duō shuǐguǒ, píngguǒ, xiāngjiāo shénme de.) — Anh ấy mua rất nhiều hoa quả, nào là táo, nào là chuối.",
+   "你带点儿吃的，面包、饼干什么的。(Nǐ dài diǎnr chī de, miànbāo, bǐnggān shénme de.) — Bạn mang chút đồ ăn đi, nào là bánh mì, nào là bánh quy.",
+   "周末我喜欢做点儿家务，洗衣服、打扫房间什么的。(Zhōumò wǒ xǐhuan zuò diǎnr jiāwù, xǐ yīfu, dǎsǎo fángjiān shénme de.) — Cuối tuần tôi thích làm chút việc nhà, nào là giặt quần áo, nào là dọn phòng."
+  ],
+  "speak": "书、笔什么的，都放在桌子上。他买了很多水果，苹果、香蕉什么的。你带点儿吃的，面包、饼干什么的。周末我喜欢做点儿家务，洗衣服、打扫房间什么的。",
+  "rule": "什么的 đặt sau một loạt ví dụ cùng loại, nghĩa là “nào là… nào là…, vân vân”, nói liệt kê chưa hết. Cấu trúc: ví dụ 1、ví dụ 2 + 什么的. Nó đứng cuối cụm liệt kê, không đứng đầu.",
+  "tip": "什么的 chỉ dùng khi liệt kê ÍT NHẤT hai thứ cùng loại: đừng dùng sau một thứ duy nhất.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "什么的 dùng để làm gì?",
+    "o": [
+     "Phủ định",
+     "So sánh",
+     "Liệt kê ví dụ cùng loại",
+     "Hỏi cái gì"
+    ],
+    "a": 2,
+    "why": "什么的 sau loạt ví dụ nghĩa là “nào là…, vân vân”."
+   },
+   {
+    "q": "什么的 đứng ở đâu?",
+    "o": [
+     "Cuối cụm liệt kê",
+     "Đầu câu",
+     "Trước động từ",
+     "Sau chủ ngữ"
+    ],
+    "a": 0,
+    "why": "什么的 luôn đứng cuối cụm liệt kê."
+   },
+   {
+    "q": "Điền vào chỗ trống: 苹果、香蕉___，他都买了。",
+    "o": [
+     "的",
+     "吗",
+     "什么的",
+     "什么"
+    ],
+    "a": 2,
+    "why": "Liệt kê táo, chuối rồi thêm 什么的: nào là… vân vân."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你带点儿吃的，面包、饼干什么的",
+     "他买了苹果什么的",
+     "书、笔什么的，都放在桌子上",
+     "苹果、香蕉什么的，他都买了"
+    ],
+    "a": 1,
+    "why": "Chỉ có một thứ (苹果) thì không dùng 什么的."
+   },
+   {
+    "q": "“书、笔什么的” nghĩa là gì?",
+    "o": [
+     "Nào là sách, nào là bút, vân vân",
+     "Sách hay bút",
+     "Không có sách, không có bút",
+     "Chỉ có sách và bút"
+    ],
+    "a": 0,
+    "why": "什么的 nói liệt kê chưa hết."
+   },
+   {
+    "q": "Câu nào liệt kê đúng với 什么的?",
+    "o": [
+     "我买了一个苹果什么的",
+     "水果、苹果什么的，他都买了",
+     "什么的苹果，他买了",
+     "他买了苹果、香蕉什么的"
+    ],
+    "a": 3,
+    "why": "苹果、香蕉 là hai ví dụ cùng loại, 什么的 đứng cuối."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-25",
+  "stage": 2,
+  "title": "越来越 — càng ngày càng (cơ bản)",
+  "hook": "“天气越来越冷了。” — thời tiết càng ngày càng lạnh: 越来越 nói mức độ tăng dần theo thời gian.",
+  "examples": [
+   "天气越来越冷了。(Tiānqì yuè lái yuè lěng le.) — Thời tiết càng ngày càng lạnh.",
+   "他越来越高了。(Tā yuè lái yuè gāo le.) — Anh ấy càng ngày càng cao.",
+   "我的汉语越来越好了。(Wǒ de Hànyǔ yuè lái yuè hǎo le.) — Tiếng Trung của tôi càng ngày càng tốt.",
+   "路上的车越来越多了。(Lù shang de chē yuè lái yuè duō le.) — Xe trên đường càng ngày càng nhiều."
+  ],
+  "speak": "天气越来越冷了。他越来越高了。我的汉语越来越好了。路上的车越来越多了。",
+  "rule": "越来越 + tính từ hoặc động từ, nghĩa là “càng ngày càng…”, nói mức độ thay đổi tăng dần theo thời gian: 天气越来越冷. Chủ ngữ thường là sự vật hoặc người đang thay đổi. Đây là mẫu cơ bản cấp 2; cách dùng mở rộng (so sánh, càng… càng…) học ở cấp cao hơn.",
+  "tip": "越来越 nói thay đổi DẦN DẦN theo thời gian: đừng dùng cho việc xảy ra trong một khoảnh khắc.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "越来越 nghĩa là gì?",
+    "o": [
+     "Càng ngày càng",
+     "Không bao giờ",
+     "Đột nhiên",
+     "Rất nhanh"
+    ],
+    "a": 0,
+    "why": "越来越: càng ngày càng."
+   },
+   {
+    "q": "越来越 thường đi với từ loại nào?",
+    "o": [
+     "Giới từ",
+     "Tính từ hoặc động từ",
+     "Danh từ",
+     "Số từ"
+    ],
+    "a": 1,
+    "why": "越来越 + tính từ hoặc động từ: 越来越冷, 越来越好."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天气越来越___了。",
+    "o": [
+     "跑",
+     "吃",
+     "冷",
+     "书"
+    ],
+    "a": 2,
+    "why": "Sau 越来越 cần tính từ: 冷 (lạnh)."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "天气越来越冷了",
+     "他越来越高了",
+     "我的汉语越来越好了",
+     "他越来越一本书了"
+    ],
+    "a": 3,
+    "why": "越来越 không đi với danh từ 一本书."
+   },
+   {
+    "q": "“我的汉语越来越好了” nghĩa là gì?",
+    "o": [
+     "Tiếng Trung của tôi càng ngày càng khó",
+     "Tôi không học tiếng Trung",
+     "Tiếng Trung của tôi càng ngày càng tốt",
+     "Tiếng Trung của tôi rất khó"
+    ],
+    "a": 2,
+    "why": "越来越好: càng ngày càng tốt."
+   },
+   {
+    "q": "Câu nào dùng 越来越 đúng?",
+    "o": [
+     "他越来越明天了",
+     "他越来越吃饭了",
+     "天气越来越桌子了",
+     "路上的车越来越多了"
+    ],
+    "a": 3,
+    "why": "越来越多: xe càng ngày càng nhiều — đúng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-26",
+  "stage": 2,
+  "title": "又……又…… — vừa… vừa… (hai mặt)",
+  "hook": "“这个苹果又大又红。” — quả táo này vừa to vừa đỏ: 又……又…… nói một thứ có hai đặc điểm cùng lúc.",
+  "examples": [
+   "这个苹果又大又红。(Zhè gè píngguǒ yòu dà yòu hóng.) — Quả táo này vừa to vừa đỏ.",
+   "这件衣服又便宜又好看。(Zhè jiàn yīfu yòu piányi yòu hǎokàn.) — Chiếc áo này vừa rẻ vừa đẹp.",
+   "他又高又瘦。(Tā yòu gāo yòu shòu.) — Anh ấy vừa cao vừa gầy.",
+   "今天又冷又下雨。(Jīntiān yòu lěng yòu xià yǔ.) — Hôm nay vừa lạnh vừa mưa."
+  ],
+  "speak": "这个苹果又大又红。这件衣服又便宜又好看。他又高又瘦。今天又冷又下雨。",
+  "rule": "又 + tính từ hoặc động từ + 又 + tính từ hoặc động từ, nghĩa là “vừa… vừa…”, nói một người hoặc vật có hai đặc điểm cùng lúc. Hai vế thường cùng chiều (cùng khen hoặc cùng chê): 又大又红, 又便宜又好看. Khác với 一边…一边… (hai việc làm cùng lúc).",
+  "tip": "Hai vế của 又……又…… cùng chiều cảm xúc: đừng nói 又便宜又贵 — rẻ và đắt mâu thuẫn nhau.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "又……又…… dùng để nói gì?",
+    "o": [
+     "Một thứ có hai đặc điểm cùng lúc",
+     "Hai thời gian khác nhau",
+     "Hai người khác nhau",
+     "Hai việc làm cùng lúc"
+    ],
+    "a": 0,
+    "why": "又……又…… nói một thứ có hai đặc điểm cùng lúc."
+   },
+   {
+    "q": "“又大又红” nói quả táo thế nào?",
+    "o": [
+     "To hoặc đỏ",
+     "Vừa to vừa đỏ",
+     "Đỏ nhưng không to",
+     "To nhưng không đỏ"
+    ],
+    "a": 1,
+    "why": "又大又红: vừa to vừa đỏ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这件衣服又便宜___好看。",
+    "o": [
+     "就",
+     "又",
+     "和",
+     "也"
+    ],
+    "a": 1,
+    "why": "Cấu trúc: 又……又……."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这件衣服又便宜又贵",
+     "这个苹果又大又红",
+     "他又高又瘦",
+     "这件衣服又便宜又好看"
+    ],
+    "a": 0,
+    "why": "便宜 và 贵 mâu thuẫn nhau, không cùng chiều."
+   },
+   {
+    "q": "“今天又冷又下雨” nghĩa là gì?",
+    "o": [
+     "Hôm nay vừa lạnh vừa mưa",
+     "Hôm nay lạnh hoặc mưa",
+     "Hôm nay lạnh nên không mưa",
+     "Hôm nay không lạnh, không mưa"
+    ],
+    "a": 0,
+    "why": "又冷又下雨: vừa lạnh vừa mưa."
+   },
+   {
+    "q": "Câu nào dùng 又……又…… đúng?",
+    "o": [
+     "这个西瓜又大又甜",
+     "我又去商店又买东西",
+     "他又跑步又吃饭",
+     "他又高又矮"
+    ],
+    "a": 0,
+    "why": "又大又甜: hai đặc điểm cùng chiều của quả dưa."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-27",
+  "stage": 2,
+  "title": "Danh từ làm vị ngữ — 今天星期三",
+  "hook": "“今天星期三。” — hôm nay là thứ Tư: danh từ cũng làm được vị ngữ, không cần 是.",
+  "examples": [
+   "今天星期三。(Jīntiān xīngqīsān.) — Hôm nay là thứ Tư.",
+   "他二十岁。(Tā èrshí suì.) — Anh ấy hai mươi tuổi.",
+   "这本书三块钱。(Zhè běn shū sān kuài qián.) — Quyển sách này ba đồng.",
+   "我北京人。(Wǒ Běijīng rén.) — Tôi là người Bắc Kinh."
+  ],
+  "speak": "今天星期三。他二十岁。这本书三块钱。我北京人。",
+  "rule": "Danh từ, đại từ, số từ, cụm số lượng hoặc cụm danh từ đều có thể làm vị ngữ, thường không cần 是: 今天星期三 (ngày), 他二十岁 (tuổi), 这本书三块钱 (giá tiền), 我北京人 (quê quán). Đây là cách nói ngắn gọn, tự nhiên trong khẩu ngữ; muốn nhấn mạnh mới thêm 是.",
+  "tip": "Câu này phủ định dùng 不是: 今天不是星期三; đừng dùng 不 + danh từ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Câu danh từ làm vị ngữ thường có 是 không?",
+    "o": [
+     "Luôn có 有",
+     "Luôn có 是",
+     "Luôn có 在",
+     "Thường không cần 是"
+    ],
+    "a": 3,
+    "why": "Danh từ làm vị ngữ thường đứng trực tiếp sau chủ ngữ, không cần 是."
+   },
+   {
+    "q": "“他二十岁” nói về điều gì?",
+    "o": [
+     "Tuổi anh ấy",
+     "Tên anh ấy",
+     "Quê anh ấy",
+     "Nghề anh ấy"
+    ],
+    "a": 0,
+    "why": "二十岁: hai mươi tuổi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这本书___块钱。",
+    "o": [
+     "是",
+     "很",
+     "三",
+     "在"
+    ],
+    "a": 2,
+    "why": "Vị ngữ là cụm số lượng: 三块钱 (ba đồng)."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我不北京人",
+     "今天星期三",
+     "他二十岁",
+     "这本书三块钱"
+    ],
+    "a": 0,
+    "why": "Phủ định danh từ làm vị ngữ dùng 不是, không dùng 不."
+   },
+   {
+    "q": "“我北京人” nghĩa là gì?",
+    "o": [
+     "Tôi thích Bắc Kinh",
+     "Tôi là người Bắc Kinh",
+     "Tôi ở Bắc Kinh hôm nay",
+     "Tôi muốn đi Bắc Kinh"
+    ],
+    "a": 1,
+    "why": "北京人: người Bắc Kinh."
+   },
+   {
+    "q": "Phủ định của “今天星期三” là gì?",
+    "o": [
+     "今天不是星期三",
+     "今天没有星期三",
+     "今天不星期三",
+     "今天没星期三"
+    ],
+    "a": 0,
+    "why": "Phủ định dùng 不是 + danh từ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-28",
+  "stage": 2,
+  "title": "Bổ ngữ kết quả 1 — 懂/干净/会/清楚/完",
+  "hook": "“我听懂了。” — tôi nghe hiểu rồi: động từ + 懂 nói kết quả của việc nghe là hiểu.",
+  "examples": [
+   "我听懂了。(Wǒ tīng dǒng le.) — Tôi nghe hiểu rồi.",
+   "他把衣服洗干净了。(Tā bǎ yīfu xǐ gānjìng le.) — Anh ấy đã giặt sạch quần áo.",
+   "我学会了游泳。(Wǒ xué huì le yóuyǒng.) — Tôi đã học biết bơi.",
+   "这本书我看完了。(Zhè běn shū wǒ kàn wán le.) — Quyển sách này tôi đã đọc xong."
+  ],
+  "speak": "我听懂了。他把衣服洗干净了。我学会了游泳。这本书我看完了。",
+  "rule": "Bổ ngữ kết quả đứng ngay sau động từ, nói kết quả của hành động: 听懂 (nghe–hiểu), 洗干净 (giặt–sạch), 学会 (học–biết làm), 看清楚 (nhìn–rõ), 做完 hoặc 看完 (làm hoặc đọc–xong). Công thức: động từ + bổ ngữ kết quả (+ 了). Phủ định dùng 没: 没听懂, 没学会 — không dùng 不.",
+  "tip": "Bổ ngữ kết quả đứng SÁT động từ, trước tân ngữ; tân ngữ dài thì dùng câu chữ 把: 把衣服洗干净了; đừng nói 洗衣服干净了.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我听懂了” nghĩa là gì?",
+    "o": [
+     "Tôi muốn nghe",
+     "Tôi nghe hiểu rồi",
+     "Tôi không nghe",
+     "Tôi đang nghe"
+    ],
+    "a": 1,
+    "why": "听懂: nghe và hiểu — kết quả của việc nghe."
+   },
+   {
+    "q": "Bổ ngữ kết quả đứng ở đâu?",
+    "o": [
+     "Trước động từ",
+     "Ngay sau động từ",
+     "Cuối câu",
+     "Trước chủ ngữ"
+    ],
+    "a": 1,
+    "why": "Công thức: động từ + bổ ngữ kết quả."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你看___了吗？(Bạn nhìn rõ chưa?)",
+    "o": [
+     "会",
+     "完",
+     "清楚",
+     "懂"
+    ],
+    "a": 2,
+    "why": "看清楚: nhìn rõ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我听懂了",
+     "我学会了游泳",
+     "他洗衣服干净了",
+     "这本书我看完了"
+    ],
+    "a": 2,
+    "why": "Bổ ngữ kết quả phải đứng sát động từ: 洗干净衣服, hoặc dùng 把."
+   },
+   {
+    "q": "Phủ định của “听懂” là gì?",
+    "o": [
+     "不听",
+     "不听懂",
+     "没听",
+     "没听懂"
+    ],
+    "a": 3,
+    "why": "Kết quả chưa đạt dùng 没: 没听懂."
+   },
+   {
+    "q": "“做完作业” nghĩa là gì?",
+    "o": [
+     "Đang làm bài tập",
+     "Muốn làm bài tập",
+     "Làm bài tập rất giỏi",
+     "Làm xong bài tập"
+    ],
+    "a": 3,
+    "why": "做完: làm xong."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-29",
+  "stage": 2,
+  "title": "Bổ ngữ xu hướng 1 — 来/去",
+  "hook": "“他走进来了。” — anh ấy đi vào rồi: động từ + 来/去 nói hướng di chuyển so với người nói.",
+  "examples": [
+   "他走进来了。(Tā zǒu jìn lái le.) — Anh ấy đi vào rồi.",
+   "他跑出去了。(Tā pǎo chū qù le.) — Anh ấy chạy ra ngoài rồi.",
+   "请把书拿上来。(Qǐng bǎ shū ná shàng lái.) — Xin mang sách lên đây.",
+   "他回家去了。(Tā huí jiā qù le.) — Anh ấy về nhà rồi."
+  ],
+  "speak": "他走进来了。他跑出去了。请把书拿上来。他回家去了。",
+  "rule": "Bổ ngữ xu hướng gồm hướng (上, 下, 进, 出, 回, 过, 起) + 来 hoặc 去: 来 là hướng về phía người nói, 去 là hướng ra xa người nói. 走进来 (đi vào đây), 跑出去 (chạy ra kia), 拿上来 (mang lên đây), 回家去 (về nhà kia). Tân ngữ thường đứng sau cả cụm hoặc dùng câu chữ 把.",
+  "tip": "来 hay 去 quyết định bởi vị trí NGƯỜI NÓI, không phải chủ ngữ: người nói ở trong nhà thì nói 他走进来了.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“走进来” nghĩa là gì?",
+    "o": [
+     "Đi vào (về phía người nói)",
+     "Đi ra ngoài",
+     "Đi lên",
+     "Đi xuống"
+    ],
+    "a": 0,
+    "why": "进来: đi vào, về phía người nói."
+   },
+   {
+    "q": "来 và 去 phân biệt theo điều gì?",
+    "o": [
+     "Vị trí người nói",
+     "Thời gian",
+     "Người nghe",
+     "Tốc độ"
+    ],
+    "a": 0,
+    "why": "来 là về phía người nói, 去 là ra xa người nói."
+   },
+   {
+    "q": "Điền vào chỗ trống: 请把书拿___来。",
+    "o": [
+     "上",
+     "回",
+     "下",
+     "出"
+    ],
+    "a": 0,
+    "why": "拿上来: mang lên đây."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他跑出去了",
+     "他回家去了",
+     "他走进来了",
+     "他走进来去了"
+    ],
+    "a": 3,
+    "why": "来 và 去 không dùng cùng lúc: chỉ một trong hai."
+   },
+   {
+    "q": "“他回家去了” nghĩa là gì?",
+    "o": [
+     "Anh ấy về nhà rồi (ra xa người nói)",
+     "Anh ấy đến nhà tôi",
+     "Anh ấy không về nhà",
+     "Anh ấy đang ở nhà"
+    ],
+    "a": 0,
+    "why": "回家去: về nhà, hướng ra xa người nói."
+   },
+   {
+    "q": "Câu nào nói người đi VÀO phía người nói?",
+    "o": [
+     "他走出去了",
+     "他回家去了",
+     "他走进来了",
+     "他跑出去了"
+    ],
+    "a": 2,
+    "why": "走进来: đi vào phía người nói."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-30",
+  "stage": 2,
+  "title": "Bổ ngữ số lượng 1 — động lượng (次/遍/趟)",
+  "hook": "“我去过三次中国。” — tôi đã đi Trung Quốc ba lần: số lần đi là bổ ngữ số lượng.",
+  "examples": [
+   "我去过三次中国。(Wǒ qù guo sān cì Zhōngguó.) — Tôi đã đi Trung Quốc ba lần.",
+   "这部电影我看了两遍。(Zhè bù diànyǐng wǒ kàn le liǎng biàn.) — Bộ phim này tôi đã xem hai lần.",
+   "他来了一趟北京。(Tā lái le yī tàng Běijīng.) — Anh ấy đã đến Bắc Kinh một chuyến.",
+   "你去过几次上海？(Nǐ qù guo jǐ cì Shànghǎi?) — Bạn đã đi Thượng Hải mấy lần?"
+  ],
+  "speak": "我去过三次中国。这部电影我看了两遍。他来了一趟北京。你去过几次上海？",
+  "rule": "Bổ ngữ động lượng nói hành động xảy ra mấy lần: động từ + số từ + 次, 遍 hoặc 趟. 次 là lần nói chung (去三次); 遍 nhấn mạnh làm trọn vẹn từ đầu đến cuối (看两遍); 趟 nói một chuyến đi về (来一趟). Tân ngữ chỉ nơi chốn có thể đứng sau bổ ngữ: 去三次中国; tân ngữ khác thường đưa lên trước bằng câu chữ 把 hoặc đảo lên đầu câu.",
+  "tip": "Đừng nhầm 次 với 遍: 看一次 là xem một lần, 看一遍 là xem trọn vẹn một lượt từ đầu đến cuối.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“去过三次” nghĩa là gì?",
+    "o": [
+     "Đi ba người",
+     "Đi ba nơi",
+     "Đi ba ngày",
+     "Đã đi ba lần"
+    ],
+    "a": 3,
+    "why": "三次: ba lần."
+   },
+   {
+    "q": "遍 khác 次 ở điểm nào?",
+    "o": [
+     "遍 nói giá tiền",
+     "遍 nói số ngày",
+     "遍 nói số người",
+     "遍 nhấn mạnh làm trọn vẹn một lượt"
+    ],
+    "a": 3,
+    "why": "看一遍 là xem trọn vẹn từ đầu đến cuối."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这部电影我看了两___。",
+    "o": [
+     "天",
+     "次",
+     "遍",
+     "趟"
+    ],
+    "a": 2,
+    "why": "Xem phim trọn vẹn một lượt dùng 遍."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我去了中国三次过",
+     "这部电影我看了两遍",
+     "他来了一趟北京",
+     "我去过三次中国"
+    ],
+    "a": 0,
+    "why": "过 phải đứng sát động từ: 去过三次中国."
+   },
+   {
+    "q": "“他来了一趟北京” nghĩa là gì?",
+    "o": [
+     "Anh ấy đi Bắc Kinh ba lần",
+     "Anh ấy ở Bắc Kinh một tháng",
+     "Anh ấy muốn đến Bắc Kinh",
+     "Anh ấy đến Bắc Kinh một chuyến"
+    ],
+    "a": 3,
+    "why": "一趟: một chuyến đi."
+   },
+   {
+    "q": "Hỏi số lần dùng từ hỏi nào?",
+    "o": [
+     "多久",
+     "几次",
+     "多少",
+     "几"
+    ],
+    "a": 1,
+    "why": "Hỏi số lần dùng 几次."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-31",
+  "stage": 2,
+  "title": "Bổ ngữ số lượng 2 — tính từ + số lượng",
+  "hook": "“他比我高五厘米。” — anh ấy cao hơn tôi năm xăng-ti-mét: sau tính từ cũng có bổ ngữ số lượng.",
+  "examples": [
+   "他比我高五厘米。(Tā bǐ wǒ gāo wǔ límǐ.) — Anh ấy cao hơn tôi năm xăng-ti-mét.",
+   "这条裙子长十厘米。(Zhè tiáo qúnzi cháng shí límǐ.) — Chiếc váy này dài mười xăng-ti-mét.",
+   "这本书便宜五块钱。(Zhè běn shū piányi wǔ kuài qián.) — Quyển sách này rẻ hơn năm đồng.",
+   "他比我大两岁。(Tā bǐ wǒ dà liǎng suì.) — Anh ấy lớn hơn tôi hai tuổi."
+  ],
+  "speak": "他比我高五厘米。这条裙子长十厘米。这本书便宜五块钱。他比我大两岁。",
+  "rule": "Tính từ cũng mang bổ ngữ số lượng, nói chênh lệch cụ thể: tính từ + số từ + đơn vị (高五厘米, 大两岁, 便宜五块钱). Bổ ngữ này thường đi sau cấu trúc so sánh 比: 他比我高五厘米. Không có 比 thì nó nói số đo tuyệt đối: 这条裙子长十厘米 (chiếc váy dài mười xăng-ti-mét).",
+  "tip": "Bổ ngữ số lượng sau tính từ phải có ĐƠN VỊ: nói 高五厘米, đừng nói 高五.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他比我高五厘米” nói chênh lệch bao nhiêu?",
+    "o": [
+     "Năm ngày",
+     "Năm tuổi",
+     "Năm xăng-ti-mét",
+     "Năm đồng"
+    ],
+    "a": 2,
+    "why": "五厘米: năm xăng-ti-mét."
+   },
+   {
+    "q": "Bổ ngữ số lượng sau tính từ gồm những gì?",
+    "o": [
+     "Chỉ đơn vị",
+     "Số từ + đơn vị",
+     "Chỉ số từ",
+     "Tính từ + động từ"
+    ],
+    "a": 1,
+    "why": "Bổ ngữ số lượng là số từ + đơn vị: 五厘米, 两岁."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他比我大两___。",
+    "o": [
+     "岁",
+     "米",
+     "块钱",
+     "厘米"
+    ],
+    "a": 0,
+    "why": "大两岁: lớn hơn hai tuổi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他比我高五厘米",
+     "这条裙子长十厘米",
+     "他比我大两岁",
+     "他比我高五"
+    ],
+    "a": 3,
+    "why": "Thiếu đơn vị: phải nói 高五厘米."
+   },
+   {
+    "q": "“这本书便宜五块钱” nghĩa là gì?",
+    "o": [
+     "Quyển sách này đắt hơn năm đồng",
+     "Quyển sách này rẻ hơn năm đồng",
+     "Quyển sách này có năm trang",
+     "Quyển sách này giá năm đồng"
+    ],
+    "a": 1,
+    "why": "便宜五块钱: rẻ hơn năm đồng."
+   },
+   {
+    "q": "Câu nào nói số đo tuyệt đối (không so sánh)?",
+    "o": [
+     "他比我大两岁",
+     "这条裙子长十厘米",
+     "他比我高五厘米",
+     "这本书便宜五块钱"
+    ],
+    "a": 1,
+    "why": "长十厘米 nói chiếc váy dài mười xăng-ti-mét, không so sánh với ai."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-32",
+  "stage": 2,
+  "title": "主谓句 3 — câu vị ngữ danh từ",
+  "hook": "“明天星期六。” — ngày mai là thứ Bảy: cả câu chỉ có chủ ngữ + vị ngữ danh từ, không cần động từ.",
+  "examples": [
+   "明天星期六。(Míngtiān xīngqīliù.) — Ngày mai là thứ Bảy.",
+   "他上海人。(Tā Shànghǎi rén.) — Anh ấy là người Thượng Hải.",
+   "这件毛衣一百块。(Zhè jiàn máoyī yī bǎi kuài.) — Chiếc áo len này một trăm đồng.",
+   "今天晴天。(Jīntiān qíngtiān.) — Hôm nay trời nắng."
+  ],
+  "speak": "明天星期六。他上海人。这件毛衣一百块。今天晴天。",
+  "rule": "Câu vị ngữ danh từ có dạng chủ ngữ + vị ngữ danh từ, không có động từ, thường nói thời gian, thời tiết, quê quán, tuổi, giá tiền: 明天星期六, 今天晴天, 他上海人, 这件毛衣一百块. Đây là kiểu câu chủ–vị loại 3 trong khung chuẩn; phủ định dùng 不是.",
+  "tip": "Câu này KHÔNG thêm 很 trước vị ngữ danh từ: nói 今天晴天, không nói 今天很晴天.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Câu vị ngữ danh từ có động từ không?",
+    "o": [
+     "Không, vị ngữ là danh từ",
+     "Có, luôn có",
+     "Có, là 有",
+     "Có, là 是"
+    ],
+    "a": 0,
+    "why": "Vị ngữ của câu này là danh từ, không có động từ."
+   },
+   {
+    "q": "“明天星期六” nói về điều gì?",
+    "o": [
+     "Thời tiết",
+     "Quê quán",
+     "Giá tiền",
+     "Ngày trong tuần"
+    ],
+    "a": 3,
+    "why": "星期六: thứ Bảy."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这件毛衣___块。",
+    "o": [
+     "很",
+     "在",
+     "是",
+     "一百"
+    ],
+    "a": 3,
+    "why": "Vị ngữ là cụm số lượng: 一百块 (một trăm đồng)."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "今天很晴天",
+     "这件毛衣一百块",
+     "明天星期六",
+     "他上海人"
+    ],
+    "a": 0,
+    "why": "Không thêm 很 trước vị ngữ danh từ."
+   },
+   {
+    "q": "“今天晴天” nghĩa là gì?",
+    "o": [
+     "Hôm nay trời mưa",
+     "Hôm nay trời nắng",
+     "Hôm nay rất lạnh",
+     "Hôm nay là thứ Bảy"
+    ],
+    "a": 1,
+    "why": "晴天: trời nắng."
+   },
+   {
+    "q": "Phủ định của “他上海人” là gì?",
+    "o": [
+     "他不上海人",
+     "他不是上海人",
+     "他没有上海人",
+     "他没上海人"
+    ],
+    "a": 1,
+    "why": "Phủ định danh từ làm vị ngữ dùng 不是."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-33",
+  "stage": 2,
+  "title": "“有”字句 2 — câu chữ 有 (mở rộng)",
+  "hook": "“桌子上有三本书。” — trên bàn có ba quyển sách: câu chữ 有 nói có cái gì ở đâu.",
+  "examples": [
+   "桌子上有三本书。(Zhuōzi shang yǒu sān běn shū.) — Trên bàn có ba quyển sách.",
+   "学校里有很多学生。(Xuéxiào lǐ yǒu hěn duō xuésheng.) — Trong trường có rất nhiều học sinh.",
+   "前面有一家商店。(Qiánmian yǒu yī jiā shāngdiàn.) — Phía trước có một cửa hàng.",
+   "他有一个弟弟。(Tā yǒu yī gè dìdi.) — Anh ấy có một em trai."
+  ],
+  "speak": "桌子上有三本书。学校里有很多学生。前面有一家商店。他有一个弟弟。",
+  "rule": "Câu chữ 有 có hai dạng chính: nơi chốn + 有 + vật tồn tại (桌子上有书 — nói có cái gì ở đâu); người + 有 + vật sở hữu (他有一个弟弟 — nói ai có cái gì). Ở dạng tồn tại, chủ ngữ là nơi chốn, tân ngữ sau 有 là vật mới xuất hiện, thường có số lượng. Phủ định dùng 没有, không dùng 不有.",
+  "tip": "Đừng nói 不有: phủ định của 有 là 没有 — 桌子上没有书.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“桌子上有三本书” thuộc dạng nào?",
+    "o": [
+     "Sở hữu",
+     "Câu hỏi",
+     "Tồn tại: nơi chốn + 有 + vật",
+     "So sánh"
+    ],
+    "a": 2,
+    "why": "桌子上 là nơi chốn, 三本书 là vật tồn tại ở đó."
+   },
+   {
+    "q": "Muốn nói “không có” thì dùng từ nào?",
+    "o": [
+     "不是",
+     "没",
+     "不有",
+     "没有"
+    ],
+    "a": 3,
+    "why": "Phủ định của 有 là 没有."
+   },
+   {
+    "q": "Điền vào chỗ trống: 前面___一家商店。",
+    "o": [
+     "在",
+     "有",
+     "着",
+     "是"
+    ],
+    "a": 1,
+    "why": "Nói có một cửa hàng ở phía trước dùng 有."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "桌子上不有书",
+     "他有一个弟弟",
+     "桌子上有三本书",
+     "学校里有很多学生"
+    ],
+    "a": 0,
+    "why": "Không nói 不有, phải nói 没有."
+   },
+   {
+    "q": "“他有一个弟弟” nghĩa là gì?",
+    "o": [
+     "Anh ấy có một em trai",
+     "Anh ấy thích em trai",
+     "Anh ấy gặp em trai",
+     "Anh ấy là em trai"
+    ],
+    "a": 0,
+    "why": "有一个弟弟: có một em trai."
+   },
+   {
+    "q": "Trong “桌子上有三本书”, 桌子上 là gì?",
+    "o": [
+     "Chủ ngữ chỉ nơi chốn",
+     "Vị ngữ",
+     "Định ngữ",
+     "Tân ngữ"
+    ],
+    "a": 0,
+    "why": "桌子上 là chủ ngữ chỉ nơi chốn trong câu chữ 有 dạng tồn tại."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-34",
+  "stage": 2,
+  "title": "存现句 1 — câu tồn hiện (nói sự tồn tại)",
+  "hook": "“墙上挂着一幅画。” — trên tường đang treo một bức tranh: câu tồn hiện nói có cái gì đang ở đâu.",
+  "examples": [
+   "墙上挂着一幅画。(Qiáng shang guà zhe yī fú huà.) — Trên tường đang treo một bức tranh.",
+   "门口站着一个人。(Ménkǒu zhàn zhe yī gè rén.) — Ở cửa đang đứng một người.",
+   "桌子上放着一本书。(Zhuōzi shang fàng zhe yī běn shū.) — Trên bàn đang đặt một quyển sách.",
+   "天上飞着一只鸟。(Tiān shang fēi zhe yī zhī niǎo.) — Trên trời đang bay một con chim."
+  ],
+  "speak": "墙上挂着一幅画。门口站着一个人。桌子上放着一本书。天上飞着一只鸟。",
+  "rule": "Câu tồn hiện nói có người hoặc vật nào đang tồn tại ở đâu: nơi chốn + động từ + 着 + người hoặc vật. Động từ thường là động từ chỉ tư thế hoặc vị trí (挂 treo, 站 đứng, 放 đặt, 坐 ngồi) và phải mang 着. Khác câu chữ 有 (桌子上有书) ở chỗ câu tồn hiện nhấn mạnh TRẠNG THÁI đang tồn tại của vật đó.",
+  "tip": "Động từ trong câu tồn hiện phải có 着: nói 墙上挂着画, đừng bỏ 着 thành 墙上挂画.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Câu tồn hiện nhấn mạnh điều gì?",
+    "o": [
+     "Vật từ đâu đến",
+     "Vật giá bao nhiêu",
+     "Trạng thái vật đang tồn tại ở đâu",
+     "Ai sở hữu vật gì"
+    ],
+    "a": 2,
+    "why": "Câu tồn hiện nói vật đang tồn tại ở đâu, trong trạng thái nào."
+   },
+   {
+    "q": "Động từ trong câu tồn hiện phải mang gì?",
+    "o": [
+     "着",
+     "得",
+     "过",
+     "了"
+    ],
+    "a": 0,
+    "why": "Động từ tồn hiện mang 着: 挂着, 站着, 放着."
+   },
+   {
+    "q": "Điền vào chỗ trống: 门口站___一个人。",
+    "o": [
+     "着",
+     "过",
+     "了",
+     "的"
+    ],
+    "a": 0,
+    "why": "站着: đang đứng."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "桌子上放着一本书",
+     "墙上挂着一幅画",
+     "墙上挂一幅画",
+     "门口站着一个人"
+    ],
+    "a": 2,
+    "why": "Thiếu 着: phải nói 墙上挂着一幅画."
+   },
+   {
+    "q": "“天上飞着一只鸟” nghĩa là gì?",
+    "o": [
+     "Một con chim bay lên trời",
+     "Trên trời có một con chim đang bay",
+     "Trên trời không có chim",
+     "Con chim đã bay đi"
+    ],
+    "a": 1,
+    "why": "飞着: đang bay — chim đang tồn tại trên trời."
+   },
+   {
+    "q": "Câu nào là câu tồn hiện?",
+    "o": [
+     "他有一个弟弟",
+     "桌子上有三本书",
+     "今天星期六",
+     "门口站着一个人"
+    ],
+    "a": 3,
+    "why": "门口站着一个人: nơi chốn + động từ + 着 + người."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-35",
+  "stage": 2,
+  "title": "连动句1 — làm xong việc này rồi làm việc kia",
+  "hook": "“我吃完饭去图书馆看书。” — ăn cơm xong rồi đi thư viện: hai việc nối nhau trong một câu.",
+  "examples": [
+   "他起床洗脸，然后去学校。(Tā qǐ chuáng xǐ liǎn, ránhòu qù xuéxiào.) — Anh ấy dậy rửa mặt rồi đi học.",
+   "妈妈买菜回家做饭。(Māma mǎi cài huí jiā zuò fàn.) — Mẹ mua rau về nhà nấu cơm.",
+   "我吃完饭去图书馆看书。(Wǒ chī wán fàn qù túshūguǎn kàn shū.) — Tôi ăn cơm xong đi thư viện đọc sách.",
+   "他开门出去找朋友。(Tā kāi mén chū qù zhǎo péngyou.) — Anh ấy mở cửa ra ngoài tìm bạn."
+  ],
+  "speak": "他起床洗脸，然后去学校。妈妈买菜回家做饭。我吃完饭去图书馆看书。他开门出去找朋友。",
+  "rule": "Câu liên động: một chủ ngữ làm hai (hoặc nhiều) việc nối nhau, việc trước xong rồi mới tới việc sau, không cần liên từ. Thứ tự động từ không đổi được: rửa mặt rồi mới đi học, đảo lại nghĩa khác hẳn. Động từ thứ nhất hay mang bổ ngữ kết quả như 吃完, động từ sau chỉ việc tiếp theo.",
+  "tip": "Người Việt hay thêm 然后 vào giữa mọi câu liên động — thật ra không có 然后 câu vẫn đúng; chỉ thêm khi muốn nhấn mạnh trình tự.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我吃完饭去图书馆” có mấy việc làm nối nhau?",
+    "o": [
+     "Một việc",
+     "Hai việc",
+     "Ba việc",
+     "Không có việc nào"
+    ],
+    "a": 1,
+    "why": "吃完饭 là việc thứ nhất, 去图书馆 là việc thứ hai nối tiếp sau."
+   },
+   {
+    "q": "Câu nào là câu liên động?",
+    "o": [
+     "他起床洗脸，然后去学校",
+     "他很喜欢学校",
+     "学校很大",
+     "他是学生"
+    ],
+    "a": 0,
+    "why": "起床洗脸 rồi 去学校: hai việc nối nhau cùng một chủ ngữ."
+   },
+   {
+    "q": "Điền vào chỗ trống：他___饭去上班。",
+    "o": [
+     "吃",
+     "吃完",
+     "吃着",
+     "不吃"
+    ],
+    "a": 1,
+    "why": "Ăn xong rồi mới đi làm: 吃完饭去上班."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我买菜回家做饭",
+     "他开门出去",
+     "我去学校吃饭完",
+     "她洗手吃饭"
+    ],
+    "a": 2,
+    "why": "吃完 phải đứng trước 去学校: 我吃完饭去学校 mới đúng."
+   },
+   {
+    "q": "“妈妈买菜回家做饭” nghĩa là gì?",
+    "o": [
+     "Mẹ mua rau về nhà nấu cơm",
+     "Mẹ nấu cơm rồi mới mua rau",
+     "Mẹ ở nhà mua rau",
+     "Mẹ không mua rau"
+    ],
+    "a": 0,
+    "why": "Thứ tự việc làm: 买菜 trước, 回家 rồi 做饭 sau."
+   },
+   {
+    "q": "Trong câu liên động, đảo thứ tự hai động từ thì sao?",
+    "o": [
+     "Nghĩa không đổi",
+     "Luôn sai ngữ pháp",
+     "Câu trở thành câu hỏi",
+     "Nghĩa có thể đổi hẳn"
+    ],
+    "a": 3,
+    "why": "Thứ tự động từ chính là thứ tự việc làm, đảo lại là kể một câu chuyện khác."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-36",
+  "stage": 2,
+  "title": "比较句2 — so sánh hơn có số đo, 更, 不如, 有…那么",
+  "hook": "“姐姐比我大两岁。” — hơn đúng hai tuổi: so sánh có cả số đo.",
+  "examples": [
+   "姐姐比我大两岁。(Jiějiě bǐ wǒ dà liǎng suì.) — Chị gái hơn tôi hai tuổi.",
+   "这件衣服比那件更贵。(Zhè jiàn yīfu bǐ nà jiàn gèng guì.) — Chiếc áo này đắt hơn chiếc áo kia.",
+   "我的中文不如他好。(Wǒ de Zhōngwén bùrú tā hǎo.) — Tiếng Trung của tôi không bằng anh ấy.",
+   "你哥哥有你这么高吗？(Nǐ gēge yǒu nǐ zhème gāo ma?) — Anh trai bạn cao bằng bạn không?"
+  ],
+  "speak": "姐姐比我大两岁。这件衣服比那件更贵。我的中文不如他好。你哥哥有你这么高吗？",
+  "rule": "So sánh hơn có bốn dạng: A比B + tính từ + số đo (大两岁); A比B + 更/还 + tính từ (更贵, 还凉快); A不如B (+ tính từ) nghĩa là A không bằng B; A有B (+ 这么/那么) + tính từ hỏi hoặc khẳng định mức bằng nhau (有你这么高). Số đo chỉ đi sau tính từ trong mẫu 比, không đi sau 不如.",
+  "tip": "不如 là “không bằng”, đừng dịch thành “không thích”; 有…这么/那么 + tính từ hỏi mức bằng nhau, sau 有 là người hoặc vật đem so, không phải sở hữu.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“姐姐比我大两岁” — “两岁” là gì?",
+    "o": [
+     "Tuổi của chị",
+     "Số tuổi hơn kém",
+     "Tuổi của tôi",
+     "Số tuổi của cả hai"
+    ],
+    "a": 1,
+    "why": "大两岁: hơn đúng hai tuổi, 两岁 là số đo chênh lệch."
+   },
+   {
+    "q": "Câu nào dùng 更 đúng?",
+    "o": [
+     "这件衣服比那件更贵",
+     "这件衣服更比那件贵",
+     "更这件衣服比那件贵",
+     "这件衣服比更那件贵"
+    ],
+    "a": 0,
+    "why": "更 đứng sau 比, trước tính từ: 比那件更贵."
+   },
+   {
+    "q": "Điền vào chỗ trống：我的中文___他好。",
+    "o": [
+     "比",
+     "不如",
+     "和",
+     "跟"
+    ],
+    "a": 1,
+    "why": "Không bằng ai thì dùng 不如: 我的中文不如他好."
+   },
+   {
+    "q": "“你哥哥有你这么高吗？” nghĩa là gì?",
+    "o": [
+     "Anh bạn cao hơn bạn à?",
+     "Anh bạn thấp hơn bạn à?",
+     "Anh bạn cao bằng bạn không?",
+     "Anh bạn bao nhiêu tuổi?"
+    ],
+    "a": 2,
+    "why": "有…这么高 hỏi mức cao có bằng nhau không."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "姐姐比我大两岁",
+     "他比我更努力",
+     "我的中文不如他",
+     "我比他不如高"
+    ],
+    "a": 3,
+    "why": "不如 không đi sau 比: phải nói 我的中文不如他."
+   },
+   {
+    "q": "“A比B + tính từ + số đo” dùng để làm gì?",
+    "o": [
+     "Nói A thích B",
+     "Hỏi B ở đâu",
+     "Nói A hơn B đúng bao nhiêu",
+     "Nói A bằng B"
+    ],
+    "a": 2,
+    "why": "Số đo sau tính từ cho biết hơn kém bao nhiêu, như 大两岁."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-37",
+  "stage": 2,
+  "title": "比较句3 — 跟…一样 / 不一样",
+  "hook": "“姐姐跟妹妹一样可爱。” — chị dễ thương như em: giống nhau ở một điểm cụ thể.",
+  "examples": [
+   "我的爱好跟姐姐一样。(Wǒ de àihào gēn jiějiě yīyàng.) — Sở thích của tôi giống chị gái.",
+   "姐姐跟妹妹一样可爱。(Jiějiě gēn mèimei yīyàng kě'ài.) — Chị gái dễ thương như em gái.",
+   "哥哥的手机跟我的不一样。(Gēge de shǒujī gēn wǒ de bù yīyàng.) — Điện thoại của anh trai khác điện thoại của tôi.",
+   "我跟她一样，都是这个学校的学生。(Wǒ gēn tā yīyàng, dōu shì zhège xuéxiào de xuésheng.) — Tôi giống cô ấy, đều là học sinh trường này."
+  ],
+  "speak": "我的爱好跟姐姐一样。姐姐跟妹妹一样可爱。哥哥的手机跟我的不一样。我跟她一样，都是这个学校的学生。",
+  "rule": "跟…一样 nghĩa là giống nhau; thêm tính từ sau 一样 để nói giống ở điểm nào (一样高, 一样可爱). Phủ định là 不一样, sau đó vẫn có thể kèm tính từ (不一样高). 相同 cũng nghĩa là giống nhau nhưng trang trọng hơn, thường không kèm tính từ sau.",
+  "tip": "Đừng nhầm 一样 với 相同: nói thường ngày dùng 一样; 相同 hay gặp trong văn viết trang trọng. Đừng nói 不一样了 khi chỉ muốn nói “khác nhau”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“跟…一样” nghĩa là gì?",
+    "o": [
+     "Khác nhau",
+     "Giống nhau",
+     "Hơn nhau",
+     "Ít hơn"
+    ],
+    "a": 1,
+    "why": "跟…一样 là mẫu nói hai bên giống nhau."
+   },
+   {
+    "q": "Điền vào chỗ trống：哥哥跟弟弟___高。",
+    "o": [
+     "一样",
+     "不",
+     "很",
+     "比"
+    ],
+    "a": 0,
+    "why": "Cao bằng nhau: 哥哥跟弟弟一样高."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我的爱好跟姐姐一样",
+     "我跟她一样，都是学生",
+     "他跟我不一样高",
+     "他跟我一样不"
+    ],
+    "a": 3,
+    "why": "一样不 không thành câu: phủ định phải nói 不一样."
+   },
+   {
+    "q": "“相同” thường dùng khi nào?",
+    "o": [
+     "Nói thường ngày, thân mật",
+     "Nói trang trọng, viết văn",
+     "Hỏi đường",
+     "Gọi món ăn"
+    ],
+    "a": 1,
+    "why": "相同 trang trọng hơn 一样, hay gặp trong văn viết."
+   },
+   {
+    "q": "“我跟她一样，都是这个学校的学生” nghĩa là gì?",
+    "o": [
+     "Tôi và cô ấy đều là học sinh trường này",
+     "Tôi học giỏi hơn cô ấy",
+     "Cô ấy không phải học sinh trường này",
+     "Tôi khác trường với cô ấy"
+    ],
+    "a": 0,
+    "why": "一样 + 都是: cả hai đều cùng là học sinh trường này."
+   },
+   {
+    "q": "Muốn nói “không giống nhau” thì dùng gì?",
+    "o": [
+     "一样",
+     "相同",
+     "不一样",
+     "更一样"
+    ],
+    "a": 2,
+    "why": "Phủ định của 一样 là 不一样."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-38",
+  "stage": 2,
+  "title": "承接复句 — việc nối việc, 先…再…",
+  "hook": "“吃了晚饭，我们出去走走。” — ăn tối xong rồi ra ngoài đi dạo: hai việc nối nhau theo thời gian.",
+  "examples": [
+   "吃了晚饭，我们出去走走。(Chī le wǎnfàn, wǒmen chū qù zǒu zǒu.) — Ăn tối xong, chúng tôi ra ngoài đi dạo.",
+   "他回房间拿了衣服，去教室上课了。(Tā huí fángjiān ná le yīfu, qù jiàoshì shàng kè le.) — Anh ấy về phòng lấy áo rồi đi tới lớp học.",
+   "你先去超市买东西，再回家。(Nǐ xiān qù chāoshì mǎi dōngxi, zài huí jiā.) — Bạn đi siêu thị mua đồ trước, rồi về nhà.",
+   "我先去吃午饭，然后回房间休息。(Wǒ xiān qù chī wǔfàn, ránhòu huí fángjiān xiūxi.) — Tôi đi ăn trưa trước, rồi về phòng nghỉ."
+  ],
+  "speak": "吃了晚饭，我们出去走走。他回房间拿了衣服，去教室上课了。你先去超市买东西，再回家。我先去吃午饭，然后回房间休息。",
+  "rule": "Câu phức承接: hai vế xảy ra nối tiếp theo thời gian, vế trước xong rồi mới tới vế sau. Có thể không dùng liên từ, chỉ xếp việc trước rồi việc sau; muốn nói rõ trình tự thì dùng 先…，再… hoặc …，然后…. Vế sau là việc tiếp theo, không phải nguyên nhân hay đối lập.",
+  "tip": "先…再… nhấn mạnh thứ tự; 再 thường đi sau 先, đừng dùng 再 thay cho 然后 ở mọi chỗ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "承接复句 nói về quan hệ gì giữa hai vế?",
+    "o": [
+     "Hai việc xảy ra nối tiếp nhau",
+     "Hai việc đối lập nhau",
+     "Hai việc để chọn một",
+     "Nguyên nhân và kết quả"
+    ],
+    "a": 0,
+    "why": "承接 là nối tiếp: việc trước xong rồi tới việc sau."
+   },
+   {
+    "q": "“先…，再…” nhấn mạnh điều gì?",
+    "o": [
+     "Nguyên nhân",
+     "Thứ tự trước sau",
+     "Sự lựa chọn",
+     "Sự đối lập"
+    ],
+    "a": 1,
+    "why": "先…再… nói rõ việc nào làm trước, việc nào làm sau."
+   },
+   {
+    "q": "Điền vào chỗ trống：你先去超市买东西，___回家。",
+    "o": [
+     "但是",
+     "如果",
+     "再",
+     "因为"
+    ],
+    "a": 2,
+    "why": "先…，再… là cặp liên từ của câu承接."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "吃了晚饭，我们出去走走",
+     "他先回家，再去学校",
+     "我先吃饭，然后休息",
+     "他再回家，先去超市"
+    ],
+    "a": 3,
+    "why": "再 phải đứng sau 先: 他先去超市，再回家 mới đúng."
+   },
+   {
+    "q": "“吃了晚饭，我们出去走走” nghĩa là gì?",
+    "o": [
+     "Ăn tối xong, chúng tôi ra ngoài đi dạo",
+     "Chúng tôi đi dạo rồi mới ăn tối",
+     "Chúng tôi không ăn tối",
+     "Chúng tôi ăn tối ở ngoài"
+    ],
+    "a": 0,
+    "why": "Vế trước là việc ăn tối xong, vế sau là việc đi dạo tiếp theo."
+   },
+   {
+    "q": "Câu nào là承接复句?",
+    "o": [
+     "他虽然累，但是还在学习",
+     "我先去吃午饭，然后回房间休息",
+     "如果你有时间，我们就去吧",
+     "因为下雨，所以不去了"
+    ],
+    "a": 1,
+    "why": "先…，然后…: ăn trưa trước rồi về phòng nghỉ sau."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-39",
+  "stage": 2,
+  "title": "递进复句 — càng nói càng tiến, 不但…而且…",
+  "hook": "“昨天很冷，今天更冷了。” — hôm nay còn lạnh hơn hôm qua: vế sau tiến thêm một mức.",
+  "examples": [
+   "昨天很冷，今天更冷了。(Zuótiān hěn lěng, jīntiān gèng lěng le.) — Hôm qua rất lạnh, hôm nay còn lạnh hơn.",
+   "班长学习很好，还经常帮助同学。(Bānzhǎng xuéxí hěn hǎo, hái jīngcháng bāngzhù tóngxué.) — Lớp trưởng học rất giỏi, lại còn thường xuyên giúp bạn.",
+   "她不但会说中文，而且说得很好。(Tā bùdàn huì shuō Zhōngwén, érqiě shuō de hěn hǎo.) — Cô ấy không những biết nói tiếng Trung mà còn nói rất hay.",
+   "这个地方我去过了，去过两次了。(Zhège dìfang wǒ qù guo le, qù guo liǎng cì le.) — Chỗ này tôi đã tới rồi, tới hai lần rồi."
+  ],
+  "speak": "昨天很冷，今天更冷了。班长学习很好，还经常帮助同学。她不但会说中文，而且说得很好。这个地方我去过了，去过两次了。",
+  "rule": "Câu phức递进: vế sau tiến thêm một mức so với vế trước — hơn, thêm, hoặc vượt lên. Có hai dạng: không liên từ, vế sau nói thêm một bước tiến (đi rồi, đi hai lần rồi); có liên từ, vế sau mở đầu bằng 更/还, hoặc dùng cặp 不但…，而且…. Vế sau trong 不但…而且… phải “hơn” vế trước, không đảo được.",
+  "tip": "Đừng dùng 不但…而且… khi hai vế ngang nhau: 而且 sau phải là điểm mạnh hơn, đáng nói hơn.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "递进复句 là gì?",
+    "o": [
+     "Vế sau tiến thêm một mức so với vế trước",
+     "Vế sau đối lập vế trước",
+     "Vế sau là nguyên nhân của vế trước",
+     "Hai vế để chọn một"
+    ],
+    "a": 0,
+    "why": "递进 là tiến lên từng mức: vế sau hơn vế trước."
+   },
+   {
+    "q": "“不但…，而且…” — vế sau như thế nào so với vế trước?",
+    "o": [
+     "Ngược lại",
+     "Ngang nhau",
+     "Mạnh hơn, tiến thêm",
+     "Không liên quan"
+    ],
+    "a": 2,
+    "why": "而且 sau là điểm mạnh hơn, vượt lên so với vế trước."
+   },
+   {
+    "q": "Điền vào chỗ trống：她不但会说中文，___说得很好。",
+    "o": [
+     "但是",
+     "而且",
+     "还是",
+     "如果"
+    ],
+    "a": 1,
+    "why": "不但 đi với 而且 thành một cặp."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "昨天很冷，今天更冷了",
+     "她不但会说中文，而且说得很好",
+     "他不但高，而且他高",
+     "班长学习很好，还经常帮助同学"
+    ],
+    "a": 2,
+    "why": "Vế sau “他高” không tiến thêm gì so với vế trước, câu递进 bị rỗng."
+   },
+   {
+    "q": "“昨天很冷，今天更冷了” nghĩa là gì?",
+    "o": [
+     "Hôm nay lạnh hơn hôm qua",
+     "Hôm qua lạnh hơn hôm nay",
+     "Hai hôm lạnh như nhau",
+     "Hôm nay không lạnh"
+    ],
+    "a": 0,
+    "why": "更冷了: hôm nay lạnh hơn, tiến thêm một mức."
+   },
+   {
+    "q": "“还” trong “还经常帮助同学” có tác dụng gì?",
+    "o": [
+     "Phủ định",
+     "Nói nguyên nhân",
+     "Hỏi lựa chọn",
+     "Nói thêm một điểm tốt nữa"
+    ],
+    "a": 3,
+    "why": "还 ở đây nói thêm: học giỏi, lại còn hay giúp bạn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-40",
+  "stage": 2,
+  "title": "选择复句 — chọn cái này hay cái kia, 还是",
+  "hook": "“你是走路来的，还是骑车来的？” — đi bộ tới hay đạp xe tới: hỏi để chọn một trong hai.",
+  "examples": [
+   "明天你喝咖啡还是喝茶？(Míngtiān nǐ hē kāfēi háishi hē chá?) — Mai bạn uống cà phê hay uống trà?",
+   "我们今天吃米饭还是吃面条？(Wǒmen jīntiān chī mǐfàn háishi chī miàntiáo?) — Hôm nay chúng ta ăn cơm hay ăn mì?",
+   "你是走路来的，还是骑车来的？(Nǐ shì zǒu lù lái de, háishi qí chē lái de?) — Bạn đi bộ tới hay đạp xe tới?",
+   "晚上你们想看电影，还是想去公园？(Wǎnshang nǐmen xiǎng kàn diànyǐng, háishi xiǎng qù gōngyuán?) — Tối các bạn muốn xem phim hay đi công viên?"
+  ],
+  "speak": "明天你喝咖啡还是喝茶？我们今天吃米饭还是吃面条？你是走路来的，还是骑车来的？晚上你们想看电影，还是想去公园？",
+  "rule": "Câu phức选择: hai vế đưa ra hai lựa chọn, người nghe chọn một. Giữa hai lựa chọn phải có 还是, dạng đầy đủ là (是)……，还是……. 还是 chỉ dùng trong câu hỏi lựa chọn, không dùng trong câu kể.",
+  "tip": "Đừng nhầm 还是 với 或者: 或者 dùng trong câu kể (“hoặc A hoặc B đều được”), 还是 dùng khi hỏi để chọn một.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "选择复句 dùng để làm gì?",
+    "o": [
+     "Đưa ra hai lựa chọn để chọn một",
+     "Nói nguyên nhân",
+     "Nói hai việc nối tiếp",
+     "Nói điều giả sử"
+    ],
+    "a": 0,
+    "why": "选择 là lựa chọn: đưa hai phương án để người nghe chọn một."
+   },
+   {
+    "q": "“还是” dùng trong câu nào?",
+    "o": [
+     "Câu kể",
+     "Câu hỏi lựa chọn",
+     "Câu cảm thán",
+     "Câu mệnh lệnh"
+    ],
+    "a": 1,
+    "why": "还是 nối hai lựa chọn trong câu hỏi: A，还是B?"
+   },
+   {
+    "q": "Điền vào chỗ trống：你是走路来的，___骑车来的？",
+    "o": [
+     "或者",
+     "但是",
+     "还是",
+     "因为"
+    ],
+    "a": 2,
+    "why": "Hỏi để chọn một trong hai thì dùng 还是."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你想喝咖啡还是喝茶？",
+     "你是坐火车来的，还是坐飞机来的？",
+     "我们去打球，还是去游泳？",
+     "你要咖啡或者茶？"
+    ],
+    "a": 3,
+    "why": "Trong câu hỏi lựa chọn phải dùng 还是, không dùng 或者."
+   },
+   {
+    "q": "“晚上你们想看电影，还是想去公园？” nghĩa là gì?",
+    "o": [
+     "Tối các bạn muốn xem phim hay đi công viên?",
+     "Tối các bạn vừa xem phim vừa đi công viên",
+     "Tối các bạn không xem phim",
+     "Tối các bạn đã xem phim rồi"
+    ],
+    "a": 0,
+    "why": "还是 nối hai lựa chọn: xem phim hay đi công viên."
+   },
+   {
+    "q": "Khác nhau giữa 还是 và 或者 là gì?",
+    "o": [
+     "或者 dùng trong câu hỏi, 还是 dùng trong câu kể",
+     "Hai từ giống hệt nhau",
+     "还是 dùng trong câu hỏi lựa chọn, 或者 dùng trong câu kể",
+     "还是 chỉ dùng với số đếm"
+    ],
+    "a": 2,
+    "why": "还是 hỏi để chọn, 或者 nêu phương án trong câu kể."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-41",
+  "stage": 2,
+  "title": "转折复句 — tuy… nhưng…, 虽然…但是…",
+  "hook": "“这家饭馆虽然很小，但是菜很好吃。” — quán tuy nhỏ nhưng món ăn rất ngon: vế sau xoay ngược vế trước.",
+  "examples": [
+   "这双鞋样子很好看，有一点儿贵。(Zhè shuāng xié yàngzi hěn hǎokàn, yǒu yīdiǎnr guì.) — Đôi giày này mẫu rất đẹp, hơi đắt một chút.",
+   "这家饭馆虽然很小，但是菜很好吃。(Zhè jiā fànguǎn suīrán hěn xiǎo, dànshì cài hěn hǎochī.) — Quán ăn này tuy rất nhỏ nhưng món ăn rất ngon.",
+   "虽然今天很冷，可是我们还是去跑步了。(Suīrán jīntiān hěn lěng, kěshì wǒmen háishi qù pǎobù le.) — Tuy hôm nay rất lạnh nhưng chúng tôi vẫn đi chạy bộ.",
+   "他的房间不太大，不过很干净。(Tā de fángjiān bù tài dà, bùguò hěn gānjìng.) — Phòng của anh ấy không lớn lắm, nhưng rất sạch."
+  ],
+  "speak": "这双鞋样子很好看，有一点儿贵。这家饭馆虽然很小，但是菜很好吃。虽然今天很冷，可是我们还是去跑步了。他的房间不太大，不过很干净。",
+  "rule": "Câu phức转折: vế trước nêu một mặt, vế sau xoay ngược lại. Có thể không dùng liên từ, chỉ đặt hai mặt đối nhau cạnh nhau; dùng 虽然…，但是/可是…; hoặc vế sau mở đầu bằng 不过. 虽然 và 但是 đi theo cặp, không dùng 虽然…就…; vế sau thường có 还是/很 để nhấn mạnh.",
+  "tip": "Người Việt hay bỏ 虽然 mà giữ 但是 — được, nhưng đừng bỏ 但是 mà giữ 虽然 một mình, câu sẽ lửng.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "转折复句 nói về quan hệ gì?",
+    "o": [
+     "Vế sau xoay ngược lại với vế trước",
+     "Vế sau là kết quả của vế trước",
+     "Hai vế để chọn một",
+     "Hai vế nối tiếp nhau"
+    ],
+    "a": 0,
+    "why": "转折 là xoay ngược: vế sau đối lại với điều vế trước gợi ra."
+   },
+   {
+    "q": "“虽然…，但是…” — hai từ này đi với nhau thế nào?",
+    "o": [
+     "Chỉ dùng 虽然 một mình",
+     "Chỉ dùng 但是 một mình",
+     "Đi theo cặp, không tách rời",
+     "Không bao giờ đi cùng nhau"
+    ],
+    "a": 2,
+    "why": "虽然…但是… là cặp liên từ转折, đi cùng nhau."
+   },
+   {
+    "q": "Điền vào chỗ trống：这家饭馆虽然很小，___菜很好吃。",
+    "o": [
+     "而且",
+     "但是",
+     "如果",
+     "还是"
+    ],
+    "a": 1,
+    "why": "虽然 đi với 但是: tuy nhỏ nhưng món ăn ngon."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "虽然今天很冷，可是我们还是去跑步了",
+     "他的房间不太大，不过很干净",
+     "虽然他很累，就去睡觉了",
+     "这双鞋样子很好看，有一点儿贵"
+    ],
+    "a": 2,
+    "why": "虽然 không đi với 就: phải nói 虽然他很累，但是他还是去睡觉了."
+   },
+   {
+    "q": "“不过” trong转折复句 thường đứng ở đâu?",
+    "o": [
+     "Đầu vế sau",
+     "Đầu vế trước",
+     "Cuối câu",
+     "Giữa chủ ngữ và động từ"
+    ],
+    "a": 0,
+    "why": "不过 mở đầu vế sau để xoay ngược lại: 不大，不过很干净."
+   },
+   {
+    "q": "“这家饭馆虽然很小，但是菜很好吃” nghĩa là gì?",
+    "o": [
+     "Quán ăn này vừa nhỏ vừa dở",
+     "Quán ăn này rất lớn",
+     "Quán ăn này không có món ngon",
+     "Quán ăn này tuy nhỏ nhưng món ăn rất ngon"
+    ],
+    "a": 3,
+    "why": "虽然…但是…: tuy nhỏ nhưng món ăn ngon."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-42",
+  "stage": 2,
+  "title": "假设复句 — giả sử… thì…, 如果…就…",
+  "hook": "“如果你明天早上没课，我们就一起去跑步吧。” — nếu mai không có tiết thì cùng đi chạy: giả sử rồi nói kết quả.",
+  "examples": [
+   "明天不下雨，我们去公园玩。(Míngtiān bù xià yǔ, wǒmen qù gōngyuán wán.) — Mai không mưa thì chúng tôi đi công viên chơi.",
+   "如果你明天早上没课，我们就一起去跑步吧。(Rúguǒ nǐ míngtiān zǎoshang méi kè, wǒmen jiù yīqǐ qù pǎobù ba.) — Nếu sáng mai bạn không có tiết, chúng ta cùng đi chạy bộ nhé.",
+   "明天天气不好的话，我就不去公园了。(Míngtiān tiānqì bù hǎo de huà, wǒ jiù bù qù gōngyuán le.) — Nếu mai thời tiết xấu thì tôi không đi công viên nữa.",
+   "如果你不喜欢这件衣服，我们就换一件吧。(Rúguǒ nǐ bù xǐhuan zhè jiàn yīfu, wǒmen jiù huàn yī jiàn ba.) — Nếu bạn không thích chiếc áo này thì chúng ta đổi chiếc khác nhé."
+  ],
+  "speak": "明天不下雨，我们去公园玩。如果你明天早上没课，我们就一起去跑步吧。明天天气不好的话，我就不去公园了。如果你不喜欢这件衣服，我们就换一件吧。",
+  "rule": "Câu phức假设: giả định một điều chưa xảy ra, vế sau nói kết quả nếu điều đó thành thật. Không dùng liên từ cũng được, chỉ xếp giả định trước kết quả sau; có liên từ thì dùng 如果…，就…; …的话 đặt ở cuối vế giả định. 就 ở vế sau nhấn mạnh kết quả sẽ xảy ra.",
+  "tip": "如果…就… khác 只要…就…: 如果 chỉ giả sử một việc có thể xảy ra, 只要 là điều kiện đủ — chỉ cần thỏa là chắc chắn.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "假设复句 là gì?",
+    "o": [
+     "Giả sử một điều chưa xảy ra, rồi nói kết quả",
+     "Nói nguyên nhân và kết quả",
+     "Nói hai việc nối tiếp",
+     "Đưa ra lựa chọn"
+    ],
+    "a": 0,
+    "why": "假设 là giả định: nếu điều này xảy ra thì điều kia sẽ ra sao."
+   },
+   {
+    "q": "“如果…，就…” — 就 ở vế sau có tác dụng gì?",
+    "o": [
+     "Hỏi lựa chọn",
+     "Nhấn mạnh kết quả sẽ xảy ra",
+     "Phủ định",
+     "Nói thời gian"
+    ],
+    "a": 1,
+    "why": "就 ở vế sau nhấn mạnh kết quả tất yếu của giả định."
+   },
+   {
+    "q": "Điền vào chỗ trống：___你明天早上没课，我们就一起去跑步吧。",
+    "o": [
+     "因为",
+     "虽然",
+     "如果",
+     "但是"
+    ],
+    "a": 2,
+    "why": "Giả định dùng 如果 mở đầu vế trước."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "如果你有时间，我们就去超市吧",
+     "明天天气不好的话，我就不去公园了",
+     "如果他不来，我就自己去",
+     "如果明天下雨，就我们在家休息"
+    ],
+    "a": 3,
+    "why": "就 đặt sai chỗ: phải nói 如果明天下雨，我们就在家休息."
+   },
+   {
+    "q": "“……的话” đặt ở đâu?",
+    "o": [
+     "Cuối vế giả định",
+     "Đầu câu",
+     "Cuối câu",
+     "Giữa hai vế"
+    ],
+    "a": 0,
+    "why": "的话 gắn ở cuối vế giả định: 天气不好的话, …."
+   },
+   {
+    "q": "“如果你不喜欢这件衣服，我们就换一件吧” nghĩa là gì?",
+    "o": [
+     "Bạn nhất định phải thích chiếc áo này",
+     "Chiếc áo này rất đẹp",
+     "Chúng ta không đổi áo nữa",
+     "Nếu bạn không thích chiếc áo này thì chúng ta đổi chiếc khác"
+    ],
+    "a": 3,
+    "why": "如果…就…: giả sử không thích thì đổi chiếc khác."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-43",
+  "stage": 2,
+  "title": "条件复句 — 只要…就… chỉ cần… thì…",
+  "hook": "“只要你每天练习半个小时，就一定说得越来越流利。” — chỉ cần luyện mỗi ngày nửa giờ thì nhất định nói càng trôi chảy.",
+  "examples": [
+   "只要你每天练习半个小时，就一定说得越来越流利。(Zhǐyào nǐ měitiān liànxí bàn ge xiǎoshí, jiù yīdìng shuō de yuè lái yuè liúlì.) — Chỉ cần bạn luyện tập mỗi ngày nửa giờ thì nhất định nói càng ngày càng trôi chảy.",
+   "只要你早上七点起床，就不会迟到。(Zhǐyào nǐ zǎoshang qī diǎn qǐ chuáng, jiù bù huì chídào.) — Chỉ cần bạn dậy lúc bảy giờ sáng thì sẽ không muộn.",
+   "只要我们一起努力，就能把这个活动办好。(Zhǐyào wǒmen yīqǐ nǔlì, jiù néng bǎ zhège huódòng bàn hǎo.) — Chỉ cần chúng ta cùng cố gắng thì có thể tổ chức tốt hoạt động này.",
+   "只要你把生词都记住，考试就没问题了。(Zhǐyào nǐ bǎ shēngcí dōu jì zhu, kǎoshì jiù méi wèntí le.) — Chỉ cần bạn nhớ hết từ mới thì thi cử không còn vấn đề gì."
+  ],
+  "speak": "只要你每天练习半个小时，就一定说得越来越流利。只要你早上七点起床，就不会迟到。只要我们一起努力，就能把这个活动办好。只要你把生词都记住，考试就没问题了。",
+  "rule": "Câu phức条件 với 只要…，就…: 只要 nêu điều kiện đủ — chỉ cần thỏa điều kiện thì kết quả chắc chắn xảy ra. Vế sau thường có 就 + 一定/能/会. Khác 如果 ở chỗ 只要 nhấn mạnh “chỉ cần thế là đủ”, còn 如果 chỉ giả sử một việc có thể xảy ra.",
+  "tip": "Đừng dùng 只要 cho giả định khó xảy ra hoặc không làm được; 只要 đi với điều kiện người nghe có thể thực hiện.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“只要…，就…” nhấn mạnh điều gì?",
+    "o": [
+     "Chỉ cần thỏa điều kiện thì kết quả chắc chắn xảy ra",
+     "Giả sử một việc khó xảy ra",
+     "Nói nguyên nhân",
+     "Hỏi lựa chọn"
+    ],
+    "a": 0,
+    "why": "只要 nêu điều kiện đủ: chỉ cần thế là kết quả chắc chắn tới."
+   },
+   {
+    "q": "Khác nhau giữa 只要 và 如果 là gì?",
+    "o": [
+     "Hai từ giống hệt nhau",
+     "如果 là điều kiện đủ, 只要 chỉ giả sử",
+     "只要 là điều kiện đủ, chỉ cần thế là đủ; 如果 chỉ giả sử",
+     "只要 chỉ dùng trong câu hỏi"
+    ],
+    "a": 2,
+    "why": "只要 nhấn mạnh điều kiện đủ, 如果 chỉ giả sử có thể xảy ra."
+   },
+   {
+    "q": "Điền vào chỗ trống：___你每天练习半个小时，就一定说得越来越流利。",
+    "o": [
+     "如果",
+     "只要",
+     "虽然",
+     "因为"
+    ],
+    "a": 1,
+    "why": "“Chỉ cần luyện mỗi ngày” là điều kiện đủ: dùng 只要."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "只要你早上七点起床，就不会迟到",
+     "只要我们一起努力，就能把这个活动办好",
+     "只要你不复习，就一定能考好",
+     "只要你把生词都记住，考试就没问题了"
+    ],
+    "a": 2,
+    "why": "Không ôn tập thì không thể “nhất định thi tốt”: điều kiện và kết quả mâu thuẫn."
+   },
+   {
+    "q": "“只要你每天练习，就一定说得越来越流利” nghĩa là gì?",
+    "o": [
+     "Bạn luyện mỗi ngày cũng chưa chắc nói tốt",
+     "Bạn không cần luyện tập",
+     "Bạn nói đã rất trôi chảy rồi",
+     "Chỉ cần bạn luyện mỗi ngày thì nhất định nói càng ngày càng trôi chảy"
+    ],
+    "a": 3,
+    "why": "只要…就一定…: chỉ cần luyện mỗi ngày thì chắc chắn nói tốt dần."
+   },
+   {
+    "q": "Trong “只要…，就…”, vế sau thường có thêm từ nào?",
+    "o": [
+     "但是",
+     "还是",
+     "就 + 一定/能/会",
+     "或者"
+    ],
+    "a": 2,
+    "why": "Vế sau hay có 就 kèm 一定/能/会 để khẳng định kết quả chắc chắn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-44",
+  "stage": 2,
+  "title": "因果复句 — vì… nên…, 因为…所以…",
+  "hook": "“因为这本书很有意思，所以我一口气看完了。” — vì sách hay nên tôi đọc một mạch xong luôn.",
+  "examples": [
+   "外边下雨了，我们今天不去公园了。(Wàibian xià yǔ le, wǒmen jīntiān bù qù gōngyuán le.) — Bên ngoài mưa rồi, hôm nay chúng tôi không đi công viên nữa.",
+   "他昨天睡得太晚了，今天早上起不来。(Tā zuótiān shuì de tài wǎn le, jīntiān zǎoshang qǐ bù lái.) — Hôm qua anh ấy ngủ quá muộn nên sáng nay dậy không nổi.",
+   "因为我感冒了，所以今天不能去上课。(Yīnwèi wǒ gǎnmào le, suǒyǐ jīntiān bù néng qù shàng kè.) — Vì tôi bị cảm nên hôm nay không thể đi học.",
+   "因为这本书很有意思，所以我一口气看完了。(Yīnwèi zhè běn shū hěn yǒu yìsi, suǒyǐ wǒ yī kǒu qì kàn wán le.) — Vì cuốn sách này rất hay nên tôi đọc một mạch xong luôn."
+  ],
+  "speak": "外边下雨了，我们今天不去公园了。他昨天睡得太晚了，今天早上起不来。因为我感冒了，所以今天不能去上课。因为这本书很有意思，所以我一口气看完了。",
+  "rule": "Câu phức因果: vế trước là nguyên nhân, vế sau là kết quả. Có thể không dùng liên từ, chỉ xếp nguyên nhân trước kết quả sau; muốn nhấn mạnh thì dùng 因为…，所以…. 因为 và 所以 đi theo cặp, trong khẩu ngữ có thể lược một trong hai.",
+  "tip": "Đừng đặt 所以 ở đầu câu khi không có 因为 trước đó trong văn viết trang trọng; trong khẩu ngữ vẫn nghe được.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "因果复句 nói về quan hệ gì?",
+    "o": [
+     "Nguyên nhân và kết quả",
+     "Lựa chọn",
+     "Giả sử",
+     "Đối lập"
+    ],
+    "a": 0,
+    "why": "因果 là nguyên nhân — kết quả."
+   },
+   {
+    "q": "“因为…，所以…” — hai từ này đi với nhau thế nào?",
+    "o": [
+     "Không bao giờ đi cùng nhau",
+     "Chỉ dùng 因为 một mình",
+     "Đi theo cặp, có thể lược một trong hai trong khẩu ngữ",
+     "Chỉ dùng 所以 một mình"
+    ],
+    "a": 2,
+    "why": "因为…所以… là cặp liên từ因果, khẩu ngữ có thể lược một bên."
+   },
+   {
+    "q": "Điền vào chỗ trống：___我感冒了，___今天不能去上课。",
+    "o": [
+     "如果…就",
+     "因为…所以",
+     "虽然…但是",
+     "只要…就"
+    ],
+    "a": 1,
+    "why": "Cảm là nguyên nhân, không đi học là kết quả: 因为…所以…."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "因为我感冒了，所以今天不能去上课",
+     "他昨天睡得太晚了，今天早上起不来",
+     "因为下雨了，所以路很滑",
+     "所以我感冒了，因为今天不能去上课"
+    ],
+    "a": 3,
+    "why": "所以 không đứng trước 因为: nguyên nhân phải nói trước, kết quả nói sau."
+   },
+   {
+    "q": "“外边下雨了，我们今天不去公园了” — vế nào là nguyên nhân?",
+    "o": [
+     "外边下雨了",
+     "我们今天不去公园了",
+     "Cả hai đều là kết quả",
+     "Không có nguyên nhân"
+    ],
+    "a": 0,
+    "why": "Mưa là nguyên nhân, không đi công viên là kết quả."
+   },
+   {
+    "q": "“因为这本书很有意思，所以我一口气看完了” nghĩa là gì?",
+    "o": [
+     "Cuốn sách này rất chán",
+     "Tôi không đọc cuốn sách này",
+     "Tôi đọc cuốn sách này rất chậm",
+     "Vì cuốn sách này rất hay nên tôi đọc một mạch xong luôn"
+    ],
+    "a": 3,
+    "why": "因为…所以…: sách hay là nguyên nhân, đọc một mạch xong là kết quả."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-45",
+  "stage": 2,
+  "title": "序数表示法 — thứ nhất, tầng hai, xe 302",
+  "hook": "“请坐302路公交车，在学校门口下车。” — đi xe buýt tuyến 302: số nhà, số tầng, số tuyến xe đều có cách nói riêng.",
+  "examples": [
+   "我住在二楼，哥哥住在三楼。(Wǒ zhù zài èr lóu, gēge zhù zài sān lóu.) — Tôi ở tầng hai, anh trai ở tầng ba.",
+   "这是我的第三本书。(Zhè shì wǒ de dì sān běn shū.) — Đây là quyển sách thứ ba của tôi.",
+   "请坐302路公交车，在学校门口下车。(Qǐng zuò sānbǎilíng'èr lù gōngjiāochē, zài xuéxiào ménkǒu xià chē.) — Xin đi xe buýt tuyến 302, xuống ở cổng trường.",
+   "我在205房间等你。(Wǒ zài èrbǎilíngwǔ fángjiān děng nǐ.) — Tôi đợi bạn ở phòng 205."
+  ],
+  "speak": "我住在二楼，哥哥住在三楼。这是我的第三本书。请坐302路公交车，在学校门口下车。我在205房间等你。",
+  "rule": "Số thứ tự: 第 + số (第一, 第三, 第七); dạng đầy đủ là 第 + số + lượng từ + danh từ (第三本书). Số nhà, số tầng, số phòng, số tuyến xe KHÔNG dùng 第: 二楼 là tầng hai, 205房间 là phòng 205, 302路 là tuyến xe 302. Nói tầng nhà dùng 二楼/三层, không nói 第二楼.",
+  "tip": "Người Việt hay thêm 第 vào số phòng và số tuyến xe — sai: nói 205房间, 302路, không nói 第205房间.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Số thứ tự trong tiếng Trung nói thế nào?",
+    "o": [
+     "第 + số",
+     "Số + 第",
+     "Số + 个",
+     "第 + lượng từ"
+    ],
+    "a": 0,
+    "why": "Số thứ tự: 第 + số, như 第一, 第三."
+   },
+   {
+    "q": "“205房间” có dùng 第 không?",
+    "o": [
+     "Có, 第205房间",
+     "Không, nói 205房间",
+     "Có, 205第房间",
+     "Không, nói 第房间205"
+    ],
+    "a": 1,
+    "why": "Số phòng không dùng 第: nói 205房间."
+   },
+   {
+    "q": "Điền vào chỗ trống：这是我的第___本书。",
+    "o": [
+     "一",
+     "个",
+     "三",
+     "本"
+    ],
+    "a": 2,
+    "why": "Quyển sách thứ ba: 第三本书."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我住在二楼",
+     "请坐302路公交车",
+     "我在第205房间等你",
+     "这是我的第三本书"
+    ],
+    "a": 2,
+    "why": "Số phòng không dùng 第: phải nói 我在205房间等你."
+   },
+   {
+    "q": "“三楼” nghĩa là gì?",
+    "o": [
+     "Tầng ba",
+     "Ba tòa nhà",
+     "Ba căn phòng",
+     "Tuyến xe số ba"
+    ],
+    "a": 0,
+    "why": "三楼 là tầng ba của tòa nhà."
+   },
+   {
+    "q": "“第一” dùng để nói gì?",
+    "o": [
+     "Một cái",
+     "Một lần",
+     "Một người",
+     "Thứ nhất"
+    ],
+    "a": 3,
+    "why": "第一 là thứ nhất, số thứ tự đầu tiên."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-46",
+  "stage": 2,
+  "title": "概数表示法1 — số áng chừng, 三十多本 / 三块多",
+  "hook": "“我买了三十多本书。” — mua hơn ba mươi quyển: số áng chừng, không cần chính xác từng quyển.",
+  "examples": [
+   "我买了三十多本书。(Wǒ mǎi le sānshí duō běn shū.) — Tôi mua hơn ba mươi quyển sách.",
+   "这件衣服五十多块钱。(Zhè jiàn yīfu wǔshí duō kuài qián.) — Chiếc áo này hơn năm mươi đồng.",
+   "他跑了三公里多。(Tā pǎo le sān gōnglǐ duō.) — Anh ấy chạy hơn ba cây số.",
+   "他买了七斤多苹果。(Tā mǎi le qī jīn duō píngguǒ.) — Anh ấy mua hơn bảy cân táo."
+  ],
+  "speak": "我买了三十多本书。这件衣服五十多块钱。他跑了三公里多。他买了七斤多苹果。",
+  "rule": "Số áng chừng có hai cách: 数词 + 多 + 量词 + danh từ (三十多本书 = hơn ba mươi quyển); 数词 + 量词 + 多 (三块多 = hơn ba đồng, 七斤多 = hơn bảy cân). 多 đặt trước lượng từ thì bổ nghĩa cho cả cụm, đặt sau lượng từ thì nói số lượng vượt quá con số đó một chút; cả hai đều mang nghĩa “hơn … một chút”, không phải số chính xác.",
+  "tip": "Đừng nhầm 多 trong số áng chừng với 多 nghĩa “nhiều”: 三十多本 là “hơn ba mươi quyển”, không phải “ba mươi quyển nhiều”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“三十多本书” nghĩa là gì?",
+    "o": [
+     "Đúng ba mươi quyển sách",
+     "Hơn ba mươi quyển sách",
+     "Ít hơn ba mươi quyển sách",
+     "Ba mươi quyển sách nhiều"
+    ],
+    "a": 1,
+    "why": "三十多本: hơn ba mươi quyển một chút, không phải đúng ba mươi."
+   },
+   {
+    "q": "“三块多” thuộc mẫu nào?",
+    "o": [
+     "数词 + 多 + 量词",
+     "量词 + 多 + 数词",
+     "数词 + 量词 + 多",
+     "多 + 数词 + 量词"
+    ],
+    "a": 2,
+    "why": "三块多 là 数词 + 量词 + 多: ba đồng hơn một chút."
+   },
+   {
+    "q": "Điền vào chỗ trống：他买了七___多苹果。",
+    "o": [
+     "斤",
+     "本",
+     "个",
+     "条"
+    ],
+    "a": 0,
+    "why": "Táo cân theo cân: 七斤多苹果."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我买了三十多本书",
+     "这件衣服五十多块钱",
+     "他跑了多三公里",
+     "他买了七斤多苹果"
+    ],
+    "a": 2,
+    "why": "多 không đứng trước số: phải nói 三公里多."
+   },
+   {
+    "q": "“五十多块钱” nói về cái gì?",
+    "o": [
+     "Giá tiền hơn năm mươi đồng",
+     "Đúng năm mươi đồng",
+     "Ít hơn năm mươi đồng",
+     "Năm mươi tờ tiền"
+    ],
+    "a": 0,
+    "why": "五十多块钱: giá hơn năm mươi đồng một chút."
+   },
+   {
+    "q": "多 trong “三十多本” khác 多 trong “很多书” ở điểm nào?",
+    "o": [
+     "Giống hệt nhau",
+     "很多书的 多 mới là số áng chừng",
+     "三十多本 nghĩa là đúng ba mươi",
+     "三十多本的 多 nói số áng chừng, hơn con số một chút"
+    ],
+    "a": 3,
+    "why": "三十多本的 多 gắn với con số để nói áng chừng; 很多书的 多 chỉ nghĩa “nhiều”."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-47",
+  "stage": 2,
+  "title": "用“就”表示强调 — chính là, ngay ở đây",
+  "hook": "“你看，这就是我们上课的教室。” — đây chính là phòng học của chúng ta: 就 nhấn mạnh “chính là”.",
+  "examples": [
+   "教学楼就在前边。(Jiàoxuélóu jiù zài qiánbian.) — Tòa nhà dạy học ở ngay phía trước.",
+   "你看，这就是我们上课的教室。(Nǐ kàn, zhè jiù shì wǒmen shàng kè de jiàoshì.) — Bạn xem, đây chính là phòng học của chúng ta.",
+   "我就是想去中国看看。(Wǒ jiù shì xiǎng qù Zhōngguó kàn kan.) — Tôi chính là muốn đi Trung Quốc xem thử.",
+   "他就是我的好朋友小明。(Tā jiù shì wǒ de hǎo péngyou Xiǎo Míng.) — Anh ấy chính là bạn tốt Tiểu Minh của tôi."
+  ],
+  "speak": "教学楼就在前边。你看，这就是我们上课的教室。我就是想去中国看看。他就是我的好朋友小明。",
+  "rule": "就 đặt trước động từ hoặc 是 để nhấn mạnh: chính là, ngay ở đó, đúng người đó. 就在前边 là ngay phía trước; 就是… là chính là…. Khác 就 trong 一…就… (vừa… thì đã…) và 就 trong 如果…就… (thì), hai mẫu kia nói quan hệ giữa hai vế, còn 就 ở đây chỉ nhấn mạnh một thành phần trong câu.",
+  "tip": "就 nhấn mạnh thường đi với 是/在; đừng thêm 就 vào mọi câu — chỉ dùng khi muốn khẳng định “chính là cái này, không phải cái khác”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“就” trong “教学楼就在前边” có tác dụng gì?",
+    "o": [
+     "Nhấn mạnh: ngay phía trước",
+     "Nói thời gian",
+     "Hỏi lựa chọn",
+     "Phủ định"
+    ],
+    "a": 0,
+    "why": "就在前边: tòa nhà ở ngay phía trước, 就 nhấn mạnh vị trí."
+   },
+   {
+    "q": "“这就是我们上课的教室” nghĩa là gì?",
+    "o": [
+     "Đây không phải phòng học",
+     "Đây là phòng học khác",
+     "Chúng ta không có phòng học",
+     "Đây chính là phòng học của chúng ta"
+    ],
+    "a": 3,
+    "why": "就是…: chính là phòng học của chúng ta."
+   },
+   {
+    "q": "Điền vào chỗ trống：他___是我的好朋友小明。",
+    "o": [
+     "就",
+     "才",
+     "都",
+     "也"
+    ],
+    "a": 0,
+    "why": "Nhấn mạnh “chính là Tiểu Minh”: 他就是我的好朋友小明."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "教学楼就在前边",
+     "你看，这就是我们上课的教室",
+     "我就想去中国看看",
+     "他就我的好朋友是小明"
+    ],
+    "a": 3,
+    "why": "就 phải đứng trước 是: 他就是我的好朋友小明 mới đúng."
+   },
+   {
+    "q": "“就是” thường nhấn mạnh điều gì?",
+    "o": [
+     "Một việc sắp xảy ra",
+     "Một việc đã xong",
+     "Chính là cái này, không phải cái khác",
+     "Một câu hỏi"
+    ],
+    "a": 2,
+    "why": "就是 khẳng định: chính là cái này, không phải cái khác."
+   },
+   {
+    "q": "就 nhấn mạnh khác 就 trong “一…就…” ở điểm nào?",
+    "o": [
+     "Giống hệt nhau",
+     "就 nhấn mạnh khẳng định “chính là”, còn 一…就… nói hai việc nối nhau rất nhanh",
+     "就 nhấn mạnh chỉ dùng với số đếm",
+     "一…就… mới là nhấn mạnh"
+    ],
+    "a": 1,
+    "why": "就 nhấn mạnh khẳng định một thành phần; 一…就… nói hai việc xảy ra nối nhau rất nhanh."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-48",
+  "stage": 2,
+  "title": "代词／名词+呢？ — còn… thì sao?",
+  "hook": "“我去医院，你呢？” — tôi đi bệnh viện, còn bạn? Một chữ 呢 hỏi gọn cả câu hỏi trước.",
+  "examples": [
+   "我去医院，你呢？(Wǒ qù yīyuàn, nǐ ne?) — Tôi đi bệnh viện, còn bạn?",
+   "书在桌子上，笔呢？(Shū zài zhuōzi shang, bǐ ne?) — Sách ở trên bàn, còn bút đâu?",
+   "他去学校了，妈妈呢？(Tā qù xuéxiào le, māma ne?) — Anh ấy đi học rồi, còn mẹ đâu?",
+   "我喜欢喝茶，你呢？(Wǒ xǐhuan hē chá, nǐ ne?) — Tôi thích uống trà, còn bạn?"
+  ],
+  "speak": "我去医院，你呢？书在桌子上，笔呢？他去学校了，妈妈呢？我喜欢喝茶，你呢？",
+  "rule": "Câu hỏi rút gọn: 代词/名词 + 呢？ hỏi tiếp về người hoặc vật vừa nhắc, hoặc hỏi lại cùng câu hỏi cho đối tượng khác. 你呢？ là còn bạn thì sao?; 笔呢？ là còn bút đâu? Mẫu này phải có ngữ cảnh trước đó, không dùng 呢？ để hỏi từ đầu khi chưa nhắc tới ai.",
+  "tip": "呢？ ở đây không phải lúc nào cũng hỏi “ở đâu”: 笔呢？ ngầm hỏi bút ở đâu, còn 你呢？ ngầm hỏi lại câu hỏi trước cho bạn.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“你呢？” dùng để làm gì?",
+    "o": [
+     "Hỏi lại cùng câu hỏi cho đối tượng khác",
+     "Hỏi tên người khác",
+     "Hỏi đường",
+     "Chào tạm biệt"
+    ],
+    "a": 0,
+    "why": "你呢？ hỏi lại cùng câu hỏi trước, nhưng dành cho bạn."
+   },
+   {
+    "q": "“书在桌子上，笔呢？” — người hỏi muốn biết gì?",
+    "o": [
+     "Sách ở đâu",
+     "Bàn ở đâu",
+     "Bút ở đâu",
+     "Ai đang đọc sách"
+    ],
+    "a": 2,
+    "why": "笔呢？ hỏi tiếp về cây bút vừa nhắc: bút đâu rồi?"
+   },
+   {
+    "q": "Điền vào chỗ trống：我去医院，___？",
+    "o": [
+     "你呢",
+     "你吗",
+     "你是",
+     "你吧"
+    ],
+    "a": 0,
+    "why": "Hỏi lại cho đối phương: 我去医院，你呢？"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我去医院，你呢？",
+     "书在桌子上，笔呢？",
+     "他去学校了，妈妈呢？",
+     "你呢去医院？"
+    ],
+    "a": 3,
+    "why": "呢 phải đứng cuối cụm hỏi rút gọn: 你呢？ mới đúng."
+   },
+   {
+    "q": "“我喜欢喝茶，你呢？” nghĩa là gì?",
+    "o": [
+     "Tôi không thích uống trà",
+     "Tôi thích uống trà, còn bạn?",
+     "Bạn thích uống trà à?",
+     "Trà ở đâu?"
+    ],
+    "a": 1,
+    "why": "你呢？ hỏi lại: còn bạn thì sao, bạn thích gì?"
+   },
+   {
+    "q": "Dùng “代词/名词 + 呢？” cần điều kiện gì?",
+    "o": [
+     "Dùng được ngay từ đầu, không cần ngữ cảnh",
+     "Chỉ dùng với người lạ",
+     "Phải có ngữ cảnh nhắc tới người/vật trước đó",
+     "Chỉ dùng trong văn viết"
+    ],
+    "a": 2,
+    "why": "Câu hỏi rút gọn chỉ hiểu được khi trước đó đã nhắc tới người hoặc vật."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-49",
+  "stage": 2,
+  "title": "用“吧”提问 — …吧？ đoán chừng, hỏi xác nhận",
+  "hook": "“您是经理吧？” — ngài là giám đốc phải không? Người hỏi đã đoán gần đúng, chỉ cần gật đầu xác nhận.",
+  "examples": [
+   "您是经理吧？(Nín shì jīnglǐ ba?) — Ngài là giám đốc phải không?",
+   "你是昨天到的吧？(Nǐ shì zuótiān dào de ba?) — Bạn tới hôm qua phải không?",
+   "这件衣服是你的吧？(Zhè jiàn yīfu shì nǐ de ba?) — Chiếc áo này là của bạn phải không?",
+   "他是你哥哥吧？(Tā shì nǐ gēge ba?) — Anh ấy là anh trai bạn phải không?"
+  ],
+  "speak": "您是经理吧？你是昨天到的吧？这件衣服是你的吧？他是你哥哥吧？",
+  "rule": "Câu trần thuật + 吧？ thành câu hỏi xác nhận: người hỏi đã đoán gần đúng, chỉ cần đối phương gật đầu hoặc sửa lại. Ngữ điệu lên ở cuối câu. Khác 吗 hỏi khi hoàn toàn chưa biết; trả lời thường là 是/对, hoặc sửa lại (不是，我是…).",
+  "tip": "吧 còn dùng để đề nghị (我们走吧) — đừng nhầm: 吧 cuối câu hỏi xác nhận thì ngữ điệu hỏi lên, còn 吧 đề nghị thì ngữ điệu rủ xuống.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Câu “您是经理吧？” người hỏi đã biết gì?",
+    "o": [
+     "Đã đoán gần đúng, chỉ hỏi để xác nhận",
+     "Hoàn toàn không biết gì",
+     "Đã biết chắc chắn",
+     "Đang ra lệnh"
+    ],
+    "a": 0,
+    "why": "吧 hỏi xác nhận: người hỏi đã đoán gần đúng rồi."
+   },
+   {
+    "q": "“吧” trong câu hỏi xác nhận khác “吗” ở điểm nào?",
+    "o": [
+     "吗 hỏi khi đã đoán gần đúng, 吧 hỏi khi chưa biết",
+     "Hai từ giống hệt nhau",
+     "吧 hỏi khi đã đoán gần đúng, 吗 hỏi khi chưa biết",
+     "吧 chỉ dùng trong câu kể"
+    ],
+    "a": 2,
+    "why": "吧 là hỏi xác nhận điều đã đoán; 吗 là hỏi khi chưa biết."
+   },
+   {
+    "q": "Điền vào chỗ trống：这件衣服是你的___？",
+    "o": [
+     "吗",
+     "呢",
+     "吧",
+     "啊"
+    ],
+    "a": 2,
+    "why": "Đoán áo là của bạn, hỏi để xác nhận: 是你的吧？"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "您是经理吧？",
+     "你以前学过中文吧？",
+     "他是你哥哥吧？",
+     "你是经理吗吧？"
+    ],
+    "a": 3,
+    "why": "吗 và 吧 không đi cùng nhau trong một câu hỏi."
+   },
+   {
+    "q": "“你以前学过中文吧？” nghĩa là gì?",
+    "o": [
+     "Trước đây bạn từng học tiếng Trung phải không?",
+     "Bạn chưa từng học tiếng Trung à?",
+     "Bạn đang học tiếng Trung à?",
+     "Bạn sẽ học tiếng Trung à?"
+    ],
+    "a": 0,
+    "why": "吧 hỏi xác nhận điều người hỏi đã đoán: trước đây bạn từng học tiếng Trung."
+   },
+   {
+    "q": "Trả lời câu hỏi bằng 吧 thường là gì?",
+    "o": [
+     "Chỉ trả lời 不",
+     "是/对, hoặc sửa lại cho đúng",
+     "Chỉ trả lời 好",
+     "Không trả lời được"
+    ],
+    "a": 1,
+    "why": "Hỏi xác nhận thì đáp 是/对 nếu đúng, hoặc sửa lại nếu đoán sai."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-50",
+  "stage": 2,
+  "title": "该……了 — đến lúc… rồi",
+  "hook": "“十一点了，该睡觉了。” — mười một giờ rồi, đến lúc đi ngủ rồi: 该…了 nói thời điểm đã tới.",
+  "examples": [
+   "十一点了，该睡觉了。(Shíyī diǎn le, gāi shuì jiào le.) — Mười một giờ rồi, đến lúc đi ngủ rồi.",
+   "明天有听写，我该复习生词了。(Míngtiān yǒu tīngxiě, wǒ gāi fùxí shēngcí le.) — Mai có chính tả, tôi phải ôn từ mới rồi.",
+   "电影快开始了，我们该走了。(Diànyǐng kuài kāishǐ le, wǒmen gāi zǒu le.) — Phim sắp bắt đầu rồi, chúng ta phải đi thôi.",
+   "天黑了，该回家了。(Tiān hēi le, gāi huí jiā le.) — Trời tối rồi, đến lúc về nhà rồi."
+  ],
+  "speak": "十一点了，该睡觉了。明天有听写，我该复习生词了。电影快开始了，我们该走了。天黑了，该回家了。",
+  "rule": "该 + động từ + 了: đến lúc làm việc đó rồi, mang ý “đã đến thời điểm thích hợp, nên làm ngay”. Chủ ngữ có thể lược (该回家了). Khác 应该 (nên, mang nghĩa khuyên nhủ hay bổn phận): 该…了 nhấn mạnh thời điểm đã tới.",
+  "tip": "该…了 hay đi với mốc thời gian (十一点了) hoặc sự việc sắp tới (明天有考试); đừng dùng 该…了 cho việc chung chung không gắn thời điểm.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“该……了” nghĩa là gì?",
+    "o": [
+     "Đến lúc làm việc đó rồi",
+     "Không nên làm việc đó",
+     "Đã làm xong việc đó",
+     "Sẽ không làm việc đó"
+    ],
+    "a": 0,
+    "why": "该…了: đã đến lúc làm việc đó rồi."
+   },
+   {
+    "q": "“十一点了，该睡觉了” — vì sao dùng 该…了?",
+    "o": [
+     "Vì không muốn ngủ",
+     "Vì đã đến giờ đi ngủ",
+     "Vì vừa ngủ dậy",
+     "Vì ngày mai không có việc gì"
+    ],
+    "a": 1,
+    "why": "Mười một giờ là mốc thời gian đã tới: đến lúc ngủ rồi."
+   },
+   {
+    "q": "Điền vào chỗ trống：天黑了，___回家了。",
+    "o": [
+     "应该",
+     "会",
+     "该",
+     "能"
+    ],
+    "a": 2,
+    "why": "Trời tối là thời điểm phải về: 该回家了."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "十一点了，该睡觉了",
+     "电影快开始了，我们该走了",
+     "天黑了，该回家了",
+     "我该昨天睡觉了"
+    ],
+    "a": 3,
+    "why": "该…了 nói việc sắp làm, không đi với thời gian quá khứ 昨天."
+   },
+   {
+    "q": "Khác nhau giữa 该…了 và 应该 là gì?",
+    "o": [
+     "该…了 nhấn mạnh thời điểm đã tới, 应该 nhấn mạnh nên làm",
+     "Hai từ giống hệt nhau",
+     "应该 nhấn mạnh thời điểm, 该…了 nhấn mạnh bổn phận",
+     "该…了 chỉ dùng trong quá khứ"
+    ],
+    "a": 0,
+    "why": "该…了 nói thời điểm đã tới; 应该 nói điều nên làm."
+   },
+   {
+    "q": "“明天有听写，我该复习生词了” nghĩa là gì?",
+    "o": [
+     "Mai không có chính tả",
+     "Tôi đã ôn từ mới xong rồi",
+     "Tôi không cần ôn từ mới",
+     "Mai có chính tả, tôi phải ôn từ mới rồi"
+    ],
+    "a": 3,
+    "why": "Mai có chính tả nên đến lúc ôn từ mới rồi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-51",
+  "stage": 2,
+  "title": "要/快要/就要……了 — sắp… rồi",
+  "hook": "“天要黑了，我们快回家吧。” — trời sắp tối rồi, mau về nhà thôi: ba mức “sắp” gần xa khác nhau.",
+  "examples": [
+   "天要黑了，我们快回家吧。(Tiān yào hēi le, wǒmen kuài huí jiā ba.) — Trời sắp tối rồi, chúng ta mau về nhà thôi.",
+   "我们快要到学校了。(Wǒmen kuài yào dào xuéxiào le.) — Chúng tôi sắp tới trường rồi.",
+   "他下个月就要去中国了。(Tā xià ge yuè jiù yào qù Zhōngguó le.) — Tháng sau anh ấy sắp đi Trung Quốc rồi.",
+   "火车要开了，请大家上车吧。(Huǒchē yào kāi le, qǐng dàjiā shàng chē ba.) — Tàu sắp chạy rồi, mời mọi người lên tàu."
+  ],
+  "speak": "天要黑了，我们快回家吧。我们快要到学校了。他下个月就要去中国了。火车要开了，请大家上车吧。",
+  "rule": "要/快要/就要 + động từ + 了: việc sắp xảy ra trong tương lai gần. Ba mức độ gần dần: 要 (sắp) → 快要 (sắp sửa) → 就要 (ngay đây thôi, thường kèm thời gian cụ thể như 明天/下个月). Chú ý 要 còn nghĩa “muốn/cần” — 要下雨了 là sắp mưa, không phải “muốn mưa”.",
+  "tip": "Phủ định của “sắp…” không dùng 不要…了 theo nghĩa này; muốn nói sẽ không xảy ra thì dùng 不会… hoặc 不….",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“要/快要/就要……了” dùng để nói gì?",
+    "o": [
+     "Việc sắp xảy ra trong tương lai gần",
+     "Việc đã xong",
+     "Việc đang làm",
+     "Việc không bao giờ xảy ra"
+    ],
+    "a": 0,
+    "why": "要…了 nói việc sắp xảy ra trong tương lai gần."
+   },
+   {
+    "q": "Ba mức độ gần xa xếp thế nào?",
+    "o": [
+     "就要 → 快要 → 要, càng về sau càng gần",
+     "要 → 快要 → 就要, càng về sau càng gần",
+     "Ba từ xa gần như nhau",
+     "快要 xa nhất"
+    ],
+    "a": 1,
+    "why": "要 sắp, 快要 sắp sửa, 就要 ngay đây thôi: càng về sau càng gần."
+   },
+   {
+    "q": "Điền vào chỗ trống：我们___放假了。",
+    "o": [
+     "快要",
+     "已经",
+     "正在",
+     "刚刚"
+    ],
+    "a": 0,
+    "why": "Sắp được nghỉ: 我们快要放假了."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "要下雨了",
+     "我们快要放假了",
+     "他们明天就要考试了",
+     "他要昨天去中国了"
+    ],
+    "a": 3,
+    "why": "要…了 nói việc sắp xảy ra, không đi với thời gian quá khứ 昨天."
+   },
+   {
+    "q": "“他下个月就要去中国了” nghĩa là gì?",
+    "o": [
+     "Tháng sau anh ấy sắp đi Trung Quốc rồi",
+     "Anh ấy đã đi Trung Quốc rồi",
+     "Anh ấy không đi Trung Quốc",
+     "Anh ấy đang ở Trung Quốc"
+    ],
+    "a": 0,
+    "why": "下个月就要…了: tháng sau sắp đi, kèm thời gian cụ thể."
+   },
+   {
+    "q": "“就要” thường đi kèm với gì?",
+    "o": [
+     "Quá khứ",
+     "Câu phủ định",
+     "Thời gian cụ thể, như 明天/下个月",
+     "Số đếm"
+    ],
+    "a": 2,
+    "why": "就要 hay kèm thời gian cụ thể: 明天就要考试了."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-01",
+  "stage": 3,
+  "title": "离合词 — 动宾式/动补式 (帮忙、打开…)",
+  "hook": "“我帮你的忙” — tôi giúp bạn: 帮忙 tách ra được, chen 你的 vào giữa 帮 và 忙.",
+  "examples": [
+   "他常常帮我的忙。(Tā chángcháng bāng wǒ de máng.) — Anh ấy thường giúp tôi.",
+   "我们明天见个面吧。(Wǒmen míngtiān jiàn gè miàn ba.) — Ngày mai chúng ta gặp nhau nhé.",
+   "妈妈正在洗澡，你等一下。(Māma zhèngzài xǐ zǎo, nǐ děng yīxià.) — Mẹ đang tắm, bạn đợi một chút.",
+   "请你把门打开。(Qǐng nǐ bǎ mén dǎkāi.) — Bạn mở cửa ra giúp tôi."
+  ],
+  "speak": "他常常帮我的忙。我们明天见个面吧。妈妈正在洗澡，你等一下。请你把门打开。",
+  "rule": "离合词 gồm động từ + tân ngữ dính liền, nhưng có thể tách ra để chen thêm thành phần vào giữa. 动宾式 như 帮忙、见面、洗澡、睡觉、结婚、理发、看病、放假、干杯、点头 chen được số lượng hoặc 的/了: 帮了忙、见了面、洗了澡、睡了觉. 动补式 như 打开、看见、离开、完成 thì phần sau là bổ ngữ kết quả, không tách ra chen tân ngữ vào giữa: nói 打开了门, không nói 打了开门.",
+  "tip": "离合词 đã có sẵn tân ngữ bên trong (澡 trong 洗澡, 忙 trong 帮忙), nên đừng thêm tân ngữ khác sau nó: nói 我去洗澡, không nói 我洗澡身体.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Câu nào dùng 帮忙 đúng?",
+    "o": [
+     "我帮了忙你",
+     "我帮忙你",
+     "我帮你的忙",
+     "我你帮忙"
+    ],
+    "a": 0,
+    "why": "帮忙 tách ra được: 帮你的忙 mới đúng, không nói 帮忙你."
+   },
+   {
+    "q": "“见面” tách ra thế nào là đúng?",
+    "o": [
+     "我们见面个吧",
+     "我们个见面吧",
+     "我们见吧面",
+     "我们见个面吧"
+    ],
+    "a": 1,
+    "why": "见面 là 动宾式, chen 个 vào giữa: 见个面."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他昨天洗___澡。",
+    "o": [
+     "个",
+     "很",
+     "了",
+     "过"
+    ],
+    "a": 2,
+    "why": "洗了澡: 了 chen vào giữa động từ 洗 và tân ngữ 澡."
+   },
+   {
+    "q": "Câu nào dùng 离合词 SAI?",
+    "o": [
+     "请把门打开",
+     "他看见了那只猫",
+     "她离开了学校",
+     "他打了开门"
+    ],
+    "a": 3,
+    "why": "打开 là 动补式, không tách ra: phải nói 打开了门 hoặc 把门打开."
+   },
+   {
+    "q": "“结婚” nghĩa là gì?",
+    "o": [
+     "Đi khám bệnh",
+     "Gặp nhau",
+     "Kết hôn",
+     "Đi ngủ"
+    ],
+    "a": 0,
+    "why": "结婚 là động từ ly hợp, nghĩa là kết hôn."
+   },
+   {
+    "q": "Câu nào đúng về 睡觉?",
+    "o": [
+     "我睡觉八个小时了",
+     "我睡觉了八个小时",
+     "我睡了觉八个小时",
+     "我睡了八个小时觉"
+    ],
+    "a": 1,
+    "why": "Khoảng thời gian chen vào giữa 睡 và 觉: 睡了八个小时觉."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-02",
+  "stage": 3,
+  "title": "量词 cấp 3 — 把/行/架/群/束/双/台/张/支/只/种 + 顿/口/眼",
+  "hook": "“一把椅子，一群人” — một cái ghế, một đám người: lượng từ nói rõ hình dáng và số lượng của sự vật.",
+  "examples": [
+   "桌子上有一把雨伞。(Zhuōzi shàng yǒu yī bǎ yǔsǎn.) — Trên bàn có một cái ô.",
+   "天上飞过一群大雁。(Tiān shàng fēi guò yī qún dàyàn.) — Trên trời bay qua một đàn ngỗng trời.",
+   "她买了一束花送给妈妈。(Tā mǎi le yī shù huā sòng gěi māma.) — Cô ấy mua một bó hoa tặng mẹ.",
+   "他一口气喝了三口水。(Tā yī kǒuqì hē le sān kǒu shuǐ.) — Anh ấy một hơi uống ba ngụm nước."
+  ],
+  "speak": "桌子上有一把雨伞。天上飞过一群大雁。她买了一束花送给妈妈。他一口气喝了三口水。",
+  "rule": "名量词 đi với danh từ, nói rõ hình dáng: 把 dùng cho vật có tay cầm (椅子、雨伞、刀), 行 cho hàng chữ, 架 cho máy lớn (飞机), 群 cho đám đông (人、羊), 束 cho bó (花), 双 cho đôi (鞋、手), 台 cho máy móc (电脑、电视), 张 cho vật mặt phẳng (纸、桌子), 支 cho vật dài nhỏ (笔), 只 cho con vật nhỏ hoặc vật lẻ (猫、眼睛), 种 cho loại. 动量词 đi với động từ, đếm số lần hành động: 顿 (bữa: 吃一顿饭; trận: 骂一顿), 口 (ngụm: 喝一口水), 眼 (cái liếc: 看一眼).",
+  "tip": "Đừng dùng 个 cho mọi thứ: 一把椅子、 一张纸、 一只猫 đều có lượng từ riêng. 张 dùng cho vật phẳng, 只 dùng cho con vật — đừng đổi chỗ cho nhau.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Điền vào chỗ trống: 一___椅子",
+    "o": [
+     "把",
+     "台",
+     "张",
+     "只"
+    ],
+    "a": 0,
+    "why": "椅子 có tay vịn, dùng 把: 一把椅子."
+   },
+   {
+    "q": "“一群人” nghĩa là gì?",
+    "o": [
+     "Một người",
+     "Một đám người",
+     "Một hàng người",
+     "Một đôi người"
+    ],
+    "a": 1,
+    "why": "群 chỉ đám đông: 一群人 là một đám người."
+   },
+   {
+    "q": "Câu nào dùng 把 SAI?",
+    "o": [
+     "一张桌子",
+     "一只狗",
+     "一把纸",
+     "一台电脑"
+    ],
+    "a": 2,
+    "why": "纸 là vật mặt phẳng, phải dùng 张: 一张纸, không dùng 把."
+   },
+   {
+    "q": "Trong “他看了我一眼”, 眼 là loại lượng từ gì?",
+    "o": [
+     "Tính từ",
+     "Động lượng từ",
+     "Danh lượng từ",
+     "Động từ"
+    ],
+    "a": 3,
+    "why": "眼 đếm số lần nhìn, là động lượng từ."
+   },
+   {
+    "q": "Chọn câu đúng:",
+    "o": [
+     "一双花",
+     "一双纸",
+     "一双鞋",
+     "一双水"
+    ],
+    "a": 2,
+    "why": "双 dùng cho đồ đi thành đôi: 一双鞋."
+   },
+   {
+    "q": "“吃一顿饭” — 顿 ở đây chỉ gì?",
+    "o": [
+     "Một cái liếc",
+     "Một bữa ăn",
+     "Một loại",
+     "Một ngụm"
+    ],
+    "a": 3,
+    "why": "顿 làm động lượng từ chỉ một bữa: 吃一顿饭 là ăn một bữa cơm."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-03",
+  "stage": 3,
+  "title": "量词重叠 AA — 一个一个 (từng cái một)",
+  "hook": "“一个一个来，别着急” — từng người một, đừng vội: lượng từ lặp lại nói làm lần lượt từng cái.",
+  "examples": [
+   "老师让大家一个一个回答问题。(Lǎoshī ràng dàjiā yī gè yī gè huídá wèntí.) — Cô giáo bảo mọi người trả lời từng người một.",
+   "他把书一本一本放进书包。(Tā bǎ shū yī běn yī běn fàng jìn shūbāo.) — Anh ấy bỏ sách từng quyển một vào cặp.",
+   "孩子们一个一个走进教室。(Háizimen yī gè yī gè zǒu jìn jiàoshì.) — Các em nhỏ đi từng em một vào lớp.",
+   "请你一件一件试试这些衣服。(Qǐng nǐ yī jiàn yī jiàn shìshi zhè xiē yīfu.) — Bạn thử từng cái một mấy bộ quần áo này nhé."
+  ],
+  "speak": "老师让大家一个一个回答问题。他把书一本一本放进书包。孩子们一个一个走进教室。请你一件一件试试这些衣服。",
+  "rule": "Lượng từ lặp lại dạng AA (一个一个、一本一本、一件一件) đứng trước động từ, nghĩa là “từng cái một, lần lượt từng cái”. Thường có số 一 đi trước mỗi lượng từ: 一个一个, 一本一本. Dạng này nhấn mạnh thứ tự lần lượt, không phải đếm tổng số.",
+  "tip": "Đừng dùng AA khi chỉ muốn nói tổng số: muốn nói có năm cái thì nói 一共有五个, không nói 一个一个是五个. AA nhấn mạnh lần lượt, không đếm tổng.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“一个一个来” nghĩa là gì?",
+    "o": [
+     "Một người đến một lần",
+     "Đến cùng một lúc",
+     "Từng người một, lần lượt",
+     "Chỉ có một người"
+    ],
+    "a": 0,
+    "why": "一个一个 nghĩa là từng cái một, lần lượt."
+   },
+   {
+    "q": "Điền vào chỗ trống: 请___回答问题。",
+    "o": [
+     "一个",
+     "一共一个",
+     "每一个一个",
+     "一个一个"
+    ],
+    "a": 1,
+    "why": "一个一个 làm trạng ngữ: trả lời từng người một."
+   },
+   {
+    "q": "Câu nào dùng lượng từ重叠 SAI?",
+    "o": [
+     "他们一个一个进来了",
+     "她一本一本地看书",
+     "桌子上有五个一个一个苹果",
+     "请一件一件试"
+    ],
+    "a": 2,
+    "why": "Đếm tổng số thì nói 五个苹果, không dùng 一个一个 để đếm tổng."
+   },
+   {
+    "q": "“一本一本放进书包” nhấn mạnh điều gì?",
+    "o": [
+     "Có rất nhiều sách",
+     "Sách để trong cặp",
+     "Sách rất nặng",
+     "Bỏ từng quyển một, lần lượt"
+    ],
+    "a": 3,
+    "why": "一本一本 nhấn mạnh bỏ từng quyển một, lần lượt."
+   },
+   {
+    "q": "Chọn câu đúng:",
+    "o": [
+     "一个一个走进教室",
+     "一个走进一个教室",
+     "一个一个教室走进",
+     "走进一个一个教室"
+    ],
+    "a": 0,
+    "why": "一个一个 đứng trước động từ 走进 làm trạng ngữ."
+   },
+   {
+    "q": "“一件一件试试” — 试试 ở đây là gì?",
+    "o": [
+     "Lượng từ",
+     "Tính từ",
+     "Danh từ",
+     "Động từ lặp lại, nghĩa là thử xem"
+    ],
+    "a": 1,
+    "why": "试试 là động từ lặp, nghĩa là thử xem; 一件一件 nói thử từng cái một."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-04",
+  "stage": 3,
+  "title": "光、仅、就、至少 — chỉ / ngay / ít nhất",
+  "hook": "“光他一个人就做完了” — chỉ một mình anh ấy đã làm xong: 光 nói “chỉ”, 至少 nói “ít nhất”.",
+  "examples": [
+   "光他一个人就搬完了这些箱子。(Guāng tā yī gè rén jiù bān wán le zhè xiē xiāngzi.) — Chỉ một mình anh ấy đã chuyển xong mấy cái thùng này.",
+   "这个班仅有十个学生。(Zhè gè bān jǐn yǒu shí gè xuéshēng.) — Lớp này chỉ có mười học sinh.",
+   "你至少要睡七个小时。(Nǐ zhìshǎo yào shuì qī gè xiǎoshí.) — Bạn ít nhất phải ngủ bảy tiếng.",
+   "他仅仅学了三个月就会说中文了。(Tā jǐnjǐn xué le sān gè yuè jiù huì shuō Zhōngwén le.) — Anh ấy mới học ba tháng đã biết nói tiếng Trung rồi."
+  ],
+  "speak": "光他一个人就搬完了这些箱子。这个班仅有十个学生。你至少要睡七个小时。他仅仅学了三个月就会说中文了。",
+  "rule": "光、仅、仅仅 đều nghĩa “chỉ”, đứng trước động từ hoặc tân ngữ, nhấn mạnh số lượng ít hoặc phạm vi hẹp. 仅 trang trọng hơn 光, 仅仅 nhấn mạnh hơn 仅. 就 ở đây nhấn mạnh “chỉ cần thế đã…”: 光他一个人就做完了 — chỉ một người mà đã làm xong. 至少 nghĩa “ít nhất”, đặt ra mức tối thiểu, thường đi với 要、得、应该.",
+  "tip": "光 là khẩu ngữ, đừng dùng trong văn viết trang trọng — thay bằng 仅. 至少 nói mức tối thiểu, đừng nhầm với 最多 (nhiều nhất).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“仅有十个学生” nghĩa là gì?",
+    "o": [
+     "Có ít nhất mười học sinh",
+     "Có đúng mười học sinh",
+     "Chỉ có mười học sinh",
+     "Có hơn mười học sinh"
+    ],
+    "a": 0,
+    "why": "仅 nghĩa là “chỉ”: lớp chỉ có mười học sinh."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你___要喝两杯水。",
+    "o": [
+     "最多",
+     "至少",
+     "光",
+     "就"
+    ],
+    "a": 1,
+    "why": "至少 nghĩa là ít nhất: ít nhất phải uống hai cốc nước."
+   },
+   {
+    "q": "Câu nào dùng 光/仅 SAI?",
+    "o": [
+     "我光有十块钱就够了",
+     "光他一个人就做完了",
+     "这个班仅有十个学生",
+     "光是这个问题就很难"
+    ],
+    "a": 2,
+    "why": "光有十块钱就够了 nghe không tự nhiên: muốn nói “chỉ có mười đồng mà đủ” thì nói 只有十块钱就够了."
+   },
+   {
+    "q": "“他仅仅学了三个月就会说中文了” — 仅仅 nhấn mạnh điều gì?",
+    "o": [
+     "Học rất chăm",
+     "Mới học có ba tháng mà đã biết nói",
+     "Học ba tháng vẫn chưa biết nói",
+     "Học rất lâu"
+    ],
+    "a": 3,
+    "why": "仅仅 nhấn mạnh thời gian rất ngắn: mới ba tháng mà đã biết nói."
+   },
+   {
+    "q": "Từ nào trang trọng hơn 光?",
+    "o": [
+     "仅",
+     "至少",
+     "都",
+     "就"
+    ],
+    "a": 2,
+    "why": "仅 trang trọng hơn 光, hay dùng trong văn viết."
+   },
+   {
+    "q": "“至少七个小时” — 至少 nói về mức nào?",
+    "o": [
+     "Mức vừa đủ",
+     "Mức tối thiểu",
+     "Mức trung bình",
+     "Mức nhiều nhất"
+    ],
+    "a": 3,
+    "why": "至少 nghĩa là ít nhất, đặt ra mức tối thiểu."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-05",
+  "stage": 3,
+  "title": "赶紧、立刻、始终、早已 — phó từ thời gian cấp 3",
+  "hook": "“快下雨了，赶紧回家！” — sắp mưa rồi, mau về nhà đi: 赶紧、立刻 đều giục làm ngay.",
+  "examples": [
+   "快下雨了，你赶紧回家吧。(Kuài xià yǔ le, nǐ gǎnjǐn huí jiā ba.) — Sắp mưa rồi, bạn mau về nhà đi.",
+   "听到消息，他立刻给妈妈打电话。(Tīng dào xiāoxi, tā lìkè gěi māma dǎ diànhuà.) — Nghe tin, anh ấy lập tức gọi điện cho mẹ.",
+   "她始终不相信这个故事是真的。(Tā shǐzhōng bù xiāngxìn zhè gè gùshi shì zhēn de.) — Cô ấy từ đầu đến cuối không tin câu chuyện này là thật.",
+   "这本书我早已看完了。(Zhè běn shū wǒ zǎoyǐ kàn wán le.) — Quyển sách này tôi đã đọc xong từ lâu rồi."
+  ],
+  "speak": "快下雨了，你赶紧回家吧。听到消息，他立刻给妈妈打电话。她始终不相信这个故事是真的。这本书我早已看完了。",
+  "rule": "赶紧/赶快 giục làm nhanh (“mau lên”), thường dùng trong câu cầu khiến. 立刻/连忙 nói hành động xảy ra ngay sau đó: 立刻 trung tính (“lập tức”), 连忙 nhấn mạnh sự vội vàng sau khi nghe hay thấy điều gì. 始终 nói “từ đầu đến cuối vẫn thế”. 已/早已 nói việc đã xong từ trước, 早已 nhấn mạnh “từ lâu rồi”. 才² ở đây nói việc xảy ra muộn hơn dự kiến hoặc mới đạt mức nào đó: 他三十岁才结婚 (đến ba mươi tuổi anh ấy mới kết hôn).",
+  "tip": "赶紧/赶快 dùng để giục người khác làm ngay; kể lại chuyện quá khứ một cách trung tính thì dùng 立刻/连忙. 才² khác 才¹ (vừa mới): 他才来 là “anh ấy vừa mới đến”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“赶紧回家” nghĩa là gì?",
+    "o": [
+     "Về nhà lần nữa",
+     "Về nhà từ từ",
+     "Mau về nhà đi",
+     "Về nhà từ lâu rồi"
+    ],
+    "a": 0,
+    "why": "赶紧 giục làm nhanh: mau về nhà đi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 听到消息，他___跑了出去。",
+    "o": [
+     "始终",
+     "立刻",
+     "早已",
+     "赶紧"
+    ],
+    "a": 1,
+    "why": "Nghe tin xong thì hành động ngay: dùng 立刻."
+   },
+   {
+    "q": "Câu nào dùng phó từ thời gian SAI?",
+    "o": [
+     "她始终昨天不相信这个故事",
+     "快下雨了，你赶紧回家吧",
+     "他三十岁才结婚",
+     "这本书我早已看完了"
+    ],
+    "a": 2,
+    "why": "始终 đứng trước động từ, không chen 昨天 vào giữa: 她始终不相信这个故事."
+   },
+   {
+    "q": "“早已看完了” khác “已经看完了” ở điểm nào?",
+    "o": [
+     "Hai từ giống hệt nhau",
+     "早已 nhấn mạnh đã xong từ lâu rồi",
+     "早已 nói việc chưa xong",
+     "早已 nói việc sắp xong"
+    ],
+    "a": 3,
+    "why": "早已 nhấn mạnh việc đã hoàn thành từ lâu rồi, mạnh hơn 已经."
+   },
+   {
+    "q": "Từ nào dùng để giục người khác làm nhanh?",
+    "o": [
+     "赶紧",
+     "已",
+     "始终",
+     "早已"
+    ],
+    "a": 0,
+    "why": "赶紧/赶快 dùng trong câu cầu khiến để giục làm nhanh."
+   },
+   {
+    "q": "“她始终不相信” — 始终 nghĩa là gì?",
+    "o": [
+     "Vừa mới bắt đầu",
+     "Chỉ tin một lúc",
+     "Tin rồi lại không tin",
+     "Từ đầu đến cuối vẫn thế"
+    ],
+    "a": 1,
+    "why": "始终 nghĩa là từ đầu đến cuối vẫn như vậy."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-06",
+  "stage": 3,
+  "title": "再 — lại, lần nữa (phó từ liên kết)",
+  "hook": "“你再说一遍，我没听清楚” — bạn nói lại một lần nữa, tôi nghe chưa rõ: 再 nói việc lặp lại.",
+  "examples": [
+   "你再说一遍，我没听清楚。(Nǐ zài shuō yī biàn, wǒ méi tīng qīngchu.) — Bạn nói lại một lần nữa, tôi nghe chưa rõ.",
+   "明天我们再去那家饭馆吃饭。(Míngtiān wǒmen zài qù nà jiā fànguǎn chī fàn.) — Ngày mai chúng ta lại đến quán ăn đó ăn cơm.",
+   "你先休息一下，再开始工作。(Nǐ xiān xiūxi yīxià, zài kāishǐ gōngzuò.) — Bạn nghỉ một chút trước, rồi hãy bắt đầu làm việc.",
+   "这道题我做了三遍，再做一遍就会了。(Zhè dào tí wǒ zuò le sān biàn, zài zuò yī biàn jiù huì le.) — Bài này tôi làm ba lần rồi, làm thêm một lần nữa là biết."
+  ],
+  "speak": "你再说一遍，我没听清楚。明天我们再去那家饭馆吃饭。你先休息一下，再开始工作。这道题我做了三遍，再做一遍就会了。",
+  "rule": "再 đứng trước động từ, nghĩa “lại, lần nữa”, nói việc lặp lại trong tương lai hoặc thêm một lần nữa. Thường đi với 先…再… (làm trước rồi mới…) hoặc 再…就… (thêm một lần nữa thì…). Khác 又 (cũng nghĩa “lại” nhưng nói việc đã lặp trong quá khứ): 明天再来 (ngày mai lại đến) khác 他又来了 (anh ấy lại đến rồi).",
+  "tip": "Đừng nhầm 再 với 又: 再 nói việc chưa xảy ra (tương lai), 又 nói việc đã xảy ra rồi. 明天再去 đúng, 明天又去 sai.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“你再说一遍” nghĩa là gì?",
+    "o": [
+     "Bạn nói lần đầu",
+     "Bạn nói nhanh lên",
+     "Bạn nói lại một lần nữa",
+     "Bạn đừng nói nữa"
+    ],
+    "a": 0,
+    "why": "再 nói lặp lại: nói lại một lần nữa."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你先休息一下，___开始工作。",
+    "o": [
+     "又",
+     "再",
+     "还",
+     "就"
+    ],
+    "a": 1,
+    "why": "先…再… là cặp cố định: nghỉ trước, rồi mới bắt đầu làm việc."
+   },
+   {
+    "q": "Câu nào dùng 再 SAI?",
+    "o": [
+     "明天我们再去那家饭馆",
+     "你再说一遍",
+     "他昨天再来了",
+     "再做一遍就会了"
+    ],
+    "a": 2,
+    "why": "再 nói việc tương lai; chuyện hôm qua đã xảy ra thì dùng 又: 他昨天又来了."
+   },
+   {
+    "q": "再 khác 又 ở điểm nào?",
+    "o": [
+     "再 chỉ dùng trong câu hỏi",
+     "再 nói tương lai, 又 nói quá khứ đã lặp",
+     "再 nói quá khứ, 又 nói tương lai",
+     "Hai từ giống hệt nhau"
+    ],
+    "a": 3,
+    "why": "再 dùng cho việc chưa xảy ra, 又 dùng cho việc đã lặp trong quá khứ."
+   },
+   {
+    "q": "“再做一遍就会了” — 再 ở đây nghĩa là gì?",
+    "o": [
+     "Làm thêm một lần nữa",
+     "Không làm nữa",
+     "Làm rất nhanh",
+     "Làm lần đầu"
+    ],
+    "a": 2,
+    "why": "再做一遍 là làm thêm một lần nữa."
+   },
+   {
+    "q": "Chọn câu đúng với 先…再…:",
+    "o": [
+     "你先再休息一下，开始工作",
+     "你休息再一下，先开始工作",
+     "你再休息，先开始工作",
+     "你先休息一下，再开始工作"
+    ],
+    "a": 3,
+    "why": "先…再…: làm việc trước rồi mới làm việc sau."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-07",
+  "stage": 3,
+  "title": "到底、反正、果然、简直 — phó từ ngữ khí cấp 3",
+  "hook": "“果然下雨了！” — quả nhiên mưa rồi: 果然 nói điều đoán trước đã thành thật.",
+  "examples": [
+   "我就知道他会来，果然他来了。(Wǒ jiù zhīdào tā huì lái, guǒrán tā lái le.) — Tôi biết ngay anh ấy sẽ đến, quả nhiên anh ấy đến rồi.",
+   "这件衣服简直太漂亮了！(Zhè jiàn yīfu jiǎnzhí tài piàoliang le!) — Bộ quần áo này đẹp quá đi mất!",
+   "反正我不去，你自己去吧。(Fǎnzhèng wǒ bù qù, nǐ zìjǐ qù ba.) — Dù sao tôi cũng không đi, bạn tự đi đi.",
+   "你到底想说什么？(Nǐ dàodǐ xiǎng shuō shénme?) — Rốt cuộc bạn muốn nói gì?"
+  ],
+  "speak": "我就知道他会来，果然他来了。这件衣服简直太漂亮了！反正我不去，你自己去吧。你到底想说什么？",
+  "rule": "Nhóm này bày tỏ thái độ của người nói. 白: uổng công (白跑了一趟 — chạy một chuyến uổng công). 并: không hề, đi với phủ định (并不知道 — hoàn toàn không biết). 到底: rốt cuộc, hỏi dồn. 反正: dù sao đi nữa, kệ thế nào. 根本: hoàn toàn không, căn bản (根本不怕 — hoàn toàn không sợ). 果然: quả nhiên, đúng như đã đoán. 简直: gần như là, nhấn mạnh quá mức (简直太漂亮了). 绝对: tuyệt đối. 难道: chẳng lẽ, dùng trong câu hỏi tu từ.",
+  "tip": "难道 dùng trong câu hỏi tu từ — người hỏi đã có ý kiến sẵn: 难道你不知道吗？(chẳng lẽ bạn không biết sao?) — đừng dịch như một câu hỏi thật sự.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“果然他来了” — 果然 nghĩa là gì?",
+    "o": [
+     "Anh ấy chắc sẽ không đến",
+     "Không ngờ anh ấy đến",
+     "Quả nhiên, đúng như đã đoán",
+     "Anh ấy đến rất muộn"
+    ],
+    "a": 0,
+    "why": "果然 nghĩa là quả nhiên, đúng như điều đã đoán trước."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___不怕冷。",
+    "o": [
+     "到底",
+     "根本",
+     "反正",
+     "果然"
+    ],
+    "a": 1,
+    "why": "根本不怕: hoàn toàn không sợ, nhấn mạnh căn bản."
+   },
+   {
+    "q": "Câu nào dùng phó từ ngữ khí SAI?",
+    "o": [
+     "他果然不知道，明天他就知道了",
+     "这件衣服简直太漂亮了",
+     "你到底想说什么",
+     "反正我不去，你自己去吧"
+    ],
+    "a": 2,
+    "why": "果然 nói điều đoán trước đã thành thật; chưa biết thì không dùng 果然, phải nói 他现在还不知道."
+   },
+   {
+    "q": "“简直太漂亮了” — 简直 có tác dụng gì?",
+    "o": [
+     "Nói đồ vật rẻ tiền",
+     "Hỏi giá tiền",
+     "Làm nhẹ bớt lời khen",
+     "Nhấn mạnh quá mức, gần như là"
+    ],
+    "a": 3,
+    "why": "简直 nhấn mạnh quá mức: đẹp đến mức gần như không tin được."
+   },
+   {
+    "q": "“难道你不知道吗？” là loại câu gì?",
+    "o": [
+     "Câu cảm thán",
+     "Câu hỏi thật sự cần trả lời",
+     "Câu hỏi tu từ, người hỏi đã có ý kiến sẵn",
+     "Câu cầu khiến"
+    ],
+    "a": 0,
+    "why": "难道 dùng trong câu hỏi tu từ: chẳng lẽ bạn không biết sao?"
+   },
+   {
+    "q": "“白跑了一趟” nghĩa là gì?",
+    "o": [
+     "Chạy rất nhanh một chuyến",
+     "Chạy một chuyến uổng công",
+     "Chạy một chuyến rất vui",
+     "Chạy một chuyến buổi sáng"
+    ],
+    "a": 1,
+    "why": "白 nghĩa là uổng công: chạy một chuyến mà không được việc gì."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-08",
+  "stage": 3,
+  "title": "为/为了 — vì / để (mục đích)",
+  "hook": "“我为了学中文，每天早起一个小时” — tôi vì học tiếng Trung mà mỗi ngày dậy sớm một tiếng: 为了 nói mục đích.",
+  "examples": [
+   "我为了学中文，每天早起一个小时。(Wǒ wèile xué Zhōngwén, měitiān zǎo qǐ yī gè xiǎoshí.) — Vì học tiếng Trung, mỗi ngày tôi dậy sớm một tiếng.",
+   "妈妈为我们做了很多好吃的。(Māma wèi wǒmen zuò le hěn duō hǎochī de.) — Mẹ vì chúng tôi mà làm rất nhiều món ngon.",
+   "他为了解决这个问题，想了很多办法。(Tā wèile jiějué zhè gè wèntí, xiǎng le hěn duō bànfǎ.) — Để giải quyết vấn đề này, anh ấy đã nghĩ rất nhiều cách.",
+   "大家为胜利干杯！(Dàjiā wèi shènglì gānbēi!) — Mọi người vì chiến thắng mà cạn ly!"
+  ],
+  "speak": "我为了学中文，每天早起一个小时。妈妈为我们做了很多好吃的。他为了解决这个问题，想了很多办法。大家为胜利干杯！",
+  "rule": "为了 + động từ hoặc cụm động từ đứng đầu câu hoặc trước động từ chính, nêu mục đích (“để…”). 为 + người hoặc sự việc nêu đối tượng được hưởng lợi hoặc nguyên nhân (“vì…”): 为我们做饭 (nấu cơm cho chúng tôi), 为胜利干杯 (cạn ly vì chiến thắng), 为你高兴 (vui vì bạn). 为了 thường đi với cụm động từ dài; 为² (vì, nguyên nhân) hay đứng sau động từ.",
+  "tip": "Đừng nhầm 为了 (để, mục đích hướng tới tương lai) với 因为 (vì, nguyên nhân đã có): 为了学中文 (để học tiếng Trung) khác 因为喜欢中文 (vì thích tiếng Trung).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我为了学中文，每天早起” — 为了 nêu điều gì?",
+    "o": [
+     "Địa điểm học",
+     "Nguyên nhân đã xảy ra",
+     "Mục đích hướng tới",
+     "Thời gian học"
+    ],
+    "a": 0,
+    "why": "为了 nêu mục đích: để học tiếng Trung."
+   },
+   {
+    "q": "Điền vào chỗ trống: 妈妈___我们做了很多好吃的。",
+    "o": [
+     "由于",
+     "为了",
+     "因为",
+     "为"
+    ],
+    "a": 1,
+    "why": "为我们做饭: 为 + người, nêu đối tượng được hưởng lợi."
+   },
+   {
+    "q": "Câu nào dùng 为/为了 SAI?",
+    "o": [
+     "我为了学中文，每天早起",
+     "大家为胜利干杯",
+     "他因为了学中文，每天早起",
+     "妈妈为我们做了很多好吃的"
+    ],
+    "a": 2,
+    "why": "因为了 là sai: 因为 và 为了 không gộp lại với nhau."
+   },
+   {
+    "q": "“他为了解决这个问题，想了很多办法” — 他想办法 để làm gì?",
+    "o": [
+     "Để học tiếng Trung",
+     "Để nấu cơm",
+     "Để đi chơi",
+     "Để giải quyết vấn đề này"
+    ],
+    "a": 3,
+    "why": "为了解决这个问题: mục đích là giải quyết vấn đề này."
+   },
+   {
+    "q": "“为你高兴” nghĩa là gì?",
+    "o": [
+     "Buồn vì bạn",
+     "Cười bạn",
+     "Vui vì bạn",
+     "Vui thay bạn đi chơi"
+    ],
+    "a": 2,
+    "why": "为你高兴: vui vì bạn, mừng cho bạn."
+   },
+   {
+    "q": "Chọn câu đúng:",
+    "o": [
+     "因为学中文，我每天早起",
+     "我为了学中文，每天早起",
+     "为学中文因为，我每天早起",
+     "为了他生病，他没来"
+    ],
+    "a": 3,
+    "why": "为了学中文 nêu mục đích; 因为生病 mới nêu nguyên nhân."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-09",
+  "stage": 3,
+  "title": "因为 — vì (nguyên nhân)",
+  "hook": "“因为下雨，所以我们不去了” — vì trời mưa nên chúng tôi không đi nữa: 因为 nói lý do.",
+  "examples": [
+   "因为下雨，所以我们不去公园了。(Yīnwèi xià yǔ, suǒyǐ wǒmen bù qù gōngyuán le.) — Vì trời mưa nên chúng tôi không đi công viên nữa.",
+   "他没来，因为他生病了。(Tā méi lái, yīnwèi tā shēng bìng le.) — Anh ấy không đến, vì anh ấy bị ốm.",
+   "因为时间不够，我只看了一半。(Yīnwèi shíjiān bù gòu, wǒ zhǐ kàn le yī bàn.) — Vì không đủ thời gian, tôi chỉ xem được một nửa.",
+   "你为什么不喜欢冬天？因为太冷了。(Nǐ wèishénme bù xǐhuān dōngtiān? Yīnwèi tài lěng le.) — Sao bạn không thích mùa đông? Vì lạnh quá."
+  ],
+  "speak": "因为下雨，所以我们不去公园了。他没来，因为他生病了。因为时间不够，我只看了一半。你为什么不喜欢冬天？因为太冷了。",
+  "rule": "因为 nêu nguyên nhân, thường đi cặp với 所以 (vì… nên…): 因为…，所以…. 因为 có thể đứng đầu câu nêu lý do trước, hoặc đứng giữa câu sau mệnh đề kết quả: 他没来，因为他生病了. Trả lời câu hỏi 为什么 thì dùng 因为.",
+  "tip": "因为…所以… là cặp cố định; trong văn viết chuẩn đừng bỏ 所以 khi 因为 đứng đầu câu, nhưng trong khẩu ngữ có thể lược 所以.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“因为下雨，所以我们不去了” — 下雨 là gì?",
+    "o": [
+     "Thời gian",
+     "Kết quả",
+     "Nguyên nhân",
+     "Mục đích"
+    ],
+    "a": 0,
+    "why": "因为 nêu nguyên nhân: vì trời mưa."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___时间不够，我只看了一半。",
+    "o": [
+     "所以",
+     "因为",
+     "为了",
+     "由于"
+    ],
+    "a": 1,
+    "why": "因为时间不够: 因为 đứng đầu câu nêu nguyên nhân."
+   },
+   {
+    "q": "Câu nào dùng 因为 SAI?",
+    "o": [
+     "因为了下雨，所以我们不去了",
+     "因为下雨，所以我们不去了",
+     "他没来，因为他生病了",
+     "因为他喜欢，所以他学中文"
+    ],
+    "a": 2,
+    "why": "因为了 là sai: 因为 không đi với 了."
+   },
+   {
+    "q": "Trả lời câu hỏi “你为什么不喜欢冬天？” dùng từ nào?",
+    "o": [
+     "为了",
+     "由于",
+     "所以",
+     "因为"
+    ],
+    "a": 3,
+    "why": "Trả lời 为什么 thì dùng 因为: 因为太冷了."
+   },
+   {
+    "q": "Cặp “因为…，所以…” nghĩa là gì?",
+    "o": [
+     "Vì… nên… (nguyên nhân — kết quả)",
+     "Để… (mục đích)",
+     "Nếu… thì… (giả định)",
+     "Càng… càng… (so sánh)"
+    ],
+    "a": 0,
+    "why": "因为…所以… nêu quan hệ nguyên nhân — kết quả: vì… nên…."
+   },
+   {
+    "q": "Chọn câu đúng:",
+    "o": [
+     "所以下雨，因为我们不去了",
+     "因为下雨，所以我们不去了",
+     "下雨因为，所以我们不去了",
+     "因为下雨，我们不去了所以"
+    ],
+    "a": 1,
+    "why": "Thứ tự đúng: 因为 nêu lý do trước, 所以 nêu kết quả sau."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-10",
+  "stage": 3,
+  "title": "按、按照 — làm theo, cứ theo",
+  "hook": "“请按照说明书做” — xin làm theo hướng dẫn sử dụng: 按照 nói căn cứ để làm.",
+  "examples": [
+   "请按照说明书安装这台电脑。(Qǐng ànzhào shuōmíngshū ānzhuāng zhè tái diànnǎo.) — Xin lắp máy tính này theo hướng dẫn sử dụng.",
+   "我们按计划进行，明天出发。(Wǒmen àn jìhuà jìnxíng, míngtiān chūfā.) — Chúng tôi làm theo kế hoạch, ngày mai xuất phát.",
+   "请按顺序排队，不要着急。(Qǐng àn shùnxù páiduì, bùyào zháojí.) — Xin xếp hàng theo thứ tự, đừng vội.",
+   "老师按照学生的水平分了班。(Lǎoshī ànzhào xuéshēng de shuǐpíng fēn le bān.) — Cô giáo chia lớp theo trình độ của học sinh."
+  ],
+  "speak": "请按照说明书安装这台电脑。我们按计划进行，明天出发。请按顺序排队，不要着急。老师按照学生的水平分了班。",
+  "rule": "按/按照 + danh từ (kế hoạch, thứ tự, quy định, hướng dẫn, 说明书) đứng trước động từ, nghĩa “cứ theo, làm theo cái gì”. 按 ngắn gọn, hay dùng trong khẩu ngữ; 按照 trang trọng hơn, hay dùng trong văn viết và hướng dẫn. Khác 根据 (căn cứ vào, nhấn mạnh cơ sở để kết luận) và 对于 (đối với, nêu đối tượng).",
+  "tip": "按/按照 đi với danh từ chỉ quy tắc, trình tự, cách làm; đừng dùng 按 với người: không nói 按他做, mà nói 按照他的办法做.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“请按照说明书安装” — 按照 ở đây nghĩa là gì?",
+    "o": [
+     "Đọc to",
+     "Căn cứ vào",
+     "Làm theo",
+     "Nhìn vào"
+    ],
+    "a": 0,
+    "why": "按照说明书安装: lắp theo hướng dẫn sử dụng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 请___顺序排队。",
+    "o": [
+     "为",
+     "在",
+     "从",
+     "按"
+    ],
+    "a": 1,
+    "why": "按顺序: xếp hàng theo thứ tự."
+   },
+   {
+    "q": "Câu nào dùng 按/按照 SAI?",
+    "o": [
+     "我们按计划进行",
+     "老师按照学生的水平分了班",
+     "请按他做这件事",
+     "请按照说明书安装"
+    ],
+    "a": 2,
+    "why": "按 không đi trực tiếp với người: phải nói 按照他的办法做."
+   },
+   {
+    "q": "按 và 按照 khác nhau thế nào?",
+    "o": [
+     "按 chỉ dùng trong văn viết",
+     "Hai từ khác nghĩa hoàn toàn",
+     "按 trang trọng hơn",
+     "按照 trang trọng hơn, hay dùng trong văn viết"
+    ],
+    "a": 3,
+    "why": "按 ngắn gọn, khẩu ngữ; 按照 trang trọng hơn, hay dùng trong văn viết và hướng dẫn."
+   },
+   {
+    "q": "“老师按照学生的水平分了班” — 老师 chia lớp căn cứ vào cái gì?",
+    "o": [
+     "Trình độ của học sinh",
+     "Số lượng học sinh",
+     "Tên của học sinh",
+     "Tuổi của học sinh"
+    ],
+    "a": 2,
+    "why": "按照学生的水平: chia lớp theo trình độ của học sinh."
+   },
+   {
+    "q": "Chọn câu đúng:",
+    "o": [
+     "请安装按照说明书这台电脑",
+     "请按照说明书安装这台电脑",
+     "请说明书按照安装这台电脑",
+     "请按照安装说明书这台电脑"
+    ],
+    "a": 3,
+    "why": "按照 + danh từ đứng trước động từ: 按照说明书安装."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-11",
+  "stage": 3,
+  "title": "并且、不光、另外、因此 — liên từ nối câu cấp 3",
+  "hook": "“他会唱歌，并且会跳舞” — anh ấy biết hát, hơn nữa còn biết nhảy: 并且 nối thêm một việc nữa.",
+  "examples": [
+   "他会唱歌，并且会跳舞。(Tā huì chàng gē, bìngqiě huì tiàowǔ.) — Anh ấy biết hát, hơn nữa còn biết nhảy.",
+   "不光我喜欢，你也喜欢，对吧？(Bùguāng wǒ xǐhuān, nǐ yě xǐhuān, duì ba?) — Không chỉ tôi thích, bạn cũng thích, đúng không?",
+   "另外，我们明天还要去一趟市场。(Lìngwài, wǒmen míngtiān hái yào qù yī tàng shìchǎng.) — Ngoài ra, ngày mai chúng ta còn phải đi chợ một chuyến.",
+   "他每天都练习，因此进步很快。(Tā měitiān dōu liànxí, yīncǐ jìnbù hěn kuài.) — Anh ấy ngày nào cũng luyện tập, vì thế tiến bộ rất nhanh."
+  ],
+  "speak": "他会唱歌，并且会跳舞。不光我喜欢，你也喜欢，对吧？另外，我们明天还要去一趟市场。他每天都练习，因此进步很快。",
+  "rule": "并且 nối hai vế cùng chiều, vế sau bổ sung thêm cho vế trước. 不光/不仅 (“không chỉ”) thường đi cặp với 而且/也/还: 不光…，也…. 另外 (“ngoài ra”) thêm một việc khác, thường đứng đầu câu. 要是 (“nếu”) mở đầu giả định, đi với 就: 要是你来，我就高兴. 因此 (“vì thế”) nêu kết quả của việc vừa nói. 由于² ở đây làm liên từ nêu nguyên nhân ở đầu câu. 只有 (“chỉ khi”) đi cặp với 才, nêu điều kiện duy nhất: 只有努力，才能成功.",
+  "tip": "并且 nối hai việc cùng chiều, cùng chủ ngữ hoặc cùng hướng; đừng dùng 并且 để nối hai việc trái ngược — trái ngược thì dùng 但是.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他会唱歌，并且会跳舞” — 并且 có tác dụng gì?",
+    "o": [
+     "Nêu giả định",
+     "Nối hai việc trái ngược",
+     "Nối thêm một việc cùng chiều",
+     "Nêu nguyên nhân"
+    ],
+    "a": 0,
+    "why": "并且 nối hai vế cùng chiều, vế sau bổ sung thêm."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他每天都练习，___进步很快。",
+    "o": [
+     "另外",
+     "因此",
+     "要是",
+     "只有"
+    ],
+    "a": 1,
+    "why": "因此 nêu kết quả: luyện tập nên tiến bộ nhanh."
+   },
+   {
+    "q": "Câu nào dùng liên từ SAI?",
+    "o": [
+     "他会唱歌，并且会跳舞",
+     "不光我喜欢，你也喜欢",
+     "他很累，并且他不想休息",
+     "另外，我们明天还要去一趟市场"
+    ],
+    "a": 2,
+    "why": "并且 nối hai việc cùng chiều; “mệt” và “không muốn nghỉ” không cùng chiều, phải dùng 但是."
+   },
+   {
+    "q": "“不光我喜欢，你也喜欢” — 不光 nghĩa là gì?",
+    "o": [
+     "Chỉ có tôi",
+     "Cũng không",
+     "Không thích",
+     "Không chỉ"
+    ],
+    "a": 3,
+    "why": "不光 nghĩa là không chỉ: không chỉ tôi thích, bạn cũng thích."
+   },
+   {
+    "q": "“只有努力，才能成功” — 只有 đi cặp với từ nào?",
+    "o": [
+     "还",
+     "就",
+     "才",
+     "也"
+    ],
+    "a": 0,
+    "why": "只有…才… là cặp cố định nêu điều kiện duy nhất."
+   },
+   {
+    "q": "“另外，我们明天还要去一趟市场” — 另外 nghĩa là gì?",
+    "o": [
+     "Vì thế",
+     "Nếu như",
+     "Không chỉ",
+     "Ngoài ra, thêm một việc khác"
+    ],
+    "a": 1,
+    "why": "另外 nghĩa là ngoài ra, thêm một việc khác nữa."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-12",
+  "stage": 3,
+  "title": "哈哈 — thán từ (cười ha ha)",
+  "hook": "“哈哈，你太有意思了！” — ha ha, bạn thú vị quá: 哈哈 là tiếng cười viết thành chữ.",
+  "examples": [
+   "哈哈，你太有意思了！(Hāhā, nǐ tài yǒu yìsi le!) — Ha ha, bạn thú vị quá đi!",
+   "听到这个笑话，大家都哈哈大笑起来。(Tīng dào zhè gè xiàohua, dàjiā dōu hāhā dà xiào qǐlái.) — Nghe câu chuyện cười này, mọi người đều cười ha hả.",
+   "哈哈，我终于做对了！(Hāhā, wǒ zhōngyú zuò duì le!) — Ha ha, cuối cùng tôi làm đúng rồi!",
+   "他哈哈一笑，就走开了。(Tā hāhā yī xiào, jiù zǒu kāi le.) — Anh ấy cười ha hả một tiếng rồi bỏ đi."
+  ],
+  "speak": "哈哈，你太有意思了！听到这个笑话，大家都哈哈大笑起来。哈哈，我终于做对了！他哈哈一笑，就走开了。",
+  "rule": "哈哈 là thán từ mô phỏng tiếng cười, đứng đầu câu hoặc trước động từ cười (哈哈大笑 — cười ha hả). Có thể lặp lại thành 哈哈哈 để nói cười to hơn. Dùng trong khẩu ngữ và tin nhắn, không dùng trong văn viết trang trọng. Khác 呵呵 (cười khẽ, cười gượng) và 嘿嘿 (cười thầm, cười gian).",
+  "tip": "哈哈 chỉ dùng khi thật sự vui hoặc trêu đùa thân mật; đừng dùng 哈哈 khi trả lời chuyện buồn của người khác — nghe rất vô duyên.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“哈哈，你太有意思了！” — 哈哈 nghĩa là gì?",
+    "o": [
+     "Tiếng cười, sự vui vẻ",
+     "Buồn bã",
+     "Sự giận dữ",
+     "Sự ngạc nhiên"
+    ],
+    "a": 0,
+    "why": "哈哈 mô phỏng tiếng cười, bày tỏ sự vui vẻ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 听到这个笑话，大家都___大笑起来。",
+    "o": [
+     "哼哼",
+     "呵呵",
+     "嘿嘿",
+     "哈哈"
+    ],
+    "a": 1,
+    "why": "哈哈大笑 là cụm cố định: cười ha hả."
+   },
+   {
+    "q": "Câu nào dùng 哈哈 SAI?",
+    "o": [
+     "哈哈，我终于做对了",
+     "他哈哈一笑，就走开了",
+     "听到这个消息，他哈哈地哭了起来",
+     "哈哈，你太有意思了"
+    ],
+    "a": 2,
+    "why": "哈哈 là tiếng cười, không đi với 哭 (khóc)."
+   },
+   {
+    "q": "哈哈 khác 呵呵 ở điểm nào?",
+    "o": [
+     "哈哈 dùng trong văn viết trang trọng",
+     "哈哈 là cười to vui vẻ, 呵呵 là cười khẽ hoặc cười gượng",
+     "Hai từ giống hệt nhau",
+     "哈哈 là cười gượng, 呵呵 là cười to"
+    ],
+    "a": 3,
+    "why": "哈哈 cười to vui vẻ; 呵呵 cười khẽ, thường là cười gượng."
+   },
+   {
+    "q": "哈哈 thường dùng ở đâu?",
+    "o": [
+     "Khẩu ngữ và tin nhắn",
+     "Bài phát biểu chính thức",
+     "Hợp đồng",
+     "Văn viết trang trọng"
+    ],
+    "a": 2,
+    "why": "哈哈 là thán từ khẩu ngữ, dùng khi nói chuyện và nhắn tin."
+   },
+   {
+    "q": "Muốn nói cười to hơn 哈哈 thì viết thế nào?",
+    "o": [
+     "呵呵",
+     "嘿嘿",
+     "哈",
+     "哈哈哈"
+    ],
+    "a": 3,
+    "why": "Lặp thêm một 哈: 哈哈哈 nói cười to hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-14",
+  "stage": 3,
+  "title": "数量重叠 — 一个一个 / 一本一本 (số + lượng từ lặp)",
+  "hook": "“他一本一本地看书” — anh ấy đọc sách từng quyển một: số + lượng từ lặp lại nói làm lần lượt từng cái.",
+  "examples": [
+   "他一本一本地看书，看得很认真。(Tā yī běn yī běn de kàn shū, kàn de hěn rènzhēn.) — Anh ấy đọc sách từng quyển một, đọc rất chăm chú.",
+   "学生们一个一个地走进教室。(Xuéshēngmen yī gè yī gè de zǒu jìn jiàoshì.) — Các học sinh đi từng em một vào lớp.",
+   "她一朵一朵地摘花，放在篮子里。(Tā yī duǒ yī duǒ de zhāi huā, fàng zài lánzi lǐ.) — Cô ấy hái hoa từng bông một, bỏ vào giỏ.",
+   "我们一块一块地把面包分给孩子们。(Wǒmen yī kuài yī kuài de bǎ miànbāo fēn gěi háizimen.) — Chúng tôi chia bánh mì từng miếng một cho các em nhỏ."
+  ],
+  "speak": "他一本一本地看书，看得很认真。学生们一个一个地走进教室。她一朵一朵地摘花，放在篮子里。我们一块一块地把面包分给孩子们。",
+  "rule": "Cấu trúc 数词 + 量词 + 数词 + 量词 (thường là 一 + 量词 + 一 + 量词) làm trạng ngữ, thêm 地 trước động từ, nghĩa “từng cái một, lần lượt”. Khác với lượng từ重叠 dạng AA (一个一个) ở chỗ đây có số từ 一 lặp lại rõ ràng và thường đi với 地: 一本一本地看书, 一个一个地走进教室.",
+  "tip": "Dạng này nhấn mạnh “từng cái một” khi làm việc gì đó; đừng dùng khi chỉ đếm số lượng — đếm thì nói 一共三本, không nói 一本一本是三本.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“一本一本地看书” nghĩa là gì?",
+    "o": [
+     "Đọc sách rất nhanh",
+     "Đọc rất nhiều sách",
+     "Đọc sách từng quyển một",
+     "Đọc một quyển sách"
+    ],
+    "a": 0,
+    "why": "一本一本 nghĩa là từng quyển một, lần lượt."
+   },
+   {
+    "q": "Điền vào chỗ trống: 学生们___走进教室。",
+    "o": [
+     "一个",
+     "一共一个",
+     "每一个",
+     "一个一个地"
+    ],
+    "a": 1,
+    "why": "一个一个地 làm trạng ngữ, thêm 地 trước động từ 走进."
+   },
+   {
+    "q": "Câu nào dùng 数量重叠 SAI?",
+    "o": [
+     "她一朵一朵地摘花",
+     "我们一块一块地分面包",
+     "桌子上一本一本是五本书",
+     "他一本一本地看书"
+    ],
+    "a": 2,
+    "why": "Đếm tổng số thì nói 一共五本书, không dùng 一本一本 để đếm tổng."
+   },
+   {
+    "q": "“一朵一朵地摘花” — 地 ở đây có tác dụng gì?",
+    "o": [
+     "Làm tân ngữ",
+     "Nối trạng ngữ với động từ",
+     "Nối định ngữ với danh từ",
+     "Nối bổ ngữ với động từ"
+    ],
+    "a": 3,
+    "why": "地 nối trạng ngữ 一朵一朵 với động từ 摘."
+   },
+   {
+    "q": "Chọn câu đúng:",
+    "o": [
+     "一本看书一本地",
+     "看书一本一本地",
+     "一本一本地看书",
+     "一本地一本看书"
+    ],
+    "a": 2,
+    "why": "Thứ tự đúng: 一本一本 + 地 + động từ 看书."
+   },
+   {
+    "q": "数量重叠 khác lượng từ重叠 AA ở điểm nào?",
+    "o": [
+     "数量重叠 không có số từ",
+     "AA dùng với 地, 数量重叠 thì không",
+     "Không khác gì nhau",
+     "数量重叠 có số từ 一 lặp lại rõ ràng và thường đi với 地"
+    ],
+    "a": 3,
+    "why": "数量重叠 lặp cả số từ: 一本一本, và thường thêm 地 trước động từ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-15",
+  "stage": 3,
+  "title": "不A不B — không… không… (不三不四)",
+  "hook": "“他不慌不忙地走进来” — anh ấy thong thả bước vào: 不A不B nói trạng thái ở giữa, không nghiêng bên nào.",
+  "examples": [
+   "他不慌不忙地走进来，坐下了。(Tā bù huāng bù máng de zǒu jìnlái, zuò xià le.) — Anh ấy thong thả bước vào rồi ngồi xuống.",
+   "这个人说话不三不四，让人听不懂。(Zhè gè rén shuōhuà bù sān bù sì, ràng rén tīng bù dǒng.) — Người này nói năng lung tung, nghe không hiểu gì.",
+   "她不冷不热地回了一句，就走了。(Tā bù lěng bù rè de huí le yī jù, jiù zǒu le.) — Cô ấy đáp một câu lạnh nhạt rồi bỏ đi.",
+   "别不声不响的，有话就说出来。(Bié bù shēng bù xiǎng de, yǒu huà jiù shuō chūlái.) — Đừng im thin thít thế, có gì thì nói ra đi."
+  ],
+  "speak": "他不慌不忙地走进来，坐下了。这个人说话不三不四，让人听不懂。她不冷不热地回了一句，就走了。别不声不响的，有话就说出来。",
+  "rule": "不A不B ghép hai từ trái nghĩa hoặc gần nghĩa sau 不, tạo thành ngữ cố định chỉ trạng thái ở giữa hoặc thái độ không rõ ràng: 不慌不忙 (thong thả), 不三不四 (lung tung, không ra gì), 不冷不热 (lạnh nhạt), 不声不响 (im lặng). A và B thường là tính từ hoặc động từ đơn âm tiết; cả cụm làm trạng ngữ (thêm 地) hoặc làm vị ngữ.",
+  "tip": "不A不B là thành ngữ cố định, đừng tự ghép bừa hai từ bất kỳ — chỉ dùng những cụm đã thành quen như 不慌不忙、不三不四、不冷不热、不声不响.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不慌不忙” nghĩa là gì?",
+    "o": [
+     "Không biết làm gì",
+     "Rất hoảng hốt",
+     "Thong thả, không vội vàng",
+     "Rất bận rộn"
+    ],
+    "a": 0,
+    "why": "不慌不忙: không hoảng không vội, thong thả."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她___地回了一句，就走了。",
+    "o": [
+     "不三不四",
+     "不慌不忙",
+     "不声不响",
+     "不冷不热"
+    ],
+    "a": 1,
+    "why": "不冷不热 nói thái độ lạnh nhạt khi trả lời."
+   },
+   {
+    "q": "Câu nào dùng 不A不B SAI?",
+    "o": [
+     "他不慌不忙地走进来",
+     "别不声不响的，有话就说出来",
+     "他不高不低地站在那里",
+     "这个人说话不三不四"
+    ],
+    "a": 2,
+    "why": "不高不低 không phải thành ngữ cố định: muốn nói chiều cao bình thường thì nói 不高不矮."
+   },
+   {
+    "q": "“不三不四” dùng để nói về điều gì?",
+    "o": [
+     "Ăn mặc chỉnh tề",
+     "Nói năng lung tung, không ra gì",
+     "Đếm số ba và số bốn",
+     "Làm việc rất cẩn thận"
+    ],
+    "a": 3,
+    "why": "不三不四 là thành ngữ chỉ lời nói hoặc việc làm lung tung, không ra gì."
+   },
+   {
+    "q": "“别不声不响的” — 不声不响 nghĩa là gì?",
+    "o": [
+     "Cười rất to",
+     "Nói rất to",
+     "Im lặng, không nói gì",
+     "Hát rất hay"
+    ],
+    "a": 0,
+    "why": "不声不响: không tiếng động, im lặng."
+   },
+   {
+    "q": "不A不B thường làm thành phần gì trong câu?",
+    "o": [
+     "Chủ ngữ",
+     "Trạng ngữ hoặc vị ngữ",
+     "Tân ngữ",
+     "Định ngữ"
+    ],
+    "a": 1,
+    "why": "不A不B làm trạng ngữ (thêm 地) hoặc làm vị ngữ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-16",
+  "stage": 3,
+  "title": "看起来 / 看上去 — trông có vẻ",
+  "hook": "“他看起来很累” — trông anh ấy rất mệt: 看起来 nói ấn tượng bề ngoài.",
+  "examples": [
+   "他看起来很累，昨晚一定没睡好。(Tā kàn qǐlái hěn lèi, zuówǎn yīdìng méi shuì hǎo.) — Trông anh ấy rất mệt, tối qua chắc chắn ngủ không ngon.",
+   "这件衣服看上去很贵，其实不贵。(Zhè jiàn yīfu kàn shàngqù hěn guì, qíshí bù guì.) — Bộ quần áo này trông có vẻ đắt, thật ra không đắt.",
+   "今天看上去要下雨，你带把伞吧。(Jīntiān kàn shàngqù yào xià yǔ, nǐ dài bǎ sǎn ba.) — Hôm nay trông có vẻ sắp mưa, bạn mang ô đi nhé.",
+   "她看起来比实际年龄年轻多了。(Tā kàn qǐlái bǐ shíjì niánlíng niánqīng duō le.) — Trông cô ấy trẻ hơn tuổi thật nhiều."
+  ],
+  "speak": "他看起来很累，昨晚一定没睡好。这件衣服看上去很贵，其实不贵。今天看上去要下雨，你带把伞吧。她看起来比实际年龄年轻多了。",
+  "rule": "看起来/看上去 + tính từ hoặc cụm từ, nghĩa “trông có vẻ…”, nói ấn tượng từ bề ngoài, chưa chắc là sự thật. 看起来 thông dụng hơn; 看上去 nhấn mạnh góc nhìn từ ngoài vào. Phủ định: 看起来不…. Có thể thêm 比 để so sánh: 看起来比实际年龄年轻. Khác 听起来 (nghe có vẻ) và 闻起来 (ngửi có mùi).",
+  "tip": "看起来 chỉ nói ấn tượng bề ngoài — muốn khẳng định sự thật thì dùng 是 hoặc 真的: 他看起来很累 (trông mệt) khác 他真的很累 (thật sự mệt).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他看起来很累” nghĩa là gì?",
+    "o": [
+     "Anh ấy nghe nói rất mệt",
+     "Anh ấy thật sự rất mệt",
+     "Trông anh ấy có vẻ rất mệt",
+     "Anh ấy nói mình rất mệt"
+    ],
+    "a": 0,
+    "why": "看起来 nói ấn tượng bề ngoài: trông có vẻ mệt."
+   },
+   {
+    "q": "Điền vào chỗ trống: 今天___要下雨，你带把伞吧。",
+    "o": [
+     "吃起来",
+     "听起来",
+     "闻起来",
+     "看起来"
+    ],
+    "a": 1,
+    "why": "Trời sắp mưa là điều “trông thấy”: dùng 看起来."
+   },
+   {
+    "q": "Câu nào dùng 看起来/看上去 SAI?",
+    "o": [
+     "他看起来很累",
+     "这件衣服看上去很贵",
+     "这首歌看起来很好听",
+     "她看起来比实际年龄年轻多了"
+    ],
+    "a": 2,
+    "why": "Bài hát thì “nghe” hay, phải nói 这首歌听起来很好听, không dùng 看起来."
+   },
+   {
+    "q": "“今天看上去要下雨” — người nói chắc chắn trời sẽ mưa không?",
+    "o": [
+     "Chắc chắn không mưa",
+     "Người nói đã xem dự báo thời tiết",
+     "Chắc chắn sẽ mưa",
+     "Chỉ là ấn tượng bề ngoài, chưa chắc"
+    ],
+    "a": 3,
+    "why": "看上去 chỉ nói ấn tượng bề ngoài, chưa chắc là sự thật."
+   },
+   {
+    "q": "Muốn nói “ngửi có mùi thơm” thì dùng từ nào?",
+    "o": [
+     "看起来",
+     "听起来",
+     "闻起来",
+     "看上去"
+    ],
+    "a": 2,
+    "why": "闻起来 nói ấn tượng qua mùi: 闻起来很香."
+   },
+   {
+    "q": "“她看起来比实际年龄年轻多了” — 比 ở đây dùng để làm gì?",
+    "o": [
+     "Hỏi tuổi của cô ấy",
+     "So sánh tuổi trông thấy với tuổi thật",
+     "Nói cô ấy rất già",
+     "Nói cô ấy rất trẻ con"
+    ],
+    "a": 3,
+    "why": "看起来比…年轻: so sánh vẻ ngoài với tuổi thật."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-17",
+  "stage": 3,
+  "title": "有的是 — có khối người / có khối thứ",
+  "hook": "“我们班有的是爱踢球的人。” — lớp tôi có khối người thích đá bóng: 有的是 nhấn mạnh số lượng nhiều, không đếm xuể.",
+  "examples": [
+   "我们班有的是爱踢球的人。(Wǒmen bān yǒu de shì ài tī qiú de rén.) — Lớp tôi có khối người thích đá bóng.",
+   "菜市场有的是新鲜蔬菜。(Cài shìchǎng yǒu de shì xīnxiān shūcài.) — Chợ có khối rau tươi.",
+   "图书馆里有的是爱看书的学生。(Túshūguǎn lǐ yǒu de shì ài kàn shū de xuésheng.) — Trong thư viện có khối học sinh thích đọc sách.",
+   "别担心，办法有的是。(Bié dānxīn, bànfǎ yǒu de shì.) — Đừng lo, cách thì có khối."
+  ],
+  "speak": "我们班有的是爱踢球的人。菜市场有的是新鲜蔬菜。图书馆里有的是爱看书的学生。别担心，办法有的是。",
+  "rule": "Công thức: 有的是 + danh từ/cụm danh từ, nhấn mạnh số lượng rất nhiều, ý là “có khối, có thừa”. 有的是 thường đứng sau chủ ngữ chỉ nơi chốn hoặc nhóm người, cũng có thể đứng cuối câu sau danh từ chỉ thứ có nhiều. Khác với 有 (chỉ nói là có) ở chỗ 有的是 mang sắc thái nhấn mạnh “nhiều lắm, tha hồ”.",
+  "tip": "Đừng dịch 有的是 thành “có là”: nghĩa của nó là “có khối, có rất nhiều”, ví dụ 办法有的是 là “cách thì có khối”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我们班有的是爱踢球的人” nghĩa là gì?",
+    "o": [
+     "Lớp tôi chỉ có một người thích đá bóng",
+     "Lớp tôi không ai thích đá bóng",
+     "Lớp tôi có khối người thích đá bóng",
+     "Lớp tôi sắp có người thích đá bóng"
+    ],
+    "a": 2,
+    "why": "有的是 nhấn mạnh số lượng rất nhiều: có khối người thích đá bóng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 图书馆里___爱看书的学生。",
+    "o": [
+     "是没有",
+     "有的是",
+     "是有的",
+     "有没有"
+    ],
+    "a": 1,
+    "why": "有的是 + danh từ: trong thư viện có khối học sinh thích đọc sách."
+   },
+   {
+    "q": "Câu nào dùng 有的是 SAI?",
+    "o": [
+     "菜市场有的是新鲜蔬菜",
+     "办法有的是",
+     "我有的是一个哥哥",
+     "我们班有的是爱踢球的人"
+    ],
+    "a": 2,
+    "why": "有的是 nói số lượng nhiều không đếm xuể; một người anh thì không dùng 有的是."
+   },
+   {
+    "q": "有的是 khác 有 ở điểm nào?",
+    "o": [
+     "有的是 nói số lượng rất nhiều, có sắc thái nhấn mạnh",
+     "有的是 chỉ dùng trong câu hỏi",
+     "有的是 chỉ dùng với thời gian",
+     "Hai từ này giống hệt nhau"
+    ],
+    "a": 0,
+    "why": "有 chỉ nói là có; 有的是 nhấn mạnh “có khối, có thừa”."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他有的是钱，不用担心",
+     "他有的是一个钱",
+     "他有的是钱了没有",
+     "他有的是在钱"
+    ],
+    "a": 0,
+    "why": "有的是 + danh từ chỉ thứ có nhiều: 他有的是钱 là anh ấy có khối tiền."
+   },
+   {
+    "q": "“办法有的是” muốn nói gì?",
+    "o": [
+     "Hết cách rồi",
+     "Chỉ có một cách duy nhất",
+     "Chưa tìm ra cách nào",
+     "Cách thì có khối, đừng lo"
+    ],
+    "a": 3,
+    "why": "办法有的是: cách thì có khối, ý an ủi là đừng lo."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-18",
+  "stage": 3,
+  "title": "对…来说 — xét từ góc nhìn của ai",
+  "hook": "“对我来说，早上跑步最舒服。” — đối với tôi, chạy bộ buổi sáng dễ chịu nhất: 对…来说 nêu góc nhìn của một người hay một nhóm.",
+  "examples": [
+   "对我来说，早上跑步最舒服。(Duì wǒ lái shuō, zǎoshang pǎobù zuì shūfu.) — Đối với tôi, chạy bộ buổi sáng là dễ chịu nhất.",
+   "对小孩子来说，学汉字有点儿难。(Duì xiǎo háizi lái shuō, xué Hànzì yǒudiǎnr nán.) — Đối với trẻ nhỏ, học chữ Hán hơi khó.",
+   "对我们来说，时间就是金钱。(Duì wǒmen lái shuō, shíjiān jiù shì jīnqián.) — Đối với chúng tôi, thời gian là tiền bạc.",
+   "这件事对他来说很重要。(Zhè jiàn shì duì tā lái shuō hěn zhòngyào.) — Việc này đối với anh ấy rất quan trọng."
+  ],
+  "speak": "对我来说，早上跑步最舒服。对小孩子来说，学汉字有点儿难。对我们来说，时间就是金钱。这件事对他来说很重要。",
+  "rule": "Công thức: 对 + người/vật + 来说, đặt ở đầu câu hoặc trước vị ngữ, nêu đối tượng mà sự việc có ý nghĩa khác nhau tùy người. Sau 来说 là lời nhận xét, đánh giá. 来说 không chia theo người, lúc nào cũng giữ nguyên hình thức.",
+  "tip": "Đừng bỏ 来说 khi đã có 对: nói 对我，时间很重要 là sai, phải nói 对我来说，时间很重要.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“对我来说，早上跑步最舒服” nghĩa là gì?",
+    "o": [
+     "Tôi chạy bộ vào buổi sáng",
+     "Đối với tôi, chạy bộ buổi sáng là dễ chịu nhất",
+     "Tôi chỉ chạy bộ một mình",
+     "Buổi sáng tôi không chạy bộ"
+    ],
+    "a": 1,
+    "why": "对我来说 nêu góc nhìn của tôi: đối với tôi thì chạy bộ buổi sáng dễ chịu nhất."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___小孩子来说，学汉字有点儿难。",
+    "o": [
+     "在",
+     "对",
+     "跟",
+     "从"
+    ],
+    "a": 1,
+    "why": "Công thức là 对…来说: 对小孩子来说."
+   },
+   {
+    "q": "Câu nào dùng 对…来说 SAI?",
+    "o": [
+     "对我来说，早上跑步最舒服",
+     "对我们来说，时间就是金钱",
+     "对他来说很重要这件事",
+     "这件事对他来说很重要"
+    ],
+    "a": 2,
+    "why": "对他来说 phải đặt đầu câu hoặc trước vị ngữ, không chen vào giữa 这件事 và 很重要 như vậy."
+   },
+   {
+    "q": "对…来说 dùng để làm gì?",
+    "o": [
+     "Nêu thời gian xảy ra việc",
+     "Nêu nơi chốn",
+     "Nêu góc nhìn, đối tượng mà sự việc có ý nghĩa khác nhau",
+     "Nêu nguyên nhân"
+    ],
+    "a": 2,
+    "why": "对…来说 nêu đối tượng đánh giá: cùng một việc, với người này thì dễ, với người kia thì khó."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "对你来说，这本书怎么样？",
+     "对你，这本书来说怎么样？",
+     "来说对你，这本书怎么样？",
+     "对你来说这本书吗怎么样？"
+    ],
+    "a": 0,
+    "why": "对你来说 đặt đầu câu hỏi nhận xét: đối với bạn, quyển sách này thế nào?"
+   },
+   {
+    "q": "Trong “这件事对他来说很重要”, 对他来说 đứng ở đâu?",
+    "o": [
+     "Cuối câu",
+     "Sau tính từ",
+     "Giữa chủ ngữ và tân ngữ",
+     "Trước vị ngữ 很重要"
+    ],
+    "a": 3,
+    "why": "对他来说 đặt trước vị ngữ 很重要, nêu việc này quan trọng đối với anh ấy."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-19",
+  "stage": 3,
+  "title": "一…也/都+不/没… — một… cũng không…",
+  "hook": "“他一句话也没说。” — anh ấy một câu cũng không nói: mẫu này nhấn mạnh phủ định tuyệt đối, không một chút nào.",
+  "examples": [
+   "他一句话也没说。(Tā yī jù huà yě méi shuō.) — Anh ấy một câu cũng không nói.",
+   "我一点儿也不累。(Wǒ yīdiǎnr yě bù lèi.) — Tôi một chút cũng không mệt.",
+   "今天一点儿风也没有。(Jīntiān yīdiǎnr fēng yě méiyǒu.) — Hôm nay một chút gió cũng không có.",
+   "他一分钱都没花。(Tā yī fēn qián dōu méi huā.) — Anh ấy một xu cũng không tiêu."
+  ],
+  "speak": "他一句话也没说。我一点儿也不累。今天一点儿风也没有。他一分钱都没花。",
+  "rule": "Công thức: 一 + lượng từ nhỏ (一句, 一点儿, 一分钱) + 也/都 + 不/没 + động từ/tính từ, nhấn mạnh hoàn toàn không, không một chút nào. 也 thường đi với 不, 都 thường đi với 没, nhưng có thể đổi cho nhau. Lượng từ sau 一 phải chỉ số lượng rất nhỏ thì sắc thái “một chút cũng không” mới rõ.",
+  "tip": "Người Việt hay quên 也/都: nói 一句话没说 là sai, phải có 也 hoặc 都 mới thành câu nhấn mạnh phủ định.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他一句话也没说” nghĩa là gì?",
+    "o": [
+     "Anh ấy nói một câu",
+     "Anh ấy một câu cũng không nói",
+     "Anh ấy nói rất nhiều",
+     "Anh ấy sắp nói một câu"
+    ],
+    "a": 1,
+    "why": "一句话也没说: một câu cũng không nói, phủ định tuyệt đối."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我一点儿___累。",
+    "o": [
+     "很",
+     "也",
+     "都",
+     "就"
+    ],
+    "a": 1,
+    "why": "一点儿也 + 不: 一点儿也不累 là một chút cũng không mệt."
+   },
+   {
+    "q": "Câu nào dùng mẫu này SAI?",
+    "o": [
+     "他一句话也没说",
+     "我一点儿也不累",
+     "他一句话没说",
+     "他一分钱都没花"
+    ],
+    "a": 2,
+    "why": "Thiếu 也/都 thì câu mất sắc thái nhấn mạnh phủ định: phải nói 一句话也没说."
+   },
+   {
+    "q": "Trong mẫu này, 也/都 có tác dụng gì?",
+    "o": [
+     "Nhấn mạnh phủ định tuyệt đối: một chút cũng không",
+     "Nêu thời gian",
+     "Nêu nơi chốn",
+     "Làm câu thành câu hỏi"
+    ],
+    "a": 0,
+    "why": "也/都 sau 一 + lượng từ nhỏ nhấn mạnh: hoàn toàn không, không một chút nào."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "今天一点儿风也没有",
+     "今天一点儿风没有也",
+     "今天风一点儿也没有了",
+     "今天一点儿也没有风了"
+    ],
+    "a": 0,
+    "why": "一点儿风也没有: một chút gió cũng không có, đúng thứ tự 一 + danh từ + 也 + 没."
+   },
+   {
+    "q": "“他一分钱都没花” nhấn mạnh điều gì?",
+    "o": [
+     "Anh ấy tiêu rất nhiều tiền",
+     "Anh ấy chỉ tiêu một xu",
+     "Anh ấy sắp tiêu tiền",
+     "Anh ấy một xu cũng không tiêu"
+    ],
+    "a": 3,
+    "why": "一分钱都没花: một xu cũng không tiêu, phủ định tuyệt đối."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-20",
+  "stage": 3,
+  "title": "越…越… — càng… càng…",
+  "hook": "“天越冷，我越想喝热茶。” — trời càng lạnh, tôi càng muốn uống trà nóng: hai sự thay đổi đi song song với nhau.",
+  "examples": [
+   "天越冷，我越想喝热茶。(Tiān yuè lěng, wǒ yuè xiǎng hē rè chá.) — Trời càng lạnh, tôi càng muốn uống trà nóng.",
+   "他汉语说得越好，朋友就越多。(Tā Hànyǔ shuō de yuè hǎo, péngyou jiù yuè duō.) — Anh ấy nói tiếng Hán càng giỏi, bạn bè càng đông.",
+   "书越读越多，问题也越来越多。(Shū yuè dú yuè duō, wèntí yě yuè lái yuè duō.) — Sách càng đọc càng nhiều, vấn đề cũng càng lúc càng nhiều.",
+   "路越走越宽，心情越来越好。(Lù yuè zǒu yuè kuān, xīnqíng yuè lái yuè hǎo.) — Đường càng đi càng rộng, tâm trạng càng lúc càng tốt."
+  ],
+  "speak": "天越冷，我越想喝热茶。他汉语说得越好，朋友就越多。书越读越多，问题也越来越多。路越走越宽，心情越来越好。",
+  "rule": "Công thức: 越 + A, 越 + B: A thay đổi thì B thay đổi theo cùng chiều. Cả hai vế đều có 越; vế sau có thể thêm 就. Khác với 越来越 (một chủ thể thay đổi dần theo thời gian) ở chỗ 越…越… nối hai sự thay đổi song song, cái này kéo theo cái kia.",
+  "tip": "Đừng chỉ dùng một 越: nói 天冷，我越想喝茶 là sai, vế đầu cũng cần 越 mới thành mẫu càng… càng….",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“天越冷，我越想喝热茶” nghĩa là gì?",
+    "o": [
+     "Trời lạnh nên tôi không uống trà",
+     "Trời càng lạnh, tôi càng muốn uống trà nóng",
+     "Tôi uống trà nóng nên trời lạnh",
+     "Trời lạnh, trà nóng cũng lạnh"
+    ],
+    "a": 1,
+    "why": "越…越…: trời càng lạnh thì càng muốn uống trà nóng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他汉语说得___好，朋友就越多。",
+    "o": [
+     "很",
+     "越",
+     "更",
+     "最"
+    ],
+    "a": 1,
+    "why": "越…越…: nói càng giỏi, bạn bè càng đông."
+   },
+   {
+    "q": "Câu nào dùng 越…越… SAI?",
+    "o": [
+     "天越冷，我越想喝热茶",
+     "书越读越多，问题也越来越多",
+     "天冷，我越想喝热茶",
+     "路越走越宽，心情越来越好"
+    ],
+    "a": 2,
+    "why": "Vế đầu thiếu 越: phải nói 天越冷, 我越想喝热茶."
+   },
+   {
+    "q": "越…越… khác 越来越 ở điểm nào?",
+    "o": [
+     "越…越… nối hai sự thay đổi song song, còn 越来越 là một chủ thể thay đổi dần",
+     "Hai mẫu giống hệt nhau",
+     "越…越… chỉ dùng với thời tiết",
+     "越来越 chỉ dùng trong câu hỏi"
+    ],
+    "a": 0,
+    "why": "越…越…: A thay đổi kéo theo B thay đổi; 越来越: một thứ tự nó thay đổi dần theo thời gian."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他努力，成绩越好越",
+     "他越努力越，成绩好",
+     "他努力越成绩越好",
+     "他越努力，成绩越好"
+    ],
+    "a": 3,
+    "why": "越努力，成绩越好: càng cố gắng, thành tích càng tốt."
+   },
+   {
+    "q": "Trong “路越走越宽”, vế sau nói gì thay đổi theo?",
+    "o": [
+     "Con đường càng đi càng rộng",
+     "Người đi càng ngày càng mệt",
+     "Trời càng ngày càng tối",
+     "Xe càng chạy càng nhanh"
+    ],
+    "a": 0,
+    "why": "路越走越宽: đường càng đi càng rộng, vế sau là kết quả thay đổi theo vế đầu."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-21",
+  "stage": 3,
+  "title": "Cụm từ làm thành phần câu — chủ ngữ, tân ngữ, định ngữ",
+  "hook": "“学汉语很有意思。” — học tiếng Hán rất thú vị: cụm động từ 学汉语 làm chủ ngữ của cả câu.",
+  "examples": [
+   "学汉语很有意思。(Xué Hànyǔ hěn yǒu yìsi.) — Học tiếng Hán rất thú vị.",
+   "我喜欢踢足球。(Wǒ xǐhuan tī zúqiú.) — Tôi thích đá bóng.",
+   "这是妈妈做的饭。(Zhè shì māma zuò de fàn.) — Đây là cơm mẹ nấu.",
+   "跑步对身体有好处。(Pǎobù duì shēntǐ yǒu hǎochù.) — Chạy bộ tốt cho sức khỏe."
+  ],
+  "speak": "学汉语很有意思。我喜欢踢足球。这是妈妈做的饭。跑步对身体有好处。",
+  "rule": "Cụm động từ hoặc cụm tính từ có thể đóng vai danh từ trong câu. Làm chủ ngữ: 学汉语很难, 跑步对身体有好处. Làm tân ngữ sau động từ như 喜欢, 希望: 我喜欢游泳. Làm định ngữ khi thêm 的 trước danh từ: 他买的书, 妈妈做的饭. Nhận biết vai trò bằng vị trí của cụm trong câu, không bằng hình thức của cụm.",
+  "tip": "Người Việt hay thêm 的 thừa: nói 学汉语的很有意思 là sai, cụm làm chủ ngữ thì không cần 的; chỉ khi làm định ngữ trước danh từ mới thêm 的.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Trong “学汉语很有意思”, cụm 学汉语 làm gì?",
+    "o": [
+     "Tân ngữ",
+     "Chủ ngữ",
+     "Định ngữ",
+     "Trạng ngữ"
+    ],
+    "a": 1,
+    "why": "学汉语 đứng đầu câu làm chủ ngữ: học tiếng Hán thì rất thú vị."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我喜欢___。",
+    "o": [
+     "的踢足球",
+     "很踢足球",
+     "踢足球的",
+     "踢足球"
+    ],
+    "a": 3,
+    "why": "Cụm động từ 踢足球 làm tân ngữ sau 喜欢, không cần 的."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "学汉语很有意思",
+     "我喜欢踢足球",
+     "学汉语的很有意思",
+     "跑步对身体有好处"
+    ],
+    "a": 2,
+    "why": "Cụm làm chủ ngữ không cần 的: phải nói 学汉语很有意思."
+   },
+   {
+    "q": "Trong “这是妈妈做的饭”, cụm 妈妈做的 làm gì?",
+    "o": [
+     "Chủ ngữ",
+     "Tân ngữ",
+     "Định ngữ bổ nghĩa cho 饭",
+     "Vị ngữ"
+    ],
+    "a": 2,
+    "why": "妈妈做的 + 的 đứng trước 饭 làm định ngữ: cơm (mà) mẹ nấu."
+   },
+   {
+    "q": "“我喜欢踢足球” nghĩa là gì?",
+    "o": [
+     "Tôi ghét đá bóng",
+     "Tôi thích đá bóng",
+     "Tôi đang đá bóng",
+     "Tôi dạy đá bóng"
+    ],
+    "a": 1,
+    "why": "喜欢踢足球: thích đá bóng."
+   },
+   {
+    "q": "Khi nào cụm động từ cần thêm 的?",
+    "o": [
+     "Khi làm định ngữ trước danh từ",
+     "Khi làm chủ ngữ",
+     "Khi làm tân ngữ",
+     "Không bao giờ cần 的"
+    ],
+    "a": 0,
+    "why": "Làm định ngữ mới thêm 的: 妈妈做的饭; làm chủ ngữ hay tân ngữ thì không cần."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-22",
+  "stage": 3,
+  "title": "Bổ ngữ kết quả 到 / 住 — chạm tới, giữ chặt",
+  "hook": "“我终于买到票了。” — cuối cùng tôi mua được vé rồi: 到 báo kết quả đạt được, chạm tới mục tiêu.",
+  "examples": [
+   "我终于买到票了。(Wǒ zhōngyú mǎi dào piào le.) — Cuối cùng tôi mua được vé rồi.",
+   "请记住这个电话号码。(Qǐng jì zhù zhè ge diànhuà hàomǎ.) — Xin hãy nhớ số điện thoại này.",
+   "他听到一个好消息。(Tā tīng dào yī gè hǎo xiāoxi.) — Anh ấy nghe được một tin tốt.",
+   "小狗紧紧地抓住了球。(Xiǎo gǒu jǐnjǐn de zhuā zhù le qiú.) — Chú chó con nắm chặt quả bóng."
+  ],
+  "speak": "我终于买到票了。请记住这个电话号码。他听到一个好消息。小狗紧紧地抓住了球。",
+  "rule": "Động từ + 到: kết quả đạt được, chạm tới mục tiêu (看到, 找到, 买到, 听到). Động từ + 住: kết quả giữ chặt, không rời ra (记住, 抓住, 拿住). 到 nhấn mạnh “đạt được”, 住 nhấn mạnh “giữ lại được”. Sau 到 thường có tân ngữ chỉ thứ đạt được; sau 住 tân ngữ đứng ngay sau 住.",
+  "tip": "Đừng lẫn 听到 (nghe được tin) với 听见: 到 đi với động từ có mục tiêu rõ như 买, 找, 看; còn 住 đi với giữ, nắm, nhớ như 记, 抓, 拿.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我终于买到票了” nghĩa là gì?",
+    "o": [
+     "Tôi đang mua vé",
+     "Cuối cùng tôi mua được vé rồi",
+     "Tôi không mua được vé",
+     "Tôi sắp đi mua vé"
+    ],
+    "a": 1,
+    "why": "买到: mua được, 到 báo kết quả đạt được."
+   },
+   {
+    "q": "Điền vào chỗ trống: 请___住这个电话号码。",
+    "o": [
+     "记",
+     "看",
+     "买",
+     "听"
+    ],
+    "a": 0,
+    "why": "记住: nhớ kỹ, 住 báo kết quả giữ lại trong đầu."
+   },
+   {
+    "q": "Câu nào sai trật tự của 到?",
+    "o": [
+     "我终于买到票了",
+     "他听到一个好消息",
+     "请记住这个电话号码",
+     "他看到票买"
+    ],
+    "a": 3,
+    "why": "看到票买 sai trật tự: 到 phải đứng ngay sau động từ 看, tân ngữ 票 đứng sau 到."
+   },
+   {
+    "q": "到 và 住 khác nhau thế nào?",
+    "o": [
+     "到 nhấn mạnh đạt được, 住 nhấn mạnh giữ chặt không rời",
+     "Hai từ giống hệt nhau",
+     "到 chỉ dùng với 听, 住 chỉ dùng với 看",
+     "到 đứng trước động từ, 住 đứng sau tân ngữ"
+    ],
+    "a": 0,
+    "why": "买到 là đạt được vé; 记住 là giữ lại trong trí nhớ."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "小狗紧紧地抓球住了",
+     "小狗紧紧地住了抓球",
+     "小狗紧紧地抓住了球",
+     "小狗紧紧地抓球住"
+    ],
+    "a": 2,
+    "why": "抓住: động từ 抓 + 住 + tân ngữ 球, đúng thứ tự."
+   },
+   {
+    "q": "“他听到一个好消息” — 听到 báo kết quả gì?",
+    "o": [
+     "Anh ấy sắp nghe tin",
+     "Anh ấy nghe được một tin tốt",
+     "Anh ấy không nghe thấy gì",
+     "Anh ấy đang nghe nhạc"
+    ],
+    "a": 1,
+    "why": "听到: nghe được, 到 báo việc nghe đã đạt kết quả."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-23",
+  "stage": 3,
+  "title": "Bổ ngữ số lượng — động lượng kèm tân ngữ + thời lượng",
+  "hook": "“我去过三次北京。” — tôi đã đi Bắc Kinh ba lần: bổ ngữ số lượng nói rõ làm việc đó mấy lần, trong bao lâu, hay còn bao xa tới một thời điểm.",
+  "examples": [
+   "我去过三次北京。(Wǒ qù guo sān cì Běijīng.) — Tôi đã đi Bắc Kinh ba lần.",
+   "他看了两遍这部电影。(Tā kàn le liǎng biàn zhè bù diànyǐng.) — Anh ấy xem bộ phim này hai lần.",
+   "我在上海住了三年。(Wǒ zài Shànghǎi zhù le sān nián.) — Tôi đã ở Thượng Hải ba năm.",
+   "离考试还有三天。(Lí kǎoshì hái yǒu sān tiān.) — Còn ba ngày nữa là đến kỳ thi."
+  ],
+  "speak": "我去过三次北京。他看了两遍这部电影。我在上海住了三年。离考试还有三天。",
+  "rule": "Động lượng bổ ngữ (次, 遍, 趟): động từ + số + lượng từ + tân ngữ, ví dụ 去过三次北京, 看了两遍电影; nếu tân ngữ là đại từ thì động lượng đứng sau đại từ, ví dụ 找了他三次. Thời lượng bổ ngữ: động từ + 了 + khoảng thời gian, ví dụ 住了三年, 学了两个月. Khoảng cách tới một thời điểm: 离…还有 + thời gian, ví dụ 离考试还有三天.",
+  "tip": "Đừng đặt động lượng bổ ngữ sau tân ngữ dài: nói 我去过北京三次 nghe không tự nhiên bằng 我去过三次北京; còn 住了三年 thì 了 phải đứng trước khoảng thời gian.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“我去过三次北京” nghĩa là gì?",
+    "o": [
+     "Tôi đang đi Bắc Kinh",
+     "Tôi đã đi Bắc Kinh ba lần",
+     "Tôi sẽ đi Bắc Kinh ba ngày",
+     "Tôi ở Bắc Kinh ba năm"
+    ],
+    "a": 1,
+    "why": "三次 là động lượng bổ ngữ: đi ba lần."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他看了___这部电影。",
+    "o": [
+     "三天",
+     "三年",
+     "两遍",
+     "三次北京"
+    ],
+    "a": 2,
+    "why": "看了两遍电影: xem hai lần, 遍 dùng cho việc xem/đọc trọn vẹn."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我去过三次北京",
+     "他在上海住了三年",
+     "离考试还有三天",
+     "我去过北京三次了电影"
+    ],
+    "a": 3,
+    "why": "Động lượng bổ ngữ phải đứng trước tân ngữ dài: 去过三次北京, không đặt sau tân ngữ rồi thêm tân ngữ khác."
+   },
+   {
+    "q": "“我在上海住了三年” — 三年 là bổ ngữ gì?",
+    "o": [
+     "Thời lượng bổ ngữ: ở trong ba năm",
+     "Động lượng bổ ngữ",
+     "Bổ ngữ kết quả",
+     "Bổ ngữ mức độ"
+    ],
+    "a": 0,
+    "why": "住了三年: 了 + khoảng thời gian chỉ việc kéo dài ba năm."
+   },
+   {
+    "q": "“离考试还有三天” nghĩa là gì?",
+    "o": [
+     "Kỳ thi đã qua ba ngày",
+     "Còn ba ngày nữa là đến kỳ thi",
+     "Kỳ thi kéo dài ba ngày",
+     "Tôi thi ba lần rồi"
+    ],
+    "a": 1,
+    "why": "离…还有三天: còn ba ngày nữa mới tới kỳ thi."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他找了他三次",
+     "他找了三次他",
+     "他三次找了他",
+     "他找他了三次"
+    ],
+    "a": 0,
+    "why": "Tân ngữ là đại từ 他 thì động lượng bổ ngữ đứng sau đại từ: 找了他三次."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-24",
+  "stage": 3,
+  "title": "主谓谓语句 — câu vị ngữ là cụm chủ–vị",
+  "hook": "“他身体很好。” — anh ấy sức khỏe rất tốt: vị ngữ 身体很好 tự nó là một cụm chủ ngữ + vị ngữ.",
+  "examples": [
+   "他身体很好。(Tā shēntǐ hěn hǎo.) — Anh ấy sức khỏe rất tốt.",
+   "这本书内容很有意思。(Zhè běn shū nèiróng hěn yǒu yìsi.) — Quyển sách này nội dung rất thú vị.",
+   "我妈妈做的饭很好吃。(Wǒ māma zuò de fàn hěn hǎochī.) — Cơm mẹ tôi nấu rất ngon.",
+   "他眼睛很大。(Tā yǎnjing hěn dà.) — Mắt anh ấy rất to."
+  ],
+  "speak": "他身体很好。这本书内容很有意思。我妈妈做的饭很好吃。他眼睛很大。",
+  "rule": "Cấu trúc: chủ ngữ lớn + (chủ ngữ nhỏ + vị ngữ). Ví dụ 他 (chủ ngữ lớn) + 身体很好 (cụm chủ–vị làm vị ngữ). Chủ ngữ nhỏ thường là bộ phận hay thuộc tính của chủ ngữ lớn: 身体, 眼睛, 内容, 成绩. Dịch sang tiếng Việt hay dùng “thì”: “Anh ấy thì sức khỏe rất tốt”, “Quyển sách này thì nội dung rất thú vị”.",
+  "tip": "Đừng thêm 的 giữa chủ ngữ lớn và chủ ngữ nhỏ: 他的身体很好 là câu sở hữu khác, còn 他身体很好 mới là câu chủ–vị vị ngữ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Trong “他身体很好”, cụm nào làm vị ngữ?",
+    "o": [
+     "他",
+     "身体",
+     "身体很好",
+     "很好"
+    ],
+    "a": 2,
+    "why": "身体很好 là cụm chủ–vị (身体 là chủ ngữ nhỏ, 很好 là vị ngữ) làm vị ngữ của 他."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___很大。",
+    "o": [
+     "的眼睛",
+     "眼睛的",
+     "是眼睛",
+     "眼睛"
+    ],
+    "a": 3,
+    "why": "他眼睛很大: 眼睛 làm chủ ngữ nhỏ, không thêm 的."
+   },
+   {
+    "q": "Câu nào là câu chủ–vị vị ngữ?",
+    "o": [
+     "他身体很好",
+     "他很高",
+     "他的身体很好",
+     "他是学生"
+    ],
+    "a": 0,
+    "why": "他身体很好: vị ngữ là cụm chủ–vị 身体很好; 他的身体很好 chỉ là câu sở hữu."
+   },
+   {
+    "q": "“这本书内容很有意思” nghĩa là gì?",
+    "o": [
+     "Quyển sách này rất dày",
+     "Quyển sách này rất đắt",
+     "Quyển sách này nội dung rất thú vị",
+     "Tôi rất thích quyển sách này"
+    ],
+    "a": 2,
+    "why": "内容很有意思 là cụm chủ–vị làm vị ngữ: nội dung thì rất thú vị."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他身体很好",
+     "他眼睛很大",
+     "这本书内容很有意思",
+     "他的眼睛很大很好"
+    ],
+    "a": 3,
+    "why": "他的眼睛很大很好 sai: vừa thêm 的 vừa lặp hai vị ngữ, phải nói 他眼睛很大."
+   },
+   {
+    "q": "Chủ ngữ nhỏ trong câu này thường là gì?",
+    "o": [
+     "Thời gian",
+     "Bộ phận hay thuộc tính của chủ ngữ lớn",
+     "Nơi chốn",
+     "Nguyên nhân"
+    ],
+    "a": 1,
+    "why": "Chủ ngữ nhỏ như 身体, 眼睛, 内容 là bộ phận hay thuộc tính của chủ ngữ lớn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-25",
+  "stage": 3,
+  "title": "连动句 — hai động tác nối nhau (nâng cao)",
+  "hook": "“他跑去开门。” — anh ấy chạy đi mở cửa: hai động tác 跑 và 开 nối nhau trong một câu, cùng một người làm.",
+  "examples": [
+   "他跑去开门。(Tā pǎo qù kāi mén.) — Anh ấy chạy đi mở cửa.",
+   "我去商店买东西。(Wǒ qù shāngdiàn mǎi dōngxi.) — Tôi đi cửa hàng mua đồ.",
+   "她拿着伞走出家门。(Tā ná zhe sǎn zǒu chū jiā mén.) — Cô ấy cầm ô bước ra khỏi nhà.",
+   "我们坐车去机场。(Wǒmen zuò chē qù jīchǎng.) — Chúng tôi đi xe ra sân bay."
+  ],
+  "speak": "他跑去开门。我去商店买东西。她拿着伞走出家门。我们坐车去机场。",
+  "rule": "Một chủ ngữ + hai (hoặc nhiều) động từ liên tiếp, cùng một chủ thể làm, các động tác xảy ra theo thứ tự hoặc đồng thời. Động từ đầu thường chỉ cách thức hay di chuyển (去, 跑, 坐, 拿着), động từ sau chỉ mục đích hay động tác chính. Giữa hai động từ không có liên từ; phủ định đặt trước động từ đầu, ví dụ 他没去商店买东西.",
+  "tip": "Đừng thêm 和 giữa hai động từ: nói 他跑和开门 là sai, câu liên động không dùng liên từ nối hai động tác.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“他跑去开门” có mấy động từ?",
+    "o": [
+     "Một: 跑",
+     "Hai: 跑 và 开",
+     "Ba: 跑, 去, 开",
+     "Không có động từ"
+    ],
+    "a": 1,
+    "why": "跑去开门: 跑 là động tác di chuyển, 开 là động tác chính; 去 là từ chỉ hướng đi kèm."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我们___去机场。",
+    "o": [
+     "坐车",
+     "和车",
+     "坐车的",
+     "车坐"
+    ],
+    "a": 0,
+    "why": "坐车去机场: đi xe ra sân bay, hai động tác nối nhau không dùng liên từ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我去商店买东西",
+     "他跑去开门",
+     "他跑和开门",
+     "我们坐车去机场"
+    ],
+    "a": 2,
+    "why": "Câu liên động không dùng 和 nối hai động từ: phải nói 他跑去开门."
+   },
+   {
+    "q": "“她拿着伞走出家门” nghĩa là gì?",
+    "o": [
+     "Cô ấy cầm ô bước ra khỏi nhà",
+     "Cô ấy mua một cái ô",
+     "Cô ấy ở nhà cầm ô",
+     "Cô ấy làm mất ô"
+    ],
+    "a": 0,
+    "why": "拿着伞 (cầm ô) và 走出家门 (bước ra khỏi nhà) là hai động tác nối nhau."
+   },
+   {
+    "q": "Phủ định của câu liên động đặt ở đâu?",
+    "o": [
+     "Trước động từ đầu",
+     "Giữa hai động từ",
+     "Sau động từ cuối",
+     "Trước tân ngữ"
+    ],
+    "a": 0,
+    "why": "Phủ định đặt trước động từ đầu: 他没去商店买东西."
+   },
+   {
+    "q": "Câu nào là câu liên động?",
+    "o": [
+     "我喜欢买东西",
+     "商店的东西很多",
+     "我买东西去了商店",
+     "我去商店买东西"
+    ],
+    "a": 3,
+    "why": "去商店买东西: 去 và 买 là hai động tác nối nhau của cùng một chủ ngữ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-26",
+  "stage": 3,
+  "title": "兼语句 — bảo ai làm gì (cấp 3)",
+  "hook": "“老师请我回答问题。” — cô giáo mời tôi trả lời câu hỏi: 我 vừa là tân ngữ của 请, vừa là chủ ngữ của 回答.",
+  "examples": [
+   "老师请我回答问题。(Lǎoshī qǐng wǒ huídá wèntí.) — Cô giáo mời tôi trả lời câu hỏi.",
+   "妈妈叫我早点儿回家。(Māma jiào wǒ zǎo diǎnr huí jiā.) — Mẹ bảo tôi về nhà sớm một chút.",
+   "他让我帮他搬东西。(Tā ràng wǒ bāng tā bān dōngxi.) — Anh ấy nhờ tôi giúp anh ấy chuyển đồ.",
+   "爸爸不许我看电视。(Bàba bù xǔ wǒ kàn diànshì.) — Bố không cho tôi xem ti vi."
+  ],
+  "speak": "老师请我回答问题。妈妈叫我早点儿回家。他让我帮他搬东西。爸爸不许我看电视。",
+  "rule": "Công thức: chủ ngữ + 请/叫/让/许 + người + động từ. Người ở giữa kiêm hai vai: tân ngữ của động từ đầu, đồng thời là chủ ngữ của động từ sau. Động từ đầu thường mang nghĩa sai khiến, nhờ vả, cho phép hay cấm đoán. Phủ định 不 đặt trước động từ đầu, ví dụ 不许, 不让.",
+  "tip": "Đừng thêm từ thừa sau người ở giữa: nói 老师请我去回答问题 vẫn hiểu được nhưng câu kiêm ngữ chuẩn là 老师请我回答问题, động từ sau đi thẳng vào việc.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Trong “老师请我回答问题”, 我 làm gì?",
+    "o": [
+     "Chỉ làm chủ ngữ",
+     "Chỉ làm tân ngữ",
+     "Vừa là tân ngữ của 请, vừa là chủ ngữ của 回答",
+     "Làm trạng ngữ"
+    ],
+    "a": 2,
+    "why": "我 kiêm hai vai: tân ngữ của 请 và chủ ngữ của 回答."
+   },
+   {
+    "q": "Điền vào chỗ trống: 妈妈___我早点儿回家。",
+    "o": [
+     "叫",
+     "是",
+     "很",
+     "在"
+    ],
+    "a": 0,
+    "why": "叫我回家: mẹ bảo tôi về nhà, 叫 là động từ sai khiến mở đầu câu kiêm ngữ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "老师请我回答问题",
+     "他让我帮他搬东西",
+     "爸爸不许我看电视",
+     "老师请回答问题我"
+    ],
+    "a": 3,
+    "why": "Thứ tự sai: người ở giữa phải đứng trước động từ sau: 请我回答问题."
+   },
+   {
+    "q": "“爸爸不许我看电视” nghĩa là gì?",
+    "o": [
+     "Bố cho tôi xem ti vi",
+     "Bố không cho tôi xem ti vi",
+     "Bố cùng tôi xem ti vi",
+     "Bố mua ti vi cho tôi"
+    ],
+    "a": 1,
+    "why": "不许: không cho phép, bố không cho tôi xem ti vi."
+   },
+   {
+    "q": "Câu nào là câu kiêm ngữ?",
+    "o": [
+     "我喜欢看电视",
+     "他让我帮他搬东西",
+     "他看电视",
+     "电视很好看"
+    ],
+    "a": 1,
+    "why": "让我帮他搬东西: 我 vừa là tân ngữ của 让, vừa là chủ ngữ của 帮."
+   },
+   {
+    "q": "Phủ định 不 trong câu kiêm ngữ đặt ở đâu?",
+    "o": [
+     "Trước động từ đầu như 不许, 不让",
+     "Trước động từ sau",
+     "Sau người ở giữa",
+     "Cuối câu"
+    ],
+    "a": 0,
+    "why": "不 đặt trước động từ sai khiến đầu: 爸爸不许我看电视."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-27",
+  "stage": 3,
+  "title": "比较句 — so sánh hơn và kém (cấp 3)",
+  "hook": "“今天比昨天冷多了。” — hôm nay lạnh hơn hôm qua nhiều: 比 nối hai đối tượng để so sánh hơn kém.",
+  "examples": [
+   "今天比昨天冷多了。(Jīntiān bǐ zuótiān lěng duō le.) — Hôm nay lạnh hơn hôm qua nhiều.",
+   "他的汉语没有我说得好。(Tā de Hànyǔ méiyǒu wǒ shuō de hǎo.) — Tiếng Hán của anh ấy không nói tốt bằng tôi.",
+   "这件衣服比那件贵一点儿。(Zhè jiàn yīfu bǐ nà jiàn guì yīdiǎnr.) — Cái áo này đắt hơn cái kia một chút.",
+   "北京的冬天比上海冷。(Běijīng de dōngtiān bǐ Shànghǎi lěng.) — Mùa đông Bắc Kinh lạnh hơn Thượng Hải."
+  ],
+  "speak": "今天比昨天冷多了。他的汉语没有我说得好。这件衣服比那件贵一点儿。北京的冬天比上海冷。",
+  "rule": "So sánh hơn: A + 比 + B + tính từ (+ mức chênh lệch 得多/一点儿/一些), ví dụ 今天比昨天冷多了. So sánh kém: A + 没有 + B + tính từ, hoặc A + 没有 + B + động từ + 得 + tính từ, ví dụ 他的汉语没有我说得好. Mức chênh lệch đặt sau tính từ, không đặt sau 比.",
+  "tip": "Sau 比 đừng dùng 更 hay 很: nói 比昨天更冷 là thừa, muốn nhấn mạnh thì nói 冷多了; muốn nói chênh ít thì nói 贵一点儿.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“今天比昨天冷多了” nghĩa là gì?",
+    "o": [
+     "Hôm nay lạnh bằng hôm qua",
+     "Hôm nay lạnh hơn hôm qua nhiều",
+     "Hôm nay ấm hơn hôm qua",
+     "Hôm qua lạnh hơn hôm nay"
+    ],
+    "a": 1,
+    "why": "比…冷多了: lạnh hơn nhiều, 多了 chỉ mức chênh lệch lớn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这件衣服比那件___一点儿。",
+    "o": [
+     "贵",
+     "很贵",
+     "更贵",
+     "最贵"
+    ],
+    "a": 0,
+    "why": "比那件贵一点儿: đắt hơn một chút, sau 比 không dùng 更/很."
+   },
+   {
+    "q": "Câu nào dùng câu so sánh SAI?",
+    "o": [
+     "今天比昨天冷多了",
+     "北京的冬天比上海冷",
+     "今天比昨天更冷",
+     "他的汉语没有我说得好"
+    ],
+    "a": 2,
+    "why": "Sau 比 không dùng 更: muốn nhấn mạnh thì nói 冷多了."
+   },
+   {
+    "q": "“他的汉语没有我说得好” nghĩa là gì?",
+    "o": [
+     "Tiếng Hán của anh ấy nói tốt hơn tôi",
+     "Tiếng Hán của anh ấy không nói tốt bằng tôi",
+     "Anh ấy không nói tiếng Hán",
+     "Tôi không nói tiếng Hán"
+    ],
+    "a": 1,
+    "why": "没有…说得好: không bằng, kém hơn ở cách nói."
+   },
+   {
+    "q": "Mức chênh lệch trong câu 比 đặt ở đâu?",
+    "o": [
+     "Sau tính từ: 冷多了, 贵一点儿",
+     "Ngay sau 比",
+     "Trước chủ ngữ",
+     "Cuối câu sau 了"
+    ],
+    "a": 0,
+    "why": "Mức chênh lệch đứng sau tính từ: 比昨天冷多了, 比那件贵一点儿."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "北京的冬天比上海更冷",
+     "北京的冬天很比上海冷",
+     "北京的冬天比上海冷更",
+     "北京的冬天比上海冷"
+    ],
+    "a": 3,
+    "why": "A + 比 + B + tính từ: 北京的冬天比上海冷."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-28",
+  "stage": 3,
+  "title": "重动句 — một động từ lặp lại hai lần",
+  "hook": "“他唱歌唱得很好。” — anh ấy hát hay lắm: động từ 唱 xuất hiện hai lần, lần sau mang theo bổ ngữ.",
+  "examples": [
+   "他唱歌唱得很好。(Tā chàng gē chàng de hěn hǎo.) — Anh ấy hát hay lắm.",
+   "我吃饭吃得很慢。(Wǒ chī fàn chī de hěn màn.) — Tôi ăn cơm rất chậm.",
+   "她跳舞跳了一个小时。(Tā tiào wǔ tiào le yī gè xiǎoshí.) — Cô ấy nhảy múa một tiếng đồng hồ.",
+   "他写字写得很漂亮。(Tā xiě zì xiě de hěn piàoliang.) — Anh ấy viết chữ rất đẹp."
+  ],
+  "speak": "他唱歌唱得很好。我吃饭吃得很慢。她跳舞跳了一个小时。他写字写得很漂亮。",
+  "rule": "Công thức: chủ ngữ + động từ + tân ngữ + động từ (lặp lại) + bổ ngữ. Động từ xuất hiện lần đầu đi với tân ngữ, lần hai mang bổ ngữ mức độ (唱得很好), thời lượng (跳了一个小时) hay số lần. Tân ngữ chỉ xuất hiện một lần, ở sau động từ đầu; lần hai không lặp lại tân ngữ.",
+  "tip": "Đừng bỏ động từ lặp: nói 他唱歌得很好 là sai, phải lặp lại động từ mới mang được bổ ngữ: 唱歌唱得很好.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他唱歌唱得很好” nghĩa là gì?",
+    "o": [
+     "Anh ấy hát rất dở",
+     "Anh ấy hát hay lắm",
+     "Anh ấy đang học hát",
+     "Anh ấy không biết hát"
+    ],
+    "a": 1,
+    "why": "唱歌唱得很好: hát hay lắm, 唱 lặp lại để mang bổ ngữ mức độ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她跳舞跳了___。",
+    "o": [
+     "一个小时",
+     "很跳舞",
+     "跳舞一个",
+     "小时一个"
+    ],
+    "a": 0,
+    "why": "跳了一个小时: động từ lặp 跳 mang bổ ngữ thời lượng một tiếng đồng hồ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他唱歌唱得很好",
+     "我吃饭吃得很慢",
+     "他唱歌得很好",
+     "他写字写得很漂亮"
+    ],
+    "a": 2,
+    "why": "Thiếu động từ lặp: phải nói 唱歌唱得很好, không nói 唱歌得很好."
+   },
+   {
+    "q": "Trong câu trùng động, tân ngữ đứng ở đâu?",
+    "o": [
+     "Sau động từ lần hai",
+     "Chỉ sau động từ lần đầu, lần hai không lặp tân ngữ",
+     "Trước chủ ngữ",
+     "Giữa hai động từ"
+    ],
+    "a": 1,
+    "why": "唱歌唱得很好: 歌 chỉ xuất hiện sau 唱 lần đầu."
+   },
+   {
+    "q": "Câu nào là câu trùng động?",
+    "o": [
+     "他唱歌很好",
+     "他喜欢唱歌",
+     "他唱歌了",
+     "他唱歌唱得很好"
+    ],
+    "a": 3,
+    "why": "唱歌唱得很好: động từ 唱 lặp hai lần, lần sau mang bổ ngữ 得很好."
+   },
+   {
+    "q": "“我吃饭吃得很慢” — bổ ngữ 很慢 nói về điều gì?",
+    "o": [
+     "Cơm rất ngon",
+     "Tôi ăn rất nhiều",
+     "Cách ăn: ăn rất chậm",
+     "Tôi ăn cơm lúc chậm lúc nhanh"
+    ],
+    "a": 2,
+    "why": "吃得很慢: bổ ngữ mức độ nói cách ăn chậm."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-29",
+  "stage": 3,
+  "title": "（也）…，也… — …cũng…, …cũng…",
+  "hook": "“他会唱歌，也会跳舞。” — anh ấy biết hát, cũng biết nhảy: hai vế song song, cùng khẳng định một người có hai khả năng.",
+  "examples": [
+   "他会唱歌，也会跳舞。(Tā huì chàng gē, yě huì tiào wǔ.) — Anh ấy biết hát, cũng biết nhảy.",
+   "她喜欢看书，也喜欢看电影。(Tā xǐhuan kàn shū, yě xǐhuan kàn diànyǐng.) — Cô ấy thích đọc sách, cũng thích xem phim.",
+   "我们是同学，也是好朋友。(Wǒmen shì tóngxué, yě shì hǎo péngyou.) — Chúng tôi là bạn học, cũng là bạn tốt.",
+   "他不喝酒，也不抽烟。(Tā bù hē jiǔ, yě bù chōu yān.) — Anh ấy không uống rượu, cũng không hút thuốc."
+  ],
+  "speak": "他会唱歌，也会跳舞。她喜欢看书，也喜欢看电影。我们是同学，也是好朋友。他不喝酒，也不抽烟。",
+  "rule": "Công thức: vế 1 + ，也 + vế 2. Hai vế có thể cùng chủ ngữ hoặc chủ ngữ khác nhau, nêu hai việc hay hai đặc điểm song song; vế 2 thêm 也 để nhấn mạnh “cũng”. Mẫu dùng được cả khẳng định lẫn phủ định (也不…); vế 1 có thể không có 也, nhưng vế 2 bắt buộc có 也.",
+  "tip": "Đừng đặt 也 ở vế 1 rồi quên ở vế 2: nói 也会唱歌，会跳舞 là sai, 也 phải nằm ở vế sau mới đúng mẫu.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他会唱歌，也会跳舞” nghĩa là gì?",
+    "o": [
+     "Anh ấy chỉ biết hát",
+     "Anh ấy biết hát, cũng biết nhảy",
+     "Anh ấy không biết hát cũng không biết nhảy",
+     "Anh ấy đang học hát"
+    ],
+    "a": 1,
+    "why": "也会跳舞: cũng biết nhảy, hai khả năng song song."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她喜欢看书，___喜欢看电影。",
+    "o": [
+     "很",
+     "都",
+     "也",
+     "就"
+    ],
+    "a": 2,
+    "why": "Vế 2 thêm 也: 也喜欢看电影."
+   },
+   {
+    "q": "Câu nào dùng mẫu này SAI?",
+    "o": [
+     "他会唱歌，也会跳舞",
+     "我们是同学，也是好朋友",
+     "他不喝酒，也不抽烟",
+     "他也会唱歌，会跳舞"
+    ],
+    "a": 3,
+    "why": "也 phải nằm ở vế 2: 会唱歌，也会跳舞; đặt 也 ở vế 1 là sai mẫu."
+   },
+   {
+    "q": "“他不喝酒，也不抽烟” dùng mẫu này để nói gì?",
+    "o": [
+     "Hai việc xấu cùng không làm",
+     "Anh ấy uống rượu",
+     "Anh ấy hút thuốc",
+     "Anh ấy thích uống rượu"
+    ],
+    "a": 0,
+    "why": "也不抽烟: cũng không hút thuốc, phủ định song song."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "我们是同学，也是好朋友",
+     "我们是同学，也好朋友是",
+     "我们是同学，是也好朋友",
+     "我们同学是，也好朋友"
+    ],
+    "a": 0,
+    "why": "是同学，也是好朋友: vế 2 có 也 + 是."
+   },
+   {
+    "q": "也 trong mẫu này bắt buộc nằm ở đâu?",
+    "o": [
+     "Vế 1",
+     "Vế 2",
+     "Cả hai vế",
+     "Cuối câu"
+    ],
+    "a": 1,
+    "why": "Vế 2 bắt buộc có 也; vế 1 có thể không có."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-30",
+  "stage": 3,
+  "title": "一会儿…，一会儿… / 一方面…，另一方面… — lúc thì… lúc thì… / một mặt… mặt khác…",
+  "hook": "“他一会儿看书，一会儿看手机。” — lúc thì anh ấy đọc sách, lúc thì xem điện thoại: hai việc thay nhau trong thời gian ngắn.",
+  "examples": [
+   "他一会儿看书，一会儿看手机。(Tā yīhuìr kàn shū, yīhuìr kàn shǒujī.) — Lúc thì anh ấy đọc sách, lúc thì xem điện thoại.",
+   "天气一会儿晴，一会儿阴。(Tiānqì yīhuìr qíng, yīhuìr yīn.) — Thời tiết lúc thì nắng, lúc thì âm u.",
+   "一方面要学习，另一方面也要休息。(Yī fāngmiàn yào xuéxí, lìng yī fāngmiàn yě yào xiūxi.) — Một mặt phải học, mặt khác cũng phải nghỉ ngơi.",
+   "这件事一方面是好事，另一方面也有问题。(Zhè jiàn shì yī fāngmiàn shì hǎo shì, lìng yī fāngmiàn yě yǒu wèntí.) — Việc này một mặt là chuyện tốt, mặt khác cũng có vấn đề."
+  ],
+  "speak": "他一会儿看书，一会儿看手机。天气一会儿晴，一会儿阴。一方面要学习，另一方面也要休息。这件事一方面是好事，另一方面也有问题。",
+  "rule": "一会儿…，一会儿…: hai việc hay hai trạng thái thay nhau trong thời gian ngắn, cùng một chủ ngữ, ví dụ 一会儿看书，一会儿看手机. 一方面…，另一方面…: nhìn một việc từ hai mặt đối lập hoặc bổ sung, vế sau thường có 也, ví dụ 一方面要学习，另一方面也要休息. Hai mẫu khác nhau: 一会儿 nói về thời gian luân phiên, 一方面 nói về góc nhìn.",
+  "tip": "Đừng lẫn hai mẫu: nói 一方面看书，一方面看手机 là sai ý, vì đọc sách và xem điện thoại luân phiên trong thời gian thì phải dùng 一会儿.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他一会儿看书，一会儿看手机” nghĩa là gì?",
+    "o": [
+     "Anh ấy vừa đọc sách vừa xem điện thoại cùng lúc",
+     "Lúc thì anh ấy đọc sách, lúc thì xem điện thoại",
+     "Anh ấy chỉ đọc sách",
+     "Anh ấy chỉ xem điện thoại"
+    ],
+    "a": 1,
+    "why": "一会儿…，一会儿…: hai việc thay nhau trong thời gian ngắn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天气___晴，一会儿阴。",
+    "o": [
+     "一会儿",
+     "一方面",
+     "一边",
+     "又"
+    ],
+    "a": 0,
+    "why": "Thời tiết lúc nắng lúc âm u là luân phiên theo thời gian: 一会儿晴，一会儿阴."
+   },
+   {
+    "q": "Câu nào dùng mẫu SAI?",
+    "o": [
+     "他一会儿看书，一会儿看手机",
+     "一方面要学习，另一方面也要休息",
+     "一方面看书，一方面看手机",
+     "这件事一方面是好事，另一方面也有问题"
+    ],
+    "a": 2,
+    "why": "Đọc sách và xem điện thoại luân phiên theo thời gian thì dùng 一会儿, không dùng 一方面."
+   },
+   {
+    "q": "一方面…，另一方面… dùng để nói gì?",
+    "o": [
+     "Hai việc thay nhau theo thời gian",
+     "Nhìn một việc từ hai mặt, hai góc nhìn",
+     "Hai người làm hai việc",
+     "Một việc xảy ra hai lần"
+    ],
+    "a": 1,
+    "why": "一方面…，另一方面…: một việc có hai mặt, ví dụ vừa là chuyện tốt vừa có vấn đề."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "一方面要学习，另一方面也要休息",
+     "一方面要学习，一方面也要休息",
+     "一会儿要学习，另一方面也要休息",
+     "一方面学习，一会儿也要休息"
+    ],
+    "a": 0,
+    "why": "一方面…，另一方面…: vế sau dùng 另一方面, thường thêm 也."
+   },
+   {
+    "q": "“这件事一方面是好事，另一方面也有问题” — vế sau nói gì?",
+    "o": [
+     "Việc này hoàn toàn tốt",
+     "Việc này đã xong",
+     "Việc này không ai quan tâm",
+     "Việc này mặt khác cũng có vấn đề"
+    ],
+    "a": 3,
+    "why": "另一方面也有问题: mặt khác cũng có vấn đề."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-31",
+  "stage": 3,
+  "title": "又…，又… — vừa… vừa… (hai mặt cùng lúc)",
+  "hook": "“今天又冷，又下雨。” — hôm nay vừa lạnh, vừa mưa: hai đặc điểm cùng xuất hiện một lúc, thường cùng tốt hoặc cùng xấu.",
+  "examples": [
+   "今天又冷，又下雨。(Jīntiān yòu lěng, yòu xià yǔ.) — Hôm nay vừa lạnh, vừa mưa.",
+   "他又高，又帅。(Tā yòu gāo, yòu shuài.) — Anh ấy vừa cao, vừa đẹp trai.",
+   "这个地方又安静，又干净。(Zhè ge dìfang yòu ānjìng, yòu gānjìng.) — Chỗ này vừa yên tĩnh, vừa sạch sẽ.",
+   "她又会唱歌，又会跳舞。(Tā yòu huì chàng gē, yòu huì tiào wǔ.) — Cô ấy vừa biết hát, vừa biết nhảy."
+  ],
+  "speak": "今天又冷，又下雨。他又高，又帅。这个地方又安静，又干净。她又会唱歌，又会跳舞。",
+  "rule": "Công thức: 又 + A, 又 + B. Hai đặc điểm hay hai việc cùng thuộc một chủ ngữ, thường cùng chiều (cùng tốt hoặc cùng xấu) và xảy ra đồng thời. Khác với 既…又… (trang trọng hơn) và khác 一边…一边… (hai việc làm cùng lúc); 又…又… nói về đặc điểm hay trạng thái có sẵn, không nói về hai việc làm lần lượt.",
+  "tip": "又…又… nói về đặc điểm hay trạng thái, không nói về hai việc lần lượt: 他又吃饭，又睡觉 nghe như ăn và ngủ cùng lúc, muốn nói lần lượt thì dùng 先…再….",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“今天又冷，又下雨” nghĩa là gì?",
+    "o": [
+     "Hôm nay vừa lạnh, vừa mưa",
+     "Hôm nay lúc lạnh lúc mưa",
+     "Hôm nay lạnh rồi mới mưa",
+     "Hôm nay không lạnh cũng không mưa"
+    ],
+    "a": 0,
+    "why": "又冷，又下雨: vừa lạnh vừa mưa, hai đặc điểm cùng lúc."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___高，___帅。",
+    "o": [
+     "又，又",
+     "一会儿，一会儿",
+     "一方面，另一方面",
+     "越，越"
+    ],
+    "a": 0,
+    "why": "又高，又帅: vừa cao vừa đẹp trai, hai đặc điểm cùng chiều."
+   },
+   {
+    "q": "Câu nào dùng 又…又… SAI?",
+    "o": [
+     "他又高，又帅",
+     "这个地方又安静，又干净",
+     "他又吃饭，又睡觉",
+     "今天又冷，又下雨"
+    ],
+    "a": 2,
+    "why": "Ăn và ngủ không thể cùng lúc: 又…又… không dùng cho hai việc lần lượt, muốn nói lần lượt thì dùng 先…再…."
+   },
+   {
+    "q": "又…又… khác 一边…一边… ở điểm nào?",
+    "o": [
+     "Hai mẫu giống hệt nhau",
+     "又…又… nói đặc điểm/trạng thái cùng lúc, 一边…一边… nói hai việc làm cùng lúc",
+     "又…又… chỉ dùng với thời tiết",
+     "一边…一边… chỉ dùng với tính từ"
+    ],
+    "a": 1,
+    "why": "又高又帅 là đặc điểm; 一边唱歌一边跳舞 là hai việc làm cùng lúc."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "她会唱歌，又会跳舞",
+     "她又会唱歌，会跳舞",
+     "她会又唱歌，又跳舞",
+     "她又会唱歌，又会跳舞"
+    ],
+    "a": 3,
+    "why": "又会唱歌，又会跳舞: cả hai vế đều có 又."
+   },
+   {
+    "q": "“这个地方又安静，又干净” — hai đặc điểm này thế nào?",
+    "o": [
+     "Trái ngược nhau",
+     "Một tốt một xấu",
+     "Cùng chiều tốt: vừa yên tĩnh vừa sạch sẽ",
+     "Không liên quan đến nhau"
+    ],
+    "a": 2,
+    "why": "又…又… thường nối hai đặc điểm cùng chiều: yên tĩnh và sạch sẽ đều tốt."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-32",
+  "stage": 3,
+  "title": "首先…，然后… — trước hết…，rồi…",
+  "hook": "“首先把米洗干净，然后放在锅里煮。” — nấu ăn cũng phải có thứ tự: trước hết làm gì, rồi mới làm gì.",
+  "examples": [
+   "首先把米洗干净，然后放在锅里煮。(Shǒuxiān bǎ mǐ xǐ gānjìng, ránhòu fàng zài guō lǐ zhǔ.) — Trước hết vo gạo cho sạch, rồi cho vào nồi nấu.",
+   "首先你要买票，然后才能进去看电影。(Shǒuxiān nǐ yào mǎi piào, ránhòu cái néng jìnqu kàn diànyǐng.) — Trước hết bạn phải mua vé, rồi mới được vào xem phim.",
+   "做这道菜，首先把菜切好，然后再放油。(Zuò zhè dào cài, shǒuxiān bǎ cài qiē hǎo, ránhòu zài fàng yóu.) — Nấu món này, trước hết thái rau cho xong, rồi mới cho dầu vào.",
+   "首先我去银行取钱，然后去超市买东西。(Shǒuxiān wǒ qù yínháng qǔ qián, ránhòu qù chāoshì mǎi dōngxi.) — Trước hết tôi đi ngân hàng rút tiền, rồi đi siêu thị mua đồ."
+  ],
+  "speak": "首先把米洗干净，然后放在锅里煮。首先你要买票，然后才能进去看电影。做这道菜，首先把菜切好，然后再放油。首先我去银行取钱，然后去超市买东西。",
+  "rule": "首先…，然后… dùng để kể các việc làm theo thứ tự trước sau: 首先 nêu việc đầu tiên, 然后 nêu việc tiếp theo. Sau 然后 thường có thể thêm 再 hoặc 就. Mẫu này nhấn mạnh trình tự, khác với 一边…一边… là hai việc làm cùng lúc.",
+  "tip": "Người Việt hay quên 然后 mà kể liền hai việc: nhớ đặt 然后 trước việc thứ hai để người nghe thấy rõ thứ tự.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'首先…，然后…' dùng để nói điều gì?",
+    "o": [
+     "Hai việc làm cùng lúc",
+     "Hai việc trái ngược nhau",
+     "Các việc làm theo thứ tự trước sau",
+     "Một việc chưa chắc chắn"
+    ],
+    "a": 2,
+    "why": "首先…，然后… kể việc theo thứ tự: việc đầu tiên, rồi việc tiếp theo."
+   },
+   {
+    "q": "Câu nào dùng 首先…，然后… đúng?",
+    "o": [
+     "首先我吃饭，然后我睡觉",
+     "首先我吃饭然后我睡觉",
+     "我首先吃饭，我然后睡觉",
+     "首先吃饭，我然后睡觉"
+    ],
+    "a": 0,
+    "why": "首先…，然后…: 首先我吃饭，然后我睡觉, hai vế ngăn cách bằng dấu phẩy."
+   },
+   {
+    "q": "Điền vào chỗ trống: 首先把菜洗干净，___放在锅里炒。",
+    "o": [
+     "或者",
+     "因为",
+     "但是",
+     "然后"
+    ],
+    "a": 3,
+    "why": "Việc sau rửa rau là cho vào nồi xào, dùng 然后 để nối theo thứ tự."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "首先买票，然后进去看电影",
+     "首先然后我去学校",
+     "首先洗手，然后吃饭",
+     "首先我去银行，然后去超市"
+    ],
+    "a": 1,
+    "why": "首先然后我去学校 sai: 首先 và 然后 không đứng cạnh nhau, mỗi từ mở đầu một vế."
+   },
+   {
+    "q": "'首先你要买票，然后才能进去' nghĩa là gì?",
+    "o": [
+     "Bạn mua vé rồi thì khỏi vào",
+     "Bạn vào trước rồi mua vé sau",
+     "Trước hết bạn phải mua vé, rồi mới được vào",
+     "Bạn không cần mua vé cũng vào được"
+    ],
+    "a": 2,
+    "why": "首先买票 là việc đầu tiên, 然后才能进去 là việc tiếp theo."
+   },
+   {
+    "q": "Câu nào nói đúng thứ tự làm bánh?",
+    "o": [
+     "首先把面和好，然后放在锅里蒸",
+     "首先把面蒸好，然后把面和好",
+     "首先然后把面和好",
+     "把面和好首先，然后蒸"
+    ],
+    "a": 0,
+    "why": "Nhào bột trước rồi mới hấp: 首先把面和好，然后放在锅里蒸."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-33",
+  "stage": 3,
+  "title": "…，并且… — …，hơn nữa…",
+  "hook": "“她会唱歌，并且唱得很好听。” — biết hát đã hay, hơn nữa hát còn rất hay: 并且 nối thêm một thông tin tốt nữa.",
+  "examples": [
+   "她会唱歌，并且唱得很好听。(Tā huì chàng gē, bìngqiě chàng de hěn hǎotīng.) — Cô ấy biết hát, hơn nữa hát rất hay.",
+   "这件衣服很便宜，并且质量也很好。(Zhè jiàn yīfu hěn piányi, bìngqiě zhìliàng yě hěn hǎo.) — Cái áo này rất rẻ, hơn nữa chất lượng cũng rất tốt.",
+   "他每天早上跑步，并且坚持了三年。(Tā měitiān zǎoshang pǎobù, bìngqiě jiānchí le sān nián.) — Anh ấy sáng nào cũng chạy bộ, hơn nữa đã kiên trì được ba năm rồi.",
+   "这家饭馆的菜很好吃，并且服务也很热情。(Zhè jiā fànguǎn de cài hěn hǎochī, bìngqiě fúwù yě hěn rèqíng.) — Món ăn của quán này rất ngon, hơn nữa phục vụ cũng rất nhiệt tình."
+  ],
+  "speak": "她会唱歌，并且唱得很好听。这件衣服很便宜，并且质量也很好。他每天早上跑步，并且坚持了三年。这家饭馆的菜很好吃，并且服务也很热情。",
+  "rule": "并且 nối hai vế câu song song, vế sau bổ sung thêm thông tin cùng chiều với vế trước, thường là một ưu điểm hoặc sự thật nữa. 并且 mang sắc thái trang trọng hơn 而且, hay dùng trong văn viết. Vế sau thường có 也 hoặc 还.",
+  "tip": "Đừng dùng 并且 để nối hai việc trái ngược nhau: trái ngược thì dùng 但是, còn 并且 chỉ thêm thông tin cùng chiều.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'并且' dùng để làm gì?",
+    "o": [
+     "Nối hai vế trái ngược nhau",
+     "Nối vế sau bổ sung thêm thông tin cùng chiều",
+     "Nối nguyên nhân và kết quả",
+     "Nối câu hỏi và câu trả lời"
+    ],
+    "a": 1,
+    "why": "并且 nối vế sau bổ sung thêm một thông tin cùng chiều với vế trước."
+   },
+   {
+    "q": "Câu nào dùng 并且 đúng?",
+    "o": [
+     "他很累，并且不想睡觉",
+     "他很忙，并且不工作",
+     "今天下雨，并且我们去爬山",
+     "这件衣服很便宜，并且质量也很好"
+    ],
+    "a": 3,
+    "why": "Rẻ và chất lượng tốt là hai thông tin cùng chiều, dùng 并且 để nối."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她会唱歌，___唱得很好听。",
+    "o": [
+     "并且",
+     "但是",
+     "如果",
+     "因为"
+    ],
+    "a": 0,
+    "why": "Biết hát và hát hay là hai thông tin cùng chiều, dùng 并且."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他每天跑步，并且坚持了三年",
+     "这家饭馆菜好吃，并且服务也热情",
+     "他很穷，并且很有钱",
+     "她会唱歌，并且唱得很好听"
+    ],
+    "a": 2,
+    "why": "Nghèo và giàu là hai ý trái ngược, không thể nối bằng 并且."
+   },
+   {
+    "q": "'这件衣服很便宜，并且质量也很好' nghĩa là gì?",
+    "o": [
+     "Áo rẻ, hơn nữa chất lượng cũng rất tốt",
+     "Áo rẻ nhưng chất lượng kém",
+     "Áo đắt nhưng chất lượng tốt",
+     "Áo rẻ nên không ai mua"
+    ],
+    "a": 0,
+    "why": "并且 bổ sung thêm: áo rẻ, hơn nữa chất lượng cũng tốt."
+   },
+   {
+    "q": "并且 khác 而且 ở điểm nào?",
+    "o": [
+     "并且 chỉ dùng trong câu hỏi",
+     "并且 trang trọng hơn, hay dùng trong văn viết",
+     "并且 nối hai ý trái ngược",
+     "并且 không bao giờ đi với 也"
+    ],
+    "a": 1,
+    "why": "并且 và 而且 nghĩa gần nhau, nhưng 并且 trang trọng hơn, hay gặp trong văn viết."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-34",
+  "stage": 3,
+  "title": "不仅/不光…，还/而且… — không chỉ…，mà còn…",
+  "hook": "“他不仅会说汉语，还会说英语。” — biết một thứ tiếng đã giỏi, không chỉ thế, anh ấy còn biết thêm một thứ nữa.",
+  "examples": [
+   "他不仅会说汉语，还会说英语。(Tā bùjǐn huì shuō Hànyǔ, hái huì shuō Yīngyǔ.) — Anh ấy không chỉ nói được tiếng Trung, mà còn nói được tiếng Anh.",
+   "不光我喜欢这本书，我的同学们也都喜欢。(Bùguāng wǒ xǐhuan zhè běn shū, wǒ de tóngxuémen yě dōu xǐhuan.) — Không chỉ tôi thích quyển sách này, các bạn cùng lớp tôi cũng đều thích.",
+   "这次旅行不仅很便宜，而且玩得非常开心。(Zhè cì lǚxíng bùjǐn hěn piányi, érqiě wán de fēicháng kāixīn.) — Chuyến đi này không chỉ rất rẻ, mà còn chơi rất vui.",
+   "她不光长得漂亮，还特别能干。(Tā bùguāng zhǎng de piàoliang, hái tèbié nénggàn.) — Cô ấy không chỉ xinh đẹp, mà còn đặc biệt giỏi giang."
+  ],
+  "speak": "他不仅会说汉语，还会说英语。不光我喜欢这本书，我的同学们也都喜欢。这次旅行不仅很便宜，而且玩得非常开心。她不光长得漂亮，还特别能干。",
+  "rule": "不仅/不光 đặt ở vế đầu, 还/而且/也 đặt ở vế sau để nhấn mạnh thêm một điều nữa, thường là điều bất ngờ hơn hoặc quan trọng hơn. Nếu hai vế cùng một chủ ngữ thì 不仅 đứng sau chủ ngữ; nếu khác chủ ngữ thì 不仅 đứng trước chủ ngữ. 不光 khẩu ngữ hơn 不仅.",
+  "tip": "Đừng quên 还/而且 ở vế sau: chỉ nói 不仅… mà không có vế sau thì câu dở dang, người nghe chờ mãi không thấy phần 'mà còn'.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'他不仅会说汉语，还会说英语' nghĩa là gì?",
+    "o": [
+     "Anh ấy chỉ nói được tiếng Trung",
+     "Anh ấy không nói được tiếng Trung",
+     "Anh ấy không chỉ nói được tiếng Trung, mà còn nói được tiếng Anh",
+     "Anh ấy nói tiếng Anh giỏi hơn tiếng Trung"
+    ],
+    "a": 2,
+    "why": "不仅…，还…: không chỉ… mà còn…, anh ấy biết cả hai thứ tiếng."
+   },
+   {
+    "q": "Câu nào dùng 不仅…，还… đúng?",
+    "o": [
+     "他不仅会说汉语，还会说英语",
+     "他不仅会说汉语，而且不会说英语",
+     "不仅他会说汉语，还他会说英语",
+     "他会说汉语不仅，还会说英语"
+    ],
+    "a": 0,
+    "why": "Cùng chủ ngữ 他 thì 不仅 đứng sau chủ ngữ, vế sau dùng 还."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这次旅行不仅很便宜，___玩得非常开心。",
+    "o": [
+     "但是",
+     "而且",
+     "如果",
+     "因为"
+    ],
+    "a": 1,
+    "why": "Vế sau bổ sung thêm điều tốt nữa, dùng 而且."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "她不光长得漂亮，还特别能干",
+     "不光我喜欢这本书，我的同学们也都喜欢",
+     "他不仅会汉语，还会英语",
+     "他不仅会说汉语，会说英语"
+    ],
+    "a": 3,
+    "why": "Thiếu 还/而且 ở vế sau, câu chưa hoàn chỉnh: phải nói 还会说英语."
+   },
+   {
+    "q": "Khi hai vế khác chủ ngữ, 不仅 đứng ở đâu?",
+    "o": [
+     "Trước chủ ngữ của vế đầu",
+     "Sau chủ ngữ của vế đầu",
+     "Cuối vế đầu",
+     "Giữa hai vế"
+    ],
+    "a": 0,
+    "why": "Khác chủ ngữ thì 不仅 đứng trước chủ ngữ, như 不光我喜欢这本书，我的同学们也都喜欢."
+   },
+   {
+    "q": "不光 khác 不仅 ở điểm nào?",
+    "o": [
+     "不光 nghĩa là hoàn toàn không",
+     "不光 không đi được với 还",
+     "不光 khẩu ngữ hơn, 不仅 trang trọng hơn",
+     "不光 chỉ dùng trong câu phủ định"
+    ],
+    "a": 2,
+    "why": "不光 và 不仅 nghĩa như nhau, nhưng 不光 mang sắc thái khẩu ngữ hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-35",
+  "stage": 3,
+  "title": "不是…，就是… / …是…，就是/不过… — hoặc là…，hoặc là… / …là…，chỉ là…",
+  "hook": "“他不是在图书馆，就是在教室里学习。” — tìm anh ấy chỉ có hai chỗ: không ở thư viện thì cũng ở trong lớp.",
+  "examples": [
+   "他不是在图书馆，就是在教室里学习。(Tā bù shì zài túshūguǎn, jiù shì zài jiàoshì lǐ xuéxí.) — Anh ấy không ở thư viện thì cũng ở trong lớp học.",
+   "这道题不是你做错了，就是我看错了。(Zhè dào tí bù shì nǐ zuò cuò le, jiù shì wǒ kàn cuò le.) — Bài này không phải bạn làm sai thì là tôi nhìn nhầm.",
+   "这个西瓜是很大，就是不太甜。(Zhège xīguā shì hěn dà, jiù shì bù tài tián.) — Quả dưa này to thì to thật, chỉ là không ngọt lắm.",
+   "他这个人是很好，不过有时候爱开玩笑。(Tā zhège rén shì hěn hǎo, bùguò yǒu shíhou ài kāi wánxiào.) — Con người anh ấy tốt thì tốt thật, có điều thỉnh thoảng thích đùa."
+  ],
+  "speak": "他不是在图书馆，就是在教室里学习。这道题不是你做错了，就是我看错了。这个西瓜是很大，就是不太甜。他这个人是很好，不过有时候爱开玩笑。",
+  "rule": "不是…，就是… liệt kê hai khả năng, chỉ có một trong hai là đúng: không phải A thì là B. Còn …是…，就是/不过… thì thừa nhận vế trước là đúng, rồi thêm một hạn chế ở vế sau: 'đúng là… chỉ là…'. Hai mẫu nhìn giống nhau vì cùng có 就是, nhưng ý nghĩa khác hẳn.",
+  "tip": "Đừng nhầm hai mẫu: 不是…就是… là chọn một trong hai khả năng; …是…，就是… là khen trước rồi chê nhẹ sau.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "'他不是在图书馆，就是在教室里' nghĩa là gì?",
+    "o": [
+     "Anh ấy không ở đâu cả",
+     "Anh ấy ở cả thư viện và lớp học",
+     "Anh ấy không ở thư viện thì cũng ở trong lớp học",
+     "Anh ấy không thích thư viện"
+    ],
+    "a": 2,
+    "why": "不是…，就是…: chỉ có hai khả năng, không phải chỗ này thì là chỗ kia."
+   },
+   {
+    "q": "Câu nào dùng 不是…，就是… đúng?",
+    "o": [
+     "他不是在图书馆，就是不去教室",
+     "他不是在图书馆，就是很喜欢学习",
+     "他不是很高，就是很聪明",
+     "他不是在图书馆，就是在教室里学习"
+    ],
+    "a": 3,
+    "why": "Hai khả năng phải cùng loại: ở thư viện hoặc ở lớp học."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这道题不是你做错了，___我看错了。",
+    "o": [
+     "就是",
+     "但是",
+     "所以",
+     "如果"
+    ],
+    "a": 0,
+    "why": "不是…，就是… là cặp cố định: không phải bạn làm sai thì là tôi nhìn nhầm."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他不是在图书馆，就是在教室里",
+     "他不是在图书馆，就是在图书馆",
+     "他这个人是很好，不过爱开玩笑",
+     "这个西瓜是很大，就是不太甜"
+    ],
+    "a": 1,
+    "why": "不是…就是… liệt kê hai khả năng khác nhau, không thể lặp lại cùng một chỗ hai lần."
+   },
+   {
+    "q": "'这个西瓜是很大，就是不太甜' nghĩa là gì?",
+    "o": [
+     "Dưa vừa to vừa ngọt",
+     "Dưa không to cũng không ngọt",
+     "Dưa to thì to thật, chỉ là không ngọt lắm",
+     "Dưa nhỏ nhưng rất ngọt"
+    ],
+    "a": 2,
+    "why": "…是…，就是…: thừa nhận dưa to, rồi thêm hạn chế là không ngọt lắm."
+   },
+   {
+    "q": "'他这个人是很好，不过有时候爱开玩笑' — vế sau nói gì?",
+    "o": [
+     "Một hạn chế nhỏ: thỉnh thoảng thích đùa",
+     "Anh ấy không bao giờ đùa",
+     "Anh ấy không tốt",
+     "Anh ấy chỉ thích đùa"
+    ],
+    "a": 0,
+    "why": "不过 sau lời khen đưa ra một hạn chế nhỏ, không phủ nhận lời khen."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-36",
+  "stage": 3,
+  "title": "只有…，（才…）— chỉ khi…，mới…",
+  "hook": "“只有多练习，才说得流利。” — muốn nói trôi chảy thì chỉ có một đường: luyện nhiều.",
+  "examples": [
+   "只有多练习，才说得流利。(Zhǐyǒu duō liànxí, cái shuō de liúlì.) — Chỉ khi luyện tập nhiều, mới nói trôi chảy được.",
+   "只有你来了，我们才能开始开会。(Zhǐyǒu nǐ lái le, wǒmen cái néng kāishǐ kāihuì.) — Chỉ khi bạn đến rồi, chúng tôi mới bắt đầu họp được.",
+   "只有努力学习，才考得上好大学。(Zhǐyǒu nǔlì xuéxí, cái kǎo de shàng hǎo dàxué.) — Chỉ khi học hành chăm chỉ, mới thi đỗ được trường đại học tốt.",
+   "只有身体好，才有力气工作。(Zhǐyǒu shēntǐ hǎo, cái yǒu lìqi gōngzuò.) — Chỉ khi sức khỏe tốt, mới có sức mà làm việc."
+  ],
+  "speak": "只有多练习，才说得流利。只有你来了，我们才能开始开会。只有努力学习，才考得上好大学。只有身体好，才有力气工作。",
+  "rule": "只有…，才… nêu điều kiện duy nhất: chỉ khi có điều kiện ở vế đầu thì kết quả ở vế sau mới xảy ra. 才 thường đi với 能/会/可以 hoặc động từ chỉ kết quả. Khác với 只要…，就… là điều kiện đủ: chỉ cần có là đủ, còn 只有 là điều kiện cần, thiếu nó thì không được.",
+  "tip": "Người Việt hay nhầm 只有 với 只要: 只有 là 'chỉ khi… mới…', thiếu điều kiện thì không xong; 只要 là 'chỉ cần… thì…', có điều kiện là đủ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'只有多练习，才说得流利' nghĩa là gì?",
+    "o": [
+     "Luyện nhiều hay ít cũng nói trôi chảy",
+     "Chỉ khi luyện nhiều, mới nói trôi chảy được",
+     "Nói trôi chảy rồi mới cần luyện",
+     "Không cần luyện cũng nói trôi chảy"
+    ],
+    "a": 1,
+    "why": "只有…，才…: luyện nhiều là điều kiện cần để nói trôi chảy."
+   },
+   {
+    "q": "Câu nào dùng 只有…，才… đúng?",
+    "o": [
+     "只有多练习，才说得流利",
+     "只有多练习，就说得流利",
+     "只要多练习，才说得流利",
+     "多练习只有，才说得流利"
+    ],
+    "a": 0,
+    "why": "只有 đi với 才, không đi với 就; 只要 mới đi với 就."
+   },
+   {
+    "q": "Điền vào chỗ trống: 只有你来了，我们___开始开会。",
+    "o": [
+     "就",
+     "都",
+     "才",
+     "也"
+    ],
+    "a": 2,
+    "why": "只有…，才能…: chỉ khi bạn đến rồi, chúng tôi mới bắt đầu họp."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "只有努力学习，才考得上好大学",
+     "只有身体好，才有力气工作",
+     "只有多练习，才说得流利",
+     "只有你来了，我们就才能开始开会"
+    ],
+    "a": 3,
+    "why": "就 và 才 không đứng cùng nhau: chỉ dùng một trong hai, ở đây là 才."
+   },
+   {
+    "q": "只有 khác 只要 ở điểm nào?",
+    "o": [
+     "只有 là điều kiện cần, thiếu thì không được; 只要 là điều kiện đủ, có là xong",
+     "只有 là điều kiện đủ, 只要 là điều kiện cần",
+     "Hai từ hoàn toàn giống nhau",
+     "只有 dùng cho quá khứ, 只要 dùng cho tương lai"
+    ],
+    "a": 0,
+    "why": "只有 nêu điều kiện cần, 只要 nêu điều kiện đủ."
+   },
+   {
+    "q": "Câu nào nói đúng điều kiện duy nhất để vào thư viện?",
+    "o": [
+     "只要办了借书证，才进图书馆借书",
+     "只有办了借书证，才能进图书馆借书",
+     "只有办了借书证，就进图书馆借书",
+     "办了借书证只有，才能进图书馆"
+    ],
+    "a": 1,
+    "why": "只有…，才能…: chỉ khi làm thẻ mượn sách rồi mới vào mượn được."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-37",
+  "stage": 3,
+  "title": "（由于）…，所以/因此… — （vì）…，nên…",
+  "hook": "“由于下雨了，所以我们今天不去爬山了。” — trời mưa là nguyên nhân, không đi leo núi là kết quả: có vì thì có nên.",
+  "examples": [
+   "由于下雨了，所以我们今天不去爬山了。(Yóuyú xià yǔ le, suǒyǐ wǒmen jīntiān bù qù páshān le.) — Vì trời mưa nên hôm nay chúng tôi không đi leo núi nữa.",
+   "他生病了，因此没有来上课。(Tā shēng bìng le, yīncǐ méiyǒu lái shàngkè.) — Anh ấy bị ốm nên không đến lớp.",
+   "由于工作太忙，所以他很少回家吃饭。(Yóuyú gōngzuò tài máng, suǒyǐ tā hěn shǎo huí jiā chī fàn.) — Vì công việc quá bận nên anh ấy hiếm khi về nhà ăn cơm.",
+   "天气很冷，因此大家都穿上了厚衣服。(Tiānqì hěn lěng, yīncǐ dàjiā dōu chuān shang le hòu yīfu.) — Trời rất lạnh nên mọi người đều mặc áo dày."
+  ],
+  "speak": "由于下雨了，所以我们今天不去爬山了。他生病了，因此没有来上课。由于工作太忙，所以他很少回家吃饭。天气很冷，因此大家都穿上了厚衣服。",
+  "rule": "由于 nêu nguyên nhân ở vế đầu, 所以/因此 nêu kết quả ở vế sau. 由于 mang sắc thái trang trọng, hay dùng trong văn viết; trong khẩu ngữ thường lược 由于, chỉ nói vế nguyên nhân rồi 所以…. 所以 và 因此 nghĩa như nhau, 因此 trang trọng hơn một chút.",
+  "tip": "Đừng dùng cả 因为 và 所以 trong một câu: 因为…，所以… là lỗi lặp, chỉ chọn một cặp: hoặc 因为…, hoặc …，所以….",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'由于下雨了，所以我们不去爬山了' nghĩa là gì?",
+    "o": [
+     "Trời mưa nên chúng tôi vẫn đi leo núi",
+     "Vì trời mưa nên hôm nay chúng tôi không đi leo núi nữa",
+     "Chúng tôi đi leo núi nên trời mưa",
+     "Trời không mưa nên chúng tôi đi leo núi"
+    ],
+    "a": 1,
+    "why": "由于 nêu nguyên nhân trời mưa, 所以 nêu kết quả không đi leo núi."
+   },
+   {
+    "q": "Câu nào dùng （由于）…，所以… đúng?",
+    "o": [
+     "由于下雨了，所以我们不去爬山了",
+     "由于下雨了，因为我们不去爬山了",
+     "因为下雨了，所以我们不去爬山了",
+     "下雨了由于，所以我们不去爬山了"
+    ],
+    "a": 0,
+    "why": "由于…，所以… là cặp đúng; 因为 và 所以 không dùng chung một câu."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他生病了，___没有来上课。",
+    "o": [
+     "虽然",
+     "但是",
+     "如果",
+     "因此"
+    ],
+    "a": 3,
+    "why": "Bị ốm là nguyên nhân, không đến lớp là kết quả, dùng 因此."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "由于工作太忙，所以他很少回家吃饭",
+     "天气很冷，因此大家都穿上了厚衣服",
+     "因为他生病了，所以没有来上课",
+     "他生病了，因此没有来上课"
+    ],
+    "a": 2,
+    "why": "因为 và 所以 không dùng chung trong một câu: chỉ nói 他生病了，所以没有来上课."
+   },
+   {
+    "q": "由于 khác 因为 ở điểm nào?",
+    "o": [
+     "由于 trang trọng hơn, hay dùng trong văn viết; 因为 thông dụng hơn",
+     "由于 chỉ dùng trong câu hỏi",
+     "由于 nêu kết quả, 因为 nêu nguyên nhân",
+     "由于 không đi được với 所以"
+    ],
+    "a": 0,
+    "why": "由于 và 因为 đều nêu nguyên nhân, nhưng 由于 trang trọng hơn, hay gặp trong văn viết."
+   },
+   {
+    "q": "Câu nào chỉ có kết quả mà không cần 由于?",
+    "o": [
+     "由于他生病了，因此没有来上课",
+     "他生病了，因此没有来上课",
+     "因为他生病了，因此没有来上课",
+     "他生病了，但是没有来上课"
+    ],
+    "a": 1,
+    "why": "由于 có thể lược: chỉ nói nguyên nhân 他生病了 rồi 因此 nêu kết quả."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-38",
+  "stage": 3,
+  "title": "为了… — để… / vì…",
+  "hook": "“为了学好汉语，他每天早上六点就起床。” — dậy từ sáu giờ sáng, tất cả chỉ để học giỏi tiếng Trung.",
+  "examples": [
+   "为了学好汉语，他每天早上六点就起床。(Wèile xué hǎo Hànyǔ, tā měitiān zǎoshang liù diǎn jiù qǐchuáng.) — Để học giỏi tiếng Trung, sáng nào anh ấy cũng dậy từ sáu giờ.",
+   "妈妈为了孩子，早上五点就去市场买菜。(Māma wèile háizi, zǎoshang wǔ diǎn jiù qù shìchǎng mǎi cài.) — Mẹ vì con mà năm giờ sáng đã đi chợ mua rau.",
+   "为了身体健康，你应该多运动，少吃油腻的东西。(Wèile shēntǐ jiànkāng, nǐ yīnggāi duō yùndòng, shǎo chī yóunì de dōngxi.) — Để khỏe mạnh, bạn nên vận động nhiều và ăn ít đồ dầu mỡ.",
+   "我们努力工作，都是为了过上更好的生活。(Wǒmen nǔlì gōngzuò, dōu shì wèile guò shang gèng hǎo de shēnghuó.) — Chúng tôi cố gắng làm việc, tất cả là để có cuộc sống tốt đẹp hơn."
+  ],
+  "speak": "为了学好汉语，他每天早上六点就起床。妈妈为了孩子，早上五点就去市场买菜。为了身体健康，你应该多运动，少吃油腻的东西。我们努力工作，都是为了过上更好的生活。",
+  "rule": "为了 + mục đích đứng đầu câu hoặc trước động từ, nêu lý do làm việc gì: 为了 + động từ/danh từ chỉ mục đích. 为了学好汉语 là nêu mục đích học giỏi, còn 为了孩子 là nêu đối tượng được hưởng lợi. Sau 为了 không dùng 了 chỉ hoàn thành.",
+  "tip": "Đừng nhầm 为了 với 因为: 为了 nói mục đích ở tương lai ('để…'), 因为 nói nguyên nhân đã xảy ra ('vì…').",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'为了学好汉语，他每天六点就起床' nghĩa là gì?",
+    "o": [
+     "Anh ấy dậy sớm vì đã học giỏi tiếng Trung",
+     "Để học giỏi tiếng Trung, sáng nào anh ấy cũng dậy từ sáu giờ",
+     "Anh ấy dậy sớm nên không học tiếng Trung",
+     "Anh ấy học tiếng Trung vì dậy sớm"
+    ],
+    "a": 1,
+    "why": "为了学好汉语 nêu mục đích: dậy sớm để học giỏi tiếng Trung."
+   },
+   {
+    "q": "Câu nào dùng 为了 đúng?",
+    "o": [
+     "学好汉语为了，他每天起床",
+     "他为了学好汉语了，每天起床",
+     "为了他学好汉语，每天六点起床就",
+     "为了学好汉语，他每天早上六点就起床"
+    ],
+    "a": 3,
+    "why": "为了 + mục đích đứng đầu câu, sau đó là hành động."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___身体健康，你应该多运动。",
+    "o": [
+     "为了",
+     "因为",
+     "但是",
+     "如果"
+    ],
+    "a": 0,
+    "why": "Nêu mục đích khỏe mạnh thì dùng 为了, không phải 因为."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "为了学好汉语，他每天起床很早",
+     "妈妈为了孩子，早上五点就去市场",
+     "为了他昨天生病了，所以没来上课",
+     "我们努力工作，都是为了过上更好的生活"
+    ],
+    "a": 2,
+    "why": "Bị ốm là nguyên nhân đã xảy ra, phải dùng 因为, không dùng 为了."
+   },
+   {
+    "q": "为了 khác 因为 ở điểm nào?",
+    "o": [
+     "为了 nói nguyên nhân, 因为 nói mục đích",
+     "为了 nói mục đích ở tương lai, 因为 nói nguyên nhân đã xảy ra",
+     "Hai từ hoàn toàn giống nhau",
+     "为了 chỉ dùng với danh từ, 因为 chỉ dùng với động từ"
+    ],
+    "a": 1,
+    "why": "为了 = để (mục đích), 因为 = vì (nguyên nhân)."
+   },
+   {
+    "q": "'妈妈为了孩子，早上五点就去市场' — 为了孩子 ở đây nêu gì?",
+    "o": [
+     "Đối tượng mẹ lo cho: vì con",
+     "Nguyên nhân mẹ bị ốm",
+     "Thời gian mẹ đi chợ",
+     "Nơi mẹ đi chợ"
+    ],
+    "a": 0,
+    "why": "为了 + danh từ chỉ người được hưởng lợi: mẹ đi chợ vì con."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-39",
+  "stage": 3,
+  "title": "…了…（就）… — …rồi…（thì）…",
+  "hook": "“我吃完饭就去学校。” — ăn xong là đi ngay, không chần chừ một phút nào.",
+  "examples": [
+   "我吃完饭就去学校。(Wǒ chī wán fàn jiù qù xuéxiào.) — Tôi ăn cơm xong thì đi học ngay.",
+   "他一到家就打开电脑开始工作。(Tā yī dào jiā jiù dǎkāi diànnǎo kāishǐ gōngzuò.) — Anh ấy vừa về đến nhà thì mở máy tính làm việc ngay.",
+   "下了课我们就去打篮球。(Xià le kè wǒmen jiù qù dǎ lánqiú.) — Tan học là chúng tôi đi chơi bóng rổ ngay.",
+   "妈妈做好饭了，我们就一起吃饭。(Māma zuò hǎo fàn le, wǒmen jiù yìqǐ chī fàn.) — Mẹ nấu cơm xong rồi, chúng tôi cùng nhau ăn cơm."
+  ],
+  "speak": "我吃完饭就去学校。他一到家就打开电脑开始工作。下了课我们就去打篮球。妈妈做好饭了，我们就一起吃饭。",
+  "rule": "V了…（就）…: việc trước xong thì làm ngay việc sau, hai việc nối nhau rất sát, không có khoảng chờ. 就 nhấn mạnh sự nối tiếp ngay lập tức và có thể lược. Mẫu này khác 一…就… ở chỗ 一…就… nhấn mạnh 'vừa… thì đã…', còn …了…就… chỉ kể việc trước xong rồi làm việc sau.",
+  "tip": "Nhớ đặt 了 sau động từ của việc trước (吃完饭了/下了课), đừng đặt 了 ở cuối cả câu khi việc sau chưa xảy ra.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'我吃完饭就去学校' nghĩa là gì?",
+    "o": [
+     "Tôi ăn cơm xong thì đi học ngay",
+     "Tôi đi học rồi mới ăn cơm",
+     "Tôi ăn cơm trong lúc đi học",
+     "Tôi không ăn cơm mà đi học"
+    ],
+    "a": 0,
+    "why": "吃完饭了…就…: ăn xong thì làm ngay việc sau là đi học."
+   },
+   {
+    "q": "Câu nào dùng …了…就… đúng?",
+    "o": [
+     "我就吃完饭去学校",
+     "我吃饭就吃完去学校",
+     "我吃完饭就去学校",
+     "我吃完就饭去学校"
+    ],
+    "a": 2,
+    "why": "吃完饭 là việc trước đã xong, 就去学校 là việc làm ngay sau đó."
+   },
+   {
+    "q": "Điền vào chỗ trống: 下了课我们___去打篮球。",
+    "o": [
+     "才",
+     "就",
+     "都",
+     "也"
+    ],
+    "a": 1,
+    "why": "Tan học thì đi chơi bóng ngay, dùng 就 để nối hai việc sát nhau."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我吃完饭就去学校",
+     "他一到家就打开电脑",
+     "下了课我们就去打篮球",
+     "我去学校了就吃完饭"
+    ],
+    "a": 3,
+    "why": "Thứ tự ngược: phải ăn xong rồi mới đi học, không thể đi học rồi mới ăn xong."
+   },
+   {
+    "q": "就 trong mẫu này nhấn mạnh điều gì?",
+    "o": [
+     "Việc sau làm ngay lập tức, không chờ đợi",
+     "Việc sau làm rất chậm",
+     "Việc sau không bao giờ xảy ra",
+     "Việc sau làm trước việc trước"
+    ],
+    "a": 0,
+    "why": "就 nhấn mạnh hai việc nối nhau rất sát, việc sau làm ngay."
+   },
+   {
+    "q": "Câu nào nói đúng trình tự 'nấu xong rồi ăn'?",
+    "o": [
+     "妈妈就做好饭了，我们一起吃饭",
+     "我们一起吃饭了，妈妈就做好饭",
+     "妈妈做好饭了，我们就一起吃饭",
+     "做好饭妈妈了，我们就一起吃饭"
+    ],
+    "a": 2,
+    "why": "做好饭了 là việc trước xong, 就一起吃饭 là việc sau làm ngay."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-40",
+  "stage": 3,
+  "title": "概数表示法2 — cách nói số xấp xỉ (phần 2)",
+  "hook": "“他今年三十来岁，看起来很年轻。” — ba mươi mấy tuổi, không nói chính xác: tiếng Trung có nhiều cách nói số “khoảng chừng”.",
+  "examples": [
+   "他今年三十来岁，看起来很年轻。(Tā jīnnián sānshí lái suì, kàn qǐlai hěn niánqīng.) — Anh ấy năm nay ba mươi mấy tuổi, trông rất trẻ.",
+   "教室里有二十多个学生。(Jiàoshì lǐ yǒu èrshí duō ge xuésheng.) — Trong lớp có hơn hai mươi học sinh.",
+   "我们走了三四个小时，才到了山顶。(Wǒmen zǒu le sān sì ge xiǎoshí, cái dào le shāndǐng.) — Chúng tôi đi ba bốn tiếng đồng hồ mới tới đỉnh núi.",
+   "他买了好几本书，都放在书架上。(Tā mǎi le hǎojǐ běn shū, dōu fàng zài shūjià shang.) — Anh ấy mua mấy quyển sách, đều để trên giá sách."
+  ],
+  "speak": "他今年三十来岁，看起来很年轻。教室里有二十多个学生。我们走了三四个小时，才到了山顶。他买了好几本书，都放在书架上。",
+  "rule": "Số xấp xỉ có bốn cách thường dùng: số nhỏ + số lớn hơn một (三四 = ba bốn), số tròn chục/trăm + 来 (三十来 = ba mươi mấy), số + 多 (二十多 = hơn hai mươi), 好几 + lượng từ (好几本 = mấy quyển). 来 và 多 đều đứng sau số, nhưng 来 đi với số tròn chục, còn 多 đi với số bất kỳ và mang ý 'hơn'.",
+  "tip": "Đừng nói số xấp xỉ như số chính xác: 三四个小时 là khoảng ba đến bốn tiếng, không phải đúng ba tiếng rưỡi.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'三十来岁' nghĩa là gì?",
+    "o": [
+     "Đúng ba mươi tuổi",
+     "Ba mươi mấy tuổi",
+     "Chưa đến ba mươi tuổi",
+     "Hơn bốn mươi tuổi"
+    ],
+    "a": 1,
+    "why": "三十来 = ba mươi mấy, số xấp xỉ với 来 sau số tròn chục."
+   },
+   {
+    "q": "Câu nào nói số xấp xỉ đúng?",
+    "o": [
+     "教室里有二十多个学生",
+     "教室里有二十个多学生",
+     "教室里有多二十个学生",
+     "教室里有二十多学生个"
+    ],
+    "a": 0,
+    "why": "二十多个: số + 多 + lượng từ 个 + danh từ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我们走了___小时，才到了山顶。",
+    "o": [
+     "四三",
+     "三四",
+     "三四个",
+     "三个四"
+    ],
+    "a": 2,
+    "why": "三四个小时: hai số liền nhau + lượng từ, nghĩa là ba bốn tiếng."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他今年三十来岁",
+     "教室里有二十多个学生",
+     "他买了好几本书",
+     "他今年三十多来岁"
+    ],
+    "a": 3,
+    "why": "来 và 多 không dùng chung: chỉ nói 三十来岁 hoặc 三十多岁."
+   },
+   {
+    "q": "'好几本书' nghĩa là gì?",
+    "o": [
+     "Đúng ba quyển sách",
+     "Mấy quyển sách, số lượng không xác định nhưng khá nhiều",
+     "Rất ít sách",
+     "Sách rất hay"
+    ],
+    "a": 1,
+    "why": "好几 + lượng từ: mấy cái, số lượng không chính xác nhưng không ít."
+   },
+   {
+    "q": "二十多 và 三十来 khác nhau ở điểm nào?",
+    "o": [
+     "二十多 là hơn hai mươi, 三十来 là ba mươi mấy; hai cách nói khác nhau nhưng đều là số xấp xỉ",
+     "二十多 là đúng hai mươi, 三十来 là đúng ba mươi",
+     "二十多 dùng cho tuổi, 三十来 dùng cho tiền",
+     "Hai cách nói hoàn toàn giống nhau"
+    ],
+    "a": 0,
+    "why": "多 mang ý hơn, 来 mang ý khoảng chừng; cả hai đều nói số xấp xỉ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-41",
+  "stage": 3,
+  "title": "用'一点儿也不'表示强调 — dùng '一点儿也不' để nhấn mạnh",
+  "hook": "“他一点儿也不累，还想再跑一圈。” — chạy xong mà không mệt chút nào: 一点儿也不 là cách nói “hoàn toàn không” mạnh nhất.",
+  "examples": [
+   "他一点儿也不累，还想再跑一圈。(Tā yī diǎnr yě bù lèi, hái xiǎng zài pǎo yī quān.) — Anh ấy không mệt chút nào, còn muốn chạy thêm một vòng nữa.",
+   "这件衣服一点儿也不贵，才五十块钱。(Zhè jiàn yīfu yī diǎnr yě bù guì, cái wǔshí kuài qián.) — Cái áo này không đắt chút nào, chỉ có năm mươi đồng.",
+   "我一点儿也不怕冷，冬天只穿一件毛衣。(Wǒ yī diǎnr yě bù pà lěng, dōngtiān zhǐ chuān yī jiàn máoyī.) — Tôi không sợ lạnh chút nào, mùa đông chỉ mặc một chiếc áo len.",
+   "今天一点儿也不热，出去走走吧。(Jīntiān yī diǎnr yě bù rè, chūqu zǒuzou ba.) — Hôm nay không nóng chút nào, ra ngoài đi dạo đi."
+  ],
+  "speak": "他一点儿也不累，还想再跑一圈。这件衣服一点儿也不贵，才五十块钱。我一点儿也不怕冷，冬天只穿一件毛衣。今天一点儿也不热，出去走走吧。",
+  "rule": "一点儿也不 + tính từ/động từ = hoàn toàn không… chút nào, là cách phủ định nhấn mạnh mạnh nhất. Cấu trúc bắt buộc có 不 hoặc 没 sau 也: 一点儿也不 + 不/没 + tính từ/động từ. Không dùng mẫu này trong câu khẳng định.",
+  "tip": "Đừng bỏ 不/没: nói 一点儿也累 là sai, phải nói 一点儿也不累 mới đúng.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'他一点儿也不累' nghĩa là gì?",
+    "o": [
+     "Anh ấy hơi mệt",
+     "Anh ấy rất mệt",
+     "Anh ấy không mệt chút nào",
+     "Anh ấy mệt một chút"
+    ],
+    "a": 2,
+    "why": "一点儿也不累: hoàn toàn không mệt chút nào, phủ định nhấn mạnh."
+   },
+   {
+    "q": "Câu nào dùng 一点儿也不 đúng?",
+    "o": [
+     "这件衣服一点儿也不贵",
+     "这件衣服一点儿也贵",
+     "这件衣服一点儿不也贵",
+     "这件衣服一点儿贵也不"
+    ],
+    "a": 0,
+    "why": "Cấu trúc cố định: 一点儿也不 + tính từ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我一点儿___怕冷，冬天只穿一件毛衣。",
+    "o": [
+     "都",
+     "也",
+     "就",
+     "还"
+    ],
+    "a": 1,
+    "why": "一点儿也不怕冷: 一点儿 + 也 + 不 + tính từ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他一点儿也不累",
+     "今天一点儿也不热",
+     "我一点儿也不怕冷",
+     "他一点儿也很高兴"
+    ],
+    "a": 3,
+    "why": "一点儿也不 chỉ dùng trong câu phủ định, không dùng với 高兴 trong câu khẳng định."
+   },
+   {
+    "q": "一点儿也不 khác 不太 ở điểm nào?",
+    "o": [
+     "一点儿也不 phủ định hoàn toàn, mạnh hơn; 不太 chỉ là không… lắm",
+     "Hai cách nói hoàn toàn giống nhau",
+     "一点儿也不 dùng cho quá khứ, 不太 dùng cho hiện tại",
+     "一点儿也不 là câu hỏi, 不太 là câu kể"
+    ],
+    "a": 0,
+    "why": "一点儿也不 = hoàn toàn không… chút nào, mạnh hơn 不太 = không… lắm."
+   },
+   {
+    "q": "Câu nào nhấn mạnh phủ định mạnh nhất?",
+    "o": [
+     "他不累",
+     "他一点儿也不累",
+     "他不太累",
+     "他没有累"
+    ],
+    "a": 1,
+    "why": "一点儿也不累 là cách phủ định nhấn mạnh mạnh nhất trong bốn câu."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-42",
+  "stage": 3,
+  "title": "反问句 + 用'是'强调 — câu hỏi tu từ + nhấn mạnh bằng '是'",
+  "hook": "“这么简单的题，难道你不会做吗？” — hỏi mà không cần trả lời: câu hỏi tu từ là cách khẳng định mạnh nhất.",
+  "examples": [
+   "这么简单的题，难道你不会做吗？(Zhème jiǎndān de tí, nándào nǐ bù huì zuò ma?) — Bài đơn giản thế này, chẳng lẽ bạn không làm được sao?",
+   "他是你最好的朋友，你怎么能不相信他呢？(Tā shì nǐ zuì hǎo de péngyou, nǐ zěnme néng bù xiāngxìn tā ne?) — Anh ấy là bạn thân nhất của bạn, sao bạn lại không tin anh ấy chứ?",
+   "这本书是我昨天在书店买的。(Zhè běn shū shì wǒ zuótiān zài shūdiàn mǎi de.) — Quyển sách này là tôi mua ở hiệu sách hôm qua.",
+   "我是在学校认识他的。(Wǒ shì zài xuéxiào rènshi tā de.) — Tôi quen anh ấy ở trường."
+  ],
+  "speak": "这么简单的题，难道你不会做吗？他是你最好的朋友，你怎么能不相信他呢？这本书是我昨天在书店买的。我是在学校认识他的。",
+  "rule": "反问句 dùng hình thức câu hỏi để khẳng định ý ngược lại, thường có 难道…吗 hoặc 怎么能…呢, giọng điệu mạnh và mang cảm xúc. Còn 是…的 nhấn mạnh thông tin về thời gian, nơi chốn hoặc cách thức: 是 + thành phần được nhấn mạnh + 动词 + 的. Cả hai đều là cách nhấn mạnh, một bằng câu hỏi tu từ, một bằng 是.",
+  "tip": "Đừng trả lời câu hỏi tu từ như câu hỏi thật: '难道你不会做吗？' không cần bạn đáp '会' hay '不会', nó có ý là 'bạn làm được mà'.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'这么简单的题，难道你不会做吗？' nghĩa thật là gì?",
+    "o": [
+     "Hỏi xem bạn có làm được không",
+     "Khẳng định rằng bạn làm được bài này",
+     "Hỏi xem bài này có khó không",
+     "Nói rằng bài này rất khó"
+    ],
+    "a": 1,
+    "why": "Câu hỏi tu từ 难道…吗 dùng hình thức hỏi để khẳng định: bạn làm được mà."
+   },
+   {
+    "q": "Câu nào là câu hỏi tu từ?",
+    "o": [
+     "这么简单的题，难道你不会做吗",
+     "这道题你会做吗",
+     "这道题很难吗",
+     "你会做这道题还是不会"
+    ],
+    "a": 0,
+    "why": "难道…吗 là dấu hiệu của câu hỏi tu từ, không cần câu trả lời thật."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这本书是___昨天在书店买的。",
+    "o": [
+     "呢",
+     "吗",
+     "我",
+     "吧"
+    ],
+    "a": 2,
+    "why": "是…的 nhấn mạnh ai mua: 是我昨天在书店买的."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这么简单的题，难道你不会做吗",
+     "他是你最好的朋友，你怎么能不相信他呢",
+     "我是在学校认识他的",
+     "这本书是我昨天在书店买的吗"
+    ],
+    "a": 3,
+    "why": "是…的 là câu nhấn mạnh, không thêm 吗 thành câu hỏi."
+   },
+   {
+    "q": "'我是在学校认识他的' nhấn mạnh điều gì?",
+    "o": [
+     "Nhấn mạnh nơi quen nhau: ở trường",
+     "Nhấn mạnh người được quen",
+     "Nhấn mạnh thời gian quen nhau",
+     "Hỏi xem có quen anh ấy không"
+    ],
+    "a": 0,
+    "why": "是…的 ở đây nhấn mạnh nơi chốn: 是在学校认识他的."
+   },
+   {
+    "q": "怎么能…呢 trong câu hỏi tu từ có tác dụng gì?",
+    "o": [
+     "Hỏi cách làm một việc",
+     "Khẳng định mạnh ý ngược lại, mang cảm xúc ngạc nhiên hoặc trách móc",
+     "Hỏi xem ai có thể làm việc đó",
+     "Đề nghị ai đó làm một việc"
+    ],
+    "a": 1,
+    "why": "怎么能不相信他呢: sao lại không tin chứ, khẳng định rằng nên tin."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-43",
+  "stage": 3,
+  "title": "用疑问语调表示疑问 — hỏi bằng giọng lên cuối câu (không cần 吗)",
+  "hook": "“你去学校？” — không có 吗, không có từ hỏi, chỉ cần giọng lên cao ở cuối câu là đã thành câu hỏi.",
+  "examples": [
+   "你去学校？(Nǐ qù xuéxiào?) — Bạn đi học à?",
+   "他今天不来？(Tā jīntiān bù lái?) — Hôm nay anh ấy không đến à?",
+   "你喜欢这件衣服？(Nǐ xǐhuan zhè jiàn yīfu?) — Bạn thích cái áo này à?",
+   "明天我们去爬山？(Míngtiān wǒmen qù páshān?) — Ngày mai chúng ta đi leo núi à?"
+  ],
+  "speak": "你去学校？他今天不来？你喜欢这件衣服？明天我们去爬山？",
+  "rule": "Câu trần thuật + ngữ điệu lên cao ở cuối câu thành câu hỏi xác nhận, không cần thêm 吗. Cách hỏi này thường dùng khi người nói ngạc nhiên, nghi ngờ hoặc muốn xác nhận lại điều vừa nghe. Trong văn viết, dấu chấm hỏi ? thể hiện ngữ điệu lên cao đó.",
+  "tip": "Đừng thêm 吗 vào câu đã lên giọng: nói 你去学校吗？ thì dùng 吗, nói 你去学校？ thì dùng ngữ điệu, đừng dùng cả hai.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'你去学校？' nghĩa là gì?",
+    "o": [
+     "Bạn đi học à?",
+     "Bạn không đi học",
+     "Bạn đã đi học rồi",
+     "Bạn đừng đi học"
+    ],
+    "a": 0,
+    "why": "Câu trần thuật + ngữ điệu lên cao = câu hỏi xác nhận: bạn đi học à?"
+   },
+   {
+    "q": "Câu nào dùng ngữ điệu hỏi đúng?",
+    "o": [
+     "你去学校。",
+     "你去学校吗？吗",
+     "你去学校？",
+     "你去学校！"
+    ],
+    "a": 2,
+    "why": "你去学校？ dùng dấu hỏi và ngữ điệu lên cao, không cần 吗."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他今天不来___",
+    "o": [
+     "。",
+     "？",
+     "！",
+     "、"
+    ],
+    "a": 1,
+    "why": "Muốn hỏi xác nhận thì dùng dấu hỏi: 他今天不来？"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你去学校？",
+     "他今天不来？",
+     "你喜欢这件衣服？",
+     "你去学校吗？"
+    ],
+    "a": 3,
+    "why": "你去学校吗？ là câu hỏi có 吗, không phải câu hỏi bằng ngữ điệu, nên không thuộc mẫu này."
+   },
+   {
+    "q": "Câu hỏi bằng ngữ điệu thường dùng khi nào?",
+    "o": [
+     "Khi ngạc nhiên hoặc muốn xác nhận lại điều vừa nghe",
+     "Khi đã biết chắc câu trả lời",
+     "Khi viết văn bản chính thức",
+     "Khi không muốn ai trả lời"
+    ],
+    "a": 0,
+    "why": "Ngữ điệu hỏi dùng khi ngạc nhiên hoặc xác nhận lại, mang sắc thái khẩu ngữ."
+   },
+   {
+    "q": "'明天我们去爬山？' khác '明天我们去爬山吗？' ở điểm nào?",
+    "o": [
+     "Hai câu hoàn toàn giống nhau",
+     "Câu đầu dùng ngữ điệu, câu sau dùng 吗; ý nghĩa gần nhau nhưng câu đầu mang sắc thái ngạc nhiên hơn",
+     "Câu đầu là câu kể, câu sau là câu hỏi",
+     "Câu đầu hỏi quá khứ, câu sau hỏi tương lai"
+    ],
+    "a": 1,
+    "why": "Cả hai đều hỏi xác nhận, nhưng câu dùng ngữ điệu mang sắc thái ngạc nhiên, khẩu ngữ hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-44",
+  "stage": 3,
+  "title": "都…了 — đều… rồi",
+  "hook": "“都八点了，你怎么还没起床？” — đã tám giờ rồi mà còn chưa dậy: 都…了 là tiếng thở dài “đã đến mức này rồi”.",
+  "examples": [
+   "都八点了，你怎么还没起床？(Dōu bā diǎn le, nǐ zěnme hái méi qǐchuáng?) — Đã tám giờ rồi, sao bạn còn chưa dậy?",
+   "电影都开始了，我们快进去吧。(Diànyǐng dōu kāishǐ le, wǒmen kuài jìnqu ba.) — Phim đã bắt đầu rồi, chúng ta mau vào đi.",
+   "他都走了，你还站在这里等什么？(Tā dōu zǒu le, nǐ hái zhàn zài zhèlǐ děng shénme?) — Anh ấy đi rồi, bạn còn đứng đây chờ gì nữa?",
+   "饭都凉了，快吃吧。(Fàn dōu liáng le, kuài chī ba.) — Cơm đã nguội rồi, ăn mau đi."
+  ],
+  "speak": "都八点了，你怎么还没起床？电影都开始了，我们快进去吧。他都走了，你还站在这里等什么？饭都凉了，快吃吧。",
+  "rule": "都…了 nhấn mạnh sự việc đã đến mức đó rồi, thường là đã muộn hoặc đã xong, mang ý thúc giục, ngạc nhiên hoặc trách nhẹ. 都 đứng trước thời gian hoặc sự việc đã xảy ra, 了 đứng cuối câu. Mẫu này khác với 都 chỉ 'đều' ở chỗ 都 ở đây không phải là 'tất cả đều', mà là 'đã… rồi'.",
+  "tip": "Đừng dịch 都 ở đây là 'đều': 都八点了 không phải 'đều tám giờ', mà là 'đã tám giờ rồi'.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'都八点了，你怎么还没起床？' nghĩa là gì?",
+    "o": [
+     "Tám giờ là giờ dậy sớm",
+     "Mọi người đều dậy lúc tám giờ",
+     "Đã tám giờ rồi, sao bạn còn chưa dậy?",
+     "Bạn dậy lúc tám giờ mỗi ngày"
+    ],
+    "a": 2,
+    "why": "都…了 nhấn mạnh đã đến tám giờ rồi, mang ý thúc giục."
+   },
+   {
+    "q": "Câu nào dùng 都…了 đúng?",
+    "o": [
+     "电影都开始了，我们快进去吧",
+     "电影都开始，我们快进去吧",
+     "都电影开始了，我们快进去吧",
+     "电影开始了都，我们快进去吧"
+    ],
+    "a": 0,
+    "why": "都 đứng trước sự việc đã xảy ra, 了 cuối câu: 电影都开始了."
+   },
+   {
+    "q": "Điền vào chỗ trống: 饭___凉了，快吃吧。",
+    "o": [
+     "也",
+     "都",
+     "就",
+     "还"
+    ],
+    "a": 1,
+    "why": "饭都凉了: cơm đã nguội rồi, nhấn mạnh đã đến mức đó rồi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "都八点了，你怎么还没起床",
+     "电影都开始了，我们快进去吧",
+     "他都走了，你还等什么",
+     "我们都吃饭了，快去学校吧"
+    ],
+    "a": 3,
+    "why": "我们都吃饭了 chỉ là 'chúng tôi đều đã ăn cơm', 都 ở đây là 'đều', không phải mẫu nhấn mạnh 都…了."
+   },
+   {
+    "q": "都 trong 都八点了 có nghĩa là gì?",
+    "o": [
+     "Đều, tất cả",
+     "Cũng",
+     "Đã… rồi, nhấn mạnh thời gian đã đến mức đó",
+     "Chỉ"
+    ],
+    "a": 2,
+    "why": "都 ở đây không phải 'đều' mà nhấn mạnh: đã tám giờ rồi."
+   },
+   {
+    "q": "Câu nào mang ý thúc giục mạnh nhất?",
+    "o": [
+     "都八点了，你怎么还没起床",
+     "八点了，你起床吧",
+     "八点起床很好",
+     "你八点起床吗"
+    ],
+    "a": 0,
+    "why": "都八点了…怎么还没起床 vừa nhấn mạnh đã muộn, vừa trách nhẹ, ý thúc giục mạnh nhất."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-45",
+  "stage": 3,
+  "title": "×就×（点儿）吧 — ×就×（点儿）吧 (rủ nhẹ / giục nhẹ)",
+  "hook": "“天冷了，你就多穿点儿吧。” — trời lạnh rồi, cứ mặc thêm chút đi: 就…吧 là lời giục nhẹ đầy quan tâm.",
+  "examples": [
+   "你就坐这儿吧，别站着了。(Nǐ jiù zuò zhèr ba, bié zhàn zhe le.) — Bạn cứ ngồi đây đi, đừng đứng nữa.",
+   "天冷了，你就多穿点儿吧。(Tiān lěng le, nǐ jiù duō chuān diǎnr ba.) — Trời lạnh rồi, bạn cứ mặc thêm chút đi.",
+   "你就吃点儿吧，不吃会饿的。(Nǐ jiù chī diǎnr ba, bù chī huì è de.) — Bạn cứ ăn một chút đi, không ăn sẽ đói đấy.",
+   "别生气了，你就原谅他吧。(Bié shēngqì le, nǐ jiù yuánliàng tā ba.) — Đừng giận nữa, bạn cứ tha thứ cho anh ấy đi."
+  ],
+  "speak": "你就坐这儿吧，别站着了。天冷了，你就多穿点儿吧。你就吃点儿吧，不吃会饿的。别生气了，你就原谅他吧。",
+  "rule": "就 + động từ (+ 点儿) + 吧 dùng để đề nghị hoặc giục nhẹ ai đó làm một việc, mang ý 'cứ… đi', giọng thân mật và quan tâm. 点儿 làm mức độ nhẹ đi: 多穿点儿 là mặc thêm một chút, 吃点儿 là ăn một chút. Mẫu này khác với 就 trong 只有…才… vì ở đây 就 không nêu điều kiện mà nêu thái độ giục nhẹ.",
+  "tip": "Đừng dùng mẫu này để ra lệnh cho người lạ hoặc cấp trên: 就…吧 thân mật, chỉ hợp với người quen hoặc người nhỏ tuổi hơn.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "'你就坐这儿吧' nghĩa là gì?",
+    "o": [
+     "Bạn phải ngồi đây ngay lập tức",
+     "Bạn cứ ngồi đây đi",
+     "Bạn không được ngồi đây",
+     "Bạn ngồi đây hay đứng đó"
+    ],
+    "a": 1,
+    "why": "就…吧 là lời giục nhẹ thân mật: cứ ngồi đây đi."
+   },
+   {
+    "q": "Câu nào dùng ×就×（点儿）吧 đúng?",
+    "o": [
+     "天冷了，你就多穿点儿吧",
+     "天冷了，你多就穿点儿吧",
+     "天冷了，你就多穿点儿吗",
+     "天冷了，就你多穿点儿吧"
+    ],
+    "a": 0,
+    "why": "就 đứng trước động từ, 吧 cuối câu: 你就多穿点儿吧."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你就___点儿吧，不吃会饿的。",
+    "o": [
+     "饿",
+     "饭",
+     "吃",
+     "很"
+    ],
+    "a": 2,
+    "why": "你就吃点儿吧: cứ ăn một chút đi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你就坐这儿吧，别站着了",
+     "天冷了，你就多穿点儿吧",
+     "你就吃点儿吧，不吃会饿的",
+     "你就吧坐这儿，别站着了"
+    ],
+    "a": 3,
+    "why": "吧 đứng cuối câu, không đứng sau 就."
+   },
+   {
+    "q": "点儿 trong '多穿点儿' có tác dụng gì?",
+    "o": [
+     "Làm mức độ nhẹ đi: mặc thêm một chút",
+     "Hỏi xem mặc bao nhiêu",
+     "Ra lệnh phải mặc nhiều",
+     "Nói rằng không cần mặc"
+    ],
+    "a": 0,
+    "why": "点儿 làm nhẹ lời giục: chỉ cần mặc thêm một chút thôi."
+   },
+   {
+    "q": "就…吧 khác với mệnh lệnh '坐下！' ở điểm nào?",
+    "o": [
+     "就…吧 là mệnh lệnh mạnh hơn",
+     "就…吧 là lời giục nhẹ, thân mật; 坐下 là mệnh lệnh trực tiếp",
+     "Hai cách nói hoàn toàn giống nhau",
+     "就…吧 chỉ dùng trong văn viết"
+    ],
+    "a": 1,
+    "why": "就…吧 mang giọng quan tâm, giục nhẹ, không phải ra lệnh."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-46",
+  "stage": 3,
+  "title": "×什么（啊）— ×什么（啊）(hỏi lại / ngạc nhiên)",
+  "hook": "“怕什么啊，有我在呢。” — sợ cái gì chứ, có tôi ở đây rồi: 什么啊 là cách hỏi lại đầy ngạc nhiên.",
+  "examples": [
+   "怕什么啊，有我在呢。(Pà shénme a, yǒu wǒ zài ne.) — Sợ cái gì chứ, có tôi ở đây mà.",
+   "你哭什么啊，事情没有那么严重。(Nǐ kū shénme a, shìqing méiyǒu nàme yánzhòng.) — Bạn khóc cái gì chứ, chuyện không nghiêm trọng đến thế đâu.",
+   "急什么啊，时间还早呢。(Jí shénme a, shíjiān hái zǎo ne.) — Vội cái gì chứ, còn sớm mà.",
+   "笑什么啊，我说错了吗？(Xiào shénme a, wǒ shuō cuò le ma?) — Cười cái gì chứ, tôi nói sai à?"
+  ],
+  "speak": "怕什么啊，有我在呢。你哭什么啊，事情没有那么严重。急什么啊，时间还早呢。笑什么啊，我说错了吗？",
+  "rule": "Động từ/tính từ + 什么（啊） dùng để hỏi lại với ý ngạc nhiên, không đồng tình hoặc cho rằng không đáng làm như vậy: 怕什么啊 là 'sợ cái gì chứ', 哭什么啊 là 'khóc cái gì chứ'. Người nói không thật sự hỏi lý do mà muốn người nghe dừng việc đó lại. 啊 cuối câu làm giọng mềm đi, mang sắc thái khẩu ngữ.",
+  "tip": "Đừng dịch 什么啊 lúc nào cũng là 'cái gì': ở đây nó không hỏi thông tin mà hỏi lại với ý 'có gì đâu mà…'.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "'怕什么啊，有我在呢' nghĩa là gì?",
+    "o": [
+     "Hỏi xem bạn sợ cái gì",
+     "Sợ cái gì chứ, có tôi ở đây mà",
+     "Tôi cũng sợ như bạn",
+     "Bạn nên sợ nhiều hơn"
+    ],
+    "a": 1,
+    "why": "怕什么啊 không hỏi thật mà trấn an: sợ cái gì chứ, có tôi ở đây."
+   },
+   {
+    "q": "Câu nào dùng ×什么（啊） đúng?",
+    "o": [
+     "你什么哭啊，事情没有那么严重",
+     "你哭什么啊事情没有那么严重",
+     "你哭什么啊，事情没有那么严重",
+     "你哭啊什么，事情没有那么严重"
+    ],
+    "a": 2,
+    "why": "Động từ + 什么 + 啊: 哭什么啊, sau đó là câu giải thích."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___什么啊，时间还早呢。",
+    "o": [
+     "急",
+     "时间",
+     "早",
+     "还"
+    ],
+    "a": 0,
+    "why": "急什么啊: vội cái gì chứ, còn sớm mà."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "怕什么啊，有我在呢",
+     "你哭什么啊，事情没有那么严重",
+     "急什么啊，时间还早呢",
+     "你什么啊哭，事情没有那么严重"
+    ],
+    "a": 3,
+    "why": "Thứ tự sai: động từ đứng trước 什么, phải nói 你哭什么啊."
+   },
+   {
+    "q": "什么啊 trong mẫu này hỏi điều gì?",
+    "o": [
+     "Hỏi thông tin thật về lý do",
+     "Hỏi lại với ý ngạc nhiên, không đồng tình, cho rằng không đáng",
+     "Hỏi xem ai đang làm việc đó",
+     "Hỏi xem việc đó xảy ra khi nào"
+    ],
+    "a": 1,
+    "why": "什么啊 ở đây không hỏi thông tin mà hỏi lại: có gì đâu mà phải như vậy."
+   },
+   {
+    "q": "'笑什么啊，我说错了吗？' — người nói muốn gì?",
+    "o": [
+     "Muốn người kia ngừng cười và giải thích",
+     "Muốn biết mình nói sai chỗ nào",
+     "Muốn kể một câu chuyện cười",
+     "Muốn mọi người cùng cười"
+    ],
+    "a": 0,
+    "why": "笑什么啊 hỏi lại với ý ngạc nhiên: cười cái gì chứ, tôi nói sai à?"
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-01",
+  "stage": 4,
+  "title": "得 — phải, cần phải (động từ khuyết thiếu)",
+  "hook": "“我得走了，明天早上还得开会。” — phải đi rồi, sáng mai còn phải họp: 得 nói việc bắt buộc phải làm.",
+  "examples": [
+   "我得走了，明天早上还得开会。(Wǒ děi zǒu le, míngtiān zǎoshang hái děi kāi huì.) — Tôi phải đi rồi, sáng mai còn phải họp.",
+   "你得先把作业写完，才能去踢球。(Nǐ děi xiān bǎ zuòyè xiě wán, cái néng qù tī qiú.) — Bạn phải viết xong bài tập trước, rồi mới được đi đá bóng.",
+   "这件衣服太贵了，我得再想想。(Zhè jiàn yīfu tài guì le, wǒ děi zài xiǎng xiang.) — Cái áo này đắt quá, tôi phải nghĩ thêm đã.",
+   "他感冒了，得在家休息两天。(Tā gǎnmào le, děi zài jiā xiūxi liǎng tiān.) — Anh ấy bị cảm rồi, phải ở nhà nghỉ hai ngày."
+  ],
+  "speak": "我得走了，明天早上还得开会。你得先把作业写完，才能去踢球。这件衣服太贵了，我得再想想。他感冒了，得在家休息两天。",
+  "rule": "得 (děi) là động từ khuyết thiếu, nghĩa là “phải, cần phải”, đứng trước động từ chính: 得走, 得休息. Nó nói sự bắt buộc do hoàn cảnh, thời gian hay quy định, không phải mong muốn. Phủ định thường dùng 不用 hoặc 不必, ít dùng 不得; muốn nói “không cần” thì nói 不用.",
+  "tip": "Người Việt hay nhầm 得 (děi, phải) với 得 (de, bổ ngữ) và 得 (dé, được): chỉ khi đọc là děi và đứng trước động từ thì mới là “phải”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我得走了” nghĩa là gì?",
+    "o": [
+     "Tôi muốn đi",
+     "Tôi đang đi",
+     "Tôi phải đi rồi",
+     "Tôi được đi"
+    ],
+    "a": 2,
+    "why": "得 (děi) nghĩa là “phải”: tôi phải đi rồi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你___先把作业写完，才能去踢球。",
+    "o": [
+     "得",
+     "的",
+     "地",
+     "很"
+    ],
+    "a": 0,
+    "why": "Viết xong bài tập là việc bắt buộc trước khi đi chơi, dùng 得."
+   },
+   {
+    "q": "Câu nào dùng 得 SAI?",
+    "o": [
+     "他得在家休息",
+     "我得再想想",
+     "你得先吃饭",
+     "我不得走得很早"
+    ],
+    "a": 3,
+    "why": "Phủ định của 得 (phải) không nói 不得, muốn nói không cần thì dùng 不用."
+   },
+   {
+    "q": "“他感冒了，得休息” — vì sao dùng 得?",
+    "o": [
+     "Vì anh ấy muốn nghỉ",
+     "Vì hoàn cảnh bắt buộc phải nghỉ",
+     "Vì anh ấy được nghỉ",
+     "Vì anh ấy đang nghỉ"
+    ],
+    "a": 1,
+    "why": "Bị cảm nên hoàn cảnh bắt buộc phải nghỉ, dùng 得."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "我得去学校了",
+     "我去得学校了",
+     "我得学校去",
+     "我去学校得"
+    ],
+    "a": 0,
+    "why": "得 đứng trước động từ chính: 得去学校."
+   },
+   {
+    "q": "Muốn nói “không cần phải đi” thì nói thế nào?",
+    "o": [
+     "不得去",
+     "不用去",
+     "不去得",
+     "得不去"
+    ],
+    "a": 1,
+    "why": "“Không cần” nói 不用去, không dùng 不得."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-02",
+  "stage": 4,
+  "title": "打、根、卷、棵、批 — lượng từ danh từ",
+  "hook": "“我买了一打鸡蛋、三根香蕉和一棵白菜。” — mua một tá trứng, ba quả chuối và một cây cải: mỗi thứ có lượng từ riêng.",
+  "examples": [
+   "我买了一打鸡蛋。(Wǒ mǎi le yī dǎ jīdàn.) — Tôi mua một tá trứng.",
+   "桌子上有三根香蕉和一棵白菜。(Zhuōzi shang yǒu sān gēn xiāngjiāo hé yī kē báicài.) — Trên bàn có ba quả chuối và một cây cải thảo.",
+   "他借了两卷胶带，一卷红的，一卷蓝的。(Tā jiè le liǎng juàn jiāodài, yī juàn hóng de, yī juàn lán de.) — Anh ấy mượn hai cuộn băng dính, một cuộn đỏ, một cuộn xanh.",
+   "这批学生都很喜欢踢足球。(Zhè pī xuésheng dōu hěn xǐhuan tī zúqiú.) — Lứa học sinh này đều rất thích đá bóng."
+  ],
+  "speak": "我买了一打鸡蛋。桌子上有三根香蕉和一棵白菜。他借了两卷胶带，一卷红的，一卷蓝的。这批学生都很喜欢踢足球。",
+  "rule": "打 (dǎ) là một tá, bằng 12 cái, dùng cho trứng, bút, tất: 一打鸡蛋. 根 (gēn) dùng cho vật dài và mảnh: 一根香蕉, 一根绳子. 卷 (juàn) dùng cho vật cuộn tròn: 一卷胶带, 一卷纸. 棵 (kē) dùng cho cây, rau: 一棵白菜, 一棵树. 批 (pī) dùng cho một lứa, một đợt người hay hàng: 一批学生, 一批货.",
+  "tip": "Người Việt hay dùng chung 个 cho mọi thứ; với vật dài mảnh thì nhớ 根, vật cuộn thì 卷, cây cối thì 棵, một lứa thì 批.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“一打鸡蛋” là bao nhiêu quả trứng?",
+    "o": [
+     "12 quả",
+     "10 quả",
+     "20 quả",
+     "100 quả"
+    ],
+    "a": 0,
+    "why": "打 là một tá, bằng 12 cái."
+   },
+   {
+    "q": "Điền vào chỗ trống: 一___香蕉。",
+    "o": [
+     "根",
+     "棵",
+     "卷",
+     "批"
+    ],
+    "a": 0,
+    "why": "Chuối là vật dài, dùng lượng từ 根."
+   },
+   {
+    "q": "Câu nào dùng 根 SAI?",
+    "o": [
+     "一棵树",
+     "一卷纸",
+     "一批学生",
+     "一根白菜"
+    ],
+    "a": 3,
+    "why": "Cải thảo là cây rau, dùng 一棵白菜, không dùng 根."
+   },
+   {
+    "q": "“这批货” nghĩa là gì?",
+    "o": [
+     "Một cái hàng",
+     "Một đợt hàng",
+     "Một cuộn hàng",
+     "Một cây hàng"
+    ],
+    "a": 1,
+    "why": "批 chỉ một lứa, một đợt người hay hàng hóa."
+   },
+   {
+    "q": "Băng dính cuộn tròn thì dùng lượng từ nào?",
+    "o": [
+     "根",
+     "棵",
+     "打",
+     "卷"
+    ],
+    "a": 3,
+    "why": "Vật cuộn tròn dùng 卷: 一卷胶带."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "一打学生",
+     "一棵鸡蛋",
+     "三根绳子",
+     "一卷香蕉"
+    ],
+    "a": 2,
+    "why": "Dây thừng dài và mảnh, dùng 三根绳子."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-03",
+  "stage": 4,
+  "title": "Phó từ cấp 4 — 按时、即将、急忙、尽快、一再、再三、的确、反而、还、竟然、究竟",
+  "hook": "“他竟然按时到了，的确让我很吃惊。” — anh ấy vậy mà đến đúng giờ, quả thật làm tôi ngạc nhiên: phó từ nói thái độ và thời gian.",
+  "examples": [
+   "请大家按时到教室，老师即将开始讲课。(Qǐng dàjiā ànshí dào jiàoshì, lǎoshī jíjiāng kāishí jiǎng kè.) — Mọi người hãy đến lớp đúng giờ, thầy sắp bắt đầu giảng bài.",
+   "妈妈急忙跑进厨房，尽快把饭做好。(Māma jímáng pǎo jìn chúfáng, jǐnkuài bǎ fàn zuò hǎo.) — Mẹ vội vàng chạy vào bếp, nấu cơm xong càng nhanh càng tốt.",
+   "老师一再提醒我们，再三说不要迟到。(Lǎoshī yīzài tíxǐng wǒmen, zàisān shuō bú yào chídào.) — Thầy nhắc chúng tôi nhiều lần, dặn đi dặn lại đừng đến muộn.",
+   "他明明生病了，反而还来上课，究竟为什么呢？(Tā míngmíng shēng bìng le, fǎn'ér hái lái shàng kè, jiūjìng wèi shénme ne?) — Anh ấy rõ ràng đang ốm, ngược lại còn đến lớp, rốt cuộc là vì sao nhỉ?"
+  ],
+  "speak": "请大家按时到教室，老师即将开始讲课。妈妈急忙跑进厨房，尽快把饭做好。老师一再提醒我们，再三说不要迟到。他明明生病了，反而还来上课，究竟为什么呢？",
+  "rule": "按时 là đúng giờ, 即将 là sắp (việc sắp xảy ra), 急忙 là vội vàng, 尽快 là càng nhanh càng tốt. 一再 và 再三 đều là nhiều lần, lặp đi lặp lại. 的确 là quả thật, dùng để khẳng định. 反而 là ngược lại với dự đoán. 还 ở đây là còn, vẫn. 竟然 là vậy mà, ngoài dự đoán. 究竟 là rốt cuộc, dùng khi truy hỏi nguyên nhân thật sự.",
+  "tip": "Đừng nhầm 一再 với 再: 再 là “lại, nữa”, còn 一再 là “nhiều lần, lặp đi lặp lại”. 竟然 mang ngạc nhiên, không dùng cho việc bình thường.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“即将开始” nghĩa là gì?",
+    "o": [
+     "Sắp bắt đầu",
+     "Đã bắt đầu",
+     "Đang bắt đầu",
+     "Không bắt đầu"
+    ],
+    "a": 0,
+    "why": "即将 nghĩa là sắp, việc sắp xảy ra."
+   },
+   {
+    "q": "Điền vào chỗ trống: 请大家___到教室。",
+    "o": [
+     "竟然",
+     "究竟",
+     "反而",
+     "按时"
+    ],
+    "a": 3,
+    "why": "Đến lớp đúng giờ dùng 按时."
+   },
+   {
+    "q": "Câu nào dùng phó từ SAI?",
+    "o": [
+     "他竟然考了一百分",
+     "请尽快把饭做好",
+     "他竟然每天都吃饭",
+     "老师一再提醒我们"
+    ],
+    "a": 2,
+    "why": "竟然 mang ngạc nhiên ngoài dự đoán; ăn cơm hằng ngày là việc bình thường, không dùng 竟然."
+   },
+   {
+    "q": "“的确让我很吃惊” — 的确 có nghĩa gì?",
+    "o": [
+     "Có lẽ",
+     "Rốt cuộc",
+     "Ngược lại",
+     "Quả thật"
+    ],
+    "a": 3,
+    "why": "的确 là quả thật, dùng để khẳng định."
+   },
+   {
+    "q": "“究竟为什么” dùng để hỏi điều gì?",
+    "o": [
+     "Hỏi thời gian",
+     "Hỏi địa điểm",
+     "Truy hỏi nguyên nhân thật sự",
+     "Hỏi số lượng"
+    ],
+    "a": 2,
+    "why": "究竟 là rốt cuộc, dùng khi muốn biết nguyên nhân thật sự."
+   },
+   {
+    "q": "“反而还来上课” — 反而 nói lên điều gì?",
+    "o": [
+     "Việc xảy ra như dự đoán",
+     "Việc xảy ra ngược với dự đoán",
+     "Việc xảy ra đúng giờ",
+     "Việc xảy ra nhiều lần"
+    ],
+    "a": 1,
+    "why": "反而 chỉ kết quả ngược lại với điều người ta dự đoán."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-04",
+  "stage": 4,
+  "title": "未必 / 几乎、似乎 — chưa chắc / gần như, dường như",
+  "hook": "“他几乎每天都来，似乎很喜欢这里，但未必会留下来。” — anh ấy gần như ngày nào cũng đến, dường như rất thích nơi này, nhưng chưa chắc sẽ ở lại.",
+  "examples": [
+   "他几乎每天都来图书馆看书。(Tā jīhū měitiān dōu lái túshūguǎn kàn shū.) — Anh ấy gần như ngày nào cũng đến thư viện đọc sách.",
+   "外面似乎下雨了，你听，窗户上有声音。(Wàimiàn sìhū xià yǔ le, nǐ tīng, chuānghu shang yǒu shēngyīn.) — Ngoài trời dường như mưa rồi, bạn nghe đi, trên cửa sổ có tiếng động.",
+   "这个办法未必有用，我们再想想别的办法吧。(Zhège bànfǎ wèibì yǒu yòng, wǒmen zài xiǎng xiang bié de bànfǎ ba.) — Cách này chưa chắc đã có tác dụng, chúng ta nghĩ thêm cách khác nhé.",
+   "他看起来很累，似乎一夜没睡。(Tā kàn qǐlái hěn lèi, sìhū yī yè méi shuì.) — Trông anh ấy rất mệt, dường như cả đêm không ngủ."
+  ],
+  "speak": "他几乎每天都来图书馆看书。外面似乎下雨了，你听，窗户上有声音。这个办法未必有用，我们再想想别的办法吧。他看起来很累，似乎一夜没睡。",
+  "rule": "几乎 nghĩa là gần như, suýt nữa, dùng trước động từ hay tính từ để nói mức độ rất gần đạt được: 几乎每天, 几乎忘了. 似乎 nghĩa là dường như, nói phỏng đoán dựa trên dấu hiệu bên ngoài: 似乎下雨了. 未必 nghĩa là chưa chắc, dùng để phủ định một phỏng đoán: 未必有用, 未必会来. Ba từ đều đứng trước động từ hay tính từ.",
+  "tip": "几乎 nói “gần như đã”, còn 似乎 nói “dường như là”: 几乎忘了 là suýt quên thật, 似乎忘了 chỉ là trông như quên. 未必 là phủ định mềm, lịch sự hơn 不一定.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他几乎每天都来” nghĩa là gì?",
+    "o": [
+     "Anh ấy chưa từng đến",
+     "Anh ấy chỉ đến một lần",
+     "Anh ấy gần như ngày nào cũng đến",
+     "Anh ấy sẽ không đến nữa"
+    ],
+    "a": 2,
+    "why": "几乎 nghĩa là gần như."
+   },
+   {
+    "q": "Điền vào chỗ trống: 外面___下雨了。",
+    "o": [
+     "未必",
+     "几乎",
+     "似乎",
+     "都"
+    ],
+    "a": 2,
+    "why": "Dựa trên dấu hiệu bên ngoài mà phỏng đoán, dùng 似乎 (dường như)."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "他几乎忘了我的名字",
+     "这个办法未必有用",
+     "外面似乎下雨了",
+     "他未必每天都几乎来"
+    ],
+    "a": 3,
+    "why": "未必 và 几乎 không xếp chồng lên nhau như vậy; phải nói 他几乎每天都来."
+   },
+   {
+    "q": "“未必会留下来” có thái độ gì?",
+    "o": [
+     "Khẳng định chắc chắn sẽ ở lại",
+     "Chưa chắc sẽ ở lại",
+     "Đã ở lại rồi",
+     "Không muốn ở lại"
+    ],
+    "a": 1,
+    "why": "未必 là chưa chắc, phủ định một phỏng đoán."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他似乎很累",
+     "他未必很累了",
+     "他几乎似乎很累",
+     "他似乎未必很累"
+    ],
+    "a": 0,
+    "why": "似乎 đứng trước tính từ để phỏng đoán: 似乎很累."
+   },
+   {
+    "q": "“几乎忘了” khác “忘了” ở chỗ nào?",
+    "o": [
+     "Đã quên hẳn",
+     "Suýt quên nhưng chưa quên hẳn",
+     "Chưa bao giờ quên",
+     "Sẽ quên sau này"
+    ],
+    "a": 1,
+    "why": "几乎忘了 là suýt quên, mức độ rất gần đạt được nhưng chưa hẳn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-05",
+  "stage": 4,
+  "title": "自 / 替 / 作为 — từ, thay cho, với tư cách là",
+  "hook": "“自从去年起，他就替我照顾花园，作为邻居，他一直很好。” — từ năm ngoái, anh ấy thay tôi chăm vườn, với tư cách hàng xóm, anh ấy luôn rất tốt.",
+  "examples": [
+   "自从去年搬到这里，他就每天早上跑步。(Zìcóng qùnián bān dào zhèlǐ, tā jiù měitiān zǎoshang pǎobù.) — Từ khi chuyển đến đây năm ngoái, anh ấy ngày nào cũng chạy bộ buổi sáng.",
+   "今天我有事，你替我去开会。(Jīntiān wǒ yǒu shì, nǐ tì wǒ qù kāi huì.) — Hôm nay tôi bận, bạn thay tôi đi họp nhé?",
+   "作为学生，我们应该按时完成作业。(Zuòwéi xuésheng, wǒmen yīnggāi ànshí wánchéng zuòyè.) — Với tư cách học sinh, chúng ta nên hoàn thành bài tập đúng hạn.",
+   "这本书自出版以来，已经卖了十万本。(Zhè běn shū zì chūbǎn yǐlái, yǐjīng mài le shí wàn běn.) — Cuốn sách này từ khi xuất bản đến nay đã bán được mười vạn bản."
+  ],
+  "speak": "自从去年搬到这里，他就每天早上跑步。今天我有事，你替我去开会。作为学生，我们应该按时完成作业。这本书自出版以来，已经卖了十万本。",
+  "rule": "自 (trong 自从, 自…以来) chỉ điểm bắt đầu của thời gian hay sự việc: 自从去年, 自出版以来. 替 nghĩa là thay cho ai làm việc gì: 替我开会, 替他买票, chủ ngữ là người làm thay. 作为 nghĩa là với tư cách là, đứng đầu câu để nêu thân phận, vai trò rồi mới nói điều phải làm hay đánh giá: 作为学生, 作为老师.",
+  "tip": "替 khác 给: 替 là làm thay người khác, còn 给 là làm cho người khác nhận. 作为 luôn nêu vai trò trước, đừng nhầm với 是.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“自从去年起” nghĩa là gì?",
+    "o": [
+     "Từ năm ngoái trở đi",
+     "Đến năm ngoái",
+     "Trong năm ngoái",
+     "Trước năm ngoái"
+    ],
+    "a": 0,
+    "why": "自从 chỉ điểm bắt đầu: từ năm ngoái trở đi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你___我去开会，好吗？",
+    "o": [
+     "自",
+     "作为",
+     "替",
+     "从"
+    ],
+    "a": 2,
+    "why": "Thay tôi đi họp, dùng 替."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "作为学生，应该按时完成作业",
+     "自从去年，他每天跑步",
+     "你替我买一张票",
+     "作为我去开会，好吗"
+    ],
+    "a": 3,
+    "why": "作为 nêu vai trò, thân phận, không dùng trước động từ đi họp như vậy."
+   },
+   {
+    "q": "“作为老师” mở đầu câu để làm gì?",
+    "o": [
+     "Hỏi thời gian",
+     "Nêu vai trò rồi nói điều phải làm",
+     "Nói người thay mình",
+     "Nói điểm bắt đầu"
+    ],
+    "a": 1,
+    "why": "作为 nêu thân phận, vai trò trước khi nói điều liên quan."
+   },
+   {
+    "q": "“自出版以来” — 自…以来 nói về điều gì?",
+    "o": [
+     "Nơi xuất bản",
+     "Thời điểm bắt đầu đến nay",
+     "Người xuất bản",
+     "Số lượng xuất bản"
+    ],
+    "a": 1,
+    "why": "自…以来 chỉ khoảng thời gian từ lúc bắt đầu đến nay."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他替我照顾花园",
+     "他自照顾花园",
+     "他作为照顾花园",
+     "他替花园照顾我"
+    ],
+    "a": 0,
+    "why": "替 + người + động từ: thay tôi chăm vườn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-06",
+  "stage": 4,
+  "title": "并、以及 / 此外、而、而是、既然、可见、甚至、例如、总之 — liên từ cấp 4",
+  "hook": "“他不仅会唱歌，而且会跳舞，甚至还会画画，总之，他什么都会一点儿。” — anh ấy không chỉ biết hát mà còn biết nhảy, thậm chí còn biết vẽ, tóm lại cái gì cũng biết một chút.",
+  "examples": [
+   "他会说汉语以及英语，还会一点儿法语。(Tā huì shuō Hànyǔ yǐjí Yīngyǔ, hái huì yīdiǎnr Fǎyǔ.) — Anh ấy biết nói tiếng Trung và tiếng Anh, còn biết một chút tiếng Pháp.",
+   "这件衣服很便宜，而且很漂亮。(Zhè jiàn yīfu hěn piányi, érqiě hěn piàoliang.) — Cái áo này rất rẻ, mà còn rất đẹp.",
+   "他不是不喜欢你，而是不好意思说话。(Tā bú shì bù xǐhuan nǐ, ér shì bù hǎoyìsi shuō huà.) — Anh ấy không phải không thích bạn, mà là ngại nói chuyện.",
+   "例如，你每天早上跑步，身体就会越来越好。(Lìrú, nǐ měitiān zǎoshang pǎobù, shēntǐ jiù huì yuè lái yuè hǎo.) — Ví dụ, bạn chạy bộ mỗi sáng thì sức khỏe sẽ ngày càng tốt."
+  ],
+  "speak": "他会说汉语以及英语，还会一点儿法语。这件衣服很便宜，而且很漂亮。他不是不喜欢你，而是不好意思说话。例如，你每天早上跑步，身体就会越来越好。",
+  "rule": "并 và 以及 đều là “và”, nối các thành phần cùng loại; 以及 trang trọng hơn, hay nối danh từ hay cụm dài. 此外 là “ngoài ra”, thêm một ý. 而 nối hai vế đối lập hay bổ sung nhẹ; 而是 dùng sau phủ định 不是… để đưa ra điều đúng: 不是…，而是…. 既然 là “đã… thì”, nói điều đã rõ rồi suy ra kết quả. 可见 là “có thể thấy”, rút ra kết luận. 甚至 là “thậm chí”, đẩy ý lên mức cao hơn. 例如 là “ví dụ”. 总之 là “tóm lại”, tổng kết ý trước.",
+  "tip": "而是 luôn đi sau 不是, không dùng độc lập. 甚至 đứng trước thành phần được nhấn mạnh, đừng đặt sau động từ chính.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“以及” trong câu “他会说汉语以及英语” nghĩa là gì?",
+    "o": [
+     "Và",
+     "Hoặc",
+     "Nhưng",
+     "Vì"
+    ],
+    "a": 0,
+    "why": "以及 nghĩa là “và”, nối các thành phần cùng loại, trang trọng hơn 和."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他不是不喜欢你，___是不好意思说话。",
+    "o": [
+     "而",
+     "而且",
+     "而是",
+     "但是"
+    ],
+    "a": 2,
+    "why": "Sau 不是… phải dùng 而是 để đưa ra điều đúng."
+   },
+   {
+    "q": "Câu nào dùng liên từ SAI?",
+    "o": [
+     "他会唱歌以及跳舞",
+     "例如，你每天跑步",
+     "他不是累，而是饿了",
+     "他而是喜欢你，不是讨厌你"
+    ],
+    "a": 3,
+    "why": "而是 phải đứng sau 不是, không đứng đầu câu như vậy."
+   },
+   {
+    "q": "“总之，他什么都会一点儿” — 总之 dùng để làm gì?",
+    "o": [
+     "Đưa ví dụ",
+     "Nói điều ngược lại",
+     "Nói nguyên nhân",
+     "Tổng kết ý trước"
+    ],
+    "a": 3,
+    "why": "总之 là “tóm lại”, tổng kết các ý đã nói."
+   },
+   {
+    "q": "“甚至还会画画” — 甚至 nhấn mạnh điều gì?",
+    "o": [
+     "Việc bình thường",
+     "Việc ở mức cao hơn, ngoài dự đoán",
+     "Việc đã xảy ra",
+     "Việc không thể xảy ra"
+    ],
+    "a": 1,
+    "why": "甚至 là “thậm chí”, đẩy ý lên mức cao hơn."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "此外，我还要买一本书",
+     "他以及很喜欢唱歌",
+     "可见他不喜欢你而是",
+     "例如他不是累"
+    ],
+    "a": 0,
+    "why": "此外 là “ngoài ra”, thêm một ý mới vào câu."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-07",
+  "stage": 4,
+  "title": "似的 / 啊 — trợ từ giống như / à",
+  "hook": "“他跑得像风似的，多快啊！” — anh ấy chạy như gió ấy, nhanh quá à: 似的 nói giống như, 啊 nói cảm thán.",
+  "examples": [
+   "他跑得像风似的，一下子就不见了。(Tā pǎo de xiàng fēng shìde, yīxiàzi jiù bú jiàn le.) — Anh ấy chạy như gió, chớp mắt đã không thấy đâu.",
+   "孩子们高兴得像过节似的。(Háizimen gāoxìng de xiàng guò jié shìde.) — Các em nhỏ vui như đón Tết vậy.",
+   "多快啊！他一下子就跑完了。(Duō kuài a! Tā yīxiàzi jiù pǎo wán le.) — Nhanh quá à! Anh ấy chạy xong trong chớp mắt.",
+   "你看，外面下雪了，多美啊！(Nǐ kàn, wàimiàn xià xuě le, duō měi a!) — Bạn xem kìa, ngoài trời tuyết rơi rồi, đẹp quá à!"
+  ],
+  "speak": "他跑得像风似的，一下子就不见了。孩子们高兴得像过节似的。多快啊！他一下子就跑完了。你看，外面下雪了，多美啊！",
+  "rule": "似的 (shìde) là trợ từ, đứng cuối cụm so sánh sau 像…: 像风似的, 像过节似的, nghĩa là “như…, giống như…”, không có 像 vẫn có thể dùng: 下雪似的. 啊 (a) là trợ từ ngữ khí cuối câu, dùng sau câu cảm thán hay câu hỏi nhẹ: 多美啊！, 好啊！, làm giọng nói mềm và thân mật hơn. 啊 đọc nhẹ, không mang thanh điệu rõ.",
+  "tip": "似的 luôn đi kèm so sánh, đừng dùng cho câu trần thuật bình thường. 啊 cuối câu cảm thán phải đi với 多/太/真…: 多美啊 mới đúng, đừng nói 美啊 một mình.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“像风似的” nghĩa là gì?",
+    "o": [
+     "Vì gió",
+     "Là gió",
+     "Trong gió",
+     "Như gió"
+    ],
+    "a": 3,
+    "why": "像…似的 là cấu trúc so sánh: giống như gió."
+   },
+   {
+    "q": "Điền vào chỗ trống: 多美___！",
+    "o": [
+     "似的",
+     "了",
+     "的",
+     "啊"
+    ],
+    "a": 3,
+    "why": "Câu cảm thán 多美… dùng trợ từ 啊 cuối câu."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "他跑得像风似的",
+     "孩子们高兴得像过节似的",
+     "他似的跑得很快",
+     "多快啊"
+    ],
+    "a": 2,
+    "why": "似的 đứng cuối cụm so sánh, không đứng trước động từ."
+   },
+   {
+    "q": "“多美啊” — 啊 có tác dụng gì?",
+    "o": [
+     "Hỏi có hay không",
+     "Nói cảm thán, giọng mềm hơn",
+     "Phủ định",
+     "Nối hai câu"
+    ],
+    "a": 1,
+    "why": "啊 cuối câu cảm thán làm giọng nói mềm và thân mật."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他像风似的跑",
+     "他跑得风似的",
+     "他跑得像风似的",
+     "他风似的跑得"
+    ],
+    "a": 2,
+    "why": "Cấu trúc đúng: động từ + 得 + 像…似的."
+   },
+   {
+    "q": "似的 thường đi với từ nào?",
+    "o": [
+     "像",
+     "很",
+     "都",
+     "就"
+    ],
+    "a": 0,
+    "why": "似的 hay đi sau 像…: 像风似的."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-08",
+  "stage": 4,
+  "title": "大A大B / A一B — mẫu câu lặp",
+  "hook": "“他大口大口地吃饭，一口一口地喝汤。” — anh ấy ăn từng miếng to, uống từng ngụm canh: mẫu lặp nói cách làm từng cái một.",
+  "examples": [
+   "他大口大口地吃饭，一会儿就吃完了。(Tā dà kǒu dà kǒu de chī fàn, yīhuìr jiù chī wán le.) — Anh ấy ăn từng miếng to, một lát đã ăn xong.",
+   "她一步一步地走上山，一点儿也不着急。(Tā yī bù yī bù de zǒu shang shān, yīdiǎnr yě bù zháojí.) — Cô ấy bước từng bước lên núi, không vội chút nào.",
+   "孩子们一个一个地回答问题，老师听得很认真。(Háizimen yī gè yī gè de huí dá wèn tí, lǎoshī tīng de hěn rènzhēn.) — Các em nhỏ trả lời từng em một, thầy nghe rất chăm chú.",
+   "雨大滴大滴地落下来，路一下子就湿了。(Yǔ dà dī dà dī de luò xiàlai, lù yīxiàzi jiù shī le.) — Mưa rơi từng giọt to, đường ướt ngay lập tức."
+  ],
+  "speak": "他大口大口地吃饭，一会儿就吃完了。她一步一步地走上山，一点儿也不着急。孩子们一个一个地回答问题，老师听得很认真。雨大滴大滴地落下来，路一下子就湿了。",
+  "rule": "大A大B là mẫu lặp tính từ hay lượng từ sau 大: 大口大口, 大滴大滴, nói động tác diễn ra từng đợt lớn, liên tục. A一B là mẫu lặp với 一 ở giữa: 一步一步, 一个一个, 一口一口, nói làm từng cái một, theo thứ tự, chậm mà chắc. Cả hai mẫu thường đứng trước động từ, làm trạng ngữ, sau đó dùng 地: 大口大口地吃, 一步一步地走.",
+  "tip": "大A大B nhấn mạnh “từng cái to, từng đợt lớn”, còn A一B nhấn mạnh “từng cái một, theo thứ tự”: đừng dùng 大口大口 khi muốn nói ăn từng miếng nhỏ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“一步一步地走” nghĩa là gì?",
+    "o": [
+     "Chạy rất nhanh",
+     "Đi một bước rồi dừng",
+     "Bước từng bước một",
+     "Đi cùng lúc nhiều bước"
+    ],
+    "a": 2,
+    "why": "一…一… nói làm từng cái một, theo thứ tự."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他大口大口___吃饭。",
+    "o": [
+     "的",
+     "得",
+     "地",
+     "着"
+    ],
+    "a": 2,
+    "why": "Mẫu lặp làm trạng ngữ trước động từ, dùng 地."
+   },
+   {
+    "q": "Câu nào dùng mẫu lặp SAI?",
+    "o": [
+     "一个一个地回答问题",
+     "一步一步地走上山",
+     "他大口大口地吃饭",
+     "他一口大口地喝汤"
+    ],
+    "a": 3,
+    "why": "一口一口 mới đúng mẫu A一B; 一口大口 trộn hai mẫu với nhau là sai."
+   },
+   {
+    "q": "“大滴大滴地落下来” nhấn mạnh điều gì?",
+    "o": [
+     "Mưa rất nhỏ",
+     "Mưa rơi từng giọt to",
+     "Mưa rơi một giọt",
+     "Mưa đã tạnh"
+    ],
+    "a": 1,
+    "why": "大A大B nói từng đợt lớn, liên tục: từng giọt to."
+   },
+   {
+    "q": "Muốn nói “trả lời từng em một” thì nói thế nào?",
+    "o": [
+     "大个大个地回答",
+     "一个一个地回答",
+     "一口一口地回答",
+     "大口大口地回答"
+    ],
+    "a": 1,
+    "why": "Từng em một, theo thứ tự, dùng 一个一个地."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "她一步一步地走上山",
+     "她一步大步地走上山",
+     "她大步一步地走上山",
+     "她一步一步走上山地"
+    ],
+    "a": 0,
+    "why": "Mẫu A一B + 地 + động từ: 一步一步地走."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-09",
+  "stage": 4,
+  "title": "看来 / 说不定 — xem ra / chưa biết chừng",
+  "hook": "“看来今天要下雨了，说不定下午还会下雪呢。” — xem ra hôm nay sắp mưa, chưa biết chừng chiều còn tuyết rơi nữa.",
+  "examples": [
+   "看来今天要下雨了，你最好带一把伞。(Kànlái jīntiān yào xià yǔ le, nǐ zuì hǎo dài yī bǎ sǎn.) — Xem ra hôm nay sắp mưa, bạn tốt nhất mang theo một cái ô.",
+   "他说不定下午会来，你等他一会儿吧。(Tā shuōbudìng xiàwǔ huì lái, nǐ děng tā yīhuìr ba.) — Chưa biết chừng chiều nay anh ấy sẽ đến, bạn đợi anh ấy một lát nhé.",
+   "看来他很喜欢这本书，已经看了三遍了。(Kànlái tā hěn xǐhuan zhè běn shū, yǐjīng kàn le sān biàn le.) — Xem ra anh ấy rất thích cuốn sách này, đã đọc ba lần rồi.",
+   "明天说不定会放假，我们先别买票。(Míngtiān shuōbudìng huì fàng jià, wǒmen xiān bié mǎi piào.) — Ngày mai chưa biết chừng được nghỉ, chúng ta đừng vội mua vé."
+  ],
+  "speak": "看来今天要下雨了，你最好带一把伞。他说不定下午会来，你等他一会儿吧。看来他很喜欢这本书，已经看了三遍了。明天说不定会放假，我们先别买票。",
+  "rule": "看来 nghĩa là “xem ra, có vẻ như”, dùng để đưa ra phán đoán dựa trên dấu hiệu đã thấy: 看来要下雨了. 看来 thường đứng đầu câu. 说不定 nghĩa là “chưa biết chừng, có thể”, nói một khả năng chưa chắc chắn, thường đi với 会: 说不定会来, 说不定会放假. Cả hai đều nói phỏng đoán, nhưng 看来 chắc chắn hơn vì có căn cứ, 说不定 thì khả năng mở hơn.",
+  "tip": "看来 đứng đầu câu, đừng đặt giữa câu sau chủ ngữ. 说不定 hay đi với 会, đừng nói 说不定来了 cho việc đã xảy ra.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“看来要下雨了” nghĩa là gì?",
+    "o": [
+     "Chắc chắn mưa to",
+     "Đã mưa xong",
+     "Xem ra sắp mưa",
+     "Không bao giờ mưa"
+    ],
+    "a": 2,
+    "why": "看来 là “xem ra”, phán đoán dựa trên dấu hiệu đã thấy."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___下午会来，你等他一会儿吧。",
+    "o": [
+     "看来",
+     "说不定",
+     "一定",
+     "已经"
+    ],
+    "a": 1,
+    "why": "Khả năng chưa chắc chắn, dùng 说不定."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "看来他很喜欢这本书",
+     "他说不定下午会来",
+     "看来下午他说不定会来",
+     "他说不定昨天来了"
+    ],
+    "a": 3,
+    "why": "说不定 nói khả năng trong tương lai, không dùng cho việc đã xảy ra hôm qua."
+   },
+   {
+    "q": "看来 và 说不定 khác nhau ở chỗ nào?",
+    "o": [
+     "看来 chắc chắn hơn vì có căn cứ, 说不定 khả năng mở hơn",
+     "说不定 chắc chắn hơn, 看来 mở hơn",
+     "Hai từ giống hệt nhau",
+     "看来 chỉ dùng cho thời tiết"
+    ],
+    "a": 0,
+    "why": "看来 phán đoán dựa trên dấu hiệu đã thấy, 说不定 chỉ nói một khả năng chưa chắc."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "看来今天要下雨了",
+     "他看来今天要下雨了",
+     "今天看来要下雨了啊",
+     "要下雨了看来今天"
+    ],
+    "a": 0,
+    "why": "看来 thường đứng đầu câu."
+   },
+   {
+    "q": "“明天说不定会放假” — người nói có chắc chắn không?",
+    "o": [
+     "Rất chắc chắn",
+     "Chưa chắc, chỉ là khả năng",
+     "Chắc chắn không nghỉ",
+     "Đã nghỉ rồi"
+    ],
+    "a": 1,
+    "why": "说不定 nghĩa là chưa biết chừng, chỉ là một khả năng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-10",
+  "stage": 4,
+  "title": "来得及 / 来不及 — kịp / không kịp",
+  "hook": "“快点儿，还来得及赶上火车；再慢就来不及了。” — nhanh lên, vẫn kịp tàu; chậm nữa là không kịp đâu.",
+  "examples": [
+   "快点儿，还来得及赶上七点的火车。(Kuài diǎnr, hái láidejí gǎn shang qī diǎn de huǒchē.) — Nhanh lên, vẫn kịp chuyến tàu bảy giờ.",
+   "你现在去机场，恐怕来不及了。(Nǐ xiànzài qù jīchǎng, kǒngpà láibují le.) — Bây giờ bạn mới ra sân bay, e là không kịp rồi.",
+   "作业很多，今天晚上我来得及写完。(Zuòyè hěn duō, jīntiān wǎnshang wǒ láidejí xiě wán.) — Bài tập nhiều thế, tối nay tôi kịp viết xong.",
+   "他起得太晚了，来不及吃早饭就去上班了。(Tā qǐ de tài wǎn le, láibují chī zǎofàn jiù qù shàng bān le.) — Anh ấy dậy quá muộn, không kịp ăn sáng đã đi làm."
+  ],
+  "speak": "快点儿，还来得及赶上七点的火车。你现在去机场，恐怕来不及了。作业很多，今天晚上我来得及写完。他起得太晚了，来不及吃早饭就去上班了。",
+  "rule": "来得及 nghĩa là “kịp”, 来不及 nghĩa là “không kịp”, đều nói về thời gian có đủ hay không để làm việc gì. Cấu trúc: 来得及/来不及 + động từ, có thể thêm tân ngữ hay bổ ngữ kết quả: 来得及赶上火车, 来不及写完. Thường dùng với 还 (还来得及) hay 恐怕 (恐怕来不及了) để nhấn mạnh.",
+  "tip": "来得及 là dạng khẳng định của bổ ngữ khả năng, đừng nói 来得及了 cho việc đã xong; muốn hỏi thì nói 来得及吗.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“还来得及赶上火车” nghĩa là gì?",
+    "o": [
+     "Đã lỡ tàu",
+     "Không muốn đi tàu",
+     "Vẫn kịp tàu",
+     "Tàu đã đi rồi"
+    ],
+    "a": 2,
+    "why": "来得及 nghĩa là kịp."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你现在去机场，恐怕___了。",
+    "o": [
+     "来得及",
+     "来不",
+     "来得",
+     "来不及"
+    ],
+    "a": 3,
+    "why": "Bây giờ mới đi thì thời gian không đủ, dùng 来不及."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "还来得及赶上火车",
+     "他来不及吃早饭",
+     "今天晚上来得及写完吗",
+     "他来得及了火车"
+    ],
+    "a": 3,
+    "why": "来得及 phải đi với động từ, không đứng trực tiếp trước danh từ 火车."
+   },
+   {
+    "q": "“来不及吃早饭就去上班了” — vì sao không kịp?",
+    "o": [
+     "Vì không đói",
+     "Vì dậy quá muộn, thời gian không đủ",
+     "Vì không thích ăn sáng",
+     "Vì xe buýt đến sớm"
+    ],
+    "a": 1,
+    "why": "Dậy muộn nên thời gian không đủ để ăn sáng."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "快点儿，还来得及",
+     "快点儿，还来不及",
+     "快点儿，已经来得及了",
+     "快点儿，来得及火车"
+    ],
+    "a": 0,
+    "why": "还来得及 là vẫn kịp, dùng để giục nhanh lên."
+   },
+   {
+    "q": "Muốn hỏi “tối nay kịp viết xong không” thì nói thế nào?",
+    "o": [
+     "今天晚上来得及写完吗",
+     "今天晚上来不及写完吗",
+     "今天晚上写完了来得及",
+     "今天晚上来得及吗写完"
+    ],
+    "a": 0,
+    "why": "Câu hỏi: 来得及 + động từ + 吗."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-11",
+  "stage": 4,
+  "title": "一般来说 — nói chung",
+  "hook": "“一般来说，早上跑步对身体很好。” — nói chung, chạy bộ buổi sáng rất tốt cho sức khỏe.",
+  "examples": [
+   "一般来说，早上跑步对身体很好。(Yībān lái shuō, zǎoshang pǎobù duì shēntǐ hěn hǎo.) — Nói chung, chạy bộ buổi sáng rất tốt cho sức khỏe.",
+   "一般来说，学生都喜欢放假。(Yībān lái shuō, xuésheng dōu xǐhuan fàng jià.) — Nói chung, học sinh đều thích được nghỉ.",
+   "一般来说，冬天的北京很冷，你要多穿衣服。(Yībān lái shuō, dōngtiān de Běijīng hěn lěng, nǐ yào duō chuān yīfu.) — Nói chung, mùa đông ở Bắc Kinh rất lạnh, bạn phải mặc nhiều áo.",
+   "一般来说，学一门外语需要很长时间。(Yībān lái shuō, xué yī mén wàiyǔ xūyào hěn cháng shíjiān.) — Nói chung, học một ngoại ngữ cần rất nhiều thời gian."
+  ],
+  "speak": "一般来说，早上跑步对身体很好。一般来说，学生都喜欢放假。一般来说，冬天的北京很冷，你要多穿衣服。一般来说，学一门外语需要很长时间。",
+  "rule": "一般来说 nghĩa là “nói chung, thông thường”, đứng đầu câu để nêu một nhận xét chung, một quy luật thường thấy, trước khi nói chi tiết. Sau 一般来说 thường là một phán đoán chung: 都喜欢, 很冷, 需要很长时间. Nó làm câu nói mềm hơn, vì chỉ nói trường hợp chung chứ không khẳng định mọi trường hợp đều như vậy.",
+  "tip": "一般来说 đứng đầu câu, sau nó có dấu phẩy; đừng dùng khi nói một việc cụ thể, riêng lẻ của một người.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“一般来说，早上跑步对身体很好” nghĩa là gì?",
+    "o": [
+     "Chỉ hôm nay chạy bộ mới tốt",
+     "Chỉ một người chạy bộ mới tốt",
+     "Chạy bộ buổi sáng không tốt",
+     "Nói chung, chạy bộ buổi sáng tốt cho sức khỏe"
+    ],
+    "a": 3,
+    "why": "一般来说 nêu nhận xét chung, thông thường."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___，学生都喜欢放假。",
+    "o": [
+     "看来",
+     "说不定",
+     "一般来说",
+     "竟然"
+    ],
+    "a": 2,
+    "why": "Nói nhận xét chung về học sinh, dùng 一般来说."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "一般来说，冬天的北京很冷",
+     "一般来说，学外语需要很长时间",
+     "一般来说，他昨天吃了三碗饭",
+     "一般来说，学生都喜欢放假"
+    ],
+    "a": 2,
+    "why": "一般来说 nói nhận xét chung, không dùng cho một việc cụ thể hôm qua của một người."
+   },
+   {
+    "q": "一般来说 thường đứng ở đâu trong câu?",
+    "o": [
+     "Cuối câu",
+     "Trước danh từ",
+     "Giữa động từ và tân ngữ",
+     "Đầu câu, sau đó có dấu phẩy"
+    ],
+    "a": 3,
+    "why": "一般来说 đứng đầu câu để mở ra nhận xét chung."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "一般来说，早上跑步对身体很好",
+     "早上跑步一般来说对身体很好",
+     "对身体很好一般来说早上跑步",
+     "一般来说早上跑步很好对身体"
+    ],
+    "a": 0,
+    "why": "Cấu trúc: 一般来说 + câu nhận xét."
+   },
+   {
+    "q": "Nói “一般来说” thì người nói có khẳng định mọi trường hợp đều như vậy không?",
+    "o": [
+     "Có, khẳng định tất cả",
+     "Không, chỉ nói trường hợp chung, thông thường",
+     "Không, chỉ nói một trường hợp",
+     "Có, nhưng chỉ nói quá khứ"
+    ],
+    "a": 1,
+    "why": "一般来说 chỉ nêu quy luật chung, làm câu nói mềm hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-12",
+  "stage": 4,
+  "title": "一+量词+比+一+量词 / （自）…以来 — càng ngày càng… / từ khi… đến nay",
+  "hook": "“天气一天比一天冷，自从上个月以来，我每天都多穿一件衣服。” — trời ngày càng lạnh, từ tháng trước đến nay ngày nào tôi cũng mặc thêm một áo.",
+  "examples": [
+   "天气一天比一天冷了。(Tiānqì yī tiān bǐ yī tiān lěng le.) — Thời tiết ngày càng lạnh.",
+   "他的汉语一个星期比一个星期说得好。(Tā de Hànyǔ yī gè xīngqī bǐ yī gè xīngqī shuō de hǎo.) — Tiếng Trung của anh ấy tuần này nói tốt hơn tuần trước.",
+   "自从上个月以来，我每天都多穿一件衣服。(Zìcóng shàng gè yuè yǐlái, wǒ měitiān dōu duō chuān yī jiàn yīfu.) — Từ tháng trước đến nay, ngày nào tôi cũng mặc thêm một áo.",
+   "自去年以来，这家店的生意越来越好。(Zì qùnián yǐlái, zhè jiā diàn de shēngyi yuè lái yuè hǎo.) — Từ năm ngoái đến nay, việc buôn bán của cửa hàng này ngày càng tốt."
+  ],
+  "speak": "天气一天比一天冷了。他的汉语一个星期比一个星期说得好。自从上个月以来，我每天都多穿一件衣服。自去年以来，这家店的生意越来越好。",
+  "rule": "一+量词+比+一+量词 nghĩa là “càng ngày càng…”, nói sự thay đổi dần theo thời gian: 一天比一天冷, 一个星期比一个星期好. Lượng từ hai vế phải giống nhau (天/天, 星期/星期), sau đó là tính từ hay cụm động từ. （自）…以来 nghĩa là “từ khi… đến nay”, chỉ khoảng thời gian từ một mốc bắt đầu đến hiện tại: 自从上个月以来, 自去年以来, sau đó là câu nói điều xảy ra trong khoảng đó.",
+  "tip": "Hai vế của 一…比一… phải dùng cùng một lượng từ; đừng nói 一天比一个星期冷. 自…以来 luôn nói từ mốc bắt đầu đến nay, không dùng cho tương lai.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“天气一天比一天冷” nghĩa là gì?",
+    "o": [
+     "Hôm nay lạnh, ngày mai nóng",
+     "Thời tiết ngày càng lạnh",
+     "Chỉ hôm nay lạnh",
+     "Thời tiết không thay đổi"
+    ],
+    "a": 1,
+    "why": "一+量词+比+一+量词 nói sự thay đổi dần: càng ngày càng lạnh."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___上个月以来，我每天都跑步。",
+    "o": [
+     "以来",
+     "自从以",
+     "自从",
+     "从以"
+    ],
+    "a": 2,
+    "why": "自从…以来 chỉ khoảng thời gian từ mốc bắt đầu đến nay."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "天气一天比一天冷",
+     "他的汉语一个星期比一个星期说得好",
+     "天气一天比一个星期冷",
+     "自去年以来，生意越来越好"
+    ],
+    "a": 2,
+    "why": "Hai vế phải dùng cùng lượng từ, không thể 一天比一个星期."
+   },
+   {
+    "q": "“自去年以来” nói về khoảng thời gian nào?",
+    "o": [
+     "Chỉ năm ngoái",
+     "Từ năm ngoái đến nay",
+     "Sang năm",
+     "Trước năm ngoái"
+    ],
+    "a": 1,
+    "why": "自…以来 chỉ từ mốc bắt đầu đến hiện tại."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他一月比一年高",
+     "他一年比一天高",
+     "他一天比一年高",
+     "他一年比一年高"
+    ],
+    "a": 3,
+    "why": "Hai vế cùng lượng từ 年: 一年比一年高."
+   },
+   {
+    "q": "“一个星期比一个星期说得好” — so sánh cái gì với cái gì?",
+    "o": [
+     "Tuần này với tuần trước",
+     "Tuần này với tháng trước",
+     "Anh ấy với bạn anh ấy",
+     "Tiếng Trung với tiếng Anh"
+    ],
+    "a": 0,
+    "why": "Mẫu này so sánh cùng một sự việc ở hai thời điểm liên tiếp."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-13",
+  "stage": 4,
+  "title": "由……组成 — gồm có / được tạo thành từ",
+  "hook": "“这个小组由五个学生组成，大家一起做一个小调查。” — nhóm này gồm năm học sinh, mọi người cùng làm một cuộc khảo sát nhỏ.",
+  "examples": [
+   "这个小组由五个学生组成。(Zhège xiǎozǔ yóu wǔ gè xuésheng zǔchéng.) — Nhóm này gồm năm học sinh.",
+   "水由氢和氧组成。(Shuǐ yóu qīng hé yǎng zǔchéng.) — Nước được tạo thành từ hiđrô và ôxy.",
+   "这本书由十个故事组成，每个故事都很有意思。(Zhè běn shū yóu shí gè gùshi zǔchéng, měi gè gùshi dōu hěn yǒu yìsi.) — Cuốn sách này gồm mười câu chuyện, câu chuyện nào cũng rất thú vị.",
+   "我们的足球队由十一个队员组成。(Wǒmen de zúqiú duì yóu shíyī gè duìyuán zǔchéng.) — Đội bóng đá của chúng tôi gồm mười một cầu thủ."
+  ],
+  "speak": "这个小组由五个学生组成。水由氢和氧组成。这本书由十个故事组成，每个故事都很有意思。我们的足球队由十一个队员组成。",
+  "rule": "由……组成 nghĩa là “gồm có, được tạo thành từ”, dùng để nói một整体 gồm những bộ phận nào. Cấu trúc: danh từ chỉ整体 + 由 + danh từ chỉ bộ phận + 组成. Chủ ngữ là cái được tạo thành (小组, 书, 队), sau 由 là các thành phần. Mẫu này trang trọng hơn 有, hay dùng khi liệt kê thành phần.",
+  "tip": "Đừng nhầm 由……组成 với 是: 组成 nói cái整体 gồm những phần nào, còn 是 nói cái đó là gì. Sau 由 phải là thành phần, không phải kết quả.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“这个小组由五个学生组成” nghĩa là gì?",
+    "o": [
+     "Nhóm này dạy năm học sinh",
+     "Nhóm này là năm học sinh",
+     "Nhóm này có năm học sinh",
+     "Nhóm này gặp năm học sinh"
+    ],
+    "a": 2,
+    "why": "由……组成 nghĩa là gồm có, được tạo thành từ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 水___氢和氧组成。",
+    "o": [
+     "由",
+     "被",
+     "把",
+     "给"
+    ],
+    "a": 0,
+    "why": "Nước được tạo thành từ hiđrô và ôxy, dùng 由……组成."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "这本书由十个故事组成",
+     "这个小组由五个学生组成",
+     "水由氢和氧组成",
+     "这本书由十个故事是"
+    ],
+    "a": 3,
+    "why": "Sau 由…… phải là 组成, không dùng 是."
+   },
+   {
+    "q": "Trong “由五个学生组成”, chủ ngữ là gì?",
+    "o": [
+     "Năm học sinh",
+     "Nhóm",
+     "组成",
+     "由"
+    ],
+    "a": 1,
+    "why": "Chủ ngữ là cái整体 được tạo thành: 小组."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "我们的足球队由十一个队员组成",
+     "我们的足球队由十一个队员是",
+     "十一个队员由我们的足球队组成",
+     "我们的足球队组成由十一个队员"
+    ],
+    "a": 0,
+    "why": "Cấu trúc: 整体 + 由 + bộ phận + 组成."
+   },
+   {
+    "q": "“由……组成” khác “有” ở chỗ nào?",
+    "o": [
+     "Giống hệt nhau",
+     "由……组成 trang trọng hơn, nhấn mạnh liệt kê thành phần",
+     "有 trang trọng hơn",
+     "由……组成 chỉ dùng cho người"
+    ],
+    "a": 1,
+    "why": "由……组成 hay dùng khi liệt kê thành phần của một整体, trang trọng hơn 有."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-14",
+  "stage": 4,
+  "title": "在…方面 / 在…上/下/中 — về mặt… / ở…",
+  "hook": "“他在学习方面很努力，在班上很有名，在同学中很受欢迎。” — anh ấy về mặt học tập rất chăm chỉ, trong lớp rất nổi tiếng, trong số bạn bè rất được yêu mến.",
+  "examples": [
+   "他在学习方面很努力，每天都看书到很晚。(Tā zài xuéxí fāngmiàn hěn nǔlì, měitiān dōu kàn shū dào hěn wǎn.) — Về mặt học tập anh ấy rất chăm chỉ, ngày nào cũng đọc sách đến rất khuya.",
+   "这本书在内容上很有意思，在价格上也不贵。(Zhè běn shū zài nèiróng shang hěn yǒu yìsi, zài jiàgé shang yě bú guì.) — Cuốn sách này về nội dung rất thú vị, về giá cả cũng không đắt.",
+   "在同学中，他是最受欢迎的一个。(Zài tóngxué zhōng, tā shì zuì shòu huānyíng de yī gè.) — Trong số các bạn học, anh ấy là người được yêu mến nhất.",
+   "在老师的帮助下，他很快就学会了游泳。(Zài lǎoshī de bāngzhù xià, tā hěn kuài jiù xué huì le yóuyǒng.) — Nhờ sự giúp đỡ của thầy, anh ấy rất nhanh đã học được bơi."
+  ],
+  "speak": "他在学习方面很努力，每天都看书到很晚。这本书在内容上很有意思，在价格上也不贵。在同学中，他是最受欢迎的一个。在老师的帮助下，他很快就学会了游泳。",
+  "rule": "在…方面 nghĩa là “về mặt…”, dùng để giới hạn phạm vi đánh giá: 在学习方面, 在工作方面. 在…上 nghĩa là “về…, ở…”, cũng giới hạn phạm vi: 在内容上, 在价格上. 在…中 nghĩa là “trong số…”, nói một người hay vật nổi bật giữa một nhóm: 在同学中, 在大家中. 在…下 nghĩa là “nhờ…, trong điều kiện…”: 在老师的帮助下, 在大家的努力下.",
+  "tip": "方面 đi với lĩnh vực trừu tượng (学习, 工作), còn 上 đi với mặt cụ thể hơn (内容, 价格). 中 nói trong một nhóm, 下 nói nhờ điều kiện hay sự giúp đỡ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“在学习方面很努力” nghĩa là gì?",
+    "o": [
+     "Ở trường rất chăm chỉ",
+     "Nhờ học tập rất chăm chỉ",
+     "Trong lớp rất chăm chỉ",
+     "Về mặt học tập rất chăm chỉ"
+    ],
+    "a": 3,
+    "why": "在…方面 nghĩa là về mặt…"
+   },
+   {
+    "q": "Điền vào chỗ trống: 在同学___，他是最受欢迎的一个。",
+    "o": [
+     "上",
+     "下",
+     "中",
+     "方面"
+    ],
+    "a": 2,
+    "why": "Trong số các bạn học, dùng 在…中."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "他在学习方面很努力",
+     "这本书在内容上很有意思",
+     "在同学中，他最受欢迎",
+     "在老师的帮助上，他学会了游泳"
+    ],
+    "a": 3,
+    "why": "Nhờ sự giúp đỡ phải dùng 在…下: 在老师的帮助下."
+   },
+   {
+    "q": "“在老师的帮助下” nghĩa là gì?",
+    "o": [
+     "Trên đầu thầy",
+     "Nhờ sự giúp đỡ của thầy",
+     "Trong lớp của thầy",
+     "Về mặt thầy"
+    ],
+    "a": 1,
+    "why": "在…下 chỉ điều kiện, sự giúp đỡ nhờ đó mà làm được việc."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "这本书在价格上也不贵",
+     "这本书在价格中也不贵",
+     "这本书在价格下也不贵",
+     "这本书在价格方面上也不贵"
+    ],
+    "a": 0,
+    "why": "Về giá cả, dùng 在…上."
+   },
+   {
+    "q": "Muốn nói “về mặt công việc anh ấy rất认真” thì dùng mẫu nào?",
+    "o": [
+     "在工作方面",
+     "在工作中",
+     "在工作下",
+     "在工作上中"
+    ],
+    "a": 0,
+    "why": "Về mặt một lĩnh vực, dùng 在…方面."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-15",
+  "stage": 4,
+  "title": "主谓短语作主语 / 受事主语 / 多项定语 — thành phần câu cấp 4",
+  "hook": "“学习汉语很有意思，作业写完了，我新买的那本很有意思的中文书也看完了。” — học tiếng Trung rất thú vị, bài tập viết xong rồi, cuốn sách tiếng Trung mới mua rất hay kia tôi cũng đọc xong rồi.",
+  "examples": [
+   "学习汉语很有意思，我每天都想多学一点儿。(Xuéxí Hànyǔ hěn yǒu yìsi, wǒ měitiān dōu xiǎng duō xué yīdiǎnr.) — Học tiếng Trung rất thú vị, ngày nào tôi cũng muốn học thêm một chút.",
+   "饭做好了，大家快来吃饭吧。(Fàn zuò hǎo le, dàjiā kuài lái chī fàn ba.) — Cơm nấu xong rồi, mọi người mau đến ăn cơm đi.",
+   "我新买的那本很有意思的中文书也看完了。(Wǒ xīn mǎi de nà běn hěn yǒu yìsi de Zhōngwén shū yě kàn wán le.) — Cuốn sách tiếng Trung mới mua rất hay kia tôi cũng đọc xong rồi.",
+   "他跑步很快，身体也越来越好。(Tā pǎo bù hěn kuài, shēntǐ yě yuè lái yuè hǎo.) — Anh ấy chạy rất nhanh, sức khỏe cũng ngày càng tốt."
+  ],
+  "speak": "学习汉语很有意思，我每天都想多学一点儿。饭做好了，大家快来吃饭吧。我新买的那本很有意思的中文书也看完了。他跑步很快，身体也越来越好。",
+  "rule": "Chủ ngữ có thể là một cụm chủ-vị: 学习汉语 (học tiếng Trung) làm chủ ngữ của 很有意思. Chủ ngữ cũng có thể là đối tượng chịu tác động (受事主语): 饭做好了 — cơm là thứ được nấu, không phải người nấu. Một danh từ có thể có nhiều định ngữ cùng lúc (多项定语): 我新买的那本很有意思的中文书 — 新买的, 那本, 很有意思的 đều bổ nghĩa cho 书, xếp theo thứ tự: sở hữu/thời gian, chỉ thị + lượng từ, tính chất.",
+  "tip": "Người Việt hay dịch 受事主语 thành câu bị động, nhưng tiếng Trung chỉ cần đặt danh từ chịu tác động lên đầu câu: 饭做好了, 作业写完了. Nhiều định ngữ thì nhớ thứ tự: cái nào gần danh từ nhất là tính chất.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“学习汉语很有意思” nghĩa là gì?",
+    "o": [
+     "Học tiếng Trung rất thú vị",
+     "Tiếng Trung rất khó",
+     "Học tiếng Trung rất mệt",
+     "Tiếng Trung không thú vị"
+    ],
+    "a": 0,
+    "why": "学习汉语 là cụm chủ-vị làm chủ ngữ của câu, 很有意思 là rất thú vị."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___做好了，大家快来吃饭吧。",
+    "o": [
+     "我",
+     "做",
+     "他",
+     "饭"
+    ],
+    "a": 3,
+    "why": "饭 là đối tượng chịu tác động, làm chủ ngữ受事: 饭做好了."
+   },
+   {
+    "q": "Câu nào có nhiều định ngữ?",
+    "o": [
+     "饭做好了",
+     "学习汉语很有意思",
+     "我新买的那本很有意思的中文书",
+     "他跑步很快"
+    ],
+    "a": 2,
+    "why": "新买的, 那本, 很有意思的 đều là định ngữ của 书."
+   },
+   {
+    "q": "“饭做好了” — 饭 là gì trong câu?",
+    "o": [
+     "Người nấu cơm",
+     "Trạng ngữ",
+     "Tân ngữ",
+     "Đối tượng chịu tác động làm chủ ngữ"
+    ],
+    "a": 3,
+    "why": "饭 là thứ được nấu xong, là受事主语."
+   },
+   {
+    "q": "Câu nào SAI? Câu nào sau đây KHÔNG phải là câu có 受事主语?",
+    "o": [
+     "饭做好了",
+     "作业写完了",
+     "我做饭了",
+     "门关上了"
+    ],
+    "a": 2,
+    "why": "我做饭了 có chủ ngữ là người làm (我); ba câu kia chủ ngữ đều là đối tượng chịu tác động."
+   },
+   {
+    "q": "“他跑步很快” — 跑步 là gì?",
+    "o": [
+     "Tân ngữ",
+     "Chủ ngữ là cụm chủ-vị",
+     "Định ngữ",
+     "Bổ ngữ"
+    ],
+    "a": 1,
+    "why": "跑步 là cụm chủ-vị làm chủ ngữ, 很快 là vị ngữ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-16",
+  "stage": 4,
+  "title": "趋向补语 3 — bổ ngữ xu hướng nâng cao",
+  "hook": "“他走进教室，拿出一本书，看起来很认真。” — anh ấy bước vào lớp, lấy ra một quyển sách, trông rất chăm chú.",
+  "examples": [
+   "他走进教室，坐在第一排。(Tā zǒu jìn jiàoshì, zuò zài dì yī pái.) — Anh ấy bước vào lớp, ngồi ở hàng đầu tiên.",
+   "妈妈从包里拿出一把雨伞。(Māma cóng bāo lǐ ná chū yī bǎ yǔsǎn.) — Mẹ lấy ra một cái ô từ trong túi.",
+   "他爬上山顶，看到了美丽的日出。(Tā pá shang shāndǐng, kàn dào le měilì de rìchū.) — Anh ấy leo lên đỉnh núi, nhìn thấy bình minh đẹp.",
+   "请你把这本书带回来，我想再看一遍。(Qǐng nǐ bǎ zhè běn shū dài huílai, wǒ xiǎng zài kàn yī biàn.) — Bạn mang cuốn sách này về giúp tôi, tôi muốn đọc lại một lần."
+  ],
+  "speak": "他走进教室，坐在第一排。妈妈从包里拿出一把雨伞。他爬上山顶，看到了美丽的日出。请你把这本书带回来，我想再看一遍。",
+  "rule": "Bổ ngữ xu hướng gồm hai phần: hướng (上/下/进/出/回/过/起) và 来/去 chỉ hướng về phía người nói hay rời xa người nói: 进来 (vào đây), 出去 (ra kia), 回来 (về đây), 上去 (lên kia). Cấu trúc: động từ + 补语 xu hướng (+ tân ngữ): 走进教室, 拿出一把伞, 爬上山顶. Khi có tân ngữ chỉ nơi chốn, tân ngữ đứng giữa: 走进教室, 爬上山; khi tân ngữ là vật, thường đứng sau: 拿出一本书.",
+  "tip": "来 là hướng về phía người nói, 去 là rời xa người nói: 拿来 (mang đến đây), 拿去 (mang đi kia). Đừng nhầm 进来 với 进去.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“走进教室” — 进 chỉ hướng nào?",
+    "o": [
+     "Ra ngoài",
+     "Lên trên",
+     "Vào trong",
+     "Xuống dưới"
+    ],
+    "a": 2,
+    "why": "进 là vào trong, 走进 là bước vào."
+   },
+   {
+    "q": "Điền vào chỗ trống: 妈妈从包里拿___一把雨伞。",
+    "o": [
+     "进",
+     "上",
+     "出",
+     "回"
+    ],
+    "a": 2,
+    "why": "Lấy ra từ trong túi, dùng 拿出."
+   },
+   {
+    "q": "Câu nào dùng 出/进 SAI?",
+    "o": [
+     "他走进教室",
+     "妈妈拿出一把伞",
+     "他爬上山顶",
+     "他走出进教室"
+    ],
+    "a": 3,
+    "why": "出 và 进 là hai hướng ngược nhau, không xếp chồng như vậy."
+   },
+   {
+    "q": "“带回来” nghĩa là gì?",
+    "o": [
+     "Mang đi nơi khác",
+     "Mang về phía người nói",
+     "Mang lên trên",
+     "Mang xuống dưới"
+    ],
+    "a": 1,
+    "why": "回 là trở về, 来 là hướng về phía người nói: mang về đây."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "请你把书带回来",
+     "请你把书带回去了",
+     "请你带回书来去",
+     "请你把书回来带"
+    ],
+    "a": 0,
+    "why": "Cấu trúc: 把 + tân ngữ + động từ + bổ ngữ xu hướng: 把书带回来."
+   },
+   {
+    "q": "“爬上去” khác “爬上来” ở chỗ nào?",
+    "o": [
+     "Giống hệt nhau",
+     "上去 là leo lên xa người nói, 上来 là leo lên về phía người nói",
+     "上去 là leo xuống, 上来 là leo lên",
+     "上去 dùng cho người, 上来 dùng cho vật"
+    ],
+    "a": 1,
+    "why": "去 là rời xa người nói, 来 là hướng về phía người nói."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-17",
+  "stage": 4,
+  "title": "存现句 2 — câu tồn hiện nâng cao",
+  "hook": "“桌子上放着一本书，门口站着一个人，墙上挂着一幅画。” — trên bàn đặt một quyển sách, ở cửa đứng một người, trên tường treo một bức tranh.",
+  "examples": [
+   "桌子上放着一本书和一支笔。(Zhuōzi shang fàng zhe yī běn shū hé yī zhī bǐ.) — Trên bàn đặt một quyển sách và một cây bút.",
+   "门口站着一个人，好像在等谁。(Ménkǒu zhàn zhe yī gè rén, hǎoxiàng zài děng shéi.) — Ở cửa đứng một người, hình như đang đợi ai.",
+   "墙上挂着一幅画，画的是美丽的西湖。(Qiáng shang guà zhe yī fú huà, huà de shì měilì de Xī Hú.) — Trên tường treo một bức tranh, vẽ hồ Tây đẹp.",
+   "昨天晚上，村里来了一个新老师。(Zuótiān wǎnshang, cūn lǐ lái le yī gè xīn lǎoshī.) — Tối hôm qua, trong làng đến một thầy giáo mới."
+  ],
+  "speak": "桌子上放着一本书和一支笔。门口站着一个人，好像在等谁。墙上挂着一幅画，画的是美丽的西湖。昨天晚上，村里来了一个新老师。",
+  "rule": "Câu tồn hiện nói có người hay vật xuất hiện hay tồn tại ở một nơi nào đó. Cấu trúc: nơi chốn + động từ + 着/了 + danh từ (người/vật mới): 桌子上放着一本书, 门口站着一个人. Động từ thường là 放, 挂, 站, 坐, 住, 来, 死, 出现. Dùng 着 để nói trạng thái đang tồn tại, dùng 了 để nói sự xuất hiện mới: 村里来了新老师. Danh từ sau động từ là thông tin mới, không dùng định ngữ xác định như 这/那.",
+  "tip": "Nơi chốn đứng đầu câu, không đứng sau động từ. Danh từ mới xuất hiện không thêm 这/那: nói 门口站着一个人, không nói 门口站着这个人.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“桌子上放着一本书” nghĩa là gì?",
+    "o": [
+     "Trên bàn đặt một quyển sách",
+     "Trên bàn không có sách",
+     "Trên bàn đặt một cái bàn",
+     "Sách đang ở trong túi"
+    ],
+    "a": 0,
+    "why": "Câu tồn hiện nói có vật tồn tại ở một nơi: trên bàn đặt một quyển sách."
+   },
+   {
+    "q": "Điền vào chỗ trống: 墙上挂___一幅画。",
+    "o": [
+     "了",
+     "过",
+     "着",
+     "的"
+    ],
+    "a": 2,
+    "why": "Tranh đang treo trên tường, trạng thái tồn tại dùng 着."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "桌子上放着一本书",
+     "门口站着一个人",
+     "墙上挂着一幅画",
+     "桌子上放着这本书"
+    ],
+    "a": 3,
+    "why": "Danh từ trong câu tồn hiện là thông tin mới, không dùng 这."
+   },
+   {
+    "q": "“村里来了一个新老师” — 了 ở đây nói điều gì?",
+    "o": [
+     "Trạng thái đang tồn tại",
+     "Sự xuất hiện mới",
+     "Việc đã làm xong từ lâu",
+     "Câu hỏi"
+    ],
+    "a": 1,
+    "why": "了 trong câu tồn hiện nói người hay vật mới xuất hiện."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "门口站着一个人",
+     "门口一个人站着",
+     "站着门口一个人",
+     "一个人门口站着"
+    ],
+    "a": 0,
+    "why": "Cấu trúc: nơi chốn + động từ + 着 + danh từ mới."
+   },
+   {
+    "q": "Động từ nào thường dùng trong câu tồn hiện?",
+    "o": [
+     "吃、喝、跑",
+     "放、挂、站、来",
+     "想、喜欢、知道",
+     "是、有、会"
+    ],
+    "a": 1,
+    "why": "Câu tồn hiện hay dùng động từ chỉ vị trí hay xuất hiện: 放, 挂, 站, 来."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-18",
+  "stage": 4,
+  "title": "“是……的”句 2 — nhấn mạnh quan điểm, thái độ",
+  "hook": "“我是真心喜欢这份工作的，不是为了钱才来的。” — tôi thật lòng thích công việc này, không phải vì tiền mà đến.",
+  "examples": [
+   "我是真心喜欢这份工作的。(Wǒ shì zhēnxīn xǐhuan zhè fèn gōngzuò de.) — Tôi thật lòng thích công việc này.",
+   "他是故意不告诉你的，不是忘了。(Tā shì gùyì bú gàosu nǐ de, bú shì wàng le.) — Anh ấy cố ý không nói cho bạn, không phải quên đâu.",
+   "这件事我是不同意的，你别再说了。(Zhè jiàn shì wǒ shì bù tóngyì de, nǐ bié zài shuō le.) — Việc này tôi không đồng ý, bạn đừng nói nữa.",
+   "她是觉得这个办法很好，才决定试一试的。(Tā shì juéde zhège bànfǎ hěn hǎo, cái juédìng shì yī shì de.) — Cô ấy thấy cách này rất hay, mới quyết định thử một lần."
+  ],
+  "speak": "我是真心喜欢这份工作的。他是故意不告诉你的，不是忘了。这件事我是不同意的，你别再说了。她是觉得这个办法很好，才决定试一试的。",
+  "rule": "是……的 ở cấp này nhấn mạnh quan điểm, thái độ hay ý đồ của người nói, không phải thời gian hay địa điểm. Cấu trúc: chủ ngữ + 是 + cụm nói quan điểm/thái độ (真心喜欢, 故意不告诉, 不同意, 觉得…很好) + 的. Phần giữa 是 và 的 là điều được nhấn mạnh. Phủ định: 不是…的 hay 是不…的: 我是不同意的, 他不是忘了. Mẫu này hay dùng khi giải thích lý do hay làm rõ thái độ.",
+  "tip": "Đừng nhầm với 是……的 nhấn mạnh thời gian/địa điểm ở cấp 2: ở đây phần nhấn mạnh là quan điểm hay ý đồ, không phải khi nào hay ở đâu.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“我是真心喜欢这份工作的” nghĩa là gì?",
+    "o": [
+     "Tôi làm việc này chỉ vì tiền",
+     "Tôi không thích công việc này",
+     "Tôi thích công việc này hôm qua",
+     "Tôi thật lòng thích công việc này"
+    ],
+    "a": 3,
+    "why": "是……的 ở đây nhấn mạnh thái độ thật lòng thích công việc của người nói."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他是故意不告诉你的，不是忘___。",
+    "o": [
+     "的",
+     "了",
+     "过",
+     "着"
+    ],
+    "a": 1,
+    "why": "不是忘了 là phủ định của việc quên, dùng 了."
+   },
+   {
+    "q": "Câu nào dùng 是……的 SAI?",
+    "o": [
+     "我是真心喜欢这份工作的",
+     "他是故意不告诉你的",
+     "这件事我是不同意的",
+     "我是昨天真心喜欢的这份工作"
+    ],
+    "a": 3,
+    "why": "是……的 nhấn mạnh thái độ không xếp 昨天 vào giữa như vậy; muốn nhấn mạnh thời gian thì nói 我是昨天开始喜欢这份工作的."
+   },
+   {
+    "q": "“她是觉得这个办法很好，才决定试一试的” — phần nhấn mạnh là gì?",
+    "o": [
+     "Thời gian thử",
+     "Địa điểm thử",
+     "Quan điểm thấy cách này rất hay",
+     "Số lần thử"
+    ],
+    "a": 2,
+    "why": "觉得这个办法很好 là quan điểm được nhấn mạnh giữa 是 và 的."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "这件事我是不同意的",
+     "这件事我是不不同意的",
+     "这件事我是不同意",
+     "这件事我不同意的是"
+    ],
+    "a": 0,
+    "why": "Cấu trúc: 是 + 不同意 + 的."
+   },
+   {
+    "q": "Muốn phủ định “我是真心喜欢的” thì nói thế nào?",
+    "o": [
+     "我不是真心喜欢的",
+     "我是真心不喜欢的",
+     "我是不真心喜欢的",
+     "我真心不是喜欢的"
+    ],
+    "a": 0,
+    "why": "Phủ định của 是……的 là 不是……的."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-19",
+  "stage": 4,
+  "title": "不是…，而是… / …，然而… — không phải… mà là… / … tuy nhiên…",
+  "hook": "“他不是不努力，而是方法不对；然而，他并没有放弃。” — anh ấy không phải không cố gắng, mà là phương pháp sai; tuy nhiên, anh ấy không hề bỏ cuộc.",
+  "examples": [
+   "他不是不努力，而是方法不对。(Tā bú shì bù nǔlì, ér shì fāngfǎ bú duì.) — Anh ấy không phải không cố gắng, mà là phương pháp sai.",
+   "这不是你的错，而是我的问题。(Zhè bú shì nǐ de cuò, ér shì wǒ de wèn tí.) — Đây không phải lỗi của bạn, mà là vấn đề của tôi.",
+   "天气很冷，然而孩子们还是去上学了。(Tiānqì hěn lěng, rán'ér háizimen háishì qù shàng xué le.) — Trời rất lạnh, tuy nhiên các em nhỏ vẫn đi học.",
+   "他很累，然而他没有停下来休息。(Tā hěn lèi, rán'ér tā méiyǒu tíng xiàlai xiūxi.) — Anh ấy rất mệt, tuy nhiên anh ấy không dừng lại nghỉ."
+  ],
+  "speak": "他不是不努力，而是方法不对。这不是你的错，而是我的问题。天气很冷，然而孩子们还是去上学了。他很累，然而他没有停下来休息。",
+  "rule": "不是…，而是… dùng để phủ định một điều rồi đưa ra điều đúng thay thế: 不是不努力，而是方法不对. 不是 đứng trước điều bị phủ định, 而是 đứng trước điều đúng. …，然而… dùng để nối hai vế trái ngược: vế trước nói một tình huống, vế sau nói kết quả ngược với dự đoán: 天气很冷，然而还是去上学了. 然而 trang trọng hơn 但是, hay dùng trong văn viết, thường đi với 还是/仍然/却.",
+  "tip": "而是 luôn đi sau 不是, không dùng một mình. 然而 đứng đầu vế sau, sau dấu phẩy; đừng dùng 然而 để nối hai danh từ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他不是不努力，而是方法不对” nghĩa là gì?",
+    "o": [
+     "Anh ấy không cố gắng",
+     "Anh ấy không có phương pháp",
+     "Anh ấy cố gắng nhưng phương pháp sai",
+     "Anh ấy không muốn cố gắng"
+    ],
+    "a": 2,
+    "why": "不是…，而是… phủ định điều sai rồi đưa ra điều đúng: phương pháp sai."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天气很冷，___孩子们还是去上学了。",
+    "o": [
+     "而是",
+     "不是",
+     "然而",
+     "而且"
+    ],
+    "a": 2,
+    "why": "Hai vế trái ngược, vế sau ngược dự đoán, dùng 然而."
+   },
+   {
+    "q": "Câu nào dùng SAI?",
+    "o": [
+     "他不是不努力，而是方法不对",
+     "这不是你的错，而是我的问题",
+     "天气很冷，然而孩子们还是去上学了",
+     "他而是努力，不是方法不对"
+    ],
+    "a": 3,
+    "why": "而是 phải đứng sau 不是, không đứng đầu câu."
+   },
+   {
+    "q": "“然而” khác “但是” ở chỗ nào?",
+    "o": [
+     "Giống hệt nhau",
+     "然而 chỉ dùng trong khẩu ngữ",
+     "但是 trang trọng hơn",
+     "然而 trang trọng hơn, hay dùng trong văn viết"
+    ],
+    "a": 3,
+    "why": "然而 trang trọng hơn 但是, hay dùng trong văn viết."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "这不是你的错，而是我的问题",
+     "这不是你的错，而且我的问题",
+     "这是不是你的错，而是我的问题",
+     "这不是你的错，而是是我的问题"
+    ],
+    "a": 0,
+    "why": "Cấu trúc: 不是…，而是…."
+   },
+   {
+    "q": "“他很累，然而他没有停下来” — 然而 nối hai vế có quan hệ gì?",
+    "o": [
+     "Nguyên nhân - kết quả",
+     "Đối lập, kết quả ngược dự đoán",
+     "Liệt kê",
+     "Ví dụ"
+    ],
+    "a": 1,
+    "why": "然而 nối hai vế trái ngược: mệt nhưng không dừng lại."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-20",
+  "stage": 4,
+  "title": "首先…，其次… — liệt kê theo thứ tự",
+  "hook": "“首先把米洗干净，其次把水加好。” — kể việc theo thứ tự: trước hết…，rồi đến…",
+  "examples": [
+   "首先把米洗干净，其次把水加好，再按下开关。(Shǒuxiān bǎ mǐ xǐ gānjìng, qícì bǎ shuǐ jiā hǎo, zài àn xià kāiguān.) — Trước hết vo gạo cho sạch, rồi đến cho nước vào, sau đó bấm nút nấu.",
+   "首先我要谢谢大家，其次我想说说今年的计划。(Shǒuxiān wǒ yào xièxie dàjiā, qícì wǒ xiǎng shuōshuo jīnnián de jìhuà.) — Trước hết tôi muốn cảm ơn mọi người, tiếp theo tôi muốn nói về kế hoạch năm nay.",
+   "做这道题，首先要看清题目，其次要写出步骤。(Zuò zhè dào tí, shǒuxiān yào kàn qīng tímù, qícì yào xiě chū bùzhòu.) — Làm bài này, trước hết phải đọc kỹ đề, rồi đến viết ra các bước.",
+   "首先把行李放在门口，其次去楼下买早饭。(Shǒuxiān bǎ xíngli fàng zài ménkǒu, qícì qù lóu xià mǎi zǎofàn.) — Trước hết để hành lý ở cửa, tiếp theo xuống lầu mua bữa sáng."
+  ],
+  "speak": "首先把米洗干净，其次把水加好，再按下开关。首先我要谢谢大家，其次我想说说今年的计划。做这道题，首先要看清题目，其次要写出步骤。首先把行李放在门口，其次去楼下买早饭。",
+  "rule": "首先 mở đầu việc hay lý do đầu tiên, 其次 mở đầu việc hay lý do tiếp theo; sau 其次 thường còn có 然后 hoặc 最后. Dùng khi kể trình tự làm việc hoặc liệt kê lý do theo thứ tự quan trọng, hai vế phải cùng loại (cùng là việc làm hoặc cùng là lý do). Không dùng 其次 một mình khi chưa có 首先 mở đầu.",
+  "tip": "Người Việt hay quên 其次 mà nhảy thẳng sang 然后 — muốn nhấn thứ tự liệt kê thì giữ cặp 首先…其次…; 其次 không đứng một mình ở đầu câu độc lập.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“首先…，其次…” nghĩa là gì?",
+    "o": [
+     "Hoặc… hoặc…",
+     "Tuy… nhưng…",
+     "Nếu… thì…",
+     "Trước hết…，rồi đến… (liệt kê theo thứ tự)"
+    ],
+    "a": 3,
+    "why": "首先…其次… liệt kê việc hay lý do theo thứ tự trước sau."
+   },
+   {
+    "q": "Điền vào chỗ trống: 做这道题，___要看清题目，其次要写出步骤。",
+    "o": [
+     "否则",
+     "首先",
+     "或者",
+     "甚至"
+    ],
+    "a": 1,
+    "why": "Vế đầu tiên trong cặp liệt kê dùng 首先."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "其次我要谢谢大家，首先我想说说计划。",
+     "首先要看清题目，其次要写出步骤。",
+     "首先把行李放好，其次去买早饭。",
+     "首先把米洗干净，其次把水加好。"
+    ],
+    "a": 0,
+    "why": "其次 phải đứng sau 首先, không được đảo thứ tự."
+   },
+   {
+    "q": "“其次” nghĩa là gì?",
+    "o": [
+     "Trước hết",
+     "Ngược lại",
+     "Tiếp theo / thứ hai",
+     "Cuối cùng"
+    ],
+    "a": 2,
+    "why": "其次 nghĩa là tiếp theo, thứ hai trong trình tự liệt kê."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "首先做饭，其次去买菜。",
+     "做饭首先，其次去买菜。",
+     "首先去买菜，然后首先做饭。",
+     "其次去买菜，首先做饭。"
+    ],
+    "a": 0,
+    "why": "Thứ tự đúng là 首先…，其次…."
+   },
+   {
+    "q": "Sau 首先…，其次… thường có thể thêm từ nào?",
+    "o": [
+     "如果",
+     "然后/最后",
+     "但是",
+     "因为"
+    ],
+    "a": 1,
+    "why": "Sau 其次 thường còn có 然后 hoặc 最后 để kể tiếp trình tự."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-21",
+  "stage": 4,
+  "title": "…，于是… / …，可见… — …，thế là… / …，có thể thấy…",
+  "hook": "“天下雨了，于是我们回家了。” — việc trước dẫn tới việc sau, thế là…",
+  "examples": [
+   "天下雨了，于是我们回家了。(Tiān xià yǔ le, yúshì wǒmen huí jiā le.) — Trời đổ mưa, thế là chúng tôi về nhà.",
+   "他每天跑步，于是身体越来越好。(Tā měitiān pǎobù, yúshì shēn tǐ yuè lái yuè hǎo.) — Anh ấy chạy bộ mỗi ngày, thế là sức khỏe ngày càng tốt.",
+   "这本书大家都喜欢，可见它写得很好。(Zhè běn shū dàjiā dōu xǐhuan, kějiàn tā xiě de hěn hǎo.) — Quyển sách này ai cũng thích, có thể thấy nó viết rất hay.",
+   "她每天练习说中文，可见她的中文进步很快。(Tā měitiān liànxí shuō Zhōngwén, kějiàn tā de Zhōngwén jìnbù hěn kuài.) — Cô ấy luyện nói tiếng Trung mỗi ngày, có thể thấy tiếng Trung của cô ấy tiến bộ rất nhanh."
+  ],
+  "speak": "天下雨了，于是我们回家了。他每天跑步，于是身体越来越好。这本书大家都喜欢，可见它写得很好。她每天练习说中文，可见她的中文进步很快。",
+  "rule": "于是 nối kết quả xảy ra tiếp sau sự việc ở vế trước, mang nghĩa thế là, vì vậy. 可见 đứng trước kết luận rút ra từ sự việc ở vế trước, nghĩa có thể thấy, rõ ràng là. 于是 kể chuyện tiếp diễn, 可见 đưa ra nhận xét hay kết luận; hai từ không thay thế cho nhau.",
+  "tip": "Đừng dùng 于是 trước một kết luận đánh giá (phải dùng 可见), và đừng dùng 可见 khi vế sau chỉ là một việc xảy ra tiếp theo.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“于是” nghĩa là gì?",
+    "o": [
+     "Bất kể",
+     "Thế là, vì vậy (kết quả xảy ra tiếp theo)",
+     "Giả sử",
+     "Ngược lại"
+    ],
+    "a": 1,
+    "why": "于是 nối kết quả xảy ra tiếp sau sự việc ở vế trước."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天下雨了，___我们回家了。",
+    "o": [
+     "假如",
+     "不管",
+     "于是",
+     "可见"
+    ],
+    "a": 2,
+    "why": "Về nhà là việc xảy ra tiếp sau khi trời mưa, dùng 于是."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他每天跑步，于是身体越来越好。",
+     "他很累，于是去睡觉了。",
+     "这本书大家都喜欢，可见它写得很好。",
+     "她很漂亮，可见去睡觉了。"
+    ],
+    "a": 3,
+    "why": "去睡觉 không phải kết luận rút ra từ việc xinh đẹp, không dùng 可见."
+   },
+   {
+    "q": "“可见” nghĩa là gì?",
+    "o": [
+     "Có thể thấy, rõ ràng là (rút ra kết luận)",
+     "Thế là",
+     "Nếu không thì",
+     "Hoặc… hoặc…"
+    ],
+    "a": 0,
+    "why": "可见 đưa ra kết luận rút ra từ sự việc ở vế trước."
+   },
+   {
+    "q": "Câu nào dùng 可见 đúng?",
+    "o": [
+     "他很累，可见去睡觉了。",
+     "天下雨了，可见我们回家了。",
+     "她每天练习说中文，可见她的中文进步很快。",
+     "天黑了，可见吃晚饭。"
+    ],
+    "a": 2,
+    "why": "Tiến bộ nhanh là kết luận rút ra từ việc luyện tập mỗi ngày."
+   },
+   {
+    "q": "于是 và 可见 khác nhau ở điểm nào?",
+    "o": [
+     "于是 dùng trong câu hỏi",
+     "于是 đưa kết luận, 可见 kể kết quả",
+     "Hai từ giống hệt nhau",
+     "于是 kể kết quả tiếp theo, 可见 đưa kết luận"
+    ],
+    "a": 3,
+    "why": "于是 kể chuyện tiếp diễn, 可见 đưa ra nhận xét hay kết luận."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-22",
+  "stage": 4,
+  "title": "…，甚至… — …，thậm chí…",
+  "hook": "“他很忙，甚至没有时间吃饭。” — mức độ đẩy xa hơn cả vế trước, thậm chí…",
+  "examples": [
+   "他很忙，甚至没有时间吃饭。(Tā hěn máng, shènzhì méi yǒu shíjiān chī fàn.) — Anh ấy bận lắm, thậm chí không có thời gian ăn cơm.",
+   "这家店很便宜，甚至比网上还便宜。(Zhè jiā diàn hěn piányi, shènzhì bǐ wǎng shàng hái piányi.) — Cửa hàng này rẻ lắm, thậm chí còn rẻ hơn trên mạng.",
+   "她喜欢唱歌，甚至在洗澡的时候也唱。(Tā xǐhuan chàng gē, shènzhì zài xǐzǎo de shíhou yě chàng.) — Cô ấy thích hát, thậm chí lúc tắm cũng hát.",
+   "雨下得很大，甚至把路都淹了。(Yǔ xià de hěn dà, shènzhì bǎ lù dōu yān le.) — Mưa to lắm, thậm chí ngập cả đường."
+  ],
+  "speak": "他很忙，甚至没有时间吃饭。这家店很便宜，甚至比网上还便宜。她喜欢唱歌，甚至在洗澡的时候也唱。雨下得很大，甚至把路都淹了。",
+  "rule": "甚至 đứng ở vế sau, đưa ra tình huống cực đoan hơn vế trước để nhấn mạnh mức độ; vế sau thường có 都 hoặc 也 đi kèm. Cấu trúc: vế thường + ，甚至 + vế cực đoan. Khác với 而且 (thêm một việc ngang hàng), 甚至 đẩy mức độ lên cao hơn.",
+  "tip": "Người Việt hay dịch 甚至 thành thậm chí rồi đặt ở đầu câu; trong tiếng Trung 甚至 thường đứng giữa câu, sau vế đầu, không đứng đầu câu.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“甚至” nghĩa là gì?",
+    "o": [
+     "Vì vậy",
+     "Thậm chí (đẩy mức độ cao hơn)",
+     "Nếu… thì…",
+     "Hoặc… hoặc…"
+    ],
+    "a": 1,
+    "why": "甚至 đưa ra tình huống cực đoan hơn để nhấn mạnh mức độ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他很忙，___没有时间吃饭。",
+    "o": [
+     "甚至",
+     "假如",
+     "首先",
+     "或者"
+    ],
+    "a": 0,
+    "why": "Không có thời gian ăn cơm là mức độ cực đoan hơn của việc rất bận."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这家店很便宜，甚至比网上还便宜。",
+     "她喜欢唱歌，甚至洗澡的时候也唱。",
+     "雨下得很大，甚至把路都淹了。",
+     "他很忙，甚至他很忙。"
+    ],
+    "a": 3,
+    "why": "Vế sau 甚至 phải là tình huống cực đoan hơn, không được lặp lại vế trước."
+   },
+   {
+    "q": "“甚至” thường đi với từ nào ở vế sau?",
+    "o": [
+     "吗",
+     "才",
+     "都/也",
+     "就"
+    ],
+    "a": 2,
+    "why": "Vế sau 甚至 thường có 都 hoặc 也 đi kèm để nhấn mạnh."
+   },
+   {
+    "q": "Câu nào dùng 甚至 đúng nhất?",
+    "o": [
+     "他跑得很快，甚至比我还快。",
+     "她会说中文，甚至她会说中文。",
+     "我喜欢苹果，甚至我喜欢苹果。",
+     "今天很热，甚至今天很热。"
+    ],
+    "a": 0,
+    "why": "Chạy nhanh hơn tôi là mức độ cao hơn việc chạy nhanh, dùng 甚至 đúng."
+   },
+   {
+    "q": "甚至 khác 而且 ở điểm nào?",
+    "o": [
+     "甚至 thêm việc ngang hàng, 而且 đẩy mức độ",
+     "甚至 đẩy mức độ cao hơn, 而且 thêm việc ngang hàng",
+     "Hai từ giống nhau",
+     "甚至 chỉ dùng trong câu hỏi"
+    ],
+    "a": 1,
+    "why": "甚至 đẩy mức độ lên cao hơn, 而且 chỉ thêm một việc ngang hàng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-23",
+  "stage": 4,
+  "title": "或者…，或者… — hoặc…，hoặc…",
+  "hook": "“周末或者去看电影，或者在家休息。” — hai lựa chọn ngang nhau, hoặc… hoặc…",
+  "examples": [
+   "周末或者去看电影，或者在家休息。(Zhōumò huòzhě qù kàn diànyǐng, huòzhě zài jiā xiūxi.) — Cuối tuần hoặc đi xem phim, hoặc ở nhà nghỉ ngơi.",
+   "你或者坐地铁，或者坐公共汽车，都很方便。(Nǐ huòzhě zuò dìtiě, huòzhě zuò gōnggòng qìchē, dōu hěn fāngbiàn.) — Bạn hoặc đi tàu điện ngầm, hoặc đi xe buýt, đều tiện cả.",
+   "或者今天去，或者明天去，你决定吧。(Huòzhě jīntiān qù, huòzhě míngtiān qù, nǐ juédìng ba.) — Hoặc đi hôm nay, hoặc đi ngày mai, bạn quyết đi.",
+   "晚上或者吃面条，或者吃米饭，我都行。(Wǎnshang huòzhě chī miàntiáo, huòzhě chī mǐfàn, wǒ dōu xíng.) — Tối hoặc ăn mì, hoặc ăn cơm, tôi sao cũng được."
+  ],
+  "speak": "周末或者去看电影，或者在家休息。你或者坐地铁，或者坐公共汽车，都很方便。或者今天去，或者明天去，你决定吧。晚上或者吃面条，或者吃米饭，我都行。",
+  "rule": "或者…，或者… liệt kê hai hoặc nhiều lựa chọn ngang hàng, chỉ chọn một trong số đó. Khác với 还是 (dùng trong câu hỏi để hỏi chọn cái nào), 或者 dùng trong câu trần thuật. Vế sau 或者 có thể tỉnh lược khi ngữ cảnh đã rõ, nhưng muốn nhấn mạnh sự lựa chọn thì giữ cả hai.",
+  "tip": "Đừng dùng 或者…或者… trong câu hỏi lựa chọn — câu hỏi dùng 还是; 或者 chỉ liệt kê lựa chọn trong câu kể.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“或者…，或者…” nghĩa là gì?",
+    "o": [
+     "Nếu… thì…",
+     "Đã… thì…",
+     "Tuy… nhưng…",
+     "Hoặc… hoặc… (liệt kê lựa chọn)"
+    ],
+    "a": 3,
+    "why": "或者…，或者… liệt kê các lựa chọn ngang hàng, chỉ chọn một."
+   },
+   {
+    "q": "Điền vào chỗ trống: 周末___去看电影，___在家休息。",
+    "o": [
+     "虽然…但是",
+     "因为…所以",
+     "或者…或者",
+     "如果…就"
+    ],
+    "a": 2,
+    "why": "Hai lựa chọn ngang hàng dùng cặp 或者…，或者…."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你或者去看电影，还是在家休息？",
+     "或者去看电影，或者在家休息。",
+     "或者今天去，或者明天去。",
+     "你或者坐地铁，或者坐公共汽车。"
+    ],
+    "a": 0,
+    "why": "Câu này trộn 或者 với 还是 trong một câu hỏi, không đúng mẫu 或者…或者…."
+   },
+   {
+    "q": "Câu hỏi lựa chọn dùng từ nào?",
+    "o": [
+     "于是",
+     "还是",
+     "甚至",
+     "或者"
+    ],
+    "a": 1,
+    "why": "Câu hỏi chọn cái nào dùng 还是, không dùng 或者."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "晚上吃面条或者，或者吃米饭。",
+     "晚上或者吃面条，还是吃米饭。",
+     "晚上或者吃面条，或者吃米饭。",
+     "晚上或者吃面条，或者吃面条。"
+    ],
+    "a": 2,
+    "why": "Hai lựa chọn khác nhau, dùng cặp 或者…，或者… là đúng."
+   },
+   {
+    "q": "或者…，或者… liệt kê mấy lựa chọn?",
+    "o": [
+     "Chỉ dùng cho câu hỏi",
+     "Không có lựa chọn nào",
+     "Chỉ một",
+     "Hai hoặc nhiều lựa chọn ngang hàng"
+    ],
+    "a": 3,
+    "why": "或者…，或者… liệt kê hai hoặc nhiều lựa chọn ngang hàng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-24",
+  "stage": 4,
+  "title": "…，否则… — …，nếu không thì…",
+  "hook": "“快走吧，否则我们要迟到了。” — không làm vế trước thì hậu quả xấu, nếu không thì…",
+  "examples": [
+   "快走吧，否则我们要迟到了。(Kuài zǒu ba, fǒuzé wǒmen yào chídào le.) — Đi nhanh lên, nếu không chúng ta sẽ muộn mất.",
+   "你要多喝水，否则会生病的。(Nǐ yào duō hē shuǐ, fǒuzé huì shēng bìng de.) — Bạn phải uống nhiều nước, nếu không sẽ bị ốm đấy.",
+   "记得带伞，否则会被雨淋湿。(Jìde dài sǎn, fǒuzé huì bèi yǔ lín shī.) — Nhớ mang ô, nếu không sẽ bị mưa ướt.",
+   "现在就开始复习，否则考试的时候会很着急。(Xiànzài jiù kāishǐ fùxí, fǒuzé kǎoshì de shíhou huì hěn zháojí.) — Bây giờ bắt đầu ôn ngay, nếu không đến lúc thi sẽ cuống lắm."
+  ],
+  "speak": "快走吧，否则我们要迟到了。你要多喝水，否则会生病的。记得带伞，否则会被雨淋湿。现在就开始复习，否则考试的时候会很着急。",
+  "rule": "否则 đứng ở vế sau, nêu hậu quả xấu sẽ xảy ra nếu không làm (hoặc không xảy ra) điều ở vế trước; nghĩa là nếu không thì, bằng không. Vế trước thường là lời khuyên, yêu cầu hoặc điều kiện. 否则 mang sắc thái cảnh báo, hậu quả thường là điều không mong muốn.",
+  "tip": "否则 không dùng để nói hậu quả tốt — chỉ dùng cho kết quả xấu hoặc điều cần tránh; muốn nói kết quả tốt thì dùng 就 hoặc 于是.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“否则” nghĩa là gì?",
+    "o": [
+     "Vì vậy",
+     "Hoặc… hoặc…",
+     "Nếu không thì (hậu quả xấu)",
+     "Thậm chí"
+    ],
+    "a": 2,
+    "why": "否则 nêu hậu quả xấu nếu không làm điều ở vế trước."
+   },
+   {
+    "q": "Điền vào chỗ trống: 快走吧，___我们要迟到了。",
+    "o": [
+     "否则",
+     "于是",
+     "可见",
+     "甚至"
+    ],
+    "a": 0,
+    "why": "Muộn là hậu quả xấu nếu không đi nhanh, dùng 否则."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "快走吧，否则我们要迟到了。",
+     "你要多喝水，否则身体会很好。",
+     "记得带伞，否则会被雨淋湿。",
+     "你要多喝水，否则会生病的。"
+    ],
+    "a": 1,
+    "why": "否则 chỉ dùng cho hậu quả xấu,身体会很好 là kết quả tốt nên không dùng 否则."
+   },
+   {
+    "q": "否则 thường đứng ở đâu?",
+    "o": [
+     "Cuối câu",
+     "Đầu câu",
+     "Trước chủ ngữ",
+     "Vế sau, trước hậu quả xấu"
+    ],
+    "a": 3,
+    "why": "否则 đứng ở vế sau, mở đầu phần hậu quả xấu."
+   },
+   {
+    "q": "Câu nào dùng 否则 đúng?",
+    "o": [
+     "现在就开始复习，否则考试的时候会很着急。",
+     "今天天气很好，否则我们去公园。",
+     "他很喜欢中文，否则学得很好。",
+     "我吃饭了，否则很饱。"
+    ],
+    "a": 0,
+    "why": "Cuống lúc thi là hậu quả xấu nếu không ôn từ bây giờ."
+   },
+   {
+    "q": "否则 dùng cho hậu quả nào?",
+    "o": [
+     "Câu hỏi",
+     "Hậu quả xấu / điều cần tránh",
+     "Hậu quả tốt",
+     "Kết quả trung tính"
+    ],
+    "a": 1,
+    "why": "否则 mang sắc thái cảnh báo, chỉ dùng cho hậu quả xấu."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-25",
+  "stage": 4,
+  "title": "假如…，（就）… / 万一…，（就）… — giả sử… thì… / lỡ mà… thì…",
+  "hook": "“假如明天下雨，我们就不去了。” — giả sử một tình huống, thì…",
+  "examples": [
+   "假如明天下雨，我们就不去了。(Jiǎrú míngtiān xià yǔ, wǒmen jiù bù qù le.) — Giả sử ngày mai mưa thì chúng tôi không đi nữa.",
+   "假如你有时间，就来我家吃饭吧。(Jiǎrú nǐ yǒu shíjiān, jiù lái wǒ jiā chī fàn ba.) — Giả sử bạn có thời gian thì đến nhà tôi ăn cơm nhé.",
+   "万一他不来，我们怎么办？(Wànyī tā bù lái, wǒmen zěnme bàn?) — Lỡ mà anh ấy không đến thì chúng ta làm sao?",
+   "万一下雨了，就在家里看电影吧。(Wànyī xià yǔ le, jiù zài jiālǐ kàn diànyǐng ba.) — Lỡ mà mưa thì ở nhà xem phim nhé."
+  ],
+  "speak": "假如明天下雨，我们就不去了。假如你有时间，就来我家吃饭吧。万一他不来，我们怎么办？万一下雨了，就在家里看电影吧。",
+  "rule": "假如 nêu giả thiết bình thường, có thể xảy ra, vế sau thường có 就. 万一 nêu giả thiết ít ngờ tới hoặc xấu, mang nghĩa lỡ mà, chẳng may, vế sau cũng có 就 hoặc là câu hỏi. Cả hai đều là giả định; khác 如果 ở chỗ 假如 trang trọng hơn một chút, 万一 nhấn mạnh tính bất ngờ hoặc xấu của giả thiết.",
+  "tip": "Đừng dùng 万一 cho giả thiết tốt đẹp hay thường ngày — 万一 dành cho chuyện ít xảy ra hoặc không mong muốn; giả thiết bình thường dùng 假如 hoặc 如果.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“假如” nghĩa là gì?",
+    "o": [
+     "Đã… thì…",
+     "Thậm chí",
+     "Giả sử (giả thiết có thể xảy ra)",
+     "Bất kể"
+    ],
+    "a": 2,
+    "why": "假如 nêu giả thiết bình thường, có thể xảy ra."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___明天下雨，我们就不去了。",
+    "o": [
+     "万一",
+     "可见",
+     "于是",
+     "假如"
+    ],
+    "a": 3,
+    "why": "Ngày mai mưa là giả thiết bình thường, dùng 假如."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "万一你有时间，就来我家吃饭吧。",
+     "假如明天下雨，我们就不去了。",
+     "假如你有时间，就来我家吃饭吧。",
+     "万一他不来，我们怎么办？"
+    ],
+    "a": 0,
+    "why": "有时间 là giả thiết bình thường, không dùng 万一."
+   },
+   {
+    "q": "万一 nhấn mạnh điều gì?",
+    "o": [
+     "Kết quả chắc chắn",
+     "Giả thiết ít ngờ tới hoặc xấu",
+     "Giả thiết bình thường",
+     "Câu hỏi lựa chọn"
+    ],
+    "a": 1,
+    "why": "万一 nêu giả thiết ít ngờ tới hoặc xấu, nghĩa là lỡ mà, chẳng may."
+   },
+   {
+    "q": "Câu nào dùng 万一 đúng?",
+    "o": [
+     "万一你有空，就来玩吧。",
+     "万一今天是星期一，我们去上课。",
+     "万一下雨了，就在家里看电影吧。",
+     "万一他很高，就打篮球。"
+    ],
+    "a": 2,
+    "why": "Mưa bất ngờ là giả thiết ít ngờ tới, dùng 万一 đúng."
+   },
+   {
+    "q": "Sau 假如/万一, vế sau thường có từ nào?",
+    "o": [
+     "吗",
+     "都",
+     "但是",
+     "就"
+    ],
+    "a": 3,
+    "why": "Vế sau của 假如 và 万一 thường có 就."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-26",
+  "stage": 4,
+  "title": "不管…，（都…） — bất kể…，đều…",
+  "hook": "“不管多忙，他都坚持跑步。” — bất kể điều kiện nào, kết quả vẫn vậy.",
+  "examples": [
+   "不管多忙，他都坚持跑步。(Bùguǎn duō máng, tā dōu jiānchí pǎobù.) — Bất kể bận đến đâu, anh ấy vẫn kiên trì chạy bộ.",
+   "不管天气怎么样，我们都要去。(Bùguǎn tiānqì zěnmeyàng, wǒmen dōu yào qù.) — Bất kể thời tiết thế nào, chúng tôi vẫn phải đi.",
+   "不管你说什么，我都不改变主意。(Bùguǎn nǐ shuō shénme, wǒ dōu bù gǎibiàn zhǔyī.) — Bất kể bạn nói gì, tôi cũng không đổi ý.",
+   "不管多贵，这件衣服我都要买。(Bùguǎn duō guì, zhè jiàn yīfu wǒ dōu yào mǎi.) — Bất kể đắt đến đâu, bộ quần áo này tôi cũng phải mua."
+  ],
+  "speak": "不管多忙，他都坚持跑步。不管天气怎么样，我们都要去。不管你说什么，我都不改变主意。不管多贵，这件衣服我都要买。",
+  "rule": "不管…，都… nêu một điều kiện bất kỳ (thường là câu hỏi hoặc mức độ) rồi khẳng định kết quả không đổi: bất kể… đều…. Vế 不管 thường chứa từ hỏi (什么/怎么/多…) hoặc tính từ mức độ; 都 ở vế sau có thể tỉnh lược khi ngữ khí đã rõ, nhưng giữ 都 thì nhấn mạnh hơn.",
+  "tip": "不管 khác 如果: 如果 là nếu (điều kiện có thể đổi kết quả), 不管 là bất kể (điều kiện nào kết quả cũng vậy) — đừng dịch 不管 thành nếu.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不管…，都…” nghĩa là gì?",
+    "o": [
+     "Vì… nên…",
+     "Bất kể… đều… (kết quả không đổi)",
+     "Hoặc… hoặc…",
+     "Nếu… thì…"
+    ],
+    "a": 1,
+    "why": "不管 nêu điều kiện bất kỳ rồi khẳng định kết quả không đổi."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___多忙，他都坚持跑步。",
+    "o": [
+     "因为",
+     "如果",
+     "假如",
+     "不管"
+    ],
+    "a": 3,
+    "why": "Bận đến đâu vẫn chạy bộ, điều kiện nào kết quả cũng vậy, dùng 不管."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "不管你说什么，我都不改变主意。",
+     "不管多贵，这件衣服我都要买。",
+     "不管天气很好，我们都要去。",
+     "不管天气怎么样，我们都要去。"
+    ],
+    "a": 2,
+    "why": "Vế 不管 phải chứa từ hỏi hoặc mức độ, không dùng câu khẳng định thường như 天气很好."
+   },
+   {
+    "q": "Vế 不管 thường chứa gì?",
+    "o": [
+     "Từ hỏi hoặc mức độ (什么/怎么/多…)",
+     "Câu hỏi lựa chọn",
+     "Từ chỉ thời gian",
+     "Từ nối nhân quả"
+    ],
+    "a": 0,
+    "why": "Vế 不管 thường chứa từ hỏi hoặc từ chỉ mức độ."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "不管他说什么，我都不听。",
+     "不管他很高，我都不听。",
+     "不管他是老师，我都不听。",
+     "不管他说中文，我都不听。"
+    ],
+    "a": 0,
+    "why": "说什么 chứa từ hỏi 什么, đúng mẫu 不管…."
+   },
+   {
+    "q": "不管 khác 如果 ở điểm nào?",
+    "o": [
+     "如果 dùng cho kết quả không đổi",
+     "不管 là bất kể (kết quả không đổi), 如果 là nếu (kết quả có thể đổi)",
+     "不管 dùng trong câu hỏi",
+     "Hai từ giống nhau"
+    ],
+    "a": 1,
+    "why": "不管 khẳng định kết quả không đổi, 如果 để điều kiện đổi kết quả."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-27",
+  "stage": 4,
+  "title": "无论…，都/也… / 哪怕…，也/还… — dù… đều/cũng… / cho dù… cũng/vẫn…",
+  "hook": "“无论多难，他也坚持学下去。” — dù khó đến đâu, cũng kiên trì.",
+  "examples": [
+   "无论多难，他也坚持学下去。(Wúlùn duō nán, tā yě jiānchí xué xiàqù.) — Dù khó đến đâu, anh ấy cũng kiên trì học tiếp.",
+   "无论你去哪里，我都跟着你。(Wúlùn nǐ qù nǎlǐ, wǒ dōu gēn zhe nǐ.) — Dù bạn đi đâu, tôi cũng đi theo bạn.",
+   "哪怕只有一点儿时间，他也要看书。(Nǎpà zhǐ yǒu yīdiǎnr shíjiān, tā yě yào kàn shū.) — Cho dù chỉ có một chút thời gian, anh ấy cũng phải đọc sách.",
+   "哪怕下雨，我们还要去爬山。(Nǎpà xià yǔ, wǒmen hái yào qù pá shān.) — Cho dù mưa, chúng tôi vẫn phải đi leo núi."
+  ],
+  "speak": "无论多难，他也坚持学下去。无论你去哪里，我都跟着你。哪怕只有一点儿时间，他也要看书。哪怕下雨，我们还要去爬山。",
+  "rule": "无论…，都/也… và 哪怕…，也/还… đều là nhượng bộ vô điều kiện: dù điều kiện nào, kết quả vẫn giữ. 无论 thường đi với từ hỏi hoặc mức độ, trung tính; 哪怕 nhấn mạnh điều kiện cực đoan, khó khăn (cho dù, ngay cả khi), vế sau dùng 也 hoặc 还. So với 不管, 无论 trang trọng hơn, 哪怕 nhấn mạnh hơn.",
+  "tip": "哪怕 đừng dịch thành dù đơn thuần — nó mang nghĩa ngay cả khi (điều khó nhất), nên vế sau phải là kết quả vẫn kiên quyết làm; dùng 哪怕 cho điều kiện nhẹ nhàng sẽ nghe quá mức.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“无论…，都/也…” nghĩa là gì?",
+    "o": [
+     "Vì… nên…",
+     "Nếu… thì…",
+     "Hoặc… hoặc…",
+     "Dù… đều/cũng…"
+    ],
+    "a": 3,
+    "why": "无论 nêu điều kiện bất kỳ rồi khẳng định kết quả vẫn giữ."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___多难，他也坚持学下去。",
+    "o": [
+     "无论",
+     "因为",
+     "如果",
+     "于是"
+    ],
+    "a": 0,
+    "why": "Khó đến đâu cũng kiên trì học, dùng 无论."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "哪怕只有一点儿时间，他也要看书。",
+     "哪怕下雨，我们还要去爬山。",
+     "哪怕天气很好，他也要看书。",
+     "无论你去哪里，我都跟着你。"
+    ],
+    "a": 2,
+    "why": "天气很好 là điều kiện nhẹ nhàng, không dùng 哪怕 để nhấn mạnh điều cực đoan."
+   },
+   {
+    "q": "哪怕 nhấn mạnh điều gì?",
+    "o": [
+     "Điều kiện bình thường",
+     "Điều kiện cực đoan, khó khăn",
+     "Câu hỏi",
+     "Kết quả chắc chắn"
+    ],
+    "a": 1,
+    "why": "哪怕 nhấn mạnh điều kiện cực đoan, khó khăn nhất."
+   },
+   {
+    "q": "Câu nào dùng 哪怕 đúng?",
+    "o": [
+     "哪怕今天天气好，他也要看书。",
+     "哪怕你有时间，他也要看书。",
+     "哪怕只有一点儿时间，他也要看书。",
+     "哪怕他是学生，他也要看书。"
+    ],
+    "a": 2,
+    "why": "Chỉ có một chút thời gian là điều kiện cực đoan, dùng 哪怕 đúng."
+   },
+   {
+    "q": "无论 so với 不管 thì sao?",
+    "o": [
+     "不管 trang trọng hơn 无论",
+     "无论 chỉ dùng trong câu hỏi",
+     "无论 và 不管 hoàn toàn khác nghĩa",
+     "无论 trang trọng hơn, 哪怕 nhấn mạnh hơn"
+    ],
+    "a": 3,
+    "why": "无论 trang trọng hơn 不管, còn 哪怕 nhấn mạnh điều kiện cực đoan hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-28",
+  "stage": 4,
+  "title": "既然…，就… (cấp 4) — đã thế thì…",
+  "hook": "“既然来了，就多玩一会儿吧。” — sự thật đã rõ, thì cứ làm tiếp.",
+  "examples": [
+   "既然来了，就多玩一会儿吧。(Jìrán lái le, jiù duō wán yīhuìr ba.) — Đã đến rồi thì chơi thêm một lát đi.",
+   "既然你不喜欢，就不要买了。(Jìrán nǐ bù xǐhuan, jiù bù yào mǎi le.) — Đã không thích thì đừng mua nữa.",
+   "既然天气这么好，就去公园走走吧。(Jìrán tiānqì zhème hǎo, jiù qù gōngyuán zǒuzou ba.) — Đã thời tiết đẹp thế này thì ra công viên đi dạo đi.",
+   "既然决定了，就要坚持到底。(Jìrán juédìng le, jiù yào jiānchí dàodǐ.) — Đã quyết định rồi thì phải kiên trì đến cùng."
+  ],
+  "speak": "既然来了，就多玩一会儿吧。既然你不喜欢，就不要买了。既然天气这么好，就去公园走走吧。既然决定了，就要坚持到底。",
+  "rule": "既然 nêu một sự thật đã biết, đã xảy ra làm tiền đề, 就 đưa ra kết luận hay hành động hợp lý theo tiền đề đó: đã… thì…. Khác 如果 (giả sử chưa biết), 既然 nói về điều đã chắc chắn. Vế 就 có thể là lời khuyên, quyết định hoặc kết quả tất yếu.",
+  "tip": "Đừng dùng 既然 cho giả thiết chưa xảy ra — 既然 chỉ dùng khi sự việc đã rõ hoặc đã xảy ra; chưa chắc thì dùng 如果 hoặc 假如.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“既然…，就…” nghĩa là gì?",
+    "o": [
+     "Hoặc… hoặc…",
+     "Đã (sự thật đã rõ)… thì…",
+     "Nếu không thì…",
+     "Giả sử… thì…"
+    ],
+    "a": 1,
+    "why": "既然 nêu sự thật đã biết làm tiền đề, 就 đưa ra kết luận theo đó."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___来了，就多玩一会儿吧。",
+    "o": [
+     "不管",
+     "假如",
+     "既然",
+     "如果"
+    ],
+    "a": 2,
+    "why": "Đã đến rồi là sự thật đã xảy ra, dùng 既然."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "既然明天下雨，我们就不去了。",
+     "既然你不喜欢，就不要买了。",
+     "既然决定了，就要坚持到底。",
+     "既然天气这么好，就去公园走走吧。"
+    ],
+    "a": 0,
+    "why": "明天下雨 chưa xảy ra, chưa phải sự thật đã rõ, phải dùng 如果 hoặc 假如."
+   },
+   {
+    "q": "既然 khác 如果 ở điểm nào?",
+    "o": [
+     "Hai từ giống nhau",
+     "既然 dùng cho tương lai",
+     "如果 dùng cho quá khứ",
+     "既然 nói điều đã chắc chắn, 如果 giả sử chưa biết"
+    ],
+    "a": 3,
+    "why": "既然 nói về điều đã chắc chắn, 如果 giả sử điều chưa biết."
+   },
+   {
+    "q": "Câu nào dùng 既然 đúng?",
+    "o": [
+     "既然你来了，就一起吃饭吧。",
+     "既然可能下雨，就带伞吧。",
+     "既然明天有空，就一起吃饭吧。",
+     "既然你想去，就可能去吧。"
+    ],
+    "a": 0,
+    "why": "你来了 là sự thật đã xảy ra, dùng 既然 đúng."
+   },
+   {
+    "q": "Sau 既然, vế sau thường có từ nào?",
+    "o": [
+     "都",
+     "就",
+     "吗",
+     "但是"
+    ],
+    "a": 1,
+    "why": "Vế sau của 既然 thường có 就 để đưa ra kết luận."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-29",
+  "stage": 4,
+  "title": "…，好… — …，để… / … thì tốt",
+  "hook": "“把门关上，好让孩子睡觉。” — làm vế trước để vế sau được tốt, để…",
+  "examples": [
+   "把门关上，好让孩子睡觉。(Bǎ mén guān shàng, hǎo ràng háizi shuì jiào.) — Đóng cửa lại, để cho con ngủ.",
+   "你早点儿来，好帮我做饭。(Nǐ zǎo diǎnr lái, hǎo bāng wǒ zuò fàn.) — Bạn đến sớm một chút, để giúp tôi nấu cơm.",
+   "把灯打开，好写作业。(Bǎ dēng dǎ kāi, hǎo xiě zuòyè.) — Bật đèn lên, để làm bài tập.",
+   "声音小一点儿，好让大家听清楚。(Shēngyīn xiǎo yīdiǎnr, hǎo ràng dàjiā tīng qīngchu.) — Nói nhỏ một chút, để mọi người nghe cho rõ."
+  ],
+  "speak": "把门关上，好让孩子睡觉。你早点儿来，好帮我做饭。把灯打开，好写作业。声音小一点儿，好让大家听清楚。",
+  "rule": "好 ở đây nối vế sau chỉ mục đích hoặc kết quả mong muốn của hành động ở vế trước: để…, cho tiện…. Vế sau thường bắt đầu bằng 让 hoặc một động từ chỉ việc muốn đạt được. Đây là cách nói mục đích ngắn gọn trong khẩu ngữ, tương đương với 以便 hoặc 为了 trong văn viết.",
+  "tip": "好 này không phải tính từ tốt đứng một mình — đừng dịch tách rời mà phải dịch cả cụm …, để…; nhầm với 好 trong câu khen sẽ hiểu sai ý mục đích.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“好” trong “把门关上，好让孩子睡觉” nghĩa là gì?",
+    "o": [
+     "Tốt (khen)",
+     "Để… (chỉ mục đích)",
+     "Thích",
+     "Rất"
+    ],
+    "a": 1,
+    "why": "好 ở đây nối vế sau chỉ mục đích: đóng cửa để cho con ngủ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你早点儿来，___帮我做饭。",
+    "o": [
+     "因为",
+     "如果",
+     "但是",
+     "好"
+    ],
+    "a": 3,
+    "why": "Đến sớm để giúp nấu cơm, vế sau chỉ mục đích dùng 好."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你早点儿来，好帮我做饭。",
+     "把门关上，好让孩子睡觉。",
+     "把门关上，好天气很好。",
+     "把灯打开，好写作业。"
+    ],
+    "a": 2,
+    "why": "Vế sau 好 phải là mục đích hoặc việc muốn đạt, 天气很好 không phải mục đích của việc đóng cửa."
+   },
+   {
+    "q": "Vế sau 好 thường bắt đầu bằng gì?",
+    "o": [
+     "让 hoặc động từ chỉ việc muốn đạt",
+     "但是",
+     "如果",
+     "吗"
+    ],
+    "a": 0,
+    "why": "Vế sau 好 thường bắt đầu bằng 让 hoặc động từ chỉ việc muốn đạt được."
+   },
+   {
+    "q": "Câu nào dùng 好 chỉ mục đích đúng?",
+    "o": [
+     "这个菜很好吃，好想吃。",
+     "他学习很好，好老师。",
+     "声音小一点儿，好让大家听清楚。",
+     "天气很好，好热。"
+    ],
+    "a": 2,
+    "why": "Nói nhỏ để mọi người nghe rõ là quan hệ mục đích, dùng 好 đúng."
+   },
+   {
+    "q": "好 chỉ mục đích tương đương với từ trang trọng nào?",
+    "o": [
+     "如果",
+     "但是",
+     "因为",
+     "以便/为了"
+    ],
+    "a": 3,
+    "why": "好 chỉ mục đích trong khẩu ngữ tương đương 以便 hoặc 为了 trong văn viết."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-30",
+  "stage": 4,
+  "title": "无标记 — câu phức không từ nối",
+  "hook": "“他不舒服，今天没来上课。” — không có từ nối mà hai vế vẫn gắn với nhau.",
+  "examples": [
+   "他不舒服，今天没来上课。(Tā bù shūfu, jīntiān méi lái shàng kè.) — Anh ấy không khỏe, hôm nay không đến lớp.",
+   "天黑了，我们回家吧。(Tiān hēi le, wǒmen huí jiā ba.) — Trời tối rồi, chúng ta về nhà đi.",
+   "你先走，我随后就到。(Nǐ xiān zǒu, wǒ suíhòu jiù dào.) — Bạn đi trước đi, tôi đến ngay sau.",
+   "我请他吃饭，他很高兴。(Wǒ qǐng tā chī fàn, tā hěn gāoxìng.) — Tôi mời anh ấy ăn cơm, anh ấy rất vui."
+  ],
+  "speak": "他不舒服，今天没来上课。天黑了，我们回家吧。你先走，我随后就到。我请他吃饭，他很高兴。",
+  "rule": "Câu phức tiếng Trung có thể không dùng từ nối: hai vế đặt cạnh nhau, quan hệ (nhân quả, thời gian, điều kiện, đối lập) do ngữ nghĩa và thứ tự các vế quyết định. Vế trước thường nêu nguyên nhân, thời gian hoặc điều kiện, vế sau nêu kết quả hoặc hành động. Khi dịch sang tiếng Việt thường phải thêm từ nối (vì, nên, rồi) cho rõ nghĩa.",
+  "tip": "Người Việt hay thêm từ nối vào mọi chỗ — nhưng tiếng Trung lược từ nối rất thường xuyên; đọc câu không từ nối thì dựa vào thứ tự và logic, đừng cố tìm từ nối.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "Câu phức không từ nối nghĩa là gì?",
+    "o": [
+     "Hai vế nối bằng 如果",
+     "Hai vế nối bằng 但是",
+     "Một câu chỉ có một vế",
+     "Hai vế đặt cạnh nhau, không có từ nối"
+    ],
+    "a": 3,
+    "why": "Câu phức không từ nối: hai vế đặt cạnh nhau, quan hệ do ngữ nghĩa và thứ tự quyết định."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他不舒服，___没来上课。",
+    "o": [
+     "今天",
+     "但是",
+     "因为",
+     "所以"
+    ],
+    "a": 0,
+    "why": "Câu gốc không dùng từ nối, chỗ trống là trạng ngữ thời gian 今天."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "天黑了，我们回家吧。",
+     "他不舒服，因为今天没来上课。",
+     "他不舒服，今天没来上课。",
+     "你先走，我随后就到。"
+    ],
+    "a": 1,
+    "why": "因为 đặt sai chỗ làm câu vô nghĩa: không khỏe không phải vì hôm nay không đến lớp."
+   },
+   {
+    "q": "“他不舒服，今天没来上课” — quan hệ giữa hai vế là gì?",
+    "o": [
+     "Giả thiết",
+     "Đối lập",
+     "Nguyên nhân – kết quả",
+     "Lựa chọn"
+    ],
+    "a": 2,
+    "why": "Không khỏe là nguyên nhân, không đến lớp là kết quả."
+   },
+   {
+    "q": "Câu nào là câu phức không từ nối?",
+    "o": [
+     "他不舒服，今天没来上课。",
+     "如果下雨，我们就不去。",
+     "他不但聪明，而且努力。",
+     "虽然他不舒服，但是他来了。"
+    ],
+    "a": 0,
+    "why": "Câu này không có từ nối nào, hai vế đặt cạnh nhau."
+   },
+   {
+    "q": "Khi dịch câu không từ nối sang tiếng Việt thường phải làm gì?",
+    "o": [
+     "Đổi thứ tự hai vế",
+     "Thêm từ nối (vì, nên, rồi) cho rõ nghĩa",
+     "Bỏ hết từ nối",
+     "Thêm câu hỏi"
+    ],
+    "a": 1,
+    "why": "Tiếng Việt thường cần thêm từ nối để quan hệ giữa hai vế được rõ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-31",
+  "stage": 4,
+  "title": "不…也… — không… cũng…",
+  "hook": "“他不去，我也不去。” — vế trước không, vế sau cũng không.",
+  "examples": [
+   "他不去，我也不去。(Tā bù qù, wǒ yě bù qù.) — Anh ấy không đi, tôi cũng không đi.",
+   "这个菜不好吃，那个菜也不好吃。(Zhège cài bù hǎochī, nàge cài yě bù hǎochī.) — Món này không ngon, món kia cũng không ngon.",
+   "你不说，我也不问。(Nǐ bù shuō, wǒ yě bù wèn.) — Bạn không nói, tôi cũng không hỏi.",
+   "今天不冷，明天也不冷。(Jīntiān bù lěng, míngtiān yě bù lěng.) — Hôm nay không lạnh, ngày mai cũng không lạnh."
+  ],
+  "speak": "他不去，我也不去。这个菜不好吃，那个菜也不好吃。你不说，我也不问。今天不冷，明天也不冷。",
+  "rule": "不…也… nối hai vế phủ định song song: vế trước phủ định một việc, vế sau dùng 也 phủ định thêm một việc tương tự, nghĩa là không… cũng không…. 也 ở vế sau là bắt buộc để tạo quan hệ song song; hai vế thường có chủ ngữ khác nhau hoặc nói về hai sự việc khác nhau.",
+  "tip": "Đừng bỏ 也 ở vế sau — không có 也 thì hai câu chỉ là hai câu phủ định rời rạc, không còn quan hệ cũng; và đừng dùng 都 thay 也 ở đây.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不…也…” nghĩa là gì?",
+    "o": [
+     "Dù… cũng…",
+     "Không… nhưng…",
+     "Nếu không… thì…",
+     "Không… cũng không…"
+    ],
+    "a": 3,
+    "why": "不…也… nối hai vế phủ định song song: vế trước không, vế sau cũng không."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他不去，我___不去。",
+    "o": [
+     "都",
+     "也",
+     "就",
+     "才"
+    ],
+    "a": 1,
+    "why": "Vế sau của mẫu 不…也… bắt buộc dùng 也."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这个菜不好吃，那个菜也不好吃。",
+     "他不去，我也不去。",
+     "他不去，我都去。",
+     "你不说，我也不问。"
+    ],
+    "a": 2,
+    "why": "我都去 là khẳng định, không còn là vế phủ định song song với 他不去."
+   },
+   {
+    "q": "Từ nào bắt buộc ở vế sau của mẫu này?",
+    "o": [
+     "也",
+     "就",
+     "都",
+     "才"
+    ],
+    "a": 0,
+    "why": "也 ở vế sau là bắt buộc để tạo quan hệ song song."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "今天不冷，明天才冷。",
+     "今天不冷，明天就冷。",
+     "今天不冷，明天也不冷。",
+     "今天不冷，明天都冷。"
+    ],
+    "a": 2,
+    "why": "Ngày mai cũng không lạnh, đúng mẫu 不…也…."
+   },
+   {
+    "q": "不…也… nối hai vế như thế nào?",
+    "o": [
+     "Hai vế đối lập",
+     "Một vế là câu hỏi",
+     "Một vế khẳng định, một vế phủ định",
+     "Hai vế phủ định song song, tương tự nhau"
+    ],
+    "a": 3,
+    "why": "不…也… nối hai vế phủ định song song, tương tự nhau."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-32",
+  "stage": 4,
+  "title": "Cách nói số：概数 / 小数、分数、百分数、倍数 — số xấp xỉ, thập phân, phân số, phần trăm, bội số",
+  "hook": "“这本书三十来块钱。” — số xấp xỉ, số thập phân, phân số đều có cách nói riêng.",
+  "examples": [
+   "这本书三十来块钱。(Zhè běn shū sānshí lái kuài qián.) — Quyển sách này khoảng ba mươi đồng.",
+   "他身高一点七五米。(Tā shēngāo yī diǎn qī wǔ mǐ.) — Anh ấy cao một phẩy bảy năm mét.",
+   "三分之一的学生来自农村。(Sān fēn zhī yī de xuésheng láizì nóngcūn.) — Một phần ba học sinh đến từ nông thôn.",
+   "今年的人数比去年增加了百分之二十。(Jīnnián de rénshù bǐ qùnián zēngjiā le bǎi fēn zhī èrshí.) — Số người năm nay tăng hai mươi phần trăm so với năm ngoái."
+  ],
+  "speak": "这本书三十来块钱。他身高一点七五米。三分之一的学生来自农村。今年的人数比去年增加了百分之二十。",
+  "rule": "Số xấp xỉ: số + 来 + lượng từ (三十来块 = khoảng ba mươi đồng), hoặc dùng 左右, 大约. Số thập phân đọc 点 (一点七五 = 1,75). Phân số: mẫu số + 分之 + tử số (三分之一 = 1/3), 一半 = một nửa. Phần trăm: 百分之 + số (百分之二十 = 20%). Bội số: A + 比 + B + 多/长… + số + 倍 (长两倍 = dài gấp đôi).",
+  "tip": "Đừng đọc phân số theo thứ tự tiếng Việt (một phần ba → 三分之一, mẫu số đọc trước); và 来 trong 三十来块 đứng sau số, trước lượng từ, không đứng cuối câu.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“三十来块” nghĩa là gì?",
+    "o": [
+     "Đúng ba mươi đồng",
+     "Ba mươi đồng lẻ",
+     "Ba mươi mốt đồng",
+     "Khoảng ba mươi đồng"
+    ],
+    "a": 3,
+    "why": "数词 + 来 + 量词 nói số xấp xỉ: khoảng ba mươi đồng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他身高一___七五米。",
+    "o": [
+     "分",
+     "之",
+     "点",
+     "来"
+    ],
+    "a": 2,
+    "why": "Số thập phân dùng 点: 一点七五 = 1,75."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "三分之一是一分之三。",
+     "班里一半的学生是女生。",
+     "今年的人数增加了百分之二十。",
+     "这本书三十来块钱。"
+    ],
+    "a": 0,
+    "why": "Một phần ba phải nói 三分之一, mẫu số đọc trước, 一分之三 là sai."
+   },
+   {
+    "q": "“三分之一” nghĩa là gì?",
+    "o": [
+     "Ba phần ba",
+     "Một phần ba",
+     "Một phần một",
+     "Ba phần một"
+    ],
+    "a": 1,
+    "why": "三分之一 = mẫu số ba, tử số một, tức một phần ba."
+   },
+   {
+    "q": "“长两倍” nghĩa là gì?",
+    "o": [
+     "Dài gấp đôi",
+     "Dài gấp ba",
+     "Dài hơn một chút",
+     "Dài bằng nhau"
+    ],
+    "a": 0,
+    "why": "两倍 = gấp hai lần, 长两倍 là dài gấp đôi."
+   },
+   {
+    "q": "“百分之二十” là bao nhiêu phần trăm?",
+    "o": [
+     "200%",
+     "20%",
+     "2%",
+     "12%"
+    ],
+    "a": 1,
+    "why": "百分之二十 = 20 phần trăm."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-33",
+  "stage": 4,
+  "title": "Nhấn mạnh：反问句 / 双重否定 — câu hỏi tu từ và phủ định kép",
+  "hook": "“这不是很好吗？” — hỏi mà không cần trả lời, để nhấn mạnh.",
+  "examples": [
+   "这不是很好吗？(Zhè bù shì hěn hǎo ma?) — Chẳng phải thế này rất tốt sao?",
+   "难道你不知道吗？(Nándào nǐ bù zhīdào ma?) — Chẳng lẽ bạn không biết sao?",
+   "他不得不去。(Tā bùdé bù qù.) — Anh ấy không thể không đi.",
+   "没有人不喜欢他。(Méi yǒu rén bù xǐhuan tā.) — Không ai là không thích anh ấy."
+  ],
+  "speak": "这不是很好吗？难道你不知道吗？他不得不去。没有人不喜欢他。",
+  "rule": "Câu hỏi tu từ dùng hình thức hỏi (不是…吗, 难道…吗, 哪儿…) để khẳng định mạnh điều ngược lại, không cần câu trả lời. Phủ định kép dùng hai phủ định (不得不, 没有…不…, 不是不…) để khẳng định mạnh: không thể không = nhất định phải. Cả hai đều là cách nhấn mạnh, mạnh hơn câu khẳng định thường.",
+  "tip": "Dịch câu hỏi tu từ sang tiếng Việt phải giữ giọng khẳng định (chẳng phải… sao?), đừng dịch thành câu hỏi thật rồi trả lời; phủ định kép đừng bỏ bớt một phủ định kẻo đổi hẳn nghĩa.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“这不是很好吗？” nghĩa là gì?",
+    "o": [
+     "Hỏi cái gì tốt",
+     "Chẳng phải thế này rất tốt sao? (khẳng định mạnh)",
+     "Hỏi thật có tốt không",
+     "Phủ định điều tốt"
+    ],
+    "a": 1,
+    "why": "Câu hỏi tu từ dùng hình thức hỏi để khẳng định mạnh điều ngược lại."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___你不知道吗？",
+    "o": [
+     "因为",
+     "但是",
+     "如果",
+     "难道"
+    ],
+    "a": 3,
+    "why": "难道…吗 là mẫu câu hỏi tu từ: chẳng lẽ… sao?"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他不必须去吗？",
+     "难道你不知道吗？",
+     "他不得不去。",
+     "这不是很好吗？"
+    ],
+    "a": 0,
+    "why": "不必须去吗 không phải mẫu câu hỏi tu từ hay phủ định kép đúng."
+   },
+   {
+    "q": "“他不得不去” nghĩa là gì?",
+    "o": [
+     "Anh ấy không đi",
+     "Anh ấy không muốn đi",
+     "Anh ấy nhất định phải đi",
+     "Anh ấy muốn đi"
+    ],
+    "a": 2,
+    "why": "不得不 = không thể không, tức nhất định phải."
+   },
+   {
+    "q": "“没有人不喜欢他” nghĩa là gì?",
+    "o": [
+     "Có người không thích anh ấy",
+     "Không ai thích anh ấy",
+     "Mọi người đều thích anh ấy",
+     "Anh ấy không thích ai"
+    ],
+    "a": 2,
+    "why": "Phủ định kép 没有…不… khẳng định mạnh: mọi người đều thích anh ấy."
+   },
+   {
+    "q": "Phủ định kép có tác dụng gì?",
+    "o": [
+     "Đổi thành câu hỏi",
+     "Phủ định hoàn toàn",
+     "Làm câu yếu đi",
+     "Nhấn mạnh khẳng định"
+    ],
+    "a": 3,
+    "why": "Hai phủ định thành khẳng định mạnh, mạnh hơn câu khẳng định thường."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-34",
+  "stage": 4,
+  "title": "Nhấn mạnh với 也/都：一+量词+也（都）/也没… / 连…也/都… — một… cũng… / ngay cả… cũng…",
+  "hook": "“他一个字也没说。” — một chữ cũng không nói, nhấn mạnh mức tối thiểu.",
+  "examples": [
+   "他一个字也没说。(Tā yī gè zì yě méi shuō.) — Anh ấy một chữ cũng không nói.",
+   "我一口水也没喝。(Wǒ yī kǒu shuǐ yě méi hē.) — Tôi một ngụm nước cũng chưa uống.",
+   "连小孩子都知道这件事。(Lián xiǎo háizi dōu zhīdào zhè jiàn shì.) — Ngay cả trẻ con cũng biết chuyện này.",
+   "连他也不来，我们怎么办？(Lián tā yě bù lái, wǒmen zěnme bàn?) — Ngay cả anh ấy cũng không đến, chúng ta làm sao đây?"
+  ],
+  "speak": "他一个字也没说。我一口水也没喝。连小孩子都知道这件事。连他也不来，我们怎么办？",
+  "rule": "一 + lượng từ + (danh từ) + 也/都 + phủ định nhấn mạnh đến mức tối thiểu cũng không: 一个字也没说 = một chữ cũng không nói. 连…也/都… nhấn mạnh cả đối tượng ít ngờ nhất cũng như vậy: 连小孩子都… = ngay cả trẻ con cũng…. Hai mẫu đều dùng 也/都 để đẩy mức nhấn mạnh lên cao nhất, vế sau thường là phủ định hoặc kết quả bất ngờ.",
+  "tip": "Mẫu 一…也… bắt buộc đi với phủ định (没/不) mới ra nghĩa nhấn mạnh; nói 一个字也说了 là sai logic. 连…都… thì vế sau khẳng định hoặc phủ định đều được.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他一个字也没说” nghĩa là gì?",
+    "o": [
+     "Anh ấy nói rất nhiều",
+     "Anh ấy một chữ cũng không nói",
+     "Anh ấy nói một chữ",
+     "Anh ấy không biết chữ"
+    ],
+    "a": 1,
+    "why": "一 + 量词 + 也 + 没 nhấn mạnh đến mức tối thiểu cũng không."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我一口水___没喝。",
+    "o": [
+     "都",
+     "就",
+     "才",
+     "也"
+    ],
+    "a": 3,
+    "why": "Mẫu 一…也… dùng 也 để nhấn mạnh mức tối thiểu."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我一口水也没喝。",
+     "连小孩子都知道这件事。",
+     "他一个字也说了。",
+     "他一个字也没说。"
+    ],
+    "a": 2,
+    "why": "一个字也说了 sai logic: mẫu 一…也… bắt buộc đi với phủ định."
+   },
+   {
+    "q": "“连小孩子都知道” nhấn mạnh điều gì?",
+    "o": [
+     "Ngay cả trẻ con (ít ngờ nhất) cũng biết",
+     "Chỉ trẻ con biết",
+     "Chỉ người lớn biết",
+     "Trẻ con không biết"
+    ],
+    "a": 0,
+    "why": "连…都… nhấn mạnh cả đối tượng ít ngờ nhất cũng như vậy."
+   },
+   {
+    "q": "Câu nào dùng 连…都… đúng?",
+    "o": [
+     "连他也不来，我们怎么办？",
+     "他连也不来，我们怎么办？",
+     "连他不来也，我们怎么办？",
+     "连他来，我们怎么办？"
+    ],
+    "a": 0,
+    "why": "连 + đối tượng + 也/都 + vế sau mới đúng mẫu."
+   },
+   {
+    "q": "Mẫu 一…也… bắt buộc đi với gì?",
+    "o": [
+     "Khẳng định",
+     "Phủ định (没/不)",
+     "Câu cảm thán",
+     "Câu hỏi"
+    ],
+    "a": 1,
+    "why": "一…也… chỉ ra nghĩa nhấn mạnh khi đi với phủ định 没 hoặc 不."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-35",
+  "stage": 4,
+  "title": "口语格式 (1)：不×白不× / 动词+一×是一× / （没）有什么（好）×的 — nói kiểu khẩu ngữ (1)",
+  "hook": "“不吃白不吃。” — đồ miễn phí mà không ăn thì phí, cứ ăn đi.",
+  "examples": [
+   "不吃白不吃，反正不要钱。(Bù chī bái bù chī, fǎnzhèng bù yào qián.) — Không ăn thì phí, đằng nào cũng không mất tiền.",
+   "不看白不看，电影票都买了。(Bù kàn bái bù kàn, diànyǐng piào dōu mǎi le.) — Không xem thì phí, vé phim mua rồi mà.",
+   "他做一件事是一件事，从来不拖。(Tā zuò yī jiàn shì shì yī jiàn shì, cónglái bù tuō.) — Anh ấy làm được việc nào chắc việc ấy, không bao giờ dây dưa.",
+   "这没什么好说的，我们走吧。(Zhè méi shénme hǎo shuō de, wǒmen zǒu ba.) — Chuyện này chẳng có gì đáng nói, chúng ta đi thôi."
+  ],
+  "speak": "不吃白不吃，反正不要钱。不看白不看，电影票都买了。他做一件事是一件事，从来不拖。这没什么好说的，我们走吧。",
+  "rule": "不×白不×: việc có lợi mà không làm thì uổng, nghĩa là không làm thì phí (thường là đồ miễn phí, cơ hội sẵn có). 动词+一×是一×: làm được bao nhiêu chắc bấy nhiêu, nhấn mạnh làm chắc từng việc. （没）有什么（好）×的: (không) có gì đáng để ×, dùng để coi nhẹ hoặc an ủi (没什么好怕的 = chẳng có gì đáng sợ).",
+  "tip": "不×白不× chỉ dùng cho việc có lợi, không tốn kém; đừng dùng cho việc tốn tiền hay có hại. 有什么好×的 mang giọng coi nhẹ — dùng sai ngữ cảnh sẽ nghe như coi thường người khác.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“不吃白不吃” nghĩa là gì?",
+    "o": [
+     "Không ăn thì phí (có lợi mà không làm thì uổng)",
+     "Không thích ăn",
+     "Ăn trắng",
+     "Không được ăn"
+    ],
+    "a": 0,
+    "why": "不×白不× nghĩa là việc có lợi mà không làm thì uổng phí."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___白不看，电影票都买了。",
+    "o": [
+     "不吃",
+     "不看",
+     "不去",
+     "不买"
+    ],
+    "a": 1,
+    "why": "Vé đã mua rồi, không xem thì phí, động từ là 看."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "不吃白不吃，反正不要钱。",
+     "他做一件事是一件事，从来不拖。",
+     "不买白不买，这件衣服很贵。",
+     "不看白不看，电影票都买了。"
+    ],
+    "a": 2,
+    "why": "Mua đồ đắt tốn tiền, không phải việc có lợi miễn phí nên không dùng 不×白不×."
+   },
+   {
+    "q": "“他做一件事是一件事” nghĩa là gì?",
+    "o": [
+     "Làm một việc rồi bỏ",
+     "Không làm việc gì",
+     "Làm nhiều việc cùng lúc",
+     "Làm việc nào chắc việc ấy"
+    ],
+    "a": 3,
+    "why": "动词+一×是一× nhấn mạnh làm được bao nhiêu chắc bấy nhiêu."
+   },
+   {
+    "q": "“这没什么好说的” nghĩa là gì?",
+    "o": [
+     "Chuyện này không ai biết",
+     "Chuyện này phải nói ngay",
+     "Chuyện này chẳng có gì đáng nói",
+     "Chuyện này rất hay, nên nói nhiều"
+    ],
+    "a": 2,
+    "why": "没什么好×的 nghĩa là chẳng có gì đáng để ×."
+   },
+   {
+    "q": "不×白不× chỉ dùng cho việc nào?",
+    "o": [
+     "Việc tốn nhiều tiền",
+     "Việc có hại",
+     "Việc khó khăn",
+     "Việc có lợi, không tốn kém"
+    ],
+    "a": 3,
+    "why": "不×白不× chỉ dùng cho việc có lợi, không tốn kém, không làm thì uổng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-36",
+  "stage": 4,
+  "title": "口语格式 (2)：×是×，Y是Y / ×也得×，不×也得× / ×就是了 — nói kiểu khẩu ngữ (2)",
+  "hook": "“贵是贵，好是好。” — đắt thì đắt, tốt thì tốt, hai mặt tách bạch.",
+  "examples": [
+   "贵是贵，好是好，这件衣服我还是要买。(Guì shì guì, hǎo shì hǎo, zhè jiàn yīfu wǒ háishi yào mǎi.) — Đắt thì đắt, tốt thì tốt, bộ quần áo này tôi vẫn muốn mua.",
+   "累是累，开心是开心，今天玩得很好。(Lèi shì lèi, kāixīn shì kāixīn, jīntiān wán de hěn hǎo.) — Mệt thì mệt, vui thì vui, hôm nay chơi rất vui.",
+   "你去也得去，不去也得去。(Nǐ qù yě děi qù, bù qù yě děi qù.) — Bạn đi cũng phải đi, không đi cũng phải đi.",
+   "你先回家就是了，别等我了。(Nǐ xiān huí jiā jiù shì le, bié děng wǒ le.) — Bạn cứ về nhà trước đi, đừng đợi tôi nữa."
+  ],
+  "speak": "贵是贵，好是好，这件衣服我还是要买。累是累，开心是开心，今天玩得很好。你去也得去，不去也得去。你先回家就是了，别等我了。",
+  "rule": "×是×，Y是Y: thừa nhận hai mặt đối lập cùng đúng, rồi đưa ra quyết định (A thì A, B thì B). ×也得×，不×也得×: dù muốn hay không cũng bắt buộc phải làm, nhấn mạnh không có lựa chọn. ×就是了: cứ làm thế là xong, giọng dứt khoát, thường đi sau lời khuyên (先回家就是了).",
+  "tip": "×是×，Y是Y hai vế phải là hai mặt khác nhau (một xấu một tốt hoặc hai tính chất khác nhau); ×就是了 đứng cuối câu khuyên, đừng dùng khi cần nói lý do dài.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“贵是贵，好是好” nghĩa là gì?",
+    "o": [
+     "Đắt thì đắt, tốt thì tốt (thừa nhận hai mặt)",
+     "Chỉ đắt, không tốt",
+     "Chỉ tốt, không đắt",
+     "Không đắt cũng không tốt"
+    ],
+    "a": 0,
+    "why": "×是×，Y是Y thừa nhận hai mặt đối lập cùng đúng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你去也得去，___也得去。",
+    "o": [
+     "走",
+     "来",
+     "去",
+     "不去"
+    ],
+    "a": 3,
+    "why": "Mẫu ×也得×，不×也得×: vế sau phủ định động từ ở vế trước."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "累是累，开心是开心，今天玩得很好。",
+     "贵是贵，贵是贵，这件衣服很贵。",
+     "你去也得去，不去也得去。",
+     "贵是贵，好是好，这件衣服我还是要买。"
+    ],
+    "a": 1,
+    "why": "×是×，Y是Y hai vế phải là hai mặt khác nhau, không được lặp lại cùng một mặt."
+   },
+   {
+    "q": "“你先回家就是了” nghĩa là gì?",
+    "o": [
+     "Bạn về nhà rồi quay lại",
+     "Bạn phải về nhà ngay lập tức",
+     "Bạn cứ về nhà trước đi (là xong)",
+     "Bạn không được về nhà"
+    ],
+    "a": 2,
+    "why": "×就是了 nghĩa là cứ làm thế là xong, giọng dứt khoát."
+   },
+   {
+    "q": "“×也得×，不×也得×” nhấn mạnh điều gì?",
+    "o": [
+     "Dù muốn hay không cũng bắt buộc phải làm",
+     "Làm hay không tùy ý",
+     "Không cần làm",
+     "Có nhiều lựa chọn"
+    ],
+    "a": 0,
+    "why": "Mẫu này nhấn mạnh bắt buộc phải làm, không có lựa chọn."
+   },
+   {
+    "q": "×是×，Y是Y hai vế phải là gì?",
+    "o": [
+     "Hai việc không liên quan",
+     "Hai mặt khác nhau của cùng một việc",
+     "Hai việc giống hệt nhau",
+     "Một câu hỏi và một câu trả lời"
+    ],
+    "a": 1,
+    "why": "Hai vế phải là hai mặt khác nhau của cùng một việc."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-37",
+  "stage": 4,
+  "title": "口语格式 (3)：还×呢 / 你×你的吧 — nói kiểu khẩu ngữ (3)",
+  "hook": "“还早呢，再睡一会儿吧。” — còn sớm mà, cứ ngủ thêm đi.",
+  "examples": [
+   "还早呢，再睡一会儿吧。(Hái zǎo ne, zài shuì yīhuìr ba.) — Còn sớm mà, ngủ thêm một lát đi.",
+   "还贵呢，我没钱买。(Hái guì ne, wǒ méi qián mǎi.) — Còn đắt lắm, tôi không có tiền mua.",
+   "你看你的书吧，别管我了。(Nǐ kàn nǐ de shū ba, bié guǎn wǒ le.) — Bạn cứ đọc sách của bạn đi, đừng lo cho tôi.",
+   "你忙你的吧，我自己回家。(Nǐ máng nǐ de ba, wǒ zìjǐ huí jiā.) — Bạn cứ bận việc của bạn đi, tôi tự về nhà."
+  ],
+  "speak": "还早呢，再睡一会儿吧。还贵呢，我没钱买。你看你的书吧，别管我了。你忙你的吧，我自己回家。",
+  "rule": "还×呢: nhấn mạnh mức độ còn cao (còn sớm, còn đắt lắm) hoặc việc còn chưa xong, thường đi với 呢 cuối câu, mang giọng trấn an hoặc than. 你×你的吧: bảo người nghe cứ làm việc của mình, đừng bận tâm chuyện khác (bạn cứ… của bạn đi), vế × lặp lại động từ, 吧 làm câu nhẹ nhàng.",
+  "tip": "还×呢 đừng nhầm với 还 (còn, vẫn) thường — có 呢 cuối câu mới ra giọng nhấn mạnh còn… lắm đấy; 你×你的吧 nghe thân mật, chỉ dùng với người quen, không dùng với người lớn tuổi hay cấp trên.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“还早呢” nghĩa là gì?",
+    "o": [
+     "Sáng sớm",
+     "Đã muộn rồi",
+     "Rất sớm, không ngủ được",
+     "Còn sớm mà (nhấn mạnh còn sớm lắm)"
+    ],
+    "a": 3,
+    "why": "还×呢 nhấn mạnh mức độ còn cao, ở đây là còn sớm lắm."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___贵呢，我没钱买。",
+    "o": [
+     "还",
+     "就",
+     "都",
+     "很"
+    ],
+    "a": 0,
+    "why": "还贵呢 nhấn mạnh còn đắt lắm, dùng 还 + 呢."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你看你的书吧，别管我了。",
+     "你忙你的吧，我不忙你的。",
+     "还贵呢，我没钱买。",
+     "还早呢，再睡一会儿吧。"
+    ],
+    "a": 1,
+    "why": "你×你的吧 phải lặp lại cùng động từ, 我不忙你的 không đúng mẫu."
+   },
+   {
+    "q": "“你忙你的吧” nghĩa là gì?",
+    "o": [
+     "Bạn bận giúp tôi đi",
+     "Bạn không được bận",
+     "Bạn cứ bận việc của bạn đi",
+     "Bạn đừng bận gì cả"
+    ],
+    "a": 2,
+    "why": "你×你的吧 nghĩa là bạn cứ làm việc của bạn đi, đừng bận tâm chuyện khác."
+   },
+   {
+    "q": "还×呢 khác 还 thường ở điểm nào?",
+    "o": [
+     "还×呢 chỉ dùng cho quá khứ",
+     "还×呢 là câu hỏi",
+     "Có 呢 cuối câu, giọng nhấn mạnh “còn… lắm đấy”",
+     "Không khác gì"
+    ],
+    "a": 2,
+    "why": "Có 呢 cuối câu mới ra giọng nhấn mạnh còn… lắm đấy."
+   },
+   {
+    "q": "你×你的吧 dùng với ai thì hợp?",
+    "o": [
+     "Ai cũng được, kể cả cấp trên",
+     "Người lạ hoàn toàn",
+     "Người lớn tuổi, cấp trên",
+     "Người thân quen, ngang hàng"
+    ],
+    "a": 3,
+    "why": "你×你的吧 nghe thân mật, chỉ dùng với người thân quen, ngang hàng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l4-38",
+  "stage": 4,
+  "title": "口语格式 (4)：让/叫你×你就× / 说什么／怎么（着）也得× — nói kiểu khẩu ngữ (4)",
+  "hook": "“叫你走你就走，别问了。” — bảo làm gì thì làm nấy.",
+  "examples": [
+   "叫你走你就走，别问了。(Jiào nǐ zǒu nǐ jiù zǒu, bié wèn le.) — Bảo bạn đi thì bạn cứ đi, đừng hỏi nữa.",
+   "让他来他就来，你不用担心。(Ràng tā lái tā jiù lái, nǐ bù yòng dānxīn.) — Bảo anh ấy đến thì anh ấy sẽ đến, bạn đừng lo.",
+   "说什么也得把这件事做完。(Shuō shénme yě děi bǎ zhè jiàn shì zuò wán.) — Nói gì thì nói cũng phải làm xong việc này.",
+   "怎么着也得去一趟，不能不去。(Zěnme zhe yě děi qù yī tàng, bùnéng bù qù.) — Thế nào cũng phải đi một chuyến, không thể không đi."
+  ],
+  "speak": "叫你走你就走，别问了。让他来他就来，你不用担心。说什么也得把这件事做完。怎么着也得去一趟，不能不去。",
+  "rule": "让/叫你×你就×: bảo làm gì thì làm đúng thế, nhấn mạnh nghe lời, không hỏi lại; chủ ngữ vế sau lặp lại người được bảo. 说什么/怎么（着）也得×: dù nói gì, dù thế nào cũng nhất định phải ×, nhấn mạnh quyết tâm không thay đổi. Cả hai đều là khẩu ngữ mạnh, mang giọng dứt khoát.",
+  "tip": "让/叫你×你就× mang giọng ra lệnh, chỉ dùng với người thân quen hoặc cấp dưới; 说什么也得× nhấn mạnh quyết tâm, đừng dùng cho việc nhỏ nhặt kẻo nghe quá nặng.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“叫你走你就走” nghĩa là gì?",
+    "o": [
+     "Đi rồi mới bảo",
+     "Bảo đừng đi",
+     "Hỏi có đi không",
+     "Bảo đi thì cứ đi (nghe lời, không hỏi lại)"
+    ],
+    "a": 3,
+    "why": "让/叫你×你就× nghĩa là bảo làm gì thì làm đúng thế."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___他来他就来，你不用担心。",
+    "o": [
+     "让",
+     "说",
+     "叫",
+     "问"
+    ],
+    "a": 0,
+    "why": "让他来他就来: bảo anh ấy đến thì anh ấy sẽ đến."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "叫你走你就走，别问了。",
+     "说什么也得把这件事做完。",
+     "叫你走你就别走，别问了。",
+     "让他来他就来，你不用担心。"
+    ],
+    "a": 2,
+    "why": "你就别走 mâu thuẫn với 叫你走, không đúng mẫu 让/叫你×你就×."
+   },
+   {
+    "q": "“说什么也得把这件事做完” nghĩa là gì?",
+    "o": [
+     "Nói xong mới làm việc này",
+     "Nói gì thì nói cũng phải làm xong việc này",
+     "Không cần làm xong việc này",
+     "Nói gì cũng được, không cần làm"
+    ],
+    "a": 1,
+    "why": "说什么也得× nghĩa là dù nói gì cũng nhất định phải làm."
+   },
+   {
+    "q": "“怎么着也得去一趟” nhấn mạnh điều gì?",
+    "o": [
+     "Dù thế nào cũng nhất định phải đi",
+     "Đi hay không tùy ý",
+     "Đi một chuyến cho vui",
+     "Có thể không đi"
+    ],
+    "a": 0,
+    "why": "怎么着也得× nhấn mạnh dù thế nào cũng nhất định phải làm."
+   },
+   {
+    "q": "让/叫你×你就× mang giọng gì?",
+    "o": [
+     "Giọng trang trọng trong văn viết",
+     "Giọng ra lệnh, chỉ dùng với người thân quen hoặc cấp dưới",
+     "Giọng hỏi ý kiến",
+     "Giọng cảm thán"
+    ],
+    "a": 1,
+    "why": "Mẫu này mang giọng ra lệnh, chỉ dùng với người thân quen hoặc cấp dưới."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-01",
+  "stage": 5,
+  "title": "彼此、如此 — lẫn nhau, như thế (chỉ thị đại từ)",
+  "hook": "“我们彼此了解。” — chúng tôi hiểu nhau: 彼此 là “nhau”, 如此 là “như thế, như vậy”.",
+  "examples": [
+   "我们是老朋友，彼此很了解。(Wǒmen shì lǎo péngyou, bǐcǐ hěn liǎojiě.) — Chúng tôi là bạn cũ, hiểu nhau rất rõ.",
+   "他们彼此帮助，一起把工作做完了。(Tāmen bǐcǐ bāngzhù, yīqǐ bǎ gōngzuò zuò wán le.) — Họ giúp đỡ lẫn nhau, cùng nhau làm xong việc.",
+   "天气如此热，大家都不想出门。(Tiānqì rúcǐ rè, dàjiā dōu bù xiǎng chūmén.) — Trời nóng như thế, ai cũng không muốn ra ngoài.",
+   "他如此认真，难怪考试考得很好。(Tā rúcǐ rènzhēn, nán guài kǎoshì kǎo de hěn hǎo.) — Anh ấy chăm chỉ như vậy, thảo nào thi rất tốt."
+  ],
+  "speak": "我们是老朋友，彼此很了解。他们彼此帮助，一起把工作做完了。天气如此热，大家都不想出门。他如此认真，难怪考试考得很好。",
+  "rule": "彼此 là đại từ chỉ thị, nghĩa “lẫn nhau, với nhau”, thường làm tân ngữ hoặc định ngữ, chủ ngữ thường là số nhiều (我们彼此/他们彼此). 如此 là đại từ chỉ thị chỉ mức độ hoặc cách thức, nghĩa “như thế, như vậy”, thường đứng trước tính từ hoặc động từ (如此热/如此认真), cũng có thể làm tân ngữ (事情如此).",
+  "tip": "Người Việt hay dịch 彼此 thành “mỗi người” — sai: 彼此 nhấn mạnh quan hệ hai chiều, A đối với B và B đối với A. 如此 không đứng sau động từ như 很.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“彼此” nghĩa là gì?",
+    "o": [
+     "Mỗi người một việc",
+     "Lẫn nhau, với nhau",
+     "Một mình",
+     "Rất nhiều"
+    ],
+    "a": 1,
+    "why": "彼此 nhấn mạnh quan hệ hai chiều: A đối với B và B đối với A."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他们___帮助，一起完成了任务。",
+    "o": [
+     "彼此",
+     "如此",
+     "很",
+     "都"
+    ],
+    "a": 0,
+    "why": "Họ giúp đỡ lẫn nhau nên dùng 彼此."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我们彼此了解",
+     "他们彼此帮助",
+     "我彼此很高兴",
+     "大家彼此关心"
+    ],
+    "a": 2,
+    "why": "彼此 cần chủ ngữ số nhiều (hai phía trở lên), không nói 我彼此."
+   },
+   {
+    "q": "“天气如此热” — 如此 ở đây nghĩa là gì?",
+    "o": [
+     "Như thế, đến mức ấy",
+     "Rất lạnh",
+     "Hôm qua",
+     "Ngày mai"
+    ],
+    "a": 0,
+    "why": "如此 chỉ mức độ: nóng như thế, nóng đến mức ấy."
+   },
+   {
+    "q": "Câu nào dùng 如此 đúng?",
+    "o": [
+     "他高如此",
+     "他如此高",
+     "如此他高",
+     "高他如此"
+    ],
+    "a": 1,
+    "why": "如此 đứng trước tính từ: 他如此高."
+   },
+   {
+    "q": "“如此认真” có thể thay bằng gì gần nghĩa nhất?",
+    "o": [
+     "Chăm chỉ một chút",
+     "Không chăm chỉ",
+     "Chăm chỉ hôm qua",
+     "Chăm chỉ như vậy"
+    ],
+    "a": 3,
+    "why": "如此 = như thế, như vậy: 如此认真 là chăm chỉ như vậy."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-02",
+  "stage": 5,
+  "title": "名量词：册、朵、幅、届、颗、匹、扇 — sách, hoa, tranh, khóa, sao, ngựa, cửa",
+  "hook": "“我买了三册书。” — tôi mua ba quyển sách: 册 là lượng từ cho sách đóng thành tập.",
+  "examples": [
+   "我买了两册书，桌子上还放着一朵花。(Wǒ mǎi le liǎng cè shū, zhuōzi shàng hái fàng zhe yī duǒ huā.) — Tôi mua hai quyển sách, trên bàn còn đặt một bông hoa.",
+   "墙上挂着一幅画，这是今年那届学生的毕业作品。(Qiáng shàng guà zhe yī fú huà, zhè shì jīnnián nà jiè xuésheng de bìyè zuòpǐn.) — Trên tường treo một bức tranh, đó là tác phẩm tốt nghiệp của khóa học sinh năm nay.",
+   "天上有几颗星星，草原上跑着一匹马。(Tiān shàng yǒu jǐ kē xīngxing, cǎoyuán shàng pǎo zhe yī pǐ mǎ.) — Trên trời có mấy ngôi sao, trên thảo nguyên có một con ngựa đang chạy.",
+   "这扇门坏了，风一吹就响。(Zhè shàn mén huài le, fēng yī chuī jiù xiǎng.) — Cánh cửa này hỏng rồi, gió thổi là kêu."
+  ],
+  "speak": "我买了两册书，桌子上还放着一朵花。墙上挂着一幅画，这是今年那届学生的毕业作品。天上有几颗星星，草原上跑着一匹马。这扇门坏了，风一吹就响。",
+  "rule": "册 dùng cho sách đóng thành tập; 朵 cho hoa, mây; 幅 cho tranh, vải; 届 cho khóa học, kỳ hội nghị hoặc thi đấu; 颗 cho vật nhỏ tròn như sao, hạt, răng; 匹 cho ngựa; 扇 cho cửa, cửa sổ. Công thức chung: số từ + lượng từ + danh từ.",
+  "tip": "Đừng dùng 个 thay hết: 一朵花 mới đúng, 一个花 nghe rất lạ; 一匹马 mới đúng. 届 khác 年: 这届学生 là khóa này, 今年 là năm nay.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“册” nghĩa là gì?",
+    "o": [
+     "Lượng từ của hoa",
+     "Lượng từ của sách đóng thành tập",
+     "Lượng từ của cửa",
+     "Lượng từ của ngựa"
+    ],
+    "a": 1,
+    "why": "册 là lượng từ của sách đóng thành tập: 三册书."
+   },
+   {
+    "q": "Điền vào chỗ trống: 墙上挂着一___画。",
+    "o": [
+     "朵",
+     "幅",
+     "册",
+     "颗"
+    ],
+    "a": 1,
+    "why": "Tranh dùng lượng từ 幅: 一幅画."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "一朵花",
+     "一匹马",
+     "一个花",
+     "一扇门"
+    ],
+    "a": 2,
+    "why": "Hoa phải dùng 朵, không nói 一个花."
+   },
+   {
+    "q": "“届” thường dùng với từ nào?",
+    "o": [
+     "学生 (khóa học)",
+     "花",
+     "星星",
+     "门"
+    ],
+    "a": 0,
+    "why": "届 dùng cho khóa học, kỳ thi: 这届学生."
+   },
+   {
+    "q": "“颗” dùng cho vật nào?",
+    "o": [
+     "Cửa sổ",
+     "Quyển sách",
+     "Ngôi sao",
+     "Bức tranh"
+    ],
+    "a": 2,
+    "why": "颗 dùng cho vật nhỏ tròn: 一颗星星."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天上有几___星星？",
+    "o": [
+     "幅",
+     "匹",
+     "朵",
+     "颗"
+    ],
+    "a": 3,
+    "why": "Ngôi sao là vật nhỏ tròn, dùng 颗: 几颗星星."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-03",
+  "stage": 5,
+  "title": "可、稍 — khá, hơi (phó từ mức độ)",
+  "hook": "“这件衣服可贵了。” — cái áo này đắt ghê: 可 đứng trước tính từ để nhấn mạnh mức độ.",
+  "examples": [
+   "这件衣服可贵了，我买不起。(Zhè jiàn yīfu kě guì le, wǒ mǎi bù qǐ.) — Cái áo này đắt ghê, tôi mua không nổi.",
+   "他跑得可快了，一下子就不见了。(Tā pǎo de kě kuài le, yīxiàzi jiù bù jiàn le.) — Anh ấy chạy nhanh ghê, thoáng cái đã không thấy đâu.",
+   "请把声音放得稍低一点儿，孩子在睡觉。(Qǐng bǎ shēngyīn fàng de shāo dī yīdiǎnr, háizi zài shuì jiào.) — Xin vặn nhỏ tiếng một chút, con đang ngủ.",
+   "天气稍冷了一点儿，记得多穿一件衣服。(Tiānqì shāo lěng le yīdiǎnr, jìde duō chuān yī jiàn yīfu.) — Trời lạnh hơn một chút, nhớ mặc thêm một cái áo."
+  ],
+  "speak": "这件衣服可贵了，我买不起。他跑得可快了，一下子就不见了。请把声音放得稍低一点儿，孩子在睡觉。天气稍冷了一点儿，记得多穿一件衣服。",
+  "rule": "可 đứng trước tính từ hoặc động từ tâm lý, nhấn mạnh mức độ cao, thường đi với 了 cuối câu (可贵了/可快了), mang giọng cảm thán. 稍 nghĩa “hơi, một chút”, đứng trước tính từ hoặc động từ, chỉ mức độ nhỏ, hay đi với 一点儿 hoặc 一下 (稍低一点儿/稍等一下).",
+  "tip": "可 không phải 可是: 可贵了 là “đắt ghê”, 可是贵了 là “nhưng mà đắt”. 稍 chỉ mức nhỏ nên không nói 稍很冷.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“这件衣服可贵了” — 可 ở đây có nghĩa gì?",
+    "o": [
+     "Nhưng mà",
+     "Rất, ghê (nhấn mạnh mức độ)",
+     "Có thể",
+     "Hơi"
+    ],
+    "a": 1,
+    "why": "可 trước tính từ nhấn mạnh mức độ cao: đắt ghê."
+   },
+   {
+    "q": "Điền vào chỗ trống: 请把声音放得___低一点儿。",
+    "o": [
+     "可",
+     "很",
+     "稍",
+     "就"
+    ],
+    "a": 2,
+    "why": "Muốn nhỏ đi một chút thì dùng 稍: 稍低一点儿."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他跑得可快了",
+     "天气稍冷了一点儿",
+     "他可高了",
+     "他稍很冷"
+    ],
+    "a": 3,
+    "why": "稍 chỉ mức nhỏ, không đi với 很: không nói 稍很冷."
+   },
+   {
+    "q": "“稍” nghĩa gần nhất với từ nào?",
+    "o": [
+     "Rất",
+     "Quá",
+     "Cực kỳ",
+     "Hơi, một chút"
+    ],
+    "a": 3,
+    "why": "稍 nghĩa là hơi, một chút."
+   },
+   {
+    "q": "Câu nào dùng 可 đúng để nhấn mạnh?",
+    "o": [
+     "这件衣服可贵了",
+     "可他不来",
+     "可是一个人",
+     "他可吃饭"
+    ],
+    "a": 0,
+    "why": "可 nhấn mạnh đứng trước tính từ: 可贵了."
+   },
+   {
+    "q": "“稍等一下” nghĩa là gì?",
+    "o": [
+     "Không đợi",
+     "Đợi một chút",
+     "Đợi rất lâu",
+     "Đợi hôm qua"
+    ],
+    "a": 1,
+    "why": "稍等一下 là đợi một chút."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-04",
+  "stage": 5,
+  "title": "不时、将、将要、时刻 — thỉnh thoảng, sắp, lúc nào cũng (phó từ thời gian)",
+  "hook": "“他不时看看手表。” — thỉnh thoảng anh ấy lại xem đồng hồ: 不时 là “thỉnh thoảng, lúc lúc”.",
+  "examples": [
+   "他不时看看手表，好像在等什么人。(Tā bùshí kànkan shǒubiǎo, hǎoxiàng zài děng shénme rén.) — Thỉnh thoảng anh ấy lại xem đồng hồ, hình như đang đợi ai.",
+   "火车将到达北京，请大家做好准备。(Huǒchē jiāng dàodá Běijīng, qǐng dàjiā zuò hǎo zhǔnbèi.) — Tàu sắp đến Bắc Kinh, xin mọi người chuẩn bị sẵn sàng.",
+   "明天将要下雨，记得带伞。(Míngtiān jiāngyào xià yǔ, jìde dài sǎn.) — Ngày mai sắp mưa, nhớ mang ô.",
+   "妈妈时刻关心着我的身体。(Māma shíkè guānxīn zhe wǒ de shēntǐ.) — Mẹ lúc nào cũng quan tâm đến sức khỏe của tôi."
+  ],
+  "speak": "他不时看看手表，好像在等什么人。火车将到达北京，请大家做好准备。明天将要下雨，记得带伞。妈妈时刻关心着我的身体。",
+  "rule": "不时 nghĩa “thỉnh thoảng”, chỉ cùng một việc lặp lại không đều trong một khoảng thời gian, đứng trước động từ. 将 và 将要 đều chỉ tương lai sắp xảy ra, 将要 nhấn mạnh hơn và thường đi với thời gian cụ thể; 将 trang trọng hơn 要. 时刻 nghĩa “lúc nào cũng, luôn luôn”, đứng trước động từ, nhấn mạnh không lúc nào quên.",
+  "tip": "不时 khác 有时: 不时 là cùng một việc lặp lại nhiều lần trong khoảng ngắn. 时刻 mang nghĩa “mọi lúc”, đừng nhầm với 时间 (thời gian) hay 时候 (lúc).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不时” nghĩa là gì?",
+    "o": [
+     "Không bao giờ",
+     "Thỉnh thoảng, lúc lúc",
+     "Ngày mai",
+     "Luôn luôn"
+    ],
+    "a": 1,
+    "why": "不时 là thỉnh thoảng, lúc lúc lại làm."
+   },
+   {
+    "q": "Điền vào chỗ trống: 火车___到达北京，请大家做好准备。",
+    "o": [
+     "将",
+     "不时",
+     "时刻",
+     "已经"
+    ],
+    "a": 0,
+    "why": "Việc sắp xảy ra trong tương lai dùng 将."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他不时看看手表",
+     "妈妈时刻关心我",
+     "明天将要下雨",
+     "他将昨天去北京"
+    ],
+    "a": 3,
+    "why": "将 chỉ tương lai, không đi với thời gian quá khứ như 昨天."
+   },
+   {
+    "q": "“将要” khác “将” ở điểm nào?",
+    "o": [
+     "将要 chỉ quá khứ",
+     "将要 nhấn mạnh tương lai sắp xảy ra hơn",
+     "将要 là phủ định",
+     "Không khác gì"
+    ],
+    "a": 1,
+    "why": "将要 nhấn mạnh hơn 将, thường đi với thời gian cụ thể."
+   },
+   {
+    "q": "“时刻” nghĩa gần nhất với từ nào?",
+    "o": [
+     "Thỉnh thoảng",
+     "Hôm qua",
+     "Lúc nào cũng",
+     "Ngày mai"
+    ],
+    "a": 2,
+    "why": "时刻 nghĩa là lúc nào cũng, luôn luôn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 妈妈___关心着我的身体。",
+    "o": [
+     "将要",
+     "不时",
+     "将",
+     "时刻"
+    ],
+    "a": 3,
+    "why": "Mẹ lúc nào cũng quan tâm nên dùng 时刻."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-05",
+  "stage": 5,
+  "title": "不免、差点儿、倒是、干脆、就、可 — khó tránh, suýt, lại, dứt khoát (phó từ ngữ khí)",
+  "hook": "“他倒是很想去。” — anh ấy thì lại rất muốn đi: 倒是 đảo ngược dự đoán của người nghe.",
+  "examples": [
+   "一个人住在国外，不免会想家。(Yī gè rén zhù zài guówài, bùmiǎn huì xiǎng jiā.) — Một mình sống ở nước ngoài, khó tránh khỏi nhớ nhà.",
+   "他跑得很快，差一点儿就赶上火车了。(Tā pǎo de hěn kuài, chà yīdiǎnr jiù gǎn shàng huǒchē le.) — Anh ấy chạy rất nhanh, suýt nữa thì kịp tàu.",
+   "这件衣服贵是贵，倒是很合身。(Zhè jiàn yīfu guì shì guì, dàoshì hěn héshēn.) — Cái áo này đắt thì đắt, nhưng lại rất vừa người.",
+   "他可喜欢这本书了，干脆一口气读完了。(Tā kě xǐhuan zhè běn shū le, gàncuì yī kǒu qì dú wán le.) — Anh ấy thích quyển sách này ghê, dứt khoát đọc một mạch cho xong."
+  ],
+  "speak": "一个人住在国外，不免会想家。他跑得很快，差一点儿就赶上火车了。这件衣服贵是贵，倒是很合身。他可喜欢这本书了，干脆一口气读完了。",
+  "rule": "不免 nghĩa “khó tránh khỏi”, dùng khi kết quả không mong muốn nhưng tất yếu xảy ra. 差（一）点儿 nghĩa “suýt nữa”, thường đi với 就 hoặc 没, chú ý phủ định đổi nghĩa: 差一点儿赶上了 là suýt kịp (thực ra kịp), 差一点儿没赶上 là suýt không kịp (thực ra không kịp). 倒是 nghĩa “ngược lại, lại”, thường đi sau một nhượng bộ (贵是贵，倒是…). 干脆 nghĩa “dứt khoát, quyết hẳn một cách”. 就 nhấn mạnh khẳng định quyết đoán, 可 nhấn mạnh cảm xúc, khẳng định mạnh (可不是/可好了).",
+  "tip": "Chữ 没 trong 差一点儿没赶上 lật ngược nghĩa, người Việt hay nhầm: có 没 là suýt không kịp, không có 没 là suýt kịp. 倒是 không phải 是…的.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“不免” nghĩa là gì?",
+    "o": [
+     "Khó tránh khỏi",
+     "Không thể",
+     "Rất vui",
+     "Không muốn"
+    ],
+    "a": 0,
+    "why": "不免 là khó tránh khỏi, kết quả tất yếu dù không mong muốn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他跑得很快，差___就赶上火车了。",
+    "o": [
+     "一点",
+     "一点儿",
+     "一些",
+     "一点点"
+    ],
+    "a": 1,
+    "why": "差一点儿 là mẫu cố định: suýt nữa."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他差一点儿赶上了火车",
+     "他差一点儿没赶上火车",
+     "他差一点儿了赶上火车",
+     "他差一点儿就到了"
+    ],
+    "a": 2,
+    "why": "了 không đứng giữa 差一点儿 và động từ: phải nói 差一点儿赶上了火车."
+   },
+   {
+    "q": "“这件衣服贵是贵，倒是很合身” — 倒是 ở đây có nghĩa gì?",
+    "o": [
+     "Vì vậy",
+     "Nhưng mà, ngược lại với dự đoán",
+     "Ngày mai",
+     "Rất đắt"
+    ],
+    "a": 1,
+    "why": "倒是 đảo ngược dự đoán: đắt thì đắt, nhưng lại rất vừa."
+   },
+   {
+    "q": "“干脆” nghĩa gần nhất với từ nào?",
+    "o": [
+     "Dứt khoát, quyết hẳn",
+     "Từ từ",
+     "Không muốn",
+     "Thỉnh thoảng"
+    ],
+    "a": 0,
+    "why": "干脆 là dứt khoát, quyết hẳn một cách."
+   },
+   {
+    "q": "“他可喜欢这本书了” — 可 ở đây làm gì?",
+    "o": [
+     "Phủ định",
+     "Hỏi có thể không",
+     "Chỉ thời gian",
+     "Nhấn mạnh cảm xúc, thích ghê"
+    ],
+    "a": 3,
+    "why": "可 ở đây nhấn mạnh cảm xúc: thích ghê."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-06",
+  "stage": 5,
+  "title": "也好 — …cũng được (trợ từ)",
+  "hook": "“去也好，不去也好，我都支持你。” — đi cũng được, không đi cũng được, tôi đều ủng hộ bạn: 也好 chấp nhận cả hai phía.",
+  "examples": [
+   "去也好，不去也好，我都支持你。(Qù yě hǎo, bù qù yě hǎo, wǒ dōu zhīchí nǐ.) — Đi cũng được, không đi cũng được, tôi đều ủng hộ bạn.",
+   "早点儿来也好，晚点儿来也好，只要你来就行。(Zǎo diǎnr lái yě hǎo, wǎn diǎnr lái yě hǎo, zhǐyào nǐ lái jiù xíng.) — Đến sớm cũng được, đến muộn cũng được, chỉ cần bạn đến là được.",
+   "他说下雨也好，出太阳也好，比赛照常进行。(Tā shuō xià yǔ yě hǎo, chū tàiyáng yě hǎo, bǐsài zhàocháng jìnxíng.) — Anh ấy nói mưa cũng được, nắng cũng được, trận đấu vẫn diễn ra bình thường.",
+   "你自己去也好，跟朋友一起去也好，路上小心就行。(Nǐ zìjǐ qù yě hǎo, gēn péngyou yīqǐ qù yě hǎo, lù shàng xiǎoxīn jiù xíng.) — Bạn tự đi cũng được, đi cùng bạn bè cũng được, trên đường cẩn thận là được."
+  ],
+  "speak": "去也好，不去也好，我都支持你。早点儿来也好，晚点儿来也好，只要你来就行。他说下雨也好，出太阳也好，比赛照常进行。你自己去也好，跟朋友一起去也好，路上小心就行。",
+  "rule": "也好 gắn sau một lựa chọn, dạng đầy đủ là A也好，B也好, nghĩa “…cũng được”, tỏ ý chấp nhận cả hai phía, vế sau thường là 都… hoặc 只要…就行. Dùng khi người nói không thiên về phía nào. Cũng có dạng đơn: 这样也好 (như thế cũng được).",
+  "tip": "也好 khác 还是: A也好，B也好 là “cái nào cũng được”; A还是B là hỏi chọn cái nào. Đừng quên vế sau phải có kết luận (都…/…就行).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“去也好，不去也好” nghĩa là gì?",
+    "o": [
+     "Nhất định phải đi",
+     "Đi cũng được, không đi cũng được",
+     "Chỉ đi thôi",
+     "Không đi đâu"
+    ],
+    "a": 1,
+    "why": "也好 chấp nhận cả hai phía: cái nào cũng được."
+   },
+   {
+    "q": "Điền vào chỗ trống: 早点儿来___，晚点儿来也好，只要你来就行。",
+    "o": [
+     "也好",
+     "还是",
+     "可是",
+     "就"
+    ],
+    "a": 0,
+    "why": "Hai vế song song đều dùng 也好: 早点儿来也好，晚点儿来也好."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "去也好，不去也好，我都支持你",
+     "早点儿来也好，晚点儿来也好",
+     "他也好不去也好",
+     "下雨也好，出太阳也好，比赛照常进行"
+    ],
+    "a": 2,
+    "why": "也好 gắn sau cả lựa chọn, phải nói 他去也好，不去也好."
+   },
+   {
+    "q": "“这样也好” nghĩa là gì?",
+    "o": [
+     "Như thế không được",
+     "Như thế cũng được",
+     "Nhất định như thế",
+     "Không như thế"
+    ],
+    "a": 1,
+    "why": "这样也好 là như thế cũng được."
+   },
+   {
+    "q": "Sau “A也好，B也好”, vế sau thường có gì?",
+    "o": [
+     "Kết luận như 都…/…就行",
+     "Một câu hỏi",
+     "Một phủ định",
+     "Không có gì"
+    ],
+    "a": 0,
+    "why": "Sau hai lựa chọn thường là kết luận: 我都支持你/只要你来就行."
+   },
+   {
+    "q": "“也好” khác “还是” ở điểm nào?",
+    "o": [
+     "也好 là hỏi lựa chọn",
+     "还是 là chấp nhận cả hai",
+     "Không khác gì",
+     "也好 là chấp nhận cả hai, 还是 là hỏi chọn cái nào"
+    ],
+    "a": 3,
+    "why": "也好 chấp nhận cả hai phía, 还是 hỏi chọn cái nào."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-07",
+  "stage": 5,
+  "title": "A来A去 / A着A着 / 没A没B / 有A有B — bốn mẫu lặp",
+  "hook": "“他走来走去，等了半个小时。” — anh ấy đi đi lại lại, đợi nửa tiếng: A来A去 nói hành động lặp đi lặp lại.",
+  "examples": [
+   "他在房间里走来走去，等了半个小时。(Tā zài fángjiān lǐ zǒu lái zǒu qù, děng le bàn gè xiǎoshí.) — Anh ấy đi đi lại lại trong phòng, đợi nửa tiếng đồng hồ.",
+   "说着说着，他就笑了。(Shuō zhe shuō zhe, tā jiù xiào le.) — Nói rồi nói, anh ấy bật cười.",
+   "这孩子没吃没喝，忙了一整天。(Zhè háizi méi chī méi hē, máng le yī zhěng tiān.) — Đứa bé này không ăn không uống, bận cả ngày.",
+   "他家有花有草，院子很漂亮。(Tā jiā yǒu huā yǒu cǎo, yuànzi hěn piàoliang.) — Nhà anh ấy có hoa có cỏ, sân rất đẹp."
+  ],
+  "speak": "他在房间里走来走去，等了半个小时。说着说着，他就笑了。这孩子没吃没喝，忙了一整天。他家有花有草，院子很漂亮。",
+  "rule": "A来A去: động từ lặp với 来/去, chỉ hành động qua lại nhiều lần (走来走去/想来想去). A着A着: động từ + 着 lặp lại, chỉ trong lúc đang làm A thì việc khác xảy ra (说着说着就笑了). 没A没B: không A không B, nhấn mạnh thiếu cả hai. 有A有B: có A có B, nhấn mạnh đủ cả hai. A và B thường là động từ hoặc danh từ ngắn, cùng loại.",
+  "tip": "A着A着 khác A来A去: A着A着 nói “đang làm thì…”, A来A去 nói “lặp đi lặp lại”. 没A没B đã là phủ định cả hai, đừng thêm 不 nữa.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“走来走去” nói về hành động như thế nào?",
+    "o": [
+     "Đi một lần",
+     "Đi đi lại lại nhiều lần",
+     "Đứng yên",
+     "Đi rất nhanh"
+    ],
+    "a": 1,
+    "why": "A来A去 chỉ hành động qua lại nhiều lần."
+   },
+   {
+    "q": "Điền vào chỗ trống: 说___说___，他就笑了。",
+    "o": [
+     "着…着",
+     "来…去",
+     "没…没",
+     "有…有"
+    ],
+    "a": 0,
+    "why": "Đang nói thì bật cười, dùng A着A着."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他在房间里走来走去",
+     "说着说着，他就笑了",
+     "这孩子没吃没喝",
+     "他走去走来，等了半个小时"
+    ],
+    "a": 3,
+    "why": "Mẫu cố định là 走来走去, không nói 走去走来."
+   },
+   {
+    "q": "“没A没B” nhấn mạnh điều gì?",
+    "o": [
+     "Có cả hai",
+     "Chỉ có một",
+     "Thiếu cả hai",
+     "Rất nhiều"
+    ],
+    "a": 2,
+    "why": "没A没B là không A không B, thiếu cả hai."
+   },
+   {
+    "q": "“有花有草” nghĩa là gì?",
+    "o": [
+     "Không có hoa cũng không có cỏ",
+     "Chỉ có hoa",
+     "Có hoa có cỏ, đủ cả hai",
+     "Chỉ có cỏ"
+    ],
+    "a": 2,
+    "why": "有A有B nhấn mạnh đủ cả hai: có hoa có cỏ."
+   },
+   {
+    "q": "“A着A着” thường nói điều gì xảy ra?",
+    "o": [
+     "Việc khác xảy ra trong lúc đang làm A",
+     "Hành động lặp đi lặp lại",
+     "Không làm gì cả",
+     "Việc đã xong"
+    ],
+    "a": 0,
+    "why": "A着A着 nói trong lúc đang làm A thì việc khác xảy ra."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-08",
+  "stage": 5,
+  "title": "说A就A — nói là làm ngay",
+  "hook": "“他说走就走，一点儿也不犹豫。” — anh ấy nói đi là đi, không chút do dự: 说A就A nói làm ngay không chần chừ.",
+  "examples": [
+   "他说走就走，一点儿也不犹豫。(Tā shuō zǒu jiù zǒu, yīdiǎnr yě bù yóuyù.) — Anh ấy nói đi là đi, không chút do dự.",
+   "她说买就买，马上付了钱。(Tā shuō mǎi jiù mǎi, mǎshàng fù le qián.) — Cô ấy nói mua là mua, trả tiền ngay lập tức.",
+   "你说改就改，怎么也不跟大家商量一下？(Nǐ shuō gǎi jiù gǎi, zěnme yě bù gēn dàjiā shāngliang yīxià?) — Bạn nói sửa là sửa, sao không bàn với mọi người một chút?",
+   "天说变就变，刚才还晴天，现在下雨了。(Tiān shuō biàn jiù biàn, gāngcái hái qíngtiān, xiànzài xià yǔ le.) — Trời nói đổi là đổi, vừa nãy còn nắng, giờ mưa rồi."
+  ],
+  "speak": "他说走就走，一点儿也不犹豫。她说买就买，马上付了钱。你说改就改，怎么也不跟大家商量一下？天说变就变，刚才还晴天，现在下雨了。",
+  "rule": "说A就A: A là động từ, nghĩa “nói làm A là làm A ngay”, nhấn mạnh quyết đoán, nhanh gọn, không do dự. Chủ ngữ có thể là người hoặc sự vật (天说变就变). Thường mang giọng khen (quyết đoán) hoặc chê (vội vàng, không bàn bạc), tùy ngữ cảnh.",
+  "tip": "就 ở đây nhấn mạnh “ngay lập tức”, không phải “thì”. Đừng nhầm với 说一不二 (nói một không hai — nói sao làm vậy về lời hứa).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“说走就走” nghĩa là gì?",
+    "o": [
+     "Nói đi nhưng không đi",
+     "Nói đi là đi ngay, không do dự",
+     "Nói đi rất nhiều lần",
+     "Không nói gì"
+    ],
+    "a": 1,
+    "why": "说A就A là nói làm A là làm A ngay, không chần chừ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他说___就___，一点儿也不犹豫。",
+    "o": [
+     "走…走",
+     "买…卖",
+     "去…来",
+     "说…听"
+    ],
+    "a": 0,
+    "why": "Hai động từ phải giống nhau: 说走就走."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他说走就走",
+     "她说买就买",
+     "天说变就变",
+     "他说就走说走"
+    ],
+    "a": 3,
+    "why": "Thứ tự cố định là 说A就A, không nói 说就走说走."
+   },
+   {
+    "q": "“说A就A” thường mang giọng gì?",
+    "o": [
+     "Chỉ mang giọng chê",
+     "Chỉ mang giọng khen",
+     "Khen quyết đoán hoặc chê vội vàng",
+     "Không mang giọng gì"
+    ],
+    "a": 2,
+    "why": "Tùy ngữ cảnh: khen quyết đoán hoặc chê vội vàng, không bàn bạc."
+   },
+   {
+    "q": "Câu nào dùng 说A就A đúng?",
+    "o": [
+     "你说改改就",
+     "你说改就改，怎么也不商量一下",
+     "你说就改就改",
+     "你改说就改"
+    ],
+    "a": 1,
+    "why": "Đúng mẫu 说A就A: 你说改就改."
+   },
+   {
+    "q": "Trong “天说变就变”, chủ ngữ là gì?",
+    "o": [
+     "Người",
+     "Tôi",
+     "Trời (sự vật)",
+     "Anh ấy"
+    ],
+    "a": 2,
+    "why": "Chủ ngữ của 说A就A có thể là sự vật như 天."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-09",
+  "stage": 5,
+  "title": "不敢当 / 够…的 — không dám nhận / …ghê",
+  "hook": "“您过奖了，我不敢当。” — ngài quá khen, tôi không dám nhận: 不敢当 là câu khiêm tốn khi được khen.",
+  "examples": [
+   "您过奖了，我不敢当。(Nín guòjiǎng le, wǒ bù gǎn dāng.) — Ngài quá khen, tôi không dám nhận.",
+   "老师说我是班上最好的学生，我说“不敢当，不敢当”。(Lǎoshī shuō wǒ shì bān shàng zuì hǎo de xuésheng, wǒ shuō “bù gǎn dāng, bù gǎn dāng”.) — Thầy nói tôi là học sinh giỏi nhất lớp, tôi nói “không dám nhận, không dám nhận”.",
+   "这件衣服够漂亮的，穿上一定很好看。(Zhè jiàn yīfu gòu piàoliang de, chuān shàng yīdìng hěn hǎokàn.) — Cái áo này đẹp ghê, mặc vào chắc chắn rất đẹp.",
+   "今天够热的，一出门就出汗。(Jīntiān gòu rè de, yī chūmén jiù chū hàn.) — Hôm nay nóng ghê, vừa ra khỏi cửa đã đổ mồ hôi."
+  ],
+  "speak": "您过奖了，我不敢当。老师说我是班上最好的学生，我说“不敢当，不敢当”。这件衣服够漂亮的，穿上一定很好看。今天够热的，一出门就出汗。",
+  "rule": "不敢当 là câu khách sáo, dùng khi được khen hoặc được cảm ơn quá lời, nghĩa “không dám nhận”, thể hiện khiêm tốn. 够…的: 够 + tính từ + 的, nhấn mạnh mức độ đã đạt tới, thường mang giọng cảm thán (够漂亮的/够热的), đứng cuối câu hoặc làm vị ngữ.",
+  "tip": "不敢当 chỉ dùng khi được khen, không dùng để từ chối giúp đỡ. 够…的 khác 很…: 够…的 mang giọng “đủ mức rồi đấy”, hay dùng trong khẩu ngữ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不敢当” dùng khi nào?",
+    "o": [
+     "Khi được khen quá lời",
+     "Khi từ chối giúp đỡ",
+     "Khi chào tạm biệt",
+     "Khi hỏi đường"
+    ],
+    "a": 0,
+    "why": "不敢当 là câu khiêm tốn đáp lại lời khen quá lời."
+   },
+   {
+    "q": "Điền vào chỗ trống: 您过奖了，我___。",
+    "o": [
+     "不敢当",
+     "不敢去",
+     "不敢说",
+     "不敢看"
+    ],
+    "a": 0,
+    "why": "Được khen thì đáp 不敢当: không dám nhận."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "您过奖了，我不敢当",
+     "老师夸我，我说不敢当",
+     "我不敢当你帮我",
+     "这件衣服够漂亮的"
+    ],
+    "a": 2,
+    "why": "不敢当 không dùng để từ chối nhờ giúp đỡ."
+   },
+   {
+    "q": "“够…的” nhấn mạnh điều gì?",
+    "o": [
+     "Mức độ rất thấp",
+     "Mức độ đã đạt tới, mang giọng cảm thán",
+     "Không đủ",
+     "Chưa đạt"
+    ],
+    "a": 1,
+    "why": "够…的 nhấn mạnh mức độ đã đạt tới, giọng cảm thán."
+   },
+   {
+    "q": "“今天够热的” nghĩa là gì?",
+    "o": [
+     "Hôm nay hơi lạnh",
+     "Hôm nay không nóng",
+     "Hôm nay nóng ghê",
+     "Hôm nay mát"
+    ],
+    "a": 2,
+    "why": "够热的 là nóng ghê, nóng đến mức ấy."
+   },
+   {
+    "q": "Câu nào dùng 够…的 đúng?",
+    "o": [
+     "这件衣服很够漂亮的",
+     "这件衣服够很漂亮的",
+     "这件衣服够漂亮得很的",
+     "这件衣服够漂亮的"
+    ],
+    "a": 3,
+    "why": "Mẫu là 够 + tính từ + 的: 够漂亮的."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-10",
+  "stage": 5,
+  "title": "拿…来说 / A的A，B的B — lấy… mà nói / của ai nấy giữ",
+  "hook": "“拿我来说，我每天都跑步。” — lấy tôi mà nói, ngày nào tôi cũng chạy bộ: 拿…来说 lấy một ví dụ cụ thể để nói.",
+  "examples": [
+   "拿我来说，我每天都跑步。(Ná wǒ lái shuō, wǒ měitiān dōu pǎobù.) — Lấy tôi mà nói, ngày nào tôi cũng chạy bộ.",
+   "拿北京来说，冬天很冷，夏天很热。(Ná Běijīng lái shuō, dōngtiān hěn lěng, xiàtiān hěn rè.) — Lấy Bắc Kinh mà nói, mùa đông rất lạnh, mùa hè rất nóng.",
+   "他的他的，我的我的，分得很清楚。(Tā de tā de, wǒ de wǒ de, fēn de hěn qīngchu.) — Của anh ấy là của anh ấy, của tôi là của tôi, phân chia rất rõ ràng.",
+   "你是你，我是我，这件事我们各人负责。(Nǐ shì nǐ, wǒ shì wǒ, zhè jiàn shì wǒmen gèrén fùzé.) — Bạn là bạn, tôi là tôi, việc này mỗi người tự chịu trách nhiệm."
+  ],
+  "speak": "拿我来说，我每天都跑步。拿北京来说，冬天很冷，夏天很热。他的他的，我的我的，分得很清楚。你是你，我是我，这件事我们各人负责。",
+  "rule": "拿…来说: lấy … làm ví dụ, sau đó nêu nhận xét chung; sau 拿 là danh từ chỉ người hoặc nơi chốn. A的A，B的B: hai vế đối xứng, nhấn mạnh mỗi bên thuộc về bên ấy, rạch ròi, không lẫn nhau; thường dùng 他的他的/我的我的 hoặc 你是你，我是我.",
+  "tip": "拿…来说 khác 比如: 拿…来说 lấy một trường hợp cụ thể rồi rút ra nhận xét; 比如 chỉ liệt kê ví dụ. A的A，B的B cần hai vế song song, đừng viết lệch cấu trúc.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“拿我来说” nghĩa là gì?",
+    "o": [
+     "Lấy tôi mà nói",
+     "Cầm tôi lên",
+     "Nói về tôi rất lâu",
+     "Hỏi tôi"
+    ],
+    "a": 0,
+    "why": "拿…来说 là lấy … làm ví dụ để nói."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___北京来说，冬天很冷，夏天很热。",
+    "o": [
+     "把",
+     "给",
+     "跟",
+     "拿"
+    ],
+    "a": 3,
+    "why": "Mẫu cố định là 拿…来说."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "拿我来说，我每天都跑步",
+     "拿北京来说，冬天很冷",
+     "拿我来说，我不跑步",
+     "拿来说我，我每天跑步"
+    ],
+    "a": 3,
+    "why": "Thứ tự cố định là 拿 + … + 来说, không nói 拿来说我."
+   },
+   {
+    "q": "“他的他的，我的我的” nhấn mạnh điều gì?",
+    "o": [
+     "Của chung",
+     "Của ai là của người ấy, rạch ròi",
+     "Không ai có gì",
+     "Đổi cho nhau"
+    ],
+    "a": 1,
+    "why": "A的A，B的B nhấn mạnh mỗi bên thuộc về bên ấy."
+   },
+   {
+    "q": "“拿…来说” khác “比如” ở điểm nào?",
+    "o": [
+     "比如 lấy trường hợp cụ thể rồi rút nhận xét",
+     "比如 trang trọng hơn",
+     "拿…来说 lấy trường hợp cụ thể rồi rút ra nhận xét; 比如 chỉ liệt kê ví dụ",
+     "Không khác gì"
+    ],
+    "a": 2,
+    "why": "拿…来说 lấy một trường hợp cụ thể rồi rút ra nhận xét, 比如 chỉ liệt kê ví dụ."
+   },
+   {
+    "q": "Câu nào dùng “A的A，B的B” đúng?",
+    "o": [
+     "你是你，我是我",
+     "你是我的，我是你的",
+     "你是我，我是你",
+     "你是我，我不是你"
+    ],
+    "a": 0,
+    "why": "你是你，我是我 là hai vế đối xứng đúng mẫu."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-11",
+  "stage": 5,
+  "title": "宾语的语义类型与多项状语 — tân ngữ nói gì, trạng ngữ xếp sao",
+  "hook": "“他给我买了一本书。” — anh ấy mua cho tôi một quyển sách: một câu có thể có hai tân ngữ, và nhiều trạng ngữ phải xếp đúng thứ tự.",
+  "examples": [
+   "他给我买了一本书。(Tā gěi wǒ mǎi le yī běn shū.) — Anh ấy mua cho tôi một quyển sách.",
+   "妈妈在厨房里给我们做饭。(Māma zài chúfáng lǐ gěi wǒmen zuò fàn.) — Mẹ nấu cơm cho chúng tôi trong bếp.",
+   "他昨天在学校认真地听了三节课。(Tā zuótiān zài xuéxiào rènzhēn de tīng le sān jié kè.) — Hôm qua anh ấy đã nghe ba tiết học một cách chăm chú ở trường.",
+   "我们明天早上八点在教室门口集合。(Wǒmen míngtiān zǎoshang bā diǎn zài jiàoshì ménkǒu jíhé.) — Sáng mai tám giờ chúng ta tập hợp ở cửa lớp học."
+  ],
+  "speak": "他给我买了一本书。妈妈在厨房里给我们做饭。他昨天在学校认真地听了三节课。我们明天早上八点在教室门口集合。",
+  "rule": "Tân ngữ có nhiều loại nghĩa: tân ngữ chỉ người/vật gây ra hành động — 施事宾语 (死了三个人: ba người chết — 'người' là tân ngữ nhưng chính là chủ thể của hành động); tân ngữ chỉ vật chịu tác động — 受事宾语 (买一本书); tân ngữ chỉ người nhận — 与事宾语 (给我一本书). Trong câu song tân ngữ, người thường đứng trước, vật đứng sau (给我一本书). Khi nhiều trạng ngữ cùng xuất hiện, thứ tự thường là: thời gian → địa điểm → đối tượng hoặc phạm vi → cách thức → động từ (昨天在学校认真地听课).",
+  "tip": "Trạng ngữ thời gian thường đứng trước trạng ngữ địa điểm: 昨天在学校, không nói 在学校昨天 (trừ khi muốn nhấn mạnh địa điểm). Song tân ngữ: người trước, vật sau.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“给我” trong câu “他给我买了一本书” nghĩa là gì?",
+    "o": [
+     "Mua cho tôi",
+     "Mua của tôi",
+     "Mua thay tôi đi vắng",
+     "Mua cùng tôi"
+    ],
+    "a": 0,
+    "why": "给我 là mua cho tôi: 我 là người nhận sách, tân ngữ chỉ người được hưởng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 妈妈在厨房里___我们做饭。",
+    "o": [
+     "给",
+     "把",
+     "被",
+     "对"
+    ],
+    "a": 0,
+    "why": "Nấu cơm cho chúng tôi dùng 给: 给我们做饭."
+   },
+   {
+    "q": "Câu nào SAI về thứ tự trạng ngữ?",
+    "o": [
+     "他认真地在学校昨天听课",
+     "他昨天在学校认真地听课",
+     "我们明天早上八点集合",
+     "妈妈在厨房里给我们做饭"
+    ],
+    "a": 0,
+    "why": "Trạng ngữ thời gian 昨天 phải đứng trước địa điểm 在学校, không đứng cuối."
+   },
+   {
+    "q": "Thứ tự nhiều trạng ngữ thường là gì?",
+    "o": [
+     "Cách thức → thời gian → địa điểm",
+     "Địa điểm → thời gian → cách thức",
+     "Thời gian → địa điểm → cách thức",
+     "Động từ → thời gian → địa điểm"
+    ],
+    "a": 2,
+    "why": "Thứ tự thường là thời gian, rồi địa điểm, rồi cách thức: 昨天在学校认真地听课."
+   },
+   {
+    "q": "Trong câu song tân ngữ, thứ tự thường là gì?",
+    "o": [
+     "Vật trước, người sau",
+     "Thời gian trước, người sau",
+     "Người trước, vật sau",
+     "Địa điểm trước, vật sau"
+    ],
+    "a": 2,
+    "why": "Song tân ngữ: người trước, vật sau: 给我一本书."
+   },
+   {
+    "q": "“他昨天在学校认真地听了三节课” — “认真地” là trạng ngữ chỉ gì?",
+    "o": [
+     "Thời gian",
+     "Địa điểm",
+     "Đối tượng",
+     "Cách thức"
+    ],
+    "a": 3,
+    "why": "认真地 nói cách thức nghe: nghe một cách chăm chú."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-12",
+  "stage": 5,
+  "title": "趋向补语 4 — bổ ngữ xu hướng (nâng cao)",
+  "hook": "“他跑上来了。” — anh ấy chạy lên đây rồi: bổ ngữ xu hướng nói hướng di chuyển so với người nói.",
+  "examples": [
+   "他跑上来了，手里还拿着一本书。(Tā pǎo shàng lái le, shǒu lǐ hái ná zhe yī běn shū.) — Anh ấy chạy lên đây rồi, tay còn cầm một quyển sách.",
+   "请把这本书拿下去，给楼下的老师。(Qǐng bǎ zhè běn shū ná xià qù, gěi lóu xià de lǎoshī.) — Xin mang quyển sách này xuống dưới, đưa cho thầy ở tầng dưới.",
+   "他想起来了，昨天把钥匙放在桌子上了。(Tā xiǎng qǐ lái le, zuótiān bǎ yàoshi fàng zài zhuōzi shàng le.) — Anh ấy nhớ ra rồi, hôm qua đã để chìa khóa trên bàn.",
+   "雨下起来了，我们快回家吧。(Yǔ xià qǐ lái le, wǒmen kuài huí jiā ba.) — Mưa bắt đầu rơi rồi, chúng ta mau về nhà đi."
+  ],
+  "speak": "他跑上来了，手里还拿着一本书。请把这本书拿下去，给楼下的老师。他想起来了，昨天把钥匙放在桌子上了。雨下起来了，我们快回家吧。",
+  "rule": "Bổ ngữ xu hướng gồm 来/去 (hướng về phía hoặc xa người nói) và 上/下/进/出/回/过/起 (hướng cụ thể). Dạng phức hợp: động từ + 上/下/进/出/回/过/起 + 来/去 (跑上来/拿下去). Ngoài hướng di chuyển, còn có nghĩa mở rộng: 起来 sau động từ thường là “bắt đầu” (下起来了), 想起来 là “nhớ ra”, 看下去 là “tiếp tục xem”.",
+  "tip": "来 là hướng về phía người nói, 去 là hướng xa người nói: 上来 là lên đây, 上去 là lên kia. 起来 sau động từ thường là “bắt đầu”, không phải “đứng dậy”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“他跑上来了” — 上来 nói hướng nào?",
+    "o": [
+     "Đi lên về phía người nói",
+     "Đi xuống xa người nói",
+     "Đi ra ngoài",
+     "Đi vào trong"
+    ],
+    "a": 0,
+    "why": "上来 là đi lên về phía người nói."
+   },
+   {
+    "q": "Điền vào chỗ trống: 请把这本书拿___去，给楼下的老师。",
+    "o": [
+     "上",
+     "进",
+     "下",
+     "出"
+    ],
+    "a": 2,
+    "why": "Mang xuống dưới dùng 下去: 拿下去."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他跑上来了",
+     "请把书拿下去",
+     "他想起来了",
+     "他跑去上来了"
+    ],
+    "a": 3,
+    "why": "Thứ tự là động từ + 上 + 来, không nói 跑去上来."
+   },
+   {
+    "q": "“雨下起来了” — 起来 ở đây nghĩa là gì?",
+    "o": [
+     "Đứng dậy",
+     "Đi lên",
+     "Bắt đầu",
+     "Đi ra"
+    ],
+    "a": 2,
+    "why": "起来 sau động từ ở đây là bắt đầu: mưa bắt đầu rơi."
+   },
+   {
+    "q": "“想起来” nghĩa là gì?",
+    "o": [
+     "Nghĩ về tương lai",
+     "Muốn đứng dậy",
+     "Nghĩ rất lâu",
+     "Nhớ ra"
+    ],
+    "a": 3,
+    "why": "想起来 là nhớ ra."
+   },
+   {
+    "q": "“上来” khác “上去” ở điểm nào?",
+    "o": [
+     "Không khác gì",
+     "上来 là đi xuống",
+     "上去 là đi về phía người nói",
+     "上来 là lên về phía người nói, 上去 là lên xa người nói"
+    ],
+    "a": 3,
+    "why": "来 hướng về người nói, 去 hướng xa người nói."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-13",
+  "stage": 5,
+  "title": "可能补语 2 — V + 得/不得 (có làm được không)",
+  "hook": "“这么多饭，你吃得完吗？” — nhiều cơm thế, bạn ăn hết nổi không: V + 得/不得 hỏi có làm được không.",
+  "examples": [
+   "这么多饭，你吃得完吗？(Zhème duō fàn, nǐ chī de wán ma?) — Nhiều cơm thế, bạn ăn hết nổi không?",
+   "他的声音很大，我在楼下都听得见。(Tā de shēngyīn hěn dà, wǒ zài lóu xià dōu tīng de jiàn.) — Giọng anh ấy rất to, tôi ở tầng dưới cũng nghe thấy.",
+   "这本小说太难了，我看不得懂。(Zhè běn xiǎoshuō tài nán le, wǒ kàn bù dé dǒng.) — Quyển tiểu thuyết này khó quá, tôi đọc không hiểu.",
+   "今天的作业太多，我做不得完。(Jīntiān de zuòyè tài duō, wǒ zuò bù dé wán.) — Bài tập hôm nay nhiều quá, tôi làm không hết nổi."
+  ],
+  "speak": "这么多饭，你吃得完吗？他的声音很大，我在楼下都听得见。这本小说太难了，我看不得懂。今天的作业太多，我做不得完。",
+  "rule": "可能补语 (bổ ngữ khả năng): động từ + 得/不得 + bổ ngữ kết quả hoặc xu hướng, hỏi hoặc khẳng định có làm được không. Khẳng định: V + 得 + 补语 (吃得完/看得懂/听得见); phủ định: V + 不得 + 补语 (吃不得完/看不得懂). Khác với 能: 可能补语 nhấn mạnh điều kiện khách quan (nhiều quá nên ăn không hết), 能 nhấn mạnh năng lực hoặc sự cho phép.",
+  "tip": "Người Việt hay nói 吃不完 thay cho 吃不得完 — cả hai đều đúng, nhưng 吃不得完 trang trọng hơn và là mẫu của cấp 5. Đừng viết 吃得不完.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“吃得完” nghĩa là gì?",
+    "o": [
+     "Ăn không hết",
+     "Ăn hết được, có thể ăn hết",
+     "Không muốn ăn",
+     "Ăn rất nhanh"
+    ],
+    "a": 1,
+    "why": "吃得完 là ăn hết được, có thể ăn hết."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这本书你看___吗？",
+    "o": [
+     "得懂",
+     "得完",
+     "得见",
+     "得上"
+    ],
+    "a": 0,
+    "why": "Đọc hiểu dùng 看得懂."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这么多饭，你吃得完吗",
+     "他跑得很快",
+     "这道题我做不得完",
+     "他吃得不完这么多饭"
+    ],
+    "a": 3,
+    "why": "Phủ định của 吃得完 là 吃不得完, không nói 吃得不完."
+   },
+   {
+    "q": "Phủ định của “看得懂” trong mẫu 得/不得 là gì?",
+    "o": [
+     "看不懂",
+     "不看得懂",
+     "看不得懂",
+     "看得不懂"
+    ],
+    "a": 2,
+    "why": "Mẫu 得/不得: khẳng định 看得懂, phủ định 看不得懂."
+   },
+   {
+    "q": "可能补语 nhấn mạnh điều gì?",
+    "o": [
+     "Điều kiện khách quan có làm được không",
+     "Năng lực chủ quan",
+     "Ý muốn",
+     "Thói quen"
+    ],
+    "a": 0,
+    "why": "可能补语 nhấn mạnh điều kiện khách quan: có làm được không."
+   },
+   {
+    "q": "“这么多饭，你吃得完吗？” — người hỏi muốn biết gì?",
+    "o": [
+     "Bạn có thích ăn không",
+     "Bạn ăn ở đâu",
+     "Bạn có ăn hết nổi không",
+     "Bạn ăn nhanh không"
+    ],
+    "a": 2,
+    "why": "Câu hỏi về khả năng: bạn có ăn hết nổi không."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-14",
+  "stage": 5,
+  "title": "程度补语 2 — bổ ngữ mức độ (nâng cao)",
+  "hook": "“他高兴得跳了起来。” — anh ấy vui đến mức nhảy cẫng lên: bổ ngữ mức độ nói kết quả đạt tới mức nào.",
+  "examples": [
+   "他高兴得跳了起来。(Tā gāoxìng de tiào le qǐlái.) — Anh ấy vui đến mức nhảy cẫng lên.",
+   "昨天累得我一回家就睡着了。(Zuótiān lèi de wǒ yī huí jiā jiù shuì zháo le.) — Hôm qua mệt đến mức tôi vừa về nhà là ngủ luôn.",
+   "这件衣服贵得我买不起。(Zhè jiàn yīfu guì de wǒ mǎi bù qǐ.) — Cái áo này đắt đến mức tôi mua không nổi.",
+   "他跑得满头大汗，衣服都湿了。(Tā pǎo de mǎntóu dà hàn, yīfu dōu shī le.) — Anh ấy chạy đến mức mồ hôi đầy đầu, áo ướt hết."
+  ],
+  "speak": "他高兴得跳了起来。昨天累得我一回家就睡着了。这件衣服贵得我买不起。他跑得满头大汗，衣服都湿了。",
+  "rule": "程度补语: tính từ hoặc động từ + 得 + cụm từ, nói mức độ đạt tới, thường là kết quả hoặc trạng thái (高兴得跳了起来/累得睡着了). Sau 得 có thể là câu ngắn có chủ ngữ và động từ (贵得我买不起) hoặc cụm tính từ (跑得满头大汗). Khác với bổ ngữ trạng thái: 程度补语 nhấn mạnh “đến mức nào”.",
+  "tip": "得 sau tính từ đọc là de (nhẹ), đừng đọc dé. 贵得很 là mức độ đơn giản, 贵得我买不起 là mức độ 2 — có cả chủ ngữ và động từ sau 得.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“高兴得跳了起来” nghĩa là gì?",
+    "o": [
+     "Vui đến mức nhảy cẫng lên",
+     "Vui một chút",
+     "Không vui",
+     "Vui hôm qua"
+    ],
+    "a": 0,
+    "why": "高兴得跳了起来 là vui đến mức nhảy cẫng lên."
+   },
+   {
+    "q": "Điền vào chỗ trống: 昨天累___我一回家就睡着了。",
+    "o": [
+     "的",
+     "地",
+     "得",
+     "着"
+    ],
+    "a": 2,
+    "why": "Bổ ngữ mức độ dùng 得: 累得我睡着了."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他高兴得跳了起来",
+     "这件衣服贵得我买不起",
+     "他跑得满头大汗",
+     "他高兴的跳了起来"
+    ],
+    "a": 3,
+    "why": "Bổ ngữ mức độ dùng 得, không dùng 的."
+   },
+   {
+    "q": "“贵得我买不起” — sau 得 là gì?",
+    "o": [
+     "Một tính từ",
+     "Một danh từ",
+     "Một số từ",
+     "Một câu ngắn (tôi mua không nổi)"
+    ],
+    "a": 3,
+    "why": "Sau 得 là câu ngắn 我买不起: đắt đến mức tôi mua không nổi."
+   },
+   {
+    "q": "程度补语 nhấn mạnh điều gì?",
+    "o": [
+     "Hành động thế nào",
+     "Địa điểm",
+     "Mức độ đạt tới, đến mức nào",
+     "Thời gian"
+    ],
+    "a": 2,
+    "why": "程度补语 nhấn mạnh mức độ đạt tới: đến mức nào."
+   },
+   {
+    "q": "“得” trong bổ ngữ mức độ đọc là gì?",
+    "o": [
+     "dé",
+     "děi",
+     "dē",
+     "de (nhẹ)"
+    ],
+    "a": 3,
+    "why": "得 làm bổ ngữ đọc nhẹ là de."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-15",
+  "stage": 5,
+  "title": "状态补语 2 — V/Adj + 得 + cụm từ (trạng thái)",
+  "hook": "“她唱得很好听。” — cô ấy hát rất hay: động từ + 得 + cụm từ miêu tả trạng thái của hành động.",
+  "examples": [
+   "她唱得很好听，大家都喜欢听。(Tā chàng de hěn hǎotīng, dàjiā dōu xǐhuan tīng.) — Cô ấy hát rất hay, ai cũng thích nghe.",
+   "他说汉语说得非常流利。(Tā shuō Hànyǔ shuō de fēicháng liúlì.) — Anh ấy nói tiếng Trung rất trôi chảy.",
+   "这幅画画得真漂亮，颜色用得很好。(Zhè fú huà huà de zhēn piàoliang, yánsè yòng de hěn hǎo.) — Bức tranh này vẽ thật đẹp, dùng màu rất tốt.",
+   "他今天起得很早，五点就出门了。(Tā jīntiān qǐ de hěn zǎo, wǔ diǎn jiù chūmén le.) — Hôm nay anh ấy dậy rất sớm, năm giờ đã ra khỏi nhà."
+  ],
+  "speak": "她唱得很好听，大家都喜欢听。他说汉语说得非常流利。这幅画画得真漂亮，颜色用得很好。他今天起得很早，五点就出门了。",
+  "rule": "状态补语: động từ hoặc tính từ + 得 + cụm từ (thường là tính từ hoặc cụm tính từ), miêu tả trạng thái hoặc mức độ của hành động hay tính chất (唱得很好听/说得很流利). Khi có tân ngữ, động từ thường lặp lại trước 得 (说汉语说得流利), hoặc tân ngữ đặt trước động từ lặp lại (汉语说得很流利).",
+  "tip": "Đừng quên lặp động từ khi có tân ngữ: nói 说汉语说得很流利, không nói 说汉语得很流利. Trạng thái补语 khác 程度补语: 状态 nói “thế nào” (很好听), 程度 nói “đến mức nào” (高兴得跳了起来).",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“她唱得很好听” nghĩa là gì?",
+    "o": [
+     "Cô ấy hát rất hay",
+     "Cô ấy hát rất lâu",
+     "Cô ấy không biết hát",
+     "Cô ấy hát hôm qua"
+    ],
+    "a": 0,
+    "why": "很好听 là bổ ngữ trạng thái, miêu tả trạng thái của việc hát: hát rất hay."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他说汉语说___非常流利。",
+    "o": [
+     "得",
+     "的",
+     "地",
+     "着"
+    ],
+    "a": 0,
+    "why": "Bổ ngữ trạng thái dùng 得: 说得非常流利."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "她唱得很好听",
+     "他说汉语说得非常流利",
+     "他说汉语得很流利",
+     "这幅画画得真漂亮"
+    ],
+    "a": 2,
+    "why": "Có tân ngữ thì động từ phải lặp lại: 说汉语说得很流利."
+   },
+   {
+    "q": "Khi có tân ngữ, động từ trong trạng thái补语 thường làm gì?",
+    "o": [
+     "Lặp lại trước 得",
+     "Đứng sau 得",
+     "Bỏ đi",
+     "Đứng cuối câu"
+    ],
+    "a": 0,
+    "why": "Động từ lặp lại trước 得: 说汉语说得流利."
+   },
+   {
+    "q": "状态补语 khác 程度补语 ở điểm nào?",
+    "o": [
+     "状态 nói thời gian",
+     "程度 nói địa điểm",
+     "Không khác gì",
+     "状态 nói “thế nào”, 程度 nói “đến mức nào”"
+    ],
+    "a": 3,
+    "why": "状态 nói hành động thế nào, 程度 nói mức độ đến mức nào."
+   },
+   {
+    "q": "“他今天起得很早” — 很早 là gì?",
+    "o": [
+     "Bổ ngữ trạng thái sau 得",
+     "Trạng ngữ thời gian",
+     "Tân ngữ",
+     "Chủ ngữ"
+    ],
+    "a": 0,
+    "why": "很早 là bổ ngữ trạng thái sau 得, nói dậy sớm thế nào."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-16",
+  "stage": 5,
+  "title": "有字句 — câu chữ 有: có người, có vật, có việc",
+  "hook": "“门口有很多人” — ở cửa có rất nhiều người: câu chữ 有 nói ở đâu có cái gì, hoặc có ai làm gì.",
+  "examples": [
+   "桌子上有一本书。(Zhuōzi shang yǒu yī běn shū.) — Trên bàn có một quyển sách.",
+   "门口有很多人。(Ménkǒu yǒu hěn duō rén.) — Ở cửa có rất nhiều người.",
+   "学校里有一位新老师。(Xuéxiào lǐ yǒu yī wèi xīn lǎoshī.) — Trong trường có một thầy giáo mới.",
+   "有人给你打电话。(Yǒu rén gěi nǐ dǎ diànhuà.) — Có người gọi điện cho bạn."
+  ],
+  "speak": "桌子上有一本书。门口有很多人。学校里有一位新老师。有人给你打电话。",
+  "rule": "Câu chữ 有 có hai dạng chính: “nơi chốn + 有 + người/vật” nói ở đâu có cái gì (桌子上有书), và “有 + người + động từ” nói có ai đó làm gì (有人打电话). Chủ ngữ của câu thường là nơi chốn hoặc không nói rõ, còn thứ có mặt đứng sau 有. Khác với câu “我是学生” nói thân phận, câu chữ 有 chỉ nói sự tồn tại hoặc xuất hiện.",
+  "tip": "Người Việt hay nói thừa “在”: đừng nói “桌子上有有一本书”, chỉ cần một 有. Cũng đừng đảo thành “一本书有在桌子上”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“桌子上有一本书” nghĩa là gì?",
+    "o": [
+     "Trên bàn có một quyển sách",
+     "Tôi mua một quyển sách",
+     "Quyển sách rất hay",
+     "Quyển sách ở trên bàn"
+    ],
+    "a": 0,
+    "why": "桌子上有书 là câu chữ 有: ở trên bàn có một quyển sách."
+   },
+   {
+    "q": "Điền vào chỗ trống: 门口___很多人。",
+    "o": [
+     "的",
+     "有",
+     "在",
+     "是"
+    ],
+    "a": 1,
+    "why": "Nói ở cửa có nhiều người thì dùng 有: 门口有很多人。"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "有人给你打电话",
+     "桌子上有一本书",
+     "学校里有一位新老师",
+     "一本书有在桌子上"
+    ],
+    "a": 3,
+    "why": "Thứ có mặt phải đứng sau 有, không nói “一本书有在桌子上”. Đúng là “桌子上有一本书”. "
+   },
+   {
+    "q": "“有人给你打电话” nhấn mạnh điều gì?",
+    "o": [
+     "Bạn đang gọi điện",
+     "Điện thoại của bạn hết pin",
+     "Có người gọi điện cho bạn",
+     "Bạn không nghe điện thoại"
+    ],
+    "a": 2,
+    "why": "有 + 人 + 打电话: có một người nào đó gọi điện cho bạn."
+   },
+   {
+    "q": "Muốn nói “trong lớp có ba mươi học sinh”, câu nào đúng?",
+    "o": [
+     "班里是三十个学生",
+     "有班里三十个学生",
+     "三十个学生在班里有",
+     "班里有三十个学生"
+    ],
+    "a": 3,
+    "why": "Công thức nơi chốn + 有 + số lượng + người: 班里有三十个学生。"
+   },
+   {
+    "q": "Câu nào là câu chữ 有?",
+    "o": [
+     "我喜欢吃米饭",
+     "他很高",
+     "桌子上有水",
+     "我是越南人"
+    ],
+    "a": 2,
+    "why": "桌子上有水 có 有 nói ở trên bàn có nước; các câu còn lại không có 有."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-17",
+  "stage": 5,
+  "title": "把字句 — câu chữ 把: nói việc xử lý",
+  "hook": "“请把门关上” — xin hãy đóng cửa lại: câu chữ 把 đưa vật bị tác động lên trước động từ, nói rõ mình xử lý nó thế nào.",
+  "examples": [
+   "请把门关上。(Qǐng bǎ mén guān shang.) — Xin hãy đóng cửa lại.",
+   "他把作业写完了。(Tā bǎ zuòyè xiě wán le.) — Anh ấy đã làm xong bài tập.",
+   "妈妈把衣服洗干净了。(Māma bǎ yīfu xǐ gānjìng le.) — Mẹ đã giặt sạch quần áo.",
+   "别把手机放在桌子上。(Bié bǎ shǒujī fàng zài zhuōzi shang.) — Đừng để điện thoại trên bàn."
+  ],
+  "speak": "请把门关上。他把作业写完了。妈妈把衣服洗干净了。别把手机放在桌子上。",
+  "rule": "Công thức: chủ ngữ + 把 + tân ngữ + động từ + thành phần kết quả (bổ ngữ kết quả, bổ ngữ xu hướng, 了 hoặc nơi chốn). Câu chữ 把 dùng khi muốn nhấn mạnh việc xử lý, di chuyển hoặc thay đổi trạng thái của một vật đã biết: 把门关上 (đóng cửa lại), 把衣服洗干净 (giặt sạch quần áo). Động từ trong câu 把 thường phải có thêm thành phần sau nó, không đứng trơ một mình.",
+  "tip": "Người Việt hay quên thành phần sau động từ: không nói “把门关”, phải nói “把门关上”; không nói “把作业写”, phải nói “把作业写完”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“把作业写完了” nghĩa là gì?",
+    "o": [
+     "Đã làm xong bài tập",
+     "Đang làm bài tập",
+     "Không thích làm bài tập",
+     "Chưa làm bài tập"
+    ],
+    "a": 0,
+    "why": "把作业写完了: đã xử lý xong bài tập, tức là làm xong rồi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 请把门___。",
+    "o": [
+     "是",
+     "关",
+     "很",
+     "关上"
+    ],
+    "a": 3,
+    "why": "Câu 把 cần thành phần kết quả sau động từ: 把门关上, không nói 把门关."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他把作业写完了",
+     "请把门关",
+     "别把手机放在桌子上",
+     "妈妈把衣服洗干净了"
+    ],
+    "a": 1,
+    "why": "Động từ 关 trong câu 把 phải có bổ ngữ: 把门关上 mới đúng."
+   },
+   {
+    "q": "Trong câu “妈妈把衣服洗干净了”, 衣服 là gì?",
+    "o": [
+     "Chủ ngữ",
+     "Vật được xử lý, đưa lên trước động từ",
+     "Trạng ngữ",
+     "Bổ ngữ"
+    ],
+    "a": 1,
+    "why": "把 đưa 衣服 lên trước động từ 洗, nhấn mạnh mẹ giặt sạch quần áo."
+   },
+   {
+    "q": "Muốn nói “đừng để sách trên giường”, câu nào đúng?",
+    "o": [
+     "别书放在床上",
+     "别把书放在",
+     "别把书放在床上",
+     "别把放在床上书"
+    ],
+    "a": 2,
+    "why": "Công thức: 别 + 把 + 书 + 放在床上, đầy đủ tân ngữ và nơi chốn."
+   },
+   {
+    "q": "Câu nào dùng 把 đúng để nói việc đã xử lý xong?",
+    "o": [
+     "我把饭吃了",
+     "我把饭吃",
+     "我把饭吃完了",
+     "我饭把吃完了"
+    ],
+    "a": 2,
+    "why": "Phải có bổ ngữ kết quả 完: 我把饭吃完了 mới đúng; “把饭吃了” cũng nghe được nhưng “吃完了” rõ nghĩa xử lý xong hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-18",
+  "stage": 5,
+  "title": "意念被动句 — câu bị động không dùng 被",
+  "hook": "“饭做好了” — cơm nấu xong rồi: câu này không có chữ 被 mà vẫn hiểu là cơm “được” nấu xong, chủ ngữ là thứ chịu tác động.",
+  "examples": [
+   "饭做好了。(Fàn zuò hǎo le.) — Cơm nấu xong rồi.",
+   "衣服洗干净了。(Yīfu xǐ gānjìng le.) — Quần áo giặt sạch rồi.",
+   "这个问题解决了。(Zhè ge wèntí jiějué le.) — Vấn đề này giải quyết xong rồi.",
+   "窗户打开了。(Chuānghu dǎkāi le.) — Cửa sổ mở ra rồi."
+  ],
+  "speak": "饭做好了。衣服洗干净了。这个问题解决了。窗户打开了。",
+  "rule": "Câu bị động ý niệm không dùng 被, 而: chủ ngữ là vật hoặc việc chịu tác động, động từ thường mang bổ ngữ kết quả (做好、洗干净、解决) hoặc 了, và người gây ra hành động không được nhắc tới. Dạng này rất thường gặp trong đời sống: 饭做好了、衣服洗干净了. Khác với câu 被 (衣服被妈妈洗干净了) nêu rõ ai làm, câu ý niệm chỉ quan tâm kết quả.",
+  "tip": "Đừng thêm 被 một cách máy móc vào mọi câu bị động: nói 饭做好了 đã đủ, thêm 被 thành 饭被做好了 nghe rất gượng. Chỉ dùng 被 khi cần nêu người làm hoặc nhấn mạnh sự không may.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“饭做好了” thuộc loại câu nào?",
+    "o": [
+     "Câu cầu khiến",
+     "Câu hỏi",
+     "Câu chủ động",
+     "Câu bị động ý niệm, không dùng 被"
+    ],
+    "a": 3,
+    "why": "饭 là thứ chịu tác động, không có 被 mà vẫn hiểu là cơm được nấu xong."
+   },
+   {
+    "q": "Điền vào chỗ trống: 衣服洗___了。",
+    "o": [
+     "很",
+     "干净",
+     "把",
+     "在"
+    ],
+    "a": 1,
+    "why": "洗干净 là động từ + bổ ngữ kết quả, nói quần áo giặt sạch rồi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "饭做好了",
+     "窗户打开了",
+     "饭被做好了",
+     "这个问题解决了"
+    ],
+    "a": 2,
+    "why": "饭被做好了 thêm 被 thừa và gượng; nói 饭做好了 là đủ."
+   },
+   {
+    "q": "“这个问题解决了” nghĩa là gì?",
+    "o": [
+     "Vấn đề này rất khó",
+     "Vấn đề này không ai quan tâm",
+     "Vấn đề này đã được giải quyết xong",
+     "Tôi đang nghĩ về vấn đề này"
+    ],
+    "a": 2,
+    "why": "问题 là thứ chịu tác động, 解决 là kết quả: vấn đề đã được giải quyết."
+   },
+   {
+    "q": "Câu nào là câu bị động ý niệm?",
+    "o": [
+     "妈妈洗衣服",
+     "衣服被妈妈洗干净了",
+     "衣服洗干净了",
+     "妈妈喜欢洗衣服"
+    ],
+    "a": 2,
+    "why": "衣服洗干净了 không có 被 mà chủ ngữ 衣服 vẫn là thứ chịu tác động."
+   },
+   {
+    "q": "Khi nào nên dùng 被 thay vì câu ý niệm?",
+    "o": [
+     "Khi không cần nêu ai làm",
+     "Khi cần nêu rõ người làm hoặc nhấn mạnh chuyện không may",
+     "Khi chỉ nói kết quả",
+     "Khi câu ngắn"
+    ],
+    "a": 1,
+    "why": "Câu 被 nêu rõ tác nhân (衣服被妈妈洗干净了); câu ý niệm chỉ nói kết quả, không nêu ai làm."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-19",
+  "stage": 5,
+  "title": "连动句 — câu liên động: nhân quả, chuyển ý, điều kiện",
+  "hook": "“他生病了，没去上班” — anh ấy bị ốm nên không đi làm: hai cụm động từ nối nhau trong một câu, cái trước giải thích cái sau.",
+  "examples": [
+   "他生病了，没去上班。(Tā shēng bìng le, méi qù shàngbān.) — Anh ấy bị ốm nên không đi làm.",
+   "他很想去看电影，可是没买到票。(Tā hěn xiǎng qù kàn diànyǐng, kěshì méi mǎi dào piào.) — Anh ấy rất muốn đi xem phim, nhưng không mua được vé.",
+   "你得先把作业做完才能出去玩。(Nǐ děi xiān bǎ zuòyè zuò wán cái néng chūqù wán.) — Bạn phải làm xong bài tập trước rồi mới được ra ngoài chơi.",
+   "他拿起手机给妈妈打电话。(Tā ná qǐ shǒujī gěi māma dǎ diànhuà.) — Anh ấy cầm điện thoại lên gọi cho mẹ."
+  ],
+  "speak": "他生病了，没去上班。他很想去看电影，可是没买到票。你得先把作业做完才能出去玩。他拿起手机给妈妈打电话。",
+  "rule": "Câu liên động có hai cụm động từ trở lên cùng một chủ ngữ, nối tiếp nhau không dùng liên từ hoặc chỉ dùng liên từ nhẹ. Hai động từ có thể quan hệ nhân quả (生病了，没去上班: ốm nên không đi làm), chuyển ý (很想去，可是没买到票), điều kiện (先做完作业才能出去玩), hoặc trước sau theo thứ tự (拿起手机打电话). Nhận biết câu liên động bằng cách thấy hai động từ cùng một chủ ngữ, không phải hai câu riêng.",
+  "tip": "Người Việt hay tách câu liên động thành hai câu ngắn, làm văn nghe cụt: thay vì “他生病了。他没去上班。” hãy nối “他生病了，没去上班。” cho tự nhiên.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他生病了，没去上班” thể hiện quan hệ gì giữa hai việc?",
+    "o": [
+     "So sánh",
+     "Điều kiện",
+     "Chuyển ý",
+     "Nhân quả: ốm nên không đi làm"
+    ],
+    "a": 3,
+    "why": "生病 là nguyên nhân, 没去上班 là kết quả: ốm nên không đi làm."
+   },
+   {
+    "q": "Điền vào chỗ trống: 你得先把作业做完___出去玩。",
+    "o": [
+     "可是",
+     "才",
+     "就",
+     "才能"
+    ],
+    "a": 3,
+    "why": "先做完…才能…: làm xong trước thì mới được đi chơi, đó là quan hệ điều kiện."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他生病了，他没去上班没",
+     "他生病了，没去上班",
+     "他很想去看电影，可是没买到票",
+     "他拿起手机给妈妈打电话"
+    ],
+    "a": 0,
+    "why": "Câu cuối thừa chữ 没 và lặp chủ ngữ vụng về; câu liên động gọn là “他生病了，没去上班”. "
+   },
+   {
+    "q": "“他很想去看电影，可是没买到票” thể hiện quan hệ gì?",
+    "o": [
+     "Nhân quả",
+     "Chuyển ý: muốn đi nhưng không mua được vé",
+     "Mục đích",
+     "Điều kiện"
+    ],
+    "a": 1,
+    "why": "可是 báo chuyển ý: rất muốn đi, nhưng kết quả trái với mong muốn."
+   },
+   {
+    "q": "Câu nào là câu liên động?",
+    "o": [
+     "他是学生",
+     "妈妈做的饭很好吃",
+     "手机很贵",
+     "他拿起手机给妈妈打电话"
+    ],
+    "a": 3,
+    "why": "拿起手机 và 打电话 là hai động tác cùng chủ ngữ 他, nối nhau trong một câu."
+   },
+   {
+    "q": "“你得先把作业做完才能出去玩” nghĩa là gì?",
+    "o": [
+     "Bạn đã đi chơi rồi",
+     "Bạn không cần làm bài tập",
+     "Bạn phải làm xong bài tập trước rồi mới được đi chơi",
+     "Bạn vừa làm bài vừa chơi"
+    ],
+    "a": 2,
+    "why": "先…才能… là điều kiện: làm xong trước, sau đó mới được chơi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-20",
+  "stage": 5,
+  "title": "兼语句 — câu kiêm ngữ nâng cao",
+  "hook": "“老师让我回答问题” — thầy giáo bảo tôi trả lời câu hỏi: từ 我 vừa là tân ngữ của 让, vừa là chủ ngữ của 回答.",
+  "examples": [
+   "老师让我回答问题。(Lǎoshī ràng wǒ huí dá wèntí.) — Thầy giáo bảo tôi trả lời câu hỏi.",
+   "妈妈叫我早点儿回家。(Māma jiào wǒ zǎo diǎnr huí jiā.) — Mẹ gọi tôi về nhà sớm một chút.",
+   "公司派他去上海出差。(Gōngsī pài tā qù Shànghǎi chūchāi.) — Công ty cử anh ấy đi Thượng Hải công tác.",
+   "朋友请我去他家吃饭。(Péngyou qǐng wǒ qù tā jiā chī fàn.) — Bạn mời tôi đến nhà anh ấy ăn cơm."
+  ],
+  "speak": "老师让我回答问题。妈妈叫我早点儿回家。公司派他去上海出差。朋友请我去他家吃饭。",
+  "rule": "Công thức: chủ ngữ + động từ khiến (叫、让、请、派、请、安排、允许) + người + động từ. Người ở giữa làm hai việc cùng lúc: là tân ngữ của động từ đầu (老师让我) và là chủ ngữ của động từ sau (我回答问题), nên gọi là kiêm ngữ. Các động từ khiến thường gặp: 让 (bảo, để), 叫 (gọi, bảo), 请 (mời, nhờ), 派 (cử), 允许 (cho phép).",
+  "tip": "Đừng dịch 让 lúc nào cũng là “để”: 老师让我回答问题 là thầy “bảo” tôi trả lời, mang ý yêu cầu; còn 让座 mới là “nhường chỗ”. Xem ngữ cảnh để chọn nghĩa.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "Trong “老师让我回答问题”, 我 làm gì trong câu?",
+    "o": [
+     "Là bổ ngữ",
+     "Chỉ là tân ngữ",
+     "Chỉ là chủ ngữ",
+     "Vừa là tân ngữ của 让, vừa là chủ ngữ của 回答"
+    ],
+    "a": 3,
+    "why": "我 kiêm hai vai: tân ngữ của 让 và chủ ngữ của 回答问题."
+   },
+   {
+    "q": "Điền vào chỗ trống: 公司___他去上海出差。",
+    "o": [
+     "是",
+     "叫",
+     "有",
+     "派"
+    ],
+    "a": 3,
+    "why": "派他去…: công ty cử anh ấy đi, 派 là động từ khiến chỉ sự điều động."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "朋友请我去他家吃饭",
+     "老师让我回答问题",
+     "妈妈叫我早点儿回家",
+     "老师让回答问题我"
+    ],
+    "a": 3,
+    "why": "Thứ tự phải là 让 + 我 + 回答问题; “让回答问题我” đảo lộn vị trí của kiêm ngữ."
+   },
+   {
+    "q": "“妈妈叫我早点儿回家” nghĩa là gì?",
+    "o": [
+     "Mẹ gọi tôi về nhà sớm một chút",
+     "Mẹ đang ở nhà",
+     "Tôi gọi mẹ về nhà",
+     "Mẹ về nhà sớm"
+    ],
+    "a": 0,
+    "why": "妈妈叫我…: mẹ bảo tôi, 我 là người được gọi về nhà sớm."
+   },
+   {
+    "q": "Động từ nào KHÔNG phải động từ khiến trong câu kiêm ngữ?",
+    "o": [
+     "让",
+     "请",
+     "喜欢",
+     "派"
+    ],
+    "a": 2,
+    "why": "喜欢 là động từ tình cảm, không sai khiến ai làm gì; 让、请、派 đều là động từ khiến."
+   },
+   {
+    "q": "Muốn nói “thầy nhờ bạn giúp tôi”, câu nào đúng?",
+    "o": [
+     "老师请你帮我",
+     "老师你请帮我",
+     "老师请帮我你",
+     "老师帮我请你"
+    ],
+    "a": 0,
+    "why": "Công thức 请 + 你 + 帮我: thầy nhờ bạn giúp tôi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-21",
+  "stage": 5,
+  "title": "比较句 — câu so sánh nâng cao (cấp 5)",
+  "hook": "“他的汉语比我的汉语说得好得多” — tiếng Trung của anh ấy nói giỏi hơn tôi nhiều: ở cấp 5, câu so sánh thêm 得多、那么 để nói hơn kém rõ rệt.",
+  "examples": [
+   "他的汉语比我的汉语说得好得多。(Tā de Hànyǔ bǐ wǒ de Hànyǔ shuō de hǎo de duō.) — Tiếng Trung của anh ấy nói giỏi hơn tôi nhiều.",
+   "今天没有昨天那么冷。(Jīntiān méiyǒu zuótiān nàme lěng.) — Hôm nay không lạnh bằng hôm qua.",
+   "这本书比那本书有意思多了。(Zhè běn shū bǐ nà běn shū yǒu yìsi duō le.) — Quyển sách này thú vị hơn quyển kia nhiều.",
+   "她跑得比我快得多。(Tā pǎo de bǐ wǒ kuài de duō.) — Cô ấy chạy nhanh hơn tôi nhiều."
+  ],
+  "speak": "他的汉语比我的汉语说得好得多。今天没有昨天那么冷。这本书比那本书有意思多了。她跑得比我快得多。",
+  "rule": "Ở cấp 5, câu so sánh mở rộng hai dạng: “A 比 B + động từ + 得 + tính từ + 得多” nói A hơn B nhiều về một hành động (说得好得多、跑得快得多), và “A 没有 B + 那么 + tính từ” nói A không bằng B (没有昨天那么冷). 得多 đứng cuối câu nhấn mạnh mức chênh lệch lớn, còn 那么 trong câu 没有 làm nhẹ mức độ so sánh. Động từ có thể lặp lại ở cả hai vế để rõ nghĩa (他的汉语比我的汉语说得…).",
+  "tip": "Đừng nhầm 没有 với 不: 没有昨天那么冷 là “không lạnh bằng hôm qua”, còn 不冷 là “không lạnh” hẳn. Trong câu so sánh phủ định, dùng 没有 chứ không dùng 不.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“今天没有昨天那么冷” nghĩa là gì?",
+    "o": [
+     "Hôm nay không lạnh bằng hôm qua",
+     "Hôm nay rất lạnh",
+     "Hôm nay lạnh hơn hôm qua",
+     "Hôm qua không lạnh"
+    ],
+    "a": 0,
+    "why": "没有…那么… là so sánh phủ định: hôm nay không lạnh bằng hôm qua."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她跑得比我快___。",
+    "o": [
+     "是",
+     "一点",
+     "得多",
+     "很"
+    ],
+    "a": 2,
+    "why": "跑得快得多: chạy nhanh hơn tôi nhiều, 得多 nhấn mạnh chênh lệch lớn."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他的汉语比我的汉语说得好得多",
+     "这本书比那本书有意思多了",
+     "今天不昨天那么冷",
+     "今天没有昨天那么冷"
+    ],
+    "a": 2,
+    "why": "Câu so sánh phủ định dùng 没有, không dùng 不: phải nói “今天没有昨天那么冷”. "
+   },
+   {
+    "q": "“这本书比那本书有意思多了” nhấn mạnh điều gì?",
+    "o": [
+     "Quyển này thú vị hơn quyển kia nhiều",
+     "Cả hai đều chán",
+     "Hai quyển sách giống nhau",
+     "Quyển kia thú vị hơn"
+    ],
+    "a": 0,
+    "why": "比…多了: hơn nhiều, mức chênh lệch lớn."
+   },
+   {
+    "q": "Muốn nói “anh ấy nói giỏi hơn tôi nhiều”, câu nào đúng?",
+    "o": [
+     "他说得多比我好汉语",
+     "他说汉语比我得多好",
+     "他说汉语比我好得多",
+     "他比我说汉语得多好"
+    ],
+    "a": 2,
+    "why": "Công thức: 他说汉语比我好得多, 好得多 đứng cuối câu."
+   },
+   {
+    "q": "Trong câu so sánh, 得多 có tác dụng gì?",
+    "o": [
+     "Nói hai thứ bằng nhau",
+     "Nhấn mạnh hơn kém rất nhiều",
+     "Phủ định so sánh",
+     "Hỏi so sánh"
+    ],
+    "a": 1,
+    "why": "得多 ở cuối câu so sánh nhấn mạnh mức chênh lệch lớn: hơn nhiều."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-22",
+  "stage": 5,
+  "title": "或是…，或是… — hoặc là…, hoặc là…",
+  "hook": "“他或是去图书馆，或是去操场跑步” — anh ấy hoặc đi thư viện, hoặc ra sân chạy bộ: hai khả năng song song, chưa biết cái nào.",
+  "examples": [
+   "他或是去图书馆，或是去操场跑步。(Tā huòshì qù túshūguǎn, huòshì qù cāochǎng pǎobù.) — Anh ấy hoặc đi thư viện, hoặc ra sân vận động chạy bộ.",
+   "周末我或是在家看书，或是去公园散步。(Zhōumò wǒ huòshì zài jiā kàn shū, huòshì qù gōngyuán sànbù.) — Cuối tuần tôi hoặc ở nhà đọc sách, hoặc đi công viên dạo bộ.",
+   "她或是在开会，或是在接电话。(Tā huòshì zài kāi huì, huòshì zài jiē diànhuà.) — Cô ấy hoặc đang họp, hoặc đang nghe điện thoại.",
+   "这个周末我们或是去爬山，或是去海边玩。(Zhège zhōumò wǒmen huòshì qù pá shān, huòshì qù hǎibiān wán.) — Cuối tuần này chúng tôi hoặc đi leo núi, hoặc đi biển chơi."
+  ],
+  "speak": "他或是去图书馆，或是去操场跑步。周末我或是在家看书，或是去公园散步。她或是在开会，或是在接电话。这个周末我们或是去爬山，或是去海边玩。",
+  "rule": "或是…，或是… liệt kê hai (hoặc nhiều) khả năng có thể xảy ra, người nói chưa chắc cái nào là thật: 或是 A，或是 B. Hai vế thường cùng chủ ngữ và cùng dạng (cùng là nơi chốn, cùng là hoạt động). Khác với 或者 dùng trong câu trần thuật chung, 或是…，或是… mang giọng phỏng đoán, hay dùng khi không tìm thấy ai hoặc chưa quyết định làm gì.",
+  "tip": "Đừng dùng 或是 trong câu hỏi lựa chọn: hỏi “你喝茶还是咖啡?” thì dùng 还是; 或是 chỉ dùng để phỏng đoán hoặc liệt kê khả năng, không dùng để hỏi.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他或是去图书馆，或是去操场跑步” nghĩa là gì?",
+    "o": [
+     "Anh ấy chắc chắn đi thư viện",
+     "Anh ấy hoặc đi thư viện, hoặc đi chạy bộ, chưa rõ cái nào",
+     "Anh ấy không đi đâu cả",
+     "Anh ấy vừa đi thư viện vừa chạy bộ"
+    ],
+    "a": 1,
+    "why": "或是…或是… liệt kê hai khả năng, người nói chưa chắc chắn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她___在开会，___在接电话。",
+    "o": [
+     "或是，或是",
+     "还是，还是",
+     "如果，如果",
+     "或者，或者"
+    ],
+    "a": 0,
+    "why": "Phỏng đoán hai khả năng thì dùng 或是…，或是…."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他或是去图书馆，或是去操场跑步",
+     "你或是喝茶，或是喝咖啡？",
+     "她或是在开会，或是在接电话",
+     "周末我或是在家看书，或是去公园散步"
+    ],
+    "a": 1,
+    "why": "或是 không dùng trong câu hỏi lựa chọn; hỏi thì dùng 还是: “你喝茶还是喝咖啡？” "
+   },
+   {
+    "q": "或是…，或是… dùng khi nào?",
+    "o": [
+     "Khi liệt kê hai khả năng chưa rõ cái nào",
+     "Khi đã chắc chắn",
+     "Khi kể chuyện đã xong",
+     "Khi ra lệnh"
+    ],
+    "a": 0,
+    "why": "Mẫu này dùng để phỏng đoán hoặc liệt kê khả năng, không khẳng định."
+   },
+   {
+    "q": "Muốn nói “cuối tuần này hoặc leo núi hoặc đi biển”, câu nào đúng?",
+    "o": [
+     "这个周末我们还是去爬山，还是去海边玩",
+     "这个周末我们如果去爬山，如果去海边玩",
+     "这个周末我们或是去爬山，或是去海边玩",
+     "这个周末我们去爬山去海边玩"
+    ],
+    "a": 2,
+    "why": "Liệt kê hai khả năng dùng 或是…，或是…. "
+   },
+   {
+    "q": "或是 khác 或者 ở điểm nào?",
+    "o": [
+     "或是 mang giọng phỏng đoán hai khả năng, 或者 dùng chung hơn",
+     "或是 chỉ dùng trong câu hỏi",
+     "或是 chỉ dùng với danh từ",
+     "Hai từ giống hệt nhau"
+    ],
+    "a": 0,
+    "why": "或是…，或是… nhấn mạnh phỏng đoán chưa chắc chắn; 或者 dùng rộng hơn trong câu trần thuật."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-23",
+  "stage": 5,
+  "title": "尽管…，但是/可是… — dù… nhưng…",
+  "hook": "“尽管下雨了，但是我们还是去了” — dù trời mưa, nhưng chúng tôi vẫn đi: 尽管 mở đầu sự nhượng bộ, 但是/可是 đưa ra kết quả trái với dự đoán.",
+  "examples": [
+   "尽管下雨了，但是我们还是去了。(Jǐnguǎn xià yǔ le, dànshì wǒmen háishi qù le.) — Dù trời mưa, nhưng chúng tôi vẫn đi.",
+   "尽管他很累，可是他坚持把工作做完了。(Jǐnguǎn tā hěn lèi, kěshì tā jiānchí bǎ gōngzuò zuò wán le.) — Dù anh ấy rất mệt, nhưng anh ấy vẫn kiên trì làm xong việc.",
+   "尽管这本书很难，但是我很喜欢读。(Jǐnguǎn zhè běn shū hěn nán, dànshì wǒ hěn xǐhuan dú.) — Dù quyển sách này rất khó, nhưng tôi rất thích đọc.",
+   "尽管她年纪小，可是她懂得很多。(Jǐnguǎn tā niánjì xiǎo, kěshì tā dǒng de hěn duō.) — Dù cô bé còn nhỏ tuổi, nhưng cô bé biết rất nhiều."
+  ],
+  "speak": "尽管下雨了，但是我们还是去了。尽管他很累，可是他坚持把工作做完了。尽管这本书很难，但是我很喜欢读。尽管她年纪小，可是她懂得很多。",
+  "rule": "Công thức: 尽管 + tình huống khó khăn, 但是/可是 + kết quả trái dự đoán. 尽管 là liên từ nhượng bộ trang trọng hơn 虽然, hay dùng trong văn viết và lời nói nghiêm túc. Vế sau thường có 还是、仍然、坚持 để nhấn mạnh sự trái ngược: 尽管下雨了，但是我们还是去了. 但是 và 可是 dùng thay nhau được, 可是 nhẹ và khẩu ngữ hơn.",
+  "tip": "Đừng quên vế 但是/可是: chỉ nói “尽管下雨了，我们去了” nghe thiếu, câu nhượng bộ cần cả hai vế. Cũng đừng dùng 尽管 với 却 một mình thay cho 但是 trong văn viết trang trọng.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“尽管下雨了，但是我们还是去了” nghĩa là gì?",
+    "o": [
+     "Dù trời mưa, nhưng chúng tôi vẫn đi",
+     "Trời mưa nên chúng tôi không đi",
+     "Chúng tôi đi vì trời mưa",
+     "Trời không mưa nên chúng tôi đi"
+    ],
+    "a": 0,
+    "why": "尽管…但是… là nhượng bộ: dù mưa, vẫn đi."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___他很累，可是他坚持把工作做完了。",
+    "o": [
+     "因为",
+     "所以",
+     "如果",
+     "尽管"
+    ],
+    "a": 3,
+    "why": "Vế sau có 可是, vế trước phải là 尽管 để thành cặp nhượng bộ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "尽管下雨了，我们还是去了但是",
+     "尽管下雨了，但是我们还是去了",
+     "尽管这本书很难，但是我很喜欢读",
+     "尽管他很累，可是他坚持把工作做完了"
+    ],
+    "a": 0,
+    "why": "但是 phải đứng đầu vế sau, không đứng cuối câu: “尽管下雨了，但是我们还是去了”. "
+   },
+   {
+    "q": "尽管 khác 虽然 ở điểm nào?",
+    "o": [
+     "虽然 trang trọng hơn",
+     "尽管 chỉ dùng trong câu hỏi",
+     "尽管 trang trọng hơn, hay dùng trong văn viết",
+     "Nghĩa hoàn toàn khác"
+    ],
+    "a": 2,
+    "why": "尽管 và 虽然 cùng nghĩa nhượng bộ, nhưng 尽管 trang trọng hơn."
+   },
+   {
+    "q": "Trong câu nhượng bộ, 还是 có tác dụng gì?",
+    "o": [
+     "Hỏi lại",
+     "So sánh",
+     "Phủ định",
+     "Nhấn mạnh kết quả trái với dự đoán: vẫn đi"
+    ],
+    "a": 3,
+    "why": "还是 trong vế sau nhấn mạnh: dù mưa mà vẫn đi."
+   },
+   {
+    "q": "Muốn nói “dù sách khó nhưng tôi rất thích đọc”, câu nào đúng?",
+    "o": [
+     "因为这本书很难，但是我很喜欢读",
+     "如果这本书很难，但是我很喜欢读",
+     "尽管这本书很难，我很喜欢读但是",
+     "尽管这本书很难，但是我很喜欢读"
+    ],
+    "a": 3,
+    "why": "Cặp đúng là 尽管…，但是…."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-24",
+  "stage": 5,
+  "title": "要是…，（就）…，否则… — nếu… thì…, nếu không…",
+  "hook": "“要是你好好复习，就能考好，否则你会后悔的” — nếu bạn ôn tập chăm chỉ thì sẽ thi tốt, nếu không bạn sẽ hối hận: 否则 đe dọa hậu quả của việc không làm theo vế trước.",
+  "examples": [
+   "要是你好好复习，就能考好，否则你会后悔的。(Yàoshi nǐ hǎohǎo fùxí, jiù néng kǎo hǎo, fǒuzé nǐ huì hòuhuǐ de.) — Nếu bạn ôn tập chăm chỉ thì sẽ thi tốt, nếu không bạn sẽ hối hận.",
+   "要是你不带伞，就会淋雨，否则你会感冒的。(Yàoshi nǐ bù dài sǎn, jiù huì lín yǔ, fǒuzé nǐ huì gǎnmào de.) — Nếu bạn không mang ô thì sẽ bị ướt mưa, nếu không bạn sẽ bị cảm.",
+   "要是你现在不去买票，就买不到了，否则你只能看下一场。(Yàoshi nǐ xiànzài bù qù mǎi piào, jiù mǎi bù dào le, fǒuzé nǐ zhǐ néng kàn xià yī chǎng.) — Nếu bây giờ bạn không đi mua vé thì sẽ không mua được nữa, nếu không bạn chỉ có thể xem suất sau.",
+   "要是你不听我的话，就会吃亏，否则别怪我没提醒你。(Yàoshi nǐ bù tīng wǒ de huà, jiù huì chī kuī, fǒuzé bié guài wǒ méi tíxǐng nǐ.) — Nếu bạn không nghe lời tôi thì sẽ chịu thiệt, nếu không thì đừng trách tôi không nhắc bạn."
+  ],
+  "speak": "要是你好好复习，就能考好，否则你会后悔的。要是你不带伞，就会淋雨，否则你会感冒的。要是你现在不去买票，就买不到了，否则你只能看下一场。要是你不听我的话，就会吃亏，否则别怪我没提醒你。",
+  "rule": "Công thức: 要是 + giả định, （就）+ kết quả, 否则 + hậu quả xấu nếu không làm theo. 要是 mở đầu điều kiện giả định, 就 đưa ra kết quả của điều kiện đó, còn 否则 (“nếu không”) quay lại cảnh báo điều sẽ xảy ra nếu điều kiện không thành. Mẫu này hay dùng để khuyên răn hoặc cảnh báo: 要是你不带伞，就会淋雨，否则你会感冒的. Chữ 就 trong ngoặc có thể lược, nhưng 否则 không được lược.",
+  "tip": "Đừng nhầm 否则 với 不然 trong văn viết: 否则 trang trọng và chặt chẽ hơn, thường đứng đầu vế thứ ba; còn 不然 khẩu ngữ hơn. Cũng đừng đặt 否则 ở vế đầu, nó luôn đứng sau kết quả của 要是.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“要是你好好复习，就能考好，否则你会后悔的” nghĩa là gì?",
+    "o": [
+     "Bạn không cần ôn tập",
+     "Bạn ôn tập thì thi tốt, nếu không sẽ hối hận",
+     "Bạn đã thi tốt rồi",
+     "Bạn sẽ hối hận dù có ôn tập"
+    ],
+    "a": 1,
+    "why": "要是…就…否则…: nếu ôn tập thì thi tốt, nếu không thì hối hận."
+   },
+   {
+    "q": "Điền vào chỗ trống: 要是你不带伞，就会淋雨，___你会感冒的。",
+    "o": [
+     "所以",
+     "但是",
+     "否则",
+     "因为"
+    ],
+    "a": 2,
+    "why": "否则 nối vế cảnh báo hậu quả: nếu không (mang ô) thì sẽ bị cảm."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "要是你好好复习，就能考好，否则你会后悔的",
+     "要是你不听我的话，就会吃亏，否则别怪我没提醒你",
+     "要是你不带伞，就会淋雨，否则你会感冒的",
+     "否则你好好复习，就能考好，要是你会后悔的"
+    ],
+    "a": 3,
+    "why": "否则 phải đứng ở vế thứ ba, sau kết quả của 要是; không đặt 否则 lên đầu câu."
+   },
+   {
+    "q": "否则 trong mẫu này có nghĩa là gì?",
+    "o": [
+     "Nhưng mà",
+     "Nếu không (làm như vế trước)",
+     "Cho nên",
+     "Vì thế"
+    ],
+    "a": 1,
+    "why": "否则 = nếu không làm như điều đã nói, thì hậu quả xấu sẽ xảy ra."
+   },
+   {
+    "q": "Muốn cảnh báo “nếu bây giờ không mua vé thì hết vé, nếu không chỉ xem suất sau”, câu nào đúng?",
+    "o": [
+     "要是你现在不去买票，就买不到了，所以你只能看下一场",
+     "要是你现在不去买票，就买不到了，否则你只能看下一场",
+     "否则你现在不去买票，就买不到了，你只能看下一场",
+     "如果你现在不去买票，就买不到了，但是你只能看下一场"
+    ],
+    "a": 1,
+    "why": "Mẫu đầy đủ là 要是…，就…，否则…."
+   },
+   {
+    "q": "Trong mẫu này, 就 có thể làm gì?",
+    "o": [
+     "Có thể lược đi",
+     "Phải đứng đầu câu",
+     "Thay được bằng 但是",
+     "Bắt buộc phải có"
+    ],
+    "a": 0,
+    "why": "就 trong 要是…，（就）… có thể lược; 否则 thì không được lược."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-25",
+  "stage": 5,
+  "title": "除非…，才… — trừ khi… mới…",
+  "hook": "“除非你每天坚持练习，才说得好汉语” — trừ khi bạn kiên trì luyện tập mỗi ngày thì mới nói tốt tiếng Trung được: 除非 đặt ra điều kiện duy nhất.",
+  "examples": [
+   "除非你每天坚持练习，才说得好汉语。(Chúfēi nǐ měitiān jiānchí liànxí, cái shuō de hǎo Hànyǔ.) — Trừ khi bạn kiên trì luyện tập mỗi ngày thì mới nói tốt tiếng Trung được.",
+   "除非下大雨，我们才取消比赛。(Chúfēi xià dà yǔ, wǒmen cái qǔxiāo bǐsài.) — Trừ khi trời mưa to thì chúng tôi mới hủy trận đấu.",
+   "除非你亲自去问他，才知道是怎么回事。(Chúfēi nǐ qīnzì qù wèn tā, cái zhīdào shì zěnme huí shì.) — Trừ khi bạn tự đi hỏi anh ấy thì mới biết chuyện là thế nào.",
+   "除非大家一起努力，才能按时完成这个任务。(Chúfēi dàjiā yīqǐ nǔlì, cái néng ànshí wánchéng zhège rènwu.) — Trừ khi mọi người cùng nhau cố gắng thì mới hoàn thành nhiệm vụ này đúng hạn được."
+  ],
+  "speak": "除非你每天坚持练习，才说得好汉语。除非下大雨，我们才取消比赛。除非你亲自去问他，才知道是怎么回事。除非大家一起努力，才能按时完成这个任务。",
+  "rule": "Công thức: 除非 + điều kiện duy nhất, 才 + kết quả. 除非 nghĩa là “trừ khi”, đặt ra điều kiện bắt buộc: chỉ khi điều kiện đó xảy ra thì kết quả mới xảy ra. 才 nhấn mạnh kết quả chỉ xuất hiện nhờ điều kiện ấy (除非下大雨，我们才取消比赛: chỉ mưa to mới hủy). Khác với 只有…才… cũng nói điều kiện duy nhất, 除非 mang giọng phủ định mạnh hơn: ngoài điều kiện đó ra thì không.",
+  "tip": "Đừng nhầm 除非 với 如果: 如果 chỉ giả định chung, còn 除非 nhấn mạnh “chỉ có điều kiện này mới được”. Nói “如果下大雨，我们取消比赛” khác hẳn “除非下大雨，我们才取消比赛”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“除非下大雨，我们才取消比赛” nghĩa là gì?",
+    "o": [
+     "Trời mưa thì trận đấu vẫn diễn ra",
+     "Trận đấu chắc chắn bị hủy",
+     "Chỉ khi mưa to mới hủy trận đấu",
+     "Mưa nhỏ cũng hủy trận đấu"
+    ],
+    "a": 2,
+    "why": "除非…才…: chỉ có điều kiện mưa to thì mới hủy."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___你每天坚持练习，才说得好汉语。",
+    "o": [
+     "虽然",
+     "因为",
+     "除非",
+     "如果"
+    ],
+    "a": 2,
+    "why": "Điều kiện duy nhất phải dùng 除非: trừ khi luyện tập mỗi ngày."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "除非你亲自去问他，才知道是怎么回事",
+     "除非下大雨，我们才取消比赛",
+     "除非你每天坚持练习，才说得好汉语",
+     "除非你每天坚持练习，就说得好汉语"
+    ],
+    "a": 3,
+    "why": "Cặp đúng là 除非…，才…; dùng 就 ở đây sai mẫu."
+   },
+   {
+    "q": "除非 khác 如果 ở điểm nào?",
+    "o": [
+     "除非 chỉ dùng trong câu hỏi",
+     "如果 trang trọng hơn",
+     "除非 nhấn mạnh điều kiện duy nhất, 如果 chỉ giả định chung",
+     "Nghĩa giống hệt nhau"
+    ],
+    "a": 2,
+    "why": "除非 = trừ khi, chỉ điều kiện đó mới được; 如果 chỉ là nếu chung chung."
+   },
+   {
+    "q": "才 trong “除非…，才…” có tác dụng gì?",
+    "o": [
+     "So sánh",
+     "Hỏi lại",
+     "Nhấn mạnh kết quả chỉ xảy ra nhờ điều kiện đó",
+     "Phủ định"
+    ],
+    "a": 2,
+    "why": "才 nhấn mạnh: chỉ khi có điều kiện ấy thì kết quả mới xảy ra."
+   },
+   {
+    "q": "Muốn nói “trừ khi mọi người cùng cố gắng mới xong đúng hạn”, câu nào đúng?",
+    "o": [
+     "除非大家一起努力，就能按时完成这个任务",
+     "除非大家一起努力，才能按时完成这个任务",
+     "因为大家一起努力，才能按时完成这个任务",
+     "如果大家一起努力，就能按时完成这个任务"
+    ],
+    "a": 1,
+    "why": "Mẫu 除非…，才… là đúng; câu 如果 cũng đúng ngữ pháp nhưng không nhấn mạnh “trừ khi”. "
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-26",
+  "stage": 5,
+  "title": "…，因而… — …, vì thế mà…",
+  "hook": "“他每天坚持跑步，因而身体越来越好” — anh ấy kiên trì chạy bộ mỗi ngày, vì thế sức khỏe ngày càng tốt: 因而 nối kết quả với nguyên nhân vừa nói.",
+  "examples": [
+   "他每天坚持跑步，因而身体越来越好。(Tā měitiān jiānchí pǎobù, yīn'ér shēntǐ yuè lái yuè hǎo.) — Anh ấy kiên trì chạy bộ mỗi ngày, vì thế sức khỏe ngày càng tốt.",
+   "她学习很努力，因而考试得了第一名。(Tā xuéxí hěn nǔlì, yīn'ér kǎoshì dé le dì yī míng.) — Cô ấy học rất chăm chỉ, vì thế thi được hạng nhất.",
+   "这家店的东西又便宜又好，因而每天都有很多人来买。(Zhè jiā diàn de dōngxi yòu piányi yòu hǎo, yīn'ér měitiān dōu yǒu hěn duō rén lái mǎi.) — Đồ của cửa hàng này vừa rẻ vừa tốt, vì thế mỗi ngày đều có rất nhiều người đến mua.",
+   "他工作认真负责，因而大家都很信任他。(Tā gōngzuò rènzhēn fùzé, yīn'ér dàjiā dōu hěn xìnrèn tā.) — Anh ấy làm việc nghiêm túc và có trách nhiệm, vì thế mọi người đều rất tin tưởng anh ấy."
+  ],
+  "speak": "他每天坚持跑步，因而身体越来越好。她学习很努力，因而考试得了第一名。这家店的东西又便宜又好，因而每天都有很多人来买。他工作认真负责，因而大家都很信任他。",
+  "rule": "Công thức: vế trước nói nguyên nhân hoặc tình huống, 因而 + vế sau nói kết quả tất yếu: 他每天坚持跑步，因而身体越来越好. 因而 là liên từ chỉ kết quả, trang trọng hơn 所以, hay dùng trong văn viết và lời nói nghiêm túc. Vế sau 因而 thường là một nhận xét hoặc kết quả lâu dài (身体越来越好、得了第一名), chứ không phải một hành động nhất thời.",
+  "tip": "Đừng dùng 因而 thay cho 所以 trong mọi câu: nói “我饿了，因而吃饭” nghe rất gượng; 因而 dùng cho kết quả suy ra từ cả một tình huống, còn 所以 dùng cho kết quả trực tiếp, đời thường.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“他每天坚持跑步，因而身体越来越好” nghĩa là gì?",
+    "o": [
+     "Anh ấy không chạy bộ nữa",
+     "Sức khỏe của anh ấy rất kém",
+     "Anh ấy chạy bộ vì sức khỏe tốt",
+     "Anh ấy chạy bộ mỗi ngày, vì thế sức khỏe ngày càng tốt"
+    ],
+    "a": 3,
+    "why": "因而 nối kết quả: vì chạy bộ đều nên sức khỏe ngày càng tốt."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她学习很努力，___考试得了第一名。",
+    "o": [
+     "虽然",
+     "因而",
+     "但是",
+     "如果"
+    ],
+    "a": 1,
+    "why": "Vế sau là kết quả của sự chăm chỉ: dùng 因而."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他每天坚持跑步，因而身体越来越好",
+     "她学习很努力，因而考试得了第一名",
+     "他工作认真负责，因而大家都很信任他",
+     "我饿了，因而吃饭"
+    ],
+    "a": 3,
+    "why": "因而 dùng cho kết quả suy ra từ một tình huống; đói thì ăn là kết quả trực tiếp, nên dùng 所以: “我饿了，所以吃饭”. "
+   },
+   {
+    "q": "因而 khác 所以 ở điểm nào?",
+    "o": [
+     "因而 trang trọng hơn, hay dùng trong văn viết",
+     "因而 chỉ dùng trong câu hỏi",
+     "所以 trang trọng hơn",
+     "Nghĩa hoàn toàn khác"
+    ],
+    "a": 0,
+    "why": "因而 và 所以 cùng chỉ kết quả, nhưng 因而 trang trọng hơn."
+   },
+   {
+    "q": "Vế sau 因而 thường là gì?",
+    "o": [
+     "Một câu hỏi",
+     "Một hành động nhất thời",
+     "Một lời xin lỗi",
+     "Một nhận xét hoặc kết quả lâu dài"
+    ],
+    "a": 3,
+    "why": "Sau 因而 thường là kết quả suy ra như 身体越来越好, 得了第一名, 大家很信任他."
+   },
+   {
+    "q": "Muốn nói “đồ vừa rẻ vừa tốt, vì thế mỗi ngày nhiều người đến mua”, câu nào đúng?",
+    "o": [
+     "这家店的东西又便宜又好，如果每天都有很多人来买",
+     "这家店的东西又便宜又好，但是每天都有很多人来买",
+     "这家店的东西又便宜又好，因而每天都没有人来买",
+     "这家店的东西又便宜又好，因而每天都有很多人来买"
+    ],
+    "a": 3,
+    "why": "Nguyên nhân là đồ rẻ và tốt, kết quả là nhiều người đến mua: dùng 因而."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-27",
+  "stage": 5,
+  "title": "即使…，也… — cho dù… cũng…",
+  "hook": "“即使下雨，我们也要去爬山” — cho dù trời mưa, chúng tôi cũng vẫn đi leo núi: 即使 nhượng bộ mạnh hơn 尽管, kết quả không hề thay đổi.",
+  "examples": [
+   "即使下雨，我们也要去爬山。(Jíshǐ xià yǔ, wǒmen yě yào qù pá shān.) — Cho dù trời mưa, chúng tôi cũng vẫn đi leo núi.",
+   "即使他很忙，也会来参加我们的聚会。(Jíshǐ tā hěn máng, yě huì lái cānjiā wǒmen de jùhuì.) — Cho dù anh ấy rất bận, anh ấy cũng sẽ đến dự buổi gặp mặt của chúng tôi.",
+   "即使失败了，也不要放弃。(Jíshǐ shībài le, yě bù yào fàngqì.) — Cho dù thất bại rồi, cũng đừng từ bỏ.",
+   "即使路很远，我也要走过去。(Jíshǐ lù hěn yuǎn, wǒ yě yào zǒu guòqù.) — Cho dù đường rất xa, tôi cũng phải đi bộ tới đó."
+  ],
+  "speak": "即使下雨，我们也要去爬山。即使他很忙，也会来参加我们的聚会。即使失败了，也不要放弃。即使路很远，我也要走过去。",
+  "rule": "Công thức: 即使 + tình huống giả định hoặc cực đoan, 也 + kết quả không thay đổi. 即使 nhấn mạnh: dù điều kiện có xấu đến đâu, kết quả vẫn vậy (即使下雨，我们也要去). Vế sau thường có 也、还、仍然 hoặc 要 để khẳng định quyết tâm. Khác với 尽管 nói về sự thật đã biết (尽管下雨了), 即使 thường nói về giả định chưa xảy ra (即使下雨).",
+  "tip": "Đừng quên chữ 也 ở vế sau: nói “即使下雨，我们要去爬山” thiếu 也, nghe chưa đủ giọng “cho dù… cũng…”. Cũng đừng nhầm 即使 với 如果: 即使 nói dù có thế thì vẫn vậy, 如果 chỉ giả định thường.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“即使下雨，我们也要去爬山” nghĩa là gì?",
+    "o": [
+     "Trời mưa nên không đi leo núi",
+     "Chúng tôi đi leo núi vì trời mưa",
+     "Cho dù trời mưa, chúng tôi cũng vẫn đi leo núi",
+     "Trời không mưa nên đi leo núi"
+    ],
+    "a": 2,
+    "why": "即使…也…: cho dù mưa, kết quả vẫn không đổi, vẫn đi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 即使失败了，___不要放弃。",
+    "o": [
+     "才",
+     "也",
+     "但",
+     "就"
+    ],
+    "a": 1,
+    "why": "Cặp đúng là 即使…，也…: cho dù thất bại, cũng đừng từ bỏ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "即使下雨，我们也要去爬山",
+     "即使下雨，我们要去爬山",
+     "即使他很忙，也会来参加我们的聚会",
+     "即使失败了，也不要放弃"
+    ],
+    "a": 1,
+    "why": "Thiếu 也 ở vế sau: phải nói “即使下雨，我们也要去爬山”. "
+   },
+   {
+    "q": "即使 khác 尽管 ở điểm nào?",
+    "o": [
+     "即使 thường nói giả định chưa xảy ra, 尽管 nói sự thật đã biết",
+     "即使 chỉ dùng trong câu hỏi",
+     "尽管 mạnh hơn 即使",
+     "Nghĩa hoàn toàn khác"
+    ],
+    "a": 0,
+    "why": "即使下雨 là giả định (chưa chắc mưa); 尽管下雨了 là sự thật đã mưa rồi."
+   },
+   {
+    "q": "Muốn nói “cho dù đường xa, tôi cũng đi bộ tới đó”, câu nào đúng?",
+    "o": [
+     "因为路很远，我也要走过去",
+     "尽管路很远，我要走过去",
+     "如果路很远，我也要走过去",
+     "即使路很远，我也要走过去"
+    ],
+    "a": 3,
+    "why": "Cho dù… cũng… là mẫu 即使…，也…."
+   },
+   {
+    "q": "也 trong vế sau của 即使 có tác dụng gì?",
+    "o": [
+     "Khẳng định kết quả không thay đổi dù điều kiện xấu",
+     "Hỏi lại",
+     "Phủ định",
+     "So sánh"
+    ],
+    "a": 0,
+    "why": "也 nhấn mạnh: dù điều kiện thế nào, kết quả vẫn vậy."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-28",
+  "stage": 5,
+  "title": "没有…就没有… — không có… thì không có…",
+  "hook": "“没有水，就没有生命” — không có nước thì không có sự sống: mẫu này nói một thứ là điều kiện sống còn của thứ kia.",
+  "examples": [
+   "没有水，就没有生命。(Méiyǒu shuǐ, jiù méiyǒu shēngmìng.) — Không có nước thì không có sự sống.",
+   "没有付出，就没有收获。(Méiyǒu fùchū, jiù méiyǒu shōuhuò.) — Không có bỏ ra thì không có thu về.",
+   "没有健康，就没有幸福的生活。(Méiyǒu jiànkāng, jiù méiyǒu xìngfú de shēnghuó.) — Không có sức khỏe thì không có cuộc sống hạnh phúc.",
+   "没有老师的帮助，我就没有今天的成绩。(Méiyǒu lǎoshī de bāngzhù, wǒ jiù méiyǒu jīntiān de chéngjī.) — Không có sự giúp đỡ của thầy cô thì tôi đã không có thành tích hôm nay."
+  ],
+  "speak": "没有水，就没有生命。没有付出，就没有收获。没有健康，就没有幸福的生活。没有老师的帮助，我就没有今天的成绩。",
+  "rule": "Công thức: 没有 + điều kiện cần, 就没有 + kết quả không thể có. Mẫu này nhấn mạnh quan hệ điều kiện tất yếu: thiếu vế trước thì vế sau không thể tồn tại (没有水，就没有生命). Hai vế 没有 thường đối nhau, vế sau có thể thêm 就 để nhấn mạnh. Dạng này hay dùng trong câu châm ngôn, lời khuyên và bài diễn thuyết.",
+  "tip": "Đừng dùng mẫu này cho điều kiện thường: nói “没有雨伞，就没有干衣服” nghe quá nặng; mẫu này dành cho điều kiện sống còn hoặc rất quan trọng, còn điều kiện thường dùng 如果…就….",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“没有水，就没有生命” nghĩa là gì?",
+    "o": [
+     "Không có nước thì không có sự sống",
+     "Sự sống không cần nước",
+     "Nước rất quan trọng với sự sống",
+     "Nước làm ra sự sống"
+    ],
+    "a": 0,
+    "why": "没有…就没有…: thiếu nước thì sự sống không thể tồn tại."
+   },
+   {
+    "q": "Điền vào chỗ trống: 没有付出，___没有收获。",
+    "o": [
+     "但",
+     "就",
+     "也",
+     "才"
+    ],
+    "a": 1,
+    "why": "没有…，就没有…: vế sau có 就 nhấn mạnh kết quả."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "没有水，就没有生命",
+     "没有雨伞，就没有干衣服",
+     "没有健康，就没有幸福的生活",
+     "没有付出，就没有收获"
+    ],
+    "a": 1,
+    "why": "Mẫu này dành cho điều kiện sống còn hoặc rất quan trọng; không có ô thì áo ướt, không đến mức “không có áo khô” theo nghĩa sống còn. Dùng 如果…就… mới tự nhiên."
+   },
+   {
+    "q": "Mẫu 没有…就没有… nhấn mạnh điều gì?",
+    "o": [
+     "Một thứ là điều kiện tất yếu của thứ kia",
+     "Hai thứ đối lập nhau",
+     "Một thứ gây ra thứ kia",
+     "Hai thứ giống nhau"
+    ],
+    "a": 0,
+    "why": "Thiếu vế trước thì vế sau không thể có: điều kiện tất yếu."
+   },
+   {
+    "q": "Muốn nói “không có sức khỏe thì không có cuộc sống hạnh phúc”, câu nào đúng?",
+    "o": [
+     "没有健康，就有幸福的生活",
+     "没有健康，就没有幸福的生活",
+     "没有健康，就幸福的生活",
+     "有健康，就没有幸福的生活"
+    ],
+    "a": 1,
+    "why": "Cặp đúng là 没有…，就没有…. "
+   },
+   {
+    "q": "Câu nào dùng mẫu 没有…就没有… đúng nhất?",
+    "o": [
+     "没有手机，我就没有鞋",
+     "没有老师的帮助，我就没有今天的成绩",
+     "没有铅笔，我就没有作业",
+     "没有椅子，我就没有饭"
+    ],
+    "a": 1,
+    "why": "Sự giúp đỡ của thầy là điều kiện quan trọng cho thành tích; các câu còn lại gán điều kiện sống còn cho đồ vật thường ngày, nghe gượng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-29",
+  "stage": 5,
+  "title": "再…也… — dù có… đến mấy cũng…",
+  "hook": "“天再冷也要去上课” — trời có lạnh đến mấy cũng phải đi học: 再…也… nói mức độ có cao đến đâu, kết quả vẫn không đổi.",
+  "examples": [
+   "天再冷也要去上课。(Tiān zài lěng yě yào qù shàng kè.) — Trời có lạnh đến mấy cũng phải đi học.",
+   "再难也要坚持下去。(Zài nán yě yào jiānchí xiàqù.) — Dù khó đến mấy cũng phải kiên trì đến cùng.",
+   "工作再忙，也要抽时间陪陪家人。(Gōngzuò zài máng, yě yào chōu shíjiān péi péi jiārén.) — Công việc có bận đến mấy cũng phải dành thời gian ở bên gia đình.",
+   "他再有钱，也不是最幸福的人。(Tā zài yǒu qián, yě bù shì zuì xìngfú de rén.) — Anh ấy có giàu đến mấy cũng không phải người hạnh phúc nhất."
+  ],
+  "speak": "天再冷也要去上课。再难也要坚持下去。工作再忙，也要抽时间陪陪家人。他再有钱，也不是最幸福的人。",
+  "rule": "Công thức: 再 + tính từ/động từ chỉ mức độ, 也 + kết quả không thay đổi. 再 ở đây không phải “lại” mà là “dù có… đến mấy”: 天再冷 (trời có lạnh đến mấy), 再难 (dù khó đến mấy). Vế sau thường có 也 và một động từ chỉ quyết tâm (要、坚持) hoặc một phán đoán (不是). Mẫu này gần với 即使…也…, nhưng 再…也… nhấn mạnh mức độ cao nhất của tính chất, còn 即使 nhấn mạnh giả định.",
+  "tip": "Đừng nhầm 再 này với 再见 (tạm biệt) hay 再来一次 (làm lại lần nữa): trong mẫu 再…也…, 再 nghĩa là “dù có… đến mấy”, luôn đi với tính từ hoặc động từ chỉ mức độ như 冷、难、忙、有钱.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“天再冷也要去上课” nghĩa là gì?",
+    "o": [
+     "Ngày mai trời lạnh hơn",
+     "Trời không lạnh",
+     "Trời lạnh nên nghỉ học",
+     "Trời có lạnh đến mấy cũng phải đi học"
+    ],
+    "a": 3,
+    "why": "再…也…: dù lạnh đến mấy, vẫn đi học."
+   },
+   {
+    "q": "Điền vào chỗ trống: 工作再忙，___要抽时间陪陪家人。",
+    "o": [
+     "就",
+     "也",
+     "才",
+     "但"
+    ],
+    "a": 1,
+    "why": "Cặp đúng là 再…，也…: bận đến mấy cũng phải dành thời gian."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "天再冷也去上课要",
+     "天再冷也要去上课",
+     "再难也要坚持下去",
+     "工作再忙，也要抽时间陪陪家人"
+    ],
+    "a": 0,
+    "why": "要 phải đứng trước động từ 去: “天再冷也要去上课” mới đúng."
+   },
+   {
+    "q": "再 trong mẫu 再…也… nghĩa là gì?",
+    "o": [
+     "Tạm biệt",
+     "Sau đó",
+     "Dù có… đến mấy",
+     "Lại, lần nữa"
+    ],
+    "a": 2,
+    "why": "再 ở đây nhấn mạnh mức độ cao nhất: dù có lạnh/khó/bận đến mấy."
+   },
+   {
+    "q": "再…也… khác 即使…也… ở điểm nào?",
+    "o": [
+     "再…也… nhấn mạnh mức độ cao nhất, 即使 nhấn mạnh giả định",
+     "再…也… chỉ dùng trong câu hỏi",
+     "Nghĩa hoàn toàn khác",
+     "即使 mạnh hơn"
+    ],
+    "a": 0,
+    "why": "再冷 là mức độ lạnh cao nhất; 即使下雨 là giả định trời mưa."
+   },
+   {
+    "q": "Muốn nói “dù khó đến mấy cũng phải kiên trì”, câu nào đúng?",
+    "o": [
+     "如果难也要坚持下去",
+     "再难也要坚持下去",
+     "再难就坚持下去",
+     "因为难也要坚持下去"
+    ],
+    "a": 1,
+    "why": "Mẫu đúng là 再…，也…: 再难也要坚持下去."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-30",
+  "stage": 5,
+  "title": "二重复句 — đơn câu + phức câu ghép đôi",
+  "hook": "“他说他明天一定来，可是我觉得他不会来。” — một vế là câu đơn, vế kia tự nó đã là câu phức.",
+  "examples": [
+   "他说他明天一定来，可是我觉得他不会来。(Tā shuō tā míngtiān yīdìng lái, kěshì wǒ juéde tā bù huì lái.) — Anh ấy nói ngày mai nhất định sẽ đến, nhưng tôi thấy anh ấy sẽ không đến.",
+   "我很喜欢这家饭馆，可是如果你觉得太贵，我们可以换一家。(Wǒ hěn xǐhuan zhè jiā fànguǎn, kěshì rúguǒ nǐ juéde tài guì, wǒmen kěyǐ huàn yī jiā.) — Tôi rất thích quán ăn này, nhưng nếu bạn thấy đắt quá thì chúng ta có thể đổi quán khác.",
+   "天气很好，我们打算去爬山，不过要是下雨就改去博物馆。(Tiānqì hěn hǎo, wǒmen dǎsuàn qù pá shān, bùguò yàoshi xià yǔ jiù gǎi qù bówùguǎn.) — Thời tiết rất đẹp, chúng tôi định đi leo núi, nhưng nếu mưa thì đổi sang đi bảo tàng.",
+   "他不喜欢吃辣的，所以每次去川菜馆，他都只点不辣的菜。(Tā bù xǐhuan chī là de, suǒyǐ měicì qù Chuāncài guǎn, tā dōu zhǐ diǎn bù là de cài.) — Anh ấy không ăn cay được nên mỗi lần đi quán Tứ Xuyên, anh ấy chỉ gọi món không cay."
+  ],
+  "speak": "他说他明天一定来，可是我觉得他不会来。我很喜欢这家饭馆，可是如果你觉得太贵，我们可以换一家。天气很好，我们打算去爬山，不过要是下雨就改去博物馆。他不喜欢吃辣的，所以每次去川菜馆，他都只点不辣的菜。",
+  "rule": "Câu phức hai tầng là câu mà một vế chỉ là câu đơn, còn vế kia tự nó lại là một câu phức có quan hệ nội bộ riêng (điều kiện, nhân quả, nhượng bộ). Khi đọc phải tách tầng ngoài trước (quan hệ chính giữa hai vế lớn), rồi mới xem quan hệ trong vế phức. Dấu phẩy ngăn giữa hai vế lớn, còn vế phức bên trong vẫn giữ liên từ của mình như 如果, 要是, 所以.",
+  "tip": "Người Việt hay đọc liền một mạch rồi lẫn tầng: hãy tìm liên từ của tầng ngoài trước (可是, 不过, 所以), sau đó mới xử lý vế phức bên trong.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他说他明天一定来，可是我觉得他不会来” có mấy tầng quan hệ?",
+    "o": [
+     "Một tầng",
+     "Hai tầng",
+     "Ba tầng",
+     "Không có quan hệ nào"
+    ],
+    "a": 1,
+    "why": "Tầng ngoài là 可是, tầng trong là 他说…来 — một vế đơn, một vế phức."
+   },
+   {
+    "q": "Câu nào là câu phức hai tầng?",
+    "o": [
+     "我吃饭了",
+     "他跑步",
+     "今天天气很好",
+     "他说明天来，可是我觉得他不会来"
+    ],
+    "a": 3,
+    "why": "Vế đầu là câu đơn, vế sau là câu phức có quan hệ riêng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天气很好，我们打算去爬山，___下雨就改去博物馆。",
+    "o": [
+     "要是",
+     "所以",
+     "但是",
+     "因为"
+    ],
+    "a": 0,
+    "why": "要是…就… là quan hệ điều kiện trong vế phức bên trong."
+   },
+   {
+    "q": "Câu nào SAI về cách tách tầng?",
+    "o": [
+     "Tách tầng ngoài trước rồi mới xem vế trong",
+     "Vế phức bên trong vẫn giữ liên từ của mình",
+     "Vế phức bên trong không có quan hệ riêng",
+     "Dấu phẩy ngăn giữa hai vế lớn"
+    ],
+    "a": 2,
+    "why": "Vế phức bên trong có quan hệ riêng của nó, ví dụ 如果… thì…"
+   },
+   {
+    "q": "“他不喜欢吃辣的，所以每次去川菜馆，他都只点不辣的菜” — vế sau là gì?",
+    "o": [
+     "Câu hỏi",
+     "Câu phức có quan hệ điều kiện",
+     "Câu cảm thán",
+     "Câu đơn"
+    ],
+    "a": 1,
+    "why": "每次…都… là quan hệ điều kiện–thời gian trong vế phức."
+   },
+   {
+    "q": "“我很喜欢这家饭馆，可是如果你觉得太贵，我们可以换一家” nghĩa là gì?",
+    "o": [
+     "Tôi không thích quán này",
+     "Quán này rất đắt",
+     "Tôi thích quán này nên nhất định ăn ở đây",
+     "Tôi thích quán này nhưng nếu bạn thấy đắt thì đổi quán khác"
+    ],
+    "a": 3,
+    "why": "可是 nối hai vế lớn: thích quán, nhưng nếu đắt thì đổi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-31",
+  "stage": 5,
+  "title": "可 — phó từ “可” nhấn mạnh",
+  "hook": "“这件衣服可漂亮了！” — thêm 可 là lời khen mạnh hẳn lên.",
+  "examples": [
+   "这件衣服可漂亮了。(Zhè jiàn yīfu kě piàoliang le.) — Cái áo này đẹp lắm luôn!",
+   "他可真行，一个人修好了电脑。(Tā kě zhēn xíng, yī gè rén xiū hǎo le diànnǎo.) — Anh ấy giỏi thật, một mình sửa xong cả máy tính.",
+   "我可想你了，好久没见了。(Wǒ kě xiǎng nǐ le, hǎojiǔ méi jiàn le.) — Tôi nhớ bạn lắm, lâu rồi không gặp.",
+   "这道菜可辣了，你小心一点儿。(Zhè dào cài kě là le, nǐ xiǎoxīn yīdiǎnr.) — Món này cay lắm đấy, bạn cẩn thận một chút."
+  ],
+  "speak": "这件衣服可漂亮了。他可真行，一个人修好了电脑。我可想你了，好久没见了。这道菜可辣了，你小心一点儿。",
+  "rule": "可 đứng trước tính từ, động từ hoặc 真, nhấn mạnh mức độ hoặc cảm xúc, thường đi với 了 cuối câu; nghĩa gần “thật là, lắm, quá”. Khác với 很 chỉ mức độ trung tính, 可 mang giọng cảm thán, thân mật, hay dùng trong khẩu ngữ.",
+  "tip": "Đừng dùng 可 với mọi tính từ trong văn viết trang trọng; trong văn nói thì 可 + tính từ + 了 là cách khen hay chê rất tự nhiên.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“这件衣服可漂亮了” nhấn mạnh điều gì?",
+    "o": [
+     "Áo rất đắt",
+     "Áo rất đẹp",
+     "Áo rất cũ",
+     "Áo rất rộng"
+    ],
+    "a": 1,
+    "why": "可 + 漂亮 + 了 nhấn mạnh: đẹp lắm luôn."
+   },
+   {
+    "q": "“我可想你了” nghĩa là gì?",
+    "o": [
+     "Tôi nhớ bạn lắm",
+     "Tôi quên bạn rồi",
+     "Tôi ghét bạn",
+     "Tôi không quen bạn"
+    ],
+    "a": 0,
+    "why": "可 nhấn mạnh động từ 想: nhớ lắm."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这道菜___辣了，你小心一点儿。",
+    "o": [
+     "很",
+     "都",
+     "可",
+     "在"
+    ],
+    "a": 2,
+    "why": "可辣了 là cách cảnh báo nhấn mạnh trong khẩu ngữ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他可真行",
+     "这件衣服可漂亮了",
+     "我可想你了",
+     "可他在学校里"
+    ],
+    "a": 3,
+    "why": "可 nhấn mạnh đứng trước tính từ/động từ, không đứng trước chủ ngữ như vậy."
+   },
+   {
+    "q": "可 khác 很 ở điểm nào?",
+    "o": [
+     "可 mang giọng cảm thán, thân mật hơn",
+     "可 chỉ dùng trong văn viết",
+     "可 không đi với 了",
+     "可 đứng sau tính từ"
+    ],
+    "a": 0,
+    "why": "很 trung tính, 可 nhấn mạnh cảm xúc, hay dùng trong khẩu ngữ."
+   },
+   {
+    "q": "Câu nào dùng 可 đúng?",
+    "o": [
+     "他可昨天来",
+     "这本书可有意思了",
+     "可我吃饭",
+     "他可高在学校"
+    ],
+    "a": 1,
+    "why": "可 + 有意思 + 了: cuốn sách này thú vị lắm."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-32",
+  "stage": 5,
+  "title": "×也不是，Y也不是 — cả hai đều không phải",
+  "hook": "“这件衣服不是红的，也不是绿的，是蓝的。” — phủ định cả hai khả năng, rồi nói ra sự thật.",
+  "examples": [
+   "这件衣服不是红的，也不是绿的，是蓝的。(Zhè jiàn yīfu bù shì hóng de, yě bù shì lǜ de, shì lán de.) — Cái áo này không phải màu đỏ, cũng không phải màu xanh lá, mà là màu xanh dương.",
+   "他不是老师，也不是学生，是来参观的家长。(Tā bù shì lǎoshī, yě bù shì xuésheng, shì lái cānguān de jiāzhǎng.) — Anh ấy không phải giáo viên, cũng không phải học sinh, mà là phụ huynh đến tham quan.",
+   "我不是不喜欢这本书，也不是没时间看，是还没买到。(Wǒ bù shì bù xǐhuan zhè běn shū, yě bù shì méi shíjiān kàn, shì hái méi mǎi dào.) — Tôi không phải không thích quyển sách này, cũng không phải không có thời gian đọc, mà là chưa mua được.",
+   "这个问题不是你的错，也不是我的错，是大家都没说清楚。(Zhège wèntí bù shì nǐ de cuò, yě bù shì wǒ de cuò, shì dàjiā dōu méi shuō qīngchu.) — Chuyện này không phải lỗi của bạn, cũng không phải lỗi của tôi, mà là mọi người đều chưa nói rõ."
+  ],
+  "speak": "这件衣服不是红的，也不是绿的，是蓝的。他不是老师，也不是学生，是来参观的家长。我不是不喜欢这本书，也不是没时间看，是还没买到。这个问题不是你的错，也不是我的错，是大家都没说清楚。",
+  "rule": "Cấu trúc “A不是X，也不是Y” phủ định cả hai khả năng X và Y, thường tiếp theo là một câu giải thích sự thật (是…). Chú ý vế sau dùng 也不是, không lặp lại 不是, và hai vế phủ định phải song song nhau về loại từ.",
+  "tip": "Người Việt hay viết thiếu chữ 也 ở vế sau — thiếu 也 thì câu vẫn hiểu nhưng không còn đúng mẫu nhấn mạnh phủ định cả hai.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“这件衣服不是红的，也不是绿的，是蓝的” nghĩa là gì?",
+    "o": [
+     "Áo màu đỏ",
+     "Áo màu xanh lá",
+     "Áo màu xanh dương",
+     "Áo màu vàng"
+    ],
+    "a": 2,
+    "why": "Phủ định cả đỏ và xanh lá, sự thật là màu xanh dương."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他不是老师，___学生，是来参观的家长。",
+    "o": [
+     "不是",
+     "也不是",
+     "都是",
+     "还是"
+    ],
+    "a": 1,
+    "why": "Mẫu chuẩn: 不是…，也不是…"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他不是老师，也不是学生",
+     "这不是红的，也不是绿的",
+     "我不是累，也不是饿",
+     "他不是老师，也不是是学生"
+    ],
+    "a": 3,
+    "why": "Vế sau chỉ cần 也不是, không lặp 是."
+   },
+   {
+    "q": "Sau “不是X，也不是Y” thường là gì?",
+    "o": [
+     "Một câu hỏi",
+     "Một câu giải thích sự thật bằng 是…",
+     "Một câu phủ định nữa",
+     "Không nói gì thêm"
+    ],
+    "a": 1,
+    "why": "Phủ định hai khả năng xong thường nói ra sự thật: 是…"
+   },
+   {
+    "q": "“这个问题不是你的错，也不是我的错” nhấn mạnh điều gì?",
+    "o": [
+     "Lỗi là của bạn",
+     "Lỗi là của tôi",
+     "Cả hai đều không có lỗi",
+     "Không ai quan tâm"
+    ],
+    "a": 2,
+    "why": "Phủ định cả hai phía: không phải lỗi của bạn, cũng không phải lỗi của tôi."
+   },
+   {
+    "q": "Câu nào dùng mẫu “不是…，也不是…” đúng?",
+    "o": [
+     "他不是高，也不是矮，是中等个子",
+     "他不是老师，也不是",
+     "不是他，也不是是她",
+     "他不是，也不是老师"
+    ],
+    "a": 0,
+    "why": "Hai vế phủ định song song (cao/thấp), rồi nói sự thật."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-33",
+  "stage": 5,
+  "title": "×也×不得，Y也Y不得 — làm gì cũng không được",
+  "hook": "“走也走不得，停也停不得，堵在半路上真难受。” — tiến không được, lùi cũng không xong.",
+  "examples": [
+   "走也走不得，停也停不得，堵在半路上真难受。(Zǒu yě zǒu bù dé, tíng yě tíng bù dé, dǔ zài bàn lù shang zhēn nánshòu.) — Đi cũng không đi được, dừng cũng không dừng được, kẹt giữa đường thật khó chịu.",
+   "进也进不得，退也退不得，他站在门口发愁。(Jìn yě jìn bù dé, tuì yě tuì bù dé, tā zhàn zài ménkǒu fāchóu.) — Vào cũng không vào được, lui cũng không lui được, anh ấy đứng ở cửa lo lắng.",
+   "说也说不得，笑也笑不得，会议室里安静极了。(Shuō yě shuō bù dé, xiào yě xiào bù dé, huìyìshì lǐ ānjìng jí le.) — Nói cũng không nói được, cười cũng không cười được, trong phòng họp yên tĩnh vô cùng.",
+   "他病了，吃也吃不得，喝也喝不得，只能躺在床上。(Tā bìng le, chī yě chī bù dé, hē yě hē bù dé, zhǐ néng tǎng zài chuáng shang.) — Anh ấy ốm rồi, ăn cũng không ăn được, uống cũng không uống được, chỉ nằm trên giường."
+  ],
+  "speak": "走也走不得，停也停不得，堵在半路上真难受。进也进不得，退也退不得，他站在门口发愁。说也说不得，笑也笑不得，会议室里安静极了。他病了，吃也吃不得，喝也喝不得，只能躺在床上。",
+  "rule": "Mẫu “V也V不得” lặp lại động từ, nghĩa là “muốn V cũng không V được”; hai vế song song nói tình thế tiến thoái lưỡng nan, làm gì cũng không xong. 不得 ở đây là bổ ngữ khả năng phủ định, không phải “không được phép”.",
+  "tip": "Đừng nhầm 不得 với 不能: 不能 là không có khả năng hoặc không được phép nói chung, còn V也V不得 nhấn mạnh hoàn cảnh bế tắc, làm gì cũng không xong.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“走也走不得，停也停不得” nói tình huống nào?",
+    "o": [
+     "Đi lại tự do",
+     "Tiến không được, lùi cũng không xong",
+     "Đi rất nhanh",
+     "Dừng lại nghỉ ngơi"
+    ],
+    "a": 1,
+    "why": "Hai vế đều 不得: đi không được, dừng cũng không được."
+   },
+   {
+    "q": "Điền vào chỗ trống: 进也进不得，___，他站在门口发愁。",
+    "o": [
+     "退也退不得",
+     "退得很慢",
+     "退一步",
+     "退了"
+    ],
+    "a": 0,
+    "why": "Mẫu song song: V也V不得，V也V不得."
+   },
+   {
+    "q": "不得 trong mẫu này là gì?",
+    "o": [
+     "Bổ ngữ khả năng phủ định",
+     "Phó từ thời gian",
+     "Giới từ",
+     "Trợ từ cuối câu"
+    ],
+    "a": 2,
+    "why": "V不得 là bổ ngữ khả năng: không V được."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "走也走不得，停也停不得",
+     "说也说不得，笑也笑不得",
+     "吃也吃不得，喝也喝不得",
+     "走也不得，停也不得"
+    ],
+    "a": 3,
+    "why": "Mẫu phải lặp động từ: V也V不得, không bỏ V giữa."
+   },
+   {
+    "q": "“他病了，吃也吃不得，喝也喝不得” nghĩa là gì?",
+    "o": [
+     "Anh ấy ăn uống rất ngon",
+     "Anh ấy ăn không được, uống cũng không được",
+     "Anh ấy không thích ăn uống",
+     "Anh ấy đang nấu ăn"
+    ],
+    "a": 1,
+    "why": "吃不得, 喝不得: ăn không được, uống cũng không được."
+   },
+   {
+    "q": "Câu nào dùng mẫu “V也V不得” đúng?",
+    "o": [
+     "看也看不得，听也听不得",
+     "他走不得路",
+     "我不得去学校",
+     "走不得，停不得"
+    ],
+    "a": 0,
+    "why": "看也看不得，听也听不得: xem không được, nghe cũng không được."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-34",
+  "stage": 5,
+  "title": "×是它，Y也是它 — cái này là nó, cái kia cũng là nó",
+  "hook": "“说它是礼物，它是礼物；说它是纪念品，它也是纪念品。” — một vật mà vừa là cái này vừa là cái kia.",
+  "examples": [
+   "说它是礼物，它是礼物；说它是纪念品，它也是纪念品。(Shuō tā shì lǐwù, tā shì lǐwù; shuō tā shì jìniànpǐn, tā yě shì jìniànpǐn.) — Nói nó là quà tặng thì nó là quà tặng; nói nó là đồ kỷ niệm thì nó cũng là đồ kỷ niệm.",
+   "叫它花，它是花；叫它草，它也是草，谁也说不清它到底是什么。(Jiào tā huā, tā shì huā; jiào tā cǎo, tā yě shì cǎo, shéi yě shuō bù qīng tā dàodǐ shì shénme.) — Gọi nó là hoa thì nó là hoa; gọi nó là cỏ thì nó cũng là cỏ, ai cũng không nói rõ rốt cuộc nó là gì.",
+   "这件衣服，说它是外套，它是外套；说它是裙子，它也是裙子，穿法真多。(Zhè jiàn yīfu, shuō tā shì wàitào, tā shì wàitào; shuō tā shì qúnzi, tā yě shì qúnzi, chuān fǎ zhēn duō.) — Cái áo này, nói nó là áo khoác thì nó là áo khoác; nói nó là váy thì nó cũng là váy, cách mặc thật nhiều.",
+   "说这道菜是主食，它是主食；说它是小吃，它也是小吃。(Shuō zhè dào cài shì zhǔshí, tā shì zhǔshí; shuō tā shì xiǎochī, tā yě shì xiǎochī.) — Nói món này là món chính thì nó là món chính; nói nó là món ăn vặt thì nó cũng là món ăn vặt."
+  ],
+  "speak": "说它是礼物，它是礼物；说它是纪念品，它也是纪念品。叫它花，它是花；叫它草，它也是草，谁也说不清它到底是什么。这件衣服，说它是外套，它是外套；说它是裙子，它也是裙子，穿法真多。说这道菜是主食，它是主食；说它是小吃，它也是小吃。",
+  "rule": "Mẫu “X是它，Y也是它” dùng khi một sự vật vừa khớp với tên gọi X vừa khớp với tên gọi Y, nhấn mạnh tính hai mặt, khó xếp vào một loại duy nhất. Vế sau bắt buộc có 也, và 它 nhắc lại cùng một sự vật ở vế trước. Thường mở đầu bằng 说它/叫它 để nêu tên gọi.",
+  "tip": "Đừng đổi 它 thành danh từ khác ở vế sau — hai vế phải nói về cùng một vật thì mẫu mới có nghĩa.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“说它是礼物，它是礼物；说它是纪念品，它也是纪念品” nghĩa là gì?",
+    "o": [
+     "Nó chỉ là quà tặng",
+     "Nó chỉ là đồ kỷ niệm",
+     "Nó vừa là quà tặng vừa là đồ kỷ niệm",
+     "Nó không phải quà tặng"
+    ],
+    "a": 2,
+    "why": "Hai vế đều khẳng định: vừa là X, cũng là Y."
+   },
+   {
+    "q": "Điền vào chỗ trống: 说它是外套，它是外套；说它是裙子，___。",
+    "o": [
+     "它不是裙子",
+     "它也是裙子",
+     "它是外套",
+     "它没有裙子"
+    ],
+    "a": 1,
+    "why": "Vế sau của mẫu là “Y也是它”: 它也是裙子."
+   },
+   {
+    "q": "它 trong mẫu này nhắc lại cái gì?",
+    "o": [
+     "Một vật khác",
+     "Cùng một sự vật ở vế trước",
+     "Người nói",
+     "Người nghe"
+    ],
+    "a": 0,
+    "why": "它 là đại từ nhắc lại cùng một vật ở cả hai vế."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "说它是礼物，它是礼物；说它是纪念品，它也是纪念品",
+     "叫它花，它是花；叫它草，它也是草",
+     "说它是礼物，它是礼物；说它是纪念品，它是花",
+     "说这道菜是主食，它是主食；说它是小吃，它也是小吃"
+    ],
+    "a": 2,
+    "why": "Vế sau phải nhắc lại cùng một vật với tên gọi Y: 它也是小吃/纪念品, không đổi sang 花."
+   },
+   {
+    "q": "Mẫu “X是它，Y也是它” nhấn mạnh điều gì?",
+    "o": [
+     "Vật đó khó xếp vào một loại duy nhất",
+     "Vật đó rất đắt",
+     "Vật đó đã cũ",
+     "Vật đó không dùng được"
+    ],
+    "a": 0,
+    "why": "Một vật vừa khớp X vừa khớp Y nên khó xếp vào một loại."
+   },
+   {
+    "q": "Câu nào dùng mẫu này đúng?",
+    "o": [
+     "说它是书，它是书；说它是本子，它也是本子",
+     "它是书，也是本子",
+     "说它是书，它不是书",
+     "它是礼物，它是纪念品"
+    ],
+    "a": 0,
+    "why": "Đủ hai vế song song với 也 ở vế sau."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-35",
+  "stage": 5,
+  "title": "×着也是×着 — đang… thì cũng đang…",
+  "hook": "“闲着也是闲着，不如帮我收拾一下房间。” — đã rảnh thì cũng rảnh, chi bằng làm việc gì đó.",
+  "examples": [
+   "闲着也是闲着，不如帮我收拾一下房间。(Xián zhe yě shì xián zhe, bùrú bāng wǒ shōushi yīxià fángjiān.) — Đã rảnh thì cũng rảnh, chi bằng giúp tôi dọn phòng một chút.",
+   "等着也是等着，我们先去买两杯咖啡吧。(Děng zhe yě shì děng zhe, wǒmen xiān qù mǎi liǎng bēi kāfēi ba.) — Đã chờ thì cũng chờ, chúng ta đi mua hai cốc cà phê trước đi.",
+   "坐着也是坐着，不如站起来活动活动。(Zuò zhe yě shì zuò zhe, bùrú zhàn qǐlai huódòng huódòng.) — Đã ngồi thì cũng ngồi, chi bằng đứng dậy vận động một chút.",
+   "反正看着也是看着，你就陪我一起看这部电影吧。(Fǎnzhèng kàn zhe yě shì kàn zhe, nǐ jiù péi wǒ yīqǐ kàn zhè bù diànyǐng ba.) — Dù sao xem thì cũng xem, bạn cứ xem cùng tôi bộ phim này đi."
+  ],
+  "speak": "闲着也是闲着，不如帮我收拾一下房间。等着也是等着，我们先去买两杯咖啡吧。坐着也是坐着，不如站起来活动活动。反正看着也是看着，你就陪我一起看这部电影吧。",
+  "rule": "Mẫu “V着也是V着” nói một trạng thái đang diễn ra dù sao cũng đang diễn ra, thường đi sau với 不如 để đề xuất làm việc khác có ích hơn trong lúc đó. 着 giữ trạng thái tiếp diễn, 也 nhấn mạnh “đằng nào cũng vậy”.",
+  "tip": "Đừng bỏ 着: “闲也是闲” không thành mẫu; phải là V + 着 + 也是 + V + 着.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“闲着也是闲着，不如帮我收拾一下房间” nghĩa là gì?",
+    "o": [
+     "Đang bận nên không giúp được",
+     "Đã rảnh thì cũng rảnh, chi bằng giúp dọn phòng",
+     "Không muốn dọn phòng",
+     "Phòng đã sạch rồi"
+    ],
+    "a": 1,
+    "why": "Đằng nào cũng đang rảnh, nên đề xuất làm việc có ích hơn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 等着也是等着，我们___去买两杯咖啡吧。",
+    "o": [
+     "先",
+     "都",
+     "就",
+     "再"
+    ],
+    "a": 0,
+    "why": "先…吧: tranh thủ đi mua trước trong lúc chờ."
+   },
+   {
+    "q": "Sau mẫu “V着也是V着” thường là gì?",
+    "o": [
+     "Một câu hỏi",
+     "Một đề xuất làm việc khác bằng 不如",
+     "Một câu phủ định",
+     "Một lời chào"
+    ],
+    "a": 2,
+    "why": "Thường tiếp theo là 不如…: chi bằng làm việc khác."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "闲着也是闲着，不如帮我收拾一下房间",
+     "坐着也是坐着，不如站起来活动活动",
+     "闲也是闲，不如帮我收拾房间",
+     "等着也是等着，我们先去买两杯咖啡吧"
+    ],
+    "a": 2,
+    "why": "Thiếu 着 thì không thành mẫu: phải là 闲着也是闲着."
+   },
+   {
+    "q": "也 trong “V着也是V着” nhấn mạnh điều gì?",
+    "o": [
+     "Đằng nào cũng vậy",
+     "Chỉ có một người",
+     "Việc rất khó",
+     "Thời gian rất dài"
+    ],
+    "a": 0,
+    "why": "也 nhấn mạnh trạng thái đằng nào cũng đang diễn ra."
+   },
+   {
+    "q": "Câu nào dùng mẫu này đúng?",
+    "o": [
+     "看着也是看着，你就陪我一起看这部电影吧",
+     "看也是看，你去看电影",
+     "看着看着，我去看电影",
+     "我看着电影，你看着我"
+    ],
+    "a": 0,
+    "why": "Đủ mẫu V着也是V着, rồi đề xuất cùng xem phim."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-36",
+  "stage": 5,
+  "title": "×归×，Y归Y — cái nào về cái nấy",
+  "hook": "“钱归钱，事归事，别把两件事混在一起。” — tiền ra tiền, việc ra việc, đừng trộn lẫn.",
+  "examples": [
+   "钱归钱，事归事，别把两件事混在一起。(Qián guī qián, shì guī shì, bié bǎ liǎng jiàn shì hùn zài yīqǐ.) — Tiền ra tiền, việc ra việc, đừng trộn hai chuyện vào nhau.",
+   "公归公，私归私，工作上的事不要带回家。(Gōng guī gōng, sī guī sī, gōngzuò shang de shì bù yào dài huí jiā.) — Công ra công, tư ra tư, chuyện công việc đừng mang về nhà.",
+   "这本书归你，那本书归我，咱们分清楚。(Zhè běn shū guī nǐ, nà běn shū guī wǒ, zánmen fēn qīngchu.) — Quyển sách này là của bạn, quyển kia là của tôi, chúng ta chia cho rõ.",
+   "功劳归功劳，错误归错误，不能因为他有功就忘了错。(Gōngláo guī gōngláo, cuòwù guī cuòwù, bù néng yīnwèi tā yǒu gōng jiù wàng le cuò.) — Công lao ra công lao, lỗi lầm ra lỗi lầm, không thể vì anh ấy có công mà quên lỗi."
+  ],
+  "speak": "钱归钱，事归事，别把两件事混在一起。公归公，私归私，工作上的事不要带回家。这本书归你，那本书归我，咱们分清楚。功劳归功劳，错误归错误，不能因为他有功就忘了错。",
+  "rule": "Mẫu “X归X，Y归Y” tách hai chuyện, hai phía rạch ròi: mỗi thứ về đúng chỗ của nó, không lẫn lộn, không lấy cái này bù cái kia. 归 ở đây nghĩa là “thuộc về, quy về”, X và Y thường là cặp đối lập (公/私, 钱/事) hoặc hai phía khác nhau.",
+  "tip": "Đừng dịch 归 ở đây là “về” theo nghĩa di chuyển — ở mẫu này 归 là “thuộc về, tính vào”, không phải đi về đâu.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“钱归钱，事归事” nghĩa là gì?",
+    "o": [
+     "Tiền và việc là một",
+     "Tiền ra tiền, việc ra việc, đừng trộn lẫn",
+     "Tiền quan trọng hơn việc",
+     "Việc quan trọng hơn tiền"
+    ],
+    "a": 1,
+    "why": "Mỗi thứ về đúng chỗ của nó, không lẫn lộn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 公归公，___，工作上的事不要带回家。",
+    "o": [
+     "私归私",
+     "家归家",
+     "人归人",
+     "事归事"
+    ],
+    "a": 0,
+    "why": "Cặp đối lập công/tư: 公归公，私归私."
+   },
+   {
+    "q": "归 trong mẫu này nghĩa là gì?",
+    "o": [
+     "Đi về",
+     "Thuộc về, quy về",
+     "Trở lại",
+     "Quay đầu"
+    ],
+    "a": 1,
+    "why": "归 ở đây là thuộc về, tính vào đúng chỗ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "钱归钱，事归事",
+     "公归公，私归私",
+     "功劳归功劳，错误归错误",
+     "钱归事，事归钱"
+    ],
+    "a": 3,
+    "why": "Mỗi thứ phải về đúng chỗ của nó: X归X, không đảo chéo."
+   },
+   {
+    "q": "“这本书归你，那本书归我” nhấn mạnh điều gì?",
+    "o": [
+     "Hai quyển sách giống nhau",
+     "Chia rõ quyển nào của ai",
+     "Sách rất đắt",
+     "Sách để chung"
+    ],
+    "a": 1,
+    "why": "归你/归我: quyển này thuộc về bạn, quyển kia thuộc về tôi."
+   },
+   {
+    "q": "Câu nào dùng mẫu “X归X，Y归Y” đúng?",
+    "o": [
+     "功劳归功劳，错误归错误",
+     "功劳归错误，错误归功劳",
+     "功劳归你，错误归我",
+     "功劳是功劳，错误是错误"
+    ],
+    "a": 0,
+    "why": "Mỗi thứ về đúng chỗ: công lao ra công lao, lỗi lầm ra lỗi lầm."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-37",
+  "stage": 5,
+  "title": "不管怎样说 — dù nói thế nào",
+  "hook": "“不管怎样说，他帮了我们大忙，这一点不能忘。” — nói cách nào thì công giúp đỡ vẫn là thật.",
+  "examples": [
+   "不管怎样说，他帮了我们大忙，这一点不能忘。(Bùguǎn zěnyàng shuō, tā bāng le wǒmen dà máng, zhè yīdiǎn bù néng wàng.) — Dù nói thế nào, anh ấy đã giúp chúng ta rất nhiều, điều này không thể quên.",
+   "不管怎样说，安全第一，大家先戴好头盔再出发。(Bùguǎn zěnyàng shuō, ānquán dì yī, dàjiā xiān dài hǎo tóukuī zài chūfā.) — Dù nói thế nào, an toàn là trên hết, mọi người đội mũ bảo hiểm xong rồi hãy đi.",
+   "不管怎样说，孩子还小，你别对他那么凶。(Bùguǎn zěnyàng shuō, háizi hái xiǎo, nǐ bié duì tā nàme xiōng.) — Dù nói thế nào, đứa bé còn nhỏ, bạn đừng dữ với nó như vậy.",
+   "不管怎样说，事情已经过去了，我们往前看吧。(Bùguǎn zěnyàng shuō, shìqing yǐjīng guòqù le, wǒmen wǎng qián kàn ba.) — Dù nói thế nào, chuyện đã qua rồi, chúng ta nhìn về phía trước đi."
+  ],
+  "speak": "不管怎样说，他帮了我们大忙，这一点不能忘。不管怎样说，安全第一，大家先戴好头盔再出发。不管怎样说，孩子还小，你别对他那么凶。不管怎样说，事情已经过去了，我们往前看吧。",
+  "rule": "不管怎样说 đứng đầu câu, nghĩa là “dù nói thế nào đi nữa”, dùng để khẳng định một kết luận không thay đổi dù lý lẽ có khác nhau; vế sau là điều người nói cho là chắc chắn. Khác với 不管…都 (nhấn mạnh điều kiện), mẫu này nhấn mạnh thái độ kết luận của người nói.",
+  "tip": "不管怎样说 thường đứng đầu câu và đi với một kết luận; đừng đặt nó giữa câu như một liên từ nối hai vế.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不管怎样说，他帮了我们大忙” nghĩa là gì?",
+    "o": [
+     "Dù nói thế nào, anh ấy đã giúp chúng ta rất nhiều",
+     "Anh ấy không giúp gì cả",
+     "Chưa biết anh ấy có giúp không",
+     "Anh ấy giúp nhưng không đáng kể"
+    ],
+    "a": 0,
+    "why": "不管怎样说 + kết luận chắc chắn: anh ấy đã giúp rất nhiều."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___，安全第一，大家先戴好头盔再出发。",
+    "o": [
+     "不管怎样说",
+     "因为安全",
+     "如果安全",
+     "虽然安全"
+    ],
+    "a": 0,
+    "why": "不管怎样说 mở đầu câu, rồi khẳng định: an toàn là trên hết."
+   },
+   {
+    "q": "不管怎样说 thường đứng ở đâu?",
+    "o": [
+     "Cuối câu",
+     "Giữa câu như liên từ",
+     "Đầu câu",
+     "Sau động từ"
+    ],
+    "a": 2,
+    "why": "不管怎样说 đứng đầu câu, mở ra kết luận phía sau."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "不管怎样说，他帮了我们大忙",
+     "不管怎样说，安全第一",
+     "不管怎样说，事情已经过去了",
+     "他不管怎样说帮了我们"
+    ],
+    "a": 3,
+    "why": "不管怎样说 đứng đầu câu, không chen giữa chủ ngữ và động từ."
+   },
+   {
+    "q": "“不管怎样说，孩子还小” — người nói muốn nói gì?",
+    "o": [
+     "Đứa bé đã lớn",
+     "Đứa bé còn nhỏ nên đừng dữ với nó",
+     "Đứa bé rất ngoan",
+     "Đứa bé không nghe lời"
+    ],
+    "a": 1,
+    "why": "Kết luận sau 不管怎样说:孩子还小, nên 别对他那么凶."
+   },
+   {
+    "q": "不管怎样说 khác 不管…都 ở điểm nào?",
+    "o": [
+     "不管怎样说 nhấn mạnh kết luận, 不管…都 nhấn mạnh điều kiện",
+     "Hai mẫu giống hệt nhau",
+     "不管怎样说 chỉ dùng trong câu hỏi",
+     "不管…都 đứng đầu câu"
+    ],
+    "a": 0,
+    "why": "不管怎样说 khẳng định kết luận không đổi; 不管…都 nhấn mạnh dù điều kiện nào cũng vậy."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-38",
+  "stage": 5,
+  "title": "看你×的 / 瞧他×的 — xem cái kiểu… của bạn kìa",
+  "hook": "“看你高兴的，嘴都合不上了！” — nhìn cái vẻ vui mừng của bạn kìa, miệng cười không khép lại được.",
+  "examples": [
+   "看你高兴的，嘴都合不上了！(Kàn nǐ gāoxìng de, zuǐ dōu hé bù shang le!) — Xem bạn vui chưa kìa, miệng cười không khép lại được!",
+   "瞧他得意的，好像全世界都知道了。(Qiáo tā déyì de, hǎoxiàng quán shìjiè dōu zhīdào le.) — Nhìn cái vẻ đắc ý của anh ấy kìa, như thể cả thế giới đều biết rồi.",
+   "看你急的，慢慢说，我听着呢。(Kàn nǐ jí de, mànman shuō, wǒ tīng zhe ne.) — Xem bạn sốt ruột chưa kìa, nói từ từ, tôi đang nghe đây.",
+   "瞧她哭的，眼睛都红了，快去安慰安慰她。(Qiáo tā kū de, yǎnjing dōu hóng le, kuài qù ānwèi ānwèi tā.) — Nhìn cô ấy khóc chưa kìa, mắt đỏ cả rồi, mau đi an ủi cô ấy đi."
+  ],
+  "speak": "看你高兴的，嘴都合不上了！瞧他得意的，好像全世界都知道了。看你急的，慢慢说，我听着呢。瞧她哭的，眼睛都红了，快去安慰安慰她。",
+  "rule": "Mẫu “看/瞧 + người + tính từ hoặc động từ + 的” là câu cảm thán khẩu ngữ: người nói chỉ vào vẻ mặt, dáng vẻ của ai đó mà trêu, trách yêu hoặc xót xa. 的 ở cuối làm câu thành lời nhận xét cảm thán, không phải câu hỏi. 看 trung tính, 瞧 thân mật hơn, hay dùng ở miền Bắc.",
+  "tip": "Đừng dịch 的 ở đây là “của”: “看你高兴的” không phải “xem cái vui của bạn”, mà là “xem bạn vui chưa kìa”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“看你高兴的，嘴都合不上了” là câu gì?",
+    "o": [
+     "Câu hỏi",
+     "Câu cảm thán trêu vui",
+     "Câu mệnh lệnh",
+     "Câu phủ định"
+    ],
+    "a": 1,
+    "why": "看你…的 là lời nhận xét cảm thán về vẻ mặt của ai đó."
+   },
+   {
+    "q": "Điền vào chỗ trống: 瞧他___，好像全世界都知道了。",
+    "o": [
+     "得意的",
+     "高兴地",
+     "得意地",
+     "高兴得"
+    ],
+    "a": 0,
+    "why": "Mẫu: 瞧他 + tính từ + 的: 瞧他得意的."
+   },
+   {
+    "q": "的 trong “看你高兴的” có nghĩa là gì?",
+    "o": [
+     "Của",
+     "Làm câu thành lời nhận xét cảm thán",
+     "Chỉ thời gian",
+     "Chỉ địa điểm"
+    ],
+    "a": 2,
+    "why": "的 cuối mẫu này làm câu thành lời cảm thán, không phải “của”."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "看你高兴的，嘴都合不上了",
+     "瞧他得意的，好像全世界都知道了",
+     "看你急的，慢慢说",
+     "看你高兴地，嘴都合不上了"
+    ],
+    "a": 3,
+    "why": "Mẫu dùng 的, không dùng 地: 看你高兴的."
+   },
+   {
+    "q": "“瞧她哭的，眼睛都红了” — người nói có thái độ gì?",
+    "o": [
+     "Giận dữ",
+     "Xót xa, muốn ai đó đi an ủi",
+     "Vui mừng",
+     "Không quan tâm"
+    ],
+    "a": 1,
+    "why": "Nhìn cô ấy khóc đến đỏ mắt nên giục đi an ủi."
+   },
+   {
+    "q": "Câu nào dùng mẫu “看/瞧 + người + tính từ + 的” đúng?",
+    "o": [
+     "看你急的，慢慢说",
+     "看你急地，慢慢说",
+     "看你急得，慢慢说",
+     "看你的急，慢慢说"
+    ],
+    "a": 0,
+    "why": "Đúng mẫu: 看你 + 急 + 的."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-39",
+  "stage": 5,
+  "title": "真有你/他/她的 — đúng là có anh/cô ấy thật",
+  "hook": "“真有你的，连这个都会修！” — đúng là có bạn thật, cái này mà cũng sửa được!",
+  "examples": [
+   "真有你的，连这个都会修！(Zhēn yǒu nǐ de, lián zhège dōu huì xiū!) — Đúng là có bạn thật, cái này mà cũng sửa được!",
+   "真有他的，一个人走完了全程，一声也没叫累。(Zhēn yǒu tā de, yī gè rén zǒu wán le quánchéng, yī shēng yě méi jiào lèi.) — Đúng là có anh ấy thật, một mình đi hết cả chặng đường mà không kêu mệt một tiếng.",
+   "真有她的，第一次做饭就做得这么好吃。(Zhēn yǒu tā de, dì yī cì zuò fàn jiù zuò de zhème hǎochī.) — Đúng là có cô ấy thật, lần đầu nấu cơm mà đã nấu ngon thế này.",
+   "真有你的，这么难的题你一下子就做出来了。(Zhēn yǒu nǐ de, zhème nán de tí nǐ yīxiàzi jiù zuò chūlái le.) — Đúng là có bạn thật, bài khó thế mà bạn làm ra ngay."
+  ],
+  "speak": "真有你的，连这个都会修！真有他的，一个人走完了全程，一声也没叫累。真有她的，第一次做饭就做得这么好吃。真有你的，这么难的题你一下子就做出来了。",
+  "rule": "真有你的/他的/她的 là câu cảm thán khen ngợi (đôi khi trêu chọc) khi ai đó làm được việc ngoài mong đợi. 的 cuối câu làm giọng cảm thán; mẫu này bày tỏ ngạc nhiên, thán phục, không dùng để kể sự thật khách quan.",
+  "tip": "Đừng dùng mẫu này với việc xấu nghiêm trọng — nó khen hoặc trêu yêu, không dùng để mắng; muốn mắng thì dùng câu khác.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“真有你的，连这个都会修” bày tỏ thái độ gì?",
+    "o": [
+     "Chê bai",
+     "Ngạc nhiên, thán phục",
+     "Giận dữ",
+     "Không quan tâm"
+    ],
+    "a": 1,
+    "why": "真有你的 là câu cảm thán khen khi ai đó làm được việc ngoài mong đợi."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___，一个人走完了全程，一声也没叫累。",
+    "o": [
+     "真有他的",
+     "真没有他",
+     "他真有",
+     "他有没有"
+    ],
+    "a": 0,
+    "why": "Mẫu cảm thán: 真有他的 + việc làm được."
+   },
+   {
+    "q": "“真有她的，第一次做饭就做得这么好吃” nghĩa là gì?",
+    "o": [
+     "Cô ấy nấu ăn rất dở",
+     "Cô ấy nấu ăn ngon đến bất ngờ ngay lần đầu",
+     "Cô ấy không biết nấu ăn",
+     "Cô ấy nấu ăn nhiều lần rồi"
+    ],
+    "a": 1,
+    "why": "Lần đầu nấu mà đã ngon thế này — đáng thán phục."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "真有你的，连这个都会修",
+     "真有他的，一个人走完了全程",
+     "真有她的，第一次做饭就做得这么好吃",
+     "真有你的，你昨天迟到了"
+    ],
+    "a": 3,
+    "why": "Mẫu này khen hoặc trêu yêu việc làm được, không dùng để mắng việc xấu như đi muộn."
+   },
+   {
+    "q": "的 trong “真有你的” có tác dụng gì?",
+    "o": [
+     "Chỉ sở hữu",
+     "Làm giọng cảm thán",
+     "Chỉ thời gian",
+     "Chỉ số lượng"
+    ],
+    "a": 1,
+    "why": "的 cuối câu cảm thán này làm giọng thán phục, không phải “của”."
+   },
+   {
+    "q": "Câu nào dùng mẫu “真有你/他/她的” đúng?",
+    "o": [
+     "真有你的，这么难的题你一下子就做出来了",
+     "真有你的，你真高",
+     "真有他，他昨天来了",
+     "真有你的，你是学生"
+    ],
+    "a": 0,
+    "why": "Phải đi với việc làm được ngoài mong đợi: bài khó mà làm ra ngay."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-40",
+  "stage": 5,
+  "title": "×什么× — cái gì mà… (gạt đi)",
+  "hook": "“急什么急，慢慢来，时间还多着呢。” — vội cái gì mà vội, cứ từ từ, còn nhiều thời gian mà.",
+  "examples": [
+   "急什么急，慢慢来，时间还多着呢。(Jí shénme jí, mànman lái, shíjiān hái duō zhe ne.) — Vội cái gì mà vội, cứ từ từ, còn nhiều thời gian mà.",
+   "哭什么哭，别哭了，事情总会有办法的。(Kū shénme kū, bié kū le, shìqing zǒng huì yǒu bànfǎ de.) — Khóc cái gì mà khóc, đừng khóc nữa, chuyện gì cũng sẽ có cách.",
+   "忙什么忙，先坐下来喝口水再说。(Máng shénme máng, xiān zuò xiàlái hē kǒu shuǐ zài shuō.) — Bận cái gì mà bận, ngồi xuống uống ngụm nước đã rồi nói.",
+   "怕什么怕，有我在呢，没事的。(Pà shénme pà, yǒu wǒ zài ne, méi shì de.) — Sợ cái gì mà sợ, có tôi đây, không sao đâu."
+  ],
+  "speak": "急什么急，慢慢来，时间还多着呢。哭什么哭，别哭了，事情总会有办法的。忙什么忙，先坐下来喝口水再说。怕什么怕，有我在呢，没事的。",
+  "rule": "Mẫu “V什么V” lặp lại động từ hoặc tính từ chỉ trạng thái, giọng gạt đi, an ủi hoặc trách nhẹ: “có gì mà phải V đâu”. Thường đi sau là câu khuyên nhủ (慢慢来, 别哭了). Hay dùng với từ chỉ trạng thái, cảm xúc như 急, 哭, 忙, 怕.",
+  "tip": "Đừng dùng mẫu này với động từ hành động cụ thể như 吃, 跑 — “吃什么吃” nghe rất lạ, không phải cách gạt đi tự nhiên.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“急什么急，慢慢来” nghĩa là gì?",
+    "o": [
+     "Vội cái gì mà vội, cứ từ từ",
+     "Hãy vội lên",
+     "Không còn thời gian",
+     "Đi nhanh lên"
+    ],
+    "a": 0,
+    "why": "V什么V gạt đi: có gì mà phải vội đâu, cứ từ từ."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___，别哭了，事情总会有办法的。",
+    "o": [
+     "哭什么哭",
+     "哭什么",
+     "别哭什么",
+     "哭哭什么"
+    ],
+    "a": 0,
+    "why": "Mẫu lặp động từ: 哭什么哭."
+   },
+   {
+    "q": "Sau “V什么V” thường là gì?",
+    "o": [
+     "Một câu khuyên nhủ như 别哭了、慢慢来",
+     "Một câu hỏi",
+     "Một lời chào",
+     "Một câu phủ định nữa"
+    ],
+    "a": 2,
+    "why": "Gạt đi xong thường khuyên nhủ: 慢慢来, 别哭了."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "急什么急，慢慢来",
+     "哭什么哭，别哭了",
+     "怕什么怕，有我在呢",
+     "吃什么吃，快吃吧"
+    ],
+    "a": 3,
+    "why": "Mẫu này không dùng với động từ hành động cụ thể như 吃."
+   },
+   {
+    "q": "“忙什么忙，先坐下来喝口水再说” — người nói muốn gì?",
+    "o": [
+     "Muốn người kia bận hơn",
+     "Muốn người kia ngồi xuống uống nước đã",
+     "Muốn người kia đi làm ngay",
+     "Muốn người kia về nhà"
+    ],
+    "a": 1,
+    "why": "Gạt chuyện bận đi rồi khuyên: ngồi xuống uống ngụm nước đã."
+   },
+   {
+    "q": "Câu nào dùng mẫu “V什么V” đúng?",
+    "o": [
+     "怕什么怕，有我在呢",
+     "跑什么跑，快跑吧",
+     "吃什么吃，我饿了",
+     "看什么看，我好看"
+    ],
+    "a": 0,
+    "why": "怕 là cảm xúc, hợp mẫu gạt đi; 跑, 吃, 看 là hành động cụ thể."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-41",
+  "stage": 5,
+  "title": "什么×不×（的） — cái gì mà… hay không…",
+  "hook": "“什么好吃不好吃的，能吃饱就行。” — ngon hay không ngon cái gì, ăn no là được.",
+  "examples": [
+   "什么好吃不好吃的，能吃饱就行。(Shénme hǎochī bù hǎochī de, néng chī bǎo jiù xíng.) — Ngon hay không ngon cái gì, ăn no là được.",
+   "什么累不累的，工作完成了就好。(Shénme lèi bù lèi de, gōngzuò wánchéng le jiù hǎo.) — Mệt hay không mệt cái gì, làm xong việc là tốt rồi.",
+   "什么贵不贵的，喜欢就买吧。(Shénme guì bù guì de, xǐhuan jiù mǎi ba.) — Đắt hay không đắt cái gì, thích thì mua đi.",
+   "什么冷不冷的，穿上外套就暖和了。(Shénme lěng bù lěng de, chuān shang wàitào jiù nuǎnhuo le.) — Lạnh hay không lạnh cái gì, mặc áo khoác vào là ấm thôi."
+  ],
+  "speak": "什么好吃不好吃的，能吃饱就行。什么累不累的，工作完成了就好。什么贵不贵的，喜欢就买吧。什么冷不冷的，穿上外套就暖和了。",
+  "rule": "Mẫu “什么X不X(的)” là câu phản bác: người nói gạt đi chuyện X hay không X, cho rằng điều đó không quan trọng, rồi đưa ra điều mình cho là quan trọng hơn. X thường là tính từ (好吃, 累, 贵, 冷). 的 cuối câu có thể có hoặc không, có 的 thì giọng càng dứt khoát.",
+  "tip": "Đừng nhầm với mẫu “X什么X” ở mục trước: “什么X不X(的)” gạt đi cả hai mặt X hay không X, còn “V什么V” chỉ gạt một hành động, trạng thái.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“什么好吃不好吃的，能吃饱就行” nghĩa là gì?",
+    "o": [
+     "Món này rất ngon",
+     "Ngon hay không ngon cái gì, ăn no là được",
+     "Món này không ngon",
+     "Không muốn ăn"
+    ],
+    "a": 1,
+    "why": "Gạt chuyện ngon hay không: ăn no là được."
+   },
+   {
+    "q": "Điền vào chỗ trống: 什么累不累的，___就好。",
+    "o": [
+     "工作完成了",
+     "累死了",
+     "不想工作",
+     "很累很累"
+    ],
+    "a": 0,
+    "why": "Gạt chuyện mệt đi, điều quan trọng là làm xong việc."
+   },
+   {
+    "q": "X trong “什么X不X(的)” thường là gì?",
+    "o": [
+     "Động từ hành động",
+     "Tính từ như 好吃、累、贵、冷",
+     "Danh từ chỉ người",
+     "Số từ"
+    ],
+    "a": 2,
+    "why": "X thường là tính từ chỉ cảm giác, đánh giá."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "什么好吃不好吃的，能吃饱就行",
+     "什么累不累的，工作完成了就好",
+     "什么贵不贵的，喜欢就买吧",
+     "什么吃不吃的，我很饿"
+    ],
+    "a": 3,
+    "why": "X là tính từ, không phải động từ hành động như 吃."
+   },
+   {
+    "q": "“什么冷不冷的，穿上外套就暖和了” — người nói cho điều gì là quan trọng?",
+    "o": [
+     "Trời có lạnh hay không",
+     "Mặc áo khoác vào là ấm",
+     "Mua áo mới",
+     "Ở trong nhà"
+    ],
+    "a": 1,
+    "why": "Gạt chuyện lạnh đi, điều quan trọng là mặc áo khoác vào."
+   },
+   {
+    "q": "Câu nào dùng mẫu “什么X不X(的)” đúng?",
+    "o": [
+     "什么贵不贵的，喜欢就买吧",
+     "什么买不买的，我喜欢",
+     "什么去不去的，他走了",
+     "什么看不看的，电影很好"
+    ],
+    "a": 0,
+    "why": "贵 là tính từ, hợp mẫu; 买, 去, 看 là động từ hành động."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-42",
+  "stage": 5,
+  "title": "用代词复指 — dùng đại từ nhắc lại",
+  "hook": "“昨天来找我的那个年轻人，他今天又来了。” — nhắc lại bằng 他 cho câu khỏi rối.",
+  "examples": [
+   "昨天来找我的那个年轻人，他今天又来了。(Zuótiān lái zhǎo wǒ de nà gè niánqīng rén, tā jīntiān yòu lái le.) — Chàng trai trẻ hôm qua đến tìm tôi, hôm nay anh ấy lại đến.",
+   "这本书，我早就看完了，它写得真好。(Zhè běn shū, wǒ zǎojiù kàn wán le, tā xiě de zhēn hǎo.) — Quyển sách này, tôi đã đọc xong từ lâu, nó viết hay thật.",
+   "小王，他昨天没来上课，也没请假。(Xiǎo Wáng, tā zuótiān méi lái shàng kè, yě méi qǐng jià.) — Tiểu Vương, hôm qua cậu ấy không đến lớp, cũng không xin phép.",
+   "那个新来的老师，她教得特别清楚，学生都很喜欢她。(Nà gè xīn lái de lǎoshī, tā jiāo de tèbié qīngchu, xuésheng dōu hěn xǐhuan tā.) — Cô giáo mới đến, cô ấy dạy rất rõ ràng, học sinh đều thích cô."
+  ],
+  "speak": "昨天来找我的那个年轻人，他今天又来了。这本书，我早就看完了，它写得真好。小王，他昨天没来上课，也没请假。那个新来的老师，她教得特别清楚，学生都很喜欢她。",
+  "rule": "Khi chủ ngữ là một cụm dài (昨天来找我的那个年轻人) hoặc khi nhắc lại chủ đề đã nói, người ta dùng đại từ 他/她/它/这/那 nhắc lại ở đầu vế sau để câu rõ ràng, không phải lặp lại cả cụm dài. Đại từ phải khớp người, giống với danh từ được nhắc.",
+  "tip": "Người Việt hay bỏ luôn đại từ nhắc lại vì tiếng Việt ít dùng — trong tiếng Trung, chủ ngữ dài mà không có đại từ nhắc lại thì câu nghe lủng củng, khó theo dõi.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“昨天来找我的那个年轻人，他今天又来了” — 他 nhắc lại ai?",
+    "o": [
+     "Người nói",
+     "Chàng trai trẻ hôm qua đến tìm tôi",
+     "Một người khác",
+     "Người nghe"
+    ],
+    "a": 1,
+    "why": "他 nhắc lại chủ ngữ dài 昨天来找我的那个年轻人."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这本书，我早就看完了，___写得真好。",
+    "o": [
+     "他",
+     "她",
+     "它",
+     "你"
+    ],
+    "a": 2,
+    "why": "Sách là vật nên dùng 它 nhắc lại."
+   },
+   {
+    "q": "“昨天来找我的那个年轻人，他今天又来了” nghĩa là gì?",
+    "o": [
+     "Chàng trai trẻ hôm qua đến tìm tôi, hôm nay lại đến",
+     "Chàng trai trẻ hôm qua không đến",
+     "Chàng trai trẻ hôm nay mới đến lần đầu",
+     "Chàng trai trẻ đã về rồi"
+    ],
+    "a": 0,
+    "why": "他 nhắc lại chàng trai trẻ hôm qua: hôm nay anh ấy lại đến."
+   },
+   {
+    "q": "Câu nào SAI về đại từ nhắc lại?",
+    "o": [
+     "小王，他昨天没来上课",
+     "那个新来的老师，她教得特别清楚",
+     "这本书，他写得真好",
+     "昨天来找我的那个年轻人，他今天又来了"
+    ],
+    "a": 2,
+    "why": "Sách là vật, phải dùng 它, không dùng 他."
+   },
+   {
+    "q": "“那个新来的老师，她教得特别清楚” — 她 nhắc lại ai?",
+    "o": [
+     "Học sinh",
+     "Cô giáo mới đến",
+     "Người nói",
+     "Một cô giáo khác"
+    ],
+    "a": 1,
+    "why": "她 nhắc lại 那个新来的老师."
+   },
+   {
+    "q": "Câu nào dùng đại từ nhắc lại đúng?",
+    "o": [
+     "小王，他昨天没来上课，也没请假",
+     "小王，我昨天没来上课",
+     "小王，你昨天没来上课",
+     "小王，书昨天没来上课"
+    ],
+    "a": 0,
+    "why": "他 nhắc lại 小王, khớp người và giống."
+   }
+  ]
+ },
+ {
+  "id": "v218-l5-43",
+  "stage": 5,
+  "title": "带省略成分 — câu có thành phần lược bỏ",
+  "hook": "“你去吗？我去。” — câu trả lời lược luôn cả “đi đâu”, người nghe vẫn hiểu.",
+  "examples": [
+   "你去吗？我去。(Nǐ qù ma? Wǒ qù.) — Bạn đi không? Tôi đi.",
+   "要茶还是咖啡？茶，谢谢。(Yào chá háishi kāfēi? Chá, xièxie.) — Trà hay cà phê? Trà, cảm ơn.",
+   "他想去北京，我也想去。(Tā xiǎng qù Běijīng, wǒ yě xiǎng qù.) — Anh ấy muốn đi Bắc Kinh, tôi cũng muốn đi.",
+   "昨天我去商店买了三本书，今天他也去了。(Zuótiān wǒ qù shāngdiàn mǎi le sān běn shū, jīntiān tā yě qù le.) — Hôm qua tôi đi cửa hàng mua ba quyển sách, hôm nay anh ấy cũng đi rồi."
+  ],
+  "speak": "你去吗？我去。要茶还是咖啡？茶，谢谢。他想去北京，我也想去。昨天我去商店买了三本书，今天他也去了。",
+  "rule": "Trong hội thoại, thành phần nào người nghe đã biết hoặc suy ra được từ ngữ cảnh thì có thể lược bỏ: chủ ngữ, động từ, tân ngữ, thậm chí cả vế câu. Điều kiện là phần lược bỏ phải khôi phục được từ câu trước hoặc tình huống; lược sai chỗ sẽ gây khó hiểu.",
+  "tip": "Người Việt mới học hay lược cả phần không khôi phục được — trước khi lược, hãy tự hỏi: người nghe có đoán ra phần thiếu từ câu trước không?",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“你去吗？我去。” — câu trả lời đã lược bỏ phần nào?",
+    "o": [
+     "Chủ ngữ",
+     "Đi đâu",
+     "Động từ 去",
+     "Cả câu"
+    ],
+    "a": 1,
+    "why": "我去 lược “đi đâu”: người nghe hiểu từ câu hỏi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 要茶还是咖啡？___，谢谢。",
+    "o": [
+     "茶",
+     "水",
+     "饭",
+     "酒"
+    ],
+    "a": 0,
+    "why": "Chỉ cần đáp 茶, phần còn lại lược vì đã có trong câu hỏi."
+   },
+   {
+    "q": "Điều kiện để lược bỏ thành phần là gì?",
+    "o": [
+     "Phần lược phải khôi phục được từ câu trước hoặc tình huống",
+     "Lược càng nhiều càng tốt",
+     "Chỉ lược chủ ngữ",
+     "Chỉ lược trong văn viết"
+    ],
+    "a": 2,
+    "why": "Lược sai chỗ, người nghe không đoán ra thì gây khó hiểu."
+   },
+   {
+    "q": "Câu nào SAI về lược bỏ?",
+    "o": [
+     "你去吗？我去。",
+     "要茶还是咖啡？茶，谢谢。",
+     "他想去北京，我也想去。",
+     "你去吗？我。"
+    ],
+    "a": 3,
+    "why": "Chỉ đáp 我 thì thiếu động từ, người nghe không biết “tôi” làm sao."
+   },
+   {
+    "q": "“他想去北京，我也想去” nghĩa là gì?",
+    "o": [
+     "Anh ấy muốn đi Bắc Kinh, tôi cũng muốn đi",
+     "Anh ấy đã đi Bắc Kinh, tôi ở nhà",
+     "Anh ấy không muốn đi Bắc Kinh",
+     "Tôi muốn đi Bắc Kinh một mình"
+    ],
+    "a": 0,
+    "why": "我也想去 lược 北京: tôi cũng muốn đi Bắc Kinh."
+   },
+   {
+    "q": "Câu nào dùng lược bỏ đúng?",
+    "o": [
+     "他想去北京，我也想去。",
+     "他想去北京，我也。",
+     "他想去，我也北京。",
+     "他北京，我也去。"
+    ],
+    "a": 0,
+    "why": "我也想去 lược 北京, khôi phục được từ câu trước."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-01",
+  "stage": 6,
+  "title": "词缀 văn viết — 超-/多-/反-/无-/亚-/准- + -式/-型",
+  "hook": "“这是一家超大超市。” — đây là một siêu thị siêu lớn: tiền tố 超- gắn trước danh từ để nói “vượt hơn mức thường”.",
+  "examples": [
+   "这是一家超大超市，东西特别全。(Zhè shì yī jiā chāo dà chāoshì, dōngxi tèbié quán.) — Đây là một siêu thị siêu lớn, đồ đạc đầy đủ vô cùng.",
+   "学校新建了一个多媒体教室。(Xuéxiào xīn jiàn le yī gè duō méitǐ jiàoshì.) — Trường vừa xây một phòng học đa phương tiện mới.",
+   "“高兴”的反义词是“难过”。(Gāoxìng de fǎnyìcí shì nánguò.) — Từ trái nghĩa của “vui vẻ” là “buồn bã”.",
+   "新型无人机可以在田里拍照。(Xīnxíng wúrénjī kěyǐ zài tián lǐ pāi zhào.) — Máy bay không người lái kiểu mới có thể chụp ảnh trên đồng ruộng."
+  ],
+  "speak": "这是一家超大超市，东西特别全。学校新建了一个多媒体教室。“高兴”的反义词是“难过”。新型无人机可以在田里拍照。",
+  "rule": "Tiền tố văn viết gắn trước gốc từ để tạo nghĩa mới: 超- là vượt hơn (超市, 超大), 多- là nhiều loại (多媒体), 反- là ngược lại (反义词), 无- là không có (无人机), 亚- là hạng nhì (亚军), 准- là sắp trở thành (准妈妈). Hậu tố -式 chỉ kiểu cách (中式), -型 chỉ dạng mẫu (新型). Các từ tố này thường đi với từ văn viết hoặc từ chuyên ngành, không tự do gắn vào mọi từ khẩu ngữ.",
+  "tip": "Người Việt hay dịch 准妈妈 thành “mẹ chuẩn”: 准- ở đây là “sắp làm”,准妈妈 là người sắp làm mẹ. Còn 亚军 không phải “quân Á” mà là người về nhì, chỉ sau quán quân.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“超市”的 超- có nghĩa gì?",
+    "o": [
+     "Vượt hơn mức thường",
+     "Mới mở",
+     "Rất rẻ",
+     "Rất nhỏ"
+    ],
+    "a": 0,
+    "why": "超- nghĩa là vượt hơn, quá mức thường: 超市 là siêu thị, 超大 là siêu lớn."
+   },
+   {
+    "q": "Điền vào chỗ trống: “难过”是“高兴”的___词。",
+    "o": [
+     "同义",
+     "反义",
+     "近义",
+     "多义"
+    ],
+    "a": 1,
+    "why": "反义词 là từ trái nghĩa: 反- chỉ nghĩa ngược lại."
+   },
+   {
+    "q": "“无人机” nghĩa là gì?",
+    "o": [
+     "Máy bay giấy",
+     "Máy bay có người lái",
+     "Máy bay không người lái",
+     "Máy bay đồ chơi"
+    ],
+    "a": 2,
+    "why": "无- là không có: 无人机 là máy bay không người lái."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他得了亚军",
+     "这是一件中式衣服",
+     "她是一位准妈妈",
+     "这台电脑很准型"
+    ],
+    "a": 3,
+    "why": "Không nói 准型; -型 gắn sau từ chỉ loại như 新型, 大型, không gắn sau 准."
+   },
+   {
+    "q": "“新型手机” nhấn mạnh điều gì?",
+    "o": [
+     "Điện thoại kiểu mới",
+     "Điện thoại rất đắt",
+     "Điện thoại bị hỏng",
+     "Điện thoại cũ"
+    ],
+    "a": 0,
+    "why": "-型 chỉ dạng mẫu: 新型 là kiểu mới, mẫu mới."
+   },
+   {
+    "q": "Từ nào dùng tiền tố 多-?",
+    "o": [
+     "多半",
+     "多媒体",
+     "多少",
+     "多谢"
+    ],
+    "a": 1,
+    "why": "多媒体 là từ ghép bằng tiền tố 多- (nhiều phương tiện); 多少, 多谢, 多半 là từ khác, không phải tiền tố tạo từ này."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-02",
+  "stage": 6,
+  "title": "量词 cấp 6 — 餐/串/滴/副/股/集/枝 + 番/声/趟",
+  "hook": "“一串葡萄” — một chùm nho: tiếng Trung không nói “một nho” mà phải có lượng từ 串 cho thứ mọc thành chùm.",
+  "examples": [
+   "妈妈买了一串葡萄和一枝花。(Māma mǎi le yī chuàn pútáo hé yī zhī huā.) — Mẹ mua một chùm nho và một cành hoa.",
+   "他喝了一口水，杯里只剩一滴水了。(Tā hē le yī kǒu shuǐ, bēi lǐ zhǐ shèng yī dī shuǐ le.) — Anh ấy uống một ngụm nước, trong cốc chỉ còn một giọt nước.",
+   "我和弟弟去看了一集电视剧，又配了一副眼镜。(Wǒ hé dìdi qù kàn le yī jí diànshìjù, yòu pèi le yī fù yǎnjìng.) — Tôi và em trai xem một tập phim truyền hình, rồi lại đi cắt thêm một cặp kính.",
+   "他特地跑了一趟商店，喊了一声才进门。(Tā tèdì pǎo le yī tàng shāngdiàn, hǎn le yī shēng cái jìn mén.) — Anh ấy cố ý chạy một chuyến tới cửa hàng, gọi một tiếng rồi mới vào cửa."
+  ],
+  "speak": "妈妈买了一串葡萄和一枝花。他喝了一口水，杯里只剩一滴水了。我和弟弟去看了一集电视剧，又配了一副眼镜。他特地跑了一趟商店，喊了一声才进门。",
+  "rule": "Danh lượng từ cấp 6: 餐 chỉ bữa ăn (一餐饭), 串 chỉ vật thành chùm hoặc xâu (一串葡萄), 滴 chỉ giọt chất lỏng (一滴水), 副 chỉ vật thành đôi hoặc thành bộ (一副眼镜), 股 chỉ luồng, dòng (一股风), 集 chỉ tập phim hoặc tập sách (一集电视剧), 枝 chỉ cành hoa hoặc vật dài nhỏ (一枝花). Động lượng từ: 番 chỉ lần làm việc tốn công (讨论一番), 声 chỉ lần phát ra tiếng (喊一声), 趟 chỉ chuyến đi lại (跑一趟). Lượng từ đứng sau số từ, trước danh từ hoặc sau động từ.",
+  "tip": "Người Việt hay dùng 一枝花 sai thành 一朵花: cả hai đều đúng nhưng 枝 nhấn mạnh cành dài, 朵 nhấn mạnh bông hoa. Còn 副 luôn đi với vật thành cặp như 眼镜, 手套, đừng dùng 个 thay cho nó.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“一串葡萄” dùng lượng từ nào?",
+    "o": [
+     "个",
+     "串",
+     "枝",
+     "集"
+    ],
+    "a": 1,
+    "why": "串 dùng cho vật mọc thành chùm hoặc xâu lại: 一串葡萄."
+   },
+   {
+    "q": "Điền vào chỗ trống: 桌子上放着一___花。",
+    "o": [
+     "趟",
+     "副",
+     "枝",
+     "集"
+    ],
+    "a": 2,
+    "why": "枝 dùng cho cành hoa hoặc vật dài nhỏ: 一枝花."
+   },
+   {
+    "q": "“一股风” nhấn mạnh điều gì?",
+    "o": [
+     "Một cái quạt",
+     "Một cơn mưa",
+     "Một làn khói bếp",
+     "Một cơn gió, một luồng gió"
+    ],
+    "a": 3,
+    "why": "股 chỉ luồng, dòng: 一股风 là một luồng gió, 一股香味 là một luồng mùi thơm."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "桌上有一滴米饭",
+     "我看了一集电视剧",
+     "他跑了一趟北京",
+     "她买了一副眼镜"
+    ],
+    "a": 0,
+    "why": "滴 chỉ giọt chất lỏng như nước, không dùng cho hạt cơm: phải nói 一粒米饭."
+   },
+   {
+    "q": "“讨论一番” nghĩa là gì?",
+    "o": [
+     "Không thảo luận",
+     "Thảo luận một lần cho kỹ",
+     "Thảo luận một phút",
+     "Thảo luận qua loa"
+    ],
+    "a": 1,
+    "why": "番 là động lượng từ chỉ một lần làm việc tốn công sức: 讨论一番 là bàn bạc một lượt cho kỹ."
+   },
+   {
+    "q": "Lượng từ nào chỉ bữa ăn?",
+    "o": [
+     "集",
+     "声",
+     "餐",
+     "串"
+    ],
+    "a": 2,
+    "why": "餐 chỉ bữa ăn: 一餐饭, 三餐 đều là các bữa ăn trong ngày."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-03",
+  "stage": 6,
+  "title": "特、异常 — phó từ mức độ cấp 6",
+  "hook": "“今天异常安静。” — hôm nay yên tĩnh khác thường: 异常 không chỉ “rất” mà còn nói mức độ vượt khỏi bình thường.",
+  "examples": [
+   "这家小店的面条特好吃，我每周都来。(Zhè jiā xiǎodiàn de miàntiáo tè hǎochī, wǒ měi zhōu dōu lái.) — Mì của quán nhỏ này ngon cực kỳ, tuần nào tôi cũng tới.",
+   "考完试以后，教室里异常安静。(Kǎo wán shì yǐhòu, jiàoshì lǐ yìcháng ānjìng.) — Sau khi thi xong, trong lớp yên tĩnh khác thường.",
+   "他今天特忙，连午饭都没吃。(Tā jīntiān tè máng, lián wǔfàn dōu méi chī.) — Hôm nay anh ấy bận cực kỳ, ngay cả bữa trưa cũng không ăn.",
+   "听到这个消息，她异常兴奋，马上打电话告诉妈妈。(Tīng dào zhège xiāoxi, tā yìcháng xīngfèn, mǎshàng dǎ diànhuà gàosu māma.) — Nghe tin này, cô ấy phấn khích khác thường, lập tức gọi điện báo cho mẹ."
+  ],
+  "speak": "这家小店的面条特好吃，我每周都来。考完试以后，教室里异常安静。他今天特忙，连午饭都没吃。听到这个消息，她异常兴奋，马上打电话告诉妈妈。",
+  "rule": "特 là dạng rút gọn khẩu ngữ của 特别, đứng trước tính từ hoặc động từ chỉ mức độ rất cao: 特好吃, 特忙. 异常 là phó từ văn viết hơn, nghĩa gốc là khác thường, dùng làm phó từ thì nghĩa là vô cùng, vượt khỏi mức bình thường: 异常安静, 异常兴奋. Cả hai đều đứng trước tính từ hoặc động từ, không đứng sau.",
+  "tip": "Người Việt hay dùng 异常 thay cho 很 ở mọi chỗ: 异常 mang sắc thái văn viết và nhấn mạnh “khác thường”, trong câu nói thường ngày hãy dùng 特 hoặc 特别 cho tự nhiên, chỉ dùng 异常 khi muốn nhấn mạnh sự bất thường.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“特好吃” nghĩa là gì?",
+    "o": [
+     "Không ngon",
+     "Ăn rất ít",
+     "Ngon cực kỳ",
+     "Ăn rất chậm"
+    ],
+    "a": 2,
+    "why": "特 là dạng rút gọn của 特别: 特好吃 là ngon cực kỳ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 教室里___安静，一点儿声音也没有。",
+    "o": [
+     "已经",
+     "一直",
+     "一共",
+     "异常"
+    ],
+    "a": 3,
+    "why": "异常安静 nhấn mạnh yên tĩnh khác thường, vượt khỏi mức bình thường."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "异常他很高兴",
+     "这个消息让她异常兴奋",
+     "他今天特忙",
+     "这件衣服特漂亮"
+    ],
+    "a": 0,
+    "why": "Phó từ mức độ phải đứng trước tính từ hoặc động từ, không đứng trước chủ ngữ: phải nói 他异常高兴."
+   },
+   {
+    "q": "特 và 特别 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "Nghĩa khác nhau",
+     "特 ngắn gọn, khẩu ngữ hơn",
+     "特 chỉ dùng trong văn viết",
+     "特别 không chỉ mức độ"
+    ],
+    "a": 1,
+    "why": "特 là dạng rút gọn khẩu ngữ của 特别, nghĩa mức độ giống nhau, chỉ khác sắc thái."
+   },
+   {
+    "q": "“异常” ngoài nghĩa “vô cùng” còn có nghĩa gốc là gì?",
+    "o": [
+     "Rất đẹp",
+     "Bình thường",
+     "Khác thường",
+     "Rất nhanh"
+    ],
+    "a": 2,
+    "why": "异常 vốn là tính từ chỉ khác thường, rồi dùng như phó từ chỉ mức độ vượt khỏi bình thường."
+   },
+   {
+    "q": "Câu nào dùng 异常 tự nhiên nhất?",
+    "o": [
+     "他异常走路",
+     "我异常买东西",
+     "我异常吃饭",
+     "天气异常热，路上一个人也没有"
+    ],
+    "a": 3,
+    "why": "异常 đứng trước tính từ chỉ mức độ: 异常热 là nóng khác thường, hợp văn cảnh nhấn mạnh."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-04",
+  "stage": 6,
+  "title": "尽、净、一齐、一同 — phó từ phạm vi và cùng nhau",
+  "hook": "“大家一齐站了起来。” — mọi người cùng nhau đứng dậy: 一齐 nói mọi người làm cùng một lúc, không ai trước ai sau.",
+  "examples": [
+   "这个班尽是新同学，我一个也不认识。(Zhège bān jìn shì xīn tóngxué, wǒ yī gè yě bù rènshi.) — Lớp này toàn là bạn mới, tôi chẳng quen ai.",
+   "他一回家就净说工作的事，妈妈听得直摇头。(Tā yī huí jiā jiù jìng shuō gōngzuò de shì, māma tīng de zhí yáotóu.) — Anh ấy vừa về nhà đã toàn nói chuyện công việc, mẹ nghe mà lắc đầu liên tục.",
+   "听到音乐声，孩子们一齐拍起手来。(Tīng dào yīnyuè shēng, háizimen yīqí pāi qǐ shǒu lái.) — Nghe tiếng nhạc, lũ trẻ cùng nhau vỗ tay.",
+   "我们一同去看望了生病的老师。(Wǒmen yītóng qù kànwàng le shēngbìng de lǎoshī.) — Chúng tôi cùng nhau đi thăm thầy giáo đang ốm."
+  ],
+  "speak": "这个班尽是新同学，我一个也不认识。他一回家就净说工作的事，妈妈听得直摇头。听到音乐声，孩子们一齐拍起手来。我们一同去看望了生病的老师。",
+  "rule": "尽 làm phó từ phạm vi, nghĩa là toàn bộ, hết thảy, thường đi với 是: 尽是新同学 (toàn là bạn mới). 净 cũng nghĩa là toàn, chỉ, nhưng mang sắc thái chê hoặc nhấn mạnh chỉ có thứ đó: 净说工作的事 (toàn nói chuyện công việc). 一齐 và 一同 đều nghĩa là cùng nhau: 一齐 nhấn mạnh cùng một lúc, đồng loạt; 一同 nhấn mạnh cùng đi, cùng làm với nhau, hay đi với động từ di chuyển như 去, 来, 回.",
+  "tip": "Người Việt hay lẫn 一齐 với 一起: 一起 chỉ chung chung là cùng nhau, 一齐 nhấn mạnh đồng loạt cùng lúc; muốn nói cả lớp đồng loạt đứng dậy thì dùng 一齐 mới đúng sắc thái.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“尽是新同学” nghĩa là gì?",
+    "o": [
+     "Không có bạn mới",
+     "Bạn mới rất ít",
+     "Có vài bạn mới",
+     "Toàn là bạn mới"
+    ],
+    "a": 3,
+    "why": "尽 làm phó từ phạm vi: 尽是 nghĩa là toàn là, hết thảy là."
+   },
+   {
+    "q": "Điền vào chỗ trống: 大家___站了起来，一起唱歌。",
+    "o": [
+     "一齐",
+     "尽",
+     "一同",
+     "净"
+    ],
+    "a": 0,
+    "why": "一齐 nhấn mạnh đồng loạt cùng một lúc: mọi người cùng lúc đứng dậy."
+   },
+   {
+    "q": "“净说工作的事” mang sắc thái gì?",
+    "o": [
+     "Khen ngợi",
+     "Nhấn mạnh chỉ toàn nói chuyện đó, hơi chê",
+     "Hỏi han",
+     "Cổ vũ"
+    ],
+    "a": 1,
+    "why": "净 nghĩa là toàn, chỉ, thường mang sắc thái nhấn mạnh hoặc hơi chê là chỉ có thứ đó."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "孩子们一齐拍手",
+     "这个班尽是新同学",
+     "他一齐说工作的事",
+     "我们一同去看望老师"
+    ],
+    "a": 2,
+    "why": "一齐 chỉ sự đồng loạt cùng lúc, không dùng để nói một người toàn nói chuyện gì; ở đây phải dùng 净."
+   },
+   {
+    "q": "Muốn nói “cùng nhau đi”, dùng từ nào tự nhiên nhất?",
+    "o": [
+     "净去",
+     "尽去",
+     "一齐去",
+     "一同去"
+    ],
+    "a": 3,
+    "why": "一同 nhấn mạnh cùng đi, cùng làm với nhau, hay đi với động từ di chuyển như 去."
+   },
+   {
+    "q": "尽 và 净 giống nhau ở điểm nào?",
+    "o": [
+     "Đều nghĩa là toàn, chỉ phạm vi toàn bộ",
+     "Đều chỉ thời gian",
+     "Đều là động từ",
+     "Đều đứng cuối câu"
+    ],
+    "a": 0,
+    "why": "Cả hai đều là phó từ phạm vi với nghĩa toàn, chỉ khác sắc thái: 尽 trung tính, 净 hay mang sắc thái nhấn mạnh hoặc chê."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-05",
+  "stage": 6,
+  "title": "时时、一时、早晚 — phó từ thời gian cấp 6",
+  "hook": "“早晚有一天你会明白的。” — sớm muộn gì rồi sẽ có ngày bạn hiểu: 早晚 nói việc chắc chắn sẽ xảy ra, chỉ chưa biết lúc nào.",
+  "examples": [
+   "妈妈时时提醒我，出门要带雨伞。(Māma shíshí tíxǐng wǒ, chū mén yào dài yǔsǎn.) — Mẹ lúc nào cũng nhắc tôi, ra khỏi nhà phải mang ô.",
+   "他一时想不起那个人的名字，急得直挠头。(Tā yīshí xiǎng bù qǐ nà gè rén de míngzi, jí de zhí náo tóu.) — Anh ấy nhất thời không nhớ ra tên người đó, sốt ruột gãi đầu liên tục.",
+   "你现在不练，早晚会后悔的。(Nǐ xiànzài bù liàn, zǎowǎn huì hòuhuǐ de.) — Bây giờ bạn không luyện, sớm muộn gì cũng sẽ hối hận.",
+   "这个问题一时半会儿说不清楚，我们明天再谈。(Zhège wèntí yīshí bàn huìr shuō bù qīngchu, wǒmen míngtiān zài tán.) — Vấn đề này trong chốc lát nói không rõ được, mai chúng ta bàn tiếp."
+  ],
+  "speak": "妈妈时时提醒我，出门要带雨伞。他一时想不起那个人的名字，急得直挠头。你现在不练，早晚会后悔的。这个问题一时半会儿说不清楚，我们明天再谈。",
+  "rule": "时时 nghĩa là lúc nào cũng, luôn luôn, nhấn mạnh sự lặp lại không ngừng: 时时提醒. 一时 có hai nghĩa: nhất thời, trong một lúc (一时想不起); và trong chốc lát, chỉ khoảng thời gian ngắn (一时半会儿). 早晚 nghĩa là sớm hay muộn, sớm muộn gì, dùng khi khẳng định việc gì chắc chắn sẽ xảy ra, chỉ chưa biết khi nào: 早晚会后悔. Cả ba đều đứng trước động từ làm trạng ngữ thời gian.",
+  "tip": "Người Việt hay dịch 一时 thành “một giờ”: 一时 không phải một tiếng đồng hồ mà là “nhất thời, trong chốc lát”; muốn nói một giờ thì dùng 一个小时.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“时时提醒” nghĩa là gì?",
+    "o": [
+     "Lúc nào cũng nhắc",
+     "Chỉ nhắc một lần",
+     "Không bao giờ nhắc",
+     "Thỉnh thoảng nhắc"
+    ],
+    "a": 0,
+    "why": "时时 nghĩa là lúc nào cũng, luôn luôn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___想不起，只好先回家查一查。",
+    "o": [
+     "时时",
+     "一时",
+     "一共",
+     "早晚"
+    ],
+    "a": 1,
+    "why": "一时想不起 là nhất thời không nhớ ra, hợp văn cảnh quên tạm thời."
+   },
+   {
+    "q": "“早晚会后悔的” nhấn mạnh điều gì?",
+    "o": [
+     "Không bao giờ hối hận",
+     "Có thể hối hận hoặc không",
+     "Chắc chắn sẽ hối hận, chỉ chưa biết lúc nào",
+     "Đã hối hận rồi"
+    ],
+    "a": 2,
+    "why": "早晚 khẳng định việc chắc chắn sẽ xảy ra, chỉ chưa biết thời điểm."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "你早晚会明白的",
+     "妈妈时时提醒我",
+     "他一时想不起名字",
+     "我一时有三个小时"
+    ],
+    "a": 3,
+    "why": "一时 không phải “một giờ”; muốn nói ba giờ thì dùng 三个小时."
+   },
+   {
+    "q": "“一时半会儿说不清楚” nghĩa là gì?",
+    "o": [
+     "Trong chốc lát nói không rõ được",
+     "Không bao giờ nói rõ",
+     "Nói cả ngày mới rõ",
+     "Nói rất nhanh là rõ"
+    ],
+    "a": 0,
+    "why": "一时半会儿 chỉ khoảng thời gian rất ngắn: trong chốc lát nói không rõ được."
+   },
+   {
+    "q": "Từ nào nghĩa gần với “luôn luôn” nhất?",
+    "o": [
+     "一时",
+     "时时",
+     "马上",
+     "早晚"
+    ],
+    "a": 1,
+    "why": "时时 là lúc nào cũng, gần nghĩa luôn luôn nhất trong ba từ này."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-06",
+  "stage": 6,
+  "title": "便 — phó từ liên kết cấp 6",
+  "hook": "“他一听到消息，便跑了出去。” — anh ấy vừa nghe tin liền chạy ra ngoài: 便 nối hai việc lại, việc sau xảy ra ngay sau việc trước.",
+  "examples": [
+   "他一听到消息，便跑了出去。(Tā yī tīng dào xiāoxi, biàn pǎo le chūqù.) — Anh ấy vừa nghe tin liền chạy ra ngoài.",
+   "天一亮，工人们便开始干活了。(Tiān yī liàng, gōngrénmen biàn kāishǐ gàn huó le.) — Trời vừa sáng, các công nhân liền bắt đầu làm việc.",
+   "她看了我一眼，便低头写字了。(Tā kàn le wǒ yī yǎn, biàn dītóu xiě zì le.) — Cô ấy nhìn tôi một cái, rồi cúi đầu viết chữ.",
+   "只要你肯努力，便一定能学会。(Zhǐyào nǐ kěn nǔlì, biàn yīdìng néng xué huì.) — Chỉ cần bạn chịu cố gắng, nhất định sẽ học được."
+  ],
+  "speak": "他一听到消息，便跑了出去。天一亮，工人们便开始干活了。她看了我一眼，便低头写字了。只要你肯努力，便一定能学会。",
+  "rule": "便 là phó từ liên kết mang sắc thái văn viết, nghĩa là liền, ngay, rồi, dùng ở vế sau để nối việc sau xảy ra ngay sau việc trước: 一…便…, 只要…便…, 看了一眼便… Nó gần nghĩa với 就 nhưng trang trọng hơn, thường gặp trong văn viết hoặc lời kể trang trọng. 便 đứng trước động từ ở vế sau, không đứng đầu câu.",
+  "tip": "Người Việt hay dùng 就 thay cho 便 ở mọi chỗ: trong văn nói thì 就 tự nhiên hơn, nhưng khi viết văn hoặc kể chuyện trang trọng, dùng 便 sẽ đúng sắc thái hơn; đừng dùng 便 ở đầu câu vì nó phải đứng sau vế điều kiện hoặc vế trước.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“一听到消息，便跑了出去” — 便 có nghĩa gì?",
+    "o": [
+     "Có lẽ",
+     "Liền, ngay sau đó",
+     "Từ từ",
+     "Không bao giờ"
+    ],
+    "a": 1,
+    "why": "便 nối hai việc: việc sau xảy ra liền ngay sau việc trước."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天一亮，工人们___开始干活了。",
+    "o": [
+     "都",
+     "把",
+     "便",
+     "很"
+    ],
+    "a": 2,
+    "why": "一…便… là cặp liên kết: trời vừa sáng, công nhân liền bắt đầu làm."
+   },
+   {
+    "q": "便 gần nghĩa với từ nào nhất?",
+    "o": [
+     "不",
+     "很",
+     "在",
+     "就"
+    ],
+    "a": 3,
+    "why": "便 gần nghĩa 就 (liền, ngay), chỉ khác sắc thái: 便 trang trọng, văn viết hơn."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "便他跑了出去",
+     "她看了一眼，便低头写字",
+     "他一听到消息，便跑了出去",
+     "只要努力，便能学会"
+    ],
+    "a": 0,
+    "why": "便 đứng trước động từ ở vế sau, không đứng đầu câu trước chủ ngữ."
+   },
+   {
+    "q": "“只要你肯努力，便一定能学会” nhấn mạnh điều gì?",
+    "o": [
+     "Có thể học hoặc không",
+     "Chỉ cần cố gắng thì nhất định học được",
+     "Học rất khó",
+     "Không cần cố gắng"
+    ],
+    "a": 1,
+    "why": "只要…便… nối điều kiện với kết quả chắc chắn: chỉ cần cố gắng, nhất định học được."
+   },
+   {
+    "q": "便 thường dùng trong văn cảnh nào?",
+    "o": [
+     "Câu cảm thán",
+     "Văn nói thân mật",
+     "Văn viết, lời kể trang trọng",
+     "Câu hỏi"
+    ],
+    "a": 2,
+    "why": "便 mang sắc thái văn viết, trang trọng hơn 就, hay gặp trong văn viết và lời kể trang trọng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-07",
+  "stage": 6,
+  "title": "Phó từ cấp 6 — 不禁/赶忙/亲眼/特地/仿佛/偏/恰好",
+  "hook": "“我亲眼看到他把伞借给了别人。” — tôi tận mắt thấy anh ấy cho người khác mượn ô: 亲眼 nhấn mạnh chính mắt mình thấy, không phải nghe kể.",
+  "examples": [
+   "看到老照片，他不禁想起了小时候。(Kàn dào lǎo zhàopiàn, tā bùjīn xiǎng qǐ le xiǎoshíhou.) — Nhìn ảnh cũ, anh ấy không nhịn được nhớ về thời thơ ấu.",
+   "听说妈妈病了，她赶忙请假回家。(Tīngshuō māma bìng le, tā gǎnmáng qǐng jià huí jiā.) — Nghe nói mẹ ốm, cô ấy vội vàng xin nghỉ về nhà.",
+   "我亲眼看到他把伞借给了别人。(Wǒ qīnyǎn kàn dào tā bǎ sǎn jiè gěi le biérén.) — Tôi tận mắt thấy anh ấy cho người khác mượn ô.",
+   "他特地从老家带来一包茶叶，仿佛还带着山里的香味。(Tā tèdì cóng lǎojiā dài lái yī bāo cháyè, fǎngfú hái dài zhe shān lǐ de xiāngwèi.) — Anh ấy cố ý mang từ quê lên một gói trà, dường như vẫn còn mang theo hương thơm của núi rừng."
+  ],
+  "speak": "看到老照片，他不禁想起了小时候。听说妈妈病了，她赶忙请假回家。我亲眼看到他把伞借给了别人。他特地从老家带来一包茶叶，仿佛还带着山里的香味。",
+  "rule": "不禁 nghĩa là không nhịn được, không kìm được cảm xúc: 不禁想起. 赶忙 nghĩa là vội vàng, nhanh chóng làm gì: 赶忙请假. 亲眼 nghĩa là tận mắt, nhấn mạnh chính mình chứng kiến: 亲眼看到. 特地 và 特意 đều nghĩa là cố ý, đặc biệt vì việc gì đó: 特地带来; 特意 thường nhấn mạnh ý định hơn. 仿佛 nghĩa là dường như, như thể: 仿佛带着香味. 才 còn có nghĩa mới, vừa mới; 刚好 và 恰好 đều nghĩa là vừa đúng, vừa khéo, đúng lúc: 刚好路过, 恰好遇到; 偏 nghĩa là lại cứ, cố tình trái ý: 偏不去, 偏偏下雨.",
+  "tip": "Người Việt hay lẫn 仿佛 với 好像: 好像 dùng trong văn nói hàng ngày, 仿佛 văn viết và trang trọng hơn, lại hay đi với hình ảnh tưởng tượng; còn 偏 mang ý trái ý, đừng dùng khi chỉ muốn nói “vừa đúng lúc” vì đó là 恰好.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不禁想起” nghĩa là gì?",
+    "o": [
+     "Quên hẳn",
+     "Cố tình nhớ lại",
+     "Không nhịn được mà nhớ lại",
+     "Không muốn nhớ"
+    ],
+    "a": 2,
+    "why": "不禁 là không kìm được cảm xúc, tự nhiên nảy ra: 不禁想起 là không nhịn được mà nhớ lại."
+   },
+   {
+    "q": "Điền vào chỗ trống: 听说妈妈病了，她___请假回家。",
+    "o": [
+     "偏",
+     "不禁",
+     "仿佛",
+     "赶忙"
+    ],
+    "a": 3,
+    "why": "赶忙 là vội vàng, nhanh chóng: nghe mẹ ốm thì vội xin nghỉ về nhà."
+   },
+   {
+    "q": "“亲眼看到” nhấn mạnh điều gì?",
+    "o": [
+     "Chính mắt mình thấy",
+     "Đoán ra",
+     "Nằm mơ thấy",
+     "Nghe người khác kể"
+    ],
+    "a": 0,
+    "why": "亲眼 là tận mắt, nhấn mạnh chính mình chứng kiến, không qua lời kể."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他偏不听我的话",
+     "我仿佛吃饭了",
+     "他特地从老家带来茶叶",
+     "我恰好在门口遇到他"
+    ],
+    "a": 1,
+    "why": "仿佛 nghĩa là dường như, như thể, chỉ dùng với hình ảnh hoặc cảm giác tưởng tượng, không dùng với việc ăn cơm thường ngày."
+   },
+   {
+    "q": "“刚好路过”和“恰好遇到” giống nhau ở điểm nào?",
+    "o": [
+     "Đều là từ chỉ thời gian quá khứ",
+     "Đều mang ý trái ý",
+     "Đều nghĩa là vừa đúng, vừa khéo, đúng lúc",
+     "Đều nghĩa là rất nhanh"
+    ],
+    "a": 2,
+    "why": "刚好 và 恰好 đều nghĩa là vừa đúng, vừa khéo, đúng lúc."
+   },
+   {
+    "q": "“他偏不去” — 偏 có sắc thái gì?",
+    "o": [
+     "Rất vui vẻ",
+     "Không biết",
+     "Vừa đúng lúc",
+     "Lại cứ, cố tình trái ý"
+    ],
+    "a": 3,
+    "why": "偏 nghĩa là lại cứ, mang ý trái với mong đợi hoặc cố tình làm ngược lại."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-08",
+  "stage": 6,
+  "title": "于、沿（着）、至于 — giới từ văn viết (1)",
+  "hook": "“他生于一九九〇年。” — anh ấy sinh vào năm 1990: 于 trong văn viết thay cho 在 khi nói thời gian hoặc nơi chốn.",
+  "examples": [
+   "他生于一九九〇年，在北京长大。(Tā shēng yú yī jiǔ jiǔ líng nián, zài Běijīng zhǎng dà.) — Anh ấy sinh năm 1990, lớn lên ở Bắc Kinh.",
+   "我们沿着小河走到了村口。(Wǒmen yán zhe xiǎo hé zǒu dào le cūn kǒu.) — Chúng tôi đi dọc theo con sông nhỏ tới đầu làng.",
+   "至于明天的安排，老师明天早上再说。(Zhìyú míngtiān de ānpái, lǎoshī míngtiān zǎoshang zài shuō.) — Còn về kế hoạch ngày mai, thầy sẽ nói lại vào sáng mai.",
+   "这本书对于初学者很有用，至于价格也不贵。(Zhè běn shū duìyú chūxuézhě hěn yǒuyòng, zhìyú jiàgé yě bù guì.) — Cuốn sách này rất hữu ích cho người mới học, còn về giá thì cũng không đắt."
+  ],
+  "speak": "他生于一九九〇年，在北京长大。我们沿着小河走到了村口。至于明天的安排，老师明天早上再说。这本书对于初学者很有用，至于价格也不贵。",
+  "rule": "于 là giới từ văn viết, nghĩa là ở, tại, vào, dùng trước thời gian, nơi chốn hoặc đối tượng: 生于一九九〇年, 位于市中心; trong văn nói thường thay bằng 在. 沿(着) nghĩa là dọc theo, men theo: 沿着小河走; có 着 nhấn mạnh đang men theo, không có 着 vẫn đúng. 至于 nghĩa là còn về, đối với việc…, dùng để chuyển sang một khía cạnh khác hoặc một người khác: 至于明天的安排; cũng có nghĩa là đến nỗi, đến mức (chỉ kết quả xấu), nhưng nghĩa chuyển chủ đề là nghĩa hay gặp ở cấp này.",
+  "tip": "Người Việt hay dùng 于 thay 在 trong văn nói: 于 mang sắc thái văn viết, nói hàng ngày dùng 在 tự nhiên hơn; còn 至于 đừng lẫn với 对于 — 对于 giới thiệu đối tượng (对于初学者), 至于 chuyển sang khía cạnh khác (至于价格).",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“生于一九九〇年” — 于 có nghĩa gì?",
+    "o": [
+     "Sau năm 1990",
+     "Trước năm 1990",
+     "Ngoài năm 1990",
+     "Ở, vào (năm 1990)"
+    ],
+    "a": 3,
+    "why": "于 là giới từ văn viết chỉ thời gian hoặc nơi chốn: 生于一九九〇年 là sinh vào năm 1990."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我们___小河走到了村口。",
+    "o": [
+     "沿着",
+     "至于",
+     "对于",
+     "于"
+    ],
+    "a": 0,
+    "why": "沿着 nghĩa là dọc theo, men theo: 沿着小河走 là đi dọc theo con sông nhỏ."
+   },
+   {
+    "q": "“至于明天的安排” nghĩa là gì?",
+    "o": [
+     "Quên kế hoạch ngày mai",
+     "Còn về kế hoạch ngày mai",
+     "Hủy kế hoạch ngày mai",
+     "Kế hoạch ngày mai rất khó"
+    ],
+    "a": 1,
+    "why": "至于 dùng để chuyển sang một khía cạnh khác: còn về, đối với việc…"
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "我们沿着小河走",
+     "至于价格也不贵",
+     "我于吃饭在家里",
+     "他生于一九九〇年"
+    ],
+    "a": 2,
+    "why": "于 là giới từ văn viết, không dùng như 在 trong câu nói thường ngày kiểu này; phải nói 我在家里吃饭."
+   },
+   {
+    "q": "对于 và 至于 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "对于 chỉ dùng trong văn viết",
+     "至于 chỉ dùng cuối câu",
+     "Nghĩa giống hệt nhau",
+     "对于 giới thiệu đối tượng, 至于 chuyển sang khía cạnh khác"
+    ],
+    "a": 3,
+    "why": "对于初学者 là đối với người mới học; 至于价格 là chuyển sang nói về giá."
+   },
+   {
+    "q": "“沿着” và “沿” khác nhau thế nào?",
+    "o": [
+     "沿着 nhấn mạnh đang men theo, 沿 ngắn gọn hơn",
+     "沿 chỉ dùng với sông",
+     "沿着 chỉ dùng với đường",
+     "Nghĩa khác nhau"
+    ],
+    "a": 0,
+    "why": "Có 着 nhấn mạnh trạng thái đang men theo; không có 着 vẫn đúng và ngắn gọn hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-09",
+  "stage": 6,
+  "title": "同、与 — làm giới từ (cùng, với)",
+  "hook": "“他同我一起去学校。” — anh ấy cùng tôi đi học: 同 ở đây là giới từ, nghĩa là cùng, với, khác với 同 làm liên từ nối hai danh từ.",
+  "examples": [
+   "他同我一起去学校。(Tā tóng wǒ yīqǐ qù xuéxiào.) — Anh ấy cùng tôi đi học.",
+   "我想与朋友商量一下这件事。(Wǒ xiǎng yǔ péngyou shāngliang yīxià zhè jiàn shì.) — Tôi muốn bàn bạc việc này với bạn.",
+   "老师同学生们一起打扫教室。(Lǎoshī tóng xuéshengmen yīqǐ dǎsǎo jiàoshì.) — Thầy cùng các học sinh dọn dẹp lớp học.",
+   "这个问题与我们的生活有很大关系。(Zhège wèntí yǔ wǒmen de shēnghuó yǒu hěn dà guānxi.) — Vấn đề này có quan hệ rất lớn với cuộc sống của chúng ta."
+  ],
+  "speak": "他同我一起去学校。我想与朋友商量一下这件事。老师同学生们一起打扫教室。这个问题与我们的生活有很大关系。",
+  "rule": "同 và 与 làm giới từ đều nghĩa là cùng, với, đứng trước danh từ chỉ người hoặc sự vật để giới thiệu đối tác cùng làm việc gì: 同我一起去, 与朋友商量, 与…有关系. Khác với khi làm liên từ (同/与 nối hai danh từ thành một cụm, như 我同他 là tôi và anh ấy), khi làm giới từ chúng đứng trước động từ và cả cụm giới từ làm trạng ngữ. 与 trang trọng, văn viết hơn 同; trong văn nói hàng ngày người ta hay dùng 跟 hoặc 和 thay cho cả hai.",
+  "tip": "Người Việt hay lẫn 同/与 làm giới từ với làm liên từ: thử bỏ cụm giới từ đi mà câu vẫn đủ nghĩa thì đó là giới từ (他同我一起去 → 他一起去 vẫn hiểu); còn 我同他都是学生 thì 同 nối hai chủ ngữ, đó là liên từ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他同我一起去学校” — 同 là gì?",
+    "o": [
+     "Giới từ, nghĩa là cùng, với",
+     "Liên từ nối hai câu",
+     "Tính từ",
+     "Động từ"
+    ],
+    "a": 0,
+    "why": "同 đứng trước 我, giới thiệu người cùng đi: 同我一起去 là cùng tôi đi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我想___朋友商量一下。",
+    "o": [
+     "在",
+     "与",
+     "很",
+     "把"
+    ],
+    "a": 1,
+    "why": "与 làm giới từ nghĩa là với: 与朋友商量 là bàn bạc với bạn."
+   },
+   {
+    "q": "“与我们的生活有很大关系” nghĩa là gì?",
+    "o": [
+     "Cuộc sống rất khó",
+     "Không liên quan tới cuộc sống",
+     "Có quan hệ rất lớn với cuộc sống của chúng ta",
+     "Sống rất tốt"
+    ],
+    "a": 2,
+    "why": "与…有关系 là có quan hệ với…: vấn đề này liên quan lớn tới cuộc sống."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他同我一起去学校",
+     "我想与朋友商量一下",
+     "老师同学生们一起打扫教室",
+     "他与我一起很去学校"
+    ],
+    "a": 3,
+    "why": "Cụm giới từ 与我一起 phải đứng trước động từ, không chen 很 vào giữa 一起 và 去 như vậy."
+   },
+   {
+    "q": "与 và 跟 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "与 trang trọng, văn viết hơn; 跟 khẩu ngữ hơn",
+     "跟 chỉ dùng trong văn viết",
+     "与 không làm giới từ được",
+     "Nghĩa khác nhau"
+    ],
+    "a": 0,
+    "why": "与 mang sắc thái văn viết, trang trọng; trong văn nói hàng ngày hay dùng 跟 hoặc 和."
+   },
+   {
+    "q": "Câu nào dùng 同 làm GIỚI TỪ?",
+    "o": [
+     "我同他都是学生",
+     "他同我一起去学校",
+     "同桌的你",
+     "相同的方法"
+    ],
+    "a": 1,
+    "why": "同我一起去: 同 đứng trước danh từ làm trạng ngữ, đó là giới từ; 我同他都是学生 thì 同 nối hai chủ ngữ, là liên từ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-10",
+  "stage": 6,
+  "title": "因 — giới từ nguyên nhân (vì, do)",
+  "hook": "“他因病请假了。” — anh ấy xin nghỉ vì ốm: 因 đứng trước nguyên nhân, ngắn gọn và trang trọng hơn 因为.",
+  "examples": [
+   "他因病请假了，今天没来上课。(Tā yīn bìng qǐng jià le, jīntiān méi lái shàng kè.) — Anh ấy xin nghỉ vì ốm, hôm nay không tới lớp.",
+   "这场比赛因雨推迟了。(Zhè chǎng bǐsài yīn yǔ tuīchí le.) — Trận đấu này bị hoãn vì mưa.",
+   "她因工作出色，得到了大家的表扬。(Tā yīn gōngzuò chūsè, dédào le dàjiā de biǎoyáng.) — Cô ấy vì làm việc xuất sắc nên được mọi người khen ngợi.",
+   "因时间关系，我们今天就谈到这里。(Yīn shíjiān guānxi, wǒmen jīntiān jiù tán dào zhèlǐ.) — Vì lý do thời gian, hôm nay chúng ta bàn tới đây thôi."
+  ],
+  "speak": "他因病请假了，今天没来上课。这场比赛因雨推迟了。她因工作出色，得到了大家的表扬。因时间关系，我们今天就谈到这里。",
+  "rule": "因 làm giới từ nghĩa là vì, do, đứng trước danh từ hoặc cụm danh từ chỉ nguyên nhân: 因病 (vì ốm), 因雨 (vì mưa), 因时间关系 (vì lý do thời gian). Sau cụm 因… thường là kết quả ở vế sau. 因 ngắn gọn và trang trọng hơn 因为; 因为 thường đi thành cặp 因为…所以…, còn 因 hay đứng một mình trước nguyên nhân trong văn viết. Dạng 因…而… cũng hay gặp: 因小失大 là vì nhỏ mà mất lớn.",
+  "tip": "Người Việt hay viết 因病 vì…: đừng thêm 因为 vào sau 因 (không nói 因因为病); chỉ dùng một trong hai: 因病请假 hoặc 因为生病请假.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“因病请假” nghĩa là gì?",
+    "o": [
+     "Không xin nghỉ",
+     "Xin nghỉ vì ốm",
+     "Xin nghỉ để đi chơi",
+     "Xin nghỉ vì lười"
+    ],
+    "a": 1,
+    "why": "因 là giới từ chỉ nguyên nhân: 因病 là vì ốm."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这场比赛___雨推迟了。",
+    "o": [
+     "很",
+     "在",
+     "因",
+     "把"
+    ],
+    "a": 2,
+    "why": "因雨 là vì mưa: trận đấu bị hoãn vì mưa."
+   },
+   {
+    "q": "因 và 因为 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "因为 chỉ dùng trong văn viết",
+     "因 không chỉ nguyên nhân",
+     "Nghĩa khác nhau",
+     "因 ngắn gọn, trang trọng hơn; 因为 hay đi cặp với 所以"
+    ],
+    "a": 3,
+    "why": "因 gọn và trang trọng hơn; 因为 thường đi thành cặp 因为…所以… trong văn nói."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他因因为病请假了",
+     "他因病请假了",
+     "这场比赛因雨推迟了",
+     "她因工作出色得到表扬"
+    ],
+    "a": 0,
+    "why": "Không dùng cả 因 và 因为 cùng lúc trước một nguyên nhân; chỉ dùng một trong hai."
+   },
+   {
+    "q": "“因时间关系，我们今天就谈到这里” — người nói muốn gì?",
+    "o": [
+     "Muốn bàn tiếp thật lâu",
+     "Muốn dừng lại vì hết thời gian",
+     "Muốn đổi chủ đề",
+     "Muốn hỏi thêm"
+    ],
+    "a": 1,
+    "why": "因时间关系 là vì lý do thời gian: kết thúc buổi bàn vì hết giờ."
+   },
+   {
+    "q": "“因小失大” nghĩa là gì?",
+    "o": [
+     "Không mất gì cả",
+     "Việc nhỏ làm rất tốt",
+     "Vì cái nhỏ mà mất cái lớn",
+     "Việc lớn làm rất nhanh"
+    ],
+    "a": 2,
+    "why": "因…而… là vì… mà…: 因小失大 là vì ham cái nhỏ mà mất cái lớn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-11",
+  "stage": 6,
+  "title": "除 — giới từ loại trừ (trừ ra, ngoại trừ)",
+  "hook": "“除了他以外，大家都来了。” — ngoài anh ấy ra, mọi người đều đã tới: 除 mở đầu phần bị loại ra, phần còn lại mới là chính.",
+  "examples": [
+   "除了他以外，大家都来了。(Chúle tā yǐwài, dàjiā dōu lái le.) — Ngoài anh ấy ra, mọi người đều đã tới.",
+   "除周末外，图书馆每天都开门。(Chú zhōumò wài, túshūguǎn měitiān dōu kāi mén.) — Trừ cuối tuần, thư viện ngày nào cũng mở cửa.",
+   "这道题除我以外，没有人做出来。(Zhè dào tí chú wǒ yǐwài, méiyǒu rén zuò chūlái.) — Bài này ngoài tôi ra, không ai làm được.",
+   "除此之外，他还想学画画。(Chú cǐ zhī wài, tā hái xiǎng xué huà huà.) — Ngoài điều đó ra, anh ấy còn muốn học vẽ."
+  ],
+  "speak": "除了他以外，大家都来了。除周末外，图书馆每天都开门。这道题除我以外，没有人做出来。除此之外，他还想学画画。",
+  "rule": "除 làm giới từ nghĩa là trừ ra, ngoại trừ, có hai dạng hay gặp: 除了…以外 (ngoài… ra) và 除…外 (trừ… ra). Cụm 除了…以外 đứng đầu câu, vế sau nói phần còn lại: 除了他以外，大家都来了. Dạng 除…外 ngắn gọn hơn, hay dùng trong văn viết: 除周末外. Cụm cố định 除此之外 nghĩa là ngoài điều đó ra, dùng để thêm một ý: 除此之外，他还想学画画.",
+  "tip": "Người Việt hay quên 以外 hoặc 外 sau 除了: 除了…以外 là cặp đi cùng nhau; chỉ nói 除了他，大家都来了 vẫn hiểu nhưng thiếu tự nhiên, trong văn viết nên giữ đủ 以外 hoặc dùng dạng 除…外.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“除了他以外，大家都来了” nghĩa là gì?",
+    "o": [
+     "Chỉ có anh ấy tới",
+     "Anh ấy đã tới",
+     "Ngoài anh ấy ra, mọi người đều tới",
+     "Không ai tới cả"
+    ],
+    "a": 2,
+    "why": "除了…以外 là ngoài… ra: phần bị loại là 他, phần còn lại là 大家都来了."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___周末外，图书馆每天都开门。",
+    "o": [
+     "把",
+     "很",
+     "在",
+     "除"
+    ],
+    "a": 3,
+    "why": "除…外 là dạng ngắn gọn: 除周末外 là trừ cuối tuần ra."
+   },
+   {
+    "q": "“除此之外” nghĩa là gì?",
+    "o": [
+     "Ngoài điều đó ra",
+     "Chỉ có điều đó",
+     "Không có gì thêm",
+     "Quên điều đó đi"
+    ],
+    "a": 0,
+    "why": "除此之外 là cụm cố định: ngoài điều đó ra, dùng để thêm một ý nữa."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "除此之外，他还想学画画",
+     "除了他都以外来了大家",
+     "除了他以外，大家都来了",
+     "除周末外，图书馆每天都开门"
+    ],
+    "a": 1,
+    "why": "Thứ tự sai: 除了…以外 phải đứng đầu câu, vế sau mới là 大家都来了."
+   },
+   {
+    "q": "“这道题除我以外，没有人做出来” nhấn mạnh điều gì?",
+    "o": [
+     "Bài rất dễ",
+     "Ai cũng làm được",
+     "Chỉ có tôi làm được",
+     "Tôi không làm được"
+    ],
+    "a": 2,
+    "why": "除我以外…没有人: ngoài tôi ra không ai làm được, tức chỉ tôi làm được."
+   },
+   {
+    "q": "除了…以外 thường đi với từ nào ở vế sau?",
+    "o": [
+     "不",
+     "吗",
+     "吧",
+     "都 / 还"
+    ],
+    "a": 3,
+    "why": "Vế sau hay có 都 (đều) hoặc 还 (còn) để nói phần còn lại: 大家都来了, 他还想学画画."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-12",
+  "stage": 6,
+  "title": "据 — giới từ căn cứ (theo, căn cứ vào)",
+  "hook": "“据说，明天会下雨。” — nghe nói ngày mai trời sẽ mưa: 据说 mở đầu tin nghe được, chưa chắc đã đúng.",
+  "examples": [
+   "据说，明天会下雨，大家记得带伞。(Jùshuō, míngtiān huì xià yǔ, dàjiā jìde dài sǎn.) — Nghe nói ngày mai trời sẽ mưa, mọi người nhớ mang ô.",
+   "据统计，今年来旅游的人比去年多了很多。(Jù tǒngjì, jīnnián lái lǚyóu de rén bǐ qùnián duō le hěn duō.) — Theo thống kê, năm nay người tới du lịch đông hơn năm ngoái rất nhiều.",
+   "据老师说，这次考试不难。(Jù lǎoshī shuō, zhè cì kǎoshì bù nán.) — Theo lời thầy nói, kỳ thi lần này không khó.",
+   "据我所知，他已经回老家了。(Jù wǒ suǒ zhī, tā yǐjīng huí lǎojiā le.) — Theo tôi biết, anh ấy đã về quê rồi."
+  ],
+  "speak": "据说，明天会下雨，大家记得带伞。据统计，今年来旅游的人比去年多了很多。据老师说，这次考试不难。据我所知，他已经回老家了。",
+  "rule": "据 làm giới từ nghĩa là theo, căn cứ vào, đứng trước nguồn tin hoặc căn cứ: 据说 (nghe nói), 据统计 (theo thống kê), 据老师说 (theo lời thầy nói), 据我所知 (theo tôi biết). Cụm 据… đứng đầu câu, vế sau là nội dung dựa trên căn cứ đó. 据说 mang ý tin chưa được xác nhận; 据统计 và 据…说 thì căn cứ rõ ràng hơn. Đừng lẫn 据 với 根据: 根据 cũng nghĩa là căn cứ vào nhưng hay đi với danh từ trừu tượng hơn và trang trọng hơn.",
+  "tip": "Người Việt hay dịch 据说 thành “theo nói”: 据说 phải dịch là “nghe nói” vì nó chỉ tin đồn hoặc tin nghe được, chưa chắc đúng; còn muốn nói “theo lời ai” thì dùng 据…说, ví dụ 据老师说.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“据说，明天会下雨” — 据说 có nghĩa gì?",
+    "o": [
+     "Hôm qua đã mưa",
+     "Không bao giờ mưa",
+     "Chắc chắn sẽ mưa",
+     "Nghe nói sẽ mưa, chưa chắc"
+    ],
+    "a": 3,
+    "why": "据说 mở đầu tin nghe được, chưa được xác nhận chắc chắn."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___统计，今年游客比去年多了很多。",
+    "o": [
+     "据",
+     "把",
+     "很",
+     "在"
+    ],
+    "a": 0,
+    "why": "据统计 là theo thống kê: căn cứ vào số liệu thống kê."
+   },
+   {
+    "q": "“据我所知” nghĩa là gì?",
+    "o": [
+     "Tôi không biết gì",
+     "Theo tôi biết",
+     "Tôi đoán mò",
+     "Tôi nghe người khác nói"
+    ],
+    "a": 1,
+    "why": "据我所知 là cụm cố định: theo những gì tôi biết."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "据统计，今年游客多了很多",
+     "据老师说，这次考试不难",
+     "据我吃饭了",
+     "据说，明天会下雨"
+    ],
+    "a": 2,
+    "why": "据 phải đi với nguồn tin hoặc căn cứ (说, 统计, 所知), không đi với động từ ăn cơm."
+   },
+   {
+    "q": "“据老师说，这次考试不难” — nguồn tin là ai?",
+    "o": [
+     "Hiệu trưởng",
+     "Không ai cả",
+     "Học sinh",
+     "Thầy giáo"
+    ],
+    "a": 3,
+    "why": "据老师说 là theo lời thầy nói: nguồn tin là thầy giáo."
+   },
+   {
+    "q": "据 và 根据 giống nhau ở điểm nào?",
+    "o": [
+     "Đều nghĩa là căn cứ vào, theo",
+     "Đều là động từ",
+     "Đều đứng cuối câu",
+     "Đều chỉ thời gian"
+    ],
+    "a": 0,
+    "why": "Cả hai đều là giới từ chỉ căn cứ: 据 ngắn gọn hơn, 根据 trang trọng hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-13",
+  "stage": 6,
+  "title": "数词 + 形容词 + 量词 — 三米多高、两岁半",
+  "hook": "“他一米八高。” — anh ấy cao một mét tám: tiếng Trung đặt lượng từ sau tính từ, ngược hẳn với “cao một mét tám” của tiếng Việt.",
+  "examples": [
+   "他一米八高，是班里最高的同学。(Tā yī mǐ bā gāo, shì bān lǐ zuì gāo de tóngxué.) — Anh ấy cao một mét tám, là bạn cao nhất lớp.",
+   "这条河三米多深，小孩子不能一个人去玩。(Zhè tiáo hé sān mǐ duō shēn, xiǎo háizi bù néng yī gè rén qù wán.) — Con sông này sâu hơn ba mét, trẻ nhỏ không được đi chơi một mình.",
+   "弟弟今年三岁半，刚上幼儿园。(Dìdi jīnnián sān suì bàn, gāng shàng yòu'éryuán.) — Em trai năm nay ba tuổi rưỡi, vừa vào mẫu giáo.",
+   "这条裙子一米多长，穿起来很漂亮。(Zhè tiáo qúnzi yī mǐ duō cháng, chuān qǐlái hěn piàoliang.) — Chiếc váy này dài hơn một mét, mặc lên rất đẹp."
+  ],
+  "speak": "他一米八高，是班里最高的同学。这条河三米多深，小孩子不能一个人去玩。弟弟今年三岁半，刚上幼儿园。这条裙子一米多长，穿起来很漂亮。",
+  "rule": "Cấu trúc số từ + tính từ + lượng từ dùng để nói độ cao, dài, sâu, tuổi: 一米八高 (cao một mét tám), 三米多深 (sâu hơn ba mét), 三岁半 (ba tuổi rưỡi), 一米多长 (dài hơn một mét). Thứ tự là: số từ + tính từ + lượng từ, trong đó 多 chỉ hơn một chút, 半 chỉ một nửa. Lưu ý lượng từ đứng SAU tính từ (高, 深, 长, 岁), khác với cụm số + lượng từ + danh từ quen thuộc (三本书).",
+  "tip": "Người Việt hay nói 一米八的高 hoặc 高一米八: trong cấu trúc này không thêm 的 sau tính từ, và lượng từ phải đứng sau tính từ — 一米八高 mới đúng, đừng viết 高一米八 khi muốn nói chiều cao của người.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“他一米八高” — thứ tự các thành phần là gì?",
+    "o": [
+     "Số từ + tính từ + lượng từ",
+     "Tính từ + số từ + lượng từ",
+     "Lượng từ + số từ + tính từ",
+     "Số từ + lượng từ + tính từ"
+    ],
+    "a": 0,
+    "why": "Cấu trúc là 数词 + 形容词 + 量词: 一米八高 (一 + 米八 + 高)."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这条河三米___深。",
+    "o": [
+     "很",
+     "多",
+     "的",
+     "了"
+    ],
+    "a": 1,
+    "why": "多 chỉ hơn một chút, số xấp xỉ: 三米多深 là sâu hơn ba mét."
+   },
+   {
+    "q": "“三岁半” nghĩa là gì?",
+    "o": [
+     "Ba mươi tuổi",
+     "Ba tháng tuổi",
+     "Ba tuổi rưỡi",
+     "Ba tuổi đúng"
+    ],
+    "a": 2,
+    "why": "半 là một nửa: 三岁半 là ba tuổi rưỡi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他一米八高",
+     "这条河三米多深",
+     "弟弟今年三岁半",
+     "他一米八的高"
+    ],
+    "a": 3,
+    "why": "Trong cấu trúc này không thêm 的 sau tính từ: phải nói 一米八高."
+   },
+   {
+    "q": "“一米多长” nhấn mạnh điều gì?",
+    "o": [
+     "Dài hơn một mét một chút",
+     "Dài chưa tới một mét",
+     "Dài mười mét",
+     "Dài đúng một mét"
+    ],
+    "a": 0,
+    "why": "多 sau số từ chỉ số xấp xỉ, hơn một chút: 一米多长 là dài hơn một mét."
+   },
+   {
+    "q": "Muốn nói “cao một mét bảy”, nói thế nào?",
+    "o": [
+     "七米一高",
+     "一米七高",
+     "高一米七",
+     "一米七的高"
+    ],
+    "a": 1,
+    "why": "Theo cấu trúc số từ + tính từ + lượng từ: 一米七高."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-14",
+  "stage": 6,
+  "title": "或A或B / 无A无B — mẫu song song cấp 6 (mở rộng)",
+  "hook": "“他或去或留，一直拿不定主意。” — anh ấy hoặc đi hoặc ở, mãi vẫn chưa quyết được: 或A或B đặt hai lựa chọn ngang nhau, chẳng chọn được cái nào.",
+  "examples": [
+   "他或去或留，一直拿不定主意。(Tā huò qù huò liú, yīzhí ná bù dìng zhǔyi.) — Anh ấy hoặc đi hoặc ở, mãi vẫn chưa quyết được.",
+   "这件衣服或大或小，总是不合身。(Zhè jiàn yīfu huò dà huò xiǎo, zǒngshì bù héshēn.) — Chiếc áo này hoặc to hoặc nhỏ, lúc nào cũng không vừa người.",
+   "夜里四周无声无息，只有风吹树叶的声音。(Yè lǐ sìzhōu wú shēng wú xī, zhǐyǒu fēng chuī shùyè de shēngyīn.) — Ban đêm xung quanh lặng im không tiếng động, chỉ có tiếng gió thổi lá cây.",
+   "他一个人住在山里，过着无忧无虑的生活。(Tā yī gè rén zhù zài shān lǐ, guò zhe wú yōu wú lǜ de shēnghuó.) — Anh ấy sống một mình trong núi, sống cuộc đời không lo không nghĩ."
+  ],
+  "speak": "他或去或留，一直拿不定主意。这件衣服或大或小，总是不合身。夜里四周无声无息，只有风吹树叶的声音。他一个人住在山里，过着无忧无虑的生活。",
+  "rule": "或A或B là mẫu song song: 或 + lựa chọn A + 或 + lựa chọn B, nghĩa là hoặc A hoặc B, hai khả năng ngang nhau, thường đi với tình huống lưỡng lự hoặc thay đổi: 或去或留, 或大或小. 无A无B cũng là mẫu song song: 无 + A + 无 + B, nghĩa là không A không B, nhấn mạnh hoàn toàn không có gì: 无声无息 (không tiếng không hơi), 无忧无虑 (không lo không nghĩ). Cả hai mẫu đều văn viết, trang trọng, A và B thường là từ đơn âm tiết có nghĩa gần hoặc đối nhau.",
+  "tip": "Người Việt hay dùng 或者 thay cho 或A或B: 或者 chỉ nối hai lựa chọn bình thường, còn 或A或B nhấn mạnh sự lặp lại song song và mang sắc thái văn viết; đừng viết 或去或者留 vì chỉ dùng một dạng 或 ở mỗi vế.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“或去或留” nghĩa là gì?",
+    "o": [
+     "Nhất định phải đi",
+     "Hoặc đi hoặc ở",
+     "Đã đi rồi",
+     "Không đi không ở"
+    ],
+    "a": 1,
+    "why": "或A或B đặt hai lựa chọn ngang nhau: hoặc đi hoặc ở."
+   },
+   {
+    "q": "Điền vào chỗ trống: 夜里四周___声___息，只有风声。",
+    "o": [
+     "有…有",
+     "不…不",
+     "无…无",
+     "或…或"
+    ],
+    "a": 2,
+    "why": "无声无息 là mẫu 无A无B: không tiếng không hơi, lặng im hoàn toàn."
+   },
+   {
+    "q": "“无忧无虑” nhấn mạnh điều gì?",
+    "o": [
+     "Nghĩ rất nhiều",
+     "Buồn bã",
+     "Lo lắng rất nhiều",
+     "Không lo không nghĩ, hoàn toàn thoải mái"
+    ],
+    "a": 3,
+    "why": "无A无B nhấn mạnh hoàn toàn không có: 无忧无虑 là không lo không nghĩ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他或去或者留",
+     "他或去或留",
+     "这件衣服或大或小",
+     "夜里无声无息"
+    ],
+    "a": 0,
+    "why": "Mẫu là 或A或B, mỗi vế chỉ có một 或; không thêm 或者 vào vế sau."
+   },
+   {
+    "q": "或A或B thường đi với tình huống nào?",
+    "o": [
+     "Đã quyết định xong",
+     "Lưỡng lự, chưa quyết được",
+     "Chỉ có một lựa chọn",
+     "Không có lựa chọn nào"
+    ],
+    "a": 1,
+    "why": "或A或B hay đi với tình huống lưỡng lự hoặc thay đổi: 拿不定主意, 总是不合身."
+   },
+   {
+    "q": "Trong “无声无息”, A và B là gì?",
+    "o": [
+     "夜 và 里",
+     "风 và 叶",
+     "声 và 息",
+     "无 và 声"
+    ],
+    "a": 2,
+    "why": "Mẫu 无A无B: A là 声 (tiếng), B là 息 (hơi thở, tiếng động)."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-15",
+  "stage": 6,
+  "title": "A这A那 / 左A右B — mẫu song song đối xứng",
+  "hook": "“他左一句，右一句，说了半天也没说明白。” — anh ấy câu bên trái một câu, câu bên phải một câu, nói nửa ngày mà vẫn chưa nói rõ: 左A右B tả lời nói lộn xộn, chỗ này một câu chỗ kia một câu.",
+  "examples": [
+   "他说这说那，说了半天也没说到正事。(Tā shuō zhè shuō nà, shuō le bàntiān yě méi shuō dào zhèngshì.) — Anh ấy nói này nói nọ, nói nửa ngày mà vẫn chưa nói vào việc chính.",
+   "她想这想那，越想越睡不着。(Tā xiǎng zhè xiǎng nà, yuè xiǎng yuè shuì bù zháo.) — Cô ấy nghĩ này nghĩ nọ, càng nghĩ càng không ngủ được.",
+   "他左一句，右一句，说了半天也没说明白。(Tā zuǒ yī jù, yòu yī jù, shuō le bàntiān yě méi shuō míngbai.) — Anh ấy câu này một câu, câu kia một câu, nói nửa ngày mà vẫn chưa nói rõ.",
+   "孩子左看右看，对商店里的玩具很好奇。(Háizi zuǒ kàn yòu kàn, duì shāngdiàn lǐ de wánjù hěn hàoqí.) — Đứa trẻ nhìn trái nhìn phải, rất tò mò với đồ chơi trong cửa hàng."
+  ],
+  "speak": "他说这说那，说了半天也没说到正事。她想这想那，越想越睡不着。他左一句，右一句，说了半天也没说明白。孩子左看右看，对商店里的玩具很好奇。",
+  "rule": "A这A那 là mẫu lặp động từ với 这 và 那: 说这说那 (nói này nói nọ), 想这想那 (nghĩ này nghĩ nọ), nghĩa là làm việc gì lan man, không tập trung, thường mang ý chê là dài dòng. 左A右B là mẫu đối xứng trái-phải: 左一句右一句 (câu này một câu, câu kia một câu), 左看右看 (nhìn trái nhìn phải), nghĩa là hành động xen kẽ hai phía, lộn xộn hoặc tò mò ngó nghiêng. Cả hai mẫu đều khẩu ngữ, sinh động, A là động từ lặp lại ở cả hai vế.",
+  "tip": "Người Việt hay dịch 左看右看 thành “nhìn trái phải”: mẫu này nhấn mạnh hành động lặp đi lặp lại hai phía, nên dịch là “nhìn trái nhìn phải” mới giữ được nhịp lặp; còn 说这说那 đừng dịch sát thành “nói này nói kia” mà nên dịch là “nói này nói nọ” cho đúng khẩu ngữ Việt.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“说这说那” nghĩa là gì?",
+    "o": [
+     "Nói rất hay",
+     "Nói rất rõ ràng",
+     "Nói này nói nọ, lan man không vào việc chính",
+     "Nói rất ít"
+    ],
+    "a": 2,
+    "why": "A这A那 tả hành động lan man, không tập trung: 说这说那 là nói này nói nọ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 孩子___看___看，对玩具很好奇。",
+    "o": [
+     "这…那",
+     "上…下",
+     "东…西",
+     "左…右"
+    ],
+    "a": 3,
+    "why": "左A右B là mẫu đối xứng trái-phải: 左看右看 là nhìn trái nhìn phải."
+   },
+   {
+    "q": "“想这想那，越想越睡不着” nhấn mạnh điều gì?",
+    "o": [
+     "Nghĩ lan man, càng nghĩ càng không ngủ được",
+     "Không nghĩ gì cả",
+     "Nghĩ ra cách giải quyết",
+     "Nghĩ rất tập trung"
+    ],
+    "a": 0,
+    "why": "想这想那 là nghĩ này nghĩ nọ, lan man không tập trung nên càng nghĩ càng mất ngủ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "孩子左看右看",
+     "他左说右那",
+     "他说这说那",
+     "她想这想那"
+    ],
+    "a": 1,
+    "why": "左A右B lặp cùng một động từ ở hai vế: 左看右看, 左一句右一句; không nói 左说右那."
+   },
+   {
+    "q": "A这A那 thường mang sắc thái gì?",
+    "o": [
+     "Vui vẻ",
+     "Khen ngợi",
+     "Lan man, dài dòng, hơi chê",
+     "Trang trọng"
+    ],
+    "a": 2,
+    "why": "A这A那 tả việc làm lan man không tập trung, thường mang ý chê là dài dòng."
+   },
+   {
+    "q": "“左一句，右一句” tả cách nói thế nào?",
+    "o": [
+     "Nói rất ngắn gọn",
+     "Không nói gì",
+     "Nói rất mạch lạc",
+     "Nói lộn xộn, chỗ này một câu chỗ kia một câu"
+    ],
+    "a": 3,
+    "why": "左一句右一句 là mẫu đối xứng tả lời nói xen kẽ lộn xộn, không mạch lạc."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-16",
+  "stage": 6,
+  "title": "不怎么样 — chẳng ra sao, không tốt lắm",
+  "hook": "“这部电影不怎么样。” — bộ phim này chẳng ra sao: 不怎么样 là cách chê nhẹ, không nói thẳng là “dở” mà nói “không tốt lắm”.",
+  "examples": [
+   "这部电影不怎么样，我看到一半就想走了。(Zhè bù diànyǐng bù zěnmeyàng, wǒ kàn dào yībàn jiù xiǎng zǒu le.) — Bộ phim này chẳng ra sao, tôi xem được một nửa đã muốn về.",
+   "他最近身体不怎么样，常常觉得累。(Tā zuìjìn shēntǐ bù zěnmeyàng, chángcháng juéde lèi.) — Dạo này sức khỏe anh ấy không tốt lắm, thường thấy mệt.",
+   "这家饭馆的菜不怎么样，服务倒是不错。(Zhè jiā fànguǎn de cài bù zěnmeyàng, fúwù dào shì bùcuò.) — Món ăn của quán này chẳng ra sao, nhưng phục vụ thì lại không tệ.",
+   "我唱歌不怎么样，不过我很喜欢唱。(Wǒ chàng gē bù zěnmeyàng, bùguò wǒ hěn xǐhuan chàng.) — Tôi hát chẳng hay gì, nhưng tôi rất thích hát."
+  ],
+  "speak": "这部电影不怎么样，我看到一半就想走了。他最近身体不怎么样，常常觉得累。这家饭馆的菜不怎么样，服务倒是不错。我唱歌不怎么样，不过我很喜欢唱。",
+  "rule": "不怎么样 đứng sau danh từ hoặc động từ, nghĩa là chẳng ra sao, không tốt lắm, dùng để chê nhẹ hoặc tự nhận xét khiêm tốn: 电影不怎么样 (phim chẳng ra sao), 身体不怎么样 (sức khỏe không tốt lắm), 菜不怎么样 (món ăn chẳng ra sao). Nó nhẹ hơn 不好 vì không nói thẳng là xấu, chỉ nói là không đạt mức mong đợi. Cũng có thể dùng sau tính từ: 唱得不怎么样 là hát chẳng hay gì.",
+  "tip": "Người Việt hay dịch 不怎么样 thành “không như thế nào”: đây là cụm cố định nghĩa là “chẳng ra sao, không tốt lắm”, đừng dịch từng chữ; và đừng dùng 不怎么样 để khen — nó luôn mang ý chê nhẹ hoặc khiêm tốn.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“这部电影不怎么样” nghĩa là gì?",
+    "o": [
+     "Phim rất dài",
+     "Phim rất mới",
+     "Phim rất hay",
+     "Phim chẳng ra sao"
+    ],
+    "a": 3,
+    "why": "不怎么样 là cụm cố định: chẳng ra sao, không tốt lắm."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他最近身体___，常常觉得累。",
+    "o": [
+     "不怎么样",
+     "怎么样",
+     "很好",
+     "非常"
+    ],
+    "a": 0,
+    "why": "身体不怎么样 là sức khỏe không tốt lắm, hợp với vế sau 常常觉得累."
+   },
+   {
+    "q": "不怎么样 khác 不好 ở điểm nào?",
+    "o": [
+     "Nghĩa hoàn toàn khác",
+     "不怎么样 chê nhẹ hơn, không nói thẳng là xấu",
+     "不好 chê nhẹ hơn",
+     "不怎么样 chỉ dùng để khen"
+    ],
+    "a": 1,
+    "why": "不怎么样 chỉ nói không đạt mức mong đợi, nhẹ hơn 不好 nói thẳng là xấu."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他身体不怎么样",
+     "这家饭馆的菜不怎么样",
+     "这部电影不怎么样好",
+     "这部电影不怎么样"
+    ],
+    "a": 2,
+    "why": "不怎么样 là cụm cố định đứng cuối, không thêm 好 vào sau nó."
+   },
+   {
+    "q": "“我唱歌不怎么样，不过我很喜欢唱” — người nói có thái độ gì?",
+    "o": [
+     "Ghét hát",
+     "Không bao giờ hát",
+     "Khoe khoang",
+     "Tự nhận xét khiêm tốn nhưng vẫn thích hát"
+    ],
+    "a": 3,
+    "why": "不怎么样 ở đây là tự nhận xét khiêm tốn: hát chẳng hay nhưng vẫn thích."
+   },
+   {
+    "q": "Câu nào dùng 不怎么样 tự nhiên nhất?",
+    "o": [
+     "今天天气不怎么样，一直下雨",
+     "我不怎么样吃饭",
+     "他不怎么样走路",
+     "这本书不怎么样贵"
+    ],
+    "a": 0,
+    "why": "不怎么样 đánh giá chất lượng chung: 天气不怎么样 là thời tiết chẳng ra sao; không dùng với động từ ăn, đi hay giá tiền như vậy."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-17",
+  "stage": 6,
+  "title": "就是说 / 这就是说 — nói cách khác là",
+  "hook": "“就是说，明天不用上课。” — nói cách khác là, ngày mai không phải đi học: 就是说 dùng để giải thích lại ý vừa nói cho rõ hơn.",
+  "examples": [
+   "就是说，明天不用上课，大家可以在家休息。(Jiùshìshuō, míngtiān bùyòng shàng kè, dàjiā kěyǐ zài jiā xiūxi.) — Nói cách khác là, ngày mai không phải đi học, mọi người có thể nghỉ ở nhà.",
+   "这就是说，你已经同意我的办法了。(Zhè jiùshìshuō, nǐ yǐjīng tóngyì wǒ de bànfǎ le.) — Nói cách khác là, bạn đã đồng ý với cách làm của tôi rồi.",
+   "他每天跑步，就是说他很注意身体。(Tā měitiān pǎobù, jiùshìshuō tā hěn zhùyì shēntǐ.) — Anh ấy chạy bộ mỗi ngày, nói cách khác là anh ấy rất chú ý tới sức khỏe.",
+   "这次活动取消了，这就是说我们要另外找时间。(Zhè cì huódòng qǔxiāo le, zhè jiùshìshuō wǒmen yào lìngwài zhǎo shíjiān.) — Hoạt động lần này bị hủy, nói cách khác là chúng ta phải tìm thời gian khác."
+  ],
+  "speak": "就是说，明天不用上课，大家可以在家休息。这就是说，你已经同意我的办法了。他每天跑步，就是说他很注意身体。这次活动取消了，这就是说我们要另外找时间。",
+  "rule": "就是说 và 这就是说 đều nghĩa là nói cách khác là, tức là, dùng để giải thích lại, diễn đạt lại ý vừa nói cho rõ hơn hoặc rút ra kết luận: 就是说，明天不用上课. 就是说 hay đứng đầu câu hoặc giữa câu sau một ý đã nói; 这就是说 nhấn mạnh hơn, thường đứng đầu câu khi rút ra kết luận từ ý trước. Cả hai đều là cụm nối diễn ngôn, không phải động từ 是 thông thường, nên sau đó là cả một câu hoàn chỉnh.",
+  "tip": "Người Việt hay lẫn 就是说 với 也就是说: hai cụm gần nghĩa, nhưng 就是说 khẩu ngữ và ngắn gọn hơn, 也就是说 trang trọng hơn một chút; đừng viết 就是说完 vì sau 就是说 phải là một câu hoàn chỉnh, không phải một động từ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“就是说，明天不用上课” — 就是说 có nghĩa gì?",
+    "o": [
+     "Nói cách khác là",
+     "Chắc chắn là",
+     "Có lẽ là",
+     "Không phải là"
+    ],
+    "a": 0,
+    "why": "就是说 dùng để giải thích lại ý vừa nói: nói cách khác là, tức là."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___，你已经同意我的办法了。",
+    "o": [
+     "就是吧",
+     "这就是说",
+     "就是不",
+     "就是吗"
+    ],
+    "a": 1,
+    "why": "这就是说 rút ra kết luận từ ý trước: nói cách khác là bạn đã đồng ý rồi."
+   },
+   {
+    "q": "就是说 thường đứng ở đâu?",
+    "o": [
+     "Trước lượng từ",
+     "Cuối câu",
+     "Đầu câu hoặc giữa câu, trước một câu hoàn chỉnh",
+     "Sau danh từ"
+    ],
+    "a": 2,
+    "why": "就是说 là cụm nối diễn ngôn, sau nó là cả một câu hoàn chỉnh để giải thích lại."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "就是说，明天不用上课",
+     "这就是说，你已经同意了",
+     "他每天跑步，就是说他很注意身体",
+     "就是说完，明天不用上课"
+    ],
+    "a": 3,
+    "why": "Sau 就是说 phải là một câu hoàn chỉnh, không thêm 完 vào sau 说."
+   },
+   {
+    "q": "“这次活动取消了，这就是说我们要另外找时间” — kết luận là gì?",
+    "o": [
+     "Phải tìm thời gian khác",
+     "Hoạt động vẫn diễn ra",
+     "Không ai tham gia",
+     "Không cần tìm thời gian nữa"
+    ],
+    "a": 0,
+    "why": "这就是说 rút ra kết luận: hoạt động hủy nên phải tìm thời gian khác."
+   },
+   {
+    "q": "就是说 và 也就是说 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "Nghĩa khác nhau",
+     "就是说 khẩu ngữ, ngắn gọn hơn; 也就是说 trang trọng hơn",
+     "也就是说 không dùng được",
+     "就是说 chỉ dùng trong văn viết"
+    ],
+    "a": 1,
+    "why": "Hai cụm gần nghĩa, chỉ khác sắc thái: 就是说 khẩu ngữ hơn, 也就是说 trang trọng hơn một chút."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-18",
+  "stage": 6,
+  "title": "A一 + 量词，B一 + 量词 — nói một câu, cười một câu",
+  "hook": "“他说一句，笑一句。” — anh ấy nói một câu, cười một câu: mẫu này tả hai việc xen kẽ nhau, việc này một lần, việc kia một lần.",
+  "examples": [
+   "他说一句，笑一句，大家听得很高兴。(Tā shuō yī jù, xiào yī jù, dàjiā tīng de hěn gāoxìng.) — Anh ấy nói một câu, cười một câu, mọi người nghe rất vui.",
+   "妈妈做一道菜，爸爸尝一道菜，两个人配合得很好。(Māma zuò yī dào cài, bàba cháng yī dào cài, liǎng gè rén pèihé de hěn hǎo.) — Mẹ làm một món, bố nếm một món, hai người phối hợp rất ăn ý.",
+   "他写一行，念一行，写字的时候还要大声读出来。(Tā xiě yī háng, niàn yī háng, xiě zì de shíhou hái yào dà shēng dú chūlái.) — Anh ấy viết một dòng, đọc một dòng, lúc viết chữ còn phải đọc to lên.",
+   "她唱一首歌，跳一支舞，晚会上的节目一个比一个精彩。(Tā chàng yī shǒu gē, tiào yī zhī wǔ, wǎnhuì shang de jiémù yī gè bǐ yī gè jīngcǎi.) — Cô ấy hát một bài, nhảy một điệu, tiết mục trong buổi tối cái sau hay hơn cái trước."
+  ],
+  "speak": "他说一句，笑一句，大家听得很高兴。妈妈做一道菜，爸爸尝一道菜，两个人配合得很好。他写一行，念一行，写字的时候还要大声读出来。她唱一首歌，跳一支舞，晚会上的节目一个比一个精彩。",
+  "rule": "Mẫu A一 + 量词，B一 + 量词 có dạng: động từ A + 一 + lượng từ, động từ B + 一 + lượng từ, nghĩa là làm việc A một lần thì làm việc B một lần, hai việc xen kẽ nhau: 说一句，笑一句; 做一道菜，尝一道菜. Lượng từ ở hai vế thường giống nhau hoặc tương ứng (一句/一句, 一道/一道), số từ luôn là 一. Mẫu này tả nhịp xen kẽ sinh động, khác với mẫu liệt kê thông thường.",
+  "tip": "Người Việt hay viết 说一句，笑两句: mẫu này yêu cầu hai vế đối xứng, số từ đều là 一; muốn nói số khác nhau thì đừng dùng mẫu này mà nói riêng từng việc.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“说一句，笑一句” tả nhịp làm việc thế nào?",
+    "o": [
+     "Làm xong hết việc này mới làm việc kia",
+     "Hai việc xen kẽ, việc này một lần việc kia một lần",
+     "Chỉ làm một việc",
+     "Làm hai việc cùng một lúc"
+    ],
+    "a": 1,
+    "why": "Mẫu A一量词，B一量词 tả hai việc xen kẽ nhau, mỗi việc một lần."
+   },
+   {
+    "q": "Điền vào chỗ trống: 妈妈做一道菜，爸爸___一道菜。",
+    "o": [
+     "把",
+     "在",
+     "尝",
+     "很"
+    ],
+    "a": 2,
+    "why": "做一道菜，尝一道菜: mẹ làm một món, bố nếm một món, hai vế đối xứng."
+   },
+   {
+    "q": "Trong mẫu này, số từ ở hai vế thường là gì?",
+    "o": [
+     "Luôn là 二",
+     "Vế đầu 一, vế sau 二",
+     "Số nào cũng được",
+     "Luôn là 一"
+    ],
+    "a": 3,
+    "why": "Mẫu yêu cầu hai vế đối xứng, số từ luôn là 一."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他说一句，笑两句",
+     "他说一句，笑一句",
+     "妈妈做一道菜，爸爸尝一道菜",
+     "他写一行，念一行"
+    ],
+    "a": 0,
+    "why": "Hai vế phải đối xứng, số từ đều là 一; 笑两句 phá vỡ đối xứng của mẫu."
+   },
+   {
+    "q": "“她唱一首歌，跳一支舞” — lượng từ hai vế có gì đặc biệt?",
+    "o": [
+     "Giống hệt nhau",
+     "Tương ứng với từng động từ: 首 cho bài hát, 支 cho điệu nhảy",
+     "Đều là 个",
+     "Không có lượng từ"
+    ],
+    "a": 1,
+    "why": "Lượng từ tương ứng với động từ: 一首歌, 一支舞, mỗi vế dùng lượng từ riêng phù hợp."
+   },
+   {
+    "q": "Mẫu này khác liệt kê thông thường ở điểm nào?",
+    "o": [
+     "Không có động từ",
+     "Không khác gì",
+     "Nhấn mạnh nhịp xen kẽ sinh động, việc này một lần việc kia một lần",
+     "Chỉ dùng trong văn viết"
+    ],
+    "a": 2,
+    "why": "Mẫu này tả nhịp xen kẽ sinh động, khác liệt kê đơn thuần là kể lần lượt các việc."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-19",
+  "stage": 6,
+  "title": "东一A，西一A — chỗ này một cái, chỗ kia một cái",
+  "hook": "“东西丢得东一件，西一件。” — đồ đạc vứt chỗ này một cái, chỗ kia một cái: 东一A，西一A tả thứ gì rải rác khắp nơi, không gọn gàng.",
+  "examples": [
+   "东西丢得东一件，西一件，找了半天才找齐。(Dōngxi diū de dōng yī jiàn, xī yī jiàn, zhǎo le bàntiān cái zhǎo qí.) — Đồ đạc vứt chỗ này một cái, chỗ kia một cái, tìm nửa ngày mới đủ.",
+   "他东一句，西一句，说了半天也没说明白。(Tā dōng yī jù, xī yī jù, shuō le bàntiān yě méi shuō míngbai.) — Anh ấy câu này một câu, câu kia một câu, nói nửa ngày mà vẫn chưa nói rõ.",
+   "孩子东一本，西一本地乱放书，妈妈看了直摇头。(Háizi dōng yī běn, xī yī běn de luàn fàng shū, māma kàn le zhí yáotóu.) — Đứa trẻ vứt sách chỗ này một quyển, chỗ kia một quyển, mẹ nhìn mà lắc đầu.",
+   "他东问一句，西问一句，把大家都问烦了。(Tā dōng wèn yī jù, xī wèn yī jù, bǎ dàjiā dōu wèn fán le.) — Anh ấy hỏi chỗ này một câu, chỗ kia một câu, hỏi tới mức mọi người đều thấy phiền."
+  ],
+  "speak": "东西丢得东一件，西一件，找了半天才找齐。他东一句，西一句，说了半天也没说明白。孩子东一本，西一本地乱放书，妈妈看了直摇头。他东问一句，西问一句，把大家都问烦了。",
+  "rule": "Mẫu 东一A，西一A có dạng: 东 + 一 + lượng từ + A, 西 + 一 + lượng từ + A, nghĩa là chỗ này một cái, chỗ kia một cái, tả đồ vật rải rác khắp nơi hoặc lời nói, hành động lộn xộn không theo thứ tự: 东一件，西一件; 东一句，西一句; 东一本，西一本. Đông (东) và tây (西) ở đây không phải phương hướng thật mà chỉ hai phía đối nhau, nhấn mạnh sự rải rác, lộn xộn. Số từ luôn là 一, A là động từ hoặc danh từ lặp lại ở hai vế.",
+  "tip": "Người Việt hay dịch 东一句，西一句 thành “câu đông câu tây”: 东 và 西 ở đây chỉ là hai phía đối nhau, nên dịch là “câu này một câu, câu kia một câu” mới tự nhiên; và đừng đổi thành 南一A，北一A vì mẫu cố định chỉ dùng 东…西…",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“东一件，西一件” tả đồ đạc thế nào?",
+    "o": [
+     "Để trong tủ",
+     "Xếp rất gọn gàng",
+     "Rải rác chỗ này một cái, chỗ kia một cái",
+     "Chỉ có một cái"
+    ],
+    "a": 2,
+    "why": "东一A，西一A tả thứ gì rải rác khắp nơi, không gọn gàng."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他___一句，___一句，说了半天也没说明白。",
+    "o": [
+     "这…那",
+     "上…下",
+     "左…左",
+     "东…西"
+    ],
+    "a": 3,
+    "why": "Mẫu cố định là 东一A，西一A: 东一句，西一句."
+   },
+   {
+    "q": "Trong mẫu này, 东 và 西 có phải phương hướng thật không?",
+    "o": [
+     "Không, chỉ hai phía đối nhau, nhấn mạnh sự rải rác",
+     "Chỉ hướng đông",
+     "Chỉ hướng tây",
+     "Phải, chỉ hướng đông và hướng tây"
+    ],
+    "a": 0,
+    "why": "东 và 西 ở đây chỉ hai phía đối nhau, nhấn mạnh sự rải rác, lộn xộn, không phải phương hướng thật."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "孩子东一本，西一本地乱放书",
+     "他南一句，北一句",
+     "东西丢得东一件，西一件",
+     "他东一句，西一句"
+    ],
+    "a": 1,
+    "why": "Mẫu cố định chỉ dùng 东…西…, không đổi thành 南…北…"
+   },
+   {
+    "q": "“他东问一句，西问一句，把大家都问烦了” — mọi người thấy thế nào?",
+    "o": [
+     "Không nghe thấy",
+     "Rất vui",
+     "Thấy phiền vì hỏi lộn xộn khắp nơi",
+     "Rất thích"
+    ],
+    "a": 2,
+    "why": "东问一句，西问一句 tả hỏi lộn xộn chỗ này chỗ kia, khiến mọi người thấy phiền."
+   },
+   {
+    "q": "Số từ trong mẫu 东一A，西一A luôn là gì?",
+    "o": [
+     "二",
+     "三",
+     "Số nào cũng được",
+     "一"
+    ],
+    "a": 3,
+    "why": "Mẫu yêu cầu số từ luôn là 一 ở cả hai vế."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-21",
+  "stage": 6,
+  "title": "趋向补语（nâng cao） — bổ ngữ xu hướng 5: nghĩa bóng",
+  "hook": "“他笑起来了” — anh ấy cười rộ lên: bổ ngữ xu hướng không chỉ chỉ hướng đi, mà còn nói bắt đầu, tiếp tục hay ra kết quả.",
+  "examples": [
+   "他一听到好消息就笑起来了。(Tā yī tīng dào hǎo xiāoxi jiù xiào qǐlai le.) — Vừa nghe tin vui là anh ấy cười rộ lên.",
+   "这个问题很难，我们慢慢想下去吧。(Zhège wèntí hěn nán, wǒmen mànman xiǎng xiàqù ba.) — Vấn đề này khó lắm, chúng ta cứ nghĩ tiếp đi.",
+   "她终于把办法想出来了。(Tā zhōngyú bǎ bànfǎ xiǎng chūlai le.) — Cuối cùng cô ấy cũng nghĩ ra cách rồi.",
+   "你跑快点儿，马上就赶上来了。(Nǐ pǎo kuài diǎnr, mǎshàng jiù gǎn shànglai le.) — Bạn chạy nhanh lên, sắp đuổi kịp rồi."
+  ],
+  "speak": "他一听到好消息就笑起来了。这个问题很难，我们慢慢想下去吧。她终于把办法想出来了。你跑快点儿，马上就赶上来了。",
+  "rule": "Bổ ngữ xu hướng ngoài nghĩa hướng thật (đi lên, đi xuống, đi ra) còn có nghĩa bóng: 起来 = bắt đầu/nổi lên (笑起来, 忙起来); 下去 = tiếp tục (说下去, 做下去); 出来 = từ không thành có, kết quả hiện ra (想出来, 写出来); 上来 = tới gần/đuổi kịp (赶上来). Bổ ngữ đứng ngay sau động từ, trước tân ngữ thì dùng câu chữ 把 hoặc đưa tân ngữ ra sau bổ ngữ.",
+  "tip": "Người Việt hay dịch 起来 lúc nào cũng là “lên”: trong 笑起来 nó là “bắt đầu cười”, không phải cười lên trên. Nhớ nghĩa bóng theo từng từ, đừng dịch từng chữ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“笑起来了” nghĩa là gì?",
+    "o": [
+     "Cười xong rồi",
+     "Cười rất to",
+     "Đang cười lên lầu",
+     "Bắt đầu cười"
+    ],
+    "a": 3,
+    "why": "起来 ở đây là nghĩa bóng: bắt đầu, nổi lên — 笑起来 là bắt đầu cười."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她终于把办法___了。",
+    "o": [
+     "想回去",
+     "想出来",
+     "想下去",
+     "想起来"
+    ],
+    "a": 1,
+    "why": "想出来 = nghĩ ra được, kết quả hiện ra; 把办法想出来了 là cách nói đúng."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他笑起来了",
+     "我想出来办法了",
+     "我们走下去吧",
+     "请你说下去"
+    ],
+    "a": 1,
+    "why": "想出来 có tân ngữ 办法 thì phải dùng 把: 我把办法想出来了, không nói 我想出来办法了."
+   },
+   {
+    "q": "“赶上来了” nghĩa là gì?",
+    "o": [
+     "Chạy chậm lại",
+     "Đuổi kịp rồi",
+     "Chạy đi xa",
+     "Bắt đầu chạy"
+    ],
+    "a": 1,
+    "why": "上来 nghĩa bóng là tới gần, đạt được — 赶上来了 là đã đuổi kịp."
+   },
+   {
+    "q": "“做下去” nhấn mạnh điều gì?",
+    "o": [
+     "Làm xong rồi",
+     "Bắt đầu làm",
+     "Làm lại từ đầu",
+     "Tiếp tục làm"
+    ],
+    "a": 3,
+    "why": "下去 nghĩa bóng là tiếp tục — 做下去 là tiếp tục làm."
+   },
+   {
+    "q": "Câu nào đúng?",
+    "o": [
+     "他起哭来了",
+     "他哭起来了",
+     "他起来哭了",
+     "他哭了起"
+    ],
+    "a": 1,
+    "why": "Bổ ngữ xu hướng đứng ngay sau động từ: 哭起来了."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-22",
+  "stage": 6,
+  "title": "把字句表致使 / 被动句主语+被/叫/让+宾语+给+动词 — câu 把 chỉ khiến / câu bị động có 给",
+  "hook": "“这件事把他气得说不出话来” — chuyện này làm anh ấy tức đến không nói nổi: 把 còn dùng để nói ai bị khiến ra sao, và câu bị động có thêm 给 để nhấn mạnh.",
+  "examples": [
+   "这件事把他气得一句话也说不出来。(Zhè jiàn shì bǎ tā qì de yī jù huà yě shuō bù chūlai.) — Chuyện này làm anh ấy tức đến mức không nói nổi câu nào.",
+   "孩子把妈妈累坏了。(Háizi bǎ māma lèi huài le.) — Đứa bé làm mẹ mệt rã rời.",
+   "我的手机被小偷给偷走了。(Wǒ de shǒujī bèi xiǎotōu gěi tōu zǒu le.) — Điện thoại của tôi bị trộm lấy mất rồi.",
+   "他叫雨给淋湿了。(Tā jiào yǔ gěi lín shī le.) — Anh ấy bị mưa làm ướt hết."
+  ],
+  "speak": "这件事把他气得一句话也说不出来。孩子把妈妈累坏了。我的手机被小偷给偷走了。他叫雨给淋湿了。",
+  "rule": "把字句表致使: 把 + người/vật + động từ + bổ ngữ kết quả/mức độ (气得说不出话来, 累坏了), nhấn mạnh kết quả do tác động gây ra cho người/vật đó. Câu bị động dạng 被/叫/让 + tác nhân + 给 + động từ + thành phần khác: 给 đứng sau tác nhân, trước động từ, chỉ để nhấn mạnh bị động; 叫/让 khẩu ngữ hơn 被.",
+  "tip": "Đừng dịch 给 trong 被…给… là “cho”: trong 被小偷给偷走了, 给 không có nghĩa tặng cho, nó chỉ nhấn mạnh câu bị động. Nhầm nghĩa này là lỗi hay gặp nhất.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“把他气得说不出话来” nghĩa là gì?",
+    "o": [
+     "Kết quả anh ấy bị tức đến không nói được",
+     "Anh ấy đang tức giận",
+     "Anh ấy nói rất nhiều",
+     "Chuyện này rất vui"
+    ],
+    "a": 0,
+    "why": "把字句表致使 nhấn mạnh kết quả do tác động gây ra: tức đến mức không nói nổi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 我的手机被小偷___偷走了。",
+    "o": [
+     "让",
+     "被",
+     "给",
+     "把"
+    ],
+    "a": 2,
+    "why": "Cấu trúc bị động nhấn mạnh là 被 + tác nhân + 给 + động từ: 被小偷给偷走了."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他把我累坏了",
+     "我的手机给小偷被偷走了",
+     "孩子把妈妈累坏了",
+     "他叫雨给淋湿了"
+    ],
+    "a": 1,
+    "why": "Thứ tự sai: phải là 被小偷给偷走, không nói 给小偷被偷走."
+   },
+   {
+    "q": "“他叫雨给淋湿了” — 叫 ở đây có nghĩa gì?",
+    "o": [
+     "Nhờ ai làm",
+     "Ra lệnh",
+     "Dấu hiệu bị động, khẩu ngữ",
+     "Gọi ai đó"
+    ],
+    "a": 2,
+    "why": "叫 trong câu này là dấu hiệu bị động như 被, khẩu ngữ hơn."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 把表致使?",
+    "o": [
+     "这件事把他气坏了",
+     "这件事他气坏了",
+     "这件事把气他坏了",
+     "这件事气把他坏了"
+    ],
+    "a": 0,
+    "why": "把 + tân ngữ + động từ + bổ ngữ kết quả: 把他气坏了."
+   },
+   {
+    "q": "Trong “被小偷给偷走了”, 给 có tác dụng gì?",
+    "o": [
+     "Chỉ người nhận",
+     "Chỉ mục đích",
+     "Nhấn mạnh bị động",
+     "Nghĩa là cho, tặng"
+    ],
+    "a": 2,
+    "why": "给 ở đây chỉ nhấn mạnh câu bị động, không mang nghĩa cho tặng."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-23",
+  "stage": 6,
+  "title": "时而…，时而… / 一时…，一时… — lúc thì… lúc thì…",
+  "hook": "“他时而笑，时而哭” — anh ấy lúc thì cười, lúc thì khóc: hai mẫu này nói trạng thái thay đổi luân phiên, không cố định.",
+  "examples": [
+   "天上的云时而白，时而黑。(Tiān shàng de yún shí'ér bái, shí'ér hēi.) — Mây trên trời lúc thì trắng, lúc thì đen.",
+   "他时而笑，时而哭，情绪很不稳定。(Tā shí'ér xiào, shí'ér kū, qíngxù hěn bù wěndìng.) — Anh ấy lúc thì cười, lúc thì khóc, cảm xúc rất bất ổn.",
+   "我一时高兴，一时难过，不知道该怎么办。(Wǒ yīshí gāoxìng, yīshí nánguò, bù zhīdào gāi zěnme bàn.) — Tôi lúc thì vui, lúc thì buồn, không biết phải làm sao.",
+   "山里的天气一时晴，一时雨，让人摸不着头脑。(Shān lǐ de tiānqì yīshí qíng, yīshí yǔ, ràng rén mō bù zháo tóunǎo.) — Thời tiết trong núi lúc nắng lúc mưa, khiến người ta chẳng đoán nổi."
+  ],
+  "speak": "天上的云时而白，时而黑。他时而笑，时而哭，情绪很不稳定。我一时高兴，一时难过，不知道该怎么办。山里的天气一时晴，一时雨，让人摸不着头脑。",
+  "rule": "时而…，时而… và 一时…，一时… đều nối hai vế đối lập, diễn tả trạng thái thay đổi luân phiên, bất chợt. 时而 trang trọng hơn, thường đi với động từ/tính từ ngắn; 一时 hay đi với cảm xúc, thời tiết, tình huống nhất thời. Hai vế phải đối lập nhau (笑—哭, 晴—雨).",
+  "tip": "Đừng dùng 时而 cho việc lặp lại có quy luật cố định như mỗi ngày đều làm — 时而 nói sự thay đổi bất chợt, không theo lịch. Việc đều đặn thì dùng 每天/常常.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“时而笑，时而哭” nghĩa là gì?",
+    "o": [
+     "Không cười cũng không khóc",
+     "Lúc thì cười, lúc thì khóc",
+     "Vừa cười vừa khóc",
+     "Cười xong rồi khóc"
+    ],
+    "a": 1,
+    "why": "时而…，时而… diễn tả hai trạng thái thay đổi luân phiên."
+   },
+   {
+    "q": "Điền vào chỗ trống: 天上的云___白，___黑。",
+    "o": [
+     "一时，一时",
+     "不但，而且",
+     "因为，所以",
+     "时而，时而"
+    ],
+    "a": 3,
+    "why": "时而…，时而… là cặp cố định nói trạng thái thay đổi luân phiên."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "山里的天气一时晴，一时雨",
+     "他时而笑，时而哭",
+     "我一时高兴，一时难过",
+     "他时而每天跑步，时而每天游泳"
+    ],
+    "a": 3,
+    "why": "时而 nói thay đổi bất chợt, không dùng cho việc đều đặn mỗi ngày như 每天跑步."
+   },
+   {
+    "q": "一时…，一时… thường dùng với loại nội dung nào?",
+    "o": [
+     "Lịch làm việc cố định",
+     "Số liệu chính xác",
+     "Địa chỉ nhà",
+     "Cảm xúc, thời tiết nhất thời"
+    ],
+    "a": 3,
+    "why": "一时 hay đi với cảm xúc, thời tiết, tình huống nhất thời, thay đổi bất chợt."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 一时…，一时…?",
+    "o": [
+     "我一时吃饭，一时吃饭",
+     "我一时高兴，一时难过",
+     "我一时高兴，一时很高兴",
+     "我一时去学校，一时去学校"
+    ],
+    "a": 1,
+    "why": "Hai vế của 一时…，一时… phải đối lập nhau: 高兴—难过."
+   },
+   {
+    "q": "时而 và 一时 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "时而 chỉ quá khứ, 一时 chỉ tương lai",
+     "时而 dùng cho số nhiều, 一时 dùng cho số ít",
+     "Hai từ hoàn toàn giống nhau",
+     "时而 trang trọng hơn, 一时 hay nói cảm xúc nhất thời"
+    ],
+    "a": 3,
+    "why": "时而 trang trọng hơn; 一时 thường gắn với cảm xúc, thời tiết nhất thời."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-24",
+  "stage": 6,
+  "title": "…便… — … thì liền…",
+  "hook": "“他一听到这个消息便跑出去了” — vừa nghe tin này anh ấy liền chạy ra ngoài: 便 nối điều kiện với kết quả xảy ra ngay sau đó.",
+  "examples": [
+   "他一听到这个消息便跑出去了。(Tā yī tīng dào zhège xiāoxi biàn pǎo chūqù le.) — Vừa nghe tin này anh ấy liền chạy ra ngoài.",
+   "只要你努力，便一定能成功。(Zhǐyào nǐ nǔlì, biàn yīdìng néng chénggōng.) — Chỉ cần bạn cố gắng thì nhất định sẽ thành công.",
+   "她看了信，便哭了。(Tā kàn le xìn, biàn kū le.) — Cô ấy đọc thư xong liền khóc.",
+   "天一亮，他便起床去跑步。(Tiān yī liàng, tā biàn qǐchuáng qù pǎobù.) — Trời vừa sáng là anh ấy dậy chạy bộ."
+  ],
+  "speak": "他一听到这个消息便跑出去了。只要你努力，便一定能成功。她看了信，便哭了。天一亮，他便起床去跑步。",
+  "rule": "便 đứng đầu vế sau, nối điều kiện/nguyên nhân ở vế trước với kết quả xảy ra ngay sau đó. Thường đi với 一…就… (一听到…便…), 只要… (只要努力，便…), hoặc vế trước là việc đã xong (看了信，便…). 便 trang trọng, văn viết hơn 就, nghĩa là “liền, ngay”.",
+  "tip": "便 không đứng cuối câu — đừng nói “他跑出去了便”. 便 mở đầu vế kết quả, giống 就 nhưng trang trọng hơn, hay gặp trong văn viết.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“看了信，便哭了” — 便 nghĩa là gì?",
+    "o": [
+     "Tuy nhiên",
+     "Vì vậy",
+     "Liền, ngay sau đó",
+     "Nhưng mà"
+    ],
+    "a": 2,
+    "why": "便 nối việc trước với kết quả xảy ra ngay sau: đọc thư xong liền khóc."
+   },
+   {
+    "q": "Điền vào chỗ trống: 只要你努力，___一定能成功。",
+    "o": [
+     "便",
+     "但是",
+     "虽然",
+     "因为"
+    ],
+    "a": 0,
+    "why": "只要…，便… là cặp điều kiện — kết quả: chỉ cần cố gắng thì liền thành công."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他跑出去了便",
+     "她看了信，便哭了",
+     "他一听到消息便跑出去了",
+     "天一亮，他便起床了"
+    ],
+    "a": 0,
+    "why": "便 đứng đầu vế sau, không đứng cuối câu."
+   },
+   {
+    "q": "便 và 就 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "便 trang trọng, văn viết hơn 就",
+     "便 chỉ quá khứ, 就 chỉ tương lai",
+     "便 dùng cho câu hỏi, 就 dùng cho câu kể",
+     "Hai từ hoàn toàn giống nhau"
+    ],
+    "a": 0,
+    "why": "便 và 就 cùng nghĩa liền/ngay, nhưng 便 trang trọng và văn viết hơn."
+   },
+   {
+    "q": "Câu nào đúng với mẫu …便…?",
+    "o": [
+     "他便一听到消息跑出去了",
+     "他听到消息便了跑出去",
+     "一听到消息，他便跑出去了",
+     "便他一听到消息跑出去了"
+    ],
+    "a": 2,
+    "why": "便 đứng đầu vế kết quả, sau vế điều kiện 一听到消息."
+   },
+   {
+    "q": "“天一亮，他便起床去跑步” — vế trước nói điều gì?",
+    "o": [
+     "Điều kiện thời gian: trời vừa sáng",
+     "Nguyên nhân trời mưa",
+     "Kết quả đã chạy bộ",
+     "Câu hỏi về thời tiết"
+    ],
+    "a": 0,
+    "why": "天一亮 là điều kiện thời gian, 便 mở ra kết quả xảy ra ngay sau đó."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-25",
+  "stage": 6,
+  "title": "不但不/不但没有…，反而… — không những không… mà ngược lại…",
+  "hook": "“他不但不道歉，反而怪我” — anh ấy không những không xin lỗi mà ngược lại còn trách tôi: mẫu này nói kết quả đi ngược hẳn với điều người ta chờ đợi.",
+  "examples": [
+   "他不但不道歉，反而怪我。(Tā bùdàn bù dàoqiàn, fǎn'ér guài wǒ.) — Anh ấy không những không xin lỗi mà ngược lại còn trách tôi.",
+   "雨不但没有停，反而越下越大。(Yǔ bùdàn méiyǒu tíng, fǎn'ér yuè xià yuè dà.) — Mưa không những không tạnh mà ngược lại càng lúc càng to.",
+   "她不但不生气，反而笑了。(Tā bùdàn bù shēngqì, fǎn'ér xiào le.) — Cô ấy không những không giận mà ngược lại còn cười.",
+   "这个办法不但没有省钱，反而花得更多。(Zhège bànfǎ bùdàn méiyǒu shěng qián, fǎn'ér huā de gèng duō.) — Cách này không những không tiết kiệm tiền mà ngược lại còn tốn nhiều hơn."
+  ],
+  "speak": "他不但不道歉，反而怪我。雨不但没有停，反而越下越大。她不但不生气，反而笑了。这个办法不但没有省钱，反而花得更多。",
+  "rule": "不但不 + động từ/tính từ phủ định việc đáng ra phải xảy ra (不道歉, 不生气); 不但没有 dùng khi vế trước có 没/没有 (没有停, 没有省钱). Vế sau 反而 + kết quả ngược hẳn với mong đợi. 反而 đứng đầu vế sau, có thể đứng trước hoặc sau chủ ngữ của vế sau.",
+  "tip": "Đừng bỏ 反而 — không có nó câu chỉ còn là phủ định thường, mất hẳn nghĩa “ngược lại”. Và đừng nhầm 不但没有 với 不但不: có 没 thì dùng 没有, không có 没 thì dùng 不.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不但不道歉，反而怪我” nghĩa là gì?",
+    "o": [
+     "Vừa xin lỗi vừa trách tôi",
+     "Đã xin lỗi rồi mới trách",
+     "Không xin lỗi cũng không trách",
+     "Không xin lỗi mà còn trách ngược lại tôi"
+    ],
+    "a": 3,
+    "why": "不但不…，反而… = không những không làm việc đáng ra làm, mà còn làm ngược lại."
+   },
+   {
+    "q": "Điền vào chỗ trống: 雨不但没有停，___越下越大。",
+    "o": [
+     "所以",
+     "反而",
+     "但是",
+     "而且"
+    ],
+    "a": 1,
+    "why": "反而 mở vế sau, nêu kết quả ngược với mong đợi: mưa càng lúc càng to."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "雨不但没有停，反而越下越大",
+     "她不但不生气，反而笑了",
+     "他不但道歉，反而怪我",
+     "他不但不道歉，反而怪我"
+    ],
+    "a": 2,
+    "why": "Vế trước phải phủ định (不但不道歉); 不但道歉 thì không hợp logic với 反而怪我."
+   },
+   {
+    "q": "Khi nào dùng 不但没有 thay vì 不但不?",
+    "o": [
+     "Khi động từ là tính từ",
+     "Khi vế trước có 没/没有",
+     "Khi vế sau là câu hỏi",
+     "Khi chủ ngữ là số nhiều"
+    ],
+    "a": 1,
+    "why": "不但没有 dùng khi vế trước có 没/没有, như 没有停, 没有省钱."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 不但不…，反而…?",
+    "o": [
+     "她不但生气，反而笑了",
+     "她不但不生气，而且笑了",
+     "她不但生气，而且不笑了",
+     "她不但不生气，反而笑了"
+    ],
+    "a": 3,
+    "why": "不但不 + phủ định, 反而 + kết quả ngược: không giận mà ngược lại còn cười."
+   },
+   {
+    "q": "反而 trong mẫu này có tác dụng gì?",
+    "o": [
+     "Nhấn mạnh thời gian",
+     "Nêu kết quả ngược với mong đợi",
+     "Nối hai việc cùng chiều",
+     "Hỏi lại ý kiến"
+    ],
+    "a": 1,
+    "why": "反而 là linh hồn của mẫu: không có nó, câu mất nghĩa ngược lại."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-26",
+  "stage": 6,
+  "title": "不是…，还/还是… — không phải… mà là…",
+  "hook": "“他不是来旅游的，还是来工作的” — anh ấy không phải đến du lịch mà là đến làm việc: mẫu này phủ định điều người ta tưởng, rồi chỉ ra lý do thật.",
+  "examples": [
+   "他不是来旅游的，还是来工作的。(Tā bù shì lái lǚyóu de, hái shì lái gōngzuò de.) — Anh ấy không phải đến du lịch mà là đến làm việc.",
+   "这不是你的错，还是我的责任。(Zhè bù shì nǐ de cuò, hái shì wǒ de zérèn.) — Đây không phải lỗi của bạn mà là trách nhiệm của tôi.",
+   "她不是不想去，还是身体不舒服。(Tā bù shì bù xiǎng qù, hái shì shēntǐ bù shūfu.) — Cô ấy không phải không muốn đi mà là người không khỏe.",
+   "我不是不喜欢这件衣服，还是太贵了。(Wǒ bù shì bù xǐhuan zhè jiàn yīfu, hái shì tài guì le.) — Tôi không phải không thích cái áo này mà là nó đắt quá."
+  ],
+  "speak": "他不是来旅游的，还是来工作的。这不是你的错，还是我的责任。她不是不想去，还是身体不舒服。我不是不喜欢这件衣服，还是太贵了。",
+  "rule": "不是…，还/还是… phủ định nguyên nhân hay lý do mà người ta tưởng là A, rồi khẳng định nguyên nhân thật là B. 还/还是 nhấn mạnh B mới là điều quan trọng, mang sắc thái “hóa ra là”. Khác 不是…而是… ở chỗ 还/还是 thêm ý bất ngờ, nhấn mạnh.",
+  "tip": "Vế sau 还/还是 phải là lời giải thích thật, không phải một phủ định nữa — đừng nói “不是…，还是不…” rồi dừng ở đó mà không nói rõ lý do thật.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不是来旅游的，还是来工作的” nghĩa là gì?",
+    "o": [
+     "Không phải đến chơi mà là đến làm việc",
+     "Vừa du lịch vừa làm việc",
+     "Không du lịch cũng không làm việc",
+     "Đến du lịch rồi mới làm việc"
+    ],
+    "a": 0,
+    "why": "不是…，还是… phủ định A, khẳng định B mới là lý do thật."
+   },
+   {
+    "q": "Điền vào chỗ trống: 她不是不想去，___身体不舒服。",
+    "o": [
+     "而且",
+     "所以",
+     "还是",
+     "但是"
+    ],
+    "a": 2,
+    "why": "还是 mở vế sau, khẳng định lý do thật: người không khỏe."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他不是来旅游的，还是来工作的",
+     "这不是你的错，还是我的责任",
+     "我不是不喜欢，还是太贵了",
+     "他不是学生，还是不是老师"
+    ],
+    "a": 3,
+    "why": "Vế sau 还/还是 phải khẳng định điều thật, không phủ định tiếp: 还是老师 mới đúng."
+   },
+   {
+    "q": "还/还是 trong mẫu này có tác dụng gì?",
+    "o": [
+     "Hỏi lại cho chắc",
+     "Chỉ thời gian",
+     "Nhấn mạnh B mới là lý do thật",
+     "Nối hai việc cùng lúc"
+    ],
+    "a": 2,
+    "why": "还/还是 nhấn mạnh B mới là điều quan trọng, mang sắc thái hóa ra là."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 不是…，还是…?",
+    "o": [
+     "我不是不喜欢这件衣服，还是太贵了",
+     "我不是喜欢这件衣服，还是太贵了",
+     "我不是不喜欢这件衣服，而是太贵了",
+     "我不是不喜欢这件衣服，但是太贵了"
+    ],
+    "a": 0,
+    "why": "不是…，还是… cần vế trước phủ định và vế sau khẳng định lý do thật."
+   },
+   {
+    "q": "不是…，还是… khác 不是…，而是… ở điểm nào?",
+    "o": [
+     "还是 dùng cho câu hỏi",
+     "Hai mẫu hoàn toàn giống nhau",
+     "还是 thêm ý bất ngờ, nhấn mạnh hơn",
+     "还是 chỉ dùng cho quá khứ"
+    ],
+    "a": 2,
+    "why": "还/还是 mang sắc thái hóa ra là, nhấn mạnh hơn 而是."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-27",
+  "stage": 6,
+  "title": "连…也/都…，…更… / 要么…，要么… — ngay cả… cũng… huống hồ… / hoặc… hoặc…",
+  "hook": "“连他都来了，你更应该来” — ngay cả anh ấy cũng đến rồi, bạn càng nên đến: một mẫu suy ra điều càng phải thế, một mẫu bắt chọn một trong hai.",
+  "examples": [
+   "连他都来了，你更应该来。(Lián tā dōu lái le, nǐ gèng yīnggāi lái.) — Ngay cả anh ấy cũng đến rồi, bạn càng nên đến.",
+   "连这么简单的题他也不会做，更难的题怎么做？(Lián zhème jiǎndān de tí tā yě bù huì zuò, gèng nán de tí zěnme zuò?) — Ngay cả bài đơn giản thế này anh ấy còn không làm được, bài khó hơn thì làm sao?",
+   "要么你去，要么我去，总得有人去。(Yàome nǐ qù, yàome wǒ qù, zǒng děi yǒu rén qù.) — Hoặc bạn đi, hoặc tôi đi, kiểu gì cũng phải có người đi.",
+   "要么现在就开始，要么就别做了。(Yàome xiànzài jiù kāishǐ, yàome jiù bié zuò le.) — Hoặc bắt đầu ngay bây giờ, hoặc đừng làm nữa."
+  ],
+  "speak": "连他都来了，你更应该来。连这么简单的题他也不会做，更难的题怎么做？要么你去，要么我去，总得有人去。要么现在就开始，要么就别做了。",
+  "rule": "连…也/都…，…更…: vế trước nêu trường hợp cực đoan đã xảy ra (ngay cả trẻ con cũng biết, ngay cả bài dễ cũng không làm được), vế sau 更… suy ra trường hợp còn lại càng phải như vậy. 要么…，要么…: đưa ra hai lựa chọn loại trừ nhau, chỉ chọn một trong hai; hai vế phải song song, cùng loại.",
+  "tip": "连…都… thì 都/也 không được bỏ — bỏ đi câu mất nghĩa “ngay cả”. 要么…要么… thì hai vế phải cùng loại: hoặc hai chủ ngữ khác nhau làm cùng một việc, hoặc cùng một chủ ngữ làm hai việc khác nhau.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“连他都来了，你更应该来” nghĩa là gì?",
+    "o": [
+     "Anh ấy đến thay bạn",
+     "Ngay cả anh ấy cũng đến, bạn càng nên đến",
+     "Anh ấy đến rồi, bạn không cần đến",
+     "Anh ấy và bạn cùng đến"
+    ],
+    "a": 1,
+    "why": "连…都… nêu trường hợp cực đoan, 更… suy ra trường hợp còn lại càng phải như vậy."
+   },
+   {
+    "q": "Điền vào chỗ trống: ___你去，___我去，总得有人去。",
+    "o": [
+     "连，更",
+     "不但，而且",
+     "虽然，但是",
+     "要么，要么"
+    ],
+    "a": 3,
+    "why": "要么…，要么… là cặp lựa chọn loại trừ nhau: hoặc bạn đi, hoặc tôi đi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "要么现在就开始，要么就别做了",
+     "连他都来了，你更应该来",
+     "要么你去，要么我去",
+     "连他来了，你更应该来"
+    ],
+    "a": 3,
+    "why": "连… thì vế trước phải có 也/都: 连他都来了, không nói 连他来了."
+   },
+   {
+    "q": "要么…，要么… dùng để làm gì?",
+    "o": [
+     "Nêu hai việc cùng xảy ra",
+     "So sánh hai người",
+     "Nhấn mạnh nguyên nhân",
+     "Đưa hai lựa chọn, chỉ chọn một"
+    ],
+    "a": 3,
+    "why": "要么…，要么… đưa ra hai lựa chọn loại trừ nhau, chỉ chọn một."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 连…也/都…，…更…?",
+    "o": [
+     "连小孩子也知道，大人应该知道",
+     "连小孩子也知道，大人更应该知道",
+     "连小孩子知道，大人更应该知道",
+     "小孩子也知道，大人更应该知道"
+    ],
+    "a": 1,
+    "why": "Cần đủ 连…也/都… và vế sau có 更… mới đúng mẫu."
+   },
+   {
+    "q": "“连这么简单的题他也不会做，更难的题怎么做？” — người nói muốn nhấn mạnh điều gì?",
+    "o": [
+     "Bài khó dễ hơn bài dễ",
+     "Anh ấy làm được bài khó",
+     "Bài dễ không quan trọng",
+     "Bài dễ còn không làm được thì bài khó càng không"
+    ],
+    "a": 3,
+    "why": "Vế trước nêu trường hợp cực đoan (bài dễ còn không làm được), vế sau 更… suy ra bài khó càng không làm được."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-28",
+  "stage": 6,
+  "title": "虽…，但/可/却/也… — dù… nhưng…",
+  "hook": "“虽忙，却很快乐” — dù bận nhưng rất vui: 虽 là 虽然 rút gọn, mở vế nhượng bộ rồi chờ vế sau lật lại.",
+  "examples": [
+   "虽忙，却很快乐。(Suī máng, què hěn kuàilè.) — Dù bận nhưng rất vui.",
+   "虽然贵，也值得买。(Suīrán guì, yě zhíde mǎi.) — Dù đắt nhưng cũng đáng mua.",
+   "虽下雨，但比赛照常进行。(Suī xià yǔ, dàn bǐsài zhàocháng jìnxíng.) — Dù trời mưa nhưng trận đấu vẫn diễn ra bình thường.",
+   "虽他年纪大了，可身体还很健康。(Suī tā niánjì dà le, kě shēntǐ hái hěn jiànkāng.) — Dù ông ấy đã lớn tuổi nhưng sức khỏe vẫn rất tốt."
+  ],
+  "speak": "虽忙，却很快乐。虽然贵，也值得买。虽下雨，但比赛照常进行。虽他年纪大了，可身体还很健康。",
+  "rule": "虽 (虽然 rút gọn, hay gặp văn viết) mở vế nhượng bộ, vế sau dùng 但/可/却/也: 但 trang trọng, 可 khẩu ngữ hơn, 却 nhấn mạnh đối lập, 也 nhấn mạnh “vẫn”. 虽 thường đứng đầu câu; 虽然 thì có thể đứng sau chủ ngữ (他虽然…).",
+  "tip": "Đừng bỏ vế sau 但/可/却/也 — 虽… mà không có vế đối lập thì câu lửng, chưa trọn ý. Và đừng dùng hai liên từ nhượng bộ cùng lúc như “虽然…，但是…，却…”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“虽忙，却很快乐” nghĩa là gì?",
+    "o": [
+     "Bận nên mới vui",
+     "Không bận cũng không vui",
+     "Dù bận nhưng rất vui",
+     "Vừa bận vừa vui"
+    ],
+    "a": 2,
+    "why": "虽…，却… = dù… nhưng…: dù bận, nhưng vẫn rất vui."
+   },
+   {
+    "q": "Điền vào chỗ trống: 虽下雨，___比赛照常进行。",
+    "o": [
+     "但",
+     "因为",
+     "所以",
+     "而且"
+    ],
+    "a": 0,
+    "why": "虽…，但… là cặp nhượng bộ — đối lập: dù mưa nhưng trận đấu vẫn diễn ra."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "虽下雨，但比赛照常进行",
+     "虽他年纪大了，身体还很健康",
+     "虽忙，却很快乐",
+     "虽然贵，也值得买"
+    ],
+    "a": 1,
+    "why": "Vế sau của 虽… phải có 但/可/却/也; câu này thiếu liên từ đối lập."
+   },
+   {
+    "q": "却 trong “虽忙，却很快乐” nhấn mạnh điều gì?",
+    "o": [
+     "Sự đối lập: bận mà vẫn vui",
+     "Thời gian trôi nhanh",
+     "Nguyên nhân của niềm vui",
+     "Mức độ rất bận"
+    ],
+    "a": 0,
+    "why": "却 nhấn mạnh đối lập giữa hai vế: bận nhưng lại vui."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 虽…，也…?",
+    "o": [
+     "虽然贵，所以值得买",
+     "虽然贵，而且值得买",
+     "虽然贵，也值得买",
+     "虽然贵，但是值得买"
+    ],
+    "a": 2,
+    "why": "虽…，也… dùng 也 để nhấn mạnh vẫn đáng mua dù đắt."
+   },
+   {
+    "q": "虽 và 虽然 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "虽 ngắn gọn, văn viết hơn; 虽然 có thể đứng sau chủ ngữ",
+     "虽 chỉ quá khứ, 虽然 chỉ hiện tại",
+     "虽 dùng cho câu hỏi, 虽然 dùng cho câu kể",
+     "Hai từ hoàn toàn giống nhau"
+    ],
+    "a": 0,
+    "why": "虽 là dạng rút gọn, văn viết, thường đứng đầu câu; 虽然 linh hoạt hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-29",
+  "stage": 6,
+  "title": "…，要不然/不然… — … nếu không thì…",
+  "hook": "“你快点儿，要不然就迟到了” — bạn nhanh lên, nếu không sẽ muộn mất: 要不然/不然 cảnh báo hậu quả xấu nếu không làm theo vế trước.",
+  "examples": [
+   "你快点儿，要不然就迟到了。(Nǐ kuài diǎnr, yàobùrán jiù chídào le.) — Bạn nhanh lên, nếu không sẽ muộn mất.",
+   "记得带伞，不然会淋湿的。(Jìde dài sǎn, bùrán huì lín shī de.) — Nhớ mang ô, nếu không sẽ bị ướt đấy.",
+   "他天天练习，不然怎么会进步这么快？(Tā tiāntiān liànxí, bùrán zěnme huì jìnbù zhème kuài?) — Anh ấy luyện tập mỗi ngày, nếu không sao tiến bộ nhanh thế được?",
+   "我们现在就走，要不然赶不上火车了。(Wǒmen xiànzài jiù zǒu, yàobùrán gǎn bù shàng huǒchē le.) — Chúng ta đi ngay bây giờ, nếu không sẽ lỡ tàu mất."
+  ],
+  "speak": "你快点儿，要不然就迟到了。记得带伞，不然会淋湿的。他天天练习，不然怎么会进步这么快？我们现在就走，要不然赶不上火车了。",
+  "rule": "要不然/不然 đứng đầu vế sau, nêu hậu quả xấu nếu không làm theo vế trước (快点儿，要不然就迟到了), hoặc nêu lý do suy đoán ngược trong câu hỏi tu từ (天天练习，不然怎么会进步这么快？). 要不然 trang trọng hơn 不然 một chút; 不然 khẩu ngữ hơn.",
+  "tip": "Đừng nhầm 不然 với 要不: 要不 đứng một mình có nghĩa “hoặc là” để đưa lựa chọn, còn 不然/要不然 là “nếu không thì”. Hai từ mở đầu khác nhau, nghĩa khác nhau.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“你快点儿，要不然就迟到了” nghĩa là gì?",
+    "o": [
+     "Nhanh lên, vì đã muộn rồi",
+     "Đừng nhanh, sẽ muộn",
+     "Muộn rồi, đừng đi nữa",
+     "Nhanh lên, nếu không sẽ muộn"
+    ],
+    "a": 3,
+    "why": "要不然 nêu hậu quả xấu nếu không làm theo vế trước: không nhanh thì sẽ muộn."
+   },
+   {
+    "q": "Điền vào chỗ trống: 记得带伞，___会淋湿的。",
+    "o": [
+     "所以",
+     "不然",
+     "但是",
+     "而且"
+    ],
+    "a": 1,
+    "why": "不然 mở vế sau, nêu hậu quả nếu không mang ô: sẽ bị ướt."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "记得带伞，不然会淋湿的",
+     "我们现在就走，要不然赶不上火车了",
+     "要不然你快点儿，就迟到了",
+     "你快点儿，要不然就迟到了"
+    ],
+    "a": 2,
+    "why": "要不然 đứng đầu vế sau, không đứng đầu câu để mở lời khuyên như thế này."
+   },
+   {
+    "q": "“他天天练习，不然怎么会进步这么快？” — 不然 ở đây dùng để làm gì?",
+    "o": [
+     "Khen anh ấy luyện tập giỏi",
+     "Suy đoán ngược: nếu không luyện tập thì sao tiến bộ được",
+     "Cảnh báo sẽ bị tụt lại",
+     "Hỏi giờ luyện tập"
+    ],
+    "a": 1,
+    "why": "不然 trong câu hỏi tu từ nêu lý do suy đoán ngược: chính nhờ luyện tập mỗi ngày nên mới tiến bộ nhanh."
+   },
+   {
+    "q": "Câu nào đúng với mẫu …，要不然…?",
+    "o": [
+     "要不然我们现在就走，赶不上火车了",
+     "我们现在就走，但是要不然赶不上火车了",
+     "我们现在就走，所以要不然赶不上火车了",
+     "我们现在就走，要不然赶不上火车了"
+    ],
+    "a": 3,
+    "why": "要不然 đứng đầu vế sau, sau vế nêu hành động cần làm."
+   },
+   {
+    "q": "要不然 và 不然 khác nhau chủ yếu ở đâu?",
+    "o": [
+     "Hai từ hoàn toàn giống nhau",
+     "要不然 trang trọng hơn, 不然 khẩu ngữ hơn",
+     "要不然 chỉ quá khứ, 不然 chỉ tương lai",
+     "要不然 dùng cho câu hỏi, 不然 dùng cho câu kể"
+    ],
+    "a": 1,
+    "why": "Nghĩa giống nhau; 要不然 trang trọng hơn, 不然 khẩu ngữ hơn."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-30",
+  "stage": 6,
+  "title": "凡是…，都… / 就算/就是…也… — phàm là… đều… / cho dù… cũng…",
+  "hook": "“凡是努力的人，都会有收获” — phàm là người chăm chỉ đều sẽ có thu hoạch: một mẫu nói tất cả không trừ ai, một mẫu nói dù thế nào kết quả vẫn vậy.",
+  "examples": [
+   "凡是来参加的人，都要登记。(Fánshì lái cānjiā de rén, dōu yào dēngjì.) — Phàm là người đến tham gia đều phải đăng ký.",
+   "凡是努力的人，都会有收获。(Fánshì nǔlì de rén, dōu huì yǒu shōuhuò.) — Phàm là người chăm chỉ đều sẽ có thu hoạch.",
+   "就算下雨，我也要去。(Jiùsuàn xià yǔ, wǒ yě yào qù.) — Cho dù trời mưa tôi cũng vẫn đi.",
+   "就是他不来，我们也要开会。(Jiùshì tā bù lái, wǒmen yě yào kāihuì.) — Cho dù anh ấy không đến, chúng tôi vẫn họp."
+  ],
+  "speak": "凡是来参加的人，都要登记。凡是努力的人，都会有收获。就算下雨，我也要去。就是他不来，我们也要开会。",
+  "rule": "凡是…，都…: 凡是 mở đầu nhóm đối tượng bao quát (凡是来参加的人), 都 khẳng định tất cả đều như vậy, không trừ ai. 就算/就是…也…: nhượng bộ giả định — dù điều kiện có xảy ra, kết quả vẫn không đổi; vế sau nhất định có 也/还/都; 就是 khẩu ngữ hơn 就算.",
+  "tip": "凡是 sau đó phải có 都/全都 — bỏ 都 câu mất nghĩa bao quát. 就算…也… thì vế sau nhất định phải có 也/还/都, bỏ đi câu mất nghĩa nhượng bộ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“凡是努力的人，都会有收获” nghĩa là gì?",
+    "o": [
+     "Người chăm chỉ nào cũng có thu hoạch",
+     "Chỉ vài người chăm chỉ có thu hoạch",
+     "Người lười cũng có thu hoạch",
+     "Không ai có thu hoạch"
+    ],
+    "a": 0,
+    "why": "凡是…，都… bao quát tất cả: phàm là người chăm chỉ đều có thu hoạch."
+   },
+   {
+    "q": "Điền vào chỗ trống: 就算下雨，我___要去。",
+    "o": [
+     "才",
+     "都",
+     "也",
+     "就"
+    ],
+    "a": 2,
+    "why": "就算…也… là cặp nhượng bộ giả định: cho dù mưa, tôi cũng vẫn đi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "凡是来参加的人，都要登记",
+     "就算下雨，我也要去",
+     "凡是努力的人，会有收获",
+     "就是他不来，我们也要开会"
+    ],
+    "a": 2,
+    "why": "凡是… thì vế sau phải có 都/全都; câu này thiếu 都."
+   },
+   {
+    "q": "就算 và 就是 trong mẫu này khác nhau ở đâu?",
+    "o": [
+     "就算 dùng cho câu hỏi, 就是 dùng cho câu kể",
+     "Hai từ hoàn toàn giống nhau",
+     "就是 khẩu ngữ hơn 就算",
+     "就算 chỉ quá khứ, 就是 chỉ tương lai"
+    ],
+    "a": 2,
+    "why": "Nghĩa nhượng bộ giống nhau; 就是 khẩu ngữ hơn 就算."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 凡是…，都…?",
+    "o": [
+     "凡是来参加的人，都要登记",
+     "凡是来参加的人，要登记",
+     "来参加的人，都要登记",
+     "凡是来参加的人，也要登记"
+    ],
+    "a": 0,
+    "why": "Cần đủ 凡是 mở đầu và 都 ở vế sau mới đúng mẫu bao quát."
+   },
+   {
+    "q": "“就是他不来，我们也要开会” — người nói muốn nhấn mạnh điều gì?",
+    "o": [
+     "Cuộc họp chờ anh ấy đến mới họp",
+     "Không có anh ấy thì không họp",
+     "Dù anh ấy không đến, cuộc họp vẫn diễn ra",
+     "Anh ấy nhất định phải đến"
+    ],
+    "a": 2,
+    "why": "就是…也… nhượng bộ giả định: dù điều kiện xảy ra, kết quả vẫn không đổi."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-31",
+  "stage": 6,
+  "title": "不…不… — không… không…",
+  "hook": "“我们不见不散” — chúng ta không gặp không về: hai chữ 不 nối nhau thành lời hẹn chắc nịch, hoặc nói ai đó vừa không thế này vừa không thế kia.",
+  "examples": [
+   "他不慌不忙地走进教室。(Tā bù huāng bù máng de zǒu jìn jiàoshì.) — Anh ấy thong thả bước vào lớp.",
+   "我们说好不见不散。(Wǒmen shuō hǎo bù jiàn bù sàn.) — Chúng ta đã hẹn không gặp không về.",
+   "孩子不哭不闹，安安静静地睡觉。(Háizi bù kū bù nào, ān'ān jìngjìng de shuì jiào.) — Đứa bé không khóc không quấy, ngủ yên lặng.",
+   "今天他不吃不喝，一直在工作。(Jīntiān tā bù chī bù hē, yīzhí zài gōngzuò.) — Hôm nay anh ấy không ăn không uống, làm việc suốt."
+  ],
+  "speak": "他不慌不忙地走进教室。我们说好不见不散。孩子不哭不闹，安安静静地睡觉。今天他不吃不喝，一直在工作。",
+  "rule": "不A不B nối hai động từ/tính từ phủ định: vừa không A vừa không B (不哭不闹, 不吃不喝, 不慌不忙), A và B thường đối xứng, cùng loại từ. Với thành ngữ hẹn ước như 不见不散, nghĩa là “không A thì không B”: không gặp thì không tan.",
+  "tip": "Đừng thêm 就 giữa hai vế — 不见不散 đã đủ nghĩa hẹn, thêm 就 thành thừa. Và đừng dịch sát từng chữ khi gặp thành ngữ: 不见不散 không phải “không gặp không tan rã” theo nghĩa đen, mà là lời hẹn chắc chắn.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“不见不散” nghĩa là gì?",
+    "o": [
+     "Không muốn gặp nhau",
+     "Hẹn gặp nhau, không gặp thì không về",
+     "Không gặp nhau nữa",
+     "Gặp nhau rồi chia tay"
+    ],
+    "a": 1,
+    "why": "不见不散 là lời hẹn chắc chắn: không gặp được thì không tan."
+   },
+   {
+    "q": "Điền vào chỗ trống: 孩子___不闹，安安静静地睡觉。",
+    "o": [
+     "不吃",
+     "不想",
+     "不看",
+     "不哭"
+    ],
+    "a": 3,
+    "why": "不哭不闹 là cặp cố định: không khóc không quấy."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他不就慌不忙地走进教室",
+     "他不慌不忙地走进教室",
+     "我们说好不见不散",
+     "孩子不哭不闹，安安静静地睡觉"
+    ],
+    "a": 0,
+    "why": "Không thêm 就 giữa hai vế 不…不…: phải nói 不慌不忙."
+   },
+   {
+    "q": "“不吃不喝” nhấn mạnh điều gì?",
+    "o": [
+     "Ăn rồi mới uống",
+     "Không muốn ăn",
+     "Ăn uống rất ít",
+     "Vừa không ăn vừa không uống"
+    ],
+    "a": 3,
+    "why": "不…不… nối hai phủ định: vừa không A vừa không B."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 不…不…?",
+    "o": [
+     "他不慌不忙忙地走进教室",
+     "他不慌不忙地走进教室",
+     "他不慌张很忙地走进教室",
+     "他慌不忙地走进教室"
+    ],
+    "a": 1,
+    "why": "不慌不忙 là cặp đối xứng đúng mẫu: hai tính từ phủ định song song."
+   },
+   {
+    "q": "不…不… yêu cầu A và B như thế nào?",
+    "o": [
+     "Trái nghĩa hoàn toàn",
+     "Một cái là động từ, một cái là danh từ",
+     "Không có yêu cầu gì",
+     "Đối xứng, cùng loại từ"
+    ],
+    "a": 3,
+    "why": "A và B trong 不…不… thường đối xứng, cùng loại từ như 哭—闹, 吃—喝, 慌—忙."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-32",
+  "stage": 6,
+  "title": "二重复句2：复句+复句 — câu phức hai tầng",
+  "hook": "“因为他生病了，所以没来上课，可是作业他都写完了” — vì ốm nên không đến lớp, nhưng bài tập thì làm xong hết: một câu lớn chứa trong nó những câu phức nhỏ.",
+  "examples": [
+   "因为他生病了，所以没来上课，可是作业他都写完了。(Yīnwèi tā shēng bìng le, suǒyǐ méi lái shàng kè, kěshì zuòyè tā dōu xiě wán le.) — Vì anh ấy ốm nên không đến lớp, nhưng bài tập thì anh ấy đã làm xong hết.",
+   "虽然天下雨，可是只要你带伞，就可以出去玩。(Suīrán tiān xià yǔ, kěshì zhǐyào nǐ dài sǎn, jiù kěyǐ chūqù wán.) — Dù trời mưa, nhưng chỉ cần bạn mang ô là có thể ra ngoài chơi.",
+   "如果你明天有空，我们就一起去看电影，要是你没空，我们就改天再去。(Rúguǒ nǐ míngtiān yǒu kòng, wǒmen jiù yīqǐ qù kàn diànyǐng, yàoshì nǐ méi kòng, wǒmen jiù gǎi tiān zài qù.) — Nếu mai bạn rảnh thì chúng ta cùng đi xem phim, nếu bạn bận thì để hôm khác đi.",
+   "他不但会说中文，而且还会写汉字，可是写得不太好看。(Tā bùdàn huì shuō Zhōngwén, érqiě hái huì xiě Hànzì, kěshì xiě de bù tài hǎokàn.) — Anh ấy không những nói được tiếng Trung mà còn viết được chữ Hán, nhưng viết chưa đẹp lắm."
+  ],
+  "speak": "因为他生病了，所以没来上课，可是作业他都写完了。虽然天下雨，可是只要你带伞，就可以出去玩。如果你明天有空，我们就一起去看电影，要是你没空，我们就改天再去。他不但会说中文，而且还会写汉字，可是写得不太好看。",
+  "rule": "Câu phức hai tầng là câu phức lớn mà trong đó một vế (hoặc cả hai vế) bản thân nó lại là một câu phức nhỏ. Phân tích theo tầng: tách quan hệ lớn trước (nhân quả, chuyển ngoặt, điều kiện), rồi tách quan hệ nhỏ trong từng vế. Ví dụ: tầng lớn là 可是 chuyển ngoặt, tầng nhỏ trong vế trước là 因为…所以… nhân quả.",
+  "tip": "Khi viết câu dài, mỗi tầng chỉ dùng một cặp liên từ — đừng chồng hai cặp cùng lúc trong một vế, dễ rối và sai logic. Viết xong thì đọc lại, tách tầng lớn ra trước rồi mới kiểm tra tầng nhỏ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“Câu phức hai tầng” nghĩa là gì?",
+    "o": [
+     "Câu có hai động từ",
+     "Câu hỏi có hai lựa chọn",
+     "Câu phức lớn chứa câu phức nhỏ trong vế của nó",
+     "Câu có hai chủ ngữ"
+    ],
+    "a": 2,
+    "why": "Hai tầng nghĩa là trong câu phức lớn, một vế lại là một câu phức nhỏ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 虽然天下雨，可是___你带伞，就可以出去玩。",
+    "o": [
+     "只要",
+     "因为",
+     "但是",
+     "所以"
+    ],
+    "a": 0,
+    "why": "Vế nhỏ trong câu là điều kiện 只要…就…: chỉ cần mang ô là có thể ra ngoài chơi."
+   },
+   {
+    "q": "Câu nào SAI về logic tầng?",
+    "o": [
+     "他不但会说中文，而且还会写汉字，可是写得不太好看",
+     "因为他生病了，但是没来上课，所以作业他都写完了",
+     "因为他生病了，所以没来上课，可是作业他都写完了",
+     "如果你明天有空，我们就一起去看电影，要是你没空，我们就改天再去"
+    ],
+    "a": 1,
+    "why": "因为…所以… là một cặp; chen 但是 vào giữa rồi mới 所以 làm rối tầng nhân quả."
+   },
+   {
+    "q": "Trong “因为他生病了，所以没来上课，可是作业他都写完了”, quan hệ tầng lớn là gì?",
+    "o": [
+     "Chuyển ngoặt với 可是",
+     "Nhân quả với 因为",
+     "Điều kiện với 如果",
+     "Lựa chọn với 要么"
+    ],
+    "a": 0,
+    "why": "Tầng lớn là 可是 chuyển ngoặt; 因为…所以… chỉ là tầng nhỏ trong vế trước."
+   },
+   {
+    "q": "Câu nào là câu phức hai tầng?",
+    "o": [
+     "你带伞，就可以出去玩",
+     "虽然天下雨，可是我们不出去",
+     "虽然天下雨，可是只要你带伞，就可以出去玩",
+     "天下雨了"
+    ],
+    "a": 2,
+    "why": "Câu này có tầng lớn 虽然…可是… và tầng nhỏ 只要…就… lồng trong vế sau."
+   },
+   {
+    "q": "Khi phân tích câu phức hai tầng nên làm gì trước?",
+    "o": [
+     "Tách quan hệ lớn trước, rồi tách quan hệ nhỏ trong từng vế",
+     "Đếm số chữ trong câu",
+     "Dịch từng chữ một",
+     "Tìm chủ ngữ trước tiên"
+    ],
+    "a": 0,
+    "why": "Phân tích theo tầng: quan hệ lớn trước, quan hệ nhỏ sau."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-33",
+  "stage": 6,
+  "title": "非…不可 — nhấn mạnh nhất định phải (HSK 6)",
+  "hook": "“这件事非你不可” — việc này nhất định phải là bạn: 非…不可 là cách nhấn mạnh mạnh nhất cho sự bắt buộc, không còn lựa chọn khác.",
+  "examples": [
+   "这件事非你不可，别人做不了。(Zhè jiàn shì fēi nǐ bù kě, biérén zuò bù liǎo.) — Việc này nhất định phải là bạn, người khác không làm được.",
+   "明天我非去不可，谁也拦不住我。(Míngtiān wǒ fēi qù bù kě, shéi yě lán bù zhù wǒ.) — Ngày mai tôi nhất định phải đi, ai cũng không ngăn được tôi.",
+   "他非要把事情问个明白不可。(Tā fēi yào bǎ shìqing wèn ge míngbai bù kě.) — Anh ấy nhất định phải hỏi cho rõ chuyện này mới thôi.",
+   "你非学好中文不可，将来用得上。(Nǐ fēi xué hǎo Zhōngwén bù kě, jiānglái yòng de shàng.) — Bạn nhất định phải học giỏi tiếng Trung, sau này sẽ dùng đến."
+  ],
+  "speak": "这件事非你不可，别人做不了。明天我非去不可，谁也拦不住我。他非要把事情问个明白不可。你非学好中文不可，将来用得上。",
+  "rule": "非…不可 = nhất định phải…, nhấn mạnh sự bắt buộc hoặc quyết tâm không thể khác. 非 đứng trước động từ/cụm động từ (非去, 非你), 不可 đứng cuối câu. Có thể thêm 要/得 để nhấn mạnh hơn: 非要…不可, 非得…不可. Dùng khi người nói quyết tâm hoặc tình thế bắt buộc.",
+  "tip": "Đừng dùng 非…不可 cho lời khuyên nhẹ nhàng — nó rất mạnh, chỉ dùng khi thật sự không còn lựa chọn khác. Và đừng nhầm với 非…不… (không… thì không…), hai mẫu khác nhau.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“这件事非你不可” nghĩa là gì?",
+    "o": [
+     "Việc này không cần bạn",
+     "Việc này bạn không làm được",
+     "Việc này ai cũng làm được",
+     "Việc này nhất định phải là bạn"
+    ],
+    "a": 3,
+    "why": "非…不可 nhấn mạnh bắt buộc: nhất định phải là bạn, không ai khác."
+   },
+   {
+    "q": "Điền vào chỗ trống: 明天我___去不可，谁也拦不住我。",
+    "o": [
+     "别",
+     "非",
+     "不",
+     "没"
+    ],
+    "a": 1,
+    "why": "非…不可 là mẫu cố định: 非去不可 = nhất định phải đi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "明天我非去不可，谁也拦不住我",
+     "他非要把事情问个明白不可",
+     "你非学好中文可不，将来用得上",
+     "这件事非你不可，别人做不了"
+    ],
+    "a": 2,
+    "why": "Thứ tự sai: phải là 非…不可, không nói 非…可不."
+   },
+   {
+    "q": "非要…不可 so với 非…不可 thì sao?",
+    "o": [
+     "Chỉ dùng cho quá khứ",
+     "Nhấn mạnh hơn",
+     "Nhẹ nhàng hơn",
+     "Nghĩa ngược lại"
+    ],
+    "a": 1,
+    "why": "Thêm 要/得 vào giữa làm mẫu càng mạnh hơn: 非要…不可."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 非…不可?",
+    "o": [
+     "你非学好中文可以，将来用得上",
+     "你学好中文非不可，将来用得上",
+     "你非学好中文不，将来用得上",
+     "你非学好中文不可，将来用得上"
+    ],
+    "a": 3,
+    "why": "Cấu trúc đúng là 非 + động từ + 不可: 非学好中文不可."
+   },
+   {
+    "q": "Khi nào KHÔNG nên dùng 非…不可?",
+    "o": [
+     "Khi không ai khác làm được",
+     "Khi chỉ khuyên nhẹ nhàng, còn nhiều lựa chọn",
+     "Khi người nói rất quyết tâm",
+     "Khi tình thế bắt buộc"
+    ],
+    "a": 1,
+    "why": "非…不可 rất mạnh, chỉ dùng khi thật sự không còn lựa chọn khác."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-34",
+  "stage": 6,
+  "title": "×到Y头上来了 / ×就×吧 — chuyện đổ lên đầu… / … thì cứ… đi",
+  "hook": "“麻烦找到他头上来了” — rắc rối tìm đến tận đầu anh ấy: chuyện xấu đã lan tới tận người nào đó, tránh cũng không được; còn ×就×吧 là chấp nhận mọi chuyện như nó vốn là.",
+  "examples": [
+   "麻烦找到他头上来了，他只好自己解决。(Máfan zhǎodào tā tóu shàng lái le, tā zhǐhǎo zìjǐ jiějué.) — Rắc rối tìm đến tận đầu anh ấy, anh ấy đành tự giải quyết.",
+   "这件事都闹到老师头上来了。(Zhè jiàn shì dōu nào dào lǎoshī tóu shàng lái le.) — Chuyện này đã ầm ĩ đến tận thầy giáo rồi.",
+   "算了，错就错了吧，下次注意。(Suàn le, cuò jiù cuò le ba, xià cì zhùyì.) — Thôi, sai thì sai rồi, lần sau chú ý.",
+   "就这样吧，别再吵了。(Jiù zhèyàng ba, bié zài chǎo le.) — Cứ thế đi, đừng cãi nhau nữa."
+  ],
+  "speak": "麻烦找到他头上来了，他只好自己解决。这件事都闹到老师头上来了。算了，错就错了吧，下次注意。就这样吧，别再吵了。",
+  "rule": "×到Y头上来了: chuyện rắc rối (×) đã lan tới tận Y, Y không tránh được nữa, phải đối mặt — × là chuyện xấu (麻烦, 问题), Y là người bị vạ lây. ×就×吧: chấp nhận sự việc như nó vốn là, không cưỡng lại nữa — × lặp lại cùng một từ (错就错了, 去就去了), mang giọng bất đắc dĩ hoặc thoải mái.",
+  "tip": "×到Y头上来了 chỉ dùng cho chuyện xấu/rắc rối, không dùng cho chuyện vui. ×就×吧 thì × phải lặp đúng từ, đừng đổi sang từ khác giữa chừng.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“麻烦找到他头上来了” nghĩa là gì?",
+    "o": [
+     "Rắc rối đã tìm đến tận anh ấy",
+     "Anh ấy đi tìm rắc rối",
+     "Rắc rối đã được giải quyết",
+     "Anh ấy gây ra rắc rối"
+    ],
+    "a": 0,
+    "why": "×到Y头上来了: chuyện xấu đã lan tới tận Y, Y phải đối mặt."
+   },
+   {
+    "q": "Điền vào chỗ trống: 算了，错___错了吧，下次注意。",
+    "o": [
+     "都",
+     "还",
+     "就",
+     "也"
+    ],
+    "a": 2,
+    "why": "错就错了 là mẫu ×就×吧: sai thì sai rồi, chấp nhận thôi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "麻烦找到他头上来了，他只好自己解决",
+     "这件事都闹到老师头上来了",
+     "算了，错就错了吧，下次注意",
+     "好运找到他头上来了，他很高兴"
+    ],
+    "a": 3,
+    "why": "×到Y头上来了 chỉ dùng cho chuyện xấu/rắc rối, không dùng cho chuyện vui như 好运."
+   },
+   {
+    "q": "×就×吧 mang giọng điệu gì?",
+    "o": [
+     "Hỏi ý kiến người khác",
+     "Khen ngợi ai đó",
+     "Chấp nhận, bất đắc dĩ hoặc thoải mái",
+     "Ra lệnh nghiêm khắc"
+    ],
+    "a": 2,
+    "why": "×就×吧 chấp nhận sự việc như nó vốn là, không cưỡng lại nữa."
+   },
+   {
+    "q": "Câu nào đúng với mẫu ×就×吧?",
+    "o": [
+     "去就去了，别后悔",
+     "去就走了，别后悔",
+     "去了就去，别后悔",
+     "去就去走，别后悔"
+    ],
+    "a": 0,
+    "why": "× phải lặp đúng từ: 去就去了."
+   },
+   {
+    "q": "Trong “问题出到我头上来了”, Y là ai?",
+    "o": [
+     "头 — cái đầu",
+     "出 — động từ",
+     "我 — người bị vấn đề đổ lên đầu",
+     "问题 — chuyện xấu"
+    ],
+    "a": 2,
+    "why": "Y trong ×到Y头上来了 là người bị vạ lây, ở đây là 我."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-35",
+  "stage": 6,
+  "title": "×是× / 不×不…，一×… — … thì… nhưng… / không… thì không…, … một cái thì…",
+  "hook": "“这件衣服好是好，就是太贵了” — cái áo này tốt thì tốt, chỉ là đắt quá: thừa nhận một mặt rồi lật sang mặt hạn chế; còn 不看不知道，一看吓一跳 là không làm thì không biết, làm một cái thì giật mình.",
+  "examples": [
+   "这件衣服好是好，就是太贵了。(Zhè jiàn yīfu hǎo shì hǎo, jiùshì tài guì le.) — Cái áo này tốt thì tốt, chỉ là đắt quá.",
+   "他累是累，但是心里很高兴。(Tā lèi shì lèi, dànshì xīn lǐ hěn gāoxìng.) — Anh ấy mệt thì mệt, nhưng trong lòng rất vui.",
+   "不看不知道，一看吓一跳。(Bù kàn bù zhīdào, yī kàn xià yī tiào.) — Không xem thì không biết, xem một cái giật cả mình.",
+   "不问不知道，一问才明白原来是这样。(Bù wèn bù zhīdào, yī wèn cái míngbai yuánlái shì zhèyàng.) — Không hỏi thì không biết, hỏi một cái mới hiểu hóa ra là thế."
+  ],
+  "speak": "这件衣服好是好，就是太贵了。他累是累，但是心里很高兴。不看不知道，一看吓一跳。不问不知道，一问才明白原来是这样。",
+  "rule": "×是×: thừa nhận × là đúng, rồi dùng 就是/但是/可是 chuyển sang mặt hạn chế (好是好，就是太贵了). 不×不…，一×…: vế trước phủ định kép (không làm thì không biết), vế sau 一×… nêu kết quả bất ngờ ngay khi làm (一看吓一跳); động từ hai vế phải là cặp liên quan (看—知道, 问—明白).",
+  "tip": "×是× thì × lặp đúng từ, vế sau thường có 就是/可是/但是. 不×不…，一×… thì động từ hai vế phải liên quan nhau, đừng ghép bừa hai động từ không dính dáng gì.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“好是好，就是太贵了” nghĩa là gì?",
+    "o": [
+     "Tốt hay không cũng đắt",
+     "Tốt thì tốt, chỉ là đắt quá",
+     "Không tốt mà còn đắt",
+     "Vừa tốt vừa rẻ"
+    ],
+    "a": 1,
+    "why": "×是× thừa nhận × là đúng, rồi 就是 chuyển sang mặt hạn chế."
+   },
+   {
+    "q": "Điền vào chỗ trống: 不看不知道，___吓一跳。",
+    "o": [
+     "一听",
+     "一想",
+     "一说",
+     "一看"
+    ],
+    "a": 3,
+    "why": "不看不知道，一看吓一跳 là cặp cố định: 看—知道—看—吓一跳."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这件衣服好是贵，就是太好了",
+     "这件衣服好是好，就是太贵了",
+     "他累是累，但是心里很高兴",
+     "不看不知道，一看吓一跳"
+    ],
+    "a": 0,
+    "why": "×是× thì × phải lặp đúng từ: 好是好, không nói 好是贵."
+   },
+   {
+    "q": "“不问不知道，一问才明白” — vế sau nói điều gì?",
+    "o": [
+     "Không nên hỏi gì cả",
+     "Hỏi cũng không hiểu",
+     "Hỏi xong vẫn chưa biết",
+     "Kết quả bất ngờ ngay khi hỏi"
+    ],
+    "a": 3,
+    "why": "一×… nêu kết quả bất ngờ ngay khi làm: hỏi một cái mới hiểu ra."
+   },
+   {
+    "q": "Câu nào đúng với mẫu ×是×?",
+    "o": [
+     "他累累是，但是心里很高兴",
+     "他累是累，但是心里很高兴",
+     "他累是高兴，但是心里很累",
+     "他是累累，但是心里很高兴"
+    ],
+    "a": 1,
+    "why": "× lặp đúng từ: 累是累, rồi 但是 chuyển sang mặt khác."
+   },
+   {
+    "q": "Trong mẫu 不×不…，一×…, hai động từ ở hai vế phải như thế nào?",
+    "o": [
+     "Hoàn toàn không liên quan",
+     "Phải là hai động từ giống hệt nhau",
+     "Một cái là tính từ, một cái là danh từ",
+     "Là cặp liên quan nhau như 看—知道"
+    ],
+    "a": 3,
+    "why": "Động từ hai vế phải là cặp liên quan: 看—知道, 问—明白."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-36",
+  "stage": 6,
+  "title": "好你个× / 动词+什么（就）是什么 — hay lắm, cái đồ… / … gì là… nấy",
+  "hook": "“好你个小子，敢骗我！” — hay lắm, thằng nhóc này, dám lừa tôi!: 好你个× là câu mắng yêu hay giận dỗi khi bắt quả tang ai đó; còn 说什么就是什么 là nói gì là nấy, không ai lay chuyển được.",
+  "examples": [
+   "好你个小子，敢骗我！(Hǎo nǐ ge xiǎozi, gǎn piàn wǒ!) — Hay lắm, thằng nhóc này, dám lừa tôi!",
+   "好你个小气鬼，连一杯水都舍不得请。(Hǎo nǐ ge xiǎoqìguǐ, lián yī bēi shuǐ dōu shěbude qǐng.) — Hay thật, cái đồ keo kiệt, đến một cốc nước cũng tiếc không mời.",
+   "在我家，想吃什么就吃什么，别客气。(Zài wǒ jiā, xiǎng chī shénme jiù chī shénme, bié kèqi.) — Ở nhà tôi, muốn ăn gì thì ăn nấy, đừng khách sáo.",
+   "他说什么就是什么，谁也说服不了他。(Tā shuō shénme jiù shì shénme, shéi yě shuōfú bù liǎo tā.) — Anh ấy nói gì là nấy, ai cũng không thuyết phục được anh ấy."
+  ],
+  "speak": "好你个小子，敢骗我！好你个小气鬼，连一杯水都舍不得请。在我家，想吃什么就吃什么，别客气。他说什么就是什么，谁也说服不了他。",
+  "rule": "好你个×: 好 + 你个 + danh từ chỉ người (thường mang nghĩa trách mắng thân mật hoặc giận dỗi), dùng khi bắt quả tang ai làm chuyện gì đó. 动词+什么（就）是什么: động từ + 什么 + (就) + động từ lặp lại — muốn gì được nấy, nói gì là nấy, nhấn mạnh sự tùy ý hoặc tuyệt đối.",
+  "tip": "好你个× có thể là giận thật hoặc đùa thân mật, nghe ngữ điệu mới biết — đừng dịch cứng thành câu chửi. 动词+什么… thì động từ lặp lại phải giống hệt động từ đầu (想吃…就吃…, 说…就是…).",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“好你个小子，敢骗我！” — người nói đang làm gì?",
+    "o": [
+     "Hỏi thằng bé tên gì",
+     "Nhờ thằng bé giúp đỡ",
+     "Trách mắng khi bắt quả tang bị lừa",
+     "Khen thằng bé thông minh"
+    ],
+    "a": 2,
+    "why": "好你个× dùng khi bắt quả tang ai làm chuyện gì, mang nghĩa trách mắng hoặc giận dỗi."
+   },
+   {
+    "q": "Điền vào chỗ trống: 在我家，想吃什么___吃什么，别客气。",
+    "o": [
+     "就",
+     "也",
+     "都",
+     "还"
+    ],
+    "a": 0,
+    "why": "想吃什么就吃什么: muốn ăn gì thì ăn nấy — 就 nối hai vế lặp động từ."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他说什么就是什么，谁也说服不了他",
+     "好你个小子，敢很骗我",
+     "好你个小子，敢骗我",
+     "好你个小气鬼，连一杯水都舍不得请"
+    ],
+    "a": 1,
+    "why": "敢骗我 là cụm đúng; chen 很 vào giữa 敢 và 骗 làm sai cấu trúc."
+   },
+   {
+    "q": "“他说什么就是什么” nghĩa là gì?",
+    "o": [
+     "Anh ấy nói gì là nấy, không ai lay chuyển được",
+     "Anh ấy nói rất nhiều",
+     "Anh ấy nói gì cũng sai",
+     "Anh ấy không chịu nói gì"
+    ],
+    "a": 0,
+    "why": "说什么就是什么 nhấn mạnh tuyệt đối: nói gì là nấy."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 动词+什么（就）是什么?",
+    "o": [
+     "想吃就什么吃什么",
+     "想什么吃就吃什么",
+     "想吃什么就吃什么",
+     "想吃什么就喝什么"
+    ],
+    "a": 2,
+    "why": "Động từ lặp lại phải giống hệt động từ đầu: 想吃…就吃…."
+   },
+   {
+    "q": "好你个× dùng trong hoàn cảnh nào?",
+    "o": [
+     "Khi bắt quả tang ai làm chuyện gì",
+     "Khi gặp người lạ lần đầu",
+     "Khi viết thư trang trọng",
+     "Khi hỏi đường"
+    ],
+    "a": 0,
+    "why": "好你个× là câu cảm thán khi bắt quả tang, giận dỗi hoặc đùa thân mật."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-37",
+  "stage": 6,
+  "title": "早（也）不×，晚（也）不× / 看／瞧把+宾语+×得 — sớm không… muộn không… / xem cái vẻ…",
+  "hook": "“早不下雨，晚不下雨，偏偏出门的时候下” — sớm không mưa, muộn không mưa, đúng lúc ra khỏi nhà lại mưa: mẫu này trách sự trùng hợp oái oăm; còn 瞧把他高兴得 là xem anh ấy vui chưa kìa.",
+  "examples": [
+   "早不下雨，晚不下雨，偏偏出门的时候下。(Zǎo bù xià yǔ, wǎn bù xià yǔ, piānpiān chūmén de shíhou xià.) — Sớm không mưa, muộn không mưa, đúng lúc ra khỏi nhà lại mưa.",
+   "他早不来，晚不来，偏偏我刚走他就来了。(Tā zǎo bù lái, wǎn bù lái, piānpiān wǒ gāng zǒu tā jiù lái le.) — Anh ấy sớm không đến, muộn không đến, đúng lúc tôi vừa đi thì anh ấy đến.",
+   "瞧把他高兴得，嘴都合不上了。(Qiáo bǎ tā gāoxìng de, zuǐ dōu hé bù shàng le.) — Xem anh ấy vui chưa kìa, miệng cười không khép lại được.",
+   "看把你累得，快去休息吧。(Kàn bǎ nǐ lèi de, kuài qù xiūxi ba.) — Xem cậu mệt chưa kìa, mau đi nghỉ đi."
+  ],
+  "speak": "早不下雨，晚不下雨，偏偏出门的时候下。他早不来，晚不来，偏偏我刚走他就来了。瞧把他高兴得，嘴都合不上了。看把你累得，快去休息吧。",
+  "rule": "早（也）不×，晚（也）不×: trách móc sự trùng hợp oái oăm — đáng ra sớm hay muộn đều được, lại đúng lúc tệ nhất mới xảy ra; thường thêm 偏偏 ở vế sau. 看/瞧把+宾语+×得: cảm thán về trạng thái của ai đó quá mức — 看/瞧 mở đầu, 把 + người, × là tính từ chỉ trạng thái (高兴/累/忙), 得 mở ra bổ ngữ mức độ.",
+  "tip": "早…晚… chỉ dùng khi sự việc xảy ra đúng lúc gây khó chịu, không dùng cho chuyện vui đúng lúc. 看/瞧把…×得 thì × phải là tính từ chỉ trạng thái, không phải động từ thường.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“早不下雨，晚不下雨，偏偏出门的时候下” nghĩa là gì?",
+    "o": [
+     "Trời mưa rất to",
+     "Không muốn ra khỏi nhà nữa",
+     "Mưa sớm hơn dự định",
+     "Mưa rơi đúng lúc ra khỏi nhà, thật oái oăm"
+    ],
+    "a": 3,
+    "why": "早…晚… trách sự trùng hợp oái oăm: sớm hay muộn đều được, lại đúng lúc ra khỏi nhà mới mưa."
+   },
+   {
+    "q": "Điền vào chỗ trống: 瞧把他___得，嘴都合不上了。",
+    "o": [
+     "看书",
+     "高兴",
+     "跑步",
+     "吃饭"
+    ],
+    "a": 1,
+    "why": "看/瞧把…×得 thì × phải là tính từ chỉ trạng thái như 高兴, không phải động từ thường."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "他早不来，晚不来，偏偏我刚走他就来了",
+     "瞧把他高兴得，嘴都合不上了",
+     "早不下雨，晚不下雨，偏偏出门的时候很高兴",
+     "早不下雨，晚不下雨，偏偏出门的时候下"
+    ],
+    "a": 2,
+    "why": "Vế sau của 早…晚… phải là sự việc xảy ra (下雨), không phải trạng thái 高兴."
+   },
+   {
+    "q": "偏偏 trong mẫu 早…晚… có tác dụng gì?",
+    "o": [
+     "Nối hai việc cùng lúc",
+     "Nhấn mạnh sự trùng hợp oái oăm, đúng lúc tệ nhất",
+     "Chỉ thời gian chính xác",
+     "Hỏi lại cho chắc"
+    ],
+    "a": 1,
+    "why": "偏偏 nhấn mạnh: lại đúng lúc đó mới xảy ra, thật oái oăm."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 看把+宾语+×得?",
+    "o": [
+     "看把你跑步得，快去休息吧",
+     "看你把累得，快去休息吧",
+     "看把累你得，快去休息吧",
+     "看把你累得，快去休息吧"
+    ],
+    "a": 3,
+    "why": "Cấu trúc đúng: 看 + 把 + người + tính từ + 得 + bổ ngữ mức độ."
+   },
+   {
+    "q": "早（也）不×，晚（也）不× KHÔNG dùng cho trường hợp nào?",
+    "o": [
+     "Trời mưa đúng lúc ra ngoài",
+     "Chuyện vui xảy ra đúng lúc",
+     "Chuyện xấu xảy ra đúng lúc tệ",
+     "Ai đó đến muộn"
+    ],
+    "a": 1,
+    "why": "Mẫu này trách sự trùng hợp gây khó chịu, không dùng cho chuyện vui đúng lúc."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-38",
+  "stage": 6,
+  "title": "放着×不Y / ×来×去，都是/就是… — có… mà không dùng… / … tới… lui cũng chỉ là…",
+  "hook": "“放着近路不走，偏要走远路” — có đường gần không đi, lại cứ đi đường xa: mẫu này tiếc hoặc trách vì có sẵn thứ tốt mà không dùng; còn 想来想去，都是一个办法 là nghĩ tới nghĩ lui cũng chỉ có một cách.",
+  "examples": [
+   "放着近路不走，偏要走远路。(Fàng zhe jìn lù bù zǒu, piān yào zǒu yuǎn lù.) — Có đường gần không đi, lại cứ đi đường xa.",
+   "放着新衣服不穿，天天穿那件旧的。(Fàng zhe xīn yīfu bù chuān, tiāntiān chuān nà jiàn jiù de.) — Có áo mới không mặc, ngày nào cũng mặc cái cũ.",
+   "他想来想去，都是一个办法。(Tā xiǎng lái xiǎng qù, dōu shì yī ge bànfǎ.) — Anh ấy nghĩ tới nghĩ lui cũng chỉ có một cách.",
+   "说来说去，就是要我多练习。(Shuō lái shuō qù, jiùshì yào wǒ duō liànxí.) — Nói tới nói lui cũng chỉ là muốn tôi luyện tập nhiều hơn."
+  ],
+  "speak": "放着近路不走，偏要走远路。放着新衣服不穿，天天穿那件旧的。他想来想去，都是一个办法。说来说去，就是要我多练习。",
+  "rule": "放着×不Y: 放着 + thứ tốt/sẵn có (×) + 不 + Y (việc đáng ra làm) — có sẵn mà không dùng, mang ý trách móc hoặc tiếc nuối. ×来×去，都是/就是…: động từ lặp lại với 来/去 (想来想去, 说来说去) rồi kết luận 都是/就是… — dù làm đi làm lại, kết quả vẫn chỉ là một.",
+  "tip": "放着×不Y thì × phải là thứ có lợi/sẵn có, Y là hành động bị bỏ qua. ×来×去 thì động từ phải lặp đúng, 都是/就是 sau đó là kết luận duy nhất, đừng thêm kết luận thứ hai.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“放着近路不走，偏要走远路” nghĩa là gì?",
+    "o": [
+     "Có đường gần không đi, lại đi đường xa",
+     "Không có đường gần nên đi đường xa",
+     "Đường gần và đường xa giống nhau",
+     "Đi đường xa nhanh hơn đường gần"
+    ],
+    "a": 0,
+    "why": "放着×不Y: có sẵn thứ tốt (×) mà không dùng, lại làm Y."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他想来想去，___是一个办法。",
+    "o": [
+     "就",
+     "还",
+     "都",
+     "也"
+    ],
+    "a": 2,
+    "why": "想来想去，都是一个办法: nghĩ tới nghĩ lui cũng chỉ có một cách."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "放着近路不走，偏要走远路",
+     "放着新衣服不穿，天天穿那件旧的",
+     "他想来想去，都是一个办法",
+     "放着远路不走，偏要走近路"
+    ],
+    "a": 3,
+    "why": "× trong 放着×不Y phải là thứ tốt/sẵn có (近路), không phải thứ xấu (远路)."
+   },
+   {
+    "q": "“说来说去，就是要我多练习” — người nói muốn kết luận điều gì?",
+    "o": [
+     "Muốn tôi nói nhiều hơn",
+     "Không biết muốn tôi làm gì",
+     "Nói mãi cũng chỉ là muốn tôi luyện tập nhiều hơn",
+     "Muốn tôi đừng luyện tập nữa"
+    ],
+    "a": 2,
+    "why": "×来×去，就是…: dù nói đi nói lại, kết luận vẫn chỉ là một."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 放着×不Y?",
+    "o": [
+     "放着新衣服不穿，天天穿那件旧的",
+     "放着旧衣服不穿，天天穿新衣服",
+     "放着新衣服穿，天天穿那件旧的",
+     "放着新衣服不穿，天天不穿那件旧的"
+    ],
+    "a": 0,
+    "why": "放着 + thứ tốt (新衣服) + 不 + việc đáng ra làm (穿)."
+   },
+   {
+    "q": "Trong mẫu ×来×去，都是/就是…, động từ phải như thế nào?",
+    "o": [
+     "Chỉ dùng động từ hai âm tiết",
+     "Động từ nào cũng được",
+     "Lặp đúng từ, đi với 来/去",
+     "Hai động từ khác nhau"
+    ],
+    "a": 2,
+    "why": "Động từ lặp đúng với 来/去: 想来想去, 说来说去."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-39",
+  "stage": 6,
+  "title": "×了就×了，（没）有… — … rồi thì… rồi, (chẳng) có…",
+  "hook": "“丢了就丢了，没什么大不了的” — mất thì mất rồi, có gì to tát đâu: mẫu này chấp nhận chuyện đã xảy ra, không tiếc nuối, không cưỡng lại nữa.",
+  "examples": [
+   "丢了就丢了，没什么大不了的。(Diū le jiù diū le, méi shénme dà bù liǎo de.) — Mất thì mất rồi, có gì to tát đâu.",
+   "错了就错了，有什么好怕的？(Cuò le jiù cuò le, yǒu shénme hǎo pà de?) — Sai thì sai rồi, có gì mà sợ?",
+   "他走了就走了，没有人会想他。(Tā zǒu le jiù zǒu le, méiyǒu rén huì xiǎng tā.) — Anh ấy đi thì đi rồi, chẳng ai nhớ anh ấy đâu.",
+   "坏了就坏了，有修的必要吗？(Huài le jiù huài le, yǒu xiū de bìyào ma?) — Hỏng thì hỏng rồi, có cần sửa nữa không?"
+  ],
+  "speak": "丢了就丢了，没什么大不了的。错了就错了，有什么好怕的？他走了就走了，没有人会想他。坏了就坏了，有修的必要吗？",
+  "rule": "×了就×了: chấp nhận sự việc đã xảy ra, không tiếc nuối hay cưỡng lại; × lặp lại cùng một động từ/tính từ đã xảy ra (丢了就丢了, 错了就错了). Vế sau （没）有… đưa ra đánh giá — 没什么大不了的 (chẳng sao cả) hoặc 有什么… (có gì đâu mà…), mang giọng buông xuôi, thản nhiên.",
+  "tip": "Mẫu này chỉ dùng cho việc đã xảy ra và không đổi được nữa; đừng dùng cho việc còn có thể sửa — nghe sẽ thành bỏ cuộc quá sớm.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“丢了就丢了，没什么大不了的” nghĩa là gì?",
+    "o": [
+     "Phải tìm lại cho bằng được",
+     "Mất thì mất rồi, chẳng sao cả",
+     "Chưa mất, còn tìm được",
+     "Mất rồi nên rất buồn"
+    ],
+    "a": 1,
+    "why": "×了就×了 chấp nhận việc đã xảy ra; 没什么大不了的 = chẳng sao cả."
+   },
+   {
+    "q": "Điền vào chỗ trống: 错了___错了，有什么好怕的？",
+    "o": [
+     "也",
+     "都",
+     "还",
+     "就"
+    ],
+    "a": 3,
+    "why": "错了就错了 là mẫu cố định: sai thì sai rồi."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "丢了就找了，没什么大不了的",
+     "丢了就丢了，没什么大不了的",
+     "错了就错了，有什么好怕的",
+     "他走了就走了，没有人会想他"
+    ],
+    "a": 0,
+    "why": "× phải lặp đúng từ: 丢了就丢了, không nói 丢了就找了."
+   },
+   {
+    "q": "Vế sau “有什么好怕的？” có tác dụng gì?",
+    "o": [
+     "Hỏi thật sự sợ cái gì",
+     "Ra lệnh đừng sợ",
+     "Khen người ta dũng cảm",
+     "Đánh giá: có gì đâu mà sợ"
+    ],
+    "a": 3,
+    "why": "有什么… là câu hỏi tu từ đưa ra đánh giá: có gì đâu mà sợ."
+   },
+   {
+    "q": "Câu nào đúng với mẫu ×了就×了?",
+    "o": [
+     "坏了坏了，有修的必要吗",
+     "坏了就坏了，有修的必要吗",
+     "坏了就修了，有修的必要吗",
+     "坏就坏了，有修的必要吗"
+    ],
+    "a": 1,
+    "why": "Cấu trúc đúng: ×了就×了 — 坏了就坏了."
+   },
+   {
+    "q": "Khi nào KHÔNG nên dùng mẫu ×了就×了?",
+    "o": [
+     "Khi việc đã xảy ra không đổi được",
+     "Khi muốn tỏ ra thản nhiên",
+     "Khi chuyện đã qua rồi",
+     "Khi việc còn có thể sửa được"
+    ],
+    "a": 3,
+    "why": "Mẫu này chỉ dùng cho việc đã xảy ra và không đổi được; việc còn sửa được mà dùng sẽ thành bỏ cuộc quá sớm."
+   }
+  ]
+ },
+ {
+  "id": "v218-l6-40",
+  "stage": 6,
+  "title": "这／那也不×，那／这也不Y — cái này cũng không…, cái kia cũng không…",
+  "hook": "“这也不吃，那也不吃，你到底想吃什么？” — cái này cũng không ăn, cái kia cũng không ăn, rốt cuộc bạn muốn ăn gì?: mẫu này liệt kê hai lựa chọn đều bị chê, không cái nào được.",
+  "examples": [
+   "这也不吃，那也不吃，你到底想吃什么？(Zhè yě bù chī, nà yě bù chī, nǐ dàodǐ xiǎng chī shénme?) — Cái này cũng không ăn, cái kia cũng không ăn, rốt cuộc bạn muốn ăn gì?",
+   "这件也不合适，那件也不合适，买衣服真难。(Zhè jiàn yě bù héshì, nà jiàn yě bù héshì, mǎi yīfu zhēn nán.) — Cái này cũng không vừa, cái kia cũng không vừa, mua quần áo khó thật.",
+   "这个办法也不行，那个办法也不行，得再想想。(Zhège bànfǎ yě bù xíng, nàge bànfǎ yě bù xíng, děi zài xiǎngxiang.) — Cách này cũng không được, cách kia cũng không được, phải nghĩ thêm thôi.",
+   "这也不对，那也不对，你到底要我怎么样？(Zhè yě bù duì, nà yě bù duì, nǐ dàodǐ yào wǒ zěnmeyàng?) — Cái này cũng không đúng, cái kia cũng không đúng, rốt cuộc bạn muốn tôi thế nào?"
+  ],
+  "speak": "这也不吃，那也不吃，你到底想吃什么？这件也不合适，那件也不合适，买衣服真难。这个办法也不行，那个办法也不行，得再想想。这也不对，那也不对，你到底要我怎么样？",
+  "rule": "这/那 + 也 + 不 + ×, 那/这 + 也 + 不 + Y: liệt kê hai lựa chọn đều bị phủ định, nhấn mạnh không cái nào được. 也 không được bỏ — bỏ 也 câu thành phủ định thường, mất nghĩa “cả hai đều không”. Hai vế phải song song (cùng động từ hoặc cùng tính từ); vế sau thường đổi 这↔那 để chỉ cái còn lại.",
+  "tip": "Đừng bỏ 也: “这不吃，那不吃” chỉ là hai phủ định thường, còn “这也不吃，那也不吃” mới nhấn mạnh cả hai đều không được. Và hai vế phải song song, đừng ghép động từ với tính từ.",
+  "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
+  "quiz": [
+   {
+    "q": "“这也不吃，那也不吃” nghĩa là gì?",
+    "o": [
+     "Cái này không ăn, cái kia ăn",
+     "Cả hai cái đều ăn",
+     "Cái này cũng không ăn, cái kia cũng không ăn",
+     "Cái này ăn, cái kia không ăn"
+    ],
+    "a": 2,
+    "why": "这/那 + 也 + 不 + 动词: cả hai lựa chọn đều bị phủ định."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这个办法___，那个办法也不行，得再想想。",
+    "o": [
+     "也不行",
+     "不行",
+     "也行",
+     "不行也"
+    ],
+    "a": 0,
+    "why": "Mẫu cần 也 + 不 ở cả hai vế: 这个办法也不行，那个办法也不行."
+   },
+   {
+    "q": "Câu nào SAI?",
+    "o": [
+     "这个办法也不行，那个办法也不行，得再想想",
+     "这不吃，那也不吃，你到底想吃什么",
+     "这也不吃，那也不吃，你到底想吃什么",
+     "这件也不合适，那件也不合适，买衣服真难"
+    ],
+    "a": 1,
+    "why": "Vế trước thiếu 也: phải nói 这也不吃, không nói 这不吃."
+   },
+   {
+    "q": "也 trong mẫu này có tác dụng gì?",
+    "o": [
+     "Nhấn mạnh cả hai lựa chọn đều không được",
+     "Chỉ thời gian",
+     "Nối hai câu hỏi",
+     "Nhấn mạnh số lượng"
+    ],
+    "a": 0,
+    "why": "也 là linh hồn của mẫu: bỏ 也 thì mất nghĩa cả hai đều không."
+   },
+   {
+    "q": "Câu nào đúng với mẫu 这/那也不×，那/这也不Y?",
+    "o": [
+     "这也不对，那对，你到底要我怎么样",
+     "这对，那也不对，你到底要我怎么样",
+     "这也不对，那也不对，你到底要我怎么样",
+     "这不对，那也不对，你到底要我怎么样"
+    ],
+    "a": 2,
+    "why": "Cả hai vế đều cần 也 + 不: 这也不对，那也不对."
+   },
+   {
+    "q": "Hai vế trong mẫu này phải như thế nào?",
+    "o": [
+     "Song song, cùng động từ hoặc cùng tính từ",
+     "Hoàn toàn khác nhau",
+     "Một vế khẳng định, một vế phủ định",
+     "Không có yêu cầu gì"
+    ],
+    "a": 0,
+    "why": "Hai vế phải song song, cùng loại: cùng động từ (吃—吃) hoặc cùng tính từ (对—对)."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-18",
+  "stage": 2,
+  "title": "基本结构类型 — 5 kiểu cụm từ",
+  "hook": "“我和他去北京上海买新衣服，听清楚再进教室。” — Trong một câu đã có cụm song song, cụm chính-phụ, cụm động-tân và cụm động-bổ.",
+  "examples": [
+   "我和他一起去北京上海旅游。(Wǒ hé tā yīqǐ qù Běijīng Shànghǎi lǚyóu.) — Tôi và anh ấy cùng đi du lịch Bắc Kinh, Thượng Hải.",
+   "我买了一件新衣服，在学校的图书馆里认真学习。(Wǒ mǎi le yī jiàn xīn yīfu, zài xuéxiào de túshūguǎn lǐ rènzhēn xuéxí.) — Tôi mua một chiếc áo mới, rồi học tập chăm chỉ trong thư viện của trường.",
+   "我喜欢学习中文，每天吃水果，还走进教室听清楚老师的话。(Wǒ xǐhuan xuéxí Zhōngwén, měitiān chī shuǐguǒ, hái zǒu jìn jiàoshì tīng qīngchu lǎoshī de huà.) — Tôi thích học tiếng Trung, mỗi ngày ăn hoa quả, còn bước vào lớp nghe rõ lời thầy.",
+   "教室很大，学习认真，我休息一下再走。(Jiàoshì hěn dà, xuéxí rènzhēn, wǒ xiūxi yīxià zài zǒu.) — Phòng học rất rộng, học tập nghiêm túc, tôi nghỉ một lát rồi đi."
+  ],
+  "speak": "我和他一起去北京上海旅游。我买了一件新衣服，在学校的图书馆里认真学习。我喜欢学习中文，每天吃水果，还走进教室听清楚老师的话。教室很大，学习认真，我休息一下再走。",
+  "rule": "Cụm từ là nhóm từ kết hợp với nhau nhưng chưa thành câu hoàn chỉnh, có thể làm chủ ngữ, vị ngữ, tân ngữ, định ngữ, trạng ngữ hoặc bổ ngữ trong câu. Có 5 kiểu cấu tạo cơ bản: 联合短语 — hai thành phần song song, ngang hàng (北京上海, 我和他, 又大又干净); 偏正短语 — thành phần bổ nghĩa đứng trước, thành phần trung tâm đứng sau (新衣服, 学校的图书馆, 认真学习); 动宾短语 — động từ + tân ngữ (买东西, 吃水果, 学习中文); 动补短语 — động từ + bổ ngữ nói kết quả, phương hướng hay mức độ (听清楚, 走来, 说得很高兴); 主谓短语 — chủ ngữ + vị ngữ (我休息, 他出国, 教室很大). Nhận diện kiểu cụm bằng cách hỏi: hai phần có ngang hàng không, phần nào là trung tâm, phần sau là tân ngữ hay bổ ngữ.",
+  "tip": "Người Việt hay nhầm 动补短语 với 动宾短语: trong 听清楚 thì 清楚 là bổ ngữ nói kết quả nghe rõ, không phải tân ngữ — không nói “听清楚音乐” như một cụm động-tân; muốn nói tân ngữ thì dùng 听音乐, muốn nói kết quả thì dùng 听清楚这首歌.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“偏正短语” là cụm gì?",
+    "o": [
+     "Cụm chính-phụ: thành phần bổ nghĩa + thành phần trung tâm",
+     "Cụm động từ + tân ngữ",
+     "Cụm chủ ngữ + vị ngữ",
+     "Cụm hai động từ liền nhau"
+    ],
+    "a": 0,
+    "why": "偏正短语 gồm phần bổ nghĩa đứng trước và phần trung tâm đứng sau, như 新衣服 (áo mới), 认真学习."
+   },
+   {
+    "q": "Điền vào chỗ trống: 他每天早上___，身体很好。",
+    "o": [
+     "新衣服",
+     "买东西",
+     "吃水果",
+     "听清楚"
+    ],
+    "a": 2,
+    "why": "吃水果 là cụm động-tân, hợp nghĩa “ăn hoa quả mỗi sáng”; các lựa chọn khác không làm vị ngữ được ở đây."
+   },
+   {
+    "q": "Câu nào dùng cụm từ SAI?",
+    "o": [
+     "我和他是好朋友。",
+     "他买东西去了。",
+     "教室很大，学习认真。",
+     "我吃清楚水果。"
+    ],
+    "a": 3,
+    "why": "清楚 là bổ ngữ nói kết quả, không đi sau 吃 theo kiểu này; nói đúng là 吃水果 hoặc 把水果吃完."
+   },
+   {
+    "q": "“动补短语” gồm những gì?",
+    "o": [
+     "Động từ + tân ngữ",
+     "Động từ + bổ ngữ",
+     "Chủ ngữ + vị ngữ",
+     "Hai từ song song"
+    ],
+    "a": 1,
+    "why": "动补短语 là động từ + bổ ngữ, như 听清楚 (nghe rõ), 走来 (đi tới)."
+   },
+   {
+    "q": "Cụm “学习认真” thuộc loại nào?",
+    "o": [
+     "联合短语",
+     "动宾短语",
+     "主谓短语",
+     "偏正短语"
+    ],
+    "a": 2,
+    "why": "学习认真 có chủ ngữ 学习 và vị ngữ 认真 nên là cụm chủ-vị."
+   },
+   {
+    "q": "Trong câu “他说得很高兴”, cụm 动补 là gì?",
+    "o": [
+     "说得很高兴",
+     "他说",
+     "很高兴",
+     "他很高兴"
+    ],
+    "a": 0,
+    "why": "说得很高兴 là động từ 说 + bổ ngữ mức độ 得很高兴, đúng cấu tạo động-bổ."
+   }
+  ]
+ },
+ {
+  "id": "v218-l2-19",
+  "stage": 2,
+  "title": "其他结构类型 1 — cụm chữ 的 / cụm liên vị",
+  "hook": "“他买的是我的，我去买东西，哭着说。” — Cụm chữ 的 và cụm liên vị: hai kiểu cụm mới giúp câu ngắn mà nói được nhiều việc.",
+  "examples": [
+   "这件黑色的外套是我的，你喜欢吗？(Zhè jiàn hēisè de wàitào shì wǒ de, nǐ xǐhuan ma?) — Cái áo khoác màu đen này là của tôi, bạn có thích không?",
+   "他买的那本书很好看，我也想买一本。(Tā mǎi de nà běn shū hěn hǎokàn, wǒ yě xiǎng mǎi yī běn.) — Quyển sách anh ấy mua rất hay, tôi cũng muốn mua một quyển.",
+   "我去图书馆借书，回来再告诉你。(Wǒ qù túshūguǎn jiè shū, huílai zài gàosu nǐ.) — Tôi đi thư viện mượn sách, về rồi kể cho bạn nghe.",
+   "她哭着说今天很累，想早点回家。(Tā kū zhe shuō jīntiān hěn lèi, xiǎng zǎo diǎn huí jiā.) — Cô ấy vừa khóc vừa nói hôm nay rất mệt, muốn về nhà sớm."
+  ],
+  "speak": "这件黑色的外套是我的，你喜欢吗？他买的那本书很好看，我也想买一本。我去图书馆借书，回来再告诉你。她哭着说今天很累，想早点回家。",
+  "rule": "“的”字短语 là cụm do danh từ, đại từ, động từ hoặc tính từ + 的 tạo thành, dùng như một danh từ: làm chủ ngữ, tân ngữ hoặc định ngữ (我的 là “cái của tôi”, 黑色的 là “cái màu đen”, 他买的 là “cái anh ấy mua”). 连谓短语 là cụm có hai động từ (hoặc cụm động từ) liền nhau, chung một chủ ngữ, diễn tả hai hành động liên tiếp hoặc đồng thời (去买东西, 哭着说, 坐飞机去北京). Chú ý: 连谓短语 chỉ là một CỤM, làm thành phần (thường là vị ngữ) trong câu — khác với 连动句 là một LOẠI CÂU có hai vị ngữ động từ, sẽ học ở điểm 二57.",
+  "tip": "Người Việt hay dịch “吃的” thành “ăn” — sai: 吃的 là cụm chữ 的, nghĩa “đồ ăn, thứ để ăn”. Và đừng chèn 和 giữa hai động từ của cụm liên vị: nói 去买东西, không nói “去和买东西”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“的”字短语 là gì?",
+    "o": [
+     "Cụm do danh từ/động từ + 的 tạo thành, dùng như danh từ",
+     "Cụm hai động từ liền nhau",
+     "Cụm giới từ + tân ngữ",
+     "Cụm chủ ngữ + vị ngữ"
+    ],
+    "a": 0,
+    "why": "“的”字短语 gắn 的 sau danh từ, đại từ hay động từ và dùng như danh từ, như 我的, 他买的."
+   },
+   {
+    "q": "Điền vào chỗ trống: 这本书是___，不是你的。",
+    "o": [
+     "去买",
+     "我的",
+     "哭着",
+     "很好"
+    ],
+    "a": 1,
+    "why": "Chỗ trống cần một cụm chữ 的 làm vị ngữ chỉ sở hữu: 是我的 (là của tôi)."
+   },
+   {
+    "q": "Câu nào dùng cụm từ SAI?",
+    "o": [
+     "我去买东西。",
+     "他哭着说。",
+     "这是吃的，你尝尝。",
+     "我去和买东西。"
+    ],
+    "a": 3,
+    "why": "Cụm liên vị không chèn 和 giữa hai động từ; nói đúng là 我去买东西."
+   },
+   {
+    "q": "Cụm “去图书馆借书” thuộc loại nào?",
+    "o": [
+     "“的”字短语",
+     "连谓短语",
+     "动宾短语",
+     "主谓短语"
+    ],
+    "a": 1,
+    "why": "去图书馆借书 có hai động từ 去 và 借 chung chủ ngữ, diễn tả hai hành động liên tiếp nên là cụm liên vị."
+   },
+   {
+    "q": "“吃的” trong câu “这是吃的” nghĩa là gì?",
+    "o": [
+     "Đang ăn",
+     "Ăn xong rồi",
+     "Đồ ăn / thứ để ăn",
+     "Muốn ăn"
+    ],
+    "a": 2,
+    "why": "吃的 là cụm chữ 的, dùng như danh từ chỉ “đồ ăn, thứ để ăn”, không phải động từ 吃."
+   },
+   {
+    "q": "连谓短语 khác 连动句 ở điểm nào?",
+    "o": [
+     "连谓短语 là cụm, làm thành phần trong câu; 连动句 là một loại câu",
+     "连谓短语 là câu, 连动句 là cụm",
+     "Hai cái giống nhau hoàn toàn",
+     "连谓短语 chỉ có một động từ"
+    ],
+    "a": 0,
+    "why": "连谓短语 là cụm từ, làm vị ngữ trong câu; 连动句 là cả một câu có hai vị ngữ động từ (điểm 二57)."
+   }
+  ]
+ },
+ {
+  "id": "v218-l3-13",
+  "stage": 3,
+  "title": "其他结构类型 2 — cụm giới-tân / phương vị / kiêm ngữ / đồng vị",
+  "hook": "“老师请他进来，我的朋友小张在桌子上边放了一本书。” — Cụm kiêm ngữ, cụm đồng vị, cụm phương vị: ba kiểu cụm giúp câu nói rõ ai làm gì ở đâu.",
+  "examples": [
+   "我在房间里看书，按照规定不能大声说话。(Wǒ zài fángjiān lǐ kàn shū, ànzhào guīdìng bù néng dà shēng shuō huà.) — Tôi đọc sách trong phòng, theo quy định thì không được nói to.",
+   "书在桌子上边，学校在东边，你起床后去找他。(Shū zài zhuōzi shàngbian, xuéxiào zài dōngbian, nǐ qǐchuáng hòu qù zhǎo tā.) — Sách ở trên bàn, trường ở phía đông, bạn dậy rồi đi tìm anh ấy.",
+   "老师请他进来，通知他明天开会。(Lǎoshī qǐng tā jìnlai, tōngzhī tā míngtiān kāi huì.) — Thầy mời anh ấy vào, thông báo cho anh ấy ngày mai họp.",
+   "我的朋友小张喜欢游泳这种运动，每周都去三次。(Wǒ de péngyou Xiǎo Zhāng xǐhuan yóuyǒng zhè zhǒng yùndòng, měi zhōu dōu qù sān cì.) — Bạn tôi Tiểu Trương thích môn bơi lội, mỗi tuần đi ba lần."
+  ],
+  "speak": "我在房间里看书，按照规定不能大声说话。书在桌子上边，学校在东边，你起床后去找他。老师请他进来，通知他明天开会。我的朋友小张喜欢游泳这种运动，每周都去三次。",
+  "rule": "介宾短语 là giới từ + tân ngữ (在房间, 从前边, 按照规定), thường làm trạng ngữ chỉ nơi chốn, thời gian hay cách thức. 方位短语 là danh từ + từ chỉ phương vị (教室里, 桌子上边, 起床后), chỉ vị trí hoặc thời điểm. 兼语短语 là động từ + danh từ, danh từ ấy vừa là tân ngữ của động từ trước, vừa là chủ ngữ của động từ sau (请他进来, 叫他上车, 通知他开会). 同位短语 là hai thành phần cùng chỉ một người hay một vật, phần sau giải thích phần trước (我的朋友小张, 他妈妈李老师, 游泳这种运动). Chú ý: 兼语短语 chỉ là một CỤM, làm thành phần trong câu — khác với 兼语句 là một LOẠI CÂU, sẽ học ở điểm 三57.",
+  "tip": "Người Việt hay quên từ chỉ phương vị đứng SAU danh từ: nói 在房间里、起床后, không nói “在里房间” hay “后起床”. Với cụm kiêm ngữ, đừng lặp chủ ngữ ở giữa: nói 请他进来, không nói “请他他进来”.",
+  "note": "Nhãn HSK là mức đặt theo trình độ.",
+  "quiz": [
+   {
+    "q": "“兼语短语” là cụm gì?",
+    "o": [
+     "Cụm có một danh từ vừa làm tân ngữ của động từ trước, vừa làm chủ ngữ của động từ sau",
+     "Cụm giới từ + tân ngữ",
+     "Cụm hai danh từ cùng chỉ một người/vật",
+     "Cụm danh từ + từ chỉ phương vị"
+    ],
+    "a": 0,
+    "why": "Trong 请他进来, 他 vừa là tân ngữ của 请, vừa là chủ ngữ của 进来 — đó là kiêm ngữ."
+   },
+   {
+    "q": "Điền vào chỗ trống: 老师___明天开会。",
+    "o": [
+     "在房间",
+     "通知他",
+     "我的朋友",
+     "桌子上边"
+    ],
+    "a": 1,
+    "why": "通知他 là cụm kiêm ngữ: 老师通知他 (thầy thông báo cho anh ấy) + 他开会 (anh ấy họp)."
+   },
+   {
+    "q": "Câu nào dùng cụm từ SAI?",
+    "o": [
+     "请他进来。",
+     "书在桌子上边。",
+     "请他他进来。",
+     "我的朋友小张来了。"
+    ],
+    "a": 2,
+    "why": "Cụm kiêm ngữ chỉ có một 他 làm kiêm ngữ; lặp thành “他他” là sai."
+   },
+   {
+    "q": "Cụm “在房间” thuộc loại nào?",
+    "o": [
+     "方位短语",
+     "兼语短语",
+     "同位短语",
+     "介宾短语"
+    ],
+    "a": 3,
+    "why": "在房间 là giới từ 在 + tân ngữ 房间 nên là cụm giới-tân."
+   },
+   {
+    "q": "“同位短语” có đặc điểm gì?",
+    "o": [
+     "Hai động từ liền nhau",
+     "Hai thành phần cùng chỉ một người hoặc một vật, phần sau giải thích phần trước",
+     "Danh từ + từ chỉ phương vị",
+     "Động từ + tân ngữ"
+    ],
+    "a": 1,
+    "why": "Trong 我的朋友小张, 小张 giải thích rõ 我的朋友 là ai — hai phần cùng chỉ một người."
+   },
+   {
+    "q": "兼语短语 khác 兼语句 ở điểm nào?",
+    "o": [
+     "兼语短语 là cụm, làm thành phần trong câu; 兼语句 là một loại câu",
+     "兼语短语 là câu, 兼语句 là cụm",
+     "Hai cái giống nhau hoàn toàn",
+     "兼语短语 chỉ có một động từ"
+    ],
+    "a": 0,
+    "why": "兼语短语 là cụm từ, làm thành phần trong câu; 兼语句 là cả một câu có cấu trúc kiêm ngữ (điểm 三57)."
+   }
+  ]
+ }
 ]);
 
 ZH_WRITE.push.apply(ZH_WRITE, ZH_WRITE_EXPAND_E2);
