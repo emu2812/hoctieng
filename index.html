@@ -26291,7 +26291,7 @@ function viewHomeZh(app) {
 }
 function viewRoadmapZh(app) {
   var html = trackSwitchHTML() + '<h2>Thế giới cấp độ · Tiếng Trung</h2>' + trailHeadHTML("6 chặng theo Giáo trình chuẩn HSK — đi dọc đường mòn, thu nhặt từng bộ từ, từng bài ngữ pháp dọc đường.");
-  html += '<p class="mut">6 chặng theo Giáo trình chuẩn HSK (hệ 6 cấp cũ) + lớp bổ sung HSK 3.0 hệ E. Chặng 1–6 đã có bộ từ riêng cùng ngữ pháp, đọc, nghe, nói, nhập vai, viết, kiểm tra cuối chặng và thi thử HSK; viết chữ (370 chữ) và từ điển bấm tra đã mở trong tab Luyện tập.</p>';
+  html += '<p class="mut">6 chặng theo Giáo trình chuẩn HSK (hệ 6 cấp cũ) + lớp bổ sung HSK 3.0 hệ E. Chặng 1–6 đã có bộ từ riêng cùng ngữ pháp, đọc, nghe, nói, nhập vai, viết, kiểm tra cuối chặng và thi thử HSK; viết chữ (439 chữ) và từ điển bấm tra đã mở trong tab Luyện tập.</p>';
   var rt = zhSessionTarget();
   html += '<div class="row"><button class="btn btn-primary" id="zhRoadmapNextBtn">Học tiếp: ' + esc(rt.title) + ' →</button></div>';
   html += zhMapHTML(true);
@@ -26365,7 +26365,7 @@ function viewPracticeZh(app) {
   var zhFaceOpts = '<optgroup label="Bộ mở đầu">' + zhFaceOpt(zhSetByKey("starter")) + '</optgroup>'
     + [1, 2, 3, 4, 5, 6].map(function (st) { return '<optgroup label="Chặng ' + st + '">' + zhStageSets(st).map(zhFaceOpt).join("") + '</optgroup>'; }).join(""); /* DOT trung 28/10/2026 (T-V2): zhSets() nay da du 28 bo; giu gop tay o day de khoi doi hanh vi tab (day la danh sach option rieng, khong trung). */
   html += '<section class="card" id="zhFaceCard"><h3>👁 Nhận mặt chữ — nhớ mặt chữ từng bộ</h3><p class="mut">Thẻ từ luôn hiện pinyin kèm chữ nên dễ học vẹt bằng pinyin mà chưa nhớ mặt chữ. Bài này tách riêng kỹ năng đó: nhìn chữ Hán (không có pinyin) rồi chọn đúng nghĩa — và ngược lại, nhìn nghĩa chọn đúng chữ. Mỗi lượt 10 câu, lấy từ một bộ thật, đáp án nhiễu cũng là từ thật trong cùng bộ (thiếu đáp án nhiễu thì bỏ câu, không bịa). Trả lời sai vào Sổ lỗi sai. Sau khi trả lời mới hiện pinyin và nút nghe để gắn thêm âm thanh.</p><div class="row"><input id="zhFaceFilter" placeholder="Lọc bộ theo chủ điểm…" style="flex:1"><select id="zhFaceSet">' + zhFaceOpts + '</select><button class="btn" id="zhFaceStartBtn">Bắt đầu luyện →</button></div></section>';
-  html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">370 chữ — sẽ bổ sung dần. Bấm vào một chữ để xem video mẫu cách viết và tập viết.</p><details><summary><b>Xem ' + zhStrokesList().length + ' chữ — theo nhóm 10 chữ</b></summary>' + zhStrokeGroupsHTML() + '</details><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
+  html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">439 chữ — sẽ bổ sung dần. Bấm vào một chữ để xem video mẫu cách viết và tập viết.</p><details><summary><b>Xem ' + zhStrokesList().length + ' chữ — theo nhóm 10 chữ</b></summary>' + zhStrokeGroupsHTML() + '</details><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
   html += pronDiagEntryHTML("zh");
   html += pronWeakHTML("zh"); /* v119b */
   html += specTutorGroupHTML("zh"); /* v129: nhom Tro giang AI nhu EN */
@@ -27052,7 +27052,7 @@ function renderZhStroke(app, l) {
   var next = list[(idx + 1) % list.length];
   var recalling = !!l.recallMode && !l.compared;
   var html = lessonHead({ title: recalling ? "Viết chữ từ trí nhớ" : "Viết chữ: " + e.han, type: "Tiếng Trung · Viết chữ" });
-  html += '<p class="mut">370 chữ — sẽ bổ sung dần. Xem video mẫu cách viết đúng chuẩn, rồi tập viết ở khung bên dưới.</p>';
+  html += '<p class="mut">439 chữ — sẽ bổ sung dần. Xem video mẫu cách viết đúng chuẩn, rồi tập viết ở khung bên dưới.</p>';
   if (recalling) {
     html += '<div class="qblock"><p>Viết từ trí nhớ chữ có pinyin <b>' + esc(e.py) + '</b> — nghĩa: ' + esc(e.vi) + '</p>'
       + '<p class="mut">Tổng số nét: ' + e.d.length + '</p>'
