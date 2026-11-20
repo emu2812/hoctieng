@@ -5728,7 +5728,7 @@ function viewHome(app) {
      Tiến trình của tôi — trang chủ chỉ giữ dòng tiến trình ở stat-strip. */
   html += '<details class="card" id="homeMore"><summary><b>Xem thêm: trò chơi, bản đồ, kiểm tra đầu vào</b></summary>'
     + '<p><button class="btn" id="wsOpenBtn">🎬 Không gian bài học video</button> <button class="btn" id="homeGamesGo">🎮 Trò chơi →</button></p>'
-    + '<p><button class="dimlink" id="mapGo">Xem bản đồ 13 chương →</button>' + (fresh ? '' : ' · <button class="dimlink" id="entryRedoLink">Làm lại kiểm tra đầu vào</button>') + ' · <button class="dimlink" id="loginLink">Đăng nhập</button></p>'
+    + '<p><button class="dimlink" id="mapGo">Xem bản đồ 14 chương →</button>' + (fresh ? '' : ' · <button class="dimlink" id="entryRedoLink">Làm lại kiểm tra đầu vào</button>') + ' · <button class="dimlink" id="loginLink">Đăng nhập</button></p>'
     + '</details></div></div>';
   app.innerHTML = html;
   pronDiagInviteWire(app); /* v166 F1 */
@@ -6179,7 +6179,7 @@ function viewRoadmap(app) {
     html += '<section class="card" id="roadmapSkipped"><h3>Đã bỏ qua</h3><p class="mut">Các bước bạn nhảy qua — quay lại học nốt khi rảnh:</p><div class="path-v">' + state.skipped.map(function (id) { var st = stepById(id); return st ? '<button class="path-node step-row" data-step="' + st.id + '"><span class="dotwrap"><span class="dot">' + mapStepEmoji(st.kind) + '</span></span><span><span class="pn-title">' + esc(st.title) + '</span><br><span class="pn-type">' + esc(st.type) + '</span></span></button>' : ''; }).join("") + '</div></section>';
   }
   var cc0 = mapCupCounts();
-  html += '<section class="card" id="mapCupCard"><div class="path-v"><button class="path-node duo-cup" id="mapCupBtn"><span class="dotwrap"><span class="dot">🏆</span></span><span><span class="pn-title">Cúp cuối lộ trình</span><br><span class="pn-type">Lộ trình IELTS · 13 chương</span><br><span class="pn-st">Đã qua ' + cc0.passed + '/' + cc0.total + ' kiểm tra cuối chương</span></span></button></div></section>';
+  html += '<section class="card" id="mapCupCard"><div class="path-v"><button class="path-node duo-cup" id="mapCupBtn"><span class="dotwrap"><span class="dot">🏆</span></span><span><span class="pn-title">Cúp cuối lộ trình</span><br><span class="pn-type">Lộ trình IELTS · 14 chương</span><br><span class="pn-st">Đã qua ' + cc0.passed + '/' + cc0.total + ' kiểm tra cuối chương</span></span></button></div></section>';
   /* v170 L5: bkRoadmapCard + clCanDo chuyen sang tab Huong dan (viewGuide) */
   html += '<p class="mut">Nói tự do với AI: <button class="dimlink" id="mapToNative">Sang trang Hội thoại AI →</button></p>';
   app.innerHTML = html;
@@ -7312,7 +7312,7 @@ function viewNative(app) {
 
 /* ============ V89: CUA TOI THEO TUNG TRACK ============
    Một khung duy nhất, số liệu/nhãn theo track đang xem. EN giữ nguyên
-   (Band IELTS + 13 chương). ZH: cấp HSK + 6 chặng. TC: điểm TOEIC +
+   (Band IELTS + 14 chương). ZH: cấp HSK + 6 chặng. TC: điểm TOEIC +
    4 chặng. TP: cấp TOPIK + 8 chặng. Mọi số đều đếm từ dữ liệu thật của
    chính track đó (cùng nguồn với các tab khác của track); số nào không
    đếm được thì không ghi lên giao diện. */
@@ -7321,7 +7321,7 @@ function trackMeta89() {
   if (t === "zh") return { key: "zh", roadLabel: "6 chặng", levelLabel: "Cấp HSK", targetLabel: "Cấp HSK mục tiêu", targetWord: "cấp HSK", targetPh: "VD: HSK 3", levelPh: "VD: mới bắt đầu / HSK 2" };
   if (t === "tc") return { key: "tc", roadLabel: "4 chặng", levelLabel: "Điểm TOEIC", targetLabel: "Điểm TOEIC mục tiêu", targetWord: "điểm TOEIC", targetPh: "VD: 750", levelPh: "VD: mới bắt đầu / TOEIC 450" };
   if (t === "tp") return { key: "tp", roadLabel: "8 chặng", levelLabel: "Cấp TOPIK", targetLabel: "Cấp TOPIK mục tiêu", targetWord: "cấp TOPIK", targetPh: "VD: TOPIK 4", levelPh: "VD: mới bắt đầu / TOPIK 2" };
-  return { key: "en", roadLabel: "13 chương", levelLabel: "Band IELTS", targetLabel: "Band mục tiêu", targetWord: "band", targetPh: "VD: 6,5", levelPh: "VD: mới bắt đầu / Band 5,0" };
+  return { key: "en", roadLabel: "14 chương", levelLabel: "Band IELTS", targetLabel: "Band mục tiêu", targetWord: "band", targetPh: "VD: 6,5", levelPh: "VD: mới bắt đầu / Band 5,0" };
 }
 function fmtDateTs89(ts) {
   try { var d = new Date(+ts); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); } catch (e) { return ""; }
