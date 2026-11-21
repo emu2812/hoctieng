@@ -1379,7 +1379,7 @@ function loadState() {
   var st = freshState();
   try {
     var raw = localStorage.getItem(LS_NEW);
-    if (raw) { Object.assign(st, JSON.parse(raw)); normHardFails(st); migrateTcTpCards103(st); migrateZhSandhi180(st); return st; }
+    if (raw) { Object.assign(st, JSON.parse(raw)); normHardFails(st); migrateTcTpCards103(st); migrateZhSandhi180(st); migrateZhMerge230(st); return st; }
   } catch (e) {}
   try {
     var old = JSON.parse(localStorage.getItem(LS_OLD) || "null");
@@ -1768,6 +1768,108 @@ function migrateZhSandhi180(st) {
     st.zhPhSkipped = st.zhPhSkipped.filter(function (x) { return x !== "sandhi"; });
     ["sandhi33", "sandhiBu", "sandhiYi"].forEach(function (id) { if (st.zhPhSkipped.indexOf(id) < 0) st.zhPhSkipped.push(id); });
   }
+}
+/* v230 (21/11/2026): gop 28 lan bo tu vung ZH (473 -> 441 bo). Tien trinh hoc vien
+   luu theo chi so mang (zhPos: "zhvocab:<idx>"; zhHard/zhSkipped: "zhvocab:<idx>:<pos>";
+   mems: "s<idx>:<pos>"; quiz: "quiz:zhVocabMulti:zhvocab:<idx>:<qi>" /
+   "quiz:zhFace:zhvocab:<idx>:<qi>") nen phai remap mot lan khi load state, neu khong
+   tien trinh se lech sang bo khac. Bo bi gop: the chuyen vao bo nhan, vi tri moi =
+   offset + vi tri cu. zhPos gop theo thu tu tuan tu (bo nhan truoc, roi tung bo bi
+   gop): cong don cac phan da xong het, dung o phan dau tien chua xong.
+   CHI GOI TREN MOT PHIA (local hoac tai khoan) TRUOC KHI GOP — khong bao gio goi
+   tren state da gop hai phia cu/moi, vi co zhMerge230Done khong phan biet duoc
+   key cu voi key moi da remap (chi so moi nam trong khoang chi so cu). */
+function migrateZhMerge230(st) {
+  st = st || (typeof state !== "undefined" ? state : null);
+  if (!st || st.zhMerge230Done) return;
+  var REMOVED = [32,34,41,42,72,73,74,75,76,91,93,95,122,123,135,137,139,153,154,161,162,167,170,188,189,190,191,192,193,195,196,197];
+  var DONOR = {"32":[23,20],"34":[14,20],"41":[12,20],"42":[38,15],"72":[61,12],"73":[13,20],"74":[39,17],"75":[122,9],"76":[45,15],"91":[95,12],"93":[125,11],"95":[74,13],"122":[122,16],"123":[97,12],"135":[69,20],"137":[64,14],"139":[123,11],"153":[92,17],"154":[94,15],"161":[84,18],"162":[74,7],"167":[108,20],"170":[94,22],"188":[163,15],"189":[158,12],"190":[159,16],"191":[161,12],"192":[157,13],"193":[125,16],"195":[126,14],"196":[127,16],"197":[124,17]};
+  var PARTS = {"12":[[12,20],[41,7]],"13":[[13,20],[73,5]],"14":[[14,20],[34,8]],"23":[[23,20],[32,5]],"38":[[40,15],[42,12]],"39":[[43,17],[74,8]],"45":[[49,15],[76,9]],"61":[[65,12],[72,11]],"64":[[68,14],[137,8]],"69":[[78,20],[135,9]],"74":[[83,7],[162,6],[95,10]],"84":[[96,18],[161,4]],"92":[[104,17],[153,11]],"94":[[106,15],[154,7],[170,7]],"95":[[107,12],[91,8]],"97":[[109,12],[123,8]],"108":[[120,20],[167,4]],"122":[[138,9],[75,7],[122,12]],"123":[[140,11],[139,9]],"124":[[141,17],[197,9]],"125":[[142,11],[93,5],[193,5]],"126":[[143,14],[195,6]],"127":[[144,16],[196,4]],"157":[[180,13],[192,9]],"158":[[181,12],[189,9]],"159":[[182,16],[190,4]],"161":[[184,12],[191,9]],"163":[[186,15],[188,5]]};
+  function newIdxOf(old) { var n = 0; for (var i = 0; i < REMOVED.length; i++) if (REMOVED[i] < old) n++; return old - n; }
+  function remapIdx(old) { return DONOR[old] ? DONOR[old][0] : newIdxOf(old); }
+  function remapVocabStr(s) { return String(s).replace(/zhvocab:(\d+)/g, function (mm, n) { return "zhvocab:" + remapIdx(+n); }); }
+  /* zhPos: "zhvocab:<idx>" -> vi tri moi (gop tuan tu doi voi bo da gop). */
+  if (st.zhPos) {
+    var partPos = {};
+    Object.keys(st.zhPos).forEach(function (kk) { var mm2 = /^zhvocab:(\d+)$/.exec(kk); if (mm2) partPos[+mm2[1]] = st.zhPos[kk] || 0; });
+    var np = {};
+    Object.keys(st.zhPos).forEach(function (kk) {
+      var mm2 = /^zhvocab:(\d+)$/.exec(kk);
+      if (!mm2) { np[kk] = st.zhPos[kk]; return; }
+      var o = +mm2[1];
+      if (DONOR[o]) return; /* gap vao bo nhan o duoi */
+      var ni = newIdxOf(o);
+      if (PARTS[ni]) return; /* bo nhan: tinh o duoi */
+      np["zhvocab:" + ni] = st.zhPos[kk] || 0;
+    });
+    Object.keys(PARTS).forEach(function (ni) {
+      var parts = PARTS[ni], p = 0, touched = false;
+      for (var j = 0; j < parts.length; j++) if (parts[j][0] in partPos) { touched = true; break; }
+      if (!touched) return;
+      for (var k2 = 0; k2 < parts.length; k2++) {
+        var op = partPos[parts[k2][0]] || 0, ln = parts[k2][1];
+        if (op >= ln) { p += ln; } else { p += op; break; }
+      }
+      np["zhvocab:" + ni] = p;
+    });
+    st.zhPos = np;
+  }
+  /* zhHard: the "zhvocab:<idx>:<pos>" doi ca chi so bo + vi tri; quiz key chi doi chi so bo
+     (rieng zhVocabMulti: qi = pos*10+k nen dich them offset*10). */
+  if (st.zhHard) {
+    var nh = {};
+    Object.keys(st.zhHard).forEach(function (kk) {
+      var h = st.zhHard[kk];
+      var mm2 = /^zhvocab:(\d+):(\d+)$/.exec(kk);
+      if (mm2) {
+        var o2 = +mm2[1], pp = +mm2[2], nk, np2;
+        if (DONOR[o2]) { nk = DONOR[o2][0]; np2 = pp + DONOR[o2][1]; }
+        else { nk = newIdxOf(o2); np2 = pp; }
+        if (h) { if (h.setKey) h.setKey = "zhvocab:" + nk; if (typeof h.idx === "number") h.idx = np2; }
+        nh["zhvocab:" + nk + ":" + np2] = h;
+        return;
+      }
+      if (kk.indexOf("zhvocab:") >= 0) {
+        var isMulti = kk.indexOf("zhVocabMulti:") >= 0;
+        var nk2 = kk.replace(/zhvocab:(\d+)/g, function (mm3, n) { return "zhvocab:" + remapIdx(+n); });
+        if (isMulti) {
+          /* qi = pos*10+k nen dich them offset*10 (tim donor cu trong key goc). */
+          var dm = /zhvocab:(\d+):(\d+)$/.exec(kk);
+          if (dm && DONOR[+dm[1]]) {
+            nk2 = "quiz:zhVocabMulti:zhvocab:" + DONOR[+dm[1]][0] + ":" + (+dm[2] + DONOR[+dm[1]][1] * 10);
+          }
+        }
+        if (h) { if (h.lesson) h.lesson = remapVocabStr(h.lesson); if (h.setKey) h.setKey = remapVocabStr(h.setKey); }
+        nh[nk2] = h;
+        return;
+      }
+      nh[kk] = h;
+    });
+    st.zhHard = nh;
+  }
+  /* mems: "s<idx>:<pos>" — doi chi so bo + vi tri. */
+  if (st.mems) {
+    var nm = {};
+    Object.keys(st.mems).forEach(function (kk) {
+      var mm2 = /^s(\d+):(\d+)$/.exec(kk);
+      if (!mm2) { nm[kk] = st.mems[kk]; return; }
+      var o4 = +mm2[1], pp2 = +mm2[2];
+      if (DONOR[o4]) nm["s" + DONOR[o4][0] + ":" + (pp2 + DONOR[o4][1])] = st.mems[kk];
+      else nm["s" + newIdxOf(o4) + ":" + pp2] = st.mems[kk];
+    });
+    st.mems = nm;
+  }
+  /* zhSkipped: mang "zhvocab:<idx>:<pos>" — doi chi so bo + vi tri. */
+  if (st.zhSkipped) {
+    st.zhSkipped = st.zhSkipped.map(function (kk) {
+      var mm2 = /^zhvocab:(\d+):(\d+)$/.exec(kk);
+      if (!mm2) return kk;
+      var o5 = +mm2[1], pp3 = +mm2[2];
+      if (DONOR[o5]) return "zhvocab:" + DONOR[o5][0] + ":" + (pp3 + DONOR[o5][1]);
+      return "zhvocab:" + newIdxOf(o5) + ":" + pp3;
+    });
+  }
+  st.zhMerge230Done = true;
 }
 function tcTpDueCards90(isTc) {
   if (isTc) tcNorm(); else tpNorm();
@@ -8108,7 +8210,14 @@ function authGetSession() {
   });
 }
 function mergeGuestIntoAccount(guest, acc) {
+  /* v230: remap tien trinh ZH theo chi so bo moi cho TUNG PHIA TRUOC KHI gop —
+     khach va tai khoan co the o hai phien ban chi so khac nhau (cu/moi); gop roi
+     moi remap se dich nham phia da remap roi. Moi phia co co rieng: khach luu o
+     localStorage, tai khoan dong bo qua meta/zhMerge230 (xem syncPush/syncPull). */
+  try { migrateZhMerge230(guest); } catch (e) {}
+  try { migrateZhMerge230(acc); } catch (e) {}
   var merged = freshState();
+  merged.zhMerge230Done = true;
   var added = { progress: 0, cards: 0, hard: 0, checkin: 0, studyLog: 0, savedWords: 0, phDone: 0, pos: 0 };
   function mergeMap(field) {
     var g = (guest && guest[field]) || {}, a = (acc && acc[field]) || {};
@@ -8265,6 +8374,7 @@ function syncPull(uid) {
           if (r.item_key === "targetBand" && r.state) acc.targetBand = r.state.v;
           if (r.item_key === "checkin" && r.state) acc.checkin = r.state.days || {};
           if (r.item_key === "freeze" && r.state) acc.freeze = { count: r.state.count || 0, used: r.state.used || [], granted: r.state.granted || [] };
+          if (r.item_key === "zhMerge230" && r.state) acc.zhMerge230Done = !!r.state.done;
           if (r.item_key === "vip" && r.state) acc.vip = !!r.state.v;
         } else if (r.section === "rb") {
           var k = r.item_key;
@@ -8362,6 +8472,7 @@ function syncPush() {
       if (state.targetBand != null) row("meta", "targetBand", { v: state.targetBand });
       row("meta", "checkin", { days: state.checkin || {} });
       normFreeze(state); row("meta", "freeze", { count: state.freeze.count, used: state.freeze.used, granted: state.freeze.granted });
+      row("meta", "zhMerge230", { done: !!state.zhMerge230Done });
       row("rb", "progress", state.progress || {});
       row("rb", "cards", state.cards || {});
       row("rb", "phDone", state.phDone || {});
