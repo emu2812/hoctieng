@@ -26365,7 +26365,7 @@ function viewPracticeZh(app) {
   var zhFaceOpts = '<optgroup label="Bộ mở đầu">' + zhFaceOpt(zhSetByKey("starter")) + '</optgroup>'
     + [1, 2, 3, 4, 5, 6].map(function (st) { return '<optgroup label="Chặng ' + st + '">' + zhStageSets(st).map(zhFaceOpt).join("") + '</optgroup>'; }).join(""); /* DOT trung 28/10/2026 (T-V2): zhSets() nay da du 28 bo; giu gop tay o day de khoi doi hanh vi tab (day la danh sach option rieng, khong trung). */
   html += '<section class="card" id="zhFaceCard"><h3>👁 Nhận mặt chữ — nhớ mặt chữ từng bộ</h3><p class="mut">Thẻ từ luôn hiện pinyin kèm chữ nên dễ học vẹt bằng pinyin mà chưa nhớ mặt chữ. Bài này tách riêng kỹ năng đó: nhìn chữ Hán (không có pinyin) rồi chọn đúng nghĩa — và ngược lại, nhìn nghĩa chọn đúng chữ. Mỗi lượt 10 câu, lấy từ một bộ thật, đáp án nhiễu cũng là từ thật trong cùng bộ (thiếu đáp án nhiễu thì bỏ câu, không bịa). Trả lời sai vào Sổ lỗi sai. Sau khi trả lời mới hiện pinyin và nút nghe để gắn thêm âm thanh.</p><div class="row"><input id="zhFaceFilter" placeholder="Lọc bộ theo chủ điểm…" style="flex:1"><select id="zhFaceSet">' + zhFaceOpts + '</select><button class="btn" id="zhFaceStartBtn">Bắt đầu luyện →</button></div></section>';
-  html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">439 chữ — sẽ bổ sung dần. Bấm vào một chữ để xem video mẫu cách viết và tập viết.</p><details><summary><b>Xem ' + zhStrokesList().length + ' chữ — theo nhóm 10 chữ</b></summary>' + zhStrokeGroupsHTML() + '</details><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
+  html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">439 chữ — mỗi chữ đều có sơ đồ thứ tự nét (30 chữ có thêm video mẫu). Bấm vào một chữ để xem và tập viết.</p><details><summary><b>Xem ' + zhStrokesList().length + ' chữ — theo nhóm 10 chữ</b></summary>' + zhStrokeGroupsHTML() + '</details><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
   html += pronDiagEntryHTML("zh");
   html += pronWeakHTML("zh"); /* v119b */
   html += specTutorGroupHTML("zh"); /* v129: nhom Tro giang AI nhu EN */
@@ -26920,9 +26920,39 @@ function zhWriteVideoId(han) {
 }
 function zhStrokeVideoHTML(e) {
   var id = zhWriteVideoId(e.han);
-  if (!id) return '<div id="zhStrokeVideo"><p>Chưa có video mẫu cho chữ ' + esc(e.han) + ' — báo lại cho người quản trị để bổ sung, đừng tập theo trí nhớ.</p></div>';
+  if (!id) return '<div id="zhStrokeVideo"><p>Chưa có video mẫu cho chữ ' + esc(e.han) + ' — xem sơ đồ thứ tự nét ở dưới, đừng tập theo trí nhớ.</p></div>';
   return '<div id="zhStrokeVideo"><iframe id="zhStrokeVideoFrame" src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0" loading="lazy" allowfullscreen></iframe>'
     + '<p class="mut">Video mẫu cách viết chữ ' + esc(e.han) + ' — xem kỹ từng nét rồi tập viết ở khung bên dưới.</p></div>';
+}
+/* ---------- v228 (21/11/2026): So do thu tu net tu render — mau TP (QT-05/QT-26) ----------
+   TP da co tpStrokeOrderSVG (v210): hien thu tu net bang SVG tu du lieu `d`
+   (medians hanzi-writer-data), buoc tung net bang nut bam. ZH thieu kha nang
+   nay = CHO THIEU: 409/439 chu khong co video mau (ZH_WRITE_VIDEOS chi 30).
+   Ham nay render that tu ZH_STROKES (khong dung video ngoai, khong bia ID):
+   shown = so net dang hien; cur = net dang tap (to mau ho phach + danh so
+   tai diem bat dau); net chua toi chi hien mo 0,12; net da qua hien dam.
+   KHONG phai hoat hinh tu chay: khong nut Phat/Tam dung/Phat lai (lenh Bui
+   27/10/2026 bo hoat hinh net ve; E1 test_zh_modules_4 cam cac nut do). */
+function zhStrokeStart(path) {
+  var m = String(path || "").match(/M(-?\d*\.?\d+)[,\s]+(-?\d*\.?\d+)/);
+  return m ? { x: parseFloat(m[1]), y: parseFloat(m[2]) } : { x: 50, y: 50 };
+}
+function zhStrokeOrderSVG(e, opts) {
+  opts = opts || {};
+  var shown = (typeof opts.shown === "number") ? opts.shown : e.d.length;
+  var hidden = (typeof opts.hidden === "number") ? opts.hidden : -1;
+  var cur = (typeof opts.cur === "number") ? opts.cur : -1;
+  var parts = e.d.map(function (path, i) {
+    var vis = (i < shown && i !== hidden);
+    var col = (i === cur) ? "#b45309" : "#222";
+    var op = vis ? "1" : "0.12";
+    var sp = zhStrokeStart(path);
+    var badge = (i === cur)
+      ? '<circle cx="' + sp.x + '" cy="' + sp.y + '" r="8" fill="#b45309"/><text x="' + sp.x + '" y="' + (sp.y + 3.5) + '" font-size="10" fill="#fff" text-anchor="middle">' + (i + 1) + '</text>'
+      : "";
+    return '<path d="' + esc(path) + '" fill="none" stroke="' + col + '" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="' + op + '"/>' + badge;
+  }).join("");
+  return '<svg viewBox="0 0 100 100" style="width:180px;height:180px;border:1px solid #ddd;background:#fff" role="img" aria-label="Thứ tự nét chữ ' + esc(e.han) + '">' + parts + '</svg>';
 }
 function zhStrokeAreaHTML(c) {
   var chars = zhStrokeCharsOf(c.han);
@@ -27052,7 +27082,7 @@ function renderZhStroke(app, l) {
   var next = list[(idx + 1) % list.length];
   var recalling = !!l.recallMode && !l.compared;
   var html = lessonHead({ title: recalling ? "Viết chữ từ trí nhớ" : "Viết chữ: " + e.han, type: "Tiếng Trung · Viết chữ" });
-  html += '<p class="mut">439 chữ — sẽ bổ sung dần. Xem video mẫu cách viết đúng chuẩn, rồi tập viết ở khung bên dưới.</p>';
+  html += '<p class="mut">439 chữ — mỗi chữ đều có sơ đồ thứ tự nét (30 chữ có thêm video mẫu). Xem kỹ từng nét rồi tập viết ở khung bên dưới.</p>';
   if (recalling) {
     html += '<div class="qblock"><p>Viết từ trí nhớ chữ có pinyin <b>' + esc(e.py) + '</b> — nghĩa: ' + esc(e.vi) + '</p>'
       + '<p class="mut">Tổng số nét: ' + e.d.length + '</p>'
@@ -27068,10 +27098,23 @@ function renderZhStroke(app, l) {
       
       + '</div>';
   }
+  /* v228: muc "Thu tu net" tu render (chi o man chinh, khong hien o che do
+     Viet tu tri nho — nhu TP free mode). Buoc tung net bang nut bam. */
+  var orderShown = (typeof l.orderShown === "number") ? l.orderShown : 1;
+  if (orderShown < 1) orderShown = 1;
+  if (orderShown > e.d.length) orderShown = e.d.length;
+  if (!recalling) {
+    var orderCur = orderShown - 1;
+    html += '<div class="qblock"><h3>Thứ tự nét</h3>'
+      + zhStrokeOrderSVG(e, { shown: orderShown, cur: orderCur })
+      + '<ol>' + e.st.map(function (s, i) { return '<li' + (i === orderCur ? ' style="font-weight:700;color:#b45309"' : '') + '>Nét ' + (i + 1) + ': ' + esc(zhStrokeNameVi(s)) + ' (' + esc(s) + ')</li>'; }).join("") + '</ol>'
+      + '<div class="row"><button class="btn" id="zhOrderPrev">← Nét trước</button><button class="btn btn-primary" id="zhOrderNext"' + (orderShown >= e.d.length ? ' disabled' : '') + '>Nét tiếp theo (' + orderShown + '/' + e.d.length + ')</button><button class="btn" id="zhOrderAll">Hiện hết</button></div>'
+      + '<p class="mut">Viết theo đúng thứ tự từ trên xuống dưới, từ trái sang phải — nét ngang trước nét dọc khi hai nét giao nhau.</p></div>';
+  }
   var frameTitle = l.compared ? "So với mẫu" : (recalling ? "Viết từ trí nhớ" : "Khung tập viết tự do");
   var frameNote = l.compared ? "Mẫu mờ hiện đè lên bài viết của bạn — so mắt từng nét rồi tự đánh dấu."
     : (recalling ? "Chỉ hiện pinyin và nghĩa — viết chữ vào khung từ trí nhớ, rồi bấm So với mẫu."
-    : "Xem video mẫu, bật mẫu mờ rồi tập viết. Khi thuộc rồi, bấm Viết từ trí nhớ để kiểm tra.");
+    : "Xem thứ tự nét ở trên, bật mẫu mờ rồi tập viết. Khi thuộc rồi, bấm Viết từ trí nhớ để kiểm tra.");
   var frameBtns = l.compared
     ? '<button class="btn btn-primary" id="zhRememberedBtn">Nhớ rồi ✓</button><button class="btn" id="zhForgotBtn">Chưa nhớ, ôn lại</button><button class="btn" id="zhRewriteBtn">Viết lại</button>'
     : (recalling
@@ -27087,6 +27130,9 @@ function renderZhStroke(app, l) {
   $("#zhStrokePrevChar").onclick = function () { openLesson({ type: "zhStroke", han: prev.han }); };
   $("#zhStrokeNextChar").onclick = function () { openLesson({ type: "zhStroke", han: next.han }); };
   $("#zhStrokeBackList").onclick = function () { go("practice"); };
+  var zhOpn = $("#zhOrderNext"); if (zhOpn) zhOpn.onclick = function () { l.orderShown = Math.min(orderShown + 1, e.d.length); render(); };
+  var zhOpp = $("#zhOrderPrev"); if (zhOpp) zhOpp.onclick = function () { l.orderShown = Math.max(orderShown - 1, 1); render(); };
+  var zhOpa = $("#zhOrderAll"); if (zhOpa) zhOpa.onclick = function () { l.orderShown = e.d.length; render(); };
   var cv = $("#zhWriteCanvas");
   var ctx = null;
   try { ctx = cv && cv.getContext ? cv.getContext("2d") : null; } catch (err) { ctx = null; }
