@@ -4258,9 +4258,9 @@ var ZH_STROKES = [
   { han: "马", py: "mǎ", vi: "ngựa", src: "Trong từ 过马路 (guò mǎlù — qua đường)", note: "", st: ["横折", "竖折折钩", "横"], d: ["M22,16 L78,16 L78,44", "M46,20 L46,72 L72,72 L72,60", "M20,88 L80,88"] },
   { han: "不", py: "bù", vi: "không", src: "Thẻ từ bộ khởi động", note: "", st: ["横", "撇", "竖", "点"], d: ["M20,16 L80,16", "M70,16 L28,86", "M50,32 L50,88", "M66,50 L78,62"] },
   { han: "天", py: "tiān", vi: "trời; ngày", src: "Trong từ 明天 (míngtiān — ngày mai)", note: "", st: ["横", "横", "撇", "捺"], d: ["M20,16 L80,16", "M26,40 L74,40", "M62,40 L28,88", "M38,40 L80,88"] },
-  { han: "午", py: "wǔ", vi: "trưa", src: "Trong từ 中午 (zhōngwǔ — buổi trưa)", note: "", st: ["撇", "横", "竖", "横"], d: ["M68,12 L32,38", "M22,44 L78,44", "M50,20 L50,82", "M24,82 L76,82"] },
+  { han: "午", py: "wǔ", vi: "trưa", src: "Trong từ 中午 (zhōngwǔ — buổi trưa)", note: "", st: ["撇", "横", "横", "竖"], d: ["M38,21 L41,25 L37,33 L23,50", "M38,38 L72,34", "M11,65 L82,59 L92,61", "M48,41 L52,46 L51,100"] },
   { han: "见", py: "jiàn", vi: "thấy; gặp", src: "Trong từ 再见 (zàijiàn — tạm biệt)", note: "", st: ["竖", "横折", "撇", "竖弯钩"], d: ["M30,14 L30,60", "M30,14 L74,14 L74,52", "M62,30 L36,62", "M74,52 L74,82 Q74,92 58,92 Q48,92 48,80"] },
-  { han: "车", py: "chē", vi: "xe", src: "Trong từ 出租车 (chūzūchē — taxi)", note: "", st: ["横", "撇折", "横", "竖"], d: ["M20,14 L80,14", "M68,14 L36,44 L80,44", "M20,68 L80,68", "M50,14 L50,90"] },
+  { han: "车", py: "chē", vi: "xe", src: "Trong từ 出租车 (chūzūchē — taxi)", note: "", st: ["横", "竖折", "横", "竖"], d: ["M27,38 L72,34", "M46,19 L49,24 L31,62 L73,59", "M11,79 L18,81 L78,75 L89,78", "M47,49 L50,53 L51,100"] },
   { han: "水", py: "shuǐ", vi: "nước", src: "Trong từ 喝水 (hēshuǐ — uống nước)", note: "", st: ["竖钩", "横撇", "撇", "捺"], d: ["M50,10 L50,74 Q50,86 38,84", "M28,30 L58,30 L40,54", "M76,30 L56,52", "M56,52 L84,88"] },
   { han: "火", py: "huǒ", vi: "lửa", src: "Trong từ 火车 (huǒchē — tàu hỏa)", note: "", st: ["点", "撇", "撇", "捺"], d: ["M28,12 L20,24", "M50,16 L22,88", "M58,24 L40,56", "M48,28 L82,88"] },
   { han: "牛", py: "niú", vi: "bò", src: "Trong từ 牛奶 (niúnǎi — sữa bò)", note: "", st: ["撇", "横", "横", "竖"], d: ["M72,12 L30,40", "M24,46 L76,46", "M22,68 L78,68", "M50,12 L50,90"] },
@@ -4268,9 +4268,9 @@ var ZH_STROKES = [
   { han: "友", py: "yǒu", vi: "bạn", src: "Trong từ 朋友 (péngyou — bạn bè)", note: "Trong từ 朋友, 友 đọc nhẹ (you).", st: ["横", "撇", "横撇", "捺"], d: ["M24,16 L76,16", "M56,16 L30,52", "M34,54 L72,54 L48,78", "M50,54 L82,88"] },
   { han: "今", py: "jīn", vi: "nay", src: "Trong từ 今天 (jīntiān — hôm nay)", note: "", st: ["撇", "捺", "横", "竖"], d: ["M52,10 L26,44", "M48,10 L76,44", "M24,58 L76,58", "M50,58 L50,90"] },
   { han: "付", py: "fù", vi: "trả; giao", src: "Trong từ 付款 (fùkuǎn — trả tiền)", note: "", st: ["撇", "竖", "横", "竖钩", "点"], d: ["M36,12 L20,40", "M30,40 L30,88", "M44,26 L78,26", "M62,26 L62,70 Q62,84 76,76", "M70,44 L80,56"] },
-  { han: "打", py: "dǎ", vi: "đánh", src: "Trong từ 打折 (dǎzhé — giảm giá)", note: "", st: ["横", "竖", "提", "横", "竖"], d: ["M20,26 L40,26", "M30,26 L30,58", "M30,58 L44,50", "M52,26 L80,26", "M66,26 L66,88"] },
+  { han: "打", py: "dǎ", vi: "đánh", src: "Trong từ 打折 (dǎzhé — giảm giá)", note: "", st: ["横", "竖钩", "提", "横", "竖钩"], d: ["M14,49 L44,44", "M29,21 L34,25 L33,89 L31,93 L21,90", "M6,77 L11,78 L42,58", "M47,50 L82,45 L90,47", "M65,51 L69,54 L69,94 L67,99 L55,94"] },
   { han: "外", py: "wài", vi: "ngoài", src: "Trong từ 外公 (wàigōng — ông ngoại)", note: "", st: ["撇", "横撇", "点", "竖", "点"], d: ["M34,12 L18,40", "M22,42 L46,42 L32,60", "M40,60 L48,70", "M68,12 L68,78", "M58,74 L50,84"] },
-  { han: "市", py: "shì", vi: "chợ; thành phố", src: "Trong từ 超市 (chāoshì — siêu thị)", note: "", st: ["点", "横折", "竖", "横折", "竖"], d: ["M50,12 L42,22", "M24,28 L76,28 L76,44", "M30,44 L30,88", "M30,50 L70,50 L70,64", "M70,50 L70,88"] },
+  { han: "市", py: "shì", vi: "chợ; thành phố", src: "Trong từ 超市 (chāoshì — siêu thị)", note: "", st: ["点", "横", "竖", "横折", "竖"], d: ["M42,18 L54,27", "M12,39 L19,41 L78,32 L89,34", "M27,52 L30,57 L29,81", "M33,53 L70,50 L70,75 L58,73", "M46,39 L50,42 L50,100"] },
   { han: "好", py: "hǎo", vi: "tốt; khỏe", src: "Thẻ từ bộ khởi động", note: "", st: ["撇点", "撇", "横", "横", "竖钩", "横"], d: ["M42,10 Q32,24 24,36", "M26,36 L14,86", "M18,54 L46,54", "M52,20 L84,20", "M68,20 L68,68 Q68,82 80,74", "M52,88 L84,88"] },
   { han: "吗", py: "ma", vi: "trợ từ câu hỏi", src: "Thẻ từ bộ khởi động", note: "", st: ["竖", "横折", "横", "横折", "竖折折钩", "横"], d: ["M18,18 L18,60", "M18,18 L44,18 L44,60", "M18,60 L44,60", "M50,18 L84,18 L84,44", "M64,20 L64,72 L80,72 L80,60", "M50,88 L84,88"] },
   { han: "妈", py: "mā", vi: "mẹ", src: "Trong từ 妈妈 (māma — mẹ)", note: "", st: ["撇点", "撇", "横", "横折", "竖折折钩", "横"], d: ["M42,10 Q32,24 24,36", "M26,36 L14,86", "M18,54 L46,54", "M50,18 L84,18 L84,44", "M64,20 L64,72 L80,72 L80,60", "M50,88 L84,88"] },
@@ -4278,7 +4278,7 @@ var ZH_STROKES = [
   { han: "早", py: "zǎo", vi: "sớm", src: "Trong từ 早上 (zǎoshang — buổi sáng)", note: "", st: ["竖", "横折", "横", "横", "横", "竖"], d: ["M28,12 L28,56", "M28,12 L72,12 L72,56", "M28,34 L72,34", "M28,56 L72,56", "M26,70 L74,70", "M50,62 L50,90"] },
   { han: "自", py: "zì", vi: "tự", src: "Trong từ 自行车 (zìxíngchē — xe đạp)", note: "", st: ["撇", "竖", "横折", "横", "横", "横"], d: ["M56,10 L30,32", "M28,16 L28,86", "M28,16 L76,16 L76,86", "M28,42 L76,42", "M28,64 L76,64", "M28,86 L76,86"] },
   { han: "灯", py: "dēng", vi: "đèn", src: "Trong từ 红绿灯 (hónglǜdēng — đèn giao thông)", note: "", st: ["点", "撇", "撇", "捺", "横", "竖"], d: ["M26,12 L20,22", "M42,14 L16,86", "M44,24 L30,52", "M40,28 L62,86", "M54,26 L84,26", "M70,26 L70,88"] },
-  { han: "再", py: "zài", vi: "lại", src: "Trong từ 再见 (zàijiàn — tạm biệt)", note: "", st: ["横", "竖", "横", "横", "竖", "横"], d: ["M24,14 L76,14", "M28,14 L28,44", "M28,44 L76,44", "M24,60 L76,60", "M50,60 L50,86", "M22,86 L78,86"] },
+  { han: "再", py: "zài", vi: "lại", src: "Trong từ 再见 (zàijiàn — tạm biệt)", note: "", st: ["横", "竖", "横折钩", "竖", "横", "横"], d: ["M26,28 L75,23", "M30,43 L34,48 L34,57 L30,96", "M36,44 L62,40 L69,44 L69,92 L68,95 L57,92", "M47,29 L50,32 L48,68", "M40,57 L60,55", "M10,73 L16,75 L83,67 L91,70"] },
   { han: "米", py: "mǐ", vi: "gạo", src: "Trong từ 米饭 (mǐfàn — cơm)", note: "", st: ["点", "撇", "横", "竖", "撇", "捺"], d: ["M50,10 L44,20", "M62,18 L30,40", "M22,46 L78,46", "M50,18 L50,86", "M50,56 L26,88", "M50,56 L76,88"] }
 ];
 // v213 DOT D (17/11/2026): ZH_STROKES +20 chu don gian (30 -> 50).
@@ -4460,25 +4460,25 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "han": "足",
     "py": "zú",
     "vi": "chân",
-    "src": "Thẻ từ bộ khởi động",
+    "src": "Trong từ 足球 (zúqiú — bóng đá)",
     "note": "",
     "st": [
       "竖",
       "横折",
       "横",
-      "横",
       "竖",
       "横",
-      "竖"
+      "撇",
+      "捺"
     ],
     "d": [
-      "M30,12 L30,44",
-      "M30,12 L70,12 L70,44",
-      "M30,44 L70,44",
-      "M26,58 L74,58",
-      "M50,58 L50,74",
-      "M24,74 L76,74",
-      "M64,74 L64,90"
+      "M31,26 L35,31 L40,49",
+      "M38,26 L62,25 L65,28 L58,41",
+      "M42,47 L64,44",
+      "M47,47 L50,50 L52,78",
+      "M53,63 L71,60",
+      "M29,58 L32,62 L26,76 L10,95",
+      "M34,67 L45,77 L67,91 L92,92"
     ]
   },
   {
@@ -11765,7 +11765,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "捺"
     ],
@@ -11784,7 +11784,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "Trong từ 认识, 识 đọc nhẹ (shi).",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "竖",
       "横折",
       "横",
@@ -11809,7 +11809,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "横",
       "竖",
@@ -11836,7 +11836,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "横",
       "竖",
@@ -11863,7 +11863,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖",
       "横折",
@@ -11892,7 +11892,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "撇",
       "竖",
@@ -11921,7 +11921,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "横",
       "竖",
@@ -11952,7 +11952,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖",
       "横钩",
@@ -11983,7 +11983,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "竖",
       "横折",
       "横",
@@ -12014,7 +12014,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "竖",
       "点",
@@ -12045,7 +12045,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "竖",
       "横折钩",
@@ -14934,7 +14934,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横折",
       "横",
       "竖弯钩"
@@ -14955,7 +14955,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "撇",
       "横",
@@ -15453,7 +15453,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "丁",
     "py": "dīng",
-    "vi": "miếng vá; đinh",
+    "vi": "đinh; miếng vá (trong 补丁)",
     "src": "Trong từ 补丁 (bǔdīng — bản vá)",
     "note": "",
     "st": [
@@ -15724,7 +15724,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "lín",
     "vi": "đến gần; đối mặt",
     "src": "Trong từ 临床试验 (línchuáng shìyàn — thử nghiệm lâm sàng)",
-    "note": "",
+    "note": "Trong 临床, 临 mang nghĩa 'có mặt tại chỗ (bên giường bệnh)'.",
     "st": [
       "竖",
       "竖",
@@ -15919,7 +15919,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "乎",
     "py": "hū",
-    "vi": "tiểu từ; dường như",
+    "vi": "tiểu từ (chỉ dùng trong 似乎)",
     "src": "Trong từ 似乎 (sìhū — dường như)",
     "note": "",
     "st": [
@@ -16532,7 +16532,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "zǎi",
     "vi": "trẻ nhỏ; con non",
     "src": "Trong từ 牛仔裤 (niúzǎikù — quần bò; quần jeans)",
-    "note": "",
+    "note": "Trong 牛仔裤, 仔 nằm trong 牛仔 (cao bồi), không mang nghĩa 'trẻ nhỏ'.",
     "st": [
       "撇",
       "竖",
@@ -20635,7 +20635,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "shi",
     "vi": "thìa; chìa khóa",
     "src": "Trong từ 钥匙 (yàoshi — chìa khóa)",
-    "note": "",
+    "note": "Chữ này còn đọc chí, nghĩa 'thìa'; trong 钥匙 đọc nhẹ shi, nghĩa 'chìa khóa'.",
     "st": [
       "竖",
       "横折",
@@ -24748,7 +24748,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "士",
     "py": "shì",
-    "vi": "người làm nghề; học trò",
+    "vi": "người làm nghề; học giả",
     "src": "Trong từ 护士 (hùshi — điều dưỡng, y tá)",
     "note": "Trong từ 护士, 士 đọc nhẹ (shi).",
     "st": [
@@ -25472,7 +25472,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "gū",
     "vi": "cô gái; cô (bên nội)",
     "src": "Trong từ 姑娘 (gūniang — cô gái; thiếu nữ; con gái)",
-    "note": "",
+    "note": "姑 vốn nghĩa 'cô bên nội' (em gái của cha); trong 姑娘, 姑 cùng 娘 tạo thành từ 'cô gái'.",
     "st": [
       "撇点",
       "撇",
@@ -27977,7 +27977,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "巴",
     "py": "bā",
-    "vi": "miệng (hậu tố)",
+    "vi": "mong ngóng; hậu tố (trong 嘴巴)",
     "src": "Trong từ 嘴巴 (zuǐba — miệng; mồm)",
     "note": "Trong từ 嘴巴, 巴 đọc nhẹ (ba).",
     "st": [
@@ -29496,7 +29496,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "征",
     "py": "zhēng",
-    "vi": "tượng trưng; dấu hiệu",
+    "vi": "chinh phạt; tượng trưng",
     "src": "Trong từ 象征 (xiàngzhēng — tượng trưng)",
     "note": "",
     "st": [
@@ -31810,9 +31810,9 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "慕",
     "py": "mù",
-    "vi": "âm dịch (khóa học mở)",
+    "vi": "ngưỡng mộ",
     "src": "Trong từ 慕课 (mùkè — khóa học mở trực tuyến)",
-    "note": "",
+    "note": "Trong 慕课 (khóa học mở trực tuyến), 慕 chỉ là âm dịch của 'MOOC', không mang nghĩa 'ngưỡng mộ'.",
     "st": [
       "横",
       "竖",
@@ -35748,7 +35748,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "故",
     "py": "gù",
-    "vi": "sự cố; nguyên do",
+    "vi": "cũ; sự cố; vì vậy",
     "src": "Trong từ 事故 (shìgù — tai nạn)",
     "note": "",
     "st": [
@@ -37731,7 +37731,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "han": "李",
     "py": "lǐ",
     "vi": "hành lý (chỉ dùng trong 行李)",
-    "src": "Trong từ 行李 (xínglǐ — hành lý)",
+    "src": "Trong từ 行李 (xíngli — hành lý)",
     "note": "",
     "st": [
       "横",
@@ -41176,7 +41176,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "津",
     "py": "jīn",
-    "vi": "phụ cấp; trợ cấp",
+    "vi": "bến đò; phụ cấp (trong 津贴)",
     "src": "Trong từ 津贴 (jīntiē — phụ cấp)",
     "note": "",
     "st": [
@@ -45650,7 +45650,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "shā",
     "vi": "bệnh sa; nổi ban",
     "src": "Trong từ 刮痧 (guāshā — cạo gió)",
-    "note": "",
+    "note": "Thuật ngữ Đông y: chứng sa (nổi ban đỏ sau khi cạo gió).",
     "st": [
       "点",
       "横",
@@ -46242,7 +46242,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "xiàng",
     "vi": "ảnh; hình ảnh",
     "src": "Trong từ 相机 (xiàngjī — máy ảnh)",
-    "note": "",
+    "note": "Chữ này còn đọc xiāng, nghĩa 'lẫn nhau' (như 互相).",
     "st": [
       "横",
       "竖",
@@ -49353,7 +49353,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "gāo",
     "vi": "bánh; bánh ngọt",
     "src": "Trong từ 糟糕 (zāogāo — tệ hại; tồi tệ; hỏng bét)",
-    "note": "",
+    "note": "Trong 糟糕, 糕 không mang nghĩa 'bánh'; cả từ có nghĩa 'tệ hại'.",
     "st": [
       "点",
       "撇",
@@ -52987,9 +52987,9 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "舆",
     "py": "yú",
-    "vi": "dư luận; xe",
+    "vi": "công chúng; xe",
     "src": "Trong từ 舆论 (yúlùn — dư luận)",
-    "note": "",
+    "note": "Trong 舆论, 舆 mang nghĩa 'công chúng'.",
     "st": [
       "撇",
       "竖",
@@ -53152,7 +53152,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "háng",
     "vi": "hàng không; đi tàu",
     "src": "Trong từ 航空 (hángkōng — hàng không)",
-    "note": "",
+    "note": "航 vốn nghĩa 'đi tàu, điều hướng trên biển'; trong 航空 mang nghĩa 'hàng không'.",
     "st": [
       "撇",
       "撇",
@@ -54212,7 +54212,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "py": "péng",
     "vi": "tươi tốt; bừng bừng",
     "src": "Trong từ 朝气蓬勃 (zhāoqìpéngbó — tràn đầy sức sống)",
-    "note": "",
+    "note": "蓬 vốn là tên một loại cỏ (cỏ bồng); trong 蓬勃 mang nghĩa 'tươi tốt, sung sức'.",
     "st": [
       "横",
       "竖",
@@ -55714,7 +55714,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖"
     ],
@@ -55733,7 +55733,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖钩"
     ],
@@ -55752,7 +55752,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖钩",
       "点"
@@ -55773,7 +55773,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "竖",
       "横",
       "横"
@@ -55794,7 +55794,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "竖",
       "竖"
@@ -55815,7 +55815,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "撇",
       "捺"
@@ -55836,7 +55836,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横折钩",
       "横",
       "竖"
@@ -55857,7 +55857,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "横",
       "撇",
@@ -55880,7 +55880,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖折",
       "竖钩",
@@ -55903,7 +55903,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "横",
       "横",
@@ -55926,7 +55926,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "捺",
       "撇",
@@ -55949,7 +55949,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "捺",
       "撇折",
@@ -55972,7 +55972,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "横折钩",
       "撇",
@@ -55995,7 +55995,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "横折",
       "横折",
@@ -56018,7 +56018,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "横",
       "横折钩",
@@ -56041,7 +56041,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖",
       "横",
@@ -56066,7 +56066,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "点",
       "撇",
@@ -56091,7 +56091,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "横",
       "竖",
@@ -56120,7 +56120,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "捺",
       "撇",
@@ -56145,7 +56145,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横折钩",
       "横",
       "竖",
@@ -56170,7 +56170,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横撇",
       "捺",
       "横",
@@ -56195,7 +56195,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖",
       "横",
@@ -56222,7 +56222,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "撇",
       "横折钩",
@@ -56249,7 +56249,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "竖",
       "横",
@@ -56276,7 +56276,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "横折钩",
       "竖",
@@ -56303,7 +56303,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "横",
       "竖折",
@@ -56330,7 +56330,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "撇",
       "横",
@@ -56357,7 +56357,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "竖",
       "横折",
       "横",
@@ -56386,7 +56386,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横折",
       "点",
       "竖",
@@ -56415,7 +56415,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖",
       "横",
@@ -56446,7 +56446,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖",
       "竖",
@@ -56477,7 +56477,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "横折钩",
       "横",
@@ -56508,7 +56508,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "横",
       "竖",
@@ -56539,7 +56539,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "撇",
       "撇",
@@ -56570,7 +56570,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "点",
       "横折",
@@ -56601,7 +56601,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖",
       "竖",
@@ -56634,7 +56634,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "卧钩",
       "撇",
@@ -56667,7 +56667,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "竖",
       "横折",
       "横",
@@ -56704,7 +56704,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "横",
       "点",
@@ -56737,7 +56737,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "撇",
       "点",
       "点",
@@ -56772,7 +56772,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "撇",
       "横",
@@ -56807,7 +56807,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横",
       "竖",
       "竖",
@@ -56844,7 +56844,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "横折",
       "点",
       "提",
@@ -56881,7 +56881,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
     "note": "",
     "st": [
       "点",
-      "横折钩",
+      "横折提",
       "点",
       "撇",
       "横",
@@ -59260,9 +59260,9 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "辑",
     "py": "jí",
-    "vi": "lô-gíc (âm dịch)",
+    "vi": "biên tập; sưu tập",
     "src": "Trong từ 逻辑 (luójí — logic; lô-gíc)",
-    "note": "",
+    "note": "Trong 逻辑, 辑 chỉ là âm dịch của '-gic', không mang nghĩa 'biên tập'.",
     "st": [
       "横",
       "竖折",
@@ -60340,9 +60340,9 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "逻",
     "py": "luó",
-    "vi": "lô-gíc (âm dịch)",
+    "vi": "tuần tra",
     "src": "Trong từ 逻辑 (luójí — logic; lô-gíc)",
-    "note": "",
+    "note": "Trong 逻辑, 逻 chỉ là âm dịch, không mang nghĩa 'tuần tra'.",
     "st": [
       "竖",
       "横折",
@@ -62767,7 +62767,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "际",
     "py": "jì",
-    "vi": "thực tế; lúc",
+    "vi": "ranh giới; lúc; thực tế",
     "src": "Trong từ 实际上 (shíjìshang — trên thực tế)",
     "note": "",
     "st": [
@@ -64472,7 +64472,7 @@ ZH_STROKES.push.apply(ZH_STROKES, [
   {
     "han": "额",
     "py": "é",
-    "vi": "mức; số lượng",
+    "vi": "trán; mức, số tiền",
     "src": "Trong từ 余额 (yú'é — số dư)",
     "note": "",
     "st": [
@@ -132511,7 +132511,7 @@ var ZH_VOCAB_EXPAND_E2 = [
    },
    {
     "han": "行李箱",
-    "pinyin": "xínglǐxiāng",
+    "pinyin": "xínglixiāng",
     "vi": "vali",
     "col": "拖着行李箱",
     "ex": "她拖着行李箱，急急忙忙往站台走。",
@@ -132527,7 +132527,7 @@ var ZH_VOCAB_EXPAND_E2 = [
    },
    {
     "han": "托运行李",
-    "pinyin": "tuōyùn xínglǐ",
+    "pinyin": "tuōyùn xíngli",
     "vi": "hành lý ký gửi",
     "col": "办理托运行李",
     "ex": "这个箱子太重了，需要办理托运行李。",
@@ -132956,7 +132956,7 @@ var ZH_VOCAB_EXPAND_E2 = [
    },
    {
     "han": "打包行李",
-    "pinyin": "dǎbāo xínglǐ",
+    "pinyin": "dǎbāo xíngli",
     "vi": "đóng gói hành lý",
     "col": "提前打包行李",
     "ex": "搬家前三天，她就开始提前打包行李。",
