@@ -3441,7 +3441,7 @@ if (typeof CONTENT !== "undefined") { CONTENT.zhVocab = [
    },
    {
     "han": "行李",
-    "pinyin": "xínglǐ",
+    "pinyin": "xíngli",
     "vi": "hành lý",
     "col": "行李很多",
     "ex": "我们的行李很多。",
@@ -83168,7 +83168,10 @@ var ZH_VOCAB_EXPAND = [
   { han: "小时", pinyin: "xiǎoshí", vi: "giờ (đơn vị)", col: "三个小时", ex: "我学习了三个小时。", exv: "Tôi đã học ba giờ." },
   { han: "分钟", pinyin: "fēnzhōng", vi: "phút", col: "五分钟", ex: "等五分钟。", exv: "Chờ năm phút." },
   { han: "时候", pinyin: "shíhou", vi: "lúc, khi", col: "的时候", ex: "吃饭的时候别说话。", exv: "Lúc ăn cơm đừng nói chuyện." },
-  { han: "早", pinyin: "zǎo", vi: "sớm", col: "很早", ex: "他每天起得很早。", exv: "Anh ấy mỗi ngày dậy rất sớm." }
+  { han: "早", pinyin: "zǎo", vi: "sớm", col: "很早", ex: "他每天起得很早。", exv: "Anh ấy mỗi ngày dậy rất sớm." },
+  {"han":"上午","pinyin":"shàngwǔ","vi":"buổi sáng","col":"上午九点","ex":"上午九点我们上课。","exv":"9 giờ sáng chúng ta vào học.","use":"Dùng khi nói buổi sáng, thường kèm giờ cụ thể (上午九点上课).","err":"上午 là buổi sáng (trước 12 giờ trưa); đừng nhầm với 中午 (buổi trưa) hay 下午 (buổi chiều).","gfl":1},
+  {"han":"中午","pinyin":"zhōngwǔ","vi":"buổi trưa","col":"中午十二点","ex":"中午十二点吃午饭。","exv":"12 giờ trưa ăn cơm trưa.","use":"Dùng khi nói buổi trưa, quanh 12 giờ (中午十二点吃午饭).","err":"中午 là giữa trưa; đừng nhầm với 下午 — 下午三点 đã là buổi chiều, không còn là trưa.","gfl":1},
+  {"han":"晚上","pinyin":"wǎnshang","vi":"buổi tối","col":"晚上七点","ex":"晚上七点我们看电视。","exv":"7 giờ tối chúng ta xem ti vi.","use":"Dùng khi nói buổi tối, thường kèm giờ (晚上七点看电视).","err":"晚上 là buổi tối sau khi trời tối; đừng nhầm với 下午 (buổi chiều, trời còn sáng).","gfl":1}
   ] },
 { topic: "HSK1 — Màu sắc và hình dáng", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
@@ -83200,7 +83203,20 @@ var ZH_VOCAB_EXPAND = [
   { han: "饱", pinyin: "bǎo", vi: "no", col: "吃饱了", ex: "我吃饱了，谢谢。", exv: "Tôi ăn no rồi, cảm ơn." },
   { han: "甜", pinyin: "tián", vi: "ngọt", col: "很甜", ex: "这个苹果很甜。", exv: "Quả táo này rất ngọt." },
   { han: "酸", pinyin: "suān", vi: "chua", col: "很酸", ex: "这个柠檬很酸。", exv: "Quả chanh này rất chua." },
-  { han: "咸", pinyin: "xián", vi: "mặn", col: "太咸了", ex: "这个汤太咸了。", exv: "Món canh này quá mặn." }
+  { han: "咸", pinyin: "xián", vi: "mặn", col: "太咸了", ex: "这个汤太咸了。", exv: "Món canh này quá mặn." },
+  {"han":"牛奶","pinyin":"niúnǎi","vi":"sữa","col":"喝牛奶","ex":"早上我喝一杯牛奶。","exv":"Buổi sáng tôi uống một cốc sữa.","use":"Dùng khi nói đồ uống buổi sáng (早上喝一杯牛奶).","err":"牛奶 là sữa bò; đừng nhầm với 豆奶 (sữa đậu nành) — hai loại sữa khác nhau.","gfl":1},
+  {"han":"茶","pinyin":"chá","vi":"trà","col":"喝茶","ex":"爷爷早上喜欢喝茶。","exv":"Ông buổi sáng thích uống trà.","use":"Dùng khi nói uống trà (早上喝茶).","err":"茶 đọc chá thanh 2; đừng nhầm 茶 (trà) với 菜 (rau, cài) — khác cả âm lẫn chữ.","gfl":1},
+  {"han":"水","pinyin":"shuǐ","vi":"nước","col":"喝水","ex":"早上起床先喝一杯水。","exv":"Buổi sáng ngủ dậy uống trước một cốc nước.","use":"Dùng khi nói uống nước (喝水); 一杯水 là một cốc nước.","err":"水 là nước uống; đừng nói 吃水 — uống nước dùng 喝, không dùng 吃.","gfl":1},
+  {"han":"鸡蛋","pinyin":"jīdàn","vi":"trứng gà","col":"吃鸡蛋","ex":"早上我吃一个鸡蛋。","exv":"Buổi sáng tôi ăn một quả trứng.","use":"Dùng khi nói trứng gà ăn sáng (早上吃一个鸡蛋).","err":"鸡蛋 là trứng gà; đừng nhầm với 鸭蛋 (trứng vịt) — 鸡 là gà, 鸭 là vịt.","gfl":1},
+  {"han":"水果","pinyin":"shuǐguǒ","vi":"trái cây","col":"吃水果","ex":"早餐后吃一点水果。","exv":"Sau bữa sáng ăn một ít trái cây.","use":"Dùng khi nói trái cây nói chung (早餐后吃水果).","err":"水果 là trái cây nói chung; muốn nói quả táo cụ thể thì nói 苹果, không nói 水果.","gfl":1},
+  {"han":"肉","pinyin":"ròu","vi":"thịt","col":"吃肉","ex":"早餐我不吃肉，只吃面包。","exv":"Bữa sáng tôi không ăn thịt, chỉ ăn bánh mì.","use":"Dùng khi nói thịt nói chung (吃肉); muốn nói rõ thì thêm tên: 猪肉、鸡肉.","err":"肉 đọc ròu thanh 4; đừng đọc thành róu thanh 2.","gfl":1},
+  {"han":"饿","pinyin":"è","vi":"đói","col":"我饿了","ex":"早上起来我饿了，想吃早餐。","exv":"Buổi sáng ngủ dậy tôi đói rồi, muốn ăn sáng.","use":"Dùng với 了 để nói đang đói (我饿了).","err":"饿 là tính từ, nói 我饿了, không thêm 是 — đừng nói 我是饿.","gfl":1},
+  {"han":"渴","pinyin":"kě","vi":"khát","col":"我渴了","ex":"跑步以后我渴了，想喝水。","exv":"Sau khi chạy bộ tôi khát rồi, muốn uống nước.","use":"Dùng với 了 để nói đang khát (我渴了，想喝水).","err":"渴 (khát) khác 喝 (uống): 渴 là cảm giác khát, 喝 là hành động uống — 我渴了，所以喝水.","gfl":1},
+  {"han":"喝","pinyin":"hē","vi":"uống","col":"喝牛奶","ex":"早上喝牛奶对身体好。","exv":"Buổi sáng uống sữa tốt cho cơ thể.","use":"Dùng với đồ uống (喝牛奶、喝茶、喝水).","err":"喝 chỉ dùng với đồ uống; ăn cơm dùng 吃, đừng nói 喝米饭.","gfl":1},
+  {"han":"吃","pinyin":"chī","vi":"ăn","col":"吃早餐","ex":"我们七点吃早餐。","exv":"Chúng ta ăn sáng lúc 7 giờ.","use":"Dùng với món ăn hoặc bữa ăn (吃早餐、吃面包).","err":"吃 dùng với đồ ăn; uống nước dùng 喝 — đừng nói 吃水 hay 喝面包.","gfl":1},
+  {"han":"米饭","pinyin":"mǐfàn","vi":"cơm","col":"吃米饭","ex":"早上我不吃米饭，只吃面包。","exv":"Buổi sáng tôi không ăn cơm, chỉ ăn bánh mì.","use":"Dùng khi nói cơm (吃米饭); 一碗米饭 là một bát cơm.","err":"米饭 là cơm đã nấu chín; 米 chưa nấu là gạo — đừng nhầm 米 với 米饭.","gfl":1},
+  {"han":"包子","pinyin":"bāozi","vi":"bánh bao","col":"吃包子","ex":"早上我买两个包子吃。","exv":"Buổi sáng tôi mua hai cái bánh bao ăn.","use":"Dùng khi nói bánh bao ăn sáng (早上吃包子).","err":"包子 là bánh bao (bột nở, hấp); 饺子 là bánh chẻo (bột cán mỏng, luộc) — đừng nhầm hai loại.","gfl":1},
+  {"han":"早餐","pinyin":"zǎocān","vi":"bữa sáng","col":"吃早餐","ex":"我每天七点吃早餐。","exv":"Mỗi ngày tôi ăn sáng lúc 7 giờ.","use":"Dùng khi nói bữa sáng (每天七点吃早餐).","err":"早餐 là bữa sáng; 午餐 là bữa trưa, 晚餐 là bữa tối — đừng nhầm ba bữa.","gfl":2}
   ] },
 { topic: "HSK1 — Gia đình và xưng hô", hsk: "HSK1", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
@@ -83240,7 +83256,12 @@ var ZH_VOCAB_EXPAND = [
   { han: "新鲜", pinyin: "xīnxiān", vi: "tươi", col: "很新鲜", ex: "今天的菜很新鲜。", exv: "Rau hôm nay rất tươi." },
   { han: "公斤", pinyin: "gōngjīn", vi: "ki-lô-gam", col: "一公斤", ex: "买一公斤苹果。", exv: "Mua một ki-lô-gam táo." },
   { han: "斤", pinyin: "jīn", vi: "cân (0,5 kg)", col: "一斤", ex: "买一斤肉。", exv: "Mua một cân thịt." },
-  { han: "袋子", pinyin: "dàizi", vi: "túi", col: "塑料袋", ex: "请给我一个袋子。", exv: "Xin cho tôi một cái túi." }
+  { han: "袋子", pinyin: "dàizi", vi: "túi", col: "塑料袋", ex: "请给我一个袋子。", exv: "Xin cho tôi một cái túi." },
+  {"han":"便宜","pinyin":"piányi","vi":"rẻ","col":"很便宜","ex":"这个很便宜，才十块钱。","exv":"Cái này rất rẻ, chỉ mười đồng thôi.","use":"Dùng khi nói đồ rẻ (这个很便宜)。","err":"便宜 đọc piányi — 便 đọc 'pián' thanh 2, đừng đọc thành biàn; đừng nhầm 便宜 (rẻ) với '方便' (tiện lợi).","gfl":2},
+  {"han":"贵","pinyin":"guì","vi":"đắt","col":"很贵","ex":"这件衣服太贵了。","exv":"Bộ quần áo này đắt quá.","use":"Dùng khi nói đồ đắt (这件衣服太贵了)。","err":"贵 là đắt, trái nghĩa với 便宜 (rẻ) — hỏi giá thì nói '多少钱', chê đắt thì nói '太贵了'。","gfl":1},
+  {"han":"衣服","pinyin":"yīfu","vi":"quần áo","col":"买衣服","ex":"我想去市场买衣服。","exv":"Tôi muốn ra chợ mua quần áo.","use":"Dùng khi mua quần áo ở chợ (去市场买衣服)。","err":"衣服 là quần áo nói chung; đừng nhầm với '衣' đứng một mình — nói quần áo phải nói '衣服'。","gfl":1},
+  {"han":"鞋","pinyin":"xié","vi":"giày","col":"一双鞋","ex":"这双鞋很合适。","exv":"Đôi giày này rất vừa.","use":"Dùng khi mua giày (这双鞋很合适)。","err":"鞋 đọc xié thanh 2; giày đi theo đôi nên nói '一双鞋', không nói '一个鞋'。","gfl":2},
+  {"han":"颜色","pinyin":"yánsè","vi":"màu sắc","col":"什么颜色","ex":"你喜欢什么颜色？","exv":"Bạn thích màu gì?","use":"Dùng khi hỏi màu (你喜欢什么颜色？)。","err":"颜色 là màu sắc; đừng nhầm với '色' đứng một mình — hỏi màu phải nói '什么颜色'。","gfl":2}
   ] },
 { topic: "HSK2 — Giao thông đi lại", hsk: "HSK2", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
@@ -83253,7 +83274,17 @@ var ZH_VOCAB_EXPAND = [
 { han: "十字路口", pinyin: "shízì lùkǒu", vi: "ngã tư", col: "在十字路口", ex: "在十字路口左转。", exv: "Ở ngã tư rẽ trái." },
 { han: "堵车", pinyin: "dǔchē", vi: "tắc đường", col: "堵车了", ex: "早上常常堵车。", exv: "Buổi sáng thường tắc đường." },
 { han: "方向", pinyin: "fāngxiàng", vi: "hướng, phương hướng", col: "哪个方向", ex: "学校在哪个方向？", exv: "Trường học ở hướng nào?" },
-{ han: "地图", pinyin: "dìtú", vi: "bản đồ", col: "看地图", ex: "看地图找路。", exv: "Xem bản đồ tìm đường." }
+{ han: "地图", pinyin: "dìtú", vi: "bản đồ", col: "看地图", ex: "看地图找路。", exv: "Xem bản đồ tìm đường." },
+  {"han":"公共汽车","pinyin":"gōnggòng qìchē","vi":"xe buýt","col":"坐公共汽车","ex":"我每天坐公共汽车去学校。","exv":"Mỗi ngày tôi đi xe buýt đến trường.","use":"Dùng khi đi xe buýt (坐公共汽车去学校)。","err":"公共汽车 là xe buýt; đừng nhầm với '车' nói chung — xe buýt phải nói đủ '公共汽车'。","gfl":2},
+  {"han":"出租车","pinyin":"chūzūchē","vi":"xe taxi","col":"打出租车","ex":"下雨了，我们打出租车吧。","exv":"Trời mưa rồi, chúng ta gọi taxi nhé.","use":"Dùng khi gọi taxi (打出租车吧)。","err":"出租车 là xe taxi; đừng nhầm với '公共汽车' (xe buýt) — taxi là '出租车', xe buýt là '公共汽车'。","gfl":2},
+  {"han":"地铁","pinyin":"dìtiě","vi":"tàu điện ngầm","col":"坐地铁","ex":"坐地铁去机场很快。","exv":"Đi tàu điện ngầm ra sân bay rất nhanh.","use":"Dùng khi đi tàu điện ngầm (坐地铁去机场)。","err":"地铁 là tàu điện ngầm; đừng nhầm với '火车' (tàu hỏa) — tàu chạy dưới đất trong thành phố là '地铁'。","gfl":2},
+  {"han":"自行车","pinyin":"zìxíngchē","vi":"xe đạp","col":"骑自行车","ex":"他每天骑自行车上班。","exv":"Anh ấy mỗi ngày đạp xe đi làm.","use":"Dùng với '骑' khi đi xe đạp (骑自行车)。","err":"自行车 là xe đạp; đi xe đạp nói '骑自行车', giống xe máy nói '骑摩托车', không nói '开自行车'。","gfl":2},
+  {"han":"火车","pinyin":"huǒchē","vi":"tàu hỏa","col":"坐火车","ex":"我们坐火车去河内。","exv":"Chúng tôi đi tàu hỏa đến Hà Nội.","use":"Dùng khi đi tàu hỏa (坐火车去河内)。","err":"火车 là tàu hỏa; đừng nhầm với '地铁' (tàu điện ngầm) — tàu chạy đường dài giữa các thành phố là '火车'。","gfl":1},
+  {"han":"飞机","pinyin":"fēijī","vi":"máy bay","col":"坐飞机","ex":"坐飞机去胡志明市要两个小时。","exv":"Đi máy bay đến Thành phố Hồ Chí Minh mất hai giờ.","use":"Dùng khi đi máy bay (坐飞机)。","err":"飞机 là máy bay; đi máy bay nói '坐飞机', không nói '开飞机' (开飞机 là lái máy bay)。","gfl":1},
+  {"han":"船","pinyin":"chuán","vi":"thuyền, tàu thủy","col":"坐船","ex":"我们坐船去下龙湾。","exv":"Chúng tôi đi thuyền ra vịnh Hạ Long.","use":"Dùng khi đi thuyền, tàu thủy (坐船去下龙湾)。","err":"船 là thuyền, tàu thủy; đừng nhầm với '车' (xe) — đi trên nước là '坐船', đi trên đường là '坐车'。","gfl":2},
+  {"han":"车票","pinyin":"chēpiào","vi":"vé xe, vé tàu","col":"买车票","ex":"请问，在哪儿买车票？","exv":"Xin hỏi, mua vé xe ở đâu?","use":"Dùng khi mua vé xe, vé tàu (买车票)。","err":"车票 là vé xe, vé tàu; đừng nhầm với '票' nói chung — vé xe, vé tàu cụ thể nói '车票', vé máy bay là '机票'。","gfl":1},
+  {"han":"左","pinyin":"zuǒ","vi":"trái, bên trái","col":"左边","ex":"在十字路口向左转。","exv":"Ở ngã tư rẽ trái.","use":"Dùng khi chỉ hướng trái (向左转)。","err":"左 là bên trái, trái nghĩa với 右 (bên phải) — rẽ trái nói '向左转', rẽ phải nói '向右转'。","gfl":1},
+  {"han":"右","pinyin":"yòu","vi":"phải, bên phải","col":"右边","ex":"学校在马路的右边。","exv":"Trường học ở phía bên phải đường.","use":"Dùng khi chỉ hướng phải (在马路的右边)。","err":"右 là bên phải, trái nghĩa với 左 (bên trái) — đừng nhầm 左 và 右, 左 là trái, 右 là phải。","gfl":1}
   ] },
 { topic: "HSK3 — Công việc văn phòng cơ bản", hsk: "HSK3", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
@@ -83272,7 +83303,11 @@ var ZH_VOCAB_EXPAND = [
 { han: "合作", pinyin: "hézuò", vi: "hợp tác", col: "合作愉快", ex: "希望我们合作愉快。", exv: "Hy vọng chúng ta hợp tác vui vẻ." },
 { han: "成功", pinyin: "chénggōng", vi: "thành công", col: "取得成功", ex: "努力才能取得成功。", exv: "Chỉ có nỗ lực mới đạt được thành công." },
 { han: "失败", pinyin: "shībài", vi: "thất bại", col: "考试失败", ex: "这次他失败了，但是没有放弃。", exv: "Lần này anh ấy thất bại, nhưng không bỏ cuộc." },
-{ han: "努力", pinyin: "nǔlì", vi: "nỗ lực", col: "努力学习", ex: "他每天努力学习。", exv: "Mỗi ngày anh ấy đều nỗ lực học tập." }
+{ han: "努力", pinyin: "nǔlì", vi: "nỗ lực", col: "努力学习", ex: "他每天努力学习。", exv: "Mỗi ngày anh ấy đều nỗ lực học tập." },
+  {"han":"办公室","pinyin":"bàngōngshì","vi":"văn phòng","col":"在办公室","ex":"他在办公室工作。","exv":"Anh ấy làm việc ở văn phòng.","use":"Dùng khi nói về nơi làm việc trong công ty, đi với 在: 在办公室工作。","err":"办公室 là nơi làm việc; đừng nhầm với 公司 (công ty) — văn phòng là một phòng/bộ phận trong công ty.","gfl":2},
+  {"han":"会议","pinyin":"huìyì","vi":"cuộc họp","col":"参加会议","ex":"明天上午有一个重要会议。","exv":"Sáng mai có một cuộc họp quan trọng.","use":"会议 là danh từ, chỉ cuộc họp; thường đi với 参加 (tham dự), 开 (mở, tổ chức).","err":"会议 là danh từ (cuộc họp), còn 开会 là động từ (họp) — nói 参加会议, không nói 参加开会。","gfl":3},
+  {"han":"同事","pinyin":"tóngshì","vi":"đồng nghiệp","col":"我的同事","ex":"我的同事都很友好。","exv":"Đồng nghiệp của tôi đều rất thân thiện.","use":"Dùng khi nói về người cùng làm việc ở một công ty, thường đi với 我的/新/老。","err":"同事 là đồng nghiệp cùng công ty; đừng nhầm với 朋友 (bạn bè) hay 同学 (bạn học) — đồng nghiệp là 同事。","gfl":2},
+  {"han":"打印","pinyin":"dǎyìn","vi":"in (tài liệu)","col":"打印文件","ex":"请帮我打印这份文件。","exv":"Hãy giúp tôi in tập tài liệu này.","use":"打印 là động từ, đi với tân ngữ là thứ cần in: 打印文件、打印报告。","err":"打印 là in ra giấy; đừng nhầm với 写 (viết) hay 复印 (photocopy) — in từ máy tính ra là 打印。","gfl":2}
   ] },
 { topic: "HSK4 — Môi trường và xã hội", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
@@ -83351,7 +83386,10 @@ var ZH_VOCAB_EXPAND2 = [
   { han: "转", pinyin: "zhuǎn", vi: "rẽ, quay", col: "左转", ex: "到路口左转。", exv: "Đến ngã tư thì rẽ trái." },
   { han: "客气", pinyin: "kèqi", vi: "khách sáo", col: "不客气", ex: "谢谢！—不客气。", exv: "Cảm ơn! — Không có gì." },
   { han: "越南", pinyin: "Yuènán", vi: "Việt Nam", col: "越南河内", ex: "我住在越南河内。", exv: "Tôi sống ở Hà Nội, Việt Nam." },
-  { han: "河内", pinyin: "Hénèi", vi: "Hà Nội", col: "河内市", ex: "河内是越南的首都。", exv: "Hà Nội là thủ đô của Việt Nam." }
+  { han: "河内", pinyin: "Hénèi", vi: "Hà Nội", col: "河内市", ex: "河内是越南的首都。", exv: "Hà Nội là thủ đô của Việt Nam." },
+  {"han":"左","pinyin":"zuǒ","vi":"trái","col":"往左转","ex":"到市场往左转，就到了。","exv":"Đến chợ rẽ trái là tới.","use":"Dùng với 边/转 để chỉ hướng trái (左边、往左转).","err":"左 là trái; đừng nhầm với 右 (phải) — đi chợ rẽ nhầm hướng là lạc đường.","gfl":1},
+  {"han":"右","pinyin":"yòu","vi":"phải","col":"往右转","ex":"往前走，到路口往右转。","exv":"Đi thẳng, đến ngã tư rẽ phải.","use":"Dùng với 边/转 để chỉ hướng phải (右边、往右转).","err":"右 là phải; đừng nhầm với 左 (trái) — 往右转 là rẽ phải, không phải rẽ trái.","gfl":1},
+  {"han":"北","pinyin":"běi","vi":"hướng bắc; phía bắc","col":"往北走","ex":"市场在北边，往北走五分钟就到了。","exv":"Chợ ở phía bắc, đi về hướng bắc năm phút là tới.","use":"Dùng với 边/走 để chỉ hướng bắc (北边、往北走).","err":"Muốn nói 'ở phía bắc' thì nói 北边, đừng nói 在北; 北 thường đi với 边 hoặc ghép với danh từ như 北门.","gfl":1}
  ] }
 ];
 
@@ -85381,7 +85419,15 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "位置", pinyin: "wèizhi", vi: "vị trí", col: "地理位置", ex: "这个地方地理位置很好。", exv: "Nơi này có vị trí địa lý rất tốt." },
   { han: "距离", pinyin: "jùlí", vi: "khoảng cách", col: "距离很远", ex: "学校离家距离很远。", exv: "Trường học cách nhà rất xa." },
   { han: "中心", pinyin: "zhōngxīn", vi: "trung tâm", col: "市中心", ex: "市中心很热闹。", exv: "Trung tâm thành phố rất nhộn nhịp." },
-  { han: "周围", pinyin: "zhōuwéi", vi: "xung quanh", col: "周围环境", ex: "周围环境很好。", exv: "Môi trường xung quanh rất tốt." }
+  { han: "周围", pinyin: "zhōuwéi", vi: "xung quanh", col: "周围环境", ex: "周围环境很好。", exv: "Môi trường xung quanh rất tốt." },
+  {"han":"环境","pinyin":"huánjìng","vi":"môi trường","col":"保护环境","ex":"我们要保护环境。","exv":"Chúng ta phải bảo vệ môi trường.","use":"Dùng khi nói về môi trường xung quanh, thường đi với 保护 (bảo vệ) hay 周围 (xung quanh).","err":"环境 là môi trường nói chung; đừng nhầm với 自然 (thiên nhiên) — môi trường gồm cả thiên nhiên và nơi con người sống.","gfl":3},
+  {"han":"保护","pinyin":"bǎohù","vi":"bảo vệ","col":"保护动物","ex":"我们要保护动物和森林。","exv":"Chúng ta phải bảo vệ động vật và rừng.","use":"保护 là động từ, đi với tân ngữ là thứ cần giữ gìn: 保护环境、保护动物。","err":"保护 là bảo vệ, giữ gìn; đừng nhầm với 保守 (bảo thủ) hay 保持 (giữ, duy trì) — bảo vệ thiên nhiên là 保护。","gfl":3},
+  {"han":"公园","pinyin":"gōngyuán","vi":"công viên","col":"去公园","ex":"周末我们去公园散步。","exv":"Cuối tuần chúng tôi đi dạo ở công viên.","use":"Dùng khi nói về công viên trong thành phố, thường đi với 去 (đi) hay 在 (ở).","err":"公园 là công viên; đừng nhầm với 广场 (quảng trường) — công viên có cây xanh, quảng trường là khoảng đất trống.","gfl":2},
+  {"han":"交通","pinyin":"jiāotōng","vi":"giao thông","col":"交通方便","ex":"这里的交通很方便。","exv":"Giao thông ở đây rất thuận tiện.","use":"Dùng khi nói về giao thông đi lại, thường đi với 方便 (thuận tiện) hay 很忙 (đông, bận rộn).","err":"交通 là giao thông nói chung; đừng nhầm với 运输 (vận chuyển hàng hóa) — đi lại hằng ngày là 交通。","gfl":2},
+  {"han":"空气","pinyin":"kōngqì","vi":"không khí","col":"新鲜空气","ex":"公园里的空气很新鲜。","exv":"Không khí trong công viên rất trong lành.","use":"Dùng khi nói về không khí, thường đi với 新鲜 (trong lành) hay 污染 (ô nhiễm).","err":"空气 là không khí; đừng nhầm với 天气 (thời tiết) — không khí là thứ ta hít thở, thời tiết là nắng mưa.","gfl":2},
+  {"han":"节约","pinyin":"jiéyuē","vi":"tiết kiệm","col":"节约用水","ex":"我们要节约用水。","exv":"Chúng ta phải tiết kiệm nước.","use":"节约 là động từ, đi với tân ngữ là thứ cần tiết kiệm: 节约用水、节约用电。","err":"节约 là tiết kiệm tài nguyên (nước, điện); đừng nhầm với 省钱 (tiết kiệm tiền) — tiết kiệm nước là 节约用水。","gfl":3},
+  {"han":"树木","pinyin":"shùmù","vi":"cây cối","col":"种树木","ex":"我们在公园种了很多树木。","exv":"Chúng tôi trồng rất nhiều cây cối trong công viên.","use":"树木 chỉ cây cối nói chung, thường đi với 种 (trồng) hay 保护 (bảo vệ).","err":"树木 là cây cối nói chung; đừng nhầm với 森林 (rừng) — rừng là một khu rộng lớn, còn 树木 là từng cây.","gfl":0},
+  {"han":"污染","pinyin":"wūrǎn","vi":"ô nhiễm","col":"空气污染","ex":"工厂污染了这里的空气。","exv":"Nhà máy đã làm ô nhiễm không khí ở đây.","use":"污染 vừa là động từ (làm ô nhiễm) vừa là danh từ (sự ô nhiễm): 污染空气、空气污染。","err":"污染 là làm bẩn môi trường; đừng nhầm với 脏 (bẩn nói chung) — ô nhiễm không khí, nguồn nước là 污染。","gfl":5}
   ] },
 { topic: "HSK4 — Tư duy và đánh giá", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
@@ -85426,7 +85472,8 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "经营", pinyin: "jīngyíng", vi: "kinh doanh", col: "经营商店", ex: "他经营一家商店。", exv: "Anh ấy kinh doanh một cửa hàng." },
   { han: "增长", pinyin: "zēngzhǎng", vi: "tăng trưởng", col: "增长很快", ex: "经济增长很快。", exv: "Kinh tế tăng trưởng rất nhanh." },
   { han: "收入", pinyin: "shōurù", vi: "thu nhập", col: "增加收入", ex: "他想增加收入。", exv: "Anh ấy muốn tăng thu nhập." },
-  { han: "支出", pinyin: "zhīchū", vi: "chi tiêu", col: "减少支出", ex: "我们要减少支出。", exv: "Chúng ta phải giảm chi tiêu." }
+  { han: "支出", pinyin: "zhīchū", vi: "chi tiêu", col: "减少支出", ex: "我们要减少支出。", exv: "Chúng ta phải giảm chi tiêu." },
+  {"han":"企业","pinyin":"qǐyè","vi":"doanh nghiệp","col":"一家企业","ex":"这家企业有五百多名员工。","exv":"Doanh nghiệp này có hơn năm trăm nhân viên.","use":"企业 là danh từ, chỉ công ty, xí nghiệp; dùng trang trọng hơn 公司 trong văn bản kinh tế.","err":"Đừng nhầm 企业 (doanh nghiệp, tổ chức kinh doanh) với 事业 (sự nghiệp, công việc cả đời).","gfl":4}
   ] },
 { topic: "HSK4 — Khoa học và công nghệ", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
@@ -85471,7 +85518,8 @@ var ZH_VOCAB_EXPAND3 = [
   { han: "讲座", pinyin: "jiǎngzuò", vi: "buổi giảng, bài giảng", col: "听讲座", ex: "我去听讲座。", exv: "Tôi đi nghe giảng." },
   { han: "论文", pinyin: "lùnwén", vi: "luận văn", col: "写论文", ex: "他在写论文。", exv: "Anh ấy đang viết luận văn." },
   { han: "观点", pinyin: "guāndiǎn", vi: "quan điểm", col: "提出观点", ex: "请提出你的观点。", exv: "Hãy đưa ra quan điểm của bạn." },
-  { han: "思想", pinyin: "sīxiǎng", vi: "tư tưởng", col: "思想进步", ex: "他的思想很进步。", exv: "Tư tưởng của anh ấy rất tiến bộ." }
+  { han: "思想", pinyin: "sīxiǎng", vi: "tư tưởng", col: "思想进步", ex: "他的思想很进步。", exv: "Tư tưởng của anh ấy rất tiến bộ." },
+  {"han":"传统","pinyin":"chuántǒng","vi":"truyền thống","col":"传统文化","ex":"春节是中国最重要的传统节日。","exv":"Tết Nguyên đán là ngày lễ truyền thống quan trọng nhất của Trung Quốc.","use":"传统 vừa là danh từ (truyền thống) vừa là tính từ (mang tính truyền thống), thường đi với 文化、节日、习俗.","err":"传统 chỉ những gì lưu truyền lâu đời; đừng dùng cho thói quen mới hình thành, thói quen mới dùng 习惯.","gfl":4}
   ] },
 { topic: "HSK4 — Đời sống và sức khỏe nâng cao", hsk: "HSK4", hskNote: "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
   cards: [
@@ -95019,7 +95067,18 @@ var ZH_VOCAB_EXPAND5 = [
         "col": "品尝美食",
         "ex": "我们品尝了美食。",
         "exv": "Chúng tôi đã nếm thử món ngon."
-      }
+      },
+  {"han":"旅游","pinyin":"lǚyóu","vi":"du lịch","col":"去旅游","ex":"今年夏天我们去北京旅游。","exv":"Mùa hè năm nay chúng tôi đi du lịch Bắc Kinh.","use":"旅游 là động từ, chỉ đi chơi xa ngắm cảnh; thường đi với 去 (đi) hay 喜欢 (thích).","err":"旅游 là đi du lịch ngắm cảnh; đừng nhầm với 旅行 (chuyến đi nói chung, gồm cả công tác) — đi chơi là 旅游。","gfl":2},
+  {"han":"旅行","pinyin":"lǚxíng","vi":"đi du lịch, chuyến đi","col":"去旅行","ex":"他喜欢一个人去旅行。","exv":"Anh ấy thích đi du lịch một mình.","use":"旅行 vừa là động từ (đi xa) vừa là danh từ (chuyến đi): 去旅行、一次旅行。","err":"旅行 là chuyến đi nói chung; đừng nhầm với 旅游 (chỉ đi chơi ngắm cảnh) — đi công tác xa cũng là 旅行。","gfl":2},
+  {"han":"酒店","pinyin":"jiǔdiàn","vi":"khách sạn","col":"住酒店","ex":"我们在北京住了一家酒店。","exv":"Chúng tôi ở một khách sạn tại Bắc Kinh.","use":"酒店 là danh từ, chỉ khách sạn; thường đi với 住 (ở) hay 预订 (đặt trước).","err":"酒店 là khách sạn; đừng nhầm với 饭店 (nhà hàng, quán ăn) — chỗ ngủ qua đêm là 酒店。","gfl":2},
+  {"han":"护照","pinyin":"hùzhào","vi":"hộ chiếu","col":"我的护照","ex":"出国旅游要带护照。","exv":"Đi du lịch nước ngoài phải mang hộ chiếu.","use":"护照 là danh từ, thường đi với 带 (mang theo) hay 办 (làm, xin cấp).","err":"护照 là hộ chiếu; đừng nhầm với 身份证 (chứng minh nhân dân) — ra nước ngoài dùng 护照。","gfl":2},
+  {"han":"地图","pinyin":"dìtú","vi":"bản đồ","col":"看地图","ex":"我们看地图找路。","exv":"Chúng tôi xem bản đồ để tìm đường.","use":"地图 là danh từ, thường đi với 看 (xem) hay 用 (dùng).","err":"地图 là bản đồ; đừng nhầm với 照片 (ảnh) — tìm đường dùng 地图。","gfl":1},
+  {"han":"行李","pinyin":"xíngli","vi":"hành lý","col":"我的行李","ex":"我的行李很多。","exv":"Hành lý của tôi rất nhiều.","use":"行李 là danh từ, chỉ đồ mang theo khi đi xa; thường đi với 带 (mang) hay 拿 (xách).","err":"行李 là hành lý mang theo; đừng nhầm với 包 (túi, ba lô) — túi đựng hành lý là 包, còn đồ trong đó là 行李。","gfl":3},
+  {"han":"游客","pinyin":"yóukè","vi":"du khách","col":"很多游客","ex":"今天有很多游客来这里。","exv":"Hôm nay có rất nhiều du khách đến đây.","use":"游客 là danh từ, chỉ người đi du lịch; thường đi với 很多 (nhiều) hay 来 (đến).","err":"游客 là du khách; đừng nhầm với 旅客 (hành khách đi xe, đi tàu nói chung) — người đi chơi ngắm cảnh là 游客。","gfl":2},
+  {"han":"参观","pinyin":"cānguān","vi":"tham quan","col":"参观博物馆","ex":"明天我们去参观博物馆。","exv":"Ngày mai chúng tôi đi tham quan bảo tàng.","use":"参观 là động từ, đi với tân ngữ là nơi đến xem: 参观博物馆、参观学校。","err":"参观 là đi xem có mục đích tìm hiểu; đừng nhầm với 看 (xem nói chung) hay 旅游 (đi chơi) — đi xem bảo tàng là 参观。","gfl":2},
+  {"han":"出发","pinyin":"chūfā","vi":"xuất phát, khởi hành","col":"明天出发","ex":"我们明天早上出发。","exv":"Sáng mai chúng tôi khởi hành.","use":"出发 là động từ, chỉ bắt đầu lên đường; thường đi với thời gian: 明天出发、早上出发。","err":"出发 là bắt đầu đi; đừng nhầm với 到达 (đến nơi) — khởi hành là 出发, đến nơi là 到达。","gfl":2},
+  {"han":"到达","pinyin":"dàodá","vi":"đến nơi","col":"到达北京","ex":"我们下午三点到达北京。","exv":"3 giờ chiều chúng tôi đến Bắc Kinh.","use":"到达 là động từ, đi với tân ngữ là nơi đến: 到达北京、到达机场。","err":"到达 là đến nơi; đừng nhầm với 出发 (khởi hành) hay 来 (đến nói chung) — đến đúng điểm đích là 到达。","gfl":3},
+  {"han":"夜市","pinyin":"yèshì","vi":"chợ đêm","col":"逛夜市","ex":"晚上我们去逛夜市。","exv":"Buổi tối chúng tôi đi dạo chợ đêm.","use":"夜市 chỉ chợ họp vào buổi tối, thường đi với 逛 (dạo) hay 去 (đi).","err":"夜市 là chợ đêm; đừng nhầm với 市场 (chợ nói chung, họp cả ban ngày) — chợ chỉ mở buổi tối là 夜市。","gfl":0}
     ]
   },
   {
@@ -95170,7 +95229,9 @@ var ZH_VOCAB_EXPAND5 = [
         "col": "抓住机会",
         "ex": "要抓住机会。",
         "exv": "Cần nắm bắt cơ hội."
-      }
+      },
+  {"han":"工资","pinyin":"gōngzī","vi":"tiền lương","col":"发工资","ex":"每个月十号发工资。","exv":"Mùng mười mỗi tháng phát lương.","use":"工资 là tiền lương tháng cố định; nói 发工资 (phát lương), 涨工资 (tăng lương).","err":"Phân biệt 工资 (lương tháng cố định) với 奖金 (tiền thưởng, không cố định) và 薪水 (lương, cách nói trang trọng hơn).","gfl":3},
+  {"han":"培训","pinyin":"péixùn","vi":"đào tạo, tập huấn","col":"参加培训","ex":"新员工要参加一个月的培训。","exv":"Nhân viên mới phải tham gia một tháng đào tạo.","use":"培训 là động từ/danh từ: 参加培训 (tham gia đào tạo), 培训班 (lớp đào tạo).","err":"培训 là đào tạo nghề/kỹ năng cho người đi làm; đừng nhầm với 教育 (giáo dục nói chung) hay 学习 (học tập).","gfl":4}
     ]
   },
   {
@@ -97800,7 +97861,8 @@ var ZH_VOCAB_EXPAND6 = [
       { "han": "班长", "pinyin": "bānzhǎng", "vi": "lớp trưởng", "col": "我们班长", "ex": "班长帮助老师。", "exv": "Lớp trưởng giúp thầy cô." },
       { "han": "考试", "pinyin": "kǎoshì", "vi": "kỳ thi", "col": "准备考试", "ex": "明天我们考试。", "exv": "Ngày mai chúng ta thi." },
       { "han": "成绩", "pinyin": "chéngjì", "vi": "thành tích, điểm số", "col": "提高成绩", "ex": "他的成绩进步了。", "exv": "Điểm số của anh ấy rất tốt." },
-      { "han": "作业", "pinyin": "zuòyè", "vi": "bài tập về nhà", "col": "认真做作业", "ex": "我先做作业。", "exv": "Tôi làm bài tập về nhà trước." }
+      { "han": "作业", "pinyin": "zuòyè", "vi": "bài tập về nhà", "col": "认真做作业", "ex": "我先做作业。", "exv": "Tôi làm bài tập về nhà trước." },
+  {"han":"老师","pinyin":"lǎoshī","vi":"thầy cô giáo","col":"问老师","ex":"这道题我不会做，去问老师。","exv":"Bài này em không biết làm, đi hỏi thầy cô.","use":"Dùng khi gọi hoặc nhắc tới thầy cô ở trường (问老师).","err":"Gọi thầy cô thì nói 老师, không gọi thẳng tên; muốn hỏi bài thì nói 请问老师, lịch sự hơn.","gfl":1}
     ] },
   { "topic": "HSK3 — Đời sống gia đình",
     "hsk": "HSK3",
@@ -97824,7 +97886,8 @@ var ZH_VOCAB_EXPAND6 = [
       { "han": "沙发", "pinyin": "shāfā", "vi": "ghế sofa", "col": "舒服的沙发", "ex": "沙发很舒服。", "exv": "Ghế sofa rất thoải mái." },
       { "han": "窗帘", "pinyin": "chuānglián", "vi": "rèm cửa", "col": "漂亮的窗帘", "ex": "窗帘很漂亮。", "exv": "Rèm cửa rất đẹp." },
       { "han": "灯", "pinyin": "dēng", "vi": "đèn", "col": "开灯", "ex": "请开灯。", "exv": "Hãy bật đèn." },
-      { "han": "钥匙", "pinyin": "yàoshi", "vi": "chìa khóa", "col": "我的钥匙", "ex": "钥匙在哪里？", "exv": "Chìa khóa ở đâu?" }
+      { "han": "钥匙", "pinyin": "yàoshi", "vi": "chìa khóa", "col": "我的钥匙", "ex": "钥匙在哪里？", "exv": "Chìa khóa ở đâu?" },
+  {"han":"做饭","pinyin":"zuòfàn","vi":"nấu cơm","col":"在家做饭","ex":"妈妈每天在家做饭。","exv":"Mẹ nấu cơm ở nhà mỗi ngày.","use":"做饭 là động từ, chỉ nấu ăn ở nhà; thường đi với 在家 (ở nhà) hay 给 (cho ai).","err":"做饭 là nấu cơm ở nhà; đừng nhầm với 吃饭 (ăn cơm) hay 做菜 (nấu món ăn) — nấu bữa cơm nói chung là 做饭。","gfl":2}
     ] },
   { "topic": "HSK4 — Giao thông",
     "hsk": "HSK4",
@@ -97967,7 +98030,11 @@ var ZH_VOCAB_EXPAND6 = [
       { "han": "忽略", "pinyin": "hūlüè", "vi": "bỏ qua, xem nhẹ", "col": "不要忽略", "ex": "不要忽略细节。", "exv": "Đừng bỏ qua chi tiết." },
       { "han": "强调", "pinyin": "qiángdiào", "vi": "nhấn mạnh", "col": "特别强调", "ex": "老师特别强调了这一点。", "exv": "Thầy cô đặc biệt nhấn mạnh điểm này." },
       { "han": "反思", "pinyin": "fǎnsī", "vi": "suy ngẫm lại", "col": "认真反思", "ex": "要认真反思。", "exv": "Phải suy ngẫm lại nghiêm túc." },
-      { "han": "启发", "pinyin": "qǐfā", "vi": "gợi mở, truyền cảm hứng", "col": "受到启发", "ex": "我受到了启发。", "exv": "Tôi đã được gợi mở." }
+      { "han": "启发", "pinyin": "qǐfā", "vi": "gợi mở, truyền cảm hứng", "col": "受到启发", "ex": "我受到了启发。", "exv": "Tôi đã được gợi mở." },
+  {"han":"概念","pinyin":"gàiniàn","vi":"khái niệm","col":"基本概念","ex":"这个概念很重要，要先弄清楚。","exv":"Khái niệm này rất quan trọng, phải hiểu rõ trước đã.","use":"概念指对事物本质的抽象认识，常用于学术和讨论；常说“弄清楚概念”。","err":"别把概念和“想法”混用：想法是临时的念头，概念是相对稳定的认识。","gfl":3},
+  {"han":"判断","pinyin":"pànduàn","vi":"phán đoán; nhận định","col":"做出判断","ex":"没有证据，不能随便做出判断。","exv":"Không có bằng chứng thì không thể tùy tiện đưa ra phán đoán.","use":"可作动词（判断对错）也可作名词（我的判断是……）；正式场合常用。","err":"判断强调依据事实推理；“猜测”没有依据，别混用。","gfl":3},
+  {"han":"推论","pinyin":"tuīlùn","vi":"suy luận (kết quả suy ra)","col":"得出推论","ex":"从这些数据可以得出一个推论。","exv":"Từ những số liệu này có thể rút ra một suy luận.","use":"推论是推理得出的结论，多用于学术写作；常说“得出推论”。","err":"推论是结论，推理是过程：不要说“我的推论过程”，要说“我的推理过程”。","gfl":0},
+  {"han":"思考","pinyin":"sīkǎo","vi":"suy nghĩ","col":"认真思考","ex":"做决定之前，请认真思考。","exv":"Trước khi quyết định, hãy suy nghĩ kỹ.","use":"思考比“想”更正式、更深入，常用于学习和工作场合。","err":"思考是动词，不能说“一个思考”；想表达名词用“思考方式”。","gfl":4}
     ] },
   { "topic": "HSK5 — Xã hội hiện đại",
     "hsk": "HSK5",
@@ -97989,7 +98056,10 @@ var ZH_VOCAB_EXPAND6 = [
       { "han": "创新", "pinyin": "chuàngxīn", "vi": "đổi mới; đổi mới, sáng tạo", "col": "技术创新", "ex": "企业要不断创新。", "exv": "Doanh nghiệp phải không ngừng đổi mới." },
       { "han": "创业", "pinyin": "chuàngyè", "vi": "khởi nghiệp", "col": "创业团队", "ex": "很多年轻人选择自主创业。", "exv": "Nhiều người trẻ chọn tự khởi nghiệp." },
       { "han": "风险", "pinyin": "fēngxiǎn", "vi": "rủi ro", "col": "注意风险", "ex": "做生意要注意风险。", "exv": "Làm ăn phải chú ý đến rủi ro." },
-      { "han": "义务", "pinyin": "yìwù", "vi": "nghĩa vụ", "col": "履行义务", "ex": "公民要履行义务。", "exv": "Công dân phải thực hiện nghĩa vụ." }
+      { "han": "义务", "pinyin": "yìwù", "vi": "nghĩa vụ", "col": "履行义务", "ex": "公民要履行义务。", "exv": "Công dân phải thực hiện nghĩa vụ." },
+  {"han":"福利","pinyin":"fúlì","vi":"phúc lợi","col":"社会福利","ex":"政府提高了老年人的社会福利。","exv":"Chính phủ đã nâng cao phúc lợi xã hội cho người cao tuổi.","use":"福利常指国家或单位给的保障和待遇，如医疗福利、住房福利。","err":"福利不是工资：工资是劳动报酬，福利是额外的保障和待遇。","gfl":5},
+  {"han":"贫困","pinyin":"pínkùn","vi":"nghèo khó","col":"摆脱贫困","ex":"很多家庭通过努力摆脱了贫困。","exv":"Nhiều gia đình đã thoát nghèo nhờ nỗ lực.","use":"贫困是形容词，也可作名词，常用于政策和社会话题。","err":"贫困比“穷”更正式；口语说“很穷”，书面说“贫困”。","gfl":6},
+  {"han":"退休","pinyin":"tuì xiū","vi":"nghỉ hưu","col":"退休生活","ex":"爷爷退休以后，每天早上都去公园散步。","exv":"Ông nội sau khi nghỉ hưu, mỗi sáng đều ra công viên đi dạo.","use":"退休是离合词，可以说“退了休”“退过休”，中间可插入成分。","err":"别说“退休了工作”；退休后不再工作，说“他已经退休了”。","gfl":3}
     ] },
   { "topic": "HSK5 — Kinh tế đời sống",
     "hsk": "HSK5",
@@ -98024,7 +98094,22 @@ var ZH_VOCAB_EXPAND6 = [
       { "han": "遗产", "pinyin": "yíchǎn", "vi": "di sản", "col": "遗产保护工作", "ex": "我们要好好保护文化遗产。", "exv": "Chúng ta phải bảo vệ tốt di sản văn hóa." },
       { "han": "书法", "pinyin": "shūfǎ", "vi": "thư pháp", "col": "练习书法", "ex": "我练习书法。", "exv": "Tôi luyện thư pháp." },
       { "han": "民歌", "pinyin": "míngē", "vi": "dân ca", "col": "唱民歌", "ex": "奶奶唱民歌。", "exv": "Bà hát dân ca." },
-      { "han": "交流", "pinyin": "jiāoliú", "vi": "giao lưu", "col": "文化交流", "ex": "文化交流很重要。", "exv": "Giao lưu văn hóa rất quan trọng." }
+      { "han": "交流", "pinyin": "jiāoliú", "vi": "giao lưu", "col": "文化交流", "ex": "文化交流很重要。", "exv": "Giao lưu văn hóa rất quan trọng." },
+  {"han":"传统","pinyin":"chuántǒng","vi":"truyền thống","col":"传统文化","ex":"春节是中国最重要的传统节日。","exv":"Tết Nguyên đán là lễ truyền thống quan trọng nhất của Trung Quốc.","use":"传统可作名词也可作形容词，常说“传统文化、传统习俗”。","err":"传统指长期流传下来的东西；“习惯”是个人的，范围小得多。","gfl":4},
+  {"han":"习俗","pinyin":"xísú","vi":"phong tục, tập quán","col":"当地习俗","ex":"每个地方都有自己的习俗。","exv":"Mỗi địa phương đều có phong tục riêng.","use":"习俗指一个地区或民族长期形成的风俗习惯，多用于文化话题。","err":"习俗和风俗意思接近，习俗更强调“习惯成俗”的做法。","gfl":0},
+  {"han":"节日","pinyin":"jiérì","vi":"ngày lễ","col":"传统节日","ex":"中秋节是中国人团圆的节日。","exv":"Tết Trung thu là ngày lễ đoàn viên của người Trung Quốc.","use":"节日指庆祝的日子，如春节、中秋节；常说“过节”。","err":"节日是日子本身；“庆祝”是活动，别说“过庆祝”。","gfl":2},
+  {"han":"风俗","pinyin":"fēngsú","vi":"phong tục","col":"风俗习惯","ex":"了解一个地方的风俗习惯很有意思。","exv":"Tìm hiểu phong tục tập quán của một nơi rất thú vị.","use":"风俗多指社会风尚和习俗，常与“习惯”连用。","err":"风俗和习俗可互换，但风俗更常用于“风俗习惯”这个固定搭配。","gfl":4},
+  {"han":"礼仪","pinyin":"lǐyí","vi":"lễ nghi, lễ tiết","col":"礼仪文化","ex":"学习礼仪可以帮助我们更好地与人交往。","exv":"Học lễ nghi giúp chúng ta giao tiếp với người khác tốt hơn.","use":"礼仪指正式场合的行为规范，如见面礼仪、餐桌礼仪。","err":"礼仪是规范和规矩；“礼貌”是个人的态度，别混用。","gfl":0},
+  {"han":"宗教","pinyin":"zōngjiào","vi":"tôn giáo","col":"宗教信仰","ex":"不同的宗教有不同的节日。","exv":"Các tôn giáo khác nhau có những ngày lễ khác nhau.","use":"宗教指佛教、基督教等信仰体系；谈论时要保持尊重和客观。","err":"宗教是体系和组织；“信仰”是个人内心的相信，别混用。","gfl":6},
+  {"han":"信仰","pinyin":"xìnyǎng","vi":"tín ngưỡng; tin tưởng","col":"宗教信仰","ex":"每个人都有自己的信仰。","exv":"Mỗi người đều có tín ngưỡng của riêng mình.","use":"信仰可作名词（一种信仰）也可作动词（信仰佛教）。","err":"信仰的对象多是宗教或理想；“相信”对象更广，如相信朋友。","gfl":6},
+  {"han":"艺术","pinyin":"yìshù","vi":"nghệ thuật","col":"艺术作品","ex":"这件艺术作品非常有创意。","exv":"Tác phẩm nghệ thuật này rất sáng tạo.","use":"艺术指绘画、音乐、舞蹈等，常说“艺术家、艺术作品”。","err":"艺术是总称；具体说一种艺术时用“绘画艺术、音乐艺术”。","gfl":3},
+  {"han":"舞蹈","pinyin":"wǔdǎo","vi":"múa; điệu múa","col":"民间舞蹈","ex":"她从小就喜欢跳舞，梦想成为舞蹈演员。","exv":"Cô ấy từ nhỏ đã thích múa, mơ trở thành diễn viên múa.","use":"舞蹈是名词，动词说“跳舞”；常说“舞蹈表演、舞蹈演员”。","err":"别说“跳舞蹈”；说“跳舞”或“表演舞蹈”。","gfl":6},
+  {"han":"戏剧","pinyin":"xìjù","vi":"kịch; sân khấu kịch","col":"传统戏剧","ex":"京剧是中国最有名的传统戏剧之一。","exv":"Kinh kịch là một trong những loại kịch truyền thống nổi tiếng nhất của Trung Quốc.","use":"戏剧指话剧、京剧等舞台艺术，常说“看戏剧、戏剧表演”。","err":"戏剧是舞台演出；“电影”是银幕作品，别混用。","gfl":5},
+  {"han":"文学","pinyin":"wénxué","vi":"văn học","col":"中国文学","ex":"中国文学有着悠久的历史。","exv":"Văn học Trung Quốc có lịch sử lâu đời.","use":"文学指小说、诗歌等作品的总称，常说“文学作品、文学家”。","err":"文学是艺术门类；“文字”只是书写的符号，别混用。","gfl":3},
+  {"han":"诗歌","pinyin":"shīgē","vi":"thơ ca","col":"朗诵诗歌","ex":"他喜欢朗诵诗歌，尤其是唐诗。","exv":"Anh ấy thích ngâm thơ ca, nhất là thơ Đường.","use":"诗歌指诗的总称，常说“写诗歌、朗诵诗歌”。","err":"诗是单首，诗歌是总称；说“一首诗”，不说“一个诗歌”。","gfl":5},
+  {"han":"绘画","pinyin":"huìhuà","vi":"hội họa; vẽ tranh","col":"学习绘画","ex":"她从小学习绘画，画得很好。","exv":"Cô ấy học vẽ từ nhỏ, vẽ rất giỏi.","use":"绘画可作名词也可作动词，常说“绘画作品、学习绘画”。","err":"绘画强调艺术性的画；随便画画口语说“画画”。","gfl":6},
+  {"han":"服饰","pinyin":"fúshì","vi":"trang phục","col":"传统服饰","ex":"旗袍是中国传统的服饰。","exv":"Sườn xám là trang phục truyền thống của Trung Quốc.","use":"服饰是书面语，指衣服和装饰，常用于文化和时尚话题。","err":"口语多说“衣服”；服饰更正式，常用于介绍传统文化。","gfl":0},
+  {"han":"饮食","pinyin":"yǐnshí","vi":"ăn uống; ẩm thực","col":"饮食文化","ex":"中国的饮食文化非常丰富。","exv":"Ẩm thực Trung Quốc vô cùng phong phú.","use":"饮食是书面语，指吃喝方面的习惯和文化，常说“饮食习惯、饮食文化”。","err":"饮食是总称；具体说“吃饭、喝水”时不用饮食。","gfl":5}
     ] },
   { "topic": "HSK5 — Khoa học và công nghệ",
     "hsk": "HSK5",
@@ -98074,7 +98159,10 @@ var ZH_VOCAB_EXPAND6 = [
       { "han": "生态", "pinyin": "shēngtài", "vi": "sinh thái", "col": "生态保护", "ex": "生态环境越来越好。", "exv": "Môi trường sinh thái ngày càng tốt." },
       { "han": "可持续", "pinyin": "kě chíxù", "vi": "bền vững", "col": "可持续利用", "ex": "要可持续发展。", "exv": "Phải phát triển bền vững." },
       { "han": "意识", "pinyin": "yìshí", "vi": "ý thức", "col": "环保意识", "ex": "要提高环保意识。", "exv": "Phải nâng cao ý thức bảo vệ môi trường." },
-      { "han": "行动", "pinyin": "xíngdòng", "vi": "hành động", "col": "立即行动", "ex": "让我们立即行动。", "exv": "Chúng ta hãy hành động ngay." }
+      { "han": "行动", "pinyin": "xíngdòng", "vi": "hành động", "col": "立即行动", "ex": "让我们立即行动。", "exv": "Chúng ta hãy hành động ngay." },
+  {"han":"污染","pinyin":"wūrǎn","vi":"ô nhiễm","col":"环境污染","ex":"工厂排出的废水污染了这条河。","exv":"Nước thải nhà máy xả ra đã làm ô nhiễm dòng sông này.","use":"污染可作动词也可作名词，常说“污染环境、空气污染”。","err":"污染强调“弄脏、破坏”；“脏”只是不干净，程度轻得多。","gfl":5},
+  {"han":"节能","pinyin":"jiénéng","vi":"tiết kiệm năng lượng","col":"节能环保","ex":"使用节能灯可以节约用电。","exv":"Dùng đèn tiết kiệm điện có thể tiết kiệm điện.","use":"节能常用于产品和生活方式，如节能灯、节能汽车。","err":"节能特指节约能源；节约用水说“节水”，不说“节能水”。","gfl":6},
+  {"han":"治理","pinyin":"zhìlǐ","vi":"quản lý, xử lý (vấn đề)","col":"环境治理","ex":"政府正在努力治理环境污染。","exv":"Chính phủ đang nỗ lực xử lý ô nhiễm môi trường.","use":"治理多用于环境、交通等公共问题，比“管理”更强调解决问题。","err":"治理的对象是问题；管理人的时候说“管理”，不说“治理人”。","gfl":5}
     ] },
   { "topic": "HSK6 — Triết lý và tư tưởng",
     "hsk": "HSK6",
@@ -99298,7 +99386,12 @@ var ZH_VOCAB_EXPAND7 = [
       { "han": "毕业", "pinyin": "bìyè", "vi": "tốt nghiệp", "col": "毕业证书", "ex": "他去年拿到了毕业证书。", "exv": "Năm ngoái anh ấy đã tốt nghiệp đại học." },
       { "han": "奖学金", "pinyin": "jiǎngxuéjīn", "vi": "học bổng", "col": "奖学金申请", "ex": "奖学金申请通过了。", "exv": "Đơn xin học bổng đã được duyệt." },
       { "han": "教授", "pinyin": "jiàoshòu", "vi": "giáo sư", "col": "拜访教授", "ex": "我去拜访教授。", "exv": "Tôi đi hỏi giáo sư." },
-      { "han": "课堂", "pinyin": "kètáng", "vi": "lớp học", "col": "走进课堂", "ex": "在课堂上要认真听。", "exv": "Trong lớp học phải nghe chăm chú." }
+      { "han": "课堂", "pinyin": "kètáng", "vi": "lớp học", "col": "走进课堂", "ex": "在课堂上要认真听。", "exv": "Trong lớp học phải nghe chăm chú." },
+  {"han":"研究","pinyin":"yánjiū","vi":"nghiên cứu","col":"科学研究","ex":"他正在研究人工智能。","exv":"Anh ấy đang nghiên cứu trí tuệ nhân tạo.","use":"研究可作动词也可作名词，常说“做研究、研究成果”。","err":"研究强调系统深入；随便看看说“了解”，不说“研究一下”。","gfl":4},
+  {"han":"实验","pinyin":"shíyàn","vi":"thí nghiệm","col":"做实验","ex":"学生们在实验室做实验。","exv":"Các học sinh đang làm thí nghiệm trong phòng thí nghiệm.","use":"实验可作名词也可作动词，常说“做实验、实验结果”。","err":"实验是在受控条件下进行的；“试验”多指试用新产品，别混用。","gfl":3},
+  {"han":"数据","pinyin":"shùjù","vi":"số liệu","col":"调查数据","ex":"调查数据显示，年轻人更喜欢网上购物。","exv":"Số liệu khảo sát cho thấy người trẻ thích mua sắm online hơn.","use":"数据是复数概念，常说“收集数据、分析数据”。","err":"数据是客观的数字；“资料”范围更广，包括文字和图片。","gfl":4},
+  {"han":"发现","pinyin":"fāxiàn","vi":"phát hiện","col":"新发现","ex":"科学家有了新发现。","exv":"Các nhà khoa học đã có phát hiện mới.","use":"发现可作动词（发现问题）也可作名词（新发现）。","err":"发现指找到原来存在的东西；“发明”是创造原来没有的东西，别混用。","gfl":2},
+  {"han":"发表","pinyin":"fābiǎo","vi":"công bố; phát biểu","col":"发表论文","ex":"他在杂志上发表了一篇论文。","exv":"Anh ấy đã đăng một bài luận trên tạp chí.","use":"发表常用于论文、文章和意见，如发表演讲、发表看法。","err":"发表文章是公开登出来；“写文章”只是写，不一定发表。","gfl":3}
     ] },
   { "topic": "HSK5 — Xã hội và pháp luật",
     "hsk": "HSK5",
@@ -99319,7 +99412,11 @@ var ZH_VOCAB_EXPAND7 = [
       { "han": "罚款", "pinyin": "fákuǎn", "vi": "tiền phạt; phạt tiền", "col": "交通罚款", "ex": "他交了交通罚款。", "exv": "Anh ấy đã nộp phạt giao thông." },
       { "han": "监狱", "pinyin": "jiānyù", "vi": "nhà tù", "col": "送进监狱", "ex": "罪犯被送进了监狱。", "exv": "Tội phạm đã bị đưa vào nhà tù." },
       { "han": "自由", "pinyin": "zìyóu", "vi": "tự do", "col": "珍惜自由", "ex": "我们要珍惜自由。", "exv": "Chúng ta phải trân trọng tự do." },
-      { "han": "平等", "pinyin": "píngděng", "vi": "bình đẳng", "col": "男女平等", "ex": "法律面前人人平等。", "exv": "Trước pháp luật mọi người bình đẳng." }
+      { "han": "平等", "pinyin": "píngděng", "vi": "bình đẳng", "col": "男女平等", "ex": "法律面前人人平等。", "exv": "Trước pháp luật mọi người bình đẳng." },
+  {"han":"违法","pinyin":"wéi fǎ","vi":"vi phạm pháp luật","col":"违法行为","ex":"这种行为是违法的，要受到处罚。","exv":"Hành vi này là vi phạm pháp luật, sẽ bị xử phạt.","use":"违法是离合词，可说“违了法”；常用于法律话题。","err":"违法是违反法律；违反学校规定说“违反规定”，不说“违法”。","gfl":5},
+  {"han":"惩罚","pinyin":"chéngfá","vi":"trừng phạt","col":"受到惩罚","ex":"犯罪的人会受到法律的惩罚。","exv":"Người phạm tội sẽ chịu sự trừng phạt của pháp luật.","use":"惩罚是正式用语，常用于法律和教育场合。","err":"惩罚比“罚”更正式；口语说“罚站”，书面说“惩罚”。","gfl":0},
+  {"han":"责任","pinyin":"zérèn","vi":"trách nhiệm","col":"负责任","ex":"每个人都要对自己的行为负责任。","exv":"Mỗi người đều phải chịu trách nhiệm về hành vi của mình.","use":"责任是名词，常说“负责任、有责任、责任心”。","err":"责任是应尽的义务；“任务”是具体要做的事，别混用。","gfl":3},
+  {"han":"诉讼","pinyin":"sùsòng","vi":"kiện tụng","col":"提起诉讼","ex":"他决定向法院提起诉讼。","exv":"Anh ấy quyết định khởi kiện ra tòa án.","use":"诉讼是法律术语，指通过法院解决纠纷；常说“提起诉讼”。","err":"诉讼是正式的法律程序；口语说“打官司”，书面说“诉讼”。","gfl":0}
     ] },
   { "topic": "HSK5 — Sức khỏe và y tế",
     "hsk": "HSK5",
@@ -99519,8 +99616,9 @@ var ZH_VOCAB_EXPAND7 = [
       { "han": "地图", "pinyin": "dìtú", "vi": "bản đồ", "col": "电子地图", "ex": "请看地图。", "exv": "Hãy xem bản đồ." },
       { "han": "照片", "pinyin": "zhàopiàn", "vi": "ảnh", "col": "照片墙", "ex": "游客在拍照片。", "exv": "Du khách đang chụp ảnh." },
       { "han": "纪念品", "pinyin": "jìniànpǐn", "vi": "quà lưu niệm", "col": "精美纪念品", "ex": "我买了精美纪念品。", "exv": "Tôi đã mua quà lưu niệm." },
-      { "han": "行李", "pinyin": "xínglǐ", "vi": "hành lý", "col": "托运行李", "ex": "请拿好行李。", "exv": "Hãy cầm chắc hành lý." },
-      { "han": "海关", "pinyin": "hǎiguān", "vi": "hải quan", "col": "通过海关", "ex": "我们通过了海关。", "exv": "Chúng ta đã qua hải quan." }
+      { "han": "行李", "pinyin": "xíngli", "vi": "hành lý", "col": "托运行李", "ex": "请拿好行李。", "exv": "Hãy cầm chắc hành lý." },
+      { "han": "海关", "pinyin": "hǎiguān", "vi": "hải quan", "col": "通过海关", "ex": "我们通过了海关。", "exv": "Chúng ta đã qua hải quan." },
+  {"han":"风景","pinyin":"fēngjǐng","vi":"phong cảnh","col":"美丽的风景","ex":"这里的风景很美，很多人来拍照。","exv":"Phong cảnh ở đây rất đẹp, nhiều người đến chụp ảnh.","use":"风景 chỉ cảnh đẹp tự nhiên hoặc của một nơi; hay đi với 美丽、优美, nói 看风景 (ngắm cảnh).","err":"风景 là cảnh vật nhìn thấy được; đừng nhầm với 景色 (cũng là cảnh sắc, dùng tương tự nhưng 景色 trang trọng hơn) hay 环境 (môi trường xung quanh).","gfl":4}
     ] },
   { "topic": "HSK4 — Thể thao và giải trí",
     "hsk": "HSK4",
@@ -99574,7 +99672,11 @@ var ZH_VOCAB_EXPAND7 = [
       { "han": "公园", "pinyin": "gōngyuán", "vi": "công viên", "col": "公园散步", "ex": "周末去公园玩。", "exv": "Cuối tuần đến công viên chơi." },
       { "han": "超市", "pinyin": "chāoshì", "vi": "siêu thị", "col": "大超市", "ex": "妈妈去超市买菜。", "exv": "Mẹ đến siêu thị mua rau." },
       { "han": "银行", "pinyin": "yínháng", "vi": "ngân hàng", "col": "银行职员", "ex": "银行职员很重要。", "exv": "Ngân hàng rất quan trọng." },
-      { "han": "邮局", "pinyin": "yóujú", "vi": "bưu điện", "col": "去邮局", "ex": "我去邮局寄信。", "exv": "Tôi đến bưu điện gửi thư." }
+      { "han": "邮局", "pinyin": "yóujú", "vi": "bưu điện", "col": "去邮局", "ex": "我去邮局寄信。", "exv": "Tôi đến bưu điện gửi thư." },
+  {"han":"交通","pinyin":"jiāotōng","vi":"giao thông","col":"交通方便","ex":"这里交通很方便，地铁和公交都有。","exv":"Giao thông ở đây rất tiện, có cả tàu điện ngầm và xe buýt.","use":"交通 là danh từ chung cho đi lại, vận tải; hay nói 交通方便/拥挤 (giao thông tiện lợi/tắc nghẽn).","err":"交通 chỉ hệ thống đi lại chung; đừng nhầm với 运输 (vận chuyển hàng hóa) hay 旅行 (đi du lịch).","gfl":2},
+  {"han":"地铁","pinyin":"dìtiě","vi":"tàu điện ngầm","col":"坐地铁","ex":"坐地铁去市中心只要二十分钟。","exv":"Đi tàu điện ngầm đến trung tâm thành phố chỉ mất hai mươi phút.","use":"地铁 là phương tiện công cộng dưới lòng đất; nói 坐地铁、换乘地铁, hỏi 地铁站 (ga tàu điện ngầm).","err":"地铁 chạy dưới lòng đất; đừng nhầm với 火车 (tàu hỏa đường dài) hay 轻轨 (tàu điện trên cao/đường sắt nhẹ).","gfl":2},
+  {"han":"停车场","pinyin":"tíngchēchǎng","vi":"bãi đỗ xe","col":"地下停车场","ex":"商场下面有一个很大的停车场。","exv":"Dưới trung tâm thương mại có một bãi đỗ xe rất lớn.","use":"停车场 là nơi đỗ xe; nói 找停车场 (tìm bãi đỗ xe), 停车场收费 (bãi đỗ xe thu phí).","err":"停车场 là cả khu vực đỗ xe; đừng nhầm với 车站 (bến xe/ga) hay 车库 (ga-ra để xe riêng).","gfl":2},
+  {"han":"红绿灯","pinyin":"hónglǜdēng","vi":"đèn giao thông","col":"等红绿灯","ex":"过马路要等红绿灯变绿。","exv":"Qua đường phải đợi đèn giao thông chuyển xanh.","use":"红绿灯 là đèn tín hiệu giao thông; nói 等红绿灯 (đợi đèn), 闯红灯 (vượt đèn đỏ).","err":"红灯 là dừng, 绿灯 là đi; đừng nhầm 绿灯 với đèn đường, và nhớ 黄灯 là chuẩn bị dừng.","gfl":0}
     ] },
   { "topic": "HSK4 — Mua sắm và dịch vụ",
     "hsk": "HSK4",
@@ -100452,7 +100554,13 @@ var ZH_VOCAB_EXPAND8 = [
       { "han": "血压", "pinyin": "xuèyā", "vi": "huyết áp", "col": "血压偏低", "ex": "护士为他测量血压。", "exv": "Y tá đo huyết áp cho anh ấy." },
       { "han": "麻醉", "pinyin": "mázuì", "vi": "gây mê", "col": "全身麻醉", "ex": "手术需要全身麻醉。", "exv": "Phẫu thuật cần gây mê toàn thân." },
       { "han": "输血", "pinyin": "shūxuè", "vi": "truyền máu", "col": "紧急输血", "ex": "病人需要紧急输血。", "exv": "Bệnh nhân cần truyền máu khẩn cấp." },
-      { "han": "护理", "pinyin": "hùlǐ", "vi": "chăm sóc", "col": "细心护理", "ex": "护士细心护理病人。", "exv": "Y tá chăm sóc bệnh nhân tận tình." }
+      { "han": "护理", "pinyin": "hùlǐ", "vi": "chăm sóc", "col": "细心护理", "ex": "护士细心护理病人。", "exv": "Y tá chăm sóc bệnh nhân tận tình." },
+  {"han":"治疗","pinyin":"zhìliáo","vi":"điều trị","col":"接受治疗","ex":"病人正在医院接受治疗。","exv":"Bệnh nhân đang điều trị ở bệnh viện.","use":"治疗是动词，常说“治疗疾病、接受治疗”。","err":"治疗是过程；“治好”是结果，别说“治疗好了病”。","gfl":4},
+  {"han":"药物","pinyin":"yàowù","vi":"thuốc","col":"药物治疗","ex":"这种病可以用药物治疗。","exv":"Bệnh này có thể điều trị bằng thuốc.","use":"药物是正式说法，泛指治疗用的药品；口语多说“药”。","err":"药物多用于医学和正式场合；日常买药说“买药”，不说“买药物”。","gfl":4},
+  {"han":"症状","pinyin":"zhèngzhuàng","vi":"triệu chứng","col":"出现症状","ex":"如果出现这些症状，请马上看医生。","exv":"Nếu xuất hiện những triệu chứng này, hãy đi khám ngay.","use":"症状指生病的表现，如发烧、咳嗽；常说“症状明显”。","err":"症状是表现；“疾病”是病本身，别说“得了症状”。","gfl":6},
+  {"han":"健康","pinyin":"jiànkāng","vi":"khỏe mạnh; sức khỏe","col":"身体健康","ex":"经常运动对身体健康很有好处。","exv":"Thường xuyên vận động rất tốt cho sức khỏe.","use":"健康可作形容词（健康的身体）也可作名词（注意健康）。","err":"健康是状态；“卫生”指清洁和防疫，别混用。","gfl":2},
+  {"han":"疾病","pinyin":"jíbìng","vi":"bệnh tật","col":"预防疾病","ex":"勤洗手可以预防疾病。","exv":"Rửa tay thường xuyên có thể phòng bệnh.","use":"疾病是正式说法，常用于医学和公共卫生话题。","err":"口语多说“生病、得病”；疾病是书面语，多用于正式场合。","gfl":6},
+  {"han":"手术","pinyin":"shǒushù","vi":"phẫu thuật","col":"做手术","ex":"医生说明天要给他做手术。","exv":"Bác sĩ nói ngày mai sẽ phẫu thuật cho anh ấy.","use":"手术是名词，常说“做手术、手术成功”。","err":"手术是名词，不能说“手术他”；动词说“做手术、动手术”。","gfl":4}
     ] },
   { "topic": "HSK5 — Pháp luật và trật tự",
     "hsk": "HSK5",
@@ -100553,7 +100661,12 @@ var ZH_VOCAB_EXPAND8 = [
       { "han": "岗位", "pinyin": "gǎngwèi", "vi": "vị trí công tác; vị trí công việc", "col": "这个岗位", "ex": "这个岗位需要会说两种语言。", "exv": "Vị trí này cần biết nói hai ngôn ngữ." },
       { "han": "辞职", "pinyin": "cízhí", "vi": "từ chức; nghỉ việc", "col": "辞职原因", "ex": "她决定辞职，换一份工作。", "exv": "Cô ấy quyết định nghỉ việc để đổi công việc khác." },
       { "han": "兼职", "pinyin": "jiānzhí", "vi": "làm thêm", "col": "兼职工作", "ex": "学生找了一份兼职工作。", "exv": "Sinh viên tìm được việc làm thêm." },
-      { "han": "全职", "pinyin": "quánzhí", "vi": "toàn thời gian", "col": "全职员工", "ex": "他是一名全职员工。", "exv": "Anh ấy là nhân viên toàn thời gian." }
+      { "han": "全职", "pinyin": "quánzhí", "vi": "toàn thời gian", "col": "全职员工", "ex": "他是一名全职员工。", "exv": "Anh ấy là nhân viên toàn thời gian." },
+  {"han":"职业","pinyin":"zhíyè","vi":"nghề nghiệp","col":"选择职业","ex":"选择职业要考虑自己的兴趣。","exv":"Chọn nghề nghiệp phải cân nhắc sở thích của mình.","use":"职业是正式说法，指长期从事的工作；常说“职业选择、职业发展”。","err":"职业是长期稳定的工作；临时打工说“工作”，不说“职业”。","gfl":3},
+  {"han":"工资","pinyin":"gōngzī","vi":"tiền lương","col":"发工资","ex":"公司每个月十号发工资。","exv":"Công ty phát lương vào ngày mười hằng tháng.","use":"工资指按月发的劳动报酬；常说“发工资、涨工资”。","err":"工资是按月发的；按天算的钱说“工钱”，不说“工资”。","gfl":3},
+  {"han":"收入","pinyin":"shōurù","vi":"thu nhập","col":"增加收入","ex":"他通过兼职增加了收入。","exv":"Anh ấy tăng thu nhập nhờ làm thêm.","use":"收入可作名词也可作动词，常说“收入不高、月收入”。","err":"收入是总的进账；工资只是收入的一种，别把两者等同。","gfl":2},
+  {"han":"升职","pinyin":"shēngzhí","vi":"thăng chức","col":"升职加薪","ex":"他工作努力，今年升职了。","exv":"Anh ấy làm việc chăm chỉ, năm nay được thăng chức.","use":"升职指职位提高，常与“加薪”连用。","err":"升职是职位上升；“升级”多用于级别或游戏，别混用。","gfl":0},
+  {"han":"离职","pinyin":"lízhí","vi":"nghỉ việc, thôi việc","col":"办理离职","ex":"他已经办理了离职手续。","exv":"Anh ấy đã làm xong thủ tục nghỉ việc.","use":"离职是正式说法，指离开原来的工作岗位。","err":"离职是正式用语；口语多说“辞职、换工作”。","gfl":0}
     ] },
   { "topic": "HSK5 — Giao thông và logistics",
     "hsk": "HSK5",
@@ -100572,7 +100685,13 @@ var ZH_VOCAB_EXPAND8 = [
       { "han": "驾驶", "pinyin": "jiàshǐ", "vi": "lái xe", "col": "安全驾驶", "ex": "司机要安全驾驶。", "exv": "Tài xế phải lái xe an toàn." },
       { "han": "驾照", "pinyin": "jiàzhào", "vi": "bằng lái", "col": "考取驾照", "ex": "他正在考取驾照。", "exv": "Anh ấy đang thi bằng lái." },
       { "han": "违章", "pinyin": "wéizhāng", "vi": "vi phạm giao thông", "col": "违章记录", "ex": "违章记录会影响信用。", "exv": "Hồ sơ vi phạm sẽ ảnh hưởng uy tín." },
-      { "han": "货运", "pinyin": "huòyùn", "vi": "vận tải hàng hóa", "col": "货运公司", "ex": "货运公司送货很快。", "exv": "Công ty vận tải hàng hóa giao hàng rất nhanh." }
+      { "han": "货运", "pinyin": "huòyùn", "vi": "vận tải hàng hóa", "col": "货运公司", "ex": "货运公司送货很快。", "exv": "Công ty vận tải hàng hóa giao hàng rất nhanh." },
+  {"han":"库存","pinyin":"kùcún","vi":"hàng tồn kho","col":"库存不足","ex":"这种商品库存不足，请等几天。","exv":"Mặt hàng này tồn kho không đủ, xin chờ vài ngày.","use":"库存指仓库里存着的货物，常用于电商和物流。","err":"库存是存货的数量；“仓库”是放货的地方，别混用。","gfl":0},
+  {"han":"订单","pinyin":"dìngdān","vi":"đơn hàng","col":"下订单","ex":"顾客在网上下了订单。","exv":"Khách hàng đã đặt hàng trên mạng.","use":"订单指购买的单据，常说“下订单、取消订单”。","err":"订单是买方下的单；“发货单”是卖方发货的单据，别混用。","gfl":0},
+  {"han":"发货","pinyin":"fāhuò","vi":"gửi hàng","col":"及时发货","ex":"商家承诺三天内发货。","exv":"Người bán cam kết gửi hàng trong ba ngày.","use":"发货指卖家把货发出去，常用于网购。","err":"发货是卖家发；买家收货说“收货”，不说“发货”。","gfl":0},
+  {"han":"签收","pinyin":"qiānshōu","vi":"ký nhận (hàng)","col":"签收包裹","ex":"收到包裹后请检查再签收。","exv":"Sau khi nhận bưu kiện hãy kiểm tra rồi mới ký nhận.","use":"签收指收到货物后签字确认，常用于快递。","err":"签收的前提是收到货；没收到不能签收。","gfl":0},
+  {"han":"快递","pinyin":"kuàidì","vi":"chuyển phát nhanh","col":"寄快递","ex":"我把礼物寄快递给朋友了。","exv":"Tôi đã gửi quà bằng chuyển phát nhanh cho bạn.","use":"快递既指服务也指包裹，常说“寄快递、收快递”。","err":"快递是快件服务；普通邮寄说“寄信、寄包裹”，速度慢得多。","gfl":4},
+  {"han":"配送","pinyin":"pèisòng","vi":"giao hàng (phân phối)","col":"配送服务","ex":"这家超市提供免费配送服务。","exv":"Siêu thị này cung cấp dịch vụ giao hàng miễn phí.","use":"配送指按订单把货送到指定地点，常用于电商和超市。","err":"配送强调按计划分送；“送货”更口语、范围更广。","gfl":0}
     ] },
   { "topic": "HSK5 — Truyền thông và dư luận",
     "hsk": "HSK5",
@@ -100596,7 +100715,8 @@ var ZH_VOCAB_EXPAND8 = [
       { "han": "转发", "pinyin": "zhuǎnfā", "vi": "chia sẻ lại", "col": "转发消息", "ex": "他转发了这条消息。", "exv": "Anh ấy đã chia sẻ lại tin này." },
       { "han": "点击", "pinyin": "diǎnjī", "vi": "nhấp chuột", "col": "点击率", "ex": "这篇文章点击率很高。", "exv": "Bài viết này có tỉ lệ nhấp rất cao." },
       { "han": "收视率", "pinyin": "shōushìlǜ", "vi": "tỉ lệ người xem", "col": "提高收视率", "ex": "节目提高了收视率。", "exv": "Chương trình đã tăng tỉ lệ người xem." },
-      { "han": "公关", "pinyin": "gōngguān", "vi": "quan hệ công chúng", "col": "公关活动", "ex": "公司举办了公关活动。", "exv": "Công ty đã tổ chức hoạt động quan hệ công chúng." }
+      { "han": "公关", "pinyin": "gōngguān", "vi": "quan hệ công chúng", "col": "公关活动", "ex": "公司举办了公关活动。", "exv": "Công ty đã tổ chức hoạt động quan hệ công chúng." },
+  {"han":"宣传","pinyin":"xuānchuán","vi":"tuyên truyền; quảng bá","col":"宣传活动","ex":"学校开展了环保宣传活动。","exv":"Trường học đã tổ chức hoạt động tuyên truyền bảo vệ môi trường.","use":"宣传可作动词也可作名词，常说“做宣传、宣传产品”。","err":"宣传是公开传播信息；“广告”是商业宣传的一种，别等同。","gfl":3}
     ] },
   { "topic": "HSK6 — Kinh tế học và chính sách",
     "hsk": "HSK6",
@@ -100762,7 +100882,8 @@ var ZH_VOCAB_EXPAND8 = [
       { "han": "招牌菜", "pinyin": "zhāopáicài", "vi": "món signature", "col": "招牌菜很好吃", "ex": "这家店的招牌菜很好吃。", "exv": "Món signature của quán này rất ngon." },
       { "han": "饮料", "pinyin": "yǐnliào", "vi": "đồ uống", "col": "点饮料", "ex": "请点饮料。", "exv": "Hãy gọi đồ uống." },
       { "han": "甜点", "pinyin": "tiándiǎn", "vi": "món tráng miệng", "col": "饭后甜点", "ex": "饭后甜点很好吃。", "exv": "Món tráng miệng sau bữa rất ngon." },
-      { "han": "厨师", "pinyin": "chúshī", "vi": "đầu bếp", "col": "厨师手艺", "ex": "厨师手艺很好。", "exv": "Tay nghề đầu bếp rất giỏi." }
+      { "han": "厨师", "pinyin": "chúshī", "vi": "đầu bếp", "col": "厨师手艺", "ex": "厨师手艺很好。", "exv": "Tay nghề đầu bếp rất giỏi." },
+  {"han":"味道","pinyin":"wèidao","vi":"mùi vị","col":"味道很好","ex":"这道菜味道很好，又香又辣。","exv":"Món này vị rất ngon, vừa thơm vừa cay.","use":"味道 chỉ mùi và vị của món ăn; hay nói 味道很好/不错, 尝尝味道 (nếm thử vị).","err":"味道 là mùi vị nói chung; đừng nhầm với 口味 (khẩu vị, sở thích ăn uống của từng người).","gfl":2}
     ] },
   { "topic": "HSK4 — Thời tiết và mùa",
     "hsk": "HSK4",
@@ -100812,7 +100933,11 @@ var ZH_VOCAB_EXPAND8 = [
       { "han": "信任", "pinyin": "xìnrèn", "vi": "tin tưởng", "col": "信任关系", "ex": "朋友之间要建立信任。", "exv": "Bạn bè phải tin tưởng lẫn nhau." },
       { "han": "陪伴", "pinyin": "péibàn", "vi": "ở bên", "col": "陪伴父母", "ex": "周末陪伴父母。", "exv": "Cuối tuần ở bên cha mẹ." },
       { "han": "团聚", "pinyin": "tuánjù", "vi": "đoàn tụ", "col": "全家团聚", "ex": "春节全家团聚。", "exv": "Tết cả nhà đoàn tụ." },
-      { "han": "争吵", "pinyin": "zhēngchǎo", "vi": "cãi nhau", "col": "避免争吵", "ex": "家人要避免争吵。", "exv": "Gia đình nên tránh cãi nhau." }
+      { "han": "争吵", "pinyin": "zhēngchǎo", "vi": "cãi nhau", "col": "避免争吵", "ex": "家人要避免争吵。", "exv": "Gia đình nên tránh cãi nhau." },
+  {"han":"关心","pinyin":"guānxīn","vi":"quan tâm","col":"关心朋友","ex":"朋友之间要互相关心。","exv":"Bạn bè với nhau phải quan tâm lẫn nhau.","use":"关心 là động từ: 关心父母/朋友; cũng dùng 关心国家大事 (quan tâm việc lớn của đất nước).","err":"关心 là quan tâm bằng tình cảm; đừng nhầm với 关注 (chú ý, theo dõi một vấn đề) hay 在乎 (để ý, bận tâm).","gfl":2},
+  {"han":"帮助","pinyin":"bāngzhù","vi":"giúp đỡ","col":"互相帮助","ex":"遇到困难的时候，朋友都会帮助我。","exv":"Lúc gặp khó khăn, bạn bè đều giúp đỡ tôi.","use":"帮助 vừa là động từ vừa là danh từ: 帮助别人, 得到帮助; cũng nói 帮个忙 (giúp một tay, khẩu ngữ).","err":"帮助 là giúp đỡ chung; 帮忙 khẩu ngữ hơn và thường chỉ giúp việc cụ thể, ngắn hạn.","gfl":2},
+  {"han":"结婚","pinyin":"jiéhūn","vi":"kết hôn","col":"结婚纪念日","ex":"他们去年结婚了，今年有了孩子。","exv":"Họ kết hôn năm ngoái, năm nay đã có con.","use":"结婚 là động từ ly hợp: 结婚了、跟……结婚、结婚纪念日; đừng thêm tân ngữ trực tiếp sau 结婚.","err":"结婚 là kết hôn (làm lễ cưới); đừng nhầm với 订婚 (đính hôn, mới chỉ hứa hôn).","gfl":3},
+  {"han":"幸福","pinyin":"xìngfú","vi":"hạnh phúc","col":"幸福的生活","ex":"一家人住在一起，生活很幸福。","exv":"Cả nhà sống cùng nhau, cuộc sống rất hạnh phúc.","use":"幸福 vừa là tính từ vừa là danh từ: 幸福的生活, 祝你幸福; dùng cho cảm giác viên mãn lâu dài.","err":"幸福 là hạnh phúc bền vững; đừng nhầm với 快乐 (vui vẻ nhất thời) hay 高兴 (vui mừng trong chốc lát).","gfl":3}
     ] },
 ];
 var IELTS_VOCAB_EXPAND7 = [
@@ -104931,7 +105056,14 @@ var ZH_VOCAB_EXPAND9 = [
         "col": "开设专栏",
         "ex": "报纸开设了一个专栏。",
         "exv": "Báo đã mở một chuyên mục."
-      }
+      },
+  {"han":"主编","pinyin":"zhǔbiān","vi":"tổng biên tập","col":"杂志主编","ex":"这位主编负责杂志的全部内容。","exv":"Tổng biên tập này phụ trách toàn bộ nội dung tạp chí.","use":"主编指负责编辑工作的负责人，常用于报纸和杂志。","err":"主编是负责人；“编辑”是具体做编辑工作的人，别混用。","gfl":0},
+  {"han":"投稿","pinyin":"tóugǎo","vi":"gửi bài đăng","col":"向杂志投稿","ex":"她向一家杂志投稿，写的是家乡的美食。","exv":"Cô ấy đã gửi bài cho một tạp chí, viết về ẩm thực quê hương.","use":"投稿指把文章投给报刊发表；常说“投稿给……”。","err":"投稿是投给报刊；发到网上说“发帖”，不说“投稿”。","gfl":0},
+  {"han":"版面","pinyin":"bǎnmiàn","vi":"trang báo (bố cục)","col":"版面设计","ex":"报纸的版面设计得很清楚。","exv":"Bố cục trang báo được thiết kế rất rõ ràng.","use":"版面指报纸、杂志一页的编排；常说“版面设计”。","err":"版面是整页的编排；“版块”是报纸的某个栏目，别混用。","gfl":0},
+  {"han":"通讯","pinyin":"tōngxùn","vi":"tin thông tấn; thông tin liên lạc","col":"通讯报道","ex":"通讯员发回了一篇通讯报道。","exv":"Thông tín viên đã gửi về một bài tin thông tấn.","use":"通讯可指新闻体裁，也可指通信联络；新闻场合多指前者。","err":"通讯报道是详细的新闻；“消息”是简短的新闻，别混用。","gfl":6},
+  {"han":"采访","pinyin":"cǎifǎng","vi":"phỏng vấn (báo chí)","col":"接受采访","ex":"这位作家接受了记者的采访。","exv":"Nhà văn này đã nhận lời phỏng vấn của phóng viên.","use":"采访是记者的工作方式，常说“采访对象、进行采访”。","err":"采访是记者采访别人；求职面试说“面试”，不说“采访”。","gfl":4},
+  {"han":"刊物","pinyin":"kānwù","vi":"ấn phẩm định kỳ","col":"学术刊物","ex":"这是一种很有名的学术刊物。","exv":"Đây là một ấn phẩm học thuật rất nổi tiếng.","use":"刊物指定期出版的报刊杂志，常用于正式场合。","err":"刊物是定期出版物；只出一期的书说“书”，不说“刊物”。","gfl":0},
+  {"han":"杂志","pinyin":"zázhì","vi":"tạp chí","col":"订杂志","ex":"他订了一份体育杂志。","exv":"Anh ấy đã đặt mua một tờ tạp chí thể thao.","use":"杂志指定期出版的刊物，如月刊、周刊。","err":"杂志是定期出版；“报纸”多为日报，别混用。","gfl":3}
     ]
   },
   {
@@ -105050,7 +105182,13 @@ var ZH_VOCAB_EXPAND9 = [
         "col": "同情弱者",
         "ex": "我们要同情弱者。",
         "exv": "Chúng ta phải đồng cảm với người yếu thế."
-      }
+      },
+  {"han":"焦虑","pinyin":"jiāolǜ","vi":"lo âu","col":"感到焦虑","ex":"考试前，他感到很焦虑。","exv":"Trước kỳ thi, anh ấy cảm thấy rất lo âu.","use":"焦虑是持续的不安和担心，常用于心理话题。","err":"焦虑是长期的情绪状态；一时的担心说“担心”，不说“焦虑”。","gfl":0},
+  {"han":"紧张","pinyin":"jǐnzhāng","vi":"căng thẳng","col":"心情紧张","ex":"第一次上台表演，他很紧张。","exv":"Lần đầu lên sân khấu biểu diễn, anh ấy rất căng thẳng.","use":"紧张既可指情绪，也可指局势，如“局势紧张”。","err":"紧张是暂时的情绪；长期压力大说“压力大”，不说“很紧张”。","gfl":3},
+  {"han":"压力","pinyin":"yālì","vi":"áp lực","col":"工作压力","ex":"工作压力太大，他想换个轻松一点的工作。","exv":"Áp lực công việc quá lớn, anh ấy muốn đổi sang công việc nhẹ nhàng hơn.","use":"压力可指心理压力，也可指物理压力；常说“压力大、减轻压力”。","err":"压力是外在或内在的负担；“紧张”是压力带来的情绪，别等同。","gfl":3},
+  {"han":"孤独","pinyin":"gūdú","vi":"cô đơn","col":"感到孤独","ex":"一个人在国外生活，他有时会感到孤独。","exv":"Sống một mình ở nước ngoài, đôi khi anh ấy cảm thấy cô đơn.","use":"孤独指内心的孤单感，常用于心理和文学话题。","err":"孤独是内心的感受；“独自一人”只是状态，不一定孤独。","gfl":6},
+  {"han":"兴奋","pinyin":"xīngfèn","vi":"hưng phấn, phấn khích","col":"非常兴奋","ex":"听到这个好消息，他非常兴奋。","exv":"Nghe tin tốt này, anh ấy rất phấn khích.","use":"兴奋指情绪高涨，常说“兴奋得睡不着”。","err":"兴奋是积极的高兴；“激动”可好可坏，范围更广。","gfl":4},
+  {"han":"失望","pinyin":"shīwàng","vi":"thất vọng","col":"感到失望","ex":"比赛输了，大家都很失望。","exv":"Trận đấu thua, mọi người đều rất thất vọng.","use":"失望指希望落空后的难过；常说“失望极了”。","err":"失望是希望落空；“伤心”范围更广，不一定和希望有关。","gfl":4}
     ]
   },
   {
@@ -105193,7 +105331,10 @@ var ZH_VOCAB_EXPAND9 = [
         "col": "需要绕行",
         "ex": "前方施工，需要绕行。",
         "exv": "Phía trước thi công, cần đi đường vòng."
-      }
+      },
+  {"han":"行人","pinyin":"xíngrén","vi":"người đi bộ","col":"行人过马路","ex":"司机要让行人先过马路。","exv":"Tài xế phải nhường người đi bộ qua đường trước.","use":"行人是正式说法，指步行的人；常用于交通规则。","err":"行人是走路的人；“乘客”是坐车的人，别混用。","gfl":2},
+  {"han":"停车","pinyin":"tíng chē","vi":"đỗ xe","col":"停车场","ex":"这里不能停车，请开到停车场去。","exv":"Ở đây không được đỗ xe, xin lái đến bãi đỗ xe.","use":"停车是离合词，可说“停了车”；常说“停车场、停车位”。","err":"停车是把车停下；“开车”是把车开走，方向相反。","gfl":2},
+  {"han":"斑马线","pinyin":"bānmǎxiàn","vi":"vạch sang đường (vạch ngựa vằn)","col":"走斑马线","ex":"过马路要走斑马线。","exv":"Qua đường phải đi trên vạch sang đường.","use":"斑马线指画在路上的白色条纹，供行人过马路。","err":"斑马线是行人过街的地方；“人行道”是行人走路的路，别混用。","gfl":0}
     ]
   },
   {
@@ -105519,7 +105660,8 @@ var ZH_VOCAB_EXPAND9 = [
         "col": "招生计划",
         "ex": "学校公布了招生计划。",
         "exv": "Trường đã công bố kế hoạch tuyển sinh."
-      }
+      },
+  {"han":"试卷","pinyin":"shìjuàn","vi":"đề thi; bài thi","col":"发试卷","ex":"老师发下试卷，大家开始答题。","exv":"Thầy cô phát đề thi, mọi người bắt đầu làm bài.","use":"试卷指考试用的卷子，常说“做试卷、交试卷”。","err":"试卷是印好的考卷；“试题”指考卷上的题目，别混用。","gfl":4}
     ]
   },
   {
@@ -106576,7 +106718,16 @@ var ZH_VOCAB_EXPAND9 = [
         "col": "免税店",
         "ex": "机场有免税店。",
         "exv": "Sân bay có cửa hàng miễn thuế."
-      }
+      },
+  {"han":"机票","pinyin":"jīpiào","vi":"vé máy bay","col":"订机票","ex":"我已经在网上订了机票，下周去北京。","exv":"Tôi đã đặt vé máy bay trên mạng, tuần sau đi Bắc Kinh.","use":"机票 là vé máy bay; nói 订机票 (đặt vé), 机票很贵/便宜.","err":"机票 chỉ vé máy bay; vé tàu là 车票, vé vào cửa là 门票, đừng dùng lẫn.","gfl":1},
+  {"han":"车票","pinyin":"chēpiào","vi":"vé xe, vé tàu","col":"买车票","ex":"去火车站之前，最好先在网上买车票。","exv":"Trước khi đến ga tàu, tốt nhất nên mua vé tàu trên mạng trước.","use":"车票 chỉ vé tàu/vé xe; nói 买车票、车票多少钱, đi tàu cao tốc cũng dùng 车票.","err":"车票 là vé tàu/xe; đừng nhầm với 机票 (vé máy bay) hay 船票 (vé tàu thủy).","gfl":1},
+  {"han":"旅行社","pinyin":"lǚxíngshè","vi":"công ty du lịch","col":"找旅行社","ex":"第一次出国旅游，可以找旅行社安排。","exv":"Lần đầu đi du lịch nước ngoài, có thể nhờ công ty du lịch sắp xếp.","use":"旅行社 là công ty tổ chức tour; nói 找旅行社、旅行社的导游.","err":"旅行社 là công ty; đừng nhầm với 旅行团 (đoàn du lịch, nhóm người đi cùng nhau).","gfl":3},
+  {"han":"参观","pinyin":"cānguān","vi":"tham quan","col":"参观博物馆","ex":"明天我们去参观博物馆，记得带身份证。","exv":"Ngày mai chúng ta đi tham quan bảo tàng, nhớ mang chứng minh thư.","use":"参观 là động từ: 参观博物馆/工厂/学校, sau nó là nơi chốn, không dùng 把.","err":"参观 là đi xem có mục đích học hỏi; đừng nhầm với 游览 (đi chơi ngắm cảnh) hay 看 (xem nói chung).","gfl":2},
+  {"han":"航班","pinyin":"hángbān","vi":"chuyến bay","col":"航班延误","ex":"因为天气不好，今天的航班延误了两个小时。","exv":"Vì thời tiết xấu, chuyến bay hôm nay bị hoãn hai tiếng.","use":"航班 chỉ chuyến bay cụ thể; nói 航班号 (số hiệu chuyến bay), 航班延误/取消.","err":"航班 là chuyến bay; đừng nhầm với 飞机 (máy bay, phương tiện) hay 机票 (vé máy bay).","gfl":4},
+  {"han":"宾馆","pinyin":"bīnguǎn","vi":"nhà khách, khách sạn","col":"住宾馆","ex":"出差的时候，我一般住宾馆，不住朋友家。","exv":"Khi đi công tác, tôi thường ở nhà khách, không ở nhà bạn.","use":"宾馆 là khách sạn, thường nhỏ hơn 酒店 cao cấp; nói 住宾馆、订宾馆.","err":"宾馆 và 酒店 đều là nơi ở khi đi xa; 宾馆 thường rẻ và đơn giản hơn, 酒店 thường lớn và sang hơn.","gfl":5},
+  {"han":"退票","pinyin":"tuìpiào","vi":"trả vé","col":"退票手续费","ex":"行程改了，我想退票，可是要收手续费。","exv":"Lịch trình đổi rồi, tôi muốn trả vé nhưng phải mất phí thủ tục.","use":"退票 là trả lại vé đã mua; nói 退票、退票要收费, vé máy bay/tàu đều dùng được.","err":"退票 là trả vé lấy lại tiền (có thể mất phí); đừng nhầm với 改签 (đổi vé sang chuyến khác, không trả vé).","gfl":6},
+  {"han":"托运","pinyin":"tuōyùn","vi":"ký gửi hành lý","col":"托运行李","ex":"行李太重了，要去办理托运。","exv":"Hành lý nặng quá, phải đi làm thủ tục ký gửi.","use":"托运 là gửi hành lý theo chuyến bay/tàu; nói 托运行李、托运费.","err":"托运 là ký gửi để vận chuyển cùng; đừng nhầm với 携带 (mang theo bên người) hay 邮寄 (gửi qua bưu điện).","gfl":0},
+  {"han":"旅游团","pinyin":"lǚyóutuán","vi":"đoàn du lịch","col":"跟旅游团","ex":"我们跟旅游团去云南玩了五天，很方便。","exv":"Chúng tôi đi Vân Nam năm ngày theo đoàn du lịch, rất tiện.","use":"旅游团 là đoàn khách đi tour cùng nhau; nói 跟旅游团、参加旅游团.","err":"旅游团 là nhóm người đi du lịch; đừng nhầm với 旅行社 (công ty tổ chức tour).","gfl":0}
     ]
   },
   {
@@ -107561,7 +107712,7 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "门票", "pinyin": "ménpiào", "vi": "vé vào cửa", "col": "门票免费", "ex": "门票可以在网上提前买。", "exv": "Vé vào cửa có thể mua trước trên mạng." },
       { "han": "旅行", "pinyin": "lǚxíng", "vi": "du lịch", "col": "旅行社", "ex": "旅行安排很重要。", "exv": "Du lịch rất quan trọng." },
       { "han": "旅游", "pinyin": "lǚyóu", "vi": "du lịch", "col": "文化旅游", "ex": "文化旅游越来越受欢迎。", "exv": "Du lịch văn hóa ngày càng được ưa chuộng." },
-      { "han": "行李", "pinyin": "xínglǐ", "vi": "hành lý", "col": "行李超重", "ex": "请注意行李准备。", "exv": "Hãy chú ý tới hành lý." },
+      { "han": "行李", "pinyin": "xíngli", "vi": "hành lý", "col": "行李超重", "ex": "请注意行李准备。", "exv": "Hãy chú ý tới hành lý." },
       { "han": "住宿", "pinyin": "zhùsù", "vi": "chỗ ở", "col": "住宿条件", "ex": "住宿条件很好。", "exv": "Điều kiện chỗ ở rất tốt." },
       { "han": "预订", "pinyin": "yùdìng", "vi": "đặt trước", "col": "预订机票", "ex": "提前预订酒店。", "exv": "Đặt trước khách sạn." },
       { "han": "取消", "pinyin": "qǔxiāo", "vi": "hủy bỏ", "col": "取消行程", "ex": "因为下雨取消行程。", "exv": "Vì mưa nên hủy lịch trình." },
@@ -107729,7 +107880,10 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "利率", "pinyin": "lìlǜ", "vi": "lãi suất", "col": "利率变化", "ex": "利率变化不大。", "exv": "Lãi suất thay đổi không lớn." },
       { "han": "兑换", "pinyin": "duìhuàn", "vi": "đổi tiền", "col": "兑换外币", "ex": "在银行兑换外币。", "exv": "Đổi ngoại tệ tại ngân hàng." },
       { "han": "外币", "pinyin": "wàibì", "vi": "ngoại tệ", "col": "外币兑换", "ex": "外币兑换要证件。", "exv": "Đổi ngoại tệ cần giấy tờ." },
-      { "han": "支票", "pinyin": "zhīpiào", "vi": "séc", "col": "开支票", "ex": "公司开支票付款。", "exv": "Công ty mở séc thanh toán." }
+      { "han": "支票", "pinyin": "zhīpiào", "vi": "séc", "col": "开支票", "ex": "公司开支票付款。", "exv": "Công ty mở séc thanh toán." },
+  {"han":"信用卡","pinyin":"xìnyòngkǎ","vi":"thẻ tín dụng","col":"用信用卡付款","ex":"这家店可以用信用卡付款，很方便。","exv":"Cửa hàng này có thể thanh toán bằng thẻ tín dụng, rất tiện.","use":"信用卡 là thẻ tín dụng, tiêu trước trả sau; nói 用信用卡、信用卡透支.","err":"信用卡 là thẻ tín dụng (tiêu trước trả sau); đừng nhầm với 借记卡 (thẻ ghi nợ, tiêu tiền trong tài khoản của mình).","gfl":2},
+  {"han":"现金","pinyin":"xiànjīn","vi":"tiền mặt","col":"付现金","ex":"我身上没有现金，只能用手机支付。","exv":"Tôi không mang tiền mặt, chỉ có thể thanh toán bằng điện thoại.","use":"现金 là tiền mặt; nói 付现金、用现金, đối lập với 刷卡 (quẹt thẻ).","err":"现金 là tiền giấy/tiền xu thật; đừng nhầm với 余额 (số dư trong tài khoản) hay 存款 (tiền gửi ngân hàng).","gfl":3},
+  {"han":"存款","pinyin":"cúnkuǎn","vi":"tiền gửi ngân hàng","col":"银行存款","ex":"他每个月都存一些钱，银行存款越来越多。","exv":"Anh ấy mỗi tháng đều gửi một ít tiền, tiền gửi ngân hàng ngày càng nhiều.","use":"存款 là tiền gửi ở ngân hàng; nói 存钱 (gửi tiền), 存款利息 (lãi tiền gửi).","err":"存款 là tiền đã gửi vào ngân hàng; đừng nhầm với 储蓄 (việc tiết kiệm nói chung) hay 现金 (tiền mặt đang cầm).","gfl":5}
     ] },
   { "topic": "HSK4 — Thời tiết và du lịch", "hsk": "HSK4",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -107746,7 +107900,14 @@ var ZH_VOCAB_EXPAND10 = [
       { "han": "湿度", "pinyin": "shīdù", "vi": "độ ẩm", "col": "湿度很大", "ex": "今天湿度很大。", "exv": "Hôm nay độ ẩm rất lớn." },
       { "han": "预报", "pinyin": "yùbào", "vi": "dự báo", "col": "天气预报", "ex": "天气预报说明天下雨。", "exv": "Dự báo thời tiết nói ngày mai mưa." },
       { "han": "四季", "pinyin": "sìjì", "vi": "bốn mùa", "col": "四季分明", "ex": "这里四季分明。", "exv": "Ở đây bốn mùa rõ rệt." },
-      { "han": "炎热", "pinyin": "yánrè", "vi": "nóng bức", "col": "炎热难耐", "ex": "炎热夏天要多喝水。", "exv": "Mùa hè nóng bức phải uống nhiều nước." }
+      { "han": "炎热", "pinyin": "yánrè", "vi": "nóng bức", "col": "炎热难耐", "ex": "炎热夏天要多喝水。", "exv": "Mùa hè nóng bức phải uống nhiều nước." },
+  {"han":"春天","pinyin":"chūntiān","vi":"mùa xuân","col":"春天来了","ex":"春天来了，花都开了，适合出去旅游。","exv":"Mùa xuân đến rồi, hoa đều nở, thích hợp đi du lịch.","use":"春天 là mùa xuân; nói 春天来了、春天的花, đi du lịch mùa xuân hay nói 踏青 (đi chơi ngắm xuân).","err":"春天 là một trong 四季; đừng nhầm 春天 với 春节 (Tết Nguyên đán, chỉ dịp lễ đầu năm).","gfl":2},
+  {"han":"夏天","pinyin":"xiàtiān","vi":"mùa hè","col":"夏天很热","ex":"夏天很热，出门要带水，还要防晒。","exv":"Mùa hè rất nóng, ra ngoài phải mang nước, còn phải chống nắng.","use":"夏天 là mùa hè; nói 夏天很热、过夏天, đi biển mùa hè rất phổ biến.","err":"夏天 là mùa hè; đừng nhầm với 暑假 (kỳ nghỉ hè của học sinh) — 暑假 chỉ kỳ nghỉ, không phải mùa.","gfl":2},
+  {"han":"秋天","pinyin":"qiūtiān","vi":"mùa thu","col":"秋天很凉快","ex":"秋天很凉快，是去北京旅游最好的季节。","exv":"Mùa thu rất mát mẻ, là mùa đẹp nhất để đi du lịch Bắc Kinh.","use":"秋天 là mùa thu; nói 秋天的叶子、秋高气爽 (trời thu cao trong, khí sảng khoái).","err":"秋天 là mùa thu; đừng nhầm với 秋季 (cách nói trang trọng của mùa thu, dùng trong văn bản).","gfl":2},
+  {"han":"冬天","pinyin":"dōngtiān","vi":"mùa đông","col":"冬天很冷","ex":"冬天很冷，出门要穿羽绒服，还要戴手套。","exv":"Mùa đông rất lạnh, ra ngoài phải mặc áo phao, còn phải đeo găng tay.","use":"冬天 là mùa đông; nói 冬天很冷、过冬, miền Bắc mùa đông có 暖气 (hệ thống sưởi).","err":"冬天 là mùa đông; đừng nhầm với 寒假 (kỳ nghỉ đông của học sinh) — 寒假 chỉ kỳ nghỉ.","gfl":2},
+  {"han":"多云","pinyin":"duōyún","vi":"nhiều mây","col":"多云转晴","ex":"今天多云，可能会下雨，出门记得带伞。","exv":"Hôm nay nhiều mây, có thể mưa, ra ngoài nhớ mang ô.","use":"多云 là từ dự báo thời tiết: 多云转晴 (nhiều mây chuyển nắng), 多云有雨.","err":"多云 là trời nhiều mây nhưng chưa mưa; đừng nhầm với 阴天 (trời râm, u ám) hay 下雨 (đang mưa).","gfl":2},
+  {"han":"凉快","pinyin":"liángkuai","vi":"mát mẻ","col":"天气凉快","ex":"秋天天气凉快，最适合爬山。","exv":"Mùa thu thời tiết mát mẻ, thích hợp nhất để leo núi.","use":"凉快 là tính từ chỉ thời tiết mát dễ chịu; nói 天气凉快、很凉快.","err":"凉快 là mát dễ chịu; đừng nhầm với 冷 (lạnh, khó chịu) hay 寒冷 (lạnh buốt).","gfl":2},
+  {"han":"寒冷","pinyin":"hánlěng","vi":"lạnh giá, rét buốt","col":"寒冷的冬天","ex":"北方的冬天非常寒冷，河水都结冰了。","exv":"Mùa đông miền Bắc vô cùng lạnh giá, nước sông đều đóng băng.","use":"寒冷 là tính từ trang trọng chỉ rất lạnh; nói 寒冷的冬天、天气寒冷.","err":"寒冷 là lạnh buốt, mức độ mạnh hơn 冷 và 凉快; dùng khi trời rét sâu, không dùng cho cảm giác mát nhẹ.","gfl":4}
     ] },
 ];
 var IELTS_VOCAB_EXPAND9 = [
@@ -108623,7 +108784,21 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "公交", "pinyin": "gōngjiāo", "vi": "xe buýt công cộng", "col": "公交车", "ex": "坐公交车去学校很方便。", "exv": "Đi xe buýt đến trường rất tiện." },
       { "han": "护照", "pinyin": "hùzhào", "vi": "hộ chiếu", "col": "护照有效期", "ex": "护照过期了，值得思考。", "exv": "Hộ chiếu đã hết hạn." },
       { "han": "酒店", "pinyin": "jiǔdiàn", "vi": "khách sạn", "col": "酒店管理", "ex": "预订酒店很重要。", "exv": "Đặt khách sạn rất quan trọng." },
-      { "han": "换乘", "pinyin": "huànchéng", "vi": "chuyển tuyến", "col": "换乘公交", "ex": "去机场要换乘地铁。", "exv": "Đi sân bay phải chuyển tuyến tàu điện ngầm." }
+      { "han": "换乘", "pinyin": "huànchéng", "vi": "chuyển tuyến", "col": "换乘公交", "ex": "去机场要换乘地铁。", "exv": "Đi sân bay phải chuyển tuyến tàu điện ngầm." },
+  {"han":"景点","pinyin":"jǐngdiǎn","vi":"điểm tham quan","col":"著名景点","ex":"故宫是北京最著名的景点之一。","exv":"Cố Cung là một trong những điểm tham quan nổi tiếng nhất Bắc Kinh.","use":"景点指供游览的地方，常说“参观景点、景点门票”。","err":"景点是地方；“风景”是看到的景色，别混用。","gfl":6},
+  {"han":"导游","pinyin":"dǎoyóu","vi":"hướng dẫn viên","col":"请导游","ex":"第一次来这里，我们请了一位导游。","exv":"Lần đầu đến đây, chúng tôi đã thuê một hướng dẫn viên.","use":"导游可作名词也可作动词（导游带我们参观）。","err":"导游是带领游客的人；“游客”是参观的人，别混用。","gfl":4},
+  {"han":"旅行","pinyin":"lǚxíng","vi":"du lịch (đi xa)","col":"旅行计划","ex":"我们计划明年去云南旅行。","exv":"Chúng tôi dự định sang năm đi du lịch Vân Nam.","use":"旅行强调出行过程，常说“去旅行、旅行计划”。","err":"旅行和旅游意思接近，旅行更强调“行”，旅游更强调“游玩”。","gfl":2},
+  {"han":"旅游","pinyin":"lǚyóu","vi":"du lịch","col":"旅游景点","ex":"旅游业发展很快。","exv":"Ngành du lịch phát triển rất nhanh.","use":"旅游常用于行业和活动，如旅游业、旅游团。","err":"旅游多指游览观光；出差说“出差”，不说“旅游”。","gfl":2},
+  {"han":"游客","pinyin":"yóukè","vi":"du khách","col":"游客很多","ex":"假期里，这里的游客很多。","exv":"Vào kỳ nghỉ, du khách ở đây rất đông.","use":"游客指外出旅游的人，常说“游客中心、接待游客”。","err":"游客是来游玩的；“居民”是住在这里的人，别混用。","gfl":2},
+  {"han":"行李","pinyin":"xíngli","vi":"hành lý","col":"托运行李","ex":"坐飞机要先托运行李。","exv":"Đi máy bay phải gửi hành lý ký gửi trước.","use":"行李指出行带的箱包，常说“带行李、行李箱”。","err":"行李是带的物品；“行程”是走的路线，别混用。","gfl":3},
+  {"han":"签证","pinyin":"qiānzhèng","vi":"thị thực (visa)","col":"办理签证","ex":"出国之前要先办理签证。","exv":"Trước khi ra nước ngoài phải làm thị thực trước.","use":"签证可作名词也可作动词，常说“办签证、签证过期”。","err":"签证是入境许可；“护照”是身份证明，别混用。","gfl":5},
+  {"han":"登机","pinyin":"dēngjī","vi":"lên máy bay","col":"登机时间","ex":"请提前一个小时到机场办理登机。","exv":"Xin đến sân bay trước một giờ để làm thủ tục lên máy bay.","use":"登机指登上飞机，常说“登机口、登机牌”。","err":"登机是上飞机；“上车”是上汽车、火车，别混用。","gfl":0},
+  {"han":"出发","pinyin":"chūfā","vi":"xuất phát","col":"出发时间","ex":"我们明天早上八点出发。","exv":"Sáng mai tám giờ chúng tôi xuất phát.","use":"出发指开始一段行程，常说“出发去……”。","err":"出发是开始走；“到达”是走到终点，方向相反。","gfl":2},
+  {"han":"到达","pinyin":"dàodá","vi":"đến nơi","col":"到达目的地","ex":"火车准时到达了目的地。","exv":"Tàu hỏa đã đến đích đúng giờ.","use":"到达是正式说法，常用于旅行和物流。","err":"到达是动词，后面接地点；“到”是口语说法，更随意。","gfl":3},
+  {"han":"预订","pinyin":"yùdìng","vi":"đặt trước","col":"预订酒店","ex":"我们已经在网上预订了酒店。","exv":"Chúng tôi đã đặt khách sạn trên mạng rồi.","use":"预订指提前订好，常说“预订机票、预订房间”。","err":"预订是提前订；临时买票说“买票”，不说“预订”。","gfl":4},
+  {"han":"退票","pinyin":"tuì piào","vi":"trả vé","col":"办理退票","ex":"行程改变了，我去车站办理退票。","exv":"Lịch trình thay đổi, tôi ra ga làm thủ tục trả vé.","use":"退票是离合词，可说“退了票”；常用于车票和机票。","err":"退票是把票退掉；“改签”是改时间不退票，别混用。","gfl":6},
+  {"han":"行程","pinyin":"xíngchéng","vi":"lịch trình","col":"安排行程","ex":"导游帮我们安排了三天的行程。","exv":"Hướng dẫn viên đã giúp chúng tôi sắp xếp lịch trình ba ngày.","use":"行程指旅行的时间和路线安排，常说“行程安排”。","err":"行程是计划；“行李”是带的东西，别混用。","gfl":6},
+  {"han":"风景","pinyin":"fēngjǐng","vi":"phong cảnh","col":"风景优美","ex":"这里风景优美，很多人来拍照。","exv":"Phong cảnh ở đây rất đẹp, nhiều người đến chụp ảnh.","use":"风景指自然景色，常说“风景优美、看风景”。","err":"风景是看到的景色；“景点”是游览的地方，别混用。","gfl":4}
     ] },
   { "topic": "HSK5 — Nghề nghiệp và công việc", "hsk": "HSK5",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -108635,7 +108810,19 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "团队", "pinyin": "tuánduì", "vi": "đội nhóm; đội ngũ", "col": "团队精神", "ex": "团队合作比一个人单干更有效。", "exv": "Làm việc theo đội hiệu quả hơn làm một mình." },
       { "han": "老板", "pinyin": "lǎobǎn", "vi": "ông chủ", "col": "老板办公室", "ex": "老板要求很高，值得思考。", "exv": "Yêu cầu của ông chủ rất cao." },
       { "han": "公司", "pinyin": "gōngsī", "vi": "công ty", "col": "公司发展", "ex": "公司发展很好。", "exv": "Công ty phát triển rất tốt." },
-      { "han": "部门", "pinyin": "bùmén", "vi": "phòng ban", "col": "部门经理", "ex": "部门经理很严格。", "exv": "Quản lý phòng ban rất nghiêm khắc." }
+      { "han": "部门", "pinyin": "bùmén", "vi": "phòng ban", "col": "部门经理", "ex": "部门经理很严格。", "exv": "Quản lý phòng ban rất nghiêm khắc." },
+  {"han":"员工","pinyin":"yuángōng","vi":"nhân viên","col":"公司员工","ex":"这家公司的员工有一百多人。","exv":"Công ty này có hơn một trăm nhân viên.","use":"员工指在一个单位工作的人，常说“新员工、老员工”。","err":"员工是受雇的人；“老板”是雇人的人，别混用。","gfl":3},
+  {"han":"领导","pinyin":"lǐngdǎo","vi":"lãnh đạo","col":"公司领导","ex":"领导要求大家按时完成任务。","exv":"Lãnh đạo yêu cầu mọi người hoàn thành nhiệm vụ đúng hạn.","use":"领导可作名词（一位领导）也可作动词（领导大家）。","err":"领导是管人的人；“老板”强调出钱开公司，范围不同。","gfl":3},
+  {"han":"同事","pinyin":"tóngshì","vi":"đồng nghiệp","col":"同事关系","ex":"他和同事的关系很好。","exv":"Anh ấy có quan hệ rất tốt với đồng nghiệp.","use":"同事指在同一单位工作的人，常说“同事之间”。","err":"同事是工作关系；“朋友”是私人关系，别等同。","gfl":2},
+  {"han":"客户","pinyin":"kèhù","vi":"khách hàng","col":"服务客户","ex":"我们要认真服务每一位客户。","exv":"Chúng ta phải phục vụ chu đáo từng khách hàng.","use":"客户是正式说法，常用于商业和服务行业。","err":"客户多用于商业；“顾客”多用于商店买东西的人。","gfl":5},
+  {"han":"项目","pinyin":"xiàngmù","vi":"dự án","col":"负责项目","ex":"她负责一个很重要的项目。","exv":"Cô ấy phụ trách một dự án rất quan trọng.","use":"项目指有计划的工作任务，常说“项目经理、完成项目”。","err":"项目是有目标的任务；“工作”是总称，范围更广。","gfl":4},
+  {"han":"计划","pinyin":"jìhuà","vi":"kế hoạch","col":"工作计划","ex":"我们先做一个工作计划。","exv":"Chúng ta làm một kế hoạch công việc trước đã.","use":"计划可作名词也可作动词，常说“有计划、计划做……”。","err":"计划是事先的安排；“打算”更口语、更随意。","gfl":2},
+  {"han":"目标","pinyin":"mùbiāo","vi":"mục tiêu","col":"实现目标","ex":"努力工作，才能实现自己的目标。","exv":"Nỗ lực làm việc mới đạt được mục tiêu của mình.","use":"目标指想要达到的结果，常说“定目标、实现目标”。","err":"目标是结果；“计划”是达到目标的方法，别混用。","gfl":3},
+  {"han":"效率","pinyin":"xiàolǜ","vi":"hiệu suất","col":"工作效率","ex":"用新方法可以提高工作效率。","exv":"Dùng phương pháp mới có thể nâng cao hiệu suất làm việc.","use":"效率指做事的速度和效果，常说“效率高、提高效率”。","err":"效率高不等于质量好；两者要分开说。","gfl":4},
+  {"han":"合作","pinyin":"hézuò","vi":"hợp tác","col":"合作愉快","ex":"希望我们合作愉快。","exv":"Hy vọng chúng ta hợp tác vui vẻ.","use":"合作可作动词也可作名词，常说“合作项目、一起合作”。","err":"合作是双方一起做；“帮助”是一方帮另一方，别混用。","gfl":3},
+  {"han":"沟通","pinyin":"gōutōng","vi":"giao tiếp, trao đổi","col":"及时沟通","ex":"有问题要及时沟通。","exv":"Có vấn đề phải trao đổi kịp thời.","use":"沟通强调双方交换意见，常用于工作和家庭。","err":"沟通是双向的；“通知”是单向传达，别混用。","gfl":5},
+  {"han":"汇报","pinyin":"huìbào","vi":"báo cáo (lên cấp trên)","col":"向领导汇报","ex":"每周五要向领导汇报工作。","exv":"Mỗi thứ Sáu phải báo cáo công việc với lãnh đạo.","use":"汇报指下级向上级报告，常用于工作场合。","err":"汇报是向上报告；“报告”范围更广，也可向下级传达。","gfl":4},
+  {"han":"出差","pinyin":"chū chāi","vi":"đi công tác","col":"出差一周","ex":"他下周要出差一周。","exv":"Tuần sau anh ấy phải đi công tác một tuần.","use":"出差是离合词，可说“出了差”；指出差办公事。","err":"出差是因公外出；自己出去玩说“旅游”，不说“出差”。","gfl":5}
     ] }
 ,
   { "topic": "HSK5 — Gia đình và xã hội", "hsk": "HSK5",
@@ -108657,7 +108844,10 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "帮助", "pinyin": "bāngzhù", "vi": "giúp đỡ", "col": "帮助很大", "ex": "同事之间应该互相帮助。", "exv": "Đồng nghiệp với nhau nên giúp đỡ lẫn nhau." },
       { "han": "支持", "pinyin": "zhīchí", "vi": "ủng hộ", "col": "大力支持", "ex": "遇到困难的时候，他得到了同事的支持。", "exv": "Khi gặp khó khăn, anh ấy đã nhận được sự ủng hộ của đồng nghiệp." },
       { "han": "关心", "pinyin": "guānxīn", "vi": "quan tâm", "col": "关心员工", "ex": "领导应该多关心员工的生活。", "exv": "Lãnh đạo nên quan tâm nhiều hơn đến đời sống của nhân viên." },
-      { "han": "爱心", "pinyin": "àixīn", "vi": "tình yêu thương", "col": "献爱心", "ex": "献爱心帮助别人。", "exv": "Hãy trao tình yêu thương giúp người khác." }
+      { "han": "爱心", "pinyin": "àixīn", "vi": "tình yêu thương", "col": "献爱心", "ex": "献爱心帮助别人。", "exv": "Hãy trao tình yêu thương giúp người khác." },
+  {"han":"婚姻","pinyin":"hūnyīn","vi":"hôn nhân","col":"婚姻生活","ex":"幸福的婚姻需要两个人共同努力。","exv":"Hôn nhân hạnh phúc cần hai người cùng nỗ lực.","use":"婚姻指结婚后的关系和生活，常用于社会话题。","err":"婚姻是关系；“结婚”是办手续、成家的动作，别混用。","gfl":0},
+  {"han":"亲戚","pinyin":"qīnqi","vi":"họ hàng","col":"走亲戚","ex":"过年的时候，大家都去走亲戚。","exv":"Dịp Tết, mọi người đều đi thăm họ hàng.","use":"亲戚指有血缘或姻亲关系的人，常说“亲戚朋友”。","err":"亲戚是有亲属关系的；“邻居”只是住得近，别混用。","gfl":0},
+  {"han":"孝顺","pinyin":"xiàoshùn","vi":"hiếu thảo","col":"孝顺父母","ex":"孝顺父母是中华民族的传统美德。","exv":"Hiếu thảo với cha mẹ là đức tính truyền thống tốt đẹp của dân tộc Trung Hoa.","use":"孝顺是形容词，常说“孝顺的孩子、孝顺父母”。","err":"孝顺特指对长辈；对朋友好说“友好”，不说“孝顺”。","gfl":0}
     ] },
   { "topic": "HSK5 — Thể thao và giải trí", "hsk": "HSK5",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -108672,7 +108862,16 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "足球", "pinyin": "zúqiú", "vi": "bóng đá", "col": "足球场", "ex": "踢足球很累。", "exv": "Đá bóng rất mệt." },
       { "han": "歌曲", "pinyin": "gēqǔ", "vi": "ca khúc", "col": "流行歌曲", "ex": "流行歌曲很好听。", "exv": "Ca khúc thịnh hành nghe rất hay." },
       { "han": "演出", "pinyin": "yǎnchū", "vi": "buổi diễn", "col": "精彩演出", "ex": "精彩演出很多人。", "exv": "Buổi diễn đặc sắc rất đông người." },
-      { "han": "票房", "pinyin": "piàofáng", "vi": "doanh thu phòng vé", "col": "票房很高", "ex": "票房非常高。", "exv": "Doanh thu phòng vé vô cùng cao." }
+      { "han": "票房", "pinyin": "piàofáng", "vi": "doanh thu phòng vé", "col": "票房很高", "ex": "票房非常高。", "exv": "Doanh thu phòng vé vô cùng cao." },
+  {"han":"运动","pinyin":"yùndòng","vi":"vận động; thể thao","col":"体育运动","ex":"每天运动半个小时对身体有好处。","exv":"Mỗi ngày vận động nửa giờ rất tốt cho sức khỏe.","use":"运动可作名词也可作动词，常说“做运动、运动会”。","err":"运动是总称；具体项目说“跑步、游泳”，不说“运动跑步”。","gfl":2},
+  {"han":"健身","pinyin":"jiànshēn","vi":"tập thể hình; rèn luyện sức khỏe","col":"健身房","ex":"他每天下班后都去健身房健身。","exv":"Mỗi ngày sau giờ làm anh ấy đều đến phòng gym tập thể hình.","use":"健身指锻炼身体，常说“去健身、健身房”。","err":"健身强调锻炼身体；“运动”范围更广，包括比赛。","gfl":4},
+  {"han":"游泳","pinyin":"yóuyǒng","vi":"bơi","col":"学游泳","ex":"夏天很多人喜欢去游泳。","exv":"Mùa hè nhiều người thích đi bơi.","use":"游泳可作名词也可作动词，常说“会游泳、去游泳”。","err":"游泳是在水里游；“洗澡”是在水里洗，别混用。","gfl":3},
+  {"han":"跑步","pinyin":"pǎo bù","vi":"chạy bộ","col":"每天跑步","ex":"他每天早上跑步半个小时。","exv":"Mỗi sáng anh ấy chạy bộ nửa giờ.","use":"跑步是离合词，可说“跑了步”；常说“跑步锻炼”。","err":"跑步是锻炼方式；“跑”还可以指跑着去办事，范围更广。","gfl":3},
+  {"han":"冠军","pinyin":"guànjūn","vi":"quán quân","col":"获得冠军","ex":"中国队获得了比赛的冠军。","exv":"Đội Trung Quốc đã giành chức vô địch của giải đấu.","use":"冠军指比赛第一名，常说“冠军奖杯、世界冠军”。","err":"冠军是第一名；“胜利”是赢了比赛，不一定是第一名。","gfl":5},
+  {"han":"裁判","pinyin":"cáipàn","vi":"trọng tài","col":"裁判决定","ex":"裁判决定这个球有效。","exv":"Trọng tài quyết định quả bóng này hợp lệ.","use":"裁判可作名词也可作动词，常说“当裁判、裁判员”。","err":"裁判是执法的人；“教练”是教队员的人，别混用。","gfl":5},
+  {"han":"观众","pinyin":"guānzhòng","vi":"khán giả","col":"现场观众","ex":"现场观众为运动员加油。","exv":"Khán giả tại sân cổ vũ cho vận động viên.","use":"观众指看比赛或演出的人，常说“观众很多”。","err":"观众是看的人；“听众”是听广播、音乐会的人。","gfl":3},
+  {"han":"演唱会","pinyin":"yǎnchànghuì","vi":"buổi hòa nhạc (ca nhạc)","col":"开演唱会","ex":"这位歌手下个月要开演唱会。","exv":"Ca sĩ này tháng sau sẽ tổ chức buổi hòa nhạc.","use":"演唱会指歌手的现场演出，常说“看演唱会、买演唱会门票”。","err":"演唱会以唱歌为主；“音乐会”可以是器乐演奏。","gfl":3},
+  {"han":"音乐会","pinyin":"yīnyuèhuì","vi":"buổi hòa nhạc","col":"听音乐会","ex":"周末我们去听音乐会。","exv":"Cuối tuần chúng tôi đi nghe hòa nhạc.","use":"音乐会指器乐或声乐的正式演出，常说“音乐会门票”。","err":"音乐会偏正式；流行歌手的演出多说“演唱会”。","gfl":2}
     ] },
   { "topic": "HSK4 — Ăn uống hằng ngày", "hsk": "HSK4",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -108693,7 +108892,10 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "糖", "pinyin": "táng", "vi": "đường", "col": "糖太多", "ex": "糖太多不好。", "exv": "Đường quá nhiều là không tốt." },
       { "han": "盐", "pinyin": "yán", "vi": "muối", "col": "盐太少", "ex": "盐太少没味道。", "exv": "Muối quá ít thì không có vị." },
       { "han": "辣", "pinyin": "là", "vi": "cay", "col": "很辣", "ex": "这个菜很辣。", "exv": "Món này rất cay." },
-      { "han": "甜", "pinyin": "tián", "vi": "ngọt", "col": "甜点", "ex": "这个水果很甜。", "exv": "Trái cây này rất ngọt." }
+      { "han": "甜", "pinyin": "tián", "vi": "ngọt", "col": "甜点", "ex": "这个水果很甜。", "exv": "Trái cây này rất ngọt." },
+  {"han":"水果","pinyin":"shuǐguǒ","vi":"trái cây","col":"吃水果","ex":"每天吃一点水果，对身体很好。","exv":"Mỗi ngày ăn một ít trái cây, rất tốt cho sức khỏe.","use":"水果 là trái cây nói chung; nói 吃水果、买水果, hỏi 什么水果 (trái cây gì).","err":"水果 là trái cây tươi; đừng nhầm với 果汁 (nước ép trái cây) hay 蔬菜 (rau củ).","gfl":1},
+  {"han":"面包","pinyin":"miànbāo","vi":"bánh mì","col":"吃面包","ex":"早上我喜欢吃面包，喝一杯牛奶。","exv":"Buổi sáng tôi thích ăn bánh mì, uống một cốc sữa.","use":"面包 là bánh mì; nói 吃面包、买面包, 面包店 là tiệm bánh.","err":"面包 là bánh mì làm từ bột mì; đừng nhầm với 馒头 (màn thầu, bánh bao không nhân) hay 包子 (bánh bao có nhân).","gfl":1},
+  {"han":"零食","pinyin":"língshí","vi":"đồ ăn vặt","col":"吃零食","ex":"看电影的时候，很多人喜欢吃零食。","exv":"Khi xem phim, nhiều người thích ăn đồ ăn vặt.","use":"零食 là đồ ăn vặt ngoài bữa chính; nói 吃零食、买零食, không dùng cho bữa ăn chính.","err":"零食 là đồ ăn vặt; đừng nhầm với 正餐 (bữa chính) hay 点心 (điểm tâm, món ăn nhẹ kiểu bánh ngọt).","gfl":4}
     ] },
   { "topic": "HSK4 — Học tập ở trường", "hsk": "HSK4",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -108711,7 +108913,13 @@ var ZH_VOCAB_EXPAND11 = [
       { "han": "预习", "pinyin": "yùxí", "vi": "chuẩn bị bài trước", "col": "预习新课", "ex": "提前预习很好。", "exv": "Chuẩn bị bài trước rất tốt." },
       { "han": "提问", "pinyin": "tíwèn", "vi": "đặt câu hỏi", "col": "举手提问", "ex": "大胆提问很好。", "exv": "Mạnh dạn đặt câu hỏi rất tốt." },
       { "han": "回答", "pinyin": "huídá", "vi": "trả lời", "col": "认真回答", "ex": "回答问题要清楚。", "exv": "Trả lời câu hỏi phải rõ ràng." },
-      { "han": "讨论", "pinyin": "tǎolùn", "vi": "thảo luận", "col": "展开讨论", "ex": "讨论问题很有趣。", "exv": "Thảo luận vấn đề rất thú vị." }
+      { "han": "讨论", "pinyin": "tǎolùn", "vi": "thảo luận", "col": "展开讨论", "ex": "讨论问题很有趣。", "exv": "Thảo luận vấn đề rất thú vị." },
+  {"han":"笔记","pinyin":"bǐjì","vi":"ghi chép, vở ghi","col":"记笔记","ex":"上课要认真记笔记，复习的时候很有用。","exv":"Lên lớp phải chăm chú ghi chép, lúc ôn tập rất có ích.","use":"笔记 là vở ghi/ghi chép; nói 记笔记 (ghi chép), 看笔记 (xem vở ghi).","err":"笔记 là ghi chép bài học; đừng nhầm với 日记 (nhật ký, ghi việc riêng hằng ngày) hay 作业 (bài tập về nhà).","gfl":2},
+  {"han":"课文","pinyin":"kèwén","vi":"bài khóa","col":"读课文","ex":"老师让我们先读课文，再回答问题。","exv":"Cô giáo bảo chúng tôi đọc bài khóa trước, rồi trả lời câu hỏi.","use":"课文 là bài đọc trong sách giáo khoa; nói 读课文、背课文 (học thuộc bài khóa).","err":"课文 là bài trong sách; đừng nhầm với 课本 (cả quyển sách giáo khoa) hay 课程 (môn học/khóa học).","gfl":1},
+  {"han":"上课","pinyin":"shàngkè","vi":"vào học, lên lớp","col":"上课时间","ex":"我们早上八点上课，不要迟到。","exv":"Chúng tôi tám giờ sáng vào học, đừng đến muộn.","use":"上课 là động từ ly hợp: 上课了、去上课、上课时间; tân ngữ thời gian đứng giữa: 上两个小时的课.","err":"上课 là vào lớp học; đừng nhầm với 上学 (đi học, đến trường nói chung) hay 学习 (học tập nói chung).","gfl":1},
+  {"han":"下课","pinyin":"xiàkè","vi":"tan học, hết giờ học","col":"下课了","ex":"下课了，同学们都去食堂吃饭。","exv":"Tan học rồi, các bạn đều đến nhà ăn ăn cơm.","use":"下课 là động từ ly hợp: 下课了、等下课; đối lập với 上课.","err":"下课 là hết tiết học; đừng nhầm với 放学 (tan trường, hết buổi học cả ngày) hay 下班 (tan làm).","gfl":1},
+  {"han":"迟到","pinyin":"chídào","vi":"đến muộn","col":"上课迟到","ex":"今天早上堵车，他上课迟到了十分钟。","exv":"Sáng nay tắc đường, anh ấy đến lớp muộn mười phút.","use":"迟到 là động từ: 上课迟到、开会迟到; nói 不要迟到, đối lập với 准时 (đúng giờ).","err":"迟到 là đến muộn; đừng nhầm với 晚点 (chuyến tàu/máy bay đến muộn) hay 缺席 (vắng mặt hẳn).","gfl":4},
+  {"han":"抄写","pinyin":"chāoxiě","vi":"chép lại","col":"抄写生词","ex":"老师让大家抄写生词，每个写三遍。","exv":"Cô giáo bảo mọi người chép từ mới, mỗi từ viết ba lần.","use":"抄写 là chép lại y nguyên chữ đã có; nói 抄写生词、抄写课文.","err":"抄写 là chép lại theo mẫu; đừng nhầm với 写 (viết tự do) hay 默写 (viết theo trí nhớ, không nhìn mẫu).","gfl":4}
     ] },
 ];
 var IELTS_VOCAB_EXPAND10 = [
@@ -109470,7 +109678,12 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "窗口", "pinyin": "chuāngkǒu", "vi": "cửa sổ dịch vụ", "col": "服务窗口", "ex": "请到三号服务窗口办理。", "exv": "Xin hãy đến cửa sổ dịch vụ số ba để làm thủ tục." },
       { "han": "收费", "pinyin": "shōufèi", "vi": "thu phí", "col": "收费标准", "ex": "这里的收费标准很清楚。", "exv": "Tiêu chuẩn thu phí ở đây rất rõ ràng." },
       { "han": "通知", "pinyin": "tōngzhī", "vi": "thông báo", "col": "收到通知", "ex": "我昨天收到了学校的通知。", "exv": "Hôm qua tôi đã nhận được thông báo của trường." },
-      { "han": "办理", "pinyin": "bànlǐ", "vi": "giải quyết, làm", "col": "办理业务", "ex": "这个窗口办理出国业务。", "exv": "Cửa sổ này giải quyết nghiệp vụ xuất ngoại." }
+      { "han": "办理", "pinyin": "bànlǐ", "vi": "giải quyết, làm", "col": "办理业务", "ex": "这个窗口办理出国业务。", "exv": "Cửa sổ này giải quyết nghiệp vụ xuất ngoại." },
+  {"han":"证明","pinyin":"zhèngmíng","vi":"chứng minh; giấy chứng nhận","col":"开证明","ex":"办签证要开工作证明，公司可以帮忙开。","exv":"Làm thị thực cần giấy chứng nhận công tác, công ty có thể giúp mở.","use":"证明 vừa là động từ (chứng minh) vừa là danh từ (giấy chứng nhận): 证明自己、开证明.","err":"开证明 là xin cấp giấy chứng nhận; đừng nhầm với 证明信 (thư chứng nhận) hay 证件 (giấy tờ tùy thân nói chung).","gfl":3},
+  {"han":"复印","pinyin":"fùyìn","vi":"photocopy","col":"复印文件","ex":"办手续要复印身份证，复印两份。","exv":"Làm thủ tục phải photocopy chứng minh thư, photocopy hai bản.","use":"复印 là động từ: 复印文件、复印身份证; 复印件 là bản photocopy.","err":"复印 là sao chụp bằng máy; đừng nhầm với 打印 (in từ máy tính) hay 抄写 (chép tay).","gfl":3},
+  {"han":"批准","pinyin":"pīzhǔn","vi":"phê chuẩn, chấp thuận","col":"批准申请","ex":"他的申请已经批准了，下周可以去取证件。","exv":"Đơn của anh ấy đã được phê duyệt, tuần sau có thể đi lấy giấy tờ.","use":"批准 là động từ trang trọng: 批准申请、得到批准; chủ ngữ thường là cơ quan, lãnh đạo.","err":"批准 là cấp trên đồng ý chính thức; đừng nhầm với 同意 (đồng ý nói chung) hay 通过 (thông qua, đạt yêu cầu).","gfl":3},
+  {"han":"拒绝","pinyin":"jùjué","vi":"từ chối","col":"拒绝申请","ex":"因为材料不全，他的申请被拒绝了。","exv":"Vì hồ sơ chưa đủ, đơn của anh ấy đã bị từ chối.","use":"拒绝 là động từ: 拒绝申请、拒绝帮助; nói 被拒绝 (bị từ chối).","err":"拒绝 là từ chối thẳng; đừng nhầm với 不同意 (không đồng ý, nhẹ hơn) hay 反对 (phản đối một ý kiến).","gfl":5},
+  {"han":"查询","pinyin":"cháxún","vi":"tra cứu","col":"查询结果","ex":"你可以在网上查询申请的结果，不用去窗口问。","exv":"Bạn có thể tra cứu kết quả đơn trên mạng, không cần đến quầy hỏi.","use":"查询 là động từ trang trọng: 查询余额、查询结果; dùng cho tra cứu thông tin chính thức.","err":"查询 là tra cứu hồ sơ/thông tin; đừng nhầm với 查找 (tìm đồ vật) hay 问 (hỏi người).","gfl":5}
     ] },
   { "topic": "HSK4 — Thuê nhà và sinh hoạt", "hsk": "HSK4",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -109490,7 +109703,11 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "安静", "pinyin": "ānjìng", "vi": "yên tĩnh", "col": "环境安静", "ex": "这里环境安静，适合学习。", "exv": "Môi trường ở đây yên tĩnh, thích hợp để học." },
       { "han": "方便", "pinyin": "fāngbiàn", "vi": "tiện lợi", "col": "生活方便", "ex": "附近有超市，生活很方便。", "exv": "Gần đây có siêu thị, sinh hoạt rất tiện lợi." },
       { "han": "租金", "pinyin": "zūjīn", "vi": "tiền thuê", "col": "租金上涨", "ex": "今年的租金上涨了不少。", "exv": "Tiền thuê năm nay đã tăng lên khá nhiều." },
-      { "han": "续租", "pinyin": "xùzū", "vi": "thuê tiếp", "col": "续租一年", "ex": "他打算再续租一年。", "exv": "Anh ấy định thuê tiếp thêm một năm nữa." }
+      { "han": "续租", "pinyin": "xùzū", "vi": "thuê tiếp", "col": "续租一年", "ex": "他打算再续租一年。", "exv": "Anh ấy định thuê tiếp thêm một năm nữa." },
+  {"han":"合同","pinyin":"hétóng","vi":"hợp đồng","col":"签合同","ex":"租房之前，一定要先看清楚合同再签。","exv":"Trước khi thuê nhà, nhất định phải đọc kỹ hợp đồng rồi mới ký.","use":"合同 là hợp đồng; nói 签合同 (ký hợp đồng), 合同到期 (hợp đồng hết hạn).","err":"签合同 là ký hợp đồng; đừng nhầm với 协议 (thỏa thuận, thường ít chặt chẽ hơn hợp đồng) hay 租房 (việc thuê nhà).","gfl":4},
+  {"han":"中介","pinyin":"zhōngjiè","vi":"môi giới","col":"找中介","ex":"我通过中介租到了房子，要付一个月中介费。","exv":"Tôi thuê được nhà qua môi giới, phải trả một tháng phí môi giới.","use":"中介 là người/công ty môi giới; nói 找中介、通过中介, 中介费 là phí môi giới.","err":"中介 là bên môi giới trung gian; đừng nhầm với 房东 (chủ nhà trực tiếp) hay 租客 (người thuê).","gfl":4},
+  {"han":"合租","pinyin":"hézū","vi":"thuê chung","col":"跟人合租","ex":"一个人租整套房子太贵了，我想跟人合租。","exv":"Một mình thuê cả căn quá đắt, tôi muốn thuê chung với người khác.","use":"合租 là nhiều người cùng thuê một nhà; nói 跟人合租、合租一套房子.","err":"合租 là cùng thuê chung; đừng nhầm với 租房 (thuê nhà nói chung, có thể một mình) hay 同住 (ở chung, không nhất thiết cùng thuê).","gfl":0},
+  {"han":"电费","pinyin":"diànfèi","vi":"tiền điện","col":"交电费","ex":"每个月要记得交电费，不然会停电。","exv":"Mỗi tháng phải nhớ đóng tiền điện, nếu không sẽ bị cắt điện.","use":"电费 là tiền điện; nói 交电费 (đóng tiền điện), 电费很贵.","err":"电费 là tiền điện; đừng nhầm với 水费 (tiền nước) hay 房租 (tiền thuê nhà) — ba khoản này thường tách riêng.","gfl":0}
     ] },
   { "topic": "HSK6 — Đạo đức nghề nghiệp và trách nhiệm xã hội", "hsk": "HSK6",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -109702,7 +109919,10 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "大棚", "pinyin": "dàpéng", "vi": "nhà kính trồng rau", "col": "蔬菜大棚", "ex": "冬天蔬菜大棚里也很暖和。", "exv": "Mùa đông trong nhà kính trồng rau cũng rất ấm." },
       { "han": "温室", "pinyin": "wēnshì", "vi": "nhà kính", "col": "温室种植", "ex": "温室种植不受季节限制。", "exv": "Trồng trong nhà kính không bị giới hạn mùa vụ." },
       { "han": "有机", "pinyin": "yǒujī", "vi": "hữu cơ", "col": "有机蔬菜", "ex": "有机蔬菜越来越受欢迎。", "exv": "Rau hữu cơ ngày càng được ưa chuộng." },
-      { "han": "乡村", "pinyin": "xiāngcūn", "vi": "nông thôn", "col": "乡村振兴", "ex": "国家正在推进乡村振兴。", "exv": "Nhà nước đang thúc đẩy chấn hưng nông thôn." }
+      { "han": "乡村", "pinyin": "xiāngcūn", "vi": "nông thôn", "col": "乡村振兴", "ex": "国家正在推进乡村振兴。", "exv": "Nhà nước đang thúc đẩy chấn hưng nông thôn." },
+  {"han":"灌溉","pinyin":"guàngài","vi":"tưới tiêu","col":"灌溉农田","ex":"农民用水灌溉农田。","exv":"Nông dân dùng nước tưới ruộng.","use":"灌溉指给农田供水，常用于农业话题。","err":"灌溉是给田地浇水；给花浇水口语说“浇水”，不说“灌溉”。","gfl":0},
+  {"han":"收获","pinyin":"shōuhuò","vi":"thu hoạch","col":"收获季节","ex":"秋天是收获的季节。","exv":"Mùa thu là mùa thu hoạch.","use":"收获可作动词也可作名词，常说“收获很大”（也可比喻成果）。","err":"收获是收回来；“收成”特指庄稼收得多少，别混用。","gfl":4},
+  {"han":"产量","pinyin":"chǎnliàng","vi":"sản lượng","col":"提高产量","ex":"新技术提高了粮食产量。","exv":"Kỹ thuật mới đã nâng cao sản lượng lương thực.","use":"产量指生产出来的数量，常说“产量高、年产量”。","err":"产量是生产的数量；“收成”是收获的结果，角度不同。","gfl":6}
     ] },
   { "topic": "HSK5 — Giao thông đô thị", "hsk": "HSK5",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -109744,7 +109964,14 @@ var ZH_VOCAB_EXPAND12 = [
       { "han": "申报", "pinyin": "shēnbào", "vi": "đề xuất, khai báo", "col": "申报遗产", "ex": "这个项目正在申报遗产。", "exv": "Dự án này đang đề xuất công nhận di sản." },
       { "han": "名录", "pinyin": "mínglù", "vi": "danh sách", "col": "列入名录", "ex": "这项技艺被列入名录。", "exv": "Kỹ nghệ này đã được đưa vào danh sách." },
       { "han": "非遗", "pinyin": "fēiyí", "vi": "di sản phi vật thể", "col": "非遗项目", "ex": "非遗项目越来越多。", "exv": "Các hạng mục di sản phi vật thể ngày càng nhiều." },
-      { "han": "遗存", "pinyin": "yícún", "vi": "di tồn", "col": "历史遗存", "ex": "这座城市历史遗存丰富。", "exv": "Thành phố này có di tồn lịch sử phong phú." }
+      { "han": "遗存", "pinyin": "yícún", "vi": "di tồn", "col": "历史遗存", "ex": "这座城市历史遗存丰富。", "exv": "Thành phố này có di tồn lịch sử phong phú." },
+  {"han":"文物","pinyin":"wénwù","vi":"văn vật; cổ vật","col":"保护文物","ex":"国家很重视保护文物。","exv":"Nhà nước rất coi trọng bảo vệ văn vật.","use":"文物指有历史价值的物品，常说“文物保护、文物展览”。","err":"文物是实物；“文化”是抽象的传统和习俗，别混用。","gfl":0},
+  {"han":"古迹","pinyin":"gǔjì","vi":"di tích cổ","col":"参观古迹","ex":"我们参观了当地的古迹。","exv":"Chúng tôi đã tham quan di tích cổ ở địa phương.","use":"古迹指古代留下的遗迹，如长城、古庙。","err":"古迹是地方；“文物”是物品，别混用。","gfl":0},
+  {"han":"博物馆","pinyin":"bówùguǎn","vi":"bảo tàng","col":"参观博物馆","ex":"周末很多家长带孩子参观博物馆。","exv":"Cuối tuần nhiều phụ huynh đưa con đi tham quan bảo tàng.","use":"博物馆是收藏和展出文物的地方，常说“去博物馆”。","err":"博物馆是场所；“展览”是里面的活动，别混用。","gfl":5},
+  {"han":"展览","pinyin":"zhǎnlǎn","vi":"triển lãm","col":"举办展览","ex":"博物馆举办了一个文物展览。","exv":"Bảo tàng đã tổ chức một triển lãm văn vật.","use":"展览可作名词也可作动词，常说“看展览、办展览”。","err":"展览是展示活动；“展出”是展览的动作，别说“展览出”。","gfl":5},
+  {"han":"文化","pinyin":"wénhuà","vi":"văn hóa","col":"文化交流","ex":"文化交流可以增进了解。","exv":"Giao lưu văn hóa có thể tăng thêm hiểu biết.","use":"文化指一个民族的生活方式和精神财富，常说“文化差异”。","err":"文化是总称；具体说一种文化时用“中国文化、茶文化”。","gfl":3},
+  {"han":"民间","pinyin":"mínjiān","vi":"dân gian","col":"民间艺术","ex":"剪纸是一种有名的民间艺术。","exv":"Cắt giấy là một loại nghệ thuật dân gian nổi tiếng.","use":"民间指老百姓中间的，常说“民间故事、民间艺术”。","err":"民间是民众的；“官方”是政府的，意思相反。","gfl":3},
+  {"han":"工艺","pinyin":"gōngyì","vi":"kỹ nghệ; nghề thủ công","col":"传统工艺","ex":"这件瓷器的工艺很精细。","exv":"Kỹ nghệ làm đồ sứ này rất tinh xảo.","use":"工艺指制作的技术和手艺，常说“工艺品、手工艺”。","err":"工艺是技术；“工业”是大规模生产，别混用。","gfl":5}
     ] },
   { "topic": "HSK5 — Khởi nghiệp và việc làm trẻ", "hsk": "HSK5",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -110481,7 +110708,23 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "经营", "pinyin": "jīngyíng", "vi": "kinh doanh", "col": "经营一家小店", "ex": "他经营一家小店已经十年了。", "exv": "Anh ấy kinh doanh một cửa hàng nhỏ đã mười năm rồi." },
       { "han": "业务", "pinyin": "yèwù", "vi": "nghiệp vụ", "col": "业务发展", "ex": "这家小公司业务发展很快。", "exv": "Nghiệp vụ của công ty nhỏ này phát triển rất nhanh." },
       { "han": "产业", "pinyin": "chǎnyè", "vi": "ngành nghề", "col": "新兴产业", "ex": "这个地区的新兴产业越来越多。", "exv": "Ngành nghề mới nổi ở khu vực này ngày càng nhiều." },
-      { "han": "收购", "pinyin": "shōugòu", "vi": "mua lại (công ty)", "col": "收购一家小公司", "ex": "大公司想收购这家小公司。", "exv": "Công ty lớn muốn mua lại công ty nhỏ này." }
+      { "han": "收购", "pinyin": "shōugòu", "vi": "mua lại (công ty)", "col": "收购一家小公司", "ex": "大公司想收购这家小公司。", "exv": "Công ty lớn muốn mua lại công ty nhỏ này." },
+  {"han":"企业","pinyin":"qǐyè","vi":"doanh nghiệp","col":"中小企业","ex":"中小企业是经济发展的重要力量。","exv":"Doanh nghiệp vừa và nhỏ là lực lượng quan trọng của phát triển kinh tế.","use":"企业指从事生产经营的单位，常说“企业管理、企业文化”。","err":"企业是单位；“公司”是一种企业形式，别等同。","gfl":4},
+  {"han":"管理","pinyin":"guǎnlǐ","vi":"quản lý","col":"企业管理","ex":"好的管理可以提高工作效率。","exv":"Quản lý tốt có thể nâng cao hiệu suất làm việc.","use":"管理可作动词也可作名词，常说“管理公司、管理工作”。","err":"管理是管人管事；“治理”多用于社会问题，别混用。","gfl":3},
+  {"han":"市场","pinyin":"shìchǎng","vi":"thị trường","col":"市场需求","ex":"产品要满足市场需求。","exv":"Sản phẩm phải đáp ứng nhu cầu thị trường.","use":"市场既指买卖的场所，也指需求的总和；常说“市场调查”。","err":"市场是供求关系；“商场”是购物的具体场所，别混用。","gfl":3},
+  {"han":"销售","pinyin":"xiāoshòu","vi":"bán hàng","col":"产品销售","ex":"这款手机销售得很好。","exv":"Chiếc điện thoại này bán rất chạy.","use":"销售是正式说法，指卖出产品；常说“销售量、销售员”。","err":"销售是卖；“买”是买进，方向相反。","gfl":4},
+  {"han":"利润","pinyin":"lìrùn","vi":"lợi nhuận","col":"获得利润","ex":"公司今年获得了不少利润。","exv":"Công ty năm nay thu được không ít lợi nhuận.","use":"利润指收入减去成本后的所得，常说“利润高、净利润”。","err":"利润是赚到的钱；“收入”是总进账，还没减成本。","gfl":5},
+  {"han":"投资","pinyin":"tóuzī","vi":"đầu tư","col":"投资项目","ex":"他打算投资一个新项目。","exv":"Anh ấy định đầu tư vào một dự án mới.","use":"投资可作动词也可作名词，常说“投资人、投资风险”。","err":"投资是投钱求回报；“花钱”只是消费，别混用。","gfl":4},
+  {"han":"成本","pinyin":"chéngběn","vi":"chi phí","col":"降低成本","ex":"企业要想办法降低成本。","exv":"Doanh nghiệp phải tìm cách giảm chi phí.","use":"成本指生产或经营花的钱，常说“成本高、控制成本”。","err":"成本是花的钱；“价格”是卖的价，两者不同。","gfl":5},
+  {"han":"品牌","pinyin":"pǐnpái","vi":"thương hiệu","col":"有名品牌","ex":"这个品牌在中国很有名。","exv":"Thương hiệu này rất nổi tiếng ở Trung Quốc.","use":"品牌指产品的牌子和名声，常说“创立品牌、品牌价值”。","err":"品牌是名声和标志；“产品”是具体的东西，别混用。","gfl":6},
+  {"han":"广告","pinyin":"guǎnggào","vi":"quảng cáo","col":"做广告","ex":"公司在电视上做了广告。","exv":"Công ty đã quảng cáo trên truyền hình.","use":"广告可作名词也可作动词，常说“打广告、广告牌”。","err":"广告是宣传手段；“宣传”范围更广，不一定是商业的。","gfl":2},
+  {"han":"顾客","pinyin":"gùkè","vi":"khách hàng (mua sắm)","col":"招待顾客","ex":"服务员热情地招待顾客。","exv":"Nhân viên phục vụ nhiệt tình tiếp đón khách hàng.","use":"顾客指买东西的人，常用于商店、饭馆。","err":"顾客多用于零售；“客户”多用于商业合作，别混用。","gfl":2},
+  {"han":"合同","pinyin":"hétóng","vi":"hợp đồng","col":"签合同","ex":"双方签了合同。","exv":"Hai bên đã ký hợp đồng.","use":"合同是正式的书面协议，常说“签合同、按合同办事”。","err":"合同是书面协议；口头答应的事说“约定”，不说“合同”。","gfl":4},
+  {"han":"谈判","pinyin":"tánpàn","vi":"đàm phán","col":"进行谈判","ex":"双方正在进行谈判。","exv":"Hai bên đang tiến hành đàm phán.","use":"谈判指为达成协议而交谈，常用于商业和外交。","err":"谈判是正式交涉；随便聊聊说“谈话”，不说“谈判”。","gfl":3},
+  {"han":"发展","pinyin":"fāzhǎn","vi":"phát triển","col":"发展很快","ex":"这家公司发展得很快。","exv":"Công ty này phát triển rất nhanh.","use":"发展可作动词也可作名词，常说“发展经济、发展空间”。","err":"发展是变大变好；“生长”多用于生物，别混用。","gfl":3},
+  {"han":"竞争","pinyin":"jìngzhēng","vi":"cạnh tranh","col":"市场竞争","ex":"市场竞争很激烈。","exv":"Cạnh tranh trên thị trường rất khốc liệt.","use":"竞争可作动词也可作名词，常说“竞争对手、公平竞争”。","err":"竞争是争胜负；“比赛”是具体的竞赛活动，别等同。","gfl":5},
+  {"han":"资金","pinyin":"zījīn","vi":"vốn; tiền vốn","col":"资金不足","ex":"小公司常常资金不足。","exv":"Công ty nhỏ thường thiếu vốn.","use":"资金指经营用的钱，常说“资金周转、筹集资金”。","err":"资金是用于经营的钱；“工资”是发给员工的钱，别混用。","gfl":3},
+  {"han":"贷款","pinyin":"dàikuǎn","vi":"vay vốn","col":"申请贷款","ex":"他向银行申请贷款开店。","exv":"Anh ấy vay vốn ngân hàng để mở cửa hàng.","use":"贷款可作动词也可作名词，常说“贷款买房、银行贷款”。","err":"贷款是借钱；“借钱”更口语，对象可以是朋友。","gfl":5}
     ] },
   { "topic": "HSK5 — Văn hóa đọc và thư viện cộng đồng", "hsk": "HSK5",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -110499,7 +110742,13 @@ var ZH_VOCAB_EXPAND13 = [
       { "han": "座位", "pinyin": "zuòwèi", "vi": "chỗ ngồi", "col": "找座位", "ex": "周末图书馆里很难找座位。", "exv": "Cuối tuần trong thư viện rất khó tìm chỗ ngồi." },
       { "han": "活动", "pinyin": "huódòng", "vi": "hoạt động", "col": "读书活动", "ex": "图书馆每个月都举办读书活动。", "exv": "Thư viện mỗi tháng đều tổ chức hoạt động đọc sách." },
       { "han": "分享", "pinyin": "fēnxiǎng", "vi": "chia sẻ", "col": "分享读书心得", "ex": "大家一起分享读书心得。", "exv": "Mọi người cùng nhau chia sẻ cảm nhận đọc sách." },
-      { "han": "推荐", "pinyin": "tuījiàn", "vi": "giới thiệu", "col": "推荐好书", "ex": "老师给我们推荐了几本好书。", "exv": "Thầy giáo đã giới thiệu cho chúng tôi vài cuốn sách hay." }
+      { "han": "推荐", "pinyin": "tuījiàn", "vi": "giới thiệu", "col": "推荐好书", "ex": "老师给我们推荐了几本好书。", "exv": "Thầy giáo đã giới thiệu cho chúng tôi vài cuốn sách hay." },
+  {"han":"图书馆","pinyin":"túshūguǎn","vi":"thư viện","col":"社区图书馆","ex":"社区图书馆可以免费借书。","exv":"Thư viện cộng đồng có thể mượn sách miễn phí.","use":"图书馆是借书、看书的地方，常说“去图书馆、图书馆开放时间”。","err":"图书馆是公共场所；“书店”是卖书的地方，别混用。","gfl":1},
+  {"han":"借阅","pinyin":"jièyuè","vi":"mượn đọc","col":"借阅图书","ex":"读者可以借阅图书。","exv":"Bạn đọc có thể mượn sách đọc.","use":"借阅是正式说法，指借书来看；常用于图书馆。","err":"借阅特指借书刊；借钱说“借钱”，不说“借阅”。","gfl":0},
+  {"han":"报纸","pinyin":"bàozhǐ","vi":"báo (giấy)","col":"看报纸","ex":"爷爷每天早上看报纸。","exv":"Ông nội mỗi sáng đều đọc báo.","use":"报纸指日报等，常说“订报纸、看报纸”。","err":"报纸是纸质的；手机上看的新闻说“看新闻”，不说“看报纸”。","gfl":2},
+  {"han":"阅读","pinyin":"yuèdú","vi":"đọc","col":"阅读习惯","ex":"养成良好的阅读习惯很重要。","exv":"Hình thành thói quen đọc tốt rất quan trọng.","use":"阅读是正式说法，指读书看文章；常说“阅读理解”。","err":"阅读偏书面；口语说“看书”，更随意。","gfl":4},
+  {"han":"写作","pinyin":"xiězuò","vi":"viết","col":"写作能力","ex":"多读书可以提高写作能力。","exv":"Đọc nhiều sách có thể nâng cao khả năng viết.","use":"写作指写文章，常说“写作练习、写作课”。","err":"写作是写文章；“写字”只是写单个的字，别混用。","gfl":3},
+  {"han":"知识","pinyin":"zhīshi","vi":"tri thức","col":"学习知识","ex":"学习知识可以改变命运。","exv":"Học tri thức có thể thay đổi vận mệnh.","use":"知识指学到的道理和技能，常说“知识丰富、增长知识”。","err":"知识是学到的内容；“智力”是学习的能力，别混用。","gfl":1}
     ] },
 { "topic": "HSK6 — Kinh tế vĩ mô và lạm phát", "hsk": "HSK6",
     "hskNote": "Nhãn cấp là mức đặt chủ đề. Không phải từ đề cương HSK 3.0 chính thức.",
@@ -130486,7 +130735,10 @@ var ZH_VOCAB_EXPAND_E1 = [
     "col": "下雪",
     "ex": "冬天下雪了。",
     "exv": "Mùa đông tuyết rơi rồi."
-   }
+   },
+  {"han":"鱼","pinyin":"yú","vi":"cá","col":"一条鱼","ex":"湖里有一条小鱼，游得很快。","exv":"Trong hồ có một con cá nhỏ, bơi rất nhanh.","use":"Dùng với lượng từ 条 khi đếm cá (一条鱼).","err":"Đếm cá dùng 条 (一条鱼), không dùng 只 — 只 dùng cho mèo, chó, chim.","gfl":2},
+  {"han":"老虎","pinyin":"lǎohǔ","vi":"hổ","col":"一只老虎","ex":"动物园里有一只大老虎。","exv":"Trong sở thú có một con hổ lớn.","use":"Dùng với lượng từ 只 khi đếm hổ (一只老虎).","err":"老虎 đọc lǎohǔ, hai chữ đều thanh 3 nên khi đọc liền 老 biến thành thanh 2 (láo hǔ); đừng nhầm 老虎 (hổ) với 狮子 (sư tử).","gfl":0},
+  {"han":"太阳","pinyin":"tàiyang","vi":"mặt trời","col":"太阳出来了","ex":"早上太阳出来了，天亮了。","exv":"Buổi sáng mặt trời lên rồi, trời sáng rồi.","use":"Dùng khi nói mặt trời mọc/lên (太阳出来了).","err":"太阳 đọc tàiyang, 阳 đọc nhẹ thanh 5 — đừng đọc 阳 thành yáng thanh 2; 太阳 là mặt trời, 月亮 là mặt trăng.","gfl":2}
   ]
  },
  {
@@ -133314,7 +133566,9 @@ var ZH_VOCAB_EXPAND_E2 = [
     "col": "审核通过了",
     "ex": "等了一个星期，他的申请审核通过了。",
     "exv": "Chờ một tuần, đơn của anh ấy đã được thẩm duyệt đạt."
-   }
+   },
+  {"han":"身份证","pinyin":"shēnfènzhèng","vi":"chứng minh thư, căn cước","col":"出示身份证","ex":"办手续的时候，要出示身份证，还要复印一份。","exv":"Khi làm thủ tục, phải xuất trình chứng minh thư, còn phải photocopy một bản.","use":"身份证 là giấy tờ tùy thân quan trọng nhất; nói 出示身份证、身份证号码 (số chứng minh thư).","err":"身份证 là chứng minh thư/căn cước; đừng nhầm với 护照 (hộ chiếu, dùng khi ra nước ngoài) hay 居住证 (giấy chứng nhận cư trú).","gfl":3},
+  {"han":"复印件","pinyin":"fùyìnjiàn","vi":"bản photocopy","col":"交复印件","ex":"办手续要交身份证复印件，记得提前复印好。","exv":"Làm thủ tục phải nộp bản photocopy chứng minh thư, nhớ photocopy trước.","use":"复印件 là bản sao chụp; nói 交复印件、复印两份; 原件 là bản gốc, đối lập với 复印件.","err":"复印件 là bản sao; đừng nhầm với 原件 (bản gốc) — nhiều nơi yêu cầu cả hai để đối chiếu.","gfl":0}
   ]
  },
  {
@@ -167548,7 +167802,9 @@ ZH_WRITE.push.apply(ZH_WRITE, ZH_WRITE_EXPAND_V214D);
     {"han":"干杯","pinyin":"gānbēi","vi":"cạn ly; chúc mừng (nâng ly)","col":"我们干杯吧","ex":"我们干杯吧，祝你生日快乐！","exv":"Chúng ta cùng cạn ly nào, chúc bạn sinh nhật vui vẻ！","use":"Động từ; dùng khi nâng ly chúc mừng, nghĩa đen là \"cạn chén\", thường nói 干杯 hoặc 来，干杯。","err":"Người Việt hay đọc 干 là gàn — trong 干杯, 干 đọc gān (thanh 1); đọc gàn là sai。"},
     {"han":"中餐","pinyin":"zhōngcān","vi":"món ăn Trung Quốc; bữa trưa (kiểu Trung)","col":"吃中餐","ex":"今天我们吃中餐吧。","exv":"Hôm nay chúng ta ăn món Trung nhé。","use":"Danh từ; vừa chỉ món ăn Trung Quốc, vừa chỉ bữa trưa trong cách nói đối lập với 西餐; dùng trong 吃中餐、中餐厅。","err":"Người Việt hay nhầm 中餐 với 午餐 — 午餐 chỉ bữa trưa nói chung, 中餐 là món Trung (hoặc bữa trưa kiểu Trung); muốn nói bữa trưa chung chung phải dùng 午餐。"},
     {"han":"方便面","pinyin":"fāngbiànmiàn","vi":"mì ăn liền; mì gói","col":"一包方便面","ex":"晚上我吃了一包方便面。","exv":"Tối qua tôi đã ăn một gói mì ăn liền。","use":"Danh từ; chỉ mì gói, mì ăn liền, lượng từ là 包 (一包方便面) hoặc 碗。","err":"Người Việt hay dịch 方便面 là \"mì tiện lợi\" — tên gọi quen thuộc là mì ăn liền hay mì gói; 方便 ở đây nghĩa là tiện, nhanh。"},
-    {"han":"西餐","pinyin":"xīcān","vi":"món Tây; đồ ăn phương Tây","col":"吃西餐","ex":"周末我们去吃西餐。","exv":"Cuối tuần chúng ta đi ăn món Tây。","use":"Danh từ; chỉ món ăn phương Tây, dùng trong 吃西餐、西餐厅, đối lập với 中餐。","err":"Người Việt hay nhầm 西餐 với 午餐 — 西餐 là món Tây, không phải bữa trưa; bữa trưa nói chung là 午餐。"}
+    {"han":"西餐","pinyin":"xīcān","vi":"món Tây; đồ ăn phương Tây","col":"吃西餐","ex":"周末我们去吃西餐。","exv":"Cuối tuần chúng ta đi ăn món Tây。","use":"Danh từ; chỉ món ăn phương Tây, dùng trong 吃西餐、西餐厅, đối lập với 中餐。","err":"Người Việt hay nhầm 西餐 với 午餐 — 西餐 là món Tây, không phải bữa trưa; bữa trưa nói chung là 午餐。"},
+  {"han":"米饭","pinyin":"mǐfàn","vi":"cơm (đã nấu)","col":"一碗米饭","ex":"我每天都吃米饭。","exv":"Tôi ngày nào cũng ăn cơm.","use":"Danh từ; chỉ cơm đã nấu chín, dùng trong 吃米饭、一碗米饭; người miền Bắc còn gọi cơm nói chung là 米饭。","err":"Người Việt hay nhầm 米饭 với 米 — 米 là gạo (chưa nấu), 米饭 mới là cơm đã nấu chín; '吃米' là sai, phải nói '吃米饭'。","gfl":1},
+  {"han":"茶","pinyin":"chá","vi":"trà","col":"喝茶","ex":"爷爷喜欢喝茶。","exv":"Ông tôi thích uống trà.","use":"Danh từ; chỉ trà, lá trà hoặc nước trà, dùng trong 喝茶、买茶、绿茶; 喝茶 vừa là uống trà vừa là ngồi uống trà trò chuyện。","err":"Người Việt hay nhầm 茶 với 咖啡 — 茶 là trà, 咖啡 mới là cà phê; đừng dùng 茶 để chỉ cà phê。","gfl":1}
    ]
   },
   {
@@ -167835,7 +168091,17 @@ ZH_WRITE.push.apply(ZH_WRITE, ZH_WRITE_EXPAND_V214D);
     {"han":"体育场","pinyin":"tǐyùchǎng","vi":"sân vận động","col":"在体育场","ex":"这个体育场很大。","exv":"Sân vận động này rất lớn.","use":"Danh từ, chỉ sân vận động lớn ngoài trời, thường có khán đài và đường chạy. Thường nói 在体育场 (ở sân vận động).","err":"Hay nhầm 体育场 với 体育馆 và 球场. 体育场 là sân vận động lớn ngoài trời; 体育馆 là nhà thi đấu trong nhà; 球场 là sân chơi bóng."},
     {"han":"排球","pinyin":"páiqiú","vi":"bóng chuyền","col":"打排球","ex":"她喜欢打排球。","exv":"Cô ấy thích chơi bóng chuyền.","use":"Danh từ, chỉ môn bóng chuyền và quả bóng chuyền. Chơi bóng chuyền nói 打排球, vì bóng chuyền chơi bằng tay.","err":"Người Việt hay nói 踢排球 theo thói quen “đá bóng”. Bóng chuyền chơi bằng tay nên phải nói 打排球; 踢 chỉ dùng cho bóng đá."},
     {"han":"一路顺风","pinyin":"yīlùshùnfēng","vi":"chúc lên đường thuận lợi","col":"祝你一路顺风","ex":"祝你一路顺风！","exv":"Chúc bạn lên đường thuận lợi!","use":"Cụm câu chúc, dùng khi tiễn ai đó lên đường, chúc chuyến đi suôn sẻ, thuận lợi. Thường nói 祝你一路顺风.","err":"Hay dùng 一路顺风 khi người ta đã đến nơi hoặc khi đón ai đó. Câu này chỉ dùng lúc tiễn người lên đường, không dùng khi đón."},
-    {"han":"一路平安","pinyin":"yīlùpíng'ān","vi":"chúc bình an trên đường","col":"祝你一路平安","ex":"祝你一路平安！","exv":"Chúc bạn bình an trên đường!","use":"Câu chúc, dùng khi tiễn ai đó lên đường, chúc đi đường bình an, an toàn. Thường nói 祝你一路平安.","err":"Hay nhầm 一路平安 với 一路顺风. 一路顺风 chúc chuyến đi thuận lợi; 一路平安 nhấn mạnh bình an, an toàn trên đường. Cả hai đều chỉ dùng lúc tiễn, không dùng lúc đón."}
+    {"han":"一路平安","pinyin":"yīlùpíng'ān","vi":"chúc bình an trên đường","col":"祝你一路平安","ex":"祝你一路平安！","exv":"Chúc bạn bình an trên đường!","use":"Câu chúc, dùng khi tiễn ai đó lên đường, chúc đi đường bình an, an toàn. Thường nói 祝你一路平安.","err":"Hay nhầm 一路平安 với 一路顺风. 一路顺风 chúc chuyến đi thuận lợi; 一路平安 nhấn mạnh bình an, an toàn trên đường. Cả hai đều chỉ dùng lúc tiễn, không dùng lúc đón."},
+  {"han":"足球","pinyin":"zúqiú","vi":"bóng đá","col":"踢足球","ex":"很多男孩子喜欢踢足球。","exv":"Nhiều bạn nam thích đá bóng.","use":"Danh từ, chỉ môn bóng đá và quả bóng đá. Đá bóng nói 踢足球, vì bóng đá chơi bằng chân.","err":"Người Việt hay nói 打足球 theo thói quen 'chơi bóng'. Bóng đá chơi bằng chân nên phải nói 踢足球; 打 chỉ dùng cho bóng chuyền, bóng rổ.","gfl":3},
+  {"han":"篮球","pinyin":"lánqiú","vi":"bóng rổ","col":"打篮球","ex":"星期天我们去打篮球。","exv":"Chủ nhật chúng tôi đi chơi bóng rổ.","use":"Danh từ, chỉ môn bóng rổ và quả bóng rổ. Chơi bóng rổ nói 打篮球, vì bóng rổ chơi bằng tay.","err":"Người Việt hay nói 踢篮球 theo thói quen 'đá bóng'. Bóng rổ chơi bằng tay nên phải nói 打篮球; 踢 chỉ dùng cho bóng đá.","gfl":2},
+  {"han":"游泳","pinyin":"yóuyǒng","vi":"bơi lội","col":"去游泳","ex":"夏天我们常常去游泳。","exv":"Mùa hè chúng tôi thường đi bơi.","use":"Động từ và danh từ, chỉ hoạt động bơi lội. Thường nói 去游泳 (đi bơi) hoặc 学游泳 (học bơi).","err":"Người Việt hay nói '游游泳' vì nghĩ 游泳 là danh từ. 游泳 bản thân đã là động từ, nói '去游泳' là đủ, không cần thêm động từ khác.","gfl":3},
+  {"han":"唱歌","pinyin":"chànggē","vi":"hát, ca hát","col":"喜欢唱歌","ex":"她很喜欢唱歌。","exv":"Cô ấy rất thích hát.","use":"Động từ, chỉ hoạt động ca hát. Thường nói 唱歌 (hát) hoặc 唱一首歌 (hát một bài hát).","err":"Người Việt hay nói 唱音乐 — 唱歌 mới là hát, 音乐 là âm nhạc nói chung; muốn nói hát một bài thì nói '唱一首歌'。","gfl":1},
+  {"han":"跳舞","pinyin":"tiàowǔ","vi":"nhảy múa","col":"跳舞吧","ex":"晚会上大家一起跳舞。","exv":"Ở buổi liên hoan mọi người cùng nhảy múa.","use":"Động từ, chỉ hoạt động nhảy múa. Thường nói 跳舞 (nhảy múa) hoặc 跟我跳舞 (nhảy cùng tôi).","err":"Người Việt hay nhầm 跳舞 với 跳 — 跳 là nhảy lên nói chung, 跳舞 mới là nhảy múa theo nhạc; muốn nói khiêu vũ phải nói 跳舞。","gfl":3},
+  {"han":"电影","pinyin":"diànyǐng","vi":"phim","col":"看电影","ex":"周末我们去看电影。","exv":"Cuối tuần chúng tôi đi xem phim.","use":"Danh từ, chỉ phim điện ảnh. Thường nói 看电影 (xem phim) hoặc 一部电影 (một bộ phim).","err":"Người Việt hay nói 看电影院 — 电影院 là rạp chiếu phim (nơi xem), 电影 mới là bộ phim; xem phim nói '看电影', đến rạp nói '去电影院'。","gfl":1},
+  {"han":"音乐","pinyin":"yīnyuè","vi":"âm nhạc","col":"听音乐","ex":"我喜欢听音乐。","exv":"Tôi thích nghe nhạc.","use":"Danh từ, chỉ âm nhạc nói chung. Thường nói 听音乐 (nghe nhạc) hoặc 音乐很好听 (nhạc rất hay).","err":"Người Việt hay nhầm 音乐 với 歌 — 歌 là bài hát, 音乐 là âm nhạc nói chung; nghe nhạc nói '听音乐', hát một bài nói '唱一首歌'。","gfl":2},
+  {"han":"运动","pinyin":"yùndòng","vi":"vận động, thể thao","col":"做运动","ex":"每天做运动对身体好。","exv":"Vận động mỗi ngày tốt cho sức khỏe.","use":"Động từ và danh từ, chỉ hoạt động vận động, tập thể dục thể thao. Thường nói 做运动 (tập thể dục) hoặc 喜欢运动 (thích vận động).","err":"Người Việt hay nhầm 运动 với 体育. 运动 là vận động, hoạt động thể chất nói chung; 体育 là thể thao nói chung hoặc môn thể dục — tập luyện thì nói 做运动。","gfl":2},
+  {"han":"公园","pinyin":"gōngyuán","vi":"công viên","col":"去公园","ex":"星期天我们去公园散步。","exv":"Chủ nhật chúng tôi đi công viên dạo bộ.","use":"Danh từ, chỉ công viên. Thường nói 去公园 (đi công viên) hoặc 在公园里 (ở trong công viên).","err":"Người Việt hay nhầm 公园 với 动物园. 公园 là công viên, nơi dạo chơi, tập thể dục; 动物园 là sở thú, nơi xem động vật.","gfl":2},
+  {"han":"电影院","pinyin":"diànyǐngyuàn","vi":"rạp chiếu phim","col":"去电影院","ex":"我们去电影院看电影。","exv":"Chúng tôi đến rạp chiếu phim xem phim.","use":"Danh từ, chỉ rạp chiếu phim. Thường nói 去电影院 (đến rạp chiếu phim).","err":"Người Việt hay nhầm 电影院 với 电影. 电影院 là rạp chiếu phim (địa điểm), 电影 mới là bộ phim; đến rạp nói '去电影院', xem phim nói '看电影'。","gfl":1}
    ]
   }
 ]); })();
