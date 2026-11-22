@@ -205,6 +205,109 @@ var RB_PH_GLIDE = { "eɪ": "ɪ", "aɪ": "ɪ", "ɔɪ": "ɪ", "əʊ": "ʊ", "aʊ":
 // Từ ví dụ cho toàn bảng 44 âm (bài học đủ 44 âm từ giai đoạn 1.6).
 var RB_PH_ALL_EXAMPLES = { "i:": "see", "ɪ": "ship", "e": "bed", "æ": "cat", "ɑ:": "car", "ɒ": "hot", "ɔ:": "horse", "ʊ": "book", "u:": "food", "ʌ": "cup", "ɜ:": "bird", "ə": "about", "eɪ": "day", "aɪ": "night", "ɔɪ": "boy", "əʊ": "go", "aʊ": "now", "ɪə": "here", "eə": "hair", "ʊə": "sure", "p": "pen", "b": "bag", "t": "ten", "d": "dog", "tʃ": "chair", "dʒ": "job", "k": "key", "ɡ": "go", "f": "fish", "v": "van", "θ": "think", "ð": "this", "s": "see", "z": "zoo", "ʃ": "she", "ʒ": "television", "h": "hat", "m": "man", "n": "no", "ŋ": "sing", "l": "leg", "r": "red", "w": "water", "j": "yes" };
 
+// ---------- v237 W-B (lệch 5): VÍ DỤ NGỮ CẢNH TOEIC RIÊNG CHO 44 ÂM (track TC) ----------
+// Từ chính + cặp phân biệt: lấy từ TC_VOCAB (từ TOEIC thật trong kho; IPA/vi
+// chép nguyên từ thẻ đó — IPA kho đã chuẩn en-GB non-rhotic, kiểm B v213/v236).
+// Cụm chính: cụm đầu tiên trong trường col của chính thẻ đó (cụm TOEIC trong kho);
+// nghĩa Việt của cụm do Muse tự dịch (tự soạn, không chép đề thi thật).
+// Cặp phân biệt TC: a chứa âm đích, b chứa âm đối chiếu và KHÔNG chứa âm đích
+// (đã kiểm bằng phTokIpa); minimal=false cho tất cả — đây là cặp hay nhầm,
+// KHÔNG mạo nhận là cặp tối thiểu thật (kho TOEIC không có đủ cặp tối thiểu).
+// Câu mẫu TC: dùng sẵn tcSen/tcSenVi trong RB_PH1/RB_PH2 (đủ 44/44).
+var TC_PH_ALL_EXAMPLES = { "i:": "even", "ɪ": "issue", "e": "edit", "æ": "asset", "ɑ:": "answer", "ɒ": "offer", "ɔ:": "order", "ʊ": "goods", "u:": "renew", "ʌ": "update", "ɜ:": "urgent", "ə": "per", "eɪ": "able", "aɪ": "item", "ɔɪ": "avoid", "əʊ": "own", "aʊ": "outcome", "ɪə": "career", "eə": "fare", "ʊə": "assure", "p": "prior", "b": "buyer", "t": "total", "d": "data", "tʃ": "checkout", "dʒ": "general", "k": "copy", "ɡ": "gather", "f": "favor", "v": "voucher", "θ": "thorough", "ð": "though", "s": "survey", "z": "raise", "ʃ": "shuttle", "ʒ": "measure", "h": "hire", "m": "merger", "n": "notice", "ŋ": "booking", "l": "lower", "r": "reason", "w": "waiter", "j": "yearly" };
+var TC_PH_PHRASES = {
+  "m": { ph: "a planned merger", vi: "một vụ sáp nhập đã lên kế hoạch" },
+  "n": { ph: "notice a change", vi: "nhận thấy một thay đổi" },
+  "p": { ph: "prior experience", vi: "kinh nghiệm trước đó" },
+  "b": { ph: "potential buyer", vi: "người mua tiềm năng" },
+  "f": { ph: "in favor of", vi: "ủng hộ (điều gì)" },
+  "s": { ph: "do a survey", vi: "làm một khảo sát" },
+  "h": { ph: "hire a new assistant", vi: "tuyển một trợ lý mới" },
+  "l": { ph: "lower the price", vi: "hạ giá xuống" },
+  "t": { ph: "in total", vi: "tổng cộng" },
+  "d": { ph: "collect data", vi: "thu thập dữ liệu" },
+  "k": { ph: "make a copy", vi: "làm một bản sao" },
+  "ɡ": { ph: "gather information", vi: "thu thập thông tin" },
+  "ŋ": { ph: "confirm your booking", vi: "xác nhận đặt chỗ của bạn" },
+  "j": { ph: "yearly basis", vi: "tính theo năm" },
+  "i:": { ph: "even more", vi: "thậm chí còn hơn" },
+  "e": { ph: "edit a draft", vi: "biên tập một bản nháp" },
+  "ɑ:": { ph: "answer the phone", vi: "nghe điện thoại" },
+  "ɔ:": { ph: "place an order", vi: "đặt một đơn hàng" },
+  "u:": { ph: "renew a contract", vi: "gia hạn một hợp đồng" },
+  "eɪ": { ph: "be able to", vi: "có thể (làm gì)" },
+  "aɪ": { ph: "an item of clothing", vi: "một món đồ (quần áo)" },
+  "aʊ": { ph: "a good outcome", vi: "một kết quả tốt" },
+  "ɔɪ": { ph: "avoid mistakes", vi: "tránh sai sót" },
+  "ɪ": { ph: "issue a ticket", vi: "phát hành một vé" },
+  "ʊ": { ph: "baked goods", vi: "đồ nướng (bánh mì, bánh ngọt)" },
+  "ʌ": { ph: "update the software", vi: "cập nhật phần mềm" },
+  "ɒ": { ph: "offer a discount", vi: "đưa ra một mức giảm giá" },
+  "ɪə": { ph: "a successful career", vi: "một sự nghiệp thành công" },
+  "eə": { ph: "taxi fare", vi: "giá vé taxi" },
+  "ʊə": { ph: "assure customers", vi: "đảm bảo với khách hàng" },
+  "əʊ": { ph: "own a business", vi: "sở hữu một doanh nghiệp" },
+  "ə": { ph: "per person", vi: "mỗi người" },
+  "v": { ph: "gift voucher", vi: "phiếu quà tặng" },
+  "z": { ph: "ask for a raise", vi: "xin tăng lương" },
+  "tʃ": { ph: "checkout time", vi: "giờ trả phòng" },
+  "dʒ": { ph: "in general", vi: "nhìn chung" },
+  "r": { ph: "for this reason", vi: "vì lý do này" },
+  "w": { ph: "call the waiter", vi: "gọi người phục vụ" },
+  "æ": { ph: "company assets", vi: "tài sản của công ty" },
+  "ɜ:": { ph: "urgent matter", vi: "việc khẩn cấp" },
+  "θ": { ph: "a thorough check", vi: "một lần kiểm tra kỹ lưỡng" },
+  "ð": { ph: "even though", vi: "mặc dù vậy" },
+  "ʒ": { ph: "safety measures", vi: "các biện pháp an toàn" },
+  "ʃ": { ph: "airport shuttle", vi: "xe đưa đón sân bay" }
+};
+var TC_PH_PAIRS = {
+  "m": { a: "mayor", b: "newly", partner: "n", minimal: false },
+  "n": { a: "newly", b: "mayor", partner: "m", minimal: false },
+  "p": { a: "parcel", b: "buyer", partner: "b", minimal: false },
+  "b": { a: "busy", b: "prior", partner: "p", minimal: false },
+  "f": { a: "flyer", b: "via", partner: "v", minimal: false },
+  "s": { a: "solar", b: "zoning", partner: "z", minimal: false },
+  "h": { a: "highly", b: "owe", partner: "không có /h/", minimal: false },
+  "l": { a: "lobby", b: "rider", partner: "r", minimal: false },
+  "t": { a: "toner", b: "diner", partner: "d", minimal: false },
+  "d": { a: "duty", b: "toner", partner: "t", minimal: false },
+  "k": { a: "cover", b: "gather", partner: "ɡ", minimal: false },
+  "ɡ": { a: "goggles", b: "copy", partner: "k", minimal: false },
+  "ŋ": { a: "zoning", b: "newly", partner: "n", minimal: false },
+  "j": { a: "usage", b: "journal", partner: "dʒ", minimal: false },
+  "i:": { a: "eager", b: "issue", partner: "ɪ", minimal: false },
+  "e": { a: "airline", b: "action", partner: "æ", minimal: false },
+  "ɑ:": { a: "artwork", b: "order", partner: "ɔ:", minimal: false },
+  "ɔ:": { a: "author", b: "owe", partner: "əʊ", minimal: false },
+  "u:": { a: "view", b: "goods", partner: "ʊ", minimal: false },
+  "eɪ": { a: "agent", b: "item", partner: "aɪ", minimal: false },
+  "aɪ": { a: "icebreaker", b: "avoid", partner: "ɔɪ", minimal: false },
+  "aʊ": { a: "outdoor", b: "own", partner: "əʊ", minimal: false },
+  "ɔɪ": { a: "loyal", b: "item", partner: "aɪ", minimal: false },
+  "ɪ": { a: "input", b: "even", partner: "i:", minimal: false },
+  "ʊ": { a: "booking", b: "view", partner: "u:", minimal: false },
+  "ʌ": { a: "upsell", b: "asset", partner: "æ", minimal: false },
+  "ɒ": { a: "honor", b: "action", partner: "æ", minimal: false },
+  "ɪə": { a: "tier", b: "airmail", partner: "eə", minimal: false },
+  "eə": { a: "airmail", b: "tier", partner: "ɪə", minimal: false },
+  "ʊə": { a: "secure", b: "order", partner: "ɔ:", minimal: false },
+  "əʊ": { a: "ocean", b: "order", partner: "ɔ:", minimal: false },
+  "ə": { a: "via", b: "owe", partner: "không có /ə/", minimal: false },
+  "v": { a: "vary", b: "flyer", partner: "f", minimal: false },
+  "z": { a: "ease", b: "solar", partner: "s", minimal: false },
+  "tʃ": { a: "channel", b: "shuttle", partner: "ʃ", minimal: false },
+  "dʒ": { a: "journal", b: "yearly", partner: "j", minimal: false },
+  "r": { a: "ruler", b: "lower", partner: "l", minimal: false },
+  "w": { a: "whether", b: "voucher", partner: "v", minimal: false },
+  "æ": { a: "action", b: "upsell", partner: "ʌ", minimal: false },
+  "ɜ:": { a: "urban", b: "edit", partner: "e", minimal: false },
+  "θ": { a: "thermos", b: "settle", partner: "s", minimal: false },
+  "ð": { a: "smooth", b: "data", partner: "d", minimal: false },
+  "ʒ": { a: "leisure", b: "far", partner: "không có /ʒ/", minimal: false },
+  "ʃ": { a: "shopper", b: "survey", partner: "s", minimal: false }
+};
+
 // ---------- 8. LỊCH ÔN, XP, THANG ĐIỂM, GHI CHÚ ----------
 var RB_INTERVALS = [1, 3, 7, 14, 30];
 var RB_SCHEDULE_TEXT = "1-3-7-14-30 ngày";
