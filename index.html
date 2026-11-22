@@ -5364,7 +5364,7 @@ function homeQuickHTML(tr) {
   if (!s) return '<section class="card"><h3>✍️ Luyện nhanh</h3><p class="mut">Chưa có bộ từ để kiểm tra nhanh.</p></section>';
   return '<section class="card"><h3>✍️ Luyện nhanh — ' + esc(s.topic) + '</h3><div class="row"><button class="btn" data-home-quick="' + i + '">Kiểm tra nhanh cả bộ →</button></div></section>';
 }
-/* v71 — Khu Trò chơi mới: đúng 3 game, mở bằng nút data-g71game (không dùng
+/* v71 — Khu Trò chơi mới: 5 game, mở bằng nút data-g71game (không dùng
    dây nối của game cũ). Thắng +10 XP bằng hàm sẵn có; thua không
    trừ gì. Từ vựng lấy từ kho bài học theo track (v91: EN kho IELTS,
    ZH kho HSK, TC kho TOEIC, TP kho TOPIK).
@@ -19813,7 +19813,8 @@ function listenVoiceNoteHTML() {
    dong ten + 1 nut vao; man dich tu noi cach lam. ZH/TC/TP chi co cac
    cach that su co o track do (ZH tu v126 da co Nghe chep + Shadowing
    Xem/Luyen + Podcast qua video zh-e10, chua co Shadowing 10 buoc;
-   TC/TP chi co Nghe hieu + Video 4 dang + Link tu gan). */
+   TC/TP tu v234 da co Nghe chep + Shadowing Xem/Luyen + Podcast qua
+   video tc-e5/tp-e10, chua co Shadowing 10 buoc va Nghe thu dong — video). */
 var LISTEN_HUB_ROWS = {
   en: [
     { k: "compre", t: "Nghe hiểu" },
@@ -19835,22 +19836,28 @@ var LISTEN_HUB_ROWS = {
   ], /* v126: ZH da co Nghe chep + Shadowing + Podcast qua video zh-e10 co phu de that */
   tc: [
     { k: "compre", t: "Nghe hiểu" },
+    { k: "dict", t: "Nghe chép chính tả" },
+    { k: "shadowView", t: "Shadowing Xem/Luyện" },
+    { k: "podcast", t: "Nghe thụ động — Podcast" },
     { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
-  ],
+  ], /* v234: TC da co Nghe chep + Shadowing + Podcast qua video tc-e5 co phu de that */
   tp: [
     { k: "compre", t: "Nghe hiểu" },
+    { k: "dict", t: "Nghe chép chính tả" },
+    { k: "shadowView", t: "Shadowing Xem/Luyện" },
+    { k: "podcast", t: "Nghe thụ động — Podcast" },
     { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
-  ]
+  ] /* v234: TP da co Nghe chep + Shadowing + Podcast qua video tp-e10 co phu de that */
 };
 /* v117 P1 (lech 2): ghi ro vi sao track nay thieu cach luyen — khong lang
    le vang mat. EN du 7 hang nen khong co ghi chu thieu. */
 var LISTEN_HUB_NOTE = {
   en: "",
   zh: "Shadowing 10 bước chưa có — đang chờ chuyển khung Shadowing 10 bước sang tiếng Trung.", /* v139 (M7): hang video ZH nay mo zh-e10, khong mo VOA nua */
-  tc: "Track TOEIC chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật.",
-  tp: "Track TOPIK chưa có Nghe chép chính tả, Shadowing, Podcast và Nghe thụ động — đang chờ phụ đề thật."
+  tc: "Shadowing 10 bước và Nghe thụ động — video chưa có ở track này (đã có Nghe thụ động — Podcast qua video tc-e5).",
+  tp: "Shadowing 10 bước và Nghe thụ động — video chưa có ở track này (đã có Nghe thụ động — Podcast qua video tp-e10)."
 };
 function listenHubHTML(track) {
   var rows = LISTEN_HUB_ROWS[track] || LISTEN_HUB_ROWS.en;
@@ -19915,8 +19922,8 @@ function listenHubScrollTo(el) {
   try { el.scrollIntoView({ block: "start" }); } catch (e) { try { el.scrollIntoView(); } catch (e2) {} }
 }
 /* v139 (M7): moi track mo video CO PHU DE THAT cua chinh track do qua
-   workspace (wsVideoKey). Chi EN (VOA) va ZH (zh-e10) co video that da
-   kiem chung; TC/TP chua co — hang video an han, khong mo video tieng Anh. */
+   workspace (wsVideoKey). v234: ca 4 track deu co video that da kiem
+   chung (EN VOA, ZH zh-e10, TC tc-e5, TP tp-e10). */
 var LISTEN_VIDEO_KEY = { en: "voa-break-the-news", zh: "zh-e10", tc: "tc-e5", tp: "tp-e10" }; /* v139 (M7): TC mo tc-e5 (BBC English at Work), TP mo tp-e10 (akapinn); ca 4 track deu co video phu de that */
 function listenHubGo(track, key) {
   var i, idx;
@@ -19964,10 +19971,11 @@ function listenHubGo(track, key) {
     }
     return;
   }
-  /* v126: ZH mo Nghe chep / Shadowing / Podcast cua video zh-e10 co phu de that. */
-  if (track === "zh" && (key === "dict" || key === "shadowView" || key === "podcast")) {
-    var zi = (typeof videoLinesEnsure === "function") ? videoLinesEnsure("zh-e10") : null;
-    if (!zi) { toast("Chưa có phụ đề thật của video tiếng Trung nên chưa mở được bài tập."); return; }
+  /* v126: ZH mo Nghe chep / Shadowing / Podcast cua video zh-e10 co phu de that. v234: mo rong cho TC (tc-e5) + TP (tp-e10) — videoLinesEnsure dung chung moi key VIDEO_LINES. */
+  if ((track === "zh" || track === "tc" || track === "tp") && (key === "dict" || key === "shadowView" || key === "podcast")) {
+    var vk2 = (typeof LISTEN_VIDEO_KEY !== "undefined") ? LISTEN_VIDEO_KEY[track] : null;
+    var zi = (vk2 && typeof videoLinesEnsure === "function") ? videoLinesEnsure(vk2) : null;
+    if (!zi) { toast("Chưa có phụ đề thật của video track này nên chưa mở được bài tập."); return; }
     if (key === "dict") openLesson({ type: "dictation", idx: zi.listen });
     else if (key === "shadowView") openLesson({ type: "skillSpeak", idx: zi.speak });
     else openLesson({ type: "podcast", idx: zi.speak });
