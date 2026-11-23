@@ -66193,7 +66193,7 @@ var ZH_HSKK_ADV_Q18 = [{"kind":"question","topic":"Điều khó nhất khi học
 // (TP_SPEAK_MOCK, 6 nhiem vu theo NIKL, thi rieng tren may 30 phut). Shape bat chuoc ZH_HSKK_* (kind + en/w
 // + vi + prep/speak); nhiem vu tranh la dang chuyen the (mo ta bang chu). UI render o dot khac.
 var TC_SPEAK_MOCK = [
-  {
+{
     "kind": "readaloud",
     "no": 1,
     "task": "Đọc to",
@@ -66202,7 +66202,7 @@ var TC_SPEAK_MOCK = [
     "prep": 45,
     "speak": 45
   },
-  {
+{
     "kind": "readaloud",
     "no": 2,
     "task": "Đọc to",
@@ -66211,7 +66211,7 @@ var TC_SPEAK_MOCK = [
     "prep": 45,
     "speak": 45
   },
-  {
+{
     "kind": "describe",
     "no": 3,
     "task": "Mô tả tranh",
@@ -66222,20 +66222,9 @@ var TC_SPEAK_MOCK = [
     "prep": 45,
     "speak": 30
   },
-  {
-    "kind": "describe",
-    "no": 4,
-    "task": "Mô tả tranh",
-    "sitEn": "A picture: At a busy airport, a man is checking in a large suitcase at the counter. A woman behind him is looking at the departure board. Outside the window, an airplane is waiting on the runway.",
-    "sitVi": "Dạng chuyển thể — tranh mô tả bằng chữ: Ở một sân bay đông người, một người đàn ông đang làm thủ tục cho một chiếc vali lớn tại quầy. Người phụ nữ phía sau đang xem bảng giờ bay. Ngoài cửa sổ, một chiếc máy bay đang chờ trên đường băng.",
-    "en": "Describe the picture in as much detail as you can.",
-    "vi": "Hãy mô tả bức tranh càng chi tiết càng tốt.",
-    "prep": 45,
-    "speak": 30
-  },
-  {
+{
     "kind": "answer",
-    "no": 5,
+    "no": 4,
     "task": "Trả lời câu hỏi",
     "q": "What kind of work do you do?",
     "qvi": "Bạn làm công việc gì?",
@@ -66244,9 +66233,9 @@ var TC_SPEAK_MOCK = [
     "prep": 3,
     "speak": 15
   },
-  {
+{
     "kind": "answer",
-    "no": 6,
+    "no": 5,
     "task": "Trả lời câu hỏi",
     "q": "How do you usually travel to work?",
     "qvi": "Bạn thường đi làm bằng cách nào?",
@@ -66255,9 +66244,9 @@ var TC_SPEAK_MOCK = [
     "prep": 3,
     "speak": 15
   },
-  {
+{
     "kind": "answer",
-    "no": 7,
+    "no": 6,
     "task": "Trả lời câu hỏi",
     "q": "What do you like most about your job?",
     "qvi": "Bạn thích nhất điều gì ở công việc của mình?",
@@ -66266,9 +66255,9 @@ var TC_SPEAK_MOCK = [
     "prep": 3,
     "speak": 30
   },
-  {
+{
     "kind": "info",
-    "no": 8,
+    "no": 7,
     "task": "Trả lời theo thông tin cho sẵn",
     "infoEn": "A train timetable: Train A leaves Hanoi at 7:00 and arrives in Hai Phong at 9:30. Train B leaves Hanoi at 9:00 and arrives at 11:00. A one-way ticket costs 120,000 dong.",
     "infoVi": "Bảng giờ tàu mô tả bằng chữ: Tàu A rời Hà Nội lúc 7 giờ và đến Hải Phòng lúc 9 giờ 30. Tàu B rời Hà Nội lúc 9 giờ và đến lúc 11 giờ. Vé một chiều giá 120.000 đồng.",
@@ -66280,9 +66269,9 @@ var TC_SPEAK_MOCK = [
     "prep": 3,
     "speak": 15
   },
-  {
+{
     "kind": "info",
-    "no": 9,
+    "no": 8,
     "task": "Trả lời theo thông tin cho sẵn",
     "infoEn": "A train timetable: Train A leaves Hanoi at 7:00 and arrives in Hai Phong at 9:30. Train B leaves Hanoi at 9:00 and arrives at 11:00. A one-way ticket costs 120,000 dong.",
     "infoVi": "Bảng giờ tàu mô tả bằng chữ: Tàu A rời Hà Nội lúc 7 giờ và đến Hải Phòng lúc 9 giờ 30. Tàu B rời Hà Nội lúc 9 giờ và đến lúc 11 giờ. Vé một chiều giá 120.000 đồng.",
@@ -66293,9 +66282,9 @@ var TC_SPEAK_MOCK = [
     "prep": 3,
     "speak": 15
   },
-  {
+{
     "kind": "info",
-    "no": 10,
+    "no": 9,
     "task": "Trả lời theo thông tin cho sẵn",
     "infoEn": "A train timetable: Train A leaves Hanoi at 7:00 and arrives in Hai Phong at 9:30. Train B leaves Hanoi at 9:00 and arrives at 11:00. A one-way ticket costs 120,000 dong.",
     "infoVi": "Bảng giờ tàu mô tả bằng chữ: Tàu A rời Hà Nội lúc 7 giờ và đến Hải Phòng lúc 9 giờ 30. Tàu B rời Hà Nội lúc 9 giờ và đến lúc 11 giờ. Vé một chiều giá 120.000 đồng.",
@@ -66307,7 +66296,21 @@ var TC_SPEAK_MOCK = [
     "speak": 30,
     "twice": true,
   },
-  {
+{
+    "kind": "propose",
+    "no": 10,
+    "task": "Đề xuất giải pháp",
+    "sitEn": "Hi, this is David from Green Star Company. I am calling about our meeting tomorrow at nine o'clock. We will show our new product to twenty clients in your main meeting room, but I just heard that the room is already booked for another meeting at the same time. The small meeting room is free, but the projector there is broken, and we really need a projector for the presentation. Could you please help me solve this problem today? Thank you very much.",
+    "sitVi": "Dạng chuyển thể — tin nhắn thoại mô tả bằng chữ: Chào bạn, tôi là David ở Công ty Green Star. Tôi gọi về cuộc họp ngày mai lúc 9 giờ. Chúng tôi sẽ giới thiệu sản phẩm mới cho hai mươi khách hàng ở phòng họp chính của bạn, nhưng tôi vừa nghe nói phòng đó đã có người đặt cho một cuộc họp khác cùng giờ. Phòng họp nhỏ thì còn trống, nhưng máy chiếu ở đó bị hỏng, mà chúng tôi rất cần máy chiếu cho buổi giới thiệu. Bạn giúp tôi giải quyết vấn đề này hôm nay được không? Cảm ơn bạn rất nhiều.",
+    "en": "Propose a solution to this problem. In your response, be sure to show that you recognize the problem and propose a way of dealing with the problem.",
+    "vi": "Hãy đề xuất một giải pháp cho vấn đề này. Trong bài nói, hãy cho thấy bạn đã hiểu rõ vấn đề và đề xuất một cách xử lý vấn đề đó.",
+    "guide": "Nói đủ 4 phần: nhắc lại vấn đề trong 1 câu, đưa 2 cách xử lý, chọn 1 cách và nói rõ vì sao, nói bước tiếp theo. Bài nói mở — máy chấm phần đọc to bài mẫu, bạn tự đối chiếu theo thang 0–3 (phát âm, ngữ pháp, từ vựng, mạch lạc, đủ ý).",
+    "model": "Hello, this is Linh from the Sales Department. I understand the problem: the main meeting room is already booked for tomorrow morning, and the projector in the small room does not work. There are two ways we can solve this. First, we can move the presentation to the large training room on the third floor. It is free tomorrow morning, and it has a new projector and seats for twenty people. Second, we can keep the small room and borrow a projector from another office. I think the first way is better, because the training room is large enough for all twenty clients, and we do not need to move any equipment. I will book the room today, test the projector this afternoon, and send you an email to confirm the change. Please let me know if this plan works for you. Thank you.",
+    "modelVi": "Xin chào, tôi là Linh ở Phòng Kinh doanh. Tôi đã hiểu vấn đề: phòng họp chính đã có người đặt vào sáng mai, còn máy chiếu ở phòng nhỏ thì không hoạt động. Có hai cách để giải quyết. Thứ nhất, chúng ta có thể chuyển buổi giới thiệu sang phòng đào tạo lớn ở tầng ba. Phòng đó còn trống vào sáng mai, có máy chiếu mới và đủ chỗ cho hai mươi người. Thứ hai, chúng ta có thể giữ phòng nhỏ và mượn máy chiếu ở văn phòng khác. Tôi nghĩ cách thứ nhất tốt hơn, vì phòng đào tạo đủ rộng cho cả hai mươi khách hàng và chúng ta không cần di chuyển thiết bị. Tôi sẽ đặt phòng hôm nay, kiểm tra máy chiếu chiều nay và gửi email xác nhận thay đổi cho bạn. Bạn cho tôi biết kế hoạch này có ổn không nhé. Cảm ơn bạn.",
+    "prep": 30,
+    "speak": 60
+  },
+{
     "kind": "question",
     "no": 11,
     "task": "Nêu ý kiến",

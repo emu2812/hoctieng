@@ -29588,7 +29588,7 @@ function renderZhHskk(app, l) {
    xong goi tcMarkDone("speak") / tpMarkDone("speak") (+10 XP). */
 function tcSpeakHTML() {
   return '<section class="card" id="tcSpeakCard"><h3>🗣️ Luyện Nói TOEIC — thi nói riêng</h3>'
-    + '<p class="mut">TOEIC Speaking là bài thi nói riêng, thi trên máy trong khoảng 20 phút, gồm 11 nhiệm vụ: đọc to 2, mô tả tranh 2, trả lời câu hỏi 3, trả lời theo thông tin cho sẵn 3, nêu ý kiến 1. Thời gian từng phần: đọc to (chuẩn bị 45 giây, nói 45 giây); mô tả tranh (45 giây / 30 giây); trả lời câu hỏi (3 giây / 15–30 giây); trả lời theo thông tin cho sẵn (đọc thông tin chung 45 giây, chuẩn bị 3 giây/câu, nói 15–30 giây); nêu ý kiến (45 giây / 60 giây). Tranh thật được mô tả bằng chữ (dạng chuyển thể, như HSKK Trung cấp).</p>'
+    + '<p class="mut">TOEIC Speaking là bài thi nói riêng, thi trên máy trong khoảng 20 phút, gồm 11 nhiệm vụ: đọc to 2, mô tả tranh 1, trả lời câu hỏi 3, trả lời theo thông tin cho sẵn 3, đề xuất giải pháp 1, nêu ý kiến 1. Thời gian từng phần: đọc to (chuẩn bị 45 giây, nói 45 giây); mô tả tranh (45 giây / 30 giây); trả lời câu hỏi (3 giây / 15–30 giây); trả lời theo thông tin cho sẵn (đọc thông tin chung 45 giây, chuẩn bị 3 giây/câu, nói 15–30 giây); đề xuất giải pháp (30 giây / 60 giây); nêu ý kiến (45 giây / 60 giây). Tranh thật được mô tả bằng chữ (dạng chuyển thể, như HSKK Trung cấp).</p>'
     + '<div class="row"><button class="btn" id="tcSpeakExamBtn">Luyện Nói TOEIC →</button></div>'
     + '<p class="mut">Nghe mẫu rồi đọc to từng câu — máy kiểm tra có nghe ra không. Không chấm điểm AI sâu.</p></section>';
 }
@@ -29619,8 +29619,8 @@ function tcTpSpeakExamNorm(track, it, i) {
       prompt: it.en || "", promptVi: it.vi || "",
       topic: it.topic || "", guide: it.guide || "",
       model: it.model || "", modelVi: it.modelVi || "",
-      listen: (rk === "describe") ? (it.sitEn || "") : (rk === "readaloud" ? (it.en || "") : (it.q || it.en || "")),
-      micRef: (rk === "describe") ? "" : (rk === "question" ? (it.model || "") : (it.en || ""))
+      listen: (rk === "describe" || rk === "propose") ? (it.sitEn || "") : (rk === "readaloud" ? (it.en || "") : (it.q || it.en || "")),
+      micRef: (rk === "describe") ? "" : (rk === "question" || rk === "propose" ? (it.model || "") : (it.en || ""))
     };
   }
   return {
@@ -29632,9 +29632,10 @@ function tcTpSpeakExamNorm(track, it, i) {
     micRef: it.ans || ""
   };
 }
-/* v217 (2): pha thi noi TC/TP theo dung de that — TC Q8 doc thong tin chung
-   45 giay truoc (infoSecs), roi moi cau chuan bi 3 giay; Q10 cau hoi doc 2 lan
-   (ghi o body, khong phai pha rieng). */
+/* v217 (2): pha thi noi TC/TP theo dung de that — TC muc 7 doc thong tin chung
+   45 giay truoc (infoSecs), roi moi cau chuan bi 3 giay; muc 9 cau hoi doc 2 lan
+   (ghi o body, khong phai pha rieng). SUA 23/11 v245: muc doi tu 8->7 va 10->9
+   do bo muc mo ta tranh trung + chen Q10 de xuat giai phap. */
 function tcTpSpeakPhases(track, n) {
   var ph = [];
   if (track === "tc" && n.infoSecs) ph.push({ id: "info", label: "Đọc thông tin", secs: n.infoSecs });
@@ -29645,16 +29646,16 @@ function tcTpSpeakPhases(track, n) {
 function tcTpSpeakBodyHTML(track, n, i) {
   var h = "";
   if (track === "tc") {
-    if (n.sitEn || n.sitVi) h += '<p><b>Tranh (dạng chuyển thể — mô tả bằng chữ):</b></p><p>' + esc(n.sitEn) + '</p><p class="mut">' + esc(n.sitVi) + '</p>';
+    if (n.sitEn || n.sitVi) h += '<p><b>' + (n.rk === "propose" ? 'Tin nhắn thoại (dạng chuyển thể — đọc bằng chữ):' : 'Tranh (dạng chuyển thể — mô tả bằng chữ):') + '</b></p><p>' + esc(n.sitEn) + '</p><p class="mut">' + esc(n.sitVi) + '</p>';
     if (n.infoEn || n.infoVi) {
       h += '<p><b>Thông tin cho sẵn:</b></p><p>' + esc(n.infoEn) + '</p><p class="mut">' + esc(n.infoVi) + '</p>';
-      if (i !== 7) h += '<p class="mut">Thông tin chung này đã đọc ở Câu 8 (45 giây) — ở câu này chỉ còn chuẩn bị 3 giây rồi nói.</p>';
+      if (i !== 6) h += '<p class="mut">Thông tin chung này đã đọc ở Câu 7 (45 giây) — ở câu này chỉ còn chuẩn bị 3 giây rồi nói.</p>';
     }
     if (n.q) h += '<p><b>Câu hỏi:</b> ' + esc(n.q) + '</p><p class="mut">' + esc(n.qvi) + '</p>';
     if (n.rk === "readaloud") h += '<p><b>Đọc to đoạn sau:</b></p><p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p>';
     else if (n.rk === "describe") h += '<p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p><p class="mut">Mô tả mở — máy không chấm được, tự đối chiếu mô tả tranh trên.</p>';
     else if (n.rk === "answer" || n.rk === "info") h += '<p>Câu trả lời mẫu (bạn có thể trả lời khác, miễn là đúng ý):</p><p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p>';
-    else if (n.rk === "question") {
+    else if (n.rk === "question" || n.rk === "propose") {
       if (n.topic) h += '<p><b>Chủ đề:</b> ' + esc(n.topic) + '</p>';
       h += '<p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p>';
       if (n.guide) h += '<p class="mut">' + esc(n.guide) + '</p>';
