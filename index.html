@@ -9385,6 +9385,17 @@ function elsaSoundVerdictHTML(sym, targetWord, aiRes, useTc) {
   h += '<p><button class="dimlink" data-syl-detail-word="' + esc(targetWord) + '" data-syl-detail-sym="' + esc(sym || "") + '">🔍 Xem chi tiết từng âm tiết →</button></p>';
   return h + '</div>';
 }
+/* v240: dung ket qua tang 1 SR cua khoi P3 lam aiRes cho verdict elsa.
+   - Dung: tu duoc nghe dung (pct 100).
+   - Sai: chi ghi tu + cau may nghe duoc, KHONG dat issue.sound — tang 1 chi
+     biet nghe ra hay khong theo TU, khong dinh vi duoc am sai cu the; dat
+     sound = sym se bia cau "may chu dinh vi loi o dung am /sym/" (QT-09).
+   Tra null khi chua co luot doc bang mic (duong go thay mic khong co verdict). */
+function phP3VerdictAiRes(word, r) {
+  if (!r || !r.tried || !r.spoke) return null;
+  if (r.ok) return { words: [{ word: word, ok: true }], issues: [], transcript: r.heard || "", score: 100 };
+  return { words: [{ word: word, ok: false }], issues: [{ word: word, heard: r.heard || "" }], transcript: r.heard || "", score: 0 };
+}
 /* v93: loi theo tung AM TIET tieng Trung — tu words[] + toneIssues[] cua may chu.
    Chu dung + thanh dung -> Đúng; chu dung + thanh sai -> Gần đúng (thanh sai);
    chu sai -> Sai. Khong co du lieu AI -> "Chưa đo được". */
@@ -11450,7 +11461,7 @@ function pronT1Wire(l, sym, track) {
    pronT1Store như đọc 1 lượt cũ (lượt 2 chỉ đọc từ lỗi thì không ghi) — ngữ
    nghĩa chấm cũ giữ nguyên, chỉ đổi phiên đọc. Không mic/không SR → gõ lại
    (drillMode, luật thoát mic v112); nút "Bước tiếp theo" vốn luôn mở. */
-function pronP3BlockHTML(l, key, label, vi, track, isWord) {
+function pronP3BlockHTML(l, key, label, vi, track, isWord, verdict) {
   if (!l.__p3) l.__p3 = {};
   var p3 = l.__p3[key] || (l.__p3[key] = p3New());
   var r = (l.phT1 || {})[key] || {};
@@ -11465,7 +11476,7 @@ function pronP3BlockHTML(l, key, label, vi, track, isWord) {
   } else {
     h += '<button class="btn btn-primary" data-p3-rec="' + esc(key) + '">' + esc(p3SpeakLabel(p3, isWord)) + '</button></div>';
   }
-  h += '<div class="t1-res" id="p3res-' + esc(key) + '">' + (p3.msg ? '<p><b>' + esc(p3.msg) + '</b></p>' : '') + (p3.heard ? '<p class="mut">Máy nghe được: “' + esc(p3.heard) + '”</p>' : '') + (r.tried && r.spoke ? pronTier1VerdictHTML(!!r.ok, r.heard || "") : "") + '</div>'
+  h += '<div class="t1-res" id="p3res-' + esc(key) + '">' + (p3.msg ? '<p><b>' + esc(p3.msg) + '</b></p>' : '') + (p3.heard ? '<p class="mut">Máy nghe được: “' + esc(p3.heard) + '”</p>' : '') + (r.tried && r.spoke ? pronTier1VerdictHTML(!!r.ok, r.heard || "") : "") + (verdict && r.tried && r.spoke ? elsaSoundVerdictHTML(verdict.sym, verdict.word, phP3VerdictAiRes(verdict.word, r), !!verdict.useTc) : "") + '</div>'
     + '<p class="mut" id="p3err-' + esc(key) + '">' + esc(r.err || '') + '</p>';
   if (r.tried) h += (r.selfUrl ? '' : '<div class="row" id="t1selfrow-' + esc(key) + '"><button class="btn" data-t1-selfrec="' + esc(key) + '">🎙 Ghi giọng mình để tự nghe</button></div>') + '<div id="t1self-' + esc(key) + '">' + p3SelfCompareInner(track || "en", label, "", r, true, "Chưa ghi được giọng của bạn trong lượt đọc này — bấm “🎙 Ghi giọng mình để tự nghe” để ghi riêng một lượt.") + '</div>';
   return h + '</div>';
@@ -16465,7 +16476,7 @@ function renderPronLesson(app, l) {
     l.__t1texts = { w: { text: exW, ref: exW, persist: "word" } };
     extraW.forEach(function (wd, i) { l.__t1texts["exw" + i] = { text: wd.w, ref: wd.w }; });
     html += '<p class="mut">Nghe mẫu rồi đọc to — máy nghe ra đúng từ là được. Chỉ cần mic, không cần camera.</p><p style="font-size:30px"><b>' + esc(exW) + '</b> <span class="mut">— ' + esc(exVi) + '</span></p>'
-      + pronP3BlockHTML(l, "w", exW, exVi, "en", true)
+      + pronP3BlockHTML(l, "w", exW, exVi, "en", true, { sym: sym, word: exW, useTc: useTc }) /* v240: verdict "Dễ nhầm" hiện lại ở kết quả đọc từ đơn (khung P3 thay #phPracticeResult đã gỡ ở v122) */
       + (extraW.length ? '<p class="mut">Thêm từ chứa âm /' + esc(sym) + '/:</p>' + extraW.map(function (wd, i) { return pronT1BlockHTML(l, "exw" + i, wd.w, (wd.vi || "") + (wd.ipa ? " " + wd.ipa : "")); }).join("") : '<p class="mut">Kho cũ không còn từ nào khác chứa âm này.</p>');
   } else if (sub === 3) {
     var phr = useTc ? (TC_PH_PHRASES[sym] || { ph: exW, vi: exVi }) : (RB_PH_PHRASES[sym] || { ph: p.w, vi: p.vi });
