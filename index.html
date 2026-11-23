@@ -1379,7 +1379,7 @@ function loadState() {
   var st = freshState();
   try {
     var raw = localStorage.getItem(LS_NEW);
-    if (raw) { Object.assign(st, JSON.parse(raw)); normHardFails(st); migrateTcTpCards103(st); migrateZhSandhi180(st); migrateZhMerge230(st); migrateZhFill231(st); return st; }
+    if (raw) { Object.assign(st, JSON.parse(raw)); normHardFails(st); migrateTcTpCards103(st); migrateZhSandhi180(st); migrateZhMerge230(st); migrateZhFill231(st); migrateZhFill243(st); return st; }
   } catch (e) {}
   try {
     var old = JSON.parse(localStorage.getItem(LS_OLD) || "null");
@@ -1937,6 +1937,64 @@ function migrateZhFill231(st) {
     });
   }
   st.zhFill231Done = true;
+}
+function migrateZhFill243(st) {
+  st = st || (typeof state !== "undefined" ? state : null);
+  if (!st || st.zhFill243Done) return;
+  var SHIFT = { "36": [15, 1], "37": [18, 6], "185": [6, 1], "197": [20, 5] }; /* [so the trong file, so the moi chen] */
+  function sh(idx, pos) { var s = SHIFT[String(idx)]; return (s && pos >= s[0]) ? pos + s[1] : pos; }
+  if (st.zhPos) {
+    var np = {};
+    Object.keys(st.zhPos).forEach(function (kk) {
+      var mm = /^zhvocab:(\d+)$/.exec(kk);
+      if (!mm) { np[kk] = st.zhPos[kk]; return; }
+      np[kk] = sh(+mm[1], st.zhPos[kk] || 0);
+    });
+    st.zhPos = np;
+  }
+  if (st.zhHard) {
+    var nh = {};
+    Object.keys(st.zhHard).forEach(function (kk) {
+      var h = st.zhHard[kk];
+      var mm = /^zhvocab:(\d+):(\d+)$/.exec(kk);
+      if (mm) {
+        var ni = +mm[1], npos = sh(ni, +mm[2]);
+        if (h && typeof h.idx === "number") h.idx = npos;
+        nh["zhvocab:" + ni + ":" + npos] = h;
+        return;
+      }
+      if (kk.indexOf("zhVocabMulti:zhvocab:") >= 0) {
+        var dm = /zhvocab:(\d+):(\d+)$/.exec(kk);
+        if (dm && SHIFT[String(+dm[1])]) {
+          var pos = Math.floor(+dm[2] / 10), k = +dm[2] % 10;
+          var nq = sh(+dm[1], pos) * 10 + k;
+          var nk = kk.replace(/:\d+$/, ":" + nq);
+          if (h && typeof h.qi === "number") h.qi = nq;
+          nh[nk] = h;
+          return;
+        }
+      }
+      nh[kk] = h;
+    });
+    st.zhHard = nh;
+  }
+  if (st.mems) {
+    var nm = {};
+    Object.keys(st.mems).forEach(function (kk) {
+      var mm = /^s(\d+):(\d+)$/.exec(kk);
+      if (!mm) { nm[kk] = st.mems[kk]; return; }
+      nm["s" + mm[1] + ":" + sh(+mm[1], +mm[2])] = st.mems[kk];
+    });
+    st.mems = nm;
+  }
+  if (st.zhSkipped) {
+    st.zhSkipped = st.zhSkipped.map(function (kk) {
+      var mm = /^zhvocab:(\d+):(\d+)$/.exec(kk);
+      if (!mm) return kk;
+      return "zhvocab:" + mm[1] + ":" + sh(+mm[1], +mm[2]);
+    });
+  }
+  st.zhFill243Done = true;
 }
 function tcTpDueCards90(isTc) {
   if (isTc) tcNorm(); else tpNorm();
@@ -8285,9 +8343,12 @@ function mergeGuestIntoAccount(guest, acc) {
   try { migrateZhMerge230(acc); } catch (e) {}
   try { migrateZhFill231(guest); } catch (e) {}
   try { migrateZhFill231(acc); } catch (e) {}
+  try { migrateZhFill243(guest); } catch (e) {}
+  try { migrateZhFill243(acc); } catch (e) {}
   var merged = freshState();
   merged.zhMerge230Done = true;
   merged.zhFill231Done = true;
+  merged.zhFill243Done = true;
   var added = { progress: 0, cards: 0, hard: 0, checkin: 0, studyLog: 0, savedWords: 0, phDone: 0, pos: 0 };
   function mergeMap(field) {
     var g = (guest && guest[field]) || {}, a = (acc && acc[field]) || {};
@@ -8446,6 +8507,7 @@ function syncPull(uid) {
           if (r.item_key === "freeze" && r.state) acc.freeze = { count: r.state.count || 0, used: r.state.used || [], granted: r.state.granted || [] };
           if (r.item_key === "zhMerge230" && r.state) acc.zhMerge230Done = !!r.state.done;
           if (r.item_key === "zhFill231" && r.state) acc.zhFill231Done = !!r.state.done;
+          if (r.item_key === "zhFill243" && r.state) acc.zhFill243Done = !!r.state.done;
           if (r.item_key === "vip" && r.state) acc.vip = !!r.state.v;
         } else if (r.section === "rb") {
           var k = r.item_key;
@@ -8545,6 +8607,7 @@ function syncPush() {
       normFreeze(state); row("meta", "freeze", { count: state.freeze.count, used: state.freeze.used, granted: state.freeze.granted });
       row("meta", "zhMerge230", { done: !!state.zhMerge230Done });
       row("meta", "zhFill231", { done: !!state.zhFill231Done });
+      row("meta", "zhFill243", { done: !!state.zhFill243Done });
       row("rb", "progress", state.progress || {});
       row("rb", "cards", state.cards || {});
       row("rb", "phDone", state.phDone || {});
