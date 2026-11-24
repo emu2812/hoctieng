@@ -10858,75 +10858,75 @@ function zhToneName(t) { return t === 0 ? "thanh nhẹ" : "thanh " + t; }
 /* --- ban do am ZH: 5 thanh + 21 thanh mau + 36 van mau (theo GTC HSK; v135: 33, v137 (M5): +üe/üan/ün).
    Vi du la tu that thuong dung; cap phan biet la tu that chi khac o am dang hoc. --- */
 var ZH_PRON_TONES = [
-  { sym: "thanh 1", group: "tone", tone: 1, han: "妈", py: "mā", vi: "mẹ", pair: "thanh 3", pairHan: "马", pairPy: "mǎ", pairVi: "ngựa", desc: "Thanh 1 — đọc cao và đều, giữ nguyên một nốt cao." },
-  { sym: "thanh 2", group: "tone", tone: 2, han: "麻", py: "má", vi: "tê, gai", pair: "thanh 4", pairHan: "骂", pairPy: "mà", pairVi: "mắng", desc: "Thanh 2 — đọc đi lên, như đang hỏi “hả?”." },
-  { sym: "thanh 3", group: "tone", tone: 3, han: "马", py: "mǎ", vi: "ngựa", pair: "thanh 4", pairHan: "骂", pairPy: "mà", pairVi: "mắng", desc: "Thanh 3 — đọc xuống rồi lên, như võng xuống rồi hất lên. Trong lời nói liền, thanh 3 trước thanh khác thường chỉ xuống rồi dừng (không lên lại) — thanh 3 nửa; riêng hai thanh 3 đi liền thì thanh đầu đọc thành thanh 2 (đã dạy riêng)." },
-  { sym: "thanh 4", group: "tone", tone: 4, han: "骂", py: "mà", vi: "mắng", pair: "thanh 1", pairHan: "妈", pairPy: "mā", pairVi: "mẹ", desc: "Thanh 4 — đọc đi xuống, dứt khoát như quát." },
-  { sym: "thanh nhẹ", group: "tone", tone: 0, han: "吗", py: "ma", vi: "trợ từ hỏi", pair: "thanh 1", pairHan: "妈", pairPy: "mā", pairVi: "mẹ", desc: "Thanh nhẹ — đọc ngắn và lướt, không nhấn." }
+  { sym: "thanh 1", group: "tone", tone: 1, han: "妈", py: "mā", vi: "mẹ", pair: "thanh 3", pairHan: "马", pairPy: "mǎ", pairVi: "ngựa", desc: "Thanh 1 — đọc cao và đều, giữ nguyên một nốt cao.", vid: "SxFKhmDYKpA", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "thanh 2", group: "tone", tone: 2, han: "麻", py: "má", vi: "tê, gai", pair: "thanh 4", pairHan: "骂", pairPy: "mà", pairVi: "mắng", desc: "Thanh 2 — đọc đi lên, như đang hỏi “hả?”.", vid: "SxFKhmDYKpA", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "thanh 3", group: "tone", tone: 3, han: "马", py: "mǎ", vi: "ngựa", pair: "thanh 4", pairHan: "骂", pairPy: "mà", pairVi: "mắng", desc: "Thanh 3 — đọc xuống rồi lên, như võng xuống rồi hất lên. Trong lời nói liền, thanh 3 trước thanh khác thường chỉ xuống rồi dừng (không lên lại) — thanh 3 nửa; riêng hai thanh 3 đi liền thì thanh đầu đọc thành thanh 2 (đã dạy riêng).", vid: "SxFKhmDYKpA", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "thanh 4", group: "tone", tone: 4, han: "骂", py: "mà", vi: "mắng", pair: "thanh 1", pairHan: "妈", pairPy: "mā", pairVi: "mẹ", desc: "Thanh 4 — đọc đi xuống, dứt khoát như quát.", vid: "SxFKhmDYKpA", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "thanh nhẹ", group: "tone", tone: 0, han: "吗", py: "ma", vi: "trợ từ hỏi", pair: "thanh 1", pairHan: "妈", pairPy: "mā", pairVi: "mẹ", desc: "Thanh nhẹ — đọc ngắn và lướt, không nhấn.", vid: "SxFKhmDYKpA", vch: "Anfa - Tiếng Trung cho người bắt đầu" }
 ];
 var ZH_PRON_INITIALS = [
-  { sym: "b", group: "init", han: "爸", py: "bà", vi: "bố", pair: "p", pairHan: "怕", pairPy: "pà", pairVi: "sợ", desc: "Thanh mẫu b — môi mím rồi bật nhẹ, không bật hơi." },
-  { sym: "p", group: "init", han: "怕", py: "pà", vi: "sợ", pair: "b", pairHan: "爸", pairPy: "bà", pairVi: "bố", desc: "Thanh mẫu p — bật hơi mạnh ra ngoài." },
-  { sym: "m", group: "init", han: "马", py: "mǎ", vi: "ngựa", pair: "n", pairHan: "哪", pairPy: "nǎ", pairVi: "nào, đâu", desc: "Thanh mẫu m — môi mím, hơi ra bằng mũi." },
-  { sym: "f", group: "init", han: "饭", py: "fàn", vi: "cơm", pair: "h", pairHan: "汉", pairPy: "hàn", pairVi: "người Hán", desc: "Thanh mẫu f — răng trên chạm môi dưới, hơi thổi ra." },
-  { sym: "d", group: "init", han: "大", py: "dà", vi: "lớn", pair: "t", pairHan: "踏", pairPy: "tà", pairVi: "giẫm, bước lên", desc: "Thanh mẫu d — đầu lưỡi chạm lợi trên, không bật hơi." },
-  { sym: "t", group: "init", han: "踏", py: "tà", vi: "giẫm, bước lên", pair: "d", pairHan: "大", pairPy: "dà", pairVi: "lớn", desc: "Thanh mẫu t — bật hơi mạnh." },
-  { sym: "n", group: "init", han: "你", py: "nǐ", vi: "bạn", pair: "l", pairHan: "里", pairPy: "lǐ", pairVi: "bên trong", desc: "Thanh mẫu n — đầu lưỡi chạm lợi trên, hơi ra bằng mũi." },
-  { sym: "l", group: "init", han: "里", py: "lǐ", vi: "bên trong", pair: "n", pairHan: "你", pairPy: "nǐ", pairVi: "bạn", desc: "Thanh mẫu l — đầu lưỡi chạm lợi trên, hơi thoát hai bên lưỡi." },
-  { sym: "g", group: "init", han: "干", py: "gàn", vi: "khô", pair: "k", pairHan: "看", pairPy: "kàn", pairVi: "nhìn", desc: "Thanh mẫu g — cuống lưỡi nâng lên, không bật hơi." },
-  { sym: "k", group: "init", han: "看", py: "kàn", vi: "nhìn", pair: "g", pairHan: "干", pairPy: "gàn", pairVi: "khô", desc: "Thanh mẫu k — bật hơi mạnh." },
-  { sym: "h", group: "init", han: "汉", py: "hàn", vi: "người Hán", pair: "f", pairHan: "饭", pairPy: "fàn", pairVi: "cơm", desc: "Thanh mẫu h — hơi thở ra từ cổ họng." },
-  { sym: "j", group: "init", han: "鸡", py: "jī", vi: "gà", pair: "q", pairHan: "七", pairPy: "qī", pairVi: "bảy", desc: "Thanh mẫu j [tɕ] — mặt lưỡi nâng lên gần vòm cứng, bật ra thành âm tắc-xát, không bật hơi." },
-  { sym: "q", group: "init", han: "七", py: "qī", vi: "bảy", pair: "j", pairHan: "鸡", pairPy: "jī", pairVi: "gà", desc: "Thanh mẫu q [tɕʰ] — mặt lưỡi nâng lên gần vòm cứng, bật ra thành âm tắc-xát, bật hơi mạnh." },
-  { sym: "x", group: "init", han: "细", py: "xì", vi: "nhỏ, tỉ mỉ", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu x [ɕ] — mặt lưỡi nâng lên gần vòm cứng, hơi xì qua khe hẹp." },
-  { sym: "zh", group: "init", han: "中", py: "zhōng", vi: "giữa", pair: "ch", pairHan: "充", pairPy: "chōng", pairVi: "đổ đầy", desc: "Thanh mẫu zh — đầu lưỡi cuộn lên, không bật hơi." },
-  { sym: "ch", group: "init", han: "充", py: "chōng", vi: "đổ đầy", pair: "zh", pairHan: "中", pairPy: "zhōng", pairVi: "giữa", desc: "Thanh mẫu ch — đầu lưỡi cuộn lên, bật hơi mạnh." },
-  { sym: "sh", group: "init", han: "是", py: "shì", vi: "là", pair: "r", pairHan: "日", pairPy: "rì", pairVi: "ngày", desc: "Thanh mẫu sh — đầu lưỡi cuộn lên, hơi thoát nhẹ." },
-  { sym: "r", group: "init", han: "日", py: "rì", vi: "ngày", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu r — đầu lưỡi cuộn lên, hơi ma sát nhẹ, dây thanh rung." },
-  { sym: "z", group: "init", han: "在", py: "zài", vi: "ở", pair: "c", pairHan: "菜", pairPy: "cài", pairVi: "rau", desc: "Thanh mẫu z — đầu lưỡi chạm răng, không bật hơi." },
-  { sym: "c", group: "init", han: "菜", py: "cài", vi: "rau", pair: "z", pairHan: "在", pairPy: "zài", pairVi: "ở", desc: "Thanh mẫu c [tsʰ] — đầu lưỡi chạm chân răng trên, bật ra thành âm tắc-xát, bật hơi mạnh." },
-  { sym: "s", group: "init", han: "三", py: "sān", vi: "ba", pair: "sh", pairHan: "山", pairPy: "shān", pairVi: "núi", desc: "Thanh mẫu s — đầu lưỡi đưa gần răng trên nhưng không chạm, hơi xì qua khe hẹp." }
+  { sym: "b", group: "init", han: "爸", py: "bà", vi: "bố", pair: "p", pairHan: "怕", pairPy: "pà", pairVi: "sợ", desc: "Thanh mẫu b — môi mím rồi bật nhẹ, không bật hơi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "p", group: "init", han: "怕", py: "pà", vi: "sợ", pair: "b", pairHan: "爸", pairPy: "bà", pairVi: "bố", desc: "Thanh mẫu p — bật hơi mạnh ra ngoài.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "m", group: "init", han: "马", py: "mǎ", vi: "ngựa", pair: "n", pairHan: "哪", pairPy: "nǎ", pairVi: "nào, đâu", desc: "Thanh mẫu m — môi mím, hơi ra bằng mũi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "f", group: "init", han: "饭", py: "fàn", vi: "cơm", pair: "h", pairHan: "汉", pairPy: "hàn", pairVi: "người Hán", desc: "Thanh mẫu f — răng trên chạm môi dưới, hơi thổi ra.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "d", group: "init", han: "大", py: "dà", vi: "lớn", pair: "t", pairHan: "踏", pairPy: "tà", pairVi: "giẫm, bước lên", desc: "Thanh mẫu d — đầu lưỡi chạm lợi trên, không bật hơi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "t", group: "init", han: "踏", py: "tà", vi: "giẫm, bước lên", pair: "d", pairHan: "大", pairPy: "dà", pairVi: "lớn", desc: "Thanh mẫu t — bật hơi mạnh.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "n", group: "init", han: "你", py: "nǐ", vi: "bạn", pair: "l", pairHan: "里", pairPy: "lǐ", pairVi: "bên trong", desc: "Thanh mẫu n — đầu lưỡi chạm lợi trên, hơi ra bằng mũi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "l", group: "init", han: "里", py: "lǐ", vi: "bên trong", pair: "n", pairHan: "你", pairPy: "nǐ", pairVi: "bạn", desc: "Thanh mẫu l — đầu lưỡi chạm lợi trên, hơi thoát hai bên lưỡi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "g", group: "init", han: "干", py: "gàn", vi: "khô", pair: "k", pairHan: "看", pairPy: "kàn", pairVi: "nhìn", desc: "Thanh mẫu g — cuống lưỡi nâng lên, không bật hơi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "k", group: "init", han: "看", py: "kàn", vi: "nhìn", pair: "g", pairHan: "干", pairPy: "gàn", pairVi: "khô", desc: "Thanh mẫu k — bật hơi mạnh.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "h", group: "init", han: "汉", py: "hàn", vi: "người Hán", pair: "f", pairHan: "饭", pairPy: "fàn", pairVi: "cơm", desc: "Thanh mẫu h — hơi thở ra từ cổ họng.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "j", group: "init", han: "鸡", py: "jī", vi: "gà", pair: "q", pairHan: "七", pairPy: "qī", pairVi: "bảy", desc: "Thanh mẫu j [tɕ] — mặt lưỡi nâng lên gần vòm cứng, bật ra thành âm tắc-xát, không bật hơi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "q", group: "init", han: "七", py: "qī", vi: "bảy", pair: "j", pairHan: "鸡", pairPy: "jī", pairVi: "gà", desc: "Thanh mẫu q [tɕʰ] — mặt lưỡi nâng lên gần vòm cứng, bật ra thành âm tắc-xát, bật hơi mạnh.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "x", group: "init", han: "细", py: "xì", vi: "nhỏ, tỉ mỉ", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu x [ɕ] — mặt lưỡi nâng lên gần vòm cứng, hơi xì qua khe hẹp.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "zh", group: "init", han: "中", py: "zhōng", vi: "giữa", pair: "ch", pairHan: "充", pairPy: "chōng", pairVi: "đổ đầy", desc: "Thanh mẫu zh — đầu lưỡi cuộn lên, không bật hơi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ch", group: "init", han: "充", py: "chōng", vi: "đổ đầy", pair: "zh", pairHan: "中", pairPy: "zhōng", pairVi: "giữa", desc: "Thanh mẫu ch — đầu lưỡi cuộn lên, bật hơi mạnh.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "sh", group: "init", han: "是", py: "shì", vi: "là", pair: "r", pairHan: "日", pairPy: "rì", pairVi: "ngày", desc: "Thanh mẫu sh — đầu lưỡi cuộn lên, hơi thoát nhẹ.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "r", group: "init", han: "日", py: "rì", vi: "ngày", pair: "sh", pairHan: "是", pairPy: "shì", pairVi: "là", desc: "Thanh mẫu r — đầu lưỡi cuộn lên, hơi ma sát nhẹ, dây thanh rung.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "z", group: "init", han: "在", py: "zài", vi: "ở", pair: "c", pairHan: "菜", pairPy: "cài", pairVi: "rau", desc: "Thanh mẫu z — đầu lưỡi chạm răng, không bật hơi.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "c", group: "init", han: "菜", py: "cài", vi: "rau", pair: "z", pairHan: "在", pairPy: "zài", pairVi: "ở", desc: "Thanh mẫu c [tsʰ] — đầu lưỡi chạm chân răng trên, bật ra thành âm tắc-xát, bật hơi mạnh.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "s", group: "init", han: "三", py: "sān", vi: "ba", pair: "sh", pairHan: "山", pairPy: "shān", pairVi: "núi", desc: "Thanh mẫu s — đầu lưỡi đưa gần răng trên nhưng không chạm, hơi xì qua khe hẹp.", vid: "nHIFhBC3jDc", vch: "Anfa - Tiếng Trung cho người bắt đầu" }
 ];
 var ZH_PRON_FINALS = [
-  { sym: "a", group: "fin", han: "大", py: "dà", vi: "lớn", pair: "an", pairHan: "蛋", pairPy: "dàn", pairVi: "trứng", desc: "Vận mẫu a — miệng mở rộng." },
-  { sym: "o", group: "fin", han: "哦", py: "ō", vi: "ồ (thán từ)", pair: "ou", pairHan: "欧", pairPy: "ōu", pairVi: "châu Âu", desc: "Vận mẫu o — môi tròn lại." }, /* v169 (N28): cap toi thieu that 哦 ō / 欧 ōu (cung khong thanh mau, cung thanh 1) — 歌 gē la van 'e', khong phai 'o' */
-  { sym: "e", group: "fin", han: "个", py: "gè", vi: "cái", pair: "ao", pairHan: "告", pairPy: "gào", pairVi: "báo cho biết", desc: "Vận mẫu e — miệng mở vừa, lưỡi hơi lùi." },
-  { sym: "i", group: "fin", han: "里", py: "lǐ", vi: "bên trong", pair: "ü", pairHan: "旅", pairPy: "lǚ", pairVi: "du lịch", desc: "Vận mẫu i — miệng cười nhẹ, lưỡi nâng cao." },
-  { sym: "u", group: "fin", han: "不", py: "bù", vi: "không", pair: "ai", pairHan: "拜", pairPy: "bài", pairVi: "bái lạy", desc: "Vận mẫu u — môi chu lại như huýt sáo." },
-  { sym: "ü", group: "fin", han: "旅", py: "lǚ", vi: "du lịch", pair: "i", pairHan: "里", pairPy: "lǐ", pairVi: "bên trong", desc: "Vận mẫu ü — môi chu như u, lưỡi như i." },
-  { sym: "ai", group: "fin", han: "拜", py: "bài", vi: "bái lạy", pair: "ei", pairHan: "背", pairPy: "bèi", pairVi: "lưng; cõng", desc: "Vận mẫu ai — miệng mở rộng rồi khép dần." },
-  { sym: "ei", group: "fin", han: "美", py: "měi", vi: "đẹp", pair: "ai", pairHan: "买", pairPy: "mǎi", pairVi: "mua", desc: "Vận mẫu ei — miệng mở vừa rồi khép dần." },
-  { sym: "ao", group: "fin", han: "高", py: "gāo", vi: "cao", pair: "ou", pairHan: "勾", pairPy: "gōu", pairVi: "móc, câu", desc: "Vận mẫu ao — miệng mở rộng rồi tròn lại." },
-  { sym: "ou", group: "fin", han: "勾", py: "gōu", vi: "móc, câu", pair: "ao", pairHan: "高", pairPy: "gāo", pairVi: "cao", desc: "Vận mẫu ou — môi tròn rồi khép dần." },
-  { sym: "an", group: "fin", han: "班", py: "bān", vi: "lớp", pair: "ang", pairHan: "帮", pairPy: "bāng", pairVi: "giúp", desc: "Vận mẫu an — kết thúc bằng n, đầu lưỡi chạm lợi." },
-  { sym: "en", group: "fin", han: "奔", py: "bēn", vi: "chạy nhanh", pair: "eng", pairHan: "崩", pairPy: "bēng", pairVi: "sụp đổ", desc: "Vận mẫu en — kết thúc bằng n, âm ngắn." },
-  { sym: "ang", group: "fin", han: "帮", py: "bāng", vi: "giúp", pair: "an", pairHan: "班", pairPy: "bān", pairVi: "lớp", desc: "Vận mẫu ang — kết thúc bằng ng, âm vang ở mũi sau." },
-  { sym: "eng", group: "fin", han: "崩", py: "bēng", vi: "sụp đổ", pair: "en", pairHan: "奔", pairPy: "bēn", pairVi: "chạy nhanh", desc: "Vận mẫu eng — kết thúc bằng ng, âm vang ở mũi sau." },
+  { sym: "a", group: "fin", han: "大", py: "dà", vi: "lớn", pair: "an", pairHan: "蛋", pairPy: "dàn", pairVi: "trứng", desc: "Vận mẫu a — miệng mở rộng.", vid: "a_Jp8WX_rG0", vch: "Weiwei Chinese 炜炜中文", seg: [224, 248] },
+  { sym: "o", group: "fin", han: "哦", py: "ō", vi: "ồ (thán từ)", pair: "ou", pairHan: "欧", pairPy: "ōu", pairVi: "châu Âu", desc: "Vận mẫu o — môi tròn lại.", vid: "a_Jp8WX_rG0", vch: "Weiwei Chinese 炜炜中文", seg: [288, 353] }, /* v169 (N28): cap toi thieu that 哦 ō / 欧 ōu (cung khong thanh mau, cung thanh 1) — 歌 gē la van 'e', khong phai 'o' */
+  { sym: "e", group: "fin", han: "个", py: "gè", vi: "cái", pair: "ao", pairHan: "告", pairPy: "gào", pairVi: "báo cho biết", desc: "Vận mẫu e — miệng mở vừa, lưỡi hơi lùi.", vid: "a_Jp8WX_rG0", vch: "Weiwei Chinese 炜炜中文", seg: [248, 277] },
+  { sym: "i", group: "fin", han: "里", py: "lǐ", vi: "bên trong", pair: "ü", pairHan: "旅", pairPy: "lǚ", pairVi: "du lịch", desc: "Vận mẫu i — miệng cười nhẹ, lưỡi nâng cao.", vid: "a_Jp8WX_rG0", vch: "Weiwei Chinese 炜炜中文", seg: [353, 398] },
+  { sym: "u", group: "fin", han: "不", py: "bù", vi: "không", pair: "ai", pairHan: "拜", pairPy: "bài", pairVi: "bái lạy", desc: "Vận mẫu u — môi chu lại như huýt sáo.", vid: "a_Jp8WX_rG0", vch: "Weiwei Chinese 炜炜中文", seg: [398, 437] },
+  { sym: "ü", group: "fin", han: "旅", py: "lǚ", vi: "du lịch", pair: "i", pairHan: "里", pairPy: "lǐ", pairVi: "bên trong", desc: "Vận mẫu ü — môi chu như u, lưỡi như i.", vid: "a_Jp8WX_rG0", vch: "Weiwei Chinese 炜炜中文", seg: [437, 572] },
+  { sym: "ai", group: "fin", han: "拜", py: "bài", vi: "bái lạy", pair: "ei", pairHan: "背", pairPy: "bèi", pairVi: "lưng; cõng", desc: "Vận mẫu ai — miệng mở rộng rồi khép dần.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ei", group: "fin", han: "美", py: "měi", vi: "đẹp", pair: "ai", pairHan: "买", pairPy: "mǎi", pairVi: "mua", desc: "Vận mẫu ei — miệng mở vừa rồi khép dần.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ao", group: "fin", han: "高", py: "gāo", vi: "cao", pair: "ou", pairHan: "勾", pairPy: "gōu", pairVi: "móc, câu", desc: "Vận mẫu ao — miệng mở rộng rồi tròn lại.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ou", group: "fin", han: "勾", py: "gōu", vi: "móc, câu", pair: "ao", pairHan: "高", pairPy: "gāo", pairVi: "cao", desc: "Vận mẫu ou — môi tròn rồi khép dần.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "an", group: "fin", han: "班", py: "bān", vi: "lớp", pair: "ang", pairHan: "帮", pairPy: "bāng", pairVi: "giúp", desc: "Vận mẫu an — kết thúc bằng n, đầu lưỡi chạm lợi.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "en", group: "fin", han: "奔", py: "bēn", vi: "chạy nhanh", pair: "eng", pairHan: "崩", pairPy: "bēng", pairVi: "sụp đổ", desc: "Vận mẫu en — kết thúc bằng n, âm ngắn.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ang", group: "fin", han: "帮", py: "bāng", vi: "giúp", pair: "an", pairHan: "班", pairPy: "bān", pairVi: "lớp", desc: "Vận mẫu ang — kết thúc bằng ng, âm vang ở mũi sau.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "eng", group: "fin", han: "崩", py: "bēng", vi: "sụp đổ", pair: "en", pairHan: "奔", pairPy: "bēn", pairVi: "chạy nhanh", desc: "Vận mẫu eng — kết thúc bằng ng, âm vang ở mũi sau.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
   /* v135 (M4): bo sung 19 van mau con thieu — moi muc nhu 14 muc cu: chu Han that
      (tu HSK1/thuong dung) + pinyin + nghia Viet + cap de nham + 1 dong huong dan. */
-  { sym: "ia", group: "fin", han: "家", py: "jiā", vi: "nhà", pair: "iao", pairHan: "交", pairPy: "jiāo", pairVi: "giao, đưa", desc: "Vận mẫu ia — đọc i rồi trượt nhanh sang a, miệng mở rộng dần." },
-  { sym: "ie", group: "fin", han: "姐", py: "jiě", vi: "chị gái", pair: "ia", pairHan: "假", pairPy: "jiǎ", pairVi: "giả", desc: "Vận mẫu ie — đọc i rồi trượt sang e, miệng mở vừa." },
+  { sym: "ia", group: "fin", han: "家", py: "jiā", vi: "nhà", pair: "iao", pairHan: "交", pairPy: "jiāo", pairVi: "giao, đưa", desc: "Vận mẫu ia — đọc i rồi trượt nhanh sang a, miệng mở rộng dần.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ie", group: "fin", han: "姐", py: "jiě", vi: "chị gái", pair: "ia", pairHan: "假", pairPy: "jiǎ", pairVi: "giả", desc: "Vận mẫu ie — đọc i rồi trượt sang e, miệng mở vừa.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
   /* v137 (M5): bo sung 3 van mau chuan con thieu (üe/üan/ün) — he chuan 36 van. */
-  { sym: "üe", group: "fin", han: "学", py: "xué", vi: "học", pair: "ie", pairHan: "鞋", pairPy: "xié", pairVi: "giày", desc: "Vận mẫu üe — môi chu như u, lưỡi như i rồi trượt sang e. Chỉ đi sau j, q, x, y (viết gọn thành ue: xué)." },
-  { sym: "iao", group: "fin", han: "交", py: "jiāo", vi: "giao, đưa", pair: "ia", pairHan: "家", pairPy: "jiā", pairVi: "nhà", desc: "Vận mẫu iao — trượt từ i qua a rồi khép về o, đọc liền một hơi." },
-  { sym: "iu", group: "fin", han: "九", py: "jiǔ", vi: "chín (số 9)", pair: "i", pairHan: "挤", pairPy: "jǐ", pairVi: "chen chúc", desc: "Vận mẫu iu — đọc i rồi khép về u, môi tròn dần. Đừng nhầm với ui (u rồi i)." },
-  { sym: "ian", group: "fin", han: "剪", py: "jiǎn", vi: "cắt", pair: "in", pairHan: "紧", pairPy: "jǐn", pairVi: "chặt", desc: "Vận mẫu ian — đọc i rồi sang a, kết thúc bằng n, đầu lưỡi chạm lợi." },
-  { sym: "in", group: "fin", han: "紧", py: "jǐn", vi: "chặt", pair: "ian", pairHan: "剪", pairPy: "jiǎn", pairVi: "cắt", desc: "Vận mẫu in — đọc i rồi kết thúc bằng n, âm ngắn, đầu lưỡi chạm lợi." },
-  { sym: "iang", group: "fin", han: "两", py: "liǎng", vi: "hai", pair: "ian", pairHan: "脸", pairPy: "liǎn", pairVi: "mặt", desc: "Vận mẫu iang — đọc i rồi sang a, kết thúc bằng ng, âm vang mũi sâu." },
-  { sym: "ing", group: "fin", han: "星", py: "xīng", vi: "ngôi sao", pair: "in", pairHan: "心", pairPy: "xīn", pairVi: "tim, lòng", desc: "Vận mẫu ing — đọc i rồi kết thúc bằng ng, âm vang mũi sâu, lưỡi nâng cao." },
-  { sym: "iong", group: "fin", han: "穷", py: "qióng", vi: "nghèo", pair: "iang", pairHan: "强", pairPy: "qiáng", pairVi: "mạnh, khỏe", desc: "Vận mẫu iong — đọc i rồi sang o, kết thúc bằng ng. Chỉ đi sau j, q, x, y." }, /* v169 (N28): cap toi thieu that 穷 qióng / 强 qiáng (cung q, cung thanh 2) — giu vi du goc N10; 窘 jiǒng it gap hon */
-  { sym: "ua", group: "fin", han: "瓜", py: "guā", vi: "dưa", pair: "uo", pairHan: "锅", pairPy: "guō", pairVi: "nồi", desc: "Vận mẫu ua — đọc u rồi trượt sang a, miệng mở rộng dần." },
-  { sym: "uo", group: "fin", han: "锅", py: "guō", vi: "nồi", pair: "ua", pairHan: "瓜", pairPy: "guā", pairVi: "dưa", desc: "Vận mẫu uo — đọc u rồi trượt sang o, môi tròn dần." },
-  { sym: "uai", group: "fin", han: "快", py: "kuài", vi: "nhanh", pair: "ui", pairHan: "愧", pairPy: "kuì", pairVi: "hổ thẹn", desc: "Vận mẫu uai — trượt từ u qua a rồi khép về i, đọc liền một hơi." },
-  { sym: "ui", group: "fin", han: "会", py: "huì", vi: "biết, có thể", pair: "u", pairHan: "户", pairPy: "hù", pairVi: "hộ gia đình", desc: "Vận mẫu ui — đọc u rồi khép về i. Đừng nhầm với iu (i rồi u)." },
-  { sym: "uan", group: "fin", han: "短", py: "duǎn", vi: "ngắn", pair: "an", pairHan: "胆", pairPy: "dǎn", pairVi: "gan, mật", desc: "Vận mẫu uan — đọc u rồi sang a, kết thúc bằng n." },
-  { sym: "üan", group: "fin", han: "愿", py: "yuàn", vi: "nguyện, mong muốn", pair: "ian", pairHan: "宴", pairPy: "yàn", pairVi: "tiệc", desc: "Vận mẫu üan — môi chu như u rồi trượt sang a, kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành uan: yuán). Đừng nhầm với uan (u thật) như 短 duǎn." },
-  { sym: "un", group: "fin", han: "温", py: "wēn", vi: "ấm", pair: "uan", pairHan: "弯", pairPy: "wān", pairVi: "cong", desc: "Vận mẫu un — đọc u rồi kết thúc bằng n, âm ngắn." },
-  { sym: "ün", group: "fin", han: "运", py: "yùn", vi: "vận chuyển; vận may", pair: "in", pairHan: "印", pairPy: "yìn", pairVi: "in, dấu", desc: "Vận mẫu ün — môi chu như u, lưỡi như i rồi kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành un: yùn)." },
-  { sym: "uang", group: "fin", han: "黄", py: "huáng", vi: "vàng", pair: "uan", pairHan: "还", pairPy: "huán", pairVi: "trả lại", desc: "Vận mẫu uang — đọc u rồi sang a, kết thúc bằng ng, âm vang mũi sâu." },
-  { sym: "ueng", group: "fin", han: "翁", py: "wēng", vi: "ông lão", pair: "uang", pairHan: "汪", pairPy: "wāng", pairVi: "nước mênh mông", desc: "Vận mẫu ueng — đọc u rồi sang e, kết thúc bằng ng. Hiếm gặp, chủ yếu trong chữ 翁 (ông lão)." },
-  { sym: "er", group: "fin", han: "二", py: "èr", vi: "hai (số 2)", pair: "e", pairHan: "饿", pairPy: "è", pairVi: "đói", desc: "Vận mẫu er — đầu lưỡi cuộn lên, âm vang như r cuối, chỉ đứng một mình thành âm tiết." },
-  { sym: "ong", group: "fin", han: "东", py: "dōng", vi: "phía đông", pair: "ang", pairHan: "当", pairPy: "dāng", pairVi: "làm, đảm nhiệm", desc: "Vận mẫu ong — đọc o rồi kết thúc bằng ng, môi tròn, âm vang mũi sâu." }
+  { sym: "üe", group: "fin", han: "学", py: "xué", vi: "học", pair: "ie", pairHan: "鞋", pairPy: "xié", pairVi: "giày", desc: "Vận mẫu üe — môi chu như u, lưỡi như i rồi trượt sang e. Chỉ đi sau j, q, x, y (viết gọn thành ue: xué).", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "iao", group: "fin", han: "交", py: "jiāo", vi: "giao, đưa", pair: "ia", pairHan: "家", pairPy: "jiā", pairVi: "nhà", desc: "Vận mẫu iao — trượt từ i qua a rồi khép về o, đọc liền một hơi.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "iu", group: "fin", han: "九", py: "jiǔ", vi: "chín (số 9)", pair: "i", pairHan: "挤", pairPy: "jǐ", pairVi: "chen chúc", desc: "Vận mẫu iu — đọc i rồi khép về u, môi tròn dần. Đừng nhầm với ui (u rồi i).", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ian", group: "fin", han: "剪", py: "jiǎn", vi: "cắt", pair: "in", pairHan: "紧", pairPy: "jǐn", pairVi: "chặt", desc: "Vận mẫu ian — đọc i rồi sang a, kết thúc bằng n, đầu lưỡi chạm lợi.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "in", group: "fin", han: "紧", py: "jǐn", vi: "chặt", pair: "ian", pairHan: "剪", pairPy: "jiǎn", pairVi: "cắt", desc: "Vận mẫu in — đọc i rồi kết thúc bằng n, âm ngắn, đầu lưỡi chạm lợi.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "iang", group: "fin", han: "两", py: "liǎng", vi: "hai", pair: "ian", pairHan: "脸", pairPy: "liǎn", pairVi: "mặt", desc: "Vận mẫu iang — đọc i rồi sang a, kết thúc bằng ng, âm vang mũi sâu.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ing", group: "fin", han: "星", py: "xīng", vi: "ngôi sao", pair: "in", pairHan: "心", pairPy: "xīn", pairVi: "tim, lòng", desc: "Vận mẫu ing — đọc i rồi kết thúc bằng ng, âm vang mũi sâu, lưỡi nâng cao.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "iong", group: "fin", han: "穷", py: "qióng", vi: "nghèo", pair: "iang", pairHan: "强", pairPy: "qiáng", pairVi: "mạnh, khỏe", desc: "Vận mẫu iong — đọc i rồi sang o, kết thúc bằng ng. Chỉ đi sau j, q, x, y.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" }, /* v169 (N28): cap toi thieu that 穷 qióng / 强 qiáng (cung q, cung thanh 2) — giu vi du goc N10; 窘 jiǒng it gap hon */
+  { sym: "ua", group: "fin", han: "瓜", py: "guā", vi: "dưa", pair: "uo", pairHan: "锅", pairPy: "guō", pairVi: "nồi", desc: "Vận mẫu ua — đọc u rồi trượt sang a, miệng mở rộng dần.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "uo", group: "fin", han: "锅", py: "guō", vi: "nồi", pair: "ua", pairHan: "瓜", pairPy: "guā", pairVi: "dưa", desc: "Vận mẫu uo — đọc u rồi trượt sang o, môi tròn dần.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "uai", group: "fin", han: "快", py: "kuài", vi: "nhanh", pair: "ui", pairHan: "愧", pairPy: "kuì", pairVi: "hổ thẹn", desc: "Vận mẫu uai — trượt từ u qua a rồi khép về i, đọc liền một hơi.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ui", group: "fin", han: "会", py: "huì", vi: "biết, có thể", pair: "u", pairHan: "户", pairPy: "hù", pairVi: "hộ gia đình", desc: "Vận mẫu ui — đọc u rồi khép về i. Đừng nhầm với iu (i rồi u).", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "uan", group: "fin", han: "短", py: "duǎn", vi: "ngắn", pair: "an", pairHan: "胆", pairPy: "dǎn", pairVi: "gan, mật", desc: "Vận mẫu uan — đọc u rồi sang a, kết thúc bằng n.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "üan", group: "fin", han: "愿", py: "yuàn", vi: "nguyện, mong muốn", pair: "ian", pairHan: "宴", pairPy: "yàn", pairVi: "tiệc", desc: "Vận mẫu üan — môi chu như u rồi trượt sang a, kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành uan: yuán). Đừng nhầm với uan (u thật) như 短 duǎn.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "un", group: "fin", han: "温", py: "wēn", vi: "ấm", pair: "uan", pairHan: "弯", pairPy: "wān", pairVi: "cong", desc: "Vận mẫu un — đọc u rồi kết thúc bằng n, âm ngắn.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ün", group: "fin", han: "运", py: "yùn", vi: "vận chuyển; vận may", pair: "in", pairHan: "印", pairPy: "yìn", pairVi: "in, dấu", desc: "Vận mẫu ün — môi chu như u, lưỡi như i rồi kết thúc bằng n. Chỉ đi sau j, q, x, y (viết gọn thành un: yùn).", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "uang", group: "fin", han: "黄", py: "huáng", vi: "vàng", pair: "uan", pairHan: "还", pairPy: "huán", pairVi: "trả lại", desc: "Vận mẫu uang — đọc u rồi sang a, kết thúc bằng ng, âm vang mũi sâu.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "ueng", group: "fin", han: "翁", py: "wēng", vi: "ông lão", pair: "uang", pairHan: "汪", pairPy: "wāng", pairVi: "nước mênh mông", desc: "Vận mẫu ueng — đọc u rồi sang e, kết thúc bằng ng. Hiếm gặp, chủ yếu trong chữ 翁 (ông lão).", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" },
+  { sym: "er", group: "fin", han: "二", py: "èr", vi: "hai (số 2)", pair: "e", pairHan: "饿", pairPy: "è", pairVi: "đói", desc: "Vận mẫu er — đầu lưỡi cuộn lên, âm vang như r cuối, chỉ đứng một mình thành âm tiết.", vid: "a_Jp8WX_rG0", vch: "Weiwei Chinese 炜炜中文", seg: [277, 288] },
+  { sym: "ong", group: "fin", han: "东", py: "dōng", vi: "phía đông", pair: "ang", pairHan: "当", pairPy: "dāng", pairVi: "làm, đảm nhiệm", desc: "Vận mẫu ong — đọc o rồi kết thúc bằng ng, môi tròn, âm vang mũi sâu.", vid: "ij0STnxAffo", vch: "Anfa - Tiếng Trung cho người bắt đầu" }
 ];
 function zhPronSounds() { return ZH_PRON_INITIALS.concat(ZH_PRON_FINALS, ZH_PRON_TONES); } /* v137 (M5): thu tu dung su pham — thanh mau -> van mau -> thanh dieu */
 function zhPronEntry(sym) {
@@ -10973,7 +10973,7 @@ function tpPronSounds() {
     (g.items || []).forEach(function (it) {
       var sym = it.k;
       var grp = gi === 0 ? "vowel" : (gi === 1 ? "vowel" : (gi === 2 ? "init" : (gi === 3 ? "init" : (sym.indexOf("받침") === 0 ? "batchim" : "composite"))));
-      var e = { sym: sym, group: grp, r: it.r, vi: it.vi, ex: it.ex, exr: it.exr, exv: it.exv };
+      var e = { sym: sym, group: grp, r: it.r, vi: it.vi, ex: it.ex, exr: it.exr, exv: it.exv, vid: it.vid, vch: it.vch, seg: it.seg }; /* v247: passthrough video riêng từng âm */
       if (grp === "batchim") {
         var fins = [];
         var m = sym.match(/([ㄱ-ㅎ]+)/g) || [];
@@ -11286,6 +11286,20 @@ function pronStepPillsHTML(track, sym, sub) {
 }
 function renderZhPron(app, l) { renderTrackPron(app, l, "zh"); }
 function renderTpPron(app, l) { renderTrackPron(app, l, "tp"); }
+/* v247: video riêng từng âm ZH/TP ở sub 0 bài âm — nhúng YouTube nocookie.
+   Mỗi âm có vid + vch trong mục âm; seg [start,end] chỉ khi tác giả ghi mốc.
+   Caption nói thật: có seg thì "đoạn này chỉ dạy âm…", không seg thì video nhóm. */
+function trackPhSegTime(s) { var m = Math.floor(s / 60), r = s % 60; return m + ":" + (r < 10 ? "0" : "") + r; }
+function trackPhVideoHTML(e, sym, isZh) {
+  if (!e || !e.vid) return "";
+  var segQ = (e.seg && e.seg.length === 2) ? ("&start=" + e.seg[0] + "&end=" + e.seg[1]) : "";
+  var gLbl = isZh ? (e.group === "init" ? "thanh mẫu" : (e.group === "fin" ? "vận mẫu" : "thanh điệu"))
+    : (e.group === "vowel" ? "nguyên âm" : (e.group === "init" ? "phụ âm" : (e.group === "batchim" ? "batchim" : "ghép âm tiết")));
+  var cap = (e.seg && e.seg.length === 2)
+    ? ("Đoạn video này chỉ dạy âm " + sym + " — " + (e.vch || "video dạy phát âm") + " dạy bằng tiếng Việt, thấy rõ miệng (từ " + trackPhSegTime(e.seg[0]) + " đến " + trackPhSegTime(e.seg[1]) + "). Xem rồi nghe từ ví dụ bên dưới.")
+    : ("Video này dạy cả nhóm " + gLbl + " bằng tiếng Việt — " + (e.vch || "video dạy phát âm") + " dạy, giáo viên hiện hình, thấy rõ miệng. Âm " + sym + " được dạy trong video. Xem rồi nghe từ ví dụ bên dưới.");
+  return '<iframe src="https://www.youtube-nocookie.com/embed/' + e.vid + '?rel=0' + segQ + '" id="trackPhSegFrame" allowfullscreen></iframe><p class="mut">' + esc(cap) + '</p>';
+}
 function renderTrackPron(app, l, track) {
   var isZh = track === "zh";
   var entryFn = isZh ? zhPronEntry : tpPronEntry;
@@ -11359,6 +11373,7 @@ function renderTrackPron(app, l, track) {
       h += '<p style="font-size:44px;margin:4px 0"><b>' + esc(sym) + '</b> <span style="font-size:20px" class="mut">/' + esc(e.r) + '/</span></p>';
       h += '<p><b>' + esc(e.ex) + '</b> — ' + esc(e.exv) + '</p><p class="mut">' + esc(e.vi) + '</p>';
     }
+    h += trackPhVideoHTML(e, sym, isZh); /* v247: video riêng từng âm */
     h += '<div class="row"><button class="btn" id="tpHearEx">🔊 Nghe mẫu</button></div></div>';
   } else if (sub === 1) {
     h += '<div class="qblock"><p><b>Nghe phân biệt:</b> nghe cả 2 từ, rồi chọn từ chứa âm <b>' + esc(sym) + '</b>.</p>'
