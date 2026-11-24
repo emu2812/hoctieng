@@ -26936,7 +26936,7 @@ function viewPracticeZh(app) {
   var zhFaceOpts = '<optgroup label="Bộ mở đầu">' + zhFaceOpt(zhSetByKey("starter")) + '</optgroup>'
     + [1, 2, 3, 4, 5, 6].map(function (st) { return '<optgroup label="Chặng ' + st + '">' + zhStageSets(st).map(zhFaceOpt).join("") + '</optgroup>'; }).join(""); /* DOT trung 28/10/2026 (T-V2): zhSets() nay da du 28 bo; giu gop tay o day de khoi doi hanh vi tab (day la danh sach option rieng, khong trung). */
   html += '<section class="card" id="zhFaceCard"><h3>👁 Nhận mặt chữ — nhớ mặt chữ từng bộ</h3><p class="mut">Thẻ từ luôn hiện pinyin kèm chữ nên dễ học vẹt bằng pinyin mà chưa nhớ mặt chữ. Bài này tách riêng kỹ năng đó: nhìn chữ Hán (không có pinyin) rồi chọn đúng nghĩa — và ngược lại, nhìn nghĩa chọn đúng chữ. Mỗi lượt 10 câu, lấy từ một bộ thật, đáp án nhiễu cũng là từ thật trong cùng bộ (thiếu đáp án nhiễu thì bỏ câu, không bịa). Trả lời sai vào Sổ lỗi sai. Sau khi trả lời mới hiện pinyin và nút nghe để gắn thêm âm thanh.</p><div class="row"><input id="zhFaceFilter" placeholder="Lọc bộ theo chủ điểm…" style="flex:1"><select id="zhFaceSet">' + zhFaceOpts + '</select><button class="btn" id="zhFaceStartBtn">Bắt đầu luyện →</button></div></section>';
-  html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">2.115 chữ — mỗi chữ đều có sơ đồ thứ tự nét (30 chữ có thêm video mẫu). Bấm vào một chữ để xem và tập viết.</p><details><summary><b>Xem ' + zhStrokesList().length + ' chữ — theo nhóm 10 chữ</b></summary>' + zhStrokeGroupsHTML() + '</details><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
+  html += '<section class="card" id="zhStrokeCard"><h3>✍️ Viết chữ</h3><p class="mut">2.115 chữ — mỗi chữ đều có sơ đồ thứ tự nét (2.109 chữ có video mẫu; 6 chữ chưa có: 之 俚 忐 忑 素 霾). Bấm vào một chữ để xem và tập viết.</p><details><summary><b>Xem ' + zhStrokesList().length + ' chữ — theo nhóm 10 chữ</b></summary>' + zhStrokeGroupsHTML() + '</details><div class="qblock"><p><b>Video nền tảng viết chữ (xem trước khi tập từng chữ):</b></p>' + videoSlotIf("zhPractice:janus1") + videoSlotIf("zhPractice:janus2") + videoSlotIf("zhPractice:janus3") + '</div></section>';
   html += pronDiagEntryHTML("zh");
   html += pronWeakHTML("zh"); /* v119b */
   html += specTutorGroupHTML("zh"); /* v129: nhom Tro giang AI nhu EN */
@@ -27498,7 +27498,8 @@ function zhStrokeVideoHTML(e) {
 /* ---------- v228 (21/11/2026): So do thu tu net tu render — mau TP (QT-05/QT-26) ----------
    TP da co tpStrokeOrderSVG (v210): hien thu tu net bang SVG tu du lieu `d`
    (medians hanzi-writer-data), buoc tung net bang nut bam. ZH thieu kha nang
-   nay = CHO THIEU: 2085/2115 chu khong co video mau (ZH_WRITE_VIDEOS chi 30).
+   nay = v248: chi 6/2115 chu chua co video mau (ZH_WRITE_VIDEOS 2109:
+   之 俚 忐 忑 素 霾).
    Ham nay render that tu ZH_STROKES (khong dung video ngoai, khong bia ID):
    shown = so net dang hien; cur = net dang tap (to mau ho phach + danh so
    tai diem bat dau); net chua toi chi hien mo 0,12; net da qua hien dam.
@@ -27653,7 +27654,7 @@ function renderZhStroke(app, l) {
   var next = list[(idx + 1) % list.length];
   var recalling = !!l.recallMode && !l.compared;
   var html = lessonHead({ title: recalling ? "Viết chữ từ trí nhớ" : "Viết chữ: " + e.han, type: "Tiếng Trung · Viết chữ" });
-  html += '<p class="mut">2.115 chữ — mỗi chữ đều có sơ đồ thứ tự nét (30 chữ có thêm video mẫu). Xem kỹ từng nét rồi tập viết ở khung bên dưới.</p>';
+  html += '<p class="mut">2.115 chữ — mỗi chữ đều có sơ đồ thứ tự nét (2.109 chữ có video mẫu; 6 chữ chưa có: 之 俚 忐 忑 素 霾). Xem kỹ từng nét rồi tập viết ở khung bên dưới.</p>';
   if (recalling) {
     html += '<div class="qblock"><p>Viết từ trí nhớ chữ có pinyin <b>' + esc(e.py) + '</b> — nghĩa: ' + esc(e.vi) + '</p>'
       + '<p class="mut">Tổng số nét: ' + e.d.length + '</p>'
@@ -27808,14 +27809,30 @@ function tpStrokeByHan(ch) {
 }
 function tpWriteVideoId(han) {
   var m = (typeof TP_WRITE_VIDEOS !== "undefined") ? TP_WRITE_VIDEOS : null;
-  var id = (m && m[han]) || null;
+  var v = (m && m[han]) || null;
+  var id = (v && typeof v === "object") ? v.id : v;
   return (id && /^[A-Za-z0-9_-]{11}$/.test(id)) ? id : null;
+}
+/* v248: moc chapter (start/end, giay) cua video nhom cho chu nay — de iframe
+   mo dung doan viet chu do thay vi chay tu dau video (mau v247 trackPhSegTime). */
+function tpWriteVideoSeg(han) {
+  var m = (typeof TP_WRITE_VIDEOS !== "undefined") ? TP_WRITE_VIDEOS : null;
+  var v = (m && m[han]) || null;
+  if (!v || typeof v !== "object") return null;
+  if (typeof v.start !== "number" || typeof v.end !== "number") return null;
+  if (v.end <= v.start) return null;
+  return { start: v.start, end: v.end };
 }
 function tpStrokeVideoHTML(e) {
   var id = tpWriteVideoId(e.han);
   if (!id) return '<div id="tpStrokeVideo"><p>Chưa có video mẫu cho chữ ' + esc(e.han) + ' — tập theo thứ tự nét ở hình bên dưới, đừng học vẹt theo trí nhớ.</p></div>';
-  return '<div id="tpStrokeVideo"><iframe id="tpStrokeVideoFrame" src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0" loading="lazy" allowfullscreen></iframe>'
-    + '<p class="mut">Video mẫu cách viết chữ ' + esc(e.han) + ' — xem kỹ từng nét rồi tập viết ở khung bên dưới.</p></div>';
+  var seg = tpWriteVideoSeg(e.han);
+  var src = 'https://www.youtube-nocookie.com/embed/' + id + '?rel=0' + (seg ? '&start=' + seg.start + '&end=' + seg.end : '');
+  var cap = seg
+    ? 'Video nhóm — chương viết chữ ' + esc(e.han) + ' (từ ' + Math.floor(seg.start / 60) + ':' + ('0' + (seg.start % 60)).slice(-2) + ' đến ' + Math.floor(seg.end / 60) + ':' + ('0' + (seg.end % 60)).slice(-2) + '). Video này dạy nhiều chữ; đoạn trên chỉ phát chương của chữ này — xem kỹ từng nét rồi tập viết ở khung bên dưới.'
+    : 'Video mẫu cách viết chữ ' + esc(e.han) + ' — xem kỹ từng nét rồi tập viết ở khung bên dưới.';
+  return '<div id="tpStrokeVideo"><iframe id="tpStrokeVideoFrame" src="' + src + '" loading="lazy" allowfullscreen></iframe>'
+    + '<p class="mut">' + cap + '</p></div>';
 }
 function tpStrokeStart(path) {
   var m = String(path || "").match(/M(-?\d*\.?\d+)[,\s]+(-?\d*\.?\d+)/);
@@ -32356,7 +32373,7 @@ function viewPracticeTp(app) {
     html += '<section class="card" id="tpFunVideoPractice"><div class="qblock"><h3>🎬 Video — xem cho vui</h3><p class="mut">Đang tải video…</p></div></section>';
   html += videoNewBlockHTML("tp");
   html += '<section class="card"><h3>Hangul — học theo thứ tự (5 bài)</h3><div class="row">' + TP_HANGUL.map(function (h, i) { return tpStepBtnHTML("h" + i); }).join("") + '</div><p class="mut">Học xong nhóm trước mới mở nhóm sau — bấm vào nhóm khóa để xem cần học nhóm nào trước.</p></section>'; /* v213 A2 */
-  html += '<section class="card" id="tpStrokeCard"><h3>✍️ Viết chữ Hangul</h3><p class="mut">40 chữ cái + 25 âm tiết mẫu (7 mẫu + 18 batchim) — bấm vào một chữ để xem thứ tự nét và tập viết (3 dạng: tập theo thứ tự, điền nét còn thiếu, viết từ trí nhớ). Số nét theo giáo trình Sejong Korean 1.</p><details><summary><b>Xem ' + tpStrokesList().length + ' mục — theo nhóm</b></summary>' + tpStrokeGroupsHTML() + '</details></section>';
+  html += '<section class="card" id="tpStrokeCard"><h3>✍️ Viết chữ Hangul</h3><p class="mut">40 chữ cái + 25 âm tiết mẫu (7 mẫu + 18 batchim) — bấm vào một chữ để xem thứ tự nét và tập viết (3 dạng: tập theo thứ tự, điền nét còn thiếu, viết từ trí nhớ). Số nét theo giáo trình Sejong Korean 1; 30/65 mục có video mẫu (video nhóm có chương riêng từng chữ).</p><details><summary><b>Xem ' + tpStrokesList().length + ' mục — theo nhóm</b></summary>' + tpStrokeGroupsHTML() + '</details></section>';
   html += practiceFilterHTML("", "tp");
   html += typeEntryRowHTML("tp");
   html += vocabGroupsHTML(TP_STAGES, tpStepBtnHTML, tpStepStatus, tpStepMeta, "tpVocabSearch", "tpVocabGroups", "Từ vựng đời sống", "tp");
