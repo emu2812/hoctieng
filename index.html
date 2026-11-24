@@ -24228,6 +24228,114 @@ function callAiTutorTcWord(transcript, refText, pronounceScore, pronounceDetail)
     }, function () { reject(loginMsg); });
   });
 }
+/* v251 HSKK: AI chấm sâu bài nói HSKK 3 cấp (Sơ/Trung/Cao) — mirror đúng
+   callAiTutorTpWord (v237): cùng đường callAiTutorSpeaking, mode
+   "speaking", máy chủ chặn VIP thật 403 vip_required, parseAiDetailReply
+   "speaking", 4 tiêu chí Phát âm / Trôi chảy và mạch lạc / Từ vựng /
+   Ngữ pháp và câu. Prompt viết RIÊNG cho HSKK, KHÔNG copy prompt IELTS:
+   Phát âm neo thanh điệu + pinyin, chấm theo thang 0–100 (parser bắt buộc
+   chữ "Band" trong format trả về, giao diện hiển thị "Điểm .../100").
+   Điểm Phát âm lấy điểm pronounce tầng 1 đã đo làm neo; không bịa % từng âm (QT-09);
+   chỉ chấm theo bản ghi nghe được. */
+function callAiTutorHskkSpeak(transcript, refText, pronounceScore, pronounceDetail) {
+  return new Promise(function (resolve, reject) {
+    var loginMsg = authLoginMsg("AI chấm sâu bài nói HSKK");
+    var ready = window.__supabaseReady;
+    if (!ready || typeof ready.then !== "function") { reject(loginMsg); return; }
+    ready.then(function (client) {
+      if (!client || !client.auth || !client.auth.getSession) { reject(loginMsg); return; }
+      client.auth.getSession().then(function (res) {
+        var sess = res && res.data && res.data.session;
+        if (!sess || !sess.access_token) { reject(loginMsg); return; }
+        var body = { message: "Chấm bài nói HSKK 3 cấp (Sơ cấp/Trung cấp/Cao cấp) này theo đúng 4 tiêu chí, mỗi tiêu chí 25%, cho điểm mỗi tiêu chí theo thang 0–100: (1) Phát âm — đọc đúng thanh điệu và pinyin từng âm tiết, đọc rõ từng âm tiết, không lẫn thanh điệu; (2) Trôi chảy và mạch lạc — nói liền mạch, đúng thứ tự ý, không ngập ngừng hay ngắt quãng giữa các câu; (3) Từ vựng — dùng đúng từ đã học cho tình huống/câu hỏi, không dùng sai từ; (4) Ngữ pháp và câu — câu đúng ngữ pháp tiếng Trung, đủ thành phần câu, đúng trật tự từ. Tiêu chí Phát âm phải neo điểm pronounce đã cho (điểm pronounce cao thì điểm cao, thấp thì thấp, không bịa ngược). Chỉ chấm theo bản ghi nghe được — không bịa thêm từ người học không nói, không bịa điểm % từng âm. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: mỗi tiêu chí một dòng dạng 'TIÊU CHÍ: <tên tiêu chí> | Band <điểm 0–100> | <nhận xét ngắn>'; một dòng 'BAND CHUNG: <số>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng câu người học nói> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng câu yếu> — <vì sao yếu/sai> — Sửa thành: <cách nói đúng, ghi bằng chữ Hán + pinyin>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng câu> — <vì sao nên nâng cấp để nói hay hơn> — Viết lại: <cách nói hay hơn, ghi bằng chữ Hán + pinyin>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau.", mode: "speaking", context: "TÌNH HUỐNG/CÂU HỎI + BÀI MẪU:\n" + refText + "\nBẢN GHI CÂU TRẢ LỜI MỞ CỦA NGƯỜI HỌC:\n" + transcript + "\nĐIỂM PHÁT ÂM TỪ HÀM PRONOUNCE: " + pronounceScore + "%\nCHI TIẾT PHÁT ÂM:\n" + pronounceDetail };
+        fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify(body) })
+          .then(function (resp) {
+            if (!resp.ok) {
+              return resp.json().catch(function () { return {}; }).then(function (d) {
+                if (resp.status === 403 && d && d.error === "vip_required") throw new Error("AI chấm sâu chỉ mở cho tài khoản VIP do quản trị viên cấp.");
+                throw new Error(aiErrMessage(resp.status, d && d.error, loginMsg));
+              });
+            }
+            return resp.json();
+          })
+          .then(function (data) { if (data && data.reply) resolve({ reply: data.reply, parsed: parseAiDetailReply(data.reply, "speaking") }); else reject(new Error("AI trả về trống — hãy thử gửi lại.")); })
+          .catch(function (e) { reject(new Error((e && e.message) || "Mất mạng — hãy kiểm tra kết nối rồi gửi lại.")); });
+      }, function () { reject(loginMsg); });
+    }, function () { reject(loginMsg); });
+  });
+}
+/* v251: AI chấm sâu bài Nói thi thử TOEIC (thi thử Nói TC) — mirror đúng
+   callAiTutorTcWord (v238): cùng đường ai-tutor mode "speaking", máy chủ chặn
+   VIP thật 403 vip_required, parseAiDetailReply "speaking", 4 tiêu chí Phát âm
+   / Trôi chảy và mạch lạc / Từ vựng / Ngữ pháp và câu, mỗi tiêu chí thang
+   0–100, điểm chung = trung bình 4 tiêu chí (parser tự tính). Prompt viết
+   riêng theo rubric ETS TOEIC Speaking (đọc to phát âm/ngữ điệu, mô tả tranh,
+   trả lời câu hỏi, trả lời theo thông tin cho sẵn, đề xuất giải pháp, nêu ý
+   kiến), KHÔNG copy prompt IELTS hay prompt 1 từ. Phát âm neo theo điểm
+   pronounce tầng 1 đã đo; chỉ chấm theo bản ghi nghe được, không bịa % từng
+   âm (QT-09). */
+function callAiTutorTcSpeakExam(transcript, refText, pronounceScore, pronounceDetail) {
+  return new Promise(function (resolve, reject) {
+    var loginMsg = authLoginMsg("AI chấm Nói TOEIC");
+    var ready = window.__supabaseReady;
+    if (!ready || typeof ready.then !== "function") { reject(loginMsg); return; }
+    ready.then(function (client) {
+      if (!client || !client.auth || !client.auth.getSession) { reject(loginMsg); return; }
+      client.auth.getSession().then(function (res) {
+        var sess = res && res.data && res.data.session;
+        if (!sess || !sess.access_token) { reject(loginMsg); return; }
+        var body = { message: "Chấm bài thi Nói TOEIC Speaking này theo rubric ETS TOEIC Speaking, theo đúng 4 tiêu chí, mỗi tiêu chí 25%: (1) Phát âm — đọc to rõ, phát âm đúng từng âm tiết, trọng âm rơi đúng chỗ và ngữ điệu lên xuống đúng câu hỏi hay câu trần thuật; (2) Trôi chảy và mạch lạc — nói liền mạch, không ngập ngừng lâu, ý nối nhau rõ ràng, trả lời đúng trọng tâm từng nhiệm vụ (mô tả tranh, trả lời câu hỏi, trả lời theo thông tin cho sẵn, đề xuất giải pháp, nêu ý kiến); (3) Từ vựng — dùng đúng từ cho từng nhiệm vụ, không dùng sai nghĩa hay nhầm từ gần âm; (4) Ngữ pháp và câu — câu đúng ngữ pháp, đủ chủ ngữ – động từ, dùng đúng thì và dạng câu cho từng nhiệm vụ. Cho điểm mỗi tiêu chí theo thang 0–100. Tiêu chí Phát âm phải neo điểm pronounce đã cho (điểm pronounce cao thì điểm cao, thấp thì điểm thấp, không bịa ngược). Chỉ chấm theo bản ghi nghe được — không bịa thêm từ người học không nói, không bịa điểm % từng âm. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: mỗi tiêu chí một dòng dạng 'TIÊU CHÍ: <tên tiêu chí> | Band <điểm 0–100> | <nhận xét ngắn>'; một dòng 'BAND CHUNG: <số>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng câu/từ người học nói> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng câu/từ yếu> — <vì sao yếu/sai> — Sửa thành: <câu đúng>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng câu/từ> — <vì sao nên nâng cấp để nói hay hơn> — Viết lại: <câu nói hay hơn>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau.", mode: "speaking", context: "ĐỀ VÀ BÀI MẪU TỪNG NHIỆM VỤ MỞ:\n" + refText + "\nBẢN GHI CÂU TRẢ LỜI MỞ CỦA NGƯỜI HỌC:\n" + transcript + "\nĐIỂM PHÁT ÂM TỪ HÀM PRONOUNCE: " + (pronounceScore == null ? "chưa đo" : pronounceScore) + "%\nCHI TIẾT PHÁT ÂM TỪNG MỤC ĐỌC TO:\n" + pronounceDetail };
+        fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify(body) })
+          .then(function (resp) {
+            if (!resp.ok) {
+              return resp.json().catch(function () { return {}; }).then(function (d) {
+                if (resp.status === 403 && d && d.error === "vip_required") throw new Error("AI chấm sâu chỉ mở cho tài khoản VIP do quản trị viên cấp.");
+                throw new Error(aiErrMessage(resp.status, d && d.error, loginMsg));
+              });
+            }
+            return resp.json();
+          })
+          .then(function (data) { if (data && data.reply) resolve({ reply: data.reply, parsed: parseAiDetailReply(data.reply, "speaking") }); else reject(new Error("AI trả về trống — hãy thử gửi lại.")); })
+          .catch(function (e) { reject(new Error((e && e.message) || "Mất mạng — hãy kiểm tra kết nối rồi gửi lại.")); });
+      }, function () { reject(loginMsg); });
+    }, function () { reject(loginMsg); });
+  });
+}
+/* v251: AI chấm sâu bài Nói thi thử TOPIK (thi thử Nói TP) — mirror đúng
+   callAiTutorTcSpeakExam (TC, v251): cùng đường ai-tutor mode "speaking",
+   máy chủ chặn VIP thật 403 vip_required, parseAiDetailReply "speaking",
+   4 tiêu chí Phát âm / Trôi chảy và mạch lạc / Từ vựng / Ngữ pháp và câu,
+   mỗi tiêu chí thang 0–100. Prompt viết riêng theo rubric TOPIK Speaking
+   (6 nhiệm vụ; phát âm Hàn gồm patchim/âm căng), KHÔNG copy prompt TOEIC hay
+   prompt IELTS. Phát âm neo theo điểm pronounce tầng 1 đã đo; chỉ chấm theo
+   bản ghi nghe được, không bịa % từng âm (QT-09). */
+function callAiTutorTpSpeakExam(transcript, refText, pronounceScore, pronounceDetail) {
+  return new Promise(function (resolve, reject) {
+    var loginMsg = authLoginMsg("AI chấm Nói TOPIK");
+    var ready = window.__supabaseReady;
+    if (!ready || typeof ready.then !== "function") { reject(loginMsg); return; }
+    ready.then(function (client) {
+      if (!client || !client.auth || !client.auth.getSession) { reject(loginMsg); return; }
+      client.auth.getSession().then(function (res) {
+        var sess = res && res.data && res.data.session;
+        if (!sess || !sess.access_token) { reject(loginMsg); return; }
+        var body = { message: "Chấm bài thi Nói TOPIK Speaking này theo rubric TOPIK Speaking, theo đúng 4 tiêu chí, mỗi tiêu chí 25%: (1) Phát âm — phát âm tiếng Hàn đúng từng âm tiết, phụ âm cuối (patchim) đúng và âm căng đúng chỗ, không nhầm âm thường với âm căng; (2) Trôi chảy và mạch lạc — nói liền mạch, không ngập ngừng lâu, ý nối nhau rõ ràng, trả lời đúng trọng tâm từng nhiệm vụ trong 6 nhiệm vụ (trả lời câu hỏi, đóng vai theo tranh, kể chuyện theo tranh, hoàn thành hội thoại, đọc hiểu dữ liệu, nêu ý kiến); (3) Từ vựng — dùng đúng từ tiếng Hàn cho từng nhiệm vụ, không dùng sai nghĩa hay nhầm từ gần âm; (4) Ngữ pháp và câu — câu đúng ngữ pháp tiếng Hàn, đúng đuôi câu và dạng câu cho từng nhiệm vụ. Cho điểm mỗi tiêu chí theo thang 0–100. Tiêu chí Phát âm phải neo điểm pronounce đã cho (điểm pronounce cao thì điểm cao, thấp thì điểm thấp, không bịa ngược). Chỉ chấm theo bản ghi nghe được — không bịa thêm từ người học không nói, không bịa điểm % từng âm. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: mỗi tiêu chí một dòng dạng 'TIÊU CHÍ: <tên tiêu chí> | Band <điểm 0–100> | <nhận xét ngắn>'; một dòng 'BAND CHUNG: <số>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng câu/từ người học nói> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng câu/từ yếu> — <vì sao yếu/sai> — Sửa thành: <câu đúng>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng câu/từ> — <vì sao nên nâng cấp để nói hay hơn> — Viết lại: <câu nói hay hơn>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau.", mode: "speaking", context: "ĐỀ VÀ BÀI MẪU TỪNG NHIỆM VỤ MỞ:\n" + refText + "\nBẢN GHI CÂU TRẢ LỜI MỞ CỦA NGƯỜI HỌC:\n" + transcript + "\nĐIỂM PHÁT ÂM TỪ HÀM PRONOUNCE: " + (pronounceScore == null ? "chưa đo" : pronounceScore) + "%\nCHI TIẾT PHÁT ÂM TỪNG MỤC ĐỌC TO:\n" + pronounceDetail };
+        fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify(body) })
+          .then(function (resp) {
+            if (!resp.ok) {
+              return resp.json().catch(function () { return {}; }).then(function (d) {
+                if (resp.status === 403 && d && d.error === "vip_required") throw new Error("AI chấm sâu chỉ mở cho tài khoản VIP do quản trị viên cấp.");
+                throw new Error(aiErrMessage(resp.status, d && d.error, loginMsg));
+              });
+            }
+            return resp.json();
+          })
+          .then(function (data) { if (data && data.reply) resolve({ reply: data.reply, parsed: parseAiDetailReply(data.reply, "speaking") }); else reject(new Error("AI trả về trống — hãy thử gửi lại.")); })
+          .catch(function (e) { reject(new Error((e && e.message) || "Mất mạng — hãy kiểm tra kết nối rồi gửi lại.")); });
+      }, function () { reject(loginMsg); });
+    }, function () { reject(loginMsg); });
+  });
+}
 /* v177: AI chấm buổi đóng vai theo 3 chiều (từ vựng, ngữ pháp, phát âm) —
    KHÔNG band, KHÔNG điểm số. Dùng mode chat của ai-tutor (máy chủ chặn
    VIP thật: 403 vip_required). Phát âm chỉ nhận xét theo bản ghi nghe
@@ -26771,7 +26879,7 @@ function zhHskkHTML() {
     + '<p class="mut">Ghi chú: HSK 3.0 ra mắt toàn cầu ngày 13/12/2026 — sau mốc này cần kiểm tra lại cấu trúc đề và HSKK.</p></details>'
     + '<div class="row"><button class="btn" id="zhHskkBtn">Luyện HSKK Sơ cấp (27 câu, đủ 3 phần)</button><button class="btn" id="zhHskkBtnInter">Luyện HSKK Trung cấp (14 câu, đủ 3 phần)</button><button class="btn" id="zhHskkBtnAdv">Luyện HSKK Cao cấp (6 câu chính thức, đủ 3 phần + luyện thêm)</button></div>'
     + prevTxt
-    + '<p class="mut">Chấm điểm ước lượng thang 0–100 (đậu từ 60): phần nhắc lại/đọc to câu mẫu tính theo số mục máy nghe ra đúng, phần trả lời mở tự chấm theo rubric 3 tiêu chí; máy chỉ kiểm tra có nghe ra không, chưa phải điểm từng âm. AI chấm sâu 4 tiêu chí sẽ có ở đợt sau.</p></section>';
+    + '<p class="mut">Chấm điểm ước lượng thang 0–100 (đậu từ 60): phần nhắc lại/đọc to câu mẫu tính theo số mục máy nghe ra đúng, phần trả lời mở tự chấm theo rubric 3 tiêu chí; máy chỉ kiểm tra có nghe ra không, chưa phải điểm từng âm. Tài khoản VIP được AI chấm sâu 4 tiêu chí ở màn kết thúc (ghi âm câu trả lời mở trước bằng nút 🎤 Ghi âm câu trả lời ở từng câu mở).</p></section>';
 }
 function wireZhMap(scope) {
   (scope || document).querySelectorAll("[data-zhph]").forEach(function (b) { b.onclick = function () {
@@ -29524,7 +29632,7 @@ function speakSummaryHTML(l, storeKey, micFlags, openCount, openLabel, scaleNote
   var c = speakSummaryCounts(l, storeKey, micFlags);
   var pct = c.micTotal ? Math.round(c.ok / c.micTotal * 100) : 0;
   var h = '<p><b>Đọc to bài mẫu:</b> máy nghe ra đúng <b>' + c.ok + '/' + c.micTotal + ' mục (' + pct + '%)</b>' + (c.tried < c.micTotal ? ' — trong đó ' + (c.micTotal - c.tried) + ' mục chưa thử mic' : '') + '.</p>'
-    + '<p class="mut">Chỉ tính phần đọc to mẫu — máy chỉ kiểm tra có nghe ra không, chưa phải điểm từng âm, chưa có AI chấm sâu.</p>';
+    + '<p class="mut">Chỉ tính phần đọc to mẫu — máy chỉ kiểm tra có nghe ra không, chưa phải điểm từng âm, chưa có AI chấm sâu ở bảng này — AI chấm sâu ở khối bên dưới (chỉ VIP).</p>';
   if (openCount > 0) h += '<p><b>' + esc(openLabel) + ' (' + openCount + ' mục):</b> câu trả lời mở — máy không chấm được, tự đối chiếu bài mẫu.</p>';
   h += '<p class="mut">' + esc(scaleNote) + '</p>'
     + '<p class="mut">Web KHÔNG tính ra điểm thang thi thật — kết quả trên chỉ đếm số mục máy nghe ra, chỉ để tham khảo, không phải điểm thi.</p>';
@@ -29588,6 +29696,40 @@ function hskkEstBoxHTML(est) {
     + [1, 2, 3].map(function (n) { var s = est.parts[n].score; return "Phần " + n + " " + (s == null ? "—" : s + "/100"); }).join(" · ") + '.</p>';
   return h;
 }
+/* v251: hiển thị kết quả AI chấm sâu HSKK — mirror tpWordAiResultHTML
+   nhưng ghi "Điểm .../100" thay "Band" (thang HSKK 0–100, đậu từ 60).
+   Parser bắt buộc chữ "Band" trong format AI trả về, giao diện không ghi
+   chữ đó. Điểm chung = trung bình 4 tiêu chí (parser tự tính). */
+function hskkAiResultHTML(parsed) {
+  if (!parsed) return "";
+  if (!parsed.full) return '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(parsed.raw || "") + '</p><p class="mut">Chưa có điểm cho lần chấm này — hãy bấm “Chấm lại bằng AI” để AI chấm lại.</p>';
+  var s = '<div class="sumcard"><h3>Kết quả AI chấm (Máy ước lượng)</h3>';
+  parsed.criteria.forEach(function (cr) { s += '<p><b>' + esc(cr.name) + ': Điểm ' + cr.band + '/100</b> — ' + esc(cr.note) + '</p>'; });
+  s += '<p><b>Điểm AI chung (Máy ước lượng): ' + parsed.overall + '/100 (đậu từ 60)</b></p></div>';
+  if (parsed.good && parsed.good.length) s += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + parsed.good.map(function (g) { return '<p>“' + esc(g.quote) + '” — ' + esc(g.why) + '</p>'; }).join("") + '</div>';
+  if (parsed.fix && parsed.fix.length) s += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + parsed.fix.map(function (f) { return '<p>“' + esc(f.quote) + '” — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  if (parsed.tips && parsed.tips.length) s += '<div class="sumcard"><h3>NOTE — ĐỌC HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + parsed.tips.map(function (t) { return '<p>“' + esc(t.quote) + '” — ' + esc(t.why) + (t.rewrite ? ' — <b>Viết lại: ' + esc(t.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  s += '<p class="mut">Điểm AI là máy ước lượng, chỉ để tham khảo — không phải điểm thi thật.</p>';
+  return s;
+}
+/* v251: khối AI chấm sâu ở màn kết thúc HSKK. Chưa có transcript mở nào
+   → chỉ nhắc ghi âm. Không VIP → thông báo VIP mẫu v104 + bảng tự đối
+   chiếu (checklist rubric tự chấm ở trên màn kết thúc chính là bảng tự
+   đối chiếu), KHÔNG nút AI, KHÔNG gọi Gemini. VIP → nút AI chấm. Kết quả
+   AI chỉ lưu ở lesson state (l.hskkAi), KHÔNG đưa vào mốc điểm ước lượng. */
+function hskkAiHTML(l, lv, flat) {
+  var opens = [];
+  (flat || []).forEach(function (e, idx) { if (e.official && hskkScoreKind(e) === "open") opens.push({ e: e, idx: idx }); });
+  var heardOpens = opens.filter(function (o) { var r = (l.hskkOpen || {})[o.idx]; return r && r.heard; });
+  if (!heardOpens.length) return '<div class="qblock" id="hskkAiBlock"><h3>AI chấm sâu bài nói HSKK 4 tiêu chí</h3><p class="mut">Chưa có bản ghi câu trả lời mở để AI chấm — hãy ghi âm câu trả lời ở từng câu mở (nút 🎤 Ghi âm câu trả lời) rồi quay lại đây.</p></div>';
+  if (!msIsVip()) return '<div class="qblock" id="hskkAiBlock">' + aiVipNoticeHTML("speaking") + '<p class="mut">Checklist rubric tự chấm ở trên màn kết thúc chính là bảng tự đối chiếu — tick vào ô nào đúng với bài nói của bạn.</p></div>';
+  var ai = l.hskkAi || {};
+  var h = '<div class="qblock" id="hskkAiBlock"><h3>AI chấm sâu bài nói HSKK 4 tiêu chí (VIP)</h3><p class="mut">AI chấm thêm từ bản ghi câu trả lời mở bạn đã ghi âm — điểm ước lượng ở trên không đổi, điểm AI không lưu vào mốc điểm.</p>';
+  if (ai.err) h += '<p>' + esc(ai.err) + '</p>';
+  if (ai.parsed) h += hskkAiResultHTML(ai.parsed);
+  h += '<div class="row"><button class="btn btn-primary" id="hskkAiBtn"' + (ai.busy ? ' disabled' : '') + '>' + (ai.busy ? 'Đang chấm...' : (ai.parsed ? 'Chấm lại bằng AI' : 'AI chấm Nói HSKK 4 tiêu chí (VIP)')) + '</button></div></div>';
+  return h;
+}
 function hskkFinishHTML(l, lv, flat, meta, times) {
   var est = hskkEstimateScore(lv, flat, l);
   var partLabel = {};
@@ -29627,7 +29769,7 @@ function hskkFinishHTML(l, lv, flat, meta, times) {
     + '<p class="mut" id="hskkSaveNote">' + (prev.length ? 'Đã lưu trước đây: ' + prev.map(function (m) { return m.date + ' — ' + m.score + '/100' + (m.pass ? ' (Đạt)' : ' (Chưa đạt)'); }).join(' · ') : 'Chưa có mốc điểm HSKK ' + esc(meta.name) + ' nào được lưu.') + '</p>'
     + '<p class="mut">Thang điểm chính thức của HSKK là 0–100, đậu từ 60 điểm. Thời gian thi thật cấp ' + esc(meta.name) + ' khoảng ' + esc(times.total) + '.</p>'
     + '<p class="mut">Cách tính điểm ước lượng của web: mỗi phần thi tính bằng nhau (1/3 tổng điểm); phần nhắc lại/đọc to tính theo số mục máy nghe ra đúng, phần trả lời mở tính theo rubric tự chấm ở trên. Đề thi thật không công bố tỉ trọng từng phần nên đây chỉ là cách tính của web để tham khảo — điểm thi thật do giám khảo chấm từ bản ghi âm.</p>'
-    + '<p class="mut">AI chấm sâu bài nói (4 tiêu chí) sẽ có ở đợt sau — đợt này điểm ước lượng chỉ gồm máy nghe ra + tự chấm.</p></div>';
+    + '<div id="hskkAiBox">' + hskkAiHTML(l, lv, flat) + '</div></div>';
   return h;
 }
 function wireHskkFinish(l, lv, flat, meta) {
@@ -29657,6 +29799,44 @@ function wireHskkFinish(l, lv, flat, meta) {
     var note = document.getElementById("hskkSaveNote");
     if (note) note.textContent = "Đã lưu mốc điểm ước lượng " + est.total + "/100" + (est.pass ? " (Đạt)" : " (Chưa đạt)") + " — xem lại ở mục Luyện HSKK.";
   };
+  /* v251: nút AI chấm sâu HSKK — VIP mới có nút; không VIP chỉ thấy thông
+     báo (wireBack đã wire #aiVipReqBtn, wire lại tại chỗ nếu cần, mẫu v237).
+     AI lỗi → hiện lỗi rõ, không tự chấm thay, không lưu mốc AI. */
+  var vr2 = document.getElementById("aiVipReqBtn"); if (vr2) vr2.onclick = function () { sendVipRequest(); };
+  var wireHskkAiBtn = function () {
+    var b = document.getElementById("hskkAiBtn"); if (!b) return;
+    b.onclick = function () {
+      if (!l.hskkAi) l.hskkAi = {};
+      if (l.hskkAi.busy) return;
+      var opens = [];
+      flat.forEach(function (e, idx) { if (e.official && hskkScoreKind(e) === "open") opens.push({ e: e, idx: idx }); });
+      var heardOpens = opens.filter(function (o) { var r = (l.hskkOpen || {})[o.idx]; return r && r.heard; });
+      if (!heardOpens.length) { l.hskkAi.err = "Chưa có bản ghi câu trả lời mở để AI chấm — hãy ghi âm câu trả lời ở từng câu mở trước."; refreshHskkAi(); return; }
+      var transcript = heardOpens.map(function (o, n) { var r = (l.hskkOpen || {})[o.idx]; return "Câu mở " + (n + 1) + " (" + o.e.part + "): " + r.heard; }).join("\n");
+      var refText = heardOpens.map(function (o, n) { var it = o.e.it || {}; var bits = ["Câu mở " + (n + 1) + " (" + o.e.part + ")"]; if (it.sitVi) bits.push("Tình huống: " + it.sitVi); if (it.qhan) bits.push("Câu hỏi: " + it.qhan + " (" + (it.qpinyin || "") + ") — " + (it.qvi || "")); if (it.topic) bits.push("Chủ đề: " + it.topic); if (it.han) bits.push("Bài mẫu: " + it.han + " (" + (it.pinyin || "") + ") — " + (it.vi || "")); return bits.join("\n"); }).join("\n\n");
+      var micTotal = 0, micOk = 0; var perPart = { 1: { ok: 0, tot: 0 }, 2: { ok: 0, tot: 0 }, 3: { ok: 0, tot: 0 } };
+      flat.forEach(function (e, idx) { if (!e.official || hskkScoreKind(e) !== "mic") return; var pn = zhHskkPartNo(e); micTotal++; if (perPart[pn]) perPart[pn].tot++; var r = (l.hskkT1 || {})[idx]; if (r && r.tried && r.ok) { micOk++; if (perPart[pn]) perPart[pn].ok++; } });
+      var pronScore = micTotal ? Math.round(micOk / micTotal * 100) : 0;
+      var pronDetail = [1, 2, 3].map(function (n) { return "Phần " + n + ": nghe ra đúng " + perPart[n].ok + "/" + perPart[n].tot + " mục"; }).join("\n");
+      l.hskkAi.busy = true; l.hskkAi.err = "";
+      refreshHskkAi();
+      callAiTutorHskkSpeak(transcript, refText, pronScore, pronDetail).then(function (res) {
+        l.hskkAi = { parsed: res.parsed, overall: res.parsed && res.parsed.overall, err: "", busy: false };
+        refreshHskkAi();
+      }, function (err) {
+        if (!l.hskkAi) l.hskkAi = {};
+        l.hskkAi.busy = false; l.hskkAi.err = (err && err.message) || String(err);
+        refreshHskkAi();
+      });
+    };
+  };
+  var refreshHskkAi = function () {
+    var box = document.getElementById("hskkAiBox");
+    if (box) box.innerHTML = hskkAiHTML(l, lv, flat);
+    var vr3 = document.getElementById("aiVipReqBtn"); if (vr3) vr3.onclick = function () { sendVipRequest(); };
+    wireHskkAiBtn();
+  };
+  wireHskkAiBtn();
 }
 function zhHskkItems(lv) {
   if (lv === "inter") return [
@@ -29747,7 +29927,7 @@ function renderZhHskk(app, l) {
     app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + finishSummaryHTML("Xong bài luyện HSKK " + meta.name + "!", '<p>Bạn đã luyện ' + flat.length + ' mục trong ' + elapsedText() + '.</p>' + sum + '<p class="mut">HSK 3.0 (thi từ 13/12/2026): phần nói gộp vào bài thi chính từ cấp HSK 3 trở lên — chi tiết cần đối chiếu giáo trình.</p>', "", { adaptive: false }) + zhNextStepHTML();
     wireBack();
     wireHskkFinish(l, lv, flat, meta);
-    var rb = $("#btnRedo"); if (rb) rb.onclick = function () { l.i = 0; l.hskkT1 = {}; l.hskkSelf = {}; render(); };
+    var rb = $("#btnRedo"); if (rb) rb.onclick = function () { l.i = 0; l.hskkT1 = {}; l.hskkSelf = {}; l.hskkOpen = {}; l.hskkAi = null; render(); };
     return;
   }
   var entry = flat[i], it = entry.it;
@@ -29780,6 +29960,16 @@ function renderZhHskk(app, l) {
     else if (hskkT1r.err) hskkT1Html = '<p class="mut">' + esc(hskkT1r.err) + '</p>';
     else if (hskkT1r.tried) hskkT1Html = '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(hskkT1r.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
   }
+  /* v251: bản ghi câu trả lời mở (chỉ mục mở, không có mic đọc to mẫu) —
+     ghi 1 lần bằng pronTier1Start, lưu l.hskkOpen[i], KHÔNG chấm điểm bằng
+     SR vì câu trả lời tự do. Hiển thị transcript ngay dưới nút. */
+  var hskkOpenR = (l.hskkOpen || {})[i] || null;
+  var hskkOpenHtml = "";
+  if (hskkOpenR) {
+    if (hskkOpenR.heard) hskkOpenHtml = '<p class="ok" style="font-size:18px">✓ Máy nghe ra: ' + esc(hskkOpenR.heard || "") + '</p>';
+    else if (hskkOpenR.err) hskkOpenHtml = '<p class="mut">' + esc(hskkOpenR.err) + '</p>';
+    else if (hskkOpenR.tried) hskkOpenHtml = '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(hskkOpenR.heard || "") + ' — chưa rõ. Nghe mẫu rồi nói lại.</p>';
+  }
   var pno = zhHskkPartNo(entry);
   var partTimeTxt = pno ? times.byPart[pno] : "Bài luyện thêm · Nghe nhắc lại câu (không phải format Phần 1 Cao cấp)";
   var clockTxt = ph.secs == null ? "Pha này không đếm giờ — bấm nút dưới khi xong." : speakClockText(ph.secs);
@@ -29791,12 +29981,13 @@ function renderZhHskk(app, l) {
     + '<div class="qblock"><b>⏱ ' + esc(ph.label) + ': <span id="speakClock">' + esc(clockTxt) + '</span></b> <button class="btn" id="speakPhaseNext">' + phaseBtnLabel + '</button></div>'
     + body
     + '<p class="mut">' + (micRef ? 'Đọc to câu mẫu — máy chỉ kiểm tra có nghe ra không.' : 'Câu trả lời mở — máy không chấm được, tự đối chiếu bài mẫu.') + '</p>'
-    + '<div class="row"><button class="btn" id="zhHskkListen">🔊 Nghe</button>' + (micRef ? '<button class="btn" id="zhHskkRec">🎤 Đọc to câu mẫu</button>' : '') + '<button class="btn btn-primary" id="zhHskkNext"' + (l.speakDone ? '' : ' disabled') + '>Mục tiếp theo →</button></div>'
-    + '<div id="zhHskkT1">' + hskkT1Html + '</div></div>';
+    + '<div class="row"><button class="btn" id="zhHskkListen">🔊 Nghe</button>' + (micRef ? '<button class="btn" id="zhHskkRec">🎤 Đọc to câu mẫu</button>' : '<button class="btn" id="zhHskkOpenRec">🎤 Ghi âm câu trả lời</button>') + '<button class="btn btn-primary" id="zhHskkNext"' + (l.speakDone ? '' : ' disabled') + '>Mục tiếp theo →</button></div>'
+    + '<div id="zhHskkT1">' + hskkT1Html + '</div><div id="zhHskkOpen">' + hskkOpenHtml + '</div></div>';
   wireBack();
   speakPhaseStartTimer(l, key, phases);
   $("#zhHskkListen").onclick = function () { zhSpeak(speakText); if (!l.hskkHeard) l.hskkHeard = {}; l.hskkHeard[i] = true; };
   var hskkRec = $("#zhHskkRec"); if (hskkRec) hskkRec.onclick = function () { var ref = micRef; if (!ref) return; pronTier1Start("zh", function (heard) { var sc = pronTier1Score(heard, ref, "zh"); if (!l.hskkT1) l.hskkT1 = {}; l.hskkT1[i] = { tried: true, ok: sc === 100, heard: heard, err: "" }; render(); }, function (kind) { if (!l.hskkT1) l.hskkT1 = {}; l.hskkT1[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; render(); }); };
+  var hskkOpenRec = $("#zhHskkOpenRec"); if (hskkOpenRec) hskkOpenRec.onclick = function () { if (micRef) return; pronTier1Start("zh", function (heard) { if (!l.hskkOpen) l.hskkOpen = {}; l.hskkOpen[i] = { tried: true, heard: heard, err: "" }; render(); }, function (kind) { if (!l.hskkOpen) l.hskkOpen = {}; l.hskkOpen[i] = { tried: true, heard: "", err: pronTier1ErrText(kind) }; render(); }); };
   $("#speakPhaseNext").onclick = function () { speakPhaseAdvance(l, phases); };
   $("#zhHskkNext").onclick = function () { speakTimerStop(); l.i = i + 1; render(); };
   /* v217 (2): pha Noi cua muc doc to thi chay mic tang 1 trong luc dem nguoc
@@ -29818,13 +30009,13 @@ function tcSpeakHTML() {
   return '<section class="card" id="tcSpeakCard"><h3>🗣️ Luyện Nói TOEIC — thi nói riêng</h3>'
     + '<p class="mut">TOEIC Speaking là bài thi nói riêng, thi trên máy trong khoảng 20 phút, gồm 11 nhiệm vụ: đọc to 2, mô tả tranh 1, trả lời câu hỏi 3, trả lời theo thông tin cho sẵn 3, đề xuất giải pháp 1, nêu ý kiến 1. Thời gian từng phần: đọc to (chuẩn bị 45 giây, nói 45 giây); mô tả tranh (45 giây / 30 giây); trả lời câu hỏi (3 giây / 15–30 giây); trả lời theo thông tin cho sẵn (đọc thông tin chung 45 giây, chuẩn bị 3 giây/câu, nói 15–30 giây); đề xuất giải pháp (30 giây / 60 giây); nêu ý kiến (45 giây / 60 giây). Tranh thật được mô tả bằng chữ (dạng chuyển thể, như HSKK Trung cấp).</p>'
     + '<div class="row"><button class="btn" id="tcSpeakExamBtn">Luyện Nói TOEIC →</button></div>'
-    + '<p class="mut">Nghe mẫu rồi đọc to từng câu — máy kiểm tra có nghe ra không. Không chấm điểm AI sâu.</p></section>';
+    + '<p class="mut">Nghe mẫu rồi đọc to từng câu — máy kiểm tra có nghe ra không. VIP được AI chấm sâu 4 tiêu chí ở bài thi Nói (ghi âm câu trả lời mở ở từng nhiệm vụ rồi bấm chấm ở màn kết thúc); tài khoản thường tự đối chiếu bài mẫu.</p></section>';
 }
 function tpSpeakHTML() {
   return '<section class="card" id="tpSpeakCard"><h3>🗣️ Luyện Nói TOPIK — thi nói riêng</h3>'
     + '<p class="mut">TOPIK Speaking là bài thi nói riêng, thi trên máy trong 30 phút, gồm 6 nhiệm vụ: trả lời câu hỏi (chuẩn bị 20 giây, nói 30 giây); đóng vai theo tranh (30 giây / 40 giây); kể chuyện theo tranh (40 giây / 60 giây); hoàn thành hội thoại (40 giây / 60 giây); đọc hiểu dữ liệu (70 giây / 80 giây); nêu ý kiến (70 giây / 80 giây). Tranh thật được mô tả bằng chữ (dạng chuyển thể, như HSKK Trung cấp).</p>'
     + '<div class="row"><button class="btn" id="tpSpeakExamBtn">Luyện Nói TOPIK →</button></div>'
-    + '<p class="mut">Nghe mẫu rồi đọc to từng câu — máy kiểm tra có nghe ra không. Không chấm điểm AI sâu.</p></section>';
+    + '<p class="mut">Nghe mẫu rồi đọc to từng câu — máy kiểm tra có nghe ra không. VIP được AI chấm sâu 4 tiêu chí ở bài thi Nói (ghi âm câu trả lời mở ở từng nhiệm vụ rồi bấm chấm ở màn kết thúc); tài khoản thường tự đối chiếu bài mẫu.</p></section>';
 }
 function wireTcSpeakExam(scope) { var b = (scope || document).querySelector("#tcSpeakExamBtn"); if (b) b.onclick = function () { openLesson({ type: "tcSpeak" }); }; }
 function wireTpSpeakExam(scope) { var b = (scope || document).querySelector("#tpSpeakExamBtn"); if (b) b.onclick = function () { openLesson({ type: "tpSpeak" }); }; }
@@ -29897,6 +30088,57 @@ function tcTpSpeakBodyHTML(track, n, i) {
   }
   return h;
 }
+/* v251: AI chấm sâu bài Nói thi thử TC/TP (việc #14 v241) — nút ghi âm câu
+   trả lời mở + khối AI ở màn kết thúc. Nhiệm vụ mở: TC là mọi nhiệm vụ trừ
+   rk === "readaloud" (đọc to đã có mic tầng 1 riêng); TP là cả 6 nhiệm vụ.
+   Transcript mở lưu ở lesson state l.examOpen[i] = {tried, heard, err} —
+   KHÔNG lưu vào kho mốc vĩnh viễn. Kết quả AI chỉ ở l.examAi =
+   {parsed, overall, err, busy} — cũng chỉ lesson state. */
+function speakExamIsOpen(track, n) { return track === "tc" ? ((n || {}).rk !== "readaloud") : true; }
+function fmtScore100(v) { var r = Math.round(v * 10) / 10; return String(r).replace(".", ","); }
+function speakExamOpenRef(track, n, j) {
+  var parts = ["Nhiệm vụ " + (j + 1) + " · " + (n.title || "")];
+  if (track === "tc") {
+    if (n.q) parts.push("Câu hỏi: " + n.q);
+    if (n.sitEn) parts.push("Tranh/tình huống: " + n.sitEn);
+    if (n.infoEn) parts.push("Thông tin cho sẵn: " + n.infoEn);
+    if (n.prompt) parts.push("Đề: " + n.prompt);
+    if (n.model) parts.push("Bài mẫu: " + n.model);
+  } else {
+    if (n.sitKo) parts.push("Tình huống: " + n.sitKo);
+    if (n.prompt) parts.push("Đề: " + n.prompt);
+    if (n.ans) parts.push("Câu trả lời mẫu: " + n.ans);
+  }
+  return parts.join("\n");
+}
+/* v251: kết quả AI chấm bài Nói thi thử TC/TP — mirror tpWordAiResultHTML
+   nhưng ghi "Điểm .../100" thay cho "Band" (parser bắt buộc chữ "Band" trong
+   format AI trả về, giao diện hiển thị điểm /100). */
+function speakExamAiResultHTML(parsed) {
+  if (!parsed) return "";
+  if (!parsed.full) return '<p class="mut">AI trả lời chưa đúng định dạng 4 tiêu chí nên chưa tách được điểm từng tiêu chí — toàn văn AI trả lời:</p><p>' + esc(parsed.raw || "") + '</p><p class="mut">Chưa có điểm cho lần chấm này — hãy bấm “Chấm lại bằng AI” để AI chấm lại.</p>';
+  var s = '<div class="sumcard"><h3>Kết quả AI chấm (Máy ước lượng)</h3>';
+  parsed.criteria.forEach(function (cr) { s += '<p><b>' + esc(cr.name) + ': Điểm ' + fmtScore100(cr.band) + '/100</b> — ' + esc(cr.note) + '</p>'; });
+  s += '<p><b>Điểm AI chung (Máy ước lượng): ' + fmtScore100(parsed.overall) + '/100</b></p></div>';
+  if (parsed.good && parsed.good.length) s += '<div class="sumcard"><h3>PHẦN ỔN — giữ nguyên</h3>' + parsed.good.map(function (g) { return '<p>“' + esc(g.quote) + '” — ' + esc(g.why) + '</p>'; }).join("") + '</div>';
+  if (parsed.fix && parsed.fix.length) s += '<div class="sumcard"><h3>PHẦN CẦN SỬA — chỉ đúng chỗ</h3>' + parsed.fix.map(function (f) { return '<p>“' + esc(f.quote) + '” — ' + esc(f.why) + (f.fix ? ' — <b>Sửa thành: ' + esc(f.fix) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  if (parsed.tips && parsed.tips.length) s += '<div class="sumcard"><h3>NOTE — ĐỌC HAY HƠN (khuyến nghị nâng cấp, không phải lỗi sai)</h3>' + parsed.tips.map(function (t) { return '<p>“' + esc(t.quote) + '” — ' + esc(t.why) + (t.rewrite ? ' — <b>Viết lại: ' + esc(t.rewrite) + '</b>' : '') + '</p>'; }).join("") + '</div>';
+  s += '<p class="mut">Điểm AI là máy ước lượng, chỉ để tham khảo — không phải điểm thi thật (thang thi thật TOEIC/TOPIK Speaking là 0–200).</p>';
+  return s;
+}
+function speakExamAiHTML(l, track, items) {
+  var openIdx = [];
+  items.forEach(function (raw, j) { if (speakExamIsOpen(track, tcTpSpeakExamNorm(track, raw, j))) openIdx.push(j); });
+  var heardAny = openIdx.some(function (j) { var o = (l.examOpen || {})[j]; return !!(o && o.heard); });
+  if (!heardAny) return '<div class="qblock" id="speakExamAiBlock"><h3>AI chấm sâu 4 tiêu chí</h3><p class="mut">Chưa có bản ghi câu trả lời mở để AI chấm — hãy ghi âm câu trả lời ở từng nhiệm vụ (nút 🎤 Ghi âm câu trả lời) rồi quay lại đây.</p></div>';
+  if (!msIsVip()) return '<div class="qblock" id="speakExamAiBlock">' + aiVipNoticeHTML("speaking") + '</div>';
+  var ai = l.examAi || {};
+  var h = '<div class="qblock" id="speakExamAiBlock"><h3>AI chấm sâu 4 tiêu chí</h3><p class="mut">AI chấm thêm từ các bản ghi câu trả lời mở bạn đã ghi âm — điểm đọc to ở bảng trên không đổi, điểm AI không phải điểm thi thật.</p>';
+  if (ai.err) h += '<p>' + esc(ai.err) + '</p>';
+  if (ai.parsed) h += speakExamAiResultHTML(ai.parsed);
+  h += '<div class="row"><button class="btn btn-primary" id="speakExamAiBtn"' + (ai.busy ? ' disabled' : '') + '>' + (ai.busy ? 'Đang chấm...' : (ai.parsed ? 'Chấm lại bằng AI' : 'AI chấm Nói 4 tiêu chí (VIP)')) + '</button></div></div>';
+  return h;
+}
 function renderTcTpSpeakExam(app, l, track) {
   var items = tcTpSpeakExamItems(track);
   var isTc = track === "tc";
@@ -29920,9 +30162,36 @@ function renderTcTpSpeakExam(app, l, track) {
     var openLabel = isTc ? "Mô tả tranh" : "Bài nói thật";
     var scale = isTc ? "Thang điểm chính thức của TOEIC Speaking là 0–200 (Q1–10 chấm 0–3, Q11 chấm 0–5, tổng thô tối đa 35). Thời gian thi thật khoảng 20 phút." : "Thang điểm chính thức của TOPIK Speaking là 0–200, cấp 1–6 (L1 20–49, L2 50–89, L3 90–109, L4 110–129, L5 130–159, L6 160–200). Thời gian thi thật 30 phút.";
     var sum = speakSummaryHTML(l, "examT1", micFlags, openN, openLabel, scale);
-    app.innerHTML = lessonHead({ title: "Luyện Nói " + examName, type: examName + " · Nói" }) + '<div class="summarybox"><h2>Xong bài luyện Nói ' + examName + '!</h2><p>Bạn đã luyện ' + items.length + ' nhiệm vụ trong ' + elapsedText() + '.</p>' + sum + '<div class="row"><button class="btn btn-primary" id="speakExamBack">Về Luyện tập</button></div></div>';
+    var aiHtml = speakExamAiHTML(l, track, items);
+    app.innerHTML = lessonHead({ title: "Luyện Nói " + examName, type: examName + " · Nói" }) + '<div class="summarybox"><h2>Xong bài luyện Nói ' + examName + '!</h2><p>Bạn đã luyện ' + items.length + ' nhiệm vụ trong ' + elapsedText() + '.</p>' + sum + aiHtml + '<div class="row"><button class="btn btn-primary" id="speakExamBack">Về Luyện tập</button></div></div>';
     wireBack();
     var bb = document.getElementById("speakExamBack"); if (bb) bb.onclick = function () { backFromLesson(); };
+    /* v251: wire lại tại chỗ nút Yêu cầu VIP trong khối AI (wireBack() đã
+       wire sẵn #aiVipReqBtn, wire lại cho chắc khi khối AI render sau). */
+    var vr = document.getElementById("aiVipReqBtn"); if (vr) vr.onclick = function () { sendVipRequest(); };
+    var aiBtn = document.getElementById("speakExamAiBtn");
+    if (aiBtn) aiBtn.onclick = function () {
+      if (!l.examAi) l.examAi = {};
+      if (l.examAi.busy) return;
+      var openIdx = [];
+      items.forEach(function (raw, j) { if (speakExamIsOpen(track, tcTpSpeakExamNorm(track, raw, j))) openIdx.push(j); });
+      var transcript = openIdx.map(function (j) { var o = (l.examOpen || {})[j]; var n = tcTpSpeakExamNorm(track, items[j], j); return "Nhiệm vụ " + (j + 1) + " (" + (n.title || "") + "): " + ((o && o.heard) || "(chưa ghi âm)"); }).join("\n");
+      var refText = openIdx.map(function (j) { return speakExamOpenRef(track, tcTpSpeakExamNorm(track, items[j], j), j); }).join("\n\n");
+      var micTotal = 0, micOk = 0, micTried = 0;
+      items.forEach(function (raw, j) { var n = tcTpSpeakExamNorm(track, raw, j); if (!n.micRef) return; micTotal++; var r = (l.examT1 || {})[j]; if (r && r.tried) { micTried++; if (r.ok) micOk++; } });
+      var pScore = micTried ? Math.round(micOk / micTotal * 100) : null;
+      var pDetail = items.map(function (raw, j) { var n = tcTpSpeakExamNorm(track, raw, j); if (!n.micRef) return null; var r = (l.examT1 || {})[j]; return "Nhiệm vụ " + (j + 1) + ": " + (!r || !r.tried ? "chưa thử" : (r.ok ? "nghe ra đúng" : "chưa khớp")); }).filter(Boolean).join("; ");
+      l.examAi.busy = true; l.examAi.err = "";
+      render();
+      var fn = isTc ? callAiTutorTcSpeakExam : callAiTutorTpSpeakExam;
+      fn(transcript, refText, pScore, pDetail).then(function (res) {
+        l.examAi.busy = false; l.examAi.parsed = res.parsed; l.examAi.err = "";
+        render();
+      }, function (err) {
+        l.examAi.busy = false; l.examAi.err = (err && err.message) || String(err);
+        render();
+      });
+    };
     return;
   }
   var it = tcTpSpeakExamNorm(track, items[i], i);
@@ -29936,6 +30205,15 @@ function renderTcTpSpeakExam(app, l, track) {
     else if (r.err) rHtml = '<p class="mut">' + esc(r.err) + '</p>';
     else if (r.tried) rHtml = '<p class="warn" style="font-size:18px">Máy nghe ra: ' + esc(r.heard || "") + ' — chưa khớp. Nghe mẫu rồi đọc lại.</p>';
   }
+  /* v251: nút ghi âm câu trả lời mở — TC mọi nhiệm vụ trừ readaloud, TP cả
+     6 nhiệm vụ; KHÔNG dùng id speakExamRec, KHÔNG auto-mic trong pha Nói. */
+  var isOpen = speakExamIsOpen(track, it);
+  var o = (l.examOpen || {})[i] || null;
+  var oHtml = "";
+  if (o) {
+    if (o.heard) oHtml = '<p class="ok" style="font-size:18px">Bạn vừa nói: ' + esc(o.heard || "") + '</p>';
+    else if (o.err) oHtml = '<p class="mut">' + esc(o.err) + '</p>';
+  }
   var clockTxt = ph.secs == null ? "Pha này không đếm giờ." : speakClockText(ph.secs);
   var lastPhase = (l.speakPhase || 0) >= phases.length - 1;
   var phaseBtnLabel = ph.secs == null ? (lastPhase ? "Đã nói xong →" : "Bắt đầu nói →") : "⏭ Sang pha sau ngay";
@@ -29946,13 +30224,15 @@ function renderTcTpSpeakExam(app, l, track) {
     + '<div class="qblock"><b>⏱ ' + esc(ph.label) + ': <span id="speakClock">' + esc(clockTxt) + '</span></b> <button class="btn" id="speakPhaseNext">' + phaseBtnLabel + '</button></div>'
     + tcTpSpeakBodyHTML(track, it, i)
     + '<p class="mut">' + (it.micRef ? 'Nghe mẫu rồi đọc to câu mẫu thành tiếng trong lúc đồng hồ chạy — máy kiểm tra có nghe ra không.' : 'Nghe mẫu rồi tự nói thành tiếng trong lúc đồng hồ chạy — câu trả lời mở, máy không chấm được.') + '</p>'
-    + '<div class="row"><button class="btn" id="speakExamListen">🔊 Nghe mẫu</button>' + (it.micRef ? '<button class="btn" id="speakExamRec">🎤 Đọc to câu mẫu</button>' : '') + '<button class="btn btn-primary" id="speakExamNext"' + (l.speakDone ? '' : ' disabled') + '>Nhiệm vụ tiếp theo →</button></div>'
-    + '<div id="speakExamT1">' + rHtml + '</div></div>';
+    + '<div class="row"><button class="btn" id="speakExamListen">🔊 Nghe mẫu</button>' + (it.micRef ? '<button class="btn" id="speakExamRec">🎤 Đọc to câu mẫu</button>' : '') + (isOpen ? '<button class="btn" id="speakExamOpenRec">🎤 Ghi âm câu trả lời</button>' : '') + '<button class="btn btn-primary" id="speakExamNext"' + (l.speakDone ? '' : ' disabled') + '>Nhiệm vụ tiếp theo →</button></div>'
+    + '<div id="speakExamT1">' + rHtml + '</div><div id="speakExamOpen">' + oHtml + '</div></div>';
   wireBack();
   speakPhaseStartTimer(l, key, phases);
   document.getElementById("speakExamListen").onclick = function () { try { speakFn(it.listen || it.micRef || it.prompt); } catch (e) {} if (!l.examHeard) l.examHeard = {}; l.examHeard[i] = true; };
   var rec = document.getElementById("speakExamRec");
   if (rec) rec.onclick = function () { if (!it.micRef) return; pronTier1Start(srTrack, function (heardTx) { var sc = pronTier1Score(heardTx, it.micRef, srTrack); if (!l.examT1) l.examT1 = {}; l.examT1[i] = { tried: true, ok: sc === 100, heard: heardTx, err: "" }; render(); }, function (kind) { if (!l.examT1) l.examT1 = {}; l.examT1[i] = { tried: true, ok: false, heard: "", err: pronTier1ErrText(kind) }; render(); }); };
+  var openRec = document.getElementById("speakExamOpenRec");
+  if (openRec) openRec.onclick = function () { pronTier1Start(srTrack, function (heardTx) { if (!l.examOpen) l.examOpen = {}; l.examOpen[i] = { tried: true, heard: heardTx, err: "" }; render(); }, function (kind) { if (!l.examOpen) l.examOpen = {}; l.examOpen[i] = { tried: true, heard: "", err: pronTier1ErrText(kind) }; render(); }); };
   document.getElementById("speakPhaseNext").onclick = function () { speakPhaseAdvance(l, phases); };
   document.getElementById("speakExamNext").onclick = function () { speakTimerStop(); l.i = i + 1; render(); };
   /* v217 (2): pha Noi cua muc doc to thi chay mic tang 1 trong luc dem nguoc
