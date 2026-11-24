@@ -503,6 +503,55 @@ function speak(text, rate, onend) { try { if (window.speechSynthesis && window.S
 /* v126: doc cau tieng Trung phai dung giong zh-CN (zhSpeak), khong dung giong en-GB. */
 function hasCJK(s) { return /[\u3400-\u9FFF\uF900-\uFAFF]/.test(String(s || "")); }
 function speakAuto(text, rate, onend) { if (hasCJK(text)) zhSpeak(text, rate, onend); else if (/[\uAC00-\uD7A3]/.test(String(text || ""))) tpSpeak(text, rate, onend); else speak(text, rate, onend); } /* v186 U9: cau Han doc bang ko-KR (truoc day roi ve en-GB) */
+/* v252: nhan giong may/that — 1 helper duy nhat cho nhan giong nghe. */
+function listenVoiceLabelHTML(kind) {
+  if (kind === "real") return '<p class="mut">🎙 Giọng thật — audio người thật (video).</p>';
+  if (kind === "mixed") return '<p class="mut">🎙 Video giọng thật; bài tập theo câu đang dùng giọng máy.</p>';
+  return '<p class="mut">🔊 Giọng máy — bài nghe này dùng giọng đọc tổng hợp trên trình duyệt, chưa phải giọng người thật. Web sẽ thay bằng giọng thật khi có bản ghi.</p>';
+}
+/* v252: video giong that dict/shadow — VIDEO_LINES khong co moc thoi gian tung cau
+   (moi dong chi en/vi, them who/py) nen khong seek theo cau duoc: phat ca video
+   (giong that) roi chep/nhai tung cau theo phu de. Chi dung cho 4 video VIDEO_LINES. */
+function videoIdForKey(key, track) {
+  try {
+    var list = (typeof videoNewList === "function") ? videoNewList(track) : [];
+    for (var i = 0; i < list.length; i++) if (list[i] && list[i].key === key) return list[i].id;
+  } catch (e) {}
+  if (key === "voa-break-the-news") return "BKNJxpdNAtY"; /* v174 N7: VOA khong co trong VIDEO_NEW */
+  return "";
+}
+function videoRealVoiceInfoForItem(item) {
+  if (!item || !item.text || typeof VIDEO_LINES === "undefined") return null;
+  var keys = (typeof LISTEN_VIDEO_KEY !== "undefined") ? LISTEN_VIDEO_KEY : {};
+  var found = null;
+  Object.keys(keys).forEach(function (tr) {
+    var k = keys[tr], lines = VIDEO_LINES[k];
+    if (lines && lines.length && lines.map(function (x) { return x.en; }).join(" ") === String(item.text)) found = { key: k, track: tr, lines: lines };
+  });
+  if (!found) return null;
+  found.videoId = videoIdForKey(found.key, found.track);
+  return found.videoId ? found : null;
+}
+function videoRealVoiceInfoForSpeak(sp) {
+  if (!sp || !sp.videoKey || typeof VIDEO_LINES === "undefined" || !VIDEO_LINES[sp.videoKey]) return null;
+  var track = "en";
+  try { track = videoTrackOf(sp.videoKey) || "en"; } catch (e) {}
+  var videoId = videoIdForKey(sp.videoKey, track);
+  return videoId ? { key: sp.videoKey, track: track, lines: VIDEO_LINES[sp.videoKey], videoId: videoId } : null;
+}
+function videoRealVoiceHTML(info) {
+  if (!info || !info.videoId) return "";
+  return '<div class="qblock" id="videoRealVoice">' + listenVoiceLabelHTML("real")
+    + '<p class="mut">Nghe giọng thật trong video; chưa có mốc từng câu nên nghe cả đoạn rồi chép từng câu theo phụ đề.</p>'
+    + '<div class="row"><button class="btn btn-primary" id="videoRealPlay">▶ Phát video — nghe giọng thật</button></div>'
+    + '<iframe id="videoRealFrame" src="https://www.youtube-nocookie.com/embed/' + info.videoId + '?rel=0" loading="lazy" allowfullscreen style="width:100%;min-height:200px;aspect-ratio:16/9"></iframe></div>';
+}
+function videoRealVoicePlayWire(info) {
+  if (!info || !info.videoId) return;
+  var b = $("#videoRealPlay"), f = $("#videoRealFrame");
+  if (b && f) b.onclick = function () { try { f.src = "https://www.youtube-nocookie.com/embed/" + info.videoId + "?rel=0&autoplay=1"; } catch (e) {} };
+}
+function videoRealVoicePlay() { var b = $("#videoRealPlay"); if (b) b.click(); }
 /* v107b: trang thai dang phat cho nut "Nghe giong mau" (buoc 1 tu vung) — truoc
    day bam nut khong co phan hoi nhin thay duoc. Khoi phuc qua onend (speak) hoac
    timeout uoc luong (zhSpeak/tpSpeak khong co onend); timeout tham chieu nut cu
@@ -1088,7 +1137,7 @@ function myLinkCardHTML(m) {
 }
 function myListenLinksHTML(track) {
   var links = myLinksForTrack(track);
-  var html = '<div class="qblock" id="myListenLinkBox"><h3>🔗 Link luyện nghe của bạn <span class="chip">cá nhân</span></h3>'
+  var html = '<div class="qblock" id="myListenLinkBox"><h3>🔗 Link luyện nghe của bạn <span class="chip">cá nhân</span></h3>' + listenVoiceLabelHTML("real") /* v252: nhan giong may/that */
     + '<p class="mut">Dán link video bất kỳ vào đây — link nằm chung trong khu Luyện nghe này, chỉ bạn thấy, gắn nhãn "cá nhân". YouTube phát trong trang, nghe từng đoạn bằng nút −10s/+10s. Link web khác vẫn lưu lại, mở ở trang gốc bằng nút bên dưới. Chỉ nghe cho vui thì cứ bấm Phát rồi xem, không cần làm bài tập. Bài tập nghe chép/Shadowing chỉ mở khi web đã có phụ đề thật của video đó — web không bịa phụ đề.</p>'
     + '<div class="row"><input id="myLinkUrl" type="url" placeholder="Dán link video vào đây — ví dụ: https://www.youtube.com/watch?v=..." style="flex:1;min-width:220px"><button class="btn" id="myLinkAdd">+ Thêm link</button></div>'
     + '<p class="mut" id="myLinkMsg"></p>'
@@ -5003,7 +5052,7 @@ function u7PositionText() {
      "<Loai bai> · Chuong <X> · done/total buoc da xong" (khong tien to
      "Vi tri:", khong ten tab o che do xem tab — ten tab da co o H1 +
      chip dang chon; chi con tien do thi hien, khong thi an dong). */
-  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Chẩn đoán phát âm đầu vào", pronDiag: "Chẩn đoán phát âm", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra trình độ đầu vào (trắc nghiệm)", entryFour: "Kiểm tra đầu vào 4 kỹ năng", entryPlace: "Xếp lớp đầu vào", tcEntry: "Kiểm tra trình độ TOEIC", tpEntry: "Kiểm tra trình độ TOPIK", dictation: "Nghe chép chính tả", reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", weakEx: "Luyện điểm yếu của tôi", weakPronDrill: "Luyện âm yếu", earDisc: "Nghe-chọn-phiên-âm", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
+  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Chẩn đoán phát âm đầu vào", pronDiag: "Chẩn đoán phát âm", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra trình độ đầu vào (trắc nghiệm)", entryFour: "Kiểm tra đầu vào 4 kỹ năng", entryPlace: "Xếp lớp đầu vào", tcEntry: "Kiểm tra trình độ TOEIC", tpEntry: "Kiểm tra trình độ TOPIK", dictation: "Nghe chép chính tả", voaListen: "Nghe giọng thật — VOA", /* v252: VOA giong that */ reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", weakEx: "Luyện điểm yếu của tôi", weakPronDrill: "Luyện âm yếu", earDisc: "Nghe-chọn-phiên-âm", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
   if (typeof curLesson !== "undefined" && curLesson) {
     if (curLesson.step) {
       var ls = learningSteps(); var li = -1;
@@ -5294,7 +5343,7 @@ function mapStepEmoji(k) {
   if (k === "vocab" || k === "Từ vựng") return "📚";
   if (k === "grammar" || k === "gram" || k === "skillGramOld" || k === "Ngữ pháp") return "📖";
   if (k === "ch1read" || k === "skillRead" || k === "read" || k === "Đọc") return "📄";
-  if (k === "ch1listen" || k === "skillListen" || k === "skillListenLong" || k === "listen" || k === "Nghe ngắn" || k === "Nghe dài") return "🎧";
+  if (k === "ch1listen" || k === "skillListen" || k === "skillListenLong" || k === "listen" || k === "Nghe ngắn" || k === "Nghe dài" || k === "voaListen" || k === "Nghe giọng thật") return "🎧"; /* v252: VOA giong that */
   if (k === "pron" || k === "skillPronTopic" || k === "Phát âm") return "🎤";
   if (k === "skillSpeak" || k === "Nói") return "🗣️";
   if (k === "skillRoleplay" || k === "roleplay" || k === "Nhập vai") return "🎭";
@@ -5858,7 +5907,8 @@ function renderLessonWorkspace(app, l) {
     + '<section class="card ws-col" id="wsExCol"><h3>✍️ Bài tập — Nghe chép</h3>'
     + "<p>Chế độ: " + modeBtn("dict", "Nghe chép cả câu") + " " + modeBtn("gap", "Luyện — điền từ còn thiếu") + "</p>"
     + '<p><button class="btn" id="wsAutoStopBtn">⏸ Tự động dừng sau mỗi câu: ' + (l.wsAutoStop ? "Bật" : "Tắt") + '</button></p>'
-    + '<p class="mut">Bật: nghe xong 1 câu thì dừng để chép. Tắt: nghe liền sang câu tiếp theo (chỉ áp cho nút Bắt đầu; Phát lại chỉ phát câu hiện tại). Video YouTube không có mốc thời gian từng câu nên không dừng thật được trên video — phần nghe theo câu dùng giọng đọc mẫu.</p>'
+    + listenVoiceLabelHTML("mixed") /* v252: nhan giong may/that */
+    + '<p class="mut">Bật: nghe xong 1 câu thì dừng để chép. Tắt: nghe liền sang câu tiếp theo (chỉ áp cho nút Bắt đầu; Phát lại chỉ phát câu hiện tại). Video YouTube không có mốc thời gian từng câu nên không dừng thật được trên video — phần nghe theo câu dùng giọng máy.</p>'
     + (l.wsMode === "gap" ? gapHTML : ("<p>Mức độ: " + lvlBtn("easy", "Dễ") + " " + lvlBtn("medium", "Vừa") + " " + lvlBtn("hard", "Khó") + "</p>"
     + (scaffold ? "<p>Bản chép gợi ý: <b>" + esc(scaffold) + "</b></p>" : '')
     + (chips.length ? "<div class=\"row\">" + chips.map(function (w, i) { return '<button class="btn ws-chip" data-wschip="' + i + '">' + esc(w) + "</button>"; }).join("") + "</div>" : '')
@@ -6719,7 +6769,7 @@ function viewPractice(app) {
     + '<button class="step-row" data-entrycheck="zero"><span>Kiểm tra trình độ đầu vào — Band 0 (6 câu)</span><span class="st">' + (doneK("entryZero") ? '✓' : '→') + '</span></button>'
     + '<button class="step-row" data-entrycheck="trial"><span>Kiểm tra trình độ đầu vào — Band 5,0–7,5+ (16 câu)</span><span class="st">' + (doneK("entryTrial") ? '✓' : '→') + '</span></button></details>';
   /* v246 WB: Nghe thụ động — video (mẫu ZH HSK1): danh sách lấy từ kho VIDEO_NEW kind giaitri đã kiểm chứng của track. */
-  html += '<details id="passiveVideoEn"><summary><b>Nghe thụ động — video · Học tiếng Anh qua phim Friends (4 tập)</b></summary><div class="qblock"><p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Cả 4 video đều chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("en").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
+  html += '<details id="passiveVideoEn"><summary><b>Nghe thụ động — video · Học tiếng Anh qua phim Friends (4 tập)</b></summary><div class="qblock">' + listenVoiceLabelHTML("real") /* v252: nhan giong may/that */ + '<p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Cả 4 video đều chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("en").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
   html += videoNewBlockHTML("en");
   app.innerHTML = html;
   videoSampleWire();
@@ -13239,6 +13289,7 @@ function renderLesson(app) {
   else if (l.type === "skillReview") renderSkillReview(app, l);
   else if (l.type === "skillListen") renderSkillListen(app, l);
   else if (l.type === "skillListenLong") renderSkillListenLong(app, l);
+  else if (l.type === "voaListen") renderVoaListen(app, l); /* v252: VOA giong that */
   else if (l.type === "dictation") renderDictation(app, l);
   else if (l.type === "workspace") renderLessonWorkspace(app, l);
   else if (l.type === "story") renderStory(app, l);
@@ -14291,6 +14342,7 @@ function renderCh1Skill(app, l, d, isListen) {
   html += '<div class="qblock"><p class="mut">' + esc(d.intro) + '</p>';
   if (isListen) {
     html += '<div class="row"><button class="btn" id="ch1ListenBtn">🔊 Nghe</button><button class="btn" id="ch1ScriptBtn">Hiện lời thoại</button></div>'
+      + listenVoiceLabelHTML("tts") /* v252: nhan giong may/that */
       + '<div id="ch1ScriptBox" style="display:none"><p>' + esc(d.script).replace(/\n/g, "<br>") + '</p><p class="mut">' + esc(d.scriptVi).replace(/\n/g, "<br>") + '</p></div>';
   } else {
     html += '<p>' + esc(d.passage) + '</p><p class="mut">' + esc(d.passageVi) + '</p>';
@@ -19159,6 +19211,49 @@ function renderSkillListenLong(app, l) {
   gd23ListenWire(l);
   renderQuizEngine($("#quizSlot"), l, r.questions, "skill", (l.src === "tpListen" ? "listenLongTp:" : "listenLong:") + l.idx, 2);
 }
+/* v252: VOA giong that — man bai nghe giong that (audio mp3 VOA + transcript + 4 cau hoi tu soan).
+   2 pha giong Nghe hieu EN: pha nghe (audio + nut hien/an transcript + nut Lam bai),
+   pha quiz (renderQuizEngine vao #voaQuizSlot). O pha quiz chi ve lai kho quiz,
+   giu nguyen the <audio> khi tra loi tung cau (khong ve lai toan man). */
+var VOA_LISTEN_LABEL = "🎙 Giọng thật — người đọc VOA (giọng Mỹ, tốc độ chậm ~90 từ/phút). Không phải giọng Anh-Anh. Audio + transcript: VOA Learning English (public domain).";
+function renderVoaListen(app, l) {
+  var r = (typeof VOA_LISTEN_EN !== "undefined") ? VOA_LISTEN_EN[l.idx] : null;
+  if (!r) { curLesson = null; render(); return; }
+  l.title = "Nghe giọng thật — " + r.title; l.skillKey = "voaListen:" + l.idx;
+  l.sub = r.topic + " · " + (r.band || "") + " · " + r.qs.length + " câu hỏi nghe hiểu";
+  var trHTML = '<div id="voaTr" style="display:' + (l.trShown ? "block" : "none") + '"><div class="qblock">' + paraHTML(r.transcript) + '</div></div>';
+  function voaTrWire() {
+    var b = $("#voaTrBtn"); if (!b) return;
+    b.textContent = l.trShown ? "Ẩn transcript" : "Hiện transcript";
+    b.onclick = function () { l.trShown = !l.trShown; var t = $("#voaTr"); if (t) t.style.display = l.trShown ? "block" : "none"; b.textContent = l.trShown ? "Ẩn transcript" : "Hiện transcript"; };
+  }
+  if (!l.quiz) {
+    app.innerHTML = skillHead(l.title, l.sub)
+      + '<div class="qblock"><p class="mut">' + VOA_LISTEN_LABEL + '</p>'
+      + '<p class="mut">Nguồn: ' + esc(r.source) + ' · Bài gốc: <a href="' + esc(r.article) + '" target="_blank" rel="noopener">learningenglish.voanews.com</a></p>'
+      + '<audio controls preload="none" src="' + esc(r.audio) + '" style="width:100%"></audio>'
+      + '<div class="row" style="margin-top:8px"><button class="btn" id="voaTrBtn">Hiện transcript</button>'
+      + '<button class="btn btn-primary" id="voaStart">Làm bài (' + r.qs.length + ' câu)</button></div>'
+      + trHTML + '</div>';
+    wireBack();
+    voaTrWire();
+    $("#voaStart").onclick = function () { l.quiz = true; lessonStart = Date.now(); runWrong = []; runFirstTry = {}; render(); };
+    return;
+  }
+  if (document.getElementById("voaQuizSlot")) {
+    /* v252: VOA giong that — pha quiz chi ve lai kho quiz, giu nguyen the <audio> */
+    renderQuizEngine($("#voaQuizSlot"), l, r.qs, "skill", "voaListen:" + l.idx, 2);
+    return;
+  }
+  app.innerHTML = skillHead(l.title, l.sub)
+    + '<div class="qblock"><p class="mut">' + VOA_LISTEN_LABEL + '</p>'
+    + '<audio controls preload="none" src="' + esc(r.audio) + '" style="width:100%"></audio>'
+    + '<div class="row" style="margin-top:8px"><button class="btn" id="voaTrBtn">Hiện transcript</button></div>'
+    + trHTML + '</div><div id="voaQuizSlot"></div>';
+  wireBack();
+  voaTrWire();
+  renderQuizEngine($("#voaQuizSlot"), l, r.qs, "skill", "voaListen:" + l.idx, 2);
+}
 /* ============ PARROTO-HAY 03/11/2026: nghe chép, shadowing, lọc, mục tiêu ngày ============
    Chỉ dùng kho tự soạn sẵn của web. Không video bên thứ ba, không bảng xếp hạng,
    không tim/lượt, không cửa hàng, không đếm ngược, không upsell, không quảng cáo
@@ -19498,6 +19593,7 @@ function renderU9QuizPhase(app, l, item, total) {
 function renderDictation(app, l) {
   var item = listenItemFor(l);
   if (!item) { curLesson = null; render(); return; }
+  var vinfo = videoRealVoiceInfoForItem(item); /* v252: video giong that dict/shadow */
   l.title = "Nghe chép — " + item.topic; l.skillKey = (l.src === "tpListen" ? "dictationTp:" : "dictation:") + l.idx;
   l.sub = item.section + (item.band ? " · " + item.band : "") + " · Nghe từng câu rồi gõ lại đúng chính tả";
   if (!l.sents) l.sents = splitSentencesEN(item.text);
@@ -19508,6 +19604,7 @@ function renderDictation(app, l) {
   if (!total) { curLesson = null; render(); return; }
   if (!l.theoryDone) {
     app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1)
+      + (vinfo ? videoRealVoiceHTML(vinfo) : "")
       + '<div class="qblock">'
       + '<p class="mut">3 mức che từ: Dễ che ít nhất, Vừa che một nửa, Khó che gần hết. Bấm “💡 Gợi ý” để mở 1 từ thì câu đó bị trừ điểm và vào Sổ lỗi sai — chỉ bấm khi thật sự bí.</p>'
       + u9theoryNote
@@ -19515,6 +19612,7 @@ function renderDictation(app, l) {
     wireBack();
     wireListenMethods108(app, l, true);
     $("#dcTheoryGo").onclick = function () { l.theoryDone = true; l.si = 0; l.res = {}; l.score = 0; l.hints = 0; l.level = "medium"; l.hideScaffold = false; l.rate = 1; l.typed = {}; l.retrying = {}; l.retryOk = {}; l.retryFail = {}; l.u9phase = false; l.u9quizDone = false; l.u9ans = {}; l.u9quizQs = null; lessonStart = Date.now(); render(); };
+    videoRealVoicePlayWire(vinfo); /* v252: video giong that dict/shadow */
     return;
   }
   if (l.done) {
@@ -19565,17 +19663,18 @@ function renderDictation(app, l) {
     + '<div class="qblock"><p><b>Câu ' + (si + 1) + '/' + total + ' · Tiến độ ' + pctDone + '%</b></p>'
     + '<p>Mức che từ: ' + levelBtn("easy", "Dễ — che ít") + ' ' + levelBtn("medium", "Vừa — che nửa") + ' ' + levelBtn("hard", "Khó — che gần hết") + '</p>'
     + (u9strictOk ? '<p><label><input type="checkbox" id="dcStrict"' + (l.u9strict ? ' checked' : '') + '> Chế độ nghiêm ngặt — chấm cả từ đệm (oh, 啊, 어…): từ đệm cũng bị che như từ thường, phải gõ đúng mới qua.</label></p>' : '<p class="mut">Bài mẫu thử cơ chế — chưa có phụ đề thật nên không bật chế độ nghiêm ngặt.</p>')
-    + '<p><label><input type="checkbox" id="dcHide"' + (l.hideScaffold ? ' checked' : '') + '> Ẩn bản chép (chỉ nghe rồi gõ)</label> · Tốc độ: <select id="dcRate"><option value="0.75"' + (l.rate === 0.75 ? ' selected' : '') + '>0,75</option><option value="1"' + (l.rate !== 0.75 && l.rate !== 1.25 ? ' selected' : '') + '>1</option><option value="1.25"' + (l.rate === 1.25 ? ' selected' : '') + '>1,25</option></select></p>'
+    + '<p><label><input type="checkbox" id="dcHide"' + (l.hideScaffold ? ' checked' : '') + '> Ẩn bản chép (chỉ nghe rồi gõ)</label>' + (vinfo ? ' · <span class="mut">Video phát ở tốc độ gốc — không chỉnh tốc độ được vì đây là giọng thật trong video.</span>' : ' · Tốc độ: <select id="dcRate"><option value="0.75"' + (l.rate === 0.75 ? ' selected' : '') + '>0,75</option><option value="1"' + (l.rate !== 0.75 && l.rate !== 1.25 ? ' selected' : '') + '>1</option><option value="1.25"' + (l.rate === 1.25 ? ' selected' : '') + '>1,25</option></select>') + '</p>'
     + (l.hideScaffold ? '<p class="mut">Bản chép đang ẩn — nghe kỹ rồi gõ lại câu.</p>' : '<p>Bản chép gợi ý: <b>' + esc(scaffold) + '</b></p>')
-    + '<div class="row"><button class="btn" id="dcPlay">🔊 Nghe câu</button><button class="btn" id="dcHint">💡 Gợi ý: mở 1 từ</button></div>' + listenVoiceNoteHTML()    + resBlock
+    + '<div class="row"><button class="btn" id="dcPlay">' + (vinfo ? '▶ Phát video — nghe giọng thật' : '🔊 Nghe câu') + '</button><button class="btn" id="dcHint">💡 Gợi ý: mở 1 từ</button></div>' + (vinfo ? videoRealVoiceHTML(vinfo) : listenVoiceNoteHTML())    + resBlock
     + '</div>';
   wireBack();
   $$("[data-dclevel]").forEach(function (b) { b.onclick = function () { l.level = b.dataset.dclevel; render(); }; });
   $("#dcHide").onchange = function () { l.hideScaffold = $("#dcHide").checked; render(); };
   var dcStrictBox = $("#dcStrict");
   if (dcStrictBox) dcStrictBox.onchange = function () { l.u9strict = dcStrictBox.checked; render(); }; /* v186 U9 */
-  $("#dcRate").onchange = function () { l.rate = parseFloat($("#dcRate").value) || 1; };
-  $("#dcPlay").onclick = function () { speakAuto(sent, l.rate || 1); }; /* v126: cau tieng Trung doc bang zh-CN */
+  var dcRateEl = $("#dcRate"); if (dcRateEl) dcRateEl.onchange = function () { l.rate = parseFloat(dcRateEl.value) || 1; }; /* v252: video giong that dict/shadow — video khong co nut toc do */
+  $("#dcPlay").onclick = function () { if (vinfo) { videoRealVoicePlay(); return; } speakAuto(sent, l.rate || 1); }; /* v126: cau tieng Trung doc bang zh-CN */ /* v252: video giong that dict/shadow */
+  videoRealVoicePlayWire(vinfo); /* v252: video giong that dict/shadow */
   $("#dcHint").onclick = function () {
     if (res) return;
     var rev = l.revealed[si];
@@ -19972,6 +20071,7 @@ function shadowStep10HTML(l, item, isLong) {
 function renderShadowSteps(app, l, item, isLong) {
   if (!l.shadowSents) l.shadowSents = isLong ? splitSentencesEN(item.text) : [item.text];
   var sents = l.shadowSents, total = sents.length;
+  var vinfo = videoRealVoiceInfoForItem(item); /* v252: video giong that dict/shadow */
   var step = l.shadowStep || 1;
   if (!l.shadowStepsDone) l.shadowStepsDone = {};
   if (!l.shadowWeak) l.shadowWeak = [];
@@ -20002,11 +20102,13 @@ function renderShadowSteps(app, l, item, isLong) {
   else if (step === 9) body = shadowStep9HTML(l, sents);
   else if (step === 10) body = shadowStep10HTML(l, item, isLong);
   else body = shadowStepUnitHTML(l, sents, unit, ui, units.length, step);
-  app.innerHTML = head + listenVoiceNoteHTML() + shadowStepsBarHTML(l) + body + '<div class="qblock"><button class="btn" id="shStepsBack">← Về bài Nghe</button></div>';
+  app.innerHTML = head + (vinfo ? videoRealVoiceHTML(vinfo) : listenVoiceNoteHTML()) + shadowStepsBarHTML(l) + body + '<div class="qblock"><button class="btn" id="shStepsBack">← Về bài Nghe</button></div>';
   wireBack();
+  videoRealVoicePlayWire(vinfo); /* v252: video giong that dict/shadow */
   $$("[data-shstep]").forEach(function (b) { b.onclick = function () { l.shadowStep = +b.dataset.shstep; l.shadowStepIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); }; });
   var bk = $("#shStepsBack"); if (bk) bk.onclick = function () { l.shadow = false; render(); };
-  var sp = $("#shStepPlayAll"); if (sp) sp.onclick = function () { speakAuto(item.text); };
+  var sp = $("#shStepPlayAll"); if (sp) sp.onclick = function () { if (vinfo) { videoRealVoicePlay(); return; } speakAuto(item.text); }; /* v252: video giong that dict/shadow */
+  if (vinfo && sp) sp.textContent = "▶ Phát video — nghe giọng thật";
   var sd = $("#shStepDone"); if (sd) sd.onclick = function () { shadowStepDone(l, step); };
   $$("[data-sw]").forEach(function (b) {
     b.onclick = function () {
@@ -20018,10 +20120,12 @@ function renderShadowSteps(app, l, item, isLong) {
   });
   var splay = $("#shStepPlay");
   if (splay) splay.onclick = function () {
+    if (vinfo) { videoRealVoicePlay(); return; } /* v252: video giong that dict/shadow */
     var rate = step === 3 ? 0.75 : 1;
     if (step >= 4) speakAuto(unitText, rate, function () { l.shadowTurn = "user"; render(); });
     else speakAuto(unitText, rate);
   };
+  if (vinfo && splay) splay.textContent = "▶ Phát video — nghe giọng thật";
   var stu = $("#shStepToUser"); if (stu) stu.onclick = function () { l.shadowTurn = "user"; render(); };
   var sst = $("#shStepShowText"); if (sst) sst.onclick = function () { l.shadowShowText = true; render(); };
   var sn = $("#shStepNext"); if (sn) sn.onclick = function () { l.shadowStepIdx = ui + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
@@ -20071,8 +20175,8 @@ function renderShadowSteps(app, l, item, isLong) {
 }
 /* ---------- v108: GHI RO GIONG NGHE (giong trinh duyet hay giong that) ---------- */
 function listenVoiceNoteHTML() {
-  /* v113 B-L1: dong ghi chu giong da doi vao tab Huong dan — khong lap lai o moi man Nghe. */
-  return '';
+  /* v252: nhan giong may/that — khoi phuc ghi chu giong: alias cua helper chung (cac man Nghe goi ham nay tu dong co nhan). */
+  return listenVoiceLabelHTML("tts");
 }
 /* ---------- v113 S9: HUB "CACH LUYEN NGHE" DUY NHAT TRONG CUM K3 ----------
    Slice-B §F: 15 cach luyen nghe rai o >=9 cho -> 1 hub o tab Luyen tap
@@ -20081,10 +20185,12 @@ function listenVoiceNoteHTML() {
    Podcast -> Video co phu de that (4 dang) -> Link tu gan. Moi cach = 1
    dong ten + 1 nut vao; man dich tu noi cach lam. Tu v246 ca 4 track
    du 8 cach, cung thu tu key: compre,dict,shadowView,shadowSteps,
-   podcast,passive,video,link. */
+   podcast,passive,video,link. Tu v252 track EN co them 1 cach (voa,
+   ngay sau compre) -> EN 9 cach, 3 track kia van 8 cach. */
 var LISTEN_HUB_ROWS = {
   en: [
     { k: "compre", t: "Nghe hiểu" },
+    { k: "voa", t: "Nghe giọng thật — VOA" }, /* v252: VOA giong that — chi track EN */
     { k: "dict", t: "Nghe chép chính tả" },
     { k: "shadowView", t: "Shadowing Xem/Luyện" },
     { k: "shadowSteps", t: "Shadowing 10 bước" },
@@ -20232,6 +20338,13 @@ function listenHubGo(track, key) {
     return;
   }
   lessonStart = Date.now(); runWrong = []; runFirstTry = {};
+  if (key === "voa") { /* v252: VOA giong that — chi track EN; mo bai dau chua xong */
+    if (track !== "en") return;
+    var vi = 0;
+    for (var i2 = 0; i2 < (VOA_LISTEN_EN || []).length; i2++) { if (!(state.skillDone && state.skillDone["voaListen:" + i2])) { vi = i2; break; } }
+    openLesson({ type: "voaListen", idx: vi });
+    return;
+  }
   if (key === "compre") {
     if (track === "zh") {
       idx = 0;
@@ -20367,6 +20480,7 @@ function renderShadowListen(app, l, item, isLong) {
   if ((l.shadowMode || "view") === "steps") { renderShadowSteps(app, l, item, isLong); return; }
   if (!l.shadowSents) l.shadowSents = isLong ? splitSentencesEN(item.text) : [item.text];
   var sents = l.shadowSents, total = sents.length;
+  var vinfo = videoRealVoiceInfoForItem(item); /* v252: video giong that dict/shadow */
   var si = l.shadowIdx || 0;
   var sent = sents[si];
   var mode = l.shadowMode || "view";
@@ -20389,11 +20503,11 @@ function renderShadowListen(app, l, item, isLong) {
       + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shGood">Tôi nhại được ✓</button><button class="btn" id="shWeak">Cần luyện thêm</button></div></div>';
   }
   app.innerHTML = skillHead("Shadowing — " + item.topic, (isLong ? "Nghe dài" : "Nghe ngắn") + " · Chế độ " + (mode === "view" ? "Xem" : "Luyện") + " · Câu " + (si + 1) + "/" + total)
-    + '<div class="qblock"><p><b>Câu ' + (si + 1) + '/' + total + ':</b></p><p>' + wordBtns + '</p>' + ipaLine + viLine + listenVoiceNoteHTML()
+    + '<div class="qblock"><p><b>Câu ' + (si + 1) + '/' + total + ':</b></p><p>' + wordBtns + '</p>' + ipaLine + viLine + (vinfo ? videoRealVoiceHTML(vinfo) : listenVoiceNoteHTML())
     + (isEnSent ? '<p><label><input type="checkbox" id="shIpa"' + (showIpa ? ' checked' : '') + '> Hiện phiên âm khi bấm từ</label></p>' : '')
-    + '<div class="row" style="margin-top:8px"><button class="btn" id="shPlay">🔊 Nghe câu mẫu</button>' + (si > 0 ? '<button class="btn" id="shPrev">← Câu trước</button>' : '') + (si + 1 < total ? '<button class="btn btn-primary" id="shNext">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="shDone">Xong Shadowing →</button>') + '</div>'
+    + '<div class="row" style="margin-top:8px"><button class="btn" id="shPlay">' + (vinfo ? '▶ Phát video — nghe giọng thật' : '🔊 Nghe câu mẫu') + '</button>' + (si > 0 ? '<button class="btn" id="shPrev">← Câu trước</button>' : '') + (si + 1 < total ? '<button class="btn btn-primary" id="shNext">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="shDone">Xong Shadowing →</button>') + '</div>'
     + '<div class="row"><button class="btn" id="shModeView">👀 Xem</button><button class="btn" id="shModePractice">🎤 Luyện (tự dừng sau mỗi câu)</button></div>'
-    + (mode === "practice" && l.shadowTurn !== "user" ? '<p class="mut">Nếu máy không đọc được giọng mẫu thì bấm luôn, không cần chờ hết đoạn.</p><div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shToUser">Đã nghe xong, sang phần nhại lại →</button></div>' : '') /* v112b L2: cung goc — turn chi doi khi callback speak() chay */
+    + (mode === "practice" && l.shadowTurn !== "user" ? (vinfo ? '<p class="mut">Nghe hết video rồi bấm nút dưới để sang phần nhại lại.</p>' : '<p class="mut">Nếu máy không đọc được giọng mẫu thì bấm luôn, không cần chờ hết đoạn.</p>') + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shToUser">Đã nghe xong, sang phần nhại lại →</button></div>' : '') /* v112b L2: cung goc — turn chi doi khi callback speak() chay */
     + '</div>' + turnLine
     + '<div class="qblock"><button class="btn" id="shBackListen">← Về bài Nghe</button></div>';
   wireBack();
@@ -20410,9 +20524,11 @@ function renderShadowListen(app, l, item, isLong) {
   $("#shModeView").onclick = function () { l.shadowMode = "view"; l.shadowTurn = "listen"; render(); };
   $("#shModePractice").onclick = function () { l.shadowMode = "practice"; l.shadowTurn = "listen"; render(); };
   $("#shPlay").onclick = function () {
+    if (vinfo) { videoRealVoicePlay(); return; } /* v252: video giong that dict/shadow */
     if (mode === "practice") speakAuto(sent, 1, function () { l.shadowTurn = "user"; render(); });
     else speakAuto(sent, 1);
   };
+  videoRealVoicePlayWire(vinfo); /* v252: video giong that dict/shadow */
   var stu2 = $("#shToUser"); if (stu2) stu2.onclick = function () { l.shadowTurn = "user"; render(); };
   var pv = $("#shPrev"); if (pv) pv.onclick = function () { l.shadowIdx = Math.max(0, si - 1); l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
   var nx = $("#shNext"); if (nx) nx.onclick = function () { l.shadowIdx = si + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
@@ -21705,27 +21821,31 @@ function sp10TaskTcTp(track, s, ref) {
 function renderSkillSpeak(app, l) {
   var s = CONTENT.speaking[l.idx];
   if (!s) { curLesson = null; render(); return; }
+  var vinfo = videoRealVoiceInfoForSpeak(s); /* v252: video giong that dict/shadow */
   l.title = "Nói — " + s.topic; l.skillKey = "speak:" + l.idx;
   /* v140 (S4): bai Shadowing tu video co phu de that dem theo so cau hoi thoai
      that (vd zh-e10: 24 cau), khong dem "cau hoi tu bai mau" vi bai nay
      khong co quiz. */
   l.sub = (s.part ? s.part + " · " : "") + (s.band ? s.band + " · " : "") + (s.videoKey ? (s.lines || []).length + " câu hội thoại" : (s.quiz || []).length + " câu hỏi từ bài mẫu");
   if (!l.theoryDone) {
-    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + (RB_SPEAK_FAMILIAR[l.idx] ? '<div class="qblock"><p class="mut">Bài làm quen Part 3: Part 3 chính thức từ Band 4,5 — bài này chỉ để làm quen trước, không tính vào số bước mở kiểm tra của chương.</p></div>' : '') + (isZhShadowLesson(s) ? zhShadowTheoryHTML(s) : speakTheoryHTML(s))
+    app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(1) + (vinfo ? videoRealVoiceHTML(vinfo) : "") + (RB_SPEAK_FAMILIAR[l.idx] ? '<div class="qblock"><p class="mut">Bài làm quen Part 3: Part 3 chính thức từ Band 4,5 — bài này chỉ để làm quen trước, không tính vào số bước mở kiểm tra của chương.</p></div>' : '') + (isZhShadowLesson(s) ? zhShadowTheoryHTML(s) : speakTheoryHTML(s))
       + (l.idx === 1 ? videoSlotIf("speak:1") : "")
       + (l.idx === 3 ? videoSlotIf("speak:dailyroutine") : "")
       + '<div class="qblock"><button class="btn btn-primary" id="spTheoryGo">Vào luyện tập →</button></div>';
     wireBack();
+    videoRealVoicePlayWire(vinfo); /* v252: video giong that dict/shadow */
     $("#spTheoryGo").onclick = function () { l.theoryDone = true; render(); };
     return;
   }
   if (!l.quiz) {
     app.innerHTML = skillHead(l.title, l.sub) + phaseBarHTML(2) + '<div class="qblock"><div class="row">' + subModeHTML() + '</div>' + speakLinesPracticeHTML(s, l)
       + '<p class="mut">Nghe từng câu rồi đọc to từng câu — máy nghe ra đúng câu là được (chưa phải điểm từng âm). Không cần đăng nhập, không cần camera.' + ((s.quiz || []).length ? ' Sau đó làm câu hỏi từ vựng và cấu trúc rút ra từ chính bài mẫu.' : ' Bài mẫu này chỉ để nghe và nhại theo — không có câu hỏi.') + '</p>'
+      + (vinfo ? videoRealVoiceHTML(vinfo) : listenVoiceLabelHTML("tts")) /* v252: video giong that dict/shadow */
       + ((s.quiz || []).length ? '<button class="btn btn-primary" id="spStart">Làm câu hỏi (' + (s.quiz || []).length + ' câu)</button>' : '') + '</div>';
     wireBack();
     subModeWire(); /* v156 S19 */
-    $$("[data-speakline]").forEach(function (b) { b.onclick = function () { speakAuto(s.lines[+b.dataset.speakline].en); }; }); /* v126: cau tieng Trung doc bang zh-CN */
+    videoRealVoicePlayWire(vinfo); /* v252: video giong that dict/shadow */
+    $$("[data-speakline]").forEach(function (b) { b.onclick = function () { if (vinfo) { videoRealVoicePlay(); return; } speakAuto(s.lines[+b.dataset.speakline].en); }; }); /* v126: cau tieng Trung doc bang zh-CN */ /* v252: video giong that dict/shadow */
     $$("[data-splinerec]").forEach(function (b) { b.onclick = function () {
       var i = +b.dataset.splinerec, ref = s.lines[i].en;
       pronTier1Start(hasCJK(ref) ? "zh" : "en", function (heard) {
@@ -23486,7 +23606,7 @@ function renderExamListen(slot, l, questions, opts) {
   var locked = !!opts.locked;
   var html = "";
   if (opts.listenText) {
-    html += '<div class="qblock"><p><b>🎧 Nghe toàn bài:</b> ' + (opts.guided ? 'Lần thi có hướng dẫn: không bấm giờ. Nghe toàn bài, chọn đáp án trong lúc nghe, đổi được tới khi nộp. Nghe xong bấm “Đã nghe xong” để mở nút Nộp bài.' : (locked ? 'Câu hỏi bên dưới hiện đủ hết — bạn vẫn chọn được đáp án ngay trong lúc nghe, đổi đáp án được tới khi nộp. Đồng hồ chưa chạy — nghe hết toàn bài rồi bấm “Đã nghe xong” (hoặc nghe hết tự mở) thì đồng hồ mới bắt đầu tính giờ và mở nút Nộp bài.' : 'Đồng hồ đang chạy — nghe lại thì đồng hồ vẫn chạy tiếp, không reset.')) + '</p><div class="row"><button class="btn btn-primary" id="examListenPlay">🔊 Nghe bài</button>' + (locked ? (opts.guided ? '<button class="btn btn-primary" id="examListenDone">Đã nghe xong → Mở nút Nộp bài</button>' : '<button class="btn btn-primary" id="examListenDone">Đã nghe xong → Bắt đầu tính giờ + mở Nộp bài</button>') : (opts.guided ? '<button class="btn" id="examListenAgain">🔊 Nghe lại (không bấm giờ)</button>' : '<button class="btn" id="examListenAgain">🔊 Nghe lại (đồng hồ vẫn chạy)</button>')) + '</div></div>';
+    html += '<div class="qblock"><p><b>🎧 Nghe toàn bài:</b> ' + (opts.guided ? 'Lần thi có hướng dẫn: không bấm giờ. Nghe toàn bài, chọn đáp án trong lúc nghe, đổi được tới khi nộp. Nghe xong bấm “Đã nghe xong” để mở nút Nộp bài.' : (locked ? 'Câu hỏi bên dưới hiện đủ hết — bạn vẫn chọn được đáp án ngay trong lúc nghe, đổi đáp án được tới khi nộp. Đồng hồ chưa chạy — nghe hết toàn bài rồi bấm “Đã nghe xong” (hoặc nghe hết tự mở) thì đồng hồ mới bắt đầu tính giờ và mở nút Nộp bài.' : 'Đồng hồ đang chạy — nghe lại thì đồng hồ vẫn chạy tiếp, không reset.')) + '</p><div class="row"><button class="btn btn-primary" id="examListenPlay">🔊 Nghe bài</button>' + (locked ? (opts.guided ? '<button class="btn btn-primary" id="examListenDone">Đã nghe xong → Mở nút Nộp bài</button>' : '<button class="btn btn-primary" id="examListenDone">Đã nghe xong → Bắt đầu tính giờ + mở Nộp bài</button>') : (opts.guided ? '<button class="btn" id="examListenAgain">🔊 Nghe lại (không bấm giờ)</button>' : '<button class="btn" id="examListenAgain">🔊 Nghe lại (đồng hồ vẫn chạy)</button>'))  + listenVoiceLabelHTML("tts") /* v252: nhan giong may/that */ + '</div></div>';
   }
   qs.forEach(function (q, i) {
     var ans = l.examAns[i] || {};
@@ -27071,7 +27191,7 @@ function viewPracticeZh(app) {
   html += '<details><summary><b>Đọc chặng 1–6 (' + ZH_READING.length + ' bài)</b></summary>' + zhSkillPracticeHTML("read") + '</details>';
   html += listenHubHTML("zh");
   html += '<details><summary><b>Nghe chặng 1–6 (' + ZH_LISTENING.length + ' đoạn)</b></summary><div class="qblock"><p><b>Nghe thêm (ngoài các đoạn hội thoại trong bài):</b></p>' + videoSlotLazyIf("zhPractice:listenExtra1") + videoSlotLazyIf("zhPractice:listenExtra2") + videoSlotLazyIf("zhPractice:listenExtra3") + videoSlotLazyIf("zhPractice:listenExtra4") + videoSlotLazyIf("zhPractice:listenExtra5") + videoSlotLazyIf("zhPractice:listenExtra6") + videoSlotLazyIf("zhPractice:listenExtra7") + videoSlotLazyIf("zhPractice:listenExtra8") + videoSlotLazyIf("zhPractice:listenExtra9") + videoSlotLazyIf("zhPractice:listenExtra10") + videoSlotLazyIf("zhPractice:listenExtra11") + '</div>' + zhSkillPracticeHTML("listen") + '</details>';
-  html += '<details><summary><b>Luyện nghe và đọc HSK1 trong 30 ngày (29 tập)</b></summary><div class="qblock"><p><b>Nghe + đọc theo ngày, từ dễ đến khó:</b></p><p class="mut">Dải gốc 30 ngày nhưng trang playlist thiếu Ngày 17 nên chỉ gắn được 29 tập. Kênh hiển thị: Listening Chinese With Me.</p>' + videoSlotLazyIf("zhPractice:xiaoyun01") + videoSlotLazyIf("zhPractice:xiaoyun02") + videoSlotLazyIf("zhPractice:xiaoyun03") + videoSlotLazyIf("zhPractice:xiaoyun04") + videoSlotLazyIf("zhPractice:xiaoyun05") + videoSlotLazyIf("zhPractice:xiaoyun06") + videoSlotLazyIf("zhPractice:xiaoyun07") + videoSlotLazyIf("zhPractice:xiaoyun08") + videoSlotLazyIf("zhPractice:xiaoyun09") + videoSlotLazyIf("zhPractice:xiaoyun10") + videoSlotLazyIf("zhPractice:xiaoyun11") + videoSlotLazyIf("zhPractice:xiaoyun12") + videoSlotLazyIf("zhPractice:xiaoyun13") + videoSlotLazyIf("zhPractice:xiaoyun14") + videoSlotLazyIf("zhPractice:xiaoyun15") + videoSlotLazyIf("zhPractice:xiaoyun16") + videoSlotLazyIf("zhPractice:xiaoyun18") + videoSlotLazyIf("zhPractice:xiaoyun19") + videoSlotLazyIf("zhPractice:xiaoyun20") + videoSlotLazyIf("zhPractice:xiaoyun21") + videoSlotLazyIf("zhPractice:xiaoyun22") + videoSlotLazyIf("zhPractice:xiaoyun23") + videoSlotLazyIf("zhPractice:xiaoyun24") + videoSlotLazyIf("zhPractice:xiaoyun25") + videoSlotLazyIf("zhPractice:xiaoyun26") + videoSlotLazyIf("zhPractice:xiaoyun27") + videoSlotLazyIf("zhPractice:xiaoyun28") + videoSlotLazyIf("zhPractice:xiaoyun29") + videoSlotLazyIf("zhPractice:xiaoyun30") + '</div></details>';
+  html += '<details><summary><b>Luyện nghe và đọc HSK1 trong 30 ngày (29 tập)</b></summary><div class="qblock">' + listenVoiceLabelHTML("real") /* v252: nhan giong may/that */ + '<p><b>Nghe + đọc theo ngày, từ dễ đến khó:</b></p><p class="mut">Dải gốc 30 ngày nhưng trang playlist thiếu Ngày 17 nên chỉ gắn được 29 tập. Kênh hiển thị: Listening Chinese With Me.</p>' + videoSlotLazyIf("zhPractice:xiaoyun01") + videoSlotLazyIf("zhPractice:xiaoyun02") + videoSlotLazyIf("zhPractice:xiaoyun03") + videoSlotLazyIf("zhPractice:xiaoyun04") + videoSlotLazyIf("zhPractice:xiaoyun05") + videoSlotLazyIf("zhPractice:xiaoyun06") + videoSlotLazyIf("zhPractice:xiaoyun07") + videoSlotLazyIf("zhPractice:xiaoyun08") + videoSlotLazyIf("zhPractice:xiaoyun09") + videoSlotLazyIf("zhPractice:xiaoyun10") + videoSlotLazyIf("zhPractice:xiaoyun11") + videoSlotLazyIf("zhPractice:xiaoyun12") + videoSlotLazyIf("zhPractice:xiaoyun13") + videoSlotLazyIf("zhPractice:xiaoyun14") + videoSlotLazyIf("zhPractice:xiaoyun15") + videoSlotLazyIf("zhPractice:xiaoyun16") + videoSlotLazyIf("zhPractice:xiaoyun18") + videoSlotLazyIf("zhPractice:xiaoyun19") + videoSlotLazyIf("zhPractice:xiaoyun20") + videoSlotLazyIf("zhPractice:xiaoyun21") + videoSlotLazyIf("zhPractice:xiaoyun22") + videoSlotLazyIf("zhPractice:xiaoyun23") + videoSlotLazyIf("zhPractice:xiaoyun24") + videoSlotLazyIf("zhPractice:xiaoyun25") + videoSlotLazyIf("zhPractice:xiaoyun26") + videoSlotLazyIf("zhPractice:xiaoyun27") + videoSlotLazyIf("zhPractice:xiaoyun28") + videoSlotLazyIf("zhPractice:xiaoyun29") + videoSlotLazyIf("zhPractice:xiaoyun30") + '</div></details>';
   html += '<details><summary><b>Nói chặng 1–6 (' + ZH_SPEAK.length + ' kịch bản)</b></summary>' + zhSkillPracticeHTML("speak") + '</details>';
   html += '<details><summary><b>Nhập vai chặng 1–6 (' + ZH_ROLE.length + ' tình huống)</b></summary>' + zhSkillPracticeHTML("role") + '</details>';
   html += '<details><summary><b>Viết chặng 1–6 (' + ZH_WRITE.length + ' bài)</b></summary>' + zhSkillPracticeHTML("write") + '</details>';
@@ -28744,7 +28864,7 @@ function renderZhListen(app, l) {
   }
   l.title = "Nghe: " + r.title; l.typeLabel = "Tiếng Trung · Nghe chặng " + r.stage;
   l.recordErrors = true; l.zhQuizLesson = "zhListen:" + r.id;
-  app.innerHTML = '<div class="qblock"><p class="mut">Nghe lại toàn đoạn rồi trả lời ' + r.questions.length + ' câu hỏi.</p><div class="row"><button class="btn btn-primary" id="zhLisAgain">🔊 Nghe lại toàn đoạn</button></div></div><div id="zhQuizSlot"></div>';
+  app.innerHTML = '<div class="qblock"><p class="mut">Nghe lại toàn đoạn rồi trả lời ' + r.questions.length + ' câu hỏi.</p>' + listenVoiceLabelHTML("tts") /* v252: nhan giong may/that */ + '<div class="row"><button class="btn btn-primary" id="zhLisAgain">🔊 Nghe lại toàn đoạn</button></div></div><div id="zhQuizSlot"></div>';
   wireBack();
   var la = $("#zhLisAgain"); if (la) la.onclick = function () { zhSpeak(zhListenSpeakText(r)); };
   renderZhQuiz($("#zhQuizSlot"), l, r.questions, function (score, total) { zhAwardOnce("zhListen:" + r.id); }, function (score, total) { return zhListenTranscriptHTML(r); }, {});
@@ -29540,7 +29660,7 @@ function renderZhMock(app, l) {
   var essayBlockHTML = mq.kind === "essay" ? '<div class="qblock"><p><b>Đoạn văn để đọc rồi viết luận:</b></p><p class="zh-han">' + esc(mq.passage || "") + '</p><p><b>Đề bài:</b> ' + esc(mq.q) + '</p><textarea id="zhMockEssayText" rows="8" style="width:100%" placeholder="Viết bài luận khoảng ' + (mq.minChars || 400) + ' chữ...">' + esc(l.essayText || "") + '</textarea><p class="mut" id="zhMockEssayCount">Đã viết ' + essayCharsNow + '/' + (mq.minChars || 400) + ' chữ</p><p class="mut">Bài luận không chấm điểm tự động — sau khi nộp, tự chấm theo 4 tiêu chí và đối chiếu với bài mẫu ở màn bảng điểm.</p><div class="row" style="margin-top:8px">' + (l.qi > 0 ? '<button class="btn" id="zhMockPrev">← Câu trước</button>' : '') + '<button class="btn" id="zhMockNext"' + (l.qi + 1 < meta.qs.length ? '' : ' style="display:none"') + '>Câu tiếp theo →</button><button class="btn btn-primary" id="zhMockSubmit">Nộp phần này</button></div></div>' : null;
   var ans = l.ans[key] || [];
   var extra = "";
-  if (key === "listen") extra = '<div class="qblock"><p class="mut">Nghe các đoạn rồi trả lời:</p>' + mock.listen.segments.map(function (sg, si) { return '<p><b>' + esc(sg.title) + '</b> <button class="btn" data-zhmocklisten="' + si + '">🔊 Nghe đoạn</button></p>'; }).join("") + '</div>';
+  if (key === "listen") extra = '<div class="qblock"><p class="mut">Nghe các đoạn rồi trả lời:</p>' + listenVoiceLabelHTML("tts") /* v252: nhan giong may/that */ + mock.listen.segments.map(function (sg, si) { return '<p><b>' + esc(sg.title) + '</b> <button class="btn" data-zhmocklisten="' + si + '">🔊 Nghe đoạn</button></p>'; }).join("") + '</div>';
   if (key === "read") extra = '<details class="rule-more"><summary><b>Bài đọc để đối chiếu</b></summary>' + mock.read.passages.map(function (r) { return '<p><b>' + esc(r.title) + ':</b></p><p class="zh-han">' + esc(r.text) + '</p><p><b>' + esc(r.pinyin) + '</b></p>'; }).join("") + '</details>';
   app.innerHTML = lessonHead({ title: "Thi thử " + label + " — " + meta.name, type: "Tiếng Trung · Thi thử HSK" }, "Phần " + meta.name + ": " + meta.qs.length + " câu · " + (mock.total >= ({ 1: 40, 2: 60, 3: 80, 4: 100, 5: 100, 6: 101 })[hsk] ? "Đủ câu theo đề mẫu HSK 3.0" : "Bản rút gọn — đề HSK thật nhiều câu hơn") + ".")
     + examClockBlock(zhMockMinutes(hsk, key), "Hết giờ phần này tự chuyển phần tiếp theo.")
@@ -29982,6 +30102,7 @@ function renderZhHskk(app, l) {
     + body
     + '<p class="mut">' + (micRef ? 'Đọc to câu mẫu — máy chỉ kiểm tra có nghe ra không.' : 'Câu trả lời mở — máy không chấm được, tự đối chiếu bài mẫu.') + '</p>'
     + '<div class="row"><button class="btn" id="zhHskkListen">🔊 Nghe</button>' + (micRef ? '<button class="btn" id="zhHskkRec">🎤 Đọc to câu mẫu</button>' : '<button class="btn" id="zhHskkOpenRec">🎤 Ghi âm câu trả lời</button>') + '<button class="btn btn-primary" id="zhHskkNext"' + (l.speakDone ? '' : ' disabled') + '>Mục tiếp theo →</button></div>'
+    + listenVoiceLabelHTML("tts") /* v252: nhan giong may/that */
     + '<div id="zhHskkT1">' + hskkT1Html + '</div><div id="zhHskkOpen">' + hskkOpenHtml + '</div></div>';
   wireBack();
   speakPhaseStartTimer(l, key, phases);
@@ -30357,10 +30478,16 @@ function tcAddHard(stepId, q, correct, why) {
   try { DaySum_logErr("tc", "tcHard:" + stepId, q); } catch (e) {} /* v215 (5b) */
   saveState();
 }
+/* v252: nhan giong may/that — nut Nghe cho cau "Nghe (script)" / "Nghe: '...'" o kiem tra cuoi chang: trich script trong dau ' '. */
+function tcTpCheckListenBtnHTML(q, cls) {
+  var m = q && q.q ? String(q.q).match(/^(?:Nghe \(script\)|Nghe): '([\s\S]*?)' /) : null;
+  if (!m) return "";
+  return '<div class="row"><button class="btn ' + cls + '" data-script="' + esc(m[1]) + '">🔊 Nghe script</button></div>';
+}
 function tcQuizBlockHTML(qs, prefix, opts) {
   opts = opts || {};
   return qs.map(function (q, qi) {
-    return '<div class="qblock tcq" data-qi="' + qi + '"><p><b>Câu ' + (qi + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">'
+    return '<div class="qblock tcq" data-qi="' + qi + '"><p><b>Câu ' + (qi + 1) + ':</b> ' + esc(q.q) + '</p>' + (opts.listenScript ? tcTpCheckListenBtnHTML(q, "tcCheckListen") : "") + '<div class="row">'
       + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tcopt" data-qi="' + qi + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") /* v169 (N23-N26): xao tron vi tri dap an moi lan ve — data-oi giu chi so goc */
       + '</div><div class="tcwhy"></div>'
       + (opts.hints ? '<div class="row tcHintRow"><span class="chip tcSelfRelChip">Điểm tự lực: 1,0</span><button class="btn tcHintBtn" data-qi="' + qi + '">💡 Gợi ý (bậc 1)</button></div><div class="tcHintBox"></div>' : '')
@@ -31301,12 +31428,14 @@ function tcOpenStep(id, backTab) {
   }
   if (m.kind === "check") {
     var ck = TC_CHECK_ALL[m.ref];
-    var htmlC = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · KIỂM TRA CUỐI CHẶNG</p><h2>' + esc(ck.title) + '</h2><p class="mut">' + ck.qs.length + ' câu trắc nghiệm tự soạn: ngữ pháp, từ vựng, Nghe (theo script) và Đọc. Mỗi màn hiện 1 câu, bấm Câu sau để sang câu tiếp. Làm xong cả ' + ck.qs.length + ' câu thì bấm Xong để nhận +10 XP; câu sai vào Sổ lỗi sai TOEIC để ôn lại.</p>' + tcQuizBlockHTML(ck.qs, "c") + '<div class="row"><button class="btn" id="tcRedoBtn">Làm lại</button><button class="btn btn-primary" id="tcFinishBtn">Xong bài kiểm tra (+10 XP)</button></div></section>';
+    var htmlC = tcBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOEIC · KIỂM TRA CUỐI CHẶNG</p><h2>' + esc(ck.title) + '</h2><p class="mut">' + ck.qs.length + ' câu trắc nghiệm tự soạn: ngữ pháp, từ vựng, Nghe (theo script) và Đọc. Mỗi màn hiện 1 câu, bấm Câu sau để sang câu tiếp. Làm xong cả ' + ck.qs.length + ' câu thì bấm Xong để nhận +10 XP; câu sai vào Sổ lỗi sai TOEIC để ôn lại.</p>' + listenVoiceLabelHTML("tts") /* v252: nhan giong may/that */ + tcQuizBlockHTML(ck.qs, "c", { listenScript: true }) + '<div class="row"><button class="btn" id="tcRedoBtn">Làm lại</button><button class="btn btn-primary" id="tcFinishBtn">Xong bài kiểm tra (+10 XP)</button></div></section>';
     app.innerHTML = htmlC; app._tcQs = ck.qs;
     tcWireQuiz(app, id, "tcFinishBtn");
     paginateQuiz(app, "tcq", "tc", "tcFinishBtn");
     document.getElementById("tcFinishBtn").onclick = function () { if (tcMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     document.getElementById("tcRedoBtn").onclick = function () { tcOpenStep(id, back); };
+    /* v252: nhan giong may/that — nut Nghe script dung giong may en-GB (script tieng Anh). */
+    app.querySelectorAll(".tcCheckListen").forEach(function (b) { b.onclick = function () { try { speak(b.dataset.script || ""); } catch (e) {} }; });
     tcWireBack(back); return;
   }
   if (m.kind === "mock") { tcOpenMock(back, id); return; }
@@ -31336,7 +31465,7 @@ function tcOpenMock(back, stepId) {
     var body = document.getElementById("tcMockBody");
     var secs = mins * 60;
     var qhtml = '<p><b>Thời gian còn lại: <span id="tcMockClock">' + mins + ':00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
-    qhtml += '<h3>Phần Nghe (' + ML.length + ' câu)</h3>';
+    qhtml += '<h3>Phần Nghe (' + ML.length + ' câu)</h3>' + listenVoiceLabelHTML("tts"); /* v252: nhan giong may/that */
     qhtml += ML.map(function (q, i) {
       return '<div class="qblock tcq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tcmocklisten" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tcopt" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tcwhy"></div></div>';
     }).join("");
@@ -31641,7 +31770,7 @@ function viewPracticeTc(app) {
   html += '<section class="card"><h3>Ngữ pháp trọng tâm (' + TC_GRAMMAR.length + ' trạm)</h3><div class="row">' + TC_GRAMMAR.map(function (g, i) { return tcStepBtnHTML("g" + i); }).join("") + '</div></section>';
   html += listenHubHTML("tc");
   /* v246 WB: Nghe thụ động — video (mẫu ZH HSK1): danh sách lấy từ kho VIDEO_NEW kind giaitri đã kiểm chứng của track. */
-  html += '<details id="passiveVideoTc"><summary><b>Nghe thụ động — video giải trí TOEIC (5 video)</b></summary><div class="qblock"><p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Trong 5 video, video “How to offer help — Hội thoại công sở” đã có phụ đề thật — muốn làm bài tập (nghe chép, Shadowing…) thì mở video đó ở mục “Video mới”; 4 video còn lại chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("tc").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
+  html += '<details id="passiveVideoTc"><summary><b>Nghe thụ động — video giải trí TOEIC (5 video)</b></summary><div class="qblock">' + listenVoiceLabelHTML("real") /* v252: nhan giong may/that */ + '<p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Trong 5 video, video “How to offer help — Hội thoại công sở” đã có phụ đề thật — muốn làm bài tập (nghe chép, Shadowing…) thì mở video đó ở mục “Video mới”; 4 video còn lại chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("tc").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
 
   html += pronDiagEntryHTML("tc");
   html += pronWeakHTML("tc"); /* v119b */
@@ -32093,7 +32222,7 @@ function tpAddHard(stepId, q, correct, why) {
 function tpQuizBlockHTML(qs, prefix, opts) {
   opts = opts || {};
   return qs.map(function (q, qi) {
-    return '<div class="qblock tpq" data-qi="' + qi + '"><p><b>Câu ' + (qi + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">'
+    return '<div class="qblock tpq" data-qi="' + qi + '"><p><b>Câu ' + (qi + 1) + ':</b> ' + esc(q.q) + '</p>' + (opts.listenScript ? tcTpCheckListenBtnHTML(q, "tpCheckListen") : "") + '<div class="row">'
       + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt" data-qi="' + qi + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") /* v169 (N23-N26): xao tron vi tri dap an moi lan ve — data-oi giu chi so goc */
       + '</div><div class="tpwhy"></div>'
       + (opts.hints ? '<div class="row tpHintRow"><span class="chip tpSelfRelChip">Điểm tự lực: 1,0</span><button class="btn tpHintBtn" data-qi="' + qi + '">💡 Gợi ý (bậc 1)</button></div><div class="tpHintBox"></div>' : '')
@@ -32455,12 +32584,14 @@ function tpOpenStep(id, backTab) {
   }
   if (m.kind === "check") {
     var ck = TP_CHECK[m.ref];
-    var htmlC = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · KIỂM TRA CUỐI CHẶNG</p><h2>' + esc(ck.title) + '</h2><p class="mut">' + ck.qs.length + ' câu trắc nghiệm tự soạn theo đúng dạng TOPIK. Mỗi màn hiện 1 câu, bấm Câu sau để sang câu tiếp. Làm xong cả ' + ck.qs.length + ' câu thì bấm Xong để nhận +10 XP; câu sai vào Sổ lỗi sai TOPIK để ôn lại.</p>' + tpQuizBlockHTML(ck.qs, "k") + '<div class="row"><button class="btn" id="tpRedoBtn">Làm lại</button><button class="btn btn-primary" id="tpFinishBtn">Xong bài kiểm tra (+10 XP)</button></div></section>';
+    var htmlC = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · KIỂM TRA CUỐI CHẶNG</p><h2>' + esc(ck.title) + '</h2><p class="mut">' + ck.qs.length + ' câu trắc nghiệm tự soạn theo đúng dạng TOPIK. Mỗi màn hiện 1 câu, bấm Câu sau để sang câu tiếp. Làm xong cả ' + ck.qs.length + ' câu thì bấm Xong để nhận +10 XP; câu sai vào Sổ lỗi sai TOPIK để ôn lại.</p>' + listenVoiceLabelHTML("tts") /* v252: nhan giong may/that */ + tpQuizBlockHTML(ck.qs, "k", { listenScript: true }) + '<div class="row"><button class="btn" id="tpRedoBtn">Làm lại</button><button class="btn btn-primary" id="tpFinishBtn">Xong bài kiểm tra (+10 XP)</button></div></section>';
     app.innerHTML = htmlC; app._tpQs = ck.qs;
     tpWireQuiz(app, id, "tpFinishBtn");
     paginateQuiz(app, "tpq", "tp", "tpFinishBtn");
     document.getElementById("tpFinishBtn").onclick = function () { if (tpMarkDone(id)) { this.textContent = "Đã xong ✓"; this.disabled = true; } };
     document.getElementById("tpRedoBtn").onclick = function () { tpOpenStep(id, back); };
+    /* v252: nhan giong may/that — nut Nghe script dung giong may ko-KR (script tieng Han). */
+    app.querySelectorAll(".tpCheckListen").forEach(function (b) { b.onclick = function () { try { tpSpeak(b.dataset.script || ""); } catch (e) {} }; });
     tpWireBack(back); return;
   }
   if (m.kind === "write") {
@@ -32513,7 +32644,7 @@ function tpOpenMock(back) {
     var body = document.getElementById("tpMockBody");
     var secs = 100 * 60;
     var qhtml = '<p><b>Thời gian còn lại: <span id="tpMockClock">100:00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
-    qhtml += '<h3>Phần Nghe (35 câu)</h3>';
+    qhtml += '<h3>Phần Nghe (35 câu)</h3>' + listenVoiceLabelHTML("tts"); /* v252: nhan giong may/that */
     qhtml += TP_MOCK_L.map(function (q, i) {
       return '<div class="qblock tpq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tpmocklisten" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
@@ -32581,7 +32712,7 @@ function tpOpenMock2(back, stepId) {
     var body = document.getElementById("tpMock2Body");
     var secs = 180 * 60;
     var qhtml = '<p><b>Thời gian còn lại: <span id="tpMock2Clock">180:00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
-    qhtml += '<h3>Phần Nghe (50 câu)</h3>';
+    qhtml += '<h3>Phần Nghe (50 câu)</h3>' + listenVoiceLabelHTML("tts"); /* v252: nhan giong may/that */
     qhtml += TP_MOCK2_L.map(function (q, i) {
       return '<div class="qblock tpq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tpmock2listen" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt2" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
@@ -32798,7 +32929,7 @@ function viewPracticeTp(app) {
   html += '<section class="card"><h3>Ngữ pháp · Thành ngữ Hàn (' + TP_GRAMMAR.filter(function (g) { return g.cat === "idiom"; }).length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return g.cat === "idiom" ? tpStepBtnHTML("g" + i) : ""; }).join("") + '</div></section>';
   html += listenHubHTML("tp");
   /* v246 WB: Nghe thụ động — video (mẫu ZH HSK1): danh sách lấy từ kho VIDEO_NEW kind giaitri đã kiểm chứng của track. */
-  html += '<details id="passiveVideoTp"><summary><b>Nghe thụ động — video giải trí TOPIK (10 video)</b></summary><div class="qblock"><p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Trong 10 video, video “Gọi điện rủ đi ăn thịt nướng — Hội thoại tiếng Hàn” đã có phụ đề thật — muốn làm bài tập (nghe chép, Shadowing…) thì mở video đó ở mục “Video mới”; 9 video còn lại chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("tp").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
+  html += '<details id="passiveVideoTp"><summary><b>Nghe thụ động — video giải trí TOPIK (10 video)</b></summary><div class="qblock">' + listenVoiceLabelHTML("real") /* v252: nhan giong may/that */ + '<p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Trong 10 video, video “Gọi điện rủ đi ăn thịt nướng — Hội thoại tiếng Hàn” đã có phụ đề thật — muốn làm bài tập (nghe chép, Shadowing…) thì mở video đó ở mục “Video mới”; 9 video còn lại chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("tp").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
 
   html += pronDiagEntryHTML("tp");
   html += pronWeakHTML("tp"); /* v119b */
