@@ -1023,6 +1023,21 @@ function videoLinesEnsure(key) {
   window.__videoLinesIdx[key] = { listen: li, read: ri, speak: si };
   return window.__videoLinesIdx[key];
 }
+/* v246: TP_LISTEN gan engine nghe chep + Shadowing — map sang shape listeningPlus.
+   Giu nguyen nhan nguoi noi "여자:"/"남자:" trong script (trung thuc du lieu;
+   gameNormSent da tha dau cau nen nguoi hoc go khong co dau hai cham van dung). */
+function tpListenItem(idx) {
+  var it = (typeof TP_LISTEN !== "undefined") ? TP_LISTEN[idx] : null;
+  if (!it) return null;
+  return { topic: it.title, section: "TOPIK — Nghe", band: "TOPIK Part " + it.part, questions: (it.qs || []).map(function (q) { return { type: "MC", q: q.q, o: q.o, a: q.a, why: q.why }; }), text: it.script };
+}
+function listenItemFor(l) { return (l && l.src === "tpListen") ? tpListenItem(l.idx) : CONTENT.listeningPlus[l.idx]; }
+/* v246: bai TP_LISTEN dau tien chua xong theo mot tien to skillDone. */
+function tpFirstUndone(prefix) {
+  var done = (state.skillDone || {});
+  for (var i = 0; i < (TP_LISTEN || []).length; i++) if (!done[prefix + i]) return i;
+  return 0;
+}
 function videoLinkWire() {
   /* Nối chung cho mọi nút [data-vvideo] có phụ đề thật (kể cả video của web
      gắn phụ đề sau này): nghe chép + Shadowing + podcast dùng đúng cỗ máy
@@ -6703,6 +6718,8 @@ function viewPractice(app) {
     + '<button class="step-row" data-entrycheck="four"><span>Kiểm tra đầu vào 4 kỹ năng — Nghe · Đọc · Nói · Viết (~15 phút, khuyên dùng)</span><span class="st">' + (doneK("entryFour") ? '✓' : '→') + '</span></button>'
     + '<button class="step-row" data-entrycheck="zero"><span>Kiểm tra trình độ đầu vào — Band 0 (6 câu)</span><span class="st">' + (doneK("entryZero") ? '✓' : '→') + '</span></button>'
     + '<button class="step-row" data-entrycheck="trial"><span>Kiểm tra trình độ đầu vào — Band 5,0–7,5+ (16 câu)</span><span class="st">' + (doneK("entryTrial") ? '✓' : '→') + '</span></button></details>';
+  /* v246 WB: Nghe thụ động — video (mẫu ZH HSK1): danh sách lấy từ kho VIDEO_NEW kind giaitri đã kiểm chứng của track. */
+  html += '<details id="passiveVideoEn"><summary><b>Nghe thụ động — video · Học tiếng Anh qua phim Friends (4 tập)</b></summary><div class="qblock"><p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Cả 4 video đều chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("en").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
   html += videoNewBlockHTML("en");
   app.innerHTML = html;
   videoSampleWire();
@@ -6752,6 +6769,7 @@ function viewPractice(app) {
     put(G3, byId("practiceGrpListen"));
     put(G3, listenVideoRowEl);
     put(G3, listenHubCardEl);
+    put(G3, byId("passiveVideoEn")); /* v246 WB: Nghe thụ động — video, ngay sau hub nghe */
     put(G3, byId("practiceGrpDict"));
     put(G3, byId("practiceGrpPod"));
     put(G3, byId("practiceGrpRead"));
@@ -19092,10 +19110,10 @@ function renderSkillListen(app, l) {
   renderQuizEngine($("#quizSlot"), l, [q], "skill", "listen:" + l.idx, 2);
 }
 function renderSkillListenLong(app, l) {
-  var r = CONTENT.listeningPlus[l.idx];
+  var r = listenItemFor(l);
   if (!r) { curLesson = null; render(); return; }
   if (l.shadow) { renderShadowListen(app, l, r, true); return; }
-  l.title = "Nghe dài — " + r.topic; l.skillKey = "listenLong:" + l.idx;
+  l.title = "Nghe dài — " + r.topic; l.skillKey = (l.src === "tpListen" ? "listenLongTp:" : "listenLong:") + l.idx;
   var tfN = (r.questions || []).filter(function (q) { return q.type === "TF"; }).length;
   l.sub = r.section + (r.band ? " · " + r.band : "") + " · " + r.questions.length + " câu hỏi hiểu nội dung" + (tfN ? " · có " + tfN + " câu đúng/sai (dạng luyện thêm — đề thi Listening chính thức không có dạng đúng/sai)" : "");
   if (!l.theoryDone) {
@@ -19111,7 +19129,7 @@ function renderSkillListenLong(app, l) {
       + listenVoiceNoteHTML()
       + '<div class="row"><button class="btn" id="lpPlay">🔊 Nghe toàn bài</button><button class="btn btn-primary" id="lpStart"' + (l.listened ? "" : " disabled") + '>Làm bài (' + r.questions.length + ' câu)</button></div>' + '</div>' + gd23ListenFrameHTML(l);
     wireBack();
-    $("#lpPlay").onclick = function () { speak(r.text); l.listened = true; var st = $("#lpStart"); if (st) st.disabled = false; };
+    $("#lpPlay").onclick = function () { speakAuto(r.text); l.listened = true; var st = $("#lpStart"); if (st) st.disabled = false; };
     gd23ListenWire(l);
     $("#lpStart").onclick = function () { if (!l.listened) { toast("Hãy bấm 🔊 Nghe trước đã."); return; } l.quiz = true; l.listenStep = 3; lessonStart = Date.now(); runWrong = []; runFirstTry = {}; render(); };
     shadowWireEntry(l);
@@ -19119,9 +19137,9 @@ function renderSkillListenLong(app, l) {
     return;
   }
   app.innerHTML = gd23ListenFrameHTML(l) + '<div class="row" style="margin-bottom:10px"><button class="btn btn-primary" id="lpAgain">🔊 Nghe lại toàn bài</button></div>' + listenVoiceNoteHTML()    + '<details style="margin-bottom:10px"><summary><b>Transcript (mở để đối chiếu sau khi nghe)</b></summary><div class="qblock">' + paraHTML(r.text) + '</div></details><div id="quizSlot"></div>';
-  $("#lpAgain").onclick = function () { speak(r.text); };
+  $("#lpAgain").onclick = function () { speakAuto(r.text); };
   gd23ListenWire(l);
-  renderQuizEngine($("#quizSlot"), l, r.questions, "skill", "listenLong:" + l.idx, 2);
+  renderQuizEngine($("#quizSlot"), l, r.questions, "skill", (l.src === "tpListen" ? "listenLongTp:" : "listenLong:") + l.idx, 2);
 }
 /* ============ PARROTO-HAY 03/11/2026: nghe chép, shadowing, lọc, mục tiêu ngày ============
    Chỉ dùng kho tự soạn sẵn của web. Không video bên thứ ba, không bảng xếp hạng,
@@ -19362,6 +19380,7 @@ function u9VideoKeyOf(l) {
   return null;
 }
 function u9TrackOfLesson(l, item) {
+  if (l && l.src === "tpListen") return "tp";
   var key = u9VideoKeyOf(l);
   if (key) { try { return videoTrackOf(key); } catch (e) { return "en"; } }
   return "en";
@@ -19404,7 +19423,7 @@ function u9DoneSummaryHTML(l) {
 /* Logic ket thuc bai nghe chep (tach tu nut dcFinish de pha quiz goi lai duoc). */
 function finishDictationNow(l, item) {
   var total = (l.sents || []).length, others = (l.sents || []).slice();
-  for (var i2 = 0; i2 < total; i2++) if (l.res[i2] === "good") srsEnqueueSentence("dictation", l.idx, i2, l.sents[i2], others);
+  for (var i2 = 0; i2 < total; i2++) if (l.res[i2] === "good") srsEnqueueSentence("dictation", (l.src === "tpListen" ? "tp:" + l.idx : l.idx), i2, l.sents[i2], others);
   if (!state.skillDone) state.skillDone = {};
   var was = !!state.skillDone[l.skillKey];
   state.skillDone[l.skillKey] = true; if (!was) logStepDoneIfRb(l.skillKey); /* v161 */ awardXp(was ? 5 : 10);
@@ -19447,7 +19466,7 @@ function renderU9QuizPhase(app, l, item, total) {
       if (!ok) kind = goodRate >= 0.8 ? "paraphrase" : "listen";
       if (!l.u9ans) l.u9ans = {};
       l.u9ans[qi] = { ok: ok, u9: kind };
-      if (!ok) recordQuizError("dictation", l.idx * 1000 + 500 + qi, { q: q.q, o: opts, a: q.a, why: q.why, u9: kind }); /* v186 U9: +500 de khong dung khoa loi chep cau (idx*100+si) — bai idx=0 thi 0*1000+0 trung 0*100+0 */
+      if (!ok) recordQuizError(l.src === "tpListen" ? "dictationTp" : "dictation", l.idx * 1000 + 500 + qi, { q: q.q, o: opts, a: q.a, why: q.why, u9: kind }); /* v186 U9: +500 de khong dung khoa loi chep cau (idx*100+si) — bai idx=0 thi 0*1000+0 trung 0*100+0 */
       saveState(); render();
     };
   });
@@ -19459,9 +19478,9 @@ function renderU9QuizPhase(app, l, item, total) {
 
 /* ---------- Nghe chép chính tả theo câu (mới) ---------- */
 function renderDictation(app, l) {
-  var item = CONTENT.listeningPlus[l.idx];
+  var item = listenItemFor(l);
   if (!item) { curLesson = null; render(); return; }
-  l.title = "Nghe chép — " + item.topic; l.skillKey = "dictation:" + l.idx;
+  l.title = "Nghe chép — " + item.topic; l.skillKey = (l.src === "tpListen" ? "dictationTp:" : "dictation:") + l.idx;
   l.sub = item.section + (item.band ? " · " + item.band : "") + " · Nghe từng câu rồi gõ lại đúng chính tả";
   if (!l.sents) l.sents = splitSentencesEN(item.text);
   var total = l.sents.length;
@@ -19570,8 +19589,8 @@ function renderDictation(app, l) {
       }
       l.typed[si] = v;
       if (ok && !l.hintUsed) { l.res[si] = "good"; l.score++; }
-      else if (ok) { l.res[si] = "hint"; l.hints++; var u9h = {}; var dt2 = dictToks(sent); dt2.toks.forEach(function (tw, ti2) { if (mask[ti2] && l.revealed[si] && l.revealed[si][ti2] && !u9h.u9) { var c2 = u9ClassifyWord(tw, u9track, "", ""); if (c2) u9h.u9 = c2; } }); recordQuizError("dictation", l.idx * 100 + si, { q: "Nghe chép: " + sent, o: [sent], a: 0, why: "Câu đúng trong bài " + item.topic + " là: " + sent, u9: u9h.u9 }); } /* v186 U9: tu duoc mo goi y la tu khong nghe ra */
-      else { l.res[si] = "wrong"; var u9cl = u9ClassifyDiff(v, sent, u9track); var u9first = "listen"; u9cl.list.forEach(function (it) { if (u9first === "listen" && it.cls) u9first = it.cls; }); recordQuizError("dictation", l.idx * 100 + si, { q: "Nghe chép: " + sent, o: [sent], a: 0, why: "Câu đúng trong bài " + item.topic + " là: " + sent, u9: u9first }); } /* v186 U9 */
+      else if (ok) { l.res[si] = "hint"; l.hints++; var u9h = {}; var dt2 = dictToks(sent); dt2.toks.forEach(function (tw, ti2) { if (mask[ti2] && l.revealed[si] && l.revealed[si][ti2] && !u9h.u9) { var c2 = u9ClassifyWord(tw, u9track, "", ""); if (c2) u9h.u9 = c2; } }); recordQuizError(l.src === "tpListen" ? "dictationTp" : "dictation", l.idx * 100 + si, { q: "Nghe chép: " + sent, o: [sent], a: 0, why: "Câu đúng trong bài " + item.topic + " là: " + sent, u9: u9h.u9 }); } /* v186 U9: tu duoc mo goi y la tu khong nghe ra */
+      else { l.res[si] = "wrong"; var u9cl = u9ClassifyDiff(v, sent, u9track); var u9first = "listen"; u9cl.list.forEach(function (it) { if (u9first === "listen" && it.cls) u9first = it.cls; }); recordQuizError(l.src === "tpListen" ? "dictationTp" : "dictation", l.idx * 100 + si, { q: "Nghe chép: " + sent, o: [sent], a: 0, why: "Câu đúng trong bài " + item.topic + " là: " + sent, u9: u9first }); } /* v186 U9 */
       saveState(); render();
     };
     checkBtn.onclick = doCheck;
@@ -19781,7 +19800,12 @@ var SHADOW_EVAL_CRITS = [
   { k: "chay", t: "Trôi chảy", d: "nói liền mạch, không ngập ngừng quá lâu" }
 ];
 function shadowStepDef(n) { return SHADOW_STEPS[n - 1] || SHADOW_STEPS[0]; }
-function shadowKey(l, isLong) { return (isLong ? "long:" : "short:") + l.idx; }
+function shadowKey(l, isLong) { if (l && l.src === "tpListen") return (isLong ? "longTp:" : "shortTp:") + l.idx; return (isLong ? "long:" : "short:") + l.idx; }
+/* v246: Shadowing dung duoc cho ZH/TC/TP — SR theo he chu; SRS/loi dat ten mien rieng cho TP. */
+function shadowSrLang(text) { var t = String(text || ""); if (hasCJK(t)) return "zh-CN"; if (/[\uAC00-\uD7A3]/.test(t)) return "ko-KR"; return "en-GB"; }
+function shadowIsEn(text) { var t = String(text || ""); return !hasCJK(t) && !/[\uAC00-\uD7A3]/.test(t); }
+function shadowSrsLessonId(l, isLong) { if (l && l.src === "tpListen") return (isLong ? "longTp:" : "shortTp:") + l.idx; return (isLong ? "long:" : "short:") + l.idx; }
+function shadowErrLessonId(l, isLong) { if (l && l.src === "tpListen") return isLong ? "shadowLongTp:" + l.idx : "shadowTp:" + l.idx; return "shadow" + (isLong ? "Long" : "") + ":" + l.idx; }
 function shadowUnitsFor(l, sents) {
   var step = l.shadowStep || 1, out = [], i;
   function rangeIdx(a, b) { var r = []; for (var k = a; k < b; k++) r.push(k); return r; }
@@ -19849,7 +19873,7 @@ function shadowSrCheck(l, sent) {
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) { l.shadowSrText = "Trình duyệt này không hỗ trợ nhận giọng nói — hãy mở bằng Chrome hoặc Edge, hoặc tự nghe lại bản ghi để đánh giá."; render(); return; }
   try {
-    var r2 = new SR(); r2.lang = "en-GB"; r2.interimResults = false; r2.maxAlternatives = 1;
+    var r2 = new SR(); r2.lang = shadowSrLang(sent); r2.interimResults = false; r2.maxAlternatives = 1;
     r2.onresult = function (ev) { var tx = ""; try { tx = ev.results[0][0].transcript || ""; } catch (e) {} l.shadowSrText = gameNormSent(tx) === gameNormSent(sent) ? "Máy nghe khớp câu mẫu (ước lượng): “" + tx + "” — tốt lắm, đây chỉ là so khớp đơn giản, không phải điểm chuẩn." : "Máy nghe được: “" + tx + "” — chưa khớp hẳn câu mẫu. Nghe lại bản ghi của bạn và tự đánh giá thêm."; render(); };
     r2.onerror = function () { l.shadowSrText = "Không nghe được — hãy thử lại."; render(); };
     r2.start();
@@ -19867,9 +19891,13 @@ function shadowStepUnitHTML(l, sents, unit, ui, unitTotal, step) {
   var h = '<div class="qblock">';
   h += '<p><b>' + (unit.sents.length > 1 ? 'Đoạn ' + (ui + 1) + '/' + unitTotal + ' (' + unit.sents.length + ' câu)' : 'Câu ' + (unit.idxs[0] + 1) + '/' + sents.length) + ':</b></p>';
   if (!maskText) {
-    var words = text.split(" ");
-    h += '<p>' + words.map(function (w, i) { return '<button class="btn" data-sw="' + i + '">' + esc(w) + '</button>'; }).join(" ") + '</p>';
-    h += l.shadowWordIpa ? '<p id="shadowIpaLine"><b>' + esc(l.shadowWord) + '</b>: ' + esc(l.shadowWordIpa) + '</p>' : '<p class="mut" id="shadowIpaLine"></p>';
+    if (shadowIsEn(text)) {
+      var words = text.split(" ");
+      h += '<p>' + words.map(function (w, i) { return '<button class="btn" data-sw="' + i + '">' + esc(w) + '</button>'; }).join(" ") + '</p>';
+      h += l.shadowWordIpa ? '<p id="shadowIpaLine"><b>' + esc(l.shadowWord) + '</b>: ' + esc(l.shadowWordIpa) + '</p>' : '<p class="mut" id="shadowIpaLine"></p>';
+    } else {
+      h += '<p>' + esc(text) + '</p>';
+    }
   } else {
     h += '<p><b>• • • • •</b> <span class="mut">(câu đã che — nghe rồi nhại, bí quá mới hiện)</span></p><div class="row"><button class="btn" id="shStepShowText">👁 Hiện câu mẫu</button></div>';
   }
@@ -19960,7 +19988,7 @@ function renderShadowSteps(app, l, item, isLong) {
   wireBack();
   $$("[data-shstep]").forEach(function (b) { b.onclick = function () { l.shadowStep = +b.dataset.shstep; l.shadowStepIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); }; });
   var bk = $("#shStepsBack"); if (bk) bk.onclick = function () { l.shadow = false; render(); };
-  var sp = $("#shStepPlayAll"); if (sp) sp.onclick = function () { speak(item.text); };
+  var sp = $("#shStepPlayAll"); if (sp) sp.onclick = function () { speakAuto(item.text); };
   var sd = $("#shStepDone"); if (sd) sd.onclick = function () { shadowStepDone(l, step); };
   $$("[data-sw]").forEach(function (b) {
     b.onclick = function () {
@@ -19973,8 +20001,8 @@ function renderShadowSteps(app, l, item, isLong) {
   var splay = $("#shStepPlay");
   if (splay) splay.onclick = function () {
     var rate = step === 3 ? 0.75 : 1;
-    if (step >= 4) speak(unitText, rate, function () { l.shadowTurn = "user"; render(); });
-    else speak(unitText, rate);
+    if (step >= 4) speakAuto(unitText, rate, function () { l.shadowTurn = "user"; render(); });
+    else speakAuto(unitText, rate);
   };
   var stu = $("#shStepToUser"); if (stu) stu.onclick = function () { l.shadowTurn = "user"; render(); };
   var sst = $("#shStepShowText"); if (sst) sst.onclick = function () { l.shadowShowText = true; render(); };
@@ -19991,7 +20019,7 @@ function renderShadowSteps(app, l, item, isLong) {
   var gd = $("#shStepGood");
   if (gd) gd.onclick = function () {
     l.shadowRepeats = (l.shadowRepeats || 0) + 1;
-    unit.idxs.forEach(function (si) { srsEnqueueSentence("shadow", (isLong ? "long:" : "short:") + l.idx, si, sents[si], sents); });
+    unit.idxs.forEach(function (si) { srsEnqueueSentence("shadow", shadowSrsLessonId(l, isLong), si, sents[si], sents); });
     shadowStepAdvanceUnit(l, ui, units.length, step);
   };
   var wk = $("#shStepWeak");
@@ -19999,7 +20027,7 @@ function renderShadowSteps(app, l, item, isLong) {
     l.shadowRepeats = (l.shadowRepeats || 0) + 1;
     unit.idxs.forEach(function (si) {
       if (l.shadowWeak.indexOf(si) < 0) l.shadowWeak.push(si);
-      recordQuizError("shadow" + (isLong ? "Long" : "") + ":" + l.idx, si, { q: "Shadowing: " + sents[si], o: [sents[si]], a: 0, why: "Câu này bạn tự đánh giá là cần luyện thêm trong bài " + item.topic + "." });
+      recordQuizError(shadowErrLessonId(l, isLong), si, { q: "Shadowing: " + sents[si], o: [sents[si]], a: 0, why: "Câu này bạn tự đánh giá là cần luyện thêm trong bài " + item.topic + "." });
     });
     saveState();
     shadowStepAdvanceUnit(l, ui, units.length, step);
@@ -20033,11 +20061,9 @@ function listenVoiceNoteHTML() {
    (cum K3) + mo ta day du chi o tab Huong dan. Thu tu: Nghe hieu ->
    Nghe chep -> Shadowing Xem/Luyen -> Shadowing 10 buoc -> Nghe thu dong/
    Podcast -> Video co phu de that (4 dang) -> Link tu gan. Moi cach = 1
-   dong ten + 1 nut vao; man dich tu noi cach lam. ZH/TC/TP chi co cac
-   cach that su co o track do (ZH tu v126 da co Nghe chep + Shadowing
-   Xem/Luyen + Podcast qua video zh-e10, chua co Shadowing 10 buoc;
-   TC/TP tu v234 da co Nghe chep + Shadowing Xem/Luyen + Podcast qua
-   video tc-e5/tp-e10, chua co Shadowing 10 buoc va Nghe thu dong — video). */
+   dong ten + 1 nut vao; man dich tu noi cach lam. Tu v246 ca 4 track
+   du 8 cach, cung thu tu key: compre,dict,shadowView,shadowSteps,
+   podcast,passive,video,link. */
 var LISTEN_HUB_ROWS = {
   en: [
     { k: "compre", t: "Nghe hiểu" },
@@ -20045,6 +20071,7 @@ var LISTEN_HUB_ROWS = {
     { k: "shadowView", t: "Shadowing Xem/Luyện" },
     { k: "shadowSteps", t: "Shadowing 10 bước" },
     { k: "podcast", t: "Nghe thụ động — Podcast" },
+    { k: "passive", t: "Nghe thụ động — video" },
     { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
   ],
@@ -20052,35 +20079,40 @@ var LISTEN_HUB_ROWS = {
     { k: "compre", t: "Nghe hiểu" },
     { k: "dict", t: "Nghe chép chính tả" },
     { k: "shadowView", t: "Shadowing Xem/Luyện" },
+    { k: "shadowSteps", t: "Shadowing 10 bước" },
     { k: "podcast", t: "Nghe thụ động — Podcast" },
     { k: "passive", t: "Nghe thụ động — video" },
     { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
-  ], /* v126: ZH da co Nghe chep + Shadowing + Podcast qua video zh-e10 co phu de that */
+  ],
   tc: [
     { k: "compre", t: "Nghe hiểu" },
     { k: "dict", t: "Nghe chép chính tả" },
     { k: "shadowView", t: "Shadowing Xem/Luyện" },
+    { k: "shadowSteps", t: "Shadowing 10 bước" },
     { k: "podcast", t: "Nghe thụ động — Podcast" },
+    { k: "passive", t: "Nghe thụ động — video" },
     { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
-  ], /* v234: TC da co Nghe chep + Shadowing + Podcast qua video tc-e5 co phu de that */
+  ],
   tp: [
     { k: "compre", t: "Nghe hiểu" },
     { k: "dict", t: "Nghe chép chính tả" },
     { k: "shadowView", t: "Shadowing Xem/Luyện" },
+    { k: "shadowSteps", t: "Shadowing 10 bước" },
     { k: "podcast", t: "Nghe thụ động — Podcast" },
+    { k: "passive", t: "Nghe thụ động — video" },
     { k: "video", t: "Video có phụ đề thật — 5 dạng bài" },
     { k: "link", t: "Link tự gắn" }
-  ] /* v234: TP da co Nghe chep + Shadowing + Podcast qua video tp-e10 co phu de that */
+  ]
 };
-/* v117 P1 (lech 2): ghi ro vi sao track nay thieu cach luyen — khong lang
-   le vang mat. EN du 7 hang nen khong co ghi chu thieu. */
+/* v246: ca 4 track du cach luyen — khong con ghi chu thieu; giu object +
+   code render ghi chu cho khoi vo. */
 var LISTEN_HUB_NOTE = {
   en: "",
-  zh: "Shadowing 10 bước chưa có — đang chờ chuyển khung Shadowing 10 bước sang tiếng Trung.", /* v139 (M7): hang video ZH nay mo zh-e10, khong mo VOA nua */
-  tc: "Shadowing 10 bước và Nghe thụ động — video chưa có ở track này (đã có Nghe thụ động — Podcast qua video tc-e5).",
-  tp: "Shadowing 10 bước và Nghe thụ động — video chưa có ở track này (đã có Nghe thụ động — Podcast qua video tp-e10)."
+  zh: "",
+  tc: "",
+  tp: ""
 };
 function listenHubHTML(track) {
   var rows = LISTEN_HUB_ROWS[track] || LISTEN_HUB_ROWS.en;
@@ -20166,11 +20198,19 @@ function listenHubGo(track, key) {
     return;
   }
   if (key === "passive") {
-    var dts = $$("#app details");
-    for (var d = 0; d < dts.length; d++) {
-      var sm = dts[d].querySelector("summary");
-      if (sm && sm.textContent.indexOf("Luyện nghe và đọc HSK1") === 0) { dts[d].open = true; listenHubScrollTo(dts[d]); return; }
+    if (track === "zh") {
+      var dts = $$("#app details");
+      for (var d = 0; d < dts.length; d++) {
+        var sm = dts[d].querySelector("summary");
+        if (sm && sm.textContent.indexOf("Luyện nghe và đọc HSK1") === 0) { dts[d].open = true; listenHubScrollTo(dts[d]); return; }
+      }
+      toast("Chưa có mục nghe thụ động của track này.");
+      return;
     }
+    var pvId = { en: "passiveVideoEn", tc: "passiveVideoTc", tp: "passiveVideoTp" }[track];
+    var pvEl = pvId ? document.getElementById(pvId) : null;
+    if (pvEl) { pvEl.open = true; listenHubScrollTo(pvEl); return; }
+    toast("Chưa có mục nghe thụ động của track này.");
     return;
   }
   lessonStart = Date.now(); runWrong = []; runFirstTry = {};
@@ -20194,14 +20234,34 @@ function listenHubGo(track, key) {
     }
     return;
   }
-  /* v126: ZH mo Nghe chep / Shadowing / Podcast cua video zh-e10 co phu de that. v234: mo rong cho TC (tc-e5) + TP (tp-e10) — videoLinesEnsure dung chung moi key VIDEO_LINES. */
+  /* v246: TP mo Nghe chep / Shadowing Xem-Luyen tren TP_LISTEN (bai dau chua xong
+     theo skillDone dictationTp:/listenLongTp: — khong mo video tp-e10 nua; video
+     tp-e10 van mo duoc qua nut bai tap cua chinh video do + hang "video").
+     ZH/TC giu videoLinesEnsure (zh-e10/tc-e5); podcast TP van qua video tp-e10. */
   if ((track === "zh" || track === "tc" || track === "tp") && (key === "dict" || key === "shadowView" || key === "podcast")) {
+    if (track === "tp" && key !== "podcast") {
+      if (key === "dict") openLesson({ type: "dictation", idx: tpFirstUndone("dictationTp:"), src: "tpListen" });
+      else openLesson({ type: "skillListenLong", idx: tpFirstUndone("listenLongTp:"), src: "tpListen", shadow: true, shadowMode: "view", shadowIdx: 0, shadowTurn: "listen" });
+      return;
+    }
     var vk2 = (typeof LISTEN_VIDEO_KEY !== "undefined") ? LISTEN_VIDEO_KEY[track] : null;
     var zi = (vk2 && typeof videoLinesEnsure === "function") ? videoLinesEnsure(vk2) : null;
     if (!zi) { toast("Chưa có phụ đề thật của video track này nên chưa mở được bài tập."); return; }
     if (key === "dict") openLesson({ type: "dictation", idx: zi.listen });
     else if (key === "shadowView") openLesson({ type: "skillSpeak", idx: zi.speak });
     else openLesson({ type: "podcast", idx: zi.speak });
+    return;
+  }
+  /* v246: Shadowing 10 buoc cho zh/tc/tp — zh/tc qua videoLinesEnsure, tp qua TP_LISTEN. */
+  if (key === "shadowSteps" && (track === "zh" || track === "tc" || track === "tp")) {
+    if (track === "tp") {
+      openLesson({ type: "skillListenLong", idx: tpFirstUndone("listenLongTp:"), src: "tpListen", shadow: true, shadowMode: "steps", shadowStep: 1, shadowStepsDone: {}, shadowWeak: [], shadowStepIdx: 0, shadowTurn: "listen", shadowRecUrl: "", shadowStepsFinished: false });
+    } else {
+      var vk3 = (typeof LISTEN_VIDEO_KEY !== "undefined") ? LISTEN_VIDEO_KEY[track] : null;
+      var zi3 = (vk3 && typeof videoLinesEnsure === "function") ? videoLinesEnsure(vk3) : null;
+      if (!zi3) { toast("Chưa có phụ đề thật của video track này nên chưa mở được bài tập."); return; }
+      openLesson({ type: "skillListenLong", idx: zi3.listen, shadow: true, shadowMode: "steps", shadowStep: 1, shadowStepsDone: {}, shadowWeak: [], shadowStepIdx: 0, shadowTurn: "listen", shadowRecUrl: "", shadowStepsFinished: false });
+    }
     return;
   }
   if (track !== "en") return;
@@ -20228,15 +20288,15 @@ function listenMethodsHTML108(l, isLong) {
 }
 function listenMethodsOpen108(l, isLong, mode) {
   if (mode === "shadow") {
-    if (l.type === "dictation") { openLesson({ type: "skillListenLong", idx: l.idx, shadow: true, shadowMode: "steps", shadowStep: 1, shadowStepIdx: 0, shadowStepsDone: {}, shadowWeak: [], shadowRepeats: 0, shadowTurn: "listen" }); return; }
+    if (l.type === "dictation") { openLesson({ type: "skillListenLong", idx: l.idx, src: l.src, shadow: true, shadowMode: "steps", shadowStep: 1, shadowStepIdx: 0, shadowStepsDone: {}, shadowWeak: [], shadowRepeats: 0, shadowTurn: "listen" }); return; }
     l.shadow = true; l.shadowMode = "steps";
     if (!l.shadowStep) l.shadowStep = 1;
     if (!l.shadowStepsDone) l.shadowStepsDone = {};
     if (!l.shadowWeak) l.shadowWeak = [];
     l.shadowStepIdx = 0; l.shadowTurn = "listen"; l.shadowRecUrl = ""; l.shadowStepsFinished = false; render(); return;
   }
-  if (mode === "dict" && isLong) { openLesson({ type: "dictation", idx: l.idx }); return; }
-  if (mode === "again") { var item = isLong ? CONTENT.listeningPlus[l.idx] : CONTENT.listening[l.idx]; if (item) speak(item.text); return; }
+  if (mode === "dict" && isLong) { openLesson({ type: "dictation", idx: l.idx, src: l.src }); return; }
+  if (mode === "again") { var item = isLong ? listenItemFor(l) : CONTENT.listening[l.idx]; if (item) speakAuto(item.text); return; }
   if (mode === "review") { backFromLesson(); go("review"); return; }
 }
 function wireListenMethods108(app, l, isLong) {
@@ -20294,11 +20354,12 @@ function renderShadowListen(app, l, item, isLong) {
   var mode = l.shadowMode || "view";
   var showIpa = l.shadowShowIpa !== false, showVi = !!l.shadowShowVi;
   var words = sent.split(" ");
-  var wordBtns = words.map(function (w, i) {
+  var isEnSent = shadowIsEn(sent);
+  var wordBtns = isEnSent ? words.map(function (w, i) {
     var ipa = wordIpaOf(w);
     return '<button class="btn" data-sw="' + i + '">' + esc(w) + '</button>';
-  }).join(" ");
-  var ipaLine = l.shadowWordIpa ? '<p id="shadowIpaLine"><b>' + esc(l.shadowWord) + '</b>: ' + esc(l.shadowWordIpa) + '</p>' : '<p class="mut" id="shadowIpaLine"></p>';
+  }).join(" ") : esc(sent);
+  var ipaLine = !isEnSent ? "" : (l.shadowWordIpa ? '<p id="shadowIpaLine"><b>' + esc(l.shadowWord) + '</b>: ' + esc(l.shadowWordIpa) + '</p>' : '<p class="mut" id="shadowIpaLine"></p>');
   var viLine = '';
   var turnLine = "";
   if (mode === "practice" && l.shadowTurn === "user") {
@@ -20311,7 +20372,7 @@ function renderShadowListen(app, l, item, isLong) {
   }
   app.innerHTML = skillHead("Shadowing — " + item.topic, (isLong ? "Nghe dài" : "Nghe ngắn") + " · Chế độ " + (mode === "view" ? "Xem" : "Luyện") + " · Câu " + (si + 1) + "/" + total)
     + '<div class="qblock"><p><b>Câu ' + (si + 1) + '/' + total + ':</b></p><p>' + wordBtns + '</p>' + ipaLine + viLine + listenVoiceNoteHTML()
-    + '<p><label><input type="checkbox" id="shIpa"' + (showIpa ? ' checked' : '') + '> Hiện phiên âm khi bấm từ</label></p>'
+    + (isEnSent ? '<p><label><input type="checkbox" id="shIpa"' + (showIpa ? ' checked' : '') + '> Hiện phiên âm khi bấm từ</label></p>' : '')
     + '<div class="row" style="margin-top:8px"><button class="btn" id="shPlay">🔊 Nghe câu mẫu</button>' + (si > 0 ? '<button class="btn" id="shPrev">← Câu trước</button>' : '') + (si + 1 < total ? '<button class="btn btn-primary" id="shNext">Câu tiếp theo →</button>' : '<button class="btn btn-primary" id="shDone">Xong Shadowing →</button>') + '</div>'
     + '<div class="row"><button class="btn" id="shModeView">👀 Xem</button><button class="btn" id="shModePractice">🎤 Luyện (tự dừng sau mỗi câu)</button></div>'
     + (mode === "practice" && l.shadowTurn !== "user" ? '<p class="mut">Nếu máy không đọc được giọng mẫu thì bấm luôn, không cần chờ hết đoạn.</p><div class="row" style="margin-top:8px"><button class="btn btn-primary" id="shToUser">Đã nghe xong, sang phần nhại lại →</button></div>' : '') /* v112b L2: cung goc — turn chi doi khi callback speak() chay */
@@ -20327,12 +20388,12 @@ function renderShadowListen(app, l, item, isLong) {
       render();
     };
   });
-  $("#shIpa").onchange = function () { l.shadowShowIpa = $("#shIpa").checked; render(); };
+  var shIpaBox = $("#shIpa"); if (shIpaBox) shIpaBox.onchange = function () { l.shadowShowIpa = $("#shIpa").checked; render(); };
   $("#shModeView").onclick = function () { l.shadowMode = "view"; l.shadowTurn = "listen"; render(); };
   $("#shModePractice").onclick = function () { l.shadowMode = "practice"; l.shadowTurn = "listen"; render(); };
   $("#shPlay").onclick = function () {
-    if (mode === "practice") speak(sent, 1, function () { l.shadowTurn = "user"; render(); });
-    else speak(sent, 1);
+    if (mode === "practice") speakAuto(sent, 1, function () { l.shadowTurn = "user"; render(); });
+    else speakAuto(sent, 1);
   };
   var stu2 = $("#shToUser"); if (stu2) stu2.onclick = function () { l.shadowTurn = "user"; render(); };
   var pv = $("#shPrev"); if (pv) pv.onclick = function () { l.shadowIdx = Math.max(0, si - 1); l.shadowTurn = "listen"; l.shadowRecUrl = ""; render(); };
@@ -20362,16 +20423,16 @@ function renderShadowListen(app, l, item, isLong) {
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SR) { l.shadowSrText = "Trình duyệt này không hỗ trợ nhận giọng nói — hãy mở bằng Chrome hoặc Edge, hoặc tự nghe lại bản ghi để đánh giá."; render(); return; }
       try {
-        var r2 = new SR(); r2.lang = "en-GB"; r2.interimResults = false; r2.maxAlternatives = 1;
+        var r2 = new SR(); r2.lang = shadowSrLang(sent); r2.interimResults = false; r2.maxAlternatives = 1;
         r2.onresult = function (ev) { var tx = ""; try { tx = ev.results[0][0].transcript || ""; } catch (e) {} l.shadowSrText = gameNormSent(tx) === gameNormSent(sent) ? "Máy nghe khớp câu mẫu (ước lượng): “" + tx + "” — tốt lắm, đây chỉ là so khớp đơn giản, không phải điểm chuẩn." : "Máy nghe được: “" + tx + "” — chưa khớp hẳn câu mẫu. Nghe lại bản ghi của bạn và tự đánh giá thêm."; render(); };
         r2.onerror = function () { l.shadowSrText = "Không nghe được — hãy thử lại."; render(); };
         r2.start();
       } catch (e) { l.shadowSrText = "Không mở được nhận giọng nói trên máy này."; render(); }
     };
     var gd = $("#shGood");
-    if (gd) gd.onclick = function () { srsEnqueueSentence("shadow", (isLong ? "long:" : "short:") + l.idx, si, sent, sents); if (si + 1 < total) { l.shadowIdx = si + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; } else { l.shadowFinished = true; } render(); };
+    if (gd) gd.onclick = function () { srsEnqueueSentence("shadow", shadowSrsLessonId(l, isLong), si, sent, sents); if (si + 1 < total) { l.shadowIdx = si + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; } else { l.shadowFinished = true; } render(); };
     var wk = $("#shWeak");
-    if (wk) wk.onclick = function () { recordQuizError("shadow" + (isLong ? "Long" : "") + ":" + l.idx, si, { q: "Shadowing: " + sent, o: [sent], a: 0, why: "Câu này bạn tự đánh giá là cần luyện thêm trong bài " + item.topic + "." }); if (si + 1 < total) { l.shadowIdx = si + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; } else { l.shadowFinished = true; } saveState(); render(); };
+    if (wk) wk.onclick = function () { recordQuizError(shadowErrLessonId(l, isLong), si, { q: "Shadowing: " + sent, o: [sent], a: 0, why: "Câu này bạn tự đánh giá là cần luyện thêm trong bài " + item.topic + "." }); if (si + 1 < total) { l.shadowIdx = si + 1; l.shadowTurn = "listen"; l.shadowRecUrl = ""; } else { l.shadowFinished = true; } saveState(); render(); };
   }
   if (l.shadowFinished) {
     logLessonMinutes(l); /* v106d Loi 2: ghi phut TRUOC khi ve man tong ket — neu ghi sau, day "Hom nay" trong man tong ket + dau bai doc so cu, cot phai doc so moi, lech nhau 1 phut */
@@ -31132,6 +31193,9 @@ function viewPracticeTc(app) {
   html += vocabGroupsHTML(TC_STAGES, tcStepBtnHTML, tcStepStatus, tcStepMeta, "tcVocabSearch", "tcVocabGroups", "Từ vựng công sở", "tc");
   html += '<section class="card"><h3>Ngữ pháp trọng tâm (' + TC_GRAMMAR.length + ' trạm)</h3><div class="row">' + TC_GRAMMAR.map(function (g, i) { return tcStepBtnHTML("g" + i); }).join("") + '</div></section>';
   html += listenHubHTML("tc");
+  /* v246 WB: Nghe thụ động — video (mẫu ZH HSK1): danh sách lấy từ kho VIDEO_NEW kind giaitri đã kiểm chứng của track. */
+  html += '<details id="passiveVideoTc"><summary><b>Nghe thụ động — video giải trí TOEIC (5 video)</b></summary><div class="qblock"><p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Trong 5 video, video “How to offer help — Hội thoại công sở” đã có phụ đề thật — muốn làm bài tập (nghe chép, Shadowing…) thì mở video đó ở mục “Video mới”; 4 video còn lại chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("tc").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
+
   html += pronDiagEntryHTML("tc");
   html += pronWeakHTML("tc"); /* v119b */
   html += specTutorGroupHTML("tc"); /* v129: nhom Tro giang AI nhu EN */
@@ -31197,6 +31261,7 @@ function viewPracticeTc(app) {
       else if (h3.indexOf("Ngữ pháp") === 0) put(G2, el);
       else if (id === "listenVideoRow") put(G3, el);
       else if (id === "listenHubCard") put(G3, el);
+      else if (id === "passiveVideoTc") put(G3, el); /* v246 WB: Nghe thụ động — video, ngay sau hub nghe */
       else if (id === "tcPronDiagCard") put(G3, el);
       else if (id === "tcPronWeakCard") put(G3, el); /* v119b */
       else if (id === "tcPronAreaCard") put(G3, el); /* v123 */
@@ -32285,6 +32350,9 @@ function viewPracticeTp(app) {
   html += '<section class="card"><h3>Ngữ pháp · Kính ngữ — 존댓말 (' + TP_GRAMMAR.filter(function (g) { return g.cat === "honorific"; }).length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return g.cat === "honorific" ? tpStepBtnHTML("g" + i) : ""; }).join("") + '</div></section>';
   html += '<section class="card"><h3>Ngữ pháp · Thành ngữ Hàn (' + TP_GRAMMAR.filter(function (g) { return g.cat === "idiom"; }).length + ' trạm)</h3><div class="row">' + TP_GRAMMAR.map(function (g, i) { return g.cat === "idiom" ? tpStepBtnHTML("g" + i) : ""; }).join("") + '</div></section>';
   html += listenHubHTML("tp");
+  /* v246 WB: Nghe thụ động — video (mẫu ZH HSK1): danh sách lấy từ kho VIDEO_NEW kind giaitri đã kiểm chứng của track. */
+  html += '<details id="passiveVideoTp"><summary><b>Nghe thụ động — video giải trí TOPIK (10 video)</b></summary><div class="qblock"><p>Nghe thụ động — chỉ nghe và xem cho vui, không có trắc nghiệm, không chấm điểm. Mỗi video có nút phát — bấm để xem. Đây là danh sách nghe thụ động lấy từ kho video đã kiểm chứng của track (các video này cũng có trong mục “Video mới”). Trong 10 video, video “Gọi điện rủ đi ăn thịt nướng — Hội thoại tiếng Hàn” đã có phụ đề thật — muốn làm bài tập (nghe chép, Shadowing…) thì mở video đó ở mục “Video mới”; 9 video còn lại chưa có phụ đề thật dùng được nên chỉ xem, chưa có bài tập.</p>' + videoNewList("tp").filter(function (v) { return v.kind === "giaitri"; }).map(function (v) { return '<div class="sumcard"><p><b>' + esc(v.title) + '</b> (' + esc(v.channel) + ')</p>' + vidLazyHTML(v) + '<p class="mut">' + esc(v.note) + '</p></div>'; }).join("") + '</div></details>';
+
   html += pronDiagEntryHTML("tp");
   html += pronWeakHTML("tp"); /* v119b */
   html += specTutorGroupHTML("tp"); /* v129: nhom Tro giang AI nhu EN */
@@ -32358,6 +32426,7 @@ function viewPracticeTp(app) {
       else if (h3.indexOf("Ngữ pháp") === 0) put(G2, el);
       else if (id === "listenVideoRow") put(G3, el);
       else if (id === "listenHubCard") put(G3, el);
+      else if (id === "passiveVideoTp") put(G3, el); /* v246 WB: Nghe thụ động — video, ngay sau hub nghe */
       else if (id === "tpPronDiagCard") put(G3, el);
       else if (id === "tpPronWeakCard") put(G3, el); /* v119b */
       else if (id === "tpPronAreaCard") put(G3, el); /* v123 */
