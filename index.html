@@ -536,7 +536,7 @@ function phDescFull(p) {
 }
 /* ---------- Store: một nguồn số liệu duy nhất ---------- */
 var LS_NEW = "ielts_rebuild_v1", LS_OLD = "ielts_standalone_v1";
-function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, pronDiagInviteDismissed: {}, gramRuleOpen: {}, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", adaptiveDone: {}, earDisc: {}, onboardingProfile: null, onboardingDone: false, myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
+function freshState() { return { progress: {}, cards: {}, hard: {}, xp: 0, checkin: {}, studyLog: {}, savedWords: {}, goal: 30, pos: {}, skipped: [], phDone: {}, phSkipped: [], pronDiag: {}, zhPronDone: {}, zhPronSkipped: [], zhPronSpeak: {}, zhPronDiff: {}, tpPronDone: {}, tpPronSkipped: [], tpPronSpeak: {}, tpPronDiff: {}, vocabSkipped: [], wordPron: {}, pronSrs: {}, chatStars: [], chatReports: [], chatVoicePrefs: {}, testDone: false, chapterTestDone: {}, milestoneDone: {}, entryPlaced: null, entrySkipped: false, pronDiagInviteDismissed: {}, gramRuleOpen: {}, xpClaimed: {}, track: "en", trackChosen: false, authSkipped: false, zhPos: {}, zhDone: {}, zhHard: {}, zhPhDone: {}, zhPhSkipped: [], zhEntrySkipped: false, tcEntryPlaced: null, tcEntrySkipped: false, tpEntryPlaced: null, tpEntrySkipped: false, zhChapterTestDone: {}, zhMockTests: [], zhHskkScores: [], tcDone: {}, tcHard: [], tcMockTests: [], tpDone: {}, tpHard: [], tpMockTests: [], mems: {}, unsure: {}, videoUnknown: {}, plan: null, migrated: false, targetBand: null, pace: "vua", subMode: "dual", personalPath: null, personalExplain: "", adaptiveDone: {}, earDisc: {}, onboardingProfile: null, onboardingDone: false, myWords: [], myWordsPronNext: {}, myLinks: [], vipRequests: [], accountMerge: null, phaseExams: [], mockTests: [], skillDone: {}, writingAttempts: {}, specTutor: {}, mockPending: null, phasePending: null, xpMerge: null, forestMusic: true, freeze: { count: 0, used: [], granted: [] }, push: { enabled: false, time: "20:00", types: { srs: true, path: true, checkin: true }, permission: "default", subscribed: false, serverSynced: false, lastLocalDay: "" } }; }
 function saveState() { try { localStorage.setItem(LS_NEW, JSON.stringify(state)); } catch (e) {} try { if (typeof authState !== "undefined" && authState.user) scheduleSyncPush(); } catch (e2) {} }
 
 /* ---------- BỔ SUNG NỘI DUNG — từ cá nhân nhập tay (v73, Bùi lệnh 08:16 05/11) ----------
@@ -8443,6 +8443,8 @@ function mergeGuestIntoAccount(guest, acc) {
   [acc && acc.zhChapterTestDone, guest && guest.zhChapterTestDone].forEach(function (o) { Object.keys(o || {}).forEach(function (k) { if (o[k]) merged.zhChapterTestDone[k] = true; }); });
   merged.zhMockTests = (guest && guest.zhMockTests) || [];
   ((acc && acc.zhMockTests) || []).forEach(function (m) { if (!merged.zhMockTests.some(function (x) { return x.hsk === m.hsk && x.date === m.date; })) merged.zhMockTests.push(m); });
+  merged.zhHskkScores = (guest && guest.zhHskkScores) || [];
+  ((acc && acc.zhHskkScores) || []).forEach(function (m) { if (!merged.zhHskkScores.some(function (x) { return x.level === m.level && x.date === m.date; })) merged.zhHskkScores.push(m); });
   merged.tcDone = Object.assign({}, (guest && guest.tcDone) || {}, (acc && acc.tcDone) || {});
   merged.tcHard = (guest && guest.tcHard) || [];
   ((acc && acc.tcHard) || []).forEach(function (h) { if (!merged.tcHard.some(function (x) { return x.step === h.step && x.q === h.q; })) merged.tcHard.push(h); });
@@ -8570,6 +8572,7 @@ function syncPull(uid) {
           else if (k === "tpEntryPlaced") acc.tpEntryPlaced = r.state || null;
           else if (k === "zhChapterTestDone") acc.zhChapterTestDone = r.state || {};
           else if (k === "zhMockTests") acc.zhMockTests = r.state || [];
+          else if (k === "zhHskkScores") acc.zhHskkScores = r.state || [];
           else if (k === "tcDone") acc.tcDone = r.state || {};
           else if (k === "tcHard") acc.tcHard = r.state || [];
           else if (k === "tcMockTests") acc.tcMockTests = r.state || [];
@@ -26756,6 +26759,8 @@ function zhSystemEHTML() {
     + '<table><tr><th>Chặng</th><th>Sách cũ (tích lũy)</th><th>Hệ E (tích lũy)</th></tr>' + rows + '<tr><td>Chặng 7–9 (hệ E)</td><td>— (ngoài bộ 6 cấp)</td><td>11000</td></tr></table></details>';
 }
 function zhHskkHTML() {
+  var prevScores = (state.zhHskkScores || []);
+  var prevTxt = prevScores.length ? '<p class="mut">Đã lưu trước đây: ' + prevScores.map(function (m) { return (m.level === "elem" ? "Sơ cấp" : m.level === "inter" ? "Trung cấp" : "Cao cấp") + " " + m.date + " — " + m.score + "/100" + (m.pass ? " (Đạt)" : " (Chưa đạt)"); }).join(" · ") + '</p>' : "";
   return '<section class="card" id="zhHskkCard"><h3>Luyện HSKK — thi nói riêng</h3>'
     + '<p class="mut">HSKK là bài thi nói riêng, thi bằng ghi âm, gồm 3 cấp: Sơ cấp, Trung cấp, Cao cấp. Web giữ mục này riêng, không gộp nói vào đề từng cấp.</p>' /* v170 FIX (13/11): khoi phuc cau 'khong gop noi' bi mat khi gap the V12 — y v117 */
     + '<details><summary><b>Xem cấu trúc từng cấp HSKK</b></summary>'
@@ -26765,7 +26770,8 @@ function zhHskkHTML() {
     + '<p class="mut">Phần mô tả tình huống ở Trung cấp là dạng chuyển thể: đề thật dùng tranh, web dùng đoạn mô tả tình huống bằng chữ thay cho tranh.</p>'
     + '<p class="mut">Ghi chú: HSK 3.0 ra mắt toàn cầu ngày 13/12/2026 — sau mốc này cần kiểm tra lại cấu trúc đề và HSKK.</p></details>'
     + '<div class="row"><button class="btn" id="zhHskkBtn">Luyện HSKK Sơ cấp (27 câu, đủ 3 phần)</button><button class="btn" id="zhHskkBtnInter">Luyện HSKK Trung cấp (14 câu, đủ 3 phần)</button><button class="btn" id="zhHskkBtnAdv">Luyện HSKK Cao cấp (6 câu chính thức, đủ 3 phần + luyện thêm)</button></div>'
-    + '<p class="mut">Bài luyện này là tự luyện nghe–nhắc lại — đọc to câu mẫu — máy chỉ kiểm tra có nghe ra không; chấm nói AI sâu sẽ có ở đợt sau.</p></section>';
+    + prevTxt
+    + '<p class="mut">Chấm điểm ước lượng thang 0–100 (đậu từ 60): phần nhắc lại/đọc to câu mẫu tính theo số mục máy nghe ra đúng, phần trả lời mở tự chấm theo rubric 3 tiêu chí; máy chỉ kiểm tra có nghe ra không, chưa phải điểm từng âm. AI chấm sâu 4 tiêu chí sẽ có ở đợt sau.</p></section>';
 }
 function wireZhMap(scope) {
   (scope || document).querySelectorAll("[data-zhph]").forEach(function (b) { b.onclick = function () {
@@ -29446,7 +29452,8 @@ function renderZhMock(app, l) {
 
 /* DOT 18 HSKK (31/10/2026): luyen theo dung phan cua de chinh thuc, giu nguyen hanh vi cu:
    nut "Muc tiep theo" van khoa cho toi khi hoc vien bam Nghe cua chinh muc nay (C6b);
-   done key hskk:elem/inter/adv khong doi; bai luyen chua cham diem. */
+   done key hskk:elem/inter/adv khong doi; v250: cham diem uoc luong (SR + rubric
+   tu cham — xem hskkEstimateScore), AI cham sau VIP de dot sau. */
 /* v217 (2): DONG HO THI NOI theo giay cho TC/TP/HSKK (dung chung ca 3 bai).
    Khac examTimer (tinh theo phut + Date.now): dem lui theo so tick 1 giay
    nen probe duoc bang fake timer; het gio goi onTimeout. Khoa key chong
@@ -29523,6 +29530,134 @@ function speakSummaryHTML(l, storeKey, micFlags, openCount, openLabel, scaleNote
     + '<p class="mut">Web KHÔNG tính ra điểm thang thi thật — kết quả trên chỉ đếm số mục máy nghe ra, chỉ để tham khảo, không phải điểm thi.</p>';
   return h;
 }
+/* ============ v250 — CHAM DIEM UOC LUONG HSKK (SR + rubric tu cham) ============
+   Thang chinh thuc HSKK: 0-100, dau tu 60, ca 3 cap (da doi chieu nguon chinh
+   thuc chinesetest.cn qua graphchinese/uv.es/thepurelanguage/study4).
+   Ti trong tung phan KHONG duoc cong bo chinh thuc (chi co 1 trang luyen thi
+   VN ghi So cap 30/30/40 — nguon thu ba, khong dung lam chuan) nen diem uoc
+   luong cua web tinh moi phan bang nhau (1/3 tong), ghi ro trong man hinh.
+   SR khop tuyet doi (pronTier1Score) CHI hop le voi nhiem vu doc lai nguyen
+   van (nhac lai cau, doc to doan van). Cau tra loi tu do — P2 nghe-tra loi
+   (dap an mau chi la mau, hoc vien duoc tra loi khac dung y), P3 cau hoi,
+   P2 mo ta tinh huong, P1 Cao cap tom tat doan van bang loi minh — may KHONG
+   cham duoc bang SR, nen tu cham theo rubric 3 tieu chi o man ket thuc.
+   (Truoc v250 cac muc nay van bi dem vao micTotal va hien "chua khop" du
+   tra loi dung khac mau — da sua: zhHskkMicRef chi tra mic cho muc doc lai
+   nguyen van.) Diem tong = trung binh 3 phan chinh thuc x 100, lam tron;
+   muc luyen them Cao cap khong tinh vao tong. AI cham sau VIP (mode
+   "speaking", mau v104/v237/v238) chua co o v250 — can ghi am ban ghi SR cho
+   cau tra loi mo + goi AI tung muc, de v251 cung viec #14. */
+function hskkScoreKind(entry) {
+  var k = ((entry || {}).it || {}).kind || "";
+  if (k === "answer" || k === "question" || k === "describe" || k === "passage") return "open";
+  return "mic";
+}
+function hskkCritLabel(c) {
+  if (c === "idea") return "Nói đủ ý chính theo bài mẫu";
+  if (c === "time") return "Nói đủ thời gian yêu cầu";
+  return "Phát âm rõ, người nghe hiểu được";
+}
+function hskkEstimateScore(lv, flat, l) {
+  flat = flat || zhHskkFlat(lv);
+  l = l || {};
+  var t1 = l.hskkT1 || {}, self = l.hskkSelf || {};
+  var parts = { 1: { mic: 0, micOk: 0, open: 0, openPts: 0, openMax: 0, score: null }, 2: { mic: 0, micOk: 0, open: 0, openPts: 0, openMax: 0, score: null }, 3: { mic: 0, micOk: 0, open: 0, openPts: 0, openMax: 0, score: null } };
+  var extra = { mic: 0, micOk: 0 };
+  flat.forEach(function (e, idx) {
+    var kind = hskkScoreKind(e);
+    if (!e.official) { if (kind === "mic") { extra.mic++; if (t1[idx] && t1[idx].tried && t1[idx].ok) extra.micOk++; } return; }
+    var p = parts[zhHskkPartNo(e)];
+    if (!p) return;
+    if (kind === "mic") { p.mic++; if (t1[idx] && t1[idx].tried && t1[idx].ok) p.micOk++; }
+    else { p.open++; var s = self[idx] || {}, got = 0; ["idea", "time", "clear"].forEach(function (c) { if (s[c]) got++; }); p.openPts += got; p.openMax += 3; }
+  });
+  var sum = 0, nParts = 0;
+  [1, 2, 3].forEach(function (n) {
+    var p = parts[n], sc = null;
+    if (p.mic && p.open) sc = ((p.micOk / p.mic) + (p.openMax ? p.openPts / p.openMax : 0)) / 2;
+    else if (p.mic) sc = p.micOk / p.mic;
+    else if (p.open) sc = p.openMax ? p.openPts / p.openMax : 0;
+    if (sc != null) { p.score = Math.round(sc * 100); sum += sc; nParts++; }
+  });
+  var total = nParts ? Math.round(sum / nParts * 100) : 0;
+  return { parts: parts, extra: extra, total: total, pass: total >= 60 };
+}
+function hskkEstBoxHTML(est) {
+  var h = '<p style="font-size:20px"><b>Điểm ước lượng HSKK: ' + est.total + '/100</b> — ' + (est.pass ? '<b class="ok">Đạt (từ 60 điểm là đạt)</b>' : '<b class="warn">Chưa đạt (cần từ 60 điểm)</b>') + '</p>'
+    + '<p class="mut">Máy ước lượng, chỉ để tham khảo — không phải điểm thi thật. Điểm từng phần (mỗi phần tính bằng nhau): '
+    + [1, 2, 3].map(function (n) { var s = est.parts[n].score; return "Phần " + n + " " + (s == null ? "—" : s + "/100"); }).join(" · ") + '.</p>';
+  return h;
+}
+function hskkFinishHTML(l, lv, flat, meta, times) {
+  var est = hskkEstimateScore(lv, flat, l);
+  var partLabel = {};
+  flat.forEach(function (e) { var n = zhHskkPartNo(e); if (n && e.official && !partLabel[n]) partLabel[n] = (e.part || "").replace(/^Phần \d+ · /, ""); });
+  var h = '<div class="summarybox"><h2>Bảng điểm ước lượng HSKK — ' + esc(meta.name) + '</h2>';
+  [1, 2, 3].forEach(function (n) {
+    var p = est.parts[n];
+    var line = "<b>Phần " + n + " · " + esc(partLabel[n] || "") + ":</b> ";
+    if (p.mic) line += "máy nghe ra đúng <b>" + p.micOk + "/" + p.mic + " mục (" + Math.round(p.micOk / p.mic * 100) + "%)</b>";
+    if (p.open) line += (p.mic ? " · " : "") + "tự chấm <b>" + p.openPts + "/" + p.openMax + " ô (" + Math.round(p.openPts / p.openMax * 100) + "%)</b>";
+    h += "<p>" + line + "</p>";
+  });
+  if (est.extra.mic) h += '<p class="mut">Bài luyện thêm · Nghe nhắc lại câu: máy nghe ra đúng ' + est.extra.micOk + '/' + est.extra.mic + ' mục — chỉ để luyện, không tính vào điểm ước lượng.</p>';
+  var opens = [];
+  flat.forEach(function (e, idx) { if (e.official && hskkScoreKind(e) === "open") opens.push({ e: e, idx: idx }); });
+  if (opens.length) {
+    h += '<h3>Tự chấm các câu trả lời mở (' + opens.length + ' câu)</h3>'
+      + '<p class="mut">Máy không chấm được câu trả lời mở — bạn tự chấm từng câu theo bài mẫu, tick vào ô nào đúng với bài nói của bạn. Câu chưa tick được tính 0 điểm.</p>';
+    opens.forEach(function (o, n) {
+      var it = o.e.it || {};
+      var s = (l.hskkSelf || {})[o.idx] || {};
+      h += '<div class="qblock"><p><b>Câu mở ' + (n + 1) + ' · ' + esc(o.e.part) + '</b></p>'
+        + (it.sitVi ? '<p><b>Tình huống:</b> ' + esc(it.sitVi) + '</p>' : '')
+        + (it.qhan ? '<p class="mut">Câu hỏi: ' + esc(it.qhan) + '</p>' : '')
+        + (it.topic ? '<p><b>Chủ đề:</b> ' + esc(it.topic) + '</p>' : '')
+        + '<div class="zh-han">' + esc(it.han || "") + '</div><p><b>' + esc(it.pinyin || "") + '</b></p><p class="mut">' + esc(it.vi || "") + '</p>'
+        + (it.guide ? '<p class="mut">' + esc(it.guide) + '</p>' : '')
+        + ["idea", "time", "clear"].map(function (c) {
+          return '<label style="display:block;margin:4px 0"><input type="checkbox" data-hskk-self="' + o.idx + '" data-hskk-crit="' + c + '"' + (s[c] ? ' checked' : '') + '> ' + esc(hskkCritLabel(c)) + '</label>';
+        }).join("")
+        + '</div>';
+    });
+  }
+  h += '<div id="hskkEstBox">' + hskkEstBoxHTML(est) + '</div>';
+  var prev = (state.zhHskkScores || []).filter(function (m) { return m.level === lv; });
+  h += '<div class="row"><button class="btn btn-primary" id="hskkSaveScore">Lưu mốc điểm ước lượng</button></div>'
+    + '<p class="mut" id="hskkSaveNote">' + (prev.length ? 'Đã lưu trước đây: ' + prev.map(function (m) { return m.date + ' — ' + m.score + '/100' + (m.pass ? ' (Đạt)' : ' (Chưa đạt)'); }).join(' · ') : 'Chưa có mốc điểm HSKK ' + esc(meta.name) + ' nào được lưu.') + '</p>'
+    + '<p class="mut">Thang điểm chính thức của HSKK là 0–100, đậu từ 60 điểm. Thời gian thi thật cấp ' + esc(meta.name) + ' khoảng ' + esc(times.total) + '.</p>'
+    + '<p class="mut">Cách tính điểm ước lượng của web: mỗi phần thi tính bằng nhau (1/3 tổng điểm); phần nhắc lại/đọc to tính theo số mục máy nghe ra đúng, phần trả lời mở tính theo rubric tự chấm ở trên. Đề thi thật không công bố tỉ trọng từng phần nên đây chỉ là cách tính của web để tham khảo — điểm thi thật do giám khảo chấm từ bản ghi âm.</p>'
+    + '<p class="mut">AI chấm sâu bài nói (4 tiêu chí) sẽ có ở đợt sau — đợt này điểm ước lượng chỉ gồm máy nghe ra + tự chấm.</p></div>';
+  return h;
+}
+function wireHskkFinish(l, lv, flat, meta) {
+  var boxes = document.querySelectorAll("[data-hskk-self]");
+  for (var bi = 0; bi < boxes.length; bi++) {
+    boxes[bi].onchange = (function (box) {
+      return function () {
+        var idx = parseInt(box.getAttribute("data-hskk-self"), 10);
+        var crit = box.getAttribute("data-hskk-crit");
+        if (!l.hskkSelf) l.hskkSelf = {};
+        if (!l.hskkSelf[idx]) l.hskkSelf[idx] = {};
+        l.hskkSelf[idx][crit] = !!box.checked;
+        var est = hskkEstimateScore(lv, flat, l);
+        var eb = document.getElementById("hskkEstBox");
+        if (eb) eb.innerHTML = hskkEstBoxHTML(est);
+      };
+    })(boxes[bi]);
+  }
+  var sb = document.getElementById("hskkSaveScore");
+  if (sb) sb.onclick = function () {
+    var est = hskkEstimateScore(lv, flat, l);
+    if (!state.zhHskkScores) state.zhHskkScores = [];
+    state.zhHskkScores.push({ level: lv, date: todayStr(), score: est.total, pass: est.pass, parts: { p1: est.parts[1].score, p2: est.parts[2].score, p3: est.parts[3].score } });
+    saveState();
+    sb.textContent = "Đã lưu mốc ✓";
+    sb.disabled = true;
+    var note = document.getElementById("hskkSaveNote");
+    if (note) note.textContent = "Đã lưu mốc điểm ước lượng " + est.total + "/100" + (est.pass ? " (Đạt)" : " (Chưa đạt)") + " — xem lại ở mục Luyện HSKK.";
+  };
+}
 function zhHskkItems(lv) {
   if (lv === "inter") return [
     { part: "Phần 1 · Nghe nhắc lại", items: ZH_HSKK_INTER },
@@ -29583,11 +29718,12 @@ function zhHskkPhases(lv, entry) {
   if (isP3) return [{ id: "prep", label: "Chuẩn bị", secs: 120 }, speak(180)];
   return [listen, speak(null)];
 }
-/* Mic tang 1 chi cham muc doc to/nhac lai mau (han). Cau tra loi mo
-   (question/describe) khong co mic — may khong cham duoc. */
+/* Mic tang 1 chi cham muc doc to/nhac lai NGUYEN VAN (han). Cau tra loi mo
+   (answer/question/describe/passage) khong co mic — SR khop tuyet doi khong
+   cham duoc cau tra loi tu do hay tom tat bang loi minh (v250). */
 function zhHskkMicRef(entry) {
   var it = entry.it || {};
-  if (it.kind === "question" || it.kind === "describe") return "";
+  if (it.kind === "question" || it.kind === "describe" || it.kind === "answer" || it.kind === "passage") return "";
   return it.han || "";
 }
 function zhHskkPartNo(entry) {
@@ -29607,12 +29743,11 @@ function renderZhHskk(app, l) {
     speakTimerStop();
     zhAwardOnce(meta.done);
     l.zhNext = true;
-    var micFlags = flat.map(function (e) { return !!zhHskkMicRef(e); });
-    var openN = flat.filter(function (e) { var k = (e.it || {}).kind; return k === "question" || k === "describe"; }).length;
-    var sum = speakSummaryHTML(l, "hskkT1", micFlags, openN, "Câu trả lời mở", "Thang điểm chính thức của HSKK là 0–100, đậu từ 60 điểm. Thời gian thi thật cấp " + meta.name + " khoảng " + times.total + ".");
+    var sum = hskkFinishHTML(l, lv, flat, meta, times);
     app.innerHTML = lessonHead({ title: "Luyện HSKK " + meta.name, type: "Tiếng Trung · HSKK" }) + finishSummaryHTML("Xong bài luyện HSKK " + meta.name + "!", '<p>Bạn đã luyện ' + flat.length + ' mục trong ' + elapsedText() + '.</p>' + sum + '<p class="mut">HSK 3.0 (thi từ 13/12/2026): phần nói gộp vào bài thi chính từ cấp HSK 3 trở lên — chi tiết cần đối chiếu giáo trình.</p>', "", { adaptive: false }) + zhNextStepHTML();
     wireBack();
-    var rb = $("#btnRedo"); if (rb) rb.onclick = function () { l.i = 0; l.hskkT1 = {}; render(); };
+    wireHskkFinish(l, lv, flat, meta);
+    var rb = $("#btnRedo"); if (rb) rb.onclick = function () { l.i = 0; l.hskkT1 = {}; l.hskkSelf = {}; render(); };
     return;
   }
   var entry = flat[i], it = entry.it;
