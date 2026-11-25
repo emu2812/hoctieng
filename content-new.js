@@ -70068,15 +70068,23 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 "我把书放在桌子上了。(Wǒ bǎ shū fàng zài zhuōzi shang le.) — Tôi đã đặt sách lên bàn rồi.",
 "请把门关上。(Qǐng bǎ mén guān shang.) — Hãy đóng cửa lại.",
 "他把房间打扫干净了。(Tā bǎ fángjiān dǎsǎo gānjìng le.) — Anh ấy đã dọn phòng sạch rồi.",
-"妈妈把衣服洗干净了。(Māma bǎ yīfu xǐ gānjìng le.) — Mẹ đã giặt quần áo sạch rồi."
+"妈妈把衣服洗干净了。(Māma bǎ yīfu xǐ gānjìng le.) — Mẹ đã giặt quần áo sạch rồi.",
+   "同学们再把试卷检查检查。(Tóngxuémen zài bǎ shìjuàn jiǎnchá jiǎnchá.) — Các em kiểm tra lại bài thi một lượt nữa.",
+   "他把学过的生词都忘了。(Tā bǎ xué guò de shēngcí dōu wàng le.) — Anh ấy quên hết từ mới đã học."
 ],
-"speak": "我把书放在桌子上了。请把门关上。他把房间打扫干净了。妈妈把衣服洗干净了。",
-"rule": "把 + đồ vật + động từ + kết quả hoặc phương hướng. Sau động từ phải có thêm thành phần như 上, 干净, 在桌子上 — động từ không đứng trơ một mình.",
+"speak": "我把书放在桌子上了。请把门关上。他把房间打扫干净了。妈妈把衣服洗干净了。同学们再把试卷检查检查。他把学过的生词都忘了。",
+"rule": "Phủ định việc đã qua dùng 没把… (không dùng 不把 cho việc đã xảy ra). 把…给… đưa vật cho ai. 把 + vật + động từ + 得 + mức độ. 把 còn đi với động từ lặp lại (把试卷检查检查 = kiểm tra bài một lượt) và 把 + động từ + 了/着 (他把学过的生词都忘了 = anh ấy quên hết từ đã học). Câu dài thêm thời gian/địa điểm trước 把.",
 "tip": "Hãy nhớ công thức: 把 + cái gì + làm gì + kết quả ra sao.",
 "note": "Nhãn HSK là mức đặt theo chủ đề/trình độ.",
 "quiz": [
 {"q": "Câu nào là câu chữ 把 đúng?", "o": ["我把书放在桌子上了", "我把书放", "我放把书在桌子上", "我书把放在桌子上"], "a": 0, "why": "把 + 书 + 放 + 在桌子上: đồ vật lên trước động từ, sau động từ có phương hướng."},
-{"q": "“请把门关上” nghĩa là gì?", "o": ["Hãy đóng cửa lại", "Hãy mở cửa ra", "Hãy lau cửa đi", "Hãy khóa cửa lại"], "a": 0, "why": "把门关上: đóng cửa lại, 上 chỉ phương hướng đóng vào."}
+{"q": "“请把门关上” nghĩa là gì?", "o": ["Hãy đóng cửa lại", "Hãy mở cửa ra", "Hãy lau cửa đi", "Hãy khóa cửa lại"], "a": 0, "why": "把门关上: đóng cửa lại, 上 chỉ phương hướng đóng vào."},
+   {
+    "q": "“同学们再把试卷检查检查” — 检查检查 nghĩa là gì?",
+    "o": ["Kiểm tra rất kỹ nhiều lần", "Kiểm tra một lượt (động từ lặp lại)", "Không kiểm tra nữa", "Nhờ người khác kiểm tra"],
+    "a": 1,
+    "why": "把 + động từ lặp lại: làm việc đó một lượt."
+   }
 ]
 },
 {
@@ -70742,7 +70750,7 @@ var ZH_S5_NOTE = "Nhãn HSK là mức đặt theo chủ đề/trình độ. Ch�
 ZH_GRAMMAR.push(
 { "id": "s5-chufei", "stage": 5, "title": "除非…否则/不然 — trừ phi… nếu không…", "hook": "“除非你告诉我，否则我不知道” — trừ phi bạn nói cho tôi, nếu không tôi không biết: điều kiện duy nhất.", "examples": [ "除非你告诉我，否则我不知道。(Chúfēi nǐ gàosu wǒ, fǒuzé wǒ bù zhīdào.) — Trừ phi bạn nói cho tôi, nếu không tôi không biết.", "除非努力学习，否则很难通过考试。(Chúfēi nǔlì xuéxí, fǒuzé hěn nán tōngguò kǎoshì.) — Trừ phi học chăm chỉ, nếu không rất khó qua kỳ thi.", "除非下雨，否则我们明天去爬山。(Chúfēi xià yǔ, fǒuzé wǒmen míngtiān qù pá shān.) — Trừ phi trời mưa, nếu không ngày mai chúng tôi đi leo núi.", "除非你早点来，否则就没有座位了。(Chúfēi nǐ zǎo diǎn lái, fǒuzé jiù méiyǒu zuòwèi le.) — Trừ phi bạn đến sớm, nếu không sẽ không còn chỗ ngồi." ,
    "除非你去，不然我不去。(Chúfēi nǐ qù, bùrán wǒ bù qù.) — Trừ phi bạn đi, nếu không tôi không đi.",
-   "除非明天晴天，不然我们不去爬山。(Chúfēi míngtiān qíngtiān, bùrán wǒmen bù qù pá shān.) — Trừ phi ngày mai trời nắng, nếu không chúng tôi không đi leo núi."], "speak": "除非你告诉我，否则我不知道。除非努力学习，否则很难通过考试。除非下雨，否则我们明天去爬山。除非你早点来，否则就没有座位了。", "rule": "除非 nêu điều kiện duy nhất ở vế đầu, 否则 nêu kết quả xấu nếu điều kiện không xảy ra ở vế sau. 不然 cũng nghĩa “nếu không”, khẩu ngữ hơn 否则, dùng thay được cho 否则 sau 除非 (除非你去，不然我不去). Hai chữ đi thành cặp với 除非.", "tip": "Hãy nhớ: 除非 là “trừ phi”, 否则 là “nếu không” — chỉ có một cách duy nhất thì mới dùng 除非.", "note": ZH_S5_NOTE, "quiz": [
+   "除非明天晴天，不然我们不去爬山。(Chúfēi míngtiān qíngtiān, bùrán wǒmen bù qù pá shān.) — Trừ phi ngày mai trời nắng, nếu không chúng tôi không đi leo núi."], "speak": "除非你告诉我，否则我不知道。除非努力学习，否则很难通过考试。除非下雨，否则我们明天去爬山。除非你早点来，否则就没有座位了。除非你去，不然我不去。除非明天晴天，不然我们不去爬山。", "rule": "除非 nêu điều kiện duy nhất ở vế đầu, 否则 nêu kết quả xấu nếu điều kiện không xảy ra ở vế sau. 不然 cũng nghĩa “nếu không”, khẩu ngữ hơn 否则, dùng thay được cho 否则 sau 除非 (除非你去，不然我不去). Hai chữ đi thành cặp với 除非.", "tip": "Hãy nhớ: 除非 là “trừ phi”, 否则 là “nếu không” — chỉ có một cách duy nhất thì mới dùng 除非.", "note": ZH_S5_NOTE, "quiz": [
 { "q": "Câu nào dùng 除非…否则 đúng?", "o": [ "除非你告诉我，否则我不知道。", "除非你告诉我，但是我不知道。", "除非你告诉我，所以我不知道。", "除非你告诉我，可是我不知道。" ], "a": 0, "why": "除非 đi cặp với 否则: trừ phi bạn nói, nếu không tôi không biết." },
 { "q": "Điền vào chỗ trống: 除非努力学习，___ 很难通过考试。", "o": [ "否则", "但是", "所以", "可是" ], "a": 0, "why": "Vế sau là kết quả xấu khi điều kiện không xảy ra, dùng 否则." },
 { "q": "“Trừ phi trời mưa, nếu không ngày mai chúng tôi đi leo núi” viết thế nào?", "o": [ "除非下雨，否则我们明天去爬山。", "除非下雨，但是我们明天去爬山。", "如果下雨，我们明天去爬山。", "虽然下雨，我们明天去爬山。" ], "a": 0, "why": "“Trừ phi… nếu không…” là 除非…否则, không phải 虽然 hay 如果." },
@@ -71596,10 +71604,11 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 "这个房间既便宜又干净。(Zhège fángjiān jì piányi yòu gānjìng.) — Phòng này vừa rẻ vừa sạch.",
 "这件衣服既好看又舒服。(Zhè jiàn yīfu jì hǎokàn yòu shūfu.) — Cái áo này vừa đẹp vừa thoải mái.",
 "他既认真又努力。(Tā jì rènzhēn yòu nǔlì.) — Anh ấy vừa nghiêm túc vừa nỗ lực.",
-"北京的冬天既冷又干。(Běijīng de dōngtiān jì lěng yòu gān.) — Mùa đông Bắc Kinh vừa lạnh vừa khô."
+"北京的冬天既冷又干。(Běijīng de dōngtiān jì lěng yòu gān.) — Mùa đông Bắc Kinh vừa lạnh vừa khô.",
+   "他既是我们的老师，也是我们的朋友。(Tā jì shì wǒmen de lǎoshī, yě shì wǒmen de péngyou.) — Anh ấy vừa là thầy của chúng tôi, vừa là bạn của chúng tôi."
 ],
 "speak": "这个房间既便宜又干净。这件衣服既好看又舒服。他既认真又努力。北京的冬天既冷又干。",
-"rule": "既 + đặc điểm 1 + 又 + đặc điểm 2; hai đặc điểm cùng chiều (cùng tốt hoặc cùng xấu), không dùng mẫu này cho một tốt một xấu. 既 đọc jì (thanh 4), 又 đọc yòu (thanh 4).",
+"rule": "既 + đặc điểm 1 + 又 + đặc điểm 2; hai đặc điểm cùng chiều (cùng tốt hoặc cùng xấu), không dùng mẫu này cho một tốt một xấu. 既…也… là dạng thay thế của 既…又…: 他既是我们的老师，也是我们的朋友 (anh ấy vừa là thầy, vừa là bạn của chúng tôi). 既 đọc jì (thanh 4), 又 đọc yòu (thanh 4).",
 "tip": "Phân biệt: 一边…一边… nói hai VIỆC cùng lúc, 既…又… nói hai ĐẶC ĐIỂM cùng lúc.",
 "note": N4,
 "quiz": [
@@ -71608,7 +71617,13 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
 {"q": "Câu nào dùng 既…又… SAI về nghĩa?", "o": ["他既认真又努力", "这个房间既便宜又干净", "北京的冬天既冷又干", "这件衣服既好看又难看"], "a": 3, "why": "好看 và 难看 trái chiều, không dùng 既…又…."},
 {"q": "既 đọc là gì?", "o": ["jì", "jī", "jǐ", "jí"], "a": 0, "why": "既 là thanh 4: jì."},
 {"q": "“他既认真又努力” — anh ấy thế nào?", "o": ["Vừa nghiêm túc vừa nỗ lực", "Chỉ nghiêm túc", "Chỉ nỗ lực", "Không nghiêm túc"], "a": 0, "why": "既认真又努力 là vừa nghiêm túc vừa nỗ lực."},
-{"q": "Muốn nói hai đặc điểm tốt cùng lúc dùng mẫu nào?", "o": ["既…又…", "一边…一边…", "先…再…", "虽然…但是…"], "a": 0, "why": "Hai đặc điểm dùng 既…又…; hai việc dùng 一边…一边…."}
+{"q": "Muốn nói hai đặc điểm tốt cùng lúc dùng mẫu nào?", "o": ["既…又…", "一边…一边…", "先…再…", "虽然…但是…"], "a": 0, "why": "Hai đặc điểm dùng 既…又…; hai việc dùng 一边…一边…."},
+   {
+    "q": "Điền vào chỗ trống: 他既是我们的老师，___是我们的朋友。",
+    "o": ["又", "也", "还", "就"],
+    "a": 1,
+    "why": "既…也…: vừa là thầy, cũng là bạn."
+   }
 ]
 },
 {
@@ -78185,7 +78200,12 @@ var RB_STAGE_INFO = {
    虽然 sau chu ngu + 却/可是, 不但…而且还, 如果…的话/那么/否则, 被…过, 是…被…的).
    Giu nguyen id/stage/tieu de (ke ca "(nang cao)" cua ba/bei) va note. */
 (function () {
-  var NEW = {"s4-suiran":{"hook":"“虽然他昨天晚上工作到很晚，但是今天早上他还是第一个到办公室的人” — mệt thì mệt, nhưng sáng nay vẫn đến văn phòng sớm nhất: tuy… nhưng… ở chặng này nói mệnh đề dài, có thể đổi 但是 thành 却/可是, hoặc đặt chủ ngữ trước 虽然.","rule":"虽然 có thể đứng đầu câu hoặc sau chủ ngữ (他虽然…). Vế sau dùng 但是/可是/却 đều được, và thường thêm 还是 trước động từ để nhấn mạnh “vẫn”. Mệnh đề dài hơn, có thể có hai ý trái ngược nối nhau.","tip":"Hãy nhớ ba biến thể: 虽然…但是 / 虽然…可是 / 虽然…却 — và 还是 đứng trước động từ để nhấn “vẫn làm”.","speak":"虽然他昨天晚上工作到很晚，但是今天早上他还是第一个到办公室的人。他虽然中文说得不太流利，可是跟中国朋友聊天的时候一点儿也不害怕。虽然这件衣服的价格比去年贵了很多，但是质量比以前好，我还是决定买下来。虽然外面下着大雨，路上很堵，但是他们还是按时到了学校，没有迟到。","examples":["虽然他昨天晚上工作到很晚，但是今天早上他还是第一个到办公室的人。(Suīrán tā zuótiān wǎnshang gōngzuò dào hěn wǎn, dànshì jīntiān zǎoshang tā háishi dì yī gè dào bàngōngshì de rén.) — Tuy tối qua anh ấy làm việc đến rất muộn, nhưng sáng nay anh ấy vẫn là người đầu tiên đến văn phòng.","他虽然中文说得不太流利，可是跟中国朋友聊天的时候一点儿也不害怕。(Tā suīrán Zhōngwén shuō de bù tài liúlì, kěshì gēn Zhōngguó péngyou liáotiān de shíhou yīdiǎnr yě bù hàipà.) — Tuy tiếng Trung của anh ấy nói chưa lưu loát lắm, nhưng khi trò chuyện với bạn Trung Quốc thì chẳng sợ chút nào.","虽然这件衣服的价格比去年贵了很多，但是质量比以前好，我还是决定买下来。(Suīrán zhè jiàn yīfu de jiàgé bǐ qùnián guì le hěn duō, dànshì zhìliàng bǐ yǐqián hǎo, wǒ háishi juédìng mǎi xiàlai.) — Tuy giá chiếc áo này đắt hơn năm ngoái nhiều, nhưng chất lượng tốt hơn trước nên tôi vẫn quyết định mua.","虽然外面下着大雨，路上很堵，但是他们还是按时到了学校，没有迟到。(Suīrán wàimian xià zhe dàyǔ, lùshang hěn dǔ, dànshì tāmen háishi ànshí dào le xuéxiào, méiyǒu chídào.) — Tuy ngoài trời mưa to, đường rất tắc, nhưng họ vẫn đến trường đúng giờ, không muộn."],"quiz":[{"q":"Điền chỗ trống: 他虽然中文说得不太流利，___ 跟中国朋友聊天的时候一点儿也不害怕。","o":["但是","可是","如果","而且"],"a":1,"why":"虽然…可是 cũng là cặp nói hai mặt trái ngược; chủ ngữ 他 đứng trước 虽然."},{"q":"Câu nào dùng 虽然…却 đúng?","o":["虽然下着大雨，他却按时到了学校","虽然下着大雨，他如果按时到了学校","虽然下着大雨，他而且按时到了学校","虽然下着大雨，他因为按时到了学校"],"a":0,"why":"虽然…却: tuy mưa to nhưng anh ấy vẫn đến trường đúng giờ."},{"q":"“虽然这件衣服的价格比去年贵了很多，但是质量比以前好，我还是决定买下来” nghĩa là gì?","o":["Tuy áo đắt hơn năm ngoái nhiều nhưng chất lượng tốt hơn nên tôi vẫn quyết định mua","Vì áo đắt hơn năm ngoái nên tôi không mua nữa","Nếu áo đắt hơn năm ngoái thì tôi sẽ mua","Không những áo đắt mà chất lượng còn tốt"],"a":0,"why":"虽然 = tuy, 但是 = nhưng, 还是 = vẫn: tuy đắt nhưng chất lượng tốt hơn nên vẫn mua."},{"q":"Điền chỗ trống: 虽然外面下着大雨，路上很堵，___ 他们还是按时到了学校。","o":["如果","但是","而且","因为"],"a":1,"why":"虽然 đi với 但是: tuy mưa to, đường tắc, nhưng họ vẫn đến trường đúng giờ."},{"q":"虽然 có thể đứng ở đâu trong câu?","o":["Chỉ đầu câu","Đầu câu hoặc sau chủ ngữ","Chỉ cuối câu","Thay cho động từ"],"a":1,"why":"他虽然… cũng đúng: chủ ngữ đứng trước 虽然."},{"q":"Chọn câu viết đúng mẫu 虽然…但是 với mệnh đề dài:","o":["虽然他昨天晚上工作到很晚，但是今天早上他还是第一个到办公室的人","虽然他昨天晚上工作到很晚，如果今天早上他还是第一个到办公室的人","虽然他昨天晚上工作到很晚，而且今天早上他还是第一个到办公室的人","虽然他昨天晚上工作到很晚，因为今天早上他还是第一个到办公室的人"],"a":0,"why":"虽然…但是 nói hai mặt trái ngược: tuy làm muộn nhưng sáng vẫn đến sớm nhất."}]},"s4-budan":{"hook":"“他不但每天早上跑步锻炼身体，而且还坚持写日记” — không những chạy bộ mỗi sáng mà còn kiên trì viết nhật ký: chặng này nói cụm động từ dài và thêm 还 để nhấn vế sau.","rule":"不但…而且还…: vế sau thêm 还 để nhấn mạnh. Hai vế có thể là cụm động từ dài hoặc hai mệnh đề; điểm sau vẫn mạnh hơn điểm trước.","tip":"Muốn nhấn vế sau thì thêm 还 trước động từ: 不但…而且还….","speak":"他不但每天早上跑步锻炼身体，而且还坚持写日记，记录自己的进步。这家新开的饭馆不但菜做得好吃，价格也不贵，而且服务员的态度还特别好。她不但能用中文流利地介绍自己的家乡，而且能用英文跟外国朋友讨论中国文化。学习一门外语不但需要记住很多单词和语法，而且需要多听多说，在实际交流中慢慢提高。","examples":["他不但每天早上跑步锻炼身体，而且还坚持写日记，记录自己的进步。(Tā bùdàn měitiān zǎoshang pǎobù duànliàn shēntǐ, érqiě hái jiānchí xiě rìjì, jìlù zìjǐ de jìnbù.) — Anh ấy không những mỗi sáng chạy bộ rèn luyện sức khỏe, mà còn kiên trì viết nhật ký, ghi lại tiến bộ của mình.","这家新开的饭馆不但菜做得好吃，价格也不贵，而且服务员的态度还特别好。(Zhè jiā xīn kāi de fànguǎn bùdàn cài zuò de hǎochī, jiàgé yě bù guì, érqiě fúwùyuán de tàidù hái tèbié hǎo.) — Nhà hàng mới mở này không những món ăn ngon, giá không đắt, mà thái độ phục vụ còn đặc biệt tốt.","她不但能用中文流利地介绍自己的家乡，而且能用英文跟外国朋友讨论中国文化。(Tā bùdàn néng yòng Zhōngwén liúlì de jièshào zìjǐ de jiāxiāng, érqiě néng yòng Yīngwén gēn wàiguó péngyou tǎolùn Zhōngguó wénhuà.) — Cô ấy không những có thể dùng tiếng Trung giới thiệu lưu loát quê hương mình, mà còn có thể dùng tiếng Anh thảo luận văn hóa Trung Quốc với bạn nước ngoài.","学习一门外语不但需要记住很多单词和语法，而且需要多听多说，在实际交流中慢慢提高。(Xuéxí yī mén wàiyǔ bùdàn xūyào jìzhu hěn duō dāncí hé yǔfǎ, érqiě xūyào duō tīng duō shuō, zài shíjì jiāoliú zhōng mànmàn tígāo.) — Học một ngoại ngữ không những cần nhớ nhiều từ vựng và ngữ pháp, mà còn cần nghe nhiều nói nhiều, nâng cao dần trong giao tiếp thực tế."],"quiz":[{"q":"Điền chỗ trống: 他不但每天早上跑步锻炼身体，___ 坚持写日记。","o":["而且","而且还","但是","如果"],"a":1,"why":"不但…而且还…: vế sau thêm 还 để nhấn mạnh việc kiên trì viết nhật ký."},{"q":"Câu nào dùng 不但…而且 đúng với cụm dài?","o":["她不但能用中文流利地介绍自己的家乡，而且能用英文跟外国朋友讨论中国文化","她不但能用中文流利地介绍自己的家乡，但是能用英文跟外国朋友讨论中国文化","她不但能用中文流利地介绍自己的家乡，如果能用英文跟外国朋友讨论中国文化","她不但能用中文流利地介绍自己的家乡，因为能用英文跟外国朋友讨论中国文化"],"a":0,"why":"不但…而且 nói hai điểm tốt cùng lúc: giới thiệu bằng tiếng Trung và thảo luận bằng tiếng Anh."},{"q":"“学习一门外语不但需要记住很多单词和语法，而且需要多听多说” nghĩa là gì?","o":["Học ngoại ngữ không những cần nhớ nhiều từ và ngữ pháp mà còn cần nghe nói nhiều","Học ngoại ngữ chỉ cần nhớ từ vựng là đủ","Vì học ngoại ngữ khó nên phải nghe nhiều","Tuy học ngoại ngữ cần nhớ từ nhưng không cần nói"],"a":0,"why":"不但 = không những, 而且 = mà còn: nhớ từ và ngữ pháp, lại còn cần nghe nói nhiều."},{"q":"Điền chỗ trống: 这家饭馆不但菜做得好吃，价格也不贵，___ 服务员的态度还特别好。","o":["如果","而且","但是","因为"],"a":1,"why":"不但…而且: không những món ngon, giá rẻ, mà thái độ phục vụ còn tốt."},{"q":"还 trong 不但…而且还… có tác dụng gì?","o":["Nhấn mạnh vế sau","Phủ định vế trước","Nói điều kiện","Nối hai câu hỏi"],"a":0,"why":"而且还…: 还 nhấn mạnh vế sau mạnh hơn vế trước."},{"q":"Chọn câu viết đúng mẫu 不但…而且还…:","o":["他不但每天早上跑步锻炼身体，而且还坚持写日记，记录自己的进步","他不但每天早上跑步锻炼身体，但是还坚持写日记，记录自己的进步","他不但每天早上跑步锻炼身体，如果还坚持写日记，记录自己的进步","他不但每天早上跑步锻炼身体，因为还坚持写日记，记录自己的进步"],"a":0,"why":"不但…而且还…: không những chạy bộ mà còn kiên trì viết nhật ký."}]},"s4-ruguo":{"hook":"“如果你明天有时间的话，就来我家一起吃晚饭” — nếu… thì… ở chặng này thêm 的话, dùng 那么/否则 và cả câu hỏi điều kiện.","rule":"如果…的话 làm điều kiện mềm hơn (的话 đứng cuối vế điều kiện). Vế sau dùng 就/便/那么 đều được; 否则 = “không thì” đứng đầu vế nói hậu quả xấu. Điều kiện cũng có thể đặt thành câu hỏi.","tip":"的话 đứng cuối vế điều kiện; 否则 đứng đầu vế hậu quả xấu.","speak":"如果你明天有时间的话，就来我家一起吃晚饭，我们可以一边吃一边练习中文。如果已经下雨了，就不要骑自行车去学校了，不然衣服会淋湿，还可能感冒。如果你想把中文说得更流利，那么每天至少要跟别人说半个小时，不要只看书不说话。如果考试的时候遇到不会的题，你会怎么办？先做会的题，还是马上问老师？","examples":["如果你明天有时间的话，就来我家一起吃晚饭，我们可以一边吃一边练习中文。(Rúguǒ nǐ míngtiān yǒu shíjiān de huà, jiù lái wǒ jiā yīqǐ chī wǎnfàn, wǒmen kěyǐ yībiān chī yībiān liànxí Zhōngwén.) — Nếu ngày mai bạn có thời gian thì đến nhà tôi ăn tối cùng nhau, chúng ta vừa ăn vừa luyện tiếng Trung.","如果已经下雨了，就不要骑自行车去学校了，不然衣服会淋湿，还可能感冒。(Rúguǒ yǐjīng xià yǔ le, jiù bùyào qí zìxíngchē qù xuéxiào le, bùrán yīfu huì lín shī, hái kěnéng gǎnmào.) — Nếu đã mưa rồi thì đừng đạp xe đi học nữa, không thì quần áo sẽ ướt, còn có thể bị cảm.","如果你想把中文说得更流利，那么每天至少要跟别人说半个小时，不要只看书不说话。(Rúguǒ nǐ xiǎng bǎ Zhōngwén shuō de gèng liúlì, nàme měitiān zhìshǎo yào gēn biéren shuō bàn gè xiǎoshí, bùyào zhǐ kàn shū bù shuōhuà.) — Nếu bạn muốn nói tiếng Trung lưu loát hơn thì mỗi ngày ít nhất phải nói với người khác nửa tiếng, đừng chỉ đọc sách mà không nói.","如果考试的时候遇到不会的题，你会怎么办？先做会的题，还是马上问老师？(Rúguǒ kǎoshì de shíhou yùdào bù huì de tí, nǐ huì zěnme bàn? Xiān zuò huì de tí, háishi mǎshàng wèn lǎoshī?) — Nếu lúc thi gặp câu không biết làm thì bạn sẽ làm sao? Làm câu biết trước, hay hỏi thầy ngay?"],"quiz":[{"q":"Điền chỗ trống: 如果你明天有时间___，就来我家一起吃晚饭。","o":["的话","的时候","以后","以前"],"a":0,"why":"如果…的话: 的话 đứng cuối vế điều kiện, làm điều kiện mềm hơn."},{"q":"否则 nghĩa là gì?","o":["Không thì","Vì vậy","Tuy nhiên","Không những"],"a":0,"why":"否则 = không thì, dùng để nói hậu quả xấu nếu điều kiện không xảy ra."},{"q":"Câu nào dùng 如果…那么 đúng?","o":["如果你想把中文说得更流利，那么每天至少要跟别人说半个小时","如果你想把中文说得更流利，但是每天至少要跟别人说半个小时","如果你想把中文说得更流利，而且每天至少要跟别人说半个小时","如果你想把中文说得更流利，因为每天至少要跟别人说半个小时"],"a":0,"why":"如果…那么: nếu muốn nói lưu loát hơn thì mỗi ngày phải nói nửa tiếng."},{"q":"Điền chỗ trống: 如果已经下雨了，___ 不要骑自行车去学校了，不然衣服会淋湿。","o":["如果","就","而且","但是"],"a":1,"why":"如果…就: nếu đã mưa rồi thì đừng đạp xe đi học nữa."},{"q":"“如果考试的时候遇到不会的题，你会怎么办？” là loại câu gì?","o":["Câu hỏi điều kiện","Câu phủ định","Câu cảm thán","Câu mệnh lệnh"],"a":0,"why":"如果…怎么办: đặt điều kiện rồi hỏi sẽ làm sao."},{"q":"Chọn câu viết đúng mẫu 如果…就 với điều kiện đã hoàn thành:","o":["如果已经下雨了，就不要骑自行车去学校了","如果已经下雨了，但是不要骑自行车去学校了","如果已经下雨了，而且不要骑自行车去学校了","如果已经下雨了，因为不要骑自行车去学校了"],"a":0,"why":"如果已经…就…: nếu đã mưa rồi thì đừng đạp xe nữa."}]},"s4-ba":{"hook":"“昨天晚上我没把作业做完” — tối qua chưa làm xong bài tập: 把 ở chặng này có phủ định, có 给 người nhận, có bổ ngữ 得 và câu dài có thời gian.","rule":"Phủ định việc đã qua dùng 没把… (không dùng 不把 cho việc đã xảy ra). 把…给… đưa vật cho ai (给 + người sau 把 + vật). 把 + vật + động từ + 得 + mức độ. Câu dài thêm thời gian/địa điểm trước 把.","tip":"Chưa làm xong việc đã qua thì nói 没把…做完; muốn nói “đưa cho ai” thì thêm 给 + người sau 把 + vật.","speak":"昨天晚上我没把作业做完，今天早上只好早点儿起床，抓紧时间补上。请你把这本书给坐在前面的那个同学，他刚才一直在找这本书。老师把这个故事讲得非常生动，全班同学都听得入了迷，连下课铃响了都没注意到。妈妈每天早上都把早饭做好放在桌子上，然后才叫我们起床吃饭。","examples":["昨天晚上我没把作业做完，今天早上只好早点儿起床，抓紧时间补上。(Zuótiān wǎnshang wǒ méi bǎ zuòyè zuò wán, jīntiān zǎoshang zhǐhǎo zǎo diǎnr qǐchuáng, zhuājǐn shíjiān bǔ shang.) — Tối qua tôi chưa làm xong bài tập, sáng nay đành dậy sớm, tranh thủ thời gian làm bù.","请你把这本书给坐在前面的那个同学，他刚才一直在找这本书。(Qǐng nǐ bǎ zhè běn shū gěi zuò zài qiánmian de nà gè tóngxué, tā gāngcái yīzhí zài zhǎo zhè běn shū.) — Nhờ bạn đưa cuốn sách này cho bạn ngồi phía trước, bạn ấy vừa nãy vẫn đang tìm cuốn sách này.","老师把这个故事讲得非常生动，全班同学都听得入了迷，连下课铃响了都没注意到。(Lǎoshī bǎ zhège gùshi jiǎng de fēicháng shēngdòng, quán bān tóngxué dōu tīng de rù le mí, lián xiàkè líng xiǎng le dōu méi zhùyì dào.) — Cô giáo kể câu chuyện này rất sinh động, cả lớp nghe mê mẩn, đến chuông hết giờ reo cũng không để ý.","妈妈每天早上都把早饭做好放在桌子上，然后才叫我们起床吃饭。(Māma měitiān zǎoshang dōu bǎ zǎofàn zuò hǎo fàng zài zhuōzi shang, ránhòu cái jiào wǒmen qǐchuáng chīfàn.) — Mỗi sáng mẹ đều làm xong bữa sáng đặt lên bàn, rồi mới gọi chúng tôi dậy ăn."],"quiz":[{"q":"Điền chỗ trống: 昨天晚上我___把作业做完，今天早上只好早点儿起床。","o":["没","把","在","给"],"a":0,"why":"Phủ định việc đã qua dùng 没把…: tối qua chưa làm xong bài tập."},{"q":"Câu nào dùng 把…给… đúng?","o":["请你把这本书给坐在前面的那个同学","请你把这本书在坐在前面的那个同学","请你给这本书把坐在前面的那个同学","请你把坐在前面的那个同学这本书"],"a":0,"why":"把 + 这本书 + 给 + 同学: đưa sách cho bạn ngồi phía trước."},{"q":"“老师把这个故事讲得非常生动” — 得 ở đây chỉ gì?","o":["Mức độ sinh động của việc kể","Phương hướng của câu chuyện","Thời gian kể chuyện","Người nghe chuyện"],"a":0,"why":"讲得非常生动: 得 + mức độ — kể rất sinh động."},{"q":"Điền chỗ trống: 妈妈每天早上都把早饭做好___桌子上，然后才叫我们起床。","o":["放在","在放","给放","得放"],"a":0,"why":"把早饭做好放在桌子上: làm xong bữa sáng rồi đặt lên bàn."},{"q":"Vì sao câu “我把书放” là sai?","o":["Vì sau động từ thiếu thành phần kết quả hoặc phương hướng","Vì câu thiếu chữ 把","Vì câu thiếu chủ ngữ","Vì câu thiếu đồ vật"],"a":0,"why":"Câu 把: động từ không đứng trơ một mình, phải có thêm như 在桌子上."},{"q":"Câu nào nói việc tối qua CHƯA làm xong bằng 把?","o":["昨天晚上我没把作业做完","昨天晚上我不把作业做完","昨天晚上我把作业没做完","昨天晚上我把没作业做完"],"a":0,"why":"Việc đã qua chưa xong dùng 没把…: tối qua chưa làm xong bài tập."}]},"s4-bei":{"hook":"“他的钱包去年在地铁上被小偷偷过一次” — ví từng bị trộm một lần: 被 ở chặng này có kinh nghiệm 过, có 是…被…的 nói mục đích, có khoảng thời gian và cả cách nói văn nói “bị lừa”.","rule":"被…过… nói kinh nghiệm đã từng bị. 是…被…的 nói mục đích/cách thức (是 trước 被, 的 cuối câu). Sau động từ có thể thêm khoảng thời gian (批评了一个小时). Văn nói dùng 被骗/被偷 nói việc không may.","tip":"Muốn nói “từng bị” thì thêm 过 sau động từ; muốn nói mục đích thì dùng 是…被…的.","speak":"他的钱包去年在地铁上被小偷偷过一次，从那以后他坐车的时候总是特别小心。这封信是被妈妈特意放在桌子上的，怕我早上出门的时候忘记带走。他被老师批评了整整一个小时，出来的时候脸都红了，一句话也不敢说。网上卖的东西太便宜了要小心，很多人就是这样被骗了钱，还不知道找谁去要回来。","examples":["他的钱包去年在地铁上被小偷偷过一次，从那以后他坐车的时候总是特别小心。(Tā de qiánbāo qùnián zài dìtiě shang bèi xiǎotōu tōu guò yī cì, cóng nà yǐhòu tā zuò chē de shíhou zǒngshì tèbié xiǎoxīn.) — Ví của anh ấy năm ngoái trên tàu điện ngầm từng bị trộm lấy một lần, từ đó mỗi khi đi xe anh ấy luôn đặc biệt cẩn thận.","这封信是被妈妈特意放在桌子上的，怕我早上出门的时候忘记带走。(Zhè fēng xìn shì bèi māma tèyì fàng zài zhuōzi shang de, pà wǒ zǎoshang chūmén de shíhou wàngjì dài zǒu.) — Lá thư này là mẹ cố ý đặt lên bàn, sợ sáng tôi ra khỏi nhà quên mang theo.","他被老师批评了整整一个小时，出来的时候脸都红了，一句话也不敢说。(Tā bèi lǎoshī pīpíng le zhěngzhěng yī gè xiǎoshí, chūlai de shíhou liǎn dōu hóng le, yī jù huà yě bù gǎn shuō.) — Anh ấy bị thầy phê bình suốt cả một tiếng, lúc đi ra mặt đỏ bừng, một câu cũng không dám nói.","网上卖的东西太便宜了要小心，很多人就是这样被骗了钱，还不知道找谁去要回来。(Wǎng shang mài de dōngxi tài piányi le yào xiǎoxīn, hěn duō rén jiùshì zhèyàng bèi piàn le qián, hái bù zhīdào zhǎo shéi qù yào huílai.) — Đồ bán trên mạng rẻ quá thì phải cẩn thận, nhiều người cứ thế bị lừa mất tiền, còn không biết tìm ai đòi lại."],"quiz":[{"q":"Điền chỗ trống: 他的钱包去年在地铁上被小偷偷___一次，从那以后他坐车的时候总是特别小心。","o":["过","了","着","的"],"a":0,"why":"被…过… nói kinh nghiệm đã từng bị: ví từng bị trộm một lần."},{"q":"Câu nào dùng 是…被…的 nói mục đích đúng?","o":["这封信是被妈妈特意放在桌子上的","这封信是妈妈特意放在桌子上的被","这封信被是妈妈特意放在桌子上的","这封信妈妈是被特意放在桌子上的"],"a":0,"why":"是…被…的: 是 trước 被, 的 cuối câu — thư là mẹ cố ý đặt lên bàn."},{"q":"“他被老师批评了整整一个小时” — 一个小时 chỉ gì?","o":["Khoảng thời gian bị phê bình","Người phê bình","Lý do bị phê bình","Địa điểm bị phê bình"],"a":0,"why":"批评了一个小时: khoảng thời gian bị phê bình là cả một tiếng."},{"q":"Điền chỗ trống: 网上卖的东西太便宜了要小心，很多人就是这样被___了钱。","o":["骗","偷","拿","找"],"a":0,"why":"被骗了钱: bị lừa mất tiền (cách nói văn nói)."},{"q":"Trong câu chữ 被, đồ vật chịu tác động đứng ở đâu?","o":["Trước chữ 被","Sau chữ 被","Cuối câu","Thay cho động từ"],"a":0,"why":"Đồ vật chịu tác động đứng trước 被, người làm ra việc (nếu có) đứng sau 被."},{"q":"Chọn câu chữ 被 viết đúng với kinh nghiệm:","o":["他的钱包去年在地铁上被小偷偷过一次","他的钱包去年在地铁上被小偷偷了一次过","他的钱包去年在地铁上过被小偷偷了一次","他的钱包去年在地铁上被过小偷偷了一次"],"a":0,"why":"被…偷过一次: từng bị trộm một lần — 过 đứng sau động từ."}]}};
+  var NEW = {"s4-suiran":{"hook":"“虽然他昨天晚上工作到很晚，但是今天早上他还是第一个到办公室的人” — mệt thì mệt, nhưng sáng nay vẫn đến văn phòng sớm nhất: tuy… nhưng… ở chặng này nói mệnh đề dài, có thể đổi 但是 thành 却/可是, hoặc đặt chủ ngữ trước 虽然.","rule":"虽然 có thể đứng đầu câu hoặc sau chủ ngữ (他虽然…). Vế sau dùng 但是/可是/却 đều được, và thường thêm 还是 trước động từ để nhấn mạnh “vẫn”. Mệnh đề dài hơn, có thể có hai ý trái ngược nối nhau.","tip":"Hãy nhớ ba biến thể: 虽然…但是 / 虽然…可是 / 虽然…却 — và 还是 đứng trước động từ để nhấn “vẫn làm”.","speak":"虽然他昨天晚上工作到很晚，但是今天早上他还是第一个到办公室的人。他虽然中文说得不太流利，可是跟中国朋友聊天的时候一点儿也不害怕。虽然这件衣服的价格比去年贵了很多，但是质量比以前好，我还是决定买下来。虽然外面下着大雨，路上很堵，但是他们还是按时到了学校，没有迟到。","examples":["虽然他昨天晚上工作到很晚，但是今天早上他还是第一个到办公室的人。(Suīrán tā zuótiān wǎnshang gōngzuò dào hěn wǎn, dànshì jīntiān zǎoshang tā háishi dì yī gè dào bàngōngshì de rén.) — Tuy tối qua anh ấy làm việc đến rất muộn, nhưng sáng nay anh ấy vẫn là người đầu tiên đến văn phòng.","他虽然中文说得不太流利，可是跟中国朋友聊天的时候一点儿也不害怕。(Tā suīrán Zhōngwén shuō de bù tài liúlì, kěshì gēn Zhōngguó péngyou liáotiān de shíhou yīdiǎnr yě bù hàipà.) — Tuy tiếng Trung của anh ấy nói chưa lưu loát lắm, nhưng khi trò chuyện với bạn Trung Quốc thì chẳng sợ chút nào.","虽然这件衣服的价格比去年贵了很多，但是质量比以前好，我还是决定买下来。(Suīrán zhè jiàn yīfu de jiàgé bǐ qùnián guì le hěn duō, dànshì zhìliàng bǐ yǐqián hǎo, wǒ háishi juédìng mǎi xiàlai.) — Tuy giá chiếc áo này đắt hơn năm ngoái nhiều, nhưng chất lượng tốt hơn trước nên tôi vẫn quyết định mua.","虽然外面下着大雨，路上很堵，但是他们还是按时到了学校，没有迟到。(Suīrán wàimian xià zhe dàyǔ, lùshang hěn dǔ, dànshì tāmen háishi ànshí dào le xuéxiào, méiyǒu chídào.) — Tuy ngoài trời mưa to, đường rất tắc, nhưng họ vẫn đến trường đúng giờ, không muộn."],"quiz":[{"q":"Điền chỗ trống: 他虽然中文说得不太流利，___ 跟中国朋友聊天的时候一点儿也不害怕。","o":["但是","可是","如果","而且"],"a":1,"why":"虽然…可是 cũng là cặp nói hai mặt trái ngược; chủ ngữ 他 đứng trước 虽然."},{"q":"Câu nào dùng 虽然…却 đúng?","o":["虽然下着大雨，他却按时到了学校","虽然下着大雨，他如果按时到了学校","虽然下着大雨，他而且按时到了学校","虽然下着大雨，他因为按时到了学校"],"a":0,"why":"虽然…却: tuy mưa to nhưng anh ấy vẫn đến trường đúng giờ."},{"q":"“虽然这件衣服的价格比去年贵了很多，但是质量比以前好，我还是决定买下来” nghĩa là gì?","o":["Tuy áo đắt hơn năm ngoái nhiều nhưng chất lượng tốt hơn nên tôi vẫn quyết định mua","Vì áo đắt hơn năm ngoái nên tôi không mua nữa","Nếu áo đắt hơn năm ngoái thì tôi sẽ mua","Không những áo đắt mà chất lượng còn tốt"],"a":0,"why":"虽然 = tuy, 但是 = nhưng, 还是 = vẫn: tuy đắt nhưng chất lượng tốt hơn nên vẫn mua."},{"q":"Điền chỗ trống: 虽然外面下着大雨，路上很堵，___ 他们还是按时到了学校。","o":["如果","但是","而且","因为"],"a":1,"why":"虽然 đi với 但是: tuy mưa to, đường tắc, nhưng họ vẫn đến trường đúng giờ."},{"q":"虽然 có thể đứng ở đâu trong câu?","o":["Chỉ đầu câu","Đầu câu hoặc sau chủ ngữ","Chỉ cuối câu","Thay cho động từ"],"a":1,"why":"他虽然… cũng đúng: chủ ngữ đứng trước 虽然."},{"q":"Chọn câu viết đúng mẫu 虽然…但是 với mệnh đề dài:","o":["虽然他昨天晚上工作到很晚，但是今天早上他还是第一个到办公室的人","虽然他昨天晚上工作到很晚，如果今天早上他还是第一个到办公室的人","虽然他昨天晚上工作到很晚，而且今天早上他还是第一个到办公室的人","虽然他昨天晚上工作到很晚，因为今天早上他还是第一个到办公室的人"],"a":0,"why":"虽然…但是 nói hai mặt trái ngược: tuy làm muộn nhưng sáng vẫn đến sớm nhất."}]},"s4-budan":{"hook":"“他不但每天早上跑步锻炼身体，而且还坚持写日记” — không những chạy bộ mỗi sáng mà còn kiên trì viết nhật ký: chặng này nói cụm động từ dài và thêm 还 để nhấn vế sau.","rule":"不但…而且还…: vế sau thêm 还 để nhấn mạnh. Hai vế có thể là cụm động từ dài hoặc hai mệnh đề; điểm sau vẫn mạnh hơn điểm trước.","tip":"Muốn nhấn vế sau thì thêm 还 trước động từ: 不但…而且还….","speak":"他不但每天早上跑步锻炼身体，而且还坚持写日记，记录自己的进步。这家新开的饭馆不但菜做得好吃，价格也不贵，而且服务员的态度还特别好。她不但能用中文流利地介绍自己的家乡，而且能用英文跟外国朋友讨论中国文化。学习一门外语不但需要记住很多单词和语法，而且需要多听多说，在实际交流中慢慢提高。","examples":["他不但每天早上跑步锻炼身体，而且还坚持写日记，记录自己的进步。(Tā bùdàn měitiān zǎoshang pǎobù duànliàn shēntǐ, érqiě hái jiānchí xiě rìjì, jìlù zìjǐ de jìnbù.) — Anh ấy không những mỗi sáng chạy bộ rèn luyện sức khỏe, mà còn kiên trì viết nhật ký, ghi lại tiến bộ của mình.","这家新开的饭馆不但菜做得好吃，价格也不贵，而且服务员的态度还特别好。(Zhè jiā xīn kāi de fànguǎn bùdàn cài zuò de hǎochī, jiàgé yě bù guì, érqiě fúwùyuán de tàidù hái tèbié hǎo.) — Nhà hàng mới mở này không những món ăn ngon, giá không đắt, mà thái độ phục vụ còn đặc biệt tốt.","她不但能用中文流利地介绍自己的家乡，而且能用英文跟外国朋友讨论中国文化。(Tā bùdàn néng yòng Zhōngwén liúlì de jièshào zìjǐ de jiāxiāng, érqiě néng yòng Yīngwén gēn wàiguó péngyou tǎolùn Zhōngguó wénhuà.) — Cô ấy không những có thể dùng tiếng Trung giới thiệu lưu loát quê hương mình, mà còn có thể dùng tiếng Anh thảo luận văn hóa Trung Quốc với bạn nước ngoài.","学习一门外语不但需要记住很多单词和语法，而且需要多听多说，在实际交流中慢慢提高。(Xuéxí yī mén wàiyǔ bùdàn xūyào jìzhu hěn duō dāncí hé yǔfǎ, érqiě xūyào duō tīng duō shuō, zài shíjì jiāoliú zhōng mànmàn tígāo.) — Học một ngoại ngữ không những cần nhớ nhiều từ vựng và ngữ pháp, mà còn cần nghe nhiều nói nhiều, nâng cao dần trong giao tiếp thực tế."],"quiz":[{"q":"Điền chỗ trống: 他不但每天早上跑步锻炼身体，___ 坚持写日记。","o":["而且","而且还","但是","如果"],"a":1,"why":"不但…而且还…: vế sau thêm 还 để nhấn mạnh việc kiên trì viết nhật ký."},{"q":"Câu nào dùng 不但…而且 đúng với cụm dài?","o":["她不但能用中文流利地介绍自己的家乡，而且能用英文跟外国朋友讨论中国文化","她不但能用中文流利地介绍自己的家乡，但是能用英文跟外国朋友讨论中国文化","她不但能用中文流利地介绍自己的家乡，如果能用英文跟外国朋友讨论中国文化","她不但能用中文流利地介绍自己的家乡，因为能用英文跟外国朋友讨论中国文化"],"a":0,"why":"不但…而且 nói hai điểm tốt cùng lúc: giới thiệu bằng tiếng Trung và thảo luận bằng tiếng Anh."},{"q":"“学习一门外语不但需要记住很多单词和语法，而且需要多听多说” nghĩa là gì?","o":["Học ngoại ngữ không những cần nhớ nhiều từ và ngữ pháp mà còn cần nghe nói nhiều","Học ngoại ngữ chỉ cần nhớ từ vựng là đủ","Vì học ngoại ngữ khó nên phải nghe nhiều","Tuy học ngoại ngữ cần nhớ từ nhưng không cần nói"],"a":0,"why":"不但 = không những, 而且 = mà còn: nhớ từ và ngữ pháp, lại còn cần nghe nói nhiều."},{"q":"Điền chỗ trống: 这家饭馆不但菜做得好吃，价格也不贵，___ 服务员的态度还特别好。","o":["如果","而且","但是","因为"],"a":1,"why":"不但…而且: không những món ngon, giá rẻ, mà thái độ phục vụ còn tốt."},{"q":"还 trong 不但…而且还… có tác dụng gì?","o":["Nhấn mạnh vế sau","Phủ định vế trước","Nói điều kiện","Nối hai câu hỏi"],"a":0,"why":"而且还…: 还 nhấn mạnh vế sau mạnh hơn vế trước."},{"q":"Chọn câu viết đúng mẫu 不但…而且还…:","o":["他不但每天早上跑步锻炼身体，而且还坚持写日记，记录自己的进步","他不但每天早上跑步锻炼身体，但是还坚持写日记，记录自己的进步","他不但每天早上跑步锻炼身体，如果还坚持写日记，记录自己的进步","他不但每天早上跑步锻炼身体，因为还坚持写日记，记录自己的进步"],"a":0,"why":"不但…而且还…: không những chạy bộ mà còn kiên trì viết nhật ký."}]},"s4-ruguo":{"hook":"“如果你明天有时间的话，就来我家一起吃晚饭” — nếu… thì… ở chặng này thêm 的话, dùng 那么/否则 và cả câu hỏi điều kiện.","rule":"如果…的话 làm điều kiện mềm hơn (的话 đứng cuối vế điều kiện). Vế sau dùng 就/便/那么 đều được; 否则 = “không thì” đứng đầu vế nói hậu quả xấu. Điều kiện cũng có thể đặt thành câu hỏi.","tip":"的话 đứng cuối vế điều kiện; 否则 đứng đầu vế hậu quả xấu.","speak":"如果你明天有时间的话，就来我家一起吃晚饭，我们可以一边吃一边练习中文。如果已经下雨了，就不要骑自行车去学校了，不然衣服会淋湿，还可能感冒。如果你想把中文说得更流利，那么每天至少要跟别人说半个小时，不要只看书不说话。如果考试的时候遇到不会的题，你会怎么办？先做会的题，还是马上问老师？","examples":["如果你明天有时间的话，就来我家一起吃晚饭，我们可以一边吃一边练习中文。(Rúguǒ nǐ míngtiān yǒu shíjiān de huà, jiù lái wǒ jiā yīqǐ chī wǎnfàn, wǒmen kěyǐ yībiān chī yībiān liànxí Zhōngwén.) — Nếu ngày mai bạn có thời gian thì đến nhà tôi ăn tối cùng nhau, chúng ta vừa ăn vừa luyện tiếng Trung.","如果已经下雨了，就不要骑自行车去学校了，不然衣服会淋湿，还可能感冒。(Rúguǒ yǐjīng xià yǔ le, jiù bùyào qí zìxíngchē qù xuéxiào le, bùrán yīfu huì lín shī, hái kěnéng gǎnmào.) — Nếu đã mưa rồi thì đừng đạp xe đi học nữa, không thì quần áo sẽ ướt, còn có thể bị cảm.","如果你想把中文说得更流利，那么每天至少要跟别人说半个小时，不要只看书不说话。(Rúguǒ nǐ xiǎng bǎ Zhōngwén shuō de gèng liúlì, nàme měitiān zhìshǎo yào gēn biéren shuō bàn gè xiǎoshí, bùyào zhǐ kàn shū bù shuōhuà.) — Nếu bạn muốn nói tiếng Trung lưu loát hơn thì mỗi ngày ít nhất phải nói với người khác nửa tiếng, đừng chỉ đọc sách mà không nói.","如果考试的时候遇到不会的题，你会怎么办？先做会的题，还是马上问老师？(Rúguǒ kǎoshì de shíhou yùdào bù huì de tí, nǐ huì zěnme bàn? Xiān zuò huì de tí, háishi mǎshàng wèn lǎoshī?) — Nếu lúc thi gặp câu không biết làm thì bạn sẽ làm sao? Làm câu biết trước, hay hỏi thầy ngay?"],"quiz":[{"q":"Điền chỗ trống: 如果你明天有时间___，就来我家一起吃晚饭。","o":["的话","的时候","以后","以前"],"a":0,"why":"如果…的话: 的话 đứng cuối vế điều kiện, làm điều kiện mềm hơn."},{"q":"否则 nghĩa là gì?","o":["Không thì","Vì vậy","Tuy nhiên","Không những"],"a":0,"why":"否则 = không thì, dùng để nói hậu quả xấu nếu điều kiện không xảy ra."},{"q":"Câu nào dùng 如果…那么 đúng?","o":["如果你想把中文说得更流利，那么每天至少要跟别人说半个小时","如果你想把中文说得更流利，但是每天至少要跟别人说半个小时","如果你想把中文说得更流利，而且每天至少要跟别人说半个小时","如果你想把中文说得更流利，因为每天至少要跟别人说半个小时"],"a":0,"why":"如果…那么: nếu muốn nói lưu loát hơn thì mỗi ngày phải nói nửa tiếng."},{"q":"Điền chỗ trống: 如果已经下雨了，___ 不要骑自行车去学校了，不然衣服会淋湿。","o":["如果","就","而且","但是"],"a":1,"why":"如果…就: nếu đã mưa rồi thì đừng đạp xe đi học nữa."},{"q":"“如果考试的时候遇到不会的题，你会怎么办？” là loại câu gì?","o":["Câu hỏi điều kiện","Câu phủ định","Câu cảm thán","Câu mệnh lệnh"],"a":0,"why":"如果…怎么办: đặt điều kiện rồi hỏi sẽ làm sao."},{"q":"Chọn câu viết đúng mẫu 如果…就 với điều kiện đã hoàn thành:","o":["如果已经下雨了，就不要骑自行车去学校了","如果已经下雨了，但是不要骑自行车去学校了","如果已经下雨了，而且不要骑自行车去学校了","如果已经下雨了，因为不要骑自行车去学校了"],"a":0,"why":"如果已经…就…: nếu đã mưa rồi thì đừng đạp xe nữa."}]},"s4-ba":{"hook":"“昨天晚上我没把作业做完” — tối qua chưa làm xong bài tập: 把 ở chặng này có phủ định, có 给 người nhận, có bổ ngữ 得 và câu dài có thời gian.","rule":"Phủ định việc đã qua dùng 没把… (không dùng 不把 cho việc đã xảy ra). 把…给… đưa vật cho ai. 把 + vật + động từ + 得 + mức độ. 把 còn đi với động từ lặp lại (把试卷检查检查 = kiểm tra bài một lượt) và 把 + động từ + 了/着 (他把学过的生词都忘了 = anh ấy quên hết từ đã học). Câu dài thêm thời gian/địa điểm trước 把.","tip":"Chưa làm xong việc đã qua thì nói 没把…做完; muốn nói “đưa cho ai” thì thêm 给 + người sau 把 + vật.","speak":"昨天晚上我没把作业做完，今天早上只好早点儿起床，抓紧时间补上。请你把这本书给坐在前面的那个同学，他刚才一直在找这本书。老师把这个故事讲得非常生动，全班同学都听得入了迷，连下课铃响了都没注意到。妈妈每天早上都把早饭做好放在桌子上，然后才叫我们起床吃饭。同学们再把试卷检查检查。他把学过的生词都忘了。","examples":["昨天晚上我没把作业做完，今天早上只好早点儿起床，抓紧时间补上。(Zuótiān wǎnshang wǒ méi bǎ zuòyè zuò wán, jīntiān zǎoshang zhǐhǎo zǎo diǎnr qǐchuáng, zhuājǐn shíjiān bǔ shang.) — Tối qua tôi chưa làm xong bài tập, sáng nay đành dậy sớm, tranh thủ thời gian làm bù.","请你把这本书给坐在前面的那个同学，他刚才一直在找这本书。(Qǐng nǐ bǎ zhè běn shū gěi zuò zài qiánmian de nà gè tóngxué, tā gāngcái yīzhí zài zhǎo zhè běn shū.) — Nhờ bạn đưa cuốn sách này cho bạn ngồi phía trước, bạn ấy vừa nãy vẫn đang tìm cuốn sách này.","老师把这个故事讲得非常生动，全班同学都听得入了迷，连下课铃响了都没注意到。(Lǎoshī bǎ zhège gùshi jiǎng de fēicháng shēngdòng, quán bān tóngxué dōu tīng de rù le mí, lián xiàkè líng xiǎng le dōu méi zhùyì dào.) — Cô giáo kể câu chuyện này rất sinh động, cả lớp nghe mê mẩn, đến chuông hết giờ reo cũng không để ý.","妈妈每天早上都把早饭做好放在桌子上，然后才叫我们起床吃饭。(Māma měitiān zǎoshang dōu bǎ zǎofàn zuò hǎo fàng zài zhuōzi shang, ránhòu cái jiào wǒmen qǐchuáng chīfàn.) — Mỗi sáng mẹ đều làm xong bữa sáng đặt lên bàn, rồi mới gọi chúng tôi dậy ăn.","同学们再把试卷检查检查。(Tóngxuémen zài bǎ shìjuàn jiǎnchá jiǎnchá.) — Các em kiểm tra lại bài thi một lượt nữa.","他把学过的生词都忘了。(Tā bǎ xué guò de shēngcí dōu wàng le.) — Anh ấy quên hết từ mới đã học."],"quiz":[{"q":"Điền chỗ trống: 昨天晚上我___把作业做完，今天早上只好早点儿起床。","o":["没","把","在","给"],"a":0,"why":"Phủ định việc đã qua dùng 没把…: tối qua chưa làm xong bài tập."},{"q":"Câu nào dùng 把…给… đúng?","o":["请你把这本书给坐在前面的那个同学","请你把这本书在坐在前面的那个同学","请你给这本书把坐在前面的那个同学","请你把坐在前面的那个同学这本书"],"a":0,"why":"把 + 这本书 + 给 + 同学: đưa sách cho bạn ngồi phía trước."},{"q":"“老师把这个故事讲得非常生动” — 得 ở đây chỉ gì?","o":["Mức độ sinh động của việc kể","Phương hướng của câu chuyện","Thời gian kể chuyện","Người nghe chuyện"],"a":0,"why":"讲得非常生动: 得 + mức độ — kể rất sinh động."},{"q":"Điền chỗ trống: 妈妈每天早上都把早饭做好___桌子上，然后才叫我们起床。","o":["放在","在放","给放","得放"],"a":0,"why":"把早饭做好放在桌子上: làm xong bữa sáng rồi đặt lên bàn."},{"q":"Vì sao câu “我把书放” là sai?","o":["Vì sau động từ thiếu thành phần kết quả hoặc phương hướng","Vì câu thiếu chữ 把","Vì câu thiếu chủ ngữ","Vì câu thiếu đồ vật"],"a":0,"why":"Câu 把: động từ không đứng trơ một mình, phải có thêm như 在桌子上."},{"q":"Câu nào nói việc tối qua CHƯA làm xong bằng 把?","o":["昨天晚上我没把作业做完","昨天晚上我不把作业做完","昨天晚上我把作业没做完","昨天晚上我把没作业做完"],"a":0,"why":"Việc đã qua chưa xong dùng 没把…: tối qua chưa làm xong bài tập."},{
+    "q": "“同学们再把试卷检查检查” — 检查检查 nghĩa là gì?",
+    "o": ["Kiểm tra rất kỹ nhiều lần", "Kiểm tra một lượt (động từ lặp lại)", "Không kiểm tra nữa", "Nhờ người khác kiểm tra"],
+    "a": 1,
+    "why": "把 + động từ lặp lại: làm việc đó một lượt."
+   }]},"s4-bei":{"hook":"“他的钱包去年在地铁上被小偷偷过一次” — ví từng bị trộm một lần: 被 ở chặng này có kinh nghiệm 过, có 是…被…的 nói mục đích, có khoảng thời gian và cả cách nói văn nói “bị lừa”.","rule":"被…过… nói kinh nghiệm đã từng bị. 是…被…的 nói mục đích/cách thức (是 trước 被, 的 cuối câu). Sau động từ có thể thêm khoảng thời gian (批评了一个小时). Văn nói dùng 被骗/被偷 nói việc không may.","tip":"Muốn nói “từng bị” thì thêm 过 sau động từ; muốn nói mục đích thì dùng 是…被…的.","speak":"他的钱包去年在地铁上被小偷偷过一次，从那以后他坐车的时候总是特别小心。这封信是被妈妈特意放在桌子上的，怕我早上出门的时候忘记带走。他被老师批评了整整一个小时，出来的时候脸都红了，一句话也不敢说。网上卖的东西太便宜了要小心，很多人就是这样被骗了钱，还不知道找谁去要回来。","examples":["他的钱包去年在地铁上被小偷偷过一次，从那以后他坐车的时候总是特别小心。(Tā de qiánbāo qùnián zài dìtiě shang bèi xiǎotōu tōu guò yī cì, cóng nà yǐhòu tā zuò chē de shíhou zǒngshì tèbié xiǎoxīn.) — Ví của anh ấy năm ngoái trên tàu điện ngầm từng bị trộm lấy một lần, từ đó mỗi khi đi xe anh ấy luôn đặc biệt cẩn thận.","这封信是被妈妈特意放在桌子上的，怕我早上出门的时候忘记带走。(Zhè fēng xìn shì bèi māma tèyì fàng zài zhuōzi shang de, pà wǒ zǎoshang chūmén de shíhou wàngjì dài zǒu.) — Lá thư này là mẹ cố ý đặt lên bàn, sợ sáng tôi ra khỏi nhà quên mang theo.","他被老师批评了整整一个小时，出来的时候脸都红了，一句话也不敢说。(Tā bèi lǎoshī pīpíng le zhěngzhěng yī gè xiǎoshí, chūlai de shíhou liǎn dōu hóng le, yī jù huà yě bù gǎn shuō.) — Anh ấy bị thầy phê bình suốt cả một tiếng, lúc đi ra mặt đỏ bừng, một câu cũng không dám nói.","网上卖的东西太便宜了要小心，很多人就是这样被骗了钱，还不知道找谁去要回来。(Wǎng shang mài de dōngxi tài piányi le yào xiǎoxīn, hěn duō rén jiùshì zhèyàng bèi piàn le qián, hái bù zhīdào zhǎo shéi qù yào huílai.) — Đồ bán trên mạng rẻ quá thì phải cẩn thận, nhiều người cứ thế bị lừa mất tiền, còn không biết tìm ai đòi lại."],"quiz":[{"q":"Điền chỗ trống: 他的钱包去年在地铁上被小偷偷___一次，从那以后他坐车的时候总是特别小心。","o":["过","了","着","的"],"a":0,"why":"被…过… nói kinh nghiệm đã từng bị: ví từng bị trộm một lần."},{"q":"Câu nào dùng 是…被…的 nói mục đích đúng?","o":["这封信是被妈妈特意放在桌子上的","这封信是妈妈特意放在桌子上的被","这封信被是妈妈特意放在桌子上的","这封信妈妈是被特意放在桌子上的"],"a":0,"why":"是…被…的: 是 trước 被, 的 cuối câu — thư là mẹ cố ý đặt lên bàn."},{"q":"“他被老师批评了整整一个小时” — 一个小时 chỉ gì?","o":["Khoảng thời gian bị phê bình","Người phê bình","Lý do bị phê bình","Địa điểm bị phê bình"],"a":0,"why":"批评了一个小时: khoảng thời gian bị phê bình là cả một tiếng."},{"q":"Điền chỗ trống: 网上卖的东西太便宜了要小心，很多人就是这样被___了钱。","o":["骗","偷","拿","找"],"a":0,"why":"被骗了钱: bị lừa mất tiền (cách nói văn nói)."},{"q":"Trong câu chữ 被, đồ vật chịu tác động đứng ở đâu?","o":["Trước chữ 被","Sau chữ 被","Cuối câu","Thay cho động từ"],"a":0,"why":"Đồ vật chịu tác động đứng trước 被, người làm ra việc (nếu có) đứng sau 被."},{"q":"Chọn câu chữ 被 viết đúng với kinh nghiệm:","o":["他的钱包去年在地铁上被小偷偷过一次","他的钱包去年在地铁上被小偷偷了一次过","他的钱包去年在地铁上过被小偷偷了一次","他的钱包去年在地铁上被过小偷偷了一次"],"a":0,"why":"被…偷过一次: từng bị trộm một lần — 过 đứng sau động từ."}]}};
   (ZH_GRAMMAR || []).forEach(function (g) {
     if (NEW[g.id]) { g.hook = NEW[g.id].hook; g.rule = NEW[g.id].rule; g.tip = NEW[g.id].tip; g.examples = NEW[g.id].examples; g.quiz = NEW[g.id].quiz; if (NEW[g.id].speak) g.speak = NEW[g.id].speak; }
   });
@@ -142228,9 +142248,12 @@ var ZH_GRAMMAR_EXPAND192C = [
    "请给我一碗饭。(Qǐng gěi wǒ yì wǎn fàn.) — Xin cho tôi một bát cơm.",
    "他洗了一脸汗。(Tā xǐ le yì liǎn hàn.) — Anh ấy rửa mặt đầy mồ hôi.",
    "他有一手好字。(Tā yǒu yì shǒu hǎo zì.) — Anh ấy viết chữ rất đẹp (có một tay chữ đẹp).",
-   "桌子上有一桌子菜。(Zhuōzi shang yǒu yì zhuōzi cài.) — Trên bàn có đầy một bàn món ăn." ],
+   "桌子上有一桌子菜。(Zhuōzi shang yǒu yì zhuōzi cài.) — Trên bàn có đầy một bàn món ăn.",
+   "屋子里有一屋子人。(Wūzi lǐ yǒu yì wūzi rén.) — Trong nhà có đầy một nhà người.",
+   "医生给他打了一针。(Yīshēng gěi tā dǎ le yì zhēn.) — Bác sĩ tiêm cho anh ấy một mũi.",
+   "这块肉要切两刀。(Zhè kuài ròu yào qiē liǎng dāo.) — Miếng thịt này phải cắt hai nhát." ],
   speak: "请给我一碗饭。他洗了一脸汗。他有一手好字。桌子上有一桌子菜。",
-  rule: "Lượng từ mượn lấy bộ phận cơ thể/đồ vật làm đơn vị: 碗 (bát: 一碗饭), 脸 (mặt: 一脸汗 = đầy mặt), 手 (tay: 一手好字 = một tay chữ đẹp), 桌子 (bàn: 一桌子菜 = đầy một bàn). Cấu trúc: số + lượng từ mượn + danh từ.",
+  rule: "Lượng từ mượn lấy bộ phận cơ thể/đồ vật làm đơn vị: 碗 (一碗饭), 脸 (一脸汗 = đầy mặt), 手 (一手好字), 桌子 (一桌子菜 = đầy một bàn), 屋子 (一屋子人 = đầy một nhà người). Động lượng từ: 刀 (một nhát dao: 切两刀), 针 (một mũi tiêm: 打一针). Cấu trúc: số + lượng từ mượn + danh từ.",
   tip: "一脸/一手/一桌子 mang nghĩa 'đầy, cả một', không phải đếm đúng một cái.",
   note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
@@ -142239,7 +142262,13 @@ var ZH_GRAMMAR_EXPAND192C = [
    { q: "“一手好字” khen điều gì?", o: ["Viết chữ rất đẹp", "Tay rất to", "Có một bàn tay", "Chữ viết rất xấu"], a: 0, why: "一手好字 = một tay chữ đẹp." },
    { q: "“一桌子菜” nghĩa là gì?", o: ["Đầy một bàn món ăn", "Một món ăn", "Một cái bàn", "Một đĩa thức ăn"], a: 0, why: "一桌子菜 = đầy một bàn món ăn." },
    { q: "Điền vào chỗ trống: 请给我___饭。(một bát)", o: ["一碗", "一脸", "一手", "一桌"], a: 0, why: "Một bát cơm: 一碗饭." },
-   { q: "Chọn câu đúng:", o: ["桌子上有一桌子菜", "桌子有一上桌子菜", "一桌子菜有桌子上", "桌子菜有一桌子上"], a: 0, why: "一桌子菜 = đầy một bàn món ăn." } ] },
+   { q: "Chọn câu đúng:", o: ["桌子上有一桌子菜", "桌子有一上桌子菜", "一桌子菜有桌子上", "桌子菜有一桌子上"], a: 0, why: "一桌子菜 = đầy một bàn món ăn." },
+   {
+    "q": "“打了一针” nghĩa là gì?",
+    "o": ["Đánh một cái", "Tiêm một mũi", "Uống một viên thuốc", "Khám một lần"],
+    "a": 1,
+    "why": "针 làm động lượng từ: 打一针 = tiêm một mũi."
+   } ] },
 { id: "zh18g-rongqi-liangci", stage: 4, title: "Lượng từ dung tích — 瓶/盒/袋/杯",
   hook: "“一瓶水” — một chai nước: lượng từ dung tích nói đồ đựng.",
   examples: [
@@ -142490,9 +142519,11 @@ var ZH_GRAMMAR_EXPAND192D = [
    "这件事使我很高兴。(Zhè jiàn shì shǐ wǒ hěn gāoxìng.) — Việc này làm tôi rất vui.",
    "这个消息使大家很吃惊。(Zhège xiāoxi shǐ dàjiā hěn chījīng.) — Tin này làm mọi người rất ngạc nhiên.",
    "老师让我回答问题。(Lǎoshī ràng wǒ huídá wèntí.) — Thầy giáo bảo tôi trả lời câu hỏi.",
-   "妈妈叫他去买东西。(Māma jiào tā qù mǎi dōngxi.) — Mẹ bảo anh ấy đi mua đồ." ],
+   "妈妈叫他去买东西。(Māma jiào tā qù mǎi dōngxi.) — Mẹ bảo anh ấy đi mua đồ.",
+   "老师表扬他帮助同学。(Lǎoshī biǎoyáng tā bāngzhù tóngxué.) — Thầy khen anh ấy giúp đỡ bạn học.",
+   "大家都称他为先生。(Dàjiā dōu chēng tā wéi xiānsheng.) — Mọi người đều gọi anh ấy là thầy." ],
   speak: "这件事使我很高兴。这个消息使大家很吃惊。老师让我回答问题。妈妈叫他去买东西。",
-  rule: "使 + người + tính từ/động từ: gây ra, làm cho (使我很高兴 — trang trọng, hay dùng trong văn viết). 让 + người + động từ: bảo, để cho (让我回答问题). 叫 + người + động từ: gọi, bảo (叫他去买东西 — khẩu ngữ hơn 让).",
+  rule: "Câu kiêm ngữ: một danh từ vừa là tân ngữ của động từ 1, vừa là chủ ngữ của động từ 2. 使/让/叫: 使 + cảm xúc (使我很高兴), 让/叫 + hành động. 兼语句2: (1) 表扬/批评 + người + động từ: 老师表扬他帮助同学 (thầy khen anh ấy giúp bạn); (2) 称/说/选 + người + 做/为/当/是 + …: 大家都称他为先生 (mọi người gọi anh ấy là thầy), 老师们都说她是好学生. 使 trang trọng, hay dùng trong văn viết; 叫 khẩu ngữ hơn 让.",
   tip: "使 hay đi với cảm xúc (高兴, 吃惊, 难过); 让/叫 hay đi với hành động (回答, 去买).",
   note: "Nhãn HSK là mức đặt theo trình độ.",
   quiz: [
@@ -142501,7 +142532,13 @@ var ZH_GRAMMAR_EXPAND192D = [
    { q: "使、让、叫 khác nhau thế nào?", o: ["使: gây ra (trang trọng); 让: bảo/để cho; 叫: gọi/bảo (khẩu ngữ)", "Ba từ giống hệt nhau", "使: gọi; 让: gây ra; 叫: để cho", "使 chỉ dùng với hành động"], a: 0, why: "使 gây ra, 让 bảo/để cho, 叫 gọi/bảo." },
    { q: "Điền vào chỗ trống: 老师___我回答问题。(bảo)", o: ["让", "使", "叫我", "请"], a: 0, why: "Bảo tôi trả lời: 让我回答问题." },
    { q: "Câu nào dùng 使 đúng?", o: ["这件事使我很高兴", "这件事使我回答问题", "这件事使我去买东西", "这件事使我吃饭"], a: 0, why: "使 hay đi với cảm xúc: 使我很高兴." },
-   { q: "Chọn câu đúng:", o: ["妈妈叫他去买东西", "妈妈叫去他买东西", "妈妈他叫去买东西", "妈妈去叫他买东西"], a: 0, why: "叫他去买东西: 叫 + 他 + 去买东西." } ] },
+   { q: "Chọn câu đúng:", o: ["妈妈叫他去买东西", "妈妈叫去他买东西", "妈妈他叫去买东西", "妈妈去叫他买东西"], a: 0, why: "叫他去买东西: 叫 + 他 + 去买东西." },
+   {
+    "q": "“老师表扬他帮助同学” — 他 vừa là gì?",
+    "o": ["Chủ ngữ của 表扬", "Tân ngữ của 表扬, đồng thời là chủ ngữ của 帮助 (kiêm ngữ)", "Trạng ngữ", "Bổ ngữ"],
+    "a": 1,
+    "why": "他 là kiêm ngữ: vừa được khen, vừa là người giúp bạn."
+   } ] },
 { id: "zh18g-buyu-zongfu", stage: 4, title: "Bổ ngữ tổng hợp — 结果/程度/趋向/数量",
   hook: "“他跑得很快，走进来了，看了三本书。” — anh ấy chạy rất nhanh, đi vào rồi, đọc ba quyển sách: các loại bổ ngữ gặp nhau.",
   examples: [
@@ -142697,7 +142734,7 @@ var ZH_GRAMMAR_EXPAND192E = [
    "他努力学习，从而考上了大学。(Tā nǔlì xuéxí, cóng'ér kǎo shàng le dàxué.) — Anh ấy chăm chỉ học, nhờ đó thi đỗ đại học." ,
    "他说完了，就走了。(Tā shuō wán le, jiù zǒu le.) — Anh ấy nói xong rồi thì đi.",
    "写完了作业，他就去玩了。(Xiě wán le zuòyè, tā jiù qù wán le.) — Làm xong bài tập rồi thì anh ấy đi chơi."],
-  speak: "这样做，从而提高了效率。加上天气不好，我们不去了。一旦下雨，比赛就取消。他努力学习，从而考上了大学。",
+  speak: "这样做，从而提高了效率。加上天气不好，我们不去了。一旦下雨，比赛就取消。他努力学习，从而考上了大学。他说完了，就走了。写完了作业，他就去玩了。",
   rule: "从而: nhờ đó, do đó (nối kết quả: 这样做，从而提高了效率); 加上: thêm nữa, cộng thêm (加上天气不好); 一旦: một khi, hễ (一旦下雨，比赛就取消). 从而 nối nguyên nhân–kết quả, 加上 nối thêm lý do, 一旦 nối điều kiện giả định. 完了: sau khi làm xong một việc thì chuyển sang việc tiếp theo (他说完了，就走了 — nói xong rồi thì đi).",
   tip: "从而 hay đi sau dấu phẩy, nối hai vế; 一旦…就… là mẫu điều kiện: một khi… thì…",
   note: "Nhãn HSK là mức đặt theo trình độ.",
@@ -145491,7 +145528,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "他从今天学汉语。(Tā cóng jīntiān xué Hànyǔ.) — Anh ấy học tiếng Trung từ hôm nay."
   ],
   "speak": "我从学校回家。他从越南来。我们从早上八点看书。他从今天学汉语。",
-  "rule": "从 là giới từ, đứng trước danh từ chỉ nơi chốn hoặc thời gian, tạo thành cụm “从 + nơi chốn/thời gian + động từ” để nói điểm bắt đầu: 从学校来 (từ trường đến), 从八点开始 (bắt đầu từ tám giờ). 从 thường đi cặp với 到 (从…到…: từ… đến…), và hay đứng sau động từ 来/去 trong mẫu “从…来/去”.",
+  "rule": "从 là giới từ, đứng trước danh từ chỉ nơi chốn hoặc thời gian, tạo thành cụm “从 + nơi chốn/thời gian + động từ” để nói điểm bắt đầu: 从学校来 (từ trường đến), 从八点开始 (bắt đầu từ tám giờ). 从 thường đi cặp với 到 (从…到…: từ… đến…). 从 đứng TRƯỚC động từ 来/去 (从学校来, 从北京来), không đứng sau động từ.",
   "tip": "Người Việt hay bỏ 从 mà nói thẳng “我学校回家” là sai: muốn nói “từ trường” phải có 从 — 我从学校回家.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -146401,7 +146438,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Anh ấy là bạn tốt của tôi"
     ],
     "a": 3,
-    "why": "是…的: anh ấy là bạn tốt của tôi."
+    "why": "他是我的好朋友: anh ấy là bạn tốt của tôi — câu kể dùng 是 nói thân phận, không phải mẫu 是……的."
    }
   ]
  },
@@ -151232,7 +151269,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "我帮你的忙",
      "我你帮忙"
     ],
-    "a": 0,
+    a: 2,
     "why": "帮忙 tách ra được: 帮你的忙 mới đúng, không nói 帮忙你."
    },
    {
@@ -151243,7 +151280,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "我们见吧面",
      "我们见个面吧"
     ],
-    "a": 1,
+    a: 3,
     "why": "见面 là 动宾式, chen 个 vào giữa: 见个面."
    },
    {
@@ -151276,7 +151313,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Kết hôn",
      "Đi ngủ"
     ],
-    "a": 0,
+    a: 2,
     "why": "结婚 là động từ ly hợp, nghĩa là kết hôn."
    },
    {
@@ -151287,7 +151324,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "我睡了觉八个小时",
      "我睡了八个小时觉"
     ],
-    "a": 1,
+    a: 3,
     "why": "Khoảng thời gian chen vào giữa 睡 và 觉: 睡了八个小时觉."
    }
   ,
@@ -151350,7 +151387,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Danh lượng từ",
      "Động từ"
     ],
-    "a": 3,
+    a: 1,
     "why": "眼 đếm số lần nhìn, là động lượng từ."
    },
    {
@@ -151372,7 +151409,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Một loại",
      "Một ngụm"
     ],
-    "a": 3,
+    a: 1,
     "why": "顿 làm động lượng từ chỉ một bữa: 吃一顿饭 là ăn một bữa cơm."
    }
   ]
@@ -151404,7 +151441,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Từng người một, lần lượt",
      "Chỉ có một người"
     ],
-    "a": 0,
+    a: 2,
     "why": "一个一个 nghĩa là từng cái một, lần lượt."
    },
    {
@@ -151415,7 +151452,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "每一个一个",
      "一个一个"
     ],
-    "a": 1,
+    a: 3,
     "why": "一个一个 làm trạng ngữ: trả lời từng người một."
    },
    {
@@ -151459,7 +151496,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Danh từ",
      "Động từ lặp lại, nghĩa là thử xem"
     ],
-    "a": 1,
+    a: 3,
     "why": "试试 là động từ lặp, nghĩa là thử xem; 一件一件 nói thử từng cái một."
    }
   ,
@@ -151491,7 +151528,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Chỉ có mười học sinh",
      "Có hơn mười học sinh"
     ],
-    "a": 0,
+    a: 2,
     "why": "仅 nghĩa là “chỉ”: lớp chỉ có mười học sinh."
    },
    {
@@ -151513,7 +151550,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "这个班仅有十个学生",
      "光是这个问题就很难"
     ],
-    "a": 2,
+    a: 0,
     "why": "光有十块钱就够了 nghe không tự nhiên: muốn nói “chỉ có mười đồng mà đủ” thì nói 只有十块钱就够了."
    },
    {
@@ -151524,7 +151561,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Học ba tháng vẫn chưa biết nói",
      "Học rất lâu"
     ],
-    "a": 3,
+    a: 1,
     "why": "仅仅 nhấn mạnh thời gian rất ngắn: mới ba tháng mà đã biết nói."
    },
    {
@@ -151535,7 +151572,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "都",
      "就"
     ],
-    "a": 2,
+    a: 0,
     "why": "仅 trang trọng hơn 光, hay dùng trong văn viết."
    },
    {
@@ -151546,7 +151583,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Mức trung bình",
      "Mức nhiều nhất"
     ],
-    "a": 3,
+    a: 1,
     "why": "至少 nghĩa là ít nhất, đặt ra mức tối thiểu."
    }
   ]
@@ -151575,7 +151612,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Mau về nhà đi",
      "Về nhà từ lâu rồi"
     ],
-    "a": 0,
+    a: 2,
     "why": "赶紧 giục làm nhanh: mau về nhà đi."
    },
    {
@@ -151597,7 +151634,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "他三十岁才结婚",
      "这本书我早已看完了"
     ],
-    "a": 2,
+    a: 0,
     "why": "始终 đứng trước động từ, không chen 昨天 vào giữa: 她始终不相信这个故事."
    },
    {
@@ -151608,7 +151645,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "早已 nói việc chưa xong",
      "早已 nói việc sắp xong"
     ],
-    "a": 3,
+    a: 1,
     "why": "早已 nhấn mạnh việc đã hoàn thành từ lâu rồi, mạnh hơn 已经."
    },
    {
@@ -151630,7 +151667,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Tin rồi lại không tin",
      "Từ đầu đến cuối vẫn thế"
     ],
-    "a": 1,
+    a: 3,
     "why": "始终 nghĩa là từ đầu đến cuối vẫn như vậy."
    }
   ]
@@ -151659,7 +151696,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Bạn nói lại một lần nữa",
      "Bạn đừng nói nữa"
     ],
-    "a": 0,
+    a: 2,
     "why": "再 nói lặp lại: nói lại một lần nữa."
    },
    {
@@ -151692,7 +151729,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "再 nói quá khứ, 又 nói tương lai",
      "Hai từ giống hệt nhau"
     ],
-    "a": 3,
+    a: 1,
     "why": "再 dùng cho việc chưa xảy ra, 又 dùng cho việc đã lặp trong quá khứ."
    },
    {
@@ -151703,7 +151740,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Làm rất nhanh",
      "Làm lần đầu"
     ],
-    "a": 2,
+    a: 0,
     "why": "再做一遍 là làm thêm một lần nữa."
    },
    {
@@ -151747,7 +151784,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Quả nhiên, đúng như đã đoán",
      "Anh ấy đến rất muộn"
     ],
-    "a": 0,
+    a: 2,
     "why": "果然 nghĩa là quả nhiên, đúng như điều đã đoán trước."
    },
    {
@@ -151769,7 +151806,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "你到底想说什么",
      "反正我不去，你自己去吧"
     ],
-    "a": 2,
+    a: 0,
     "why": "果然 nói điều đoán trước đã thành thật; chưa biết thì không dùng 果然, phải nói 他现在还不知道."
    },
    {
@@ -151791,7 +151828,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Câu hỏi tu từ, người hỏi đã có ý kiến sẵn",
      "Câu cầu khiến"
     ],
-    "a": 0,
+    a: 2,
     "why": "难道 dùng trong câu hỏi tu từ: chẳng lẽ bạn không biết sao?"
    },
    {
@@ -151834,7 +151871,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Mục đích hướng tới",
      "Thời gian học"
     ],
-    "a": 0,
+    a: 2,
     "why": "为了 nêu mục đích: để học tiếng Trung."
    },
    {
@@ -151845,7 +151882,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "因为",
      "为"
     ],
-    "a": 1,
+    a: 3,
     "why": "为我们做饭: 为 + người, nêu đối tượng được hưởng lợi."
    },
    {
@@ -151889,7 +151926,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "为学中文因为，我每天早起",
      "为了他生病，他没来"
     ],
-    "a": 3,
+    a: 1,
     "why": "为了学中文 nêu mục đích; 因为生病 mới nêu nguyên nhân."
    }
   ]
@@ -151918,7 +151955,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Nguyên nhân",
      "Mục đích"
     ],
-    "a": 0,
+    a: 2,
     "why": "因为 nêu nguyên nhân: vì trời mưa."
    },
    {
@@ -151940,7 +151977,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "他没来，因为他生病了",
      "因为他喜欢，所以他学中文"
     ],
-    "a": 2,
+    a: 0,
     "why": "因为了 là sai: 因为 không đi với 了."
    },
    {
@@ -152003,7 +152040,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Làm theo",
      "Nhìn vào"
     ],
-    "a": 0,
+    a: 2,
     "why": "按照说明书安装: lắp theo hướng dẫn sử dụng."
    },
    {
@@ -152014,7 +152051,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "从",
      "按"
     ],
-    "a": 1,
+    a: 3,
     "why": "按顺序: xếp hàng theo thứ tự."
    },
    {
@@ -152047,7 +152084,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Tên của học sinh",
      "Tuổi của học sinh"
     ],
-    "a": 2,
+    a: 0,
     "why": "按照学生的水平: chia lớp theo trình độ của học sinh."
    },
    {
@@ -152058,7 +152095,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "请说明书按照安装这台电脑",
      "请按照安装说明书这台电脑"
     ],
-    "a": 3,
+    a: 1,
     "why": "按照 + danh từ đứng trước động từ: 按照说明书安装."
    }
   ,
@@ -152088,7 +152125,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Nối thêm một việc cùng chiều",
      "Nêu nguyên nhân"
     ],
-    "a": 0,
+    a: 2,
     "why": "并且 nối hai vế cùng chiều, vế sau bổ sung thêm."
    },
    {
@@ -152132,7 +152169,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "才",
      "也"
     ],
-    "a": 0,
+    a: 2,
     "why": "只有…才… là cặp cố định nêu điều kiện duy nhất."
    },
    {
@@ -152143,7 +152180,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Không chỉ",
      "Ngoài ra, thêm một việc khác"
     ],
-    "a": 1,
+    a: 3,
     "why": "另外 nghĩa là ngoài ra, thêm một việc khác nữa."
    }
   ]
@@ -152183,7 +152220,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "嘿嘿",
      "哈哈"
     ],
-    "a": 1,
+    a: 3,
     "why": "哈哈大笑 là cụm cố định: cười ha hả."
    },
    {
@@ -152205,7 +152242,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Hai từ giống hệt nhau",
      "哈哈 là cười gượng, 呵呵 là cười to"
     ],
-    "a": 3,
+    a: 1,
     "why": "哈哈 cười to vui vẻ; 呵呵 cười khẽ, thường là cười gượng."
    },
    {
@@ -152216,7 +152253,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Hợp đồng",
      "Văn viết trang trọng"
     ],
-    "a": 2,
+    a: 0,
     "why": "哈哈 là thán từ khẩu ngữ, dùng khi nói chuyện và nhắn tin."
    },
    {
@@ -152256,7 +152293,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Đọc sách từng quyển một",
      "Đọc một quyển sách"
     ],
-    "a": 0,
+    a: 2,
     "why": "一本一本 nghĩa là từng quyển một, lần lượt."
    },
    {
@@ -152267,7 +152304,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "每一个",
      "一个一个地"
     ],
-    "a": 1,
+    a: 3,
     "why": "一个一个地 làm trạng ngữ, thêm 地 trước động từ 走进."
    },
    {
@@ -152289,7 +152326,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Nối định ngữ với danh từ",
      "Nối bổ ngữ với động từ"
     ],
-    "a": 3,
+    a: 1,
     "why": "地 nối trạng ngữ 一朵一朵 với động từ 摘."
    },
    {
@@ -152340,7 +152377,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Thong thả, không vội vàng",
      "Rất bận rộn"
     ],
-    "a": 0,
+    a: 2,
     "why": "不慌不忙: không hoảng không vội, thong thả."
    },
    {
@@ -152351,7 +152388,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "不声不响",
      "不冷不热"
     ],
-    "a": 1,
+    a: 3,
     "why": "不冷不热 nói thái độ lạnh nhạt khi trả lời."
    },
    {
@@ -152373,7 +152410,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Đếm số ba và số bốn",
      "Làm việc rất cẩn thận"
     ],
-    "a": 3,
+    a: 1,
     "why": "不三不四 là thành ngữ chỉ lời nói hoặc việc làm lung tung, không ra gì."
    },
    {
@@ -152384,7 +152421,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Im lặng, không nói gì",
      "Hát rất hay"
     ],
-    "a": 0,
+    a: 2,
     "why": "不声不响: không tiếng động, im lặng."
    },
    {
@@ -152424,7 +152461,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Trông anh ấy có vẻ rất mệt",
      "Anh ấy nói mình rất mệt"
     ],
-    "a": 0,
+    a: 2,
     "why": "看起来 nói ấn tượng bề ngoài: trông có vẻ mệt."
    },
    {
@@ -152435,7 +152472,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "闻起来",
      "看起来"
     ],
-    "a": 1,
+    a: 3,
     "why": "Trời sắp mưa là điều “trông thấy”: dùng 看起来."
    },
    {
@@ -152479,7 +152516,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "Nói cô ấy rất già",
      "Nói cô ấy rất trẻ con"
     ],
-    "a": 3,
+    a: 1,
     "why": "看起来比…年轻: so sánh vẻ ngoài với tuổi thật."
    }
   ]
@@ -154198,7 +154235,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "天气很冷，因此大家都穿上了厚衣服。(Tiānqì hěn lěng, yīncǐ dàjiā dōu chuān shang le hòu yīfu.) — Trời rất lạnh nên mọi người đều mặc áo dày."
   ],
   "speak": "由于下雨了，所以我们今天不去爬山了。他生病了，因此没有来上课。由于工作太忙，所以他很少回家吃饭。天气很冷，因此大家都穿上了厚衣服。",
-  "rule": "由于 nêu nguyên nhân ở vế đầu, 所以/因此 nêu kết quả ở vế sau. 由于 mang sắc thái trang trọng, hay dùng trong văn viết; trong khẩu ngữ thường lược 由于, chỉ nói vế nguyên nhân rồi 所以…. 所以 và 因此 nghĩa như nhau, 因此 trang trọng hơn một chút.",
+  "rule": "由于 nêu nguyên nhân ở vế đầu, 所以/因此 nêu kết quả ở vế sau. 由于 trang trọng hơn 因为, hay dùng trong văn viết; trong khẩu ngữ thường lược 由于, chỉ nói vế nguyên nhân rồi 所以…. Lưu ý: 因为…，所以… cũng đúng và rất thường dùng, không phải lỗi lặp.",
   "tip": "Đừng dùng cả 因为 và 所以 trong một câu: 因为…，所以… là lỗi lặp, chỉ chọn một cặp: hoặc 因为…, hoặc …，所以….",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -154222,7 +154259,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
      "下雨了由于，所以我们不去爬山了"
     ],
     "a": 0,
-    "why": "由于…，所以… là cặp đúng; 因为 và 所以 không dùng chung một câu."
+    "why": "由于…，所以… là cặp đúng; 因为…，所以… cũng đúng nhưng câu này hỏi mẫu có 由于 nên chọn câu dùng 由于."
    },
    {
     "q": "Điền vào chỗ trống: 他生病了，___没有来上课。",
@@ -154237,14 +154274,9 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    },
    {
     "q": "Câu nào SAI?",
-    "o": [
-     "由于工作太忙，所以他很少回家吃饭",
-     "天气很冷，因此大家都穿上了厚衣服",
-     "因为他生病了，所以没有来上课",
-     "他生病了，因此没有来上课"
-    ],
-    "a": 2,
-    "why": "因为 và 所以 không dùng chung trong một câu: chỉ nói 他生病了，所以没有来上课."
+    "o": ["因为他生病了，所以没有来上课", "他生病了，因此没有来上课", "由于工作太忙，所以他很少回家吃饭", "由于他生病了，因为没有来上课"],
+    "a": 3,
+    "why": "由于 và 因为 không dùng chung một câu: đã có 由于 thì vế sau dùng 所以/因此, không dùng 因为."
    },
    {
     "q": "由于 khác 因为 ở điểm nào?",
@@ -155218,10 +155250,11 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "请大家按时到教室，老师即将开始讲课。(Qǐng dàjiā ànshí dào jiàoshì, lǎoshī jíjiāng kāishí jiǎng kè.) — Mọi người hãy đến lớp đúng giờ, thầy sắp bắt đầu giảng bài.",
    "妈妈急忙跑进厨房，尽快把饭做好。(Māma jímáng pǎo jìn chúfáng, jǐnkuài bǎ fàn zuò hǎo.) — Mẹ vội vàng chạy vào bếp, nấu cơm xong càng nhanh càng tốt.",
    "老师一再提醒我们，再三说不要迟到。(Lǎoshī yīzài tíxǐng wǒmen, zàisān shuō bú yào chídào.) — Thầy nhắc chúng tôi nhiều lần, dặn đi dặn lại đừng đến muộn.",
-   "他明明生病了，反而还来上课，究竟为什么呢？(Tā míngmíng shēng bìng le, fǎn'ér hái lái shàng kè, jiūjìng wèi shénme ne?) — Anh ấy rõ ràng đang ốm, ngược lại còn đến lớp, rốt cuộc là vì sao nhỉ?"
+   "他明明生病了，反而还来上课，究竟为什么呢？(Tā míngmíng shēng bìng le, fǎn'ér hái lái shàng kè, jiūjìng wèi shénme ne?) — Anh ấy rõ ràng đang ốm, ngược lại còn đến lớp, rốt cuộc là vì sao nhỉ?",
+   "他还真有办法，问题马上就解决了。(Tā hái zhēn yǒu bànfǎ, wèntí mǎshàng jiù jiějué le.) — Anh ấy vậy mà thật có cách, vấn đề giải quyết ngay."
   ],
   "speak": "请大家按时到教室，老师即将开始讲课。妈妈急忙跑进厨房，尽快把饭做好。老师一再提醒我们，再三说不要迟到。他明明生病了，反而还来上课，究竟为什么呢？",
-  "rule": "按时 là đúng giờ, 即将 là sắp (việc sắp xảy ra), 急忙 là vội vàng, 尽快 là càng nhanh càng tốt. 一再 và 再三 đều là nhiều lần, lặp đi lặp lại. 的确 là quả thật, dùng để khẳng định. 反而 là ngược lại với dự đoán. 还 ở đây là còn, vẫn. 竟然 là vậy mà, ngoài dự đoán. 究竟 là rốt cuộc, dùng khi truy hỏi nguyên nhân thật sự.",
+  "rule": "按时 là đúng giờ, 即将 là sắp, 急忙 là vội vàng, 尽快 là càng nhanh càng tốt. 一再 và 再三 đều là nhiều lần. 的确 là quả thật. 反而 là ngược lại với dự đoán. 还 còn có nghĩa 'còn, vẫn' (他明明生病了，反而还来上课). 还⁴: vậy mà, lại (ngoài dự đoán, hay đi với 真): 他还真有办法 = anh ấy vậy mà thật có cách. 竟然 là vậy mà, ngoài dự đoán. 究竟 là rốt cuộc, dùng khi truy hỏi nguyên nhân thật sự.",
   "tip": "Đừng nhầm 一再 với 再: 再 là “lại, nữa”, còn 一再 là “nhiều lần, lặp đi lặp lại”. 竟然 mang ngạc nhiên, không dùng cho việc bình thường.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -155290,6 +155323,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 1,
     "why": "反而 chỉ kết quả ngược lại với điều người ta dự đoán."
+   },
+   {
+    "q": "“他还真有办法” — 还 ở đây nghĩa là gì?",
+    "o": ["Vẫn (chưa thay đổi)", "Còn nữa", "Vậy mà, lại (ngoài dự đoán)", "Rất"],
+    "a": 2,
+    "why": "还⁴ đi với 真, nói điều ngoài dự đoán: vậy mà thật có cách."
    }
   ]
  },
@@ -155386,10 +155425,13 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "自从去年搬到这里，他就每天早上跑步。(Zìcóng qùnián bān dào zhèlǐ, tā jiù měitiān zǎoshang pǎobù.) — Từ khi chuyển đến đây năm ngoái, anh ấy ngày nào cũng chạy bộ buổi sáng.",
    "今天我有事，你替我去开会。(Jīntiān wǒ yǒu shì, nǐ tì wǒ qù kāi huì.) — Hôm nay tôi bận, bạn thay tôi đi họp nhé?",
    "作为学生，我们应该按时完成作业。(Zuòwéi xuésheng, wǒmen yīnggāi ànshí wánchéng zuòyè.) — Với tư cách học sinh, chúng ta nên hoàn thành bài tập đúng hạn.",
-   "这本书自出版以来，已经卖了十万本。(Zhè běn shū zì chūbǎn yǐlái, yǐjīng mài le shí wàn běn.) — Cuốn sách này từ khi xuất bản đến nay đã bán được mười vạn bản."
+   "这本书自出版以来，已经卖了十万本。(Zhè běn shū zì chūbǎn yǐlái, yǐjīng mài le shí wàn běn.) — Cuốn sách này từ khi xuất bản đến nay đã bán được mười vạn bản.",
+   "我们的航班准时自北京出发。(Wǒmen de hángbān zhǔnshí zì Běijīng chūfā.) — Chuyến bay của chúng tôi đúng giờ xuất phát từ Bắc Kinh.",
+   "你别替我担心了，我自己处理。(Nǐ bié tì wǒ dānxīn le, wǒ zìjǐ chǔlǐ.) — Bạn đừng lo thay tôi nữa, tôi tự xử lý được.",
+   "大家都替你感到高兴。(Dàjiā dōu tì nǐ gǎndào gāoxìng.) — Mọi người đều mừng thay cho bạn."
   ],
   "speak": "自从去年搬到这里，他就每天早上跑步。今天我有事，你替我去开会。作为学生，我们应该按时完成作业。这本书自出版以来，已经卖了十万本。",
-  "rule": "自 (trong 自从, 自…以来) chỉ điểm bắt đầu của thời gian hay sự việc: 自从去年, 自出版以来. 替 nghĩa là thay cho ai làm việc gì: 替我开会, 替他买票, chủ ngữ là người làm thay. 作为 nghĩa là với tư cách là, đứng đầu câu để nêu thân phận, vai trò rồi mới nói điều phải làm hay đánh giá: 作为学生, 作为老师.",
+  "rule": "自 (trong 自从, 自…以来) chỉ điểm bắt đầu của thời gian hay sự việc: 自从去年, 自出版以来. 自 còn là giới từ 'từ' trước nơi chốn: 自北京出发 = xuất phát từ Bắc Kinh. 替 nghĩa là thay cho ai làm việc gì: 替我开会, 替他买票. 替 còn nói thay ai về tình cảm: 替你担心 (lo thay bạn), 替你感到高兴 (mừng thay bạn). 作为 nghĩa là với tư cách là, đứng đầu câu để nêu thân phận, vai trò.",
   "tip": "替 khác 给: 替 là làm thay người khác, còn 给 là làm cho người khác nhận. 作为 luôn nêu vai trò trước, đừng nhầm với 是.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -155458,6 +155500,18 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 0,
     "why": "替 + người + động từ: thay tôi chăm vườn."
+   },
+   {
+    "q": "“自北京出发” nghĩa là gì?",
+    "o": ["Đi về Bắc Kinh", "Xuất phát từ Bắc Kinh", "Đến Bắc Kinh chơi", "Ở lại Bắc Kinh"],
+    "a": 1,
+    "why": "自 + nơi chốn = từ (nơi đó): 自北京出发 = xuất phát từ Bắc Kinh."
+   },
+   {
+    "q": "“大家都替你感到高兴” — 替 ở đây nghĩa là gì?",
+    "o": ["Thay bạn làm việc", "Mừng thay cho bạn", "Nhờ bạn giúp", "Hỏi thay bạn"],
+    "a": 1,
+    "why": "替 + động từ tình cảm = thay ai về tình cảm: mừng thay cho bạn."
    }
   ]
  },
@@ -155472,9 +155526,10 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "他不是不喜欢你，而是不好意思说话。(Tā bú shì bù xǐhuan nǐ, ér shì bù hǎoyìsi shuō huà.) — Anh ấy không phải không thích bạn, mà là ngại nói chuyện.",
    "例如，你每天早上跑步，身体就会越来越好。(Lìrú, nǐ měitiān zǎoshang pǎobù, shēntǐ jiù huì yuè lái yuè hǎo.) — Ví dụ, bạn chạy bộ mỗi sáng thì sức khỏe sẽ ngày càng tốt."
   ,
-   "他会说汉语，并会写汉字。(Tā huì shuō Hànyǔ, bìng huì xiě Hànzì.) — Anh ấy biết nói tiếng Trung, và còn biết viết chữ Hán."],
+   "他会说汉语，并会写汉字。(Tā huì shuō Hànyǔ, bìng huì xiě Hànzì.) — Anh ấy biết nói tiếng Trung, và còn biết viết chữ Hán.",
+   "他喜欢游泳，而我喜欢跑步。(Tā xǐhuan yóuyǒng, ér wǒ xǐhuan pǎobù.) — Anh ấy thích bơi, còn tôi thích chạy bộ."],
   "speak": "他会说汉语以及英语，还会一点儿法语。这件衣服很便宜，而且很漂亮。他不是不喜欢你，而是不好意思说话。例如，你每天早上跑步，身体就会越来越好。他会说汉语，并会写汉字。",
-  "rule": "并 và 以及 đều là “và”, nối các thành phần cùng loại; 以及 trang trọng hơn, hay nối danh từ hay cụm dài. 此外 là “ngoài ra”, thêm một ý. 而 nối hai vế đối lập hay bổ sung nhẹ; 而是 dùng sau phủ định 不是… để đưa ra điều đúng: 不是…，而是…. 既然 là “đã… thì”, nói điều đã rõ rồi suy ra kết quả. 可见 là “có thể thấy”, rút ra kết luận. 甚至 là “thậm chí”, đẩy ý lên mức cao hơn. 例如 là “ví dụ”. 总之 là “tóm lại”, tổng kết ý trước.",
+  "rule": "并 và 以及 đều là 'và', nối các thành phần cùng loại; 以及 trang trọng hơn, hay nối danh từ hay cụm dài. 此外 là 'ngoài ra', thêm một ý. 而 nối hai vế đối lập nhẹ hay bổ sung: 他喜欢游泳，而我喜欢跑步. 而是 dùng sau phủ định 不是… để đưa ra điều đúng. 既然 là 'đã… thì', nói điều đã rõ rồi suy ra kết quả. 可见 là 'có thể thấy', rút ra kết luận. 甚至 là 'thậm chí'. 例如 là 'ví dụ'. 总之 là 'tóm lại'.",
   "tip": "而是 luôn đi sau 不是, không dùng độc lập. 甚至 đứng trước thành phần được nhấn mạnh, đừng đặt sau động từ chính.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -155545,7 +155600,13 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     "why": "此外 là “ngoài ra”, thêm một ý mới vào câu."
    }
   ,
-   { "q": "Điền vào chỗ trống: 他会说汉语，___会写汉字。", "o": ["但是", "并", "如果", "因为"], "a": 1, "why": "并 là liên từ 'và' (trang trọng), nối hai khả năng cùng loại: 会说汉语，并会写汉字。" }]
+   { "q": "Điền vào chỗ trống: 他会说汉语，___会写汉字。", "o": ["但是", "并", "如果", "因为"], "a": 1, "why": "并 là liên từ 'và' (trang trọng), nối hai khả năng cùng loại: 会说汉语，并会写汉字。" },
+   {
+    "q": "“他喜欢游泳，而我喜欢跑步” — 而 nối hai vế có quan hệ gì?",
+    "o": ["Nguyên nhân", "Đối lập nhẹ / bổ sung", "Điều kiện", "Lựa chọn"],
+    "a": 1,
+    "why": "而 nối hai vế đối lập nhẹ: anh ấy thích bơi, còn tôi thích chạy."
+   }]
  },
  {
   "id": "v218-l4-07",
@@ -155556,10 +155617,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "他跑得像风似的，一下子就不见了。(Tā pǎo de xiàng fēng shìde, yīxiàzi jiù bú jiàn le.) — Anh ấy chạy như gió, chớp mắt đã không thấy đâu.",
    "孩子们高兴得像过节似的。(Háizimen gāoxìng de xiàng guò jié shìde.) — Các em nhỏ vui như đón Tết vậy.",
    "多快啊！他一下子就跑完了。(Duō kuài a! Tā yīxiàzi jiù pǎo wán le.) — Nhanh quá à! Anh ấy chạy xong trong chớp mắt.",
-   "你看，外面下雪了，多美啊！(Nǐ kàn, wàimiàn xià xuě le, duō měi a!) — Bạn xem kìa, ngoài trời tuyết rơi rồi, đẹp quá à!"
+   "你看，外面下雪了，多美啊！(Nǐ kàn, wàimiàn xià xuě le, duō měi a!) — Bạn xem kìa, ngoài trời tuyết rơi rồi, đẹp quá à!",
+   "啊，你怎么在这里？(Ā, nǐ zěnme zài zhèlǐ?) — Ồ, sao bạn lại ở đây?",
+   "啊，我明白了。(Ā, wǒ míngbai le.) — À, tôi hiểu rồi."
   ],
   "speak": "他跑得像风似的，一下子就不见了。孩子们高兴得像过节似的。多快啊！他一下子就跑完了。你看，外面下雪了，多美啊！",
-  "rule": "似的 (shìde) là trợ từ, đứng cuối cụm so sánh sau 像…: 像风似的, 像过节似的, nghĩa là “như…, giống như…”, không có 像 vẫn có thể dùng: 下雪似的. 啊 (a) là trợ từ ngữ khí cuối câu, dùng sau câu cảm thán hay câu hỏi nhẹ: 多美啊！, 好啊！, làm giọng nói mềm và thân mật hơn. 啊 đọc nhẹ, không mang thanh điệu rõ.",
+  "rule": "似的 (shìde) là trợ từ, đứng cuối cụm so sánh sau 像…: 像风似的, nghĩa là 'như…, giống như…', không có 像 vẫn có thể dùng. 啊 (a) là trợ từ ngữ khí cuối câu cảm thán: 多美啊！. 啊² còn là thán từ đứng đầu câu, nói ngạc nhiên hay chợt hiểu ra: 啊，你怎么在这里？/ 啊，我明白了。",
   "tip": "似的 luôn đi kèm so sánh, đừng dùng cho câu trần thuật bình thường. 啊 cuối câu cảm thán phải đi với 多/太/真…: 多美啊 mới đúng, đừng nói 美啊 một mình.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -155628,6 +155691,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 0,
     "why": "似的 hay đi sau 像…: 像风似的."
+   },
+   {
+    "q": "“啊，我明白了” — 啊 ở đây là gì?",
+    "o": ["Trợ từ cuối câu cảm thán", "Thán từ đầu câu, nói chợt hiểu ra", "Từ nối hai câu", "Phó từ mức độ"],
+    "a": 1,
+    "why": "啊² là thán từ đầu câu: chợt hiểu ra, ngạc nhiên."
    }
   ]
  },
@@ -155640,11 +155709,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "他大口大口地吃饭，一会儿就吃完了。(Tā dà kǒu dà kǒu de chī fàn, yīhuìr jiù chī wán le.) — Anh ấy ăn từng miếng to, một lát đã ăn xong.",
    "她一步一步地走上山，一点儿也不着急。(Tā yī bù yī bù de zǒu shang shān, yīdiǎnr yě bù zháojí.) — Cô ấy bước từng bước lên núi, không vội chút nào.",
    "孩子们一个一个地回答问题，老师听得很认真。(Háizimen yī gè yī gè de huí dá wèn tí, lǎoshī tīng de hěn rènzhēn.) — Các em nhỏ trả lời từng em một, thầy nghe rất chăm chú.",
-   "雨大滴大滴地落下来，路一下子就湿了。(Yǔ dà dī dà dī de luò xiàlai, lù yīxiàzi jiù shī le.) — Mưa rơi từng giọt to, đường ướt ngay lập tức."
+   "雨大滴大滴地落下来，路一下子就湿了。(Yǔ dà dī dà dī de luò xiàlai, lù yīxiàzi jiù shī le.) — Mưa rơi từng giọt to, đường ướt ngay lập tức.",
+   "你这大吃大喝的毛病对身体不好，一定要改改。(Nǐ zhè dà chī dà hē de máobìng duì shēntǐ bù hǎo, yīdìng yào gǎigai.) — Cái tật ăn uống thả ga này của bạn hại sức khỏe lắm, nhất định phải sửa."
   ],
   "speak": "他大口大口地吃饭，一会儿就吃完了。她一步一步地走上山，一点儿也不着急。孩子们一个一个地回答问题，老师听得很认真。雨大滴大滴地落下来，路一下子就湿了。",
-  "rule": "大A大B là mẫu lặp tính từ hay lượng từ sau 大: 大口大口, 大滴大滴, nói động tác diễn ra từng đợt lớn, liên tục. A一B là mẫu lặp với 一 ở giữa: 一步一步, 一个一个, 一口一口, nói làm từng cái một, theo thứ tự, chậm mà chắc. Cả hai mẫu thường đứng trước động từ, làm trạng ngữ, sau đó dùng 地: 大口大口地吃, 一步一步地走.",
-  "tip": "大A大B nhấn mạnh “từng cái to, từng đợt lớn”, còn A一B nhấn mạnh “từng cái một, theo thứ tự”: đừng dùng 大口大口 khi muốn nói ăn từng miếng nhỏ.",
+  "rule": "大A大B: 大 + động từ A + 大 + động từ B, nói làm gì đó ở mức lớn, thường làm vị ngữ: 大吃大喝 (ăn uống thả ga), 大吵大闹 (làm ầm ĩ). Khác với mẫu lặp 大口大口地吃 (từng miếng to, làm trạng ngữ với 地). A一B là mẫu lặp với 一 ở giữa: 一步一步, 一个一个, nói làm từng cái một, theo thứ tự.",
+  "tip": "大吃大喝 là 大A大B (hai động từ khác nhau, làm vị ngữ); 大口大口 / 大滴大滴 là mẫu lặp làm trạng ngữ với 地, còn A一B nhấn mạnh 'từng cái một, theo thứ tự'.",
   "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
   "quiz": [
    {
@@ -155682,14 +155752,9 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    },
    {
     "q": "“大滴大滴地落下来” nhấn mạnh điều gì?",
-    "o": [
-     "Mưa rất nhỏ",
-     "Mưa rơi từng giọt to",
-     "Mưa rơi một giọt",
-     "Mưa đã tạnh"
-    ],
+    "o": ["Mưa rất nhỏ", "Mưa rơi từng giọt to", "Mưa rơi một giọt", "Mưa đã tạnh"],
     "a": 1,
-    "why": "大A大B nói từng đợt lớn, liên tục: từng giọt to."
+    "why": "大滴大滴 là mẫu lặp nói mưa rơi từng giọt to, liên tục (khác với 大A大B như 大吃大喝)."
    },
    {
     "q": "Muốn nói “trả lời từng em một” thì nói thế nào?",
@@ -155712,6 +155777,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 0,
     "why": "Mẫu A一B + 地 + động từ: 一步一步地走."
+   },
+   {
+    "q": "“大吃大喝” nghĩa là gì?",
+    "o": ["Ăn từng miếng to", "Ăn uống thả ga, quá mức", "Ăn rất chậm", "Ăn một mình"],
+    "a": 1,
+    "why": "大吃大喝 = ăn to uống lớn, ăn uống thả ga."
    }
   ]
  },
@@ -155724,11 +155795,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "看来今天要下雨了，你最好带一把伞。(Kànlái jīntiān yào xià yǔ le, nǐ zuì hǎo dài yī bǎ sǎn.) — Xem ra hôm nay sắp mưa, bạn tốt nhất mang theo một cái ô.",
    "他说不定下午会来，你等他一会儿吧。(Tā shuōbudìng xiàwǔ huì lái, nǐ děng tā yīhuìr ba.) — Chưa biết chừng chiều nay anh ấy sẽ đến, bạn đợi anh ấy một lát nhé.",
    "看来他很喜欢这本书，已经看了三遍了。(Kànlái tā hěn xǐhuan zhè běn shū, yǐjīng kàn le sān biàn le.) — Xem ra anh ấy rất thích cuốn sách này, đã đọc ba lần rồi.",
-   "明天说不定会放假，我们先别买票。(Míngtiān shuōbudìng huì fàng jià, wǒmen xiān bié mǎi piào.) — Ngày mai chưa biết chừng được nghỉ, chúng ta đừng vội mua vé."
+   "明天说不定会放假，我们先别买票。(Míngtiān shuōbudìng huì fàng jià, wǒmen xiān bié mǎi piào.) — Ngày mai chưa biết chừng được nghỉ, chúng ta đừng vội mua vé.",
+   "这件事说不定就是他干的。(Zhè jiàn shì shuōbudìng jiù shì tā gàn de.) — Chuyện này chưa biết chừng chính là anh ấy làm."
   ],
   "speak": "看来今天要下雨了，你最好带一把伞。他说不定下午会来，你等他一会儿吧。看来他很喜欢这本书，已经看了三遍了。明天说不定会放假，我们先别买票。",
-  "rule": "看来 nghĩa là “xem ra, có vẻ như”, dùng để đưa ra phán đoán dựa trên dấu hiệu đã thấy: 看来要下雨了. 看来 thường đứng đầu câu. 说不定 nghĩa là “chưa biết chừng, có thể”, nói một khả năng chưa chắc chắn, thường đi với 会: 说不定会来, 说不定会放假. Cả hai đều nói phỏng đoán, nhưng 看来 chắc chắn hơn vì có căn cứ, 说不定 thì khả năng mở hơn.",
-  "tip": "看来 đứng đầu câu, đừng đặt giữa câu sau chủ ngữ. 说不定 hay đi với 会, đừng nói 说不定来了 cho việc đã xảy ra.",
+  "rule": "说不定 nghĩa là 'chưa biết chừng, có thể', nói một khả năng chưa chắc chắn, thường đi với 会. Khả năng đó có thể ở tương lai (说不定下午会来), cũng có thể là phỏng đoán về việc đã xảy ra (这件事说不定就是他干的). 看来 chắc chắn hơn vì có căn cứ, 说不定 thì khả năng mở hơn.",
+  "tip": "看来 đứng đầu câu, đừng đặt giữa câu sau chủ ngữ. 说不定 hay đi với 会, nhưng cũng phỏng đoán được việc đã xảy ra: 说不定昨天来了.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
@@ -155754,15 +155826,10 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     "why": "Khả năng chưa chắc chắn, dùng 说不定."
    },
    {
-    "q": "Câu nào dùng SAI?",
-    "o": [
-     "看来他很喜欢这本书",
-     "他说不定下午会来",
-     "看来下午他说不定会来",
-     "他说不定昨天来了"
-    ],
-    "a": 3,
-    "why": "说不定 nói khả năng trong tương lai, không dùng cho việc đã xảy ra hôm qua."
+    "q": "Câu nào dùng 说不定 đúng?",
+    "o": ["他说不定昨天来了", "他说不定明天来了", "他说不定去年会来", "他说不定昨天会来了吗"],
+    "a": 0,
+    "why": "说不定 phỏng đoán cả việc đã xảy ra: chưa biết chừng hôm qua anh ấy đã đến."
    },
    {
     "q": "看来 và 说不定 khác nhau ở chỗ nào?",
@@ -155796,6 +155863,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 1,
     "why": "说不定 nghĩa là chưa biết chừng, chỉ là một khả năng."
+   },
+   {
+    "q": "“这件事说不定就是他干的” — người nói có chắc chắn không?",
+    "o": ["Chắc chắn là anh ấy làm", "Chưa chắc, chỉ phỏng đoán (kể cả việc đã xảy ra)", "Chắc chắn không phải anh ấy", "Đã biết rõ từ lâu"],
+    "a": 1,
+    "why": "说不定 phỏng đoán cả việc đã xảy ra, không chỉ tương lai."
    }
   ]
  },
@@ -156312,10 +156385,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "他走进教室，坐在第一排。(Tā zǒu jìn jiàoshì, zuò zài dì yī pái.) — Anh ấy bước vào lớp, ngồi ở hàng đầu tiên.",
    "妈妈从包里拿出一把雨伞。(Māma cóng bāo lǐ ná chū yī bǎ yǔsǎn.) — Mẹ lấy ra một cái ô từ trong túi.",
    "他爬上山顶，看到了美丽的日出。(Tā pá shang shāndǐng, kàn dào le měilì de rìchū.) — Anh ấy leo lên đỉnh núi, nhìn thấy bình minh đẹp.",
-   "请你把这本书带回来，我想再看一遍。(Qǐng nǐ bǎ zhè běn shū dài huílai, wǒ xiǎng zài kàn yī biàn.) — Bạn mang cuốn sách này về giúp tôi, tôi muốn đọc lại một lần."
+   "请你把这本书带回来，我想再看一遍。(Qǐng nǐ bǎ zhè běn shū dài huílai, wǒ xiǎng zài kàn yī biàn.) — Bạn mang cuốn sách này về giúp tôi, tôi muốn đọc lại một lần.",
+   "他终于想起了当时的情况。(Tā zhōngyú xiǎng qǐ le dāngshí de qíngkuàng.) — Cuối cùng anh ấy nhớ ra tình hình lúc đó.",
+   "请同学们离开教室时关上窗户。(Qǐng tóngxuémen líkāi jiàoshì shí guān shang chuānghu.) — Các bạn rời lớp nhớ đóng cửa sổ lại."
   ],
   "speak": "他走进教室，坐在第一排。妈妈从包里拿出一把雨伞。他爬上山顶，看到了美丽的日出。请你把这本书带回来，我想再看一遍。",
-  "rule": "Bổ ngữ xu hướng gồm hai phần: hướng (上/下/进/出/回/过/起) và 来/去 chỉ hướng về phía người nói hay rời xa người nói: 进来 (vào đây), 出去 (ra kia), 回来 (về đây), 上去 (lên kia). Cấu trúc: động từ + 补语 xu hướng (+ tân ngữ): 走进教室, 拿出一把伞, 爬上山顶. Khi có tân ngữ chỉ nơi chốn, tân ngữ đứng giữa: 走进教室, 爬上山; khi tân ngữ là vật, thường đứng sau: 拿出一本书.",
+  "rule": "Bổ ngữ xu hướng gồm hai phần: hướng (上/下/进/出/回/过/起) và 来/去 chỉ hướng về phía người nói hay rời xa người nói: 进来, 出去, 回来. Bổ ngữ xu hướng còn dùng với nghĩa kết quả (nghĩa mở rộng): động từ + 上/出/起/下: 想起 (nhớ ra), 说出 (nói ra), 关上 (đóng lại), 留下 (để lại/ở lại), 建立起 (xây dựng nên). Cấu trúc: động từ + bổ ngữ xu hướng (+ tân ngữ): 走进教室, 拿出一把伞, 爬上山顶. Khi có tân ngữ chỉ nơi chốn, tân ngữ đứng giữa: 走进教室, 爬上山; khi tân ngữ là vật, thường đứng sau: 拿出一本书.",
   "tip": "来 là hướng về phía người nói, 去 là rời xa người nói: 拿来 (mang đến đây), 拿去 (mang đi kia). Đừng nhầm 进来 với 进去.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -156384,6 +156459,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 1,
     "why": "去 là rời xa người nói, 来 là hướng về phía người nói."
+   },
+   {
+    "q": "“他想起了当时的情况” — 起 ở đây chỉ gì?",
+    "o": ["Hướng lên trên", "Nhớ ra (kết quả, nghĩa mở rộng)", "Đi xa người nói", "Bắt đầu làm"],
+    "a": 1,
+    "why": "想起 = nhớ ra: 起 làm bổ ngữ kết quả với nghĩa mở rộng."
    }
   ]
  },
@@ -156396,10 +156477,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "桌子上放着一本书和一支笔。(Zhuōzi shang fàng zhe yī běn shū hé yī zhī bǐ.) — Trên bàn đặt một quyển sách và một cây bút.",
    "门口站着一个人，好像在等谁。(Ménkǒu zhàn zhe yī gè rén, hǎoxiàng zài děng shéi.) — Ở cửa đứng một người, hình như đang đợi ai.",
    "墙上挂着一幅画，画的是美丽的西湖。(Qiáng shang guà zhe yī fú huà, huà de shì měilì de Xī Hú.) — Trên tường treo một bức tranh, vẽ hồ Tây đẹp.",
-   "昨天晚上，村里来了一个新老师。(Zuótiān wǎnshang, cūn lǐ lái le yī gè xīn lǎoshī.) — Tối hôm qua, trong làng đến một thầy giáo mới."
+   "昨天晚上，村里来了一个新老师。(Zuótiān wǎnshang, cūn lǐ lái le yī gè xīn lǎoshī.) — Tối hôm qua, trong làng đến một thầy giáo mới.",
+   "前边开来一辆车。(Qiánbian kāi lái yī liàng chē.) — Phía trước chạy đến một chiếc xe.",
+   "对面走来一位老人。(Duìmiàn zǒu lái yī wèi lǎorén.) — Đối diện đi đến một cụ già."
   ],
   "speak": "桌子上放着一本书和一支笔。门口站着一个人，好像在等谁。墙上挂着一幅画，画的是美丽的西湖。昨天晚上，村里来了一个新老师。",
-  "rule": "Câu tồn hiện nói có người hay vật xuất hiện hay tồn tại ở một nơi nào đó. Cấu trúc: nơi chốn + động từ + 着/了 + danh từ (người/vật mới): 桌子上放着一本书, 门口站着一个人. Động từ thường là 放, 挂, 站, 坐, 住, 来, 死, 出现. Dùng 着 để nói trạng thái đang tồn tại, dùng 了 để nói sự xuất hiện mới: 村里来了新老师. Danh từ sau động từ là thông tin mới, không dùng định ngữ xác định như 这/那.",
+  "rule": "Câu tồn hiện nói có người hay vật xuất hiện hay tồn tại ở một nơi. Tồn tại tĩnh: nơi chốn + động từ + 着 + danh từ mới (桌子上放着一本书). Xuất hiện: nơi chốn + động từ + bổ ngữ xu hướng/kết quả + 了 + số lượng + người/vật mới: 前边开来一辆车, 对面走来一位老人, 教室里走出来一位老师. Biến mất: nơi chốn + động từ + bổ ngữ kết quả + 了 + người/vật. Danh từ sau động từ là thông tin mới, không dùng 这/那. Động từ thường là 放, 挂, 站, 坐, 住, 来, 死, 出现. Dùng 着 để nói trạng thái đang tồn tại, dùng 了 để nói sự xuất hiện mới.",
   "tip": "Nơi chốn đứng đầu câu, không đứng sau động từ. Danh từ mới xuất hiện không thêm 这/那: nói 门口站着一个人, không nói 门口站着这个人.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -156468,6 +156551,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 1,
     "why": "Câu tồn hiện hay dùng động từ chỉ vị trí hay xuất hiện: 放, 挂, 站, 来."
+   },
+   {
+    "q": "“前边开来一辆车” nói điều gì?",
+    "o": ["Một chiếc xe đang đỗ phía trước", "Phía trước chạy đến một chiếc xe (mới xuất hiện)", "Xe đã đi khỏi phía trước", "Không có xe nào phía trước"],
+    "a": 1,
+    "why": "开来 + 了: xe chạy đến, mới xuất hiện ở nơi chốn."
    }
   ]
  },
@@ -157152,10 +157241,11 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "不管多忙，他都坚持跑步。(Bùguǎn duō máng, tā dōu jiānchí pǎobù.) — Bất kể bận đến đâu, anh ấy vẫn kiên trì chạy bộ.",
    "不管天气怎么样，我们都要去。(Bùguǎn tiānqì zěnmeyàng, wǒmen dōu yào qù.) — Bất kể thời tiết thế nào, chúng tôi vẫn phải đi.",
    "不管你说什么，我都不改变主意。(Bùguǎn nǐ shuō shénme, wǒ dōu bù gǎibiàn zhǔyī.) — Bất kể bạn nói gì, tôi cũng không đổi ý.",
-   "不管多贵，这件衣服我都要买。(Bùguǎn duō guì, zhè jiàn yīfu wǒ dōu yào mǎi.) — Bất kể đắt đến đâu, bộ quần áo này tôi cũng phải mua."
+   "不管多贵，这件衣服我都要买。(Bùguǎn duō guì, zhè jiàn yīfu wǒ dōu yào mǎi.) — Bất kể đắt đến đâu, bộ quần áo này tôi cũng phải mua.",
+   "不管有多难，我也会坚持学下去。(Bùguǎn yǒu duō nán, wǒ yě huì jiānchí xué xiàqù.) — Dù khó đến đâu, tôi cũng sẽ kiên trì học tiếp."
   ],
   "speak": "不管多忙，他都坚持跑步。不管天气怎么样，我们都要去。不管你说什么，我都不改变主意。不管多贵，这件衣服我都要买。",
-  "rule": "不管…，都… nêu một điều kiện bất kỳ (thường là câu hỏi hoặc mức độ) rồi khẳng định kết quả không đổi: bất kể… đều…. Vế 不管 thường chứa từ hỏi (什么/怎么/多…) hoặc tính từ mức độ; 都 ở vế sau có thể tỉnh lược khi ngữ khí đã rõ, nhưng giữ 都 thì nhấn mạnh hơn.",
+  "rule": "不管…，都… nêu một điều kiện bất kỳ (thường là câu hỏi hoặc mức độ) rồi khẳng định kết quả không đổi: bất kể… đều…. 不管…，也… là dạng thay thế: 不管有多难，我也会坚持学下去. Vế 不管 thường chứa từ hỏi (什么/怎么/多…) hoặc tính từ mức độ; 都 ở vế sau có thể tỉnh lược khi ngữ khí đã rõ.",
   "tip": "不管 khác 如果: 如果 là nếu (điều kiện có thể đổi kết quả), 不管 là bất kể (điều kiện nào kết quả cũng vậy) — đừng dịch 不管 thành nếu.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -157224,6 +157314,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 1,
     "why": "不管 khẳng định kết quả không đổi, 如果 để điều kiện đổi kết quả."
+   },
+   {
+    "q": "“不管有多难，我也会坚持学下去” — 也 ở đây tương đương với từ nào?",
+    "o": ["就", "都", "还", "才"],
+    "a": 1,
+    "why": "不管…，也… = 不管…，都…: dù thế nào kết quả cũng không đổi."
    }
   ]
  },
@@ -157488,10 +157584,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "他不舒服，今天没来上课。(Tā bù shūfu, jīntiān méi lái shàng kè.) — Anh ấy không khỏe, hôm nay không đến lớp.",
    "天黑了，我们回家吧。(Tiān hēi le, wǒmen huí jiā ba.) — Trời tối rồi, chúng ta về nhà đi.",
    "你先走，我随后就到。(Nǐ xiān zǒu, wǒ suíhòu jiù dào.) — Bạn đi trước đi, tôi đến ngay sau.",
-   "我请他吃饭，他很高兴。(Wǒ qǐng tā chī fàn, tā hěn gāoxìng.) — Tôi mời anh ấy ăn cơm, anh ấy rất vui."
+   "我请他吃饭，他很高兴。(Wǒ qǐng tā chī fàn, tā hěn gāoxìng.) — Tôi mời anh ấy ăn cơm, anh ấy rất vui.",
+   "你有事你先走。(Nǐ yǒu shì nǐ xiān zǒu.) — Bạn có việc thì cứ đi trước đi.",
+   "你不怕我怕。(Nǐ bù pà wǒ pà.) — Bạn không sợ thì tôi sợ."
   ],
   "speak": "他不舒服，今天没来上课。天黑了，我们回家吧。你先走，我随后就到。我请他吃饭，他很高兴。",
-  "rule": "Câu phức tiếng Trung có thể không dùng từ nối: hai vế đặt cạnh nhau, quan hệ (nhân quả, thời gian, điều kiện, đối lập) do ngữ nghĩa và thứ tự các vế quyết định. Vế trước thường nêu nguyên nhân, thời gian hoặc điều kiện, vế sau nêu kết quả hoặc hành động. Khi dịch sang tiếng Việt thường phải thêm từ nối (vì, nên, rồi) cho rõ nghĩa.",
+  "rule": "Câu phức tiếng Trung có thể không dùng từ nối: hai vế đặt cạnh nhau, quan hệ do ngữ nghĩa và thứ tự quyết định. Dạng cấp 4 là câu rút gọn 紧缩: hai vế ngắn đặt cạnh nhau, vế trước ngầm là điều kiện, vế sau là kết quả: 你有事你先走 (bạn có việc thì cứ đi trước), 你不怕我怕 (bạn không sợ thì tôi sợ), 你想去你去 (bạn muốn đi thì cứ đi).",
   "tip": "Người Việt hay thêm từ nối vào mọi chỗ — nhưng tiếng Trung lược từ nối rất thường xuyên; đọc câu không từ nối thì dựa vào thứ tự và logic, đừng cố tìm từ nối.",
   "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
   "quiz": [
@@ -157560,6 +157658,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 1,
     "why": "Tiếng Việt thường cần thêm từ nối để quan hệ giữa hai vế được rõ."
+   },
+   {
+    "q": "“你有事你先走” — quan hệ giữa hai vế là gì?",
+    "o": ["Nguyên nhân – kết quả", "Điều kiện ngầm – kết quả (câu rút gọn)", "Liệt kê", "Đối lập"],
+    "a": 1,
+    "why": "Câu rút gọn: vế trước ngầm là điều kiện (nếu bạn có việc), vế sau là kết quả."
    }
   ]
  },
@@ -157572,10 +157676,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "他不去，我也不去。(Tā bù qù, wǒ yě bù qù.) — Anh ấy không đi, tôi cũng không đi.",
    "这个菜不好吃，那个菜也不好吃。(Zhège cài bù hǎochī, nàge cài yě bù hǎochī.) — Món này không ngon, món kia cũng không ngon.",
    "你不说，我也不问。(Nǐ bù shuō, wǒ yě bù wèn.) — Bạn không nói, tôi cũng không hỏi.",
-   "今天不冷，明天也不冷。(Jīntiān bù lěng, míngtiān yě bù lěng.) — Hôm nay không lạnh, ngày mai cũng không lạnh."
+   "今天不冷，明天也不冷。(Jīntiān bù lěng, míngtiān yě bù lěng.) — Hôm nay không lạnh, ngày mai cũng không lạnh.",
+   "今天晚上我不睡觉也要把这篇作文写完。(Jīntiān wǎnshang wǒ bù shuì jiào yě yào bǎ zhè piān zuòwén xiě wán.) — Tối nay dù không ngủ tôi cũng phải viết xong bài văn này.",
+   "他不吃饭也要帮我修电脑。(Tā bù chī fàn yě yào bāng wǒ xiū diànnǎo.) — Anh ấy dù không ăn cơm cũng phải giúp tôi sửa máy tính."
   ],
   "speak": "他不去，我也不去。这个菜不好吃，那个菜也不好吃。你不说，我也不问。今天不冷，明天也不冷。",
-  "rule": "不…也… nối hai vế phủ định song song: vế trước phủ định một việc, vế sau dùng 也 phủ định thêm một việc tương tự, nghĩa là không… cũng không…. 也 ở vế sau là bắt buộc để tạo quan hệ song song; hai vế thường có chủ ngữ khác nhau hoặc nói về hai sự việc khác nhau.",
+  "rule": "不…也… có hai dùng: (1) hai vế phủ định song song: vế trước phủ định một việc, vế sau dùng 也 phủ định thêm một việc tương tự, nghĩa là không… cũng không…: 他不去，我也不去. 也 ở vế sau là bắt buộc để tạo quan hệ song song; hai vế thường có chủ ngữ khác nhau hoặc nói về hai sự việc khác nhau. (2) nhượng bộ 不…也（要）…: dù không làm việc A, vẫn làm việc B: 今天晚上我不睡觉也要把这篇作文写完 (tối nay dù không ngủ tôi cũng phải viết xong bài văn), 他不吃饭也要帮我修电脑. Đây là hai mẫu khác nhau, đừng lẫn nhượng bộ với hai phủ định song song.",
   "tip": "Đừng bỏ 也 ở vế sau — không có 也 thì hai câu chỉ là hai câu phủ định rời rạc, không còn quan hệ cũng; và đừng dùng 都 thay 也 ở đây.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -157644,6 +157750,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 3,
     "why": "不…也… nối hai vế phủ định song song, tương tự nhau."
+   },
+   {
+    "q": "“他不吃饭也要帮我修电脑” nghĩa là gì?",
+    "o": ["Anh ấy không ăn cơm, cũng không sửa máy tính", "Dù không ăn cơm, anh ấy vẫn giúp tôi sửa máy tính", "Anh ấy ăn cơm xong mới sửa máy tính", "Anh ấy không muốn sửa máy tính"],
+    "a": 1,
+    "why": "不…也（要）…: dù không ăn, vẫn giúp sửa — nhượng bộ, không phải hai phủ định song song."
    }
   ]
  },
@@ -157740,10 +157852,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "这不是很好吗？(Zhè bù shì hěn hǎo ma?) — Chẳng phải thế này rất tốt sao?",
    "难道你不知道吗？(Nándào nǐ bù zhīdào ma?) — Chẳng lẽ bạn không biết sao?",
    "他不得不去。(Tā bùdé bù qù.) — Anh ấy không thể không đi.",
-   "没有人不喜欢他。(Méi yǒu rén bù xǐhuan tā.) — Không ai là không thích anh ấy."
+   "没有人不喜欢他。(Méi yǒu rén bù xǐhuan tā.) — Không ai là không thích anh ấy.",
+   "他这么有名，谁不知道他啊？(Tā zhème yǒumíng, shéi bù zhīdào tā a?) — Anh ấy nổi tiếng như thế, ai mà không biết anh ấy chứ?",
+   "作业这么多，我哪儿有时间出去玩儿？(Zuòyè zhème duō, wǒ nǎr yǒu shíjiān chūqù wánr?) — Bài tập nhiều thế này, tôi lấy đâu ra thời gian đi chơi?"
   ],
   "speak": "这不是很好吗？难道你不知道吗？他不得不去。没有人不喜欢他。",
-  "rule": "Câu hỏi tu từ dùng hình thức hỏi (不是…吗, 难道…吗, 哪儿…) để khẳng định mạnh điều ngược lại, không cần câu trả lời. Phủ định kép dùng hai phủ định (不得不, 没有…不…, 不是不…) để khẳng định mạnh: không thể không = nhất định phải. Cả hai đều là cách nhấn mạnh, mạnh hơn câu khẳng định thường.",
+  "rule": "Câu hỏi tu từ dùng hình thức hỏi để khẳng định mạnh điều ngược lại, không cần câu trả lời. Loại 1: 不是…吗, 难道…吗 (这不是很好吗？). Loại 2 (cấp 4): dùng đại từ nghi vấn 谁/怎么/哪儿: 他这么有名，谁不知道他啊？(ai mà không biết?), 作业这么多，我哪儿有时间出去玩儿？(lấy đâu ra thời gian?). Phủ định kép dùng hai phủ định (不得不, 没有…不…) để khẳng định mạnh.",
   "tip": "Dịch câu hỏi tu từ sang tiếng Việt phải giữ giọng khẳng định (chẳng phải… sao?), đừng dịch thành câu hỏi thật rồi trả lời; phủ định kép đừng bỏ bớt một phủ định kẻo đổi hẳn nghĩa.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -157812,6 +157926,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 3,
     "why": "Hai phủ định thành khẳng định mạnh, mạnh hơn câu khẳng định thường."
+   },
+   {
+    "q": "“作业这么多，我哪儿有时间出去玩儿？” — người nói thực sự muốn hỏi gì?",
+    "o": ["Hỏi xem có thời gian không", "Khẳng định mạnh: không có thời gian đi chơi", "Hỏi bài tập ở đâu", "Hỏi đi chơi ở đâu"],
+    "a": 1,
+    "why": "哪儿…？là câu hỏi tu từ: khẳng định không có thời gian."
    }
   ]
  },
@@ -157908,10 +158028,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "不吃白不吃，反正不要钱。(Bù chī bái bù chī, fǎnzhèng bù yào qián.) — Không ăn thì phí, đằng nào cũng không mất tiền.",
    "不看白不看，电影票都买了。(Bù kàn bái bù kàn, diànyǐng piào dōu mǎi le.) — Không xem thì phí, vé phim mua rồi mà.",
    "他做一件事是一件事，从来不拖。(Tā zuò yī jiàn shì shì yī jiàn shì, cónglái bù tuō.) — Anh ấy làm được việc nào chắc việc ấy, không bao giờ dây dưa.",
-   "这没什么好说的，我们走吧。(Zhè méi shénme hǎo shuō de, wǒmen zǒu ba.) — Chuyện này chẳng có gì đáng nói, chúng ta đi thôi."
+   "这没什么好说的，我们走吧。(Zhè méi shénme hǎo shuō de, wǒmen zǒu ba.) — Chuyện này chẳng có gì đáng nói, chúng ta đi thôi.",
+   "你还是别担心了，有什么好害怕的。(Nǐ háishi bié dānxīn le, yǒu shénme hǎo hàipà de.) — Bạn đừng lo nữa, có gì đáng sợ đâu.",
+   "有什么好难过的，这是我们早就想到的结果。(Yǒu shénme hǎo nánguò de, zhè shì wǒmen zǎo jiù xiǎng dào de jiéguǒ.) — Có gì đáng buồn đâu, đây là kết quả chúng ta đã nghĩ đến từ lâu."
   ],
   "speak": "不吃白不吃，反正不要钱。不看白不看，电影票都买了。他做一件事是一件事，从来不拖。这没什么好说的，我们走吧。",
-  "rule": "不×白不×: việc có lợi mà không làm thì uổng, nghĩa là không làm thì phí (thường là đồ miễn phí, cơ hội sẵn có). 动词+一×是一×: làm được bao nhiêu chắc bấy nhiêu, nhấn mạnh làm chắc từng việc. （没）有什么（好）×的: (không) có gì đáng để ×, dùng để coi nhẹ hoặc an ủi (没什么好怕的 = chẳng có gì đáng sợ).",
+  "rule": "不×白不×: việc có lợi mà không làm thì uổng. 动词+一×是一×: làm được bao nhiêu chắc bấy nhiêu. （没）有什么（好）×的: (không) có gì đáng để ×, dùng để coi nhẹ hoặc an ủi. Dạng khẳng định 有什么好×的: 有什么好害怕的 (có gì đáng sợ đâu), 有什么好难过的 (có gì đáng buồn đâu).",
   "tip": "不×白不× chỉ dùng cho việc có lợi, không tốn kém; đừng dùng cho việc tốn tiền hay có hại. 有什么好×的 mang giọng coi nhẹ — dùng sai ngữ cảnh sẽ nghe như coi thường người khác.",
   "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
   "quiz": [
@@ -157980,6 +158102,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 3,
     "why": "不×白不× chỉ dùng cho việc có lợi, không tốn kém, không làm thì uổng."
+   },
+   {
+    "q": "“有什么好害怕的” nghĩa là gì?",
+    "o": ["Có rất nhiều điều đáng sợ", "Có gì đáng sợ đâu (coi nhẹ)", "Nhất định phải sợ", "Không biết sợ là gì"],
+    "a": 1,
+    "why": "有什么好×的 (khẳng định) = có gì đáng × đâu, giọng coi nhẹ."
    }
   ]
  },
@@ -158076,10 +158204,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "还早呢，再睡一会儿吧。(Hái zǎo ne, zài shuì yīhuìr ba.) — Còn sớm mà, ngủ thêm một lát đi.",
    "还贵呢，我没钱买。(Hái guì ne, wǒ méi qián mǎi.) — Còn đắt lắm, tôi không có tiền mua.",
    "你看你的书吧，别管我了。(Nǐ kàn nǐ de shū ba, bié guǎn wǒ le.) — Bạn cứ đọc sách của bạn đi, đừng lo cho tôi.",
-   "你忙你的吧，我自己回家。(Nǐ máng nǐ de ba, wǒ zìjǐ huí jiā.) — Bạn cứ bận việc của bạn đi, tôi tự về nhà."
+   "你忙你的吧，我自己回家。(Nǐ máng nǐ de ba, wǒ zìjǐ huí jiā.) — Bạn cứ bận việc của bạn đi, tôi tự về nhà.",
+   "还名牌儿呢，我听都没听过。(Hái míngpáir ne, wǒ tīng dōu méi tīng guò.) — Hãng nổi tiếng gì chứ, tôi nghe còn chưa nghe bao giờ.",
+   "还著名诗人呢，这诗写得我都看不懂。(Hái zhùmíng shīrén ne, zhè shī xiě de wǒ dōu kàn bù dǒng.) — Nhà thơ nổi tiếng gì chứ, bài thơ này viết đến tôi còn đọc không hiểu."
   ],
   "speak": "还早呢，再睡一会儿吧。还贵呢，我没钱买。你看你的书吧，别管我了。你忙你的吧，我自己回家。",
-  "rule": "还×呢: nhấn mạnh mức độ còn cao (còn sớm, còn đắt lắm) hoặc việc còn chưa xong, thường đi với 呢 cuối câu, mang giọng trấn an hoặc than. 你×你的吧: bảo người nghe cứ làm việc của mình, đừng bận tâm chuyện khác (bạn cứ… của bạn đi), vế × lặp lại động từ, 吧 làm câu nhẹ nhàng.",
+  "rule": "还×呢 có hai dùng: (1) nhấn mạnh mức độ còn cao (còn sớm, còn đắt lắm) hoặc việc còn chưa xong, thường đi với 呢 cuối câu, mang giọng trấn an hoặc than: 还早呢, 还贵呢. (2) mỉa mai, phủ định lời khen/xưng danh: 还名牌儿呢，我听都没听过 (hãng nổi tiếng gì chứ, tôi nghe còn chưa nghe bao giờ), 还著名诗人呢. 你×你的吧: bảo người nghe cứ làm việc của mình, đừng bận tâm chuyện khác.",
   "tip": "还×呢 đừng nhầm với 还 (còn, vẫn) thường — có 呢 cuối câu mới ra giọng nhấn mạnh còn… lắm đấy; 你×你的吧 nghe thân mật, chỉ dùng với người quen, không dùng với người lớn tuổi hay cấp trên.",
   "note": "Nhãn HSK là mức đặt theo trình độ. Điểm này cần đối chiếu giáo trình.",
   "quiz": [
@@ -158148,6 +158278,12 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
     ],
     "a": 3,
     "why": "你×你的吧 nghe thân mật, chỉ dùng với người thân quen, ngang hàng."
+   },
+   {
+    "q": "“还名牌儿呢，我听都没听过” — người nói thực sự nghĩ gì?",
+    "o": ["Khen hãng rất nổi tiếng", "Mỉa mai: chẳng nổi tiếng gì, tôi còn chưa nghe bao giờ", "Hỏi hãng nào nổi tiếng", "Muốn mua hãng đó"],
+    "a": 1,
+    "why": "还×呢 mỉa mai: phủ định lời xưng là hàng hiệu."
    }
   ]
  },
@@ -159676,7 +159812,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "窗户打开了。(Chuānghu dǎkāi le.) — Cửa sổ mở ra rồi."
   ],
   "speak": "饭做好了。衣服洗干净了。这个问题解决了。窗户打开了。",
-  "rule": "Câu bị động ý niệm không dùng 被, 而: chủ ngữ là vật hoặc việc chịu tác động, động từ thường mang bổ ngữ kết quả (做好、洗干净、解决) hoặc 了, và người gây ra hành động không được nhắc tới. Dạng này rất thường gặp trong đời sống: 饭做好了、衣服洗干净了. Khác với câu 被 (衣服被妈妈洗干净了) nêu rõ ai làm, câu ý niệm chỉ quan tâm kết quả.",
+  "rule": "Câu bị động ý niệm không dùng 被: chủ ngữ là vật hoặc việc chịu tác động, động từ thường mang bổ ngữ kết quả (做好、洗干净、解决) hoặc 了, và người gây ra hành động không được nhắc tới. Dạng này rất thường gặp trong đời sống: 饭做好了、衣服洗干净了. Khác với câu 被 (衣服被妈妈洗干净了) nêu rõ ai làm, câu ý niệm chỉ quan tâm kết quả.",
   "tip": "Đừng thêm 被 một cách máy móc vào mọi câu bị động: nói 饭做好了 đã đủ, thêm 被 thành 饭被做好了 nghe rất gượng. Chỉ dùng 被 khi cần nêu người làm hoặc nhấn mạnh sự không may.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -162455,7 +162591,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
   ],
   "speak": "他一米八高，是班里最高的同学。这条河三米多深，小孩子不能一个人去玩。弟弟今年三岁半，刚上幼儿园。这条裙子一米多长，穿起来很漂亮。",
   "rule": "Cấu trúc số từ + tính từ + lượng từ dùng để nói độ cao, dài, sâu, tuổi: 一米八高 (cao một mét tám), 三米多深 (sâu hơn ba mét), 三岁半 (ba tuổi rưỡi), 一米多长 (dài hơn một mét). Thứ tự là: số từ + tính từ + lượng từ, trong đó 多 chỉ hơn một chút, 半 chỉ một nửa. Lưu ý lượng từ đứng SAU tính từ (高, 深, 长, 岁), khác với cụm số + lượng từ + danh từ quen thuộc (三本书).",
-  "tip": "Người Việt hay nói 一米八的高 hoặc 高一米八: trong cấu trúc này không thêm 的 sau tính từ, và lượng từ phải đứng sau tính từ — 一米八高 mới đúng, đừng viết 高一米八 khi muốn nói chiều cao của người.",
+  "tip": "一米八高 là dạng chuẩn của mẫu số từ + tính từ + lượng từ ở cấp này, nên nắm vững dạng này trước. 高一米八 cũng gặp trong khẩu ngữ (他高一米八), không phải câu sai — chỉ là không phải dạng của mẫu đang học. Trong mẫu này không thêm 的 sau tính từ: nói 一米八高, không nói 一米八的高。",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
    {
@@ -163044,7 +163180,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
    "大家吵了半天，屋里终于安静了下来。(Dàjiā chǎo le bàntiān, wū lǐ zhōngyú ānjìng le xiàlai.) — Mọi người ồn ào cả buổi, trong phòng cuối cùng cũng yên lặng lại.",
    "他睡了很久，早上才慢慢醒过来。(Tā shuì le hěn jiǔ, zǎoshang cái mànman xǐng guòlai.) — Anh ấy ngủ rất lâu, đến sáng mới từ từ tỉnh lại."],
   "speak": "他一听到好消息就笑起来了。这个问题很难，我们慢慢想下去吧。她终于把办法想出来了。你跑快点儿，马上就赶上来了。",
-  "rule": "Bổ ngữ xu hướng ngoài nghĩa hướng thật (đi lên, đi xuống, đi ra) còn có nghĩa bóng: 起来 = bắt đầu/nổi lên (笑起来, 忙起来); 下去 = tiếp tục (说下去, 做下去); 出来 = từ không thành có, kết quả hiện ra (想出来, 写出来); 上来 = tới gần/đuổi kịp (赶上来); 下来 = trạng thái dần dần ổn định lại (安静下来 — dần yên lặng lại); 过来 = từ trạng thái này chuyển sang trạng thái khác, tỉnh lại (醒过来 — tỉnh lại). Bổ ngữ đứng ngay sau động từ, trước tân ngữ thì dùng câu chữ 把 hoặc đưa tân ngữ ra sau bổ ngữ. (Trong phụ lục GF, danh sách ghi 下来/下去/起来/过去 nhưng ví dụ dùng 醒过来 — cần đối chiếu giáo trình xem 过去 hay 过来.)",
+  "rule": "Bổ ngữ xu hướng ngoài nghĩa hướng thật (đi lên, đi xuống, đi ra) còn có nghĩa bóng: 起来 = bắt đầu/nổi lên (笑起来, 忙起来); 下去 = tiếp tục (说下去, 做下去); 出来 = từ không thành có, kết quả hiện ra (想出来, 写出来); 上来 = tới gần/đuổi kịp (赶上来); 下来 = trạng thái dần dần ổn định lại (安静下来 — dần yên lặng lại); 过来 = từ trạng thái này chuyển sang trạng thái khác, tỉnh lại (醒过来 — tỉnh lại). Bổ ngữ đứng ngay sau động từ, trước tân ngữ thì dùng câu chữ 把 hoặc đưa tân ngữ ra sau bổ ngữ。",
   "tip": "Người Việt hay dịch 起来 lúc nào cũng là “lên”: trong 笑起来 nó là “bắt đầu cười”, không phải cười lên trên. Nhớ nghĩa bóng theo từng từ, đừng dịch từng chữ.",
   "note": "Nhãn HSK là mức đặt theo trình độ.",
   "quiz": [
@@ -163883,7 +164019,7 @@ ZH_GRAMMAR.push.apply(ZH_GRAMMAR, [
   "id": "v218-l6-31",
   "stage": 6,
   "title": "不…不… — không… không…",
-  "hook": "“我们不见不散” — chúng ta không gặp không về: hai chữ 不 nối nhau thành lời hẹn chắc nịch, hoặc nói ai đó vừa không thế này vừa không thế kia.",
+  "hook": "“我们不见不散” — chúng ta không gặp không về: hai chữ 不 nối nhau thành lời hẹn chắc nịch — vế trước là điều kiện, vế sau là kết quả chỉ xảy ra khi có vế trước.",
   "examples": [
    "我们说好不见不散。(Wǒmen shuō hǎo bù jiàn bù sàn.) — Chúng ta đã hẹn không gặp không về.",
    "不问不知道，一问才知道路这么远。(Bù wèn bù zhīdào, yī wèn cái zhīdào lù zhème yuǎn.) — Không hỏi thì không biết, hỏi rồi mới biết đường xa thế này.",
