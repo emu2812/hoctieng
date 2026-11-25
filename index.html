@@ -26750,7 +26750,21 @@ function zhStageSeq(stage) {
   (ZH_SPEAK || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhSpeak", r.id), target: { kind: "zhLesson", title: "Nói: " + r.title, type: "Tiếng Trung · Nói chặng " + stage, lesson: { type: "zhSpeak", idx: i } } }); });
   (ZH_ROLE || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhRole", r.id), target: { kind: "zhLesson", title: "Nhập vai: " + r.title, type: "Tiếng Trung · Nhập vai chặng " + stage, lesson: { type: "zhRole", idx: i } } }); });
   (ZH_WRITE || []).forEach(function (r, i) { if (r.stage === stage) out.push({ done: zhModDone("zhWrite", r.id), target: { kind: "zhLesson", title: "Viết: " + r.title, type: "Tiếng Trung · Viết chặng " + stage, lesson: { type: "zhWrite", idx: i } } }); });
-  /* VONG PHA v205 (16/11/2026): phan bo lai theo vong TI LE (thay vong
+  /* VONG PHA v253 (25/11/2026): giu khung vong v205 (R = so muc ngu phap,
+     moi vong 1 ngu phap; thu tu pha trong vong: tu vung -> ngu phap -> nghe
+     -> doc -> noi -> nhap vai -> viet; vong 0 lay 3 bo tu vung dau), chi doi
+     cach chia chunk: tu chunkBy (muc j -> vong floor(j*R/n), cum don ve dau,
+     muc cuoi dung o vong R-R/n) sang chunkStretch (muc j -> vong
+     floor(j*(R-1)/(n-1)), muc cuoi cham vong cuoi; n=1 thi ve vong startAt).
+     Vi sao stretch nay dat luat: tu vung da day (chặng 2 10 -> 37 bo, chặng 3
+     25 -> 54, chặng 6 108 -> 132 bo tu v213 den v244) nen keo dan tu vung +
+     ky nang ra het vong cuoi van du mat do, khong con cum ngu phap don o
+     cuoi chang. So do that (jsdom, du lieu v252): duoi G = 0 ca 6 chang
+     (truoc 2/3/2/1/1/1), maxRun 3 ca 6, badWin10 = 0, gapV 6/7/7/6/6/6
+     khong doi; tong buoc + so luong tung loai + thu tu trong cung loai
+     khong doi. Ap cho CA hai cho dung chunkBy cu: tu vung con lai (R-1
+     vong, startAt 1) VA cac loai ky nang (R vong, startAt 0).
+     VONG PHA v205 (16/11/2026): phan bo lai theo vong TI LE (thay vong
      round-robin 1-buoc/loai cua DOT DAN-XEN v47). Vong cu gay duoi ngu phap
      dai (chang 4: 24 buoc G lien tiep, khong con tu vung) vi ngu phap troi
      han (23-34 muc) so voi cac loai khac (6-13): vong round-robin can cac
@@ -26760,7 +26774,8 @@ function zhStageSeq(stage) {
      khong con duoi G; cac loai ky nang khac va tu vung chia deu qua cac
      vong theo phan du lon nhat (muc j -> vong floor(j*R/n)), giu nguyen
      thu tu trong cung loai va thu tu pha trong moi vong: tu vung -> ngu
-     phap -> nghe -> doc -> noi -> nhap vai -> viet. Vong 0 lay 3 bo tu
+     phap -> nghe -> doc -> noi -> nhap vai -> viet. (v253 doi thanh stretch:
+     muc j -> vong floor(j*(R-1)/(n-1)); xem ghi chu v253 o dau khoi.) Vong 0 lay 3 bo tu
      vung dau (khoi dong nhu cu; G3: xong starter thi buoc ke la bo HSK1
      dau). Giu nguyen tap buoc + tong so buoc. Mach pinyin nam ngoai
      zhStageSeq nen khong anh huong; "Hoc tiep" va Ban do doc zhStageSeq
@@ -26774,12 +26789,15 @@ function zhStageSeq(stage) {
     var grams = groups["zhGram"] || [];
     if (!vocab.length || !grams.length) return;
     var R = grams.length; // so vong = so muc ngu phap
-    // Chia deu n muc qua R vong: muc j -> vong floor(j*R/n) (phan du lon nhat).
-    var chunkBy = function (arr, rounds, startAt) {
+    // Chia deu n muc qua R vong (stretch): muc j -> vong floor(j*(R-1)/(n-1)),
+    // muc cuoi cham vong cuoi; n=1 thi ve vong startAt.
+    var chunkStretch = function (arr, rounds, startAt) {
       var chunks = [];
       for (var i = 0; i < (startAt || 0) + rounds; i++) chunks.push([]);
       arr.forEach(function (it, j) {
-        var r = (startAt || 0) + Math.floor(j * rounds / arr.length);
+        var r;
+        if (arr.length <= 1) r = startAt || 0;
+        else r = (startAt || 0) + Math.floor(j * (rounds - 1) / (arr.length - 1));
         if (r >= (startAt || 0) + rounds) r = (startAt || 0) + rounds - 1;
         chunks[r].push(it);
       });
@@ -26791,14 +26809,14 @@ function zhStageSeq(stage) {
     var firstV = Math.min(3, vocab.length);
     for (var fj = 0; fj < firstV; fj++) vChunks[0].push(vocab[fj]);
     if (vocab.length > firstV && R > 1) {
-      var rest = chunkBy(vocab.slice(firstV), R - 1, 1);
+      var rest = chunkStretch(vocab.slice(firstV), R - 1, 1);
       for (var ri = 1; ri < R; ri++) vChunks[ri] = rest[ri]; // rest[1..R-1] <-> vong 1..R-1
     }
     // Ky nang: moi loai chia deu qua R vong (1 muc/vong toi da vi n <= R).
     var sChunks = {};
     SKILL_ORDER.forEach(function (k) {
       var arr = groups[k] || [];
-      sChunks[k] = arr.length ? chunkBy(arr, R, 0) : null;
+      sChunks[k] = arr.length ? chunkStretch(arr, R, 0) : null;
     });
     var mixed = [];
     for (var r = 0; r < R; r++) {
