@@ -5052,7 +5052,7 @@ function u7PositionText() {
      "<Loai bai> · Chuong <X> · done/total buoc da xong" (khong tien to
      "Vi tri:", khong ten tab o che do xem tab — ten tab da co o H1 +
      chip dang chon; chi con tien do thi hien, khong thi an dong). */
-  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Chẩn đoán phát âm đầu vào", pronDiag: "Chẩn đoán phát âm", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra trình độ đầu vào (trắc nghiệm)", entryFour: "Kiểm tra đầu vào 4 kỹ năng", entryPlace: "Xếp lớp đầu vào", tcEntry: "Kiểm tra trình độ TOEIC", tpEntry: "Kiểm tra trình độ TOPIK", dictation: "Nghe chép chính tả", voaListen: "Nghe giọng thật — VOA", /* v252: VOA giong that */ reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", weakEx: "Luyện điểm yếu của tôi", weakPronDrill: "Luyện âm yếu", earDisc: "Nghe-chọn-phiên-âm", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", mixedQuiz: "Trắc nghiệm trộn" };
+  var typeMap = { skillRead: "Bài Đọc", skillReadEasy: "Bài Đọc dễ", skillListen: "Bài Nghe ngắn", skillListenLong: "Bài Nghe dài", skillSpeak: "Bài Nói", skillRoleplay: "Luyện nói theo tình huống", skillWrite: "Bài Viết", skillDrill: "Luyện viết", skillGramOld: "Trạm ngữ pháp", skillPronTopic: "Phát âm theo chủ đề", skillTyping: "Gõ câu", skillReview: "Ôn tập kỹ năng", phaseExam: "Buổi thi", phaseSkill: "Buổi luyện", mockTest: "Thi thử", test: "Bài kiểm tra cuối chương", chapterTest: "Kiểm tra cuối chương", milestone: "Nhiệm vụ giao tiếp thật", chat: "Trò chuyện với AI", pron: "Bài phát âm", pronEntry: "Chẩn đoán phát âm đầu vào", pronDiag: "Chẩn đoán phát âm", vocab: "Thẻ từ vựng", grammar: "Trạm ngữ pháp", quickcheck: "Kiểm tra nhanh", vocabQuick: "Kiểm tra nhanh từ vựng", u7trial: "Chơi thử", entryCheck: "Kiểm tra trình độ đầu vào (trắc nghiệm)", entryFour: "Kiểm tra đầu vào 4 kỹ năng", entryPlace: "Xếp lớp đầu vào", tcEntry: "Kiểm tra trình độ TOEIC", tpEntry: "Kiểm tra trình độ TOPIK", dictation: "Nghe chép chính tả", voaListen: "Nghe giọng thật — VOA", /* v252: VOA giong that */ reviewSession: "Buổi ôn trộn", reviewCard: "Thẻ ôn tập", weakSession: "Buổi luyện phần yếu", weakEx: "Luyện điểm yếu của tôi", weakPronDrill: "Luyện âm yếu", earDisc: "Nghe-chọn-phiên-âm", bkErr: "Sửa lỗi Việt", bkLife: "Tình huống đời sống", bkTone: "Luyện thanh điệu", sachB1: "Sách — Từ vựng theo sách", mixedQuiz: "Trắc nghiệm trộn" };
   if (typeof curLesson !== "undefined" && curLesson) {
     if (curLesson.step) {
       var ls = learningSteps(); var li = -1;
@@ -6839,6 +6839,7 @@ function viewPractice(app) {
         var st = sum ? sum.textContent : "";
         if (dt.querySelector("[data-bkerr]")) put(G2, dt);
         else if (dt.querySelector("[data-bklife]")) put(G3, dt);
+        else if (dt.querySelector("[data-sachb1]")) put(G1, dt);
       });
       /* T9: giu nhan "chi chang 7,5+" cua Sac thai khi tach hop — dua ca tieu de + ghi chu vao G3 cung nut. */
       Array.prototype.slice.call(bk.querySelectorAll("h4")).forEach(function (h) { if (h.textContent.indexOf("Sắc thái") >= 0) G3.appendChild(h); });
@@ -6960,6 +6961,7 @@ function viewPractice(app) {
   $$("[data-bkerr]").forEach(function (b) { b.onclick = function () { openSkill("bkErr", 0, { idx: +b.dataset.bkerr, skillKey: "bkErr:" + b.dataset.bkerr, title: BK_VIET_ERRORS[+b.dataset.bkerr].title }); }; });
   $$("[data-bklife]").forEach(function (b) { b.onclick = function () { openSkill("bkLife", 0, { idx: +b.dataset.bklife, skillKey: "bkLife:" + b.dataset.bklife, title: BK_LIFE[+b.dataset.bklife].title }); }; });
   $$("[data-bktone]").forEach(function (b) { b.onclick = function () { openSkill("bkTone", 0, { idx: +b.dataset.bktone, skillKey: "bkTone:" + b.dataset.bktone, title: BK_TONE[+b.dataset.bktone].title }); }; });
+  $$("[data-sachb1]").forEach(function (b) { b.onclick = function () { openSkill("sachB1", 0, { idx: +b.dataset.sachb1, skillKey: "sachB1:" + b.dataset.sachb1, title: "Unit " + SACH86_B1[+b.dataset.sachb1].n + " — " + SACH86_B1[+b.dataset.sachb1].title }); }; });
   $$("[data-vocabset]").forEach(function (b) { b.onclick = function () { lessonStart = Date.now(); runWrong = []; runFirstTry = {}; openLesson({ type: "vocab", setIdx: +b.dataset.vocabset }); }; });
   wireVocabSearch("enVocabSearch", "enVocabGroups");
   var vbf = $(" #enVocabBandFilter"); if (vbf) vbf.onchange = function () { var v = vbf.value; var wrap = $(" #enVocabGroups"); if (!wrap) return; wrap.querySelectorAll("details[data-vband]").forEach(function (d) { d.open = !v || d.getAttribute("data-vband") === v; }); if (v) { var t = wrap.querySelector('details[data-vband="' + v + '"]'); if (t) t.scrollIntoView(); } };
@@ -12570,6 +12572,26 @@ function renderBkTone(app, l) {
   }
   renderQuizEngine(app, l, [t.q], "skill", "bkTone:" + l.idx);
 }
+/* v260: Sách 1 — Vocabulary in Use Elementary (60 unit, viết lại theo QT-15).
+   Trang lý thuyết: bảng từ (từ + IPA + nghĩa + cụm + ví dụ soạn mới) rồi quiz 6 câu. */
+function renderSachB1(app, l) {
+  var u = (typeof SACH86_B1 !== "undefined") ? SACH86_B1[l.idx] : null;
+  if (!u) { toast("Bài này chưa có."); backFromLesson(); return; }
+  l.title = "Unit " + u.n + " — " + u.title; l.skillKey = "sachB1:" + l.idx;
+  if (!l.quiz) {
+    var rows = u.words.map(function (wd, wi) {
+      return '<tr><td><b>' + esc(wd.w) + '</b><br><span class="mut">' + esc(wd.ipa) + '</span> <button class="btn" data-sachsay="' + wi + '">🔊</button></td><td>' + esc(wd.vi) + '</td><td>' + esc(wd.col) + '</td><td>' + esc(wd.ex) + '<br><span class="mut">' + esc(wd.exv) + '</span></td></tr>';
+    }).join("");
+    app.innerHTML = skillHead(l.title, "Sách 1 · " + esc(u.group) + " · Band 0–2,0") + '<div class="qblock"><p class="mut">Học bảng từ dưới đây trước — từ + phiên âm + nghĩa + cụm đi kèm + ví dụ — rồi mới vào luyện tập.</p>'
+      + '<table><tr><th>Từ</th><th>Nghĩa</th><th>Cụm từ</th><th>Ví dụ</th></tr>' + rows + '</table>'
+      + '<p><button class="btn btn-primary" id="sachB1Start">Luyện tập (' + u.quiz.length + ' câu)</button></p></div>';
+    wireBack();
+    $$("[data-sachsay]").forEach(function (b) { b.onclick = function () { speak(u.words[+b.dataset.sachsay].w); }; });
+    $("#sachB1Start").onclick = function () { l.quiz = true; lessonStart = Date.now(); runWrong = []; runFirstTry = {}; render(); };
+    return;
+  }
+  renderQuizEngine(app, l, u.quiz, "skill", "sachB1:" + l.idx);
+}
 function bkPracticeHTML() {
   var html = '<section class="card" id="bkPracticeCard"><h3>📚 Nội dung mới theo nghiên cứu sách</h3>';
   html += '<h4>Lỗi riêng cho người Việt — theo chặng</h4>';
@@ -12594,6 +12616,15 @@ function bkPracticeHTML() {
   html += '</div>';
   html += '<h4>Đối chiếu format thi hiện tại — thẻ tra cứu</h4>';
   BK_FORMAT.forEach(function (f) { html += '<div class="qblock"><p><b>Sách cũ hay ghi:</b> ' + esc(f.old) + '</p><p><b>Format hiện tại:</b> ' + esc(f.now) + '</p></div>'; });
+  var sachGroups = ["Luyện học từ", "Động từ thường ngày", "Từ và ngữ pháp", "Con người", "Thế giới", "Ở nhà", "Trường học và nơi làm việc", "Giải trí", "Vấn đề xã hội"];
+  sachGroups.forEach(function (g) {
+    var idxs = []; SACH86_B1.forEach(function (u, i) { if (u.group === g) idxs.push(i); });
+    if (!idxs.length) return;
+    var first = SACH86_B1[idxs[0]].n, last = SACH86_B1[idxs[idxs.length - 1]].n;
+    html += '<details style="margin-top:8px"><summary><b>📚 Sách 1 · ' + esc(g) + ' · Unit ' + first + '–' + last + ' (' + idxs.length + ' bài)</b></summary><div class="row" style="margin-top:6px">';
+    idxs.forEach(function (i) { var u = SACH86_B1[i]; html += '<button class="btn" data-sachb1="' + i + '">Unit ' + u.n + ' — ' + esc(u.title) + skillDoneMark("sachB1:" + i) + '</button>'; });
+    html += '</div></details>';
+  });
   html += '</section>';
   return html;
 }
@@ -13399,6 +13430,7 @@ function renderLesson(app) {
   else if (l.type === "bkErr") renderBkErr(app, l);
   else if (l.type === "bkLife") renderBkLife(app, l);
   else if (l.type === "bkTone") renderBkTone(app, l);
+  else if (l.type === "sachB1") renderSachB1(app, l);
   else if (l.type === "mixedQuiz") renderMixedQuiz(app, l);
   else if (l.type === "clozeSpeak") renderClozeSpeak(app, l);
   else if (l.type === "videoUnknown") renderMarkUnknownVideo(app, l);

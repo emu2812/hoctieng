@@ -1358,6 +1358,16134 @@ var BK_FORMAT = [
     now: "Hiện nay có cả thi giấy và thi trên máy tính với cùng format 4 kỹ năng. Bài thi thử theo format trên; phần Đọc của web có 40 câu như thi thật (3 bài đọc, 13 + 13 + 14 câu) — điểm tra band trực tiếp, không quy đổi. (SUA v213: 46 -> 40 cau do thi thu dung bo IELTS_MOCKREAD rieng, du 40 cau nhu thi that.)" }
 ];
 
+// ---------- v260: SÁCH 1 — Vocabulary in Use Elementary (60 unit) ----------
+// Viết lại theo QT-15: đủ 60 unit đúng thứ tự/nhóm sách, từ + nghĩa + cụm đúng sách;
+// ví dụ + bài tập SOẠN MỚI (không chép nguyên văn sách). Nguồn đối chiếu: OCR toàn văn
+// book01.pdf (Drive 1Mt_FGeI8UA49Y7_PczD3NtF8sVXwEhpM) tại sach86-work/toc/01-full.txt.
+var SACH86_B1 = [
+  {
+    "n": 1,
+    "group": "Luyện học từ",
+    "title": "Talking about language",
+    "titleVi": "Nói về ngôn ngữ",
+    "words": [
+      {
+        "w": "noun",
+        "ipa": "/naʊn/",
+        "vi": "danh từ",
+        "col": "a noun",
+        "ex": "The word 'table' is a noun.",
+        "exv": "Từ 'table' là một danh từ."
+      },
+      {
+        "w": "verb",
+        "ipa": "/vɜːb/",
+        "vi": "động từ",
+        "col": "a verb",
+        "ex": "The word 'run' is a verb.",
+        "exv": "Từ 'run' là một động từ."
+      },
+      {
+        "w": "adjective",
+        "ipa": "/ˈædʒɪktɪv/",
+        "vi": "tính từ",
+        "col": "an adjective",
+        "ex": "The word 'big' is an adjective.",
+        "exv": "Từ 'big' là một tính từ."
+      },
+      {
+        "w": "adverb",
+        "ipa": "/ˈædvɜːb/",
+        "vi": "trạng từ",
+        "col": "an adverb",
+        "ex": "The word 'slowly' is an adverb.",
+        "exv": "Từ 'slowly' là một trạng từ."
+      },
+      {
+        "w": "preposition",
+        "ipa": "/ˌprepəˈzɪʃn/",
+        "vi": "giới từ",
+        "col": "a preposition",
+        "ex": "The word 'in' is a preposition.",
+        "exv": "Từ 'in' là một giới từ."
+      },
+      {
+        "w": "singular",
+        "ipa": "/ˈsɪŋɡjələ/",
+        "vi": "số ít",
+        "col": "singular form",
+        "ex": "One book is singular.",
+        "exv": "Một cuốn sách là số ít."
+      },
+      {
+        "w": "plural",
+        "ipa": "/ˈplʊərəl/",
+        "vi": "số nhiều",
+        "col": "plural form",
+        "ex": "'Books' is the plural of 'book'.",
+        "exv": "'Books' là số nhiều của 'book'."
+      },
+      {
+        "w": "phrase",
+        "ipa": "/freɪz/",
+        "vi": "cụm từ",
+        "col": "a phrase",
+        "ex": "'At home' is a phrase.",
+        "exv": "'At home' là một cụm từ."
+      },
+      {
+        "w": "sentence",
+        "ipa": "/ˈsentəns/",
+        "vi": "câu",
+        "col": "a sentence",
+        "ex": "'I like tea.' is a sentence.",
+        "exv": "'I like tea.' là một câu."
+      },
+      {
+        "w": "paragraph",
+        "ipa": "/ˈpærəɡrɑːf/",
+        "vi": "đoạn văn",
+        "col": "a paragraph",
+        "ex": "My letter has two paragraphs.",
+        "exv": "Bức thư của tôi có hai đoạn văn."
+      },
+      {
+        "w": "dialogue",
+        "ipa": "/ˈdaɪəlɒɡ/",
+        "vi": "đoạn hội thoại",
+        "col": "a dialogue",
+        "ex": "Ann and Bill have a short dialogue.",
+        "exv": "Ann và Bill có một đoạn hội thoại ngắn."
+      },
+      {
+        "w": "question",
+        "ipa": "/ˈkwestʃən/",
+        "vi": "câu hỏi",
+        "col": "a question",
+        "ex": "'What is your name?' is a question.",
+        "exv": "'What is your name?' là một câu hỏi."
+      },
+      {
+        "w": "answer",
+        "ipa": "/ˈɑːnsə/",
+        "vi": "câu trả lời",
+        "col": "an answer",
+        "ex": "'No, thanks.' is an answer.",
+        "exv": "'No, thanks.' là một câu trả lời."
+      },
+      {
+        "w": "grammar",
+        "ipa": "/ˈɡræmə/",
+        "vi": "ngữ pháp",
+        "col": "English grammar",
+        "ex": "I learn English grammar every day.",
+        "exv": "Tôi học ngữ pháp tiếng Anh mỗi ngày."
+      },
+      {
+        "w": "example",
+        "ipa": "/ɪɡˈzɑːmpl/",
+        "vi": "ví dụ",
+        "col": "an example",
+        "ex": "Give me an example, please.",
+        "exv": "Cho tôi một ví dụ nhé."
+      },
+      {
+        "w": "match",
+        "ipa": "/mætʃ/",
+        "vi": "nối, ghép đôi",
+        "col": "match the words",
+        "ex": "Match the word with the picture.",
+        "exv": "Nối từ với bức tranh."
+      },
+      {
+        "w": "fill the gaps",
+        "ipa": "/fɪl ðə ɡæps/",
+        "vi": "điền vào chỗ trống",
+        "col": "fill the gaps",
+        "ex": "Fill the gaps with the right words.",
+        "exv": "Điền từ đúng vào chỗ trống."
+      },
+      {
+        "w": "correct the mistakes",
+        "ipa": "/kəˈrekt ðə mɪˈsteɪks/",
+        "vi": "sửa lỗi sai",
+        "col": "correct the mistakes",
+        "ex": "Correct the mistakes in my letter.",
+        "exv": "Sửa các lỗi sai trong bức thư của tôi."
+      },
+      {
+        "w": "complete the sentence",
+        "ipa": "/kəmˈpliːt ðə ˈsentəns/",
+        "vi": "hoàn thành câu",
+        "col": "complete the sentence",
+        "ex": "Complete the sentence with your name.",
+        "exv": "Hoàn thành câu bằng tên của bạn."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'danh từ'?",
+        "o": [
+          "noun",
+          "verb",
+          "adjective"
+        ],
+        "a": 0,
+        "why": "noun = danh từ; verb = động từ; adjective = tính từ."
+      },
+      {
+        "q": "Từ nào là tính từ?",
+        "o": [
+          "good",
+          "do",
+          "in"
+        ],
+        "a": 0,
+        "why": "good là tính từ, mô tả người hoặc vật; do là động từ; in là giới từ."
+      },
+      {
+        "q": "'At home' là gì?",
+        "o": [
+          "phrase",
+          "sentence",
+          "question"
+        ],
+        "a": 0,
+        "why": "'At home' là một nhóm từ, chưa phải câu hoàn chỉnh, nên là phrase."
+      },
+      {
+        "q": "Số nhiều của 'book' là gì?",
+        "o": [
+          "books",
+          "book",
+          "book's"
+        ],
+        "a": 0,
+        "why": "Số nhiều của book thêm -s thành books; book là số ít; book's là sở hữu cách."
+      },
+      {
+        "q": "Câu nào yêu cầu điền từ vào chỗ trống?",
+        "o": [
+          "Fill the gaps in the sentence.",
+          "Correct the mistakes.",
+          "Match the words."
+        ],
+        "a": 0,
+        "why": "Fill the gaps nghĩa là điền vào chỗ trống; hai câu kia là sửa lỗi và nối từ."
+      },
+      {
+        "q": "Từ nào mô tả một động từ?",
+        "o": [
+          "adverb",
+          "adjective",
+          "noun"
+        ],
+        "a": 0,
+        "why": "adverb mô tả động từ, ví dụ slowly; adjective mô tả danh từ; noun là danh từ."
+      }
+    ]
+  },
+  {
+    "n": 2,
+    "group": "Luyện học từ",
+    "title": "Learning vocabulary",
+    "titleVi": "Học từ vựng",
+    "words": [
+      {
+        "w": "vocabulary",
+        "ipa": "/vəˈkæbjələri/",
+        "vi": "từ vựng",
+        "col": "learn vocabulary",
+        "ex": "I learn new vocabulary every morning.",
+        "exv": "Tôi học từ vựng mới mỗi buổi sáng."
+      },
+      {
+        "w": "notebook",
+        "ipa": "/ˈnəʊtbʊk/",
+        "vi": "sổ tay",
+        "col": "a vocabulary notebook",
+        "ex": "I write new words in my notebook.",
+        "exv": "Tôi viết từ mới vào sổ tay của mình."
+      },
+      {
+        "w": "dictionary",
+        "ipa": "/ˈdɪkʃənri/",
+        "vi": "từ điển",
+        "col": "a good dictionary",
+        "ex": "I look up new words in my dictionary.",
+        "exv": "Tôi tra từ mới trong từ điển của mình."
+      },
+      {
+        "w": "collocation",
+        "ipa": "/ˌkɒləˈkeɪʃn/",
+        "vi": "cụm từ đi kèm",
+        "col": "a collocation",
+        "ex": "'Make a mistake' is a collocation.",
+        "exv": "'Make a mistake' là một cụm từ đi kèm."
+      },
+      {
+        "w": "word family",
+        "ipa": "/wɜːd ˈfæməli/",
+        "vi": "họ từ",
+        "col": "a word family",
+        "ex": "'Hot' and 'cold' are in one word family.",
+        "exv": "'Hot' và 'cold' thuộc cùng một họ từ."
+      },
+      {
+        "w": "temperature",
+        "ipa": "/ˈtemprətʃə/",
+        "vi": "nhiệt độ",
+        "col": "the temperature",
+        "ex": "What is the temperature today?",
+        "exv": "Hôm nay nhiệt độ là bao nhiêu?"
+      },
+      {
+        "w": "hot",
+        "ipa": "/hɒt/",
+        "vi": "nóng",
+        "col": "very hot",
+        "ex": "The soup is very hot.",
+        "exv": "Bát súp rất nóng."
+      },
+      {
+        "w": "warm",
+        "ipa": "/wɔːm/",
+        "vi": "ấm",
+        "col": "warm and soft",
+        "ex": "This coat is warm and soft.",
+        "exv": "Chiếc áo khoác này ấm và mềm."
+      },
+      {
+        "w": "cool",
+        "ipa": "/kuːl/",
+        "vi": "mát",
+        "col": "cool air",
+        "ex": "The evening air is cool.",
+        "exv": "Không khí buổi tối mát mẻ."
+      },
+      {
+        "w": "cold",
+        "ipa": "/kəʊld/",
+        "vi": "lạnh",
+        "col": "very cold",
+        "ex": "The water in the lake is cold.",
+        "exv": "Nước trong hồ rất lạnh."
+      },
+      {
+        "w": "travel",
+        "ipa": "/ˈtrævl/",
+        "vi": "đi lại, du lịch",
+        "col": "travel by train",
+        "ex": "We travel to Hue by train.",
+        "exv": "Chúng tôi đi Huế bằng tàu hỏa."
+      },
+      {
+        "w": "ticket",
+        "ipa": "/ˈtɪkɪt/",
+        "vi": "vé",
+        "col": "a ticket",
+        "ex": "I buy a ticket at the station.",
+        "exv": "Tôi mua vé ở nhà ga."
+      },
+      {
+        "w": "passport",
+        "ipa": "/ˈpɑːspɔːt/",
+        "vi": "hộ chiếu",
+        "col": "a passport",
+        "ex": "Please show your passport at the airport.",
+        "exv": "Xin hãy xuất trình hộ chiếu ở sân bay."
+      },
+      {
+        "w": "suitcase",
+        "ipa": "/ˈsuːtkeɪs/",
+        "vi": "va li",
+        "col": "a suitcase",
+        "ex": "My suitcase is big and red.",
+        "exv": "Va li của tôi to và màu đỏ."
+      },
+      {
+        "w": "windscreen",
+        "ipa": "/ˈwɪndskriːn/",
+        "vi": "kính chắn gió",
+        "col": "the windscreen",
+        "ex": "The windscreen of my car is clean.",
+        "exv": "Kính chắn gió của xe tôi rất sạch."
+      },
+      {
+        "w": "headlight",
+        "ipa": "/ˈhedlaɪt/",
+        "vi": "đèn pha",
+        "col": "a headlight",
+        "ex": "The car headlight is very bright.",
+        "exv": "Đèn pha của xe rất sáng."
+      },
+      {
+        "w": "wheel",
+        "ipa": "/wiːl/",
+        "vi": "bánh xe",
+        "col": "a wheel",
+        "ex": "This bicycle has two wheels.",
+        "exv": "Chiếc xe đạp này có hai bánh xe."
+      },
+      {
+        "w": "knife",
+        "ipa": "/naɪf/",
+        "vi": "dao",
+        "col": "a knife",
+        "ex": "I cut bread with a knife.",
+        "exv": "Tôi cắt bánh mì bằng dao."
+      },
+      {
+        "w": "fork",
+        "ipa": "/fɔːk/",
+        "vi": "cái dĩa",
+        "col": "a fork",
+        "ex": "I eat salad with a fork.",
+        "exv": "Tôi ăn salad bằng dĩa."
+      },
+      {
+        "w": "spoon",
+        "ipa": "/spuːn/",
+        "vi": "cái thìa",
+        "col": "a spoon",
+        "ex": "I eat soup with a spoon.",
+        "exv": "Tôi ăn súp bằng thìa."
+      },
+      {
+        "w": "mug",
+        "ipa": "/mʌɡ/",
+        "vi": "cốc có quai",
+        "col": "a mug",
+        "ex": "My mug has tea in it.",
+        "exv": "Cốc của tôi có trà bên trong."
+      },
+      {
+        "w": "glass",
+        "ipa": "/ɡlɑːs/",
+        "vi": "cái ly",
+        "col": "a glass",
+        "ex": "I drink water from a glass.",
+        "exv": "Tôi uống nước bằng ly."
+      },
+      {
+        "w": "cup",
+        "ipa": "/kʌp/",
+        "vi": "cái tách",
+        "col": "a cup",
+        "ex": "She drinks coffee from a cup.",
+        "exv": "Cô ấy uống cà phê bằng tách."
+      },
+      {
+        "w": "picture",
+        "ipa": "/ˈpɪktʃə/",
+        "vi": "bức tranh",
+        "col": "draw a picture",
+        "ex": "I draw a picture of my house.",
+        "exv": "Tôi vẽ một bức tranh về nhà mình."
+      },
+      {
+        "w": "diagram",
+        "ipa": "/ˈdaɪəɡræm/",
+        "vi": "sơ đồ",
+        "col": "a diagram",
+        "ex": "This diagram shows the parts of a car.",
+        "exv": "Sơ đồ này cho thấy các bộ phận của xe hơi."
+      },
+      {
+        "w": "make a mistake",
+        "ipa": "/meɪk ə mɪˈsteɪk/",
+        "vi": "mắc lỗi",
+        "col": "make a mistake",
+        "ex": "Do not worry if you make a mistake.",
+        "exv": "Đừng lo nếu bạn mắc lỗi."
+      },
+      {
+        "w": "do an exercise",
+        "ipa": "/duː ən ˈeksəsaɪz/",
+        "vi": "làm một bài tập",
+        "col": "do an exercise",
+        "ex": "I do an exercise in my book every day.",
+        "exv": "Tôi làm một bài tập trong sách mỗi ngày."
+      },
+      {
+        "w": "on foot",
+        "ipa": "/ɒn fʊt/",
+        "vi": "đi bộ",
+        "col": "go on foot",
+        "ex": "We go to school on foot.",
+        "exv": "Chúng tôi đi bộ đến trường."
+      },
+      {
+        "w": "good at",
+        "ipa": "/ɡʊd æt/",
+        "vi": "giỏi về",
+        "col": "good at English",
+        "ex": "Lan is good at English.",
+        "exv": "Lan giỏi tiếng Anh."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Cụm từ nào là một collocation đúng?",
+        "o": [
+          "make a mistake",
+          "good in languages",
+          "high man"
+        ],
+        "a": 0,
+        "why": "make a mistake là cụm đi kèm đúng; good in và high man đều sai theo sách."
+      },
+      {
+        "q": "Nhóm nào là một word family?",
+        "o": [
+          "hot, warm, cool, cold",
+          "hot, ticket, fork, mug",
+          "hot, passport, spoon, cup"
+        ],
+        "a": 0,
+        "why": "hot, warm, cool, cold đều nói về nhiệt độ nên cùng một họ từ."
+      },
+      {
+        "q": "Bạn nên ghi từ mới vào đâu?",
+        "o": [
+          "a vocabulary notebook",
+          "a passport",
+          "a windscreen"
+        ],
+        "a": 0,
+        "why": "Sổ từ vựng là nơi ghi từ mới; hộ chiếu và kính chắn gió không phải chỗ ghi từ."
+      },
+      {
+        "q": "Từ nào là một bộ phận của xe hơi?",
+        "o": [
+          "windscreen",
+          "spoon",
+          "dictionary"
+        ],
+        "a": 0,
+        "why": "windscreen là kính chắn gió của xe hơi; spoon là thìa; dictionary là từ điển."
+      },
+      {
+        "q": "Cụm nào đúng với giới từ 'by'?",
+        "o": [
+          "by train",
+          "by foot",
+          "by on foot"
+        ],
+        "a": 0,
+        "why": "Đi bằng tàu hỏa nói là by train; đi bộ nói là on foot, không nói by foot."
+      },
+      {
+        "q": "Bạn dùng gì để ăn súp?",
+        "o": [
+          "a spoon",
+          "a knife",
+          "a ticket"
+        ],
+        "a": 0,
+        "why": "Ăn súp dùng thìa (spoon); dao dùng để cắt; vé dùng để đi tàu."
+      }
+    ]
+  },
+  {
+    "n": 3,
+    "group": "Động từ thường ngày",
+    "title": "Have/had/had",
+    "titleVi": "Động từ have",
+    "words": [
+      {
+        "w": "have lunch",
+        "ipa": "/hæv lʌntʃ/",
+        "vi": "ăn trưa",
+        "col": "have lunch",
+        "ex": "We have lunch at twelve o'clock.",
+        "exv": "Chúng tôi ăn trưa lúc mười hai giờ."
+      },
+      {
+        "w": "have breakfast",
+        "ipa": "/hæv ˈbrekfəst/",
+        "vi": "ăn sáng",
+        "col": "have breakfast",
+        "ex": "I have breakfast with my mum.",
+        "exv": "Tôi ăn sáng cùng mẹ tôi."
+      },
+      {
+        "w": "have dinner",
+        "ipa": "/hæv ˈdɪnə/",
+        "vi": "ăn tối",
+        "col": "have dinner",
+        "ex": "They have dinner at home tonight.",
+        "exv": "Tối nay họ ăn tối ở nhà."
+      },
+      {
+        "w": "have a meal",
+        "ipa": "/hæv ə miːl/",
+        "vi": "ăn một bữa",
+        "col": "have a meal",
+        "ex": "Let us have a meal together on Sunday.",
+        "exv": "Chủ nhật chúng ta cùng ăn một bữa nhé."
+      },
+      {
+        "w": "have a party",
+        "ipa": "/hæv ə ˈpɑːti/",
+        "vi": "mở tiệc",
+        "col": "have a party",
+        "ex": "Mai has a party for her birthday.",
+        "exv": "Mai mở tiệc mừng sinh nhật của mình."
+      },
+      {
+        "w": "have a game",
+        "ipa": "/hæv ə ɡeɪm/",
+        "vi": "chơi một ván",
+        "col": "have a game of chess",
+        "ex": "Let us have a game of chess after lunch.",
+        "exv": "Sau bữa trưa chúng ta chơi một ván cờ nhé."
+      },
+      {
+        "w": "have a meeting",
+        "ipa": "/hæv ə ˈmiːtɪŋ/",
+        "vi": "họp",
+        "col": "have a meeting",
+        "ex": "Our class has a meeting on Monday.",
+        "exv": "Lớp chúng tôi họp vào thứ Hai."
+      },
+      {
+        "w": "have a lesson",
+        "ipa": "/hæv ə ˈlesn/",
+        "vi": "học một tiết",
+        "col": "have a lesson",
+        "ex": "We have a lesson at nine o'clock.",
+        "exv": "Chúng tôi có một tiết học lúc chín giờ."
+      },
+      {
+        "w": "have an exam",
+        "ipa": "/hæv ən ɪɡˈzæm/",
+        "vi": "thi, làm bài kiểm tra",
+        "col": "have an exam",
+        "ex": "I have an exam next Friday.",
+        "exv": "Tôi có bài kiểm tra vào thứ Sáu tới."
+      },
+      {
+        "w": "have homework",
+        "ipa": "/hæv ˈhəʊmwɜːk/",
+        "vi": "có bài tập về nhà",
+        "col": "have homework",
+        "ex": "The children have homework today.",
+        "exv": "Hôm nay các em có bài tập về nhà."
+      },
+      {
+        "w": "have an appointment",
+        "ipa": "/hæv ən əˈpɔɪntmənt/",
+        "vi": "có hẹn",
+        "col": "have an appointment with the dentist",
+        "ex": "I have an appointment with the dentist tomorrow.",
+        "exv": "Ngày mai tôi có hẹn với nha sĩ."
+      },
+      {
+        "w": "have a cup of tea",
+        "ipa": "/hæv ə kʌp əv tiː/",
+        "vi": "uống một tách trà",
+        "col": "have a cup of tea",
+        "ex": "Come in and have a cup of tea.",
+        "exv": "Vào nhà và uống một tách trà nhé."
+      },
+      {
+        "w": "have a drink",
+        "ipa": "/hæv ə drɪŋk/",
+        "vi": "uống một ly",
+        "col": "have a drink",
+        "ex": "Would you like to have a drink with us?",
+        "exv": "Bạn có muốn uống một ly cùng chúng tôi không?"
+      },
+      {
+        "w": "have a sandwich",
+        "ipa": "/hæv ə ˈsænwɪdʒ/",
+        "vi": "ăn một chiếc bánh mì kẹp",
+        "col": "have a sandwich",
+        "ex": "I have a sandwich for lunch today.",
+        "exv": "Hôm nay tôi ăn một chiếc bánh mì kẹp vào bữa trưa."
+      },
+      {
+        "w": "have an ice-cream",
+        "ipa": "/hæv ən ˈaɪskriːm/",
+        "vi": "ăn một cây kem",
+        "col": "have an ice-cream",
+        "ex": "The children have an ice-cream in the park.",
+        "exv": "Các em nhỏ ăn kem trong công viên."
+      },
+      {
+        "w": "have a shower",
+        "ipa": "/hæv ə ˈʃaʊə/",
+        "vi": "tắm vòi sen",
+        "col": "have a shower",
+        "ex": "I have a shower before breakfast.",
+        "exv": "Tôi tắm vòi sen trước bữa sáng."
+      },
+      {
+        "w": "have a bath",
+        "ipa": "/hæv ə bɑːθ/",
+        "vi": "tắm bồn",
+        "col": "have a bath",
+        "ex": "She has a bath in the evening.",
+        "exv": "Cô ấy tắm bồn vào buổi tối."
+      },
+      {
+        "w": "have a swim",
+        "ipa": "/hæv ə swɪm/",
+        "vi": "đi bơi",
+        "col": "have a swim",
+        "ex": "We have a swim at the beach.",
+        "exv": "Chúng tôi đi bơi ở bãi biển."
+      },
+      {
+        "w": "have a sauna",
+        "ipa": "/hæv ə ˈsɔːnə/",
+        "vi": "xông hơi",
+        "col": "have a sauna",
+        "ex": "After the gym, we have a sauna.",
+        "exv": "Sau buổi tập, chúng tôi đi xông hơi."
+      },
+      {
+        "w": "have a look",
+        "ipa": "/hæv ə lʊk/",
+        "vi": "nhìn thử, xem thử",
+        "col": "have a look",
+        "ex": "Can I have a look at your new book?",
+        "exv": "Tôi xem thử cuốn sách mới của bạn được không?"
+      },
+      {
+        "w": "have a go",
+        "ipa": "/hæv ə ɡəʊ/",
+        "vi": "thử một lần",
+        "col": "have a go",
+        "ex": "Can I have a go on your bike?",
+        "exv": "Tôi thử đi xe đạp của bạn một lần được không?"
+      },
+      {
+        "w": "have a good time",
+        "ipa": "/hæv ə ɡʊd taɪm/",
+        "vi": "chơi vui vẻ",
+        "col": "have a good time",
+        "ex": "We have a good time at the party.",
+        "exv": "Chúng tôi chơi rất vui ở buổi tiệc."
+      },
+      {
+        "w": "have a good journey",
+        "ipa": "/hæv ə ɡʊd ˈdʒɜːni/",
+        "vi": "chúc đi đường bình an",
+        "col": "have a good journey",
+        "ex": "Have a good journey, and see you soon!",
+        "exv": "Chúc bạn đi đường bình an, hẹn gặp lại sớm nhé!"
+      },
+      {
+        "w": "have a moment",
+        "ipa": "/hæv ə ˈməʊmənt/",
+        "vi": "có chút thời gian",
+        "col": "have a moment",
+        "ex": "Do you have a moment to talk now?",
+        "exv": "Bây giờ bạn có chút thời gian để nói chuyện không?"
+      },
+      {
+        "w": "have a word with",
+        "ipa": "/hæv ə wɜːd wɪð/",
+        "vi": "nói chuyện với ai",
+        "col": "have a word with you",
+        "ex": "Can I have a word with you after class?",
+        "exv": "Tôi có thể nói chuyện với bạn sau giờ học không?"
+      },
+      {
+        "w": "have your hair cut",
+        "ipa": "/hæv jɔː heə kʌt/",
+        "vi": "đi cắt tóc",
+        "col": "have your hair cut",
+        "ex": "I am going to have my hair cut today.",
+        "exv": "Hôm nay tôi đi cắt tóc."
+      },
+      {
+        "w": "have the time",
+        "ipa": "/hæv ðə taɪm/",
+        "vi": "có thời gian",
+        "col": "have the time",
+        "ex": "Do you have the time to help me now?",
+        "exv": "Bây giờ bạn có thời gian giúp tôi không?"
+      },
+      {
+        "w": "have got",
+        "ipa": "/hæv ɡɒt/",
+        "vi": "có",
+        "col": "have got",
+        "ex": "I have got two brothers.",
+        "exv": "Tôi có hai anh trai."
+      },
+      {
+        "w": "have got a problem",
+        "ipa": "/hæv ɡɒt ə ˈprɒbləm/",
+        "vi": "có một vấn đề",
+        "col": "have got a problem",
+        "ex": "I have got a problem with my new phone.",
+        "exv": "Tôi gặp vấn đề với chiếc điện thoại mới của mình."
+      },
+      {
+        "w": "have a cold",
+        "ipa": "/hæv ə kəʊld/",
+        "vi": "bị cảm lạnh",
+        "col": "have a cold",
+        "ex": "I have a cold, so I stay at home.",
+        "exv": "Tôi bị cảm lạnh nên ở nhà."
+      },
+      {
+        "w": "have a headache",
+        "ipa": "/hæv ə ˈhedeɪk/",
+        "vi": "bị đau đầu",
+        "col": "have a headache",
+        "ex": "She has a headache and needs to rest.",
+        "exv": "Cô ấy bị đau đầu và cần nghỉ ngơi."
+      },
+      {
+        "w": "have to",
+        "ipa": "/hæv tə/",
+        "vi": "phải",
+        "col": "have to pay",
+        "ex": "You have to pay to go into the museum.",
+        "exv": "Bạn phải trả tiền để vào bảo tàng."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Muốn nói 'ăn trưa' thì dùng cụm nào?",
+        "o": [
+          "have lunch",
+          "have a shower",
+          "have a look"
+        ],
+        "a": 0,
+        "why": "have lunch = ăn trưa; have a shower = tắm vòi sen; have a look = nhìn thử."
+      },
+      {
+        "q": "Điền từ đúng: I want to ___ a cup of tea.",
+        "o": [
+          "have",
+          "do",
+          "make"
+        ],
+        "a": 0,
+        "why": "Uống trà dùng have a cup of tea; do và make không đi với cụm này."
+      },
+      {
+        "q": "Ai đó sắp đi xa, bạn chúc họ thế nào?",
+        "o": [
+          "Have a good journey!",
+          "Have a cold!",
+          "Have a headache!"
+        ],
+        "a": 0,
+        "why": "Have a good journey là lời chúc đi đường bình an; hai cụm kia nói về bệnh."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'thử một lần'?",
+        "o": [
+          "have a go",
+          "have a bath",
+          "have a meeting"
+        ],
+        "a": 0,
+        "why": "have a go = thử một lần; have a bath = tắm bồn; have a meeting = họp."
+      },
+      {
+        "q": "Câu nào đúng với 'have got'?",
+        "o": [
+          "I have got two brothers.",
+          "I have got a shower.",
+          "I have got a good journey."
+        ],
+        "a": 0,
+        "why": "have got nghĩa là có, đi với thứ sở hữu được như brothers; không dùng với shower hay journey theo nghĩa này."
+      },
+      {
+        "q": "Bạn phải trả tiền để vào cửa, dùng cụm nào?",
+        "o": [
+          "have to pay",
+          "have a swim",
+          "have a party"
+        ],
+        "a": 0,
+        "why": "have to pay = phải trả tiền; have a swim = đi bơi; have a party = mở tiệc."
+      }
+    ]
+  },
+  {
+    "n": 4,
+    "group": "Động từ thường ngày",
+    "title": "Go/went/gone",
+    "titleVi": "Động từ go",
+    "words": [
+      {
+        "w": "go",
+        "ipa": "/ɡəʊ/",
+        "vi": "đi",
+        "col": "go to work",
+        "ex": "I go to work at eight o'clock.",
+        "exv": "Tôi đi làm lúc tám giờ."
+      },
+      {
+        "w": "went",
+        "ipa": "/went/",
+        "vi": "đã đi",
+        "col": "went home",
+        "ex": "Yesterday we went home early.",
+        "exv": "Hôm qua chúng tôi về nhà sớm."
+      },
+      {
+        "w": "gone",
+        "ipa": "/ɡɒn/",
+        "vi": "đã đi (rồi)",
+        "col": "has gone",
+        "ex": "She has gone to the shop.",
+        "exv": "Cô ấy đã đi đến cửa hàng rồi."
+      },
+      {
+        "w": "go to work",
+        "ipa": "/ɡəʊ tə wɜːk/",
+        "vi": "đi làm",
+        "col": "go to work by bike",
+        "ex": "My mum goes to work by bus.",
+        "exv": "Mẹ tôi đi làm bằng xe buýt."
+      },
+      {
+        "w": "go by bike",
+        "ipa": "/ɡəʊ baɪ baɪk/",
+        "vi": "đi bằng xe đạp",
+        "col": "go by bike",
+        "ex": "The boy goes by bike to school.",
+        "exv": "Cậu bé đi xe đạp đến trường."
+      },
+      {
+        "w": "go by car",
+        "ipa": "/ɡəʊ baɪ kɑː/",
+        "vi": "đi bằng ô tô",
+        "col": "go by car",
+        "ex": "We go by car when it rains.",
+        "exv": "Chúng tôi đi ô tô khi trời mưa."
+      },
+      {
+        "w": "go on foot",
+        "ipa": "/ɡəʊ ɒn fʊt/",
+        "vi": "đi bộ",
+        "col": "go on foot",
+        "ex": "They go on foot to the market.",
+        "exv": "Họ đi bộ đến chợ."
+      },
+      {
+        "w": "go in",
+        "ipa": "/ɡəʊ ɪn/",
+        "vi": "đi vào",
+        "col": "go in",
+        "ex": "Please go in and sit down.",
+        "exv": "Mời bạn đi vào và ngồi xuống."
+      },
+      {
+        "w": "go out of",
+        "ipa": "/ɡəʊ aʊt əv/",
+        "vi": "đi ra khỏi",
+        "col": "go out of the house",
+        "ex": "She goes out of the house in the morning.",
+        "exv": "Cô ấy đi ra khỏi nhà vào buổi sáng."
+      },
+      {
+        "w": "go up",
+        "ipa": "/ɡəʊ ʌp/",
+        "vi": "đi lên",
+        "col": "go up the stairs",
+        "ex": "He goes up the stairs slowly.",
+        "exv": "Anh ấy đi lên cầu thang một cách chậm rãi."
+      },
+      {
+        "w": "go down",
+        "ipa": "/ɡəʊ daʊn/",
+        "vi": "đi xuống",
+        "col": "go down the stairs",
+        "ex": "We go down the stairs to the garden.",
+        "exv": "Chúng tôi đi xuống cầu thang ra vườn."
+      },
+      {
+        "w": "go away",
+        "ipa": "/ɡəʊ əˈweɪ/",
+        "vi": "đi xa, rời đi",
+        "col": "go away",
+        "ex": "They go away for the weekend.",
+        "exv": "Họ đi xa vào cuối tuần."
+      },
+      {
+        "w": "go back",
+        "ipa": "/ɡəʊ bæk/",
+        "vi": "quay lại, trở về",
+        "col": "go back home",
+        "ex": "I go back home in the evening.",
+        "exv": "Tôi trở về nhà vào buổi tối."
+      },
+      {
+        "w": "go shopping",
+        "ipa": "/ɡəʊ ˈʃɒpɪŋ/",
+        "vi": "đi mua sắm",
+        "col": "go shopping",
+        "ex": "On Saturday we go shopping together.",
+        "exv": "Thứ Bảy chúng tôi cùng đi mua sắm."
+      },
+      {
+        "w": "go swimming",
+        "ipa": "/ɡəʊ ˈswɪmɪŋ/",
+        "vi": "đi bơi",
+        "col": "go swimming",
+        "ex": "I usually go swimming with my friends.",
+        "exv": "Tôi thường đi bơi cùng bạn bè."
+      },
+      {
+        "w": "go dancing",
+        "ipa": "/ɡəʊ ˈdɑːnsɪŋ/",
+        "vi": "đi nhảy",
+        "col": "go dancing",
+        "ex": "Let us go dancing on Friday night.",
+        "exv": "Tối thứ Sáu chúng ta đi nhảy nhé."
+      },
+      {
+        "w": "go sightseeing",
+        "ipa": "/ɡəʊ ˈsaɪtsiːɪŋ/",
+        "vi": "đi tham quan",
+        "col": "go sightseeing",
+        "ex": "Do you like going sightseeing on holiday?",
+        "exv": "Bạn có thích đi tham quan khi đi nghỉ không?"
+      },
+      {
+        "w": "go skiing",
+        "ipa": "/ɡəʊ ˈskiːɪŋ/",
+        "vi": "đi trượt tuyết",
+        "col": "go skiing",
+        "ex": "Hans goes skiing with his family in January.",
+        "exv": "Hans đi trượt tuyết cùng gia đình vào tháng Một."
+      },
+      {
+        "w": "go fishing",
+        "ipa": "/ɡəʊ ˈfɪʃɪŋ/",
+        "vi": "đi câu cá",
+        "col": "go fishing",
+        "ex": "Bob is going fishing with his dad tomorrow.",
+        "exv": "Ngày mai Bob đi câu cá cùng bố."
+      },
+      {
+        "w": "be going to",
+        "ipa": "/biː ˈɡəʊɪŋ tə/",
+        "vi": "sẽ, dự định",
+        "col": "be going to visit",
+        "ex": "On Saturday Jan is going to visit his friend.",
+        "exv": "Thứ Bảy Jan sẽ đến thăm bạn của mình."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Quá khứ của 'go' là gì?",
+        "o": [
+          "went",
+          "goed",
+          "gone"
+        ],
+        "a": 0,
+        "why": "Quá khứ của go là went; goed không phải từ đúng; gone là dạng phân từ."
+      },
+      {
+        "q": "Điền từ đúng: We ___ to the market on foot.",
+        "o": [
+          "go",
+          "goes",
+          "going"
+        ],
+        "a": 0,
+        "why": "Chủ ngữ We đi với go; goes dùng cho he, she, it; going cần thêm be."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'đi mua sắm'?",
+        "o": [
+          "go shopping",
+          "go swimming",
+          "go fishing"
+        ],
+        "a": 0,
+        "why": "go shopping = đi mua sắm; go swimming = đi bơi; go fishing = đi câu cá."
+      },
+      {
+        "q": "Muốn nói 'đi lên cầu thang' thì dùng cụm nào?",
+        "o": [
+          "go up the stairs",
+          "go down the stairs",
+          "go out of the house"
+        ],
+        "a": 0,
+        "why": "go up = đi lên; go down = đi xuống; go out of = đi ra khỏi."
+      },
+      {
+        "q": "Câu nào nói về dự định tương lai?",
+        "o": [
+          "I am going to meet Sam tomorrow.",
+          "I went to Paris last summer.",
+          "I go to work by bike."
+        ],
+        "a": 0,
+        "why": "be going to dùng cho dự định tương lai; hai câu kia nói về quá khứ và thói quen."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "go fishing",
+          "go swimming",
+          "go back"
+        ],
+        "a": 2,
+        "why": "go fishing và go swimming là hoạt động với -ing; go back là cụm chỉ hướng di chuyển."
+      }
+    ]
+  },
+  {
+    "n": 5,
+    "group": "Động từ thường ngày",
+    "title": "Do/did/done",
+    "titleVi": "Động từ do",
+    "words": [
+      {
+        "w": "do",
+        "ipa": "/duː/",
+        "vi": "làm",
+        "col": "do your best",
+        "ex": "Please do your homework now.",
+        "exv": "Xin hãy làm bài tập về nhà ngay bây giờ."
+      },
+      {
+        "w": "did",
+        "ipa": "/dɪd/",
+        "vi": "đã làm",
+        "col": "did you do",
+        "ex": "What did you do yesterday?",
+        "exv": "Hôm qua bạn đã làm gì?"
+      },
+      {
+        "w": "done",
+        "ipa": "/dʌn/",
+        "vi": "đã làm xong",
+        "col": "have done",
+        "ex": "I have done my work for today.",
+        "exv": "Tôi đã làm xong việc hôm nay."
+      },
+      {
+        "w": "do the housework",
+        "ipa": "/duː ðə ˈhaʊswɜːk/",
+        "vi": "làm việc nhà",
+        "col": "do the housework",
+        "ex": "I do the housework on Sunday morning.",
+        "exv": "Tôi làm việc nhà vào sáng Chủ nhật."
+      },
+      {
+        "w": "do the gardening",
+        "ipa": "/duː ðə ˈɡɑːdnɪŋ/",
+        "vi": "làm vườn",
+        "col": "do the gardening",
+        "ex": "My dad does the gardening every weekend.",
+        "exv": "Bố tôi làm vườn mỗi cuối tuần."
+      },
+      {
+        "w": "do the washing",
+        "ipa": "/duː ðə ˈwɒʃɪŋ/",
+        "vi": "giặt quần áo",
+        "col": "do the washing",
+        "ex": "Did you do the washing on Sunday?",
+        "exv": "Chủ nhật bạn đã giặt quần áo chưa?"
+      },
+      {
+        "w": "do the washing-up",
+        "ipa": "/duː ðə ˈwɒʃɪŋ ʌp/",
+        "vi": "rửa bát đĩa",
+        "col": "do the washing-up",
+        "ex": "After dinner, I do the washing-up.",
+        "exv": "Sau bữa tối, tôi rửa bát đĩa."
+      },
+      {
+        "w": "do your homework",
+        "ipa": "/duː jɔː ˈhəʊmwɜːk/",
+        "vi": "làm bài tập về nhà",
+        "col": "do your homework",
+        "ex": "The children do their homework after school.",
+        "exv": "Các em làm bài tập về nhà sau giờ học."
+      },
+      {
+        "w": "do some exercises",
+        "ipa": "/duː səm ˈeksəsaɪzɪz/",
+        "vi": "làm một số bài tập",
+        "col": "do some exercises",
+        "ex": "We do some exercises in our English book.",
+        "exv": "Chúng tôi làm một số bài tập trong sách tiếng Anh."
+      },
+      {
+        "w": "do business with",
+        "ipa": "/duː ˈbɪznəs wɪð/",
+        "vi": "làm ăn với",
+        "col": "do business with the USA",
+        "ex": "Our company does business with the USA.",
+        "exv": "Công ty chúng tôi làm ăn với Mỹ."
+      },
+      {
+        "w": "do your best",
+        "ipa": "/duː jɔː best/",
+        "vi": "cố gắng hết sức",
+        "col": "do your best",
+        "ex": "The test is hard, so just do your best.",
+        "exv": "Bài kiểm tra khó đấy, cứ cố gắng hết sức nhé."
+      },
+      {
+        "w": "What do you do?",
+        "ipa": "/wɒt duː juː duː/",
+        "vi": "Bạn làm nghề gì?",
+        "col": "What do you do?",
+        "ex": "What do you do? I am a teacher.",
+        "exv": "Bạn làm nghề gì? Tôi là giáo viên."
+      },
+      {
+        "w": "student",
+        "ipa": "/ˈstjuːdnt/",
+        "vi": "học sinh, sinh viên",
+        "col": "a student",
+        "ex": "Lan is a student at my school.",
+        "exv": "Lan là học sinh ở trường tôi."
+      },
+      {
+        "w": "teacher",
+        "ipa": "/ˈtiːtʃə/",
+        "vi": "giáo viên",
+        "col": "a teacher",
+        "ex": "My teacher is very kind.",
+        "exv": "Giáo viên của tôi rất tốt bụng."
+      },
+      {
+        "w": "engineer",
+        "ipa": "/ˌendʒɪˈnɪə/",
+        "vi": "kỹ sư",
+        "col": "an engineer",
+        "ex": "Her brother is an engineer.",
+        "exv": "Anh trai cô ấy là kỹ sư."
+      },
+      {
+        "w": "doctor",
+        "ipa": "/ˈdɒktə/",
+        "vi": "bác sĩ",
+        "col": "a doctor",
+        "ex": "The doctor works at the hospital.",
+        "exv": "Bác sĩ làm việc ở bệnh viện."
+      },
+      {
+        "w": "secretary",
+        "ipa": "/ˈsekrətri/",
+        "vi": "thư ký",
+        "col": "a secretary",
+        "ex": "She is a secretary in an office.",
+        "exv": "Cô ấy là thư ký trong một văn phòng."
+      },
+      {
+        "w": "mechanic",
+        "ipa": "/mɪˈkænɪk/",
+        "vi": "thợ sửa máy",
+        "col": "a mechanic",
+        "ex": "The mechanic fixes my car.",
+        "exv": "Thợ sửa máy sửa xe của tôi."
+      },
+      {
+        "w": "listen to music",
+        "ipa": "/ˈlɪsn tə ˈmjuːzɪk/",
+        "vi": "nghe nhạc",
+        "col": "listen to music",
+        "ex": "I listen to music when I relax.",
+        "exv": "Tôi nghe nhạc khi thư giãn."
+      },
+      {
+        "w": "relax",
+        "ipa": "/rɪˈlæks/",
+        "vi": "thư giãn",
+        "col": "relax at home",
+        "ex": "On Sunday I relax at home.",
+        "exv": "Chủ nhật tôi thư giãn ở nhà."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Quá khứ của 'do' là gì?",
+        "o": [
+          "did",
+          "does",
+          "done"
+        ],
+        "a": 0,
+        "why": "Quá khứ của do là did; does là hiện tại ngôi thứ ba; done là phân từ."
+      },
+      {
+        "q": "Muốn hỏi nghề nghiệp của ai đó, bạn hỏi thế nào?",
+        "o": [
+          "What do you do?",
+          "What are you doing?",
+          "What did you do?"
+        ],
+        "a": 0,
+        "why": "What do you do? hỏi về nghề nghiệp; hai câu kia hỏi đang làm gì và đã làm gì."
+      },
+      {
+        "q": "Điền từ đúng: I ___ the washing-up after dinner.",
+        "o": [
+          "do",
+          "have",
+          "go"
+        ],
+        "a": 0,
+        "why": "Rửa bát đĩa dùng do the washing-up; have và go không đi với cụm này."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'cố gắng hết sức'?",
+        "o": [
+          "do your best",
+          "do the gardening",
+          "do business with"
+        ],
+        "a": 0,
+        "why": "do your best = cố gắng hết sức; do the gardening = làm vườn; do business with = làm ăn với."
+      },
+      {
+        "q": "Ai làm việc ở bệnh viện?",
+        "o": [
+          "a doctor",
+          "a secretary",
+          "a mechanic"
+        ],
+        "a": 0,
+        "why": "doctor là bác sĩ, làm việc ở bệnh viện; secretary làm văn phòng; mechanic sửa máy."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "student",
+          "teacher",
+          "relax"
+        ],
+        "a": 2,
+        "why": "student và teacher đều chỉ người; relax là động từ chỉ hành động thư giãn."
+      }
+    ]
+  },
+  {
+    "n": 6,
+    "group": "Động từ thường ngày",
+    "title": "Make/made/made",
+    "titleVi": "Động từ make",
+    "words": [
+      {
+        "w": "make",
+        "ipa": "/meɪk/",
+        "vi": "làm, tạo ra",
+        "col": "make coffee",
+        "ex": "I make coffee every morning.",
+        "exv": "Tôi pha cà phê mỗi sáng."
+      },
+      {
+        "w": "make breakfast",
+        "ipa": "/meɪk ˈbrekfəst/",
+        "vi": "nấu bữa sáng",
+        "col": "make breakfast",
+        "ex": "My mother makes breakfast at six o clock.",
+        "exv": "Mẹ tôi nấu bữa sáng lúc sáu giờ."
+      },
+      {
+        "w": "make lunch",
+        "ipa": "/meɪk lʌntʃ/",
+        "vi": "nấu bữa trưa",
+        "col": "make lunch",
+        "ex": "We make lunch at home on Sunday.",
+        "exv": "Chúng tôi nấu bữa trưa ở nhà vào Chủ nhật."
+      },
+      {
+        "w": "make dinner",
+        "ipa": "/meɪk ˈdɪnə/",
+        "vi": "nấu bữa tối",
+        "col": "make dinner",
+        "ex": "Anna makes dinner for her family tonight.",
+        "exv": "Tối nay Anna nấu bữa tối cho gia đình."
+      },
+      {
+        "w": "make supper",
+        "ipa": "/meɪk ˈsʌpə/",
+        "vi": "chuẩn bị bữa ăn nhẹ trước khi đi ngủ",
+        "col": "make supper",
+        "ex": "I make supper at nine o clock.",
+        "exv": "Tôi chuẩn bị bữa ăn nhẹ lúc chín giờ tối."
+      },
+      {
+        "w": "make tea",
+        "ipa": "/meɪk tiː/",
+        "vi": "pha trà",
+        "col": "make tea",
+        "ex": "Please make tea for our guest.",
+        "exv": "Xin hãy pha trà cho khách của chúng ta."
+      },
+      {
+        "w": "make hot chocolate",
+        "ipa": "/meɪk hɒt ˈtʃɒklət/",
+        "vi": "pha sô-cô-la nóng",
+        "col": "make hot chocolate",
+        "ex": "On a cold day I make hot chocolate for my son.",
+        "exv": "Vào ngày lạnh, tôi pha sô-cô-la nóng cho con trai tôi."
+      },
+      {
+        "w": "make a photocopy",
+        "ipa": "/meɪk ə ˈfəʊtəʊkɒpi/",
+        "vi": "photo một bản sao",
+        "col": "make a photocopy",
+        "ex": "The teacher makes a photocopy of the letter.",
+        "exv": "Cô giáo photo một bản sao của bức thư."
+      },
+      {
+        "w": "make a film",
+        "ipa": "/meɪk ə fɪlm/",
+        "vi": "làm một bộ phim",
+        "col": "make a film",
+        "ex": "They make a film about life in a small town.",
+        "exv": "Họ làm một bộ phim về cuộc sống ở một thị trấn nhỏ."
+      },
+      {
+        "w": "make a video",
+        "ipa": "/meɪk ə ˈvɪdiəʊ/",
+        "vi": "quay một đoạn video",
+        "col": "make a video",
+        "ex": "He makes a video of his baby every week.",
+        "exv": "Anh ấy quay một đoạn video về em bé của mình mỗi tuần."
+      },
+      {
+        "w": "make a noise",
+        "ipa": "/meɪk ə nɔɪz/",
+        "vi": "gây tiếng ồn",
+        "col": "make a noise",
+        "ex": "Please do not make a noise in the library.",
+        "exv": "Xin đừng gây tiếng ồn trong thư viện."
+      },
+      {
+        "w": "make a mistake",
+        "ipa": "/meɪk ə mɪˈsteɪk/",
+        "vi": "mắc lỗi",
+        "col": "make a mistake",
+        "ex": "I made a mistake in my English exercise.",
+        "exv": "Tôi đã mắc một lỗi trong bài tập tiếng Anh của mình."
+      },
+      {
+        "w": "make my bed",
+        "ipa": "/meɪk maɪ bed/",
+        "vi": "dọn giường",
+        "col": "make my bed",
+        "ex": "I make my bed before breakfast.",
+        "exv": "Tôi dọn giường trước bữa sáng."
+      },
+      {
+        "w": "make an appointment",
+        "ipa": "/meɪk ən əˈpɔɪntmənt/",
+        "vi": "đặt lịch hẹn",
+        "col": "make an appointment",
+        "ex": "I need to make an appointment with the doctor on Monday.",
+        "exv": "Tôi cần đặt lịch hẹn với bác sĩ vào thứ Hai."
+      },
+      {
+        "w": "make me feel tired",
+        "ipa": "/meɪk miː fiːl ˈtaɪəd/",
+        "vi": "làm tôi thấy mệt",
+        "col": "make me feel tired",
+        "ex": "A long walk makes me feel tired.",
+        "exv": "Đi bộ lâu làm tôi thấy mệt."
+      },
+      {
+        "w": "make me feel angry",
+        "ipa": "/meɪk miː fiːl ˈæŋɡri/",
+        "vi": "làm tôi thấy tức giận",
+        "col": "make me feel angry",
+        "ex": "His words made me feel angry.",
+        "exv": "Lời nói của anh ấy làm tôi thấy tức giận."
+      },
+      {
+        "w": "make me feel sad",
+        "ipa": "/meɪk miː fiːl sæd/",
+        "vi": "làm tôi thấy buồn",
+        "col": "make me feel sad",
+        "ex": "That story made me feel sad.",
+        "exv": "Câu chuyện đó làm tôi thấy buồn."
+      },
+      {
+        "w": "do my homework",
+        "ipa": "/duː maɪ ˈhəʊmwɜːk/",
+        "vi": "làm bài tập về nhà",
+        "col": "do my homework",
+        "ex": "I do my homework after dinner.",
+        "exv": "Tôi làm bài tập về nhà sau bữa tối."
+      },
+      {
+        "w": "take an exam",
+        "ipa": "/teɪk ən ɪɡˈzæm/",
+        "vi": "dự thi, làm bài thi",
+        "col": "take an exam",
+        "ex": "She takes an exam in French next week.",
+        "exv": "Cô ấy dự thi tiếng Pháp vào tuần tới."
+      },
+      {
+        "w": "take a photo",
+        "ipa": "/teɪk ə ˈfəʊtəʊ/",
+        "vi": "chụp ảnh",
+        "col": "take a photo",
+        "ex": "I would like to take a photo of you.",
+        "exv": "Tôi muốn chụp một bức ảnh của bạn."
+      },
+      {
+        "w": "do the dishes",
+        "ipa": "/duː ðə ˈdɪʃɪz/",
+        "vi": "rửa bát đĩa",
+        "col": "do the dishes",
+        "ex": "After dinner I help my mother do the dishes.",
+        "exv": "Sau bữa tối, tôi giúp mẹ rửa bát đĩa."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "I ___ coffee every morning.",
+        "o": [
+          "make",
+          "do",
+          "take"
+        ],
+        "a": 0,
+        "why": "make coffee là pha cà phê; do và take không đi với coffee theo cách này."
+      },
+      {
+        "q": "Cụm từ make a mistake có nghĩa là gì?",
+        "o": [
+          "mắc lỗi",
+          "làm bài tập về nhà",
+          "chụp một bức ảnh"
+        ],
+        "a": 0,
+        "why": "make a mistake = mắc lỗi; homework đi với do, photo đi với take."
+      },
+      {
+        "q": "Câu nào sau đây là đúng?",
+        "o": [
+          "I have to do my homework.",
+          "I have to make my homework.",
+          "I have to take my homework."
+        ],
+        "a": 0,
+        "why": "Bài tập về nhà đi với do: do my homework; không dùng make hay take ở đây."
+      },
+      {
+        "q": "Cụm từ make an appointment dùng khi nào?",
+        "o": [
+          "đặt lịch hẹn gặp bác sĩ",
+          "chụp một bức ảnh",
+          "làm một bài kiểm tra"
+        ],
+        "a": 0,
+        "why": "make an appointment = đặt lịch hẹn, ví dụ hẹn gặp bác sĩ."
+      },
+      {
+        "q": "Từ nào KHÔNG đi với make?",
+        "o": [
+          "a mistake",
+          "a noise",
+          "my homework"
+        ],
+        "a": 2,
+        "why": "make a mistake và make a noise đều đúng; homework đi với do, không đi với make."
+      },
+      {
+        "q": "That film ___ me feel sad.",
+        "o": [
+          "made",
+          "did",
+          "took"
+        ],
+        "a": 0,
+        "why": "make me feel sad là cấu trúc đúng; made là dạng quá khứ của make."
+      }
+    ]
+  },
+  {
+    "n": 7,
+    "group": "Động từ thường ngày",
+    "title": "Come/came/come",
+    "titleVi": "Động từ come",
+    "words": [
+      {
+        "w": "come",
+        "ipa": "/kʌm/",
+        "vi": "đến, tới",
+        "col": "come in",
+        "ex": "Please come to my house tomorrow.",
+        "exv": "Xin hãy đến nhà tôi vào ngày mai."
+      },
+      {
+        "w": "go",
+        "ipa": "/ɡəʊ/",
+        "vi": "đi",
+        "col": "go there",
+        "ex": "We go to school by bus.",
+        "exv": "Chúng tôi đi học bằng xe buýt."
+      },
+      {
+        "w": "come in",
+        "ipa": "/kʌm ɪn/",
+        "vi": "đi vào",
+        "col": "come in",
+        "ex": "Someone knocks at the door, and I say Come in.",
+        "exv": "Có người gõ cửa, và tôi nói Mời vào."
+      },
+      {
+        "w": "come out",
+        "ipa": "/kʌm aʊt/",
+        "vi": "đi ra",
+        "col": "come out",
+        "ex": "The children come out of school at four o clock.",
+        "exv": "Bọn trẻ đi ra khỏi trường lúc bốn giờ."
+      },
+      {
+        "w": "come back",
+        "ipa": "/kʌm bæk/",
+        "vi": "trở lại",
+        "col": "come back",
+        "ex": "She went away for three days and came back yesterday.",
+        "exv": "Cô ấy đi xa ba ngày và trở lại vào hôm qua."
+      },
+      {
+        "w": "come home",
+        "ipa": "/kʌm həʊm/",
+        "vi": "về nhà",
+        "col": "come home",
+        "ex": "My father comes home late on Friday.",
+        "exv": "Bố tôi về nhà muộn vào thứ Sáu."
+      },
+      {
+        "w": "come from",
+        "ipa": "/kʌm frɒm/",
+        "vi": "đến từ",
+        "col": "come from Norway",
+        "ex": "I come from Viet Nam.",
+        "exv": "Tôi đến từ Việt Nam."
+      },
+      {
+        "w": "come along",
+        "ipa": "/kʌm əˈlɒŋ/",
+        "vi": "đi cùng",
+        "col": "come along",
+        "ex": "We are going to a party tonight. Do you want to come along?",
+        "exv": "Tối nay chúng tôi đi dự tiệc. Bạn có muốn đi cùng không?"
+      },
+      {
+        "w": "come and see me",
+        "ipa": "/kʌm ənd siː miː/",
+        "vi": "đến thăm tôi",
+        "col": "come and see me",
+        "ex": "Come and see me some time next week.",
+        "exv": "Hãy đến thăm tôi vào lúc nào đó trong tuần tới."
+      },
+      {
+        "w": "come into",
+        "ipa": "/kʌm ˈɪntuː/",
+        "vi": "đi vào trong",
+        "col": "come into the room",
+        "ex": "The teacher comes into the room and says hello.",
+        "exv": "Cô giáo đi vào trong phòng và chào mọi người."
+      },
+      {
+        "w": "come out of",
+        "ipa": "/kʌm aʊt əv/",
+        "vi": "đi ra khỏi",
+        "col": "come out of the shop",
+        "ex": "The ticket comes out of the machine.",
+        "exv": "Tấm vé đi ra khỏi máy."
+      },
+      {
+        "w": "here",
+        "ipa": "/hɪə/",
+        "vi": "ở đây",
+        "col": "come here",
+        "ex": "Please come here and sit with me.",
+        "exv": "Xin hãy đến đây và ngồi cùng tôi."
+      },
+      {
+        "w": "there",
+        "ipa": "/ðeə/",
+        "vi": "ở đó",
+        "col": "go there",
+        "ex": "My friend lives there.",
+        "exv": "Bạn tôi sống ở đó."
+      },
+      {
+        "w": "knock at the door",
+        "ipa": "/nɒk ət ðə dɔː/",
+        "vi": "gõ cửa",
+        "col": "knock at the door",
+        "ex": "I hear someone knock at the door.",
+        "exv": "Tôi nghe có người gõ cửa."
+      },
+      {
+        "w": "ticket",
+        "ipa": "/ˈtɪkɪt/",
+        "vi": "vé",
+        "col": "a ticket",
+        "ex": "I put my money in and the ticket comes out.",
+        "exv": "Tôi cho tiền vào và tấm vé đi ra."
+      },
+      {
+        "w": "machine",
+        "ipa": "/məˈʃiːn/",
+        "vi": "máy",
+        "col": "the machine",
+        "ex": "This machine gives me a ticket for the train.",
+        "exv": "Chiếc máy này đưa cho tôi một tấm vé tàu."
+      },
+      {
+        "w": "shop",
+        "ipa": "/ʃɒp/",
+        "vi": "cửa hàng",
+        "col": "a shop",
+        "ex": "My mother buys bread in a shop near our house.",
+        "exv": "Mẹ tôi mua bánh mì ở một cửa hàng gần nhà chúng tôi."
+      },
+      {
+        "w": "disco",
+        "ipa": "/ˈdɪskəʊ/",
+        "vi": "vũ trường",
+        "col": "go to a disco",
+        "ex": "We are going to a disco on Friday night.",
+        "exv": "Chúng tôi sẽ đi vũ trường vào tối thứ Sáu."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Cụm từ come back có nghĩa là gì?",
+        "o": [
+          "trở lại",
+          "đi ra khỏi",
+          "đi cùng với ai"
+        ],
+        "a": 0,
+        "why": "come back = trở lại nơi này; come out = đi ra, come along = đi cùng."
+      },
+      {
+        "q": "She went to Italy and she ___ yesterday.",
+        "o": [
+          "came back",
+          "came out",
+          "came along"
+        ],
+        "a": 0,
+        "why": "came back là dạng quá khứ của come back, nghĩa là trở lại; hai lựa chọn kia không hợp nghĩa ở đây."
+      },
+      {
+        "q": "Câu hỏi với come from thường hỏi về điều gì?",
+        "o": [
+          "quê quán, đất nước mình đến từ",
+          "thời gian mình về nhà",
+          "cách mình đi vào phòng"
+        ],
+        "a": 0,
+        "why": "Where do you come from? hỏi bạn đến từ nước nào; come home hỏi về nhà, come in hỏi đi vào."
+      },
+      {
+        "q": "A: Where do you come ___? B: I am from Norway.",
+        "o": [
+          "from",
+          "in",
+          "back"
+        ],
+        "a": 0,
+        "why": "come from = đến từ; come in = đi vào, come back = trở lại, không hợp câu hỏi này."
+      },
+      {
+        "q": "Cụm từ come along có nghĩa là gì?",
+        "o": [
+          "đi cùng với chúng tôi",
+          "đi ra khỏi cửa hàng",
+          "trở về nhà của mình"
+        ],
+        "a": 0,
+        "why": "come along = đi cùng với chúng tôi; come out of the shop = đi ra khỏi cửa hàng, come home = về nhà."
+      },
+      {
+        "q": "Cụm từ nào có nghĩa là đến thăm tôi vào lúc nào đó?",
+        "o": [
+          "Come and see me some time.",
+          "Come out of the shop.",
+          "Come back from Italy."
+        ],
+        "a": 0,
+        "why": "Come and see me some time = đến thăm tôi vào lúc nào đó; hai cụm kia nói về đi ra khỏi cửa hàng và trở về từ Ý."
+      }
+    ]
+  },
+  {
+    "n": 8,
+    "group": "Động từ thường ngày",
+    "title": "Take/took/taken",
+    "titleVi": "Động từ take",
+    "words": [
+      {
+        "w": "take",
+        "ipa": "/teɪk/",
+        "vi": "lấy, mang theo, mất thời gian",
+        "col": "take the bus",
+        "ex": "I take my bag when I go out.",
+        "exv": "Tôi mang theo túi của mình khi ra ngoài."
+      },
+      {
+        "w": "take an English course",
+        "ipa": "/teɪk ən ˈɪŋɡlɪʃ kɔːs/",
+        "vi": "học một khóa tiếng Anh",
+        "col": "take an English course",
+        "ex": "Are you taking an English course this year?",
+        "exv": "Năm nay bạn có học một khóa tiếng Anh không?"
+      },
+      {
+        "w": "take an exam",
+        "ipa": "/teɪk ən ɪɡˈzæm/",
+        "vi": "dự thi, làm bài thi",
+        "col": "take an exam",
+        "ex": "I have to take an exam at the end of the course.",
+        "exv": "Tôi phải dự thi vào cuối khóa học."
+      },
+      {
+        "w": "take lessons",
+        "ipa": "/teɪk ˈlesnz/",
+        "vi": "học các buổi học",
+        "col": "take some Japanese lessons",
+        "ex": "I want to take some Japanese lessons in the summer.",
+        "exv": "Tôi muốn học một số buổi học tiếng Nhật vào mùa hè."
+      },
+      {
+        "w": "take the bus",
+        "ipa": "/teɪk ðə bʌs/",
+        "vi": "đi xe buýt",
+        "col": "take the bus",
+        "ex": "I take the bus to work every day.",
+        "exv": "Tôi đi xe buýt tới chỗ làm mỗi ngày."
+      },
+      {
+        "w": "take the metro",
+        "ipa": "/teɪk ðə ˈmetrəʊ/",
+        "vi": "đi tàu điện ngầm",
+        "col": "take the metro",
+        "ex": "We take the metro to the city centre in Paris.",
+        "exv": "Chúng tôi đi tàu điện ngầm tới trung tâm thành phố ở Paris."
+      },
+      {
+        "w": "take the train",
+        "ipa": "/teɪk ðə treɪn/",
+        "vi": "đi tàu hỏa",
+        "col": "take the train",
+        "ex": "He takes the train to work in the morning.",
+        "exv": "Anh ấy đi tàu hỏa tới chỗ làm vào buổi sáng."
+      },
+      {
+        "w": "take an umbrella",
+        "ipa": "/teɪk ən ʌmˈbrelə/",
+        "vi": "mang theo ô",
+        "col": "take an umbrella",
+        "ex": "It is raining, so take an umbrella with you.",
+        "exv": "Trời đang mưa, vì vậy hãy mang theo ô."
+      },
+      {
+        "w": "take some water",
+        "ipa": "/teɪk səm ˈwɔːtə/",
+        "vi": "mang theo một ít nước",
+        "col": "take some water",
+        "ex": "We take some water with us on a hot day.",
+        "exv": "Chúng tôi mang theo một ít nước vào ngày nóng."
+      },
+      {
+        "w": "take your camera",
+        "ipa": "/teɪk jɔː ˈkæmrə/",
+        "vi": "mang theo máy ảnh của bạn",
+        "col": "take your camera",
+        "ex": "Please do not take your camera into the museum.",
+        "exv": "Xin đừng mang máy ảnh của bạn vào bảo tàng."
+      },
+      {
+        "w": "take a photograph",
+        "ipa": "/teɪk ə ˈfəʊtəɡrɑːf/",
+        "vi": "chụp ảnh",
+        "col": "take a photograph",
+        "ex": "May I take a photograph of this old house?",
+        "exv": "Tôi có thể chụp ảnh ngôi nhà cũ này không?"
+      },
+      {
+        "w": "take a picture",
+        "ipa": "/teɪk ə ˈpɪktʃə/",
+        "vi": "chụp một bức ảnh",
+        "col": "take a picture",
+        "ex": "I take a picture of my friends at the park.",
+        "exv": "Tôi chụp một bức ảnh về các bạn tôi ở công viên."
+      },
+      {
+        "w": "take a look at",
+        "ipa": "/teɪk ə lʊk ət/",
+        "vi": "nhìn qua, xem qua",
+        "col": "take a look at",
+        "ex": "Please take a look at my new book.",
+        "exv": "Xin hãy xem qua cuốn sách mới của tôi."
+      },
+      {
+        "w": "take a chance",
+        "ipa": "/teɪk ə tʃɑːns/",
+        "vi": "thử vận may, liều thử",
+        "col": "take a chance",
+        "ex": "I take a chance and ask the teacher my question.",
+        "exv": "Tôi liều thử và hỏi cô giáo câu hỏi của mình."
+      },
+      {
+        "w": "get to work",
+        "ipa": "/ɡet tə wɜːk/",
+        "vi": "đến chỗ làm",
+        "col": "get to work",
+        "ex": "It takes me 40 minutes to get to work by bus.",
+        "exv": "Tôi mất 40 phút để đến chỗ làm bằng xe buýt."
+      },
+      {
+        "w": "get to the station",
+        "ipa": "/ɡet tə ðə ˈsteɪʃn/",
+        "vi": "đến ga, đến trạm",
+        "col": "get to the station",
+        "ex": "It takes 15 minutes to get to the station by taxi.",
+        "exv": "Đi taxi mất 15 phút để đến ga."
+      },
+      {
+        "w": "do homework",
+        "ipa": "/duː ˈhəʊmwɜːk/",
+        "vi": "làm bài tập về nhà",
+        "col": "do homework",
+        "ex": "I do homework every day after school.",
+        "exv": "Tôi làm bài tập về nhà mỗi ngày sau giờ học."
+      },
+      {
+        "w": "minute",
+        "ipa": "/ˈmɪnɪt/",
+        "vi": "phút",
+        "col": "30 minutes",
+        "ex": "The lesson starts in five minutes.",
+        "exv": "Buổi học bắt đầu sau năm phút nữa."
+      },
+      {
+        "w": "hour",
+        "ipa": "/ˈaʊə/",
+        "vi": "giờ",
+        "col": "two hours",
+        "ex": "I read for one hour in the evening.",
+        "exv": "Tôi đọc sách một giờ vào buổi tối."
+      },
+      {
+        "w": "station",
+        "ipa": "/ˈsteɪʃn/",
+        "vi": "ga, trạm",
+        "col": "the station",
+        "ex": "We meet at the station at eight o clock.",
+        "exv": "Chúng tôi gặp nhau ở ga lúc tám giờ."
+      },
+      {
+        "w": "taxi",
+        "ipa": "/ˈtæksi/",
+        "vi": "xe taxi",
+        "col": "a taxi",
+        "ex": "We take a taxi to the airport.",
+        "exv": "Chúng tôi đi taxi tới sân bay."
+      },
+      {
+        "w": "beach",
+        "ipa": "/biːtʃ/",
+        "vi": "bãi biển",
+        "col": "the beach",
+        "ex": "We swim at the beach in the summer.",
+        "exv": "Chúng tôi bơi ở bãi biển vào mùa hè."
+      },
+      {
+        "w": "museum",
+        "ipa": "/mjuːˈziːəm/",
+        "vi": "bảo tàng",
+        "col": "the museum",
+        "ex": "We visit a museum on Sunday.",
+        "exv": "Chúng tôi thăm một bảo tàng vào Chủ nhật."
+      },
+      {
+        "w": "course",
+        "ipa": "/kɔːs/",
+        "vi": "khóa học",
+        "col": "an English course",
+        "ex": "This English course starts in September.",
+        "exv": "Khóa học tiếng Anh này bắt đầu vào tháng Chín."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "It ___ me 30 minutes to get to school.",
+        "o": [
+          "takes",
+          "makes",
+          "gets"
+        ],
+        "a": 0,
+        "why": "Cấu trúc it takes me + thời gian diễn tả mất bao lâu; make và get không dùng ở đây."
+      },
+      {
+        "q": "How do you get to work? I ___ the bus.",
+        "o": [
+          "take",
+          "make",
+          "bring"
+        ],
+        "a": 0,
+        "why": "Đi xe buýt dùng take the bus; make và bring không hợp nghĩa ở đây."
+      },
+      {
+        "q": "Cụm từ take an exam có nghĩa là gì?",
+        "o": [
+          "dự thi, làm bài thi",
+          "làm bài tập về nhà",
+          "chụp một bức ảnh"
+        ],
+        "a": 0,
+        "why": "take an exam = dự thi; bài tập về nhà là do homework, chụp ảnh là take a photo."
+      },
+      {
+        "q": "Are you going out? ___ an umbrella.",
+        "o": [
+          "Take",
+          "Make",
+          "Do"
+        ],
+        "a": 0,
+        "why": "Mang theo ô dùng take an umbrella; make và do không đi với umbrella theo cách này."
+      },
+      {
+        "q": "Cụm từ take a photograph có nghĩa là gì?",
+        "o": [
+          "chụp ảnh",
+          "xem một bức ảnh",
+          "mua một bức ảnh"
+        ],
+        "a": 0,
+        "why": "take a photograph = chụp ảnh; xem ảnh là look at a photo, mua ảnh là buy a photo."
+      },
+      {
+        "q": "Từ nào KHÔNG đi với take?",
+        "o": [
+          "an exam",
+          "a course",
+          "a mistake"
+        ],
+        "a": 2,
+        "why": "take an exam và take a course đều đúng; mistake đi với make, thành make a mistake."
+      }
+    ]
+  },
+  {
+    "n": 9,
+    "group": "Động từ thường ngày",
+    "title": "Bring/brought/brought",
+    "titleVi": "Động từ bring",
+    "words": [
+      {
+        "w": "bring",
+        "ipa": "/brɪŋ/",
+        "vi": "mang đến",
+        "col": "bring me flowers",
+        "ex": "Please bring your book to class tomorrow.",
+        "exv": "Xin hãy mang sách của bạn đến lớp vào ngày mai."
+      },
+      {
+        "w": "take",
+        "ipa": "/teɪk/",
+        "vi": "mang đi",
+        "col": "take your books",
+        "ex": "Please take this bag to the next room.",
+        "exv": "Xin hãy mang chiếc túi này sang phòng bên cạnh."
+      },
+      {
+        "w": "bring somebody something",
+        "ipa": "/brɪŋ ˈsʌmbədi ˈsʌmθɪŋ/",
+        "vi": "mang cho ai cái gì",
+        "col": "bring somebody something",
+        "ex": "My friend brings me flowers on my birthday.",
+        "exv": "Bạn tôi mang hoa cho tôi vào ngày sinh nhật của tôi."
+      },
+      {
+        "w": "bring me a glass",
+        "ipa": "/brɪŋ miː ə ɡlɑːs/",
+        "vi": "mang cho tôi một cái ly",
+        "col": "bring me a glass",
+        "ex": "Can you bring me a glass of water from the kitchen?",
+        "exv": "Bạn có thể mang cho tôi một ly nước từ bếp không?"
+      },
+      {
+        "w": "bring your guitar",
+        "ipa": "/brɪŋ jɔː ɡɪˈtɑː/",
+        "vi": "mang đàn ghi ta của bạn đến",
+        "col": "bring your guitar",
+        "ex": "Please bring your guitar to the party on Saturday.",
+        "exv": "Xin hãy mang đàn ghi ta của bạn đến buổi tiệc vào thứ Bảy."
+      },
+      {
+        "w": "bring me flowers",
+        "ipa": "/brɪŋ miː ˈflaʊəz/",
+        "vi": "mang hoa cho tôi",
+        "col": "bring me flowers",
+        "ex": "She brings me flowers every spring.",
+        "exv": "Cô ấy mang hoa cho tôi mỗi mùa xuân."
+      },
+      {
+        "w": "bring you some apples",
+        "ipa": "/brɪŋ juː səm ˈæplz/",
+        "vi": "mang cho bạn một ít táo",
+        "col": "bring you some apples",
+        "ex": "I have brought you some apples from my garden.",
+        "exv": "Tôi đã mang cho bạn một ít táo từ vườn nhà tôi."
+      },
+      {
+        "w": "bring it back",
+        "ipa": "/brɪŋ ɪt bæk/",
+        "vi": "mang nó trả lại",
+        "col": "bring it back",
+        "ex": "Please bring my umbrella back tomorrow morning.",
+        "exv": "Xin hãy mang trả ô của tôi vào sáng mai."
+      },
+      {
+        "w": "bring back",
+        "ipa": "/brɪŋ bæk/",
+        "vi": "mang trả lại",
+        "col": "bring back",
+        "ex": "I will bring this book back on Friday.",
+        "exv": "Tôi sẽ mang trả cuốn sách này vào thứ Sáu."
+      },
+      {
+        "w": "take your books",
+        "ipa": "/teɪk jɔː bʊks/",
+        "vi": "mang sách của bạn đi",
+        "col": "take your books",
+        "ex": "Do not forget to take your books to school.",
+        "exv": "Đừng quên mang sách của bạn tới trường."
+      },
+      {
+        "w": "secretary",
+        "ipa": "/ˈsekrətri/",
+        "vi": "thư ký",
+        "col": "the secretary",
+        "ex": "The secretary works in the office near the door.",
+        "exv": "Cô thư ký làm việc trong văn phòng gần cửa ra vào."
+      },
+      {
+        "w": "guitar",
+        "ipa": "/ɡɪˈtɑː/",
+        "vi": "đàn ghi ta",
+        "col": "a guitar",
+        "ex": "My brother plays the guitar very well.",
+        "exv": "Anh trai tôi chơi đàn ghi ta rất hay."
+      },
+      {
+        "w": "flowers",
+        "ipa": "/ˈflaʊəz/",
+        "vi": "hoa",
+        "col": "some flowers",
+        "ex": "She buys flowers at the market.",
+        "exv": "Cô ấy mua hoa ở chợ."
+      },
+      {
+        "w": "apples",
+        "ipa": "/ˈæplz/",
+        "vi": "táo",
+        "col": "some apples",
+        "ex": "I eat two apples every day.",
+        "exv": "Tôi ăn hai quả táo mỗi ngày."
+      },
+      {
+        "w": "garden",
+        "ipa": "/ˈɡɑːdn/",
+        "vi": "vườn",
+        "col": "my garden",
+        "ex": "We grow apples in our garden.",
+        "exv": "Chúng tôi trồng táo trong vườn nhà."
+      },
+      {
+        "w": "kitchen",
+        "ipa": "/ˈkɪtʃɪn/",
+        "vi": "bếp",
+        "col": "the kitchen",
+        "ex": "My mother cooks in the kitchen.",
+        "exv": "Mẹ tôi nấu ăn trong bếp."
+      },
+      {
+        "w": "umbrella",
+        "ipa": "/ʌmˈbrelə/",
+        "vi": "ô, dù",
+        "col": "my umbrella",
+        "ex": "I take my umbrella when it rains.",
+        "exv": "Tôi mang theo ô khi trời mưa."
+      },
+      {
+        "w": "book",
+        "ipa": "/bʊk/",
+        "vi": "cuốn sách",
+        "col": "this book",
+        "ex": "I read this book every night before bed.",
+        "exv": "Tôi đọc cuốn sách này mỗi tối trước khi đi ngủ."
+      },
+      {
+        "w": "Friday",
+        "ipa": "/ˈfraɪdeɪ/",
+        "vi": "thứ Sáu",
+        "col": "on Friday",
+        "ex": "We meet on Friday at five o clock.",
+        "exv": "Chúng tôi gặp nhau vào thứ Sáu lúc năm giờ."
+      },
+      {
+        "w": "tomorrow",
+        "ipa": "/təˈmɒrəʊ/",
+        "vi": "ngày mai",
+        "col": "tomorrow",
+        "ex": "I will see you tomorrow.",
+        "exv": "Tôi sẽ gặp bạn vào ngày mai."
+      },
+      {
+        "w": "here",
+        "ipa": "/hɪə/",
+        "vi": "ở đây",
+        "col": "here",
+        "ex": "Please come here and help me.",
+        "exv": "Xin hãy đến đây và giúp tôi."
+      },
+      {
+        "w": "there",
+        "ipa": "/ðeə/",
+        "vi": "ở đó",
+        "col": "there",
+        "ex": "The secretary is there, in the office.",
+        "exv": "Cô thư ký ở đó, trong văn phòng."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Are you going to the kitchen? Can you ___ me a glass of water?",
+        "o": [
+          "bring",
+          "take",
+          "get"
+        ],
+        "a": 0,
+        "why": "bring = mang từ đó về đây, về phía người nói; take = mang từ đây đi chỗ khác."
+      },
+      {
+        "q": "Please ___ this form to the secretary.",
+        "o": [
+          "take",
+          "bring",
+          "come"
+        ],
+        "a": 0,
+        "why": "take this form to the secretary = mang tờ đơn này tới chỗ cô thư ký ở đó; bring dùng khi mang về đây."
+      },
+      {
+        "q": "She always ___ me flowers when she visits me.",
+        "o": [
+          "brings",
+          "takes",
+          "makes"
+        ],
+        "a": 0,
+        "why": "bring me flowers = mang hoa đến cho tôi; takes mang đi chỗ khác, makes không hợp nghĩa."
+      },
+      {
+        "q": "Cụm từ bring it back có nghĩa là gì?",
+        "o": [
+          "mang nó trả lại",
+          "mang nó đi xa",
+          "mang nó đến lần đầu"
+        ],
+        "a": 0,
+        "why": "bring it back = mang trả lại cho người cho mượn; take mang đi, bring lần đầu không có back."
+      },
+      {
+        "q": "Come to my house tomorrow and ___ your guitar.",
+        "o": [
+          "bring",
+          "take",
+          "do"
+        ],
+        "a": 0,
+        "why": "Nhà tôi là ở đây với người nói, nên mang đàn đến dùng bring; take dùng khi mang đi chỗ khác."
+      },
+      {
+        "q": "I will ___ it back on Friday.",
+        "o": [
+          "bring",
+          "take",
+          "make"
+        ],
+        "a": 0,
+        "why": "bring it back = mang trả lại; take it back không phải cụm sách dạy ở đây, make không hợp nghĩa."
+      }
+    ]
+  },
+  {
+    "n": 10,
+    "group": "Động từ thường ngày",
+    "title": "Get/got/got",
+    "titleVi": "Động từ get",
+    "words": [
+      {
+        "w": "get",
+        "ipa": "/ɡet/",
+        "vi": "trở nên, lấy, đến",
+        "col": "get better",
+        "ex": "I get a letter every week.",
+        "exv": "Tôi nhận được một bức thư mỗi tuần."
+      },
+      {
+        "w": "get dark",
+        "ipa": "/ɡet dɑːk/",
+        "vi": "trời tối dần",
+        "col": "get dark",
+        "ex": "It is getting dark outside now.",
+        "exv": "Trời bên ngoài đang tối dần."
+      },
+      {
+        "w": "get better",
+        "ipa": "/ɡet ˈbetə/",
+        "vi": "khỏe hơn, tốt hơn",
+        "col": "get better",
+        "ex": "She was ill, but now she is getting better.",
+        "exv": "Cô ấy đã ốm, nhưng giờ cô ấy đang khỏe hơn."
+      },
+      {
+        "w": "get tired",
+        "ipa": "/ɡet ˈtaɪəd/",
+        "vi": "trở nên mệt",
+        "col": "get tired",
+        "ex": "I am getting tired, so I want to go to bed.",
+        "exv": "Tôi đang thấy mệt, vì vậy tôi muốn đi ngủ."
+      },
+      {
+        "w": "get wet",
+        "ipa": "/ɡet wet/",
+        "vi": "bị ướt",
+        "col": "get wet",
+        "ex": "It is raining, and I am getting wet.",
+        "exv": "Trời đang mưa, và tôi đang bị ướt."
+      },
+      {
+        "w": "get a stamp",
+        "ipa": "/ɡet ə stæmp/",
+        "vi": "mua một con tem",
+        "col": "get a stamp",
+        "ex": "I want to send a postcard, so I have to get a stamp.",
+        "exv": "Tôi muốn gửi một tấm bưu thiếp, vì vậy tôi phải mua một con tem."
+      },
+      {
+        "w": "get a job",
+        "ipa": "/ɡet ə dʒɒb/",
+        "vi": "kiếm được việc làm",
+        "col": "get a job",
+        "ex": "I have finished my studies, and now I want to get a job.",
+        "exv": "Tôi đã học xong, và giờ tôi muốn kiếm một việc làm."
+      },
+      {
+        "w": "get a doctor",
+        "ipa": "/ɡet ə ˈdɒktə/",
+        "vi": "gọi một bác sĩ",
+        "col": "get a doctor",
+        "ex": "My friend is ill, so please get a doctor.",
+        "exv": "Bạn tôi đang ốm, vì vậy xin hãy gọi một bác sĩ."
+      },
+      {
+        "w": "get some coffee",
+        "ipa": "/ɡet səm ˈkɒfi/",
+        "vi": "lấy một ít cà phê",
+        "col": "get some coffee",
+        "ex": "I can get some coffee for you from the shop.",
+        "exv": "Tôi có thể mua giúp bạn một ít cà phê ở cửa hàng."
+      },
+      {
+        "w": "get a newspaper",
+        "ipa": "/ɡet ə ˈnjuːzpeɪpə/",
+        "vi": "mua một tờ báo",
+        "col": "get a newspaper",
+        "ex": "I am going to the shop to get a newspaper.",
+        "exv": "Tôi đang đi đến cửa hàng để mua một tờ báo."
+      },
+      {
+        "w": "get a taxi",
+        "ipa": "/ɡet ə ˈtæksi/",
+        "vi": "bắt một chiếc taxi",
+        "col": "get a taxi",
+        "ex": "Where can I get a taxi near the station?",
+        "exv": "Tôi có thể bắt taxi ở đâu gần ga?"
+      },
+      {
+        "w": "get to the airport",
+        "ipa": "/ɡet tə ði ˈeəpɔːt/",
+        "vi": "đến sân bay",
+        "col": "get to the airport",
+        "ex": "How can I get to the airport from this hotel?",
+        "exv": "Tôi có thể đến sân bay từ khách sạn này bằng cách nào?"
+      },
+      {
+        "w": "get married",
+        "ipa": "/ɡet ˈmærid/",
+        "vi": "kết hôn",
+        "col": "get married",
+        "ex": "My sister is getting married in April.",
+        "exv": "Chị gái tôi sẽ kết hôn vào tháng Tư."
+      },
+      {
+        "w": "get back",
+        "ipa": "/ɡet bæk/",
+        "vi": "trở về",
+        "col": "get back",
+        "ex": "When you get back from your trip, please ring me.",
+        "exv": "Khi bạn trở về từ chuyến đi, xin hãy gọi cho tôi."
+      },
+      {
+        "w": "get home",
+        "ipa": "/ɡet həʊm/",
+        "vi": "về đến nhà",
+        "col": "get home",
+        "ex": "When I get home, I cook dinner for my family.",
+        "exv": "Khi về đến nhà, tôi nấu bữa tối cho gia đình."
+      },
+      {
+        "w": "get there",
+        "ipa": "/ɡet ðeə/",
+        "vi": "đến đó",
+        "col": "get there",
+        "ex": "I get there at six o clock in the evening.",
+        "exv": "Tôi đến đó lúc sáu giờ tối."
+      },
+      {
+        "w": "dark",
+        "ipa": "/dɑːk/",
+        "vi": "tối",
+        "col": "get dark",
+        "ex": "The room is dark at night.",
+        "exv": "Căn phòng tối vào ban đêm."
+      },
+      {
+        "w": "light",
+        "ipa": "/laɪt/",
+        "vi": "sáng",
+        "col": "it is light",
+        "ex": "It is light in the morning.",
+        "exv": "Trời sáng vào buổi sáng."
+      },
+      {
+        "w": "better",
+        "ipa": "/ˈbetə/",
+        "vi": "tốt hơn, khỏe hơn",
+        "col": "get better",
+        "ex": "She is better today.",
+        "exv": "Hôm nay cô ấy khỏe hơn."
+      },
+      {
+        "w": "tired",
+        "ipa": "/ˈtaɪəd/",
+        "vi": "mệt",
+        "col": "get tired",
+        "ex": "I feel tired after a long day.",
+        "exv": "Tôi thấy mệt sau một ngày dài."
+      },
+      {
+        "w": "wet",
+        "ipa": "/wet/",
+        "vi": "ướt",
+        "col": "get wet",
+        "ex": "My shoes are wet after the rain.",
+        "exv": "Giày của tôi bị ướt sau cơn mưa."
+      },
+      {
+        "w": "ill",
+        "ipa": "/ɪl/",
+        "vi": "ốm",
+        "col": "get ill",
+        "ex": "She is ill and stays at home.",
+        "exv": "Cô ấy bị ốm và ở nhà."
+      },
+      {
+        "w": "stamp",
+        "ipa": "/stæmp/",
+        "vi": "con tem",
+        "col": "a stamp",
+        "ex": "I put a stamp on the letter.",
+        "exv": "Tôi dán một con tem lên bức thư."
+      },
+      {
+        "w": "job",
+        "ipa": "/dʒɒb/",
+        "vi": "việc làm",
+        "col": "a job",
+        "ex": "He has a good job in a bank.",
+        "exv": "Anh ấy có một việc làm tốt ở ngân hàng."
+      },
+      {
+        "w": "doctor",
+        "ipa": "/ˈdɒktə/",
+        "vi": "bác sĩ",
+        "col": "a doctor",
+        "ex": "The doctor helps my mother.",
+        "exv": "Bác sĩ giúp mẹ tôi."
+      },
+      {
+        "w": "newspaper",
+        "ipa": "/ˈnjuːzpeɪpə/",
+        "vi": "báo",
+        "col": "a newspaper",
+        "ex": "My father reads a newspaper every morning.",
+        "exv": "Bố tôi đọc báo mỗi sáng."
+      },
+      {
+        "w": "taxi",
+        "ipa": "/ˈtæksi/",
+        "vi": "xe taxi",
+        "col": "a taxi",
+        "ex": "We go home by taxi at night.",
+        "exv": "Chúng tôi về nhà bằng taxi vào ban đêm."
+      },
+      {
+        "w": "airport",
+        "ipa": "/ˈeəpɔːt/",
+        "vi": "sân bay",
+        "col": "the airport",
+        "ex": "The airport is far from our house.",
+        "exv": "Sân bay ở xa nhà chúng tôi."
+      },
+      {
+        "w": "married",
+        "ipa": "/ˈmærid/",
+        "vi": "đã kết hôn",
+        "col": "get married",
+        "ex": "They are married and live in Ha Noi.",
+        "exv": "Họ đã kết hôn và sống ở Hà Nội."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "She was ill, but now she is ___ better.",
+        "o": [
+          "getting",
+          "getting to",
+          "getting married"
+        ],
+        "a": 0,
+        "why": "get better = khỏe hơn; getting to và getting married không hợp nghĩa ở đây."
+      },
+      {
+        "q": "I want to send a letter. I have to ___ a stamp.",
+        "o": [
+          "get",
+          "make",
+          "take"
+        ],
+        "a": 0,
+        "why": "get a stamp = mua một con tem; make và take không dùng với stamp theo cách này."
+      },
+      {
+        "q": "How can I ___ to the airport?",
+        "o": [
+          "get",
+          "make",
+          "bring"
+        ],
+        "a": 0,
+        "why": "get to = đến một nơi; make to và bring to không phải cấu trúc đúng ở đây."
+      },
+      {
+        "q": "Maria and David are ___ married in April.",
+        "o": [
+          "getting",
+          "getting to",
+          "getting back"
+        ],
+        "a": 0,
+        "why": "get married = kết hôn; getting to và getting back không hợp nghĩa ở đây."
+      },
+      {
+        "q": "Cụm từ get back có nghĩa là gì?",
+        "o": [
+          "trở về",
+          "kết hôn",
+          "trở nên tối"
+        ],
+        "a": 0,
+        "why": "get back = trở về; kết hôn là get married, trở nên tối là get dark."
+      },
+      {
+        "q": "When I ___ home, I have my lunch.",
+        "o": [
+          "get",
+          "get to",
+          "get married"
+        ],
+        "a": 0,
+        "why": "get home là đúng, sách ghi rõ không nói get to home; get married không hợp nghĩa."
+      }
+    ]
+  },
+  {
+    "n": 11,
+    "group": "Động từ thường ngày",
+    "title": "Phrasal verbs",
+    "titleVi": "Cụm động từ",
+    "words": [
+      {
+        "w": "get up",
+        "ipa": "/ɡet ʌp/",
+        "vi": "thức dậy, ra khỏi giường",
+        "col": "get up at six",
+        "ex": "Mai gets up at six and opens her window.",
+        "exv": "Mai thức dậy lúc sáu giờ và mở cửa sổ."
+      },
+      {
+        "w": "get on with",
+        "ipa": "/ɡet ɒn wɪð/",
+        "vi": "hòa hợp với ai",
+        "col": "get on with my sister",
+        "ex": "Lan gets on with her new classmate very well.",
+        "exv": "Lan hòa hợp rất tốt với bạn cùng lớp mới của mình."
+      },
+      {
+        "w": "get over",
+        "ipa": "/ɡet ˈəʊvə/",
+        "vi": "khỏi (ốm), vượt qua",
+        "col": "get over a cold",
+        "ex": "Nam got over his cold and went back to school.",
+        "exv": "Nam đã khỏi cảm và trở lại trường học."
+      },
+      {
+        "w": "turn on",
+        "ipa": "/tɜːn ɒn/",
+        "vi": "bật (đèn, ti vi)",
+        "col": "turn on the TV",
+        "ex": "Please turn on the lamp, it is dark in here.",
+        "exv": "Hãy bật đèn lên, trong này tối quá."
+      },
+      {
+        "w": "turn off",
+        "ipa": "/tɜːn ɒf/",
+        "vi": "tắt (đèn, ti vi)",
+        "col": "turn off the light",
+        "ex": "Remember to turn off the light before you sleep.",
+        "exv": "Nhớ tắt đèn trước khi bạn ngủ."
+      },
+      {
+        "w": "turn up",
+        "ipa": "/tɜːn ʌp/",
+        "vi": "vặn to (âm lượng)",
+        "col": "turn up the TV",
+        "ex": "Turn up the radio, I love this song.",
+        "exv": "Vặn to đài lên, tôi thích bài hát này."
+      },
+      {
+        "w": "turn down the music",
+        "ipa": "/tɜːn daʊn ðə ˈmjuːzɪk/",
+        "vi": "vặn nhỏ nhạc",
+        "col": "turn down the music",
+        "ex": "Please turn down the music, the baby is asleep.",
+        "exv": "Hãy vặn nhỏ nhạc xuống, em bé đang ngủ."
+      },
+      {
+        "w": "turn down an invitation",
+        "ipa": "/tɜːn daʊn ən ˌɪnvɪˈteɪʃn/",
+        "vi": "từ chối một lời mời",
+        "col": "turn down an invitation",
+        "ex": "Hoa turned down an invitation because she was busy.",
+        "exv": "Hoa đã từ chối một lời mời vì cô ấy bận."
+      },
+      {
+        "w": "go on",
+        "ipa": "/ɡəʊ ɒn/",
+        "vi": "tiếp tục",
+        "col": "go on talking",
+        "ex": "Go on reading, your story is very nice.",
+        "exv": "Cứ đọc tiếp đi, câu chuyện của bạn rất hay."
+      },
+      {
+        "w": "go off",
+        "ipa": "/ɡəʊ ɒf/",
+        "vi": "nổ, reo, vang lên",
+        "col": "a bomb goes off",
+        "ex": "My alarm clock goes off at half past five.",
+        "exv": "Đồng hồ báo thức của tôi reo lúc năm giờ rưỡi."
+      },
+      {
+        "w": "put on",
+        "ipa": "/pʊt ɒn/",
+        "vi": "mặc vào, khoác vào",
+        "col": "put your coat on",
+        "ex": "It is cold outside, put on your warm jacket.",
+        "exv": "Ngoài trời lạnh lắm, hãy mặc áo khoác ấm vào."
+      },
+      {
+        "w": "come on",
+        "ipa": "/kʌm ɒn/",
+        "vi": "nhanh lên nào",
+        "col": "Come on! We are late.",
+        "ex": "Come on, the bus is here and we must hurry.",
+        "exv": "Nhanh lên nào, xe buýt đã tới và chúng ta phải vội."
+      },
+      {
+        "w": "do up your coat",
+        "ipa": "/duː ʌp jɔː kəʊt/",
+        "vi": "cài áo khoác lại",
+        "col": "do up your coat",
+        "ex": "Do up your coat, the wind is very strong today.",
+        "exv": "Cài áo khoác lại đi, hôm nay gió rất mạnh."
+      },
+      {
+        "w": "do up a flat",
+        "ipa": "/duː ʌp ə flæt/",
+        "vi": "sửa sang lại căn hộ",
+        "col": "do up a flat",
+        "ex": "They did up their small flat and painted it white.",
+        "exv": "Họ đã sửa sang căn hộ nhỏ của mình và sơn nó màu trắng."
+      },
+      {
+        "w": "take off",
+        "ipa": "/teɪk ɒf/",
+        "vi": "cất cánh (máy bay)",
+        "col": "the plane takes off",
+        "ex": "Our plane takes off in the morning and lands at noon.",
+        "exv": "Máy bay của chúng tôi cất cánh vào buổi sáng và hạ cánh lúc trưa."
+      },
+      {
+        "w": "take off your shoes",
+        "ipa": "/teɪk ɒf jɔː ʃuːz/",
+        "vi": "cởi giày ra",
+        "col": "take off your shoes",
+        "ex": "Please take off your shoes before you come inside.",
+        "exv": "Hãy cởi giày ra trước khi bạn vào trong nhà."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Điền từ đúng: Please ___ the light, it is too dark in here.",
+        "o": [
+          "turn on",
+          "turn down",
+          "take off"
+        ],
+        "a": 0,
+        "why": "turn on = bật đèn; turn down = vặn nhỏ hoặc từ chối; take off = cất cánh hoặc cởi ra."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'khỏi ốm, vượt qua'?",
+        "o": [
+          "get up",
+          "get over",
+          "go off"
+        ],
+        "a": 1,
+        "why": "get over = khỏi ốm, vượt qua; get up = thức dậy; go off = nổ, reo."
+      },
+      {
+        "q": "Điền từ đúng: It is cold, so please ___ your warm coat.",
+        "o": [
+          "put on",
+          "take off",
+          "go on"
+        ],
+        "a": 0,
+        "why": "put on = mặc vào; take off = cởi ra; go on = tiếp tục."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'tiếp tục'?",
+        "o": [
+          "come on",
+          "go on",
+          "get on"
+        ],
+        "a": 1,
+        "why": "go on = tiếp tục; come on = nhanh lên nào; get on = hòa hợp với ai."
+      },
+      {
+        "q": "Điền từ đúng: She ___ her shoes and walked into the house.",
+        "o": [
+          "took off",
+          "turned on",
+          "did up"
+        ],
+        "a": 0,
+        "why": "take off your shoes = cởi giày ra; turn on = bật; do up = cài lại hoặc sửa sang."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'từ chối một lời mời'?",
+        "o": [
+          "turn up the TV",
+          "turn down an invitation",
+          "get over a cold"
+        ],
+        "a": 1,
+        "why": "turn down an invitation = từ chối một lời mời; turn up the TV = vặn to ti vi; get over a cold = khỏi cảm."
+      }
+    ]
+  },
+  {
+    "n": 12,
+    "group": "Động từ thường ngày",
+    "title": "Every day things",
+    "titleVi": "Những việc hằng ngày",
+    "words": [
+      {
+        "w": "wake up",
+        "ipa": "/weɪk ʌp/",
+        "vi": "tỉnh giấc",
+        "col": "wake up at seven",
+        "ex": "I wake up at seven and wash my face.",
+        "exv": "Tôi tỉnh giấc lúc bảy giờ và rửa mặt."
+      },
+      {
+        "w": "get up",
+        "ipa": "/ɡet ʌp/",
+        "vi": "thức dậy, ra khỏi giường",
+        "col": "get up at eight",
+        "ex": "Lan gets up at eight on Sunday morning.",
+        "exv": "Lan thức dậy lúc tám giờ vào sáng chủ nhật."
+      },
+      {
+        "w": "have a shower",
+        "ipa": "/hæv ə ˈʃaʊə/",
+        "vi": "tắm vòi sen",
+        "col": "have a shower in the morning",
+        "ex": "Nam has a shower after he plays football.",
+        "exv": "Nam tắm vòi sen sau khi chơi bóng đá."
+      },
+      {
+        "w": "go to the bathroom",
+        "ipa": "/ɡəʊ tə ðə ˈbɑːθruːm/",
+        "vi": "đi vào phòng tắm",
+        "col": "go to the bathroom",
+        "ex": "Mai goes to the bathroom and brushes her teeth.",
+        "exv": "Mai đi vào phòng tắm và đánh răng."
+      },
+      {
+        "w": "have breakfast",
+        "ipa": "/hæv ˈbrekfəst/",
+        "vi": "ăn sáng",
+        "col": "have breakfast at home",
+        "ex": "We have breakfast at home with bread and eggs.",
+        "exv": "Chúng tôi ăn sáng ở nhà với bánh mì và trứng."
+      },
+      {
+        "w": "listen to the radio",
+        "ipa": "/ˈlɪsn tə ðə ˈreɪdiəʊ/",
+        "vi": "nghe đài",
+        "col": "listen to the radio",
+        "ex": "My father listens to the radio while he drinks tea.",
+        "exv": "Bố tôi nghe đài trong khi uống trà."
+      },
+      {
+        "w": "go to work",
+        "ipa": "/ɡəʊ tə wɜːk/",
+        "vi": "đi làm",
+        "col": "go to work by bus",
+        "ex": "She goes to work by bus every morning.",
+        "exv": "Cô ấy đi làm bằng xe buýt mỗi buổi sáng."
+      },
+      {
+        "w": "come home",
+        "ipa": "/kʌm həʊm/",
+        "vi": "về nhà",
+        "col": "come home at six",
+        "ex": "He comes home at six and cooks dinner.",
+        "exv": "Anh ấy về nhà lúc sáu giờ và nấu bữa tối."
+      },
+      {
+        "w": "work",
+        "ipa": "/wɜːk/",
+        "vi": "làm việc",
+        "col": "work in an office",
+        "ex": "My mother works in an office near our house.",
+        "exv": "Mẹ tôi làm việc trong một văn phòng gần nhà chúng tôi."
+      },
+      {
+        "w": "phone a friend",
+        "ipa": "/fəʊn ə frend/",
+        "vi": "gọi điện cho một người bạn",
+        "col": "phone a friend",
+        "ex": "I phone my friend Hoa every Sunday evening.",
+        "exv": "Tôi gọi điện cho bạn Hoa mỗi tối chủ nhật."
+      },
+      {
+        "w": "make dinner",
+        "ipa": "/meɪk ˈdɪnə/",
+        "vi": "nấu bữa tối",
+        "col": "make dinner for the family",
+        "ex": "Lan makes dinner for her family at seven.",
+        "exv": "Lan nấu bữa tối cho gia đình lúc bảy giờ."
+      },
+      {
+        "w": "watch TV",
+        "ipa": "/wɒtʃ tiː ˈviː/",
+        "vi": "xem ti vi",
+        "col": "watch TV in the evening",
+        "ex": "We watch TV in the evening after dinner.",
+        "exv": "Chúng tôi xem ti vi vào buổi tối sau bữa tối."
+      },
+      {
+        "w": "go to bed",
+        "ipa": "/ɡəʊ tə bed/",
+        "vi": "đi ngủ",
+        "col": "go to bed at ten",
+        "ex": "The children go to bed at ten every night.",
+        "exv": "Bọn trẻ đi ngủ lúc mười giờ mỗi đêm."
+      },
+      {
+        "w": "wash clothes",
+        "ipa": "/wɒʃ kləʊðz/",
+        "vi": "giặt quần áo",
+        "col": "wash clothes on Saturday",
+        "ex": "My sister washes clothes on Saturday morning.",
+        "exv": "Chị tôi giặt quần áo vào sáng thứ bảy."
+      },
+      {
+        "w": "clean the house",
+        "ipa": "/kliːn ðə haʊs/",
+        "vi": "dọn dẹp nhà cửa",
+        "col": "clean the house",
+        "ex": "We clean the house together every weekend.",
+        "exv": "Chúng tôi cùng dọn dẹp nhà cửa mỗi cuối tuần."
+      },
+      {
+        "w": "go for a walk",
+        "ipa": "/ɡəʊ fə ə wɔːk/",
+        "vi": "đi dạo",
+        "col": "go for a walk in the park",
+        "ex": "They go for a walk in the park after lunch.",
+        "exv": "Họ đi dạo trong công viên sau bữa trưa."
+      },
+      {
+        "w": "write letters",
+        "ipa": "/raɪt ˈletəz/",
+        "vi": "viết thư",
+        "col": "write letters to friends",
+        "ex": "Grandma writes letters to her friends in Hue.",
+        "exv": "Bà viết thư cho bạn bè của bà ở Huế."
+      },
+      {
+        "w": "read the newspaper",
+        "ipa": "/riːd ðə ˈnjuːzpeɪpə/",
+        "vi": "đọc báo",
+        "col": "read the newspaper every day",
+        "ex": "My uncle reads the newspaper every day at breakfast.",
+        "exv": "Chú tôi đọc báo mỗi ngày vào bữa sáng."
+      },
+      {
+        "w": "usually",
+        "ipa": "/ˈjuːʒuəli/",
+        "vi": "thường thường",
+        "col": "usually get up at eight",
+        "ex": "I usually drink tea in the morning, not coffee.",
+        "exv": "Tôi thường uống trà vào buổi sáng, không uống cà phê."
+      },
+      {
+        "w": "normally",
+        "ipa": "/ˈnɔːməli/",
+        "vi": "thông thường",
+        "col": "normally go to work by bus",
+        "ex": "She normally walks to school, but today she rides a bike.",
+        "exv": "Cô ấy thông thường đi bộ tới trường, nhưng hôm nay cô ấy đi xe đạp."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Điền cụm đúng: I ___ at seven and then I have breakfast.",
+        "o": [
+          "wake up",
+          "watch TV",
+          "clean the house"
+        ],
+        "a": 0,
+        "why": "wake up = tỉnh giấc, phù hợp với buổi sáng trước bữa sáng; watch TV và clean the house không hợp nghĩa ở đây."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'ăn sáng'?",
+        "o": [
+          "have a shower",
+          "have breakfast",
+          "make dinner"
+        ],
+        "a": 1,
+        "why": "have breakfast = ăn sáng; have a shower = tắm vòi sen; make dinner = nấu bữa tối."
+      },
+      {
+        "q": "Hỏi về tần suất, ta dùng từ nào: '___ do you read the newspaper?'",
+        "o": [
+          "What time",
+          "How often",
+          "How do"
+        ],
+        "a": 1,
+        "why": "How often = bao lâu một lần, dùng để hỏi tần suất; What time hỏi giờ; How do hỏi cách thức."
+      },
+      {
+        "q": "Điền cụm đúng: She ___ to work by train every morning.",
+        "o": [
+          "goes",
+          "go to bed",
+          "washes clothes"
+        ],
+        "a": 0,
+        "why": "go to work = đi làm, dạng goes phù hợp với she; go to bed = đi ngủ; wash clothes = giặt quần áo."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'đi dạo'?",
+        "o": [
+          "go for a walk",
+          "wash clothes",
+          "clean the house"
+        ],
+        "a": 0,
+        "why": "go for a walk = đi dạo; wash clothes = giặt quần áo; clean the house = dọn dẹp nhà cửa."
+      },
+      {
+        "q": "Cụm nào KHÔNG phải việc làm buổi tối?",
+        "o": [
+          "watch TV",
+          "go to bed",
+          "have breakfast"
+        ],
+        "a": 2,
+        "why": "have breakfast = ăn sáng, là việc buổi sáng; watch TV và go to bed thường là việc buổi tối."
+      }
+    ]
+  },
+  {
+    "n": 13,
+    "group": "Động từ thường ngày",
+    "title": "Talking",
+    "titleVi": "Nói chuyện",
+    "words": [
+      {
+        "w": "say",
+        "ipa": "/seɪ/",
+        "vi": "nói",
+        "col": "say hello",
+        "ex": "Mai says hello to her teacher every morning.",
+        "exv": "Mai chào cô giáo của mình mỗi buổi sáng."
+      },
+      {
+        "w": "tell",
+        "ipa": "/tel/",
+        "vi": "kể, bảo, nói cho ai biết",
+        "col": "tell me your name",
+        "ex": "Please tell me your name and your phone number.",
+        "exv": "Hãy cho tôi biết tên và số điện thoại của bạn."
+      },
+      {
+        "w": "ask",
+        "ipa": "/ɑːsk/",
+        "vi": "hỏi",
+        "col": "ask a question",
+        "ex": "Nam asks his teacher about the new lesson.",
+        "exv": "Nam hỏi cô giáo về bài học mới."
+      },
+      {
+        "w": "speak",
+        "ipa": "/spiːk/",
+        "vi": "nói (một ngôn ngữ)",
+        "col": "speak Japanese",
+        "ex": "Lan speaks English and a little French.",
+        "exv": "Lan nói tiếng Anh và một chút tiếng Pháp."
+      },
+      {
+        "w": "talk",
+        "ipa": "/tɔːk/",
+        "vi": "nói chuyện, trò chuyện",
+        "col": "talk to a friend",
+        "ex": "I like talking to my grandmother in the evening.",
+        "exv": "Tôi thích trò chuyện với bà vào buổi tối."
+      },
+      {
+        "w": "answer",
+        "ipa": "/ˈɑːnsə/",
+        "vi": "trả lời, nhấc máy, mở cửa",
+        "col": "answer the telephone",
+        "ex": "Please answer the telephone, I am busy now.",
+        "exv": "Hãy nhấc điện thoại giúp tôi, tôi đang bận."
+      },
+      {
+        "w": "reply",
+        "ipa": "/rɪˈplaɪ/",
+        "vi": "hồi đáp (thư, tin nhắn)",
+        "col": "reply to a letter",
+        "ex": "She replies to her friend's letter on Sunday.",
+        "exv": "Cô ấy hồi đáp thư của bạn mình vào chủ nhật."
+      },
+      {
+        "w": "say hello",
+        "ipa": "/seɪ həˈləʊ/",
+        "vi": "chào (khi gặp nhau)",
+        "col": "say hello to a friend",
+        "ex": "He says hello to his neighbour when he goes out.",
+        "exv": "Anh ấy chào người hàng xóm khi đi ra ngoài."
+      },
+      {
+        "w": "say goodbye",
+        "ipa": "/seɪ ɡʊdˈbaɪ/",
+        "vi": "chào tạm biệt",
+        "col": "say goodbye to your teacher",
+        "ex": "The children say goodbye to their teacher at noon.",
+        "exv": "Bọn trẻ chào tạm biệt cô giáo vào buổi trưa."
+      },
+      {
+        "w": "say thank you",
+        "ipa": "/seɪ θæŋk juː/",
+        "vi": "nói cảm ơn",
+        "col": "say thank you for your help",
+        "ex": "Say thank you to your aunt for the lovely gift.",
+        "exv": "Hãy cảm ơn dì của bạn vì món quà xinh đẹp."
+      },
+      {
+        "w": "Happy Birthday",
+        "ipa": "/ˈhæpi ˈbɜːθdeɪ/",
+        "vi": "Chúc mừng sinh nhật",
+        "col": "say Happy Birthday",
+        "ex": "We say Happy Birthday to Lan and give her flowers.",
+        "exv": "Chúng tôi chúc mừng sinh nhật Lan và tặng cô ấy hoa."
+      },
+      {
+        "w": "Merry Christmas",
+        "ipa": "/ˈmeri ˈkrɪsməs/",
+        "vi": "Chúc mừng Giáng sinh",
+        "col": "say Merry Christmas",
+        "ex": "They say Merry Christmas to their friends in December.",
+        "exv": "Họ chúc mừng Giáng sinh bạn bè vào tháng mười hai."
+      },
+      {
+        "w": "Happy New Year",
+        "ipa": "/ˈhæpi njuː jɪə/",
+        "vi": "Chúc mừng năm mới",
+        "col": "say Happy New Year",
+        "ex": "We say Happy New Year to our neighbours in January.",
+        "exv": "Chúng tôi chúc mừng năm mới hàng xóm vào tháng một."
+      },
+      {
+        "w": "Congratulations",
+        "ipa": "/kənˌɡrætʃuˈleɪʃnz/",
+        "vi": "Chúc mừng",
+        "col": "say Congratulations",
+        "ex": "Say Congratulations to Nam, he passed his exam.",
+        "exv": "Hãy chúc mừng Nam, anh ấy đã đỗ kỳ thi."
+      },
+      {
+        "w": "tell a story",
+        "ipa": "/tel ə ˈstɔːri/",
+        "vi": "kể một câu chuyện",
+        "col": "tell a story to children",
+        "ex": "Grandma tells a story to the children every night.",
+        "exv": "Bà kể một câu chuyện cho bọn trẻ mỗi đêm."
+      },
+      {
+        "w": "tell a joke",
+        "ipa": "/tel ə dʒəʊk/",
+        "vi": "kể một câu chuyện cười",
+        "col": "tell a joke",
+        "ex": "My brother tells a joke and we all laugh.",
+        "exv": "Em trai tôi kể một câu chuyện cười và tất cả chúng tôi đều cười."
+      },
+      {
+        "w": "tell the time",
+        "ipa": "/tel ðə taɪm/",
+        "vi": "cho biết giờ",
+        "col": "tell me the time",
+        "ex": "Can you tell me the time, please? My watch is broken.",
+        "exv": "Bạn có thể cho tôi biết giờ không? Đồng hồ của tôi bị hỏng."
+      },
+      {
+        "w": "ask a question",
+        "ipa": "/ɑːsk ə ˈkwestʃən/",
+        "vi": "đặt một câu hỏi",
+        "col": "ask a question",
+        "ex": "Please ask a question if you do not understand.",
+        "exv": "Hãy đặt câu hỏi nếu bạn không hiểu."
+      },
+      {
+        "w": "ask for the bill",
+        "ipa": "/ɑːsk fə ðə bɪl/",
+        "vi": "xin hóa đơn (ở nhà hàng)",
+        "col": "ask for the bill",
+        "ex": "After lunch we ask for the bill and pay in cash.",
+        "exv": "Sau bữa trưa chúng tôi xin hóa đơn và trả bằng tiền mặt."
+      },
+      {
+        "w": "answer the telephone",
+        "ipa": "/ˈɑːnsə ðə ˈtelɪfəʊn/",
+        "vi": "nhấc điện thoại",
+        "col": "answer the telephone",
+        "ex": "When the telephone rings, Hoa answers it quickly.",
+        "exv": "Khi điện thoại reo, Hoa nhấc máy rất nhanh."
+      },
+      {
+        "w": "answer the door",
+        "ipa": "/ˈɑːnsə ðə dɔː/",
+        "vi": "mở cửa (khi có người gõ)",
+        "col": "answer the door",
+        "ex": "Someone knocks, so Lan answers the door.",
+        "exv": "Có người gõ cửa, vì vậy Lan ra mở cửa."
+      },
+      {
+        "w": "reply to a letter",
+        "ipa": "/rɪˈplaɪ tə ə ˈletə/",
+        "vi": "hồi đáp một lá thư",
+        "col": "reply to a letter",
+        "ex": "He replies to his friend's letter with good news.",
+        "exv": "Anh ấy hồi đáp thư của bạn mình với tin vui."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Điền từ đúng: Can you ___ me where the bus station is, please?",
+        "o": [
+          "say",
+          "tell",
+          "speak"
+        ],
+        "a": 1,
+        "why": "tell + người = nói cho ai biết; say không đi với người ngay sau nó; speak dùng cho ngôn ngữ."
+      },
+      {
+        "q": "Điền từ đúng: How do you ___ 'book' in Spanish?",
+        "o": [
+          "tell",
+          "say",
+          "ask"
+        ],
+        "a": 1,
+        "why": "say dùng khi hỏi về ngôn ngữ; tell cần có người nghe; ask dùng để đặt câu hỏi."
+      },
+      {
+        "q": "Cụm nào dùng khi muốn xin hóa đơn ở nhà hàng?",
+        "o": [
+          "ask for the bill",
+          "tell a joke",
+          "answer the door"
+        ],
+        "a": 0,
+        "why": "ask for the bill = xin hóa đơn; tell a joke = kể chuyện cười; answer the door = mở cửa."
+      },
+      {
+        "q": "Điền từ đúng: Do you ___ Japanese? - Yes, a little.",
+        "o": [
+          "talk",
+          "speak",
+          "tell"
+        ],
+        "a": 1,
+        "why": "speak + tên ngôn ngữ; talk dùng cho trò chuyện; tell cần có người nghe."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'hồi đáp một lá thư'?",
+        "o": [
+          "answer the telephone",
+          "reply to a letter",
+          "say goodbye"
+        ],
+        "a": 1,
+        "why": "reply to a letter = hồi đáp một lá thư; answer the telephone = nhấc điện thoại; say goodbye = chào tạm biệt."
+      },
+      {
+        "q": "Điền từ đúng: I wrote to him last week, but he did not ___.",
+        "o": [
+          "reply",
+          "ask",
+          "tell"
+        ],
+        "a": 0,
+        "why": "reply = hồi đáp thư; ask = hỏi; tell = kể, bảo."
+      }
+    ]
+  },
+  {
+    "n": 14,
+    "group": "Động từ thường ngày",
+    "title": "Moving",
+    "titleVi": "Di chuyển",
+    "words": [
+      {
+        "w": "swim",
+        "ipa": "/swɪm/",
+        "vi": "bơi",
+        "col": "swim in the sea",
+        "ex": "The children swim in the sea on hot days.",
+        "exv": "Bọn trẻ bơi ở biển vào những ngày nóng."
+      },
+      {
+        "w": "climb",
+        "ipa": "/klaɪm/",
+        "vi": "leo (núi, cây)",
+        "col": "climb a hill",
+        "ex": "They climb a small hill near their village.",
+        "exv": "Họ leo một ngọn đồi nhỏ gần làng của họ."
+      },
+      {
+        "w": "walk",
+        "ipa": "/wɔːk/",
+        "vi": "đi bộ",
+        "col": "walk to school",
+        "ex": "Lan walks to school with her friend every day.",
+        "exv": "Lan đi bộ tới trường cùng bạn mỗi ngày."
+      },
+      {
+        "w": "run",
+        "ipa": "/rʌn/",
+        "vi": "chạy",
+        "col": "run very fast",
+        "ex": "Nam runs very fast and wins the race.",
+        "exv": "Nam chạy rất nhanh và thắng cuộc đua."
+      },
+      {
+        "w": "jump",
+        "ipa": "/dʒʌmp/",
+        "vi": "nhảy",
+        "col": "jump into the pool",
+        "ex": "The boy jumps into the pool and laughs.",
+        "exv": "Cậu bé nhảy xuống bể bơi và cười."
+      },
+      {
+        "w": "dance",
+        "ipa": "/dɑːns/",
+        "vi": "nhảy múa, khiêu vũ",
+        "col": "dance at a party",
+        "ex": "They dance at a party on Saturday night.",
+        "exv": "Họ khiêu vũ tại một bữa tiệc vào tối thứ bảy."
+      },
+      {
+        "w": "jog",
+        "ipa": "/dʒɒɡ/",
+        "vi": "chạy bộ chậm",
+        "col": "jog round the park",
+        "ex": "My father jogs round the park every morning.",
+        "exv": "Bố tôi chạy bộ chậm quanh công viên mỗi buổi sáng."
+      },
+      {
+        "w": "fall",
+        "ipa": "/fɔːl/",
+        "vi": "ngã",
+        "col": "fall on the way home",
+        "ex": "The old lady fell on the wet road yesterday.",
+        "exv": "Bà cụ đã ngã trên con đường ướt hôm qua."
+      },
+      {
+        "w": "go by bus",
+        "ipa": "/ɡəʊ baɪ bʌs/",
+        "vi": "đi bằng xe buýt",
+        "col": "go by bus to work",
+        "ex": "Hoa goes by bus to work because her office is far.",
+        "exv": "Hoa đi bằng xe buýt tới chỗ làm vì văn phòng của cô ấy ở xa."
+      },
+      {
+        "w": "go by train",
+        "ipa": "/ɡəʊ baɪ treɪn/",
+        "vi": "đi bằng tàu hỏa",
+        "col": "go by train to Hanoi",
+        "ex": "We go by train to Hanoi for a short holiday.",
+        "exv": "Chúng tôi đi bằng tàu hỏa tới Hà Nội cho một kỳ nghỉ ngắn."
+      },
+      {
+        "w": "take a bus",
+        "ipa": "/teɪk ə bʌs/",
+        "vi": "đi xe buýt (bắt xe)",
+        "col": "take a bus home",
+        "ex": "I take a bus home when it rains.",
+        "exv": "Tôi đi xe buýt về nhà khi trời mưa."
+      },
+      {
+        "w": "take the underground",
+        "ipa": "/teɪk ði ˈʌndəɡraʊnd/",
+        "vi": "đi tàu điện ngầm",
+        "col": "take the underground to work",
+        "ex": "In London she takes the underground to work.",
+        "exv": "Ở Luân Đôn, cô ấy đi tàu điện ngầm tới chỗ làm."
+      },
+      {
+        "w": "ride a bicycle",
+        "ipa": "/raɪd ə ˈbaɪsɪkl/",
+        "vi": "đi xe đạp",
+        "col": "ride a bicycle to school",
+        "ex": "The boy rides a bicycle to school every morning.",
+        "exv": "Cậu bé đi xe đạp tới trường mỗi buổi sáng."
+      },
+      {
+        "w": "ride a motorbike",
+        "ipa": "/raɪd ə ˈməʊtəbaɪk/",
+        "vi": "đi xe máy",
+        "col": "ride a motorbike",
+        "ex": "My uncle rides a motorbike to the market.",
+        "exv": "Chú tôi đi xe máy tới chợ."
+      },
+      {
+        "w": "drive a car",
+        "ipa": "/draɪv ə kɑː/",
+        "vi": "lái ô tô",
+        "col": "drive a car",
+        "ex": "My mother drives a car to her office.",
+        "exv": "Mẹ tôi lái ô tô tới văn phòng của bà."
+      },
+      {
+        "w": "fly a plane",
+        "ipa": "/flaɪ ə pleɪn/",
+        "vi": "lái máy bay",
+        "col": "the pilot flies a plane",
+        "ex": "The pilot flies a plane from Hanoi to Hue.",
+        "exv": "Phi công lái máy bay từ Hà Nội tới Huế."
+      },
+      {
+        "w": "catch the bus",
+        "ipa": "/kætʃ ðə bʌs/",
+        "vi": "kịp xe buýt",
+        "col": "catch the bus",
+        "ex": "Run, or we will not catch the bus to school.",
+        "exv": "Chạy đi, nếu không chúng ta sẽ không kịp xe buýt tới trường."
+      },
+      {
+        "w": "miss the bus",
+        "ipa": "/mɪs ðə bʌs/",
+        "vi": "lỡ xe buýt",
+        "col": "miss the bus",
+        "ex": "Lan missed the bus and walked to class.",
+        "exv": "Lan đã lỡ xe buýt và đi bộ tới lớp."
+      },
+      {
+        "w": "arrive at",
+        "ipa": "/əˈraɪv æt/",
+        "vi": "đến (một địa điểm nhỏ)",
+        "col": "arrive at the station",
+        "ex": "We arrive at the station ten minutes early.",
+        "exv": "Chúng tôi đến ga sớm mười phút."
+      },
+      {
+        "w": "arrive in",
+        "ipa": "/əˈraɪv ɪn/",
+        "vi": "đến (một thành phố, nước)",
+        "col": "arrive in Tokyo",
+        "ex": "The train arrives in Tokyo at nine o'clock.",
+        "exv": "Tàu hỏa đến Tokyo lúc chín giờ."
+      },
+      {
+        "w": "get to",
+        "ipa": "/ɡet tə/",
+        "vi": "đến được (một nơi)",
+        "col": "get to Istanbul",
+        "ex": "How did you get to Hue? We flew there.",
+        "exv": "Bạn đã đến Huế bằng cách nào? Chúng tôi bay tới đó."
+      },
+      {
+        "w": "pass the salt",
+        "ipa": "/pɑːs ðə sɔːlt/",
+        "vi": "chuyển muối cho ai",
+        "col": "Please pass the salt.",
+        "ex": "Please pass the salt, my soup needs a little more.",
+        "exv": "Hãy chuyển muối cho tôi, món súp của tôi cần thêm một chút."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Điền từ đúng: She ___ a bicycle to school every morning.",
+        "o": [
+          "drives",
+          "rides",
+          "flies"
+        ],
+        "a": 1,
+        "why": "ride a bicycle = đi xe đạp; drive dùng cho ô tô; fly dùng cho máy bay."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'lỡ xe buýt'?",
+        "o": [
+          "catch the bus",
+          "miss the bus",
+          "take the underground"
+        ],
+        "a": 1,
+        "why": "miss the bus = lỡ xe buýt; catch the bus = kịp xe buýt; take the underground = đi tàu điện ngầm."
+      },
+      {
+        "q": "Điền giới từ đúng: The train arrived ___ Tokyo on time.",
+        "o": [
+          "at",
+          "in",
+          "to"
+        ],
+        "a": 1,
+        "why": "arrive in + thành phố, nước; arrive at + địa điểm nhỏ như ga, sân bay; không dùng arrive to."
+      },
+      {
+        "q": "Điền từ đúng: The pilot ___ a plane from Hanoi to Hue.",
+        "o": [
+          "drives",
+          "rides",
+          "flies"
+        ],
+        "a": 2,
+        "why": "fly a plane = lái máy bay; drive dùng cho ô tô; ride dùng cho xe đạp, xe máy, ngựa."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'chạy bộ chậm'?",
+        "o": [
+          "jog",
+          "jump",
+          "climb"
+        ],
+        "a": 0,
+        "why": "jog = chạy bộ chậm; jump = nhảy; climb = leo."
+      },
+      {
+        "q": "Điền cụm đúng: Please ___ the salt, my soup is not salty enough.",
+        "o": [
+          "pass",
+          "catch",
+          "miss"
+        ],
+        "a": 0,
+        "why": "pass the salt = chuyển muối cho ai; catch = kịp, bắt; miss = lỡ, bỏ lỡ."
+      }
+    ]
+  },
+  {
+    "n": 15,
+    "group": "Từ và ngữ pháp",
+    "title": "Conjunctions and connecting words",
+    "titleVi": "Từ nối và từ liên kết",
+    "words": [
+      {
+        "w": "and",
+        "ipa": "/ənd/",
+        "vi": "và",
+        "col": "tea and coffee",
+        "ex": "Lan likes tea and coffee with milk.",
+        "exv": "Lan thích trà và cà phê với sữa."
+      },
+      {
+        "w": "but",
+        "ipa": "/bʌt/",
+        "vi": "nhưng",
+        "col": "rich but unhappy",
+        "ex": "He is rich but he is not happy at all.",
+        "exv": "Anh ấy giàu nhưng hoàn toàn không hạnh phúc."
+      },
+      {
+        "w": "because",
+        "ipa": "/bɪˈkɒz/",
+        "vi": "bởi vì",
+        "col": "because I am tired",
+        "ex": "Mai stays at home because she is tired today.",
+        "exv": "Mai ở nhà vì hôm nay cô ấy mệt."
+      },
+      {
+        "w": "so",
+        "ipa": "/səʊ/",
+        "vi": "vì vậy, cho nên",
+        "col": "so I went home",
+        "ex": "It rains hard, so we stay inside the house.",
+        "exv": "Trời mưa to, vì vậy chúng tôi ở trong nhà."
+      },
+      {
+        "w": "when",
+        "ipa": "/wen/",
+        "vi": "khi, lúc",
+        "col": "when I was young",
+        "ex": "Lan lived in Hue when she was a child.",
+        "exv": "Lan sống ở Huế khi cô ấy còn là một đứa trẻ."
+      },
+      {
+        "w": "before",
+        "ipa": "/bɪˈfɔː/",
+        "vi": "trước khi",
+        "col": "before dinner",
+        "ex": "Wash your hands before dinner, please.",
+        "exv": "Hãy rửa tay trước bữa tối."
+      },
+      {
+        "w": "after",
+        "ipa": "/ˈɑːftə/",
+        "vi": "sau khi",
+        "col": "after lunch",
+        "ex": "We go for a walk after lunch every day.",
+        "exv": "Chúng tôi đi dạo sau bữa trưa mỗi ngày."
+      },
+      {
+        "w": "although",
+        "ipa": "/ɔːlˈðəʊ/",
+        "vi": "mặc dù",
+        "col": "although it rains",
+        "ex": "Although it rains, the children play outside.",
+        "exv": "Mặc dù trời mưa, bọn trẻ vẫn chơi ngoài trời."
+      },
+      {
+        "w": "though",
+        "ipa": "/ðəʊ/",
+        "vi": "mặc dù",
+        "col": "though he is tired",
+        "ex": "Though he is tired, Nam finishes his homework.",
+        "exv": "Mặc dù mệt, Nam vẫn làm xong bài tập về nhà."
+      },
+      {
+        "w": "if",
+        "ipa": "/ɪf/",
+        "vi": "nếu",
+        "col": "if it rains",
+        "ex": "If it rains tomorrow, we will stay at home.",
+        "exv": "Nếu ngày mai trời mưa, chúng tôi sẽ ở nhà."
+      },
+      {
+        "w": "only",
+        "ipa": "/ˈəʊnli/",
+        "vi": "chỉ, chỉ có",
+        "col": "only three hours",
+        "ex": "He sleeps only five hours every night.",
+        "exv": "Anh ấy chỉ ngủ năm tiếng mỗi đêm."
+      },
+      {
+        "w": "even",
+        "ipa": "/ˈiːvn/",
+        "vi": "thậm chí, ngay cả",
+        "col": "even a child",
+        "ex": "Even a small child can help in the garden.",
+        "exv": "Ngay cả một đứa trẻ nhỏ cũng có thể giúp việc trong vườn."
+      },
+      {
+        "w": "like",
+        "ipa": "/laɪk/",
+        "vi": "giống như",
+        "col": "look like her dad",
+        "ex": "The little girl looks like her mother.",
+        "exv": "Cô bé trông giống mẹ của mình."
+      },
+      {
+        "w": "than",
+        "ipa": "/ðæn/",
+        "vi": "hơn (dùng sau so sánh)",
+        "col": "better than me",
+        "ex": "Hoa runs faster than her brother in the park.",
+        "exv": "Hoa chạy nhanh hơn em trai cô ấy trong công viên."
+      },
+      {
+        "w": "also",
+        "ipa": "/ˈɔːlsəʊ/",
+        "vi": "cũng",
+        "col": "she works also",
+        "ex": "Nam plays football and his sister plays also.",
+        "exv": "Nam chơi bóng đá và em gái anh ấy cũng chơi."
+      },
+      {
+        "w": "too",
+        "ipa": "/tuː/",
+        "vi": "cũng (ở cuối câu)",
+        "col": "me too",
+        "ex": "I love this song, and my friend loves it too.",
+        "exv": "Tôi thích bài hát này, và bạn tôi cũng thích nó."
+      },
+      {
+        "w": "as well",
+        "ipa": "/əz wel/",
+        "vi": "cũng (ở cuối câu)",
+        "col": "as well as me",
+        "ex": "Lan speaks English, and she speaks French as well.",
+        "exv": "Lan nói tiếng Anh, và cô ấy cũng nói tiếng Pháp."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Điền từ đúng: I stayed at home ___ I was very tired.",
+        "o": [
+          "because",
+          "but",
+          "so"
+        ],
+        "a": 0,
+        "why": "because = bởi vì, trả lời câu hỏi tại sao; but = nhưng, chỉ sự tương phản; so = vì vậy, chỉ kết quả."
+      },
+      {
+        "q": "Điền từ đúng: She is rich ___ she is not happy.",
+        "o": [
+          "and",
+          "but",
+          "because"
+        ],
+        "a": 1,
+        "why": "but = nhưng, nối hai ý tương phản; and = và, thêm ý; because = bởi vì, chỉ nguyên nhân."
+      },
+      {
+        "q": "Điền từ đúng: ___ it rains tomorrow, we will stay at home.",
+        "o": [
+          "If",
+          "When",
+          "Although"
+        ],
+        "a": 0,
+        "why": "if = nếu, nêu điều kiện; when = khi, chỉ thời gian; although = mặc dù, chỉ sự tương phản."
+      },
+      {
+        "q": "Từ nào dùng để so sánh 'giống như'?",
+        "o": [
+          "than",
+          "like",
+          "only"
+        ],
+        "a": 1,
+        "why": "like = giống như, dùng để so sánh; than dùng sau tính từ so sánh hơn; only = chỉ."
+      },
+      {
+        "q": "Điền từ đúng: He works in the shop, and his sister works there ___.",
+        "o": [
+          "than",
+          "too",
+          "because"
+        ],
+        "a": 1,
+        "why": "too = cũng, đặt ở cuối câu; than dùng sau so sánh hơn; because = bởi vì."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'mặc dù'?",
+        "o": [
+          "although",
+          "because",
+          "so"
+        ],
+        "a": 0,
+        "why": "although = mặc dù; because = bởi vì; so = vì vậy."
+      }
+    ]
+  },
+  {
+    "n": 16,
+    "group": "Từ và ngữ pháp",
+    "title": "Time words (1): days, months and seasons",
+    "titleVi": "Từ chỉ thời gian (1): ngày, tháng và mùa",
+    "words": [
+      {
+        "w": "year",
+        "ipa": "/jɪə/",
+        "vi": "năm",
+        "col": "365 days in a year",
+        "ex": "This year we will visit my parents in Da Nang.",
+        "exv": "Năm nay chúng tôi sẽ thăm bố mẹ ở Đà Nẵng."
+      },
+      {
+        "w": "week",
+        "ipa": "/wiːk/",
+        "vi": "tuần",
+        "col": "7 days in a week",
+        "ex": "I go to the gym three times a week.",
+        "exv": "Tôi đi tập gym ba lần một tuần."
+      },
+      {
+        "w": "fortnight",
+        "ipa": "/ˈfɔːtnaɪt/",
+        "vi": "hai tuần",
+        "col": "2 weeks in a fortnight",
+        "ex": "She will be on holiday for a fortnight.",
+        "exv": "Cô ấy sẽ đi nghỉ trong hai tuần."
+      },
+      {
+        "w": "day",
+        "ipa": "/deɪ/",
+        "vi": "ngày",
+        "col": "24 hours in a day",
+        "ex": "I drink two litres of water every day.",
+        "exv": "Mỗi ngày tôi uống hai lít nước."
+      },
+      {
+        "w": "hour",
+        "ipa": "/aʊə/",
+        "vi": "giờ, tiếng đồng hồ",
+        "col": "60 minutes in an hour",
+        "ex": "The film lasts two hours.",
+        "exv": "Bộ phim kéo dài hai tiếng."
+      },
+      {
+        "w": "minute",
+        "ipa": "/ˈmɪnɪt/",
+        "vi": "phút",
+        "col": "60 seconds in a minute",
+        "ex": "Please wait a minute, I am coming.",
+        "exv": "Xin chờ một phút, tôi đang đến."
+      },
+      {
+        "w": "second",
+        "ipa": "/ˈsekənd/",
+        "vi": "giây",
+        "col": "60 seconds in a minute",
+        "ex": "Wait a second, I need my keys.",
+        "exv": "Chờ một giây nhé, tôi cần lấy chìa khóa."
+      },
+      {
+        "w": "century",
+        "ipa": "/ˈsentʃəri/",
+        "vi": "thế kỷ",
+        "col": "100 years in a century",
+        "ex": "This old house is more than a century old.",
+        "exv": "Ngôi nhà cũ này đã hơn một trăm năm tuổi."
+      },
+      {
+        "w": "Sunday",
+        "ipa": "/ˈsʌndeɪ/",
+        "vi": "Chủ nhật",
+        "col": "on Sunday",
+        "ex": "We visit my grandmother on Sunday.",
+        "exv": "Chúng tôi thăm bà vào Chủ nhật."
+      },
+      {
+        "w": "Monday",
+        "ipa": "/ˈmʌndeɪ/",
+        "vi": "thứ Hai",
+        "col": "on Monday",
+        "ex": "My English class is on Monday.",
+        "exv": "Lớp tiếng Anh của tôi học vào thứ Hai."
+      },
+      {
+        "w": "Tuesday",
+        "ipa": "/ˈtjuːzdeɪ/",
+        "vi": "thứ Ba",
+        "col": "on Tuesday",
+        "ex": "I play football on Tuesday.",
+        "exv": "Tôi chơi bóng đá vào thứ Ba."
+      },
+      {
+        "w": "Wednesday",
+        "ipa": "/ˈwenzdeɪ/",
+        "vi": "thứ Tư",
+        "col": "on Wednesday",
+        "ex": "She works at home on Wednesday.",
+        "exv": "Cô ấy làm việc ở nhà vào thứ Tư."
+      },
+      {
+        "w": "Thursday",
+        "ipa": "/ˈθɜːzdeɪ/",
+        "vi": "thứ Năm",
+        "col": "on Thursday",
+        "ex": "We have a test on Thursday.",
+        "exv": "Chúng tôi có bài kiểm tra vào thứ Năm."
+      },
+      {
+        "w": "Friday",
+        "ipa": "/ˈfraɪdeɪ/",
+        "vi": "thứ Sáu",
+        "col": "on Friday",
+        "ex": "I finish work early on Friday.",
+        "exv": "Tôi tan làm sớm vào thứ Sáu."
+      },
+      {
+        "w": "Saturday",
+        "ipa": "/ˈsætədeɪ/",
+        "vi": "thứ Bảy",
+        "col": "on Saturday",
+        "ex": "We go to the market on Saturday.",
+        "exv": "Chúng tôi đi chợ vào thứ Bảy."
+      },
+      {
+        "w": "weekend",
+        "ipa": "/ˌwiːkˈend/",
+        "vi": "cuối tuần",
+        "col": "at the weekend",
+        "ex": "I rest at home at the weekend.",
+        "exv": "Tôi nghỉ ngơi ở nhà vào cuối tuần."
+      },
+      {
+        "w": "yesterday",
+        "ipa": "/ˈjestədeɪ/",
+        "vi": "hôm qua",
+        "col": "yesterday morning",
+        "ex": "It was very hot yesterday.",
+        "exv": "Hôm qua trời rất nóng."
+      },
+      {
+        "w": "today",
+        "ipa": "/təˈdeɪ/",
+        "vi": "hôm nay",
+        "col": "all day today",
+        "ex": "Today is a good day for a walk.",
+        "exv": "Hôm nay là một ngày đẹp để đi dạo."
+      },
+      {
+        "w": "tomorrow",
+        "ipa": "/təˈmɒrəʊ/",
+        "vi": "ngày mai",
+        "col": "tomorrow morning",
+        "ex": "I will call you tomorrow.",
+        "exv": "Tôi sẽ gọi cho bạn vào ngày mai."
+      },
+      {
+        "w": "morning",
+        "ipa": "/ˈmɔːnɪŋ/",
+        "vi": "buổi sáng",
+        "col": "in the morning",
+        "ex": "I drink tea in the morning.",
+        "exv": "Tôi uống trà vào buổi sáng."
+      },
+      {
+        "w": "afternoon",
+        "ipa": "/ˌɑːftəˈnuːn/",
+        "vi": "buổi chiều",
+        "col": "in the afternoon",
+        "ex": "We meet at two in the afternoon.",
+        "exv": "Chúng tôi gặp nhau lúc hai giờ chiều."
+      },
+      {
+        "w": "evening",
+        "ipa": "/ˈiːvnɪŋ/",
+        "vi": "buổi tối",
+        "col": "in the evening",
+        "ex": "We watch TV in the evening.",
+        "exv": "Chúng tôi xem ti vi vào buổi tối."
+      },
+      {
+        "w": "January",
+        "ipa": "/ˈdʒænjuəri/",
+        "vi": "tháng Một",
+        "col": "in January",
+        "ex": "It is cold in January.",
+        "exv": "Tháng Một trời lạnh."
+      },
+      {
+        "w": "February",
+        "ipa": "/ˈfebruəri/",
+        "vi": "tháng Hai",
+        "col": "in February",
+        "ex": "My friend has a birthday in February.",
+        "exv": "Bạn tôi có sinh nhật vào tháng Hai."
+      },
+      {
+        "w": "March",
+        "ipa": "/mɑːtʃ/",
+        "vi": "tháng Ba",
+        "col": "in March",
+        "ex": "The flowers come out in March.",
+        "exv": "Hoa nở vào tháng Ba."
+      },
+      {
+        "w": "April",
+        "ipa": "/ˈeɪprəl/",
+        "vi": "tháng Tư",
+        "col": "in April",
+        "ex": "It often rains in April.",
+        "exv": "Tháng Tư trời thường mưa."
+      },
+      {
+        "w": "May",
+        "ipa": "/meɪ/",
+        "vi": "tháng Năm",
+        "col": "in May",
+        "ex": "We travel in May.",
+        "exv": "Chúng tôi đi du lịch vào tháng Năm."
+      },
+      {
+        "w": "June",
+        "ipa": "/dʒuːn/",
+        "vi": "tháng Sáu",
+        "col": "in June",
+        "ex": "School ends in June.",
+        "exv": "Trường học kết thúc vào tháng Sáu."
+      },
+      {
+        "w": "July",
+        "ipa": "/dʒuˈlaɪ/",
+        "vi": "tháng Bảy",
+        "col": "in July",
+        "ex": "We go to the beach in July.",
+        "exv": "Chúng tôi đi biển vào tháng Bảy."
+      },
+      {
+        "w": "August",
+        "ipa": "/ˈɔːɡəst/",
+        "vi": "tháng Tám",
+        "col": "in August",
+        "ex": "August is very hot here.",
+        "exv": "Tháng Tám ở đây rất nóng."
+      },
+      {
+        "w": "September",
+        "ipa": "/sepˈtembə/",
+        "vi": "tháng Chín",
+        "col": "in September",
+        "ex": "The new school year starts in September.",
+        "exv": "Năm học mới bắt đầu vào tháng Chín."
+      },
+      {
+        "w": "October",
+        "ipa": "/ɒkˈtəʊbə/",
+        "vi": "tháng Mười",
+        "col": "in October",
+        "ex": "The leaves fall in October.",
+        "exv": "Lá rơi vào tháng Mười."
+      },
+      {
+        "w": "November",
+        "ipa": "/nəʊˈvembə/",
+        "vi": "tháng Mười một",
+        "col": "in November",
+        "ex": "It gets cold in November.",
+        "exv": "Tháng Mười một trời trở lạnh."
+      },
+      {
+        "w": "December",
+        "ipa": "/dɪˈsembə/",
+        "vi": "tháng Mười hai",
+        "col": "in December",
+        "ex": "We have a holiday in December.",
+        "exv": "Chúng tôi có kỳ nghỉ vào tháng Mười hai."
+      },
+      {
+        "w": "spring",
+        "ipa": "/sprɪŋ/",
+        "vi": "mùa xuân",
+        "col": "in spring",
+        "ex": "Flowers grow in spring.",
+        "exv": "Hoa mọc vào mùa xuân."
+      },
+      {
+        "w": "summer",
+        "ipa": "/ˈsʌmə/",
+        "vi": "mùa hè",
+        "col": "in summer",
+        "ex": "We swim a lot in summer.",
+        "exv": "Chúng tôi bơi rất nhiều vào mùa hè."
+      },
+      {
+        "w": "autumn",
+        "ipa": "/ˈɔːtəm/",
+        "vi": "mùa thu",
+        "col": "in autumn",
+        "ex": "The trees turn yellow in autumn.",
+        "exv": "Cây chuyển sang màu vàng vào mùa thu."
+      },
+      {
+        "w": "winter",
+        "ipa": "/ˈwɪntə/",
+        "vi": "mùa đông",
+        "col": "in winter",
+        "ex": "We wear warm coats in winter.",
+        "exv": "Chúng tôi mặc áo khoác ấm vào mùa đông."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Tháng nào là tháng đầu tiên trong năm?",
+        "o": [
+          "January",
+          "December",
+          "June"
+        ],
+        "a": 0,
+        "why": "January là tháng 1, tháng đầu tiên trong năm; December là tháng 12; June là tháng 6."
+      },
+      {
+        "q": "Câu nào đúng về một tuần?",
+        "o": [
+          "Một tuần có bảy ngày.",
+          "Một tuần có năm ngày.",
+          "Một tuần có mười ngày."
+        ],
+        "a": 0,
+        "why": "Một tuần có đúng bảy ngày, từ Monday đến Sunday."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'cuối tuần'?",
+        "o": [
+          "weekend",
+          "weekday",
+          "morning"
+        ],
+        "a": 0,
+        "why": "weekend = cuối tuần (Saturday và Sunday); weekday = ngày trong tuần; morning = buổi sáng."
+      },
+      {
+        "q": "Hôm nay là thứ Tư. Hôm qua là thứ mấy?",
+        "o": [
+          "Tuesday",
+          "Thursday",
+          "Friday"
+        ],
+        "a": 0,
+        "why": "Hôm qua là ngày trước thứ Tư, tức là thứ Ba (Tuesday)."
+      },
+      {
+        "q": "Mùa nào lạnh nhất trong năm ở nhiều nước?",
+        "o": [
+          "winter",
+          "summer",
+          "spring"
+        ],
+        "a": 0,
+        "why": "winter = mùa đông, mùa lạnh nhất; summer = mùa hè; spring = mùa xuân."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "Monday",
+          "July",
+          "Tuesday"
+        ],
+        "a": 1,
+        "why": "Monday và Tuesday là ngày trong tuần, July là tháng trong năm."
+      }
+    ]
+  },
+  {
+    "n": 17,
+    "group": "Từ và ngữ pháp",
+    "title": "Time words (2)",
+    "titleVi": "Từ chỉ thời gian (2)",
+    "words": [
+      {
+        "w": "now",
+        "ipa": "/naʊ/",
+        "vi": "bây giờ",
+        "col": "right now",
+        "ex": "I am busy now.",
+        "exv": "Bây giờ tôi đang bận."
+      },
+      {
+        "w": "then",
+        "ipa": "/ðen/",
+        "vi": "lúc đó",
+        "col": "at that time",
+        "ex": "We lived in a small house then.",
+        "exv": "Lúc đó chúng tôi sống trong một ngôi nhà nhỏ."
+      },
+      {
+        "w": "ago",
+        "ipa": "/əˈɡəʊ/",
+        "vi": "trước đây",
+        "col": "two years ago",
+        "ex": "I met her two years ago.",
+        "exv": "Tôi đã gặp cô ấy hai năm trước."
+      },
+      {
+        "w": "last week",
+        "ipa": "/lɑːst wiːk/",
+        "vi": "tuần trước",
+        "col": "last week",
+        "ex": "I was ill last week.",
+        "exv": "Tuần trước tôi bị ốm."
+      },
+      {
+        "w": "next week",
+        "ipa": "/nekst wiːk/",
+        "vi": "tuần tới",
+        "col": "next week",
+        "ex": "I will start a new job next week.",
+        "exv": "Tuần tới tôi sẽ bắt đầu công việc mới."
+      },
+      {
+        "w": "the past",
+        "ipa": "/ðə pɑːst/",
+        "vi": "quá khứ",
+        "col": "in the past",
+        "ex": "In the past, people wrote letters by hand.",
+        "exv": "Ngày xưa, mọi người viết thư bằng tay."
+      },
+      {
+        "w": "the present",
+        "ipa": "/ðə ˈpreznt/",
+        "vi": "hiện tại",
+        "col": "in the present",
+        "ex": "We live in the present, not in the past.",
+        "exv": "Chúng ta sống ở hiện tại, không phải quá khứ."
+      },
+      {
+        "w": "the future",
+        "ipa": "/ðə ˈfjuːtʃə/",
+        "vi": "tương lai",
+        "col": "in the future",
+        "ex": "In the future, cars may fly.",
+        "exv": "Trong tương lai, ô tô có thể bay."
+      },
+      {
+        "w": "in a moment",
+        "ipa": "/ɪn ə ˈməʊmənt/",
+        "vi": "trong chốc lát",
+        "col": "in a moment",
+        "ex": "Wait for me, I will be back in a moment.",
+        "exv": "Chờ tôi nhé, tôi sẽ quay lại ngay."
+      },
+      {
+        "w": "at the moment",
+        "ipa": "/ət ðə ˈməʊmənt/",
+        "vi": "lúc này, hiện nay",
+        "col": "at the moment",
+        "ex": "He is at home at the moment.",
+        "exv": "Lúc này anh ấy đang ở nhà."
+      },
+      {
+        "w": "soon",
+        "ipa": "/suːn/",
+        "vi": "sớm, chẳng bao lâu",
+        "col": "very soon",
+        "ex": "Dinner will be ready soon.",
+        "exv": "Bữa tối sẽ xong ngay thôi."
+      },
+      {
+        "w": "recently",
+        "ipa": "/ˈriːsntli/",
+        "vi": "gần đây",
+        "col": "recently",
+        "ex": "I saw him recently at the market.",
+        "exv": "Gần đây tôi đã gặp anh ấy ở chợ."
+      },
+      {
+        "w": "always",
+        "ipa": "/ˈɔːlweɪz/",
+        "vi": "luôn luôn",
+        "col": "always",
+        "ex": "She always drinks tea in the morning.",
+        "exv": "Cô ấy luôn uống trà vào buổi sáng."
+      },
+      {
+        "w": "often",
+        "ipa": "/ˈɒfn/",
+        "vi": "thường xuyên",
+        "col": "very often",
+        "ex": "It often rains here in June.",
+        "exv": "Ở đây tháng Sáu trời thường mưa."
+      },
+      {
+        "w": "usually",
+        "ipa": "/ˈjuːʒuəli/",
+        "vi": "thường thường",
+        "col": "usually",
+        "ex": "I usually walk to work.",
+        "exv": "Tôi thường đi bộ đến chỗ làm."
+      },
+      {
+        "w": "sometimes",
+        "ipa": "/ˈsʌmtaɪmz/",
+        "vi": "thỉnh thoảng",
+        "col": "sometimes",
+        "ex": "Sometimes I cook at home.",
+        "exv": "Thỉnh thoảng tôi nấu ăn ở nhà."
+      },
+      {
+        "w": "occasionally",
+        "ipa": "/əˈkeɪʒnəli/",
+        "vi": "đôi khi",
+        "col": "occasionally",
+        "ex": "We occasionally eat out on Sundays.",
+        "exv": "Đôi khi chúng tôi ăn ngoài vào Chủ nhật."
+      },
+      {
+        "w": "rarely",
+        "ipa": "/ˈreəli/",
+        "vi": "hiếm khi",
+        "col": "very rarely",
+        "ex": "I rarely watch TV at night.",
+        "exv": "Tôi hiếm khi xem ti vi vào buổi tối."
+      },
+      {
+        "w": "hardly ever",
+        "ipa": "/ˈhɑːdli ˈevə/",
+        "vi": "hầu như không bao giờ",
+        "col": "hardly ever",
+        "ex": "He hardly ever eats meat.",
+        "exv": "Anh ấy hầu như không bao giờ ăn thịt."
+      },
+      {
+        "w": "never",
+        "ipa": "/ˈnevə/",
+        "vi": "không bao giờ",
+        "col": "never",
+        "ex": "I never drink coffee at night.",
+        "exv": "Tôi không bao giờ uống cà phê vào buổi tối."
+      },
+      {
+        "w": "now and then",
+        "ipa": "/naʊ ənd ðen/",
+        "vi": "thỉnh thoảng",
+        "col": "now and then",
+        "ex": "We meet now and then for coffee.",
+        "exv": "Thỉnh thoảng chúng tôi gặp nhau uống cà phê."
+      },
+      {
+        "w": "not often",
+        "ipa": "/nɒt ˈɒfn/",
+        "vi": "không thường xuyên",
+        "col": "not often",
+        "ex": "I go swimming, but not often.",
+        "exv": "Tôi có đi bơi, nhưng không thường xuyên."
+      },
+      {
+        "w": "once a week",
+        "ipa": "/wʌns ə wiːk/",
+        "vi": "một lần một tuần",
+        "col": "once a week",
+        "ex": "I visit the library once a week.",
+        "exv": "Tôi đến thư viện một lần một tuần."
+      },
+      {
+        "w": "twice a day",
+        "ipa": "/twaɪs ə deɪ/",
+        "vi": "hai lần một ngày",
+        "col": "twice a day",
+        "ex": "She takes her medicine twice a day.",
+        "exv": "Cô ấy uống thuốc hai lần một ngày."
+      },
+      {
+        "w": "three times a month",
+        "ipa": "/θriː taɪmz ə mʌnθ/",
+        "vi": "ba lần một tháng",
+        "col": "three times a month",
+        "ex": "I visit my parents three times a month.",
+        "exv": "Tôi thăm bố mẹ ba lần một tháng."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'luôn luôn'?",
+        "o": [
+          "always",
+          "never",
+          "sometimes"
+        ],
+        "a": 0,
+        "why": "always = luôn luôn; never = không bao giờ; sometimes = thỉnh thoảng."
+      },
+      {
+        "q": "Câu nào dùng đúng 'ago'?",
+        "o": [
+          "I met him two days ago.",
+          "I met him two days before.",
+          "I met him in two days ago."
+        ],
+        "a": 0,
+        "why": "'ago' đứng sau khoảng thời gian để chỉ thời điểm trong quá khứ, ví dụ two days ago."
+      },
+      {
+        "q": "Trạng từ nào có nghĩa gần nhất với 'almost never'?",
+        "o": [
+          "hardly ever",
+          "often",
+          "usually"
+        ],
+        "a": 0,
+        "why": "hardly ever = hầu như không bao giờ, gần nghĩa với almost never; often = thường xuyên; usually = thường thường."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'thỉnh thoảng'?",
+        "o": [
+          "sometimes",
+          "always",
+          "never"
+        ],
+        "a": 0,
+        "why": "sometimes = thỉnh thoảng; always = luôn luôn; never = không bao giờ."
+      },
+      {
+        "q": "Điền từ đúng vào câu: I go to the gym ___ a week.",
+        "o": [
+          "once",
+          "ago",
+          "then"
+        ],
+        "a": 0,
+        "why": "once a week = một lần một tuần; ago và then không dùng để chỉ tần suất."
+      },
+      {
+        "q": "Từ nào chỉ thời gian trong tương lai?",
+        "o": [
+          "next week",
+          "last week",
+          "two years ago"
+        ],
+        "a": 0,
+        "why": "next week là tuần tới, thuộc tương lai; last week là tuần trước; two years ago là hai năm trước."
+      }
+    ]
+  },
+  {
+    "n": 18,
+    "group": "Từ và ngữ pháp",
+    "title": "Places",
+    "titleVi": "Nơi chốn",
+    "words": [
+      {
+        "w": "here",
+        "ipa": "/hɪə/",
+        "vi": "ở đây",
+        "col": "come here",
+        "ex": "Please sit here next to me.",
+        "exv": "Xin mời ngồi đây cạnh tôi."
+      },
+      {
+        "w": "there",
+        "ipa": "/ðeə/",
+        "vi": "ở đó",
+        "col": "over there",
+        "ex": "Put the bag over there.",
+        "exv": "Hãy đặt cái túi ở đằng kia."
+      },
+      {
+        "w": "come back",
+        "ipa": "/kʌm bæk/",
+        "vi": "trở lại",
+        "col": "come back home",
+        "ex": "She will come back home tomorrow.",
+        "exv": "Ngày mai cô ấy sẽ trở về nhà."
+      },
+      {
+        "w": "everywhere",
+        "ipa": "/ˈevriweə/",
+        "vi": "ở khắp mọi nơi",
+        "col": "everywhere",
+        "ex": "I look for my keys everywhere in the house.",
+        "exv": "Tôi tìm chìa khóa khắp nơi trong nhà."
+      },
+      {
+        "w": "the top",
+        "ipa": "/ðə tɒp/",
+        "vi": "đỉnh, phía trên cùng",
+        "col": "the top of the stairs",
+        "ex": "The cat sits at the top of the stairs.",
+        "exv": "Con mèo ngồi ở đầu cầu thang."
+      },
+      {
+        "w": "the middle",
+        "ipa": "/ðə ˈmɪdl/",
+        "vi": "giữa, ở giữa",
+        "col": "the middle of the road",
+        "ex": "He stands in the middle of the road.",
+        "exv": "Anh ấy đứng giữa đường."
+      },
+      {
+        "w": "the bottom",
+        "ipa": "/ðə ˈbɒtəm/",
+        "vi": "đáy, phía dưới cùng",
+        "col": "the bottom of the glass",
+        "ex": "There is some water at the bottom of the glass.",
+        "exv": "Có một ít nước ở đáy cái ly."
+      },
+      {
+        "w": "the front",
+        "ipa": "/ðə frʌnt/",
+        "vi": "phía trước",
+        "col": "the front of the bus",
+        "ex": "The driver sits at the front of the bus.",
+        "exv": "Tài xế ngồi ở phía trước xe buýt."
+      },
+      {
+        "w": "the side",
+        "ipa": "/ðə saɪd/",
+        "vi": "bên cạnh, phía bên",
+        "col": "at the side of the house",
+        "ex": "There is a small garden at the side of the house.",
+        "exv": "Có một khu vườn nhỏ ở bên cạnh ngôi nhà."
+      },
+      {
+        "w": "the back",
+        "ipa": "/ðə bæk/",
+        "vi": "phía sau",
+        "col": "the back of the car",
+        "ex": "The children sit at the back of the car.",
+        "exv": "Bọn trẻ ngồi ở phía sau xe ô tô."
+      },
+      {
+        "w": "the beginning",
+        "ipa": "/ðə bɪˈɡɪnɪŋ/",
+        "vi": "phần đầu, lúc bắt đầu",
+        "col": "the beginning of the month",
+        "ex": "We meet at the beginning of the month.",
+        "exv": "Chúng tôi gặp nhau vào đầu tháng."
+      },
+      {
+        "w": "the end",
+        "ipa": "/ðə end/",
+        "vi": "phần cuối, lúc kết thúc",
+        "col": "the end of the lesson",
+        "ex": "We finish at the end of the lesson.",
+        "exv": "Chúng tôi kết thúc vào cuối buổi học."
+      },
+      {
+        "w": "left",
+        "ipa": "/left/",
+        "vi": "bên trái",
+        "col": "on the left",
+        "ex": "Turn left at the corner.",
+        "exv": "Rẽ trái ở góc đường."
+      },
+      {
+        "w": "right",
+        "ipa": "/raɪt/",
+        "vi": "bên phải",
+        "col": "on the right",
+        "ex": "Turn right at the traffic lights.",
+        "exv": "Rẽ phải ở đèn giao thông."
+      },
+      {
+        "w": "at home",
+        "ipa": "/ət həʊm/",
+        "vi": "ở nhà",
+        "col": "at home",
+        "ex": "Is Mary at home now?",
+        "exv": "Bây giờ Mary có ở nhà không?"
+      },
+      {
+        "w": "out",
+        "ipa": "/aʊt/",
+        "vi": "ra ngoài, không ở nhà",
+        "col": "go out",
+        "ex": "He is out, please come back later.",
+        "exv": "Anh ấy đang ra ngoài, xin quay lại sau."
+      },
+      {
+        "w": "away",
+        "ipa": "/əˈweɪ/",
+        "vi": "đi vắng, ở xa",
+        "col": "go away",
+        "ex": "They are away on holiday this week.",
+        "exv": "Tuần này họ đi nghỉ, không ở nhà."
+      },
+      {
+        "w": "abroad",
+        "ipa": "/əˈbrɔːd/",
+        "vi": "ở nước ngoài",
+        "col": "live abroad",
+        "ex": "She works abroad in France.",
+        "exv": "Cô ấy làm việc ở nước ngoài, tại Pháp."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'ở đây'?",
+        "o": [
+          "here",
+          "there",
+          "everywhere"
+        ],
+        "a": 0,
+        "why": "here = ở đây; there = ở đó; everywhere = ở khắp mọi nơi."
+      },
+      {
+        "q": "Từ nào chỉ vị trí cao nhất?",
+        "o": [
+          "the top",
+          "the bottom",
+          "the middle"
+        ],
+        "a": 0,
+        "why": "the top = phía trên cùng; the bottom = phía dưới cùng; the middle = ở giữa."
+      },
+      {
+        "q": "Cô ấy đang ở nước ngoài. Từ đúng là gì?",
+        "o": [
+          "abroad",
+          "at home",
+          "out"
+        ],
+        "a": 0,
+        "why": "abroad = ở nước ngoài; at home = ở nhà; out = ra ngoài."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "left",
+          "right",
+          "abroad"
+        ],
+        "a": 2,
+        "why": "left và right chỉ hướng trái - phải; abroad chỉ việc ở nước ngoài."
+      },
+      {
+        "q": "Điền từ đúng vào câu: Please come ___ and sit with us.",
+        "o": [
+          "here",
+          "there",
+          "away"
+        ],
+        "a": 0,
+        "why": "come here = đến đây; there là ở đó; away là đi xa, không hợp nghĩa."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'ở khắp mọi nơi'?",
+        "o": [
+          "everywhere",
+          "here",
+          "there"
+        ],
+        "a": 0,
+        "why": "everywhere = ở khắp mọi nơi; here = ở đây; there = ở đó."
+      }
+    ]
+  },
+  {
+    "n": 19,
+    "group": "Từ và ngữ pháp",
+    "title": "Manner",
+    "titleVi": "Cách thức",
+    "words": [
+      {
+        "w": "fast",
+        "ipa": "/fɑːst/",
+        "vi": "nhanh",
+        "col": "a fast car",
+        "ex": "This train goes very fast.",
+        "exv": "Chuyến tàu này chạy rất nhanh."
+      },
+      {
+        "w": "slow",
+        "ipa": "/sləʊ/",
+        "vi": "chậm",
+        "col": "a slow train",
+        "ex": "This is a slow train.",
+        "exv": "Đây là một chuyến tàu chậm."
+      },
+      {
+        "w": "slowly",
+        "ipa": "/ˈsləʊli/",
+        "vi": "một cách chậm rãi",
+        "col": "speak slowly",
+        "ex": "Please speak slowly, I cannot hear you.",
+        "exv": "Xin hãy nói chậm lại, tôi không nghe rõ bạn."
+      },
+      {
+        "w": "right",
+        "ipa": "/raɪt/",
+        "vi": "đúng",
+        "col": "a right answer",
+        "ex": "Your answer is right.",
+        "exv": "Câu trả lời của bạn đúng."
+      },
+      {
+        "w": "wrong",
+        "ipa": "/rɒŋ/",
+        "vi": "sai",
+        "col": "a wrong answer",
+        "ex": "That word is wrong, try again.",
+        "exv": "Từ đó sai rồi, hãy thử lại."
+      },
+      {
+        "w": "loud",
+        "ipa": "/laʊd/",
+        "vi": "to, ồn ào",
+        "col": "too loud",
+        "ex": "Please do not speak so loud at night.",
+        "exv": "Xin đừng nói to như vậy vào buổi tối."
+      },
+      {
+        "w": "quiet",
+        "ipa": "/ˈkwaɪət/",
+        "vi": "yên tĩnh",
+        "col": "very quiet",
+        "ex": "It is very quiet in the library.",
+        "exv": "Trong thư viện rất yên tĩnh."
+      },
+      {
+        "w": "quietly",
+        "ipa": "/ˈkwaɪətli/",
+        "vi": "một cách khẽ khàng",
+        "col": "speak quietly",
+        "ex": "She speaks quietly in the library.",
+        "exv": "Cô ấy nói khẽ trong thư viện."
+      },
+      {
+        "w": "loudly",
+        "ipa": "/ˈlaʊdli/",
+        "vi": "một cách to tiếng",
+        "col": "sing loudly",
+        "ex": "He sings loudly in the shower.",
+        "exv": "Anh ấy hát to trong phòng tắm."
+      },
+      {
+        "w": "well",
+        "ipa": "/wel/",
+        "vi": "tốt, giỏi",
+        "col": "drive well",
+        "ex": "She drives very well.",
+        "exv": "Cô ấy lái xe rất giỏi."
+      },
+      {
+        "w": "badly",
+        "ipa": "/ˈbædli/",
+        "vi": "một cách tệ",
+        "col": "play badly",
+        "ex": "He plays football badly.",
+        "exv": "Anh ấy chơi bóng đá rất tệ."
+      },
+      {
+        "w": "good",
+        "ipa": "/ɡʊd/",
+        "vi": "tốt",
+        "col": "a good teacher",
+        "ex": "She is a good teacher.",
+        "exv": "Cô ấy là một giáo viên giỏi."
+      },
+      {
+        "w": "bad",
+        "ipa": "/bæd/",
+        "vi": "tệ, xấu",
+        "col": "a bad day",
+        "ex": "This is a bad day for a picnic.",
+        "exv": "Hôm nay là một ngày tệ để đi dã ngoại."
+      },
+      {
+        "w": "friendly",
+        "ipa": "/ˈfrendli/",
+        "vi": "thân thiện",
+        "col": "a friendly person",
+        "ex": "Our new teacher is very friendly.",
+        "exv": "Giáo viên mới của chúng tôi rất thân thiện."
+      },
+      {
+        "w": "unfriendly",
+        "ipa": "/ʌnˈfrendli/",
+        "vi": "không thân thiện",
+        "col": "an unfriendly person",
+        "ex": "The dog looks unfriendly, so do not touch it.",
+        "exv": "Con chó trông không thân thiện, vì vậy đừng chạm vào nó."
+      },
+      {
+        "w": "way",
+        "ipa": "/weɪ/",
+        "vi": "cách, cách thức",
+        "col": "in a different way",
+        "ex": "Please do it in a different way.",
+        "exv": "Xin hãy làm việc đó theo một cách khác."
+      },
+      {
+        "w": "in a friendly way",
+        "ipa": "/ɪn ə ˈfrendli weɪ/",
+        "vi": "một cách thân thiện",
+        "col": "in a friendly way",
+        "ex": "She talks to us in a friendly way.",
+        "exv": "Cô ấy nói chuyện với chúng tôi một cách thân thiện."
+      },
+      {
+        "w": "in an unfriendly way",
+        "ipa": "/ɪn ən ˈfrendli weɪ/",
+        "vi": "một cách không thân thiện",
+        "col": "in an unfriendly way",
+        "ex": "He looks at me in an unfriendly way.",
+        "exv": "Anh ấy nhìn tôi một cách không thân thiện."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào là trạng từ của 'slow'?",
+        "o": [
+          "slowly",
+          "slow",
+          "slowness"
+        ],
+        "a": 0,
+        "why": "slowly là trạng từ của slow, thêm -ly vào tính từ; slow là tính từ; slowness là danh từ."
+      },
+      {
+        "q": "Câu nào đúng?",
+        "o": [
+          "She sings well.",
+          "She sings good.",
+          "She sings badly good."
+        ],
+        "a": 0,
+        "why": "well là trạng từ bổ nghĩa cho động từ sings; good là tính từ, không bổ nghĩa cho động từ."
+      },
+      {
+        "q": "Từ nào có nghĩa trái với 'loud'?",
+        "o": [
+          "quiet",
+          "fast",
+          "wrong"
+        ],
+        "a": 0,
+        "why": "quiet = yên tĩnh, trái nghĩa với loud = to, ồn ào; fast = nhanh; wrong = sai."
+      },
+      {
+        "q": "Chọn cặp từ đúng: He is a ___ driver. He drives ___.",
+        "o": [
+          "good - well",
+          "well - good",
+          "good - good"
+        ],
+        "a": 0,
+        "why": "Trước danh từ driver dùng tính từ good; sau động từ drives dùng trạng từ well."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'một cách thân thiện'?",
+        "o": [
+          "in a friendly way",
+          "in an unfriendly way",
+          "in a wrong way"
+        ],
+        "a": 0,
+        "why": "in a friendly way = một cách thân thiện; in an unfriendly way = một cách không thân thiện; in a wrong way = một cách sai."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "fast",
+          "slow",
+          "right"
+        ],
+        "a": 2,
+        "why": "fast và slow nói về tốc độ; right nói về đúng - sai."
+      }
+    ]
+  },
+  {
+    "n": 20,
+    "group": "Từ và ngữ pháp",
+    "title": "Irregular verbs",
+    "titleVi": "Động từ bất quy tắc",
+    "words": [
+      {
+        "w": "cut - cut - cut",
+        "ipa": "/kʌt - kʌt - kʌt/",
+        "vi": "cắt",
+        "col": "cut the bread",
+        "ex": "I cut the bread with a sharp knife.",
+        "exv": "Tôi cắt bánh mì bằng một con dao sắc."
+      },
+      {
+        "w": "hurt - hurt - hurt",
+        "ipa": "/hɜːt - hɜːt - hɜːt/",
+        "vi": "làm đau",
+        "col": "hurt your leg",
+        "ex": "He hurt his leg in the game.",
+        "exv": "Anh ấy bị đau chân trong trận đấu."
+      },
+      {
+        "w": "cost - cost - cost",
+        "ipa": "/kɒst - kɒst - kɒst/",
+        "vi": "tốn (tiền)",
+        "col": "cost a lot",
+        "ex": "This bag cost a lot of money.",
+        "exv": "Cái túi này tốn rất nhiều tiền."
+      },
+      {
+        "w": "let - let - let",
+        "ipa": "/let - let - let/",
+        "vi": "để cho, cho phép",
+        "col": "let me help",
+        "ex": "Please let me help you.",
+        "exv": "Xin hãy để tôi giúp bạn."
+      },
+      {
+        "w": "put - put - put",
+        "ipa": "/pʊt - pʊt - pʊt/",
+        "vi": "đặt, để",
+        "col": "put it on the table",
+        "ex": "Please put the book on the table.",
+        "exv": "Xin hãy đặt cuốn sách lên bàn."
+      },
+      {
+        "w": "shut - shut - shut",
+        "ipa": "/ʃʌt - ʃʌt - ʃʌt/",
+        "vi": "đóng lại",
+        "col": "shut the door",
+        "ex": "Please shut the door at night.",
+        "exv": "Xin hãy đóng cửa vào buổi tối."
+      },
+      {
+        "w": "run - ran - run",
+        "ipa": "/rʌn - ræn - rʌn/",
+        "vi": "chạy",
+        "col": "run fast",
+        "ex": "He ran to school this morning.",
+        "exv": "Sáng nay anh ấy đã chạy đến trường."
+      },
+      {
+        "w": "read - read - read",
+        "ipa": "/riːd - red - red/",
+        "vi": "đọc",
+        "col": "read a book",
+        "ex": "She read a good book last night.",
+        "exv": "Tối qua cô ấy đã đọc một cuốn sách hay."
+      },
+      {
+        "w": "feel - felt - felt",
+        "ipa": "/fiːl - felt - felt/",
+        "vi": "cảm thấy",
+        "col": "feel happy",
+        "ex": "I felt happy after the trip.",
+        "exv": "Tôi cảm thấy vui sau chuyến đi."
+      },
+      {
+        "w": "sleep - slept - slept",
+        "ipa": "/sliːp - slept - slept/",
+        "vi": "ngủ",
+        "col": "sleep well",
+        "ex": "I slept well last night.",
+        "exv": "Tối qua tôi đã ngủ rất ngon."
+      },
+      {
+        "w": "keep - kept - kept",
+        "ipa": "/kiːp - kept - kept/",
+        "vi": "giữ",
+        "col": "keep it safe",
+        "ex": "Please keep my bag safe.",
+        "exv": "Xin hãy giữ túi của tôi cẩn thận."
+      },
+      {
+        "w": "leave - left - left",
+        "ipa": "/liːv - left - left/",
+        "vi": "rời đi, để lại",
+        "col": "leave home",
+        "ex": "She left home at seven this morning.",
+        "exv": "Sáng nay cô ấy đã rời nhà lúc bảy giờ."
+      },
+      {
+        "w": "come - came - come",
+        "ipa": "/kʌm - keɪm - kʌm/",
+        "vi": "đến",
+        "col": "come home",
+        "ex": "They came home late yesterday.",
+        "exv": "Hôm qua họ đã về nhà muộn."
+      },
+      {
+        "w": "become",
+        "ipa": "/bɪˈkʌm/",
+        "vi": "trở thành",
+        "col": "become, became, become",
+        "ex": "My sister wants to become a doctor.",
+        "exv": "Em gái tôi muốn trở thành bác sĩ."
+      },
+      {
+        "w": "bring - brought - brought",
+        "ipa": "/brɪŋ - brɔːt - brɔːt/",
+        "vi": "mang đến",
+        "col": "bring a friend",
+        "ex": "Please bring a friend to the party.",
+        "exv": "Xin hãy dẫn một người bạn đến bữa tiệc."
+      },
+      {
+        "w": "buy - bought - bought",
+        "ipa": "/baɪ - bɔːt - bɔːt/",
+        "vi": "mua",
+        "col": "buy a ticket",
+        "ex": "I bought a ticket for the film.",
+        "exv": "Tôi đã mua một vé xem phim."
+      },
+      {
+        "w": "catch - caught - caught",
+        "ipa": "/kætʃ - kɔːt - kɔːt/",
+        "vi": "bắt, đón",
+        "col": "catch the bus",
+        "ex": "We caught the bus at eight.",
+        "exv": "Chúng tôi đã đón xe buýt lúc tám giờ."
+      },
+      {
+        "w": "fight",
+        "ipa": "/faɪt/",
+        "vi": "đánh nhau, chiến đấu",
+        "col": "fight, fought, fought",
+        "ex": "The two cats fight over food in the garden.",
+        "exv": "Hai con mèo đánh nhau vì thức ăn trong vườn."
+      },
+      {
+        "w": "teach - taught - taught",
+        "ipa": "/tiːtʃ - tɔːt - tɔːt/",
+        "vi": "dạy",
+        "col": "teach English",
+        "ex": "She taught English in Hanoi.",
+        "exv": "Cô ấy đã dạy tiếng Anh ở Hà Nội."
+      },
+      {
+        "w": "think - thought - thought",
+        "ipa": "/θɪŋk - θɔːt - θɔːt/",
+        "vi": "nghĩ",
+        "col": "think about it",
+        "ex": "I thought about it all day.",
+        "exv": "Tôi đã nghĩ về việc đó cả ngày."
+      },
+      {
+        "w": "find",
+        "ipa": "/faɪnd/",
+        "vi": "tìm thấy",
+        "col": "find, found, found",
+        "ex": "I found my keys under the bed.",
+        "exv": "Tôi đã tìm thấy chìa khóa dưới gầm giường."
+      },
+      {
+        "w": "spend",
+        "ipa": "/spend/",
+        "vi": "tiêu (tiền), dành (thời gian)",
+        "col": "spend, spent, spent",
+        "ex": "She spent all her money on new shoes.",
+        "exv": "Cô ấy đã tiêu hết tiền vào giày mới."
+      },
+      {
+        "w": "learn",
+        "ipa": "/lɜːn/",
+        "vi": "học",
+        "col": "learn, learnt, learnt",
+        "ex": "I learn five new words every day.",
+        "exv": "Mỗi ngày tôi học năm từ mới."
+      },
+      {
+        "w": "pay",
+        "ipa": "/peɪ/",
+        "vi": "trả tiền",
+        "col": "pay, paid, paid",
+        "ex": "Please pay the bill at the desk.",
+        "exv": "Xin hãy trả tiền ở quầy thu ngân."
+      },
+      {
+        "w": "say",
+        "ipa": "/seɪ/",
+        "vi": "nói",
+        "col": "say, said, said",
+        "ex": "She said hello to me with a smile.",
+        "exv": "Cô ấy chào tôi với một nụ cười."
+      },
+      {
+        "w": "win",
+        "ipa": "/wɪn/",
+        "vi": "thắng, chiến thắng",
+        "col": "win, won, won",
+        "ex": "He won a prize in the singing contest.",
+        "exv": "Anh ấy đã giành giải thưởng trong cuộc thi hát."
+      },
+      {
+        "w": "lose",
+        "ipa": "/luːz/",
+        "vi": "thua, mất, đánh mất",
+        "col": "lose, lost, lost",
+        "ex": "I lost my phone on the bus yesterday.",
+        "exv": "Hôm qua tôi đã đánh mất điện thoại trên xe buýt."
+      },
+      {
+        "w": "shine",
+        "ipa": "/ʃaɪn/",
+        "vi": "chiếu sáng, tỏa sáng",
+        "col": "shine, shone, shone",
+        "ex": "The sun shines brightly today.",
+        "exv": "Hôm nay mặt trời chiếu sáng rực rỡ."
+      },
+      {
+        "w": "sit",
+        "ipa": "/sɪt/",
+        "vi": "ngồi",
+        "col": "sit, sat, sat",
+        "ex": "Please sit down and listen to me.",
+        "exv": "Xin hãy ngồi xuống và nghe tôi nói."
+      },
+      {
+        "w": "sell",
+        "ipa": "/sel/",
+        "vi": "bán",
+        "col": "sell, sold, sold",
+        "ex": "They sell fresh bread at this shop.",
+        "exv": "Họ bán bánh mì tươi ở cửa hàng này."
+      },
+      {
+        "w": "tell",
+        "ipa": "/tel/",
+        "vi": "kể, nói với",
+        "col": "tell, told, told",
+        "ex": "Please tell me a story before I sleep.",
+        "exv": "Xin hãy kể cho tôi một câu chuyện trước khi tôi ngủ."
+      },
+      {
+        "w": "meet",
+        "ipa": "/miːt/",
+        "vi": "gặp",
+        "col": "meet, met, met",
+        "ex": "I met my old friend at the market.",
+        "exv": "Tôi đã gặp người bạn cũ ở chợ."
+      },
+      {
+        "w": "get",
+        "ipa": "/ɡet/",
+        "vi": "lấy, nhận được",
+        "col": "get, got, got",
+        "ex": "I got a letter from my friend yesterday.",
+        "exv": "Hôm qua tôi đã nhận được một lá thư của bạn tôi."
+      },
+      {
+        "w": "shoot",
+        "ipa": "/ʃuːt/",
+        "vi": "bắn",
+        "col": "shoot, shot, shot",
+        "ex": "He shot the ball and scored a goal.",
+        "exv": "Anh ấy đã sút bóng và ghi một bàn thắng."
+      },
+      {
+        "w": "stand",
+        "ipa": "/stænd/",
+        "vi": "đứng",
+        "col": "stand, stood, stood",
+        "ex": "Please stand in line and wait for your turn.",
+        "exv": "Xin hãy xếp hàng và chờ đến lượt mình."
+      },
+      {
+        "w": "understand",
+        "ipa": "/ˌʌndəˈstænd/",
+        "vi": "hiểu",
+        "col": "understand, understood, understood",
+        "ex": "I do not understand this word. Can you help me?",
+        "exv": "Tôi không hiểu từ này. Bạn có thể giúp tôi không?"
+      },
+      {
+        "w": "make",
+        "ipa": "/meɪk/",
+        "vi": "làm, tạo ra",
+        "col": "make, made, made",
+        "ex": "My mother makes a cake every Sunday.",
+        "exv": "Mẹ tôi làm bánh mỗi Chủ nhật."
+      },
+      {
+        "w": "have",
+        "ipa": "/hæv/",
+        "vi": "có",
+        "col": "have, had, had",
+        "ex": "We have lunch at twelve every day.",
+        "exv": "Chúng tôi ăn trưa lúc mười hai giờ mỗi ngày."
+      },
+      {
+        "w": "do",
+        "ipa": "/duː/",
+        "vi": "làm",
+        "col": "do, did, done",
+        "ex": "I do my homework after dinner.",
+        "exv": "Tôi làm bài tập về nhà sau bữa tối."
+      },
+      {
+        "w": "hear",
+        "ipa": "/hɪə/",
+        "vi": "nghe thấy",
+        "col": "hear, heard, heard",
+        "ex": "I heard a strange noise last night.",
+        "exv": "Tối qua tôi đã nghe thấy một tiếng động lạ."
+      },
+      {
+        "w": "beat",
+        "ipa": "/biːt/",
+        "vi": "đánh bại, đánh",
+        "col": "beat, beat, beaten",
+        "ex": "Our team beat the other team three to one.",
+        "exv": "Đội của chúng tôi đã đánh bại đội kia với tỉ số ba một."
+      },
+      {
+        "w": "be",
+        "ipa": "/biː/",
+        "vi": "là, thì, ở",
+        "col": "be, was/were, been",
+        "ex": "I was tired after the long walk.",
+        "exv": "Tôi đã mệt sau chuyến đi bộ dài."
+      },
+      {
+        "w": "go - went - gone",
+        "ipa": "/ɡəʊ - went - ɡɒn/",
+        "vi": "đi",
+        "col": "go home",
+        "ex": "We went home after dinner.",
+        "exv": "Chúng tôi đã về nhà sau bữa tối."
+      },
+      {
+        "w": "begin - began - begun",
+        "ipa": "/bɪˈɡɪn - bɪˈɡæn - bɪˈɡʌn/",
+        "vi": "bắt đầu",
+        "col": "begin a new job",
+        "ex": "The lesson began at nine.",
+        "exv": "Buổi học đã bắt đầu lúc chín giờ."
+      },
+      {
+        "w": "drink - drank - drunk",
+        "ipa": "/drɪŋk - dræŋk - drʌŋk/",
+        "vi": "uống",
+        "col": "drink water",
+        "ex": "He drank a glass of water.",
+        "exv": "Anh ấy đã uống một ly nước."
+      },
+      {
+        "w": "sing",
+        "ipa": "/sɪŋ/",
+        "vi": "hát",
+        "col": "sing, sang, sung",
+        "ex": "My mother sings while she cooks dinner.",
+        "exv": "Mẹ tôi hát trong khi nấu bữa tối."
+      },
+      {
+        "w": "swim - swam - swum",
+        "ipa": "/swɪm - swæm - swʌm/",
+        "vi": "bơi",
+        "col": "swim in the sea",
+        "ex": "We swam in the sea yesterday.",
+        "exv": "Hôm qua chúng tôi đã bơi ở biển."
+      },
+      {
+        "w": "fly - flew - flown",
+        "ipa": "/flaɪ - fluː - fləʊn/",
+        "vi": "bay",
+        "col": "fly to London",
+        "ex": "They flew to London last month.",
+        "exv": "Tháng trước họ đã bay đến London."
+      },
+      {
+        "w": "know - knew - known",
+        "ipa": "/nəʊ - njuː - nəʊn/",
+        "vi": "biết",
+        "col": "know the answer",
+        "ex": "I knew the answer at once.",
+        "exv": "Tôi đã biết đáp án ngay lập tức."
+      },
+      {
+        "w": "throw",
+        "ipa": "/θrəʊ/",
+        "vi": "ném",
+        "col": "throw, threw, thrown",
+        "ex": "Please throw the ball to me.",
+        "exv": "Xin hãy ném quả bóng cho tôi."
+      },
+      {
+        "w": "break - broke - broken",
+        "ipa": "/breɪk - brəʊk - ˈbrəʊkən/",
+        "vi": "làm vỡ",
+        "col": "break a cup",
+        "ex": "He broke a cup this morning.",
+        "exv": "Sáng nay anh ấy đã làm vỡ một cái cốc."
+      },
+      {
+        "w": "choose",
+        "ipa": "/tʃuːz/",
+        "vi": "chọn, lựa chọn",
+        "col": "choose, chose, chosen",
+        "ex": "I cannot choose between the red shirt and the blue one.",
+        "exv": "Tôi không thể chọn giữa chiếc áo đỏ và chiếc áo xanh."
+      },
+      {
+        "w": "speak - spoke - spoken",
+        "ipa": "/spiːk - spəʊk - ˈspəʊkən/",
+        "vi": "nói",
+        "col": "speak English",
+        "ex": "She spoke English with her friend.",
+        "exv": "Cô ấy đã nói tiếng Anh với bạn mình."
+      },
+      {
+        "w": "steal",
+        "ipa": "/stiːl/",
+        "vi": "ăn trộm, lấy trộm",
+        "col": "steal, stole, stolen",
+        "ex": "The cat stole a fish from the kitchen table.",
+        "exv": "Con mèo đã lấy trộm một con cá trên bàn bếp."
+      },
+      {
+        "w": "wake",
+        "ipa": "/weɪk/",
+        "vi": "thức dậy, đánh thức",
+        "col": "wake, woke, woken",
+        "ex": "My alarm wakes me at six every morning.",
+        "exv": "Đồng hồ báo thức đánh thức tôi lúc sáu giờ mỗi sáng."
+      },
+      {
+        "w": "take - took - taken",
+        "ipa": "/teɪk - tʊk - ˈteɪkən/",
+        "vi": "lấy, mang theo",
+        "col": "take a photo",
+        "ex": "I took a photo of the lake.",
+        "exv": "Tôi đã chụp một bức ảnh của hồ nước."
+      },
+      {
+        "w": "wear",
+        "ipa": "/weə/",
+        "vi": "mặc, đội, đeo",
+        "col": "wear, wore, worn",
+        "ex": "He always wears a hat in summer.",
+        "exv": "Anh ấy luôn đội mũ vào mùa hè."
+      },
+      {
+        "w": "drive",
+        "ipa": "/draɪv/",
+        "vi": "lái xe",
+        "col": "drive, drove, driven",
+        "ex": "My father drives me to school every day.",
+        "exv": "Bố tôi chở tôi đến trường mỗi ngày."
+      },
+      {
+        "w": "ride",
+        "ipa": "/raɪd/",
+        "vi": "cưỡi, đi (xe đạp, ngựa)",
+        "col": "ride, rode, ridden",
+        "ex": "I ride my bike to the market every morning.",
+        "exv": "Sáng nào tôi cũng đạp xe ra chợ."
+      },
+      {
+        "w": "rise",
+        "ipa": "/raɪz/",
+        "vi": "mọc, tăng lên",
+        "col": "rise, rose, risen",
+        "ex": "The sun rises at six in summer.",
+        "exv": "Mặt trời mọc lúc sáu giờ vào mùa hè."
+      },
+      {
+        "w": "write - wrote - written",
+        "ipa": "/raɪt - rəʊt - ˈrɪtn/",
+        "vi": "viết",
+        "col": "write a letter",
+        "ex": "She wrote a letter to her mother.",
+        "exv": "Cô ấy đã viết một lá thư cho mẹ."
+      },
+      {
+        "w": "eat - ate - eaten",
+        "ipa": "/iːt - eɪt - ˈiːtn/",
+        "vi": "ăn",
+        "col": "eat breakfast",
+        "ex": "We ate breakfast at seven.",
+        "exv": "Chúng tôi đã ăn sáng lúc bảy giờ."
+      },
+      {
+        "w": "give - gave - given",
+        "ipa": "/ɡɪv - ɡeɪv - ˈɡɪvn/",
+        "vi": "cho, tặng",
+        "col": "give a gift",
+        "ex": "He gave me a nice gift.",
+        "exv": "Anh ấy đã tặng tôi một món quà đẹp."
+      },
+      {
+        "w": "forget",
+        "ipa": "/fəˈɡet/",
+        "vi": "quên",
+        "col": "forget, forgot, forgotten",
+        "ex": "I always forget my umbrella on rainy days.",
+        "exv": "Tôi luôn quên ô vào những ngày mưa."
+      },
+      {
+        "w": "fall",
+        "ipa": "/fɔːl/",
+        "vi": "ngã, rơi",
+        "col": "fall, fell, fallen",
+        "ex": "Be careful, you may fall on the wet floor.",
+        "exv": "Hãy cẩn thận, bạn có thể bị ngã trên sàn ướt."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Dạng quá khứ của 'go' là gì?",
+        "o": [
+          "went",
+          "goed",
+          "gone"
+        ],
+        "a": 0,
+        "why": "Quá khứ của go là went; gone là dạng quá khứ phân từ; goed không phải dạng đúng."
+      },
+      {
+        "q": "Động từ nào có cả ba dạng giống nhau?",
+        "o": [
+          "cut",
+          "run",
+          "go"
+        ],
+        "a": 0,
+        "why": "cut có cả ba dạng đều là cut; run có dạng quá khứ ran; go có dạng quá khứ went."
+      },
+      {
+        "q": "Chọn dạng đúng: She ___ a letter yesterday.",
+        "o": [
+          "wrote",
+          "write",
+          "written"
+        ],
+        "a": 0,
+        "why": "Câu ở thì quá khứ đơn với yesterday nên dùng wrote; write là dạng nguyên thể; written là quá khứ phân từ."
+      },
+      {
+        "q": "Quá khứ phân từ của 'eat' là gì?",
+        "o": [
+          "eaten",
+          "ate",
+          "eated"
+        ],
+        "a": 0,
+        "why": "Ba dạng của eat là eat - ate - eaten; eated không phải dạng đúng."
+      },
+      {
+        "q": "Động từ nào có dạng quá khứ là 'bought'?",
+        "o": [
+          "buy",
+          "bring",
+          "break"
+        ],
+        "a": 0,
+        "why": "buy - bought - bought; bring có quá khứ là brought; break có quá khứ là broke."
+      },
+      {
+        "q": "Chọn câu đúng:",
+        "o": [
+          "They swam in the sea.",
+          "They swimmed in the sea.",
+          "They swum in the sea yesterday."
+        ],
+        "a": 0,
+        "why": "Quá khứ của swim là swam; swimmed không phải dạng đúng; swum là quá khứ phân từ, không dùng một mình ở thì quá khứ đơn."
+      }
+    ]
+  },
+  {
+    "n": 21,
+    "group": "Từ và ngữ pháp",
+    "title": "Common uncountable words",
+    "titleVi": "Những từ không đếm được thường gặp",
+    "words": [
+      {
+        "w": "sugar",
+        "ipa": "/ˈʃʊɡə/",
+        "vi": "đường",
+        "col": "some sugar",
+        "ex": "My mum puts one spoon of sugar in her morning coffee in Hanoi.",
+        "exv": "Mẹ tôi cho một thìa đường vào cà phê buổi sáng ở Hà Nội."
+      },
+      {
+        "w": "money",
+        "ipa": "/ˈmʌni/",
+        "vi": "tiền",
+        "col": "some money",
+        "ex": "Lan keeps some money in a small red wallet in her school bag.",
+        "exv": "Lan giữ một ít tiền trong chiếc ví đỏ nhỏ ở trong cặp đi học."
+      },
+      {
+        "w": "luggage",
+        "ipa": "/ˈlʌɡɪdʒ/",
+        "vi": "hành lý",
+        "col": "my luggage",
+        "ex": "My luggage is heavy because I packed six thick books for the trip.",
+        "exv": "Hành lý của tôi rất nặng vì tôi đã xếp sáu quyển sách dày cho chuyến đi."
+      },
+      {
+        "w": "traffic",
+        "ipa": "/ˈtræfɪk/",
+        "vi": "giao thông, xe cộ",
+        "col": "heavy traffic",
+        "ex": "The traffic near the old market moves very slowly on Saturday morning.",
+        "exv": "Xe cộ gần chợ cũ đi rất chậm vào sáng thứ Bảy."
+      },
+      {
+        "w": "furniture",
+        "ipa": "/ˈfɜːnɪtʃə/",
+        "vi": "đồ đạc trong nhà",
+        "col": "new furniture",
+        "ex": "We bought new furniture for the small flat, a table and four chairs.",
+        "exv": "Chúng tôi đã mua đồ đạc mới cho căn hộ nhỏ, một cái bàn và bốn cái ghế."
+      },
+      {
+        "w": "information",
+        "ipa": "/ˌɪnfəˈmeɪʃn/",
+        "vi": "thông tin",
+        "col": "useful information",
+        "ex": "The teacher gave us useful information about the bus times to the museum.",
+        "exv": "Cô giáo đã cho chúng tôi thông tin hữu ích về giờ xe buýt tới bảo tàng."
+      },
+      {
+        "w": "news",
+        "ipa": "/njuːz/",
+        "vi": "tin tức",
+        "col": "good news",
+        "ex": "I have good news for you: your brother passed his driving test today.",
+        "exv": "Tôi có tin tốt cho bạn: anh trai bạn đã đỗ kỳ thi lái xe hôm nay."
+      },
+      {
+        "w": "advice",
+        "ipa": "/ədˈvaɪs/",
+        "vi": "lời khuyên",
+        "col": "some advice",
+        "ex": "My grandma gave me some advice about how to keep my shoes clean.",
+        "exv": "Bà tôi đã cho tôi một vài lời khuyên về cách giữ giày sạch."
+      },
+      {
+        "w": "accommodation",
+        "ipa": "/əˌkɒməˈdeɪʃn/",
+        "vi": "chỗ ở",
+        "col": "cheap accommodation",
+        "ex": "The students found cheap accommodation near the river, only ten minutes from school.",
+        "exv": "Các sinh viên đã tìm được chỗ ở rẻ gần sông, chỉ cách trường mười phút."
+      },
+      {
+        "w": "weather",
+        "ipa": "/ˈweðə/",
+        "vi": "thời tiết",
+        "col": "bad weather",
+        "ex": "The weather in the mountains changed fast, and cold rain started at noon.",
+        "exv": "Thời tiết trên núi thay đổi nhanh, và mưa lạnh bắt đầu lúc trưa."
+      },
+      {
+        "w": "air",
+        "ipa": "/eə/",
+        "vi": "không khí",
+        "col": "fresh air",
+        "ex": "Open the window in the morning and let some fresh air into the room.",
+        "exv": "Hãy mở cửa sổ vào buổi sáng và để không khí trong lành vào phòng."
+      },
+      {
+        "w": "work",
+        "ipa": "/wɜːk/",
+        "vi": "công việc",
+        "col": "hard work",
+        "ex": "Learning a new language takes a lot of hard work every day.",
+        "exv": "Học một ngôn ngữ mới cần rất nhiều công sức mỗi ngày."
+      },
+      {
+        "w": "bread",
+        "ipa": "/bred/",
+        "vi": "bánh mì",
+        "col": "a loaf of bread",
+        "ex": "Please buy a loaf of bread and some eggs at the small shop on the corner.",
+        "exv": "Hãy mua một ổ bánh mì và một ít trứng ở cửa hàng nhỏ góc phố."
+      },
+      {
+        "w": "rice",
+        "ipa": "/raɪs/",
+        "vi": "gạo, cơm",
+        "col": "a bowl of rice",
+        "ex": "For lunch, my family eats a bowl of rice with fish and green vegetables.",
+        "exv": "Vào bữa trưa, gia đình tôi ăn một bát cơm với cá và rau xanh."
+      },
+      {
+        "w": "spaghetti",
+        "ipa": "/spəˈɡeti/",
+        "vi": "mì Ý sợi dài",
+        "col": "a plate of spaghetti",
+        "ex": "The cook made a plate of spaghetti with tomato sauce for the children.",
+        "exv": "Đầu bếp đã làm một đĩa mì Ý với sốt cà chua cho bọn trẻ."
+      },
+      {
+        "w": "butter",
+        "ipa": "/ˈbʌtə/",
+        "vi": "bơ",
+        "col": "some butter",
+        "ex": "Put some butter on the warm bread before you eat it with jam.",
+        "exv": "Hãy phết một ít bơ lên bánh mì còn ấm trước khi ăn cùng mứt."
+      },
+      {
+        "w": "milk",
+        "ipa": "/mɪlk/",
+        "vi": "sữa",
+        "col": "a bottle of milk",
+        "ex": "There is a bottle of milk in the fridge for your breakfast tomorrow.",
+        "exv": "Có một chai sữa trong tủ lạnh để bạn ăn sáng ngày mai."
+      },
+      {
+        "w": "water",
+        "ipa": "/ˈwɔːtə/",
+        "vi": "nước",
+        "col": "a glass of water",
+        "ex": "After football practice, Tom drank a big glass of cold water.",
+        "exv": "Sau buổi tập bóng đá, Tom đã uống một cốc nước lạnh lớn."
+      },
+      {
+        "w": "tea",
+        "ipa": "/tiː/",
+        "vi": "trà",
+        "col": "a cup of tea",
+        "ex": "My aunt likes a cup of tea with lemon after dinner in the garden.",
+        "exv": "Dì tôi thích một tách trà chanh sau bữa tối ở ngoài vườn."
+      },
+      {
+        "w": "coffee",
+        "ipa": "/ˈkɒfi/",
+        "vi": "cà phê",
+        "col": "a cup of coffee",
+        "ex": "Dad drinks a cup of coffee at his desk before he starts work at eight.",
+        "exv": "Bố uống một tách cà phê ở bàn làm việc trước khi bắt đầu làm việc lúc tám giờ."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'thông tin'?",
+        "o": [
+          "information",
+          "furniture",
+          "weather"
+        ],
+        "a": 0,
+        "why": "information = thông tin; furniture = đồ đạc trong nhà; weather = thời tiết."
+      },
+      {
+        "q": "Chọn từ đúng để điền vào câu: 'Please give me some ___ about the bus to the airport.'",
+        "o": [
+          "advice",
+          "bread",
+          "luggage"
+        ],
+        "a": 0,
+        "why": "advice = lời khuyên, dùng với some; bread là bánh mì, luggage là hành lý, không hợp nghĩa câu này."
+      },
+      {
+        "q": "Từ nào KHÔNG phải là từ không đếm được?",
+        "o": [
+          "shoes",
+          "rice",
+          "milk"
+        ],
+        "a": 0,
+        "why": "shoes đếm được (two shoes); rice và milk là từ không đếm được."
+      },
+      {
+        "q": "Cụm nào đúng để nói về lượng sữa?",
+        "o": [
+          "a bottle of milk",
+          "a milk",
+          "two milks"
+        ],
+        "a": 0,
+        "why": "milk không đếm được nên nói a bottle of milk; không nói a milk hay two milks."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'chỗ ở'?",
+        "o": [
+          "accommodation",
+          "traffic",
+          "news"
+        ],
+        "a": 0,
+        "why": "accommodation = chỗ ở; traffic = giao thông; news = tin tức."
+      },
+      {
+        "q": "Chọn câu đúng về từ không đếm được.",
+        "o": [
+          "The news is good today.",
+          "The news are good today.",
+          "I need an advice."
+        ],
+        "a": 0,
+        "why": "news tuy có s nhưng động từ chia số ít (is); advice không dùng a, phải nói some advice."
+      }
+    ]
+  },
+  {
+    "n": 22,
+    "group": "Từ và ngữ pháp",
+    "title": "Common adjectives: good and bad things",
+    "titleVi": "Tính từ thường gặp: điều tốt và điều xấu",
+    "words": [
+      {
+        "w": "good",
+        "ipa": "/ɡʊd/",
+        "vi": "tốt",
+        "col": "a good book",
+        "ex": "This is a good book for beginners, with short stories and clear pictures.",
+        "exv": "Đây là một quyển sách hay cho người mới bắt đầu, với truyện ngắn và hình rõ ràng."
+      },
+      {
+        "w": "nice",
+        "ipa": "/naɪs/",
+        "vi": "đẹp, hay, dễ chịu",
+        "col": "a nice day",
+        "ex": "It is a nice day for a walk by the lake with my little sister.",
+        "exv": "Hôm nay là một ngày đẹp để đi dạo bên hồ với em gái tôi."
+      },
+      {
+        "w": "lovely",
+        "ipa": "/ˈlʌvli/",
+        "vi": "đẹp, đáng yêu",
+        "col": "a lovely garden",
+        "ex": "Mrs Brown has a lovely garden with red roses near the front door.",
+        "exv": "Bà Brown có một khu vườn đẹp với hoa hồng đỏ gần cửa trước."
+      },
+      {
+        "w": "wonderful",
+        "ipa": "/ˈwʌndəfl/",
+        "vi": "tuyệt vời",
+        "col": "a wonderful view",
+        "ex": "From the top of the hill, we can see a wonderful view of the sea.",
+        "exv": "Từ đỉnh đồi, chúng tôi có thể nhìn thấy khung cảnh biển tuyệt vời."
+      },
+      {
+        "w": "excellent",
+        "ipa": "/ˈeksələnt/",
+        "vi": "xuất sắc, rất tốt",
+        "col": "an excellent idea",
+        "ex": "Going to the library on Sunday morning is an excellent idea for our group.",
+        "exv": "Đi thư viện vào sáng Chủ nhật là một ý tưởng rất tốt cho nhóm chúng tôi."
+      },
+      {
+        "w": "great",
+        "ipa": "/ɡreɪt/",
+        "vi": "tuyệt, rất tốt",
+        "col": "a great film",
+        "ex": "We watched a great film about a young singer last Friday evening.",
+        "exv": "Chúng tôi đã xem một bộ phim hay về một ca sĩ trẻ tối thứ Sáu tuần trước."
+      },
+      {
+        "w": "perfect",
+        "ipa": "/ˈpɜːfɪkt/",
+        "vi": "hoàn hảo",
+        "col": "a perfect day",
+        "ex": "A picnic under the big tree was a perfect day for the whole family.",
+        "exv": "Buổi dã ngoại dưới gốc cây lớn là một ngày hoàn hảo cho cả gia đình."
+      },
+      {
+        "w": "bad",
+        "ipa": "/bæd/",
+        "vi": "xấu, tệ",
+        "col": "bad weather",
+        "ex": "We stayed at home because of the bad weather and the strong wind.",
+        "exv": "Chúng tôi ở nhà vì thời tiết xấu và gió mạnh."
+      },
+      {
+        "w": "awful",
+        "ipa": "/ˈɔːfl/",
+        "vi": "tệ hại, kinh khủng",
+        "col": "awful weather",
+        "ex": "The rain was so heavy that our awful walk home took more than an hour.",
+        "exv": "Mưa to đến mức chuyến đi bộ về nhà tệ hại của chúng tôi kéo dài hơn một giờ."
+      },
+      {
+        "w": "terrible",
+        "ipa": "/ˈterəbl/",
+        "vi": "tồi tệ, khủng khiếp",
+        "col": "a terrible day",
+        "ex": "I lost my keys and missed the bus, so it was a terrible day for me.",
+        "exv": "Tôi làm mất chìa khóa và lỡ xe buýt, vì vậy đó là một ngày tồi tệ với tôi."
+      },
+      {
+        "w": "horrible",
+        "ipa": "/ˈhɒrəbl/",
+        "vi": "kinh khủng, ghê gớm",
+        "col": "a horrible smell",
+        "ex": "There was a horrible smell in the old kitchen, so we opened all the windows.",
+        "exv": "Có một mùi kinh khủng trong căn bếp cũ, vì vậy chúng tôi đã mở hết các cửa sổ."
+      },
+      {
+        "w": "better",
+        "ipa": "/ˈbetə/",
+        "vi": "tốt hơn",
+        "col": "better than",
+        "ex": "This new bike is better than my old one because it is lighter and faster.",
+        "exv": "Chiếc xe đạp mới này tốt hơn chiếc cũ của tôi vì nó nhẹ hơn và nhanh hơn."
+      },
+      {
+        "w": "best",
+        "ipa": "/best/",
+        "vi": "tốt nhất",
+        "col": "the best restaurant",
+        "ex": "This small cafe is the best restaurant in our street for noodle soup.",
+        "exv": "Quán cà phê nhỏ này là nhà hàng ngon nhất trên phố chúng tôi về món phở."
+      },
+      {
+        "w": "worse",
+        "ipa": "/wɜːs/",
+        "vi": "tệ hơn",
+        "col": "worse than",
+        "ex": "The traffic today is worse than yesterday because two roads are closed.",
+        "exv": "Giao thông hôm nay tệ hơn hôm qua vì hai con đường bị đóng."
+      },
+      {
+        "w": "worst",
+        "ipa": "/wɜːst/",
+        "vi": "tệ nhất",
+        "col": "the worst day",
+        "ex": "Monday was the worst day of my week: I was late and I forgot my homework.",
+        "exv": "Thứ Hai là ngày tệ nhất trong tuần của tôi: tôi đi muộn và quên bài tập về nhà."
+      },
+      {
+        "w": "not bad",
+        "ipa": "/nɒt bæd/",
+        "vi": "không tệ, khá tốt",
+        "col": "That is not bad!",
+        "ex": "You got eight out of ten in the test - that is not bad at all!",
+        "exv": "Bạn được tám trên mười trong bài kiểm tra - như vậy là khá tốt!"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'tuyệt vời'?",
+        "o": [
+          "wonderful",
+          "awful",
+          "terrible"
+        ],
+        "a": 0,
+        "why": "wonderful = tuyệt vời; awful và terrible đều mang nghĩa xấu, tệ hại."
+      },
+      {
+        "q": "Chọn dạng so sánh đúng của 'good'.",
+        "o": [
+          "better",
+          "gooder",
+          "more good"
+        ],
+        "a": 0,
+        "why": "good là tính từ bất quy tắc: good - better - best; không có gooder hay more good."
+      },
+      {
+        "q": "Chọn từ đúng để điền vào câu: 'What a ___ house! The garden is big and the rooms are bright.'",
+        "o": [
+          "lovely",
+          "horrible",
+          "awful"
+        ],
+        "a": 0,
+        "why": "lovely mang nghĩa tốt, hợp với câu khen nhà; horrible và awful mang nghĩa xấu."
+      },
+      {
+        "q": "Từ nào là dạng so sánh nhất của 'bad'?",
+        "o": [
+          "worst",
+          "worse",
+          "badder"
+        ],
+        "a": 0,
+        "why": "bad là tính từ bất quy tắc: bad - worse - worst; không có badder."
+      },
+      {
+        "q": "Ai đó nói 'I get 500 dollars a week in my job.' Bạn đáp thế nào để khen là khá tốt?",
+        "o": [
+          "That is not bad!",
+          "Oh, how awful!",
+          "Oh, how terrible!"
+        ],
+        "a": 0,
+        "why": "not bad dùng để nói một điều khá tốt; how awful và how terrible dùng khi nghe tin xấu."
+      },
+      {
+        "q": "Từ nào KHÔNG mang nghĩa tốt?",
+        "o": [
+          "horrible",
+          "excellent",
+          "perfect"
+        ],
+        "a": 0,
+        "why": "horrible = kinh khủng, mang nghĩa xấu; excellent và perfect đều mang nghĩa tốt."
+      }
+    ]
+  },
+  {
+    "n": 23,
+    "group": "Từ và ngữ pháp",
+    "title": "Common adjectives: people",
+    "titleVi": "Tính từ thường gặp: con người",
+    "words": [
+      {
+        "w": "nice",
+        "ipa": "/naɪs/",
+        "vi": "tốt bụng, dễ mến",
+        "col": "a nice man",
+        "ex": "Mr Lee is a nice man who always says hello to the children in our street.",
+        "exv": "Ông Lee là một người đàn ông tốt bụng, luôn chào bọn trẻ trên phố chúng tôi."
+      },
+      {
+        "w": "wonderful",
+        "ipa": "/ˈwʌndəfl/",
+        "vi": "tuyệt vời",
+        "col": "a wonderful teacher",
+        "ex": "Our English teacher is a wonderful teacher, and all the students love her lessons.",
+        "exv": "Cô giáo tiếng Anh của chúng tôi là một giáo viên tuyệt vời, và tất cả học sinh đều thích tiết học của cô."
+      },
+      {
+        "w": "kind",
+        "ipa": "/kaɪnd/",
+        "vi": "tử tế, tốt bụng",
+        "col": "kind to me",
+        "ex": "My neighbour was very kind to me when I was ill last winter.",
+        "exv": "Hàng xóm của tôi đã rất tử tế với tôi khi tôi ốm mùa đông năm ngoái."
+      },
+      {
+        "w": "lovely",
+        "ipa": "/ˈlʌvli/",
+        "vi": "đáng yêu, dễ mến",
+        "col": "a lovely man",
+        "ex": "Grandpa is a lovely man who tells funny stories to his grandchildren.",
+        "exv": "Ông nội là một người đáng yêu, hay kể chuyện vui cho các cháu nghe."
+      },
+      {
+        "w": "easy-going",
+        "ipa": "/ˈiːzi ˈɡəʊɪŋ/",
+        "vi": "dễ tính, thoải mái",
+        "col": "a very easy-going friend",
+        "ex": "Tom is a very easy-going friend, so it is relaxing to travel with him.",
+        "exv": "Tom là một người bạn rất dễ tính, vì vậy đi du lịch cùng anh ấy rất thoải mái."
+      },
+      {
+        "w": "happy",
+        "ipa": "/ˈhæpi/",
+        "vi": "vui vẻ, hạnh phúc",
+        "col": "a happy person",
+        "ex": "Anna is a happy person who smiles at everyone in the office.",
+        "exv": "Anna là một người vui vẻ, luôn mỉm cười với mọi người trong văn phòng."
+      },
+      {
+        "w": "intelligent",
+        "ipa": "/ɪnˈtelɪdʒənt/",
+        "vi": "thông minh",
+        "col": "a very intelligent student",
+        "ex": "Hoa is a very intelligent student who learns new words very fast.",
+        "exv": "Hoa là một học sinh rất thông minh, học từ mới rất nhanh."
+      },
+      {
+        "w": "not very nice",
+        "ipa": "/nɒt ˈveri naɪs/",
+        "vi": "không tốt lắm",
+        "col": "not very nice to me",
+        "ex": "The new shopkeeper was not very nice to me when I asked about the price.",
+        "exv": "Người bán hàng mới không tốt lắm với tôi khi tôi hỏi về giá."
+      },
+      {
+        "w": "horrible",
+        "ipa": "/ˈhɒrəbl/",
+        "vi": "khó chịu, đáng ghét",
+        "col": "a horrible woman",
+        "ex": "Nobody likes the horrible woman in flat 5 because she shouts at the children.",
+        "exv": "Không ai thích người phụ nữ khó chịu ở căn hộ số 5 vì bà ấy quát bọn trẻ."
+      },
+      {
+        "w": "difficult",
+        "ipa": "/ˈdɪfɪkəlt/",
+        "vi": "khó tính, khó chiều",
+        "col": "a difficult person",
+        "ex": "My uncle is a difficult person, and he is never happy with his food.",
+        "exv": "Chú tôi là một người khó tính, và chú không bao giờ hài lòng với đồ ăn."
+      },
+      {
+        "w": "stupid",
+        "ipa": "/ˈstjuːpɪd/",
+        "vi": "ngốc nghếch",
+        "col": "a stupid mistake",
+        "ex": "He made a stupid mistake in the test because he did not read the question.",
+        "exv": "Anh ấy đã mắc một lỗi ngớ ngẩn trong bài kiểm tra vì không đọc kỹ câu hỏi."
+      },
+      {
+        "w": "selfish",
+        "ipa": "/ˈselfɪʃ/",
+        "vi": "ích kỷ",
+        "col": "a selfish person",
+        "ex": "I do not like selfish people who never share their food with friends.",
+        "exv": "Tôi không thích những người ích kỷ, không bao giờ chia sẻ đồ ăn với bạn bè."
+      },
+      {
+        "w": "good",
+        "ipa": "/ɡʊd/",
+        "vi": "ngoan, tốt",
+        "col": "a good child",
+        "ex": "The little boy is a good child who helps his mum wash the dishes.",
+        "exv": "Cậu bé là một đứa trẻ ngoan, giúp mẹ rửa bát đĩa."
+      },
+      {
+        "w": "well-behaved",
+        "ipa": "/wel bɪˈheɪvd/",
+        "vi": "ngoan, lễ phép",
+        "col": "a well-behaved child",
+        "ex": "The well-behaved child sat quietly and listened to the story in the library.",
+        "exv": "Đứa trẻ ngoan đã ngồi yên lặng và nghe kể chuyện trong thư viện."
+      },
+      {
+        "w": "naughty",
+        "ipa": "/ˈnɔːti/",
+        "vi": "nghịch ngợm, hư",
+        "col": "a naughty child",
+        "ex": "The naughty child hid his sister's shoes under the bed and laughed.",
+        "exv": "Đứa trẻ nghịch ngợm đã giấu giày của em gái dưới gầm giường rồi cười."
+      },
+      {
+        "w": "unhappy",
+        "ipa": "/ʌnˈhæpi/",
+        "vi": "không vui, buồn",
+        "col": "an unhappy person",
+        "ex": "He was an unhappy person after he lost his job in the factory.",
+        "exv": "Anh ấy là một người buồn bã sau khi mất việc ở nhà máy."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'tử tế, tốt bụng'?",
+        "o": [
+          "kind",
+          "selfish",
+          "stupid"
+        ],
+        "a": 0,
+        "why": "kind = tử tế, tốt bụng; selfish = ích kỷ; stupid = ngốc nghếch."
+      },
+      {
+        "q": "Chọn từ đúng để điền vào câu: 'She helps old people every week. She is very ___.'",
+        "o": [
+          "kind",
+          "horrible",
+          "naughty"
+        ],
+        "a": 0,
+        "why": "Giúp người già mỗi tuần là hành động tử tế nên dùng kind; horrible và naughty mang nghĩa xấu."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'ích kỷ'?",
+        "o": [
+          "selfish",
+          "easy-going",
+          "intelligent"
+        ],
+        "a": 0,
+        "why": "selfish = ích kỷ, chỉ nghĩ cho mình; easy-going = dễ tính; intelligent = thông minh."
+      },
+      {
+        "q": "Chọn giới từ đúng: 'It was very kind ___ you to help me carry the bags.'",
+        "o": [
+          "of",
+          "to",
+          "for"
+        ],
+        "a": 0,
+        "why": "Cấu trúc đúng là It was kind of you to...; kind to dùng khi nói ai đó tử tế với ai."
+      },
+      {
+        "q": "Từ nào dùng để khen một đứa trẻ ngoan?",
+        "o": [
+          "well-behaved",
+          "naughty",
+          "difficult"
+        ],
+        "a": 0,
+        "why": "well-behaved = ngoan, lễ phép; naughty = nghịch ngợm; difficult = khó tính."
+      },
+      {
+        "q": "Từ nào KHÔNG phải là từ khen người?",
+        "o": [
+          "stupid",
+          "wonderful",
+          "lovely"
+        ],
+        "a": 0,
+        "why": "stupid = ngốc nghếch, là từ chê mạnh; wonderful và lovely đều là từ khen."
+      }
+    ]
+  },
+  {
+    "n": 24,
+    "group": "Từ và ngữ pháp",
+    "title": "Words and prepositions",
+    "titleVi": "Từ và giới từ đi kèm",
+    "words": [
+      {
+        "w": "listen to",
+        "ipa": "/ˈlɪsn tuː/",
+        "vi": "nghe",
+        "col": "listen to the radio",
+        "ex": "Every morning, my dad listens to the radio while he cooks breakfast.",
+        "exv": "Mỗi buổi sáng, bố tôi nghe đài trong lúc nấu bữa sáng."
+      },
+      {
+        "w": "wait for",
+        "ipa": "/weɪt fɔː/",
+        "vi": "chờ đợi",
+        "col": "wait for the bus",
+        "ex": "We waited for the bus at the corner for twenty minutes in the rain.",
+        "exv": "Chúng tôi đã chờ xe buýt ở góc phố hai mươi phút dưới mưa."
+      },
+      {
+        "w": "ask for",
+        "ipa": "/ɑːsk fɔː/",
+        "vi": "xin, yêu cầu",
+        "col": "ask for help",
+        "ex": "If you do not understand the map, ask for help at the tourist office.",
+        "exv": "Nếu bạn không hiểu bản đồ, hãy xin giúp đỡ ở văn phòng du lịch."
+      },
+      {
+        "w": "pay for",
+        "ipa": "/peɪ fɔː/",
+        "vi": "trả tiền cho",
+        "col": "pay for the meal",
+        "ex": "On my birthday, my brother paid for the meal at a small restaurant.",
+        "exv": "Vào ngày sinh nhật tôi, anh trai tôi đã trả tiền bữa ăn ở một nhà hàng nhỏ."
+      },
+      {
+        "w": "belong to",
+        "ipa": "/bɪˈlɒŋ tuː/",
+        "vi": "thuộc về",
+        "col": "belong to Sarah",
+        "ex": "This blue umbrella belongs to Sarah, so please give it back to her.",
+        "exv": "Chiếc ô màu xanh này là của Sarah, vì vậy hãy trả lại cho cô ấy."
+      },
+      {
+        "w": "think about",
+        "ipa": "/θɪŋk əˈbaʊt/",
+        "vi": "nghĩ về",
+        "col": "think about the future",
+        "ex": "At night, I often think about the future and my new job in the city.",
+        "exv": "Vào ban đêm, tôi thường nghĩ về tương lai và công việc mới của tôi ở thành phố."
+      },
+      {
+        "w": "thank for",
+        "ipa": "/θæŋk fɔː/",
+        "vi": "cảm ơn vì",
+        "col": "thank her for the present",
+        "ex": "I thanked my teacher for the present and for her help all year.",
+        "exv": "Tôi đã cảm ơn cô giáo về món quà và về sự giúp đỡ của cô trong cả năm."
+      },
+      {
+        "w": "apologise for",
+        "ipa": "/əˈpɒlədʒaɪz fɔː/",
+        "vi": "xin lỗi vì",
+        "col": "apologise for being late",
+        "ex": "He apologised for being late because his train stopped for a long time.",
+        "exv": "Anh ấy đã xin lỗi vì đến muộn do tàu dừng lại rất lâu."
+      },
+      {
+        "w": "look at",
+        "ipa": "/lʊk æt/",
+        "vi": "nhìn vào",
+        "col": "look at the photo",
+        "ex": "Look at the photo on the wall: it shows my family at the beach in 2019.",
+        "exv": "Hãy nhìn bức ảnh trên tường: nó cho thấy gia đình tôi ở bãi biển năm 2019."
+      },
+      {
+        "w": "look for",
+        "ipa": "/lʊk fɔː/",
+        "vi": "tìm kiếm",
+        "col": "look for my keys",
+        "ex": "I looked for my keys in every room, but I found them in my coat pocket.",
+        "exv": "Tôi đã tìm chìa khóa ở mọi phòng, nhưng tôi thấy chúng trong túi áo khoác."
+      },
+      {
+        "w": "look after",
+        "ipa": "/lʊk ˈɑːftə/",
+        "vi": "chăm sóc",
+        "col": "look after the children",
+        "ex": "My aunt looks after the children when their parents go to work.",
+        "exv": "Dì tôi chăm sóc bọn trẻ khi bố mẹ chúng đi làm."
+      },
+      {
+        "w": "look forward to",
+        "ipa": "/lʊk ˈfɔːwəd tuː/",
+        "vi": "mong chờ",
+        "col": "look forward to the holiday",
+        "ex": "We look forward to the holiday by the sea with our cousins in July.",
+        "exv": "Chúng tôi mong chờ kỳ nghỉ bên biển cùng các anh em họ vào tháng Bảy."
+      },
+      {
+        "w": "good at",
+        "ipa": "/ɡʊd æt/",
+        "vi": "giỏi về",
+        "col": "good at maths",
+        "ex": "My sister is good at maths, but she finds history very hard.",
+        "exv": "Em gái tôi giỏi toán, nhưng em thấy môn lịch sử rất khó."
+      },
+      {
+        "w": "bad at",
+        "ipa": "/bæd æt/",
+        "vi": "kém về",
+        "col": "bad at singing",
+        "ex": "I am bad at singing, so I never sing at the school party.",
+        "exv": "Tôi hát kém, vì vậy tôi không bao giờ hát ở buổi tiệc của trường."
+      },
+      {
+        "w": "interested in",
+        "ipa": "/ˈɪntrəstɪd ɪn/",
+        "vi": "quan tâm, thích thú về",
+        "col": "interested in sport",
+        "ex": "My brother is interested in sport, and he reads football news every day.",
+        "exv": "Anh trai tôi thích thể thao, và anh ấy đọc tin bóng đá mỗi ngày."
+      },
+      {
+        "w": "afraid of",
+        "ipa": "/əˈfreɪd ɒv/",
+        "vi": "sợ",
+        "col": "afraid of dogs",
+        "ex": "The little girl is afraid of dogs, so she hides behind her mum.",
+        "exv": "Cô bé sợ chó, vì vậy cô bé trốn sau lưng mẹ."
+      },
+      {
+        "w": "proud of",
+        "ipa": "/praʊd ɒv/",
+        "vi": "tự hào về",
+        "col": "proud of her son",
+        "ex": "Mrs Lan is proud of her son because he won a prize at school.",
+        "exv": "Bà Lan tự hào về con trai vì cậu ấy đã giành giải thưởng ở trường."
+      },
+      {
+        "w": "be used to",
+        "ipa": "/biː juːst tuː/",
+        "vi": "đã quen với",
+        "col": "be used to early mornings",
+        "ex": "I am used to early mornings now because school starts at seven.",
+        "exv": "Bây giờ tôi đã quen dậy sớm vì trường học bắt đầu lúc bảy giờ."
+      },
+      {
+        "w": "get used to",
+        "ipa": "/ɡet juːst tuː/",
+        "vi": "dần quen với",
+        "col": "get used to a new school",
+        "ex": "It took me a month to get used to a new school and new friends.",
+        "exv": "Tôi mất một tháng để dần quen với trường mới và bạn bè mới."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Chọn giới từ đúng: 'I listen ___ music every evening.'",
+        "o": [
+          "to",
+          "for",
+          "about"
+        ],
+        "a": 0,
+        "why": "listen đi với to: listen to music; for dùng với wait, about dùng với think."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'chăm sóc'?",
+        "o": [
+          "look after",
+          "look for",
+          "look at"
+        ],
+        "a": 0,
+        "why": "look after = chăm sóc; look for = tìm kiếm; look at = nhìn vào."
+      },
+      {
+        "q": "Chọn câu đúng.",
+        "o": [
+          "She is good at playing the piano.",
+          "She is good at play the piano.",
+          "She is good in playing the piano."
+        ],
+        "a": 0,
+        "why": "Sau giới từ at phải dùng dạng V-ing: good at playing; không dùng play hay in."
+      },
+      {
+        "q": "Chọn giới từ đúng: 'He apologised ___ being late.'",
+        "o": [
+          "for",
+          "to",
+          "about"
+        ],
+        "a": 0,
+        "why": "apologise đi với for: apologise for being late."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'mong chờ'?",
+        "o": [
+          "look forward to",
+          "look after",
+          "belong to"
+        ],
+        "a": 0,
+        "why": "look forward to = mong chờ điều tốt đẹp sắp tới; look after = chăm sóc; belong to = thuộc về."
+      },
+      {
+        "q": "Chọn giới từ đúng: 'I am interested ___ learning English.'",
+        "o": [
+          "in",
+          "of",
+          "at"
+        ],
+        "a": 0,
+        "why": "interested đi với in: interested in learning; afraid đi với of, good đi với at."
+      }
+    ]
+  },
+  {
+    "n": 25,
+    "group": "Từ và ngữ pháp",
+    "title": "Prefixes",
+    "titleVi": "Tiền tố",
+    "words": [
+      {
+        "w": "ex-",
+        "ipa": "/eks/",
+        "vi": "tiền tố: đã từng, trước đây",
+        "col": "ex- + noun",
+        "ex": "The prefix ex- tells us that a person had a job or a role in the past.",
+        "exv": "Tiền tố ex- cho biết một người đã từng giữ một công việc hay vai trò trong quá khứ."
+      },
+      {
+        "w": "half-",
+        "ipa": "/hɑːf/",
+        "vi": "tiền tố: một nửa",
+        "col": "half- + noun",
+        "ex": "The prefix half- means 50 percent of something, like half of a cake.",
+        "exv": "Tiền tố half- có nghĩa là 50 phần trăm của một thứ gì đó, như một nửa chiếc bánh."
+      },
+      {
+        "w": "in-",
+        "ipa": "/ɪn/",
+        "vi": "tiền tố: không",
+        "col": "in- + adjective",
+        "ex": "The prefix in- can make an adjective mean not, as in the word informal.",
+        "exv": "Tiền tố in- có thể làm cho một tính từ mang nghĩa phủ định, như trong từ informal."
+      },
+      {
+        "w": "im-",
+        "ipa": "/ɪm/",
+        "vi": "tiền tố: không",
+        "col": "im- + adjective",
+        "ex": "The prefix im- is the form of in- before some letters, as in impossible.",
+        "exv": "Tiền tố im- là dạng của in- đứng trước một số chữ cái, như trong từ impossible."
+      },
+      {
+        "w": "non-",
+        "ipa": "/nɒn/",
+        "vi": "tiền tố: không",
+        "col": "non- + noun",
+        "ex": "The prefix non- means not, so a non-smoking room has no smoking in it.",
+        "exv": "Tiền tố non- có nghĩa là không, vì vậy phòng non-smoking là phòng không hút thuốc."
+      },
+      {
+        "w": "pre-",
+        "ipa": "/priː/",
+        "vi": "tiền tố: trước",
+        "col": "pre- + noun",
+        "ex": "The prefix pre- means before, so pre-school children are too young for school.",
+        "exv": "Tiền tố pre- có nghĩa là trước, vì vậy trẻ pre-school còn quá nhỏ để đi học."
+      },
+      {
+        "w": "re-",
+        "ipa": "/riː/",
+        "vi": "tiền tố: lại, lần nữa",
+        "col": "re- + verb",
+        "ex": "The prefix re- means again, so to rewrite is to write something a second time.",
+        "exv": "Tiền tố re- có nghĩa là lại, vì vậy rewrite là viết lại một thứ gì đó lần thứ hai."
+      },
+      {
+        "w": "un-",
+        "ipa": "/ʌn/",
+        "vi": "tiền tố: không",
+        "col": "un- + adjective",
+        "ex": "The prefix un- makes the opposite meaning, as in unhappy, the opposite of happy.",
+        "exv": "Tiền tố un- tạo nghĩa trái ngược, như trong unhappy, trái nghĩa với happy."
+      },
+      {
+        "w": "ex-wife",
+        "ipa": "/eks waɪf/",
+        "vi": "vợ cũ",
+        "col": "my ex-wife",
+        "ex": "His ex-wife lives in a small town near the sea with their two children.",
+        "exv": "Vợ cũ của anh ấy sống ở một thị trấn nhỏ gần biển cùng hai con của họ."
+      },
+      {
+        "w": "ex-president",
+        "ipa": "/eks ˈprezɪdənt/",
+        "vi": "cựu tổng thống",
+        "col": "an ex-president",
+        "ex": "The ex-president of the club still comes to every meeting on Saturday.",
+        "exv": "Cựu chủ tịch của câu lạc bộ vẫn đến mọi cuộc họp vào thứ Bảy."
+      },
+      {
+        "w": "half-price",
+        "ipa": "/hɑːf praɪs/",
+        "vi": "giảm nửa giá",
+        "col": "half-price tickets",
+        "ex": "The cinema sells half-price tickets for children on Tuesday morning.",
+        "exv": "Rạp chiếu phim bán vé nửa giá cho trẻ em vào sáng thứ Ba."
+      },
+      {
+        "w": "half-hour",
+        "ipa": "/hɑːf aʊə/",
+        "vi": "nửa giờ",
+        "col": "a half-hour walk",
+        "ex": "A half-hour walk from my house takes me to the lake and back.",
+        "exv": "Đi bộ nửa giờ từ nhà tôi sẽ đưa tôi tới hồ rồi quay lại."
+      },
+      {
+        "w": "informal",
+        "ipa": "/ɪnˈfɔːml/",
+        "vi": "không trang trọng",
+        "col": "informal clothes",
+        "ex": "For the picnic, we wear informal clothes like jeans and a simple shirt.",
+        "exv": "Để đi dã ngoại, chúng tôi mặc quần áo thoải mái như quần jeans và áo sơ mi đơn giản."
+      },
+      {
+        "w": "impossible",
+        "ipa": "/ɪmˈpɒsəbl/",
+        "vi": "không thể",
+        "col": "an impossible task",
+        "ex": "It is impossible to finish the whole book in one night before the exam.",
+        "exv": "Không thể đọc xong cả quyển sách trong một đêm trước kỳ thi."
+      },
+      {
+        "w": "non-smoking",
+        "ipa": "/nɒn ˈsməʊkɪŋ/",
+        "vi": "không hút thuốc",
+        "col": "a non-smoking room",
+        "ex": "Please give us a non-smoking room because my mum does not like smoke.",
+        "exv": "Hãy cho chúng tôi một phòng không hút thuốc vì mẹ tôi không thích khói thuốc."
+      },
+      {
+        "w": "pre-school",
+        "ipa": "/priː skuːl/",
+        "vi": "trước tuổi đi học",
+        "col": "pre-school children",
+        "ex": "The pre-school children play with colourful blocks in the sunny garden.",
+        "exv": "Các trẻ mẫu giáo chơi với những khối xếp hình nhiều màu trong vườn nắng."
+      },
+      {
+        "w": "redo",
+        "ipa": "/riːˈduː/",
+        "vi": "làm lại",
+        "col": "redo the homework",
+        "ex": "My teacher asked me to redo the homework because I made many mistakes.",
+        "exv": "Cô giáo yêu cầu tôi làm lại bài tập về nhà vì tôi đã mắc nhiều lỗi."
+      },
+      {
+        "w": "rewrite",
+        "ipa": "/riːˈraɪt/",
+        "vi": "viết lại",
+        "col": "rewrite the letter",
+        "ex": "Please rewrite the letter in clear handwriting before you send it tomorrow.",
+        "exv": "Hãy viết lại bức thư bằng chữ viết rõ ràng trước khi gửi nó ngày mai."
+      },
+      {
+        "w": "unhappy",
+        "ipa": "/ʌnˈhæpi/",
+        "vi": "không vui, buồn",
+        "col": "an unhappy child",
+        "ex": "The unhappy child sat alone in the garden after his friends went home.",
+        "exv": "Đứa trẻ buồn bã ngồi một mình trong vườn sau khi bạn bè về nhà."
+      },
+      {
+        "w": "unsafe",
+        "ipa": "/ʌnˈseɪf/",
+        "vi": "không an toàn",
+        "col": "an unsafe road",
+        "ex": "Do not walk on that unsafe road at night because there are no lights.",
+        "exv": "Đừng đi bộ trên con đường không an toàn đó vào ban đêm vì không có đèn."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Tiền tố nào có nghĩa là 'lại, lần nữa'?",
+        "o": [
+          "re-",
+          "pre-",
+          "un-"
+        ],
+        "a": 0,
+        "why": "re- = lại, lần nữa (redo, rewrite); pre- = trước; un- = không."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'vợ cũ'?",
+        "o": [
+          "ex-wife",
+          "half-hour",
+          "pre-school"
+        ],
+        "a": 0,
+        "why": "ex-wife = vợ cũ (đã ly hôn); half-hour = nửa giờ; pre-school = trước tuổi đi học."
+      },
+      {
+        "q": "Chọn từ đúng để điền vào câu: 'This room is ___. Please do not smoke here.'",
+        "o": [
+          "non-smoking",
+          "impossible",
+          "half-price"
+        ],
+        "a": 0,
+        "why": "non-smoking = không hút thuốc, hợp với câu cấm hút thuốc; impossible = không thể; half-price = nửa giá."
+      },
+      {
+        "q": "Từ 'unhappy' có nghĩa trái ngược với từ nào?",
+        "o": [
+          "happy",
+          "safe",
+          "formal"
+        ],
+        "a": 0,
+        "why": "un- tạo nghĩa phủ định: unhappy là trái nghĩa của happy; safe trái nghĩa là unsafe, formal trái nghĩa là informal."
+      },
+      {
+        "q": "Chọn từ đúng: 'A journey of 30 minutes is a ___ journey.'",
+        "o": [
+          "half-hour",
+          "half-price",
+          "pre-school"
+        ],
+        "a": 0,
+        "why": "half-hour = nửa giờ, chỉ thời gian 30 phút; half-price chỉ giá tiền; pre-school chỉ trẻ trước tuổi đi học."
+      },
+      {
+        "q": "Từ nào có tiền tố 'im-' với nghĩa 'không'?",
+        "o": [
+          "impossible",
+          "informal",
+          "unsafe"
+        ],
+        "a": 0,
+        "why": "impossible dùng tiền tố im- (dạng của in- trước p); informal dùng in-; unsafe dùng un-."
+      }
+    ]
+  },
+  {
+    "n": 26,
+    "group": "Từ và ngữ pháp",
+    "title": "Suffixes",
+    "titleVi": "Hậu tố",
+    "words": [
+      {
+        "w": "suffix",
+        "ipa": "/ˈsʌfɪks/",
+        "vi": "hậu tố",
+        "col": "a suffix",
+        "ex": "We add a suffix at the end of a word.",
+        "exv": "Chúng ta thêm một hậu tố vào cuối một từ."
+      },
+      {
+        "w": "worker",
+        "ipa": "/ˈwɜːkə/",
+        "vi": "người lao động, công nhân",
+        "col": "a hard worker",
+        "ex": "My uncle is a factory worker in this town.",
+        "exv": "Chú tôi là một công nhân nhà máy ở thị trấn này."
+      },
+      {
+        "w": "swimmer",
+        "ipa": "/ˈswɪmə/",
+        "vi": "người bơi",
+        "col": "a good swimmer",
+        "ex": "That young swimmer trains in the pool every morning.",
+        "exv": "Người bơi trẻ đó tập luyện ở bể bơi mỗi buổi sáng."
+      },
+      {
+        "w": "instructor",
+        "ipa": "/ɪnˈstrʌktə/",
+        "vi": "người hướng dẫn, huấn luyện viên",
+        "col": "a driving instructor",
+        "ex": "Our new driving instructor is very kind and calm.",
+        "exv": "Huấn luyện viên lái xe mới của chúng tôi rất tốt bụng và bình tĩnh."
+      },
+      {
+        "w": "cooker",
+        "ipa": "/ˈkʊkə/",
+        "vi": "bếp nấu",
+        "col": "a gas cooker",
+        "ex": "Mum bought a small cooker for our new flat.",
+        "exv": "Mẹ đã mua một chiếc bếp nấu nhỏ cho căn hộ mới của chúng tôi."
+      },
+      {
+        "w": "word processor",
+        "ipa": "/ˈwɜːd ˈprəʊsesə/",
+        "vi": "máy xử lý văn bản",
+        "col": "a word processor",
+        "ex": "I write my letters on a word processor at work.",
+        "exv": "Tôi viết thư bằng máy xử lý văn bản ở chỗ làm."
+      },
+      {
+        "w": "useful",
+        "ipa": "/ˈjuːsfəl/",
+        "vi": "hữu ích",
+        "col": "very useful",
+        "ex": "This small bag is very useful on a trip.",
+        "exv": "Chiếc túi nhỏ này rất hữu ích trong một chuyến đi."
+      },
+      {
+        "w": "beautiful",
+        "ipa": "/ˈbjuːtɪfəl/",
+        "vi": "đẹp",
+        "col": "a beautiful photo",
+        "ex": "We saw a beautiful garden near the river.",
+        "exv": "Chúng tôi đã thấy một khu vườn đẹp gần dòng sông."
+      },
+      {
+        "w": "sociology",
+        "ipa": "/ˌsəʊsiˈɒlədʒi/",
+        "vi": "xã hội học",
+        "col": "study sociology",
+        "ex": "She likes sociology because she wants to know about people in towns.",
+        "exv": "Cô ấy thích xã hội học vì cô ấy muốn hiểu về con người trong các thị trấn."
+      },
+      {
+        "w": "psychology",
+        "ipa": "/saɪˈkɒlədʒi/",
+        "vi": "tâm lý học",
+        "col": "study psychology",
+        "ex": "He reads a book about psychology at night.",
+        "exv": "Anh ấy đọc một cuốn sách về tâm lý học vào buổi tối."
+      },
+      {
+        "w": "economics",
+        "ipa": "/ˌiːkəˈnɒmɪks/",
+        "vi": "kinh tế học",
+        "col": "study economics",
+        "ex": "My brother studies economics at a big school in the city.",
+        "exv": "Anh trai tôi học kinh tế học ở một trường lớn trong thành phố."
+      },
+      {
+        "w": "politics",
+        "ipa": "/ˈpɒlətɪks/",
+        "vi": "chính trị học",
+        "col": "study politics",
+        "ex": "They talk about politics at lunch every day.",
+        "exv": "Họ nói chuyện về chính trị trong bữa trưa mỗi ngày."
+      },
+      {
+        "w": "useless",
+        "ipa": "/ˈjuːsləs/",
+        "vi": "vô dụng",
+        "col": "a useless book",
+        "ex": "This old key is useless now.",
+        "exv": "Chiếc chìa khóa cũ này giờ đây vô dụng."
+      },
+      {
+        "w": "endless",
+        "ipa": "/ˈendləs/",
+        "vi": "vô tận, dài bất tận",
+        "col": "an endless book",
+        "ex": "The road in the desert looks endless.",
+        "exv": "Con đường trong sa mạc trông dài bất tận."
+      },
+      {
+        "w": "sadly",
+        "ipa": "/ˈsædli/",
+        "vi": "một cách buồn bã",
+        "col": "walk sadly",
+        "ex": "She walked home sadly after the bad news.",
+        "exv": "Cô ấy đi bộ về nhà một cách buồn bã sau tin xấu."
+      },
+      {
+        "w": "happily",
+        "ipa": "/ˈhæpɪli/",
+        "vi": "một cách vui vẻ",
+        "col": "play happily",
+        "ex": "The children play happily in the park.",
+        "exv": "Bọn trẻ chơi đùa vui vẻ trong công viên."
+      },
+      {
+        "w": "happiness",
+        "ipa": "/ˈhæpɪnəs/",
+        "vi": "niềm hạnh phúc",
+        "col": "great happiness",
+        "ex": "Good friends bring us a lot of happiness.",
+        "exv": "Những người bạn tốt mang đến cho chúng ta rất nhiều niềm hạnh phúc."
+      },
+      {
+        "w": "sadness",
+        "ipa": "/ˈsædnəs/",
+        "vi": "nỗi buồn",
+        "col": "great sadness",
+        "ex": "There was sadness in his eyes that day.",
+        "exv": "Có nỗi buồn trong mắt anh ấy hôm đó."
+      },
+      {
+        "w": "sandy",
+        "ipa": "/ˈsændi/",
+        "vi": "đầy cát",
+        "col": "a sandy beach",
+        "ex": "We walk on the long sandy beach in the morning.",
+        "exv": "Chúng tôi đi dạo trên bãi biển dài đầy cát vào buổi sáng."
+      },
+      {
+        "w": "sunny",
+        "ipa": "/ˈsʌni/",
+        "vi": "nắng, có nắng",
+        "col": "a sunny day",
+        "ex": "It is a sunny morning, so we open the windows.",
+        "exv": "Buổi sáng nay có nắng, vì vậy chúng tôi mở cửa sổ."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Hậu tố '-er' trong từ 'worker' có nghĩa là gì?",
+        "o": [
+          "người làm việc đó",
+          "nơi làm việc đó",
+          "đồ vật để làm việc đó"
+        ],
+        "a": 0,
+        "why": "Hậu tố -er chỉ người làm một việc, worker là người làm việc."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'She is a good ___ and she swims very fast.'",
+        "o": [
+          "swimmer",
+          "sociology",
+          "sadness"
+        ],
+        "a": 0,
+        "why": "swimmer là người bơi, hợp với 'swims very fast'; sociology là môn học, sadness là nỗi buồn."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'không có ích, vô dụng'?",
+        "o": [
+          "useless",
+          "useful",
+          "beautiful"
+        ],
+        "a": 0,
+        "why": "useless = vô dụng, với hậu tố -less nghĩa là không có; useful = hữu ích; beautiful = đẹp."
+      },
+      {
+        "q": "'Sociology' là môn học về cái gì?",
+        "o": [
+          "xã hội",
+          "tiền bạc và tài chính",
+          "tâm lý con người"
+        ],
+        "a": 0,
+        "why": "sociology là xã hội học, nghiên cứu về xã hội; economics mới là về tiền bạc, psychology là về tâm lý."
+      },
+      {
+        "q": "Từ nào khác loại với hai từ còn lại?",
+        "o": [
+          "happily",
+          "sadly",
+          "happiness"
+        ],
+        "a": 2,
+        "why": "happiness là danh từ, còn happily và sadly đều là trạng từ với hậu tố -ly."
+      },
+      {
+        "q": "Chọn cụm đúng để nói về một ngày có nắng.",
+        "o": [
+          "a sunny day",
+          "a sandy day",
+          "an endless day"
+        ],
+        "a": 0,
+        "why": "sunny day là ngày nắng; sandy chỉ đầy cát, endless chỉ dài bất tận."
+      }
+    ]
+  },
+  {
+    "n": 27,
+    "group": "Từ và ngữ pháp",
+    "title": "Words you may confuse",
+    "titleVi": "Những từ dễ nhầm lẫn",
+    "words": [
+      {
+        "w": "quite",
+        "ipa": "/kwaɪt/",
+        "vi": "khá, tương đối",
+        "col": "quite good",
+        "ex": "This film is quite good, but it is a bit long.",
+        "exv": "Bộ phim này khá hay, nhưng nó hơi dài."
+      },
+      {
+        "w": "quiet",
+        "ipa": "/ˈkwaɪət/",
+        "vi": "yên tĩnh",
+        "col": "very quiet",
+        "ex": "Our street is very quiet at night.",
+        "exv": "Con phố của chúng tôi rất yên tĩnh vào ban đêm."
+      },
+      {
+        "w": "lose",
+        "ipa": "/luːz/",
+        "vi": "đánh mất, làm mất",
+        "col": "lose my keys",
+        "ex": "I often lose my pen at school.",
+        "exv": "Tôi thường làm mất bút ở trường."
+      },
+      {
+        "w": "loose",
+        "ipa": "/luːs/",
+        "vi": "rộng, không chật",
+        "col": "loose trousers",
+        "ex": "My new shirt is loose and very soft.",
+        "exv": "Chiếc áo sơ mi mới của tôi rộng và rất mềm."
+      },
+      {
+        "w": "fell",
+        "ipa": "/fel/",
+        "vi": "đã ngã (quá khứ của fall)",
+        "col": "fell down",
+        "ex": "He fell off his bike and hurt his leg.",
+        "exv": "Anh ấy ngã khỏi xe đạp và bị đau chân."
+      },
+      {
+        "w": "felt",
+        "ipa": "/felt/",
+        "vi": "đã cảm thấy (quá khứ của feel)",
+        "col": "felt ill",
+        "ex": "I felt cold this morning, so I wore a coat.",
+        "exv": "Sáng nay tôi cảm thấy lạnh, vì vậy tôi đã mặc áo khoác."
+      },
+      {
+        "w": "cooker",
+        "ipa": "/ˈkʊkə/",
+        "vi": "bếp nấu",
+        "col": "a new cooker",
+        "ex": "We need a new cooker for the kitchen.",
+        "exv": "Chúng tôi cần một chiếc bếp nấu mới cho nhà bếp."
+      },
+      {
+        "w": "cook",
+        "ipa": "/kʊk/",
+        "vi": "đầu bếp, người nấu ăn",
+        "col": "a good cook",
+        "ex": "My dad is a good cook and makes nice soup.",
+        "exv": "Bố tôi là một đầu bếp giỏi và nấu món súp ngon."
+      },
+      {
+        "w": "lend",
+        "ipa": "/lend/",
+        "vi": "cho mượn",
+        "col": "lend me your bicycle",
+        "ex": "Can you lend me your pen for a minute?",
+        "exv": "Bạn có thể cho tôi mượn bút một lát không?"
+      },
+      {
+        "w": "borrow",
+        "ipa": "/ˈbɒrəʊ/",
+        "vi": "mượn (từ ai)",
+        "col": "borrow a book",
+        "ex": "I want to borrow a book from my friend.",
+        "exv": "Tôi muốn mượn một cuốn sách từ bạn tôi."
+      },
+      {
+        "w": "check",
+        "ipa": "/tʃek/",
+        "vi": "kiểm tra, xem xét",
+        "col": "check my passport",
+        "ex": "The teacher will check our homework today.",
+        "exv": "Cô giáo sẽ kiểm tra bài tập về nhà của chúng tôi hôm nay."
+      },
+      {
+        "w": "control",
+        "ipa": "/kənˈtrəʊl/",
+        "vi": "điều khiển",
+        "col": "control the computer",
+        "ex": "You can control this game with your hands.",
+        "exv": "Bạn có thể điều khiển trò chơi này bằng tay."
+      },
+      {
+        "w": "afternoon",
+        "ipa": "/ˌɑːftəˈnuːn/",
+        "vi": "buổi chiều",
+        "col": "in the afternoon",
+        "ex": "We play football in the afternoon after school.",
+        "exv": "Chúng tôi chơi bóng đá vào buổi chiều sau giờ học."
+      },
+      {
+        "w": "evening",
+        "ipa": "/ˈiːvnɪŋ/",
+        "vi": "buổi tối",
+        "col": "in the evening",
+        "ex": "We eat dinner together in the evening.",
+        "exv": "Chúng tôi ăn tối cùng nhau vào buổi tối."
+      },
+      {
+        "w": "night",
+        "ipa": "/naɪt/",
+        "vi": "ban đêm",
+        "col": "at night",
+        "ex": "Stars shine in the sky at night.",
+        "exv": "Các ngôi sao tỏa sáng trên bầu trời vào ban đêm."
+      },
+      {
+        "w": "wait",
+        "ipa": "/weɪt/",
+        "vi": "chờ đợi",
+        "col": "wait for the bus",
+        "ex": "We wait for the bus at the bus stop.",
+        "exv": "Chúng tôi chờ xe buýt ở trạm xe buýt."
+      },
+      {
+        "w": "hope",
+        "ipa": "/həʊp/",
+        "vi": "hy vọng",
+        "col": "hope to pass",
+        "ex": "I hope it is sunny tomorrow.",
+        "exv": "Tôi hy vọng ngày mai trời nắng."
+      },
+      {
+        "w": "expect",
+        "ipa": "/ɪkˈspekt/",
+        "vi": "mong đợi, cho là có thể",
+        "col": "expect to fail",
+        "ex": "I expect many people at the party tonight.",
+        "exv": "Tôi nghĩ sẽ có nhiều người ở bữa tiệc tối nay."
+      },
+      {
+        "w": "pass",
+        "ipa": "/pɑːs/",
+        "vi": "đỗ, vượt qua (kỳ thi)",
+        "col": "pass my exams",
+        "ex": "She works hard because she wants to pass the test.",
+        "exv": "Cô ấy học chăm chỉ vì cô ấy muốn đỗ bài kiểm tra."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'khá, tương đối'?",
+        "o": [
+          "quite",
+          "quiet",
+          "loose"
+        ],
+        "a": 0,
+        "why": "quite = khá, tương đối; quiet = yên tĩnh; loose = rộng, không chật."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'My room is very ___ at night, and I can sleep well.'",
+        "o": [
+          "quiet",
+          "quite",
+          "loose"
+        ],
+        "a": 0,
+        "why": "quiet = yên tĩnh, hợp với việc ngủ ngon; quite = khá; loose = rộng."
+      },
+      {
+        "q": "'Lose' có nghĩa là gì?",
+        "o": [
+          "đánh mất, không tìm thấy",
+          "rộng, không chật",
+          "ngã xuống"
+        ],
+        "a": 0,
+        "why": "lose = đánh mất; loose = rộng; fell = đã ngã."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'Can I ___ your bike for one day?'",
+        "o": [
+          "borrow",
+          "lend",
+          "check"
+        ],
+        "a": 0,
+        "why": "borrow = mượn từ ai, người nói nhận đồ; lend = cho mượn, người nói đưa đồ đi."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'xem xét, kiểm tra'?",
+        "o": [
+          "check",
+          "control",
+          "wait"
+        ],
+        "a": 0,
+        "why": "check = kiểm tra, xem xét; control = điều khiển; wait = chờ đợi."
+      },
+      {
+        "q": "Buổi chiều (afternoon) là khoảng thời gian nào?",
+        "o": [
+          "khoảng 12 giờ đến 5, 6 giờ chiều",
+          "khoảng 5, 6 giờ đến 9, 10 giờ tối",
+          "sau 9, 10 giờ tối"
+        ],
+        "a": 0,
+        "why": "afternoon là từ khoảng 12 giờ đến 5, 6 giờ chiều; evening là từ 5, 6 giờ đến 9, 10 giờ tối; night là sau 9, 10 giờ tối."
+      }
+    ]
+  },
+  {
+    "n": 28,
+    "group": "Con người",
+    "title": "Birth, marriage and death",
+    "titleVi": "Sinh, cưới và mất",
+    "words": [
+      {
+        "w": "baby",
+        "ipa": "/ˈbeɪbi/",
+        "vi": "em bé",
+        "col": "a baby",
+        "ex": "The baby sleeps in a small bed near her mum.",
+        "exv": "Em bé ngủ trong một chiếc giường nhỏ gần mẹ."
+      },
+      {
+        "w": "be born",
+        "ipa": "/biː bɔːn/",
+        "vi": "được sinh ra",
+        "col": "be born in 1945",
+        "ex": "My little sister was born in Hanoi in 2020.",
+        "exv": "Em gái tôi được sinh ra ở Hà Nội vào năm 2020."
+      },
+      {
+        "w": "weigh",
+        "ipa": "/weɪ/",
+        "vi": "nặng, cân nặng",
+        "col": "weigh 3 kilograms",
+        "ex": "This bag weighs five kilograms.",
+        "exv": "Chiếc túi này nặng năm ki-lô-gam."
+      },
+      {
+        "w": "marriage",
+        "ipa": "/ˈmærɪdʒ/",
+        "vi": "hôn nhân",
+        "col": "a happy marriage",
+        "ex": "Their marriage is very happy after ten years.",
+        "exv": "Cuộc hôn nhân của họ rất hạnh phúc sau mười năm."
+      },
+      {
+        "w": "single",
+        "ipa": "/ˈsɪŋɡəl/",
+        "vi": "độc thân",
+        "col": "be single",
+        "ex": "He is single and lives with his parents.",
+        "exv": "Anh ấy còn độc thân và sống cùng bố mẹ."
+      },
+      {
+        "w": "married",
+        "ipa": "/ˈmærid/",
+        "vi": "đã kết hôn",
+        "col": "be married",
+        "ex": "My aunt is married and has two children.",
+        "exv": "Cô tôi đã kết hôn và có hai con."
+      },
+      {
+        "w": "widowed",
+        "ipa": "/ˈwɪdəʊd/",
+        "vi": "góa vợ/chồng",
+        "col": "be widowed",
+        "ex": "Mrs Lan is widowed and lives with her daughter.",
+        "exv": "Bà Lan góa chồng và sống cùng con gái."
+      },
+      {
+        "w": "separated",
+        "ipa": "/ˈsepəreɪtɪd/",
+        "vi": "ly thân",
+        "col": "be separated",
+        "ex": "They are separated, but they are still good friends.",
+        "exv": "Họ đã ly thân, nhưng họ vẫn là bạn tốt của nhau."
+      },
+      {
+        "w": "divorced",
+        "ipa": "/dɪˈvɔːst/",
+        "vi": "đã ly hôn",
+        "col": "be divorced",
+        "ex": "My uncle is divorced and lives alone now.",
+        "exv": "Chú tôi đã ly hôn và hiện sống một mình."
+      },
+      {
+        "w": "wedding",
+        "ipa": "/ˈwedɪŋ/",
+        "vi": "đám cưới, lễ cưới",
+        "col": "a wedding",
+        "ex": "We went to a big wedding in the countryside last month.",
+        "exv": "Chúng tôi đã đi dự một đám cưới lớn ở vùng quê tháng trước."
+      },
+      {
+        "w": "bride",
+        "ipa": "/braɪd/",
+        "vi": "cô dâu",
+        "col": "the bride",
+        "ex": "The bride wears a long white dress.",
+        "exv": "Cô dâu mặc một chiếc váy trắng dài."
+      },
+      {
+        "w": "groom",
+        "ipa": "/ɡruːm/",
+        "vi": "chú rể",
+        "col": "the groom",
+        "ex": "The groom smiles and holds the bride's hand.",
+        "exv": "Chú rể mỉm cười và nắm tay cô dâu."
+      },
+      {
+        "w": "get married",
+        "ipa": "/ɡet ˈmærid/",
+        "vi": "kết hôn",
+        "col": "get married to Bill",
+        "ex": "They will get married in June next year.",
+        "exv": "Họ sẽ kết hôn vào tháng Sáu năm sau."
+      },
+      {
+        "w": "honeymoon",
+        "ipa": "/ˈhʌnimuːn/",
+        "vi": "tuần trăng mật",
+        "col": "go on honeymoon",
+        "ex": "They go on honeymoon to the sea after the wedding.",
+        "exv": "Họ đi hưởng tuần trăng mật ở biển sau đám cưới."
+      },
+      {
+        "w": "die",
+        "ipa": "/daɪ/",
+        "vi": "chết, qua đời",
+        "col": "die last year",
+        "ex": "Old trees die when there is no water.",
+        "exv": "Cây già chết khi không có nước."
+      },
+      {
+        "w": "heart attack",
+        "ipa": "/ˈhɑːt əˈtæk/",
+        "vi": "cơn đau tim",
+        "col": "die of a heart attack",
+        "ex": "He went to hospital after a heart attack.",
+        "exv": "Ông ấy đã vào bệnh viện sau một cơn đau tim."
+      },
+      {
+        "w": "dead",
+        "ipa": "/ded/",
+        "vi": "đã chết",
+        "col": "be dead",
+        "ex": "The old tree in our garden is dead now.",
+        "exv": "Cây già trong vườn nhà chúng tôi giờ đã chết."
+      },
+      {
+        "w": "funeral",
+        "ipa": "/ˈfjuːnərəl/",
+        "vi": "đám tang, lễ tang",
+        "col": "the funeral",
+        "ex": "Many friends came to the funeral on Sunday.",
+        "exv": "Nhiều bạn bè đã đến dự lễ tang vào Chủ nhật."
+      },
+      {
+        "w": "birthday",
+        "ipa": "/ˈbɜːθdeɪ/",
+        "vi": "sinh nhật",
+        "col": "my birthday",
+        "ex": "Her birthday is on the sixteenth of June.",
+        "exv": "Sinh nhật của cô ấy là vào ngày mười sáu tháng Sáu."
+      },
+      {
+        "w": "break up",
+        "ipa": "/breɪk ʌp/",
+        "vi": "tan vỡ (hôn nhân)",
+        "col": "marriage breaks up",
+        "ex": "Their marriage broke up after five years.",
+        "exv": "Cuộc hôn nhân của họ tan vỡ sau năm năm."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "'Single' có nghĩa là gì?",
+        "o": [
+          "chưa có bạn đời, độc thân",
+          "đã kết hôn",
+          "góa vợ hoặc góa chồng"
+        ],
+        "a": 0,
+        "why": "single = độc thân, chưa có bạn đời; married = đã kết hôn; widowed = góa vợ hoặc góa chồng."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'They ___ in church last year.'",
+        "o": [
+          "got married",
+          "were born",
+          "died"
+        ],
+        "a": 0,
+        "why": "got married = đã kết hôn, hợp với 'in church'; were born = được sinh ra; died = đã qua đời."
+      },
+      {
+        "q": "Từ nào chỉ người phụ nữ trong ngày cưới?",
+        "o": [
+          "bride",
+          "groom",
+          "funeral"
+        ],
+        "a": 0,
+        "why": "bride = cô dâu; groom = chú rể; funeral = đám tang."
+      },
+      {
+        "q": "'Honeymoon' là gì?",
+        "o": [
+          "kỳ nghỉ sau đám cưới",
+          "lễ cưới trong nhà thờ",
+          "đám tang"
+        ],
+        "a": 0,
+        "why": "honeymoon = tuần trăng mật, kỳ nghỉ sau đám cưới; wedding = đám cưới; funeral = đám tang."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'He ___ of a heart attack last year.'",
+        "o": [
+          "died",
+          "dead",
+          "death"
+        ],
+        "a": 0,
+        "why": "died là động từ quá khứ, hợp sau chủ ngữ 'he'; dead là tính từ; death là danh từ."
+      },
+      {
+        "q": "'Divorced' có nghĩa là gì?",
+        "o": [
+          "đã ly hôn",
+          "đã góa vợ hoặc góa chồng",
+          "đang ly thân"
+        ],
+        "a": 0,
+        "why": "divorced = đã ly hôn, hôn nhân đã chấm dứt về mặt pháp lý; widowed = góa; separated = ly thân."
+      }
+    ]
+  },
+  {
+    "n": 29,
+    "group": "Con người",
+    "title": "The family",
+    "titleVi": "Gia đình",
+    "words": [
+      {
+        "w": "husband",
+        "ipa": "/ˈhʌzbənd/",
+        "vi": "chồng",
+        "col": "her husband",
+        "ex": "Her husband works in a hospital in town.",
+        "exv": "Chồng của cô ấy làm việc ở một bệnh viện trong thị trấn."
+      },
+      {
+        "w": "wife",
+        "ipa": "/waɪf/",
+        "vi": "vợ",
+        "col": "his wife",
+        "ex": "His wife is a teacher at my school.",
+        "exv": "Vợ của anh ấy là giáo viên ở trường tôi."
+      },
+      {
+        "w": "father",
+        "ipa": "/ˈfɑːðə/",
+        "vi": "bố, cha",
+        "col": "my father",
+        "ex": "My father cooks dinner for us on Sundays.",
+        "exv": "Bố tôi nấu bữa tối cho chúng tôi vào các ngày Chủ nhật."
+      },
+      {
+        "w": "mother",
+        "ipa": "/ˈmʌðə/",
+        "vi": "mẹ",
+        "col": "my mother",
+        "ex": "My mother reads a story to me every night.",
+        "exv": "Mẹ tôi đọc truyện cho tôi nghe mỗi tối."
+      },
+      {
+        "w": "parents",
+        "ipa": "/ˈpeərənts/",
+        "vi": "bố mẹ",
+        "col": "my parents",
+        "ex": "Her parents live in a small village near the sea.",
+        "exv": "Bố mẹ của cô ấy sống ở một ngôi làng nhỏ gần biển."
+      },
+      {
+        "w": "daughter",
+        "ipa": "/ˈdɔːtə/",
+        "vi": "con gái",
+        "col": "their daughter",
+        "ex": "Their daughter is ten years old and loves music.",
+        "exv": "Con gái của họ mười tuổi và rất thích âm nhạc."
+      },
+      {
+        "w": "son",
+        "ipa": "/sʌn/",
+        "vi": "con trai",
+        "col": "their son",
+        "ex": "Our son plays football with his friends on Saturdays.",
+        "exv": "Con trai chúng tôi chơi bóng đá với bạn bè vào các ngày thứ Bảy."
+      },
+      {
+        "w": "sister",
+        "ipa": "/ˈsɪstə/",
+        "vi": "chị gái, em gái",
+        "col": "my sister",
+        "ex": "My sister and I share one room at home.",
+        "exv": "Chị gái tôi và tôi dùng chung một phòng ở nhà."
+      },
+      {
+        "w": "brother",
+        "ipa": "/ˈbrʌðə/",
+        "vi": "anh trai, em trai",
+        "col": "my brother",
+        "ex": "My brother is taller than me now.",
+        "exv": "Em trai tôi giờ cao hơn tôi."
+      },
+      {
+        "w": "grandfather",
+        "ipa": "/ˈɡrændfɑːðə/",
+        "vi": "ông nội, ông ngoại",
+        "col": "my grandfather",
+        "ex": "My grandfather tells us funny stories in the evening.",
+        "exv": "Ông tôi kể cho chúng tôi nghe những câu chuyện vui vào buổi tối."
+      },
+      {
+        "w": "grandmother",
+        "ipa": "/ˈɡrændmʌðə/",
+        "vi": "bà nội, bà ngoại",
+        "col": "my grandmother",
+        "ex": "My grandmother makes very good cakes.",
+        "exv": "Bà tôi làm những chiếc bánh rất ngon."
+      },
+      {
+        "w": "grandparents",
+        "ipa": "/ˈɡrændpeərənts/",
+        "vi": "ông bà",
+        "col": "my grandparents",
+        "ex": "We visit our grandparents every weekend.",
+        "exv": "Chúng tôi thăm ông bà mỗi cuối tuần."
+      },
+      {
+        "w": "granddaughter",
+        "ipa": "/ˈɡrænddɔːtə/",
+        "vi": "cháu gái",
+        "col": "their granddaughter",
+        "ex": "She is the granddaughter of Mr and Mrs Brown.",
+        "exv": "Cô bé là cháu gái của ông bà Brown."
+      },
+      {
+        "w": "grandson",
+        "ipa": "/ˈɡrænsʌn/",
+        "vi": "cháu trai",
+        "col": "their grandson",
+        "ex": "Their grandson is only three years old.",
+        "exv": "Cháu trai của họ mới chỉ ba tuổi."
+      },
+      {
+        "w": "uncle",
+        "ipa": "/ˈʌŋkəl/",
+        "vi": "chú, bác, cậu",
+        "col": "my uncle",
+        "ex": "My uncle lives in London and visits us in summer.",
+        "exv": "Chú tôi sống ở London và đến thăm chúng tôi vào mùa hè."
+      },
+      {
+        "w": "aunt",
+        "ipa": "/ɑːnt/",
+        "vi": "cô, dì, bác gái",
+        "col": "my aunt",
+        "ex": "My aunt sends us a card every New Year.",
+        "exv": "Cô tôi gửi cho chúng tôi một tấm thiệp mỗi dịp năm mới."
+      },
+      {
+        "w": "niece",
+        "ipa": "/niːs/",
+        "vi": "cháu gái (con của anh/chị/em)",
+        "col": "my niece",
+        "ex": "Anna is my niece, the daughter of my sister.",
+        "exv": "Anna là cháu gái tôi, con gái của chị tôi."
+      },
+      {
+        "w": "nephew",
+        "ipa": "/ˈnefjuː/",
+        "vi": "cháu trai (con của anh/chị/em)",
+        "col": "my nephew",
+        "ex": "Tom is my nephew, the son of my brother.",
+        "exv": "Tom là cháu trai tôi, con trai của anh tôi."
+      },
+      {
+        "w": "cousin",
+        "ipa": "/ˈkʌzən/",
+        "vi": "anh/chị/em họ",
+        "col": "my cousin",
+        "ex": "My cousin and I go to the same school.",
+        "exv": "Anh họ tôi và tôi học cùng một trường."
+      },
+      {
+        "w": "relatives",
+        "ipa": "/ˈrelətɪvz/",
+        "vi": "họ hàng, người thân",
+        "col": "my relatives",
+        "ex": "We have many relatives in the north of the country.",
+        "exv": "Chúng tôi có nhiều họ hàng ở miền Bắc đất nước."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Lan là con gái của ông Nam. Ông Nam là ___ của Lan.",
+        "o": [
+          "father",
+          "son",
+          "brother"
+        ],
+        "a": 0,
+        "why": "father = bố; son = con trai; brother = anh hoặc em trai."
+      },
+      {
+        "q": "'Grandfather' là ai trong gia đình?",
+        "o": [
+          "ông nội hoặc ông ngoại",
+          "cháu trai",
+          "chú hoặc bác"
+        ],
+        "a": 0,
+        "why": "grandfather = ông; grandson = cháu trai; uncle = chú hoặc bác."
+      },
+      {
+        "q": "'Niece' có nghĩa là gì?",
+        "o": [
+          "cháu gái (con của anh, chị hoặc em)",
+          "cháu trai (con của anh, chị hoặc em)",
+          "anh, chị hoặc em họ"
+        ],
+        "a": 0,
+        "why": "niece = cháu gái; nephew = cháu trai; cousin = anh, chị hoặc em họ."
+      },
+      {
+        "q": "Theo cây gia đình trong sách, John và George là ___ của Sarah và Jack.",
+        "o": [
+          "uncles",
+          "aunts",
+          "cousins"
+        ],
+        "a": 0,
+        "why": "John và George là chú của Sarah và Jack, tức uncles; aunts là cô, dì; cousins là anh, chị, em họ."
+      },
+      {
+        "q": "Từ nào chỉ người thuộc thế hệ cháu?",
+        "o": [
+          "grandson",
+          "grandfather",
+          "uncle"
+        ],
+        "a": 0,
+        "why": "grandson = cháu trai; grandfather = ông; uncle = chú hoặc bác."
+      },
+      {
+        "q": "Theo cây gia đình trong sách, Emily và Peter là ___ của Sarah và Jack.",
+        "o": [
+          "cousins",
+          "uncles",
+          "parents"
+        ],
+        "a": 0,
+        "why": "Emily và Peter là anh, chị, em họ của Sarah và Jack; uncles là chú, bác; parents là bố mẹ."
+      }
+    ]
+  },
+  {
+    "n": 30,
+    "group": "Con người",
+    "title": "Parts of the body",
+    "titleVi": "Các bộ phận cơ thể",
+    "words": [
+      {
+        "w": "hair",
+        "ipa": "/heə/",
+        "vi": "tóc",
+        "col": "wash her hair",
+        "ex": "She washes her hair every morning.",
+        "exv": "Cô ấy gội đầu mỗi buổi sáng."
+      },
+      {
+        "w": "eye",
+        "ipa": "/aɪ/",
+        "vi": "mắt",
+        "col": "my eyes",
+        "ex": "My baby has big brown eyes.",
+        "exv": "Em bé của tôi có đôi mắt nâu to."
+      },
+      {
+        "w": "ear",
+        "ipa": "/ɪə/",
+        "vi": "tai",
+        "col": "my ears",
+        "ex": "He listens to music with his ears.",
+        "exv": "Anh ấy nghe nhạc bằng tai."
+      },
+      {
+        "w": "nose",
+        "ipa": "/nəʊz/",
+        "vi": "mũi",
+        "col": "my nose",
+        "ex": "I can smell fresh bread with my nose.",
+        "exv": "Tôi có thể ngửi thấy mùi bánh mì mới bằng mũi."
+      },
+      {
+        "w": "mouth",
+        "ipa": "/maʊθ/",
+        "vi": "miệng",
+        "col": "my mouth",
+        "ex": "Open your mouth and say 'ah'.",
+        "exv": "Hãy mở miệng ra và nói 'a'."
+      },
+      {
+        "w": "lip",
+        "ipa": "/lɪp/",
+        "vi": "môi",
+        "col": "my lips",
+        "ex": "Her lips are red in the cold wind.",
+        "exv": "Môi của cô ấy đỏ lên trong gió lạnh."
+      },
+      {
+        "w": "tooth",
+        "ipa": "/tuːθ/",
+        "vi": "răng (số ít)",
+        "col": "clean your teeth",
+        "ex": "This tooth hurts when I eat sweets.",
+        "exv": "Chiếc răng này đau khi tôi ăn kẹo."
+      },
+      {
+        "w": "neck",
+        "ipa": "/nek/",
+        "vi": "cổ",
+        "col": "my neck",
+        "ex": "She wears a red scarf round her neck.",
+        "exv": "Cô ấy quàng một chiếc khăn đỏ quanh cổ."
+      },
+      {
+        "w": "thumb",
+        "ipa": "/θʌm/",
+        "vi": "ngón tay cái",
+        "col": "my thumb",
+        "ex": "The baby holds my thumb with her hand.",
+        "exv": "Em bé nắm ngón tay cái của tôi bằng tay bé."
+      },
+      {
+        "w": "shoulder",
+        "ipa": "/ˈʃəʊldə/",
+        "vi": "vai",
+        "col": "my shoulder",
+        "ex": "He puts his bag on his shoulder.",
+        "exv": "Anh ấy đeo túi lên vai."
+      },
+      {
+        "w": "arm",
+        "ipa": "/ɑːm/",
+        "vi": "cánh tay",
+        "col": "my arm",
+        "ex": "She broke her arm and wears a white band.",
+        "exv": "Cô ấy bị gãy tay và đang đeo băng trắng."
+      },
+      {
+        "w": "nail",
+        "ipa": "/neɪl/",
+        "vi": "móng tay, móng chân",
+        "col": "my nails",
+        "ex": "Mum cuts my nails every week.",
+        "exv": "Mẹ cắt móng tay cho tôi mỗi tuần."
+      },
+      {
+        "w": "finger",
+        "ipa": "/ˈfɪŋɡə/",
+        "vi": "ngón tay",
+        "col": "my fingers",
+        "ex": "I have five fingers on each hand.",
+        "exv": "Tôi có năm ngón tay trên mỗi bàn tay."
+      },
+      {
+        "w": "hand",
+        "ipa": "/hænd/",
+        "vi": "bàn tay",
+        "col": "my hand",
+        "ex": "He writes his name with his right hand.",
+        "exv": "Anh ấy viết tên mình bằng tay phải."
+      },
+      {
+        "w": "foot",
+        "ipa": "/fʊt/",
+        "vi": "bàn chân (số ít)",
+        "col": "my foot",
+        "ex": "My left foot hurts after a long walk.",
+        "exv": "Bàn chân trái của tôi đau sau một quãng đường dài."
+      },
+      {
+        "w": "knee",
+        "ipa": "/niː/",
+        "vi": "đầu gối",
+        "col": "my knee",
+        "ex": "The boy fell and hurt his knee.",
+        "exv": "Cậu bé ngã và bị đau đầu gối."
+      },
+      {
+        "w": "toe",
+        "ipa": "/təʊ/",
+        "vi": "ngón chân",
+        "col": "my toes",
+        "ex": "I have five toes on each foot.",
+        "exv": "Tôi có năm ngón chân trên mỗi bàn chân."
+      },
+      {
+        "w": "chest",
+        "ipa": "/tʃest/",
+        "vi": "ngực",
+        "col": "my chest",
+        "ex": "He puts his hand on his chest and smiles.",
+        "exv": "Anh ấy đặt tay lên ngực và mỉm cười."
+      },
+      {
+        "w": "back",
+        "ipa": "/bæk/",
+        "vi": "lưng",
+        "col": "my back",
+        "ex": "My back hurts after I carry a heavy bag.",
+        "exv": "Lưng tôi đau sau khi tôi mang một chiếc túi nặng."
+      },
+      {
+        "w": "bust",
+        "ipa": "/bʌst/",
+        "vi": "ngực (của phụ nữ)",
+        "col": "her bust",
+        "ex": "This dress fits her bust very well.",
+        "exv": "Chiếc váy này rất vừa với vòng ngực của cô ấy."
+      },
+      {
+        "w": "side",
+        "ipa": "/saɪd/",
+        "vi": "hông, bên sườn",
+        "col": "my side",
+        "ex": "I have a pain in my side after I run.",
+        "exv": "Tôi bị đau bên sườn sau khi chạy."
+      },
+      {
+        "w": "waist",
+        "ipa": "/weɪst/",
+        "vi": "eo",
+        "col": "my waist",
+        "ex": "She wears a belt round her waist.",
+        "exv": "Cô ấy đeo thắt lưng quanh eo."
+      },
+      {
+        "w": "stomach",
+        "ipa": "/ˈstʌmək/",
+        "vi": "bụng, dạ dày",
+        "col": "my stomach",
+        "ex": "My stomach hurts because I ate too much.",
+        "exv": "Bụng tôi đau vì tôi đã ăn quá nhiều."
+      },
+      {
+        "w": "hips",
+        "ipa": "/hɪps/",
+        "vi": "hông",
+        "col": "my hips",
+        "ex": "She puts her hands on her hips and laughs.",
+        "exv": "Cô ấy chống tay lên hông và cười."
+      },
+      {
+        "w": "heart",
+        "ipa": "/hɑːt/",
+        "vi": "trái tim",
+        "col": "my heart",
+        "ex": "My heart beats fast when I run.",
+        "exv": "Tim tôi đập nhanh khi tôi chạy."
+      },
+      {
+        "w": "brain",
+        "ipa": "/breɪn/",
+        "vi": "não",
+        "col": "my brain",
+        "ex": "We use our brain to think and learn.",
+        "exv": "Chúng ta dùng não để suy nghĩ và học tập."
+      },
+      {
+        "w": "blood",
+        "ipa": "/blʌd/",
+        "vi": "máu",
+        "col": "my blood",
+        "ex": "Blood moves round our body every day.",
+        "exv": "Máu lưu thông khắp cơ thể chúng ta mỗi ngày."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Điền từ đúng vào câu: 'A hand has five ___.'",
+        "o": [
+          "fingers",
+          "toes",
+          "teeth"
+        ],
+        "a": 0,
+        "why": "fingers là ngón tay, bàn tay có năm ngón tay; toes là ngón chân; teeth là răng."
+      },
+      {
+        "q": "Bạn ngửi mùi bằng bộ phận nào?",
+        "o": [
+          "nose",
+          "ear",
+          "eye"
+        ],
+        "a": 0,
+        "why": "nose = mũi, dùng để ngửi; ear = tai, dùng để nghe; eye = mắt, dùng để nhìn."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'đầu gối'?",
+        "o": [
+          "knee",
+          "neck",
+          "toe"
+        ],
+        "a": 0,
+        "why": "knee = đầu gối; neck = cổ; toe = ngón chân."
+      },
+      {
+        "q": "Từ nào chỉ bộ phận dùng để suy nghĩ và học tập?",
+        "o": [
+          "brain",
+          "blood",
+          "heart"
+        ],
+        "a": 0,
+        "why": "brain = não, dùng để suy nghĩ và học tập; blood = máu; heart = trái tim."
+      },
+      {
+        "q": "Từ nào khác loại với hai từ còn lại?",
+        "o": [
+          "heart",
+          "hand",
+          "foot"
+        ],
+        "a": 0,
+        "why": "heart là bộ phận bên trong cơ thể; hand và foot đều là bộ phận bên ngoài cơ thể."
+      },
+      {
+        "q": "Bạn nghe nhạc bằng bộ phận nào?",
+        "o": [
+          "ear",
+          "mouth",
+          "nose"
+        ],
+        "a": 0,
+        "why": "ear = tai, dùng để nghe; mouth = miệng; nose = mũi."
+      }
+    ]
+  },
+  {
+    "n": 31,
+    "group": "Con người",
+    "title": "Clothes",
+    "titleVi": "Quần áo",
+    "words": [
+      {
+        "w": "coat",
+        "ipa": "/kəʊt/",
+        "vi": "áo khoác dài",
+        "col": "a warm coat",
+        "ex": "I wear a warm coat on cold days.",
+        "exv": "Tôi mặc một chiếc áo khoác ấm vào những ngày lạnh."
+      },
+      {
+        "w": "jacket",
+        "ipa": "/ˈdʒækɪt/",
+        "vi": "áo khoác ngắn",
+        "col": "a blue jacket",
+        "ex": "My jacket is blue and light.",
+        "exv": "Áo khoác của tôi màu xanh và nhẹ."
+      },
+      {
+        "w": "scarf",
+        "ipa": "/skɑːf/",
+        "vi": "khăn quàng cổ",
+        "col": "a red scarf",
+        "ex": "She puts a red scarf round her neck.",
+        "exv": "Cô ấy quàng một chiếc khăn đỏ quanh cổ."
+      },
+      {
+        "w": "gloves",
+        "ipa": "/ɡlʌvz/",
+        "vi": "găng tay",
+        "col": "a pair of gloves",
+        "ex": "I wear gloves when my hands are cold.",
+        "exv": "Tôi đeo găng tay khi tay tôi lạnh."
+      },
+      {
+        "w": "shoes",
+        "ipa": "/ʃuːz/",
+        "vi": "giày",
+        "col": "a pair of shoes",
+        "ex": "His shoes are clean and black.",
+        "exv": "Giày của anh ấy sạch và màu đen."
+      },
+      {
+        "w": "trainers",
+        "ipa": "/ˈtreɪnəz/",
+        "vi": "giày thể thao",
+        "col": "a pair of trainers",
+        "ex": "I wear trainers when I go for a run.",
+        "exv": "Tôi đi giày thể thao khi tôi chạy bộ."
+      },
+      {
+        "w": "boots",
+        "ipa": "/buːts/",
+        "vi": "ủng, giày cao cổ",
+        "col": "a pair of boots",
+        "ex": "She wears boots on rainy days.",
+        "exv": "Cô ấy đi ủng vào những ngày mưa."
+      },
+      {
+        "w": "suit",
+        "ipa": "/suːt/",
+        "vi": "bộ com lê",
+        "col": "a new suit",
+        "ex": "He has a new suit for work.",
+        "exv": "Anh ấy có một bộ com lê mới để đi làm."
+      },
+      {
+        "w": "hat",
+        "ipa": "/hæt/",
+        "vi": "mũ",
+        "col": "a white hat",
+        "ex": "I put on a white hat in the sun.",
+        "exv": "Tôi đội một chiếc mũ trắng khi trời nắng."
+      },
+      {
+        "w": "socks",
+        "ipa": "/sɒks/",
+        "vi": "tất",
+        "col": "a pair of socks",
+        "ex": "My socks are white and soft.",
+        "exv": "Tất của tôi màu trắng và mềm."
+      },
+      {
+        "w": "belt",
+        "ipa": "/belt/",
+        "vi": "thắt lưng",
+        "col": "a black belt",
+        "ex": "He wears a black belt with his trousers.",
+        "exv": "Anh ấy đeo thắt lưng đen với quần dài."
+      },
+      {
+        "w": "T-shirt",
+        "ipa": "/ˈtiːʃɜːt/",
+        "vi": "áo phông",
+        "col": "a white T-shirt",
+        "ex": "I like my white T-shirt a lot.",
+        "exv": "Tôi rất thích chiếc áo phông trắng của mình."
+      },
+      {
+        "w": "shirt",
+        "ipa": "/ʃɜːt/",
+        "vi": "áo sơ mi",
+        "col": "a clean shirt",
+        "ex": "Dad wears a clean shirt to work.",
+        "exv": "Bố mặc một chiếc áo sơ mi sạch đi làm."
+      },
+      {
+        "w": "dress",
+        "ipa": "/dres/",
+        "vi": "váy liền",
+        "col": "a long dress",
+        "ex": "Mum has a long dress for the party.",
+        "exv": "Mẹ có một chiếc váy dài để đi dự tiệc."
+      },
+      {
+        "w": "tie",
+        "ipa": "/taɪ/",
+        "vi": "cà vạt",
+        "col": "wear a tie",
+        "ex": "Dad wears a tie to work every day.",
+        "exv": "Bố đeo cà vạt đi làm mỗi ngày."
+      },
+      {
+        "w": "skirt",
+        "ipa": "/skɜːt/",
+        "vi": "váy",
+        "col": "wear a skirt",
+        "ex": "My sister wears a blue skirt to school.",
+        "exv": "Chị tôi mặc váy xanh đi học."
+      },
+      {
+        "w": "ring",
+        "ipa": "/rɪŋ/",
+        "vi": "nhẫn",
+        "col": "a gold ring",
+        "ex": "She has a small gold ring on her hand.",
+        "exv": "Cô ấy đeo một chiếc nhẫn vàng nhỏ trên tay."
+      },
+      {
+        "w": "sweater",
+        "ipa": "/ˈswetə/",
+        "vi": "áo len",
+        "col": "a warm sweater",
+        "ex": "I need a warm sweater in winter.",
+        "exv": "Tôi cần một chiếc áo len ấm vào mùa đông."
+      },
+      {
+        "w": "trousers",
+        "ipa": "/ˈtraʊzəz/",
+        "vi": "quần dài",
+        "col": "a pair of trousers",
+        "ex": "These trousers are grey and new.",
+        "exv": "Chiếc quần dài này màu xám và còn mới."
+      },
+      {
+        "w": "jeans",
+        "ipa": "/dʒiːnz/",
+        "vi": "quần bò",
+        "col": "a pair of jeans",
+        "ex": "I wear jeans almost every day.",
+        "exv": "Tôi mặc quần bò gần như mỗi ngày."
+      },
+      {
+        "w": "shorts",
+        "ipa": "/ʃɔːts/",
+        "vi": "quần soóc",
+        "col": "a pair of shorts",
+        "ex": "He wears shorts in hot weather.",
+        "exv": "Anh ấy mặc quần soóc khi trời nóng."
+      },
+      {
+        "w": "tights",
+        "ipa": "/taɪts/",
+        "vi": "quần tất",
+        "col": "a pair of tights",
+        "ex": "She wears tights with her dress.",
+        "exv": "Cô ấy mặc quần tất với váy của mình."
+      },
+      {
+        "w": "glasses",
+        "ipa": "/ˈɡlɑːsɪz/",
+        "vi": "kính đeo mắt",
+        "col": "a pair of glasses",
+        "ex": "I wear glasses to read books.",
+        "exv": "Tôi đeo kính để đọc sách."
+      },
+      {
+        "w": "sunglasses",
+        "ipa": "/ˈsʌnɡlɑːsɪz/",
+        "vi": "kính râm",
+        "col": "a pair of sunglasses",
+        "ex": "She wears sunglasses on sunny days.",
+        "exv": "Cô ấy đeo kính râm vào những ngày nắng."
+      },
+      {
+        "w": "wear",
+        "ipa": "/weə/",
+        "vi": "mặc, đeo",
+        "col": "wear a coat",
+        "ex": "I wear a coat and a scarf today.",
+        "exv": "Hôm nay tôi mặc áo khoác và quàng khăn."
+      },
+      {
+        "w": "carry",
+        "ipa": "/ˈkæri/",
+        "vi": "mang, xách",
+        "col": "carry a bag",
+        "ex": "I carry a bag when I go to school.",
+        "exv": "Tôi xách một chiếc túi khi đi học."
+      },
+      {
+        "w": "get dressed",
+        "ipa": "/ɡet ˈdrest/",
+        "vi": "mặc quần áo",
+        "col": "get dressed in the morning",
+        "ex": "I get dressed in the morning before school.",
+        "exv": "Tôi mặc quần áo vào buổi sáng trước khi đi học."
+      },
+      {
+        "w": "get undressed",
+        "ipa": "/ɡet ʌnˈdrest/",
+        "vi": "cởi quần áo",
+        "col": "get undressed at night",
+        "ex": "I get undressed at night before bed.",
+        "exv": "Tôi cởi quần áo vào buổi tối trước khi đi ngủ."
+      },
+      {
+        "w": "suitcase",
+        "ipa": "/ˈsuːtkeɪs/",
+        "vi": "va li",
+        "col": "a big suitcase",
+        "ex": "My suitcase is big and heavy.",
+        "exv": "Va li của tôi to và nặng."
+      },
+      {
+        "w": "handbag",
+        "ipa": "/ˈhændbæɡ/",
+        "vi": "túi xách tay",
+        "col": "a small handbag",
+        "ex": "Mum puts her keys in her handbag.",
+        "exv": "Mẹ để chìa khóa trong túi xách tay."
+      },
+      {
+        "w": "briefcase",
+        "ipa": "/ˈbriːfkeɪs/",
+        "vi": "cặp tài liệu",
+        "col": "carry a briefcase",
+        "ex": "Dad carries a briefcase to the office.",
+        "exv": "Bố xách một chiếc cặp tài liệu tới văn phòng."
+      },
+      {
+        "w": "umbrella",
+        "ipa": "/ʌmˈbrelə/",
+        "vi": "ô, dù",
+        "col": "carry an umbrella",
+        "ex": "I carry an umbrella when it rains.",
+        "exv": "Tôi mang theo ô khi trời mưa."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'áo khoác dài'?",
+        "o": [
+          "coat",
+          "shirt",
+          "hat"
+        ],
+        "a": 0,
+        "why": "coat = áo khoác dài; shirt = áo sơ mi; hat = mũ."
+      },
+      {
+        "q": "Điền từ đúng vào câu: I wear ___ when my hands are cold.",
+        "o": [
+          "gloves",
+          "shoes",
+          "socks"
+        ],
+        "a": 0,
+        "why": "gloves là găng tay, đeo vào tay khi lạnh; shoes là giày, socks là tất."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "trousers",
+          "jeans",
+          "ring",
+          "shorts"
+        ],
+        "a": 2,
+        "why": "trousers, jeans và shorts đều là quần; ring là nhẫn, đeo ở tay."
+      },
+      {
+        "q": "Cụm nào đúng để nói về kính đeo mắt?",
+        "o": [
+          "a pair of glasses",
+          "a pair of coats",
+          "a pair of shirts"
+        ],
+        "a": 0,
+        "why": "glasses luôn ở dạng số nhiều, nói a pair of glasses; coat và shirt không dùng với pair."
+      },
+      {
+        "q": "Chọn câu đúng với nghĩa của 'get dressed'.",
+        "o": [
+          "I get dressed in the morning.",
+          "I get dressed my shoes.",
+          "I get dressed a coat."
+        ],
+        "a": 0,
+        "why": "get dressed = mặc quần áo, dùng một mình không cần tân ngữ; hai câu còn lại sai ngữ pháp."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'quần bò'?",
+        "o": [
+          "jeans",
+          "jacket",
+          "belt"
+        ],
+        "a": 0,
+        "why": "jeans = quần bò; jacket = áo khoác ngắn; belt = thắt lưng."
+      }
+    ]
+  },
+  {
+    "n": 32,
+    "group": "Con người",
+    "title": "Describing people",
+    "titleVi": "Miêu tả người",
+    "words": [
+      {
+        "w": "tall",
+        "ipa": "/tɔːl/",
+        "vi": "cao",
+        "col": "a tall woman",
+        "ex": "My teacher is a tall woman.",
+        "exv": "Cô giáo của tôi là một phụ nữ cao."
+      },
+      {
+        "w": "short",
+        "ipa": "/ʃɔːt/",
+        "vi": "thấp",
+        "col": "quite short",
+        "ex": "My little brother is quite short.",
+        "exv": "Em trai tôi khá thấp."
+      },
+      {
+        "w": "medium height",
+        "ipa": "/ˈmiːdiəm haɪt/",
+        "vi": "cao trung bình",
+        "col": "medium height",
+        "ex": "She is medium height, not tall or short.",
+        "exv": "Cô ấy cao trung bình, không cao cũng không thấp."
+      },
+      {
+        "w": "slim",
+        "ipa": "/slɪm/",
+        "vi": "thon thả, mảnh mai",
+        "col": "really slim",
+        "ex": "She is really slim and healthy.",
+        "exv": "Cô ấy rất thon thả và khỏe mạnh."
+      },
+      {
+        "w": "thin",
+        "ipa": "/θɪn/",
+        "vi": "gầy",
+        "col": "very thin",
+        "ex": "He was very thin after he was ill.",
+        "exv": "Anh ấy rất gầy sau khi bị ốm."
+      },
+      {
+        "w": "fat",
+        "ipa": "/fæt/",
+        "vi": "béo",
+        "col": "a fat man",
+        "ex": "The fat man sits near the door.",
+        "exv": "Người đàn ông béo ngồi gần cửa."
+      },
+      {
+        "w": "overweight",
+        "ipa": "/ˌəʊvəˈweɪt/",
+        "vi": "thừa cân",
+        "col": "be overweight",
+        "ex": "The doctor says I am overweight.",
+        "exv": "Bác sĩ nói tôi bị thừa cân."
+      },
+      {
+        "w": "weigh",
+        "ipa": "/weɪ/",
+        "vi": "cân nặng",
+        "col": "weigh 60 kilos",
+        "ex": "I weigh 60 kilos this year.",
+        "exv": "Năm nay tôi nặng 60 ki-lô-gam."
+      },
+      {
+        "w": "dark hair",
+        "ipa": "/dɑːk heə/",
+        "vi": "tóc đen, tóc sẫm màu",
+        "col": "have dark hair",
+        "ex": "My friend has dark hair and brown eyes.",
+        "exv": "Bạn tôi có tóc đen và mắt nâu."
+      },
+      {
+        "w": "fair hair",
+        "ipa": "/feə heə/",
+        "vi": "tóc vàng nhạt",
+        "col": "have fair hair",
+        "ex": "The little girl has fair hair.",
+        "exv": "Bé gái có mái tóc vàng nhạt."
+      },
+      {
+        "w": "blonde",
+        "ipa": "/blɒnd/",
+        "vi": "tóc vàng",
+        "col": "blonde hair",
+        "ex": "She has blonde hair and blue eyes.",
+        "exv": "Cô ấy có tóc vàng và mắt xanh."
+      },
+      {
+        "w": "beard",
+        "ipa": "/bɪəd/",
+        "vi": "râu",
+        "col": "have a beard",
+        "ex": "My uncle has a beard and short hair.",
+        "exv": "Chú tôi có râu và tóc ngắn."
+      },
+      {
+        "w": "moustache",
+        "ipa": "/məˈstɑːʃ/",
+        "vi": "ria mép",
+        "col": "have a moustache",
+        "ex": "Grandpa has a moustache and grey hair.",
+        "exv": "Ông có ria mép và tóc bạc."
+      },
+      {
+        "w": "long hair",
+        "ipa": "/lɒŋ heə/",
+        "vi": "tóc dài",
+        "col": "have long hair",
+        "ex": "My sister has long hair and brown eyes.",
+        "exv": "Chị tôi có tóc dài và mắt nâu."
+      },
+      {
+        "w": "short hair",
+        "ipa": "/ʃɔːt heə/",
+        "vi": "tóc ngắn",
+        "col": "have short hair",
+        "ex": "He has short hair and green eyes.",
+        "exv": "Anh ấy có tóc ngắn và mắt xanh lá."
+      },
+      {
+        "w": "dark skin",
+        "ipa": "/dɑːk skɪn/",
+        "vi": "da sẫm màu",
+        "col": "have dark skin",
+        "ex": "She has dark skin and dark hair.",
+        "exv": "Cô ấy có da sẫm màu và tóc đen."
+      },
+      {
+        "w": "fair skin",
+        "ipa": "/feə skɪn/",
+        "vi": "da trắng, da sáng màu",
+        "col": "have fair skin",
+        "ex": "He has fair skin and blonde hair.",
+        "exv": "Anh ấy có da sáng màu và tóc vàng."
+      },
+      {
+        "w": "blue eyes",
+        "ipa": "/bluː aɪz/",
+        "vi": "mắt xanh dương",
+        "col": "have blue eyes",
+        "ex": "The baby has blue eyes and fair hair.",
+        "exv": "Em bé có mắt xanh dương và tóc vàng nhạt."
+      },
+      {
+        "w": "old",
+        "ipa": "/əʊld/",
+        "vi": "già",
+        "col": "very old",
+        "ex": "My grandmother is very old now.",
+        "exv": "Bà tôi bây giờ đã rất già."
+      },
+      {
+        "w": "young",
+        "ipa": "/jʌŋ/",
+        "vi": "trẻ",
+        "col": "very young",
+        "ex": "My sister is young and full of energy.",
+        "exv": "Em gái tôi còn trẻ và đầy năng lượng."
+      },
+      {
+        "w": "middle-aged",
+        "ipa": "/ˌmɪdlˈeɪdʒd/",
+        "vi": "trung niên",
+        "col": "middle-aged people",
+        "ex": "My father is middle-aged and kind.",
+        "exv": "Bố tôi đã trung niên và rất tốt bụng."
+      },
+      {
+        "w": "elderly",
+        "ipa": "/ˈeldəli/",
+        "vi": "cao tuổi",
+        "col": "elderly people",
+        "ex": "This house is for elderly people.",
+        "exv": "Ngôi nhà này dành cho người cao tuổi."
+      },
+      {
+        "w": "pretty",
+        "ipa": "/ˈprɪti/",
+        "vi": "xinh xắn",
+        "col": "quite pretty",
+        "ex": "My sister is quite pretty and kind.",
+        "exv": "Chị tôi khá xinh xắn và tốt bụng."
+      },
+      {
+        "w": "beautiful",
+        "ipa": "/ˈbjuːtɪfəl/",
+        "vi": "đẹp",
+        "col": "a beautiful girl",
+        "ex": "She is a very beautiful girl.",
+        "exv": "Cô ấy là một cô gái rất đẹp."
+      },
+      {
+        "w": "handsome",
+        "ipa": "/ˈhænsəm/",
+        "vi": "đẹp trai",
+        "col": "a handsome man",
+        "ex": "He is a very handsome man.",
+        "exv": "Anh ấy là một người đàn ông rất đẹp trai."
+      },
+      {
+        "w": "ugly",
+        "ipa": "/ˈʌɡli/",
+        "vi": "xấu xí",
+        "col": "rather ugly",
+        "ex": "The old house looks rather ugly.",
+        "exv": "Ngôi nhà cũ trông khá xấu xí."
+      },
+      {
+        "w": "ordinary-looking",
+        "ipa": "/ˈɔːdnri ˈlʊkɪŋ/",
+        "vi": "có vẻ ngoài bình thường",
+        "col": "ordinary-looking",
+        "ex": "I am not tall or short, I am ordinary-looking.",
+        "exv": "Tôi không cao cũng không thấp, tôi có vẻ ngoài bình thường."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'cao' khi nói về người?",
+        "o": [
+          "tall",
+          "high",
+          "long"
+        ],
+        "a": 0,
+        "why": "tall dùng cho người cao; high dùng cho vật cao; long dùng cho vật dài."
+      },
+      {
+        "q": "Điền từ đúng vào câu: She has ___ hair and blue eyes.",
+        "o": [
+          "blonde",
+          "fat",
+          "old"
+        ],
+        "a": 0,
+        "why": "blonde = tóc vàng, hợp với blue eyes; fat nói về cân nặng, old nói về tuổi."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "slim",
+          "thin",
+          "fat",
+          "beard"
+        ],
+        "a": 3,
+        "why": "slim, thin và fat đều nói về cân nặng; beard là râu, thuộc về khuôn mặt."
+      },
+      {
+        "q": "Chọn câu hỏi đúng để hỏi về chiều cao của một người.",
+        "o": [
+          "How tall is she?",
+          "How high is she?",
+          "How long is she?"
+        ],
+        "a": 0,
+        "why": "Hỏi chiều cao của người dùng How tall; How high và How long không dùng cho người."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'trung niên'?",
+        "o": [
+          "middle-aged",
+          "elderly",
+          "young"
+        ],
+        "a": 0,
+        "why": "middle-aged = trung niên; elderly = cao tuổi; young = trẻ."
+      },
+      {
+        "q": "Từ nào thường chỉ dùng để khen đàn ông đẹp trai?",
+        "o": [
+          "handsome",
+          "pretty",
+          "beautiful"
+        ],
+        "a": 0,
+        "why": "handsome thường dùng cho đàn ông; pretty thường dùng cho phụ nữ; beautiful dùng chung nhưng không chuyên cho đàn ông."
+      }
+    ]
+  },
+  {
+    "n": 33,
+    "group": "Con người",
+    "title": "Health and illness",
+    "titleVi": "Sức khỏe và bệnh tật",
+    "words": [
+      {
+        "w": "well",
+        "ipa": "/wel/",
+        "vi": "khỏe",
+        "col": "very well",
+        "ex": "I am very well today, thanks.",
+        "exv": "Hôm nay tôi rất khỏe, cảm ơn bạn."
+      },
+      {
+        "w": "fine",
+        "ipa": "/faɪn/",
+        "vi": "khỏe, ổn",
+        "col": "feel fine",
+        "ex": "I feel fine after a good sleep.",
+        "exv": "Tôi thấy khỏe sau một giấc ngủ ngon."
+      },
+      {
+        "w": "feel ill",
+        "ipa": "/fiːl ɪl/",
+        "vi": "cảm thấy ốm",
+        "col": "feel ill",
+        "ex": "I feel ill, so I stay at home.",
+        "exv": "Tôi cảm thấy ốm nên tôi ở nhà."
+      },
+      {
+        "w": "be sick",
+        "ipa": "/biː sɪk/",
+        "vi": "bị nôn, ốm",
+        "col": "be going to be sick",
+        "ex": "I think I am going to be sick.",
+        "exv": "Tôi nghĩ tôi sắp bị nôn."
+      },
+      {
+        "w": "aspirin",
+        "ipa": "/ˈæsprɪn/",
+        "vi": "thuốc aspirin",
+        "col": "take an aspirin",
+        "ex": "I take an aspirin when my head hurts.",
+        "exv": "Tôi uống một viên aspirin khi đầu tôi đau."
+      },
+      {
+        "w": "headache",
+        "ipa": "/ˈhedeɪk/",
+        "vi": "đau đầu",
+        "col": "have a headache",
+        "ex": "I have a headache, so I rest at home.",
+        "exv": "Tôi bị đau đầu nên tôi nghỉ ở nhà."
+      },
+      {
+        "w": "toothache",
+        "ipa": "/ˈtuːθeɪk/",
+        "vi": "đau răng",
+        "col": "have toothache",
+        "ex": "I have toothache and need to see a dentist.",
+        "exv": "Tôi bị đau răng và cần gặp nha sĩ."
+      },
+      {
+        "w": "dentist",
+        "ipa": "/ˈdentɪst/",
+        "vi": "nha sĩ",
+        "col": "go to the dentist",
+        "ex": "I go to the dentist twice a year.",
+        "exv": "Tôi đi gặp nha sĩ hai lần một năm."
+      },
+      {
+        "w": "cold",
+        "ipa": "/kəʊld/",
+        "vi": "cảm lạnh",
+        "col": "have a cold",
+        "ex": "I have a cold and a red nose.",
+        "exv": "Tôi bị cảm lạnh và mũi đỏ."
+      },
+      {
+        "w": "hay fever",
+        "ipa": "/ˈheɪ ˌfiːvə/",
+        "vi": "dị ứng phấn hoa",
+        "col": "have hay fever",
+        "ex": "I have hay fever in summer.",
+        "exv": "Tôi bị dị ứng phấn hoa vào mùa hè."
+      },
+      {
+        "w": "sneeze",
+        "ipa": "/sniːz/",
+        "vi": "hắt hơi",
+        "col": "sneeze all day",
+        "ex": "I sneeze all day when flowers are near.",
+        "exv": "Tôi hắt hơi cả ngày khi có hoa ở gần."
+      },
+      {
+        "w": "asthma",
+        "ipa": "/ˈæsmə/",
+        "vi": "bệnh hen suyễn",
+        "col": "have asthma",
+        "ex": "My brother has asthma and needs medicine.",
+        "exv": "Em trai tôi bị hen suyễn và cần thuốc."
+      },
+      {
+        "w": "breathe",
+        "ipa": "/briːð/",
+        "vi": "thở",
+        "col": "cannot breathe",
+        "ex": "He cannot breathe well when he runs fast.",
+        "exv": "Anh ấy không thở tốt khi chạy nhanh."
+      },
+      {
+        "w": "mosquito",
+        "ipa": "/məˈskiːtəʊ/",
+        "vi": "muỗi",
+        "col": "a mosquito bite",
+        "ex": "A mosquito bite makes my arm itch.",
+        "exv": "Một vết muỗi đốt làm tay tôi ngứa."
+      },
+      {
+        "w": "malaria",
+        "ipa": "/məˈleəriə/",
+        "vi": "bệnh sốt rét",
+        "col": "get malaria",
+        "ex": "People can get malaria from mosquitoes.",
+        "exv": "Mọi người có thể bị sốt rét do muỗi."
+      },
+      {
+        "w": "cholera",
+        "ipa": "/ˈkɒlərə/",
+        "vi": "bệnh tả",
+        "col": "have cholera",
+        "ex": "Bad water can give children cholera.",
+        "exv": "Nước bẩn có thể làm trẻ em bị bệnh tả."
+      },
+      {
+        "w": "heart attack",
+        "ipa": "/ˈhɑːt əˌtæk/",
+        "vi": "cơn đau tim",
+        "col": "have a heart attack",
+        "ex": "My uncle had a heart attack last year.",
+        "exv": "Chú tôi bị đau tim năm ngoái."
+      },
+      {
+        "w": "hospital",
+        "ipa": "/ˈhɒspɪtl/",
+        "vi": "bệnh viện",
+        "col": "in hospital",
+        "ex": "He is in hospital for two days.",
+        "exv": "Anh ấy nằm viện hai ngày."
+      },
+      {
+        "w": "cancer",
+        "ipa": "/ˈkænsə/",
+        "vi": "bệnh ung thư",
+        "col": "have cancer",
+        "ex": "Smoking can cause cancer in the lungs.",
+        "exv": "Hút thuốc có thể gây ung thư phổi."
+      },
+      {
+        "w": "diet",
+        "ipa": "/ˈdaɪət/",
+        "vi": "chế độ ăn",
+        "col": "a good diet",
+        "ex": "A good diet has lots of fruit and vegetables.",
+        "exv": "Một chế độ ăn tốt có nhiều trái cây và rau."
+      },
+      {
+        "w": "exercise",
+        "ipa": "/ˈeksəsaɪz/",
+        "vi": "tập thể dục",
+        "col": "get some exercise",
+        "ex": "Swimming is good exercise for me.",
+        "exv": "Bơi lội là bài tập tốt cho tôi."
+      },
+      {
+        "w": "stress",
+        "ipa": "/stres/",
+        "vi": "căng thẳng",
+        "col": "too much stress",
+        "ex": "I have too much stress at work.",
+        "exv": "Tôi bị căng thẳng quá nhiều ở chỗ làm."
+      },
+      {
+        "w": "relax",
+        "ipa": "/rɪˈlæks/",
+        "vi": "thư giãn",
+        "col": "relax after work",
+        "ex": "I relax after work with a walk.",
+        "exv": "Tôi thư giãn sau giờ làm bằng một buổi đi dạo."
+      },
+      {
+        "w": "panic",
+        "ipa": "/ˈpænɪk/",
+        "vi": "hoảng sợ",
+        "col": "do not panic",
+        "ex": "Do not panic, just breathe slowly.",
+        "exv": "Đừng hoảng sợ, hãy thở chậm lại."
+      },
+      {
+        "w": "keep fit",
+        "ipa": "/kiːp fɪt/",
+        "vi": "giữ sức khỏe",
+        "col": "keep fit",
+        "ex": "I walk every day to keep fit.",
+        "exv": "Tôi đi bộ mỗi ngày để giữ sức khỏe."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'đau đầu'?",
+        "o": [
+          "headache",
+          "toothache",
+          "cold"
+        ],
+        "a": 0,
+        "why": "headache = đau đầu; toothache = đau răng; cold = cảm lạnh."
+      },
+      {
+        "q": "Điền từ đúng vào câu: I have toothache. I need to go to the ___.",
+        "o": [
+          "dentist",
+          "teacher",
+          "driver"
+        ],
+        "a": 0,
+        "why": "Đau răng thì gặp dentist (nha sĩ); teacher là giáo viên, driver là tài xế."
+      },
+      {
+        "q": "Bệnh nào do muỗi gây ra?",
+        "o": [
+          "malaria",
+          "cholera",
+          "hay fever"
+        ],
+        "a": 0,
+        "why": "malaria (sốt rét) do muỗi truyền; cholera do nước bẩn; hay fever do phấn hoa."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "headache",
+          "toothache",
+          "cold",
+          "relax"
+        ],
+        "a": 3,
+        "why": "headache, toothache và cold đều là bệnh; relax là thư giãn, cách giữ sức khỏe."
+      },
+      {
+        "q": "Chọn câu đúng với nghĩa của 'keep fit'.",
+        "o": [
+          "I walk every day to keep fit.",
+          "I eat too much to keep fit.",
+          "I never sleep to keep fit."
+        ],
+        "a": 0,
+        "why": "keep fit = giữ sức khỏe, đi bộ mỗi ngày giúp giữ sức khỏe; ăn quá nhiều và không ngủ thì không tốt cho sức khỏe."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'hắt hơi'?",
+        "o": [
+          "sneeze",
+          "breathe",
+          "panic"
+        ],
+        "a": 0,
+        "why": "sneeze = hắt hơi; breathe = thở; panic = hoảng sợ."
+      }
+    ]
+  },
+  {
+    "n": 34,
+    "group": "Con người",
+    "title": "Feelings",
+    "titleVi": "Cảm xúc",
+    "words": [
+      {
+        "w": "love",
+        "ipa": "/lʌv/",
+        "vi": "yêu",
+        "col": "love my family",
+        "ex": "I love my mum and my little sister a lot.",
+        "exv": "Tôi rất yêu mẹ và em gái nhỏ của tôi."
+      },
+      {
+        "w": "like",
+        "ipa": "/laɪk/",
+        "vi": "thích",
+        "col": "like my job",
+        "ex": "I like my job and my work friends.",
+        "exv": "Tôi thích công việc và các bạn đồng nghiệp của mình."
+      },
+      {
+        "w": "don't like",
+        "ipa": "/dəʊnt laɪk/",
+        "vi": "không thích",
+        "col": "don't like horror films",
+        "ex": "I don't like horror films at night.",
+        "exv": "Tôi không thích phim kinh dị vào ban đêm."
+      },
+      {
+        "w": "hate",
+        "ipa": "/heɪt/",
+        "vi": "ghét",
+        "col": "hate my boss",
+        "ex": "I hate cold rain on my way to work.",
+        "exv": "Tôi ghét mưa lạnh trên đường đi làm."
+      },
+      {
+        "w": "dislike",
+        "ipa": "/dɪsˈlaɪk/",
+        "vi": "không thích",
+        "col": "dislike horror films",
+        "ex": "I dislike loud music in the morning.",
+        "exv": "Tôi không thích nhạc ồn ào vào buổi sáng."
+      },
+      {
+        "w": "prefer",
+        "ipa": "/prɪˈfɜː/",
+        "vi": "thích hơn",
+        "col": "prefer coffee to tea",
+        "ex": "I prefer coffee to tea in the morning.",
+        "exv": "Tôi thích cà phê hơn trà vào buổi sáng."
+      },
+      {
+        "w": "want",
+        "ipa": "/wɒnt/",
+        "vi": "muốn",
+        "col": "want a new car",
+        "ex": "I want a new car for my family.",
+        "exv": "Tôi muốn một chiếc xe hơi mới cho gia đình."
+      },
+      {
+        "w": "hope",
+        "ipa": "/həʊp/",
+        "vi": "hi vọng",
+        "col": "hope to do well",
+        "ex": "I hope to pass my test on Friday.",
+        "exv": "Tôi hi vọng đậu bài kiểm tra vào thứ sáu."
+      },
+      {
+        "w": "sad",
+        "ipa": "/sæd/",
+        "vi": "buồn",
+        "col": "feel sad",
+        "ex": "I feel sad when my friend goes away.",
+        "exv": "Tôi cảm thấy buồn khi bạn tôi đi xa."
+      },
+      {
+        "w": "happy",
+        "ipa": "/ˈhæpi/",
+        "vi": "vui vẻ",
+        "col": "feel happy",
+        "ex": "I feel happy when I see my family.",
+        "exv": "Tôi cảm thấy vui khi gặp gia đình."
+      },
+      {
+        "w": "angry",
+        "ipa": "/ˈæŋɡri/",
+        "vi": "tức giận",
+        "col": "feel angry",
+        "ex": "I feel angry when people are late.",
+        "exv": "Tôi cảm thấy tức giận khi mọi người đến muộn."
+      },
+      {
+        "w": "surprised",
+        "ipa": "/səˈpraɪzd/",
+        "vi": "ngạc nhiên",
+        "col": "feel surprised",
+        "ex": "I feel surprised when I get a big gift.",
+        "exv": "Tôi cảm thấy ngạc nhiên khi nhận một món quà lớn."
+      },
+      {
+        "w": "upset",
+        "ipa": "/ʌpˈset/",
+        "vi": "buồn bực, khó chịu",
+        "col": "feel upset",
+        "ex": "I feel upset when my plan does not work.",
+        "exv": "Tôi cảm thấy buồn bực khi kế hoạch của tôi không thành."
+      },
+      {
+        "w": "tired",
+        "ipa": "/ˈtaɪəd/",
+        "vi": "mệt",
+        "col": "feel tired",
+        "ex": "I feel tired after a long day at work.",
+        "exv": "Tôi cảm thấy mệt sau một ngày dài làm việc."
+      },
+      {
+        "w": "thirsty",
+        "ipa": "/ˈθɜːsti/",
+        "vi": "khát nước",
+        "col": "feel thirsty",
+        "ex": "I feel thirsty after I play football.",
+        "exv": "Tôi cảm thấy khát nước sau khi chơi bóng đá."
+      },
+      {
+        "w": "hungry",
+        "ipa": "/ˈhʌŋɡri/",
+        "vi": "đói",
+        "col": "feel hungry",
+        "ex": "I feel hungry before lunch every day.",
+        "exv": "Tôi cảm thấy đói trước bữa trưa mỗi ngày."
+      },
+      {
+        "w": "well",
+        "ipa": "/wel/",
+        "vi": "khỏe",
+        "col": "feel well",
+        "ex": "I feel well after a good night sleep.",
+        "exv": "Tôi cảm thấy khỏe sau một đêm ngủ ngon."
+      },
+      {
+        "w": "ill",
+        "ipa": "/ɪl/",
+        "vi": "ốm",
+        "col": "feel ill",
+        "ex": "I feel ill, so I stay in bed.",
+        "exv": "Tôi cảm thấy ốm nên tôi nằm trên giường."
+      },
+      {
+        "w": "warm",
+        "ipa": "/wɔːm/",
+        "vi": "ấm",
+        "col": "feel warm",
+        "ex": "I feel warm in my new coat.",
+        "exv": "Tôi cảm thấy ấm trong chiếc áo khoác mới."
+      },
+      {
+        "w": "hot",
+        "ipa": "/hɒt/",
+        "vi": "nóng",
+        "col": "feel hot",
+        "ex": "I feel hot in the summer sun.",
+        "exv": "Tôi cảm thấy nóng dưới nắng mùa hè."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'ghét'?",
+        "o": [
+          "hate",
+          "love",
+          "like"
+        ],
+        "a": 0,
+        "why": "hate = ghét; love = yêu; like = thích."
+      },
+      {
+        "q": "Điền từ đúng vào câu: I feel ___ after I play football. I need water.",
+        "o": [
+          "thirsty",
+          "hungry",
+          "tired"
+        ],
+        "a": 0,
+        "why": "thirsty = khát nước, cần nước; hungry = đói, cần ăn; tired = mệt, cần nghỉ."
+      },
+      {
+        "q": "Chọn câu đúng với cấu trúc 'prefer ... to ...'.",
+        "o": [
+          "I prefer coffee to tea.",
+          "I prefer coffee than tea.",
+          "I prefer coffee and tea."
+        ],
+        "a": 0,
+        "why": "prefer dùng với to: prefer A to B; than và and không đúng cấu trúc này."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "happy",
+          "sad",
+          "angry",
+          "hope"
+        ],
+        "a": 3,
+        "why": "happy, sad và angry đều là cảm xúc; hope là hi vọng, một động từ mong muốn."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'ngạc nhiên'?",
+        "o": [
+          "surprised",
+          "upset",
+          "tired"
+        ],
+        "a": 0,
+        "why": "surprised = ngạc nhiên; upset = buồn bực; tired = mệt."
+      },
+      {
+        "q": "Điền từ đúng vào câu: I ___ to do well in my exam.",
+        "o": [
+          "hope",
+          "hate",
+          "prefer"
+        ],
+        "a": 0,
+        "why": "hope to do well = hi vọng làm tốt; hate và prefer không hợp nghĩa trong câu này."
+      }
+    ]
+  },
+  {
+    "n": 35,
+    "group": "Con người",
+    "title": "Greetings and other useful phrases",
+    "titleVi": "Chào hỏi và các câu hữu ích",
+    "words": [
+      {
+        "w": "good morning",
+        "ipa": "/ɡʊd ˈmɔːnɪŋ/",
+        "vi": "chào buổi sáng",
+        "col": "say good morning",
+        "ex": "I say good morning to my teacher every day.",
+        "exv": "Tôi chào buổi sáng cô giáo của tôi mỗi ngày."
+      },
+      {
+        "w": "good afternoon",
+        "ipa": "/ɡʊd ˌɑːftəˈnuːn/",
+        "vi": "chào buổi chiều",
+        "col": "say good afternoon",
+        "ex": "We say good afternoon when we meet at two.",
+        "exv": "Chúng tôi chào buổi chiều khi gặp nhau lúc hai giờ."
+      },
+      {
+        "w": "good evening",
+        "ipa": "/ɡʊd ˈiːvnɪŋ/",
+        "vi": "chào buổi tối",
+        "col": "say good evening",
+        "ex": "I say good evening to my neighbours at seven.",
+        "exv": "Tôi chào buổi tối hàng xóm của tôi lúc bảy giờ."
+      },
+      {
+        "w": "hello",
+        "ipa": "/həˈləʊ/",
+        "vi": "xin chào",
+        "col": "say hello",
+        "ex": "She says hello to her friends at school.",
+        "exv": "Cô ấy chào các bạn ở trường."
+      },
+      {
+        "w": "hi",
+        "ipa": "/haɪ/",
+        "vi": "chào (thân mật)",
+        "col": "say hi",
+        "ex": "I say hi to my friend on the phone.",
+        "exv": "Tôi chào bạn tôi qua điện thoại."
+      },
+      {
+        "w": "How are you?",
+        "ipa": "/haʊ ɑː juː/",
+        "vi": "Bạn khỏe không?",
+        "col": "ask How are you?",
+        "ex": "He asks How are you? when we meet.",
+        "exv": "Anh ấy hỏi bạn khỏe không khi chúng tôi gặp nhau."
+      },
+      {
+        "w": "Fine thanks",
+        "ipa": "/faɪn θæŋks/",
+        "vi": "Tôi khỏe, cảm ơn",
+        "col": "Fine thanks. And you?",
+        "ex": "I say Fine thanks when friends ask me.",
+        "exv": "Tôi nói tôi khỏe, cảm ơn khi bạn bè hỏi tôi."
+      },
+      {
+        "w": "Not too bad",
+        "ipa": "/nɒt tuː bæd/",
+        "vi": "Cũng không tệ lắm",
+        "col": "Not too bad, thanks.",
+        "ex": "I say Not too bad when I feel okay.",
+        "exv": "Tôi nói cũng không tệ lắm khi tôi thấy ổn."
+      },
+      {
+        "w": "Goodbye",
+        "ipa": "/ɡʊdˈbaɪ/",
+        "vi": "tạm biệt",
+        "col": "say goodbye",
+        "ex": "We say goodbye at the end of the lesson.",
+        "exv": "Chúng tôi tạm biệt nhau khi kết thúc buổi học."
+      },
+      {
+        "w": "See you soon",
+        "ipa": "/siː juː suːn/",
+        "vi": "Hẹn gặp lại sớm",
+        "col": "say See you soon",
+        "ex": "I say See you soon to my friend at the door.",
+        "exv": "Tôi nói hẹn gặp lại sớm với bạn tôi ở cửa."
+      },
+      {
+        "w": "Goodnight",
+        "ipa": "/ɡʊdˈnaɪt/",
+        "vi": "chúc ngủ ngon",
+        "col": "say goodnight",
+        "ex": "Mum says goodnight to me at ten.",
+        "exv": "Mẹ chúc tôi ngủ ngon lúc mười giờ."
+      },
+      {
+        "w": "Sleep well",
+        "ipa": "/sliːp wel/",
+        "vi": "Ngủ ngon nhé",
+        "col": "say Sleep well",
+        "ex": "Dad says Sleep well before I close my eyes.",
+        "exv": "Bố nói ngủ ngon nhé trước khi tôi nhắm mắt."
+      },
+      {
+        "w": "Please",
+        "ipa": "/pliːz/",
+        "vi": "làm ơn",
+        "col": "say please",
+        "ex": "I say please when I ask for a glass of water.",
+        "exv": "Tôi nói làm ơn khi xin một cốc nước."
+      },
+      {
+        "w": "Thank you",
+        "ipa": "/θæŋk juː/",
+        "vi": "cảm ơn bạn",
+        "col": "say thank you",
+        "ex": "I say thank you when someone helps me.",
+        "exv": "Tôi nói cảm ơn khi ai đó giúp tôi."
+      },
+      {
+        "w": "Cheers",
+        "ipa": "/tʃɪəz/",
+        "vi": "cạn ly, cảm ơn (thân mật)",
+        "col": "say Cheers",
+        "ex": "We say Cheers when we drink tea together.",
+        "exv": "Chúng tôi nói cạn ly khi cùng uống trà."
+      },
+      {
+        "w": "Excuse me",
+        "ipa": "/ɪkˈskjuːz miː/",
+        "vi": "xin lỗi (khi muốn hỏi)",
+        "col": "say Excuse me",
+        "ex": "I say Excuse me when I ask the way.",
+        "exv": "Tôi nói xin lỗi khi hỏi đường."
+      },
+      {
+        "w": "Sorry",
+        "ipa": "/ˈsɒri/",
+        "vi": "xin lỗi",
+        "col": "say Sorry",
+        "ex": "I say Sorry when I am late for class.",
+        "exv": "Tôi nói xin lỗi khi tôi đến lớp muộn."
+      },
+      {
+        "w": "Bless you",
+        "ipa": "/bles juː/",
+        "vi": "Chúc bạn khỏe (khi ai hắt hơi)",
+        "col": "say Bless you",
+        "ex": "I say Bless you when my friend sneezes.",
+        "exv": "Tôi nói chúc bạn khỏe khi bạn tôi hắt hơi."
+      },
+      {
+        "w": "Happy Birthday",
+        "ipa": "/ˈhæpi ˈbɜːθdeɪ/",
+        "vi": "Chúc mừng sinh nhật",
+        "col": "say Happy Birthday",
+        "ex": "We say Happy Birthday to Mum on her birthday.",
+        "exv": "Chúng tôi chúc mừng sinh nhật mẹ vào ngày sinh nhật của mẹ."
+      },
+      {
+        "w": "Happy Christmas",
+        "ipa": "/ˈhæpi ˈkrɪsməs/",
+        "vi": "Chúc Giáng sinh vui vẻ",
+        "col": "say Happy Christmas",
+        "ex": "We say Happy Christmas to our friends in December.",
+        "exv": "Chúng tôi chúc Giáng sinh vui vẻ tới bạn bè vào tháng mười hai."
+      },
+      {
+        "w": "Merry Christmas",
+        "ipa": "/ˈmeri ˈkrɪsməs/",
+        "vi": "Chúc Giáng sinh an lành",
+        "col": "say Merry Christmas",
+        "ex": "We say Merry Christmas to our family at home.",
+        "exv": "Chúng tôi chúc Giáng sinh an lành tới gia đình ở nhà."
+      },
+      {
+        "w": "Happy New Year",
+        "ipa": "/ˈhæpi njuː jɪə/",
+        "vi": "Chúc mừng năm mới",
+        "col": "say Happy New Year",
+        "ex": "We say Happy New Year on the first of January.",
+        "exv": "Chúng tôi chúc mừng năm mới vào ngày một tháng một."
+      },
+      {
+        "w": "Good luck",
+        "ipa": "/ɡʊd lʌk/",
+        "vi": "Chúc may mắn",
+        "col": "say Good luck",
+        "ex": "I say Good luck to my friend before her exam.",
+        "exv": "Tôi chúc may mắn bạn tôi trước kỳ thi của bạn ấy."
+      },
+      {
+        "w": "Congratulations",
+        "ipa": "/kənˌɡrætʃəˈleɪʃənz/",
+        "vi": "Chúc mừng",
+        "col": "say Congratulations",
+        "ex": "I say Congratulations when my friend gets a new job.",
+        "exv": "Tôi nói chúc mừng khi bạn tôi có công việc mới."
+      },
+      {
+        "w": "Well done",
+        "ipa": "/wel dʌn/",
+        "vi": "Làm tốt lắm",
+        "col": "say Well done",
+        "ex": "The teacher says Well done when I finish my work.",
+        "exv": "Cô giáo nói làm tốt lắm khi tôi hoàn thành bài làm."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Bạn nói gì khi gặp bạn vào buổi sáng?",
+        "o": [
+          "good morning",
+          "goodnight",
+          "goodbye"
+        ],
+        "a": 0,
+        "why": "good morning dùng để chào buổi sáng; goodnight dùng khi đi ngủ; goodbye dùng khi tạm biệt."
+      },
+      {
+        "q": "Điền cụm đúng vào câu: A: How are you? B: ___. And you?",
+        "o": [
+          "Fine thanks",
+          "Good luck",
+          "Happy Birthday"
+        ],
+        "a": 0,
+        "why": "Fine thanks là câu trả lời cho How are you?; Good luck chúc may mắn; Happy Birthday chúc sinh nhật."
+      },
+      {
+        "q": "Bạn nói gì khi ai đó hắt hơi?",
+        "o": [
+          "Bless you",
+          "Cheers",
+          "Sorry"
+        ],
+        "a": 0,
+        "why": "Bless you nói khi ai đó hắt hơi; Cheers dùng khi cạn ly; Sorry dùng khi xin lỗi."
+      },
+      {
+        "q": "Câu nào đúng để chúc ai đó trước kỳ thi khó?",
+        "o": [
+          "Good luck!",
+          "Happy Birthday!",
+          "Goodnight!"
+        ],
+        "a": 0,
+        "why": "Good luck chúc may mắn trước việc khó; Happy Birthday chúc sinh nhật; Goodnight chúc ngủ ngon."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "hello",
+          "hi",
+          "good morning",
+          "thank you"
+        ],
+        "a": 3,
+        "why": "hello, hi và good morning đều là lời chào khi gặp nhau; thank you là lời cảm ơn."
+      },
+      {
+        "q": "Bạn nói gì khi bạn của bạn vừa làm tốt trong kỳ thi?",
+        "o": [
+          "Congratulations!",
+          "Good luck!",
+          "Excuse me!"
+        ],
+        "a": 0,
+        "why": "Congratulations chúc mừng khi ai đó làm tốt việc gì; Good luck chúc trước khi làm; Excuse me dùng khi muốn hỏi."
+      }
+    ]
+  },
+  {
+    "n": 36,
+    "group": "Thế giới",
+    "title": "Countries, languages and people",
+    "titleVi": "Các nước, ngôn ngữ và con người",
+    "words": [
+      {
+        "w": "Africa",
+        "ipa": "/ˈæfrɪkə/",
+        "vi": "châu Phi",
+        "col": "in Africa",
+        "ex": "Many wild animals live in Africa.",
+        "exv": "Nhiều động vật hoang dã sống ở châu Phi."
+      },
+      {
+        "w": "Asia",
+        "ipa": "/ˈeɪʃə/",
+        "vi": "châu Á",
+        "col": "in Asia",
+        "ex": "My friend comes from Asia.",
+        "exv": "Bạn tôi đến từ châu Á."
+      },
+      {
+        "w": "Europe",
+        "ipa": "/ˈjʊərəp/",
+        "vi": "châu Âu",
+        "col": "in Europe",
+        "ex": "We want to travel in Europe next year.",
+        "exv": "Chúng tôi muốn đi du lịch ở châu Âu vào năm sau."
+      },
+      {
+        "w": "North America",
+        "ipa": "/nɔːθ əˈmerɪkə/",
+        "vi": "Bắc Mỹ",
+        "col": "in North America",
+        "ex": "Canada is in North America.",
+        "exv": "Canada ở Bắc Mỹ."
+      },
+      {
+        "w": "South America",
+        "ipa": "/saʊθ əˈmerɪkə/",
+        "vi": "Nam Mỹ",
+        "col": "in South America",
+        "ex": "Brazil is a big country in South America.",
+        "exv": "Bra-xin là một nước lớn ở Nam Mỹ."
+      },
+      {
+        "w": "Australia",
+        "ipa": "/ɒˈstreɪliə/",
+        "vi": "châu Úc; nước Úc",
+        "col": "in Australia",
+        "ex": "My cousin lives in Australia now.",
+        "exv": "Em họ tôi hiện sống ở Úc."
+      },
+      {
+        "w": "Antarctica",
+        "ipa": "/ænˈtɑːktɪkə/",
+        "vi": "châu Nam Cực",
+        "col": "in Antarctica",
+        "ex": "It is very cold in Antarctica.",
+        "exv": "Ở châu Nam Cực rất lạnh."
+      },
+      {
+        "w": "New Zealand",
+        "ipa": "/njuː ˈziːlənd/",
+        "vi": "Niu Di-lân",
+        "col": "from New Zealand",
+        "ex": "She is from New Zealand.",
+        "exv": "Cô ấy đến từ Niu Di-lân."
+      },
+      {
+        "w": "China",
+        "ipa": "/ˈtʃaɪnə/",
+        "vi": "Trung Quốc",
+        "col": "in China",
+        "ex": "He works in China this year.",
+        "exv": "Anh ấy làm việc ở Trung Quốc trong năm nay."
+      },
+      {
+        "w": "Japan",
+        "ipa": "/dʒəˈpæn/",
+        "vi": "Nhật Bản",
+        "col": "in Japan",
+        "ex": "I want to visit Japan one day.",
+        "exv": "Tôi muốn đến thăm Nhật Bản một ngày nào đó."
+      },
+      {
+        "w": "France",
+        "ipa": "/frɑːns/",
+        "vi": "nước Pháp",
+        "col": "in France",
+        "ex": "They live in France with their children.",
+        "exv": "Họ sống ở Pháp cùng các con."
+      },
+      {
+        "w": "Germany",
+        "ipa": "/ˈdʒɜːməni/",
+        "vi": "nước Đức",
+        "col": "in Germany",
+        "ex": "My teacher studied in Germany.",
+        "exv": "Thầy giáo của tôi đã học ở Đức."
+      },
+      {
+        "w": "Spain",
+        "ipa": "/speɪn/",
+        "vi": "Tây Ban Nha",
+        "col": "in Spain",
+        "ex": "It is warm in Spain in summer.",
+        "exv": "Ở Tây Ban Nha trời ấm vào mùa hè."
+      },
+      {
+        "w": "Italy",
+        "ipa": "/ˈɪtəli/",
+        "vi": "nước Ý",
+        "col": "in Italy",
+        "ex": "We eat good food in Italy.",
+        "exv": "Chúng tôi ăn món ngon ở Ý."
+      },
+      {
+        "w": "Brazil",
+        "ipa": "/brəˈzɪl/",
+        "vi": "Bra-xin",
+        "col": "in Brazil",
+        "ex": "Football is very popular in Brazil.",
+        "exv": "Bóng đá rất được yêu thích ở Bra-xin."
+      },
+      {
+        "w": "Vietnamese",
+        "ipa": "/vjetnəˈmiːz/",
+        "vi": "tiếng Việt; người Việt",
+        "col": "speak Vietnamese",
+        "ex": "I speak Vietnamese at home.",
+        "exv": "Tôi nói tiếng Việt ở nhà."
+      },
+      {
+        "w": "English",
+        "ipa": "/ˈɪŋɡlɪʃ/",
+        "vi": "tiếng Anh; người Anh",
+        "col": "speak English",
+        "ex": "We speak English in class every day.",
+        "exv": "Chúng tôi nói tiếng Anh trong lớp mỗi ngày."
+      },
+      {
+        "w": "French",
+        "ipa": "/frentʃ/",
+        "vi": "tiếng Pháp; người Pháp",
+        "col": "speak French",
+        "ex": "Her mother speaks French very well.",
+        "exv": "Mẹ cô ấy nói tiếng Pháp rất giỏi."
+      },
+      {
+        "w": "Chinese",
+        "ipa": "/tʃaɪˈniːz/",
+        "vi": "tiếng Trung; người Trung Quốc",
+        "col": "speak Chinese",
+        "ex": "My friend can speak Chinese a little.",
+        "exv": "Bạn tôi có thể nói tiếng Trung một chút."
+      },
+      {
+        "w": "Japanese",
+        "ipa": "/dʒæpəˈniːz/",
+        "vi": "tiếng Nhật; người Nhật",
+        "col": "speak Japanese",
+        "ex": "He wants to speak Japanese at work.",
+        "exv": "Anh ấy muốn nói tiếng Nhật ở chỗ làm."
+      },
+      {
+        "w": "Spanish",
+        "ipa": "/ˈspænɪʃ/",
+        "vi": "tiếng Tây Ban Nha; người Tây Ban Nha",
+        "col": "speak Spanish",
+        "ex": "They speak Spanish in Spain.",
+        "exv": "Họ nói tiếng Tây Ban Nha ở Tây Ban Nha."
+      },
+      {
+        "w": "German",
+        "ipa": "/ˈdʒɜːmən/",
+        "vi": "tiếng Đức; người Đức",
+        "col": "speak German",
+        "ex": "Can you speak German with me?",
+        "exv": "Bạn có thể nói tiếng Đức với tôi không?"
+      },
+      {
+        "w": "British",
+        "ipa": "/ˈbrɪtɪʃ/",
+        "vi": "người Anh (Anh quốc)",
+        "col": "British people",
+        "ex": "Many British people drink tea in the morning.",
+        "exv": "Nhiều người Anh uống trà vào buổi sáng."
+      },
+      {
+        "w": "American",
+        "ipa": "/əˈmerɪkən/",
+        "vi": "người Mỹ",
+        "col": "American people",
+        "ex": "My new friend is American.",
+        "exv": "Bạn mới của tôi là người Mỹ."
+      },
+      {
+        "w": "Arabic",
+        "ipa": "/ˈærəbɪk/",
+        "vi": "tiếng Ả Rập",
+        "col": "speak Arabic",
+        "ex": "People in Egypt speak Arabic.",
+        "exv": "Người dân ở Ai Cập nói tiếng Ả Rập."
+      },
+      {
+        "w": "Russian",
+        "ipa": "/ˈrʌʃən/",
+        "vi": "tiếng Nga; người Nga",
+        "col": "speak Russian",
+        "ex": "She learns Russian at school.",
+        "exv": "Cô ấy học tiếng Nga ở trường."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'châu Á'?",
+        "o": [
+          "Asia",
+          "Africa",
+          "Europe"
+        ],
+        "a": 0,
+        "why": "Asia = châu Á; Africa = châu Phi; Europe = châu Âu."
+      },
+      {
+        "q": "Điền từ đúng vào câu: She is from ___. She speaks Japanese.",
+        "o": [
+          "Japan",
+          "France",
+          "Brazil"
+        ],
+        "a": 0,
+        "why": "Người nói tiếng Nhật thường đến từ Nhật Bản (Japan); France là Pháp, Brazil là Bra-xin."
+      },
+      {
+        "q": "Từ nào là tên một ngôn ngữ?",
+        "o": [
+          "Spanish",
+          "Spain",
+          "Italy"
+        ],
+        "a": 0,
+        "why": "Spanish là tiếng Tây Ban Nha; Spain là nước Tây Ban Nha, Italy là nước Ý."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "French",
+          "Africa",
+          "Asia",
+          "Europe"
+        ],
+        "a": 0,
+        "why": "French là tên ngôn ngữ và người Pháp; Africa, Asia, Europe đều là tên châu lục."
+      },
+      {
+        "q": "Điền từ đúng vào câu: People in France speak ___.",
+        "o": [
+          "French",
+          "German",
+          "Chinese"
+        ],
+        "a": 0,
+        "why": "Ở Pháp người ta nói tiếng Pháp (French); German là tiếng Đức, Chinese là tiếng Trung."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'người Mỹ'?",
+        "o": [
+          "American",
+          "British",
+          "Russian"
+        ],
+        "a": 0,
+        "why": "American = người Mỹ; British = người Anh; Russian = người Nga."
+      }
+    ]
+  },
+  {
+    "n": 37,
+    "group": "Thế giới",
+    "title": "Weather",
+    "titleVi": "Thời tiết",
+    "words": [
+      {
+        "w": "sun",
+        "ipa": "/sʌn/",
+        "vi": "mặt trời",
+        "col": "the sun is shining",
+        "ex": "The sun is warm on my face today.",
+        "exv": "Hôm nay nắng ấm chiếu lên mặt tôi."
+      },
+      {
+        "w": "rain",
+        "ipa": "/reɪn/",
+        "vi": "mưa",
+        "col": "heavy rain",
+        "ex": "Take a coat because there is rain tonight.",
+        "exv": "Hãy mang theo áo khoác vì tối nay có mưa."
+      },
+      {
+        "w": "wind",
+        "ipa": "/wɪnd/",
+        "vi": "gió",
+        "col": "a strong wind",
+        "ex": "The wind is strong near the sea.",
+        "exv": "Gió mạnh gần biển."
+      },
+      {
+        "w": "cloud",
+        "ipa": "/klaʊd/",
+        "vi": "mây",
+        "col": "a white cloud",
+        "ex": "I see a big white cloud in the sky.",
+        "exv": "Tôi thấy một đám mây trắng lớn trên bầu trời."
+      },
+      {
+        "w": "snow",
+        "ipa": "/snəʊ/",
+        "vi": "tuyết",
+        "col": "in the snow",
+        "ex": "Children play in the snow in winter.",
+        "exv": "Trẻ em chơi trong tuyết vào mùa đông."
+      },
+      {
+        "w": "fog",
+        "ipa": "/fɒɡ/",
+        "vi": "sương mù",
+        "col": "thick fog",
+        "ex": "We cannot see the road in the thick fog.",
+        "exv": "Chúng tôi không nhìn thấy đường trong sương mù dày."
+      },
+      {
+        "w": "thunder",
+        "ipa": "/ˈθʌndə/",
+        "vi": "sấm",
+        "col": "thunder and lightning",
+        "ex": "I hear thunder far away at night.",
+        "exv": "Tôi nghe tiếng sấm từ xa vào ban đêm."
+      },
+      {
+        "w": "lightning",
+        "ipa": "/ˈlaɪtnɪŋ/",
+        "vi": "chớp",
+        "col": "a flash of lightning",
+        "ex": "A flash of lightning lights up the sky.",
+        "exv": "Một tia chớp làm sáng cả bầu trời."
+      },
+      {
+        "w": "sunny",
+        "ipa": "/ˈsʌni/",
+        "vi": "có nắng",
+        "col": "a sunny day",
+        "ex": "We have a sunny day for our walk.",
+        "exv": "Chúng tôi có một ngày nắng đẹp để đi dạo."
+      },
+      {
+        "w": "rainy",
+        "ipa": "/ˈreɪni/",
+        "vi": "mưa nhiều",
+        "col": "a rainy day",
+        "ex": "It is a rainy day, so we stay at home.",
+        "exv": "Hôm nay là ngày mưa nên chúng tôi ở nhà."
+      },
+      {
+        "w": "windy",
+        "ipa": "/ˈwɪndi/",
+        "vi": "nhiều gió",
+        "col": "a windy day",
+        "ex": "It is a windy day, so hold your hat.",
+        "exv": "Hôm nay nhiều gió nên hãy giữ chặt mũ của bạn."
+      },
+      {
+        "w": "cloudy",
+        "ipa": "/ˈklaʊdi/",
+        "vi": "nhiều mây",
+        "col": "a cloudy sky",
+        "ex": "The sky is cloudy, but it is not cold.",
+        "exv": "Bầu trời nhiều mây nhưng trời không lạnh."
+      },
+      {
+        "w": "snowy",
+        "ipa": "/ˈsnəʊi/",
+        "vi": "có tuyết",
+        "col": "a snowy morning",
+        "ex": "We wake up to a snowy morning.",
+        "exv": "Chúng tôi thức dậy trong một buổi sáng có tuyết."
+      },
+      {
+        "w": "foggy",
+        "ipa": "/ˈfɒɡi/",
+        "vi": "có sương mù",
+        "col": "a foggy morning",
+        "ex": "Drivers go slowly on a foggy morning.",
+        "exv": "Các tài xế đi chậm vào buổi sáng có sương mù."
+      },
+      {
+        "w": "thundery",
+        "ipa": "/ˈθʌndəri/",
+        "vi": "có sấm",
+        "col": "thundery weather",
+        "ex": "Thundery weather is coming this evening.",
+        "exv": "Thời tiết có sấm đang đến vào tối nay."
+      },
+      {
+        "w": "hot",
+        "ipa": "/hɒt/",
+        "vi": "nóng",
+        "col": "very hot",
+        "ex": "It is very hot, so I drink cold water.",
+        "exv": "Trời rất nóng nên tôi uống nước lạnh."
+      },
+      {
+        "w": "cold",
+        "ipa": "/kəʊld/",
+        "vi": "lạnh",
+        "col": "very cold",
+        "ex": "It is very cold, so I wear a warm coat.",
+        "exv": "Trời rất lạnh nên tôi mặc áo khoác ấm."
+      },
+      {
+        "w": "wet",
+        "ipa": "/wet/",
+        "vi": "ướt",
+        "col": "wet clothes",
+        "ex": "My clothes are wet after the rain.",
+        "exv": "Quần áo của tôi bị ướt sau cơn mưa."
+      },
+      {
+        "w": "dry",
+        "ipa": "/draɪ/",
+        "vi": "khô",
+        "col": "dry weather",
+        "ex": "We need dry weather for our trip.",
+        "exv": "Chúng tôi cần thời tiết khô ráo cho chuyến đi."
+      },
+      {
+        "w": "storm",
+        "ipa": "/stɔːm/",
+        "vi": "bão",
+        "col": "a big storm",
+        "ex": "A big storm is coming to the town.",
+        "exv": "Một cơn bão lớn đang đến thị trấn."
+      },
+      {
+        "w": "hurricane",
+        "ipa": "/ˈhʌrɪkən/",
+        "vi": "bão lớn (cuồng phong)",
+        "col": "a hurricane",
+        "ex": "A hurricane can break many trees.",
+        "exv": "Một cơn bão lớn có thể làm gãy nhiều cây."
+      },
+      {
+        "w": "thunderstorm",
+        "ipa": "/ˈθʌndəstɔːm/",
+        "vi": "cơn giông có sấm sét",
+        "col": "a thunderstorm",
+        "ex": "We stay inside during a thunderstorm.",
+        "exv": "Chúng tôi ở trong nhà trong lúc có giông sấm sét."
+      },
+      {
+        "w": "weather",
+        "ipa": "/ˈweðə/",
+        "vi": "thời tiết",
+        "col": "lovely weather",
+        "ex": "The weather is lovely for a walk today.",
+        "exv": "Thời tiết hôm nay rất đẹp để đi dạo."
+      },
+      {
+        "w": "degree",
+        "ipa": "/dɪˈɡriː/",
+        "vi": "độ (nhiệt độ)",
+        "col": "45 degrees",
+        "ex": "It is 30 degrees in my town today.",
+        "exv": "Hôm nay ở thị trấn của tôi là 30 độ."
+      },
+      {
+        "w": "umbrella",
+        "ipa": "/ʌmˈbrelə/",
+        "vi": "cái ô",
+        "col": "carry an umbrella",
+        "ex": "I carry an umbrella when it rains.",
+        "exv": "Tôi mang theo ô khi trời mưa."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'có nắng'?",
+        "o": [
+          "sunny",
+          "rainy",
+          "snowy"
+        ],
+        "a": 0,
+        "why": "sunny = có nắng; rainy = mưa nhiều; snowy = có tuyết."
+      },
+      {
+        "q": "Điền từ đúng vào câu: It is ___ today. I need my umbrella.",
+        "o": [
+          "rainy",
+          "sunny",
+          "dry"
+        ],
+        "a": 0,
+        "why": "Trời mưa (rainy) thì cần ô; sunny là có nắng, dry là khô ráo."
+      },
+      {
+        "q": "Từ nào là danh từ chỉ 'sấm'?",
+        "o": [
+          "thunder",
+          "thundery",
+          "windy"
+        ],
+        "a": 0,
+        "why": "thunder là danh từ chỉ sấm; thundery và windy đều là tính từ."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "hot",
+          "sun",
+          "rain",
+          "snow"
+        ],
+        "a": 0,
+        "why": "hot là tính từ chỉ nóng; sun, rain, snow đều là danh từ chỉ hiện tượng thời tiết."
+      },
+      {
+        "q": "Điền từ đúng vào câu: It is very ___ in winter. I wear a warm coat.",
+        "o": [
+          "cold",
+          "hot",
+          "dry"
+        ],
+        "a": 0,
+        "why": "Mùa đông trời lạnh (cold) nên mặc áo ấm; hot là nóng, dry là khô."
+      },
+      {
+        "q": "Cơn bão rất mạnh kèm gió lớn gọi là gì?",
+        "o": [
+          "hurricane",
+          "cloud",
+          "fog"
+        ],
+        "a": 0,
+        "why": "hurricane là bão lớn với gió rất mạnh; cloud là mây, fog là sương mù."
+      }
+    ]
+  },
+  {
+    "n": 38,
+    "group": "Thế giới",
+    "title": "In the town",
+    "titleVi": "Trong thị trấn",
+    "words": [
+      {
+        "w": "tourist information office",
+        "ipa": "/ˈtʊərɪst ɪnfəˈmeɪʃən ˈɒfɪs/",
+        "vi": "văn phòng thông tin du lịch",
+        "col": "at the tourist information office",
+        "ex": "We ask about hotels at the tourist information office.",
+        "exv": "Chúng tôi hỏi về khách sạn ở văn phòng thông tin du lịch."
+      },
+      {
+        "w": "museum",
+        "ipa": "/mjuːˈziːəm/",
+        "vi": "bảo tàng",
+        "col": "go to the museum",
+        "ex": "We go to the museum to see old things.",
+        "exv": "Chúng tôi đến bảo tàng để xem những đồ vật cổ."
+      },
+      {
+        "w": "car park",
+        "ipa": "/kɑː pɑːk/",
+        "vi": "bãi đỗ xe",
+        "col": "in the car park",
+        "ex": "My father parks his car in the car park.",
+        "exv": "Bố tôi đỗ xe ở bãi đỗ xe."
+      },
+      {
+        "w": "library",
+        "ipa": "/ˈlaɪbrəri/",
+        "vi": "thư viện",
+        "col": "at the library",
+        "ex": "I read books at the library every week.",
+        "exv": "Tôi đọc sách ở thư viện mỗi tuần."
+      },
+      {
+        "w": "town hall",
+        "ipa": "/taʊn hɔːl/",
+        "vi": "tòa thị chính",
+        "col": "near the town hall",
+        "ex": "The market is near the town hall.",
+        "exv": "Chợ ở gần tòa thị chính."
+      },
+      {
+        "w": "bus station",
+        "ipa": "/bʌs ˈsteɪʃən/",
+        "vi": "bến xe buýt",
+        "col": "at the bus station",
+        "ex": "We wait for the bus at the bus station.",
+        "exv": "Chúng tôi đợi xe buýt ở bến xe buýt."
+      },
+      {
+        "w": "post office",
+        "ipa": "/pəʊst ˈɒfɪs/",
+        "vi": "bưu điện",
+        "col": "at the post office",
+        "ex": "I send a letter at the post office.",
+        "exv": "Tôi gửi một lá thư ở bưu điện."
+      },
+      {
+        "w": "railway station",
+        "ipa": "/ˈreɪlweɪ ˈsteɪʃən/",
+        "vi": "ga tàu",
+        "col": "at the railway station",
+        "ex": "We meet our friend at the railway station.",
+        "exv": "Chúng tôi gặp bạn mình ở ga tàu."
+      },
+      {
+        "w": "bank",
+        "ipa": "/bæŋk/",
+        "vi": "ngân hàng",
+        "col": "at the bank",
+        "ex": "I change money at the bank.",
+        "exv": "Tôi đổi tiền ở ngân hàng."
+      },
+      {
+        "w": "square",
+        "ipa": "/skweə/",
+        "vi": "quảng trường",
+        "col": "in the square",
+        "ex": "Children play in the square after school.",
+        "exv": "Trẻ em chơi ở quảng trường sau giờ học."
+      },
+      {
+        "w": "pedestrian area",
+        "ipa": "/pəˈdestriən ˈeəriə/",
+        "vi": "khu vực đi bộ",
+        "col": "in the pedestrian area",
+        "ex": "Cars cannot go in the pedestrian area.",
+        "exv": "Ô tô không được đi vào khu vực đi bộ."
+      },
+      {
+        "w": "crossroads",
+        "ipa": "/ˈkrɒsrəʊdz/",
+        "vi": "ngã tư",
+        "col": "at the crossroads",
+        "ex": "Turn left at the crossroads.",
+        "exv": "Rẽ trái ở ngã tư."
+      },
+      {
+        "w": "traffic lights",
+        "ipa": "/ˈtræfɪk laɪts/",
+        "vi": "đèn giao thông",
+        "col": "at the traffic lights",
+        "ex": "We stop at the traffic lights.",
+        "exv": "Chúng tôi dừng lại ở đèn giao thông."
+      },
+      {
+        "w": "bus stop",
+        "ipa": "/bʌs stɒp/",
+        "vi": "trạm xe buýt",
+        "col": "at the bus stop",
+        "ex": "She waits at the bus stop every morning.",
+        "exv": "Cô ấy đợi ở trạm xe buýt mỗi buổi sáng."
+      },
+      {
+        "w": "street",
+        "ipa": "/striːt/",
+        "vi": "đường phố",
+        "col": "in the street",
+        "ex": "My house is in a quiet street.",
+        "exv": "Nhà tôi ở trên một con phố yên tĩnh."
+      },
+      {
+        "w": "road",
+        "ipa": "/rəʊd/",
+        "vi": "đường",
+        "col": "on the road",
+        "ex": "There are many cars on the road today.",
+        "exv": "Hôm nay có nhiều ô tô trên đường."
+      },
+      {
+        "w": "police officer",
+        "ipa": "/pəˈliːs ˈɒfɪsə/",
+        "vi": "cảnh sát",
+        "col": "a police officer",
+        "ex": "A police officer helps us cross the road.",
+        "exv": "Một cảnh sát giúp chúng tôi qua đường."
+      },
+      {
+        "w": "traffic warden",
+        "ipa": "/ˈtræfɪk ˈwɔːdən/",
+        "vi": "nhân viên kiểm soát đỗ xe",
+        "col": "a traffic warden",
+        "ex": "The traffic warden checks the cars in this street.",
+        "exv": "Nhân viên kiểm soát đỗ xe kiểm tra các xe trên phố này."
+      },
+      {
+        "w": "shop assistant",
+        "ipa": "/ʃɒp əˈsɪstənt/",
+        "vi": "nhân viên bán hàng",
+        "col": "a shop assistant",
+        "ex": "The shop assistant helps me find a shirt.",
+        "exv": "Nhân viên bán hàng giúp tôi tìm một chiếc áo sơ mi."
+      },
+      {
+        "w": "librarian",
+        "ipa": "/laɪˈbreəriən/",
+        "vi": "thủ thư",
+        "col": "the librarian",
+        "ex": "The librarian helps me find a good book.",
+        "exv": "Thủ thư giúp tôi tìm một cuốn sách hay."
+      },
+      {
+        "w": "bank clerk",
+        "ipa": "/bæŋk klɑːk/",
+        "vi": "nhân viên ngân hàng",
+        "col": "a bank clerk",
+        "ex": "A bank clerk helps me open an account.",
+        "exv": "Một nhân viên ngân hàng giúp tôi mở tài khoản."
+      },
+      {
+        "w": "no parking",
+        "ipa": "/nəʊ ˈpɑːkɪŋ/",
+        "vi": "cấm đỗ xe",
+        "col": "no parking here",
+        "ex": "This sign says no parking here.",
+        "exv": "Biển này ghi cấm đỗ xe ở đây."
+      },
+      {
+        "w": "no entry",
+        "ipa": "/nəʊ ˈentri/",
+        "vi": "cấm vào",
+        "col": "no entry",
+        "ex": "Do not go in. The sign says no entry.",
+        "exv": "Đừng đi vào. Biển ghi cấm vào."
+      },
+      {
+        "w": "shopping centre",
+        "ipa": "/ˈʃɒpɪŋ ˈsentə/",
+        "vi": "trung tâm mua sắm",
+        "col": "at the shopping centre",
+        "ex": "We buy clothes at the shopping centre.",
+        "exv": "Chúng tôi mua quần áo ở trung tâm mua sắm."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Bạn đổi tiền ở đâu?",
+        "o": [
+          "at the bank",
+          "at the museum",
+          "at the library"
+        ],
+        "a": 0,
+        "why": "Đổi tiền ở ngân hàng (bank); museum là bảo tàng, library là thư viện."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'bảo tàng'?",
+        "o": [
+          "museum",
+          "market",
+          "square"
+        ],
+        "a": 0,
+        "why": "museum = bảo tàng; market = chợ; square = quảng trường."
+      },
+      {
+        "q": "Điền từ đúng vào câu: I send a letter at the ___.",
+        "o": [
+          "post office",
+          "car park",
+          "bus station"
+        ],
+        "a": 0,
+        "why": "Gửi thư ở bưu điện (post office); car park là bãi đỗ xe, bus station là bến xe buýt."
+      },
+      {
+        "q": "Ai giúp bạn tìm sách trong thư viện?",
+        "o": [
+          "a librarian",
+          "a bank clerk",
+          "a traffic warden"
+        ],
+        "a": 0,
+        "why": "Thủ thư (librarian) làm việc ở thư viện; bank clerk làm ở ngân hàng, traffic warden kiểm soát đỗ xe."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "street",
+          "museum",
+          "library",
+          "bank"
+        ],
+        "a": 0,
+        "why": "street là đường phố; museum, library, bank đều là tòa nhà, nơi chốn trong thị trấn."
+      },
+      {
+        "q": "Biển 'no parking' có nghĩa là gì?",
+        "o": [
+          "cấm đỗ xe",
+          "cấm vào",
+          "đi bộ"
+        ],
+        "a": 0,
+        "why": "no parking = cấm đỗ xe; no entry = cấm vào."
+      }
+    ]
+  },
+  {
+    "n": 39,
+    "group": "Thế giới",
+    "title": "In the countryside",
+    "titleVi": "Ở vùng quê",
+    "words": [
+      {
+        "w": "countryside",
+        "ipa": "/ˈkʌntrisaɪd/",
+        "vi": "vùng quê",
+        "col": "in the countryside",
+        "ex": "My grandparents live in the countryside.",
+        "exv": "Ông bà tôi sống ở vùng quê."
+      },
+      {
+        "w": "country",
+        "ipa": "/ˈkʌntri/",
+        "vi": "vùng quê; đất nước",
+        "col": "in the country",
+        "ex": "They live in the country, far from the city.",
+        "exv": "Họ sống ở vùng quê, xa thành phố."
+      },
+      {
+        "w": "mountain",
+        "ipa": "/ˈmaʊntɪn/",
+        "vi": "núi",
+        "col": "in the mountains",
+        "ex": "We walk in the mountains on Sunday.",
+        "exv": "Chúng tôi đi bộ trên núi vào Chủ nhật."
+      },
+      {
+        "w": "river",
+        "ipa": "/ˈrɪvə/",
+        "vi": "sông",
+        "col": "by the river",
+        "ex": "We sit by the river in the afternoon.",
+        "exv": "Chúng tôi ngồi bên sông vào buổi chiều."
+      },
+      {
+        "w": "farm",
+        "ipa": "/fɑːm/",
+        "vi": "trang trại",
+        "col": "on a farm",
+        "ex": "My uncle works on a farm.",
+        "exv": "Chú tôi làm việc ở một trang trại."
+      },
+      {
+        "w": "field",
+        "ipa": "/fiːld/",
+        "vi": "cánh đồng",
+        "col": "in the field",
+        "ex": "The cows eat grass in the field.",
+        "exv": "Những con bò ăn cỏ trên cánh đồng."
+      },
+      {
+        "w": "village",
+        "ipa": "/ˈvɪlɪdʒ/",
+        "vi": "làng",
+        "col": "in the village",
+        "ex": "Only a few people live in this village.",
+        "exv": "Chỉ có ít người sống ở làng này."
+      },
+      {
+        "w": "small town",
+        "ipa": "/smɔːl taʊn/",
+        "vi": "thị trấn nhỏ",
+        "col": "a small town",
+        "ex": "We live in a small town with one school.",
+        "exv": "Chúng tôi sống ở một thị trấn nhỏ có một trường học."
+      },
+      {
+        "w": "farmer",
+        "ipa": "/ˈfɑːmə/",
+        "vi": "nông dân",
+        "col": "a farmer",
+        "ex": "The farmer grows rice in his fields.",
+        "exv": "Người nông dân trồng lúa trên cánh đồng của mình."
+      },
+      {
+        "w": "cottage",
+        "ipa": "/ˈkɒtɪdʒ/",
+        "vi": "nhà nhỏ ở quê",
+        "col": "a small cottage",
+        "ex": "My friend lives in a small cottage near the river.",
+        "exv": "Bạn tôi sống trong một ngôi nhà nhỏ ở quê gần sông."
+      },
+      {
+        "w": "nature",
+        "ipa": "/ˈneɪtʃə/",
+        "vi": "thiên nhiên",
+        "col": "love nature",
+        "ex": "I love nature and clean air.",
+        "exv": "Tôi yêu thiên nhiên và không khí trong lành."
+      },
+      {
+        "w": "wildlife",
+        "ipa": "/ˈwaɪldlaɪf/",
+        "vi": "động vật hoang dã",
+        "col": "wonderful wildlife",
+        "ex": "There is wonderful wildlife in this park.",
+        "exv": "Có nhiều động vật hoang dã tuyệt vời trong công viên này."
+      },
+      {
+        "w": "conservation area",
+        "ipa": "/kɒnsəˈveɪʃən ˈeəriə/",
+        "vi": "khu bảo tồn",
+        "col": "a conservation area",
+        "ex": "Animals are safe in the conservation area.",
+        "exv": "Động vật được an toàn trong khu bảo tồn."
+      },
+      {
+        "w": "national park",
+        "ipa": "/ˈnæʃənəl pɑːk/",
+        "vi": "vườn quốc gia",
+        "col": "in the national park",
+        "ex": "We see many birds in the national park.",
+        "exv": "Chúng tôi thấy nhiều chim trong vườn quốc gia."
+      },
+      {
+        "w": "picnic",
+        "ipa": "/ˈpɪknɪk/",
+        "vi": "chuyến dã ngoại",
+        "col": "have a picnic",
+        "ex": "We have a picnic under a big tree.",
+        "exv": "Chúng tôi đi dã ngoại dưới một cây lớn."
+      },
+      {
+        "w": "country road",
+        "ipa": "/ˈkʌntri rəʊd/",
+        "vi": "đường quê",
+        "col": "on a country road",
+        "ex": "We ride our bikes on a country road.",
+        "exv": "Chúng tôi đạp xe trên đường quê."
+      },
+      {
+        "w": "go walking",
+        "ipa": "/ɡəʊ ˈwɔːkɪŋ/",
+        "vi": "đi bộ đường dài",
+        "col": "go walking",
+        "ex": "We go walking in the hills every weekend.",
+        "exv": "Chúng tôi đi bộ đường dài ở vùng đồi mỗi cuối tuần."
+      },
+      {
+        "w": "go skiing",
+        "ipa": "/ɡəʊ ˈskiːɪŋ/",
+        "vi": "đi trượt tuyết",
+        "col": "go skiing",
+        "ex": "They go skiing in the mountains in winter.",
+        "exv": "Họ đi trượt tuyết trên núi vào mùa đông."
+      },
+      {
+        "w": "animal",
+        "ipa": "/ˈænɪməl/",
+        "vi": "động vật",
+        "col": "a wild animal",
+        "ex": "A fox is a wild animal.",
+        "exv": "Cáo là một động vật hoang dã."
+      },
+      {
+        "w": "bird",
+        "ipa": "/bɜːd/",
+        "vi": "chim",
+        "col": "a small bird",
+        "ex": "A small bird sings in the tree.",
+        "exv": "Một chú chim nhỏ hót trên cây."
+      },
+      {
+        "w": "plant",
+        "ipa": "/plɑːnt/",
+        "vi": "cây cối",
+        "col": "a green plant",
+        "ex": "This green plant grows near the river.",
+        "exv": "Cây xanh này mọc gần sông."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'nông dân'?",
+        "o": [
+          "farmer",
+          "village",
+          "cottage"
+        ],
+        "a": 0,
+        "why": "farmer = nông dân; village = làng; cottage = nhà nhỏ ở quê."
+      },
+      {
+        "q": "Điền từ đúng vào câu: We have a ___ under a big tree. We bring food and drink.",
+        "o": [
+          "picnic",
+          "farm",
+          "river"
+        ],
+        "a": 0,
+        "why": "Đi dã ngoại (picnic) thì mang theo đồ ăn và thức uống; farm là trang trại, river là sông."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'vườn quốc gia'?",
+        "o": [
+          "national park",
+          "conservation area",
+          "small town"
+        ],
+        "a": 0,
+        "why": "national park = vườn quốc gia; conservation area = khu bảo tồn; small town = thị trấn nhỏ."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "nature",
+          "mountain",
+          "river",
+          "field"
+        ],
+        "a": 0,
+        "why": "nature là thiên nhiên nói chung; mountain, river, field đều là những thứ cụ thể nhìn thấy ở vùng quê."
+      },
+      {
+        "q": "Điền từ đúng vào câu: My uncle lives on a ___ and works in the fields.",
+        "o": [
+          "farm",
+          "village",
+          "cottage"
+        ],
+        "a": 0,
+        "why": "Nông dân sống ở trang trại (farm) và làm việc trên cánh đồng; village là làng, cottage là nhà nhỏ ở quê."
+      },
+      {
+        "q": "'Wildlife' có nghĩa là gì?",
+        "o": [
+          "động vật hoang dã",
+          "cây cối trong nhà",
+          "đường quê"
+        ],
+        "a": 0,
+        "why": "wildlife = động vật hoang dã (thú, chim, cá, côn trùng sống tự nhiên)."
+      }
+    ]
+  },
+  {
+    "n": 40,
+    "group": "Thế giới",
+    "title": "Animals and pets",
+    "titleVi": "Động vật và thú cưng",
+    "words": [
+      {
+        "w": "pig",
+        "ipa": "/pɪɡ/",
+        "vi": "lợn",
+        "col": "a pig",
+        "ex": "The pig sleeps in the farm yard.",
+        "exv": "Con lợn ngủ trong sân trang trại."
+      },
+      {
+        "w": "horse",
+        "ipa": "/hɔːs/",
+        "vi": "ngựa",
+        "col": "ride a horse",
+        "ex": "I want to ride a horse one day.",
+        "exv": "Tôi muốn cưỡi ngựa một ngày nào đó."
+      },
+      {
+        "w": "hen",
+        "ipa": "/hen/",
+        "vi": "gà mái",
+        "col": "a hen",
+        "ex": "The hen gives us eggs every day.",
+        "exv": "Gà mái cho chúng tôi trứng mỗi ngày."
+      },
+      {
+        "w": "sheep",
+        "ipa": "/ʃiːp/",
+        "vi": "cừu",
+        "col": "a sheep",
+        "ex": "The sheep eats grass in the field.",
+        "exv": "Con cừu ăn cỏ trên cánh đồng."
+      },
+      {
+        "w": "cow",
+        "ipa": "/kaʊ/",
+        "vi": "bò cái",
+        "col": "a cow",
+        "ex": "The cow gives us milk.",
+        "exv": "Bò cái cho chúng tôi sữa."
+      },
+      {
+        "w": "foal",
+        "ipa": "/fəʊl/",
+        "vi": "ngựa con",
+        "col": "a young foal",
+        "ex": "The young foal stays near its mother.",
+        "exv": "Ngựa con ở gần mẹ của nó."
+      },
+      {
+        "w": "calf",
+        "ipa": "/kɑːf/",
+        "vi": "bê con",
+        "col": "a calf",
+        "ex": "The calf drinks milk from its mother.",
+        "exv": "Bê con uống sữa từ mẹ của nó."
+      },
+      {
+        "w": "lamb",
+        "ipa": "/læm/",
+        "vi": "cừu con",
+        "col": "a lamb",
+        "ex": "The lamb is small and white.",
+        "exv": "Cừu con nhỏ và trắng."
+      },
+      {
+        "w": "piglet",
+        "ipa": "/ˈpɪɡlət/",
+        "vi": "lợn con",
+        "col": "a piglet",
+        "ex": "The piglet plays with its brothers.",
+        "exv": "Lợn con chơi với các anh em của nó."
+      },
+      {
+        "w": "chick",
+        "ipa": "/tʃɪk/",
+        "vi": "gà con",
+        "col": "a chick",
+        "ex": "The chick is yellow and small.",
+        "exv": "Gà con màu vàng và nhỏ."
+      },
+      {
+        "w": "giraffe",
+        "ipa": "/dʒɪˈrɑːf/",
+        "vi": "hươu cao cổ",
+        "col": "a giraffe",
+        "ex": "The giraffe eats leaves from a tall tree.",
+        "exv": "Hươu cao cổ ăn lá trên cây cao."
+      },
+      {
+        "w": "tiger",
+        "ipa": "/ˈtaɪɡə/",
+        "vi": "hổ",
+        "col": "a tiger",
+        "ex": "The tiger is big and strong.",
+        "exv": "Con hổ to và khỏe."
+      },
+      {
+        "w": "elephant",
+        "ipa": "/ˈelɪfənt/",
+        "vi": "voi",
+        "col": "an elephant",
+        "ex": "The elephant drinks water with its trunk.",
+        "exv": "Con voi uống nước bằng vòi của nó."
+      },
+      {
+        "w": "snake",
+        "ipa": "/sneɪk/",
+        "vi": "rắn",
+        "col": "a snake",
+        "ex": "The snake moves slowly on the grass.",
+        "exv": "Con rắn bò chậm trên cỏ."
+      },
+      {
+        "w": "budgie",
+        "ipa": "/ˈbʌdʒi/",
+        "vi": "chim yến phụng",
+        "col": "a budgie",
+        "ex": "My budgie sings in the morning.",
+        "exv": "Chim yến phụng của tôi hót vào buổi sáng."
+      },
+      {
+        "w": "tortoise",
+        "ipa": "/ˈtɔːtəs/",
+        "vi": "rùa cạn",
+        "col": "a tortoise",
+        "ex": "The tortoise walks very slowly.",
+        "exv": "Rùa cạn đi rất chậm."
+      },
+      {
+        "w": "fish",
+        "ipa": "/fɪʃ/",
+        "vi": "cá",
+        "col": "a fish",
+        "ex": "The fish swims in the small lake.",
+        "exv": "Con cá bơi trong hồ nhỏ."
+      },
+      {
+        "w": "cat",
+        "ipa": "/kæt/",
+        "vi": "mèo",
+        "col": "a cat",
+        "ex": "My cat sleeps on my bed.",
+        "exv": "Mèo của tôi ngủ trên giường của tôi."
+      },
+      {
+        "w": "parrot",
+        "ipa": "/ˈpærət/",
+        "vi": "vẹt",
+        "col": "a parrot",
+        "ex": "The parrot is green and red.",
+        "exv": "Con vẹt có màu xanh lá và đỏ."
+      },
+      {
+        "w": "dog",
+        "ipa": "/dɒɡ/",
+        "vi": "chó",
+        "col": "a dog",
+        "ex": "My dog runs in the garden every day.",
+        "exv": "Chó của tôi chạy trong vườn mỗi ngày."
+      },
+      {
+        "w": "bird",
+        "ipa": "/bɜːd/",
+        "vi": "chim",
+        "col": "a bird",
+        "ex": "A bird sings outside my window.",
+        "exv": "Một chú chim hót ngoài cửa sổ của tôi."
+      },
+      {
+        "w": "milk",
+        "ipa": "/mɪlk/",
+        "vi": "sữa",
+        "col": "drink milk",
+        "ex": "Children drink milk in the morning.",
+        "exv": "Trẻ em uống sữa vào buổi sáng."
+      },
+      {
+        "w": "wool",
+        "ipa": "/wʊl/",
+        "vi": "len",
+        "col": "soft wool",
+        "ex": "This warm coat is made of soft wool.",
+        "exv": "Chiếc áo khoác ấm này làm từ len mềm."
+      },
+      {
+        "w": "beef",
+        "ipa": "/biːf/",
+        "vi": "thịt bò",
+        "col": "eat beef",
+        "ex": "We eat beef with rice for lunch.",
+        "exv": "Chúng tôi ăn thịt bò với cơm vào bữa trưa."
+      },
+      {
+        "w": "pork",
+        "ipa": "/pɔːk/",
+        "vi": "thịt lợn",
+        "col": "eat pork",
+        "ex": "We eat pork and vegetables for dinner.",
+        "exv": "Chúng tôi ăn thịt lợn và rau vào bữa tối."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Con non của ngựa gọi là gì?",
+        "o": [
+          "foal",
+          "calf",
+          "lamb"
+        ],
+        "a": 0,
+        "why": "foal = ngựa con; calf = bê con; lamb = cừu con."
+      },
+      {
+        "q": "Điền từ đúng vào câu: The ___ gives us milk.",
+        "o": [
+          "cow",
+          "hen",
+          "pig"
+        ],
+        "a": 0,
+        "why": "Bò cái (cow) cho sữa; hen là gà mái cho trứng, pig là lợn cho thịt."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'hươu cao cổ'?",
+        "o": [
+          "giraffe",
+          "elephant",
+          "tiger"
+        ],
+        "a": 0,
+        "why": "giraffe = hươu cao cổ; elephant = voi; tiger = hổ."
+      },
+      {
+        "q": "Con vật nào thường là thú cưng trong nhà?",
+        "o": [
+          "cat",
+          "tiger",
+          "snake"
+        ],
+        "a": 0,
+        "why": "Mèo (cat) thường là thú cưng; tiger là hổ, snake là rắn, đều là động vật hoang dã."
+      },
+      {
+        "q": "Thịt của bò gọi là gì?",
+        "o": [
+          "beef",
+          "pork",
+          "wool"
+        ],
+        "a": 0,
+        "why": "beef = thịt bò; pork = thịt lợn; wool = len."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "milk",
+          "pig",
+          "horse",
+          "sheep"
+        ],
+        "a": 0,
+        "why": "milk là sữa, sản phẩm từ động vật; pig, horse, sheep đều là con vật."
+      }
+    ]
+  },
+  {
+    "n": 41,
+    "group": "Thế giới",
+    "title": "Travelling",
+    "titleVi": "Đi lại",
+    "words": [
+      {
+        "w": "aeroplane",
+        "ipa": "/ˈeərəpleɪn/",
+        "vi": "máy bay",
+        "col": "an aeroplane",
+        "ex": "The aeroplane is big and white.",
+        "exv": "Chiếc máy bay to và màu trắng."
+      },
+      {
+        "w": "train",
+        "ipa": "/treɪn/",
+        "vi": "tàu hỏa",
+        "col": "by train",
+        "ex": "I take the train to work every day.",
+        "exv": "Tôi đi tàu hỏa đi làm mỗi ngày."
+      },
+      {
+        "w": "car",
+        "ipa": "/kɑː/",
+        "vi": "ô tô",
+        "col": "a car",
+        "ex": "My father has a red car.",
+        "exv": "Bố tôi có một chiếc ô tô màu đỏ."
+      },
+      {
+        "w": "bus",
+        "ipa": "/bʌs/",
+        "vi": "xe buýt",
+        "col": "by bus",
+        "ex": "We go to school by bus.",
+        "exv": "Chúng tôi đi xe buýt đến trường."
+      },
+      {
+        "w": "bicycle/bike",
+        "ipa": "/ˈbaɪsɪkəl/",
+        "vi": "xe đạp",
+        "col": "a bicycle",
+        "ex": "I ride my bicycle to the park.",
+        "exv": "Tôi đạp xe đạp đến công viên."
+      },
+      {
+        "w": "taxi",
+        "ipa": "/ˈtæksi/",
+        "vi": "xe taxi",
+        "col": "by taxi",
+        "ex": "We take a taxi to the hotel.",
+        "exv": "Chúng tôi đi taxi đến khách sạn."
+      },
+      {
+        "w": "motorbike/motorcycle",
+        "ipa": "/ˈməʊtəbaɪk/",
+        "vi": "xe máy",
+        "col": "a motorbike",
+        "ex": "He rides a motorbike to work.",
+        "exv": "Anh ấy đi xe máy đi làm."
+      },
+      {
+        "w": "underground",
+        "ipa": "/ˈʌndəɡraʊnd/",
+        "vi": "tàu điện ngầm",
+        "col": "the underground",
+        "ex": "We go to the city by underground.",
+        "exv": "Chúng tôi đi tàu điện ngầm vào thành phố."
+      },
+      {
+        "w": "helicopter",
+        "ipa": "/ˈhelɪkɒptə/",
+        "vi": "máy bay trực thăng",
+        "col": "a helicopter",
+        "ex": "A helicopter flies over the town.",
+        "exv": "Một chiếc trực thăng bay qua thị trấn."
+      },
+      {
+        "w": "boat",
+        "ipa": "/bəʊt/",
+        "vi": "thuyền",
+        "col": "a boat",
+        "ex": "We go on a boat on the lake.",
+        "exv": "Chúng tôi đi thuyền trên hồ."
+      },
+      {
+        "w": "ship",
+        "ipa": "/ʃɪp/",
+        "vi": "tàu thủy",
+        "col": "a ship",
+        "ex": "The ship goes across the sea.",
+        "exv": "Con tàu đi qua biển."
+      },
+      {
+        "w": "map",
+        "ipa": "/mæp/",
+        "vi": "bản đồ",
+        "col": "a map",
+        "ex": "Look at the map and find our street.",
+        "exv": "Nhìn vào bản đồ và tìm đường của chúng ta."
+      },
+      {
+        "w": "timetable",
+        "ipa": "/ˈtaɪmteɪbəl/",
+        "vi": "lịch trình tàu xe",
+        "col": "a timetable",
+        "ex": "The timetable says the train leaves at nine.",
+        "exv": "Lịch trình ghi tàu rời đi lúc chín giờ."
+      },
+      {
+        "w": "customs",
+        "ipa": "/ˈkʌstəmz/",
+        "vi": "hải quan",
+        "col": "go through customs",
+        "ex": "We go through customs at the airport.",
+        "exv": "Chúng tôi qua hải quan ở sân bay."
+      },
+      {
+        "w": "luggage",
+        "ipa": "/ˈlʌɡɪdʒ/",
+        "vi": "hành lý",
+        "col": "my luggage",
+        "ex": "My luggage is very heavy.",
+        "exv": "Hành lý của tôi rất nặng."
+      },
+      {
+        "w": "passport",
+        "ipa": "/ˈpɑːspɔːt/",
+        "vi": "hộ chiếu",
+        "col": "my passport",
+        "ex": "I need my passport to travel.",
+        "exv": "Tôi cần hộ chiếu để đi du lịch."
+      },
+      {
+        "w": "single ticket",
+        "ipa": "/ˈsɪŋɡəl ˈtɪkɪt/",
+        "vi": "vé một chiều",
+        "col": "a single ticket",
+        "ex": "I want a single ticket to the city, please.",
+        "exv": "Tôi muốn mua một vé một chiều đi thành phố."
+      },
+      {
+        "w": "return ticket",
+        "ipa": "/rɪˈtɜːn ˈtɪkɪt/",
+        "vi": "vé khứ hồi",
+        "col": "a return ticket",
+        "ex": "A return ticket is cheaper than two single tickets.",
+        "exv": "Vé khứ hồi rẻ hơn hai vé một chiều."
+      },
+      {
+        "w": "fare",
+        "ipa": "/feə/",
+        "vi": "tiền vé",
+        "col": "the bus fare",
+        "ex": "The bus fare is very cheap today.",
+        "exv": "Tiền vé xe buýt hôm nay rất rẻ."
+      },
+      {
+        "w": "journey",
+        "ipa": "/ˈdʒɜːni/",
+        "vi": "chuyến đi",
+        "col": "a long journey",
+        "ex": "The journey to my home takes two hours.",
+        "exv": "Chuyến đi về nhà tôi mất hai giờ."
+      },
+      {
+        "w": "platform",
+        "ipa": "/ˈplætfɔːm/",
+        "vi": "sân ga",
+        "col": "platform 2",
+        "ex": "We wait on platform 2 for our train.",
+        "exv": "Chúng tôi đợi ở sân ga số 2 để lên tàu."
+      },
+      {
+        "w": "buffet car",
+        "ipa": "/ˈbʊfeɪ kɑː/",
+        "vi": "toa ăn trên tàu",
+        "col": "a buffet car",
+        "ex": "We buy a sandwich in the buffet car.",
+        "exv": "Chúng tôi mua một chiếc bánh mì kẹp ở toa ăn trên tàu."
+      },
+      {
+        "w": "check in",
+        "ipa": "/tʃek ɪn/",
+        "vi": "làm thủ tục lên máy bay",
+        "col": "check in at the airport",
+        "ex": "We check in at the airport at six.",
+        "exv": "Chúng tôi làm thủ tục ở sân bay lúc sáu giờ."
+      },
+      {
+        "w": "take off",
+        "ipa": "/teɪk ɒf/",
+        "vi": "cất cánh",
+        "col": "the plane takes off",
+        "ex": "The plane takes off at ten o'clock.",
+        "exv": "Máy bay cất cánh lúc mười giờ."
+      },
+      {
+        "w": "boarding card",
+        "ipa": "/ˈbɔːdɪŋ kɑːd/",
+        "vi": "thẻ lên máy bay",
+        "col": "a boarding card",
+        "ex": "Please give your boarding card to the man at the door.",
+        "exv": "Xin đưa thẻ lên máy bay của bạn cho người đàn ông ở cửa."
+      },
+      {
+        "w": "land",
+        "ipa": "/lænd/",
+        "vi": "hạ cánh",
+        "col": "the plane lands",
+        "ex": "The plane lands in London at five.",
+        "exv": "Máy bay hạ cánh ở Luân Đôn lúc năm giờ."
+      },
+      {
+        "w": "hire a car",
+        "ipa": "/haɪə ə kɑː/",
+        "vi": "thuê ô tô",
+        "col": "hire a car",
+        "ex": "We hire a car to go to the sea.",
+        "exv": "Chúng tôi thuê ô tô để đi ra biển."
+      },
+      {
+        "w": "give a lift",
+        "ipa": "/ɡɪv ə lɪft/",
+        "vi": "cho đi nhờ xe",
+        "col": "give someone a lift",
+        "ex": "My friend gives me a lift to school.",
+        "exv": "Bạn tôi cho tôi đi nhờ xe đến trường."
+      },
+      {
+        "w": "depart",
+        "ipa": "/dɪˈpɑːt/",
+        "vi": "khởi hành",
+        "col": "the train departs",
+        "ex": "Our train departs at eight in the morning.",
+        "exv": "Tàu của chúng tôi khởi hành lúc tám giờ sáng."
+      },
+      {
+        "w": "fill up with petrol",
+        "ipa": "/fɪl ʌp wɪð ˈpetrəl/",
+        "vi": "đổ đầy xăng",
+        "col": "fill up with petrol",
+        "ex": "We fill up the car with petrol before we go.",
+        "exv": "Chúng tôi đổ đầy xăng cho xe trước khi đi."
+      },
+      {
+        "w": "book/reserve a seat",
+        "ipa": "/bʊk rɪˈzɜːv ə siːt/",
+        "vi": "đặt trước chỗ ngồi",
+        "col": "book a seat",
+        "ex": "I book a seat on the morning train to the city.",
+        "exv": "Tôi đặt trước một chỗ ngồi trên chuyến tàu buổi sáng đi thành phố."
+      },
+      {
+        "w": "restaurant car",
+        "ipa": "/ˈrestrɒnt kɑː/",
+        "vi": "toa ăn trên tàu",
+        "col": "a restaurant car",
+        "ex": "We have lunch in the restaurant car on the long train.",
+        "exv": "Chúng tôi ăn trưa ở toa ăn trên chuyến tàu dài."
+      },
+      {
+        "w": "flight steward",
+        "ipa": "/flaɪt ˈstjuːəd/",
+        "vi": "tiếp viên hàng không",
+        "col": "a flight steward",
+        "ex": "A flight steward gives us water on the plane.",
+        "exv": "Một tiếp viên hàng không đưa nước cho chúng tôi trên máy bay."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "We go to the station and wait on the ___ for our train.",
+        "o": [
+          "platform",
+          "map",
+          "passport"
+        ],
+        "a": 0,
+        "why": "platform = sân ga, nơi bạn đợi tàu; map = bản đồ; passport = hộ chiếu."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'hành lý'?",
+        "o": [
+          "timetable",
+          "luggage",
+          "customs"
+        ],
+        "a": 1,
+        "why": "luggage = hành lý; timetable = lịch trình tàu xe; customs = hải quan."
+      },
+      {
+        "q": "Chọn từ khác loại.",
+        "o": [
+          "train",
+          "bus",
+          "passport",
+          "taxi"
+        ],
+        "a": 2,
+        "why": "train, bus và taxi đều là phương tiện đi lại; passport = hộ chiếu, là giấy tờ."
+      },
+      {
+        "q": "A ___ ticket is for going there and coming back.",
+        "o": [
+          "return",
+          "single",
+          "platform"
+        ],
+        "a": 0,
+        "why": "return ticket = vé khứ hồi, đi và về; single ticket = vé một chiều."
+      },
+      {
+        "q": "The plane ___ from the ground into the sky.",
+        "o": [
+          "lands",
+          "takes off",
+          "hires"
+        ],
+        "a": 1,
+        "why": "take off = cất cánh, bay lên khỏi mặt đất; land = hạ cánh."
+      },
+      {
+        "q": "You pay the ___ when you travel by bus.",
+        "o": [
+          "luggage",
+          "fare",
+          "platform"
+        ],
+        "a": 1,
+        "why": "fare = tiền vé phải trả khi đi lại; luggage = hành lý; platform = sân ga."
+      }
+    ]
+  },
+  {
+    "n": 42,
+    "group": "Thế giới",
+    "title": "Notices",
+    "titleVi": "Các biển báo",
+    "words": [
+      {
+        "w": "exit",
+        "ipa": "/ˈeɡzɪt/",
+        "vi": "lối ra",
+        "col": "the exit",
+        "ex": "Go out through the exit on the left.",
+        "exv": "Đi ra qua lối ra bên trái."
+      },
+      {
+        "w": "entrance",
+        "ipa": "/ˈentrəns/",
+        "vi": "lối vào",
+        "col": "the entrance",
+        "ex": "The entrance to the shop is here.",
+        "exv": "Lối vào cửa hàng ở đây."
+      },
+      {
+        "w": "way out",
+        "ipa": "/weɪ aʊt/",
+        "vi": "lối ra",
+        "col": "the way out",
+        "ex": "Follow the signs to the way out.",
+        "exv": "Đi theo các biển chỉ dẫn đến lối ra."
+      },
+      {
+        "w": "way in",
+        "ipa": "/weɪ ɪn/",
+        "vi": "lối vào",
+        "col": "the way in",
+        "ex": "This is the way in to the cinema.",
+        "exv": "Đây là lối vào rạp chiếu phim."
+      },
+      {
+        "w": "no smoking",
+        "ipa": "/nəʊ ˈsməʊkɪŋ/",
+        "vi": "cấm hút thuốc",
+        "col": "no smoking here",
+        "ex": "There is a 'No smoking' sign in the room.",
+        "exv": "Có biển 'Cấm hút thuốc' trong phòng."
+      },
+      {
+        "w": "sale",
+        "ipa": "/seɪl/",
+        "vi": "giảm giá, bán hạ giá",
+        "col": "a sale",
+        "ex": "The shop has a big sale today.",
+        "exv": "Cửa hàng giảm giá lớn hôm nay."
+      },
+      {
+        "w": "closed",
+        "ipa": "/kləʊzd/",
+        "vi": "đóng cửa",
+        "col": "closed on Sunday",
+        "ex": "The bank is closed on Sunday.",
+        "exv": "Ngân hàng đóng cửa vào Chủ nhật."
+      },
+      {
+        "w": "open",
+        "ipa": "/ˈəʊpən/",
+        "vi": "mở cửa",
+        "col": "open from nine to six",
+        "ex": "The shop is open from nine to six.",
+        "exv": "Cửa hàng mở cửa từ chín giờ đến sáu giờ."
+      },
+      {
+        "w": "please pay here",
+        "ipa": "/pliːz peɪ hɪə/",
+        "vi": "xin trả tiền ở đây",
+        "col": "please pay here",
+        "ex": "Please pay here for your ticket.",
+        "exv": "Xin trả tiền vé ở đây."
+      },
+      {
+        "w": "please ring",
+        "ipa": "/pliːz rɪŋ/",
+        "vi": "xin bấm chuông",
+        "col": "please ring the bell",
+        "ex": "Please ring the bell and wait.",
+        "exv": "Xin bấm chuông và đợi."
+      },
+      {
+        "w": "don't walk on the grass",
+        "ipa": "/dəʊnt wɔːk ɒn ðə ɡrɑːs/",
+        "vi": "không đi lên cỏ",
+        "col": "don't walk on the grass",
+        "ex": "Please do not walk on the grass here.",
+        "exv": "Xin đừng đi lên cỏ ở đây."
+      },
+      {
+        "w": "queue this side",
+        "ipa": "/kjuː ðɪs saɪd/",
+        "vi": "xếp hàng bên này",
+        "col": "queue this side",
+        "ex": "Please queue on this side of the door.",
+        "exv": "Xin xếp hàng ở phía bên này của cửa."
+      },
+      {
+        "w": "out of order",
+        "ipa": "/aʊt əv ˈɔːdə/",
+        "vi": "hỏng, không dùng được",
+        "col": "out of order",
+        "ex": "The lift is out of order today.",
+        "exv": "Thang máy hôm nay bị hỏng."
+      },
+      {
+        "w": "men",
+        "ipa": "/men/",
+        "vi": "nam giới",
+        "col": "toilets for men",
+        "ex": "This toilet is for men.",
+        "exv": "Nhà vệ sinh này dành cho nam giới."
+      },
+      {
+        "w": "women",
+        "ipa": "/ˈwɪmɪn/",
+        "vi": "nữ giới",
+        "col": "toilets for women",
+        "ex": "This toilet is for women.",
+        "exv": "Nhà vệ sinh này dành cho nữ giới."
+      },
+      {
+        "w": "toilets",
+        "ipa": "/ˈtɔɪləts/",
+        "vi": "nhà vệ sinh",
+        "col": "the toilets",
+        "ex": "Where are the toilets, please?",
+        "exv": "Xin hỏi nhà vệ sinh ở đâu?"
+      },
+      {
+        "w": "WC",
+        "ipa": "/ˌdʌbəljuː ˈsiː/",
+        "vi": "nhà vệ sinh",
+        "col": "the WC",
+        "ex": "The WC is at the end of the hall.",
+        "exv": "Nhà vệ sinh ở cuối hành lang."
+      },
+      {
+        "w": "notice",
+        "ipa": "/ˈnəʊtɪs/",
+        "vi": "biển báo, thông báo",
+        "col": "a notice",
+        "ex": "Read the notice on the door.",
+        "exv": "Hãy đọc biển báo trên cửa."
+      },
+      {
+        "w": "sign",
+        "ipa": "/saɪn/",
+        "vi": "biển hiệu",
+        "col": "a sign",
+        "ex": "I see an English sign in the street.",
+        "exv": "Tôi thấy một biển hiệu tiếng Anh trên phố."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'lối ra'?",
+        "o": [
+          "entrance",
+          "exit",
+          "sale"
+        ],
+        "a": 1,
+        "why": "exit = lối ra; entrance = lối vào; sale = giảm giá."
+      },
+      {
+        "q": "You see 'CLOSED' on a shop door. What does it mean?",
+        "o": [
+          "The shop is not open now.",
+          "The shop is open now.",
+          "The shop is on sale."
+        ],
+        "a": 0,
+        "why": "closed = đóng cửa, cửa hàng không mở lúc này; open = mở cửa."
+      },
+      {
+        "q": "Chọn từ khác loại.",
+        "o": [
+          "men",
+          "women",
+          "sale",
+          "toilets"
+        ],
+        "a": 2,
+        "why": "men, women và toilets đều liên quan đến nhà vệ sinh; sale = giảm giá, liên quan đến mua bán."
+      },
+      {
+        "q": "What does 'OUT OF ORDER' mean?",
+        "o": [
+          "It does not work.",
+          "It is open.",
+          "It is for sale."
+        ],
+        "a": 0,
+        "why": "out of order = bị hỏng, không dùng được; open = mở cửa."
+      },
+      {
+        "q": "You are at the till in a shop. The sign says 'PLEASE ___ HERE'.",
+        "o": [
+          "pay",
+          "ring",
+          "walk"
+        ],
+        "a": 0,
+        "why": "please pay here = xin trả tiền ở đây; ring = bấm chuông."
+      },
+      {
+        "q": "WC means ___.",
+        "o": [
+          "toilets",
+          "way out",
+          "sale"
+        ],
+        "a": 0,
+        "why": "WC là chữ viết tắt chỉ nhà vệ sinh; way out = lối ra."
+      }
+    ]
+  },
+  {
+    "n": 43,
+    "group": "Ở nhà",
+    "title": "Food and drink",
+    "titleVi": "Đồ ăn và đồ uống",
+    "words": [
+      {
+        "w": "bread",
+        "ipa": "/bred/",
+        "vi": "bánh mì",
+        "col": "some bread",
+        "ex": "I eat bread with butter for breakfast.",
+        "exv": "Tôi ăn bánh mì với bơ vào bữa sáng."
+      },
+      {
+        "w": "rice",
+        "ipa": "/raɪs/",
+        "vi": "cơm, gạo",
+        "col": "some rice",
+        "ex": "We eat rice with fish for lunch.",
+        "exv": "Chúng tôi ăn cơm với cá vào bữa trưa."
+      },
+      {
+        "w": "pasta",
+        "ipa": "/ˈpæstə/",
+        "vi": "mì Ý",
+        "col": "some pasta",
+        "ex": "I like pasta with tomato sauce.",
+        "exv": "Tôi thích mì Ý với sốt cà chua."
+      },
+      {
+        "w": "meat",
+        "ipa": "/miːt/",
+        "vi": "thịt",
+        "col": "some meat",
+        "ex": "We do not eat much meat.",
+        "exv": "Chúng tôi không ăn nhiều thịt."
+      },
+      {
+        "w": "hot-dog",
+        "ipa": "/ˈhɒt dɒɡ/",
+        "vi": "bánh mì kẹp xúc xích",
+        "col": "a hot-dog",
+        "ex": "I want a hot-dog and a drink, please.",
+        "exv": "Tôi muốn một chiếc bánh mì kẹp xúc xích và một đồ uống."
+      },
+      {
+        "w": "hamburger",
+        "ipa": "/ˈhæmbɜːɡə/",
+        "vi": "bánh mì kẹp thịt",
+        "col": "a hamburger",
+        "ex": "He eats a hamburger for lunch.",
+        "exv": "Anh ấy ăn một chiếc bánh mì kẹp thịt vào bữa trưa."
+      },
+      {
+        "w": "pizza",
+        "ipa": "/ˈpiːtsə/",
+        "vi": "bánh pizza",
+        "col": "a pizza",
+        "ex": "We have pizza on Friday evening.",
+        "exv": "Chúng tôi ăn pizza vào tối thứ Sáu."
+      },
+      {
+        "w": "fish and chips",
+        "ipa": "/fɪʃ ənd tʃɪps/",
+        "vi": "cá chiên và khoai tây chiên",
+        "col": "fish and chips",
+        "ex": "Fish and chips is a good lunch.",
+        "exv": "Cá chiên và khoai tây chiên là một bữa trưa ngon."
+      },
+      {
+        "w": "carrots",
+        "ipa": "/ˈkærəts/",
+        "vi": "cà rốt",
+        "col": "some carrots",
+        "ex": "I put carrots in my soup.",
+        "exv": "Tôi cho cà rốt vào món súp."
+      },
+      {
+        "w": "beans",
+        "ipa": "/biːnz/",
+        "vi": "đậu",
+        "col": "some beans",
+        "ex": "We grow beans in our garden.",
+        "exv": "Chúng tôi trồng đậu trong vườn."
+      },
+      {
+        "w": "potatoes",
+        "ipa": "/pəˈteɪtəʊz/",
+        "vi": "khoai tây",
+        "col": "some potatoes",
+        "ex": "I like potatoes with my dinner.",
+        "exv": "Tôi thích khoai tây trong bữa tối."
+      },
+      {
+        "w": "tomatoes",
+        "ipa": "/təˈmɑːtəʊz/",
+        "vi": "cà chua",
+        "col": "some tomatoes",
+        "ex": "These tomatoes are red and sweet.",
+        "exv": "Những quả cà chua này đỏ và ngọt."
+      },
+      {
+        "w": "peas",
+        "ipa": "/piːz/",
+        "vi": "đậu Hà Lan",
+        "col": "some peas",
+        "ex": "I put peas in the rice.",
+        "exv": "Tôi cho đậu Hà Lan vào cơm."
+      },
+      {
+        "w": "onions",
+        "ipa": "/ˈʌnjənz/",
+        "vi": "hành tây",
+        "col": "some onions",
+        "ex": "Cut the onions and put them in the pan.",
+        "exv": "Thái hành tây rồi cho vào chảo."
+      },
+      {
+        "w": "garlic",
+        "ipa": "/ˈɡɑːlɪk/",
+        "vi": "tỏi",
+        "col": "some garlic",
+        "ex": "I use garlic in my cooking.",
+        "exv": "Tôi dùng tỏi khi nấu ăn."
+      },
+      {
+        "w": "mushrooms",
+        "ipa": "/ˈmʌʃruːmz/",
+        "vi": "nấm",
+        "col": "some mushrooms",
+        "ex": "Mushrooms grow in the forest.",
+        "exv": "Nấm mọc trong rừng."
+      },
+      {
+        "w": "apple",
+        "ipa": "/ˈæpəl/",
+        "vi": "quả táo",
+        "col": "an apple",
+        "ex": "I eat an apple every day.",
+        "exv": "Tôi ăn một quả táo mỗi ngày."
+      },
+      {
+        "w": "orange",
+        "ipa": "/ˈɒrɪndʒ/",
+        "vi": "quả cam",
+        "col": "an orange",
+        "ex": "This orange is sweet and good.",
+        "exv": "Quả cam này ngọt và ngon."
+      },
+      {
+        "w": "banana",
+        "ipa": "/bəˈnɑːnə/",
+        "vi": "quả chuối",
+        "col": "a banana",
+        "ex": "I put a banana in my bag.",
+        "exv": "Tôi bỏ một quả chuối vào túi."
+      },
+      {
+        "w": "pear",
+        "ipa": "/peə/",
+        "vi": "quả lê",
+        "col": "a pear",
+        "ex": "She eats a pear after lunch.",
+        "exv": "Cô ấy ăn một quả lê sau bữa trưa."
+      },
+      {
+        "w": "grapes",
+        "ipa": "/ɡreɪps/",
+        "vi": "nho",
+        "col": "some grapes",
+        "ex": "Grapes are small and sweet.",
+        "exv": "Nho nhỏ và ngọt."
+      },
+      {
+        "w": "strawberries",
+        "ipa": "/ˈstrɔːbəriz/",
+        "vi": "dâu tây",
+        "col": "some strawberries",
+        "ex": "Strawberries are red and sweet.",
+        "exv": "Dâu tây đỏ và ngọt."
+      },
+      {
+        "w": "pineapple",
+        "ipa": "/ˈpaɪnæpəl/",
+        "vi": "quả dứa",
+        "col": "a pineapple",
+        "ex": "I like pineapple in my fruit salad.",
+        "exv": "Tôi thích dứa trong món salad trái cây."
+      },
+      {
+        "w": "tea",
+        "ipa": "/tiː/",
+        "vi": "trà",
+        "col": "a cup of tea",
+        "ex": "I drink tea in the morning.",
+        "exv": "Tôi uống trà vào buổi sáng."
+      },
+      {
+        "w": "coffee",
+        "ipa": "/ˈkɒfi/",
+        "vi": "cà phê",
+        "col": "a cup of coffee",
+        "ex": "My mother drinks coffee every day.",
+        "exv": "Mẹ tôi uống cà phê mỗi ngày."
+      },
+      {
+        "w": "milk",
+        "ipa": "/mɪlk/",
+        "vi": "sữa",
+        "col": "a glass of milk",
+        "ex": "I drink a glass of milk at breakfast.",
+        "exv": "Tôi uống một cốc sữa vào bữa sáng."
+      },
+      {
+        "w": "fruit juice",
+        "ipa": "/fruːt dʒuːs/",
+        "vi": "nước ép trái cây",
+        "col": "a glass of fruit juice",
+        "ex": "I drink fruit juice with my breakfast.",
+        "exv": "Tôi uống nước ép trái cây với bữa sáng."
+      },
+      {
+        "w": "beer",
+        "ipa": "/bɪə/",
+        "vi": "bia",
+        "col": "a glass of beer",
+        "ex": "He drinks a glass of beer with dinner.",
+        "exv": "Anh ấy uống một cốc bia với bữa tối."
+      },
+      {
+        "w": "wine",
+        "ipa": "/waɪn/",
+        "vi": "rượu vang",
+        "col": "a glass of wine",
+        "ex": "She drinks a glass of wine at dinner.",
+        "exv": "Cô ấy uống một ly rượu vang vào bữa tối."
+      },
+      {
+        "w": "mineral water",
+        "ipa": "/ˈmɪnərəl ˈwɔːtə/",
+        "vi": "nước khoáng",
+        "col": "a bottle of mineral water",
+        "ex": "I drink mineral water when I am thirsty.",
+        "exv": "Tôi uống nước khoáng khi khát."
+      },
+      {
+        "w": "fish",
+        "ipa": "/fɪʃ/",
+        "vi": "cá",
+        "col": "fish and chips",
+        "ex": "My mother cooks fish with rice for dinner.",
+        "exv": "Mẹ tôi nấu cá với cơm cho bữa tối."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào là một loại rau?",
+        "o": [
+          "carrot",
+          "apple",
+          "banana"
+        ],
+        "a": 0,
+        "why": "carrot = cà rốt, là rau; apple = quả táo và banana = quả chuối, là quả."
+      },
+      {
+        "q": "Từ nào là một loại quả?",
+        "o": [
+          "potato",
+          "orange",
+          "onion"
+        ],
+        "a": 1,
+        "why": "orange = quả cam, là quả; potato = khoai tây và onion = hành tây, là rau củ."
+      },
+      {
+        "q": "Chọn từ khác loại.",
+        "o": [
+          "tea",
+          "coffee",
+          "bread",
+          "milk"
+        ],
+        "a": 2,
+        "why": "tea, coffee và milk đều là đồ uống; bread = bánh mì, là đồ ăn."
+      },
+      {
+        "q": "I drink a glass of ___ with my breakfast.",
+        "o": [
+          "milk",
+          "rice",
+          "potato"
+        ],
+        "a": 0,
+        "why": "milk = sữa, là đồ uống; rice = cơm và potato = khoai tây là đồ ăn."
+      },
+      {
+        "q": "Which drink is made from fruit?",
+        "o": [
+          "fruit juice",
+          "tea",
+          "beer"
+        ],
+        "a": 0,
+        "why": "fruit juice = nước ép trái cây, làm từ quả; tea = trà; beer = bia."
+      },
+      {
+        "q": "What is 'fish and chips'?",
+        "o": [
+          "a popular British food",
+          "a drink",
+          "a fruit"
+        ],
+        "a": 0,
+        "why": "fish and chips = cá chiên và khoai tây chiên, là món ăn nổi tiếng của Anh."
+      }
+    ]
+  },
+  {
+    "n": 44,
+    "group": "Ở nhà",
+    "title": "In the kitchen",
+    "titleVi": "Trong bếp",
+    "words": [
+      {
+        "w": "shelf",
+        "ipa": "/ʃelf/",
+        "vi": "kệ, giá",
+        "col": "a shelf",
+        "ex": "Put the books on the shelf.",
+        "exv": "Đặt sách lên kệ."
+      },
+      {
+        "w": "cupboard",
+        "ipa": "/ˈkʌbəd/",
+        "vi": "tủ chén",
+        "col": "a cupboard",
+        "ex": "The cups are in the cupboard.",
+        "exv": "Những chiếc cốc ở trong tủ chén."
+      },
+      {
+        "w": "cooker",
+        "ipa": "/ˈkʊkə/",
+        "vi": "bếp nấu",
+        "col": "a cooker",
+        "ex": "I cook rice on the cooker.",
+        "exv": "Tôi nấu cơm trên bếp."
+      },
+      {
+        "w": "sink",
+        "ipa": "/sɪŋk/",
+        "vi": "bồn rửa",
+        "col": "a sink",
+        "ex": "Wash your hands in the sink.",
+        "exv": "Rửa tay ở bồn rửa."
+      },
+      {
+        "w": "worktop",
+        "ipa": "/ˈwɜːktɒp/",
+        "vi": "mặt bàn bếp",
+        "col": "a worktop",
+        "ex": "Put the food on the worktop.",
+        "exv": "Đặt thức ăn lên mặt bàn bếp."
+      },
+      {
+        "w": "microwave",
+        "ipa": "/ˈmaɪkrəweɪv/",
+        "vi": "lò vi sóng",
+        "col": "a microwave",
+        "ex": "I warm the soup in the microwave.",
+        "exv": "Tôi hâm nóng súp trong lò vi sóng."
+      },
+      {
+        "w": "fridge",
+        "ipa": "/frɪdʒ/",
+        "vi": "tủ lạnh",
+        "col": "a fridge",
+        "ex": "The milk is in the fridge.",
+        "exv": "Sữa ở trong tủ lạnh."
+      },
+      {
+        "w": "freezer",
+        "ipa": "/ˈfriːzə/",
+        "vi": "ngăn đá",
+        "col": "a freezer",
+        "ex": "We keep ice cream in the freezer.",
+        "exv": "Chúng tôi để kem trong ngăn đá."
+      },
+      {
+        "w": "wastebin",
+        "ipa": "/ˈweɪstbɪn/",
+        "vi": "thùng rác",
+        "col": "a wastebin",
+        "ex": "Put the paper in the wastebin.",
+        "exv": "Bỏ giấy vào thùng rác."
+      },
+      {
+        "w": "cloth",
+        "ipa": "/klɒθ/",
+        "vi": "khăn lau, giẻ lau",
+        "col": "a cloth",
+        "ex": "Clean the table with a cloth.",
+        "exv": "Lau bàn bằng khăn lau."
+      },
+      {
+        "w": "kitchen paper",
+        "ipa": "/ˈkɪtʃɪn ˈpeɪpə/",
+        "vi": "giấy lau bếp",
+        "col": "some kitchen paper",
+        "ex": "I dry my hands with kitchen paper.",
+        "exv": "Tôi lau khô tay bằng giấy lau bếp."
+      },
+      {
+        "w": "washing-up liquid",
+        "ipa": "/ˈwɒʃɪŋ ʌp ˈlɪkwɪd/",
+        "vi": "nước rửa bát",
+        "col": "some washing-up liquid",
+        "ex": "Put some washing-up liquid in the water.",
+        "exv": "Cho một ít nước rửa bát vào nước."
+      },
+      {
+        "w": "saucepan",
+        "ipa": "/ˈsɔːspən/",
+        "vi": "nồi nhỏ",
+        "col": "a saucepan",
+        "ex": "Boil the potatoes in a saucepan.",
+        "exv": "Luộc khoai tây trong nồi nhỏ."
+      },
+      {
+        "w": "frying pan",
+        "ipa": "/ˈfraɪɪŋ pæn/",
+        "vi": "chảo rán",
+        "col": "a frying pan",
+        "ex": "Fry the egg in a frying pan.",
+        "exv": "Rán trứng trong chảo."
+      },
+      {
+        "w": "teapot",
+        "ipa": "/ˈtiːpɒt/",
+        "vi": "ấm trà",
+        "col": "a teapot",
+        "ex": "The tea is in the teapot.",
+        "exv": "Trà ở trong ấm."
+      },
+      {
+        "w": "coffee maker",
+        "ipa": "/ˈkɒfi ˈmeɪkə/",
+        "vi": "máy pha cà phê",
+        "col": "a coffee maker",
+        "ex": "My mother makes coffee with the coffee maker.",
+        "exv": "Mẹ tôi pha cà phê bằng máy pha cà phê."
+      },
+      {
+        "w": "tea towel",
+        "ipa": "/tiː ˈtaʊəl/",
+        "vi": "khăn lau bát đĩa",
+        "col": "a tea towel",
+        "ex": "Dry the cups with a tea towel.",
+        "exv": "Lau khô cốc bằng khăn lau bát đĩa."
+      },
+      {
+        "w": "chopsticks",
+        "ipa": "/ˈtʃɒpstɪks/",
+        "vi": "đũa",
+        "col": "some chopsticks",
+        "ex": "We eat rice with chopsticks.",
+        "exv": "Chúng tôi ăn cơm bằng đũa."
+      },
+      {
+        "w": "knife",
+        "ipa": "/naɪf/",
+        "vi": "dao",
+        "col": "a knife",
+        "ex": "Cut the bread with a knife.",
+        "exv": "Cắt bánh mì bằng dao."
+      },
+      {
+        "w": "glass",
+        "ipa": "/ɡlɑːs/",
+        "vi": "cốc thủy tinh",
+        "col": "a glass",
+        "ex": "I drink water from a glass.",
+        "exv": "Tôi uống nước từ cốc thủy tinh."
+      },
+      {
+        "w": "plate",
+        "ipa": "/pleɪt/",
+        "vi": "đĩa",
+        "col": "a plate",
+        "ex": "Put the food on a plate.",
+        "exv": "Đặt thức ăn lên đĩa."
+      },
+      {
+        "w": "cup",
+        "ipa": "/kʌp/",
+        "vi": "tách, cốc",
+        "col": "a cup",
+        "ex": "My tea is in a blue cup.",
+        "exv": "Trà của tôi ở trong chiếc tách màu xanh."
+      },
+      {
+        "w": "fork",
+        "ipa": "/fɔːk/",
+        "vi": "dĩa, nĩa",
+        "col": "a fork",
+        "ex": "Eat the salad with a fork.",
+        "exv": "Ăn salad bằng dĩa."
+      },
+      {
+        "w": "spoon",
+        "ipa": "/spuːn/",
+        "vi": "thìa",
+        "col": "a spoon",
+        "ex": "I eat soup with a spoon.",
+        "exv": "Tôi ăn súp bằng thìa."
+      },
+      {
+        "w": "mug",
+        "ipa": "/mʌɡ/",
+        "vi": "cốc lớn có quai",
+        "col": "a mug",
+        "ex": "I drink hot milk from a mug.",
+        "exv": "Tôi uống sữa nóng từ cốc lớn có quai."
+      },
+      {
+        "w": "bowl",
+        "ipa": "/bəʊl/",
+        "vi": "bát",
+        "col": "a bowl",
+        "ex": "Put the rice in a bowl.",
+        "exv": "Cho cơm vào bát."
+      },
+      {
+        "w": "saucer",
+        "ipa": "/ˈsɔːsə/",
+        "vi": "đĩa lót tách",
+        "col": "a saucer",
+        "ex": "Put the cup on the saucer.",
+        "exv": "Đặt tách lên đĩa lót."
+      },
+      {
+        "w": "washing-up",
+        "ipa": "/ˈwɒʃɪŋ ʌp/",
+        "vi": "việc rửa bát",
+        "col": "do the washing-up",
+        "ex": "I help with the washing-up after dinner.",
+        "exv": "Tôi phụ rửa bát sau bữa tối."
+      },
+      {
+        "w": "cooking",
+        "ipa": "/ˈkʊkɪŋ/",
+        "vi": "việc nấu ăn",
+        "col": "do the cooking",
+        "ex": "My father likes cooking on Sunday.",
+        "exv": "Bố tôi thích nấu ăn vào Chủ nhật."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'tủ lạnh'?",
+        "o": [
+          "fridge",
+          "cooker",
+          "sink"
+        ],
+        "a": 0,
+        "why": "fridge = tủ lạnh; cooker = bếp nấu; sink = bồn rửa."
+      },
+      {
+        "q": "Chọn từ khác loại.",
+        "o": [
+          "knife",
+          "fork",
+          "spoon",
+          "saucepan"
+        ],
+        "a": 3,
+        "why": "knife, fork và spoon dùng để ăn; saucepan = nồi nhỏ, dùng để nấu."
+      },
+      {
+        "q": "You wash the dishes in the ___.",
+        "o": [
+          "sink",
+          "fridge",
+          "shelf"
+        ],
+        "a": 0,
+        "why": "sink = bồn rửa, nơi rửa bát đĩa; fridge = tủ lạnh."
+      },
+      {
+        "q": "What do you use to fry an egg?",
+        "o": [
+          "frying pan",
+          "teapot",
+          "bowl"
+        ],
+        "a": 0,
+        "why": "frying pan = chảo rán, dùng để rán trứng; teapot = ấm trà."
+      },
+      {
+        "q": "Where do you keep cups and plates?",
+        "o": [
+          "cupboard",
+          "freezer",
+          "wastebin"
+        ],
+        "a": 0,
+        "why": "cupboard = tủ chén, nơi cất cốc và đĩa; freezer = ngăn đá."
+      },
+      {
+        "q": "I drink my tea from a ___.",
+        "o": [
+          "mug",
+          "knife",
+          "cloth"
+        ],
+        "a": 0,
+        "why": "mug = cốc lớn có quai, dùng để uống trà; knife = dao."
+      }
+    ]
+  },
+  {
+    "n": 45,
+    "group": "Ở nhà",
+    "title": "In the bedroom and bathroom",
+    "titleVi": "Trong phòng ngủ và phòng tắm",
+    "words": [
+      {
+        "w": "bedside lamp",
+        "ipa": "/ˈbedsaɪd læmp/",
+        "vi": "đèn đầu giường",
+        "col": "a bedside lamp",
+        "ex": "I turn on the bedside lamp to read.",
+        "exv": "Tôi bật đèn đầu giường để đọc sách."
+      },
+      {
+        "w": "hairbrush",
+        "ipa": "/ˈheəbrʌʃ/",
+        "vi": "lược chải tóc",
+        "col": "a hairbrush",
+        "ex": "I brush my hair with a hairbrush.",
+        "exv": "Tôi chải tóc bằng lược."
+      },
+      {
+        "w": "dressing table",
+        "ipa": "/ˈdresɪŋ ˈteɪbəl/",
+        "vi": "bàn trang điểm",
+        "col": "a dressing table",
+        "ex": "My mother sits at the dressing table.",
+        "exv": "Mẹ tôi ngồi ở bàn trang điểm."
+      },
+      {
+        "w": "comb",
+        "ipa": "/kəʊm/",
+        "vi": "lược",
+        "col": "a comb",
+        "ex": "I comb my hair in the morning.",
+        "exv": "Tôi chải tóc vào buổi sáng."
+      },
+      {
+        "w": "mirror",
+        "ipa": "/ˈmɪrə/",
+        "vi": "gương",
+        "col": "a mirror",
+        "ex": "I look in the mirror every morning.",
+        "exv": "Tôi soi gương mỗi sáng."
+      },
+      {
+        "w": "bed",
+        "ipa": "/bed/",
+        "vi": "giường",
+        "col": "a bed",
+        "ex": "I sleep in a big bed.",
+        "exv": "Tôi ngủ trên một chiếc giường lớn."
+      },
+      {
+        "w": "cupboard",
+        "ipa": "/ˈkʌbəd/",
+        "vi": "tủ quần áo",
+        "col": "a cupboard",
+        "ex": "My clothes are in the cupboard.",
+        "exv": "Quần áo của tôi ở trong tủ."
+      },
+      {
+        "w": "alarm clock",
+        "ipa": "/əˈlɑːm klɒk/",
+        "vi": "đồng hồ báo thức",
+        "col": "an alarm clock",
+        "ex": "My alarm clock rings at six.",
+        "exv": "Đồng hồ báo thức của tôi reo lúc sáu giờ."
+      },
+      {
+        "w": "chest of drawers",
+        "ipa": "/tʃest əv drɔːz/",
+        "vi": "tủ có ngăn kéo",
+        "col": "a chest of drawers",
+        "ex": "My shirts are in the chest of drawers.",
+        "exv": "Áo sơ mi của tôi ở trong tủ có ngăn kéo."
+      },
+      {
+        "w": "pyjamas",
+        "ipa": "/pəˈdʒɑːməz/",
+        "vi": "bộ đồ ngủ",
+        "col": "my pyjamas",
+        "ex": "I wear my pyjamas in bed.",
+        "exv": "Tôi mặc bộ đồ ngủ trên giường."
+      },
+      {
+        "w": "bedside table",
+        "ipa": "/ˈbedsaɪd ˈteɪbəl/",
+        "vi": "bàn đầu giường",
+        "col": "a bedside table",
+        "ex": "My book is on the bedside table.",
+        "exv": "Quyển sách của tôi ở trên bàn đầu giường."
+      },
+      {
+        "w": "nightdress/nightie",
+        "ipa": "/ˈnaɪtdres/",
+        "vi": "váy ngủ",
+        "col": "a nightdress",
+        "ex": "She wears a nightdress to bed.",
+        "exv": "Cô ấy mặc váy ngủ đi ngủ."
+      },
+      {
+        "w": "wardrobe",
+        "ipa": "/ˈwɔːdrəʊb/",
+        "vi": "tủ quần áo lớn",
+        "col": "a wardrobe",
+        "ex": "Hang your coat in the wardrobe.",
+        "exv": "Treo áo khoác của bạn vào tủ quần áo."
+      },
+      {
+        "w": "soap",
+        "ipa": "/səʊp/",
+        "vi": "xà phòng",
+        "col": "some soap",
+        "ex": "Wash your hands with soap.",
+        "exv": "Rửa tay bằng xà phòng."
+      },
+      {
+        "w": "toothpaste",
+        "ipa": "/ˈtuːθpeɪst/",
+        "vi": "kem đánh răng",
+        "col": "some toothpaste",
+        "ex": "Put toothpaste on your toothbrush.",
+        "exv": "Cho kem đánh răng lên bàn chải."
+      },
+      {
+        "w": "shelf",
+        "ipa": "/ʃelf/",
+        "vi": "kệ, giá",
+        "col": "a shelf",
+        "ex": "The soap is on the shelf.",
+        "exv": "Xà phòng ở trên kệ."
+      },
+      {
+        "w": "toothbrush",
+        "ipa": "/ˈtuːθbrʌʃ/",
+        "vi": "bàn chải đánh răng",
+        "col": "a toothbrush",
+        "ex": "My toothbrush is blue.",
+        "exv": "Bàn chải đánh răng của tôi màu xanh."
+      },
+      {
+        "w": "basin",
+        "ipa": "/ˈbeɪsən/",
+        "vi": "chậu rửa mặt",
+        "col": "a basin",
+        "ex": "Wash your face in the basin.",
+        "exv": "Rửa mặt ở chậu rửa mặt."
+      },
+      {
+        "w": "shower",
+        "ipa": "/ˈʃaʊə/",
+        "vi": "vòi sen, việc tắm vòi sen",
+        "col": "a shower",
+        "ex": "I have a shower in the morning.",
+        "exv": "Tôi tắm vòi sen vào buổi sáng."
+      },
+      {
+        "w": "bath",
+        "ipa": "/bɑːθ/",
+        "vi": "bồn tắm, việc tắm bồn",
+        "col": "a bath",
+        "ex": "I have a bath in the evening.",
+        "exv": "Tôi tắm bồn vào buổi tối."
+      },
+      {
+        "w": "towel",
+        "ipa": "/ˈtaʊəl/",
+        "vi": "khăn tắm",
+        "col": "a towel",
+        "ex": "Dry your face with a towel.",
+        "exv": "Lau khô mặt bằng khăn tắm."
+      },
+      {
+        "w": "shampoo",
+        "ipa": "/ʃæmˈpuː/",
+        "vi": "dầu gội đầu",
+        "col": "some shampoo",
+        "ex": "Wash your hair with shampoo.",
+        "exv": "Gội đầu bằng dầu gội."
+      },
+      {
+        "w": "toilet",
+        "ipa": "/ˈtɔɪlət/",
+        "vi": "bồn cầu, nhà vệ sinh",
+        "col": "a toilet",
+        "ex": "The toilet is next to the bathroom.",
+        "exv": "Bồn cầu ở cạnh phòng tắm."
+      },
+      {
+        "w": "go to bed",
+        "ipa": "/ɡəʊ tə bed/",
+        "vi": "đi ngủ",
+        "col": "go to bed",
+        "ex": "I go to bed at ten o'clock.",
+        "exv": "Tôi đi ngủ lúc mười giờ."
+      },
+      {
+        "w": "get undressed",
+        "ipa": "/ɡet ʌnˈdrest/",
+        "vi": "cởi quần áo",
+        "col": "get undressed",
+        "ex": "I get undressed before my shower.",
+        "exv": "Tôi cởi quần áo trước khi tắm vòi sen."
+      },
+      {
+        "w": "fall asleep",
+        "ipa": "/fɔːl əˈsliːp/",
+        "vi": "ngủ thiếp đi",
+        "col": "fall asleep",
+        "ex": "I read a book and then I fall asleep.",
+        "exv": "Tôi đọc sách rồi ngủ thiếp đi."
+      },
+      {
+        "w": "wake up",
+        "ipa": "/weɪk ʌp/",
+        "vi": "thức dậy",
+        "col": "wake up",
+        "ex": "I wake up at six every day.",
+        "exv": "Tôi thức dậy lúc sáu giờ mỗi ngày."
+      },
+      {
+        "w": "get up",
+        "ipa": "/ɡet ʌp/",
+        "vi": "ngồi dậy, ra khỏi giường",
+        "col": "get up",
+        "ex": "I get up and open the window.",
+        "exv": "Tôi ra khỏi giường và mở cửa sổ."
+      },
+      {
+        "w": "clean your teeth",
+        "ipa": "/kliːn jɔː tiːθ/",
+        "vi": "đánh răng",
+        "col": "clean your teeth",
+        "ex": "I clean my teeth in the morning and at night.",
+        "exv": "Tôi đánh răng vào buổi sáng và buổi tối."
+      },
+      {
+        "w": "get dressed",
+        "ipa": "/ɡet drest/",
+        "vi": "mặc quần áo",
+        "col": "get dressed",
+        "ex": "I get dressed and go to school.",
+        "exv": "Tôi mặc quần áo rồi đi học."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'gương'?",
+        "o": [
+          "mirror",
+          "comb",
+          "bed"
+        ],
+        "a": 0,
+        "why": "mirror = gương; comb = lược; bed = giường."
+      },
+      {
+        "q": "Chọn từ khác loại.",
+        "o": [
+          "soap",
+          "shampoo",
+          "towel",
+          "bed"
+        ],
+        "a": 3,
+        "why": "soap, shampoo và towel đều dùng trong phòng tắm; bed = giường, ở phòng ngủ."
+      },
+      {
+        "q": "You clean your teeth with a ___.",
+        "o": [
+          "toothbrush",
+          "hairbrush",
+          "comb"
+        ],
+        "a": 0,
+        "why": "toothbrush = bàn chải đánh răng, dùng để đánh răng; hairbrush = lược chải tóc."
+      },
+      {
+        "q": "My ___ rings at six o'clock and wakes me up.",
+        "o": [
+          "alarm clock",
+          "mirror",
+          "wardrobe"
+        ],
+        "a": 0,
+        "why": "alarm clock = đồng hồ báo thức, reo để đánh thức bạn; mirror = gương."
+      },
+      {
+        "q": "What do you do first in the morning?",
+        "o": [
+          "get up",
+          "go to bed",
+          "fall asleep"
+        ],
+        "a": 0,
+        "why": "get up = ra khỏi giường, là việc làm đầu tiên buổi sáng; go to bed = đi ngủ."
+      },
+      {
+        "q": "Where do you keep your clothes?",
+        "o": [
+          "wardrobe",
+          "basin",
+          "bath"
+        ],
+        "a": 0,
+        "why": "wardrobe = tủ quần áo lớn, nơi cất quần áo; basin = chậu rửa mặt."
+      }
+    ]
+  },
+  {
+    "n": 46,
+    "group": "Ở nhà",
+    "title": "In the living room",
+    "titleVi": "Trong phòng khách",
+    "words": [
+      {
+        "w": "sofa",
+        "ipa": "/ˈsəʊfə/",
+        "vi": "ghế sofa",
+        "col": "a sofa",
+        "ex": "My mum sits on the sofa in the evening.",
+        "exv": "Mẹ tôi ngồi trên ghế sofa vào buổi tối."
+      },
+      {
+        "w": "armchair",
+        "ipa": "/ˈɑːmtʃeə/",
+        "vi": "ghế bành",
+        "col": "an armchair",
+        "ex": "My dad likes his big armchair.",
+        "exv": "Bố tôi thích chiếc ghế bành to của ông."
+      },
+      {
+        "w": "coffee table",
+        "ipa": "/ˈkɒfi ˈteɪbl/",
+        "vi": "bàn cà phê",
+        "col": "a coffee table",
+        "ex": "My book is on the coffee table.",
+        "exv": "Quyển sách của tôi ở trên bàn cà phê."
+      },
+      {
+        "w": "bookshelf",
+        "ipa": "/ˈbʊkʃelf/",
+        "vi": "giá sách",
+        "col": "a bookshelf",
+        "ex": "There are many books on the bookshelf.",
+        "exv": "Có nhiều sách trên giá sách."
+      },
+      {
+        "w": "carpet",
+        "ipa": "/ˈkɑːpɪt/",
+        "vi": "tấm thảm",
+        "col": "a carpet",
+        "ex": "The carpet in my room is blue.",
+        "exv": "Tấm thảm trong phòng tôi màu xanh dương."
+      },
+      {
+        "w": "curtains",
+        "ipa": "/ˈkɜːtnz/",
+        "vi": "rèm cửa",
+        "col": "the curtains",
+        "ex": "Please close the curtains at night.",
+        "exv": "Hãy kéo rèm cửa lại vào buổi tối."
+      },
+      {
+        "w": "picture",
+        "ipa": "/ˈpɪktʃə/",
+        "vi": "bức tranh",
+        "col": "a picture",
+        "ex": "There is a nice picture on the wall.",
+        "exv": "Có một bức tranh đẹp trên tường."
+      },
+      {
+        "w": "CD player",
+        "ipa": "/ˌsiːˈdiː ˈpleɪə/",
+        "vi": "máy nghe đĩa CD",
+        "col": "a CD player",
+        "ex": "My brother has a small CD player.",
+        "exv": "Anh trai tôi có một máy nghe đĩa CD nhỏ."
+      },
+      {
+        "w": "music centre",
+        "ipa": "/ˈmjuːzɪk ˈsentə/",
+        "vi": "dàn nghe nhạc",
+        "col": "a music centre",
+        "ex": "The music centre is next to the TV.",
+        "exv": "Dàn nghe nhạc ở bên cạnh ti vi."
+      },
+      {
+        "w": "television",
+        "ipa": "/ˈtelɪvɪʒn/",
+        "vi": "ti vi",
+        "col": "a television",
+        "ex": "We watch the news on television at seven.",
+        "exv": "Chúng tôi xem tin tức trên ti vi lúc bảy giờ."
+      },
+      {
+        "w": "radio",
+        "ipa": "/ˈreɪdiəʊ/",
+        "vi": "đài radio",
+        "col": "a radio",
+        "ex": "I listen to the radio in the morning.",
+        "exv": "Tôi nghe đài radio vào buổi sáng."
+      },
+      {
+        "w": "remote control",
+        "ipa": "/rɪˈməʊt kənˈtrəʊl/",
+        "vi": "điều khiển từ xa",
+        "col": "the remote control",
+        "ex": "The remote control is on the small table.",
+        "exv": "Điều khiển từ xa ở trên chiếc bàn nhỏ."
+      },
+      {
+        "w": "reading lamp",
+        "ipa": "/ˈriːdɪŋ læmp/",
+        "vi": "đèn đọc sách",
+        "col": "a reading lamp",
+        "ex": "I read my book under the reading lamp.",
+        "exv": "Tôi đọc sách dưới đèn đọc sách."
+      },
+      {
+        "w": "light",
+        "ipa": "/laɪt/",
+        "vi": "đèn",
+        "col": "a light",
+        "ex": "The light in this room is very bright.",
+        "exv": "Đèn trong phòng này rất sáng."
+      },
+      {
+        "w": "switch",
+        "ipa": "/swɪtʃ/",
+        "vi": "công tắc",
+        "col": "a switch",
+        "ex": "The switch is on the wall by the door.",
+        "exv": "Công tắc ở trên tường cạnh cửa ra vào."
+      },
+      {
+        "w": "power point",
+        "ipa": "/ˈpaʊə pɔɪnt/",
+        "vi": "ổ cắm điện",
+        "col": "a power point",
+        "ex": "Please put the plug in the power point.",
+        "exv": "Hãy cắm phích vào ổ cắm điện."
+      },
+      {
+        "w": "phone",
+        "ipa": "/fəʊn/",
+        "vi": "điện thoại",
+        "col": "a phone",
+        "ex": "The phone is on the small table.",
+        "exv": "Điện thoại ở trên chiếc bàn nhỏ."
+      },
+      {
+        "w": "book",
+        "ipa": "/bʊk/",
+        "vi": "quyển sách",
+        "col": "a book",
+        "ex": "This book is very interesting.",
+        "exv": "Quyển sách này rất thú vị."
+      },
+      {
+        "w": "table",
+        "ipa": "/ˈteɪbl/",
+        "vi": "cái bàn",
+        "col": "a table",
+        "ex": "We eat lunch at the table.",
+        "exv": "Chúng tôi ăn trưa ở bàn."
+      },
+      {
+        "w": "chair",
+        "ipa": "/tʃeə/",
+        "vi": "cái ghế",
+        "col": "a chair",
+        "ex": "There are four chairs in the room.",
+        "exv": "Có bốn cái ghế trong phòng."
+      },
+      {
+        "w": "relax",
+        "ipa": "/rɪˈlæks/",
+        "vi": "thư giãn",
+        "col": "relax at home",
+        "ex": "I relax at home on Sunday evening.",
+        "exv": "Tôi thư giãn ở nhà vào tối chủ nhật."
+      },
+      {
+        "w": "watch television",
+        "ipa": "/wɒtʃ ˈtelɪvɪʒn/",
+        "vi": "xem ti vi",
+        "col": "watch television",
+        "ex": "My family watches television after dinner.",
+        "exv": "Gia đình tôi xem ti vi sau bữa tối."
+      },
+      {
+        "w": "listen to music",
+        "ipa": "/ˈlɪsn tə ˈmjuːzɪk/",
+        "vi": "nghe nhạc",
+        "col": "listen to music",
+        "ex": "She listens to music in her free time.",
+        "exv": "Cô ấy nghe nhạc vào lúc rảnh."
+      },
+      {
+        "w": "in the middle of",
+        "ipa": "/ɪn ðə ˈmɪdl əv/",
+        "vi": "ở giữa",
+        "col": "in the middle of the room",
+        "ex": "My chair is in the middle of the room.",
+        "exv": "Ghế của tôi ở giữa phòng."
+      },
+      {
+        "w": "next to",
+        "ipa": "/nekst tə/",
+        "vi": "bên cạnh",
+        "col": "next to the sofa",
+        "ex": "My bag is next to the sofa.",
+        "exv": "Túi của tôi ở bên cạnh ghế sofa."
+      },
+      {
+        "w": "in the corner",
+        "ipa": "/ɪn ðə ˈkɔːnə/",
+        "vi": "ở góc phòng",
+        "col": "in the corner",
+        "ex": "My desk is in the corner of the room.",
+        "exv": "Bàn học của tôi ở góc phòng."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'ghế sofa'?",
+        "o": [
+          "sofa",
+          "chair",
+          "table"
+        ],
+        "a": 0,
+        "why": "sofa = ghế sofa; chair = cái ghế; table = cái bàn."
+      },
+      {
+        "q": "Điền từ đúng: 'My bag is ___ the sofa.'",
+        "o": [
+          "next to",
+          "in the corner",
+          "in the middle of"
+        ],
+        "a": 0,
+        "why": "next to = bên cạnh; in the corner = ở góc phòng; in the middle of = ở giữa."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "carpet",
+          "sofa",
+          "relax"
+        ],
+        "a": 2,
+        "why": "relax là động từ (thư giãn); carpet và sofa đều là đồ đạc trong phòng khách."
+      },
+      {
+        "q": "Điền từ đúng: 'Please switch the ___ on.'",
+        "o": [
+          "light",
+          "book",
+          "chair"
+        ],
+        "a": 0,
+        "why": "switch the light on = bật đèn; book = quyển sách; chair = cái ghế."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'điều khiển từ xa'?",
+        "o": [
+          "remote control",
+          "power point",
+          "reading lamp"
+        ],
+        "a": 0,
+        "why": "remote control = điều khiển từ xa; power point = ổ cắm điện; reading lamp = đèn đọc sách."
+      },
+      {
+        "q": "Đồ nào dùng để nghe nhạc?",
+        "o": [
+          "CD player",
+          "bookshelf",
+          "coffee table"
+        ],
+        "a": 0,
+        "why": "CD player dùng để nghe đĩa nhạc; bookshelf để sách; coffee table để đặt cốc."
+      }
+    ]
+  },
+  {
+    "n": 47,
+    "group": "Trường học và nơi làm việc",
+    "title": "Jobs",
+    "titleVi": "Nghề nghiệp",
+    "words": [
+      {
+        "w": "nurse",
+        "ipa": "/nɜːs/",
+        "vi": "y tá",
+        "col": "a nurse",
+        "ex": "My aunt is a nurse in a big hospital.",
+        "exv": "Dì tôi là y tá trong một bệnh viện lớn."
+      },
+      {
+        "w": "doctor",
+        "ipa": "/ˈdɒktə/",
+        "vi": "bác sĩ",
+        "col": "a doctor",
+        "ex": "The doctor works in the hospital every day.",
+        "exv": "Bác sĩ làm việc trong bệnh viện mỗi ngày."
+      },
+      {
+        "w": "mechanic",
+        "ipa": "/mɪˈkænɪk/",
+        "vi": "thợ sửa xe",
+        "col": "a mechanic",
+        "ex": "The mechanic can fix my old car.",
+        "exv": "Thợ sửa xe có thể sửa chiếc xe cũ của tôi."
+      },
+      {
+        "w": "hairdresser",
+        "ipa": "/ˈheədresə/",
+        "vi": "thợ làm tóc",
+        "col": "a hairdresser",
+        "ex": "My sister is a hairdresser in town.",
+        "exv": "Chị gái tôi là thợ làm tóc trong thành phố."
+      },
+      {
+        "w": "engineer",
+        "ipa": "/ˌendʒɪˈnɪə/",
+        "vi": "kỹ sư",
+        "col": "an engineer",
+        "ex": "He is an engineer and he likes his job.",
+        "exv": "Anh ấy là kỹ sư và anh ấy thích công việc của mình."
+      },
+      {
+        "w": "farmer",
+        "ipa": "/ˈfɑːmə/",
+        "vi": "nông dân",
+        "col": "a farmer",
+        "ex": "The farmer works on a farm.",
+        "exv": "Nông dân làm việc ở nông trại."
+      },
+      {
+        "w": "secretary",
+        "ipa": "/ˈsekrətri/",
+        "vi": "thư ký",
+        "col": "a secretary",
+        "ex": "The secretary works in a big office.",
+        "exv": "Thư ký làm việc trong một văn phòng lớn."
+      },
+      {
+        "w": "shop assistant",
+        "ipa": "/ˈʃɒp əˈsɪstənt/",
+        "vi": "nhân viên bán hàng",
+        "col": "a shop assistant",
+        "ex": "The shop assistant helps me in the shop.",
+        "exv": "Nhân viên bán hàng giúp tôi trong cửa hàng."
+      },
+      {
+        "w": "waiter",
+        "ipa": "/ˈweɪtə/",
+        "vi": "bồi bàn",
+        "col": "a waiter",
+        "ex": "The waiter works in a small restaurant.",
+        "exv": "Bồi bàn làm việc trong một nhà hàng nhỏ."
+      },
+      {
+        "w": "job",
+        "ipa": "/dʒɒb/",
+        "vi": "công việc",
+        "col": "a job",
+        "ex": "I like my new job very much.",
+        "exv": "Tôi rất thích công việc mới của mình."
+      },
+      {
+        "w": "work",
+        "ipa": "/wɜːk/",
+        "vi": "làm việc",
+        "col": "work in a factory",
+        "ex": "My father works in a factory.",
+        "exv": "Bố tôi làm việc trong một nhà máy."
+      },
+      {
+        "w": "workplace",
+        "ipa": "/ˈwɜːkpleɪs/",
+        "vi": "nơi làm việc",
+        "col": "a workplace",
+        "ex": "My workplace is near my home.",
+        "exv": "Nơi làm việc của tôi gần nhà tôi."
+      },
+      {
+        "w": "hospital",
+        "ipa": "/ˈhɒspɪtl/",
+        "vi": "bệnh viện",
+        "col": "a hospital",
+        "ex": "There is a big hospital near my house.",
+        "exv": "Có một bệnh viện lớn gần nhà tôi."
+      },
+      {
+        "w": "shop",
+        "ipa": "/ʃɒp/",
+        "vi": "cửa hàng",
+        "col": "a shop",
+        "ex": "I buy bread in a small shop near my home.",
+        "exv": "Tôi mua bánh mì ở một cửa hàng nhỏ gần nhà."
+      },
+      {
+        "w": "factory",
+        "ipa": "/ˈfæktri/",
+        "vi": "nhà máy",
+        "col": "a factory",
+        "ex": "Many people work in the factory.",
+        "exv": "Nhiều người làm việc trong nhà máy."
+      },
+      {
+        "w": "office",
+        "ipa": "/ˈɒfɪs/",
+        "vi": "văn phòng",
+        "col": "an office",
+        "ex": "She works in an office in the city.",
+        "exv": "Cô ấy làm việc trong một văn phòng ở thành phố."
+      },
+      {
+        "w": "school",
+        "ipa": "/skuːl/",
+        "vi": "trường học",
+        "col": "a school",
+        "ex": "My brother teaches at a school.",
+        "exv": "Anh trai tôi dạy học ở một trường học."
+      },
+      {
+        "w": "college",
+        "ipa": "/ˈkɒlɪdʒ/",
+        "vi": "trường cao đẳng",
+        "col": "a college",
+        "ex": "He studies at a college in my town.",
+        "exv": "Anh ấy học ở một trường cao đẳng trong thị trấn của tôi."
+      },
+      {
+        "w": "work at home",
+        "ipa": "/wɜːk ət həʊm/",
+        "vi": "làm việc tại nhà",
+        "col": "work at home",
+        "ex": "My mum works at home on Friday.",
+        "exv": "Mẹ tôi làm việc tại nhà vào thứ sáu."
+      },
+      {
+        "w": "work from home",
+        "ipa": "/wɜːk frɒm həʊm/",
+        "vi": "làm việc từ nhà",
+        "col": "work from home",
+        "ex": "I work from home two days a week.",
+        "exv": "Tôi làm việc từ nhà hai ngày một tuần."
+      },
+      {
+        "w": "interesting job",
+        "ipa": "/ˈɪntrəstɪŋ dʒɒb/",
+        "vi": "công việc thú vị",
+        "col": "an interesting job",
+        "ex": "My job is very interesting.",
+        "exv": "Công việc của tôi rất thú vị."
+      },
+      {
+        "w": "teacher",
+        "ipa": "/ˈtiːtʃə/",
+        "vi": "giáo viên",
+        "col": "a teacher",
+        "ex": "My teacher is kind and helps me learn English.",
+        "exv": "Giáo viên của tôi rất tốt bụng và giúp tôi học tiếng Anh."
+      },
+      {
+        "w": "taxi-driver",
+        "ipa": "/ˈtæksi draɪvə/",
+        "vi": "tài xế taxi",
+        "col": "a taxi-driver",
+        "ex": "The taxi-driver waits for us outside the hotel.",
+        "exv": "Tài xế taxi đợi chúng tôi bên ngoài khách sạn."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'y tá'?",
+        "o": [
+          "nurse",
+          "doctor",
+          "farmer"
+        ],
+        "a": 0,
+        "why": "nurse = y tá; doctor = bác sĩ; farmer = nông dân."
+      },
+      {
+        "q": "Người nào làm việc trong bệnh viện?",
+        "o": [
+          "nurse",
+          "farmer",
+          "hairdresser"
+        ],
+        "a": 0,
+        "why": "y tá làm việc trong bệnh viện; nông dân làm việc ở nông trại; thợ làm tóc làm việc ở tiệm tóc."
+      },
+      {
+        "q": "Điền từ đúng: 'A secretary works in an ___.'",
+        "o": [
+          "office",
+          "hospital",
+          "factory"
+        ],
+        "a": 0,
+        "why": "secretary làm việc ở văn phòng (office); hospital là bệnh viện; factory là nhà máy."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "doctor",
+          "nurse",
+          "hospital"
+        ],
+        "a": 2,
+        "why": "hospital là nơi làm việc; doctor và nurse đều là tên nghề nghiệp."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'làm việc tại nhà'?",
+        "o": [
+          "work at home",
+          "work in a shop",
+          "work in a factory"
+        ],
+        "a": 0,
+        "why": "work at home = làm việc tại nhà; work in a shop = làm việc trong cửa hàng; work in a factory = làm việc trong nhà máy."
+      },
+      {
+        "q": "Câu nào hỏi về nghề nghiệp của một người?",
+        "o": [
+          "What is your job?",
+          "Where is the hospital?",
+          "What is your name?"
+        ],
+        "a": 0,
+        "why": "'What is your job?' hỏi về nghề nghiệp; câu kia hỏi về nơi chốn và tên."
+      }
+    ]
+  },
+  {
+    "n": 48,
+    "group": "Trường học và nơi làm việc",
+    "title": "At school and university",
+    "titleVi": "Ở trường học và đại học",
+    "words": [
+      {
+        "w": "English",
+        "ipa": "/ˈɪŋɡlɪʃ/",
+        "vi": "tiếng Anh",
+        "col": "English lessons",
+        "ex": "We learn English at school every day.",
+        "exv": "Chúng tôi học tiếng Anh ở trường mỗi ngày."
+      },
+      {
+        "w": "mathematics",
+        "ipa": "/ˌmæθəˈmætɪks/",
+        "vi": "toán học",
+        "col": "mathematics lessons",
+        "ex": "I like mathematics, but it is difficult.",
+        "exv": "Tôi thích toán học, nhưng nó khó."
+      },
+      {
+        "w": "history",
+        "ipa": "/ˈhɪstri/",
+        "vi": "lịch sử",
+        "col": "history lessons",
+        "ex": "We learn about the past in history.",
+        "exv": "Chúng tôi học về quá khứ trong môn lịch sử."
+      },
+      {
+        "w": "geography",
+        "ipa": "/dʒiˈɒɡrəfi/",
+        "vi": "địa lý",
+        "col": "geography lessons",
+        "ex": "Geography is about countries and rivers.",
+        "exv": "Địa lý là môn học về các nước và dòng sông."
+      },
+      {
+        "w": "biology",
+        "ipa": "/baɪˈɒlədʒi/",
+        "vi": "sinh học",
+        "col": "biology lessons",
+        "ex": "Biology is about plants and animals.",
+        "exv": "Sinh học là môn học về cây cối và động vật."
+      },
+      {
+        "w": "art",
+        "ipa": "/ɑːt/",
+        "vi": "mỹ thuật",
+        "col": "art lessons",
+        "ex": "My sister loves art and drawing.",
+        "exv": "Em gái tôi thích mỹ thuật và vẽ."
+      },
+      {
+        "w": "physics",
+        "ipa": "/ˈfɪzɪks/",
+        "vi": "vật lý",
+        "col": "physics lessons",
+        "ex": "Physics is a hard subject for me.",
+        "exv": "Vật lý là một môn khó đối với tôi."
+      },
+      {
+        "w": "languages",
+        "ipa": "/ˈlæŋɡwɪdʒɪz/",
+        "vi": "các ngôn ngữ",
+        "col": "learn languages",
+        "ex": "She speaks two languages very well.",
+        "exv": "Cô ấy nói hai ngôn ngữ rất giỏi."
+      },
+      {
+        "w": "information technology",
+        "ipa": "/ˌɪnfəˈmeɪʃn tekˈnɒlədʒi/",
+        "vi": "công nghệ thông tin",
+        "col": "information technology lessons",
+        "ex": "We use computers in information technology.",
+        "exv": "Chúng tôi dùng máy tính trong môn công nghệ thông tin."
+      },
+      {
+        "w": "technical drawing",
+        "ipa": "/ˈteknɪkl ˈdrɔːɪŋ/",
+        "vi": "vẽ kỹ thuật",
+        "col": "technical drawing lessons",
+        "ex": "He is good at technical drawing.",
+        "exv": "Anh ấy giỏi vẽ kỹ thuật."
+      },
+      {
+        "w": "physical education",
+        "ipa": "/ˈfɪzɪkl ˌedʒuˈkeɪʃn/",
+        "vi": "thể dục",
+        "col": "physical education lessons",
+        "ex": "We play games in physical education.",
+        "exv": "Chúng tôi chơi trò chơi trong giờ thể dục."
+      },
+      {
+        "w": "music",
+        "ipa": "/ˈmjuːzɪk/",
+        "vi": "âm nhạc",
+        "col": "music lessons",
+        "ex": "We sing songs in music.",
+        "exv": "Chúng tôi hát trong giờ âm nhạc."
+      },
+      {
+        "w": "chemistry",
+        "ipa": "/ˈkemɪstri/",
+        "vi": "hóa học",
+        "col": "chemistry lessons",
+        "ex": "Chemistry lessons are on Monday.",
+        "exv": "Giờ hóa học vào thứ hai."
+      },
+      {
+        "w": "textbook",
+        "ipa": "/ˈtekstbʊk/",
+        "vi": "sách giáo khoa",
+        "col": "a textbook",
+        "ex": "My textbook is in my school bag.",
+        "exv": "Sách giáo khoa của tôi ở trong cặp."
+      },
+      {
+        "w": "notebook",
+        "ipa": "/ˈnəʊtbʊk/",
+        "vi": "vở ghi",
+        "col": "a notebook",
+        "ex": "I write new words in my notebook.",
+        "exv": "Tôi viết từ mới vào vở ghi."
+      },
+      {
+        "w": "pencil",
+        "ipa": "/ˈpensl/",
+        "vi": "bút chì",
+        "col": "a pencil",
+        "ex": "Please write your name with a pencil.",
+        "exv": "Hãy viết tên của bạn bằng bút chì."
+      },
+      {
+        "w": "pen",
+        "ipa": "/pen/",
+        "vi": "bút mực",
+        "col": "a pen",
+        "ex": "I have a blue pen in my bag.",
+        "exv": "Tôi có một cây bút mực màu xanh trong túi."
+      },
+      {
+        "w": "ruler",
+        "ipa": "/ˈruːlə/",
+        "vi": "thước kẻ",
+        "col": "a ruler",
+        "ex": "I draw a line with a ruler.",
+        "exv": "Tôi kẻ một đường thẳng bằng thước kẻ."
+      },
+      {
+        "w": "rubber",
+        "ipa": "/ˈrʌbə/",
+        "vi": "cục tẩy",
+        "col": "a rubber",
+        "ex": "I use a rubber to change my answer.",
+        "exv": "Tôi dùng cục tẩy để sửa câu trả lời của mình."
+      },
+      {
+        "w": "computer",
+        "ipa": "/kəmˈpjuːtə/",
+        "vi": "máy tính",
+        "col": "a computer",
+        "ex": "We use a computer at school on Friday.",
+        "exv": "Chúng tôi dùng máy tính ở trường vào thứ sáu."
+      },
+      {
+        "w": "teach",
+        "ipa": "/tiːtʃ/",
+        "vi": "dạy",
+        "col": "teach English",
+        "ex": "My teacher teaches us English.",
+        "exv": "Giáo viên của tôi dạy chúng tôi tiếng Anh."
+      },
+      {
+        "w": "study",
+        "ipa": "/ˈstʌdi/",
+        "vi": "học",
+        "col": "study English",
+        "ex": "I study English every evening at home.",
+        "exv": "Tôi học tiếng Anh mỗi tối ở nhà."
+      },
+      {
+        "w": "learn",
+        "ipa": "/lɜːn/",
+        "vi": "học để biết",
+        "col": "learn to read",
+        "ex": "Children learn to read at school.",
+        "exv": "Trẻ em học đọc ở trường."
+      },
+      {
+        "w": "do homework",
+        "ipa": "/duː ˈhəʊmwɜːk/",
+        "vi": "làm bài tập về nhà",
+        "col": "do homework",
+        "ex": "I do my homework after dinner.",
+        "exv": "Tôi làm bài tập về nhà sau bữa tối."
+      },
+      {
+        "w": "take an exam",
+        "ipa": "/teɪk ən ɪɡˈzæm/",
+        "vi": "dự thi",
+        "col": "take an exam",
+        "ex": "We take an exam in June.",
+        "exv": "Chúng tôi dự thi vào tháng sáu."
+      },
+      {
+        "w": "pass an exam",
+        "ipa": "/pɑːs ən ɪɡˈzæm/",
+        "vi": "thi đỗ",
+        "col": "pass an exam",
+        "ex": "I hope to pass my exam this year.",
+        "exv": "Tôi hy vọng thi đỗ trong năm nay."
+      },
+      {
+        "w": "fail an exam",
+        "ipa": "/feɪl ən ɪɡˈzæm/",
+        "vi": "thi trượt",
+        "col": "fail an exam",
+        "ex": "I do not want to fail my exam.",
+        "exv": "Tôi không muốn thi trượt."
+      },
+      {
+        "w": "get a degree",
+        "ipa": "/ɡet ə dɪˈɡriː/",
+        "vi": "nhận bằng đại học",
+        "col": "get a degree",
+        "ex": "If I finish university, I get a degree.",
+        "exv": "Nếu tôi học xong đại học, tôi sẽ nhận bằng."
+      },
+      {
+        "w": "noticeboard",
+        "ipa": "/ˈnəʊtɪsbɔːd/",
+        "vi": "bảng thông báo",
+        "col": "a noticeboard",
+        "ex": "The new class list is on the noticeboard.",
+        "exv": "Danh sách lớp mới dán trên bảng thông báo."
+      },
+      {
+        "w": "piece of paper",
+        "ipa": "/piːs əv ˈpeɪpə/",
+        "vi": "mảnh giấy",
+        "col": "a piece of paper",
+        "ex": "Write your name on a piece of paper.",
+        "exv": "Hãy viết tên của bạn lên một tờ giấy."
+      },
+      {
+        "w": "cassette",
+        "ipa": "/kəˈset/",
+        "vi": "băng cassette",
+        "col": "a cassette",
+        "ex": "I listen to the new song on a cassette.",
+        "exv": "Tôi nghe bài hát mới trên băng cassette."
+      },
+      {
+        "w": "crayon",
+        "ipa": "/ˈkreɪɒn/",
+        "vi": "bút sáp màu",
+        "col": "a crayon",
+        "ex": "The little girl draws a red house with a crayon.",
+        "exv": "Bé gái vẽ một ngôi nhà màu đỏ bằng bút sáp màu."
+      },
+      {
+        "w": "paper clip",
+        "ipa": "/ˈpeɪpə klɪp/",
+        "vi": "cái kẹp giấy",
+        "col": "a paper clip",
+        "ex": "I use a paper clip to keep the pages together.",
+        "exv": "Tôi dùng một cái kẹp giấy để giữ các trang giấy lại với nhau."
+      },
+      {
+        "w": "board rubber",
+        "ipa": "/bɔːd ˈrʌbə/",
+        "vi": "cái lau bảng",
+        "col": "a board rubber",
+        "ex": "The teacher cleans the board with a board rubber.",
+        "exv": "Giáo viên lau bảng bằng cái lau bảng."
+      },
+      {
+        "w": "video recorder",
+        "ipa": "/ˈvɪdiəʊ rɪˈkɔːdə/",
+        "vi": "máy ghi hình video",
+        "col": "a video recorder",
+        "ex": "We watch the film on the video recorder.",
+        "exv": "Chúng tôi xem phim trên máy ghi hình video."
+      },
+      {
+        "w": "OHP",
+        "ipa": "/ˌəʊ eɪtʃ ˈpiː/",
+        "vi": "máy chiếu overhead",
+        "col": "an OHP",
+        "ex": "The teacher puts the picture on the OHP.",
+        "exv": "Giáo viên đặt bức tranh lên máy chiếu overhead."
+      },
+      {
+        "w": "pencil sharpener",
+        "ipa": "/ˈpensl ˈʃɑːpnə/",
+        "vi": "cái gọt bút chì",
+        "col": "a pencil sharpener",
+        "ex": "My pencil is not sharp, so I use a pencil sharpener.",
+        "exv": "Bút chì của tôi không nhọn, vì vậy tôi dùng cái gọt bút chì."
+      },
+      {
+        "w": "drawing pin",
+        "ipa": "/ˈdrɔːɪŋ pɪn/",
+        "vi": "cái đinh ghim",
+        "col": "a drawing pin",
+        "ex": "I put the picture on the wall with a drawing pin.",
+        "exv": "Tôi ghim bức tranh lên tường bằng một cái đinh ghim."
+      },
+      {
+        "w": "tape recorder",
+        "ipa": "/teɪp rɪˈkɔːdə/",
+        "vi": "máy ghi âm",
+        "col": "a tape recorder",
+        "ex": "We listen to English on the tape recorder.",
+        "exv": "Chúng tôi nghe tiếng Anh trên máy ghi âm."
+      },
+      {
+        "w": "desk",
+        "ipa": "/desk/",
+        "vi": "bàn học",
+        "col": "a desk",
+        "ex": "My books are on my desk at home.",
+        "exv": "Sách của tôi ở trên bàn học ở nhà."
+      },
+      {
+        "w": "board",
+        "ipa": "/bɔːd/",
+        "vi": "bảng",
+        "col": "a board",
+        "ex": "The teacher writes new words on the board.",
+        "exv": "Giáo viên viết từ mới lên bảng."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'toán học'?",
+        "o": [
+          "mathematics",
+          "history",
+          "geography"
+        ],
+        "a": 0,
+        "why": "mathematics = toán học; history = lịch sử; geography = địa lý."
+      },
+      {
+        "q": "Môn nào học về các chất?",
+        "o": [
+          "chemistry",
+          "music",
+          "art"
+        ],
+        "a": 0,
+        "why": "chemistry = hóa học, học về các chất; music = âm nhạc; art = mỹ thuật."
+      },
+      {
+        "q": "Điền từ đúng: 'I write new words in my ___.'",
+        "o": [
+          "notebook",
+          "ruler",
+          "rubber"
+        ],
+        "a": 0,
+        "why": "notebook = vở ghi, nơi viết từ mới; ruler = thước kẻ; rubber = cục tẩy."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "pencil",
+          "pen",
+          "teach"
+        ],
+        "a": 2,
+        "why": "teach là động từ (dạy); pencil và pen đều là đồ dùng học tập."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'thi đỗ'?",
+        "o": [
+          "pass an exam",
+          "fail an exam",
+          "take an exam"
+        ],
+        "a": 0,
+        "why": "pass an exam = thi đỗ; fail an exam = thi trượt; take an exam = dự thi."
+      },
+      {
+        "q": "Điền từ đúng: 'A teacher ___ English at my school.'",
+        "o": [
+          "teaches",
+          "studies",
+          "learns"
+        ],
+        "a": 0,
+        "why": "teaches = dạy; studies = học; learns = học để biết. Giáo viên dạy học sinh."
+      }
+    ]
+  },
+  {
+    "n": 49,
+    "group": "Trường học và nơi làm việc",
+    "title": "Communications",
+    "titleVi": "Liên lạc",
+    "words": [
+      {
+        "w": "letter",
+        "ipa": "/ˈletə/",
+        "vi": "bức thư",
+        "col": "a letter",
+        "ex": "I write a letter to my friend every month.",
+        "exv": "Tôi viết thư cho bạn tôi mỗi tháng."
+      },
+      {
+        "w": "address",
+        "ipa": "/əˈdres/",
+        "vi": "địa chỉ",
+        "col": "an address",
+        "ex": "Please write your address on the letter.",
+        "exv": "Hãy viết địa chỉ của bạn lên bức thư."
+      },
+      {
+        "w": "stamp",
+        "ipa": "/stæmp/",
+        "vi": "con tem",
+        "col": "a stamp",
+        "ex": "I put a stamp on the envelope.",
+        "exv": "Tôi dán một con tem lên phong bì."
+      },
+      {
+        "w": "envelope",
+        "ipa": "/ˈenvələʊp/",
+        "vi": "phong bì",
+        "col": "an envelope",
+        "ex": "The letter is in a white envelope.",
+        "exv": "Bức thư ở trong một phong bì trắng."
+      },
+      {
+        "w": "post box",
+        "ipa": "/ˈpəʊst bɒks/",
+        "vi": "hòm thư",
+        "col": "a post box",
+        "ex": "I put the letter in the post box.",
+        "exv": "Tôi bỏ thư vào hòm thư."
+      },
+      {
+        "w": "post",
+        "ipa": "/pəʊst/",
+        "vi": "gửi thư",
+        "col": "post a letter",
+        "ex": "I post my letter on Monday morning.",
+        "exv": "Tôi gửi thư của mình vào sáng thứ hai."
+      },
+      {
+        "w": "phone box",
+        "ipa": "/ˈfəʊn bɒks/",
+        "vi": "bốt điện thoại",
+        "col": "a phone box",
+        "ex": "There is a phone box near my house.",
+        "exv": "Có một bốt điện thoại gần nhà tôi."
+      },
+      {
+        "w": "answerphone",
+        "ipa": "/ˈɑːnsəfəʊn/",
+        "vi": "máy trả lời tự động",
+        "col": "an answerphone",
+        "ex": "Please leave a message on my answerphone.",
+        "exv": "Hãy để lại lời nhắn trên máy trả lời tự động của tôi."
+      },
+      {
+        "w": "mobile phone",
+        "ipa": "/ˈməʊbaɪl fəʊn/",
+        "vi": "điện thoại di động",
+        "col": "a mobile phone",
+        "ex": "My mobile phone is in my bag.",
+        "exv": "Điện thoại di động của tôi ở trong túi."
+      },
+      {
+        "w": "telephone",
+        "ipa": "/ˈtelɪfəʊn/",
+        "vi": "điện thoại",
+        "col": "a telephone",
+        "ex": "The telephone is on my desk at home.",
+        "exv": "Điện thoại ở trên bàn của tôi ở nhà."
+      },
+      {
+        "w": "phone call",
+        "ipa": "/ˈfəʊn kɔːl/",
+        "vi": "cuộc gọi điện thoại",
+        "col": "a phone call",
+        "ex": "I make a phone call to my mum every day.",
+        "exv": "Tôi gọi điện cho mẹ tôi mỗi ngày."
+      },
+      {
+        "w": "make a phone call",
+        "ipa": "/meɪk ə ˈfəʊn kɔːl/",
+        "vi": "gọi điện thoại",
+        "col": "make a phone call",
+        "ex": "He makes a phone call every morning.",
+        "exv": "Anh ấy gọi điện thoại mỗi sáng."
+      },
+      {
+        "w": "phone number",
+        "ipa": "/ˈfəʊn ˈnʌmbə/",
+        "vi": "số điện thoại",
+        "col": "a phone number",
+        "ex": "Please tell me your phone number.",
+        "exv": "Hãy cho tôi biết số điện thoại của bạn."
+      },
+      {
+        "w": "fax",
+        "ipa": "/fæks/",
+        "vi": "máy fax",
+        "col": "a fax",
+        "ex": "My office has a new fax.",
+        "exv": "Văn phòng của tôi có một máy fax mới."
+      },
+      {
+        "w": "send a fax",
+        "ipa": "/send ə fæks/",
+        "vi": "gửi fax",
+        "col": "send a fax",
+        "ex": "I send a fax to my office in the morning.",
+        "exv": "Tôi gửi fax tới văn phòng vào buổi sáng."
+      },
+      {
+        "w": "e-mail",
+        "ipa": "/ˈiːmeɪl/",
+        "vi": "thư điện tử",
+        "col": "an e-mail",
+        "ex": "I get many e-mails from my friends.",
+        "exv": "Tôi nhận được nhiều thư điện tử từ bạn bè."
+      },
+      {
+        "w": "e-mail address",
+        "ipa": "/ˈiːmeɪl əˈdres/",
+        "vi": "địa chỉ thư điện tử",
+        "col": "an e-mail address",
+        "ex": "Please tell me your e-mail address.",
+        "exv": "Hãy cho tôi biết địa chỉ thư điện tử của bạn."
+      },
+      {
+        "w": "computer",
+        "ipa": "/kəmˈpjuːtə/",
+        "vi": "máy tính",
+        "col": "a computer",
+        "ex": "I write e-mails on my computer.",
+        "exv": "Tôi viết thư điện tử trên máy tính của mình."
+      },
+      {
+        "w": "screen",
+        "ipa": "/skriːn/",
+        "vi": "màn hình",
+        "col": "a screen",
+        "ex": "The words are on the computer screen.",
+        "exv": "Các từ hiện trên màn hình máy tính."
+      },
+      {
+        "w": "keyboard",
+        "ipa": "/ˈkiːbɔːd/",
+        "vi": "bàn phím",
+        "col": "a keyboard",
+        "ex": "I type my name on the keyboard.",
+        "exv": "Tôi gõ tên mình trên bàn phím."
+      },
+      {
+        "w": "mouse",
+        "ipa": "/maʊs/",
+        "vi": "chuột máy tính",
+        "col": "a mouse",
+        "ex": "I move the mouse to open the file.",
+        "exv": "Tôi di chuột máy tính để mở tập tin."
+      },
+      {
+        "w": "disk",
+        "ipa": "/dɪsk/",
+        "vi": "đĩa máy tính",
+        "col": "a disk",
+        "ex": "My photos are on a disk.",
+        "exv": "Ảnh của tôi ở trên một chiếc đĩa máy tính."
+      },
+      {
+        "w": "take a message",
+        "ipa": "/teɪk ə ˈmesɪdʒ/",
+        "vi": "nhận lời nhắn",
+        "col": "take a message",
+        "ex": "Can you take a message for my sister?",
+        "exv": "Bạn có thể nhận lời nhắn giúp chị gái tôi không?"
+      },
+      {
+        "w": "call back",
+        "ipa": "/kɔːl bæk/",
+        "vi": "gọi lại",
+        "col": "call back later",
+        "ex": "I am busy now. I will call back later.",
+        "exv": "Bây giờ tôi đang bận. Tôi sẽ gọi lại sau."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'con tem'?",
+        "o": [
+          "stamp",
+          "envelope",
+          "letter"
+        ],
+        "a": 0,
+        "why": "stamp = con tem; envelope = phong bì; letter = bức thư."
+      },
+      {
+        "q": "Muốn gửi thư, ta dán tem rồi bỏ thư vào đâu?",
+        "o": [
+          "a post box",
+          "a phone box",
+          "a keyboard"
+        ],
+        "a": 0,
+        "why": "post box = hòm thư; phone box = bốt điện thoại; keyboard = bàn phím."
+      },
+      {
+        "q": "Điền từ đúng: 'I make a ___ to my friend every day.'",
+        "o": [
+          "phone call",
+          "post box",
+          "disk"
+        ],
+        "a": 0,
+        "why": "make a phone call = gọi điện thoại; post box = hòm thư; disk = đĩa máy tính."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "keyboard",
+          "screen",
+          "letter"
+        ],
+        "a": 2,
+        "why": "letter là thư giấy; keyboard và screen đều là bộ phận của máy tính."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'gọi lại sau'?",
+        "o": [
+          "call back",
+          "take a message",
+          "send a fax"
+        ],
+        "a": 0,
+        "why": "call back = gọi lại; take a message = nhận lời nhắn; send a fax = gửi fax."
+      },
+      {
+        "q": "Điền từ đúng: 'Please leave a message on my ___.'",
+        "o": [
+          "answerphone",
+          "envelope",
+          "stamp"
+        ],
+        "a": 0,
+        "why": "answerphone = máy trả lời tự động; envelope = phong bì; stamp = con tem."
+      }
+    ]
+  },
+  {
+    "n": 50,
+    "group": "Giải trí",
+    "title": "Holidays",
+    "titleVi": "Kỳ nghỉ",
+    "words": [
+      {
+        "w": "holiday",
+        "ipa": "/ˈhɒlədeɪ/",
+        "vi": "kỳ nghỉ",
+        "col": "a holiday",
+        "ex": "My family has a holiday in the summer.",
+        "exv": "Gia đình tôi có một kỳ nghỉ vào mùa hè."
+      },
+      {
+        "w": "on holiday",
+        "ipa": "/ɒn ˈhɒlədeɪ/",
+        "vi": "đang đi nghỉ",
+        "col": "on holiday",
+        "ex": "My teacher is on holiday this week.",
+        "exv": "Giáo viên của tôi đang đi nghỉ trong tuần này."
+      },
+      {
+        "w": "go on holiday",
+        "ipa": "/ɡəʊ ɒn ˈhɒlədeɪ/",
+        "vi": "đi nghỉ",
+        "col": "go on holiday",
+        "ex": "We go on holiday to the sea every year.",
+        "exv": "Chúng tôi đi nghỉ ở biển mỗi năm."
+      },
+      {
+        "w": "package holiday",
+        "ipa": "/ˈpækɪdʒ ˈhɒlədeɪ/",
+        "vi": "kỳ nghỉ trọn gói",
+        "col": "a package holiday",
+        "ex": "A package holiday is easy because everything is included.",
+        "exv": "Kỳ nghỉ trọn gói rất tiện vì mọi thứ đã bao gồm."
+      },
+      {
+        "w": "winter holiday",
+        "ipa": "/ˈwɪntə ˈhɒlədeɪ/",
+        "vi": "kỳ nghỉ mùa đông",
+        "col": "a winter holiday",
+        "ex": "We want a winter holiday with lots of snow.",
+        "exv": "Chúng tôi muốn một kỳ nghỉ mùa đông có nhiều tuyết."
+      },
+      {
+        "w": "go camping",
+        "ipa": "/ɡəʊ ˈkæmpɪŋ/",
+        "vi": "đi cắm trại",
+        "col": "go camping",
+        "ex": "We go camping in the forest in June.",
+        "exv": "Chúng tôi đi cắm trại trong rừng vào tháng sáu."
+      },
+      {
+        "w": "walking holiday",
+        "ipa": "/ˈwɔːkɪŋ ˈhɒlədeɪ/",
+        "vi": "kỳ nghỉ đi bộ đường dài",
+        "col": "a walking holiday",
+        "ex": "A walking holiday is good for your health.",
+        "exv": "Kỳ nghỉ đi bộ đường dài tốt cho sức khỏe của bạn."
+      },
+      {
+        "w": "coach tour",
+        "ipa": "/ˈkəʊtʃ tʊə/",
+        "vi": "chuyến du lịch bằng xe khách",
+        "col": "a coach tour",
+        "ex": "A coach tour is a cheap way to travel.",
+        "exv": "Chuyến du lịch bằng xe khách là cách đi rẻ."
+      },
+      {
+        "w": "fly",
+        "ipa": "/flaɪ/",
+        "vi": "đi máy bay",
+        "col": "fly to France",
+        "ex": "We fly to France in the summer.",
+        "exv": "Chúng tôi đi máy bay tới Pháp vào mùa hè."
+      },
+      {
+        "w": "ferry",
+        "ipa": "/ˈferi/",
+        "vi": "phà",
+        "col": "by ferry",
+        "ex": "We go to the island by ferry.",
+        "exv": "Chúng tôi ra đảo bằng phà."
+      },
+      {
+        "w": "by train",
+        "ipa": "/baɪ treɪn/",
+        "vi": "bằng tàu hỏa",
+        "col": "by train",
+        "ex": "We go to the city by train.",
+        "exv": "Chúng tôi tới thành phố bằng tàu hỏa."
+      },
+      {
+        "w": "by car",
+        "ipa": "/baɪ kɑː/",
+        "vi": "bằng ô tô",
+        "col": "by car",
+        "ex": "My family travels by car on holiday.",
+        "exv": "Gia đình tôi đi bằng ô tô trong kỳ nghỉ."
+      },
+      {
+        "w": "passport",
+        "ipa": "/ˈpɑːspɔːt/",
+        "vi": "hộ chiếu",
+        "col": "a passport",
+        "ex": "Do not forget your passport when you travel.",
+        "exv": "Đừng quên hộ chiếu khi bạn đi du lịch."
+      },
+      {
+        "w": "ticket",
+        "ipa": "/ˈtɪkɪt/",
+        "vi": "vé",
+        "col": "a ticket",
+        "ex": "I buy two tickets for the train.",
+        "exv": "Tôi mua hai vé tàu hỏa."
+      },
+      {
+        "w": "traveller's cheque",
+        "ipa": "/ˈtrævləz tʃek/",
+        "vi": "séc du lịch",
+        "col": "a traveller's cheque",
+        "ex": "I take some traveller's cheques on holiday.",
+        "exv": "Tôi mang theo một ít séc du lịch trong kỳ nghỉ."
+      },
+      {
+        "w": "currency",
+        "ipa": "/ˈkʌrənsi/",
+        "vi": "tiền tệ",
+        "col": "local currency",
+        "ex": "What is the currency of this country?",
+        "exv": "Tiền tệ của nước này là gì?"
+      },
+      {
+        "w": "camera",
+        "ipa": "/ˈkæmrə/",
+        "vi": "máy ảnh",
+        "col": "a camera",
+        "ex": "I take photos with my camera on holiday.",
+        "exv": "Tôi chụp ảnh bằng máy ảnh trong kỳ nghỉ."
+      },
+      {
+        "w": "phrase book",
+        "ipa": "/ˈfreɪz bʊk/",
+        "vi": "sách cụm từ",
+        "col": "a phrase book",
+        "ex": "I use a phrase book to speak a little Spanish.",
+        "exv": "Tôi dùng sách cụm từ để nói một chút tiếng Tây Ban Nha."
+      },
+      {
+        "w": "luggage",
+        "ipa": "/ˈlʌɡɪdʒ/",
+        "vi": "hành lý",
+        "col": "your luggage",
+        "ex": "My luggage is very heavy today.",
+        "exv": "Hành lý của tôi hôm nay rất nặng."
+      },
+      {
+        "w": "postcard",
+        "ipa": "/ˈpəʊstkɑːd/",
+        "vi": "bưu thiếp",
+        "col": "a postcard",
+        "ex": "I send a postcard to my friend from the beach.",
+        "exv": "Tôi gửi bưu thiếp cho bạn tôi từ bãi biển."
+      },
+      {
+        "w": "local food",
+        "ipa": "/ˈləʊkl fuːd/",
+        "vi": "món ăn địa phương",
+        "col": "local food",
+        "ex": "I like to try the local food on holiday.",
+        "exv": "Tôi thích thử món ăn địa phương trong kỳ nghỉ."
+      },
+      {
+        "w": "nightlife",
+        "ipa": "/ˈnaɪtlaɪf/",
+        "vi": "cuộc sống về đêm",
+        "col": "the nightlife",
+        "ex": "The nightlife here is very good.",
+        "exv": "Cuộc sống về đêm ở đây rất tốt."
+      },
+      {
+        "w": "Tourist Information Office",
+        "ipa": "/ˈtʊərɪst ˌɪnfəˈmeɪʃn ˈɒfɪs/",
+        "vi": "văn phòng thông tin du lịch",
+        "col": "the Tourist Information Office",
+        "ex": "Ask at the Tourist Information Office for a map.",
+        "exv": "Hãy hỏi ở văn phòng thông tin du lịch để lấy bản đồ."
+      },
+      {
+        "w": "wonderful",
+        "ipa": "/ˈwʌndəfl/",
+        "vi": "tuyệt vời",
+        "col": "a wonderful holiday",
+        "ex": "We had a wonderful time at the beach.",
+        "exv": "Chúng tôi đã có thời gian tuyệt vời ở bãi biển."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'kỳ nghỉ'?",
+        "o": [
+          "holiday",
+          "luggage",
+          "ticket"
+        ],
+        "a": 0,
+        "why": "holiday = kỳ nghỉ; luggage = hành lý; ticket = vé."
+      },
+      {
+        "q": "Đi nghỉ mà ngủ trong lều gọi là gì?",
+        "o": [
+          "go camping",
+          "coach tour",
+          "package holiday"
+        ],
+        "a": 0,
+        "why": "go camping = đi cắm trại, ngủ trong lều; coach tour = chuyến du lịch bằng xe khách; package holiday = kỳ nghỉ trọn gói."
+      },
+      {
+        "q": "Điền từ đúng: 'Do not forget your ___ when you travel to another country.'",
+        "o": [
+          "passport",
+          "camera",
+          "postcard"
+        ],
+        "a": 0,
+        "why": "passport = hộ chiếu, cần mang khi ra nước ngoài; camera = máy ảnh; postcard = bưu thiếp."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "ferry",
+          "fly",
+          "passport"
+        ],
+        "a": 2,
+        "why": "passport là giấy tờ; ferry và fly đều là cách di chuyển."
+      },
+      {
+        "q": "Cụm nào có nghĩa là 'chuyến du lịch bằng xe khách lớn'?",
+        "o": [
+          "coach tour",
+          "walking holiday",
+          "winter holiday"
+        ],
+        "a": 0,
+        "why": "coach tour = chuyến du lịch bằng xe khách; walking holiday = kỳ nghỉ đi bộ; winter holiday = kỳ nghỉ mùa đông."
+      },
+      {
+        "q": "Muốn hỏi thông tin ở nơi du lịch, ta đến đâu?",
+        "o": [
+          "Tourist Information Office",
+          "a post box",
+          "a phone box"
+        ],
+        "a": 0,
+        "why": "Tourist Information Office = văn phòng thông tin du lịch; post box = hòm thư; phone box = bốt điện thoại."
+      }
+    ]
+  },
+  {
+    "n": 51,
+    "group": "Giải trí",
+    "title": "Shops and shopping",
+    "titleVi": "Cửa hàng và mua sắm",
+    "words": [
+      {
+        "w": "book shop",
+        "ipa": "/bʊk ʃɒp/",
+        "vi": "cửa hàng sách",
+        "col": "a book shop",
+        "ex": "I buy a notebook at the book shop near my house.",
+        "exv": "Tôi mua một quyển vở ở cửa hàng sách gần nhà tôi."
+      },
+      {
+        "w": "butcher",
+        "ipa": "/ˈbʊtʃə/",
+        "vi": "cửa hàng thịt",
+        "col": "at the butcher's",
+        "ex": "Mum buys fresh chicken at the butcher's on Saturday.",
+        "exv": "Mẹ mua thịt gà tươi ở cửa hàng thịt vào thứ Bảy."
+      },
+      {
+        "w": "supermarket",
+        "ipa": "/ˈsuːpəmɑːkɪt/",
+        "vi": "siêu thị",
+        "col": "a big supermarket",
+        "ex": "We buy rice and milk at the supermarket every week.",
+        "exv": "Chúng tôi mua gạo và sữa ở siêu thị mỗi tuần."
+      },
+      {
+        "w": "post office",
+        "ipa": "/pəʊst ˈɒfɪs/",
+        "vi": "bưu điện",
+        "col": "at the post office",
+        "ex": "I send a letter at the post office near the school.",
+        "exv": "Tôi gửi một bức thư ở bưu điện gần trường học."
+      },
+      {
+        "w": "hairdresser",
+        "ipa": "/ˈheədresə/",
+        "vi": "thợ cắt tóc",
+        "col": "at the hairdresser's",
+        "ex": "My dad goes to the hairdresser's on Sunday morning.",
+        "exv": "Bố tôi đi cắt tóc vào sáng Chủ nhật."
+      },
+      {
+        "w": "baker",
+        "ipa": "/ˈbeɪkə/",
+        "vi": "tiệm bánh",
+        "col": "at the baker's",
+        "ex": "I buy hot bread at the baker's in the morning.",
+        "exv": "Tôi mua bánh mì nóng ở tiệm bánh vào buổi sáng."
+      },
+      {
+        "w": "chemist",
+        "ipa": "/ˈkemɪst/",
+        "vi": "hiệu thuốc",
+        "col": "at the chemist's",
+        "ex": "Mum buys medicine for my cold at the chemist's.",
+        "exv": "Mẹ mua thuốc cảm cho tôi ở hiệu thuốc."
+      },
+      {
+        "w": "gift shop",
+        "ipa": "/ɡɪft ʃɒp/",
+        "vi": "cửa hàng quà tặng",
+        "col": "a small gift shop",
+        "ex": "I buy a nice card in the gift shop for my friend.",
+        "exv": "Tôi mua một tấm thiệp đẹp ở cửa hàng quà tặng cho bạn tôi."
+      },
+      {
+        "w": "newsagent",
+        "ipa": "/ˈnjuːzeɪdʒənt/",
+        "vi": "cửa hàng bán báo",
+        "col": "at the newsagent's",
+        "ex": "Grandad buys a paper at the newsagent's every day.",
+        "exv": "Ông tôi mua báo ở cửa hàng bán báo mỗi ngày."
+      },
+      {
+        "w": "department store",
+        "ipa": "/dɪˈpɑːtmənt stɔː/",
+        "vi": "cửa hàng bách hóa",
+        "col": "a big department store",
+        "ex": "We buy clothes and shoes in the big department store.",
+        "exv": "Chúng tôi mua quần áo và giày ở cửa hàng bách hóa lớn."
+      },
+      {
+        "w": "cosmetics",
+        "ipa": "/kɒzˈmetɪks/",
+        "vi": "mỹ phẩm",
+        "col": "cosmetics and shoes",
+        "ex": "My sister buys lipstick and other cosmetics in the shop.",
+        "exv": "Chị tôi mua son môi và các mỹ phẩm khác ở cửa hàng."
+      },
+      {
+        "w": "stationery",
+        "ipa": "/ˈsteɪʃənəri/",
+        "vi": "văn phòng phẩm",
+        "col": "pens, pencils and stationery",
+        "ex": "The shop sells pens, pencils and other stationery.",
+        "exv": "Cửa hàng bán bút, bút chì và các đồ văn phòng phẩm khác."
+      },
+      {
+        "w": "ladieswear",
+        "ipa": "/ˈleɪdizweə/",
+        "vi": "quần áo nữ",
+        "col": "ladieswear and shoes",
+        "ex": "Ladieswear is on the second floor of the shop.",
+        "exv": "Quần áo nữ ở tầng hai của cửa hàng."
+      },
+      {
+        "w": "menswear",
+        "ipa": "/ˈmenzweə/",
+        "vi": "quần áo nam",
+        "col": "menswear and toys",
+        "ex": "My dad looks at shirts in the menswear department.",
+        "exv": "Bố tôi xem áo sơ mi ở khu quần áo nam."
+      },
+      {
+        "w": "childrenswear",
+        "ipa": "/ˈtʃɪldrənzweə/",
+        "vi": "quần áo trẻ em",
+        "col": "shoes and childrenswear",
+        "ex": "Mum buys a red coat in the childrenswear department.",
+        "exv": "Mẹ mua một chiếc áo khoác đỏ ở khu quần áo trẻ em."
+      },
+      {
+        "w": "electrical goods",
+        "ipa": "/ɪˈlektrɪkəl ɡʊdz/",
+        "vi": "đồ điện",
+        "col": "electrical goods and furniture",
+        "ex": "The shop sells TVs and other electrical goods.",
+        "exv": "Cửa hàng bán ti vi và các đồ điện khác."
+      },
+      {
+        "w": "furniture",
+        "ipa": "/ˈfɜːnɪtʃə/",
+        "vi": "đồ nội thất",
+        "col": "tables and furniture",
+        "ex": "We buy a new table and chairs in the furniture department.",
+        "exv": "Chúng tôi mua một cái bàn mới và ghế ở khu đồ nội thất."
+      },
+      {
+        "w": "toys",
+        "ipa": "/tɔɪz/",
+        "vi": "đồ chơi",
+        "col": "menswear and toys",
+        "ex": "The children look at dolls and cars in the toys department.",
+        "exv": "Bọn trẻ xem búp bê và ô tô ở khu đồ chơi."
+      },
+      {
+        "w": "shop assistant",
+        "ipa": "/ʃɒp əˈsɪstənt/",
+        "vi": "nhân viên bán hàng",
+        "col": "ask a shop assistant",
+        "ex": "I ask a shop assistant where the shoes are.",
+        "exv": "Tôi hỏi nhân viên bán hàng xem giày ở đâu."
+      },
+      {
+        "w": "cash desk",
+        "ipa": "/kæʃ desk/",
+        "vi": "quầy thu tiền",
+        "col": "pay at the cash desk",
+        "ex": "I pay for my shirt at the cash desk.",
+        "exv": "Tôi trả tiền chiếc áo sơ mi ở quầy thu tiền."
+      },
+      {
+        "w": "till",
+        "ipa": "/tɪl/",
+        "vi": "quầy thu tiền",
+        "col": "pay at the till",
+        "ex": "The woman at the till gives me my change.",
+        "exv": "Người phụ nữ ở quầy thu tiền đưa lại tiền lẻ cho tôi."
+      },
+      {
+        "w": "receipt",
+        "ipa": "/rɪˈsiːt/",
+        "vi": "biên lai",
+        "col": "get a receipt",
+        "ex": "Please keep your receipt if you want to change the shirt.",
+        "exv": "Hãy giữ biên lai nếu bạn muốn đổi chiếc áo."
+      },
+      {
+        "w": "cash",
+        "ipa": "/kæʃ/",
+        "vi": "tiền mặt",
+        "col": "pay in cash",
+        "ex": "I pay in cash because I have no card with me.",
+        "exv": "Tôi trả bằng tiền mặt vì tôi không mang thẻ theo."
+      },
+      {
+        "w": "cheque",
+        "ipa": "/tʃek/",
+        "vi": "séc",
+        "col": "pay by cheque",
+        "ex": "My uncle pays by cheque at the shop.",
+        "exv": "Chú tôi trả bằng séc ở cửa hàng."
+      },
+      {
+        "w": "credit card",
+        "ipa": "/ˈkredɪt kɑːd/",
+        "vi": "thẻ tín dụng",
+        "col": "pay by credit card",
+        "ex": "Can I pay by credit card in this shop?",
+        "exv": "Tôi có thể trả bằng thẻ tín dụng ở cửa hàng này không?"
+      },
+      {
+        "w": "cheque book",
+        "ipa": "/tʃek bʊk/",
+        "vi": "sổ séc",
+        "col": "a cheque book",
+        "ex": "Dad keeps his cheque book in his bag.",
+        "exv": "Bố giữ sổ séc trong túi của bố."
+      },
+      {
+        "w": "carrier bag",
+        "ipa": "/ˈkæriə bæɡ/",
+        "vi": "túi đựng đồ",
+        "col": "a carrier bag",
+        "ex": "The shop assistant puts my book in a carrier bag.",
+        "exv": "Nhân viên bán hàng bỏ quyển sách của tôi vào túi đựng đồ."
+      },
+      {
+        "w": "change",
+        "ipa": "/tʃeɪndʒ/",
+        "vi": "tiền lẻ trả lại",
+        "col": "have any change",
+        "ex": "I pay with a big note and get some change back.",
+        "exv": "Tôi trả bằng tờ tiền lớn và nhận lại một ít tiền lẻ."
+      },
+      {
+        "w": "note",
+        "ipa": "/nəʊt/",
+        "vi": "tờ tiền giấy",
+        "col": "a £20 note",
+        "ex": "Mum gives me a £10 note to buy some bread.",
+        "exv": "Mẹ đưa tôi tờ 10 bảng để mua bánh mì."
+      },
+      {
+        "w": "try on",
+        "ipa": "/traɪ ɒn/",
+        "vi": "thử (quần áo)",
+        "col": "try it on",
+        "ex": "I try on the blue jacket before I buy it.",
+        "exv": "Tôi thử chiếc áo khoác xanh trước khi mua nó."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'hiệu thuốc'?",
+        "o": [
+          "chemist",
+          "baker",
+          "butcher"
+        ],
+        "a": 0,
+        "why": "chemist = hiệu thuốc; baker = tiệm bánh; butcher = cửa hàng thịt."
+      },
+      {
+        "q": "Bạn mua bánh mì mới nướng ở đâu?",
+        "o": [
+          "at the baker's",
+          "at the chemist's",
+          "at the post office"
+        ],
+        "a": 0,
+        "why": "Bánh mì mua ở tiệm bánh (baker's); hiệu thuốc bán thuốc, bưu điện gửi thư."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'I pay for my dress at the ___.'",
+        "o": [
+          "cash desk",
+          "gift shop",
+          "hairdresser"
+        ],
+        "a": 0,
+        "why": "Trả tiền ở quầy thu tiền (cash desk); gift shop là cửa hàng quà, hairdresser là thợ cắt tóc."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "receipt",
+          "supermarket",
+          "book shop",
+          "gift shop"
+        ],
+        "a": 0,
+        "why": "receipt là biên lai, không phải một cửa hàng như supermarket, book shop, gift shop."
+      },
+      {
+        "q": "Chọn cụm đúng: 'Can I pay ___ credit card?'",
+        "o": [
+          "by",
+          "in",
+          "at"
+        ],
+        "a": 0,
+        "why": "Trả bằng thẻ tín dụng nói 'pay by credit card'; 'in' và 'at' không dùng ở đây."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'tiền mặt'?",
+        "o": [
+          "cash",
+          "cheque",
+          "change"
+        ],
+        "a": 0,
+        "why": "cash = tiền mặt; cheque = séc; change = tiền lẻ trả lại."
+      }
+    ]
+  },
+  {
+    "n": 52,
+    "group": "Giải trí",
+    "title": "In a hotel",
+    "titleVi": "Ở khách sạn",
+    "words": [
+      {
+        "w": "reception",
+        "ipa": "/rɪˈsepʃən/",
+        "vi": "lễ tân",
+        "col": "at reception",
+        "ex": "I ask the woman at reception about my room.",
+        "exv": "Tôi hỏi người phụ nữ ở lễ tân về phòng của tôi."
+      },
+      {
+        "w": "receptionist",
+        "ipa": "/rɪˈsepʃənɪst/",
+        "vi": "nhân viên lễ tân",
+        "col": "ask the receptionist",
+        "ex": "The receptionist gives me the key to room 12.",
+        "exv": "Nhân viên lễ tân đưa cho tôi chìa khóa phòng 12."
+      },
+      {
+        "w": "form",
+        "ipa": "/fɔːm/",
+        "vi": "mẫu đơn, phiếu",
+        "col": "fill in a form",
+        "ex": "Please fill in this form with your name.",
+        "exv": "Xin hãy điền mẫu đơn này với tên của bạn."
+      },
+      {
+        "w": "lift",
+        "ipa": "/lɪft/",
+        "vi": "thang máy",
+        "col": "take the lift",
+        "ex": "We take the lift to the third floor.",
+        "exv": "Chúng tôi đi thang máy lên tầng ba."
+      },
+      {
+        "w": "shower",
+        "ipa": "/ˈʃaʊə/",
+        "vi": "vòi sen",
+        "col": "have a shower",
+        "ex": "I have a shower in the bathroom in the morning.",
+        "exv": "Tôi tắm vòi sen trong phòng tắm vào buổi sáng."
+      },
+      {
+        "w": "TV",
+        "ipa": "/ˌtiːˈviː/",
+        "vi": "ti vi",
+        "col": "watch TV",
+        "ex": "There is a small TV in my hotel room.",
+        "exv": "Có một chiếc ti vi nhỏ trong phòng khách sạn của tôi."
+      },
+      {
+        "w": "telephone",
+        "ipa": "/ˈtelɪfəʊn/",
+        "vi": "điện thoại",
+        "col": "use the telephone",
+        "ex": "I use the telephone in my room to call my mum.",
+        "exv": "Tôi dùng điện thoại trong phòng để gọi cho mẹ tôi."
+      },
+      {
+        "w": "key",
+        "ipa": "/kiː/",
+        "vi": "chìa khóa",
+        "col": "your room key",
+        "ex": "I put my room key in my bag after breakfast.",
+        "exv": "Tôi bỏ chìa khóa phòng vào túi sau bữa sáng."
+      },
+      {
+        "w": "luggage",
+        "ipa": "/ˈlʌɡɪdʒ/",
+        "vi": "hành lý",
+        "col": "help with your luggage",
+        "ex": "The man helps me carry my big luggage to the lift.",
+        "exv": "Người đàn ông giúp tôi mang hành lý lớn ra thang máy."
+      },
+      {
+        "w": "bill",
+        "ipa": "/bɪl/",
+        "vi": "hóa đơn",
+        "col": "check your bill",
+        "ex": "Please check your bill before you leave the hotel.",
+        "exv": "Xin hãy kiểm tra hóa đơn của bạn trước khi rời khách sạn."
+      },
+      {
+        "w": "bathroom",
+        "ipa": "/ˈbɑːθruːm/",
+        "vi": "phòng tắm",
+        "col": "a room with a bathroom",
+        "ex": "My room has a bathroom with a big shower.",
+        "exv": "Phòng của tôi có phòng tắm với vòi sen lớn."
+      },
+      {
+        "w": "kettle",
+        "ipa": "/ˈketəl/",
+        "vi": "ấm đun nước",
+        "col": "a kettle in the room",
+        "ex": "I use the kettle in my room to make hot tea.",
+        "exv": "Tôi dùng ấm đun nước trong phòng để pha trà nóng."
+      },
+      {
+        "w": "hair dryer",
+        "ipa": "/heə ˈdraɪə/",
+        "vi": "máy sấy tóc",
+        "col": "use a hair dryer",
+        "ex": "I use the hair dryer after I wash my hair.",
+        "exv": "Tôi dùng máy sấy tóc sau khi gội đầu."
+      },
+      {
+        "w": "single room",
+        "ipa": "/ˈsɪŋɡəl ruːm/",
+        "vi": "phòng đơn",
+        "col": "a single room",
+        "ex": "I book a single room for one night.",
+        "exv": "Tôi đặt một phòng đơn cho một đêm."
+      },
+      {
+        "w": "double room",
+        "ipa": "/ˈdʌbəl ruːm/",
+        "vi": "phòng đôi",
+        "col": "a double room",
+        "ex": "Mum and Dad stay in a double room on holiday.",
+        "exv": "Bố và mẹ ở phòng đôi trong kỳ nghỉ."
+      },
+      {
+        "w": "reservation",
+        "ipa": "/ˌrezəˈveɪʃən/",
+        "vi": "đặt phòng trước",
+        "col": "have a reservation",
+        "ex": "I have a reservation for two nights in June.",
+        "exv": "Tôi đã đặt phòng trước cho hai đêm vào tháng Sáu."
+      },
+      {
+        "w": "check in",
+        "ipa": "/tʃek ɪn/",
+        "vi": "nhận phòng",
+        "col": "check in at the hotel",
+        "ex": "We check in at the hotel at two o'clock.",
+        "exv": "Chúng tôi nhận phòng ở khách sạn lúc hai giờ."
+      },
+      {
+        "w": "check out",
+        "ipa": "/tʃek aʊt/",
+        "vi": "trả phòng",
+        "col": "check out in the morning",
+        "ex": "We check out of the hotel before ten o'clock.",
+        "exv": "Chúng tôi trả phòng trước mười giờ."
+      },
+      {
+        "w": "outside line",
+        "ipa": "/ˌaʊtˈsaɪd laɪn/",
+        "vi": "đường dây ra ngoài",
+        "col": "get an outside line",
+        "ex": "I ask reception how to get an outside line to call home.",
+        "exv": "Tôi hỏi lễ tân cách gọi ra ngoài để gọi về nhà."
+      },
+      {
+        "w": "code",
+        "ipa": "/kəʊd/",
+        "vi": "mã (điện thoại)",
+        "col": "the code for Korea",
+        "ex": "What is the code for Viet Nam when I call from here?",
+        "exv": "Mã điện thoại của Việt Nam là gì khi tôi gọi từ đây?"
+      },
+      {
+        "w": "morning call",
+        "ipa": "/ˈmɔːnɪŋ kɔːl/",
+        "vi": "cuộc gọi đánh thức",
+        "col": "a morning call at 6.30",
+        "ex": "I ask for a morning call at seven o'clock.",
+        "exv": "Tôi xin một cuộc gọi đánh thức lúc bảy giờ."
+      },
+      {
+        "w": "breakfast",
+        "ipa": "/ˈbrekfəst/",
+        "vi": "bữa sáng",
+        "col": "breakfast in my room",
+        "ex": "I have breakfast in my room at eight o'clock.",
+        "exv": "Tôi ăn sáng trong phòng lúc tám giờ."
+      },
+      {
+        "w": "exchange money",
+        "ipa": "/ɪksˈtʃeɪndʒ ˈmʌni/",
+        "vi": "đổi tiền",
+        "col": "exchange some money",
+        "ex": "I exchange some dollars into pounds at the hotel.",
+        "exv": "Tôi đổi một ít đô la sang bảng Anh ở khách sạn."
+      },
+      {
+        "w": "traveller's cheque",
+        "ipa": "/ˈtrævələz tʃek/",
+        "vi": "séc du lịch",
+        "col": "cash a traveller's cheque",
+        "ex": "I cash a traveller's cheque at the big hotel.",
+        "exv": "Tôi đổi séc du lịch lấy tiền mặt ở khách sạn lớn."
+      },
+      {
+        "w": "sign",
+        "ipa": "/saɪn/",
+        "vi": "ký (tên)",
+        "col": "sign here, please",
+        "ex": "Please sign your name at the bottom of the form.",
+        "exv": "Xin hãy ký tên của bạn ở cuối mẫu đơn."
+      },
+      {
+        "w": "yen",
+        "ipa": "/jen/",
+        "vi": "đồng yên (Nhật)",
+        "col": "yen to the pound",
+        "ex": "How many yen are there to the pound today?",
+        "exv": "Hôm nay một bảng Anh đổi được bao nhiêu yên?"
+      },
+      {
+        "w": "cash a cheque",
+        "ipa": "/kæʃ ə tʃek/",
+        "vi": "đổi séc lấy tiền mặt",
+        "col": "cash a cheque",
+        "ex": "Can I cash this cheque at the hotel desk?",
+        "exv": "Tôi có thể đổi séc này lấy tiền mặt ở quầy khách sạn không?"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'hành lý'?",
+        "o": [
+          "luggage",
+          "bill",
+          "kettle"
+        ],
+        "a": 0,
+        "why": "luggage = hành lý; bill = hóa đơn; kettle = ấm đun nước."
+      },
+      {
+        "q": "Bạn ở một mình thì đặt phòng nào?",
+        "o": [
+          "a single room",
+          "a double room",
+          "a bathroom"
+        ],
+        "a": 0,
+        "why": "Phòng đơn (single room) dành cho một người; phòng đôi cho hai người; bathroom là phòng tắm."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'Can I ___ out, please? I want to leave the hotel.'",
+        "o": [
+          "check",
+          "fill",
+          "sign"
+        ],
+        "a": 0,
+        "why": "Trả phòng nói 'check out'; fill in là điền đơn, sign là ký tên."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "kettle",
+          "hair dryer",
+          "telephone",
+          "receptionist"
+        ],
+        "a": 3,
+        "why": "receptionist là người làm việc ở lễ tân; ba từ còn lại là đồ dùng trong phòng."
+      },
+      {
+        "q": "Câu nào dùng để hỏi xin bữa sáng trong phòng?",
+        "o": [
+          "Can I have breakfast in my room, please?",
+          "Can I have a morning call, please?",
+          "Can I change some money, please?"
+        ],
+        "a": 0,
+        "why": "Câu đầu hỏi xin bữa sáng trong phòng; câu thứ hai xin gọi đánh thức, câu thứ ba xin đổi tiền."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'đặt phòng trước'?",
+        "o": [
+          "reservation",
+          "reception",
+          "luggage"
+        ],
+        "a": 0,
+        "why": "reservation = đặt phòng trước; reception = lễ tân; luggage = hành lý."
+      }
+    ]
+  },
+  {
+    "n": 53,
+    "group": "Giải trí",
+    "title": "Eating out",
+    "titleVi": "Ăn ngoài",
+    "words": [
+      {
+        "w": "cafe",
+        "ipa": "/ˈkæfeɪ/",
+        "vi": "quán cà phê",
+        "col": "have a cup of tea in a cafe",
+        "ex": "We sit in a small cafe and drink hot coffee.",
+        "exv": "Chúng tôi ngồi trong một quán cà phê nhỏ và uống cà phê nóng."
+      },
+      {
+        "w": "restaurant",
+        "ipa": "/ˈrestrɒnt/",
+        "vi": "nhà hàng",
+        "col": "go to a restaurant",
+        "ex": "On Sunday we go to a restaurant for a big meal.",
+        "exv": "Vào Chủ nhật chúng tôi đến nhà hàng ăn một bữa lớn."
+      },
+      {
+        "w": "bar",
+        "ipa": "/bɑː/",
+        "vi": "quán rượu",
+        "col": "have a drink in a bar",
+        "ex": "My uncle has a glass of juice in the bar near his house.",
+        "exv": "Chú tôi uống một ly nước trái cây ở quán rượu gần nhà chú."
+      },
+      {
+        "w": "pub",
+        "ipa": "/pʌb/",
+        "vi": "quán rượu (Anh)",
+        "col": "have a meal in a pub",
+        "ex": "We have lunch in a friendly pub in the village.",
+        "exv": "Chúng tôi ăn trưa ở một quán rượu thân thiện trong làng."
+      },
+      {
+        "w": "sandwich bar",
+        "ipa": "/ˈsænwɪdʒ bɑː/",
+        "vi": "quán bánh mì kẹp",
+        "col": "buy a sandwich at a sandwich bar",
+        "ex": "I buy a sandwich at the sandwich bar and eat it in the park.",
+        "exv": "Tôi mua bánh mì kẹp ở quán bánh mì kẹp và ăn nó trong công viên."
+      },
+      {
+        "w": "fast food restaurant",
+        "ipa": "/fɑːst fuːd ˈrestrɒnt/",
+        "vi": "nhà hàng đồ ăn nhanh",
+        "col": "a fast food restaurant",
+        "ex": "The children like burgers at the fast food restaurant.",
+        "exv": "Bọn trẻ thích bánh mì kẹp thịt ở nhà hàng đồ ăn nhanh."
+      },
+      {
+        "w": "self-service restaurant",
+        "ipa": "/self ˈsɜːvɪs ˈrestrɒnt/",
+        "vi": "nhà hàng tự phục vụ",
+        "col": "a self-service restaurant",
+        "ex": "In a self-service restaurant I take my food to the table.",
+        "exv": "Ở nhà hàng tự phục vụ, tôi tự mang đồ ăn ra bàn."
+      },
+      {
+        "w": "snack",
+        "ipa": "/snæk/",
+        "vi": "món ăn nhẹ",
+        "col": "have a snack",
+        "ex": "I have a small snack and a cup of tea at four o'clock.",
+        "exv": "Tôi ăn một món nhẹ và uống một tách trà lúc bốn giờ."
+      },
+      {
+        "w": "soft drink",
+        "ipa": "/sɒft drɪŋk/",
+        "vi": "nước ngọt không cồn",
+        "col": "a soft drink",
+        "ex": "My little brother drinks a soft drink with his lunch.",
+        "exv": "Em trai tôi uống một ly nước ngọt không cồn với bữa trưa."
+      },
+      {
+        "w": "meal",
+        "ipa": "/miːl/",
+        "vi": "bữa ăn",
+        "col": "a full meal",
+        "ex": "We have a big meal with my grandparents on Sunday.",
+        "exv": "Chúng tôi ăn một bữa lớn với ông bà vào Chủ nhật."
+      },
+      {
+        "w": "starter",
+        "ipa": "/ˈstɑːtə/",
+        "vi": "món khai vị",
+        "col": "a starter and a main course",
+        "ex": "For my starter I have a small bowl of soup.",
+        "exv": "Món khai vị của tôi là một bát súp nhỏ."
+      },
+      {
+        "w": "main course",
+        "ipa": "/meɪn kɔːs/",
+        "vi": "món chính",
+        "col": "the main course",
+        "ex": "The main course is chicken with rice and green beans.",
+        "exv": "Món chính là gà với cơm và đậu xanh."
+      },
+      {
+        "w": "dessert",
+        "ipa": "/dɪˈzɜːt/",
+        "vi": "món tráng miệng",
+        "col": "have a dessert",
+        "ex": "For dessert we have ice-cream and fruit.",
+        "exv": "Món tráng miệng của chúng tôi là kem và hoa quả."
+      },
+      {
+        "w": "wine list",
+        "ipa": "/waɪn lɪst/",
+        "vi": "thực đơn rượu vang",
+        "col": "look at the wine list",
+        "ex": "Dad looks at the wine list and orders a red wine.",
+        "exv": "Bố xem thực đơn rượu vang và gọi một chai rượu vang đỏ."
+      },
+      {
+        "w": "menu",
+        "ipa": "/ˈmenjuː/",
+        "vi": "thực đơn",
+        "col": "look at the menu",
+        "ex": "I look at the menu and choose fish and chips.",
+        "exv": "Tôi xem thực đơn và chọn cá rán với khoai tây chiên."
+      },
+      {
+        "w": "tomato soup",
+        "ipa": "/təˈmɑːtəʊ suːp/",
+        "vi": "súp cà chua",
+        "col": "a bowl of tomato soup",
+        "ex": "Mum makes hot tomato soup for lunch on cold days.",
+        "exv": "Mẹ nấu súp cà chua nóng cho bữa trưa vào những ngày lạnh."
+      },
+      {
+        "w": "melon",
+        "ipa": "/ˈmelən/",
+        "vi": "dưa lưới, dưa gang",
+        "col": "a melon",
+        "ex": "In summer we eat cold melon after lunch.",
+        "exv": "Vào mùa hè chúng tôi ăn dưa lưới lạnh sau bữa trưa."
+      },
+      {
+        "w": "orange juice",
+        "ipa": "/ˈɒrɪndʒ dʒuːs/",
+        "vi": "nước cam",
+        "col": "orange juice",
+        "ex": "I drink a glass of orange juice with my breakfast.",
+        "exv": "Tôi uống một ly nước cam với bữa sáng."
+      },
+      {
+        "w": "roast beef",
+        "ipa": "/rəʊst biːf/",
+        "vi": "thịt bò nướng",
+        "col": "roast beef and potatoes",
+        "ex": "We eat roast beef and roast potatoes on Sunday.",
+        "exv": "Chúng tôi ăn thịt bò nướng và khoai tây nướng vào Chủ nhật."
+      },
+      {
+        "w": "green peas",
+        "ipa": "/ɡriːn piːz/",
+        "vi": "đậu Hà Lan xanh",
+        "col": "green peas",
+        "ex": "Mum puts green peas in the soup for dinner.",
+        "exv": "Mẹ cho đậu Hà Lan xanh vào món súp cho bữa tối."
+      },
+      {
+        "w": "carrots",
+        "ipa": "/ˈkærəts/",
+        "vi": "cà rốt",
+        "col": "carrots",
+        "ex": "The baby eats soft carrots with rice.",
+        "exv": "Em bé ăn cà rốt mềm với cơm."
+      },
+      {
+        "w": "roast potatoes",
+        "ipa": "/rəʊst pəˈteɪtəʊz/",
+        "vi": "khoai tây nướng",
+        "col": "roast potatoes",
+        "ex": "Grandma makes roast potatoes in the oven for lunch.",
+        "exv": "Bà làm khoai tây nướng trong lò cho bữa trưa."
+      },
+      {
+        "w": "steak",
+        "ipa": "/steɪk/",
+        "vi": "bít tết",
+        "col": "a steak with chips",
+        "ex": "My dad orders a steak with chips and salad.",
+        "exv": "Bố tôi gọi một miếng bít tết với khoai tây chiên và salad."
+      },
+      {
+        "w": "mashed potatoes",
+        "ipa": "/mæʃt pəˈteɪtəʊz/",
+        "vi": "khoai tây nghiền",
+        "col": "mashed potatoes",
+        "ex": "I eat mashed potatoes with butter and milk.",
+        "exv": "Tôi ăn khoai tây nghiền với bơ và sữa."
+      },
+      {
+        "w": "mixed vegetables",
+        "ipa": "/mɪkst ˈvedʒtəbəlz/",
+        "vi": "rau củ thập cẩm",
+        "col": "mixed vegetables",
+        "ex": "For dinner we have chicken and mixed vegetables.",
+        "exv": "Bữa tối chúng tôi ăn gà và rau củ thập cẩm."
+      },
+      {
+        "w": "new potatoes",
+        "ipa": "/njuː pəˈteɪtəʊz/",
+        "vi": "khoai tây non",
+        "col": "new potatoes",
+        "ex": "We eat new potatoes with butter in spring.",
+        "exv": "Chúng tôi ăn khoai tây non với bơ vào mùa xuân."
+      },
+      {
+        "w": "chicken salad",
+        "ipa": "/ˈtʃɪkɪn ˈsæləd/",
+        "vi": "salad gà",
+        "col": "a chicken salad",
+        "ex": "For lunch I have a fresh chicken salad and bread.",
+        "exv": "Bữa trưa tôi ăn salad gà tươi và bánh mì."
+      },
+      {
+        "w": "fish and chips",
+        "ipa": "/fɪʃ ənd tʃɪps/",
+        "vi": "cá rán với khoai tây chiên",
+        "col": "fish, chips and beans",
+        "ex": "We buy fish and chips and eat them at home.",
+        "exv": "Chúng tôi mua cá rán với khoai tây chiên và ăn ở nhà."
+      },
+      {
+        "w": "beans",
+        "ipa": "/biːnz/",
+        "vi": "đậu",
+        "col": "beans",
+        "ex": "Mum cooks beans and puts them next to the fish.",
+        "exv": "Mẹ nấu đậu và đặt chúng cạnh món cá."
+      },
+      {
+        "w": "omelette",
+        "ipa": "/ˈɒmlət/",
+        "vi": "trứng tráng",
+        "col": "a cheese omelette",
+        "ex": "Mum makes a cheese omelette for my breakfast.",
+        "exv": "Mẹ làm trứng tráng phô mai cho bữa sáng của tôi."
+      },
+      {
+        "w": "cheese",
+        "ipa": "/tʃiːz/",
+        "vi": "phô mai",
+        "col": "cheese",
+        "ex": "I put cheese on my bread for breakfast.",
+        "exv": "Tôi phết phô mai lên bánh mì cho bữa sáng."
+      },
+      {
+        "w": "ham",
+        "ipa": "/hæm/",
+        "vi": "giăm bông",
+        "col": "ham",
+        "ex": "Mum makes a sandwich with ham and salad.",
+        "exv": "Mẹ làm bánh mì kẹp với giăm bông và salad."
+      },
+      {
+        "w": "fruit salad",
+        "ipa": "/fruːt ˈsæləd/",
+        "vi": "salad hoa quả",
+        "col": "a fruit salad",
+        "ex": "I eat a fruit salad with apples and oranges.",
+        "exv": "Tôi ăn salad hoa quả với táo và cam."
+      },
+      {
+        "w": "chocolate gateau",
+        "ipa": "/ˈtʃɒklət ˈɡætəʊ/",
+        "vi": "bánh ga-tô sô-cô-la",
+        "col": "a chocolate gateau",
+        "ex": "We share a big chocolate gateau at the party.",
+        "exv": "Chúng tôi cùng ăn một chiếc bánh ga-tô sô-cô-la lớn ở bữa tiệc."
+      },
+      {
+        "w": "strawberries and cream",
+        "ipa": "/ˈstrɔːbəriz ənd kriːm/",
+        "vi": "dâu tây với kem",
+        "col": "strawberries and cream",
+        "ex": "On my birthday I eat strawberries and cream.",
+        "exv": "Vào ngày sinh nhật tôi ăn dâu tây với kem."
+      },
+      {
+        "w": "ice-cream",
+        "ipa": "/aɪs kriːm/",
+        "vi": "kem",
+        "col": "an ice-cream",
+        "ex": "The children eat an ice-cream after their meal.",
+        "exv": "Bọn trẻ ăn kem sau bữa ăn."
+      },
+      {
+        "w": "rare",
+        "ipa": "/reə/",
+        "vi": "tái (thịt)",
+        "col": "a rare steak",
+        "ex": "My uncle likes his steak rare, not well cooked.",
+        "exv": "Chú tôi thích bít tết tái, không nấu chín kỹ."
+      },
+      {
+        "w": "medium",
+        "ipa": "/ˈmiːdiəm/",
+        "vi": "vừa chín",
+        "col": "a medium steak",
+        "ex": "I like my steak medium, not too red and not too brown.",
+        "exv": "Tôi thích bít tết vừa chín, không quá đỏ và không quá nâu."
+      },
+      {
+        "w": "well-done",
+        "ipa": "/wel dʌn/",
+        "vi": "chín kỹ",
+        "col": "a well-done steak",
+        "ex": "Grandma wants her steak well-done and hot.",
+        "exv": "Bà muốn bít tết của bà chín kỹ và nóng."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'món khai vị'?",
+        "o": [
+          "starter",
+          "dessert",
+          "main course"
+        ],
+        "a": 0,
+        "why": "starter = món khai vị; dessert = món tráng miệng; main course = món chính."
+      },
+      {
+        "q": "Bạn muốn ăn nhanh một bữa nóng thì đi đâu?",
+        "o": [
+          "a fast food restaurant",
+          "a cafe",
+          "a pub"
+        ],
+        "a": 0,
+        "why": "Nhà hàng đồ ăn nhanh phục vụ bữa nóng nhanh; quán cà phê chỉ ăn nhẹ, quán rượu uống nước và ăn nhẹ."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'For ___, we have ice-cream and fruit.'",
+        "o": [
+          "dessert",
+          "starter",
+          "main course"
+        ],
+        "a": 0,
+        "why": "Kem và hoa quả ăn cuối bữa, đó là món tráng miệng (dessert); starter ăn đầu bữa, main course là món chính."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "cafe",
+          "restaurant",
+          "pub",
+          "dessert"
+        ],
+        "a": 3,
+        "why": "dessert là món ăn, không phải một nơi ăn uống như cafe, restaurant, pub."
+      },
+      {
+        "q": "Nhà hàng nào bạn tự lấy đồ ăn rồi mang ra bàn?",
+        "o": [
+          "a self-service restaurant",
+          "a fast food restaurant",
+          "a sandwich bar"
+        ],
+        "a": 0,
+        "why": "Ở nhà hàng tự phục vụ (self-service) bạn tự lấy đồ ăn và mang ra bàn; hai nơi kia có người phục vụ hoặc mua mang đi."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'nước ngọt không cồn'?",
+        "o": [
+          "soft drink",
+          "wine",
+          "snack"
+        ],
+        "a": 0,
+        "why": "soft drink = nước ngọt không cồn; wine = rượu vang; snack = món ăn nhẹ."
+      }
+    ]
+  },
+  {
+    "n": 54,
+    "group": "Giải trí",
+    "title": "Sports",
+    "titleVi": "Thể thao",
+    "words": [
+      {
+        "w": "badminton",
+        "ipa": "/ˈbædmɪntən/",
+        "vi": "cầu lông",
+        "col": "play badminton",
+        "ex": "We play badminton in the park on Saturday.",
+        "exv": "Chúng tôi chơi cầu lông trong công viên vào thứ Bảy."
+      },
+      {
+        "w": "football",
+        "ipa": "/ˈfʊtbɔːl/",
+        "vi": "bóng đá",
+        "col": "play football",
+        "ex": "The boys play football on the school field every Friday.",
+        "exv": "Các bạn nam chơi bóng đá trên sân trường mỗi thứ Sáu."
+      },
+      {
+        "w": "rugby",
+        "ipa": "/ˈrʌɡbi/",
+        "vi": "bóng bầu dục",
+        "col": "play rugby",
+        "ex": "My brother plays rugby with his friends at school.",
+        "exv": "Anh trai tôi chơi bóng bầu dục với các bạn ở trường."
+      },
+      {
+        "w": "American football",
+        "ipa": "/əˈmerɪkən ˈfʊtbɔːl/",
+        "vi": "bóng bầu dục Mỹ",
+        "col": "play American football",
+        "ex": "American football is a popular sport in the USA.",
+        "exv": "Bóng bầu dục Mỹ là môn thể thao phổ biến ở Mỹ."
+      },
+      {
+        "w": "basketball",
+        "ipa": "/ˈbɑːskɪtbɔːl/",
+        "vi": "bóng rổ",
+        "col": "play basketball",
+        "ex": "We play basketball on the court near my house.",
+        "exv": "Chúng tôi chơi bóng rổ trên sân gần nhà tôi."
+      },
+      {
+        "w": "volleyball",
+        "ipa": "/ˈvɒlibɔːl/",
+        "vi": "bóng chuyền",
+        "col": "play volleyball",
+        "ex": "The girls play volleyball on the beach in summer.",
+        "exv": "Các bạn nữ chơi bóng chuyền trên bãi biển vào mùa hè."
+      },
+      {
+        "w": "baseball",
+        "ipa": "/ˈbeɪsbɔːl/",
+        "vi": "bóng chày",
+        "col": "play baseball",
+        "ex": "My cousin plays baseball in the park on Sunday.",
+        "exv": "Em họ tôi chơi bóng chày trong công viên vào Chủ nhật."
+      },
+      {
+        "w": "cricket",
+        "ipa": "/ˈkrɪkɪt/",
+        "vi": "cricket (môn bóng gậy)",
+        "col": "play cricket",
+        "ex": "They play cricket on the big field in the afternoon.",
+        "exv": "Họ chơi cricket trên sân lớn vào buổi chiều."
+      },
+      {
+        "w": "table tennis",
+        "ipa": "/ˈteɪbəl ˈtenɪs/",
+        "vi": "bóng bàn",
+        "col": "play table tennis",
+        "ex": "I play table tennis with my dad at home.",
+        "exv": "Tôi chơi bóng bàn với bố ở nhà."
+      },
+      {
+        "w": "tennis",
+        "ipa": "/ˈtenɪs/",
+        "vi": "quần vợt",
+        "col": "play tennis",
+        "ex": "We play tennis on the court behind the school.",
+        "exv": "Chúng tôi chơi quần vợt trên sân sau trường."
+      },
+      {
+        "w": "motor racing",
+        "ipa": "/ˈməʊtə ˈreɪsɪŋ/",
+        "vi": "đua xe",
+        "col": "like motor racing",
+        "ex": "My dad likes to watch motor racing on TV.",
+        "exv": "Bố tôi thích xem đua xe trên ti vi."
+      },
+      {
+        "w": "swimming",
+        "ipa": "/ˈswɪmɪŋ/",
+        "vi": "bơi lội",
+        "col": "go swimming",
+        "ex": "I go swimming in the pool every week.",
+        "exv": "Tôi đi bơi ở bể bơi mỗi tuần."
+      },
+      {
+        "w": "running",
+        "ipa": "/ˈrʌnɪŋ/",
+        "vi": "chạy bộ",
+        "col": "go running",
+        "ex": "Mum goes running in the park in the morning.",
+        "exv": "Mẹ đi chạy bộ trong công viên vào buổi sáng."
+      },
+      {
+        "w": "sailing",
+        "ipa": "/ˈseɪlɪŋ/",
+        "vi": "chèo thuyền buồm",
+        "col": "go sailing",
+        "ex": "We go sailing on the lake in summer.",
+        "exv": "Chúng tôi đi chèo thuyền buồm trên hồ vào mùa hè."
+      },
+      {
+        "w": "skiing",
+        "ipa": "/ˈskiːɪŋ/",
+        "vi": "trượt tuyết",
+        "col": "go skiing",
+        "ex": "They go skiing in the mountains in winter.",
+        "exv": "Họ đi trượt tuyết trên núi vào mùa đông."
+      },
+      {
+        "w": "judo",
+        "ipa": "/ˈdʒuːdəʊ/",
+        "vi": "judo",
+        "col": "do judo",
+        "ex": "My sister does judo on Tuesday evening.",
+        "exv": "Em gái tôi tập judo vào tối thứ Ba."
+      },
+      {
+        "w": "karate",
+        "ipa": "/kəˈrɑːti/",
+        "vi": "karate",
+        "col": "do karate",
+        "ex": "I do karate with my friends after school.",
+        "exv": "Tôi tập karate với các bạn sau giờ học."
+      },
+      {
+        "w": "canoe",
+        "ipa": "/kəˈnuː/",
+        "vi": "xuồng (môn chèo xuồng)",
+        "col": "go canoeing",
+        "ex": "We go canoeing on the river in summer.",
+        "exv": "Chúng tôi đi chèo xuồng trên sông vào mùa hè."
+      },
+      {
+        "w": "horse racing",
+        "ipa": "/hɔːs ˈreɪsɪŋ/",
+        "vi": "đua ngựa",
+        "col": "like horse racing",
+        "ex": "Grandad likes to watch horse racing on Saturday.",
+        "exv": "Ông tôi thích xem đua ngựa vào thứ Bảy."
+      },
+      {
+        "w": "court",
+        "ipa": "/kɔːt/",
+        "vi": "sân (quần vợt, bóng rổ)",
+        "col": "a tennis court",
+        "ex": "We play tennis on the new court near the river.",
+        "exv": "Chúng tôi chơi quần vợt trên sân mới gần sông."
+      },
+      {
+        "w": "field",
+        "ipa": "/fiːld/",
+        "vi": "sân (bóng đá)",
+        "col": "a football field",
+        "ex": "The boys run on the football field after school.",
+        "exv": "Các bạn nam chạy trên sân bóng đá sau giờ học."
+      },
+      {
+        "w": "pitch",
+        "ipa": "/pɪtʃ/",
+        "vi": "sân (bóng đá, cricket)",
+        "col": "a football pitch",
+        "ex": "It rains, so the football pitch is wet and soft.",
+        "exv": "Trời mưa nên sân bóng đá ướt và mềm."
+      },
+      {
+        "w": "swimming pool",
+        "ipa": "/ˈswɪmɪŋ puːl/",
+        "vi": "bể bơi",
+        "col": "in a swimming pool",
+        "ex": "I swim in the swimming pool with my class.",
+        "exv": "Tôi bơi trong bể bơi cùng lớp của tôi."
+      },
+      {
+        "w": "favourite sport",
+        "ipa": "/ˈfeɪvrɪt spɔːt/",
+        "vi": "môn thể thao yêu thích",
+        "col": "What's your favourite sport?",
+        "ex": "My favourite sport is swimming, and I go every week.",
+        "exv": "Môn thể thao yêu thích của tôi là bơi lội, và tôi đi bơi mỗi tuần."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'bóng bàn'?",
+        "o": [
+          "table tennis",
+          "tennis",
+          "badminton"
+        ],
+        "a": 0,
+        "why": "table tennis = bóng bàn; tennis = quần vợt; badminton = cầu lông."
+      },
+      {
+        "q": "Điền động từ đúng vào câu: 'I ___ swimming every week.'",
+        "o": [
+          "go",
+          "play",
+          "do"
+        ],
+        "a": 0,
+        "why": "Đi bơi nói 'go swimming'; play dùng với môn bóng, do dùng với judo và karate."
+      },
+      {
+        "q": "Bạn chơi quần vợt ở đâu?",
+        "o": [
+          "on a tennis court",
+          "in a swimming pool",
+          "on a football field"
+        ],
+        "a": 0,
+        "why": "Quần vợt chơi trên sân tennis (court); bể bơi để bơi, sân bóng đá để đá bóng."
+      },
+      {
+        "q": "Từ nào là nơi chơi thể thao, không phải môn thể thao?",
+        "o": [
+          "court",
+          "tennis",
+          "badminton",
+          "cricket"
+        ],
+        "a": 0,
+        "why": "court là sân chơi; tennis, badminton, cricket đều là môn thể thao."
+      },
+      {
+        "q": "Điền động từ đúng vào câu: 'She ___ judo on Tuesday.'",
+        "o": [
+          "does",
+          "plays",
+          "goes"
+        ],
+        "a": 0,
+        "why": "Judo dùng với 'do'; play dùng với môn bóng, go dùng với môn đi như swimming."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'đua ngựa'?",
+        "o": [
+          "horse racing",
+          "motor racing",
+          "skiing"
+        ],
+        "a": 0,
+        "why": "horse racing = đua ngựa; motor racing = đua xe; skiing = trượt tuyết."
+      }
+    ]
+  },
+  {
+    "n": 55,
+    "group": "Giải trí",
+    "title": "Cinema",
+    "titleVi": "Điện ảnh",
+    "words": [
+      {
+        "w": "horror film",
+        "ipa": "/ˈhɒrə fɪlm/",
+        "vi": "phim kinh dị",
+        "col": "a horror film",
+        "ex": "My brother likes horror films, but I do not watch them at night.",
+        "exv": "Anh trai tôi thích phim kinh dị, nhưng tôi không xem chúng vào ban đêm."
+      },
+      {
+        "w": "action film",
+        "ipa": "/ˈækʃən fɪlm/",
+        "vi": "phim hành động",
+        "col": "an action film",
+        "ex": "We watch a new action film with fast cars and big fights.",
+        "exv": "Chúng tôi xem một phim hành động mới với xe chạy nhanh và những trận đánh lớn."
+      },
+      {
+        "w": "western",
+        "ipa": "/ˈwestən/",
+        "vi": "phim cao bồi miền Tây",
+        "col": "a western",
+        "ex": "Dad watches a western about cowboys and horses on Sunday.",
+        "exv": "Bố xem một phim cao bồi về những người chăn bò và ngựa vào Chủ nhật."
+      },
+      {
+        "w": "musical",
+        "ipa": "/ˈmjuːzɪkəl/",
+        "vi": "phim ca nhạc",
+        "col": "a musical",
+        "ex": "The musical has lots of songs and dancing.",
+        "exv": "Phim ca nhạc có rất nhiều bài hát và nhảy múa."
+      },
+      {
+        "w": "crime film",
+        "ipa": "/kraɪm fɪlm/",
+        "vi": "phim tội phạm",
+        "col": "a crime film",
+        "ex": "In the crime film, the police look for a man in a black car.",
+        "exv": "Trong phim tội phạm, cảnh sát tìm một người đàn ông trong xe đen."
+      },
+      {
+        "w": "detective film",
+        "ipa": "/dɪˈtektɪv fɪlm/",
+        "vi": "phim trinh thám",
+        "col": "a detective film",
+        "ex": "I like detective films because I try to find the answer first.",
+        "exv": "Tôi thích phim trinh thám vì tôi cố tìm ra đáp án trước."
+      },
+      {
+        "w": "cartoon",
+        "ipa": "/kɑːˈtuːn/",
+        "vi": "phim hoạt hình",
+        "col": "a cartoon",
+        "ex": "The children watch a funny cartoon about a small mouse.",
+        "exv": "Bọn trẻ xem một phim hoạt hình vui nhộn về một con chuột nhỏ."
+      },
+      {
+        "w": "science fiction film",
+        "ipa": "/ˈsaɪəns ˈfɪkʃən fɪlm/",
+        "vi": "phim khoa học viễn tưởng",
+        "col": "a science fiction film",
+        "ex": "The science fiction film is about people on a far planet.",
+        "exv": "Phim khoa học viễn tưởng nói về những người trên một hành tinh xa."
+      },
+      {
+        "w": "love story",
+        "ipa": "/lʌv ˈstɔːri/",
+        "vi": "chuyện tình",
+        "col": "a love story",
+        "ex": "Mum likes a love story about two young teachers.",
+        "exv": "Mẹ thích một chuyện tình về hai giáo viên trẻ."
+      },
+      {
+        "w": "romantic film",
+        "ipa": "/rəʊˈmæntɪk fɪlm/",
+        "vi": "phim lãng mạn",
+        "col": "a romantic film",
+        "ex": "We see a romantic film about a girl and a singer.",
+        "exv": "Chúng tôi xem một phim lãng mạn về một cô gái và một ca sĩ."
+      },
+      {
+        "w": "comedy",
+        "ipa": "/ˈkɒmədi/",
+        "vi": "phim hài",
+        "col": "a comedy",
+        "ex": "The comedy makes us laugh all evening.",
+        "exv": "Phim hài làm chúng tôi cười suốt buổi tối."
+      },
+      {
+        "w": "film star",
+        "ipa": "/fɪlm stɑː/",
+        "vi": "ngôi sao điện ảnh",
+        "col": "a famous film star",
+        "ex": "The film star lives in a big house in Hollywood.",
+        "exv": "Ngôi sao điện ảnh sống trong một ngôi nhà lớn ở Hollywood."
+      },
+      {
+        "w": "Hollywood",
+        "ipa": "/ˈhɒliwʊd/",
+        "vi": "Hollywood",
+        "col": "live in Hollywood",
+        "ex": "Many big film stars live in Hollywood.",
+        "exv": "Nhiều ngôi sao điện ảnh lớn sống ở Hollywood."
+      },
+      {
+        "w": "director",
+        "ipa": "/dɪˈrektə/",
+        "vi": "đạo diễn",
+        "col": "a film director",
+        "ex": "The director of this film is from Italy.",
+        "exv": "Đạo diễn của phim này đến từ Ý."
+      },
+      {
+        "w": "cinema",
+        "ipa": "/ˈsɪnəmə/",
+        "vi": "rạp chiếu phim",
+        "col": "go to the cinema",
+        "ex": "We go to the cinema on Friday night.",
+        "exv": "Chúng tôi đi xem phim ở rạp vào tối thứ Sáu."
+      },
+      {
+        "w": "video",
+        "ipa": "/ˈvɪdiəʊ/",
+        "vi": "băng video",
+        "col": "watch a video",
+        "ex": "We watch a video at home when it rains.",
+        "exv": "Chúng tôi xem băng video ở nhà khi trời mưa."
+      },
+      {
+        "w": "boring",
+        "ipa": "/ˈbɔːrɪŋ/",
+        "vi": "chán, buồn tẻ",
+        "col": "a boring film",
+        "ex": "The film is boring, so we go home early.",
+        "exv": "Phim chán quá nên chúng tôi về nhà sớm."
+      },
+      {
+        "w": "enjoy",
+        "ipa": "/ɪnˈdʒɔɪ/",
+        "vi": "thích, thưởng thức",
+        "col": "enjoy a film",
+        "ex": "I enjoy the new comedy very much.",
+        "exv": "Tôi rất thích phim hài mới."
+      },
+      {
+        "w": "film",
+        "ipa": "/fɪlm/",
+        "vi": "phim",
+        "col": "a good film",
+        "ex": "This is a good film about a brave young doctor.",
+        "exv": "Đây là một phim hay về một bác sĩ trẻ dũng cảm."
+      },
+      {
+        "w": "play",
+        "ipa": "/pleɪ/",
+        "vi": "đóng vai",
+        "col": "play a part in a film",
+        "ex": "The young actor plays a teacher in the new film.",
+        "exv": "Nam diễn viên trẻ đóng vai một giáo viên trong phim mới."
+      },
+      {
+        "w": "What's on",
+        "ipa": "/wɒts ɒn/",
+        "vi": "đang chiếu gì",
+        "col": "What's on at the cinema?",
+        "ex": "I ask Mum what's on at the cinema this week.",
+        "exv": "Tôi hỏi mẹ rạp chiếu phim đang chiếu gì trong tuần này."
+      },
+      {
+        "w": "see a film",
+        "ipa": "/siː ə fɪlm/",
+        "vi": "xem phim",
+        "col": "see a film",
+        "ex": "We see a film about the sea at the cinema.",
+        "exv": "Chúng tôi xem một phim về biển ở rạp chiếu phim."
+      },
+      {
+        "w": "go to the cinema",
+        "ipa": "/ɡəʊ tə ðə ˈsɪnəmə/",
+        "vi": "đi xem phim ở rạp",
+        "col": "go to the cinema",
+        "ex": "My friends and I go to the cinema every Saturday.",
+        "exv": "Bạn bè tôi và tôi đi xem phim ở rạp mỗi thứ Bảy."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'phim kinh dị'?",
+        "o": [
+          "horror film",
+          "action film",
+          "comedy"
+        ],
+        "a": 0,
+        "why": "horror film = phim kinh dị; action film = phim hành động; comedy = phim hài."
+      },
+      {
+        "q": "Phim nào có nhiều bài hát và nhảy múa?",
+        "o": [
+          "a musical",
+          "a western",
+          "a crime film"
+        ],
+        "a": 0,
+        "why": "Phim ca nhạc (musical) có nhiều bài hát và nhảy múa; western là phim cao bồi, crime film là phim tội phạm."
+      },
+      {
+        "q": "Điền từ đúng vào câu: 'I ___ the new comedy very much.'",
+        "o": [
+          "enjoy",
+          "boring",
+          "play"
+        ],
+        "a": 0,
+        "why": "enjoy = thích, thưởng thức; boring là tính từ chỉ sự chán, play là đóng vai, không hợp ở đây."
+      },
+      {
+        "q": "Từ nào là tên một nơi, không phải loại phim hay người?",
+        "o": [
+          "Hollywood",
+          "comedy",
+          "western",
+          "director"
+        ],
+        "a": 0,
+        "why": "Hollywood là tên nơi ở Mỹ; comedy và western là loại phim, director là đạo diễn."
+      },
+      {
+        "q": "Bạn muốn biết rạp đang chiếu phim gì thì hỏi câu nào?",
+        "o": [
+          "What's on at the cinema this week?",
+          "Do you go to the cinema often?",
+          "Did you like the film?"
+        ],
+        "a": 0,
+        "why": "Câu đầu hỏi rạp đang chiếu phim gì; câu thứ hai hỏi có hay đi xem phim không, câu thứ ba hỏi có thích phim đó không."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'phim hoạt hình'?",
+        "o": [
+          "cartoon",
+          "musical",
+          "love story"
+        ],
+        "a": 0,
+        "why": "cartoon = phim hoạt hình; musical = phim ca nhạc; love story = chuyện tình."
+      }
+    ]
+  },
+  {
+    "n": 56,
+    "group": "Giải trí",
+    "title": "Leisure at home",
+    "titleVi": "Giải trí ở nhà",
+    "words": [
+      {
+        "w": "watch TV",
+        "ipa": "/wɒtʃ tiːˈviː/",
+        "vi": "xem ti vi",
+        "col": "watch TV every evening",
+        "ex": "Lan watches TV with her mum after dinner.",
+        "exv": "Lan xem ti vi cùng mẹ sau bữa tối."
+      },
+      {
+        "w": "listen to the radio",
+        "ipa": "/ˈlɪsən tə ðə ˈreɪdiəʊ/",
+        "vi": "nghe đài",
+        "col": "listen to the radio",
+        "ex": "My grandad listens to the radio while he drinks tea.",
+        "exv": "Ông tôi nghe đài trong khi uống trà."
+      },
+      {
+        "w": "programme",
+        "ipa": "/ˈprəʊɡræm/",
+        "vi": "chương trình",
+        "col": "a TV programme",
+        "ex": "This programme about food is very good.",
+        "exv": "Chương trình về ẩm thực này rất hay."
+      },
+      {
+        "w": "film",
+        "ipa": "/fɪlm/",
+        "vi": "phim",
+        "col": "watch a film",
+        "ex": "We watched a funny film on Saturday night.",
+        "exv": "Chúng tôi đã xem một bộ phim hài vào tối thứ Bảy."
+      },
+      {
+        "w": "listen to music",
+        "ipa": "/ˈlɪsən tə ˈmjuːzɪk/",
+        "vi": "nghe nhạc",
+        "col": "listen to music",
+        "ex": "Anna listens to music when she cleans her room.",
+        "exv": "Anna nghe nhạc khi dọn phòng của mình."
+      },
+      {
+        "w": "CD",
+        "ipa": "/siːˈdiː/",
+        "vi": "đĩa CD",
+        "col": "listen to a CD",
+        "ex": "Tom has a CD of old songs from his father.",
+        "exv": "Tom có một đĩa CD nhạc cũ của bố anh ấy."
+      },
+      {
+        "w": "tape",
+        "ipa": "/teɪp/",
+        "vi": "băng cát-xét",
+        "col": "listen to a tape",
+        "ex": "My mum keeps an old tape in a small box.",
+        "exv": "Mẹ tôi giữ một cuộn băng cũ trong một chiếc hộp nhỏ."
+      },
+      {
+        "w": "video",
+        "ipa": "/ˈvɪdiəʊ/",
+        "vi": "băng video",
+        "col": "watch a video",
+        "ex": "The children watched a video about animals yesterday.",
+        "exv": "Bọn trẻ đã xem một băng video về động vật hôm qua."
+      },
+      {
+        "w": "computer game",
+        "ipa": "/kəmˈpjuːtə ɡeɪm/",
+        "vi": "trò chơi điện tử",
+        "col": "play a computer game",
+        "ex": "Ben plays a computer game for one hour after school.",
+        "exv": "Ben chơi trò chơi điện tử một tiếng sau giờ học."
+      },
+      {
+        "w": "use the Internet",
+        "ipa": "/juːz ðiː ˈɪntənet/",
+        "vi": "dùng Internet",
+        "col": "use the Internet",
+        "ex": "I use the Internet to look for new recipes.",
+        "exv": "Tôi dùng Internet để tìm công thức nấu ăn mới."
+      },
+      {
+        "w": "cooking",
+        "ipa": "/ˈkʊkɪŋ/",
+        "vi": "việc nấu ăn",
+        "col": "like cooking",
+        "ex": "Mai likes cooking rice and soup for her family.",
+        "exv": "Mai thích nấu cơm và canh cho gia đình."
+      },
+      {
+        "w": "gardening",
+        "ipa": "/ˈɡɑːdnɪŋ/",
+        "vi": "việc làm vườn",
+        "col": "like gardening",
+        "ex": "My uncle likes gardening on Sunday morning.",
+        "exv": "Chú tôi thích làm vườn vào sáng Chủ nhật."
+      },
+      {
+        "w": "grow",
+        "ipa": "/ɡrəʊ/",
+        "vi": "trồng",
+        "col": "grow flowers",
+        "ex": "We grow tomatoes and lettuce behind our house.",
+        "exv": "Chúng tôi trồng cà chua và xà lách sau nhà."
+      },
+      {
+        "w": "house plant",
+        "ipa": "/haʊs plɑːnt/",
+        "vi": "cây trồng trong nhà",
+        "col": "a house plant",
+        "ex": "There is a green house plant next to my desk.",
+        "exv": "Có một chậu cây xanh bên cạnh bàn của tôi."
+      },
+      {
+        "w": "read",
+        "ipa": "/riːd/",
+        "vi": "đọc",
+        "col": "read a book",
+        "ex": "Hoa reads a book in bed every night.",
+        "exv": "Hoa đọc sách trên giường mỗi tối."
+      },
+      {
+        "w": "novel",
+        "ipa": "/ˈnɒvəl/",
+        "vi": "tiểu thuyết",
+        "col": "read a novel",
+        "ex": "This novel tells a story about a young doctor.",
+        "exv": "Cuốn tiểu thuyết này kể câu chuyện về một bác sĩ trẻ."
+      },
+      {
+        "w": "magazine",
+        "ipa": "/mæɡəˈziːn/",
+        "vi": "tạp chí",
+        "col": "read a magazine",
+        "ex": "I bought a magazine about travel at the station.",
+        "exv": "Tôi đã mua một tạp chí về du lịch ở nhà ga."
+      },
+      {
+        "w": "newspaper",
+        "ipa": "/ˈnjuːzpeɪpə/",
+        "vi": "báo",
+        "col": "read a newspaper",
+        "ex": "Dad reads a newspaper with his breakfast.",
+        "exv": "Bố đọc báo trong bữa sáng."
+      },
+      {
+        "w": "invite friends around",
+        "ipa": "/ɪnˈvaɪt frendz əˈraʊnd/",
+        "vi": "mời bạn đến nhà chơi",
+        "col": "invite friends around",
+        "ex": "We invite friends around for tea on Friday.",
+        "exv": "Chúng tôi mời bạn đến nhà uống trà vào thứ Sáu."
+      },
+      {
+        "w": "have friends to dinner",
+        "ipa": "/hæv frendz tə ˈdɪnə/",
+        "vi": "mời bạn đến ăn tối",
+        "col": "have friends to dinner",
+        "ex": "On Sunday we have friends to dinner at our flat.",
+        "exv": "Vào Chủ nhật chúng tôi mời bạn đến ăn tối ở căn hộ của mình."
+      },
+      {
+        "w": "come to stay",
+        "ipa": "/kʌm tə steɪ/",
+        "vi": "đến ở lại",
+        "col": "come to stay",
+        "ex": "My cousin comes to stay with us in the summer.",
+        "exv": "Em họ tôi đến ở với chúng tôi vào mùa hè."
+      },
+      {
+        "w": "ring",
+        "ipa": "/rɪŋ/",
+        "vi": "gọi điện thoại",
+        "col": "ring a friend",
+        "ex": "I ring my best friend every Sunday evening.",
+        "exv": "Tôi gọi điện cho bạn thân nhất vào mỗi tối Chủ nhật."
+      },
+      {
+        "w": "do nothing",
+        "ipa": "/duː ˈnʌθɪŋ/",
+        "vi": "không làm gì cả",
+        "col": "just do nothing",
+        "ex": "After a long week, I just do nothing on Sunday.",
+        "exv": "Sau một tuần dài, tôi chẳng làm gì cả vào Chủ nhật."
+      },
+      {
+        "w": "have a sleep",
+        "ipa": "/hæv ə sliːp/",
+        "vi": "ngủ một giấc",
+        "col": "have a sleep",
+        "ex": "Grandma has a sleep after lunch every day.",
+        "exv": "Bà ngoại ngủ một giấc sau bữa trưa mỗi ngày."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Điền từ đúng vào câu: I like to ___ a film on TV in the evening.",
+        "o": [
+          "watch",
+          "hear",
+          "grow"
+        ],
+        "a": 0,
+        "why": "watch a film = xem phim; hear không dùng với phim, grow = trồng."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'tiểu thuyết'?",
+        "o": [
+          "magazine",
+          "novel",
+          "newspaper"
+        ],
+        "a": 1,
+        "why": "novel = tiểu thuyết, một câu chuyện dài; magazine = tạp chí; newspaper = báo."
+      },
+      {
+        "q": "Cụm nào đúng với 'radio'?",
+        "o": [
+          "listen to the radio",
+          "watch the radio",
+          "read the radio"
+        ],
+        "a": 0,
+        "why": "Ta nói listen to the radio (nghe đài), không nói watch hay read the radio."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "cooking",
+          "gardening",
+          "newspaper",
+          "reading"
+        ],
+        "a": 2,
+        "why": "cooking, gardening và reading đều là hoạt động giải trí ở nhà; newspaper là đồ vật để đọc."
+      },
+      {
+        "q": "Điền từ đúng vào câu: We ___ flowers and vegetables in our garden.",
+        "o": [
+          "grow",
+          "ring",
+          "invite"
+        ],
+        "a": 0,
+        "why": "grow flowers = trồng hoa; ring = gọi điện; invite = mời."
+      },
+      {
+        "q": "'have friends to dinner' có nghĩa là gì?",
+        "o": [
+          "mời bạn đến ăn tối",
+          "mời bạn đến ngủ lại",
+          "gọi điện cho bạn"
+        ],
+        "a": 0,
+        "why": "have friends to dinner = mời bạn đến nhà ăn tối; come to stay mới là đến ở lại."
+      }
+    ]
+  },
+  {
+    "n": 57,
+    "group": "Vấn đề xã hội",
+    "title": "Crime",
+    "titleVi": "Tội phạm",
+    "words": [
+      {
+        "w": "crime",
+        "ipa": "/kraɪm/",
+        "vi": "tội phạm",
+        "col": "a crime",
+        "ex": "The police want to stop crime in this town.",
+        "exv": "Cảnh sát muốn ngăn chặn tội phạm ở thị trấn này."
+      },
+      {
+        "w": "robbery",
+        "ipa": "/ˈrɒbəri/",
+        "vi": "vụ cướp",
+        "col": "a robbery",
+        "ex": "There was a robbery at a small shop last week.",
+        "exv": "Có một vụ cướp ở một cửa hàng nhỏ tuần trước."
+      },
+      {
+        "w": "robber",
+        "ipa": "/ˈrɒbə/",
+        "vi": "kẻ cướp",
+        "col": "a robber",
+        "ex": "The robber took money from the shop and ran away.",
+        "exv": "Kẻ cướp lấy tiền trong cửa hàng rồi bỏ chạy."
+      },
+      {
+        "w": "to rob somebody",
+        "ipa": "/tə rɒb ˈsʌmbədi/",
+        "vi": "cướp ai, cướp của ai",
+        "col": "to rob somebody",
+        "ex": "A man robbed an old lady of her bag near the market.",
+        "exv": "Một người đàn ông đã cướp túi của một bà cụ gần chợ."
+      },
+      {
+        "w": "murder",
+        "ipa": "/ˈmɜːdə/",
+        "vi": "vụ giết người",
+        "col": "a murder",
+        "ex": "The news talked about a murder in the city.",
+        "exv": "Tin tức nói về một vụ giết người trong thành phố."
+      },
+      {
+        "w": "murderer",
+        "ipa": "/ˈmɜːdərə/",
+        "vi": "kẻ giết người",
+        "col": "a murderer",
+        "ex": "The police caught the murderer two days later.",
+        "exv": "Cảnh sát đã bắt được kẻ giết người hai ngày sau đó."
+      },
+      {
+        "w": "to murder",
+        "ipa": "/tə ˈmɜːdə/",
+        "vi": "giết người",
+        "col": "to murder somebody",
+        "ex": "In the story, a rich man murdered his brother to get his house.",
+        "exv": "Trong câu chuyện, một người đàn ông giàu có đã giết em trai mình để lấy nhà của anh ta."
+      },
+      {
+        "w": "burglary",
+        "ipa": "/ˈbɜːɡləri/",
+        "vi": "vụ trộm đột nhập vào nhà",
+        "col": "a burglary",
+        "ex": "There was a burglary at the school during the night.",
+        "exv": "Có một vụ trộm đột nhập vào trường học trong đêm."
+      },
+      {
+        "w": "burglar",
+        "ipa": "/ˈbɜːɡlə/",
+        "vi": "kẻ trộm đột nhập",
+        "col": "a burglar",
+        "ex": "A burglar broke a window and went into the house.",
+        "exv": "Một kẻ trộm đã đập vỡ cửa sổ và lẻn vào nhà."
+      },
+      {
+        "w": "to break into",
+        "ipa": "/tə breɪk ˈɪntə/",
+        "vi": "đột nhập vào",
+        "col": "break into a house",
+        "ex": "Someone tried to break into our garage last night.",
+        "exv": "Ai đó đã cố đột nhập vào gara của chúng tôi đêm qua."
+      },
+      {
+        "w": "mugging",
+        "ipa": "/ˈmʌɡɪŋ/",
+        "vi": "vụ cướp giật ngoài đường",
+        "col": "a mugging",
+        "ex": "There are many muggings near the station at night.",
+        "exv": "Có nhiều vụ cướp giật gần nhà ga vào ban đêm."
+      },
+      {
+        "w": "mugger",
+        "ipa": "/ˈmʌɡə/",
+        "vi": "kẻ cướp giật ngoài đường",
+        "col": "a mugger",
+        "ex": "A mugger took her bag and ran down the street.",
+        "exv": "Một kẻ cướp giật đã lấy túi của cô ấy và chạy dọc phố."
+      },
+      {
+        "w": "to mug",
+        "ipa": "/tə mʌɡ/",
+        "vi": "cướp giật ngoài đường",
+        "col": "to mug somebody",
+        "ex": "A thief mugged a student on a dark street and took his phone.",
+        "exv": "Một tên trộm đã cướp giật một học sinh trên con phố tối và lấy điện thoại của cậu ấy."
+      },
+      {
+        "w": "shoplifting",
+        "ipa": "/ˈʃɒplɪftɪŋ/",
+        "vi": "tội ăn cắp ở cửa hàng",
+        "col": "shoplifting",
+        "ex": "Shoplifting is a crime in every country.",
+        "exv": "Ăn cắp ở cửa hàng là tội phạm ở mọi nước."
+      },
+      {
+        "w": "shoplifter",
+        "ipa": "/ˈʃɒplɪftə/",
+        "vi": "kẻ ăn cắp ở cửa hàng",
+        "col": "a shoplifter",
+        "ex": "The shop worker saw a shoplifter take a small radio.",
+        "exv": "Nhân viên cửa hàng thấy một kẻ ăn cắp lấy một chiếc đài nhỏ."
+      },
+      {
+        "w": "car theft",
+        "ipa": "/kɑː θeft/",
+        "vi": "tội trộm xe hơi",
+        "col": "car theft",
+        "ex": "Car theft is a big problem in this area.",
+        "exv": "Trộm xe hơi là vấn đề lớn ở khu vực này."
+      },
+      {
+        "w": "car thief",
+        "ipa": "/kɑː θiːf/",
+        "vi": "kẻ trộm xe hơi",
+        "col": "a car thief",
+        "ex": "A car thief stole my neighbour's old car.",
+        "exv": "Một kẻ trộm xe hơi đã lấy chiếc xe cũ của hàng xóm tôi."
+      },
+      {
+        "w": "to steal",
+        "ipa": "/tə stiːl/",
+        "vi": "ăn trộm",
+        "col": "steal something",
+        "ex": "Somebody stole my bike from outside the school.",
+        "exv": "Ai đó đã lấy trộm xe đạp của tôi ở ngoài trường."
+      },
+      {
+        "w": "drug dealing",
+        "ipa": "/drʌɡ ˈdiːlɪŋ/",
+        "vi": "việc buôn bán ma túy",
+        "col": "drug dealing",
+        "ex": "The police want to stop drug dealing in the city.",
+        "exv": "Cảnh sát muốn ngăn chặn buôn bán ma túy trong thành phố."
+      },
+      {
+        "w": "drug dealer",
+        "ipa": "/drʌɡ ˈdiːlə/",
+        "vi": "kẻ buôn ma túy",
+        "col": "a drug dealer",
+        "ex": "The police arrested a drug dealer near the park.",
+        "exv": "Cảnh sát đã bắt một kẻ buôn ma túy gần công viên."
+      },
+      {
+        "w": "terrorism",
+        "ipa": "/ˈterərɪzəm/",
+        "vi": "chủ nghĩa khủng bố",
+        "col": "terrorism",
+        "ex": "People in many countries worry about terrorism.",
+        "exv": "Người dân ở nhiều nước lo lắng về chủ nghĩa khủng bố."
+      },
+      {
+        "w": "terrorist",
+        "ipa": "/ˈterərɪst/",
+        "vi": "kẻ khủng bố",
+        "col": "a terrorist",
+        "ex": "Terrorists attacked a bus station in the story.",
+        "exv": "Những kẻ khủng bố đã tấn công một bến xe buýt trong câu chuyện."
+      },
+      {
+        "w": "to attack",
+        "ipa": "/tə əˈtæk/",
+        "vi": "tấn công",
+        "col": "attack somebody",
+        "ex": "A dog attacked a man in the park yesterday.",
+        "exv": "Một con chó đã tấn công một người đàn ông trong công viên hôm qua."
+      },
+      {
+        "w": "arrest",
+        "ipa": "/əˈrest/",
+        "vi": "bắt giữ",
+        "col": "arrest somebody",
+        "ex": "The police arrested two men after the robbery.",
+        "exv": "Cảnh sát đã bắt giữ hai người đàn ông sau vụ cướp."
+      },
+      {
+        "w": "court",
+        "ipa": "/kɔːt/",
+        "vi": "tòa án",
+        "col": "go to court",
+        "ex": "The man has to go to court next Monday.",
+        "exv": "Người đàn ông phải ra tòa vào thứ Hai tới."
+      },
+      {
+        "w": "guilty",
+        "ipa": "/ˈɡɪlti/",
+        "vi": "có tội",
+        "col": "be guilty",
+        "ex": "If he is guilty, he will go to prison.",
+        "exv": "Nếu anh ta có tội, anh ta sẽ phải đi tù."
+      },
+      {
+        "w": "innocent",
+        "ipa": "/ˈɪnəsənt/",
+        "vi": "vô tội",
+        "col": "be innocent",
+        "ex": "She is innocent, so she can go home now.",
+        "exv": "Cô ấy vô tội, vì vậy cô ấy có thể về nhà bây giờ."
+      },
+      {
+        "w": "fine",
+        "ipa": "/faɪn/",
+        "vi": "tiền phạt",
+        "col": "pay a fine",
+        "ex": "He had to pay a fine for parking in the wrong place.",
+        "exv": "Anh ta phải nộp tiền phạt vì đỗ xe sai chỗ."
+      },
+      {
+        "w": "prison",
+        "ipa": "/ˈprɪzən/",
+        "vi": "nhà tù",
+        "col": "go to prison",
+        "ex": "The robber will go to prison for five years.",
+        "exv": "Kẻ cướp sẽ phải đi tù năm năm."
+      },
+      {
+        "w": "vandal",
+        "ipa": "/ˈvændəl/",
+        "vi": "kẻ phá hoại",
+        "col": "a vandal",
+        "ex": "A vandal broke the windows of the bus stop.",
+        "exv": "Một kẻ phá hoại đã đập vỡ cửa kính của trạm xe buýt."
+      },
+      {
+        "w": "vandalism",
+        "ipa": "/ˈvændəlɪzəm/",
+        "vi": "hành vi phá hoại",
+        "col": "vandalism",
+        "ex": "There is a lot of vandalism in this town.",
+        "exv": "Có rất nhiều hành vi phá hoại ở thị trấn này."
+      },
+      {
+        "w": "take drugs",
+        "ipa": "/teɪk drʌɡz/",
+        "vi": "dùng ma túy",
+        "col": "take drugs",
+        "ex": "Young people should never take drugs.",
+        "exv": "Người trẻ không bao giờ nên dùng ma túy."
+      },
+      {
+        "w": "football hooliganism",
+        "ipa": "/ˈfʊtbɔːl ˈhuːlɪɡənɪzəm/",
+        "vi": "hành vi gây rối của cổ động viên bóng đá",
+        "col": "football hooliganism",
+        "ex": "Football hooliganism is a problem after some big games.",
+        "exv": "Hành vi gây rối của cổ động viên là vấn đề sau một số trận đấu lớn."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Người trộm đồ trong cửa hàng được gọi là gì?",
+        "o": [
+          "shoplifter",
+          "robber",
+          "burglar"
+        ],
+        "a": 0,
+        "why": "shoplifter = kẻ ăn cắp ở cửa hàng; robber cướp người hoặc nơi; burglar đột nhập vào nhà."
+      },
+      {
+        "q": "Điền từ đúng vào câu: A ___ steals cars.",
+        "o": [
+          "car thief",
+          "murderer",
+          "journalist"
+        ],
+        "a": 0,
+        "why": "car thief = kẻ trộm xe hơi; murderer = kẻ giết người; journalist = nhà báo."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'vô tội'?",
+        "o": [
+          "guilty",
+          "innocent",
+          "fine"
+        ],
+        "a": 1,
+        "why": "innocent = vô tội; guilty = có tội; fine = tiền phạt."
+      },
+      {
+        "q": "Điền từ đúng vào câu: The police ___ the man for shoplifting this morning.",
+        "o": [
+          "arrested",
+          "murdered",
+          "attacked"
+        ],
+        "a": 0,
+        "why": "arrest = bắt giữ, đúng với cảnh sát bắt người; murder = giết; attack = tấn công."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "robbery",
+          "murder",
+          "court",
+          "burglary"
+        ],
+        "a": 2,
+        "why": "robbery, murder và burglary đều là tên tội; court là tòa án, nơi xét xử."
+      },
+      {
+        "q": "'go to prison' có nghĩa là gì?",
+        "o": [
+          "đi tù",
+          "nộp tiền phạt",
+          "ra tòa"
+        ],
+        "a": 0,
+        "why": "go to prison = đi tù; pay a fine = nộp tiền phạt; go to court = ra tòa."
+      }
+    ]
+  },
+  {
+    "n": 58,
+    "group": "Vấn đề xã hội",
+    "title": "The media",
+    "titleVi": "Truyền thông",
+    "words": [
+      {
+        "w": "the news",
+        "ipa": "/ðə njuːz/",
+        "vi": "tin tức",
+        "col": "the news is on TV",
+        "ex": "The news starts at seven o'clock on this channel.",
+        "exv": "Tin tức bắt đầu lúc bảy giờ trên kênh này."
+      },
+      {
+        "w": "soap opera",
+        "ipa": "/səʊp ˈɒpərə/",
+        "vi": "phim truyền hình dài tập về đời sống",
+        "col": "watch a soap opera",
+        "ex": "My aunt watches a soap opera every evening.",
+        "exv": "Dì tôi xem phim truyền hình dài tập mỗi tối."
+      },
+      {
+        "w": "nature programme",
+        "ipa": "/ˈneɪtʃə ˈprəʊɡræm/",
+        "vi": "chương trình về thiên nhiên",
+        "col": "a nature programme",
+        "ex": "We saw a nature programme about elephants last night.",
+        "exv": "Tối qua chúng tôi đã xem một chương trình về thiên nhiên nói về voi."
+      },
+      {
+        "w": "documentary",
+        "ipa": "/dɒkjəˈmentri/",
+        "vi": "phim tài liệu",
+        "col": "watch a documentary",
+        "ex": "I watched a documentary about life in the mountains.",
+        "exv": "Tôi đã xem một phim tài liệu về cuộc sống trên núi."
+      },
+      {
+        "w": "talk show",
+        "ipa": "/tɔːk ʃəʊ/",
+        "vi": "chương trình trò chuyện",
+        "col": "a talk show",
+        "ex": "On the talk show, a singer talked about her new song.",
+        "exv": "Trong chương trình trò chuyện, một ca sĩ đã nói về bài hát mới của cô ấy."
+      },
+      {
+        "w": "cartoon",
+        "ipa": "/kɑːˈtuːn/",
+        "vi": "phim hoạt hình",
+        "col": "watch a cartoon",
+        "ex": "The little boy loves a cartoon about a talking cat.",
+        "exv": "Cậu bé thích một phim hoạt hình về chú mèo biết nói."
+      },
+      {
+        "w": "sport programme",
+        "ipa": "/spɔːt ˈprəʊɡræm/",
+        "vi": "chương trình thể thao",
+        "col": "a sport programme",
+        "ex": "Dad never misses the sport programme on Sunday.",
+        "exv": "Bố không bao giờ bỏ lỡ chương trình thể thao vào Chủ nhật."
+      },
+      {
+        "w": "film",
+        "ipa": "/fɪlm/",
+        "vi": "phim",
+        "col": "watch a film",
+        "ex": "We watched a film about a brave young girl.",
+        "exv": "Chúng tôi đã xem một bộ phim về một cô gái trẻ dũng cảm."
+      },
+      {
+        "w": "morning newspaper",
+        "ipa": "/ˈmɔːnɪŋ ˈnjuːzpeɪpə/",
+        "vi": "báo buổi sáng",
+        "col": "a morning newspaper",
+        "ex": "He reads a morning newspaper on the train to work.",
+        "exv": "Anh ấy đọc báo buổi sáng trên tàu đi làm."
+      },
+      {
+        "w": "evening newspaper",
+        "ipa": "/ˈiːvnɪŋ ˈnjuːzpeɪpə/",
+        "vi": "báo buổi chiều",
+        "col": "an evening newspaper",
+        "ex": "She buys an evening newspaper on her way home.",
+        "exv": "Cô ấy mua một tờ báo buổi chiều trên đường về nhà."
+      },
+      {
+        "w": "magazine",
+        "ipa": "/mæɡəˈziːn/",
+        "vi": "tạp chí",
+        "col": "buy a magazine",
+        "ex": "I buy a magazine about food every month.",
+        "exv": "Tôi mua một tạp chí về ẩm thực mỗi tháng."
+      },
+      {
+        "w": "women's magazine",
+        "ipa": "/ˈwɪmɪnz mæɡəˈziːn/",
+        "vi": "tạp chí phụ nữ",
+        "col": "a women's magazine",
+        "ex": "My mother buys a women's magazine every week.",
+        "exv": "Mẹ tôi mua một tạp chí phụ nữ mỗi tuần."
+      },
+      {
+        "w": "news magazine",
+        "ipa": "/njuːz mæɡəˈziːn/",
+        "vi": "tạp chí tin tức",
+        "col": "a news magazine",
+        "ex": "This news magazine has stories from many countries.",
+        "exv": "Tạp chí tin tức này có bài viết từ nhiều nước."
+      },
+      {
+        "w": "comic",
+        "ipa": "/ˈkɒmɪk/",
+        "vi": "truyện tranh",
+        "col": "read a comic",
+        "ex": "My little brother reads comics in his bedroom.",
+        "exv": "Em trai tôi đọc truyện tranh trong phòng ngủ."
+      },
+      {
+        "w": "sports magazine",
+        "ipa": "/spɔːts mæɡəˈziːn/",
+        "vi": "tạp chí thể thao",
+        "col": "a sports magazine",
+        "ex": "Tom reads a sports magazine about football.",
+        "exv": "Tom đọc một tạp chí thể thao về bóng đá."
+      },
+      {
+        "w": "computer magazine",
+        "ipa": "/kəmˈpjuːtə mæɡəˈziːn/",
+        "vi": "tạp chí máy tính",
+        "col": "a computer magazine",
+        "ex": "My friend reads a computer magazine to learn new things.",
+        "exv": "Bạn tôi đọc tạp chí máy tính để học điều mới."
+      },
+      {
+        "w": "teenage magazine",
+        "ipa": "/ˈtiːneɪdʒ mæɡəˈziːn/",
+        "vi": "tạp chí tuổi teen",
+        "col": "a teenage magazine",
+        "ex": "Her sister reads a teenage magazine with stories about pop stars.",
+        "exv": "Em gái cô ấy đọc tạp chí tuổi teen với bài về các ngôi sao nhạc pop."
+      },
+      {
+        "w": "satellite TV",
+        "ipa": "/ˈsætəlaɪt tiːˈviː/",
+        "vi": "truyền hình vệ tinh",
+        "col": "satellite TV",
+        "ex": "Our house has satellite TV with many channels.",
+        "exv": "Nhà chúng tôi có truyền hình vệ tinh với nhiều kênh."
+      },
+      {
+        "w": "channel",
+        "ipa": "/ˈtʃænəl/",
+        "vi": "kênh truyền hình",
+        "col": "a TV channel",
+        "ex": "How many channels do you have on your TV?",
+        "exv": "Ti vi của bạn có bao nhiêu kênh?"
+      },
+      {
+        "w": "the Internet",
+        "ipa": "/ðiː ˈɪntənet/",
+        "vi": "Internet",
+        "col": "on the Internet",
+        "ex": "I read the weather news on the Internet every morning.",
+        "exv": "Tôi đọc tin thời tiết trên Internet mỗi sáng."
+      },
+      {
+        "w": "interview",
+        "ipa": "/ˈɪntəvjuː/",
+        "vi": "cuộc phỏng vấn",
+        "col": "an interview with somebody",
+        "ex": "There was an interview with a famous singer on TV.",
+        "exv": "Có một cuộc phỏng vấn với một ca sĩ nổi tiếng trên ti vi."
+      },
+      {
+        "w": "reporter",
+        "ipa": "/rɪˈpɔːtə/",
+        "vi": "phóng viên",
+        "col": "a reporter",
+        "ex": "Reporters are outside the school to get the news.",
+        "exv": "Các phóng viên đang ở ngoài trường để lấy tin."
+      },
+      {
+        "w": "journalist",
+        "ipa": "/ˈdʒɜːnəlɪst/",
+        "vi": "nhà báo",
+        "col": "a journalist",
+        "ex": "My sister is a journalist and writes for a newspaper.",
+        "exv": "Chị tôi là nhà báo và viết bài cho một tờ báo."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Chương trình kể chuyện về đời sống của mọi người, chiếu gần như mỗi ngày, gọi là gì?",
+        "o": [
+          "soap opera",
+          "documentary",
+          "cartoon"
+        ],
+        "a": 0,
+        "why": "soap opera = phim truyền hình dài tập về đời sống; documentary = phim tài liệu; cartoon = phim hoạt hình."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'nhà báo'?",
+        "o": [
+          "reporter",
+          "journalist",
+          "teacher"
+        ],
+        "a": 1,
+        "why": "journalist = nhà báo, người viết bài; reporter = phóng viên đi lấy tin; teacher = giáo viên."
+      },
+      {
+        "q": "Điền từ đúng vào câu: The ___ is on TV at six o'clock every night.",
+        "o": [
+          "news",
+          "comic",
+          "magazine"
+        ],
+        "a": 0,
+        "why": "the news = tin tức, chiếu trên ti vi; comic là truyện tranh; magazine là tạp chí."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "documentary",
+          "soap opera",
+          "cartoon",
+          "journalist"
+        ],
+        "a": 3,
+        "why": "documentary, soap opera và cartoon đều là loại chương trình; journalist là người làm báo."
+      },
+      {
+        "q": "Một tạp chí dành cho tuổi teen thường có nội dung gì?",
+        "o": [
+          "tin về ngôi sao nhạc pop",
+          "tin về giá nhà đất",
+          "hướng dẫn sửa xe"
+        ],
+        "a": 0,
+        "why": "teenage magazine = tạp chí tuổi teen, thường có bài về ngôi sao nhạc pop; hai lựa chọn kia không phải nội dung tuổi teen."
+      },
+      {
+        "q": "'a person who goes out and gets the news stories' là ai?",
+        "o": [
+          "a reporter",
+          "a teacher",
+          "a doctor"
+        ],
+        "a": 0,
+        "why": "reporter = phóng viên, người đi lấy tin ở nơi xảy ra sự việc; teacher và doctor không làm việc này."
+      }
+    ]
+  },
+  {
+    "n": 59,
+    "group": "Vấn đề xã hội",
+    "title": "Everyday problems",
+    "titleVi": "Những vấn đề hằng ngày",
+    "words": [
+      {
+        "w": "isn't working",
+        "ipa": "/ˈɪzənt ˈwɜːkɪŋ/",
+        "vi": "không hoạt động",
+        "col": "The TV isn't working",
+        "ex": "The lamp in my room isn't working today.",
+        "exv": "Chiếc đèn trong phòng tôi hôm nay không hoạt động."
+      },
+      {
+        "w": "repair",
+        "ipa": "/rɪˈpeə/",
+        "vi": "sửa chữa",
+        "col": "repair it",
+        "ex": "Can you repair my old bike this weekend?",
+        "exv": "Bạn có thể sửa chiếc xe đạp cũ của tôi vào cuối tuần này không?"
+      },
+      {
+        "w": "mend",
+        "ipa": "/mend/",
+        "vi": "sửa, vá",
+        "col": "mend it",
+        "ex": "We need to mend the chair before dinner.",
+        "exv": "Chúng ta cần sửa chiếc ghế trước bữa tối."
+      },
+      {
+        "w": "broken",
+        "ipa": "/ˈbrəʊkən/",
+        "vi": "bị hỏng",
+        "col": "broken",
+        "ex": "The washing machine is broken again.",
+        "exv": "Máy giặt lại bị hỏng rồi."
+      },
+      {
+        "w": "dying",
+        "ipa": "/ˈdaɪɪŋ/",
+        "vi": "đang chết dần",
+        "col": "The plants are dying",
+        "ex": "The plants in the garden are dying in the hot sun.",
+        "exv": "Cây trong vườn đang chết dần dưới nắng nóng."
+      },
+      {
+        "w": "water",
+        "ipa": "/ˈwɔːtə/",
+        "vi": "tưới nước",
+        "col": "water the plants",
+        "ex": "Please water the plants every morning.",
+        "exv": "Hãy tưới cây mỗi sáng nhé."
+      },
+      {
+        "w": "untidy",
+        "ipa": "/ʌnˈtaɪdi/",
+        "vi": "bừa bộn",
+        "col": "an untidy room",
+        "ex": "My room is untidy because my books are everywhere.",
+        "exv": "Phòng tôi bừa bộn vì sách vở ở khắp nơi."
+      },
+      {
+        "w": "tidy",
+        "ipa": "/ˈtaɪdi/",
+        "vi": "dọn dẹp cho gọn gàng",
+        "col": "tidy it",
+        "ex": "Please tidy your desk before you go to bed.",
+        "exv": "Hãy dọn bàn học cho gọn trước khi đi ngủ nhé."
+      },
+      {
+        "w": "lose",
+        "ipa": "/luːz/",
+        "vi": "đánh mất",
+        "col": "lose your keys",
+        "ex": "I lost my keys on the bus yesterday.",
+        "exv": "Tôi đã đánh mất chìa khóa trên xe buýt hôm qua."
+      },
+      {
+        "w": "look for",
+        "ipa": "/lʊk fɔː/",
+        "vi": "tìm kiếm",
+        "col": "look for them",
+        "ex": "Will you help me look for my red bag?",
+        "exv": "Bạn giúp tôi tìm chiếc túi đỏ được không?"
+      },
+      {
+        "w": "cut",
+        "ipa": "/kʌt/",
+        "vi": "cắt, cứa",
+        "col": "cut your finger",
+        "ex": "Be careful, you can cut your finger with that knife.",
+        "exv": "Cẩn thận nhé, bạn có thể cứa vào ngón tay với con dao đó."
+      },
+      {
+        "w": "plaster",
+        "ipa": "/ˈplɑːstə/",
+        "vi": "băng dán cá nhân",
+        "col": "put on a plaster",
+        "ex": "Put on a plaster so the small cut stays clean.",
+        "exv": "Dán một miếng băng cá nhân để vết cắt nhỏ được sạch."
+      },
+      {
+        "w": "have a row",
+        "ipa": "/hæv ə raʊ/",
+        "vi": "cãi nhau",
+        "col": "have a row with a friend",
+        "ex": "Tom had a row with his friend about the game.",
+        "exv": "Tom đã cãi nhau với bạn về trận đấu."
+      },
+      {
+        "w": "apologise",
+        "ipa": "/əˈpɒlədʒaɪz/",
+        "vi": "xin lỗi",
+        "col": "apologise",
+        "ex": "You should apologise when you hurt your friend.",
+        "exv": "Bạn nên xin lỗi khi làm bạn mình buồn."
+      },
+      {
+        "w": "late for work",
+        "ipa": "/leɪt fə wɜːk/",
+        "vi": "đi làm muộn",
+        "col": "be late for work",
+        "ex": "She was late for work because the bus was slow.",
+        "exv": "Cô ấy đi làm muộn vì xe buýt chạy chậm."
+      },
+      {
+        "w": "too much work",
+        "ipa": "/tuː mʌtʃ wɜːk/",
+        "vi": "quá nhiều việc",
+        "col": "too much work to do",
+        "ex": "I have too much work to do before Friday.",
+        "exv": "Tôi có quá nhiều việc phải làm trước thứ Sáu."
+      },
+      {
+        "w": "in a bad mood",
+        "ipa": "/ɪn ə bæd muːd/",
+        "vi": "đang bực bội, tâm trạng xấu",
+        "col": "in a bad mood",
+        "ex": "Her colleague was in a bad mood all morning.",
+        "exv": "Đồng nghiệp của cô ấy bực bội cả buổi sáng."
+      },
+      {
+        "w": "crash",
+        "ipa": "/kræʃ/",
+        "vi": "bị sập, bị treo (máy tính)",
+        "col": "The computer crashed",
+        "ex": "My computer crashed and I lost my homework.",
+        "exv": "Máy tính của tôi bị sập và tôi mất bài tập về nhà."
+      },
+      {
+        "w": "out of order",
+        "ipa": "/aʊt əv ˈɔːdə/",
+        "vi": "bị hỏng, không dùng được",
+        "col": "out of order",
+        "ex": "The lift in our building is out of order today.",
+        "exv": "Thang máy trong tòa nhà của chúng tôi hôm nay bị hỏng."
+      },
+      {
+        "w": "washing machine",
+        "ipa": "/ˈwɒʃɪŋ məˈʃiːn/",
+        "vi": "máy giặt",
+        "col": "a washing machine",
+        "ex": "Our washing machine makes a loud noise at night.",
+        "exv": "Máy giặt nhà chúng tôi kêu rất to vào ban đêm."
+      },
+      {
+        "w": "photocopier",
+        "ipa": "/ˈfəʊtəʊkɒpiə/",
+        "vi": "máy photocopy",
+        "col": "a photocopier",
+        "ex": "The photocopier at work is out of order again.",
+        "exv": "Máy photocopy ở chỗ làm lại bị hỏng rồi."
+      },
+      {
+        "w": "coffee machine",
+        "ipa": "/ˈkɒfi məˈʃiːn/",
+        "vi": "máy pha cà phê",
+        "col": "a coffee machine",
+        "ex": "The coffee machine in the office isn't working.",
+        "exv": "Máy pha cà phê ở văn phòng không hoạt động."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Điền từ đúng vào câu: The washing machine is ___. We need to mend it.",
+        "o": [
+          "broken",
+          "tidy",
+          "late"
+        ],
+        "a": 0,
+        "why": "broken = bị hỏng, đúng với máy giặt cần sửa; tidy = gọn gàng; late = muộn."
+      },
+      {
+        "q": "Từ nào có nghĩa là 'bừa bộn'?",
+        "o": [
+          "untidy",
+          "tidy",
+          "broken"
+        ],
+        "a": 0,
+        "why": "untidy = bừa bộn; tidy = gọn gàng; broken = bị hỏng."
+      },
+      {
+        "q": "Bạn nên làm gì khi cắt vào ngón tay?",
+        "o": [
+          "put on a plaster",
+          "water the plants",
+          "have a row"
+        ],
+        "a": 0,
+        "why": "put on a plaster = dán băng cá nhân lên vết cắt; water the plants = tưới cây; have a row = cãi nhau."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "repair",
+          "mend",
+          "tidy",
+          "plaster"
+        ],
+        "a": 3,
+        "why": "repair, mend và tidy đều là động từ chỉ hành động sửa hoặc dọn; plaster là danh từ chỉ đồ vật."
+      },
+      {
+        "q": "Điền từ đúng vào câu: I've lost my keys. Will you help me ___ them?",
+        "o": [
+          "look for",
+          "cut",
+          "apologise"
+        ],
+        "a": 0,
+        "why": "look for = tìm kiếm, đúng với tìm chìa khóa đã mất; cut = cắt; apologise = xin lỗi."
+      },
+      {
+        "q": "'out of order' có nghĩa là gì?",
+        "o": [
+          "bị hỏng, không dùng được",
+          "đang chạy rất tốt",
+          "rất gọn gàng"
+        ],
+        "a": 0,
+        "why": "out of order = bị hỏng, không dùng được, như máy photocopy hỏng; hai nghĩa kia ngược lại."
+      }
+    ]
+  },
+  {
+    "n": 60,
+    "group": "Vấn đề xã hội",
+    "title": "Global problems",
+    "titleVi": "Những vấn đề toàn cầu",
+    "words": [
+      {
+        "w": "natural disaster",
+        "ipa": "/ˈnætʃrəl dɪˈzɑːstə/",
+        "vi": "thiên tai",
+        "col": "a natural disaster",
+        "ex": "A flood is a natural disaster that can hurt many people.",
+        "exv": "Lũ lụt là một thiên tai có thể gây hại cho nhiều người."
+      },
+      {
+        "w": "hurricane",
+        "ipa": "/ˈhʌrɪkən/",
+        "vi": "bão lớn",
+        "col": "a hurricane",
+        "ex": "A hurricane hit the town and broke many roofs.",
+        "exv": "Một cơn bão lớn đã đổ vào thị trấn và làm vỡ nhiều mái nhà."
+      },
+      {
+        "w": "snowstorm",
+        "ipa": "/ˈsnəʊstɔːm/",
+        "vi": "bão tuyết",
+        "col": "a snowstorm",
+        "ex": "A snowstorm stopped all the buses yesterday.",
+        "exv": "Một cơn bão tuyết đã làm mọi xe buýt dừng chạy hôm qua."
+      },
+      {
+        "w": "forest fire",
+        "ipa": "/ˈfɒrɪst faɪə/",
+        "vi": "cháy rừng",
+        "col": "a forest fire",
+        "ex": "A forest fire started when the dry trees caught fire.",
+        "exv": "Một vụ cháy rừng đã bắt đầu khi cây khô bắt lửa."
+      },
+      {
+        "w": "earthquake",
+        "ipa": "/ˈɜːθkweɪk/",
+        "vi": "động đất",
+        "col": "an earthquake",
+        "ex": "An earthquake shook the city for one minute.",
+        "exv": "Một trận động đất đã làm rung chuyển thành phố trong một phút."
+      },
+      {
+        "w": "flood",
+        "ipa": "/flʌd/",
+        "vi": "lũ lụt",
+        "col": "a flood",
+        "ex": "After heavy rain, the river made a flood in the village.",
+        "exv": "Sau cơn mưa lớn, dòng sông gây lũ lụt ở ngôi làng."
+      },
+      {
+        "w": "heavy rain",
+        "ipa": "/ˈhevi reɪn/",
+        "vi": "mưa lớn",
+        "col": "heavy rain",
+        "ex": "Heavy rain fell all night and the roads were wet.",
+        "exv": "Mưa lớn rơi cả đêm và đường sá ướt hết."
+      },
+      {
+        "w": "crowded",
+        "ipa": "/ˈkraʊdɪd/",
+        "vi": "đông đúc",
+        "col": "too crowded",
+        "ex": "The city centre is too crowded on Saturday.",
+        "exv": "Trung tâm thành phố quá đông đúc vào thứ Bảy."
+      },
+      {
+        "w": "poor",
+        "ipa": "/pɔː/",
+        "vi": "nghèo",
+        "col": "poor people",
+        "ex": "Poor people in the village need more food and clean water.",
+        "exv": "Người nghèo ở làng cần thêm thức ăn và nước sạch."
+      },
+      {
+        "w": "hungry",
+        "ipa": "/ˈhʌŋɡri/",
+        "vi": "đói",
+        "col": "hungry people",
+        "ex": "The hungry children ate the bread very fast.",
+        "exv": "Những đứa trẻ đói đã ăn bánh mì rất nhanh."
+      },
+      {
+        "w": "homeless",
+        "ipa": "/ˈhəʊmləs/",
+        "vi": "vô gia cư",
+        "col": "homeless people",
+        "ex": "Homeless people sleep on the streets in cold weather.",
+        "exv": "Người vô gia cư ngủ trên đường phố trong thời tiết lạnh."
+      },
+      {
+        "w": "unemployed",
+        "ipa": "/ʌnɪmˈplɔɪd/",
+        "vi": "thất nghiệp",
+        "col": "unemployed people",
+        "ex": "Many unemployed people are looking for a new job.",
+        "exv": "Nhiều người thất nghiệp đang tìm việc mới."
+      },
+      {
+        "w": "pollution",
+        "ipa": "/pəˈluːʃən/",
+        "vi": "sự ô nhiễm",
+        "col": "pollution",
+        "ex": "There is a lot of pollution in many big cities.",
+        "exv": "Có rất nhiều ô nhiễm ở nhiều thành phố lớn."
+      },
+      {
+        "w": "polluted",
+        "ipa": "/pəˈluːtɪd/",
+        "vi": "bị ô nhiễm",
+        "col": "polluted",
+        "ex": "The river is polluted and many fish have died.",
+        "exv": "Dòng sông bị ô nhiễm và nhiều cá đã chết."
+      },
+      {
+        "w": "air pollution",
+        "ipa": "/eə pəˈluːʃən/",
+        "vi": "ô nhiễm không khí",
+        "col": "air pollution",
+        "ex": "Air pollution is very bad in the city today.",
+        "exv": "Ô nhiễm không khí ở thành phố hôm nay rất tệ."
+      },
+      {
+        "w": "war",
+        "ipa": "/wɔː/",
+        "vi": "chiến tranh",
+        "col": "a war",
+        "ex": "The war lasted eight years and hurt many families.",
+        "exv": "Cuộc chiến kéo dài tám năm và gây đau khổ cho nhiều gia đình."
+      },
+      {
+        "w": "traffic jam",
+        "ipa": "/ˈtræfɪk dʒæm/",
+        "vi": "tắc đường",
+        "col": "a traffic jam",
+        "ex": "There is a traffic jam on the bridge every morning.",
+        "exv": "Có tắc đường trên cầu mỗi sáng."
+      },
+      {
+        "w": "rush hour",
+        "ipa": "/rʌʃ aʊə/",
+        "vi": "giờ cao điểm",
+        "col": "in the rush hour",
+        "ex": "Buses are very slow in the rush hour.",
+        "exv": "Xe buýt chạy rất chậm vào giờ cao điểm."
+      },
+      {
+        "w": "car crash",
+        "ipa": "/kɑː kræʃ/",
+        "vi": "vụ tai nạn xe hơi",
+        "col": "a car crash",
+        "ex": "A small car crash closed the road near my school.",
+        "exv": "Một vụ tai nạn xe hơi nhỏ đã làm đóng con đường gần trường tôi."
+      },
+      {
+        "w": "strike",
+        "ipa": "/straɪk/",
+        "vi": "cuộc đình công",
+        "col": "on strike",
+        "ex": "The bus drivers are on strike today.",
+        "exv": "Các tài xế xe buýt đang đình công hôm nay."
+      }
+    ],
+    "quiz": [
+      {
+        "q": "Từ nào có nghĩa là 'động đất'?",
+        "o": [
+          "earthquake",
+          "snowstorm",
+          "forest fire"
+        ],
+        "a": 0,
+        "why": "earthquake = động đất, khi mặt đất rung chuyển; snowstorm = bão tuyết; forest fire = cháy rừng."
+      },
+      {
+        "q": "Điền từ đúng vào câu: There is a lot of ___ in many cities.",
+        "o": [
+          "pollution",
+          "war",
+          "strike"
+        ],
+        "a": 0,
+        "why": "pollution = sự ô nhiễm, đúng với không khí, nước bẩn ở thành phố; war = chiến tranh; strike = đình công."
+      },
+      {
+        "q": "'homeless' có nghĩa là gì?",
+        "o": [
+          "không có nơi để ở",
+          "không có việc làm",
+          "không có đủ tiền"
+        ],
+        "a": 0,
+        "why": "homeless = không có nơi để ở; unemployed = không có việc làm; poor = không có đủ tiền."
+      },
+      {
+        "q": "Từ nào khác loại với các từ còn lại?",
+        "o": [
+          "hurricane",
+          "snowstorm",
+          "flood",
+          "traffic jam"
+        ],
+        "a": 3,
+        "why": "hurricane, snowstorm và flood đều là thiên tai; traffic jam là vấn đề giao thông do con người."
+      },
+      {
+        "q": "Điền từ đúng vào câu: The ___ in the city are terrible in the rush hour.",
+        "o": [
+          "traffic jams",
+          "forest fires",
+          "earthquakes"
+        ],
+        "a": 0,
+        "why": "traffic jams = tắc đường, tệ nhất vào giờ cao điểm; forest fire = cháy rừng; earthquake = động đất."
+      },
+      {
+        "q": "'on strike' có nghĩa là gì?",
+        "o": [
+          "đang đình công, không làm việc",
+          "đang đi làm rất chăm",
+          "đang nghỉ phép dài ngày"
+        ],
+        "a": 0,
+        "why": "on strike = đang đình công, người lao động không làm việc để đòi quyền lợi; hai nghĩa kia khác hẳn."
+      }
+    ]
+  }
+];
+
 // ---------- GĐ2+GĐ3 CÒN LẠI (25/10/2026): hằng số dùng chung ----------
 var RB_GD23_LISTEN_STEPS = [
   { name: "Nghe lấy ý chính", desc: "Nghe một lượt, nắm ý chính, chưa cần hiểu từng từ." },
@@ -167454,6 +183582,7 @@ N.forEach(function(r){CONTENT.zhVocab[r[0]].cards.push(r[1]);});
   rotSets(typeof TP_READ !== "undefined" ? TP_READ : null);
   rotSets(typeof TC_LISTEN !== "undefined" ? TC_LISTEN : null);
   rotSets(typeof TP_LISTEN !== "undefined" ? TP_LISTEN : null);
+  rotSets(typeof SACH86_B1 !== "undefined" ? SACH86_B1 : null); /* v260: xoay dap an quiz sach 1 */
   /* DOT v206 16/11/2026 — V204-15: xoay readingMock (thi thu IELTS Doc).
      Ly do: 280 cau co 58,2% dap an dung o A; 215 cau 4 lua chon co 63,3% o A,
      0% o D (SC 24/24 o A; MC 94/140 o A) — nguoi hoc doan A la trung.
