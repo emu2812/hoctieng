@@ -97839,16 +97839,16 @@ var TC_GRAMMAR = [
   { q: "The goods ___ shipped this morning.", o: ["were", "was", "is"], a: 0, why: "'Goods' số nhiều: were shipped." }
   ] },
 { name: "Mệnh đề quan hệ trong mô tả", level: "600",
-  explain: "Nghe ví dụ trước: 'This is the manager who hired me.' (Đây là quản lý đã tuyển tôi.) 'This is the office which we rented last year.' (Đây là văn phòng mà chúng tôi đã thuê năm ngoái.) Quy tắc: who cho người, which cho vật, that dùng được cho cả hai. Mệnh đề quan hệ đứng ngay sau danh từ nó mô tả.",
-  examples: [{"t": "'This is the manager who hired me.' (Đây là quản lý đã tuyển tôi.)", "s": "This is the manager who hired me."}, {"t": "'This is the office which we rented last year.' (Đây là văn phòng mà chúng tôi đã thuê năm ngoái.)", "s": "This is the office which we rented last year."}],
-  rule: "who cho người, which cho vật, that dùng được cho cả hai. Mệnh đề quan hệ đứng ngay sau danh từ nó mô tả.",
+  explain: "Nghe ví dụ trước: 'This is the manager who hired me.' (Đây là quản lý đã tuyển tôi.) 'This is the office which we rented last year.' (Đây là văn phòng mà chúng tôi đã thuê năm ngoái.) 'This is the office where I work every day.' (Đây là văn phòng nơi tôi làm việc mỗi ngày.) Quy tắc: who cho người làm chủ ngữ, whom cho người làm tân ngữ, whose chỉ sở hữu, which cho vật, where cho nơi chốn, when cho thời gian, that dùng được cho cả người lẫn vật. Mệnh đề quan hệ đứng ngay sau danh từ nó mô tả. Khi đại từ quan hệ làm tân ngữ, có thể lược bỏ that: The report (that) I wrote is on your desk. (Bản báo cáo (mà) tôi đã viết đang ở trên bàn của bạn.)",
+  examples: [{ "t": "'This is the manager who hired me.' (Đây là quản lý đã tuyển tôi.)", "s": "This is the manager who hired me." }, { "t": "'This is the office which we rented last year.' (Đây là văn phòng mà chúng tôi đã thuê năm ngoái.)", "s": "This is the office which we rented last year." }, { "t": "'This is the office where I work every day.' (Đây là văn phòng nơi tôi làm việc mỗi ngày.)", "s": "This is the office where I work every day." }],
+  rule: "who cho người làm chủ ngữ, whom cho người làm tân ngữ, whose chỉ sở hữu, which cho vật, where cho nơi chốn, when cho thời gian, that dùng được cho cả người lẫn vật. Mệnh đề quan hệ đứng ngay sau danh từ nó mô tả. Khi đại từ quan hệ làm tân ngữ, có thể lược bỏ that: The report (that) I wrote is on your desk.",
   quiz: [
-  { q: "This is the woman ___ helped me.", o: ["who", "which", "whose"], a: 0, why: "Người phụ nữ: who." },
+  { q: "This is the woman ___ helped me.", o: ["which", "whose", "who"], a: 2, why: "Người phụ nữ: who." },
   { q: "This is the report ___ you asked for.", o: ["who", "that", "whose"], a: 1, why: "Báo cáo là vật, that dùng được." },
-  { q: "The company ___ we work for is in Hanoi.", o: ["which", "who", "whom"], a: 0, why: "Công ty là vật: which (that cũng đúng, nhưng trong các lựa chọn này which là đáp án)." },
-  { q: "He is the engineer ___ designed this bridge.", o: ["who", "which", "what"], a: 0, why: "Kỹ sư là người: who." },
-  { q: "The hotel ___ we stayed at was clean.", o: ["who", "which", "whose"], a: 1, why: "Khách sạn là vật: which." },
-  { q: "Do you know the man ___ is waiting outside?", o: ["who", "which", "whose"], a: 0, why: "Người đàn ông: who." }
+  { q: "The company ___ we work for is in Hanoi.", o: ["whom", "which", "who"], a: 1, why: "Công ty là vật: which (that cũng đúng, nhưng trong các lựa chọn này which là đáp án)." },
+  { q: "He is the engineer ___ designed this bridge.", o: ["what", "who", "which"], a: 1, why: "Kỹ sư là người: who." },
+  { q: "The hotel ___ we stayed at was clean.", o: ["whose", "who", "which"], a: 2, why: "Khách sạn là vật: which." },
+  { q: "Do you know the man ___ is waiting outside?", o: ["whose", "who", "which"], a: 1, why: "Người đàn ông: who." }
   ] },
 { name: "Giới từ chỉ thời gian và địa điểm", level: "450",
   explain: "Nghe ví dụ trước: 'The meeting is on Monday at 9 a.m. in Room 3.' (Cuộc họp diễn ra vào thứ Hai lúc 9 giờ sáng tại Phòng 3.) 'The workshop is in June at the Hanoi office.' (Hội thảo diễn ra vào tháng Sáu tại văn phòng Hà Nội.) 'Please submit the form on Friday before 5 p.m.' (Hãy nộp mẫu đơn vào thứ Sáu trước 5 giờ chiều.) Quy tắc: on + ngày (on Monday, on Friday), at + giờ (at 9 a.m., at 5 p.m.), in + tháng/năm/thành phố (in June, in Hanoi). Địa điểm cụ thể trong tòa nhà dùng in (in Room 3, in the office). Thêm: at + đêm/lễ (at night, at Christmas); in + buổi trong ngày (in the morning, in the afternoon).",
@@ -97863,28 +97863,28 @@ var TC_GRAMMAR = [
   { q: "The deadline is ___ Friday.", o: ["in", "on", "at"], a: 1, why: "Ngày dùng on." }
   ] },
 { name: "Từ loại: danh từ, tính từ, trạng từ", level: "600",
-  explain: "Nghe ví dụ trước: 'She is a careful worker.' (careful = tính từ, đứng trước danh từ worker.) 'She works carefully.' (carefully = trạng từ, đứng sau động từ works.) Quy tắc: tính từ bổ nghĩa cho danh từ; trạng từ (thường tận cùng -ly) bổ nghĩa cho động từ. Sau 'very' là tính từ hoặc trạng từ, không phải danh từ.",
-  examples: [{"t": "'She is a careful worker.' (careful = tính từ, đứng trước danh từ worker.)", "s": "She is a careful worker."}, {"t": "'She works carefully.' (carefully = trạng từ, đứng sau động từ works.)", "s": "She works carefully."}],
-  rule: "tính từ bổ nghĩa cho danh từ; trạng từ (thường tận cùng -ly) bổ nghĩa cho động từ. Sau 'very' là tính từ hoặc trạng từ, không phải danh từ.",
+  explain: "Nghe ví dụ trước: 'She is a careful worker.' (careful = tính từ, đứng trước danh từ worker.) 'She works carefully.' (carefully = trạng từ, đứng sau động từ works.) 'The success of the project depends on the team.' (success là danh từ.) 'We bought a new printer for the office.' (printer là danh từ, đứng sau tính từ new.) Quy tắc: danh từ đứng sau mạo từ (a, an, the), sau tính từ sở hữu (my, our) và sau tính từ; nhiều danh từ có hậu tố -tion, -ment, -ness (information, management, happiness); danh từ đếm được dùng many/few, không đếm được dùng much/little (chi tiết ở mục 22). Tính từ bổ nghĩa cho danh từ; trạng từ (thường tận cùng -ly) bổ nghĩa cho động từ.",
+  examples: [{ "t": "'She is a careful worker.' (careful = tính từ, đứng trước danh từ worker.)", "s": "She is a careful worker." }, { "t": "'She works carefully.' (carefully = trạng từ, đứng sau động từ works.)", "s": "She works carefully." }, { "t": "'The success of the project depends on the team.' (success là danh từ.)", "s": "The success of the project depends on the team." }, { "t": "'We bought a new printer for the office.' (printer là danh từ, đứng sau tính từ new.)", "s": "We bought a new printer for the office." }],
+  rule: "danh từ đứng sau mạo từ (a, an, the), sau tính từ sở hữu (my, our) và sau tính từ; nhiều danh từ có hậu tố -tion, -ment, -ness (information, management, happiness); danh từ đếm được dùng many/few, không đếm được dùng much/little (chi tiết ở mục 22). Tính từ bổ nghĩa cho danh từ; trạng từ (thường tận cùng -ly) bổ nghĩa cho động từ.",
   quiz: [
-  { q: "She is a ___ worker.", o: ["careful", "carefully", "care"], a: 0, why: "Trước danh từ worker cần tính từ careful." },
-  { q: "She works ___.", o: ["careful", "carefully", "care"], a: 1, why: "Sau động từ works cần trạng từ carefully." },
-  { q: "This is a ___ decision.", o: ["quick", "quickly", "quickness"], a: 0, why: "Trước danh từ decision cần tính từ quick." },
-  { q: "Please speak ___.", o: ["slow", "slowly", "slowness"], a: 1, why: "Sau động từ speak cần trạng từ slowly." },
-  { q: "He gave a ___ presentation.", o: ["clear", "clearly", "clarity"], a: 0, why: "Trước danh từ presentation cần tính từ clear." },
-  { q: "The team finished the work ___.", o: ["efficient", "efficiently", "efficiency"], a: 1, why: "Sau động từ finished cần trạng từ efficiently." }
+  { q: "She is a ___ worker.", o: ["care", "careful", "carefully"], a: 1, why: "Trước danh từ worker cần tính từ careful." },
+  { q: "She works ___.", o: ["care", "careful", "carefully"], a: 2, why: "Sau động từ works cần trạng từ carefully." },
+  { q: "This is a ___ decision.", o: ["quickness", "quick", "quickly"], a: 1, why: "Trước danh từ decision cần tính từ quick." },
+  { q: "Please speak ___.", o: ["slowness", "slow", "slowly"], a: 2, why: "Sau động từ speak cần trạng từ slowly." },
+  { q: "He gave a ___ presentation.", o: ["clearly", "clarity", "clear"], a: 2, why: "Trước danh từ presentation cần tính từ clear." },
+  { q: "The team finished the work ___.", o: ["efficiently", "efficiency", "efficient"], a: 0, why: "Sau động từ finished cần trạng từ efficiently." }
   ] },
 { name: "Liên từ và câu điều kiện trong hợp đồng", level: "600",
-  explain: "Nghe ví dụ trước: 'If you sign today, you will get a discount.' (Nếu bạn ký hôm nay, bạn sẽ được giảm giá.) Quy tắc điều kiện loại 1: If + hiện tại, will + động từ. Liên từ because chỉ lý do (because it rained), so chỉ kết quả (so we stayed), although chỉ nhượng bộ (although it rained, we went).",
-  examples: [{"t": "'If you sign today, you will get a discount.' (Nếu bạn ký hôm nay, bạn sẽ được giảm giá.)", "s": "If you sign today, you will get a discount."}],
+  explain: "Nghe ví dụ trước: 'If you sign today, you will get a discount.' (Ký hôm nay, bạn được giảm giá.) 'We stayed at the office late because the client needed the report today.' (Chúng tôi ở lại muộn vì khách cần báo cáo.) 'The price went up, so we asked the supplier for a new quotation.' (Giá tăng nên chúng tôi xin báo giá mới.) 'Although the contract was long, we read every page before signing it.' (Dù hợp đồng dài, chúng tôi đọc hết trước khi ký.) Quy tắc: điều kiện loại 1: If + hiện tại, will + động từ. Liên từ because chỉ lý do (because it rained), so chỉ kết quả (so we stayed), although chỉ nhượng bộ (although it rained, we went). Nhớ: because = tại sao, so = kết quả, although = nhượng bộ.",
+  examples: [{ "t": "'If you sign today, you will get a discount.' (Ký hôm nay, bạn được giảm giá.)", "s": "If you sign today, you will get a discount." }, { "t": "'We stayed at the office late because the client needed the report today.' (Chúng tôi ở lại muộn vì khách cần báo cáo.)", "s": "We stayed at the office late because the client needed the report today." }, { "t": "'The price went up, so we asked the supplier for a new quotation.' (Giá tăng nên chúng tôi xin báo giá mới.)", "s": "The price went up, so we asked the supplier for a new quotation." }, { "t": "'Although the contract was long, we read every page before signing it.' (Dù hợp đồng dài, chúng tôi đọc hết trước khi ký.)", "s": "Although the contract was long, we read every page before signing it." }],
   rule: "điều kiện loại 1: If + hiện tại, will + động từ. Liên từ because chỉ lý do (because it rained), so chỉ kết quả (so we stayed), although chỉ nhượng bộ (although it rained, we went).",
   quiz: [
-  { q: "If you sign today, you ___ a discount.", o: ["get", "will get", "got"], a: 1, why: "Điều kiện loại 1: If + hiện tại, will + động từ." },
-  { q: "We stayed home ___ it rained.", o: ["although", "because", "so"], a: 1, why: "Because chỉ lý do: vì trời mưa." },
+  { q: "If you sign today, you ___ a discount.", o: ["will get", "got", "get"], a: 0, why: "Điều kiện loại 1: If + hiện tại, will + động từ." },
+  { q: "We stayed home ___ it rained.", o: ["so", "although", "because"], a: 2, why: "Because chỉ lý do: vì trời mưa." },
   { q: "___ it rained, we went to work.", o: ["Although", "Because", "So"], a: 0, why: "Although mở đầu mệnh đề nhượng bộ: mặc dù trời mưa, chúng tôi vẫn đi làm." },
   { q: "If it rains tomorrow, we ___ the meeting indoors.", o: ["hold", "will hold", "held"], a: 1, why: "Điều kiện loại 1: will hold." },
-  { q: "She was late ___ the traffic was heavy.", o: ["because", "although", "but"], a: 0, why: "Because chỉ lý do tắc đường." },
-  { q: "He studied hard, ___ he passed the test.", o: ["because", "so", "although"], a: 1, why: "So chỉ kết quả: nên anh ấy đã đỗ." }
+  { q: "She was late ___ the traffic was heavy.", o: ["but", "because", "although"], a: 1, why: "Because chỉ lý do tắc đường." },
+  { q: "He studied hard, ___ he passed the test.", o: ["so", "although", "because"], a: 0, why: "So chỉ kết quả: nên anh ấy đã đỗ." }
   ] }
 ];
 // Nghe: 10 bài, 18 câu. Nút Nghe đọc script bằng giọng máy (giống cách luyện nghe của web).
@@ -99066,76 +99066,76 @@ var TC_VOCAB_EXPAND3 = [
 // Tự soạn 100%, tiếng Việt. Điểm thi thử chỉ là ước lượng tham khảo — ETS không công bố bảng quy đổi cố định.
 var TC_GRAMMAR_EXPAND = [
 { name: "So sánh hơn và so sánh nhất trong mô tả sản phẩm", level: "450",
-  explain: "Nghe ví dụ trước: 'This phone is cheaper than that one.' (Điện thoại này rẻ hơn cái kia.) 'This is the cheapest phone in our shop.' (Đây là điện thoại rẻ nhất trong cửa hàng chúng tôi.) Quy tắc: so sánh hơn = tính từ + -er + than (cheaper than); so sánh nhất = the + tính từ + -est (the cheapest). Tính từ dài dùng more/most: more expensive, the most expensive.",
-  examples: [{"t": "'This phone is cheaper than that one.' (Điện thoại này rẻ hơn cái kia.)", "s": "This phone is cheaper than that one."}, {"t": "'This is the cheapest phone in our shop.' (Đây là điện thoại rẻ nhất trong cửa hàng chúng tôi.)", "s": "This is the cheapest phone in our shop."}],
-  rule: "so sánh hơn = tính từ + -er + than (cheaper than); so sánh nhất = the + tính từ + -est (the cheapest). Tính từ dài dùng more/most: more expensive, the most expensive.",
+  explain: "Nghe ví dụ trước: 'This phone is cheaper than that one.' (Điện thoại này rẻ hơn cái kia.) 'This is the cheapest phone in our shop.' (Đây là điện thoại rẻ nhất trong cửa hàng chúng tôi.) 'Our new service is better than the old one.' (Dịch vụ mới của chúng tôi tốt hơn dịch vụ cũ.) Quy tắc: so sánh hơn = tính từ + -er + than (cheaper than); so sánh nhất = the + tính từ + -est (the cheapest). Tính từ dài dùng more/most: more expensive, the most expensive. Dạng bất quy tắc phải học thuộc: good/well → better → best, bad/badly → worse → worst.",
+  examples: [{ "t": "'This phone is cheaper than that one.' (Điện thoại này rẻ hơn cái kia.)", "s": "This phone is cheaper than that one." }, { "t": "'This is the cheapest phone in our shop.' (Đây là điện thoại rẻ nhất trong cửa hàng chúng tôi.)", "s": "This is the cheapest phone in our shop." }, { "t": "'Our new service is better than the old one.' (Dịch vụ mới của chúng tôi tốt hơn dịch vụ cũ.)", "s": "Our new service is better than the old one." }],
+  rule: "so sánh hơn = tính từ + -er + than (cheaper than); so sánh nhất = the + tính từ + -est (the cheapest). Tính từ dài dùng more/most: more expensive, the most expensive. Dạng bất quy tắc phải học thuộc: good/well → better → best, bad/badly → worse → worst.",
   quiz: [
-  { q: "This phone is ___ than that one.", o: ["cheap", "cheaper", "cheapest"], a: 1, why: "Có than nên dùng so sánh hơn: cheaper than." },
+  { q: "This phone is ___ than that one.", o: ["cheapest", "cheap", "cheaper"], a: 2, why: "Có than nên dùng so sánh hơn: cheaper than." },
   { q: "This is the ___ phone in our shop.", o: ["cheap", "cheaper", "cheapest"], a: 2, why: "Có the và phạm vi 'in our shop' nên dùng so sánh nhất: the cheapest." },
-  { q: "This hotel is ___ expensive than that one.", o: ["more", "most", "much"], a: 0, why: "Tính từ dài expensive dùng more cho so sánh hơn." },
-  { q: "She is the ___ worker in our team.", o: ["hard", "harder", "hardest"], a: 2, why: "So sánh nhất: the hardest." },
-  { q: "My new laptop is faster ___ my old one.", o: ["then", "than", "that"], a: 1, why: "So sánh hơn dùng than, không phải then (lúc đó)." },
-  { q: "This is ___ most popular product we sell.", o: ["a", "the", "an"], a: 1, why: "So sánh nhất luôn có the: the most popular." }
+  { q: "This hotel is ___ expensive than that one.", o: ["much", "more", "most"], a: 1, why: "Tính từ dài expensive dùng more cho so sánh hơn." },
+  { q: "She is the ___ worker in our team.", o: ["harder", "hardest", "hard"], a: 1, why: "So sánh nhất: the hardest." },
+  { q: "My new laptop is faster ___ my old one.", o: ["than", "that", "then"], a: 0, why: "So sánh hơn dùng than, không phải then (lúc đó)." },
+  { q: "This is ___ most popular product we sell.", o: ["the", "an", "a"], a: 0, why: "So sánh nhất luôn có the: the most popular." }
   ] },
 { name: "Mệnh đề quan hệ rút gọn trong mô tả công việc", level: "750",
-  explain: "Nghe ví dụ trước: 'The man working in Room 3 is our manager.' (Người đàn ông đang làm việc ở Phòng 3 là quản lý của chúng tôi.) Quy tắc: who is working → working (bỏ who is, giữ V-ing) khi mệnh đề ở thể chủ động và đang diễn ra; who was chosen → chosen (bỏ who was, giữ phân từ 2) khi ở thể bị động.",
-  examples: [{"t": "'The man working in Room 3 is our manager.' (Người đàn ông đang làm việc ở Phòng 3 là quản lý của chúng tôi.)", "s": "The man working in Room 3 is our manager."}],
+  explain: "Nghe ví dụ trước: 'The man working in Room 3 is our manager.' (Người đàn ông đang làm việc ở Phòng 3 là quản lý của chúng tôi.) 'The report written by Ms. Lan is on my desk.' (Bản báo cáo do cô Lan viết đang ở trên bàn tôi.) 'The products made in Vietnam are sold all over the world.' (Các sản phẩm sản xuất tại Việt Nam được bán trên khắp thế giới.) Quy tắc: who is working → working (bỏ who is, giữ V-ing) khi mệnh đề ở thể chủ động và đang diễn ra; who was chosen → chosen (bỏ who was, giữ phân từ 2) khi ở thể bị động. Mẹo nhận biết: chủ ngữ tự làm hành động thì rút gọn bằng V-ing, chủ ngữ bị tác động thì rút gọn bằng phân từ 2.",
+  examples: [{ "t": "'The man working in Room 3 is our manager.' (Người đàn ông đang làm việc ở Phòng 3 là quản lý của chúng tôi.)", "s": "The man working in Room 3 is our manager." }, { "t": "'The report written by Ms. Lan is on my desk.' (Bản báo cáo do cô Lan viết đang ở trên bàn tôi.)", "s": "The report written by Ms. Lan is on my desk." }, { "t": "'The products made in Vietnam are sold all over the world.' (Các sản phẩm sản xuất tại Việt Nam được bán trên khắp thế giới.)", "s": "The products made in Vietnam are sold all over the world." }],
   rule: "who is working → working (bỏ who is, giữ V-ing) khi mệnh đề ở thể chủ động và đang diễn ra; who was chosen → chosen (bỏ who was, giữ phân từ 2) khi ở thể bị động.",
   quiz: [
   { q: "The man ___ in Room 3 is our manager.", o: ["work", "working", "worked"], a: 1, why: "Rút gọn who is working thành working." },
   { q: "The report ___ yesterday is on my desk.", o: ["writing", "written", "write"], a: 1, why: "Bị động rút gọn: written (được viết)." },
-  { q: "Students ___ in this course must attend every class.", o: ["enrolling", "enrolled", "enroll"], a: 1, why: "Học viên 'được ghi danh' — bị động: enrolled." },
-  { q: "The woman ___ to the client is Ms. Lan.", o: ["talking", "talked", "talk"], a: 0, why: "Đang nói chuyện — chủ động: talking." },
-  { q: "Packages ___ this morning will arrive tomorrow.", o: ["sending", "sent", "send"], a: 1, why: "Gói hàng 'được gửi' — bị động: sent." },
-  { q: "Anyone ___ help, please call me.", o: ["needing", "needed", "need"], a: 0, why: "Ai 'cần' giúp — chủ động: needing." }
+  { q: "Students ___ in this course must attend every class.", o: ["enroll", "enrolling", "enrolled"], a: 2, why: "Học viên 'được ghi danh' — bị động: enrolled." },
+  { q: "The woman ___ to the client is Ms. Lan.", o: ["talked", "talk", "talking"], a: 2, why: "Đang nói chuyện — chủ động: talking." },
+  { q: "Packages ___ this morning will arrive tomorrow.", o: ["sent", "send", "sending"], a: 0, why: "Gói hàng 'được gửi' — bị động: sent." },
+  { q: "Anyone ___ help, please call me.", o: ["needed", "need", "needing"], a: 2, why: "Ai 'cần' giúp — chủ động: needing." }
   ] },
 { name: "Câu gián tiếp trong báo cáo công việc", level: "750",
-  explain: "Nghe ví dụ trước: Lan nói: 'I will finish the report tomorrow.' → Lan said she would finish the report the next day. (Lan nói cô ấy sẽ hoàn thành báo cáo vào ngày hôm sau.) Lan nói: 'I am working now.' → She said she was working then. (Cô ấy nói cô ấy đang làm việc lúc đó.) Lan nói: 'I will call you tomorrow.' → He said he would call me the next day. (Anh ấy nói anh ấy sẽ gọi cho tôi vào ngày hôm sau.) Quy tắc: lùi thì (will → would, present → past, present continuous → past continuous: am working → was working), đổi tomorrow → the next day, yesterday → the day before, today → that day, now → then; said + mệnh đề, không dùng dấu ngoặc kép; said that có thể bỏ that, told + tân ngữ (told me that...).",
-  examples: [{"t": "Lan nói: 'I will finish the report tomorrow.' → Lan said she would finish the report the next day. (Lan nói cô ấy sẽ hoàn thành báo cáo vào ngày hôm sau.)", "s": "I will finish the report tomorrow. Lan said she would finish the report the next day."}, {"t": "Lan nói: 'I am working now.' → She said she was working then. (Cô ấy nói cô ấy đang làm việc lúc đó.)", "s": "I am working now. She said she was working then."}, {"t": "Lan nói: 'I will call you tomorrow.' → He said he would call me the next day. (Anh ấy nói anh ấy sẽ gọi cho tôi vào ngày hôm sau.)", "s": "I will call you tomorrow. He said he would call me the next day."}],
+  explain: "Nghe ví dụ trước: Lan nói: 'I will finish the report tomorrow.' → Lan said she would finish the report the next day. (Lan nói cô ấy sẽ hoàn thành báo cáo vào ngày hôm sau.) Lan nói: 'I am working now.' → She said she was working then. (Cô ấy nói cô ấy đang làm việc lúc đó.) Lan nói: 'I will call you tomorrow.' → Lan said she would call me the next day. (Lan nói cô ấy sẽ gọi cho tôi vào ngày hôm sau.) Quy tắc: lùi thì (will → would, present → past, present continuous → past continuous: am working → was working), đổi tomorrow → the next day, yesterday → the day before, today → that day, now → then; said + mệnh đề, không dùng dấu ngoặc kép; said that có thể bỏ that, told + tân ngữ (told me that...).",
+  examples: [{ "t": "Lan nói: 'I will finish the report tomorrow.' → Lan said she would finish the report the next day. (Lan nói cô ấy sẽ hoàn thành báo cáo vào ngày hôm sau.)", "s": "Lan said she would finish the report the next day." }, { "t": "Lan nói: 'I am working now.' → She said she was working then. (Cô ấy nói cô ấy đang làm việc lúc đó.)", "s": "She said she was working then." }, { "t": "Lan nói: 'I will call you tomorrow.' → Lan said she would call me the next day. (Lan nói cô ấy sẽ gọi cho tôi vào ngày hôm sau.)", "s": "Lan said she would call me the next day." }],
   rule: "lùi thì (will → would, present → past, present continuous → past continuous: am working → was working), đổi tomorrow → the next day, yesterday → the day before, today → that day, now → then; said + mệnh đề, không dùng dấu ngoặc kép; said that có thể bỏ that, told + tân ngữ (told me that...).",
   quiz: [
   { q: "Lan said she ___ finish the report the next day.", o: ["will", "would", "is"], a: 1, why: "Lùi thì: will → would." },
   { q: "He said he ___ busy that day.", o: ["is", "was", "will be"], a: 1, why: "Lùi thì: is → was." },
   { q: "She told me she ___ the client the day before.", o: ["meets", "had met", "will meet"], a: 1, why: "Lùi thì + đổi mốc thời gian: yesterday → the day before, met → had met." },
-  { q: "They said they ___ to Hanoi the following week.", o: ["go", "would go", "goes"], a: 1, why: "Lùi thì: will go → would go; next week → the following week." },
+  { q: "They said they ___ to Hanoi the following week.", o: ["would go", "goes", "go"], a: 0, why: "Lùi thì: will go → would go; next week → the following week." },
   { q: "Direct: 'I am tired.' → Indirect: He said he ___ tired.", o: ["is", "was", "were"], a: 1, why: "Lùi thì: am → was." },
-  { q: "Direct: 'We finished yesterday.' → Indirect: They said they ___ the day before.", o: ["finish", "had finished", "have finished"], a: 1, why: "Lùi thì quá khứ → quá khứ hoàn thành: had finished; yesterday → the day before." }
+  { q: "Direct: 'We finished yesterday.' → Indirect: They said they ___ the day before.", o: ["have finished", "finish", "had finished"], a: 2, why: "Lùi thì quá khứ → quá khứ hoàn thành: had finished; yesterday → the day before." }
   ] },
 { name: "Động từ khuyết thiếu trong quy định công ty", level: "600",
-  explain: "Nghe ví dụ trước: 'You must wear a helmet on site.' (Bạn phải đội mũ bảo hộ ở công trường.) 'You should arrive on time.' (Bạn nên đến đúng giờ.) Quy tắc: must = bắt buộc (quy định, luật); should = khuyên nên làm; have to = phải làm (do hoàn cảnh); must not = cấm; don't have to = không bắt buộc.",
-  examples: [{"t": "'You must wear a helmet on site.' (Bạn phải đội mũ bảo hộ ở công trường.)", "s": "You must wear a helmet on site."}, {"t": "'You should arrive on time.' (Bạn nên đến đúng giờ.)", "s": "You should arrive on time."}],
+  explain: "Nghe ví dụ trước: 'You must wear a helmet on site.' (Bạn phải đội mũ bảo hộ ở công trường.) 'You should arrive on time.' (Bạn nên đến đúng giờ.) 'Employees have to wear a badge at work.' (Nhân viên phải đeo thẻ khi làm việc.) 'You must not smoke in the office.' (Bạn không được hút thuốc trong văn phòng.) 'You don't have to work on Sunday.' (Bạn không cần làm việc vào Chủ nhật.) Quy tắc: must = bắt buộc (quy định, luật); should = khuyên nên làm; have to = phải làm (do hoàn cảnh); must not = cấm; don't have to = không bắt buộc.",
+  examples: [{ "t": "'You must wear a helmet on site.' (Bạn phải đội mũ bảo hộ ở công trường.)", "s": "You must wear a helmet on site." }, { "t": "'You should arrive on time.' (Bạn nên đến đúng giờ.)", "s": "You should arrive on time." }, { "t": "'Employees have to wear a badge at work.' (Nhân viên phải đeo thẻ khi làm việc.)", "s": "Employees have to wear a badge at work." }, { "t": "'You must not smoke in the office.' (Bạn không được hút thuốc trong văn phòng.)", "s": "You must not smoke in the office." }, { "t": "'You don't have to work on Sunday.' (Bạn không cần làm việc vào Chủ nhật.)", "s": "You don't have to work on Sunday." }],
   rule: "must = bắt buộc (quy định, luật); should = khuyên nên làm; have to = phải làm (do hoàn cảnh); must not = cấm; don't have to = không bắt buộc.",
   quiz: [
-  { q: "You ___ wear a helmet on site. It is a rule.", o: ["should", "must", "may"], a: 1, why: "Quy định bắt buộc: must." },
-  { q: "You ___ arrive on time. It is good advice.", o: ["must", "should", "must not"], a: 1, why: "Lời khuyên: should." },
+  { q: "You ___ wear a helmet on site. It is a rule.", o: ["may", "should", "must"], a: 2, why: "Quy định bắt buộc: must." },
+  { q: "You ___ arrive on time. It is good advice.", o: ["must not", "must", "should"], a: 2, why: "Lời khuyên: should." },
   { q: "You ___ smoke in this building. It is forbidden.", o: ["must not", "don't have to", "should"], a: 0, why: "Cấm: must not." },
   { q: "You ___ work on Sunday. It is optional.", o: ["must", "don't have to", "must not"], a: 1, why: "Không bắt buộc: don't have to." },
   { q: "Employees ___ to submit the form by Friday.", o: ["has", "have", "having"], a: 1, why: "Have to + động từ nguyên mẫu: have to submit." },
   { q: "You ___ be late for the meeting with the client.", o: ["should not", "don't have to", "must"], a: 0, why: "Không nên: should not." }
   ] },
 { name: "Câu điều kiện loại 2 trong đề xuất", level: "750",
-  explain: "Nghe ví dụ trước: 'If we had more money, we would open a new office.' (Nếu chúng tôi có nhiều tiền hơn, chúng tôi sẽ mở một văn phòng mới — nhưng thực tế không có.) Quy tắc loại 2: If + quá khứ đơn, would + động từ nguyên mẫu; nói về tình huống không thật ở hiện tại, dùng để đề xuất lịch sự.",
-  examples: [{"t": "'If we had more money, we would open a new office.' (Nếu chúng tôi có nhiều tiền hơn, chúng tôi sẽ mở một văn phòng mới — nhưng thực tế không có.)", "s": "If we had more money, we would open a new office."}],
+  explain: "Nghe ví dụ trước: 'If we had more money, we would open a new office.' (Nếu chúng tôi có nhiều tiền hơn, chúng tôi sẽ mở một văn phòng mới — nhưng thực tế không có.) 'If I were you, I would talk to the manager first.' (Nếu tôi là bạn, tôi sẽ nói chuyện với quản lý trước.) 'If the office were bigger, we would invite more clients to the meeting.' (Nếu văn phòng rộng hơn, chúng tôi sẽ mời nhiều khách hàng hơn tới cuộc họp.) Quy tắc: loại 2: If + quá khứ đơn, would + động từ nguyên mẫu; nói về tình huống không thật ở hiện tại, dùng để đề xuất lịch sự. Chú ý: với be ở loại 2, dùng were cho mọi ngôi (If I were, If he were); đừng dùng will trong mệnh đề If của loại 2.",
+  examples: [{ "t": "'If we had more money, we would open a new office.' (Nếu chúng tôi có nhiều tiền hơn, chúng tôi sẽ mở một văn phòng mới — nhưng thực tế không có.)", "s": "If we had more money, we would open a new office." }, { "t": "'If I were you, I would talk to the manager first.' (Nếu tôi là bạn, tôi sẽ nói chuyện với quản lý trước.)", "s": "If I were you, I would talk to the manager first." }, { "t": "'If the office were bigger, we would invite more clients to the meeting.' (Nếu văn phòng rộng hơn, chúng tôi sẽ mời nhiều khách hàng hơn tới cuộc họp.)", "s": "If the office were bigger, we would invite more clients to the meeting." }],
   rule: "loại 2: If + quá khứ đơn, would + động từ nguyên mẫu; nói về tình huống không thật ở hiện tại, dùng để đề xuất lịch sự.",
   quiz: [
-  { q: "If we had more money, we ___ a new office.", o: ["will open", "would open", "open"], a: 1, why: "Điều kiện loại 2: would + động từ." },
+  { q: "If we had more money, we ___ a new office.", o: ["open", "will open", "would open"], a: 2, why: "Điều kiện loại 2: would + động từ." },
   { q: "If I ___ the manager, I would change the schedule.", o: ["am", "were", "was be"], a: 1, why: "Loại 2 với be dùng were cho mọi ngôi (If I were...)." },
   { q: "If it ___ tomorrow, we would stay home.", o: ["rains", "rained", "will rain"], a: 1, why: "Mệnh đề If ở loại 2 dùng quá khứ: rained." },
-  { q: "She would travel more if she ___ more free time.", o: ["has", "had", "will have"], a: 1, why: "If + quá khứ: had." },
+  { q: "She would travel more if she ___ more free time.", o: ["will have", "has", "had"], a: 2, why: "If + quá khứ: had." },
   { q: "If you studied harder, you ___ the test.", o: ["pass", "would pass", "will pass"], a: 1, why: "Mệnh đề chính loại 2: would pass." },
-  { q: "We would hire more staff if sales ___.", o: ["increase", "increased", "will increase"], a: 1, why: "If + quá khứ: increased." }
+  { q: "We would hire more staff if sales ___.", o: ["increased", "will increase", "increase"], a: 0, why: "If + quá khứ: increased." }
   ] },
 { name: "Mệnh đề danh từ trong email công sở", level: "900",
-  explain: "Nghe ví dụ trước: 'I don't know whether the meeting is on Friday.' (Tôi không biết cuộc họp có phải vào thứ Sáu không.) Quy tắc: mệnh đề danh từ làm tân ngữ sau know/wonder/ask: whether/if cho câu hỏi Yes/No; what/when/where cho câu hỏi có từ hỏi; trong mệnh đề danh từ, thứ tự là chủ ngữ + động từ (không đảo như câu hỏi).",
-  examples: [{"t": "'I don't know whether the meeting is on Friday.' (Tôi không biết cuộc họp có phải vào thứ Sáu không.)", "s": "I don't know whether the meeting is on Friday."}],
+  explain: "Nghe ví dụ trước: 'I don't know whether the meeting is on Friday.' (Tôi không biết cuộc họp có phải vào thứ Sáu không.) 'Please tell me where the new office is.' (Làm ơn cho tôi biết văn phòng mới ở đâu.) 'I wonder if the manager has read my email.' (Tôi tự hỏi không biết quản lý đã đọc email của tôi chưa.) Quy tắc: mệnh đề danh từ làm tân ngữ sau know/wonder/ask: whether/if cho câu hỏi Yes/No; what/when/where cho câu hỏi có từ hỏi; trong mệnh đề danh từ, thứ tự là chủ ngữ + động từ (không đảo như câu hỏi). Ví dụ, hỏi trực tiếp 'Where is the office?' thành 'I don't know where the office is.' — đảo lại thành thứ tự khẳng định.",
+  examples: [{ "t": "'I don't know whether the meeting is on Friday.' (Tôi không biết cuộc họp có phải vào thứ Sáu không.)", "s": "I don't know whether the meeting is on Friday." }, { "t": "'Please tell me where the new office is.' (Làm ơn cho tôi biết văn phòng mới ở đâu.)", "s": "Please tell me where the new office is." }, { "t": "'I wonder if the manager has read my email.' (Tôi tự hỏi không biết quản lý đã đọc email của tôi chưa.)", "s": "I wonder if the manager has read my email." }],
   rule: "mệnh đề danh từ làm tân ngữ sau know/wonder/ask: whether/if cho câu hỏi Yes/No; what/when/where cho câu hỏi có từ hỏi; trong mệnh đề danh từ, thứ tự là chủ ngữ + động từ (không đảo như câu hỏi).",
   quiz: [
   { q: "I don't know ___ the meeting is on Friday.", o: ["whether", "what", "when"], a: 0, why: "Câu hỏi Yes/No trong mệnh đề danh từ dùng whether." },
   { q: "Can you tell me ___ the new manager is?", o: ["who", "whether", "if"], a: 0, why: "Hỏi 'ai' dùng who, thứ tự: who the new manager is." },
   { q: "I wonder ___ Lan will come tomorrow.", o: ["if", "what", "where"], a: 0, why: "Câu hỏi Yes/No dùng if (hoặc whether)." },
-  { q: "Do you know ___ the report is?", o: ["where", "whether", "that"], a: 0, why: "Hỏi 'ở đâu' dùng where." },
-  { q: "Please tell me ___ time the shop opens.", o: ["what", "whether", "if"], a: 0, why: "Hỏi 'mấy giờ' dùng what time." },
-  { q: "She asked me ___ I could help her.", o: ["that", "whether", "what"], a: 1, why: "Câu hỏi Yes/No gián tiếp dùng whether/if." }
+  { q: "Do you know ___ the report is?", o: ["that", "where", "whether"], a: 1, why: "Hỏi 'ở đâu' dùng where." },
+  { q: "Please tell me ___ time the shop opens.", o: ["whether", "if", "what"], a: 2, why: "Hỏi 'mấy giờ' dùng what time." },
+  { q: "She asked me ___ I could help her.", o: ["whether", "what", "that"], a: 0, why: "Câu hỏi Yes/No gián tiếp dùng whether/if." }
   ] }
 ];
 var TC_LISTEN_EXPAND = [
@@ -141035,15 +141035,15 @@ var TC_GRAMMAR_EXPAND17 = [
   { q: "Every worker ___ a helmet on site.", o: ["wear", "wears", "wearing"], a: 1, why: "Every + danh từ số ít nên động từ số ít: wears." }
   ] },
 { name: "Danh-động từ: V-ing và to-V trong công việc", level: "750",
-  explain: "Nghe ví dụ trước: 'She enjoys working with clients.' (Cô ấy thích làm việc với khách hàng.) 'She decided to work late.' (Cô ấy quyết định làm thêm giờ.) Quy tắc: sau enjoy, avoid, finish, suggest, consider thì động từ thêm -ing (working, making); sau decide, plan, promise, agree, want, need thì động từ có to (to work, to send). Nhớ theo từng động từ, đừng dịch từng chữ.",
-  examples: [{"t": "'She enjoys working with clients.' (Cô ấy thích làm việc với khách hàng.)", "s": "She enjoys working with clients."}, {"t": "'She decided to work late.' (Cô ấy quyết định làm thêm giờ.)", "s": "She decided to work late."}],
-  rule: "sau enjoy, avoid, finish, suggest, consider thì động từ thêm -ing (working, making); sau decide, plan, promise, agree, want, need thì động từ có to (to work, to send). Nhớ theo từng động từ, đừng dịch từng chữ.",
+  explain: "Nghe ví dụ trước: 'She enjoys working with clients.' (Cô ấy thích làm việc với khách.) 'She decided to work late.' (Cô ấy quyết định làm thêm giờ.) 'The manager made us finish the report on time.' (Quản lý bắt chúng tôi nộp báo cáo đúng hạn.) 'He stopped working to drink some water.' (Anh ấy dừng lại để uống nước.) 'Remember to send the email before 5 p.m.' (Nhớ gửi email trước 5 giờ chiều.) 'I will try to finish it.' (Tôi sẽ cố hoàn thành nó.) Quy tắc: sau enjoy, avoid, finish, suggest, consider thì động từ thêm -ing; sau decide, plan, promise, agree, want, need thì động từ có to. Sau make/let là nguyên thể không to. Đổi nghĩa: stop doing=dừng hẳn, stop to do=dừng để làm khác; remember doing=nhớ đã làm, remember to do=nhớ phải làm; try doing=thử xem sao, try to do=cố gắng làm. ",
+  examples: [{ "t": "'She enjoys working with clients.' (Cô ấy thích làm việc với khách.)", "s": "She enjoys working with clients." }, { "t": "'She decided to work late.' (Cô ấy quyết định làm thêm giờ.)", "s": "She decided to work late." }, { "t": "'The manager made us finish the report on time.' (Quản lý bắt chúng tôi nộp báo cáo đúng hạn.)", "s": "The manager made us finish the report on time." }, { "t": "'He stopped working to drink some water.' (Anh ấy dừng lại để uống nước.)", "s": "He stopped working to drink some water." }, { "t": "'Remember to send the email before 5 p.m.' (Nhớ gửi email trước 5 giờ chiều.)", "s": "Remember to send the email before 5 p.m." }, { "t": "'I will try to finish it.' (Tôi sẽ cố hoàn thành nó.)", "s": "I will try to finish it." }],
+  rule: "sau enjoy, avoid, finish, suggest, consider thì động từ thêm -ing; sau decide, plan, promise, agree, want, need thì động từ có to. Sau make/let là nguyên thể không to. Đổi nghĩa: stop doing=dừng hẳn, stop to do=dừng để làm khác; remember doing=nhớ đã làm, remember to do=nhớ phải làm; try doing=thử xem sao, try to do=cố gắng làm.",
   quiz: [
   { q: "She enjoys ___ with clients.", o: ["work", "working", "to work"], a: 1, why: "Enjoy + V-ing: enjoys working." },
-  { q: "He decided ___ late tonight.", o: ["work", "working", "to work"], a: 2, why: "Decide + to-V: decided to work." },
+  { q: "He decided ___ late tonight.", o: ["working", "to work", "work"], a: 1, why: "Decide + to-V: decided to work." },
   { q: "Please avoid ___ personal calls during the meeting.", o: ["make", "making", "to make"], a: 1, why: "Avoid + V-ing: avoid making." },
   { q: "We plan ___ a new branch next year.", o: ["open", "opening", "to open"], a: 2, why: "Plan + to-V: plan to open." },
-  { q: "They finished ___ the report at 5 p.m.", o: ["write", "writing", "to write"], a: 1, why: "Finish + V-ing: finished writing." },
+  { q: "They finished ___ the report at 5 p.m.", o: ["to write", "write", "writing"], a: 2, why: "Finish + V-ing: finished writing." },
   { q: "She promised ___ the email by Friday.", o: ["send", "sending", "to send"], a: 2, why: "Promise + to-V: promised to send." }
   ] },
 { name: "Thì hoàn thành trong báo cáo công việc", level: "600",
@@ -141071,15 +141071,15 @@ var TC_GRAMMAR_EXPAND17 = [
   { q: "Do not worry, we ___ finish the report on time.", o: ["will", "would", "did"], a: 0, why: "Lời hứa chắc chắn: will." }
   ] },
 { name: "Câu điều kiện loại 3 trong báo cáo sự cố", level: "900",
-  explain: "Nghe ví dụ trước: 'If we had checked the order, we would not have made the mistake.' (Nếu chúng tôi đã kiểm tra đơn hàng thì đã không mắc lỗi — nhưng thực tế đã không kiểm tra và đã mắc lỗi.) Quy tắc loại 3: If + had + phân từ 2, would have + phân từ 2; nói về việc đã qua không thể đổi, dùng để rút bài học hoặc tiếc nuối trong báo cáo sự cố.",
-  examples: [{"t": "'If we had checked the order, we would not have made the mistake.' (Nếu chúng tôi đã kiểm tra đơn hàng thì đã không mắc lỗi — nhưng thực tế đã không kiểm tra và đã mắc lỗi.)", "s": "If we had checked the order, we would not have made the mistake."}],
+  explain: "Nghe ví dụ trước: 'If we had checked the order, we would not have made the mistake.' (Nếu chúng tôi đã kiểm tra đơn hàng thì đã không mắc lỗi — nhưng thực tế đã không kiểm tra và đã mắc lỗi.) 'If the server had not crashed, we would have sent the invoices on time.' (Nếu máy chủ không sập thì chúng tôi đã gửi hóa đơn đúng hạn.) 'If we had backed up the files, we would not have lost the report.' (Nếu đã sao lưu tập tin thì chúng tôi đã không mất báo cáo.) Quy tắc: loại 3: If + had + phân từ 2, would have + phân từ 2; nói về việc đã qua không thể đổi, dùng để rút bài học hoặc tiếc nuối trong báo cáo sự cố. Cả hai mệnh đề đều nói về quá khứ đã xong.",
+  examples: [{ "t": "'If we had checked the order, we would not have made the mistake.' (Nếu chúng tôi đã kiểm tra đơn hàng thì đã không mắc lỗi — nhưng thực tế đã không kiểm tra và đã mắc lỗi.)", "s": "If we had checked the order, we would not have made the mistake." }, { "t": "'If the server had not crashed, we would have sent the invoices on time.' (Nếu máy chủ không sập thì chúng tôi đã gửi hóa đơn đúng hạn.)", "s": "If the server had not crashed, we would have sent the invoices on time." }, { "t": "'If we had backed up the files, we would not have lost the report.' (Nếu đã sao lưu tập tin thì chúng tôi đã không mất báo cáo.)", "s": "If we had backed up the files, we would not have lost the report." }],
   rule: "loại 3: If + had + phân từ 2, would have + phân từ 2; nói về việc đã qua không thể đổi, dùng để rút bài học hoặc tiếc nuối trong báo cáo sự cố.",
   quiz: [
   { q: "If we had checked the order, we ___ made the mistake.", o: ["would not have", "will not have", "would not"], a: 0, why: "Mệnh đề chính loại 3: would have + phân từ 2." },
-  { q: "If she had arrived earlier, she ___ the meeting.", o: ["would not miss", "would not have missed", "will not miss"], a: 1, why: "Mệnh đề chính loại 3: would not have missed." },
-  { q: "If it ___ yesterday, we would have cancelled the trip.", o: ["rains", "had rained", "rained"], a: 1, why: "Mệnh đề If loại 3: had + phân từ 2 (had rained)." },
-  { q: "We would have finished on time if we ___ more staff.", o: ["had had", "have", "had"], a: 0, why: "Had had: had + phân từ 2 của have là had." },
-  { q: "If you had told me, I ___ helped you.", o: ["would have", "will have", "would"], a: 0, why: "Mệnh đề chính loại 3: would have helped." },
+  { q: "If she had arrived earlier, she ___ the meeting.", o: ["would not have missed", "will not miss", "would not miss"], a: 0, why: "Mệnh đề chính loại 3: would not have missed." },
+  { q: "If it ___ yesterday, we would have cancelled the trip.", o: ["had rained", "rained", "rains"], a: 0, why: "Mệnh đề If loại 3: had + phân từ 2 (had rained)." },
+  { q: "We would have finished on time if we ___ more staff.", o: ["had", "had had", "have"], a: 1, why: "Had had: had + phân từ 2 của have là had." },
+  { q: "If you had told me, I ___ helped you.", o: ["would", "would have", "will have"], a: 1, why: "Mệnh đề chính loại 3: would have helped." },
   { q: "The company would not have lost the client if the manager ___ faster.", o: ["acts", "had acted", "has acted"], a: 1, why: "Mệnh đề If loại 3: had acted." }
   ] },
 { name: "So sánh bằng và kém trong mô tả sản phẩm", level: "600",
@@ -141095,16 +141095,16 @@ var TC_GRAMMAR_EXPAND17 = [
   { q: "This hotel is not as expensive ___ that one, so it is cheaper.", o: ["as", "than", "then"], a: 0, why: "So sánh không bằng: not as expensive as." }
   ] },
 { name: "Giới từ đi kèm trong công sở", level: "750",
-  explain: "Nghe ví dụ trước: 'She is responsible for the budget.' (Cô ấy chịu trách nhiệm về ngân sách.) 'We depend on this supplier.' (Chúng tôi phụ thuộc vào nhà cung cấp này.) Quy tắc: một số động từ/tính từ luôn đi với một giới từ cố định: responsible for, depend on, apply for, interested in, familiar with, focus on. Nhớ theo cặp, đừng dịch từng chữ sang tiếng Việt rồi đoán giới từ.",
-  examples: [{"t": "'She is responsible for the budget.' (Cô ấy chịu trách nhiệm về ngân sách.)", "s": "She is responsible for the budget."}, {"t": "'We depend on this supplier.' (Chúng tôi phụ thuộc vào nhà cung cấp này.)", "s": "We depend on this supplier."}],
+  explain: "Nghe ví dụ trước: 'She is responsible for the budget.' (Cô phụ trách ngân sách.) 'We depend on this supplier.' (Chúng tôi dựa vào nhà cung cấp này.) 'He applied for the sales job last week.' (Anh ấy xin việc bán hàng tuần trước.) 'I am interested in the new project.' (Tôi quan tâm dự án mới.) 'The manager is familiar with the new rules.' (Quản lý quen với quy định mới.) 'Please focus on the main problem.' (Tập trung vào vấn đề chính.) Quy tắc: một số động từ/tính từ luôn đi với một giới từ cố định: responsible for, depend on, apply for, interested in, familiar with, focus on. Nhớ theo cặp, đừng dịch từng chữ sang tiếng Việt rồi đoán giới từ. Lưu ý: apply for + việc, apply to + nơi nộp đơn.",
+  examples: [{ "t": "'She is responsible for the budget.' (Cô phụ trách ngân sách.)", "s": "She is responsible for the budget." }, { "t": "'We depend on this supplier.' (Chúng tôi dựa vào nhà cung cấp này.)", "s": "We depend on this supplier." }, { "t": "'He applied for the sales job last week.' (Anh ấy xin việc bán hàng tuần trước.)", "s": "He applied for the sales job last week." }, { "t": "'I am interested in the new project.' (Tôi quan tâm dự án mới.)", "s": "I am interested in the new project." }, { "t": "'The manager is familiar with the new rules.' (Quản lý quen với quy định mới.)", "s": "The manager is familiar with the new rules." }, { "t": "'Please focus on the main problem.' (Tập trung vào vấn đề chính.)", "s": "Please focus on the main problem." }],
   rule: "một số động từ/tính từ luôn đi với một giới từ cố định: responsible for, depend on, apply for, interested in, familiar with, focus on. Nhớ theo cặp, đừng dịch từng chữ sang tiếng Việt rồi đoán giới từ.",
   quiz: [
-  { q: "She is responsible ___ the budget.", o: ["for", "on", "of"], a: 0, why: "Cặp cố định: responsible for." },
-  { q: "We depend ___ this supplier.", o: ["on", "for", "in"], a: 0, why: "Cặp cố định: depend on." },
+  { q: "She is responsible ___ the budget.", o: ["of", "for", "on"], a: 1, why: "Cặp cố định: responsible for." },
+  { q: "We depend ___ this supplier.", o: ["in", "on", "for"], a: 1, why: "Cặp cố định: depend on." },
   { q: "He applied ___ the job last week.", o: ["for", "to", "on"], a: 0, why: "Cặp cố định: apply for (nộp đơn xin việc)." },
-  { q: "I am interested ___ the new project.", o: ["at", "in", "on"], a: 1, why: "Cặp cố định: interested in." },
+  { q: "I am interested ___ the new project.", o: ["in", "on", "at"], a: 0, why: "Cặp cố định: interested in." },
   { q: "The manager is familiar ___ the new rules.", o: ["with", "for", "on"], a: 0, why: "Cặp cố định: familiar with." },
-  { q: "Please focus ___ the main problem.", o: ["in", "on", "for"], a: 1, why: "Cặp cố định: focus on." }
+  { q: "Please focus ___ the main problem.", o: ["on", "for", "in"], a: 0, why: "Cặp cố định: focus on." }
   ] },
 { name: "Liên từ tương quan và từ nối trong báo cáo", level: "750",
   explain: "Nghe ví dụ trước: 'He is both careful and fast.' (Anh ấy vừa cẩn thận vừa nhanh.) 'The new office is not only bigger but also cheaper.' (Văn phòng mới không những rộng hơn mà còn rẻ hơn.) 'Sales rose. Therefore, we hired more staff.' (Doanh số tăng. Vì vậy, chúng tôi tuyển thêm nhân viên.) Quy tắc: both...and = cả hai; either...or = hoặc cái này hoặc cái kia; neither...nor = cả hai đều không; not only...but also = không những...mà còn; therefore = vì vậy (nói kết quả); however = tuy nhiên (nói trái ngược).",
@@ -141155,27 +141155,27 @@ var TC_GRAMMAR_EXPAND18 = [
   ] },
 { name: "Đại từ và định từ trong văn bản công sở", level: "600",
   explain: "Nghe ví dụ trước: 'Each employee should submit his or her report.' (Mỗi nhân viên nên nộp báo cáo của mình.) 'The manager himself approved the plan.' (Chính quản lý đã duyệt kế hoạch.) Quy tắc: đại từ sở hữu (his, her, their, its) đứng trước danh từ (their report); đại từ phản thân (himself, herself, themselves) nhấn mạnh chính người đó làm; each/every + danh từ số ít + động từ số ít; this/that + danh từ số ít, these/those + danh từ số nhiều.",
-  examples: [{"t": "'Each employee should submit his or her report.' (Mỗi nhân viên nên nộp báo cáo của mình.)", "s": "Each employee should submit his or her report."}, {"t": "'The manager himself approved the plan.' (Chính quản lý đã duyệt kế hoạch.)", "s": "The manager himself approved the plan."}],
+  examples: [{ "t": "'Each employee should submit his or her report.' (Mỗi nhân viên nên nộp báo cáo của mình.)", "s": "Each employee should submit his or her report." }, { "t": "'The manager himself approved the plan.' (Chính quản lý đã duyệt kế hoạch.)", "s": "The manager himself approved the plan." }],
   rule: "đại từ sở hữu (his, her, their, its) đứng trước danh từ (their report); đại từ phản thân (himself, herself, themselves) nhấn mạnh chính người đó làm; each/every + danh từ số ít + động từ số ít; this/that + danh từ số ít, these/those + danh từ số nhiều.",
   quiz: [
   { q: "Each employee should submit ___ report by Friday.", o: ["his or her", "they", "them"], a: 0, why: "Each + danh từ số ít: dùng his or her (they/them không đứng trước danh từ)." },
-  { q: "The manager ___ approved the budget.", o: ["himself", "him", "his"], a: 0, why: "Nhấn mạnh chính quản lý làm: himself." },
-  { q: "___ reports on the desk are yours.", o: ["This", "These", "That"], a: 1, why: "Reports số nhiều + ở gần: these." },
-  { q: "Please send the file to ___ as soon as possible.", o: ["we", "us", "our"], a: 1, why: "Sau giới từ to cần đại từ tân ngữ us." },
-  { q: "We asked everyone, but ___ knew the answer.", o: ["nobody", "somebody", "anybody"], a: 0, why: "Cần ý phủ định sau 'but': nobody knew the answer (không ai biết đáp án). 'Somebody knew' không hợp nghĩa tương phản ở đây. 'Anybody knew' sai trong ngữ cảnh này: anybody trong câu khẳng định mang nghĩa 'bất cứ ai' (vd: Anybody can join the meeting), không dùng để nói 'có người biết'." },
-  { q: "This is ___ office, not theirs.", o: ["our", "ours", "us"], a: 0, why: "Trước danh từ office cần tính từ sở hữu our (ours đứng một mình, không kèm danh từ)." }
+  { q: "The manager ___ approved the budget.", o: ["his", "himself", "him"], a: 1, why: "Nhấn mạnh chính quản lý làm: himself." },
+  { q: "___ reports on the desk are yours.", o: ["That", "This", "These"], a: 2, why: "Reports số nhiều + ở gần: these." },
+  { q: "Please send the file to ___ as soon as possible.", o: ["us", "our", "we"], a: 0, why: "Sau giới từ to cần đại từ tân ngữ us." },
+  { q: "We asked everyone, but ___ knew the answer.", o: ["nobody", "somebody", "anybody"], a: 0, why: "Trong câu này cần nobody (không ai) vì vế sau có 'but' tương phản — anybody làm chủ ngữ không phải lúc nào cũng sai (vd: Anybody can join the meeting), chỉ sai trong ngữ cảnh này." },
+  { q: "This is ___ office, not theirs.", o: ["us", "our", "ours"], a: 1, why: "Trước danh từ office cần tính từ sở hữu our (ours đứng một mình, không kèm danh từ)." }
   ] },
 { name: "Câu hỏi gián tiếp trong email và cuộc gọi", level: "600",
   explain: "Nghe ví dụ trước: 'Could you tell me where the meeting is?' (Bạn có thể cho tôi biết cuộc họp ở đâu không?) 'Do you know when the report is due?' (Bạn có biết khi nào phải nộp báo cáo không?) Quy tắc: câu hỏi gián tiếp dùng trật tự câu khẳng định (where the meeting is, không đảo thành where is the meeting) và lùi thì khi cần; mở đầu bằng Could you tell me / Do you know / I wonder + if/whether + mệnh đề.",
-  examples: [{"t": "'Could you tell me where the meeting is?' (Bạn có thể cho tôi biết cuộc họp ở đâu không?)", "s": "Could you tell me where the meeting is?"}, {"t": "'Do you know when the report is due?' (Bạn có biết khi nào phải nộp báo cáo không?)", "s": "Do you know when the report is due?"}],
+  examples: [{ "t": "'Could you tell me where the meeting is?' (Bạn có thể cho tôi biết cuộc họp ở đâu không?)", "s": "Could you tell me where the meeting is?" }, { "t": "'Do you know when the report is due?' (Bạn có biết khi nào phải nộp báo cáo không?)", "s": "Do you know when the report is due?" }],
   rule: "câu hỏi gián tiếp dùng trật tự câu khẳng định (where the meeting is, không đảo thành where is the meeting) và lùi thì khi cần; mở đầu bằng Could you tell me / Do you know / I wonder + if/whether + mệnh đề.",
   quiz: [
-  { q: "Could you tell me where ___?", o: ["is the meeting", "the meeting is", "does the meeting"], a: 1, why: "Câu hỏi gián tiếp giữ trật tự khẳng định: where the meeting is." },
-  { q: "Do you know when ___?", o: ["the report is due", "is the report due", "does the report due"], a: 0, why: "Trật tự khẳng định: when the report is due." },
-  { q: "I wonder ___ the manager is in today.", o: ["if", "that", "what"], a: 0, why: "Câu hỏi yes/no gián tiếp dùng if (hoặc whether)." },
-  { q: "Could you tell me ___ to contact about the order?", o: ["who", "what", "which"], a: 0, why: "Hỏi về người liên hệ: who to contact." },
-  { q: "She asked me ___ I had finished the report.", o: ["if", "that", "when"], a: 0, why: "Câu hỏi gián tiếp yes/no: asked if I had finished (lùi thì had finished)." },
-  { q: "Please let me know ___ the delivery will arrive.", o: ["when", "which", "what"], a: 0, why: "Hỏi thời gian: let me know when the delivery will arrive." }
+  { q: "Could you tell me where ___?", o: ["the meeting is", "does the meeting", "is the meeting"], a: 0, why: "Câu hỏi gián tiếp giữ trật tự khẳng định: where the meeting is." },
+  { q: "Do you know when ___?", o: ["is the report due", "does the report due", "the report is due"], a: 2, why: "Trật tự khẳng định: when the report is due." },
+  { q: "I wonder ___ the manager is in today.", o: ["what", "if", "that"], a: 1, why: "Câu hỏi yes/no gián tiếp dùng if (hoặc whether)." },
+  { q: "Could you tell me ___ to contact about the order?", o: ["what", "which", "who"], a: 2, why: "Hỏi về người liên hệ: who to contact." },
+  { q: "She asked me ___ I had finished the report.", o: ["that", "because", "if"], a: 2, why: "Câu hỏi gián tiếp yes/no: asked if I had finished (lùi thì had finished); 'asked me that...' và 'asked me because...' đều sai." },
+  { q: "Please let me know ___ the delivery will arrive.", o: ["which", "what", "when"], a: 2, why: "Hỏi thời gian: let me know when the delivery will arrive." }
   ] },
 { name: "Cụm động từ (phrasal verbs) trong công sở", level: "600",
   explain: "Nghe ví dụ trước: 'The manager will take over the project next month.' (Quản lý sẽ tiếp quản dự án vào tháng sau.) 'Please put off the meeting until Friday.' (Xin hãy hoãn cuộc họp đến thứ Sáu.) Quy tắc: cụm động từ = động từ + giới từ/trạng từ (take over = tiếp quản, put off = hoãn, call off = hủy, look into = điều tra, set up = thành lập, carry out = thực hiện); nghĩa của cả cụm thường khác nghĩa từng từ nên phải học thuộc cả cụm. Vị trí tân ngữ đại từ: cụm TÁCH ĐƯỢC (put off, take over, call off, set up, carry out) thì đại từ đứng giữa (put it off, không nói put off it); cụm KHÔNG TÁCH ĐƯỢC (look into, look after) thì tân ngữ luôn đứng sau cả cụm (look into it, không nói look it into).",
@@ -141226,16 +141226,16 @@ var TC_GRAMMAR_EXPAND18 = [
   { q: "Do not call at 8 tonight. I ___ dinner with my family.", o: ["will be having", "will have", "have"], a: 0, why: "Đang ăn tối lúc 8 giờ tối nay: will be having." }
   ] },
 { name: "Câu bị động với động từ khuyết thiếu", level: "600",
-  explain: "Nghe ví dụ trước: 'The report should be finished by Friday.' (Báo cáo nên được hoàn thành trước thứ Sáu.) 'All visitors must be registered at the desk.' (Mọi khách thăm phải được đăng ký tại quầy.) Quy tắc: bị động với động từ khuyết thiếu = modal (should/must/can/may/might) + be + phân từ 2 (should be finished, must be registered); không dùng 'should finished' hay 'must registering'.",
-  examples: [{"t": "'The report should be finished by Friday.' (Báo cáo nên được hoàn thành trước thứ Sáu.)", "s": "The report should be finished by Friday."}, {"t": "'All visitors must be registered at the desk.' (Mọi khách thăm phải được đăng ký tại quầy.)", "s": "All visitors must be registered at the desk."}],
+  explain: "Nghe ví dụ trước: 'The report should be finished by Friday.' (Báo cáo nên được hoàn thành trước thứ Sáu.) 'All visitors must be registered at the desk.' (Mọi khách thăm phải được đăng ký tại quầy.) 'The goods can be shipped by air next week.' (Hàng hóa có thể được vận chuyển bằng đường hàng không vào tuần tới.) Quy tắc: bị động với động từ khuyết thiếu = modal (should/must/can/may/might) + be + phân từ 2 (should be finished, must be registered); không dùng 'should finished' hay 'must registering'. Phân biệt: should be done là nên làm, must be done là bắt buộc; còn should do là chủ động, chủ ngữ tự làm.",
+  examples: [{ "t": "'The report should be finished by Friday.' (Báo cáo nên được hoàn thành trước thứ Sáu.)", "s": "The report should be finished by Friday." }, { "t": "'All visitors must be registered at the desk.' (Mọi khách thăm phải được đăng ký tại quầy.)", "s": "All visitors must be registered at the desk." }, { "t": "'The goods can be shipped by air next week.' (Hàng hóa có thể được vận chuyển bằng đường hàng không vào tuần tới.)", "s": "The goods can be shipped by air next week." }],
   rule: "bị động với động từ khuyết thiếu = modal (should/must/can/may/might) + be + phân từ 2 (should be finished, must be registered); không dùng 'should finished' hay 'must registering'.",
   quiz: [
-  { q: "The report should ___ by Friday.", o: ["be finished", "finished", "be finish"], a: 0, why: "Should + be + phân từ 2: should be finished." },
+  { q: "The report should ___ by Friday.", o: ["be finish", "be finished", "finished"], a: 1, why: "Should + be + phân từ 2: should be finished." },
   { q: "All visitors must ___ at the desk.", o: ["be registered", "register", "be register"], a: 0, why: "Must + be + phân từ 2: must be registered." },
-  { q: "The goods can ___ by air.", o: ["be shipped", "ship", "be ship"], a: 0, why: "Can + be + phân từ 2: can be shipped." },
+  { q: "The goods can ___ by air.", o: ["ship", "be ship", "be shipped"], a: 2, why: "Can + be + phân từ 2: can be shipped." },
   { q: "This form ___ filled in before the interview.", o: ["must be", "must", "must is"], a: 0, why: "Must be + phân từ 2: must be filled in." },
   { q: "The meeting might ___ to next week.", o: ["be postponed", "postpone", "be postpone"], a: 0, why: "Might + be + phân từ 2: might be postponed." },
-  { q: "Smoking ___ in this building.", o: ["is not allowed", "is not allow", "not allowed"], a: 0, why: "Bị động hiện tại: is not allowed (allow là động từ thường, cần be + allowed)." }
+  { q: "Smoking ___ in this building.", o: ["is not allow", "not allowed", "is not allowed"], a: 2, why: "Bị động hiện tại: is not allowed (allow là động từ thường, cần be + allowed)." }
   ] },
 { name: "Causative: have/get something done, make/let", level: "750",
   explain: "Nghe ví dụ trước: 'We had the office cleaned last weekend.' (Chúng tôi đã thuê người dọn văn phòng cuối tuần trước.) 'The manager made us finish the report on time.' (Quản lý bắt chúng tôi hoàn thành báo cáo đúng hạn.) Quy tắc: have/get + tân ngữ + phân từ 2 (had the office cleaned) nghĩa là thuê/nhờ ai làm gì cho mình; make + tân ngữ + động từ nguyên thể (made us finish) nghĩa là bắt buộc; let + tân ngữ + động từ nguyên thể (let us leave) nghĩa là cho phép.",
@@ -141271,12 +141271,12 @@ var TC_GRAMMAR_EXPAND19 = [
   examples: [{ "t": "'While I was writing the report, the manager called me.' (Trong lúc tôi đang viết báo cáo, quản lý gọi cho tôi.)", "s": "While I was writing the report, the manager called me." }, { "t": "'At 9 a.m. yesterday, we were discussing the new project.' (Lúc 9 giờ sáng hôm qua, chúng tôi đang thảo luận dự án mới.)", "s": "At 9 a.m. yesterday, we were discussing the new project." }],
   rule: "quá khứ tiếp diễn = was/were + V-ing; dùng cho việc ĐANG DIỄN RA tại một thời điểm trong quá khứ, hoặc việc đang diễn ra thì bị một việc khác (quá khứ đơn) cắt ngang: While I was writing…, the manager called. Trong email và báo cáo TOEIC, quá khứ tiếp diễn hay dùng để mô tả việc đang làm dở khi có việc khác xảy ra, khác quá khứ đơn là việc đã xong hẳn và có mốc thời gian.",
   quiz: [
-  { q: "While I ___ the report, the manager called me.", o: ["was writing", "wrote", "write"], a: 0, why: "Việc đang diễn ra thì bị cắt ngang: was writing." },
-  { q: "At 9 a.m. yesterday, we ___ the new project.", o: ["were discussing", "discussed", "discuss"], a: 0, why: "Đang diễn ra lúc 9 giờ sáng hôm qua: were discussing." },
-  { q: "She ___ to a client when the phone rang.", o: ["was talking", "talked", "talks"], a: 0, why: "Was talking: đang nói chuyện thì điện thoại reo." },
+  { q: "While I ___ the report, the manager called me.", o: ["write", "was writing", "am writing"], a: 1, why: "Việc đang diễn ra thì bị cắt ngang: was writing; 'am writing' sai thì với quá khứ, 'write' không diễn tả đang diễn ra." },
+  { q: "At 9 a.m. yesterday, we ___ the new project.", o: ["discuss", "were discussing", "are discussing"], a: 1, why: "Đang diễn ra lúc 9 giờ sáng hôm qua: were discussing; 'are discussing' sai thì với yesterday." },
+  { q: "She ___ to a client when the phone rang.", o: ["was talking", "is talking", "talks"], a: 0, why: "Was talking: đang nói chuyện thì điện thoại reo; 'is talking' sai thì với quá khứ." },
   { q: "While they ___ in the meeting room, the fire alarm went off.", o: ["were working", "are working", "will work"], a: 0, why: "While + quá khứ tiếp diễn: việc đang diễn ra (were working) thì bị một việc khác ở quá khứ đơn (went off) cắt ngang." },
-  { q: "What ___ at this time yesterday?", o: ["were you doing", "did you do", "you were doing"], a: 0, why: "Hỏi việc đang diễn ra tại mốc quá khứ: were you doing." },
-  { q: "I was reading the contract ___ the lawyer arrived.", o: ["when", "while", "because"], a: 0, why: "When + quá khứ đơn cắt ngang quá khứ tiếp diễn." }
+  { q: "What ___ at this time yesterday?", o: ["you did do", "you were doing", "were you doing"], a: 2, why: "Hỏi việc đang diễn ra tại mốc quá khứ: were you doing; 'you did do' và 'you were doing' sai trật tự câu hỏi." },
+  { q: "I was reading the contract ___ the lawyer arrived.", o: ["while", "because", "when"], a: 2, why: "When + quá khứ đơn cắt ngang quá khứ tiếp diễn." }
   ] },
 { name: "Trạng từ tần suất và vị trí trạng từ trong câu", level: "600",
   explain: "Nghe ví dụ trước: 'She always arrives on time.' (Cô ấy lúc nào cũng tới đúng giờ.) 'He is usually busy on Mondays.' (Anh ấy thường bận vào thứ Hai.) Quy tắc: trạng từ tần suất nói việc xảy ra thường xuyên tới mức nào: always (lúc nào cũng), usually (thường xuyên), often (thường), sometimes (thỉnh thoảng), rarely (hiếm khi), never (không bao giờ). Vị trí: đứng TRƯỚC động từ thường (She always arrives); đứng SAU động từ be (He is usually busy); đứng GIỮA trợ động từ và động từ chính (I have never been late). Chú ý: never đi với động từ khẳng định, không dùng don't never; sometimes và often có thể đứng cuối câu (We practice together sometimes. / I go there often.); usually, often, sometimes và occasionally có thể đứng đầu câu để nhấn mạnh; always và never không đứng cuối câu.",
@@ -141295,21 +141295,85 @@ var TC_GRAMMAR_EXPAND19 = [
 TC_GRAMMAR.push.apply(TC_GRAMMAR, TC_GRAMMAR_EXPAND19);
 
 /* v213 dot C (17/11/2026): TC +1 muc ngu phap — P2-11 (phan tu lam tinh tu). SUA 17/11 v213-fix: level 550 -> 600 (550 khong thuoc bo 4 muc 450/600/750/900 cua TC; muc nay o bang 600). */
-TC_GRAMMAR.push({
-  name: "Phân từ làm tính từ — interested/interesting",
-  level: "600",
-  explain: "Ví dụ trước: 'I am interested in the job.' (Tôi quan tâm đến công việc.) 'The job is interesting.' (Công việc thì thú vị.) Quy tắc: -ed tả cảm xúc của người (interested, bored, excited); -ing tả tính chất của vật/việc gây ra cảm xúc đó (interesting, boring, exciting). Người thì -ed, vật thì -ing — đừng đổi chỗ.",
-  examples: [{"t": "'I am interested in the job.' (Tôi quan tâm đến công việc.)", "s": "I am interested in the job."}, {"t": "'The job is interesting.' (Công việc thì thú vị.)", "s": "The job is interesting."}],
+TC_GRAMMAR.push({ name: "Phân từ làm tính từ — interested/interesting", level: "600",
+  explain: "Ví dụ trước: 'I am interested in the job.' (Tôi quan tâm đến công việc.) 'The job is interesting.' (Công việc thì thú vị.) 'I was surprised by the good news.' (Tôi đã ngạc nhiên trước tin tốt.) Quy tắc: -ed tả cảm xúc của người (interested, bored, excited); -ing tả tính chất của vật/việc gây ra cảm xúc đó (interesting, boring, exciting). Người thì -ed, vật thì -ing — đừng đổi chỗ. Các cặp khác cũng theo quy tắc này: surprised/surprising (ngạc nhiên/gây ngạc nhiên), tired/tiring (mệt mỏi/gây mệt mỏi), disappointed/disappointing (thất vọng/gây thất vọng); ví dụ the long trip was tiring còn we were tired after the long trip.",
+  examples: [{ "t": "'I am interested in the job.' (Tôi quan tâm đến công việc.)", "s": "I am interested in the job." }, { "t": "'The job is interesting.' (Công việc thì thú vị.)", "s": "The job is interesting." }, { "t": "'I was surprised by the good news.' (Tôi đã ngạc nhiên trước tin tốt.)", "s": "I was surprised by the good news." }],
   rule: "-ed tả cảm xúc của người (interested, bored, excited); -ing tả tính chất của vật/việc gây ra cảm xúc đó (interesting, boring, exciting). Người thì -ed, vật thì -ing — đừng đổi chỗ.",
   quiz: [
   { q: "I am ___ in this project.", o: ["interesting", "interested", "interest"], a: 1, why: "Người có cảm xúc dùng -ed: interested." },
-  { q: "The movie was very ___.", o: ["bored", "boring", "bore"], a: 1, why: "Bộ phim gây ra cảm giác nên dùng -ing: boring." },
-  { q: "She felt ___ after the long meeting.", o: ["boring", "bored", "bore"], a: 1, why: "Cô ấy có cảm xúc nên dùng -ed: bored." },
-  { q: "This is an ___ book.", o: ["excited", "exciting", "excite"], a: 1, why: "Quyển sách gây ra cảm giác nên dùng -ing: exciting." },
-  { q: "The workers were ___ about the news.", o: ["exciting", "excited", "excite"], a: 1, why: "Người lao động có cảm xúc nên dùng -ed: excited." },
-  { q: "The lesson was ___.", o: ["confused", "confusing", "confuse"], a: 1, why: "Bài học gây ra cảm giác nên dùng -ing: confusing." }
+  { q: "The movie was very ___.", o: ["bore", "bored", "boring"], a: 2, why: "Bộ phim gây ra cảm giác nên dùng -ing: boring." },
+  { q: "She felt ___ after the long meeting.", o: ["bore", "boring", "bored"], a: 2, why: "Cô ấy có cảm xúc nên dùng -ed: bored." },
+  { q: "This is an ___ book.", o: ["excite", "excited", "exciting"], a: 2, why: "Quyển sách gây ra cảm giác nên dùng -ing: exciting." },
+  { q: "The workers were ___ about the news.", o: ["excite", "exciting", "excited"], a: 2, why: "Người lao động có cảm xúc nên dùng -ed: excited." },
+  { q: "The lesson was ___.", o: ["confusing", "confuse", "confused"], a: 0, why: "Bài học gây ra cảm giác nên dùng -ing: confusing." }
   ]
 });
+
+/* v262 (27/11/2026): TC +5 muc ngu phap moi — du 37 diem chuan (TC_GRAMMAR 35 -> 40, quiz 210 -> 240). Noi dung tu soan theo Barron's TOEIC Targets List Part 5/6 + TOEIC Handbook; khong chep de thi that. */
+var TC_GRAMMAR_EXPAND_V262 = [
+{ name: "Cấu trúc song song (parallel structure) trong mô tả công việc", level: "750",
+  explain: "Nghe ví dụ trước: 'She is responsible for training new staff, writing reports, and answering client emails.' (Cô ấy phụ trách đào tạo nhân viên mới, viết báo cáo, trả lời email khách hàng.) 'The new manager is organized, friendly, and hardworking.' (Quản lý mới ngăn nắp, thân thiện, chăm chỉ.) 'We plan to cut costs, to improve service, and to train our staff.' (Chúng tôi định cắt chi phí, cải thiện dịch vụ, đào tạo nhân viên.) Quy tắc: các phần nối bằng and/or/but/not only...but also phải cùng dạng: V-ing với V-ing (training, writing, answering), to-V với to-V (to cut, to improve, to train), danh từ với danh từ, tính từ với tính từ (organized, friendly, hardworking); câu 'She likes reading, to swim and jogging' sai vì to swim lạc dạng — sửa thành 'She likes reading, swimming and jogging'.",
+  examples: [{ "t": "'She is responsible for training new staff, writing reports, and answering client emails.' (Cô ấy phụ trách đào tạo nhân viên mới, viết báo cáo, trả lời email khách hàng.)", "s": "She is responsible for training new staff, writing reports, and answering client emails." }, { "t": "'The new manager is organized, friendly, and hardworking.' (Quản lý mới ngăn nắp, thân thiện, chăm chỉ.)", "s": "The new manager is organized, friendly, and hardworking." }, { "t": "'We plan to cut costs, to improve service, and to train our staff.' (Chúng tôi định cắt chi phí, cải thiện dịch vụ, đào tạo nhân viên.)", "s": "We plan to cut costs, to improve service, and to train our staff." }],
+  rule: "các phần nối bằng and/or/but/not only...but also phải cùng dạng: V-ing với V-ing (training, writing, answering), to-V với to-V (to cut, to improve, to train), danh từ với danh từ, tính từ với tính từ (organized, friendly, hardworking); câu 'She likes reading, to swim and jogging' sai vì to swim lạc dạng — sửa thành 'She likes reading, swimming and jogging'.",
+  quiz: [
+  { q: "She is responsible for training new staff, writing reports, and ___ client emails.", o: ["answer", "to answer", "answering"], a: 2, why: "Cùng dạng V-ing: training, writing, answering." },
+  { q: "The new manager is organized, friendly, and ___.", o: ["hardworking", "work hard", "hardly works"], a: 0, why: "Cùng dạng tính từ: organized, friendly, hardworking." },
+  { q: "She likes reading, swimming, and ___.", o: ["to jog", "jogging", "jog"], a: 1, why: "Cùng dạng V-ing: reading, swimming, jogging." },
+  { q: "We plan to cut costs, to improve service, and ___ our staff.", o: ["training", "to train", "train"], a: 1, why: "Cùng dạng to-V: to cut, to improve, to train." },
+  { q: "Not only does he speak English, but he also ___ French.", o: ["speak", "speaks", "speaking"], a: 1, why: "Chủ ngữ he + động từ chia theo thì: speaks French." },
+  { q: "The job requires patience, attention to detail, and ___.", o: ["to be flexible", "flexibility", "flexible"], a: 1, why: "Cùng dạng danh từ: patience, attention, flexibility." }
+  ] },
+{ name: "Mệnh đề thời gian tương lai trong kế hoạch công sở", level: "600",
+  explain: "Nghe ví dụ trước: 'When the meeting ends, we will send the minutes to everyone.' (Khi cuộc họp kết thúc, chúng tôi sẽ gửi biên bản cho mọi người.) 'Please call me as soon as the client arrives.' (Hãy gọi cho tôi ngay khi khách hàng đến.) 'Do not leave until the manager approves the report.' (Đừng rời đi cho đến khi quản lý phê duyệt báo cáo.) Quy tắc: sau when/after/before/as soon as/until dùng thì hiện tại đơn (ends, arrives, approves) để chỉ tương lai, KHÔNG dùng will trong mệnh đề thời gian; mệnh đề chính mới dùng will (we will send); khác với mệnh đề điều kiện if — if nói điều kiện có thể xảy ra (If it rains, we will stay inside), còn when nói thời điểm chắc chắn sẽ đến.",
+  examples: [{ "t": "'When the meeting ends, we will send the minutes to everyone.' (Khi cuộc họp kết thúc, chúng tôi sẽ gửi biên bản cho mọi người.)", "s": "When the meeting ends, we will send the minutes to everyone." }, { "t": "'Please call me as soon as the client arrives.' (Hãy gọi cho tôi ngay khi khách hàng đến.)", "s": "Please call me as soon as the client arrives." }, { "t": "'Do not leave until the manager approves the report.' (Đừng rời đi cho đến khi quản lý phê duyệt báo cáo.)", "s": "Do not leave until the manager approves the report." }],
+  rule: "sau when/after/before/as soon as/until dùng thì hiện tại đơn (ends, arrives, approves) để chỉ tương lai, KHÔNG dùng will trong mệnh đề thời gian; mệnh đề chính mới dùng will (we will send); khác với mệnh đề điều kiện if — if nói điều kiện có thể xảy ra (If it rains, we will stay inside), còn when nói thời điểm chắc chắn sẽ đến.",
+  quiz: [
+  { q: "When the meeting ___, we will send the minutes.", o: ["will end", "ends", "ended"], a: 1, why: "Mệnh đề thời gian dùng hiện tại đơn: When the meeting ends." },
+  { q: "Please call me as soon as the client ___.", o: ["arrives", "will arrive", "arrived"], a: 0, why: "As soon as + hiện tại đơn: as soon as the client arrives." },
+  { q: "We will start the training after the new staff ___.", o: ["will arrive", "arrive", "arrived"], a: 1, why: "After + hiện tại đơn: after the new staff arrive." },
+  { q: "Do not leave until the manager ___ the report.", o: ["approves", "will approve", "approved"], a: 0, why: "Until + hiện tại đơn: until the manager approves." },
+  { q: "If it rains tomorrow, we ___ the meeting indoors.", o: ["hold", "will hold", "held"], a: 1, why: "Mệnh đề chính của câu điều kiện loại 1 dùng will: we will hold." },
+  { q: "I will email you before I ___ the office.", o: ["will leave", "leave", "left"], a: 1, why: "Before + hiện tại đơn: before I leave the office." }
+  ] },
+{ name: "Mệnh đề trạng ngữ trong văn bản công sở", level: "750",
+  explain: "Nghe ví dụ trước: 'While I was checking the report, the manager called.' (Khi tôi đang kiểm tra báo cáo, quản lý gọi điện.) 'We stayed late because the client needed the files.' (Chúng tôi ở lại muộn vì khách cần tài liệu gấp.) 'Although the budget was small, we finished on time.' (Dù ngân sách ít, chúng tôi vẫn xong đúng hạn.) 'We held a training session so that new staff could learn the system.' (Chúng tôi mở buổi đào tạo cho nhân viên mới học hệ thống.) 'The instructions were so clear that everyone understood them.' (Hướng dẫn rõ nên ai cũng hiểu.) Quy tắc: mệnh đề thời gian dùng when/while/as soon as; lý do dùng because/since/as; nhượng bộ dùng although/though/even though; mục đích dùng so that/in order to + động từ nguyên thể; kết quả dùng so...that/such...that và too/enough + to-V.",
+  examples: [{ "t": "'While I was checking the report, the manager called.' (Khi tôi đang kiểm tra báo cáo, quản lý gọi điện.)", "s": "While I was checking the report, the manager called." }, { "t": "'We stayed late because the client needed the files.' (Chúng tôi ở lại muộn vì khách cần tài liệu gấp.)", "s": "We stayed late because the client needed the files." }, { "t": "'Although the budget was small, we finished on time.' (Dù ngân sách ít, chúng tôi vẫn xong đúng hạn.)", "s": "Although the budget was small, we finished on time." }, { "t": "'We held a training session so that new staff could learn the system.' (Chúng tôi mở buổi đào tạo cho nhân viên mới học hệ thống.)", "s": "We held a training session so that new staff could learn the system." }, { "t": "'The instructions were so clear that everyone understood them.' (Hướng dẫn rõ nên ai cũng hiểu.)", "s": "The instructions were so clear that everyone understood them." }],
+  rule: "mệnh đề thời gian dùng when/while/as soon as; lý do dùng because/since/as; nhượng bộ dùng although/though/even though; mục đích dùng so that/in order to + động từ nguyên thể; kết quả dùng so...that/such...that và too/enough + to-V.",
+  quiz: [
+  { q: "___ the budget was small, we finished on time.", o: ["Because", "Although", "So that"], a: 1, why: "Nhượng bộ: Although the budget was small." },
+  { q: "We stayed late ___ the client needed the files.", o: ["although", "because", "so that"], a: 1, why: "Lý do: because the client needed the files." },
+  { q: "We held a training session ___ new staff could learn the system.", o: ["so that", "because", "although"], a: 0, why: "Mục đích: so that new staff could learn the system." },
+  { q: "The instructions were so clear ___ everyone understood them.", o: ["that", "because", "so"], a: 0, why: "Kết quả: so clear that everyone understood them." },
+  { q: "While I was checking the report, the manager ___.", o: ["called", "calls", "will call"], a: 0, why: "Hành động xen vào trong quá khứ: the manager called." },
+  { q: "This task is too difficult for a new employee ___ alone.", o: ["to finish", "finishing", "finish"], a: 0, why: "Kết quả với too: too difficult + to-V." }
+  ] },
+{ name: "Các loại câu hỏi trong giao tiếp công sở", level: "450",
+  explain: "Nghe ví dụ trước: 'Did you send the report to the client?' (Bạn đã gửi báo cáo cho khách hàng chưa?) 'When does the meeting start?' (Cuộc họp bắt đầu lúc nào?) 'You finished the report, didn't you?' (Bạn đã xong báo cáo rồi, phải không?) Quy tắc: câu hỏi yes/no đảo trợ động từ lên trước chủ ngữ (Did you send...?); câu hỏi wh- dùng what/when/where/who/why/how + trợ động từ đảo trước chủ ngữ (When does the meeting start?); câu hỏi đuôi: mệnh đề khẳng định thì đuôi phủ định và ngược lại (You finished the report, didn't you?), đuôi theo đúng chủ ngữ + trợ động từ của mệnh đề chính.",
+  examples: [{ "t": "'Did you send the report to the client?' (Bạn đã gửi báo cáo cho khách hàng chưa?)", "s": "Did you send the report to the client?" }, { "t": "'When does the meeting start?' (Cuộc họp bắt đầu lúc nào?)", "s": "When does the meeting start?" }, { "t": "'You finished the report, didn't you?' (Bạn đã xong báo cáo rồi, phải không?)", "s": "You finished the report, didn't you?" }],
+  rule: "câu hỏi yes/no đảo trợ động từ lên trước chủ ngữ (Did you send...?); câu hỏi wh- dùng what/when/where/who/why/how + trợ động từ đảo trước chủ ngữ (When does the meeting start?); câu hỏi đuôi: mệnh đề khẳng định thì đuôi phủ định và ngược lại (You finished the report, didn't you?), đuôi theo đúng chủ ngữ + trợ động từ của mệnh đề chính.",
+  quiz: [
+  { q: "___ you send the report to the client yesterday?", o: ["Did", "Do", "Does"], a: 0, why: "Hỏi về quá khứ: Did you send... yesterday?" },
+  { q: "___ does the meeting start?", o: ["What", "When", "Who"], a: 1, why: "Hỏi thời gian: When does the meeting start?" },
+  { q: "You finished the report, ___?", o: ["didn't you", "did you", "don't you"], a: 0, why: "Mệnh đề khẳng định thì đuôi phủ định: didn't you." },
+  { q: "She works in the sales department, ___?", o: ["doesn't she", "isn't she", "does she"], a: 0, why: "Works → trợ động từ does; khẳng định → đuôi phủ định: doesn't she." },
+  { q: "Where ___ the new office?", o: ["is", "does", "are"], a: 0, why: "Hỏi địa điểm với be: Where is the new office?" },
+  { q: "Why ___ you leave the meeting early yesterday?", o: ["did", "do", "does"], a: 0, why: "Hỏi lý do về quá khứ: Why did you leave... yesterday?" }
+  ] },
+{ name: "Thì hoàn thành tiếp diễn trong báo cáo công việc", level: "600",
+  explain: "Nghe ví dụ trước: 'We have been working on this project since January.' (Chúng tôi đã làm dự án này từ tháng Một.) 'She had been waiting for an hour before the client arrived.' (Cô ấy đã đợi một tiếng trước khi khách hàng đến.) 'By next month, we will have been working here for five years.' (Đến tháng sau, chúng tôi sẽ làm việc ở đây được năm năm.) Quy tắc: hiện tại hoàn thành tiếp diễn = have/has been + V-ing (have been working), việc bắt đầu trong quá khứ và còn tiếp diễn tới nay, nhấn mạnh quá trình, hay đi với since/for; quá khứ hoàn thành tiếp diễn = had been + V-ing; tương lai hoàn thành tiếp diễn = will have been + V-ing; khác thì hoàn thành (have worked — nhấn mạnh kết quả) và thì tiếp diễn (are working — không nối với since/for dài).",
+  examples: [{ "t": "'We have been working on this project since January.' (Chúng tôi đã làm dự án này từ tháng Một.)", "s": "We have been working on this project since January." }, { "t": "'She had been waiting for an hour before the client arrived.' (Cô ấy đã đợi một tiếng trước khi khách hàng đến.)", "s": "She had been waiting for an hour before the client arrived." }, { "t": "'By next month, we will have been working here for five years.' (Đến tháng sau, chúng tôi sẽ làm việc ở đây được năm năm.)", "s": "By next month, we will have been working here for five years." }],
+  rule: "hiện tại hoàn thành tiếp diễn = have/has been + V-ing (have been working), việc bắt đầu trong quá khứ và còn tiếp diễn tới nay, nhấn mạnh quá trình, hay đi với since/for; quá khứ hoàn thành tiếp diễn = had been + V-ing; tương lai hoàn thành tiếp diễn = will have been + V-ing; khác thì hoàn thành (have worked — nhấn mạnh kết quả) và thì tiếp diễn (are working — không nối với since/for dài).",
+  quiz: [
+  { q: "We ___ on this project since January.", o: ["have been working", "are working", "worked"], a: 0, why: "Since January + còn tiếp diễn: have been working." },
+  { q: "She ___ for an hour before the client arrived.", o: ["has been waiting", "had been waiting", "is waiting"], a: 1, why: "Trước một mốc quá khứ: had been waiting." },
+  { q: "By next month, we ___ here for five years.", o: ["will have been working", "have been working", "will be working"], a: 0, why: "By next month + for five years: will have been working." },
+  { q: "He has been learning English ___ 2020.", o: ["since", "for", "from"], a: 0, why: "Mốc bắt đầu 2020: since 2020." },
+  { q: "They ___ the new system for three weeks now.", o: ["have been testing", "test", "are testing"], a: 0, why: "For three weeks now + còn tiếp diễn: have been testing." },
+  { q: "I have ___ the report, so you can send it now.", o: ["been writing", "finished", "been finishing"], a: 1, why: "Nhấn mạnh kết quả đã xong: have finished." }
+  ] }
+];
+
+TC_GRAMMAR.push.apply(TC_GRAMMAR, TC_GRAMMAR_EXPAND_V262);
 
 
 
