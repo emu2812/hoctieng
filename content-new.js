@@ -17486,6 +17486,3162 @@ var SACH86_B1 = [
   }
 ];
 
+// ---------- v261: SÁCH 2 — Basic Tactics for Listening (24 unit) ----------
+// Viết lại theo QT-15: đủ 24 unit đúng thứ tự/chủ đề/kỹ năng sách; bài nghe +
+// bài tập SOẠN MỚI (không chép transcript/bài tập/đáp án sách). Nguồn đối chiếu:
+// OCR toàn văn book02.pdf (Drive 14jp8HeDGF-Madd6IZzVEnWjqr-J3Q5z8) tại sach86-work/toc/02-full.txt.
+var SACH86_B2 = [
+  {
+    "n": 1,
+    "title": "Names and Titles",
+    "titleVi": "Tên gọi và cách xưng hô",
+    "skill": [
+      "Listening for names",
+      "Spelling",
+      "Listening for details",
+      "Listening for formal and informal forms of address"
+    ],
+    "skillVi": "Nghe tên gọi · Đánh vần · Nghe chi tiết · Cách xưng hô trang trọng/thân mật",
+    "warmup": {
+      "q": "Is this a first name or a last name? How do you say your name to a new friend?",
+      "qv": "Nhìn một cái tên và đoán đó là tên hay họ, rồi tập nói tên của mình với một người bạn mới.",
+      "words": [
+        {
+          "w": "first name",
+          "vi": "tên"
+        },
+        {
+          "w": "last name",
+          "vi": "họ"
+        },
+        {
+          "w": "telephone number",
+          "vi": "số điện thoại"
+        },
+        {
+          "w": "Mr.",
+          "vi": "ông (xưng hô với nam giới)"
+        },
+        {
+          "w": "Ms.",
+          "vi": "cô, bà (xưng hô chung với nữ giới)"
+        },
+        {
+          "w": "Dr.",
+          "vi": "bác sĩ, tiến sĩ"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the name of the hotel guest",
+        "focusVi": "Nghe tên của khách ở khách sạn.",
+        "script": "A: Good evening. Welcome to the Blue Garden Hotel.\nB: Thank you. I have a room for tonight. My name is Elena Ruiz.\nA: Let me check. Elena Ruiz, room 214. Is that right?\nB: Yes, that is right. Thank you very much for your help.",
+        "scriptVi": "A: Chào buổi tối. Chào mừng quý khách đến khách sạn Blue Garden.\nB: Cảm ơn. Tôi đã đặt một phòng cho tối nay. Tôi tên là Elena Ruiz.\nA: Để tôi kiểm tra. Elena Ruiz, phòng 214. Có đúng không ạ?\nB: Vâng, đúng rồi. Cảm ơn bạn rất nhiều vì đã giúp đỡ."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for a name and its spelling",
+        "focusVi": "Nghe tên một người và cách đánh vần tên đó.",
+        "script": "A: Hello, this is the front desk. How can I help you?\nB: Hello, I want to leave a message for Marco Silva.\nA: Of course. Can you spell his last name, please?\nB: Yes. S-I-L-V-A. Silva. My number is 555-0148.\nA: Thank you. I will give him the message today.",
+        "scriptVi": "A: Xin chào, đây là quầy lễ tân. Tôi có thể giúp gì cho bạn?\nB: Xin chào, tôi muốn để lại lời nhắn cho Marco Silva.\nA: Tất nhiên rồi. Bạn có thể đánh vần họ của anh ấy không?\nB: Được. S-I-L-V-A. Silva. Số điện thoại của tôi là 555-0148.\nA: Cảm ơn bạn. Tôi sẽ chuyển lời nhắn cho anh ấy hôm nay."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for formal and informal greetings",
+        "focusVi": "Nghe cách chào hỏi trang trọng và thân mật.",
+        "script": "A: Good morning, Dr. Petrova. Welcome to our office.\nB: Good morning, Hugo. Please call me Nadia. We are friends now.\nA: Thank you, Nadia. Please sit here. The meeting starts at nine.\nB: Thank you, Hugo. I am very happy to be here today.",
+        "scriptVi": "A: Chào buổi sáng, bác sĩ Petrova. Chào mừng bà đến văn phòng của chúng tôi.\nB: Chào buổi sáng, Hugo. Hãy gọi tôi là Nadia nhé. Giờ chúng ta là bạn rồi.\nA: Cảm ơn Nadia. Mời bà ngồi đây. Cuộc họp bắt đầu lúc chín giờ.\nB: Cảm ơn Hugo. Hôm nay tôi rất vui khi có mặt ở đây."
+      }
+    ],
+    "over": "Work in pairs. Ask your partner for their first name and last name, and ask them to spell their last name. Then tell the class your partner's full name.",
+    "overVi": "Làm việc theo cặp. Hỏi bạn cùng lớp tên và họ của bạn ấy, nhờ bạn ấy đánh vần họ của mình, rồi giới thiệu tên đầy đủ của bạn ấy trước lớp.",
+    "quiz": [
+      {
+        "q": "Khách ở khách sạn tên là gì?",
+        "o": [
+          "Elena Ruiz",
+          "Elena Ross",
+          "Elena Rice"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe 1, vị khách nói rõ tên mình là Elena Ruiz."
+      },
+      {
+        "q": "Vị khách ở phòng số mấy?",
+        "o": [
+          "214",
+          "241",
+          "124"
+        ],
+        "a": 0,
+        "why": "Nhân viên lễ tân đọc rõ: Elena Ruiz, phòng 214."
+      },
+      {
+        "q": "Người gọi điện muốn để lại lời nhắn cho ai?",
+        "o": [
+          "Marco Silva",
+          "Marco Simon",
+          "Martin Silva"
+        ],
+        "a": 0,
+        "why": "Người gọi nói rõ: tôi muốn để lại lời nhắn cho Marco Silva."
+      },
+      {
+        "q": "Họ Silva được đánh vần như thế nào?",
+        "o": [
+          "S-I-L-V-A",
+          "S-I-L-V-E",
+          "S-I-L-V-O"
+        ],
+        "a": 0,
+        "why": "Người gọi đánh vần rõ từng chữ: S-I-L-V-A."
+      },
+      {
+        "q": "Lúc đầu Hugo chào vị khách như thế nào?",
+        "o": [
+          "Good morning, Dr. Petrova",
+          "Good morning, Nadia",
+          "Hello, Nadia"
+        ],
+        "a": 0,
+        "why": "Lúc đầu Hugo chào trang trọng bằng học vị và họ: Good morning, Dr. Petrova."
+      },
+      {
+        "q": "Nadia muốn Hugo gọi mình là gì?",
+        "o": [
+          "Nadia",
+          "Dr. Petrova",
+          "Mrs. Petrova"
+        ],
+        "a": 0,
+        "why": "Nadia nói rõ: hãy gọi tôi là Nadia, vì giờ chúng ta là bạn."
+      }
+    ]
+  },
+  {
+    "n": 2,
+    "title": "Describing People",
+    "titleVi": "Miêu tả người",
+    "skill": [
+      "Listening for topics",
+      "Listening for gist",
+      "Listening for details"
+    ],
+    "skillVi": "Nghe chủ đề · Nghe ý chính · Nghe chi tiết",
+    "warmup": {
+      "q": "Look at a photo of a new classmate. What can you say about their age, height, and hair?",
+      "qv": "Nhìn ảnh một bạn học mới và thử nói về tuổi, chiều cao và mái tóc của bạn ấy.",
+      "words": [
+        {
+          "w": "short",
+          "vi": "thấp"
+        },
+        {
+          "w": "tall",
+          "vi": "cao"
+        },
+        {
+          "w": "curly",
+          "vi": "xoăn"
+        },
+        {
+          "w": "blond",
+          "vi": "vàng hoe"
+        },
+        {
+          "w": "in her teens",
+          "vi": "ở tuổi thiếu niên (nữ)"
+        },
+        {
+          "w": "in his twenties",
+          "vi": "ở độ tuổi hai mươi (nam)"
+        },
+        {
+          "w": "shoulder-length",
+          "vi": "dài ngang vai"
+        },
+        {
+          "w": "light brown",
+          "vi": "nâu nhạt"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the topic: age, height, or hair",
+        "focusVi": "Nghe xem đoạn hội thoại nói về tuổi, chiều cao hay mái tóc.",
+        "script": "A: Our new teacher is very nice. She is about 25 years old.\nB: Is she tall or short?\nA: She is tall, and she has long straight hair.\nB: What color is her hair?\nA: It is light brown. She always wears a red scarf.",
+        "scriptVi": "A: Cô giáo mới của chúng ta rất dễ mến. Cô khoảng 25 tuổi.\nB: Cô cao hay thấp?\nA: Cô cao, và cô có mái tóc dài thẳng.\nB: Tóc cô màu gì?\nA: Màu nâu nhạt. Cô lúc nào cũng quàng một chiếc khăn đỏ."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for the main idea of each description",
+        "focusVi": "Nghe ý chính của mỗi lời miêu tả.",
+        "script": "A: I met a man at the park today. He is in his thirties.\nB: What does he look like?\nA: He is not so tall. He has short curly hair.\nB: Is his hair dark?\nA: No, it is blond. He was with a small white dog.",
+        "scriptVi": "A: Hôm nay tôi gặp một người đàn ông ở công viên. Anh ấy ở độ tuổi ba mươi.\nB: Anh ấy trông như thế nào?\nA: Anh ấy không cao lắm. Anh ấy có mái tóc ngắn xoăn.\nB: Tóc anh ấy có sẫm màu không?\nA: Không, tóc anh ấy màu vàng hoe. Anh ấy đi cùng một chú chó trắng nhỏ."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for details about a lost child",
+        "focusVi": "Nghe chi tiết về một bé gái bị lạc.",
+        "script": "A: Excuse me, I cannot find my daughter. Can you help me?\nB: Of course. How old is she?\nA: She is seven years old. She is short, with shoulder-length dark hair.\nB: What is she wearing today?\nA: She is wearing a blue dress and white shoes.",
+        "scriptVi": "A: Xin lỗi, tôi không tìm thấy con gái tôi. Bạn có thể giúp tôi không?\nB: Tất nhiên rồi. Cháu bao nhiêu tuổi?\nA: Cháu bảy tuổi. Cháu thấp, tóc sẫm màu dài ngang vai.\nB: Hôm nay cháu mặc gì?\nA: Cháu mặc một chiếc váy xanh và đi giày trắng."
+      }
+    ],
+    "over": "Work in pairs. Describe a person in your class. Your partner asks questions about age, height, and hair, and guesses who it is.",
+    "overVi": "Làm việc theo cặp. Miêu tả một người trong lớp, bạn cùng lớp sẽ hỏi về tuổi, chiều cao và mái tóc rồi đoán xem đó là ai.",
+    "quiz": [
+      {
+        "q": "Cô giáo mới khoảng bao nhiêu tuổi?",
+        "o": [
+          "About 25",
+          "About 15",
+          "About 35"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe 1, người nói cho biết cô giáo mới khoảng 25 tuổi."
+      },
+      {
+        "q": "Tóc của cô giáo mới như thế nào?",
+        "o": [
+          "Long, straight, light brown",
+          "Short, curly, blond",
+          "Long, curly, black"
+        ],
+        "a": 0,
+        "why": "Cô giáo có mái tóc dài thẳng, màu nâu nhạt."
+      },
+      {
+        "q": "Người đàn ông ở công viên khoảng bao nhiêu tuổi?",
+        "o": [
+          "In his thirties",
+          "In his teens",
+          "In his forties"
+        ],
+        "a": 0,
+        "why": "Người nói cho biết anh ấy ở độ tuổi ba mươi."
+      },
+      {
+        "q": "Tóc của người đàn ông đó màu gì?",
+        "o": [
+          "Blond",
+          "Dark",
+          "Light brown"
+        ],
+        "a": 0,
+        "why": "Tóc của anh ấy màu vàng hoe, không phải màu sẫm."
+      },
+      {
+        "q": "Cô bé bị lạc mấy tuổi?",
+        "o": [
+          "Seven",
+          "Nine",
+          "Five"
+        ],
+        "a": 0,
+        "why": "Người mẹ nói rõ con gái mình bảy tuổi."
+      },
+      {
+        "q": "Cô bé mặc gì hôm nay?",
+        "o": [
+          "A blue dress and white shoes",
+          "A red dress and black shoes",
+          "A blue shirt and white shoes"
+        ],
+        "a": 0,
+        "why": "Người mẹ nói rõ cháu mặc váy xanh và đi giày trắng."
+      }
+    ]
+  },
+  {
+    "n": 3,
+    "title": "Clothes",
+    "titleVi": "Quần áo",
+    "skill": [
+      "Listening for gist",
+      "Listening for details"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết",
+    "warmup": {
+      "q": "What are you wearing today? Name three things you are wearing.",
+      "qv": "Bạn đang mặc gì hôm nay? Kể tên ba món đồ bạn đang mặc.",
+      "words": [
+        {
+          "w": "jeans",
+          "vi": "quần bò"
+        },
+        {
+          "w": "dress",
+          "vi": "váy liền"
+        },
+        {
+          "w": "hat",
+          "vi": "mũ"
+        },
+        {
+          "w": "glasses",
+          "vi": "kính"
+        },
+        {
+          "w": "blouse",
+          "vi": "áo kiểu nữ"
+        },
+        {
+          "w": "tie",
+          "vi": "cà vạt"
+        },
+        {
+          "w": "scarf",
+          "vi": "khăn quàng"
+        },
+        {
+          "w": "suit",
+          "vi": "bộ com-lê"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the main idea: who is at the party",
+        "focusVi": "Nghe ý chính: người được miêu tả ở bữa tiệc là ai.",
+        "script": "A: Look at the woman near the door. She is wearing a red dress.\nB: Is she wearing a hat?\nA: No, she is not. She is wearing a white scarf and black shoes.\nB: I see her now. Is that Rosa Lima?\nA: Yes, it is. She looks very nice tonight.",
+        "scriptVi": "A: Nhìn người phụ nữ đứng gần cửa kìa. Cô ấy đang mặc một chiếc váy đỏ.\nB: Cô ấy có đội mũ không?\nA: Không. Cô ấy đang quàng khăn trắng và đi giày đen.\nB: Tôi thấy cô ấy rồi. Đó có phải là Rosa Lima không?\nA: Đúng rồi. Tối nay cô ấy trông rất đẹp."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for details about clothes in a shop",
+        "focusVi": "Nghe chi tiết về quần áo trong cửa hàng.",
+        "script": "A: These sneakers are too small. I need a bigger pair.\nB: What size do you wear?\nA: I wear size nine. Do you have these shoes in black?\nB: Yes, we do. Please try this pair here.\nA: Thank you. These are much more comfortable now.",
+        "scriptVi": "A: Đôi giày thể thao này chật quá. Tôi cần một đôi lớn hơn.\nB: Anh đi cỡ giày số mấy?\nA: Tôi đi cỡ chín. Cửa hàng có đôi giày này màu đen không?\nB: Có ạ. Mời anh thử đôi này.\nA: Cảm ơn. Đôi này thoải mái hơn nhiều rồi."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for details about what a man was wearing",
+        "focusVi": "Nghe chi tiết về những gì một người đàn ông đã mặc.",
+        "script": "A: Who was the man in the blue suit yesterday?\nB: That was Ivan Costa. He was wearing a white shirt and a blue tie.\nA: Was he wearing glasses?\nB: Yes, he was. He was also carrying a small black bag.\nA: I remember him now. He was at the front of the room.",
+        "scriptVi": "A: Người đàn ông mặc bộ com-lê xanh hôm qua là ai vậy?\nB: Đó là Ivan Costa. Anh ấy mặc áo sơ mi trắng và thắt cà vạt xanh.\nA: Anh ấy có đeo kính không?\nB: Có. Anh ấy còn xách một chiếc túi đen nhỏ.\nA: Giờ thì tôi nhớ ra rồi. Anh ấy đứng ở phía trước căn phòng."
+      }
+    ],
+    "over": "Work in pairs. One person describes what a classmate is wearing. The other person asks yes-or-no questions and guesses who it is.",
+    "overVi": "Làm việc theo cặp. Một người miêu tả trang phục của một bạn trong lớp, người kia hỏi các câu hỏi có - không rồi đoán xem đó là ai.",
+    "quiz": [
+      {
+        "q": "Người phụ nữ gần cửa mặc gì?",
+        "o": [
+          "A red dress",
+          "A blue dress",
+          "A white dress"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe 1, người nói cho biết cô ấy mặc một chiếc váy đỏ."
+      },
+      {
+        "q": "Cô ấy có đội mũ không?",
+        "o": [
+          "No, she is not",
+          "Yes, she is",
+          "She wears a red hat"
+        ],
+        "a": 0,
+        "why": "Người nói trả lời rõ: không, cô ấy không đội mũ."
+      },
+      {
+        "q": "Đôi giày thể thao của người đàn ông có vấn đề gì?",
+        "o": [
+          "They are too small",
+          "They are too big",
+          "They are too old"
+        ],
+        "a": 0,
+        "why": "Người đàn ông nói rõ đôi giày thể thao này chật quá."
+      },
+      {
+        "q": "Anh ấy đi giày cỡ mấy?",
+        "o": [
+          "Size nine",
+          "Size seven",
+          "Size eight"
+        ],
+        "a": 0,
+        "why": "Anh ấy nói rõ mình đi giày cỡ chín."
+      },
+      {
+        "q": "Hôm qua Ivan Costa mặc gì?",
+        "o": [
+          "A white shirt and a blue tie",
+          "A blue shirt and a white tie",
+          "A white suit and a blue shirt"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe 3, Ivan mặc áo sơ mi trắng và thắt cà vạt xanh."
+      },
+      {
+        "q": "Ivan có đeo kính không?",
+        "o": [
+          "Yes, he was",
+          "No, he was not",
+          "He wore a hat"
+        ],
+        "a": 0,
+        "why": "Người nói trả lời rõ: có, anh ấy có đeo kính."
+      }
+    ]
+  },
+  {
+    "n": 4,
+    "title": "Time",
+    "titleVi": "Giờ giấc",
+    "skill": [
+      "Listening for times",
+      "Listening for numbers",
+      "Listening for letters and numbers"
+    ],
+    "skillVi": "Nghe giờ giấc · Nghe số · Nghe chữ cái và số",
+    "warmup": {
+      "q": "What time is it now? How do you say the time in English?",
+      "qv": "Bây giờ là mấy giờ? Bạn nói giờ bằng tiếng Anh như thế nào?",
+      "words": [
+        {
+          "w": "two o'clock",
+          "vi": "hai giờ đúng"
+        },
+        {
+          "w": "three fifteen",
+          "vi": "ba giờ mười lăm"
+        },
+        {
+          "w": "ten after ten",
+          "vi": "mười giờ mười phút"
+        },
+        {
+          "w": "twenty to two",
+          "vi": "hai giờ kém hai mươi"
+        },
+        {
+          "w": "five past ten",
+          "vi": "mười giờ năm phút"
+        },
+        {
+          "w": "six forty-five",
+          "vi": "sáu giờ bốn mươi lăm"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the time of day",
+        "focusVi": "Nghe xem bây giờ là mấy giờ.",
+        "script": "A: Excuse me, what time is it now?\nB: It is ten after ten. The class starts at half past ten.\nA: Thank you. Is it morning or evening?\nB: It is morning. We have twenty minutes before class.\nA: Good. I still have time to buy a coffee.",
+        "scriptVi": "A: Xin lỗi, bây giờ là mấy giờ?\nB: Mười giờ mười phút. Lớp học bắt đầu lúc mười giờ rưỡi.\nA: Cảm ơn. Đây là buổi sáng hay buổi tối?\nB: Là buổi sáng. Chúng ta còn hai mươi phút nữa mới vào lớp.\nA: Tốt quá. Tôi vẫn còn thời gian mua một ly cà phê."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for the time and the radio station",
+        "focusVi": "Nghe giờ phát sóng và số hiệu đài phát thanh.",
+        "script": "A: You are listening to Radio 88.4. The time is seven fifteen.\nB: And now the morning news. The weather today is warm and sunny.\nA: The news starts at seven twenty. Please stay with us.\nB: Thank you for listening to Radio 88.4 this morning.",
+        "scriptVi": "A: Quý vị đang nghe Đài Radio 88.4. Bây giờ là bảy giờ mười lăm phút.\nB: Và sau đây là bản tin buổi sáng. Thời tiết hôm nay ấm áp và nắng đẹp.\nA: Bản tin bắt đầu lúc bảy giờ hai mươi phút. Mời quý vị tiếp tục theo dõi.\nB: Cảm ơn quý vị đã nghe Đài Radio 88.4 sáng nay."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for movie show times",
+        "focusVi": "Nghe giờ chiếu phim.",
+        "script": "A: Hello, this is the Star Cinema. How can I help you?\nB: Hello, what time does the new film start tonight?\nA: It starts at six forty-five and again at nine ten.\nB: Thank you. What time does the box office open?\nA: It opens at five o'clock. See you tonight.",
+        "scriptVi": "A: Xin chào, đây là rạp Star Cinema. Tôi có thể giúp gì cho bạn?\nB: Xin chào, tối nay phim mới chiếu lúc mấy giờ?\nA: Phim chiếu lúc sáu giờ bốn mươi lăm và chiếu lại lúc chín giờ mười phút.\nB: Cảm ơn. Quầy vé mở cửa lúc mấy giờ?\nA: Quầy vé mở cửa lúc năm giờ. Hẹn gặp bạn tối nay."
+      }
+    ],
+    "over": "Work in pairs. Ask your partner about the time in three cities: Hanoi, London, and Sydney. Take turns asking and answering, and write the times in a chart.",
+    "overVi": "Làm việc theo cặp. Hỏi bạn cùng lớp về giờ ở ba thành phố: Hà Nội, Luân Đôn và Sydney. Thay phiên nhau hỏi và trả lời, rồi ghi giờ vào bảng.",
+    "quiz": [
+      {
+        "q": "Bây giờ là mấy giờ trong bài nghe 1?",
+        "o": [
+          "Ten after ten",
+          "Ten to ten",
+          "Half past ten"
+        ],
+        "a": 0,
+        "why": "Người nói trả lời rõ: mười giờ mười phút."
+      },
+      {
+        "q": "Lớp học bắt đầu lúc mấy giờ?",
+        "o": [
+          "Half past ten",
+          "Ten after ten",
+          "Ten o'clock"
+        ],
+        "a": 0,
+        "why": "Lớp học bắt đầu lúc mười giờ rưỡi."
+      },
+      {
+        "q": "Đài phát thanh có số hiệu bao nhiêu?",
+        "o": [
+          "88.4",
+          "98.4",
+          "84.8"
+        ],
+        "a": 0,
+        "why": "Đài tự giới thiệu rõ: Radio 88.4."
+      },
+      {
+        "q": "Bản tin buổi sáng bắt đầu lúc mấy giờ?",
+        "o": [
+          "Seven twenty",
+          "Seven fifteen",
+          "Seven thirty"
+        ],
+        "a": 0,
+        "why": "Bản tin bắt đầu lúc bảy giờ hai mươi phút, sau phần giới thiệu lúc bảy giờ mười lăm."
+      },
+      {
+        "q": "Phim mới chiếu lúc mấy giờ tối nay?",
+        "o": [
+          "Six forty-five and nine ten",
+          "Six fifteen and nine forty-five",
+          "Five o'clock and nine ten"
+        ],
+        "a": 0,
+        "why": "Phim chiếu lúc sáu giờ bốn mươi lăm và chiếu lại lúc chín giờ mười phút."
+      },
+      {
+        "q": "Quầy vé mở cửa lúc mấy giờ?",
+        "o": [
+          "Five o'clock",
+          "Six forty-five",
+          "Nine ten"
+        ],
+        "a": 0,
+        "why": "Quầy vé mở cửa lúc năm giờ."
+      }
+    ]
+  },
+  {
+    "n": 5,
+    "title": "Dates",
+    "titleVi": "Ngày tháng",
+    "skill": [
+      "Listening for dates",
+      "Listening for dates and times",
+      "Listening for details",
+      "Listening for gist"
+    ],
+    "skillVi": "Nghe ngày tháng · Nghe ngày và giờ · Nghe chi tiết · Nghe ý chính",
+    "warmup": {
+      "q": "When is your birthday? How do you say the date in English?",
+      "qv": "Sinh nhật của bạn là ngày nào? Bạn nói ngày tháng bằng tiếng Anh như thế nào?",
+      "words": [
+        {
+          "w": "January",
+          "vi": "tháng Một"
+        },
+        {
+          "w": "February",
+          "vi": "tháng Hai"
+        },
+        {
+          "w": "March",
+          "vi": "tháng Ba"
+        },
+        {
+          "w": "April",
+          "vi": "tháng Tư"
+        },
+        {
+          "w": "May",
+          "vi": "tháng Năm"
+        },
+        {
+          "w": "June",
+          "vi": "tháng Sáu"
+        },
+        {
+          "w": "birthday",
+          "vi": "sinh nhật"
+        },
+        {
+          "w": "calendar",
+          "vi": "lịch"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for arrival and leaving dates",
+        "focusVi": "Nghe ngày đến và ngày rời đi của vị khách.",
+        "script": "A: Welcome to our hotel. When did you arrive in the city?\nB: I arrived on March fifth. I will leave on March twelfth.\nA: That is a nice long visit. Are you here for work?\nB: No, I am here to visit my sister and her family.\nA: Wonderful. I hope you enjoy your stay here.",
+        "scriptVi": "A: Chào mừng quý khách đến khách sạn của chúng tôi. Quý khách đến thành phố này từ khi nào?\nB: Tôi đến vào ngày 5 tháng Ba. Tôi sẽ rời đi vào ngày 12 tháng Ba.\nA: Chuyến thăm dài thật là tuyệt. Quý khách đến đây vì công việc à?\nB: Không, tôi đến thăm chị gái tôi và gia đình chị ấy.\nA: Tuyệt vời. Tôi chúc quý khách có kỳ nghỉ vui vẻ ở đây."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for dates and times of events",
+        "focusVi": "Nghe ngày và giờ của các sự kiện.",
+        "script": "A: Hello, this is Dr. Lane's office. Your dental appointment is on April eighth at nine thirty in the morning.\nB: Thank you. I also have a party on April tenth at seven in the evening.\nA: Let me check your calendar. Yes, April eighth and April tenth are free for you.\nB: Great. Please call me if anything changes.",
+        "scriptVi": "A: Xin chào, đây là văn phòng của bác sĩ Lane. Lịch hẹn khám răng của bạn là ngày 8 tháng Tư lúc chín giờ rưỡi sáng.\nB: Cảm ơn. Tôi còn có một buổi tiệc vào ngày 10 tháng Tư lúc bảy giờ tối.\nA: Để tôi kiểm tra lịch của bạn. Vâng, ngày 8 và ngày 10 tháng Tư bạn đều rảnh.\nB: Tuyệt quá. Nếu có gì thay đổi thì gọi cho tôi nhé."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for the main idea about birthdays",
+        "focusVi": "Nghe ý chính về sinh nhật của hai người bạn.",
+        "script": "A: When is your birthday, Ana?\nB: It was on June third. I had a small party with my friends.\nA: Did you have a cake?\nB: Yes, we had a big chocolate cake and some music.\nA: That sounds fun. My birthday is on September ninth.\nB: Then we will have another party in September!",
+        "scriptVi": "A: Sinh nhật của bạn là ngày nào vậy, Ana?\nB: Sinh nhật của tôi là ngày 3 tháng Sáu. Tôi đã tổ chức một bữa tiệc nhỏ với bạn bè.\nA: Bạn có bánh sinh nhật không?\nB: Có, chúng tôi có một chiếc bánh sô-cô-la lớn và nghe nhạc.\nA: Nghe vui thật. Sinh nhật của tôi là ngày 9 tháng Chín.\nB: Vậy tháng Chín chúng ta lại có thêm một bữa tiệc nữa!"
+      }
+    ],
+    "over": "Move around the class. Ask three classmates when their birthdays are, and write each birthday on a calendar. Then tell the class who has the next birthday.",
+    "overVi": "Đi quanh lớp, hỏi ba bạn cùng lớp xem sinh nhật của các bạn là ngày nào và ghi từng sinh nhật lên lịch. Sau đó nói cho cả lớp biết ai là người sắp tới sinh nhật nhất.",
+    "quiz": [
+      {
+        "q": "Vị khách đến thành phố vào ngày nào?",
+        "o": [
+          "March fifth",
+          "March twelfth",
+          "March fifteenth"
+        ],
+        "a": 0,
+        "why": "Vị khách nói rõ mình đến vào ngày 5 tháng Ba."
+      },
+      {
+        "q": "Vị khách sẽ rời đi vào ngày nào?",
+        "o": [
+          "March twelfth",
+          "March fifth",
+          "March second"
+        ],
+        "a": 0,
+        "why": "Vị khách nói rõ mình sẽ rời đi vào ngày 12 tháng Ba."
+      },
+      {
+        "q": "Lịch hẹn khám răng vào ngày nào?",
+        "o": [
+          "April eighth",
+          "April tenth",
+          "April ninth"
+        ],
+        "a": 0,
+        "why": "Văn phòng bác sĩ Lane hẹn khám răng vào ngày 8 tháng Tư."
+      },
+      {
+        "q": "Buổi tiệc diễn ra lúc mấy giờ?",
+        "o": [
+          "Seven in the evening",
+          "Nine thirty in the morning",
+          "Seven in the morning"
+        ],
+        "a": 0,
+        "why": "Buổi tiệc diễn ra vào ngày 10 tháng Tư lúc bảy giờ tối."
+      },
+      {
+        "q": "Sinh nhật của Ana là ngày nào?",
+        "o": [
+          "June third",
+          "September ninth",
+          "June ninth"
+        ],
+        "a": 0,
+        "why": "Ana nói rõ sinh nhật của mình là ngày 3 tháng Sáu."
+      },
+      {
+        "q": "Sinh nhật của người bạn kia là ngày nào?",
+        "o": [
+          "September ninth",
+          "June third",
+          "September third"
+        ],
+        "a": 0,
+        "why": "Người bạn nói rõ sinh nhật của mình là ngày 9 tháng Chín."
+      }
+    ]
+  },
+  {
+    "n": 6,
+    "title": "Jobs",
+    "titleVi": "Nghề nghiệp",
+    "skill": [
+      "Listening for gist",
+      "Listening for details",
+      "Listening for attitudes"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết · Nghe thái độ",
+    "warmup": {
+      "q": "What jobs do you know? Which job would you like to do, and why?",
+      "qv": "Bạn biết những nghề nào? Bạn thích làm nghề gì và vì sao?",
+      "words": [
+        {
+          "w": "businessperson",
+          "vi": "doanh nhân"
+        },
+        {
+          "w": "taxi driver",
+          "vi": "tài xế taxi"
+        },
+        {
+          "w": "waitress",
+          "vi": "nữ phục vụ bàn"
+        },
+        {
+          "w": "construction worker",
+          "vi": "công nhân xây dựng"
+        },
+        {
+          "w": "nurse",
+          "vi": "y tá"
+        },
+        {
+          "w": "chef",
+          "vi": "đầu bếp"
+        },
+        {
+          "w": "flight attendant",
+          "vi": "tiếp viên hàng không"
+        },
+        {
+          "w": "teacher",
+          "vi": "giáo viên"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the main idea: what job is it",
+        "focusVi": "Nghe ý chính: đó là nghề gì.",
+        "script": "A: What does your sister do?\nB: She works in a hospital. She helps doctors and looks after sick people.\nA: Is she a doctor?\nB: No, she is a nurse. She works at night sometimes.\nA: That is hard work. Does she like her job?\nB: Yes, she loves helping people every day.",
+        "scriptVi": "A: Chị gái của bạn làm nghề gì?\nB: Chị ấy làm việc trong bệnh viện. Chị ấy giúp các bác sĩ và chăm sóc người bệnh.\nA: Chị ấy là bác sĩ à?\nB: Không, chị ấy là y tá. Thỉnh thoảng chị ấy làm việc vào ban đêm.\nA: Công việc đó vất vả thật. Chị ấy có thích công việc của mình không?\nB: Có, chị ấy rất thích giúp đỡ mọi người mỗi ngày."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for details about a new job",
+        "focusVi": "Nghe chi tiết về một công việc mới.",
+        "script": "A: I have good news. I started a new job last week.\nB: Really? What do you do now?\nA: I am a chef in a small restaurant near the park.\nB: Do you cook all day?\nA: Yes, I cook lunch and dinner. It is busy, but I like it.",
+        "scriptVi": "A: Tôi có tin vui đây. Tuần trước tôi bắt đầu một công việc mới.\nB: Thật à? Bây giờ anh làm gì?\nA: Tôi làm đầu bếp ở một nhà hàng nhỏ gần công viên.\nB: Anh nấu ăn cả ngày à?\nA: Vâng, tôi nấu bữa trưa và bữa tối. Công việc bận rộn nhưng tôi thích."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for attitudes about a job",
+        "focusVi": "Nghe thái độ đối với công việc.",
+        "script": "A: Do you like your job, Clara?\nB: Yes, I love working with kids. They make me smile every day.\nA: Is there anything you do not like?\nB: The school is very far from my home. The bus takes one hour.\nA: That is a long trip. Do you want a new job?\nB: No, I love my students. I will stay here.",
+        "scriptVi": "A: Clara, bạn có thích công việc của mình không?\nB: Có, tôi rất thích làm việc với trẻ con. Các em làm tôi mỉm cười mỗi ngày.\nA: Có điều gì bạn không thích không?\nB: Trường học ở rất xa nhà tôi. Đi xe buýt mất một giờ đồng hồ.\nA: Chuyến đi đó dài thật. Bạn có muốn đổi việc mới không?\nB: Không, tôi yêu quý học trò của mình. Tôi sẽ ở lại đây."
+      }
+    ],
+    "over": "Work in groups of four. Choose a job from the list, or think of your own job. Ask yes-or-no questions to guess the job, for example: Is it a dangerous job? Do you work at night?",
+    "overVi": "Làm việc theo nhóm bốn người. Chọn một nghề trong danh sách hoặc tự nghĩ ra một nghề. Đặt các câu hỏi có - không để đoán nghề đó, ví dụ: Đó có phải là nghề nguy hiểm không? Bạn có làm việc vào ban đêm không?",
+    "quiz": [
+      {
+        "q": "Chị gái của B làm nghề gì?",
+        "o": [
+          "Nurse",
+          "Doctor",
+          "Teacher"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe 1, B nói rõ chị gái mình là y tá."
+      },
+      {
+        "q": "Chị ấy làm việc ở đâu?",
+        "o": [
+          "In a hospital",
+          "In a school",
+          "In a restaurant"
+        ],
+        "a": 0,
+        "why": "Chị ấy làm việc trong bệnh viện."
+      },
+      {
+        "q": "Người đàn ông bắt đầu công việc mới khi nào?",
+        "o": [
+          "Last week",
+          "Last month",
+          "Yesterday"
+        ],
+        "a": 0,
+        "why": "Anh ấy nói rõ mình bắt đầu công việc mới vào tuần trước."
+      },
+      {
+        "q": "Anh ấy làm nghề gì bây giờ?",
+        "o": [
+          "Chef",
+          "Waiter",
+          "Teacher"
+        ],
+        "a": 0,
+        "why": "Anh ấy làm đầu bếp ở một nhà hàng nhỏ gần công viên."
+      },
+      {
+        "q": "Clara thích điều gì ở công việc của mình?",
+        "o": [
+          "Working with kids",
+          "The bus trip",
+          "The school building"
+        ],
+        "a": 0,
+        "why": "Clara nói rõ cô rất thích làm việc với trẻ con."
+      },
+      {
+        "q": "Clara có muốn đổi việc mới không?",
+        "o": [
+          "No, she will stay",
+          "Yes, she wants a new job",
+          "She is not sure"
+        ],
+        "a": 0,
+        "why": "Clara nói rõ cô yêu quý học trò của mình và sẽ ở lại."
+      }
+    ]
+  },
+  {
+    "n": 7,
+    "over": "Over to You: Ask a classmate which sports they do. Ask how often they do each sport, and find one sport you both like.",
+    "overVi": "Hỏi một bạn cùng lớp chơi những môn thể thao nào, hỏi họ chơi mỗi môn thường xuyên ra sao, và tìm một môn mà cả hai bạn đều thích.",
+    "quiz": [
+      {
+        "a": 0,
+        "o": [
+          "Sáng thứ Bảy",
+          "Chiều thứ Bảy",
+          "Sáng Chủ nhật"
+        ],
+        "q": "Nina bơi vào lúc nào?",
+        "why": "Nina nói cô ấy bơi vào sáng thứ Bảy ở hồ bơi gần nhà."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Với anh trai của cô ấy",
+          "Với bạn cùng lớp",
+          "Với mẹ của cô ấy"
+        ],
+        "q": "Nina chơi quần vợt với ai?",
+        "why": "Nina nói cô ấy chơi quần vợt với anh trai vào Chủ nhật."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Không, vì anh ấy có lớp học buổi sáng",
+          "Có, anh ấy chơi lúc 9 giờ",
+          "Không, vì anh ấy bận cả ngày Chủ nhật"
+        ],
+        "q": "Sam có chơi bóng chuyền vào ngày mai không?",
+        "why": "Sam nói anh ấy rất muốn chơi, nhưng anh ấy có lớp học vào buổi sáng."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Chủ nhật",
+          "Thứ Bảy",
+          "Thứ Hai"
+        ],
+        "q": "Sam sẽ chơi bóng chuyền vào ngày nào?",
+        "why": "Sam nói Chủ nhật tốt với anh ấy vì anh ấy rảnh cả ngày."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Ba lần",
+          "Hai lần",
+          "Một lần"
+        ],
+        "q": "Nina chạy bộ mấy lần một tuần?",
+        "why": "Nina nói cô ấy chạy bộ ba lần một tuần, vào thứ Hai, thứ Tư và thứ Sáu."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Gôn",
+          "Bóng chuyền",
+          "Bơi lội"
+        ],
+        "q": "Nina không bao giờ chơi môn nào?",
+        "why": "Nina nói cô ấy không bao giờ chơi gôn."
+      }
+    ],
+    "rounds": [
+      {
+        "focus": "Listen for the main idea - what sports does Nina do on the weekend?",
+        "focusVi": "Nghe ý chính - Nina chơi những môn thể thao nào vào cuối tuần.",
+        "label": "Let's Listen 1",
+        "script": "A: Hi, Nina. What do you do on the weekend?\nB: On Saturday morning, I swim at the pool near my house.\nA: Do you swim every Saturday?\nB: Yes, I do. Then on Sunday, I play tennis with my brother.\nA: That sounds fun. Do you play tennis in the park?\nB: Yes, we play in the park. It is close to our house, and we play for one hour.",
+        "scriptVi": "A: Chào Nina. Bạn làm gì vào cuối tuần?\nB: Sáng thứ Bảy, tôi bơi ở hồ bơi gần nhà tôi.\nA: Bạn có bơi vào mỗi thứ Bảy không?\nB: Có. Sau đó vào Chủ nhật, tôi chơi quần vợt với anh trai tôi.\nA: Nghe vui đấy. Bạn có chơi quần vợt ở công viên không?\nB: Có, chúng tôi chơi ở công viên. Công viên gần nhà chúng tôi, và chúng tôi chơi trong một giờ."
+      },
+      {
+        "focus": "Listen and guess what Sam says next.",
+        "focusVi": "Nghe và đoán Sam sẽ nói gì tiếp theo.",
+        "label": "Let's Listen 2",
+        "script": "A: Sam, do you want to play volleyball with us tomorrow?\nB: Tomorrow? What time do you play?\nA: We play at nine in the morning, in the park.\nB: I would love to, but I have a class in the morning.\nA: Oh, that is too bad. Do you want to play on Sunday?\nB: Yes, Sunday is good for me. I am free all day.",
+        "scriptVi": "A: Sam, ngày mai bạn có muốn chơi bóng chuyền với chúng tôi không?\nB: Ngày mai à? Các bạn chơi lúc mấy giờ?\nA: Chúng tôi chơi lúc 9 giờ sáng, ở công viên.\nB: Tôi rất muốn, nhưng tôi có lớp học vào buổi sáng.\nA: Ồ, tiếc quá. Bạn có muốn chơi vào Chủ nhật không?\nB: Có, Chủ nhật tốt với tôi. Tôi rảnh cả ngày."
+      },
+      {
+        "focus": "Listen for how often Nina exercises.",
+        "focusVi": "Nghe xem Nina tập thể dục thường xuyên như thế nào.",
+        "label": "Let's Listen 3",
+        "script": "A: Nina, how often do you exercise?\nB: I run three times a week, on Monday, Wednesday, and Friday.\nA: Do you run in the morning or in the evening?\nB: I run in the morning, before work. It is cool and quiet.\nA: Do you do anything else?\nB: Yes, I swim twice a week, on Tuesday and Thursday. I never play golf.",
+        "scriptVi": "A: Nina, bạn tập thể dục thường xuyên như thế nào?\nB: Tôi chạy bộ ba lần một tuần, vào thứ Hai, thứ Tư và thứ Sáu.\nA: Bạn chạy vào buổi sáng hay buổi tối?\nB: Tôi chạy vào buổi sáng, trước giờ làm việc. Trời mát và yên tĩnh.\nA: Bạn còn làm gì khác không?\nB: Có, tôi bơi hai lần một tuần, vào thứ Ba và thứ Năm. Tôi không bao giờ chơi gôn."
+      }
+    ],
+    "skill": [
+      "Listening for gist",
+      "Listening and making predictions",
+      "Listening for frequency",
+      "Listening for details"
+    ],
+    "skillVi": "Nghe ý chính · Nghe và đoán trước · Nghe tần suất · Nghe chi tiết",
+    "title": "Sports and Exercise",
+    "titleVi": "Thể thao và tập thể dục",
+    "warmup": {
+      "q": "Do you play any sports? Which sports do you like - swimming, running, or playing tennis?",
+      "qv": "Hỏi bạn chơi môn thể thao nào và thích môn nào nhất - như bài khởi động trong sách.",
+      "words": [
+        {
+          "vi": "lướt ván buồm",
+          "w": "windsurf"
+        },
+        {
+          "vi": "chơi bóng chày",
+          "w": "play baseball"
+        },
+        {
+          "vi": "trượt tuyết",
+          "w": "ski"
+        },
+        {
+          "vi": "chơi gôn",
+          "w": "play golf"
+        },
+        {
+          "vi": "đi tập ở phòng gym",
+          "w": "go to a gym"
+        },
+        {
+          "vi": "chơi quần vợt",
+          "w": "play tennis"
+        }
+      ]
+    }
+  },
+  {
+    "n": 8,
+    "over": "Over to You: Work in pairs. One student puts three things in different places in the room. The other student asks where each thing is, then draws a small map of the room.",
+    "overVi": "Làm việc theo cặp. Một bạn đặt ba đồ vật ở ba chỗ khác nhau trong phòng. Bạn còn lại hỏi từng đồ vật ở đâu, rồi vẽ một bản đồ nhỏ của căn phòng.",
+    "quiz": [
+      {
+        "a": 0,
+        "o": [
+          "Trên bàn, cạnh tờ báo",
+          "Dưới bàn, trên sàn nhà",
+          "Sau cửa, cạnh cửa sổ"
+        ],
+        "q": "Chìa khóa của Chris ở đâu?",
+        "why": "Maya nói chìa khóa ở trên bàn, cạnh tờ báo."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Dưới bàn",
+          "Trên bàn",
+          "Sau cửa"
+        ],
+        "q": "Quyển sách của Chris ở đâu?",
+        "why": "Maya nói quyển sách ở dưới bàn, trên sàn nhà."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Sau cửa, cạnh cửa sổ",
+          "Trên bàn",
+          "Dưới bàn"
+        ],
+        "q": "Gậy chơi gôn ở đâu?",
+        "why": "Maya nói gậy chơi gôn ở sau cửa, cạnh cửa sổ."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Giữa hai chiếc ghế",
+          "Cạnh cửa sổ",
+          "Trước ghế sofa"
+        ],
+        "q": "Maya muốn đặt chậu cây ở đâu?",
+        "why": "Maya nói đặt chậu cây giữa hai chiếc ghế."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Trước ghế sofa, dưới bức tranh",
+          "Cạnh cửa sổ",
+          "Giữa hai chiếc ghế"
+        ],
+        "q": "Chiếc bàn nhỏ được đặt ở đâu?",
+        "why": "Maya nói đặt chiếc bàn nhỏ trước ghế sofa, dưới bức tranh."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Cạnh ti vi, phía bên trái",
+          "Trước ghế sofa",
+          "Giữa hai chiếc ghế"
+        ],
+        "q": "Maya muốn đặt giá đỡ cây ở đâu?",
+        "why": "Maya nói đặt giá đỡ cây cạnh ti vi, phía bên trái."
+      }
+    ],
+    "rounds": [
+      {
+        "focus": "Listen for the main idea - where are Chris's things?",
+        "focusVi": "Nghe ý chính - đồ đạc của Chris đang ở đâu?",
+        "label": "Let's Listen 1",
+        "script": "A: Maya, where are my keys? I cannot find them.\nB: Your keys are on the table, next to the newspaper.\nA: And where is my book?\nB: Your book is under the table, on the floor.\nA: Oh, I see it. Where are the golf clubs?\nB: They are behind the door, next to the window.",
+        "scriptVi": "A: Maya, chìa khóa của tôi ở đâu? Tôi không tìm thấy chúng.\nB: Chìa khóa của bạn ở trên bàn, cạnh tờ báo.\nA: Còn quyển sách của tôi đâu?\nB: Quyển sách của bạn ở dưới bàn, trên sàn nhà.\nA: Ồ, tôi thấy rồi. Gậy chơi gôn ở đâu?\nB: Chúng ở sau cửa, cạnh cửa sổ."
+      },
+      {
+        "focus": "Listen for details - where does Maya want to put each thing?",
+        "focusVi": "Nghe chi tiết - Maya muốn đặt từng đồ vật ở đâu?",
+        "label": "Let's Listen 2",
+        "script": "A: Chris, help me put the plant in the living room.\nB: Where do you want it? Next to the window?\nA: No, put it between the two chairs, please.\nB: Okay. And where is the bookshelf?\nA: Put the bookshelf on the wall, next to the table.\nB: Good. Now, where do I put the small table?\nA: Put it in front of the sofa, under the picture.",
+        "scriptVi": "A: Chris, giúp tôi đặt chậu cây vào phòng khách.\nB: Bạn muốn đặt nó ở đâu? Cạnh cửa sổ à?\nA: Không, đặt nó giữa hai chiếc ghế nhé.\nB: Được rồi. Còn giá sách ở đâu?\nA: Đặt giá sách lên tường, cạnh cái bàn.\nB: Tốt. Giờ tôi đặt chiếc bàn nhỏ ở đâu?\nA: Đặt nó trước ghế sofa, dưới bức tranh."
+      },
+      {
+        "focus": "Listen and guess what Maya says next.",
+        "focusVi": "Nghe và đoán Maya sẽ nói gì tiếp theo.",
+        "label": "Let's Listen 3",
+        "script": "A: Maya, where do you want the TV?\nB: Put it on the table, in front of the sofa.\nA: Is that a good place? The window is behind the sofa.\nB: Yes, it is a good place. The TV is not in the sun.\nA: Okay, I will put it there. What about the plant stand?\nB: Put the plant stand next to the TV, on the left.",
+        "scriptVi": "A: Maya, bạn muốn đặt ti vi ở đâu?\nB: Đặt nó lên bàn, trước ghế sofa.\nA: Chỗ đó có tốt không? Cửa sổ ở sau ghế sofa mà.\nB: Có, đó là chỗ tốt. Ti vi không bị nắng chiếu.\nA: Được rồi, tôi sẽ đặt nó ở đó. Còn giá đỡ cây thì sao?\nB: Đặt giá đỡ cây cạnh ti vi, phía bên trái."
+      }
+    ],
+    "skill": [
+      "Listening for gist",
+      "Listening for details",
+      "Listening and making predictions"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết · Nghe và đoán trước",
+    "title": "Locations",
+    "titleVi": "Vị trí",
+    "warmup": {
+      "q": "Where is your English book now? Is it on the table, under the table, or next to the window?",
+      "qv": "Hỏi một đồ vật đang ở đâu, dùng các từ chỉ vị trí - như bài khởi động trong sách.",
+      "words": [
+        {
+          "vi": "cây cảnh",
+          "w": "a plant"
+        },
+        {
+          "vi": "ván trượt tuyết",
+          "w": "the skis"
+        },
+        {
+          "vi": "cái giường",
+          "w": "the bed"
+        },
+        {
+          "vi": "gậy chơi gôn",
+          "w": "the golf clubs"
+        },
+        {
+          "vi": "quyển sách",
+          "w": "a book"
+        },
+        {
+          "vi": "tờ báo",
+          "w": "the newspaper"
+        }
+      ]
+    }
+  },
+  {
+    "n": 9,
+    "over": "Over to You: Draw your family tree on a piece of paper. Then tell a classmate about your family: how many brothers and sisters you have, and who you are most similar to.",
+    "overVi": "Vẽ cây gia đình của bạn lên một tờ giấy. Sau đó kể cho một bạn cùng lớp nghe về gia đình bạn: bạn có mấy anh chị em, và bạn giống ai nhất.",
+    "quiz": [
+      {
+        "a": 0,
+        "o": [
+          "Hai anh trai và một chị gái",
+          "Một anh trai và hai em gái",
+          "Ba anh trai"
+        ],
+        "q": "Anna có mấy anh chị em?",
+        "why": "Anna nói cô ấy có hai anh trai và một chị gái."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Con út",
+          "Con cả",
+          "Con giữa"
+        ],
+        "q": "Anna là con thứ mấy trong nhà?",
+        "why": "Anna nói cô ấy là con út, anh trai cô ấy hai mươi tuổi và chị gái mười tám tuổi."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Sống cùng gia đình Anna",
+          "Sống ở thành phố khác",
+          "Sống cùng chú của Anna"
+        ],
+        "q": "Bà của Anna sống ở đâu?",
+        "why": "Anna nói bà của cô ấy sống cùng gia đình, còn ông sống ở một thành phố khác."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Giáo viên",
+          "Bác sĩ",
+          "Học sinh"
+        ],
+        "q": "Anh trai của Leo làm nghề gì?",
+        "why": "Leo nói anh trai của anh ấy là giáo viên, dạy tiếng Anh ở một trường nhỏ."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Mẹ của cô ấy",
+          "Bố của cô ấy",
+          "Dì của cô ấy"
+        ],
+        "q": "Anna giống ai nhất trong gia đình?",
+        "why": "Anna nói cô ấy giống mẹ nhất, cả hai đều thích âm nhạc và đọc sách."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Dì của cô ấy",
+          "Mẹ của cô ấy",
+          "Bà của cô ấy"
+        ],
+        "q": "Em gái của Anna giống ai?",
+        "why": "Anna nói em gái cô ấy giống dì, cả hai đều thích nấu ăn."
+      }
+    ],
+    "rounds": [
+      {
+        "focus": "Listen for the main idea - how big is Anna's family?",
+        "focusVi": "Nghe ý chính - gia đình của Anna lớn như thế nào?",
+        "label": "Let's Listen 1",
+        "script": "A: Anna, tell me about your family. Is it big?\nB: Yes, it is big. I have two brothers and one sister.\nA: Are you the oldest child?\nB: No, I am the youngest. My older brother is twenty, and my sister is eighteen.\nA: Do your grandparents live with you?\nB: Yes, my grandmother lives with us. My grandfather lives in another city.",
+        "scriptVi": "A: Anna, kể cho tôi nghe về gia đình bạn. Gia đình bạn có lớn không?\nB: Có, gia đình tôi lớn. Tôi có hai anh trai và một chị gái.\nA: Bạn có phải là con cả không?\nB: Không, tôi là con út. Anh trai tôi hai mươi tuổi, và chị gái tôi mười tám tuổi.\nA: Ông bà của bạn có sống cùng bạn không?\nB: Có, bà tôi sống cùng chúng tôi. Ông tôi sống ở một thành phố khác."
+      },
+      {
+        "focus": "Listen for details - how many brothers and sisters does Leo have?",
+        "focusVi": "Nghe chi tiết - Leo có mấy anh chị em?",
+        "label": "Let's Listen 2",
+        "script": "A: Leo, how many brothers and sisters do you have?\nB: I have one older brother and one younger sister.\nA: What does your brother do?\nB: He is a teacher. He teaches English at a small school.\nA: And your sister? Is she a student?\nB: Yes, she is a student. She is fifteen years old.",
+        "scriptVi": "A: Leo, bạn có mấy anh chị em?\nB: Tôi có một anh trai và một em gái.\nA: Anh trai bạn làm nghề gì?\nB: Anh ấy là giáo viên. Anh ấy dạy tiếng Anh ở một trường nhỏ.\nA: Còn em gái bạn? Em ấy có phải là học sinh không?\nB: Có, em ấy là học sinh. Em ấy mười lăm tuổi."
+      },
+      {
+        "focus": "Listen for similarities - who is each person most similar to?",
+        "focusVi": "Nghe điểm giống nhau - mỗi người giống ai nhất trong gia đình?",
+        "label": "Let's Listen 3",
+        "script": "A: Anna, who are you most similar to in your family?\nB: I am most similar to my mother. We both like music and reading.\nA: What about your brother? Is he similar to your father?\nB: Yes, he is. They both like sports, and they both play football on Sunday.\nA: And your sister? Is she similar to anyone?\nB: She is similar to my aunt. They both like cooking, and they cook together.",
+        "scriptVi": "A: Anna, bạn giống ai nhất trong gia đình?\nB: Tôi giống mẹ tôi nhất. Cả hai chúng tôi đều thích âm nhạc và đọc sách.\nA: Còn anh trai bạn? Anh ấy có giống bố bạn không?\nB: Có. Cả hai đều thích thể thao, và cả hai đều chơi bóng đá vào Chủ nhật.\nA: Còn chị gái bạn? Chị ấy có giống ai không?\nB: Chị ấy giống dì tôi. Cả hai đều thích nấu ăn, và họ cùng nhau nấu ăn."
+      }
+    ],
+    "skill": [
+      "Listening for gist",
+      "Listening for details",
+      "Listening for similarities"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết · Nghe điểm giống nhau",
+    "title": "The Family",
+    "titleVi": "Gia đình",
+    "warmup": {
+      "q": "How many brothers and sisters do you have? Who is the oldest child in your family?",
+      "qv": "Hỏi về anh chị em trong gia đình bạn - như bài khởi động trong sách.",
+      "words": [
+        {
+          "vi": "chú, bác hoặc cậu",
+          "w": "uncle"
+        },
+        {
+          "vi": "cô, dì hoặc bác gái",
+          "w": "aunt"
+        },
+        {
+          "vi": "anh, chị hoặc em họ",
+          "w": "cousin"
+        },
+        {
+          "vi": "cháu trai",
+          "w": "nephew"
+        },
+        {
+          "vi": "cháu gái",
+          "w": "niece"
+        },
+        {
+          "vi": "ông bà",
+          "w": "grandparents"
+        }
+      ]
+    }
+  },
+  {
+    "n": 10,
+    "over": "Over to You: Work in pairs. Invite your partner to do something on Saturday - go to a movie, go shopping, or go to a game. Agree on a time and a place to meet, or refuse politely and suggest another time.",
+    "overVi": "Làm việc theo cặp. Mời bạn cùng lớp làm một việc gì đó vào thứ Bảy - đi xem phim, đi mua sắm, hoặc đi xem một trận đấu. Thống nhất thời gian và địa điểm gặp nhau, hoặc từ chối một cách lịch sự và gợi ý một thời gian khác.",
+    "quiz": [
+      {
+        "a": 0,
+        "o": [
+          "Tối thứ Sáu",
+          "Sáng thứ Sáu",
+          "Tối thứ Bảy"
+        ],
+        "q": "Max và Lily đi xem phim vào lúc nào?",
+        "why": "Lily mời Max đi xem phim vào tối thứ Sáu."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Bảy giờ rưỡi",
+          "Bảy giờ",
+          "Chín giờ rưỡi"
+        ],
+        "q": "Phim bắt đầu lúc mấy giờ?",
+        "why": "Lily nói phim bắt đầu lúc bảy giờ rưỡi."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Không, vì cô ấy thăm bà",
+          "Có, cô ấy sẽ đến",
+          "Không, vì cô ấy đi xem phim"
+        ],
+        "q": "Lily có đến bữa tiệc tối thứ Bảy không?",
+        "why": "Lily nói cô ấy không đến được vì cô ấy thăm bà vào thứ Bảy."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Xem trận bóng đá trên ti vi",
+          "Đi xem phim",
+          "Đi mua sắm"
+        ],
+        "q": "Max và Lily sẽ làm gì vào chiều Chủ nhật?",
+        "why": "Max nói hai người có thể xem một trận bóng đá trên ti vi vào Chủ nhật."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Có, cô ấy rất muốn đi",
+          "Không, cô ấy bận",
+          "Không, cô ấy không thích hòa nhạc"
+        ],
+        "q": "Lily có đồng ý đi nghe hòa nhạc không?",
+        "why": "Lily nói cô ấy rất muốn đi nghe hòa nhạc vào tối thứ Năm."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Không, vì anh ấy bận và có nhiều việc",
+          "Có, anh ấy sẽ đi",
+          "Không, vì anh ấy đi xem phim"
+        ],
+        "q": "Max có đồng ý đi lái xe dạo chơi vào ngày mai không?",
+        "why": "Max nói anh ấy không đi được vì ngày mai anh ấy bận và có rất nhiều việc."
+      }
+    ],
+    "rounds": [
+      {
+        "focus": "Listen for the main idea - what do Max and Lily plan to do on Friday?",
+        "focusVi": "Nghe ý chính - Max và Lily định làm gì vào tối thứ Sáu?",
+        "label": "Let's Listen 1",
+        "script": "A: Max, would you like to go to a movie on Friday night?\nB: Yes, I would love to. What movie do you want to see?\nA: There is a funny movie at the theater near my house.\nB: What time does it start?\nA: It starts at seven thirty. We can meet at seven in front of the theater.\nB: Great. See you on Friday, then.",
+        "scriptVi": "A: Max, tối thứ Sáu bạn có muốn đi xem phim không?\nB: Có, tôi rất muốn. Bạn muốn xem phim nào?\nA: Có một bộ phim hài ở rạp gần nhà tôi.\nB: Phim bắt đầu lúc mấy giờ?\nA: Phim bắt đầu lúc bảy giờ rưỡi. Chúng ta có thể gặp nhau lúc bảy giờ trước rạp.\nB: Tuyệt. Vậy hẹn gặp bạn vào thứ Sáu nhé."
+      },
+      {
+        "focus": "Listen for details - why can Lily not come to the party?",
+        "focusVi": "Nghe chi tiết - vì sao Lily không thể đến bữa tiệc?",
+        "label": "Let's Listen 2",
+        "script": "A: Lily, there is a party at my house on Saturday night. Can you come?\nB: I am sorry, I cannot come. I visit my grandmother on Saturday.\nA: Oh, that is too bad. What about Sunday afternoon?\nB: Sunday afternoon is good. I am free after lunch.\nA: Great. We can watch a football game on TV on Sunday.\nB: That sounds fun. I will bring some snacks.",
+        "scriptVi": "A: Lily, tối thứ Bảy có một bữa tiệc ở nhà tôi. Bạn có đến được không?\nB: Tôi xin lỗi, tôi không đến được. Tôi thăm bà tôi vào thứ Bảy.\nA: Ồ, tiếc quá. Còn chiều Chủ nhật thì sao?\nB: Chiều Chủ nhật thì tốt. Tôi rảnh sau bữa trưa.\nA: Tuyệt. Chúng ta có thể xem một trận bóng đá trên ti vi vào Chủ nhật.\nB: Nghe vui đấy. Tôi sẽ mang một ít đồ ăn vặt."
+      },
+      {
+        "focus": "Listen for acceptances and refusals - who says yes, and who says no?",
+        "focusVi": "Nghe lời đồng ý và từ chối - ai đồng ý, ai từ chối?",
+        "label": "Let's Listen 3",
+        "script": "A: Lily, would you like to go to a concert with me next week?\nB: Yes, I would love to. When is the concert?\nA: It is on Thursday night. We can meet at six.\nB: Good. Now, would you like to go for a drive with me tomorrow?\nA: I am sorry, I cannot. I am busy tomorrow. I have a lot of work.\nB: That is okay. Maybe we can go next weekend.",
+        "scriptVi": "A: Lily, tuần tới bạn có muốn đi nghe hòa nhạc với tôi không?\nB: Có, tôi rất muốn. Buổi hòa nhạc diễn ra khi nào?\nA: Vào tối thứ Năm. Chúng ta có thể gặp nhau lúc sáu giờ.\nB: Tốt. Giờ bạn có muốn đi lái xe dạo chơi với tôi vào ngày mai không?\nA: Tôi xin lỗi, tôi không đi được. Ngày mai tôi bận. Tôi có rất nhiều việc.\nB: Không sao. Có lẽ chúng ta có thể đi vào cuối tuần tới."
+      }
+    ],
+    "skill": [
+      "Listening for gist",
+      "Listening for details",
+      "Listening for acceptances and refusals"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết · Nghe lời đồng ý và từ chối",
+    "title": "Entertainment",
+    "titleVi": "Giải trí",
+    "warmup": {
+      "q": "What do you like to do on the weekend? Do you like to go to a movie, play sports, or eat out with friends?",
+      "qv": "Hỏi bạn thích làm gì vào cuối tuần - như bài khởi động trong sách.",
+      "words": [
+        {
+          "vi": "đi xem phim",
+          "w": "go to a movie"
+        },
+        {
+          "vi": "xem thể thao trên ti vi",
+          "w": "watch sports on TV"
+        },
+        {
+          "vi": "thuê băng video",
+          "w": "rent a video"
+        },
+        {
+          "vi": "chơi trò chơi điện tử",
+          "w": "play computer games"
+        },
+        {
+          "vi": "đi mua sắm",
+          "w": "go shopping"
+        },
+        {
+          "vi": "đi ăn ngoài",
+          "w": "eat out"
+        }
+      ]
+    }
+  },
+  {
+    "n": 11,
+    "over": "Over to You: How much do you spend each week on food, clothes, and entertainment? Ask two classmates how much they spend, write their answers, and compare them with yours.",
+    "overVi": "Mỗi tuần bạn chi bao nhiêu tiền cho đồ ăn, quần áo và giải trí? Hỏi hai bạn cùng lớp xem họ chi bao nhiêu, ghi lại câu trả lời của họ, và so sánh với chi tiêu của bạn.",
+    "quiz": [
+      {
+        "a": 0,
+        "o": [
+          "38 đô la",
+          "45 đô la",
+          "28 đô la"
+        ],
+        "q": "Đôi giày thể thao giá bao nhiêu?",
+        "why": "Nhân viên bán hàng nói đôi giày thể thao có giá ba mươi tám đô la."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Màu xanh dương",
+          "Màu đen",
+          "Màu trắng"
+        ],
+        "q": "Người mua chọn đôi giày màu nào?",
+        "why": "Người mua nói anh ấy sẽ lấy đôi giày màu xanh dương."
+      },
+      {
+        "a": 0,
+        "o": [
+          "17,50 đô la",
+          "20 đô la",
+          "18,50 đô la"
+        ],
+        "q": "Tổng số tiền Zoe phải trả là bao nhiêu?",
+        "why": "Zoe mua đĩa CD giá 9 đô la và quyển sách giá 8,50 đô la, tổng cộng 17,50 đô la."
+      },
+      {
+        "a": 0,
+        "o": [
+          "2,50 đô la",
+          "3,50 đô la",
+          "1,50 đô la"
+        ],
+        "q": "Zoe nhận lại bao nhiêu tiền thừa?",
+        "why": "Zoe trả 20 đô la cho tổng 17,50 đô la nên nhận lại 2,50 đô la."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Ở nước của Zoe",
+          "Ở Mỹ",
+          "Giá như nhau"
+        ],
+        "q": "Quần áo rẻ hơn ở đâu?",
+        "why": "Zoe nói quần áo rẻ hơn ở nước cô ấy."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Ở Mỹ",
+          "Ở nước của Zoe",
+          "Giá như nhau"
+        ],
+        "q": "Ô tô rẻ hơn ở đâu?",
+        "why": "Zoe nói ô tô rẻ hơn ở Mỹ, còn ở nước cô ấy ô tô rất đắt."
+      }
+    ],
+    "rounds": [
+      {
+        "focus": "Listen for details - how much are the sneakers?",
+        "focusVi": "Nghe chi tiết - đôi giày thể thao giá bao nhiêu?",
+        "label": "Let's Listen 1",
+        "script": "A: Excuse me, how much are these sneakers?\nB: They are thirty-eight dollars.\nA: That is a good price. Do you have them in blue?\nB: Yes, we do. We have blue and black.\nA: I will take the blue ones, please.\nB: Good. That is thirty-eight dollars, please.",
+        "scriptVi": "A: Xin lỗi, đôi giày thể thao này giá bao nhiêu?\nB: Chúng có giá ba mươi tám đô la.\nA: Giá tốt đấy. Bạn có giày màu xanh dương không?\nB: Có. Chúng tôi có màu xanh dương và màu đen.\nA: Tôi sẽ lấy đôi màu xanh dương.\nB: Tốt. Ba mươi tám đô la, xin cảm ơn."
+      },
+      {
+        "focus": "Listen for details - how much does Zoe pay, and how much change does she get?",
+        "focusVi": "Nghe chi tiết - Zoe trả bao nhiêu tiền, và cô ấy nhận lại bao nhiêu tiền thừa?",
+        "label": "Let's Listen 2",
+        "script": "A: Good morning. I would like this CD and this book, please.\nB: The CD is nine dollars, and the book is eight dollars and fifty cents.\nA: So the total is seventeen dollars and fifty cents?\nB: Yes, that is right. How do you want to pay?\nA: Here is twenty dollars.\nB: Thank you. Here is your change, two dollars and fifty cents.",
+        "scriptVi": "A: Chào buổi sáng. Tôi muốn mua chiếc đĩa CD này và quyển sách này.\nB: Đĩa CD giá chín đô la, và quyển sách giá tám đô la năm mươi xu.\nA: Vậy tổng cộng là mười bảy đô la năm mươi xu?\nB: Vâng, đúng rồi. Bạn muốn trả bằng cách nào?\nA: Đây là hai mươi đô la.\nB: Cảm ơn bạn. Đây là tiền thừa của bạn, hai đô la năm mươi xu."
+      },
+      {
+        "focus": "Listen for the main idea - where are things cheaper?",
+        "focusVi": "Nghe ý chính - mọi thứ rẻ hơn ở đâu?",
+        "label": "Let's Listen 3",
+        "script": "A: Zoe, are clothes cheaper in your country or in the United States?\nB: Clothes are cheaper in my country. I buy a lot of clothes when I go home.\nA: What about cars? Are cars cheaper at home?\nB: No, cars are cheaper here. In my country, cars are very expensive.\nA: What about food? Is food cheaper in your country?\nB: Yes, food is much cheaper at home than it is here.",
+        "scriptVi": "A: Zoe, quần áo rẻ hơn ở nước bạn hay ở Mỹ?\nB: Quần áo rẻ hơn ở nước tôi. Tôi mua rất nhiều quần áo khi về quê.\nA: Còn ô tô thì sao? Ô tô có rẻ hơn ở quê bạn không?\nB: Không, ô tô rẻ hơn ở đây. Ở nước tôi, ô tô rất đắt.\nA: Còn đồ ăn thì sao? Đồ ăn có rẻ hơn ở nước bạn không?\nB: Có, đồ ăn rẻ hơn nhiều ở quê tôi so với ở đây."
+      }
+    ],
+    "skill": [
+      "Listening for details",
+      "Listening for gist"
+    ],
+    "skillVi": "Nghe chi tiết · Nghe ý chính",
+    "title": "Prices",
+    "titleVi": "Giá cả",
+    "warmup": {
+      "q": "How much is a movie ticket in your city? Can you guess the price of a new laptop?",
+      "qv": "Đoán giá một số món đồ ở thành phố của bạn - như bài khởi động trong sách.",
+      "words": [
+        {
+          "vi": "vé xem phim",
+          "w": "a movie ticket"
+        },
+        {
+          "vi": "tờ báo",
+          "w": "a newspaper"
+        },
+        {
+          "vi": "máy ảnh kỹ thuật số",
+          "w": "a digital camera"
+        },
+        {
+          "vi": "đĩa CD",
+          "w": "a CD"
+        },
+        {
+          "vi": "đôi giày thể thao",
+          "w": "a pair of sneakers"
+        },
+        {
+          "vi": "máy tính xách tay",
+          "w": "a laptop computer"
+        }
+      ]
+    }
+  },
+  {
+    "n": 12,
+    "over": "Over to You: Work in pairs. One student is the waiter or waitress, and the other is the customer. Order an appetizer, a main dish, a dessert, and a drink. Then say if you liked the meal or not.",
+    "overVi": "Làm việc theo cặp. Một bạn làm nhân viên phục vụ, bạn còn lại làm khách hàng. Gọi một món khai vị, một món chính, một món tráng miệng và một đồ uống. Sau đó nói xem bạn có thích bữa ăn đó hay không.",
+    "quiz": [
+      {
+        "a": 0,
+        "o": [
+          "Súp rau",
+          "Súp gà",
+          "Salad rau"
+        ],
+        "q": "Adam gọi món khai vị nào?",
+        "why": "Adam nói anh ấy muốn súp rau và cá nướng."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Kem",
+          "Bánh táo",
+          "Bánh sô cô la"
+        ],
+        "q": "Adam gọi món tráng miệng nào?",
+        "why": "Adam nói anh ấy muốn kem và một ly nước quả."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Một tách trà",
+          "Một ly nước quả",
+          "Một ly cà phê"
+        ],
+        "q": "Ruby gọi đồ uống nào?",
+        "why": "Ruby gọi súp gà, gà quay và một tách trà."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Không, cá nguội và súp quá mặn",
+          "Có, mọi món đều ngon",
+          "Không, vì món ăn quá ngọt"
+        ],
+        "q": "Ruby có hài lòng với món ăn không?",
+        "why": "Ruby nói cá của cô ấy bị nguội và súp quá mặn."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Có, cá rất ngon",
+          "Không, cá quá mặn",
+          "Không, cá bị nguội"
+        ],
+        "q": "Adam có thích món cá không?",
+        "why": "Adam nói món salad tươi và món cá rất ngon."
+      },
+      {
+        "a": 0,
+        "o": [
+          "Có, vì đồ ăn ngon và nhân viên thân thiện",
+          "Không, vì món tráng miệng quá ngọt",
+          "Không, vì nhân viên không thân thiện"
+        ],
+        "q": "Adam có muốn quay lại nhà hàng đó không?",
+        "why": "Adam nói anh ấy muốn quay lại vì đồ ăn ngon và các nhân viên phục vụ rất thân thiện."
+      }
+    ],
+    "rounds": [
+      {
+        "focus": "Listen for details - what does each person order?",
+        "focusVi": "Nghe chi tiết - mỗi người gọi món gì?",
+        "label": "Let's Listen 1",
+        "script": "A: Good evening. May I take your order, please?\nB: Yes, I would like the vegetable soup and the grilled fish, please.\nA: And for dessert?\nB: I would like ice cream, please. And a glass of juice.\nA: Thank you. And what would you like, madam?\nB: I would like the chicken soup, the roast chicken, and a cup of tea.",
+        "scriptVi": "A: Chào buổi tối. Tôi có thể ghi món của quý khách được không?\nB: Vâng, tôi muốn súp rau và cá nướng.\nA: Còn món tráng miệng thì sao?\nB: Tôi muốn kem. Và một ly nước quả.\nA: Cảm ơn quý khách. Còn bà muốn dùng món gì?\nB: Tôi muốn súp gà, gà quay và một tách trà."
+      },
+      {
+        "focus": "Listen for attitudes - is Ruby pleased with her meal?",
+        "focusVi": "Nghe thái độ - Ruby có hài lòng với món ăn của mình không?",
+        "label": "Let's Listen 2",
+        "script": "A: Ruby, is your food good?\nB: No, it is not. My fish is cold, and the soup is too salty.\nA: I am sorry to hear that. Do you want to talk to the waitress?\nB: Yes, I do. I would like hot fish, please.\nA: Excuse me. My friend's fish is cold. Can you bring hot fish, please?\nB: I am very sorry. I will bring hot fish right away.",
+        "scriptVi": "A: Ruby, món ăn của bạn có ngon không?\nB: Không. Cá của tôi bị nguội, và súp thì quá mặn.\nA: Tôi rất tiếc khi nghe vậy. Bạn có muốn nói chuyện với cô phục vụ không?\nB: Có. Tôi muốn món cá nóng.\nA: Xin lỗi. Cá của bạn tôi bị nguội. Cô có thể mang món cá nóng được không?\nB: Tôi rất xin lỗi. Tôi sẽ mang món cá nóng ra ngay."
+      },
+      {
+        "focus": "Listen for attitudes - did Adam like his meal?",
+        "focusVi": "Nghe thái độ - Adam có thích bữa ăn của mình không?",
+        "label": "Let's Listen 3",
+        "script": "A: Adam, did you like your meal at the new restaurant?\nB: Yes, I liked it very much. The salad was fresh, and the fish was delicious.\nA: What about the dessert? Was it good?\nB: The apple pie was good, but the ice cream was too sweet for me.\nA: Would you like to go back to that restaurant again?\nB: Yes, I would. The food was good, and the waiters were very friendly.",
+        "scriptVi": "A: Adam, bạn có thích bữa ăn ở nhà hàng mới không?\nB: Có, tôi rất thích. Món salad tươi, và món cá rất ngon.\nA: Còn món tráng miệng thì sao? Nó có ngon không?\nB: Bánh táo ngon, nhưng kem thì quá ngọt đối với tôi.\nA: Bạn có muốn quay lại nhà hàng đó nữa không?\nB: Có. Đồ ăn ngon, và các nhân viên phục vụ rất thân thiện."
+      }
+    ],
+    "skill": [
+      "Listening for details",
+      "Listening for gist",
+      "Listening for attitudes"
+    ],
+    "skillVi": "Nghe chi tiết · Nghe ý chính · Nghe thái độ",
+    "title": "Restaurants",
+    "titleVi": "Nhà hàng",
+    "warmup": {
+      "q": "What do you like to order at a restaurant? Do you like salad, steak, or fish for your main dish?",
+      "qv": "Xếp các món ăn vào nhóm món khai vị, món chính, rau, đồ uống và món tráng miệng - như bài khởi động trong sách.",
+      "words": [
+        {
+          "vi": "món salad",
+          "w": "salad"
+        },
+        {
+          "vi": "bít tết",
+          "w": "steak"
+        },
+        {
+          "vi": "cá",
+          "w": "fish"
+        },
+        {
+          "vi": "cà phê",
+          "w": "coffee"
+        },
+        {
+          "vi": "bánh ngọt",
+          "w": "cake"
+        },
+        {
+          "vi": "kem",
+          "w": "ice cream"
+        }
+      ]
+    }
+  },
+  {
+    "n": 13,
+    "title": "Small Talk",
+    "titleVi": "Chuyện trò xã giao",
+    "skill": [
+      "Listening for greetings and conversation endings",
+      "Listening for topics",
+      "Listening for details",
+      "Listening for reactions"
+    ],
+    "skillVi": "Nghe lời chào và kết thúc trò chuyện · Nghe chủ đề · Nghe chi tiết · Nghe phản ứng",
+    "warmup": {
+      "q": "Khi gặp lại một người bạn cũ, bạn thường chào hỏi và hỏi thăm những gì trước tiên?",
+      "qv": "Nghĩ xem bạn mở đầu và kết thúc một cuộc trò chuyện xã giao như thế nào - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "Keep in touch.",
+          "vi": "Giữ liên lạc nhé."
+        },
+        {
+          "w": "How have you been?",
+          "vi": "Dạo này bạn thế nào?"
+        },
+        {
+          "w": "How's everything?",
+          "vi": "Mọi việc thế nào?"
+        },
+        {
+          "w": "Nice to see you again.",
+          "vi": "Rất vui được gặp lại bạn."
+        },
+        {
+          "w": "It's been great seeing you again.",
+          "vi": "Thật tuyệt khi gặp lại bạn."
+        },
+        {
+          "w": "Talk to you later.",
+          "vi": "Nói chuyện sau nhé."
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen: is each person greeting someone or ending a conversation?",
+        "focusVi": "Nghe xem mỗi người đang chào hỏi hay kết thúc trò chuyện.",
+        "script": "A: Maya! What a nice surprise to see you at the park.\nB: Leo! Hello! It is so good to see you again.\nA: We last met at the spring fair. How is your family?\nB: They are all well. My son started school this year.\nA: That is wonderful news. Let us meet for coffee next week.\nB: Good! I look forward to your call on Sunday.",
+        "scriptVi": "A: Maya! Thật bất ngờ khi gặp bạn ở công viên.\nB: Leo! Chào bạn! Thật vui khi gặp lại bạn.\nA: Lần cuối chúng ta gặp nhau là ở hội chợ mùa xuân. Gia đình bạn thế nào?\nB: Mọi người đều khỏe. Con trai tôi bắt đầu đi học trong năm nay.\nA: Đó là tin tuyệt vời. Tuần tới chúng ta gặp nhau uống cà phê nhé.\nB: Tốt! Tôi rất mong cuộc gọi của bạn vào Chủ nhật."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for the topic of each small talk at the party.",
+        "focusVi": "Nghe chủ đề của từng cuộc trò chuyện xã giao ở bữa tiệc.",
+        "script": "A: Nora, meet my friend Omar. He just moved to this town.\nB: Hello, Omar. What do you do in your free time?\nA: I like to cook, and I play football on Saturdays.\nB: That sounds fun. Do you know a good place to eat?\nA: Yes, there is a small cafe by the river. The food is fresh.\nB: Great! I will bring two cups of tea for us.",
+        "scriptVi": "A: Nora, gặp bạn tôi là Omar. Anh ấy vừa chuyển đến thị trấn này.\nB: Chào Omar. Bạn thường làm gì lúc rảnh?\nA: Tôi thích nấu ăn, và tôi chơi bóng đá vào thứ Bảy.\nB: Nghe vui đấy. Bạn có biết chỗ nào ăn ngon không?\nA: Có, có một quán cà phê nhỏ bên sông. Đồ ăn ở đó rất tươi.\nB: Tuyệt! Tôi sẽ mang hai tách trà cho chúng ta."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for details and the speakers' reactions to the news.",
+        "focusVi": "Nghe chi tiết và phản ứng của người nói trước tin mới.",
+        "script": "A: Rita, did you hear the news? Ken got a new job.\nB: Really? That is great news! Where will he work?\nA: He will work at a small bookshop in the old town.\nB: Oh, I know that shop. Does he start next Monday?\nA: Yes, he starts on Monday morning. He is very happy.\nB: I am happy for him too. Let us send him a card.",
+        "scriptVi": "A: Rita, bạn đã nghe tin chưa? Ken đã có việc làm mới.\nB: Thật sao? Đó là tin tuyệt vời! Anh ấy sẽ làm việc ở đâu?\nA: Anh ấy sẽ làm việc ở một hiệu sách nhỏ trong khu phố cổ.\nB: Ồ, tôi biết hiệu sách đó. Anh ấy bắt đầu vào thứ Hai tới à?\nA: Đúng, anh ấy bắt đầu vào sáng thứ Hai. Anh ấy rất vui.\nB: Tôi cũng mừng cho anh ấy. Chúng ta gửi cho anh ấy một tấm thiệp nhé."
+      }
+    ],
+    "over": "Work in pairs. Pretend you have not seen your partner for a long time. Meet your partner at a small cafe on Saturday, greet each other, ask about family and what you have been doing, then end the conversation politely.",
+    "overVi": "Làm việc theo cặp: giả vờ đã lâu không gặp nhau, gặp nhau ở một quán cà phê nhỏ vào thứ Bảy, chào hỏi, hỏi thăm gia đình và việc gần đây, rồi kết thúc trò chuyện một cách lịch sự.",
+    "quiz": [
+      {
+        "q": "Maya và Leo gặp nhau ở đâu?",
+        "o": [
+          "Ở công viên",
+          "Ở thư viện",
+          "Ở hội chợ mùa xuân"
+        ],
+        "a": 0,
+        "why": "Leo chào Maya ở công viên, còn hội chợ mùa xuân chỉ là nơi họ gặp nhau lần trước."
+      },
+      {
+        "q": "Con trai của Maya có gì mới trong năm nay?",
+        "o": [
+          "Bắt đầu đi học",
+          "Bắt đầu đi làm ở thư viện",
+          "Chuyển đến thị trấn khác"
+        ],
+        "a": 0,
+        "why": "Maya nói con trai cô bắt đầu đi học trong năm nay."
+      },
+      {
+        "q": "Leo sẽ làm gì vào Chủ nhật?",
+        "o": [
+          "Gọi điện cho Maya",
+          "Đi uống cà phê với Maya",
+          "Đi làm ở thư viện"
+        ],
+        "a": 0,
+        "why": "Leo nói anh sẽ gọi cho Maya vào Chủ nhật, còn buổi cà phê thì để tuần tới."
+      },
+      {
+        "q": "Omar thường chơi bóng đá vào khi nào?",
+        "o": [
+          "Vào thứ Bảy",
+          "Vào Chủ nhật",
+          "Vào buổi tối mỗi ngày"
+        ],
+        "a": 0,
+        "why": "Omar nói anh chơi bóng đá vào thứ Bảy."
+      },
+      {
+        "q": "Nora sẽ mang gì cho hai người?",
+        "o": [
+          "Hai tách trà",
+          "Hai cốc cà phê",
+          "Hai ly nước trái cây"
+        ],
+        "a": 0,
+        "why": "Ở cuối đoạn hội thoại, Nora nói cô sẽ mang hai tách trà cho hai người."
+      },
+      {
+        "q": "Ken sẽ bắt đầu công việc mới khi nào và ở đâu?",
+        "o": [
+          "Sáng thứ Hai, ở một hiệu sách nhỏ",
+          "Sáng thứ Hai, ở một thư viện",
+          "Sáng Chủ nhật, ở một hiệu sách nhỏ"
+        ],
+        "a": 0,
+        "why": "Rita nói Ken bắt đầu vào sáng thứ Hai ở một hiệu sách nhỏ trong khu phố cổ."
+      }
+    ]
+  },
+  {
+    "n": 14,
+    "title": "Vacations",
+    "titleVi": "Kỳ nghỉ",
+    "skill": [
+      "Listening for gist",
+      "Listening for attitudes",
+      "Listening for details"
+    ],
+    "skillVi": "Nghe ý chính · Nghe thái độ · Nghe chi tiết",
+    "warmup": {
+      "q": "Bạn dùng những từ nào để nói về một kỳ nghỉ rất thích, hơi thích hay không thích?",
+      "qv": "Xếp các từ chỉ cảm nhận về kỳ nghỉ vào ba nhóm: rất thích, hơi thích và không thích - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "wonderful",
+          "vi": "tuyệt vời"
+        },
+        {
+          "w": "terrible",
+          "vi": "tệ hại"
+        },
+        {
+          "w": "fantastic",
+          "vi": "tuyệt vời"
+        },
+        {
+          "w": "pretty boring",
+          "vi": "khá chán"
+        },
+        {
+          "w": "really great",
+          "vi": "thật tuyệt"
+        },
+        {
+          "w": "not bad",
+          "vi": "không tệ"
+        },
+        {
+          "w": "very disappointing",
+          "vi": "rất thất vọng"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the gist: did Dan have a good week at home?",
+        "focusVi": "Nghe ý chính: Dan có một tuần ở nhà vui vẻ không?",
+        "script": "A: Hi, Dan. How was your week at home? Did you have fun?\nB: Not really, Amy. It rained every day, so I stayed inside.\nA: Did you watch any films or cook at home?\nB: Yes, I watched two funny films and cooked a big meal.\nA: Did you go out at all during the week?\nB: Only once. I walked to the shop on Thursday in heavy rain.",
+        "scriptVi": "A: Chào Dan. Tuần ở nhà của bạn thế nào? Bạn có vui không?\nB: Không hẳn, Amy. Trời mưa mỗi ngày, nên tôi ở trong nhà.\nA: Bạn có xem phim hay nấu ăn ở nhà không?\nB: Có, tôi xem hai bộ phim hài và nấu một bữa ăn lớn.\nA: Trong tuần bạn có ra ngoài lần nào không?\nB: Chỉ một lần. Tôi đi bộ đến cửa hàng vào thứ Năm trong cơn mưa to."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for attitudes: did Emma enjoy her trip to the hills?",
+        "focusVi": "Nghe thái độ: Emma có thích chuyến đi lên đồi của mình không?",
+        "script": "A: Emma, tell me about your trip to the hills last month.\nB: Oh, Chris, it was wonderful! The air was clean and the views were beautiful.\nA: How was the small hotel? Did you stay in a nice place?\nB: The hotel was clean and quiet, and the food was really great.\nA: Was there anything you did not like?\nB: Only the bus ride home. It was long and slow, but the trip was still great.",
+        "scriptVi": "A: Emma, kể cho tôi nghe về chuyến đi lên đồi tháng trước của bạn.\nB: Ồ, Chris, chuyến đi tuyệt vời! Không khí trong lành và phong cảnh rất đẹp.\nA: Khách sạn nhỏ đó thế nào? Bạn có ở một chỗ tốt không?\nB: Khách sạn sạch sẽ và yên tĩnh, đồ ăn thì thật ngon.\nA: Có điều gì bạn không thích không?\nB: Chỉ có chuyến xe buýt về nhà. Nó dài và chậm, nhưng chuyến đi vẫn tuyệt vời."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for details about Priya's trip to the sea.",
+        "focusVi": "Nghe chi tiết về chuyến đi ra biển của Priya.",
+        "script": "A: Priya, where did you go on your last trip?\nB: I went to the sea with my sister for five days.\nA: What did you do there every day?\nB: We swam in the morning and walked along the beach.\nA: Did you try the food? I hear the fish is very good.\nB: Yes, we ate fish every night. But I loved the quiet mornings by the sea most.",
+        "scriptVi": "A: Priya, chuyến đi gần đây nhất của bạn là đi đâu?\nB: Tôi đi ra biển với em gái trong năm ngày.\nA: Mỗi ngày các bạn làm gì ở đó?\nB: Buổi sáng chúng tôi bơi và đi dạo dọc bãi biển.\nA: Bạn có thử đồ ăn ở đó không? Tôi nghe nói cá ở đó rất ngon.\nB: Có, tối nào chúng tôi cũng ăn cá. Nhưng tôi thích nhất những buổi sáng yên tĩnh bên biển."
+      }
+    ],
+    "over": "Write answers about your last vacation: where you went, when, who you went with, how long you stayed, what you did, what you enjoyed most, what you did not like, and what food you tried. Then interview your partner with the same questions.",
+    "overVi": "Viết câu trả lời về kỳ nghỉ gần đây nhất của bạn: bạn đi đâu, khi nào, đi với ai, ở bao lâu, làm gì, thích nhất điều gì, không thích điều gì, và đã thử món ăn nào. Sau đó phỏng vấn bạn cùng lớp bằng những câu hỏi đó.",
+    "quiz": [
+      {
+        "q": "Vì sao Dan ở trong nhà cả tuần?",
+        "o": [
+          "Vì trời mưa mỗi ngày",
+          "Vì Dan bị ốm",
+          "Vì Dan phải đi làm"
+        ],
+        "a": 0,
+        "why": "Dan nói trời mưa mỗi ngày nên anh ở trong nhà."
+      },
+      {
+        "q": "Dan đã ra ngoài mấy lần trong tuần đó?",
+        "o": [
+          "Chỉ một lần",
+          "Hai lần",
+          "Mỗi ngày"
+        ],
+        "a": 0,
+        "why": "Dan nói anh chỉ ra ngoài một lần, đi bộ đến cửa hàng vào thứ Năm."
+      },
+      {
+        "q": "Emma nghĩ gì về chuyến đi lên đồi của mình?",
+        "o": [
+          "Chuyến đi tuyệt vời",
+          "Chuyến đi khá chán",
+          "Chuyến đi rất thất vọng"
+        ],
+        "a": 0,
+        "why": "Emma nói chuyến đi thật tuyệt vời, không khí trong lành và phong cảnh rất đẹp."
+      },
+      {
+        "q": "Điều duy nhất Emma không thích trong chuyến đi là gì?",
+        "o": [
+          "Chuyến xe buýt về nhà rất dài và chậm",
+          "Khách sạn ồn ào",
+          "Đồ ăn không ngon"
+        ],
+        "a": 0,
+        "why": "Emma nói khách sạn sạch và yên tĩnh, đồ ăn rất ngon; chỉ có chuyến xe buýt về nhà là dài và chậm."
+      },
+      {
+        "q": "Priya đã ở biển bao lâu và đi với ai?",
+        "o": [
+          "Năm ngày, với em gái",
+          "Năm ngày, với bạn học",
+          "Ba ngày, với em gái"
+        ],
+        "a": 0,
+        "why": "Priya nói cô đi biển với em gái trong năm ngày."
+      },
+      {
+        "q": "Priya thích nhất điều gì trong chuyến đi?",
+        "o": [
+          "Những buổi sáng yên tĩnh bên biển",
+          "Những buổi chiều đi dạo",
+          "Món cá tươi mỗi tối"
+        ],
+        "a": 0,
+        "why": "Priya trả lời cô thích nhất những buổi sáng yên tĩnh bên biển."
+      }
+    ]
+  },
+  {
+    "n": 15,
+    "title": "Apartment Living",
+    "titleVi": "Sống trong căn hộ",
+    "skill": [
+      "Listening for gist",
+      "Listening for details"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết",
+    "warmup": {
+      "q": "Trong nhà bạn, những đồ vật sau thường ở phòng nào: ghế sofa, tủ lạnh, bồn tắm, lò vi sóng?",
+      "qv": "Xếp từng đồ vật vào đúng phòng: phòng khách, phòng ngủ, phòng tắm hay nhà bếp - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "sofa",
+          "vi": "ghế sofa"
+        },
+        {
+          "w": "refrigerator",
+          "vi": "tủ lạnh"
+        },
+        {
+          "w": "bathtub",
+          "vi": "bồn tắm"
+        },
+        {
+          "w": "microwave",
+          "vi": "lò vi sóng"
+        },
+        {
+          "w": "dresser",
+          "vi": "tủ ngăn kéo"
+        },
+        {
+          "w": "mattress",
+          "vi": "nệm"
+        },
+        {
+          "w": "coffee table",
+          "vi": "bàn trà"
+        },
+        {
+          "w": "stove",
+          "vi": "bếp nấu"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the gist: what is in each room of the flat?",
+        "focusVi": "Nghe ý chính: mỗi phòng trong căn hộ có những gì?",
+        "script": "A: Hi, Omar. Come in and see my new flat.\nB: The living room is very bright! I like the big window and the soft sofa.\nA: Thank you. The sofa is new, and the coffee table is from my old flat.\nB: Is the kitchen big? Do you cook a lot at home?\nA: It is small, but it has a new stove and a big refrigerator. I cook every evening.\nB: And the bedroom? The bed looks comfortable. Is the mattress new too?",
+        "scriptVi": "A: Chào Omar. Vào xem căn hộ mới của tôi đi.\nB: Phòng khách rất sáng! Tôi thích cửa sổ lớn và chiếc ghế sofa êm.\nA: Cảm ơn bạn. Ghế sofa mới đấy, còn bàn trà thì từ căn hộ cũ của tôi.\nB: Nhà bếp có lớn không? Bạn có nấu ăn nhiều ở nhà không?\nA: Nó nhỏ, nhưng có bếp nấu mới và một tủ lạnh lớn. Tôi nấu ăn mỗi tối.\nB: Còn phòng ngủ thì sao? Chiếc giường trông thoải mái. Nệm cũng mới à?"
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for details about Nora's favourite room and its furniture.",
+        "focusVi": "Nghe chi tiết về căn phòng yêu thích của Nora và đồ đạc trong đó.",
+        "script": "A: Nora, what is your favourite room in your new flat?\nB: My bedroom, Ken. It is quiet, and I read books there every night.\nA: What does it have in it? Tell me about the furniture.\nB: It has a bed, a small dresser, and a lamp by the bed.\nA: Do you want to buy anything else for the room?\nB: Yes, I want a small bookshelf. The bathroom has a big bathtub too.",
+        "scriptVi": "A: Nora, căn phòng yêu thích của bạn trong căn hộ mới là phòng nào?\nB: Phòng ngủ, Ken. Phòng yên tĩnh, và tôi đọc sách ở đó mỗi tối.\nA: Phòng có những gì? Kể cho tôi nghe về đồ đạc trong phòng.\nB: Phòng có một chiếc giường, một tủ ngăn kéo nhỏ và một chiếc đèn bên giường.\nA: Bạn có muốn mua thêm gì cho phòng không?\nB: Có, tôi muốn một giá sách nhỏ. Phòng tắm cũng có một bồn tắm lớn."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for details: what does Dan already have, and what does he want to buy?",
+        "focusVi": "Nghe chi tiết: Dan đã có những gì, và anh ấy muốn mua gì?",
+        "script": "A: Dan, what do you already have in your new flat?\nB: I have a TV and a sofa, Amy, but I do not have a dinner table yet.\nA: Do you want to buy a small round table this week?\nB: Yes, but it must not cost too much. I also want a cheap stereo.\nA: I saw a good shop near the park. They sell tables and stereos.\nB: Great! Let us go there on Saturday morning and look together.",
+        "scriptVi": "A: Dan, trong căn hộ mới bạn đã có những gì?\nB: Tôi có một chiếc ti vi và một ghế sofa, Amy, nhưng tôi chưa có bàn ăn.\nA: Bạn có muốn mua một bàn tròn nhỏ trong tuần này không?\nB: Có, nhưng nó không được quá đắt. Tôi cũng muốn một máy nghe nhạc rẻ.\nA: Tôi thấy một cửa hàng tốt gần công viên. Họ bán bàn và máy nghe nhạc.\nB: Tuyệt! Chúng ta cùng đến đó vào sáng thứ Bảy xem nhé."
+      }
+    ],
+    "over": "Think about your favourite room at home and answer: which room it is, why you like it, what it has in it, how much time you spend there, and what you like to do there. Then describe the room while your partner draws it.",
+    "overVi": "Nghĩ về căn phòng yêu thích của bạn ở nhà và trả lời: đó là phòng nào, vì sao bạn thích, trong phòng có gì, bạn dành bao nhiêu thời gian ở đó, và bạn thích làm gì ở đó. Sau đó tả căn phòng để bạn cùng lớp vẽ lại.",
+    "quiz": [
+      {
+        "q": "Phòng khách trong căn hộ mới có gì?",
+        "o": [
+          "Cửa sổ lớn và ghế sofa êm",
+          "Bếp nấu mới và tủ lạnh lớn",
+          "Giường thoải mái và nệm mới"
+        ],
+        "a": 0,
+        "why": "Omar khen phòng khách sáng, có cửa sổ lớn và ghế sofa êm; bếp nấu và tủ lạnh thuộc về nhà bếp."
+      },
+      {
+        "q": "Chiếc bàn trà trong phòng khách từ đâu mà có?",
+        "o": [
+          "Từ căn hộ cũ của chủ nhà",
+          "Mua mới cùng ghế sofa",
+          "Mượn của Omar"
+        ],
+        "a": 0,
+        "why": "Chủ nhà nói ghế sofa mới, còn bàn trà thì từ căn hộ cũ của chủ nhà."
+      },
+      {
+        "q": "Căn phòng yêu thích của Nora là phòng nào và vì sao?",
+        "o": [
+          "Phòng ngủ, vì yên tĩnh để đọc sách",
+          "Phòng tắm, vì có bồn tắm lớn",
+          "Phòng khách, vì có cửa sổ lớn"
+        ],
+        "a": 0,
+        "why": "Nora nói phòng ngủ là phòng yêu thích vì yên tĩnh, cô đọc sách ở đó mỗi tối."
+      },
+      {
+        "q": "Nora muốn mua thêm gì cho phòng ngủ?",
+        "o": [
+          "Một giá sách nhỏ",
+          "Một chiếc giường mới",
+          "Một chiếc đèn mới"
+        ],
+        "a": 0,
+        "why": "Nora nói cô muốn một giá sách nhỏ; trong phòng cô đã có giường, tủ ngăn kéo và đèn."
+      },
+      {
+        "q": "Dan đã có gì trong căn hộ mới và còn thiếu gì?",
+        "o": [
+          "Đã có ti vi và ghế sofa, còn thiếu bàn ăn",
+          "Đã có bàn ăn và máy nghe nhạc, còn thiếu ti vi",
+          "Đã có bàn tròn và máy nghe nhạc, còn thiếu ghế sofa"
+        ],
+        "a": 0,
+        "why": "Dan nói anh có ti vi và ghế sofa nhưng chưa có bàn ăn, và anh cũng chưa có máy nghe nhạc."
+      },
+      {
+        "q": "Dan và Amy dự định đi đâu vào sáng thứ Bảy?",
+        "o": [
+          "Đến cửa hàng gần công viên để xem bàn và máy nghe nhạc",
+          "Đến công viên để đi dạo",
+          "Đến nhà Amy để mang bàn về"
+        ],
+        "a": 0,
+        "why": "Amy nói có một cửa hàng tốt gần công viên bán bàn và máy nghe nhạc, hai người sẽ đến đó sáng thứ Bảy."
+      }
+    ]
+  },
+  {
+    "n": 16,
+    "title": "Movies",
+    "titleVi": "Phim ảnh",
+    "skill": [
+      "Listening for likes and dislikes",
+      "Listening for gist",
+      "Listening for attitudes",
+      "Listening for opinions",
+      "Listening for details"
+    ],
+    "skillVi": "Nghe thích và không thích · Nghe ý chính · Nghe thái độ · Nghe ý kiến · Nghe chi tiết",
+    "warmup": {
+      "q": "Bạn thích loại phim nào nhất và không thích loại phim nào? Vì sao?",
+      "qv": "Đánh dấu mức độ thích của bạn với từng loại phim rồi so sánh với bạn cùng lớp - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "animated movie",
+          "vi": "phim hoạt hình"
+        },
+        {
+          "w": "comedy",
+          "vi": "phim hài"
+        },
+        {
+          "w": "horror",
+          "vi": "phim kinh dị"
+        },
+        {
+          "w": "western",
+          "vi": "phim miền Tây"
+        },
+        {
+          "w": "action",
+          "vi": "phim hành động"
+        },
+        {
+          "w": "romance",
+          "vi": "phim tình cảm"
+        },
+        {
+          "w": "musical",
+          "vi": "phim ca nhạc"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for likes and dislikes about kinds of films.",
+        "focusVi": "Nghe xem mỗi người thích và không thích loại phim nào.",
+        "script": "A: Emma, what kinds of films do you like best?\nB: I like comedies a lot, Chris. They make me laugh.\nA: What about horror films? Do you like those?\nB: No, I do not like horror films at all. They are too scary for me.\nA: What about action films? I love the fast cars and loud music.\nB: I like action a little, but I love animated films most.\nA: Which animated film is your favourite?\nB: The one about a brave cat and a magic garden.",
+        "scriptVi": "A: Emma, bạn thích loại phim nào nhất?\nB: Tôi rất thích phim hài, Chris. Phim hài làm tôi cười.\nA: Còn phim kinh dị thì sao? Bạn có thích không?\nB: Không, tôi hoàn toàn không thích phim kinh dị. Chúng quá đáng sợ với tôi.\nA: Còn phim hành động? Tôi thích những chiếc xe chạy nhanh và âm nhạc sôi động.\nB: Tôi thích phim hành động một chút, nhưng tôi yêu phim hoạt hình nhất.\nA: Bộ phim hoạt hình nào là phim yêu thích của bạn?\nB: Bộ phim về một chú mèo dũng cảm và khu vườn kỳ diệu."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for the gist and opinions about a science fiction film.",
+        "focusVi": "Nghe ý chính và ý kiến về một bộ phim khoa học viễn tưởng.",
+        "script": "A: Jack, I saw a new science fiction film last night. \nB: Really, Lily? What was the story about?\nA: It was about people who travel to a far planet to find a new home.\nB: Were the actors good? What about the music?\nA: The actors were good, and the music was beautiful.\nB: What about the special effects? Were they good too?\nA: They were the best part! The ships looked so real.\nB: Now I want to see it. Will you come with me on Friday?",
+        "scriptVi": "A: Jack, tối qua tôi xem một bộ phim khoa học viễn tưởng mới. \nB: Thật sao, Lily? Câu chuyện phim nói về điều gì?\nA: Phim kể về những người du hành đến một hành tinh xa để tìm ngôi nhà mới.\nB: Các diễn viên có hay không? Còn âm nhạc thì sao?\nA: Các diễn viên chính hay, và âm nhạc cũng rất đẹp.\nB: Còn hiệu ứng đặc biệt thì sao? Có tốt không?\nA: Đó là phần hay nhất! Những con tàu trông rất thật.\nB: Giờ tôi muốn xem phim đó. Thứ Sáu bạn đi cùng tôi nhé?"
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for attitudes and details about a romance film.",
+        "focusVi": "Nghe thái độ và chi tiết về một bộ phim tình cảm.",
+        "script": "A: Omar, did you see the romance film at the cinema yesterday?\nB: Yes, Priya. I liked the story, but I did not like the ending.\nA: Oh, why not? Was the ending sad?\nB: Yes, it was very sad. The two friends said goodbye at the train station.\nA: Did you like the music? Where does the story take place?\nB: The songs were lovely. It takes place in a small town by the sea, with white houses.",
+        "scriptVi": "A: Omar, hôm qua bạn có xem bộ phim tình cảm ở rạp không?\nB: Có, Priya. Tôi thích câu chuyện, nhưng tôi không thích đoạn kết.\nA: Ồ, vì sao? Đoạn kết buồn à?\nB: Đúng, rất buồn. Hai người bạn nói lời tạm biệt ở ga tàu.\nA: Bạn có thích âm nhạc không? Câu chuyện diễn ra ở đâu?\nB: Các bài hát rất hay. Câu chuyện diễn ra ở một thị trấn nhỏ bên biển, với những ngôi nhà trắng."
+      }
+    ],
+    "over": "Answer a short movie survey: how often you go to the cinema, what kinds of films you like and do not like, a film you really loved, and your favourite actor and actress. Then ask your group the same questions.",
+    "overVi": "Trả lời một bảng hỏi ngắn về phim: bạn đi xem phim ở rạp bao lâu một lần, bạn thích và không thích loại phim nào, một bộ phim bạn rất yêu thích, và nam/nữ diễn viên yêu thích của bạn. Sau đó hỏi nhóm của bạn những câu hỏi đó.",
+    "quiz": [
+      {
+        "q": "Emma thích loại phim nào nhất và không thích loại nào?",
+        "o": [
+          "Thích nhất phim hài, không thích phim kinh dị",
+          "Thích nhất phim kinh dị, không thích phim hài",
+          "Thích nhất phim hành động, không thích phim hoạt hình"
+        ],
+        "a": 0,
+        "why": "Emma nói cô rất thích phim hài và hoàn toàn không thích phim kinh dị vì chúng quá đáng sợ."
+      },
+      {
+        "q": "Bộ phim hoạt hình yêu thích của Emma kể về điều gì?",
+        "o": [
+          "Một chú mèo dũng cảm và khu vườn kỳ diệu",
+          "Một chiếc xe chạy nhanh và âm nhạc sôi động",
+          "Một người bạn nói lời tạm biệt ở ga tàu"
+        ],
+        "a": 0,
+        "why": "Emma nói phim yêu thích của cô kể về một chú mèo dũng cảm và khu vườn kỳ diệu."
+      },
+      {
+        "q": "Bộ phim khoa học viễn tưởng mà Lily xem kể về điều gì?",
+        "o": [
+          "Những người du hành đến hành tinh xa để tìm nhà mới",
+          "Những người bạn nói lời tạm biệt ở ga tàu",
+          "Một chú mèo dũng cảm và khu vườn kỳ diệu"
+        ],
+        "a": 0,
+        "why": "Lily nói phim kể về những người du hành đến một hành tinh xa để tìm ngôi nhà mới."
+      },
+      {
+        "q": "Theo Lily, phần nào hay nhất trong bộ phim khoa học viễn tưởng?",
+        "o": [
+          "Hiệu ứng đặc biệt",
+          "Âm nhạc",
+          "Diễn viên chính"
+        ],
+        "a": 0,
+        "why": "Lily nói hiệu ứng đặc biệt là phần hay nhất, những con tàu trông rất thật."
+      },
+      {
+        "q": "Omar nghĩ gì về bộ phim tình cảm?",
+        "o": [
+          "Thích câu chuyện nhưng không thích đoạn kết",
+          "Thích đoạn kết nhưng không thích câu chuyện",
+          "Không thích cả câu chuyện lẫn âm nhạc"
+        ],
+        "a": 0,
+        "why": "Omar nói anh thích câu chuyện nhưng không thích đoạn kết buồn, còn các bài hát thì rất hay."
+      },
+      {
+        "q": "Câu chuyện trong bộ phim tình cảm diễn ra ở đâu?",
+        "o": [
+          "Ở một thị trấn nhỏ bên biển",
+          "Ở một thành phố lớn",
+          "Ở một hành tinh xa"
+        ],
+        "a": 0,
+        "why": "Omar nói câu chuyện diễn ra ở một thị trấn nhỏ bên biển, với những ngôi nhà trắng."
+      }
+    ]
+  },
+  {
+    "n": 17,
+    "title": "The Weather",
+    "titleVi": "Thời tiết",
+    "skill": [
+      "Listening for gist",
+      "Listening for details",
+      "Listening and making predictions"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết · Nghe và dự đoán",
+    "warmup": {
+      "q": "Thời tiết ở thành phố của bạn trong các tháng 5, 8, 10 và 12 thường như thế nào?",
+      "qv": "Dùng các từ chỉ thời tiết để tả từng tháng trong năm ở nơi bạn sống - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "rainy",
+          "vi": "có mưa"
+        },
+        {
+          "w": "sunny",
+          "vi": "có nắng"
+        },
+        {
+          "w": "windy",
+          "vi": "có gió"
+        },
+        {
+          "w": "humid",
+          "vi": "ẩm"
+        },
+        {
+          "w": "snowy",
+          "vi": "có tuyết"
+        },
+        {
+          "w": "cloudy",
+          "vi": "nhiều mây"
+        },
+        {
+          "w": "hot",
+          "vi": "nóng"
+        },
+        {
+          "w": "cold",
+          "vi": "lạnh"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the gist and details of the weather report for three cities.",
+        "focusVi": "Nghe ý chính và chi tiết của bản tin thời tiết cho ba thành phố.",
+        "script": "A: Good morning. Here is the weather for today in three cities.\nB: In London, it is cold and cloudy: low 3 degrees, high 8 degrees.\nA: In Sydney, it is warm and sunny: low 18 degrees, high 26 degrees.\nB: In Toronto, it is snowy and windy: low minus 5 degrees, high 0 degrees.\nA: So, take a warm coat if you go out in London or Toronto today.\nB: Yes, and in Sydney, you can wear a light shirt and enjoy the sun.",
+        "scriptVi": "A: Chào buổi sáng. Đây là thời tiết hôm nay ở ba thành phố.\nB: Ở Luân Đôn, trời lạnh và nhiều mây: thấp nhất 3 độ, cao nhất 8 độ.\nA: Ở Sydney, trời ấm và có nắng: thấp nhất 18 độ, cao nhất 26 độ.\nB: Ở Toronto, trời có tuyết và gió: thấp nhất âm 5 độ, cao nhất 0 độ.\nA: Vì vậy, hãy mang áo khoác ấm nếu hôm nay bạn ra ngoài ở Luân Đôn hay Toronto.\nB: Đúng vậy, còn ở Sydney, bạn có thể mặc áo sơ mi nhẹ và tận hưởng nắng."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for details: what will Leo wear or take in the rain?",
+        "focusVi": "Nghe chi tiết: Leo sẽ mặc gì và mang gì khi trời mưa?",
+        "script": "A: Leo, look outside! It is raining hard, and the sky is very dark.\nB: Oh no, Maya. I wanted to walk to the park this morning.\nA: Take an umbrella and wear your raincoat. You will stay dry.\nB: Good idea. Should I wear my warm boots too?\nA: Yes, the streets are wet. I think the rain will stop after lunch.\nB: Good. Then we can walk in the park later and enjoy the fresh air.",
+        "scriptVi": "A: Leo, nhìn ra ngoài kìa! Trời đang mưa to, và bầu trời rất tối.\nB: Ôi không, Maya. Sáng nay tôi muốn đi bộ đến công viên.\nA: Mang theo ô và mặc áo mưa vào. Bạn sẽ không bị ướt.\nB: Ý hay đấy. Tôi có nên đi đôi ủng ấm nữa không?\nA: Có, đường phố ướt. Tôi nghĩ mưa sẽ tạnh sau bữa trưa.\nB: Tốt. Vậy lát nữa chúng ta có thể đi dạo trong công viên và tận hưởng không khí trong lành."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen and predict: is the weather getting better or worse?",
+        "focusVi": "Nghe và dự đoán: thời tiết đang tốt lên hay xấu đi?",
+        "script": "A: Ken, is the weather getting better or worse today?\nB: It is getting better, Rita. This morning it was cold and windy.\nA: Yes, I remember. I wore two warm sweaters this morning!\nB: Now the sun is out, and it is getting warmer every hour.\nA: Will it stay warm tomorrow too? Will there be rain?\nB: Tomorrow will be sunny and warm, with no rain. Let us have lunch outside in the garden.",
+        "scriptVi": "A: Ken, hôm nay thời tiết đang tốt lên hay xấu đi?\nB: Thời tiết đang tốt lên, Rita. Sáng nay trời lạnh và có gió.\nA: Đúng, tôi nhớ. Sáng nay tôi mặc hai chiếc áo len ấm!\nB: Giờ nắng đã lên, và trời ấm dần lên từng giờ.\nA: Ngày mai trời có ấm nữa không? Có mưa không?\nB: Ngày mai trời sẽ nắng và ấm, không mưa. Chúng ta ăn trưa ngoài trời trong vườn nhé."
+      }
+    ],
+    "over": "Work in pairs. Think of two fun things to do on each of these days: a cool sunny day, a cool rainy day, a hot rainy day, a hot sunny day, a cold snowy day, and a cold sunny day. Then compare your ideas with another pair.",
+    "overVi": "Làm việc theo cặp: nghĩ hai việc vui để làm trong mỗi ngày sau: ngày mát có nắng, ngày mát có mưa, ngày nóng có mưa, ngày nóng có nắng, ngày lạnh có tuyết, và ngày lạnh có nắng. Sau đó so sánh ý tưởng của bạn với một cặp khác.",
+    "quiz": [
+      {
+        "q": "Theo bản tin thời tiết, hôm nay ở Luân Đôn trời thế nào?",
+        "o": [
+          "Lạnh và nhiều mây, 3 đến 8 độ",
+          "Ấm và có nắng, 18 đến 26 độ",
+          "Có tuyết và gió, âm 5 đến 0 độ"
+        ],
+        "a": 0,
+        "why": "Bản tin nói ở Luân Đôn trời lạnh và nhiều mây, nhiệt độ thấp nhất 3 độ và cao nhất 8 độ."
+      },
+      {
+        "q": "Thành phố nào trong bản tin có nhiệt độ cao nhất hôm nay?",
+        "o": [
+          "Sydney, cao nhất 26 độ",
+          "Luân Đôn, cao nhất 8 độ",
+          "Toronto, cao nhất 0 độ"
+        ],
+        "a": 0,
+        "why": "Sydney có nhiệt độ cao nhất là 26 độ, cao hơn Luân Đôn (8 độ) và Toronto (0 độ)."
+      },
+      {
+        "q": "Maya khuyên Leo mang gì và mặc gì khi trời mưa?",
+        "o": [
+          "Mang ô và mặc áo mưa",
+          "Mang kính râm và mặc áo sơ mi nhẹ",
+          "Mang ô và mặc áo len ấm"
+        ],
+        "a": 0,
+        "why": "Maya nói Leo hãy mang ô và mặc áo mưa để không bị ướt."
+      },
+      {
+        "q": "Mưa sẽ tạnh khi nào theo dự đoán của Maya?",
+        "o": [
+          "Sau bữa trưa",
+          "Trước bữa trưa",
+          "Vào buổi tối"
+        ],
+        "a": 0,
+        "why": "Maya nói mưa sẽ tạnh sau bữa trưa."
+      },
+      {
+        "q": "Thời tiết hôm nay đang tốt lên hay xấu đi, theo Ken?",
+        "o": [
+          "Đang tốt lên",
+          "Đang xấu đi",
+          "Không thay đổi"
+        ],
+        "a": 0,
+        "why": "Ken nói thời tiết đang tốt lên: sáng nay lạnh và có gió, giờ nắng đã lên và trời ấm dần."
+      },
+      {
+        "q": "Ken và Rita dự định ăn trưa ở đâu vào ngày mai?",
+        "o": [
+          "Ngoài trời trong vườn",
+          "Trong nhà bếp",
+          "Ở một quán cà phê nhỏ"
+        ],
+        "a": 0,
+        "why": "Ken nói ngày mai hai người có thể ăn trưa ngoài trời trong vườn vì trời nắng và ấm, không mưa."
+      }
+    ]
+  },
+  {
+    "n": 18,
+    "title": "Shopping",
+    "titleVi": "Mua sắm",
+    "skill": [
+      "Listening for gist",
+      "Listening and making predictions",
+      "Listening for details"
+    ],
+    "skillVi": "Nghe ý chính · Nghe và dự đoán · Nghe chi tiết",
+    "warmup": {
+      "q": "Bạn có thể mua đĩa CD, tạp chí, cà vạt, dây chuyền và rau củ ở những cửa hàng nào?",
+      "qv": "Nối mỗi món đồ với đúng cửa hàng bán nó, rồi thêm một món đồ cho mỗi cửa hàng - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "CD",
+          "vi": "đĩa CD"
+        },
+        {
+          "w": "magazines",
+          "vi": "tạp chí"
+        },
+        {
+          "w": "tie",
+          "vi": "cà vạt"
+        },
+        {
+          "w": "necklace",
+          "vi": "dây chuyền"
+        },
+        {
+          "w": "vegetables",
+          "vi": "rau củ"
+        },
+        {
+          "w": "envelopes",
+          "vi": "phong bì"
+        },
+        {
+          "w": "running shoes",
+          "vi": "giày chạy bộ"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the gist: what is the customer shopping for?",
+        "focusVi": "Nghe ý chính: khách hàng đang mua gì?",
+        "script": "A: Good morning. Can I help you find something today?\nB: Yes, please. I am looking for a warm jacket for the winter.\nA: We have jackets by the window. What size do you wear?\nB: I wear a medium size. Do you have this blue jacket in medium?\nA: Let me check. Yes, here it is. Would you like to try it on?\nB: Yes, thank you. Where is the changing room?\nA: The changing room is at the back of the shop, next to the shoes.",
+        "scriptVi": "A: Chào buổi sáng. Tôi có thể giúp bạn tìm gì hôm nay không?\nB: Được, làm ơn. Tôi đang tìm một chiếc áo khoác ấm cho mùa đông.\nA: Áo khoác ở bên cửa sổ. Bạn mặc cỡ nào?\nB: Tôi mặc cỡ vừa. Bạn có chiếc áo khoác xanh này cỡ vừa không?\nA: Để tôi kiểm tra. Có, đây rồi. Bạn có muốn thử không?\nB: Có, cảm ơn. Phòng thử đồ ở đâu?\nA: Phòng thử đồ ở phía sau cửa hàng, bên cạnh khu giày."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen and predict what the clerk says next.",
+        "focusVi": "Nghe và dự đoán nhân viên bán hàng sẽ nói gì tiếp theo.",
+        "script": "A: Excuse me, how much is this red scarf?\nB: It is twelve dollars. It is made of soft wool, and it is very warm.\nA: Twelve dollars is a good price. I would like to buy it.\nB: Great! Would you like to pay with cash or by card?\nA: I will pay by card. Do you have a gift bag? It is a present for my mother.\nB: Yes, we have small gift bags. I will put it in one for you now.",
+        "scriptVi": "A: Xin lỗi, chiếc khăn quàng đỏ này giá bao nhiêu?\nB: Mười hai đô la. Khăn làm bằng len mềm, và rất ấm.\nA: Mười hai đô la là giá tốt. Tôi muốn mua nó.\nB: Tuyệt! Bạn muốn trả bằng tiền mặt hay bằng thẻ?\nA: Tôi sẽ trả bằng thẻ. Bạn có túi quà không? Đây là món quà cho mẹ tôi.\nB: Có, chúng tôi có túi quà nhỏ. Tôi sẽ bỏ khăn vào một túi quà cho bạn ngay."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for details about the backpack: colour, price, and pockets.",
+        "focusVi": "Nghe chi tiết về ba lô: màu sắc, giá tiền và các ngăn.",
+        "script": "A: Hi, I am looking for a backpack for school. Can you help me?\nB: Of course. We have black, green, and brown. What colour do you like?\nA: I like the green one. Is it strong? I carry many books every day.\nB: Yes, it is very strong. It has two big pockets and a bottle holder.\nA: How much does it cost? Does it have a small pocket inside?\nB: It costs twenty-five dollars, on sale this week. It has a small pocket for keys and a phone.",
+        "scriptVi": "A: Chào bạn, tôi đang tìm một chiếc ba lô đi học. Bạn có thể giúp tôi không?\nB: Được chứ. Chúng tôi có màu đen, xanh lá và nâu. Bạn thích màu nào?\nA: Tôi thích cái màu xanh lá. Nó có chắc không? Tôi mang nhiều sách mỗi ngày.\nB: Có, nó rất chắc. Nó có hai ngăn lớn và một chỗ để chai nước.\nA: Nó giá bao nhiêu? Bên trong nó có ngăn nhỏ không?\nB: Hai mươi lăm đô la, đang giảm giá trong tuần này. Nó có một ngăn nhỏ để chìa khóa và điện thoại."
+      }
+    ],
+    "over": "Work in groups of four. Where is a good place in your town or city to buy jeans, books, shoes, birthday cards, cameras, sports equipment, jewelry, and makeup? Write your suggestions, then compare them with another group.",
+    "overVi": "Làm việc theo nhóm bốn người: ở đâu là chỗ tốt trong thành phố của bạn để mua quần jeans, sách, giày, thiệp sinh nhật, máy ảnh, dụng cụ thể thao, đồ trang sức và mỹ phẩm? Viết gợi ý của nhóm, rồi so sánh với một nhóm khác.",
+    "quiz": [
+      {
+        "q": "Khách hàng trong đoạn hội thoại đầu tiên đang tìm mua gì?",
+        "o": [
+          "Một chiếc áo khoác ấm cỡ vừa",
+          "Một chiếc khăn quàng đỏ",
+          "Một chiếc ba lô xanh lá"
+        ],
+        "a": 0,
+        "why": "Khách hàng nói cô đang tìm một chiếc áo khoác ấm cho mùa đông, mặc cỡ vừa, màu xanh."
+      },
+      {
+        "q": "Phòng thử đồ ở đâu trong cửa hàng?",
+        "o": [
+          "Ở phía sau cửa hàng, bên cạnh khu giày",
+          "Ở phía trước cửa hàng, bên cửa sổ",
+          "Ở tầng trên, bên cạnh khu áo khoác"
+        ],
+        "a": 0,
+        "why": "Nhân viên nói phòng thử đồ ở phía sau cửa hàng, bên cạnh khu giày."
+      },
+      {
+        "q": "Chiếc khăn quàng đỏ giá bao nhiêu và làm bằng gì?",
+        "o": [
+          "Mười hai đô la, bằng len mềm",
+          "Hai mươi lăm đô la, bằng len mềm",
+          "Mười hai đô la, bằng lụa"
+        ],
+        "a": 0,
+        "why": "Nhân viên nói khăn giá mười hai đô la, làm bằng len mềm và rất ấm."
+      },
+      {
+        "q": "Khách hàng mua khăn quàng để làm gì?",
+        "o": [
+          "Làm quà cho mẹ của cô",
+          "Để mặc trong mùa đông",
+          "Để tặng cho bạn cùng lớp"
+        ],
+        "a": 0,
+        "why": "Khách hàng hỏi xin túi quà vì chiếc khăn là món quà cho mẹ cô."
+      },
+      {
+        "q": "Chiếc ba lô xanh lá có những gì?",
+        "o": [
+          "Hai ngăn lớn, chỗ để chai nước và một ngăn nhỏ bên trong",
+          "Một ngăn lớn và một ngăn nhỏ bên trong",
+          "Hai ngăn lớn và một túi quà"
+        ],
+        "a": 0,
+        "why": "Nhân viên nói ba lô có hai ngăn lớn, một chỗ để chai nước, và một ngăn nhỏ bên trong để chìa khóa và điện thoại."
+      },
+      {
+        "q": "Chiếc ba lô xanh lá giá bao nhiêu?",
+        "o": [
+          "Hai mươi lăm đô la, đang giảm giá",
+          "Mười hai đô la, đang giảm giá",
+          "Hai mươi lăm đô la, giá gốc"
+        ],
+        "a": 0,
+        "why": "Nhân viên nói ba lô giá hai mươi lăm đô la và đang giảm giá trong tuần này."
+      }
+    ]
+  },
+  {
+    "n": 19,
+    "title": "Using the Telephone",
+    "titleVi": "Dùng điện thoại",
+    "skill": [
+      "Listening for gist",
+      "Listening for details",
+      "Listening for attitudes"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết · Nghe thái độ",
+    "warmup": {
+      "q": "Bạn thường gọi điện cho ai? Khi người bạn cần gặp không có nhà, bạn sẽ nói gì?",
+      "qv": "Nói về những cuộc gọi điện thoại của bạn - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "leave a message",
+          "vi": "để lại lời nhắn"
+        },
+        {
+          "w": "call back",
+          "vi": "gọi lại"
+        },
+        {
+          "w": "wrong number",
+          "vi": "nhầm số"
+        },
+        {
+          "w": "telephone number",
+          "vi": "số điện thoại"
+        },
+        {
+          "w": "speak to someone",
+          "vi": "nói chuyện với ai đó"
+        },
+        {
+          "w": "just a minute",
+          "vi": "chờ một chút"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the main idea of the call",
+        "focusVi": "Nghe ý chính của cuộc gọi.",
+        "script": "A: Hello, this is Mark. Can I speak to Lisa, please?\nB: Hello, Mark. This is Lisa's mother. Lisa is out now. She is at her English class.\nA: Oh, I see. Can I leave a message, please?\nB: Yes, of course. What is the message?\nA: Please tell her to call me back tonight. My number is 555-0162.\nB: 555-0162. I will tell her when she comes home.\nA: Thank you very much. Goodbye.\nB: Goodbye, Mark.",
+        "scriptVi": "A: Xin chào, tôi là Mark. Tôi có thể nói chuyện với Lisa được không?\nB: Chào Mark. Tôi là mẹ của Lisa. Lisa đang đi vắng. Bạn ấy đang ở lớp học tiếng Anh.\nA: Ồ, tôi hiểu rồi. Tôi có thể để lại lời nhắn được không?\nB: Được chứ. Lời nhắn là gì?\nA: Làm ơn bảo bạn ấy gọi lại cho tôi tối nay. Số của tôi là 555-0148.\nB: 555-0148. Tôi sẽ nói với bạn ấy khi bạn ấy về nhà.\nA: Cảm ơn cô rất nhiều. Tạm biệt.\nB: Tạm biệt, Mark."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for the telephone number and the meeting time",
+        "focusVi": "Nghe số điện thoại và giờ hẹn.",
+        "script": "A: Hello, this is David. Is Paul there, please?\nB: I am sorry. Paul is busy now. He is cooking dinner.\nA: That is OK. Can you ask him to call me at seven tonight?\nB: At seven tonight? Yes, I can. What is it about?\nA: We want to change our meeting to Friday at ten in the morning.\nB: Friday at ten. I will write it on the note.\nA: Thank you. My number is 555-0923.\nB: OK, 555-0923. I will give him the message.",
+        "scriptVi": "A: Xin chào, tôi là David. Paul có ở đó không?\nB: Tôi xin lỗi. Paul đang bận. Anh ấy đang nấu bữa tối.\nA: Không sao. Bạn có thể bảo anh ấy gọi lại cho tôi lúc bảy giờ tối nay được không?\nB: Lúc bảy giờ tối nay à? Được, tôi có thể. Có việc gì vậy?\nA: Chúng tôi muốn đổi cuộc hẹn sang sáng thứ Sáu lúc mười giờ.\nB: Thứ Sáu lúc mười giờ. Tôi sẽ ghi lại vào giấy nhắn.\nA: Cảm ơn bạn. Số của tôi là 555-0923.\nB: Được rồi, 555-0923. Tôi sẽ chuyển lời nhắn cho anh ấy."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen to how Nina feels after the call",
+        "focusVi": "Nghe xem Nina cảm thấy thế nào sau cuộc gọi.",
+        "script": "A: Hi, Nina. This is Kevin. I have two movie tickets for Saturday night. Do you want to come with me?\nB: Oh, Kevin! Yes, I would love to! What time does the movie start?\nA: It starts at eight. I can pick you up at seven at your house.\nB: That is great. Thank you so much for calling me. I am so happy!\nA: You are welcome. See you on Saturday night!\nB: See you then. I cannot wait!",
+        "scriptVi": "A: Chào Nina. Tôi là Kevin. Tôi có hai vé xem phim cho tối thứ Bảy. Bạn có muốn đi cùng tôi không?\nB: Ồ, Kevin! Vâng, tôi rất muốn đi! Phim bắt đầu lúc mấy giờ?\nA: Phim bắt đầu lúc tám giờ. Tôi có thể đến đón bạn lúc bảy giờ ở nhà bạn.\nB: Tuyệt quá. Cảm ơn bạn rất nhiều vì đã gọi cho tôi. Tôi vui lắm!\nA: Không có gì. Hẹn gặp bạn tối thứ Bảy nhé!\nB: Hẹn gặp bạn lúc đó. Tôi nóng lòng chờ đợi!"
+      }
+    ],
+    "over": "Work in pairs. Think of three people you called last week. Take turns asking and answering: Who did you call? When did you call? Why did you call?",
+    "overVi": "Làm việc theo cặp. Hãy nghĩ về ba người bạn đã gọi điện tuần trước. Lần lượt hỏi và trả lời: Bạn đã gọi cho ai? Bạn gọi khi nào? Bạn gọi để làm gì?",
+    "quiz": [
+      {
+        "q": "Lisa đang ở đâu?",
+        "o": [
+          "Ở lớp học tiếng Anh",
+          "Ở nhà",
+          "Ở thư viện"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, mẹ của Lisa nói Lisa đang ở lớp học tiếng Anh."
+      },
+      {
+        "q": "Mark muốn Lisa làm gì?",
+        "o": [
+          "Gọi lại cho anh ấy tối nay",
+          "Đến nhà anh ấy chơi",
+          "Mua vé xem phim giúp anh ấy"
+        ],
+        "a": 0,
+        "why": "Mark nhờ mẹ Lisa bảo Lisa gọi lại cho anh ấy tối nay."
+      },
+      {
+        "q": "Số điện thoại của Mark là gì?",
+        "o": [
+          "555-0162",
+          "555-0184",
+          "555-0923"
+        ],
+        "a": 0,
+        "why": "Mark đọc rõ số của mình là 555-0162; 555-0923 là số của David."
+      },
+      {
+        "q": "Paul đang làm gì?",
+        "o": [
+          "Nấu bữa tối",
+          "Đang ngủ",
+          "Đi mua sách"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, Paul đang bận vì anh ấy đang nấu bữa tối."
+      },
+      {
+        "q": "David muốn đổi cuộc hẹn sang khi nào?",
+        "o": [
+          "Sáng thứ Sáu lúc mười giờ",
+          "Tối thứ Bảy lúc bảy giờ",
+          "Sáng thứ Hai lúc chín giờ"
+        ],
+        "a": 0,
+        "why": "David nói muốn đổi cuộc hẹn sang thứ Sáu lúc mười giờ sáng."
+      },
+      {
+        "q": "Nina cảm thấy thế nào sau cuộc gọi của Kevin?",
+        "o": [
+          "Rất vui",
+          "Không vui",
+          "Tức giận"
+        ],
+        "a": 0,
+        "why": "Nina nói cô ấy rất vui vì Kevin mời cô ấy đi xem phim tối thứ Bảy."
+      }
+    ]
+  },
+  {
+    "n": 20,
+    "title": "Describing Things",
+    "titleVi": "Miêu tả đồ vật",
+    "skill": [
+      "Listening for gist",
+      "Listening for details"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết",
+    "warmup": {
+      "q": "Bạn đã bao giờ để quên đồ trên xe buýt hay xe taxi chưa? Bạn sẽ miêu tả món đồ đó như thế nào?",
+      "qv": "Nói về một món đồ bạn từng để quên và cách miêu tả nó - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "briefcase",
+          "vi": "cặp tài liệu"
+        },
+        {
+          "w": "handbag",
+          "vi": "túi xách tay"
+        },
+        {
+          "w": "suitcase",
+          "vi": "va li"
+        },
+        {
+          "w": "backpack",
+          "vi": "ba lô"
+        },
+        {
+          "w": "wallet",
+          "vi": "ví"
+        },
+        {
+          "w": "leather strap",
+          "vi": "quai da"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for what the bag looks like",
+        "focusVi": "Nghe xem chiếc túi trông như thế nào.",
+        "script": "A: Hello. I left my bag in your taxi this morning.\nB: I am sorry to hear that. What does your bag look like?\nA: It is a small red backpack with a striped design.\nB: Is there anything inside the bag?\nA: Yes, there is a blue water bottle and a small book inside.\nB: I see it. It is under the back seat of the taxi.\nA: Thank you! Can I pick it up at three o'clock?\nB: Yes, of course. Come to the taxi office.",
+        "scriptVi": "A: Xin chào. Tôi đã để quên túi của mình trên xe taxi của bạn sáng nay.\nB: Tôi rất tiếc khi nghe vậy. Túi của bạn trông như thế nào?\nA: Đó là một chiếc ba lô nhỏ màu đỏ có họa tiết kẻ sọc.\nB: Bên trong túi có gì không?\nA: Có, bên trong có một chai nước màu xanh và một cuốn sách nhỏ.\nB: Tôi thấy nó rồi. Nó ở dưới ghế sau của xe taxi.\nA: Cảm ơn bạn! Tôi có thể đến lấy lúc ba giờ được không?\nB: Được chứ. Hãy đến văn phòng xe taxi."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for why she likes the handbag",
+        "focusVi": "Nghe xem vì sao cô ấy thích chiếc túi xách.",
+        "script": "A: I love your new handbag. It looks very nice. Where did you buy it?\nB: Thank you! I bought it at a small shop near my house.\nA: What is it made of? Is it real leather?\nB: Yes, it is soft brown leather. It has a long strap and a small pocket inside.\nA: Why do you like it so much?\nB: I like it because it is light and easy to carry. I use it every day.\nA: I want a black one too!",
+        "scriptVi": "A: Tôi thích chiếc túi xách mới của bạn. Nó trông rất đẹp. Bạn mua nó ở đâu vậy?\nB: Cảm ơn bạn! Tôi mua nó ở một cửa hàng nhỏ gần nhà tôi.\nA: Nó làm bằng gì vậy? Có phải da thật không?\nB: Đúng vậy, đó là da màu nâu mềm. Nó có một quai dài và một ngăn nhỏ bên trong.\nA: Vì sao bạn thích nó nhiều như vậy?\nB: Tôi thích nó vì nó nhẹ và dễ mang. Tôi dùng nó mỗi ngày.\nA: Tôi cũng muốn một chiếc màu đen!"
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for what he lost and where he lost it",
+        "focusVi": "Nghe xem anh ấy làm mất gì và làm mất ở đâu.",
+        "script": "A: Excuse me. I lost my wallet on the bus this morning. Did you find it?\nB: What does your wallet look like? Can you describe it, please?\nA: It is a small black wallet. It has my photo and some money inside.\nB: I am sorry. We did not find it on the bus today.\nA: Oh, no! Where can I look for it?\nB: You can ask at the bus office.\nA: Thank you. I will go now.\nB: Good luck! I hope you find it soon.",
+        "scriptVi": "A: Xin lỗi. Tôi đã làm mất ví trên xe buýt sáng nay. Bạn có tìm thấy nó không?\nB: Ví của bạn trông như thế nào? Bạn có thể miêu tả nó được không?\nA: Đó là một chiếc ví nhỏ màu đen. Bên trong có ảnh của tôi và một ít tiền.\nB: Tôi xin lỗi. Hôm nay chúng tôi không tìm thấy nó trên xe buýt.\nA: Ồ, không! Tôi còn có thể tìm nó ở đâu nữa?\nB: Bạn có thể hỏi ở văn phòng xe buýt.\nA: Cảm ơn bạn. Tôi sẽ đi ngay bây giờ.\nB: Chúc may mắn! Tôi hy vọng bạn sớm tìm thấy nó."
+      }
+    ],
+    "over": "Work in pairs. Take turns describing one thing in the classroom. Give short clues about its color, size, and material. Can your partner guess what it is?",
+    "overVi": "Làm việc theo cặp. Lần lượt miêu tả một đồ vật trong lớp học. Đưa ra gợi ý ngắn về màu sắc, kích thước và chất liệu của nó. Bạn cùng lớp có đoán được đó là vật gì không?",
+    "quiz": [
+      {
+        "q": "Chiếc ba lô bị bỏ quên trên xe taxi có màu gì và họa tiết gì?",
+        "o": [
+          "Màu đỏ, họa tiết kẻ sọc",
+          "Màu đen, họa tiết kẻ ô",
+          "Màu xanh, không có họa tiết"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, chiếc ba lô được miêu tả là nhỏ, màu đỏ, có họa tiết kẻ sọc."
+      },
+      {
+        "q": "Bên trong chiếc ba lô có gì?",
+        "o": [
+          "Một chai nước màu xanh và một cuốn sách nhỏ",
+          "Một chiếc ví và chìa khóa",
+          "Một chiếc áo khoác và một tờ báo"
+        ],
+        "a": 0,
+        "why": "Người nói kể trong ba lô có một chai nước màu xanh và một cuốn sách nhỏ."
+      },
+      {
+        "q": "Chiếc túi xách làm bằng gì?",
+        "o": [
+          "Da màu nâu mềm",
+          "Nhựa màu đen",
+          "Vải màu đỏ"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, chiếc túi xách làm bằng da màu nâu mềm."
+      },
+      {
+        "q": "Người phụ nữ thích chiếc túi xách vì sao?",
+        "o": [
+          "Vì nó nhẹ, dễ mang và cô ấy dùng nó mỗi ngày",
+          "Vì nó rất đắt tiền",
+          "Vì nó có rất nhiều ngăn lớn"
+        ],
+        "a": 0,
+        "why": "Cô ấy thích chiếc túi vì nó nhẹ, dễ mang và cô ấy dùng nó mỗi ngày."
+      },
+      {
+        "q": "Người đàn ông làm mất gì trên xe buýt?",
+        "o": [
+          "Một chiếc ví nhỏ màu đen",
+          "Một chiếc va li lớn",
+          "Một chiếc điện thoại"
+        ],
+        "a": 0,
+        "why": "Anh ấy nói đã làm mất một chiếc ví nhỏ màu đen trên xe buýt sáng nay."
+      },
+      {
+        "q": "Anh ấy nên hỏi ở đâu để tìm chiếc ví?",
+        "o": [
+          "Ở văn phòng xe buýt",
+          "Ở thư viện",
+          "Ở cửa hàng quần áo"
+        ],
+        "a": 0,
+        "why": "Nhân viên nói anh ấy có thể hỏi ở văn phòng xe buýt."
+      }
+    ]
+  },
+  {
+    "n": 21,
+    "title": "Directions",
+    "titleVi": "Chỉ đường",
+    "skill": [
+      "Listening for gist",
+      "Listening for details",
+      "Listening for sequence"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết · Nghe trình tự",
+    "warmup": {
+      "q": "Khi bạn bị lạc đường, bạn hỏi đường như thế nào? Bạn biết những từ chỉ đường nào?",
+      "qv": "Nói về cách bạn hỏi đường và tìm đường - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "go straight",
+          "vi": "đi thẳng"
+        },
+        {
+          "w": "turn right",
+          "vi": "rẽ phải"
+        },
+        {
+          "w": "turn left",
+          "vi": "rẽ trái"
+        },
+        {
+          "w": "intersection",
+          "vi": "ngã tư"
+        },
+        {
+          "w": "corner",
+          "vi": "góc phố"
+        },
+        {
+          "w": "block",
+          "vi": "dãy nhà"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for where the bank is",
+        "focusVi": "Nghe xem ngân hàng nằm ở đâu.",
+        "script": "A: Excuse me. I am looking for the bank. Can you help me, please?\nB: Yes. Go straight up King Street for two blocks.\nA: Then what do I do?\nB: Turn right at the light. The bank is on your left, next to the post office.\nA: Is it far from here?\nB: No, it is not far. It is only about five minutes on foot.\nA: Thank you very much for your help.\nB: You are welcome. Have a nice day!",
+        "scriptVi": "A: Xin lỗi. Tôi đang tìm ngân hàng. Bạn có thể giúp tôi được không?\nB: Được. Bạn đi thẳng lên phố King hai dãy nhà.\nA: Sau đó tôi làm gì?\nB: Rẽ phải ở đèn giao thông. Ngân hàng nằm bên trái của bạn, cạnh bưu điện.\nA: Nó có xa đây không?\nB: Không, nó không xa. Chỉ khoảng năm phút đi bộ thôi.\nA: Cảm ơn bạn rất nhiều vì đã giúp tôi.\nB: Không có gì. Chúc bạn một ngày tốt lành!"
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for the order of the directions to the museum",
+        "focusVi": "Nghe trình tự các bước chỉ đường đến bảo tàng.",
+        "script": "A: Excuse me. How can I get to the art museum from here?\nB: First, go straight up Third Street for two blocks.\nA: OK. Go straight for two blocks. Then what?\nB: Next, turn left on Pine Street and walk past the park.\nA: Turn left on Pine Street and walk past the park. What is next?\nB: Finally, the museum is on your right, next to the big hotel.\nA: Thank you. Is it open today?\nB: Yes, it is open from nine to five.",
+        "scriptVi": "A: Xin lỗi. Từ đây tôi có thể đến bảo tàng nghệ thuật bằng cách nào?\nB: Trước tiên, bạn đi thẳng lên phố Third hai dãy nhà.\nA: Được rồi. Đi thẳng hai dãy nhà. Sau đó thì sao?\nB: Tiếp theo, rẽ trái vào phố Pine và đi qua công viên.\nA: Rẽ trái vào phố Pine và đi qua công viên. Tiếp theo là gì?\nB: Cuối cùng, bảo tàng nằm bên phải của bạn, cạnh khách sạn lớn.\nA: Cảm ơn bạn. Hôm nay bảo tàng có mở cửa không?\nB: Có, bảo tàng mở cửa từ chín giờ đến năm giờ."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for the directions to the house and what to bring",
+        "focusVi": "Nghe đường đến nhà bạn ấy và thứ cần mang theo.",
+        "script": "A: Please come to my house for dinner on Sunday.\nB: I would love to come. How do I get to your house?\nA: Get off the bus across from the school. Then walk north for two blocks.\nB: Get off the bus across from the school. Then what?\nA: Turn right just past the gas station. My house is on the left.\nB: That sounds easy. What should I bring?\nA: Please bring some fruit.\nB: OK, I will bring fruit. See you on Sunday at six!",
+        "scriptVi": "A: Mời bạn đến nhà tôi ăn tối vào Chủ nhật nhé.\nB: Tôi rất muốn đến. Tôi đến nhà bạn bằng cách nào?\nA: Bạn xuống xe buýt ở đối diện trường học. Sau đó đi về phía bắc hai dãy nhà.\nB: Xuống xe buýt ở đối diện trường học. Sau đó thì sao?\nA: Rẽ phải ngay sau trạm xăng. Nhà tôi nằm bên trái.\nB: Nghe có vẻ dễ. Tôi nên mang theo gì?\nA: Làm ơn mang theo một ít hoa quả.\nB: Được rồi, tôi sẽ mang hoa quả. Hẹn gặp bạn Chủ nhật lúc sáu giờ!"
+      }
+    ],
+    "over": "Work in pairs. Ask your partner for directions to a place on your list, such as a bank, a post office, a drugstore, or a library. Listen and draw the way on your map.",
+    "overVi": "Làm việc theo cặp. Hỏi bạn cùng lớp đường đến một địa điểm trong danh sách của bạn, ví dụ ngân hàng, bưu điện, hiệu thuốc hay thư viện. Lắng nghe và vẽ đường đi lên bản đồ của bạn.",
+    "quiz": [
+      {
+        "q": "Ngân hàng nằm ở đâu?",
+        "o": [
+          "Bên trái, cạnh bưu điện",
+          "Bên phải, cạnh khách sạn",
+          "Cuối phố, cạnh trường học"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, ngân hàng nằm bên trái, cạnh bưu điện."
+      },
+      {
+        "q": "Muốn đến ngân hàng, sau khi đi thẳng hai dãy nhà thì làm gì?",
+        "o": [
+          "Rẽ phải ở đèn giao thông",
+          "Rẽ trái ở góc phố",
+          "Đi qua cầu vượt"
+        ],
+        "a": 0,
+        "why": "Sau khi đi thẳng hai dãy nhà trên phố King thì rẽ phải ở đèn giao thông."
+      },
+      {
+        "q": "Để đến bảo tàng nghệ thuật, bước đầu tiên là gì?",
+        "o": [
+          "Đi thẳng lên phố Third hai dãy nhà",
+          "Rẽ trái ngay lập tức",
+          "Đi qua cầu vượt"
+        ],
+        "a": 0,
+        "why": "Bước đầu tiên là đi thẳng lên phố Third hai dãy nhà."
+      },
+      {
+        "q": "Bảo tàng nghệ thuật nằm ở đâu?",
+        "o": [
+          "Bên phải, cạnh khách sạn lớn",
+          "Bên trái, cạnh trường học",
+          "Cuối phố, cạnh nhà ga"
+        ],
+        "a": 0,
+        "why": "Bảo tàng nằm bên phải, cạnh khách sạn lớn."
+      },
+      {
+        "q": "Để đến nhà người bạn, hành khách xuống xe buýt ở đâu?",
+        "o": [
+          "Đối diện trường học",
+          "Đối diện siêu thị",
+          "Cạnh bưu điện"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, hành khách xuống xe buýt ở đối diện trường học."
+      },
+      {
+        "q": "Khách nên mang gì đến bữa tối ở nhà bạn?",
+        "o": [
+          "Một ít hoa quả",
+          "Một ít rau",
+          "Một quả bóng"
+        ],
+        "a": 0,
+        "why": "Chủ nhà dặn khách mang theo một ít hoa quả."
+      }
+    ]
+  },
+  {
+    "n": 22,
+    "title": "People We Know",
+    "titleVi": "Những người chúng ta biết",
+    "skill": [
+      "Listening for gist",
+      "Listening for similarities and differences",
+      "Listening for details",
+      "Listening for opinions",
+      "Listening for attitudes"
+    ],
+    "skillVi": "Nghe ý chính · Nghe điểm giống và khác nhau · Nghe chi tiết · Nghe ý kiến · Nghe thái độ",
+    "warmup": {
+      "q": "Bạn thân của bạn là người như thế nào? Hãy chọn những từ miêu tả tính cách của bạn ấy.",
+      "qv": "Nói về tính cách của bạn thân của bạn - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "shy",
+          "vi": "nhút nhát"
+        },
+        {
+          "w": "funny",
+          "vi": "vui tính"
+        },
+        {
+          "w": "easygoing",
+          "vi": "dễ tính"
+        },
+        {
+          "w": "generous",
+          "vi": "hào phóng"
+        },
+        {
+          "w": "talkative",
+          "vi": "hay nói"
+        },
+        {
+          "w": "smart",
+          "vi": "thông minh"
+        },
+        {
+          "w": "kind",
+          "vi": "tốt bụng"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for words that describe Ethan",
+        "focusVi": "Nghe những từ miêu tả Ethan.",
+        "script": "A: I met a new friend at work today. His name is Ethan.\nB: What is Ethan like? Is he friendly?\nA: Yes, he is very funny and talkative. He makes everyone laugh.\nB: That sounds nice. Is he serious about his work?\nA: Yes, he is also smart and hardworking. He finishes his work on time.\nB: I would like to meet him. Is he free on Saturday?\nA: Yes, he is. Let us have lunch together on Saturday.\nB: Great idea! I cannot wait.",
+        "scriptVi": "A: Hôm nay tôi đã gặp một người bạn mới ở chỗ làm. Anh ấy tên là Ethan.\nB: Ethan là người như thế nào? Anh ấy có thân thiện không?\nA: Có, anh ấy rất vui tính và hay nói. Anh ấy làm mọi người cười.\nB: Nghe hay đấy. Anh ấy có nghiêm túc với công việc không?\nA: Có, anh ấy cũng thông minh và chăm chỉ. Anh ấy hoàn thành công việc đúng hạn.\nB: Tôi muốn gặp anh ấy. Thứ Bảy anh ấy có rảnh không?\nA: Có, anh ấy rảnh. Chúng ta cùng ăn trưa vào thứ Bảy nhé.\nB: Ý kiến hay đấy! Tôi nóng lòng chờ đợi."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for how the two sisters are similar and different",
+        "focusVi": "Nghe xem hai chị em giống và khác nhau ở điểm nào.",
+        "script": "A: My two sisters are very different from each other.\nB: Really? How are they different?\nA: Anna is serious and hardworking. She studies every day after school.\nB: And what about your other sister?\nA: Mia is easygoing and funny. She loves music and talks to everyone.\nB: Are they similar in any way?\nA: Yes, they are both kind and generous. They always help our friends.\nB: That is nice. Do they get along well?\nA: Yes, they do. They are different, but they are best friends.",
+        "scriptVi": "A: Hai chị em gái của tôi rất khác nhau.\nB: Thật à? Họ khác nhau như thế nào?\nA: Anna nghiêm túc và chăm chỉ. Bạn ấy học mỗi ngày sau giờ học.\nB: Còn chị em gái kia của bạn thì sao?\nA: Mia dễ tính và vui vẻ. Bạn ấy thích âm nhạc và nói chuyện với mọi người.\nB: Họ có giống nhau ở điểm nào không?\nA: Có, cả hai đều tốt bụng và hào phóng. Họ luôn giúp đỡ bạn bè của chúng tôi.\nB: Thật tốt. Họ có hòa thuận với nhau không?\nA: Có, họ hòa thuận. Họ khác nhau, nhưng họ là bạn thân nhất của nhau."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for what she likes and does not like about Zoe",
+        "focusVi": "Nghe xem cô ấy thích và không thích điều gì ở Zoe.",
+        "script": "A: Do you want to meet my friend Zoe? She is in my English class.\nB: Yes, I do. What is Zoe like?\nA: She is smart and sociable.\nB: That sounds great. What do you like about her?\nA: I like her sense of humor. She always makes me laugh.\nB: Is there anything you do not like about her?\nA: She is a little lazy at times. She never finishes her homework on time.\nB: I still want to meet her. She sounds fun!",
+        "scriptVi": "A: Bạn có muốn gặp bạn tôi là Zoe không? Bạn ấy học cùng lớp tiếng Anh với tôi.\nB: Có, tôi muốn. Zoe là người như thế nào?\nA: Bạn ấy thông minh và hòa đồng.\nB: Nghe tuyệt đấy. Bạn thích điều gì ở bạn ấy?\nA: Tôi thích khiếu hài hước của bạn ấy. Bạn ấy luôn làm tôi cười.\nB: Có điều gì bạn không thích ở bạn ấy không?\nA: Thỉnh thoảng bạn ấy hơi lười. Bạn ấy không bao giờ làm bài tập về nhà đúng hạn.\nB: Tôi vẫn muốn gặp bạn ấy. Bạn ấy nghe có vẻ vui tính!"
+      }
+    ],
+    "over": "Work in pairs. What are you like? Guess your partner's qualities, then ask your partner about them. How many did you guess correctly?",
+    "overVi": "Làm việc theo cặp. Bạn là người như thế nào? Hãy đoán tính cách của bạn cùng lớp, rồi hỏi bạn ấy về những tính cách đó. Bạn đã đoán đúng bao nhiêu tính cách?",
+    "quiz": [
+      {
+        "q": "Ethan là người như thế nào?",
+        "o": [
+          "Vui tính và hay nói",
+          "Nhút nhát và ít nói",
+          "Nghiêm khắc và khó tính"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, Ethan được miêu tả là rất vui tính và hay nói."
+      },
+      {
+        "q": "Anna và Mia có giống nhau không?",
+        "o": [
+          "Khác nhau",
+          "Giống nhau hoàn toàn",
+          "Là hai người hoàn toàn xa lạ"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, hai chị em được nói là rất khác nhau."
+      },
+      {
+        "q": "Anna là người như thế nào?",
+        "o": [
+          "Nghiêm túc và chăm chỉ",
+          "Dễ tính và vui vẻ",
+          "Lười biếng và hay quên"
+        ],
+        "a": 0,
+        "why": "Anna được miêu tả là nghiêm túc, chăm chỉ và học mỗi ngày sau giờ học."
+      },
+      {
+        "q": "Hai chị em giống nhau ở điểm nào?",
+        "o": [
+          "Đều tốt bụng và hào phóng",
+          "Đều thích âm nhạc",
+          "Đều học giỏi toán"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, cả hai chị em đều tốt bụng, hào phóng và luôn giúp đỡ bạn bè."
+      },
+      {
+        "q": "Người nói không thích điều gì ở Zoe?",
+        "o": [
+          "Thỉnh thoảng Zoe hơi lười, không làm bài tập đúng hạn",
+          "Zoe hay cáu gắt với bạn bè",
+          "Zoe không thích nói chuyện với ai"
+        ],
+        "a": 0,
+        "why": "Người nói cho biết Zoe thỉnh thoảng hơi lười và không làm bài tập về nhà đúng hạn."
+      },
+      {
+        "q": "Người nghe có muốn gặp Zoe không?",
+        "o": [
+          "Có, vì Zoe nghe có vẻ vui tính",
+          "Không, vì Zoe quá nghiêm túc",
+          "Không, vì Zoe rất nhút nhát"
+        ],
+        "a": 0,
+        "why": "Người nghe nói vẫn muốn gặp Zoe vì cô ấy nghe có vẻ vui tính."
+      }
+    ]
+  },
+  {
+    "n": 23,
+    "title": "Places",
+    "titleVi": "Các địa điểm",
+    "skill": [
+      "Listening for attitudes",
+      "Listening for gist",
+      "Listening for details",
+      "Listening for preferences"
+    ],
+    "skillVi": "Nghe thái độ · Nghe ý chính · Nghe chi tiết · Nghe sở thích",
+    "warmup": {
+      "q": "Bạn thích sống ở thành phố lớn hay thị trấn nhỏ? Vì sao?",
+      "qv": "Nói về nơi bạn thích sống và vì sao - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "crowded",
+          "vi": "đông đúc"
+        },
+        {
+          "w": "noisy",
+          "vi": "ồn ào"
+        },
+        {
+          "w": "beautiful",
+          "vi": "đẹp"
+        },
+        {
+          "w": "famous",
+          "vi": "nổi tiếng"
+        },
+        {
+          "w": "romantic",
+          "vi": "lãng mạn"
+        },
+        {
+          "w": "modern",
+          "vi": "hiện đại"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen to how much she likes Da Lat",
+        "focusVi": "Nghe xem cô ấy thích Đà Lạt đến mức nào.",
+        "script": "A: How do you like living in Da Lat? Do you like it there?\nB: I like it a lot! The weather is cool.\nA: What is the city like? Is it busy?\nB: No, it is quiet and beautiful. There are flowers everywhere.\nA: That sounds lovely. What do you do there every day?\nB: I walk in the park in the morning and drink coffee.\nA: I want to visit Da Lat one day.\nB: Please come! I will show you the city.",
+        "scriptVi": "A: Bạn thích sống ở Đà Lạt như thế nào? Bạn có thích nơi đó không?\nB: Tôi rất thích! Thời tiết ở đó mát mẻ.\nA: Thành phố đó như thế nào? Có nhộn nhịp không?\nB: Không, nơi đó yên tĩnh và đẹp. Hoa ở khắp mọi nơi.\nA: Nghe thật dễ chịu. Mỗi ngày bạn làm gì ở đó?\nB: Tôi đi dạo trong công viên vào buổi sáng và uống cà phê.\nA: Một ngày nào đó tôi muốn đến thăm Đà Lạt.\nB: Mời bạn đến nhé! Tôi sẽ dẫn bạn đi xem thành phố."
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for what Hoi An is like",
+        "focusVi": "Nghe xem Hội An là nơi như thế nào.",
+        "script": "A: I visited Hoi An last month. It is a small and lovely city.\nB: What is Hoi An like? Is it crowded?\nA: It is quiet in the morning, but it is crowded at night.\nB: What can you do there?\nA: You can walk in the old streets and eat very good food.\nB: Is the food expensive there?\nA: No, it is not expensive. The food is cheap and very tasty.\nB: I want to go there. It sounds like a great place.",
+        "scriptVi": "A: Tháng trước tôi đã đến thăm Hội An. Đó là một thành phố nhỏ và dễ thương.\nB: Hội An là nơi như thế nào? Có đông đúc không?\nA: Buổi sáng thì yên tĩnh, nhưng buổi tối thì đông đúc.\nB: Bạn có thể làm gì ở đó?\nA: Bạn có thể đi dạo trên những con phố cổ và ăn những món ăn rất ngon.\nB: Đồ ăn ở đó có đắt không?\nA: Không, không đắt. Đồ ăn rẻ và rất ngon.\nB: Tôi muốn đến đó. Nơi đó nghe có vẻ tuyệt vời."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for which city each person prefers",
+        "focusVi": "Nghe xem mỗi người thích thành phố nào hơn.",
+        "script": "A: I like Da Nang more than Hue. Do you agree with me?\nB: No, I do not. I like Hue more than Da Nang.\nA: Why do you like Da Nang? Tell me more.\nB: Da Nang has beautiful beaches and modern hotels. It is great for families.\nA: Hue is also beautiful. It has old buildings and quiet streets.\nB: That is true, but Da Nang is more exciting.\nA: Hue is more relaxing. I like quiet places.\nB: We are different! You like quiet places.",
+        "scriptVi": "A: Tôi thích Đà Nẵng hơn Huế. Bạn có đồng ý với tôi không?\nB: Không, tôi không đồng ý. Tôi thích Huế hơn Đà Nẵng.\nA: Vì sao bạn thích Đà Nẵng? Hãy kể thêm cho tôi nghe.\nB: Đà Nẵng có những bãi biển đẹp và khách sạn hiện đại. Nơi đó rất hợp với các gia đình.\nA: Huế cũng đẹp. Huế có những tòa nhà cổ và những con phố yên tĩnh.\nB: Đúng vậy, nhưng Đà Nẵng sôi động hơn.\nA: Huế thư giãn hơn. Tôi thích những nơi yên tĩnh.\nB: Chúng ta khác nhau! Bạn thích những nơi yên tĩnh."
+      }
+    ],
+    "over": "Work in pairs. Make a short travel brochure about a place you know. Write about its hotels, food, shopping, and interesting things to do. Then compare your brochure with another pair.",
+    "overVi": "Làm việc theo cặp. Hãy làm một tờ quảng cáo du lịch ngắn về một nơi bạn biết. Viết về khách sạn, món ăn, mua sắm và những điều thú vị để làm ở đó. Sau đó so sánh tờ quảng cáo của bạn với một cặp khác.",
+    "quiz": [
+      {
+        "q": "Người bạn thích Đà Lạt đến mức nào?",
+        "o": [
+          "Rất thích",
+          "Chỉ thích một chút",
+          "Không thích"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, cô ấy nói rất thích Đà Lạt vì thời tiết mát mẻ."
+      },
+      {
+        "q": "Đà Lạt có đặc điểm gì?",
+        "o": [
+          "Yên tĩnh, đẹp, có nhiều hoa",
+          "Ồn ào và đông đúc",
+          "Rất nóng và khô"
+        ],
+        "a": 0,
+        "why": "Đà Lạt được miêu tả là yên tĩnh, đẹp và có hoa ở khắp mọi nơi."
+      },
+      {
+        "q": "Hội An vào buổi sáng như thế nào?",
+        "o": [
+          "Yên tĩnh",
+          "Đông đúc",
+          "Ồn ào"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, Hội An yên tĩnh vào buổi sáng và đông đúc vào buổi tối."
+      },
+      {
+        "q": "Đồ ăn ở Hội An như thế nào?",
+        "o": [
+          "Rẻ và rất ngon",
+          "Đắt và không ngon",
+          "Khó tìm"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, đồ ăn ở Hội An rẻ và rất ngon."
+      },
+      {
+        "q": "Ai thích Đà Nẵng hơn Huế?",
+        "o": [
+          "Người nói A",
+          "Người nói B",
+          "Cả hai người"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, người nói A nói thích Đà Nẵng hơn Huế; người nói B thích Huế hơn."
+      },
+      {
+        "q": "Ai nói Huế thư giãn hơn?",
+        "o": [
+          "Người nói A",
+          "Người nói B",
+          "Cả hai người"
+        ],
+        "a": 0,
+        "why": "Người nói A nói Huế thư giãn hơn và mình thích những nơi yên tĩnh."
+      }
+    ]
+  },
+  {
+    "n": 24,
+    "title": "Health",
+    "titleVi": "Sức khỏe",
+    "skill": [
+      "Listening for gist",
+      "Listening for details",
+      "Listening for advice"
+    ],
+    "skillVi": "Nghe ý chính · Nghe chi tiết · Nghe lời khuyên",
+    "warmup": {
+      "q": "Khi bạn bị ốm, bạn thường làm gì? Bạn hãy kể tên các bộ phận trên cơ thể mà bạn biết.",
+      "qv": "Nói về sức khỏe của bạn và các bộ phận cơ thể - như bài khởi động trong sách.",
+      "words": [
+        {
+          "w": "hand",
+          "vi": "bàn tay"
+        },
+        {
+          "w": "ear",
+          "vi": "tai"
+        },
+        {
+          "w": "mouth",
+          "vi": "miệng"
+        },
+        {
+          "w": "nose",
+          "vi": "mũi"
+        },
+        {
+          "w": "eye",
+          "vi": "mắt"
+        },
+        {
+          "w": "foot",
+          "vi": "bàn chân"
+        },
+        {
+          "w": "back",
+          "vi": "lưng"
+        },
+        {
+          "w": "stomach",
+          "vi": "bụng"
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "label": "Let's Listen 1",
+        "focus": "Listen for the health problem",
+        "focusVi": "Nghe xem người nói gặp vấn đề sức khỏe gì.",
+        "script": "A: I do not feel well today. I have a bad headache and a sore throat.\nB: Oh, no! When did it start?\nA: It started yesterday morning. I also feel very tired.\nB: Did you go to the doctor?\nA: No, not yet. I stayed at home and drank warm water.\nB: You should rest and get more sleep tonight.\nA: You are right. I will go to bed early tonight.\nB: I hope you feel better soon. Take care!",
+        "scriptVi": "A: Hôm nay tôi cảm thấy không khỏe. Tôi bị đau đầu nặng và đau họng.\nB: Ồ, không! Nó bắt đầu khi nào?\nA: Nó bắt đầu từ sáng hôm qua. Tôi cũng cảm thấy rất mệt.\nB: Bạn đã đi khám bác sĩ chưa?\nA: Chưa. Tôi ở nhà và uống nước ấm.\nB: Tối nay bạn nên nghỉ ngơi và ngủ nhiều hơn.\nA: Bạn nói đúng. Tối nay tôi sẽ đi ngủ sớm.\nB: Tôi hy vọng bạn sớm khỏe lại. Bảo trọng nhé!"
+      },
+      {
+        "label": "Let's Listen 2",
+        "focus": "Listen for the problem and when it started",
+        "focusVi": "Nghe xem vấn đề là gì và bắt đầu khi nào.",
+        "script": "A: My brother Ben has a stomachache today. He stayed at home.\nB: Oh, no! When did his stomachache start?\nA: It started last night after dinner. He ate too much spicy food.\nB: Did he see the doctor this morning?\nA: No, he did not. My mother gave him warm water and medicine.\nB: Is he feeling better now?\nA: Yes, a little better. He is sleeping now.\nB: Tell him to rest and eat light food today.",
+        "scriptVi": "A: Hôm nay em trai tôi là Ben bị đau bụng. Em ấy ở nhà.\nB: Ồ, không! Cơn đau bụng của em ấy bắt đầu khi nào?\nA: Nó bắt đầu tối qua sau bữa tối. Em ấy đã ăn quá nhiều đồ cay.\nB: Sáng nay em ấy có đi khám bác sĩ không?\nA: Không. Mẹ tôi cho em ấy uống nước ấm và thuốc.\nB: Bây giờ em ấy có đỡ hơn không?\nA: Có, đỡ hơn một chút. Em ấy đang ngủ.\nB: Bảo em ấy nghỉ ngơi và ăn đồ ăn nhẹ hôm nay nhé."
+      },
+      {
+        "label": "Let's Listen 3",
+        "focus": "Listen for the advice the friend gives",
+        "focusVi": "Nghe lời khuyên mà người bạn đưa ra.",
+        "script": "A: I have a bad backache. I sit at the computer all day.\nB: That is not good. You should sit in a different way.\nA: What else should I do? I also cannot fall asleep at night.\nB: You should get up and walk around every hour.\nA: That is a good idea. What about my sleep?\nB: You should get more sleep. Go to bed early.\nA: Thank you for your advice. I will try it this week.\nB: Good luck! I hope your back feels better soon.",
+        "scriptVi": "A: Tôi bị đau lưng nặng. Tôi ngồi trước máy tính cả ngày.\nB: Như vậy không tốt. Bạn nên ngồi theo một cách khác.\nA: Tôi còn nên làm gì nữa? Tôi cũng không ngủ được vào ban đêm.\nB: Bạn nên đứng dậy và đi lại mỗi giờ.\nA: Đó là ý kiến hay. Còn giấc ngủ của tôi thì sao?\nB: Bạn nên ngủ nhiều hơn. Hãy đi ngủ sớm.\nA: Cảm ơn bạn vì lời khuyên. Tôi sẽ thử trong tuần này.\nB: Chúc may mắn! Tôi hy vọng lưng của bạn sớm đỡ hơn."
+      }
+    ],
+    "over": "Work in pairs. Take turns acting out a health problem, such as a headache, a cold, or a backache. Your partner guesses what is wrong and gives you some advice. Example: Do you have a backache? You should rest and get more sleep.",
+    "overVi": "Làm việc theo cặp. Lần lượt đóng vai một vấn đề sức khỏe, ví dụ đau đầu, cảm lạnh hay đau lưng. Bạn cùng lớp đoán xem bạn bị làm sao và đưa ra lời khuyên. Ví dụ: Bạn có bị đau lưng không? Bạn nên nghỉ ngơi và ngủ nhiều hơn.",
+    "quiz": [
+      {
+        "q": "Người nói A bị làm sao?",
+        "o": [
+          "Đau đầu nặng và đau họng",
+          "Đau bụng và đau răng",
+          "Cảm cúm và đau lưng"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, người nói A bị đau đầu nặng và đau họng."
+      },
+      {
+        "q": "Vấn đề của người nói A bắt đầu khi nào?",
+        "o": [
+          "Sáng hôm qua",
+          "Tối hôm qua",
+          "Tuần trước"
+        ],
+        "a": 0,
+        "why": "Người nói A cho biết vấn đề bắt đầu từ sáng hôm qua."
+      },
+      {
+        "q": "Ben bị làm sao?",
+        "o": [
+          "Đau bụng",
+          "Đau đầu",
+          "Đau răng"
+        ],
+        "a": 0,
+        "why": "Trong bài nghe, Ben bị đau bụng và phải ở nhà hôm nay."
+      },
+      {
+        "q": "Cơn đau bụng của Ben bắt đầu khi nào?",
+        "o": [
+          "Tối qua sau bữa tối",
+          "Sáng nay",
+          "Tuần trước"
+        ],
+        "a": 0,
+        "why": "Cơn đau bụng của Ben bắt đầu tối qua sau bữa tối, khi em ấy ăn quá nhiều đồ cay."
+      },
+      {
+        "q": "Người bạn khuyên người đau lưng nên làm gì?",
+        "o": [
+          "Ngồi theo cách khác và đứng dậy đi lại mỗi giờ",
+          "Mua máy tính mới",
+          "Ngừng dùng điện thoại hoàn toàn"
+        ],
+        "a": 0,
+        "why": "Người bạn khuyên nên ngồi theo cách khác và đứng dậy đi lại mỗi giờ."
+      },
+      {
+        "q": "Ngoài đau lưng, người nói còn gặp vấn đề gì khác?",
+        "o": [
+          "Không ngủ được vào ban đêm",
+          "Đau răng",
+          "Bị cảm lạnh"
+        ],
+        "a": 0,
+        "why": "Người nói cho biết mình cũng không ngủ được vào ban đêm."
+      }
+    ]
+  }
+];
+
 // ---------- GĐ2+GĐ3 CÒN LẠI (25/10/2026): hằng số dùng chung ----------
 var RB_GD23_LISTEN_STEPS = [
   { name: "Nghe lấy ý chính", desc: "Nghe một lượt, nắm ý chính, chưa cần hiểu từng từ." },
@@ -183583,6 +186739,7 @@ N.forEach(function(r){CONTENT.zhVocab[r[0]].cards.push(r[1]);});
   rotSets(typeof TC_LISTEN !== "undefined" ? TC_LISTEN : null);
   rotSets(typeof TP_LISTEN !== "undefined" ? TP_LISTEN : null);
   rotSets(typeof SACH86_B1 !== "undefined" ? SACH86_B1 : null); /* v260: xoay dap an quiz sach 1 */
+  rotSets(typeof SACH86_B2 !== "undefined" ? SACH86_B2 : null); /* v261: xoay dap an quiz sach 2 */
   /* DOT v206 16/11/2026 — V204-15: xoay readingMock (thi thu IELTS Doc).
      Ly do: 280 cau co 58,2% dap an dung o A; 215 cau 4 lua chon co 63,3% o A,
      0% o D (SC 24/24 o A; MC 94/140 o A) — nguoi hoc doan A la trung.
