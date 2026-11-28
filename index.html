@@ -24531,7 +24531,7 @@ function callAiTutorHskkSpeak(transcript, refText, pronounceScore, pronounceDeta
    / Trôi chảy và mạch lạc / Từ vựng / Ngữ pháp và câu, mỗi tiêu chí thang
    0–100, điểm chung = trung bình 4 tiêu chí (parser tự tính). Prompt viết
    riêng theo rubric ETS TOEIC Speaking (đọc to phát âm/ngữ điệu, mô tả tranh,
-   trả lời câu hỏi, trả lời theo thông tin cho sẵn, đề xuất giải pháp, nêu ý
+   trả lời câu hỏi, trả lời theo thông tin cho sẵn, nêu ý
    kiến), KHÔNG copy prompt IELTS hay prompt 1 từ. Phát âm neo theo điểm
    pronounce tầng 1 đã đo; chỉ chấm theo bản ghi nghe được, không bịa % từng
    âm (QT-09). */
@@ -24545,7 +24545,7 @@ function callAiTutorTcSpeakExam(transcript, refText, pronounceScore, pronounceDe
       client.auth.getSession().then(function (res) {
         var sess = res && res.data && res.data.session;
         if (!sess || !sess.access_token) { reject(loginMsg); return; }
-        var body = { message: "Chấm bài thi Nói TOEIC Speaking này theo rubric ETS TOEIC Speaking, theo đúng 4 tiêu chí, mỗi tiêu chí 25%: (1) Phát âm — đọc to rõ, phát âm đúng từng âm tiết, trọng âm rơi đúng chỗ và ngữ điệu lên xuống đúng câu hỏi hay câu trần thuật; (2) Trôi chảy và mạch lạc — nói liền mạch, không ngập ngừng lâu, ý nối nhau rõ ràng, trả lời đúng trọng tâm từng nhiệm vụ (mô tả tranh, trả lời câu hỏi, trả lời theo thông tin cho sẵn, đề xuất giải pháp, nêu ý kiến); (3) Từ vựng — dùng đúng từ cho từng nhiệm vụ, không dùng sai nghĩa hay nhầm từ gần âm; (4) Ngữ pháp và câu — câu đúng ngữ pháp, đủ chủ ngữ – động từ, dùng đúng thì và dạng câu cho từng nhiệm vụ. Cho điểm mỗi tiêu chí theo thang 0–100. Tiêu chí Phát âm phải neo điểm pronounce đã cho (điểm pronounce cao thì điểm cao, thấp thì điểm thấp, không bịa ngược). Chỉ chấm theo bản ghi nghe được — không bịa thêm từ người học không nói, không bịa điểm % từng âm. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: mỗi tiêu chí một dòng dạng 'TIÊU CHÍ: <tên tiêu chí> | Band <điểm 0–100> | <nhận xét ngắn>'; một dòng 'BAND CHUNG: <số>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng câu/từ người học nói> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng câu/từ yếu> — <vì sao yếu/sai> — Sửa thành: <câu đúng>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng câu/từ> — <vì sao nên nâng cấp để nói hay hơn> — Viết lại: <câu nói hay hơn>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau.", mode: "speaking", context: "ĐỀ VÀ BÀI MẪU TỪNG NHIỆM VỤ MỞ:\n" + refText + "\nBẢN GHI CÂU TRẢ LỜI MỞ CỦA NGƯỜI HỌC:\n" + transcript + "\nĐIỂM PHÁT ÂM TỪ HÀM PRONOUNCE: " + (pronounceScore == null ? "chưa đo" : pronounceScore) + "%\nCHI TIẾT PHÁT ÂM TỪNG MỤC ĐỌC TO:\n" + pronounceDetail };
+        var body = { message: "Chấm bài thi Nói TOEIC Speaking này theo rubric ETS TOEIC Speaking, theo đúng 4 tiêu chí, mỗi tiêu chí 25%: (1) Phát âm — đọc to rõ, phát âm đúng từng âm tiết, trọng âm rơi đúng chỗ và ngữ điệu lên xuống đúng câu hỏi hay câu trần thuật; (2) Trôi chảy và mạch lạc — nói liền mạch, không ngập ngừng lâu, ý nối nhau rõ ràng, trả lời đúng trọng tâm từng nhiệm vụ (mô tả tranh, trả lời câu hỏi, trả lời theo thông tin cho sẵn, nêu ý kiến); (3) Từ vựng — dùng đúng từ cho từng nhiệm vụ, không dùng sai nghĩa hay nhầm từ gần âm; (4) Ngữ pháp và câu — câu đúng ngữ pháp, đủ chủ ngữ – động từ, dùng đúng thì và dạng câu cho từng nhiệm vụ. Cho điểm mỗi tiêu chí theo thang 0–100. Tiêu chí Phát âm phải neo điểm pronounce đã cho (điểm pronounce cao thì điểm cao, thấp thì điểm thấp, không bịa ngược). Chỉ chấm theo bản ghi nghe được — không bịa thêm từ người học không nói, không bịa điểm % từng âm. Trả lời ĐÚNG định dạng sau, không viết thêm gì khác: mỗi tiêu chí một dòng dạng 'TIÊU CHÍ: <tên tiêu chí> | Band <điểm 0–100> | <nhận xét ngắn>'; một dòng 'BAND CHUNG: <số>'; sau đó ít nhất 1 dòng 'TỐT: <trích đúng câu/từ người học nói> — <vì sao tốt>'; ít nhất 1 dòng 'SỬA: <trích đúng câu/từ yếu> — <vì sao yếu/sai> — Sửa thành: <câu đúng>'; ít nhất 1 dòng 'KHUYẾN NGHỊ: <trích đúng câu/từ> — <vì sao nên nâng cấp để nói hay hơn> — Viết lại: <câu nói hay hơn>'. Dùng tiếng Việt đơn giản, ví dụ trước - quy tắc sau.", mode: "speaking", context: "ĐỀ VÀ BÀI MẪU TỪNG NHIỆM VỤ MỞ:\n" + refText + "\nBẢN GHI CÂU TRẢ LỜI MỞ CỦA NGƯỜI HỌC:\n" + transcript + "\nĐIỂM PHÁT ÂM TỪ HÀM PRONOUNCE: " + (pronounceScore == null ? "chưa đo" : pronounceScore) + "%\nCHI TIẾT PHÁT ÂM TỪNG MỤC ĐỌC TO:\n" + pronounceDetail };
         fetch(supabaseFnUrl("ai-tutor"), { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + sess.access_token, "apikey": window.SUPABASE_ANON_KEY || "" }, body: JSON.stringify(body) })
           .then(function (resp) {
             if (!resp.ok) {
@@ -30288,7 +30288,7 @@ function renderZhHskk(app, l) {
    xong goi tcMarkDone("speak") / tpMarkDone("speak") (+10 XP). */
 function tcSpeakHTML() {
   return '<section class="card" id="tcSpeakCard"><h3>🗣️ Luyện Nói TOEIC — thi nói riêng</h3>'
-    + '<p class="mut">TOEIC Speaking là bài thi nói riêng, thi trên máy trong khoảng 20 phút, gồm 11 nhiệm vụ: đọc to 2, mô tả tranh 1, trả lời câu hỏi 3, trả lời theo thông tin cho sẵn 3, đề xuất giải pháp 1, nêu ý kiến 1. Thời gian từng phần: đọc to (chuẩn bị 45 giây, nói 45 giây); mô tả tranh (45 giây / 30 giây); trả lời câu hỏi (3 giây / 15–30 giây); trả lời theo thông tin cho sẵn (đọc thông tin chung 45 giây, chuẩn bị 3 giây/câu, nói 15–30 giây); đề xuất giải pháp (30 giây / 60 giây); nêu ý kiến (45 giây / 60 giây). Tranh thật được mô tả bằng chữ (dạng chuyển thể, như HSKK Trung cấp).</p>'
+    + '<p class="mut">TOEIC Speaking là bài thi nói riêng, thi trên máy trong khoảng 20 phút, gồm 11 nhiệm vụ: đọc to 2, mô tả tranh 2, trả lời câu hỏi 3, trả lời theo thông tin cho sẵn 3, nêu ý kiến 1. Thời gian từng phần: đọc to (chuẩn bị 45 giây, nói 45 giây); mô tả tranh (45 giây / 30 giây); trả lời câu hỏi (3 giây / 15–30 giây); trả lời theo thông tin cho sẵn (đọc thông tin chung 45 giây, chuẩn bị 3 giây/câu, nói 15–30 giây); nêu ý kiến (45 giây / 60 giây). Tranh thật được mô tả bằng chữ (dạng chuyển thể, như HSKK Trung cấp).</p>'
     + '<div class="row"><button class="btn" id="tcSpeakExamBtn">Luyện Nói TOEIC →</button></div>'
     + '<p class="mut">Nghe mẫu rồi đọc to từng câu — máy kiểm tra có nghe ra không. VIP được AI chấm sâu 4 tiêu chí ở bài thi Nói (ghi âm câu trả lời mở ở từng nhiệm vụ rồi bấm chấm ở màn kết thúc); tài khoản thường tự đối chiếu bài mẫu.</p></section>';
 }
@@ -30332,10 +30332,10 @@ function tcTpSpeakExamNorm(track, it, i) {
     micRef: it.ans || ""
   };
 }
-/* v217 (2): pha thi noi TC/TP theo dung de that — TC muc 7 doc thong tin chung
-   45 giay truoc (infoSecs), roi moi cau chuan bi 3 giay; muc 9 cau hoi doc 2 lan
-   (ghi o body, khong phai pha rieng). SUA 23/11 v245: muc doi tu 8->7 va 10->9
-   do bo muc mo ta tranh trung + chen Q10 de xuat giai phap. */
+/* v217 (2): pha thi noi TC/TP theo dung de that — TC muc 8 (index 7) doc thong tin chung
+   45 giay truoc (infoSecs), roi moi cau chuan bi 3 giay; muc 10 (index 9) cau hoi doc 2 lan
+   (ghi o body, khong phai pha rieng). SUA 28/11 v264: bo Q10 propose cu, them tranh mo ta thu 2
+   lam Q4, danh lai so Q5-Q10. */
 function tcTpSpeakPhases(track, n) {
   var ph = [];
   if (track === "tc" && n.infoSecs) ph.push({ id: "info", label: "Đọc thông tin", secs: n.infoSecs });
@@ -30349,11 +30349,11 @@ function tcTpSpeakBodyHTML(track, n, i) {
     if (n.sitEn || n.sitVi) h += '<p><b>' + (n.rk === "propose" ? 'Tin nhắn thoại (dạng chuyển thể — đọc bằng chữ):' : 'Tranh (dạng chuyển thể — mô tả bằng chữ):') + '</b></p><p>' + esc(n.sitEn) + '</p><p class="mut">' + esc(n.sitVi) + '</p>';
     if (n.infoEn || n.infoVi) {
       h += '<p><b>Thông tin cho sẵn:</b></p><p>' + esc(n.infoEn) + '</p><p class="mut">' + esc(n.infoVi) + '</p>';
-      if (i !== 6) h += '<p class="mut">Thông tin chung này đã đọc ở Câu 7 (45 giây) — ở câu này chỉ còn chuẩn bị 3 giây rồi nói.</p>';
+      if (i !== 7) h += '<p class="mut">Thông tin chung này đã đọc ở Câu 8 (45 giây) — ở câu này chỉ còn chuẩn bị 3 giây rồi nói.</p>';
     }
     if (n.q) h += '<p><b>Câu hỏi:</b> ' + esc(n.q) + '</p><p class="mut">' + esc(n.qvi) + '</p>';
     if (n.rk === "readaloud") h += '<p><b>Đọc to đoạn sau:</b></p><p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p>';
-    else if (n.rk === "describe") h += '<p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p><p class="mut">Mô tả mở — máy không chấm được, tự đối chiếu mô tả tranh trên.</p>';
+    else if (n.rk === "describe") { h += '<p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p><p class="mut">Mô tả mở — máy không chấm được, tự đối chiếu mô tả tranh trên.</p>'; if (n.model) h += '<p>Bài mẫu (tự đối chiếu — máy không chấm bài mô tả của bạn):</p><p><b>' + esc(n.model) + '</b></p><p class="mut">' + esc(n.modelVi) + '</p>'; }
     else if (n.rk === "answer" || n.rk === "info") h += '<p>Câu trả lời mẫu (bạn có thể trả lời khác, miễn là đúng ý):</p><p><b>' + esc(n.prompt) + '</b></p><p class="mut">' + esc(n.promptVi) + '</p>';
     else if (n.rk === "question" || n.rk === "propose") {
       if (n.topic) h += '<p><b>Chủ đề:</b> ' + esc(n.topic) + '</p>';
