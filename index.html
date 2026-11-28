@@ -5532,7 +5532,7 @@ function viewGuide(app) {
     + '<p>AI góp ý (nhiệm vụ giao tiếp thật): bấm "Nhận giọng nói thành chữ" trước, rồi mới bấm "AI góp ý". AI chỉ đọc được bản ghi chữ nên chỉ góp ý về ý, từ, câu — không chấm phát âm, không phải điểm thi.</p>'
     + notesScoreHTML89()
     + cefrGuideHTML() /* v212: mục giải thích khung CEFR */
-    + '<details><summary><b>Luật đạt/không đạt cần biết</b></summary>' + (tr === "zh" ? '<p>Kiểm tra cuối chặng: mỗi phần cần từ 50% đúng lần đầu mới tính qua; chưa qua chỉ cần học lại đúng phần yếu, các phần đã đạt không cần làm lại.</p>' : tr === "tp" ? '<p>Thi thử TOPIK I rút gọn: tổng /200; từ 140 = cấp 2, 80–139 = cấp 1.</p>' : '') + '<p>Thẻ từ: quyền mic bị từ chối thì không tính đạt chuẩn (gương không tính điểm, chỉ để tự nhìn).</p></details></details>'
+    + '<details><summary><b>Luật đạt/không đạt cần biết</b></summary>' + (tr === "zh" ? '<p>Kiểm tra cuối chặng: mỗi phần cần từ 50% đúng lần đầu mới tính qua; chưa qua chỉ cần học lại đúng phần yếu, các phần đã đạt không cần làm lại.</p>' : tr === "tp" ? '<p>Thi thử TOPIK I: tổng /200; từ 140 = cấp 2, 80–139 = cấp 1.</p>' : '') + '<p>Thẻ từ: quyền mic bị từ chối thì không tính đạt chuẩn (gương không tính điểm, chỉ để tự nhìn).</p></details></details>'
     + '<details class="guide-sec" id="guideTerms"><summary><b>📖 Thuật ngữ hay gặp</b></summary>' + trackGlossary89().map(function (g) { return '<p><b>' + esc(g.t) + ':</b> ' + esc(g.d) + '</p>'; }).join("") + '</details>'
     + '<details class="guide-sec" id="guideAccount"><summary><b>👤 Tài khoản &amp; VIP</b></summary>'
     + '<p>Sau khi được cấp VIP, bấm "Tải lại từ tài khoản" ở mục Hồ sơ của tôi → Tài khoản để hiện VIP.</p></details>'
@@ -7831,7 +7831,7 @@ function tcMockLine89(m) {
 function tpMockLine89(m) {
   var d = fmtDateTs89(m.at);
   if (m.milestone === "tp-mock-II") return 'Thi thử TOPIK II đủ 104 nhiệm vụ (' + d + '): Nghe ' + m.l + '/50 · Đọc ' + m.r + '/50 · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "") + ' · CEFR: ' + ((tpCefrFromEst(m.est) || { label: "" }).label);
-  return 'Thi thử TOPIK I rút gọn (' + d + '): Nghe ' + m.l + '/35 · Đọc ' + m.r + '/35 · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "") + ' · CEFR: ' + ((tpCefrFromLevelStr(m.level) || { label: "" }).label);
+  return 'Thi thử TOPIK I (' + d + '): Nghe ' + m.l + '/' + (m.den ? m.den[0] : 35) + ' · Đọc ' + m.r + '/' + (m.den ? m.den[1] : 35) + ' · Điểm ước lượng ' + m.est + '/200 — ' + esc(m.level || "") + ' · CEFR: ' + ((tpCefrFromLevelStr(m.level) || { label: "" }).label);
 }
 /* Thẻ "Đánh giá mức độ" theo track. EN giữ nguyên y hệt. */
 function trackLevelHTML89() {
@@ -25452,9 +25452,9 @@ function buildMockRun(milestone) {
   }
   /* v213 A2: Doc thi thu dung bo IELTS_MOCKREAD theo moc — moi bo 3 bai,
      13+13+14 = 40 cau nhu thi that (thay readingMock cu: moi bai 15-16 cau,
-     tong 46 cau/moc truoc v213). Anh xa moc: 4.5->50, 5.5->60, 6.5->70, 7.5+->70. */
+     tong 46 cau/moc truoc v213). Anh xa moc: 4.5->50, 5.5->60, 6.5->65, 7.5+->75. (v265: them MOCKREAD_65/75) */
   var mockReadSet = null;
-  try { mockReadSet = milestone === "4.5" ? IELTS_MOCKREAD_50 : milestone === "5.5" ? IELTS_MOCKREAD_60 : IELTS_MOCKREAD_70; } catch (e) {}
+  try { mockReadSet = milestone === "4.5" ? IELTS_MOCKREAD_50 : milestone === "5.5" ? IELTS_MOCKREAD_60 : milestone === "6.5" ? IELTS_MOCKREAD_65 : IELTS_MOCKREAD_75; } catch (e) {}
   var read = mockPickByBand(mockReadSet || CONTENT.readingMock, mNum, 3, function (r) { return r.level; });
   var t1s = CONTENT.writing.filter(function (w) { return w.type === "Task 1" && w.track !== "G"; });
   var t2s = CONTENT.writing.filter(function (w) { return w.type === "Task 2"; });
@@ -29667,6 +29667,8 @@ function zhMockOrderMCQ(item, idx) {
 function zhMockBuild(hsk) {
   var stage = hsk;
   var listens = (ZH_LISTENING || []).filter(function (x) { return x.stage === stage; });
+  var mockListens = []; try { mockListens = (typeof ZH_MOCK_LISTEN !== "undefined" ? ZH_MOCK_LISTEN : []).filter(function (x) { return x.stage === stage; }); } catch (e) {}
+  if (mockListens.length) listens = mockListens; /* v265: thi thu dung doan mock-only, khong dung lai doan luyen tap */
   var lQs = [];
   listens.forEach(function (sg) { (sg.questions || []).forEach(function (qq) { lQs.push(qq); }); });
   var reads = (ZH_READING || []).filter(function (x) { return x.stage === stage; });
@@ -29693,11 +29695,15 @@ function zhMockBuild(hsk) {
   // + 4 cau tu bai Nghe moi zh18-mock-l1.
   // v213 A2: HSK1 KHONG co Viet trong thi thu (de that cap 1 khong co Viet) —
   // Viet luyen them o buoc Viet trong chang, ghi ro o man hub, khong mao nhan la cau de that.
-  var lQs1 = []; listens.slice(0, 4).forEach(function (sg) { (sg.questions || []).forEach(function (qq) { lQs1.push(qq); }); });
-  var mockL1 = null; listens.forEach(function (sg) { if (sg.id === "zh18-mock-l1") mockL1 = sg; });
-  if (mockL1) (mockL1.questions || []).forEach(function (qq) { lQs1.push(qq); });
+  var lQs1 = []; var segs1;
+  if (mockListens.length) { listens.forEach(function (sg) { (sg.questions || []).forEach(function (qq) { lQs1.push(qq); }); }); segs1 = listens; }
+  else {
+    listens.slice(0, 4).forEach(function (sg) { (sg.questions || []).forEach(function (qq) { lQs1.push(qq); }); });
+    var mockL1 = null; listens.forEach(function (sg) { if (sg.id === "zh18-mock-l1") mockL1 = sg; });
+    if (mockL1) (mockL1.questions || []).forEach(function (qq) { lQs1.push(qq); });
+    segs1 = listens.slice(0, 4); if (mockL1) segs1.push(mockL1);
+  }
   var rQs1 = []; reads.slice(0, 4).forEach(function (r) { (r.questions || []).forEach(function (qq) { rQs1.push(qq); }); });
-  var segs1 = listens.slice(0, 4); if (mockL1) segs1.push(mockL1);
   var wQs1 = []; /* v213 A2: HSK1 de that khong co Viet — thi thu 0 cau Viet; luyen Viet o buoc Viet trong chang. */
   lQs1 = lQs1.slice(0, 20); rQs1 = rQs1.slice(0, 20); /* v213 A2: chac chan dung 20+20 tu dau ngan hang. */
   return { hsk: hsk, listen: { qs: lQs1, n: lQs1.length, segments: segs1 }, read: { qs: rQs1, n: rQs1.length, passages: reads.slice(0, 4) }, write: { qs: wQs1, n: wQs1.length }, total: lQs1.length + rQs1.length + wQs1.length };
@@ -29753,6 +29759,7 @@ function renderZhMock(app, l) {
       + (function () { var zr = { 1: [20, 20, 0], 2: [35, 25, 0], 3: [40, 30, 10], 4: [45, 40, 15], 5: [45, 45, 10], 6: [50, 50, 1] }[hsk] || [0, 0, 0]; var zt = { 1: 40, 2: 60, 3: 80, 4: 100, 5: 100, 6: 101 }[hsk] || 0; var wTxt = hsk === 6 ? 'Viết ' + mock.write.n + '/1 bài luận' : (zr[2] === 0 ? 'Viết: đề thật không có phần Viết' : 'Viết ' + mock.write.n + '/' + zr[2]); return '<p class="mut">Tỉ lệ so với đề thật (HSK 3.0, theo đề mẫu): Nghe ' + mock.listen.n + '/' + zr[0] + ' · Đọc ' + mock.read.n + '/' + zr[1] + ' · ' + wTxt + ' — tổng ' + mock.total + '/' + zt + ' câu' + (mock.total >= zt ? ' — đủ câu để gọi sẵn sàng thi.' : ' — chưa đủ câu để gọi sẵn sàng thi.') + (hsk === 5 ? ' Lưu ý: phần Viết khác dạng đề thật (web luyện sắp xếp/điền từ, đề thật: điền từ + 2 bài luận).' : (hsk === 6 ? ' Lưu ý: Viết là 1 bài luận, tự chấm theo 4 tiêu chí, không chấm điểm tự động.' : '')) + '</p>'; })()
       + '<p class="mut">Không có phần Nói trong đề này — nói thi riêng ở mục HSKK (HSKK là bài thi nói riêng). Chấm Nghe/Đọc/Viết rút gọn theo đáp án; không có AI chấm tiếng Trung trong đợt này (chờ nâng cấp).</p>'
       + '<p class="mut">Thi thử này theo hệ 6 cấp cũ (Giáo trình chuẩn HSK); HSK 3.0 ra mắt toàn cầu 13/12/2026 có cấu trúc mới — xem thêm ở Thế giới cấp độ → Lớp bổ sung HSK 3.0.</p>'
+      + '<p class="mut">Muốn luyện thêm bằng giọng thật: đề mẫu chính thức HSK 3.0 tại <a href="https://www.chinesetest.cn" target="_blank" rel="noopener">chinesetest.cn</a> và đề luyện Nghe của <a href="https://www.faustacademy.com/pruefungsmaterial/hsk-1-listening-01" target="_blank" rel="noopener">Faust Academy</a> (mở link ngoài).</p>'
       + prevHTML
       + '<div class="row" style="margin-top:8px"><button class="btn btn-primary" id="zhMockStart">Bắt đầu thi thử →</button></div></div>';
     wireBack();
@@ -31779,7 +31786,7 @@ var TP_STAGE_GOALS = [
   { goal: "Đọc và viết được bảng chữ Hàn: nhận mặt và đọc đúng nguyên âm, phụ âm và cách ghép âm tiết có âm cuối.", can: ["Đọc nguyên âm cơ bản và nguyên âm đôi (có y, có w).", "Đọc phụ âm cơ bản và phụ âm căng.", "Ghép âm tiết và đọc đúng 받침 (âm cuối), ví dụ 아기 (em bé), 어제 (hôm qua).", "Qua kiểm tra cuối Hangul rồi mới vào TOPIK I."] },
   { goal: "Dùng câu đơn giản trong đời sống hằng ngày: chào hỏi, giới thiệu bản thân và gia đình, mua sắm đơn giản.", can: ["Nghe câu ngắn, hỏi giờ, mua cà phê, hỏi đường, đi chợ.", "Đọc đoạn giới thiệu bản thân và quê quán, chọn tiểu từ nơi đến, hiểu nghĩa từ 가족, phân biệt từ trái nghĩa với 비싸다.", "Dùng 입니다 / 입니까, 은/는 và 이/가, 에 / 에서, 하고 싶다.", "Viết: điền câu đơn giản.", "Dùng từ vựng: gia đình, trường học, số đếm và thời gian, màu sắc, cơ thể người, quần áo, nhà bếp, thời tiết, thể thao."] },
   { goal: "Tự xử lý các việc hằng ngày quen thuộc: đi lại, mua sắm, hỏi giá, hẹn gặp, nói về chủ đề quen thuộc.", can: ["Nghe hỏi giá, đặt bàn ăn, mượn sách, mua vé, hẹn gặp, hỏi thời tiết ngày mai.", "Đọc chuyến đi Gyeongju, du lịch Seoul, mua sắm, tiết kiệm tiền, sức khỏe, học tiếng Hàn.", "Dùng 을/를 và 에/에서, quá khứ 았/었어요, 기 때문에 (vì), ㄴ/은 후에 (sau khi).", "Viết: điền câu ghép và đoạn ngắn.", "Dùng từ vựng: công việc, giao thông, mùa và tháng, nghề nghiệp, giáo dục và thi cử, công nghệ và internet, văn hóa và nghệ thuật."] },
-  { goal: "Nối từ tiếng Hàn đời sống sang tiếng Hàn xã hội: kể kế hoạch, nêu lý do, nối câu, làm quen dạng viết TOPIK II.", can: ["Nghe kế hoạch cuối tuần, gọi món ăn, xin nghỉ một ngày, thông báo thư viện, đặt phòng khách sạn, đổi vé.", "Đọc đoạn tự giới thiệu, thông báo thư viện, một ngày của Minjun, Seoul, môi trường, công nghệ, quê hương.", "Dùng tương lai 을 거예요, muốn 고 싶어요, nối câu 고 / 지만 / 그래서, 는 동안 (trong khi), 도록 (để, sao cho).", "Viết TOPIK II: nhiệm vụ 51-52 (điền câu) và 53-54 (luận ngắn).", "Làm thi thử TOPIK I rút gọn để chốt nền trước khi lên cấp 3."] },
+  { goal: "Nối từ tiếng Hàn đời sống sang tiếng Hàn xã hội: kể kế hoạch, nêu lý do, nối câu, làm quen dạng viết TOPIK II.", can: ["Nghe kế hoạch cuối tuần, gọi món ăn, xin nghỉ một ngày, thông báo thư viện, đặt phòng khách sạn, đổi vé.", "Đọc đoạn tự giới thiệu, thông báo thư viện, một ngày của Minjun, Seoul, môi trường, công nghệ, quê hương.", "Dùng tương lai 을 거예요, muốn 고 싶어요, nối câu 고 / 지만 / 그래서, 는 동안 (trong khi), 도록 (để, sao cho).", "Viết TOPIK II: nhiệm vụ 51-52 (điền câu) và 53-54 (luận ngắn).", "Làm thi thử TOPIK I để chốt nền trước khi lên cấp 3."] },
   { goal: "Sống bằng tiếng Hàn không gặp trở ngại trong đời sống và bắt đầu nói về chủ đề xã hội quen thuộc.", can: ["Nghe đặt lịch hẹn với đồng nghiệp, xin nghỉ phép, chuẩn bị thuyết trình, tìm nhà thuê, thông báo công ty, phỏng vấn xin việc ngắn.", "Đọc đoạn chuẩn bị đi làm, kế hoạch cuối tuần, thông báo lớp học, bảo vệ môi trường ở trường học, chuẩn bị phỏng vấn xin việc.", "Dùng (으)려고 (định làm gì), (으)ㄴ/는데 (đưa nền, tương phản nhẹ), 아/어지다 (trở nên), (으)면서 (vừa... vừa...).", "Dùng từ vựng: đời sống hằng ngày, việc nhà, cảm xúc, ăn uống và nấu ăn, mua sắm, giao thông, công việc văn phòng, tìm việc.", "Làm thi thử TOPIK II cấp 3 đủ 104 nhiệm vụ (nghe + viết + đọc)."] },
   { goal: "Hiểu tin tức và bài báo khá đơn giản, xử lý một số việc công sở, nói về chủ đề xã hội và trừu tượng.", can: ["Nghe tranh luận về tái chế và mạng xã hội, phỏng vấn làm việc từ xa, bản tin môi trường và công nghệ, bàn về giá nhà và du lịch bền vững.", "Đọc tin giả và cách kiểm chứng, làm việc từ xa, thành phố thông minh, thư gửi tòa soạn về môi trường, quan điểm về mạng xã hội.", "Dùng bị động -이/히/리/기-, sai khiến -게 하다, giả định -(으)면 và -(이)라면, trích dẫn gián tiếp -다고/-라고/-자고/-냐고.", "Dùng từ vựng: tin tức và báo chí, quan điểm và tranh luận, môi trường, công nghệ, xã hội hiện đại, thị trường việc làm, pháp luật và quyền công dân.", "Làm thi thử TOPIK II cấp 4 đủ 104 nhiệm vụ (nghe + viết + đọc)."] },
   { goal: "Dùng tiếng Hàn cho công việc chuyên môn và học thuật ở mức khá: nói và viết về chủ đề ít quen thuộc trong chính trị, kinh tế, xã hội, văn hóa với độ chính xác tăng dần.", can: ["Nghe tranh luận học trực tuyến, phỏng vấn nghề nghiệp, thảo luận môi trường, bàn về giá cả và tiêu dùng, kế hoạch du học, diễn văn về giáo dục.", "Đọc thư viện thành phố, chợ truyền thống và siêu thị, một nhà nghiên cứu trẻ, lễ hội làng, công nghệ và đời sống.", "Dùng nhấn mạnh -(이)야말로 (chính là), đảo trật tự để nhấn mạnh, văn viết -기에 (vì... nên), liên kết luận điểm 한편 / 반면에 / 따라서 / 결론적으로.", "Dùng từ vựng: tư duy trừu tượng, học thuật và nghiên cứu, xã hội và công dân, văn hóa và nghệ thuật sâu, kinh tế và thị trường, pháp luật và chính sách, truyền thông và thông tin.", "Làm thi thử TOPIK II cấp 5 đủ 104 nhiệm vụ (nghe + viết + đọc)."] },
@@ -32302,7 +32309,7 @@ function tpStepMeta(id) {
      Du lieu TP_SANDHI (content-new.js), dung lai noi dung man chi tiet am tiet
      (v141) cho b0–b2, b3–b6 doi chieu chuan bien am Han truoc khi viet. */
   if (k === "b") { var sd = (typeof TP_SANDHI !== "undefined") ? TP_SANDHI[n] : null; return sd ? { kind: "sandhi", title: "Biến âm: " + sd.title, ref: n } : null; }
-  if (id === "m0") return { kind: "mock", title: "Thi thử TOPIK I rút gọn (70 câu · 100 phút)", ref: 0 }; /* v151 S14: ghi 100 phut len the (lay tu man chi tiet tpOpenMock) */
+  if (id === "m0") return { kind: "mock", title: "Thi thử TOPIK I (70 câu · 100 phút)", ref: 0 }; /* v151 S14: ghi 100 phut len the (lay tu man chi tiet tpOpenMock) */
   if (id === "m1") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 3 (đủ 104 nhiệm vụ)", ref: 1 };
   if (id === "m2") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 4 (đủ 104 nhiệm vụ)", ref: 2 };
   if (id === "m3") return { kind: "mock", title: "Thi thử TOPIK II — Cấp 5 (đủ 104 nhiệm vụ)", ref: 3 };
@@ -32797,20 +32804,20 @@ function tpEst(lc, rc) {
 function tpOpenMock(back) {
   var app = document.getElementById("app"); if (!app) return;
   var skipBanner = tpSkipBanner("m0");
-  app.innerHTML = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · THI THỬ RÚT GỌN</p><h2>Thi thử TOPIK I rút gọn</h2><p class="mut">70 câu: 35 câu Nghe + 35 câu Đọc, thời gian tham khảo 100 phút. Đây là bài tự soạn rút gọn; tổng bằng đề thi thật TOPIK I dạng giấy (70 câu, 100 phút) nhưng tỉ lệ từng phần khác thi thật (thi thật: 30 Nghe + 40 Đọc). Cấp dưới đây chỉ là ước lượng nội bộ theo quy ước của web (tổng 200 điểm: từ 140 = cấp 2, 80–139 = cấp 1), không phải bảng quy đổi chính thức, nên cấp ước lượng càng mang tính tham khảo.</p><div class="row"><button class="btn btn-primary" id="tpMockStart">Bắt đầu thi thử</button> <button class="btn" id="tpMock2Btn">Thi thử TOPIK II đủ 104 nhiệm vụ →</button></div><div id="tpMockBody"></div></section>';
+  app.innerHTML = tpBackBtnHTML(back) + skipBanner + '<section class="card"><p class="eyebrow">TOPIK · THI THỬ</p><h2>Thi thử TOPIK I</h2><p class="mut">70 câu: 30 câu Nghe + 40 câu Đọc, thời gian tham khảo 100 phút. Đây là bài tự soạn theo đúng tỉ lệ đề thi thật TOPIK I dạng giấy (70 câu, 100 phút). Cấp dưới đây chỉ là ước lượng nội bộ theo quy ước của web (tổng 200 điểm: từ 140 = cấp 2, 80–139 = cấp 1), không phải bảng quy đổi chính thức, nên cấp ước lượng càng mang tính tham khảo.</p><div class="row"><button class="btn btn-primary" id="tpMockStart">Bắt đầu thi thử</button> <button class="btn" id="tpMock2Btn">Thi thử TOPIK II đủ 104 nhiệm vụ →</button></div><div id="tpMockBody"></div></section>';
   tpWireBack(back);
   var tpM2Btn = document.getElementById("tpMock2Btn"); if (tpM2Btn) tpM2Btn.onclick = function () { tpOpenMock2(back); };
   document.getElementById("tpMockStart").onclick = function () {
     var body = document.getElementById("tpMockBody");
     var secs = 100 * 60;
     var qhtml = '<p><b>Thời gian còn lại: <span id="tpMockClock">100:00</span> (tham khảo — hết giờ sẽ tự nộp)</b></p>';
-    qhtml += '<h3>Phần Nghe (35 câu)</h3>' + listenVoiceLabelHTML("tts"); /* v252: nhan giong may/that */
+    qhtml += '<h3>Phần Nghe (30 câu)</h3>' + listenVoiceLabelHTML("tts"); /* v252: nhan giong may/that */
     qhtml += TP_MOCK_L.map(function (q, i) {
       return '<div class="qblock tpq" data-qi="L' + i + '"><p><b>Nghe ' + (i + 1) + ':</b> <button class="btn tpmocklisten" data-i="' + i + '">🔊 Nghe</button></p><p>' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt" data-qi="L' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
-    qhtml += '<h3>Phần Đọc (35 câu)</h3>';
+    qhtml += '<h3>Phần Đọc (40 câu)</h3>';
     qhtml += TP_MOCK_R.map(function (q, i) {
-      return '<div class="qblock tpq" data-qi="R' + i + '"><p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
+      return '<div class="qblock tpq" data-qi="R' + i + '">' + (q.passage ? '<p>' + esc(q.passage) + '</p>' : '') + '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
     qhtml += '<div class="row"><button class="btn btn-primary" id="tpMockSubmit">Nộp bài</button></div><div id="tpMockResult"></div>';
     body.innerHTML = qhtml;
@@ -32829,11 +32836,11 @@ function tpOpenMock(back) {
       TP_MOCK_L.forEach(function (q, i) { if (answers["L" + i] === q.a) lc++; });
       TP_MOCK_R.forEach(function (q, i) { if (answers["R" + i] === q.a) rc++; });
       var est = tpEst(lc, rc);
-      tpNorm(); state.tpMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, level: est.level, milestone: "tp-mock-I" }); saveState(); tpMarkDone("m0");
-      var rev = '<h3>Kết quả thi thử rút gọn</h3><p>Nghe: ' + lc + '/' + TP_MOCK_L.length + ' · Đọc: ' + rc + '/' + TP_MOCK_R.length + ' · <b>Điểm ước lượng: ' + est.total + '/200 — ' + esc(est.level) + ' (tham khảo)</b> · CEFR: ' + ((tpCefrFromLevelStr(est.level) || { label: "" }).label) + ' (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p class="mut">Cấp này chỉ để tham khảo — bài rút gọn 70 câu (35 Nghe + 35 Đọc, khác tỉ lệ thi thật 30 Nghe + 40 Đọc); ngưỡng 80/140 là quy ước nội bộ của web theo thang PBT /200, không phải bảng chính thức.</p>';
+      tpNorm(); state.tpMockTests.push({ at: Date.now(), l: lc, r: rc, est: est.total, level: est.level, den: [30, 40], milestone: "tp-mock-I" }); saveState(); tpMarkDone("m0");
+      var rev = '<h3>Kết quả thi thử TOPIK I</h3><p>Nghe: ' + lc + '/' + TP_MOCK_L.length + ' · Đọc: ' + rc + '/' + TP_MOCK_R.length + ' · <b>Điểm ước lượng: ' + est.total + '/200 — ' + esc(est.level) + ' (tham khảo)</b> · CEFR: ' + ((tpCefrFromLevelStr(est.level) || { label: "" }).label) + ' (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p class="mut">Cấp này chỉ để tham khảo — bài tự soạn 70 câu đúng tỉ lệ thi thật (30 Nghe + 40 Đọc); ngưỡng 80/140 là quy ước nội bộ của web theo thang PBT /200, không phải bảng chính thức.</p>';
       rev += '<h3>Xem lại từng câu</h3><p class="mut">Sửa thế này: câu nào chưa đúng thì xem lại lý thuyết của chặng đó rồi mở lại thi thử từ Thế giới cấp độ để làm lại.</p>';
       TP_MOCK_L.forEach(function (q, i) { rev += '<p><b>Nghe ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["L" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
-      TP_MOCK_R.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
+      TP_MOCK_R.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + (q.passage ? esc(q.passage) + '<br>' : '') + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
       var resEl = document.getElementById("tpMockResult"); if (resEl) resEl.innerHTML = rev;
       var sub = document.getElementById("tpMockSubmit"); if (sub) sub.disabled = true;
       body.querySelectorAll(".tpopt").forEach(function (x) { x.disabled = true; });
@@ -32878,7 +32885,7 @@ function tpOpenMock2(back, stepId) {
     }).join("");
     qhtml += '<h3>Phần Đọc (50 câu)</h3>';
     qhtml += TP_MOCK2_R.map(function (q, i) {
-      return '<div class="qblock tpq" data-qi="R' + i + '"><p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt2" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
+      return '<div class="qblock tpq" data-qi="R' + i + '">' + (q.passage ? '<p>' + esc(q.passage) + '</p>' : '') + '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + '</p><div class="row">' + gameShuffle(q.o.map(function (op, oi) { return oi; })).map(function (oi) { return '<button class="btn tpopt2" data-qi="R' + i + '" data-oi="' + oi + '">' + esc(q.o[oi]) + '</button>'; }).join("") + '</div><div class="tpwhy"></div></div>';
     }).join("");
     qhtml += '<h3>Phần Viết (4 nhiệm vụ — tự luyện, không cộng điểm)</h3>';
     qhtml += TP_MOCK2_W.map(function (w, i) {
@@ -32906,7 +32913,7 @@ function tpOpenMock2(back, stepId) {
       var rev = '<h3>Kết quả thi thử TOPIK II đủ câu</h3><p>Nghe: ' + lc + '/50 · Đọc: ' + rc + '/50 · <b>Điểm ước lượng Nghe + Đọc: ' + est.total + '/200 (tham khảo)</b> · CEFR: ' + ((tpCefrFromEst(est.total) || { label: "" }).label) + ' (Nghe ~' + est.l + ' + Đọc ~' + est.r + ')</p><p><b>' + tpLevelMin(est.total) + '</b> <span class="mut">Công thức hiển thị: điểm Nghe + Đọc quy về /200, Viết tự chấm KHÔNG cộng vào; tổng thật = điểm này + điểm Viết (0–100). Ngưỡng cấp chính thức /300: cấp 3 ≥120, cấp 4 ≥150, cấp 5 ≥190, cấp 6 ≥230. Đây là ước lượng nội bộ, không phải kết quả chính thức.</span></p><p class="mut">Điểm này là ước lượng có giới hạn: đề thật TOPIK II tính trên tổng 300 điểm gồm Viết 100 điểm, còn bài này Viết chỉ tự chấm theo bảng tiêu chí, KHÔNG cộng vào điểm số. Phần Viết hãy tự chấm theo bảng tiêu chí ở trên.</p>';
       rev += '<h3>Xem lại từng câu trắc nghiệm</h3><p class="mut">Sửa thế này: câu nào chưa đúng thì xem lại lý thuyết của chặng đó rồi mở lại thi thử từ Thế giới cấp độ để làm lại.</p>';
       TP_MOCK2_L.forEach(function (q, i) { rev += '<p><b>Nghe ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["L" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
-      TP_MOCK2_R.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
+      TP_MOCK2_R.forEach(function (q, i) { rev += '<p><b>Đọc ' + (i + 1) + ':</b> ' + (q.passage ? esc(q.passage) + '<br>' : '') + esc(q.q) + ' — Đáp án đúng: ' + esc(q.o[q.a]) + '. ' + esc(q.why) + (answers["R" + i] === q.a ? ' (Bạn đúng ✓)' : ' (Bạn chưa đúng)') + '</p>'; });
       var resEl = document.getElementById("tpMock2Result"); if (resEl) resEl.innerHTML = rev;
       var sub = document.getElementById("tpMock2Submit"); if (sub) sub.disabled = true;
       body.querySelectorAll(".tpopt2").forEach(function (x) { x.disabled = true; });
@@ -33104,7 +33111,7 @@ function viewPracticeTp(app) {
     if (items.length) html += '<section class="card"><h3>Đọc dạng ' + p + '</h3><div class="row">' + items.map(function (x) { return tpStepBtnHTML("r" + x.i); }).join("") + '</div></section>';
   });
   html += tpSpeakHTML(); /* v213 A2 */
-  html += '<section class="card"><h3>Thi thử TOPIK I rút gọn</h3><p class="mut">70 câu: 35 câu Nghe + 35 câu Đọc, 100 phút tham khảo, cấp ước lượng chỉ để tham khảo.</p><div class="row">' + tpStepBtnHTML("m0") + '</div></section>';
+  html += '<section class="card"><h3>Thi thử TOPIK I</h3><p class="mut">70 câu: 30 câu Nghe + 40 câu Đọc, 100 phút tham khảo, cấp ước lượng chỉ để tham khảo.</p><div class="row">' + tpStepBtnHTML("m0") + '</div></section>';
   if (state.tpHard.length > 0) html += '<section class="card"><h3>Lỗi sai TOPIK chưa sửa: ' + state.tpHard.length + '</h3><p class="mut">Xem và sửa ở tab Ôn tập.</p></section>';
   html += '<p><button class="btn" id="tpPracticeEntryBtn">Làm lại kiểm tra đầu vào TOPIK</button> <button class="btn" id="tpPracticeEntryQuickBtn">Kiểm tra nhanh (chỉ trắc nghiệm)</button></p>';
     app.innerHTML = html;

@@ -40967,14 +40967,18 @@ const CONTENT = {
      "why": "Bữa sáng của Mai có bánh mì và một ly sữa vì phần ghi chú còn thiếu chính là ly sữa."
     },
     {
-     "type": "TF",
-     "q": "Mai's school is next to the market.",
+     "type": "MC",
+     "q": "Where is Mai's school?",
      "o": [
-      "True",
-      "False"
+      "Next to the park",
+      "Next to the library",
+      "Next to her house",
+      "Next to the market"
      ],
-     "a": 0,
-     "why": "Câu này đúng vì bài nghe nói trường của Mai nằm ngay cạnh chợ."
+     "a": 3,
+     "why": "Ví dụ: trong đoạn nghe có câu “Trường của Mai nằm ngay cạnh chợ và có 12 phòng học”. Vì vậy đáp án “Next to the market” đúng. Cách làm: nghe kỹ rồi đối chiếu từng ý trong đoạn nghe với đáp án.",
+     "whyOrig": "Ví dụ: trong đoạn nghe có câu “Trường của Mai nằm ngay cạnh chợ và có 12 phòng học”. Vì vậy đáp án “Next to the market” đúng. Cách làm: nghe kỹ rồi đối chiếu từng ý trong đoạn nghe với đáp án.",
+     "whyU7": true
     }
    ]
   },
@@ -41027,14 +41031,12 @@ const CONTENT = {
      "why": "Thanh Ha đến lúc 9 giờ 15 vì cô ấy nói sẽ đến sớm và chờ ở quầy lễ tân."
     },
     {
-     "type": "TF",
-     "q": "The consultation fee is 200000 dong.",
-     "o": [
-      "True",
-      "False"
-     ],
-     "a": 0,
-     "why": "Câu này đúng vì lễ tân nói phí khám là 200000 đồng."
+     "type": "SA",
+     "q": "How much is the consultation fee?",
+     "answer": "200000 dong",
+     "why": "Ví dụ: trong đoạn nghe lễ tân nói phí khám là 200000 đồng. Vì vậy đáp án “200000 dong” đúng. Cách làm: nghe kỹ con số trong đoạn nghe rồi ghi lại đúng như vậy.",
+     "whyOrig": "Ví dụ: trong đoạn nghe lễ tân nói phí khám là 200000 đồng. Vì vậy đáp án “200000 dong” đúng. Cách làm: nghe kỹ con số trong đoạn nghe rồi ghi lại đúng như vậy.",
+     "whyU7": true
     }
    ]
   },
@@ -41087,14 +41089,18 @@ const CONTENT = {
      "why": "Việc đặt chỗ kết thúc vào thứ Năm vì thông báo nhắc hạn chót là thứ Năm lúc 5 giờ."
     },
     {
-     "type": "TF",
-     "q": "Visitors will watch a film before joining the workshop.",
+     "type": "MC",
+     "q": "What will visitors do before joining the workshop?",
      "o": [
-      "True",
-      "False"
+      "Visit Room 3 first",
+      "Watch a 20 minute film",
+      "Buy tickets at the front desk",
+      "Wear comfortable shoes"
      ],
-     "a": 0,
-     "why": "Câu này đúng vì du khách xem phim 20 phút rồi mới tham gia buổi thực hành."
+     "a": 1,
+     "why": "Ví dụ: trong đoạn nghe có câu “Du khách sẽ xem một bộ phim 20 phút rồi mới tham gia buổi thực hành”. Vì vậy đáp án “Watch a 20 minute film” đúng. Các đáp án khác nói việc khác trong bài, không phải việc làm trước buổi thực hành.",
+     "whyOrig": "Ví dụ: trong đoạn nghe có câu “Du khách sẽ xem một bộ phim 20 phút rồi mới tham gia buổi thực hành”. Vì vậy đáp án “Watch a 20 minute film” đúng. Các đáp án khác nói việc khác trong bài, không phải việc làm trước buổi thực hành.",
+     "whyU7": true
     }
    ]
   },
@@ -41147,14 +41153,18 @@ const CONTENT = {
      "why": "Hai buổi tập huấn diễn ra ngày 24 và ngày 26 tháng 2 vì thông báo liệt kê cả hai ngày."
     },
     {
-     "type": "TF",
-     "q": "Volunteers will read stories on Monday and Wednesday evenings.",
+     "type": "MC",
+     "q": "On which evenings do volunteers read stories to children?",
      "o": [
-      "True",
-      "False"
+      "Monday and Wednesday evenings",
+      "Tuesday and Friday evenings",
+      "Monday and Thursday evenings",
+      "Tuesday and Thursday evenings"
      ],
-     "a": 1,
-     "why": "Câu này sai vì tình nguyện viên đọc truyện vào tối thứ Ba và tối thứ Năm."
+     "a": 3,
+     "why": "Ví dụ: trong đoạn nghe có câu “Tình nguyện viên đọc truyện cho nhóm trẻ vào tối thứ Ba và tối thứ Năm”. Vì vậy đáp án “Tuesday and Thursday evenings” đúng. Đáp án “Monday and Wednesday evenings” sai ngày.",
+     "whyOrig": "Ví dụ: trong đoạn nghe có câu “Tình nguyện viên đọc truyện cho nhóm trẻ vào tối thứ Ba và tối thứ Năm”. Vì vậy đáp án “Tuesday and Thursday evenings” đúng. Đáp án “Monday and Wednesday evenings” sai ngày.",
+     "whyU7": true
     }
    ]
   },
@@ -41207,14 +41217,12 @@ const CONTENT = {
      "why": "Có 62 phần trăm sinh viên ngủ ít hơn 7 giờ trước kỳ thi vì kết quả nghiên cứu nêu tỉ lệ này."
     },
     {
-     "type": "TF",
-     "q": "The online questionnaire had 20 questions.",
-     "o": [
-      "True",
-      "False"
-     ],
-     "a": 1,
-     "why": "Câu này sai vì bảng hỏi trực tuyến chỉ có 18 câu hỏi."
+     "type": "COMP",
+     "q": "The online questionnaire had ___ questions.",
+     "answer": "18",
+     "why": "Ví dụ: trong đoạn nghe nhóm nói họ dùng bảng hỏi trực tuyến gồm 18 câu hỏi, rồi phỏng vấn sâu 12 sinh viên. Vì vậy đáp án “18” đúng, không phải 20.",
+     "whyOrig": "Ví dụ: trong đoạn nghe nhóm nói họ dùng bảng hỏi trực tuyến gồm 18 câu hỏi, rồi phỏng vấn sâu 12 sinh viên. Vì vậy đáp án “18” đúng, không phải 20.",
+     "whyU7": true
     }
    ]
   },
@@ -41267,14 +41275,18 @@ const CONTENT = {
      "why": "Sinh viên nộp bản thảo đầy đủ cho thầy Pham vì câu cuối nêu tên người nhận và hạn nộp là trưa thứ Sáu ngày 9."
     },
     {
-     "type": "TF",
-     "q": "The sample of interviewed residents included 50 people.",
+     "type": "MC",
+     "q": "How many residents were interviewed last semester?",
      "o": [
-      "True",
-      "False"
+      "50 residents",
+      "35 residents",
+      "180 residents",
+      "120 residents"
      ],
      "a": 1,
-     "why": "Câu này sai vì mẫu cư dân được phỏng vấn chỉ gồm 35 người."
+     "why": "Ví dụ: trong đoạn nghe có câu “Mẫu gồm 35 cư dân được phỏng vấn vào học kỳ trước”. Vì vậy đáp án “35 residents” đúng. Số 180 là số người dùng công viên trả lời khảo sát thêm, không phải số cư dân được phỏng vấn.",
+     "whyOrig": "Ví dụ: trong đoạn nghe có câu “Mẫu gồm 35 cư dân được phỏng vấn vào học kỳ trước”. Vì vậy đáp án “35 residents” đúng. Số 180 là số người dùng công viên trả lời khảo sát thêm, không phải số cư dân được phỏng vấn.",
+     "whyU7": true
     }
    ]
   },
@@ -41327,14 +41339,18 @@ const CONTENT = {
      "why": "Mực ngập đỉnh giảm gần 18 phần trăm vì ví dụ trong bài giảng nêu mức giảm này."
     },
     {
-     "type": "TF",
-     "q": "Wetlands make water quality worse for nearby neighbourhoods.",
+     "type": "MC",
+     "q": "What do wetlands do to water quality for nearby neighbourhoods?",
      "o": [
-      "True",
-      "False"
+      "They improve it",
+      "They make it worse",
+      "They do not change it",
+      "They make it salty"
      ],
-     "a": 1,
-     "why": "Câu này sai vì bài giảng nói vùng đất ngập nước lọc chất ô nhiễm và làm nước sạch hơn."
+     "a": 0,
+     "why": "Ví dụ: trong đoạn nghe có câu “Vùng đất ngập nước giữ trầm tích và lọc chất ô nhiễm, nhờ đó nước sạch hơn cho các khu dân cư gần đó”. Vì vậy đáp án “They improve it” đúng.",
+     "whyOrig": "Ví dụ: trong đoạn nghe có câu “Vùng đất ngập nước giữ trầm tích và lọc chất ô nhiễm, nhờ đó nước sạch hơn cho các khu dân cư gần đó”. Vì vậy đáp án “They improve it” đúng.",
+     "whyU7": true
     }
    ]
   },
@@ -41387,14 +41403,12 @@ const CONTENT = {
      "why": "Tỉ lệ tái chế chính thức chưa tới 22 phần trăm vì phần ghi chú còn thiếu chính là con số này."
     },
     {
-     "type": "TF",
-     "q": "Effective policy requires producers to finance collection.",
-     "o": [
-      "True",
-      "False"
-     ],
-     "a": 0,
-     "why": "Câu này đúng vì bài giảng nói chính sách hiệu quả buộc nhà sản xuất chi tiền cho việc thu gom."
+     "type": "SA",
+     "q": "Who must finance collection under effective policy?",
+     "answer": "producers",
+     "why": "Ví dụ: trong đoạn nghe có câu “Chính sách hiệu quả đòi hỏi nhà sản xuất chi tiền cho việc thu gom”. Vì vậy đáp án “producers” đúng. Cách làm: nghe kỹ xem ai phải làm việc đó trong đoạn nghe.",
+     "whyOrig": "Ví dụ: trong đoạn nghe có câu “Chính sách hiệu quả đòi hỏi nhà sản xuất chi tiền cho việc thu gom”. Vì vậy đáp án “producers” đúng. Cách làm: nghe kỹ xem ai phải làm việc đó trong đoạn nghe.",
+     "whyU7": true
     }
    ]
   }

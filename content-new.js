@@ -1076,7 +1076,7 @@ function skillCounts() {
 /* ============ NỘI DUNG MỚI — ĐỢT NỘI DUNG CHUẨN 26/10/2026 ============
    Tự soạn, append vào cuối mảng (không chèn giữa, không splice) để giữ nguyên
    chỉ số cũ và tiến trình theo chỉ số. Căn cứ: nhóm 2-4 trong THU-TU-VIET.md. */
-CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, [{"section":"Section 1","band":"Band 2,0","topic":"Đăng ký lớp học tiếng Anh buổi tối","text":"A: Good morning, Sun Language Centre. How can I help you? B: Good morning. I would like to join an evening English class, please. A: We have two evening classes. The Monday and Wednesday class is for beginners, and the Tuesday and Thursday class is for elementary students. B: I am a beginner, so the Monday and Wednesday class sounds good. What time does it start? A: It starts at 7 o'clock in the evening and finishes at 9 o'clock. Each lesson lasts two hours. B: How much does the course cost? A: The course costs 1200000 dong for ten lessons, and the book costs 150000 dong. B: That is fine. My name is Thu Ha, and my phone number is 0912345678. A: Thank you, Thu Ha. Please come to Room 5 on Monday evening and bring your book and a notebook. B: Thank you very much. I will see you on Monday.","questions":[{"type":"MC","q":"Which class does Thu Ha choose?","o":["The Tuesday and Thursday class","The Monday and Wednesday class","The Saturday morning class","The Sunday class"],"a":1,"why":"Thu Ha chọn lớp thứ Hai và thứ Tư vì cô ấy là người mới bắt đầu và lớp đó dành cho người mới bắt đầu."},{"type":"MC","q":"What time does the class finish?","o":["At 8 o'clock","At 10 o'clock","At 7 o'clock","At 9 o'clock"],"a":3,"why":"Lớp học kết thúc lúc 9 giờ tối vì nhân viên nói lớp bắt đầu lúc 7 giờ và kết thúc lúc 9 giờ."},{"type":"COMP","q":"The course costs ___ dong for ten lessons.","answer":"1200000","why":"Khóa học có giá 1200000 đồng cho mười buổi vì nhân viên báo giá này khi Thu Ha hỏi học phí."},{"type":"TF","q":"Thu Ha must bring her book and a notebook to Room 5.","o":["True","False"],"a":0,"why":"Câu này đúng vì nhân viên dặn Thu Ha đến phòng 5 vào tối thứ Hai và mang theo sách cùng vở."},{"type":"SA","q":"What is Thu Ha's phone number?","answer":"0912345678","why":"Số điện thoại của Thu Ha là 0912345678 vì cô ấy đọc số này khi đăng ký."}]},{"section":"Section 1","band":"Band 2,0","topic":"Hỏi đường đến thư viện thành phố","text":"A: Excuse me, can you help me, please? I want to go to the city library. B: Of course. Go straight along this street for about ten minutes. A: Do I turn left or right at the traffic lights? B: Turn left at the traffic lights, and then walk past the post office. A: Is the library near the post office? B: No, it is a little further. After the post office, turn right into Green Street. The library is on your left, next to the small park. A: How long does it take to walk there? B: It takes about fifteen minutes from here. A: Thank you. Is the library open on Sunday? B: Yes, it is open from 8 o'clock in the morning to 5 o'clock in the afternoon on Sunday. A: That is very helpful. Thank you so much. B: You are welcome. Have a nice day.","questions":[{"type":"MC","q":"Where does the visitor want to go?","o":["The post office","The small park","The city library","The bus station"],"a":2,"why":"Người khách muốn đến thư viện thành phố vì câu đầu tiên anh ấy hỏi đường đến thư viện."},{"type":"MATCH","q":"Which street is the library on?","o":["Green Street","Park Street","Main Street"],"a":0,"why":"Thư viện nằm trên đường Green vì người chỉ đường nói rẽ phải vào đường Green rồi thư viện ở bên trái."},{"type":"MC","q":"How long does it take to walk to the library?","o":["About five minutes","About ten minutes","About fifteen minutes","About twenty minutes"],"a":2,"why":"Đi bộ tới thư viện mất khoảng mười lăm phút vì người chỉ đường nói rõ thời gian này."},{"type":"COMP","q":"On Sunday, the library is open from 8 o'clock in the morning to ___ o'clock in the afternoon.","answer":"5","why":"Chủ nhật thư viện mở cửa đến 5 giờ chiều vì người chỉ đường nói giờ mở cửa ngày Chủ nhật."},{"type":"TF","q":"The visitor must turn right at the traffic lights.","o":["True","False"],"a":1,"why":"Câu này sai vì người chỉ đường dặn rẽ trái ở đèn giao thông, không phải rẽ phải."}]},{"section":"Section 1","band":"Band 2,5","topic":"Mua vé tàu đi thăm bạn","text":"A: Good afternoon. I would like two train tickets to River Town, please. B: Certainly. When do you want to travel? A: On Saturday morning, please. B: There is a train at 8:20 and another at 10:40. Which one do you prefer? A: The 8:20 train, please. We want to arrive early. B: The 8:20 train arrives at 11:05, and a return ticket costs 240000 dong per person. A: That is fine. Can we sit near the window? B: Yes, I can book two window seats in carriage 3. A: Thank you. Do we need to bring anything for the journey? B: Please bring your tickets and your identity cards. The train leaves from platform 2. A: Platform 2, carriage 3, window seats. Thank you very much. B: You are welcome. Have a pleasant journey.","questions":[{"type":"MC","q":"Which train does the customer choose?","o":["The 7:20 train","The 10:40 train","The 11:05 train","The 8:20 train"],"a":3,"why":"Khách chọn chuyến tàu 8 giờ 20 vì anh ấy muốn đến sớm và chọn chuyến này khi nhân viên đưa ra hai lựa chọn."},{"type":"MC","q":"How much is a return ticket per person?","o":["120.000 đồng","200000 dong","240000 dong","340000 dong"],"a":2,"why":"Vé khứ hồi giá 240000 đồng một người vì nhân viên báo giá này cho chuyến tàu 8 giờ 20."},{"type":"MATCH","q":"Which carriage are the seats in?","o":["Carriage 2","Carriage 3","Carriage 5"],"a":1,"why":"Ghế ngồi ở toa số 3 vì nhân viên nói đặt hai ghế cửa sổ ở toa 3."},{"type":"COMP","q":"The train leaves from platform ___.","answer":"2","why":"Tàu khởi hành từ sân ga số 2 vì nhân viên dặn khách điều này ở cuối đoạn hội thoại."},{"type":"TF","q":"The customers must bring their tickets and identity cards.","o":["True","False"],"a":0,"why":"Câu này đúng vì nhân viên dặn khách mang theo vé và giấy tờ tùy thân cho chuyến đi."}]},{"section":"Section 1","band":"Band 2,5","topic":"Hỏi giờ làm việc của bưu điện trung tâm","text":"A: Excuse me, what time does the central post office open? B: It opens at 7:30 in the morning from Monday to Friday. A: And what time does it close? B: It closes at 6 o'clock in the evening on weekdays. A: Is it open on Saturday? B: Yes, on Saturday it opens at 8 o'clock and closes at 12 o'clock at noon. A: I see. Is it open on Sunday? B: No, I am afraid it is closed on Sunday. A: I want to send a parcel to my sister. How much does it cost? B: A small parcel costs 45000 dong, and a large parcel costs 90000 dong. A: Thank you. Can I buy stamps here as well? B: Yes, you can buy stamps at counter 4, next to the main door. A: Thank you for your help. B: You are welcome.","questions":[{"type":"MC","q":"What time does the post office open on weekdays?","o":["At 7 o'clock","At 7:30","At 8 o'clock","At 9 o'clock"],"a":1,"why":"Bưu điện mở cửa lúc 7 giờ 30 các ngày trong tuần vì nhân viên nói rõ giờ mở cửa từ thứ Hai đến thứ Sáu."},{"type":"MATCH","q":"When does the post office close on Saturday?","o":["At 12 o'clock at noon","At 5 o'clock","At 6 o'clock"],"a":0,"why":"Thứ Bảy bưu điện đóng cửa lúc 12 giờ trưa vì nhân viên nói giờ làm việc thứ Bảy là từ 8 giờ đến 12 giờ."},{"type":"MC","q":"How much does a large parcel cost to send?","o":["90000 dong","45000 dong","60000 dong","120.000 đồng"],"a":0,"why":"Gửi bưu kiện lớn tốn 90000 đồng vì nhân viên báo giá bưu kiện nhỏ là 45000 đồng và bưu kiện lớn là 90000 đồng."},{"type":"COMP","q":"You can buy stamps at counter ___.","answer":"4","why":"Bạn có thể mua tem ở quầy số 4 vì nhân viên chỉ quầy 4 nằm cạnh cửa chính."},{"type":"TF","q":"The post office is open on Sunday.","o":["True","False"],"a":1,"why":"Câu này sai vì nhân viên nói bưu điện đóng cửa vào Chủ nhật."}]},{"section":"Section 2","band":"Band 3,0","topic":"Thông báo ở trường về ngày hội thể thao","text":"Good morning, students. I have an important announcement about our school sports day. The sports day will take place on Friday the 20th of June in the school stadium. All students from class 6 to class 9 will take part in the event. There will be running races, football matches and a long jump competition. Students should arrive at school at 7:30 in the morning and wear their sports clothes and trainers. Please bring a bottle of water and a hat, because the weather may be hot. Lunch will be provided in the school canteen at 12 o'clock. Parents are welcome to come and watch the competitions from 9 o'clock. If you want to join the football team, please give your name to Mr Tuan in Room 12 before Wednesday. We hope everyone will have a fun and healthy day.","questions":[{"type":"MC","q":"When will the sports day take place?","o":["On Wednesday the 20th of June","On Saturday the 20th of June","On Friday the 12th of June","On Friday the 20th of June"],"a":3,"why":"Ngày hội thể thao diễn ra vào thứ Sáu ngày 20 tháng 6 vì thông báo nêu rõ ngày này."},{"type":"MC","q":"What should students bring?","o":["A book and a pen","A bottle of water and a hat","A football and a racket","A camera and a phone"],"a":1,"why":"Học sinh nên mang theo một chai nước và một chiếc mũ vì thông báo dặn mang hai thứ này do trời có thể nóng."},{"type":"MATCH","q":"Who should students give their name to for the football team?","o":["Mr Tuan","Mrs Hoa","Mr Nam"],"a":0,"why":"Học sinh muốn vào đội bóng phải đưa tên cho thầy Tuan vì thông báo nói rõ tên thầy Tuan."},{"type":"COMP","q":"Lunch will be provided in the school canteen at ___ o'clock.","answer":"12","why":"Bữa trưa được phục vụ ở căng tin trường lúc 12 giờ vì thông báo nêu giờ ăn trưa này."},{"type":"TF","q":"Parents can come and watch the competitions from 9 o'clock.","o":["True","False"],"a":0,"why":"Câu này đúng vì thông báo mời phụ huynh đến xem các cuộc thi từ 9 giờ."}]},{"section":"Section 2","band":"Band 3,0","topic":"Hướng dẫn tham quan vườn thực vật","text":"Welcome to Green Garden, our city botanical garden. The garden opens at 8 o'clock in the morning and closes at 5:30 in the afternoon. Your visit today has three parts. First, we will walk through the flower garden, where you can see more than 200 kinds of flowers. Next, we will visit the tall tree area, where some trees are over 100 years old. Finally, we will stop at the lake, where you can take photos and rest under the trees. Please stay on the paths and do not pick the flowers. You can buy drinks and snacks at the small cafe near the main gate. The entrance ticket costs 30000 dong for adults and is free for children under 6 years old. Our guides wear green hats, so please follow them. Thank you, and enjoy your visit to Green Garden.","questions":[{"type":"MC","q":"What is the first part of the visit?","o":["The lake","The tall tree area","The flower garden","The small cafe"],"a":2,"why":"Phần đầu tiên của chuyến tham quan là vườn hoa vì hướng dẫn viên nói trước tiên đoàn sẽ đi qua vườn hoa."},{"type":"MATCH","q":"Where can visitors buy drinks and snacks?","o":["At the lake","In the tall tree area","At the small cafe near the main gate"],"a":2,"why":"Du khách có thể mua đồ uống và đồ ăn nhẹ ở quán cà phê nhỏ gần cổng chính vì hướng dẫn viên nói rõ địa điểm này."},{"type":"MC","q":"How much is an entrance ticket for an adult?","o":["20000 dong","50000 dong","It is free","30000 dong"],"a":3,"why":"Vé vào cửa cho người lớn giá 30000 đồng vì hướng dẫn viên báo giá vé người lớn và miễn phí cho trẻ dưới 6 tuổi."},{"type":"COMP","q":"The guides wear ___ hats.","answer":"green","why":"Hướng dẫn viên đội mũ màu xanh lá vì hướng dẫn viên nói du khách hãy đi theo những người đội mũ xanh lá."},{"type":"TF","q":"Visitors can pick the flowers in the garden.","o":["True","False"],"a":1,"why":"Câu này sai vì hướng dẫn viên dặn du khách đi trên lối đi và không được hái hoa."}]},{"section":"Section 2","band":"Band 3,5","topic":"Bản tin khu phố về ngày dọn dẹp công viên","text":"Hello, everyone. This is the weekly news for Rose Neighbourhood. Next Saturday, we will have a big clean-up day in Rose Park. The clean-up starts at 8 o'clock in the morning and finishes at 11 o'clock. Volunteers will collect rubbish, paint the benches and plant 50 new flowers near the main gate. The neighbourhood committee will provide gloves, bags and drinking water for all volunteers. Children can join with their parents and help plant flowers in the small garden area. After the clean-up, there will be a free lunch in the park for all volunteers at 12 o'clock. If you want to join, please write your name on the list at the community house before Thursday evening. Last year, 80 people joined the clean-up day, and this year we hope even more neighbours will take part. Thank you for helping to keep our park clean and beautiful.","questions":[{"type":"MC","q":"When does the clean-up day start?","o":["At 7 o'clock","At 9 o'clock","At 11 o'clock","At 8 o'clock"],"a":3,"why":"Ngày dọn dẹp bắt đầu lúc 8 giờ sáng vì bản tin nêu giờ bắt đầu là 8 giờ và kết thúc lúc 11 giờ."},{"type":"MC","q":"What will volunteers plant near the main gate?","o":["50 new flowers","50 new trees","80 new flowers","20 new benches"],"a":0,"why":"Tình nguyện viên sẽ trồng 50 bông hoa mới gần cổng chính vì bản tin nêu con số và địa điểm này."},{"type":"MATCH","q":"Where should people write their name to join?","o":["At the park gate","At the community house","At the school"],"a":1,"why":"Người muốn tham gia phải ghi tên vào danh sách tại nhà cộng đồng vì bản tin dặn đăng ký ở đó trước tối thứ Năm."},{"type":"COMP","q":"Last year, ___ people joined the clean-up day.","answer":"80","why":"Năm ngoái có 80 người tham gia ngày dọn dẹp vì bản tin nhắc lại con số của năm trước."},{"type":"TF","q":"Volunteers will have a free lunch in the park at 12 o'clock.","o":["True","False"],"a":0,"why":"Câu này đúng vì bản tin nói sau khi dọn dẹp sẽ có bữa trưa miễn phí trong công viên lúc 12 giờ."}]},{"section":"Section 2","band":"Band 3,5","topic":"Giới thiệu câu lạc bộ bóng bàn","text":"Welcome to the Blue Table Tennis Club. Our club meets every Tuesday and Friday evening in the community sports hall on Sun Street. Beginners are welcome, and our coaches will teach you the basic skills step by step. Each meeting starts at 6:30 in the evening with a warm-up, and then members play friendly matches for one hour. The club has 12 tables, so everyone can play without waiting too long. The monthly fee is 100000 dong, and this includes the use of bats and balls. Members under 18 years old pay only 60000 dong a month. Twice a year, the club organises a small tournament, and the winners receive medals and small gifts. If you want to join, please come to the sports hall on Friday evening and speak to Coach Minh. We look forward to meeting you.","questions":[{"type":"MC","q":"When does the club meet?","o":["Every Monday and Wednesday","Every Tuesday and Friday","Every Saturday and Sunday","Every Friday only"],"a":1,"why":"Câu lạc bộ gặp nhau vào tối thứ Ba và thứ Sáu vì phần giới thiệu nêu rõ hai buổi này."},{"type":"MATCH","q":"Who should new members speak to on Friday evening?","o":["Coach Lan","Coach Minh","Coach Tuan"],"a":1,"why":"Người mới muốn tham gia nên gặp huấn luyện viên Minh vào tối thứ Sáu vì phần giới thiệu nói rõ tên huấn luyện viên Minh."},{"type":"MC","q":"How much is the monthly fee for members under 18?","o":["60000 dong","100000 dong","120.000 đồng","It is free"],"a":0,"why":"Hội viên dưới 18 tuổi chỉ đóng 60000 đồng một tháng vì phần giới thiệu nêu mức phí riêng cho nhóm tuổi này."},{"type":"COMP","q":"The club has ___ tables.","answer":"12","why":"Câu lạc bộ có 12 bàn vì phần giới thiệu nêu số bàn để mọi người đều có thể chơi mà không phải chờ lâu."},{"type":"TF","q":"The club organises a tournament twice a year.","o":["True","False"],"a":0,"why":"Câu này đúng vì phần giới thiệu nói câu lạc bộ tổ chức một giải đấu nhỏ hai lần một năm."}]},{"section":"Section 2","band":"Band 4,0","topic":"Phỏng vấn việc làm thêm tại quán cà phê","text":"A: Good morning. Thank you for coming to the interview for the part-time job at Moon Cafe. B: Good morning. Thank you for inviting me. A: Can you tell me about your experience? B: I worked at a small bakery for six months last year. I served customers, made coffee and cleaned the tables. A: That sounds useful. When can you work? B: I can work on Saturday and Sunday mornings, and on Friday evenings. I study at college from Monday to Thursday. A: Our cafe opens at 7 o'clock in the morning. Can you start at 7:30 on Saturdays? B: Yes, I can. I live near the cafe, so I can arrive early. A: The job pays 35000 dong an hour, and you will work about 12 hours a week. B: That sounds good to me. A: One more question. How do you deal with a difficult customer? B: I stay calm, listen carefully and try to solve the problem politely. A: Thank you. We will call you on Monday with our decision.","questions":[{"type":"MC","q":"Where did the candidate work last year?","o":["At a restaurant","At a small bakery","At a bookshop","At a hotel"],"a":1,"why":"Ứng viên từng làm việc ở một tiệm bánh nhỏ sáu tháng năm ngoái vì anh ấy kể kinh nghiệm này khi được hỏi."},{"type":"MC","q":"When can the candidate work?","o":["From Monday to Thursday","Every evening","Only on Mondays","On Saturday and Sunday mornings and Friday evenings"],"a":3,"why":"Ứng viên có thể làm việc vào sáng thứ Bảy, sáng Chủ nhật và tối thứ Sáu vì anh ấy học ở trường từ thứ Hai đến thứ Năm."},{"type":"MATCH","q":"How does the candidate deal with a difficult customer?","o":["He argues with the customer","He calls the police","He stays calm and listens carefully"],"a":2,"why":"Ứng viên xử lý khách khó tính bằng cách giữ bình tĩnh, lắng nghe cẩn thận và cố gắng giải quyết vấn đề một cách lịch sự."},{"type":"COMP","q":"The job pays ___ dong an hour.","answer":"35000","why":"Công việc trả lương 35000 đồng một giờ vì người phỏng vấn báo mức lương này."},{"type":"TF","q":"The candidate will work about 12 hours a week.","o":["True","False"],"a":0,"why":"Câu này đúng vì người phỏng vấn nói ứng viên sẽ làm việc khoảng 12 giờ mỗi tuần."}]},{"section":"Section 2","band":"Band 4,0","topic":"Tư vấn sức khỏe về ăn uống lành mạnh","text":"Good afternoon, everyone. Today I would like to talk about healthy eating. Many people eat too much fast food and drink too many sweet drinks, and this can lead to weight gain and tiredness. A healthy diet does not mean you must stop eating your favourite foods completely. It means you should eat more vegetables, fruit and whole grains, and eat less fried food, salt and sugar. Try to drink at least six glasses of water a day, and eat three regular meals instead of skipping breakfast. Cooking at home is also a good idea, because you can control the amount of oil and salt in your food. Finally, remember that small changes can make a big difference. For example, if you replace one sweet drink a day with water, you will feel better after a few weeks. Thank you for listening, and please ask me if you have any questions.","questions":[{"type":"MC","q":"What problem can too much fast food cause?","o":["Better sleep","Stronger muscles","Better memory","Weight gain and tiredness"],"a":3,"why":"Ăn quá nhiều đồ ăn nhanh có thể gây tăng cân và mệt mỏi vì bài tư vấn nêu hai hậu quả này."},{"type":"MATCH","q":"What should people eat more of?","o":["Fried food and salt","Vegetables, fruit and whole grains","Sweet drinks"],"a":1,"why":"Mọi người nên ăn nhiều rau, trái cây và ngũ cốc nguyên hạt hơn vì bài tư vấn khuyên ăn nhiều nhóm thực phẩm này."},{"type":"MC","q":"Why is cooking at home a good idea?","o":["Because it is always cheaper","Because you can control the amount of oil and salt","Because it takes less time","Because restaurants are closed"],"a":1,"why":"Nấu ăn ở nhà là ý hay vì bạn có thể kiểm soát lượng dầu và muối trong món ăn."},{"type":"COMP","q":"Try to drink at least ___ glasses of water a day.","answer":"six|6","why":"Bạn nên cố gắng uống ít nhất sáu ly nước mỗi ngày vì bài tư vấn nêu con số này."},{"type":"TF","q":"A healthy diet means you must stop eating your favourite foods completely.","o":["True","False"],"a":1,"why":"Câu này sai vì bài tư vấn nói chế độ ăn lành mạnh không có nghĩa là phải ngừng hẳn các món ăn yêu thích."}]},{"section":"Section 3","band":"Band 4,5","topic":"Thảo luận nhóm làm bài tập về môi trường","text":"A: Let us plan our group project about the environment. Our topic is reducing plastic waste at school. B: Good idea. First, we need to collect information. I can make a short survey for students in our class. A: That is helpful. How many questions will the survey have? B: I think ten questions is enough. We can ask students how often they use plastic bags and plastic bottles. A: And I will interview our teacher, Mrs Lan, about the school recycling programme. B: Great. What about the presentation? A: I suggest we divide it into three parts: the problem, our survey results and our solutions. B: I agree. I can prepare the slides about the solutions, such as using cloth bags and refillable bottles. A: Good. Our deadline is Friday next week, and we will meet again on Wednesday afternoon in the library to check our work. B: Perfect. Let us start today.","questions":[{"type":"MC","q":"What is the group project about?","o":["Saving water at home","Reducing plastic waste at school","Planting trees in the park","Cleaning the beach"],"a":1,"why":"Dự án nhóm nói về việc giảm rác thải nhựa ở trường vì người nói nêu chủ đề này ngay đầu buổi thảo luận."},{"type":"MATCH","q":"Who will the group interview?","o":["Mrs Lan","Mr Tuan","Mrs Hoa"],"a":0,"why":"Nhóm sẽ phỏng vấn cô Lan về chương trình tái chế của trường vì thành viên nhóm nói rõ tên cô Lan."},{"type":"MC","q":"How many questions will the survey have?","o":["Ten questions","Eight questions","Five questions","Twenty questions"],"a":0,"why":"Bản khảo sát sẽ có mười câu hỏi vì thành viên nhóm nói mười câu hỏi là đủ."},{"type":"COMP","q":"The group will meet again on Wednesday afternoon in the ___.","answer":"library","why":"Nhóm sẽ gặp lại nhau vào chiều thứ Tư ở thư viện vì buổi thảo luận nêu cả ngày và địa điểm gặp lại."},{"type":"TF","q":"The deadline for the project is Friday next week.","o":["True","False"],"a":0,"why":"Câu này đúng vì nhóm nói hạn chót là thứ Sáu tuần tới."}]},{"section":"Section 3","band":"Band 4,5","topic":"Nói chuyện với gia sư về bài luận","text":"A: Good afternoon, Miss Hoa. I need some help with my essay about city life. B: Of course, Nam. What is the problem? A: I have written the introduction, but I do not know how to organise the main part. B: Let us look at your plan. A good essay usually has three main paragraphs: advantages, disadvantages and your opinion. A: I see. My first paragraph is about the advantages, such as good jobs and public transport. B: That is a good start. For the disadvantages, you could write about traffic jams, air pollution and high living costs. A: Yes, those are important points. How long should the essay be? B: About 300 words. Your introduction should be short, about 50 words, and your conclusion should summarise your main ideas. A: Thank you. I will rewrite the second paragraph tonight and bring it to our next meeting on Thursday. B: Excellent. Remember to check your spelling and grammar before you hand it in.","questions":[{"type":"MC","q":"What is Nam's essay about?","o":["Village life","City life","School life","Family life"],"a":1,"why":"Bài luận của Nam nói về cuộc sống thành phố vì Nam nói rõ chủ đề này khi nhờ gia sư giúp."},{"type":"MC","q":"How many main paragraphs should a good essay have?","o":["Two paragraphs","Three paragraphs","Four paragraphs","Five paragraphs"],"a":1,"why":"Một bài luận hay thường có ba đoạn chính vì gia sư liệt kê ba đoạn: ưu điểm, nhược điểm và ý kiến của bạn."},{"type":"MATCH","q":"Which disadvantage does the tutor suggest?","o":["Good jobs","Traffic jams","Public transport"],"a":1,"why":"Gia sư gợi ý viết về tắc đường như một nhược điểm, cùng với ô nhiễm không khí và chi phí sinh hoạt cao."},{"type":"COMP","q":"The essay should be about ___ words long.","answer":"300","why":"Bài luận nên dài khoảng 300 từ vì gia sư nói rõ độ dài này khi Nam hỏi."},{"type":"TF","q":"Nam will bring his rewritten paragraph to the next meeting on Thursday.","o":["True","False"],"a":0,"why":"Câu này đúng vì Nam nói sẽ viết lại đoạn thứ hai tối nay và mang đến buổi gặp tiếp theo vào thứ Năm."}]}]);
+CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, [{"section":"Section 1","band":"Band 2,0","topic":"Đăng ký lớp học tiếng Anh buổi tối","text":"A: Good morning, Sun Language Centre. How can I help you? B: Good morning. I would like to join an evening English class, please. A: We have two evening classes. The Monday and Wednesday class is for beginners, and the Tuesday and Thursday class is for elementary students. B: I am a beginner, so the Monday and Wednesday class sounds good. What time does it start? A: It starts at 7 o'clock in the evening and finishes at 9 o'clock. Each lesson lasts two hours. B: How much does the course cost? A: The course costs 1200000 dong for ten lessons, and the book costs 150000 dong. B: That is fine. My name is Thu Ha, and my phone number is 0912345678. A: Thank you, Thu Ha. Please come to Room 5 on Monday evening and bring your book and a notebook. B: Thank you very much. I will see you on Monday.","questions":[{"type":"MC","q":"Which class does Thu Ha choose?","o":["The Tuesday and Thursday class","The Monday and Wednesday class","The Saturday morning class","The Sunday class"],"a":1,"why":"Thu Ha chọn lớp thứ Hai và thứ Tư vì cô ấy là người mới bắt đầu và lớp đó dành cho người mới bắt đầu."},{"type":"MC","q":"What time does the class finish?","o":["At 8 o'clock","At 10 o'clock","At 7 o'clock","At 9 o'clock"],"a":3,"why":"Lớp học kết thúc lúc 9 giờ tối vì nhân viên nói lớp bắt đầu lúc 7 giờ và kết thúc lúc 9 giờ."},{"type":"COMP","q":"The course costs ___ dong for ten lessons.","answer":"1200000","why":"Khóa học có giá 1200000 đồng cho mười buổi vì nhân viên báo giá này khi Thu Ha hỏi học phí."},{"type":"MATCH","q":"What must Thu Ha bring to Room 5 on Monday evening?","o":["Her book and a notebook","Her book and her phone","Her notebook and her phone"],"a":0,"why":"Ví dụ: trong đoạn nghe nhân viên dặn Thu Ha đến phòng 5 vào tối thứ Hai và mang theo sách cùng vở ghi. Vì vậy đáp án “Her book and a notebook” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Ví dụ: trong đoạn nghe nhân viên dặn Thu Ha đến phòng 5 vào tối thứ Hai và mang theo sách cùng vở ghi. Vì vậy đáp án “Her book and a notebook” đúng.","whyU7":true},{"type":"SA","q":"What is Thu Ha's phone number?","answer":"0912345678","why":"Số điện thoại của Thu Ha là 0912345678 vì cô ấy đọc số này khi đăng ký."}]},{"section":"Section 1","band":"Band 2,0","topic":"Hỏi đường đến thư viện thành phố","text":"A: Excuse me, can you help me, please? I want to go to the city library. B: Of course. Go straight along this street for about ten minutes. A: Do I turn left or right at the traffic lights? B: Turn left at the traffic lights, and then walk past the post office. A: Is the library near the post office? B: No, it is a little further. After the post office, turn right into Green Street. The library is on your left, next to the small park. A: How long does it take to walk there? B: It takes about fifteen minutes from here. A: Thank you. Is the library open on Sunday? B: Yes, it is open from 8 o'clock in the morning to 5 o'clock in the afternoon on Sunday. A: That is very helpful. Thank you so much. B: You are welcome. Have a nice day.","questions":[{"type":"MC","q":"Where does the visitor want to go?","o":["The post office","The small park","The city library","The bus station"],"a":2,"why":"Người khách muốn đến thư viện thành phố vì câu đầu tiên anh ấy hỏi đường đến thư viện."},{"type":"MATCH","q":"Which street is the library on?","o":["Green Street","Park Street","Main Street"],"a":0,"why":"Thư viện nằm trên đường Green vì người chỉ đường nói rẽ phải vào đường Green rồi thư viện ở bên trái."},{"type":"MC","q":"How long does it take to walk to the library?","o":["About five minutes","About ten minutes","About fifteen minutes","About twenty minutes"],"a":2,"why":"Đi bộ tới thư viện mất khoảng mười lăm phút vì người chỉ đường nói rõ thời gian này."},{"type":"COMP","q":"On Sunday, the library is open from 8 o'clock in the morning to ___ o'clock in the afternoon.","answer":"5","why":"Chủ nhật thư viện mở cửa đến 5 giờ chiều vì người chỉ đường nói giờ mở cửa ngày Chủ nhật."},{"type":"MC","q":"At the traffic lights, which way must the visitor turn?","o":["Turn right","Go straight","Turn left","Turn back"],"a":2,"why":"Ví dụ: trong đoạn nghe người chỉ đường dặn rẽ trái ở đèn giao thông, rồi đi qua bưu điện. Vì vậy đáp án “Turn left” đúng, không phải rẽ phải. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Ví dụ: trong đoạn nghe người chỉ đường dặn rẽ trái ở đèn giao thông, rồi đi qua bưu điện. Vì vậy đáp án “Turn left” đúng, không phải rẽ phải.","whyU7":true}]},{"section":"Section 1","band":"Band 2,5","topic":"Mua vé tàu đi thăm bạn","text":"A: Good afternoon. I would like two train tickets to River Town, please. B: Certainly. When do you want to travel? A: On Saturday morning, please. B: There is a train at 8:20 and another at 10:40. Which one do you prefer? A: The 8:20 train, please. We want to arrive early. B: The 8:20 train arrives at 11:05, and a return ticket costs 240000 dong per person. A: That is fine. Can we sit near the window? B: Yes, I can book two window seats in carriage 3. A: Thank you. Do we need to bring anything for the journey? B: Please bring your tickets and your identity cards. The train leaves from platform 2. A: Platform 2, carriage 3, window seats. Thank you very much. B: You are welcome. Have a pleasant journey.","questions":[{"type":"MC","q":"Which train does the customer choose?","o":["The 7:20 train","The 10:40 train","The 11:05 train","The 8:20 train"],"a":3,"why":"Khách chọn chuyến tàu 8 giờ 20 vì anh ấy muốn đến sớm và chọn chuyến này khi nhân viên đưa ra hai lựa chọn."},{"type":"MC","q":"How much is a return ticket per person?","o":["120.000 đồng","200000 dong","240000 dong","340000 dong"],"a":2,"why":"Vé khứ hồi giá 240000 đồng một người vì nhân viên báo giá này cho chuyến tàu 8 giờ 20."},{"type":"MATCH","q":"Which carriage are the seats in?","o":["Carriage 2","Carriage 3","Carriage 5"],"a":1,"why":"Ghế ngồi ở toa số 3 vì nhân viên nói đặt hai ghế cửa sổ ở toa 3."},{"type":"COMP","q":"The train leaves from platform ___.","answer":"2","why":"Tàu khởi hành từ sân ga số 2 vì nhân viên dặn khách điều này ở cuối đoạn hội thoại."},{"type":"MC","q":"What must the customers bring for the journey?","o":["Their tickets and passports","Their identity cards and money","Their tickets and suitcases","Their tickets and identity cards"],"a":3,"why":"Ví dụ: trong đoạn nghe nhân viên dặn khách mang theo vé và giấy tờ tùy thân cho chuyến đi. Vì vậy đáp án “Their tickets and identity cards” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Ví dụ: trong đoạn nghe nhân viên dặn khách mang theo vé và giấy tờ tùy thân cho chuyến đi. Vì vậy đáp án “Their tickets and identity cards” đúng.","whyU7":true}]},{"section":"Section 1","band":"Band 2,5","topic":"Hỏi giờ làm việc của bưu điện trung tâm","text":"A: Excuse me, what time does the central post office open? B: It opens at 7:30 in the morning from Monday to Friday. A: And what time does it close? B: It closes at 6 o'clock in the evening on weekdays. A: Is it open on Saturday? B: Yes, on Saturday it opens at 8 o'clock and closes at 12 o'clock at noon. A: I see. Is it open on Sunday? B: No, I am afraid it is closed on Sunday. A: I want to send a parcel to my sister. How much does it cost? B: A small parcel costs 45000 dong, and a large parcel costs 90000 dong. A: Thank you. Can I buy stamps here as well? B: Yes, you can buy stamps at counter 4, next to the main door. A: Thank you for your help. B: You are welcome.","questions":[{"type":"MC","q":"What time does the post office open on weekdays?","o":["At 7 o'clock","At 7:30","At 8 o'clock","At 9 o'clock"],"a":1,"why":"Bưu điện mở cửa lúc 7 giờ 30 các ngày trong tuần vì nhân viên nói rõ giờ mở cửa từ thứ Hai đến thứ Sáu."},{"type":"MATCH","q":"When does the post office close on Saturday?","o":["At 12 o'clock at noon","At 5 o'clock","At 6 o'clock"],"a":0,"why":"Thứ Bảy bưu điện đóng cửa lúc 12 giờ trưa vì nhân viên nói giờ làm việc thứ Bảy là từ 8 giờ đến 12 giờ."},{"type":"MC","q":"How much does a large parcel cost to send?","o":["90000 dong","45000 dong","60000 dong","120.000 đồng"],"a":0,"why":"Gửi bưu kiện lớn tốn 90000 đồng vì nhân viên báo giá bưu kiện nhỏ là 45000 đồng và bưu kiện lớn là 90000 đồng."},{"type":"COMP","q":"You can buy stamps at counter ___.","answer":"4","why":"Bạn có thể mua tem ở quầy số 4 vì nhân viên chỉ quầy 4 nằm cạnh cửa chính."},{"type":"MC","q":"Is the post office open on Sunday?","o":["Yes, it opens at 8 o'clock","No, it is closed on Sunday","Yes, it opens at 7:30","Yes, it opens at 9 o'clock"],"a":1,"why":"Ví dụ: trong đoạn nghe nhân viên nói “Tôi e là bưu điện đóng cửa vào Chủ nhật”. Vì vậy đáp án “No, it is closed on Sunday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Ví dụ: trong đoạn nghe nhân viên nói “Tôi e là bưu điện đóng cửa vào Chủ nhật”. Vì vậy đáp án “No, it is closed on Sunday” đúng.","whyU7":true}]},{"section":"Section 2","band":"Band 3,0","topic":"Thông báo ở trường về ngày hội thể thao","text":"Good morning, students. I have an important announcement about our school sports day. The sports day will take place on Friday the 20th of June in the school stadium. All students from class 6 to class 9 will take part in the event. There will be running races, football matches and a long jump competition. Students should arrive at school at 7:30 in the morning and wear their sports clothes and trainers. Please bring a bottle of water and a hat, because the weather may be hot. Lunch will be provided in the school canteen at 12 o'clock. Parents are welcome to come and watch the competitions from 9 o'clock. If you want to join the football team, please give your name to Mr Tuan in Room 12 before Wednesday. We hope everyone will have a fun and healthy day.","questions":[{"type":"MC","q":"When will the sports day take place?","o":["On Wednesday the 20th of June","On Saturday the 20th of June","On Friday the 12th of June","On Friday the 20th of June"],"a":3,"why":"Ngày hội thể thao diễn ra vào thứ Sáu ngày 20 tháng 6 vì thông báo nêu rõ ngày này."},{"type":"MC","q":"What should students bring?","o":["A book and a pen","A bottle of water and a hat","A football and a racket","A camera and a phone"],"a":1,"why":"Học sinh nên mang theo một chai nước và một chiếc mũ vì thông báo dặn mang hai thứ này do trời có thể nóng."},{"type":"MATCH","q":"Who should students give their name to for the football team?","o":["Mr Tuan","Mrs Hoa","Mr Nam"],"a":0,"why":"Học sinh muốn vào đội bóng phải đưa tên cho thầy Tuan vì thông báo nói rõ tên thầy Tuan."},{"type":"COMP","q":"Lunch will be provided in the school canteen at ___ o'clock.","answer":"12","why":"Bữa trưa được phục vụ ở căng tin trường lúc 12 giờ vì thông báo nêu giờ ăn trưa này."},{"type":"COMP","q":"Parents are welcome to come and watch the competitions from ___ o'clock.","answer":"9","why":"Ví dụ: trong đoạn nghe thông báo mời phụ huynh đến xem các cuộc thi từ 9 giờ. Vì vậy đáp án “9” đúng. Cách làm: nghe kỹ con số trong đoạn nghe rồi ghi lại đúng như vậy.","whyOrig":"Ví dụ: trong đoạn nghe thông báo mời phụ huynh đến xem các cuộc thi từ 9 giờ. Vì vậy đáp án “9” đúng. Cách làm: nghe kỹ con số trong đoạn nghe rồi ghi lại đúng như vậy.","whyU7":true}]},{"section":"Section 2","band":"Band 3,0","topic":"Hướng dẫn tham quan vườn thực vật","text":"Welcome to Green Garden, our city botanical garden. The garden opens at 8 o'clock in the morning and closes at 5:30 in the afternoon. Your visit today has three parts. First, we will walk through the flower garden, where you can see more than 200 kinds of flowers. Next, we will visit the tall tree area, where some trees are over 100 years old. Finally, we will stop at the lake, where you can take photos and rest under the trees. Please stay on the paths and do not pick the flowers. You can buy drinks and snacks at the small cafe near the main gate. The entrance ticket costs 30000 dong for adults and is free for children under 6 years old. Our guides wear green hats, so please follow them. Thank you, and enjoy your visit to Green Garden.","questions":[{"type":"MC","q":"What is the first part of the visit?","o":["The lake","The tall tree area","The flower garden","The small cafe"],"a":2,"why":"Phần đầu tiên của chuyến tham quan là vườn hoa vì hướng dẫn viên nói trước tiên đoàn sẽ đi qua vườn hoa."},{"type":"MATCH","q":"Where can visitors buy drinks and snacks?","o":["At the lake","In the tall tree area","At the small cafe near the main gate"],"a":2,"why":"Du khách có thể mua đồ uống và đồ ăn nhẹ ở quán cà phê nhỏ gần cổng chính vì hướng dẫn viên nói rõ địa điểm này."},{"type":"MC","q":"How much is an entrance ticket for an adult?","o":["20000 dong","50000 dong","It is free","30000 dong"],"a":3,"why":"Vé vào cửa cho người lớn giá 30000 đồng vì hướng dẫn viên báo giá vé người lớn và miễn phí cho trẻ dưới 6 tuổi."},{"type":"COMP","q":"The guides wear ___ hats.","answer":"green","why":"Hướng dẫn viên đội mũ màu xanh lá vì hướng dẫn viên nói du khách hãy đi theo những người đội mũ xanh lá."},{"type":"MC","q":"What must visitors NOT do in the garden?","o":["Stay on the paths","Pick the flowers","Take photos at the lake","Rest under the trees"],"a":1,"why":"Ví dụ: trong đoạn nghe hướng dẫn viên dặn du khách đi trên lối đi và không được hái hoa. Vì vậy đáp án “Pick the flowers” đúng vì đây là việc bị cấm. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Ví dụ: trong đoạn nghe hướng dẫn viên dặn du khách đi trên lối đi và không được hái hoa. Vì vậy đáp án “Pick the flowers” đúng vì đây là việc bị cấm.","whyU7":true}]},{"section":"Section 2","band":"Band 3,5","topic":"Bản tin khu phố về ngày dọn dẹp công viên","text":"Hello, everyone. This is the weekly news for Rose Neighbourhood. Next Saturday, we will have a big clean-up day in Rose Park. The clean-up starts at 8 o'clock in the morning and finishes at 11 o'clock. Volunteers will collect rubbish, paint the benches and plant 50 new flowers near the main gate. The neighbourhood committee will provide gloves, bags and drinking water for all volunteers. Children can join with their parents and help plant flowers in the small garden area. After the clean-up, there will be a free lunch in the park for all volunteers at 12 o'clock. If you want to join, please write your name on the list at the community house before Thursday evening. Last year, 80 people joined the clean-up day, and this year we hope even more neighbours will take part. Thank you for helping to keep our park clean and beautiful.","questions":[{"type":"MC","q":"When does the clean-up day start?","o":["At 7 o'clock","At 9 o'clock","At 11 o'clock","At 8 o'clock"],"a":3,"why":"Ngày dọn dẹp bắt đầu lúc 8 giờ sáng vì bản tin nêu giờ bắt đầu là 8 giờ và kết thúc lúc 11 giờ."},{"type":"MC","q":"What will volunteers plant near the main gate?","o":["50 new flowers","50 new trees","80 new flowers","20 new benches"],"a":0,"why":"Tình nguyện viên sẽ trồng 50 bông hoa mới gần cổng chính vì bản tin nêu con số và địa điểm này."},{"type":"MATCH","q":"Where should people write their name to join?","o":["At the park gate","At the community house","At the school"],"a":1,"why":"Người muốn tham gia phải ghi tên vào danh sách tại nhà cộng đồng vì bản tin dặn đăng ký ở đó trước tối thứ Năm."},{"type":"COMP","q":"Last year, ___ people joined the clean-up day.","answer":"80","why":"Năm ngoái có 80 người tham gia ngày dọn dẹp vì bản tin nhắc lại con số của năm trước."},{"type":"SA","q":"What time is the free lunch in the park for volunteers?","answer":"12 o'clock","why":"Ví dụ: trong đoạn nghe bản tin nói sau khi dọn dẹp sẽ có bữa trưa miễn phí trong công viên cho mọi tình nguyện viên lúc 12 giờ. Vì vậy đáp án “12 o'clock” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Ví dụ: trong đoạn nghe bản tin nói sau khi dọn dẹp sẽ có bữa trưa miễn phí trong công viên cho mọi tình nguyện viên lúc 12 giờ. Vì vậy đáp án “12 o'clock” đúng.","whyU7":true}]},{"section":"Section 2","band":"Band 3,5","topic":"Giới thiệu câu lạc bộ bóng bàn","text":"Welcome to the Blue Table Tennis Club. Our club meets every Tuesday and Friday evening in the community sports hall on Sun Street. Beginners are welcome, and our coaches will teach you the basic skills step by step. Each meeting starts at 6:30 in the evening with a warm-up, and then members play friendly matches for one hour. The club has 12 tables, so everyone can play without waiting too long. The monthly fee is 100000 dong, and this includes the use of bats and balls. Members under 18 years old pay only 60000 dong a month. Twice a year, the club organises a small tournament, and the winners receive medals and small gifts. If you want to join, please come to the sports hall on Friday evening and speak to Coach Minh. We look forward to meeting you.","questions":[{"type":"MC","q":"When does the club meet?","o":["Every Monday and Wednesday","Every Tuesday and Friday","Every Saturday and Sunday","Every Friday only"],"a":1,"why":"Câu lạc bộ gặp nhau vào tối thứ Ba và thứ Sáu vì phần giới thiệu nêu rõ hai buổi này."},{"type":"MATCH","q":"Who should new members speak to on Friday evening?","o":["Coach Lan","Coach Minh","Coach Tuan"],"a":1,"why":"Người mới muốn tham gia nên gặp huấn luyện viên Minh vào tối thứ Sáu vì phần giới thiệu nói rõ tên huấn luyện viên Minh."},{"type":"MC","q":"How much is the monthly fee for members under 18?","o":["60000 dong","100000 dong","120.000 đồng","It is free"],"a":0,"why":"Hội viên dưới 18 tuổi chỉ đóng 60000 đồng một tháng vì phần giới thiệu nêu mức phí riêng cho nhóm tuổi này."},{"type":"COMP","q":"The club has ___ tables.","answer":"12","why":"Câu lạc bộ có 12 bàn vì phần giới thiệu nêu số bàn để mọi người đều có thể chơi mà không phải chờ lâu."},{"type":"COMP","q":"The club organises a small tournament ___ a year.","answer":"twice","why":"Ví dụ: trong đoạn nghe phần giới thiệu nói câu lạc bộ tổ chức một giải đấu nhỏ hai lần một năm. Vì vậy đáp án “twice” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Ví dụ: trong đoạn nghe phần giới thiệu nói câu lạc bộ tổ chức một giải đấu nhỏ hai lần một năm. Vì vậy đáp án “twice” đúng.","whyU7":true}]},{"section":"Section 2","band":"Band 4,0","topic":"Phỏng vấn việc làm thêm tại quán cà phê","text":"A: Good morning. Thank you for coming to the interview for the part-time job at Moon Cafe. B: Good morning. Thank you for inviting me. A: Can you tell me about your experience? B: I worked at a small bakery for six months last year. I served customers, made coffee and cleaned the tables. A: That sounds useful. When can you work? B: I can work on Saturday and Sunday mornings, and on Friday evenings. I study at college from Monday to Thursday. A: Our cafe opens at 7 o'clock in the morning. Can you start at 7:30 on Saturdays? B: Yes, I can. I live near the cafe, so I can arrive early. A: The job pays 35000 dong an hour, and you will work about 12 hours a week. B: That sounds good to me. A: One more question. How do you deal with a difficult customer? B: I stay calm, listen carefully and try to solve the problem politely. A: Thank you. We will call you on Monday with our decision.","questions":[{"type":"MC","q":"Where did the candidate work last year?","o":["At a restaurant","At a small bakery","At a bookshop","At a hotel"],"a":1,"why":"Ứng viên từng làm việc ở một tiệm bánh nhỏ sáu tháng năm ngoái vì anh ấy kể kinh nghiệm này khi được hỏi."},{"type":"MC","q":"When can the candidate work?","o":["From Monday to Thursday","Every evening","Only on Mondays","On Saturday and Sunday mornings and Friday evenings"],"a":3,"why":"Ứng viên có thể làm việc vào sáng thứ Bảy, sáng Chủ nhật và tối thứ Sáu vì anh ấy học ở trường từ thứ Hai đến thứ Năm."},{"type":"MATCH","q":"How does the candidate deal with a difficult customer?","o":["He argues with the customer","He calls the police","He stays calm and listens carefully"],"a":2,"why":"Ứng viên xử lý khách khó tính bằng cách giữ bình tĩnh, lắng nghe cẩn thận và cố gắng giải quyết vấn đề một cách lịch sự."},{"type":"COMP","q":"The job pays ___ dong an hour.","answer":"35000","why":"Công việc trả lương 35000 đồng một giờ vì người phỏng vấn báo mức lương này."},{"type":"MC","q":"How many hours a week will the candidate work?","o":["About 20 hours","About 7 hours","About 12 hours","About 35 hours"],"a":2,"why":"Ví dụ: trong đoạn nghe người phỏng vấn nói ứng viên sẽ làm việc khoảng 12 giờ mỗi tuần. Vì vậy đáp án “About 12 hours” đúng. Số 35000 là tiền lương một giờ, không phải số giờ làm. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Ví dụ: trong đoạn nghe người phỏng vấn nói ứng viên sẽ làm việc khoảng 12 giờ mỗi tuần. Vì vậy đáp án “About 12 hours” đúng. Số 35000 là tiền lương một giờ, không phải số giờ làm.","whyU7":true}]},{"section":"Section 2","band":"Band 4,0","topic":"Tư vấn sức khỏe về ăn uống lành mạnh","text":"Good afternoon, everyone. Today I would like to talk about healthy eating. Many people eat too much fast food and drink too many sweet drinks, and this can lead to weight gain and tiredness. A healthy diet does not mean you must stop eating your favourite foods completely. It means you should eat more vegetables, fruit and whole grains, and eat less fried food, salt and sugar. Try to drink at least six glasses of water a day, and eat three regular meals instead of skipping breakfast. Cooking at home is also a good idea, because you can control the amount of oil and salt in your food. Finally, remember that small changes can make a big difference. For example, if you replace one sweet drink a day with water, you will feel better after a few weeks. Thank you for listening, and please ask me if you have any questions.","questions":[{"type":"MC","q":"What problem can too much fast food cause?","o":["Better sleep","Stronger muscles","Better memory","Weight gain and tiredness"],"a":3,"why":"Ăn quá nhiều đồ ăn nhanh có thể gây tăng cân và mệt mỏi vì bài tư vấn nêu hai hậu quả này."},{"type":"MATCH","q":"What should people eat more of?","o":["Fried food and salt","Vegetables, fruit and whole grains","Sweet drinks"],"a":1,"why":"Mọi người nên ăn nhiều rau, trái cây và ngũ cốc nguyên hạt hơn vì bài tư vấn khuyên ăn nhiều nhóm thực phẩm này."},{"type":"MC","q":"Why is cooking at home a good idea?","o":["Because it is always cheaper","Because you can control the amount of oil and salt","Because it takes less time","Because restaurants are closed"],"a":1,"why":"Nấu ăn ở nhà là ý hay vì bạn có thể kiểm soát lượng dầu và muối trong món ăn."},{"type":"COMP","q":"Try to drink at least ___ glasses of water a day.","answer":"six|6","why":"Bạn nên cố gắng uống ít nhất sáu ly nước mỗi ngày vì bài tư vấn nêu con số này."},{"type":"MC","q":"According to the talk, what does a healthy diet mean?","o":["You should eat more vegetables, fruit and whole grains","You must stop eating your favourite foods completely","You must skip breakfast every day","You should drink only sweet drinks"],"a":0,"why":"Ví dụ: trong đoạn nghe bài tư vấn nói chế độ ăn lành mạnh không có nghĩa là phải ngừng hẳn các món yêu thích, mà là ăn nhiều rau, quả và ngũ cốc nguyên hạt hơn. Vì vậy đáp án “You should eat more vegetables, fruit and whole grains” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Ví dụ: trong đoạn nghe bài tư vấn nói chế độ ăn lành mạnh không có nghĩa là phải ngừng hẳn các món yêu thích, mà là ăn nhiều rau, quả và ngũ cốc nguyên hạt hơn. Vì vậy đáp án “You should eat more vegetables, fruit and whole grains” đúng.","whyU7":true}]},{"section":"Section 3","band":"Band 4,5","topic":"Thảo luận nhóm làm bài tập về môi trường","text":"A: Let us plan our group project about the environment. Our topic is reducing plastic waste at school. B: Good idea. First, we need to collect information. I can make a short survey for students in our class. A: That is helpful. How many questions will the survey have? B: I think ten questions is enough. We can ask students how often they use plastic bags and plastic bottles. A: And I will interview our teacher, Mrs Lan, about the school recycling programme. B: Great. What about the presentation? A: I suggest we divide it into three parts: the problem, our survey results and our solutions. B: I agree. I can prepare the slides about the solutions, such as using cloth bags and refillable bottles. A: Good. Our deadline is Friday next week, and we will meet again on Wednesday afternoon in the library to check our work. B: Perfect. Let us start today.","questions":[{"type":"MC","q":"What is the group project about?","o":["Saving water at home","Reducing plastic waste at school","Planting trees in the park","Cleaning the beach"],"a":1,"why":"Dự án nhóm nói về việc giảm rác thải nhựa ở trường vì người nói nêu chủ đề này ngay đầu buổi thảo luận."},{"type":"MATCH","q":"Who will the group interview?","o":["Mrs Lan","Mr Tuan","Mrs Hoa"],"a":0,"why":"Nhóm sẽ phỏng vấn cô Lan về chương trình tái chế của trường vì thành viên nhóm nói rõ tên cô Lan."},{"type":"MC","q":"How many questions will the survey have?","o":["Ten questions","Eight questions","Five questions","Twenty questions"],"a":0,"why":"Bản khảo sát sẽ có mười câu hỏi vì thành viên nhóm nói mười câu hỏi là đủ."},{"type":"COMP","q":"The group will meet again on Wednesday afternoon in the ___.","answer":"library","why":"Nhóm sẽ gặp lại nhau vào chiều thứ Tư ở thư viện vì buổi thảo luận nêu cả ngày và địa điểm gặp lại."},{"type":"SA","q":"When is the deadline for the group project?","answer":"Friday next week","why":"Ví dụ: trong đoạn nghe nhóm nói hạn chót là thứ Sáu tuần tới, và họ sẽ gặp lại nhau vào chiều thứ Tư ở thư viện. Vì vậy đáp án “Friday next week” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Ví dụ: trong đoạn nghe nhóm nói hạn chót là thứ Sáu tuần tới, và họ sẽ gặp lại nhau vào chiều thứ Tư ở thư viện. Vì vậy đáp án “Friday next week” đúng.","whyU7":true}]},{"section":"Section 3","band":"Band 4,5","topic":"Nói chuyện với gia sư về bài luận","text":"A: Good afternoon, Miss Hoa. I need some help with my essay about city life. B: Of course, Nam. What is the problem? A: I have written the introduction, but I do not know how to organise the main part. B: Let us look at your plan. A good essay usually has three main paragraphs: advantages, disadvantages and your opinion. A: I see. My first paragraph is about the advantages, such as good jobs and public transport. B: That is a good start. For the disadvantages, you could write about traffic jams, air pollution and high living costs. A: Yes, those are important points. How long should the essay be? B: About 300 words. Your introduction should be short, about 50 words, and your conclusion should summarise your main ideas. A: Thank you. I will rewrite the second paragraph tonight and bring it to our next meeting on Thursday. B: Excellent. Remember to check your spelling and grammar before you hand it in.","questions":[{"type":"MC","q":"What is Nam's essay about?","o":["Village life","City life","School life","Family life"],"a":1,"why":"Bài luận của Nam nói về cuộc sống thành phố vì Nam nói rõ chủ đề này khi nhờ gia sư giúp."},{"type":"MC","q":"How many main paragraphs should a good essay have?","o":["Two paragraphs","Three paragraphs","Four paragraphs","Five paragraphs"],"a":1,"why":"Một bài luận hay thường có ba đoạn chính vì gia sư liệt kê ba đoạn: ưu điểm, nhược điểm và ý kiến của bạn."},{"type":"MATCH","q":"Which disadvantage does the tutor suggest?","o":["Good jobs","Traffic jams","Public transport"],"a":1,"why":"Gia sư gợi ý viết về tắc đường như một nhược điểm, cùng với ô nhiễm không khí và chi phí sinh hoạt cao."},{"type":"COMP","q":"The essay should be about ___ words long.","answer":"300","why":"Bài luận nên dài khoảng 300 từ vì gia sư nói rõ độ dài này khi Nam hỏi."},{"type":"COMP","q":"Nam will bring his rewritten ___ to the next meeting on Thursday.","answer":"paragraph","why":"Ví dụ: trong đoạn nghe Nam nói sẽ viết lại đoạn thứ hai tối nay và mang đến buổi gặp tiếp theo vào thứ Năm. Vì vậy đáp án “paragraph” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Ví dụ: trong đoạn nghe Nam nói sẽ viết lại đoạn thứ hai tối nay và mang đến buổi gặp tiếp theo vào thứ Năm. Vì vậy đáp án “paragraph” đúng.","whyU7":true}]}]);
 CONTENT.listening.push.apply(CONTENT.listening, [{"section":"Section 4","topic":"Năng lượng mặt trời","text":"In the small town of Sunfield, a new solar farm with 12000 panels now provides electricity for nearly 4000 homes throughout the year.","band":"Band 6,5"},{"section":"Section 4","topic":"Năng lượng mặt trời","text":"Researchers at Northfield University found that solar panels work best when they face south and are cleaned twice a year.","band":"Band 6,5"},{"section":"Section 4","topic":"Năng lượng mặt trời","text":"The cost of a home solar system in the study fell from 18000 dollars in 2015 to 9000 dollars in 2024, which encouraged many families to install one.","band":"Band 6,5"},{"section":"Section 4","topic":"Năng lượng mặt trời","text":"During cloudy weeks, the farm stores extra energy in large batteries, so local schools and hospitals still receive power at night.","band":"Band 6,5"},{"section":"Section 4","topic":"Giấc ngủ và trí nhớ","text":"In a study of 240 students, those who slept for eight hours remembered 30 percent more new words the next morning than those who slept for five hours.","band":"Band 6,5"},{"section":"Section 4","topic":"Giấc ngủ và trí nhớ","text":"Dr Elena Marsh explains that deep sleep helps the brain move short term memories into long term storage, especially during the first half of the night.","band":"Band 6,5"},{"section":"Section 4","topic":"Giấc ngủ và trí nhớ","text":"Students who reviewed their notes in the evening and then slept well performed better on a test of 60 questions than students who stayed up late.","band":"Band 6,5"},{"section":"Section 4","topic":"Giấc ngủ và trí nhớ","text":"The researchers advise learners to avoid bright screens for one hour before bed, because screen light can delay sleep by about 45 minutes.","band":"Band 6,5"},{"section":"Section 4","topic":"Kinh tế tuần hoàn","text":"The circular economy aims to keep products in use for as long as possible, so a phone designed in Greenport can now be repaired 12 times instead of being thrown away.","band":"Band 7,0"},{"section":"Section 4","topic":"Kinh tế tuần hoàn","text":"Professor Alan Reed argues that recycling alone is not enough, because nearly 40 percent of materials are lost when products are badly designed.","band":"Band 7,0"},{"section":"Section 4","topic":"Kinh tế tuần hoàn","text":"In the city of Harlow, a sharing library lends out 800 tools, from drills to sewing machines, which has reduced new purchases by a third in two years.","band":"Band 7,0"},{"section":"Section 4","topic":"Kinh tế tuần hoàn","text":"Companies that rent clothes instead of selling them must design stronger fabrics, since each jacket may be worn by 20 different customers.","band":"Band 7,0"},{"section":"Section 4","topic":"Ngôn ngữ và tư duy","text":"Linguist Dr Sara Kim studied 150 bilingual children in Seoul and found that switching between two languages can improve attention and problem solving.","band":"Band 7,0"},{"section":"Section 4","topic":"Ngôn ngữ và tư duy","text":"Some languages require speakers to state how they know a fact, for example whether they saw it themselves or heard it from another person.","band":"Band 7,0"},{"section":"Section 4","topic":"Ngôn ngữ và tư duy","text":"In one experiment, adults who learned 40 new words for colours became faster at telling apart shades that had previously looked identical to them.","band":"Band 7,0"},{"section":"Section 4","topic":"Ngôn ngữ và tư duy","text":"However, researchers warn that language shapes thought only in limited ways, because speakers of different languages still share most basic concepts.","band":"Band 7,0"},{"section":"Section 4","topic":"Trí tuệ nhân tạo trong y tế","text":"At Central Hospital, an artificial intelligence system now checks 5000 chest scans a month and flags possible problems for doctors to review within 24 hours.","band":"Band 7,5+"},{"section":"Section 4","topic":"Trí tuệ nhân tạo trong y tế","text":"Dr James Owen stresses that the system supports, rather than replaces, doctors, because a final diagnosis still requires clinical judgement and patient history.","band":"Band 7,5+"},{"section":"Section 4","topic":"Trí tuệ nhân tạo trong y tế","text":"A trial involving 18 clinics showed that the tool reduced missed cases by 22 percent, but it also produced false alarms in about 8 percent of healthy scans.","band":"Band 7,5+"},{"section":"Section 4","topic":"Trí tuệ nhân tạo trong y tế","text":"Ethical guidelines now require hospitals to explain to patients when artificial intelligence has assisted in their care, and to protect medical data with strict controls.","band":"Band 7,5+"},{"section":"Section 4","topic":"Biến đổi khí hậu và nông nghiệp","text":"Farmers in the Delta Valley have shifted rice planting two weeks earlier, after average spring temperatures rose by 1.5 degrees Celsius over 30 years.","band":"Band 7,5+"},{"section":"Section 4","topic":"Biến đổi khí hậu và nông nghiệp","text":"New drought resistant varieties developed at Riverland Institute yielded 25 percent more grain than older varieties during a dry season in 2023.","band":"Band 7,5+"},{"section":"Section 4","topic":"Biến đổi khí hậu và nông nghiệp","text":"However, heavier rainfall has also increased soil erosion, so many farms now plant cover crops to protect fields between harvests.","band":"Band 7,5+"},{"section":"Section 4","topic":"Biến đổi khí hậu và nông nghiệp","text":"Experts argue that small farms need affordable weather forecasts and insurance, because a single failed harvest can affect 600 families in one village.","band":"Band 7,5+"}]);
 
 /* v252: 3 bai nghe giong that VOA, public domain */
@@ -88683,6 +88683,6273 @@ var ZH_LISTENING = [ {
   ]
  }
 ];
+
+// v265: doan Nghe thi thu HSK mock-only (khong dung lai doan luyen tap) — 58 doan/236 cau, HSK1-6; giong may, xem zhMockBuild + nhan o man thi thu.
+var ZH_MOCK_LISTEN = [ {
+  "hsk": 1,
+  "id": "zh-mock-l1-1",
+  "stage": 1,
+  "title": "Chào hỏi ở trường",
+  "topic": "Chào hỏi",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你好！",
+    "py": "Nǐ hǎo!",
+    "vi": "Xin chào!"
+   },
+   {
+    "sp": "B",
+    "han": "你好！你是学生吗？",
+    "py": "Nǐ hǎo! Nǐ shì xuésheng ma?",
+    "vi": "Xin chào! Bạn là học sinh phải không?"
+   },
+   {
+    "sp": "A",
+    "han": "是，我是学生。你呢？",
+    "py": "Shì, wǒ shì xuésheng. Nǐ ne?",
+    "vi": "Đúng vậy, tôi là học sinh. Còn bạn thì sao?"
+   },
+   {
+    "sp": "B",
+    "han": "我也是学生。你叫什么名字？",
+    "py": "Wǒ yě shì xuésheng. Nǐ jiào shénme míngzi?",
+    "vi": "Tôi cũng là học sinh. Bạn tên là gì?"
+   },
+   {
+    "sp": "A",
+    "han": "我叫李明。",
+    "py": "Wǒ jiào Lǐ Míng.",
+    "vi": "Tôi tên là Lý Minh."
+   },
+   {
+    "sp": "B",
+    "han": "我叫王小红，很高兴认识你。",
+    "py": "Wǒ jiào Wáng Xiǎohóng, hěn gāoxìng rènshi nǐ.",
+    "vi": "Tôi tên là Vương Tiểu Hồng, rất vui được gặp bạn."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Hai người đều là gì?",
+    "o": [
+     "Học sinh",
+     "Giáo viên",
+     "Bác sĩ",
+     "Nhân viên bán hàng"
+    ],
+    "a": 0,
+    "why": "我是学生 / 我也是学生: cả hai đều là học sinh."
+   },
+   {
+    "type": "MC",
+    "q": "Người A tên là gì?",
+    "o": [
+     "王小红",
+     "李明",
+     "张伟",
+     "刘芳"
+    ],
+    "a": 1,
+    "why": "我叫李明: A tên là Lý Minh."
+   },
+   {
+    "type": "MC",
+    "q": "Người B tên là gì?",
+    "o": [
+     "李明",
+     "张伟",
+     "王小红",
+     "刘芳"
+    ],
+    "a": 2,
+    "why": "我叫王小红: B tên là Vương Tiểu Hồng."
+   },
+   {
+    "type": "MC",
+    "q": "B nói gì với A ở câu cuối?",
+    "o": [
+     "Tạm biệt",
+     "Rất vui được gặp bạn",
+     "Cảm ơn bạn",
+     "Xin lỗi bạn"
+    ],
+    "a": 3,
+    "why": "很高兴认识你: rất vui được gặp bạn."
+   }
+  ]
+ },
+ {
+  "hsk": 1,
+  "id": "zh-mock-l1-2",
+  "stage": 1,
+  "title": "Mua áo ở cửa hàng",
+  "topic": "Mua sắm",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "这件衣服多少钱？",
+    "py": "Zhè jiàn yīfu duōshao qián?",
+    "vi": "Cái áo này bao nhiêu tiền?"
+   },
+   {
+    "sp": "B",
+    "han": "一百五十块。",
+    "py": "Yībǎi wǔshí kuài.",
+    "vi": "150 đồng."
+   },
+   {
+    "sp": "A",
+    "han": "太贵了！便宜一点儿，可以吗？",
+    "py": "Tài guì le! Piányi yīdiǎnr, kěyǐ ma?",
+    "vi": "Đắt quá! Rẻ hơn một chút được không?"
+   },
+   {
+    "sp": "B",
+    "han": "好吧，一百二十块。",
+    "py": "Hǎo ba, yībǎi èrshí kuài.",
+    "vi": "Được thôi, 120 đồng."
+   },
+   {
+    "sp": "A",
+    "han": "好，我买这件。",
+    "py": "Hǎo, wǒ mǎi zhè jiàn.",
+    "vi": "Được, tôi mua cái này."
+   },
+   {
+    "sp": "B",
+    "han": "谢谢！",
+    "py": "Xièxie!",
+    "vi": "Cảm ơn!"
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Cái áo lúc đầu giá bao nhiêu?",
+    "o": [
+     "120 đồng",
+     "150 đồng",
+     "100 đồng",
+     "200 đồng"
+    ],
+    "a": 1,
+    "why": "一百五十块: 150 đồng."
+   },
+   {
+    "type": "MC",
+    "q": "Người mua thấy giá thế nào?",
+    "o": [
+     "Rẻ",
+     "Vừa",
+     "Đắt",
+     "Miễn phí"
+    ],
+    "a": 2,
+    "why": "太贵了: đắt quá."
+   },
+   {
+    "type": "MC",
+    "q": "Cuối cùng cái áo bán giá bao nhiêu?",
+    "o": [
+     "100 đồng",
+     "150 đồng",
+     "130 đồng",
+     "120 đồng"
+    ],
+    "a": 3,
+    "why": "一百二十块: 120 đồng."
+   },
+   {
+    "type": "MC",
+    "q": "Người mua có mua áo không?",
+    "o": [
+     "Có, mua với giá 120 đồng",
+     "Không, vì đắt quá",
+     "Có, mua với giá 150 đồng",
+     "Chưa quyết định"
+    ],
+    "a": 0,
+    "why": "好，我买这件: được, tôi mua cái này."
+   }
+  ]
+ },
+ {
+  "hsk": 1,
+  "id": "zh-mock-l1-3",
+  "stage": 1,
+  "title": "Gia đình của tôi",
+  "topic": "Gia đình",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你家有几口人？",
+    "py": "Nǐ jiā yǒu jǐ kǒu rén?",
+    "vi": "Nhà bạn có mấy người?"
+   },
+   {
+    "sp": "B",
+    "han": "我家有四口人。",
+    "py": "Wǒ jiā yǒu sì kǒu rén.",
+    "vi": "Nhà tôi có bốn người."
+   },
+   {
+    "sp": "A",
+    "han": "都有谁？",
+    "py": "Dōu yǒu shéi?",
+    "vi": "Gồm những ai?"
+   },
+   {
+    "sp": "B",
+    "han": "爸爸、妈妈、我和弟弟。",
+    "py": "Bàba, māma, wǒ hé dìdi.",
+    "vi": "Bố, mẹ, tôi và em trai."
+   },
+   {
+    "sp": "A",
+    "han": "你弟弟几岁？",
+    "py": "Nǐ dìdi jǐ suì?",
+    "vi": "Em trai bạn mấy tuổi?"
+   },
+   {
+    "sp": "B",
+    "han": "他八岁，是小学生。",
+    "py": "Tā bā suì, shì xiǎoxuéshēng.",
+    "vi": "Em ấy 8 tuổi, là học sinh tiểu học."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Nhà của B có mấy người?",
+    "o": [
+     "3 người",
+     "5 người",
+     "4 người",
+     "6 người"
+    ],
+    "a": 2,
+    "why": "我家有四口人: nhà tôi có bốn người."
+   },
+   {
+    "type": "MC",
+    "q": "Em trai của B mấy tuổi?",
+    "o": [
+     "6 tuổi",
+     "7 tuổi",
+     "9 tuổi",
+     "8 tuổi"
+    ],
+    "a": 3,
+    "why": "他八岁: em ấy 8 tuổi."
+   },
+   {
+    "type": "MC",
+    "q": "Nhà B gồm những ai?",
+    "o": [
+     "Bố, mẹ, tôi và em trai",
+     "Bố, mẹ và chị gái",
+     "Ông, bà, bố và mẹ",
+     "Bố, mẹ, tôi và anh trai"
+    ],
+    "a": 0,
+    "why": "爸爸、妈妈、我和弟弟: bố, mẹ, tôi và em trai."
+   },
+   {
+    "type": "MC",
+    "q": "Em trai của B là gì?",
+    "o": [
+     "Học sinh trung học",
+     "Học sinh tiểu học",
+     "Sinh viên",
+     "Giáo viên"
+    ],
+    "a": 1,
+    "why": "是小学生: là học sinh tiểu học."
+   }
+  ]
+ },
+ {
+  "hsk": 1,
+  "id": "zh-mock-l1-4",
+  "stage": 1,
+  "title": "Mấy giờ đi học?",
+  "topic": "Thời gian",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "现在几点？",
+    "py": "Xiànzài jǐ diǎn?",
+    "vi": "Bây giờ là mấy giờ?"
+   },
+   {
+    "sp": "B",
+    "han": "现在七点半。",
+    "py": "Xiànzài qī diǎn bàn.",
+    "vi": "Bây giờ là 7 giờ rưỡi."
+   },
+   {
+    "sp": "A",
+    "han": "我们八点上课，对吗？",
+    "py": "Wǒmen bā diǎn shàngkè, duì ma?",
+    "vi": "Chúng ta 8 giờ vào học, đúng không?"
+   },
+   {
+    "sp": "B",
+    "han": "对，八点上课。快走吧！",
+    "py": "Duì, bā diǎn shàngkè. Kuài zǒu ba!",
+    "vi": "Đúng, 8 giờ vào học. Đi nhanh thôi!"
+   },
+   {
+    "sp": "A",
+    "han": "好，我们走吧。",
+    "py": "Hǎo, wǒmen zǒu ba.",
+    "vi": "Được, chúng ta đi thôi."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Bây giờ là mấy giờ?",
+    "o": [
+     "6 giờ rưỡi",
+     "7 giờ",
+     "8 giờ",
+     "7 giờ rưỡi"
+    ],
+    "a": 3,
+    "why": "现在七点半: bây giờ là 7 giờ rưỡi."
+   },
+   {
+    "type": "MC",
+    "q": "Mấy giờ vào học?",
+    "o": [
+     "8 giờ",
+     "7 giờ rưỡi",
+     "9 giờ",
+     "7 giờ"
+    ],
+    "a": 0,
+    "why": "八点上课: 8 giờ vào học."
+   },
+   {
+    "type": "MC",
+    "q": "B nói “快走吧” nghĩa là gì?",
+    "o": [
+     "Đi chậm thôi",
+     "Đi nhanh thôi",
+     "Đừng đi",
+     "Ngồi xuống"
+    ],
+    "a": 1,
+    "why": "快走吧: đi nhanh thôi."
+   },
+   {
+    "type": "MC",
+    "q": "Hai người sắp đi đâu?",
+    "o": [
+     "Đi ăn cơm",
+     "Đi mua đồ",
+     "Đi học",
+     "Đi xem phim"
+    ],
+    "a": 2,
+    "why": "八点上课: 8 giờ vào học, hai người sắp đi học."
+   }
+  ]
+ },
+ {
+  "hsk": 1,
+  "id": "zh-mock-l1-5",
+  "stage": 1,
+  "title": "Ăn cơm ở nhà",
+  "topic": "Ăn uống",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "妈妈，今天吃什么？",
+    "py": "Māma, jīntiān chī shénme?",
+    "vi": "Mẹ ơi, hôm nay ăn gì?"
+   },
+   {
+    "sp": "B",
+    "han": "今天吃米饭和鱼。",
+    "py": "Jīntiān chī mǐfàn hé yú.",
+    "vi": "Hôm nay ăn cơm và cá."
+   },
+   {
+    "sp": "A",
+    "han": "还有什么？",
+    "py": "Hái yǒu shénme?",
+    "vi": "Còn gì nữa không?"
+   },
+   {
+    "sp": "B",
+    "han": "还有青菜和汤。",
+    "py": "Hái yǒu qīngcài hé tāng.",
+    "vi": "Còn có rau xanh và canh."
+   },
+   {
+    "sp": "A",
+    "han": "太好了，我喜欢吃鱼。",
+    "py": "Tài hǎo le, wǒ xǐhuan chī yú.",
+    "vi": "Tuyệt quá, con thích ăn cá."
+   },
+   {
+    "sp": "B",
+    "han": "那你多吃一点儿。",
+    "py": "Nà nǐ duō chī yīdiǎnr.",
+    "vi": "Vậy con ăn nhiều một chút nhé."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Hôm nay ăn món chính là gì?",
+    "o": [
+     "Cơm và cá",
+     "Mì và thịt",
+     "Bánh mì và trứng",
+     "Cháo và rau"
+    ],
+    "a": 0,
+    "why": "今天吃米饭和鱼: hôm nay ăn cơm và cá."
+   },
+   {
+    "type": "MC",
+    "q": "Ngoài cơm và cá còn có món gì?",
+    "o": [
+     "Thịt và trứng",
+     "Trái cây và sữa",
+     "Rau xanh và canh",
+     "Mì và bánh"
+    ],
+    "a": 2,
+    "why": "还有青菜和汤: còn có rau xanh và canh."
+   },
+   {
+    "type": "MC",
+    "q": "A thích ăn gì?",
+    "o": [
+     "Ăn rau",
+     "Ăn cá",
+     "Ăn thịt",
+     "Ăn canh"
+    ],
+    "a": 1,
+    "why": "我喜欢吃鱼: tôi thích ăn cá."
+   },
+   {
+    "type": "MC",
+    "q": "Mẹ bảo A làm gì?",
+    "o": [
+     "Uống nước",
+     "Ăn ít thôi",
+     "Đi ngủ sớm",
+     "Ăn nhiều một chút"
+    ],
+    "a": 3,
+    "why": "那你多吃一点儿: vậy con ăn nhiều một chút nhé."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-1",
+  "stage": 2,
+  "title": "Đi du lịch Bắc Kinh",
+  "topic": "Du lịch",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "明天我们去北京旅游，你去吗？",
+    "py": "Míngtiān wǒmen qù Běijīng lǚyóu, nǐ qù ma?",
+    "vi": "Ngày mai chúng tôi đi du lịch Bắc Kinh, bạn có đi không?"
+   },
+   {
+    "sp": "B",
+    "han": "去！我们怎么去？",
+    "py": "Qù! Wǒmen zěnme qù?",
+    "vi": "Đi chứ! Chúng ta đi bằng gì?"
+   },
+   {
+    "sp": "A",
+    "han": "坐火车去，早上八点出发。",
+    "py": "Zuò huǒchē qù, zǎoshang bā diǎn chūfā.",
+    "vi": "Đi tàu hỏa, 8 giờ sáng xuất phát."
+   },
+   {
+    "sp": "B",
+    "han": "火车票多少钱？",
+    "py": "Huǒchē piào duōshao qián?",
+    "vi": "Vé tàu bao nhiêu tiền?"
+   },
+   {
+    "sp": "A",
+    "han": "一张票二百块。",
+    "py": "Yī zhāng piào èrbǎi kuài.",
+    "vi": "Một vé 200 đồng."
+   },
+   {
+    "sp": "B",
+    "han": "好，我现在就去买票。",
+    "py": "Hǎo, wǒ xiànzài jiù qù mǎi piào.",
+    "vi": "Được, tôi đi mua vé ngay bây giờ."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Hai người định đi đâu du lịch?",
+    "o": [
+     "Bắc Kinh",
+     "Thượng Hải",
+     "Tây An",
+     "Quảng Châu"
+    ],
+    "a": 0,
+    "why": "去北京旅游: đi du lịch Bắc Kinh."
+   },
+   {
+    "type": "MC",
+    "q": "Họ đi bằng phương tiện gì?",
+    "o": [
+     "Máy bay",
+     "Tàu hỏa",
+     "Ô tô",
+     "Xe buýt"
+    ],
+    "a": 1,
+    "why": "坐火车去: đi tàu hỏa."
+   },
+   {
+    "type": "MC",
+    "q": "Mấy giờ xuất phát?",
+    "o": [
+     "7 giờ sáng",
+     "9 giờ sáng",
+     "8 giờ sáng",
+     "10 giờ sáng"
+    ],
+    "a": 2,
+    "why": "早上八点出发: 8 giờ sáng xuất phát."
+   },
+   {
+    "type": "MC",
+    "q": "Một vé tàu giá bao nhiêu?",
+    "o": [
+     "100 đồng",
+     "150 đồng",
+     "250 đồng",
+     "200 đồng"
+    ],
+    "a": 3,
+    "why": "一张票二百块: một vé 200 đồng."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-2",
+  "stage": 2,
+  "title": "Xin nghỉ phép",
+  "topic": "Công việc",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "王经理，我明天想请一天假。",
+    "py": "Wáng jīnglǐ, wǒ míngtiān xiǎng qǐng yī tiān jià.",
+    "vi": "Giám đốc Vương, ngày mai tôi muốn xin nghỉ một ngày."
+   },
+   {
+    "sp": "B",
+    "han": "为什么请假？",
+    "py": "Wèishénme qǐng jià?",
+    "vi": "Vì sao xin nghỉ?"
+   },
+   {
+    "sp": "A",
+    "han": "因为我妈妈生病了，我要带她去医院。",
+    "py": "Yīnwèi wǒ māma shēngbìng le, wǒ yào dài tā qù yīyuàn.",
+    "vi": "Vì mẹ tôi bị ốm, tôi phải đưa mẹ đi bệnh viện."
+   },
+   {
+    "sp": "B",
+    "han": "好，没问题。你后天来上班吧。",
+    "py": "Hǎo, méi wèntí. Nǐ hòutiān lái shàngbān ba.",
+    "vi": "Được, không vấn đề gì. Ngày kia bạn đi làm nhé."
+   },
+   {
+    "sp": "A",
+    "han": "谢谢经理！",
+    "py": "Xièxie jīnglǐ!",
+    "vi": "Cảm ơn giám đốc!"
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A xin nghỉ ngày nào?",
+    "o": [
+     "Hôm nay",
+     "Ngày mai",
+     "Ngày kia",
+     "Cuối tuần"
+    ],
+    "a": 1,
+    "why": "我明天想请一天假: ngày mai tôi muốn xin nghỉ một ngày."
+   },
+   {
+    "type": "MC",
+    "q": "A xin nghỉ vì lý do gì?",
+    "o": [
+     "Bản thân bị ốm",
+     "Đi du lịch",
+     "Mẹ bị ốm, phải đưa mẹ đi bệnh viện",
+     "Chuyển nhà"
+    ],
+    "a": 2,
+    "why": "我妈妈生病了，我要带她去医院: mẹ tôi bị ốm, tôi phải đưa mẹ đi bệnh viện."
+   },
+   {
+    "type": "MC",
+    "q": "Giám đốc bảo A khi nào đi làm lại?",
+    "o": [
+     "Ngày mai",
+     "Hôm nay",
+     "Cuối tuần",
+     "Ngày kia"
+    ],
+    "a": 3,
+    "why": "你后天来上班吧: ngày kia bạn đi làm nhé."
+   },
+   {
+    "type": "MC",
+    "q": "Giám đốc có đồng ý cho nghỉ không?",
+    "o": [
+     "Đồng ý",
+     "Không đồng ý",
+     "Bảo suy nghĩ thêm",
+     "Bảo hỏi người khác"
+    ],
+    "a": 0,
+    "why": "好，没问题: được, không vấn đề gì."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-3",
+  "stage": 2,
+  "title": "Đi khám bệnh",
+  "topic": "Sức khỏe",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "医生，我昨天开始发烧，还咳嗽。",
+    "py": "Yīshēng, wǒ zuótiān kāishǐ fāshāo, hái késou.",
+    "vi": "Bác sĩ, từ hôm qua tôi bắt đầu sốt, còn ho nữa."
+   },
+   {
+    "sp": "B",
+    "han": "你量体温了吗？",
+    "py": "Nǐ liáng tǐwēn le ma?",
+    "vi": "Bạn đã đo nhiệt độ chưa?"
+   },
+   {
+    "sp": "A",
+    "han": "量了，三十八度五。",
+    "py": "Liáng le, sānshí bā dù wǔ.",
+    "vi": "Đo rồi, 38,5 độ."
+   },
+   {
+    "sp": "B",
+    "han": "你感冒了。要多喝水，多休息，吃三天药。",
+    "py": "Nǐ gǎnmào le. Yào duō hē shuǐ, duō xiūxi, chī sān tiān yào.",
+    "vi": "Bạn bị cảm rồi. Cần uống nhiều nước, nghỉ ngơi nhiều, uống thuốc ba ngày."
+   },
+   {
+    "sp": "A",
+    "han": "谢谢医生，我知道了。",
+    "py": "Xièxie yīshēng, wǒ zhīdào le.",
+    "vi": "Cảm ơn bác sĩ, tôi biết rồi."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A bị làm sao?",
+    "o": [
+     "Đau bụng",
+     "Đau đầu",
+     "Sốt và ho",
+     "Đau răng"
+    ],
+    "a": 2,
+    "why": "发烧，还咳嗽: sốt, còn ho nữa."
+   },
+   {
+    "type": "MC",
+    "q": "Nhiệt độ của A là bao nhiêu?",
+    "o": [
+     "37,5 độ",
+     "38 độ",
+     "39 độ",
+     "38,5 độ"
+    ],
+    "a": 3,
+    "why": "三十八度五: 38,5 độ."
+   },
+   {
+    "type": "MC",
+    "q": "Bác sĩ chẩn đoán A bị gì?",
+    "o": [
+     "Bị cảm",
+     "Bị viêm họng",
+     "Bị đau dạ dày",
+     "Bị dị ứng"
+    ],
+    "a": 0,
+    "why": "你感冒了: bạn bị cảm rồi."
+   },
+   {
+    "type": "MC",
+    "q": "Bác sĩ dặn A uống thuốc mấy ngày?",
+    "o": [
+     "Một ngày",
+     "Ba ngày",
+     "Hai ngày",
+     "Năm ngày"
+    ],
+    "a": 1,
+    "why": "吃三天药: uống thuốc ba ngày."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-4",
+  "stage": 2,
+  "title": "Dự báo thời tiết",
+  "topic": "Thời tiết",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "明天天气怎么样？",
+    "py": "Míngtiān tiānqì zěnmeyàng?",
+    "vi": "Thời tiết ngày mai thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "明天有雨，气温二十度左右。",
+    "py": "Míngtiān yǒu yǔ, qìwēn èrshí dù zuǒyòu.",
+    "vi": "Ngày mai có mưa, nhiệt độ khoảng 20 độ."
+   },
+   {
+    "sp": "A",
+    "han": "那我们还去爬山吗？",
+    "py": "Nà wǒmen hái qù páshān ma?",
+    "vi": "Vậy chúng ta còn đi leo núi không?"
+   },
+   {
+    "sp": "B",
+    "han": "不去了，下雨爬山很危险。我们改天再去吧。",
+    "py": "Bù qù le, xià yǔ páshān hěn wēixiǎn. Wǒmen gǎitiān zài qù ba.",
+    "vi": "Không đi nữa, trời mưa leo núi rất nguy hiểm. Chúng ta để hôm khác đi nhé."
+   },
+   {
+    "sp": "A",
+    "han": "好吧，那明天我在家看书。",
+    "py": "Hǎo ba, nà míngtiān wǒ zài jiā kàn shū.",
+    "vi": "Được thôi, vậy ngày mai tôi ở nhà đọc sách."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Ngày mai thời tiết thế nào?",
+    "o": [
+     "Nắng to",
+     "Nhiều mây",
+     "Không mưa",
+     "Có mưa"
+    ],
+    "a": 3,
+    "why": "明天有雨: ngày mai có mưa."
+   },
+   {
+    "type": "MC",
+    "q": "Nhiệt độ ngày mai khoảng bao nhiêu?",
+    "o": [
+     "20 độ",
+     "25 độ",
+     "15 độ",
+     "30 độ"
+    ],
+    "a": 0,
+    "why": "气温二十度左右: nhiệt độ khoảng 20 độ."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao họ không đi leo núi?",
+    "o": [
+     "Vì không có xe",
+     "Vì trời mưa, leo núi nguy hiểm",
+     "Vì không có thời gian",
+     "Vì núi đóng cửa"
+    ],
+    "a": 1,
+    "why": "下雨爬山很危险: trời mưa leo núi rất nguy hiểm."
+   },
+   {
+    "type": "MC",
+    "q": "Ngày mai A định làm gì?",
+    "o": [
+     "Đi làm",
+     "Đi mua sắm",
+     "Ở nhà đọc sách",
+     "Đi bơi"
+    ],
+    "a": 2,
+    "why": "明天我在家看书: ngày mai tôi ở nhà đọc sách."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-5",
+  "stage": 2,
+  "title": "Thông báo ở ga tàu",
+  "topic": "Du lịch",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "各位旅客请注意：开往上海的火车马上就要出发了，请还没有上车的旅客快一点儿上车。",
+    "py": "Gèwèi lǚkè qǐng zhùyì: kāi wǎng Shànghǎi de huǒchē mǎshàng jiù yào chūfā le, qǐng hái méiyǒu shàngchē de lǚkè kuài yīdiǎnr shàngchē.",
+    "vi": "Xin quý hành khách chú ý: tàu đi Thượng Hải sắp khởi hành, hành khách chưa lên tàu xin nhanh chóng lên tàu."
+   },
+   {
+    "sp": "N",
+    "han": "这次列车一共停五站，下一站是南京。",
+    "py": "Zhè cì lièchē yīgòng tíng wǔ zhàn, xià yī zhàn shì Nánjīng.",
+    "vi": "Chuyến tàu này dừng tổng cộng 5 ga, ga tiếp theo là Nam Kinh."
+   },
+   {
+    "sp": "N",
+    "han": "请大家带好自己的东西，祝大家一路平安。",
+    "py": "Qǐng dàjiā dài hǎo zìjǐ de dōngxi, zhù dàjiā yīlù píng'ān.",
+    "vi": "Xin mọi người mang theo đồ đạc của mình, chúc mọi người thượng lộ bình an."
+   }
+  ],
+  "note": "Thông báo tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Tàu này đi đâu?",
+    "o": [
+     "Thượng Hải",
+     "Bắc Kinh",
+     "Nam Kinh",
+     "Quảng Châu"
+    ],
+    "a": 0,
+    "why": "开往上海的火车: tàu đi Thượng Hải."
+   },
+   {
+    "type": "MC",
+    "q": "Ga tiếp theo là ga nào?",
+    "o": [
+     "Bắc Kinh",
+     "Nam Kinh",
+     "Tô Châu",
+     "Hàng Châu"
+    ],
+    "a": 1,
+    "why": "下一站是南京: ga tiếp theo là Nam Kinh."
+   },
+   {
+    "type": "MC",
+    "q": "Chuyến tàu dừng tổng cộng mấy ga?",
+    "o": [
+     "3 ga",
+     "4 ga",
+     "5 ga",
+     "6 ga"
+    ],
+    "a": 2,
+    "why": "一共停五站: dừng tổng cộng 5 ga."
+   },
+   {
+    "type": "MC",
+    "q": "Thông báo nhắc hành khách làm gì?",
+    "o": [
+     "Mua vé nhanh",
+     "Mang theo đồ đạc của mình",
+     "Ngồi đúng chỗ",
+     "Không hút thuốc"
+    ],
+    "a": 1,
+    "why": "请大家带好自己的东西: xin mọi người mang theo đồ đạc của mình."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-6",
+  "stage": 2,
+  "title": "Hẹn gặp khách hàng",
+  "topic": "Công việc",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "李先生，下午三点我们开会，你有时间吗？",
+    "py": "Lǐ xiānsheng, xiàwǔ sān diǎn wǒmen kāihuì, nǐ yǒu shíjiān ma?",
+    "vi": "Ông Lý, 3 giờ chiều chúng ta họp, ông có thời gian không?"
+   },
+   {
+    "sp": "B",
+    "han": "有时间。会议在哪个房间？",
+    "py": "Yǒu shíjiān. Huìyì zài nǎge fángjiān?",
+    "vi": "Có thời gian. Cuộc họp ở phòng nào?"
+   },
+   {
+    "sp": "A",
+    "han": "在三楼的三〇二房间。",
+    "py": "Zài sān lóu de sān líng èr fángjiān.",
+    "vi": "Ở phòng 302, tầng 3."
+   },
+   {
+    "sp": "B",
+    "han": "好，我两点五十到。",
+    "py": "Hǎo, wǒ liǎng diǎn wǔshí dào.",
+    "vi": "Được, tôi sẽ đến lúc 2 giờ 50."
+   },
+   {
+    "sp": "A",
+    "han": "谢谢，我们下午见。",
+    "py": "Xièxie, wǒmen xiàwǔ jiàn.",
+    "vi": "Cảm ơn, chiều gặp nhau nhé."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Cuộc họp bắt đầu lúc mấy giờ?",
+    "o": [
+     "2 giờ 50",
+     "3 giờ chiều",
+     "4 giờ chiều",
+     "2 giờ chiều"
+    ],
+    "a": 1,
+    "why": "下午三点我们开会: 3 giờ chiều chúng ta họp."
+   },
+   {
+    "type": "MC",
+    "q": "Cuộc họp ở phòng nào?",
+    "o": [
+     "Phòng 201",
+     "Phòng 203",
+     "Phòng 302",
+     "Phòng 303"
+    ],
+    "a": 2,
+    "why": "在三楼的三〇二房间: ở phòng 302, tầng 3."
+   },
+   {
+    "type": "MC",
+    "q": "Ông Lý sẽ đến lúc mấy giờ?",
+    "o": [
+     "3 giờ",
+     "2 giờ 40",
+     "2 giờ 30",
+     "2 giờ 50"
+    ],
+    "a": 3,
+    "why": "我两点五十到: tôi sẽ đến lúc 2 giờ 50."
+   },
+   {
+    "type": "MC",
+    "q": "Ai hẹn họp với ông Lý?",
+    "o": [
+     "Người A",
+     "Giám đốc Vương",
+     "Cô Trương",
+     "Anh Trần"
+    ],
+    "a": 0,
+    "why": "李先生，下午三点我们开会: A hẹn ông Lý họp lúc 3 giờ chiều."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-7",
+  "stage": 2,
+  "title": "Mua vé xem phim",
+  "topic": "Giải trí",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你好，我想买两张今天晚上的电影票。",
+    "py": "Nǐ hǎo, wǒ xiǎng mǎi liǎng zhāng jīntiān wǎnshang de diànyǐng piào.",
+    "vi": "Xin chào, tôi muốn mua hai vé xem phim tối nay."
+   },
+   {
+    "sp": "B",
+    "han": "好的，请问你想看哪一场？",
+    "py": "Hǎo de, qǐngwèn nǐ xiǎng kàn nǎ yī chǎng?",
+    "vi": "Vâng, xin hỏi bạn muốn xem suất nào?"
+   },
+   {
+    "sp": "A",
+    "han": "七点半的那场。",
+    "py": "Qī diǎn bàn de nà chǎng.",
+    "vi": "Suất 7 giờ rưỡi."
+   },
+   {
+    "sp": "B",
+    "han": "一张票四十块，两张八十块。",
+    "py": "Yī zhāng piào sìshí kuài, liǎng zhāng bāshí kuài.",
+    "vi": "Một vé 40 đồng, hai vé 80 đồng."
+   },
+   {
+    "sp": "A",
+    "han": "好，给你一百块。",
+    "py": "Hǎo, gěi nǐ yībǎi kuài.",
+    "vi": "Được, đưa bạn 100 đồng."
+   },
+   {
+    "sp": "B",
+    "han": "找你二十块，这是你的票。",
+    "py": "Zhǎo nǐ èrshí kuài, zhè shì nǐ de piào.",
+    "vi": "Trả lại bạn 20 đồng, đây là vé của bạn."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A muốn mua mấy vé?",
+    "o": [
+     "Một vé",
+     "Ba vé",
+     "Hai vé",
+     "Bốn vé"
+    ],
+    "a": 2,
+    "why": "买两张……电影票: mua hai vé xem phim."
+   },
+   {
+    "type": "MC",
+    "q": "A xem suất mấy giờ?",
+    "o": [
+     "6 giờ rưỡi",
+     "7 giờ",
+     "8 giờ",
+     "7 giờ rưỡi"
+    ],
+    "a": 3,
+    "why": "七点半的那场: suất 7 giờ rưỡi."
+   },
+   {
+    "type": "MC",
+    "q": "Hai vé giá bao nhiêu?",
+    "o": [
+     "80 đồng",
+     "40 đồng",
+     "100 đồng",
+     "60 đồng"
+    ],
+    "a": 0,
+    "why": "两张八十块: hai vé 80 đồng."
+   },
+   {
+    "type": "MC",
+    "q": "Nhân viên trả lại A bao nhiêu tiền?",
+    "o": [
+     "10 đồng",
+     "20 đồng",
+     "30 đồng",
+     "40 đồng"
+    ],
+    "a": 1,
+    "why": "找你二十块: trả lại bạn 20 đồng."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-8",
+  "stage": 2,
+  "title": "Học tiếng Trung",
+  "topic": "Học tập",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你学中文多长时间了？",
+    "py": "Nǐ xué Zhōngwén duō cháng shíjiān le?",
+    "vi": "Bạn học tiếng Trung được bao lâu rồi?"
+   },
+   {
+    "sp": "B",
+    "han": "我学了一年了。",
+    "py": "Wǒ xué le yī nián le.",
+    "vi": "Tôi học được một năm rồi."
+   },
+   {
+    "sp": "A",
+    "han": "你觉得中文难吗？",
+    "py": "Nǐ juéde Zhōngwén nán ma?",
+    "vi": "Bạn thấy tiếng Trung khó không?"
+   },
+   {
+    "sp": "B",
+    "han": "汉字有点儿难，但是说话不难。",
+    "py": "Hànzì yǒudiǎnr nán, dànshì shuōhuà bù nán.",
+    "vi": "Chữ Hán hơi khó, nhưng nói thì không khó."
+   },
+   {
+    "sp": "A",
+    "han": "你每天学习多长时间？",
+    "py": "Nǐ měitiān xuéxí duō cháng shíjiān?",
+    "vi": "Mỗi ngày bạn học bao lâu?"
+   },
+   {
+    "sp": "B",
+    "han": "每天学习两个小时。",
+    "py": "Měitiān xuéxí liǎng gè xiǎoshí.",
+    "vi": "Mỗi ngày học hai tiếng."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "B học tiếng Trung được bao lâu?",
+    "o": [
+     "Sáu tháng",
+     "Hai năm",
+     "Ba tháng",
+     "Một năm"
+    ],
+    "a": 3,
+    "why": "我学了一年了: tôi học được một năm rồi."
+   },
+   {
+    "type": "MC",
+    "q": "B thấy cái gì khó?",
+    "o": [
+     "Chữ Hán",
+     "Phát âm",
+     "Ngữ pháp",
+     "Nghe"
+    ],
+    "a": 0,
+    "why": "汉字有点儿难: chữ Hán hơi khó."
+   },
+   {
+    "type": "MC",
+    "q": "B thấy nói tiếng Trung thế nào?",
+    "o": [
+     "Rất khó",
+     "Không khó",
+     "Rất dễ",
+     "Hơi khó"
+    ],
+    "a": 1,
+    "why": "说话不难: nói thì không khó."
+   },
+   {
+    "type": "MC",
+    "q": "Mỗi ngày B học bao lâu?",
+    "o": [
+     "Bốn tiếng",
+     "Một tiếng",
+     "Hai tiếng",
+     "Ba tiếng"
+    ],
+    "a": 2,
+    "why": "每天学习两个小时: mỗi ngày học hai tiếng."
+   }
+  ]
+ },
+ {
+  "hsk": 2,
+  "id": "zh-mock-l2-9",
+  "stage": 2,
+  "title": "Thời tiết cuối tuần",
+  "topic": "Thời tiết",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "这个周末天气怎么样？",
+    "py": "Zhège zhōumò tiānqì zěnmeyàng?",
+    "vi": "Thời tiết cuối tuần này thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "星期六晴天，星期天可能下雨。",
+    "py": "Xīngqīliù qíngtiān, xīngqītiān kěnéng xià yǔ.",
+    "vi": "Thứ bảy trời nắng, chủ nhật có thể mưa."
+   },
+   {
+    "sp": "A",
+    "han": "那星期六我们去公园玩吧。",
+    "py": "Nà xīngqīliù wǒmen qù gōngyuán wán ba.",
+    "vi": "Vậy thứ bảy chúng ta đi công viên chơi nhé."
+   },
+   {
+    "sp": "B",
+    "han": "好啊，星期六上午九点在公园门口见。",
+    "py": "Hǎo a, xīngqīliù shàngwǔ jiǔ diǎn zài gōngyuán ménkǒu jiàn.",
+    "vi": "Được, 9 giờ sáng thứ bảy gặp ở cổng công viên."
+   },
+   {
+    "sp": "A",
+    "han": "好，不见不散。",
+    "py": "Hǎo, bù jiàn bù sàn.",
+    "vi": "Được, không gặp không về."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Thứ bảy thời tiết thế nào?",
+    "o": [
+     "Trời nắng",
+     "Có mưa",
+     "Nhiều mây",
+     "Có tuyết"
+    ],
+    "a": 0,
+    "why": "星期六晴天: thứ bảy trời nắng."
+   },
+   {
+    "type": "MC",
+    "q": "Chủ nhật thời tiết thế nào?",
+    "o": [
+     "Trời nắng",
+     "Trời đẹp",
+     "Có thể mưa",
+     "Có tuyết"
+    ],
+    "a": 2,
+    "why": "星期天可能下雨: chủ nhật có thể mưa."
+   },
+   {
+    "type": "MC",
+    "q": "Họ hẹn đi đâu chơi vào thứ bảy?",
+    "o": [
+     "Đi leo núi",
+     "Đi công viên",
+     "Đi xem phim",
+     "Đi mua sắm"
+    ],
+    "a": 1,
+    "why": "去公园玩: đi công viên chơi."
+   },
+   {
+    "type": "MC",
+    "q": "Họ hẹn gặp lúc mấy giờ?",
+    "o": [
+     "8 giờ sáng",
+     "10 giờ sáng",
+     "11 giờ sáng",
+     "9 giờ sáng"
+    ],
+    "a": 3,
+    "why": "上午九点……见: 9 giờ sáng gặp nhau."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-1",
+  "stage": 3,
+  "title": "Chọn chuyên ngành",
+  "topic": "Học tập",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你大学学什么专业？",
+    "py": "Nǐ dàxué xué shénme zhuānyè?",
+    "vi": "Đại học bạn học chuyên ngành gì?"
+   },
+   {
+    "sp": "B",
+    "han": "我学汉语专业。你呢？",
+    "py": "Wǒ xué Hànyǔ zhuānyè. Nǐ ne?",
+    "vi": "Tôi học chuyên ngành tiếng Hán. Còn bạn?"
+   },
+   {
+    "sp": "A",
+    "han": "我学经济专业。",
+    "py": "Wǒ xué jīngjì zhuānyè.",
+    "vi": "Tôi học chuyên ngành kinh tế."
+   },
+   {
+    "sp": "B",
+    "han": "你为什么选这个专业？",
+    "py": "Nǐ wèishénme xuǎn zhège zhuānyè?",
+    "vi": "Vì sao bạn chọn chuyên ngành này?"
+   },
+   {
+    "sp": "A",
+    "han": "因为我想以后做生意。",
+    "py": "Yīnwèi wǒ xiǎng yǐhòu zuò shēngyi.",
+    "vi": "Vì sau này tôi muốn làm kinh doanh."
+   },
+   {
+    "sp": "B",
+    "han": "那你要努力学习啊。",
+    "py": "Nà nǐ yào nǔlì xuéxí a.",
+    "vi": "Vậy bạn phải học chăm chỉ nhé."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "B học chuyên ngành gì?",
+    "o": [
+     "Tiếng Hán",
+     "Kinh tế",
+     "Y học",
+     "Luật"
+    ],
+    "a": 0,
+    "why": "我学汉语专业: tôi học chuyên ngành tiếng Hán."
+   },
+   {
+    "type": "MC",
+    "q": "A học chuyên ngành gì?",
+    "o": [
+     "Tiếng Hán",
+     "Kinh tế",
+     "Kỹ thuật",
+     "Ngoại ngữ"
+    ],
+    "a": 1,
+    "why": "我学经济专业: tôi học chuyên ngành kinh tế."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao A chọn chuyên ngành kinh tế?",
+    "o": [
+     "Vì thích đọc sách",
+     "Vì muốn làm giáo viên",
+     "Vì sau này muốn làm kinh doanh",
+     "Vì bố mẹ chọn hộ"
+    ],
+    "a": 2,
+    "why": "因为我想以后做生意: vì sau này tôi muốn làm kinh doanh."
+   },
+   {
+    "type": "MC",
+    "q": "B khuyên A điều gì?",
+    "o": [
+     "Đổi chuyên ngành",
+     "Đi du học",
+     "Tìm việc làm thêm",
+     "Học chăm chỉ"
+    ],
+    "a": 3,
+    "why": "那你要努力学习啊: vậy bạn phải học chăm chỉ nhé."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-2",
+  "stage": 3,
+  "title": "Phỏng vấn xin việc",
+  "topic": "Công việc",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "请你先介绍一下自己。",
+    "py": "Qǐng nǐ xiān jièshào yīxià zìjǐ.",
+    "vi": "Mời bạn giới thiệu về bản thân trước."
+   },
+   {
+    "sp": "B",
+    "han": "我叫陈明，去年大学毕业，学的是计算机专业。",
+    "py": "Wǒ jiào Chén Míng, qùnián dàxué bìyè, xué de shì jìsuànjī zhuānyè.",
+    "vi": "Tôi tên Trần Minh, tốt nghiệp đại học năm ngoái, học chuyên ngành máy tính."
+   },
+   {
+    "sp": "A",
+    "han": "你以前做过什么工作？",
+    "py": "Nǐ yǐqián zuò guò shénme gōngzuò?",
+    "vi": "Trước đây bạn đã làm công việc gì?"
+   },
+   {
+    "sp": "B",
+    "han": "我在两家公司实习过，做过网站设计。",
+    "py": "Wǒ zài liǎng jiā gōngsī shíxí guò, zuò guò wǎngzhàn shèjì.",
+    "vi": "Tôi đã thực tập ở hai công ty, từng làm thiết kế website."
+   },
+   {
+    "sp": "A",
+    "han": "你为什么想来我们公司？",
+    "py": "Nǐ wèishénme xiǎng lái wǒmen gōngsī?",
+    "vi": "Vì sao bạn muốn đến công ty chúng tôi?"
+   },
+   {
+    "sp": "B",
+    "han": "因为贵公司很有名，我想在这里学习更多的东西。",
+    "py": "Yīnwèi guì gōngsī hěn yǒumíng, wǒ xiǎng zài zhèlǐ xuéxí gèng duō de dōngxi.",
+    "vi": "Vì quý công ty rất nổi tiếng, tôi muốn học thêm nhiều thứ ở đây."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "B tên là gì?",
+    "o": [
+     "陈亮",
+     "陈明",
+     "陈军",
+     "陈强"
+    ],
+    "a": 1,
+    "why": "我叫陈明: tôi tên Trần Minh."
+   },
+   {
+    "type": "MC",
+    "q": "B học chuyên ngành gì?",
+    "o": [
+     "Kinh tế",
+     "Tiếng Hán",
+     "Máy tính",
+     "Ngoại ngữ"
+    ],
+    "a": 2,
+    "why": "学的是计算机专业: học chuyên ngành máy tính."
+   },
+   {
+    "type": "MC",
+    "q": "B đã thực tập ở mấy công ty?",
+    "o": [
+     "Một công ty",
+     "Ba công ty",
+     "Bốn công ty",
+     "Hai công ty"
+    ],
+    "a": 3,
+    "why": "在两家公司实习过: đã thực tập ở hai công ty."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao B muốn vào công ty này?",
+    "o": [
+     "Vì công ty nổi tiếng, muốn học thêm",
+     "Vì lương cao",
+     "Vì gần nhà",
+     "Vì bạn bè giới thiệu"
+    ],
+    "a": 0,
+    "why": "因为贵公司很有名，我想在这里学习更多的东西: vì quý công ty rất nổi tiếng, tôi muốn học thêm nhiều thứ ở đây."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-3",
+  "stage": 3,
+  "title": "Thói quen đọc sách",
+  "topic": "Xã hội",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "我每天晚上睡觉以前都要看半个小时的书。",
+    "py": "Wǒ měitiān wǎnshang shuì jiào yǐqián dōu yào kàn bàn gè xiǎoshí de shū.",
+    "vi": "Mỗi tối trước khi đi ngủ tôi đều đọc sách nửa tiếng."
+   },
+   {
+    "sp": "N",
+    "han": "我最喜欢看历史书，因为历史书能让我了解过去的事情。",
+    "py": "Wǒ zuì xǐhuan kàn lìshǐ shū, yīnwèi lìshǐ shū néng ràng wǒ liǎojiě guòqù de shìqing.",
+    "vi": "Tôi thích nhất là đọc sách lịch sử, vì sách lịch sử giúp tôi hiểu những chuyện đã qua."
+   },
+   {
+    "sp": "N",
+    "han": "上个星期我看完了一本关于中国历史的书，一共三百多页。",
+    "py": "Shàng gè xīngqī wǒ kàn wán le yī běn guānyú Zhōngguó lìshǐ de shū, yīgòng sānbǎi duō yè.",
+    "vi": "Tuần trước tôi đã đọc xong một cuốn sách về lịch sử Trung Quốc, tổng cộng hơn 300 trang."
+   },
+   {
+    "sp": "N",
+    "han": "以后我还想看更多的书。",
+    "py": "Yǐhòu wǒ hái xiǎng kàn gèng duō de shū.",
+    "vi": "Sau này tôi còn muốn đọc thêm nhiều sách nữa."
+   }
+  ],
+  "note": "Đoạn độc thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Người nói đọc sách vào lúc nào?",
+    "o": [
+     "Buổi sáng",
+     "Buổi trưa",
+     "Buổi tối trước khi ngủ",
+     "Buổi chiều"
+    ],
+    "a": 2,
+    "why": "每天晚上睡觉以前都要看……书: mỗi tối trước khi đi ngủ đều đọc sách."
+   },
+   {
+    "type": "MC",
+    "q": "Mỗi ngày người nói đọc sách bao lâu?",
+    "o": [
+     "Một tiếng",
+     "Một tiếng rưỡi",
+     "Hai tiếng",
+     "Nửa tiếng"
+    ],
+    "a": 3,
+    "why": "看半个小时的书: đọc sách nửa tiếng."
+   },
+   {
+    "type": "MC",
+    "q": "Người nói thích đọc sách gì nhất?",
+    "o": [
+     "Sách lịch sử",
+     "Sách khoa học",
+     "Tiểu thuyết",
+     "Sách kinh tế"
+    ],
+    "a": 0,
+    "why": "我最喜欢看历史书: tôi thích nhất là đọc sách lịch sử."
+   },
+   {
+    "type": "MC",
+    "q": "Cuốn sách tuần trước người nói đọc xong có bao nhiêu trang?",
+    "o": [
+     "Hơn 200 trang",
+     "Hơn 300 trang",
+     "Hơn 400 trang",
+     "Hơn 100 trang"
+    ],
+    "a": 1,
+    "why": "一共三百多页: tổng cộng hơn 300 trang."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-4",
+  "stage": 3,
+  "title": "Mượn sách ở thư viện",
+  "topic": "Học tập",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你好，我想借这本书。",
+    "py": "Nǐ hǎo, wǒ xiǎng jiè zhè běn shū.",
+    "vi": "Xin chào, tôi muốn mượn cuốn sách này."
+   },
+   {
+    "sp": "B",
+    "han": "请把你的借书证给我看一下。",
+    "py": "Qǐng bǎ nǐ de jièshūzhèng gěi wǒ kàn yīxià.",
+    "vi": "Xin cho tôi xem thẻ mượn sách của bạn."
+   },
+   {
+    "sp": "A",
+    "han": "给你。我的借书证下个月到期。",
+    "py": "Gěi nǐ. Wǒ de jièshūzhèng xià gè yuè dàoqī.",
+    "vi": "Đây ạ. Thẻ mượn sách của tôi tháng sau hết hạn."
+   },
+   {
+    "sp": "B",
+    "han": "这本书你可以借一个月，下个月十五号以前还回来。",
+    "py": "Zhè běn shū nǐ kěyǐ jiè yī gè yuè, xià gè yuè shíwǔ hào yǐqián huán huílai.",
+    "vi": "Cuốn sách này bạn có thể mượn một tháng, trả lại trước ngày 15 tháng sau."
+   },
+   {
+    "sp": "A",
+    "han": "好的，谢谢！",
+    "py": "Hǎo de, xièxie!",
+    "vi": "Vâng, cảm ơn!"
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A muốn làm gì?",
+    "o": [
+     "Trả sách",
+     "Mua sách",
+     "Đọc sách tại chỗ",
+     "Mượn sách"
+    ],
+    "a": 3,
+    "why": "我想借这本书: tôi muốn mượn cuốn sách này."
+   },
+   {
+    "type": "MC",
+    "q": "Nhân viên thư viện muốn xem gì của A?",
+    "o": [
+     "Thẻ mượn sách",
+     "Chứng minh thư",
+     "Thẻ sinh viên",
+     "Sổ tay"
+    ],
+    "a": 0,
+    "why": "请把你的借书证给我看一下: xin cho tôi xem thẻ mượn sách của bạn."
+   },
+   {
+    "type": "MC",
+    "q": "Thẻ mượn sách của A khi nào hết hạn?",
+    "o": [
+     "Tuần sau",
+     "Tháng sau",
+     "Năm sau",
+     "Ngày mai"
+    ],
+    "a": 1,
+    "why": "下个月到期: tháng sau hết hạn."
+   },
+   {
+    "type": "MC",
+    "q": "A phải trả sách trước ngày nào?",
+    "o": [
+     "Ngày 10 tháng sau",
+     "Ngày 20 tháng sau",
+     "Ngày 15 tháng sau",
+     "Cuối tháng sau"
+    ],
+    "a": 2,
+    "why": "下个月十五号以前还回来: trả lại trước ngày 15 tháng sau."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-5",
+  "stage": 3,
+  "title": "Kẹt xe buổi sáng",
+  "topic": "Xã hội",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你今天怎么来得这么晚？",
+    "py": "Nǐ jīntiān zěnme lái de zhème wǎn?",
+    "vi": "Hôm nay sao bạn đến muộn thế?"
+   },
+   {
+    "sp": "B",
+    "han": "路上堵车了，我坐了一个小时的公共汽车。",
+    "py": "Lùshang dǔchē le, wǒ zuò le yī gè xiǎoshí de gōnggòng qìchē.",
+    "vi": "Trên đường bị kẹt xe, tôi ngồi xe buýt một tiếng đồng hồ."
+   },
+   {
+    "sp": "A",
+    "han": "平时你多长时间到公司？",
+    "py": "Píngshí nǐ duō cháng shíjiān dào gōngsī?",
+    "vi": "Bình thường bạn mất bao lâu đến công ty?"
+   },
+   {
+    "sp": "B",
+    "han": "平时半个小时就到了，今天晚了半个小时。",
+    "py": "Píngshí bàn gè xiǎoshí jiù dào le, jīntiān wǎn le bàn gè xiǎoshí.",
+    "vi": "Bình thường nửa tiếng là đến, hôm nay muộn nửa tiếng."
+   },
+   {
+    "sp": "A",
+    "han": "以后你早一点儿出门吧。",
+    "py": "Yǐhòu nǐ zǎo yīdiǎnr chūmén ba.",
+    "vi": "Sau này bạn ra khỏi nhà sớm hơn một chút nhé."
+   },
+   {
+    "sp": "B",
+    "han": "好，我明天七点就出门。",
+    "py": "Hǎo, wǒ míngtiān qī diǎn jiù chūmén.",
+    "vi": "Được, ngày mai 7 giờ tôi sẽ ra khỏi nhà."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Vì sao B đến muộn?",
+    "o": [
+     "Vì kẹt xe",
+     "Vì ngủ quên",
+     "Vì xe hỏng",
+     "Vì trời mưa"
+    ],
+    "a": 0,
+    "why": "路上堵车了: trên đường bị kẹt xe."
+   },
+   {
+    "type": "MC",
+    "q": "Hôm nay B ngồi xe buýt bao lâu?",
+    "o": [
+     "Nửa tiếng",
+     "Hai tiếng",
+     "Một tiếng",
+     "Một tiếng rưỡi"
+    ],
+    "a": 2,
+    "why": "坐了一个小时的公共汽车: ngồi xe buýt một tiếng đồng hồ."
+   },
+   {
+    "type": "MC",
+    "q": "Bình thường B mất bao lâu đến công ty?",
+    "o": [
+     "Một tiếng",
+     "Nửa tiếng",
+     "40 phút",
+     "20 phút"
+    ],
+    "a": 1,
+    "why": "平时半个小时就到了: bình thường nửa tiếng là đến."
+   },
+   {
+    "type": "MC",
+    "q": "Ngày mai B định mấy giờ ra khỏi nhà?",
+    "o": [
+     "6 giờ",
+     "6 giờ rưỡi",
+     "8 giờ",
+     "7 giờ"
+    ],
+    "a": 3,
+    "why": "我明天七点就出门: ngày mai 7 giờ tôi sẽ ra khỏi nhà."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-6",
+  "stage": 3,
+  "title": "Tập thể dục buổi sáng",
+  "topic": "Sức khỏe",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你每天早上都跑步吗？",
+    "py": "Nǐ měitiān zǎoshang dōu pǎobù ma?",
+    "vi": "Mỗi sáng bạn đều chạy bộ à?"
+   },
+   {
+    "sp": "B",
+    "han": "是的，我每天早上六点起床，跑半个小时。",
+    "py": "Shì de, wǒ měitiān zǎoshang liù diǎn qǐchuáng, pǎo bàn gè xiǎoshí.",
+    "vi": "Đúng vậy, mỗi sáng 6 giờ tôi dậy, chạy nửa tiếng."
+   },
+   {
+    "sp": "A",
+    "han": "跑步以后你觉得怎么样？",
+    "py": "Pǎobù yǐhòu nǐ juéde zěnmeyàng?",
+    "vi": "Sau khi chạy bộ bạn thấy thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "觉得身体很舒服，精神也很好。",
+    "py": "Juéde shēntǐ hěn shūfu, jīngshén yě hěn hǎo.",
+    "vi": "Thấy cơ thể rất dễ chịu, tinh thần cũng rất tốt."
+   },
+   {
+    "sp": "A",
+    "han": "我也想跟你一起跑步，可以吗？",
+    "py": "Wǒ yě xiǎng gēn nǐ yīqǐ pǎobù, kěyǐ ma?",
+    "vi": "Tôi cũng muốn chạy cùng bạn, được không?"
+   },
+   {
+    "sp": "B",
+    "han": "当然可以，明天早上六点我们在楼下见。",
+    "py": "Dāngrán kěyǐ, míngtiān zǎoshang liù diǎn wǒmen zài lóuxià jiàn.",
+    "vi": "Đương nhiên được, sáng mai 6 giờ chúng ta gặp nhau dưới lầu."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "B mấy giờ dậy mỗi sáng?",
+    "o": [
+     "5 giờ",
+     "6 giờ",
+     "7 giờ",
+     "6 giờ rưỡi"
+    ],
+    "a": 1,
+    "why": "每天早上六点起床: mỗi sáng 6 giờ dậy."
+   },
+   {
+    "type": "MC",
+    "q": "B chạy bộ mỗi ngày bao lâu?",
+    "o": [
+     "20 phút",
+     "Một tiếng",
+     "Nửa tiếng",
+     "40 phút"
+    ],
+    "a": 2,
+    "why": "跑半个小时: chạy nửa tiếng."
+   },
+   {
+    "type": "MC",
+    "q": "Sau khi chạy bộ B cảm thấy thế nào?",
+    "o": [
+     "Rất mệt",
+     "Đau chân",
+     "Buồn ngủ",
+     "Cơ thể dễ chịu, tinh thần tốt"
+    ],
+    "a": 3,
+    "why": "觉得身体很舒服，精神也很好: thấy cơ thể rất dễ chịu, tinh thần cũng rất tốt."
+   },
+   {
+    "type": "MC",
+    "q": "Ngày mai hai người hẹn gặp ở đâu?",
+    "o": [
+     "Dưới lầu",
+     "Ở công viên",
+     "Ở cổng trường",
+     "Ở phòng tập"
+    ],
+    "a": 0,
+    "why": "我们在楼下见: chúng ta gặp nhau dưới lầu."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-7",
+  "stage": 3,
+  "title": "Đặt bàn ăn nhà hàng",
+  "topic": "Xã hội",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你好，我想订明天晚上的一张桌子。",
+    "py": "Nǐ hǎo, wǒ xiǎng dìng míngtiān wǎnshang de yī zhāng zhuōzi.",
+    "vi": "Xin chào, tôi muốn đặt một bàn cho tối mai."
+   },
+   {
+    "sp": "B",
+    "han": "请问几个人？",
+    "py": "Qǐngwèn jǐ gè rén?",
+    "vi": "Xin hỏi mấy người ạ?"
+   },
+   {
+    "sp": "A",
+    "han": "六个人，七点钟。",
+    "py": "Liù gè rén, qī diǎn zhōng.",
+    "vi": "Sáu người, 7 giờ."
+   },
+   {
+    "sp": "B",
+    "han": "好的，请问您贵姓？",
+    "py": "Hǎo de, qǐngwèn nín guìxìng?",
+    "vi": "Vâng, xin hỏi quý danh của ông/bà?"
+   },
+   {
+    "sp": "A",
+    "han": "我姓张，电话是13812345678。",
+    "py": "Wǒ xìng Zhāng, diànhuà shì 13812345678.",
+    "vi": "Tôi họ Trương, số điện thoại là 13812345678."
+   },
+   {
+    "sp": "B",
+    "han": "张先生，您的桌子已经订好了，明天见。",
+    "py": "Zhāng xiānsheng, nín de zhuōzi yǐjīng dìng hǎo le, míngtiān jiàn.",
+    "vi": "Ông Trương, bàn của ông đã đặt xong, hẹn gặp ngày mai."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A muốn đặt bàn cho khi nào?",
+    "o": [
+     "Tối nay",
+     "Trưa mai",
+     "Tối mai",
+     "Trưa nay"
+    ],
+    "a": 2,
+    "why": "订明天晚上的……桌子: đặt bàn cho tối mai."
+   },
+   {
+    "type": "MC",
+    "q": "Có mấy người ăn?",
+    "o": [
+     "Bốn người",
+     "Năm người",
+     "Bảy người",
+     "Sáu người"
+    ],
+    "a": 3,
+    "why": "六个人: sáu người."
+   },
+   {
+    "type": "MC",
+    "q": "Họ đặt bàn lúc mấy giờ?",
+    "o": [
+     "7 giờ",
+     "6 giờ",
+     "8 giờ",
+     "7 giờ rưỡi"
+    ],
+    "a": 0,
+    "why": "七点钟: 7 giờ."
+   },
+   {
+    "type": "MC",
+    "q": "A họ gì?",
+    "o": [
+     "Họ Lý",
+     "Họ Vương",
+     "Họ Trần",
+     "Họ Trương"
+    ],
+    "a": 3,
+    "why": "我姓张: tôi họ Trương."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-8",
+  "stage": 3,
+  "title": "Mua điện thoại mới",
+  "topic": "Mua sắm",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "这部手机多少钱？",
+    "py": "Zhè bù shǒujī duōshao qián?",
+    "vi": "Chiếc điện thoại này bao nhiêu tiền?"
+   },
+   {
+    "sp": "B",
+    "han": "三千块。现在买还可以送一个耳机。",
+    "py": "Sānqiān kuài. Xiànzài mǎi hái kěyǐ sòng yī gè ěrjī.",
+    "vi": "3000 đồng. Mua bây giờ còn được tặng một tai nghe."
+   },
+   {
+    "sp": "A",
+    "han": "这部手机有什么功能？",
+    "py": "Zhè bù shǒujī yǒu shénme gōngnéng?",
+    "vi": "Chiếc điện thoại này có chức năng gì?"
+   },
+   {
+    "sp": "B",
+    "han": "它可以拍照、上网，还可以看电影。",
+    "py": "Tā kěyǐ pāizhào, shàngwǎng, hái kěyǐ kàn diànyǐng.",
+    "vi": "Nó có thể chụp ảnh, lên mạng, còn có thể xem phim."
+   },
+   {
+    "sp": "A",
+    "han": "听起来不错，我买了。",
+    "py": "Tīng qǐlai bùcuò, wǒ mǎi le.",
+    "vi": "Nghe có vẻ tốt, tôi mua."
+   },
+   {
+    "sp": "B",
+    "han": "好的，请到那边交钱。",
+    "py": "Hǎo de, qǐng dào nàbiān jiāo qián.",
+    "vi": "Vâng, mời anh/chị sang bên kia trả tiền."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Chiếc điện thoại giá bao nhiêu?",
+    "o": [
+     "2000 đồng",
+     "2500 đồng",
+     "3500 đồng",
+     "3000 đồng"
+    ],
+    "a": 3,
+    "why": "三千块: 3000 đồng."
+   },
+   {
+    "type": "MC",
+    "q": "Mua bây giờ được tặng gì?",
+    "o": [
+     "Một tai nghe",
+     "Một ốp lưng",
+     "Một sạc dự phòng",
+     "Một thẻ nhớ"
+    ],
+    "a": 0,
+    "why": "还可以送一个耳机: còn được tặng một tai nghe."
+   },
+   {
+    "type": "MC",
+    "q": "Điện thoại này có thể làm gì?",
+    "o": [
+     "Chỉ gọi điện",
+     "Chụp ảnh, lên mạng, xem phim",
+     "Chỉ nghe nhạc",
+     "Chỉ nhắn tin"
+    ],
+    "a": 1,
+    "why": "可以拍照、上网，还可以看电影: có thể chụp ảnh, lên mạng, xem phim."
+   },
+   {
+    "type": "MC",
+    "q": "Cuối cùng A có mua điện thoại không?",
+    "o": [
+     "Không mua",
+     "Còn suy nghĩ",
+     "Mua một chiếc",
+     "Mua hai chiếc"
+    ],
+    "a": 2,
+    "why": "我买了: tôi mua."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-9",
+  "stage": 3,
+  "title": "Kế hoạch cuối tuần",
+  "topic": "Xã hội",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "这个周末我有很多事情要做。",
+    "py": "Zhège zhōumò wǒ yǒu hěn duō shìqing yào zuò.",
+    "vi": "Cuối tuần này tôi có nhiều việc phải làm."
+   },
+   {
+    "sp": "N",
+    "han": "星期六上午我要去超市买东西，下午在家打扫房间。",
+    "py": "Xīngqīliù shàngwǔ wǒ yào qù chāoshì mǎi dōngxi, xiàwǔ zài jiā dǎsǎo fángjiān.",
+    "vi": "Sáng thứ bảy tôi đi siêu thị mua đồ, chiều ở nhà dọn phòng."
+   },
+   {
+    "sp": "N",
+    "han": "星期天我要去看我的爷爷奶奶，他们住在城外。",
+    "py": "Xīngqītiān wǒ yào qù kàn wǒ de yéye nǎinai, tāmen zhù zài chéngwài.",
+    "vi": "Chủ nhật tôi đi thăm ông bà nội, ông bà sống ở ngoại thành."
+   },
+   {
+    "sp": "N",
+    "han": "虽然很忙，但是我觉得很开心。",
+    "py": "Suīrán hěn máng, dànshì wǒ juéde hěn kāixīn.",
+    "vi": "Tuy rất bận, nhưng tôi thấy rất vui."
+   }
+  ],
+  "note": "Đoạn độc thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Sáng thứ bảy người nói đi đâu?",
+    "o": [
+     "Đi siêu thị",
+     "Đi công viên",
+     "Đi thăm ông bà",
+     "Đi làm"
+    ],
+    "a": 0,
+    "why": "星期六上午我要去超市买东西: sáng thứ bảy tôi đi siêu thị mua đồ."
+   },
+   {
+    "type": "MC",
+    "q": "Chiều thứ bảy người nói làm gì?",
+    "o": [
+     "Đi mua sắm",
+     "Ở nhà dọn phòng",
+     "Đi thăm bạn",
+     "Đi xem phim"
+    ],
+    "a": 1,
+    "why": "下午在家打扫房间: chiều ở nhà dọn phòng."
+   },
+   {
+    "type": "MC",
+    "q": "Chủ nhật người nói đi thăm ai?",
+    "o": [
+     "Bố mẹ",
+     "Bạn bè",
+     "Ông bà nội",
+     "Thầy giáo"
+    ],
+    "a": 2,
+    "why": "去看我的爷爷奶奶: đi thăm ông bà nội."
+   },
+   {
+    "type": "MC",
+    "q": "Ông bà của người nói sống ở đâu?",
+    "o": [
+     "Trong thành phố",
+     "Ở quê xa",
+     "Ở nước ngoài",
+     "Ở ngoại thành"
+    ],
+    "a": 3,
+    "why": "他们住在城外: họ sống ở ngoại thành."
+   }
+  ]
+ },
+ {
+  "hsk": 3,
+  "id": "zh-mock-l3-10",
+  "stage": 3,
+  "title": "Học lái xe",
+  "topic": "Xã hội",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你开始学开车了吗？",
+    "py": "Nǐ kāishǐ xué kāichē le ma?",
+    "vi": "Bạn đã bắt đầu học lái xe chưa?"
+   },
+   {
+    "sp": "B",
+    "han": "开始了，我上个星期报的名。",
+    "py": "Kāishǐ le, wǒ shàng gè xīngqī bào de míng.",
+    "vi": "Bắt đầu rồi, tuần trước tôi đã đăng ký."
+   },
+   {
+    "sp": "A",
+    "han": "你一个星期上几次课？",
+    "py": "Nǐ yī gè xīngqī shàng jǐ cì kè?",
+    "vi": "Một tuần bạn học mấy buổi?"
+   },
+   {
+    "sp": "B",
+    "han": "上三次课，每次两个小时。",
+    "py": "Shàng sān cì kè, měi cì liǎng gè xiǎoshí.",
+    "vi": "Học ba buổi, mỗi buổi hai tiếng."
+   },
+   {
+    "sp": "A",
+    "han": "考试难吗？",
+    "py": "Kǎoshì nán ma?",
+    "vi": "Thi có khó không?"
+   },
+   {
+    "sp": "B",
+    "han": "不太难，只要多练习就能通过。",
+    "py": "Bù tài nán, zhǐyào duō liànxí jiù néng tōngguò.",
+    "vi": "Không khó lắm, chỉ cần luyện tập nhiều là đỗ."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "B đăng ký học lái xe khi nào?",
+    "o": [
+     "Hôm qua",
+     "Tuần trước",
+     "Tháng trước",
+     "Hôm nay"
+    ],
+    "a": 1,
+    "why": "我上个星期报的名: tuần trước tôi đã đăng ký."
+   },
+   {
+    "type": "MC",
+    "q": "Mỗi tuần B học mấy buổi?",
+    "o": [
+     "Hai buổi",
+     "Bốn buổi",
+     "Năm buổi",
+     "Ba buổi"
+    ],
+    "a": 3,
+    "why": "上三次课: học ba buổi."
+   },
+   {
+    "type": "MC",
+    "q": "Mỗi buổi học bao lâu?",
+    "o": [
+     "Hai tiếng",
+     "Một tiếng",
+     "Ba tiếng",
+     "Nửa tiếng"
+    ],
+    "a": 0,
+    "why": "每次两个小时: mỗi buổi hai tiếng."
+   },
+   {
+    "type": "MC",
+    "q": "Theo B, muốn đỗ thi lái xe cần gì?",
+    "o": [
+     "Học thuộc lý thuyết",
+     "Mua xe mới",
+     "Luyện tập nhiều",
+     "Thi nhiều lần"
+    ],
+    "a": 2,
+    "why": "只要多练习就能通过: chỉ cần luyện tập nhiều là đỗ."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-1",
+  "stage": 4,
+  "title": "Tuyến tàu điện ngầm mới",
+  "topic": "Tin tức",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "各位听众，下面播送一条新闻。",
+    "py": "Gèwèi tīngzhòng, xiàmiàn bōsòng yī tiáo xīnwén.",
+    "vi": "Thưa quý thính giả, sau đây là một bản tin."
+   },
+   {
+    "sp": "N",
+    "han": "从下个月一号开始，本市的三号线地铁将正式开始运行。",
+    "py": "Cóng xià gè yuè yī hào kāishǐ, běn shì de sān hào xiàn dìtiě jiāng zhèngshì kāishǐ yùnxíng.",
+    "vi": "Từ ngày 1 tháng sau, tuyến tàu điện ngầm số 3 của thành phố sẽ chính thức đi vào hoạt động."
+   },
+   {
+    "sp": "N",
+    "han": "这条地铁线一共有二十个车站，连接市中心和新开发区。",
+    "py": "Zhè tiáo dìtiě xiàn yīgòng yǒu èrshí gè chēzhàn, liánjiē shì zhōngxīn hé xīn kāifā qū.",
+    "vi": "Tuyến tàu điện ngầm này có tổng cộng 20 ga, nối trung tâm thành phố với khu phát triển mới."
+   },
+   {
+    "sp": "N",
+    "han": "从市中心坐到开发区只需要三十分钟，比坐公共汽车快一倍。",
+    "py": "Cóng shì zhōngxīn zuò dào kāifā qū zhǐ xūyào sānshí fēnzhōng, bǐ zuò gōnggòng qìchē kuài yī bèi.",
+    "vi": "Đi từ trung tâm thành phố đến khu phát triển mới chỉ mất 30 phút, nhanh gấp đôi so với đi xe buýt."
+   },
+   {
+    "sp": "N",
+    "han": "地铁每天早上六点开始运行，晚上十一点结束。",
+    "py": "Dìtiě měitiān zǎoshang liù diǎn kāishǐ yùnxíng, wǎnshang shíyī diǎn jiéshù.",
+    "vi": "Tàu điện ngầm mỗi ngày bắt đầu chạy lúc 6 giờ sáng, kết thúc lúc 11 giờ đêm."
+   },
+   {
+    "sp": "N",
+    "han": "一张票的价格是四块钱，学生可以买半价票。",
+    "py": "Yī zhāng piào de jiàgé shì sì kuài qián, xuésheng kěyǐ mǎi bànjià piào.",
+    "vi": "Giá một vé là 4 đồng, học sinh có thể mua vé nửa giá."
+   },
+   {
+    "sp": "N",
+    "han": "市政府希望这条新地铁线能减少交通拥堵，方便市民出行。",
+    "py": "Shì zhèngfǔ xīwàng zhè tiáo xīn dìtiě xiàn néng jiǎnshǎo jiāotōng yōngdǔ, fāngbiàn shìmín chūxíng.",
+    "vi": "Chính quyền thành phố hy vọng tuyến tàu điện ngầm mới này có thể giảm ùn tắc giao thông, thuận tiện cho người dân đi lại."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Tuyến tàu điện ngầm số 3 bắt đầu hoạt động khi nào?",
+    "o": [
+     "Ngày 1 tháng sau",
+     "Ngày 1 tháng này",
+     "Cuối tháng này",
+     "Ngày 15 tháng sau"
+    ],
+    "a": 0,
+    "why": "从下个月一号开始……将正式开始运行: từ ngày 1 tháng sau sẽ chính thức đi vào hoạt động."
+   },
+   {
+    "type": "MC",
+    "q": "Tuyến tàu này có bao nhiêu ga?",
+    "o": [
+     "10 ga",
+     "20 ga",
+     "30 ga",
+     "15 ga"
+    ],
+    "a": 1,
+    "why": "一共有二十个车站: có tổng cộng 20 ga."
+   },
+   {
+    "type": "MC",
+    "q": "Đi từ trung tâm thành phố đến khu phát triển mới mất bao lâu?",
+    "o": [
+     "15 phút",
+     "60 phút",
+     "30 phút",
+     "45 phút"
+    ],
+    "a": 2,
+    "why": "只需要三十分钟: chỉ mất 30 phút."
+   },
+   {
+    "type": "MC",
+    "q": "Theo bản tin, tuyến tàu mới có tác dụng gì?",
+    "o": [
+     "Giảm số lượng xe buýt",
+     "Tăng giá vé xe buýt",
+     "Giảm ùn tắc giao thông, thuận tiện đi lại",
+     "Đóng cửa khu phát triển mới"
+    ],
+    "a": 2,
+    "why": "能减少交通拥堵，方便市民出行: có thể giảm ùn tắc giao thông, thuận tiện cho người dân đi lại."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-2",
+  "stage": 4,
+  "title": "Phân công dự án mới",
+  "topic": "Công việc",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "王经理，下个星期我们要开始做新项目了，对吗？",
+    "py": "Wáng jīnglǐ, xià gè xīngqī wǒmen yào kāishǐ zuò xīn xiàngmù le, duì ma?",
+    "vi": "Giám đốc Vương, tuần sau chúng ta bắt đầu làm dự án mới, đúng không?"
+   },
+   {
+    "sp": "B",
+    "han": "对，这个项目很重要，客户要求我们在两个月内完成。",
+    "py": "Duì, zhège xiàngmù hěn zhòngyào, kèhù yāoqiú wǒmen zài liǎng gè yuè nèi wánchéng.",
+    "vi": "Đúng, dự án này rất quan trọng, khách hàng yêu cầu chúng ta hoàn thành trong vòng hai tháng."
+   },
+   {
+    "sp": "A",
+    "han": "那我们怎么分工呢？",
+    "py": "Nà wǒmen zěnme fēngōng ne?",
+    "vi": "Vậy chúng ta phân công thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "你负责市场调查，小李负责设计，我负责和客户联系。",
+    "py": "Nǐ fùzé shìchǎng diàochá, Xiǎo Lǐ fùzé shèjì, wǒ fùzé hé kèhù liánxì.",
+    "vi": "Bạn phụ trách điều tra thị trường, Tiểu Lý phụ trách thiết kế, tôi phụ trách liên hệ với khách hàng."
+   },
+   {
+    "sp": "A",
+    "han": "好的。什么时候开会讨论第一次的调查结果？",
+    "py": "Hǎo de. Shénme shíhou kāihuì tǎolùn dì yī cì de diàochá jiéguǒ?",
+    "vi": "Vâng. Khi nào họp thảo luận kết quả điều tra lần đầu?"
+   },
+   {
+    "sp": "B",
+    "han": "下星期五下午三点，我们在会议室见。",
+    "py": "Xià xīngqī wǔ xiàwǔ sān diǎn, wǒmen zài huìyìshì jiàn.",
+    "vi": "Chiều thứ Sáu tuần sau lúc 3 giờ, chúng ta gặp nhau ở phòng họp."
+   },
+   {
+    "sp": "A",
+    "han": "没问题，我会提前准备好报告。",
+    "py": "Méi wèntí, wǒ huì tíqián zhǔnbèi hǎo bàogào.",
+    "vi": "Không vấn đề gì, tôi sẽ chuẩn bị sẵn báo cáo."
+   },
+   {
+    "sp": "B",
+    "han": "很好。大家一起努力，争取提前完成任务。",
+    "py": "Hěn hǎo. Dàjiā yīqǐ nǔlì, zhēngqǔ tíqián wánchéng rènwu.",
+    "vi": "Rất tốt. Mọi người cùng cố gắng, tranh thủ hoàn thành nhiệm vụ trước thời hạn."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Khách hàng yêu cầu hoàn thành dự án trong bao lâu?",
+    "o": [
+     "Một tháng",
+     "Hai tháng",
+     "Ba tháng",
+     "Nửa tháng"
+    ],
+    "a": 1,
+    "why": "要求我们在两个月内完成: yêu cầu chúng ta hoàn thành trong vòng hai tháng."
+   },
+   {
+    "type": "MC",
+    "q": "A phụ trách công việc gì?",
+    "o": [
+     "Thiết kế",
+     "Liên hệ khách hàng",
+     "Điều tra thị trường",
+     "Viết báo cáo"
+    ],
+    "a": 2,
+    "why": "你负责市场调查: bạn phụ trách điều tra thị trường."
+   },
+   {
+    "type": "MC",
+    "q": "Họ họp thảo luận kết quả điều tra lần đầu khi nào?",
+    "o": [
+     "Thứ Sáu tuần này 3 giờ chiều",
+     "Thứ Năm tuần sau 3 giờ chiều",
+     "Thứ Sáu tuần này 2 giờ chiều",
+     "Thứ Sáu tuần sau 3 giờ chiều"
+    ],
+    "a": 3,
+    "why": "下星期五下午三点: chiều thứ Sáu tuần sau lúc 3 giờ."
+   },
+   {
+    "type": "MC",
+    "q": "Tiểu Lý phụ trách việc gì?",
+    "o": [
+     "Thiết kế",
+     "Điều tra thị trường",
+     "Liên hệ khách hàng",
+     "Chuẩn bị báo cáo"
+    ],
+    "a": 0,
+    "why": "小李负责设计: Tiểu Lý phụ trách thiết kế."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-3",
+  "stage": 4,
+  "title": "Du lịch Vân Nam",
+  "topic": "Du lịch",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "暑假我们去云南旅游吧，那里天气凉快，风景也很美。",
+    "py": "Shǔjià wǒmen qù Yúnnán lǚyóu ba, nàlǐ tiānqì liángkuai, fēngjǐng yě hěn měi.",
+    "vi": "Nghỉ hè chúng ta đi du lịch Vân Nam nhé, ở đó thời tiết mát mẻ, phong cảnh cũng rất đẹp."
+   },
+   {
+    "sp": "B",
+    "han": "好主意！我们去几天？",
+    "py": "Hǎo zhǔyi! Wǒmen qù jǐ tiān?",
+    "vi": "Ý hay đấy! Chúng ta đi mấy ngày?"
+   },
+   {
+    "sp": "A",
+    "han": "去五天。我们先坐飞机到昆明，然后再坐火车去大理。",
+    "py": "Qù wǔ tiān. Wǒmen xiān zuò fēijī dào Kūnmíng, ránhòu zài zuò huǒchē qù Dàlǐ.",
+    "vi": "Đi năm ngày. Chúng ta bay đến Côn Minh trước, sau đó đi tàu hỏa đến Đại Lý."
+   },
+   {
+    "sp": "B",
+    "han": "酒店订好了吗？",
+    "py": "Jiǔdiàn dìng hǎo le ma?",
+    "vi": "Đã đặt khách sạn chưa?"
+   },
+   {
+    "sp": "A",
+    "han": "还没有。我在网上看了几家，大理古城附近有一家很不错，一天三百块。",
+    "py": "Hái méiyǒu. Wǒ zài wǎngshang kàn le jǐ jiā, Dàlǐ gǔchéng fùjìn yǒu yī jiā hěn bùcuò, yī tiān sānbǎi kuài.",
+    "vi": "Chưa. Tôi đã xem vài khách sạn trên mạng, gần thành cổ Đại Lý có một khách sạn rất tốt, một ngày 300 đồng."
+   },
+   {
+    "sp": "B",
+    "han": "价格还可以。我们最好今天就订下来，暑假房间很紧张。",
+    "py": "Jiàgé hái kěyǐ. Wǒmen zuì hǎo jīntiān jiù dìng xiàlai, shǔjià fángjiān hěn jǐnzhāng.",
+    "vi": "Giá cũng được. Tốt nhất hôm nay chúng ta đặt luôn, phòng nghỉ hè rất khan hiếm."
+   },
+   {
+    "sp": "A",
+    "han": "好，我现在就订。你负责买机票，怎么样？",
+    "py": "Hǎo, wǒ xiànzài jiù dìng. Nǐ fùzé mǎi jīpiào, zěnmeyàng?",
+    "vi": "Được, tôi đặt ngay bây giờ. Bạn phụ trách mua vé máy bay, được không?"
+   },
+   {
+    "sp": "B",
+    "han": "没问题，我马上上网查一下。",
+    "py": "Méi wèntí, wǒ mǎshàng shàngwǎng chá yīxià.",
+    "vi": "Không vấn đề gì, tôi lên mạng tra ngay."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Họ định đi du lịch mấy ngày?",
+    "o": [
+     "Ba ngày",
+     "Bốn ngày",
+     "Năm ngày",
+     "Một tuần"
+    ],
+    "a": 2,
+    "why": "去五天: đi năm ngày."
+   },
+   {
+    "type": "MC",
+    "q": "Họ đến Đại Lý bằng phương tiện gì?",
+    "o": [
+     "Máy bay",
+     "Ô tô",
+     "Xe buýt",
+     "Tàu hỏa"
+    ],
+    "a": 3,
+    "why": "再坐火车去大理: sau đó đi tàu hỏa đến Đại Lý."
+   },
+   {
+    "type": "MC",
+    "q": "Khách sạn gần thành cổ Đại Lý giá bao nhiêu một ngày?",
+    "o": [
+     "300 đồng",
+     "200 đồng",
+     "400 đồng",
+     "500 đồng"
+    ],
+    "a": 0,
+    "why": "一天三百块: một ngày 300 đồng."
+   },
+   {
+    "type": "MC",
+    "q": "Ai phụ trách mua vé máy bay?",
+    "o": [
+     "Người A",
+     "Người B",
+     "Hướng dẫn viên",
+     "Nhân viên khách sạn"
+    ],
+    "a": 1,
+    "why": "你负责买机票: bạn phụ trách mua vé máy bay (A nói với B)."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-4",
+  "stage": 4,
+  "title": "Khám bệnh vì mất ngủ",
+  "topic": "Sức khỏe",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "医生，我最近总是睡不好，早上起来很累。",
+    "py": "Yīshēng, wǒ zuìjìn zǒngshì shuì bù hǎo, zǎoshang qǐlai hěn lèi.",
+    "vi": "Bác sĩ, gần đây tôi luôn ngủ không ngon, sáng dậy rất mệt."
+   },
+   {
+    "sp": "B",
+    "han": "你每天几点睡觉？",
+    "py": "Nǐ měitiān jǐ diǎn shuì jiào?",
+    "vi": "Mỗi ngày bạn ngủ lúc mấy giờ?"
+   },
+   {
+    "sp": "A",
+    "han": "一般十二点以后，有时候一点才睡。",
+    "py": "Yībān shí'èr diǎn yǐhòu, yǒu shíhou yī diǎn cái shuì.",
+    "vi": "Thường sau 12 giờ, có khi 1 giờ mới ngủ."
+   },
+   {
+    "sp": "B",
+    "han": "太晚了。成年人每天最好睡七到八个小时。",
+    "py": "Tài wǎn le. Chéngniánrén měitiān zuì hǎo shuì qī dào bā gè xiǎoshí.",
+    "vi": "Muộn quá. Người trưởng thành mỗi ngày tốt nhất nên ngủ 7 đến 8 tiếng."
+   },
+   {
+    "sp": "A",
+    "han": "可是我工作很忙，晚上还要加班。",
+    "py": "Kěshì wǒ gōngzuò hěn máng, wǎnshang hái yào jiābān.",
+    "vi": "Nhưng công việc của tôi rất bận, buổi tối còn phải làm thêm giờ."
+   },
+   {
+    "sp": "B",
+    "han": "工作再忙也要注意身体。睡前半小时不要看手机，可以听一点儿轻音乐。",
+    "py": "Gōngzuò zài máng yě yào zhùyì shēntǐ. Shuì qián bàn xiǎoshí bùyào kàn shǒujī, kěyǐ tīng yīdiǎnr qīng yīnyuè.",
+    "vi": "Dù công việc bận đến đâu cũng phải chú ý sức khỏe. Nửa tiếng trước khi ngủ đừng xem điện thoại, có thể nghe một chút nhạc nhẹ."
+   },
+   {
+    "sp": "A",
+    "han": "我明白了。另外，我还需要吃药吗？",
+    "py": "Wǒ míngbai le. Lìngwài, wǒ hái xūyào chī yào ma?",
+    "vi": "Tôi hiểu rồi. Ngoài ra, tôi có cần uống thuốc không?"
+   },
+   {
+    "sp": "B",
+    "han": "暂时不用。先调整作息时间，坚持运动，一个月以后再来检查。",
+    "py": "Zànshí bùyòng. Xiān tiáozhěng zuòxī shíjiān, jiānchí yùndòng, yī gè yuè yǐhòu zài lái jiǎnchá.",
+    "vi": "Tạm thời chưa cần. Trước tiên điều chỉnh giờ giấc sinh hoạt, kiên trì vận động, một tháng sau quay lại kiểm tra."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A thường ngủ lúc mấy giờ?",
+    "o": [
+     "10 giờ tối",
+     "11 giờ tối",
+     "9 giờ tối",
+     "Sau 12 giờ đêm"
+    ],
+    "a": 3,
+    "why": "一般十二点以后: thường sau 12 giờ."
+   },
+   {
+    "type": "MC",
+    "q": "Bác sĩ nói người trưởng thành nên ngủ bao lâu mỗi ngày?",
+    "o": [
+     "7 đến 8 tiếng",
+     "5 đến 6 tiếng",
+     "9 đến 10 tiếng",
+     "6 đến 7 tiếng"
+    ],
+    "a": 0,
+    "why": "每天最好睡七到八个小时: mỗi ngày tốt nhất nên ngủ 7 đến 8 tiếng."
+   },
+   {
+    "type": "MC",
+    "q": "Bác sĩ khuyên A làm gì trước khi ngủ?",
+    "o": [
+     "Xem điện thoại",
+     "Nghe nhạc nhẹ, không xem điện thoại",
+     "Uống cà phê",
+     "Làm việc thêm"
+    ],
+    "a": 1,
+    "why": "睡前半小时不要看手机，可以听一点儿轻音乐: nửa tiếng trước khi ngủ đừng xem điện thoại, có thể nghe một chút nhạc nhẹ."
+   },
+   {
+    "type": "MC",
+    "q": "A có cần uống thuốc không?",
+    "o": [
+     "Cần, uống ngay",
+     "Cần, uống một tháng",
+     "Tạm thời chưa cần",
+     "Cần, uống mỗi ngày"
+    ],
+    "a": 2,
+    "why": "暂时不用: tạm thời chưa cần."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-5",
+  "stage": 4,
+  "title": "Học ngoại ngữ trực tuyến",
+  "topic": "Giáo dục",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "我想利用业余时间学一门外语，你有什么建议吗？",
+    "py": "Wǒ xiǎng lìyòng yèyú shíjiān xué yī mén wàiyǔ, nǐ yǒu shénme jiànyì ma?",
+    "vi": "Tôi muốn tận dụng thời gian rảnh học một ngoại ngữ, bạn có gợi ý gì không?"
+   },
+   {
+    "sp": "B",
+    "han": "你可以试试网上课程，又便宜又方便，还可以自己安排时间。",
+    "py": "Nǐ kěyǐ shìshi wǎngshang kèchéng, yòu piányi yòu fāngbiàn, hái kěyǐ zìjǐ ānpái shíjiān.",
+    "vi": "Bạn có thể thử khóa học trực tuyến, vừa rẻ vừa tiện, lại có thể tự sắp xếp thời gian."
+   },
+   {
+    "sp": "A",
+    "han": "网上课程的效果怎么样？我担心自己坚持不下来。",
+    "py": "Wǎngshang kèchéng de xiàoguǒ zěnmeyàng? Wǒ dānxīn zìjǐ jiānchí bù xiàlai.",
+    "vi": "Hiệu quả của khóa học trực tuyến thế nào? Tôi lo mình không kiên trì được."
+   },
+   {
+    "sp": "B",
+    "han": "只要每天学习半个小时，坚持三个月，你一定会有很大的进步。",
+    "py": "Zhǐyào měitiān xuéxí bàn gè xiǎoshí, jiānchí sān gè yuè, nǐ yīdìng huì yǒu hěn dà de jìnbù.",
+    "vi": "Chỉ cần mỗi ngày học nửa tiếng, kiên trì ba tháng, bạn nhất định sẽ tiến bộ rất nhiều."
+   },
+   {
+    "sp": "A",
+    "han": "那我学日语还是韩语呢？",
+    "py": "Nà wǒ xué Rìyǔ háishi Hányǔ ne?",
+    "vi": "Vậy tôi học tiếng Nhật hay tiếng Hàn?"
+   },
+   {
+    "sp": "B",
+    "han": "这要看你的兴趣和工作需要。你打算去日本工作还是韩国工作？",
+    "py": "Zhè yào kàn nǐ de xìngqù hé gōngzuò xūyào. Nǐ dǎsuàn qù Rìběn gōngzuò háishi Hánguó gōngzuò?",
+    "vi": "Điều đó tùy thuộc vào sở thích và nhu cầu công việc của bạn. Bạn định đi làm ở Nhật hay ở Hàn Quốc?"
+   },
+   {
+    "sp": "A",
+    "han": "我们公司明年要在韩国开分公司，我想学韩语。",
+    "py": "Wǒmen gōngsī míngnián yào zài Hánguó kāi fēn gōngsī, wǒ xiǎng xué Hányǔ.",
+    "vi": "Công ty chúng tôi năm sau sẽ mở chi nhánh ở Hàn Quốc, tôi muốn học tiếng Hàn."
+   },
+   {
+    "sp": "B",
+    "han": "那就学韩语吧。学会以后，你的工作机会会更多。",
+    "py": "Nà jiù xué Hányǔ ba. Xuéhuì yǐhòu, nǐ de gōngzuò jīhuì huì gèng duō.",
+    "vi": "Vậy thì học tiếng Hàn đi. Học xong, cơ hội việc làm của bạn sẽ nhiều hơn."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "B khuyên A học theo hình thức nào?",
+    "o": [
+     "Khóa học trực tuyến",
+     "Lớp học buổi tối",
+     "Học với gia sư",
+     "Tự học bằng sách"
+    ],
+    "a": 0,
+    "why": "你可以试试网上课程: bạn có thể thử khóa học trực tuyến."
+   },
+   {
+    "type": "MC",
+    "q": "B nói mỗi ngày học bao lâu thì sẽ tiến bộ?",
+    "o": [
+     "Một tiếng",
+     "Hai tiếng",
+     "Nửa tiếng",
+     "15 phút"
+    ],
+    "a": 2,
+    "why": "每天学习半个小时: mỗi ngày học nửa tiếng."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao A muốn học tiếng Hàn?",
+    "o": [
+     "Vì thích phim Hàn Quốc",
+     "Vì công ty sắp mở chi nhánh ở Hàn Quốc",
+     "Vì muốn đi du học Hàn Quốc",
+     "Vì bạn bè đều học tiếng Hàn"
+    ],
+    "a": 1,
+    "why": "我们公司明年要在韩国开分公司: công ty chúng tôi năm sau sẽ mở chi nhánh ở Hàn Quốc."
+   },
+   {
+    "type": "MC",
+    "q": "A lo lắng điều gì về khóa học trực tuyến?",
+    "o": [
+     "Học phí quá cao",
+     "Thời gian không linh hoạt",
+     "Giáo viên không giỏi",
+     "Mình không kiên trì được"
+    ],
+    "a": 3,
+    "why": "我担心自己坚持不下来: tôi lo mình không kiên trì được."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-6",
+  "stage": 4,
+  "title": "Phân loại rác trong khu dân cư",
+  "topic": "Môi trường",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "小区门口新放了四个不同颜色的垃圾桶，你知道怎么分吗？",
+    "py": "Xiǎoqū ménkǒu xīn fàng le sì gè bùtóng yánsè de lājītǒng, nǐ zhīdào zěnme fēn ma?",
+    "vi": "Trước cổng khu dân cư mới đặt bốn thùng rác màu khác nhau, bạn biết phân loại thế nào không?"
+   },
+   {
+    "sp": "B",
+    "han": "知道一些。绿色的放厨余垃圾，比如剩菜剩饭和果皮。",
+    "py": "Zhīdào yīxiē. Lǜsè de fàng chúyú lājī, bǐrú shèng cài shèng fàn hé guǒpí.",
+    "vi": "Biết một chút. Thùng màu xanh lá đựng rác nhà bếp, ví dụ thức ăn thừa và vỏ trái cây."
+   },
+   {
+    "sp": "A",
+    "han": "那蓝色的呢？",
+    "py": "Nà lán sè de ne?",
+    "vi": "Vậy thùng màu xanh dương thì sao?"
+   },
+   {
+    "sp": "B",
+    "han": "蓝色的放可回收垃圾，比如报纸、塑料瓶和旧衣服。",
+    "py": "Lánsè de fàng kě huíshōu lājī, bǐrú bàozhǐ, sùliào píng hé jiù yīfu.",
+    "vi": "Màu xanh dương đựng rác tái chế được, ví dụ báo cũ, chai nhựa và quần áo cũ."
+   },
+   {
+    "sp": "A",
+    "han": "红色和灰色呢？",
+    "py": "Hóngsè hé huīsè ne?",
+    "vi": "Màu đỏ và màu xám thì sao?"
+   },
+   {
+    "sp": "B",
+    "han": "红色的是有害垃圾，比如旧电池和过期药品；灰色的是其他垃圾。",
+    "py": "Hóngsè de shì yǒuhài lājī, bǐrú jiù diànchí hé guòqī yàopǐn; huīsè de shì qítā lājī.",
+    "vi": "Màu đỏ là rác độc hại, ví dụ pin cũ và thuốc hết hạn; màu xám là rác khác."
+   },
+   {
+    "sp": "A",
+    "han": "原来是这样。垃圾分类能减少污染，我们都要认真去做。",
+    "py": "Yuánlái shì zhèyàng. Lājī fēnlèi néng jiǎnshǎo wūrǎn, wǒmen dōu yào rènzhēn qù zuò.",
+    "vi": "Thì ra là vậy. Phân loại rác có thể giảm ô nhiễm, chúng ta đều phải thực hiện nghiêm túc."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Thùng màu xanh lá đựng loại rác nào?",
+    "o": [
+     "Rác tái chế",
+     "Rác nhà bếp",
+     "Rác độc hại",
+     "Rác khác"
+    ],
+    "a": 1,
+    "why": "绿色的放厨余垃圾: thùng màu xanh lá đựng rác nhà bếp."
+   },
+   {
+    "type": "MC",
+    "q": "Báo cũ và chai nhựa bỏ vào thùng màu nào?",
+    "o": [
+     "Màu xanh lá",
+     "Màu đỏ",
+     "Màu xám",
+     "Màu xanh dương"
+    ],
+    "a": 3,
+    "why": "蓝色的放可回收垃圾，比如报纸、塑料瓶: màu xanh dương đựng rác tái chế được, ví dụ báo cũ, chai nhựa."
+   },
+   {
+    "type": "MC",
+    "q": "Pin cũ thuộc loại rác nào?",
+    "o": [
+     "Rác độc hại",
+     "Rác nhà bếp",
+     "Rác tái chế",
+     "Rác khác"
+    ],
+    "a": 0,
+    "why": "红色的是有害垃圾，比如旧电池: màu đỏ là rác độc hại, ví dụ pin cũ."
+   },
+   {
+    "type": "MC",
+    "q": "Theo đoạn hội thoại, phân loại rác có tác dụng gì?",
+    "o": [
+     "Tăng diện tích khu dân cư",
+     "Giảm số lượng thùng rác",
+     "Tiết kiệm tiền",
+     "Giảm ô nhiễm"
+    ],
+    "a": 3,
+    "why": "垃圾分类能减少污染: phân loại rác có thể giảm ô nhiễm."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-7",
+  "stage": 4,
+  "title": "Mua sắm trực tuyến",
+  "topic": "Công nghệ",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "你平时在网上买东西吗？我觉得网上购物越来越方便了。",
+    "py": "Nǐ píngshí zài wǎngshang mǎi dōngxi ma? Wǒ juéde wǎngshang gòuwù yuè lái yuè fāngbiàn le.",
+    "vi": "Bình thường bạn có mua đồ trên mạng không? Tôi thấy mua sắm trực tuyến ngày càng tiện lợi."
+   },
+   {
+    "sp": "B",
+    "han": "我经常在网上买。不仅价格便宜，而且不用出门，快递两三天就送到了。",
+    "py": "Wǒ jīngcháng zài wǎngshang mǎi. Bùjǐn jiàgé piányi, érqiě bùyòng chūmén, kuàidì liǎng sān tiān jiù sòng dào le.",
+    "vi": "Tôi thường xuyên mua trên mạng. Không chỉ giá rẻ, mà còn không cần ra khỏi nhà, chuyển phát nhanh hai ba ngày là giao đến."
+   },
+   {
+    "sp": "A",
+    "han": "可是看不到真的东西，质量怎么样呢？",
+    "py": "Kěshì kàn bù dào zhēn de dōngxi, zhìliàng zěnmeyàng ne?",
+    "vi": "Nhưng không nhìn thấy hàng thật, chất lượng thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "你可以先看看其他买家的评价，再决定买不买。",
+    "py": "Nǐ kěyǐ xiān kànkan qítā mǎijiā de píngjià, zài juédìng mǎi bù mǎi.",
+    "vi": "Bạn có thể xem đánh giá của những người mua khác trước, rồi mới quyết định mua hay không."
+   },
+   {
+    "sp": "A",
+    "han": "如果东西不合适，可以退货吗？",
+    "py": "Rúguǒ dōngxi bù héshì, kěyǐ tuìhuò ma?",
+    "vi": "Nếu hàng không phù hợp, có thể trả lại không?"
+   },
+   {
+    "sp": "B",
+    "han": "一般七天内都可以免费退货，你放心吧。",
+    "py": "Yībān qī tiān nèi dōu kěyǐ miǎnfèi tuìhuò, nǐ fàngxīn ba.",
+    "vi": "Thông thường trong vòng bảy ngày đều có thể trả hàng miễn phí, bạn yên tâm đi."
+   },
+   {
+    "sp": "A",
+    "han": "太好了！那你教教我怎么用手机付款吧。",
+    "py": "Tài hǎo le! Nà nǐ jiāo jiao wǒ zěnme yòng shǒujī fùkuǎn ba.",
+    "vi": "Tuyệt quá! Vậy bạn dạy tôi cách thanh toán bằng điện thoại nhé."
+   },
+   {
+    "sp": "B",
+    "han": "没问题。现在手机支付很安全，你先要设置一个密码。",
+    "py": "Méi wèntí. Xiànzài shǒujī zhīfù hěn ānquán, nǐ xiān yào shèzhì yī gè mìmǎ.",
+    "vi": "Không vấn đề gì. Bây giờ thanh toán bằng điện thoại rất an toàn, trước tiên bạn cần đặt một mật khẩu."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Theo B, mua sắm trực tuyến có ưu điểm gì?",
+    "o": [
+     "Hàng luôn rẻ nhất",
+     "Không cần ra khỏi nhà, giao hàng nhanh",
+     "Không cần trả tiền",
+     "Hàng luôn đúng như hình"
+    ],
+    "a": 1,
+    "why": "不用出门，快递两三天就送到了: không cần ra khỏi nhà, chuyển phát nhanh hai ba ngày là giao đến."
+   },
+   {
+    "type": "MC",
+    "q": "B khuyên A làm gì trước khi mua hàng trên mạng?",
+    "o": [
+     "Xem đánh giá của người mua khác",
+     "Hỏi ý kiến nhân viên bán hàng",
+     "So sánh giá ở nhiều cửa hàng",
+     "Đợi giảm giá"
+    ],
+    "a": 0,
+    "why": "先看看其他买家的评价: xem đánh giá của những người mua khác trước."
+   },
+   {
+    "type": "MC",
+    "q": "Hàng mua trên mạng có thể trả lại trong bao lâu?",
+    "o": [
+     "Ba ngày",
+     "Năm ngày",
+     "Một tháng",
+     "Bảy ngày"
+    ],
+    "a": 3,
+    "why": "一般七天内都可以免费退货: thông thường trong vòng bảy ngày đều có thể trả hàng miễn phí."
+   },
+   {
+    "type": "MC",
+    "q": "Trước khi dùng điện thoại thanh toán, A cần làm gì?",
+    "o": [
+     "Mua điện thoại mới",
+     "Đặt một mật khẩu",
+     "Mở tài khoản ngân hàng mới",
+     "Tải nhiều ứng dụng"
+    ],
+    "a": 1,
+    "why": "你先要设置一个密码: trước tiên bạn cần đặt một mật khẩu."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-8",
+  "stage": 4,
+  "title": "Thuê nhà gần công ty",
+  "topic": "Đời sống thành phố",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "我最近想在公司附近租一套房子，你觉得怎么样？",
+    "py": "Wǒ zuìjìn xiǎng zài gōngsī fùjìn zū yī tào fángzi, nǐ juéde zěnmeyàng?",
+    "vi": "Gần đây tôi muốn thuê một căn nhà gần công ty, bạn thấy thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "很好的想法。这样你每天可以少花一个小时在路上。",
+    "py": "Hěn hǎo de xiǎngfǎ. Zhèyàng nǐ měitiān kěyǐ shǎo huā yī gè xiǎoshí zài lùshang.",
+    "vi": "Ý tưởng rất hay. Như vậy mỗi ngày bạn có thể tiết kiệm một tiếng trên đường."
+   },
+   {
+    "sp": "A",
+    "han": "可是公司附近的房租很贵，一个月要四千多块。",
+    "py": "Kěshì gōngsī fùjìn de fángzū hěn guì, yī gè yuè yào sìqiān duō kuài.",
+    "vi": "Nhưng tiền thuê nhà gần công ty rất đắt, một tháng hơn 4000 đồng."
+   },
+   {
+    "sp": "B",
+    "han": "你可以找一个合租的室友，两个人分房租就便宜多了。",
+    "py": "Nǐ kěyǐ zhǎo yī gè hézū de shìyǒu, liǎng gè rén fēn fángzū jiù piányi duō le.",
+    "vi": "Bạn có thể tìm một người bạn cùng thuê, hai người chia tiền thuê thì rẻ hơn nhiều."
+   },
+   {
+    "sp": "A",
+    "han": "这个办法不错。房子最好有电梯和暖气，冬天住着舒服。",
+    "py": "Zhège bànfǎ bùcuò. Fángzi zuì hǎo yǒu diàntī hé nuǎnqì, dōngtiān zhùzhe shūfu.",
+    "vi": "Cách này hay đấy. Nhà tốt nhất có thang máy và hệ thống sưởi, mùa đông ở sẽ thoải mái."
+   },
+   {
+    "sp": "B",
+    "han": "对了，你打算什么时候搬家？",
+    "py": "Duì le, nǐ dǎsuàn shénme shíhou bānjiā?",
+    "vi": "À này, bạn định khi nào chuyển nhà?"
+   },
+   {
+    "sp": "A",
+    "han": "下个月一号。我的东西不多，一个下午就能搬完。",
+    "py": "Xià gè yuè yī hào. Wǒ de dōngxi bù duō, yī gè xiàwǔ jiù néng bān wán.",
+    "vi": "Ngày 1 tháng sau. Đồ của tôi không nhiều, một buổi chiều là chuyển xong."
+   },
+   {
+    "sp": "B",
+    "han": "到时候我去帮你。搬完家以后，我们一起吃顿饭庆祝一下。",
+    "py": "Dào shíhou wǒ qù bāng nǐ. Bān wán jiā yǐhòu, wǒmen yīqǐ chī dùn fàn qìngzhù yīxià.",
+    "vi": "Đến lúc đó tôi đi giúp bạn. Chuyển nhà xong, chúng ta cùng ăn một bữa cơm mừng nhé."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A muốn thuê nhà ở đâu?",
+    "o": [
+     "Ở ngoại thành",
+     "Ở quê",
+     "Gần trường học",
+     "Gần công ty"
+    ],
+    "a": 3,
+    "why": "在公司附近租一套房子: thuê một căn nhà gần công ty."
+   },
+   {
+    "type": "MC",
+    "q": "Tiền thuê nhà gần công ty là bao nhiêu một tháng?",
+    "o": [
+     "Hơn 3000 đồng",
+     "Hơn 4000 đồng",
+     "Hơn 5000 đồng",
+     "Hơn 2000 đồng"
+    ],
+    "a": 1,
+    "why": "一个月要四千多块: một tháng hơn 4000 đồng."
+   },
+   {
+    "type": "MC",
+    "q": "B gợi ý A làm gì để tiết kiệm tiền thuê?",
+    "o": [
+     "Tìm người cùng thuê, chia tiền thuê",
+     "Mặc cả với chủ nhà",
+     "Thuê nhà nhỏ hơn",
+     "Thuê nhà xa hơn"
+    ],
+    "a": 0,
+    "why": "找一个合租的室友，两个人分房租: tìm một người bạn cùng thuê, hai người chia tiền thuê."
+   },
+   {
+    "type": "MC",
+    "q": "A định chuyển nhà khi nào?",
+    "o": [
+     "Ngày 1 tháng sau",
+     "Cuối tháng này",
+     "Ngày 15 tháng sau",
+     "Tuần này"
+    ],
+    "a": 0,
+    "why": "下个月一号: ngày 1 tháng sau."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-9",
+  "stage": 4,
+  "title": "Triển lãm văn hóa truyền thống",
+  "topic": "Tin tức",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "各位观众，欢迎来到今天的文化节目。",
+    "py": "Gèwèi guānzhòng, huānyíng lái dào jīntiān de wénhuà jiémù.",
+    "vi": "Kính chào quý khán giả, chào mừng đến với chương trình văn hóa hôm nay."
+   },
+   {
+    "sp": "N",
+    "han": "从这个星期六开始，市博物馆将举办一个中国传统文化展览。",
+    "py": "Cóng zhège xīngqīliù kāishǐ, shì bówùguǎn jiāng jǔbàn yī gè Zhōngguó chuántǒng wénhuà zhǎnlǎn.",
+    "vi": "Từ thứ Bảy tuần này, Bảo tàng thành phố sẽ tổ chức một triển lãm văn hóa truyền thống Trung Quốc."
+   },
+   {
+    "sp": "N",
+    "han": "这次展览一共有三百多件展品，包括书法、绘画和古代瓷器。",
+    "py": "Zhè cì zhǎnlǎn yīgòng yǒu sānbǎi duō jiàn zhǎnpǐn, bāokuò shūfǎ, huìhuà hé gǔdài cíqì.",
+    "vi": "Triển lãm lần này có tổng cộng hơn 300 hiện vật, bao gồm thư pháp, hội họa và đồ sứ cổ."
+   },
+   {
+    "sp": "N",
+    "han": "其中最有名的是一幅一千多年前的山水画。",
+    "py": "Qízhōng zuì yǒumíng de shì yī fú yīqiān duō nián qián de shānshuǐ huà.",
+    "vi": "Trong đó nổi tiếng nhất là một bức tranh sơn thủy hơn 1000 năm tuổi."
+   },
+   {
+    "sp": "N",
+    "han": "展览将持续一个月，每天上午九点到下午五点开放，星期一休息。",
+    "py": "Zhǎnlǎn jiāng chíxù yī gè yuè, měitiān shàngwǔ jiǔ diǎn dào xiàwǔ wǔ diǎn kāifàng, xīngqīyī xiūxi.",
+    "vi": "Triển lãm sẽ kéo dài một tháng, mỗi ngày mở cửa từ 9 giờ sáng đến 5 giờ chiều, thứ Hai nghỉ."
+   },
+   {
+    "sp": "N",
+    "han": "门票二十块钱，学生和六十岁以上的老人可以免费参观。",
+    "py": "Ménpiào èrshí kuài qián, xuésheng hé liùshí suì yǐshàng de lǎorén kěyǐ miǎnfèi cānguān.",
+    "vi": "Vé vào cửa 20 đồng, học sinh và người già trên 60 tuổi được tham quan miễn phí."
+   },
+   {
+    "sp": "N",
+    "han": "博物馆希望通过这次展览，让更多年轻人了解和热爱传统文化。",
+    "py": "Bówùguǎn xīwàng tōngguò zhè cì zhǎnlǎn, ràng gèng duō niánqīngrén liǎojiě hé rè'ài chuántǒng wénhuà.",
+    "vi": "Bảo tàng hy vọng thông qua triển lãm lần này, ngày càng nhiều người trẻ hiểu và yêu mến văn hóa truyền thống."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Triển lãm bắt đầu khi nào?",
+    "o": [
+     "Thứ Bảy tuần này",
+     "Chủ nhật tuần này",
+     "Thứ Sáu tuần này",
+     "Thứ Bảy tuần sau"
+    ],
+    "a": 0,
+    "why": "从这个星期六开始: từ thứ Bảy tuần này."
+   },
+   {
+    "type": "MC",
+    "q": "Triển lãm có bao nhiêu hiện vật?",
+    "o": [
+     "Hơn 100 hiện vật",
+     "Hơn 200 hiện vật",
+     "Hơn 400 hiện vật",
+     "Hơn 300 hiện vật"
+    ],
+    "a": 3,
+    "why": "一共有三百多件展品: có tổng cộng hơn 300 hiện vật."
+   },
+   {
+    "type": "MC",
+    "q": "Hiện vật nổi tiếng nhất là gì?",
+    "o": [
+     "Một bức thư pháp",
+     "Một bức tranh sơn thủy hơn 1000 năm tuổi",
+     "Một món đồ sứ cổ",
+     "Một bức tranh hiện đại"
+    ],
+    "a": 1,
+    "why": "最有名的是一幅一千多年前的山水画: nổi tiếng nhất là một bức tranh sơn thủy hơn 1000 năm tuổi."
+   },
+   {
+    "type": "MC",
+    "q": "Ai được tham quan triển lãm miễn phí?",
+    "o": [
+     "Chỉ người già trên 70 tuổi",
+     "Mọi người dân",
+     "Học sinh và người già trên 60 tuổi",
+     "Chỉ sinh viên đại học"
+    ],
+    "a": 2,
+    "why": "学生和六十岁以上的老人可以免费参观: học sinh và người già trên 60 tuổi được tham quan miễn phí."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-10",
+  "stage": 4,
+  "title": "Áp lực công việc",
+  "topic": "Công việc",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "最近工作压力太大了，每天都要加班到九点。",
+    "py": "Zuìjìn gōngzuò yālì tài dà le, měitiān dōu yào jiābān dào jiǔ diǎn.",
+    "vi": "Gần đây áp lực công việc lớn quá, mỗi ngày đều phải làm thêm đến 9 giờ."
+   },
+   {
+    "sp": "B",
+    "han": "这样下去身体会受不了的。你应该跟经理谈一谈。",
+    "py": "Zhèyàng xiàqu shēntǐ huì shòu bù liǎo de. Nǐ yīnggāi gēn jīnglǐ tán yī tán.",
+    "vi": "Cứ thế này sức khỏe sẽ không chịu nổi đâu. Bạn nên nói chuyện với giám đốc."
+   },
+   {
+    "sp": "A",
+    "han": "可是项目还没完成，我不好意思请假。",
+    "py": "Kěshì xiàngmù hái méi wánchéng, wǒ bù hǎoyìsi qǐng jià.",
+    "vi": "Nhưng dự án chưa hoàn thành, tôi ngại xin nghỉ."
+   },
+   {
+    "sp": "B",
+    "han": "健康比工作更重要。你可以先休息两天，工作我帮你处理一部分。",
+    "py": "Jiànkāng bǐ gōngzuò gèng zhòngyào. Nǐ kěyǐ xiān xiūxi liǎng tiān, gōngzuò wǒ bāng nǐ chǔlǐ yī bùfen.",
+    "vi": "Sức khỏe quan trọng hơn công việc. Bạn có thể nghỉ hai ngày trước, phần việc tôi giúp bạn xử lý một phần."
+   },
+   {
+    "sp": "A",
+    "han": "谢谢你！那我明天就去请假。",
+    "py": "Xièxie nǐ! Nà wǒ míngtiān jiù qù qǐng jià.",
+    "vi": "Cảm ơn bạn! Vậy ngày mai tôi sẽ đi xin nghỉ."
+   },
+   {
+    "sp": "B",
+    "han": "休息的时候别想工作的事，好好睡一觉，去公园走一走。",
+    "py": "Xiūxi de shíhou bié xiǎng gōngzuò de shì, hǎohāo shuì yī jiào, qù gōngyuán zǒu yī zǒu.",
+    "vi": "Lúc nghỉ ngơi đừng nghĩ đến việc công việc, ngủ một giấc thật ngon, đi dạo công viên."
+   },
+   {
+    "sp": "A",
+    "han": "你说得对。等我回来，请你吃饭。",
+    "py": "Nǐ shuō de duì. Děng wǒ huílai, qǐng nǐ chī fàn.",
+    "vi": "Bạn nói đúng. Đợi tôi quay lại, tôi mời bạn ăn cơm."
+   },
+   {
+    "sp": "B",
+    "han": "好，一言为定。你一定要注意身体啊。",
+    "py": "Hǎo, yī yán wéi dìng. Nǐ yīdìng yào zhùyì shēntǐ a.",
+    "vi": "Được, nhất ngôn cửu đỉnh. Bạn nhất định phải chú ý sức khỏe nhé."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A mỗi ngày làm thêm đến mấy giờ?",
+    "o": [
+     "8 giờ tối",
+     "7 giờ tối",
+     "9 giờ tối",
+     "10 giờ tối"
+    ],
+    "a": 2,
+    "why": "每天都要加班到九点: mỗi ngày đều phải làm thêm đến 9 giờ."
+   },
+   {
+    "type": "MC",
+    "q": "B khuyên A nên làm gì?",
+    "o": [
+     "Đổi công việc",
+     "Nói chuyện với giám đốc",
+     "Làm việc chăm chỉ hơn",
+     "Xin chuyển sang bộ phận khác"
+    ],
+    "a": 1,
+    "why": "你应该跟经理谈一谈: bạn nên nói chuyện với giám đốc."
+   },
+   {
+    "type": "MC",
+    "q": "B sẽ giúp A việc gì?",
+    "o": [
+     "Xin nghỉ phép hộ",
+     "Hoàn thành toàn bộ dự án",
+     "Đi gặp giám đốc",
+     "Xử lý một phần công việc"
+    ],
+    "a": 3,
+    "why": "工作我帮你处理一部分: phần việc tôi giúp bạn xử lý một phần."
+   },
+   {
+    "type": "MC",
+    "q": "A hứa khi quay lại sẽ làm gì?",
+    "o": [
+     "Mời B ăn cơm",
+     "Tặng B một món quà",
+     "Giúp B làm việc",
+     "Mời B đi du lịch"
+    ],
+    "a": 0,
+    "why": "等我回来，请你吃饭: đợi tôi quay lại, tôi mời bạn ăn cơm."
+   }
+  ]
+ },
+ {
+  "hsk": 4,
+  "id": "zh-mock-l4-11",
+  "stage": 4,
+  "title": "Trí tuệ nhân tạo trong học tập",
+  "topic": "Công nghệ",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "现在，人工智能已经进入了我们的日常生活。",
+    "py": "Xiànzài, réngōng zhìnéng yǐjīng jìnrù le wǒmen de rìcháng shēnghuó.",
+    "vi": "Ngày nay, trí tuệ nhân tạo đã bước vào đời sống hằng ngày của chúng ta."
+   },
+   {
+    "sp": "N",
+    "han": "很多学生用人工智能来学习外语，比如查单词、练习口语。",
+    "py": "Hěn duō xuésheng yòng réngōng zhìnéng lái xuéxí wàiyǔ, bǐrú chá dāncí, liànxí kǒuyǔ.",
+    "vi": "Nhiều học sinh dùng trí tuệ nhân tạo để học ngoại ngữ, ví dụ tra từ, luyện nói."
+   },
+   {
+    "sp": "N",
+    "han": "人工智能可以马上指出学生的发音错误，还能根据水平推荐合适的练习。",
+    "py": "Réngōng zhìnéng kěyǐ mǎshàng zhǐchū xuésheng de fāyīn cuòwù, hái néng gēnjù shuǐpíng tuījiàn héshì de liànxí.",
+    "vi": "Trí tuệ nhân tạo có thể chỉ ra ngay lỗi phát âm của học sinh, còn có thể gợi ý bài luyện phù hợp theo trình độ."
+   },
+   {
+    "sp": "N",
+    "han": "但是，专家提醒大家：人工智能只是一个工具，不能代替老师和真正的交流。",
+    "py": "Dànshì, zhuānjiā tíxǐng dàjiā: réngōng zhìnéng zhǐ shì yī gè gōngjù, bùnéng dàitì lǎoshī hé zhēnzhèng de jiāoliú.",
+    "vi": "Tuy nhiên, các chuyên gia nhắc nhở mọi người: trí tuệ nhân tạo chỉ là một công cụ, không thể thay thế giáo viên và giao tiếp thật."
+   },
+   {
+    "sp": "N",
+    "han": "有些学生太依赖人工智能，自己不动脑筋，成绩反而下降了。",
+    "py": "Yǒuxiē xuésheng tài yīlài réngōng zhìnéng, zìjǐ bù dòng nǎojīn, chéngjì fǎn'ér xiàjiàng le.",
+    "vi": "Một số học sinh quá phụ thuộc vào trí tuệ nhân tạo, bản thân không động não, thành tích ngược lại còn giảm xuống."
+   },
+   {
+    "sp": "N",
+    "han": "专家建议，每天使用人工智能学习不要超过一个小时。",
+    "py": "Zhuānjiā jiànyì, měitiān shǐyòng réngōng zhìnéng xuéxí bùyào chāoguò yī gè xiǎoshí.",
+    "vi": "Chuyên gia khuyên, mỗi ngày dùng trí tuệ nhân tạo để học không nên quá một tiếng."
+   },
+   {
+    "sp": "N",
+    "han": "剩下的时间应该多读书、多和别人说话。",
+    "py": "Shèngxià de shíjiān yīnggāi duō dúshū, duō hé biérén shuōhuà.",
+    "vi": "Thời gian còn lại nên đọc sách nhiều, nói chuyện với người khác nhiều."
+   },
+   {
+    "sp": "N",
+    "han": "只有把新技术和传统方法结合起来，学习效果才会最好。",
+    "py": "Zhǐyǒu bǎ xīn jìshù hé chuántǒng fāngfǎ jiéhé qǐlai, xuéxí xiàoguǒ cái huì zuì hǎo.",
+    "vi": "Chỉ khi kết hợp công nghệ mới với phương pháp truyền thống, hiệu quả học tập mới tốt nhất."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Học sinh dùng AI để học ngoại ngữ làm gì?",
+    "o": [
+     "Chỉ để chơi game",
+     "Chỉ để xem phim",
+     "Chỉ để dịch bài tập",
+     "Tra từ và luyện nói"
+    ],
+    "a": 3,
+    "why": "查单词、练习口语: tra từ, luyện nói."
+   },
+   {
+    "type": "MC",
+    "q": "AI có thể làm gì ngay lập tức?",
+    "o": [
+     "Chỉ ra lỗi phát âm của học sinh",
+     "Chấm điểm bài thi",
+     "Viết bài luận hộ học sinh",
+     "Gọi điện cho giáo viên"
+    ],
+    "a": 0,
+    "why": "可以马上指出学生的发音错误: có thể chỉ ra ngay lỗi phát âm của học sinh."
+   },
+   {
+    "type": "MC",
+    "q": "Theo chuyên gia, AI không thể thay thế điều gì?",
+    "o": [
+     "Sách giáo khoa",
+     "Máy tính",
+     "Giáo viên và giao tiếp thật",
+     "Bài tập về nhà"
+    ],
+    "a": 2,
+    "why": "不能代替老师和真正的交流: không thể thay thế giáo viên và giao tiếp thật."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao một số học sinh bị giảm thành tích?",
+    "o": [
+     "Vì không dùng AI",
+     "Vì quá phụ thuộc vào AI, không động não",
+     "Vì học quá nhiều",
+     "Vì giáo viên quá nghiêm"
+    ],
+    "a": 1,
+    "why": "太依赖人工智能，自己不动脑筋，成绩反而下降了: quá phụ thuộc vào trí tuệ nhân tạo, bản thân không động não, thành tích ngược lại còn giảm xuống."
+   },
+   {
+    "type": "MC",
+    "q": "Chuyên gia khuyên mỗi ngày dùng AI học tối đa bao lâu?",
+    "o": [
+     "Nửa tiếng",
+     "Hai tiếng",
+     "Ba tiếng",
+     "Một tiếng"
+    ],
+    "a": 3,
+    "why": "每天使用人工智能学习不要超过一个小时: mỗi ngày dùng trí tuệ nhân tạo để học không nên quá một tiếng."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-1",
+  "stage": 5,
+  "title": "Phỏng vấn về kinh tế số",
+  "topic": "Kinh tế",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "王教授，最近大家都在谈数字经济，您能简单介绍一下吗？",
+    "py": "Wáng jiàoshòu, zuìjìn dàjiā dōu zài tán shùzì jīngjì, nín néng jiǎndān jièshào yīxià ma?",
+    "vi": "Giáo sư Vương, gần đây mọi người đều nói về kinh tế số, ông có thể giới thiệu đơn giản một chút không？"
+   },
+   {
+    "sp": "B",
+    "han": "当然可以。数字经济就是通过互联网和大数据来发展经济的新方式。",
+    "py": "Dāngrán kěyǐ. Shùzì jīngjì jiùshì tōngguò hùliánwǎng hé dà shùjù lái fāzhǎn jīngjì de xīn fāngshì.",
+    "vi": "Đương nhiên được. Kinh tế số là cách phát triển kinh tế mới thông qua internet và dữ liệu lớn."
+   },
+   {
+    "sp": "A",
+    "han": "它对我们的生活有什么影响？",
+    "py": "Tā duì wǒmen de shēnghuó yǒu shénme yǐngxiǎng?",
+    "vi": "Nó ảnh hưởng thế nào đến cuộc sống của chúng ta?"
+   },
+   {
+    "sp": "B",
+    "han": "影响非常大。比如说，现在很多人不用出门，就能在网上买东西、看医生。",
+    "py": "Yǐngxiǎng fēicháng dà. Bǐrú shuō, xiànzài hěn duō rén bùyòng chūmén, jiù néng zài wǎngshang mǎi dōngxi, kàn yīshēng.",
+    "vi": "Ảnh hưởng rất lớn. Ví dụ, bây giờ nhiều người không cần ra khỏi nhà cũng có thể mua đồ trên mạng, khám bác sĩ."
+   },
+   {
+    "sp": "A",
+    "han": "数字经济会不会让一些人失去工作？",
+    "py": "Shùzì jīngjì huì bù huì ràng yīxiē rén shīqù gōngzuò?",
+    "vi": "Kinh tế số có khiến một số người mất việc không?"
+   },
+   {
+    "sp": "B",
+    "han": "这是一个值得思考的问题。一些传统的工作可能会减少，但是新的工作也会出现。",
+    "py": "Zhè shì yī gè zhídé sīkǎo de wèntí. Yīxiē chuántǒng de gōngzuò kěnéng huì jiǎnshǎo, dànshì xīn de gōngzuò yě huì chūxiàn.",
+    "vi": "Đây là một vấn đề đáng suy nghĩ. Một số công việc truyền thống có thể giảm đi, nhưng công việc mới cũng sẽ xuất hiện."
+   },
+   {
+    "sp": "B",
+    "han": "比如快递员、网络主播，都是过去没有的新职业。",
+    "py": "Bǐrú kuàidìyuán, wǎngluò zhǔbō, dōu shì guòqù méiyǒu de xīn zhíyè.",
+    "vi": "Ví dụ nhân viên giao hàng, người dẫn chương trình trên mạng, đều là những nghề mới trước đây không có."
+   },
+   {
+    "sp": "A",
+    "han": "那我们应该怎么适应这种变化呢？",
+    "py": "Nà wǒmen yīnggāi zěnme shìyìng zhè zhǒng biànhuà ne?",
+    "vi": "Vậy chúng ta nên thích ứng với sự thay đổi này như thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "最重要的是不断学习，掌握新的技能。",
+    "py": "Zuì zhòngyào de shì bùduàn xuéxí, zhǎngwò xīn de jìnéng.",
+    "vi": "Quan trọng nhất là không ngừng học tập, nắm vững kỹ năng mới."
+   },
+   {
+    "sp": "A",
+    "han": "谢谢王教授的分享。",
+    "py": "Xièxie Wáng jiàoshòu de fēnxiǎng.",
+    "vi": "Cảm ơn những chia sẻ của giáo sư Vương."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Theo giáo sư Vương, kinh tế số là gì?",
+    "o": [
+     "Một ngành công nghiệp truyền thống",
+     "Cách phát triển kinh tế mới qua internet và dữ liệu lớn",
+     "Một loại tiền tệ mới",
+     "Một hình thức mua sắm trực tuyến"
+    ],
+    "a": 1,
+    "why": "数字经济就是通过互联网和大数据来发展经济的新方式: kinh tế số là cách phát triển kinh tế mới thông qua internet và dữ liệu lớn."
+   },
+   {
+    "type": "MC",
+    "q": "Kinh tế số ảnh hưởng đến cuộc sống như thế nào?",
+    "o": [
+     "Mọi người phải ra ngoài nhiều hơn",
+     "Chi phí sinh hoạt tăng cao",
+     "Nhiều người không cần ra khỏi nhà cũng mua đồ, khám bác sĩ",
+     "Mọi người ít dùng điện thoại hơn"
+    ],
+    "a": 2,
+    "why": "现在很多人不用出门，就能在网上买东西、看医生: bây giờ nhiều người không cần ra khỏi nhà cũng có thể mua đồ trên mạng, khám bác sĩ."
+   },
+   {
+    "type": "MC",
+    "q": "Về việc làm, giáo sư Vương cho rằng điều gì sẽ xảy ra?",
+    "o": [
+     "Việc truyền thống giảm nhưng việc mới xuất hiện",
+     "Tất cả mọi người đều mất việc",
+     "Không có nghề mới nào xuất hiện",
+     "Chỉ có nhân viên giao hàng là nghề mới"
+    ],
+    "a": 0,
+    "why": "一些传统的工作可能会减少，但是新的工作也会出现: một số công việc truyền thống có thể giảm đi, nhưng công việc mới cũng sẽ xuất hiện."
+   },
+   {
+    "type": "MC",
+    "q": "Để thích ứng với thay đổi, điều quan trọng nhất là gì?",
+    "o": [
+     "Đổi nghề ngay lập tức",
+     "Ngừng sử dụng internet",
+     "Tìm việc ở nước ngoài",
+     "Không ngừng học tập, nắm vững kỹ năng mới"
+    ],
+    "a": 3,
+    "why": "最重要的是不断学习，掌握新的技能: quan trọng nhất là không ngừng học tập, nắm vững kỹ năng mới."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-2",
+  "stage": 5,
+  "title": "Bài giảng về biến đổi khí hậu",
+  "topic": "Môi trường",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "各位同学，今天我们来谈一谈气候变化的问题。",
+    "py": "Gèwèi tóngxué, jīntiān wǒmen lái tán yī tán qìhòu biànhuà de wèntí.",
+    "vi": "Các bạn học sinh thân mến, hôm nay chúng ta cùng nói về vấn đề biến đổi khí hậu."
+   },
+   {
+    "sp": "N",
+    "han": "近一百年来，地球的平均气温上升了大约一度。",
+    "py": "Jìn yībǎi nián lái, dìqiú de píngjūn qìwēn shàngshēng le dàyuē yī dù.",
+    "vi": "Trong gần một trăm năm qua, nhiệt độ trung bình của Trái Đất đã tăng khoảng một độ."
+   },
+   {
+    "sp": "N",
+    "han": "气温上升的主要原因是人类活动排放了大量的二氧化碳。",
+    "py": "Qìwēn shàngshēng de zhǔyào yuányīn shì rénlèi huódòng páifàng le dàliàng de èryǎnghuàtàn.",
+    "vi": "Nguyên nhân chính khiến nhiệt độ tăng là hoạt động của con người đã thải ra lượng lớn khí CO2."
+   },
+   {
+    "sp": "N",
+    "han": "气候变化带来很多问题，比如海平面上升，极端天气越来越多。",
+    "py": "Qìhòu biànhuà dàilái hěn duō wèntí, bǐrú hǎi píngmiàn shàngshēng, jíduān tiānqì yuè lái yuè duō.",
+    "vi": "Biến đổi khí hậu mang đến nhiều vấn đề, ví dụ mực nước biển dâng, thời tiết cực đoan ngày càng nhiều."
+   },
+   {
+    "sp": "N",
+    "han": "去年夏天，很多地方出现了破纪录的高温，农作物受到了很大的损失。",
+    "py": "Qùnián xiàtiān, hěn duō dìfang chūxiàn le pò jìlù de gāowēn, nóngzuòwù shòu dào le hěn dà de sǔnshī.",
+    "vi": "Mùa hè năm ngoái, nhiều nơi xuất hiện nhiệt độ cao phá kỷ lục, cây trồng bị thiệt hại rất lớn."
+   },
+   {
+    "sp": "N",
+    "han": "为了减缓气候变化，各国都在努力发展清洁能源，比如太阳能和风能。",
+    "py": "Wèile jiǎnhuǎn qìhòu biànhuà, gèguó dōu zài nǔlì fāzhǎn qīngjié néngyuán, bǐrú tàiyángnéng hé fēngnéng.",
+    "vi": "Để làm chậm biến đổi khí hậu, các nước đều đang nỗ lực phát triển năng lượng sạch, ví dụ năng lượng mặt trời và năng lượng gió."
+   },
+   {
+    "sp": "N",
+    "han": "同时，我们每个人也可以从小事做起，比如节约用电，少开车，多坐公共交通。",
+    "py": "Tóngshí, wǒmen měi gè rén yě kěyǐ cóng xiǎoshì zuò qǐ, bǐrú jiéyuē yòngdiàn, shǎo kāichē, duō zuò gōnggòng jiāotōng.",
+    "vi": "Đồng thời, mỗi người chúng ta cũng có thể bắt đầu từ việc nhỏ, ví dụ tiết kiệm điện, ít lái xe, đi phương tiện công cộng nhiều hơn."
+   },
+   {
+    "sp": "N",
+    "han": "科学家预测，如果我们不采取行动，到本世纪末，海平面可能上升一米。",
+    "py": "Kēxuéjiā yùcè, rúguǒ wǒmen bù cǎiqǔ xíngdòng, dào běn shìjì mò, hǎi píngmiàn kěnéng shàngshēng yī mǐ.",
+    "vi": "Các nhà khoa học dự đoán, nếu chúng ta không hành động, đến cuối thế kỷ này, mực nước biển có thể dâng một mét."
+   },
+   {
+    "sp": "N",
+    "han": "保护环境不只是政府的事，也是我们每个人的责任。",
+    "py": "Bǎohù huánjìng bù zhǐshì zhèngfǔ de shì, yě shì wǒmen měi gè rén de zérèn.",
+    "vi": "Bảo vệ môi trường không chỉ là việc của chính phủ, mà còn là trách nhiệm của mỗi người chúng ta."
+   },
+   {
+    "sp": "N",
+    "han": "希望大家从今天开始，为地球的未来做出自己的贡献。",
+    "py": "Xīwàng dàjiā cóng jīntiān kāishǐ, wèi dìqiú de wèilái zuòchū zìjǐ de gòngxiàn.",
+    "vi": "Mong mọi người bắt đầu từ hôm nay, đóng góp sức mình cho tương lai của Trái Đất."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Trong gần 100 năm qua, nhiệt độ trung bình của Trái Đất đã tăng bao nhiêu?",
+    "o": [
+     "Khoảng 2 độ",
+     "Khoảng 0,5 độ",
+     "Khoảng 1 độ",
+     "Khoảng 3 độ"
+    ],
+    "a": 2,
+    "why": "地球的平均气温上升了大约一度: nhiệt độ trung bình của Trái Đất đã tăng khoảng một độ."
+   },
+   {
+    "type": "MC",
+    "q": "Nguyên nhân chính khiến nhiệt độ tăng là gì?",
+    "o": [
+     "Hoạt động của con người thải ra lượng lớn khí CO2",
+     "Núi lửa phun trào",
+     "Trái Đất tự nóng lên",
+     "Rừng bị chặt phá"
+    ],
+    "a": 0,
+    "why": "气温上升的主要原因是人类活动排放了大量的二氧化碳: nguyên nhân chính khiến nhiệt độ tăng là hoạt động của con người đã thải ra lượng lớn khí CO2."
+   },
+   {
+    "type": "MC",
+    "q": "Mùa hè năm ngoái đã xảy ra điều gì?",
+    "o": [
+     "Mưa lớn gây lũ lụt khắp nơi",
+     "Nhiều nơi nhiệt độ cao phá kỷ lục, cây trồng thiệt hại lớn",
+     "Mùa đông đến sớm",
+     "Bão lớn đổ bộ nhiều nơi"
+    ],
+    "a": 1,
+    "why": "去年夏天，很多地方出现了破纪录的高温，农作物受到了很大的损失: mùa hè năm ngoái, nhiều nơi xuất hiện nhiệt độ cao phá kỷ lục, cây trồng bị thiệt hại rất lớn."
+   },
+   {
+    "type": "MC",
+    "q": "Các nước đang làm gì để làm chậm biến đổi khí hậu?",
+    "o": [
+     "Tăng khai thác than đá",
+     "Hạn chế dùng năng lượng mặt trời",
+     "Trồng thêm cây trong thành phố",
+     "Phát triển năng lượng sạch như năng lượng mặt trời và gió"
+    ],
+    "a": 3,
+    "why": "各国都在努力发展清洁能源，比如太阳能和风能: các nước đều đang nỗ lực phát triển năng lượng sạch, ví dụ năng lượng mặt trời và năng lượng gió."
+   },
+   {
+    "type": "MC",
+    "q": "Theo bài giảng, bảo vệ môi trường là trách nhiệm của ai?",
+    "o": [
+     "Của mỗi người chúng ta, không chỉ chính phủ",
+     "Chỉ của các nhà khoa học",
+     "Chỉ của chính phủ",
+     "Chỉ của các doanh nghiệp lớn"
+    ],
+    "a": 0,
+    "why": "保护环境不只是政府的事，也是我们每个人的责任: bảo vệ môi trường không chỉ là việc của chính phủ, mà còn là trách nhiệm của mỗi người chúng ta."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-3",
+  "stage": 5,
+  "title": "Thảo luận về làm việc từ xa",
+  "topic": "Công việc",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "小李，你觉得在家工作怎么样？",
+    "py": "Xiǎolǐ, nǐ juéde zài jiā gōngzuò zěnmeyàng?",
+    "vi": "Tiểu Lý, bạn thấy làm việc ở nhà thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "我觉得挺好的，不用每天花两个小时在路上。",
+    "py": "Wǒ juéde tǐng hǎo de, bùyòng měitiān huā liǎng gè xiǎoshí zài lùshang.",
+    "vi": "Tôi thấy khá tốt, không phải mỗi ngày mất hai tiếng trên đường."
+   },
+   {
+    "sp": "A",
+    "han": "可是，在家工作很容易分心，你不觉得吗？",
+    "py": "Kěshì, zài jiā gōngzuò hěn róngyì fēnxīn, nǐ bù juéde ma?",
+    "vi": "Nhưng mà, làm việc ở nhà rất dễ mất tập trung, bạn không thấy vậy sao?"
+   },
+   {
+    "sp": "B",
+    "han": "开始的时候确实是这样。后来我给自己定了一个时间表，情况就好多了。",
+    "py": "Kāishǐ de shíhou quèshí shì zhèyàng. Hòulái wǒ gěi zìjǐ dìng le yī gè shíjiānbiǎo, qíngkuàng jiù hǎo duō le.",
+    "vi": "Lúc đầu đúng là như vậy. Sau đó tôi tự đặt cho mình một thời gian biểu, tình hình tốt hơn nhiều."
+   },
+   {
+    "sp": "A",
+    "han": "除了时间表，你还有什么好办法？",
+    "py": "Chúle shíjiānbiǎo, nǐ hái yǒu shénme hǎo bànfǎ?",
+    "vi": "Ngoài thời gian biểu, bạn còn cách hay nào khác không?"
+   },
+   {
+    "sp": "B",
+    "han": "我在家里专门布置了一个工作角，工作的时候就坐在那里，不做别的事。",
+    "py": "Wǒ zài jiālǐ zhuānmén bùzhì le yī gè gōngzuò jiǎo, gōngzuò de shíhou jiù zuò zài nàli, bù zuò bié de shì.",
+    "vi": "Tôi đã bố trí riêng một góc làm việc ở nhà, khi làm việc thì ngồi ở đó, không làm việc khác."
+   },
+   {
+    "sp": "A",
+    "han": "听起来不错。不过，在家工作是不是缺少和同事交流的机会？",
+    "py": "Tīng qǐlai bùcuò. Bùguò, zài jiā gōngzuò shì bù shì quēshǎo hé tóngshì jiāoliú de jīhuì?",
+    "vi": "Nghe có vẻ hay. Nhưng mà, làm việc ở nhà có phải thiếu cơ hội trao đổi với đồng nghiệp không?"
+   },
+   {
+    "sp": "B",
+    "han": "这一点我同意。所以我们公司每周安排一天，大家都回办公室开会。",
+    "py": "Zhè yīdiǎn wǒ tóngyì. Suǒyǐ wǒmen gōngsī měi zhōu ānpái yī tiān, dàjiā dōu huí bàngōngshì kāihuì.",
+    "vi": "Điểm này tôi đồng ý. Vì vậy công ty chúng tôi mỗi tuần sắp xếp một ngày, mọi người đều về văn phòng họp."
+   },
+   {
+    "sp": "A",
+    "han": "这种一半在家、一半在公司的方式，看来是最合适的。",
+    "py": "Zhè zhǒng yībàn zài jiā, yībàn zài gōngsī de fāngshì, kànlái shì zuì héshì de.",
+    "vi": "Cách một nửa ở nhà, một nửa ở công ty như vậy, xem ra là phù hợp nhất."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "B thích làm việc ở nhà vì sao?",
+    "o": [
+     "Lương cao hơn",
+     "Không mất hai tiếng đi đường mỗi ngày",
+     "Có nhiều thời gian ngủ hơn",
+     "Không phải họp"
+    ],
+    "a": 1,
+    "why": "不用每天花两个小时在路上: không phải mỗi ngày mất hai tiếng trên đường."
+   },
+   {
+    "type": "MC",
+    "q": "Lúc đầu B gặp vấn đề gì khi làm việc ở nhà?",
+    "o": [
+     "Mạng internet chậm",
+     "Máy tính hay hỏng",
+     "Rất dễ mất tập trung",
+     "Không có bàn làm việc"
+    ],
+    "a": 2,
+    "why": "在家工作很容易分心……开始的时候确实是这样: làm việc ở nhà rất dễ mất tập trung, lúc đầu đúng là như vậy."
+   },
+   {
+    "type": "MC",
+    "q": "B đã làm gì để cải thiện việc mất tập trung?",
+    "o": [
+     "Tự đặt thời gian biểu và bố trí góc làm việc riêng",
+     "Nghỉ việc ở nhà",
+     "Chuyển sang làm ca đêm",
+     "Mua máy tính mới"
+    ],
+    "a": 0,
+    "why": "我给自己定了一个时间表……我在家里专门布置了一个工作角: tôi tự đặt cho mình một thời gian biểu, tôi đã bố trí riêng một góc làm việc ở nhà."
+   },
+   {
+    "type": "MC",
+    "q": "Công ty của B sắp xếp thế nào để đồng nghiệp gặp nhau?",
+    "o": [
+     "Mỗi ngày đều về văn phòng",
+     "Mỗi tháng họp một lần",
+     "Không bao giờ gặp nhau",
+     "Mỗi tuần một ngày mọi người về văn phòng họp"
+    ],
+    "a": 3,
+    "why": "我们公司每周安排一天，大家都回办公室开会: công ty chúng tôi mỗi tuần sắp xếp một ngày, mọi người đều về văn phòng họp."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-4",
+  "stage": 5,
+  "title": "Tết và truyền thống gia đình",
+  "topic": "Văn hóa",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "张老师，春节快到了，您家有什么特别的习惯吗？",
+    "py": "Zhāng lǎoshī, Chūnjié kuài dào le, nín jiā yǒu shénme tèbié de xíguàn ma?",
+    "vi": "Cô Trương, Tết sắp đến rồi, nhà cô có phong tục đặc biệt gì không?"
+   },
+   {
+    "sp": "B",
+    "han": "我们家每年除夕都要一起包饺子，一家人边包边聊天，特别热闹。",
+    "py": "Wǒmen jiā měinián Chúxī dōu yào yīqǐ bāo jiǎozi, yī jiārén biān bāo biān liáotiān, tèbié rènao.",
+    "vi": "Nhà chúng tôi mỗi năm đêm giao thừa đều cùng nhau gói sủi cảo, cả nhà vừa gói vừa trò chuyện, rất náo nhiệt."
+   },
+   {
+    "sp": "A",
+    "han": "现在很多年轻人觉得这些传统太麻烦了，您怎么看？",
+    "py": "Xiànzài hěn duō niánqīngrén juéde zhèxiē chuántǒng tài máfan le, nín zěnme kàn?",
+    "vi": "Bây giờ nhiều người trẻ thấy những truyền thống này quá phiền phức, cô thấy thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "我能理解。现在生活节奏快，很多人没有时间准备。但是，传统习俗是家人团聚的理由。",
+    "py": "Wǒ néng lǐjiě. Xiànzài shēnghuó jiézòu kuài, hěn duō rén méiyǒu shíjiān zhǔnbèi. Dànshì, chuántǒng xísú shì jiārén tuánjù de lǐyóu.",
+    "vi": "Tôi có thể hiểu. Bây giờ nhịp sống nhanh, nhiều người không có thời gian chuẩn bị. Nhưng mà, phong tục truyền thống là lý do để gia đình đoàn tụ."
+   },
+   {
+    "sp": "A",
+    "han": "听说现在发红包都用手机了，是吗？",
+    "py": "Tīngshuō xiànzài fā hóngbāo dōu yòng shǒujī le, shì ma?",
+    "vi": "Nghe nói bây giờ phát lì xì đều dùng điện thoại rồi, phải không?"
+   },
+   {
+    "sp": "B",
+    "han": "是啊，电子红包很方便。不过，我还是喜欢亲手把红包交给孩子，看他们高兴的样子。",
+    "py": "Shì a, diànzǐ hóngbāo hěn fāngbiàn. Bùguò, wǒ háishì xǐhuan qīnshǒu bǎ hóngbāo jiāo gěi háizi, kàn tāmen gāoxìng de yàngzi.",
+    "vi": "Đúng vậy, lì xì điện tử rất tiện. Nhưng mà, tôi vẫn thích tự tay đưa lì xì cho bọn trẻ, nhìn vẻ mặt vui vẻ của chúng."
+   },
+   {
+    "sp": "A",
+    "han": "传统和现代结合起来，节日才更有意思，对吗？",
+    "py": "Chuántǒng hé xiàndài jiéhé qǐlai, jiérì cái gèng yǒu yìsi, duì ma?",
+    "vi": "Truyền thống kết hợp với hiện đại, ngày lễ mới thú vị hơn, đúng không?"
+   },
+   {
+    "sp": "B",
+    "han": "说得对。重要的是大家聚在一起，形式可以变，心意不能变。",
+    "py": "Shuō de duì. Zhòngyào de shì dàjiā jù zài yīqǐ, xíngshì kěyǐ biàn, xīnyì bùnéng biàn.",
+    "vi": "Nói đúng lắm. Quan trọng là mọi người tụ họp cùng nhau, hình thức có thể thay đổi, nhưng tấm lòng không được thay đổi."
+   },
+   {
+    "sp": "A",
+    "han": "谢谢张老师，祝您新年快乐！",
+    "py": "Xièxie Zhāng lǎoshī, zhù nín xīnnián kuàilè!",
+    "vi": "Cảm ơn cô Trương, chúc cô năm mới vui vẻ!"
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Đêm giao thừa nhà cô Trương làm gì?",
+    "o": [
+     "Cả nhà cùng gói sủi cảo, vừa gói vừa trò chuyện",
+     "Đi xem pháo hoa",
+     "Đi du lịch",
+     "Xem ti vi cả đêm"
+    ],
+    "a": 0,
+    "why": "我们家每年除夕都要一起包饺子，一家人边包边聊天: nhà chúng tôi mỗi năm đêm giao thừa đều cùng nhau gói sủi cảo, cả nhà vừa gói vừa trò chuyện."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao nhiều người trẻ thấy truyền thống phiền phức?",
+    "o": [
+     "Vì họ không thích ăn sủi cảo",
+     "Vì truyền thống đã lỗi thời",
+     "Vì nhịp sống nhanh, không có thời gian chuẩn bị",
+     "Vì họ không thích gặp người thân"
+    ],
+    "a": 2,
+    "why": "现在生活节奏快，很多人没有时间准备: bây giờ nhịp sống nhanh, nhiều người không có thời gian chuẩn bị."
+   },
+   {
+    "type": "MC",
+    "q": "Cô Trương thích cách lì xì nào hơn?",
+    "o": [
+     "Chỉ thích lì xì điện tử",
+     "Thích tự tay đưa lì xì cho trẻ, nhìn chúng vui vẻ",
+     "Không thích lì xì",
+     "Thích nhận lì xì hơn"
+    ],
+    "a": 1,
+    "why": "我还是喜欢亲手把红包交给孩子，看他们高兴的样子: tôi vẫn thích tự tay đưa lì xì cho bọn trẻ, nhìn vẻ mặt vui vẻ của chúng."
+   },
+   {
+    "type": "MC",
+    "q": "Theo cô Trương, điều quan trọng nhất trong ngày lễ là gì?",
+    "o": [
+     "Món ăn phải phong phú",
+     "Phải giữ nguyên mọi hình thức cũ",
+     "Nhận được nhiều lì xì",
+     "Mọi người tụ họp cùng nhau, tấm lòng không thay đổi"
+    ],
+    "a": 3,
+    "why": "重要的是大家聚在一起，形式可以变，心意不能变: quan trọng là mọi người tụ họp cùng nhau, hình thức có thể thay đổi, nhưng tấm lòng không được thay đổi."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-5",
+  "stage": 5,
+  "title": "Trí tuệ nhân tạo trong y tế",
+  "topic": "Khoa học",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "今天我们来聊一聊人工智能在医疗方面的应用。",
+    "py": "Jīntiān wǒmen lái liáo yī liáo réngōng zhìnéng zài yīliáo fāngmiàn de yìngyòng.",
+    "vi": "Hôm nay chúng ta cùng nói về ứng dụng của trí tuệ nhân tạo trong lĩnh vực y tế."
+   },
+   {
+    "sp": "N",
+    "han": "过去，医生看一张X光片可能需要十几分钟，现在人工智能几秒钟就能完成初步检查。",
+    "py": "Guòqù, yīshēng kàn yī zhāng X guāng piàn kěnéng xūyào shí jǐ fēnzhōng, xiànzài réngōng zhìnéng jǐ miǎozhōng jiù néng wánchéng chūbù jiǎnchá.",
+    "vi": "Trước đây, bác sĩ xem một tấm phim X-quang có thể mất mười mấy phút, bây giờ trí tuệ nhân tạo chỉ vài giây là hoàn thành kiểm tra ban đầu."
+   },
+   {
+    "sp": "N",
+    "han": "在一些大医院，人工智能已经帮助医生发现了很多人眼容易忽略的小问题。",
+    "py": "Zài yīxiē dà yīyuàn, réngōng zhìnéng yǐjīng bāngzhù yīshēng fāxiàn le hěn duō rén yǎn róngyì hūlüè de xiǎo wèntí.",
+    "vi": "Ở một số bệnh viện lớn, trí tuệ nhân tạo đã giúp bác sĩ phát hiện nhiều vấn đề nhỏ mà mắt người dễ bỏ qua."
+   },
+   {
+    "sp": "N",
+    "han": "不过，人工智能不能代替医生做最后的决定。",
+    "py": "Bùguò, réngōng zhìnéng bùnéng dàitì yīshēng zuò zuìhòu de juédìng.",
+    "vi": "Tuy nhiên, trí tuệ nhân tạo không thể thay bác sĩ đưa ra quyết định cuối cùng."
+   },
+   {
+    "sp": "N",
+    "han": "因为每个病人的情况都不一样，机器只能提供参考，真正的诊断还需要医生的经验。",
+    "py": "Yīnwèi měi gè bìngrén de qíngkuàng dōu bù yīyàng, jīqì zhǐ néng tígōng cānkǎo, zhēnzhèng de zhěnduàn hái xūyào yīshēng de jīngyàn.",
+    "vi": "Vì tình trạng của mỗi bệnh nhân đều khác nhau, máy móc chỉ có thể cung cấp tham khảo, chẩn đoán thực sự vẫn cần kinh nghiệm của bác sĩ."
+   },
+   {
+    "sp": "N",
+    "han": "另外，人工智能还可以帮助偏远地区的病人。",
+    "py": "Lìngwài, réngōng zhìnéng hái kěyǐ bāngzhù piānyuǎn dìqū de bìngrén.",
+    "vi": "Ngoài ra, trí tuệ nhân tạo còn có thể giúp đỡ bệnh nhân ở vùng xa."
+   },
+   {
+    "sp": "N",
+    "han": "通过远程看病，那里的病人不用跑很远，就能得到大城市专家的意见。",
+    "py": "Tōngguò yuǎnchéng kànbìng, nàli de bìngrén bùyòng pǎo hěn yuǎn, jiù néng dédào dà chéngshì zhuānjiā de yìjiàn.",
+    "vi": "Thông qua khám bệnh từ xa, bệnh nhân ở đó không cần đi xa vẫn có thể nhận được ý kiến của chuyên gia thành phố lớn."
+   },
+   {
+    "sp": "N",
+    "han": "当然，使用人工智能也要注意保护病人的隐私。",
+    "py": "Dāngrán, shǐyòng réngōng zhìnéng yě yào zhùyì bǎohù bìngrén de yǐnsī.",
+    "vi": "Đương nhiên, khi dùng trí tuệ nhân tạo cũng cần chú ý bảo vệ quyền riêng tư của bệnh nhân."
+   },
+   {
+    "sp": "N",
+    "han": "总的来说，人工智能是医生的好帮手，但不是医生的代替品。",
+    "py": "Zǒngde láishuō, réngōng zhìnéng shì yīshēng de hǎo bāngshǒu, dàn bù shì yīshēng de dàitìpǐn.",
+    "vi": "Tóm lại, trí tuệ nhân tạo là trợ thủ tốt của bác sĩ, chứ không phải là thứ thay thế bác sĩ."
+   },
+   {
+    "sp": "N",
+    "han": "未来的医疗，一定是人和机器一起合作，才能做得更好。",
+    "py": "Wèilái de yīliáo, yīdìng shì rén hé jīqì yīqǐ hézuò, cái néng zuò de gèng hǎo.",
+    "vi": "Y tế trong tương lai, nhất định là con người và máy móc cùng hợp tác mới làm tốt hơn được."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Trước đây bác sĩ xem một tấm phim X-quang mất bao lâu?",
+    "o": [
+     "Vài giây",
+     "Một giờ",
+     "Mười mấy phút",
+     "Cả buổi sáng"
+    ],
+    "a": 2,
+    "why": "过去，医生看一张X光片可能需要十几分钟: trước đây, bác sĩ xem một tấm phim X-quang có thể mất mười mấy phút."
+   },
+   {
+    "type": "MC",
+    "q": "AI giúp bác sĩ phát hiện điều gì?",
+    "o": [
+     "Nhiều vấn đề nhỏ mà mắt người dễ bỏ qua",
+     "Mọi bệnh tật",
+     "Thuốc chữa bệnh mới",
+     "Bệnh nhân giả vờ ốm"
+    ],
+    "a": 0,
+    "why": "人工智能已经帮助医生发现了很多人眼容易忽略的小问题: trí tuệ nhân tạo đã giúp bác sĩ phát hiện nhiều vấn đề nhỏ mà mắt người dễ bỏ qua."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao AI không thể thay bác sĩ đưa ra quyết định cuối cùng?",
+    "o": [
+     "Vì AI quá đắt",
+     "Vì mỗi bệnh nhân khác nhau, chẩn đoán cần kinh nghiệm bác sĩ",
+     "Vì AI thường xuyên hỏng",
+     "Vì bác sĩ không tin AI"
+    ],
+    "a": 1,
+    "why": "因为每个病人的情况都不一样，机器只能提供参考，真正的诊断还需要医生的经验: vì tình trạng của mỗi bệnh nhân đều khác nhau, máy móc chỉ có thể cung cấp tham khảo, chẩn đoán thực sự vẫn cần kinh nghiệm của bác sĩ."
+   },
+   {
+    "type": "MC",
+    "q": "AI giúp bệnh nhân vùng xa bằng cách nào?",
+    "o": [
+     "Miễn phí thuốc men",
+     "Đưa họ đến thành phố",
+     "Xây bệnh viện mới",
+     "Khám bệnh từ xa, nhận ý kiến chuyên gia thành phố lớn"
+    ],
+    "a": 3,
+    "why": "通过远程看病，那里的病人不用跑很远，就能得到大城市专家的意见: thông qua khám bệnh từ xa, bệnh nhân ở đó không cần đi xa vẫn có thể nhận được ý kiến của chuyên gia thành phố lớn."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-6",
+  "stage": 5,
+  "title": "Chăm sóc người cao tuổi",
+  "topic": "Xã hội",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "李阿姨，听说您最近在照顾八十多岁的母亲，辛苦吗？",
+    "py": "Lǐ āyí, tīngshuō nín zuìjìn zài zhàogù bāshí duō suì de mǔqīn, xīnkǔ ma?",
+    "vi": "Dì Lý, nghe nói gần đây dì đang chăm sóc mẹ hơn tám mươi tuổi, có vất vả không?"
+   },
+   {
+    "sp": "B",
+    "han": "说实话，挺辛苦的。我白天要上班，晚上还要照顾她，常常睡不好觉。",
+    "py": "Shuō shíhuà, tǐng xīnkǔ de. Wǒ báitiān yào shàngbān, wǎnshang hái yào zhàogù tā, chángcháng shuì bù hǎo jiào.",
+    "vi": "Nói thật, khá vất vả. Ban ngày tôi phải đi làm, buổi tối còn phải chăm sóc mẹ, thường xuyên ngủ không ngon."
+   },
+   {
+    "sp": "A",
+    "han": "您有没有想过请一个护工来帮忙？",
+    "py": "Nín yǒu méiyǒu xiǎng guò qǐng yī gè hùgōng lái bāngmáng?",
+    "vi": "Dì có nghĩ đến việc thuê một người chăm sóc đến giúp không?"
+   },
+   {
+    "sp": "B",
+    "han": "想过，但是好的护工很难找，而且费用也很高，一个月要八千多块。",
+    "py": "Xiǎng guò, dànshì hǎo de hùgōng hěn nán zhǎo, érqiě fèiyòng yě hěn gāo, yī gè yuè yào bāqiān duō kuài.",
+    "vi": "Có nghĩ rồi, nhưng người chăm sóc tốt rất khó tìm, hơn nữa chi phí cũng rất cao, một tháng hơn tám nghìn đồng."
+   },
+   {
+    "sp": "A",
+    "han": "现在很多城市都在建社区养老中心，您了解吗？",
+    "py": "Xiànzài hěn duō chéngshì dōu zài jiàn shèqū yǎnglǎo zhōngxīn, nín liǎojiě ma?",
+    "vi": "Bây giờ nhiều thành phố đang xây trung tâm dưỡng lão cộng đồng, dì có biết không?"
+   },
+   {
+    "sp": "B",
+    "han": "听说过。我去看过一家，离我们家很近，老人白天可以在那里吃饭、活动。",
+    "py": "Tīngshuō guò. Wǒ qù kàn guò yī jiā, lí wǒmen jiā hěn jìn, lǎorén báitiān kěyǐ zài nàli chīfàn, huódòng.",
+    "vi": "Có nghe qua. Tôi đã đến xem một nơi, rất gần nhà chúng tôi, ban ngày người già có thể ở đó ăn cơm, sinh hoạt."
+   },
+   {
+    "sp": "A",
+    "han": "那您觉得这种中心能解决问题吗？",
+    "py": "Nà nín juéde zhè zhǒng zhōngxīn néng jiějué wèntí ma?",
+    "vi": "Vậy dì thấy trung tâm như vậy có giải quyết được vấn đề không?"
+   },
+   {
+    "sp": "B",
+    "han": "能解决一部分。白天有人照顾，我就能安心上班了。不过晚上还是要靠家人。",
+    "py": "Néng jiějué yī bùfen. Báitiān yǒu rén zhàogù, wǒ jiù néng ānxīn shàngbān le. Bùguò wǎnshang háishì yào kào jiārén.",
+    "vi": "Giải quyết được một phần. Ban ngày có người chăm sóc, tôi có thể yên tâm đi làm. Nhưng buổi tối vẫn phải dựa vào gia đình."
+   },
+   {
+    "sp": "A",
+    "han": "是啊，养老问题需要社会和家庭一起想办法。",
+    "py": "Shì a, yǎnglǎo wèntí xūyào shèhuì hé jiātíng yīqǐ xiǎng bànfǎ.",
+    "vi": "Đúng vậy, vấn đề dưỡng lão cần xã hội và gia đình cùng nhau tìm cách."
+   },
+   {
+    "sp": "B",
+    "han": "希望以后这样的中心越来越多，收费也能便宜一点。",
+    "py": "Xīwàng yǐhòu zhèyàng de zhōngxīn yuè lái yuè duō, shōufèi yě néng piányi yīdiǎn.",
+    "vi": "Mong sau này những trung tâm như vậy ngày càng nhiều, chi phí cũng rẻ hơn một chút."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Vì sao dì Lý thấy vất vả?",
+    "o": [
+     "Vì mẹ dì bị bệnh nặng",
+     "Ban ngày đi làm, tối chăm sóc mẹ, thường ngủ không ngon",
+     "Vì dì không có việc làm",
+     "Vì nhà dì ở xa"
+    ],
+    "a": 1,
+    "why": "我白天要上班，晚上还要照顾她，常常睡不好觉: ban ngày tôi phải đi làm, buổi tối còn phải chăm sóc mẹ, thường xuyên ngủ không ngon."
+   },
+   {
+    "type": "MC",
+    "q": "Thuê người chăm sóc tốt gặp khó khăn gì?",
+    "o": [
+     "Khó tìm và chi phí cao, một tháng hơn 8000 đồng",
+     "Không ai muốn làm nghề này",
+     "Phải ký hợp đồng dài hạn",
+     "Người chăm sóc không biết nấu ăn"
+    ],
+    "a": 0,
+    "why": "好的护工很难找，而且费用也很高，一个月要八千多块: người chăm sóc tốt rất khó tìm, hơn nữa chi phí cũng rất cao, một tháng hơn tám nghìn đồng."
+   },
+   {
+    "type": "MC",
+    "q": "Người già có thể làm gì ở trung tâm dưỡng lão cộng đồng vào ban ngày?",
+    "o": [
+     "Đưa họ đi du lịch",
+     "Dạy họ dùng điện thoại",
+     "Cho họ tiền trợ cấp",
+     "Ăn cơm và sinh hoạt ở đó"
+    ],
+    "a": 3,
+    "why": "老人白天可以在那里吃饭、活动: ban ngày người già có thể ở đó ăn cơm, sinh hoạt."
+   },
+   {
+    "type": "MC",
+    "q": "Theo dì Lý, trung tâm giải quyết được vấn đề đến mức nào?",
+    "o": [
+     "Giải quyết hoàn toàn",
+     "Không giải quyết được gì",
+     "Giải quyết một phần, ban ngày yên tâm đi làm, tối vẫn nhờ gia đình",
+     "Chỉ giúp người giàu"
+    ],
+    "a": 2,
+    "why": "能解决一部分。白天有人照顾，我就能安心上班了。不过晚上还是要靠家人: giải quyết được một phần. Ban ngày có người chăm sóc, tôi có thể yên tâm đi làm. Nhưng buổi tối vẫn phải dựa vào gia đình."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-7",
+  "stage": 5,
+  "title": "Bán táo qua mạng",
+  "topic": "Kinh tế",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "王村长，听说你们村的苹果现在都卖到全国各地了，是真的吗？",
+    "py": "Wáng cūnzhǎng, tīngshuō nǐmen cūn de píngguǒ xiànzài dōu mài dào quánguó gèdì le, shì zhēn de ma?",
+    "vi": "Trưởng thôn Vương, nghe nói táo của làng các ông bây giờ bán khắp cả nước rồi, có thật không?"
+   },
+   {
+    "sp": "B",
+    "han": "是真的。以前我们的苹果只能在附近卖，价格很低，常常卖不出去。",
+    "py": "Shì zhēn de. Yǐqián wǒmen de píngguǒ zhǐ néng zài fùjìn mài, jiàgé hěn dī, chángcháng mài bù chūqù.",
+    "vi": "Thật đấy. Trước đây táo của chúng tôi chỉ bán được ở gần đây, giá rất thấp, thường không bán được."
+   },
+   {
+    "sp": "A",
+    "han": "那现在是怎么改变的呢？",
+    "py": "Nà xiànzài shì zěnme gǎibiàn de ne?",
+    "vi": "Vậy bây giờ đã thay đổi như thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "三年前，村里来了几个年轻人，教大家在网上开店，拍视频介绍我们的苹果。",
+    "py": "Sān nián qián, cūnlǐ lái le jǐ gè niánqīngrén, jiāo dàjiā zài wǎngshang kāi diàn, pāi shìpín jièshào wǒmen de píngguǒ.",
+    "vi": "Ba năm trước, trong làng đến vài người trẻ, dạy mọi người mở cửa hàng trên mạng, quay video giới thiệu táo của chúng tôi."
+   },
+   {
+    "sp": "A",
+    "han": "效果怎么样？",
+    "py": "Xiàoguǒ zěnmeyàng?",
+    "vi": "Hiệu quả thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "非常好。去年我们村通过网络卖了五十多万斤苹果，收入比以前多了三倍。",
+    "py": "Fēicháng hǎo. Qùnián wǒmen cūn tōngguò wǎngluò mài le wǔshí duō wàn jīn píngguǒ, shōurù bǐ yǐqián duō le sān bèi.",
+    "vi": "Rất tốt. Năm ngoái làng chúng tôi bán qua mạng hơn 500 nghìn cân táo, thu nhập tăng gấp ba lần trước đây."
+   },
+   {
+    "sp": "A",
+    "han": "除了卖苹果，网上卖东西还带来了什么变化？",
+    "py": "Chúle mài píngguǒ, wǎngshang mài dōngxi hái dàilái le shénme biànhuà?",
+    "vi": "Ngoài việc bán táo, bán hàng trên mạng còn mang lại thay đổi gì?"
+   },
+   {
+    "sp": "B",
+    "han": "很多年轻人回村创业了，村里还建了一个快递站，寄东西特别方便。",
+    "py": "Hěn duō niánqīngrén huí cūn chuàngyè le, cūnlǐ hái jiàn le yī gè kuàidì zhàn, jì dōngxi tèbié fāngbiàn.",
+    "vi": "Nhiều người trẻ đã về làng khởi nghiệp, trong làng còn xây một trạm chuyển phát nhanh, gửi đồ rất tiện."
+   },
+   {
+    "sp": "A",
+    "han": "看来网络真的改变了农村的生活。",
+    "py": "Kànlái wǎngluò zhēn de gǎibiàn le nóngcūn de shēnghuó.",
+    "vi": "Xem ra internet thật sự đã thay đổi cuộc sống nông thôn."
+   },
+   {
+    "sp": "B",
+    "han": "是啊，不过我们还要继续学习，不然就跟不上了。",
+    "py": "Shì a, bùguò wǒmen hái yào jìxù xuéxí, bùrán jiù gēn bù shàng le.",
+    "vi": "Đúng vậy, nhưng chúng tôi còn phải tiếp tục học tập, nếu không sẽ không theo kịp."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Trước đây táo của làng bán như thế nào?",
+    "o": [
+     "Bán khắp cả nước",
+     "Giá rất cao",
+     "Chỉ bán ở gần, giá thấp, thường không bán được",
+     "Chỉ bán cho khách du lịch"
+    ],
+    "a": 2,
+    "why": "以前我们的苹果只能在附近卖，价格很低，常常卖不出去: trước đây táo của chúng tôi chỉ bán được ở gần đây, giá rất thấp, thường không bán được."
+   },
+   {
+    "type": "MC",
+    "q": "Ba năm trước, người trẻ đến làng đã làm gì?",
+    "o": [
+     "Dạy mọi người mở cửa hàng trên mạng, quay video giới thiệu táo",
+     "Xây nhà máy chế biến táo",
+     "Mua hết táo của làng",
+     "Mở trường học trong làng"
+    ],
+    "a": 0,
+    "why": "教大家在网上开店，拍视频介绍我们的苹果: dạy mọi người mở cửa hàng trên mạng, quay video giới thiệu táo của chúng tôi."
+   },
+   {
+    "type": "MC",
+    "q": "Năm ngoái làng bán qua mạng bao nhiêu táo?",
+    "o": [
+     "Hơn 5 vạn cân",
+     "Hơn 10 vạn cân",
+     "Hơn 30 vạn cân",
+     "Hơn 50 vạn cân"
+    ],
+    "a": 3,
+    "why": "去年我们村通过网络卖了五十多万斤苹果: năm ngoái làng chúng tôi bán qua mạng hơn 500 nghìn cân táo."
+   },
+   {
+    "type": "MC",
+    "q": "Thu nhập của làng thay đổi như thế nào?",
+    "o": [
+     "Giảm một nửa",
+     "Tăng gấp ba lần",
+     "Không thay đổi",
+     "Tăng gấp đôi"
+    ],
+    "a": 1,
+    "why": "收入比以前多了三倍: thu nhập tăng gấp ba lần trước đây."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-8",
+  "stage": 5,
+  "title": "Học trực tuyến",
+  "topic": "Giáo dục",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "小明，你最近都在网上上课，感觉怎么样？",
+    "py": "Xiǎomíng, nǐ zuìjìn dōu zài wǎngshang shàngkè, gǎnjué zěnmeyàng?",
+    "vi": "Tiểu Minh, gần đây bạn đều học trực tuyến, cảm thấy thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "有好处也有坏处。好处是不用出门，坏处是很容易走神。",
+    "py": "Yǒu hǎochù yě yǒu huàichù. Hǎochù shì bùyòng chūmén, huàichù shì hěn róngyì zǒushén.",
+    "vi": "Có lợi cũng có hại. Lợi là không cần ra khỏi nhà, hại là rất dễ mất tập trung."
+   },
+   {
+    "sp": "A",
+    "han": "你上课的时候会不会一边听课一边玩手机？",
+    "py": "Nǐ shàngkè de shíhou huì bù huì yībiān tīngkè yībiān wán shǒujī?",
+    "vi": "Khi học bạn có vừa nghe giảng vừa chơi điện thoại không?"
+   },
+   {
+    "sp": "B",
+    "han": "以前会，现在我把手机放到另一个房间，上课就专心多了。",
+    "py": "Yǐqián huì, xiànzài wǒ bǎ shǒujī fàng dào lìng yī gè fángjiān, shàngkè jiù zhuānxīn duō le.",
+    "vi": "Trước đây có, bây giờ tôi để điện thoại ở phòng khác, học tập trung hơn nhiều."
+   },
+   {
+    "sp": "A",
+    "han": "网课的老师讲得清楚吗？",
+    "py": "Wǎngkè de lǎoshī jiǎng de qīngchu ma?",
+    "vi": "Giáo viên dạy trực tuyến giảng có rõ ràng không?"
+   },
+   {
+    "sp": "B",
+    "han": "大部分老师讲得很好，还会把课堂录下来，课后可以再看一遍。",
+    "py": "Dà bùfen lǎoshī jiǎng de hěn hǎo, hái huì bǎ kètáng lù xiàlai, kèhòu kěyǐ zài kàn yī biàn.",
+    "vi": "Đa số giáo viên giảng rất tốt, còn quay lại buổi học, sau giờ học có thể xem lại một lần."
+   },
+   {
+    "sp": "A",
+    "han": "那你觉得网课最大的问题是什么？",
+    "py": "Nà nǐ juéde wǎngkè zuì dà de wèntí shì shénme?",
+    "vi": "Vậy bạn thấy vấn đề lớn nhất của học trực tuyến là gì?"
+   },
+   {
+    "sp": "B",
+    "han": "我觉得是缺少和同学一起讨论的机会，学习有时候会觉得很孤单。",
+    "py": "Wǒ juéde shì quēshǎo hé tóngxué yīqǐ tǎolùn de jīhuì, xuéxí yǒushíhou huì juéde hěn gūdān.",
+    "vi": "Tôi thấy là thiếu cơ hội thảo luận cùng bạn học, học tập đôi khi thấy rất cô đơn."
+   },
+   {
+    "sp": "A",
+    "han": "说得有道理。看来网课和面授课各有优点，最好是结合起来。",
+    "py": "Shuō de yǒu dàolǐ. Kànlái wǎngkè hé miànshòukè gè yǒu yōudiǎn, zuìhǎo shì jiéhé qǐlai.",
+    "vi": "Nói có lý. Xem ra học trực tuyến và học trực tiếp mỗi loại đều có ưu điểm, tốt nhất là kết hợp lại."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Tiểu Minh thấy học trực tuyến có lợi gì?",
+    "o": [
+     "Được gặp bạn bè nhiều hơn",
+     "Giáo viên giảng chậm hơn",
+     "Có thể vừa học vừa chơi",
+     "Không cần ra khỏi nhà"
+    ],
+    "a": 3,
+    "why": "好处是不用出门: lợi là không cần ra khỏi nhà."
+   },
+   {
+    "type": "MC",
+    "q": "Bây giờ Tiểu Minh làm gì để tập trung học?",
+    "o": [
+     "Để điện thoại ở phòng khác",
+     "Tắt máy tính",
+     "Nghe nhạc khi học",
+     "Học vào ban đêm"
+    ],
+    "a": 0,
+    "why": "现在我把手机放到另一个房间，上课就专心多了: bây giờ tôi để điện thoại ở phòng khác, học tập trung hơn nhiều."
+   },
+   {
+    "type": "MC",
+    "q": "Sau giờ học, học sinh có thể làm gì?",
+    "o": [
+     "Hỏi giáo viên trực tiếp",
+     "Xem lại video buổi học đã quay",
+     "Làm bài tập nhóm",
+     "Đi thư viện"
+    ],
+    "a": 1,
+    "why": "还会把课堂录下来，课后可以再看一遍: còn quay lại buổi học, sau giờ học có thể xem lại một lần."
+   },
+   {
+    "type": "MC",
+    "q": "Theo Tiểu Minh, vấn đề lớn nhất của học trực tuyến là gì?",
+    "o": [
+     "Học phí quá cao",
+     "Mạng thường bị chậm",
+     "Thiếu cơ hội thảo luận cùng bạn, đôi khi thấy cô đơn",
+     "Giáo viên giảng không rõ"
+    ],
+    "a": 2,
+    "why": "我觉得是缺少和同学一起讨论的机会，学习有时候会觉得很孤单: tôi thấy là thiếu cơ hội thảo luận cùng bạn học, học tập đôi khi thấy rất cô đơn."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-9",
+  "stage": 5,
+  "title": "Rác thải nhựa và đại dương",
+  "topic": "Môi trường",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "各位听众，今天我们来谈谈塑料垃圾的问题。",
+    "py": "Gèwèi tīngzhòng, jīntiān wǒmen lái tántan sùliào lājī de wèntí.",
+    "vi": "Thưa quý thính giả, hôm nay chúng ta cùng nói về vấn đề rác thải nhựa."
+   },
+   {
+    "sp": "N",
+    "han": "每年全世界要产生三亿多吨塑料垃圾，其中很多最后都流进了大海。",
+    "py": "Měinián quán shìjiè yào chǎnshēng sān yì duō dūn sùliào lājī, qízhōng hěn duō zuìhòu dōu liú jìn le dàhǎi.",
+    "vi": "Mỗi năm toàn thế giới thải ra hơn 300 triệu tấn rác thải nhựa, trong đó rất nhiều cuối cùng trôi ra biển."
+   },
+   {
+    "sp": "N",
+    "han": "海里的鱼和海鸟常常把塑料当成食物，吃下去以后就会生病，甚至死亡。",
+    "py": "Hǎilǐ de yú hé hǎiniǎo chángcháng bǎ sùliào dàngchéng shíwù, chī xiàqù yǐhòu jiù huì shēngbìng, shènzhì sǐwáng.",
+    "vi": "Cá và chim biển thường coi nhựa là thức ăn, ăn vào rồi sẽ bị bệnh, thậm chí chết."
+   },
+   {
+    "sp": "N",
+    "han": "更严重的是，塑料在海里不会很快消失，有的要几百年才能分解。",
+    "py": "Gèng yánzhòng de shì, sùliào zài hǎilǐ bù huì hěn kuài xiāoshī, yǒu de yào jǐbǎi nián cái néng fēnjiě.",
+    "vi": "Nghiêm trọng hơn, nhựa trong biển không biến mất nhanh, có loại phải mất vài trăm năm mới phân hủy được."
+   },
+   {
+    "sp": "N",
+    "han": "为了减少塑料垃圾，很多国家已经开始禁止使用一次性塑料袋。",
+    "py": "Wèile jiǎnshǎo sùliào lājī, hěn duō guójiā yǐjīng kāishǐ jìnzhǐ shǐyòng yīcìxìng sùliàodài.",
+    "vi": "Để giảm rác thải nhựa, nhiều nước đã bắt đầu cấm dùng túi nhựa dùng một lần."
+   },
+   {
+    "sp": "N",
+    "han": "我们国家也出台了相关规定，超市不再免费提供塑料袋。",
+    "py": "Wǒmen guójiā yě chūtái le xiāngguān guīdìng, chāoshì bù zài miǎnfèi tígōng sùliàodài.",
+    "vi": "Nước chúng ta cũng đã ban hành quy định liên quan, siêu thị không còn phát túi nhựa miễn phí."
+   },
+   {
+    "sp": "N",
+    "han": "除了少用塑料，我们还要学会分类回收，让塑料重新变成有用的东西。",
+    "py": "Chúle shǎo yòng sùliào, wǒmen hái yào xuéhuì fēnlèi huíshōu, ràng sùliào chóngxīn biànchéng yǒuyòng de dōngxi.",
+    "vi": "Ngoài việc ít dùng nhựa, chúng ta còn phải học phân loại tái chế, để nhựa trở thành đồ dùng hữu ích."
+   },
+   {
+    "sp": "N",
+    "han": "一只塑料瓶回收以后，可以做成一件衣服，也可以做成新的瓶子。",
+    "py": "Yī zhī sùliào píng huíshōu yǐhòu, kěyǐ zuòchéng yī jiàn yīfu, yě kěyǐ zuòchéng xīn de píngzi.",
+    "vi": "Một chai nhựa sau khi tái chế, có thể làm thành một chiếc áo, cũng có thể làm thành chai mới."
+   },
+   {
+    "sp": "N",
+    "han": "保护海洋，从减少一个塑料袋开始，每个人都能做到。",
+    "py": "Bǎohù hǎiyáng, cóng jiǎnshǎo yī gè sùliàodài kāishǐ, měi gè rén dōu néng zuò dào.",
+    "vi": "Bảo vệ đại dương, bắt đầu từ việc giảm một chiếc túi nhựa, ai cũng làm được."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Mỗi năm thế giới thải ra bao nhiêu rác nhựa?",
+    "o": [
+     "Hơn 30 triệu tấn",
+     "Hơn 300 triệu tấn",
+     "Hơn 3 tỉ tấn",
+     "Hơn 3 triệu tấn"
+    ],
+    "a": 1,
+    "why": "每年全世界要产生三亿多吨塑料垃圾: mỗi năm toàn thế giới thải ra hơn 300 triệu tấn rác thải nhựa."
+   },
+   {
+    "type": "MC",
+    "q": "Nhựa trong biển gây hại thế nào cho cá và chim biển?",
+    "o": [
+     "Làm chúng không bơi được",
+     "Làm nước biển nóng lên",
+     "Chúng ăn nhựa vào sẽ bị bệnh, thậm chí chết",
+     "Làm chúng mất nơi ở"
+    ],
+    "a": 2,
+    "why": "海里的鱼和海鸟常常把塑料当成食物，吃下去以后就会生病，甚至死亡: cá và chim biển thường coi nhựa là thức ăn, ăn vào rồi sẽ bị bệnh, thậm chí chết."
+   },
+   {
+    "type": "MC",
+    "q": "Nhiều nước đã làm gì để giảm rác thải nhựa?",
+    "o": [
+     "Cấm dùng túi nhựa dùng một lần",
+     "Cấm sản xuất mọi loại nhựa",
+     "Đóng cửa các nhà máy nhựa",
+     "Cấm đánh bắt cá"
+    ],
+    "a": 0,
+    "why": "很多国家已经开始禁止使用一次性塑料袋: nhiều nước đã bắt đầu cấm dùng túi nhựa dùng một lần."
+   },
+   {
+    "type": "MC",
+    "q": "Một chai nhựa tái chế có thể làm thành gì?",
+    "o": [
+     "Chỉ làm thành túi nhựa",
+     "Chỉ làm thành đồ chơi",
+     "Chỉ làm thành giày dép",
+     "Một chiếc áo hoặc chai mới"
+    ],
+    "a": 3,
+    "why": "可以做成一件衣服，也可以做成新的瓶子: có thể làm thành một chiếc áo, cũng có thể làm thành chai mới."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-10",
+  "stage": 5,
+  "title": "Xe điện",
+  "topic": "Khoa học",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "老王，听说你最近换了一辆电动车，开起来感觉怎么样？",
+    "py": "Lǎo Wáng, tīngshuō nǐ zuìjìn huàn le yī liàng diàndòngchē, kāi qǐlai gǎnjué zěnmeyàng?",
+    "vi": "Ông Vương, nghe nói gần đây ông đổi sang xe điện, lái cảm thấy thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "非常好，又安静又省钱。每个月充电的钱比以前加油少了一大半。",
+    "py": "Fēicháng hǎo, yòu ānjìng yòu shěng qián. Měi gè yuè chōngdiàn de qián bǐ yǐqián jiāyóu shǎo le yī dà bàn.",
+    "vi": "Rất tốt, vừa yên tĩnh vừa tiết kiệm tiền. Mỗi tháng tiền sạc điện ít hơn tiền đổ xăng trước đây hơn một nửa."
+   },
+   {
+    "sp": "A",
+    "han": "充电方便吗？我听说充电要等很长时间。",
+    "py": "Chōngdiàn fāngbiàn ma? Wǒ tīngshuō chōngdiàn yào děng hěn cháng shíjiān.",
+    "vi": "Sạc điện có tiện không? Tôi nghe nói sạc điện phải chờ rất lâu."
+   },
+   {
+    "sp": "B",
+    "han": "现在快充半个小时就能充到百分之八十，平时在家里晚上充电也很方便。",
+    "py": "Xiànzài kuài chōng bàn gè xiǎoshí jiù néng chōng dào bǎifēn zhī bāshí, píngshí zài jiālǐ wǎnshang chōngdiàn yě hěn fāngbiàn.",
+    "vi": "Bây giờ sạc nhanh nửa tiếng là sạc được 80%, bình thường ở nhà sạc buổi tối cũng rất tiện."
+   },
+   {
+    "sp": "A",
+    "han": "那电动车有什么缺点呢？",
+    "py": "Nà diàndòngchē yǒu shénme quēdiǎn ne?",
+    "vi": "Vậy xe điện có nhược điểm gì?"
+   },
+   {
+    "sp": "B",
+    "han": "最大的问题是冬天电池不耐用，跑的距离会变短。",
+    "py": "Zuì dà de wèntí shì dōngtiān diànchí bù nàiyòng, pǎo de jùlí huì biàn duǎn.",
+    "vi": "Vấn đề lớn nhất là mùa đông pin không bền, quãng đường chạy được sẽ ngắn lại."
+   },
+   {
+    "sp": "A",
+    "han": "现在路上电动车越来越多，你觉得十年后会怎么样？",
+    "py": "Xiànzài lùshang diàndòngchē yuè lái yuè duō, nǐ juéde shí nián hòu huì zěnmeyàng?",
+    "vi": "Bây giờ trên đường xe điện ngày càng nhiều, ông thấy mười năm nữa sẽ thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "我觉得十年后，大部分新车都会是电动车，汽油车会越来越少。",
+    "py": "Wǒ juéde shí nián hòu, dà bùfen xīnchē dōu huì shì diàndòngchē, qìyóuchē huì yuè lái yuè shǎo.",
+    "vi": "Tôi nghĩ mười năm nữa, phần lớn xe mới sẽ là xe điện, xe xăng sẽ ngày càng ít."
+   },
+   {
+    "sp": "A",
+    "han": "听你这么一说，我也想换一辆电动车试试了。",
+    "py": "Tīng nǐ zhème yī shuō, wǒ yě xiǎng huàn yī liàng diàndòngchē shìshi le.",
+    "vi": "Nghe ông nói vậy, tôi cũng muốn đổi một chiếc xe điện thử xem."
+   },
+   {
+    "sp": "B",
+    "han": "可以啊，下次我开车带你去转一圈，你自己感受一下。",
+    "py": "Kěyǐ a, xià cì wǒ kāichē dài nǐ qù zhuàn yī quàn, nǐ zìjǐ gǎnshòu yīxià.",
+    "vi": "Được chứ, lần sau tôi lái xe đưa ông đi một vòng, ông tự cảm nhận xem."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Ông Vương thấy xe điện có ưu điểm gì?",
+    "o": [
+     "Yên tĩnh và tiết kiệm tiền",
+     "Chạy nhanh hơn xe xăng",
+     "Không cần sạc điện",
+     "Không bao giờ hỏng"
+    ],
+    "a": 0,
+    "why": "又安静又省钱……每个月充电的钱比以前加油少了一大半: vừa yên tĩnh vừa tiết kiệm tiền, mỗi tháng tiền sạc điện ít hơn tiền đổ xăng trước đây hơn một nửa."
+   },
+   {
+    "type": "MC",
+    "q": "Sạc nhanh mất bao lâu để sạc được 80%?",
+    "o": [
+     "10 phút",
+     "Nửa tiếng",
+     "Một tiếng",
+     "Hai tiếng"
+    ],
+    "a": 1,
+    "why": "现在快充半个小时就能充到百分之八十: bây giờ sạc nhanh nửa tiếng là sạc được 80%."
+   },
+   {
+    "type": "MC",
+    "q": "Nhược điểm lớn nhất của xe điện là gì?",
+    "o": [
+     "Sạc điện quá đắt",
+     "Xe chạy quá ồn",
+     "Mùa đông pin không bền, quãng đường chạy ngắn lại",
+     "Xe không có điều hòa"
+    ],
+    "a": 2,
+    "why": "最大的问题是冬天电池不耐用，跑的距离会变短: vấn đề lớn nhất là mùa đông pin không bền, quãng đường chạy được sẽ ngắn lại."
+   },
+   {
+    "type": "MC",
+    "q": "Ông Vương dự đoán mười năm nữa sẽ thế nào?",
+    "o": [
+     "Xe xăng sẽ nhiều hơn",
+     "Xe điện sẽ biến mất",
+     "Mọi người không dùng ô tô nữa",
+     "Phần lớn xe mới là xe điện, xe xăng ngày càng ít"
+    ],
+    "a": 3,
+    "why": "我觉得十年后，大部分新车都会是电动车，汽油车会越来越少: tôi nghĩ mười năm nữa, phần lớn xe mới sẽ là xe điện, xe xăng sẽ ngày càng ít."
+   }
+  ]
+ },
+ {
+  "hsk": 5,
+  "id": "zh-mock-l5-11",
+  "stage": 5,
+  "title": "Đọc Hồng Lâu Mộng",
+  "topic": "Văn hóa",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "小刘，最近你在看什么书？",
+    "py": "Xiǎoliú, zuìjìn nǐ zài kàn shénme shū?",
+    "vi": "Tiểu Lưu, gần đây bạn đang đọc sách gì?"
+   },
+   {
+    "sp": "B",
+    "han": "我在看《红楼梦》，已经看了两个多月了。",
+    "py": "Wǒ zài kàn “Hónglóu Mèng”, yǐjīng kàn le liǎng gè duō yuè le.",
+    "vi": "Tôi đang đọc “Hồng Lâu Mộng”, đã đọc hơn hai tháng rồi."
+   },
+   {
+    "sp": "A",
+    "han": "这本书很厚，你怎么坚持看下去的？",
+    "py": "Zhè běn shū hěn hòu, nǐ zěnme jiānchí kàn xiàqù de?",
+    "vi": "Cuốn sách này rất dày, bạn kiên trì đọc tiếp thế nào?"
+   },
+   {
+    "sp": "B",
+    "han": "一开始确实很难，人物太多，记不住。后来我一边看一边做笔记，就慢慢看进去了。",
+    "py": "Yī kāishǐ quèshí hěn nán, rénwù tài duō, jì bù zhù. Hòulái wǒ yībiān kàn yībiān zuò bǐjì, jiù mànmàn kàn jìnqù le.",
+    "vi": "Lúc đầu đúng là rất khó, nhân vật quá nhiều, không nhớ nổi. Sau đó tôi vừa đọc vừa ghi chép, dần dần đọc vào được."
+   },
+   {
+    "sp": "A",
+    "han": "听说这本书被改编成电视剧很多次了，你看过吗？",
+    "py": "Tīngshuō zhè běn shū bèi gǎibiān chéng diànshìjù hěn duō cì le, nǐ kàn guò ma?",
+    "vi": "Nghe nói cuốn sách này đã được chuyển thể thành phim truyền hình nhiều lần, bạn đã xem chưa?"
+   },
+   {
+    "sp": "B",
+    "han": "看过一版。不过我觉得电视剧和原著差别很大，很多细节都被改掉了。",
+    "py": "Kàn guò yī bǎn. Bùguò wǒ juéde diànshìjù hé yuánzhù chābié hěn dà, hěn duō xìjié dōu bèi gǎi diào le.",
+    "vi": "Đã xem một bản. Nhưng tôi thấy phim truyền hình và nguyên tác khác nhau rất nhiều, nhiều chi tiết đã bị sửa đổi."
+   },
+   {
+    "sp": "A",
+    "han": "那你更喜欢看书还是看电视剧？",
+    "py": "Nà nǐ gèng xǐhuan kàn shū háishì kàn diànshìjù?",
+    "vi": "Vậy bạn thích đọc sách hay xem phim truyền hình hơn?"
+   },
+   {
+    "sp": "B",
+    "han": "更喜欢看书。书里的描写更细腻，留给读者想象的空间也更大。",
+    "py": "Gèng xǐhuan kàn shū. Shū lǐ de miáoxiě gèng xìnì, liú gěi dúzhě xiǎngxiàng de kōngjiān yě gèng dà.",
+    "vi": "Thích đọc sách hơn. Miêu tả trong sách tinh tế hơn, không gian tưởng tượng dành cho độc giả cũng lớn hơn."
+   },
+   {
+    "sp": "A",
+    "han": "说得好。等我有时间，也想认真读一读这本书。",
+    "py": "Shuō de hǎo. Děng wǒ yǒu shíjiān, yě xiǎng rènzhēn dú yī dú zhè běn shū.",
+    "vi": "Nói hay lắm. Đợi tôi có thời gian, cũng muốn đọc nghiêm túc cuốn sách này."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Tiểu Lưu đang đọc cuốn sách nào?",
+    "o": [
+     "《三国演义》",
+     "《红楼梦》",
+     "《水浒传》",
+     "《西游记》"
+    ],
+    "a": 1,
+    "why": "我在看《红楼梦》: tôi đang đọc “Hồng Lâu Mộng”."
+   },
+   {
+    "type": "MC",
+    "q": "Tiểu Lưu đã đọc cuốn sách này được bao lâu?",
+    "o": [
+     "Hơn một tháng",
+     "Hai tuần",
+     "Hơn hai tháng",
+     "Nửa năm"
+    ],
+    "a": 2,
+    "why": "已经看了两个多月了: đã đọc hơn hai tháng rồi."
+   },
+   {
+    "type": "MC",
+    "q": "Lúc đầu Tiểu Lưu gặp khó khăn gì khi đọc sách?",
+    "o": [
+     "Sách quá đắt",
+     "Không mua được sách",
+     "Chữ quá nhỏ",
+     "Nhân vật quá nhiều, không nhớ nổi"
+    ],
+    "a": 3,
+    "why": "一开始确实很难，人物太多，记不住: lúc đầu đúng là rất khó, nhân vật quá nhiều, không nhớ nổi."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao Tiểu Lưu thích đọc sách hơn xem phim truyền hình?",
+    "o": [
+     "Vì đọc sách nhanh hơn",
+     "Vì phim quá dài",
+     "Vì sách rẻ hơn",
+     "Vì miêu tả trong sách tinh tế hơn, không gian tưởng tượng lớn hơn"
+    ],
+    "a": 3,
+    "why": "书里的描写更细腻，留给读者想象的空间也更大: miêu tả trong sách tinh tế hơn, không gian tưởng tượng dành cho độc giả cũng lớn hơn."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-1",
+  "stage": 6,
+  "title": "Kinh tế học hành vi: vì sao ta chọn phi lý trí",
+  "topic": "Kinh tế học",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "各位同学，今天我们来讨论一个看似简单、实则复杂的问题：人为什么常常做出并不理性的选择？",
+    "py": "Gèwèi tóngxué, jīntiān wǒmen lái tǎolùn yí gè kànsì jiǎndān, shízé fùzá de wèntí: rén wèishénme chángcháng zuòchū bìng bù lǐxìng de xuǎnzé?",
+    "vi": "Các bạn sinh viên thân mến, hôm nay chúng ta thảo luận một vấn đề tưởng đơn giản mà thực ra phức tạp: vì sao con người thường đưa ra những lựa chọn không hề lý trí?"
+   },
+   {
+    "sp": "N",
+    "han": "传统经济学假设人是完全理性的，总是追求利益最大化。",
+    "py": "Chuántǒng jīngjìxué jiǎshè rén shì wánquán lǐxìng de, zǒngshì zhuīqiú lìyì zuìdàhuà.",
+    "vi": "Kinh tế học truyền thống giả định con người hoàn toàn lý trí, luôn theo đuổi lợi ích tối đa."
+   },
+   {
+    "sp": "N",
+    "han": "然而，现实生活中的大量证据表明，人们的决策常常受到情绪、习惯和偏见的影响。",
+    "py": "Rán'ér, xiànshí shēnghuó zhōng de dàliàng zhèngjù biǎomíng, rénmen de juécè chángcháng shòudào qíngxù, xíguàn hé piānjiàn de yǐngxiǎng.",
+    "vi": "Tuy nhiên, rất nhiều bằng chứng trong đời sống thực tế cho thấy quyết định của con người thường chịu ảnh hưởng của cảm xúc, thói quen và định kiến."
+   },
+   {
+    "sp": "N",
+    "han": "比如，很多人明知道吸烟有害健康，却仍然难以戒掉。",
+    "py": "Bǐrú, hěn duō rén míng zhīdào xīyān yǒuhài jiànkāng, què réngrán nányǐ jièdiào.",
+    "vi": "Ví dụ, nhiều người biết rõ hút thuốc có hại cho sức khỏe, nhưng vẫn khó bỏ được."
+   },
+   {
+    "sp": "N",
+    "han": "再比如，面对同样的价格，人们对“打八折”的反应，往往比直接降价二十元更加积极。",
+    "py": "Zài bǐrú, miànduì tóngyàng de jiàgé, rénmen duì “dǎ bā zhé” de fǎnyìng, wǎngwǎng bǐ zhíjiē jiàngjià èrshí yuán gèngjiā jījí.",
+    "vi": "Lại ví dụ, với cùng một mức giá, phản ứng của mọi người với “giảm giá 20%” thường tích cực hơn so với giảm trực tiếp 20 tệ."
+   },
+   {
+    "sp": "N",
+    "han": "这种现象说明，人们看重的往往不是绝对数值，而是相对变化。",
+    "py": "Zhè zhǒng xiànxiàng shuōmíng, rénmen kànzhòng de wǎngwǎng bùshì juéduì shùzhí, ér shì xiāngduì biànhuà.",
+    "vi": "Hiện tượng này cho thấy điều con người coi trọng thường không phải con số tuyệt đối, mà là sự thay đổi tương đối."
+   },
+   {
+    "sp": "N",
+    "han": "心理学家把这种倾向称为“框架效应”，也就是说，同一个问题换一种说法，结果可能完全不同。",
+    "py": "Xīnlǐxuéjiā bǎ zhè zhǒng qīngxiàng chēng wéi “kuàngjià xiàoyìng”, yě jiùshì shuō, tóng yí gè wèntí huàn yì zhǒng shuōfǎ, jiéguǒ kěnéng wánquán bùtóng.",
+    "vi": "Các nhà tâm lý học gọi khuynh hướng này là “hiệu ứng khung”, nghĩa là cùng một vấn đề nhưng diễn đạt theo cách khác, kết quả có thể hoàn toàn khác."
+   },
+   {
+    "sp": "N",
+    "han": "值得注意的是，这种非理性并不是缺陷，而是一种在长期进化中形成的思维捷径。",
+    "py": "Zhíde zhùyì de shì, zhè zhǒng fēi lǐxìng bìng bùshì quēxiàn, ér shì yì zhǒng zài chángqī jìnhuà zhōng xíngchéng de sīwéi jiéjìng.",
+    "vi": "Đáng chú ý là, sự phi lý trí này không phải là khiếm khuyết, mà là một lối tắt tư duy hình thành trong quá trình tiến hóa lâu dài."
+   },
+   {
+    "sp": "N",
+    "han": "它能帮助我们在信息有限的情况下迅速做出判断。",
+    "py": "Tā néng bāngzhù wǒmen zài xìnxī yǒuxiàn de qíngkuàng xià xùnsù zuòchū pànduàn.",
+    "vi": "Nó có thể giúp chúng ta nhanh chóng đưa ra phán đoán khi thông tin còn hạn chế."
+   },
+   {
+    "sp": "N",
+    "han": "当然，捷径也可能带来系统性的错误，因此，了解自己的思维偏见，是做出更好决策的第一步。",
+    "py": "Dāngrán, jiéjìng yě kěnéng dàilái xìtǒngxìng de cuòwù, yīncǐ, liǎojiě zìjǐ de sīwéi piānjiàn, shì zuòchū gèng hǎo juécè de dì yī bù.",
+    "vi": "Tất nhiên, lối tắt cũng có thể dẫn đến những sai lầm mang tính hệ thống, vì vậy hiểu rõ định kiến tư duy của bản thân là bước đầu tiên để đưa ra quyết định tốt hơn."
+   },
+   {
+    "sp": "N",
+    "han": "下节课，我们将具体分析几种常见的认知偏见及其应对方法。",
+    "py": "Xià jié kè, wǒmen jiāng jùtǐ fēnxī jǐ zhǒng chángjiàn de rènzhī piānjiàn jí qí yìngduì fāngfǎ.",
+    "vi": "Tiết học sau, chúng ta sẽ phân tích cụ thể một vài định kiến nhận thức thường gặp và cách ứng phó với chúng."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Giảng viên cho rằng giả định của kinh tế học truyền thống về con người là gì?",
+    "o": [
+     "Con người hoàn toàn lý trí, luôn theo đuổi lợi ích tối đa",
+     "Con người thường quyết định theo cảm xúc",
+     "Con người không quan tâm đến lợi ích",
+     "Con người luôn tránh rủi ro"
+    ],
+    "a": 0,
+    "why": "传统经济学假设人是完全理性的，总是追求利益最大化：kinh tế học truyền thống giả định con người hoàn toàn lý trí, luôn theo đuổi lợi ích tối đa."
+   },
+   {
+    "type": "MC",
+    "q": "Ví dụ “đánh 8 chiết” so với giảm trực tiếp 20 tệ dùng để chứng minh điều gì?",
+    "o": [
+     "Người ta thích mua hàng đắt tiền",
+     "Người ta coi trọng thay đổi tương đối hơn con số tuyệt đối",
+     "Người ta luôn tính toán chính xác",
+     "Người ta không quan tâm đến giá cả"
+    ],
+    "a": 1,
+    "why": "人们看重的往往不是绝对数值，而是相对变化：điều con người coi trọng thường không phải con số tuyệt đối, mà là sự thay đổi tương đối."
+   },
+   {
+    "type": "MC",
+    "q": "Theo bài giảng, “hiệu ứng khung” nghĩa là gì?",
+    "o": [
+     "Mọi người luôn chọn phương án rẻ nhất",
+     "Giá cả không ảnh hưởng đến quyết định",
+     "Cùng một vấn đề, đổi cách diễn đạt thì kết quả có thể hoàn toàn khác nhau",
+     "Khung giá càng cao càng dễ bán"
+    ],
+    "a": 2,
+    "why": "同一个问题换一种说法，结果可能完全不同：cùng một vấn đề, đổi cách diễn đạt thì kết quả có thể hoàn toàn khác nhau."
+   },
+   {
+    "type": "MC",
+    "q": "Theo bài giảng, bước đầu tiên để đưa ra quyết định tốt hơn là gì?",
+    "o": [
+     "Học thêm kinh tế học",
+     "Thu thập càng nhiều thông tin càng tốt",
+     "Tránh mọi lối tắt tư duy",
+     "Hiểu rõ định kiến tư duy của bản thân"
+    ],
+    "a": 3,
+    "why": "了解自己的思维偏见，是做出更好决策的第一步：hiểu rõ định kiến tư duy của bản thân là bước đầu tiên để đưa ra quyết định tốt hơn."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-2",
+  "stage": 6,
+  "title": "Tranh luận: trí tuệ nhân tạo và việc làm",
+  "topic": "Tranh luận",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "人工智能正在以前所未有的速度改变就业市场，许多重复性的工作正在被机器取代。",
+    "py": "Rén gōng zhìnéng zhèngzài yǐ qián suǒ wèi yǒu de sùdù gǎibiàn jiùyè shìchǎng, xǔduō chóngfùxìng de gōngzuò zhèngzài bèi jīqì qǔdài.",
+    "vi": "Trí tuệ nhân tạo đang thay đổi thị trường việc làm với tốc độ chưa từng có, nhiều công việc mang tính lặp lại đang bị máy móc thay thế."
+   },
+   {
+    "sp": "B",
+    "han": "我承认这种变化确实存在，但历史上每一次技术革命都消灭旧岗位，同时创造了新岗位。",
+    "py": "Wǒ chéngrèn zhè zhǒng biànhuà quèshí cúnzài, dàn lìshǐ shàng měi yí cì jìshù gémìng dōu xiāomiè jiù gǎngwèi, tóngshí chuàngzào le xīn gǎngwèi.",
+    "vi": "Tôi thừa nhận sự thay đổi này thực sự tồn tại, nhưng trong lịch sử, mỗi cuộc cách mạng công nghệ đều xóa bỏ những vị trí cũ, đồng thời tạo ra những vị trí mới."
+   },
+   {
+    "sp": "A",
+    "han": "问题在于，这一次的速度太快了，很多人还没来得及学习新技能，就已经失业了。",
+    "py": "Wèntí zàiyú, zhè yí cì de sùdù tài kuài le, hěn duō rén hái méi láidejí xuéxí xīn jìnéng, jiù yǐjīng shīyè le.",
+    "vi": "Vấn đề là lần này tốc độ quá nhanh, nhiều người chưa kịp học kỹ năng mới thì đã thất nghiệp rồi."
+   },
+   {
+    "sp": "B",
+    "han": "所以关键不在于阻止技术，而在于建立更有效的职业培训体系，让劳动者跟上变化。",
+    "py": "Suǒyǐ guānjiàn bù zàiyú zǔzhǐ jìshù, ér zàiyú jiànlì gèng yǒuxiào de zhíyè péixùn tǐxì, ràng láodòngzhě gēnshàng biànhuà.",
+    "vi": "Vì vậy, mấu chốt không phải là ngăn chặn công nghệ, mà là xây dựng hệ thống đào tạo nghề hiệu quả hơn, để người lao động theo kịp sự thay đổi."
+   },
+   {
+    "sp": "A",
+    "han": "可是，培训需要时间和金钱，低收入的劳动者往往最缺少这两样东西。",
+    "py": "Kěshì, péixùn xūyào shíjiān hé jīnqián, dī shōurù de láodòngzhě wǎngwǎng zuì quēshǎo zhè liǎng yàng dōngxi.",
+    "vi": "Nhưng đào tạo cần thời gian và tiền bạc, mà người lao động thu nhập thấp thường thiếu nhất chính là hai thứ này."
+   },
+   {
+    "sp": "B",
+    "han": "这正是政府和社会应当承担的责任，不能把转型的全部代价都推给个人。",
+    "py": "Zhè zhèngshì zhèngfǔ hé shèhuì yīngdāng chéngdān de zérèn, bù néng bǎ zhuǎnxíng de quánbù dàijià dōu tuī gěi gèrén.",
+    "vi": "Đây chính là trách nhiệm mà chính phủ và xã hội cần gánh vác, không thể đẩy toàn bộ cái giá của chuyển đổi sang cho cá nhân."
+   },
+   {
+    "sp": "A",
+    "han": "即便如此，人工智能在创造力、判断力和人际沟通方面，仍然无法完全替代人类。",
+    "py": "Jíbiàn rúcǐ, réngōng zhìnéng zài chuàngzàolì, pànduànlì hé rénjì gōutōng fāngmiàn, réngrán wúfǎ wánquán tìdài rénlèi.",
+    "vi": "Dù vậy, về khả năng sáng tạo, phán đoán và giao tiếp giữa người với người, trí tuệ nhân tạo vẫn không thể hoàn toàn thay thế con người."
+   },
+   {
+    "sp": "B",
+    "han": "没错，所以未来的竞争不是人与机器的竞争，而是会用机器的人与不会用机器的人之间的竞争。",
+    "py": "Méi cuò, suǒyǐ wèilái de jìngzhēng bùshì rén yǔ jīqì de jìngzhēng, ér shì huì yòng jīqì de rén yǔ bù huì yòng jīqì de rén zhījiān de jìngzhēng.",
+    "vi": "Đúng vậy, vì thế cạnh tranh trong tương lai không phải là cạnh tranh giữa người và máy, mà là cạnh tranh giữa người biết dùng máy và người không biết dùng máy."
+   },
+   {
+    "sp": "A",
+    "han": "我同意这个结论，但前提是每个人都能公平地获得学习的机会。",
+    "py": "Wǒ tóngyì zhège jiélùn, dàn qiántí shì měi gè rén dōu néng gōngpíng de huòdé xuéxí de jīhuì.",
+    "vi": "Tôi đồng ý với kết luận này, nhưng với điều kiện mọi người đều có thể công bằng tiếp cận cơ hội học tập."
+   },
+   {
+    "sp": "B",
+    "han": "对，这才是我们今天讨论的核心：技术本身不是敌人，不公平才是。",
+    "py": "Duì, zhè cái shì wǒmen jīntiān tǎolùn de héxīn: jìshù běnshēn bùshì dírén, bù gōngpíng cái shì.",
+    "vi": "Đúng, đây mới là cốt lõi của cuộc thảo luận hôm nay: bản thân công nghệ không phải kẻ thù, sự bất công mới là kẻ thù."
+   },
+   {
+    "sp": "A",
+    "han": "说得好，下一期节目，我们再请两位经济学家深入分析这个问题。",
+    "py": "Shuō de hǎo, xià yī qī jiémù, wǒmen zài qǐng liǎng wèi jīngjìxuéjiā shēnrù fēnxī zhège wèntí.",
+    "vi": "Nói hay lắm, chương trình kỳ sau, chúng ta sẽ mời thêm hai nhà kinh tế học phân tích sâu vấn đề này."
+   },
+   {
+    "sp": "B",
+    "han": "好的，期待下次再见。",
+    "py": "Hǎo de, qīdài xià cì zàijiàn.",
+    "vi": "Được, mong gặp lại lần sau."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A lo lắng nhất về điều gì?",
+    "o": [
+     "AI quá đắt",
+     "Tốc độ thay đổi quá nhanh, nhiều người chưa kịp học kỹ năng mới đã thất nghiệp",
+     "AI không đủ thông minh",
+     "Chính phủ can thiệp quá nhiều"
+    ],
+    "a": 1,
+    "why": "这一次的速度太快了，很多人还没来得及学习新技能，就已经失业了：lần này tốc độ quá nhanh, nhiều người chưa kịp học kỹ năng mới thì đã thất nghiệp rồi."
+   },
+   {
+    "type": "MC",
+    "q": "B cho rằng giải pháp quan trọng nhất là gì?",
+    "o": [
+     "Ngăn chặn sự phát triển của AI",
+     "Đánh thuế các công ty công nghệ",
+     "Xây dựng hệ thống đào tạo nghề hiệu quả hơn",
+     "Giảm giờ làm việc"
+    ],
+    "a": 2,
+    "why": "关键不在于阻止技术，而在于建立更有效的职业培训体系：mấu chốt không phải là ngăn chặn công nghệ, mà là xây dựng hệ thống đào tạo nghề hiệu quả hơn."
+   },
+   {
+    "type": "MC",
+    "q": "Theo cuộc tranh luận, AI khó thay thế con người ở những khía cạnh nào?",
+    "o": [
+     "Sáng tạo, phán đoán và giao tiếp giữa người với người",
+     "Tính toán và ghi nhớ",
+     "Làm việc lặp lại",
+     "Xử lý dữ liệu lớn"
+    ],
+    "a": 0,
+    "why": "人工智能在创造力、判断力和人际沟通方面，仍然无法完全替代人类：về khả năng sáng tạo, phán đoán và giao tiếp giữa người với người, AI vẫn không thể hoàn toàn thay thế con người."
+   },
+   {
+    "type": "MC",
+    "q": "Hai người thống nhất cốt lõi của vấn đề là gì?",
+    "o": [
+     "Công nghệ phát triển quá chậm",
+     "Máy móc quá đắt",
+     "Con người lười học",
+     "Kẻ thù thật sự là sự bất công, không phải công nghệ"
+    ],
+    "a": 3,
+    "why": "技术本身不是敌人，不公平才是：bản thân công nghệ không phải kẻ thù, sự bất công mới là kẻ thù."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-3",
+  "stage": 6,
+  "title": "Bài giảng thơ Đường",
+  "topic": "Văn học",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "今天我们一起欣赏唐代诗歌，看看古人如何用最少的字，表达最深的感情。",
+    "py": "Jīntiān wǒmen yìqǐ xīnshǎng Tángdài shīgē, kànkan gǔrén rúhé yòng zuì shǎo de zì, biǎodá zuì shēn de gǎnqíng.",
+    "vi": "Hôm nay chúng ta cùng thưởng thức thơ ca thời Đường, xem người xưa dùng ít chữ nhất để bày tỏ tình cảm sâu sắc nhất như thế nào."
+   },
+   {
+    "sp": "N",
+    "han": "李白的诗气势磅礴，比如“飞流直下三千尺，疑是银河落九天”，一句就把瀑布写活了。",
+    "py": "Lǐ Bái de shī qìshì pángbó, bǐrú “Fēi liú zhí xià sānqiān chǐ, yí shì Yínhé luò jiǔ tiān”, yí jù jiù bǎ pùbù xiě huó le.",
+    "vi": "Thơ Lý Bạch khí thế hùng vĩ, ví dụ “Phi lưu trực hạ tam thiên xích, nghi thị Ngân Hà lạc cửu thiên”, chỉ một câu đã viết sống động thác nước."
+   },
+   {
+    "sp": "N",
+    "han": "杜甫的诗则沉郁顿挫，他写的不只是风景，更是时代的苦难。",
+    "py": "Dù Fǔ de shī zé chényù dùncuò, tā xiě de bù zhǐshì fēngjǐng, gèng shì shídài de kǔnàn.",
+    "vi": "Thơ Đỗ Phủ thì trầm uất, giọng điệu gập ghềnh, ông viết không chỉ là phong cảnh, mà còn là nỗi khổ của thời đại."
+   },
+   {
+    "sp": "N",
+    "han": "值得注意的是，唐诗的伟大并不只在于语言优美，更在于它把个人命运和历史紧紧联系在一起。",
+    "py": "Zhíde zhùyì de shì, Tángshī de wěidà bìng bù zhǐ zàiyú yǔyán yōuměi, gèng zàiyú tā bǎ gèrén mìngyùn hé lìshǐ jǐnjǐn liánxì zài yìqǐ.",
+    "vi": "Đáng chú ý là, sự vĩ đại của thơ Đường không chỉ ở ngôn từ đẹp đẽ, mà còn ở chỗ nó gắn chặt vận mệnh cá nhân với lịch sử."
+   },
+   {
+    "sp": "N",
+    "han": "比如杜甫的《春望》，表面写春天的景色，实际上写的却是战乱中的长安。",
+    "py": "Bǐrú Dù Fǔ de “Chūn Wàng”, biǎomiàn xiě chūntiān de jǐngsè, shíjì shàng xiě de què shì zhànluàn zhōng de Cháng'ān.",
+    "vi": "Ví dụ “Xuân Vọng” của Đỗ Phủ, bề ngoài viết cảnh sắc mùa xuân, thực ra viết về Trường An trong loạn lạc."
+   },
+   {
+    "sp": "N",
+    "han": "“国破山河在，城春草木深”，短短十个字，家国的悲痛已经扑面而来。",
+    "py": "“Guó pò shānhé zài, chéng chūn cǎomù shēn”, duǎnduǎn shí gè zì, jiāguó de bēitòng yǐjīng pūmiàn ér lái.",
+    "vi": "“Quốc phá sơn hà tại, thành xuân thảo mộc thâm”, chỉ vỏn vẹn mười chữ, nỗi đau mất nước đã ập đến trước mặt."
+   },
+   {
+    "sp": "N",
+    "han": "有人问，为什么一千多年过去了，我们还在读唐诗？",
+    "py": "Yǒu rén wèn, wèishénme yìqiān duō nián guòqù le, wǒmen hái zài dú Tángshī?",
+    "vi": "Có người hỏi, vì sao hơn một nghìn năm đã qua mà chúng ta vẫn đọc thơ Đường?"
+   },
+   {
+    "sp": "N",
+    "han": "答案很简单：因为人类的基本情感没有变，离别、思乡、孤独，古人和我们感受相同。",
+    "py": "Dá'àn hěn jiǎndān: yīnwèi rénlèi de jīběn qínggǎn méiyǒu biàn, líbié, sīxiāng, gūdú, gǔrén hé wǒmen gǎnshòu xiāngtóng.",
+    "vi": "Câu trả lời rất đơn giản: vì những tình cảm cơ bản của con người không thay đổi, ly biệt, nhớ quê, cô đơn — người xưa và chúng ta cảm nhận giống nhau."
+   },
+   {
+    "sp": "N",
+    "han": "换言之，唐诗跨越时间的原因，正是它写出了普遍的人性。",
+    "py": "Huàn yán zhī, Tángshī kuàyuè shíjiān de yuányīn, zhèngshì tā xiěchū le pǔbiàn de rénxìng.",
+    "vi": "Nói cách khác, lý do thơ Đường vượt qua thời gian chính là nó đã viết ra nhân tính phổ quát."
+   },
+   {
+    "sp": "N",
+    "han": "学习唐诗，不是背诵多少首，而是学会用诗人的眼睛去看世界。",
+    "py": "Xuéxí Tángshī, bùshì bèisòng duōshao shǒu, ér shì xuéhuì yòng shīrén de yǎnjing qù kàn shìjiè.",
+    "vi": "Học thơ Đường không phải là thuộc bao nhiêu bài, mà là học cách nhìn thế giới bằng đôi mắt của nhà thơ."
+   },
+   {
+    "sp": "N",
+    "han": "希望大家今晚读一读《春望》，明天我们一起讨论这首诗的意境。",
+    "py": "Xīwàng dàjiā jīnwǎn dú yì dú “Chūn Wàng”, míngtiān wǒmen yìqǐ tǎolùn zhè shǒu shī de yìjìng.",
+    "vi": "Hy vọng tối nay mọi người đọc thử “Xuân Vọng”, ngày mai chúng ta cùng thảo luận về ý cảnh của bài thơ này."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Giảng viên cho rằng thơ Lý Bạch nổi bật ở điểm nào?",
+    "o": [
+     "Ngôn từ giản dị",
+     "Tả cảnh quê hương",
+     "Khí thế hùng vĩ",
+     "Giọng điệu trầm buồn"
+    ],
+    "a": 2,
+    "why": "李白的诗气势磅礴：thơ Lý Bạch khí thế hùng vĩ."
+   },
+   {
+    "type": "MC",
+    "q": "Theo bài giảng, sự vĩ đại của thơ Đường không chỉ ở ngôn từ đẹp mà còn ở điều gì?",
+    "o": [
+     "Gắn vận mệnh cá nhân với lịch sử",
+     "Dùng nhiều điển cố khó hiểu",
+     "Viết về cảnh đẹp thiên nhiên",
+     "Tuân thủ nghiêm ngặt luật thơ"
+    ],
+    "a": 0,
+    "why": "它把个人命运和历史紧紧联系在一起：nó gắn chặt vận mệnh cá nhân với lịch sử."
+   },
+   {
+    "type": "MC",
+    "q": "Câu “Quốc phá sơn hà tại, thành xuân thảo mộc thâm” trong bài giảng được dùng để nói về điều gì?",
+    "o": [
+     "Vẻ đẹp mùa xuân ở Trường An",
+     "Niềm vui đoàn tụ",
+     "Ước mơ hòa bình",
+     "Nỗi đau mất nước trong loạn lạc"
+    ],
+    "a": 3,
+    "why": "写的却是战乱中的长安，家国的悲痛已经扑面而来：viết về Trường An trong loạn lạc, nỗi đau mất nước đã ập đến trước mặt."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao hơn nghìn năm qua người ta vẫn đọc thơ Đường?",
+    "o": [
+     "Vì thơ Đường dễ thuộc",
+     "Vì tình cảm cơ bản của con người không thay đổi",
+     "Vì thơ Đường được dạy trong trường học",
+     "Vì nhà thơ thời Đường rất nổi tiếng"
+    ],
+    "a": 1,
+    "why": "因为人类的基本情感没有变：vì những tình cảm cơ bản của con người không thay đổi."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-4",
+  "stage": 6,
+  "title": "Phỏng vấn chuyên gia khí hậu",
+  "topic": "Khoa học",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "陈教授，感谢您接受采访。最近极端天气越来越频繁，普通人最应该了解什么？",
+    "py": "Chén jiàoshòu, gǎnxiè nín jiēshòu cǎifǎng. Zuìjìn jíduān tiānqì yuè lái yuè pínfán, pǔtōng rén zuì yīnggāi liǎojiě shénme?",
+    "vi": "Giáo sư Trần, cảm ơn ông đã nhận lời phỏng vấn. Gần đây thời tiết cực đoan ngày càng thường xuyên, người bình thường nên hiểu điều gì nhất?"
+   },
+   {
+    "sp": "B",
+    "han": "首先要明白，气候变化不是未来的问题，而是正在发生的问题。",
+    "py": "Shǒuxiān yào míngbai, qìhòu biànhuà bùshì wèilái de wèntí, ér shì zhèngzài fāshēng de wèntí.",
+    "vi": "Trước hết cần hiểu rằng biến đổi khí hậu không phải là vấn đề của tương lai, mà là vấn đề đang diễn ra."
+   },
+   {
+    "sp": "A",
+    "han": "可是很多人觉得，气温只升高了一两度，似乎没什么大不了的。",
+    "py": "Kěshì hěn duō rén juéde, qìwēn zhǐ shēnggāo le yì liǎng dù, sìhū méi shénme dà bùliǎo de.",
+    "vi": "Nhưng nhiều người cho rằng nhiệt độ chỉ tăng một hai độ, dường như chẳng có gì to tát."
+   },
+   {
+    "sp": "B",
+    "han": "这是一个常见的误解。全球平均气温升高一度，极端高温和暴雨的概率会大幅上升。",
+    "py": "Zhè shì yí gè chángjiàn de wùjiě. Quánqiú píngjūn qìwēn shēnggāo yí dù, jíduān gāowēn hé bàoyǔ de gàilǜ huì dàfú shàngshēng.",
+    "vi": "Đây là một hiểu lầm phổ biến. Nhiệt độ trung bình toàn cầu tăng một độ, xác suất nắng nóng cực đoan và mưa lớn sẽ tăng mạnh."
+   },
+   {
+    "sp": "A",
+    "han": "那么，减排是不是唯一的办法？",
+    "py": "Nàme, jiǎnpái shì bùshì wéiyī de bànfǎ?",
+    "vi": "Vậy giảm phát thải có phải là cách duy nhất không?"
+   },
+   {
+    "sp": "B",
+    "han": "减排当然重要，但同样重要的是适应。我们必须学会在已经变化的气候中生活。",
+    "py": "Jiǎnpái dāngrán zhòngyào, dàn tóngyàng zhòngyào de shì shìyìng. Wǒmen bìxū xuéhuì zài yǐjīng biànhuà de qìhòu zhōng shēnghuó.",
+    "vi": "Giảm phát thải tất nhiên quan trọng, nhưng thích ứng cũng quan trọng không kém. Chúng ta phải học cách sống trong khí hậu đã thay đổi."
+   },
+   {
+    "sp": "A",
+    "han": "适应具体包括什么呢？",
+    "py": "Shìyìng jùtǐ bāokuò shénme ne?",
+    "vi": "Thích ứng cụ thể bao gồm những gì ạ?"
+   },
+   {
+    "sp": "B",
+    "han": "比如城市要建设更好的排水系统，农业要改种更耐旱的作物品种，医院要做好应对高温的准备。",
+    "py": "Bǐrú chéngshì yào jiànshè gèng hǎo de páishuǐ xìtǒng, nóngyè yào gǎi zhòng gèng nàihàn de zuòwù pǐnzhǒng, yīyuàn yào zuòhǎo yìngduì gāowēn de zhǔnbèi.",
+    "vi": "Ví dụ thành phố cần xây hệ thống thoát nước tốt hơn, nông nghiệp cần chuyển sang trồng giống cây chịu hạn hơn, bệnh viện cần chuẩn bị ứng phó với nắng nóng."
+   },
+   {
+    "sp": "A",
+    "han": "听起来，适应和减排一样，都需要大量的投入。",
+    "py": "Tīng qǐlai, shìyìng hé jiǎnpái yíyàng, dōu xūyào dàliàng de tóurù.",
+    "vi": "Nghe ra thì thích ứng và giảm phát thải đều cần đầu tư rất lớn."
+   },
+   {
+    "sp": "B",
+    "han": "是的，但不投入的代价更大。每一次灾害造成的损失，往往是预防成本的数倍。",
+    "py": "Shì de, dàn bù tóurù de dàijià gèng dà. Měi yí cì zāihài zàochéng de sǔnshī, wǎngwǎng shì yùfáng chéngběn de shù bèi.",
+    "vi": "Đúng vậy, nhưng cái giá của việc không đầu tư còn lớn hơn. Mỗi lần thiên tai gây thiệt hại thường gấp nhiều lần chi phí phòng ngừa."
+   },
+   {
+    "sp": "A",
+    "han": "非常感谢您的分享，希望更多人能听到这些声音。",
+    "py": "Fēicháng gǎnxiè nín de fēnxiǎng, xīwàng gèng duō rén néng tīngdào zhèxiē shēngyīn.",
+    "vi": "Cảm ơn ông rất nhiều vì những chia sẻ, hy vọng nhiều người hơn sẽ nghe được những điều này."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Giáo sư Trần cho rằng biến đổi khí hậu là vấn đề như thế nào?",
+    "o": [
+     "Vấn đề đang diễn ra, không phải chuyện tương lai",
+     "Vấn đề chỉ xảy ra ở các nước nghèo",
+     "Vấn đề sẽ tự biến mất",
+     "Vấn đề chỉ ảnh hưởng đến nông nghiệp"
+    ],
+    "a": 0,
+    "why": "气候变化不是未来的问题，而是正在发生的问题：biến đổi khí hậu không phải là vấn đề của tương lai, mà là vấn đề đang diễn ra."
+   },
+   {
+    "type": "MC",
+    "q": "Hiểu lầm phổ biến mà giáo sư nhắc đến là gì?",
+    "o": [
+     "Nhiệt độ tăng khiến mùa đông biến mất",
+     "Mưa lớn chỉ xảy ra ở vùng núi",
+     "Nhiệt độ tăng một hai độ thì chẳng có gì to tát",
+     "Biến đổi khí hậu do mặt trời gây ra"
+    ],
+    "a": 2,
+    "why": "气温只升高了一两度，似乎没什么大不了的——这是一个常见的误解：nhiệt độ chỉ tăng một hai độ, dường như chẳng có gì to tát — đây là một hiểu lầm phổ biến."
+   },
+   {
+    "type": "MC",
+    "q": "Ngoài giảm phát thải, giáo sư nhấn mạnh điều gì cũng quan trọng không kém?",
+    "o": [
+     "Tăng thuế năng lượng",
+     "Thích ứng với khí hậu đã thay đổi",
+     "Ngừng sử dụng ô tô",
+     "Trồng thêm cây xanh trong thành phố"
+    ],
+    "a": 1,
+    "why": "同样重要的是适应：thích ứng cũng quan trọng không kém."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao giáo sư cho rằng nên đầu tư vào phòng ngừa?",
+    "o": [
+     "Vì phòng ngừa giúp tăng trưởng kinh tế",
+     "Vì phòng ngừa tạo nhiều việc làm",
+     "Vì phòng ngừa rẻ hơn",
+     "Vì thiệt hại do thiên tai thường gấp nhiều lần chi phí phòng ngừa"
+    ],
+    "a": 3,
+    "why": "每一次灾害造成的损失，往往是预防成本的数倍：mỗi lần thiên tai gây thiệt hại thường gấp nhiều lần chi phí phòng ngừa."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-5",
+  "stage": 6,
+  "title": "Tư tưởng Khổng Tử và thời hiện đại",
+  "topic": "Triết học",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "今天我们谈谈孔子的思想，看看两千多年前的智慧，如何回应今天的问题。",
+    "py": "Jīntiān wǒmen tántan Kǒngzǐ de sīxiǎng, kànkan liǎngqiān duō nián qián de zhìhuì, rúhé huíyìng jīntiān de wèntí.",
+    "vi": "Hôm nay chúng ta nói về tư tưởng Khổng Tử, xem trí tuệ hơn hai nghìn năm trước đáp lại các vấn đề hôm nay như thế nào."
+   },
+   {
+    "sp": "N",
+    "han": "孔子最核心的观念是“仁”，简单说，就是爱人，推己及人。",
+    "py": "Kǒngzǐ zuì héxīn de guānniàn shì “rén”, jiǎndān shuō, jiùshì ài rén, tuī jǐ jí rén.",
+    "vi": "Quan niệm cốt lõi nhất của Khổng Tử là “nhân”, nói đơn giản là yêu người, suy từ mình ra người."
+   },
+   {
+    "sp": "N",
+    "han": "很多人以为“仁”只是个人的修养，其实孔子讲的“仁”同时也是一种社会理想。",
+    "py": "Hěn duō rén yǐwéi “rén” zhǐshì gèrén de xiūyǎng, qíshí Kǒngzǐ jiǎng de “rén” tóngshí yě shì yì zhǒng shèhuì lǐxiǎng.",
+    "vi": "Nhiều người tưởng “nhân” chỉ là tu dưỡng cá nhân, thực ra “nhân” mà Khổng Tử nói đồng thời cũng là một lý tưởng xã hội."
+   },
+   {
+    "sp": "N",
+    "han": "他主张“己所不欲，勿施于人”，这句话今天仍然被世界各地的伦理学教材引用。",
+    "py": "Tā zhǔzhāng “jǐ suǒ bù yù, wù shī yú rén”, zhè jù huà jīntiān réngrán bèi shìjiè gèdì de lúnlǐxué jiàocái yǐnyòng.",
+    "vi": "Ông chủ trương “kỷ sở bất dục, vật thi ư nhân”, câu này đến nay vẫn được sách giáo khoa đạo đức học khắp thế giới trích dẫn."
+   },
+   {
+    "sp": "N",
+    "han": "但是，孔子的思想也有历史局限，他生活的时代，社会等级森严。",
+    "py": "Dànshì, Kǒngzǐ de sīxiǎng yě yǒu lìshǐ júxiàn, tā shēnghuó de shídài, shèhuì děngjí sēnyán.",
+    "vi": "Nhưng tư tưởng Khổng Tử cũng có giới hạn lịch sử, thời đại ông sống, đẳng cấp xã hội rất nghiêm ngặt."
+   },
+   {
+    "sp": "N",
+    "han": "他讲“君君，臣臣，父父，子子”，强调每个人安守自己的位置。",
+    "py": "Tā jiǎng “jūn jūn, chén chén, fù fù, zǐ zǐ”, qiángdiào měi gè rén ānshǒu zìjǐ de wèizhì.",
+    "vi": "Ông nói “quân quân, thần thần, phụ phụ, tử tử”, nhấn mạnh mỗi người an phận giữ đúng vị trí của mình."
+   },
+   {
+    "sp": "N",
+    "han": "这种观念在今天看来，显然与人人平等的现代理念存在冲突。",
+    "py": "Zhè zhǒng guānniàn zài jīntiān kànlai, xiǎnrán yǔ rénrén píngděng de xiàndài lǐniàn cúnzài chōngtū.",
+    "vi": "Quan niệm này nhìn từ hôm nay, rõ ràng xung đột với quan niệm hiện đại về bình đẳng."
+   },
+   {
+    "sp": "N",
+    "han": "所以，学习孔子不能全盘接受，也不能全盘否定，关键在于分辨哪些是普遍价值，哪些是时代的产物。",
+    "py": "Suǒyǐ, xuéxí Kǒngzǐ bù néng quánpán jiēshòu, yě bù néng quánpán fǒudìng, guānjiàn zàiyú fēnbiàn nǎxiē shì pǔbiàn jiàzhí, nǎxiē shì shídài de chǎnpǐn.",
+    "vi": "Vì vậy, học Khổng Tử không thể tiếp nhận toàn bộ, cũng không thể phủ định toàn bộ, mấu chốt là phân biệt đâu là giá trị phổ quát, đâu là sản phẩm của thời đại."
+   },
+   {
+    "sp": "N",
+    "han": "比如“仁”和“己所不欲，勿施于人”，就具有超越时代的意义。",
+    "py": "Bǐrú “rén” hé “jǐ suǒ bù yù, wù shī yú rén”, jiù jùyǒu chāoyuè shídài de yìyì.",
+    "vi": "Ví dụ “nhân” và “kỷ sở bất dục, vật thi ư nhân” có ý nghĩa vượt thời đại."
+   },
+   {
+    "sp": "N",
+    "han": "而严格的等级观念，则应当放在历史中去理解，而不是直接搬到今天。",
+    "py": "Ér yángé de děngjí guānniàn, zé yīngdāng fàng zài lìshǐ zhōng qù lǐjiě, ér bùshì zhíjiē bān dào jīntiān.",
+    "vi": "Còn quan niệm đẳng cấp nghiêm ngặt thì nên đặt trong lịch sử để hiểu, chứ không áp dụng trực tiếp vào hôm nay."
+   },
+   {
+    "sp": "N",
+    "han": "下次课，我们将对比孔子与古希腊哲学家苏格拉底，看看两种文明如何思考“什么是好生活”。",
+    "py": "Xià cì kè, wǒmen jiāng duìbǐ Kǒngzǐ yǔ gǔ Xīlà zhéxuéjiā Sūgélādǐ, kànkan liǎng zhǒng wénmíng rúhé sīkǎo “shénme shì hǎo shēnghuó”.",
+    "vi": "Buổi học sau, chúng ta sẽ đối chiếu Khổng Tử với triết gia Hy Lạp cổ đại Socrates, xem hai nền văn minh suy nghĩ về “thế nào là cuộc sống tốt” ra sao."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Theo giảng viên, “nhân” của Khổng Tử là gì?",
+    "o": [
+     "Chỉ là lễ nghi bên ngoài",
+     "Yêu người, suy từ mình ra người; vừa là tu dưỡng vừa là lý tưởng xã hội",
+     "Chỉ là quy tắc cai trị",
+     "Chỉ dành cho người làm quan"
+    ],
+    "a": 1,
+    "why": "“仁”……就是爱人，推己及人；同时也是一种社会理想：“nhân” là yêu người, suy từ mình ra người, đồng thời cũng là một lý tưởng xã hội."
+   },
+   {
+    "type": "MC",
+    "q": "Câu “Kỷ sở bất dục, vật thi ư nhân” có nghĩa là gì?",
+    "o": [
+     "Muốn người khác làm gì thì mình làm trước",
+     "Phải nghe lời người lớn",
+     "Ai cũng phải tuân theo lễ nghi",
+     "Điều mình không muốn thì đừng áp đặt cho người khác"
+    ],
+    "a": 3,
+    "why": "己所不欲，勿施于人：điều mình không muốn thì đừng áp đặt cho người khác."
+   },
+   {
+    "type": "MC",
+    "q": "Giảng viên cho rằng tư tưởng Khổng Tử có giới hạn lịch sử nào?",
+    "o": [
+     "Không quan tâm đến giáo dục",
+     "Không nói về đạo đức",
+     "Nhấn mạnh đẳng cấp nghiêm ngặt, xung đột với quan niệm bình đẳng hiện đại",
+     "Phản đối việc học tập"
+    ],
+    "a": 2,
+    "why": "社会等级森严；与人人平等的现代理念存在冲突：đẳng cấp xã hội rất nghiêm ngặt, xung đột với quan niệm hiện đại về bình đẳng."
+   },
+   {
+    "type": "MC",
+    "q": "Thái độ đúng khi học Khổng Tử theo giảng viên là gì?",
+    "o": [
+     "Phân biệt giá trị phổ quát và sản phẩm của thời đại, không tiếp nhận hay phủ định toàn bộ",
+     "Tiếp nhận toàn bộ",
+     "Phủ định toàn bộ",
+     "Chỉ học những gì dễ hiểu"
+    ],
+    "a": 0,
+    "why": "不能全盘接受，也不能全盘否定，关键在于分辨哪些是普遍价值，哪些是时代的产物：không thể tiếp nhận toàn bộ, cũng không thể phủ định toàn bộ, mấu chốt là phân biệt đâu là giá trị phổ quát, đâu là sản phẩm của thời đại."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-6",
+  "stage": 6,
+  "title": "Tranh luận: video ngắn và giới trẻ",
+  "topic": "Tranh luận",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "现在的年轻人每天花好几个小时刷短视频，我觉得这正在毁掉他们的注意力。",
+    "py": "Xiànzài de niánqīng rén měitiān huā hǎo jǐ gè xiǎoshí shuā duǎn shìpín, wǒ juéde zhè zhèngzài huǐdiào tāmen de zhùyìlì.",
+    "vi": "Người trẻ bây giờ mỗi ngày dành nhiều giờ lướt video ngắn, tôi thấy điều này đang hủy hoại khả năng tập trung của họ."
+   },
+   {
+    "sp": "B",
+    "han": "注意力确实是个问题，但不能把责任全推给手机，短视频只是满足了人天生喜欢新鲜事物的心理。",
+    "py": "Zhùyìlì quèshí shì gè wèntí, dàn bù néng bǎ zérèn quán tuī gěi shǒujī, duǎn shìpín zhǐshì mǎnzú le rén tiānshēng xǐhuan xīnxiān shìwù de xīnlǐ.",
+    "vi": "Khả năng tập trung đúng là vấn đề, nhưng không thể đổ hết trách nhiệm cho điện thoại, video ngắn chỉ thỏa mãn tâm lý bẩm sinh thích cái mới của con người."
+   },
+   {
+    "sp": "A",
+    "han": "可是，算法会不断推荐你最喜欢的内容，让人越刷越停不下来，这已经不是单纯的个人选择了。",
+    "py": "Kěshì, suànfǎ huì bùduàn tuījiàn nǐ zuì xǐhuan de nèiróng, ràng rén yuè shuā yuè tíng bù xiàlai, zhè yǐjīng bùshì dānchún de gèrén xuǎnzé le.",
+    "vi": "Nhưng thuật toán sẽ liên tục gợi ý nội dung bạn thích nhất, khiến người ta càng lướt càng không dừng được, đây đã không còn là lựa chọn cá nhân đơn thuần nữa."
+   },
+   {
+    "sp": "B",
+    "han": "你说得有道理，平台确实有责任。但另一方面，短视频也让很多人第一次接触到科学、艺术和外面的世界。",
+    "py": "Nǐ shuō de yǒu dàolǐ, píngtái quèshí yǒu zérèn. Dàn lìng yì fāngmiàn, duǎn shìpín yě ràng hěn duō rén dì yī cì jiēchù dào kēxué, yìshù hé wàimiàn de shìjiè.",
+    "vi": "Bạn nói có lý, nền tảng đúng là có trách nhiệm. Nhưng mặt khác, video ngắn cũng giúp nhiều người lần đầu tiếp xúc với khoa học, nghệ thuật và thế giới bên ngoài."
+   },
+   {
+    "sp": "A",
+    "han": "接触不等于学习，十五秒的视频只能留下印象，很难形成真正的理解。",
+    "py": "Jiēchù bù děngyú xuéxí, shíwǔ miǎo de shìpín zhǐ néng liúxià yìnxiàng, hěn nán xíngchéng zhēnzhèng de lǐjiě.",
+    "vi": "Tiếp xúc không bằng học tập, video mười lăm giây chỉ để lại ấn tượng, rất khó hình thành sự hiểu biết thật sự."
+   },
+   {
+    "sp": "B",
+    "han": "我同意浅层浏览代替不了深度学习，但问题不在于短视频本身，而在于我们怎么用它。",
+    "py": "Wǒ tóngyì qiǎncéng liúlǎn dàitì bùliǎo shēndù xuéxí, dàn wèntí bù zàiyú duǎn shìpín běnshēn, ér zàiyú wǒmen zěnme yòng tā.",
+    "vi": "Tôi đồng ý lướt qua hời hợt không thay thế được học sâu, nhưng vấn đề không nằm ở bản thân video ngắn, mà ở cách chúng ta dùng nó."
+   },
+   {
+    "sp": "A",
+    "han": "那你觉得，学校和家庭应该怎么做？",
+    "py": "Nà nǐ juéde, xuéxiào hé jiātíng yīnggāi zěnme zuò?",
+    "vi": "Vậy bạn thấy nhà trường và gia đình nên làm gì?"
+   },
+   {
+    "sp": "B",
+    "han": "与其一味禁止，不如教孩子管理时间、辨别信息，让自律代替强制。",
+    "py": "Yǔqí yíwèi jìnzhǐ, bùrú jiāo háizi guǎnlǐ shíjiān, biànbié xìnxī, ràng zìlǜ dàitì qiángzhì.",
+    "vi": "Thay vì cấm đoán một mực, chi bằng dạy trẻ quản lý thời gian, phân biệt thông tin, để tự giác thay cho ép buộc."
+   },
+   {
+    "sp": "A",
+    "han": "这个思路我可以接受，自律确实比禁止更长久。",
+    "py": "Zhège sīlù wǒ kěyǐ jiēshòu, zìlǜ quèshí bǐ jìnzhǐ gèng chángjiǔ.",
+    "vi": "Cách nghĩ này tôi có thể chấp nhận, tự giác đúng là bền lâu hơn cấm đoán."
+   },
+   {
+    "sp": "B",
+    "han": "对，技术会一直发展，关键是我们要学会和技术相处，而不是被技术牵着走。",
+    "py": "Duì, jìshù huì yìzhí fāzhǎn, guānjiàn shì wǒmen yào xuéhuì hé jìshù xiāngchǔ, ér bùshì bèi jìshù qiānzhe zǒu.",
+    "vi": "Đúng vậy, công nghệ sẽ còn phát triển mãi, mấu chốt là chúng ta phải học cách sống chung với công nghệ, chứ không phải bị công nghệ dắt đi."
+   },
+   {
+    "sp": "A",
+    "han": "说得好，希望今天的讨论能让家长和老师都有一些启发。",
+    "py": "Shuō de hǎo, xīwàng jīntiān de tǎolùn néng ràng jiāzhǎng hé lǎoshī dōu yǒu yìxiē qǐfā.",
+    "vi": "Nói hay lắm, hy vọng cuộc thảo luận hôm nay sẽ gợi mở điều gì đó cho phụ huynh và giáo viên."
+   },
+   {
+    "sp": "B",
+    "han": "也希望年轻人自己能想一想：手机在帮你，还是在控制你？",
+    "py": "Yě xīwàng niánqīng rén zìjǐ néng xiǎng yì xiǎng: shǒujī zài bāng nǐ, háishi zài kòngzhì nǐ?",
+    "vi": "Cũng hy vọng chính người trẻ sẽ tự nghĩ: điện thoại đang giúp bạn, hay đang kiểm soát bạn?"
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "A lo ngại điều gì nhất về video ngắn?",
+    "o": [
+     "Video ngắn quá đắt",
+     "Video ngắn không có nội dung hay",
+     "Video ngắn đang hủy hoại khả năng tập trung của người trẻ",
+     "Video ngắn khiến điện thoại nhanh hỏng"
+    ],
+    "a": 2,
+    "why": "正在毁掉他们的注意力：đang hủy hoại khả năng tập trung của họ."
+   },
+   {
+    "type": "MC",
+    "q": "B thừa nhận thuật toán có vấn đề gì?",
+    "o": [
+     "Liên tục gợi ý nội dung yêu thích khiến người ta không dừng được",
+     "Thuật toán quá chậm",
+     "Thuật toán không hiểu người dùng",
+     "Thuật toán làm video quá dài"
+    ],
+    "a": 0,
+    "why": "算法会不断推荐你最喜欢的内容，让人越刷越停不下来：thuật toán liên tục gợi ý nội dung bạn thích nhất, khiến người ta càng lướt càng không dừng được."
+   },
+   {
+    "type": "MC",
+    "q": "A cho rằng tiếp xúc qua video ngắn khác học tập ở điểm nào?",
+    "o": [
+     "Video ngắn quá dài",
+     "Video ngắn chỉ để lại ấn tượng, khó hình thành hiểu biết thật sự",
+     "Video ngắn không có hình ảnh",
+     "Video ngắn chỉ dành cho trẻ em"
+    ],
+    "a": 1,
+    "why": "十五秒的视频只能留下印象，很难形成真正的理解：video mười lăm giây chỉ để lại ấn tượng, rất khó hình thành sự hiểu biết thật sự."
+   },
+   {
+    "type": "MC",
+    "q": "B đề xuất nhà trường và gia đình nên làm gì?",
+    "o": [
+     "Cấm hoàn toàn điện thoại",
+     "Tịch thu điện thoại của trẻ",
+     "Chỉ cho trẻ xem video giáo dục",
+     "Dạy trẻ quản lý thời gian và phân biệt thông tin, để tự giác thay ép buộc"
+    ],
+    "a": 3,
+    "why": "教孩子管理时间、辨别信息，让自律代替强制：dạy trẻ quản lý thời gian, phân biệt thông tin, để tự giác thay cho ép buộc."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-7",
+  "stage": 6,
+  "title": "Khoa học giấc ngủ",
+  "topic": "Khoa học",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "各位，今天我们来聊聊睡眠。很多人以为睡觉就是大脑在休息，其实恰恰相反。",
+    "py": "Gèwèi, jīntiān wǒmen lái liáo liáo shuìmiàn. Hěn duō rén yǐwéi shuì jiào jiùshì dànǎo zài xiūxi, qíshí qiàqià xiāngfǎn.",
+    "vi": "Các bạn, hôm nay chúng ta nói về giấc ngủ. Nhiều người tưởng ngủ là não đang nghỉ ngơi, thực ra hoàn toàn ngược lại."
+   },
+   {
+    "sp": "N",
+    "han": "睡眠期间，大脑正在做一件非常重要的工作：整理白天学到的知识。",
+    "py": "Shuìmiàn qījiān, dànǎo zhèngzài zuò yí jiàn fēicháng zhòngyào de gōngzuò: zhěnglǐ báitiān xué dào de zhīshi.",
+    "vi": "Trong lúc ngủ, não đang làm một việc rất quan trọng: sắp xếp những kiến thức học được ban ngày."
+   },
+   {
+    "sp": "N",
+    "han": "研究发现，睡个好觉以后，人们记住新单词的速度会明显提高。",
+    "py": "Yánjiū fāxiàn, shuì gè hǎo jiào yǐhòu, rénmen jìzhù xīn dāncí de sùdù huì míngxiǎn tígāo.",
+    "vi": "Nghiên cứu phát hiện sau một giấc ngủ ngon, tốc độ ghi nhớ từ mới của con người tăng lên rõ rệt."
+   },
+   {
+    "sp": "N",
+    "han": "相反，长期睡眠不足会损害记忆力，还会让人情绪不稳定、判断力下降。",
+    "py": "Xiāngfǎn, chángqī shuìmiàn bùzú huì sǔnhài jìyìlì, hái huì ràng rén qíngxù bù wěndìng, pànduànlì xiàjiàng.",
+    "vi": "Ngược lại, thiếu ngủ kéo dài sẽ làm hại trí nhớ, còn khiến cảm xúc bất ổn và khả năng phán đoán giảm sút."
+   },
+   {
+    "sp": "N",
+    "han": "更值得注意的是，睡眠不足还会影响身体健康，增加肥胖和糖尿病的风险。",
+    "py": "Gèng zhíde zhùyì de shì, shuìmiàn bùzú hái huì yǐngxiǎng shēntǐ jiànkāng, zēngjiā féipàng hé tángniàobìng de fēngxiǎn.",
+    "vi": "Đáng chú ý hơn nữa, thiếu ngủ còn ảnh hưởng sức khỏe, làm tăng nguy cơ béo phì và tiểu đường."
+   },
+   {
+    "sp": "N",
+    "han": "那么，每天睡多长时间才够呢？对大多数成年人来说，七到九个小时比较合适。",
+    "py": "Nàme, měitiān shuì duō cháng shíjiān cái gòu ne? Duì dà duōshù chéngnián rén láishuō, qī dào jiǔ gè xiǎoshí bǐjiào héshì.",
+    "vi": "Vậy mỗi ngày ngủ bao lâu mới đủ? Với đa số người trưởng thành, bảy đến chín tiếng là hợp lý."
+   },
+   {
+    "sp": "N",
+    "han": "有人说，周末多睡一点儿就能把平时缺的觉补回来，这种想法并不完全正确。",
+    "py": "Yǒu rén shuō, zhōumò duō shuì yìdiǎnr jiù néng bǎ píngshí quē de jiào bǔ huílai, zhè zhǒng xiǎngfǎ bìng bù wánquán zhèngquè.",
+    "vi": "Có người nói cuối tuần ngủ bù là có thể bù lại giấc ngủ thiếu trong tuần, cách nghĩ này không hoàn toàn đúng."
+   },
+   {
+    "sp": "N",
+    "han": "因为睡眠的规律性同样重要，作息紊乱本身就会打乱身体的生物钟。",
+    "py": "Yīnwèi shuìmiàn de guīlǜxìng tóngyàng zhòngyào, zuòxī wěnluàn běnshēn jiù huì dǎluàn shēntǐ de shēngwùzhōng.",
+    "vi": "Vì tính đều đặn của giấc ngủ cũng quan trọng không kém, sinh hoạt thất thường tự nó sẽ làm rối loạn đồng hồ sinh học của cơ thể."
+   },
+   {
+    "sp": "N",
+    "han": "改善睡眠的方法并不复杂：固定起床时间，睡前少看手机，保持卧室安静黑暗。",
+    "py": "Gǎishàn shuìmiàn de fāngfǎ bìng bù fùzá: gùdìng qǐchuáng shíjiān, shuì qián shǎo kàn shǒujī, bǎochí wòshì ānjìng hēi'àn.",
+    "vi": "Cách cải thiện giấc ngủ không phức tạp: giờ dậy cố định, trước khi ngủ ít xem điện thoại, giữ phòng ngủ yên tĩnh và tối."
+   },
+   {
+    "sp": "N",
+    "han": "如果长期失眠，靠自己调整没有效果，就应当及时去看医生，而不是随便吃安眠药。",
+    "py": "Rúguǒ chángqī shīmián, kào zìjǐ tiáozhěng méiyǒu xiàoguǒ, jiù yīngdāng jíshí qù kàn yīshēng, ér bùshì suíbiàn chī ānmiányào.",
+    "vi": "Nếu mất ngủ kéo dài, tự điều chỉnh không hiệu quả thì nên đi khám bác sĩ kịp thời, chứ đừng tùy tiện uống thuốc ngủ."
+   },
+   {
+    "sp": "N",
+    "han": "总之，睡眠不是浪费时间，而是大脑和身体恢复的必需过程，请大家认真对待。",
+    "py": "Zǒngzhī, shuìmiàn bùshì làngfèi shíjiān, ér shì dànǎo hé shēntǐ huīfù de bìxū guòchéng, qǐng dàjiā rènzhēn duìdài.",
+    "vi": "Tóm lại, giấc ngủ không phải là lãng phí thời gian, mà là quá trình cần thiết để não và cơ thể hồi phục, mong mọi người nghiêm túc đối đãi với nó."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Theo bài giảng, trong lúc ngủ não đang làm gì?",
+    "o": [
+     "Hoàn toàn ngừng hoạt động",
+     "Chỉ mơ",
+     "Xóa bỏ mọi ký ức",
+     "Sắp xếp kiến thức học được ban ngày"
+    ],
+    "a": 3,
+    "why": "睡眠期间，大脑正在做……整理白天学到的知识：trong lúc ngủ, não đang sắp xếp những kiến thức học được ban ngày."
+   },
+   {
+    "type": "MC",
+    "q": "Thiếu ngủ kéo dài gây ra hậu quả nào?",
+    "o": [
+     "Làm hại trí nhớ, khiến cảm xúc bất ổn và phán đoán giảm sút",
+     "Chỉ khiến người ta buồn ngủ",
+     "Giúp trí nhớ tốt hơn",
+     "Không ảnh hưởng gì"
+    ],
+    "a": 0,
+    "why": "长期睡眠不足会损害记忆力，还会让人情绪不稳定、判断力下降：thiếu ngủ kéo dài sẽ làm hại trí nhớ, còn khiến cảm xúc bất ổn và khả năng phán đoán giảm sút."
+   },
+   {
+    "type": "MC",
+    "q": "Người trưởng thành nên ngủ bao lâu mỗi ngày?",
+    "o": [
+     "5–6 tiếng",
+     "6–7 tiếng",
+     "7–9 tiếng",
+     "10–12 tiếng"
+    ],
+    "a": 2,
+    "why": "七到九个小时比较合适：bảy đến chín tiếng là hợp lý."
+   },
+   {
+    "type": "MC",
+    "q": "Theo bài giảng, vì sao ngủ bù cuối tuần không hoàn toàn đúng?",
+    "o": [
+     "Vì cuối tuần ngủ nhiều sẽ mệt hơn",
+     "Vì tính đều đặn của giấc ngủ cũng quan trọng, sinh hoạt thất thường làm rối loạn đồng hồ sinh học",
+     "Vì ban ngày không thể ngủ sâu",
+     "Vì thuốc ngủ gây hại"
+    ],
+    "a": 1,
+    "why": "睡眠的规律性同样重要，作息紊乱本身就会打乱身体的生物钟：tính đều đặn của giấc ngủ cũng quan trọng, sinh hoạt thất thường làm rối loạn đồng hồ sinh học."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-8",
+  "stage": 6,
+  "title": "Đô thị hóa và công bằng xã hội",
+  "topic": "Xã hội",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "过去三十年，中国的城市化进程之快，在世界历史上都是罕见的。",
+    "py": "Guòqù sānshí nián, Zhōngguó de chéngshìhuà jìnchéng zhī kuài, zài shìjiè lìshǐ shàng dōu shì hǎnjiàn de.",
+    "vi": "Ba mươi năm qua, tốc độ đô thị hóa của Trung Quốc nhanh đến mức hiếm thấy trong lịch sử thế giới."
+   },
+   {
+    "sp": "N",
+    "han": "大量农村人口涌入城市，带来了劳动力，也带来了新的社会问题。",
+    "py": "Dàliàng nóngcūn rénkǒu yǒngrù chéngshì, dàilái le láodònglì, yě dàilái le xīn de shèhuì wèntí.",
+    "vi": "Lượng lớn dân nông thôn đổ vào thành phố, mang đến lực lượng lao động, đồng thời mang đến những vấn đề xã hội mới."
+   },
+   {
+    "sp": "N",
+    "han": "最突出的问题之一，是外来务工人员的子女教育问题。",
+    "py": "Zuì tūchū de wèntí zhī yī, shì wàilái wùgōng rényuán de zǐnǚ jiàoyù wèntí.",
+    "vi": "Một trong những vấn đề nổi bật nhất là giáo dục con cái của lao động nhập cư."
+   },
+   {
+    "sp": "N",
+    "han": "很多孩子跟着父母来到城市，却因为户籍限制，难以进入公立学校。",
+    "py": "Hěn duō háizi gēnzhe fùmǔ láidào chéngshì, què yīnwèi hùjí xiànzhì, nányǐ jìnrù gōnglì xuéxiào.",
+    "vi": "Nhiều trẻ em theo cha mẹ đến thành phố, nhưng vì hạn chế hộ khẩu nên khó vào trường công lập."
+   },
+   {
+    "sp": "N",
+    "han": "与此同时，城市的住房、交通和医疗资源，也面临着巨大的压力。",
+    "py": "Yǔ cǐ tóngshí, chéngshì de zhùfáng, jiāotōng hé yīliáo zīyuán, yě miànlínzhe jùdà de yālì.",
+    "vi": "Cùng lúc đó, nhà ở, giao thông và nguồn lực y tế của thành phố cũng đối mặt với áp lực rất lớn."
+   },
+   {
+    "sp": "N",
+    "han": "有人因此认为，城市化带来的弊大于利，这种看法过于简单。",
+    "py": "Yǒu rén yīncǐ rènwéi, chéngshìhuà dàilái de bì dà yú lì, zhè zhǒng kànfǎ guòyú jiǎndān.",
+    "vi": "Có người vì thế cho rằng đô thị hóa hại nhiều hơn lợi, cách nhìn này quá đơn giản."
+   },
+   {
+    "sp": "N",
+    "han": "事实上，城市化也创造了大量的就业机会，提高了整体的生活水平。",
+    "py": "Shìshí shàng, chéngshìhuà yě chuàngzào le dàliàng de jiùyè jīhuì, tígāo le zhěngtǐ de shēnghuó shuǐpíng.",
+    "vi": "Thực tế, đô thị hóa cũng tạo ra nhiều cơ hội việc làm, nâng cao mức sống chung."
+   },
+   {
+    "sp": "N",
+    "han": "许多农民工通过进城务工，收入明显增加，子女也有了更多的选择。",
+    "py": "Xǔduō nóngmíngōng tōngguò jìnchéng wùgōng, shōurù míngxiǎn zēngjiā, zǐnǚ yě yǒu le gèng duō de xuǎnzé.",
+    "vi": "Nhiều lao động nông thôn nhờ vào thành phố làm việc mà thu nhập tăng rõ rệt, con cái cũng có thêm nhiều lựa chọn."
+   },
+   {
+    "sp": "N",
+    "han": "关键的问题不是要不要城市化，而是如何让城市化更加公平和包容。",
+    "py": "Guānjiàn de wèntí bùshì yào bùyào chéngshìhuà, ér shì rúhé ràng chéngshìhuà gèngjiā gōngpíng hé bāoróng.",
+    "vi": "Vấn đề then chốt không phải là có nên đô thị hóa hay không, mà là làm sao để đô thị hóa công bằng và bao dung hơn."
+   },
+   {
+    "sp": "N",
+    "han": "比如，改革户籍制度，扩大保障性住房，让更多人真正融入城市生活。",
+    "py": "Bǐrú, gǎigé hùjí zhìdù, kuòdà bǎozhàngxìng zhùfáng, ràng gèng duō rén zhēnzhèng róngrù chéngshì shēnghuó.",
+    "vi": "Ví dụ, cải cách chế độ hộ khẩu, mở rộng nhà ở bảo đảm, để nhiều người hơn thực sự hòa nhập vào đời sống thành phố."
+   },
+   {
+    "sp": "N",
+    "han": "只有这样，城市化才能从单纯的人口流动，变成真正的社会进步。",
+    "py": "Zhǐyǒu zhèyàng, chéngshìhuà cái néng cóng dānchún de rénkǒu liúdòng, biànchéng zhēnzhèng de shèhuì jìnbù.",
+    "vi": "Chỉ như vậy, đô thị hóa mới có thể từ dòng chảy dân số đơn thuần trở thành tiến bộ xã hội thật sự."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Vấn đề nổi bật nhất được nêu về lao động nhập cư là gì?",
+    "o": [
+     "Giáo dục con cái của họ",
+     "Thu nhập quá thấp",
+     "Không tìm được việc làm",
+     "Không quen với khí hậu thành phố"
+    ],
+    "a": 0,
+    "why": "最突出的问题之一，是外来务工人员的子女教育问题：một trong những vấn đề nổi bật nhất là giáo dục con cái của lao động nhập cư."
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao nhiều trẻ em khó vào trường công lập?",
+    "o": [
+     "Vì trường công quá xa",
+     "Vì học phí quá cao",
+     "Vì hạn chế hộ khẩu",
+     "Vì không đủ tuổi"
+    ],
+    "a": 2,
+    "why": "因为户籍限制，难以进入公立学校：vì hạn chế hộ khẩu nên khó vào trường công lập."
+   },
+   {
+    "type": "MC",
+    "q": "Tác giả cho rằng quan điểm “đô thị hóa hại nhiều hơn lợi” như thế nào?",
+    "o": [
+     "Hoàn toàn đúng",
+     "Quá đơn giản",
+     "Rất sâu sắc",
+     "Chưa ai đưa ra"
+    ],
+    "a": 1,
+    "why": "这种看法过于简单：cách nhìn này quá đơn giản."
+   },
+   {
+    "type": "MC",
+    "q": "Theo bài giảng, vấn đề then chốt của đô thị hóa là gì?",
+    "o": [
+     "Ngăn chặn dân nông thôn vào thành phố",
+     "Xây thêm nhà cao tầng",
+     "Giảm tốc độ đô thị hóa",
+     "Làm sao để đô thị hóa công bằng và bao dung hơn"
+    ],
+    "a": 3,
+    "why": "关键的问题不是要不要城市化，而是如何让城市化更加公平和包容：vấn đề then chốt không phải là có nên đô thị hóa hay không, mà là làm sao để đô thị hóa công bằng và bao dung hơn."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-9",
+  "stage": 6,
+  "title": "Phỏng vấn nhà văn",
+  "topic": "Văn học",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "王老师，您的新小说刚刚出版，读者反响很好。您写作的时候，最看重什么？",
+    "py": "Wáng lǎoshī, nín de xīn xiǎoshuō gānggāng chūbǎn, dúzhě fǎnxiǎng hěn hǎo. Nín xiězuò de shíhou, zuì kànzhòng shénme?",
+    "vi": "Thầy Vương, tiểu thuyết mới của thầy vừa xuất bản, độc giả phản hồi rất tốt. Khi viết, thầy coi trọng điều gì nhất?"
+   },
+   {
+    "sp": "B",
+    "han": "我最看重真实。人物可以虚构，但感情必须是真的，读者一眼就能看出来。",
+    "py": "Wǒ zuì kànzhòng zhēnshí. Rénwù kěyǐ xūgòu, dàn gǎnqíng bìxū shì zhēn de, dúzhě yí yǎn jiù néng kàn chūlai.",
+    "vi": "Tôi coi trọng nhất là sự chân thật. Nhân vật có thể hư cấu, nhưng cảm xúc phải thật, độc giả nhìn một cái là nhận ra ngay."
+   },
+   {
+    "sp": "A",
+    "han": "可是现在很多畅销书都在追求情节刺激，您不担心自己的书太慢吗？",
+    "py": "Kěshì xiànzài hěn duō chàngxiāoshū dōu zài zhuīqiú qíngjié cìjī, nín bù dānxīn zìjǐ de shū tài màn ma?",
+    "vi": "Nhưng hiện nay nhiều sách bán chạy đều theo đuổi tình tiết gây cấn, thầy không lo sách của mình quá chậm sao?"
+   },
+   {
+    "sp": "B",
+    "han": "快节奏当然能吸引眼球，但真正留住读者的，是人物内心的变化。",
+    "py": "Kuài jiézòu dāngrán néng xīyǐn yǎnqiú, dàn zhēnzhèng liúzhù dúzhě de, shì rénwù nèixīn de biànhuà.",
+    "vi": "Nhịp nhanh tất nhiên thu hút ánh mắt, nhưng thứ thực sự giữ chân độc giả là sự thay đổi trong nội tâm nhân vật."
+   },
+   {
+    "sp": "A",
+    "han": "您写这部小说花了多长时间？",
+    "py": "Nín xiě zhè bù xiǎoshuō huā le duō cháng shíjiān?",
+    "vi": "Thầy viết cuốn tiểu thuyết này mất bao lâu?"
+   },
+   {
+    "sp": "B",
+    "han": "整整五年。前三年我只是在观察和记录，真正动笔只有两年。",
+    "py": "Zhěngzhěng wǔ nián. Qián sān nián wǒ zhǐshì zài guānchá hé jìlù, zhēnzhèng dòngbǐ zhǐyǒu liǎng nián.",
+    "vi": "Trọn vẹn năm năm. Ba năm đầu tôi chỉ quan sát và ghi chép, thực sự cầm bút chỉ có hai năm."
+   },
+   {
+    "sp": "A",
+    "han": "五年只写一本书，您的家人支持吗？",
+    "py": "Wǔ nián zhǐ xiě yì běn shū, nín de jiārén zhīchí ma?",
+    "vi": "Năm năm chỉ viết một cuốn sách, gia đình thầy có ủng hộ không?"
+   },
+   {
+    "sp": "B",
+    "han": "开始不太理解，后来看到初稿，他们成了我最严格的读者。",
+    "py": "Kāishǐ bù tài lǐjiě, hòulái kàndào chūgǎo, tāmen chéng le wǒ zuì yángé de dúzhě.",
+    "vi": "Lúc đầu không hiểu lắm, sau khi đọc bản thảo đầu, họ trở thành những độc giả nghiêm khắc nhất của tôi."
+   },
+   {
+    "sp": "A",
+    "han": "年轻作者常常问，怎样才能写出好作品？您会给他们什么建议？",
+    "py": "Niánqīng zuòzhě chángcháng wèn, zěnyàng cái néng xiěchū hǎo zuòpǐn? Nín huì gěi tāmen shénme jiànyì?",
+    "vi": "Các tác giả trẻ thường hỏi làm sao để viết được tác phẩm hay, thầy sẽ khuyên họ điều gì?"
+   },
+   {
+    "sp": "B",
+    "han": "我的建议很简单：先学会生活，再学会写作。没有生活，技巧只是空壳。",
+    "py": "Wǒ de jiànyì hěn jiǎndān: xiān xuéhuì shēnghuó, zài xuéhuì xiězuò. Méiyǒu shēnghuó, jìqiǎo zhǐshì kōngké.",
+    "vi": "Lời khuyên của tôi rất đơn giản: học sống trước, rồi mới học viết. Không có cuộc sống, kỹ thuật chỉ là cái vỏ rỗng."
+   },
+   {
+    "sp": "A",
+    "han": "谢谢王老师，今天的采访就到这里。",
+    "py": "Xièxie Wáng lǎoshī, jīntiān de cǎifǎng jiù dào zhèlǐ.",
+    "vi": "Cảm ơn thầy Vương, buổi phỏng vấn hôm nay đến đây là hết."
+   },
+   {
+    "sp": "B",
+    "han": "谢谢，也希望读者喜欢这本书。",
+    "py": "Xièxie, yě xīwàng dúzhě xǐhuan zhè běn shū.",
+    "vi": "Cảm ơn, cũng mong độc giả yêu thích cuốn sách này."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Nhà văn coi trọng nhất điều gì khi viết?",
+    "o": [
+     "Tình tiết gây cấn",
+     "Sự chân thật trong cảm xúc",
+     "Nhịp độ nhanh",
+     "Số lượng nhân vật"
+    ],
+    "a": 1,
+    "why": "我最看重真实……感情必须是真的：tôi coi trọng nhất là sự chân thật, cảm xúc phải thật."
+   },
+   {
+    "type": "MC",
+    "q": "Theo nhà văn, điều gì thực sự giữ chân độc giả?",
+    "o": [
+     "Tình tiết bất ngờ",
+     "Nhân vật đẹp",
+     "Sự thay đổi trong nội tâm nhân vật",
+     "Bối cảnh kỳ lạ"
+    ],
+    "a": 2,
+    "why": "真正留住读者的，是人物内心的变化：thứ thực sự giữ chân độc giả là sự thay đổi trong nội tâm nhân vật."
+   },
+   {
+    "type": "MC",
+    "q": "Nhà văn viết cuốn tiểu thuyết này mất bao lâu?",
+    "o": [
+     "Trọn vẹn 5 năm",
+     "3 năm",
+     "2 năm",
+     "7 năm"
+    ],
+    "a": 0,
+    "why": "整整五年：trọn vẹn năm năm."
+   },
+   {
+    "type": "MC",
+    "q": "Ba năm đầu nhà văn chủ yếu làm gì?",
+    "o": [
+     "Viết bản thảo",
+     "Đi du lịch lấy cảm hứng",
+     "Tìm nhà xuất bản",
+     "Quan sát và ghi chép"
+    ],
+    "a": 3,
+    "why": "前三年我只是在观察和记录：ba năm đầu tôi chỉ quan sát và ghi chép."
+   },
+   {
+    "type": "MC",
+    "q": "Lời khuyên của nhà văn dành cho tác giả trẻ là gì?",
+    "o": [
+     "Học kỹ thuật viết trước",
+     "Học sống trước, rồi mới học viết",
+     "Viết càng nhanh càng tốt",
+     "Chỉ viết về những gì mình thích"
+    ],
+    "a": 1,
+    "why": "先学会生活，再学会写作：học sống trước, rồi mới học viết."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-10",
+  "stage": 6,
+  "title": "Tranh luận: giáo dục trực tuyến",
+  "topic": "Tranh luận",
+  "lines": [
+   {
+    "sp": "A",
+    "han": "线上教育发展这么快，传统课堂会不会有一天被完全取代？",
+    "py": "Xiànshàng jiàoyù fāzhǎn zhème kuài, chuántǒng kètáng huì bù huì yǒu yì tiān bèi wánquán qǔdài?",
+    "vi": "Giáo dục trực tuyến phát triển nhanh như vậy, lớp học truyền thống liệu có ngày bị thay thế hoàn toàn không?"
+   },
+   {
+    "sp": "B",
+    "han": "我认为不会。线上教育方便灵活，但它代替不了面对面的交流和情感互动。",
+    "py": "Wǒ rènwéi bù huì. Xiànshàng jiàoyù fāngbiàn línghuó, dàn tā dàitì bùliǎo miànduìmiàn de jiāoliú hé qínggǎn hùdòng.",
+    "vi": "Tôi cho là không. Giáo dục trực tuyến tiện lợi linh hoạt, nhưng nó không thay thế được giao tiếp trực tiếp và tương tác cảm xúc."
+   },
+   {
+    "sp": "A",
+    "han": "可是，线上课程可以请到最好的老师，农村的孩子也能听到名校的课，这是传统课堂做不到的。",
+    "py": "Kěshì, xiànshàng kèchéng kěyǐ qǐng dào zuì hǎo de lǎoshī, nóngcūn de háizi yě néng tīngdào míngxiào de kè, zhè shì chuántǒng kètáng zuò bù dào de.",
+    "vi": "Nhưng khóa học trực tuyến có thể mời được giáo viên giỏi nhất, trẻ em nông thôn cũng nghe được bài giảng của trường danh tiếng, điều lớp học truyền thống không làm được."
+   },
+   {
+    "sp": "B",
+    "han": "这确实是线上教育的优势。但是，学习不只是听课，还需要讨论、合作和及时的反馈。",
+    "py": "Zhè quèshí shì xiànshàng jiàoyù de yōushi. Dànshì, xuéxí bù zhǐshì tīngkè, hái xūyào tǎolùn, hézuò hé jíshí de fǎnkuì.",
+    "vi": "Đây đúng là ưu thế của giáo dục trực tuyến. Nhưng học tập không chỉ là nghe giảng, còn cần thảo luận, hợp tác và phản hồi kịp thời."
+   },
+   {
+    "sp": "A",
+    "han": "现在的线上平台也有讨论区和作业批改，互动并不比课堂差。",
+    "py": "Xiànzài de xiànshàng píngtái yě yǒu tǎolùnqū hé zuòyè pīgǎi, hùdòng bìng bù bǐ kètáng chà.",
+    "vi": "Các nền tảng trực tuyến hiện nay cũng có diễn đàn thảo luận và chấm bài tập, tương tác không hề thua lớp học."
+   },
+   {
+    "sp": "B",
+    "han": "形式上的互动和真正的课堂氛围还是不一样的。很多学生在线上容易分心，坚持不下去。",
+    "py": "Xíngshì shàng de hùdòng hé zhēnzhèng de kètáng fēnwéi háishi bù yíyàng de. Hěn duō xuésheng zài xiànshàng róngyì fēnxīn, jiānchí bù xiàqu.",
+    "vi": "Tương tác trên hình thức vẫn khác với bầu không khí lớp học thật. Nhiều học sinh học trực tuyến dễ mất tập trung, khó kiên trì."
+   },
+   {
+    "sp": "A",
+    "han": "那你觉得未来的教育会是什么样子？",
+    "py": "Nà nǐ juéde wèilái de jiàoyù huì shì shénme yàngzi?",
+    "vi": "Vậy bạn thấy giáo dục tương lai sẽ ra sao?"
+   },
+   {
+    "sp": "B",
+    "han": "我认为会是线上和线下的结合：知识传授在线上完成，课堂主要用来讨论、实践和解决问题。",
+    "py": "Wǒ rènwéi huì shì xiànshàng hé xiànxià de jiéhé: zhīshi chuánshòu zài xiànshàng wánchéng, kètáng zhǔyào yòng lái tǎolùn, shíjiàn hé jiějué wèntí.",
+    "vi": "Tôi cho rằng sẽ là sự kết hợp trực tuyến và trực tiếp: truyền thụ kiến thức hoàn thành trực tuyến, lớp học chủ yếu dùng để thảo luận, thực hành và giải quyết vấn đề."
+   },
+   {
+    "sp": "A",
+    "han": "这个设想很有道理，老师的角色也会从讲授者变成引导者。",
+    "py": "Zhège shèxiǎng hěn yǒu dàolǐ, lǎoshī de juésè yě huì cóng jiǎngshòuzhě biànchéng yǐndǎozhě.",
+    "vi": "Giả thiết này rất có lý, vai trò của giáo viên cũng sẽ chuyển từ người giảng bài thành người dẫn dắt."
+   },
+   {
+    "sp": "B",
+    "han": "没错，未来的竞争不是线上和线下的竞争，而是谁能把两者结合得更好。",
+    "py": "Méi cuò, wèilái de jìngzhēng bùshì xiànshàng hé xiànxià de jìngzhēng, ér shì shéi néng bǎ liǎngzhě jiéhé de gèng hǎo.",
+    "vi": "Đúng vậy, cạnh tranh tương lai không phải là cạnh tranh giữa trực tuyến và trực tiếp, mà là ai kết hợp hai bên tốt hơn."
+   },
+   {
+    "sp": "A",
+    "han": "看来我们达成了共识，今天的讨论很有收获。",
+    "py": "Kànlai wǒmen dáchéng le gòngshí, jīntiān de tǎolùn hěn yǒu shōuhuò.",
+    "vi": "Có vẻ chúng ta đã đạt được đồng thuận, cuộc thảo luận hôm nay rất bổ ích."
+   },
+   {
+    "sp": "B",
+    "han": "是的，希望下次再一起讨论。",
+    "py": "Shì de, xīwàng xià cì zài yìqǐ tǎolùn.",
+    "vi": "Đúng vậy, hy vọng lần sau lại cùng thảo luận."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "B cho rằng giáo dục trực tuyến không thay thế được điều gì?",
+    "o": [
+     "Giáo viên giỏi",
+     "Bài giảng hay",
+     "Giao tiếp trực tiếp và tương tác cảm xúc",
+     "Học phí thấp"
+    ],
+    "a": 2,
+    "why": "它代替不了面对面的交流和情感互动：nó không thay thế được giao tiếp trực tiếp và tương tác cảm xúc."
+   },
+   {
+    "type": "MC",
+    "q": "Theo A, ưu thế lớn nhất của khóa học trực tuyến là gì?",
+    "o": [
+     "Trẻ em nông thôn cũng nghe được bài giảng của trường danh tiếng",
+     "Học phí rẻ",
+     "Không cần làm bài tập",
+     "Có thể học lúc nửa đêm"
+    ],
+    "a": 0,
+    "why": "农村的孩子也能听到名校的课：trẻ em nông thôn cũng nghe được bài giảng của trường danh tiếng."
+   },
+   {
+    "type": "MC",
+    "q": "B cho rằng học tập ngoài nghe giảng còn cần những gì?",
+    "o": [
+     "Chỉ cần ghi chép",
+     "Chỉ cần xem video",
+     "Chỉ cần làm bài kiểm tra",
+     "Thảo luận, hợp tác và phản hồi kịp thời"
+    ],
+    "a": 3,
+    "why": "学习不只是听课，还需要讨论、合作和及时的反馈：học tập không chỉ là nghe giảng, còn cần thảo luận, hợp tác và phản hồi kịp thời."
+   },
+   {
+    "type": "MC",
+    "q": "Theo B, khó khăn lớn nhất của học sinh khi học trực tuyến là gì?",
+    "o": [
+     "Không có sách giáo khoa",
+     "Dễ mất tập trung, khó kiên trì",
+     "Không có giáo viên",
+     "Mạng quá chậm"
+    ],
+    "a": 1,
+    "why": "很多学生在线上容易分心，坚持不下去：nhiều học sinh học trực tuyến dễ mất tập trung, khó kiên trì."
+   },
+   {
+    "type": "MC",
+    "q": "Hai người thống nhất mô hình giáo dục tương lai như thế nào?",
+    "o": [
+     "Chỉ còn lớp học truyền thống",
+     "Chỉ còn giáo dục trực tuyến",
+     "Kết hợp trực tuyến và trực tiếp: kiến thức trực tuyến, lớp học để thảo luận và thực hành",
+     "Giáo viên không còn cần thiết"
+    ],
+    "a": 2,
+    "why": "线上和线下的结合：知识传授在线上完成，课堂主要用来讨论、实践和解决问题：kết hợp trực tuyến và trực tiếp, truyền thụ kiến thức hoàn thành trực tuyến, lớp học chủ yếu dùng để thảo luận, thực hành và giải quyết vấn đề."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-11",
+  "stage": 6,
+  "title": "Con đường Tơ lụa",
+  "topic": "Lịch sử",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "今天我们回到两千年前，看看丝绸之路如何改变了世界。",
+    "py": "Jīntiān wǒmen huídào liǎngqiān nián qián, kànkan Sīchóu zhī Lù rúhé gǎibiàn le shìjiè.",
+    "vi": "Hôm nay chúng ta quay về hai nghìn năm trước, xem Con đường Tơ lụa đã thay đổi thế giới như thế nào."
+   },
+   {
+    "sp": "N",
+    "han": "丝绸之路并不是一条路，而是一个由无数商路组成的交通网络。",
+    "py": "Sīchóu zhī Lù bìng bùshì yì tiáo lù, ér shì yí gè yóu wúshù shānglù zǔchéng de jiāotōng wǎngluò.",
+    "vi": "Con đường Tơ lụa không phải là một con đường, mà là một mạng lưới giao thông gồm vô số tuyến thương mại."
+   },
+   {
+    "sp": "N",
+    "han": "中国的丝绸、瓷器和茶叶沿着这条路向西传播，罗马的玻璃器皿和西域的香料则向东而来。",
+    "py": "Zhōngguó de sīchóu, cíqì hé cháyè yánzhe zhè tiáo lù xiàng xī chuánbō, Luómǎ de bōli qìmǐn hé Xīyù de xiāngliào zé xiàng dōng ér lái.",
+    "vi": "Tơ lụa, đồ sứ và trà của Trung Quốc theo con đường này truyền sang phía Tây, đồ thủy tinh La Mã và hương liệu Tây Vực thì đi sang phía Đông."
+   },
+   {
+    "sp": "N",
+    "han": "但丝绸之路传播的远不只是商品，还有技术、宗教和思想。",
+    "py": "Dàn Sīchóu zhī Lù chuánbō de yuǎn bù zhǐshì shāngpǐn, hái yǒu jìshù, zōngjiào hé sīxiǎng.",
+    "vi": "Nhưng Con đường Tơ lụa truyền bá còn xa hơn hàng hóa, còn có kỹ thuật, tôn giáo và tư tưởng."
+   },
+   {
+    "sp": "N",
+    "han": "比如，造纸术就是沿着这条路传到中亚，再传到欧洲的。",
+    "py": "Bǐrú, zàozhǐshù jiùshì yánzhe zhè tiáo lù chuán dào Zhōngyà, zài chuán dào Ōuzhōu de.",
+    "vi": "Ví dụ, kỹ thuật làm giấy chính là theo con đường này truyền đến Trung Á, rồi truyền sang châu Âu."
+   },
+   {
+    "sp": "N",
+    "han": "佛教也是从印度出发，经过丝绸之路传入中国，并在中国扎根发展。",
+    "py": "Fójiào yě shì cóng Yìndù chūfā, jīngguò Sīchóu zhī Lù chuánrù Zhōngguó, bìng zài Zhōngguó zhāgēn fāzhǎn.",
+    "vi": "Phật giáo cũng xuất phát từ Ấn Độ, qua Con đường Tơ lụa truyền vào Trung Quốc và bén rễ phát triển tại đây."
+   },
+   {
+    "sp": "N",
+    "han": "值得注意的是，这种交流从来不是单向的，而是双向的、平等的。",
+    "py": "Zhíde zhùyì de shì, zhè zhǒng jiāoliú cónglái bùshì dānxiàng de, ér shì shuāngxiàng de, píngděng de.",
+    "vi": "Đáng chú ý là, sự giao lưu này chưa bao giờ là một chiều, mà là hai chiều và bình đẳng."
+   },
+   {
+    "sp": "N",
+    "han": "沿途的商人、僧侣和使节，既是商品的搬运者，也是文化的传播者。",
+    "py": "Yántú de shāngrén, sēnglǚ hé shǐjié, jì shì shāngpǐn de bānyùnzhe, yě shì wénhuà de chuánbōzhě.",
+    "vi": "Thương nhân, tăng lữ và sứ giả dọc đường vừa là người vận chuyển hàng hóa, vừa là người truyền bá văn hóa."
+   },
+   {
+    "sp": "N",
+    "han": "丝绸之路的衰落，不是因为某一次战争，而是因为海上贸易的兴起。",
+    "py": "Sīchóu zhī Lù de shuāiluò, bùshì yīnwèi mǒu yí cì zhànzhēng, ér shì yīnwèi hǎishàng màoyì de xīngqǐ.",
+    "vi": "Sự suy tàn của Con đường Tơ lụa không phải vì một cuộc chiến tranh nào, mà vì thương mại đường biển nổi lên."
+   },
+   {
+    "sp": "N",
+    "han": "海运成本更低、运量更大，陆上商路渐渐失去了优势。",
+    "py": "Hǎiyùn chéngběn gèng dī, yùnliàng gèng dà, lùshàng shānglù jiànjiàn shīqù le yōushì.",
+    "vi": "Vận tải biển chi phí thấp hơn, khối lượng lớn hơn, tuyến thương mại trên bộ dần mất đi ưu thế."
+   },
+   {
+    "sp": "N",
+    "han": "今天我们重提丝绸之路，不仅是为了怀念历史，更是为了理解文明之间如何和平共处。",
+    "py": "Jīntiān wǒmen chóng tí Sīchóu zhī Lù, bù jǐn shì wèile huáiniàn lìshǐ, gèng shì wèile lǐjiě wénmíng zhījiān rúhé hépíng gòngchǔ.",
+    "vi": "Hôm nay chúng ta nhắc lại Con đường Tơ lụa không chỉ để hoài niệm lịch sử, mà còn để hiểu các nền văn minh chung sống hòa bình như thế nào."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Con đường Tơ lụa thực chất là gì?",
+    "o": [
+     "Một con đường duy nhất từ Trung Quốc đến La Mã",
+     "Một mạng lưới giao thông gồm vô số tuyến thương mại",
+     "Một tuyến đường biển",
+     "Một con đường chỉ dành cho sứ giả"
+    ],
+    "a": 1,
+    "why": "而是一个由无数商路组成的交通网络：mà là một mạng lưới giao thông gồm vô số tuyến thương mại."
+   },
+   {
+    "type": "MC",
+    "q": "Ngoài hàng hóa, Con đường Tơ lụa còn truyền bá những gì?",
+    "o": [
+     "Chỉ có tơ lụa",
+     "Chỉ có vàng bạc",
+     "Kỹ thuật, tôn giáo và tư tưởng",
+     "Chỉ có vũ khí"
+    ],
+    "a": 2,
+    "why": "还有技术、宗教和思想：còn có kỹ thuật, tôn giáo và tư tưởng."
+   },
+   {
+    "type": "MC",
+    "q": "Kỹ thuật làm giấy truyền sang châu Âu theo con đường nào?",
+    "o": [
+     "Theo Con đường Tơ lụa, qua Trung Á rồi sang châu Âu",
+     "Theo đường biển trực tiếp",
+     "Do thương nhân châu Âu tự phát minh",
+     "Theo Con đường Tơ lụa từ châu Âu về Trung Quốc"
+    ],
+    "a": 0,
+    "why": "造纸术就是沿着这条路传到中亚，再传到欧洲的：kỹ thuật làm giấy chính là theo con đường này truyền đến Trung Á, rồi truyền sang châu Âu."
+   },
+   {
+    "type": "MC",
+    "q": "Theo bài giảng, Con đường Tơ lụa suy tàn vì lý do gì?",
+    "o": [
+     "Vì một cuộc chiến tranh lớn",
+     "Vì thiếu thương nhân",
+     "Vì dịch bệnh",
+     "Vì thương mại đường biển nổi lên, chi phí thấp hơn và khối lượng lớn hơn"
+    ],
+    "a": 3,
+    "why": "不是因为某一次战争，而是因为海上贸易的兴起；海运成本更低、运量更大：không phải vì một cuộc chiến tranh nào, mà vì thương mại đường biển nổi lên; vận tải biển chi phí thấp hơn, khối lượng lớn hơn."
+   }
+  ]
+ },
+ {
+  "hsk": 6,
+  "id": "zh-mock-l6-12",
+  "stage": 6,
+  "title": "Kinh tế chia sẻ: cơ hội và thách thức",
+  "topic": "Kinh tế",
+  "lines": [
+   {
+    "sp": "N",
+    "han": "共享经济是近十年最引人注目的经济现象之一，从共享单车到共享办公，无处不在。",
+    "py": "Gòngxiǎng jīngjì shì jìn shí nián zuì yǐn rén zhùmù de jīngjì xiànxiàng zhī yī, cóng gòngxiǎng dānchē dào gòngxiǎng bàngōng, wúchù bù zài.",
+    "vi": "Kinh tế chia sẻ là một trong những hiện tượng kinh tế đáng chú ý nhất trong mười năm gần đây, từ xe đạp chia sẻ đến văn phòng chia sẻ, đâu đâu cũng có."
+   },
+   {
+    "sp": "N",
+    "han": "它的核心理念很简单：把闲置的资源利用起来，让所有者获得收入，让使用者减少成本。",
+    "py": "Tā de héxīn lǐniàn hěn jiǎndān: bǎ xiánzhì de zīyuán lìyòng qǐlai, ràng suǒyǒuzhě huòdé shōurù, ràng shǐyòngzhě jiǎnshǎo chéngběn.",
+    "vi": "Ý tưởng cốt lõi của nó rất đơn giản: tận dụng nguồn lực nhàn rỗi, để chủ sở hữu có thu nhập, để người dùng giảm chi phí."
+   },
+   {
+    "sp": "N",
+    "han": "比如，一辆私家车每天平均只有不到一个小时在使用，共享可以大大提高它的利用率。",
+    "py": "Bǐrú, yí liàng sījiāchē měitiān píngjūn zhǐyǒu bù dào yí gè xiǎoshí zài shǐyòng, gòngxiǎng kěyǐ dàdà tígāo tā de lìyònglǜ.",
+    "vi": "Ví dụ, một chiếc xe riêng mỗi ngày trung bình chỉ được sử dụng chưa đầy một giờ, chia sẻ có thể nâng cao đáng kể hiệu suất sử dụng của nó."
+   },
+   {
+    "sp": "N",
+    "han": "但是，共享经济的快速发展也带来了一系列问题。",
+    "py": "Dànshì, gòngxiǎng jīngjì de kuàisù fāzhǎn yě dàilái le yí xìliè wèntí.",
+    "vi": "Nhưng sự phát triển nhanh chóng của kinh tế chia sẻ cũng mang đến một loạt vấn đề."
+   },
+   {
+    "sp": "N",
+    "han": "最突出的是监管问题：共享平台上的服务提供者，算不算正式员工？出了事故，谁来负责？",
+    "py": "Zuì tūchū de shì jiānguǎn wèntí: gòngxiǎng píngtái shàng de fúwù tígōngzhě, suàn bù suàn zhèngshì yuángōng? Chū le shìgù, shéi lái fùzé?",
+    "vi": "Nổi bật nhất là vấn đề quản lý: người cung cấp dịch vụ trên nền tảng chia sẻ có tính là nhân viên chính thức không? Xảy ra tai nạn thì ai chịu trách nhiệm?"
+   },
+   {
+    "sp": "N",
+    "han": "很多国家至今没有明确的法律答案，平台和劳动者之间经常发生纠纷。",
+    "py": "Hěn duō guójiā zhìjīn méiyǒu míngquè de fǎlǜ dá'àn, píngtái hé láodòngzhě zhījiān jīngcháng fāshēng jiūfēn.",
+    "vi": "Nhiều quốc gia đến nay vẫn chưa có câu trả lời pháp lý rõ ràng, giữa nền tảng và người lao động thường xuyên xảy ra tranh chấp."
+   },
+   {
+    "sp": "N",
+    "han": "其次是信任问题。陌生人之间的交易，离不开评价系统和信用机制。",
+    "py": "Qícì shì xìnrèn wèntí. Mòshēng rén zhījiān de jiāoyì, lí bù kāi píngjià xìtǒng hé xìnyòng jīzhì.",
+    "vi": "Thứ hai là vấn đề tin cậy. Giao dịch giữa những người xa lạ không thể tách rời hệ thống đánh giá và cơ chế tín dụng."
+   },
+   {
+    "sp": "N",
+    "han": "一旦评价造假，整个模式的基础就会动摇。",
+    "py": "Yí dàn píngjià zàojiǎ, zhěnggè móshì de jīchǔ jiù huì dòngyáo.",
+    "vi": "Một khi đánh giá bị làm giả, nền tảng của cả mô hình sẽ lung lay."
+   },
+   {
+    "sp": "N",
+    "han": "尽管如此，专家普遍认为，共享经济的方向是对的，问题在于如何完善规则。",
+    "py": "Jǐnguǎn rúcǐ, zhuānjiā pǔbiàn rènwéi, gòngxiǎng jīngjì de fāngxiàng shì duì de, wèntí zàiyú rúhé wánshàn guīzé.",
+    "vi": "Dù vậy, các chuyên gia nhìn chung cho rằng hướng đi của kinh tế chia sẻ là đúng, vấn đề nằm ở chỗ làm sao hoàn thiện quy tắc."
+   },
+   {
+    "sp": "N",
+    "han": "未来的关键，是在鼓励创新和保护劳动者之间找到平衡。",
+    "py": "Wèilái de guānjiàn, shì zài gǔlì chuàngxīn hé bǎohù láodòngzhě zhījiān zhǎodào pínghéng.",
+    "vi": "Mấu chốt của tương lai là tìm được sự cân bằng giữa khuyến khích đổi mới và bảo vệ người lao động."
+   },
+   {
+    "sp": "N",
+    "han": "只有规则跟上了，共享经济才能真正实现它“人人受益”的承诺。",
+    "py": "Zhǐyǒu guīzé gēn shàng le, gòngxiǎng jīngjì cái néng zhēnzhèng shíxiàn tā “rénrén shòuyì” de chéngnuò.",
+    "vi": "Chỉ khi quy tắc theo kịp, kinh tế chia sẻ mới thực sự thực hiện được lời hứa “ai cũng được lợi” của nó."
+   }
+  ],
+  "note": "Đoạn hội thoại tự soạn cho thi thử (mock-only, không dùng lại đoạn luyện tập). Nghe bằng giọng đọc máy zh-CN, không phải audio thu sẵn.",
+  "questions": [
+   {
+    "type": "MC",
+    "q": "Ý tưởng cốt lõi của kinh tế chia sẻ là gì?",
+    "o": [
+     "Tận dụng nguồn lực nhàn rỗi, chủ sở hữu có thu nhập, người dùng giảm chi phí",
+     "Bán càng nhiều hàng càng tốt",
+     "Để chính phủ quản lý mọi giao dịch",
+     "Khuyến khích mọi người mua xe riêng"
+    ],
+    "a": 0,
+    "why": "把闲置的资源利用起来，让所有者获得收入，让使用者减少成本：tận dụng nguồn lực nhàn rỗi, để chủ sở hữu có thu nhập, để người dùng giảm chi phí."
+   },
+   {
+    "type": "MC",
+    "q": "Vấn đề quản lý nổi bật nhất của kinh tế chia sẻ là gì?",
+    "o": [
+     "Nền tảng thu phí quá cao",
+     "Người cung cấp dịch vụ có tính là nhân viên chính thức không, xảy ra tai nạn ai chịu trách nhiệm",
+     "Không có đủ người dùng",
+     "Công nghệ quá lạc hậu"
+    ],
+    "a": 1,
+    "why": "共享平台上的服务提供者，算不算正式员工？出了事故，谁来负责？：người cung cấp dịch vụ trên nền tảng chia sẻ có tính là nhân viên chính thức không? Xảy ra tai nạn thì ai chịu trách nhiệm?"
+   },
+   {
+    "type": "MC",
+    "q": "Vì sao hệ thống đánh giá quan trọng với kinh tế chia sẻ?",
+    "o": [
+     "Vì nó giúp tăng giá dịch vụ",
+     "Vì nó giúp quảng cáo",
+     "Vì nó làm cho nền tảng đẹp hơn",
+     "Vì giao dịch giữa người lạ dựa vào đánh giá và tín dụng, đánh giá giả sẽ làm lung lay cả mô hình"
+    ],
+    "a": 3,
+    "why": "陌生人之间的交易，离不开评价系统和信用机制；一旦评价造假，整个模式的基础就会动摇：giao dịch giữa người lạ không thể tách rời hệ thống đánh giá và cơ chế tín dụng; một khi đánh giá bị làm giả, nền tảng của cả mô hình sẽ lung lay."
+   },
+   {
+    "type": "MC",
+    "q": "Theo các chuyên gia, mấu chốt của tương lai kinh tế chia sẻ là gì?",
+    "o": [
+     "Mở rộng càng nhanh càng tốt",
+     "Giảm giá dịch vụ",
+     "Ngừng phát triển nền tảng mới",
+     "Tìm cân bằng giữa khuyến khích đổi mới và bảo vệ người lao động"
+    ],
+    "a": 3,
+    "why": "在鼓励创新和保护劳动者之间找到平衡：tìm được sự cân bằng giữa khuyến khích đổi mới và bảo vệ người lao động."
+   }
+  ]
+ }
+];
 // Dot 2b (26/10/2026): anh xa nay chay theo nhan hsk nen khong can doi logic —
 // them 4 bo hsk "HSK2" la du: chang 2 -> cac chi so bo HSK2 moi, chang 3 ->
 // cac chi so bo HSK3 moi (kiem chung bang test_zh_sets_hsk23.js).
@@ -92215,7 +98482,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "How much are two tickets?", "o": ["60000 dong", "120.000 đồng", "100000 dong", "150000 dong"], "a": 1, "why": "Một vé giá 60000 đồng nên hai vé là 120000 đồng."},
        {"type": "MATCH", "q": "Where does the bus leave from?", "o": ["Stop 2", "Stop 4", "Stop 5"], "a": 1, "why": "Xe khởi hành từ điểm dừng số 4."},
        {"type": "COMP", "q": "The bus arrives at ___.", "answer": "10:15", "why": "Xe 7 giờ 30 tới nơi lúc 10 giờ 15."},
-       {"type": "TF", "q": "The last bus back is at 5:00 in the afternoon.", "o": ["True", "False"], "a": 0, "why": "Câu này đúng vì nhân viên nói chuyến xe cuối về lúc 5 giờ chiều."}
+       {"type": "MC", "q": "What time is the last bus back?", "o": ["At 7:30 in the morning", "At 5:00 in the afternoon", "At 9:00 in the morning", "At 10:15 in the morning"], "a": 1, "why": "Ví dụ: trong đoạn nghe nhân viên nói chuyến xe cuối về lúc 5 giờ chiều. Vì vậy đáp án “At 5:00 in the afternoon” đúng. Các giờ khác là giờ xe đi, không phải xe về. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", "whyOrig": "Ví dụ: trong đoạn nghe nhân viên nói chuyến xe cuối về lúc 5 giờ chiều. Vì vậy đáp án “At 5:00 in the afternoon” đúng. Các giờ khác là giờ xe đi, không phải xe về.", "whyU7": true}
      ]},
     {"section": "Section 1", "band": "Band 2,0", "topic": "Hỏi giờ mở cửa nhà sách",
      "text": "A: Excuse me, what time does the bookshop open? B: It opens at 8 o'clock in the morning, from Monday to Saturday. A: And what time does it close? B: It closes at 9 o'clock in the evening. A: Is it open on Sunday? B: Yes, on Sunday it opens at 9 o'clock and closes at 6 o'clock. A: Thank you. I want to buy notebooks and pens for my children. B: Notebooks are on the first floor, and pens are on the second floor. A: How much is a notebook? B: A notebook costs 15000 dong. A: Good. Do you sell story books for children? B: Yes, children's books are near the front door. There are many funny stories. A: Great. I will come on Sunday morning. B: You are welcome. See you on Sunday!",
@@ -92224,7 +98491,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "What time does the bookshop close on Sunday?", "o": ["At 5 o'clock", "At 6 o'clock", "At 9 o'clock", "At 8 o'clock"], "a": 1, "why": "Chủ nhật nhà sách đóng cửa lúc 6 giờ chiều."},
        {"type": "MATCH", "q": "Where are the pens?", "o": ["On the first floor", "On the second floor", "Near the front door"], "a": 1, "why": "Bút ở tầng hai, vở ở tầng một."},
        {"type": "COMP", "q": "Notebooks are on the ___ floor.", "answer": "first", "why": "Vở ở tầng một theo lời nhân viên."},
-       {"type": "TF", "q": "Children's books are near the front door.", "o": ["True", "False"], "a": 0, "why": "Câu này đúng vì nhân viên nói sách thiếu nhi ở gần cửa trước."}
+       {"type": "COMP", "q": "Children's books are near the ___.", "answer": "front door", "why": "Ví dụ: trong đoạn nghe nhân viên nói sách thiếu nhi ở gần cửa trước, có nhiều truyện vui. Vì vậy đáp án “front door” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", "whyOrig": "Ví dụ: trong đoạn nghe nhân viên nói sách thiếu nhi ở gần cửa trước, có nhiều truyện vui. Vì vậy đáp án “front door” đúng.", "whyU7": true}
      ]},
     {"section": "Section 1", "band": "Band 2,0", "topic": "Thông báo lớp học vẽ cuối tuần",
      "text": "Good morning, students. I have good news about a new drawing class. The class meets on Saturday morning in the art room. It starts at 8 o'clock and finishes at 10 o'clock. Our teacher is Miss Thu. She teaches us to draw animals, flowers and houses. We also draw with colours, and we show our pictures to our friends. The class is free for all students in our school. There are 20 places in the class. You only need to bring pencils and paper. If you want to join, please write your name on the list in Room 3 before Friday. The first lesson is this Saturday. At the end of the month, parents can come and see our pictures. We hope many students join the class. Thank you.",
@@ -92233,7 +98500,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "Who is the teacher?", "o": ["Miss Thu", "Miss Lan", "Mr Tuan", "Mrs Hoa"], "a": 0, "why": "Giáo viên của lớp là cô Thu."},
        {"type": "MATCH", "q": "Where should students write their name to join?", "o": ["Room 3", "Room 5", "The art room"], "a": 0, "why": "Học sinh muốn tham gia ghi tên vào danh sách ở phòng 3."},
        {"type": "COMP", "q": "The class finishes at ___ o'clock.", "answer": "10", "why": "Lớp học kết thúc lúc 10 giờ."},
-       {"type": "TF", "q": "Students must pay for the drawing class.", "o": ["True", "False"], "a": 1, "why": "Câu này sai vì lớp học miễn phí cho mọi học sinh trong trường."}
+       {"type": "MC", "q": "How much must students pay for the drawing class?", "o": ["150000 dong", "20000 dong", "It is free", "100000 dong"], "a": 2, "why": "Ví dụ: trong đoạn nghe thông báo nói lớp học miễn phí cho mọi học sinh trong trường. Vì vậy đáp án “It is free” đúng. Học sinh chỉ cần mang bút chì và giấy. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", "whyOrig": "Ví dụ: trong đoạn nghe thông báo nói lớp học miễn phí cho mọi học sinh trong trường. Vì vậy đáp án “It is free” đúng. Học sinh chỉ cần mang bút chì và giấy.", "whyU7": true}
      ]}
   ]);
   CONTENT.speaking.push.apply(CONTENT.speaking, [
@@ -92611,7 +98878,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "What flavour does the customer choose?", "o": ["Chocolate", "Strawberry", "Vanilla", "Lemon"], "a": 0, "why": "Khách chọn vị sô-cô-la vì con gái thích sô-cô-la."},
        {"type": "MATCH", "q": "When can the customer pick up the cake?", "o": ["On Saturday morning, after 9 o'clock", "On Friday evening", "On Sunday morning"], "a": 0, "why": "Khách có thể lấy bánh vào sáng thứ Bảy, sau 9 giờ."},
        {"type": "COMP", "q": "A medium chocolate cake costs ___ dong.", "answer": "350000", "why": "Bánh sô-cô-la cỡ vừa giá 350000 đồng."},
-       {"type": "TF", "q": "The cake is for the customer's son.", "o": ["True", "False"], "a": 1, "why": "Câu này sai vì bánh dành cho con gái của khách, bé mười tuổi."}
+       {"type": "MC", "q": "Who is the birthday cake for?", "o": ["The customer's daughter", "The customer's son", "The customer's husband", "Mrs Lan herself"], "a": 0, "why": "Ví dụ: trong đoạn nghe khách nói bánh dành cho con gái của mình, bé mười tuổi và rất thích sô-cô-la. Vì vậy đáp án “The customer's daughter” đúng, không phải con trai. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", "whyOrig": "Ví dụ: trong đoạn nghe khách nói bánh dành cho con gái của mình, bé mười tuổi và rất thích sô-cô-la. Vì vậy đáp án “The customer's daughter” đúng, không phải con trai.", "whyU7": true}
      ]},
     {"section": "Section 1", "band": "Band 2,5", "topic": "Hướng dẫn làm thẻ thư viện",
      "text": "A: Excuse me, I want to make a library card. What do I need? B: You need one photo and your student card. A: I have my student card here. What about the photo? B: You can take a photo at the shop next door. It costs 20000 dong. A: How much is the library card? B: The card is free for students. You only pay 50000 dong if you lose the card. A: How many books can I borrow? B: You can borrow three books for two weeks. A: Can I borrow books on Sunday? B: Yes, the library is open on Sunday, from 8 o'clock to 5 o'clock. A: One more question. Where is the reading room? B: It is on the second floor. A: Thank you very much. I will bring my photo tomorrow. B: You are welcome. See you tomorrow!",
@@ -92620,7 +98887,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "How many books can the student borrow?", "o": ["Two books", "Three books", "Five books", "Ten books"], "a": 1, "why": "Học sinh có thể mượn ba cuốn sách trong hai tuần."},
        {"type": "MATCH", "q": "Where is the reading room?", "o": ["On the second floor", "On the first floor", "Next door"], "a": 0, "why": "Phòng đọc ở tầng hai."},
        {"type": "COMP", "q": "The card is free for ___.", "answer": "students", "why": "Thẻ thư viện miễn phí cho học sinh."},
-       {"type": "TF", "q": "The library is open on Sunday from 8 o'clock to 5 o'clock.", "o": ["True", "False"], "a": 0, "why": "Câu này đúng vì nhân viên nói thư viện mở cửa Chủ nhật từ 8 giờ đến 5 giờ."}
+       {"type": "SA", "q": "What time does the library close on Sunday?", "answer": "5 o'clock", "why": "Ví dụ: trong đoạn nghe nhân viên nói thư viện mở cửa Chủ nhật từ 8 giờ đến 5 giờ. Vì vậy đáp án “5 o'clock” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", "whyOrig": "Ví dụ: trong đoạn nghe nhân viên nói thư viện mở cửa Chủ nhật từ 8 giờ đến 5 giờ. Vì vậy đáp án “5 o'clock” đúng.", "whyU7": true}
      ]},
     {"section": "Section 1", "band": "Band 2,5", "topic": "Thông báo nghỉ học vì bão",
      "text": "Good morning, students and parents. I have an important announcement. Because of the storm, there is no school tomorrow, on Friday. All classes are cancelled. Please stay at home and stay safe. Do not go out in heavy rain and strong wind. The storm brings heavy rain and strong wind to our town. Teachers will send homework to your class group. Please finish your homework at home. On Saturday, school is open again, if the weather is good. Classes on Saturday start at 7:30 as usual. Please bring your homework to school on Saturday. Please listen to the school announcement on Saturday morning. If you have any questions, please call the school office. The phone number is 02438501234. We hope to see you all on Saturday. Thank you, and stay safe.",
@@ -92629,7 +98896,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "When is school open again?", "o": ["On Saturday, if the weather is good", "On Sunday", "On Monday", "On Friday evening"], "a": 0, "why": "Thứ Bảy trường mở cửa trở lại nếu thời tiết tốt."},
        {"type": "MATCH", "q": "What should students do at home?", "o": ["Finish their homework", "Play football", "Go swimming"], "a": 0, "why": "Học sinh nên làm xong bài tập ở nhà."},
        {"type": "COMP", "q": "The school office phone number is ___.", "answer": "02438501234", "why": "Số điện thoại văn phòng trường là 02438501234."},
-       {"type": "TF", "q": "Students should go out in heavy rain.", "o": ["True", "False"], "a": 1, "why": "Câu này sai vì thông báo dặn học sinh ở nhà, không ra ngoài khi mưa to và gió mạnh."}
+       {"type": "MC", "q": "What should students NOT do in heavy rain and strong wind?", "o": ["Go out in heavy rain", "Stay at home", "Finish their homework", "Listen to the school announcement"], "a": 0, "why": "Ví dụ: trong đoạn nghe thông báo dặn học sinh ở nhà, không ra ngoài khi mưa to và gió mạnh. Vì vậy đáp án “Go out in heavy rain” đúng vì đây là việc bị cấm. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", "whyOrig": "Ví dụ: trong đoạn nghe thông báo dặn học sinh ở nhà, không ra ngoài khi mưa to và gió mạnh. Vì vậy đáp án “Go out in heavy rain” đúng vì đây là việc bị cấm.", "whyU7": true}
      ]}
   ]);
   CONTENT.speaking.push.apply(CONTENT.speaking, [
@@ -93007,7 +99274,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "How much are story books?", "o": ["20000 dong", "30000 dong", "40000 dong", "50000 dong"], "a": 1, "why": "Sách truyện giá 30000 đồng, sách tranh giá 20000 đồng."},
        {"type": "MATCH", "q": "When can students meet the writer?", "o": ["At 10 o'clock", "At 8 o'clock", "At 4 o'clock"], "a": 0, "why": "Học sinh có thể gặp nhà văn nổi tiếng lúc 10 giờ."},
        {"type": "COMP", "q": "The fair finishes at ___ o'clock in the afternoon.", "answer": "4", "why": "Hội chợ kết thúc lúc 4 giờ chiều."},
-       {"type": "TF", "q": "Parents cannot come to the book fair.", "o": ["True", "False"], "a": 1, "why": "Câu này sai vì phụ huynh được chào đón tới cùng con."}
+       {"type": "MC", "q": "Can parents come to the book fair?", "o": ["Yes, they are welcome to come with their children", "No, only students can come", "No, parents must stay at home", "Yes, but only on Sunday"], "a": 0, "why": "Ví dụ: trong đoạn nghe thông báo nói phụ huynh được chào đón tới cùng con. Vì vậy đáp án “Yes, they are welcome to come with their children” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", "whyOrig": "Ví dụ: trong đoạn nghe thông báo nói phụ huynh được chào đón tới cùng con. Vì vậy đáp án “Yes, they are welcome to come with their children” đúng.", "whyU7": true}
      ]},
     {"section": "Section 2", "band": "Band 3,0", "topic": "Phỏng vấn ngắn về câu lạc bộ đọc sách",
      "text": "A: Good afternoon, Mai. Can I ask you about the reading club? B: Yes, of course. A: When does the club meet? B: The club meets on Wednesday afternoon, in the library. A: How many members are there? B: There are 25 members. Most of them are in class 6 and class 7. A: What do you do in the club? B: We read stories, talk about books and write short reviews. A: What book are you reading now? B: I am reading a funny story about a cat. A: Who helps the club? B: Miss Hoa helps us. She chooses good books for us. A: Where do you get the books? B: We borrow books from the school library. A: What time does the club finish? B: It finishes at half past four. A: Do new members need to bring anything? B: No, they only need to love books. A: Thank you, Mai. B: You are welcome.",
@@ -93016,7 +99283,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "How many members are there?", "o": ["15 members", "25 members", "35 members", "45 members"], "a": 1, "why": "Câu lạc bộ có 25 thành viên."},
        {"type": "MATCH", "q": "Who helps the club?", "o": ["Miss Hoa", "Miss Thu", "Mr Nam"], "a": 0, "why": "Cô Hoa giúp câu lạc bộ và chọn sách hay cho các bạn."},
        {"type": "COMP", "q": "The club finishes at half past ___.", "answer": "four", "why": "Câu lạc bộ kết thúc lúc bốn giờ rưỡi."},
-       {"type": "TF", "q": "New members must bring books.", "o": ["True", "False"], "a": 1, "why": "Câu này sai vì thành viên mới chỉ cần yêu sách, không cần mang gì."}
+       {"type": "COMP", "q": "New members only need to ___ books.", "answer": "love", "why": "Ví dụ: trong đoạn nghe Mai nói thành viên mới không cần mang gì, chỉ cần yêu sách. Vì vậy đáp án “love” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", "whyOrig": "Ví dụ: trong đoạn nghe Mai nói thành viên mới không cần mang gì, chỉ cần yêu sách. Vì vậy đáp án “love” đúng.", "whyU7": true}
      ]},
     {"section": "Section 2", "band": "Band 3,0", "topic": "Hướng dẫn đi tham quan bảo tàng",
      "text": "Welcome to the City Museum. Our museum opens at 8 o'clock in the morning and closes at 5 o'clock in the afternoon. Your visit today has two parts. First, we will visit the history room, where you can see old clothes, old coins and old photos. Next, we will visit the nature room, where you can see big animal models and beautiful stones. Please do not touch the things in the museum. You can take photos, but please do not use the flash. You can buy drinks at the small shop near the main gate. The entrance ticket costs 20000 dong for students and is free for children under 6 years old. Our guides wear blue shirts, so please follow them. Thank you, and enjoy your visit.",
@@ -93025,7 +99292,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
        {"type": "MC", "q": "What can visitors see in the history room?", "o": ["Old clothes, old coins and old photos", "Big animal models", "New books", "Pretty flowers"], "a": 0, "why": "Phòng lịch sử có quần áo cũ, tiền xu cũ và ảnh cũ."},
        {"type": "MATCH", "q": "What colour shirts do the guides wear?", "o": ["Blue shirts", "Green shirts", "Red shirts"], "a": 0, "why": "Hướng dẫn viên mặc áo xanh dương."},
        {"type": "COMP", "q": "The entrance ticket costs ___ dong for students.", "answer": "20000", "why": "Vé vào cửa cho học sinh giá 20000 đồng."},
-       {"type": "TF", "q": "Visitors can use the flash when they take photos.", "o": ["True", "False"], "a": 1, "why": "Câu này sai vì du khách được chụp ảnh nhưng không được dùng đèn flash."}
+       {"type": "MC", "q": "Can visitors use the flash when they take photos?", "o": ["Yes, they can use it everywhere", "Yes, but only in the history room", "No, they must not use the flash", "No, they cannot take photos at all"], "a": 2, "why": "Ví dụ: trong đoạn nghe hướng dẫn viên nói du khách được chụp ảnh nhưng không được dùng đèn flash. Vì vậy đáp án “No, they must not use the flash” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", "whyOrig": "Ví dụ: trong đoạn nghe hướng dẫn viên nói du khách được chụp ảnh nhưng không được dùng đèn flash. Vì vậy đáp án “No, they must not use the flash” đúng.", "whyU7": true}
      ]}
   ]);
   CONTENT.speaking.push.apply(CONTENT.speaking, [
@@ -93902,7 +100169,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "When did the new family move in?", o: ["Yesterday", "Last week", "This morning", "Last month"], a: 0, why: "Bài nghe: We moved here yesterday." },
         { type: "MC", q: "Where is the nearest market?", o: ["At the end of the lane, turn left, two hundred metres away", "Behind the school", "Next to the bus stop", "Across the river"], a: 0, why: "Bài nghe: Walk to the end of the lane and turn left. The market is two hundred metres away." },
         { type: "MC", q: "How old is the new family's son?", o: ["Eight years old", "Six years old", "Ten years old", "Twelve years old"], a: 0, why: "Bài nghe: My son is eight years old." },
-        { type: "TF", q: "Mrs Lan invites the new family for tea this evening.", o: ["True", "False"], a: 0, why: "Bài nghe: Please come for tea at my house this evening." },
+        { type: "MC", q: "What will Mrs Lan's son do this afternoon?", o: ["Help carry the big boxes","Open the boxes alone","Go to the market","Walk to school"], a: 0, why: "Ví dụ: trong đoạn nghe có câu “My son can help you carry the big boxes this afternoon”. Vì vậy đáp án “Help carry the big boxes” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'My son can help you carry the big boxes this afternoon.' Vì vậy con trai bà Lan sẽ giúp khuân những thùng to vào chiều nay.", whyU7: true },
         { type: "COMP", q: "The primary school opens at ___ in the morning.", answer: "seven", why: "Bài nghe: It opens at seven in the morning." }
       ] },
     { section: "Section 2", band: "Band 3,5", topic: "Announcements at the weekend sports day",
@@ -93911,7 +100178,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What time does the sports day start?", o: ["At eight o'clock in the morning", "At nine o'clock", "At ten o'clock", "At seven o'clock"], a: 0, why: "Bài nghe: The sports day starts at eight o'clock in the morning." },
         { type: "MC", q: "What happens at ten o'clock?", o: ["A tug of war between classes", "A running race for children under ten", "A football game", "Prize giving"], a: 0, why: "Bài nghe: At ten o'clock, we have a tug of war between classes." },
         { type: "MC", q: "What should children bring?", o: ["Their own water bottle and a hat", "A football and a book", "A raincoat and gloves", "A camera and money"], a: 0, why: "Bài nghe: Please bring your own water bottle and wear a hat." },
-        { type: "TF", q: "Prizes are given at four o'clock near the main gate.", o: ["True", "False"], a: 0, why: "Bài nghe: Prizes are given at four o'clock in the afternoon, near the main gate." },
+        { type: "SA", q: "Where are the prizes given?", answer: "near the main gate", why: "Ví dụ: trong đoạn nghe có câu “Prizes are given at four o'clock in the afternoon, near the main gate”. Vì vậy đáp án “near the main gate” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'Prizes are given at four o'clock in the afternoon, near the main gate.' Vì vậy giải được trao gần cổng chính.", whyU7: true },
         { type: "COMP", q: "Lunch is at eleven ___ in the school yard.", answer: "thirty", why: "Bài nghe: Lunch is at eleven thirty in the school yard." }
       ] },
     { section: "Section 2", band: "Band 3,5", topic: "A talk about the school lost-and-found box",
@@ -93920,7 +100187,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "Where is the lost-and-found box?", o: ["Near the school gate, next to the guard's room", "In the library", "In the classroom", "Behind the market"], a: 0, why: "Bài nghe: The box is near the school gate, next to the guard's room." },
         { type: "MC", q: "What name is on the blue water bottle?", o: ["Nam", "Lan", "Hoa", "Tuan"], a: 0, why: "Bài nghe: a blue water bottle with the name Nam on it." },
         { type: "MC", q: "What should children do if something is theirs?", o: ["Tell their teacher their name and class", "Take it home at once", "Buy a new one", "Ask the guard for money"], a: 0, why: "Bài nghe: please tell your teacher your name and your class." },
-        { type: "TF", q: "Things nobody takes after two weeks go to poor children.", o: ["True", "False"], a: 0, why: "Bài nghe: Things that nobody takes after two weeks go to poor children in the ward." },
+        { type: "MATCH", q: "Which thing is in the lost-and-found box this week?", o: ["A black umbrella with a broken handle","A green coat","A yellow school bag"], a: 0, why: "Ví dụ: trong đoạn nghe có câu “a black umbrella with a broken handle”. Vì vậy đáp án “A black umbrella with a broken handle” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe liệt kê trong hộp có 'a black umbrella with a broken handle' (một chiếc ô đen bị gãy cán).", whyU7: true },
         { type: "COMP", q: "There is a red hat with a small ___ on it.", answer: "star", why: "Bài nghe: a red hat with a small star on it." }
       ] },
     // ---------- BAND 4.0 — NGHE DÀI ----------
@@ -93930,7 +100197,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "When does the library need a student?", o: ["On Saturday and Sunday mornings", "On Monday and Tuesday evenings", "Every afternoon", "On Friday nights"], a: 0, why: "Bài nghe: we need a student to work on Saturday and Sunday mornings." },
         { type: "MC", q: "What are the working hours?", o: ["From eight in the morning to twelve at noon", "From nine to five", "From one to six", "From seven to eleven"], a: 0, why: "Bài nghe: You start at eight in the morning and finish at twelve at noon." },
         { type: "MC", q: "How much is the pay an hour?", o: ["Twenty-five thousand dong", "Twenty thousand dong", "Thirty thousand dong", "Fifteen thousand dong"], a: 0, why: "Bài nghe: The pay is twenty-five thousand dong an hour." },
-        { type: "TF", q: "The student needs experience for the job.", o: ["True", "False"], a: 1, why: "Bài nghe: No, you do not need experience." },
+        { type: "MC", q: "When can the student start work?", o: ["Next Monday","Next Saturday","Tomorrow morning","Next Sunday"], a: 1, why: "Ví dụ: trong đoạn nghe có câu “You can start next Saturday”. Vì vậy đáp án “Next Saturday” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'You can start next Saturday.' (Bạn có thể bắt đầu vào thứ Bảy tới.) Ngoài ra bài nghe nói rõ 'you do not need experience' nên câu True/False cũ là sai.", whyU7: true },
         { type: "COMP", q: "The student also gets a free library ___.", answer: "card", why: "Bài nghe: you also get a free library card." }
       ] },
     { section: "Section 2", band: "Band 4,0", topic: "A talk about saving water at home",
@@ -93939,7 +100206,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "How much water can a running tap waste in one minute?", o: ["Six litres", "Two litres", "Ten litres", "Twenty litres"], a: 0, why: "Bài nghe: A running tap can waste six litres of water in one minute." },
         { type: "MC", q: "How much can one small leak waste a day?", o: ["Twenty litres", "Six litres", "Five litres", "Fifty litres"], a: 0, why: "Bài nghe: One small leak can waste twenty litres a day." },
         { type: "MC", q: "What can water from washing vegetables do?", o: ["Water the plants in the garden", "Wash the car", "Cook rice", "Clean the floor"], a: 0, why: "Bài nghe: Water from washing vegetables can water the plants in your garden." },
-        { type: "TF", q: "A shower of five minutes uses more water than a shower of fifteen minutes.", o: ["True", "False"], a: 1, why: "Bài nghe: A shower of five minutes uses much less water than a shower of fifteen minutes." },
+        { type: "MC", q: "According to the talk, how does a five-minute shower compare with a fifteen-minute shower?", o: ["It uses more water","It uses the same amount of water","It uses much less water","It wastes twenty litres"], a: 2, why: "Ví dụ: trong đoạn nghe có câu “A shower of five minutes uses much less water than a shower of fifteen minutes”. Vì vậy đáp án “It uses much less water” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'A shower of five minutes uses much less water than a shower of fifteen minutes.' (Tắm 5 phút tốn ít nước hơn nhiều so với tắm 15 phút.)", whyU7: true },
         { type: "COMP", q: "Wash clothes only when you have a full ___.", answer: "load", why: "Bài nghe: wash clothes only when you have a full load." }
       ] },
     { section: "Section 2", band: "Band 4,0", topic: "Two friends plan a charity book sale",
@@ -93948,7 +100215,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "When is the charity book sale?", o: ["Next Saturday", "Next Sunday", "This Friday", "Next Monday"], a: 0, why: "Bài nghe: Let us hold a charity book sale at school next Saturday." },
         { type: "MC", q: "Where do students put donated books?", o: ["In a big box near the library", "In the classroom", "At the school gate", "In the canteen"], a: 0, why: "Bài nghe: We put a big box near the library." },
         { type: "MC", q: "How much is a big book?", o: ["Twenty thousand dong", "Ten thousand dong", "Thirty thousand dong", "Five thousand dong"], a: 0, why: "Bài nghe: twenty thousand for a big book." },
-        { type: "TF", q: "The money goes to poor children.", o: ["True", "False"], a: 0, why: "Bài nghe: we give the money to poor children." },
+        { type: "SA", q: "Who will the money from the book sale go to?", answer: "poor children", why: "Ví dụ: trong đoạn nghe có câu “we give the money to poor children”. Vì vậy đáp án “poor children” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'we give the money to poor children.' (Chúng tôi đưa tiền cho trẻ em nghèo.)", whyU7: true },
         { type: "COMP", q: "We make posters on ___.", answer: "Wednesday", why: "Bài nghe: We make posters on Wednesday." }
       ] },
     // ---------- BAND 4.5 — NGHE DÀI ----------
@@ -93958,7 +100225,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "How many students answered the survey?", o: ["Thirty students", "Twenty students", "Forty students", "Fifteen students"], a: 0, why: "Bài nghe: Thirty students answered questions about sleep." },
         { type: "MC", q: "How many hours do students sleep on average?", o: ["Six hours", "Eight hours", "Seven hours", "Five hours"], a: 0, why: "Bài nghe: students sleep only six hours a night, not eight." },
         { type: "MC", q: "What do the five students who sleep well do?", o: ["Turn off phones at nine, read before bed, and sleep at the same time", "Drink coffee at night", "Watch films in bed", "Sleep in the afternoon"], a: 0, why: "Bài nghe: They turn off their phones at nine o'clock, they read a book before bed, and they go to bed at the same time every night." },
-        { type: "TF", q: "Twenty students feel sleepy in the first lesson.", o: ["True", "False"], a: 0, why: "Bài nghe: Twenty students say they feel sleepy in the first lesson." },
+        { type: "MATCH", q: "How many students say they sleep well every night?", o: ["Twenty students","Five students","Thirty students"], a: 1, why: "Ví dụ: trong đoạn nghe có câu “Only five students say they sleep well every night”. Vì vậy đáp án “Five students” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'Only five students say they sleep well every night.' (Chỉ 5 bạn nói ngủ ngon mỗi đêm.)", whyU7: true },
         { type: "COMP", q: "Many students use their phones in bed for one more ___.", answer: "hour", why: "Bài nghe: many use their phones in bed for one more hour." }
       ] },
     { section: "Section 3", band: "Band 4,5", topic: "A talk about a new bike-sharing station",
@@ -93967,7 +100234,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "How many bikes does the station have?", o: ["Twenty bikes", "Ten bikes", "Thirty bikes", "Fifteen bikes"], a: 0, why: "Bài nghe: The station has twenty bikes." },
         { type: "MC", q: "How much is one hour of riding?", o: ["Ten thousand dong", "Five thousand dong", "Twenty thousand dong", "Fifteen thousand dong"], a: 0, why: "Bài nghe: You can ride for one hour for ten thousand dong." },
         { type: "MC", q: "Where must you return the bike?", o: ["To any station in the city", "Only to this station", "To your home", "To the market"], a: 0, why: "Bài nghe: You must return the bike to any station in the city." },
-        { type: "TF", q: "Children under fourteen must ride with an adult.", o: ["True", "False"], a: 0, why: "Bài nghe: Children under fourteen must ride with an adult." },
+        { type: "MC", q: "How much extra do you pay for each hour after the first hour of riding?", o: ["Ten thousand dong","Fifteen thousand dong","Twenty thousand dong","Five thousand dong"], a: 3, why: "Ví dụ: trong đoạn nghe có câu “If you ride longer, you pay five thousand dong for each extra hour”. Vì vậy đáp án “Five thousand dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'If you ride longer, you pay five thousand dong for each extra hour.' (Đi lâu hơn thì trả thêm 5000 đồng mỗi giờ.)", whyU7: true },
         { type: "COMP", q: "The station closes at ten at ___.", answer: "night", why: "Bài nghe: closes at ten at night." }
       ] },
     { section: "Section 3", band: "Band 4,5", topic: "An interview for a weekend job as a tour guide",
@@ -93976,7 +100243,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What job did the candidate apply for?", o: ["A weekend job as a tour guide", "A job as a bus driver", "A job at a bookshop", "A job as a teacher"], a: 0, why: "Bài nghe: You applied for the weekend job as a tour guide." },
         { type: "MC", q: "Where did the candidate help last summer?", o: ["At the old quarter with his uncle", "At a hotel", "At a school", "At a market"], a: 0, why: "Bài nghe: I helped my uncle, who is a guide at the old quarter." },
         { type: "MC", q: "How much is the pay an hour?", o: ["Forty thousand dong", "Thirty thousand dong", "Twenty-five thousand dong", "Fifty thousand dong"], a: 0, why: "Bài nghe: The job pays forty thousand dong an hour." },
-        { type: "TF", q: "The candidate can work on Saturdays and Sundays.", o: ["True", "False"], a: 0, why: "Bài nghe: I can work on Saturdays and Sundays." },
+        { type: "COMP", q: "The candidate speaks Vietnamese and ___.", answer: "English", why: "Ví dụ: trong đoạn nghe có câu “I speak Vietnamese and English”. Vì vậy đáp án “English” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'I speak Vietnamese and English.' (Tôi nói tiếng Việt và tiếng Anh.)", whyU7: true },
         { type: "COMP", q: "We will call you on ___ with our answer.", answer: "Wednesday", why: "Bài nghe: We will call you on Wednesday with our answer." }
       ] }
   ]);
@@ -94732,7 +100999,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "When is the library closed?", o: ["On Monday", "On Saturday", "On Sunday", "On Friday"], a: 2, why: "Thư viện đóng cửa vào Chủ nhật vì nhân viên nói rõ thư viện đóng cửa ngày Chủ nhật." },
         { type: "MATCH", q: "How many books can a member borrow at one time?", o: ["Two books", "Three books", "Five books"], a: 1, why: "Với thẻ thư viện, bạn có thể mượn ba cuốn sách trong hai tuần." },
         { type: "COMP", q: "You can collect your library card on ___.", answer: "Friday", why: "Nhân viên dặn Lan Anh có thể lấy thẻ thư viện vào thứ Sáu." },
-        { type: "TF", q: "Lan Anh must pay 50000 dong for her card.", o: ["True", "False"], a: 1, why: "Câu này sai vì thẻ miễn phí cho học sinh, và Lan Anh là học sinh nên thẻ của cô ấy miễn phí." }
+        { type: "MC", q: "How much does Lan Anh's library card cost?", o: ["It is free because she is a student","50000 dong a year","30000 dong a year","100000 dong a year"], a: 0, why: "Ví dụ: trong đoạn nghe có câu “The card is free for students... I am a student, so my card is free”. Vì vậy đáp án “It is free because she is a student” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'The card is free for students... I am a student, so my card is free.' (Thẻ miễn phí cho học sinh, sinh viên; Lan Anh là học sinh nên thẻ của cô miễn phí — không phải trả 50000 đồng.)", whyU7: true }
       ]
     },
     {
@@ -94745,7 +101012,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What time does the Sunday class start?", o: ["At 7:45", "At 8 o'clock", "At 9 o'clock", "At 10 o'clock"], a: 2, why: "Lớp Chủ nhật bắt đầu lúc 9 giờ, trong khi lớp thứ Bảy bắt đầu lúc 8 giờ." },
         { type: "MATCH", q: "How many teachers help the children in the water?", o: ["One teacher", "Two teachers", "Three teachers"], a: 1, why: "Có hai giáo viên giúp các em trong nước, cùng với 10 em trong một lớp." },
         { type: "COMP", q: "One month costs ___ dong.", answer: "400000", why: "Học phí một tháng là 400000 đồng, đã gồm mũ bơi và kính bơi." },
-        { type: "TF", q: "The daughter must bring a towel and a bottle of water.", o: ["True", "False"], a: 0, why: "Câu này đúng vì nhân viên dặn mang theo khăn tắm và một chai nước khi tới hồ bơi." }
+        { type: "SA", q: "What time should the daughter come to the pool on Saturday?", answer: "7:45", why: "Ví dụ: trong đoạn nghe có câu “Please bring her to the pool at 7:45 on Saturday, and do not forget a towel and a bottle of water”. Vì vậy đáp án “7:45” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'Please bring her to the pool at 7:45 on Saturday, and do not forget a towel and a bottle of water.'", whyU7: true }
       ]
     },
     {
@@ -94758,7 +101025,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What do old people do in the afternoon?", o: ["Learn English", "Play chess and read newspapers", "Dance", "Draw pictures"], a: 1, why: "Buổi chiều người già tới đây chơi cờ và đọc báo, theo phần giới thiệu tầng một." },
         { type: "MATCH", q: "Where should people write their name to join a class?", o: ["On the classroom door", "At the front desk", "In the large room"], a: 1, why: "Người muốn tham gia lớp học phải ghi tên vào danh sách ở quầy lễ tân." },
         { type: "COMP", q: "The community house is open from 8 o'clock in the morning to ___ o'clock in the evening.", answer: "9", why: "Nhà văn hóa mở cửa từ 8 giờ sáng đến 9 giờ tối mỗi ngày." },
-        { type: "TF", q: "There is a free health check for old people every month.", o: ["True", "False"], a: 0, why: "Câu này đúng vì mỗi tháng nhà văn hóa có một buổi kiểm tra sức khỏe miễn phí cho người già trong khu phố." }
+        { type: "MATCH", q: "What happens in the community house in the evening?", o: ["Drawing and singing classes for children","Chess and newspapers for old people","English classes and dance classes for adults"], a: 2, why: "Ví dụ: trong đoạn nghe có câu “In the evening, there are English classes and dance classes for adults”. Vì vậy đáp án “English classes and dance classes for adults” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'In the evening, there are English classes and dance classes for adults.' (Buổi tối có lớp tiếng Anh và lớp khiêu vũ cho người lớn.)", whyU7: true }
       ]
     }
   ]);
@@ -95114,7 +101381,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "Which time does Thu Trang choose?", o: ["At 5 o'clock", "At 6 o'clock", "At 7 o'clock", "At 8 o'clock"], a: 1, why: "Thu Trang chọn lúc 6 giờ vì gia đình có hai trẻ nhỏ nên muốn ăn sớm." },
         { type: "MATCH", q: "Which table number is booked?", o: ["Table 6", "Table 12", "Table 21"], a: 1, why: "Bàn đã đặt nằm gần cửa sổ và mang số 12." },
         { type: "COMP", q: "The restaurant has ___ vegetarian dishes.", answer: "five|5", why: "Nhà hàng có năm món chay, gồm canh rau và đậu phụ chiên." },
-        { type: "TF", q: "Thu Trang's phone number is 0987654321.", o: ["True", "False"], a: 0, why: "Câu này đúng vì Thu Trang đọc số điện thoại này khi đặt bàn." }
+        { type: "MC", q: "Why does Thu Trang choose a table at 6 o'clock?", o: ["Because the restaurant closes at 7","Because they have two small children and want to eat early","Because her mother likes mornings","Because the table is free only then"], a: 1, why: "Ví dụ: trong đoạn nghe có câu “We have two small children, so we want to eat early”. Vì vậy đáp án “Because they have two small children and want to eat early” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'We have two small children, so we want to eat early.' (Nhà có hai con nhỏ nên muốn ăn sớm.)", whyU7: true }
       ]
     },
     {
@@ -95127,7 +101394,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "When is the free swimming hour for old people?", o: ["On Saturday mornings", "On Sunday mornings from 8 to 9 o'clock", "On weekday evenings", "On Sunday afternoons"], a: 1, why: "Giờ bơi miễn phí cho người già là sáng Chủ nhật từ 8 đến 9 giờ." },
         { type: "MATCH", q: "How much is the entrance fee for children under 12?", o: ["30000 dong", "15000 dong", "Free"], a: 1, why: "Vé vào cửa cho trẻ dưới 12 tuổi là 15000 đồng, trong khi người lớn là 30000 đồng." },
         { type: "COMP", q: "Please bring your own ___.", answer: "towel", why: "Thông báo dặn khách mang theo khăn tắm của mình và không mang đồ ăn vào khu vực bể bơi." },
-        { type: "TF", q: "Visitors can bring food into the pool area.", o: ["True", "False"], a: 1, why: "Câu này sai vì thông báo dặn không mang đồ ăn vào khu vực bể bơi." }
+        { type: "COMP", q: "On Saturday and Sunday, the pool opens at ___ o'clock.", answer: "7", why: "Ví dụ: trong đoạn nghe có câu “On Saturday and Sunday, it will open at 7 o'clock and close at 8 o'clock in the evening”. Vì vậy đáp án “7” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'On Saturday and Sunday, it will open at 7 o'clock and close at 8 o'clock in the evening.' Bài nghe cũng nói rõ 'please do not bring food into the pool area' nên câu True/False cũ là sai.", whyU7: true }
       ]
     },
     {
@@ -95140,7 +101407,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What will members paint in May?", o: ["Street scenes and old houses", "Flowers and trees", "People and animals", "Boats and rivers"], a: 1, why: "Tháng Năm, các thành viên sẽ vẽ hoa và cây; tháng Sáu mới vẽ cảnh phố và nhà cũ." },
         { type: "MATCH", q: "What should members bring themselves?", o: ["Paper and paint", "Their own brushes", "Watercolours"], a: 1, why: "Học phí đã gồm giấy và màu, thành viên chỉ cần mang theo cọ vẽ của mình." },
         { type: "COMP", q: "The class finishes at ___.", answer: "4:30", why: "Lớp học bắt đầu lúc 2 giờ và kết thúc lúc 4 giờ 30." },
-        { type: "TF", q: "You need experience to join the club.", o: ["True", "False"], a: 1, why: "Câu này sai vì lời giới thiệu nói bạn không cần kinh nghiệm gì để tham gia." }
+        { type: "MC", q: "How much is the monthly fee, and what does it include?", o: ["250000 dong, including brushes","150000 dong, including paper and paint","250000 dong, including paper and paint","200000 dong, including brushes"], a: 2, why: "Ví dụ: trong đoạn nghe có câu “The monthly fee is 250000 dong, and this includes paper and paint”. Vì vậy đáp án “250000 dong, including paper and paint” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'The monthly fee is 250000 dong, and this includes paper and paint.' (Phí tháng là 250000 đồng, đã gồm giấy và màu vẽ; chỉ cần tự mang cọ.)", whyU7: true }
       ]
     },
     {
@@ -95153,7 +101420,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What time will the bus leave?", o: ["At 7:30", "At 8 o'clock", "At 9 o'clock", "At 7 o'clock"], a: 1, why: "Mọi người tập trung ở cổng trường lúc 7 giờ 30 và xe buýt rời đi lúc 8 giờ." },
         { type: "MATCH", q: "How long is the walk around the lake?", o: ["About 3 kilometres", "About 5 kilometres", "About 1 kilometre"], a: 0, why: "Đoạn đi bộ quanh hồ dài khoảng 3 km và mất khoảng một giờ." },
         { type: "COMP", q: "Each student pays ___ dong for the bus and lunch.", answer: "50000", why: "Mỗi học sinh đóng 50000 đồng cho tiền xe buýt và bữa trưa." },
-        { type: "TF", q: "Students should wear comfortable shoes for the walk.", o: ["True", "False"], a: 0, why: "Câu này đúng vì cô giáo dặn mang giày thoải mái do cả lớp sẽ đi bộ quanh hồ." }
+        { type: "SA", q: "When will the class meet at the school gate?", answer: "7:30 in the morning", why: "Ví dụ: trong đoạn nghe có câu “We will meet at the school gate at 7:30 in the morning, and the bus will leave at 8 o'clock”. Vì vậy đáp án “7:30 in the morning” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'We will meet at the school gate at 7:30 in the morning, and the bus will leave at 8 o'clock.'", whyU7: true }
       ]
     }
   ]);
@@ -95509,7 +101776,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What do interns work on?", o: ["Making coffee and copying documents", "A real project in a small team", "Only online courses", "Testing phones at home"], a: 1, why: "Thực tập sinh làm việc trong nhóm nhỏ bốn người trên một dự án thật, như thiết kế ứng dụng hoặc kiểm tra trang web mới." },
         { type: "MATCH", q: "Who can apply for the programme?", o: ["First-year students only", "Second-year and third-year students in computer science or a related subject", "High school students"], a: 1, why: "Chương trình mở cho sinh viên năm hai và năm ba học khoa học máy tính hoặc ngành liên quan." },
         { type: "COMP", q: "The deadline for applications is the 30th of ___.", answer: "April", why: "Hạn nộp hồ sơ là ngày 30 tháng 4." },
-        { type: "TF", q: "Successful applicants receive a certificate at the end.", o: ["True", "False"], a: 0, why: "Câu này đúng vì ứng viên thành công sẽ nhận 5 triệu đồng một tháng và một chứng chỉ khi kết thúc chương trình." }
+        { type: "MATCH", q: "How much do successful applicants receive a month?", o: ["5 million dong","3 million dong","8 million dong"], a: 0, why: "Ví dụ: trong đoạn nghe có câu “Successful applicants will receive 5 million dong a month and a certificate at the end of the programme”. Vì vậy đáp án “5 million dong” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'Successful applicants will receive 5 million dong a month and a certificate at the end of the programme.'", whyU7: true }
       ]
     },
     {
@@ -95522,7 +101789,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "How often do students check their phones on average?", o: ["20 or 30 times a day", "50 times a day", "More than 80 times a day", "10 times a day"], a: 2, why: "Kết quả đáng ngạc nhiên nhất là sinh viên kiểm tra điện thoại trung bình hơn 80 lần mỗi ngày." },
         { type: "MATCH", q: "What is the main reason students check so often?", o: ["Boredom", "Notifications", "Lack of homework"], a: 1, why: "Người làm khảo sát cho rằng thông báo là lý do chính: mỗi tin nhắn hay cập nhật khiến người ta cầm điện thoại lên, ngay cả khi đang học." },
         { type: "COMP", q: "The report must be finished by ___.", answer: "Friday", why: "Báo cáo cần hoàn thành trước thứ Sáu và trình bày trước lớp vào thứ Hai tới." },
-        { type: "TF", q: "Students guessed their phone checks correctly.", o: ["True", "False"], a: 1, why: "Câu này sai vì khi được hỏi đoán, sinh viên nói 20 hoặc 30 lần, trong khi con số thật cao hơn nhiều." }
+        { type: "MC", q: "What will the student suggest in the report?", o: ["Checking phones more often","Buying a new phone","Studying with the phone on the desk","Turning off notifications during study time and keeping phones in another room"], a: 3, why: "Ví dụ: trong đoạn nghe có câu “I will suggest turning off notifications during study time and keeping phones in another room”. Vì vậy đáp án “Turning off notifications during study time and keeping phones in another room” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'I will suggest turning off notifications during study time and keeping phones in another room.' (Sinh viên đoán chỉ 20–30 lần, trong khi thực tế hơn 80 lần nên câu True/False cũ là sai.)", whyU7: true }
       ]
     },
     {
@@ -95535,7 +101802,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What do some apps let shops do?", o: ["Sell food at a lower price near closing time", "Give food away for free only", "Close earlier", "Buy more food"], a: 0, why: "Một số ứng dụng cho phép cửa hàng bán thực phẩm với giá thấp hơn gần giờ đóng cửa thay vì vứt đi." },
         { type: "MATCH", q: "What do food banks receive from supermarkets?", o: ["Money", "Unsold food for people in need", "New equipment"], a: 1, why: "Ngân hàng thực phẩm là nơi siêu thị tặng thực phẩm chưa bán cho người cần." },
         { type: "COMP", q: "Schools teach children to plan ___ and understand date labels.", answer: "meals", why: "Trường học dạy trẻ lập kế hoạch bữa ăn và hiểu sự khác nhau giữa hạn bán và hạn sử dụng." },
-        { type: "TF", q: "These steps solve the food waste problem completely.", o: ["True", "False"], a: 1, why: "Câu này sai vì bài giảng nói các bước này không giải quyết hoàn toàn vấn đề, nhưng cho thấy rác thực phẩm có thể giảm khi các bên cùng làm việc." }
+        { type: "COMP", q: "Some cities have set up food ___, where supermarkets donate unsold food to people in need.", answer: "banks", why: "Ví dụ: trong đoạn nghe có câu “Others have set up food banks, where supermarkets donate unsold food to people in need”. Vì vậy đáp án “banks” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'Others have set up food banks, where supermarkets donate unsold food to people in need.' Bài nghe cũng nói rõ 'These steps do not solve the problem completely' nên câu True/False cũ là sai.", whyU7: true }
       ]
     }
   ]);
@@ -95907,7 +102174,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "By how much did water use fall in the first two weeks?", o: ["By about 10 percent", "By about 20 percent", "By about 30 percent", "By about 40 percent"], a: 1, why: "Trong hai tuần đầu, lượng nước dùng ở các phòng đó giảm khoảng 20% so với cùng kỳ năm ngoái." },
         { type: "MATCH", q: "How long will it take to recover the total cost?", o: ["Within one month", "Within six months", "Within one year"], a: 2, why: "Tổng chi phí 6 triệu đồng, và nhóm nghĩ ký túc xá sẽ tiết kiệm được số tiền đó trong hóa đơn nước trong vòng một năm." },
         { type: "COMP", q: "Each shower head costs ___ dong.", answer: "150000", why: "Mỗi vòi sen giá 150000 đồng, tổng chi phí là 6 triệu đồng cho 40 phòng." },
-        { type: "TF", q: "The manager may install the shower heads in all 200 rooms if results are positive.", o: ["True", "False"], a: 0, why: "Câu này đúng vì nếu kết quả tích cực, quản lý có thể lắp vòi sen ở cả 200 phòng." }
+        { type: "MC", q: "What did some students say about the water pressure at first?", o: ["It felt a little lower","It felt much stronger","It did not change at all","The water stopped completely"], a: 0, why: "Ví dụ: trong đoạn nghe có câu “Some students said the pressure felt a little lower at first, but most of them got used to it within a few days”. Vì vậy đáp án “It felt a little lower” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'Some students said the pressure felt a little lower at first, but most of them got used to it within a few days.'", whyU7: true }
       ]
     },
     {
@@ -95920,7 +102187,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What advantage do supporters mention?", o: ["It is cheaper than human staff", "It is faster and does not get tired or favour one university", "It can interview candidates", "It always finds the best candidate"], a: 1, why: "Người ủng hộ cho rằng quy trình này nhanh hơn và công bằng hơn: máy tính không mệt và không thiên vị ứng viên từ một trường đại học cụ thể." },
         { type: "MATCH", q: "What risk is mentioned about past hiring data?", o: ["It is too large to store", "It may reflect old biases that the software repeats", "It is always out of date"], a: 1, why: "Phần mềm học từ dữ liệu tuyển dụng quá khứ, và nếu dữ liệu đó phản ánh thiên kiến cũ, phần mềm có thể lặp lại chúng." },
         { type: "COMP", q: "Candidates often do not know why they were ___.", answer: "rejected", why: "Bài giảng nói thiếu minh bạch: ứng viên thường không biết vì sao họ bị loại." },
-        { type: "TF", q: "The lecturer concludes that AI should make final hiring decisions alone.", o: ["True", "False"], a: 1, why: "Câu này sai vì kết luận là AI có thể hỗ trợ tuyển dụng nhưng không nên tự đưa ra quyết định cuối cùng; phán đoán con người vẫn thiết yếu." }
+        { type: "COMP", q: "Artificial intelligence can support recruitment, but it should not make final decisions ___.", answer: "alone", why: "Ví dụ: trong đoạn nghe có câu “artificial intelligence can support recruitment, but it should not make final decisions alone. Human judgement remains essential”. Vì vậy đáp án “alone” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'artificial intelligence can support recruitment, but it should not make final decisions alone. Human judgement remains essential...' (AI chỉ hỗ trợ tuyển dụng, không nên tự quyết định cuối cùng.)", whyU7: true }
       ]
     },
     {
@@ -95933,7 +102200,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What do participants practise in weeks three and four?", o: ["Structuring a talk", "Voice control, eye contact and body language", "Writing reports", "Using presentation software"], a: 1, why: "Tuần ba và bốn, học viên luyện kiểm soát giọng nói, giao tiếp bằng mắt và ngôn ngữ cơ thể." },
         { type: "MATCH", q: "How many participants can join the course?", o: ["10 participants", "20 participants", "30 participants"], a: 1, why: "Khóa học giới hạn 20 học viên nên cần đăng ký sớm." },
         { type: "COMP", q: "To register, send an email before the 20th of ___.", answer: "April", why: "Để đăng ký, gửi email cho nhóm đào tạo trước ngày 20 tháng 4, kèm tên, phòng ban và một chủ đề muốn thuyết trình." },
-        { type: "TF", q: "The company will pay the full fee for all staff.", o: ["True", "False"], a: 1, why: "Câu này sai vì công ty chỉ trả một nửa học phí cho nhân viên hoàn thành khóa học, không phải toàn bộ." }
+        { type: "MC", q: "How much of the fee does the company pay for staff who complete the course?", o: ["The full fee","Half of the fee","Nothing","A quarter of the fee"], a: 1, why: "Ví dụ: trong đoạn nghe có câu “the company will pay half for staff who complete the course”. Vì vậy đáp án “Half of the fee” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'the company will pay half for staff who complete the course.' (Công ty chỉ trả một nửa cho nhân viên hoàn thành khóa học, không phải toàn bộ.)", whyU7: true }
       ]
     }
   ]);
@@ -96305,7 +102572,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "Which group is the least satisfied?", o: ["First-year students", "Second-year students", "Final-year students", "Postgraduate students"], a: 2, why: "Sinh viên năm cuối ít hài lòng nhất, ở mức 68%, trong khi sinh viên năm nhất hài lòng nhất ở mức 86%." },
         { type: "MATCH", q: "Which reason for final-year dissatisfaction is mentioned?", o: ["High tuition fees", "Limited access to busy supervisors", "Poor library facilities"], a: 1, why: "Bình luận mở cho thấy hai lý do: áp lực từ đồ án cuối khóa và hạn chế tiếp cận giảng viên hướng dẫn, những người rất bận vào thời điểm này trong năm." },
         { type: "COMP", q: "Results will be presented to the faculty board next ___.", answer: "Thursday", why: "Kết quả sẽ được trình bày trước hội đồng khoa vào thứ Năm tới, kèm bản tóm tắt ngắn cho sinh viên." },
-        { type: "TF", q: "Overall, 78 percent of students are satisfied or very satisfied.", o: ["True", "False"], a: 0, why: "Câu này đúng vì mức hài lòng chung khá cao: 78% sinh viên nói hài lòng hoặc rất hài lòng với khóa học." }
+        { type: "MATCH", q: "How satisfied are first-year students?", o: ["68 percent","78 percent","86 percent"], a: 2, why: "Ví dụ: trong đoạn nghe có câu “First-year students are the most satisfied, at 86 percent, while final-year students are the least satisfied, at 68 percent”. Vì vậy đáp án “86 percent” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'First-year students are the most satisfied, at 86 percent, while final-year students are the least satisfied, at 68 percent.'", whyU7: true }
       ]
     },
     {
@@ -96318,7 +102585,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "What have digital platforms made easier?", o: ["Manufacturing more products", "Matching people with spare capacity to people who need it", "Paying taxes", "Building hotels"], a: 1, why: "Nền tảng số giúp việc chia sẻ dễ hơn nhiều bằng cách kết nối người có năng lực dư thừa với người cần nó." },
         { type: "MATCH", q: "Which difficult question is raised?", o: ["Whether regular renters are private individuals or businesses", "Whether sharing saves time", "Whether cars are expensive"], a: 0, why: "Bài giảng đặt câu hỏi: khi một người cho thuê phòng hay xe thường xuyên, họ vẫn là cá nhân hay đã trở thành doanh nghiệp?" },
         { type: "COMP", q: "Sharing reduces the number of products that need to be ___.", answer: "manufactured", why: "Chia sẻ giảm số sản phẩm cần sản xuất, nhờ đó tiết kiệm vật liệu và năng lượng." },
-        { type: "TF", q: "The lecturer calls the sharing economy a revolution.", o: ["True", "False"], a: 1, why: "Câu này sai vì giảng viên nói kinh tế chia sẻ không phải cuộc cách mạng cũng không phải mốt nhất thời, mà là bổ sung hữu ích cho sở hữu truyền thống." }
+        { type: "SA", q: "In the lecturer's view, what is the sharing economy?", answer: "a useful addition to traditional ownership", why: "Ví dụ: trong đoạn nghe có câu “In my view, the sharing economy is neither a revolution nor a passing fashion. It is a useful addition to traditional ownership”. Vì vậy đáp án “a useful addition to traditional ownership” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'In my view, the sharing economy is neither a revolution nor a passing fashion. It is a useful addition to traditional ownership...' (Giảng viên không gọi đó là một cuộc cách mạng, mà là một bổ sung hữu ích cho hình thức sở hữu truyền thống.)", whyU7: true }
       ]
     },
     {
@@ -96331,7 +102598,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "How does climate-related migration differ from traditional migration?", o: ["It is always planned over years", "It may happen suddenly, with little time to prepare and few resources", "It only affects rich countries", "It never involves families"], a: 1, why: "Khác với di cư truyền thống thường lên kế hoạch nhiều tháng hay nhiều năm, di cư do khí hậu có thể xảy ra đột ngột sau lũ lụt hay hạn hán, ít thời gian chuẩn bị và ít nguồn lực." },
         { type: "MATCH", q: "Which benefit of migration is mentioned?", o: ["Lower house prices", "New workers, new skills and new cultural energy", "Less traffic"], a: 1, why: "Với quy hoạch sớm, di cư cũng có thể mang lại lợi ích: lao động mới, kỹ năng mới và năng lượng văn hóa mới." },
         { type: "COMP", q: "Climate-related migrants are particularly ___.", answer: "vulnerable", why: "Di cư đột ngột, ít chuẩn bị và ít nguồn lực khiến nhóm này đặc biệt dễ bị tổn thương." },
-        { type: "TF", q: "The key question is whether climate migration will happen.", o: ["True", "False"], a: 1, why: "Câu này sai vì câu hỏi then chốt với nhà hoạch định chính sách không phải liệu di cư khí hậu có xảy ra hay không, mà là xã hội sẽ chuẩn bị trước hay chỉ phản ứng sau khi nó đã bắt đầu." }
+        { type: "MC", q: "What must cities that receive climate migrants provide?", o: ["Free flights home","New farmland only","Housing, jobs and services for new arrivals","Tourist guides"], a: 2, why: "Ví dụ: trong đoạn nghe có câu “They must provide housing, jobs and services for new arrivals, often with limited budgets”. Vì vậy đáp án “Housing, jobs and services for new arrivals” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'They must provide housing, jobs and services for new arrivals, often with limited budgets.' Câu hỏi then chốt trong bài là các xã hội có chuẩn bị trước hay không, chứ không phải di cư có xảy ra hay không.", whyU7: true }
       ]
     }
   ]);
@@ -96703,7 +102970,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "Why is editing an embryo particularly concerning?", o: ["Because it is expensive", "Because the change would be passed to all future generations who cannot consent", "Because it is slow", "Because it only works on adults"], a: 1, why: "Thay đổi ở phôi sẽ được truyền cho mọi thế hệ tương lai, những người không thể đồng ý với nó." },
         { type: "MATCH", q: "Which distinction is described as far from clear?", o: ["Between research and teaching", "Between preventing disease and enhancing traits", "Between medicine and surgery"], a: 1, why: "Ranh giới giữa ngăn ngừa bệnh và tăng cường đặc điểm — như trí thông minh hay ngoại hình — còn xa mới rõ ràng." },
         { type: "COMP", q: "Some countries have banned heritable gene editing ___.", answer: "entirely", why: "Một số nước đã cấm hoàn toàn chỉnh sửa gene di truyền, trong khi số khác cho phép nghiên cứu với điều kiện nghiêm ngặt." },
-        { type: "TF", q: "There is a global agreement on heritable gene editing.", o: ["True", "False"], a: 1, why: "Câu này sai vì điều đáng chú ý là không có thỏa thuận toàn cầu, dù hậu quả của quyết định ở một nước có thể ảnh hưởng tới toàn bộ vốn gene con người." }
+        { type: "COMP", q: "Different societies have responded ___.", answer: "differently", why: "Ví dụ: trong đoạn nghe có câu “Different societies have responded differently... What is striking is that there is no global agreement”. Vì vậy đáp án “differently” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'Different societies have responded differently... What is striking is that there is no global agreement...' (Các xã hội phản ứng khác nhau — không có thỏa thuận toàn cầu.)", whyU7: true }
       ]
     },
     {
@@ -96716,7 +102983,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "Why can a city functioning at night feel safer?", o: ["Because police work more at night", "Because streets with people, lights and open businesses deter crime more effectively", "Because criminals sleep at night", "Because cameras work better at night"], a: 1, why: "Thành phố hoạt động về đêm có thể cảm thấy an toàn hơn vì đường phố có người, ánh sáng và cửa hàng mở có xu hướng ngăn chặn tội phạm hiệu quả hơn đường phố trống và tối." },
         { type: "MATCH", q: "Which health risk for night workers is mentioned?", o: ["Back pain", "Health risks from disrupted sleep patterns", "Eye strain"], a: 1, why: "Người làm việc ban đêm có thể đối mặt rủi ro sức khỏe từ mô hình giấc ngủ bị phá vỡ và hạn chế tiếp cận dịch vụ đóng cửa về đêm như giữ trẻ." },
         { type: "COMP", q: "Some cities have appointed night ___ to mediate between businesses, residents and workers.", answer: "mayors", why: "Một số thành phố đã bổ nhiệm thị trưởng ban đêm để hòa giải giữa doanh nghiệp, cư dân và người lao động." },
-        { type: "TF", q: "The night-time economy has only benefits and no tensions.", o: ["True", "False"], a: 1, why: "Câu này sai vì nền kinh tế ban đêm cũng tạo ra căng thẳng: cư dân gần khu vực giải trí về đêm có thể chịu tiếng ồn và giấc ngủ bị quấy rầy." }
+        { type: "MATCH", q: "What may residents near busy nightlife areas suffer from?", o: ["Higher wages","Noise and disturbed sleep","Better transport"], a: 1, why: "Ví dụ: trong đoạn nghe có câu “Residents who live near busy nightlife areas may suffer from noise and disturbed sleep, which can affect their health and work”. Vì vậy đáp án “Noise and disturbed sleep” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyOrig: "Bài nghe: 'Residents who live near busy nightlife areas may suffer from noise and disturbed sleep, which can affect their health and work.'", whyU7: true }
       ]
     },
     {
@@ -96729,7 +102996,7 @@ ZH_WRITE.push.apply(ZH_WRITE, [
         { type: "MC", q: "Which responses should probably be excluded?", o: ["Responses from old people", "150 responses completed in under one minute", "Responses from students", "The first 100 responses"], a: 1, why: "Nhóm tìm thấy 150 phản hồi hoàn thành dưới một phút, gần như không thể với khảo sát 30 câu hỏi, nên có lẽ cần loại bỏ." },
         { type: "MATCH", q: "What suggests most respondents took the survey seriously?", o: ["The high number of responses", "A consistent pattern across age groups in the remaining responses", "The short completion time"], a: 1, why: "Các phản hồi còn lại cho thấy mô hình nhất quán giữa các nhóm tuổi, cho thấy hầu hết người trả lời đã làm khảo sát nghiêm túc." },
         { type: "COMP", q: "The sample was self-selected, not ___, so results cannot be generalised.", answer: "random", why: "Báo cáo nên nêu rõ mẫu tự chọn, không phải ngẫu nhiên, nên kết quả không thể khái quát cho toàn bộ dân số." },
-        { type: "TF", q: "The researchers agree that hiding limitations makes a survey more credible.", o: ["True", "False"], a: 1, why: "Câu này sai vì hai người đồng ý rằng minh bạch về hạn chế tốt hơn giả vờ dữ liệu hoàn hảo, và khảo sát có hạn chế trung thực đáng tin hơn nhiều so với khảo sát che giấu chúng." }
+        { type: "MC", q: "What does the speaker say about the remaining responses?", o: ["They are all duplicates","They come from one device","They prove the survey is perfect","They show a consistent pattern across age groups, suggesting most respondents took the survey seriously"], a: 3, why: "Ví dụ: trong đoạn nghe có câu “The remaining responses show a consistent pattern across age groups, which suggests that most respondents took the survey seriously”. Vì vậy đáp án “They show a consistent pattern across age groups, suggesting most respondents took the survey seriously” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: 'The remaining responses show a consistent pattern across age groups, which suggests that most respondents took the survey seriously.' Hai người cũng đồng ý khảo sát trung thực về hạn chế mới đáng tin, chứ không phải che giấu hạn chế.", whyU7: true }
       ]
     }
   ]);
@@ -98648,30 +104915,30 @@ var TP_READ = [
 { q: "Ẩm thực Seoul thế nào?", o: ["Ngon", "Cay", "Mặn", "Nhạt"], a: 0, why: "서울의 음식은 맛있습니다: ẩm thực Seoul ngon." }
 ] }
 ];
-// Thi thử rút gọn đợt 30/10: 35 Nghe + 35 Đọc = 70 câu, 100 phút tham khảo. Tổng bằng thi thật TOPIK I nhưng tỉ lệ từng phần khác (thi thật: 30 Nghe + 40 Đọc) nên cấp vẫn chỉ là ước lượng tham khảo.
+// v265: TOPIK I dung ti le de that: 30 Nghe + 40 Đọc = 70 câu, 100 phút tham khảo. Nghe: cau 1-10 ngan, cau 11-30 keo dai; Đọc: 35 cau cu + 5 cau moi co doan van rieng. Cap van chi la uoc luong tham khao.
 var TP_MOCK_L = [
-{ q: "Nghe: '안녕하세요.' Người nói đang làm gì?", script: "안녕하세요.", o: ["Chào hỏi", "Tạm biệt", "Cảm ơn", "Xin lỗi"], a: 0, why: "안녕하세요 là câu chào hỏi." },
-{ q: "Nghe: '저는 선생님입니다.' Người nói là ai?", script: "저는 선생님입니다.", o: ["Giáo viên", "Học sinh", "Bác sĩ", "Nhân viên"], a: 0, why: "선생님 là giáo viên." },
-{ q: "Nghe: '이것은 얼마예요?' '3,000원이에요.' Giá là bao nhiêu?", script: "이것은 얼마예요? 3,000원이에요.", o: ["3.000 won", "5.000 won", "30.000 won", "300 won"], a: 0, why: "3,000원 là 3.000 won." },
-{ q: "Nghe: '오늘은 비가 와요.' Hôm nay thời tiết thế nào?", script: "오늘은 비가 와요.", o: ["Mưa", "Nắng", "Tuyết rơi", "Có gió"], a: 0, why: "비가 와요 là trời mưa." },
-{ q: "Nghe: '주말에 뭐 할 거예요?' '집에서 쉴 거예요.' Cuối tuần người nói sẽ làm gì?", script: "주말에 뭐 할 거예요? 집에서 쉴 거예요.", o: ["Nghỉ ở nhà", "Đi xem phim", "Đi chợ", "Học bài"], a: 0, why: "집에서 쉴 거예요: sẽ nghỉ ở nhà." },
-{ q: "Nghe: '저는 매일 운동을 해요.' Người nói làm gì mỗi ngày?", script: "저는 매일 운동을 해요.", o: ["Tập thể thao", "Đọc sách", "Nấu ăn", "Đi chợ"], a: 0, why: "운동을 해요 là tập thể thao." },
-{ q: "Nghe: '어디에 가요?' '시장에 가요.' Người nói đi đâu?", script: "어디에 가요? 시장에 가요.", o: ["Chợ", "Trường học", "Bệnh viện", "Công ty"], a: 0, why: "시장에 가요 là đi chợ." },
-{ q: "Nghe: '버스는 10분 후에 옵니다.' Xe buýt đến khi nào?", script: "버스는 10분 후에 옵니다.", o: ["Sau 10 phút", "Sau 10 giờ", "Ngay bây giờ", "Ngày mai"], a: 0, why: "10분 후에: sau 10 phút." },
-{ q: "Nghe: '저는 한국어를 공부하고 싶어요.' Người nói muốn làm gì?", script: "저는 한국어를 공부하고 싶어요.", o: ["Học tiếng Hàn", "Đi Hàn Quốc", "Dạy tiếng Hàn", "Mua sách"], a: 0, why: "공부하고 싶어요 là muốn học." },
-{ q: "Nghe: '뭐 마실까요?' '커피를 마셔요.' Hai người sẽ uống gì?", script: "뭐 마실까요? 커피를 마셔요.", o: ["Cà phê", "Nước", "Trà", "Sữa"], a: 0, why: "커피를 마셔요 là uống cà phê." }
+{ q: "Nghe: '저는 선생님입니다.' Người nói là ai?", script: "저는 선생님입니다.", o: ["Giáo viên","Học sinh","Bác sĩ","Nhân viên"], a: 0, why: "선생님 là giáo viên." },
+{ q: "Nghe: '이것은 얼마예요?' '3,000원이에요.' Giá là bao nhiêu?", script: "이것은 얼마예요? 3,000원이에요.", o: ["3.000 won","5.000 won","30.000 won","300 won"], a: 0, why: "3,000원 là 3.000 won." },
+{ q: "Nghe: '오늘은 비가 와요.' Hôm nay thời tiết thế nào?", script: "오늘은 비가 와요.", o: ["Mưa","Nắng","Tuyết rơi","Có gió"], a: 0, why: "비가 와요 là trời mưa." },
+{ q: "Nghe: '주말에 뭐 할 거예요?' '집에서 쉴 거예요.' Cuối tuần người nói sẽ làm gì?", script: "주말에 뭐 할 거예요? 집에서 쉴 거예요.", o: ["Nghỉ ở nhà","Đi xem phim","Đi chợ","Học bài"], a: 0, why: "집에서 쉴 거예요: sẽ nghỉ ở nhà." },
+{ q: "Nghe: '저는 매일 운동을 해요.' Người nói làm gì mỗi ngày?", script: "저는 매일 운동을 해요.", o: ["Tập thể thao","Đọc sách","Nấu ăn","Đi chợ"], a: 0, why: "운동을 해요 là tập thể thao." },
+{ q: "Nghe: '어디에 가요?' '시장에 가요.' Người nói đi đâu?", script: "어디에 가요? 시장에 가요.", o: ["Chợ","Trường học","Bệnh viện","Công ty"], a: 0, why: "시장에 가요 là đi chợ." },
+{ q: "Nghe: '버스는 10분 후에 옵니다.' Xe buýt đến khi nào?", script: "버스는 10분 후에 옵니다.", o: ["Sau 10 phút","Sau 10 giờ","Ngay bây giờ","Ngày mai"], a: 0, why: "10분 후에: sau 10 phút." },
+{ q: "Nghe: '저는 한국어를 공부하고 싶어요.' Người nói muốn làm gì?", script: "저는 한국어를 공부하고 싶어요.", o: ["Học tiếng Hàn","Đi Hàn Quốc","Dạy tiếng Hàn","Mua sách"], a: 0, why: "공부하고 싶어요 là muốn học." },
+{ q: "Nghe: '뭐 마실까요?' '커피를 마셔요.' Hai người sẽ uống gì?", script: "뭐 마실까요? 커피를 마셔요.", o: ["Cà phê","Nước","Trà","Sữa"], a: 0, why: "커피를 마셔요 là uống cà phê." },
+{ q: "Nghe: '이것은 연필입니다.' Đây là cái gì?", script: "이것은 연필입니다.", o: ["Bút chì","Bút mực","Sách","Vở"], a: 0, why: "연필 là bút chì." }
 ];
 var TP_MOCK_R = [
-{ q: "Điền đúng: '저는 학교___ 가요.'", o: ["에", "에서", "를", "가"], a: 0, why: "Nơi đến dùng 에." },
-{ q: "'친구' nghĩa là gì?", o: ["Bạn", "Gia đình", "Thầy cô", "Đồng nghiệp"], a: 0, why: "친구 là bạn." },
-{ q: "Điền đúng: '어제 책을 ___.' (đọc, quá khứ)", o: ["읽어요", "읽었어요", "읽을 거예요", "읽고 싶어요"], a: 1, why: "어제 là quá khứ: 읽었어요." },
-{ q: "Đọc: '미나 씨는 매일 아침에 커피를 마셔요.' Mina mỗi sáng làm gì?", o: ["Uống cà phê", "Ăn cơm", "Đi học", "Tập thể thao"], a: 0, why: "매일 아침에 커피를 마셔요: mỗi sáng uống cà phê." },
-{ q: "Câu trái nghĩa với '이 옷은 비싸요.' là:", o: ["이 옷은 싸요.", "이 옷은 예뻐요.", "이 옷은 커요.", "이 옷은 작아요."], a: 0, why: "싸요 (rẻ) trái nghĩa với 비싸요 (đắt)." },
-{ q: "Đọc: '도서관은 조용합니다. 도서관에서 책을 읽어요.' Ở thư viện làm gì?", o: ["Đọc sách", "Ăn cơm", "Ngủ", "Chơi"], a: 0, why: "도서관에서 책을 읽어요: ở thư viện đọc sách." },
-{ q: "Điền đúng: '내일 영화를 ___ 거예요.' (xem, tương lai)", o: ["봐", "봤", "볼", "보고"], a: 2, why: "보다 tương lai là 볼 거예요." },
-{ q: "'한국' đọc là gì?", o: ["hanguk", "hakgyo", "gajok", "hanja"], a: 0, why: "한국 đọc là hanguk." },
-{ q: "Đọc: '지민은 의사입니다. 병원에서 일해요.' Jimin làm việc ở đâu?", o: ["Bệnh viện", "Trường học", "Công ty", "Thư viện"], a: 0, why: "병원에서 일해요: làm việc ở bệnh viện." },
-{ q: "Đọc: '저는 한국에 가고 싶어요.' Người nói muốn gì?", o: ["Đi Hàn Quốc", "Học tiếng Hàn", "Mua vé", "Gặp bạn"], a: 0, why: "한국에 가고 싶어요: muốn đi Hàn Quốc." }
+{ q: "Điền đúng: '저는 학교___ 가요.'", o: ["에","에서","를","가"], a: 0, why: "Nơi đến dùng 에." },
+{ q: "'친구' nghĩa là gì?", o: ["Bạn","Gia đình","Thầy cô","Đồng nghiệp"], a: 0, why: "친구 là bạn." },
+{ q: "Điền đúng: '어제 책을 ___.' (đọc, quá khứ)", o: ["읽어요","읽었어요","읽을 거예요","읽고 싶어요"], a: 1, why: "어제 là quá khứ: 읽었어요." },
+{ q: "Đọc: '미나 씨는 매일 아침에 커피를 마셔요.' Mina mỗi sáng làm gì?", o: ["Uống cà phê","Ăn cơm","Đi học","Tập thể thao"], a: 0, why: "매일 아침에 커피를 마셔요: mỗi sáng uống cà phê." },
+{ q: "Câu trái nghĩa với '이 옷은 비싸요.' là:", o: ["이 옷은 싸요.","이 옷은 예뻐요.","이 옷은 커요.","이 옷은 작아요."], a: 0, why: "싸요 (rẻ) trái nghĩa với 비싸요 (đắt)." },
+{ q: "Đọc: '도서관은 조용합니다. 도서관에서 책을 읽어요.' Ở thư viện làm gì?", o: ["Đọc sách","Ăn cơm","Ngủ","Chơi"], a: 0, why: "도서관에서 책을 읽어요: ở thư viện đọc sách." },
+{ q: "Điền đúng: '내일 영화를 ___ 거예요.' (xem, tương lai)", o: ["봐","봤","볼","보고"], a: 2, why: "보다 tương lai là 볼 거예요." },
+{ q: "'한국' đọc là gì?", o: ["hanguk","hakgyo","gajok","hanja"], a: 0, why: "한국 đọc là hanguk." },
+{ q: "Đọc: '지민은 의사입니다. 병원에서 일해요.' Jimin làm việc ở đâu?", o: ["Bệnh viện","Trường học","Công ty","Thư viện"], a: 0, why: "병원에서 일해요: làm việc ở bệnh viện." },
+{ q: "Đọc: '저는 한국에 가고 싶어요.' Người nói muốn gì?", o: ["Đi Hàn Quốc","Học tiếng Hàn","Mua vé","Gặp bạn"], a: 0, why: "한국에 가고 싶어요: muốn đi Hàn Quốc." }
 ];
 // v210: Thu tu net chu Hangul (TP_STROKES) — mau ZH_STROKES: moi muc co
 // han (chu cai / am tiet), py (phien am RR), vi (nghia tieng Viet ngan),
@@ -99955,58 +106222,58 @@ var TP_READ_EXPAND = [
   ] }
 ];
 var TP_MOCK_L_EXPAND = [
-{ q: "Nghe: '이것은 연필입니다.' Đây là cái gì?", script: "이것은 연필입니다.", o: ["Bút chì", "Bút mực", "Sách", "Vở"], a: 0, why: "연필 là bút chì." },
-{ q: "Nghe: '저는 한국 사람입니다.' Người nói là người nước nào?", script: "저는 한국 사람입니다.", o: ["Hàn Quốc", "Việt Nam", "Nhật Bản", "Trung Quốc"], a: 0, why: "한국 사람 là người Hàn Quốc." },
-{ q: "Nghe: '지금은 오후 5시예요.' Bây giờ là mấy giờ?", script: "지금은 오후 5시예요.", o: ["5 giờ chiều", "5 giờ sáng", "3 giờ chiều", "6 giờ chiều"], a: 0, why: "오후 5시 là 5 giờ chiều." },
-{ q: "Nghe: '내일은 일요일이에요.' Ngày mai là thứ mấy?", script: "내일은 일요일이에요.", o: ["Chủ nhật", "Thứ Bảy", "Thứ Hai", "Thứ Sáu"], a: 0, why: "일요일 là chủ nhật." },
-{ q: "Nghe: '이 책은 얼마예요?' '5,000원이에요.' Cuốn sách giá bao nhiêu?", script: "이 책은 얼마예요? 5,000원이에요.", o: ["5.000 won", "50.000 won", "500 won", "15.000 won"], a: 0, why: "5,000원 là 5.000 won." },
-{ q: "Nghe: '날씨가 추워요.' Thời tiết thế nào?", script: "날씨가 추워요.", o: ["Lạnh", "Nóng", "Mát", "Ẩm"], a: 0, why: "추워요 là lạnh." },
-{ q: "Nghe: '저는 매일 운동을 해요.' Người nói làm gì mỗi ngày?", script: "저는 매일 운동을 해요.", o: ["Tập thể dục", "Đọc sách", "Nấu ăn", "Ngủ"], a: 0, why: "운동을 해요 là tập thể dục." },
-{ q: "Nghe: '남자: 어디에 가요? 여자: 도서관에 가요.' Người phụ nữ đi đâu?", script: "남자: 어디에 가요? 여자: 도서관에 가요.", o: ["Thư viện", "Trường học", "Công viên", "Chợ"], a: 0, why: "도서관에 가요 là đi thư viện." },
-{ q: "Nghe: '남자: 점심을 먹었어요? 여자: 네, 먹었어요.' Người phụ nữ đã ăn trưa chưa?", script: "남자: 점심을 먹었어요? 여자: 네, 먹었어요.", o: ["Rồi", "Chưa", "Không ăn", "Đang ăn"], a: 0, why: "네, 먹었어요 là đã ăn rồi." },
-{ q: "Nghe: '이 가방은 무거워요.' Chiếc túi thế nào?", script: "이 가방은 무거워요.", o: ["Nặng", "Nhẹ", "To", "Nhỏ"], a: 0, why: "무거워요 là nặng." },
-{ q: "Nghe: '저는 커피를 좋아하지 않아요.' Người nói thích hay không thích cà phê?", script: "저는 커피를 좋아하지 않아요.", o: ["Không thích", "Thích", "Rất thích", "Ghét"], a: 0, why: "좋아하지 않아요 là không thích." },
-{ q: "Nghe: '오늘은 월요일이에요.' Hôm nay là thứ mấy?", script: "오늘은 월요일이에요.", o: ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Chủ nhật"], a: 0, why: "월요일 là thứ Hai." },
-{ q: "Nghe: '남자: 몇 명이 왔어요? 여자: 다섯 명이 왔어요.' Có mấy người đã đến?", script: "남자: 몇 명이 왔어요? 여자: 다섯 명이 왔어요.", o: ["5 người", "4 người", "6 người", "3 người"], a: 0, why: "다섯 명 là 5 người." },
-{ q: "Nghe: '저는 서울에 살아요.' Người nói sống ở đâu?", script: "저는 서울에 살아요.", o: ["Seoul", "Busan", "Incheon", "Daegu"], a: 0, why: "서울에 살아요 là sống ở Seoul." },
-{ q: "Nghe: '이 영화는 재미있어요.' Bộ phim thế nào?", script: "이 영화는 재미있어요.", o: ["Thú vị", "Buồn chán", "Buồn", "Đáng sợ"], a: 0, why: "재미있어요 là thú vị." },
-{ q: "Nghe: '남자: 버스는 어디에서 타요? 여자: 저기 정류장에서 타요.' Đi xe buýt ở đâu?", script: "남자: 버스는 어디에서 타요? 여자: 저기 정류장에서 타요.", o: ["Trạm xe buýt đằng kia", "Trước cửa", "Ở ga", "Ở chợ"], a: 0, why: "저기 정류장에서 là ở trạm xe buýt đằng kia." },
-{ q: "Nghe: '저는 20살이에요.' Người nói bao nhiêu tuổi?", script: "저는 20살이에요.", o: ["20 tuổi", "12 tuổi", "30 tuổi", "25 tuổi"], a: 0, why: "20살 là 20 tuổi." },
-{ q: "Nghe: '어제는 비가 왔어요.' Hôm qua thời tiết thế nào?", script: "어제는 비가 왔어요.", o: ["Mưa", "Nắng", "Tuyết rơi", "Có gió"], a: 0, why: "비가 왔어요 là trời đã mưa." },
-{ q: "Nghe: '남자: 내일 뭐 할 거예요? 여자: 친구를 만날 거예요.' Ngày mai người phụ nữ sẽ làm gì?", script: "남자: 내일 뭐 할 거예요? 여자: 친구를 만날 거예요.", o: ["Gặp bạn", "Đi học", "Làm việc", "Nghỉ ngơi ở nhà"], a: 0, why: "친구를 만날 거예요 là sẽ gặp bạn." },
-{ q: "Nghe: '이 옷은 싸요.' Quần áo này thế nào?", script: "이 옷은 싸요.", o: ["Rẻ", "Đắt", "Đẹp", "Xấu"], a: 0, why: "싸요 là rẻ." },
-{ q: "Nghe: '저는 아침에 빵을 먹어요.' Buổi sáng người nói ăn gì?", script: "저는 아침에 빵을 먹어요.", o: ["Bánh mì", "Cơm", "Mì", "Trứng"], a: 0, why: "빵을 먹어요 là ăn bánh mì." },
-{ q: "Nghe: '남자: 몇 시에 자요? 여자: 11시에 자요.' Người phụ nữ đi ngủ lúc nào?", script: "남자: 몇 시에 자요? 여자: 11시에 자요.", o: ["11 giờ", "10 giờ", "12 giờ", "9 giờ"], a: 0, why: "11시에 자요 là ngủ lúc 11 giờ." },
-{ q: "Nghe: '이것은 제 동생이에요.' Người này là ai của người nói?", script: "이것은 제 동생이에요.", o: ["Em", "Anh/chị", "Bạn", "Bố"], a: 0, why: "동생 là em." },
-{ q: "Nghe: '남자: 한국어를 잘해요? 여자: 조금 해요.' Người phụ nữ nói tiếng Hàn thế nào?", script: "남자: 한국어를 잘해요? 여자: 조금 해요.", o: ["Một chút", "Rất giỏi", "Không biết", "Khá giỏi"], a: 0, why: "조금 해요 là biết một chút." },
-{ q: "Nghe: '오늘은 덥지 않아요.' Hôm nay thời tiết thế nào?", script: "오늘은 덥지 않아요.", o: ["Không nóng", "Nóng", "Lạnh", "Mát"], a: 0, why: "덥지 않아요 là không nóng." }
+{ q: "Nghe: '남자: 안녕하세요? 저는 미국 사람입니다. 여자: 아, 그렇군요. 저는 한국 사람입니다. 서울에서 왔어요. 남자: 서울은 한국의 수도지요? 여자: 네, 맞아요.' Người phụ nữ là người nước nào?", script: "남자: 안녕하세요? 저는 미국 사람입니다. 여자: 아, 그렇군요. 저는 한국 사람입니다. 서울에서 왔어요. 남자: 서울은 한국의 수도지요? 여자: 네, 맞아요.", o: ["Hàn Quốc","Việt Nam","Nhật Bản","Trung Quốc"], a: 0, why: "Người phụ nữ nói: '저는 한국 사람입니다' — cô ấy là người Hàn Quốc." },
+{ q: "Nghe: '여자: 지금 몇 시예요? 남자: 지금은 오후 5시예요. 여자: 아, 벌써 5시예요? 그럼 저는 지금 집에 가야 해요. 남자: 네, 오늘은 일찍 들어가세요.' Bây giờ là mấy giờ?", script: "여자: 지금 몇 시예요? 남자: 지금은 오후 5시예요. 여자: 아, 벌써 5시예요? 그럼 저는 지금 집에 가야 해요. 남자: 네, 오늘은 일찍 들어가세요.", o: ["5 giờ chiều","5 giờ sáng","3 giờ chiều","6 giờ chiều"], a: 0, why: "Người đàn ông nói: '지금은 오후 5시예요' — bây giờ là 5 giờ chiều." },
+{ q: "Nghe: '남자: 내일은 무슨 요일이에요? 여자: 내일은 일요일이에요. 남자: 아, 일요일에는 뭐 할 거예요? 여자: 저는 집에서 쉬고 책을 읽을 거예요.' Ngày mai là thứ mấy?", script: "남자: 내일은 무슨 요일이에요? 여자: 내일은 일요일이에요. 남자: 아, 일요일에는 뭐 할 거예요? 여자: 저는 집에서 쉬고 책을 읽을 거예요.", o: ["Chủ nhật","Thứ Bảy","Thứ Hai","Thứ Sáu"], a: 0, why: "'내일은 일요일이에요' — ngày mai là Chủ nhật." },
+{ q: "Nghe: '여자: 오늘 날씨가 어때요? 남자: 오늘은 날씨가 추워요. 바람도 많이 불어요. 여자: 그럼 두꺼운 옷을 입어야 해요. 남자: 네, 따뜻하게 입으세요.' Hôm nay thời tiết thế nào?", script: "여자: 오늘 날씨가 어때요? 남자: 오늘은 날씨가 추워요. 바람도 많이 불어요. 여자: 그럼 두꺼운 옷을 입어야 해요. 남자: 네, 따뜻하게 입으세요.", o: ["Lạnh","Nóng","Mát","Ẩm"], a: 0, why: "'오늘은 날씨가 추워요' — hôm nay trời lạnh." },
+{ q: "Nghe: '남자: 어디에 가요? 여자: 도서관에 가요. 책을 빌리러 가요. 남자: 무슨 책을 빌릴 거예요? 여자: 한국어 책을 빌릴 거예요.' Người phụ nữ đi đâu?", script: "남자: 어디에 가요? 여자: 도서관에 가요. 책을 빌리러 가요. 남자: 무슨 책을 빌릴 거예요? 여자: 한국어 책을 빌릴 거예요.", o: ["Thư viện","Trường học","Công viên","Chợ"], a: 0, why: "'도서관에 가요. 책을 빌리러 가요' — cô ấy đi thư viện để mượn sách." },
+{ q: "Nghe: '남자: 점심을 먹었어요? 여자: 네, 먹었어요. 남자: 뭐를 먹었어요? 여자: 김밥을 먹었어요. 집에서 싸 온 김밥이에요.' Người phụ nữ đã ăn trưa chưa?", script: "남자: 점심을 먹었어요? 여자: 네, 먹었어요. 남자: 뭐를 먹었어요? 여자: 김밥을 먹었어요. 집에서 싸 온 김밥이에요.", o: ["Chưa","Rồi","Không ăn","Đang ăn"], a: 1, why: "'네, 먹었어요. 김밥을 먹었어요' — cô ấy đã ăn trưa rồi." },
+{ q: "Nghe: '여자: 이 가방은 무거워요. 남자: 안에 뭐가 있어요? 여자: 책이 많아요. 한국어 책이 다섯 권이나 있어요. 남자: 그럼 제가 들어 드릴게요.' Chiếc túi thế nào?", script: "여자: 이 가방은 무거워요. 남자: 안에 뭐가 있어요? 여자: 책이 많아요. 한국어 책이 다섯 권이나 있어요. 남자: 그럼 제가 들어 드릴게요.", o: ["Nhẹ","Nặng","To","Nhỏ"], a: 1, why: "'이 가방은 무거워요. 책이 많아요' — chiếc túi nặng vì có nhiều sách." },
+{ q: "Nghe: '남자: 커피를 좋아해요? 여자: 아니요, 저는 커피를 좋아하지 않아요. 남자: 그럼 차를 마실까요? 여자: 네, 저는 녹차를 좋아해요.' Người nói thích hay không thích cà phê?", script: "남자: 커피를 좋아해요? 여자: 아니요, 저는 커피를 좋아하지 않아요. 남자: 그럼 차를 마실까요? 여자: 네, 저는 녹차를 좋아해요.", o: ["Thích","Không thích","Rất thích","Ghét"], a: 1, why: "'저는 커피를 좋아하지 않아요' — cô ấy không thích cà phê." },
+{ q: "Nghe: '남자: 몇 명이 왔어요? 여자: 다섯 명이 왔어요. 남자: 모두 왔어요? 여자: 네, 다섯 명이 모두 왔어요. 지금 회의실에 있어요.' Có mấy người đã đến?", script: "남자: 몇 명이 왔어요? 여자: 다섯 명이 왔어요. 남자: 모두 왔어요? 여자: 네, 다섯 명이 모두 왔어요. 지금 회의실에 있어요.", o: ["4 người","5 người","6 người","3 người"], a: 1, why: "'다섯 명이 왔어요. 다섯 명이 모두 왔어요' — có 5 người đã đến." },
+{ q: "Nghe: '여자: 어디에 살아요? 남자: 저는 서울에 살아요. 여자: 서울에서 얼마나 살았어요? 남자: 3년 동안 살았어요. 서울이 정말 좋아요.' Người nói sống ở đâu?", script: "여자: 어디에 살아요? 남자: 저는 서울에 살아요. 여자: 서울에서 얼마나 살았어요? 남자: 3년 동안 살았어요. 서울이 정말 좋아요.", o: ["Busan","Seoul","Incheon","Daegu"], a: 1, why: "'저는 서울에 살아요' — anh ấy sống ở Seoul." },
+{ q: "Nghe: '남자: 어제 영화를 봤어요? 여자: 네, 봤어요. 남자: 영화가 어땠어요? 여자: 이 영화는 재미있어요. 이야기도 좋고 음악도 좋아요. 남자: 그래요? 저도 보고 싶어요. 여자: 네, 주말에 같이 봐요.' Bộ phim thế nào?", script: "남자: 어제 영화를 봤어요? 여자: 네, 봤어요. 남자: 영화가 어땠어요? 여자: 이 영화는 재미있어요. 이야기도 좋고 음악도 좋아요. 남자: 그래요? 저도 보고 싶어요. 여자: 네, 주말에 같이 봐요.", o: ["Buồn chán","Buồn","Thú vị","Đáng sợ"], a: 2, why: "'이 영화는 재미있어요' — bộ phim thú vị." },
+{ q: "Nghe: '남자: 버스는 어디에서 타요? 여자: 저기 정류장에서 타요. 남자: 정류장이 어디에 있어요? 여자: 저기 은행 앞에 있어요. 남자: 몇 번 버스를 타야 해요? 여자: 5번 버스를 타세요. 10분 후에 와요.' Đi xe buýt ở đâu?", script: "남자: 버스는 어디에서 타요? 여자: 저기 정류장에서 타요. 남자: 정류장이 어디에 있어요? 여자: 저기 은행 앞에 있어요. 남자: 몇 번 버스를 타야 해요? 여자: 5번 버스를 타세요. 10분 후에 와요.", o: ["Trước cửa","Ở ga","Trạm xe buýt đằng kia","Ở chợ"], a: 2, why: "'저기 정류장에서 타요. 저기 은행 앞에 있어요' — đón xe buýt ở trạm đằng kia, trước ngân hàng." },
+{ q: "Nghe: '여자: 몇 살이에요? 남자: 저는 20살이에요. 여자: 아, 스무 살이군요. 저는 22살이에요. 남자: 그럼 저는 동생이네요. 여자: 네, 저는 누나예요. 만나서 반가워요. 남자: 네, 저도 반가워요.' Người đàn ông bao nhiêu tuổi?", script: "여자: 몇 살이에요? 남자: 저는 20살이에요. 여자: 아, 스무 살이군요. 저는 22살이에요. 남자: 그럼 저는 동생이네요. 여자: 네, 저는 누나예요. 만나서 반가워요. 남자: 네, 저도 반가워요.", o: ["12 tuổi","30 tuổi","20 tuổi","25 tuổi"], a: 2, why: "'저는 20살이에요' — anh ấy 20 tuổi." },
+{ q: "Nghe: '남자: 내일 뭐 할 거예요? 여자: 친구를 만날 거예요. 남자: 어디에서 만날 거예요? 여자: 홍대에서 만날 거예요. 남자: 뭐 할 거예요? 여자: 같이 점심을 먹고 영화를 볼 거예요.' Ngày mai người phụ nữ sẽ làm gì?", script: "남자: 내일 뭐 할 거예요? 여자: 친구를 만날 거예요. 남자: 어디에서 만날 거예요? 여자: 홍대에서 만날 거예요. 남자: 뭐 할 거예요? 여자: 같이 점심을 먹고 영화를 볼 거예요.", o: ["Đi học","Làm việc","Gặp bạn","Nghỉ ngơi ở nhà"], a: 2, why: "'친구를 만날 거예요' — ngày mai cô ấy sẽ gặp bạn." },
+{ q: "Nghe: '여자: 어서 오세요. 무엇을 찾으세요? 남자: 이 옷은 얼마예요? 여자: 이 옷은 싸요. 10,000원이에요. 남자: 정말 싸네요. 그럼 이 옷을 사겠어요. 여자: 네, 감사합니다.' Chiếc áo này có giá thế nào?", script: "여자: 어서 오세요. 무엇을 찾으세요? 남자: 이 옷은 얼마예요? 여자: 이 옷은 싸요. 10,000원이에요. 남자: 정말 싸네요. 그럼 이 옷을 사겠어요. 여자: 네, 감사합니다.", o: ["Đắt","Đẹp","Rẻ","Xấu"], a: 2, why: "'이 옷은 싸요. 10,000원이에요' — chiếc áo rẻ, giá 10.000 won." },
+{ q: "Nghe: '남자: 아침에 뭐를 먹어요? 여자: 저는 아침에 빵을 먹어요. 남자: 빵만 먹어요? 여자: 아니요, 빵하고 우유를 먹어요. 가끔은 과일도 먹어요. 남자: 건강하게 드시네요. 여자: 네, 아침을 꼭 먹어야 해요.' Buổi sáng người nói ăn gì?", script: "남자: 아침에 뭐를 먹어요? 여자: 저는 아침에 빵을 먹어요. 남자: 빵만 먹어요? 여자: 아니요, 빵하고 우유를 먹어요. 가끔은 과일도 먹어요. 남자: 건강하게 드시네요. 여자: 네, 아침을 꼭 먹어야 해요.", o: ["Cơm","Mì","Trứng","Bánh mì"], a: 3, why: "'저는 아침에 빵을 먹어요' — buổi sáng cô ấy ăn bánh mì." },
+{ q: "Nghe: '남자: 몇 시에 자요? 여자: 11시에 자요. 남자: 일찍 자네요. 몇 시에 일어나요? 여자: 아침 6시에 일어나요. 남자: 그럼 7시간이나 자네요. 여자: 네, 잠이 중요해요. 남자: 푹 주무세요.' Người phụ nữ đi ngủ lúc nào?", script: "남자: 몇 시에 자요? 여자: 11시에 자요. 남자: 일찍 자네요. 몇 시에 일어나요? 여자: 아침 6시에 일어나요. 남자: 그럼 7시간이나 자네요. 여자: 네, 잠이 중요해요. 남자: 푹 주무세요.", o: ["10 giờ","12 giờ","9 giờ","11 giờ"], a: 3, why: "'11시에 자요' — cô ấy đi ngủ lúc 11 giờ." },
+{ q: "Nghe: '여자: 저기 있는 사람은 누구예요? 남자: 저 사람은 제 동생이에요. 여자: 동생은 몇 살이에요? 남자: 동생은 15살이에요. 중학생이에요. 여자: 아, 그렇군요. 동생하고 사이가 좋아요? 남자: 네, 아주 좋아요.' Người này là ai của người nói?", script: "여자: 저기 있는 사람은 누구예요? 남자: 저 사람은 제 동생이에요. 여자: 동생은 몇 살이에요? 남자: 동생은 15살이에요. 중학생이에요. 여자: 아, 그렇군요. 동생하고 사이가 좋아요? 남자: 네, 아주 좋아요.", o: ["Anh/chị","Bạn","Bố","Em"], a: 3, why: "'이것은 제 동생이에요' — người đó là em của anh ấy." },
+{ q: "Nghe: '남자: 한국어를 잘해요? 여자: 조금 해요. 남자: 언제부터 공부했어요? 여자: 1년 전부터 공부했어요. 남자: 발음이 좋네요. 여자: 감사합니다. 아직 많이 부족해요. 남자: 매일 공부하면 곧 잘할 거예요. 여자: 네, 열심히 공부할게요.' Người phụ nữ nói tiếng Hàn thế nào?", script: "남자: 한국어를 잘해요? 여자: 조금 해요. 남자: 언제부터 공부했어요? 여자: 1년 전부터 공부했어요. 남자: 발음이 좋네요. 여자: 감사합니다. 아직 많이 부족해요. 남자: 매일 공부하면 곧 잘할 거예요. 여자: 네, 열심히 공부할게요.", o: ["Rất giỏi","Không biết","Khá giỏi","Một chút"], a: 3, why: "'조금 해요' — cô ấy nói tiếng Hàn một chút." },
+{ q: "Nghe: '여자: 오늘은 어때요? 남자: 오늘은 덥지 않아요. 여자: 그래요? 어제는 정말 더웠어요. 남자: 네, 오늘은 바람이 불어서 시원해요. 여자: 그럼 산책하기 좋겠네요. 남자: 네, 같이 산책할까요?' Hôm nay thời tiết thế nào?", script: "여자: 오늘은 어때요? 남자: 오늘은 덥지 않아요. 여자: 그래요? 어제는 정말 더웠어요. 남자: 네, 오늘은 바람이 불어서 시원해요. 여자: 그럼 산책하기 좋겠네요. 남자: 네, 같이 산책할까요?", o: ["Nóng","Lạnh","Nắng","Không nóng"], a: 3, why: "'오늘은 덥지 않아요. 바람이 불어서 시원해요' — hôm nay không nóng, có gió nên mát." }
 ];
 var TP_MOCK_R_EXPAND = [
-{ q: "Đọc: '이것은 책입니다.' Đây là cái gì?", o: ["Sách", "Vở", "Bút", "Bàn"], a: 0, why: "책 là sách: 이것은 책입니다 = Đây là sách." },
-{ q: "'사과' nghĩa là gì?", o: ["Quả táo", "Quả chuối", "Quả nho", "Quả cam"], a: 0, why: "사과 là quả táo." },
-{ q: "'학교' nghĩa là gì?", o: ["Trường học", "Bệnh viện", "Công ty", "Nhà"], a: 0, why: "학교 là trường học." },
-{ q: "Điền đúng: '어제 영화를 ___.' (xem, quá khứ)", o: ["봐요", "봤어요", "볼 거예요", "보고 싶어요"], a: 1, why: "어제 là quá khứ: 봤어요." },
-{ q: "Điền đúng: '저는 내일 친구를 ___.' (gặp, tương lai)", o: ["만나요", "만났어요", "만날 거예요", "만나고 싶어요"], a: 2, why: "내일 là tương lai: 만날 거예요." },
-{ q: "Từ trái nghĩa với '크다' (to) là gì?", o: ["작다", "길다", "높다", "빠르다"], a: 0, why: "작다 là nhỏ, trái nghĩa với 크다." },
-{ q: "Từ trái nghĩa với '빠르다' (nhanh) là gì?", o: ["느리다", "크다", "좋다", "쉽다"], a: 0, why: "느리다 là chậm, trái nghĩa với 빠르다." },
-{ q: "Đọc: '지민 씨는 의사예요. 병원에서 일해요.' Jimin làm việc ở đâu?", o: ["Bệnh viện", "Trường học", "Công ty", "Ngân hàng"], a: 0, why: "병원에서 일해요: làm việc ở bệnh viện." },
-{ q: "Đọc: '지민 씨는 의사예요.' Jimin làm nghề gì?", o: ["Bác sĩ", "Giáo viên", "Y tá", "Kỹ sư"], a: 0, why: "의사예요 là bác sĩ." },
-{ q: "Đọc: '오늘은 금요일이에요. 내일은 토요일이에요.' Ngày mai là thứ mấy?", o: ["Thứ Bảy", "Chủ nhật", "Thứ Sáu", "Thứ Hai"], a: 0, why: "내일은 토요일이에요: ngày mai là thứ Bảy." },
-{ q: "Câu nào đúng ngữ pháp?", o: ["저는 물을 마셔요.", "저는 물이 마셔요.", "저는 물에 마셔요."], a: 0, why: "Tân ngữ 'nước' dùng 을: 물을 마셔요." },
-{ q: "Câu nào đúng ngữ pháp?", o: ["저는 학교에 가요.", "저는 학교에서 가요.", "저는 학교를 가요."], a: 0, why: "Đi đến trường: 학교에 가요." },
-{ q: "'저녁' nghĩa là gì?", o: ["Buổi tối", "Buổi sáng", "Buổi trưa", "Buổi chiều"], a: 0, why: "저녁 là buổi tối." },
-{ q: "'아침' nghĩa là gì?", o: ["Buổi sáng", "Buổi tối", "Buổi trưa", "Đêm"], a: 0, why: "아침 là buổi sáng." },
-{ q: "Điền đúng: '저는 밥을 먹고 ___ 산책했어요.' (sau đó)", o: ["나서", "기 때문에", "지만", "거나"], a: 0, why: "먹고 나서 = sau khi ăn xong." },
-{ q: "Điền đúng: '비가 와___ 우산을 가져왔어요.' (vì)", o: ["서", "지만", "거나", "고"], a: 0, why: "와서 = vì mưa (lý do)." },
-{ q: "Đọc: '수미 씨는 매일 아침 6시에 일어나요. 그리고 운동을 해요.' Sumi thức dậy lúc nào?", o: ["6 giờ sáng", "7 giờ sáng", "5 giờ sáng", "8 giờ sáng"], a: 0, why: "매일 아침 6시에 일어나요." },
-{ q: "Đọc: '수미 씨는 매일 아침 6시에 일어나요. 그리고 운동을 해요.' Sau khi thức dậy, Sumi làm gì?", o: ["Tập thể dục", "Ăn sáng", "Đi học", "Đi làm"], a: 0, why: "그리고 운동을 해요: và tập thể dục." },
-{ q: "'도서관' nghĩa là gì?", o: ["Thư viện", "Bảo tàng", "Rạp phim", "Công viên"], a: 0, why: "도서관 là thư viện." },
-{ q: "'병원' nghĩa là gì?", o: ["Bệnh viện", "Trường học", "Ngân hàng", "Bưu điện"], a: 0, why: "병원 là bệnh viện." },
-{ q: "Điền đúng: '이것은 제 ___예요.' (sách)", o: ["책", "책을", "책이", "책에"], a: 0, why: "이것은 제 책예요: Đây là sách của tôi." },
-{ q: "Điền đúng: '저는 한국어를 ___ 공부해요.' (chăm chỉ)", o: ["열심히", "열심한", "열심", "열심히를"], a: 0, why: "Trạng từ 열심히 bổ nghĩa cho 공부해요." },
-{ q: "Đọc: '민수 씨는 축구를 좋아해요. 주말마다 축구를 해요.' Minsu chơi bóng đá khi nào?", o: ["Mỗi cuối tuần", "Mỗi ngày", "Mỗi tháng", "Mỗi năm"], a: 0, why: "주말마다 축구를 해요: mỗi cuối tuần chơi bóng đá." },
-{ q: "'친절하다' nghĩa là gì?", o: ["Thân thiện", "Thông minh", "Chăm chỉ", "Vui vẻ"], a: 0, why: "친절하다 là thân thiện." },
-{ q: "'어렵다' nghĩa là gì?", o: ["Khó", "Dễ", "Nhanh", "Chậm"], a: 0, why: "어렵다 là khó." }
+{ q: "Đọc: '이것은 책입니다.' Đây là cái gì?", o: ["Sách","Vở","Bút","Bàn"], a: 0, why: "책 là sách: 이것은 책입니다 = Đây là sách." },
+{ q: "'사과' nghĩa là gì?", o: ["Quả táo","Quả chuối","Quả nho","Quả cam"], a: 0, why: "사과 là quả táo." },
+{ q: "'학교' nghĩa là gì?", o: ["Trường học","Bệnh viện","Công ty","Nhà"], a: 0, why: "학교 là trường học." },
+{ q: "Điền đúng: '어제 영화를 ___.' (xem, quá khứ)", o: ["봐요","봤어요","볼 거예요","보고 싶어요"], a: 1, why: "어제 là quá khứ: 봤어요." },
+{ q: "Điền đúng: '저는 내일 친구를 ___.' (gặp, tương lai)", o: ["만나요","만났어요","만날 거예요","만나고 싶어요"], a: 2, why: "내일 là tương lai: 만날 거예요." },
+{ q: "Từ trái nghĩa với '크다' (to) là gì?", o: ["작다","길다","높다","빠르다"], a: 0, why: "작다 là nhỏ, trái nghĩa với 크다." },
+{ q: "Từ trái nghĩa với '빠르다' (nhanh) là gì?", o: ["느리다","크다","좋다","쉽다"], a: 0, why: "느리다 là chậm, trái nghĩa với 빠르다." },
+{ q: "Đọc: '지민 씨는 의사예요. 병원에서 일해요.' Jimin làm việc ở đâu?", o: ["Bệnh viện","Trường học","Công ty","Ngân hàng"], a: 0, why: "병원에서 일해요: làm việc ở bệnh viện." },
+{ q: "Đọc: '지민 씨는 의사예요.' Jimin làm nghề gì?", o: ["Bác sĩ","Giáo viên","Y tá","Kỹ sư"], a: 0, why: "의사예요 là bác sĩ." },
+{ q: "Đọc: '오늘은 금요일이에요. 내일은 토요일이에요.' Ngày mai là thứ mấy?", o: ["Thứ Bảy","Chủ nhật","Thứ Sáu","Thứ Hai"], a: 0, why: "내일은 토요일이에요: ngày mai là thứ Bảy." },
+{ q: "Câu nào đúng ngữ pháp?", o: ["저는 물을 마셔요.","저는 물이 마셔요.","저는 물에 마셔요."], a: 0, why: "Tân ngữ 'nước' dùng 을: 물을 마셔요." },
+{ q: "Câu nào đúng ngữ pháp?", o: ["저는 학교에 가요.","저는 학교에서 가요.","저는 학교를 가요."], a: 0, why: "Đi đến trường: 학교에 가요." },
+{ q: "'저녁' nghĩa là gì?", o: ["Buổi tối","Buổi sáng","Buổi trưa","Buổi chiều"], a: 0, why: "저녁 là buổi tối." },
+{ q: "'아침' nghĩa là gì?", o: ["Buổi sáng","Buổi tối","Buổi trưa","Đêm"], a: 0, why: "아침 là buổi sáng." },
+{ q: "Điền đúng: '저는 밥을 먹고 ___ 산책했어요.' (sau đó)", o: ["나서","기 때문에","지만","거나"], a: 0, why: "먹고 나서 = sau khi ăn xong." },
+{ q: "Điền đúng: '비가 와___ 우산을 가져왔어요.' (vì)", o: ["서","지만","거나","고"], a: 0, why: "와서 = vì mưa (lý do)." },
+{ q: "Đọc: '수미 씨는 매일 아침 6시에 일어나요. 그리고 운동을 해요.' Sumi thức dậy lúc nào?", o: ["6 giờ sáng","7 giờ sáng","5 giờ sáng","8 giờ sáng"], a: 0, why: "매일 아침 6시에 일어나요." },
+{ q: "Đọc: '수미 씨는 매일 아침 6시에 일어나요. 그리고 운동을 해요.' Sau khi thức dậy, Sumi làm gì?", o: ["Tập thể dục","Ăn sáng","Đi học","Đi làm"], a: 0, why: "그리고 운동을 해요: và tập thể dục." },
+{ q: "'도서관' nghĩa là gì?", o: ["Thư viện","Bảo tàng","Rạp phim","Công viên"], a: 0, why: "도서관 là thư viện." },
+{ q: "'병원' nghĩa là gì?", o: ["Bệnh viện","Trường học","Ngân hàng","Bưu điện"], a: 0, why: "병원 là bệnh viện." },
+{ q: "Điền đúng: '이것은 제 ___예요.' (sách)", o: ["책","책을","책이","책에"], a: 0, why: "이것은 제 책예요: Đây là sách của tôi." },
+{ q: "Điền đúng: '저는 한국어를 ___ 공부해요.' (chăm chỉ)", o: ["열심히","열심한","열심","열심히를"], a: 0, why: "Trạng từ 열심히 bổ nghĩa cho 공부해요." },
+{ q: "Đọc: '민수 씨는 축구를 좋아해요. 주말마다 축구를 해요.' Minsu chơi bóng đá khi nào?", o: ["Mỗi cuối tuần","Mỗi ngày","Mỗi tháng","Mỗi năm"], a: 0, why: "주말마다 축구를 해요: mỗi cuối tuần chơi bóng đá." },
+{ q: "'친절하다' nghĩa là gì?", o: ["Thân thiện","Thông minh","Chăm chỉ","Vui vẻ"], a: 0, why: "친절하다 là thân thiện." },
+{ q: "'어렵다' nghĩa là gì?", o: ["Khó","Dễ","Nhanh","Chậm"], a: 0, why: "어렵다 là khó." },
+{ q: "Lớp 초급반 mới học vào những buổi nào?", passage: "안내 말씀드립니다. 우리 한국어 학원에서는 다음 달부터 새로운 초급반을 시작합니다. 수업은 매주 월요일과 수요일 저녁 7시에 있습니다. 한 달 수업료는 150,000원입니다. 관심이 있는 분은 1층 안내 데스크에 문의해 주세요.", o: ["Thứ Hai và thứ Tư lúc 19 giờ","Thứ Ba và thứ Năm lúc 19 giờ","Thứ Hai và thứ Tư lúc 7 giờ sáng","Mỗi ngày lúc 19 giờ"], a: 0, why: "Đoạn văn ghi rõ: '수업은 매주 월요일과 수요일 저녁 7시에 있습니다' — lớp học thứ Hai và thứ Tư lúc 7 giờ tối." },
+{ q: "Trong thư viện, người đọc phải làm gì?", passage: "도서관 이용 안내: 도서관에서는 조용히 해 주세요. 음식물을 먹지 마세요. 책을 읽은 후에는 제자리에 두어 주세요. 휴대 전화는 진동으로 바꾸어 주세요. 여러분의 협조에 감사드립니다.", o: ["Ăn uống thoải mái","Giữ yên lặng","Nói chuyện thật to","Nghe nhạc không dùng tai nghe"], a: 1, why: "Biển báo ghi '도서관에서는 조용히 해 주세요' — trong thư viện phải giữ yên lặng; các lựa chọn còn lại đều trái với nội quy (không ăn uống, không ồn ào)." },
+{ q: "Quán giảm giá món 김치찌개 bao nhiêu phần trăm?", passage: "맛있는 김치찌개! 우리 식당에서는 이번 주 금요일까지 모든 김치찌개를 20% 할인합니다. 점심시간(11시부터 2시까지)에는 밥과 반찬이 무료입니다. 가족과 함께 오세요. 주소는 서울 시청 앞 10번지입니다.", o: ["10%","30%","20%","50%"], a: 2, why: "Quảng cáo ghi '모든 김치찌개를 20% 할인합니다' — giảm giá 20%." },
+{ q: "영희 씨 mấy giờ tan làm?", passage: "영희 씨는 회사원입니다. 아침 7시에 일어나서 8시에 집을 나갑니다. 회사에는 9시에 도착합니다. 점심은 회사 식당에서 먹습니다. 저녁 6시에 퇴근하고 집에서 저녁을 만듭니다. 밤 10시에 책을 읽고 잡니다.", o: ["17 giờ","19 giờ","20 giờ","18 giờ"], a: 3, why: "Đoạn văn ghi '저녁 6시에 퇴근하고' — tan làm lúc 6 giờ chiều, tức 18 giờ." },
+{ q: "Công ty nghỉ ngày nào?", passage: "직원 여러분께 알립니다. 다음 주 월요일은 공휴일이라서 회사가 쉽니다. 화요일부터 정상 근무합니다. 급한 일이 있으면 김 과장에게 연락해 주세요. 월요일에 회사 문이 닫혀 있으니 참고해 주세요. 즐거운 휴일 보내세요.", o: ["Thứ Hai tuần sau","Thứ Ba tuần sau","Thứ Hai tuần này","Cả tuần sau"], a: 0, why: "Thông báo ghi '다음 주 월요일은 공휴일이라서 회사가 쉽니다' — công ty nghỉ thứ Hai tuần sau; từ thứ Ba làm việc bình thường." }
 ];
 var TP_CHECK = [
 { stage: 0, title: "Kiểm tra cuối Hangul", qs: [
@@ -103124,6 +109391,62 @@ var IELTS_MOCKREAD_60 = [
 ]}
 ];
 
+// IELTS thi thu Doc Band 6,5 (v265, 28/11) — 3 bai, 13+13+14 = 40 cau, dung band 6,5. Tu soan 100%.
+var IELTS_MOCKREAD_65 = [
+{"topic":"Học tập suốt đời","level":"Band 6,5","title":"Learning After School: Why Adults Go Back to Class",
+"text":"A. For most of the twentieth century, education had a clear finishing line. People went to school, perhaps to university, found a job, and then stopped studying. Learning belonged to the young. Today that picture has changed. In many countries, adults in their thirties, forties and fifties are returning to classrooms, both real and virtual, in growing numbers. They take evening courses, weekend workshops and short online programmes, often while working full time and raising a family. This movement has a name: lifelong learning. But why are so many adults going back to study, and what do they hope to gain?\n\nB. The most obvious reason is work. The skills that employers want today are not the same as the skills they wanted twenty years ago. Jobs that once required only paper forms and a telephone now demand data analysis, digital communication and the ability to learn new software quickly. A factory worker may need to operate a computer-controlled machine; a shop assistant may need to manage an online store as well as a physical one. Workers who do not update their skills risk being left behind, while those who keep learning can move into better-paid roles or change careers entirely. For many adults, therefore, education is not a luxury but a form of protection.\n\nC. Yet work is only part of the story. Researchers who interview adult learners often hear a different reason: curiosity, or the wish to finish something that was left undone. A woman who left school at sixteen to help her family may return at forty to study literature. A retired engineer may sign up for a course in photography simply because he has always wanted to understand how a camera works. These learners are not chasing a promotion. They study because learning itself gives them pleasure and a sense of progress. Some describe it as a way of staying young in mind, even as the body ages.\n\nD. Governments have noticed this change, and many now encourage it. Several European countries offer adults a personal learning account, a sum of money that can be spent on approved courses. In Singapore, the SkillsFuture programme gives every citizen over the age of twenty-five a credit to use for training, with extra support for older workers. Supporters of such schemes argue that a country whose workers keep learning will adapt faster to new technology and will need less help when industries decline. Critics, however, point out that the people who use these schemes most are often those who already have a good education, while the workers who need training most, those in low-paid, insecure jobs, are the least likely to take part.\n\nE. This raises a difficult question: who is lifelong learning really for? Studies show that adults with a university degree are far more likely to enrol in further training than adults who left school early. Part of the problem is confidence. A person who struggled at school may believe that classrooms are not for them, and may avoid returning. Another problem is time. An adult who works long hours and cares for children or elderly parents may simply have no free evening for a course, however cheap it is. For this reason, some experts argue that the best courses for disadvantaged adults are short, practical and close to home, or available online, to be studied in small pieces at any hour.\n\nF. Despite these problems, the trend seems likely to continue. Online learning has made study cheaper and more flexible than ever before, and employers increasingly expect workers to keep updating their skills. The old idea that education ends at twenty-one now looks out of date. The question is no longer whether adults should keep learning, but how society can make that learning available to everyone, not only to those who already have the time, money and confidence to pursue it.",
+"questions":[
+{"type":"MC","q":"What change does paragraph A describe?","o":["More adults are returning to study while working and raising families.","Most adults have stopped studying after university.","Evening courses have closed in many countries.","Young people no longer go to university."],"options":["More adults are returning to study while working and raising families.","Most adults have stopped studying after university.","Evening courses have closed in many countries.","Young people no longer go to university."],"a":0,"why":"Đoạn A nói người lớn ở độ tuổi 30–50 đang quay lại lớp học (thật và trực tuyến) với số lượng ngày càng tăng, trong khi vẫn làm việc toàn thời gian và nuôi gia đình."},
+{"type":"MC","q":"According to paragraph B, why do many adults go back to study?","o":["They want to protect their jobs by updating their skills.","They want to become full-time students again.","Their employers pay them to leave work.","They are required by law to study every year."],"options":["They want to protect their jobs by updating their skills.","They want to become full-time students again.","Their employers pay them to leave work.","They are required by law to study every year."],"a":0,"why":"Đoạn B: công việc ngày nay đòi hỏi kỹ năng mới; người lao động không cập nhật kỹ năng có nguy cơ bị bỏ lại phía sau, còn người tiếp tục học có thể chuyển sang vai trò lương cao hơn."},
+{"type":"TFNG","q":"The number of adults returning to study is growing.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":0,"why":"Đoạn A: người lớn quay lại lớp học \"in growing numbers\" — số lượng ngày càng tăng, nên câu này Đúng."},
+{"type":"YNNG","q":"The writer believes that learning after school is a luxury for most adults.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn B viết rõ: \"For many adults, therefore, education is not a luxury but a form of protection\" — học không phải xa xỉ mà là hình thức bảo vệ, nên đáp án là No."},
+{"type":"MC","q":"What does paragraph C say about adults who study literature or photography?","o":["They study because their employers force them to.","They study only after they retire from work.","They study mainly because they enjoy learning and feel a sense of progress.","They study mainly to get a better job."],"options":["They study because their employers force them to.","They study only after they retire from work.","They study mainly because they enjoy learning and feel a sense of progress.","They study mainly to get a better job."],"a":2,"why":"Đoạn C: những người học này \"are not chasing a promotion\" — họ học vì bản thân việc học mang lại niềm vui và cảm giác tiến bộ."},
+{"type":"MATCH","q":"Who is most likely to use government learning schemes, according to the critics in paragraph D?","o":["Workers in low-paid, insecure jobs.","People who have never been to school.","People who already have a good education.","Workers who have recently lost their jobs."],"options":["Workers in low-paid, insecure jobs.","People who have never been to school.","People who already have a good education.","Workers who have recently lost their jobs."],"a":2,"why":"Đoạn D: các nhà phê bình cho rằng những người dùng các chương trình này nhiều nhất thường là người đã có học vấn tốt, trong khi người lao động lương thấp, việc làm bấp bênh — nhóm cần đào tạo nhất — lại ít tham gia nhất."},
+{"type":"MSEND","q":"For many adults, education is not a luxury but","o":["a way to retire early.","a hobby for the rich.","a form of protection.","a replacement for work."],"options":["a way to retire early.","a hobby for the rich.","a form of protection.","a replacement for work."],"a":2,"why":"Đoạn B: \"For many adults, therefore, education is not a luxury but a form of protection\" — học là hình thức bảo vệ việc làm."},
+{"type":"MC","q":"What does Singapore's SkillsFuture programme give citizens over the age of twenty-five?","o":["A monthly payment for life.","A job in the government.","A free university degree.","A credit to spend on training."],"options":["A monthly payment for life.","A job in the government.","A free university degree.","A credit to spend on training."],"a":3,"why":"Đoạn D: chương trình SkillsFuture cho mọi công dân trên 25 tuổi một khoản tín dụng (credit) để dùng cho đào tạo, kèm hỗ trợ thêm cho lao động lớn tuổi."},
+{"type":"TFNG","q":"In Singapore, the SkillsFuture credit can only be spent on approved courses.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":2,"why":"Đoạn D: các nước châu Âu mới là nơi có tài khoản học tập dùng cho \"approved courses\"; với Singapore, bài chỉ nói mọi công dân trên 25 tuổi nhận một khoản tín dụng \"to use for training\" mà không nói khoản đó chỉ được dùng cho khóa học đã phê duyệt — không có thông tin để kết luận, nên đáp án là Not Given."},
+{"type":"YNNG","q":"The writer thinks government learning schemes already reach the workers who need training most.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn D nêu ý kiến phê bình: người dùng các chương trình nhiều nhất là người đã có học vấn tốt, còn nhóm cần đào tạo nhất lại ít tham gia nhất — nên tác giả không cho rằng các chương trình đã tới đúng nhóm cần nhất. Đáp án No."},
+{"type":"MC","q":"According to paragraph E, why might an adult avoid returning to the classroom?","o":["They think courses are too short.","They prefer to study only online at home.","They have already finished a university degree.","They may believe classrooms are not for them after struggling at school."],"options":["They think courses are too short.","They prefer to study only online at home.","They have already finished a university degree.","They may believe classrooms are not for them after struggling at school."],"a":3,"why":"Đoạn E: một phần vấn đề là sự tự tin — người từng gặp khó khăn ở trường có thể tin rằng lớp học không dành cho mình nên tránh quay lại; vấn đề khác là thiếu thời gian."},
+{"type":"SC","q":"Some experts argue that the best courses for disadvantaged adults are short, practical and ___.","answer":"close to home","why":"Đoạn E: \"the best courses for disadvantaged adults are short, practical and close to home\" — ngắn, thực tế và gần nhà (hoặc học trực tuyến theo từng phần nhỏ)."},
+{"type":"MC","q":"What is the writer's main point in the final paragraph?","o":["Online learning will replace all classroom courses.","Governments should spend less on adult education.","Adults should stop studying after the age of fifty.","Society must make lifelong learning available to everyone, not only to those who can already afford it."],"options":["Online learning will replace all classroom courses.","Governments should spend less on adult education.","Adults should stop studying after the age of fifty.","Society must make lifelong learning available to everyone, not only to those who can already afford it."],"a":3,"why":"Đoạn F: câu hỏi không còn là người lớn có nên tiếp tục học không, mà là làm sao để việc học đến được với mọi người, không chỉ những ai đã có thời gian, tiền bạc và sự tự tin."}
+]},
+{"topic":"Chiến dịch sức khỏe cộng đồng","level":"Band 6,5","title":"Why Some Health Campaigns Change Behaviour — and Others Fail",
+"text":"A. Every year, governments spend large sums of money on campaigns to improve public health. Posters in bus stations warn about the dangers of smoking; television advertisements encourage people to eat less salt; social media messages remind parents to vaccinate their children. Some of these campaigns are remarkably successful. In many countries, the share of adults who smoke has fallen by half in a single generation. Other campaigns, however, seem to change nothing at all. The question is why.\n\nB. One reason for success is simplicity. The most effective health messages usually ask people to do one clear thing. \"Wear a seat belt.\" \"Wash your hands.\" \"Get your child vaccinated.\" Each message is easy to understand, easy to remember and easy to act on. By contrast, campaigns that ask for a general change, such as \"live a healthier life\" or \"eat better\", often fail, because people do not know exactly what they are supposed to do differently on Monday morning. Researchers have found that a message works best when it tells people not only what to do, but also when and how to do it.\n\nC. A second factor is trust. People are far more likely to follow health advice if they trust the person or organisation giving it. During the COVID-19 pandemic, countries in which citizens trusted their governments and their doctors generally saw higher vaccination rates than countries where trust was low. Trust, however, is fragile. A single scandal, a drug that turns out to be unsafe, or an official caught breaking the very rules they promoted, can damage public confidence for years. Health officials therefore need to be honest about what they do not know, as well as what they do. Admitting uncertainty, studies suggest, often increases trust rather than reducing it.\n\nD. A third factor is social pressure. Human beings are deeply influenced by what they believe other people are doing. A campaign that says \"nine out of ten people in your neighbourhood have already been vaccinated\" is often more persuasive than one that lists the medical benefits of the vaccine. The same principle applies to smoking: when smoking was common in offices and restaurants, quitting was hard; once smoking bans made it unusual, quitting became easier, because the smoker no longer felt part of a group. Clever campaigns therefore do not only give facts; they change what seems normal.\n\nE. Yet even a well-designed campaign can fail if it ignores the real lives of its audience. A campaign that tells poor families to buy fresh vegetables will achieve little if fresh vegetables are expensive or hard to find in their neighbourhood. A message urging people to exercise more may be useless to someone who works twelve hours a day and lives far from any park. In such cases, the problem is not ignorance, as people often know perfectly well what is healthy, but circumstance. Health experts increasingly argue that information alone is not enough, and that campaigns must be combined with practical changes, such as cheaper healthy food, safer streets for walking, or paid time off to visit a doctor.\n\nF. There is also the question of fear. For decades, many campaigns relied on frightening images: blackened lungs on cigarette packets, or photographs of car crashes. Fear can attract attention, but research suggests it often fails to change behaviour. People who feel frightened may simply look away, or convince themselves that the danger applies to others, not to them. Messages that offer hope and a clear next step, such as \"quit smoking and your lungs begin to recover within weeks\", tend to work better than messages that only warn of disaster. The most successful campaigns, researchers conclude, respect their audience: they explain the risk honestly, show that change is possible, and make the first step easy.",
+"questions":[
+{"type":"MC","q":"What question does paragraph A raise?","o":["Why do some health campaigns succeed while others change nothing?","How much money do governments spend on hospitals?","Why do people refuse to visit a doctor?","Which country has the best health system?"],"options":["Why do some health campaigns succeed while others change nothing?","How much money do governments spend on hospitals?","Why do people refuse to visit a doctor?","Which country has the best health system?"],"a":0,"why":"Đoạn A: một số chiến dịch thành công rõ rệt (tỉ lệ hút thuốc giảm một nửa trong một thế hệ), số khác dường như không thay đổi gì — \"The question is why.\""},
+{"type":"MC","q":"According to paragraph B, why do simple health messages work well?","o":["They use frightening pictures.","They are repeated on television every day.","They are written by doctors.","They ask people to do one clear thing that is easy to remember and act on."],"options":["They use frightening pictures.","They are repeated on television every day.","They are written by doctors.","They ask people to do one clear thing that is easy to remember and act on."],"a":3,"why":"Đoạn B: thông điệp hiệu quả nhất thường yêu cầu một việc rõ ràng, dễ hiểu, dễ nhớ và dễ thực hiện; thông điệp chung chung như \"sống lành mạnh hơn\" thường thất bại vì người ta không biết phải làm gì khác cụ thể."},
+{"type":"MSEND","q":"A health message works best when it tells people not only what to do, but also","o":["why doctors are always right.","how much it will cost.","when and how to do it.","who paid for the campaign."],"options":["why doctors are always right.","how much it will cost.","when and how to do it.","who paid for the campaign."],"a":2,"why":"Đoạn B: \"a message works best when it tells people not only what to do, but also when and how to do it\" — không chỉ làm gì mà còn khi nào và làm như thế nào."},
+{"type":"TFNG","q":"During the COVID-19 pandemic, countries where citizens trusted their governments generally had higher vaccination rates.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":0,"why":"Đoạn C: các nước mà người dân tin tưởng chính phủ và bác sĩ \"generally saw higher vaccination rates\" — tỉ lệ tiêm chủng cao hơn, nên câu này Đúng."},
+{"type":"YNNG","q":"The writer believes that admitting uncertainty reduces public trust.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn C: \"Admitting uncertainty, studies suggest, often increases trust rather than reducing it\" — thừa nhận điều chưa biết thường làm TĂNG niềm tin, nên đáp án là No."},
+{"type":"MATCH","q":"Which message is given as an example of using social pressure?","o":["\"Live a healthier life.\"","\"Nine out of ten people in your neighbourhood have already been vaccinated.\"","\"Smoking damages your lungs.\"","\"Wash your hands.\""],"options":["\"Live a healthier life.\"","\"Nine out of ten people in your neighbourhood have already been vaccinated.\"","\"Smoking damages your lungs.\"","\"Wash your hands.\""],"a":1,"why":"Đoạn D: thông điệp \"nine out of ten people in your neighbourhood have already been vaccinated\" là ví dụ về áp lực xã hội — con người chịu ảnh hưởng mạnh bởi điều họ tin rằng người khác đang làm."},
+{"type":"MC","q":"According to paragraph D, how did smoking bans help people quit?","o":["They closed all cigarette factories.","They gave smokers free medicine.","They made cigarettes more expensive.","They made smoking unusual, so smokers no longer felt part of a group."],"options":["They closed all cigarette factories.","They gave smokers free medicine.","They made cigarettes more expensive.","They made smoking unusual, so smokers no longer felt part of a group."],"a":3,"why":"Đoạn D: khi lệnh cấm khiến hút thuốc trở nên bất thường, bỏ thuốc trở nên dễ hơn vì người hút không còn cảm thấy mình thuộc về một nhóm."},
+{"type":"MC","q":"According to paragraph E, why might a campaign about fresh vegetables fail in a poor neighbourhood?","o":["Poor families do not like vegetables.","Vegetables are not healthy.","Fresh vegetables may be expensive or hard to find there.","The campaign is only shown on television."],"options":["Poor families do not like vegetables.","Vegetables are not healthy.","Fresh vegetables may be expensive or hard to find there.","The campaign is only shown on television."],"a":2,"why":"Đoạn E: chiến dịch khuyên gia đình nghèo mua rau tươi sẽ ít hiệu quả nếu rau tươi đắt hoặc khó tìm trong khu vực của họ."},
+{"type":"TFNG","q":"According to the passage, poor families usually do not know which food is healthy.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":1,"why":"Đoạn E: vấn đề không phải là thiếu hiểu biết — \"people often know perfectly well what is healthy\" — mà là hoàn cảnh, nên câu này Sai."},
+{"type":"MSEND","q":"Health experts increasingly argue that information alone","o":["is not enough.","is dangerous.","is too expensive.","is unnecessary."],"options":["is not enough.","is dangerous.","is too expensive.","is unnecessary."],"a":0,"why":"Đoạn E: \"information alone is not enough\" — chỉ thông tin thôi là chưa đủ; chiến dịch phải đi kèm thay đổi thực tế như thực phẩm lành mạnh rẻ hơn, đường phố an toàn hơn."},
+{"type":"YNNG","q":"The writer thinks fear-based images are the most effective way to change behaviour.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn F: nỗi sợ có thể thu hút chú ý nhưng nghiên cứu cho thấy nó thường không thay đổi được hành vi; thông điệp mang hy vọng và bước tiếp theo rõ ràng hiệu quả hơn. Đáp án No."},
+{"type":"MC","q":"What kind of message does research suggest works better than fear?","o":["A message that hides the risks.","A message that blames the audience.","A message that shows frightening pictures.","A message that offers hope and a clear next step."],"options":["A message that hides the risks.","A message that blames the audience.","A message that shows frightening pictures.","A message that offers hope and a clear next step."],"a":3,"why":"Đoạn F: thông điệp mang hy vọng và bước tiếp theo rõ ràng — ví dụ \"bỏ thuốc thì phổi bắt đầu hồi phục trong vài tuần\" — có xu hướng hiệu quả hơn thông điệp chỉ cảnh báo thảm họa."},
+{"type":"SC","q":"People who feel frightened may simply look away, or convince themselves that the danger applies to ___.","answer":"others","why":"Đoạn F: người sợ hãi có thể chỉ đơn giản quay đi, hoặc tự thuyết phục rằng nguy hiểm áp dụng cho người khác (\"others, not to them\"), chứ không phải cho mình."}
+]},
+{"topic":"Năng lượng mặt trời","level":"Band 6,5","title":"Solar Panels on Every Roof?",
+"text":"A. Thirty years ago, a solar panel was an unusual sight. It appeared mainly on calculators, on remote weather stations, or on the roofs of a few enthusiasts. Today, solar panels cover the roofs of houses, schools and factories in countries across the world, and vast fields of panels stretch across deserts in China, India and the United States. In 2023, for the first time, more new electricity capacity came from solar power than from any other single source. Solar energy, once a curiosity, has become a central part of how the world produces electricity. How did this happen, and what limits its growth?\n\nB. The main reason is cost. In the 1970s, generating electricity from sunlight was roughly a hundred times more expensive than generating it from coal. Since then, the price of solar panels has fallen dramatically, by more than 90 percent in the last fifteen years alone. This fall was driven by mass production in China, by improvements in manufacturing, and by government support in many countries. In sunny regions, electricity from a new solar farm is now often cheaper than electricity from a new coal or gas plant, even without subsidies. For homeowners, a rooftop system can pay for itself within seven to ten years through lower electricity bills.\n\nC. A second reason is speed. A large coal or nuclear power station can take a decade or more to plan and build. A solar farm, by contrast, can be designed and connected to the grid within a year or two, and a rooftop system can be installed in a single day. This speed matters when demand for electricity is rising fast, as it is in many developing countries, and when governments need to reduce carbon emissions quickly. Solar power also suits small-scale use: a single panel can charge a phone or light a rural clinic that has no connection to the national grid at all.\n\nD. Yet solar power has a weakness that no amount of cheap panels can remove: the sun does not shine at night, and it shines weakly in winter and on cloudy days. A country that depends heavily on solar power must therefore find a way to store electricity or to produce it from other sources when the sun is absent. Batteries are the most discussed solution. Their price has also fallen sharply, but storing enough electricity for a whole city through a long, dark winter remains extremely expensive. Other solutions include building connections to distant regions, where it may be sunny when it is cloudy at home, and using hydroelectric power, which can be switched on and off quickly, to fill the gaps.\n\nE. There are also questions about land and materials. A solar farm needs far more land than a gas plant producing the same amount of electricity, and in crowded countries that land may be needed for farming or housing. Some developers now place panels above crops, on lakes, or on the roofs of warehouses, so that the land can serve two purposes at once. Panels also require materials such as silicon, silver and aluminium, and most of the world's panels are made in a small number of countries, which worries governments concerned about supply. Recycling old panels is another growing challenge: the first large wave of panels installed in the early 2000s is now reaching the end of its life, and the industry must find ways to recover their valuable materials rather than sending them to landfill.\n\nF. Despite these challenges, most experts expect solar power to keep growing. The International Energy Agency predicts that solar will become the largest source of electricity in the world by the early 2030s, ahead of coal. Whether that prediction comes true will depend not only on the price of panels, but on how well countries solve the problems of storage, land and supply. Solar power has already shown that clean energy can be cheap and fast to build. The next test is whether it can also be reliable, available whenever people need it, in sunshine and in darkness alike.",
+"questions":[
+{"type":"MC","q":"What change does paragraph A describe?","o":["Solar power has become a central part of how the world produces electricity.","Solar panels are now used only on calculators.","Coal has become the cheapest source of electricity.","Few countries use solar power today."],"options":["Solar power has become a central part of how the world produces electricity.","Solar panels are now used only on calculators.","Coal has become the cheapest source of electricity.","Few countries use solar power today."],"a":0,"why":"Đoạn A: năm 2023, lần đầu tiên, công suất điện mới từ năng lượng mặt trời vượt mọi nguồn đơn lẻ khác; năng lượng mặt trời từ thứ lạ lẫm đã thành phần trung tâm của sản xuất điện thế giới."},
+{"type":"MC","q":"According to paragraph B, what caused the price of solar panels to fall?","o":["A shortage of sunlight.","The closure of solar farms.","A fall in the price of coal.","Mass production in China, better manufacturing and government support."],"options":["A shortage of sunlight.","The closure of solar farms.","A fall in the price of coal.","Mass production in China, better manufacturing and government support."],"a":3,"why":"Đoạn B: giá tấm pin giảm nhờ sản xuất hàng loạt ở Trung Quốc, cải tiến sản xuất và hỗ trợ của chính phủ ở nhiều nước; riêng 15 năm qua đã giảm hơn 90%."},
+{"type":"TFNG","q":"In the 1970s, generating electricity from sunlight was roughly a hundred times more expensive than generating it from coal.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":0,"why":"Đoạn B: \"In the 1970s, generating electricity from sunlight was roughly a hundred times more expensive than generating it from coal\" — câu này Đúng."},
+{"type":"YNNG","q":"The writer claims that solar electricity is now cheaper than coal or gas everywhere in the world.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn B chỉ nói \"In sunny regions\" — ở vùng nhiều nắng — điện mặt trời mới thường rẻ hơn điện từ nhà máy than/khí mới, chứ không phải ở mọi nơi. Đáp án No."},
+{"type":"MC","q":"What advantage of solar power does paragraph C emphasise?","o":["It works best at night.","It needs no land at all.","It can be built and installed much faster than a coal or nuclear plant.","It produces electricity only in deserts."],"options":["It works best at night.","It needs no land at all.","It can be built and installed much faster than a coal or nuclear plant.","It produces electricity only in deserts."],"a":2,"why":"Đoạn C: nhà máy than/hạt nhân mất cả thập kỷ để quy hoạch và xây, trong khi trang trại mặt trời chỉ mất một-hai năm và hệ thống mái nhà lắp trong một ngày."},
+{"type":"MATCH","q":"Which example shows that solar power suits small-scale use?","o":["A single panel can charge a phone or light a rural clinic.","A solar farm can power a whole country.","Panels are built in deserts.","Solar farms take a year to connect to the grid."],"options":["A single panel can charge a phone or light a rural clinic.","A solar farm can power a whole country.","Panels are built in deserts.","Solar farms take a year to connect to the grid."],"a":0,"why":"Đoạn C: năng lượng mặt trời phù hợp dùng quy mô nhỏ — một tấm pin có thể sạc điện thoại hoặc thắp sáng phòng khám nông thôn không nối lưới điện quốc gia."},
+{"type":"MSEND","q":"A country that depends heavily on solar power must therefore find a way to","o":["build more coal plants.","stop using electricity at night.","store electricity or produce it from other sources when the sun is absent.","move its population to sunny regions."],"options":["build more coal plants.","stop using electricity at night.","store electricity or produce it from other sources when the sun is absent.","move its population to sunny regions."],"a":2,"why":"Đoạn D: nước phụ thuộc nhiều vào mặt trời phải tìm cách \"store electricity or to produce it from other sources when the sun is absent\" — trữ điện hoặc sản xuất từ nguồn khác khi không có nắng."},
+{"type":"MC","q":"According to paragraph D, what is the main weakness of solar power?","o":["Solar panels are too heavy to install.","Solar power cannot be used in cities.","Batteries are too cheap.","The sun does not shine at night and shines weakly in winter and on cloudy days."],"options":["Solar panels are too heavy to install.","Solar power cannot be used in cities.","Batteries are too cheap.","The sun does not shine at night and shines weakly in winter and on cloudy days."],"a":3,"why":"Đoạn D: điểm yếu là mặt trời không chiếu sáng ban đêm, yếu vào mùa đông và ngày nhiều mây — điểm yếu mà không lượng pin rẻ nào loại bỏ được."},
+{"type":"TFNG","q":"The price of batteries for storing electricity has fallen by more than 90 percent in the last fifteen years.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":2,"why":"Đoạn B cho con số giảm hơn 90% trong 15 năm là của tấm pin mặt trời, còn đoạn D chỉ nói giá pin lưu trữ \"have also fallen sharply\" mà không đưa con số nào — bài không nói pin đã giảm hơn 90%, nên đáp án là Not Given."},
+{"type":"YNNG","q":"The writer believes that building connections to distant regions could help deal with solar power's weakness.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":0,"why":"Đoạn D nêu giải pháp: xây đường truyền tới vùng xa — nơi có thể nắng khi ở nhà nhiều mây — cùng với thủy điện để lấp khoảng trống. Đáp án Yes."},
+{"type":"MC","q":"What does paragraph E say about the land needed for solar farms?","o":["Solar farms need no land at all.","Solar farms can only be built on farmland.","A solar farm needs far more land than a gas plant producing the same electricity.","Gas plants need more land than solar farms."],"options":["Solar farms need no land at all.","Solar farms can only be built on farmland.","A solar farm needs far more land than a gas plant producing the same electricity.","Gas plants need more land than solar farms."],"a":2,"why":"Đoạn E: trang trại mặt trời cần nhiều đất hơn hẳn nhà máy khí cùng sản lượng; một số nhà phát triển đặt pin trên cây trồng, trên hồ hoặc mái nhà kho để đất phục vụ hai mục đích."},
+{"type":"MATCH","q":"Which problem about solar panel materials is mentioned in paragraph E?","o":["Panels are made only from wood.","Most panels are made in a small number of countries.","Silver is no longer used in panels.","Panels contain no valuable materials."],"options":["Panels are made only from wood.","Most panels are made in a small number of countries.","Silver is no longer used in panels.","Panels contain no valuable materials."],"a":1,"why":"Đoạn E: hầu hết tấm pin thế giới được sản xuất ở một số ít quốc gia, khiến các chính phủ lo ngại về nguồn cung; tái chế pin cũ cũng là thách thức đang lớn dần."},
+{"type":"SC","q":"The International Energy Agency predicts that solar will become the largest source of electricity in the world by ___.","answer":"the early 2030s","why":"Đoạn F: Cơ quan Năng lượng Quốc tế dự báo năng lượng mặt trời sẽ thành nguồn điện lớn nhất thế giới vào đầu thập niên 2030 (\"by the early 2030s\"), vượt than."},
+{"type":"MC","q":"What is the writer's main conclusion?","o":["Countries should stop building solar farms.","Coal will remain the largest source of electricity.","Solar power will never become a major energy source.","Solar power is cheap and fast to build, but its next test is whether it can be reliable at all times."],"options":["Countries should stop building solar farms.","Coal will remain the largest source of electricity.","Solar power will never become a major energy source.","Solar power is cheap and fast to build, but its next test is whether it can be reliable at all times."],"a":3,"why":"Đoạn F: năng lượng mặt trời đã chứng tỏ năng lượng sạch có thể rẻ và xây nhanh; bài kiểm tra tiếp theo là liệu nó có đáng tin cậy — có sẵn bất cứ khi nào người ta cần, cả khi nắng lẫn khi tối."}
+]}
+];
+
 // IELTS thi thử Đọc Band 7,0 đợt 30/10 — 3 bài, 13+13+14 = 40 câu, đúng band 7,0. Tự soạn 100%.
 var IELTS_MOCKREAD_70 = [
 {"topic":"Kinh tế làm việc từ xa","level":"Band 7,0","title":"The Economics of Remote Work",
@@ -103177,6 +109500,62 @@ var IELTS_MOCKREAD_70 = [
 {"type":"MC","q":"Các thành phố quản lý lũ tốt nhất có ba thói quen chung nào?","o":["Lên kế hoạch cho trận lũ lớn hơn những trận đã thấy; kết hợp công trình cứng như tường với không gian mềm như công viên; nói thật với dân về rủi ro để dân chuẩn bị thay vì bị bất ngờ.","Chỉ xây tường.","Chỉ nói với dân.","Chỉ lập kế hoạch."],"options":["Lên kế hoạch cho trận lũ lớn hơn những trận đã thấy; kết hợp công trình cứng như tường với không gian mềm như công viên; nói thật với dân về rủi ro để dân chuẩn bị thay vì bị bất ngờ.","Chỉ xây tường.","Chỉ nói với dân.","Chỉ lập kế hoạch."],"a":0,"why":"Đoạn E liệt kê ba thói quen."},
 {"type":"MSEND","q":"Cuối cùng, quản lý lũ ít là về đánh bại nước, mà là về","o":["học cách chia sẻ không gian với nước.","xây tường cao nhất.","cấm mưa.","di dời mọi thành phố."],"options":["học cách chia sẻ không gian với nước.","xây tường cao nhất.","cấm mưa.","di dời mọi thành phố."],"a":0,"why":"Đoạn E: quản lý lũ là học cách chia sẻ không gian với nước."},
 {"type":"MC","q":"Thông điệp chính của bài là gì?","o":["Kết hợp công trình cứng và không gian mềm, lên kế hoạch cho lũ lớn hơn và nói thật về rủi ro là cách quản lý lũ hiệu quả nhất.","Chỉ cần xây tường cao.","Lũ không thể quản lý.","Thành phố nên bỏ mặc lũ."],"options":["Kết hợp công trình cứng và không gian mềm, lên kế hoạch cho lũ lớn hơn và nói thật về rủi ro là cách quản lý lũ hiệu quả nhất.","Chỉ cần xây tường cao.","Lũ không thể quản lý.","Thành phố nên bỏ mặc lũ."],"a":0,"why":"Toàn bài lập luận cho cách tiếp cận kết hợp và trung thực về rủi ro."}
+]}
+];
+
+// IELTS thi thu Doc Band 7,5+ (v265, 28/11) — 3 bai, 13+13+14 = 40 cau, dung band 7,5+. Tu soan 100%.
+var IELTS_MOCKREAD_75 = [
+{"topic":"Trí tuệ nhân tạo và việc làm","level":"Band 7,5+","title":"The Automation Paradox: Artificial Intelligence and the Future of Work",
+"text":"A. For most of the twentieth century, anxiety about machines replacing human labour followed a predictable rhythm. Each wave of automation — the mechanical loom, the assembly line, the computer — provoked warnings that work itself was disappearing, and each time the warnings proved exaggerated. New occupations emerged, often in forms that contemporaries could scarcely have imagined, and employment recovered. Yet the current wave, driven by artificial intelligence, differs from its predecessors in a respect that economists have been slow to acknowledge: earlier machines chiefly replaced muscle, whereas intelligent systems encroach upon cognition itself — pattern recognition, language, judgement — the very capacities in which human workers once held an unassailable advantage.\n\nB. The optimistic case begins with productivity. When a technology allows the same output to be produced with fewer workers, the cost of goods and services falls, real incomes rise, and consumers spend the surplus on new things, creating demand for new kinds of work. This mechanism, the optimists argue, has operated reliably for two centuries, and there is no compelling reason to believe it has suddenly stopped. They point to the occupations that barely existed a generation ago — data analyst, user-experience designer, drone operator — as evidence that the economy's capacity to invent new tasks is limited only by human ingenuity. From this perspective, artificial intelligence is simply the latest instrument of a familiar process, and the appropriate response is to let markets adjust while helping workers move into the jobs that appear.\n\nC. The sceptics reply that this reassurance confuses the eventual outcome with the journey. Even if new jobs eventually appear, they argue, the transition may be long, painful and unevenly shared. A weaver displaced by the power loom in 1810 could not simply become a railway engineer; the skills, the geography and the decades involved made the adjustment a generational ordeal rather than a smooth reallocation. Moreover, the new jobs created by artificial intelligence may demand cognitive skills that displaced workers do not possess and cannot readily acquire late in life. The historical record, on this reading, is less comforting than it first appears: aggregate employment recovered, but the individuals caught in the transition often did not.\n\nD. A second line of argument, associated with the task-based view of the labour market, suggests that the crucial question is not whether occupations vanish but whether particular tasks within them are automated. Few jobs consist of a single activity; a radiologist, for instance, interprets images, consults colleagues, reassures patients and weighs ambiguous evidence. If machines absorb only the first of these tasks, the radiologist's role is transformed rather than eliminated — but it may also be devalued, since the scarce skill that once commanded a premium becomes a commodity. This hollowing out of occupations from the inside is harder to measure than outright job loss, yet it may be the more pervasive effect. Wages, in this account, are determined less by whether a worker still has a job than by how much of that job remains distinctively human.\n\nE. The distributional consequences deepen the concern. The gains from artificial intelligence are likely to accrue disproportionately to those who own the systems and to the small number of workers whose skills complement them — the engineers who build the models, the managers who deploy them, the professionals whose judgement becomes more valuable when routine analysis is cheap. Meanwhile, workers whose tasks are most readily codified — clerks, paralegals, junior analysts, translators — face downward pressure on their earnings even if they remain employed. The result may be an economy that is richer in aggregate yet more unequal, in which the central political question is not scarcity but distribution: who captures the surplus that intelligent machines create?\n\nF. Faced with these tensions, policymakers have proposed a familiar menu of remedies: retraining programmes, stronger safety nets, shorter working weeks, and, most radically, a universal basic income funded by taxing the owners of automated capital. Each proposal has its advocates, yet each also rests on assumptions that remain untested at scale. Retraining assumes that displaced workers can acquire new skills quickly enough and that suitable jobs will be waiting; the evidence from earlier programmes is mixed at best, with many participants ending up in work no better paid than the jobs they lost. A universal basic income, meanwhile, has been trialled only in small, short-lived experiments, and its effects on work incentives and public finances over decades remain a matter of speculation rather than knowledge.\n\nG. Perhaps the most honest conclusion is that the future of work under artificial intelligence is neither the utopia of the optimists nor the catastrophe of the pessimists, but something more ambiguous and more dependent on human choices than either side admits. Technology sets the range of what is possible; institutions — labour law, education, taxation, the norms governing how firms treat their workers — determine where within that range societies actually land. The automation paradox is that the same technology can produce shared prosperity or concentrated windfalls, depending on decisions that have not yet been taken. What is certain is that those decisions cannot be postponed indefinitely: every year in which intelligent systems grow more capable without a corresponding adaptation of institutions, the adjustment, when it finally comes, is likely to be more disruptive.",
+"questions":[
+{"type":"MC","q":"What does the writer suggest is the key difference between artificial intelligence and earlier waves of automation?","o":["Earlier machines replaced physical strength, while AI encroaches on mental abilities such as judgement and pattern recognition.","Earlier machines were more expensive to build than AI systems.","Earlier machines created more jobs than AI is likely to create.","Earlier machines were resisted by workers, whereas AI is welcomed by them."],"options":["Earlier machines replaced physical strength, while AI encroaches on mental abilities such as judgement and pattern recognition.","Earlier machines were more expensive to build than AI systems.","Earlier machines created more jobs than AI is likely to create.","Earlier machines were resisted by workers, whereas AI is welcomed by them."],"a":0,"why":"Đoạn A: máy móc trước đây chủ yếu thay thế sức cơ bắp (muscle), còn AI lấn sang nhận thức — nhận diện mẫu, ngôn ngữ, phán đoán — những năng lực mà con người từng nắm lợi thế tuyệt đối."},
+{"type":"MC","q":"According to the optimists, why does automation ultimately create new work?","o":["Governments always create public-sector jobs to replace those lost to machines.","New technology directly employs more people than it displaces.","Workers displaced by machines immediately retrain for better-paid occupations.","Cheaper goods raise real incomes, and consumers spend the surplus on new things, generating demand for new jobs."],"options":["Governments always create public-sector jobs to replace those lost to machines.","New technology directly employs more people than it displaces.","Workers displaced by machines immediately retrain for better-paid occupations.","Cheaper goods raise real incomes, and consumers spend the surplus on new things, generating demand for new jobs."],"a":3,"why":"Đoạn B: khi cùng một sản lượng làm ra với ít lao động hơn, giá hàng hóa giảm, thu nhập thực tăng, người tiêu dùng chi tiêu phần dư cho thứ mới, tạo nhu cầu việc làm mới."},
+{"type":"MC","q":"What point do the sceptics make about the transition to new jobs?","o":["Historical evidence shows that displaced workers always find better work quickly.","The transition is only difficult for workers in developing countries.","Even if new jobs eventually appear, the adjustment can be long and painful for the individuals displaced.","New jobs never appear after a wave of automation."],"options":["Historical evidence shows that displaced workers always find better work quickly.","The transition is only difficult for workers in developing countries.","Even if new jobs eventually appear, the adjustment can be long and painful for the individuals displaced.","New jobs never appear after a wave of automation."],"a":2,"why":"Đoạn C: người hoài nghi cho rằng dù việc làm mới cuối cùng xuất hiện, quá trình chuyển đổi có thể dài, đau đớn và không chia đều — ví dụ thợ dệt năm 1810 không thể đơn giản trở thành kỹ sư đường sắt."},
+{"type":"MC","q":"In the task-based view described in paragraph D, what is the main effect of AI on a profession such as radiology?","o":["It will leave the profession completely unchanged.","It may transform the role and reduce its value by automating the scarce skill that once commanded a premium.","It will eliminate the profession entirely within a few years.","It will increase the radiologist's pay because machines make diagnosis slower."],"options":["It will leave the profession completely unchanged.","It may transform the role and reduce its value by automating the scarce skill that once commanded a premium.","It will eliminate the profession entirely within a few years.","It will increase the radiologist's pay because machines make diagnosis slower."],"a":1,"why":"Đoạn D: máy chỉ hấp thụ một nhiệm vụ (đọc ảnh) thì vai trò bác sĩ X-quang bị biến đổi chứ không biến mất — nhưng có thể bị mất giá vì kỹ năng khan hiếm từng được trả cao trở thành hàng hóa thông thường."},
+{"type":"TFNG","q":"Artificial intelligence has already destroyed more jobs in total than it has created.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":2,"why":"Bài không đưa ra con số tổng nào về việc AI đã phá hủy hay tạo ra bao nhiêu việc làm; đoạn B–C chỉ tranh luận về triển vọng, nên không có thông tin để kết luận — Not Given."},
+{"type":"TFNG","q":"The task-based view holds that wages depend on how much of a job remains distinctively human, not merely on whether the worker is still employed.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":0,"why":"Đoạn D nêu rõ: tiền lương được quyết định ít bởi việc người lao động còn việc hay không, mà bởi bao nhiêu phần công việc còn mang tính riêng của con người — True."},
+{"type":"TFNG","q":"Universal basic income has been tested in large-scale, long-term trials that prove it works.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":1,"why":"Đoạn F: thu nhập cơ bản phổ quát mới chỉ được thử nghiệm trong các thí nghiệm nhỏ, ngắn hạn; tác động dài hạn vẫn là suy đoán chứ không phải kiến thức đã biết — nên khẳng định 'đã được chứng minh qua thử nghiệm lớn, dài hạn' là False."},
+{"type":"YNNG","q":"The writer believes that retraining programmes alone are sufficient to solve the problem of displaced workers.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn F: tác giả nói bằng chứng từ các chương trình đào tạo lại trước đây chỉ ở mức lẫn lộn, nhiều người tham gia cuối cùng làm việc không được trả cao hơn công việc đã mất — nên tác giả không tin đào tạo lại một mình là đủ — No."},
+{"type":"YNNG","q":"The writer believes that the gains from AI will be shared equally across all groups of workers.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn E: tác giả cho rằng lợi ích từ AI có thể tập trung vào người sở hữu hệ thống và số ít lao động có kỹ năng bổ trợ, trong khi lao động có nhiệm vụ dễ mã hóa chịu áp lực giảm lương — tức không chia đều — No."},
+{"type":"MSEND","q":"The history of automation suggests that, although employment eventually recovered,","o":["no worker ever lost a job to a machine.","governments always compensated displaced workers fully.","new occupations appeared immediately and without cost.","the individuals caught in the transition often did not recover."],"options":["no worker ever lost a job to a machine.","governments always compensated displaced workers fully.","new occupations appeared immediately and without cost.","the individuals caught in the transition often did not recover."],"a":3,"why":"Đoạn C: tổng việc làm phục hồi, nhưng những cá nhân bị kẹt trong quá trình chuyển đổi thường không phục hồi được."},
+{"type":"MSEND","q":"Unlike the loom or the assembly line, modern AI systems threaten","o":["the price of consumer goods.","the supply of raw materials.","the cognitive capacities in which human workers once held an unassailable advantage.","only the jobs of unskilled manual labourers."],"options":["the price of consumer goods.","the supply of raw materials.","the cognitive capacities in which human workers once held an unassailable advantage.","only the jobs of unskilled manual labourers."],"a":2,"why":"Đoạn A: máy móc trước đây thay sức cơ bắp, còn hệ thống thông minh lấn sang nhận thức — nhận diện mẫu, ngôn ngữ, phán đoán."},
+{"type":"MATCH","q":"Who argues that the appropriate response to AI is to let markets adjust while helping workers move into new jobs?","o":["The sceptics","The task-based economists","The policymakers proposing universal basic income","The optimists"],"options":["The sceptics","The task-based economists","The policymakers proposing universal basic income","The optimists"],"a":3,"why":"Đoạn B: phe lạc quan cho rằng AI chỉ là công cụ mới nhất của một quá trình quen thuộc, và phản ứng phù hợp là để thị trường điều chỉnh trong khi giúp người lao động chuyển sang việc làm mới."},
+{"type":"SC","q":"Complete the sentence. Earlier machines chiefly replaced ______, whereas intelligent systems encroach upon cognition itself.","answer":"muscle","why":"Đoạn A viết nguyên văn: 'earlier machines chiefly replaced muscle, whereas intelligent systems encroach upon cognition itself' — đáp án đúng là 'muscle'."}
+]},
+{"topic":"Kinh tế hành vi và lựa chọn","level":"Band 7,5+","title":"Why We Choose Poorly: Behavioural Economics and the Architecture of Choice",
+"text":"A. Classical economics rests on an elegant fiction: the rational actor. This hypothetical person weighs every option, calculates probabilities without error, resists temptation, and always chooses whatever best serves their long-term interests. The model has been extraordinarily productive, yet anyone who has eaten a second slice of cake while on a diet, or left a pension form uncompleted for months, knows that real human beings depart from it routinely. Behavioural economics begins from this gap between the model and the person, and asks a question that classical theory largely ignored: if people are predictably irrational, what follows?\n\nB. The departures from rationality are not random errors that cancel each other out; they follow systematic patterns. People feel losses roughly twice as keenly as equivalent gains, a tendency known as loss aversion, which explains why investors cling to falling shares and why homeowners resist selling at a price below what they once paid. People also discount the future steeply — a phenomenon called present bias — so that a reward tomorrow is worth far less than the same reward today, even when the delay is trivial. And when faced with complex choices, people rely on mental shortcuts that mislead them when the stakes are high and the information is unfamiliar. These are not signs of stupidity. They are the predictable output of a mind that evolved to make quick decisions under uncertainty, not to solve optimisation problems.\n\nC. The most influential practical insight to emerge from these findings is the power of defaults. When employees are automatically enrolled in a pension scheme, with the option to opt out, participation rates rise dramatically compared with schemes that require workers to opt in — even though the financial cost of ticking a box is negligible. The same logic applies to organ donation: countries in which citizens are presumed to be donors unless they explicitly object record far higher consent rates than countries that require an active decision to donate. In both cases, nothing has been forbidden and no incentive has changed; what has changed is the path of least resistance. Behavioural economists call this deliberate design of the decision environment choice architecture, and its gentlest instrument the nudge — a small change that steers people towards better choices while preserving their freedom to choose otherwise.\n\nD. Enthusiasts argue that nudges offer policymakers something close to a free lunch: better outcomes without coercion, mandates or large public spending. A cafeteria that places fruit at eye level and sugary drinks at the back sells more fruit. Because nudges work with human psychology rather than against it, their defenders claim, they are more humane than the blunt instruments of tax and prohibition. Yet this very effectiveness is what troubles the critics. If a choice architect can predictably steer behaviour without people noticing, the line between helping and manipulating becomes difficult to draw, and the question of who decides what counts as a better choice becomes unavoidable.\n\nE. That question is sharper than it first appears. A nudge towards saving for retirement seems uncontroversial, but the same technique could steer citizens towards political opinions, commercial products or medical decisions that serve the nudger rather than the nudged. The behavioural economist has no neutral vantage point from which to answer what counts as a good choice. Critics therefore insist that nudges should be transparent — people should be able to recognise that they are being nudged and why — and that the most consequential decisions should remain subject to democratic debate rather than quietly engineered by experts. Transparency, however, may weaken the nudge itself: a default that is announced as a deliberate attempt to influence behaviour invites precisely the resistance that the unannounced default avoids.\n\nF. There is a further difficulty, less discussed but arguably more important: nudges address the symptoms of poor decision-making while leaving its deeper causes untouched. Automatically enrolling workers in a pension improves their retirement income, but it does little to help them understand compound interest, evaluate investment risk or resist the marketing of unsuitable financial products. Some researchers therefore argue that the field has overinvested in clever tweaks to the environment and underinvested in building people's actual competence — financial literacy and statistical reasoning. A population that can only choose well when the choice is arranged for it remains dependent on the arranger, and the arranger may not always be benevolent.\n\nG. None of this diminishes the achievement of behavioural economics, which has permanently altered how economists think about human nature. The rational actor has not been discarded — it remains a useful benchmark, a way of describing how people would behave if they had unlimited time, information and self-control. But it is now understood as a benchmark, not a description, and policy designed on the assumption that citizens resemble it is recognised as policy designed for people who do not exist. The enduring lesson is subtler than either the enthusiasts or the critics allow: human beings are neither the flawless calculators of the textbooks nor the helpless victims of their biases, but creatures whose choices depend profoundly on the context in which those choices are made — and context, unlike human nature, can be deliberately and responsibly designed.",
+"questions":[
+{"type":"MC","q":"According to the writer, what is the starting point of behavioural economics?","o":["The gap between the rational-actor model of classical economics and the way real people actually behave.","The discovery that people are entirely irrational in all their decisions.","The failure of classical economics to explain international trade.","The observation that people always choose what is best for them in the long term."],"options":["The gap between the rational-actor model of classical economics and the way real people actually behave.","The discovery that people are entirely irrational in all their decisions.","The failure of classical economics to explain international trade.","The observation that people always choose what is best for them in the long term."],"a":0,"why":"Đoạn A: kinh tế hành vi bắt đầu từ khoảng cách giữa mô hình (người hành động duy lý) và con người thật — người ăn thêm bánh khi đang ăn kiêng, để đơn lương hưu chưa điền hàng tháng."},
+{"type":"MC","q":"Why, according to paragraph B, do investors hold on to falling shares?","o":["Because they do not understand what shares are.","Because selling shares is legally forbidden in most countries.","Because falling shares always recover their value eventually.","Because losses are felt roughly twice as keenly as equivalent gains."],"options":["Because they do not understand what shares are.","Because selling shares is legally forbidden in most countries.","Because falling shares always recover their value eventually.","Because losses are felt roughly twice as keenly as equivalent gains."],"a":3,"why":"Đoạn B: do ác cảm mất mát (loss aversion) — người ta cảm nhận mất mát mạnh gấp đôi lợi ích tương đương, nên nhà đầu tư bám giữ cổ phiếu đang rớt giá."},
+{"type":"MC","q":"What do the pension and organ-donation examples in paragraph C have in common?","o":["In both cases, participation is made compulsory by law.","In both cases, people are given detailed financial education first.","In both cases, changing the default — rather than changing incentives or forbidding anything — sharply raises participation.","In both cases, the government pays people to participate."],"options":["In both cases, participation is made compulsory by law.","In both cases, people are given detailed financial education first.","In both cases, changing the default — rather than changing incentives or forbidding anything — sharply raises participation.","In both cases, the government pays people to participate."],"a":2,"why":"Đoạn C: đăng ký tự động vào quỹ hưu trí (có quyền rút ra) và mặc định hiến tạng (trừ khi từ chối) đều làm tỉ lệ tham gia tăng mạnh, dù không cấm gì và không thay đổi ưu đãi."},
+{"type":"MC","q":"What is the writer's main criticism of nudges in paragraph F?","o":["They always require people to give up their freedom of choice.","They improve decisions in the moment but do little to build people's underlying competence to choose well for themselves.","They cost far more than traditional taxes and regulations.","They have never been shown to work in any real-world setting."],"options":["They always require people to give up their freedom of choice.","They improve decisions in the moment but do little to build people's underlying competence to choose well for themselves.","They cost far more than traditional taxes and regulations.","They have never been shown to work in any real-world setting."],"a":1,"why":"Đoạn F: nudge chỉ xử lý triệu chứng của quyết định kém mà không chạm tới nguyên nhân sâu — lĩnh vực này đầu tư quá nhiều vào mẹo sắp đặt môi trường mà đầu tư quá ít vào năng lực thật của con người (hiểu biết tài chính, tư duy thống kê)."},
+{"type":"TFNG","q":"The rational-actor model has been completely abandoned by modern economists.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":1,"why":"Đoạn G: mô hình người duy lý không bị loại bỏ — nó vẫn là chuẩn mực hữu ích để mô tả cách con người sẽ hành xử nếu có thời gian, thông tin và tự chủ vô hạn — nên khẳng định 'đã bị bỏ hoàn toàn' là False."},
+{"type":"TFNG","q":"Countries with presumed-consent organ donation record far higher consent rates than countries requiring an active decision to donate.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":0,"why":"Đoạn C nêu rõ: các nước mặc định công dân là người hiến tạng trừ khi từ chối có tỉ lệ đồng ý cao hơn nhiều so với các nước yêu cầu quyết định chủ động hiến — True."},
+{"type":"YNNG","q":"The writer believes that making a nudge transparent may reduce its effectiveness.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":0,"why":"Đoạn E: tác giả nói tính minh bạch có thể làm nudge yếu đi — mặc định được công bố là nỗ lực cố ý tác động sẽ mời gọi chính sự kháng cự mà mặc định không công bố tránh được — Yes."},
+{"type":"YNNG","q":"The writer believes that nudges address only the symptoms of poor decision-making, not its deeper causes.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":0,"why":"Đoạn F: tác giả viết thẳng rằng nudge chỉ xử lý triệu chứng của việc quyết định kém — \"nudges address the symptoms of poor decision-making while leaving its deeper causes untouched\" — nên đáp án là Yes."},
+{"type":"YNNG","q":"The writer believes that experts have a neutral standpoint from which to decide what counts as a good choice for citizens.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn E: tác giả nói rõ nhà kinh tế hành vi không có điểm nhìn trung lập để trả lời thế nào là lựa chọn tốt — nên quan điểm này là No."},
+{"type":"MSEND","q":"Behavioural economists argue that departures from rationality are systematic, because","o":["people are too stupid to make any good decisions.","classical economics has proved that human beings are flawless calculators.","governments deliberately design every choice environment.","they follow predictable patterns such as loss aversion and present bias, rather than being random errors."],"options":["people are too stupid to make any good decisions.","classical economics has proved that human beings are flawless calculators.","governments deliberately design every choice environment.","they follow predictable patterns such as loss aversion and present bias, rather than being random errors."],"a":3,"why":"Đoạn B: các lệch lạc khỏi tính duy lý không phải lỗi ngẫu nhiên triệt tiêu lẫn nhau; chúng tuân theo quy luật có hệ thống như ác cảm mất mát và thiên kiến hiện tại."},
+{"type":"MATCH","q":"Who would most likely support placing fruit at eye level in a cafeteria while leaving sugary drinks available?","o":["A classical economist who trusts only taxes","A researcher focused on financial literacy","An enthusiast for nudges","A critic worried about manipulation"],"options":["A classical economist who trusts only taxes","A researcher focused on financial literacy","An enthusiast for nudges","A critic worried about manipulation"],"a":2,"why":"Đoạn D: người ủng hộ nudge cho rằng sắp đặt căng-tin để trái cây ngang tầm mắt và đồ uống ngọt ở phía sau là cách cải thiện kết quả mà không ép buộc, không cấm đoán."},
+{"type":"MATCH","q":"Who argues that a population which can only choose well when choices are arranged for it remains dependent on the arranger?","o":["Enthusiasts who see nudges as a free lunch","Classical economists defending the rational actor","Policymakers who prefer taxation to nudging","Researchers who favour building people's competence over clever environmental tweaks"],"options":["Enthusiasts who see nudges as a free lunch","Classical economists defending the rational actor","Policymakers who prefer taxation to nudging","Researchers who favour building people's competence over clever environmental tweaks"],"a":3,"why":"Đoạn F: một số nhà nghiên cứu cho rằng lĩnh vực này đầu tư quá nhiều vào mẹo sắp đặt môi trường và quá ít vào việc xây dựng năng lực thật; dân chúng chỉ chọn tốt khi lựa chọn được sắp đặt sẵn thì vẫn phụ thuộc vào người sắp đặt."},
+{"type":"SC","q":"Complete the sentence. People feel losses roughly twice as keenly as equivalent gains, a tendency known as ______.","answer":"loss aversion","why":"Đoạn B viết nguyên văn: 'People feel losses roughly twice as keenly as equivalent gains, a tendency known as loss aversion' — đáp án đúng là 'loss aversion'."}
+]},
+{"topic":"Chỉnh sửa gen và y sinh","level":"Band 7,5+","title":"Rewriting the Code of Life: The Promise and Peril of Gene Editing",
+"text":"A. For most of medical history, physicians could treat the consequences of a faulty gene but not the fault itself. A child born with sickle-cell disease could receive transfusions, pain relief and careful monitoring, yet the single-letter error in their DNA that distorted their red blood cells remained untouched. That boundary began to dissolve in 2012, when researchers demonstrated that a bacterial defence system called CRISPR could be repurposed into a precise editing tool for the genomes of other organisms. Within a decade, the technology had moved from laboratory curiosity to approved therapy: patients with sickle-cell disease began receiving treatments in which their own stem cells were edited outside the body and returned, freeing many of them from transfusions.\n\nB. The scientific appeal of CRISPR is deceptively simple. A short guide molecule directs a cutting enzyme to a chosen sequence of DNA, the cell's own repair machinery is invoked, and the targeted section is disabled, corrected or replaced. The analogy most often offered is that of a word processor's find-and-replace function applied to the book of life. Yet the analogy is misleading in an important respect: a word processor can undo a mistake, whereas an edit to a living genome is difficult to reverse and impossible to confine with certainty to its intended target. The cutting enzyme sometimes acts at sites resembling the target, producing off-target changes whose consequences may not appear for years, and a proportion of cells may be edited differently from their neighbours, creating a mosaic whose long-term behaviour is hard to predict.\n\nC. These technical uncertainties divide the applications of gene editing into two categories that could hardly be more different in their ethical weight. Somatic editing alters the cells of a single patient — blood stem cells, for instance — and its effects die with that patient. Germline editing, by contrast, alters embryos, eggs or sperm, so that the change is inherited by every cell of the resulting person and passed on to their descendants. The first category is now broadly accepted as a legitimate extension of medicine, governed by the same principles as any experimental treatment. The second remains, in most jurisdictions, either prohibited or subject to a moratorium, not because scientists doubt its eventual feasibility, but because a single intervention would rewrite the genetic inheritance of people who cannot consent to it.\n\nD. The distinction was tested dramatically in 2018, when a Chinese biophysicist announced that he had created the world's first gene-edited babies, twin girls whose embryos he had altered in an attempt to confer resistance to HIV. The reaction was swift and almost universally condemnatory: the experiment had been conducted in secrecy, without credible ethical approval, for a condition that existing medicine could already prevent, and with a genetic change whose effects on the children's health were unknown. The scientist was imprisoned, and the episode is now widely cited as a cautionary tale. Yet some observers draw a subtler lesson from it. The scandal, they argue, was not that the technology failed — the children appear healthy — but that it worked well enough to be attempted before society had agreed on the circumstances, if any, in which it should be used.\n\nE. Supporters of germline editing contend that a categorical ban would itself be ethically questionable. There are genetic conditions so severe that preventing them at the embryonic stage may one day be the most humane option available. They note, moreover, that parents already shape their children's genetic inheritance through embryo selection in fertility clinics, choosing among embryos on the basis of genetic tests; editing, on this view, differs in degree rather than in kind. Critics reply that the comparison is false comfort: selection chooses among the genetic combinations that nature and the parents have already produced, whereas editing creates combinations that have never existed, with consequences that no trial can fully anticipate before the first edited child is born.\n\nF. Beyond the ethics of individual cases lies a question of distribution. The first approved gene-editing therapies cost millions of dollars per patient, placing them beyond the reach of all but the wealthiest health systems — and sickle-cell disease, the condition they treat most dramatically, is concentrated precisely in sub-Saharan Africa and other regions where health budgets are thinnest. A technology that cures a disease of the poor at a price only the rich can pay risks becoming a symbol of medical inequality rather than a triumph over it. Some propose collective price negotiation, or that the patents behind such therapies should be licensed in exchange for public funding; others argue that prices will fall as manufacturing improves, as they have for earlier breakthroughs. The history of expensive medicines gives both sides reason for confidence and for doubt.\n\nG. What gene editing ultimately reveals is that the hardest questions raised by a new technology are rarely technical. The science of cutting DNA is advancing faster than the collective capacity to decide what should be cut, by whom, and for whose benefit. That gap will not be closed by scientists alone, nor by ethicists, lawyers or theologians working in isolation; it requires a public conversation of a kind that democratic societies have rarely managed well. The code of life can now be rewritten. Whether it should be, and in whose handwriting, remains the question that will define medicine in the century ahead.",
+"questions":[
+{"type":"MC","q":"What does the writer present as the historic significance of CRISPR?","o":["It allowed physicians, for the first time, to correct the genetic fault itself rather than merely treat its consequences.","It made all genetic diseases curable within a decade.","It replaced the need for blood transfusions in every patient with sickle-cell disease.","It proved that bacterial defence systems cannot be used in human medicine."],"options":["It allowed physicians, for the first time, to correct the genetic fault itself rather than merely treat its consequences.","It made all genetic diseases curable within a decade.","It replaced the need for blood transfusions in every patient with sickle-cell disease.","It proved that bacterial defence systems cannot be used in human medicine."],"a":0,"why":"Đoạn A: trước đây bác sĩ chỉ chữa hậu quả của gen lỗi; CRISPR cho phép sửa chính lỗi đó — bệnh nhân hồng cầu hình liềm được chỉnh sửa tế bào gốc rồi truyền lại, nhiều người thoát khỏi truyền máu."},
+{"type":"MC","q":"Why does the writer say the word-processor analogy for CRISPR is misleading?","o":["Because CRISPR cannot cut DNA at all.","Because word processors are no longer used by scientists.","Because the guide molecule is longer than a word-processor command.","Because an edit to a living genome is hard to reverse and cannot be confined with certainty to its intended target."],"options":["Because CRISPR cannot cut DNA at all.","Because word processors are no longer used by scientists.","Because the guide molecule is longer than a word-processor command.","Because an edit to a living genome is hard to reverse and cannot be confined with certainty to its intended target."],"a":3,"why":"Đoạn B: trình xử lý văn bản có thể hoàn tác lỗi, còn chỉnh sửa hệ gen sống khó đảo ngược và không thể giới hạn chắc chắn ở đúng đích — enzyme cắt đôi khi tác động nhầm vị trí tương tự (off-target)."},
+{"type":"MC","q":"What is the crucial difference between somatic and germline editing, according to paragraph C?","o":["Somatic editing is cheaper than germline editing.","Somatic editing alters embryos, while germline editing alters blood cells.","Somatic edits affect only one patient and die with them, while germline edits are inherited by descendants who cannot consent.","Somatic editing is illegal everywhere, while germline editing is legal."],"options":["Somatic editing is cheaper than germline editing.","Somatic editing alters embryos, while germline editing alters blood cells.","Somatic edits affect only one patient and die with them, while germline edits are inherited by descendants who cannot consent.","Somatic editing is illegal everywhere, while germline editing is legal."],"a":2,"why":"Đoạn C: chỉnh sửa soma chỉ đổi tế bào của một bệnh nhân và mất đi cùng người đó; chỉnh sửa dòng mầm đổi phôi/trứng/tinh trùng nên thay đổi được di truyền cho mọi tế bào của người đó và con cháu họ."},
+{"type":"MC","q":"What does the writer identify as the main problem with the first approved gene-editing therapies?","o":["They are illegal in every country.","Their price of millions of dollars per patient puts them out of reach where the disease they treat is most common.","They have been shown to be completely ineffective.","They are only available for conditions that already have cheap cures."],"options":["They are illegal in every country.","Their price of millions of dollars per patient puts them out of reach where the disease they treat is most common.","They have been shown to be completely ineffective.","They are only available for conditions that already have cheap cures."],"a":1,"why":"Đoạn F: liệu pháp chỉnh sửa gen đầu tiên được phê duyệt tốn hàng triệu đô la mỗi bệnh nhân, trong khi bệnh hồng cầu hình liềm tập trung ở châu Phi cận Sahara và những nơi ngân sách y tế mỏng nhất."},
+{"type":"TFNG","q":"The two gene-edited babies born in 2018 were created with credible ethical approval and full transparency.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":1,"why":"Đoạn D: thí nghiệm được tiến hành bí mật, không có phê duyệt đạo đức đáng tin, cho một bệnh trạng mà y học hiện có đã phòng ngừa được — nên khẳng định 'có phê duyệt đạo đức đáng tin và minh bạch đầy đủ' là False."},
+{"type":"TFNG","q":"Supporters of germline editing argue that embryo selection in fertility clinics is fundamentally different in kind from gene editing.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":1,"why":"Đoạn E: người ủng hộ cho rằng chọn phôi và chỉnh sửa chỉ khác nhau về mức độ chứ không khác về bản chất (differs in degree rather than in kind); quan điểm 'khác hẳn về bản chất' là của phe phê phán — nên câu này là False."},
+{"type":"TFNG","q":"The first approved gene-editing therapies cost more than ten million dollars per patient.","o":["True","False","Not Given"],"options":["True","False","Not Given"],"a":2,"why":"Đoạn F chỉ nói các liệu pháp chỉnh sửa gen đầu tiên được phê duyệt \"cost millions of dollars per patient\" mà không đưa con số cụ thể nào — bài không nói giá hơn mười triệu đô la, nên đáp án là Not Given."},
+{"type":"YNNG","q":"The writer believes that deciding whether and how to use gene editing requires open public discussion.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":0,"why":"Đoạn G: tác giả viết thẳng rằng khoảng trống này \"requires a public conversation of a kind that democratic societies have rarely managed well\" — việc quyết định cần đối thoại công khai, nên đáp án là Yes."},
+{"type":"YNNG","q":"The writer believes that the hardest questions raised by gene editing are technical rather than moral or social.","o":["Yes","No","Not Given"],"options":["Yes","No","Not Given"],"a":1,"why":"Đoạn G: tác giả nói rõ những câu hỏi khó nhất mà công nghệ mới đặt ra hiếm khi mang tính kỹ thuật — khoa học cắt DNA tiến nhanh hơn năng lực chung quyết định nên cắt gì, ai cắt, vì lợi ích của ai — No."},
+{"type":"MSEND","q":"The 2018 case is widely cited as a cautionary tale, because the experiment was carried out","o":["with the full approval of every international ethics committee.","only after decades of public debate and democratic consent.","on adult volunteers who gave their informed consent.","in secrecy, without credible ethical approval, for a condition existing medicine could already prevent."],"options":["with the full approval of every international ethics committee.","only after decades of public debate and democratic consent.","on adult volunteers who gave their informed consent.","in secrecy, without credible ethical approval, for a condition existing medicine could already prevent."],"a":3,"why":"Đoạn D: thí nghiệm tiến hành bí mật, không có phê duyệt đạo đức đáng tin, cho bệnh trạng mà y học hiện có đã phòng ngừa được, và thay đổi gen có tác động chưa biết tới sức khỏe của các bé."},
+{"type":"MSEND","q":"Critics of germline editing reply that editing differs from embryo selection, because editing","o":["is cheaper and simpler than selecting among embryos.","has been practised safely for centuries.","only affects the patient being treated.","creates genetic combinations that have never existed, with consequences no trial can fully anticipate."],"options":["is cheaper and simpler than selecting among embryos.","has been practised safely for centuries.","only affects the patient being treated.","creates genetic combinations that have never existed, with consequences no trial can fully anticipate."],"a":3,"why":"Đoạn E: phe phê phán nói chọn phôi chỉ chọn trong các tổ hợp gen mà tự nhiên và cha mẹ đã tạo ra, còn chỉnh sửa tạo ra tổ hợp chưa từng tồn tại, với hậu quả mà không thử nghiệm nào lường trước đầy đủ được."},
+{"type":"MATCH","q":"Who argues that the scandal of 2018 was not that the technology failed, but that it worked well enough to be attempted before society had agreed on when it should be used?","o":["The governments negotiating drug prices","Some observers who draw a subtler lesson from the episode","The scientist who conducted the experiment","The critics of embryo selection"],"options":["The governments negotiating drug prices","Some observers who draw a subtler lesson from the episode","The scientist who conducted the experiment","The critics of embryo selection"],"a":1,"why":"Đoạn D: một số người quan sát rút ra bài học tinh tế hơn — vụ bê bối không phải vì công nghệ thất bại (các bé dường như khỏe mạnh) mà vì nó đủ hiệu quả để bị thử trước khi xã hội thống nhất về hoàn cảnh sử dụng."},
+{"type":"SC","q":"Complete the sentence. A child born with sickle-cell disease could receive transfusions, yet the single-letter error in their DNA that distorted their ______ remained untouched.","answer":"red blood cells","why":"Đoạn A viết nguyên văn: 'the single-letter error in their DNA that distorted their red blood cells remained untouched' — đáp án đúng là 'red blood cells'."},
+{"type":"SC","q":"Complete the sentence. Germline editing alters embryos, eggs or sperm, so that the change is inherited by every cell of the resulting person and passed on to their ______.","answer":"descendants","why":"Đoạn C viết nguyên văn: 'so that the change is inherited by every cell of the resulting person and passed on to their descendants' — đáp án đúng là 'descendants'."}
 ]}
 ];
 
@@ -104732,7 +111111,7 @@ CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, [
       { type: "MC", q: "Where do Mai and her mum go?", o: ["To the market", "To school", "To the park", "Home"], a: 0, whyOrig: "Trong đoạn nghe: 'let us go to the market' — hai mẹ con đi chợ.", why: "Ví dụ: trong đoạn nghe có đoạn 'let us go to the market' (hai mẹ con đi chợ). Vì vậy đáp án “To the market” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyU7: true },
       { type: "MC", q: "What do they buy?", o: ["Rice, eggs and apples", "Bread and milk", "Fish and meat", "Books and pens"], a: 0, whyOrig: "Trong đoạn nghe: 'We buy rice, eggs and apples' — mua gạo, trứng và táo.", why: "Ví dụ: trong đoạn nghe có đoạn 'We buy rice, eggs and apples' (mua gạo, trứng và táo). Vì vậy đáp án “Rice, eggs and apples” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyU7: true },
       { type: "COMP", q: "The apples are ___ dong.", answer: "20000", whyOrig: "Trong đoạn nghe: 'The apples are 20000 dong' — táo giá 20000 đồng.", why: "Ví dụ: trong đoạn nghe có đoạn 'The apples are 20000 dong' (táo giá 20000 đồng). Vì vậy đáp án “20000” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.", whyU7: true },
-      { type: "TF", q: "Mai likes apples.", o: ["True", "False"], a: 0, whyOrig: "Câu này đúng vì Mai nói: 'I like apples!'", why: "Ví dụ: trong đoạn nghe Mai nói 'I like apples!'. Vì vậy đáp án “True” đúng. Cách làm: nghe kỹ rồi đối chiếu từng ý trong câu hỏi với những gì nghe được. Nghe đúng như vậy thì câu này đúng.", whyU7: true },
+      { type: "MC", q: "How many apples does Mai want?", o: ["Five apples","Three apples","Two apples","Ten apples"], a: 0, why: "Ví dụ: trong đoạn nghe có câu “Five apples, please”. Vì vậy đáp án “Five apples” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyOrig: "Bài nghe: Mai nói 'Five apples, please.' (Mai muốn 5 quả táo.)", whyU7: true },
       { type: "MC", q: "How much are the eggs?", o: ["30000 dong", "20000 dong", "50000 dong", "10000 dong"], a: 0, whyOrig: "Trong đoạn nghe: 'The eggs are 30000 dong' — trứng giá 30000 đồng.", why: "Ví dụ: trong đoạn nghe có đoạn 'The eggs are 30000 dong' (trứng giá 30000 đồng). Vì vậy đáp án “30000 dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.", whyU7: true }
     ]
   }
@@ -105764,581 +112143,606 @@ var IELTS_VOCAB_EXPAND2 = [
 
 var TP_MOCK2_L = [
  {
-  "q": "Nghe: '남자: 회의가 몇 시에 시작해요? 여자: 오후 2시에 시작해요.' Cuộc họp bắt đầu lúc nào?",
-  "script": "남자: 회의가 몇 시에 시작해요? 여자: 오후 2시에 시작해요.",
+  "q": "Nghe: '여자: 내일 아침 몇 시에 출발할까요? 남자: 8시에 출발하면 돼요. 지하철역 앞에서 만나요. 늦지 마세요.' Hai người sẽ gặp nhau ở đâu, lúc mấy giờ?",
+  "script": "여자: 내일 아침 몇 시에 출발할까요? 남자: 8시에 출발하면 돼요. 지하철역 앞에서 만나요. 늦지 마세요.",
   "o": [
-   "2 giờ chiều",
-   "2 giờ sáng",
-   "12 giờ trưa",
-   "4 giờ chiều"
+   "8 giờ ở ga tàu điện ngầm",
+   "9 giờ ở ga tàu điện ngầm",
+   "8 giờ ở trường học",
+   "7 giờ ở bến xe buýt"
   ],
   "a": 0,
-  "why": "오후 2시 là 2 giờ chiều."
+  "why": "8시에 출발하면 돼요, 지하철역 앞에서 만나요: 8 giờ xuất phát, gặp nhau trước ga tàu điện ngầm."
  },
  {
-  "q": "Nghe: '여자: 내일 발표 준비 다 했어요? 남자: 아직 자료를 정리하고 있어요.' Người đàn ông đang làm gì?",
-  "script": "여자: 내일 발표 준비 다 했어요? 남자: 아직 자료를 정리하고 있어요.",
+  "q": "Nghe: '남자: 오늘 점심은 뭐 먹을까요? 여자: 날씨가 더우니까 냉면이 어때요? 남자: 좋아요. 냉면 먹으러 가요.' Hai người sẽ ăn trưa món gì?",
+  "script": "남자: 오늘 점심은 뭐 먹을까요? 여자: 날씨가 더우니까 냉면이 어때요? 남자: 좋아요. 냉면 먹으러 가요.",
   "o": [
-   "Đang nghỉ ngơi",
-   "Đang sắp xếp tài liệu",
-   "Đã chuẩn bị xong",
-   "Đang viết báo cáo"
-  ],
-  "a": 1,
-  "why": "자료를 정리하고 있어요: đang sắp xếp tài liệu."
- },
- {
-  "q": "Nghe: '남자: 이 책을 언제까지 반납해야 해요? 여자: 다음 주 금요일까지요.' Hạn trả sách là khi nào?",
-  "script": "남자: 이 책을 언제까지 반납해야 해요? 여자: 다음 주 금요일까지요.",
-  "o": [
-   "Thứ Hai tuần sau",
-   "Chủ nhật tuần sau",
-   "Thứ Sáu tuần sau",
-   "Thứ Sáu tuần này"
-  ],
-  "a": 2,
-  "why": "다음 주 금요일: thứ Sáu tuần sau."
- },
- {
-  "q": "Nghe: '여자: 비가 와서 길이 미끄러워요. 조심하세요. 남자: 네, 알겠어요.' Người phụ nữ nhắc điều gì?",
-  "script": "여자: 비가 와서 길이 미끄러워요. 조심하세요. 남자: 네, 알겠어요.",
-  "o": [
-   "Mang ô đi",
-   "Đừng ra ngoài",
-   "Mặc áo ấm",
-   "Đường trơn nên cẩn thận"
-  ],
-  "a": 3,
-  "why": "길이 미끄러워요, 조심하세요: đường trơn nên cẩn thận."
- },
- {
-  "q": "Nghe: '남자: 이번 주말에 등산 갈래요? 여자: 좋아요. 그런데 일요일에는 비가 온대요.' Hai người dự định làm gì?",
-  "script": "남자: 이번 주말에 등산 갈래요? 여자: 좋아요. 그런데 일요일에는 비가 온대요.",
-  "o": [
-   "Đi leo núi cuối tuần",
-   "Đi xem phim",
-   "Đi bơi",
-   "Ở nhà nghỉ"
-  ],
-  "a": 0,
-  "why": "등산 갈래요: rủ đi leo núi."
- },
- {
-  "q": "Nghe: '여자: 신청서는 어디에 내야 해요? 남자: 2층 사무실에 내세요.' Nộp đơn ở đâu?",
-  "script": "여자: 신청서는 어디에 내야 해요? 남자: 2층 사무실에 내세요.",
-  "o": [
-   "Thư viện",
-   "Văn phòng tầng 2",
-   "Văn phòng tầng 1",
-   "Phòng họp"
-  ],
-  "a": 1,
-  "why": "2층 사무실: văn phòng tầng 2."
- },
- {
-  "q": "Nghe: '남자: 어제 회의에서 무슨 얘기를 했어요? 여자: 새로운 프로젝트 일정에 대해 얘기했어요.' Cuộc họp hôm qua bàn về gì?",
-  "script": "남자: 어제 회의에서 무슨 얘기를 했어요? 여자: 새로운 프로젝트 일정에 대해 얘기했어요.",
-  "o": [
-   "Ngân sách năm sau",
-   "Tuyển nhân viên",
-   "Lịch trình dự án mới",
-   "Kế hoạch nghỉ phép"
-  ],
-  "a": 2,
-  "why": "새로운 프로젝트 일정: lịch trình dự án mới."
- },
- {
-  "q": "Nghe: '여자: 이 옷은 세탁기에 빨아도 돼요? 남자: 아니요, 손으로 빨아야 해요.' Chiếc áo này giặt thế nào?",
-  "script": "여자: 이 옷은 세탁기에 빨아도 돼요? 남자: 아니요, 손으로 빨아야 해요.",
-  "o": [
-   "Giặt máy",
-   "Giặt khô",
-   "Không cần giặt",
-   "Giặt tay"
-  ],
-  "a": 3,
-  "why": "손으로 빨아야 해요: phải giặt tay."
- },
- {
-  "q": "Nghe: '남자: 지하철이 고장 나서 버스를 탔어요. 여자: 그래서 늦었군요.' Vì sao người đàn ông đến muộn?",
-  "script": "남자: 지하철이 고장 나서 버스를 탔어요. 여자: 그래서 늦었군요.",
-  "o": [
-   "Tàu điện ngầm hỏng nên đi xe buýt",
-   "Tắc đường",
-   "Ngủ quên",
-   "Đi nhầm đường"
-  ],
-  "a": 0,
-  "why": "지하철이 고장 나서: tàu điện ngầm hỏng nên phải đi xe buýt."
- },
- {
-  "q": "Nghe: '여자: 이번 달 전기 요금이 지난달보다 많이 나왔어요. 남자: 에어컨을 많이 써서 그래요.' Tiền điện tháng này vì sao cao?",
-  "script": "여자: 이번 달 전기 요금이 지난달보다 많이 나왔어요. 남자: 에어컨을 많이 써서 그래요.",
-  "o": [
-   "Giá điện tăng",
-   "Dùng điều hòa nhiều",
-   "Dùng máy giặt nhiều",
-   "Quên tắt đèn"
-  ],
-  "a": 1,
-  "why": "에어컨을 많이 써서: vì dùng điều hòa nhiều."
- },
- {
-  "q": "Nghe: '남자: 도서관에서 큰 소리로 말하면 안 돼요. 여자: 네, 조용히 할게요.' Quy định ở thư viện là gì?",
-  "script": "남자: 도서관에서 큰 소리로 말하면 안 돼요. 여자: 네, 조용히 할게요.",
-  "o": [
-   "Không dùng điện thoại",
-   "Không mượn sách",
-   "Không nói to",
-   "Không ăn uống"
-  ],
-  "a": 2,
-  "why": "큰 소리로 말하면 안 돼요: không được nói to."
- },
- {
-  "q": "Nghe: '여자: 내일 비가 올까요? 남자: 일기예보에서 비가 온다고 했어요.' Dự báo thời tiết ngày mai thế nào?",
-  "script": "여자: 내일 비가 올까요? 남자: 일기예보에서 비가 온다고 했어요.",
-  "o": [
-   "Nắng",
-   "Có tuyết",
-   "Nhiều mây",
-   "Có mưa"
-  ],
-  "a": 3,
-  "why": "비가 온다고 했어요: dự báo nói sẽ mưa."
- },
- {
-  "q": "Nghe: '남자: 이 식당은 예약해야 해요? 여자: 네, 주말에는 예약이 필요해요.' Cuối tuần đến nhà hàng này cần gì?",
-  "script": "남자: 이 식당은 예약해야 해요? 여자: 네, 주말에는 예약이 필요해요.",
-  "o": [
-   "Đặt bàn trước",
-   "Mang thẻ",
-   "Đến sớm",
-   "Ăn nhanh"
-  ],
-  "a": 0,
-  "why": "주말에는 예약이 필요해요: cuối tuần cần đặt trước."
- },
- {
-  "q": "Nghe: '여자: 건강 검진 결과가 나왔어요? 남자: 네, 다 정상이라고 했어요.' Kết quả khám sức khỏe thế nào?",
-  "script": "여자: 건강 검진 결과가 나왔어요? 남자: 네, 다 정상이라고 했어요.",
-  "o": [
-   "Có một chỉ số cao",
-   "Đều bình thường",
-   "Cần điều trị",
-   "Chưa có kết quả"
-  ],
-  "a": 1,
-  "why": "다 정상: đều bình thường."
- },
- {
-  "q": "Nghe: '남자: 이 영화 어땠어요? 여자: 생각보다 재미없었어요.' Người phụ nữ thấy phim thế nào?",
-  "script": "남자: 이 영화 어땠어요? 여자: 생각보다 재미없었어요.",
-  "o": [
-   "Buồn",
-   "Đáng sợ",
-   "Không thú vị như nghĩ",
-   "Rất thú vị"
-  ],
-  "a": 2,
-  "why": "생각보다 재미없었어요: không thú vị như đã nghĩ."
- },
- {
-  "q": "Nghe: '여자: 회의 자료를 인쇄했어요? 남자: 네, 10부 인쇄했어요.' Người đàn ông đã in bao nhiêu bản?",
-  "script": "여자: 회의 자료를 인쇄했어요? 남자: 네, 10부 인쇄했어요.",
-  "o": [
-   "5 bản",
-   "20 bản",
-   "1 bản",
-   "10 bản"
-  ],
-  "a": 3,
-  "why": "10부: 10 bản."
- },
- {
-  "q": "Nghe: '남자: 지하철역까지 어떻게 가요? 여자: 여기서 10분 걸어가면 돼요.' Đi bộ đến ga tàu mất bao lâu?",
-  "script": "남자: 지하철역까지 어떻게 가요? 여자: 여기서 10분 걸어가면 돼요.",
-  "o": [
-   "10 phút",
-   "20 phút",
-   "5 phút",
-   "30 phút"
-  ],
-  "a": 0,
-  "why": "10분 걸어가면 돼요: đi bộ 10 phút là tới."
- },
- {
-  "q": "Nghe: '여자: 오늘 저녁에 뭐 먹을까요? 남자: 비빔밥이 어때요? 여자: 좋아요.' Hai người tối nay sẽ ăn gì?",
-  "script": "여자: 오늘 저녁에 뭐 먹을까요? 남자: 비빔밥이 어때요? 여자: 좋아요.",
-  "o": [
-   "Canh kim chi",
-   "Cơm trộn",
+   "Thịt nướng",
    "Mì lạnh",
-   "Thịt nướng"
+   "Cơm trộn",
+   "Canh kim chi"
   ],
   "a": 1,
-  "why": "비빔밥: cơm trộn."
+  "why": "날씨가 더우니까 냉면이 어때요: trời nóng nên ăn mì lạnh."
  },
  {
-  "q": "Nghe: '남자: 방학 때 뭐 할 거예요? 여자: 아르바이트를 하면서 돈을 모을 거예요.' Kỳ nghỉ người phụ nữ sẽ làm gì?",
-  "script": "남자: 방학 때 뭐 할 거예요? 여자: 아르바이트를 하면서 돈을 모을 거예요.",
+  "q": "Nghe: '여자: 숙제를 다 했어요? 남자: 아직 수학 숙제가 남았어요. 오늘 밤까지 끝내야 해요. 여자: 빨리 끝내고 같이 놀아요.' Người đàn ông còn bài tập gì chưa làm xong?",
+  "script": "여자: 숙제를 다 했어요? 남자: 아직 수학 숙제가 남았어요. 오늘 밤까지 끝내야 해요. 여자: 빨리 끝내고 같이 놀아요.",
   "o": [
-   "Học thêm",
-   "Về quê",
-   "Làm thêm và tiết kiệm tiền",
-   "Đi du lịch"
+   "Bài tập tiếng Hàn",
+   "Bài tập tiếng Anh",
+   "Bài tập toán",
+   "Bài tập khoa học"
   ],
   "a": 2,
-  "why": "아르바이트를 하면서 돈을 모을 거예요: làm thêm và tiết kiệm tiền."
+  "why": "아직 수학 숙제가 남았어요: vẫn còn bài tập toán chưa làm xong."
  },
  {
-  "q": "Nghe: '여자: 이 가방 무게가 몇 킬로예요? 남자: 15킬로예요. 비행기에 가지고 탈 수 있어요.' Chiếc túi nặng bao nhiêu?",
-  "script": "여자: 이 가방 무게가 몇 킬로예요? 남자: 15킬로예요. 비행기에 가지고 탈 수 있어요.",
+  "q": "Nghe: '남자: 이 옷을 입어 봐도 돼요? 여자: 네, 저기 탈의실에서 입어 보세요. 남자: 사이즈가 작으면 바꿔 주세요.' Người đàn ông muốn thử đồ ở đâu?",
+  "script": "남자: 이 옷을 입어 봐도 돼요? 여자: 네, 저기 탈의실에서 입어 보세요. 남자: 사이즈가 작으면 바꿔 주세요.",
   "o": [
-   "10 kg",
-   "20 kg",
-   "5 kg",
-   "15 kg"
-  ],
-  "a": 3,
-  "why": "15킬로: 15 kg."
- },
- {
-  "q": "Nghe: '남자: 어제 늦게까지 일했어요? 여자: 네, 보고서 때문에 11시까지 일했어요.' Vì sao người phụ nữ làm đến 11 giờ?",
-  "script": "남자: 어제 늦게까지 일했어요? 여자: 네, 보고서 때문에 11시까지 일했어요.",
-  "o": [
-   "Vì báo cáo",
-   "Vì cuộc họp",
-   "Vì khách hàng",
-   "Vì máy hỏng"
-  ],
-  "a": 0,
-  "why": "보고서 때문에: vì báo cáo."
- },
- {
-  "q": "Nghe: '여자: 내일 아침 7시에 깨워 줄 수 있어요? 남자: 네, 알람을 맞출게요.' Người đàn ông sẽ làm gì?",
-  "script": "여자: 내일 아침 7시에 깨워 줄 수 있어요? 남자: 네, 알람을 맞출게요.",
-  "o": [
-   "Nhắn tin lúc 7 giờ",
-   "Đặt báo thức 7 giờ sáng",
-   "Gọi điện lúc 7 giờ",
-   "Đến lúc 7 giờ"
-  ],
-  "a": 1,
-  "why": "알람을 맞출게요: sẽ đặt báo thức."
- },
- {
-  "q": "Nghe: '남자: 이 근처에 약국이 있어요? 여자: 네, 저기 편의점 옆에 있어요.' Hiệu thuốc ở đâu?",
-  "script": "남자: 이 근처에 약국이 있어요? 여자: 네, 저기 편의점 옆에 있어요.",
-  "o": [
-   "Trong bệnh viện",
-   "Ở tầng 2",
-   "Bên cạnh cửa hàng tiện lợi",
-   "Đối diện trường học"
-  ],
-  "a": 2,
-  "why": "편의점 옆에: bên cạnh cửa hàng tiện lợi."
- },
- {
-  "q": "Nghe: '여자: 이번 시험이 어려웠어요? 남자: 네, 특히 마지막 문제가 어려웠어요.' Phần nào khó nhất?",
-  "script": "여자: 이번 시험이 어려웠어요? 남자: 네, 특히 마지막 문제가 어려웠어요.",
-  "o": [
-   "Câu đầu tiên",
-   "Phần nghe",
-   "Phần viết",
-   "Câu cuối cùng"
-  ],
-  "a": 3,
-  "why": "마지막 문제: câu cuối cùng."
- },
- {
-  "q": "Nghe: '남자: 내일 날씨가 추워진대요. 따뜻하게 입으세요. 여자: 네, 고마워요.' Người đàn ông khuyên gì?",
-  "script": "남자: 내일 날씨가 추워진대요. 따뜻하게 입으세요. 여자: 네, 고마워요.",
-  "o": [
-   "Mặc ấm",
-   "Mang ô",
    "Ở nhà",
-   "Uống nước ấm"
+   "Ở quầy tính tiền",
+   "Ở kho hàng",
+   "Ở phòng thử đồ"
+  ],
+  "a": 3,
+  "why": "저기 탈의실에서 입어 보세요: thử ở phòng thử đồ đằng kia."
+ },
+ {
+  "q": "Nghe: '여자: 내일 비가 온다고 하던데 우산 가져갔어요? 남자: 아, 깜빡했어요. 밖에 나가면 젖을 거예요. 여자: 제 우산 같이 써요.' Người phụ nữ đề nghị gì?",
+  "script": "여자: 내일 비가 온다고 하던데 우산 가져갔어요? 남자: 아, 깜빡했어요. 밖에 나가면 젖을 거예요. 여자: 제 우산 같이 써요.",
+  "o": [
+   "Cho mượn ô dùng chung",
+   "Mua ô mới",
+   "Ở nhà tránh mưa",
+   "Đi taxi"
   ],
   "a": 0,
-  "why": "따뜻하게 입으세요: hãy mặc ấm."
+  "why": "제 우산 같이 써요: dùng chung ô của tôi."
+ },
+ {
+  "q": "Nghe: '남자: 도서관에서 이 책을 빌릴 수 있어요? 여자: 네, 학생증이 있으면 빌릴 수 있어요. 남자: 학생증을 안 가져왔는데 어떡하죠?' Muốn mượn sách ở thư viện cần có gì?",
+  "script": "남자: 도서관에서 이 책을 빌릴 수 있어요? 여자: 네, 학생증이 있으면 빌릴 수 있어요. 남자: 학생증을 안 가져왔는데 어떡하죠?",
+  "o": [
+   "Giấy giới thiệu",
+   "Thẻ sinh viên",
+   "Chứng minh thư",
+   "Thẻ ngân hàng"
+  ],
+  "a": 1,
+  "why": "학생증이 있으면 빌릴 수 있어요: có thẻ sinh viên thì mượn được."
+ },
+ {
+  "q": "Nghe: '여자: 주말에 뭐 할 거예요? 남자: 친구하고 한강 공원에 가서 자전거를 탈 거예요. 여자: 저도 같이 가고 싶어요.' Cuối tuần người đàn ông sẽ làm gì?",
+  "script": "여자: 주말에 뭐 할 거예요? 남자: 친구하고 한강 공원에 가서 자전거를 탈 거예요. 여자: 저도 같이 가고 싶어요.",
+  "o": [
+   "Đi bơi ở bể bơi",
+   "Ở nhà xem phim",
+   "Đi đạp xe ở công viên sông Hàn với bạn",
+   "Đi leo núi một mình"
+  ],
+  "a": 2,
+  "why": "친구하고 한강 공원에 가서 자전거를 탈 거예요: cùng bạn đến công viên sông Hàn đạp xe."
+ },
+ {
+  "q": "Nghe: '남자: 이 약을 어떻게 먹어야 해요? 여자: 식사 후에 하루에 세 번 드세요. 물을 많이 마시세요. 남자: 알겠어요. 고마워요.' Thuốc này uống thế nào?",
+  "script": "남자: 이 약을 어떻게 먹어야 해요? 여자: 식사 후에 하루에 세 번 드세요. 물을 많이 마시세요. 남자: 알겠어요. 고마워요.",
+  "o": [
+   "Trước bữa ăn, ngày 2 lần",
+   "Lúc đói, ngày 1 lần",
+   "Trước khi ngủ, ngày 3 lần",
+   "Sau bữa ăn, ngày 3 lần"
+  ],
+  "a": 3,
+  "why": "식사 후에 하루에 세 번 드세요: uống sau bữa ăn, ngày 3 lần."
+ },
+ {
+  "q": "Nghe: '여자: 택배가 왔는데 집에 아무도 없어요. 남자: 그럼 경비실에 맡겨 달라고 하세요. 여자: 네, 그렇게 할게요.' Người đàn ông bảo làm gì với bưu kiện?",
+  "script": "여자: 택배가 왔는데 집에 아무도 없어요. 남자: 그럼 경비실에 맡겨 달라고 하세요. 여자: 네, 그렇게 할게요.",
+  "o": [
+   "Nhờ gửi ở phòng bảo vệ",
+   "Mang đến lại ngày mai",
+   "Để trước cửa nhà",
+   "Gửi trả lại người gửi"
+  ],
+  "a": 0,
+  "why": "경비실에 맡겨 달라고 하세요: nhờ gửi ở phòng bảo vệ."
+ },
+ {
+  "q": "Nghe: '남자: 이번 달 월세가 올랐어요? 여자: 네, 지난달보다 5만 원 올랐어요. 관리비도 조금 올랐어요. 남자: 너무 많이 올랐네요.' Tiền thuê nhà tháng này thay đổi thế nào?",
+  "script": "남자: 이번 달 월세가 올랐어요? 여자: 네, 지난달보다 5만 원 올랐어요. 관리비도 조금 올랐어요. 남자: 너무 많이 올랐네요.",
+  "o": [
+   "Không thay đổi",
+   "Tăng 50.000 won so với tháng trước",
+   "Giảm 50.000 won",
+   "Tăng 100.000 won"
+  ],
+  "a": 1,
+  "why": "지난달보다 5만 원 올랐어요: tăng 50.000 won so với tháng trước."
+ },
+ {
+  "q": "Nghe: '안내 말씀드립니다. 기숙사에서는 밤 11시 이후에 큰 소리로 떠들거나 음악을 크게 틀면 안 됩니다. 다른 방 학생들에게 피해를 주기 때문입니다. 또한 복도에서 자전거나 전동 킥보드를 타는 것도 금지되어 있습니다. 규정을 지키지 않으면 벌점을 받을 수 있으니 주의해 주세요.' Theo thông báo của ký túc xá, điều nào bị cấm?",
+  "script": "안내 말씀드립니다. 기숙사에서는 밤 11시 이후에 큰 소리로 떠들거나 음악을 크게 틀면 안 됩니다. 다른 방 학생들에게 피해를 주기 때문입니다. 또한 복도에서 자전거나 전동 킥보드를 타는 것도 금지되어 있습니다. 규정을 지키지 않으면 벌점을 받을 수 있으니 주의해 주세요.",
+  "o": [
+   "Mời bạn đến chơi ban ngày",
+   "Dùng thang máy buổi tối",
+   "Sau 11 giờ đêm gây ồn và đi xe đạp/xe điện ở hành lang",
+   "Nấu ăn trong phòng"
+  ],
+  "a": 2,
+  "why": "밤 11시 이후 큰 소리로 떠들거나 음악을 크게 틀면 안 됩니다, 복도에서 자전거나 전동 킥보드를 타는 것도 금지: cấm gây ồn sau 11 giờ đêm và cấm đi xe đạp/xe điện ở hành lang, vi phạm bị phạt điểm."
+ },
+ {
+  "q": "Nghe: '내일 날씨를 전해 드리겠습니다. 내일 아침에는 전국에 비가 내리겠습니다. 오후에는 비가 그치겠지만, 바람이 강하게 불겠습니다. 기온은 오늘보다 5도 정도 낮아지겠습니다. 외출할 때는 따뜻한 옷을 입고 우산을 챙기시기 바랍니다. 특히 해안 지역에서는 파도가 높으니 주의하세요.' Dự báo thời tiết ngày mai thế nào?",
+  "script": "내일 날씨를 전해 드리겠습니다. 내일 아침에는 전국에 비가 내리겠습니다. 오후에는 비가 그치겠지만, 바람이 강하게 불겠습니다. 기온은 오늘보다 5도 정도 낮아지겠습니다. 외출할 때는 따뜻한 옷을 입고 우산을 챙기시기 바랍니다. 특히 해안 지역에서는 파도가 높으니 주의하세요.",
+  "o": [
+   "Cả ngày nắng, nhiệt độ tăng",
+   "Sáng nắng, chiều mưa to",
+   "Cả ngày tuyết rơi",
+   "Sáng mưa, chiều tạnh nhưng gió mạnh, nhiệt độ giảm khoảng 5 độ"
+  ],
+  "a": 3,
+  "why": "아침에는 비가 내리겠습니다, 오후에는 비가 그치겠지만 바람이 강하게 불겠습니다, 기온은 5도 정도 낮아지겠습니다: sáng mưa, chiều tạnh nhưng gió mạnh, nhiệt độ giảm khoảng 5 độ."
+ },
+ {
+  "q": "Nghe: '여자: 이번 축제 때 우리 반은 뭐를 준비할까요? 남자: 지난해에는 음식을 팔았는데 올해는 다른 걸 해 보면 어때요? 여자: 그럼 사진 전시회를 해요. 우리가 찍은 사진을 보여 주면 좋을 것 같아요. 남자: 좋아요. 그럼 저는 전시할 사진을 골라올게요. 여자: 저는 포스터를 만들어 올게요.' Lớp sẽ chuẩn bị gì cho lễ hội năm nay?",
+  "script": "여자: 이번 축제 때 우리 반은 뭐를 준비할까요? 남자: 지난해에는 음식을 팔았는데 올해는 다른 걸 해 보면 어때요? 여자: 그럼 사진 전시회를 해요. 우리가 찍은 사진을 보여 주면 좋을 것 같아요. 남자: 좋아요. 그럼 저는 전시할 사진을 골라올게요. 여자: 저는 포스터를 만들어 올게요.",
+  "o": [
+   "Triển lãm ảnh",
+   "Bán đồ ăn",
+   "Biểu diễn ca nhạc",
+   "Bán quần áo"
+  ],
+  "a": 0,
+  "why": "사진 전시회를 해요: năm ngoái bán đồ ăn, năm nay đổi sang làm triển lãm ảnh."
+ },
+ {
+  "q": "Nghe: '남자: 다음 주에 끝내야 하는 보고서가 아직 안 끝났어요. 자료가 늦게 와서 시간이 부족해요. 여자: 그럼 팀장님께 말씀드리고 마감을 이틀 미루는 게 어때요? 남자: 벌써 말씀드렸는데 팀장님이 안 된다고 하셨어요. 여자: 그럼 오늘 밤에 같이 남아서 마저 해요. 제가 표를 정리할게요.' Hai người quyết định làm gì với bản báo cáo?",
+  "script": "남자: 다음 주에 끝내야 하는 보고서가 아직 안 끝났어요. 자료가 늦게 와서 시간이 부족해요. 여자: 그럼 팀장님께 말씀드리고 마감을 이틀 미루는 게 어때요? 남자: 벌써 말씀드렸는데 팀장님이 안 된다고 하셨어요. 여자: 그럼 오늘 밤에 같이 남아서 마저 해요. 제가 표를 정리할게요.",
+  "o": [
+   "Nộp bản chưa hoàn thành",
+   "Ở lại làm thêm tối nay cùng nhau",
+   "Xin lùi hạn thêm 2 ngày",
+   "Nhờ nhóm khác làm hộ"
+  ],
+  "a": 1,
+  "why": "팀장님이 안 된다고 하셔서 마감을 미룰 수 없고, 오늘 밤에 같이 남아서 마저 하기로 했다: trưởng nhóm không cho lùi hạn nên hai người ở lại làm thêm tối nay."
+ },
+ {
+  "q": "Nghe: '여자: 안녕하세요. 내일 오전에 진료 예약을 하고 싶어요. 남자: 네, 어느 과로 예약해 드릴까요? 여자: 이비인후과로 해 주세요. 요즘 목이 자꾸 아프거든요. 남자: 오전 10시에 빈자리가 있습니다. 신분증을 가지고 오세요. 여자: 네, 알겠어요. 진료비는 카드로 낼 수 있나요? 남자: 네, 카드로 내셔도 돼요.' Người phụ nữ đặt lịch khám khoa nào, lúc mấy giờ?",
+  "script": "여자: 안녕하세요. 내일 오전에 진료 예약을 하고 싶어요. 남자: 네, 어느 과로 예약해 드릴까요? 여자: 이비인후과로 해 주세요. 요즘 목이 자꾸 아프거든요. 남자: 오전 10시에 빈자리가 있습니다. 신분증을 가지고 오세요. 여자: 네, 알겠어요. 진료비는 카드로 낼 수 있나요? 남자: 네, 카드로 내셔도 돼요.",
+  "o": [
+   "Khoa Tai Mũi Họng, 2 giờ chiều mai",
+   "Khoa Mắt, 10 giờ sáng mai",
+   "Khoa Tai Mũi Họng, 10 giờ sáng mai",
+   "Khoa Nội, 9 giờ sáng mai"
+  ],
+  "a": 2,
+  "why": "이비인후과로 해 주세요, 오전 10시에 빈자리가 있습니다: khoa Tai Mũi Họng, 10 giờ sáng mai còn chỗ trống."
+ },
+ {
+  "q": "Nghe: '안내 말씀드립니다. 지금 2호선 열차가 신호 문제로 10분 정도 늦어지고 있습니다. 다음 열차는 5분 후에 도착할 예정입니다. 승객 여러분께서는 양해해 주시기 바랍니다. 또한 열차 안에서 잃어버린 물건이 있으면 역무원에게 말씀해 주세요. 분실물 센터는 1번 출구 옆에 있습니다. 감사합니다.' Theo thông báo, hành khách cần biết điều gì?",
+  "script": "안내 말씀드립니다. 지금 2호선 열차가 신호 문제로 10분 정도 늦어지고 있습니다. 다음 열차는 5분 후에 도착할 예정입니다. 승객 여러분께서는 양해해 주시기 바랍니다. 또한 열차 안에서 잃어버린 물건이 있으면 역무원에게 말씀해 주세요. 분실물 센터는 1번 출구 옆에 있습니다. 감사합니다.",
+  "o": [
+   "Tuyến 2 ngừng chạy cả ngày",
+   "Phải đổi sang tuyến 1",
+   "Ga đóng cửa vì sửa chữa",
+   "Tàu tuyến 2 chậm khoảng 10 phút do lỗi tín hiệu; đồ thất lạc hỏi nhân viên ga, trung tâm đồ thất lạc ở cạnh cửa ra số 1"
+  ],
+  "a": 3,
+  "why": "신호 문제로 10분 정도 늦어지고 있습니다, 분실물 센터는 1번 출구 옆에 있습니다: tàu tuyến 2 chậm 10 phút do lỗi tín hiệu, trung tâm đồ thất lạc ở cạnh cửa ra số 1."
+ },
+ {
+  "q": "Nghe: '남자: 이번 방학에 편의점에서 아르바이트를 하려고 해요. 여자: 시간이 어떻게 돼요? 남자: 오후 6시부터 밤 11시까지예요. 주말에도 일해야 해요. 여자: 시급은 얼마예요? 남자: 시급이 1만 원인데, 주말에는 조금 더 준대요. 여자: 좋네요. 집에서 가까우니까 다니기 편하겠어요.' Công việc làm thêm ở cửa hàng tiện lợi có điều kiện thế nào?",
+  "script": "남자: 이번 방학에 편의점에서 아르바이트를 하려고 해요. 여자: 시간이 어떻게 돼요? 남자: 오후 6시부터 밤 11시까지예요. 주말에도 일해야 해요. 여자: 시급은 얼마예요? 남자: 시급이 1만 원인데, 주말에는 조금 더 준대요. 여자: 좋네요. 집에서 가까우니까 다니기 편하겠어요.",
+  "o": [
+   "18h–23h, cả cuối tuần, lương giờ 10.000 won, cuối tuần cao hơn",
+   "9h–18h, nghỉ cuối tuần, lương giờ 9.000 won",
+   "18h–23h, nghỉ cuối tuần, lương giờ 12.000 won",
+   "Chỉ làm cuối tuần, lương tính theo ngày"
+  ],
+  "a": 0,
+  "why": "오후 6시부터 밤 11시까지예요, 주말에도 일해야 해요, 시급이 1만 원인데 주말에는 조금 더 준대요: làm 18h–23h cả cuối tuần, lương giờ 10.000 won, cuối tuần cao hơn."
+ },
+ {
+  "q": "Nghe: '여자: 어제 산 신발이 작아서 바꾸고 싶어요. 남자: 영수증을 가지고 오셨나요? 여자: 네, 여기 있어요. 남자: 같은 신발로 한 치수 큰 걸로 바꿔 드릴게요. 그런데 지금 재고가 없어서 다음 주에 오셔야 해요. 화요일 오전에 오시면 돼요. 여자: 알겠어요. 다음 주 화요일에 올게요.' Người phụ nữ muốn đổi giày thế nào và khi nào có thể đổi?",
+  "script": "여자: 어제 산 신발이 작아서 바꾸고 싶어요. 남자: 영수증을 가지고 오셨나요? 여자: 네, 여기 있어요. 남자: 같은 신발로 한 치수 큰 걸로 바꿔 드릴게요. 그런데 지금 재고가 없어서 다음 주에 오셔야 해요. 화요일 오전에 오시면 돼요. 여자: 알겠어요. 다음 주 화요일에 올게요.",
+  "o": [
+   "Đổi màu khác, đổi ngay hôm nay",
+   "Đổi sang cỡ lớn hơn một số, đến thứ Ba tuần sau vì hiện hết hàng",
+   "Đổi sang cỡ nhỏ hơn, đổi ngay hôm nay",
+   "Trả lại lấy tiền, đến tuần sau"
+  ],
+  "a": 1,
+  "why": "한 치수 큰 걸로 바꿔 드릴게요, 재고가 없어서 다음 주 화요일에 와야 해요: đổi sang cỡ lớn hơn một số, hiện hết hàng nên đến thứ Ba tuần sau."
+ },
+ {
+  "q": "Nghe: '안내 말씀드립니다. 도서관 열람실 이용 시간이 다음 달부터 바뀝니다. 평일에는 오전 8시부터 밤 10시까지, 주말에는 오전 9시부터 오후 6시까지 이용할 수 있습니다. 시험 기간에는 밤 12시까지 연장합니다. 좌석은 인터넷으로 미리 예약해야 하며, 예약 없이 이용할 수 없습니다.' Từ tháng sau, phòng đọc thư viện mở cửa thế nào?",
+  "script": "안내 말씀드립니다. 도서관 열람실 이용 시간이 다음 달부터 바뀝니다. 평일에는 오전 8시부터 밤 10시까지, 주말에는 오전 9시부터 오후 6시까지 이용할 수 있습니다. 시험 기간에는 밤 12시까지 연장합니다. 좌석은 인터넷으로 미리 예약해야 하며, 예약 없이 이용할 수 없습니다.",
+  "o": [
+   "Mở cả tuần 8h–22h, không cần đặt chỗ",
+   "Ngày thường 8h–18h, cuối tuần 9h–22h",
+   "Ngày thường 8h–22h, cuối tuần 9h–18h, kỳ thi kéo dài đến 24h; phải đặt chỗ trước qua mạng",
+   "Ngày thường 9h–18h, cuối tuần đóng cửa"
+  ],
+  "a": 2,
+  "why": "평일 오전 8시부터 밤 10시까지, 주말 오전 9시부터 오후 6시까지, 시험 기간 밤 12시까지 연장, 인터넷으로 미리 예약: ngày thường 8h–22h, cuối tuần 9h–18h, kỳ thi đến 24h, phải đặt chỗ trước qua mạng."
+ },
+ {
+  "q": "Nghe: '남자: 다음 달에 이사를 가요. 새집은 회사에서 가까워서 출근이 편해질 거예요. 여자: 이사는 언제 해요? 남자: 다음 달 첫째 주 토요일에 해요. 여자: 이삿짐을 옮기는 걸 도와줄까요? 남자: 고마워요. 그런데 짐이 많지 않아서 혼자 할 수 있어요. 여자: 그래도 무거운 짐이 있으면 연락하세요.' Người đàn ông chuyển nhà khi nào và vì sao?",
+  "script": "남자: 다음 달에 이사를 가요. 새집은 회사에서 가까워서 출근이 편해질 거예요. 여자: 이사는 언제 해요? 남자: 다음 달 첫째 주 토요일에 해요. 여자: 이삿짐을 옮기는 걸 도와줄까요? 남자: 고마워요. 그런데 짐이 많지 않아서 혼자 할 수 있어요. 여자: 그래도 무거운 짐이 있으면 연락하세요.",
+  "o": [
+   "Chủ nhật tuần này, vì nhà cũ quá chật",
+   "Thứ Bảy tuần đầu tháng sau, vì tiền thuê rẻ hơn",
+   "Cuối tháng này, vì muốn ở gần trường",
+   "Thứ Bảy tuần đầu tháng sau, vì nhà mới gần công ty nên đi làm tiện"
+  ],
+  "a": 3,
+  "why": "다음 달 첫째 주 토요일에 해요, 새집은 회사에서 가까워서 출근이 편해질 거예요: chuyển vào thứ Bảy tuần đầu tháng sau, nhà mới gần công ty nên đi làm tiện."
+ },
+ {
+  "q": "Nghe: '여자: 어제 지갑을 잃어버렸어요. 카드도 같이 있었어요. 남자: 은행에 전화해서 카드를 정지해야 해요. 여자: 벌써 전화했어요. 그런데 새 카드를 받으려면 은행에 직접 가야 한대요. 남자: 신분증을 가지고 가세요. 여자: 네, 내일 아침에 갈 거예요. 남자: 그리고 경찰서에도 분실 신고를 하세요.' Người phụ nữ cần làm gì để nhận thẻ mới?",
+  "script": "여자: 어제 지갑을 잃어버렸어요. 카드도 같이 있었어요. 남자: 은행에 전화해서 카드를 정지해야 해요. 여자: 벌써 전화했어요. 그런데 새 카드를 받으려면 은행에 직접 가야 한대요. 남자: 신분증을 가지고 가세요. 여자: 네, 내일 아침에 갈 거예요. 남자: 그리고 경찰서에도 분실 신고를 하세요.",
+  "o": [
+   "Mang chứng minh thư đến ngân hàng trực tiếp vào sáng mai",
+   "Chỉ cần gọi điện là nhận thẻ mới qua bưu điện",
+   "Đến đồn cảnh sát lấy thẻ mới",
+   "Chờ ngân hàng gửi thẻ mà không cần làm gì"
+  ],
+  "a": 0,
+  "why": "새 카드를 받으려면 은행에 직접 가야 한대요, 신분증을 가지고 가세요, 내일 아침에 갈 거예요: phải đến ngân hàng trực tiếp, mang theo chứng minh thư, đi vào sáng mai."
+ },
+ {
+  "q": "Nghe: '안내 말씀드립니다. 주민센터에서 다음 달부터 요리 교실을 엽니다. 매주 수요일 오후 2시에 시작하며, 한 달에 모두 네 번 수업이 있습니다. 한국 음식과 외국 음식을 번갈아 배웁니다. 수강료는 한 달에 3만 원이며, 재료비는 따로 내지 않아도 됩니다. 신청은 이번 주 금요일까지 주민센터 사무실에서 받습니다.' Lớp học nấu ăn ở trung tâm dân cư có thông tin gì?",
+  "script": "안내 말씀드립니다. 주민센터에서 다음 달부터 요리 교실을 엽니다. 매주 수요일 오후 2시에 시작하며, 한 달에 모두 네 번 수업이 있습니다. 한국 음식과 외국 음식을 번갈아 배웁니다. 수강료는 한 달에 3만 원이며, 재료비는 따로 내지 않아도 됩니다. 신청은 이번 주 금요일까지 주민센터 사무실에서 받습니다.",
+  "o": [
+   "Chủ nhật 14h, miễn phí, không cần đăng ký",
+   "Thứ Tư 14h hàng tuần, 4 buổi/tháng, học phí 30.000 won/tháng đã gồm phí nguyên liệu, đăng ký trước thứ Sáu tuần này",
+   "Thứ Bảy 10h hàng tuần, học phí 50.000 won, phí nguyên liệu tính riêng",
+   "Thứ Tư 14h, chỉ học món Hàn, đăng ký bất cứ lúc nào"
+  ],
+  "a": 1,
+  "why": "매주 수요일 오후 2시, 한 달에 네 번, 수강료 3만 원, 재료비는 따로 내지 않아도 됩니다, 이번 주 금요일까지 신청: thứ Tư 14h, 4 buổi/tháng, học phí 30.000 won đã gồm nguyên liệu, đăng ký trước thứ Sáu tuần này."
+ },
+ {
+  "q": "Nghe: '여자: 여름 방학에 어디로 여행 갈까요? 남자: 부산에 가면 어때요? 바다도 보고 맛있는 음식도 먹을 수 있어요. 여자: 좋아요. 그런데 부산까지 기차로 얼마나 걸려요? 남자: 빠른 기차로 두 시간 반쯤 걸려요. 여자: 그럼 기차표를 미리 사야겠네요. 남자: 네, 방학 때는 표가 빨리 매진되니까 이번 주에 사요.' Hai người sẽ đi du lịch đâu và cần làm gì trước?",
+  "script": "여자: 여름 방학에 어디로 여행 갈까요? 남자: 부산에 가면 어때요? 바다도 보고 맛있는 음식도 먹을 수 있어요. 여자: 좋아요. 그런데 부산까지 기차로 얼마나 걸려요? 남자: 빠른 기차로 두 시간 반쯤 걸려요. 여자: 그럼 기차표를 미리 사야겠네요. 남자: 네, 방학 때는 표가 빨리 매진되니까 이번 주에 사요.",
+  "o": [
+   "Đi Busan, thuê xe tự lái",
+   "Đi Jeju, đặt khách sạn trước",
+   "Đi Busan, mua vé tàu nhanh trong tuần này vì kỳ nghỉ vé hết nhanh",
+   "Đi Seoul, mua vé máy bay tuần sau"
+  ],
+  "a": 2,
+  "why": "부산에 가면 어때요, 빠른 기차로 두 시간 반쯤 걸려요, 방학 때는 표가 빨리 매진되니까 이번 주에 사요: đi Busan, tàu nhanh mất khoảng 2 tiếng rưỡi, kỳ nghỉ vé hết nhanh nên mua trong tuần này."
+ },
+ {
+  "q": "Nghe: '남자: 우리 학교에서 다음 주부터 일회용 컵 사용을 줄이는 행사를 해요. 여자: 어떻게 줄이는 거예요? 남자: 학생들이 자기 컵을 가지고 오면 음료수를 싸게 팔아요. 여자: 좋은 생각이에요. 그런데 컵을 안 가지고 온 학생은 어떡해요? 남자: 종이컵을 주지만 돈을 조금 더 내야 해요. 여자: 그럼 저도 내일부터 텀블러를 가지고 다닐게요.' Chiến dịch giảm cốc dùng một lần ở trường thực hiện thế nào?",
+  "script": "남자: 우리 학교에서 다음 주부터 일회용 컵 사용을 줄이는 행사를 해요. 여자: 어떻게 줄이는 거예요? 남자: 학생들이 자기 컵을 가지고 오면 음료수를 싸게 팔아요. 여자: 좋은 생각이에요. 그런데 컵을 안 가지고 온 학생은 어떡해요? 남자: 종이컵을 주지만 돈을 조금 더 내야 해요. 여자: 그럼 저도 내일부터 텀블러를 가지고 다닐게요.",
+  "o": [
+   "Cấm hoàn toàn đồ uống trong trường",
+   "Chỉ bán đồ uống đóng chai",
+   "Phát cốc giấy miễn phí cho mọi người",
+   "Mang cốc riêng thì mua đồ uống rẻ hơn; không mang cốc thì dùng cốc giấy và trả thêm tiền"
+  ],
+  "a": 3,
+  "why": "자기 컵을 가지고 오면 음료수를 싸게 팔아요, 컵을 안 가지고 오면 종이컵을 주지만 돈을 조금 더 내야 해요: mang cốc riêng được mua rẻ hơn, không mang thì dùng cốc giấy và trả thêm tiền."
+ },
+ {
+  "q": "Nghe: '안내 말씀드립니다. 이번 주말에 시청 앞 광장에서 가을 축제가 열립니다. 토요일 오전 10시에 시작해서 일요일 오후 6시에 끝납니다. 전통 음악 공연과 먹거리 장터가 준비되어 있습니다. 비가 오면 실내 체육관에서 진행하니 걱정하지 마세요. 자세한 일정은 시청 홈페이지에서 확인할 수 있습니다.' Lễ hội mùa thu diễn ra khi nào, ở đâu?",
+  "script": "안내 말씀드립니다. 이번 주말에 시청 앞 광장에서 가을 축제가 열립니다. 토요일 오전 10시에 시작해서 일요일 오후 6시에 끝납니다. 전통 음악 공연과 먹거리 장터가 준비되어 있습니다. 비가 오면 실내 체육관에서 진행하니 걱정하지 마세요. 자세한 일정은 시청 홈페이지에서 확인할 수 있습니다.",
+  "o": [
+   "Cuối tuần này, quảng trường trước tòa thị chính, thứ Bảy 10h đến chủ nhật 18h; mưa thì chuyển vào nhà thi đấu",
+   "Tuần sau, công viên sông Hàn, chỉ thứ Bảy",
+   "Cuối tuần này, nhà thi đấu, 9h–17h",
+   "Tháng sau, trước tòa thị chính, cả tuần"
+  ],
+  "a": 0,
+  "why": "이번 주말 시청 앞 광장, 토요일 오전 10시부터 일요일 오후 6시까지, 비가 오면 실내 체육관에서 진행: cuối tuần này, quảng trường trước tòa thị chính, thứ Bảy 10h đến chủ nhật 18h, mưa thì vào nhà thi đấu."
  }
 ];
 var TP_MOCK2_R = [
  {
-  "q": "Điền đúng: '회의는 내일 오후 2시___ 시작해요.'",
+  "q": "Theo thông báo, thư viện đóng cửa vào ngày nào?",
+  "passage": "도서관 이용 안내. 우리 도서관은 평일 오전 9시부터 오후 6시까지 문을 엽니다. 토요일에는 오전 10시부터 오후 5시까지 이용할 수 있습니다. 매주 월요일과 공휴일에는 쉽니다. 책은 한 번에 다섯 권까지 빌릴 수 있고, 빌린 책은 2주 안에 반납해야 합니다.",
   "o": [
-   "에",
-   "에서",
-   "를",
-   "가"
+   "Thứ Hai và ngày lễ",
+   "Thứ Bảy",
+   "Chủ Nhật",
+   "Thứ Sáu"
   ],
   "a": 0,
-  "why": "Thời điểm bắt đầu dùng 에."
+  "why": "Thông báo ghi '매주 월요일과 공휴일에는 쉽니다' — thư viện nghỉ vào thứ Hai hàng tuần và ngày lễ."
  },
  {
-  "q": "'회의' nghĩa là gì?",
+  "q": "Trong tàu điện ngầm, hành khách KHÔNG được làm gì?",
+  "passage": "지하철 이용 안내. 지하철 안에서는 음식을 먹거나 음료수를 마실 수 없습니다. 담배를 피우는 것도 금지되어 있습니다. 큰 소리로 통화하지 말고, 음악을 들을 때는 이어폰을 사용해 주세요. 노약자석은 노인과 임산부, 몸이 불편한 분들을 위해 비워 두세요.",
   "o": [
-   "Chuyến đi",
-   "Cuộc họp",
-   "Bài học",
-   "Buổi tiệc"
+   "Nghe nhạc bằng tai nghe",
+   "Ăn uống trong tàu",
+   "Đọc sách",
+   "Nhường ghế cho người già"
   ],
   "a": 1,
-  "why": "회의 là cuộc họp."
+  "why": "Thông báo ghi '지하철 안에서는 음식을 먹거나 음료수를 마실 수 없습니다' — không được ăn uống trong tàu điện ngầm."
  },
  {
-  "q": "Điền đúng: '어제 보고서를 ___.' (viết, quá khứ)",
+  "q": "Theo quảng cáo, người làm thêm ở quán cà phê được hưởng quyền lợi nào?",
+  "passage": "카페 '향기'에서 아르바이트생을 모집합니다. 평일 오후 2시부터 6시까지 일할 수 있는 분을 찾습니다. 주말에는 일하지 않아도 됩니다. 시급은 12,000원이며, 음료는 무료로 드실 수 있습니다. 관심 있는 분은 전화로 연락해 주세요.",
   "o": [
-   "쓸 거예요",
-   "쓰고 싶어요",
-   "써요",
-   "썼어요"
-  ],
-  "a": 3,
-  "why": "어제 là quá khứ: 썼어요."
- },
- {
-  "q": "Đọc: '지민 씨는 매일 아침 6시에 일어나서 운동을 해요. 그리고 8시에 출근해요.' Jimin đi làm lúc nào?",
-  "o": [
-   "6 giờ",
-   "7 giờ",
-   "9 giờ",
-   "8 giờ"
-  ],
-  "a": 3,
-  "why": "8시에 출근해요: đi làm lúc 8 giờ."
- },
- {
-  "q": "Câu trái nghĩa với '이 방은 넓어요.' là:",
-  "o": [
-   "이 방은 좁아요.",
-   "이 방은 커요.",
-   "이 방은 밝아요.",
-   "이 방은 따뜻해요."
-  ],
-  "a": 0,
-  "why": "좁아요 (hẹp) trái nghĩa với 넓어요 (rộng)."
- },
- {
-  "q": "Đọc: '도서관 이용 시간은 오전 9시부터 오후 6시까지입니다. 일요일에는 쉽니다.' Thư viện mở cửa khi nào?",
-  "o": [
-   "Chỉ mở buổi sáng",
-   "9 giờ sáng đến 6 giờ chiều, trừ chủ nhật",
-   "8 giờ sáng đến 9 giờ tối",
-   "Cả tuần không nghỉ"
-  ],
-  "a": 1,
-  "why": "오전 9시부터 오후 6시까지, 일요일에는 쉽니다."
- },
- {
-  "q": "Điền đúng: '내일 친구를 ___ 거예요.' (gặp, tương lai)",
-  "o": [
-   "만날",
-   "만나고",
-   "만나",
-   "만났"
-  ],
-  "a": 0,
-  "why": "만나다 tương lai là 만날 거예요."
- },
- {
-  "q": "'발표' nghĩa là gì?",
-  "o": [
-   "Phỏng vấn",
-   "Thảo luận",
-   "Báo cáo viết",
-   "Thuyết trình"
-  ],
-  "a": 3,
-  "why": "발표 là thuyết trình."
- },
- {
-  "q": "Đọc: '민수 씨는 회사원입니다. 매일 버스를 타고 출근합니다.' Minsu đi làm bằng gì?",
-  "o": [
-   "Xe buýt",
-   "Tàu điện ngầm",
-   "Ô tô riêng",
-   "Xe đạp"
-  ],
-  "a": 0,
-  "why": "버스를 타고 출근합니다: đi làm bằng xe buýt."
- },
- {
-  "q": "'환경' nghĩa là gì?",
-  "o": [
-   "Không khí",
-   "Môi trường",
-   "Thời tiết",
-   "Phong cảnh"
-  ],
-  "a": 1,
-  "why": "환경 là môi trường."
- },
- {
-  "q": "Điền đúng: '이 책은 도서관___ 빌렸어요.'",
-  "o": [
-   "를",
-   "가",
-   "에서",
-   "에"
+   "Lương 15.000 won một giờ",
+   "Được nghỉ phép có lương",
+   "Được uống đồ miễn phí",
+   "Được làm việc vào cuối tuần"
   ],
   "a": 2,
-  "why": "Nơi xuất phát của hành động mượn dùng 에서."
+  "why": "Quảng cáo ghi '음료는 무료로 드실 수 있습니다' — được uống đồ miễn phí. Lương là 12.000 won một giờ, không phải 15.000 won, và cuối tuần không phải làm việc."
  },
  {
-  "q": "Đọc: '건강을 위해 매일 30분씩 걷는 것이 좋습니다. 걷기는 돈이 들지 않고 누구나 할 수 있습니다.' Theo đoạn văn, đi bộ có ưu điểm gì?",
+  "q": "Cuộc hẹn ngày mai được đổi sang mấy giờ?",
+  "passage": "민수야, 내일 오후 3시에 만나기로 했는데 갑자기 회사 회의가 생겼어. 그래서 5시로 시간을 바꿀 수 있을까? 장소는 그대로 강남역 2번 출구 앞이야. 괜찮으면 답장해 줘. 내일 보자!",
   "o": [
-   "Giúp giảm cân nhanh",
-   "Cần dụng cụ đặc biệt",
-   "Chỉ tốt cho người già",
-   "Không tốn tiền, ai cũng làm được"
+   "2 giờ chiều",
+   "3 giờ chiều",
+   "4 giờ chiều",
+   "5 giờ chiều"
   ],
   "a": 3,
-  "why": "돈이 들지 않고 누구나 할 수 있습니다: không tốn tiền, ai cũng làm được."
+  "why": "Tin nhắn nói '5시로 바꿀 수 있을까?' — muốn đổi cuộc hẹn sang 5 giờ, địa điểm giữ nguyên ở ga Gangnam."
  },
  {
-  "q": "Câu đồng nghĩa gần nhất với '이 문제는 해결하기 어려워요.' là:",
+  "q": "Theo thông báo, mặt hàng nào được giảm giá một nửa trong khung giờ nhất định?",
+  "passage": "이번 주말 대형 마트 세일 안내. 토요일과 일요일 이틀 동안 모든 과일이 30% 할인됩니다. 쌀과 라면은 20% 할인되며, 생선은 오전 10시부터 12시까지만 반값에 판매합니다. 단, 할인 상품은 교환이나 환불이 되지 않습니다.",
   "o": [
-   "이 문제는 해결하기 쉽지 않아요.",
-   "이 문제는 이미 해결됐어요.",
-   "이 문제는 중요하지 않아요.",
-   "이 문제는 아무도 몰라요."
-  ],
-  "a": 0,
-  "why": "어려워요 gần nghĩa với 쉽지 않아요."
- },
- {
-  "q": "Đọc: '인터넷 쇼핑은 편리하지만, 물건을 직접 보고 살 수 없다는 단점이 있습니다.' Nhược điểm của mua sắm trực tuyến là gì?",
-  "o": [
-   "Khó thanh toán",
-   "Không xem trực tiếp được hàng",
-   "Giao hàng chậm",
-   "Giá đắt"
-  ],
-  "a": 1,
-  "why": "물건을 직접 보고 살 수 없다는 단점: không xem trực tiếp được hàng."
- },
- {
-  "q": "Điền đúng: '날씨가 추워___ 따뜻하게 입었어요.'",
-  "o": [
-   "고",
-   "면",
-   "서",
-   "지만"
+   "Trái cây",
+   "Gạo và mì ăn liền",
+   "Cá",
+   "Rau"
   ],
   "a": 2,
-  "why": "Lý do dùng -서: vì trời lạnh nên đã mặc ấm."
+  "why": "Thông báo ghi '생선은 오전 10시부터 12시까지만 반값에 판매합니다' — cá chỉ được bán với giá một nửa từ 10 giờ đến 12 giờ sáng."
  },
  {
-  "q": "Đọc: '지하철 2호선은 시청역과 강남역을 연결합니다. 출근 시간에는 매우 붐빕니다.' Tuyến 2 nối ga nào?",
+  "q": "Buổi học bù sẽ diễn ra khi nào?",
+  "passage": "수업 휴강 안내. 김민지 선생님께서 갑자기 몸이 안 좋으셔서 오늘 오후 2시 한국어 수업은 쉽니다. 다음 주 월요일 같은 시간에 보강 수업이 있습니다. 숙제는 다음 시간까지 해 오세요. 불편을 드려 죄송합니다.",
   "o": [
-   "Ga Seoul và ga Busan",
-   "Ga sân bay và ga trung tâm",
-   "Ga trường học và ga chợ",
-   "Ga Tòa thị chính và ga Gangnam"
-  ],
-  "a": 3,
-  "why": "시청역과 강남역을 연결합니다."
- },
- {
-  "q": "'신청서' nghĩa là gì?",
-  "o": [
-   "Đơn đăng ký",
-   "Giấy chứng nhận",
-   "Hợp đồng",
-   "Biên lai"
+   "Thứ Hai tuần sau, cùng giờ",
+   "Thứ Bảy tuần này",
+   "Chủ Nhật tuần sau",
+   "Ngày mai"
   ],
   "a": 0,
-  "why": "신청서 là đơn đăng ký."
+  "why": "Thông báo ghi '다음 주 월요일 같은 시간에 보강 수업이 있습니다' — học bù vào thứ Hai tuần sau, cùng giờ với buổi học hôm nay."
  },
  {
-  "q": "Điền đúng: '저는 한국어를 공부한 지 2년이 ___.'",
+  "q": "Trong thời gian kiểm tra thang máy, cư dân nên làm gì?",
+  "passage": "엘리베이터 점검 안내. 우리 아파트 엘리베이터는 내일 오전 9시부터 오후 1시까지 정기 점검을 합니다. 점검 시간에는 엘리베이터를 이용할 수 없으니 계단을 이용해 주세요. 점검은 오후 1시에 끝날 예정입니다. 양해해 주셔서 감사합니다.",
   "o": [
-   "되고 싶어요",
-   "됐어요",
-   "돼요",
-   "될 거예요"
+   "Đi thang bộ",
+   "Chờ ở sảnh tầng 1",
+   "Dùng thang máy khác",
+   "Đi ra ngoài"
   ],
   "a": 1,
-  "why": "-한 지 2년이 됐어요: đã được 2 năm kể từ khi học."
+  "why": "Thông báo ghi '점검 시간에는 엘리베이터를 이용할 수 없으니 계단을 이용해 주세요' — trong giờ kiểm tra không dùng được thang máy nên đi thang bộ (계단)."
  },
  {
-  "q": "Đọc: '이 박물관은 월요일에 쉽니다. 입장료는 어른 5,000원, 학생 3,000원입니다.' Học sinh vào bảo tàng giá bao nhiêu?",
+  "q": "Từ tháng sau, phòng khám làm việc thêm vào ngày nào?",
+  "passage": "병원 진료 시간 변경 안내. 우리 병원은 다음 달부터 토요일 진료를 시작합니다. 토요일 진료 시간은 오전 9시부터 오후 1시까지입니다. 일요일과 공휴일에는 계속 쉽니다. 평일 진료 시간은 지금과 같이 오전 9시부터 오후 6시까지입니다.",
   "o": [
-   "Miễn phí",
-   "2.000 won",
-   "3.000 won",
-   "5.000 won"
-  ],
-  "a": 2,
-  "why": "학생 3,000원: học sinh 3.000 won."
- },
- {
-  "q": "Câu nào đúng ngữ pháp?",
-  "o": [
-   "저는 매일 신문을 읽을 거예요 어제.",
-   "저는 매일 신문은 읽었어요 오늘.",
-   "저는 매일 신문을 읽고 싶었어요 내일.",
-   "저는 매일 신문을 읽어요."
+   "Chủ Nhật",
+   "Ngày lễ",
+   "Thứ Hai",
+   "Thứ Bảy"
   ],
   "a": 3,
-  "why": "Thói quen hằng ngày dùng hiện tại: 매일 신문을 읽어요."
+  "why": "Thông báo ghi '다음 달부터 토요일 진료를 시작합니다' — từ tháng sau phòng khám bắt đầu khám vào thứ Bảy."
  },
  {
-  "q": "Đọc: '플라스틱 사용을 줄이기 위해 많은 가게에서 종이봉투를 사용하기 시작했습니다.' Nhiều cửa hàng bắt đầu dùng gì?",
+  "q": "Trong chiếc ví bị mất có những gì?",
+  "passage": "분실물 안내. 어제 오후 5시쯤 버스 정류장 앞에서 검은색 지갑을 주웠습니다. 지갑 안에는 신용카드와 학생증이 들어 있습니다. 잃어버리신 분은 1층 안내 데스크로 오셔서 신분증을 보여 주세요. 문의 전화: 02-123-4567.",
   "o": [
-   "Túi giấy",
-   "Túi vải",
-   "Túi nhựa dày",
-   "Hộp nhựa"
+   "Tiền mặt và chìa khóa",
+   "Điện thoại và tai nghe",
+   "Sổ tay và bút",
+   "Thẻ tín dụng và thẻ sinh viên"
+  ],
+  "a": 3,
+  "why": "Thông báo ghi '지갑 안에는 신용카드와 학생증이 들어 있습니다' — trong ví có thẻ tín dụng và thẻ sinh viên."
+ },
+ {
+  "q": "Nhà hàng nghỉ vào ngày nào trong tuần?",
+  "passage": "식당 영업 시간 안내. 우리 식당은 매일 오전 11시부터 오후 9시까지 문을 엽니다. 점심 시간은 오전 11시부터 오후 3시까지, 저녁 시간은 오후 5시부터 9시까지입니다. 매주 일요일은 쉽니다. 단체 손님은 미리 예약해 주세요.",
+  "o": [
+   "Chủ Nhật",
+   "Thứ Bảy",
+   "Thứ Hai",
+   "Thứ Sáu"
   ],
   "a": 0,
-  "why": "종이봉투를 사용하기 시작했습니다: bắt đầu dùng túi giấy."
+  "why": "Thông báo ghi '매주 일요일은 쉽니다' — nhà hàng nghỉ vào Chủ Nhật hàng tuần."
  },
  {
-  "q": "Điền đúng: '이 일은 혼자 하기 어려우___ 같이 해요.'",
+  "q": "Mục tiêu chính của chiến dịch này là gì?",
+  "passage": "서울시가 다음 달부터 쓰레기 줄이기 캠페인을 시작합니다. 이번 캠페인은 일회용 컵과 비닐봉지 사용을 줄이는 것을 목표로 합니다. 시민들은 텀블러와 장바구니를 사용하면 카페와 마트에서 할인 혜택을 받을 수 있습니다. 또한 올바른 분리배출 방법을 알리는 교육도 함께 진행됩니다. 시 관계자는 '작은 실천이 모이면 큰 변화를 만들 수 있다'고 말했습니다. 이 캠페인은 3개월 동안 진행되며, 참여율이 높은 동네에는 상도 수여될 예정입니다.",
   "o": [
-   "면",
-   "니까",
-   "지만",
-   "고"
+   "Mở thêm nhiều quán cà phê",
+   "Tăng giá đồ uống mang đi",
+   "Giảm dùng cốc một lần và túi ni-lông",
+   "Xây thêm trung tâm thương mại"
+  ],
+  "a": 2,
+  "why": "Bài báo ghi chiến dịch nhằm '일회용 컵과 비닐봉지 사용을 줄이는 것' — giảm dùng cốc một lần và túi ni-lông."
+ },
+ {
+  "q": "Vì sao 수아 chuyển đến Busan?",
+  "passage": "지현아, 안녕? 잘 지내고 있지? 나 다음 달에 부산으로 이사 가게 됐어. 새 직장이 부산에 있어서 어쩔 수 없지. 서울을 떠나는 게 아쉽지만, 새 회사에서 좋은 경험을 할 수 있을 것 같아 기대도 돼. 부산에 오면 우리 집에 꼭 놀러 와. 바다가 보이는 우리 집에서 같이 밥 먹자. 새 회사에서는 마케팅 일을 하게 돼. 처음이라 긴장되지만 열심히 해 보려고. 그때까지 건강하게 지내. - 수아",
+  "o": [
+   "Để đi du học",
+   "Vì công việc mới ở Busan",
+   "Để chăm sóc gia đình",
+   "Vì muốn sống gần biển"
   ],
   "a": 1,
-  "why": "-니까 nêu lý do rồi đề nghị: vì khó làm một mình nên làm cùng nhau."
+  "why": "Trong thư 수아 viết '새 직장이 부산에 있어서' — vì nơi làm việc mới ở Busan."
  },
  {
-  "q": "'면접' nghĩa là gì?",
+  "q": "Theo nghiên cứu, người đi bộ 30 phút mỗi ngày có đặc điểm gì?",
+  "passage": "매일 30분 걷기가 건강에 큰 도움이 된다는 연구 결과가 나왔습니다. 서울대학교 연구팀은 1년 동안 5천 명을 조사한 결과, 매일 30분 이상 걷는 사람들은 그렇지 않은 사람들보다 병원에 가는 횟수가 20% 적었다고 밝혔습니다. 걷기는 특별한 장비가 필요 없고 누구나 쉽게 시작할 수 있습니다. 전문가들은 '엘리베이터 대신 계단을 이용하는 것부터 시작해 보라'고 조언했습니다.",
   "o": [
-   "Bài kiểm tra viết",
-   "Buổi giới thiệu",
-   "Phỏng vấn",
-   "Cuộc họp"
-  ],
-  "a": 2,
-  "why": "면접 là phỏng vấn."
- },
- {
-  "q": "Đọc: '아침 식사를 거르면 점심에 과식하기 쉽습니다. 규칙적인 식사가 중요합니다.' Theo đoạn văn, điều gì quan trọng?",
-  "o": [
-   "Ăn sáng thật nhiều",
-   "Bỏ bữa trưa",
-   "Ăn nhanh",
-   "Ăn uống đều đặn"
-  ],
-  "a": 3,
-  "why": "규칙적인 식사가 중요합니다: ăn uống đều đặn quan trọng."
- },
- {
-  "q": "Điền đúng: '비가 ___ 우산을 가져가세요.'",
-  "o": [
-   "오면",
-   "오고",
-   "오지만",
-   "와서"
+   "Đi bệnh viện ít hơn 20%",
+   "Ngủ nhiều hơn 2 tiếng mỗi đêm",
+   "Ăn ít hơn mỗi ngày",
+   "Tập thể dục ở phòng gym"
   ],
   "a": 0,
-  "why": "Điều kiện dùng -면: nếu mưa thì mang ô đi."
+  "why": "Nghiên cứu cho biết người đi bộ 30 phút mỗi ngày '병원에 가는 횟수가 20% 적었다' — số lần đi bệnh viện ít hơn 20%."
+ },
+ {
+  "q": "Câu lạc bộ nhiếp ảnh họp vào lúc nào?",
+  "passage": "우리 학교 사진 동아리에서 새 회원을 모집합니다. 사진에 관심이 있는 학생이라면 누구나 지원할 수 있습니다. 동아리에서는 매주 금요일 오후 4시에 모여 사진 찍는 방법을 배우고, 함께 출사도 나갑니다. 학기 말에는 회원들의 사진을 모아 전시회도 엽니다. 지원서는 1층 학생회관 사무실에서 받을 수 있으며, 마감일은 이번 달 30일입니다. 동아리 활동에 필요한 카메라는 학교에서 빌릴 수 있으니 걱정하지 마세요.",
+  "o": [
+   "Thứ Hai lúc 4 giờ chiều",
+   "Thứ Sáu lúc 4 giờ chiều",
+   "Thứ Tư lúc 3 giờ chiều",
+   "Thứ Bảy lúc 10 giờ sáng"
+  ],
+  "a": 1,
+  "why": "Thông báo ghi '매주 금요일 오후 4시에 모여' — câu lạc bộ họp vào thứ Sáu lúc 4 giờ chiều hàng tuần."
+ },
+ {
+  "q": "Cuộc họp thường kỳ của đội marketing diễn ra khi nào?",
+  "passage": "안녕하세요, 마케팅팀 여러분. 다음 주 화요일 오전 10시에 회의실에서 정기 회의를 하겠습니다. 회의에서는 다음 달 신제품 광고 계획을 논의할 예정입니다. 각자 광고 아이디어를 하나씩 준비해 오세요. 또한 이번 주 금요일까지 분기 보고서를 제출해야 합니다. 보고서는 이메일로 보내 주시고, 질문이 있으면 저에게 연락해 주세요. 회의에 참석하기 어려운 분은 미리 저에게 알려 주세요. 감사합니다. - 박 팀장",
+  "o": [
+   "Thứ Hai tuần sau lúc 9 giờ sáng",
+   "Thứ Sáu tuần này lúc 10 giờ sáng",
+   "Thứ Ba tuần sau lúc 10 giờ sáng",
+   "Thứ Tư tuần sau lúc 2 giờ chiều"
+  ],
+  "a": 2,
+  "why": "Email ghi '다음 주 화요일 오전 10시에 회의실에서 정기 회의를 하겠습니다' — họp vào thứ Ba tuần sau lúc 10 giờ sáng."
+ },
+ {
+  "q": "Hạn nộp báo cáo quý của đội marketing là khi nào?",
+  "passage": "안녕하세요, 마케팅팀 여러분. 다음 주 화요일 오전 10시에 회의실에서 정기 회의를 하겠습니다. 회의에서는 다음 달 신제품 광고 계획을 논의할 예정입니다. 각자 광고 아이디어를 하나씩 준비해 오세요. 또한 이번 주 금요일까지 분기 보고서를 제출해야 합니다. 보고서는 이메일로 보내 주시고, 질문이 있으면 저에게 연락해 주세요. 회의에 참석하기 어려운 분은 미리 저에게 알려 주세요. 감사합니다. - 박 팀장",
+  "o": [
+   "Thứ Hai tuần sau",
+   "Thứ Tư tuần sau",
+   "Cuối tháng",
+   "Thứ Sáu tuần này"
+  ],
+  "a": 3,
+  "why": "Email ghi '이번 주 금요일까지 분기 보고서를 제출해야 합니다' — phải nộp báo cáo quý trước thứ Sáu tuần này."
+ },
+ {
+  "q": "Tầng 3 của thư viện mới có những gì?",
+  "passage": "우리 동네에 새 도서관이 문을 열었습니다. 새 도서관은 지하 1층, 지상 3층 규모로, 책 10만 권을 갖추고 있습니다. 1층에는 어린이 도서관이, 2층에는 일반 열람실이, 3층에는 스터디룸과 컴퓨터실이 있습니다. 도서관은 매일 오전 9시부터 오후 9시까지 운영되며, 매주 월요일은 쉽니다. 개관 첫 주에는 다양한 행사가 열릴 예정입니다. 개관 기념으로 첫 달에는 연체료도 받지 않는다고 합니다.",
+  "o": [
+   "Phòng tự học và phòng máy tính",
+   "Phòng đọc cho trẻ em",
+   "Phòng đọc chung",
+   "Quầy mượn và trả sách"
+  ],
+  "a": 0,
+  "why": "Bài báo ghi '3층에는 스터디룸과 컴퓨터실이 있습니다' — tầng 3 có phòng tự học (스터디룸) và phòng máy tính."
+ },
+ {
+  "q": "Theo bài viết, nên làm gì trong một tiếng trước khi đi ngủ?",
+  "passage": "잠들기 전에 스마트폰을 보는 습관이 수면에 나쁜 영향을 준다는 연구 결과가 발표되었습니다. 스마트폰 화면에서 나오는 빛은 뇌를 깨우기 때문에 잠들기가 어려워집니다. 연구팀은 '잠자기 1시간 전에는 스마트폰을 멀리 두는 것이 좋다'고 조언했습니다. 대신 책을 읽거나 가벼운 스트레칭을 하면 잠이 잘 온다고 합니다. 특히 청소년들은 밤늦게까지 스마트폰을 사용하는 경우가 많아 주의가 필요합니다.",
+  "o": [
+   "Xem video trên điện thoại",
+   "Để điện thoại ra xa",
+   "Chơi game trên điện thoại",
+   "Gọi điện cho bạn bè"
+  ],
+  "a": 1,
+  "why": "Bài viết khuyên '잠자기 1시간 전에는 스마트폰을 멀리 두는 것이 좋다' — một tiếng trước khi ngủ nên để điện thoại ra xa, thay vào đó có thể đọc sách hoặc giãn cơ nhẹ."
+ },
+ {
+  "q": "지훈 đã làm gì vào ngày đầu tiên ở Jeju?",
+  "passage": "엄마, 아빠, 제주도 여행 잘 다녀왔습니다. 첫날에는 성산일출봉에 올라가서 일출을 봤는데 정말 아름다웠어요. 둘째 날에는 비가 와서 밖에서 놀 수 없었지만, 박물관에서 제주도의 역사에 대해 배우는 시간이 됐어요. 마지막 날에는 시장에서 귤을 사고 친구들에게 줄 선물을 샀어요. 다음에는 엄마, 아빠와 함께 가고 싶어요. 제주도 날씨는 생각보다 따뜻해서 가벼운 옷만 입어도 괜찮았어요. 사진은 내일 보내 드릴게요. - 지훈",
+  "o": [
+   "Đi thăm bảo tàng",
+   "Mua quýt ở chợ",
+   "Leo núi Seongsan xem mặt trời mọc",
+   "Đi bơi ở biển"
+  ],
+  "a": 2,
+  "why": "Trong thư 지훈 viết '첫날에는 성산일출봉에 올라가서 일출을 봤는데' — ngày đầu leo núi Seongsan Ilchulbong để xem mặt trời mọc."
+ },
+ {
+  "q": "Vì sao ngày thứ hai 지훈 không chơi ngoài trời được?",
+  "passage": "엄마, 아빠, 제주도 여행 잘 다녀왔습니다. 첫날에는 성산일출봉에 올라가서 일출을 봤는데 정말 아름다웠어요. 둘째 날에는 비가 와서 밖에서 놀 수 없었지만, 박물관에서 제주도의 역사에 대해 배우는 시간이 됐어요. 마지막 날에는 시장에서 귤을 사고 친구들에게 줄 선물을 샀어요. 다음에는 엄마, 아빠와 함께 가고 싶어요. 제주도 날씨는 생각보다 따뜻해서 가벼운 옷만 입어도 괜찮았어요. 사진은 내일 보내 드릴게요. - 지훈",
+  "o": [
+   "Vì bị ốm",
+   "Vì bảo tàng đóng cửa",
+   "Vì hết tiền",
+   "Vì trời mưa"
+  ],
+  "a": 3,
+  "why": "Trong thư 지훈 viết '둘째 날에는 비가 와서 밖에서 놀 수 없었지만' — ngày thứ hai trời mưa nên không chơi ngoài trời được."
+ },
+ {
+  "q": "Lớp học tiếng Hàn dành cho người nước ngoài diễn ra khi nào?",
+  "passage": "우리 동 주민센터에서 다음 달부터 무료 프로그램을 시작합니다. 매주 수요일 오전 10시에는 어르신들을 위한 건강 체조 교실이 열리고, 목요일 오후 2시에는 어린이들을 위한 독서 모임이 있습니다. 또한 토요일 오후에는 외국인을 위한 한국어 교실도 운영합니다. 모든 프로그램은 무료이며, 참여를 원하는 분은 주민센터 사무실에 신청해 주세요. 자세한 내용은 주민센터 홈페이지에서 확인할 수 있습니다.",
+  "o": [
+   "Thứ Bảy buổi chiều",
+   "Thứ Tư lúc 10 giờ sáng",
+   "Thứ Năm lúc 2 giờ chiều",
+   "Chủ Nhật buổi sáng"
+  ],
+  "a": 0,
+  "why": "Thông báo ghi '토요일 오후에는 외국인을 위한 한국어 교실도 운영합니다' — lớp tiếng Hàn cho người nước ngoài diễn ra vào chiều thứ Bảy."
+ },
+ {
+  "q": "Theo bài viết, khi vứt chai nhựa cần làm gì?",
+  "passage": "올바른 분리배출 방법을 아시나요? 플라스틱병은 내용물을 비우고 물로 헹군 뒤 라벨을 떼어 버려야 합니다. 비닐봉지는 깨끗이 씻어 말린 뒤 따로 모아야 하고, 스티로폼은 이물질을 제거한 뒤 버려야 합니다. 음식물 쓰레기는 물기를 빼고 전용 봉투에 담아야 합니다. 잘못 분리배출하면 재활용이 어려워지므로, 버리기 전에 한 번 더 확인하는 습관이 필요합니다. 분리배출이 잘 되지 않는 물건은 주민센터에 문의하면 알려 준다고 합니다.",
+  "o": [
+   "Bỏ nguyên cả chai, không cần rửa",
+   "Đổ hết đồ bên trong, rửa sạch và bóc nhãn",
+   "Đập vỡ chai rồi mới vứt",
+   "Bỏ chung với rác thức ăn"
+  ],
+  "a": 1,
+  "why": "Bài viết ghi '플라스틱병은 내용물을 비우고 물로 헹군 뒤 라벨을 떼어 버려야 합니다' — đổ hết đồ bên trong, rửa sạch rồi bóc nhãn mới vứt."
+ },
+ {
+  "q": "Lễ hội mùa thu diễn ra ở đâu?",
+  "passage": "다음 주말 우리 시에서 가을 축제가 열립니다. 축제 기간은 토요일 오전 10시부터 일요일 오후 6시까지이며, 장소는 시청 앞 광장입니다. 축제에서는 전통 음식을 맛볼 수 있고, 다양한 공연도 볼 수 있습니다. 어린이들을 위한 체험 프로그램도 준비되어 있습니다. 축제에 오시는 분들은 대중교통을 이용해 주시기 바랍니다. 주차 공간이 부족하므로 자가용 이용은 자제해 주세요.",
+  "o": [
+   "Công viên thành phố",
+   "Trung tâm thương mại",
+   "Quảng trường trước tòa thị chính",
+   "Sân vận động"
+  ],
+  "a": 2,
+  "why": "Bài báo ghi '장소는 시청 앞 광장입니다' — lễ hội diễn ra ở quảng trường trước tòa thị chính."
+ },
+ {
+  "q": "Ban tổ chức khuyên khách đến lễ hội bằng phương tiện gì?",
+  "passage": "다음 주말 우리 시에서 가을 축제가 열립니다. 축제 기간은 토요일 오전 10시부터 일요일 오후 6시까지이며, 장소는 시청 앞 광장입니다. 축제에서는 전통 음식을 맛볼 수 있고, 다양한 공연도 볼 수 있습니다. 어린이들을 위한 체험 프로그램도 준비되어 있습니다. 축제에 오시는 분들은 대중교통을 이용해 주시기 바랍니다. 주차 공간이 부족하므로 자가용 이용은 자제해 주세요.",
+  "o": [
+   "Xe ô tô riêng",
+   "Xe đạp",
+   "Đi bộ",
+   "Phương tiện giao thông công cộng"
+  ],
+  "a": 3,
+  "why": "Bài báo ghi '축제에 오시는 분들은 대중교통을 이용해 주시기 바랍니다' — nên dùng phương tiện giao thông công cộng vì chỗ đỗ xe không đủ."
+ },
+ {
+  "q": "Ai có thể đăng ký chương trình hỗ trợ việc làm của thành phố Seoul?",
+  "passage": "서울시가 청년들의 취업을 돕기 위해 새로운 지원 프로그램을 시작합니다. 만 19세부터 34세까지의 청년이라면 누구나 신청할 수 있습니다. 프로그램에서는 이력서 작성법과 면접 준비 방법을 무료로 가르쳐 줍니다. 또한 취업에 성공한 청년들에게는 축하금도 지급됩니다. 신청은 다음 달 1일부터 시청 홈페이지에서 할 수 있으며, 선착순 500명까지만 받습니다. 이 프로그램은 작년에 처음 시작해 지금까지 2천 명 이상이 참여했습니다.",
+  "o": [
+   "Thanh niên từ 19 đến 34 tuổi",
+   "Mọi người dân Seoul",
+   "Chỉ sinh viên đại học",
+   "Người đã có việc làm"
+  ],
+  "a": 0,
+  "why": "Bài báo ghi '만 19세부터 34세까지의 청년이라면 누구나 신청할 수 있습니다' — thanh niên từ 19 đến 34 tuổi đều có thể đăng ký."
  }
 ];
 var TP_MOCK2_W = [
@@ -134186,58 +140590,58 @@ var TC_MOCK3_R = [
 // Nghe/Doc: script/doan tieng Han + cau hoi tieng Viet + giai thich tieng Viet.
 // Viet 52/54: tu luyen + bai mau + bang tieu chi tu cham, KHONG cong diem tu dong.
 var TP_MOCK3_L = [
-{ q: "Nghe: '남자: 내일 시험이 있어요. 여자: 열심히 공부했어요? 남자: 네, 어제 밤늦게까지 공부했어요.' Người đàn ông đã làm gì tối qua?", script: "남자: 내일 시험이 있어요. 여자: 열심히 공부했어요? 남자: 네, 어제 밤늦게까지 공부했어요.", o: ["Đã đi chơi", "Đã học đến khuya", "Đã đi làm thêm", "Đã ngủ sớm"], a: 1, why: "밤늦게까지 공부했어요: đã học đến khuya." },
-{ q: "Nghe: '여자: 이 가방 얼마예요? 남자: 3만 원입니다. 여자: 좀 비싸네요. 깎아 주실 수 있어요? 남자: 2만 5천 원에 드릴게요.' Người bán đồng ý bán giá bao nhiêu?", script: "여자: 이 가방 얼마예요? 남자: 3만 원입니다. 여자: 좀 비싸네요. 깎아 주실 수 있어요? 남자: 2만 5천 원에 드릴게요.", o: ["30.000 won", "25.000 won", "20.000 won", "35.000 won"], a: 1, why: "2만 5천 원: 25.000 won." },
-{ q: "Nghe: '남자: 주말에 뭐 할 거예요? 여자: 친구하고 한강에 갈 거예요. 자전거를 탈 거예요. 남자: 날씨가 좋으면 저도 가고 싶어요.' Người phụ nữ cuối tuần sẽ làm gì?", script: "남자: 주말에 뭐 할 거예요? 여자: 친구하고 한강에 갈 거예요. 자전거를 탈 거예요. 남자: 날씨가 좋으면 저도 가고 싶어요.", o: ["Đi sông Hàn với bạn và đạp xe", "Ở nhà xem phim", "Đi mua sắm", "Đi leo núi một mình"], a: 0, why: "친구하고 한강에 갈 거예요. 자전거를 탈 거예요." },
-{ q: "Nghe: '여자: 회의 자료를 준비했어요? 남자: 아직 다 못 했어요. 오후까지 끝낼게요. 여자: 그럼 오후 3시에 다시 만나요.' Hai người hẹn gặp lại khi nào?", script: "여자: 회의 자료를 준비했어요? 남자: 아직 다 못 했어요. 오후까지 끝낼게요. 여자: 그럼 오후 3시에 다시 만나요.", o: ["Sáng mai", "Chiều nay lúc 3 giờ", "Tối nay", "Ngày mai lúc 3 giờ"], a: 1, why: "오후 3시에 다시 만나요: gặp lại lúc 3 giờ chiều." },
-{ q: "Nghe: '남자: 비가 많이 오네요. 우산이 있어요? 여자: 네, 여분 우산이 있어요. 같이 써요. 남자: 고마워요.' Người phụ nữ nói gì?", script: "남자: 비가 많이 오네요. 우산이 있어요? 여자: 네, 여분 우산이 있어요. 같이 써요. 남자: 고마워요.", o: ["Cô ấy không có ô", "Cô ấy có ô dự phòng và rủ dùng chung", "Cô ấy muốn mua ô mới", "Cô ấy ghét trời mưa"], a: 1, why: "여분 우산이 있어요. 같이 써요: có ô dự phòng, dùng chung nhé." },
-{ q: "Nghe: '여자: 어제 병원에 갔어요? 남자: 네, 감기에 걸려서 약을 받았어요. 여자: 푹 쉬세요. 남자: 네, 오늘은 일찍 잘 거예요.' Vì sao người đàn ông đi bệnh viện?", script: "여자: 어제 병원에 갔어요? 남자: 네, 감기에 걸려서 약을 받았어요. 여자: 푹 쉬세요. 남자: 네, 오늘은 일찍 잘 거예요.", o: ["Vì đau răng", "Vì bị cảm", "Vì khám sức khỏe định kỳ", "Vì thăm bạn"], a: 1, why: "감기에 걸려서: vì bị cảm." },
-{ q: "Nghe: '남자: 이 책을 다 읽었어요? 여자: 아직 절반쯤 읽었어요. 정말 재미있어요. 남자: 다 읽으면 저한테 빌려 주세요.' Người phụ nữ đã đọc sách đến đâu?", script: "남자: 이 책을 다 읽었어요? 여자: 아직 절반쯤 읽었어요. 정말 재미있어요. 남자: 다 읽으면 저한테 빌려 주세요.", o: ["Đã đọc xong", "Mới đọc khoảng một nửa", "Chưa bắt đầu đọc", "Đã đọc hai lần"], a: 1, why: "절반쯤 읽었어요: đã đọc khoảng một nửa." },
-{ q: "Nghe: '여자: 내일 비가 온대요. 남자: 그럼 등산은 다음 주로 미뤄요. 여자: 좋아요. 다음 주 토요일에 가요.' Hai người quyết định thế nào?", script: "여자: 내일 비가 온대요. 남자: 그럼 등산은 다음 주로 미뤄요. 여자: 좋아요. 다음 주 토요일에 가요.", o: ["Vẫn đi leo núi ngày mai", "Dời leo núi sang thứ Bảy tuần sau", "Hủy hẳn chuyến đi", "Đổi sang đi biển"], a: 1, why: "다음 주로 미뤄요. 다음 주 토요일에 가요." },
-{ q: "Nghe: '남자: 점심 뭐 먹을까요? 여자: 김밥 어때요? 남자: 좋아요. 그런데 김밥집이 어디예요? 여자: 학교 앞이에요. 같이 가요.' Quán kimbap ở đâu?", script: "남자: 점심 뭐 먹을까요? 여자: 김밥 어때요? 남자: 좋아요. 그런데 김밥집이 어디예요? 여자: 학교 앞이에요. 같이 가요.", o: ["Trước trường học", "Trong chợ", "Gần ga tàu", "Trong trung tâm thương mại"], a: 0, why: "학교 앞이에요: ở trước trường học." },
-{ q: "Nghe: '여자: 전화번호가 바뀌었어요? 남자: 네, 지난달에 바꿨어요. 새 번호를 문자로 보낼게요. 여자: 네, 기다릴게요.' Người đàn ông sẽ làm gì?", script: "여자: 전화번호가 바뀌었어요? 남자: 네, 지난달에 바꿨어요. 새 번호를 문자로 보낼게요. 여자: 네, 기다릴게요.", o: ["Gọi điện ngay", "Gửi số mới bằng tin nhắn", "Gặp trực tiếp", "Không làm gì"], a: 1, why: "새 번호를 문자로 보낼게요: sẽ gửi số mới bằng tin nhắn." },
-{ q: "Nghe: '남자: 도서관 몇 시에 닫아요? 여자: 평일에는 10시에 닫고, 주말에는 6시에 닫아요. 남자: 오늘이 토요일이니까 6시까지 가야겠네요.' Hôm nay là thứ mấy, thư viện đóng lúc nào?", script: "남자: 도서관 몇 시에 닫아요? 여자: 평일에는 10시에 닫고, 주말에는 6시에 닫아요. 남자: 오늘이 토요일이니까 6시까지 가야겠네요.", o: ["Thứ Bảy, đóng lúc 6 giờ", "Chủ nhật, đóng lúc 10 giờ", "Thứ Hai, đóng lúc 6 giờ", "Thứ Bảy, đóng lúc 10 giờ"], a: 0, why: "오늘이 토요일이니까 6시: hôm nay thứ Bảy nên đóng lúc 6 giờ." },
-{ q: "Nghe: '여자: 이 영화 봤어요? 남자: 네, 지난주에 봤어요. 정말 감동적이었어요. 여자: 저도 이번 주말에 볼 거예요.' Người đàn ông nhận xét phim thế nào?", script: "여자: 이 영화 봤어요? 남자: 네, 지난주에 봤어요. 정말 감동적이었어요. 여자: 저도 이번 주말에 볼 거예요.", o: ["Rất chán", "Rất cảm động", "Rất đáng sợ", "Bình thường"], a: 1, why: "정말 감동적이었어요: thật sự rất cảm động." },
-{ q: "Nghe: '남자: 운동을 시작했어요? 여자: 네, 매일 아침 30분씩 걷고 있어요. 남자: 건강해지겠네요. 여자: 네, 기분도 좋아졌어요.' Người phụ nữ tập thể dục thế nào?", script: "남자: 운동을 시작했어요? 여자: 네, 매일 아침 30분씩 걷고 있어요. 남자: 건강해지겠네요. 여자: 네, 기분도 좋아졌어요.", o: ["Chạy bộ mỗi tối 1 giờ", "Đi bộ mỗi sáng 30 phút", "Bơi mỗi tuần 3 lần", "Tập gym mỗi chiều"], a: 1, why: "매일 아침 30분씩 걷고 있어요." },
-{ q: "Nghe: '여자: 내일 발표 준비는 어때요? 남자: 거의 다 됐어요. 그런데 마지막 부분만 더 연습해야 해요. 여자: 화이팅! 남자: 고마워요.' Người đàn ông còn cần làm gì?", script: "여자: 내일 발표 준비는 어때요? 남자: 거의 다 됐어요. 그런데 마지막 부분만 더 연습해야 해요. 여자: 화이팅! 남자: 고마워요.", o: ["Viết lại toàn bộ bài", "Luyện thêm phần cuối", "Chuẩn bị trang phục", "In thêm tài liệu"], a: 1, why: "마지막 부분만 더 연습해야 해요: chỉ cần luyện thêm phần cuối." },
-{ q: "Nghe: '남자: 지하철역이 어디예요? 여자: 이 길을 따라 쭉 가면 오른쪽에 있어요. 남자: 걸어서 몇 분 걸려요? 여자: 5분 정도 걸려요.' Ga tàu điện ngầm cách đây bao xa?", script: "남자: 지하철역이 어디예요? 여자: 이 길을 따라 쭉 가면 오른쪽에 있어요. 남자: 걸어서 몇 분 걸려요? 여자: 5분 정도 걸려요.", o: ["Đi bộ khoảng 5 phút, phía bên phải", "Đi bộ khoảng 15 phút, phía bên trái", "Đi xe buýt 5 phút", "Đi bộ khoảng 10 phút"], a: 0, why: "오른쪽에 있어요. 5분 정도 걸려요." },
-{ q: "Nghe: '여자: 어제 숙제를 다 했어요? 남자: 아니요, 너무 어려워서 친구한테 물어봤어요. 여자: 그럼 이제 알겠어요? 남자: 네, 친구가 잘 설명해 줬어요.' Người đàn ông đã làm gì khi bài tập khó?", script: "여자: 어제 숙제를 다 했어요? 남자: 아니요, 너무 어려워서 친구한테 물어봤어요. 여자: 그럼 이제 알겠어요? 남자: 네, 친구가 잘 설명해 줬어요.", o: ["Bỏ bài tập", "Hỏi bạn và được giải thích", "Hỏi thầy giáo", "Tra cứu trên mạng"], a: 1, why: "친구한테 물어봤어요. 친구가 잘 설명해 줬어요." },
-{ q: "Nghe: '남자: 내일 날씨가 어때요? 여자: 아침에는 맑다가 오후부터 흐려진대요. 남자: 그럼 우산을 가져가야겠네요. 여자: 네, 오후에는 비가 올 수도 있어요.' Chiều mai thời tiết thế nào?", script: "남자: 내일 날씨가 어때요? 여자: 아침에는 맑다가 오후부터 흐려진대요. 남자: 그럼 우산을 가져가야겠네요. 여자: 네, 오후에는 비가 올 수도 있어요.", o: ["Nắng cả ngày", "Sáng nắng, chiều nhiều mây và có thể mưa", "Mưa cả ngày", "Tuyết rơi"], a: 1, why: "아침에는 맑다가 오후부터 흐려진대요. 오후에는 비가 올 수도 있어요." },
-{ q: "Nghe: '여자: 이 식당 음식이 어때요? 남자: 김치찌개가 정말 맛있어요. 그런데 조금 매워요. 여자: 저는 매운 음식을 좋아해요. 남자: 그럼 꼭 먹어 봐요.' Người đàn ông nhận xét kimchi jjigae thế nào?", script: "여자: 이 식당 음식이 어때요? 남자: 김치찌개가 정말 맛있어요. 그런데 조금 매워요. 여자: 저는 매운 음식을 좋아해요. 남자: 그럼 꼭 먹어 봐요.", o: ["Rất ngon nhưng hơi cay", "Nhạt và chán", "Rất mặn", "Quá ngọt"], a: 0, why: "정말 맛있어요. 그런데 조금 매워요." },
-{ q: "Nghe: '남자: 은행이 몇 시에 열어요? 여자: 9시에 열어요. 그런데 오늘은 공휴일이라서 안 열어요. 남자: 아, 내일 다시 와야겠네요.' Hôm nay ngân hàng có mở cửa không, vì sao?", script: "남자: 은행이 몇 시에 열어요? 여자: 9시에 열어요. 그런데 오늘은 공휴일이라서 안 열어요. 남자: 아, 내일 다시 와야겠네요.", o: ["Có, mở lúc 9 giờ", "Không, vì hôm nay là ngày lễ", "Có, nhưng chỉ buổi chiều", "Không, vì đang sửa chữa"], a: 1, why: "오늘은 공휴일이라서 안 열어요." },
-{ q: "Nghe: '여자: 졸업 후에 뭐 할 거예요? 남자: 회사에 취직할 거예요. 이력서를 벌써 냈어요. 여자: 좋은 결과가 있길 바랄게요.' Người đàn ông đã làm gì để xin việc?", script: "여자: 졸업 후에 뭐 할 거예요? 남자: 회사에 취직할 거예요. 이력서를 벌써 냈어요. 여자: 좋은 결과가 있길 바랄게요.", o: ["Đã nộp hồ sơ xin việc", "Đang học thêm", "Mở công ty riêng", "Đi du học"], a: 0, why: "이력서를 벌써 냈어요: đã nộp hồ sơ rồi." },
-{ q: "Nghe: '남자: 어제 축구 경기 봤어요? 여자: 네, 우리 팀이 2대 1로 이겼어요. 남자: 정말요? 마지막 골이 멋있었어요? 여자: 네, 정말 멋있었어요.' Tỉ số trận đấu là bao nhiêu?", script: "남자: 어제 축구 경기 봤어요? 여자: 네, 우리 팀이 2대 1로 이겼어요. 남자: 정말요? 마지막 골이 멋있었어요? 여자: 네, 정말 멋있었어요.", o: ["1대 0", "2대 1", "3대 2", "0대 0"], a: 1, why: "2대 1로 이겼어요: thắng 2-1." },
-{ q: "Nghe: '여자: 이 옷이 어때요? 남자: 색깔은 예쁜데 조금 작아요. 한 치수 큰 것으로 바꿔 주세요. 여자: 네, 잠깐만 기다리세요.' Người đàn ông muốn đổi sang gì?", script: "여자: 이 옷이 어때요? 남자: 색깔은 예쁜데 조금 작아요. 한 치수 큰 것으로 바꿔 주세요. 여자: 네, 잠깐만 기다리세요.", o: ["Màu khác", "Cỡ lớn hơn một size", "Kiểu khác", "Giá rẻ hơn"], a: 1, why: "한 치수 큰 것으로 바꿔 주세요: đổi sang cỡ lớn hơn một size." },
-{ q: "Nghe: '남자: 내일 회의 장소가 바뀌었어요? 여자: 네, 3층 회의실로 바뀌었어요. 남자: 몇 시에 시작해요? 여자: 오전 10시예요. 늦지 마세요.' Cuộc họp ngày mai ở đâu, lúc nào?", script: "남자: 내일 회의 장소가 바뀌었어요? 여자: 네, 3층 회의실로 바뀌었어요. 남자: 몇 시에 시작해요? 여자: 오전 10시예요. 늦지 마세요.", o: ["Phòng họp tầng 2, 9 giờ sáng", "Phòng họp tầng 3, 10 giờ sáng", "Phòng họp tầng 3, 2 giờ chiều", "Hội trường, 10 giờ sáng"], a: 1, why: "3층 회의실로 바뀌었어요. 오전 10시예요." },
-{ q: "Nghe: '여자: 한국어를 얼마나 공부했어요? 남자: 2년 정도 공부했어요. 여자: 정말 잘하시네요. 남자: 아직 부족해요. 더 열심히 할 거예요.' Người đàn ông học tiếng Hàn bao lâu rồi?", script: "여자: 한국어를 얼마나 공부했어요? 남자: 2년 정도 공부했어요. 여자: 정말 잘하시네요. 남자: 아직 부족해요. 더 열심히 할 거예요.", o: ["Khoảng 2 tháng", "Khoảng 2 năm", "Khoảng 5 năm", "Khoảng 1 năm"], a: 1, why: "2년 정도 공부했어요." },
-{ q: "Nghe: '남자: 택배가 언제 와요? 여자: 오늘 오후 3시쯤 올 거예요. 남자: 집에 없을 수도 있어요. 여자: 그럼 경비실에 맡겨 달라고 하세요.' Nếu không có nhà, người đàn ông nên làm gì?", script: "남자: 택배가 언제 와요? 여자: 오늘 오후 3시쯤 올 거예요. 남자: 집에 없을 수도 있어요. 여자: 그럼 경비실에 맡겨 달라고 하세요.", o: ["Nhờ gửi ở phòng bảo vệ", "Hủy đơn hàng", "Nhờ hàng xóm nhận", "Để hôm sau giao lại"], a: 0, why: "경비실에 맡겨 달라고 하세요: nhờ gửi ở phòng bảo vệ." }
+{ q: "Nghe: '안녕하세요, 여러분. 다음 주 월요일부터 도서관 2층 열람실 운영 시간이 변경됩니다. 그동안 열람실은 오전 9시부터 오후 6시까지 열렸는데요, 시험 기간에는 학생들이 늦게까지 공부할 수 있도록 오후 10시까지 연장합니다. 다만 금요일과 토요일은 오후 9시에 닫으니까 참고하시기 바랍니다. 또한 열람실에서는 음식물을 드실 수 없습니다. 조용히 공부하는 공간을 위해 협조해 주셔서 감사합니다.' Từ tuần sau, trong kỳ thi, phòng đọc tầng 2 của thư viện mở cửa đến mấy giờ vào ngày thường?", script: "안녕하세요, 여러분. 다음 주 월요일부터 도서관 2층 열람실 운영 시간이 변경됩니다. 그동안 열람실은 오전 9시부터 오후 6시까지 열렸는데요, 시험 기간에는 학생들이 늦게까지 공부할 수 있도록 오후 10시까지 연장합니다. 다만 금요일과 토요일은 오후 9시에 닫으니까 참고하시기 바랍니다. 또한 열람실에서는 음식물을 드실 수 없습니다. 조용히 공부하는 공간을 위해 협조해 주셔서 감사합니다.", o: ["10 giờ tối; riêng thứ Sáu và thứ Bảy đóng lúc 9 giờ tối.","6 giờ chiều như trước đây.","9 giờ tối vào tất cả các ngày.","10 giờ tối kể cả cuối tuần."], a: 0, why: "Thông báo nói trong kỳ thi phòng đọc kéo dài đến 오후 10시 (10 giờ tối), riêng 금요일과 토요일은 오후 9시에 닫습니다 (đóng lúc 9 giờ tối). Phòng đọc cũng cấm mang đồ ăn vào." },
+{ q: "Nghe: '남자: 요즘 재택근무를 하고 있는데, 출퇴근 시간을 아낄 수 있어서 좋아요. 여자: 저도 처음에는 편했는데, 동료들과 만나기가 어려워서 아쉬워요. 남자: 맞아요. 그래서 우리 팀은 일주일에 이틀은 사무실에 나오기로 했어요. 여자: 좋은 방법이네요. 직접 만나서 이야기하면 일도 빨리 끝나니까요. 남자: 네, 그리고 집에서는 집중이 잘 안 될 때가 있어요. 아이들이 옆에서 놀거든요. 여자: 그렇군요. 저도 가끔 카페에서 일하는데, 그럴 때는 오히려 집중이 잘 돼요. 남자: 카페도 좋지요. 그런데 저는 사무실이 제일 편해요. 자료도 바로 찾을 수 있고요.' Đội của người đàn ông đã quyết định thế nào về việc đến văn phòng?", script: "남자: 요즘 재택근무를 하고 있는데, 출퇴근 시간을 아낄 수 있어서 좋아요. 여자: 저도 처음에는 편했는데, 동료들과 만나기가 어려워서 아쉬워요. 남자: 맞아요. 그래서 우리 팀은 일주일에 이틀은 사무실에 나오기로 했어요. 여자: 좋은 방법이네요. 직접 만나서 이야기하면 일도 빨리 끝나니까요. 남자: 네, 그리고 집에서는 집중이 잘 안 될 때가 있어요. 아이들이 옆에서 놀거든요. 여자: 그렇군요. 저도 가끔 카페에서 일하는데, 그럴 때는 오히려 집중이 잘 돼요. 남자: 카페도 좋지요. 그런데 저는 사무실이 제일 편해요. 자료도 바로 찾을 수 있고요.", o: ["Làm việc hoàn toàn từ xa, không đến văn phòng.","Đến văn phòng mỗi ngày trong tuần.","Mỗi tuần đến văn phòng 2 ngày.","Chỉ đến văn phòng khi có cuộc họp quan trọng."], a: 2, why: "Người đàn ông nói: 우리 팀은 일주일에 이틀은 사무실에 나오기로 했어요 (đội chúng tôi quyết định mỗi tuần đến văn phòng hai ngày). Anh thích làm ở văn phòng vì dễ tìm tài liệu, còn ở nhà khó tập trung vì con nhỏ chơi bên cạnh." },
+{ q: "Nghe: '주민 여러분, 안녕하십니까. 다음 달 1일부터 우리 동네에서 분리수거 캠페인을 시작합니다. 지금까지 플라스틱과 종이를 함께 버리는 경우가 많았는데요, 이제는 종류별로 나누어서 버려 주시기 바랍니다. 플라스틱은 파란색 통에, 종이는 노란색 통에 넣어 주십시오. 또한 음식물 쓰레기는 물기를 빼고 전용 봉투에 담아 주십시오. 캠페인에 적극적으로 참여해 주신 분들께는 다음 달 말에 작은 선물을 드리겠습니다. 깨끗한 동네를 위해 여러분의 협조를 부탁드립니다.' Theo thông báo, rác nhựa và rác giấy phải bỏ vào thùng nào?", script: "주민 여러분, 안녕하십니까. 다음 달 1일부터 우리 동네에서 분리수거 캠페인을 시작합니다. 지금까지 플라스틱과 종이를 함께 버리는 경우가 많았는데요, 이제는 종류별로 나누어서 버려 주시기 바랍니다. 플라스틱은 파란색 통에, 종이는 노란색 통에 넣어 주십시오. 또한 음식물 쓰레기는 물기를 빼고 전용 봉투에 담아 주십시오. 캠페인에 적극적으로 참여해 주신 분들께는 다음 달 말에 작은 선물을 드리겠습니다. 깨끗한 동네를 위해 여러분의 협조를 부탁드립니다.", o: ["Nhựa bỏ thùng vàng, giấy bỏ thùng xanh.","Cả nhựa và giấy bỏ chung một thùng.","Nhựa bỏ thùng xanh, giấy bỏ thùng vàng.","Nhựa bỏ thùng đỏ, giấy bỏ thùng vàng."], a: 2, why: "Thông báo nói rõ: 플라스틱은 파란색 통에, 종이는 노란색 통에 넣어 주십시오 (nhựa bỏ thùng xanh dương, giấy bỏ thùng vàng). Rác thực phẩm phải vắt khô nước rồi bỏ vào túi chuyên dụng." },
+{ q: "Nghe: '의사: 요즘 잠을 잘 주무세요? 환자: 아니요, 밤마다 두세 번씩 깨요. 아침에 일어나도 피곤해요. 의사: 몇 시쯤 주무세요? 환자: 열두 시쯤 자는데, 자기 전에 휴대폰을 오래 봐요. 의사: 잠들기 한 시간 전부터는 휴대폰을 보지 마시고, 따뜻한 우유를 드셔 보세요. 환자: 네, 해 볼게요. 운동은 도움이 될까요? 의사: 네, 가벼운 산책은 좋지만, 자기 직전에 심한 운동은 피하세요. 환자: 알겠습니다. 다음 달에 다시 올게요.' Bác sĩ khuyên bệnh nhân nên làm gì trước khi đi ngủ?", script: "의사: 요즘 잠을 잘 주무세요? 환자: 아니요, 밤마다 두세 번씩 깨요. 아침에 일어나도 피곤해요. 의사: 몇 시쯤 주무세요? 환자: 열두 시쯤 자는데, 자기 전에 휴대폰을 오래 봐요. 의사: 잠들기 한 시간 전부터는 휴대폰을 보지 마시고, 따뜻한 우유를 드셔 보세요. 환자: 네, 해 볼게요. 운동은 도움이 될까요? 의사: 네, 가벼운 산책은 좋지만, 자기 직전에 심한 운동은 피하세요. 환자: 알겠습니다. 다음 달에 다시 올게요.", o: ["Uống cà phê để dễ ngủ hơn.","Tập thể dục mạnh ngay trước khi ngủ.","Ngủ sau 12 giờ đêm như mọi khi.","Không xem điện thoại 1 giờ trước khi ngủ và uống sữa ấm."], a: 3, why: "Bác sĩ nói: 잠들기 한 시간 전부터는 휴대폰을 보지 마시고, 따뜻한 우유를 드셔 보세요 (từ 1 giờ trước khi ngủ đừng xem điện thoại, hãy thử uống sữa ấm). Đi dạo nhẹ thì tốt, nhưng tránh vận động mạnh ngay trước khi ngủ." },
+{ q: "Nghe: '안녕하세요, 시민 여러분. 다음 주 토요일 시청 앞 광장에서 전통 문화 축제가 열립니다. 오전 10시부터는 전통 무용과 사물놀이 공연이 있고, 오후에는 한복 입기 체험과 전통 음식 만들기 행사가 준비되어 있습니다. 특히 올해는 외국인 관광객들을 위한 한국어 체험 부스도 마련했습니다. 행사장은 오후 6시까지 운영되며, 입장은 무료입니다. 가족과 함께 오셔서 즐거운 시간 보내시기 바랍니다.' Lễ hội văn hóa truyền thống diễn ra khi nào và vé vào cửa thế nào?", script: "안녕하세요, 시민 여러분. 다음 주 토요일 시청 앞 광장에서 전통 문화 축제가 열립니다. 오전 10시부터는 전통 무용과 사물놀이 공연이 있고, 오후에는 한복 입기 체험과 전통 음식 만들기 행사가 준비되어 있습니다. 특히 올해는 외국인 관광객들을 위한 한국어 체험 부스도 마련했습니다. 행사장은 오후 6시까지 운영되며, 입장은 무료입니다. 가족과 함께 오셔서 즐거운 시간 보내시기 바랍니다.", o: ["Thứ Bảy tuần sau, vào cửa miễn phí.","Chủ nhật tuần sau, vé 10.000 won.","Thứ Bảy tuần sau, vé 5.000 won.","Ngày mai, vào cửa miễn phí."], a: 0, why: "Thông báo nói lễ hội diễn ra 다음 주 토요일 (thứ Bảy tuần sau) ở quảng trường trước tòa thị chính, 입장은 무료입니다 (vào cửa miễn phí), mở đến 6 giờ chiều. Buổi sáng có múa truyền thống và samulnori, buổi chiều có trải nghiệm mặc hanbok và làm món ăn truyền thống." },
+{ q: "Nghe: '남자: 요즘 온라인 수업이 많아졌는데, 너는 어때? 여자: 나는 온라인 수업이 편해. 통학 시간을 아낄 수 있으니까. 남자: 나는 직접 만나서 배우는 게 더 좋아. 질문을 바로 할 수 있잖아. 여자: 맞아, 그건 장점이야. 그런데 온라인 수업은 강의를 다시 볼 수 있어서 복습하기 좋아. 남자: 그것도 그렇네. 나는 발표 수업은 직접 하는 게 낫다고 생각해. 여자: 맞아. 그래서 우리 학교는 이론 수업은 온라인으로, 실습 수업은 직접 하기로 했대. 남자: 좋은 방법이다. 나도 그렇게 하면 좋겠어.' Trường của người phụ nữ đã quyết định tổ chức lớp học như thế nào?", script: "남자: 요즘 온라인 수업이 많아졌는데, 너는 어때? 여자: 나는 온라인 수업이 편해. 통학 시간을 아낄 수 있으니까. 남자: 나는 직접 만나서 배우는 게 더 좋아. 질문을 바로 할 수 있잖아. 여자: 맞아, 그건 장점이야. 그런데 온라인 수업은 강의를 다시 볼 수 있어서 복습하기 좋아. 남자: 그것도 그렇네. 나는 발표 수업은 직접 하는 게 낫다고 생각해. 여자: 맞아. 그래서 우리 학교는 이론 수업은 온라인으로, 실습 수업은 직접 하기로 했대. 남자: 좋은 방법이다. 나도 그렇게 하면 좋겠어.", o: ["Tất cả các môn đều học trực tuyến.","Lý thuyết học trực tiếp, thực hành học trực tuyến.","Tất cả các môn đều học trực tiếp.","Lý thuyết học trực tuyến, thực hành học trực tiếp."], a: 3, why: "Người phụ nữ nói: 우리 학교는 이론 수업은 온라인으로, 실습 수업은 직접 하기로 했대 (trường chúng tôi quyết định môn lý thuyết học trực tuyến, môn thực hành học trực tiếp). Học trực tuyến tiết kiệm thời gian đi lại và xem lại được bài giảng, còn học trực tiếp thì hỏi ngay được." },
+{ q: "Nghe: '승객 여러분께 알려 드립니다. 다음 달 1일부터 15번 버스 노선이 새로 생깁니다. 새 노선은 시청 앞을 출발하여 중앙 도서관과 서울역을 지나 한강공원까지 갑니다. 배차 간격은 15분이며, 첫차는 오전 5시 30분, 막차는 오후 11시입니다. 또한 기존 7번 버스는 이용객이 적어서 다음 달부터 운행이 중단됩니다. 7번 버스를 이용하시던 분들은 15번 버스를 이용해 주시기 바랍니다.' Tuyến xe buýt số 15 mới chạy từ đâu đến đâu, và tuyến số 7 sẽ ra sao?", script: "승객 여러분께 알려 드립니다. 다음 달 1일부터 15번 버스 노선이 새로 생깁니다. 새 노선은 시청 앞을 출발하여 중앙 도서관과 서울역을 지나 한강공원까지 갑니다. 배차 간격은 15분이며, 첫차는 오전 5시 30분, 막차는 오후 11시입니다. 또한 기존 7번 버스는 이용객이 적어서 다음 달부터 운행이 중단됩니다. 7번 버스를 이용하시던 분들은 15번 버스를 이용해 주시기 바랍니다.", o: ["Từ ga Seoul đến thư viện trung tâm; tuyến 7 tăng thêm chuyến.","Từ trước tòa thị chính đến công viên sông Hàn; tuyến 7 ngừng chạy từ tháng sau.","Từ công viên sông Hàn đến tòa thị chính; tuyến 7 vẫn chạy bình thường.","Từ thư viện trung tâm đến ga Seoul; tuyến 7 đổi thành tuyến 15."], a: 1, why: "Thông báo nói tuyến 15 출발 từ 시청 앞 (trước tòa thị chính), đi qua 중앙 도서관 (thư viện trung tâm) và 서울역 (ga Seoul) đến 한강공원 (công viên sông Hàn). Tuyến 7 vì ít hành khách nên 다음 달부터 운행이 중단됩니다 (ngừng chạy từ tháng sau)." },
+{ q: "Nghe: '여자: 요즘 물가가 많이 올랐지요? 남자: 네, 특히 채소값이 많이 올랐어요. 지난달보다 두 배나 비싸요. 여자: 비가 많이 와서 채소가 잘 안 자랐다고 하네요. 남자: 그래서 우리 식당은 메뉴 가격을 조금 올릴 수밖에 없어요. 여자: 손님들이 불평하지 않을까요? 남자: 걱정되지만, 재료를 줄이면 맛이 떨어지니까 어쩔 수 없어요. 여자: 대신 양을 그대로 유지하면 손님들도 이해할 거예요. 남자: 네, 그렇게 하려고요. 다음 주부터 김치찌개 가격을 1천 원 올릴 거예요.' Vì sao giá rau tăng, và nhà hàng của người đàn ông sẽ làm gì?", script: "여자: 요즘 물가가 많이 올랐지요? 남자: 네, 특히 채소값이 많이 올랐어요. 지난달보다 두 배나 비싸요. 여자: 비가 많이 와서 채소가 잘 안 자랐다고 하네요. 남자: 그래서 우리 식당은 메뉴 가격을 조금 올릴 수밖에 없어요. 여자: 손님들이 불평하지 않을까요? 남자: 걱정되지만, 재료를 줄이면 맛이 떨어지니까 어쩔 수 없어요. 여자: 대신 양을 그대로 유지하면 손님들도 이해할 거예요. 남자: 네, 그렇게 하려고요. 다음 주부터 김치찌개 가격을 1천 원 올릴 거예요.", o: ["Vì thuế tăng cao; nhà hàng sẽ đổi toàn bộ thực đơn.","Vì mưa nhiều nên rau khó trồng; nhà hàng tăng giá kimchi jjigae thêm 1.000 won từ tuần sau.","Vì hết mùa rau; nhà hàng sẽ đóng cửa một thời gian.","Vì giá nhập khẩu tăng; nhà hàng sẽ giảm khẩu phần ăn."], a: 1, why: "Người phụ nữ nói 비가 많이 와서 채소가 잘 안 자랐다고 하네요 (mưa nhiều nên rau không mọc tốt được), vì vậy rau đắt gấp đôi tháng trước. Người đàn ông sẽ tăng giá 김치찌개 (kimchi jjigae) thêm 1천 원 (1.000 won) từ tuần sau nhưng giữ nguyên khẩu phần để khách thông cảm." },
+{ q: "Nghe: '관람객 여러분, 안녕하십니까. 다음 달부터 국립박물관에서 조선 시대 특별전이 열립니다. 이번 전시에서는 왕실에서 사용하던 도자기와 그림, 그리고 옛날 문서들을 직접 보실 수 있습니다. 전시는 오전 9시부터 오후 6시까지이며, 월요일은 휴관입니다. 특히 토요일 오후 2시에는 전문가의 설명을 들으면서 전시를 관람할 수 있는 프로그램이 있습니다. 입장료는 어른 5천 원, 학생 3천 원입니다. 많은 관심 부탁드립니다.' Triển lãm đặc biệt thời Joseon mở cửa khi nào, và chương trình thuyết minh diễn ra lúc nào?", script: "관람객 여러분, 안녕하십니까. 다음 달부터 국립박물관에서 조선 시대 특별전이 열립니다. 이번 전시에서는 왕실에서 사용하던 도자기와 그림, 그리고 옛날 문서들을 직접 보실 수 있습니다. 전시는 오전 9시부터 오후 6시까지이며, 월요일은 휴관입니다. 특히 토요일 오후 2시에는 전문가의 설명을 들으면서 전시를 관람할 수 있는 프로그램이 있습니다. 입장료는 어른 5천 원, 학생 3천 원입니다. 많은 관심 부탁드립니다.", o: ["Mở 10 giờ sáng đến 6 giờ chiều, nghỉ thứ Bảy; thuyết minh 2 giờ chiều thứ Bảy.","Mở 9 giờ sáng đến 9 giờ tối, mở cả thứ Hai; thuyết minh 10 giờ sáng Chủ nhật.","Mở 9 giờ sáng đến 6 giờ chiều, nghỉ thứ Hai; thuyết minh 2 giờ chiều thứ Bảy.","Mở 9 giờ sáng đến 6 giờ chiều, nghỉ thứ Hai; thuyết minh 2 giờ chiều Chủ nhật."], a: 2, why: "Thông báo nói triển lãm mở 오전 9시부터 오후 6시까지 (9 giờ sáng đến 6 giờ chiều), 월요일은 휴관입니다 (thứ Hai đóng cửa). Chương trình nghe chuyên gia thuyết minh diễn ra 토요일 오후 2시 (2 giờ chiều thứ Bảy). Vé người lớn 5.000 won, học sinh 3.000 won." },
+{ q: "Nghe: '여자: 요즘 병원에서 인공지능을 많이 쓴다고 하던데, 정말 도움이 돼요? 남자: 네, 예를 들어 엑스레이 사진을 인공지능이 먼저 살펴보고, 이상한 부분을 찾아내요. 여자: 그럼 의사 선생님들은 뭐 하세요? 남자: 인공지능이 찾은 결과를 확인하고, 최종 진단을 내리세요. 기계가 의사를 대신하는 게 아니에요. 여자: 그렇군요. 그래도 기계가 틀리면 어떻게 해요? 남자: 그래서 아직은 인공지능의 판단만으로 치료를 결정하지 않아요. 반드시 의사가 확인합니다. 여자: 안심이 되네요. 인공지능이 의사를 도와주는 거군요.' Theo người đàn ông, vai trò của trí tuệ nhân tạo trong bệnh viện là gì?", script: "여자: 요즘 병원에서 인공지능을 많이 쓴다고 하던데, 정말 도움이 돼요? 남자: 네, 예를 들어 엑스레이 사진을 인공지능이 먼저 살펴보고, 이상한 부분을 찾아내요. 여자: 그럼 의사 선생님들은 뭐 하세요? 남자: 인공지능이 찾은 결과를 확인하고, 최종 진단을 내리세요. 기계가 의사를 대신하는 게 아니에요. 여자: 그렇군요. 그래도 기계가 틀리면 어떻게 해요? 남자: 그래서 아직은 인공지능의 판단만으로 치료를 결정하지 않아요. 반드시 의사가 확인합니다. 여자: 안심이 되네요. 인공지능이 의사를 도와주는 거군요.", o: ["Hỗ trợ bác sĩ: xem trước phim X-quang và tìm điểm bất thường, bác sĩ là người quyết định chẩn đoán cuối cùng.","Thay thế bác sĩ trong việc chẩn đoán và điều trị.","Chỉ dùng để đặt lịch khám cho bệnh nhân.","Tự quyết định phương pháp điều trị mà không cần bác sĩ."], a: 0, why: "Người đàn ông giải thích: 인공지능이 먼저 살펴보고, 이상한 부분을 찾아내요 (AI xem trước phim X-quang và tìm điểm bất thường), còn bác sĩ 확인하고 최종 진단을 내립니다 (xác nhận kết quả và đưa ra chẩn đoán cuối cùng). AI chỉ giúp bác sĩ, không thay thế bác sĩ." },
+{ q: "Nghe: '오늘은 기후 변화가 바다에 미치는 영향에 대해 이야기하겠습니다. 지난 100년 동안 지구의 평균 기온이 약 1도 올랐습니다. 얼음이 녹으면서 해수면이 높아졌고, 바닷물의 온도도 함께 올라갔습니다. 바닷물이 따뜻해지면 산호가 하얗게 변하는 백화 현상이 일어납니다. 산호가 죽으면 그곳에 살던 물고기들도 살 곳을 잃게 됩니다. 또한 바닷물이 이산화탄소를 흡수하면서 점점 산성이 되어, 조개나 게 같은 생물들이 껍데기를 만들기 어려워졌습니다. 전문가들은 지금처럼 온실가스를 계속 배출하면 2050년까지 많은 산호초가 사라질 수 있다고 경고합니다. 그러나 아직 늦지 않았습니다. 우리가 에너지를 아끼고, 재생에너지를 사용하면 바다를 지킬 수 있습니다. 오늘 배운 내용을 기억하고, 일상생활에서 작은 실천을 시작해 보시기 바랍니다.' Theo bài giảng, nước biển ấm lên và hấp thụ khí CO2 gây ra hậu quả gì?", script: "오늘은 기후 변화가 바다에 미치는 영향에 대해 이야기하겠습니다. 지난 100년 동안 지구의 평균 기온이 약 1도 올랐습니다. 얼음이 녹으면서 해수면이 높아졌고, 바닷물의 온도도 함께 올라갔습니다. 바닷물이 따뜻해지면 산호가 하얗게 변하는 백화 현상이 일어납니다. 산호가 죽으면 그곳에 살던 물고기들도 살 곳을 잃게 됩니다. 또한 바닷물이 이산화탄소를 흡수하면서 점점 산성이 되어, 조개나 게 같은 생물들이 껍데기를 만들기 어려워졌습니다. 전문가들은 지금처럼 온실가스를 계속 배출하면 2050년까지 많은 산호초가 사라질 수 있다고 경고합니다. 그러나 아직 늦지 않았습니다. 우리가 에너지를 아끼고, 재생에너지를 사용하면 바다를 지킬 수 있습니다. 오늘 배운 내용을 기억하고, 일상생활에서 작은 실천을 시작해 보시기 바랍니다.", o: ["Nước biển trở nên ngọt hơn nên cá dễ sống hơn.","Cá sinh sản nhiều hơn vì nước ấm.","Băng ở hai cực dày lên.","San hô bị bạc trắng và sinh vật có vỏ khó tạo vỏ."], a: 3, why: "Bài giảng nói nước biển ấm lên gây 백화 현상 (hiện tượng san hô bạc trắng) khiến san hô chết và cá mất nơi ở; nước biển hấp thụ 이산화탄소 (CO2) nên 점점 산성이 되어 (ngày càng chua), khiến 조개나 게 같은 생물들이 껍데기를 만들기 어려워졌습니다 (sinh vật như trai, cua khó tạo vỏ)." },
+{ q: "Nghe: '기자: 교수님, 백신은 어떻게 우리 몸을 보호합니까? 교수: 백신에는 약해진 바이러스나 바이러스의 일부가 들어 있습니다. 이것을 맞으면 우리 몸은 그 바이러스를 기억하는 법을 배웁니다. 기자: 그럼 실제로 병에 걸렸을 때는 어떻게 됩니까? 교수: 몸이 바이러스를 이미 알고 있기 때문에 빨리 싸울 수 있습니다. 그래서 증상이 가벼워지거나 아예 걸리지 않게 됩니다. 기자: 백신을 맞고 열이 나는 경우도 있는데, 괜찮은 겁니까? 교수: 네, 그것은 몸이 열심히 바이러스와 싸우는 방법을 배우고 있다는 신호입니다. 대개 하루나 이틀 안에 사라집니다. 기자: 마지막으로, 백신을 꼭 맞아야 하는 이유를 말씀해 주십시오. 교수: 백신을 맞으면 나 자신뿐만 아니라, 백신을 맞을 수 없는 아기나 아픈 사람들도 함께 보호할 수 있기 때문입니다.' Theo giáo sư, vì sao sốt nhẹ sau khi tiêm vắc-xin thường không đáng lo, và vì sao ai cũng nên tiêm?", script: "기자: 교수님, 백신은 어떻게 우리 몸을 보호합니까? 교수: 백신에는 약해진 바이러스나 바이러스의 일부가 들어 있습니다. 이것을 맞으면 우리 몸은 그 바이러스를 기억하는 법을 배웁니다. 기자: 그럼 실제로 병에 걸렸을 때는 어떻게 됩니까? 교수: 몸이 바이러스를 이미 알고 있기 때문에 빨리 싸울 수 있습니다. 그래서 증상이 가벼워지거나 아예 걸리지 않게 됩니다. 기자: 백신을 맞고 열이 나는 경우도 있는데, 괜찮은 겁니까? 교수: 네, 그것은 몸이 열심히 바이러스와 싸우는 방법을 배우고 있다는 신호입니다. 대개 하루나 이틀 안에 사라집니다. 기자: 마지막으로, 백신을 꼭 맞아야 하는 이유를 말씀해 주십시오. 교수: 백신을 맞으면 나 자신뿐만 아니라, 백신을 맞을 수 없는 아기나 아픈 사람들도 함께 보호할 수 있기 때문입니다.", o: ["Sốt là vì vắc-xin bị hỏng; chỉ nên tiêm khi đã bị ốm.","Sốt là dấu hiệu cơ thể đang học cách chống vi-rút; tiêm vắc-xin còn bảo vệ cả những người không thể tiêm.","Sốt là vì tiêm quá liều; người khỏe không cần tiêm.","Sốt là phản ứng nguy hiểm, phải nhập viện ngay."], a: 1, why: "Giáo sư giải thích sốt sau tiêm là 몸이 바이러스와 싸우는 방법을 배우고 있다는 신호 (dấu hiệu cơ thể đang học cách chống lại vi-rút), thường hết sau một hai ngày. Tiêm vắc-xin không chỉ bảo vệ bản thân mà còn 보호 cả 아기나 아픈 사람들 (em bé và người bệnh không thể tiêm)." },
+{ q: "Nghe: '오늘은 한글의 역사에 대해 이야기하겠습니다. 한글은 1443년 세종대왕과 집현전 학자들이 만든 문자입니다. 그전까지 한국 사람들은 중국의 한자를 사용했는데, 배우기가 매우 어려워서 일반 백성들은 글을 읽고 쓸 수 없었습니다. 세종대왕은 누구나 쉽게 배울 수 있는 문자가 필요하다고 생각했습니다. 그래서 소리의 원리를 바탕으로 자음 17개와 모음 11개를 만들었습니다. 한글은 발음 기관의 모양을 본떠서 만들었기 때문에 배우기가 쉽습니다. 예를 들어, ㄱ은 혀가 입천장에 닿는 모양을, ㅇ은 목구멍의 모양을 나타냅니다. 처음에는 양반들이 한글을 낮게 보았지만, 시간이 지나면서 한글은 한국인의 생활 속에 자리 잡았습니다. 오늘날 한글은 세계에서 가장 과학적인 문자로 평가받고 있습니다.' Theo bài giảng, vì sao vua Sejong sáng tạo ra chữ Hangul?", script: "오늘은 한글의 역사에 대해 이야기하겠습니다. 한글은 1443년 세종대왕과 집현전 학자들이 만든 문자입니다. 그전까지 한국 사람들은 중국의 한자를 사용했는데, 배우기가 매우 어려워서 일반 백성들은 글을 읽고 쓸 수 없었습니다. 세종대왕은 누구나 쉽게 배울 수 있는 문자가 필요하다고 생각했습니다. 그래서 소리의 원리를 바탕으로 자음 17개와 모음 11개를 만들었습니다. 한글은 발음 기관의 모양을 본떠서 만들었기 때문에 배우기가 쉽습니다. 예를 들어, ㄱ은 혀가 입천장에 닿는 모양을, ㅇ은 목구멍의 모양을 나타냅니다. 처음에는 양반들이 한글을 낮게 보았지만, 시간이 지나면서 한글은 한국인의 생활 속에 자리 잡았습니다. 오늘날 한글은 세계에서 가장 과학적인 문자로 평가받고 있습니다.", o: ["Vì chữ Hán quá khó học nên dân thường không đọc viết được; cần một loại chữ ai cũng học dễ dàng.","Vì nhà vua muốn cấm hẳn việc dùng chữ Hán.","Vì muốn giao thương thuận lợi với Trung Quốc.","Vì các quan lại yêu cầu nhà vua làm chữ mới."], a: 0, why: "Bài giảng nói trước khi có Hangul, người Hàn dùng 한자 (chữ Hán) mà 배우기가 매우 어려워서 일반 백성들은 글을 읽고 쓸 수 없었습니다 (khó học nên dân thường không đọc viết được). Vì vậy vua Sejong cho rằng cần một loại chữ 누구나 쉽게 배울 수 있는 문자 (ai cũng học dễ dàng), nên đã tạo ra 17 phụ âm và 11 nguyên âm theo nguyên lý âm thanh và hình dáng cơ quan phát âm." },
+{ q: "Nghe: '여러분, 요즘 공유 경제라는 말을 자주 들으시지요? 공유 경제란 물건을 소유하지 않고 빌려서 사용하는 경제 방식을 말합니다. 예를 들어, 자동차를 사지 않고 필요할 때만 빌려서 타는 것입니다. 이렇게 하면 자원을 아낄 수 있고, 환경에도 좋습니다. 또한 쓰지 않는 물건을 다른 사람에게 빌려 주면서 돈을 벌 수도 있습니다. 그러나 공유 경제가 항상 좋은 것만은 아닙니다. 택시를 빌려 타는 경우, 기존 택시 기사들의 수입이 줄어들 수 있기 때문입니다. 그래서 많은 나라에서는 새로운 규칙을 만들어 공유 경제와 기존 산업이 함께 발전할 수 있도록 노력하고 있습니다. 앞으로 공유 경제는 더 커질 것입니다. 우리도 물건을 사기 전에 정말 필요한지, 빌려서 쓸 수 있는지를 한 번 생각해 보는 습관을 가지면 좋겠습니다.' Theo bài nói, kinh tế chia sẻ có lợi ích và vấn đề gì?", script: "여러분, 요즘 공유 경제라는 말을 자주 들으시지요? 공유 경제란 물건을 소유하지 않고 빌려서 사용하는 경제 방식을 말합니다. 예를 들어, 자동차를 사지 않고 필요할 때만 빌려서 타는 것입니다. 이렇게 하면 자원을 아낄 수 있고, 환경에도 좋습니다. 또한 쓰지 않는 물건을 다른 사람에게 빌려 주면서 돈을 벌 수도 있습니다. 그러나 공유 경제가 항상 좋은 것만은 아닙니다. 택시를 빌려 타는 경우, 기존 택시 기사들의 수입이 줄어들 수 있기 때문입니다. 그래서 많은 나라에서는 새로운 규칙을 만들어 공유 경제와 기존 산업이 함께 발전할 수 있도록 노력하고 있습니다. 앞으로 공유 경제는 더 커질 것입니다. 우리도 물건을 사기 전에 정말 필요한지, 빌려서 쓸 수 있는지를 한 번 생각해 보는 습관을 가지면 좋겠습니다.", o: ["Chỉ làm tăng giá cả, không tiết kiệm được tài nguyên nào.","Khiến mọi người mua sắm nhiều đồ hơn trước.","Tiết kiệm tài nguyên và tốt cho môi trường, nhưng có thể làm giảm thu nhập của ngành truyền thống như taxi.","Chỉ có lợi ích, hoàn toàn không có vấn đề gì."], a: 2, why: "Bài nói cho biết kinh tế chia sẻ giúp 자원을 아낄 수 있고, 환경에도 좋습니다 (tiết kiệm tài nguyên, tốt cho môi trường) và có thể kiếm tiền từ đồ không dùng đến. Nhưng mặt trái là 기존 택시 기사들의 수입이 줄어들 수 있기 때문입니다 (thu nhập của tài xế taxi truyền thống có thể giảm), nên nhiều nước đang xây dựng quy tắc mới để hai bên cùng phát triển." },
+{ q: "Nghe: '오늘은 잠과 기억의 관계에 대해 이야기하겠습니다. 여러분은 시험 전날 밤을 새워 공부한 적이 있습니까? 그런데 연구에 따르면, 잠을 자지 않고 공부하면 오히려 기억이 잘 되지 않습니다. 우리가 자는 동안 뇌는 낮에 배운 내용을 정리하고, 중요한 정보는 오래 기억할 수 있도록 저장합니다. 특히 깊은 잠을 자는 시간에 기억이 가장 잘 정리됩니다. 반대로 잠이 부족하면 집중력이 떨어지고, 감정 조절도 어려워집니다. 그래서 전문가들은 하루 7시간에서 8시간 정도 자는 것을 권장합니다. 시험을 앞두고 있다면, 밤을 새우기보다는 일찍 자고 아침에 일찍 일어나서 복습하는 것이 훨씬 효과적입니다. 오늘부터 잠을 공부 시간의 일부로 생각해 보시기 바랍니다.' Theo bài giảng, vì sao thức trắng đêm trước kỳ thi lại không hiệu quả?", script: "오늘은 잠과 기억의 관계에 대해 이야기하겠습니다. 여러분은 시험 전날 밤을 새워 공부한 적이 있습니까? 그런데 연구에 따르면, 잠을 자지 않고 공부하면 오히려 기억이 잘 되지 않습니다. 우리가 자는 동안 뇌는 낮에 배운 내용을 정리하고, 중요한 정보는 오래 기억할 수 있도록 저장합니다. 특히 깊은 잠을 자는 시간에 기억이 가장 잘 정리됩니다. 반대로 잠이 부족하면 집중력이 떨어지고, 감정 조절도 어려워집니다. 그래서 전문가들은 하루 7시간에서 8시간 정도 자는 것을 권장합니다. 시험을 앞두고 있다면, 밤을 새우기보다는 일찍 자고 아침에 일찍 일어나서 복습하는 것이 훨씬 효과적입니다. 오늘부터 잠을 공부 시간의 일부로 생각해 보시기 바랍니다.", o: ["Vì ngủ nhiều sẽ quên hết bài đã học.","Vì ban đêm não không hoạt động nên học cũng vô ích.","Vì khi ngủ não mới sắp xếp và lưu trữ kiến thức; thiếu ngủ làm giảm khả năng tập trung.","Vì học buổi sáng không vào đầu bằng học buổi tối."], a: 1, why: "Bài giảng nói khi ngủ 뇌는 낮에 배운 내용을 정리하고 저장합니다 (não sắp xếp và lưu trữ kiến thức ban ngày học được), nhất là trong giấc ngủ sâu. Ngược lại, 잠이 부족하면 집중력이 떨어집니다 (thiếu ngủ làm giảm tập trung). Vì vậy nên ngủ 7–8 tiếng, đi ngủ sớm và dậy sớm ôn bài thay vì thức trắng đêm." },
+{ q: "Nghe: '기자: 선생님, 이중언어 교육이란 무엇입니까? 교사: 이중언어 교육은 두 가지 언어를 모두 사용해서 수업을 하는 방법입니다. 예를 들어, 수학은 한국어로 배우고, 과학은 영어로 배우는 것입니다. 기자: 학생들에게 어떤 점이 좋습니까? 교사: 두 언어를 자연스럽게 사용하다 보면 두 언어 모두에 자신감이 생깁니다. 또한 다른 문화를 이해하는 능력도 커집니다. 기자: 어려운 점은 없습니까? 교사: 있습니다. 처음에는 두 언어를 섞어서 쓰거나, 한 언어가 다른 언어보다 느리게 늘 수 있습니다. 그래서 선생님은 두 언어를 균형 있게 사용할 수 있도록 도와주어야 합니다. 기자: 부모님께 드리고 싶은 말씀이 있습니까? 교사: 집에서 아이와 한 언어로만 이야기하라고 강요하지 마십시오. 아이가 두 언어를 자유롭게 쓰도록 격려해 주시면 됩니다.' Theo giáo viên, khó khăn của giáo dục song ngữ là gì và cha mẹ nên làm gì?", script: "기자: 선생님, 이중언어 교육이란 무엇입니까? 교사: 이중언어 교육은 두 가지 언어를 모두 사용해서 수업을 하는 방법입니다. 예를 들어, 수학은 한국어로 배우고, 과학은 영어로 배우는 것입니다. 기자: 학생들에게 어떤 점이 좋습니까? 교사: 두 언어를 자연스럽게 사용하다 보면 두 언어 모두에 자신감이 생깁니다. 또한 다른 문화를 이해하는 능력도 커집니다. 기자: 어려운 점은 없습니까? 교사: 있습니다. 처음에는 두 언어를 섞어서 쓰거나, 한 언어가 다른 언어보다 느리게 늘 수 있습니다. 그래서 선생님은 두 언어를 균형 있게 사용할 수 있도록 도와주어야 합니다. 기자: 부모님께 드리고 싶은 말씀이 있습니까? 교사: 집에서 아이와 한 언어로만 이야기하라고 강요하지 마십시오. 아이가 두 언어를 자유롭게 쓰도록 격려해 주시면 됩니다.", o: ["Học sinh không bao giờ lẫn hai ngôn ngữ; cha mẹ nên cấm dùng một ngôn ngữ ở nhà.","Học sinh chỉ giỏi một ngôn ngữ duy nhất; cha mẹ nên chọn một ngôn ngữ từ đầu.","Học sinh có thể lẫn hai ngôn ngữ hoặc một ngôn ngữ phát triển chậm hơn; cha mẹ nên khuyến khích trẻ dùng tự do cả hai ngôn ngữ.","Giáo dục song ngữ không có khó khăn nào; cha mẹ không cần làm gì."], a: 2, why: "Giáo viên cho biết khó khăn là 처음에는 두 언어를 섞어서 쓰거나, 한 언어가 다른 언어보다 느리게 늘 수 있습니다 (lúc đầu trẻ có thể lẫn hai ngôn ngữ, hoặc một ngôn ngữ phát triển chậm hơn). Với cha mẹ, thầy khuyên 아이가 두 언어를 자유롭게 쓰도록 격려해 주시면 됩니다 (hãy khuyến khích trẻ dùng tự do cả hai ngôn ngữ, đừng ép trẻ chỉ nói một ngôn ngữ ở nhà)." },
+{ q: "Nghe: '오늘은 인공지능이 일자리에 미치는 영향에 대해 이야기하겠습니다. 인공지능은 반복적인 일을 빠르고 정확하게 처리합니다. 그래서 공장이나 은행처럼 정해진 규칙대로 일하는 분야에서는 일자리가 줄어들고 있습니다. 그렇다고 해서 모든 일자리가 사라지는 것은 아닙니다. 사람의 마음을 이해하거나, 새로운 것을 만들어 내는 일은 아직 인공지능이 하기 어렵습니다. 예를 들어, 환자를 위로하는 간호사나, 새로운 이야기를 쓰는 작가의 일은 쉽게 사라지지 않을 것입니다. 중요한 것은 인공지능과 경쟁하는 것이 아니라, 인공지능을 잘 활용하는 능력을 기르는 것입니다. 앞으로는 기술을 배우는 것만큼이나, 창의력과 소통 능력이 중요해질 것입니다. 여러분도 지금부터 자신의 강점을 찾아 키워 나가시기 바랍니다.' Theo bài giảng, những công việc nào khó bị trí tuệ nhân tạo thay thế, và người lao động nên làm gì?", script: "오늘은 인공지능이 일자리에 미치는 영향에 대해 이야기하겠습니다. 인공지능은 반복적인 일을 빠르고 정확하게 처리합니다. 그래서 공장이나 은행처럼 정해진 규칙대로 일하는 분야에서는 일자리가 줄어들고 있습니다. 그렇다고 해서 모든 일자리가 사라지는 것은 아닙니다. 사람의 마음을 이해하거나, 새로운 것을 만들어 내는 일은 아직 인공지능이 하기 어렵습니다. 예를 들어, 환자를 위로하는 간호사나, 새로운 이야기를 쓰는 작가의 일은 쉽게 사라지지 않을 것입니다. 중요한 것은 인공지능과 경쟁하는 것이 아니라, 인공지능을 잘 활용하는 능력을 기르는 것입니다. 앞으로는 기술을 배우는 것만큼이나, 창의력과 소통 능력이 중요해질 것입니다. 여러분도 지금부터 자신의 강점을 찾아 키워 나가시기 바랍니다.", o: ["Công việc cần thấu hiểu con người và sáng tạo như y tá, nhà văn; người lao động nên học cách tận dụng AI và rèn sáng tạo, giao tiếp.","Mọi công việc đều sẽ biến mất nên không cần chuẩn bị gì.","Chỉ công việc trong nhà máy biến mất; công việc văn phòng an toàn tuyệt đối.","AI sẽ thay thế cả sáng tạo; người lao động chỉ cần học lập trình."], a: 0, why: "Bài giảng nói AI xử lý tốt 반복적인 일 (việc lặp đi lặp lại) nên việc làm trong nhà máy, ngân hàng giảm đi. Nhưng 사람의 마음을 이해하거나, 새로운 것을 만들어 내는 일 (việc cần thấu hiểu lòng người hay sáng tạo cái mới) như y tá an ủi bệnh nhân, nhà văn viết truyện mới thì AI còn khó làm. Vì vậy người lao động nên học cách 활용하는 능력 (tận dụng AI) và rèn 창의력과 소통 능력 (sáng tạo và giao tiếp)." },
+{ q: "Nghe: '여러분, 한국의 김치와 된장은 왜 세계적으로 유명해졌을까요? 그 비밀은 발효에 있습니다. 발효란 미생물이 음식의 성분을 바꾸어 새로운 맛과 영양을 만들어 내는 과정입니다. 김치를 만들 때 배추에 소금과 고춧가루를 넣고 두면, 유산균이 자라면서 시큼하고 깊은 맛이 생깁니다. 이 유산균은 장 건강에도 좋습니다. 된장도 콩을 발효시켜 만든 것으로, 단백질이 풍부합니다. 옛날에는 냉장고가 없어서 음식을 오래 보관하기 위해 발효를 이용했는데, 오늘날 과학자들은 발효 음식이 면역력을 높이는 데도 도움이 된다고 말합니다. 또한 발효 음식은 소화를 돕고 오래 보관할 수 있어서 옛날부터 지금까지 사랑받고 있습니다. 그래서 김치와 된장은 이제 단순한 반찬이 아니라, 한국의 대표적인 건강 음식으로 세계에 알려지고 있습니다.' Theo bài nói, vì sao kimchi và doenjang tốt cho sức khỏe?", script: "여러분, 한국의 김치와 된장은 왜 세계적으로 유명해졌을까요? 그 비밀은 발효에 있습니다. 발효란 미생물이 음식의 성분을 바꾸어 새로운 맛과 영양을 만들어 내는 과정입니다. 김치를 만들 때 배추에 소금과 고춧가루를 넣고 두면, 유산균이 자라면서 시큼하고 깊은 맛이 생깁니다. 이 유산균은 장 건강에도 좋습니다. 된장도 콩을 발효시켜 만든 것으로, 단백질이 풍부합니다. 옛날에는 냉장고가 없어서 음식을 오래 보관하기 위해 발효를 이용했는데, 오늘날 과학자들은 발효 음식이 면역력을 높이는 데도 도움이 된다고 말합니다. 또한 발효 음식은 소화를 돕고 오래 보관할 수 있어서 옛날부터 지금까지 사랑받고 있습니다. 그래서 김치와 된장은 이제 단순한 반찬이 아니라, 한국의 대표적인 건강 음식으로 세계에 알려지고 있습니다.", o: ["Vì chúng chứa nhiều đường nên tốt cho sức khỏe.","Vì chúng được nấu ở nhiệt độ rất cao.","Vì chúng không chứa vi sinh vật nào.","Vì quá trình lên men tạo ra vi khuẩn lactic tốt cho đường ruột, còn doenjang giàu protein."], a: 3, why: "Bài nói giải thích 발효 (lên men) là quá trình vi sinh vật biến đổi thành phần thức ăn, tạo ra vị mới và dinh dưỡng mới. Kimchi lên men sinh 유산균 (vi khuẩn lactic) tốt cho 장 건강 (sức khỏe đường ruột); 된장 (doenjang) làm từ đậu nành lên men nên 단백질이 풍부합니다 (giàu protein). Các nhà khoa học còn cho rằng đồ ăn lên men giúp tăng 면역력 (sức miễn dịch)." },
+{ q: "Nghe: '오늘은 미세 플라스틱 문제에 대해 이야기하겠습니다. 미세 플라스틱이란 5밀리미터보다 작은 플라스틱 조각을 말합니다. 이 작은 조각들은 어디에서 올까요? 첫째, 커다란 플라스틱 쓰레기가 바다에서 부서지면서 생깁니다. 둘째, 치약이나 세안제에 들어 있던 작은 알갱이들이 하수구를 통해 바다로 흘러갑니다. 문제는 이 조각들이 물고기나 조개의 몸속으로 들어간다는 것입니다. 그리고 그런 생선을 먹는 우리의 몸속에도 미세 플라스틱이 들어올 수 있습니다. 아직 인체에 미치는 영향이 완전히 밝혀지지는 않았지만, 과학자들은 조심해야 한다고 말합니다. 우리가 할 수 있는 일은 간단합니다. 일회용 플라스틱 사용을 줄이고, 다회용 컵과 장바구니를 사용하는 것입니다. 작은 실천이 바다를 지킵니다.' Theo bài giảng, vi nhựa đến từ đâu và chúng ta có thể làm gì?", script: "오늘은 미세 플라스틱 문제에 대해 이야기하겠습니다. 미세 플라스틱이란 5밀리미터보다 작은 플라스틱 조각을 말합니다. 이 작은 조각들은 어디에서 올까요? 첫째, 커다란 플라스틱 쓰레기가 바다에서 부서지면서 생깁니다. 둘째, 치약이나 세안제에 들어 있던 작은 알갱이들이 하수구를 통해 바다로 흘러갑니다. 문제는 이 조각들이 물고기나 조개의 몸속으로 들어간다는 것입니다. 그리고 그런 생선을 먹는 우리의 몸속에도 미세 플라스틱이 들어올 수 있습니다. 아직 인체에 미치는 영향이 완전히 밝혀지지는 않았지만, 과학자들은 조심해야 한다고 말합니다. 우리가 할 수 있는 일은 간단합니다. 일회용 플라스틱 사용을 줄이고, 다회용 컵과 장바구니를 사용하는 것입니다. 작은 실천이 바다를 지킵니다.", o: ["Vi nhựa chỉ đến từ nhà máy; cá nhân không làm được gì.","Từ rác nhựa lớn vỡ ra và hạt nhỏ trong kem đánh răng, sữa rửa mặt; giảm đồ nhựa dùng một lần, dùng cốc và túi tái sử dụng.","Vi nhựa chỉ đến từ mưa axit; chỉ cần uống nước lọc là đủ.","Vi nhựa đến từ đất nông nghiệp; không liên quan gì đến biển."], a: 1, why: "Bài giảng nói vi nhựa (미세 플라스틱, mảnh nhựa nhỏ hơn 5mm) đến từ hai nguồn: rác nhựa lớn vỡ ra ở biển, và hạt nhỏ trong 치약이나 세안제 (kem đánh răng, sữa rửa mặt) trôi qua cống ra biển. Vi nhựa vào cơ thể cá rồi vào cơ thể người ăn cá. Cách giảm thiểu: 줄이고 일회용 플라스틱 사용을 줄이고, 다회용 컵과 장바구니를 사용하기 (giảm đồ nhựa dùng một lần, dùng cốc và túi tái sử dụng)." },
+{ q: "Nghe: '기자: 교수님, 문화유산을 보존하는 일이 왜 중요합니까? 교수: 문화유산은 한 나라의 기억입니다. 옛날 사람들이 어떻게 살았는지, 무엇을 소중하게 생각했는지를 알려 주기 때문입니다. 기자: 그런데 개발 때문에 유산이 사라지는 경우도 많지 않습니까? 교수: 네, 그래서 갈등이 생깁니다. 새로운 건물을 지으면 편해지지만, 유산이 사라지면 그 지역의 역사도 함께 사라집니다. 기자: 그렇다면 어떻게 해결해야 합니까? 교수: 무조건 개발을 막을 수는 없습니다. 대신 유산을 조사하고 기록한 뒤에, 가능한 한 원래 모습을 살려서 개발하는 방법이 있습니다. 기자: 시민들도 도울 수 있습니까? 교수: 물론입니다. 유산을 아끼고, 직접 찾아가서 배우는 것만으로도 큰 도움이 됩니다.' Theo giáo sư, khi phát triển và bảo tồn di sản xung đột thì nên giải quyết thế nào, và người dân có thể giúp gì?", script: "기자: 교수님, 문화유산을 보존하는 일이 왜 중요합니까? 교수: 문화유산은 한 나라의 기억입니다. 옛날 사람들이 어떻게 살았는지, 무엇을 소중하게 생각했는지를 알려 주기 때문입니다. 기자: 그런데 개발 때문에 유산이 사라지는 경우도 많지 않습니까? 교수: 네, 그래서 갈등이 생깁니다. 새로운 건물을 지으면 편해지지만, 유산이 사라지면 그 지역의 역사도 함께 사라집니다. 기자: 그렇다면 어떻게 해결해야 합니까? 교수: 무조건 개발을 막을 수는 없습니다. 대신 유산을 조사하고 기록한 뒤에, 가능한 한 원래 모습을 살려서 개발하는 방법이 있습니다. 기자: 시민들도 도울 수 있습니까? 교수: 물론입니다. 유산을 아끼고, 직접 찾아가서 배우는 것만으로도 큰 도움이 됩니다.", o: ["Khảo sát và ghi chép di sản rồi phát triển nhưng giữ nguyên hình dáng gốc càng nhiều càng tốt; người dân có thể đến thăm và tìm hiểu di sản.","Ngừng mọi hoạt động phát triển; người dân không cần làm gì.","Phá bỏ di sản để xây nhà mới; người dân chỉ cần quyên tiền.","Chỉ chuyên gia mới được chạm vào di sản; cấm người dân đến thăm."], a: 0, why: "Giáo sư nói di sản là 한 나라의 기억 (ký ức của một đất nước). Khi xung đột với phát triển, không thể 무조건 개발을 막을 수 없습니다 (cấm hẳn phát triển), mà nên 유산을 조사하고 기록한 뒤에, 가능한 한 원래 모습을 살려서 개발하기 (khảo sát, ghi chép di sản rồi phát triển nhưng giữ nguyên hình dáng gốc càng nhiều càng tốt). Người dân giúp được bằng cách 아끼고, 직접 찾아가서 배우기 (trân trọng di sản, tự đến thăm và tìm hiểu)." },
+{ q: "Nghe: '오늘은 한국 경제가 어떻게 발전했는지 이야기하겠습니다. 1960년대 한국은 세계에서 가장 가난한 나라 중 하나였습니다. 그러나 정부는 수출을 늘리는 정책을 선택했습니다. 처음에는 가발이나 신발 같은 가벼운 공업 제품을 수출했고, 나중에는 배와 자동차, 반도체 같은 기술 제품을 수출하게 되었습니다. 또한 정부는 교육에 많이 투자했습니다. 많은 젊은이들이 학교에서 공부하고, 공장과 회사에서 일했습니다. 그 결과 한국의 경제는 빠르게 성장했고, 이를 두고 사람들은 한강의 기적이라고 불렀습니다. 물론 이 과정에서 환경 문제나 노동 문제가 생기기도 했습니다. 그러나 한국 경제의 역사는, 가난한 나라가 교육과 수출을 통해 발전할 수 있다는 것을 보여 주는 중요한 사례입니다.' Theo bài giảng, Hàn Quốc đã phát triển kinh tế bằng cách nào?", script: "오늘은 한국 경제가 어떻게 발전했는지 이야기하겠습니다. 1960년대 한국은 세계에서 가장 가난한 나라 중 하나였습니다. 그러나 정부는 수출을 늘리는 정책을 선택했습니다. 처음에는 가발이나 신발 같은 가벼운 공업 제품을 수출했고, 나중에는 배와 자동차, 반도체 같은 기술 제품을 수출하게 되었습니다. 또한 정부는 교육에 많이 투자했습니다. 많은 젊은이들이 학교에서 공부하고, 공장과 회사에서 일했습니다. 그 결과 한국의 경제는 빠르게 성장했고, 이를 두고 사람들은 한강의 기적이라고 불렀습니다. 물론 이 과정에서 환경 문제나 노동 문제가 생기기도 했습니다. 그러나 한국 경제의 역사는, 가난한 나라가 교육과 수출을 통해 발전할 수 있다는 것을 보여 주는 중요한 사례입니다.", o: ["Chỉ dựa vào viện trợ nước ngoài.","Chỉ khai thác tài nguyên thiên nhiên.","Tăng xuất khẩu từ hàng nhẹ đến hàng công nghệ cao và đầu tư mạnh vào giáo dục.","Đóng cửa thị trường, không xuất khẩu hàng hóa."], a: 2, why: "Bài giảng nói những năm 1960 Hàn Quốc là một trong những nước nghèo nhất thế giới, nhưng chính phủ chọn chính sách 수출을 늘리는 정책 (tăng xuất khẩu): đầu tiên xuất khẩu 가발이나 신발 (tóc giả, giày dép), sau đó xuất khẩu 배와 자동차, 반도체 (tàu, ô tô, chất bán dẫn). Đồng thời 정부는 교육에 많이 투자했습니다 (đầu tư mạnh vào giáo dục). Nhờ đó kinh tế tăng trưởng nhanh, được gọi là 한강의 기적 (kỳ tích sông Hàn)." },
+{ q: "Nghe: '여러분, 운동이 심장에 어떤 도움을 주는지 아십니까? 규칙적으로 운동을 하면 심장 근육이 강해집니다. 강한 심장은 한 번에 더 많은 피를 보낼 수 있기 때문에, 심장이 덜 자주 뛰어도 몸 전체에 피를 충분히 공급할 수 있습니다. 또한 운동은 혈압을 낮추고, 나쁜 콜레스테롤을 줄이며, 혈당을 안정시키는 데도 도움이 됩니다. 전문가들은 일주일에 150분 정도의 빠른 걷기나 자전거 타기 같은 중간 강도의 운동을 권장합니다. 중요한 것은 갑자기 무리하게 운동하는 것이 아니라, 자신의 몸에 맞게 조금씩 늘려 나가는 것입니다. 운동을 시작하기 전에 자신의 건강 상태를 확인하고, 몸에 무리가 가지 않도록 주의하는 것도 중요합니다. 오늘부터 엘리베이터 대신 계단을 이용하는 작은 습관부터 시작해 보시기 바랍니다.' Theo bài nói, vì sao tập thể dục đều đặn tốt cho tim, và nên tập như thế nào?", script: "여러분, 운동이 심장에 어떤 도움을 주는지 아십니까? 규칙적으로 운동을 하면 심장 근육이 강해집니다. 강한 심장은 한 번에 더 많은 피를 보낼 수 있기 때문에, 심장이 덜 자주 뛰어도 몸 전체에 피를 충분히 공급할 수 있습니다. 또한 운동은 혈압을 낮추고, 나쁜 콜레스테롤을 줄이며, 혈당을 안정시키는 데도 도움이 됩니다. 전문가들은 일주일에 150분 정도의 빠른 걷기나 자전거 타기 같은 중간 강도의 운동을 권장합니다. 중요한 것은 갑자기 무리하게 운동하는 것이 아니라, 자신의 몸에 맞게 조금씩 늘려 나가는 것입니다. 운동을 시작하기 전에 자신의 건강 상태를 확인하고, 몸에 무리가 가지 않도록 주의하는 것도 중요합니다. 오늘부터 엘리베이터 대신 계단을 이용하는 작은 습관부터 시작해 보시기 바랍니다.", o: ["Tim đập nhanh hơn mới tốt; nên tập thật nặng ngay từ đầu.","Chỉ cần tập một lần mỗi tháng là đủ.","Tập thể dục làm tăng huyết áp nên không tốt cho tim.","Tim khỏe hơn nên bơm đủ máu mà đập ít hơn; nên tập cường độ vừa khoảng 150 phút mỗi tuần và tăng dần theo sức mình."], a: 3, why: "Bài nói giải thích tập đều làm 심장 근육이 강해집니다 (cơ tim khỏe hơn) nên tim bơm được nhiều máu mỗi lần, do đó 심장이 덜 자주 뛰어도 (tim đập ít lần hơn) vẫn cung cấp đủ máu cho cơ thể. Tập thể dục còn 낮추고 혈압 (hạ huyết áp), giảm 콜레스테롤 xấu và ổn định đường huyết. Chuyên gia khuyên tập 중간 강도 (cường độ vừa) khoảng 일주일에 150분 (150 phút mỗi tuần) như đi bộ nhanh, đạp xe, và tăng dần theo sức mình chứ không tập quá sức đột ngột." },
+{ q: "Nghe: '오늘은 달 탐사에 대해 이야기하겠습니다. 인류는 1969년에 처음 달에 착륙했습니다. 그 뒤로 한동안 달 탐사는 멈추었지만, 최근 여러 나라가 다시 달에 관심을 보이고 있습니다. 그 이유는 달에 물이 얼음 형태로 존재한다는 것이 밝혀졌기 때문입니다. 물이 있으면 우주 비행사들이 마실 물을 얻을 수 있고, 더 나아가 산소와 연료까지 만들 수 있습니다. 또한 달은 화성으로 가는 중간 기착지가 될 수도 있습니다. 특히 달의 남극에는 햇빛이 거의 닿지 않는 깊은 구덩이가 있는데, 그곳에 얼음이 많이 있을 것으로 보입니다. 한국도 2022년에 달 탐사선을 보냈고, 앞으로 달 착륙을 준비하고 있습니다. 달 탐사는 단순한 과학적 호기심이 아니라, 인류가 우주로 나아가기 위한 중요한 첫걸음입니다.' Theo bài giảng, vì sao các nước gần đây lại quan tâm đến Mặt Trăng, và Mặt Trăng có thể đóng vai trò gì?", script: "오늘은 달 탐사에 대해 이야기하겠습니다. 인류는 1969년에 처음 달에 착륙했습니다. 그 뒤로 한동안 달 탐사는 멈추었지만, 최근 여러 나라가 다시 달에 관심을 보이고 있습니다. 그 이유는 달에 물이 얼음 형태로 존재한다는 것이 밝혀졌기 때문입니다. 물이 있으면 우주 비행사들이 마실 물을 얻을 수 있고, 더 나아가 산소와 연료까지 만들 수 있습니다. 또한 달은 화성으로 가는 중간 기착지가 될 수도 있습니다. 특히 달의 남극에는 햇빛이 거의 닿지 않는 깊은 구덩이가 있는데, 그곳에 얼음이 많이 있을 것으로 보입니다. 한국도 2022년에 달 탐사선을 보냈고, 앞으로 달 착륙을 준비하고 있습니다. 달 탐사는 단순한 과학적 호기심이 아니라, 인류가 우주로 나아가기 위한 중요한 첫걸음입니다.", o: ["Vì Mặt Trăng có nhiều vàng nên các nước muốn khai thác vàng.","Vì đã phát hiện nước đóng băng trên Mặt Trăng, có thể tạo ra nước uống, oxy và nhiên liệu; Mặt Trăng có thể là trạm trung chuyển đến Sao Hỏa.","Vì Mặt Trăng sắp biến mất nên cần đến trước khi quá muộn.","Vì các nước muốn xây thành phố du lịch trên Mặt Trăng ngay lập tức."], a: 1, why: "Bài giảng nói nhân loại lần đầu lên Mặt Trăng năm 1969, rồi tạm dừng, gần đây các nước quan tâm trở lại vì 달에 물이 얼음 형태로 존재한다는 것이 밝혀졌기 때문입니다 (đã phát hiện nước tồn tại dưới dạng băng trên Mặt Trăng). Có nước thì phi hành gia có nước uống, hơn nữa còn 만들 수 있고 산소와 연료까지 (tạo ra oxy và nhiên liệu). Ngoài ra Mặt Trăng có thể là 화성으로 가는 중간 기착지 (trạm trung chuyển trên đường đến Sao Hỏa). Hàn Quốc cũng đã gửi tàu thăm dò Mặt Trăng năm 2022." },
+{ q: "Nghe: '기자: 작가님, 요즘 젊은 사람들이 책을 잘 읽지 않는다고 하는데, 어떻게 생각하십니까? 작가: 스마트폰과 동영상이 재미있으니까 책을 멀리하는 것은 자연스러운 일입니다. 그렇다고 해서 책이 필요 없어진 것은 아닙니다. 기자: 책 읽기의 좋은 점은 무엇입니까? 작가: 책을 읽으면 다른 사람의 삶을 깊이 이해할 수 있습니다. 짧은 동영상에서는 느끼기 어려운 감정과 생각을 천천히 따라갈 수 있지요. 기자: 책 읽기를 싫어하는 사람에게 해 주고 싶은 말이 있습니까? 작가: 두꺼운 책부터 시작하지 마십시오. 짧은 이야기나 재미있는 소설부터 읽으면 됩니다. 하루에 10분만 읽어도 충분합니다. 기자: 작가님의 다음 작품 계획은 무엇입니까? 작가: 작은 마을에 사는 사람들의 이야기를 담은 소설을 쓰고 있습니다. 내년 봄에 나올 예정입니다.' Theo nhà văn, người không thích đọc sách nên bắt đầu như thế nào, và tác phẩm tiếp theo của ông viết về đề tài gì?", script: "기자: 작가님, 요즘 젊은 사람들이 책을 잘 읽지 않는다고 하는데, 어떻게 생각하십니까? 작가: 스마트폰과 동영상이 재미있으니까 책을 멀리하는 것은 자연스러운 일입니다. 그렇다고 해서 책이 필요 없어진 것은 아닙니다. 기자: 책 읽기의 좋은 점은 무엇입니까? 작가: 책을 읽으면 다른 사람의 삶을 깊이 이해할 수 있습니다. 짧은 동영상에서는 느끼기 어려운 감정과 생각을 천천히 따라갈 수 있지요. 기자: 책 읽기를 싫어하는 사람에게 해 주고 싶은 말이 있습니까? 작가: 두꺼운 책부터 시작하지 마십시오. 짧은 이야기나 재미있는 소설부터 읽으면 됩니다. 하루에 10분만 읽어도 충분합니다. 기자: 작가님의 다음 작품 계획은 무엇입니까? 작가: 작은 마을에 사는 사람들의 이야기를 담은 소설을 쓰고 있습니다. 내년 봄에 나올 예정입니다.", o: ["Đọc truyện ngắn hoặc tiểu thuyết thú vị, mỗi ngày 10 phút; tác phẩm mới viết về người dân một ngôi làng nhỏ, dự kiến ra mắt mùa xuân năm sau.","Đọc sách dày ngay từ đầu; tác phẩm mới viết về lịch sử thế giới.","Không cần đọc sách nữa; tác phẩm mới đã ra mắt rồi.","Chỉ xem phim chuyển thể; tác phẩm mới viết về thành phố lớn."], a: 0, why: "Nhà văn khuyên: 두꺼운 책부터 시작하지 마십시오 (đừng bắt đầu với sách dày), hãy đọc 짧은 이야기나 재미있는 소설 (truyện ngắn hoặc tiểu thuyết thú vị), 하루에 10분만 읽어도 충분합니다 (mỗi ngày đọc 10 phút là đủ). Tác phẩm tiếp theo của ông là tiểu thuyết về 작은 마을에 사는 사람들 (người dân sống trong một ngôi làng nhỏ), 내년 봄에 나올 예정입니다 (dự kiến ra mắt vào mùa xuân năm sau)." },
+{ q: "Nghe: '오늘은 고령화 사회에 대해 이야기하겠습니다. 고령화 사회란 65세 이상 인구가 전체 인구의 14퍼센트를 넘는 사회를 말합니다. 한국은 2017년에 고령화 사회가 되었고, 지금은 초고령 사회로 가고 있습니다. 노인 인구가 늘어나면 의료비와 연금 지출이 커지고, 일하는 사람의 부담도 커집니다. 그러나 고령화는 문제만 있는 것이 아닙니다. 노인들은 오랜 경험과 지식을 가지고 있기 때문에, 사회에 큰 도움이 될 수 있습니다. 그래서 요즘은 은퇴 후에도 일하거나 자원봉사를 하는 노인이 늘고 있습니다. 중요한 것은 노인들을 부담으로만 보지 않고, 함께 살아가는 사회의 일원으로 존중하는 것입니다. 오늘 배운 내용을 통해 고령화에 대해 다시 한 번 생각해 보시기 바랍니다.' Theo bài giảng, xã hội già hóa gây ra khó khăn gì, và nên nhìn nhận người cao tuổi như thế nào?", script: "오늘은 고령화 사회에 대해 이야기하겠습니다. 고령화 사회란 65세 이상 인구가 전체 인구의 14퍼센트를 넘는 사회를 말합니다. 한국은 2017년에 고령화 사회가 되었고, 지금은 초고령 사회로 가고 있습니다. 노인 인구가 늘어나면 의료비와 연금 지출이 커지고, 일하는 사람의 부담도 커집니다. 그러나 고령화는 문제만 있는 것이 아닙니다. 노인들은 오랜 경험과 지식을 가지고 있기 때문에, 사회에 큰 도움이 될 수 있습니다. 그래서 요즘은 은퇴 후에도 일하거나 자원봉사를 하는 노인이 늘고 있습니다. 중요한 것은 노인들을 부담으로만 보지 않고, 함께 살아가는 사회의 일원으로 존중하는 것입니다. 오늘 배운 내용을 통해 고령화에 대해 다시 한 번 생각해 보시기 바랍니다.", o: ["Xã hội già hóa không gây khó khăn gì; người cao tuổi chỉ là gánh nặng.","Dân số tăng quá nhanh; nên hạn chế người cao tuổi làm việc.","Chi phí y tế và lương hưu tăng, người lao động gánh nặng hơn; nên tôn trọng người cao tuổi như thành viên xã hội với kinh nghiệm và tri thức quý báu.","Chi phí y tế giảm xuống; người cao tuổi không cần được tôn trọng."], a: 2, why: "Bài giảng định nghĩa xã hội già hóa là xã hội có dân số từ 65 tuổi trở lên vượt 14%; Hàn Quốc trở thành xã hội già hóa năm 2017 và đang tiến tới xã hội siêu già. Khó khăn: 노인 인구가 늘어나면 의료비와 연금 지출이 커지고, 일하는 사람의 부담도 커집니다 (chi phí y tế và lương hưu tăng, người lao động gánh nặng hơn). Nhưng người cao tuổi có 오랜 경험과 지식 (kinh nghiệm và tri thức lâu năm) nên có thể giúp ích lớn cho xã hội; cần 존중하는 것 (tôn trọng họ) như thành viên cùng chung sống, không chỉ xem họ là gánh nặng." }
 ];
 var TP_MOCK3_R = [
-{ q: "Đọc: '저는 매일 아침 6시에 일어납니다. 그리고 공원에서 30분 동안 산책합니다. 산책을 하면 하루를 기분 좋게 시작할 수 있습니다.' Tác giả làm gì mỗi sáng?", o: ["Chạy bộ 1 giờ", "Đi dạo 30 phút trong công viên", "Tập gym", "Đọc sách"], a: 1, why: "공원에서 30분 동안 산책합니다." },
-{ q: "Đọc: '서울에는 지하철 노선이 많습니다. 그래서 어디든지 빠르고 편리하게 갈 수 있습니다. 하지만 출퇴근 시간에는 사람이 매우 많습니다.' Theo đoạn văn, giờ cao điểm tàu điện ngầm Seoul thế nào?", o: ["Rất vắng", "Rất đông người", "Không chạy", "Chỉ chạy buổi sáng"], a: 1, why: "출퇴근 시간에는 사람이 매우 많습니다." },
-{ q: "Đọc: '김치는 한국의 대표적인 음식입니다. 배추에 고춧가루와 마늘을 넣어 만듭니다. 김치는 밥과 함께 먹는 경우가 많습니다.' Kimchi được làm từ gì là chính?", o: ["Củ cải và gừng", "Cải thảo với bột ớt và tỏi", "Dưa chuột và giấm", "Đậu nành và muối"], a: 1, why: "배추에 고춧가루와 마늘을 넣어 만듭니다." },
-{ q: "Đọc: '저는 어제 도서관에서 책을 빌렸습니다. 책 이름은 한국의 역사입니다. 이 책은 한국의 옛날이야기를 쉽게 설명해 줍니다.' Cuốn sách tác giả mượn nói về gì?", o: ["Nấu ăn Hàn Quốc", "Lịch sử Hàn Quốc kể dễ hiểu", "Du lịch Seoul", "Học tiếng Anh"], a: 1, why: "한국의 역사입니다. 한국의 옛날이야기를 쉽게 설명해 줍니다." },
-{ q: "Đọc: '비가 오는 날에는 우산을 꼭 가져가야 합니다. 우산이 없으면 옷이 다 젖습니다. 어제는 우산을 안 가져가서 감기에 걸렸습니다.' Vì sao tác giả bị cảm?", o: ["Vì dầm mưa không mang ô hôm qua", "Vì ăn đồ lạnh", "Vì thức khuya", "Vì không mặc áo ấm"], a: 0, why: "우산을 안 가져가서 감기에 걸렸습니다." },
-{ q: "Đọc: '우리 학교 앞에는 작은 빵집이 있습니다. 빵집 주인은 매일 아침 신선한 빵을 만듭니다. 학생들은 쉬는 시간에 빵을 사 먹습니다.' Học sinh mua bánh khi nào?", o: ["Giờ ăn trưa", "Giờ giải lao", "Sau giờ học", "Buổi sáng sớm"], a: 1, why: "쉬는 시간에 빵을 사 먹습니다." },
-{ q: "Đọc: '운동을 꾸준히 하면 몸이 건강해집니다. 그러나 너무 무리하면 다칠 수 있습니다. 자신의 몸 상태에 맞게 운동하는 것이 중요합니다.' Đoạn văn khuyên gì?", o: ["Tập càng nặng càng tốt", "Tập đều đặn và phù hợp với cơ thể", "Không nên tập thể dục", "Chỉ tập khi khỏe"], a: 1, why: "자신의 몸 상태에 맞게 운동하는 것이 중요합니다." },
-{ q: "Đọc: '저는 주말마다 시장에서 장을 봅니다. 시장에서는 신선한 채소와 생선을 싸게 살 수 있습니다. 장을 본 후에는 시장에서 파는 간식을 먹습니다.' Tác giả mua sắm ở đâu vào cuối tuần?", o: ["Siêu thị lớn", "Chợ truyền thống", "Cửa hàng tiện lợi", "Mua online"], a: 1, why: "주말마다 시장에서 장을 봅니다." },
-{ q: "Đọc: '휴대전화를 너무 오래 사용하면 눈이 피곤해지고 잠을 잘 자기 어렵습니다. 그래서 자기 전 한 시간 동안은 휴대전화를 보지 않는 것이 좋습니다.' Đoạn văn khuyên không dùng điện thoại khi nào?", o: ["Buổi sáng", "Một giờ trước khi ngủ", "Lúc ăn cơm", "Lúc đi bộ"], a: 1, why: "자기 전 한 시간 동안은 휴대전화를 보지 않는 것이 좋습니다." },
-{ q: "Đọc: '한국의 명절 중 하나는 추석입니다. 추석에는 가족들이 모여서 송편을 먹고, 조상께 감사하는 마음을 전합니다. 많은 사람들이 고향에 갑니다.' Vào Chuseok, mọi người thường làm gì?", o: ["Đi du lịch nước ngoài", "Về quê sum họp gia đình, ăn songpyeon", "Ở nhà một mình", "Đi làm bình thường"], a: 1, why: "가족들이 모여서 송편을 먹고, 많은 사람들이 고향에 갑니다." },
-{ q: "Đọc: '저는 버스를 타는 것보다 자전거를 타는 것을 더 좋아합니다. 자전거를 타면 돈을 아낄 수 있고, 건강에도 좋습니다. 단, 비가 오는 날에는 자전거를 타기 어렵습니다.' Nhược điểm của việc đi xe đạp là gì?", o: ["Tốn tiền", "Ngày mưa khó đi", "Đi chậm", "Nguy hiểm ban đêm"], a: 1, why: "비가 오는 날에는 자전거를 타기 어렵습니다." },
-{ q: "Đọc: '우리 동네에는 작은 공원이 있습니다. 공원에는 운동 기구와 산책로가 있습니다. 저녁마다 많은 사람들이 공원에서 운동을 합니다.' Buổi tối, mọi người đến công viên để làm gì?", o: ["Câu cá", "Tập thể dục", "Bán hàng", "Học bài"], a: 1, why: "저녁마다 많은 사람들이 공원에서 운동을 합니다." },
-{ q: "Đọc: '책을 읽으면 새로운 지식을 얻을 수 있습니다. 또한 상상력이 커지고, 마음이 차분해집니다. 그래서 저는 자기 전에 20분 동안 책을 읽습니다.' Tác giả đọc sách khi nào, bao lâu?", o: ["Sáng sớm 30 phút", "Trước khi ngủ 20 phút", "Giờ nghỉ trưa 10 phút", "Cuối tuần 1 giờ"], a: 1, why: "자기 전에 20분 동안 책을 읽습니다." },
-{ q: "Đọc: '요즘 많은 사람들이 온라인으로 물건을 삽니다. 온라인 쇼핑은 편리하지만, 물건을 직접 볼 수 없다는 단점이 있습니다. 그래서 후기를 꼼꼼히 읽는 것이 중요합니다.' Nhược điểm của mua sắm online là gì?", o: ["Giao hàng chậm", "Không xem trực tiếp được sản phẩm", "Giá đắt", "Khó thanh toán"], a: 1, why: "물건을 직접 볼 수 없다는 단점이 있습니다." },
-{ q: "Đọc: '저는 작년부터 한국어를 배우고 있습니다. 처음에는 발음이 어려웠지만, 매일 연습한 덕분에 이제는 간단한 대화를 할 수 있습니다.' Hiện tại tác giả có thể làm gì bằng tiếng Hàn?", o: ["Viết luận văn dài", "Trò chuyện đơn giản", "Dịch sách", "Giảng dạy"], a: 1, why: "이제는 간단한 대화를 할 수 있습니다." },
-{ q: "Đọc: '겨울에는 눈이 많이 옵니다. 눈이 오면 길이 미끄러우니까 조심해야 합니다. 특히 계단을 내려갈 때는 손잡이를 잡는 것이 좋습니다.' Đoạn văn nhắc cẩn thận điều gì vào mùa đông?", o: ["Mặc áo ấm", "Đường trơn vì tuyết, xuống cầu thang nên vịn tay vịn", "Mang ô", "Đi giày mới"], a: 1, why: "길이 미끄러우니까 조심해야 합니다. 계단을 내려갈 때는 손잡이를 잡는 것이 좋습니다." },
-{ q: "Đọc: '우리 회사는 매주 금요일 오후에 회의를 합니다. 회의에서는 이번 주 일과 다음 주 계획을 이야기합니다. 회의 시간은 보통 한 시간입니다.' Cuộc họp công ty diễn ra khi nào, kéo dài bao lâu?", o: ["Thứ Hai sáng, 30 phút", "Thứ Sáu chiều, khoảng 1 giờ", "Thứ Tư tối, 2 giờ", "Mỗi ngày, 1 giờ"], a: 1, why: "매주 금요일 오후에 회의를 합니다. 회의 시간은 보통 한 시간입니다." },
-{ q: "Đọc: '환경을 보호하기 위해 일회용품 사용을 줄여야 합니다. 텀블러를 사용하고, 장바구니를 가지고 다니는 작은 실천이 큰 도움이 됩니다.' Đoạn văn đề xuất thực hành nhỏ nào?", o: ["Mua nhiều đồ nhựa", "Dùng bình giữ nhiệt và mang túi đi chợ", "Đi xe hơi nhiều hơn", "Dùng giấy một lần"], a: 1, why: "텀블러를 사용하고, 장바구니를 가지고 다니는 작은 실천." },
-{ q: "Đọc: '저는 아침을 꼭 먹습니다. 아침을 먹지 않으면 오전 내내 힘이 없습니다. 그래서 바쁠 때에도 간단하게라도 아침을 먹습니다.' Vì sao tác giả luôn ăn sáng?", o: ["Vì thích nấu ăn", "Vì không ăn sáng thì cả buổi sáng không có sức", "Vì bác sĩ bắt buộc", "Vì gia đình yêu cầu"], a: 1, why: "아침을 먹지 않으면 오전 내내 힘이 없습니다." },
-{ q: "Đọc: '이 영화는 실화를 바탕으로 만들었습니다. 주인공은 어려운 환경에서도 꿈을 포기하지 않았습니다. 많은 관객이 영화를 보고 감동을 받았습니다.' Bộ phim này dựa trên gì?", o: ["Truyện cổ tích", "Câu chuyện có thật", "Tiểu thuyết viễn tưởng", "Trò chơi"], a: 1, why: "실화를 바탕으로 만들었습니다: dựa trên câu chuyện có thật." },
-{ q: "Đọc: '새 학기가 시작되면 학생들은 새 교재를 삽니다. 교재가 비싸서 부담이 되는 학생들도 있습니다. 그래서 중고 교재를 사거나 도서관에서 빌리는 학생들이 늘고 있습니다.' Vì sao học sinh mua sách cũ hoặc mượn thư viện?", o: ["Vì sách mới hết hàng", "Vì sách mới đắt, gây gánh nặng", "Vì thích sách cũ", "Vì thư viện yêu cầu"], a: 1, why: "교재가 비싸서 부담이 되는 학생들도 있습니다." },
-{ q: "Đọc: '우리 집 고양이는 낮에는 자고 밤에는 활동적입니다. 밤이 되면 집 안을 돌아다니며 장난감을 가지고 놉니다. 그래서 저는 고양이 장난감을 많이 사 두었습니다.' Con mèo nhà tác giả hoạt động khi nào?", o: ["Ban ngày", "Ban đêm", "Buổi chiều", "Cả ngày"], a: 1, why: "낮에는 자고 밤에는 활동적입니다." },
-{ q: "Đọc: '여행을 가기 전에는 일기예보를 확인하는 것이 좋습니다. 비가 올 예정이면 우산과 여분의 옷을 챙겨야 합니다. 날씨를 미리 알면 여행이 더 편안해집니다.' Trước chuyến đi nên kiểm tra gì?", o: ["Giá vé", "Dự báo thời tiết", "Khách sạn", "Nhà hàng"], a: 1, why: "여행을 가기 전에는 일기예보를 확인하는 것이 좋습니다." },
-{ q: "Đọc: '저는 매일 일기를 씁니다. 일기를 쓰면 하루를 돌아볼 수 있고, 감정을 정리할 수 있습니다. 일기는 저에게 소중한 기록이 됩니다.' Viết nhật ký giúp tác giả điều gì?", o: ["Nhớ từ vựng", "Nhìn lại một ngày và sắp xếp cảm xúc", "Ngủ ngon hơn", "Học ngoại ngữ"], a: 1, why: "하루를 돌아볼 수 있고, 감정을 정리할 수 있습니다." },
-{ q: "Đọc: '이 지역은 예전에는 조용했는데, 지하철역이 생긴 후로 상점과 식당이 많이 생겼습니다. 사람들이 늘어나면서 집값도 올랐습니다.' Sau khi có ga tàu điện ngầm, khu vực này thay đổi thế nào?", o: ["Vắng vẻ hơn", "Nhiều cửa hàng, nhà hàng hơn và giá nhà tăng", "Dân số giảm", "Không thay đổi"], a: 1, why: "상점과 식당이 많이 생겼습니다. 사람들이 늘어나면서 집값도 올랐습니다." }
+{ q: "이 글의 중심 내용은 무엇인가?", passage: "요즘 많은 학교에서 거꾸로 학습이라는 새로운 수업 방식을 도입하고 있다. 거꾸로 학습에서는 학생들이 집에서 영상을 보며 미리 내용을 공부하고, 학교에서는 선생님과 함께 문제를 풀고 토론을 한다. 이 방식의 가장 큰 장점은 학생마다 자신의 속도에 맞추어 공부할 수 있다는 것이다. 이해가 잘 안 되는 부분은 영상을 여러 번 다시 볼 수 있고, 이미 아는 내용은 빨리 넘어갈 수 있다. 또한 교실에서는 학생들이 서로 의견을 나누며 깊이 있는 토론을 할 수 있어 수업이 훨씬 활발해진다. 그러나 모든 학생에게 거꾸로 학습이 잘 맞는 것은 아니다. 집에서 스스로 공부하는 습관이 없는 학생은 영상을 보지 않고 학교에 오는 경우가 많기 때문이다. 결국 거꾸로 학습이 성공하려면 학생들의 자기 주도적인 학습 태도와 선생님의 세심한 지도가 함께 필요하다.", o: ["거꾸로 학습의 장점과 한계","학교에서 영상을 만드는 방법","학생들의 시험 성적 향상 비결","선생님의 수업 준비 과정"], a: 0, why: "글은 거꾸로 학습의 장점(자기 속도에 맞춘 학습, 활발한 토론)과 한계(자기 주도 학습이 안 되는 학생에게는 효과가 없음)를 함께 다루고 있으며, 성공 조건으로 학생의 태도와 교사의 지도를 제시한다." },
+{ q: "이 글에서 일회용품 문제를 해결하는 데 가장 중요하다고 강조하는 것은 무엇인가?", passage: "한 번 쓰고 버리는 일회용품은 편리하지만 환경에 큰 부담을 준다. 플라스틱 컵 하나가 자연에서 완전히 분해되는 데 수백 년이 걸린다고 한다. 게다가 일회용품을 만드는 과정에서 많은 자원이 쓰이고, 버려진 쓰레기는 바다로 흘러가 해양 생물을 위협한다. 최근에는 바다거북이나 고래의 몸속에서 플라스틱이 발견되어 충격을 주기도 했다. 이러한 문제를 줄이기 위해 여러 나라에서 일회용품 사용을 제한하는 법을 만들고 있다. 카페에서는 종이 빨대를 제공하고, 마트에서는 비닐봉지 대신 장바구니 사용을 권장한다. 그러나 법만으로는 부족하다. 또한 일회용품 쓰레기를 처리하는 데에도 많은 비용이 들며, 이 비용은 결국 세금으로 시민들이 부담하게 된다. 소비자가 텀블러를 가지고 다니는 것처럼 일상에서 작은 실천을 꾸준히 해야 환경이 조금씩 나아질 수 있다.", o: ["일회용품을 더 튼튼하게 만드는 것","소비자의 일상 속 작은 실천","바다 쓰레기를 치우는 기술","플라스틱 컵의 가격을 올리는 것"], a: 1, why: "글의 마지막 부분에서 '법만으로는 부족하다. 소비자가 텀블러를 가지고 다니는 것처럼 일상에서 작은 실천을 꾸준히 해야 한다'고 강조하고 있다." },
+{ q: "글쓴이의 주장으로 가장 적절한 것은 무엇인가?", passage: "인공지능이 의료 분야에 빠르게 도입되고 있다. 인공지능은 수만 장의 엑스레이 사진을 분석하여 의사가 놓치기 쉬운 작은 병변까지 찾아내는 데 도움을 준다. 또한 환자의 진료 기록을 종합하여 질병의 위험을 미리 예측하기도 한다. 특히 의사가 부족한 지역에서는 인공지능 진단이 큰 도움이 될 것이라는 기대가 크다. 하지만 인공지능을 의료 현장에 적용할 때는 신중해야 한다. 인공지능의 판단이 항상 옳은 것은 아니며, 잘못된 진단이 환자에게 큰 피해를 줄 수 있기 때문이다. 또한 환자의 개인정보가 인공지능 학습에 사용되는 과정에서 정보가 유출될 위험도 있다. 특히 암 진단에서는 인공지능이 초기 단계의 작은 종양을 찾아내 치료 시기를 앞당기는 데 기여하고 있다는 연구 결과도 있다. 따라서 인공지능은 의사를 대신하는 존재가 아니라 의사의 판단을 돕는 도구로 활용되어야 하며, 최종 결정은 반드시 사람이 내려야 한다.", o: ["인공지능 진단은 아직 의료 현장에서 쓸 수 없다","환자 정보는 인공지능 학습에 자유롭게 써야 한다","인공지능이 의사를 완전히 대체해야 한다","인공지능은 의사의 판단을 돕는 도구로 쓰이고 최종 결정은 사람이 내려야 한다"], a: 3, why: "마지막 문장 '인공지능은 의사를 대신하는 존재가 아니라 의사의 판단을 돕는 도구로 활용되어야 하며, 최종 결정은 반드시 사람이 내려야 한다'가 글쓴이의 주장이다." },
+{ q: "전문가들이 자영업자에게 조언하는 내용은 무엇인가?", passage: "작은 가게를 운영하는 자영업자들은 요즘 큰 어려움을 겪고 있다. 임대료와 재료비가 계속 오르는 데 비해 손님 수는 늘지 않기 때문이다. 특히 경기가 나빠지면 사람들은 외식을 줄이고 지출을 아끼므로 작은 식당이나 카페가 가장 먼저 타격을 받는다. 이러한 상황에서 많은 자영업자들이 온라인 배달이나 포장을 시작하며 새로운 길을 찾고 있다. 또한 단골손님을 만들기 위해 가게만의 특별한 메뉴를 개발하거나, 동네 주민들과 친밀한 관계를 쌓으려는 노력을 하기도 한다. 전문가들은 자영업자가 살아남기 위해서는 무조건 가격을 낮추기보다 가게만의 개성과 가치를 분명히 하는 것이 중요하다고 조언한다. 최근에는 경기 침체와 물가 상승이 겹치면서 문을 닫는 가게가 늘고 있어 자영업자들의 고민은 더욱 깊어지고 있다. 결국 위기를 기회로 바꾸는 것은 가게의 특색을 살리는 창의적인 노력에 달려 있다.", o: ["가격을 무조건 낮추어 손님을 끌어야 한다","온라인 배달을 중단하고 매장만 운영해야 한다","가게만의 개성과 가치를 분명히 해야 한다","임대료를 내지 않고 버텨야 한다"], a: 2, why: "글에서 전문가들은 '무조건 가격을 낮추기보다 가게만의 개성과 가치를 분명히 하는 것이 중요하다'고 조언한다." },
+{ q: "이 글의 내용과 일치하는 것은 무엇인가?", passage: "전통 시장은 오래된 한국의 생활 문화를 보여 주는 곳이다. 시장에서는 상인들이 손님을 부르는 소리, 신선한 채소와 생선 냄새, 그리고 사람들과 나누는 정겨운 대화가 어우러져 활기찬 분위기를 만든다. 그러나 대형 마트와 온라인 쇼핑이 늘어나면서 전통 시장을 찾는 손님이 점점 줄고 있다. 이에 따라 많은 시장이 변화를 시도하고 있다. 오래된 점포를 새롭게 꾸미고, 젊은 상인들이 직접 만든 수공예품이나 특색 있는 먹거리를 판매하기 시작한 것이다. 또 일부 시장은 야시장을 열거나 체험 프로그램을 운영하여 관광객의 발길을 끌고 있다. 시장 상인들은 손님의 취향을 기억하고 먼저 말을 건네는 등 대형 마트에서는 느낄 수 없는 따뜻한 정을 나누어 준다. 이러한 노력 덕분에 전통 시장은 단순히 물건을 사고파는 곳을 넘어 지역의 문화와 정서를 느낄 수 있는 공간으로 다시 태어나고 있다.", o: ["전통 시장은 대형 마트 때문에 이미 완전히 사라졌다","전통 시장이 문화 공간으로 거듭나기 위해 다양한 변화를 시도하고 있다","전통 시장에서는 온라인 쇼핑만 이루어진다","젊은 상인들은 전통 시장을 떠나고 있다"], a: 1, why: "글은 전통 시장이 점포를 새롭게 꾸미고, 수공예품과 특색 있는 먹거리를 팔며, 야시장과 체험 프로그램을 운영하는 등 변화를 시도하여 문화 공간으로 다시 태어나고 있다고 설명한다." },
+{ q: "이 글에서 전문가들이 권장하는 건강한 수면 습관이 아닌 것은 무엇인가?", passage: "충분한 수면은 건강을 지키는 데 매우 중요하다. 잠을 자는 동안 우리 몸은 하루 동안 쌓인 피로를 회복하고, 낮에 배운 내용을 기억으로 정리한다. 그런데 현대인들은 바쁜 일정과 휴대전화 사용 때문에 잠을 충분히 자지 못하는 경우가 많다. 수면이 부족해지면 집중력이 떨어지고 기분이 나빠지며, 심하면 면역력이 약해져 질병에 걸리기 쉬워진다. 전문가들은 건강한 수면을 위해 몇 가지 습관을 권장한다. 매일 같은 시간에 자고 일어나는 것, 자기 전 한 시간 동안은 휴대전화를 보지 않는 것, 침실을 어둡고 조용하게 유지하는 것이다. 또한 잠이 부족하면 식욕을 조절하는 호르몬의 균형이 깨져 과식하기 쉬워지고, 결국 체중 관리에도 나쁜 영향을 미친다. 잠은 시간을 아끼기 위해 줄일 수 있는 것이 아니라, 건강하고 활기찬 생활을 위한 필수 조건이다.", o: ["매일 같은 시간에 자고 일어나기","자기 전 한 시간 동안 휴대전화 보지 않기","침실을 어둡고 조용하게 유지하기","잠자는 시간을 줄여서 다른 일을 하기"], a: 3, why: "글의 마지막 부분에서 '잠은 시간을 아끼기 위해 줄일 수 있는 것이 아니라'고 분명히 말하고 있다. 나머지 세 가지는 모두 전문가들이 권장하는 습관이다." },
+{ q: "세종대왕이 한글을 만든 가장 큰 목적은 무엇인가?", passage: "한글은 1443년 세종대왕과 집현전 학자들이 만든 문자이다. 한글이 만들어지기 전, 한국 사람들은 한자를 사용해 글을 썼기 때문에 배우기 어려웠고, 글을 읽고 쓸 수 있는 사람은 소수에 불과했다. 세종대왕은 백성들이 자신의 생각을 쉽게 글로 표현할 수 있기를 바라며 한글을 만들었다. 한글은 소리의 원리를 바탕으로 만들어져 자음과 모음을 조합하면 수많은 글자를 만들 수 있다. 처음에는 일부 양반들이 한글을 낮게 보았지만, 한글은 백성들 사이에서 빠르게 퍼져 나갔다. 오늘날 한글은 과학적이고 배우기 쉬운 문자라는 평가를 받으며 전 세계 사람들에게 사랑받고 있다. 한글의 자음과 모음은 발음 기관의 모양과 하늘, 땅, 사람을 본떠 만들었다고 전해지며, 이러한 과학적인 원리는 오늘날에도 높이 평가받고 있다. 한글날은 매년 10월 9일에 기념된다.", o: ["백성들이 쉽게 글을 읽고 쓸 수 있게 하기 위해서","외국과의 무역을 늘리기 위해서","한자를 완전히 없애기 위해서","양반들의 지위를 높이기 위해서"], a: 0, why: "글에서 '세종대왕은 백성들이 자신의 생각을 쉽게 글로 표현할 수 있기를 바라며 한글을 만들었다'고 설명한다." },
+{ q: "이 글에서 앞으로 중요해질 것으로 전망하는 것은 무엇인가?", passage: "인공위성은 오늘날 우리 생활에 깊이 자리 잡고 있다. 위성은 날씨를 관측하여 태풍의 이동 경로를 예측하고, 농작물의 상태를 파악하여 농부들에게 필요한 정보를 제공한다. 또한 위성은 통신과 위치 안내에도 쓰인다. 길을 찾을 때 사용하는 지도 앱도 위성 신호 덕분에 작동한다. 최근에는 여러 나라가 작은 위성을 많이 쏘아 올려 지구 전체를 더 자세히 관찰하려는 경쟁을 벌이고 있다. 하지만 위성이 많아지면서 문제도 생기고 있다. 수명을 다한 위성이 우주 쓰레기가 되어 다른 위성과 충돌할 위험이 커지고 있기 때문이다. 또한 위성은 산불이나 지진 같은 재난이 발생했을 때 피해 지역을 빠르게 파악하여 구조 활동에 도움을 주고 인명 피해를 줄이는 데 중요한 역할을 한다. 따라서 앞으로는 위성을 쏘아 올리는 것만큼이나 우주 쓰레기를 줄이는 기술도 중요해질 것이다.", o: ["위성의 크기를 더 크게 만드는 것","위성 발사를 완전히 중단하는 것","우주 쓰레기를 줄이는 기술","지도 앱을 없애는 것"], a: 2, why: "마지막 문장 '앞으로는 위성을 쏘아 올리는 것만큼이나 우주 쓰레기를 줄이는 기술도 중요해질 것이다'가 글의 결론이다." },
+{ q: "이 글의 내용과 일치하지 않는 것은 무엇인가?", passage: "한국은 세계에서 아이를 가장 적게 낳는 나라 중 하나이다. 젊은 부부들이 아이를 낳지 않으려는 이유는 다양하다. 집값이 너무 비싸고, 아이를 키우는 데 드는 비용이 크며, 일과 육아를 함께 하기 어렵다는 점이 대표적이다. 출산율이 낮아지면 젊은 인구가 줄고 노인 인구가 늘어나 사회 전체가 고령화된다. 그러면 일할 수 있는 사람이 부족해지고, 연금과 의료비 부담이 커져 국가 재정에 큰 압박이 생긴다. 정부는 출산 장려금을 늘리고 육아휴직 제도를 개선하는 등 여러 정책을 내놓고 있다. 그러나 돈만으로는 문제가 해결되지 않는다. 또한 젊은 세대가 결혼 자체를 미루는 경우도 늘고 있어, 출산율 하락은 단순한 경제 문제를 넘어 사회 구조의 변화와도 연결되어 있다. 아이를 낳아 기르는 것이 행복한 선택이 될 수 있도록 사회 전체의 인식과 제도가 함께 바뀌어야 한다.", o: ["집값과 양육비가 출산을 망설이게 하는 이유이다","출산율 문제는 돈만으로 충분히 해결할 수 있다","정부는 출산 장려금과 육아휴직 개선 등 여러 정책을 내놓고 있다","출산율이 낮아지면 고령화가 심해지고 국가 재정 부담이 커진다"], a: 1, why: "글의 마지막 부분에서 '돈만으로는 문제가 해결되지 않는다. 아이를 낳아 기르는 것이 행복한 선택이 될 수 있도록 사회 전체의 인식과 제도가 함께 바뀌어야 한다'고 말한다." },
+{ q: "이 글에서 글쓴이가 독자에게 권하는 독서 습관은 무엇인가?", passage: "독서는 마음의 양식이라는 말이 있다. 책을 읽으면 새로운 지식을 얻을 수 있을 뿐만 아니라 다른 사람의 삶을 간접적으로 경험할 수 있다. 소설을 읽으며 주인공의 기쁨과 슬픔을 함께 느끼다 보면 타인을 이해하는 마음이 자란다. 또한 독서는 사고력을 기르는 데도 큰 도움이 된다. 글쓴이의 주장을 따라가며 찬성하거나 반대하는 생각을 하다 보면 스스로 생각하는 힘이 강해진다. 그러나 독서의 효과는 단기간에 나타나지 않는다. 매일 조금씩이라도 꾸준히 책을 읽어야 한다. 바쁜 현대인에게는 하루 20분 독서부터 시작하는 것이 좋다. 책을 통해 얻은 지식은 학교 공부나 직장 생활에서도 도움이 되며, 책을 많이 읽은 사람일수록 글을 잘 쓰고 말을 조리 있게 하는 경우가 많다. 독서는 하루의 피로를 풀어 주는 즐거운 휴식이 되기도 한다. 작은 습관이 쌓이면 어느새 독서는 삶의 즐거운 일부가 될 것이다.", o: ["매일 조금씩 꾸준히, 하루 20분부터 시작하는 것","한 번에 두꺼운 책을 끝까지 읽는 것","소설만 골라서 읽는 것","글쓴이의 주장에 무조건 동의하는 것"], a: 0, why: "글에서 '매일 조금씩이라도 꾸준히 책을 읽어야 한다. 바쁜 현대인에게는 하루 20분 독서부터 시작하는 것이 좋다'고 권한다." },
+{ q: "과학자들이 기후 변화의 가장 큰 원인으로 지적하는 것은 무엇인가?", passage: "지구 온난화로 인한 기후 변화는 이제 먼 미래의 이야기가 아니다. 최근 몇 년 동안 기록적인 폭염과 홍수, 가뭄이 세계 곳곳에서 반복되고 있다. 농작물이 말라 죽고, 해수면이 상승하면서 해안 도시가 침수될 위험도 커지고 있다. 과학자들은 이러한 변화의 가장 큰 원인이 인간의 활동으로 배출되는 온실가스라고 지적한다. 자동차와 공장에서 나오는 이산화탄소가 대기 중에 쌓이면서 지구의 온도가 점점 올라가고 있기 때문이다. 이에 따라 세계 각국은 온실가스 배출을 줄이기 위해 태양광과 풍력 같은 재생 에너지의 비중을 늘리고 있다. 기업들도 탄소 배출을 줄이는 기술에 투자하고 있다. 하지만 전문가들은 기술만으로는 부족하다고 말한다. 또한 기후 변화로 인해 생태계도 큰 영향을 받고 있다. 기온이 오르면서 동식물의 서식지가 바뀌고, 일부 생물은 멸종 위기에 처했다. 이러한 생태계의 변화는 결국 인간의 먹거리와 생활에도 영향을 미치므로, 기후 문제는 환경 문제만이 아니라 인간의 생존과 직결된 문제이다. 일상에서 에너지를 아끼고 대중교통을 이용하는 시민들의 작은 실천이 함께할 때 기후 변화를 늦출 수 있다.", o: ["인간의 활동으로 배출되는 온실가스","태양의 활동이 강해지는 것","지구의 자연적인 온도 변화","해수면의 자연스러운 상승"], a: 0, why: "글에서 '이러한 변화의 가장 큰 원인이 인간의 활동으로 배출되는 온실가스'라고 분명히 지적하고 있다." },
+{ q: "이 글의 내용과 일치하지 않는 것은 무엇인가?", passage: "지구 온난화로 인한 기후 변화는 이제 먼 미래의 이야기가 아니다. 최근 몇 년 동안 기록적인 폭염과 홍수, 가뭄이 세계 곳곳에서 반복되고 있다. 농작물이 말라 죽고, 해수면이 상승하면서 해안 도시가 침수될 위험도 커지고 있다. 과학자들은 이러한 변화의 가장 큰 원인이 인간의 활동으로 배출되는 온실가스라고 지적한다. 자동차와 공장에서 나오는 이산화탄소가 대기 중에 쌓이면서 지구의 온도가 점점 올라가고 있기 때문이다. 이에 따라 세계 각국은 온실가스 배출을 줄이기 위해 태양광과 풍력 같은 재생 에너지의 비중을 늘리고 있다. 기업들도 탄소 배출을 줄이는 기술에 투자하고 있다. 하지만 전문가들은 기술만으로는 부족하다고 말한다. 또한 기후 변화로 인해 생태계도 큰 영향을 받고 있다. 기온이 오르면서 동식물의 서식지가 바뀌고, 일부 생물은 멸종 위기에 처했다. 이러한 생태계의 변화는 결국 인간의 먹거리와 생활에도 영향을 미치므로, 기후 문제는 환경 문제만이 아니라 인간의 생존과 직결된 문제이다. 일상에서 에너지를 아끼고 대중교통을 이용하는 시민들의 작은 실천이 함께할 때 기후 변화를 늦출 수 있다.", o: ["최근 폭염, 홍수, 가뭄이 세계 곳곳에서 반복되고 있다","각국이 재생 에너지의 비중을 늘리고 있다","기술만으로 기후 변화를 충분히 막을 수 있다","해수면 상승으로 해안 도시 침수 위험이 커지고 있다"], a: 2, why: "글의 마지막 부분에서 '기술만으로는 부족하다'고 말하며 시민들의 작은 실천이 함께해야 한다고 강조한다." },
+{ q: "이 글에서 기후 변화를 늦추기 위해 필요하다고 말하는 시민들의 실천은 무엇인가?", passage: "지구 온난화로 인한 기후 변화는 이제 먼 미래의 이야기가 아니다. 최근 몇 년 동안 기록적인 폭염과 홍수, 가뭄이 세계 곳곳에서 반복되고 있다. 농작물이 말라 죽고, 해수면이 상승하면서 해안 도시가 침수될 위험도 커지고 있다. 과학자들은 이러한 변화의 가장 큰 원인이 인간의 활동으로 배출되는 온실가스라고 지적한다. 자동차와 공장에서 나오는 이산화탄소가 대기 중에 쌓이면서 지구의 온도가 점점 올라가고 있기 때문이다. 이에 따라 세계 각국은 온실가스 배출을 줄이기 위해 태양광과 풍력 같은 재생 에너지의 비중을 늘리고 있다. 기업들도 탄소 배출을 줄이는 기술에 투자하고 있다. 하지만 전문가들은 기술만으로는 부족하다고 말한다. 또한 기후 변화로 인해 생태계도 큰 영향을 받고 있다. 기온이 오르면서 동식물의 서식지가 바뀌고, 일부 생물은 멸종 위기에 처했다. 이러한 생태계의 변화는 결국 인간의 먹거리와 생활에도 영향을 미치므로, 기후 문제는 환경 문제만이 아니라 인간의 생존과 직결된 문제이다. 일상에서 에너지를 아끼고 대중교통을 이용하는 시민들의 작은 실천이 함께할 때 기후 변화를 늦출 수 있다.", o: ["자동차를 더 많이 이용하는 것","에어컨 사용을 늘리는 것","해외여행을 자주 가는 것","에너지를 아끼고 대중교통을 이용하는 것"], a: 3, why: "마지막 문장에서 '일상에서 에너지를 아끼고 대중교통을 이용하는 시민들의 작은 실천이 함께할 때 기후 변화를 늦출 수 있다'고 말한다." },
+{ q: "이 글에서 인공지능이 이미 사람보다 빠르고 정확하게 처리한다고 한 일은 무엇인가?", passage: "인공지능의 발전은 일자리에 큰 변화를 가져오고 있다. 단순하고 반복적인 업무는 인공지능과 로봇이 빠르게 대신하고 있어, 일부 직업이 사라질 것이라는 우려가 크다. 특히 계산, 자료 정리, 단순 상담 같은 일은 이미 인공지능이 사람보다 빠르고 정확하게 처리한다. 그러나 모든 일자리가 사라지는 것은 아니다. 인공지능이 만든 결과를 해석하고, 사람을 직접 만나 마음을 나누는 일은 여전히 사람의 몫이다. 또한 인공지능을 만들고 관리하는 새로운 직업도 계속 생겨나고 있다. 전문가들은 앞으로 중요한 능력이 단순한 지식이 아니라 창의력과 소통 능력, 그리고 인공지능을 잘 활용하는 능력이라고 말한다. 또한 인공지능이 확산되면서 교육을 받는 방식도 달라지고 있다. 학교에서는 암기 중심의 교육보다 문제를 찾고 해결하는 능력을 기르는 교육이 중요해지고 있으며, 직장에서도 새로운 기술을 계속 배우는 평생 학습이 필수가 되고 있다. 결국 인공지능 시대에 살아남는 방법은 인공지능과 경쟁하는 것이 아니라, 인공지능을 도구로 삼아 인간만이 할 수 있는 가치를 키우는 것이다.", o: ["사람의 마음을 위로하는 일","계산, 자료 정리, 단순 상담 같은 일","새로운 예술 작품을 창작하는 일","아이들을 가르치는 일"], a: 1, why: "글에서 '계산, 자료 정리, 단순 상담 같은 일은 이미 인공지능이 사람보다 빠르고 정확하게 처리한다'고 말한다." },
+{ q: "전문가들이 인공지능 시대에 중요하다고 말하는 능력은 무엇인가?", passage: "인공지능의 발전은 일자리에 큰 변화를 가져오고 있다. 단순하고 반복적인 업무는 인공지능과 로봇이 빠르게 대신하고 있어, 일부 직업이 사라질 것이라는 우려가 크다. 특히 계산, 자료 정리, 단순 상담 같은 일은 이미 인공지능이 사람보다 빠르고 정확하게 처리한다. 그러나 모든 일자리가 사라지는 것은 아니다. 인공지능이 만든 결과를 해석하고, 사람을 직접 만나 마음을 나누는 일은 여전히 사람의 몫이다. 또한 인공지능을 만들고 관리하는 새로운 직업도 계속 생겨나고 있다. 전문가들은 앞으로 중요한 능력이 단순한 지식이 아니라 창의력과 소통 능력, 그리고 인공지능을 잘 활용하는 능력이라고 말한다. 또한 인공지능이 확산되면서 교육을 받는 방식도 달라지고 있다. 학교에서는 암기 중심의 교육보다 문제를 찾고 해결하는 능력을 기르는 교육이 중요해지고 있으며, 직장에서도 새로운 기술을 계속 배우는 평생 학습이 필수가 되고 있다. 결국 인공지능 시대에 살아남는 방법은 인공지능과 경쟁하는 것이 아니라, 인공지능을 도구로 삼아 인간만이 할 수 있는 가치를 키우는 것이다.", o: ["많은 지식을 외우는 능력","빠르게 계산하는 능력","창의력, 소통 능력, 인공지능을 활용하는 능력","반복적인 일을 오래 참는 능력"], a: 2, why: "글에서 '앞으로 중요한 능력이 단순한 지식이 아니라 창의력과 소통 능력, 그리고 인공지능을 잘 활용하는 능력'이라고 말한다." },
+{ q: "이 글의 결론으로 가장 적절한 것은 무엇인가?", passage: "인공지능의 발전은 일자리에 큰 변화를 가져오고 있다. 단순하고 반복적인 업무는 인공지능과 로봇이 빠르게 대신하고 있어, 일부 직업이 사라질 것이라는 우려가 크다. 특히 계산, 자료 정리, 단순 상담 같은 일은 이미 인공지능이 사람보다 빠르고 정확하게 처리한다. 그러나 모든 일자리가 사라지는 것은 아니다. 인공지능이 만든 결과를 해석하고, 사람을 직접 만나 마음을 나누는 일은 여전히 사람의 몫이다. 또한 인공지능을 만들고 관리하는 새로운 직업도 계속 생겨나고 있다. 전문가들은 앞으로 중요한 능력이 단순한 지식이 아니라 창의력과 소통 능력, 그리고 인공지능을 잘 활용하는 능력이라고 말한다. 또한 인공지능이 확산되면서 교육을 받는 방식도 달라지고 있다. 학교에서는 암기 중심의 교육보다 문제를 찾고 해결하는 능력을 기르는 교육이 중요해지고 있으며, 직장에서도 새로운 기술을 계속 배우는 평생 학습이 필수가 되고 있다. 결국 인공지능 시대에 살아남는 방법은 인공지능과 경쟁하는 것이 아니라, 인공지능을 도구로 삼아 인간만이 할 수 있는 가치를 키우는 것이다.", o: ["인공지능과 경쟁하여 인공지능보다 더 빨라져야 한다","인공지능의 발전을 막아야 일자리를 지킬 수 있다","모든 사람이 인공지능을 만드는 직업을 가져야 한다","인공지능을 도구로 삼아 인간만이 할 수 있는 가치를 키워야 한다"], a: 3, why: "마지막 문장 '인공지능 시대에 살아남는 방법은 인공지능과 경쟁하는 것이 아니라, 인공지능을 도구로 삼아 인간만이 할 수 있는 가치를 키우는 것이다'가 글의 결론이다." },
+{ q: "지방 도시의 인구가 줄어드는 가장 큰 이유는 무엇인가?", passage: "한국의 많은 지방 도시가 인구 감소로 어려움을 겪고 있다. 젊은 사람들이 일자리를 찾아 대도시로 떠나면서 지방에는 노인만 남는 경우가 많아졌다. 학생 수가 줄어 학교가 문을 닫고, 가게와 병원도 하나둘씩 사라지면서 도시의 활력이 떨어지고 있다. 이러한 현상을 막기 위해 정부는 지방에 기업을 유치하고, 청년들에게 정착 지원금을 주는 정책을 펴고 있다. 또한 일부 지방 도시에서는 빈집을 고쳐 예술가나 창업가들에게 저렴하게 빌려 주며 새로운 주민을 맞이하고 있다. 도시의 특색을 살린 축제를 열어 관광객을 유치하는 곳도 늘고 있다. 하지만 전문가들은 단기적인 지원만으로는 한계가 있다고 지적한다. 인구가 줄어든 지방 도시에서는 빈집이 늘어 주거 환경이 나빠지고, 상권이 위축되면서 남아 있는 주민들의 생활도 불편해지고 있다. 이러한 악순환을 끊으려면 단기 지원에 그치지 않고 지역의 산업과 문화를 함께 살리는 장기적인 계획이 필요하다. 지방 도시가 살아나려면 일자리와 교육, 의료 시설이 함께 갖추어져 젊은 사람들이 머물고 싶은 곳이 되어야 한다.", o: ["젊은 사람들이 일자리를 찾아 대도시로 떠나기 때문이다","지방의 집값이 너무 비싸기 때문이다","지방에 학교가 너무 많기 때문이다","관광객이 지방을 찾지 않기 때문이다"], a: 0, why: "글의 두 번째 문장에서 '젊은 사람들이 일자리를 찾아 대도시로 떠나면서 지방에는 노인만 남는 경우가 많아졌다'고 설명한다." },
+{ q: "이 글에서 소개한 지방 도시들의 노력으로 옳지 않은 것은 무엇인가?", passage: "한국의 많은 지방 도시가 인구 감소로 어려움을 겪고 있다. 젊은 사람들이 일자리를 찾아 대도시로 떠나면서 지방에는 노인만 남는 경우가 많아졌다. 학생 수가 줄어 학교가 문을 닫고, 가게와 병원도 하나둘씩 사라지면서 도시의 활력이 떨어지고 있다. 이러한 현상을 막기 위해 정부는 지방에 기업을 유치하고, 청년들에게 정착 지원금을 주는 정책을 펴고 있다. 또한 일부 지방 도시에서는 빈집을 고쳐 예술가나 창업가들에게 저렴하게 빌려 주며 새로운 주민을 맞이하고 있다. 도시의 특색을 살린 축제를 열어 관광객을 유치하는 곳도 늘고 있다. 하지만 전문가들은 단기적인 지원만으로는 한계가 있다고 지적한다. 인구가 줄어든 지방 도시에서는 빈집이 늘어 주거 환경이 나빠지고, 상권이 위축되면서 남아 있는 주민들의 생활도 불편해지고 있다. 이러한 악순환을 끊으려면 단기 지원에 그치지 않고 지역의 산업과 문화를 함께 살리는 장기적인 계획이 필요하다. 지방 도시가 살아나려면 일자리와 교육, 의료 시설이 함께 갖추어져 젊은 사람들이 머물고 싶은 곳이 되어야 한다.", o: ["빈집을 고쳐 예술가나 창업가에게 저렴하게 빌려 주기","도시의 특색을 살린 축제로 관광객 유치하기","모든 학교를 대도시로 옮기기","청년들에게 정착 지원금 주기"], a: 2, why: "글에서는 빈집 활용, 축제 개최, 정착 지원금 정책을 소개하지만 '모든 학교를 대도시로 옮기기'는 언급되지 않았고, 오히려 학교가 문을 닫는 것을 문제로 지적한다." },
+{ q: "전문가들이 지방 도시가 살아나기 위해 필요하다고 말하는 것은 무엇인가?", passage: "한국의 많은 지방 도시가 인구 감소로 어려움을 겪고 있다. 젊은 사람들이 일자리를 찾아 대도시로 떠나면서 지방에는 노인만 남는 경우가 많아졌다. 학생 수가 줄어 학교가 문을 닫고, 가게와 병원도 하나둘씩 사라지면서 도시의 활력이 떨어지고 있다. 이러한 현상을 막기 위해 정부는 지방에 기업을 유치하고, 청년들에게 정착 지원금을 주는 정책을 펴고 있다. 또한 일부 지방 도시에서는 빈집을 고쳐 예술가나 창업가들에게 저렴하게 빌려 주며 새로운 주민을 맞이하고 있다. 도시의 특색을 살린 축제를 열어 관광객을 유치하는 곳도 늘고 있다. 하지만 전문가들은 단기적인 지원만으로는 한계가 있다고 지적한다. 인구가 줄어든 지방 도시에서는 빈집이 늘어 주거 환경이 나빠지고, 상권이 위축되면서 남아 있는 주민들의 생활도 불편해지고 있다. 이러한 악순환을 끊으려면 단기 지원에 그치지 않고 지역의 산업과 문화를 함께 살리는 장기적인 계획이 필요하다. 지방 도시가 살아나려면 일자리와 교육, 의료 시설이 함께 갖추어져 젊은 사람들이 머물고 싶은 곳이 되어야 한다.", o: ["단기적인 지원금을 더 늘리는 것","일자리와 교육, 의료 시설이 함께 갖추어져 젊은 사람들이 머물고 싶은 곳이 되는 것","대도시의 인구를 지방으로 강제 이동시키는 것","축제를 매일 여는 것"], a: 1, why: "마지막 문장에서 '지방 도시가 살아나려면 일자리와 교육, 의료 시설이 함께 갖추어져 젊은 사람들이 머물고 싶은 곳이 되어야 한다'고 말한다." },
+{ q: "한류의 인기가 가져온 결과로 글에서 언급한 것은 무엇인가?", passage: "한국의 대중문화, 이른바 한류는 이제 세계적인 현상이 되었다. 한국의 드라마와 음악, 영화가 아시아를 넘어 유럽과 미주에서도 큰 인기를 끌고 있다. 한류의 인기는 한국어와 한국 음식, 한국 관광에 대한 관심으로 이어지고 있다. 세계 여러 나라에서 한국어를 배우는 사람이 늘고, 한국을 찾는 관광객의 수도 계속 증가하고 있다. 한류가 성공한 이유는 무엇일까. 전문가들은 보편적인 감동과 높은 완성도를 꼽는다. 한국의 드라마는 가족과 사랑이라는 누구나 공감할 수 있는 이야기를 다루면서도, 세련된 영상과 음악으로 높은 완성도를 보여 준다. 또한 인터넷과 소셜 미디어의 발달로 한국의 콘텐츠가 전 세계에 빠르게 퍼질 수 있었다. 한류의 영향으로 한국어를 배우는 외국인 유학생도 늘고 있으며, 이들은 한국 대학에서 공부한 뒤 자국으로 돌아가 한국 문화를 알리는 역할을 하기도 한다. 이처럼 한류는 문화 교류를 넘어 사람과 사람 사이의 이해를 넓히는 다리가 되고 있다. 한류는 단순한 유행을 넘어 한국 문화의 매력을 세계에 알리는 중요한 창구가 되었다.", o: ["한국의 전통 음식이 사라진 것","한국 영화의 제작이 중단된 것","한국어 학습자가 줄어든 것","한국어를 배우는 사람과 한국 관광객이 늘어난 것"], a: 3, why: "글에서 '세계 여러 나라에서 한국어를 배우는 사람이 늘고, 한국을 찾는 관광객의 수도 계속 증가하고 있다'고 말한다." },
+{ q: "전문가들이 한류가 성공한 이유로 꼽는 것은 무엇인가?", passage: "한국의 대중문화, 이른바 한류는 이제 세계적인 현상이 되었다. 한국의 드라마와 음악, 영화가 아시아를 넘어 유럽과 미주에서도 큰 인기를 끌고 있다. 한류의 인기는 한국어와 한국 음식, 한국 관광에 대한 관심으로 이어지고 있다. 세계 여러 나라에서 한국어를 배우는 사람이 늘고, 한국을 찾는 관광객의 수도 계속 증가하고 있다. 한류가 성공한 이유는 무엇일까. 전문가들은 보편적인 감동과 높은 완성도를 꼽는다. 한국의 드라마는 가족과 사랑이라는 누구나 공감할 수 있는 이야기를 다루면서도, 세련된 영상과 음악으로 높은 완성도를 보여 준다. 또한 인터넷과 소셜 미디어의 발달로 한국의 콘텐츠가 전 세계에 빠르게 퍼질 수 있었다. 한류의 영향으로 한국어를 배우는 외국인 유학생도 늘고 있으며, 이들은 한국 대학에서 공부한 뒤 자국으로 돌아가 한국 문화를 알리는 역할을 하기도 한다. 이처럼 한류는 문화 교류를 넘어 사람과 사람 사이의 이해를 넓히는 다리가 되고 있다. 한류는 단순한 유행을 넘어 한국 문화의 매력을 세계에 알리는 중요한 창구가 되었다.", o: ["보편적인 감동과 높은 완성도","값싼 제작비와 짧은 제작 기간","정부의 강제적인 홍보 정책","외국어 더빙 기술의 발달"], a: 0, why: "글에서 '전문가들은 보편적인 감동과 높은 완성도를 꼽는다'고 말한다." },
+{ q: "이 글에서 한류의 확산에 도움을 준 요인으로 언급한 것은 무엇인가?", passage: "한국의 대중문화, 이른바 한류는 이제 세계적인 현상이 되었다. 한국의 드라마와 음악, 영화가 아시아를 넘어 유럽과 미주에서도 큰 인기를 끌고 있다. 한류의 인기는 한국어와 한국 음식, 한국 관광에 대한 관심으로 이어지고 있다. 세계 여러 나라에서 한국어를 배우는 사람이 늘고, 한국을 찾는 관광객의 수도 계속 증가하고 있다. 한류가 성공한 이유는 무엇일까. 전문가들은 보편적인 감동과 높은 완성도를 꼽는다. 한국의 드라마는 가족과 사랑이라는 누구나 공감할 수 있는 이야기를 다루면서도, 세련된 영상과 음악으로 높은 완성도를 보여 준다. 또한 인터넷과 소셜 미디어의 발달로 한국의 콘텐츠가 전 세계에 빠르게 퍼질 수 있었다. 한류의 영향으로 한국어를 배우는 외국인 유학생도 늘고 있으며, 이들은 한국 대학에서 공부한 뒤 자국으로 돌아가 한국 문화를 알리는 역할을 하기도 한다. 이처럼 한류는 문화 교류를 넘어 사람과 사람 사이의 이해를 넓히는 다리가 되고 있다. 한류는 단순한 유행을 넘어 한국 문화의 매력을 세계에 알리는 중요한 창구가 되었다.", o: ["한국어의 문법이 단순해진 것","외국 방송국의 요청","인터넷과 소셜 미디어의 발달","관광 비자 발급의 중단"], a: 2, why: "글에서 '인터넷과 소셜 미디어의 발달로 한국의 콘텐츠가 전 세계에 빠르게 퍼질 수 있었다'고 말한다." },
+{ q: "가족만으로 노인을 돌보기 어려워진 이유로 글에서 든 것은 무엇인가?", passage: "한국은 빠른 속도로 고령 사회에 접어들고 있다. 노인 인구가 늘면서 돌봄의 문제가 사회의 중요한 과제가 되었다. 과거에는 가족이 노인을 돌보는 것이 당연했지만, 핵가족이 늘고 맞벌이 부부가 많아지면서 가족만으로는 노인을 돌보기 어려워졌다. 이에 따라 요양원과 방문 돌봄 서비스 같은 전문 돌봄 제도가 확대되고 있다. 그러나 돌봄 인력은 여전히 부족하고, 돌봄 노동자의 처우도 좋지 않은 것이 현실이다. 전문가들은 돌봄을 개인의 문제가 아니라 사회 전체가 함께 해결해야 할 과제로 보아야 한다고 말한다. 정부가 돌봄 시설을 늘리고 돌봄 노동자의 임금과 근무 환경을 개선해야 하며, 지역사회가 함께 돌보는 체계를 만들어야 한다. 또한 돌봄 로봇이나 스마트 기기를 활용해 노인의 안전을 확인하는 기술도 개발되고 있지만, 기계가 사람의 따뜻한 손길을 완전히 대신할 수는 없다. 결국 기술과 제도가 함께 발전하더라도, 노인을 존중하고 배려하는 사회의 마음가짐이 가장 중요하다. 노인을 잘 돌보는 사회는 결국 우리 모두가 나이 들어 살아갈 사회를 준비하는 일이다.", o: ["노인 인구가 줄어들었기 때문이다","핵가족이 늘고 맞벌이 부부가 많아졌기 때문이다","요양원이 너무 많아졌기 때문이다","노인들이 가족과 사는 것을 싫어하기 때문이다"], a: 1, why: "글에서 '핵가족이 늘고 맞벌이 부부가 많아지면서 가족만으로는 노인을 돌보기 어려워졌다'고 설명한다." },
+{ q: "이 글에서 돌봄 문제의 현재 현실로 지적한 것은 무엇인가?", passage: "한국은 빠른 속도로 고령 사회에 접어들고 있다. 노인 인구가 늘면서 돌봄의 문제가 사회의 중요한 과제가 되었다. 과거에는 가족이 노인을 돌보는 것이 당연했지만, 핵가족이 늘고 맞벌이 부부가 많아지면서 가족만으로는 노인을 돌보기 어려워졌다. 이에 따라 요양원과 방문 돌봄 서비스 같은 전문 돌봄 제도가 확대되고 있다. 그러나 돌봄 인력은 여전히 부족하고, 돌봄 노동자의 처우도 좋지 않은 것이 현실이다. 전문가들은 돌봄을 개인의 문제가 아니라 사회 전체가 함께 해결해야 할 과제로 보아야 한다고 말한다. 정부가 돌봄 시설을 늘리고 돌봄 노동자의 임금과 근무 환경을 개선해야 하며, 지역사회가 함께 돌보는 체계를 만들어야 한다. 또한 돌봄 로봇이나 스마트 기기를 활용해 노인의 안전을 확인하는 기술도 개발되고 있지만, 기계가 사람의 따뜻한 손길을 완전히 대신할 수는 없다. 결국 기술과 제도가 함께 발전하더라도, 노인을 존중하고 배려하는 사회의 마음가짐이 가장 중요하다. 노인을 잘 돌보는 사회는 결국 우리 모두가 나이 들어 살아갈 사회를 준비하는 일이다.", o: ["요양원이 모두 문을 닫았다","노인 인구가 급격히 줄고 있다","가족이 노인을 돌보는 것이 법으로 금지되었다","돌봄 인력이 부족하고 돌봄 노동자의 처우가 좋지 않다"], a: 3, why: "글에서 '그러나 돌봄 인력은 여전히 부족하고, 돌봄 노동자의 처우도 좋지 않은 것이 현실이다'고 말한다." },
+{ q: "이 글의 결론으로 가장 적절한 것은 무엇인가?", passage: "한국은 빠른 속도로 고령 사회에 접어들고 있다. 노인 인구가 늘면서 돌봄의 문제가 사회의 중요한 과제가 되었다. 과거에는 가족이 노인을 돌보는 것이 당연했지만, 핵가족이 늘고 맞벌이 부부가 많아지면서 가족만으로는 노인을 돌보기 어려워졌다. 이에 따라 요양원과 방문 돌봄 서비스 같은 전문 돌봄 제도가 확대되고 있다. 그러나 돌봄 인력은 여전히 부족하고, 돌봄 노동자의 처우도 좋지 않은 것이 현실이다. 전문가들은 돌봄을 개인의 문제가 아니라 사회 전체가 함께 해결해야 할 과제로 보아야 한다고 말한다. 정부가 돌봄 시설을 늘리고 돌봄 노동자의 임금과 근무 환경을 개선해야 하며, 지역사회가 함께 돌보는 체계를 만들어야 한다. 또한 돌봄 로봇이나 스마트 기기를 활용해 노인의 안전을 확인하는 기술도 개발되고 있지만, 기계가 사람의 따뜻한 손길을 완전히 대신할 수는 없다. 결국 기술과 제도가 함께 발전하더라도, 노인을 존중하고 배려하는 사회의 마음가짐이 가장 중요하다. 노인을 잘 돌보는 사회는 결국 우리 모두가 나이 들어 살아갈 사회를 준비하는 일이다.", o: ["돌봄은 가족 개인의 책임이므로 정부가 개입하지 말아야 한다","노인 인구가 늘면 경제가 자동으로 좋아진다","노인을 잘 돌보는 사회를 준비하는 것은 우리 모두의 미래를 준비하는 일이다","돌봄 시설을 모두 없애고 가족 돌봄으로 돌아가야 한다"], a: 2, why: "마지막 문장 '노인을 잘 돌보는 사회는 결국 우리 모두가 나이 들어 살아갈 사회를 준비하는 일이다'가 글의 결론이다." }
 ];
 var TP_MOCK3_W = [
  {
@@ -148719,6 +155123,8 @@ var LS_EXPAND18 = [
 CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, LP_EXPAND18_A);
 CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, LP_EXPAND18_B);
 CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, LP_EXPAND18_C);
+// v265: 6 bo labelling (map/plan) Section 2, band 2,5-5,5 — moi bo 5 cau (3 MC gan nhan + 1 MC chi tiet + 1 COMP/SA).
+CONTENT.listeningPlus.push.apply(CONTENT.listeningPlus, [{"band":"Band 2,5","questions":[{"a":0,"newType":"MC","o":["The library","The science block","The sports hall","The cafeteria"],"q":"On the map, number 1 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “The library is on the north side of the campus, next to the car park. On the map, the library is number 1”. Vì vậy đáp án “The library” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'The library is on the north side of the campus, next to the car park. On the map, the library is number 1.'","whyU7":true},{"a":2,"newType":"MC","o":["The cafeteria","The student centre","The sports hall","The car park"],"q":"On the map, number 3 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “To the west of the library is the sports hall, number 3, where students play basketball and badminton”. Vì vậy đáp án “The sports hall” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'To the west of the library is the sports hall, number 3, where students play basketball and badminton.'","whyU7":true},{"a":3,"newType":"MC","o":["The garden","The library","The car park","The student centre"],"q":"On the map, number 5 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Behind the cafeteria, on the east side, is the student centre, number 5”. Vì vậy đáp án “The student centre” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Behind the cafeteria, on the east side, is the student centre, number 5.'","whyU7":true},{"a":1,"newType":"MC","o":["At five in the evening","At six in the evening","At seven in the evening","At four in the evening"],"q":"What time does the cafeteria close?","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “It is open from seven in the morning to six in the evening”. Vì vậy đáp án “At six in the evening” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'It is open from seven in the morning to six in the evening.'","whyU7":true},{"answer":"forty","newType":"COMP","q":"Lunch in the cafeteria costs about ___ thousand dong.","type":"COMP","why":"Ví dụ: trong đoạn nghe có câu “lunch costs about forty thousand dong”. Vì vậy đáp án “forty” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Bài nghe: 'lunch costs about forty thousand dong.'","whyU7":true}],"section":"Section 2","text":"Welcome to Greenfield College. Look at the map of our campus. The main gate is at the south end of the campus, and the road from the gate goes straight north to the library. The library is on the north side of the campus, next to the car park. On the map, the library is number 1. To the east of the library is the science block, number 2. Students do experiments there every week. To the west of the library is the sports hall, number 3, where students play basketball and badminton. In the centre of the campus is the cafeteria, number 4. It is open from seven in the morning to six in the evening, and lunch costs about forty thousand dong. Behind the cafeteria, on the east side, is the student centre, number 5. You can join clubs there and buy tickets for college events. Next to the main gate, on the west side, is the car park, number 6, for teachers and visitors. Finally, the garden, number 7, is between the sports hall and the cafeteria. Students often sit there and read in the afternoon. That is the end of our tour. Please ask if you have any questions.","topic":"A tour of Greenfield College campus"},{"band":"Band 3,0","questions":[{"a":0,"newType":"MC","o":["The ticket office","The main hall","The café","The gift shop"],"q":"On the map, number 1 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “The ticket office is just inside the entrance, on your left. On the map, the ticket office is number 1”. Vì vậy đáp án “The ticket office” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'The ticket office is just inside the entrance, on your left. On the map, the ticket office is number 1.'","whyU7":true},{"a":2,"newType":"MC","o":["The art gallery","The main hall","The history gallery","The garden"],"q":"On the map, number 3 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Turn right from the main hall, and you will find the history gallery, number 3”. Vì vậy đáp án “The history gallery” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Turn right from the main hall, and you will find the history gallery, number 3.'","whyU7":true},{"a":1,"newType":"MC","o":["The café","The gift shop","The ticket office","The art gallery"],"q":"On the map, number 5 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Next to the art gallery, on the east side, is the gift shop, number 5, where you can buy books and postcards”. Vì vậy đáp án “The gift shop” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Next to the art gallery, on the east side, is the gift shop, number 5, where you can buy books and postcards.'","whyU7":true},{"a":2,"newType":"MC","o":["Fifty thousand dong","Thirty thousand dong","Twenty thousand dong","Ten thousand dong"],"q":"How much is a ticket for a child?","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Tickets cost fifty thousand dong for adults and twenty thousand for children”. Vì vậy đáp án “Twenty thousand dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Tickets cost fifty thousand dong for adults and twenty thousand for children.'","whyU7":true},{"answer":"five","newType":"COMP","q":"The café is open until ___ o'clock.","type":"COMP","why":"Ví dụ: trong đoạn nghe có câu “The café, number 6, is near the entrance, on the right side. It is open until five o'clock”. Vì vậy đáp án “five” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Bài nghe: 'The café, number 6, is near the entrance, on the right side. It is open until five o'clock.'","whyU7":true}],"section":"Section 2","text":"Good morning, and welcome to the City Museum. Please look at the map in your hand. We are now at the entrance, on the south side of the building. The ticket office is just inside the entrance, on your left. On the map, the ticket office is number 1. Tickets cost fifty thousand dong for adults and twenty thousand for children. From the ticket office, walk straight ahead to the main hall, number 2, where you can see a model of the old city. Turn right from the main hall, and you will find the history gallery, number 3. It shows clothes, tools and photos from one hundred years ago. On the north side of the museum is the art gallery, number 4, with paintings by famous Vietnamese artists. Next to the art gallery, on the east side, is the gift shop, number 5, where you can buy books and postcards. The café, number 6, is near the entrance, on the right side. It is open until five o'clock. Finally, the garden, number 7, is behind the museum. It has old trees and stone statues. Please stay with your group, and do not touch the objects. Enjoy your visit!","topic":"A visit to the City Museum"},{"band":"Band 3,5","questions":[{"a":1,"newType":"MC","o":["The boathouse","The playground","The rose garden","The café"],"q":"On the map, number 2 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “On the west side of the lake is the playground, number 2, with swings and slides for children”. Vì vậy đáp án “The playground” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'On the west side of the lake is the playground, number 2, with swings and slides for children.'","whyU7":true},{"a":3,"newType":"MC","o":["The picnic area","The playground","The car park","The rose garden"],"q":"On the map, number 4 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “North of the lake is the rose garden, number 4, with more than fifty kinds of roses”. Vì vậy đáp án “The rose garden” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'North of the lake is the rose garden, number 4, with more than fifty kinds of roses.'","whyU7":true},{"a":0,"newType":"MC","o":["The car park","The visitor centre","The boathouse","The picnic area"],"q":"On the map, number 6 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “West of the visitor centre is the car park, number 6”. Vì vậy đáp án “The car park” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'West of the visitor centre is the car park, number 6.'","whyU7":true},{"a":2,"newType":"MC","o":["Twenty thousand dong","Fifty thousand dong","Thirty thousand dong","Forty thousand dong"],"q":"How much is it to hire a boat for one hour?","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “On the east side of the lake is the boathouse, number 3, where you can hire a small boat for thirty thousand dong an hour”. Vì vậy đáp án “Thirty thousand dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'On the east side of the lake is the boathouse, number 3, where you can hire a small boat for thirty thousand dong an hour.'","whyU7":true},{"answer":"a free map","newType":"SA","q":"What can visitors get free at the visitor centre?","type":"SA","why":"Ví dụ: trong đoạn nghe có câu “Just inside the entrance is the visitor centre, number 1, where you can get a free map and ask for help”. Vì vậy đáp án “a free map” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Bài nghe: 'Just inside the entrance is the visitor centre, number 1, where you can get a free map and ask for help.'","whyU7":true}],"section":"Section 2","text":"Welcome to Green Lake Park. Let us look at the map together. The main entrance is on the south side of the park. Just inside the entrance is the visitor centre, number 1, where you can get a free map and ask for help. From the visitor centre, the main path goes north to the lake, in the centre of the park. On the west side of the lake is the playground, number 2, with swings and slides for children. On the east side of the lake is the boathouse, number 3, where you can hire a small boat for thirty thousand dong an hour. North of the lake is the rose garden, number 4, with more than fifty kinds of roses. It is the most beautiful place in the park in May. To the east of the rose garden is the café, number 5, which serves tea, coffee and cakes. West of the visitor centre is the car park, number 6. Finally, the picnic area, number 7, is on the south-west side of the park, near the lake. Please put your rubbish in the bins, and enjoy your day in the park!","topic":"A walk in Green Lake Park"},{"band":"Band 4,0","questions":[{"a":1,"newType":"MC","o":["The pharmacy","The reception desk","The waiting room","The café"],"q":"On the map, number 1 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Just inside the entrance is the reception desk, number 1, where you give your name and get a number”. Vì vậy đáp án “The reception desk” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Just inside the entrance is the reception desk, number 1, where you give your name and get a number.'","whyU7":true},{"a":3,"newType":"MC","o":["The laboratory","The pharmacy","The lift","The X-ray department"],"q":"On the map, number 4 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Walk straight ahead from reception, and you will find the X-ray department, number 4, on the north side of the building”. Vì vậy đáp án “The X-ray department” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Walk straight ahead from reception, and you will find the X-ray department, number 4, on the north side of the building.'","whyU7":true},{"a":2,"newType":"MC","o":["The café","The waiting room","The lift","The laboratory"],"q":"On the map, number 7 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Finally, the lift to the upper floors, number 7, is behind the reception desk”. Vì vậy đáp án “The lift” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Finally, the lift to the upper floors, number 7, is behind the reception desk.'","whyU7":true},{"a":1,"newType":"MC","o":["At the reception desk","At the pharmacy","In the waiting room","In the laboratory"],"q":"Where do patients collect their medicine?","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “To the left of reception is the pharmacy, number 2, where you collect your medicine after seeing the doctor”. Vì vậy đáp án “At the pharmacy” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'To the left of reception is the pharmacy, number 2, where you collect your medicine after seeing the doctor.'","whyU7":true},{"answer":"five","newType":"COMP","q":"The laboratory is open from seven in the morning to ___ in the afternoon.","type":"COMP","why":"Ví dụ: trong đoạn nghe có câu “The laboratory is open from seven in the morning to five in the afternoon”. Vì vậy đáp án “five” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Bài nghe: 'The laboratory is open from seven in the morning to five in the afternoon.'","whyU7":true}],"section":"Section 2","text":"Good morning. This is City Hospital, and I will show you the map of the ground floor. The main entrance is on the south side of the building. Just inside the entrance is the reception desk, number 1, where you give your name and get a number. To the left of reception is the pharmacy, number 2, where you collect your medicine after seeing the doctor. To the right of reception is the waiting room, number 3, with seats for fifty people. Please wait there until the nurse calls your name. Walk straight ahead from reception, and you will find the X-ray department, number 4, on the north side of the building. Next to the X-ray department, on the east side, is the laboratory, number 5, where blood tests are done. The laboratory is open from seven in the morning to five in the afternoon. On the west side of the building is the café, number 6, which is open to visitors all day. Finally, the lift to the upper floors, number 7, is behind the reception desk. If you need help, please ask any member of staff. We hope you feel better soon.","topic":"Finding your way around City Hospital"},{"band":"Band 4,5","questions":[{"a":2,"newType":"MC","o":["The gym","The sports hall","The swimming pool","The tennis court"],"q":"On the map, number 2 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “In front of reception is the swimming pool, number 2, which is twenty-five metres long”. Vì vậy đáp án “The swimming pool” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'In front of reception is the swimming pool, number 2, which is twenty-five metres long.'","whyU7":true},{"a":0,"newType":"MC","o":["The gym","The café","The sports hall","The changing rooms"],"q":"On the map, number 3 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “To the east of the pool is the gym, number 3, with running machines and weights”. Vì vậy đáp án “The gym” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'To the east of the pool is the gym, number 3, with running machines and weights.'","whyU7":true},{"a":3,"newType":"MC","o":["The swimming pool","The sports hall","The café","The tennis court"],"q":"On the map, number 5 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Behind the sports hall is the tennis court, number 5, which you can book for one hundred thousand dong an hour”. Vì vậy đáp án “The tennis court” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Behind the sports hall is the tennis court, number 5, which you can book for one hundred thousand dong an hour.'","whyU7":true},{"a":1,"newType":"MC","o":["Two hundred thousand dong","Three hundred thousand dong","One hundred thousand dong","Five hundred thousand dong"],"q":"How much does membership cost a month?","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Membership costs three hundred thousand dong a month”. Vì vậy đáp án “Three hundred thousand dong” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Membership costs three hundred thousand dong a month.'","whyU7":true},{"answer":"ten","newType":"COMP","q":"The gym is open from six in the morning to ___ at night.","type":"COMP","why":"Ví dụ: trong đoạn nghe có câu “The gym is open from six in the morning to ten at night”. Vì vậy đáp án “ten” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Bài nghe: 'The gym is open from six in the morning to ten at night.'","whyU7":true}],"section":"Section 2","text":"Welcome to Riverside Sports Centre. Here is the map of the centre. The entrance is on the south side. Just inside the entrance, on your left, is the reception, number 1, where you can buy a ticket or join as a member. Membership costs three hundred thousand dong a month. In front of reception is the swimming pool, number 2, which is twenty-five metres long. Swimming lessons for children are on Saturday mornings. To the east of the pool is the gym, number 3, with running machines and weights. The gym is open from six in the morning to ten at night. To the west of the pool is the sports hall, number 4, where people play badminton, basketball and volleyball. Behind the sports hall is the tennis court, number 5, which you can book for one hundred thousand dong an hour. On the north side of the centre is the café, number 6, with a view of the river. Finally, the changing rooms, number 7, are next to the pool, on the east side. Please bring your own towel, and enjoy your sport!","topic":"A tour of Riverside Sports Centre"},{"band":"Band 5,5","questions":[{"a":1,"newType":"MC","o":["The old theatre","The museum","The post office","The library"],"q":"On the map, number 3 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Turn right, and you will find the museum, number 3, on the north side of River Road”. Vì vậy đáp án “The museum” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Turn right, and you will find the museum, number 3, on the north side of River Road.'","whyU7":true},{"a":2,"newType":"MC","o":["The park","The hospital","The night market","The museum"],"q":"On the map, number 5 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Behind the theatre is the night market, number 5, which opens at six in the evening and sells food, clothes and souvenirs”. Vì vậy đáp án “The night market” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Behind the theatre is the night market, number 5, which opens at six in the evening and sells food, clothes and souvenirs.'","whyU7":true},{"a":3,"newType":"MC","o":["The library","The park","The post office","The hospital"],"q":"On the map, number 8 is ___.","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Finally, the hospital, number 8, is in the north-east corner of the map, on Hospital Road”. Vì vậy đáp án “The hospital” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Finally, the hospital, number 8, is in the north-east corner of the map, on Hospital Road.'","whyU7":true},{"a":0,"newType":"MC","o":["In 1920","In 1820","In 1902","In 1290"],"q":"When was the old theatre built?","type":"MC","why":"Ví dụ: trong đoạn nghe có câu “Opposite the museum is the old theatre, number 4, which was built in 1920 and still shows plays every weekend”. Vì vậy đáp án “In 1920” đúng. Cách làm: nghe kỹ câu hỏi rồi tìm chỗ trong đoạn nghe nói giống đáp án. Đáp án nghe quen nhưng đoạn nghe không nói thì không chọn.","whyOrig":"Bài nghe: 'Opposite the museum is the old theatre, number 4, which was built in 1920 and still shows plays every weekend.'","whyU7":true},{"answer":"six","newType":"COMP","q":"The night market opens at ___ in the evening.","type":"COMP","why":"Ví dụ: trong đoạn nghe có câu “the night market, number 5, which opens at six in the evening”. Vì vậy đáp án “six” đúng. Cách làm: tìm chỗ trong đoạn nghe nói tới ý này rồi điền đúng từ trong đoạn nghe, đừng điền từ mình đoán.","whyOrig":"Bài nghe: 'the night market, number 5, which opens at six in the evening...'","whyU7":true}],"section":"Section 2","text":"Good morning, and welcome to the Old Town. This map will help you find your way around our neighbourhood. The bus station is on the south side of the map, number 1. From the bus station, walk north along Market Street, and on your left you will see the post office, number 2. It is open from eight in the morning to five in the afternoon, except on Sundays. Continue north, and Market Street meets River Road. Turn right, and you will find the museum, number 3, on the north side of River Road. Opposite the museum is the old theatre, number 4, which was built in 1920 and still shows plays every weekend. Behind the theatre is the night market, number 5, which opens at six in the evening and sells food, clothes and souvenirs. West of the night market is the park, number 6, with a small lake and old trees. The library, number 7, is on the east side of the neighbourhood, next to the school. Finally, the hospital, number 8, is in the north-east corner of the map, on Hospital Road. Please keep this map, and ask local people if you get lost. They are always happy to help.","topic":"A map of Old Town for new visitors"}]);
 CONTENT.writing.push.apply(CONTENT.writing, W_EXPAND18_A);
 CONTENT.writing.push.apply(CONTENT.writing, W_EXPAND18_B);
 CONTENT.writing.push.apply(CONTENT.writing, W_EXPAND18_C);
